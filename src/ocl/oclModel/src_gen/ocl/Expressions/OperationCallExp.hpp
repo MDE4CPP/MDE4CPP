@@ -44,14 +44,13 @@ namespace ocl::Expressions
 	class IfExp;
 	class LoopExp;
 	class NavigationCallExp;
-	class Variable;
+	class VarDeclarationExp;
 }
 namespace ecore 
 {
 	class EAnnotation;
 	class EClassifier;
 	class EGenericType;
-	class EOperation;
 }
 
 // namespace macro header include
@@ -67,7 +66,7 @@ namespace ecore
 namespace ocl::Expressions 
 {
 	
-	class OCL_API OperationCallExp: virtual public FeatureCallExp
+	class OCL_API OperationCallExp : virtual public FeatureCallExp
 	{
 		public:
  			OperationCallExp(const OperationCallExp &) {}
@@ -88,13 +87,15 @@ namespace ocl::Expressions
 			//*********************************
 			// Attribute Getters & Setters
 			//*********************************
+			virtual bool isIsRArrow() const = 0;
+			virtual void setIsRArrow (bool _isRArrow)= 0;
+			virtual std::string getReferredOperation() const = 0;
+			virtual void setReferredOperation (std::string _referredOperation)= 0;
 
 			//*********************************
 			// Reference Getters & Setters
 			//*********************************
 			virtual std::shared_ptr<Bag<ocl::Expressions::OclExpression>> getArgument() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getReferredOperation() const = 0;
-			virtual void setReferredOperation(std::shared_ptr<ecore::EOperation>) = 0;
 
 			//*********************************
 			// Union Reference Getters
@@ -116,12 +117,13 @@ namespace ocl::Expressions
 			//*********************************
 			// Attribute Members
 			//*********************************
+			bool m_isRArrow= false;
+			std::string m_referredOperation= "";
 			
 			//*********************************
 			// Reference Members
 			//*********************************
 			mutable std::shared_ptr<Bag<ocl::Expressions::OclExpression>> m_argument;
-			std::shared_ptr<ecore::EOperation> m_referredOperation;
 	};
 }
 #endif /* end of include guard: OCL_EXPRESSIONS_OPERATIONCALLEXP_HPP */

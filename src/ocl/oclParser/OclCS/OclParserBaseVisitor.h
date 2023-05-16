@@ -1,8 +1,5 @@
 
-  #include "CSTNode.h"
-
-
-// Generated from OclParser.g4 by ANTLR 4.9
+// Generated from OclParser.g4 by ANTLR 4.12.0
 
 #pragma once
 
@@ -20,251 +17,235 @@ namespace OclCS {
 class  OclParserBaseVisitor : public OclParserVisitor {
 public:
 
-  virtual antlrcpp::Any visitExpressionInOclCS(OclParser::ExpressionInOclCSContext *ctx) override {
+  virtual std::any visitExpressionInOclCS(OclParser::ExpressionInOclCSContext *ctx) override {
     return visitChildren(ctx);
   }
 
-  virtual antlrcpp::Any visitOclExpressionCS(OclParser::OclExpressionCSContext *ctx) override {
+  virtual std::any visitOclExpressionCS(OclParser::OclExpressionCSContext *ctx) override {
     return visitChildren(ctx);
   }
 
-  virtual antlrcpp::Any visitVariableExpCS(OclParser::VariableExpCSContext *ctx) override {
+  virtual std::any visitParentedExpCS(OclParser::ParentedExpCSContext *ctx) override {
     return visitChildren(ctx);
   }
 
-  virtual antlrcpp::Any visitSimpleNameCS(OclParser::SimpleNameCSContext *ctx) override {
+  virtual std::any visitVariableExpCS(OclParser::VariableExpCSContext *ctx) override {
     return visitChildren(ctx);
   }
 
-  virtual antlrcpp::Any visitRestrictedKeywordCS(OclParser::RestrictedKeywordCSContext *ctx) override {
+  virtual std::any visitSimpleNameCS(OclParser::SimpleNameCSContext *ctx) override {
     return visitChildren(ctx);
   }
 
-  virtual antlrcpp::Any visitUnreservedSimpleNameCS(OclParser::UnreservedSimpleNameCSContext *ctx) override {
+  virtual std::any visitRestrictedKeywordCS(OclParser::RestrictedKeywordCSContext *ctx) override {
     return visitChildren(ctx);
   }
 
-  virtual antlrcpp::Any visitPathNameCS(OclParser::PathNameCSContext *ctx) override {
+  virtual std::any visitUnreservedSimpleNameCS(OclParser::UnreservedSimpleNameCSContext *ctx) override {
     return visitChildren(ctx);
   }
 
-  virtual antlrcpp::Any visitLiteralExpCS(OclParser::LiteralExpCSContext *ctx) override {
+  virtual std::any visitPathNameCS(OclParser::PathNameCSContext *ctx) override {
     return visitChildren(ctx);
   }
 
-  virtual antlrcpp::Any visitEnumLiteralExpCS(OclParser::EnumLiteralExpCSContext *ctx) override {
+  virtual std::any visitLiteralExpCS(OclParser::LiteralExpCSContext *ctx) override {
     return visitChildren(ctx);
   }
 
-  virtual antlrcpp::Any visitCollectionLiteralExpCS(OclParser::CollectionLiteralExpCSContext *ctx) override {
+  virtual std::any visitEnumLiteralExpCS(OclParser::EnumLiteralExpCSContext *ctx) override {
     return visitChildren(ctx);
   }
 
-  virtual antlrcpp::Any visitCollectionTypeIdentifierCS(OclParser::CollectionTypeIdentifierCSContext *ctx) override {
+  virtual std::any visitCollectionLiteralExpCS(OclParser::CollectionLiteralExpCSContext *ctx) override {
     return visitChildren(ctx);
   }
 
-  virtual antlrcpp::Any visitCollectionLiteralPartsCS(OclParser::CollectionLiteralPartsCSContext *ctx) override {
+  virtual std::any visitCollectionTypeIdentifierCS(OclParser::CollectionTypeIdentifierCSContext *ctx) override {
     return visitChildren(ctx);
   }
 
-  virtual antlrcpp::Any visitCollectionLiteralPartCS(OclParser::CollectionLiteralPartCSContext *ctx) override {
+  virtual std::any visitCollectionLiteralPartsCS(OclParser::CollectionLiteralPartsCSContext *ctx) override {
     return visitChildren(ctx);
   }
 
-  virtual antlrcpp::Any visitCollectionRangeCS(OclParser::CollectionRangeCSContext *ctx) override {
+  virtual std::any visitCollectionRangeCS(OclParser::CollectionRangeCSContext *ctx) override {
     return visitChildren(ctx);
   }
 
-  virtual antlrcpp::Any visitPrefixedExp(OclParser::PrefixedExpContext *ctx) override {
+  virtual std::any visitPrefixedExp(OclParser::PrefixedExpContext *ctx) override {
     return visitChildren(ctx);
   }
 
-  virtual antlrcpp::Any visitInfixedExpCS(OclParser::InfixedExpCSContext *ctx) override {
+  virtual std::any visitPrimitiveLiteralExpCS(OclParser::PrimitiveLiteralExpCSContext *ctx) override {
     return visitChildren(ctx);
   }
 
-  virtual antlrcpp::Any visitPrimitiveLiteralExpCS(OclParser::PrimitiveLiteralExpCSContext *ctx) override {
+  virtual std::any visitTupleLiteralExpCS(OclParser::TupleLiteralExpCSContext *ctx) override {
     return visitChildren(ctx);
   }
 
-  virtual antlrcpp::Any visitTupleLiteralExpCS(OclParser::TupleLiteralExpCSContext *ctx) override {
+  virtual std::any visitUnlimitedNaturalLiteralExpCS(OclParser::UnlimitedNaturalLiteralExpCSContext *ctx) override {
     return visitChildren(ctx);
   }
 
-  virtual antlrcpp::Any visitUnlimitedNaturalLiteralExpCS(OclParser::UnlimitedNaturalLiteralExpCSContext *ctx) override {
+  virtual std::any visitIntegerLiteralExpCS(OclParser::IntegerLiteralExpCSContext *ctx) override {
     return visitChildren(ctx);
   }
 
-  virtual antlrcpp::Any visitIntegerLiteralExpCS(OclParser::IntegerLiteralExpCSContext *ctx) override {
+  virtual std::any visitRealLiteralExpCS(OclParser::RealLiteralExpCSContext *ctx) override {
     return visitChildren(ctx);
   }
 
-  virtual antlrcpp::Any visitRealLiteralExpCS(OclParser::RealLiteralExpCSContext *ctx) override {
+  virtual std::any visitStringLiteralExpCS(OclParser::StringLiteralExpCSContext *ctx) override {
     return visitChildren(ctx);
   }
 
-  virtual antlrcpp::Any visitStringLiteralExpCS(OclParser::StringLiteralExpCSContext *ctx) override {
+  virtual std::any visitBooleanLiteralExpCS(OclParser::BooleanLiteralExpCSContext *ctx) override {
     return visitChildren(ctx);
   }
 
-  virtual antlrcpp::Any visitBooleanLiteralExpCS(OclParser::BooleanLiteralExpCSContext *ctx) override {
+  virtual std::any visitTypeLiteralExpCS(OclParser::TypeLiteralExpCSContext *ctx) override {
     return visitChildren(ctx);
   }
 
-  virtual antlrcpp::Any visitTypeLiteralExpCS(OclParser::TypeLiteralExpCSContext *ctx) override {
+  virtual std::any visitIteratorExpCS(OclParser::IteratorExpCSContext *ctx) override {
     return visitChildren(ctx);
   }
 
-  virtual antlrcpp::Any visitIteratorExpCS(OclParser::IteratorExpCSContext *ctx) override {
+  virtual std::any visitIterateExpCS(OclParser::IterateExpCSContext *ctx) override {
     return visitChildren(ctx);
   }
 
-  virtual antlrcpp::Any visitIterateExpCS(OclParser::IterateExpCSContext *ctx) override {
+  virtual std::any visitVariableDeclarationCS(OclParser::VariableDeclarationCSContext *ctx) override {
     return visitChildren(ctx);
   }
 
-  virtual antlrcpp::Any visitVariableDeclarationCS(OclParser::VariableDeclarationCSContext *ctx) override {
+  virtual std::any visitTypeCS(OclParser::TypeCSContext *ctx) override {
     return visitChildren(ctx);
   }
 
-  virtual antlrcpp::Any visitTypeCS(OclParser::TypeCSContext *ctx) override {
+  virtual std::any visitPrimitiveTypeCS(OclParser::PrimitiveTypeCSContext *ctx) override {
     return visitChildren(ctx);
   }
 
-  virtual antlrcpp::Any visitPrimitiveTypeCS(OclParser::PrimitiveTypeCSContext *ctx) override {
+  virtual std::any visitOclTypeCS(OclParser::OclTypeCSContext *ctx) override {
     return visitChildren(ctx);
   }
 
-  virtual antlrcpp::Any visitOclTypeCS(OclParser::OclTypeCSContext *ctx) override {
+  virtual std::any visitCollectionTypeCS(OclParser::CollectionTypeCSContext *ctx) override {
     return visitChildren(ctx);
   }
 
-  virtual antlrcpp::Any visitCollectionTypeCS(OclParser::CollectionTypeCSContext *ctx) override {
+  virtual std::any visitTupleTypeCS(OclParser::TupleTypeCSContext *ctx) override {
     return visitChildren(ctx);
   }
 
-  virtual antlrcpp::Any visitTupleTypeCS(OclParser::TupleTypeCSContext *ctx) override {
+  virtual std::any visitOperationCallExpCS_A(OclParser::OperationCallExpCS_AContext *ctx) override {
     return visitChildren(ctx);
   }
 
-  virtual antlrcpp::Any visitVariableDeclarationListCS(OclParser::VariableDeclarationListCSContext *ctx) override {
+  virtual std::any visitOperationCallExpCS_B(OclParser::OperationCallExpCS_BContext *ctx) override {
     return visitChildren(ctx);
   }
 
-  virtual antlrcpp::Any visitOperationCallExpCS_A(OclParser::OperationCallExpCS_AContext *ctx) override {
+  virtual std::any visitPropertyCallExpCS_A(OclParser::PropertyCallExpCS_AContext *ctx) override {
     return visitChildren(ctx);
   }
 
-  virtual antlrcpp::Any visitOperationCallExpCS_B(OclParser::OperationCallExpCS_BContext *ctx) override {
+  virtual std::any visitPropertyCallExpCS_B(OclParser::PropertyCallExpCS_BContext *ctx) override {
     return visitChildren(ctx);
   }
 
-  virtual antlrcpp::Any visitPropertyCallExpCS_A(OclParser::PropertyCallExpCS_AContext *ctx) override {
+  virtual std::any visitAssociationClassCallExpCS_A(OclParser::AssociationClassCallExpCS_AContext *ctx) override {
     return visitChildren(ctx);
   }
 
-  virtual antlrcpp::Any visitPropertyCallExpCS_B(OclParser::PropertyCallExpCS_BContext *ctx) override {
+  virtual std::any visitAssociationClassCallExpCS_B(OclParser::AssociationClassCallExpCS_BContext *ctx) override {
     return visitChildren(ctx);
   }
 
-  virtual antlrcpp::Any visitAssociationClassCallExpCS_A(OclParser::AssociationClassCallExpCS_AContext *ctx) override {
+  virtual std::any visitIsMarkedPreCS(OclParser::IsMarkedPreCSContext *ctx) override {
     return visitChildren(ctx);
   }
 
-  virtual antlrcpp::Any visitAssociationClassCallExpCS_B(OclParser::AssociationClassCallExpCS_BContext *ctx) override {
+  virtual std::any visitLetExpCS(OclParser::LetExpCSContext *ctx) override {
     return visitChildren(ctx);
   }
 
-  virtual antlrcpp::Any visitIsMarkedPreCS(OclParser::IsMarkedPreCSContext *ctx) override {
+  virtual std::any visitOclMessageExpCS(OclParser::OclMessageExpCSContext *ctx) override {
     return visitChildren(ctx);
   }
 
-  virtual antlrcpp::Any visitArgumentsCS(OclParser::ArgumentsCSContext *ctx) override {
+  virtual std::any visitOclMessageArgumentsCS(OclParser::OclMessageArgumentsCSContext *ctx) override {
     return visitChildren(ctx);
   }
 
-  virtual antlrcpp::Any visitLetExpCS(OclParser::LetExpCSContext *ctx) override {
+  virtual std::any visitIfExpCS(OclParser::IfExpCSContext *ctx) override {
     return visitChildren(ctx);
   }
 
-  virtual antlrcpp::Any visitLetExpSubCS(OclParser::LetExpSubCSContext *ctx) override {
+  virtual std::any visitNullLiteralExpCS(OclParser::NullLiteralExpCSContext *ctx) override {
     return visitChildren(ctx);
   }
 
-  virtual antlrcpp::Any visitOclMessageExpCS(OclParser::OclMessageExpCSContext *ctx) override {
+  virtual std::any visitInvalidLiteralExpCS(OclParser::InvalidLiteralExpCSContext *ctx) override {
     return visitChildren(ctx);
   }
 
-  virtual antlrcpp::Any visitOclMessageArgumentsCS(OclParser::OclMessageArgumentsCSContext *ctx) override {
+  virtual std::any visitUnaryLiteralExpCS(OclParser::UnaryLiteralExpCSContext *ctx) override {
     return visitChildren(ctx);
   }
 
-  virtual antlrcpp::Any visitOclMessageArgCS(OclParser::OclMessageArgCSContext *ctx) override {
+  virtual std::any visitBinaryLiteralExpCS(OclParser::BinaryLiteralExpCSContext *ctx) override {
     return visitChildren(ctx);
   }
 
-  virtual antlrcpp::Any visitIfExpCS(OclParser::IfExpCSContext *ctx) override {
+  virtual std::any visitPackageDeclarationCS(OclParser::PackageDeclarationCSContext *ctx) override {
     return visitChildren(ctx);
   }
 
-  virtual antlrcpp::Any visitNullLiteralExpCS(OclParser::NullLiteralExpCSContext *ctx) override {
+  virtual std::any visitContextDeclarationCS(OclParser::ContextDeclarationCSContext *ctx) override {
     return visitChildren(ctx);
   }
 
-  virtual antlrcpp::Any visitInvalidLiteralExpCS(OclParser::InvalidLiteralExpCSContext *ctx) override {
+  virtual std::any visitClassifierContextDeclCS(OclParser::ClassifierContextDeclCSContext *ctx) override {
     return visitChildren(ctx);
   }
 
-  virtual antlrcpp::Any visitUnaryLiteralExpCS(OclParser::UnaryLiteralExpCSContext *ctx) override {
+  virtual std::any visitOperationContextDeclCS(OclParser::OperationContextDeclCSContext *ctx) override {
     return visitChildren(ctx);
   }
 
-  virtual antlrcpp::Any visitBinaryLiteralExpCS(OclParser::BinaryLiteralExpCSContext *ctx) override {
+  virtual std::any visitPropertyContextDeclCS(OclParser::PropertyContextDeclCSContext *ctx) override {
     return visitChildren(ctx);
   }
 
-  virtual antlrcpp::Any visitPackageDeclarationCS(OclParser::PackageDeclarationCSContext *ctx) override {
+  virtual std::any visitDefExpressionCS(OclParser::DefExpressionCSContext *ctx) override {
     return visitChildren(ctx);
   }
 
-  virtual antlrcpp::Any visitContextDeclarationCS(OclParser::ContextDeclarationCSContext *ctx) override {
+  virtual std::any visitInvOrDefCS(OclParser::InvOrDefCSContext *ctx) override {
     return visitChildren(ctx);
   }
 
-  virtual antlrcpp::Any visitClassifierContextDeclCS(OclParser::ClassifierContextDeclCSContext *ctx) override {
+  virtual std::any visitInitOrDerValueListCS(OclParser::InitOrDerValueListCSContext *ctx) override {
     return visitChildren(ctx);
   }
 
-  virtual antlrcpp::Any visitOperationContextDeclCS(OclParser::OperationContextDeclCSContext *ctx) override {
+  virtual std::any visitInitOrDerValueCS(OclParser::InitOrDerValueCSContext *ctx) override {
     return visitChildren(ctx);
   }
 
-  virtual antlrcpp::Any visitPropertyContextDeclCS(OclParser::PropertyContextDeclCSContext *ctx) override {
+  virtual std::any visitPrePostOrBodyDeclCS(OclParser::PrePostOrBodyDeclCSContext *ctx) override {
     return visitChildren(ctx);
   }
 
-  virtual antlrcpp::Any visitDefExpressionCS(OclParser::DefExpressionCSContext *ctx) override {
+  virtual std::any visitPrePostBodyExpCS(OclParser::PrePostBodyExpCSContext *ctx) override {
     return visitChildren(ctx);
   }
 
-  virtual antlrcpp::Any visitInvOrDefCS(OclParser::InvOrDefCSContext *ctx) override {
-    return visitChildren(ctx);
-  }
-
-  virtual antlrcpp::Any visitInitOrDerValueCS(OclParser::InitOrDerValueCSContext *ctx) override {
-    return visitChildren(ctx);
-  }
-
-  virtual antlrcpp::Any visitPrePostOrBodyDeclCS(OclParser::PrePostOrBodyDeclCSContext *ctx) override {
-    return visitChildren(ctx);
-  }
-
-  virtual antlrcpp::Any visitOperationCS(OclParser::OperationCSContext *ctx) override {
-    return visitChildren(ctx);
-  }
-
-  virtual antlrcpp::Any visitParametersCS(OclParser::ParametersCSContext *ctx) override {
+  virtual std::any visitOperationCS(OclParser::OperationCSContext *ctx) override {
     return visitChildren(ctx);
   }
 

@@ -1,9 +1,13 @@
 
 #include "ocl/Expressions/impl/TypeExpImpl.hpp"
 #ifdef NDEBUG
-	#define DEBUG_MESSAGE(a) /**/
+	#define DEBUG_INFO(a)		/**/
+	#define DEBUG_WARNING(a)	/**/
+	#define DEBUG_ERROR(a)		/**/
 #else
-	#define DEBUG_MESSAGE(a) a
+	#define DEBUG_INFO(a) 		std::cout<<"[\e[0;32mInfo\e[0m]:\t\t"<<__PRETTY_FUNCTION__<<"\n\t\t  -- Message: "<<a<<std::endl;
+	#define DEBUG_WARNING(a) 	std::cout<<"[\e[0;33mWarning\e[0m]:\t"<<__PRETTY_FUNCTION__<<"\n\t\t  -- Message: "<<a<<std::endl;
+	#define DEBUG_ERROR(a)		std::cout<<"[\e[0;31mError\e[0m]:\t"<<__PRETTY_FUNCTION__<<"\n\t\t  -- Message: "<<a<<std::endl;
 #endif
 
 #ifdef ACTIVITY_DEBUG_ON
@@ -21,8 +25,8 @@
 #include "abstractDataTypes/Bag.hpp"
 
 
-#include "abstractDataTypes/AnyEObject.hpp"
-#include "abstractDataTypes/AnyEObjectBag.hpp"
+#include "ecore/EcoreAny.hpp"
+#include "ecore/EcoreContainerAny.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
@@ -34,9 +38,9 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "ocl/Expressions/ExpressionsFactory.hpp"
 #include "ocl/Evaluations/EvaluationsFactory.hpp"
 #include "ecore/ecoreFactory.hpp"
+#include "ocl/Expressions/ExpressionsFactory.hpp"
 #include "ocl/Expressions/CallExp.hpp"
 #include "ocl/Expressions/CollectionRange.hpp"
 #include "ecore/EAnnotation.hpp"
@@ -49,7 +53,7 @@
 #include "ocl/Evaluations/OclExpEval.hpp"
 #include "ocl/Expressions/OclExpression.hpp"
 #include "ocl/Expressions/OperationCallExp.hpp"
-#include "ocl/Expressions/Variable.hpp"
+#include "ocl/Expressions/VarDeclarationExp.hpp"
 //Factories and Package includes
 #include "ocl/oclPackage.hpp"
 #include "ocl/Evaluations/EvaluationsPackage.hpp"
@@ -73,13 +77,6 @@ TypeExpImpl::~TypeExpImpl()
 #ifdef SHOW_DELETION
 	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete TypeExp "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
 #endif
-}
-
-//Additional constructor for the containments back reference
-TypeExpImpl::TypeExpImpl(std::weak_ptr<ocl::Expressions::CallExp> par_appliedElement)
-:TypeExpImpl()
-{
-	m_appliedElement = par_appliedElement;
 }
 
 //Additional constructor for the containments back reference
@@ -122,20 +119,25 @@ TypeExpImpl::TypeExpImpl(std::weak_ptr<ocl::Expressions::CollectionRange> par_Co
 }
 
 
-//Additional constructor for the containments back reference
-TypeExpImpl::TypeExpImpl(std::weak_ptr<ocl::Expressions::Variable> par_initializedElement)
-:TypeExpImpl()
-{
-	m_initializedElement = par_initializedElement;
-}
-
 
 //Additional constructor for the containments back reference
-TypeExpImpl::TypeExpImpl(std::weak_ptr<ocl::Expressions::LoopExp> par_loopBodyOwner)
+TypeExpImpl::TypeExpImpl(std::weak_ptr<ocl::Expressions::LoopExp> par_LoopExp, const int reference_id)
 :TypeExpImpl()
 {
-	m_loopBodyOwner = par_loopBodyOwner;
+	switch(reference_id)
+	{	
+	case ocl::Expressions::ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_LOOPBODYOWNER:
+		m_loopBodyOwner = par_LoopExp;
+		 return;
+	case ocl::Expressions::ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_LOOPEXP:
+		m_loopExp = par_LoopExp;
+		 return;
+	default:
+	std::cerr << __PRETTY_FUNCTION__ <<" Reference not found in class with the given ID" << std::endl;
+	}
+   
 }
+
 
 //Additional constructor for the containments back reference
 TypeExpImpl::TypeExpImpl(std::weak_ptr<ocl::Expressions::OperationCallExp> par_parentCall)
@@ -184,9 +186,9 @@ TypeExpImpl& TypeExpImpl::operator=(const TypeExpImpl & obj)
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy TypeExp "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
 	#endif
 	//Clone Attributes with (deep copy)
+	m_referredType = obj.getReferredType();
 
 	//copy references with no containment (soft copy)
-	m_referredType  = obj.getReferredType();
 	//Clone references with containment (deep copy)
 	return *this;
 }
@@ -206,20 +208,20 @@ std::shared_ptr<ecore::EObject> TypeExpImpl::copy() const
 //*********************************
 // Attribute Getters & Setters
 //*********************************
+/* Getter & Setter for attribute referredType */
+std::string TypeExpImpl::getReferredType() const 
+{
+	return m_referredType;
+}
+void TypeExpImpl::setReferredType(std::string _referredType)
+{
+	m_referredType = _referredType;
+	
+}
 
 //*********************************
 // Reference Getters & Setters
 //*********************************
-/* Getter & Setter for reference referredType */
-std::shared_ptr<ecore::EClassifier> TypeExpImpl::getReferredType() const
-{
-    return m_referredType;
-}
-void TypeExpImpl::setReferredType(std::shared_ptr<ecore::EClassifier> _referredType)
-{
-    m_referredType = _referredType;
-	
-}
 
 //*********************************
 // Union Getter
@@ -230,11 +232,6 @@ void TypeExpImpl::setReferredType(std::shared_ptr<ecore::EClassifier> _referredT
 //*********************************
 std::shared_ptr<ecore::EObject> TypeExpImpl::eContainer() const
 {
-	if(auto wp = m_appliedElement.lock())
-	{
-		return wp;
-	}
-
 	if(auto wp = m_elseOwner.lock())
 	{
 		return wp;
@@ -258,16 +255,16 @@ std::shared_ptr<ecore::EObject> TypeExpImpl::eContainer() const
 	}
 
 
-	if(auto wp = m_initializedElement.lock())
-	{
-		return wp;
-	}
-
 
 	if(auto wp = m_loopBodyOwner.lock())
 	{
 		return wp;
 	}
+	if(auto wp = m_loopExp.lock())
+	{
+		return wp;
+	}
+
 
 	if(auto wp = m_parentCall.lock())
 	{
@@ -311,12 +308,14 @@ void TypeExpImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoadH
 	try
 	{
 		std::map<std::string, std::string>::const_iterator iter;
-		std::shared_ptr<ecore::EClass> metaClass = this->eClass(); // get MetaClass
+	
 		iter = attr_list.find("referredType");
 		if ( iter != attr_list.end() )
 		{
-			// add unresolvedReference to loadHandler's list
-			loadHandler->addUnresolvedReference(iter->second, loadHandler->getCurrentObject(), metaClass->getEStructuralFeature("referredType")); // TODO use getEStructuralFeature() with id, for faster access to EStructuralFeature
+			// this attribute is a 'std::string'
+			std::string value;
+			value = iter->second;
+			this->setReferredType(value);
 		}
 	}
 	catch (std::exception& e)
@@ -340,20 +339,6 @@ void TypeExpImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::in
 
 void TypeExpImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
 {
-	switch(featureID)
-	{
-		case ocl::Expressions::ExpressionsPackage::TYPEEXP_ATTRIBUTE_REFERREDTYPE:
-		{
-			if (references.size() == 1)
-			{
-				// Cast object to correct type
-				std::shared_ptr<ecore::EClassifier> _referredType = std::dynamic_pointer_cast<ecore::EClassifier>( references.front() );
-				setReferredType(_referredType);
-			}
-			
-			return;
-		}
-	}
 	OclExpressionImpl::resolveReferences(featureID, references);
 }
 
@@ -377,8 +362,11 @@ void TypeExpImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHand
 	try
 	{
 		std::shared_ptr<ocl::Expressions::ExpressionsPackage> package = ocl::Expressions::ExpressionsPackage::eInstance();
-	// Add references
-		saveHandler->addReference(this->getReferredType(),"referredType", getReferredType()->eClass() != ecore::ecorePackage::eInstance()->getEClassifier_Class());
+		// Add attributes
+		if ( this->eIsSet(package->getTypeExp_Attribute_referredType()) )
+		{
+			saveHandler->addAttribute("referredType", this->getReferredType());
+		}
 	}
 	catch (std::exception& e)
 	{
@@ -394,12 +382,12 @@ std::shared_ptr<ecore::EClass> TypeExpImpl::eStaticClass() const
 //*********************************
 // EStructuralFeature Get/Set/IsSet
 //*********************************
-Any TypeExpImpl::eGet(int featureID, bool resolve, bool coreType) const
+std::shared_ptr<Any> TypeExpImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 		case ocl::Expressions::ExpressionsPackage::TYPEEXP_ATTRIBUTE_REFERREDTYPE:
-			return eAny(getReferredType(),ecore::ecorePackage::ECLASSIFIER_CLASS,false); //9122
+			return eAny(getReferredType(),ecore::ecorePackage::ESTRING_CLASS,false); //8823
 	}
 	return OclExpressionImpl::eGet(featureID, resolve, coreType);
 }
@@ -409,22 +397,28 @@ bool TypeExpImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case ocl::Expressions::ExpressionsPackage::TYPEEXP_ATTRIBUTE_REFERREDTYPE:
-			return getReferredType() != nullptr; //9122
+			return getReferredType() != ""; //8823
 	}
 	return OclExpressionImpl::internalEIsSet(featureID);
 }
 
-bool TypeExpImpl::eSet(int featureID, Any newValue)
+bool TypeExpImpl::eSet(int featureID, std::shared_ptr<Any> newValue)
 {
 	switch(featureID)
 	{
 		case ocl::Expressions::ExpressionsPackage::TYPEEXP_ATTRIBUTE_REFERREDTYPE:
 		{
-			// CAST Any to ecore::EClassifier
-			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
-			std::shared_ptr<ecore::EClassifier> _referredType = std::dynamic_pointer_cast<ecore::EClassifier>(_temp);
-			setReferredType(_referredType); //9122
-			return true;
+			try
+			{
+				std::string _referredType = newValue->get<std::string>();
+				setReferredType(_referredType); //8823
+			}
+			catch(...)
+			{
+				DEBUG_ERROR("Invalid type stored in 'Any' for feature 'referredType'. Failed to set feature!")
+				return false;
+			}
+		return true;
 		}
 	}
 
@@ -434,9 +428,9 @@ bool TypeExpImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any TypeExpImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+std::shared_ptr<Any> TypeExpImpl::eInvoke(int operationID, std::shared_ptr<Bag<Any>> arguments)
 {
-	Any result;
+	std::shared_ptr<Any> result;
  
   	switch(operationID)
 	{

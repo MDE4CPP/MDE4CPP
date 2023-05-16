@@ -7,21 +7,17 @@
 
 #include "abstractDataTypes/SubsetUnion.hpp"
 //metametamodel classes
-#include "ecore/EParameter.hpp"
-#include "ecore/EOperation.hpp"
-#include "ecore/EDataType.hpp"
-#include "ecore/EAnnotation.hpp"
-#include "ecore/EClass.hpp"
-#include "ecore/EReference.hpp"
-#include "ecore/EStringToStringMapEntry.hpp"
-#include "ecore/EAttribute.hpp"
 #include "ecore/EGenericType.hpp"
+#include "ecore/EDataType.hpp"
+#include "ecore/EOperation.hpp"
+#include "ecore/EAttribute.hpp"
+#include "ecore/EParameter.hpp"
+#include "ecore/EReference.hpp"
+#include "ecore/EClass.hpp"
 
 //depending model packages
 #include "ecore/ecorePackage.hpp"
-#include "fUML/fUMLPackage.hpp"
 #include "ocl/oclPackage.hpp"
-#include "types/typesPackage.hpp"
 //include subpackages 
  
 using namespace ocl::Evaluations;
@@ -56,6 +52,7 @@ void EvaluationsPackageImpl::createPackageContents(std::shared_ptr<ecore::EPacka
 	createLiteralExpEvalContent(package, factory);
 	createLoopExpEvalContent(package, factory);
 	createModelPropertyCallExpEvalContent(package, factory);
+	createNameValueBindingContent(package, factory);
 	createNavigationCallExpEvalContent(package, factory);
 	createNumericLiteralExpEvalContent(package, factory);
 	createOclExpEvalContent(package, factory);
@@ -80,8 +77,8 @@ void EvaluationsPackageImpl::createPackageContents(std::shared_ptr<ecore::EPacka
 void EvaluationsPackageImpl::createAssociationClassCallExpEvalContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory)
 {
 	m_associationClassCallExpEval_Class = factory->createEClass_as_eClassifiers_in_EPackage(package, ASSOCIATIONCLASSCALLEXPEVAL_CLASS);
+	m_associationClassCallExpEval_Attribute_referredAssociationClass = factory->createEAttribute_as_eAttributes_in_EClass(m_associationClassCallExpEval_Class, ASSOCIATIONCLASSCALLEXPEVAL_ATTRIBUTE_REFERREDASSOCIATIONCLASS);
 	
-	m_associationClassCallExpEval_Attribute_referredAssociationClass = factory->createEReference_as_eReferences_in_EClass(m_associationClassCallExpEval_Class, ASSOCIATIONCLASSCALLEXPEVAL_ATTRIBUTE_REFERREDASSOCIATIONCLASS);
 	
 	
 }
@@ -89,8 +86,8 @@ void EvaluationsPackageImpl::createAssociationClassCallExpEvalContent(std::share
 void EvaluationsPackageImpl::createAssociationEndCallExpEvalContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory)
 {
 	m_associationEndCallExpEval_Class = factory->createEClass_as_eClassifiers_in_EPackage(package, ASSOCIATIONENDCALLEXPEVAL_CLASS);
+	m_associationEndCallExpEval_Attribute_referredAssociationEnd = factory->createEAttribute_as_eAttributes_in_EClass(m_associationEndCallExpEval_Class, ASSOCIATIONENDCALLEXPEVAL_ATTRIBUTE_REFERREDASSOCIATIONEND);
 	
-	m_associationEndCallExpEval_Attribute_referredAssociationEnd = factory->createEReference_as_eReferences_in_EClass(m_associationEndCallExpEval_Class, ASSOCIATIONENDCALLEXPEVAL_ATTRIBUTE_REFERREDASSOCIATIONEND);
 	
 	
 }
@@ -98,8 +95,8 @@ void EvaluationsPackageImpl::createAssociationEndCallExpEvalContent(std::shared_
 void EvaluationsPackageImpl::createAttributeCallExpEvalContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory)
 {
 	m_attributeCallExpEval_Class = factory->createEClass_as_eClassifiers_in_EPackage(package, ATTRIBUTECALLEXPEVAL_CLASS);
+	m_attributeCallExpEval_Attribute_referredAttribute = factory->createEAttribute_as_eAttributes_in_EClass(m_attributeCallExpEval_Class, ATTRIBUTECALLEXPEVAL_ATTRIBUTE_REFERREDATTRIBUTE);
 	
-	m_attributeCallExpEval_Attribute_referredAttribute = factory->createEReference_as_eReferences_in_EClass(m_attributeCallExpEval_Class, ATTRIBUTECALLEXPEVAL_ATTRIBUTE_REFERREDATTRIBUTE);
 	
 	
 }
@@ -165,7 +162,7 @@ void EvaluationsPackageImpl::createEvalEnvironmentContent(std::shared_ptr<ecore:
 	
 	m_evalEnvironment_Operation_add_NameValueBinding = factory->createEOperation_as_eOperations_in_EClass(m_evalEnvironment_Class, EVALENVIRONMENT_OPERATION_ADD_NAMEVALUEBINDING);
 	m_evalEnvironment_Operation_addAll_NameValueBinding = factory->createEOperation_as_eOperations_in_EClass(m_evalEnvironment_Class, EVALENVIRONMENT_OPERATION_ADDALL_NAMEVALUEBINDING);
-	m_evalEnvironment_Operation_find_String = factory->createEOperation_as_eOperations_in_EClass(m_evalEnvironment_Class, EVALENVIRONMENT_OPERATION_FIND_STRING);
+	m_evalEnvironment_Operation_find_EString = factory->createEOperation_as_eOperations_in_EClass(m_evalEnvironment_Class, EVALENVIRONMENT_OPERATION_FIND_ESTRING);
 	m_evalEnvironment_Operation_getValueOf_EString = factory->createEOperation_as_eOperations_in_EClass(m_evalEnvironment_Class, EVALENVIRONMENT_OPERATION_GETVALUEOF_ESTRING);
 	m_evalEnvironment_Operation_replace_NameValueBinding = factory->createEOperation_as_eOperations_in_EClass(m_evalEnvironment_Class, EVALENVIRONMENT_OPERATION_REPLACE_NAMEVALUEBINDING);
 	
@@ -228,10 +225,10 @@ void EvaluationsPackageImpl::createIteratorExpEvalContent(std::shared_ptr<ecore:
 void EvaluationsPackageImpl::createLetExpEvalContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory)
 {
 	m_letExpEval_Class = factory->createEClass_as_eClassifiers_in_EPackage(package, LETEXPEVAL_CLASS);
+	m_letExpEval_Attribute_variable = factory->createEAttribute_as_eAttributes_in_EClass(m_letExpEval_Class, LETEXPEVAL_ATTRIBUTE_VARIABLE);
 	
 	m_letExpEval_Attribute_in = factory->createEReference_as_eReferences_in_EClass(m_letExpEval_Class, LETEXPEVAL_ATTRIBUTE_IN);
 	m_letExpEval_Attribute_initExpression = factory->createEReference_as_eReferences_in_EClass(m_letExpEval_Class, LETEXPEVAL_ATTRIBUTE_INITEXPRESSION);
-	m_letExpEval_Attribute_variable = factory->createEReference_as_eReferences_in_EClass(m_letExpEval_Class, LETEXPEVAL_ATTRIBUTE_VARIABLE);
 	
 	
 }
@@ -247,9 +244,9 @@ void EvaluationsPackageImpl::createLiteralExpEvalContent(std::shared_ptr<ecore::
 void EvaluationsPackageImpl::createLoopExpEvalContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory)
 {
 	m_loopExpEval_Class = factory->createEClass_as_eClassifiers_in_EPackage(package, LOOPEXPEVAL_CLASS);
+	m_loopExpEval_Attribute_iterators = factory->createEAttribute_as_eAttributes_in_EClass(m_loopExpEval_Class, LOOPEXPEVAL_ATTRIBUTE_ITERATORS);
 	
 	m_loopExpEval_Attribute_bodyEvals = factory->createEReference_as_eReferences_in_EClass(m_loopExpEval_Class, LOOPEXPEVAL_ATTRIBUTE_BODYEVALS);
-	m_loopExpEval_Attribute_iterators = factory->createEReference_as_eReferences_in_EClass(m_loopExpEval_Class, LOOPEXPEVAL_ATTRIBUTE_ITERATORS);
 	
 	
 }
@@ -263,11 +260,21 @@ void EvaluationsPackageImpl::createModelPropertyCallExpEvalContent(std::shared_p
 	
 }
 
+void EvaluationsPackageImpl::createNameValueBindingContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory)
+{
+	m_nameValueBinding_Class = factory->createEClass_as_eClassifiers_in_EPackage(package, NAMEVALUEBINDING_CLASS);
+	m_nameValueBinding_Attribute_name = factory->createEAttribute_as_eAttributes_in_EClass(m_nameValueBinding_Class, NAMEVALUEBINDING_ATTRIBUTE_NAME);
+	
+	m_nameValueBinding_Attribute_value = factory->createEReference_as_eReferences_in_EClass(m_nameValueBinding_Class, NAMEVALUEBINDING_ATTRIBUTE_VALUE);
+	
+	
+}
+
 void EvaluationsPackageImpl::createNavigationCallExpEvalContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory)
 {
 	m_navigationCallExpEval_Class = factory->createEClass_as_eClassifiers_in_EPackage(package, NAVIGATIONCALLEXPEVAL_CLASS);
+	m_navigationCallExpEval_Attribute_navigationSource = factory->createEAttribute_as_eAttributes_in_EClass(m_navigationCallExpEval_Class, NAVIGATIONCALLEXPEVAL_ATTRIBUTE_NAVIGATIONSOURCE);
 	
-	m_navigationCallExpEval_Attribute_navigationSource = factory->createEReference_as_eReferences_in_EClass(m_navigationCallExpEval_Class, NAVIGATIONCALLEXPEVAL_ATTRIBUTE_NAVIGATIONSOURCE);
 	m_navigationCallExpEval_Attribute_qualifiers = factory->createEReference_as_eReferences_in_EClass(m_navigationCallExpEval_Class, NAVIGATIONCALLEXPEVAL_ATTRIBUTE_QUALIFIERS);
 	
 	
@@ -318,9 +325,9 @@ void EvaluationsPackageImpl::createOclMessageExpEvalContent(std::shared_ptr<ecor
 void EvaluationsPackageImpl::createOperationCallExpEvalContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory)
 {
 	m_operationCallExpEval_Class = factory->createEClass_as_eClassifiers_in_EPackage(package, OPERATIONCALLEXPEVAL_CLASS);
+	m_operationCallExpEval_Attribute_referredOperation = factory->createEAttribute_as_eAttributes_in_EClass(m_operationCallExpEval_Class, OPERATIONCALLEXPEVAL_ATTRIBUTE_REFERREDOPERATION);
 	
 	m_operationCallExpEval_Attribute_arguments = factory->createEReference_as_eReferences_in_EClass(m_operationCallExpEval_Class, OPERATIONCALLEXPEVAL_ATTRIBUTE_ARGUMENTS);
-	m_operationCallExpEval_Attribute_referredOperation = factory->createEReference_as_eReferences_in_EClass(m_operationCallExpEval_Class, OPERATIONCALLEXPEVAL_ATTRIBUTE_REFERREDOPERATION);
 	
 	
 }
@@ -394,9 +401,9 @@ void EvaluationsPackageImpl::createUnspecifiedValueExpEvalContent(std::shared_pt
 void EvaluationsPackageImpl::createVariableDeclEvalContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory)
 {
 	m_variableDeclEval_Class = factory->createEClass_as_eClassifiers_in_EPackage(package, VARIABLEDECLEVAL_CLASS);
+	m_variableDeclEval_Attribute_name = factory->createEAttribute_as_eAttributes_in_EClass(m_variableDeclEval_Class, VARIABLEDECLEVAL_ATTRIBUTE_NAME);
 	
 	m_variableDeclEval_Attribute_initExp = factory->createEReference_as_eReferences_in_EClass(m_variableDeclEval_Class, VARIABLEDECLEVAL_ATTRIBUTE_INITEXP);
-	m_variableDeclEval_Attribute_name = factory->createEReference_as_eReferences_in_EClass(m_variableDeclEval_Class, VARIABLEDECLEVAL_ATTRIBUTE_NAME);
 	
 	
 }
@@ -404,8 +411,8 @@ void EvaluationsPackageImpl::createVariableDeclEvalContent(std::shared_ptr<ecore
 void EvaluationsPackageImpl::createVariableExpEvalContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory)
 {
 	m_variableExpEval_Class = factory->createEClass_as_eClassifiers_in_EPackage(package, VARIABLEEXPEVAL_CLASS);
+	m_variableExpEval_Attribute_referredVariable = factory->createEAttribute_as_eAttributes_in_EClass(m_variableExpEval_Class, VARIABLEEXPEVAL_ATTRIBUTE_REFERREDVARIABLE);
 	
-	m_variableExpEval_Attribute_referredVariable = factory->createEReference_as_eReferences_in_EClass(m_variableExpEval_Class, VARIABLEEXPEVAL_ATTRIBUTE_REFERREDVARIABLE);
 	
 	
 }

@@ -45,17 +45,14 @@ namespace ocl::Expressions
 	class LoopExp;
 	class NavigationCallExp;
 	class OperationCallExp;
-	class Variable;
+	class VarDeclarationExp;
 }
 namespace ecore 
 {
 	class EAnnotation;
 	class EClassifier;
+	class EEnumLiteral;
 	class EGenericType;
-}
-namespace uml 
-{
-	class EnumerationLiteral;
 }
 
 // namespace macro header include
@@ -71,7 +68,7 @@ namespace uml
 namespace ocl::Expressions 
 {
 	
-	class OCL_API EnumLiteralExp: virtual public LiteralExp
+	class OCL_API EnumLiteralExp : virtual public LiteralExp
 	{
 		public:
  			EnumLiteralExp(const EnumLiteralExp &) {}
@@ -92,12 +89,14 @@ namespace ocl::Expressions
 			//*********************************
 			// Attribute Getters & Setters
 			//*********************************
+			virtual std::string getReferredEnumLiteralStr() const = 0;
+			virtual void setReferredEnumLiteralStr (std::string _referredEnumLiteralStr)= 0;
 
 			//*********************************
 			// Reference Getters & Setters
 			//*********************************
-			virtual std::shared_ptr<uml::EnumerationLiteral> getReferredEnumLiteral() const = 0;
-			virtual void setReferredEnumLiteral(std::shared_ptr<uml::EnumerationLiteral>) = 0;
+			virtual std::shared_ptr<ecore::EEnumLiteral> getReferredEnumLiteral() const = 0;
+			virtual void setReferredEnumLiteral(std::shared_ptr<ecore::EEnumLiteral>) = 0;
 
 			//*********************************
 			// Union Reference Getters
@@ -119,11 +118,12 @@ namespace ocl::Expressions
 			//*********************************
 			// Attribute Members
 			//*********************************
+			std::string m_referredEnumLiteralStr= "";
 			
 			//*********************************
 			// Reference Members
 			//*********************************
-			std::shared_ptr<uml::EnumerationLiteral> m_referredEnumLiteral;
+			std::shared_ptr<ecore::EEnumLiteral> m_referredEnumLiteral;
 	};
 }
 #endif /* end of include guard: OCL_EXPRESSIONS_ENUMLITERALEXP_HPP */

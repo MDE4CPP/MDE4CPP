@@ -52,7 +52,7 @@ namespace ecore
 namespace ocl::Expressions 
 {
 	
-	class OCL_API CollectionLiteralPart: virtual public ecore::ETypedElement
+	class OCL_API CollectionLiteralPart : virtual public ecore::ETypedElement
 	{
 		public:
  			CollectionLiteralPart(const CollectionLiteralPart &) {}

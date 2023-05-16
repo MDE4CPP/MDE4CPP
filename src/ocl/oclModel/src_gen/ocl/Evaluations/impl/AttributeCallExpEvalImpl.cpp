@@ -1,9 +1,13 @@
 
 #include "ocl/Evaluations/impl/AttributeCallExpEvalImpl.hpp"
 #ifdef NDEBUG
-	#define DEBUG_MESSAGE(a) /**/
+	#define DEBUG_INFO(a)		/**/
+	#define DEBUG_WARNING(a)	/**/
+	#define DEBUG_ERROR(a)		/**/
 #else
-	#define DEBUG_MESSAGE(a) a
+	#define DEBUG_INFO(a) 		std::cout<<"[\e[0;32mInfo\e[0m]:\t\t"<<__PRETTY_FUNCTION__<<"\n\t\t  -- Message: "<<a<<std::endl;
+	#define DEBUG_WARNING(a) 	std::cout<<"[\e[0;33mWarning\e[0m]:\t"<<__PRETTY_FUNCTION__<<"\n\t\t  -- Message: "<<a<<std::endl;
+	#define DEBUG_ERROR(a)		std::cout<<"[\e[0;31mError\e[0m]:\t"<<__PRETTY_FUNCTION__<<"\n\t\t  -- Message: "<<a<<std::endl;
 #endif
 
 #ifdef ACTIVITY_DEBUG_ON
@@ -18,10 +22,11 @@
 #include <iostream>
 #include <sstream>
 
+#include "abstractDataTypes/Bag.hpp"
 
 
-#include "abstractDataTypes/AnyEObject.hpp"
-#include "abstractDataTypes/AnyEObjectBag.hpp"
+#include "ecore/EcoreAny.hpp"
+#include "ecore/EcoreContainerAny.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
@@ -34,27 +39,21 @@
 
 #include <exception> // used in Persistence
 #include "ocl/Evaluations/EvaluationsFactory.hpp"
+#include "ecore/ecoreFactory.hpp"
 #include "ocl/Expressions/ExpressionsFactory.hpp"
-#include "fUML/Semantics/Values/ValuesFactory.hpp"
-#include "uml/umlFactory.hpp"
-#include "fUML/Semantics/Loci/LociFactory.hpp"
-#include "fUML/Semantics/SimpleClassifiers/SimpleClassifiersFactory.hpp"
+#include "ecore/EAnnotation.hpp"
+#include "ecore/EClassifier.hpp"
+#include "ecore/EGenericType.hpp"
+#include "ecore/EObject.hpp"
 #include "ocl/Evaluations/EvalEnvironment.hpp"
-#include "fUML/Semantics/Loci/Locus.hpp"
 #include "ocl/Evaluations/ModelPropertyCallExpEval.hpp"
 #include "ocl/Evaluations/OclExpEval.hpp"
 #include "ocl/Expressions/OclExpression.hpp"
-#include "fUML/Semantics/SimpleClassifiers/StringValue.hpp"
-#include "fUML/Semantics/Values/Value.hpp"
-#include "uml/ValueSpecification.hpp"
 //Factories and Package includes
 #include "ocl/oclPackage.hpp"
 #include "ocl/Evaluations/EvaluationsPackage.hpp"
 #include "ocl/Expressions/ExpressionsPackage.hpp"
-#include "fUML/Semantics/Loci/LociPackage.hpp"
-#include "fUML/Semantics/SimpleClassifiers/SimpleClassifiersPackage.hpp"
-#include "fUML/Semantics/Values/ValuesPackage.hpp"
-#include "uml/umlPackage.hpp"
+#include "ecore/ecorePackage.hpp"
 
 using namespace ocl::Evaluations;
 
@@ -101,9 +100,9 @@ AttributeCallExpEvalImpl& AttributeCallExpEvalImpl::operator=(const AttributeCal
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy AttributeCallExpEval "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
 	#endif
 	//Clone Attributes with (deep copy)
+	m_referredAttribute = obj.getReferredAttribute();
 
 	//copy references with no containment (soft copy)
-	m_referredAttribute  = obj.getReferredAttribute();
 	//Clone references with containment (deep copy)
 	return *this;
 }
@@ -123,20 +122,20 @@ std::shared_ptr<ecore::EObject> AttributeCallExpEvalImpl::copy() const
 //*********************************
 // Attribute Getters & Setters
 //*********************************
+/* Getter & Setter for attribute referredAttribute */
+std::string AttributeCallExpEvalImpl::getReferredAttribute() const 
+{
+	return m_referredAttribute;
+}
+void AttributeCallExpEvalImpl::setReferredAttribute(std::string _referredAttribute)
+{
+	m_referredAttribute = _referredAttribute;
+	
+}
 
 //*********************************
 // Reference Getters & Setters
 //*********************************
-/* Getter & Setter for reference referredAttribute */
-std::shared_ptr<fUML::Semantics::SimpleClassifiers::StringValue> AttributeCallExpEvalImpl::getReferredAttribute() const
-{
-    return m_referredAttribute;
-}
-void AttributeCallExpEvalImpl::setReferredAttribute(std::shared_ptr<fUML::Semantics::SimpleClassifiers::StringValue> _referredAttribute)
-{
-    m_referredAttribute = _referredAttribute;
-	
-}
 
 //*********************************
 // Union Getter
@@ -174,12 +173,14 @@ void AttributeCallExpEvalImpl::loadAttributes(std::shared_ptr<persistence::inter
 	try
 	{
 		std::map<std::string, std::string>::const_iterator iter;
-		std::shared_ptr<ecore::EClass> metaClass = this->eClass(); // get MetaClass
+	
 		iter = attr_list.find("referredAttribute");
 		if ( iter != attr_list.end() )
 		{
-			// add unresolvedReference to loadHandler's list
-			loadHandler->addUnresolvedReference(iter->second, loadHandler->getCurrentObject(), metaClass->getEStructuralFeature("referredAttribute")); // TODO use getEStructuralFeature() with id, for faster access to EStructuralFeature
+			// this attribute is a 'std::string'
+			std::string value;
+			value = iter->second;
+			this->setReferredAttribute(value);
 		}
 	}
 	catch (std::exception& e)
@@ -203,20 +204,6 @@ void AttributeCallExpEvalImpl::loadNode(std::string nodeName, std::shared_ptr<pe
 
 void AttributeCallExpEvalImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
 {
-	switch(featureID)
-	{
-		case ocl::Evaluations::EvaluationsPackage::ATTRIBUTECALLEXPEVAL_ATTRIBUTE_REFERREDATTRIBUTE:
-		{
-			if (references.size() == 1)
-			{
-				// Cast object to correct type
-				std::shared_ptr<fUML::Semantics::SimpleClassifiers::StringValue> _referredAttribute = std::dynamic_pointer_cast<fUML::Semantics::SimpleClassifiers::StringValue>( references.front() );
-				setReferredAttribute(_referredAttribute);
-			}
-			
-			return;
-		}
-	}
 	ModelPropertyCallExpEvalImpl::resolveReferences(featureID, references);
 }
 
@@ -230,9 +217,11 @@ void AttributeCallExpEvalImpl::save(std::shared_ptr<persistence::interfaces::XSa
 	
 	OclExpEvalImpl::saveContent(saveHandler);
 	
-	fUML::Semantics::Values::EvaluationImpl::saveContent(saveHandler);
+	ecore::ETypedElementImpl::saveContent(saveHandler);
 	
-	fUML::Semantics::Loci::SemanticVisitorImpl::saveContent(saveHandler);
+	ecore::ENamedElementImpl::saveContent(saveHandler);
+	
+	ecore::EModelElementImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);
 }
@@ -242,8 +231,11 @@ void AttributeCallExpEvalImpl::saveContent(std::shared_ptr<persistence::interfac
 	try
 	{
 		std::shared_ptr<ocl::Evaluations::EvaluationsPackage> package = ocl::Evaluations::EvaluationsPackage::eInstance();
-	// Add references
-		saveHandler->addReference(this->getReferredAttribute(), "referredAttribute", getReferredAttribute()->eClass() != fUML::Semantics::SimpleClassifiers::SimpleClassifiersPackage::eInstance()->getStringValue_Class()); 
+		// Add attributes
+		if ( this->eIsSet(package->getAttributeCallExpEval_Attribute_referredAttribute()) )
+		{
+			saveHandler->addAttribute("referredAttribute", this->getReferredAttribute());
+		}
 	}
 	catch (std::exception& e)
 	{
@@ -259,12 +251,12 @@ std::shared_ptr<ecore::EClass> AttributeCallExpEvalImpl::eStaticClass() const
 //*********************************
 // EStructuralFeature Get/Set/IsSet
 //*********************************
-Any AttributeCallExpEvalImpl::eGet(int featureID, bool resolve, bool coreType) const
+std::shared_ptr<Any> AttributeCallExpEvalImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 		case ocl::Evaluations::EvaluationsPackage::ATTRIBUTECALLEXPEVAL_ATTRIBUTE_REFERREDATTRIBUTE:
-			return eAny(getReferredAttribute(),fUML::Semantics::SimpleClassifiers::SimpleClassifiersPackage::STRINGVALUE_CLASS,false); //67
+			return eAny(getReferredAttribute(),ecore::ecorePackage::ESTRING_CLASS,false); //415
 	}
 	return ModelPropertyCallExpEvalImpl::eGet(featureID, resolve, coreType);
 }
@@ -274,22 +266,28 @@ bool AttributeCallExpEvalImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case ocl::Evaluations::EvaluationsPackage::ATTRIBUTECALLEXPEVAL_ATTRIBUTE_REFERREDATTRIBUTE:
-			return getReferredAttribute() != nullptr; //67
+			return getReferredAttribute() != ""; //415
 	}
 	return ModelPropertyCallExpEvalImpl::internalEIsSet(featureID);
 }
 
-bool AttributeCallExpEvalImpl::eSet(int featureID, Any newValue)
+bool AttributeCallExpEvalImpl::eSet(int featureID, std::shared_ptr<Any> newValue)
 {
 	switch(featureID)
 	{
 		case ocl::Evaluations::EvaluationsPackage::ATTRIBUTECALLEXPEVAL_ATTRIBUTE_REFERREDATTRIBUTE:
 		{
-			// CAST Any to fUML::Semantics::SimpleClassifiers::StringValue
-			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
-			std::shared_ptr<fUML::Semantics::SimpleClassifiers::StringValue> _referredAttribute = std::dynamic_pointer_cast<fUML::Semantics::SimpleClassifiers::StringValue>(_temp);
-			setReferredAttribute(_referredAttribute); //67
-			return true;
+			try
+			{
+				std::string _referredAttribute = newValue->get<std::string>();
+				setReferredAttribute(_referredAttribute); //415
+			}
+			catch(...)
+			{
+				DEBUG_ERROR("Invalid type stored in 'Any' for feature 'referredAttribute'. Failed to set feature!")
+				return false;
+			}
+		return true;
 		}
 	}
 
@@ -299,9 +297,9 @@ bool AttributeCallExpEvalImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any AttributeCallExpEvalImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+std::shared_ptr<Any> AttributeCallExpEvalImpl::eInvoke(int operationID, std::shared_ptr<Bag<Any>> arguments)
 {
-	Any result;
+	std::shared_ptr<Any> result;
  
   	switch(operationID)
 	{

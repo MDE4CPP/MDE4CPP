@@ -1,9 +1,13 @@
 
 #include "ocl/Evaluations/impl/NavigationCallExpEvalImpl.hpp"
 #ifdef NDEBUG
-	#define DEBUG_MESSAGE(a) /**/
+	#define DEBUG_INFO(a)		/**/
+	#define DEBUG_WARNING(a)	/**/
+	#define DEBUG_ERROR(a)		/**/
 #else
-	#define DEBUG_MESSAGE(a) a
+	#define DEBUG_INFO(a) 		std::cout<<"[\e[0;32mInfo\e[0m]:\t\t"<<__PRETTY_FUNCTION__<<"\n\t\t  -- Message: "<<a<<std::endl;
+	#define DEBUG_WARNING(a) 	std::cout<<"[\e[0;33mWarning\e[0m]:\t"<<__PRETTY_FUNCTION__<<"\n\t\t  -- Message: "<<a<<std::endl;
+	#define DEBUG_ERROR(a)		std::cout<<"[\e[0;31mError\e[0m]:\t"<<__PRETTY_FUNCTION__<<"\n\t\t  -- Message: "<<a<<std::endl;
 #endif
 
 #ifdef ACTIVITY_DEBUG_ON
@@ -21,8 +25,8 @@
 #include "abstractDataTypes/Bag.hpp"
 
 
-#include "abstractDataTypes/AnyEObject.hpp"
-#include "abstractDataTypes/AnyEObjectBag.hpp"
+#include "ecore/EcoreAny.hpp"
+#include "ecore/EcoreContainerAny.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
@@ -35,27 +39,21 @@
 
 #include <exception> // used in Persistence
 #include "ocl/Evaluations/EvaluationsFactory.hpp"
+#include "ecore/ecoreFactory.hpp"
 #include "ocl/Expressions/ExpressionsFactory.hpp"
-#include "fUML/Semantics/Values/ValuesFactory.hpp"
-#include "uml/umlFactory.hpp"
-#include "fUML/Semantics/Loci/LociFactory.hpp"
-#include "fUML/Semantics/SimpleClassifiers/SimpleClassifiersFactory.hpp"
+#include "ecore/EAnnotation.hpp"
+#include "ecore/EClassifier.hpp"
+#include "ecore/EGenericType.hpp"
+#include "ecore/EObject.hpp"
 #include "ocl/Evaluations/EvalEnvironment.hpp"
-#include "fUML/Semantics/Loci/Locus.hpp"
 #include "ocl/Evaluations/ModelPropertyCallExpEval.hpp"
 #include "ocl/Evaluations/OclExpEval.hpp"
 #include "ocl/Expressions/OclExpression.hpp"
-#include "fUML/Semantics/SimpleClassifiers/StringValue.hpp"
-#include "fUML/Semantics/Values/Value.hpp"
-#include "uml/ValueSpecification.hpp"
 //Factories and Package includes
 #include "ocl/oclPackage.hpp"
 #include "ocl/Evaluations/EvaluationsPackage.hpp"
 #include "ocl/Expressions/ExpressionsPackage.hpp"
-#include "fUML/Semantics/Loci/LociPackage.hpp"
-#include "fUML/Semantics/SimpleClassifiers/SimpleClassifiersPackage.hpp"
-#include "fUML/Semantics/Values/ValuesPackage.hpp"
-#include "uml/umlPackage.hpp"
+#include "ecore/ecorePackage.hpp"
 
 using namespace ocl::Evaluations;
 
@@ -102,9 +100,9 @@ NavigationCallExpEvalImpl& NavigationCallExpEvalImpl::operator=(const Navigation
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy NavigationCallExpEval "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
 	#endif
 	//Clone Attributes with (deep copy)
+	m_navigationSource = obj.getNavigationSource();
 
 	//copy references with no containment (soft copy)
-	m_navigationSource  = obj.getNavigationSource();
 	m_qualifiers  = obj.getQualifiers();
 	//Clone references with containment (deep copy)
 	return *this;
@@ -125,21 +123,20 @@ std::shared_ptr<ecore::EObject> NavigationCallExpEvalImpl::copy() const
 //*********************************
 // Attribute Getters & Setters
 //*********************************
+/* Getter & Setter for attribute navigationSource */
+std::string NavigationCallExpEvalImpl::getNavigationSource() const 
+{
+	return m_navigationSource;
+}
+void NavigationCallExpEvalImpl::setNavigationSource(std::string _navigationSource)
+{
+	m_navigationSource = _navigationSource;
+	
+}
 
 //*********************************
 // Reference Getters & Setters
 //*********************************
-/* Getter & Setter for reference navigationSource */
-std::shared_ptr<fUML::Semantics::SimpleClassifiers::StringValue> NavigationCallExpEvalImpl::getNavigationSource() const
-{
-    return m_navigationSource;
-}
-void NavigationCallExpEvalImpl::setNavigationSource(std::shared_ptr<fUML::Semantics::SimpleClassifiers::StringValue> _navigationSource)
-{
-    m_navigationSource = _navigationSource;
-	
-}
-
 /* Getter & Setter for reference qualifiers */
 std::shared_ptr<Bag<ocl::Evaluations::OclExpEval>> NavigationCallExpEvalImpl::getQualifiers() const
 {
@@ -188,14 +185,16 @@ void NavigationCallExpEvalImpl::loadAttributes(std::shared_ptr<persistence::inte
 	try
 	{
 		std::map<std::string, std::string>::const_iterator iter;
-		std::shared_ptr<ecore::EClass> metaClass = this->eClass(); // get MetaClass
+	
 		iter = attr_list.find("navigationSource");
 		if ( iter != attr_list.end() )
 		{
-			// add unresolvedReference to loadHandler's list
-			loadHandler->addUnresolvedReference(iter->second, loadHandler->getCurrentObject(), metaClass->getEStructuralFeature("navigationSource")); // TODO use getEStructuralFeature() with id, for faster access to EStructuralFeature
+			// this attribute is a 'std::string'
+			std::string value;
+			value = iter->second;
+			this->setNavigationSource(value);
 		}
-
+		std::shared_ptr<ecore::EClass> metaClass = this->eClass(); // get MetaClass
 		iter = attr_list.find("qualifiers");
 		if ( iter != attr_list.end() )
 		{
@@ -226,18 +225,6 @@ void NavigationCallExpEvalImpl::resolveReferences(const int featureID, std::vect
 {
 	switch(featureID)
 	{
-		case ocl::Evaluations::EvaluationsPackage::NAVIGATIONCALLEXPEVAL_ATTRIBUTE_NAVIGATIONSOURCE:
-		{
-			if (references.size() == 1)
-			{
-				// Cast object to correct type
-				std::shared_ptr<fUML::Semantics::SimpleClassifiers::StringValue> _navigationSource = std::dynamic_pointer_cast<fUML::Semantics::SimpleClassifiers::StringValue>( references.front() );
-				setNavigationSource(_navigationSource);
-			}
-			
-			return;
-		}
-
 		case ocl::Evaluations::EvaluationsPackage::NAVIGATIONCALLEXPEVAL_ATTRIBUTE_QUALIFIERS:
 		{
 			std::shared_ptr<Bag<ocl::Evaluations::OclExpEval>> _qualifiers = getQualifiers();
@@ -265,9 +252,11 @@ void NavigationCallExpEvalImpl::save(std::shared_ptr<persistence::interfaces::XS
 	
 	OclExpEvalImpl::saveContent(saveHandler);
 	
-	fUML::Semantics::Values::EvaluationImpl::saveContent(saveHandler);
+	ecore::ETypedElementImpl::saveContent(saveHandler);
 	
-	fUML::Semantics::Loci::SemanticVisitorImpl::saveContent(saveHandler);
+	ecore::ENamedElementImpl::saveContent(saveHandler);
+	
+	ecore::EModelElementImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);
 }
@@ -277,8 +266,12 @@ void NavigationCallExpEvalImpl::saveContent(std::shared_ptr<persistence::interfa
 	try
 	{
 		std::shared_ptr<ocl::Evaluations::EvaluationsPackage> package = ocl::Evaluations::EvaluationsPackage::eInstance();
+		// Add attributes
+		if ( this->eIsSet(package->getNavigationCallExpEval_Attribute_navigationSource()) )
+		{
+			saveHandler->addAttribute("navigationSource", this->getNavigationSource());
+		}
 	// Add references
-		saveHandler->addReference(this->getNavigationSource(), "navigationSource", getNavigationSource()->eClass() != fUML::Semantics::SimpleClassifiers::SimpleClassifiersPackage::eInstance()->getStringValue_Class()); 
 		saveHandler->addReferences<ocl::Evaluations::OclExpEval>("qualifiers", this->getQualifiers());
 	}
 	catch (std::exception& e)
@@ -295,14 +288,14 @@ std::shared_ptr<ecore::EClass> NavigationCallExpEvalImpl::eStaticClass() const
 //*********************************
 // EStructuralFeature Get/Set/IsSet
 //*********************************
-Any NavigationCallExpEvalImpl::eGet(int featureID, bool resolve, bool coreType) const
+std::shared_ptr<Any> NavigationCallExpEvalImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 		case ocl::Evaluations::EvaluationsPackage::NAVIGATIONCALLEXPEVAL_ATTRIBUTE_NAVIGATIONSOURCE:
-			return eAny(getNavigationSource(),fUML::Semantics::SimpleClassifiers::SimpleClassifiersPackage::STRINGVALUE_CLASS,false); //557
+			return eAny(getNavigationSource(),ecore::ecorePackage::ESTRING_CLASS,false); //5316
 		case ocl::Evaluations::EvaluationsPackage::NAVIGATIONCALLEXPEVAL_ATTRIBUTE_QUALIFIERS:
-			return eAnyBag(getQualifiers(),ocl::Evaluations::EvaluationsPackage::OCLEXPEVAL_CLASS); //558
+			return eEcoreContainerAny(getQualifiers(),ocl::Evaluations::EvaluationsPackage::OCLEXPEVAL_CLASS); //5315
 	}
 	return ModelPropertyCallExpEvalImpl::eGet(featureID, resolve, coreType);
 }
@@ -312,61 +305,75 @@ bool NavigationCallExpEvalImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case ocl::Evaluations::EvaluationsPackage::NAVIGATIONCALLEXPEVAL_ATTRIBUTE_NAVIGATIONSOURCE:
-			return getNavigationSource() != nullptr; //557
+			return getNavigationSource() != ""; //5316
 		case ocl::Evaluations::EvaluationsPackage::NAVIGATIONCALLEXPEVAL_ATTRIBUTE_QUALIFIERS:
-			return getQualifiers() != nullptr; //558
+			return getQualifiers() != nullptr; //5315
 	}
 	return ModelPropertyCallExpEvalImpl::internalEIsSet(featureID);
 }
 
-bool NavigationCallExpEvalImpl::eSet(int featureID, Any newValue)
+bool NavigationCallExpEvalImpl::eSet(int featureID, std::shared_ptr<Any> newValue)
 {
 	switch(featureID)
 	{
 		case ocl::Evaluations::EvaluationsPackage::NAVIGATIONCALLEXPEVAL_ATTRIBUTE_NAVIGATIONSOURCE:
 		{
-			// CAST Any to fUML::Semantics::SimpleClassifiers::StringValue
-			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
-			std::shared_ptr<fUML::Semantics::SimpleClassifiers::StringValue> _navigationSource = std::dynamic_pointer_cast<fUML::Semantics::SimpleClassifiers::StringValue>(_temp);
-			setNavigationSource(_navigationSource); //557
-			return true;
+			try
+			{
+				std::string _navigationSource = newValue->get<std::string>();
+				setNavigationSource(_navigationSource); //5316
+			}
+			catch(...)
+			{
+				DEBUG_ERROR("Invalid type stored in 'Any' for feature 'navigationSource'. Failed to set feature!")
+				return false;
+			}
+		return true;
 		}
 		case ocl::Evaluations::EvaluationsPackage::NAVIGATIONCALLEXPEVAL_ATTRIBUTE_QUALIFIERS:
 		{
-			// CAST Any to Bag<ocl::Evaluations::OclExpEval>
-			if((newValue->isContainer()) && (ocl::Evaluations::EvaluationsPackage::OCLEXPEVAL_CLASS ==newValue->getTypeId()))
-			{ 
+			std::shared_ptr<ecore::EcoreContainerAny> ecoreContainerAny = std::dynamic_pointer_cast<ecore::EcoreContainerAny>(newValue);
+			if(ecoreContainerAny)
+			{
 				try
 				{
-					std::shared_ptr<Bag<ocl::Evaluations::OclExpEval>> qualifiersList= newValue->get<std::shared_ptr<Bag<ocl::Evaluations::OclExpEval>>>();
-					std::shared_ptr<Bag<ocl::Evaluations::OclExpEval>> _qualifiers=getQualifiers();
-					for(const std::shared_ptr<ocl::Evaluations::OclExpEval> indexQualifiers: *_qualifiers)
+					std::shared_ptr<Bag<ecore::EObject>> eObjectList = ecoreContainerAny->getAsEObjectContainer();
+	
+					if(eObjectList)
 					{
-						if (qualifiersList->find(indexQualifiers) == -1)
+						std::shared_ptr<Bag<ocl::Evaluations::OclExpEval>> _qualifiers = getQualifiers();
+	
+						for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
 						{
-							_qualifiers->erase(indexQualifiers);
-						}
-					}
-
-					for(const std::shared_ptr<ocl::Evaluations::OclExpEval> indexQualifiers: *qualifiersList)
-					{
-						if (_qualifiers->find(indexQualifiers) == -1)
-						{
-							_qualifiers->add(indexQualifiers);
+							std::shared_ptr<ocl::Evaluations::OclExpEval> valueToAdd = std::dynamic_pointer_cast<ocl::Evaluations::OclExpEval>(anEObject);
+	
+							if (valueToAdd)
+							{
+								if(_qualifiers->find(valueToAdd) == -1)
+								{
+									_qualifiers->add(valueToAdd);
+								}
+								//else, valueToAdd is already present so it won't be added again
+							}
+							else
+							{
+								throw "Invalid argument";
+							}
 						}
 					}
 				}
 				catch(...)
 				{
-					DEBUG_MESSAGE(std::cout << "invalid Type to set of eAttributes."<< std::endl;)
+					DEBUG_ERROR("Invalid type stored in 'ecore::ecoreContainerAny' for feature 'qualifiers'. Failed to set feature!")
 					return false;
 				}
 			}
 			else
 			{
+				DEBUG_ERROR("Invalid instance of 'ecore::ecoreContainerAny' for feature 'qualifiers'. Failed to set feature!")
 				return false;
 			}
-			return true;
+		return true;
 		}
 	}
 
@@ -376,9 +383,9 @@ bool NavigationCallExpEvalImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any NavigationCallExpEvalImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+std::shared_ptr<Any> NavigationCallExpEvalImpl::eInvoke(int operationID, std::shared_ptr<Bag<Any>> arguments)
 {
-	Any result;
+	std::shared_ptr<Any> result;
  
   	switch(operationID)
 	{

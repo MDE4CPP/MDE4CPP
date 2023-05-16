@@ -40,21 +40,12 @@ namespace ocl::Expressions
 {
 	class OclExpression;
 }
-namespace fUML::Semantics::Loci 
+namespace ecore 
 {
-	class Locus;
-}
-namespace fUML::Semantics::SimpleClassifiers 
-{
-	class StringValue;
-}
-namespace fUML::Semantics::Values 
-{
-	class Value;
-}
-namespace uml 
-{
-	class ValueSpecification;
+	class EAnnotation;
+	class EClassifier;
+	class EGenericType;
+	class EObject;
 }
 
 // namespace macro header include
@@ -70,7 +61,7 @@ namespace uml
 namespace ocl::Evaluations 
 {
 	
-	class OCL_API AttributeCallExpEval: virtual public ModelPropertyCallExpEval
+	class OCL_API AttributeCallExpEval : virtual public ModelPropertyCallExpEval
 	{
 		public:
  			AttributeCallExpEval(const AttributeCallExpEval &) {}
@@ -91,12 +82,12 @@ namespace ocl::Evaluations
 			//*********************************
 			// Attribute Getters & Setters
 			//*********************************
+			virtual std::string getReferredAttribute() const = 0;
+			virtual void setReferredAttribute (std::string _referredAttribute)= 0;
 
 			//*********************************
 			// Reference Getters & Setters
 			//*********************************
-			virtual std::shared_ptr<fUML::Semantics::SimpleClassifiers::StringValue> getReferredAttribute() const = 0;
-			virtual void setReferredAttribute(std::shared_ptr<fUML::Semantics::SimpleClassifiers::StringValue>) = 0;
 
 			//*********************************
 			// Union Reference Getters
@@ -118,11 +109,11 @@ namespace ocl::Evaluations
 			//*********************************
 			// Attribute Members
 			//*********************************
+			std::string m_referredAttribute= "";
 			
 			//*********************************
 			// Reference Members
 			//*********************************
-			std::shared_ptr<fUML::Semantics::SimpleClassifiers::StringValue> m_referredAttribute;
 	};
 }
 #endif /* end of include guard: OCL_EVALUATIONS_ATTRIBUTECALLEXPEVAL_HPP */

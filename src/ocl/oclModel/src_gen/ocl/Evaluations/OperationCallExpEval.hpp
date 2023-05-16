@@ -41,21 +41,12 @@ namespace ocl::Expressions
 {
 	class OclExpression;
 }
-namespace fUML::Semantics::Loci 
+namespace ecore 
 {
-	class Locus;
-}
-namespace fUML::Semantics::SimpleClassifiers 
-{
-	class StringValue;
-}
-namespace fUML::Semantics::Values 
-{
-	class Value;
-}
-namespace uml 
-{
-	class ValueSpecification;
+	class EAnnotation;
+	class EClassifier;
+	class EGenericType;
+	class EObject;
 }
 
 // namespace macro header include
@@ -71,7 +62,7 @@ namespace uml
 namespace ocl::Evaluations 
 {
 	
-	class OCL_API OperationCallExpEval: virtual public ModelPropertyCallExpEval
+	class OCL_API OperationCallExpEval : virtual public ModelPropertyCallExpEval
 	{
 		public:
  			OperationCallExpEval(const OperationCallExpEval &) {}
@@ -92,13 +83,13 @@ namespace ocl::Evaluations
 			//*********************************
 			// Attribute Getters & Setters
 			//*********************************
+			virtual std::string getReferredOperation() const = 0;
+			virtual void setReferredOperation (std::string _referredOperation)= 0;
 
 			//*********************************
 			// Reference Getters & Setters
 			//*********************************
 			virtual std::shared_ptr<Bag<ocl::Evaluations::OclExpEval>> getArguments() const = 0;
-			virtual std::shared_ptr<fUML::Semantics::SimpleClassifiers::StringValue> getReferredOperation() const = 0;
-			virtual void setReferredOperation(std::shared_ptr<fUML::Semantics::SimpleClassifiers::StringValue>) = 0;
 
 			//*********************************
 			// Union Reference Getters
@@ -120,12 +111,12 @@ namespace ocl::Evaluations
 			//*********************************
 			// Attribute Members
 			//*********************************
+			std::string m_referredOperation= "";
 			
 			//*********************************
 			// Reference Members
 			//*********************************
 			mutable std::shared_ptr<Bag<ocl::Evaluations::OclExpEval>> m_arguments;
-			std::shared_ptr<fUML::Semantics::SimpleClassifiers::StringValue> m_referredOperation;
 	};
 }
 #endif /* end of include guard: OCL_EVALUATIONS_OPERATIONCALLEXPEVAL_HPP */

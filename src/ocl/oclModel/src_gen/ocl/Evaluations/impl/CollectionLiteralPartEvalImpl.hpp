@@ -17,12 +17,12 @@
 #include "../CollectionLiteralPartEval.hpp"
 
 #include "ocl/Evaluations/impl/EvaluationsFactoryImpl.hpp"
-#include "fUML/Semantics/Values/impl/EvaluationImpl.hpp"
+#include "ocl/Evaluations/impl/OclExpEvalImpl.hpp"
 
 //*********************************
 namespace ocl::Evaluations 
 {
-	class OCL_API CollectionLiteralPartEvalImpl : virtual public fUML::Semantics::Values::EvaluationImpl, virtual public CollectionLiteralPartEval 
+	class OCL_API CollectionLiteralPartEvalImpl : virtual public OclExpEvalImpl, virtual public CollectionLiteralPartEval 
 	{
 		public: 
 			CollectionLiteralPartEvalImpl(const CollectionLiteralPartEvalImpl & obj);
@@ -51,8 +51,8 @@ namespace ocl::Evaluations
 			//*********************************
 			// Reference Getters & Setters
 			//*********************************
-			virtual std::shared_ptr<fUML::Semantics::Values::Value> getElement() const ;
-			virtual void setElement(std::shared_ptr<fUML::Semantics::Values::Value>) ;
+			virtual std::shared_ptr<ecore::EObject> getElement() const ;
+			virtual void setElement(std::shared_ptr<ecore::EObject>) ;
 			
 			//*********************************
 			// Union Reference Getters
@@ -62,7 +62,7 @@ namespace ocl::Evaluations
 			// Container Getter
 			//*********************************
 			virtual std::shared_ptr<ecore::EObject> eContainer() const ; 
-			
+
 			//*********************************
 			// Persistence Functions
 			//*********************************
@@ -79,14 +79,14 @@ namespace ocl::Evaluations
 			//*********************************
 			// EStructuralFeature Get/Set/IsSet
 			//*********************************
-			virtual Any eGet(int featureID, bool resolve, bool coreType) const ;
-			virtual bool eSet(int featureID, Any newValue) ;
+			virtual std::shared_ptr<Any> eGet(int featureID, bool resolve, bool coreType) const ;
+			virtual bool eSet(int featureID, std::shared_ptr<Any> newValue) ;
 			virtual bool internalEIsSet(int featureID) const ;
 
 			//*********************************
 			// EOperation Invoke
 			//*********************************
-			virtual Any eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments) ;
+			virtual std::shared_ptr<Any> eInvoke(int operationID, std::shared_ptr<Bag<Any>> arguments) ;
 
 		private:
 			std::weak_ptr<ocl::Evaluations::CollectionLiteralPartEval> m_thisCollectionLiteralPartEvalPtr;

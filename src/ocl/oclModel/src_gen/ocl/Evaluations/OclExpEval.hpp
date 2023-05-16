@@ -40,24 +40,19 @@ namespace ocl::Expressions
 {
 	class OclExpression;
 }
-namespace fUML::Semantics::Loci 
+namespace ecore 
 {
-	class Locus;
-}
-namespace fUML::Semantics::Values 
-{
-	class Value;
-}
-namespace uml 
-{
-	class ValueSpecification;
+	class EAnnotation;
+	class EClassifier;
+	class EGenericType;
+	class EObject;
 }
 
 // namespace macro header include
 #include "ocl/ocl.hpp"
 
 // base class includes
-#include "fUML/Semantics/Values/Evaluation.hpp"
+#include "ecore/ETypedElement.hpp"
 
 
 
@@ -66,7 +61,7 @@ namespace uml
 namespace ocl::Evaluations 
 {
 	
-	class OCL_API OclExpEval: virtual public fUML::Semantics::Values::Evaluation
+	class OCL_API OclExpEval : virtual public ecore::ETypedElement
 	{
 		public:
  			OclExpEval(const OclExpEval &) {}
@@ -97,8 +92,8 @@ namespace ocl::Evaluations
 			virtual void setEnvironment(std::shared_ptr<ocl::Evaluations::EvalEnvironment>) = 0;
 			virtual std::shared_ptr<ocl::Expressions::OclExpression> getModel() const = 0;
 			virtual void setModel(std::shared_ptr<ocl::Expressions::OclExpression>) = 0;
-			virtual std::shared_ptr<fUML::Semantics::Values::Value> getResultValue() const = 0;
-			virtual void setResultValue(std::shared_ptr<fUML::Semantics::Values::Value>) = 0;
+			virtual std::shared_ptr<ecore::EObject> getResultValue() const = 0;
+			virtual void setResultValue(std::shared_ptr<ecore::EObject>) = 0;
 
 			//*********************************
 			// Union Reference Getters
@@ -127,7 +122,7 @@ namespace ocl::Evaluations
 			std::shared_ptr<ocl::Evaluations::EvalEnvironment> m_beforeEnvironment;
 			std::shared_ptr<ocl::Evaluations::EvalEnvironment> m_environment;
 			std::shared_ptr<ocl::Expressions::OclExpression> m_model;
-			std::shared_ptr<fUML::Semantics::Values::Value> m_resultValue;
+			std::shared_ptr<ecore::EObject> m_resultValue;
 	};
 }
 #endif /* end of include guard: OCL_EVALUATIONS_OCLEXPEVAL_HPP */

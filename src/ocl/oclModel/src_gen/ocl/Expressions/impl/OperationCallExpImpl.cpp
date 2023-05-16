@@ -1,9 +1,13 @@
 
 #include "ocl/Expressions/impl/OperationCallExpImpl.hpp"
 #ifdef NDEBUG
-	#define DEBUG_MESSAGE(a) /**/
+	#define DEBUG_INFO(a)		/**/
+	#define DEBUG_WARNING(a)	/**/
+	#define DEBUG_ERROR(a)		/**/
 #else
-	#define DEBUG_MESSAGE(a) a
+	#define DEBUG_INFO(a) 		std::cout<<"[\e[0;32mInfo\e[0m]:\t\t"<<__PRETTY_FUNCTION__<<"\n\t\t  -- Message: "<<a<<std::endl;
+	#define DEBUG_WARNING(a) 	std::cout<<"[\e[0;33mWarning\e[0m]:\t"<<__PRETTY_FUNCTION__<<"\n\t\t  -- Message: "<<a<<std::endl;
+	#define DEBUG_ERROR(a)		std::cout<<"[\e[0;31mError\e[0m]:\t"<<__PRETTY_FUNCTION__<<"\n\t\t  -- Message: "<<a<<std::endl;
 #endif
 
 #ifdef ACTIVITY_DEBUG_ON
@@ -21,8 +25,8 @@
 #include "abstractDataTypes/Bag.hpp"
 
 
-#include "abstractDataTypes/AnyEObject.hpp"
-#include "abstractDataTypes/AnyEObjectBag.hpp"
+#include "ecore/EcoreAny.hpp"
+#include "ecore/EcoreContainerAny.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
@@ -34,15 +38,14 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
+#include "ocl/Evaluations/EvaluationsFactory.hpp"
 #include "ocl/Expressions/ExpressionsFactory.hpp"
 #include "ecore/ecoreFactory.hpp"
-#include "ocl/Evaluations/EvaluationsFactory.hpp"
 #include "ocl/Expressions/CallExp.hpp"
 #include "ocl/Expressions/CollectionRange.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClassifier.hpp"
 #include "ecore/EGenericType.hpp"
-#include "ecore/EOperation.hpp"
 #include "ocl/Expressions/ExpressionInOcl.hpp"
 #include "ocl/Expressions/FeatureCallExp.hpp"
 #include "ocl/Expressions/IfExp.hpp"
@@ -51,7 +54,7 @@
 #include "ocl/Evaluations/OclExpEval.hpp"
 #include "ocl/Expressions/OclExpression.hpp"
 #include "ocl/Expressions/OperationCallExp.hpp"
-#include "ocl/Expressions/Variable.hpp"
+#include "ocl/Expressions/VarDeclarationExp.hpp"
 //Factories and Package includes
 #include "ocl/oclPackage.hpp"
 #include "ocl/Evaluations/EvaluationsPackage.hpp"
@@ -75,13 +78,6 @@ OperationCallExpImpl::~OperationCallExpImpl()
 #ifdef SHOW_DELETION
 	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete OperationCallExp "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
 #endif
-}
-
-//Additional constructor for the containments back reference
-OperationCallExpImpl::OperationCallExpImpl(std::weak_ptr<ocl::Expressions::CallExp> par_appliedElement)
-:OperationCallExpImpl()
-{
-	m_appliedElement = par_appliedElement;
 }
 
 //Additional constructor for the containments back reference
@@ -124,20 +120,25 @@ OperationCallExpImpl::OperationCallExpImpl(std::weak_ptr<ocl::Expressions::Colle
 }
 
 
-//Additional constructor for the containments back reference
-OperationCallExpImpl::OperationCallExpImpl(std::weak_ptr<ocl::Expressions::Variable> par_initializedElement)
-:OperationCallExpImpl()
-{
-	m_initializedElement = par_initializedElement;
-}
-
 
 //Additional constructor for the containments back reference
-OperationCallExpImpl::OperationCallExpImpl(std::weak_ptr<ocl::Expressions::LoopExp> par_loopBodyOwner)
+OperationCallExpImpl::OperationCallExpImpl(std::weak_ptr<ocl::Expressions::LoopExp> par_LoopExp, const int reference_id)
 :OperationCallExpImpl()
 {
-	m_loopBodyOwner = par_loopBodyOwner;
+	switch(reference_id)
+	{	
+	case ocl::Expressions::ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_LOOPBODYOWNER:
+		m_loopBodyOwner = par_LoopExp;
+		 return;
+	case ocl::Expressions::ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_LOOPEXP:
+		m_loopExp = par_LoopExp;
+		 return;
+	default:
+	std::cerr << __PRETTY_FUNCTION__ <<" Reference not found in class with the given ID" << std::endl;
+	}
+   
 }
+
 
 //Additional constructor for the containments back reference
 OperationCallExpImpl::OperationCallExpImpl(std::weak_ptr<ocl::Expressions::OperationCallExp> par_parentCall)
@@ -186,9 +187,10 @@ OperationCallExpImpl& OperationCallExpImpl::operator=(const OperationCallExpImpl
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy OperationCallExp "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
 	#endif
 	//Clone Attributes with (deep copy)
+	m_isRArrow = obj.isIsRArrow();
+	m_referredOperation = obj.getReferredOperation();
 
 	//copy references with no containment (soft copy)
-	m_referredOperation  = obj.getReferredOperation();
 	//Clone references with containment (deep copy)
 	//clone reference 'argument'
 	std::shared_ptr<Bag<ocl::Expressions::OclExpression>> argumentList = obj.getArgument();
@@ -205,7 +207,7 @@ OperationCallExpImpl& OperationCallExpImpl::operator=(const OperationCallExpImpl
 	}
 	else
 	{
-		DEBUG_MESSAGE(std::cout << "Warning: container is nullptr argument."<< std::endl;)
+		DEBUG_WARNING("container is nullptr for argument.")
 	}
 	
 	return *this;
@@ -226,6 +228,27 @@ std::shared_ptr<ecore::EObject> OperationCallExpImpl::copy() const
 //*********************************
 // Attribute Getters & Setters
 //*********************************
+/* Getter & Setter for attribute isRArrow */
+bool OperationCallExpImpl::isIsRArrow() const 
+{
+	return m_isRArrow;
+}
+void OperationCallExpImpl::setIsRArrow(bool _isRArrow)
+{
+	m_isRArrow = _isRArrow;
+	
+}
+
+/* Getter & Setter for attribute referredOperation */
+std::string OperationCallExpImpl::getReferredOperation() const 
+{
+	return m_referredOperation;
+}
+void OperationCallExpImpl::setReferredOperation(std::string _referredOperation)
+{
+	m_referredOperation = _referredOperation;
+	
+}
 
 //*********************************
 // Reference Getters & Setters
@@ -242,17 +265,6 @@ std::shared_ptr<Bag<ocl::Expressions::OclExpression>> OperationCallExpImpl::getA
     return m_argument;
 }
 
-/* Getter & Setter for reference referredOperation */
-std::shared_ptr<ecore::EOperation> OperationCallExpImpl::getReferredOperation() const
-{
-    return m_referredOperation;
-}
-void OperationCallExpImpl::setReferredOperation(std::shared_ptr<ecore::EOperation> _referredOperation)
-{
-    m_referredOperation = _referredOperation;
-	
-}
-
 //*********************************
 // Union Getter
 //*********************************
@@ -262,11 +274,6 @@ void OperationCallExpImpl::setReferredOperation(std::shared_ptr<ecore::EOperatio
 //*********************************
 std::shared_ptr<ecore::EObject> OperationCallExpImpl::eContainer() const
 {
-	if(auto wp = m_appliedElement.lock())
-	{
-		return wp;
-	}
-
 	if(auto wp = m_elseOwner.lock())
 	{
 		return wp;
@@ -290,16 +297,16 @@ std::shared_ptr<ecore::EObject> OperationCallExpImpl::eContainer() const
 	}
 
 
-	if(auto wp = m_initializedElement.lock())
-	{
-		return wp;
-	}
-
 
 	if(auto wp = m_loopBodyOwner.lock())
 	{
 		return wp;
 	}
+	if(auto wp = m_loopExp.lock())
+	{
+		return wp;
+	}
+
 
 	if(auto wp = m_parentCall.lock())
 	{
@@ -343,12 +350,23 @@ void OperationCallExpImpl::loadAttributes(std::shared_ptr<persistence::interface
 	try
 	{
 		std::map<std::string, std::string>::const_iterator iter;
-		std::shared_ptr<ecore::EClass> metaClass = this->eClass(); // get MetaClass
+	
+		iter = attr_list.find("isRArrow");
+		if ( iter != attr_list.end() )
+		{
+			// this attribute is a 'bool'
+			bool value;
+			std::istringstream(iter->second) >> std::boolalpha >> value;
+			this->setIsRArrow(value);
+		}
+
 		iter = attr_list.find("referredOperation");
 		if ( iter != attr_list.end() )
 		{
-			// add unresolvedReference to loadHandler's list
-			loadHandler->addUnresolvedReference(iter->second, loadHandler->getCurrentObject(), metaClass->getEStructuralFeature("referredOperation")); // TODO use getEStructuralFeature() with id, for faster access to EStructuralFeature
+			// this attribute is a 'std::string'
+			std::string value;
+			value = iter->second;
+			this->setReferredOperation(value);
 		}
 	}
 	catch (std::exception& e)
@@ -395,20 +413,6 @@ void OperationCallExpImpl::loadNode(std::string nodeName, std::shared_ptr<persis
 
 void OperationCallExpImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
 {
-	switch(featureID)
-	{
-		case ocl::Expressions::ExpressionsPackage::OPERATIONCALLEXP_ATTRIBUTE_REFERREDOPERATION:
-		{
-			if (references.size() == 1)
-			{
-				// Cast object to correct type
-				std::shared_ptr<ecore::EOperation> _referredOperation = std::dynamic_pointer_cast<ecore::EOperation>( references.front() );
-				setReferredOperation(_referredOperation);
-			}
-			
-			return;
-		}
-	}
 	FeatureCallExpImpl::resolveReferences(featureID, references);
 }
 
@@ -436,8 +440,16 @@ void OperationCallExpImpl::saveContent(std::shared_ptr<persistence::interfaces::
 	try
 	{
 		std::shared_ptr<ocl::Expressions::ExpressionsPackage> package = ocl::Expressions::ExpressionsPackage::eInstance();
-	// Add references
-		saveHandler->addReference(this->getReferredOperation(),"referredOperation", getReferredOperation()->eClass() != ecore::ecorePackage::eInstance()->getEOperation_Class());
+		// Add attributes
+		if ( this->eIsSet(package->getOperationCallExp_Attribute_isRArrow()) )
+		{
+			saveHandler->addAttribute("isRArrow", this->isIsRArrow());
+		}
+
+		if ( this->eIsSet(package->getOperationCallExp_Attribute_referredOperation()) )
+		{
+			saveHandler->addAttribute("referredOperation", this->getReferredOperation());
+		}
 		//
 		// Add new tags (from references)
 		//
@@ -460,14 +472,16 @@ std::shared_ptr<ecore::EClass> OperationCallExpImpl::eStaticClass() const
 //*********************************
 // EStructuralFeature Get/Set/IsSet
 //*********************************
-Any OperationCallExpImpl::eGet(int featureID, bool resolve, bool coreType) const
+std::shared_ptr<Any> OperationCallExpImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 		case ocl::Expressions::ExpressionsPackage::OPERATIONCALLEXP_ATTRIBUTE_ARGUMENT:
-			return eAnyBag(getArgument(),ocl::Expressions::ExpressionsPackage::OCLEXPRESSION_CLASS); //6624
+			return eEcoreContainerAny(getArgument(),ocl::Expressions::ExpressionsPackage::OCLEXPRESSION_CLASS); //6125
+		case ocl::Expressions::ExpressionsPackage::OPERATIONCALLEXP_ATTRIBUTE_ISRARROW:
+			return eAny(isIsRArrow(),ecore::ecorePackage::EBOOLEAN_CLASS,false); //6127
 		case ocl::Expressions::ExpressionsPackage::OPERATIONCALLEXP_ATTRIBUTE_REFERREDOPERATION:
-			return eAny(getReferredOperation(),ecore::ecorePackage::EOPERATION_CLASS,false); //6625
+			return eAny(getReferredOperation(),ecore::ecorePackage::ESTRING_CLASS,false); //6126
 	}
 	return FeatureCallExpImpl::eGet(featureID, resolve, coreType);
 }
@@ -477,61 +491,91 @@ bool OperationCallExpImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case ocl::Expressions::ExpressionsPackage::OPERATIONCALLEXP_ATTRIBUTE_ARGUMENT:
-			return getArgument() != nullptr; //6624
+			return getArgument() != nullptr; //6125
+		case ocl::Expressions::ExpressionsPackage::OPERATIONCALLEXP_ATTRIBUTE_ISRARROW:
+			return isIsRArrow() != false; //6127
 		case ocl::Expressions::ExpressionsPackage::OPERATIONCALLEXP_ATTRIBUTE_REFERREDOPERATION:
-			return getReferredOperation() != nullptr; //6625
+			return getReferredOperation() != ""; //6126
 	}
 	return FeatureCallExpImpl::internalEIsSet(featureID);
 }
 
-bool OperationCallExpImpl::eSet(int featureID, Any newValue)
+bool OperationCallExpImpl::eSet(int featureID, std::shared_ptr<Any> newValue)
 {
 	switch(featureID)
 	{
 		case ocl::Expressions::ExpressionsPackage::OPERATIONCALLEXP_ATTRIBUTE_ARGUMENT:
 		{
-			// CAST Any to Bag<ocl::Expressions::OclExpression>
-			if((newValue->isContainer()) && (ocl::Expressions::ExpressionsPackage::OCLEXPRESSION_CLASS ==newValue->getTypeId()))
-			{ 
+			std::shared_ptr<ecore::EcoreContainerAny> ecoreContainerAny = std::dynamic_pointer_cast<ecore::EcoreContainerAny>(newValue);
+			if(ecoreContainerAny)
+			{
 				try
 				{
-					std::shared_ptr<Bag<ocl::Expressions::OclExpression>> argumentList= newValue->get<std::shared_ptr<Bag<ocl::Expressions::OclExpression>>>();
-					std::shared_ptr<Bag<ocl::Expressions::OclExpression>> _argument=getArgument();
-					for(const std::shared_ptr<ocl::Expressions::OclExpression> indexArgument: *_argument)
+					std::shared_ptr<Bag<ecore::EObject>> eObjectList = ecoreContainerAny->getAsEObjectContainer();
+	
+					if(eObjectList)
 					{
-						if (argumentList->find(indexArgument) == -1)
+						std::shared_ptr<Bag<ocl::Expressions::OclExpression>> _argument = getArgument();
+	
+						for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
 						{
-							_argument->erase(indexArgument);
-						}
-					}
-
-					for(const std::shared_ptr<ocl::Expressions::OclExpression> indexArgument: *argumentList)
-					{
-						if (_argument->find(indexArgument) == -1)
-						{
-							_argument->add(indexArgument);
+							std::shared_ptr<ocl::Expressions::OclExpression> valueToAdd = std::dynamic_pointer_cast<ocl::Expressions::OclExpression>(anEObject);
+	
+							if (valueToAdd)
+							{
+								if(_argument->find(valueToAdd) == -1)
+								{
+									_argument->add(valueToAdd);
+								}
+								//else, valueToAdd is already present so it won't be added again
+							}
+							else
+							{
+								throw "Invalid argument";
+							}
 						}
 					}
 				}
 				catch(...)
 				{
-					DEBUG_MESSAGE(std::cout << "invalid Type to set of eAttributes."<< std::endl;)
+					DEBUG_ERROR("Invalid type stored in 'ecore::ecoreContainerAny' for feature 'argument'. Failed to set feature!")
 					return false;
 				}
 			}
 			else
 			{
+				DEBUG_ERROR("Invalid instance of 'ecore::ecoreContainerAny' for feature 'argument'. Failed to set feature!")
 				return false;
 			}
-			return true;
+		return true;
+		}
+		case ocl::Expressions::ExpressionsPackage::OPERATIONCALLEXP_ATTRIBUTE_ISRARROW:
+		{
+			try
+			{
+				bool _isRArrow = newValue->get<bool>();
+				setIsRArrow(_isRArrow); //6127
+			}
+			catch(...)
+			{
+				DEBUG_ERROR("Invalid type stored in 'Any' for feature 'isRArrow'. Failed to set feature!")
+				return false;
+			}
+		return true;
 		}
 		case ocl::Expressions::ExpressionsPackage::OPERATIONCALLEXP_ATTRIBUTE_REFERREDOPERATION:
 		{
-			// CAST Any to ecore::EOperation
-			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
-			std::shared_ptr<ecore::EOperation> _referredOperation = std::dynamic_pointer_cast<ecore::EOperation>(_temp);
-			setReferredOperation(_referredOperation); //6625
-			return true;
+			try
+			{
+				std::string _referredOperation = newValue->get<std::string>();
+				setReferredOperation(_referredOperation); //6126
+			}
+			catch(...)
+			{
+				DEBUG_ERROR("Invalid type stored in 'Any' for feature 'referredOperation'. Failed to set feature!")
+				return false;
+			}
+		return true;
 		}
 	}
 
@@ -541,9 +585,9 @@ bool OperationCallExpImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any OperationCallExpImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+std::shared_ptr<Any> OperationCallExpImpl::eInvoke(int operationID, std::shared_ptr<Bag<Any>> arguments)
 {
-	Any result;
+	std::shared_ptr<Any> result;
  
   	switch(operationID)
 	{

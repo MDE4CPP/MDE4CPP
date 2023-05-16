@@ -1,9 +1,13 @@
 
 #include "ocl/Evaluations/impl/CollectionRangeEvalImpl.hpp"
 #ifdef NDEBUG
-	#define DEBUG_MESSAGE(a) /**/
+	#define DEBUG_INFO(a)		/**/
+	#define DEBUG_WARNING(a)	/**/
+	#define DEBUG_ERROR(a)		/**/
 #else
-	#define DEBUG_MESSAGE(a) a
+	#define DEBUG_INFO(a) 		std::cout<<"[\e[0;32mInfo\e[0m]:\t\t"<<__PRETTY_FUNCTION__<<"\n\t\t  -- Message: "<<a<<std::endl;
+	#define DEBUG_WARNING(a) 	std::cout<<"[\e[0;33mWarning\e[0m]:\t"<<__PRETTY_FUNCTION__<<"\n\t\t  -- Message: "<<a<<std::endl;
+	#define DEBUG_ERROR(a)		std::cout<<"[\e[0;31mError\e[0m]:\t"<<__PRETTY_FUNCTION__<<"\n\t\t  -- Message: "<<a<<std::endl;
 #endif
 
 #ifdef ACTIVITY_DEBUG_ON
@@ -18,10 +22,11 @@
 #include <iostream>
 #include <sstream>
 
+#include "abstractDataTypes/Bag.hpp"
 
 
-#include "abstractDataTypes/AnyEObject.hpp"
-#include "abstractDataTypes/AnyEObjectBag.hpp"
+#include "ecore/EcoreAny.hpp"
+#include "ecore/EcoreContainerAny.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
@@ -34,20 +39,21 @@
 
 #include <exception> // used in Persistence
 #include "ocl/Evaluations/EvaluationsFactory.hpp"
-#include "fUML/Semantics/Values/ValuesFactory.hpp"
-#include "uml/umlFactory.hpp"
-#include "fUML/Semantics/Loci/LociFactory.hpp"
+#include "ecore/ecoreFactory.hpp"
+#include "ocl/Expressions/ExpressionsFactory.hpp"
 #include "ocl/Evaluations/CollectionLiteralPartEval.hpp"
-#include "fUML/Semantics/Loci/Locus.hpp"
+#include "ecore/EAnnotation.hpp"
+#include "ecore/EClassifier.hpp"
+#include "ecore/EGenericType.hpp"
+#include "ecore/EObject.hpp"
+#include "ocl/Evaluations/EvalEnvironment.hpp"
 #include "ocl/Evaluations/OclExpEval.hpp"
-#include "fUML/Semantics/Values/Value.hpp"
-#include "uml/ValueSpecification.hpp"
+#include "ocl/Expressions/OclExpression.hpp"
 //Factories and Package includes
 #include "ocl/oclPackage.hpp"
 #include "ocl/Evaluations/EvaluationsPackage.hpp"
-#include "fUML/Semantics/Loci/LociPackage.hpp"
-#include "fUML/Semantics/Values/ValuesPackage.hpp"
-#include "uml/umlPackage.hpp"
+#include "ocl/Expressions/ExpressionsPackage.hpp"
+#include "ecore/ecorePackage.hpp"
 
 using namespace ocl::Evaluations;
 
@@ -250,9 +256,13 @@ void CollectionRangeEvalImpl::save(std::shared_ptr<persistence::interfaces::XSav
 
 	CollectionLiteralPartEvalImpl::saveContent(saveHandler);
 	
-	fUML::Semantics::Values::EvaluationImpl::saveContent(saveHandler);
+	OclExpEvalImpl::saveContent(saveHandler);
 	
-	fUML::Semantics::Loci::SemanticVisitorImpl::saveContent(saveHandler);
+	ecore::ETypedElementImpl::saveContent(saveHandler);
+	
+	ecore::ENamedElementImpl::saveContent(saveHandler);
+	
+	ecore::EModelElementImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);
 }
@@ -280,14 +290,14 @@ std::shared_ptr<ecore::EClass> CollectionRangeEvalImpl::eStaticClass() const
 //*********************************
 // EStructuralFeature Get/Set/IsSet
 //*********************************
-Any CollectionRangeEvalImpl::eGet(int featureID, bool resolve, bool coreType) const
+std::shared_ptr<Any> CollectionRangeEvalImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 		case ocl::Evaluations::EvaluationsPackage::COLLECTIONRANGEEVAL_ATTRIBUTE_FIRST:
-			return eAny(getFirst(),ocl::Evaluations::EvaluationsPackage::OCLEXPEVAL_CLASS,false); //203
+			return eAny(getFirst(),ocl::Evaluations::EvaluationsPackage::OCLEXPEVAL_CLASS,false); //1815
 		case ocl::Evaluations::EvaluationsPackage::COLLECTIONRANGEEVAL_ATTRIBUTE_LAST:
-			return eAny(getLast(),ocl::Evaluations::EvaluationsPackage::OCLEXPEVAL_CLASS,false); //204
+			return eAny(getLast(),ocl::Evaluations::EvaluationsPackage::OCLEXPEVAL_CLASS,false); //1816
 	}
 	return CollectionLiteralPartEvalImpl::eGet(featureID, resolve, coreType);
 }
@@ -297,32 +307,78 @@ bool CollectionRangeEvalImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case ocl::Evaluations::EvaluationsPackage::COLLECTIONRANGEEVAL_ATTRIBUTE_FIRST:
-			return getFirst() != nullptr; //203
+			return getFirst() != nullptr; //1815
 		case ocl::Evaluations::EvaluationsPackage::COLLECTIONRANGEEVAL_ATTRIBUTE_LAST:
-			return getLast() != nullptr; //204
+			return getLast() != nullptr; //1816
 	}
 	return CollectionLiteralPartEvalImpl::internalEIsSet(featureID);
 }
 
-bool CollectionRangeEvalImpl::eSet(int featureID, Any newValue)
+bool CollectionRangeEvalImpl::eSet(int featureID, std::shared_ptr<Any> newValue)
 {
 	switch(featureID)
 	{
 		case ocl::Evaluations::EvaluationsPackage::COLLECTIONRANGEEVAL_ATTRIBUTE_FIRST:
 		{
-			// CAST Any to ocl::Evaluations::OclExpEval
-			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
-			std::shared_ptr<ocl::Evaluations::OclExpEval> _first = std::dynamic_pointer_cast<ocl::Evaluations::OclExpEval>(_temp);
-			setFirst(_first); //203
-			return true;
+			std::shared_ptr<ecore::EcoreAny> ecoreAny = std::dynamic_pointer_cast<ecore::EcoreAny>(newValue);
+			if(ecoreAny)
+			{
+				try
+				{
+					std::shared_ptr<ecore::EObject> eObject = ecoreAny->getAsEObject();
+					std::shared_ptr<ocl::Evaluations::OclExpEval> _first = std::dynamic_pointer_cast<ocl::Evaluations::OclExpEval>(eObject);
+					if(_first)
+					{
+						setFirst(_first); //1815
+					}
+					else
+					{
+						throw "Invalid argument";
+					}
+				}
+				catch(...)
+				{
+					DEBUG_ERROR("Invalid type stored in 'ecore::ecoreAny' for feature 'first'. Failed to set feature!")
+					return false;
+				}
+			}
+			else
+			{
+				DEBUG_ERROR("Invalid instance of 'ecore::ecoreAny' for feature 'first'. Failed to set feature!")
+				return false;
+			}
+		return true;
 		}
 		case ocl::Evaluations::EvaluationsPackage::COLLECTIONRANGEEVAL_ATTRIBUTE_LAST:
 		{
-			// CAST Any to ocl::Evaluations::OclExpEval
-			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
-			std::shared_ptr<ocl::Evaluations::OclExpEval> _last = std::dynamic_pointer_cast<ocl::Evaluations::OclExpEval>(_temp);
-			setLast(_last); //204
-			return true;
+			std::shared_ptr<ecore::EcoreAny> ecoreAny = std::dynamic_pointer_cast<ecore::EcoreAny>(newValue);
+			if(ecoreAny)
+			{
+				try
+				{
+					std::shared_ptr<ecore::EObject> eObject = ecoreAny->getAsEObject();
+					std::shared_ptr<ocl::Evaluations::OclExpEval> _last = std::dynamic_pointer_cast<ocl::Evaluations::OclExpEval>(eObject);
+					if(_last)
+					{
+						setLast(_last); //1816
+					}
+					else
+					{
+						throw "Invalid argument";
+					}
+				}
+				catch(...)
+				{
+					DEBUG_ERROR("Invalid type stored in 'ecore::ecoreAny' for feature 'last'. Failed to set feature!")
+					return false;
+				}
+			}
+			else
+			{
+				DEBUG_ERROR("Invalid instance of 'ecore::ecoreAny' for feature 'last'. Failed to set feature!")
+				return false;
+			}
+		return true;
 		}
 	}
 
@@ -332,9 +388,9 @@ bool CollectionRangeEvalImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any CollectionRangeEvalImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+std::shared_ptr<Any> CollectionRangeEvalImpl::eInvoke(int operationID, std::shared_ptr<Bag<Any>> arguments)
 {
-	Any result;
+	std::shared_ptr<Any> result;
  
   	switch(operationID)
 	{

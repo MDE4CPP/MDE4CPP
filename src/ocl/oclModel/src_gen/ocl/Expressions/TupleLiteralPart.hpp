@@ -32,10 +32,13 @@ namespace ocl
 }
 
 //Forward Declaration for used types 
+namespace ocl::Expressions 
+{
+	class OclExpression;
+}
 namespace ecore 
 {
 	class EAnnotation;
-	class EAttribute;
 	class EClassifier;
 	class EGenericType;
 }
@@ -53,7 +56,7 @@ namespace ecore
 namespace ocl::Expressions 
 {
 	
-	class OCL_API TupleLiteralPart: virtual public ecore::ETypedElement
+	class OCL_API TupleLiteralPart : virtual public ecore::ETypedElement
 	{
 		public:
  			TupleLiteralPart(const TupleLiteralPart &) {}
@@ -74,12 +77,16 @@ namespace ocl::Expressions
 			//*********************************
 			// Attribute Getters & Setters
 			//*********************************
+			virtual std::string getTuplePartName() const = 0;
+			virtual void setTuplePartName (std::string _tuplePartName)= 0;
+			virtual std::string getTuplePartType() const = 0;
+			virtual void setTuplePartType (std::string _tuplePartType)= 0;
 
 			//*********************************
 			// Reference Getters & Setters
 			//*********************************
-			virtual std::shared_ptr<ecore::EAttribute> getAttribute() const = 0;
-			virtual void setAttribute(std::shared_ptr<ecore::EAttribute>) = 0;
+			virtual std::shared_ptr<ocl::Expressions::OclExpression> getAssignedOclExpression() const = 0;
+			virtual void setAssignedOclExpression(std::shared_ptr<ocl::Expressions::OclExpression>) = 0;
 
 			//*********************************
 			// Union Reference Getters
@@ -101,11 +108,13 @@ namespace ocl::Expressions
 			//*********************************
 			// Attribute Members
 			//*********************************
+			std::string m_tuplePartName= "";
+			std::string m_tuplePartType= "";
 			
 			//*********************************
 			// Reference Members
 			//*********************************
-			std::shared_ptr<ecore::EAttribute> m_attribute;
+			std::shared_ptr<ocl::Expressions::OclExpression> m_assignedOclExpression;
 	};
 }
 #endif /* end of include guard: OCL_EXPRESSIONS_TUPLELITERALPART_HPP */

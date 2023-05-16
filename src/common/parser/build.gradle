@@ -31,11 +31,9 @@ plugins {
 
 description 'Grammar Parser (ANTLR)'
 
-def antlr4Version = "4.9.2"
+def antlr4Version = "4.12.0"
 
-//Currently commented out due to faulty third-party dependencie contained in the original ANTLR archive
-//Currently a custom, checked-in patched verion of ANTLR runtime 4.9.2 is used
-/*
+
 task downloadAntlr4(type: Download) {
 	description 'download antlr4'
 	group 'Grammar Parser (ANTLR)'
@@ -45,9 +43,9 @@ task downloadAntlr4(type: Download) {
     quiet true
     onlyIfModified true
 }
-*/
 
-task unzipAntlr4(/*dependsOn: downloadAntlr4,*/ type: Copy) {
+
+task unzipAntlr4(dependsOn: downloadAntlr4, type: Copy) {
 	description 'download and unzip antlr4'
 	group 'Grammar Parser (ANTLR)'
 	
@@ -69,9 +67,9 @@ task compileAntlr4(dependsOn: unzipAntlr4) {
 		exec {
 			workingDir "antlr4/antlr4-cpp-runtime-${antlr4Version}-source/.cmake"
 			if (System.properties['os.name'].toLowerCase().contains('windows')) {
-				commandLine 'cmd', '/c', 'cmake -G "MinGW Makefiles" -DCMAKE_CXX_STANDARD:STRING=17 -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=' + file("./antlr4/bin") + ' ' + file("./antlr4/antlr4-cpp-runtime-${antlr4Version}-source").absolutePath
+				commandLine 'cmd', '/c', 'cmake -G "MinGW Makefiles" -DCMAKE_CXX_STANDARD:STRING=17 -DCMAKE_BUILD_TYPE=Debug -DCMAKE_INSTALL_PREFIX=' + file("./antlr4/bin") + ' ' + file("./antlr4/antlr4-cpp-runtime-${antlr4Version}-source").absolutePath
 			} else {
-				commandLine '/bin/sh', '-c', 'cmake -G "Unix Makefiles" -DCMAKE_CXX_STANDARD:STRING=17 -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=' + file("./antlr4/bin") + ' ' + file("./antlr4/antlr4-cpp-runtime-${antlr4Version}-source").absolutePath
+				commandLine '/bin/sh', '-c', 'cmake -G "Unix Makefiles" -DCMAKE_CXX_STANDARD:STRING=17 -DCMAKE_BUILD_TYPE=Debug -DCMAKE_INSTALL_PREFIX=' + file("./antlr4/bin") + ' ' + file("./antlr4/antlr4-cpp-runtime-${antlr4Version}-source").absolutePath
 			}
 		}
 		exec {
@@ -89,7 +87,7 @@ task compileAntlr4(dependsOn: unzipAntlr4) {
 			include "**/*.hpp", "**/*.h", "**/*.c"
 		}
 		copy {
-			from "antlr4/bin/lib"
+			from "antlr4/bin/bin"
 			into System.getenv('MDE4CPP_HOME')+"/application/bin"
 			include "**/*.dll", "**/*.so", "**/*.dylib"
 		}

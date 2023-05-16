@@ -1,2713 +1,2911 @@
 #include "OclParserCustomVisitor.h"
-#include "CSTNode.h"
-#include "../Utilities/OclReflection.h"
-#include "../Utilities/EnvironmentFactory.h"
 
-#include <abstractDataTypes/Bag.hpp>
-#include <abstractDataTypes/Subset.hpp>
-#include <abstractDataTypes/SubsetUnion.hpp>
-#include <abstractDataTypes/Union.hpp>
-#include <abstractDataTypes/Any.hpp>
+#include <algorithm>
 
-#include <ecore/ecorePackage.hpp>
-#include <ecore/EClass.hpp>
-#include <ecore/EObject.hpp>
-#include <ecore/EEnum.hpp>
-#include <ecore/EStructuralFeature.hpp>
-#include <ecore/EEnumLiteral.hpp>
 #include <ecore/ecoreFactory.hpp>
-#include <types/typesFactory.hpp>
-#include <types/typesPackage.hpp>
+#include <ecore/EEnum.hpp>
+#include <ecore/EEnumLiteral.hpp>
+
+#include "../Utilities/OclConversion.h"
+#include "../Utilities/ConstStrings.h"
 
 #include <ocl/Expressions/ExpressionsFactory.hpp>
-#include <ocl/Expressions/EnumLiteralExp.hpp>
-#include <ocl/Expressions/NavigationCallExp.hpp>
+//#include <ocl/Expressions/CollectionKind.hpp>
 #include <ocl/Expressions/ExpressionInOcl.hpp>
-#include <ocl/Expressions/OclExpression.hpp>
-#include <ocl/Expressions/VariableExp.hpp>
-#include <ocl/Expressions/Variable.hpp>
-#include <ocl/Expressions/LetExp.hpp>
-#include <ocl/Expressions/TypeExp.hpp>
-#include <ocl/Expressions/CollectionLiteralExp.hpp>
-#include <ocl/Expressions/CollectionItem.hpp>
-#include <ocl/Expressions/CollectionRange.hpp>
-#include <ocl/Expressions/CollectionLiteralPart.hpp>
-#include <ocl/Expressions/CollectionKind.hpp>
+
+// LiteralExp
+#include <ocl/Expressions/EnumLiteralExp.hpp>
+#include <ocl/Expressions/NullLiteralExp.hpp>
+#include <ocl/Expressions/InvalidLiteralExp.hpp>
 #include <ocl/Expressions/PrimitiveLiteralExp.hpp>
-#include <ocl/Expressions/InfixedExp.hpp>
-#include <ocl/Expressions/IterateExp.hpp>
-#include <ocl/Expressions/IteratorExp.hpp>
-#include <ocl/Expressions/IntegerLiteralExp.hpp>
-#include <ocl/Expressions/RealLiteralExp.hpp>
 #include <ocl/Expressions/BooleanLiteralExp.hpp>
 #include <ocl/Expressions/StringLiteralExp.hpp>
+#include <ocl/Expressions/RealLiteralExp.hpp>
 #include <ocl/Expressions/UnlimitedNaturalExp.hpp>
+#include <ocl/Expressions/IntegerLiteralExp.hpp>
+#include <ocl/Expressions/CollectionLiteralExp.hpp>
+#include <ocl/Expressions/CollectionLiteralParts.hpp>
+#include <ocl/Expressions/CollectionRange.hpp>
+#include <ocl/Expressions/CollectionItem.hpp>
 #include <ocl/Expressions/TupleLiteralExp.hpp>
 #include <ocl/Expressions/TupleLiteralPart.hpp>
-#include <ocl/Expressions/InvalidLiteralExp.hpp>
-#include <ocl/Expressions/NullLiteralExp.hpp>
 
-#include <ocl/Types/TypesFactory.hpp>
-#include <ocl/Types/CollectionType.hpp>
-#include <ocl/Types/BagType.hpp>
-#include <ocl/Types/OrderedSetType.hpp>
-#include <ocl/Types/SetType.hpp>
-#include <ocl/Types/SequenceType.hpp>
-#include <ocl/Types/AnyType.hpp>
-#include <ocl/Types/InvalidType.hpp>
-#include <ocl/Types/MessageType.hpp>
-#include <ocl/Types/VoidType.hpp>
-#include <ocl/Types/TupleType.hpp>
-#include <ocl/Types/NameTypeBinding.hpp>
+// CallExp
+#include <ocl/Expressions/AssociationClassCallExp.hpp>
+#include <ocl/Expressions/PropertyCallExp.hpp>
+#include <ocl/Expressions/OperationCallExp.hpp>
+#include <ocl/Expressions/IteratorExp.hpp>
+#include <ocl/Expressions/IterateExp.hpp>
+#include <ocl/Expressions/SurroundingType.hpp>
 
-#include <ocl/Values/ValuesFactory.hpp>
-#include <ocl/Values/NameValueBinding.hpp>
-#include <ocl/Values/Element.hpp>
-#include <ocl/Values/AnyValue.hpp>
-#include <ocl/Values/ObjectValue.hpp>
-#include <ocl/Values/CollectionValue.hpp>
-#include <ocl/Values/SequenceTypeValue.hpp>
-#include <ocl/Values/BagTypeValue.hpp>
-#include <ocl/Values/SetTypeValue.hpp>
-#include <ocl/Values/OrderedSetTypeValue.hpp>
-#include <ocl/Values/TupleValue.hpp>
-#include <ocl/Values/UndefinedValue.hpp>
+// IfExp
+#include <ocl/Expressions/IfExp.hpp>
 
-#include <fUML/Semantics/SimpleClassifiers/SimpleClassifiersFactory.hpp>
+// VarExp
+#include <ocl/Expressions/VariableExp.hpp>
 
-#include <uml/umlFactory.hpp>
-#include <uml/umlPackage.hpp>
-#include <uml/Enumeration.hpp>
-#include <uml/impl/EnumerationImpl.hpp>
-#include <uml/EnumerationLiteral.hpp>
+// LetExp
+#include <ocl/Expressions/LetExp.hpp>
 
-#include <ocl/Evaluations/EvaluationsFactory.hpp>
-#include <ocl/Evaluations/EvalEnvironment.hpp>
-#include <ocl/Evaluations/EnumLiteralExpEval.hpp>
-#include <ocl/Evaluations/VariableExpEval.hpp>
-#include <ocl/Evaluations/OperationCallExpEval.hpp>
-#include <ocl/Evaluations/PropertyCallExpEval.hpp>
-#include <ocl/Evaluations/LetExpEval.hpp>
-#include <ocl/Evaluations/IterateExpEval.hpp>
-#include <ocl/Evaluations/TupleLiteralExpEval.hpp>
-#include <ocl/Evaluations/AssociationClassCallExpEval.hpp>
-#include <ocl/Evaluations/IntegerLiteralExpEval.hpp>
-#include <ocl/Evaluations/BooleanLiteralExpEval.hpp>
-#include <ocl/Evaluations/RealLiteralExpEval.hpp>
-#include <ocl/Evaluations/UnlimitedNaturalLiteralExpEval.hpp>
-#include <ocl/Evaluations/StringLiteralExpEval.hpp>
-#include <ocl/Evaluations/UnspecifiedValueExpEval.hpp>
-#include <ocl/Evaluations/CollectionLiteralExpEval.hpp>
+// TypeExp
+#include <ocl/Expressions/TypeExp.hpp>
+#include <ocl/Expressions/TupleTypeExp.hpp>
+#include <ocl/Expressions/CollectionTypeExp.hpp>
+
+// MessageExp
+#include <ocl/Expressions/MessageExp.hpp>
+#include <ocl/Expressions/MessageArguments.hpp>
+
+// MiscExp
+#include <ocl/Expressions/PrefixedExp.hpp>
+#include <ocl/Expressions/VarDeclarationExp.hpp>
+#include <ocl/Expressions/ParentedExp.hpp>
+#include <ocl/Expressions/OperatorExp.hpp>
+
+// ContextExp
+#include <ocl/Expressions/PackageDeclarationExp.hpp>
+//#include <ocl/Expressions/ContextDeclarationExp.hpp>
+#include <ocl/Expressions/PropertyContextDeclExp.hpp>
+#include <ocl/Expressions/ClassifierContextDeclExp.hpp>
+#include <ocl/Expressions/OperationContextDeclExp.hpp>
+#include <ocl/Expressions/OperationContextExp.hpp>
+#include <ocl/Expressions/PrePostBodyListExp.hpp>
+#include <ocl/Expressions/PrePostBodyExp.hpp>
+#include <ocl/Expressions/PrePostBody.hpp>
+#include <ocl/Expressions/InitOrDerValueListExp.hpp>
+#include <ocl/Expressions/InitOrDerValueExp.hpp>
+#include <ocl/Expressions/InvOrDefExp.hpp>
+#include <ocl/Expressions/DefExp.hpp>
 
 using namespace Utilities;
-using namespace ocl::Values;
-using namespace ocl::Types;
-using namespace ocl::Evaluations;
 
 namespace OclCS {
 
-antlrcpp::Any OclParserCustomVisitor::visitChildren(antlr4::tree::ParseTree *node)
-{
-    size_t n = node->children.size();
-    CSTNode* cstNode = dynamic_cast<CSTNode*>(node);
-    for (size_t i = 0; i < n; i++) {
-        antlr4::tree::ParseTree *currentNode = node->children[i];
-        CSTNode* currentCST = dynamic_cast<CSTNode*>(currentNode);
-        currentCST->setEnv(cstNode->getEnv());
-        currentCST->setErrorListener(cstNode->getErrorListener());
-        if(currentNode->accept(this)) {
-            cstNode->setAST(currentCST->getAST());
-        }
-        else {
-            return false;
-        }
+    // ##################
+    // ### from antlr ###
+    // ##################    
+
+    // just for comparison
+    // virtual std::any visitChildren(ParseTree *node) override {
+    //   std::any result = defaultResult();
+    //   size_t n = node->children.size();
+    //   for (size_t i = 0; i < n; i++) {
+    //     if (!shouldVisitNextChild(node, result)) {
+    //       break;
+    //     }
+
+    //     std::any childResult = node->children[i]->accept(this);
+    //     result = aggregateResult(std::move(result), std::move(childResult));
+    //   }
+
+    //   return result;
+    // }
+    
+    // default Result is nullptr
+    std::any OclParserCustomVisitor::defaultResult() {
+
+        std::any empty;
+        
+        return empty;
+
     }
-    return true;
-}
 
-antlrcpp::Any OclParserCustomVisitor::visitOclExpressionCS(OclParser::OclExpressionCSContext *ctx)
-{
-    if(ctx->oclExpressionCS(0) != nullptr)
-    {
-        OclParser::OclExpressionCSContext* expr = ctx->oclExpressionCS(0);
-        expr->setEnv(ctx->getEnv());
-        expr->setErrorListener(ctx->getErrorListener());
+    // connect the results to a tree
+    std::any OclParserCustomVisitor::aggregateResult(std::any aggregate, std::any nextResult) {
+        
+        //TODO multiple cases have to be distinguished (e.g. normal, NavExp, IfExp, ...)
 
-        if(visitOclExpressionCS(expr)) {
-            if(ctx->operationCallExpCS_A()) {
-                OclParser::OperationCallExpCS_AContext* opCS = ctx->operationCallExpCS_A(); // get the CS node
-                std::shared_ptr<OperationCallExp> opAS = ocl::Expressions::ExpressionsFactory::eInstance()->createOperationCallExp(); // create the AS node
-                std::shared_ptr<OclExpression> src = std::dynamic_pointer_cast<OclExpression>(expr->getAST()); // get the source expression
-                opAS->setSource(src); // update the source of the AS node
-                opCS->setAST(opAS);  // update the AS node of the CS node
-                opCS->setEnv(ctx->getEnv()); // update the environment of the CS node
-                opCS->setErrorListener(ctx->getErrorListener());
+        
+        // Debug info
+        // std::cout << "---------------------------------------------" << std::endl;
+        // std::cout << "Aggregate name: " << aggregate.type().name() << std::endl;
+        // std::cout << "nextResult name: " << nextResult.type().name() << std::endl;
+        // std::cout << "---------------------------------------------" << std::endl;
 
-                if(visitOperationCallExpCS_A(opCS)) { // manage the OperationCallExpCS_A
-                    ctx->setAST(opCS->getAST());    // retrieve the result AS node
-                    return true;
-                }
+        //only aggregate have a value
+        if (aggregate.has_value() and !nextResult.has_value()) {
+
+            // Debug info
+            // std::cout << "---------------------------------------------" << std::endl;
+            // std::cout << "Aggregate name: " << aggregate.type().name() << std::endl;
+            // std::cout << "---------------------------------------------" << std::endl;
+            
+            return aggregate;
+        
+        }
+
+        //only nextResult have a value
+        if (!aggregate.has_value() and nextResult.has_value()) {
+
+            // Debug info
+            // std::cout << "---------------------------------------------" << std::endl;
+            // std::cout << "nextResult name: " << nextResult.type().name() << std::endl;
+            // std::cout << "---------------------------------------------" << std::endl;
+            
+            return nextResult;
+
+        }
+
+        //both have a value
+        if (aggregate.has_value() and nextResult.has_value()) {
+
+            // Debug info
+            // std::cout << "---------------------------------------------" << std::endl;
+            // std::cout << "Aggregate name: " << aggregate.type().name() << std::endl;
+            // std::cout << "nextResult name: " << nextResult.type().name() << std::endl;
+            // std::cout << "---------------------------------------------" << std::endl;
+            
+            // #########################
+            // ### aggregate handler ###
+            // #########################
+            
+            //ExpressionInOcl
+            //append bodyExp
+            if (aggregate.type() == typeid(std::shared_ptr<ocl::Expressions::ExpressionInOcl>)) {
+
+                handleExpressionInOcl(aggregate, nextResult);
             }
-            else if(ctx->propertyCallExpCS_A()) {
-                OclParser::PropertyCallExpCS_AContext* proCS = ctx->propertyCallExpCS_A(); // get the CS node
-                std::shared_ptr<PropertyCallExp> proAS = ocl::Expressions::ExpressionsFactory::eInstance()->createPropertyCallExp(); // create the AS node
-                std::shared_ptr<OclExpression> src = std::dynamic_pointer_cast<OclExpression>(expr->getAST()); // get the source expression
-                proAS->setSource(src); // update the source of the AS node
-                proCS->setAST(proAS);  // update the AS node of the CS node
-                proCS->setEnv(ctx->getEnv()); // update the environment of the CS node
-                proCS->setErrorListener(ctx->getErrorListener());
+            //collectionLiteralExp
+            //append all "CollectionLiteralPart" from CollectionLiteralParts
+            else if (aggregate.type() == typeid(std::shared_ptr<ocl::Expressions::CollectionLiteralExp>)) {
 
-                if(visitPropertyCallExpCS_A(proCS)) { // manage the propertyCallExpCS_A
-                    ctx->setAST(proCS->getAST());    // retrieve the result AS node
-                    return true;
-                }
+                handleCollectionLiteralExpression(aggregate, nextResult);
             }
-            else if(ctx->associationClassCallExpCS_A()) {
-                OclParser::AssociationClassCallExpCS_AContext* assCS = ctx->associationClassCallExpCS_A(); // get the CS node
-                std::shared_ptr<AssociationClassCallExp> assAS = ocl::Expressions::ExpressionsFactory::eInstance()->createAssociationClassCallExp(); // get the AS node
-                std::shared_ptr<OclExpression> src = std::dynamic_pointer_cast<OclExpression>(expr->getAST()); // get the source expression
-                assAS->setSource(src); // update the source of the AS node
-                assCS->setAST(assAS);  // update the AS node of the CS node
-                assCS->setEnv(ctx->getEnv()); // update the environment of the CS node
-                assCS->setErrorListener(ctx->getErrorListener());
+            //collectionLiteralParts
+            //append either collectionRange or create and append CollectionItem 
+            else if (aggregate.type() == typeid(std::shared_ptr<ocl::Expressions::CollectionLiteralParts>)) {
 
-                if(visitAssociationClassCallExpCS_A(assCS)) {
-                    ctx->setAST(assCS->getAST());
-                    return true;
-                }
+                handleCollectionLiteralParts(aggregate, nextResult);
             }
-            else if(ctx->infixedExpCS()) {
-                OclParser::InfixedExpCSContext* infCS = ctx->infixedExpCS(); // get the CS node
-                std::shared_ptr<InfixedExp> infAS = ocl::Expressions::ExpressionsFactory::eInstance()->createInfixedExp(); // create the AS node
-                std::shared_ptr<OclExpression> src = std::dynamic_pointer_cast<OclExpression>(expr->getAST()); // get the source expression
-                infAS->setSource(src); // update the source of the AS node
-                infCS->setAST(infAS);  // update the AS node of the CS node
-                infCS->setEnv(ctx->getEnv()); // update the environment of the CS node
-                infCS->setErrorListener(ctx->getErrorListener());
+            //collectionRange -> append upper and lower bound (first and last)
+            else if (aggregate.type() == typeid(std::shared_ptr<ocl::Expressions::CollectionRange>)) {
+     
+                handleCollectionRange(aggregate, nextResult);  
+            }
+            //TupleLiteralExpression -> append TupleLiteralParts
+            else if (aggregate.type() == typeid(std::shared_ptr<ocl::Expressions::TupleLiteralExp>)) {
 
-                if(visitInfixedExpCS(infCS)) { // manage the OperationCallExpCS_A
-                    ctx->setAST(infCS->getAST());    // retrieve the result AS node
-                    return true;
-                }
-            }
-            else if(ctx->iteratorExpCS()) {
-                OclParser::IteratorExpCSContext* iterCS = ctx->iteratorExpCS(); // get the CS node
-                std::shared_ptr<IteratorExp> iterAS = ocl::Expressions::ExpressionsFactory::eInstance()->createIteratorExp(); // create the AS node
-                std::shared_ptr<OclExpression> src = std::dynamic_pointer_cast<OclExpression>(expr->getAST()); // get the source expression
-                iterAS->setSource(src); // update the source of the AS node
-                iterCS->setAST(iterAS);  // update the AS node of the CS node
-                iterCS->setEnv(ctx->getEnv()); // update the environment of the CS node
-                iterCS->setErrorListener(ctx->getErrorListener());
-
-                if(visitIteratorExpCS(iterCS)) { // manage the OperationCallExpCS_A
-                    ctx->setAST(iterCS->getAST());    // retrieve the result AS node
-                    return true;
-                }
-            }
-            else if(ctx->iterateExpCS()) {
-                OclParser::IterateExpCSContext* iterCS = ctx->iterateExpCS(); // get the CS node
-                std::shared_ptr<IterateExp> iterAS = ocl::Expressions::ExpressionsFactory::eInstance()->createIterateExp(); // create the AS node
-                std::shared_ptr<OclExpression> src = std::dynamic_pointer_cast<OclExpression>(expr->getAST()); // get the source expression
-                iterAS->setName("iterate");
-                iterAS->setSource(src); // update the source of the AS node
-                iterCS->setAST(iterAS);  // update the AS node of the CS node
-                iterCS->setEnv(ctx->getEnv()); // update the environment of the CS node
-                iterCS->setErrorListener(ctx->getErrorListener());
-
-                if(visitIterateExpCS(iterCS)) { // manage the OperationCallExpCS_A
-                    ctx->setAST(iterCS->getAST());    // retrieve the result AS node
-                    return true;
-                }
-            }
-            else if(ctx->oclExpressionCS(1) != nullptr) {
-
-                OclParser::OclExpressionCSContext* expr2 = ctx->oclExpressionCS(1); // get the CS node
-                expr2->setEnv(ctx->getEnv()); // update the environment of the CS node
-                expr2->setErrorListener(ctx->getErrorListener());
-
-                if(visitOclExpressionCS(expr2)) {
-                    return arithmeticExpr(ctx);
-                }
-            }
-            else if(ctx->LPAREN() != nullptr && ctx->RPAREN() != nullptr) {
-                ctx->setAST(expr->getAST());
-                return true;
-            }
-            else if(ctx->oclMessageExpCS()) {
+                handleTupleLiteralExpression(aggregate, nextResult);
 
             }
-            return false;
-        }
-    }
+            //AssociationClassCallExpression -> append qualifier
+            else if (aggregate.type() == typeid(std::shared_ptr<ocl::Expressions::AssociationClassCallExp>)) {
 
-    return visitChildren(ctx);
-}
+                handleAssociationClassExp(aggregate, nextResult);
 
-bool OclParserCustomVisitor::visitOperationCallExpCS(CSTNode* ctx, std::shared_ptr<OperationCallExp> exp, std::string simpleName, bool isImplicit)
-{
-    std::shared_ptr<ecore::EClass> eClass;
-    std::shared_ptr<fUML::Semantics::Values::Value> srcValue;
-
-    if(isImplicit) {
-        std::shared_ptr<Variable> varImpl = ctx->getEnv()->getSelfVariable();
-
-        eClass = std::dynamic_pointer_cast<ecore::EClass>(varImpl->getEType());
-        srcValue = varImpl->getValue();
-    } else {
-        eClass = std::dynamic_pointer_cast<ecore::EClass>(exp->getSource()->getEType());
-        srcValue = exp->getSource()->getInstance()->getResultValue();
-    }
-
-    std::shared_ptr<ecore::EOperation> eoper = OclReflection::lookupOperation(eClass, simpleName, exp->getArgument());
-    if(eoper != nullptr) {
-        std::shared_ptr<OperationCallExpEval> expEval = ocl::Evaluations::EvaluationsFactory::eInstance()->createOperationCallExpEval();
-        std::shared_ptr<fUML::Semantics::Values::Value> objValue = OclReflection::createValue(eoper, exp->getArgument(), srcValue);
-
-        expEval->setModel(exp);
-        expEval->setResultValue(objValue);
-
-        exp->setName(simpleName);
-        exp->setInstance(expEval);
-        exp->setSource(exp->getSource());
-        exp->setEType(eoper->getEType());
-        exp->setReferredOperation(eoper);
-
-        return true;
-    }
-    //Additional BaseMetamodelElements EModelElement
-     eoper = OclReflection::lookupOperation(ecore::ecorePackage::eInstance()->getENamedElement_Class(), simpleName, exp->getArgument());
-    if(eoper != nullptr) {
-        std::shared_ptr<OperationCallExpEval> expEval = ocl::Evaluations::EvaluationsFactory::eInstance()->createOperationCallExpEval();
-        std::shared_ptr<fUML::Semantics::Values::Value> objValue = OclReflection::createValue(eoper, exp->getArgument(), srcValue);
-
-        expEval->setModel(exp);
-        expEval->setResultValue(objValue);
-
-        exp->setName(simpleName);
-        exp->setInstance(expEval);
-        exp->setSource(exp->getSource());
-        exp->setEType(eoper->getEType());
-        exp->setReferredOperation(eoper);
-
-        return true;
-    }
-
-
-    std::string error = "Unrecognized operation: " + simpleName + "(";
-    for(size_t i = 0; i < exp->getArgument()->size(); i++) {
-        if(i != 0) {
-            error += ", ";
-        }
-        error += exp->getArgument()->at(i)->getInstance()->getResultValue()->toString();
-    }
-    error += ")";
-    ctx->getErrorListener()->syntaxError(error);
-    return false;
-}
-
-antlrcpp::Any OclParserCustomVisitor::visitOperationCallExpCS_A(OclParser::OperationCallExpCS_AContext *ctx)
-{
-    //OclParser::OclExpressionCSContext* expr = ctx->oclExpressionCS();
-    OclParser::ArgumentsCSContext* argCS = ctx->argumentsCS();
-    OclParser::IsMarkedPreCSContext* isPreCS = ctx->isMarkedPreCS();
-    OclParser::PathNameCSContext* pathNameCS = ctx->pathNameCS();
-
-    std::shared_ptr<OperationCallExp> exp = std::dynamic_pointer_cast<OperationCallExp>(ctx->getAST()); // get the AS with the updated source
-    std::string simpleName = ctx->simpleNameCS()->ID()->getSymbol()->getText();
-
-    if(pathNameCS != nullptr && isPreCS != nullptr) { // J
-
-    }
-    else if(pathNameCS != nullptr) { // I
-
-    }
-    else if(isPreCS != nullptr) { // E
-
-    }
-    else if(ctx->DOT() != nullptr) { // C
-        if(argCS != nullptr) {
-            argCS->setEnv(ctx->getEnv());
-            argCS->setErrorListener(ctx->getErrorListener());
-            argCS->setAST(exp);
-            visitArgumentsCS(argCS);
-        }
-
-        return visitOperationCallExpCS(ctx, exp, simpleName, false);
-    }
-    else if(ctx->RARROW() != nullptr) { // B
-        if(argCS != nullptr) {
-            argCS->setEnv(ctx->getEnv());
-            argCS->setErrorListener(ctx->getErrorListener());
-            argCS->setAST(exp);
-            visitArgumentsCS(argCS);
-        }
-
-        return visitOperationCallExpCS(ctx, exp, simpleName, false);
-    }
-    /*else if(expr != nullptr) { // A
-        expr->setEnv(ctx->getEnv());
-        expr->setErrorListener(ctx->getErrorListener());
-
-        if(visitOclExpressionCS(expr)) {
-            exp->getArgument()->add(expr->getAST());
-            return visitOperationCallExpCS(ctx, exp, simpleName, false);
-        }
-    }*/
-
-    ctx->getErrorListener()->syntaxError("Unknown Error!");
-    return false;
-}
-
-antlrcpp::Any OclParserCustomVisitor::visitOperationCallExpCS_B(OclParser::OperationCallExpCS_BContext *ctx)
-{
-    std::shared_ptr<OperationCallExp> exp = ocl::Expressions::ExpressionsFactory::eInstance()->createOperationCallExp();
-    ctx->setAST(exp);
-
-    OclParser::SimpleNameCSContext* simCS = ctx->simpleNameCS();
-    //OclParser::OclExpressionCSContext* expr = ctx->oclExpressionCS();
-    OclParser::ArgumentsCSContext* argCS = ctx->argumentsCS();
-    OclParser::IsMarkedPreCSContext* isPreCS = ctx->isMarkedPreCS();
-    OclParser::PathNameCSContext* pathNameCS = ctx->pathNameCS();
-
-    if(simCS != nullptr && isPreCS != nullptr) { // F
-
-    }
-    else if(simCS != nullptr) { // D
-        std::string simpleName = simCS->ID()->getSymbol()->getText();
-
-        if(argCS != nullptr) {
-            argCS->setEnv(ctx->getEnv());
-            argCS->setErrorListener(ctx->getErrorListener());
-            argCS->setAST(exp);
-            visitArgumentsCS(argCS);
-        }
-
-        return visitOperationCallExpCS(ctx, exp, simpleName, true);
-    }
-    else if(pathNameCS != nullptr) { // G
-
-    }
-    /*else if(simCS != nullptr && expr != nullptr) { // H
-        std::string simpleName = simCS->ID()->getSymbol()->getText();
-        expr->setEnv(ctx->getEnv());
-        expr->setErrorListener(ctx->getErrorListener());
-
-        if(visitOclExpressionCS(expr)) {
-            exp->getArgument()->add(expr->getAST());
-            return visitOperationCallExpCS(ctx, exp, simpleName, true);
-        }
-    }*/
-
-    ctx->getErrorListener()->syntaxError("Unknown Error!");
-    return false;
-}
-
-void OclParserCustomVisitor::createPropertyCallExpEval(std::shared_ptr<ecore::EAttribute> eatt,	std::shared_ptr<fUML::Semantics::Values::Value> srcValue, std::shared_ptr<PropertyCallExp> exp, std::string simpleName,	bool isPre, CSTNode *ctx) {
-	std::shared_ptr<PropertyCallExpEval> expEval =	ocl::Evaluations::EvaluationsFactory::eInstance()->createPropertyCallExpEval();
-	std::shared_ptr<fUML::Semantics::Values::Value> objValue =	OclReflection::createValue(eatt, srcValue);
-	expEval->setModel(exp);
-	expEval->setResultValue(objValue);
-	exp->setName(simpleName);
-	exp->setInstance(expEval);
-	exp->setSource(exp->getSource());
-	exp->setEType(eatt->getEType());
-	exp->setReferredProperty(eatt);
-	exp->setIsPre(isPre);
-}
-
-void OclParserCustomVisitor::createAssociationClassCallExpEval(std::shared_ptr<ecore::EReference> eref,	std::shared_ptr<fUML::Semantics::Values::Value> srcValue,std::string simpleName, std::shared_ptr<PropertyCallExp> exp, bool isPre, CSTNode *ctx)
-{
-	std::shared_ptr<AssociationClassCallExpEval> expEval =	ocl::Evaluations::EvaluationsFactory::eInstance()->createAssociationClassCallExpEval();
-	std::shared_ptr<AssociationClassCallExp> assExpr =	ocl::Expressions::ExpressionsFactory::eInstance()->createAssociationClassCallExp();
-	std::shared_ptr<fUML::Semantics::Values::Value> objValue = 	OclReflection::createValue(eref, srcValue);
-	expEval->setModel(assExpr);
-	expEval->setResultValue(objValue);
-	assExpr->setName(simpleName);
-	assExpr->setInstance(expEval);
-	assExpr->setSource(exp->getSource());
-	assExpr->setEType(eref->getEType());
-	assExpr->setReferredAssociationClass(eref);
-	assExpr->setIsPre(isPre);
-	ctx->setAST(assExpr);
-}
-
-bool OclParserCustomVisitor::visitPropertyCallExpCS(CSTNode* ctx, std::shared_ptr<PropertyCallExp> exp, std::string simpleName, bool isPre, bool isImplicit)
-{
-    std::shared_ptr<ecore::EClass> eClass;
-    std::shared_ptr<fUML::Semantics::Values::Value> srcValue;
-    if(isImplicit) {
-        std::shared_ptr<Variable> varImpl = ctx->getEnv()->lookup(simpleName);
-        if(varImpl == nullptr) {
-            varImpl = ctx->getEnv()->getSelfVariable();
-            eClass = std::dynamic_pointer_cast<ecore::EClass>(varImpl->getEType());
-            srcValue = varImpl->getValue();
-        }
-        else {
-            std::shared_ptr<PropertyCallExpEval> expEval = ocl::Evaluations::EvaluationsFactory::eInstance()->createPropertyCallExpEval();
-            expEval->setModel(exp);
-            expEval->setResultValue(varImpl->getValue());
-            exp->setName(simpleName);
-            exp->setInstance(expEval);
-            return true;
-        }
-    }
-    else {
-        srcValue = exp->getSource()->getInstance()->getResultValue();
-    	eClass = std::dynamic_pointer_cast<ecore::EClass>(exp->getSource()->getEType());
-    }
-
-    if(isPre) {
-        std::shared_ptr<ObjectValue> objValue = std::dynamic_pointer_cast<ObjectValue>(srcValue);
-        // retrieve the context at the previous state
-        if(objValue != nullptr && !objValue->getHistory()->empty()) {
-            std::shared_ptr<LocalSnapshot> lastSnapshot = objValue->getHistory()->at(objValue->getHistory()->size() - 1);
-            for(size_t i = 0; i < objValue->getHistory()->size(); i++) {
-                std::shared_ptr<LocalSnapshot> lastSnapshot = objValue->getHistory()->at(i);
-                if(lastSnapshot->getIsPre()) {
-                    if(!lastSnapshot->getBindings()->empty()) {
-                        std::shared_ptr<fUML::Semantics::Values::Value> prevObj = lastSnapshot->getBindings()->at(0)->getValue();
-                        if(prevObj != nullptr) {
-                            srcValue = prevObj;
-                            break;
-                        }
-                    }
-                }
             }
-        }
-    }
-    if(nullptr!=eClass)
-    {
-		std::shared_ptr<ecore::EAttribute> eatt = OclReflection::lookupProperty(eClass, simpleName);
-		if(eatt != nullptr) {
-			createPropertyCallExpEval(eatt, srcValue, exp, simpleName, isPre, ctx);
-			return true;
-		}
-		else { // Association
-			std::shared_ptr<ecore::EReference> eref = OclReflection::lookupAssociationClass(eClass, simpleName);
-			if(eref != nullptr) {
-				createAssociationClassCallExpEval(eref, srcValue, simpleName, exp,isPre, ctx);
-				return true;
-			}
-			else
-			{
-				//Additional BaseMetamodelElements EModelElement
-				eatt = OclReflection::lookupProperty(ecore::ecorePackage::eInstance()->getENamedElement_Class(), simpleName);
-				if(eatt != nullptr) {
-					createPropertyCallExpEval(eatt, srcValue, exp, simpleName, isPre, ctx);
-					return true;
-				}
-				else { // Association
-					eref = OclReflection::lookupAssociationClass(ecore::ecorePackage::eInstance()->getENamedElement_Class(), simpleName);
-					if(eref != nullptr) {
-						createAssociationClassCallExpEval(eref, srcValue, simpleName, exp,isPre, ctx);
-						return true;
-					}
-				}
+            //OperationCallExpression -> append arguments
+            else if (aggregate.type() == typeid(std::shared_ptr<ocl::Expressions::OperationCallExp>)) {
 
-			}
-		}
-    }
-    ctx->getErrorListener()->syntaxError("Unrecognized variable: ("+ simpleName +")");
-    return false;
-}
+                handleOperationCallExp(aggregate, nextResult);
 
-antlrcpp::Any OclParserCustomVisitor::visitPropertyCallExpCS_A(OclParser::PropertyCallExpCS_AContext *ctx)
-{
-    std::shared_ptr<PropertyCallExp> exp = std::dynamic_pointer_cast<PropertyCallExp>(ctx->getAST()); // get the AS with the updated source
-    std::string simpleName = ctx->simpleNameCS()->ID()->getSymbol()->getText();
-    OclParser::PathNameCSContext* pathName = ctx->pathNameCS();
-
-    if(pathName == nullptr) { // A
-        return visitPropertyCallExpCS(ctx, exp, simpleName, ctx->isMarkedPreCS() != nullptr, false);
-    }
-
-    ctx->getErrorListener()->syntaxError("Unknown Error!");
-    return false;
-}
-antlrcpp::Any OclParserCustomVisitor::visitPropertyCallExpCS_B(OclParser::PropertyCallExpCS_BContext *ctx)
-{
-    std::shared_ptr<PropertyCallExp> exp = ocl::Expressions::ExpressionsFactory::eInstance()->createPropertyCallExp();
-    ctx->setAST(exp);
-
-    if(ctx->simpleNameCS() != nullptr) { // B
-        std::string simpleName = ctx->simpleNameCS()->ID()->getSymbol()->getText();
-        return visitPropertyCallExpCS(ctx, exp, simpleName, ctx->isMarkedPreCS() != nullptr, true);
-    }
-
-    ctx->getErrorListener()->syntaxError("Unknown Error!");
-    return false;
-}
-
-bool OclParserCustomVisitor::visitAssociationCallExpCS(CSTNode *ctx, OclParser::ArgumentsCSContext *argCS, std::shared_ptr<AssociationClassCallExp> exp,
-                                                       std::string simpleName, bool isPre, bool isImplicit)
-{
-    std::shared_ptr<ecore::EClass> eClass;
-    std::shared_ptr<fUML::Semantics::Values::Value> srcValue;
-
-    if(isImplicit) {
-        std::shared_ptr<Variable> varImpl = ctx->getEnv()->getSelfVariable();
-
-        eClass = std::dynamic_pointer_cast<ecore::EClass>(varImpl->getEType());
-        srcValue = varImpl->getValue();
-    } else {
-        eClass = std::dynamic_pointer_cast<ecore::EClass>(exp->getSource()->getEType());
-        srcValue = exp->getSource()->getInstance()->getResultValue();
-    }
-
-    std::shared_ptr<ecore::EReference> eref = OclReflection::lookupAssociationClass(eClass, simpleName);
-    if(eref != nullptr) {
-        std::shared_ptr<AssociationClassCallExpEval> expEval = ocl::Evaluations::EvaluationsFactory::eInstance()->createAssociationClassCallExpEval();
-        std::shared_ptr<fUML::Semantics::Values::Value> objValue = OclReflection::createValue(eref, srcValue);
-
-        expEval->setModel(exp);
-        expEval->setResultValue(objValue);
-
-        exp->setName(simpleName);
-        exp->setInstance(expEval);
-        exp->setSource(exp->getSource());
-        exp->setEType(eref->getEType());
-        exp->setReferredAssociationClass(eref);
-        exp->setIsPre(isPre);
-
-        if(argCS != nullptr) {
-            argCS->setEnv(ctx->getEnv());
-            argCS->setErrorListener(ctx->getErrorListener());
-            argCS->setAST(exp);
-            visitArgumentsCS(argCS);
-        }
-        return true;
-    }
-    ctx->getErrorListener()->syntaxError("Unrecognized variable: ("+ simpleName +")");
-    return false;
-}
-
-antlrcpp::Any OclParserCustomVisitor::visitAssociationClassCallExpCS_A(OclParser::AssociationClassCallExpCS_AContext *ctx)
-{
-    std::shared_ptr<AssociationClassCallExp> exp = std::dynamic_pointer_cast<AssociationClassCallExp>(ctx->getAST()); // get the AS with the updated source
-    OclParser::ArgumentsCSContext *argCS = ctx->argumentsCS();
-    std::string simpleName = ctx->simpleNameCS()->ID()->getSymbol()->getText();
-
-    return visitAssociationCallExpCS(ctx, argCS, exp, simpleName, ctx->isMarkedPreCS() != nullptr, false);
-}
-
-antlrcpp::Any OclParserCustomVisitor::visitAssociationClassCallExpCS_B(OclParser::AssociationClassCallExpCS_BContext *ctx)
-{
-    std::string simpleName = ctx->simpleNameCS()->ID()->getSymbol()->getText();
-    OclParser::ArgumentsCSContext* argCS = ctx->argumentsCS();
-    std::shared_ptr<AssociationClassCallExp> exp = ocl::Expressions::ExpressionsFactory::eInstance()->createAssociationClassCallExp();
-    ctx->setAST(exp);
-
-    return visitAssociationCallExpCS(ctx, argCS, exp, simpleName, ctx->isMarkedPreCS() != nullptr, true);
-}
-
-antlrcpp::Any OclParserCustomVisitor::visitVariableExpCS(OclParser::VariableExpCSContext *ctx)
-{
-    std::shared_ptr<VariableExp> exp = ocl::Expressions::ExpressionsFactory::eInstance()->createVariableExp();
-    ctx->setAST(exp);
-
-    std::shared_ptr<VariableExpEval> expEval = ocl::Evaluations::EvaluationsFactory::eInstance()->createVariableExpEval();
-    expEval->setModel(exp);
-
-    if(ctx->SELF() || ctx->simpleNameCS()) {
-        std::string name = (ctx->SELF()) ? ctx->SELF()->getSymbol()->getText()
-                                         : ctx->simpleNameCS()->ID()->getSymbol()->getText();
-
-        std::shared_ptr<Variable> var = ctx->getEnv()->lookup(name);
-        expEval->setResultValue(var->getValue());
-
-        exp->setName(name);
-        exp->setInstance(expEval);
-        exp->setReferredVariable(var);
-        exp->setEType(var->getEType());
-
-        return true;
-    }
-
-    ctx->getErrorListener()->syntaxError("Unknown Error!");
-    return false;
-}
-
-antlrcpp::Any OclParserCustomVisitor::visitLetExpCS(OclParser::LetExpCSContext *ctx)
-{
-    std::shared_ptr<LetExp> letExp = ocl::Expressions::ExpressionsFactory::eInstance()->createLetExp();
-    std::shared_ptr<Environment> env = EnvironmentFactory::getInstance().createEnvironment(ctx->getEnv());
-    OclParser::VariableDeclarationCSContext *varDeclCS = ctx->variableDeclarationCS();
-    varDeclCS->setEnv(env);
-    varDeclCS->setErrorListener(ctx->getErrorListener());
-
-    if(visitVariableDeclarationCS(varDeclCS)) {
-        std::shared_ptr<VariableExp> varExp = std::dynamic_pointer_cast<VariableExp>(varDeclCS->getAST());
-        OclParser::LetExpSubCSContext *letsubCS = ctx->letExpSubCS();
-        letsubCS->setEnv(env);
-        letsubCS->setErrorListener(ctx->getErrorListener());
-
-        if(visitLetExpSubCS(letsubCS)) {
-            std::shared_ptr<fUML::Semantics::SimpleClassifiers::StringValue> varValue = fUML::Semantics::SimpleClassifiers::SimpleClassifiersFactory::eInstance()->createStringValue();
-            std::shared_ptr<LetExpEval> expEval = ocl::Evaluations::EvaluationsFactory::eInstance()->createLetExpEval();
-
-            varValue->setValue(varExp->getName());
-            expEval->setModel(letExp);
-            expEval->setVariable(varValue);
-            expEval->setIn(letsubCS->getAST()->getInstance());
-            expEval->setResultValue(letsubCS->getAST()->getInstance()->getResultValue());
-
-            letExp->setVariable(varExp->getReferredVariable());
-            letExp->setIn(letsubCS->getAST());
-            letExp->setInstance(expEval);
-
-            ctx->setAST(letExp);
-            return true;
-        }
-    }
-
-    return false;
-}
-
-antlrcpp::Any OclParserCustomVisitor::visitVariableDeclarationCS(OclParser::VariableDeclarationCSContext *ctx)
-{
-    std::string simpleName = ctx->simpleNameCS()->ID()->getSymbol()->getText();
-    OclParser::OclExpressionCSContext* exprCS = ctx->oclExpressionCS();
-    OclParser::TypeCSContext* typeCS = ctx->typeCS();
-
-    if(ctx->getEnv()->lookup(simpleName) == nullptr) {
-        std::shared_ptr<ecore::EClassifier> type = nullptr;
-        std::shared_ptr<Variable> var = ocl::Expressions::ExpressionsFactory::eInstance()->createVariable();
-        std::shared_ptr<VariableExp> varExp = ocl::Expressions::ExpressionsFactory::eInstance()->createVariableExp();
-        std::shared_ptr<VariableExpEval> expEval = ocl::Evaluations::EvaluationsFactory::eInstance()->createVariableExpEval();
-
-        if(exprCS != nullptr) {
-            exprCS->setEnv(ctx->getEnv());
-            exprCS->setErrorListener(ctx->getErrorListener());
-            if(visitOclExpressionCS(exprCS)) {
-                std::shared_ptr<OclExpression> oclExp = exprCS->getAST();
-                type = oclExp->getEType();
-                expEval->setResultValue(oclExp->getInstance()->getResultValue());
             }
-        }
-        else {
-            expEval->setResultValue(ocl::Values::ValuesFactory::eInstance()->createUndefinedValue());
-        }
+            // Iterator -> append oclExp as correct part (see function)
+            else if (aggregate.type() == typeid(std::shared_ptr<ocl::Expressions::IteratorExp>)) {
 
-        if(typeCS != nullptr) {
-            typeCS->setEnv(ctx->getEnv());
-            typeCS->setErrorListener(ctx->getErrorListener());
-            if(visitTypeCS(typeCS)) {
-                std::shared_ptr<TypeExp> typeExp = std::dynamic_pointer_cast<TypeExp>(typeCS->getAST());
-                if(type != nullptr && !OclReflection::kindOf(type, typeExp->getReferredType())) {
-                    ctx->getErrorListener()->syntaxError("The type and the value of the variable ("+ simpleName +") are not compatible");
-                    return false;
-                }
-                type = typeExp->getReferredType();
+                handleIteratorExp(aggregate, nextResult);
+
             }
-            else {
-                return false;
+            // Iterate -> append oclExp as correct part (see function)
+            else if (aggregate.type() == typeid(std::shared_ptr<ocl::Expressions::IterateExp>)) {
+
+                handleIterateExp(aggregate, nextResult);
+
             }
-        }
+            //IfExpression -> append expression parts
+            else if (aggregate.type() == typeid(std::shared_ptr<ocl::Expressions::IfExp>)) {
 
-        var->setValue(expEval->getResultValue());
-        var->setName(simpleName);
-        var->setEType(type);
-        ctx->getEnv()->addElement(simpleName, var, false);
+                handleIfExp(aggregate, nextResult);
 
-        expEval->setModel(varExp);
-        varExp->setName(simpleName);
-        varExp->setInstance(expEval);
-        varExp->setReferredVariable(var);
-        varExp->setEType(var->getEType());
-
-        ctx->setAST(varExp);
-        return true;
-    }
-    else {
-        ctx->getErrorListener()->syntaxError("The variable ("+ simpleName +") must be unique in the current scope");
-    }
-    return false;
-}
-
-antlrcpp::Any OclParserCustomVisitor::visitLetExpSubCS(OclParser::LetExpSubCSContext *ctx)
-{
-    if(ctx->COMMA() != nullptr) {
-        OclParser::VariableDeclarationCSContext *varDeclCS = ctx->variableDeclarationCS();
-        varDeclCS->setEnv(ctx->getEnv());
-        varDeclCS->setErrorListener(ctx->getErrorListener());
-
-        if(visitVariableDeclarationCS(varDeclCS)) {
-            std::shared_ptr<VariableExp> varExp = std::dynamic_pointer_cast<VariableExp>(varDeclCS->getAST());
-            OclParser::LetExpSubCSContext *letsubCS = ctx->letExpSubCS();
-            letsubCS->setEnv(ctx->getEnv());
-            letsubCS->setErrorListener(ctx->getErrorListener());
-
-            if(visitLetExpSubCS(letsubCS)) {
-                ctx->setAST(letsubCS->getAST());
-                return true;
             }
-        }
-    }
-    else {
-        OclParser::OclExpressionCSContext *oclExp = ctx->oclExpressionCS();
-        oclExp->setEnv(ctx->getEnv());
-        oclExp->setErrorListener(ctx->getErrorListener());
+            //LetExpression -> append VarDecExp
+            else if (aggregate.type() == typeid(std::shared_ptr<ocl::Expressions::LetExp>)) {
 
-        if(visitOclExpressionCS(oclExp)) {
-            ctx->setAST(oclExp->getAST());
-            return true;
-        }
-    }
-    return false;
-}
+                handleLetExp(aggregate, nextResult);
 
-antlrcpp::Any OclParserCustomVisitor::visitTypeCS(OclParser::TypeCSContext *ctx)
-{
-    OclParser::PathNameCSContext* pathCS = ctx->pathNameCS();
-    OclParser::CollectionTypeCSContext* collCS = ctx->collectionTypeCS();
-    OclParser::TupleTypeCSContext* tupleCS = ctx->tupleTypeCS();
-    OclParser::PrimitiveTypeCSContext* priCS = ctx->primitiveTypeCS();
-    OclParser::OclTypeCSContext* oclTypeCS = ctx->oclTypeCS();
-
-    std::shared_ptr<TypeExp> typeAS = ocl::Expressions::ExpressionsFactory::eInstance()->createTypeExp();
-    ctx->setAST(typeAS);
-
-    if(pathCS != nullptr) {
-        pathCS->setEnv(ctx->getEnv());
-        pathCS->setErrorListener(ctx->getErrorListener());
-        antlrcpp::Any result =  visitPathNameCS(pathCS);
-        std::vector<std::string> seq = result.as<std::vector<std::string>>();
-        std::shared_ptr<Variable> var = ctx->getEnv()->lookupPathName(seq);
-        if(var != nullptr) {
-            std::shared_ptr<ecore::EClassifier> ref = var->getEType();
-            std::shared_ptr<OclExpEval> typeEval = ocl::Evaluations::EvaluationsFactory::eInstance()->createOclExpEval();
-            std::shared_ptr<ObjectValue> objValue = ocl::Values::ValuesFactory::eInstance()->createObjectValue();
-            objValue->setValue(ref);
-            typeEval->setResultValue(objValue);
-            typeAS->setInstance(typeEval);
-            typeAS->setReferredType(ref);
-            typeAS->setEType(ref);
-            return true;
-        }
-        else{
-            std::string path = getPath(seq);
-            ctx->getErrorListener()->syntaxError("The path ("+ path +") must be unique in the current scope");
-        }
-    }
-    else if(collCS != nullptr) {
-        collCS->setAST(typeAS);
-        collCS->setEnv(ctx->getEnv());
-        collCS->setErrorListener(ctx->getErrorListener());
-        if(visitCollectionTypeCS(collCS)) {
-            return true;
-        }
-    }
-    else if(tupleCS != nullptr) {
-        tupleCS->setAST(typeAS);
-        tupleCS->setEnv(ctx->getEnv());
-        tupleCS->setErrorListener(ctx->getErrorListener());
-        if(visitTupleTypeCS(tupleCS)) {
-            return true;
-        }
-    }
-    else if(priCS != nullptr) {
-        std::shared_ptr<ecore::EClassifier> ref = nullptr;
-        if(priCS->OCLBOOLEAN() != nullptr) {
-            ref = ::types::typesPackage::eInstance()->getBoolean_Class();
-        }
-        else if(priCS->OCLSTRING() != nullptr) {
-            ref = ::types::typesPackage::eInstance()->getString_Class();
-        }
-        else if(priCS->OCLREAL() != nullptr) {
-            ref = ::types::typesPackage::eInstance()->getReal_Class();
-        }
-        else if(priCS->OCLINTEGER() != nullptr) {
-            ref = ::types::typesPackage::eInstance()->getInteger_Class();
-        }
-        else {
-            ref = ::types::typesPackage::eInstance()->getUnlimitedNatural_Class();
-        }
-        std::shared_ptr<ObjectValue> objValue = ocl::Values::ValuesFactory::eInstance()->createObjectValue();
-        std::shared_ptr<OclExpEval> typeEval = ocl::Evaluations::EvaluationsFactory::eInstance()->createOclExpEval();
-
-        objValue->setValue(ref);
-        typeEval->setResultValue(objValue);
-        typeAS->setInstance(typeEval);
-        typeAS->setReferredType(ref);
-        typeAS->setEType(ref);
-        return true;
-    }
-    else if(oclTypeCS != nullptr) {
-        std::shared_ptr<ecore::EClassifier> ref = nullptr;
-        if(oclTypeCS->OCLANY() != nullptr) {
-            ref = ocl::Types::TypesFactory::eInstance()->createAnyType();
-        }
-        else if(oclTypeCS->OCLINVALID() != nullptr) {
-            ref = ocl::Types::TypesFactory::eInstance()->createInvalidType();
-        }
-        else if(oclTypeCS->OCLMESSAGE() != nullptr) {
-            ref = ocl::Types::TypesFactory::eInstance()->createMessageType();
-        }
-        else {
-            ref = ocl::Types::TypesFactory::eInstance()->createVoidType();
-        }
-        std::shared_ptr<ObjectValue> objValue = ocl::Values::ValuesFactory::eInstance()->createObjectValue();
-        std::shared_ptr<OclExpEval> typeEval = ocl::Evaluations::EvaluationsFactory::eInstance()->createOclExpEval();
-
-        objValue->setValue(ref);
-        typeEval->setResultValue(objValue);
-        typeAS->setInstance(typeEval);
-        typeAS->setReferredType(ref);
-        typeAS->setEType(ref);
-        return true;
-    }
-    return false;
-}
-
-antlrcpp::Any OclParserCustomVisitor::visitPathNameCS(OclParser::PathNameCSContext *ctx)
-{
-    OclParser::SimpleNameCSContext* simpleCS = ctx->simpleNameCS();
-    OclParser::PathNameCSContext* pathCS = ctx->pathNameCS();
-    OclParser::UnreservedSimpleNameCSContext* unreCS = ctx->unreservedSimpleNameCS();
-
-    if(simpleCS != nullptr) {
-        std::string simpleName = simpleCS->ID()->getSymbol()->getText();
-        vector<std::string> seq {simpleName};
-        return seq;
-    }
-    else {
-        pathCS->setEnv(ctx->getEnv());
-        pathCS->setErrorListener(ctx->getErrorListener());
-        antlrcpp::Any result1 = visitPathNameCS(pathCS);
-        vector<std::string> seq = result1.as<vector<std::string>>();
-
-        antlrcpp::Any result2 = visitUnreservedSimpleNameCS(unreCS);
-        std::string unresName = result2.as<std::string>();
-        seq.push_back(unresName);
-        return seq;
-    }
-    return vector<std::string>();
-}
-
-antlrcpp::Any OclParserCustomVisitor::visitRestrictedKeywordCS(OclParser::RestrictedKeywordCSContext *ctx)
-{
-    if(ctx->collectionTypeIdentifierCS() != nullptr) {
-        return visitCollectionTypeIdentifierCS(ctx->collectionTypeIdentifierCS());
-    }
-    else if(ctx->primitiveTypeCS() != nullptr) {
-        return visitPrimitiveTypeCS(ctx->primitiveTypeCS());
-    }
-    else if(ctx->oclTypeCS() != nullptr) {
-        return visitOclTypeCS(ctx->oclTypeCS());
-    }
-    else {
-        return ctx->TUPLE()->getSymbol()->getText();
-    }
-}
-
-antlrcpp::Any OclParserCustomVisitor::visitUnreservedSimpleNameCS(OclParser::UnreservedSimpleNameCSContext *ctx)
-{
-    OclParser::SimpleNameCSContext* simpleCS = ctx->simpleNameCS();
-    OclParser::RestrictedKeywordCSContext* restCS = ctx->restrictedKeywordCS();
-
-    if(simpleCS != nullptr) {
-        return simpleCS->ID()->getSymbol()->getText();
-    }
-    else {
-        return visitRestrictedKeywordCS(restCS);
-    }
-}
-
-antlrcpp::Any OclParserCustomVisitor::visitPrimitiveTypeCS(OclParser::PrimitiveTypeCSContext *ctx)
-{
-    if(ctx->OCLBOOLEAN() != nullptr) {
-        return ctx->OCLBOOLEAN()->getSymbol()->getText();
-    }
-    else if(ctx->OCLINTEGER() != nullptr) {
-        return ctx->OCLINTEGER()->getSymbol()->getText();
-    }
-    else if(ctx->OCLREAL() != nullptr) {
-        return ctx->OCLREAL()->getSymbol()->getText();
-    }
-    else if(ctx->OCLSTRING() != nullptr) {
-        return ctx->OCLSTRING()->getSymbol()->getText();
-    }
-    else {
-        return ctx->OCLUNLIMITEDNAT()->getSymbol()->getText();
-    }
-}
-
-antlrcpp::Any OclParserCustomVisitor::visitCollectionTypeIdentifierCS(OclParser::CollectionTypeIdentifierCSContext *ctx)
-{
-    if(ctx->SET() != nullptr) {
-        return ctx->SET()->getSymbol()->getText();
-    }
-    else if(ctx->BAG() != nullptr) {
-        return ctx->BAG()->getSymbol()->getText();
-    }
-    else if(ctx->SEQUENCE() != nullptr) {
-        return ctx->SEQUENCE()->getSymbol()->getText();
-    }
-    else if(ctx->COLLECTION() != nullptr) {
-        return ctx->COLLECTION()->getSymbol()->getText();
-    }
-    else {
-        return ctx->ORDEREDSET()->getSymbol()->getText();
-    }
-}
-
-antlrcpp::Any OclParserCustomVisitor::visitOclTypeCS(OclParser::OclTypeCSContext *ctx)
-{
-    if(ctx->OCLANY() != nullptr) {
-        return ctx->OCLANY()->getSymbol()->getText();
-    }
-    else if(ctx->OCLINVALID() != nullptr) {
-        return ctx->OCLINVALID()->getSymbol()->getText();
-    }
-    else if(ctx->OCLMESSAGE() != nullptr) {
-        return ctx->OCLMESSAGE()->getSymbol()->getText();
-    }
-    else {
-        return ctx->OCLVOID()->getSymbol()->getText();
-    }
-}
-
-antlrcpp::Any OclParserCustomVisitor::visitSimpleNameCS(OclParser::SimpleNameCSContext *ctx)
-{
-    return ctx->ID()->getSymbol()->getText();
-}
-
-antlrcpp::Any OclParserCustomVisitor::visitPrefixedExp(OclParser::PrefixedExpContext *ctx)
-{
-    OclParser::OclExpressionCSContext* exprCS = ctx->oclExpressionCS();
-    exprCS->setEnv(ctx->getEnv());
-    exprCS->setErrorListener(ctx->getErrorListener());
-
-    if(visitOclExpressionCS(exprCS)) {
-        std::shared_ptr<OclExpression> exprAS = exprCS->getAST();
-        std::shared_ptr<fUML::Semantics::Values::Value> value = exprAS->getInstance()->getResultValue();
-        ctx->setAST(exprAS);
-
-        if(ctx->unaryLiteralExpCS()->NOT() != nullptr) {
-            std::shared_ptr<fUML::Semantics::SimpleClassifiers::BooleanValue> boolValue = std::dynamic_pointer_cast<fUML::Semantics::SimpleClassifiers::BooleanValue>(value);
-            if(boolValue != nullptr) {
-                boolValue->setValue(!boolValue->isValue());
-                return true;
             }
-            ctx->getErrorListener()->syntaxError("The keyword (not) must be applied to boolean expression");
+            //CollectionTypeExpression -> append innerType
+            else if (aggregate.type() == typeid(std::shared_ptr<ocl::Expressions::CollectionTypeExp>)) {
+
+                handleCollectionTypeExp(aggregate, nextResult);
+
+            }
+            // VarDecExp -> append oclExp to assignedOclExp
+            else if (aggregate.type() == typeid(std::shared_ptr<ocl::Expressions::VarDeclarationExp>)) {
+
+                handleVarDeclarationExp(aggregate, nextResult);
+
+            }
+            // MessageExpression -> append oclExp from MessageArgumts
+            else if (aggregate.type() == typeid(std::shared_ptr<ocl::Expressions::MessageExp>)) {
+
+                handleMessageExp(aggregate, nextResult);
+
+            }
+            // MessageArguments -> append oclExp as MessageArguments
+            else if (aggregate.type() == typeid(std::shared_ptr<ocl::Expressions::MessageArguments>)) {
+
+                handleMessageArguments(aggregate, nextResult);
+
+            }
+            // "-" and "NOT"
+            else if (aggregate.type() == typeid(std::shared_ptr<ocl::Expressions::PrefixedExp>)) {
+
+                handlePrefixedExp(aggregate, nextResult);
+
+            }
+            // Expressions in "()"
+            else if (aggregate.type() == typeid(std::shared_ptr<ocl::Expressions::ParentedExp>)) {
+
+                handleParentedExp(aggregate, nextResult);
+
+            }
+            // set left and right Operand of OperatorExp
+            else if (aggregate.type() == typeid(std::shared_ptr<ocl::Expressions::OperatorExp>)) {
+
+                handleOperatorExp(aggregate, nextResult);
+
+            }
+            // add PackageDeclarationExp add contextDeclarations
+            else if (aggregate.type() == typeid(std::shared_ptr<ocl::Expressions::PackageDeclarationExp>)) {
+
+                handlePackageContextDeclExp(aggregate, nextResult);
+
+            }
+            // add ClassifierContextDeclExp add invOrDefExpr
+            else if (aggregate.type() == typeid(std::shared_ptr<ocl::Expressions::ClassifierContextDeclExp>)) {
+
+                handleClassifierContextDeclExp(aggregate, nextResult);
+
+            }
+            // add PropertyContextDeclExp add missing parts
+            // append typeExpr and initOrDerivedValueList
+            else if (aggregate.type() == typeid(std::shared_ptr<ocl::Expressions::PropertyContextDeclExp>)) {
+
+                handlePropertyContextDeclExp(aggregate, nextResult);
+
+            }
+            // add operationContextDeclExpr missing parts
+            // append operationContextExpr and prePostBodyListExpr
+            else if (aggregate.type() == typeid(std::shared_ptr<ocl::Expressions::OperationContextDeclExp>)) {
+
+                handleOperationContextDecl(aggregate, nextResult);
+
+            }
+            // append optional parts
+            else if (aggregate.type() == typeid(std::shared_ptr<ocl::Expressions::OperationContextExp>)) {
+
+                handleOperationContextExp(aggregate, nextResult);
+
+            }
+            // add pre, post, body
+            else if (aggregate.type() == typeid(std::shared_ptr<ocl::Expressions::PrePostBodyListExp>)) {
+
+                handlePrePostBodyListExp(aggregate, nextResult);
+
+            }
+            // add bodyExp
+            else if (aggregate.type() == typeid(std::shared_ptr<ocl::Expressions::PrePostBodyExp>)) {
+
+                handlePrePostBodyExp(aggregate, nextResult);
+
+            }
+            // add init, derived expr
+            else if (aggregate.type() == typeid(std::shared_ptr<ocl::Expressions::InitOrDerValueListExp>)) {
+
+                handleInitOrDerValueListExp(aggregate, nextResult);
+
+            }
+            // add bodyExp
+            else if (aggregate.type() == typeid(std::shared_ptr<ocl::Expressions::InitOrDerValueExp>)) {
+
+                handleInitOrDerValueExp(aggregate, nextResult);
+
+            }
+            // add refferedExp
+            else if (aggregate.type() == typeid(std::shared_ptr<ocl::Expressions::InvOrDefExp>)) {
+
+                handleInvOrDefExp(aggregate, nextResult);
+
+            }
+            // add frontExpr and bodyExpr
+            else if (aggregate.type() == typeid(std::shared_ptr<ocl::Expressions::DefExp>)) {
+
+                handleDefExp(aggregate, nextResult);
+
+            }
+
+            // ##########################
+            // ### nextResult handler ###
+            // ##########################
+
+            // set "source" in AssociationCallExp and set "appliedElement" in oclExp
+            if (nextResult.type() == typeid(std::shared_ptr<ocl::Expressions::AssociationClassCallExp>)) {
+
+                nR_HandlingAssociationCallExp(aggregate, nextResult);
+
+            }
+            //set "source" in PropertyCallExp and set "appliedElement" in oclExp
+            else if (nextResult.type() == typeid(std::shared_ptr<ocl::Expressions::PropertyCallExp>)) {
+
+                nR_HandlingPropertyCallExp(aggregate, nextResult);
+
+            }
+            //set "source" in OperationCallExp and set "appliedElement" in oclExp
+            else if (nextResult.type() == typeid(std::shared_ptr<ocl::Expressions::OperationCallExp>)) {
+
+                nR_HandlingOperationCallExp(aggregate, nextResult);
+
+            }
+            //set "source" in IteratorExp and set "appliedElement" in oclExp
+            else if (nextResult.type() == typeid(std::shared_ptr<ocl::Expressions::IteratorExp>)) {
+
+                nR_HandlingIteratorExp(aggregate, nextResult);
+
+            }
+            //set "source" in IterateExp and set "appliedElement" in oclExp
+            else if (nextResult.type() == typeid(std::shared_ptr<ocl::Expressions::IterateExp>)) {
+
+                nR_HandlingIterateExp(aggregate, nextResult);
+
+            }
+            //set the "target" in a MessageExp
+            else if (nextResult.type() == typeid(std::shared_ptr<ocl::Expressions::MessageExp>)) {
+
+                nR_HandlingMessageExp(aggregate, nextResult);
+
+            }
+
         }
-        else  { // ctx->unaryLiteralExpCS()->MINUS() != nullptr
-            std::shared_ptr<fUML::Semantics::SimpleClassifiers::IntegerValue> intValue = std::dynamic_pointer_cast<fUML::Semantics::SimpleClassifiers::IntegerValue>(value);
-            if(intValue != nullptr) {
-                intValue->setValue(-intValue->getValue());
-                return true;
+
+        //default case
+        return aggregate;
+
+    };
+
+    // ###############################################################
+    // ### handling tasks for differnet cases in aggregateResult() ###
+    // ###############################################################
+
+    // ### handleExpInOcl ###
+    //append the bodyExp
+    // set topExp
+    void OclParserCustomVisitor::handleExpressionInOcl(std::any aggregate, std::any nextResult) {
+
+        //get aggreggate Expression
+        std::shared_ptr<ocl::Expressions::ExpressionInOcl> expInOcl = std::any_cast<std::shared_ptr<ocl::Expressions::ExpressionInOcl>>(aggregate);
+
+        //get nextResult Expression
+        std::shared_ptr<ocl::Expressions::OclExpression> oclExp = Utilities::oclCV::exp2oclExp(nextResult);
+
+        if (oclExp == nullptr) {
+
+            //TODO error
+            // only oclExp are allowed at this point
+
+        } else {
+
+            // set the connection for the top expression
+            expInOcl->setBodyExpression(oclExp);
+            oclExp->setTopExpression(expInOcl);
+
+        }
+    }   
+    
+    // ### handleCollectionLiteralExpression ###
+    //append all CollectionParts from CollectionLiteralParts
+    void OclParserCustomVisitor::handleCollectionLiteralExpression(std::any aggregate, std::any nextResult) {
+
+        //get aggreggate Expression
+        std::shared_ptr<ocl::Expressions::CollectionLiteralExp> colLitExp = std::any_cast<std::shared_ptr<ocl::Expressions::CollectionLiteralExp>>(aggregate);
+
+        //get nextResult
+        if (nextResult.type() == typeid(std::shared_ptr<ocl::Expressions::CollectionLiteralParts>)) {
+
+            //get aggreggate Expression
+            std::shared_ptr<ocl::Expressions::CollectionLiteralParts> colLitParts = std::any_cast<std::shared_ptr<ocl::Expressions::CollectionLiteralParts>>(nextResult);
+
+            // Debug
+            // std::cout << "bag items in colLitParts " << colLitParts->getLiteralParts()->size() << std::endl;
+
+            //iterate through all literalParts from CollectionLiteralParts and add them to collectionLiteralExp
+            for(size_t i = 0; i < colLitParts->getLiteralParts()->size(); i++) {
+
+                std::shared_ptr<CollectionLiteralPart> colPart = colLitParts->getLiteralParts()->at(i);
+                colLitExp->getPart()->add(colPart);
+
+                // Debug
+                // std::cout << "add colPart to ColLitExp" << std::endl;
             }
-            std::shared_ptr<fUML::Semantics::SimpleClassifiers::RealValue> realValue = std::dynamic_pointer_cast<fUML::Semantics::SimpleClassifiers::RealValue>(value);
-            if(realValue != nullptr) {
-                realValue->setValue(-realValue->getValue());
-                return true;
-            }
-            std::shared_ptr<fUML::Semantics::SimpleClassifiers::UnlimitedNaturalValue> unlimitedValue = std::dynamic_pointer_cast<fUML::Semantics::SimpleClassifiers::UnlimitedNaturalValue>(value);
-            if(unlimitedValue != nullptr) {
-                unlimitedValue->setValue(-unlimitedValue->getValue());
-                return true;
-            }
-            ctx->getErrorListener()->syntaxError("The negative prefix (-) must be applied to numeric expression");
+        } else {
+
+            //TODO addError
+            // only collectionLiteralParts are allowed at this point
         }
     }
 
-    return false;
-}
+    // ### handleCollectionLiteralParts ###
+    // collect all collection parts (neccessary because of the grammar structure)
+    void OclParserCustomVisitor::handleCollectionLiteralParts(std::any aggregate, std::any nextResult) {
 
-antlrcpp::Any OclParserCustomVisitor::visitInfixedExpCS(OclParser::InfixedExpCSContext *ctx)
-{
-    std::shared_ptr<InfixedExp> infExpr = std::dynamic_pointer_cast<InfixedExp>(ctx->getAST());
-    OclParser::OclExpressionCSContext* expr = ctx->oclExpressionCS();
-    OclParser::BinaryLiteralExpCSContext* binCS = ctx->binaryLiteralExpCS();
-    std::shared_ptr<OclExpEval> infEval = ocl::Evaluations::EvaluationsFactory::eInstance()->createOclExpEval();
+        //get aggreggate Expression
+        std::shared_ptr<ocl::Expressions::CollectionLiteralParts> colLitParts = std::any_cast<std::shared_ptr<ocl::Expressions::CollectionLiteralParts>>(aggregate);
 
-    infExpr->setInstance(infEval);
-    expr->setEnv(ctx->getEnv());
-    expr->setErrorListener(ctx->getErrorListener());
+        //get nextResult value
+        //first try as oclExp
+        std::shared_ptr<ocl::Expressions::OclExpression> oclExp = Utilities::oclCV::exp2oclExp(nextResult);
 
-    if(visitOclExpressionCS(expr))
-    {
-        std::shared_ptr<OclExpression> leftExpr = infExpr->getSource();
-        std::shared_ptr<OclExpression> rightExpr = expr->getAST();
-        std::shared_ptr<fUML::Semantics::Values::Value> leftvalue = leftExpr->getInstance()->getResultValue();
-        std::shared_ptr<fUML::Semantics::Values::Value> rightvalue = rightExpr->getInstance()->getResultValue();
+        //second try as collectionRange
+        if (oclExp == nullptr) {
 
-        std::shared_ptr<fUML::Semantics::SimpleClassifiers::StringValue> leftString = std::dynamic_pointer_cast<fUML::Semantics::SimpleClassifiers::StringValue>(leftvalue);
+            if (nextResult.type() == typeid(std::shared_ptr<ocl::Expressions::CollectionRange>)) {
+                
+                // add collection range to collectionLiteralParts
+                std::shared_ptr<ocl::Expressions::CollectionRange> colRa = std::any_cast<std::shared_ptr<ocl::Expressions::CollectionRange>>(nextResult);
+                colLitParts->getLiteralParts()->add(colRa);
+                
+                // Debug
+                // std::cout << "add colRange" << std::endl;
 
-        if(nullptr!= leftString)
-        {
-            std::shared_ptr<fUML::Semantics::SimpleClassifiers::StringValue> rightString = std::dynamic_pointer_cast<fUML::Semantics::SimpleClassifiers::StringValue>(rightvalue);
-            if(nullptr!=rightString) {
-                bool result = false;
-                if(binCS->LT() != nullptr) { // leftString < rigtString
-                    result = leftString->getValue() < rightString->getValue();
-                }
-                else if(binCS->GT() != nullptr) { // leftString > rigtString
-                    result = leftString->getValue() > rightString->getValue();
-                }
-                else if(binCS->LTE() != nullptr) { // leftString <= rigtString
-                    result = leftString->getValue() <= rightString->getValue();
-                }
-                else if(binCS->GTE() != nullptr) { // leftString >= rigtString
-                    result = leftString->getValue() >= rightString->getValue();
-                }
-                else if(binCS->ASSIGN() != nullptr) { // leftString == rigtString
-                    result = leftString->getValue() == rightString->getValue();
-                }
-                else if(binCS->INEQUAL() != nullptr) { // leftString != rigtString
-                    result = leftString->getValue() != rightString->getValue();
                 }
                 else {
-                    ctx->getErrorListener()->syntaxError("The possible binary operations between two string are : <, >, <=, >=, =, <>, +");
-                    return false;
+                //no cast was succesfull
+                //either theres a wrong query
+                //or an abstract oclExp was set as nextResult (see Utilities::oclCV::exp2oclExp())
+                //TODO add error
                 }
-                std::shared_ptr<fUML::Semantics::SimpleClassifiers::BooleanValue> boolValue = fUML::Semantics::SimpleClassifiers::SimpleClassifiersFactory::eInstance()->createBooleanValue();
-                std::shared_ptr<ecore::EClassifier> type = ::types::typesPackage::eInstance()->getBoolean_Class();
-                boolValue->setValue(result);
-                infEval->setResultValue(boolValue);
-                infExpr->setEType(type);
-                return true;
-            }
-            else {
-                ctx->getErrorListener()->syntaxError("The right value of a binary operation with a left value string must also be a string");
-                return false;
-            }
-        }
-        else
-        {
-            std::shared_ptr<fUML::Semantics::SimpleClassifiers::BooleanValue> leftBool = std::dynamic_pointer_cast<fUML::Semantics::SimpleClassifiers::BooleanValue>(leftvalue);
-        	if(nullptr!= leftBool)
-        	{
-                std::shared_ptr<fUML::Semantics::SimpleClassifiers::BooleanValue> rightBool = std::dynamic_pointer_cast<fUML::Semantics::SimpleClassifiers::BooleanValue>(rightvalue);
-				if(nullptr!= rightBool) {
-					bool result = false;
-					if(binCS->ASSIGN() != nullptr) { // leftBool == rightBool
-						result = leftBool->isValue() == rightBool->isValue();
-					}
-					else if(binCS->INEQUAL() != nullptr) { // leftBool != rightBool
-						result = leftBool->isValue() != rightBool->isValue();
-					}
-					else if(binCS->KEYOR() != nullptr) { // leftBool || rightBool
-						result = leftBool->isValue() || rightBool->isValue();
-					}
-					else if(binCS->KEYAND() != nullptr) { // leftBool && rightBool
-						result = leftBool->isValue() && rightBool->isValue();
-					}
-					else if(binCS->IMPLIES() != nullptr) { // leftBool => rightBool
-						result = !leftBool->isValue() || rightBool->isValue();
-					}
-					else {
-						ctx->getErrorListener()->syntaxError("The possible binary operations between two boolean are : or, and, =, <>, implies");
-						return false;
-					}
-					std::shared_ptr<fUML::Semantics::SimpleClassifiers::BooleanValue> boolValue = fUML::Semantics::SimpleClassifiers::SimpleClassifiersFactory::eInstance()->createBooleanValue();
-					std::shared_ptr<ecore::EClassifier> type = ::types::typesPackage::eInstance()->getBoolean_Class();
-					infExpr->setEType(type);
-					boolValue->setValue(result);
-					infEval->setResultValue(boolValue);
-					return true;
-				}
-				else
-				{
-					ctx->getErrorListener()->syntaxError("The right value of a binary operation with a left value string must also be a string");
-					return false;
-				}
-        	}
-			else
-			{
-				std::shared_ptr<CollectionValue> leftCol = std::dynamic_pointer_cast<CollectionValue>(leftvalue);
-				if(nullptr!=leftCol)
-				{
-					std::shared_ptr<CollectionValue> rightCol = std::dynamic_pointer_cast<CollectionValue>(rightvalue);
-					if(nullptr!=rightCol )
-					{
-						bool result = false;
-						if(binCS->ASSIGN() != nullptr) { // leftCol == rightCol
-							result = leftCol->equals(rightCol);
-						}
-						else if(binCS->INEQUAL() != nullptr) { // leftCol <> rightCol
-							result = !leftCol->equals(rightCol);
-						}
-						else {
-							ctx->getErrorListener()->syntaxError("The possible binary operations between two collections are : =, <>");
-							return false;
-						}
-						std::shared_ptr<fUML::Semantics::SimpleClassifiers::BooleanValue> boolValue = fUML::Semantics::SimpleClassifiers::SimpleClassifiersFactory::eInstance()->createBooleanValue();
-						std::shared_ptr<ecore::EClassifier> type = ::types::typesPackage::eInstance()->getBoolean_Class();
-						infExpr->setEType(type);
-						boolValue->setValue(result);
-						infEval->setResultValue(boolValue);
-						return true;
-					}
-					else {
-						ctx->getErrorListener()->syntaxError("The right value of a binary operation with a left collection value must also be a collection");
-						return false;
-					}
-				}
-				else
-				{
-					std::shared_ptr<AnyValue> leftAny = std::dynamic_pointer_cast<AnyValue>(leftvalue);
-					if(nullptr!=leftAny)
-					{
-						std::shared_ptr<AnyValue> rightAny = std::dynamic_pointer_cast<AnyValue>(rightvalue);
-						if(nullptr!=rightAny )
-						{
-							bool result = false;
-							if(binCS->ASSIGN() != nullptr) { // leftCol == rightCol
-								result = leftAny->equals(rightAny);
-							}
-							else if(binCS->INEQUAL() != nullptr) { // leftCol <> rightCol
-								result = !leftAny->equals(rightAny);
-							}
-							else {
-								ctx->getErrorListener()->syntaxError("The possible binary operations between two AnyTypes are : =, <>");
-								return false;
-							}
-							std::shared_ptr<fUML::Semantics::SimpleClassifiers::BooleanValue> boolValue = fUML::Semantics::SimpleClassifiers::SimpleClassifiersFactory::eInstance()->createBooleanValue();
-							std::shared_ptr<ecore::EClassifier> type = ::types::typesPackage::eInstance()->getBoolean_Class();
-							infExpr->setEType(type);
-							boolValue->setValue(result);
-							infEval->setResultValue(boolValue);
-							return true;
-						}
-						else
-						{
-							ctx->getErrorListener()->syntaxError("The right value of a binary operation with a left value AnyType must also be an AnyType");
-							return false;
-						}
-					}
-					else
-					{
-						if(nullptr != std::dynamic_pointer_cast<fUML::Semantics::SimpleClassifiers::IntegerValue>(leftvalue) || std::dynamic_pointer_cast<fUML::Semantics::SimpleClassifiers::UnlimitedNaturalValue>(leftvalue) != nullptr)
-						{
-							int leftInt = retrieveInt(leftvalue);
-							if(nullptr != std::dynamic_pointer_cast<fUML::Semantics::SimpleClassifiers::IntegerValue>(rightvalue) || std::dynamic_pointer_cast<fUML::Semantics::SimpleClassifiers::UnlimitedNaturalValue>(rightvalue) != nullptr)
-							{
-								int rightInt = retrieveInt(rightvalue);
-								std::shared_ptr<fUML::Semantics::SimpleClassifiers::BooleanValue> boolValue = doOperation(binCS, leftInt, rightInt);
-								std::shared_ptr<ecore::EClassifier> type = ::types::typesPackage::eInstance()->getBoolean_Class();
-								infExpr->setEType(type);
-								infEval->setResultValue(boolValue);
-								return true;
-							}
-							else if(nullptr != std::dynamic_pointer_cast<fUML::Semantics::SimpleClassifiers::RealValue>(rightvalue))
-							{
-								std::shared_ptr<fUML::Semantics::SimpleClassifiers::RealValue> rightReal = std::dynamic_pointer_cast<fUML::Semantics::SimpleClassifiers::RealValue>(rightvalue);
-								std::shared_ptr<fUML::Semantics::SimpleClassifiers::BooleanValue> boolValue = doOperation(binCS, leftInt, rightReal->getValue());
-								std::shared_ptr<ecore::EClassifier> type = ::types::typesPackage::eInstance()->getBoolean_Class();
-								infExpr->setEType(type);
-								infEval->setResultValue(boolValue);
-								return true;
-							}
-							else {
-								ctx->getErrorListener()->syntaxError("The right value of a binary operation with a left integer value must be an integer, an unlimiteNatural, or a real");
-							}
-						}
-						else if(nullptr != std::dynamic_pointer_cast<fUML::Semantics::SimpleClassifiers::RealValue>(leftvalue))
-						{
-							std::shared_ptr<fUML::Semantics::SimpleClassifiers::RealValue> leftReal = std::dynamic_pointer_cast<fUML::Semantics::SimpleClassifiers::RealValue>(leftvalue);
-							if(nullptr != std::dynamic_pointer_cast<fUML::Semantics::SimpleClassifiers::IntegerValue>(rightvalue) || std::dynamic_pointer_cast<fUML::Semantics::SimpleClassifiers::UnlimitedNaturalValue>(rightvalue) != nullptr)
-							{
-								int rightInt = retrieveInt(rightvalue);
-								std::shared_ptr<fUML::Semantics::SimpleClassifiers::BooleanValue> boolValue = doOperation(binCS, leftReal->getValue(), rightInt);
-								std::shared_ptr<ecore::EClassifier> type = ::types::typesPackage::eInstance()->getBoolean_Class();
-								infExpr->setEType(type);
-								infEval->setResultValue(boolValue);
-								return true;
-							}
-							else if(nullptr != std::dynamic_pointer_cast<fUML::Semantics::SimpleClassifiers::RealValue>(rightvalue)) {
-								std::shared_ptr<fUML::Semantics::SimpleClassifiers::RealValue> rightReal = std::dynamic_pointer_cast<fUML::Semantics::SimpleClassifiers::RealValue>(rightvalue);
-								std::shared_ptr<fUML::Semantics::SimpleClassifiers::BooleanValue> boolValue = doOperation(binCS, leftReal->getValue(), rightReal->getValue());
-								std::shared_ptr<ecore::EClassifier> type = ::types::typesPackage::eInstance()->getBoolean_Class();
-								infExpr->setEType(type);
-								infEval->setResultValue(boolValue);
-								return true;
-							}
-							else
-							{
-								ctx->getErrorListener()->syntaxError("The right value of a binary operation with a left real value must be an integer, an unlimiteNatural, or a real");
-							}
-						}
-					}
-				}
-			}
+        } else {
+            //it is an oclExp
+            //create CollectionLiteralItem and add to collectionLiteralParts
+            std::shared_ptr<CollectionItem> colItem = ocl::Expressions::ExpressionsFactory::eInstance()->createCollectionItem();
+
+            //set oclExp as item of CollectionItem
+            colItem->setItem(oclExp);
+            //set Collection item as part of collectionLiteralParts
+
+            // Debug
+            // std::cout << "add colItem" << std::endl;
+            
+            colLitParts->getLiteralParts()->add(colItem);
+
         }
     }
-    ctx->getErrorListener()->syntaxError("Unknown Type for Infixed operation (=, <>, )");
-    return false;
-}
 
-antlrcpp::Any OclParserCustomVisitor::visitTupleTypeCS(OclParser::TupleTypeCSContext *ctx)
-{
-    std::shared_ptr<TupleType> tupleType = ocl::Types::TypesFactory::eInstance()->createTupleType();
-    std::shared_ptr<TypeExp> typeAS = std::dynamic_pointer_cast<TypeExp>(ctx->getAST());
-    std::shared_ptr<OclExpEval> typeEval = ocl::Evaluations::EvaluationsFactory::eInstance()->createOclExpEval();
-    std::shared_ptr<ObjectValue> objValue = ocl::Values::ValuesFactory::eInstance()->createObjectValue();
-    objValue->setValue(tupleType);
-    typeEval->setResultValue(objValue);
-    typeAS->setInstance(typeEval);
-    typeAS->setReferredType(tupleType);
-    typeAS->setEType(tupleType);
+    // ### handleCollectionRange ###
+    // append first and last oclExp
+    void OclParserCustomVisitor::handleCollectionRange(std::any aggregate, std::any nextResult) {
 
-    if(ctx->variableDeclarationListCS() != nullptr) {
-        OclParser::VariableDeclarationListCSContext *listDeclCS = ctx->variableDeclarationListCS();
-        listDeclCS->setEnv(ctx->getEnv());
-        listDeclCS->setErrorListener(ctx->getErrorListener());
+        //get aggreggate Expression
+        std::shared_ptr<ocl::Expressions::CollectionRange> colRa = std::any_cast<std::shared_ptr<ocl::Expressions::CollectionRange>>(aggregate);
 
-        if(visitVariableDeclarationListCS(listDeclCS)) {
-            std::shared_ptr<CollectionLiteralExp> collExp = std::dynamic_pointer_cast<CollectionLiteralExp>(listDeclCS->getAST());
-            for(size_t i = 0; i < collExp->getPart()->size(); i++) {
-                std::shared_ptr<CollectionItem> collItem = std::dynamic_pointer_cast<CollectionItem>(collExp->getPart()->at(i));
-                std::shared_ptr<VariableExp> varExp = std::dynamic_pointer_cast<VariableExp>(collItem->getItem());
-                std::shared_ptr<NameTypeBinding> nameType = ocl::Types::TypesFactory::eInstance()->createNameTypeBinding();
-                nameType->setName(varExp->getName());
-                nameType->setType(varExp->getEType());
-                tupleType->getParts()->add(nameType);
-            }
-            return true;
+        //get nextResult
+        std::shared_ptr<ocl::Expressions::OclExpression> oclExp = Utilities::oclCV::exp2oclExp(nextResult);
+
+        if (oclExp == nullptr) {
+            //an error occured
+            //TODO add error management
+            //throw std::invalid_argument("In aggregateResult() -> collectionRange case: std::any value couldn't be converted to oclExpression.");
         }
-        return false;
-    }
-    return true;
-}
-antlrcpp::Any OclParserCustomVisitor::visitVariableDeclarationListCS(OclParser::VariableDeclarationListCSContext *ctx)
-{
-    OclParser::VariableDeclarationCSContext *varDeclCS = ctx->variableDeclarationCS();
-    varDeclCS->setEnv(ctx->getEnv());
-    varDeclCS->setErrorListener(ctx->getErrorListener());
+        //set first
+        else if (colRa->getFirst() == nullptr) {
+            colRa->setFirst(oclExp); 
 
-    if(visitVariableDeclarationCS(varDeclCS)) {
-        std::shared_ptr<VariableExp> varExp = std::dynamic_pointer_cast<VariableExp>(varDeclCS->getAST());
-        std::shared_ptr<CollectionLiteralExp> collExp = ocl::Expressions::ExpressionsFactory::eInstance()->createCollectionLiteralExp();
-        std::shared_ptr<CollectionItem> collItem = ocl::Expressions::ExpressionsFactory::eInstance()->createCollectionItem();
-        collItem->setItem(varExp);
-        collExp->getPart()->add(collItem);
+            // Debug
+            // std::cout << "handleCollectionRange(): set first" << std::endl;
 
-        if(ctx->variableDeclarationListCS() != nullptr) {
-            OclParser::VariableDeclarationListCSContext *listDeclCS = ctx->variableDeclarationListCS();
-            listDeclCS->setEnv(ctx->getEnv());
-            listDeclCS->setErrorListener(ctx->getErrorListener());
-
-            if(visitVariableDeclarationListCS(listDeclCS)) {
-                std::shared_ptr<CollectionLiteralExp> innerColl = std::dynamic_pointer_cast<CollectionLiteralExp>(listDeclCS->getAST());
-                for(size_t i = 0; i < innerColl->getPart()->size(); i++) {
-                    collExp->getPart()->add(innerColl->getPart()->at(i));
-                }
-            }
         }
-
-        ctx->setAST(collExp);
-        return true;
-    }
-    return false;
-}
-
-antlrcpp::Any OclParserCustomVisitor::visitCollectionTypeCS(OclParser::CollectionTypeCSContext *ctx)
-{
-    OclParser::CollectionTypeIdentifierCSContext* collID = ctx->collectionTypeIdentifierCS();
-    OclParser::TypeCSContext* typeCS = ctx->typeCS();
-
-    typeCS->setEnv(ctx->getEnv());
-    typeCS->setErrorListener(ctx->getErrorListener());
-
-    if(visitTypeCS(typeCS)) {
-        std::shared_ptr<TypeExp> typeAS = std::dynamic_pointer_cast<TypeExp>(ctx->getAST());
-        std::shared_ptr<TypeExp> innerType = std::dynamic_pointer_cast<TypeExp>(typeCS->getAST());
-        std::shared_ptr<CollectionType> collType = nullptr;
-
-        if(collID->BAG() != nullptr) {
-            collType = ocl::Types::TypesFactory::eInstance()->createBagType();
-        }
-        else if(collID->SET() != nullptr) {
-            collType = ocl::Types::TypesFactory::eInstance()->createSetType();
-        }
-        else if(collID->ORDEREDSET() != nullptr) {
-            collType = ocl::Types::TypesFactory::eInstance()->createOrderedSetType();
-        }
-        else if(collID->SEQUENCE() != nullptr) {
-            collType = ocl::Types::TypesFactory::eInstance()->createSequenceType();
-        }
+        //else (because of depth first search) last have to be set
         else {
-            collType = ocl::Types::TypesFactory::eInstance()->createCollectionType();
-        }
-        collType->setElementType(innerType->getReferredType());
-        std::shared_ptr<OclExpEval> typeEval = ocl::Evaluations::EvaluationsFactory::eInstance()->createOclExpEval();
-        std::shared_ptr<ObjectValue> objValue = ocl::Values::ValuesFactory::eInstance()->createObjectValue();
-        objValue->setValue(collType);
-        typeEval->setResultValue(objValue);
-        typeAS->setInstance(typeEval);
-        typeAS->setReferredType(collType);
-        typeAS->setEType(collType);
-        return true;
-    }
-    return false;
-}
+            colRa->setLast(oclExp);
 
-antlrcpp::Any OclParserCustomVisitor::visitEnumLiteralExpCS(OclParser::EnumLiteralExpCSContext *ctx)
-{
-    OclParser::PathNameCSContext* pathCS = ctx->pathNameCS();
-    std::string simpleName = ctx->simpleNameCS()->ID()->getSymbol()->getText();
+            // Debug
+            // std::cout << "handleCollectionRange(): set last" << std::endl;
 
-    pathCS->setEnv(ctx->getEnv());
-    pathCS->setErrorListener(ctx->getErrorListener());
-    vector<std::string> seq = visitPathNameCS(pathCS).as<vector<std::string>>();
-    std::shared_ptr<Variable> var = ctx->getEnv()->lookupPathName(seq);
-    std::shared_ptr<uml::EnumerationLiteral> literal = nullptr;
-
-    if(var != nullptr) {
-        std::shared_ptr<ecore::EEnum> type = std::dynamic_pointer_cast<ecore::EEnum>(var->getEType());
-        if(type != nullptr) {
-            std::shared_ptr<ObjectValue> objValue = std::dynamic_pointer_cast<ObjectValue>(var->getValue());
-            std::shared_ptr<ecore::EEnum> en = std::dynamic_pointer_cast<ecore::EEnum>(objValue->getValue());
-            std::shared_ptr<Bag<ecore::EEnumLiteral>> literals = en->getELiterals();
-            for (size_t i = 0; i < literals->size(); i++) {
-                if(literals->at(i)->getName() == simpleName) {
-                    std::shared_ptr<uml::EnumerationLiteral> new_literal = uml::umlFactory::eInstance()->createEnumerationLiteral();
-                    new_literal->setName(literals->at(i)->getName());
-                    literal = new_literal;
-                    break;
-                }
-            }
-        }
-        else if (var->getEType()->getClassifierID() == uml::umlPackage::ENUMERATION_CLASS) {
-            std::shared_ptr<ObjectValue> objValue = std::dynamic_pointer_cast<ObjectValue>(var->getValue());
-            std::shared_ptr<uml::Enumeration> en = std::dynamic_pointer_cast<uml::Enumeration>(objValue->getValue());
-            std::shared_ptr<Bag<uml::EnumerationLiteral>> literals = en->getOwnedLiteral();
-
-            for (size_t i = 0; i < literals->size(); i++) {
-                if(literals->at(i)->getName() == simpleName) {
-                    literal = literals->at(i);
-                    break;
-                }
-            }
         }
     }
 
-    if(literal != nullptr) {
-        std::shared_ptr<EnumLiteralExp> enumExp = ocl::Expressions::ExpressionsFactory::eInstance()->createEnumLiteralExp();
-        std::shared_ptr<EnumLiteralExpEval> enumEval = ocl::Evaluations::EvaluationsFactory::eInstance()->createEnumLiteralExpEval();
-        std::shared_ptr<fUML::Semantics::SimpleClassifiers::EnumerationValue> value = fUML::Semantics::SimpleClassifiers::SimpleClassifiersFactory::eInstance()->createEnumerationValue();
+    // ### handleTupleLiteralExpression ###
+    // TupleLiteralExpression -> append TupleLiteralParts
+    void OclParserCustomVisitor::handleTupleLiteralExpression(std::any aggregate, std::any nextResult) {
 
-        value->setLiteral(literal);
-        enumEval->setResultValue(value);
-        enumEval->setModel(enumExp);
-        enumExp->setReferredEnumLiteral(literal);
-        enumExp->setInstance(enumEval);
-        enumExp->setEType(var->getEType());
-        ctx->setAST(enumExp);
-        return true;
-    }
+        //get aggreggate Expression
+        std::shared_ptr<ocl::Expressions::TupleLiteralExp> tupExp = std::any_cast<std::shared_ptr<ocl::Expressions::TupleLiteralExp>>(aggregate);
 
-    ctx->getErrorListener()->syntaxError("Unknown enum literal ("+ simpleName +")");
-    return false;
-}
+        //check if nextResult is from VarDeclarationExp type, only then it can be correctly appended
+        if (nextResult.type() == typeid(std::shared_ptr<ocl::Expressions::VarDeclarationExp>)) {
 
-antlrcpp::Any OclParserCustomVisitor::visitCollectionLiteralExpCS(OclParser::CollectionLiteralExpCSContext *ctx)
-{
-    OclParser::CollectionTypeIdentifierCSContext* collTypeCS = ctx->collectionTypeIdentifierCS();
-    OclParser::CollectionLiteralPartsCSContext* collPartsCS = ctx->collectionLiteralPartsCS();
-    std::shared_ptr<CollectionLiteralExp> collExp = ocl::Expressions::ExpressionsFactory::eInstance()->createCollectionLiteralExp();
+            //cast as varDecExp and append to TupleLiteralExp
+            std::shared_ptr<ocl::Expressions::VarDeclarationExp> varDecExp = std::any_cast<std::shared_ptr<ocl::Expressions::VarDeclarationExp>>(nextResult);
 
-    ctx->setAST(collExp);
+            // Debug
+            // std::cout << "Added an varDecExp" << std::endl;
+            
+            tupExp->getPart()->add(varDecExp);
 
-    if(collPartsCS != nullptr) {
-        collPartsCS->setAST(collExp);
-        collPartsCS->setEnv(ctx->getEnv());
-        collPartsCS->setErrorListener(ctx->getErrorListener());
-        if(!visitCollectionLiteralPartsCS(collPartsCS)) {
-            return false;
+        } else {
+
+            //TODO
+            //error: only varDecExp are valid at this point
+
         }
     }
-    std::shared_ptr<CollectionLiteralExpEval> collEval = ocl::Evaluations::EvaluationsFactory::eInstance()->createCollectionLiteralExpEval();
-    std::shared_ptr<CollectionType> type = nullptr;
-    std::shared_ptr<CollectionValue> value = nullptr;
-    if(collTypeCS->SET() != nullptr) {
-        std::shared_ptr<SetTypeValue> setValue = ocl::Values::ValuesFactory::eInstance()->createSetTypeValue();
-        std::shared_ptr<SetType> setType = ocl::Types::TypesFactory::eInstance()->createSetType();
-//        setValue->setModel(setType);
-        collExp->setKind(CollectionKind::SET);
-        value = setValue;
-        type = setType;
-    }
-    else if(collTypeCS->ORDEREDSET() != nullptr) {
-        std::shared_ptr<OrderedSetTypeValue> ordSetValue = ocl::Values::ValuesFactory::eInstance()->createOrderedSetTypeValue();
-        std::shared_ptr<OrderedSetType> ordSetType = ocl::Types::TypesFactory::eInstance()->createOrderedSetType();
-//        ordSetValue->setModel(ordSetType);
-        collExp->setKind(CollectionKind::ORDEREDSET);
-        value = ordSetValue;
-        type = ordSetType;
-    }
-    else if(collTypeCS->SEQUENCE() != nullptr) {
-        std::shared_ptr<SequenceTypeValue> seqValue = ocl::Values::ValuesFactory::eInstance()->createSequenceTypeValue();
-        std::shared_ptr<SequenceType> seqType = ocl::Types::TypesFactory::eInstance()->createSequenceType();
-//        seqValue->setModel(seqType);
-        collExp->setKind(CollectionKind::SEQUENCE);
-        value = seqValue;
-        type = seqType;
-    }
-    else {
-        std::shared_ptr<BagTypeValue> bagValue = ocl::Values::ValuesFactory::eInstance()->createBagTypeValue();
-        std::shared_ptr<BagType> bagType = ocl::Types::TypesFactory::eInstance()->createBagType();
-//        bagValue->setModel(bagType);
-        collExp->setKind(CollectionKind::BAG);
-        value = bagValue;
-        type = bagType;
+
+    // ### handleAssociationClassExp ###
+    // append qualifier and set parentNav for qualifier
+    void OclParserCustomVisitor::handleAssociationClassExp(std::any aggregate, std::any nextResult) {
+
+        //get aggreggate Expression
+        std::shared_ptr<ocl::Expressions::AssociationClassCallExp> assExp = std::any_cast<std::shared_ptr<ocl::Expressions::AssociationClassCallExp>>(aggregate);
+
+        //get nextResult
+        std::shared_ptr<ocl::Expressions::OclExpression> oclExp = Utilities::oclCV::exp2oclExp(nextResult);
+
+        if (oclExp == nullptr) {
+            //TODO add error
+            //the qualifier to append is not a oclExp
+        } else {
+            //add qualifierExp and set parentNav
+            assExp->getQualifier()->add(oclExp);
+            oclExp->setParentNav(assExp);
+
+            // Debug
+            // std::cout << "handleAssociationClass: append qualifier" << std::endl;
+        }
+
     }
 
-    collEval->setResultValue(value);
-    collExp->setEType(type);
-    collExp->setInstance(collEval);
+    // ### handlePropertyCallExp ###
+    //void OclParserCustomVisitor::handlePropertyCallExp(std::any aggregate, std::any nextResult) {}
 
-    std::shared_ptr<ecore::EClassifier> itemType = type->getElementType();
+    // ### handleOperationCallExp ###
+    // append arguments and set parentCall in each argument (oclExpression)
+    void OclParserCustomVisitor::handleOperationCallExp(std::any aggregate, std::any nextResult) {
 
-    for(size_t i = 0; i < collExp->getPart()->size(); i++) {
-        std::shared_ptr<CollectionLiteralPart> part = collExp->getPart()->at(i);
+        //get aggreggate Expression
+        std::shared_ptr<ocl::Expressions::OperationCallExp> opExp = std::any_cast<std::shared_ptr<ocl::Expressions::OperationCallExp>>(aggregate);
 
-        if(std::dynamic_pointer_cast<CollectionItem>(part) != nullptr) {
-            std::shared_ptr<CollectionItem> item = std::dynamic_pointer_cast<CollectionItem>(part);
-            value->addValue(item->getItem()->getInstance()->getResultValue());
+        //get nextResult
+        std::shared_ptr<ocl::Expressions::OclExpression> oclExp = Utilities::oclCV::exp2oclExp(nextResult);
 
-            if(itemType != nullptr) {
-                if(!itemType->eClass()->isSuperTypeOf(item->getItem()->getEType()->eClass()) &&
-                        itemType->getClassifierID() == item->getItem()->getEType()->getClassifierID()) {
-                    ctx->getErrorListener()->syntaxError("The elements types and collection type must be compatible");
-                    return false;
-                }
-            }
+        if (oclExp == nullptr) {
+
+            //TODO error
+            //no cast was successfull
+            //the given argument is not an oclExpression
+
+        } else {
+
+            //append argument and set parentCall in argument
+            opExp->getArgument()->add(oclExp);
+            oclExp->setParentCall(opExp);
+
+            // Debug
+            // std::cout << "handleOperationCall: append argument" << std::endl;
+
+        }
+
+    }
+
+    // ### handleIteratorExp###
+    // append varDecExp (as iterator in Collection Operation)
+    // or append bodyOclExp
+    // or append oclExp (as iterator in impl Collection Operation)
+    void OclParserCustomVisitor::handleIteratorExp(std::any aggregate, std::any nextResult) {
+
+        //get aggreggate Expression
+        std::shared_ptr<ocl::Expressions::IteratorExp> itoExp = std::any_cast<std::shared_ptr<ocl::Expressions::IteratorExp>>(aggregate);
+
+        // Debug 
+        // std::cout << "handleIteratorExp: Enter function" << std::endl;
+        // std::cout << itoExp->isIsCollectionOperation() << std::endl;
+
+        // if it is an CollectionOperation
+        // set the VarDecExp (max. 2) or the body oclExp
+        if (itoExp->isIsCollectionOperation()) {
+
+            // only varDecExp are allowed
+            if (nextResult.type() == typeid(std::shared_ptr<ocl::Expressions::VarDeclarationExp>)) {
+
+                // create Exp and append to Iterator
+                std::shared_ptr<ocl::Expressions::VarDeclarationExp> varDecExp = std::any_cast<std::shared_ptr<ocl::Expressions::VarDeclarationExp>>(nextResult);
+
+                itoExp->getIterator()->add(varDecExp);
+
+                // Debug 
+                // std::cout << "handleIteratorExp: set a VarDecExp for a Collection Operation" << std::endl;
+
+            }  
             else {
-                itemType = item->getItem()->getEType();
+
+                //set the loop body owner
+                //get nextResult
+                std::shared_ptr<ocl::Expressions::OclExpression> oclExp = Utilities::oclCV::exp2oclExp(nextResult);
+
+                if (oclExp == nullptr) {
+                    //TODO error
+                    // only oclExp are allowed
+                    // missing oclBodyExp
+
+                    // Debug 
+                    // std::cout << "handleIteratorExp: Error missing oclBodyExp" << std::endl;
+
+                } else {
+                    itoExp->setBody(oclExp);
+                    oclExp->setLoopBodyOwner(itoExp);
+
+                    // Debug 
+                    // std::cout << "handleIteratorExp: set a oclExp for a Collection Operation as loop body" << std::endl;
+
+                }  
+            }
+
+        } else {
+
+            // Debug 
+            // std::cout << "handleIteratorExp: Enter no CollectionOperation Part" << std::endl;
+
+            //else append as oclExp (implicit Collection Iterator)
+            // add as Iterator Var
+            // set the LoopExp in the oclExp
+            //get nextResult
+            std::shared_ptr<ocl::Expressions::OclExpression> oclExp = Utilities::oclCV::exp2oclExp(nextResult);
+
+            if (oclExp == nullptr) {
+
+                //TODO add error
+                // only oclExp are allowed at this point
+
+                // Debug 
+                // std::cout << "handleIteratorExp: Error no oclExp" << std::endl;
+
+            } else {
+
+                itoExp->getIterator()->add(oclExp);
+                oclExp->setLoopExp(itoExp);
+
+                // Debug 
+                // std::cout << "handleIteratorExp: set a oclExp as loop iterator for implicit Collect Iterator" << std::endl;
+
             }
         }
-        else { // collectionRange
-            std::shared_ptr<CollectionRange> range = std::dynamic_pointer_cast<CollectionRange>(part);
-            std::shared_ptr<fUML::Semantics::SimpleClassifiers::IntegerValue> firstVal =
-                    std::dynamic_pointer_cast<fUML::Semantics::SimpleClassifiers::IntegerValue>(range->getFirst()->getInstance()->getResultValue());
-            std::shared_ptr<fUML::Semantics::SimpleClassifiers::IntegerValue> lastVal =
-                    std::dynamic_pointer_cast<fUML::Semantics::SimpleClassifiers::IntegerValue>(range->getLast()->getInstance()->getResultValue());
-            /*std::shared_ptr<IntegerLiteralExp> firstExp = std::dynamic_pointer_cast<IntegerLiteralExp>(range->getFirst());
-            std::shared_ptr<IntegerLiteralExp> lastExp = std::dynamic_pointer_cast<IntegerLiteralExp>(range->getLast());
-
-            for (int i = firstExp->getIntegerSymbol(); i <= lastExp->getIntegerSymbol(); i++) {
-                std::shared_ptr<fUML::Semantics::SimpleClassifiers::IntegerValue> intValue = fUML::Semantics::SimpleClassifiers::SimpleClassifiersFactory::eInstance()->createIntegerValue();
-                intValue->setValue(i);
-                value->addValue(intValue);
-            }*/
-
-            for (int i = firstVal->getValue(); i <= lastVal->getValue(); i++) {
-                std::shared_ptr<fUML::Semantics::SimpleClassifiers::IntegerValue> intValue = fUML::Semantics::SimpleClassifiers::SimpleClassifiersFactory::eInstance()->createIntegerValue();
-                intValue->setValue(i);
-                value->addValue(intValue);
-            }
-        }
     }
 
-    if(type->getElementType() == nullptr) {
-        type->setElementType(itemType);
-    }
-    return true;
-}
+    // ### handleIterateExp ###
+    // add the iterators variables
+    // and the bodyOclExp
+    void OclParserCustomVisitor::handleIterateExp(std::any aggregate, std::any nextResult) {
 
-antlrcpp::Any OclParserCustomVisitor::visitTupleLiteralExpCS(OclParser::TupleLiteralExpCSContext *ctx)
-{
-    OclParser::VariableDeclarationListCSContext* varDeclListCS = ctx->variableDeclarationListCS();
+        //get aggreggate Expression
+        std::shared_ptr<ocl::Expressions::IterateExp> iterExp = std::any_cast<std::shared_ptr<ocl::Expressions::IterateExp>>(aggregate);
 
-    varDeclListCS->setEnv(ctx->getEnv());
-    varDeclListCS->setErrorListener(ctx->getErrorListener());
+        if (nextResult.type() == typeid(std::shared_ptr<ocl::Expressions::VarDeclarationExp>)) {
 
-    if(visitVariableDeclarationListCS(varDeclListCS)) {
-        std::shared_ptr<TupleLiteralExp> tupleExp = ocl::Expressions::ExpressionsFactory::eInstance()->createTupleLiteralExp();
-        std::shared_ptr<TupleLiteralExpEval> tupleEval = ocl::Evaluations::EvaluationsFactory::eInstance()->createTupleLiteralExpEval();
-        std::shared_ptr<TupleType> tupleType = ocl::Types::TypesFactory::eInstance()->createTupleType();
-        std::shared_ptr<TupleValue> tupleValue = ocl::Values::ValuesFactory::eInstance()->createTupleValue();
-        std::shared_ptr<CollectionLiteralExp> collExp = std::dynamic_pointer_cast<CollectionLiteralExp>(varDeclListCS->getAST());
+                // create Exp and append to Iterator
+                std::shared_ptr<ocl::Expressions::VarDeclarationExp> varDecExp = std::any_cast<std::shared_ptr<ocl::Expressions::VarDeclarationExp>>(nextResult);
 
-        tupleEval->setResultValue(tupleValue);
-        tupleExp->setInstance(tupleEval);
-        tupleExp->setEType(tupleType);
-        tupleValue->setModel(tupleType);
-        tupleType->setInstance(tupleValue);
-        ctx->setAST(tupleExp);
+                iterExp->getIterator()->add(varDecExp);
 
-        for(size_t i = 0; i < collExp->getPart()->size(); i++) {
-            std::shared_ptr<CollectionItem> collItem = std::dynamic_pointer_cast<CollectionItem>(collExp->getPart()->at(i));
-            std::shared_ptr<VariableExp> varExp = std::dynamic_pointer_cast<VariableExp>(collItem->getItem());
-            std::shared_ptr<TupleLiteralPart> part = ocl::Expressions::ExpressionsFactory::eInstance()->createTupleLiteralPart();
-            std::shared_ptr<NameTypeBinding> nameType = ocl::Types::TypesFactory::eInstance()->createNameTypeBinding();
-            std::shared_ptr<NameValueBinding> nameValue = ocl::Values::ValuesFactory::eInstance()->createNameValueBinding();
-            std::shared_ptr<ecore::EAttribute> attr = ecore::ecoreFactory::eInstance()->createEAttribute();
+                // Debug 
+                // std::cout << "handleIterateExp: set a VarDecExp for a Collection Operation" << std::endl;
 
-            attr->setName(varExp->getName());
-            nameType->setName(varExp->getName());
-            nameValue->setName(varExp->getName());
-            attr->setEType(varExp->getEType());
-            nameType->setType(varExp->getEType());
-            nameValue->setValue(varExp->getInstance()->getResultValue());
-
-            part->setAttribute(attr);
-
-            tupleType->getParts()->add(nameType);
-            tupleValue->getElements()->add(nameValue);
-            tupleExp->getPart()->add(part);
-        }
-        return true;
-    }
-    return false;
-}
-
-antlrcpp::Any OclParserCustomVisitor::visitPrimitiveLiteralExpCS(OclParser::PrimitiveLiteralExpCSContext *ctx)
-{
-    OclParser::IntegerLiteralExpCSContext* intCS = ctx->integerLiteralExpCS();
-    OclParser::RealLiteralExpCSContext* realCS = ctx->realLiteralExpCS();
-    OclParser::StringLiteralExpCSContext* stringCS = ctx->stringLiteralExpCS();
-    OclParser::BooleanLiteralExpCSContext* boolCS = ctx->booleanLiteralExpCS();
-    OclParser::NullLiteralExpCSContext* nullCS = ctx->nullLiteralExpCS();
-    OclParser::UnlimitedNaturalLiteralExpCSContext* unlimitedCS = ctx->unlimitedNaturalLiteralExpCS();
-    //TODO different ValueTypes EInt or UML Int are necessary (depends on context)
-    if(intCS != nullptr) {
-        std::shared_ptr<IntegerLiteralExp> intExp = ocl::Expressions::ExpressionsFactory::eInstance()->createIntegerLiteralExp();
-        std::shared_ptr<fUML::Semantics::SimpleClassifiers::IntegerValue> intValue = fUML::Semantics::SimpleClassifiers::SimpleClassifiersFactory::eInstance()->createIntegerValue();
-        std::shared_ptr<ecore::EClassifier> type = ::types::typesPackage::eInstance()->getInteger_Class();
-        std::shared_ptr<IntegerLiteralExpEval> intEval = ocl::Evaluations::EvaluationsFactory::eInstance()->createIntegerLiteralExpEval();
-        int symbol = std::atoi(intCS->INT()->getSymbol()->getText().c_str());
-
-        intValue->setValue(symbol);
-        intEval->setResultValue(intValue);
-        intExp->setIntegerSymbol(symbol);
-        intExp->setEType(type);
-        intExp->setInstance(intEval);
-        ctx->setAST(intExp);
-    }
-    else if(unlimitedCS != nullptr) {
-        std::shared_ptr<UnlimitedNaturalExp> unlExp = ocl::Expressions::ExpressionsFactory::eInstance()->createUnlimitedNaturalExp();
-        std::shared_ptr<fUML::Semantics::SimpleClassifiers::UnlimitedNaturalValue> unlValue = fUML::Semantics::SimpleClassifiers::SimpleClassifiersFactory::eInstance()->createUnlimitedNaturalValue();
-        std::shared_ptr<ecore::EClassifier> type = ::types::typesPackage::eInstance()->getUnlimitedNatural_Class();
-        std::shared_ptr<UnlimitedNaturalLiteralExpEval> unEval = ocl::Evaluations::EvaluationsFactory::eInstance()->createUnlimitedNaturalLiteralExpEval();
-        int symbol = std::atoi(unlimitedCS->INT()->getSymbol()->getText().c_str());
-
-        unlValue->setValue(symbol);
-        unEval->setResultValue(unlValue);
-        unlExp->setUnlimitedNaturalSymbol(symbol);
-        unlExp->setEType(type);
-        unlExp->setInstance(unEval);
-        ctx->setAST(unlExp);
-    }
-    else if(realCS != nullptr) {
-        std::shared_ptr<RealLiteralExp> realExp = ocl::Expressions::ExpressionsFactory::eInstance()->createRealLiteralExp();
-        std::shared_ptr<fUML::Semantics::SimpleClassifiers::RealValue> realValue = fUML::Semantics::SimpleClassifiers::SimpleClassifiersFactory::eInstance()->createRealValue();
-        std::shared_ptr<ecore::EClassifier> type = ::types::typesPackage::eInstance()->getReal_Class();
-        std::shared_ptr<RealLiteralExpEval> realEval = ocl::Evaluations::EvaluationsFactory::eInstance()->createRealLiteralExpEval();
-        double symbol = std::atof(realCS->REAL()->getSymbol()->getText().c_str());
-
-        realValue->setValue(symbol);
-        realEval->setResultValue(realValue);
-        realExp->setRealSymbol(symbol);
-        realExp->setEType(type);
-        realExp->setInstance(realEval);
-        ctx->setAST(realExp);
-    }
-    else if(stringCS != nullptr) {
-        std::shared_ptr<StringLiteralExp> stringExp = ocl::Expressions::ExpressionsFactory::eInstance()->createStringLiteralExp();
-        std::shared_ptr<fUML::Semantics::SimpleClassifiers::StringValue> stringValue = fUML::Semantics::SimpleClassifiers::SimpleClassifiersFactory::eInstance()->createStringValue();
-        std::shared_ptr<ecore::EClassifier> type = ::types::typesPackage::eInstance()->getString_Class();
-        std::shared_ptr<StringLiteralExpEval> stringEval = ocl::Evaluations::EvaluationsFactory::eInstance()->createStringLiteralExpEval();
-        string symbol = stringCS->STRING_LITERAL()->getSymbol()->getText();
-
-        stringValue->setValue(symbol);
-        stringEval->setResultValue(stringValue);
-        stringExp->setSymbol(symbol);
-        stringExp->setEType(type);
-        stringExp->setInstance(stringEval);
-        ctx->setAST(stringExp);
-    }
-    else if(boolCS != nullptr) {
-        bool symbol = (boolCS->BOOL()->getSymbol()->getText() == "true") ? true : false;
-        std::shared_ptr<BooleanLiteralExp> boolExp = createBooleanLiteralExp(symbol);
-        ctx->setAST(boolExp);
-    }
-    else if(nullCS != nullptr) {
-        std::shared_ptr<NullLiteralExp> nullExp = ocl::Expressions::ExpressionsFactory::eInstance()->createNullLiteralExp();
-        std::shared_ptr<VoidType> type = ocl::Types::TypesFactory::eInstance()->createVoidType();
-        std::shared_ptr<StringLiteralExpEval> stringEval = ocl::Evaluations::EvaluationsFactory::eInstance()->createStringLiteralExpEval();
-        std::shared_ptr<fUML::Semantics::SimpleClassifiers::StringValue> stringValue = fUML::Semantics::SimpleClassifiers::SimpleClassifiersFactory::eInstance()->createStringValue();
-
-        stringValue->setValue("Null");
-        stringEval->setResultValue(stringValue);
-        nullExp->setInstance(stringEval);
-        nullExp->setEType(type);
-        ctx->setAST(nullExp);
-    }
-    else { // invalid expression
-        std::shared_ptr<InvalidLiteralExp> invExp = ocl::Expressions::ExpressionsFactory::eInstance()->createInvalidLiteralExp();
-        std::shared_ptr<InvalidType> type = ocl::Types::TypesFactory::eInstance()->createInvalidType();
-        std::shared_ptr<StringLiteralExpEval> stringEval = ocl::Evaluations::EvaluationsFactory::eInstance()->createStringLiteralExpEval();
-        std::shared_ptr<fUML::Semantics::SimpleClassifiers::StringValue> stringValue = fUML::Semantics::SimpleClassifiers::SimpleClassifiersFactory::eInstance()->createStringValue();
-
-        stringValue->setValue("Invalid");
-        stringEval->setResultValue(stringValue);
-        invExp->setInstance(stringEval);
-        invExp->setEType(type);
-        ctx->setAST(invExp);
-    }
-    return true;
-}
-
-antlrcpp::Any OclParserCustomVisitor::visitCollectionLiteralPartsCS(OclParser::CollectionLiteralPartsCSContext *ctx)
-{
-    OclParser::CollectionLiteralPartCSContext* collPart = ctx->collectionLiteralPartCS();
-
-    collPart->setAST(ctx->getAST());
-    collPart->setEnv(ctx->getEnv());
-    collPart->setErrorListener(ctx->getErrorListener());
-
-    if(visitCollectionLiteralPartCS(collPart)) {
-        if(ctx->collectionLiteralPartsCS() != nullptr) {
-            OclParser::CollectionLiteralPartsCSContext* collPartsCS = ctx->collectionLiteralPartsCS();
-
-            collPartsCS->setAST(ctx->getAST());
-            collPartsCS->setEnv(ctx->getEnv());
-            collPartsCS->setErrorListener(ctx->getErrorListener());
-
-            return visitCollectionLiteralPartsCS(collPartsCS);
-        }
-        return true;
-    }
-    return false;
-}
-
-antlrcpp::Any OclParserCustomVisitor::visitCollectionLiteralPartCS(OclParser::CollectionLiteralPartCSContext *ctx)
-{
-    OclParser::CollectionRangeCSContext* collRangeCS = ctx->collectionRangeCS();
-    OclParser::OclExpressionCSContext* oclExpCS = ctx->oclExpressionCS();
-    std::shared_ptr<CollectionLiteralExp> collExp = std::dynamic_pointer_cast<CollectionLiteralExp>(ctx->getAST());
-
-    if(collRangeCS != nullptr) {
-        OclParser::OclExpressionCSContext* oclExp1 = collRangeCS->oclExpressionCS(0);
-        OclParser::OclExpressionCSContext* oclExp2 = collRangeCS->oclExpressionCS(1);
-
-        oclExp1->setEnv(ctx->getEnv());
-        oclExp2->setEnv(ctx->getEnv());
-        oclExp1->setErrorListener(ctx->getErrorListener());
-        oclExp2->setErrorListener(ctx->getErrorListener());
-
-        if(visitOclExpressionCS(oclExp1) && visitOclExpressionCS(oclExp2)) {
-            std::shared_ptr<fUML::Semantics::SimpleClassifiers::IntegerValue> firstVal =
-                    std::dynamic_pointer_cast<fUML::Semantics::SimpleClassifiers::IntegerValue>(oclExp1->getAST()->getInstance()->getResultValue());
-            std::shared_ptr<fUML::Semantics::SimpleClassifiers::IntegerValue> lastVal =
-                    std::dynamic_pointer_cast<fUML::Semantics::SimpleClassifiers::IntegerValue>(oclExp2->getAST()->getInstance()->getResultValue());
-            //std::shared_ptr<IntegerLiteralExp> intExp1 = std::dynamic_pointer_cast<IntegerLiteralExp>(oclExp1->getAST());
-            //std::shared_ptr<IntegerLiteralExp> intExp2 = std::dynamic_pointer_cast<IntegerLiteralExp>(oclExp2->getAST());
-
-            if(firstVal != nullptr && lastVal != nullptr) {
-                if(firstVal->getValue() <= lastVal->getValue()) {
-                    std::shared_ptr<CollectionRange> collRange = ocl::Expressions::ExpressionsFactory::eInstance()->createCollectionRange();
-                    collRange->setFirst(oclExp1->getAST());
-                    collRange->setLast(oclExp2->getAST());
-                    collRange->setEType(oclExp1->getAST()->getEType());
-                    collExp->getPart()->add(collRange);
-                    return true;
-                }
-                else {
-                    ctx->getErrorListener()->syntaxError("The first integer of the collection range must be smaller than the last one");
-                }
-            }
+            }  
             else {
-                ctx->getErrorListener()->syntaxError("The first and last elements of the collection range must be integer");
+
+                //set the loop body owner
+                //get nextResult
+                std::shared_ptr<ocl::Expressions::OclExpression> oclExp = Utilities::oclCV::exp2oclExp(nextResult);
+
+                if (oclExp == nullptr) {
+                    //TODO error
+                    // only oclExp are allowed
+                    // missing oclBodyExp
+                } else {
+                    iterExp->setBody(oclExp);
+                    oclExp->setLoopBodyOwner(iterExp);
+
+                    // Debug 
+                    // std::cout << "handleIterateExp: set a oclExp for a Collection Operation as loop body" << std::endl;
+
+                }  
+            }
+    }
+
+    // ### handleIfExp ###
+    // append all parts of the expressions
+    void OclParserCustomVisitor::handleIfExp(std::any aggregate, std::any nextResult) {
+
+        //get aggreggate Expression
+        std::shared_ptr<ocl::Expressions::IfExp> ifExp = std::any_cast<std::shared_ptr<ocl::Expressions::IfExp>>(aggregate);
+
+        //get nextResult
+        std::shared_ptr<ocl::Expressions::OclExpression> oclExp = Utilities::oclCV::exp2oclExp(nextResult);
+
+        if (oclExp == nullptr) {
+
+            //TODO add error
+            //Expression have to be an OclExp
+
+        } else {
+
+            //set the if condtion else expression and else expression
+            //all parts must be set (see OCL spec)
+
+            //because of depth first search
+            //the parts can be set in the correct order by checking what is already set
+            if (ifExp->getCondition() == nullptr) {
+                ifExp->setCondition(oclExp);
+                oclExp->setIfOwner(ifExp);
+
+                // Debug
+                //std::cout << "set If Condition" << std::endl;
+
+            }
+            else if (ifExp->getThenExpression() == nullptr) {
+                ifExp->setThenExpression(oclExp);
+                oclExp->setThenOwner(ifExp);
+
+                // Debug
+                //std::cout << "set Then Expression" << std::endl;
+
+            }
+            else if (ifExp->getElseExpression() == nullptr) {
+                ifExp->setElseExpression(oclExp);
+                oclExp->setElseOwner(ifExp);
+
+                // Debug
+                //std::cout << "set Else Expression" << std::endl;
+            }
+
+        }
+
+
+    }
+
+    //### handle LetExp ###
+    //append all variableDeclarations
+    void OclParserCustomVisitor::handleLetExp(std::any aggregate, std::any nextResult) {
+
+        //get aggreggate Expression
+        std::shared_ptr<ocl::Expressions::LetExp> letExp = std::any_cast<std::shared_ptr<ocl::Expressions::LetExp>>(aggregate);
+
+        std::shared_ptr<ocl::Expressions::VarDeclarationExp> varDecExp;
+
+        //get referredOclExp and set as varDecExp, they are only allowed at this point
+        if (nextResult.type() == typeid(std::shared_ptr<ocl::Expressions::VarDeclarationExp>)) {
+
+            varDecExp = std::any_cast<std::shared_ptr<ocl::Expressions::VarDeclarationExp>>(nextResult);
+
+            // Debug
+            // std::cout << "LetExp: set a VarDecExp" << std::endl;
+
+        } else {
+
+            //check if it is an oclExp and set as "in" 
+            //get nextResult
+            std::shared_ptr<ocl::Expressions::OclExpression> oclExp = Utilities::oclCV::exp2oclExp(nextResult);
+            if (oclExp == nullptr) {
+
+                //TODO add error
+                //either the varDecExp is missing (the variables part of the letExp) or the "in" part of the letExp
+            } else {
+
+                //set the "in" part of the letExp
+                letExp->setIn(oclExp);
+
+                // Debug
+                //std::cout << "LetExp: set in Exp" << std::endl;
+
             }
         }
-    }
-    else if(oclExpCS != nullptr) {
-        oclExpCS->setEnv(ctx->getEnv());
-        oclExpCS->setErrorListener(ctx->getErrorListener());
 
-        if(visitOclExpressionCS(oclExpCS)) {
-            std::shared_ptr<CollectionItem> collItem = ocl::Expressions::ExpressionsFactory::eInstance()->createCollectionItem();
-            collItem->setItem(oclExpCS->getAST());
-            collExp->getPart()->add(collItem);
-            return true;
+        //add to the variabel list and set initExp in VarDecExp
+        letExp->getVariables()->add(varDecExp);
+        varDecExp->setInitExpression(letExp);
+
+    }
+
+    
+    // ### handleTupleTypeExp ###
+    // append "parts"
+    void OclParserCustomVisitor::handleTupleTypeExp(std::any aggregate, std::any nextResult) {
+
+        //get aggreggate Expression
+        std::shared_ptr<ocl::Expressions::TupleTypeExp> tTypeExp = std::any_cast<std::shared_ptr<ocl::Expressions::TupleTypeExp>>(aggregate);
+
+        //check if nextResult is from VarDeclarationExp type, only then it can be correctly appended
+        if (nextResult.type() == typeid(std::shared_ptr<ocl::Expressions::VarDeclarationExp>)) {
+
+            //cast as varDecExp and append to TupleLiteralExp
+            std::shared_ptr<ocl::Expressions::VarDeclarationExp> varDecExp = std::any_cast<std::shared_ptr<ocl::Expressions::VarDeclarationExp>>(nextResult);
+
+            // Debug
+            // std::cout << "TupleTypeExp: Added an varDecExp" << std::endl;
+            
+            tTypeExp->getPart()->add(varDecExp);
+
+        } else {
+
+            //TODO
+            //error: only varDecExp are valid at this point
+
+        }
+
+    }
+
+    // ### handleCollectionTypeExp ###
+    // append innerType
+    void OclParserCustomVisitor::handleCollectionTypeExp(std::any aggregate, std::any nextResult) {
+
+        //get aggreggate Expression
+        std::shared_ptr<ocl::Expressions::CollectionTypeExp> cTypeExp = std::any_cast<std::shared_ptr<ocl::Expressions::CollectionTypeExp>>(aggregate);
+
+        //check if nextResult is an TypeExp
+        //set if possible the innerType variable
+        if (nextResult.type() == typeid(std::shared_ptr<ocl::Expressions::TypeExp>)) {
+
+            //innerType is a TypeExp
+
+            //get nextResult Expression
+            std::shared_ptr<ocl::Expressions::TypeExp> innerTypeExp = std::any_cast<std::shared_ptr<ocl::Expressions::TypeExp>>(nextResult);
+            cTypeExp->setInnerType(innerTypeExp);
+
+            // Debug
+            // std::cout << "CollectionTypeExp: Set TypeExp as innerType" << std::endl;
+
+        } else if (nextResult.type() == typeid(std::shared_ptr<ocl::Expressions::TupleTypeExp>)) {
+
+            //innerType is a TupleTypeExp
+            
+            //get nextResult Expression
+            std::shared_ptr<ocl::Expressions::TupleTypeExp> innerTypeExp = std::any_cast<std::shared_ptr<ocl::Expressions::TupleTypeExp>>(nextResult);
+            cTypeExp->setInnerType(innerTypeExp);
+
+            // Debug
+            // std::cout << "CollectionTypeExp: Set TupleTypeExp as innerType" << std::endl;
+
+        } else if (nextResult.type() == typeid(std::shared_ptr<ocl::Expressions::CollectionTypeExp>)){
+
+            //innerType is a CollectionTypeExp
+            
+            //get nextResult Expression
+            std::shared_ptr<ocl::Expressions::CollectionTypeExp> innerTypeExp = std::any_cast<std::shared_ptr<ocl::Expressions::CollectionTypeExp>>(nextResult);
+            cTypeExp->setInnerType(innerTypeExp);
+
+            // Debug
+            // std::cout << "CollectionTypeExp: Set CollectionTypeExp as innerType" << std::endl;
+
+        } else {
+
+            //TODO add error
+            // inner type must be an TypeExp
+
         }
     }
-    return false;
-}
 
-antlrcpp::Any OclParserCustomVisitor::visitIteratorExpCS(OclParser::IteratorExpCSContext *ctx)
-{
+    void OclParserCustomVisitor::handleMessageExp(std::any aggregate, std::any nextResult) {
 
-    OclParser::VariableDeclarationCSContext* var1CS = ctx->variableDeclarationCS(0);
-    OclParser::VariableDeclarationCSContext* var2CS = ctx->variableDeclarationCS(1);
-    OclParser::OclExpressionCSContext* oclExpCS = ctx->oclExpressionCS();
-    std::shared_ptr<IteratorExp> iterExp = std::dynamic_pointer_cast<IteratorExp>(ctx->getAST());
-    std::shared_ptr<Variable> iterator = ocl::Expressions::ExpressionsFactory::eInstance()->createVariable();
-    std::shared_ptr<CollectionLiteralExp> collExp = std::dynamic_pointer_cast<CollectionLiteralExp>(iterExp->getSource());
-    iterExp->setName(ctx->simpleNameCS()->ID()->getSymbol()->getText());
+        //get aggreggate Expression
+        std::shared_ptr<ocl::Expressions::MessageExp> mesExp = std::any_cast<std::shared_ptr<ocl::Expressions::MessageExp>>(aggregate);
 
-    if(oclExpCS != nullptr) { // case A
-        if(var1CS != nullptr) {
-            var1CS->setEnv(ctx->getEnv());
-            var1CS->setErrorListener(ctx->getErrorListener());
-            if(!visitVariableDeclarationCS(var1CS)) {
-                return false;
+        //check if nextResult is MessageArguments and append the single arguments if so
+        if (nextResult.type() == typeid(std::shared_ptr<ocl::Expressions::MessageArguments>)) {
+
+            //get aggreggate Expression
+            std::shared_ptr<ocl::Expressions::MessageArguments> mesAr = std::any_cast<std::shared_ptr<ocl::Expressions::MessageArguments>>(nextResult);
+
+            //iterate through all messageArguments and add them to MessageExpression
+            for(size_t i = 0; i < mesAr->getReferredOclExpressions()->size(); i++) {
+
+                std::shared_ptr<OclExpression> oclExp = mesAr->getReferredOclExpressions()->at(i);
+                mesExp->getArgument()->add(oclExp);
+
+                // Debug
+                // std::cout << "MessageExp: add message Argument to Argument list" << std::endl;
             }
-            std::shared_ptr<VariableExp> varExp = std::dynamic_pointer_cast<VariableExp>(var1CS->getAST());
-            iterator = varExp->getReferredVariable();
-        }
-        else {
-            iterator->setName("");
-            iterator->setEType(collExp->getEType());
-        }
-        var2CS->setEnv(ctx->getEnv());
-        var2CS->setErrorListener(ctx->getErrorListener());
-        if(!visitVariableDeclarationCS(var2CS)) {
-            return false;
-        }
-        if(collExp->getEType()->eClass()->isSuperTypeOf(iterator->getEType()->eClass()) ||
-                collExp->getEType()->getClassifierID() == iterator->getEType()->getClassifierID()) {
-            std::shared_ptr<Environment> env = EnvironmentFactory::getInstance().createEnvironment(ctx->getEnv());
-            std::shared_ptr<VariableExp> var2Expr = std::dynamic_pointer_cast<VariableExp>(var2CS->getAST());
-            std::shared_ptr<Variable> iterator2 = var2Expr->getReferredVariable();
 
-            env->addElement(iterator->getName(), iterator, true);
-            env->addElement(iterator2->getName(), iterator2, true);
-            oclExpCS->setEnv(env);
-            oclExpCS->setErrorListener(ctx->getErrorListener());
-            std::shared_ptr<VariableExp> resultExp = std::dynamic_pointer_cast<VariableExp>(var2CS->getAST());
-            std::shared_ptr<Variable> result = resultExp->getReferredVariable();
-            for(size_t i = 0; i < collExp->getPart()->size(); i++) {
-                std::shared_ptr<CollectionLiteralPart> part = collExp->getPart()->at(i);
-                std::shared_ptr<CollectionItem> item = std::dynamic_pointer_cast<CollectionItem>(part);
+        }
 
-                if(nullptr != item)
+    }
+
+    void OclParserCustomVisitor::handleMessageArguments(std::any aggregate, std::any nextResult) {
+
+        //get aggreggate Expression
+        std::shared_ptr<ocl::Expressions::MessageArguments> mesAr = std::any_cast<std::shared_ptr<ocl::Expressions::MessageArguments>>(aggregate);
+
+        //get nextResult
+        std::shared_ptr<ocl::Expressions::OclExpression> oclExp = Utilities::oclCV::exp2oclExp(nextResult);
+
+            if (oclExp == nullptr) {
+
+                //no cast was succesfull
+                //either theres a wrong query
+                //or an abstract oclExp was set as nextResult (see Utilities::oclCV::exp2oclExp())
+                //TODO add error
+
+            } else {
+
+                //messageArgs or TypeExp
+                mesAr->getReferredOclExpressions()->add(oclExp);
+
+                // Debug
+                // std::cout << "MessageArguments: appended oclExp" << std::endl;
+
+            }
+
+    }
+
+    // ### handleVarDeclarationExp ###
+    // append oclExp to assignedOclExp
+    void OclParserCustomVisitor::handleVarDeclarationExp(std::any aggregate, std::any nextResult) {
+
+        //get aggreggate Expression
+        std::shared_ptr<ocl::Expressions::VarDeclarationExp> varDecExp = std::any_cast<std::shared_ptr<ocl::Expressions::VarDeclarationExp>>(aggregate);
+        
+        //check if the (optional) TypeExp isn't already set and if not, try to set
+        if (varDecExp->getVarType() == nullptr) {
+
+            //try all type variants
+            if (nextResult.type() == typeid(std::shared_ptr<ocl::Expressions::TypeExp>)) {
+
+                //get aggreggate Expression
+                std::shared_ptr<ocl::Expressions::TypeExp> typeExp = std::any_cast<std::shared_ptr<ocl::Expressions::TypeExp>>(nextResult);
+                //set Type
+                varDecExp->setVarType(typeExp);
+
+                // Debug
+                // std::cout << "VarDeclarationExp: Set TypeExp as Type" << std::endl;
+
+            } else if (nextResult.type() == typeid(std::shared_ptr<ocl::Expressions::TupleTypeExp>)) {
+
+                //get aggreggate Expression
+                std::shared_ptr<ocl::Expressions::TupleTypeExp> tTypeExp = std::any_cast<std::shared_ptr<ocl::Expressions::TupleTypeExp>>(nextResult);
+                //set Type
+                varDecExp->setVarType(tTypeExp);
+
+                // Debug
+                // std::cout << "VarDeclarationExp: Set TupleTypeExp as Type" << std::endl;
+
+            } else if (nextResult.type() == typeid(std::shared_ptr<ocl::Expressions::CollectionTypeExp>)) {
+
+                //get aggreggate Expression
+                std::shared_ptr<ocl::Expressions::CollectionTypeExp> cTypeExp = std::any_cast<std::shared_ptr<ocl::Expressions::CollectionTypeExp>>(nextResult);
+                //set Type
+                varDecExp->setVarType(cTypeExp);
+
+                // Debug
+                // std::cout << "VarDeclarationExp: Set CollectionTypeExp as Type" << std::endl;
+
+            }
+        } else {
+
+            //get nextResult as (optional) assignedExp
+            std::shared_ptr<ocl::Expressions::OclExpression> oclExp = Utilities::oclCV::exp2oclExp(nextResult);
+
+            if (oclExp == nullptr) {
+
+                //no cast was succesfull
+                //either theres a wrong query
+                //or an abstract oclExp was set as nextResult (see Utilities::oclCV::exp2oclExp())
+                //TODO add error
+
+            } else {
+
+                //append (optional) assigned OclExp
+                varDecExp->setAssignedOclExp(oclExp);
+
+                // Debug
+                // std::cout << "VarDeclarationExp: Assign optional Expression" << std::endl;
+
+            }
+        }  
+    }
+
+    // ### handlePrefixedExp ###
+    // add the referredExp
+    //void OclParserCustomVisitor::handlePrefixedExp(std::any aggregate, std::any nextResult) {
+    void OclParserCustomVisitor::handlePrefixedExp(std::any aggregate, std::any nextResult) {    
+
+        //get aggreggate Expression
+        std::shared_ptr<ocl::Expressions::PrefixedExp> preExp = std::any_cast<std::shared_ptr<ocl::Expressions::PrefixedExp>>(aggregate);
+
+        //get referredOclExp and set as referredExp
+        std::shared_ptr<ocl::Expressions::OclExpression> oclExp = Utilities::oclCV::exp2oclExp(nextResult);
+
+        if (oclExp == nullptr) {
+
+            //TODO add error
+            //there must be an oclExp
+
+        } else {
+
+            //if an operatorExp is found, the prefixedExp have to be downset to the left operand
+            // so that e.g.: -2+3 will evaluate as such and not as -(2+3)
+            if (nextResult.type() == typeid(std::shared_ptr<ocl::Expressions::OperatorExp>)) {
+
+                //cast oclExp to operatorExp
+                std::shared_ptr<ocl::Expressions::OperatorExp> operExp = std::dynamic_pointer_cast<ocl::Expressions::OperatorExp>(oclExp);
+
+                // Debug
+                // std::cout << "handlePrefixedExp: Found OperatorExp" << std::endl;                
+                
+                //find the most left operatorExp and change the leftOperator (see else{})
+                while (operExp!=nullptr)
                 {
-                    iterator->setValue(item->getItem()->getInstance()->getResultValue());
-                    if(!visitOclExpressionCS(oclExpCS)){
-                        return false;
+
+                    //check if left operand is also an operatorExp
+                    if (std::dynamic_pointer_cast<ocl::Expressions::OperatorExp>(operExp->getLeftHandOperand())) {
+
+                        // if so get down to this operatorExp
+                        operExp = std::dynamic_pointer_cast<ocl::Expressions::OperatorExp>(operExp->getLeftHandOperand());
+
+                        // Debug
+                        // std::cout << "handlePrefixedExp: Get down an OperatorExp" << std::endl;
+
+                    } else {
+
+                        //create a prefixedExp with the same unarySymbol as the old PrefixedExp
+                        // set the unarySymbol of the old PrefixedExp to "IGNORE"
+                        // otherwise the connection to the upper expressions will be lost
+                        
+                        // Debug
+                        // std::shared_ptr<ocl::Expressions::IntegerLiteralExp> interExp = std::dynamic_pointer_cast<ocl::Expressions::IntegerLiteralExp>(operExp->getLeftHandOperand());
+                        // std::cout << "Bottom left exp Value: " << interExp->getSymbol() << std::endl;
+                        
+                        //create new PrefixedExp
+                        std::shared_ptr<PrefixedExp> newPreExp = ocl::Expressions::ExpressionsFactory::eInstance()->createPrefixedExp();
+                        
+                        //copy unarySymbol from the old preExp
+                        newPreExp->setUnarySymbol(preExp->getUnarySymbol());
+                        
+                        //get the current leftOperand
+                        std::shared_ptr<ocl::Expressions::OclExpression> leftOperand = operExp->getLeftHandOperand();
+                        
+                        //set correct referredExp
+                        newPreExp->setReferredExpression(leftOperand);
+                        
+                        //set correct leftOperand
+                        operExp->setLeftHandOperand(newPreExp);
+
+                        //mark (old) preExp as to be ignored
+                        preExp->setUnarySymbol(Utilities::CONST_IGNORE);
+
+                        //terminate loop
+                        operExp = nullptr;
+
+                        // Debug
+                        // std::cout << "handlePrefixedExp: Found bottom OperatorExp" << std::endl;
+
                     }
-                    std::shared_ptr<OclExpression> oclExpAS = oclExpCS->getAST();
 
-                    if(oclExpAS->getEType()->getClassifierID() == resultExp->getEType()->getClassifierID()) {
-                        result->setValue(oclExpAS->getInstance()->getResultValue());
-                        iterExp->setBody(oclExpAS);
-                    }
-                    else {
-                        ctx->getErrorListener()->syntaxError("The result type is different from the declaration");
-                        return false;
-                    }
+                    // append the expression to make it later callable
+                    preExp->setReferredExpression(oclExp);
+                    
                 }
-                else { // collectionRange
-                    std::shared_ptr<CollectionRange> range = std::dynamic_pointer_cast<CollectionRange>(part);
-                    std::shared_ptr<IntegerLiteralExp> firstExp = std::dynamic_pointer_cast<IntegerLiteralExp>(range->getFirst());
-                    std::shared_ptr<IntegerLiteralExp> lastExp = std::dynamic_pointer_cast<IntegerLiteralExp>(range->getLast());
-                    int i = firstExp->getIntegerSymbol();
-                    while (i < lastExp->getIntegerSymbol()) {
-                        std::shared_ptr<fUML::Semantics::SimpleClassifiers::IntegerValue> intValue = fUML::Semantics::SimpleClassifiers::SimpleClassifiersFactory::eInstance()->createIntegerValue();
-                        intValue->setValue(i);
-                        iterator->setValue(intValue);
-                        if(!visitOclExpressionCS(oclExpCS)){
-                            return false;
-                        }
-                        std::shared_ptr<OclExpression> oclExpAS = oclExpCS->getAST();
 
-                        if(oclExpAS->getEType()->getClassifierID() == resultExp->getEType()->getClassifierID()) {
-                            result->setValue(oclExpAS->getInstance()->getResultValue());
-                            iterExp->setBody(oclExpAS);
-                            i++;
-                        }
-                        else {
-                            ctx->getErrorListener()->syntaxError("The result type is different from the declaration");
-                            return false;
-                        }
-                    }
-                }
-            }
-            //iterExp->setResult(result);
-            iterExp->getInstance()->setResultValue(result->getValue());
-        }
-    }
+            } else {
 
-    return false;
-}
-
-antlrcpp::Any OclParserCustomVisitor::visitIterateExpCS(OclParser::IterateExpCSContext *ctx)
-{
-    OclParser::VariableDeclarationCSContext* var1CS = ctx->variableDeclarationCS(0);
-    OclParser::VariableDeclarationCSContext* var2CS = ctx->variableDeclarationCS(1);
-    OclParser::OclExpressionCSContext* oclExpCS = ctx->oclExpressionCS();
-    std::shared_ptr<IterateExp> iterExp = std::dynamic_pointer_cast<IterateExp>(ctx->getAST());
-    std::shared_ptr<IterateExpEval> iterEval = ocl::Evaluations::EvaluationsFactory::eInstance()->createIterateExpEval();
-    std::shared_ptr<Variable> iterator = ocl::Expressions::ExpressionsFactory::eInstance()->createVariable();
-    std::shared_ptr<CollectionLiteralExp> collExp = std::dynamic_pointer_cast<CollectionLiteralExp>(iterExp->getSource());
-
-    if(collExp != nullptr) {
-        if(var1CS != nullptr && var2CS != nullptr) {
-            var1CS->setEnv(ctx->getEnv());
-            var1CS->setErrorListener(ctx->getErrorListener());
-            if(!visitVariableDeclarationCS(var1CS)) {
-                return false;
-            }
-            std::shared_ptr<VariableExp> varExp = std::dynamic_pointer_cast<VariableExp>(var1CS->getAST());
-            iterator = varExp->getReferredVariable();
-        }
-        else {
-            iterator->setName("");
-            iterator->setEType(collExp->getEType());
-        }
-        if(var2CS != nullptr) {
-            var2CS->setEnv(ctx->getEnv());
-            var2CS->setErrorListener(ctx->getErrorListener());
-            if(!visitVariableDeclarationCS(var2CS)) {
-                return false;
-            }
-        }
-        else {
-            var2CS = var1CS;
-            var2CS->setEnv(ctx->getEnv());
-            var2CS->setErrorListener(ctx->getErrorListener());
-            if(!visitVariableDeclarationCS(var2CS)) {
-                return false;
-            }
-        }
-
-        iterExp->setInstance(iterEval);
-        std::shared_ptr<CollectionType> collType = std::dynamic_pointer_cast<CollectionType>(collExp->getEType());
-        std::shared_ptr<ecore::EClassifier> itemType = collType->getElementType();
-
-        if(itemType->eClass()->isSuperTypeOf(iterator->getEType()->eClass()) ||
-                itemType->getClassifierID() == iterator->getEType()->getClassifierID()) {
-            std::shared_ptr<Environment> env = EnvironmentFactory::getInstance().createEnvironment(ctx->getEnv());
-            std::shared_ptr<CollectionValue> collValue = std::dynamic_pointer_cast<CollectionValue>(collExp->getInstance()->getResultValue());
-            std::shared_ptr<VariableExp> resultExp = std::dynamic_pointer_cast<VariableExp>(var2CS->getAST());
-            std::shared_ptr<Variable> result = resultExp->getReferredVariable();
-
-            env->addElement(iterator->getName(), iterator, true);
-            env->addElement(result->getName(), result, true);
-            oclExpCS->setEnv(env);
-            oclExpCS->setErrorListener(ctx->getErrorListener());
-
-            for(size_t i = 0; i < collValue->getElements()->size(); i++) {
-                std::shared_ptr<Element> elem = collValue->getElements()->at(i);
-                iterator->setValue(elem->getValue());
-                if(!visitOclExpressionCS(oclExpCS)){
-                    return false;
-                }
-                std::shared_ptr<OclExpression> oclExpAS = oclExpCS->getAST();
-
-                if(oclExpAS->getEType()->getClassifierID() == resultExp->getEType()->getClassifierID()) {
-                    result->setValue(oclExpAS->getInstance()->getResultValue());
-                    iterExp->setBody(oclExpAS);
-                }
-                else {
-                    ctx->getErrorListener()->syntaxError("The result type is different from the declaration");
-                    return false;
-                }
-            }
-            iterExp->setResult(result);
-            iterExp->getInstance()->setResultValue(result->getValue());
-            return true;
-        }
-        else {
-            ctx->getErrorListener()->syntaxError("The iterator type must be compatible with the collection type");
-        }
-    }
-    else {
-        ctx->getErrorListener()->syntaxError("The source of the (iterate) operation must be a collection literal");
-    }
-    return false;
-}
-
-antlrcpp::Any OclParserCustomVisitor::visitIfExpCS(OclParser::IfExpCSContext *ctx)
-{
-    OclParser::OclExpressionCSContext* ifExprCS = ctx->oclExpressionCS(0);
-    OclParser::OclExpressionCSContext* thenExprCS = ctx->oclExpressionCS(1);
-    OclParser::OclExpressionCSContext* elseExprCS = ctx->oclExpressionCS(2);
-
-    ifExprCS->setEnv(ctx->getEnv());
-    thenExprCS->setEnv(ctx->getEnv());
-    elseExprCS->setEnv(ctx->getEnv());
-    ifExprCS->setErrorListener(ctx->getErrorListener());
-    thenExprCS->setErrorListener(ctx->getErrorListener());
-    elseExprCS->setErrorListener(ctx->getErrorListener());
-
-    if(visitOclExpressionCS(ifExprCS)) {
-        std::shared_ptr<OclExpression> ifExpr = ifExprCS->getAST();
-        if(ifExpr->getEType()->getClassifierID() == ::types::typesPackage::BOOLEAN_CLASS) {
-            std::shared_ptr<fUML::Semantics::SimpleClassifiers::BooleanValue> value = std::dynamic_pointer_cast<fUML::Semantics::SimpleClassifiers::BooleanValue>(ifExpr->getInstance()->getResultValue());
-            if(value->isValue()) {
-                if(visitOclExpressionCS(thenExprCS)) {
-                    ctx->setAST(thenExprCS->getAST());
-                    return true;
-                }
-            }
-            else if(visitOclExpressionCS(elseExprCS)) {
-                ctx->setAST(elseExprCS->getAST());
-                return true;
-            }
-        }
-        else {
-            ctx->getErrorListener()->syntaxError("The condition of the If expression must return a boolean");
-        }
-    }
-    return false;
-}
-
-antlrcpp::Any OclParserCustomVisitor::visitParametersCS(OclParser::ParametersCSContext *ctx)
-{
-    OclParser::VariableDeclarationCSContext *varDeclCS = ctx->variableDeclarationCS();
-    varDeclCS->setEnv(ctx->getEnv());
-    varDeclCS->setErrorListener(ctx->getErrorListener());
-
-    if(visitVariableDeclarationCS(varDeclCS)) {
-        std::shared_ptr<VariableExp> varExp = std::dynamic_pointer_cast<VariableExp>(varDeclCS->getAST());
-        std::shared_ptr<CollectionLiteralExp> collExp = ocl::Expressions::ExpressionsFactory::eInstance()->createCollectionLiteralExp();
-        std::shared_ptr<CollectionItem> collItem = ocl::Expressions::ExpressionsFactory::eInstance()->createCollectionItem();
-        collItem->setItem(varExp);
-        collExp->getPart()->add(collItem);
-
-        if(ctx->parametersCS() != nullptr) {
-            OclParser::ParametersCSContext* paramCS = ctx->parametersCS();
-            paramCS->setEnv(ctx->getEnv());
-            paramCS->setErrorListener(ctx->getErrorListener());
-
-            if(visitParametersCS(paramCS)) {
-                std::shared_ptr<CollectionLiteralExp> innerColl = std::dynamic_pointer_cast<CollectionLiteralExp>(paramCS->getAST());
-                for(size_t i = 0; i < innerColl->getPart()->size(); i++) {
-                    collExp->getPart()->add(innerColl->getPart()->at(i));
-                }
-            }
-        }
-
-        ctx->setAST(collExp);
-        return true;
-    }
-    return false;
-}
-
-antlrcpp::Any OclParserCustomVisitor::visitPackageDeclarationCS(OclParser::PackageDeclarationCSContext *ctx)
-{
-    OclParser::PathNameCSContext* pathCS = ctx->pathNameCS();
-
-    if(pathCS != nullptr) {
-        pathCS->setEnv(ctx->getEnv());
-        pathCS->setErrorListener(ctx->getErrorListener());
-        vector<std::string> seq = visitPathNameCS(pathCS).as<vector<std::string>>();
-        std::shared_ptr<Variable> var = ctx->getEnv()->lookupPathName(seq);
-
-        if(var != nullptr) {
-            ctx->getEnv()->addElement(var->getName(), var, true);
-            if(ctx->contextDeclarationCS().size() > 0) {
-                std::shared_ptr<OclExpression> resultExp = nullptr;
-                for(OclParser::ContextDeclarationCSContext* contextCS : ctx->contextDeclarationCS()) {
-                    contextCS->setEnv(ctx->getEnv());
-                    contextCS->setErrorListener(ctx->getErrorListener());
-                    if(visitContextDeclarationCS(contextCS)) {
-                        resultExp = contextCS->getAST();
-                    }
-                    else{
-                        return false;
-                    }
-                }
-                ctx->setAST(resultExp);
-                return true;
-            }
-            else {
-                ctx->setAST(createVariableExp(var));
-            }
-        }
-        else {
-            std::string path = getPath(seq);
-            ctx->getErrorListener()->syntaxError("The path ("+ path +") cannot be found");
-        }
-    }
-    else {
-        std::shared_ptr<OclExpression> resultExp = nullptr;
-        for(OclParser::ContextDeclarationCSContext* contextCS : ctx->contextDeclarationCS()) {
-            contextCS->setEnv(ctx->getEnv());
-            contextCS->setErrorListener(ctx->getErrorListener());
-            if(visitContextDeclarationCS(contextCS)) {
-                resultExp = contextCS->getAST();
-            }
-            else{
-                return false;
-            }
-        }
-        ctx->setAST(resultExp);
-        return true;
-    }
-    return false;
-}
-
-antlrcpp::Any OclParserCustomVisitor::visitPropertyContextDeclCS(OclParser::PropertyContextDeclCSContext *ctx)
-{
-    OclParser::PathNameCSContext* pathCS = ctx->pathNameCS();
-    OclParser::SimpleNameCSContext* simpleNameCS = ctx->simpleNameCS();
-    OclParser::TypeCSContext* typeCS = ctx->typeCS();
-    OclParser::InitOrDerValueCSContext* initDerCS = ctx->initOrDerValueCS();
-
-    pathCS->setEnv(ctx->getEnv());
-    pathCS->setErrorListener(ctx->getErrorListener());
-    vector<std::string> seq = visitPathNameCS(pathCS).as<vector<std::string>>();
-    std::shared_ptr<Variable> var = ctx->getEnv()->lookupPathName(seq);
-
-    if(var != nullptr) {
-        std::shared_ptr<Environment> env = ctx->getEnv();
-        std::string simpleName = simpleNameCS->ID()->getSymbol()->getText();
-
-        std::shared_ptr<ecore::EClass> eClass = std::dynamic_pointer_cast<ecore::EClass>(var->getEType());
-        std::shared_ptr<ecore::EAttribute> eatt = nullptr;
-        std::shared_ptr<ecore::EReference> eref = nullptr;
-        std::shared_ptr<ecore::EStructuralFeature> feature = nullptr;
-
-        if((eatt = OclReflection::lookupProperty(eClass, simpleName)) != nullptr) {
-            feature = eatt;
-        }
-        else if((eref = OclReflection::lookupAssociationClass(eClass, simpleName)) != nullptr) {
-            feature = eref;
-        }
-
-        if(feature != nullptr) {
-            typeCS->setEnv(env);
-            typeCS->setErrorListener(ctx->getErrorListener());
-            if(visitTypeCS(typeCS)) {
-                std::shared_ptr<TypeExp> typeExp = std::dynamic_pointer_cast<TypeExp>(typeCS->getAST());
-                initDerCS->setEnv(env);
-                initDerCS->setErrorListener(ctx->getErrorListener());
-                if(visitInitOrDerValueCS(initDerCS)) {
-                    std::shared_ptr<OclExpression> oclExp = initDerCS->getAST();
-                    if(OclReflection::kindOf(oclExp->getEType(), typeExp->getReferredType())) {
-                        std::shared_ptr<fUML::Semantics::Values::Value> value = nullptr;
-                        std::shared_ptr<fUML::Semantics::Values::Value> resultValue = oclExp->getInstance()->getResultValue();
-
-                        if(initDerCS->INIT() != nullptr) {
-                        	Any any = feature->getDefaultValue();
-                        	if(any)
-                        	{
-                        		value = OclReflection::createValue(feature, any);
-                        	}
-                        	else
-                        	{
-                            	std::string stringLiteral = feature->getDefaultValueLiteral();
-
-                        		std::shared_ptr<fUML::Semantics::SimpleClassifiers::StringValue> stringValue = fUML::Semantics::SimpleClassifiers::SimpleClassifiersFactory::eInstance()->createStringValue();
-        						stringValue->setValue(stringLiteral );
-
-                        		value = stringValue;
-                        	}
-                            std::shared_ptr<BooleanLiteralExp> boolExp = createBooleanLiteralExp(resultValue->equals(value));
-                            ctx->setAST(boolExp);
-                            return true;
-                        }
-                        else {
-                            std::shared_ptr<ObjectValue> new_value = std::dynamic_pointer_cast<ObjectValue>(var->getValue());
-                            std::shared_ptr<ecore::EObject> new_object  = new_value->getValue();
-
-                            if(new_object != nullptr) {
-                                value = OclReflection::createValue(feature, new_value);
-                                std::shared_ptr<BooleanLiteralExp> boolExp = createBooleanLiteralExp(resultValue->equals(value));
-                                ctx->setAST(boolExp);
-                                return true;
-                            }
-                            else {
-                                ctx->getErrorListener()->syntaxError("The entered context value is not a valid object");
-                            }
-                        }
-                    }
-                    else {
-                        ctx->getErrorListener()->syntaxError("The declared type must be conform to the init/derived result type");
-                    }
-                }
-            }
-        }
-        else {
-            ctx->getErrorListener()->syntaxError("Unrecognized variable: ("+ simpleName +")");
-        }
-    }
-    else {
-        std::string path = getPath(seq);
-        ctx->getErrorListener()->syntaxError("The path ("+ path +") cannot be found");
-    }
-    return false;
-}
-
-antlrcpp::Any OclParserCustomVisitor::visitInitOrDerValueCS(OclParser::InitOrDerValueCSContext *ctx)
-{
-    OclParser::OclExpressionCSContext* oclExpCS = ctx->oclExpressionCS();
-    oclExpCS->setEnv(ctx->getEnv());
-    oclExpCS->setErrorListener(ctx->getErrorListener());
-
-    if(visitOclExpressionCS(oclExpCS)) {
-        ctx->setAST(oclExpCS->getAST());
-        return true;
-    }
-    return false;
-}
-
-antlrcpp::Any OclParserCustomVisitor::visitClassifierContextDeclCS(OclParser::ClassifierContextDeclCSContext *ctx)
-{
-    OclParser::PathNameCSContext* pathCS = ctx->pathNameCS();
-    OclParser::SimpleNameCSContext* simpleNameCS = ctx->simpleNameCS();
-    OclParser::InvOrDefCSContext* invDefCS = ctx->invOrDefCS();
-
-    pathCS->setEnv(ctx->getEnv());
-    pathCS->setErrorListener(ctx->getErrorListener());
-    vector<std::string> seq = visitPathNameCS(pathCS).as<vector<std::string>>();
-    std::shared_ptr<Variable> var = ctx->getEnv()->lookupPathName(seq);
-
-    if(var != nullptr) {
-        if(simpleNameCS != nullptr) {
-            std::string simpleName = simpleNameCS->ID()->getSymbol()->getText();
-            ctx->getEnv()->addElement(simpleName, var, false);
-        }
-
-        invDefCS->setEnv(ctx->getEnv());
-        invDefCS->setErrorListener(ctx->getErrorListener());
-        if(visitInvOrDefCS(invDefCS)) {
-            ctx->setAST(invDefCS->getAST());
-            return true;
-        }
-    }
-    else {
-        std::string path = getPath(seq);
-        ctx->getErrorListener()->syntaxError("The path ("+ path +") cannot be found");
-    }
-    return false;
-}
-
-antlrcpp::Any OclParserCustomVisitor::visitInvOrDefCS(OclParser::InvOrDefCSContext *ctx)
-{
-    if(ctx->INV() != nullptr) { // invariant
-        OclParser::OclExpressionCSContext* oclExpCS = ctx->oclExpressionCS();
-        oclExpCS->setEnv(ctx->getEnv());
-        oclExpCS->setErrorListener(ctx->getErrorListener());
-
-        return visitForBoolExp(ctx, oclExpCS, ctx->simpleNameCS());
-    }
-    else { // define
-        if(ctx->defExpressionCS()->variableDeclarationCS() != nullptr) {
-            OclParser::VariableDeclarationCSContext* varDeclCS = ctx->defExpressionCS()->variableDeclarationCS();
-            OclParser::OclExpressionCSContext* oclExpCS = ctx->defExpressionCS()->oclExpressionCS();
-
-            varDeclCS->setEnv(ctx->getEnv());
-            oclExpCS->setEnv(ctx->getEnv());
-            varDeclCS->setErrorListener(ctx->getErrorListener());
-            oclExpCS->setErrorListener(ctx->getErrorListener());
-
-            if(visitVariableDeclarationCS(varDeclCS) && visitOclExpressionCS(oclExpCS)) {
-                std::shared_ptr<VariableExp> varExp = std::dynamic_pointer_cast<VariableExp>(varDeclCS->getAST());
-                std::shared_ptr<Variable> var = varExp->getReferredVariable();
-
-                if(ctx->simpleNameCS() != nullptr) {
-                    std::string simpleName = ctx->simpleNameCS()->ID()->getSymbol()->getText();
-                    var->setName(simpleName);
-                }
-                varExp->getInstance()->setResultValue(oclExpCS->getAST()->getInstance()->getResultValue());
-                var->setValue(oclExpCS->getAST()->getInstance()->getResultValue());
-                var->setInitExpression(oclExpCS->getAST());
-                ctx->getEnv()->addElement(var->getName(), var, false);
-                ctx->setAST(varExp);
-                return true;
-            }
-        }
-        else {
-            OclParser::OperationCSContext* opeCS = ctx->defExpressionCS()->operationCS();
-            OclParser::OclExpressionCSContext* oclExpCS = ctx->oclExpressionCS();
-
-            opeCS->setEnv(ctx->getEnv());
-            oclExpCS->setEnv(ctx->getEnv());
-            opeCS->setErrorListener(ctx->getErrorListener());
-            oclExpCS->setErrorListener(ctx->getErrorListener());
-
-            if(visitOperationCS(opeCS) && visitOclExpressionCS(oclExpCS)) {
-                std::shared_ptr<OperationCallExp> opeExp = std::dynamic_pointer_cast<OperationCallExp>(opeCS->getAST());
-                std::shared_ptr<Variable> var = ocl::Expressions::ExpressionsFactory::eInstance()->createVariable();
-
-                if(ctx->simpleNameCS() != nullptr) {
-                    std::string simpleName = ctx->simpleNameCS()->ID()->getSymbol()->getText();
-                    var->setName(simpleName);
-                }
-                var->setEType(opeExp->getReferredOperation()->eClass());
-                var->setValue(oclExpCS->getAST()->getInstance()->getResultValue());
-                var->setInitExpression(oclExpCS->getAST());
-                ctx->getEnv()->addElement(var->getName(), var, false);
-//                ctx->getEnv()->getRootEnv()->addElement(var->getName(), var, false);
-                ctx->setAST(opeExp);
-                return true;
+                // normal set referredExp
+                preExp->setReferredExpression(oclExp);
             }
         }
     }
-    return false;
-}
 
-antlrcpp::Any OclParserCustomVisitor::visitOperationCS(OclParser::OperationCSContext *ctx)
-{
-    OclParser::PathNameCSContext* pathCS = ctx->pathNameCS();
-    std::string simpleName = ctx->simpleNameCS()->ID()->getSymbol()->getText();
-    OclParser::TypeCSContext* typeCS = ctx->typeCS();
-    OclParser::ParametersCSContext* paramCS = ctx->parametersCS();
-    std::shared_ptr<Variable> var = nullptr;
+    // ### handleParentedExp ###
+    // append innerExp
+    void OclParserCustomVisitor::handleParentedExp(std::any aggregate, std::any nextResult) {
 
-    if(pathCS != nullptr) {
-        pathCS->setEnv(ctx->getEnv());
-        pathCS->setErrorListener(ctx->getErrorListener());
-        vector<std::string> seq = visitPathNameCS(pathCS).as<vector<std::string>>();
-        var = ctx->getEnv()->lookupPathName(seq);
-    }
-    else {
-        var = ctx->getEnv()->getSelfVariable();
-    }
+        //get aggreggate Expression
+        std::shared_ptr<ocl::Expressions::ParentedExp> parExp = std::any_cast<std::shared_ptr<ocl::Expressions::ParentedExp>>(aggregate);
 
-    if(var != nullptr) {
-        std::shared_ptr<OperationCallExp> exp = ocl::Expressions::ExpressionsFactory::eInstance()->createOperationCallExp();
-        std::shared_ptr<ecore::EClass> eClass = std::dynamic_pointer_cast<ecore::EClass>(var->getEType());
-        exp->setSource(createVariableExp(var));
+        //get referredOclExp
+        std::shared_ptr<ocl::Expressions::OclExpression> oclExp = Utilities::oclCV::exp2oclExp(nextResult);
 
-        if(paramCS != nullptr) {
-            paramCS->setEnv(ctx->getEnv());
-            paramCS->setErrorListener(ctx->getErrorListener());
-            if(!visitParametersCS(paramCS)) {
-                return false;
-            }
-            std::shared_ptr<CollectionLiteralExp> innerColl = std::dynamic_pointer_cast<CollectionLiteralExp>(paramCS->getAST());
-            for(size_t i = 0; i < innerColl->getPart()->size(); i++) {
-                std::shared_ptr<CollectionItem> item = std::dynamic_pointer_cast<CollectionItem>(innerColl->getPart()->at(i));
-                exp->getArgument()->add(item->getItem());
-            }
-        }
+        // set as innerExp
+        if (oclExp == nullptr) {
 
-        std::shared_ptr<ecore::EOperation> eoper = OclReflection::lookupOperation(eClass, simpleName, exp->getArgument());
-        if(eoper != nullptr) {
+            //TODO add error
+            //there must be an oclExp
 
-            if(typeCS != nullptr) {
-                typeCS->setEnv(ctx->getEnv());
-                typeCS->setErrorListener(ctx->getErrorListener());
-                if(!visitTypeCS(typeCS)) {
-                    return false;
-                }
-                std::shared_ptr<TypeExp> typeExp = std::dynamic_pointer_cast<TypeExp>(typeCS->getAST());
-                if(typeExp->getReferredType()->getClassifierID() != eoper->getEType()->getClassifierID()) {
-                    ctx->getErrorListener()->syntaxError("The declared type must be conform to the operation type");
-                    return false;
-                }
-            }
-
-            std::shared_ptr<OperationCallExpEval> expEval = ocl::Evaluations::EvaluationsFactory::eInstance()->createOperationCallExpEval();
-            std::shared_ptr<fUML::Semantics::Values::Value> objValue = OclReflection::createValue(eoper, exp->getArgument(), var->getValue());
-
-            expEval->setModel(exp);
-            expEval->setResultValue(objValue);
-
-            exp->setName(simpleName);
-            exp->setInstance(expEval);
-            exp->setEType(eoper->getEType());
-            exp->setReferredOperation(eoper);
-            ctx->setAST(exp);
-
-            return true;
-        }
-        else {
-            std::string error = "Unrecognized operation: " + simpleName + "(";
-            for(size_t i = 0; i < exp->getArgument()->size(); i++) {
-                if(i != 0) {
-                    error += ", ";
-                }
-                error += exp->getArgument()->at(i)->getInstance()->getResultValue()->toString();
-            }
-            error += ")";
-            ctx->getErrorListener()->syntaxError(error);
+        } else {
+            parExp->setInnerExp(oclExp);
         }
     }
-    else {
-        ctx->getErrorListener()->syntaxError("Unknown variable ("+ simpleName +")");
-    }
-    return false;
-}
 
-antlrcpp::Any OclParserCustomVisitor::visitOperationContextDeclCS(OclParser::OperationContextDeclCSContext *ctx)
-{
-    OclParser::OperationCSContext* opeCS = ctx->operationCS();
-    OclParser::PrePostOrBodyDeclCSContext* ppbCS = ctx->prePostOrBodyDeclCS();
+    
+    // ### handleOperatorExp ###
+    // append left and right operand
+    void OclParserCustomVisitor::handleOperatorExp(std::any aggregate, std::any nextResult) {
 
-    opeCS->setEnv(ctx->getEnv());
-    opeCS->setErrorListener(ctx->getErrorListener());
+        //get aggreggate Expression
+        std::shared_ptr<ocl::Expressions::OperatorExp> operExp = std::any_cast<std::shared_ptr<ocl::Expressions::OperatorExp>>(aggregate);
 
-    if(visitOperationCS(opeCS)) {
-        std::shared_ptr<OperationCallExp> opeExp = std::dynamic_pointer_cast<OperationCallExp>(opeCS->getAST());
-        std::shared_ptr<ecore::EOperation> ope = opeExp->getReferredOperation();
+        //get referredOclExp
+        std::shared_ptr<ocl::Expressions::OclExpression> oclExp = Utilities::oclCV::exp2oclExp(nextResult);
 
-        for(size_t i = 0; i < opeExp->getArgument()->size(); i++) {
-            std::shared_ptr<VariableExp> varExp = std::dynamic_pointer_cast<VariableExp>(opeExp->getArgument()->at(i));
-            std::shared_ptr<Variable> var = varExp->getReferredVariable();
-            ctx->getEnv()->addElement(var->getName(), var, true);
-        }
+        // set as innerExp
+        if (oclExp == nullptr) {
 
-        ppbCS->setAST(opeExp);
-        ppbCS->setEnv(ctx->getEnv());
-        ppbCS->setErrorListener(ctx->getErrorListener());
+            //TODO add error
+            //there must be an oclExp
 
-        if(visitPrePostOrBodyDeclCS(ppbCS)) {
-            ctx->setAST(ppbCS->getAST());
-            return true;
-        }
-    }
-    return false;
-}
+        } else {
+            
+            // set the operands
+            // because of depth first search it can be set this way
+            if (operExp->getLeftHandOperand() == nullptr) {
+                operExp->setLeftHandOperand(oclExp);
 
-antlrcpp::Any OclParserCustomVisitor::visitPrePostOrBodyDeclCS(OclParser::PrePostOrBodyDeclCSContext *ctx)
-{
-    OclParser::OclExpressionCSContext* oclExpCS = ctx->oclExpressionCS();
+                // Debug
+                // std::cout << "handleOperatorExp: Set Left Operand" << std::endl;
 
-    oclExpCS->setEnv(ctx->getEnv());
-    oclExpCS->setErrorListener(ctx->getErrorListener());
+            } else {
+                operExp->setRightHandOperand(oclExp);
 
-    if(ctx->PRE() != nullptr) {
-        return visitForBoolExp(ctx, oclExpCS, ctx->simpleNameCS());
-    }
-    else if(ctx->POST() != nullptr) {
-        std::shared_ptr<OperationCallExp> opeExp = std::dynamic_pointer_cast<OperationCallExp>(ctx->getAST());
-        std::shared_ptr<fUML::Semantics::Values::Value> objValue = opeExp->getInstance()->getResultValue();
-        std::shared_ptr<ObjectValue> selfValue = std::dynamic_pointer_cast<ObjectValue>(opeExp->getSource()->getInstance()->getResultValue());
-        std::shared_ptr<Variable> self = ctx->getEnv()->getSelfVariable();
+                // Debug
+                // std::cout << "handleOperatorExp: Set Right Operand" << std::endl;
 
-        // update the environment with the post context object (object after executing the operation)
-        if(selfValue != nullptr && !selfValue->getHistory()->empty()) {
-            std::shared_ptr<LocalSnapshot> lastSnapshot = selfValue->getHistory()->at(selfValue->getHistory()->size() - 1);
-            if(!lastSnapshot->getBindings()->empty()) {
-                std::shared_ptr<fUML::Semantics::Values::Value> postObj = lastSnapshot->getBindings()->at(0)->getValue();
-                if(postObj != nullptr) {
-                    self->setValue(postObj);
-                }
             }
         }
-
-        if(objValue != nullptr && std::dynamic_pointer_cast<UndefinedValue>(objValue) == nullptr) {
-            std::shared_ptr<Variable> var = ocl::Expressions::ExpressionsFactory::eInstance()->createVariable();
-
-            var->setName("result");
-            var->setValue(objValue);
-            ctx->getEnv()->addElement(var->getName(), var, false);
-        }
-        return visitForBoolExp(ctx, oclExpCS, ctx->simpleNameCS());
     }
-    else {
-        if(visitOclExpressionCS(oclExpCS)) {
-            std::shared_ptr<OclExpression> oclExp = oclExpCS->getAST();
-            std::shared_ptr<OperationCallExp> opeExp = std::dynamic_pointer_cast<OperationCallExp>(ctx->getAST());
 
-            /*
-            std::shared_ptr<fUML::Semantics::Values::Value> operValue = opeExp->getInstance()->getResultValue();
-            std::shared_ptr<fUML::Semantics::Values::Value> exprValue = oclExp->getInstance()->getResultValue();
-            std::shared_ptr<BooleanLiteralExp> boolExp = createBooleanLiteralExp(operValue->equals(exprValue));
-            ctx->setAST(boolExp);
-            */
+    // ### handlePackageContextDeclExp ###
+    // append contextDeclarations
+    void OclParserCustomVisitor::handlePackageContextDeclExp(std::any aggregate, std::any nextResult) {
 
-            if(oclExp->getEType()->getClassifierID() != opeExp->getEType()->getClassifierID()) {
-                ctx->getErrorListener()->syntaxError("The body return type must be conform to the operation type");
-                return false;
+        //get aggreggate Expression
+        std::shared_ptr<ocl::Expressions::PackageDeclarationExp> paDeclExp = std::any_cast<std::shared_ptr<ocl::Expressions::PackageDeclarationExp>>(aggregate);
+
+        if (nextResult.type() == typeid(std::shared_ptr<ocl::Expressions::ClassifierContextDeclExp>)) {
+
+            std::shared_ptr<ocl::Expressions::ClassifierContextDeclExp> claDeclExp = std::any_cast<std::shared_ptr<ocl::Expressions::ClassifierContextDeclExp>>(nextResult);
+            paDeclExp->getContextDeclarations()->add(claDeclExp);
+
+        } else if (nextResult.type() == typeid(std::shared_ptr<ocl::Expressions::PropertyContextDeclExp>)) {
+
+            std::shared_ptr<ocl::Expressions::PropertyContextDeclExp> propDeclExp = std::any_cast<std::shared_ptr<ocl::Expressions::PropertyContextDeclExp>>(nextResult);
+            paDeclExp->getContextDeclarations()->add(propDeclExp);
+
+        } else if (nextResult.type() == typeid(std::shared_ptr<ocl::Expressions::OperationContextDeclExp>)) {
+
+            std::shared_ptr<ocl::Expressions::OperationContextDeclExp> operaDeclExp = std::any_cast<std::shared_ptr<ocl::Expressions::OperationContextDeclExp>>(nextResult);
+            paDeclExp->getContextDeclarations()->add(operaDeclExp);
+
+        } else {
+
+            // TODO add error
+            // must be an ContextDeclarationExp
+
+        }
+
+    }
+
+    // ### handleClassifierContextDeclExp ###
+    // append invOrDecExpr
+    void OclParserCustomVisitor::handleClassifierContextDeclExp(std::any aggregate, std::any nextResult) {
+
+        //get aggreggate Expression
+        std::shared_ptr<ocl::Expressions::ClassifierContextDeclExp> claDeclExp = std::any_cast<std::shared_ptr<ocl::Expressions::ClassifierContextDeclExp>>(aggregate);
+
+        if (nextResult.type() == typeid(std::shared_ptr<ocl::Expressions::InvOrDefExp>)) {
+            std::shared_ptr<ocl::Expressions::InvOrDefExp> invOdefExp = std::any_cast<std::shared_ptr<ocl::Expressions::InvOrDefExp>>(nextResult);
+            claDeclExp->setInvOrDevExp(invOdefExp);
+        } else {
+
+            //TODO add error
+            // only InvOrDevExp are allowed at this point
+
+        }
+    }
+
+    
+    // ### handlePropertyContextDecl ###
+    // append typeExpr and initOrDerivedValueList
+    void OclParserCustomVisitor::handlePropertyContextDeclExp(std::any aggregate, std::any nextResult) {
+
+        //get aggreggate Expression
+        std::shared_ptr<ocl::Expressions::PropertyContextDeclExp> propDeclExp = std::any_cast<std::shared_ptr<ocl::Expressions::PropertyContextDeclExp>>(aggregate);
+
+        //set type of the property
+        if (propDeclExp->getPropType() == nullptr) {
+
+            if (nextResult.type() == typeid(std::shared_ptr<ocl::Expressions::TypeExp>)) {
+                std::shared_ptr<ocl::Expressions::TypeExp> typeExp = std::any_cast<std::shared_ptr<ocl::Expressions::TypeExp>>(nextResult);
+                propDeclExp->setPropType(typeExp);
+            }
+            else if (nextResult.type() == typeid(std::shared_ptr<ocl::Expressions::TupleTypeExp>)) {
+                std::shared_ptr<ocl::Expressions::TupleTypeExp> tupleTypeExp = std::any_cast<std::shared_ptr<ocl::Expressions::TupleTypeExp>>(nextResult);
+                propDeclExp->setPropType(tupleTypeExp);
+            }
+            else if (nextResult.type() == typeid(std::shared_ptr<ocl::Expressions::CollectionTypeExp>)) {
+                std::shared_ptr<ocl::Expressions::CollectionTypeExp> colTypeExp = std::any_cast<std::shared_ptr<ocl::Expressions::CollectionTypeExp>>(nextResult);
+                propDeclExp->setPropType(colTypeExp);
             }
 
-            if(ctx->simpleNameCS() != nullptr) {
-                std::string simpleName = ctx->simpleNameCS()->ID()->getSymbol()->getText();
-                std::shared_ptr<Variable> var = ocl::Expressions::ExpressionsFactory::eInstance()->createVariable();
+        //set InitOrDerValuesExpr
+        } else if (propDeclExp->getInitOrDerValues() == nullptr) {
 
-                var->setName(simpleName);
-                var->setValue(oclExp->getInstance()->getResultValue());
-                var->setInitExpression(oclExp);
-                ctx->getEnv()->addElement(var->getName(), var, false);
+            if (nextResult.type() == typeid(std::shared_ptr<ocl::Expressions::InitOrDerValueListExp>)) {
+
+                std::shared_ptr<ocl::Expressions::InitOrDerValueListExp> iOdExp = std::any_cast<std::shared_ptr<ocl::Expressions::InitOrDerValueListExp>>(nextResult);
+                propDeclExp->setInitOrDerValues(iOdExp);
+
             }
-            ctx->setAST(oclExp);
-            return true;
+
+        } else {
+
+            //TODO error
+            // wrong expr input
+
+        }
+        
+    }
+
+    // ### handleOperationContextDecl ###
+    // append operationContextExpr and prePostBodyListExpr
+    void OclParserCustomVisitor::handleOperationContextDecl(std::any aggregate, std::any nextResult) {
+
+        //get aggreggate Expression
+        std::shared_ptr<ocl::Expressions::OperationContextDeclExp> operaDeclExp = std::any_cast<std::shared_ptr<ocl::Expressions::OperationContextDeclExp>>(aggregate);
+
+        // append as operationContext (operation Argument)
+        if (nextResult.type() == typeid(std::shared_ptr<ocl::Expressions::OperationContextExp>)
+            && operaDeclExp->getOperationContext() == nullptr) {
+
+            std::shared_ptr<ocl::Expressions::OperationContextExp> operaExp = std::any_cast<std::shared_ptr<ocl::Expressions::OperationContextExp>>(nextResult);
+            operaDeclExp->setOperationContext(operaExp);
+
+        }
+        // append as PrePostBodyExpressions (Pre, Post, Body Expressions)
+        else if (nextResult.type() == typeid(std::shared_ptr<ocl::Expressions::PrePostBodyListExp>)
+                   && operaDeclExp->getPrePostBodyExpressions() == nullptr) {
+
+            std::shared_ptr<ocl::Expressions::PrePostBodyListExp> ppbListExp = std::any_cast<std::shared_ptr<ocl::Expressions::PrePostBodyListExp>>(nextResult);
+            operaDeclExp->setPrePostBodyExpressions(ppbListExp);
+
+        } else {
+
+            //TODO add error
+            //wrong Expr at this point
         }
     }
-    return false;
-}
 
-bool OclParserCustomVisitor::arithmeticExpr(OclParser::OclExpressionCSContext *ctx)
-{
-    std::shared_ptr<OclExpression> leftExpr = ctx->oclExpressionCS(0)->getAST();
-    std::shared_ptr<OclExpression> rightExpr = ctx->oclExpressionCS(1)->getAST();
-    std::shared_ptr<fUML::Semantics::Values::Value> leftvalue = leftExpr->getInstance()->getResultValue();
-    std::shared_ptr<fUML::Semantics::Values::Value> rightvalue = rightExpr->getInstance()->getResultValue();
+    // ### handleOperationContextExp ###
+    // append all (optional) varDeclExp and the (optional) typeExp
+    void OclParserCustomVisitor::handleOperationContextExp(std::any aggregate, std::any nextResult) {
 
-    if(nullptr != std::dynamic_pointer_cast<fUML::Semantics::SimpleClassifiers::IntegerValue>(leftvalue) || std::dynamic_pointer_cast<fUML::Semantics::SimpleClassifiers::UnlimitedNaturalValue>(leftvalue) != nullptr)
-    {
-        int leftInt = retrieveInt(leftvalue);
-        if(nullptr != std::dynamic_pointer_cast<fUML::Semantics::SimpleClassifiers::IntegerValue>(rightvalue) || std::dynamic_pointer_cast<fUML::Semantics::SimpleClassifiers::UnlimitedNaturalValue>(rightvalue) != nullptr)
+        //get aggreggate Expression
+        std::shared_ptr<ocl::Expressions::OperationContextExp> operaExp = std::any_cast<std::shared_ptr<ocl::Expressions::OperationContextExp>>(aggregate);
+        
+        // append as VarDeclExp (operation Arguments)
+        if (nextResult.type() == typeid(std::shared_ptr<ocl::Expressions::VarDeclarationExp>)) {
+        
+            std::shared_ptr<ocl::Expressions::VarDeclarationExp> varDecExp = std::any_cast<std::shared_ptr<ocl::Expressions::VarDeclarationExp>>(nextResult);
+
+            operaExp->getInputParameters()->add(varDecExp);
+
+        }
+        // try add as TypeExp (3 possebilities)
+        else if (nextResult.type() == typeid(std::shared_ptr<ocl::Expressions::TypeExp>)) {
+
+            std::shared_ptr<ocl::Expressions::TypeExp> typeExp = std::any_cast<std::shared_ptr<ocl::Expressions::TypeExp>>(nextResult);
+
+            operaExp->setReturnType(typeExp);
+
+        }
+        else if (nextResult.type() == typeid(std::shared_ptr<ocl::Expressions::TupleTypeExp>)) {
+
+            std::shared_ptr<ocl::Expressions::TupleTypeExp> tupleTypeExp = std::any_cast<std::shared_ptr<ocl::Expressions::TupleTypeExp>>(nextResult);
+
+            operaExp->setReturnType(tupleTypeExp);
+
+        }
+        else if (nextResult.type() == typeid(std::shared_ptr<ocl::Expressions::CollectionTypeExp>)) {
+
+            std::shared_ptr<ocl::Expressions::CollectionTypeExp> colTypeExp = std::any_cast<std::shared_ptr<ocl::Expressions::CollectionTypeExp>>(nextResult);
+
+            operaExp->setReturnType(colTypeExp);
+
+        } else {
+
+            //TODO
+            // add error no allowed Exp at this point
+
+        }
+
+    }
+
+    // ### handlePrePostBodyListExp ###
+    // append Pre, Post, Body Expr
+    void OclParserCustomVisitor::handlePrePostBodyListExp(std::any aggregate, std::any nextResult) {
+
+        //get aggreggate Expression
+        std::shared_ptr<ocl::Expressions::PrePostBodyListExp> ppbListExp = std::any_cast<std::shared_ptr<ocl::Expressions::PrePostBodyListExp>>(aggregate);
+
+        // Debug
+        // std::cout << "handlePrePostBodyListExp: Enter Exp" << std::endl;
+
+        if (nextResult.type() == typeid(std::shared_ptr<ocl::Expressions::PrePostBodyExp>)) {
+
+            std::shared_ptr<ocl::Expressions::PrePostBodyExp> ppbExp = std::any_cast<std::shared_ptr<ocl::Expressions::PrePostBodyExp>>(nextResult);
+
+            // add to the correct list
+            if (ppbExp->getKind() == ocl::Expressions::PrePostBody::PRE) {
+                ppbListExp->getPreExpressionList()->add(ppbExp);
+            } else if (ppbExp->getKind() == ocl::Expressions::PrePostBody::POST) {
+                ppbListExp->getPostExpressionList()->add(ppbExp);
+            } else {
+                ppbListExp->getBodyExpressionList()->add(ppbExp);
+            }
+
+            // Debug
+            // std::cout << "handlePrePostBodyListExp: Appended Pre or Post or Body Exp" << std::endl;
+
+        } else {
+
+            //TODO add error
+            // nextResult must be an PrePostBodyExp
+
+        }
+
+    }
+
+    // ### handlePrePostBodyExp ###
+    // append bodyExp
+    void OclParserCustomVisitor::handlePrePostBodyExp(std::any aggregate, std::any nextResult) {
+
+        //get aggreggate Expression
+        std::shared_ptr<ocl::Expressions::PrePostBodyExp> ppbExp = std::any_cast<std::shared_ptr<ocl::Expressions::PrePostBodyExp>>(aggregate);
+
+        //get referredOclExp
+        std::shared_ptr<ocl::Expressions::OclExpression> oclExp = Utilities::oclCV::exp2oclExp(nextResult);
+
+        // set as innerExp
+        if (oclExp == nullptr) {
+
+            //TODO add error
+            //there must be an oclExp
+
+        } else {
+            ppbExp->setBodyExpression(oclExp);
+        }
+
+    }
+
+    // ### handleInitOrDerValueListExp ###
+    // append Init, Derived Expr
+    void OclParserCustomVisitor::handleInitOrDerValueListExp(std::any aggregate, std::any nextResult) {
+
+        //get aggreggate Expression
+        std::shared_ptr<ocl::Expressions::InitOrDerValueListExp> iOdListExp = std::any_cast<std::shared_ptr<ocl::Expressions::InitOrDerValueListExp>>(aggregate);
+
+        if (nextResult.type() == typeid(std::shared_ptr<ocl::Expressions::InitOrDerValueExp>)) {
+
+            std::shared_ptr<ocl::Expressions::InitOrDerValueExp> iOdExp = std::any_cast<std::shared_ptr<ocl::Expressions::InitOrDerValueExp>>(nextResult);
+
+            //add in the correct list
+            if (iOdExp->getKind() == Utilities::CONST_INIT) {
+                iOdListExp->getInitExpressionList()->add(iOdExp);
+            } else {
+                iOdListExp->getDerExpressionList()->add(iOdExp);
+            }
+
+        } else {
+
+            //TODO add error
+            // nextResult must be an InitOrDerValueExp
+
+        }
+
+    }
+
+    // ### handleInitOrDerValueExp ###
+    // append bodyExp
+    void OclParserCustomVisitor::handleInitOrDerValueExp(std::any aggregate, std::any nextResult) {
+
+        //get aggreggate Expression
+        std::shared_ptr<ocl::Expressions::InitOrDerValueExp> iOdExp = std::any_cast<std::shared_ptr<ocl::Expressions::InitOrDerValueExp>>(aggregate);
+
+        //get referredOclExp
+        std::shared_ptr<ocl::Expressions::OclExpression> oclExp = Utilities::oclCV::exp2oclExp(nextResult);
+
+        // set as innerExp
+        if (oclExp == nullptr) {
+
+            //TODO add error
+            //there must be an oclExp
+
+        } else {
+            iOdExp->setBodyExpression(oclExp);
+        }
+
+    }
+
+    // ### handleInvOrDefExp ###
+    // append referredExp
+    void OclParserCustomVisitor::handleInvOrDefExp(std::any aggregate, std::any nextResult) {
+
+        //get aggreggate Expression
+        std::shared_ptr<ocl::Expressions::InvOrDefExp> invOrDefExp = std::any_cast<std::shared_ptr<ocl::Expressions::InvOrDefExp>>(aggregate);
+
+        // DEF Exp allow only defExp as refferedExp
+        if (invOrDefExp->getKind() != Utilities::CONST_INV) {
+
+            if (nextResult.type() == typeid(std::shared_ptr<ocl::Expressions::DefExp>)) {
+                //get aggreggate Expression
+                std::shared_ptr<ocl::Expressions::DefExp> defExp = std::any_cast<std::shared_ptr<ocl::Expressions::DefExp>>(nextResult);
+                invOrDefExp->setReferredExpression(defExp);
+
+            } else {
+                // TODO add error
+                // only defExpr are allowed
+            }
+        } else {
+
+            //get referredOclExp
+            std::shared_ptr<ocl::Expressions::OclExpression> oclExp = Utilities::oclCV::exp2oclExp(nextResult);
+            
+            // set as refferedExp
+            if (oclExp == nullptr) {
+                //TODO add error
+                //there must be an oclExp
+            } else {
+                invOrDefExp->setReferredExpression(oclExp);
+            }
+        }
+
+    }
+
+    // ### handleDefExp ##
+    // append frontExpr and bodyExpr
+    void OclParserCustomVisitor::handleDefExp(std::any aggregate, std::any nextResult) {
+
+        //get aggreggate Expression
+        std::shared_ptr<ocl::Expressions::DefExp> defExp = std::any_cast<std::shared_ptr<ocl::Expressions::DefExp>>(aggregate);
+        
+        // check which part of the expre is meant
+        // depth first search -> check if frontExpr is set
+        if (defExp->getFrontExp() != nullptr) {
+
+            if (nextResult.type() == typeid(std::shared_ptr<ocl::Expressions::VarDeclarationExp>)) {
+                std::shared_ptr<ocl::Expressions::VarDeclarationExp> varDecExp = std::any_cast<std::shared_ptr<ocl::Expressions::VarDeclarationExp>>(nextResult);
+                defExp->setFrontExp(varDecExp); 
+            } else if (nextResult.type() == typeid(std::shared_ptr<ocl::Expressions::OperationContextExp>)) {
+                std::shared_ptr<ocl::Expressions::OperationContextExp> operaExp = std::any_cast<std::shared_ptr<ocl::Expressions::OperationContextExp>>(nextResult);
+                defExp->setFrontExp(operaExp); 
+            } else {
+
+                //TODO add error
+                // only those two Expressions are allowed as front Expr
+
+            }
+
+        } else {
+
+            // set bodyExpr
+
+            //get referredOclExp
+            std::shared_ptr<ocl::Expressions::OclExpression> oclExp = Utilities::oclCV::exp2oclExp(nextResult);
+            
+            // set as refferedExp
+            if (oclExp == nullptr) {
+                //TODO add error
+                //there must be an oclExp
+            } else {
+                defExp->setBodyExp(oclExp);
+            }
+        }
+    }
+
+    // ####################################
+    // ### nextResultHandling Functions ###
+    // ####################################
+
+    // ### nR_HandlingAssociationCallExp ###
+    //set "source" in AssociationCallExp and set "appliedElement" in oclExp
+    void OclParserCustomVisitor::nR_HandlingAssociationCallExp(std::any aggregate, std::any nextResult) {
+
+        //get aggregate
+        std::shared_ptr<ocl::Expressions::OclExpression> oclExp = Utilities::oclCV::exp2oclExp(aggregate);
+
+        if (oclExp == nullptr) {
+
+            //TODO error
+            // if it is an ExpInOcl self is used as source (context)
+            // or an non oclExp
+
+        } else {
+
+            setAppliedElement<std::shared_ptr<ocl::Expressions::AssociationClassCallExp>>(aggregate, nextResult);
+
+        }
+        
+    }
+
+    // ### nR_HandlingPropertyCallExp ###
+    //set "source" in PropertyCallExp and set "appliedElement" in oclExp
+    void OclParserCustomVisitor::nR_HandlingPropertyCallExp(std::any aggregate, std::any nextResult) {
+
+        //get aggregate
+        std::shared_ptr<ocl::Expressions::OclExpression> oclExp = Utilities::oclCV::exp2oclExp(aggregate);
+
+        if (oclExp == nullptr) {
+
+            //TODO error
+            // if it is an ExpInOcl self is used as source (context)
+            // or an non oclExp
+
+        } else {
+            
+            setAppliedElement<std::shared_ptr<ocl::Expressions::PropertyCallExp>>(aggregate, nextResult);
+            
+        }
+    }
+
+    // ### nR_HandlingOperationCallExp ###
+    //set "source" in OperationCallExp and set "appliedElement" in oclExp
+    void OclParserCustomVisitor::nR_HandlingOperationCallExp(std::any aggregate, std::any nextResult) {
+
+        //get aggregate
+        std::shared_ptr<ocl::Expressions::OclExpression> oclExp = Utilities::oclCV::exp2oclExp(aggregate);
+
+        if (oclExp == nullptr) {
+
+            //TODO error
+            // if it is an ExpInOcl self is used as source (context)
+            // or an non oclExp
+
+        } else {
+
+            setAppliedElement<std::shared_ptr<ocl::Expressions::OperationCallExp>>(aggregate, nextResult);
+
+        }
+    }
+
+    // ### nR_HandlingIteratorExp ###
+    //set "source" in IteratorExp and set "appliedElement" in oclExp
+    void OclParserCustomVisitor::nR_HandlingIteratorExp(std::any aggregate, std::any nextResult) {
+
+        //get aggregate
+        std::shared_ptr<ocl::Expressions::OclExpression> oclExp = Utilities::oclCV::exp2oclExp(aggregate);
+
+        if (oclExp == nullptr) {
+
+            //TODO error
+            // if it is an ExpInOcl self is used as source (context)
+            // or an non oclExp
+
+        } else {
+
+            setAppliedElement<std::shared_ptr<ocl::Expressions::IteratorExp>>(aggregate, nextResult);
+            
+        }
+    }
+
+    // ### nR_HandlingIterateExp ###
+    //set "source" in IterateExp and set "appliedElement" in oclExp
+    void OclParserCustomVisitor::nR_HandlingIterateExp(std::any aggregate, std::any nextResult) {
+
+       //get aggregate
+        std::shared_ptr<ocl::Expressions::OclExpression> oclExp = Utilities::oclCV::exp2oclExp(aggregate);
+
+        if (oclExp == nullptr) {
+
+            //TODO error
+            // if it is an ExpInOcl self is used as source (context)
+            // or an non oclExp
+
+        } else {
+
+            setAppliedElement<std::shared_ptr<ocl::Expressions::IterateExp>>(aggregate, nextResult);
+
+        }
+    }
+
+    // ### nR_HandlingMessageExp ###
+    //set the "target" in a MessageExp
+    void OclParserCustomVisitor::nR_HandlingMessageExp(std::any aggregate, std::any nextResult) {
+
+        //get aggregate
+        std::shared_ptr<ocl::Expressions::OclExpression> oclExp = Utilities::oclCV::exp2oclExp(aggregate);
+
+
+        if (oclExp == nullptr) {
+
+            //TODO
+            // if it is an ExpInOcl self is used as source (context)
+            // or an non oclExp
+
+        } else {
+
+            //get nextResult
+            std::shared_ptr<ocl::Expressions::MessageExp> mesExp = std::any_cast<std::shared_ptr<ocl::Expressions::MessageExp>>(nextResult);
+            mesExp->setTarget(oclExp);
+        }
+    }
+
+
+    // ###########################
+    // ### customVisitChildren ###
+    // ###########################
+    
+    // visit the children of the given node and add them to the parent node
+    // using the aggregateResult() Function
+    std::any OclParserCustomVisitor::customVisitChildren(std::any node, antlr4::tree::ParseTree *antlrTree) {
+
+        std::any result = node;
+        size_t n = antlrTree->children.size();
+        for (size_t i = 0; i < n; i++) {
+            // if (!shouldVisitNextChild(node, result)) {
+            // break;
+            // }
+
+            std::any childResult = antlrTree->children[i]->accept(this);
+            result = OclParserCustomVisitor::aggregateResult(std::move(result), std::move(childResult));
+        }
+
+        return result;
+
+    };
+
+    // #######################
+    // ### ExpressionInOcl ###
+    // #######################
+    
+    // ### ExpressionInOclCS ###
+    // top expression of any OCL Expression
+    std::any OclParserCustomVisitor::visitExpressionInOclCS(OclParser::ExpressionInOclCSContext *ctx) {
+
+        // create ExpressionInOclCS
+        std::shared_ptr<ExpressionInOcl> expInOcl = ocl::Expressions::ExpressionsFactory::eInstance()->createExpressionInOcl();
+
+        //bodyExpression will be appended in aggregateResult
+
+        // Debug
+        // std::cout << "visitExpressionInOcl: " << expInOcl->getMetaElementID() << std::endl;
+
+        // make an any for the Exp
+        std::any result = std::make_any<std::shared_ptr<ocl::Expressions::ExpressionInOcl>>(expInOcl);
+
+        return customVisitChildren(result, ctx);
+
+    };
+
+    // #####################
+    // ### OclExpression ###
+    // #####################    
+    
+    // ### OclExpression ###
+    // to handle Rules that are not seperated by a custom Rule (e.g. because no mutual left-recursive in antlr4)
+    // Operators e.g.: +,-,*,/,<,>,...
+    std::any OclParserCustomVisitor::visitOclExpressionCS(OclParser::OclExpressionCSContext *ctx) {
+
+        std::any emptyResult;
+        
+        //check if an operatorExpression is present
+        // create if necessary
+        // operands will be added in aggregateResult
+        if (ctx->binaryLiteralExpCS() != nullptr) {
+
+            // <, >, <>, <=, ...
+            //create Exp
+            std::shared_ptr<OperatorExp> operExp = ocl::Expressions::ExpressionsFactory::eInstance()->createOperatorExp();
+
+            // get operator and set
+            std::string oper = ctx->binaryLiteralExpCS()->getText();
+            operExp->setOperator(oper);
+
+            // Debug
+            // std::cout << "oclExp: Set " << oper << " as operator" << std::endl;
+
+            // make an any for the Exp
+            std::any result = std::make_any<std::shared_ptr<ocl::Expressions::OperatorExp>>(operExp);
+
+            return customVisitChildren(result, ctx);
+
+        } else if (ctx->STAR() != nullptr || ctx->SLASH() != nullptr) {
+
+            // *, /
+            //create Exp
+            std::shared_ptr<OperatorExp> operExp = ocl::Expressions::ExpressionsFactory::eInstance()->createOperatorExp();
+
+            // set correct operator
+            if (ctx->STAR() != nullptr) {
+                operExp->setOperator(Utilities::CONST_STAR);
+
+                // Debug
+                // std::cout << "oclExp: Set '*' as operator" << std::endl;
+
+            } else {
+                operExp->setOperator(Utilities::CONST_SLASH);
+
+                // Debug
+                // std::cout << "oclExp: Set '/' as operator" << std::endl;
+
+            }
+
+            // make an any for the Exp
+            std::any result = std::make_any<std::shared_ptr<ocl::Expressions::OperatorExp>>(operExp);
+
+            return customVisitChildren(result, ctx);
+
+        } else if (ctx->PLUS() != nullptr || ctx->MINUS() != nullptr) {
+
+            // +, -
+            //create Exp
+            std::shared_ptr<OperatorExp> operExp = ocl::Expressions::ExpressionsFactory::eInstance()->createOperatorExp();
+
+            // set correct operator
+            if (ctx->PLUS() != nullptr) {
+                operExp->setOperator(Utilities::CONST_PLUS);
+
+                // Debug
+                // std::cout << "oclExp: Set '+' as operator" << std::endl;
+
+            } else {
+                operExp->setOperator(Utilities::CONST_MINUS);
+
+                // Debug
+                // std::cout << "oclExp: Set '-' as operator" << std::endl;
+
+            }
+
+            // make an any for the Exp
+            std::any result = std::make_any<std::shared_ptr<ocl::Expressions::OperatorExp>>(operExp);
+
+            return customVisitChildren(result, ctx);
+
+        }
+
+        //if no Expression is created emptyResult will be set
+        // to ignore this Expression in the resultTree
+        return customVisitChildren(emptyResult, ctx);
+
+    }
+
+    // ##########################
+    // ### LiteralExpressions ###
+    // ##########################
+
+    // ### EnumLiteralExpCS ###
+    std::any OclParserCustomVisitor::visitEnumLiteralExpCS(OclParser::EnumLiteralExpCSContext *ctx) {
+        
+        //create Exp
+        std::shared_ptr<EnumLiteralExp> EnumExp = ocl::Expressions::ExpressionsFactory::eInstance()->createEnumLiteralExp();
+
+        //get enum name with path as String
+        std::string enumLitStr = ctx->getText();
+
+        //two ways of implementation
+        //currently the second one is used because the base model (the model on which the query is made) is unknown at this state 
+
+        // # 1 #
+        //ignore the enum name
+        //create enum literal and set literal name
+        //by ocl spec this should be a reference, but the base model is not known yet
+        std::shared_ptr<ecore::EEnumLiteral> enumLitObj = ecore::ecoreFactory::eInstance()->createEEnumLiteral();
+        std::string litNameStr = enumLitStr.substr((enumLitStr.find_last_of(Utilities::CONST_COLONCOLON)+1));
+        enumLitObj->setLiteral(litNameStr);
+
+        //set newly created enum Object
+        EnumExp->setReferredEnumLiteral(enumLitObj);
+
+        // # 2 #
+        //store complete enum name and enum literal name as string
+        //to resolve later at the evaluation (where the base model is known) 
+        EnumExp->setReferredEnumLiteralStr(enumLitStr);
+
+        // make an any for the Exp
+        std::any result = std::make_any<std::shared_ptr<ocl::Expressions::EnumLiteralExp>>(EnumExp);
+
+        return customVisitChildren(result, ctx);
+
+    };
+
+
+    // ### NullLiteralExpCS ###
+    std::any OclParserCustomVisitor::visitNullLiteralExpCS(OclParser::NullLiteralExpCSContext *ctx) {
+
+        //create Exp
+        std::shared_ptr<NullLiteralExp> nullExp = ocl::Expressions::ExpressionsFactory::eInstance()->createNullLiteralExp();
+
+        // make an any for the Exp
+        std::any result = std::make_any<std::shared_ptr<ocl::Expressions::NullLiteralExp>>(nullExp);
+
+        return customVisitChildren(result, ctx);
+
+    };
+
+    // ### InvalidLiteralExpCS ###
+    std::any OclParserCustomVisitor::visitInvalidLiteralExpCS(OclParser::InvalidLiteralExpCSContext *ctx) {
+
+        //create Exp
+        std::shared_ptr<InvalidLiteralExp> invalidExp = ocl::Expressions::ExpressionsFactory::eInstance()->createInvalidLiteralExp();
+
+        // make an any for the Exp
+        std::any result = std::make_any<std::shared_ptr<ocl::Expressions::InvalidLiteralExp>>(invalidExp);
+
+        return customVisitChildren(result, ctx);
+
+    }; 
+    
+    
+    // ### BooleanLiteralExpCS ###
+    std::any OclParserCustomVisitor::visitBooleanLiteralExpCS(OclParser::BooleanLiteralExpCSContext *ctx) {
+
+        //create Expression
+        std::shared_ptr<BooleanLiteralExp> boolExp = ocl::Expressions::ExpressionsFactory::eInstance()->createBooleanLiteralExp();
+
+        //extract information from grammar (bool value)
+        std::string b_str = ctx->BOOL()->getSymbol()->getText();
+        bool b = (b_str == Utilities::CONST_TRUE) ? true : false;
+        
+        // from PrimitiveLiteralExp
+        boolExp->setSymbol(b_str);
+        
+        // from BooleanLiteralExp
+        boolExp->setBooleanSymbol(b);
+
+        // make an any for the Exp
+        std::any result = std::make_any<std::shared_ptr<ocl::Expressions::BooleanLiteralExp>>(boolExp);
+
+        return customVisitChildren(result, ctx);
+
+    };
+
+    // ### StringLiteralExpCS ###
+    std::any OclParserCustomVisitor::visitStringLiteralExpCS(OclParser::StringLiteralExpCSContext *ctx) {
+
+        //create Exp
+        std::shared_ptr<StringLiteralExp> stringExp = ocl::Expressions::ExpressionsFactory::eInstance()->createStringLiteralExp();
+
+        //get string from query
+        std::string s_str = ctx->STRING_LITERAL()->getSymbol()->getText();
+
+        char removeChars[] = "'\"";
+
+        for (size_t i = 0; i < strlen(removeChars); i++)
         {
-            int rightInt = retrieveInt(rightvalue);
-            int result = 0;
-            if(ctx->PLUS() != nullptr) { // leftInt + rightReal
-                result = leftInt + rightInt;
-            }
-            else if(ctx->MINUS() != nullptr) { // leftInt - rightReal
-                result = leftInt - rightInt;
-            }
-            if(ctx->STAR() != nullptr) { // leftInt * rightInt
-                result = leftInt * rightInt;
-            }
-            else if(ctx->SLASH() != nullptr) { // leftInt / rightInt
-                result = leftInt / rightInt;
-            }
-            std::shared_ptr<fUML::Semantics::SimpleClassifiers::IntegerValue> intValue = fUML::Semantics::SimpleClassifiers::SimpleClassifiersFactory::eInstance()->createIntegerValue();
-            std::shared_ptr<ecore::EClassifier> type = ::types::typesPackage::eInstance()->getInteger_Class();
-            std::shared_ptr<IntegerLiteralExp> resultExpr = ExpressionsFactory::eInstance()->createIntegerLiteralExp();
-            std::shared_ptr<IntegerLiteralExpEval> resultEval = EvaluationsFactory::eInstance()->createIntegerLiteralExpEval();
-
-            intValue->setValue(result);
-            resultEval->setResultValue(intValue);
-            resultExpr->setEType(type);
-            resultExpr->setInstance(resultEval);
-            resultExpr->setIntegerSymbol(result);
-            ctx->setAST(resultExpr);
-            return true;
+            s_str.erase (std::remove(s_str.begin(), s_str.end(), removeChars[i]), s_str.end());
         }
-        else
-        {
-            std::shared_ptr<fUML::Semantics::SimpleClassifiers::RealValue> rightReal = std::dynamic_pointer_cast<fUML::Semantics::SimpleClassifiers::RealValue>(rightvalue);
-        	if(nullptr != rightReal)
-        	{
-				double result = 0;
-				if(ctx->PLUS() != nullptr) { // leftInt + rightReal
-					result = leftInt + rightReal->getValue();
-				}
-				else if(ctx->MINUS() != nullptr) { // leftInt - rightReal
-					result = leftInt - rightReal->getValue();
-				}
-				else if(ctx->STAR() != nullptr) { // leftInt * rightReal
-					result = leftInt * rightReal->getValue();
-				}
-				else if(ctx->SLASH() != nullptr) { // leftInt / rightReal
-					result = leftInt / rightReal->getValue();
-				}
-				std::shared_ptr<fUML::Semantics::SimpleClassifiers::RealValue> realValue = fUML::Semantics::SimpleClassifiers::SimpleClassifiersFactory::eInstance()->createRealValue();
-				std::shared_ptr<ecore::EClassifier> type = ::types::typesPackage::eInstance()->getReal_Class();
-				std::shared_ptr<RealLiteralExp> resultExpr = ExpressionsFactory::eInstance()->createRealLiteralExp();
-				std::shared_ptr<RealLiteralExpEval> resultEval = EvaluationsFactory::eInstance()->createRealLiteralExpEval();
+        
 
-				realValue->setValue(result);
-				resultEval->setResultValue(realValue);
-				resultExpr->setEType(type);
-				resultExpr->setInstance(resultEval);
-				resultExpr->setRealSymbol(result);
-				ctx->setAST(resultExpr);
-				return true;
-			}
-			else {
-				ctx->getErrorListener()->syntaxError("The right value of a binary operation with a left integer value must be an integer, an unlimiteNatural, or a real");
-			}
-		}
+        // from PrimitiveLiteralExp
+        stringExp->setSymbol(s_str);
+        
+        // from StringLiteralExp
+        stringExp->setStringSymbol(s_str);
+
+        // make an any for the Exp
+        std::any result = std::make_any<std::shared_ptr<ocl::Expressions::StringLiteralExp>>(stringExp);
+
+        return customVisitChildren(result, ctx);
+  
+    };
+
+    // ### RealLiteralExpCS ###
+    std::any OclParserCustomVisitor::visitRealLiteralExpCS(OclParser::RealLiteralExpCSContext *ctx) {
+
+        //create Exp
+        std::shared_ptr<RealLiteralExp> realExp = ocl::Expressions::ExpressionsFactory::eInstance()->createRealLiteralExp();
+
+        //get real as string from query
+        std::string r_str = ctx->REAL()->getSymbol()->getText();
+
+        //from PrimitiveLiteralExp
+        realExp->setSymbol(r_str);
+
+        //from RealLiteralExp
+        realExp->setRealSymbol(std::stod(r_str));
+
+        // make an any for the Exp
+        std::any result = std::make_any<std::shared_ptr<ocl::Expressions::RealLiteralExp>>(realExp);
+
+        return customVisitChildren(result, ctx);
+        
+    };
+
+    // ### UnlimitedNaturalLiteralExpCS ###
+    std::any OclParserCustomVisitor::visitUnlimitedNaturalLiteralExpCS(OclParser::UnlimitedNaturalLiteralExpCSContext *ctx) {
+
+        //create Exp
+        std::shared_ptr<UnlimitedNaturalExp> unNatExp = ocl::Expressions::ExpressionsFactory::eInstance()->createUnlimitedNaturalExp();
+
+        //get unNat as string from query
+        std::string u_str = ctx->getText();
+        
+        //from PrimitiveExpression
+        unNatExp->setSymbol(u_str);
+
+        //from UnlimitednaturalExpression
+        //set the unNatSymbol to either -1 for infinity (*)
+        //or to the given integer
+        if (u_str.compare(Utilities::CONST_STAR) == 0) {
+            unNatExp->setUnlimitedNaturalSymbol(-1);
+        } else {
+            unNatExp->setUnlimitedNaturalSymbol(std::stoi(u_str));
+        }
+
+        // make an any for the Exp
+        std::any result = std::make_any<std::shared_ptr<ocl::Expressions::UnlimitedNaturalExp>>(unNatExp);
+
+        return customVisitChildren(result, ctx);
+
+    };
+
+    // ### IntegerLiteralExpCS ###
+    std::any OclParserCustomVisitor::visitIntegerLiteralExpCS(OclParser::IntegerLiteralExpCSContext *ctx) {
+
+        //create Exp
+        std::shared_ptr<IntegerLiteralExp> intExp = ocl::Expressions::ExpressionsFactory::eInstance()->createIntegerLiteralExp();
+
+        //get int as string from query
+        std::string i_str = ctx->INT()->getSymbol()->getText();
+
+        //from PrimitiveLiteralExp
+        intExp->setSymbol(i_str);
+
+        //from IntegerLiteralExp
+        intExp->setIntegerSymbol(std::stoi(i_str));
+
+        // Debug
+        // std::cout << "IntegerLiteralExp: set " << i_str << " as integer" << std::endl;
+       
+        // make an any for the Exp
+        std::any result = std::make_any<std::shared_ptr<ocl::Expressions::IntegerLiteralExp>>(intExp);
+
+        return customVisitChildren(result, ctx);
+
+    };
+
+    // ### CollectionLiteralExpCS ###
+    std::any OclParserCustomVisitor::visitCollectionLiteralExpCS(OclParser::CollectionLiteralExpCSContext *ctx) {
+
+        //create Exp
+        std::shared_ptr<CollectionLiteralExp> colExp = ocl::Expressions::ExpressionsFactory::eInstance()->createCollectionLiteralExp();
+
+        //get collection kind
+        std::string colKi_str = ctx->collectionTypeIdentifierCS()->getText();
+
+        //set collection kind
+        if (colKi_str.compare(Utilities::CONST_SET) == 0) {
+            colExp->setKind(ocl::Expressions::CollectionKind::SET);
+        }
+        else if (colKi_str.compare(Utilities::CONST_ORDEREDSET) == 0) {
+            colExp->setKind(ocl::Expressions::CollectionKind::ORDEREDSET);
+        }
+        else if (colKi_str.compare(Utilities::CONST_SEQUENCE) == 0) {
+            colExp->setKind(ocl::Expressions::CollectionKind::SEQUENCE);
+        }
+        else if (colKi_str.compare(Utilities::CONST_BAG) == 0) {
+            colExp->setKind(ocl::Expressions::CollectionKind::BAG);
+        }
+        //this is not allowed
+        else if (colKi_str.compare(Utilities::CONST_COLLECTION) == 0) {
+            //TODO error management
+            //e.g.: 'Collection' is an abstract super class
+            //valid collections are: Set, orderedSet, Sequence, Bag
+        }  
+
+        //TODO the collection literals will be added via customVisitChildren and aggreagateResult
+
+        // make an any for the Exp
+        std::any result = std::make_any<std::shared_ptr<ocl::Expressions::CollectionLiteralExp>>(colExp);
+
+        return customVisitChildren(result, ctx);
+
+    };
+
+    // ### CollectionLiteralPartsCS ###
+    //to create an collector for all collectionItems (neccessary because of the grammar structure)
+    //parts will be added alter in aggregate result
+    std::any OclParserCustomVisitor::visitCollectionLiteralPartsCS(OclParser::CollectionLiteralPartsCSContext *ctx) {
+
+        //create Exp
+        std::shared_ptr<ocl::Expressions::CollectionLiteralParts> litPartsExp = ocl::Expressions::ExpressionsFactory::eInstance()->createCollectionLiteralParts();
+
+        // make an any for the Exp
+        std::any result = std::make_any<std::shared_ptr<ocl::Expressions::CollectionLiteralParts>>(litPartsExp);
+
+        return customVisitChildren(result, ctx);
+
     }
-	else
-	{
-		std::shared_ptr<fUML::Semantics::SimpleClassifiers::RealValue> leftReal = std::dynamic_pointer_cast<fUML::Semantics::SimpleClassifiers::RealValue>(leftvalue);
-		if(nullptr != leftReal )
-		{
-			if(nullptr != std::dynamic_pointer_cast<fUML::Semantics::SimpleClassifiers::IntegerValue>(rightvalue) || std::dynamic_pointer_cast<fUML::Semantics::SimpleClassifiers::UnlimitedNaturalValue>(rightvalue) != nullptr)
-			{
-				int rightInt = retrieveInt(rightvalue);
-				double result = 0;
-				if(ctx->PLUS() != nullptr) { // leftReal + rightInt
-					result = leftReal->getValue() + rightInt;
-				}
-				else if(ctx->MINUS() != nullptr) { // leftReal - rightInt
-					result = leftReal->getValue() - rightInt;
-				}
-				else if(ctx->STAR() != nullptr) { // leftReal * rightInt
-					result = leftReal->getValue() * rightInt;
-				}
-				else if(ctx->SLASH() != nullptr) { // leftReal / rightInt
-					result = leftReal->getValue() / rightInt;
-				}
-				std::shared_ptr<fUML::Semantics::SimpleClassifiers::RealValue> realValue = fUML::Semantics::SimpleClassifiers::SimpleClassifiersFactory::eInstance()->createRealValue();
-				std::shared_ptr<ecore::EClassifier> type = ::types::typesPackage::eInstance()->getReal_Class();
-				std::shared_ptr<RealLiteralExp> resultExpr = ExpressionsFactory::eInstance()->createRealLiteralExp();
-				std::shared_ptr<RealLiteralExpEval> resultEval = EvaluationsFactory::eInstance()->createRealLiteralExpEval();
 
-				realValue->setValue(result);
-				resultEval->setResultValue(realValue);
-				resultExpr->setEType(type);
-				resultExpr->setInstance(resultEval);
-				resultExpr->setRealSymbol(result);
-				ctx->setAST(resultExpr);
-				return true;
-			}
-			else
-			{
-				std::shared_ptr<fUML::Semantics::SimpleClassifiers::RealValue> rightReal = std::dynamic_pointer_cast<fUML::Semantics::SimpleClassifiers::RealValue>(rightvalue);
-				if(nullptr!= rightReal)
-				{
-					double result = 0;
-					if(ctx->PLUS() != nullptr) { // leftReal + rightReal
-						result = leftReal->getValue() + rightReal->getValue();
-					}
-					else if(ctx->MINUS() != nullptr) { // leftReal - rightReal
-						result = leftReal->getValue() - rightReal->getValue();
-					}
-					else if(ctx->STAR() != nullptr) { // leftReal * rightReal
-						result = leftReal->getValue() * rightReal->getValue();
-					}
-					else if(ctx->SLASH() != nullptr) { // leftReal / rightReal
-						result = leftReal->getValue() / rightReal->getValue();
-					}
-					std::shared_ptr<fUML::Semantics::SimpleClassifiers::RealValue> realValue = fUML::Semantics::SimpleClassifiers::SimpleClassifiersFactory::eInstance()->createRealValue();
-					std::shared_ptr<ecore::EClassifier> type = ::types::typesPackage::eInstance()->getReal_Class();
-					std::shared_ptr<RealLiteralExp> resultExpr = ExpressionsFactory::eInstance()->createRealLiteralExp();
-					std::shared_ptr<RealLiteralExpEval> resultEval = EvaluationsFactory::eInstance()->createRealLiteralExpEval();
+    // ### CollectionRangeCS ###
+    //to distinguish between a range and a single item later in aggregate result
+    std::any OclParserCustomVisitor::visitCollectionRangeCS(OclParser::CollectionRangeCSContext *ctx) {
 
-					realValue->setValue(result);
-					resultEval->setResultValue(realValue);
-					resultExpr->setEType(type);
-					resultExpr->setInstance(resultEval);
-					resultExpr->setRealSymbol(result);
-					ctx->setAST(resultExpr);
-					return true;
-				}
-				else
-				{
-					ctx->getErrorListener()->syntaxError("The right value of a binary operation with a left real value must be an integer, an unlimiteNatural, or a real");
-				}
-			}
-		}
-		else
-		{
-			ctx->getErrorListener()->syntaxError("The left and right value of a binary operation must be integers, unlimiteNaturals, or reals");
-		}
-	}
-    return false;
-}
+        //create Exp
+        std::shared_ptr<ocl::Expressions::CollectionRange> colRa = ocl::Expressions::ExpressionsFactory::eInstance()->createCollectionRange();
 
-std::shared_ptr<fUML::Semantics::SimpleClassifiers::BooleanValue> OclParserCustomVisitor::doOperation(OclParser::BinaryLiteralExpCSContext *binCS, double left, double right)
-{
-    bool result = false;
-    if(binCS->LT() != nullptr) { // leftReal < right
-        result = left < right;
-    }
-    else if(binCS->GT() != nullptr) { // leftReal > right
-        result = left > right;
-    }
-    else if(binCS->LTE() != nullptr) { // leftReal <= right
-        result = left <= right;
-    }
-    else if(binCS->GTE() != nullptr) { // leftReal >= right
-        result = left >= right;
-    }
-    else if(binCS->ASSIGN() != nullptr) { // leftReal == right
-        result = left == right;
-    }
-    else if(binCS->INEQUAL() != nullptr) { // leftReal != right
-        result = left != right;
-    }
-    std::shared_ptr<fUML::Semantics::SimpleClassifiers::BooleanValue> boolValue = fUML::Semantics::SimpleClassifiers::SimpleClassifiersFactory::eInstance()->createBooleanValue();
-    boolValue->setValue(result);
-    return boolValue;
-}
+        //because the Lexer trys to find the longest matching Rule to a String
+        // it is neccessary to define a special Rule for this case otherwise
+        // an Real will be missinterpretated (e.g.: 1..2 as 1. Real is wrong) 
+        if (ctx->SEQRANGE() != nullptr) {
 
-std::shared_ptr<BooleanLiteralExp> OclParserCustomVisitor::createBooleanLiteralExp(bool value)
-{
-    std::shared_ptr<BooleanLiteralExp> boolExp = ocl::Expressions::ExpressionsFactory::eInstance()->createBooleanLiteralExp();
-    std::shared_ptr<fUML::Semantics::SimpleClassifiers::BooleanValue> boolValue = fUML::Semantics::SimpleClassifiers::SimpleClassifiersFactory::eInstance()->createBooleanValue();
-    std::shared_ptr<ecore::EClassifier> type = ::types::typesPackage::eInstance()->getBoolean_Class();
-    std::shared_ptr<BooleanLiteralExpEval> boolEval = ocl::Evaluations::EvaluationsFactory::eInstance()->createBooleanLiteralExpEval();
+            //SEQSTRING = Minus? DecimalNumeral Range
+            
+            std::shared_ptr<PrefixedExp> preExp;
+            
+            std::string seqString = ctx->SEQRANGE()->getText();
+            
+            //erase unecessary parts
+            seqString.erase(seqString.find(Utilities::CONST_DOTDOT), 2);
 
-    boolValue->setValue(value);
-    boolEval->setResultValue(boolValue);
-    boolExp->setBooleanSymbol(value);
-    boolExp->setEType(type);
-    boolExp->setInstance(boolEval);
+            // check if an prefix is set
+            if (seqString.find(Utilities::CONST_MINUS) != std::string::npos) {
+                
+                preExp = ocl::Expressions::ExpressionsFactory::eInstance()->createPrefixedExp();
+                preExp->setUnarySymbol(Utilities::CONST_MINUS);
 
-    return boolExp;
-}
+                //removes "-" for further processing
+                seqString.erase(seqString.find(Utilities::CONST_MINUS), 1);
 
-std::shared_ptr<VariableExp> OclParserCustomVisitor::createVariableExp(std::shared_ptr<Variable> var)
-{
-    std::shared_ptr<VariableExp> exp = ocl::Expressions::ExpressionsFactory::eInstance()->createVariableExp();
-    std::shared_ptr<VariableExpEval> expEval = ocl::Evaluations::EvaluationsFactory::eInstance()->createVariableExpEval();
-
-    expEval->setModel(exp);
-    expEval->setResultValue(var->getValue());
-
-    exp->setName(var->getName());
-    exp->setInstance(expEval);
-    exp->setReferredVariable(var);
-    exp->setEType(var->getEType());
-    return exp;
-}
-
-int OclParserCustomVisitor::retrieveInt(std::shared_ptr<fUML::Semantics::Values::Value> value)
-{
-    int intValue = 0;
-    std::shared_ptr<fUML::Semantics::SimpleClassifiers::IntegerValue> left = std::dynamic_pointer_cast<fUML::Semantics::SimpleClassifiers::IntegerValue>(value);
-
-    if(nullptr!= left)
-    {
-        intValue = left->getValue();
-    }
-    else
-    {
-        std::shared_ptr<fUML::Semantics::SimpleClassifiers::UnlimitedNaturalValue> left = std::dynamic_pointer_cast<fUML::Semantics::SimpleClassifiers::UnlimitedNaturalValue>(value);
-        intValue = left->getValue();
-    }
-    return intValue;
-}
-
-bool OclParserCustomVisitor::visitForBoolExp(CSTNode *ctx, OclParser::OclExpressionCSContext *oclExpCS, OclParser::SimpleNameCSContext *simpleNameCS)
-{
-    if(visitOclExpressionCS(oclExpCS)) {
-        std::shared_ptr<OclExpression> boolExp = oclExpCS->getAST();
-        std::shared_ptr<fUML::Semantics::Values::Value> boolValue = boolExp->getInstance()->getResultValue();
-
-        if(nullptr != std::dynamic_pointer_cast<fUML::Semantics::SimpleClassifiers::BooleanValue>(boolValue))
-        {
-            if(simpleNameCS != nullptr)
-            {
-                std::string simpleName = simpleNameCS->ID()->getSymbol()->getText();
-                std::shared_ptr<Variable> var = ocl::Expressions::ExpressionsFactory::eInstance()->createVariable();
-
-                var->setName(simpleName);
-                var->setValue(boolValue);
-                var->setInitExpression(boolExp);
-                ctx->getEnv()->addElement(var->getName(), var, false);
             }
-            ctx->setAST(boolExp);
-            return true;
+
+            //get int from string
+            int first = stoi(seqString);
+
+            //create IntExp and set values
+            std::shared_ptr<IntegerLiteralExp> intExp = ocl::Expressions::ExpressionsFactory::eInstance()->createIntegerLiteralExp();
+            intExp->setIntegerSymbol(first);
+            intExp->setSymbol(seqString);
+            
+            // set the correct expression as "first" of collectionRange
+            if (preExp != nullptr) {
+                colRa->setFirst(preExp);
+
+                // Debug
+                // std::cout << "collectionRange: set PrefixedExp as first" << std::endl;
+
+            } else {
+                colRa->setFirst(intExp);
+
+                // Debug
+                // std::cout << "collectionRange: set IntExp as first" << std::endl;
+
+            }
+            
         }
-        else {
-            ctx->getErrorListener()->syntaxError("The Result of an invariant must be a boolean");
+        
+        // make an any for the Exp
+        std::any result = std::make_any<std::shared_ptr<ocl::Expressions::CollectionRange>>(colRa);
+
+        return customVisitChildren(result, ctx);
+
+    }
+
+    // ### TupleLiteralExpCS ###
+    std::any OclParserCustomVisitor::visitTupleLiteralExpCS(OclParser::TupleLiteralExpCSContext *ctx) {
+
+        //create Exp
+        std::shared_ptr<ocl::Expressions::TupleLiteralExp> tupExp = ocl::Expressions::ExpressionsFactory::eInstance()->createTupleLiteralExp();
+
+        // make an any for the Exp
+        std::any result = std::make_any<std::shared_ptr<ocl::Expressions::TupleLiteralExp>>(tupExp);
+
+        return customVisitChildren(result, ctx);
+
+    }
+
+    // #######################
+    // ### CallExpressions ###
+    // #######################
+
+    // ### AssociationClassExp_A
+    std::any OclParserCustomVisitor::visitAssociationClassCallExpCS_A(OclParser::AssociationClassCallExpCS_AContext *ctx) {
+
+        //create Exp
+        std::shared_ptr<ocl::Expressions::AssociationClassCallExp> assExp = ocl::Expressions::ExpressionsFactory::eInstance()->createAssociationClassCallExp();
+
+        //from CallExp will be set in CustomVisitor
+
+        //from FeatureCallExp
+
+        assExp->setIsPre((ctx->isMarkedPreCS() != nullptr));
+
+        //from NavigationCallExp will be set in CustomVisitor
+
+        //from AssociationClassCallExp
+
+        std::string refAssClName = ctx->simpleNameCS()->getText();
+        assExp->setReferredAssociationClass(refAssClName);
+        
+        // make an any for the Exp
+        std::any result = std::make_any<std::shared_ptr<ocl::Expressions::AssociationClassCallExp>>(assExp);
+
+        return customVisitChildren(result, ctx);
+        
+    }
+
+    // ### AssociationClassExp_B
+    std::any OclParserCustomVisitor::visitAssociationClassCallExpCS_B(OclParser::AssociationClassCallExpCS_BContext *ctx) {
+
+        //create Exp
+        std::shared_ptr<ocl::Expressions::AssociationClassCallExp> assExp = ocl::Expressions::ExpressionsFactory::eInstance()->createAssociationClassCallExp();
+
+        //from CallExp will be set in CustomVisitor
+
+        //from FeatureCallExp
+
+        assExp->setIsPre((ctx->isMarkedPreCS() != nullptr));
+
+        //from NavigationCallExp will be set in CustomVisitor
+
+        //from AssociationClassCallExp
+
+        std::string refAssClName = ctx->simpleNameCS()->getText();
+        assExp->setReferredAssociationClass(refAssClName);
+        
+        // make an any for the Exp
+        std::any result = std::make_any<std::shared_ptr<ocl::Expressions::AssociationClassCallExp>>(assExp);
+
+        return customVisitChildren(result, ctx);
+        
+    }
+
+    // ### propertyCallExpCS_A ###
+    // set refferedProperty name
+    std::any OclParserCustomVisitor::visitPropertyCallExpCS_A(OclParser::PropertyCallExpCS_AContext *ctx) {
+
+        //create Exp
+        std::shared_ptr<ocl::Expressions::PropertyCallExp> propExp = ocl::Expressions::ExpressionsFactory::eInstance()->createPropertyCallExp();
+
+        //from CallExp will be set in CustomVisitor
+
+        //from FeatureCallExp
+
+        propExp->setIsPre((ctx->isMarkedPreCS() != nullptr));
+
+        //from PropertyClassCallExp
+        //set propertyName with (optional) path
+        std::string propName = ctx->simpleNameCS()->getText();
+        
+        if (ctx->pathNameCS() != nullptr) {
+            std::string pathName = ctx->pathNameCS()->getText();
+            propName.insert(0, pathName + Utilities::CONST_COLONCOLON);
         }
-    }
-    return false;
-}
 
-string OclParserCustomVisitor::getPath(std::vector<string> path)
-{
-    std::string str;
-    for(size_t i = 0; i < path.size(); i++) {
-        if(i == 0) str = path[i];
-        else str += "::" + path[i];
-    }
-    return str;
-}
+        propExp->setReferredProperty(propName);
 
-antlrcpp::Any OclParserCustomVisitor::visitArgumentsCS(OclParser::ArgumentsCSContext *ctx)
-{
-    OclParser::OclExpressionCSContext* expr = ctx->oclExpressionCS();
-    OclParser::ArgumentsCSContext* arguments = ctx->argumentsCS();
+        //from NavigationCallExp
 
-    expr->setEnv(ctx->getEnv());
-    expr->setErrorListener(ctx->getErrorListener());
-    visitOclExpressionCS(expr);
+        propExp->setNavigationSource(propName);
 
-    if(std::dynamic_pointer_cast<NavigationCallExp>(ctx->getAST()) != nullptr) {
-        std::shared_ptr<NavigationCallExp> navExpr = std::dynamic_pointer_cast<NavigationCallExp>(ctx->getAST());
-        navExpr->getQualifier()->add(expr->getAST());
-    }
-    else {
-        std::shared_ptr<OperationCallExp> opExpr = std::dynamic_pointer_cast<OperationCallExp>(ctx->getAST());
-        opExpr->getArgument()->add(expr->getAST());
+        // Debug
+        // std::cout << "PropertyCallCS_A: set as PropName: " << propName << std::endl;
+        
+        // make an any for the Exp
+        std::any result = std::make_any<std::shared_ptr<ocl::Expressions::PropertyCallExp>>(propExp);
+
+        return customVisitChildren(result, ctx);
+
     }
 
-    if(arguments != nullptr) {
-        arguments->setEnv(ctx->getEnv());
-        arguments->setErrorListener(ctx->getErrorListener());
-        arguments->setAST(ctx->getAST());
-        visitArgumentsCS(arguments);
+    // ### propertyCallExpCS_B ###
+    // set referredProperty name
+    std::any OclParserCustomVisitor::visitPropertyCallExpCS_B(OclParser::PropertyCallExpCS_BContext *ctx) {
+
+        //create Exp
+        std::shared_ptr<ocl::Expressions::PropertyCallExp> propExp = ocl::Expressions::ExpressionsFactory::eInstance()->createPropertyCallExp();
+
+        //from CallExp will be set in CustomVisitor
+
+        //from FeatureCallExp
+
+        propExp->setIsPre((ctx->isMarkedPreCS() != nullptr));
+
+        //from NavigationCallExp will be set in CustomVisitor
+
+        //from PropertyCallExp
+        //set propertyName
+        std::string propName = ctx->simpleNameCS()->getText();
+        propExp->setReferredProperty(propName);
+
+        //from NavigationCallExp
+        propExp->setNavigationSource(propName);
+
+        // Debug
+        // std::cout << "PropertyCallCS_B: set as PropName: " << propName << std::endl;
+        
+        // make an any for the Exp
+        std::any result = std::make_any<std::shared_ptr<ocl::Expressions::PropertyCallExp>>(propExp);
+
+        return customVisitChildren(result, ctx);
+
     }
-    return true;
-}
+
+    // ### operationCallExpCS_A ###
+    // set referredOperation name
+    std::any OclParserCustomVisitor::visitOperationCallExpCS_A(OclParser::OperationCallExpCS_AContext *ctx) {
+
+        //create Exp
+        std::shared_ptr<ocl::Expressions::OperationCallExp> opExp = ocl::Expressions::ExpressionsFactory::eInstance()->createOperationCallExp();
+
+        //from CallExp will be set in CustomVisitor
+
+        //from FeatureCallExp
+
+        opExp->setIsPre((ctx->isMarkedPreCS() != nullptr));
+
+        //from OperationCallExp
+        //set propertyName with (optional) path
+        std::string opName = ctx->simpleNameCS()->getText();
+        
+        if (ctx->pathNameCS() != nullptr) {
+            std::string pathName = ctx->pathNameCS()->getText();
+            opName.insert(0, pathName + Utilities::CONST_COLONCOLON);
+        }
+
+        opExp->setReferredOperation(opName);
+
+        //for later use in eval, to check if it is an collection Operation
+        opExp->setIsRArrow(ctx->RARROW()!=nullptr); 
+
+        // make an any for the Exp
+        std::any result = std::make_any<std::shared_ptr<ocl::Expressions::OperationCallExp>>(opExp);
+
+        return customVisitChildren(result, ctx);
+
+    }
+
+    // ### operationCallExpCS_B ###
+    // set referredOperation name
+    std::any OclParserCustomVisitor::visitOperationCallExpCS_B(OclParser::OperationCallExpCS_BContext *ctx) {
+
+        //create Exp
+        std::shared_ptr<ocl::Expressions::OperationCallExp> opExp = ocl::Expressions::ExpressionsFactory::eInstance()->createOperationCallExp();
+
+        //from CallExp will be set in CustomVisitor
+
+        //from FeatureCallExp
+
+        opExp->setIsPre((ctx->isMarkedPreCS() != nullptr));
+
+        //from OperationCallExp
+        //set propertyName with path or simple name
+        std::string opName;
+        
+        if (ctx->pathNameCS() != nullptr) {
+            std::string opName = ctx->pathNameCS()->getText();
+        } else if (ctx->pathNameCS() != nullptr) {
+            std::string opName = ctx->simpleNameCS()->getText();
+        } else {
+            //TODO error
+            //no operation name is set
+            //this case shouldn't be reachable
+        }
+
+        opExp->setReferredOperation(opName); 
+
+        // make an any for the Exp
+        std::any result = std::make_any<std::shared_ptr<ocl::Expressions::OperationCallExp>>(opExp);
+
+        return customVisitChildren(result, ctx);
+
+    }
+
+    // ### IteratorExp ###
+    // set iteratorName
+    // check if it is an implicit Iterator Call
+    // check it it is an Collection Operation Call
+    std::any OclParserCustomVisitor::visitIteratorExpCS(OclParser::IteratorExpCSContext *ctx) {
+
+        // create Exp
+        std::shared_ptr<ocl::Expressions::IteratorExp> itoExp = ocl::Expressions::ExpressionsFactory::eInstance()->createIteratorExp();
+
+        // check if it is an implicit "collect iterator"
+        itoExp->setIsImplCollectIterator(ctx->RARROW() == nullptr);
+        
+        // check if it is an Collection Operation
+        itoExp->setIsCollectionOperation(ctx->RARROW() != nullptr);
+
+        // set sourrunding Type (Brackets, Paren, None)
+        // for later use in the Evaluation Parts
+        if (ctx->LPAREN() != nullptr) {
+            itoExp->setSourrundedBy(ocl::Expressions::SurroundingType::PAREN);
+        } else if (ctx->LBRACK() != nullptr) {
+            itoExp->setSourrundedBy(ocl::Expressions::SurroundingType::BRACKETS);
+        } else {
+            itoExp->setSourrundedBy(ocl::Expressions::SurroundingType::NONE);
+        }
+
+        // get iterator Operation Name or name of the Collection
+        std::string itoName = ctx->simpleNameCS()->getText();
+
+        // set iterName
+        itoExp->setIterName(itoName);
+
+        // make an any for the Exp
+        std::any result = std::make_any<std::shared_ptr<ocl::Expressions::IteratorExp>>(itoExp);
+
+        return customVisitChildren(result, ctx);
+    }
+
+    // ### IterateExp ###
+    // special kind of iterate function
+    // iterName is always "iterate"
+    // iterate Collection Operation can parameterized as all other collection Operations
+    std::any OclParserCustomVisitor::visitIterateExpCS(OclParser::IterateExpCSContext *ctx) {
+
+        // create Exp
+        std::shared_ptr<ocl::Expressions::IterateExp> iterExp = ocl::Expressions::ExpressionsFactory::eInstance()->createIterateExp();
+
+        // the iterateExp is always an Collection Exp
+        iterExp->setIsCollectionOperation(true);
+
+        // get iterater Operation Name or name of the Collection
+        std::string iterName = ctx->ITERATE()->getText();
+
+        // set iterName
+        iterExp->setIterName(iterName);
+
+        // make an any for the Exp
+        std::any result = std::make_any<std::shared_ptr<ocl::Expressions::IterateExp>>(iterExp);
+
+        return customVisitChildren(result, ctx);
+
+    }
+
+    // #####################
+    // ### If Expression ###
+    // #####################
+
+    // ### If Expression ###
+    std::any OclParserCustomVisitor::visitIfExpCS(OclParser::IfExpCSContext *ctx) {
+
+        //create Exp
+        std::shared_ptr<ocl::Expressions::IfExp> ifExp = ocl::Expressions::ExpressionsFactory::eInstance()->createIfExp();
+
+        //the conditions will be added in the customVisitor
+
+        // make an any for the Exp
+        std::any result = std::make_any<std::shared_ptr<ocl::Expressions::IfExp>>(ifExp);
+
+        return customVisitChildren(result, ctx);
+
+    }
+
+    // ###########################
+    // ### Variable Expression ###
+    // ###########################
+
+    // ### VariableExp ###
+    //set variable name as string
+    std::any OclParserCustomVisitor::visitVariableExpCS(OclParser::VariableExpCSContext *ctx) {
+
+        // Debug
+        // std::cout << "VariableExp: entered" << std::endl;
+        
+        //create Exp
+        std::shared_ptr<VariableExp> varExp = ocl::Expressions::ExpressionsFactory::eInstance()->createVariableExp();
+
+        //set Variable name as string for later reuse
+        //either self or a simpleName is set a Variable name
+        if (ctx->SELF() != nullptr) {
+            varExp->setReferredVariable(Utilities::CONST_SELF);
+
+            // Debug
+            // std::cout << "VariableExp: created a 'self' variableExp" << std::endl;
+
+
+        } else {
+            std::string varName = ctx->simpleNameCS()->getText();
+            varExp->setReferredVariable(varName);
+
+            // Debug
+            // std::cout << "VariableExp: created a " << varName << " variableExp" << std::endl;
+
+        }
+
+        // make an any for the Exp
+        std::any result = std::make_any<std::shared_ptr<ocl::Expressions::VariableExp>>(varExp);
+
+        return customVisitChildren(result, ctx);
+
+    }
+
+    // ######################
+    // ### Let Expression ###
+    // ######################
+
+    // ### LetExp ###
+    // create LetExp
+    //other parts will be set in customVisitChildren
+    std::any OclParserCustomVisitor::visitLetExpCS(OclParser::LetExpCSContext *ctx) {
+
+        //create Exp
+        std::shared_ptr<LetExp> letExp = ocl::Expressions::ExpressionsFactory::eInstance()->createLetExp();
+
+        // make an any for the Exp
+        std::any result = std::make_any<std::shared_ptr<ocl::Expressions::LetExp>>(letExp);
+
+        return customVisitChildren(result, ctx);
+
+    }
+
+    // ########################
+    // ### Type Expressions ###
+    // ########################
+
+    // ### TypeExp ###
+    // create Expression and set referredType
+    // or check if it is a TupleTypeExp or CollectionTypeExp
+    std::any OclParserCustomVisitor::visitTypeCS(OclParser::TypeCSContext *ctx) {
+
+        std::any result;
+        
+        if (ctx->tupleTypeCS() != nullptr) {
+
+            // Debug
+            // std::cout << "TypeExp: passed to TupleTypeExp" << std::endl;
+            
+            // nothing to do in this function, pass to the TupleTypeExp
+            return customVisitChildren(result, ctx);
+
+        } else if (ctx->collectionTypeCS() != nullptr) {
+
+            // Debug
+            // std::cout << "TypeExp: passed to CollectionTypeExp" << std::endl;
+            
+            // nothing to do in this function, pass to the CollectionTypeExp
+            return customVisitChildren(result, ctx);
+
+        } else {
+
+            // the type can be set directly
+
+            //create Exp
+            std::shared_ptr<TypeExp> typeExp = ocl::Expressions::ExpressionsFactory::eInstance()->createTypeExp();
+
+            std::string type;
+            
+            // check in which form the type is given
+            if (ctx->pathNameCS() != nullptr) {
+                type = ctx->pathNameCS()->getText();
+            } else if (ctx->primitiveTypeCS() != nullptr) {
+                type = ctx->primitiveTypeCS()->getText();
+            } else /*(ctx->oclTypeCS() != nullptr) must be the last option*/ {
+                type = ctx->oclTypeCS()->getText();
+            }
+
+            //set the type
+            typeExp->setReferredType(type);
+
+            // Debug
+            // std::cout << "TypeExp: set referredType to " << type << std::endl;
+
+            // make an any for the Exp
+            std::any result = std::make_any<std::shared_ptr<ocl::Expressions::TypeExp>>(typeExp);
+
+            return customVisitChildren(result, ctx);
+        }
+
+    }
+
+    // ### TupleTypeExp ###
+    // create Expression and set referredType 
+    std::any OclParserCustomVisitor::visitTupleTypeCS(OclParser::TupleTypeCSContext *ctx) {
+
+        //create Exp
+        std::shared_ptr<TupleTypeExp> tTypeExp = ocl::Expressions::ExpressionsFactory::eInstance()->createTupleTypeExp();
+
+        //get Type
+        std::string type = ctx->TUPLE()->getText();
+        
+        //from TypeExp
+        tTypeExp->setReferredType(type);
+
+        //"parts" will be appended in customVisitChildren
+
+        // Debug
+        // std::cout << "TupleTypeExp: set referredType to " << type << std::endl;
+
+        // make an any for the Exp
+        std::any result = std::make_any<std::shared_ptr<ocl::Expressions::TupleTypeExp>>(tTypeExp);
+
+        return customVisitChildren(result, ctx);
+
+    }
+    
+    // ### CollectionTypeExp ###
+    // create Expression and add referredType 
+    std::any OclParserCustomVisitor::visitCollectionTypeCS(OclParser::CollectionTypeCSContext *ctx) {
+
+        //create Exp
+        std::shared_ptr<CollectionTypeExp> cTypeExp = ocl::Expressions::ExpressionsFactory::eInstance()->createCollectionTypeExp();
+
+        //get Type
+        std::string type = ctx->collectionTypeIdentifierCS()->getText();
+        
+        //from TypeExp
+        cTypeExp->setReferredType(type);
+
+        // Debug
+        // std::cout << "CollectionTypeExp: set referredType to " << type << std::endl;
+
+        //TypeCS will be appended in customVisitChildren
+
+        // make an any for the Exp
+        std::any result = std::make_any<std::shared_ptr<ocl::Expressions::CollectionTypeExp>>(cTypeExp);
+
+        return customVisitChildren(result, ctx);
+
+    }
+
+    // ###########################
+    // ### Message Expressions ###
+    // ###########################
+
+    // ### MessageExpression ###
+    // create the expressions
+    std::any OclParserCustomVisitor::visitOclMessageExpCS(OclParser::OclMessageExpCSContext *ctx) {
+
+        //create Exp
+        std::shared_ptr<MessageExp> mesExp = ocl::Expressions::ExpressionsFactory::eInstance()->createMessageExp();
+
+        //appendeing of the other parts will be handled in aggregateResult
+        
+        // make an any for the Exp
+        std::any result = std::make_any<std::shared_ptr<ocl::Expressions::MessageExp>>(mesExp);
+
+        return customVisitChildren(result, ctx);
+
+
+    }
+    
+    // ### MessageArgumets ###
+    // create the expressions
+    //collects in the aggregateResult function all argumnts
+    std::any OclParserCustomVisitor::visitOclMessageArgumentsCS(OclParser::OclMessageArgumentsCSContext *ctx) {
+
+        //create Exp
+        std::shared_ptr<MessageArguments> mesAr = ocl::Expressions::ExpressionsFactory::eInstance()->createMessageArguments();
+
+        // make an any for the Exp
+        std::any result = std::make_any<std::shared_ptr<ocl::Expressions::MessageArguments>>(mesAr);
+
+        return customVisitChildren(result, ctx);
+
+    }
+
+    // ########################
+    // ### Misc Expressions ###
+    // ########################
+
+    //### prefixedExp ###
+    std::any OclParserCustomVisitor::visitPrefixedExp(OclParser::PrefixedExpContext *ctx) {
+
+        //not in oclSpec but necessary to handle "-" and "NOT"
+
+        //create Exp
+        std::shared_ptr<PrefixedExp> preExp = ocl::Expressions::ExpressionsFactory::eInstance()->createPrefixedExp();
+
+        //get unary symbol
+        std::string unarySymbol_str = ctx->unaryLiteralExpCS()->getText();
+
+        //set unarySymbol
+        preExp->setUnarySymbol(unarySymbol_str);
+
+        //TODO add referredExp in aggregateResult
+        // make an any for the Exp
+        std::any result = std::make_any<std::shared_ptr<ocl::Expressions::PrefixedExp>>(preExp);
+
+        return customVisitChildren(result, ctx);
+
+    };
+
+    //### variableDeclarationExp ###
+    std::any OclParserCustomVisitor::visitVariableDeclarationCS(OclParser::VariableDeclarationCSContext *ctx) {
+
+        //not in oclSpec but necessary to handle variable Declaration e.g. in TupleExp
+
+        //create Exp
+        std::shared_ptr<VarDeclarationExp> varDecExp = ocl::Expressions::ExpressionsFactory::eInstance()->createVarDeclarationExp();
+
+        //get and set varName
+
+        std::string varName = ctx->simpleNameCS()->getText();
+
+        varDecExp->setVarName(varName);
+
+        // Debug
+        // std::cout << "VarDecExp: set " << varName << " as Variable Name" << std::endl;
+
+        //varType (optional) will be set in customVisitChildren
+
+        //optional assignedOclExp will be added in aggregateResult()
+
+        // make an any for the Exp
+        std::any result = std::make_any<std::shared_ptr<ocl::Expressions::VarDeclarationExp>>(varDecExp);
+
+        return customVisitChildren(result, ctx);
+
+    }
+
+    // ### parentedExpCS ###
+    // an expression the marks that an oclExp is in "()"
+    std::any OclParserCustomVisitor::visitParentedExpCS(OclParser::ParentedExpCSContext *ctx) {
+
+        //create Exp
+        std::shared_ptr<ParentedExp> parExp = ocl::Expressions::ExpressionsFactory::eInstance()->createParentedExp();
+
+        //innerExp will be set in aggregateResult
+
+        // make an any for the Exp
+        std::any result = std::make_any<std::shared_ptr<ocl::Expressions::ParentedExp>>(parExp);
+
+        return customVisitChildren(result, ctx);
+
+    }
+
+    // ###########################
+    // ### Context Expressions ###
+    // ###########################
+
+    // ### PackageDeclarationCS ###
+    // create Expr and (optional) path
+    std::any OclParserCustomVisitor::visitPackageDeclarationCS(OclParser::PackageDeclarationCSContext *ctx) {
+
+        //create Exp
+        std::shared_ptr<PackageDeclarationExp> paDeclExp = ocl::Expressions::ExpressionsFactory::eInstance()->createPackageDeclarationExp();
+
+        //set (optional) path
+        if (ctx->pathNameCS() != nullptr) {
+            std::string path = ctx->pathNameCS()->getText();
+            paDeclExp->setPath(path);
+        }
+
+        // contextDeclarations will be added in aggregateResult
+
+        // make an any for the Exp
+        std::any result = std::make_any<std::shared_ptr<ocl::Expressions::PackageDeclarationExp>>(paDeclExp);
+
+        return customVisitChildren(result, ctx);
+
+    }
+    
+    // ### ClassifierContextDeclCS ###
+    // create Expr and append classifierName
+    std::any OclParserCustomVisitor::visitClassifierContextDeclCS(OclParser::ClassifierContextDeclCSContext *ctx) {
+
+        //create Exp
+        std::shared_ptr<ClassifierContextDeclExp> clasDeclExp = ocl::Expressions::ExpressionsFactory::eInstance()->createClassifierContextDeclExp();
+
+        //set operation Name with (optional) path
+        std::string clPath = ctx->pathNameCS()->getText();
+        
+        if (ctx->simpleNameCS() != nullptr) {
+            std::string clName = ctx->simpleNameCS()->getText();
+            clPath = (clName + Utilities::CONST_COLONCOLON + clPath);
+        }
+
+        clasDeclExp->setClassifierName(clPath);
+
+        //invOrDefExp will be added in aggregateResult
+
+        // make an any for the Exp
+        std::any result = std::make_any<std::shared_ptr<ocl::Expressions::ClassifierContextDeclExp>>(clasDeclExp);
+
+        return customVisitChildren(result, ctx);
+
+    }
+    
+    // ### PropertyContextDeclCS ###
+    // create Expr and set name
+    std::any OclParserCustomVisitor::visitPropertyContextDeclCS(OclParser::PropertyContextDeclCSContext *ctx) {
+
+        //create Exp
+        std::shared_ptr<PropertyContextDeclExp> propDeclExp = ocl::Expressions::ExpressionsFactory::eInstance()->createPropertyContextDeclExp();
+
+        //get name
+        std::string name = ctx->simpleNameCS()->getText();
+        std::string path = ctx->pathNameCS()->getText();
+
+        propDeclExp->setName(path + Utilities::CONST_COLONCOLON + name);
+
+        //other parts will be added in aggregateResult
+
+        // make an any for the Exp
+        std::any result = std::make_any<std::shared_ptr<ocl::Expressions::PropertyContextDeclExp>>(propDeclExp);
+
+        return customVisitChildren(result, ctx);
+
+    }
+    
+    // ### OperationContextDeclCS ###
+    // create Expr
+    std::any OclParserCustomVisitor::visitOperationContextDeclCS(OclParser::OperationContextDeclCSContext *ctx) {
+
+        //create Exp
+        std::shared_ptr<OperationContextDeclExp> operaDeclExp = ocl::Expressions::ExpressionsFactory::eInstance()->createOperationContextDeclExp();
+
+        //rest parts will be appended in aggregateResult
+
+        // make an any for the Exp
+        std::any result = std::make_any<std::shared_ptr<ocl::Expressions::OperationContextDeclExp>>(operaDeclExp);
+
+        return customVisitChildren(result, ctx);
+
+    }
+    
+    // ### OperationExpCS ###
+    // part of OperationContextDeclaration
+    std::any OclParserCustomVisitor::visitOperationCS(OclParser::OperationCSContext *ctx) {
+
+        //create Exp
+        std::shared_ptr<OperationContextExp> operaExp = ocl::Expressions::ExpressionsFactory::eInstance()->createOperationContextExp();
+
+        //set operation Name with (optional) path
+        std::string opName = ctx->simpleNameCS()->getText();
+        
+        if (ctx->pathNameCS() != nullptr) {
+            std::string pathName = ctx->pathNameCS()->getText();
+            opName.insert(0, pathName + Utilities::CONST_COLONCOLON);
+        }
+
+        operaExp->setOperationName(opName);
+
+        //variableDecl and Type will be set in aggregateResult
+
+        // make an any for the Exp
+        std::any result = std::make_any<std::shared_ptr<ocl::Expressions::OperationContextExp>>(operaExp);
+
+        return customVisitChildren(result, ctx);
+
+    }
+
+    // ### PrePostBodyExpCS ###
+    std::any OclParserCustomVisitor::visitPrePostOrBodyDeclCS(OclParser::PrePostOrBodyDeclCSContext *ctx) {
+
+        //create Exp
+        std::shared_ptr<PrePostBodyListExp> ppbListExp = ocl::Expressions::ExpressionsFactory::eInstance()->createPrePostBodyListExp();
+
+        // parts will be appended in aggregateResult
+
+        // make an any for the Exp
+        std::any result = std::make_any<std::shared_ptr<ocl::Expressions::PrePostBodyListExp>>(ppbListExp);
+
+        return customVisitChildren(result, ctx);
+
+
+    }
+
+    // ### PrePostBodyExpCS ###
+    // part of OperationContextDeclaratuion
+    std::any OclParserCustomVisitor::visitPrePostBodyExpCS(OclParser::PrePostBodyExpCSContext *ctx) {
+
+        //create Exp
+        std::shared_ptr<PrePostBodyExp> ppbExp = ocl::Expressions::ExpressionsFactory::eInstance()->createPrePostBodyExp();
+        
+        // set Pre, Post, Body
+        if (ctx->PRE() != nullptr) {
+            ppbExp->setKind(ocl::Expressions::PrePostBody::PRE);
+        } else if (ctx->POST() != nullptr) {
+            ppbExp->setKind(ocl::Expressions::PrePostBody::POST);
+        } else {
+            ppbExp->setKind(ocl::Expressions::PrePostBody::BODY);
+        }
+
+        
+        // set exp name if set
+        if (ctx->simpleNameCS() != nullptr) {
+                std::string name = ctx->simpleNameCS()->getText();
+                ppbExp->setName(name);
+            }
+
+        //bodyExp will be set in aggregateResult
+
+        // make an any for the Exp
+        std::any result = std::make_any<std::shared_ptr<ocl::Expressions::PrePostBodyExp>>(ppbExp);
+
+        return customVisitChildren(result, ctx);
+
+    }
+
+    // ### InitOrDerValueCS ###
+    // create Exp
+    std::any OclParserCustomVisitor::visitInitOrDerValueListCS(OclParser::InitOrDerValueListCSContext *ctx) {
+
+        //create Exp
+        std::shared_ptr<InitOrDerValueListExp> iOdListExp = ocl::Expressions::ExpressionsFactory::eInstance()->createInitOrDerValueListExp();
+
+        //parts will be set in aggregateResult
+
+        // make an any for the Exp
+        std::any result = std::make_any<std::shared_ptr<ocl::Expressions::InitOrDerValueListExp>>(iOdListExp);
+
+        return customVisitChildren(result, ctx);
+
+
+    }
+
+    // ### InitOrDerValueCS ###
+    // set Init or Derived as kind
+    std::any OclParserCustomVisitor::visitInitOrDerValueCS(OclParser::InitOrDerValueCSContext *ctx) {
+
+        //create Exp
+        std::shared_ptr<InitOrDerValueExp> iOdExp = ocl::Expressions::ExpressionsFactory::eInstance()->createInitOrDerValueExp();
+
+        if (ctx->INIT() != nullptr) {
+            iOdExp->setKind(Utilities::CONST_INIT);
+        } else {
+            iOdExp->setKind(Utilities::CONST_DERIVED);
+        }
+
+        // make an any for the Exp
+        std::any result = std::make_any<std::shared_ptr<ocl::Expressions::InitOrDerValueExp>>(iOdExp);
+
+        return customVisitChildren(result, ctx);
+
+    }
+
+    // ### InvOrDefExp ### 
+    // create Inv or Def Exp
+    std::any OclParserCustomVisitor::visitInvOrDefCS(OclParser::InvOrDefCSContext *ctx) {
+
+        //create Exp
+        std::shared_ptr<InvOrDefExp> invOdefExp = ocl::Expressions::ExpressionsFactory::eInstance()->createInvOrDefExp();
+
+        // set (optional) name
+        if (ctx->simpleNameCS() != nullptr) {
+            
+            std::string name = ctx->simpleNameCS()->getText();
+            invOdefExp->setName(name);
+
+        }
+
+        // referredExp will be set in aggregateResult
+
+        // set Kind
+        if (ctx->INV() != nullptr) {
+            invOdefExp->setKind(Utilities::CONST_INV);
+        } else if (ctx->STATIC() != nullptr) {
+            invOdefExp->setKind(Utilities::CONST_STATICDEF);
+        } else {
+            invOdefExp->setKind(Utilities::CONST_DEF);
+        }
+
+        // make an any for the Exp
+        std::any result = std::make_any<std::shared_ptr<ocl::Expressions::InvOrDefExp>>(invOdefExp);
+
+        return customVisitChildren(result, ctx);
+
+    }
+
+    // ### DefExpressionCS ###
+    // create Exp 
+    std::any OclParserCustomVisitor::visitDefExpressionCS(OclParser::DefExpressionCSContext *ctx) {
+
+        //create Exp
+        std::shared_ptr<DefExp> defExp = ocl::Expressions::ExpressionsFactory::eInstance()->createDefExp();
+
+        //rest parts will be appended in aggregateResult
+
+        // make an any for the Exp
+        std::any result = std::make_any<std::shared_ptr<ocl::Expressions::DefExp>>(defExp);
+
+        return customVisitChildren(result, ctx);
+
+    }
+
 }

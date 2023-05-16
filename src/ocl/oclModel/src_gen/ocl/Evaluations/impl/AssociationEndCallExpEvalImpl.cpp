@@ -1,9 +1,13 @@
 
 #include "ocl/Evaluations/impl/AssociationEndCallExpEvalImpl.hpp"
 #ifdef NDEBUG
-	#define DEBUG_MESSAGE(a) /**/
+	#define DEBUG_INFO(a)		/**/
+	#define DEBUG_WARNING(a)	/**/
+	#define DEBUG_ERROR(a)		/**/
 #else
-	#define DEBUG_MESSAGE(a) a
+	#define DEBUG_INFO(a) 		std::cout<<"[\e[0;32mInfo\e[0m]:\t\t"<<__PRETTY_FUNCTION__<<"\n\t\t  -- Message: "<<a<<std::endl;
+	#define DEBUG_WARNING(a) 	std::cout<<"[\e[0;33mWarning\e[0m]:\t"<<__PRETTY_FUNCTION__<<"\n\t\t  -- Message: "<<a<<std::endl;
+	#define DEBUG_ERROR(a)		std::cout<<"[\e[0;31mError\e[0m]:\t"<<__PRETTY_FUNCTION__<<"\n\t\t  -- Message: "<<a<<std::endl;
 #endif
 
 #ifdef ACTIVITY_DEBUG_ON
@@ -21,8 +25,8 @@
 #include "abstractDataTypes/Bag.hpp"
 
 
-#include "abstractDataTypes/AnyEObject.hpp"
-#include "abstractDataTypes/AnyEObjectBag.hpp"
+#include "ecore/EcoreAny.hpp"
+#include "ecore/EcoreContainerAny.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
@@ -35,27 +39,21 @@
 
 #include <exception> // used in Persistence
 #include "ocl/Evaluations/EvaluationsFactory.hpp"
+#include "ecore/ecoreFactory.hpp"
 #include "ocl/Expressions/ExpressionsFactory.hpp"
-#include "fUML/Semantics/Values/ValuesFactory.hpp"
-#include "uml/umlFactory.hpp"
-#include "fUML/Semantics/Loci/LociFactory.hpp"
-#include "fUML/Semantics/SimpleClassifiers/SimpleClassifiersFactory.hpp"
+#include "ecore/EAnnotation.hpp"
+#include "ecore/EClassifier.hpp"
+#include "ecore/EGenericType.hpp"
+#include "ecore/EObject.hpp"
 #include "ocl/Evaluations/EvalEnvironment.hpp"
-#include "fUML/Semantics/Loci/Locus.hpp"
 #include "ocl/Evaluations/NavigationCallExpEval.hpp"
 #include "ocl/Evaluations/OclExpEval.hpp"
 #include "ocl/Expressions/OclExpression.hpp"
-#include "fUML/Semantics/SimpleClassifiers/StringValue.hpp"
-#include "fUML/Semantics/Values/Value.hpp"
-#include "uml/ValueSpecification.hpp"
 //Factories and Package includes
 #include "ocl/oclPackage.hpp"
 #include "ocl/Evaluations/EvaluationsPackage.hpp"
 #include "ocl/Expressions/ExpressionsPackage.hpp"
-#include "fUML/Semantics/Loci/LociPackage.hpp"
-#include "fUML/Semantics/SimpleClassifiers/SimpleClassifiersPackage.hpp"
-#include "fUML/Semantics/Values/ValuesPackage.hpp"
-#include "uml/umlPackage.hpp"
+#include "ecore/ecorePackage.hpp"
 
 using namespace ocl::Evaluations;
 
@@ -102,9 +100,9 @@ AssociationEndCallExpEvalImpl& AssociationEndCallExpEvalImpl::operator=(const As
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy AssociationEndCallExpEval "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
 	#endif
 	//Clone Attributes with (deep copy)
+	m_referredAssociationEnd = obj.getReferredAssociationEnd();
 
 	//copy references with no containment (soft copy)
-	m_referredAssociationEnd  = obj.getReferredAssociationEnd();
 	//Clone references with containment (deep copy)
 	return *this;
 }
@@ -124,20 +122,20 @@ std::shared_ptr<ecore::EObject> AssociationEndCallExpEvalImpl::copy() const
 //*********************************
 // Attribute Getters & Setters
 //*********************************
+/* Getter & Setter for attribute referredAssociationEnd */
+std::string AssociationEndCallExpEvalImpl::getReferredAssociationEnd() const 
+{
+	return m_referredAssociationEnd;
+}
+void AssociationEndCallExpEvalImpl::setReferredAssociationEnd(std::string _referredAssociationEnd)
+{
+	m_referredAssociationEnd = _referredAssociationEnd;
+	
+}
 
 //*********************************
 // Reference Getters & Setters
 //*********************************
-/* Getter & Setter for reference referredAssociationEnd */
-std::shared_ptr<fUML::Semantics::SimpleClassifiers::StringValue> AssociationEndCallExpEvalImpl::getReferredAssociationEnd() const
-{
-    return m_referredAssociationEnd;
-}
-void AssociationEndCallExpEvalImpl::setReferredAssociationEnd(std::shared_ptr<fUML::Semantics::SimpleClassifiers::StringValue> _referredAssociationEnd)
-{
-    m_referredAssociationEnd = _referredAssociationEnd;
-	
-}
 
 //*********************************
 // Union Getter
@@ -175,12 +173,14 @@ void AssociationEndCallExpEvalImpl::loadAttributes(std::shared_ptr<persistence::
 	try
 	{
 		std::map<std::string, std::string>::const_iterator iter;
-		std::shared_ptr<ecore::EClass> metaClass = this->eClass(); // get MetaClass
+	
 		iter = attr_list.find("referredAssociationEnd");
 		if ( iter != attr_list.end() )
 		{
-			// add unresolvedReference to loadHandler's list
-			loadHandler->addUnresolvedReference(iter->second, loadHandler->getCurrentObject(), metaClass->getEStructuralFeature("referredAssociationEnd")); // TODO use getEStructuralFeature() with id, for faster access to EStructuralFeature
+			// this attribute is a 'std::string'
+			std::string value;
+			value = iter->second;
+			this->setReferredAssociationEnd(value);
 		}
 	}
 	catch (std::exception& e)
@@ -204,20 +204,6 @@ void AssociationEndCallExpEvalImpl::loadNode(std::string nodeName, std::shared_p
 
 void AssociationEndCallExpEvalImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
 {
-	switch(featureID)
-	{
-		case ocl::Evaluations::EvaluationsPackage::ASSOCIATIONENDCALLEXPEVAL_ATTRIBUTE_REFERREDASSOCIATIONEND:
-		{
-			if (references.size() == 1)
-			{
-				// Cast object to correct type
-				std::shared_ptr<fUML::Semantics::SimpleClassifiers::StringValue> _referredAssociationEnd = std::dynamic_pointer_cast<fUML::Semantics::SimpleClassifiers::StringValue>( references.front() );
-				setReferredAssociationEnd(_referredAssociationEnd);
-			}
-			
-			return;
-		}
-	}
 	NavigationCallExpEvalImpl::resolveReferences(featureID, references);
 }
 
@@ -233,9 +219,11 @@ void AssociationEndCallExpEvalImpl::save(std::shared_ptr<persistence::interfaces
 	
 	OclExpEvalImpl::saveContent(saveHandler);
 	
-	fUML::Semantics::Values::EvaluationImpl::saveContent(saveHandler);
+	ecore::ETypedElementImpl::saveContent(saveHandler);
 	
-	fUML::Semantics::Loci::SemanticVisitorImpl::saveContent(saveHandler);
+	ecore::ENamedElementImpl::saveContent(saveHandler);
+	
+	ecore::EModelElementImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);
 }
@@ -245,8 +233,11 @@ void AssociationEndCallExpEvalImpl::saveContent(std::shared_ptr<persistence::int
 	try
 	{
 		std::shared_ptr<ocl::Evaluations::EvaluationsPackage> package = ocl::Evaluations::EvaluationsPackage::eInstance();
-	// Add references
-		saveHandler->addReference(this->getReferredAssociationEnd(), "referredAssociationEnd", getReferredAssociationEnd()->eClass() != fUML::Semantics::SimpleClassifiers::SimpleClassifiersPackage::eInstance()->getStringValue_Class()); 
+		// Add attributes
+		if ( this->eIsSet(package->getAssociationEndCallExpEval_Attribute_referredAssociationEnd()) )
+		{
+			saveHandler->addAttribute("referredAssociationEnd", this->getReferredAssociationEnd());
+		}
 	}
 	catch (std::exception& e)
 	{
@@ -262,12 +253,12 @@ std::shared_ptr<ecore::EClass> AssociationEndCallExpEvalImpl::eStaticClass() con
 //*********************************
 // EStructuralFeature Get/Set/IsSet
 //*********************************
-Any AssociationEndCallExpEvalImpl::eGet(int featureID, bool resolve, bool coreType) const
+std::shared_ptr<Any> AssociationEndCallExpEvalImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 		case ocl::Evaluations::EvaluationsPackage::ASSOCIATIONENDCALLEXPEVAL_ATTRIBUTE_REFERREDASSOCIATIONEND:
-			return eAny(getReferredAssociationEnd(),fUML::Semantics::SimpleClassifiers::SimpleClassifiersPackage::STRINGVALUE_CLASS,false); //59
+			return eAny(getReferredAssociationEnd(),ecore::ecorePackage::ESTRING_CLASS,false); //317
 	}
 	return NavigationCallExpEvalImpl::eGet(featureID, resolve, coreType);
 }
@@ -277,22 +268,28 @@ bool AssociationEndCallExpEvalImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case ocl::Evaluations::EvaluationsPackage::ASSOCIATIONENDCALLEXPEVAL_ATTRIBUTE_REFERREDASSOCIATIONEND:
-			return getReferredAssociationEnd() != nullptr; //59
+			return getReferredAssociationEnd() != ""; //317
 	}
 	return NavigationCallExpEvalImpl::internalEIsSet(featureID);
 }
 
-bool AssociationEndCallExpEvalImpl::eSet(int featureID, Any newValue)
+bool AssociationEndCallExpEvalImpl::eSet(int featureID, std::shared_ptr<Any> newValue)
 {
 	switch(featureID)
 	{
 		case ocl::Evaluations::EvaluationsPackage::ASSOCIATIONENDCALLEXPEVAL_ATTRIBUTE_REFERREDASSOCIATIONEND:
 		{
-			// CAST Any to fUML::Semantics::SimpleClassifiers::StringValue
-			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
-			std::shared_ptr<fUML::Semantics::SimpleClassifiers::StringValue> _referredAssociationEnd = std::dynamic_pointer_cast<fUML::Semantics::SimpleClassifiers::StringValue>(_temp);
-			setReferredAssociationEnd(_referredAssociationEnd); //59
-			return true;
+			try
+			{
+				std::string _referredAssociationEnd = newValue->get<std::string>();
+				setReferredAssociationEnd(_referredAssociationEnd); //317
+			}
+			catch(...)
+			{
+				DEBUG_ERROR("Invalid type stored in 'Any' for feature 'referredAssociationEnd'. Failed to set feature!")
+				return false;
+			}
+		return true;
 		}
 	}
 
@@ -302,9 +299,9 @@ bool AssociationEndCallExpEvalImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any AssociationEndCallExpEvalImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+std::shared_ptr<Any> AssociationEndCallExpEvalImpl::eInvoke(int operationID, std::shared_ptr<Bag<Any>> arguments)
 {
-	Any result;
+	std::shared_ptr<Any> result;
  
   	switch(operationID)
 	{

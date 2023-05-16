@@ -17,13 +17,12 @@
 #include "../BooleanLiteralExpEval.hpp"
 
 #include "ocl/Evaluations/impl/EvaluationsFactoryImpl.hpp"
-#include "fUML/Semantics/Values/impl/LiteralBooleanEvaluationImpl.hpp"
 #include "ocl/Evaluations/impl/PrimitiveLiteralExpEvalImpl.hpp"
 
 //*********************************
 namespace ocl::Evaluations 
 {
-	class OCL_API BooleanLiteralExpEvalImpl : virtual public fUML::Semantics::Values::LiteralBooleanEvaluationImpl, virtual public PrimitiveLiteralExpEvalImpl, virtual public BooleanLiteralExpEval 
+	class OCL_API BooleanLiteralExpEvalImpl : virtual public PrimitiveLiteralExpEvalImpl, virtual public BooleanLiteralExpEval 
 	{
 		public: 
 			BooleanLiteralExpEvalImpl(const BooleanLiteralExpEvalImpl & obj);
@@ -61,7 +60,7 @@ namespace ocl::Evaluations
 			// Container Getter
 			//*********************************
 			virtual std::shared_ptr<ecore::EObject> eContainer() const ; 
-			
+
 			//*********************************
 			// Persistence Functions
 			//*********************************
@@ -78,14 +77,14 @@ namespace ocl::Evaluations
 			//*********************************
 			// EStructuralFeature Get/Set/IsSet
 			//*********************************
-			virtual Any eGet(int featureID, bool resolve, bool coreType) const ;
-			virtual bool eSet(int featureID, Any newValue) ;
+			virtual std::shared_ptr<Any> eGet(int featureID, bool resolve, bool coreType) const ;
+			virtual bool eSet(int featureID, std::shared_ptr<Any> newValue) ;
 			virtual bool internalEIsSet(int featureID) const ;
 
 			//*********************************
 			// EOperation Invoke
 			//*********************************
-			virtual Any eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments) ;
+			virtual std::shared_ptr<Any> eInvoke(int operationID, std::shared_ptr<Bag<Any>> arguments) ;
 
 		private:
 			std::weak_ptr<ocl::Evaluations::BooleanLiteralExpEval> m_thisBooleanLiteralExpEvalPtr;

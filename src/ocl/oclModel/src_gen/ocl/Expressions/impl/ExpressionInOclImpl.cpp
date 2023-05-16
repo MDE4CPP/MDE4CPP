@@ -1,9 +1,13 @@
 
 #include "ocl/Expressions/impl/ExpressionInOclImpl.hpp"
 #ifdef NDEBUG
-	#define DEBUG_MESSAGE(a) /**/
+	#define DEBUG_INFO(a)		/**/
+	#define DEBUG_WARNING(a)	/**/
+	#define DEBUG_ERROR(a)		/**/
 #else
-	#define DEBUG_MESSAGE(a) a
+	#define DEBUG_INFO(a) 		std::cout<<"[\e[0;32mInfo\e[0m]:\t\t"<<__PRETTY_FUNCTION__<<"\n\t\t  -- Message: "<<a<<std::endl;
+	#define DEBUG_WARNING(a) 	std::cout<<"[\e[0;33mWarning\e[0m]:\t"<<__PRETTY_FUNCTION__<<"\n\t\t  -- Message: "<<a<<std::endl;
+	#define DEBUG_ERROR(a)		std::cout<<"[\e[0;31mError\e[0m]:\t"<<__PRETTY_FUNCTION__<<"\n\t\t  -- Message: "<<a<<std::endl;
 #endif
 
 #ifdef ACTIVITY_DEBUG_ON
@@ -21,8 +25,8 @@
 #include "abstractDataTypes/Bag.hpp"
 
 
-#include "abstractDataTypes/AnyEObject.hpp"
-#include "abstractDataTypes/AnyEObjectBag.hpp"
+#include "ecore/EcoreAny.hpp"
+#include "ecore/EcoreContainerAny.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
@@ -34,14 +38,13 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "ocl/Expressions/ExpressionsFactory.hpp"
 #include "ecore/ecoreFactory.hpp"
+#include "ocl/Expressions/ExpressionsFactory.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClassifier.hpp"
 #include "ecore/EGenericType.hpp"
 #include "ecore/ETypedElement.hpp"
 #include "ocl/Expressions/OclExpression.hpp"
-#include "ocl/Expressions/Variable.hpp"
 //Factories and Package includes
 #include "ocl/oclPackage.hpp"
 #include "ocl/Expressions/ExpressionsPackage.hpp"
@@ -104,31 +107,31 @@ ExpressionInOclImpl& ExpressionInOclImpl::operator=(const ExpressionInOclImpl & 
 	//clone reference 'contextVariable'
 	if(obj.getContextVariable()!=nullptr)
 	{
-		m_contextVariable = std::dynamic_pointer_cast<ocl::Expressions::Variable>(obj.getContextVariable()->copy());
+		m_contextVariable = std::dynamic_pointer_cast<ecore::ETypedElement>(obj.getContextVariable()->copy());
 	}
 
 	//clone reference 'parameterVariable'
-	std::shared_ptr<Bag<ocl::Expressions::Variable>> parameterVariableList = obj.getParameterVariable();
+	std::shared_ptr<Bag<ecore::ETypedElement>> parameterVariableList = obj.getParameterVariable();
 	if(parameterVariableList)
 	{
-		m_parameterVariable.reset(new Bag<ocl::Expressions::Variable>());
+		m_parameterVariable.reset(new Bag<ecore::ETypedElement>());
 		
 		
-		for(const std::shared_ptr<ocl::Expressions::Variable> parameterVariableindexElem: *parameterVariableList) 
+		for(const std::shared_ptr<ecore::ETypedElement> parameterVariableindexElem: *parameterVariableList) 
 		{
-			std::shared_ptr<ocl::Expressions::Variable> temp = std::dynamic_pointer_cast<ocl::Expressions::Variable>((parameterVariableindexElem)->copy());
+			std::shared_ptr<ecore::ETypedElement> temp = std::dynamic_pointer_cast<ecore::ETypedElement>((parameterVariableindexElem)->copy());
 			m_parameterVariable->push_back(temp);
 		}
 	}
 	else
 	{
-		DEBUG_MESSAGE(std::cout << "Warning: container is nullptr parameterVariable."<< std::endl;)
+		DEBUG_WARNING("container is nullptr for parameterVariable.")
 	}
 
 	//clone reference 'resultVariable'
 	if(obj.getResultVariable()!=nullptr)
 	{
-		m_resultVariable = std::dynamic_pointer_cast<ocl::Expressions::Variable>(obj.getResultVariable()->copy());
+		m_resultVariable = std::dynamic_pointer_cast<ecore::ETypedElement>(obj.getResultVariable()->copy());
 	}
 	
 	
@@ -168,22 +171,22 @@ void ExpressionInOclImpl::setBodyExpression(std::shared_ptr<ocl::Expressions::Oc
 }
 
 /* Getter & Setter for reference contextVariable */
-std::shared_ptr<ocl::Expressions::Variable> ExpressionInOclImpl::getContextVariable() const
+std::shared_ptr<ecore::ETypedElement> ExpressionInOclImpl::getContextVariable() const
 {
     return m_contextVariable;
 }
-void ExpressionInOclImpl::setContextVariable(std::shared_ptr<ocl::Expressions::Variable> _contextVariable)
+void ExpressionInOclImpl::setContextVariable(std::shared_ptr<ecore::ETypedElement> _contextVariable)
 {
     m_contextVariable = _contextVariable;
 	
 }
 
 /* Getter & Setter for reference parameterVariable */
-std::shared_ptr<Bag<ocl::Expressions::Variable>> ExpressionInOclImpl::getParameterVariable() const
+std::shared_ptr<Bag<ecore::ETypedElement>> ExpressionInOclImpl::getParameterVariable() const
 {
 	if(m_parameterVariable == nullptr)
 	{
-		m_parameterVariable.reset(new Bag<ocl::Expressions::Variable>());
+		m_parameterVariable.reset(new Bag<ecore::ETypedElement>());
 		
 		
 	}
@@ -191,11 +194,11 @@ std::shared_ptr<Bag<ocl::Expressions::Variable>> ExpressionInOclImpl::getParamet
 }
 
 /* Getter & Setter for reference resultVariable */
-std::shared_ptr<ocl::Expressions::Variable> ExpressionInOclImpl::getResultVariable() const
+std::shared_ptr<ecore::ETypedElement> ExpressionInOclImpl::getResultVariable() const
 {
     return m_resultVariable;
 }
-void ExpressionInOclImpl::setResultVariable(std::shared_ptr<ocl::Expressions::Variable> _resultVariable)
+void ExpressionInOclImpl::setResultVariable(std::shared_ptr<ecore::ETypedElement> _resultVariable)
 {
     m_resultVariable = _resultVariable;
 	
@@ -261,9 +264,10 @@ void ExpressionInOclImpl::loadNode(std::string nodeName, std::shared_ptr<persist
   			std::string typeName = loadHandler->getCurrentXSITypeName();
 			if (typeName.empty())
 			{
-				typeName = "Variable";
+				std::cout << "| WARNING    | type if an eClassifiers node it empty" << std::endl;
+				return; // no type name given and reference type is abstract
 			}
-			loadHandler->handleChild(this->getContextVariable()); 
+			loadHandler->handleChild(this->getContextVariable());
 
 			return; 
 		}
@@ -273,9 +277,10 @@ void ExpressionInOclImpl::loadNode(std::string nodeName, std::shared_ptr<persist
   			std::string typeName = loadHandler->getCurrentXSITypeName();
 			if (typeName.empty())
 			{
-				typeName = "Variable";
+				std::cout << "| WARNING    | type if an eClassifiers node it empty" << std::endl;
+				return; // no type name given and reference type is abstract
 			}
-			loadHandler->handleChildContainer<ocl::Expressions::Variable>(this->getParameterVariable());  
+			loadHandler->handleChildContainer<ecore::ETypedElement>(this->getParameterVariable());  
 
 			return; 
 		}
@@ -285,9 +290,10 @@ void ExpressionInOclImpl::loadNode(std::string nodeName, std::shared_ptr<persist
   			std::string typeName = loadHandler->getCurrentXSITypeName();
 			if (typeName.empty())
 			{
-				typeName = "Variable";
+				std::cout << "| WARNING    | type if an eClassifiers node it empty" << std::endl;
+				return; // no type name given and reference type is abstract
 			}
-			loadHandler->handleChild(this->getResultVariable()); 
+			loadHandler->handleChild(this->getResultVariable());
 
 			return; 
 		}
@@ -337,15 +343,15 @@ void ExpressionInOclImpl::saveContent(std::shared_ptr<persistence::interfaces::X
 
 		// Save 'contextVariable'
 
-		saveHandler->addReference(this->getContextVariable(), "contextVariable", getContextVariable()->eClass() != ocl::Expressions::ExpressionsPackage::eInstance()->getVariable_Class());
+		saveHandler->addReference(this->getContextVariable(), "contextVariable", getContextVariable()->eClass() != ecore::ecorePackage::eInstance()->getETypedElement_Class());
 
 		// Save 'parameterVariable'
 
-		saveHandler->addReferences<ocl::Expressions::Variable>("parameterVariable", this->getParameterVariable());
+		saveHandler->addReferences<ecore::ETypedElement>("parameterVariable", this->getParameterVariable());
 
 		// Save 'resultVariable'
 
-		saveHandler->addReference(this->getResultVariable(), "resultVariable", getResultVariable()->eClass() != ocl::Expressions::ExpressionsPackage::eInstance()->getVariable_Class());
+		saveHandler->addReference(this->getResultVariable(), "resultVariable", getResultVariable()->eClass() != ecore::ecorePackage::eInstance()->getETypedElement_Class());
 	}
 	catch (std::exception& e)
 	{
@@ -361,18 +367,18 @@ std::shared_ptr<ecore::EClass> ExpressionInOclImpl::eStaticClass() const
 //*********************************
 // EStructuralFeature Get/Set/IsSet
 //*********************************
-Any ExpressionInOclImpl::eGet(int featureID, bool resolve, bool coreType) const
+std::shared_ptr<Any> ExpressionInOclImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 		case ocl::Expressions::ExpressionsPackage::EXPRESSIONINOCL_ATTRIBUTE_BODYEXPRESSION:
-			return eAny(getBodyExpression(),ocl::Expressions::ExpressionsPackage::OCLEXPRESSION_CLASS,false); //2810
+			return eAny(getBodyExpression(),ocl::Expressions::ExpressionsPackage::OCLEXPRESSION_CLASS,false); //2610
 		case ocl::Expressions::ExpressionsPackage::EXPRESSIONINOCL_ATTRIBUTE_CONTEXTVARIABLE:
-			return eAny(getContextVariable(),ocl::Expressions::ExpressionsPackage::VARIABLE_CLASS,false); //2811
+			return eAny(getContextVariable(),ecore::ecorePackage::ETYPEDELEMENT_CLASS,false); //2611
 		case ocl::Expressions::ExpressionsPackage::EXPRESSIONINOCL_ATTRIBUTE_PARAMETERVARIABLE:
-			return eAnyBag(getParameterVariable(),ocl::Expressions::ExpressionsPackage::VARIABLE_CLASS); //2813
+			return eEcoreContainerAny(getParameterVariable(),ecore::ecorePackage::ETYPEDELEMENT_CLASS); //2613
 		case ocl::Expressions::ExpressionsPackage::EXPRESSIONINOCL_ATTRIBUTE_RESULTVARIABLE:
-			return eAny(getResultVariable(),ocl::Expressions::ExpressionsPackage::VARIABLE_CLASS,false); //2812
+			return eAny(getResultVariable(),ecore::ecorePackage::ETYPEDELEMENT_CLASS,false); //2612
 	}
 	return ecore::ETypedElementImpl::eGet(featureID, resolve, coreType);
 }
@@ -382,81 +388,158 @@ bool ExpressionInOclImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case ocl::Expressions::ExpressionsPackage::EXPRESSIONINOCL_ATTRIBUTE_BODYEXPRESSION:
-			return getBodyExpression() != nullptr; //2810
+			return getBodyExpression() != nullptr; //2610
 		case ocl::Expressions::ExpressionsPackage::EXPRESSIONINOCL_ATTRIBUTE_CONTEXTVARIABLE:
-			return getContextVariable() != nullptr; //2811
+			return getContextVariable() != nullptr; //2611
 		case ocl::Expressions::ExpressionsPackage::EXPRESSIONINOCL_ATTRIBUTE_PARAMETERVARIABLE:
-			return getParameterVariable() != nullptr; //2813
+			return getParameterVariable() != nullptr; //2613
 		case ocl::Expressions::ExpressionsPackage::EXPRESSIONINOCL_ATTRIBUTE_RESULTVARIABLE:
-			return getResultVariable() != nullptr; //2812
+			return getResultVariable() != nullptr; //2612
 	}
 	return ecore::ETypedElementImpl::internalEIsSet(featureID);
 }
 
-bool ExpressionInOclImpl::eSet(int featureID, Any newValue)
+bool ExpressionInOclImpl::eSet(int featureID, std::shared_ptr<Any> newValue)
 {
 	switch(featureID)
 	{
 		case ocl::Expressions::ExpressionsPackage::EXPRESSIONINOCL_ATTRIBUTE_BODYEXPRESSION:
 		{
-			// CAST Any to ocl::Expressions::OclExpression
-			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
-			std::shared_ptr<ocl::Expressions::OclExpression> _bodyExpression = std::dynamic_pointer_cast<ocl::Expressions::OclExpression>(_temp);
-			setBodyExpression(_bodyExpression); //2810
-			return true;
-		}
-		case ocl::Expressions::ExpressionsPackage::EXPRESSIONINOCL_ATTRIBUTE_CONTEXTVARIABLE:
-		{
-			// CAST Any to ocl::Expressions::Variable
-			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
-			std::shared_ptr<ocl::Expressions::Variable> _contextVariable = std::dynamic_pointer_cast<ocl::Expressions::Variable>(_temp);
-			setContextVariable(_contextVariable); //2811
-			return true;
-		}
-		case ocl::Expressions::ExpressionsPackage::EXPRESSIONINOCL_ATTRIBUTE_PARAMETERVARIABLE:
-		{
-			// CAST Any to Bag<ocl::Expressions::Variable>
-			if((newValue->isContainer()) && (ocl::Expressions::ExpressionsPackage::VARIABLE_CLASS ==newValue->getTypeId()))
-			{ 
+			std::shared_ptr<ecore::EcoreAny> ecoreAny = std::dynamic_pointer_cast<ecore::EcoreAny>(newValue);
+			if(ecoreAny)
+			{
 				try
 				{
-					std::shared_ptr<Bag<ocl::Expressions::Variable>> parameterVariableList= newValue->get<std::shared_ptr<Bag<ocl::Expressions::Variable>>>();
-					std::shared_ptr<Bag<ocl::Expressions::Variable>> _parameterVariable=getParameterVariable();
-					for(const std::shared_ptr<ocl::Expressions::Variable> indexParameterVariable: *_parameterVariable)
+					std::shared_ptr<ecore::EObject> eObject = ecoreAny->getAsEObject();
+					std::shared_ptr<ocl::Expressions::OclExpression> _bodyExpression = std::dynamic_pointer_cast<ocl::Expressions::OclExpression>(eObject);
+					if(_bodyExpression)
 					{
-						if (parameterVariableList->find(indexParameterVariable) == -1)
-						{
-							_parameterVariable->erase(indexParameterVariable);
-						}
+						setBodyExpression(_bodyExpression); //2610
 					}
-
-					for(const std::shared_ptr<ocl::Expressions::Variable> indexParameterVariable: *parameterVariableList)
+					else
 					{
-						if (_parameterVariable->find(indexParameterVariable) == -1)
-						{
-							_parameterVariable->add(indexParameterVariable);
-						}
+						throw "Invalid argument";
 					}
 				}
 				catch(...)
 				{
-					DEBUG_MESSAGE(std::cout << "invalid Type to set of eAttributes."<< std::endl;)
+					DEBUG_ERROR("Invalid type stored in 'ecore::ecoreAny' for feature 'bodyExpression'. Failed to set feature!")
 					return false;
 				}
 			}
 			else
 			{
+				DEBUG_ERROR("Invalid instance of 'ecore::ecoreAny' for feature 'bodyExpression'. Failed to set feature!")
 				return false;
 			}
-			return true;
+		return true;
+		}
+		case ocl::Expressions::ExpressionsPackage::EXPRESSIONINOCL_ATTRIBUTE_CONTEXTVARIABLE:
+		{
+			std::shared_ptr<ecore::EcoreAny> ecoreAny = std::dynamic_pointer_cast<ecore::EcoreAny>(newValue);
+			if(ecoreAny)
+			{
+				try
+				{
+					std::shared_ptr<ecore::EObject> eObject = ecoreAny->getAsEObject();
+					std::shared_ptr<ecore::ETypedElement> _contextVariable = std::dynamic_pointer_cast<ecore::ETypedElement>(eObject);
+					if(_contextVariable)
+					{
+						setContextVariable(_contextVariable); //2611
+					}
+					else
+					{
+						throw "Invalid argument";
+					}
+				}
+				catch(...)
+				{
+					DEBUG_ERROR("Invalid type stored in 'ecore::ecoreAny' for feature 'contextVariable'. Failed to set feature!")
+					return false;
+				}
+			}
+			else
+			{
+				DEBUG_ERROR("Invalid instance of 'ecore::ecoreAny' for feature 'contextVariable'. Failed to set feature!")
+				return false;
+			}
+		return true;
+		}
+		case ocl::Expressions::ExpressionsPackage::EXPRESSIONINOCL_ATTRIBUTE_PARAMETERVARIABLE:
+		{
+			std::shared_ptr<ecore::EcoreContainerAny> ecoreContainerAny = std::dynamic_pointer_cast<ecore::EcoreContainerAny>(newValue);
+			if(ecoreContainerAny)
+			{
+				try
+				{
+					std::shared_ptr<Bag<ecore::EObject>> eObjectList = ecoreContainerAny->getAsEObjectContainer();
+	
+					if(eObjectList)
+					{
+						std::shared_ptr<Bag<ecore::ETypedElement>> _parameterVariable = getParameterVariable();
+	
+						for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
+						{
+							std::shared_ptr<ecore::ETypedElement> valueToAdd = std::dynamic_pointer_cast<ecore::ETypedElement>(anEObject);
+	
+							if (valueToAdd)
+							{
+								if(_parameterVariable->find(valueToAdd) == -1)
+								{
+									_parameterVariable->add(valueToAdd);
+								}
+								//else, valueToAdd is already present so it won't be added again
+							}
+							else
+							{
+								throw "Invalid argument";
+							}
+						}
+					}
+				}
+				catch(...)
+				{
+					DEBUG_ERROR("Invalid type stored in 'ecore::ecoreContainerAny' for feature 'parameterVariable'. Failed to set feature!")
+					return false;
+				}
+			}
+			else
+			{
+				DEBUG_ERROR("Invalid instance of 'ecore::ecoreContainerAny' for feature 'parameterVariable'. Failed to set feature!")
+				return false;
+			}
+		return true;
 		}
 		case ocl::Expressions::ExpressionsPackage::EXPRESSIONINOCL_ATTRIBUTE_RESULTVARIABLE:
 		{
-			// CAST Any to ocl::Expressions::Variable
-			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
-			std::shared_ptr<ocl::Expressions::Variable> _resultVariable = std::dynamic_pointer_cast<ocl::Expressions::Variable>(_temp);
-			setResultVariable(_resultVariable); //2812
-			return true;
+			std::shared_ptr<ecore::EcoreAny> ecoreAny = std::dynamic_pointer_cast<ecore::EcoreAny>(newValue);
+			if(ecoreAny)
+			{
+				try
+				{
+					std::shared_ptr<ecore::EObject> eObject = ecoreAny->getAsEObject();
+					std::shared_ptr<ecore::ETypedElement> _resultVariable = std::dynamic_pointer_cast<ecore::ETypedElement>(eObject);
+					if(_resultVariable)
+					{
+						setResultVariable(_resultVariable); //2612
+					}
+					else
+					{
+						throw "Invalid argument";
+					}
+				}
+				catch(...)
+				{
+					DEBUG_ERROR("Invalid type stored in 'ecore::ecoreAny' for feature 'resultVariable'. Failed to set feature!")
+					return false;
+				}
+			}
+			else
+			{
+				DEBUG_ERROR("Invalid instance of 'ecore::ecoreAny' for feature 'resultVariable'. Failed to set feature!")
+				return false;
+			}
+		return true;
 		}
 	}
 
@@ -466,9 +549,9 @@ bool ExpressionInOclImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any ExpressionInOclImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+std::shared_ptr<Any> ExpressionInOclImpl::eInvoke(int operationID, std::shared_ptr<Bag<Any>> arguments)
 {
-	Any result;
+	std::shared_ptr<Any> result;
  
   	switch(operationID)
 	{

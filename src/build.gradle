@@ -44,7 +44,7 @@ task buildEcoreModels() {
 	dependsOn 'uml:uml:buildUml'
 	dependsOn 'fuml:buildFUML'
 	//dependsOn 'pscs:buildPSCS'
-	//dependsOn 'ocl:oclModel:buildOcl'
+	dependsOn 'ocl:oclModel:buildOcl'
 }
 
 
@@ -78,7 +78,7 @@ task compileEcoreModels() {
 	dependsOn 'uml:uml:src_gen:compileUml'
 	dependsOn 'fuml:src_gen:compileFUML'
 	//dependsOn 'pscs:src_gen:compilePSCS'
-	//dependsOn 'ocl:oclModel:src_gen:compileOcl'
+	dependsOn 'ocl:oclModel:src_gen:compileOcl'
 }
 
 // Compile all without generating the models
@@ -113,7 +113,7 @@ task generateEcoreModels() {
 	dependsOn 'uml:uml:model:generateUml'
 	dependsOn 'fuml:model:generateFUML'
 	//dependsOn 'pscs:model:generatePSCS'
-	//dependsOn 'ocl:oclModel:model:generateOcl'
+	dependsOn 'ocl:oclModel:model:generateOcl'
 }
 
 

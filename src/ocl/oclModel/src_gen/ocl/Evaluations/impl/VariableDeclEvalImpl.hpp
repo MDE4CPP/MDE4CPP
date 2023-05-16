@@ -17,14 +17,12 @@
 #include "../VariableDeclEval.hpp"
 
 #include "ocl/Evaluations/impl/EvaluationsFactoryImpl.hpp"
-
-#include "ecore/impl/EModelElementImpl.hpp"
+#include "ocl/Evaluations/impl/OclExpEvalImpl.hpp"
 
 //*********************************
 namespace ocl::Evaluations 
 {
-	class OCL_API VariableDeclEvalImpl : virtual public ecore::EModelElementImpl,
-virtual public VariableDeclEval 
+	class OCL_API VariableDeclEvalImpl : virtual public OclExpEvalImpl, virtual public VariableDeclEval 
 	{
 		public: 
 			VariableDeclEvalImpl(const VariableDeclEvalImpl & obj);
@@ -49,14 +47,14 @@ virtual public VariableDeclEval
 			//*********************************
 			// Attribute Getters & Setters
 			//*********************************
+			virtual std::string getName() const ;
+			virtual void setName (std::string _name);
 			
 			//*********************************
 			// Reference Getters & Setters
 			//*********************************
 			virtual std::shared_ptr<ocl::Evaluations::OclExpEval> getInitExp() const ;
 			virtual void setInitExp(std::shared_ptr<ocl::Evaluations::OclExpEval>) ;
-			virtual std::shared_ptr<fUML::Semantics::SimpleClassifiers::StringValue> getName() const ;
-			virtual void setName(std::shared_ptr<fUML::Semantics::SimpleClassifiers::StringValue>) ;
 			
 			//*********************************
 			// Union Reference Getters
@@ -66,7 +64,7 @@ virtual public VariableDeclEval
 			// Container Getter
 			//*********************************
 			virtual std::shared_ptr<ecore::EObject> eContainer() const ; 
-			
+
 			//*********************************
 			// Persistence Functions
 			//*********************************
@@ -83,14 +81,14 @@ virtual public VariableDeclEval
 			//*********************************
 			// EStructuralFeature Get/Set/IsSet
 			//*********************************
-			virtual Any eGet(int featureID, bool resolve, bool coreType) const ;
-			virtual bool eSet(int featureID, Any newValue) ;
+			virtual std::shared_ptr<Any> eGet(int featureID, bool resolve, bool coreType) const ;
+			virtual bool eSet(int featureID, std::shared_ptr<Any> newValue) ;
 			virtual bool internalEIsSet(int featureID) const ;
 
 			//*********************************
 			// EOperation Invoke
 			//*********************************
-			virtual Any eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments) ;
+			virtual std::shared_ptr<Any> eInvoke(int operationID, std::shared_ptr<Bag<Any>> arguments) ;
 
 		private:
 			std::weak_ptr<ocl::Evaluations::VariableDeclEval> m_thisVariableDeclEvalPtr;

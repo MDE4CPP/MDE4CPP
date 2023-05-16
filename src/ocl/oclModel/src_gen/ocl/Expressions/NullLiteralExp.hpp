@@ -45,7 +45,7 @@ namespace ocl::Expressions
 	class LoopExp;
 	class NavigationCallExp;
 	class OperationCallExp;
-	class Variable;
+	class VarDeclarationExp;
 }
 namespace ecore 
 {
@@ -58,7 +58,7 @@ namespace ecore
 #include "ocl/ocl.hpp"
 
 // base class includes
-#include "ocl/Expressions/PrimitiveLiteralExp.hpp"
+#include "ocl/Expressions/LiteralExp.hpp"
 
 
 
@@ -67,7 +67,7 @@ namespace ecore
 namespace ocl::Expressions 
 {
 	
-	class OCL_API NullLiteralExp: virtual public PrimitiveLiteralExp
+	class OCL_API NullLiteralExp : virtual public LiteralExp
 	{
 		public:
  			NullLiteralExp(const NullLiteralExp &) {}

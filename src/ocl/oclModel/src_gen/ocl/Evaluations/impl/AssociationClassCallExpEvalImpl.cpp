@@ -1,9 +1,13 @@
 
 #include "ocl/Evaluations/impl/AssociationClassCallExpEvalImpl.hpp"
 #ifdef NDEBUG
-	#define DEBUG_MESSAGE(a) /**/
+	#define DEBUG_INFO(a)		/**/
+	#define DEBUG_WARNING(a)	/**/
+	#define DEBUG_ERROR(a)		/**/
 #else
-	#define DEBUG_MESSAGE(a) a
+	#define DEBUG_INFO(a) 		std::cout<<"[\e[0;32mInfo\e[0m]:\t\t"<<__PRETTY_FUNCTION__<<"\n\t\t  -- Message: "<<a<<std::endl;
+	#define DEBUG_WARNING(a) 	std::cout<<"[\e[0;33mWarning\e[0m]:\t"<<__PRETTY_FUNCTION__<<"\n\t\t  -- Message: "<<a<<std::endl;
+	#define DEBUG_ERROR(a)		std::cout<<"[\e[0;31mError\e[0m]:\t"<<__PRETTY_FUNCTION__<<"\n\t\t  -- Message: "<<a<<std::endl;
 #endif
 
 #ifdef ACTIVITY_DEBUG_ON
@@ -21,8 +25,8 @@
 #include "abstractDataTypes/Bag.hpp"
 
 
-#include "abstractDataTypes/AnyEObject.hpp"
-#include "abstractDataTypes/AnyEObjectBag.hpp"
+#include "ecore/EcoreAny.hpp"
+#include "ecore/EcoreContainerAny.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
@@ -35,27 +39,21 @@
 
 #include <exception> // used in Persistence
 #include "ocl/Evaluations/EvaluationsFactory.hpp"
+#include "ecore/ecoreFactory.hpp"
 #include "ocl/Expressions/ExpressionsFactory.hpp"
-#include "fUML/Semantics/Values/ValuesFactory.hpp"
-#include "uml/umlFactory.hpp"
-#include "fUML/Semantics/SimpleClassifiers/SimpleClassifiersFactory.hpp"
-#include "fUML/Semantics/Loci/LociFactory.hpp"
+#include "ecore/EAnnotation.hpp"
+#include "ecore/EClassifier.hpp"
+#include "ecore/EGenericType.hpp"
+#include "ecore/EObject.hpp"
 #include "ocl/Evaluations/EvalEnvironment.hpp"
-#include "fUML/Semantics/Loci/Locus.hpp"
 #include "ocl/Evaluations/NavigationCallExpEval.hpp"
 #include "ocl/Evaluations/OclExpEval.hpp"
 #include "ocl/Expressions/OclExpression.hpp"
-#include "fUML/Semantics/SimpleClassifiers/StringValue.hpp"
-#include "fUML/Semantics/Values/Value.hpp"
-#include "uml/ValueSpecification.hpp"
 //Factories and Package includes
 #include "ocl/oclPackage.hpp"
 #include "ocl/Evaluations/EvaluationsPackage.hpp"
 #include "ocl/Expressions/ExpressionsPackage.hpp"
-#include "fUML/Semantics/Loci/LociPackage.hpp"
-#include "fUML/Semantics/SimpleClassifiers/SimpleClassifiersPackage.hpp"
-#include "fUML/Semantics/Values/ValuesPackage.hpp"
-#include "uml/umlPackage.hpp"
+#include "ecore/ecorePackage.hpp"
 
 using namespace ocl::Evaluations;
 
@@ -102,9 +100,9 @@ AssociationClassCallExpEvalImpl& AssociationClassCallExpEvalImpl::operator=(cons
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy AssociationClassCallExpEval "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
 	#endif
 	//Clone Attributes with (deep copy)
+	m_referredAssociationClass = obj.getReferredAssociationClass();
 
 	//copy references with no containment (soft copy)
-	m_referredAssociationClass  = obj.getReferredAssociationClass();
 	//Clone references with containment (deep copy)
 	return *this;
 }
@@ -124,20 +122,20 @@ std::shared_ptr<ecore::EObject> AssociationClassCallExpEvalImpl::copy() const
 //*********************************
 // Attribute Getters & Setters
 //*********************************
+/* Getter & Setter for attribute referredAssociationClass */
+std::string AssociationClassCallExpEvalImpl::getReferredAssociationClass() const 
+{
+	return m_referredAssociationClass;
+}
+void AssociationClassCallExpEvalImpl::setReferredAssociationClass(std::string _referredAssociationClass)
+{
+	m_referredAssociationClass = _referredAssociationClass;
+	
+}
 
 //*********************************
 // Reference Getters & Setters
 //*********************************
-/* Getter & Setter for reference referredAssociationClass */
-std::shared_ptr<fUML::Semantics::SimpleClassifiers::StringValue> AssociationClassCallExpEvalImpl::getReferredAssociationClass() const
-{
-    return m_referredAssociationClass;
-}
-void AssociationClassCallExpEvalImpl::setReferredAssociationClass(std::shared_ptr<fUML::Semantics::SimpleClassifiers::StringValue> _referredAssociationClass)
-{
-    m_referredAssociationClass = _referredAssociationClass;
-	
-}
 
 //*********************************
 // Union Getter
@@ -175,12 +173,14 @@ void AssociationClassCallExpEvalImpl::loadAttributes(std::shared_ptr<persistence
 	try
 	{
 		std::map<std::string, std::string>::const_iterator iter;
-		std::shared_ptr<ecore::EClass> metaClass = this->eClass(); // get MetaClass
+	
 		iter = attr_list.find("referredAssociationClass");
 		if ( iter != attr_list.end() )
 		{
-			// add unresolvedReference to loadHandler's list
-			loadHandler->addUnresolvedReference(iter->second, loadHandler->getCurrentObject(), metaClass->getEStructuralFeature("referredAssociationClass")); // TODO use getEStructuralFeature() with id, for faster access to EStructuralFeature
+			// this attribute is a 'std::string'
+			std::string value;
+			value = iter->second;
+			this->setReferredAssociationClass(value);
 		}
 	}
 	catch (std::exception& e)
@@ -204,20 +204,6 @@ void AssociationClassCallExpEvalImpl::loadNode(std::string nodeName, std::shared
 
 void AssociationClassCallExpEvalImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
 {
-	switch(featureID)
-	{
-		case ocl::Evaluations::EvaluationsPackage::ASSOCIATIONCLASSCALLEXPEVAL_ATTRIBUTE_REFERREDASSOCIATIONCLASS:
-		{
-			if (references.size() == 1)
-			{
-				// Cast object to correct type
-				std::shared_ptr<fUML::Semantics::SimpleClassifiers::StringValue> _referredAssociationClass = std::dynamic_pointer_cast<fUML::Semantics::SimpleClassifiers::StringValue>( references.front() );
-				setReferredAssociationClass(_referredAssociationClass);
-			}
-			
-			return;
-		}
-	}
 	NavigationCallExpEvalImpl::resolveReferences(featureID, references);
 }
 
@@ -233,9 +219,11 @@ void AssociationClassCallExpEvalImpl::save(std::shared_ptr<persistence::interfac
 	
 	OclExpEvalImpl::saveContent(saveHandler);
 	
-	fUML::Semantics::Values::EvaluationImpl::saveContent(saveHandler);
+	ecore::ETypedElementImpl::saveContent(saveHandler);
 	
-	fUML::Semantics::Loci::SemanticVisitorImpl::saveContent(saveHandler);
+	ecore::ENamedElementImpl::saveContent(saveHandler);
+	
+	ecore::EModelElementImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);
 }
@@ -245,8 +233,11 @@ void AssociationClassCallExpEvalImpl::saveContent(std::shared_ptr<persistence::i
 	try
 	{
 		std::shared_ptr<ocl::Evaluations::EvaluationsPackage> package = ocl::Evaluations::EvaluationsPackage::eInstance();
-	// Add references
-		saveHandler->addReference(this->getReferredAssociationClass(), "referredAssociationClass", getReferredAssociationClass()->eClass() != fUML::Semantics::SimpleClassifiers::SimpleClassifiersPackage::eInstance()->getStringValue_Class()); 
+		// Add attributes
+		if ( this->eIsSet(package->getAssociationClassCallExpEval_Attribute_referredAssociationClass()) )
+		{
+			saveHandler->addAttribute("referredAssociationClass", this->getReferredAssociationClass());
+		}
 	}
 	catch (std::exception& e)
 	{
@@ -262,12 +253,12 @@ std::shared_ptr<ecore::EClass> AssociationClassCallExpEvalImpl::eStaticClass() c
 //*********************************
 // EStructuralFeature Get/Set/IsSet
 //*********************************
-Any AssociationClassCallExpEvalImpl::eGet(int featureID, bool resolve, bool coreType) const
+std::shared_ptr<Any> AssociationClassCallExpEvalImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 		case ocl::Evaluations::EvaluationsPackage::ASSOCIATIONCLASSCALLEXPEVAL_ATTRIBUTE_REFERREDASSOCIATIONCLASS:
-			return eAny(getReferredAssociationClass(),fUML::Semantics::SimpleClassifiers::SimpleClassifiersPackage::STRINGVALUE_CLASS,false); //49
+			return eAny(getReferredAssociationClass(),ecore::ecorePackage::ESTRING_CLASS,false); //217
 	}
 	return NavigationCallExpEvalImpl::eGet(featureID, resolve, coreType);
 }
@@ -277,22 +268,28 @@ bool AssociationClassCallExpEvalImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case ocl::Evaluations::EvaluationsPackage::ASSOCIATIONCLASSCALLEXPEVAL_ATTRIBUTE_REFERREDASSOCIATIONCLASS:
-			return getReferredAssociationClass() != nullptr; //49
+			return getReferredAssociationClass() != ""; //217
 	}
 	return NavigationCallExpEvalImpl::internalEIsSet(featureID);
 }
 
-bool AssociationClassCallExpEvalImpl::eSet(int featureID, Any newValue)
+bool AssociationClassCallExpEvalImpl::eSet(int featureID, std::shared_ptr<Any> newValue)
 {
 	switch(featureID)
 	{
 		case ocl::Evaluations::EvaluationsPackage::ASSOCIATIONCLASSCALLEXPEVAL_ATTRIBUTE_REFERREDASSOCIATIONCLASS:
 		{
-			// CAST Any to fUML::Semantics::SimpleClassifiers::StringValue
-			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
-			std::shared_ptr<fUML::Semantics::SimpleClassifiers::StringValue> _referredAssociationClass = std::dynamic_pointer_cast<fUML::Semantics::SimpleClassifiers::StringValue>(_temp);
-			setReferredAssociationClass(_referredAssociationClass); //49
-			return true;
+			try
+			{
+				std::string _referredAssociationClass = newValue->get<std::string>();
+				setReferredAssociationClass(_referredAssociationClass); //217
+			}
+			catch(...)
+			{
+				DEBUG_ERROR("Invalid type stored in 'Any' for feature 'referredAssociationClass'. Failed to set feature!")
+				return false;
+			}
+		return true;
 		}
 	}
 
@@ -302,9 +299,9 @@ bool AssociationClassCallExpEvalImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any AssociationClassCallExpEvalImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+std::shared_ptr<Any> AssociationClassCallExpEvalImpl::eInvoke(int operationID, std::shared_ptr<Bag<Any>> arguments)
 {
-	Any result;
+	std::shared_ptr<Any> result;
  
   	switch(operationID)
 	{

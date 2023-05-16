@@ -4,9 +4,9 @@ options {
 	tokenVocab = OclLexer;
 }
 
-@header {
-  #include "CSTNode.h"
-}
+//@header {
+//  #include "CSTNode.h"
+//}
 
 
 // -------------------------
@@ -14,6 +14,7 @@ options {
 
 expressionInOclCS
 	:	oclExpressionCS
+	|	packageDeclarationCS
 	;  
 
 // -------------------------
@@ -43,15 +44,25 @@ oclExpressionCS
 	|	oclExpressionCS iterateExpCS
 	|	oclExpressionCS (STAR | SLASH) oclExpressionCS
 	|	oclExpressionCS (PLUS | MINUS) oclExpressionCS
-	|	LPAREN oclExpressionCS RPAREN
-	|	oclExpressionCS infixedExpCS
+//	|	LPAREN oclExpressionCS RPAREN
+	|	parentedExpCS
+//	|	oclExpressionCS infixedExpCS
+	|	oclExpressionCS binaryLiteralExpCS oclExpressionCS
 	|	variableExpCS
 	|	literalExpCS
 	|	letExpCS
 	|	oclExpressionCS oclMessageExpCS
 	|	ifExpCS
 	;
-		
+
+
+//--------------------------
+
+parentedExpCS
+	:	LPAREN oclExpressionCS RPAREN
+	;
+
+// -------------------------
 // -------------------------
 // variableExpCS :  A variable expression is just a name that refers to a variable or self.
 	
@@ -113,8 +124,10 @@ enumLiteralExpCS
 	
 // -------------------------
 // collectionLiteralExpCS : represents a collection literal expression.
+// any collection elements are now seperate childs of the collectionLiteralExp
 collectionLiteralExpCS
-	: 	collectionTypeIdentifierCS (LBRACE collectionLiteralPartsCS? RBRACE)
+	//: 	collectionTypeIdentifierCS (LBRACE collectionLiteralPartsCS? RBRACE)
+	: collectionTypeIdentifierCS (LBRACE collectionLiteralPartsCS? RBRACE)
 	;
 	
 // -------------------------
@@ -132,22 +145,24 @@ collectionTypeIdentifierCS
 // collectionLiteralPartsCS : describes a sequence of items that are the contents of a collection literal.
 	
 collectionLiteralPartsCS
-	: 	collectionLiteralPartCS (COMMA collectionLiteralPartsCS)?
+//	: 	collectionLiteralPartCS (COMMA collectionLiteralPartsCS)?
+	: 	(collectionRangeCS | oclExpressionCS) (COMMA (collectionRangeCS | oclExpressionCS))*
 	;	
 	
 // -------------------------
 // collectionLiteralPartCS : 
 	
-collectionLiteralPartCS
-	: 	collectionRangeCS
-	|	oclExpressionCS
-	;	
+//collectionLiteralPartCS
+//	: 	collectionRangeCS (COMMA collectionLiteralPartCS)?
+//	|	oclExpressionCS (COMMA collectionLiteralPartCS)?
+//	;	
 	
 // -------------------------
 // collectionRangeCS : supports the use of a value or range of values in a collection of values.
 	
 collectionRangeCS
-	: 	oclExpressionCS RANGE oclExpressionCS
+	: 	oclExpressionCS RANGE oclExpressionCS 
+	|	SEQRANGE oclExpressionCS
 	;	
 
 // -------------------------
@@ -160,9 +175,9 @@ prefixedExp
 // -------------------------
 // The InfixedExp syntax supports the application of zero or more infix binary operators between expression terms.
 
-infixedExpCS
-	: 	binaryLiteralExpCS oclExpressionCS
-	;
+//infixedExpCS
+//	: 	binaryLiteralExpCS oclExpressionCS
+//	;
 
 // -------------------------
 // primitiveLiteralExpCS : includes Real, Boolean, UnlimitedNatural, Integer, and String literals.
@@ -179,9 +194,11 @@ primitiveLiteralExpCS
 	
 // -------------------------
 // tupleLiteralExpCS : represents tuple literal expressions.
+// any tuple elements are now seperate childs of the TupleLiteralExp
 	
 tupleLiteralExpCS
-	: 	TUPLE LBRACE variableDeclarationListCS RBRACE
+//	: 	TUPLE LBRACE variableDeclarationListCS RBRACE
+	:   TUPLE LBRACE (variableDeclarationCS (COMMA variableDeclarationCS)*)? RBRACE
 	;	
 	
 // -------------------------
@@ -238,9 +255,9 @@ iteratorExpCS
 		LPAREN
 			(variableDeclarationCS (COMMA variableDeclarationCS)? PIPE)? oclExpressionCS
 		RPAREN
-	|	DOT simpleNameCS LPAREN argumentsCS? RPAREN
+	|	DOT simpleNameCS LPAREN (oclExpressionCS (COMMA oclExpressionCS)*)? RPAREN
 	|	DOT simpleNameCS
-	|	DOT simpleNameCS (LBRACK argumentsCS RBRACK)?
+	|	DOT simpleNameCS (LBRACK (oclExpressionCS (COMMA oclExpressionCS)*) RBRACK)?
 	;
 // -------------------------
 // iterateExpCS : 
@@ -302,15 +319,17 @@ collectionTypeCS
 // tupleTypeCS : a tuple type declaration.
 	
 tupleTypeCS
-	: 	TUPLE LPAREN variableDeclarationListCS? RPAREN
+//now changed equal to TupleLiteralExp
+//	: 	TUPLE LPAREN variableDeclarationListCS? RPAREN
+	:   TUPLE LPAREN (variableDeclarationCS (COMMA variableDeclarationCS)*)? RPAREN
 	;
 	
 // -------------------------
 // variableDeclarationListCS : represents the formal parameters of a tuple or attribute definition.
 	
-variableDeclarationListCS
-	: 	variableDeclarationCS (COMMA variableDeclarationListCS )?
-	;
+//variableDeclarationListCS
+//	: 	variableDeclarationCS (COMMA variableDeclarationListCS )?
+//	;
 
 // -------------------------
 // operationCallExpCS : has many different forms.
@@ -322,17 +341,17 @@ variableDeclarationListCS
 
 operationCallExpCS_A
 //	: 	simpleNameCS oclExpressionCS						// A
-	:	RARROW simpleNameCS LPAREN argumentsCS? RPAREN   // B
-	|	DOT simpleNameCS LPAREN argumentsCS? RPAREN			// C
-	|	DOT simpleNameCS isMarkedPreCS LPAREN argumentsCS? RPAREN	// E
-	|	DOT pathNameCS COLONCOLON simpleNameCS LPAREN argumentsCS? RPAREN	// I
-	|	DOT pathNameCS COLONCOLON simpleNameCS isMarkedPreCS LPAREN argumentsCS? RPAREN	// J
+	:	RARROW simpleNameCS LPAREN (oclExpressionCS (COMMA oclExpressionCS)*)? RPAREN   // B
+	|	DOT simpleNameCS LPAREN (oclExpressionCS (COMMA oclExpressionCS)*)? RPAREN			// C
+	|	DOT simpleNameCS isMarkedPreCS LPAREN (oclExpressionCS (COMMA oclExpressionCS)*)? RPAREN	// E
+	|	DOT pathNameCS COLONCOLON simpleNameCS LPAREN (oclExpressionCS (COMMA oclExpressionCS)*)? RPAREN	// I
+	|	DOT pathNameCS COLONCOLON simpleNameCS isMarkedPreCS LPAREN (oclExpressionCS (COMMA oclExpressionCS)*)? RPAREN	// J
 	;
 	
 operationCallExpCS_B
-	: 	simpleNameCS LPAREN argumentsCS? RPAREN								// D
-	|	simpleNameCS isMarkedPreCS LPAREN argumentsCS? RPAREN	// F
-	|	pathNameCS LPAREN argumentsCS? RPAREN	// G
+	: 	simpleNameCS LPAREN (oclExpressionCS (COMMA oclExpressionCS)*)? RPAREN								// D
+	|	simpleNameCS isMarkedPreCS LPAREN (oclExpressionCS (COMMA oclExpressionCS)*)? RPAREN	// F
+	|	pathNameCS LPAREN (oclExpressionCS (COMMA oclExpressionCS)*)? RPAREN	// G
 //	|	simpleNameCS oclExpressionCS	// H
 	;
 	
@@ -355,11 +374,13 @@ propertyCallExpCS_B
 // associationClassCallExpCS : represents a navigation to an association class.
 	
 associationClassCallExpCS_A
-	: 	DOT simpleNameCS (LBRACE argumentsCS RBRACE)? isMarkedPreCS?
+	//: 	DOT simpleNameCS (LBRACE argumentsCS RBRACE)? isMarkedPreCS?
+	: 	DOT simpleNameCS (LBRACE oclExpressionCS (COMMA oclExpressionCS)* RBRACE)? isMarkedPreCS?
 	;
 	
 associationClassCallExpCS_B
-	: 	simpleNameCS (LBRACE argumentsCS RBRACE)? isMarkedPreCS?
+	//: 	simpleNameCS (LBRACE argumentsCS RBRACE)? isMarkedPreCS?
+	:	simpleNameCS (LBRACE oclExpressionCS (COMMA oclExpressionCS)* RBRACE)? isMarkedPreCS?
 	;
 // -------------------------
 // isMarkedPreCS : represents the marking @pre in an ocl expression.
@@ -371,25 +392,26 @@ isMarkedPreCS
 // -------------------------
 // argumentsCS : represents a sequence of arguments.
 	
-argumentsCS
-	: 	oclExpressionCS ( COMMA argumentsCS )?
-	;
+//argumentsCS
+//	: 	oclExpressionCS ( COMMA argumentsCS )?
+//	;
 	
 // -------------------------
 // letExpCS : represents a let expression.
 	
 letExpCS
-	: 	LET variableDeclarationCS 
-		letExpSubCS
+	//: 	LET variableDeclarationCS 
+	//	letExpSubCS
+	: LET variableDeclarationCS (COMMA variableDeclarationCS)* IN oclExpressionCS
 	;
 	
 // -------------------------
 // letExpSubCS : let
 	
-letExpSubCS
-	: 	COMMA variableDeclarationCS letExpSubCS
-	|	IN oclExpressionCS
-	;
+//letExpSubCS
+//	: 	COMMA variableDeclarationCS letExpSubCS
+//	|	IN oclExpressionCS
+//	;
 	
 // -------------------------
 // oclMessageExpCS : must either be the name of a Signal, 
@@ -403,16 +425,17 @@ oclMessageExpCS
 // oclMessageArgumentsCS : ocl message arguments.
 	
 oclMessageArgumentsCS
-	: 	oclMessageArgCS (COMMA oclMessageArgumentsCS)?
+//	: 	oclMessageArgCS (COMMA oclMessageArgumentsCS)?
+	:	( (QUESTION (COLON typeCS)?) | oclExpressionCS ) ( COMMA ( (QUESTION ( COLON typeCS )?) | oclExpressionCS ) )*
 	;
 	
 // -------------------------
 // oclMessageArgCS : ocl message argument.
 	
-oclMessageArgCS
-	: 	QUESTION (COLON typeCS)?
-	|	oclExpressionCS
-	;
+//oclMessageArgCS
+//	: 	QUESTION (COLON typeCS)?
+//	|	oclExpressionCS
+//	;
 	
 // -------------------------
 // ifExpCS : if expression.
@@ -470,6 +493,7 @@ packageDeclarationCS
 	;
 	
 // -------------------------
+
 // contextDeclarationCS : identifies a model element to be complemented.
 			
 contextDeclarationCS
@@ -497,7 +521,7 @@ operationContextDeclCS
 // propertyContextDeclCS : identifies a Property to be complemented.
 			
 propertyContextDeclCS
-	:	CONTEXT pathNameCS COLONCOLON simpleNameCS COLON typeCS initOrDerValueCS
+	:	CONTEXT pathNameCS COLONCOLON simpleNameCS COLON typeCS initOrDerValueListCS
 	;	
 	
 // -------------------------
@@ -517,33 +541,52 @@ invOrDefCS
 	;
 	
 // -------------------------
+
+initOrDerValueListCS
+	:	initOrDerValueCS*
+	;
+
 // initOrDerValueCS : represents an initial or derived value expression.
 			
 initOrDerValueCS
-	:	INIT COLON oclExpressionCS initOrDerValueCS?
-	|	DERIVE COLON oclExpressionCS initOrDerValueCS?
+//	:	INIT COLON oclExpressionCS initOrDerValueCS?
+//	|	DERIVE COLON oclExpressionCS initOrDerValueCS?
+	:   (INIT | DERIVE) COLON oclExpressionCS
 	;
 
 // -------------------------
 // prePostOrBodyDeclCS : represents a pre- or postcondition or body expression.
 			
 prePostOrBodyDeclCS
-	:	PRE simpleNameCS? COLON oclExpressionCS prePostOrBodyDeclCS?
-	|	POST simpleNameCS? COLON oclExpressionCS prePostOrBodyDeclCS?
-	|	BODY simpleNameCS? COLON oclExpressionCS prePostOrBodyDeclCS?
+//	:	PRE simpleNameCS? COLON oclExpressionCS prePostOrBodyDeclCS?
+//	|	POST simpleNameCS? COLON oclExpressionCS prePostOrBodyDeclCS?
+//	|	BODY simpleNameCS? COLON oclExpressionCS prePostOrBodyDeclCS?
+	: 	prePostBodyExpCS*
 	;
 	
 // -------------------------
+
+// -------------------------
+
+prePostBodyExpCS
+	: (PRE | POST | BODY) simpleNameCS? COLON oclExpressionCS
+	;
+
+//--------------------------
+
 // operationCS : represents an operation in a context declaration or definition expression.
 			
 operationCS
-	:	pathNameCS COLONCOLON simpleNameCS LPAREN parametersCS? RPAREN COLON typeCS?
-	|	simpleNameCS LPAREN parametersCS? RPAREN COLON typeCS?
+	//:	pathNameCS COLONCOLON simpleNameCS LPAREN parametersCS? RPAREN COLON typeCS?
+	//|	simpleNameCS LPAREN parametersCS? RPAREN COLON typeCS?
+	:	pathNameCS COLONCOLON simpleNameCS LPAREN (variableDeclarationCS (COMMA variableDeclarationCS)*)? RPAREN COLON typeCS?
+	|	simpleNameCS LPAREN (variableDeclarationCS (COMMA variableDeclarationCS)*)? RPAREN COLON typeCS?
 	;
 	
 // -------------------------
 // parametersCS : represents the formal parameters of an operation.
 			
-parametersCS
-	:	variableDeclarationCS (COMMA parametersCS)?
-	;
+//parametersCS
+	//:	variableDeclarationCS (COMMA parametersCS)?
+//	:	variableDeclarationCS (COMMA variableDeclarationCS)*
+//	;

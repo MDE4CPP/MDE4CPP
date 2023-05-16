@@ -34,7 +34,7 @@ repositories {
 }
 
 dependencies {
-    antlr 'org.antlr:antlr4:4.9' // use ANTLR version 4
+    antlr 'org.antlr:antlr4:4.12.0' // use ANTLR version 4
 }
 
 ext.ocl = [
@@ -42,6 +42,7 @@ ext.ocl = [
     grammarDir:    	"../grammar",
     destinationDir: "OclCS",
 	utilitiesDir: 	"Utilities",
+	evalDir:		"Eval",
     tmpSourceDir:	"src",
     tmpGrammarDir:	"src/main/antlr",
     tmpBuildDir:	"src/build",
@@ -58,13 +59,13 @@ generateGrammarSource {
 	
 	dependsOn 'antlrInitTmpDir'
 	outputDirectory = file(ocl.tmpBuildDir) 
-	arguments = ["-Dlanguage=Cpp", "-long-messages", "-visitor", "-package", ocl.grammarpackage]
+	arguments = ["-Dlanguage=Cpp", "-long-messages", "-no-listener", "-visitor", "-package", ocl.grammarpackage]
 	
 	doLast {
 		copy {
 			from ocl.tmpBuildDir
 			into ocl.destinationDir
-			filter { line -> line.replaceAll(': public antlr4::ParserRuleContext', ': public antlr4::ParserRuleContext, public CSTNode') }
+			//filter { line -> line.replaceAll(': public antlr4::ParserRuleContext', ': public antlr4::ParserRuleContext, public CSTNode') }
 			filter { line -> line.replaceAll('delete _interpreter;', '//delete _interpreter;') } // weir bug in release mode
 		}
 	}
@@ -82,6 +83,13 @@ task generateOclParser() {
 	description 'generate ocl model and grammar sources'
 	
 	dependsOn getRootProject().getTasksByName('generateGrammarSource', true)
+	dependsOn getRootProject().getTasksByName('generateOcl', true)
+}
+
+task generateOclModel() {
+	group 'Source'
+	description 'generate ocl model'
+	
 	dependsOn getRootProject().getTasksByName('generateOcl', true)
 }
 

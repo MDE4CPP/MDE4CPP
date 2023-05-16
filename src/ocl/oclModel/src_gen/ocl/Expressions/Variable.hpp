@@ -40,10 +40,6 @@ namespace ocl::Expressions
 	class OclExpression;
 	class VariableExp;
 }
-namespace fUML::Semantics::Values 
-{
-	class Value;
-}
 namespace ecore 
 {
 	class EAnnotation;
@@ -65,25 +61,13 @@ namespace ecore
 namespace ocl::Expressions 
 {
 	
-	class OCL_API Variable: virtual public ecore::ETypedElement
+	class OCL_API Variable : virtual public ecore::ETypedElement
 	{
 		public:
  			Variable(const Variable &) {}
 
 		protected:
 			Variable(){}
-			//Additional constructors for the containments back reference
-			Variable(std::weak_ptr<ocl::Expressions::IterateExp> par_baseExp);
-
-			//Additional constructors for the containments back reference
-			Variable(std::weak_ptr<ocl::Expressions::LoopExp> par_loopExp);
-
-			//Additional constructors for the containments back reference
-			Variable(std::weak_ptr<ocl::Expressions::ExpressionInOcl> par_ExpressionInOcl, const int reference_id);
-
-			//Additional constructors for the containments back reference
-
-			//Additional constructors for the containments back reference
 
 		public:
 			virtual std::shared_ptr<ecore::EObject> copy() const = 0;
@@ -102,24 +86,24 @@ namespace ocl::Expressions
 			//*********************************
 			// Reference Getters & Setters
 			//*********************************
-			virtual std::weak_ptr<ocl::Expressions::IterateExp> getBaseExp() const = 0;
-			virtual void setBaseExp(std::weak_ptr<ocl::Expressions::IterateExp>) = 0;
+			virtual std::shared_ptr<ocl::Expressions::IterateExp> getBaseExp() const = 0;
+			virtual void setBaseExp(std::shared_ptr<ocl::Expressions::IterateExp>) = 0;
 			virtual std::shared_ptr<ocl::Expressions::OclExpression> getInitExpression() const = 0;
 			virtual void setInitExpression(std::shared_ptr<ocl::Expressions::OclExpression>) = 0;
-			virtual std::weak_ptr<ocl::Expressions::LoopExp> getLoopExp() const = 0;
-			virtual void setLoopExp(std::weak_ptr<ocl::Expressions::LoopExp>) = 0;
+			virtual std::shared_ptr<ocl::Expressions::LoopExp> getLoopExp() const = 0;
+			virtual void setLoopExp(std::shared_ptr<ocl::Expressions::LoopExp>) = 0;
 			virtual std::shared_ptr<ocl::Expressions::VariableExp> getReferringExp() const = 0;
 			virtual void setReferringExp(std::shared_ptr<ocl::Expressions::VariableExp>) = 0;
 			virtual std::shared_ptr<ecore::EParameter> getRepresentedParameter() const = 0;
 			virtual void setRepresentedParameter(std::shared_ptr<ecore::EParameter>) = 0;
-			virtual std::weak_ptr<ocl::Expressions::ExpressionInOcl> getResultOwner() const = 0;
-			virtual void setResultOwner(std::weak_ptr<ocl::Expressions::ExpressionInOcl>) = 0;
-			virtual std::weak_ptr<ocl::Expressions::ExpressionInOcl> getSelfOwner() const = 0;
-			virtual void setSelfOwner(std::weak_ptr<ocl::Expressions::ExpressionInOcl>) = 0;
-			virtual std::shared_ptr<fUML::Semantics::Values::Value> getValue() const = 0;
-			virtual void setValue(std::shared_ptr<fUML::Semantics::Values::Value>) = 0;
-			virtual std::weak_ptr<ocl::Expressions::ExpressionInOcl> getVarOwner() const = 0;
-			virtual void setVarOwner(std::weak_ptr<ocl::Expressions::ExpressionInOcl>) = 0;
+			virtual std::shared_ptr<ocl::Expressions::ExpressionInOcl> getResultOwner() const = 0;
+			virtual void setResultOwner(std::shared_ptr<ocl::Expressions::ExpressionInOcl>) = 0;
+			virtual std::shared_ptr<ocl::Expressions::ExpressionInOcl> getSelfOwner() const = 0;
+			virtual void setSelfOwner(std::shared_ptr<ocl::Expressions::ExpressionInOcl>) = 0;
+			virtual std::shared_ptr<ecore::ETypedElement> getValue() const = 0;
+			virtual void setValue(std::shared_ptr<ecore::ETypedElement>) = 0;
+			virtual std::shared_ptr<ocl::Expressions::ExpressionInOcl> getVarOwner() const = 0;
+			virtual void setVarOwner(std::shared_ptr<ocl::Expressions::ExpressionInOcl>) = 0;
 
 			//*********************************
 			// Union Reference Getters
@@ -145,15 +129,15 @@ namespace ocl::Expressions
 			//*********************************
 			// Reference Members
 			//*********************************
-			std::weak_ptr<ocl::Expressions::IterateExp> m_baseExp;
+			std::shared_ptr<ocl::Expressions::IterateExp> m_baseExp;
 			std::shared_ptr<ocl::Expressions::OclExpression> m_initExpression;
-			std::weak_ptr<ocl::Expressions::LoopExp> m_loopExp;
+			std::shared_ptr<ocl::Expressions::LoopExp> m_loopExp;
 			std::shared_ptr<ocl::Expressions::VariableExp> m_referringExp;
 			std::shared_ptr<ecore::EParameter> m_representedParameter;
-			std::weak_ptr<ocl::Expressions::ExpressionInOcl> m_resultOwner;
-			std::weak_ptr<ocl::Expressions::ExpressionInOcl> m_selfOwner;
-			std::shared_ptr<fUML::Semantics::Values::Value> m_value;
-			std::weak_ptr<ocl::Expressions::ExpressionInOcl> m_varOwner;
+			std::shared_ptr<ocl::Expressions::ExpressionInOcl> m_resultOwner;
+			std::shared_ptr<ocl::Expressions::ExpressionInOcl> m_selfOwner;
+			std::shared_ptr<ecore::ETypedElement> m_value;
+			std::shared_ptr<ocl::Expressions::ExpressionInOcl> m_varOwner;
 	};
 }
 #endif /* end of include guard: OCL_EXPRESSIONS_VARIABLE_HPP */

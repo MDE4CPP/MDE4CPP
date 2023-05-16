@@ -40,21 +40,12 @@ namespace ocl::Expressions
 {
 	class OclExpression;
 }
-namespace fUML::Semantics::Loci 
+namespace ecore 
 {
-	class Locus;
-}
-namespace fUML::Semantics::SimpleClassifiers 
-{
-	class StringValue;
-}
-namespace fUML::Semantics::Values 
-{
-	class Value;
-}
-namespace uml 
-{
-	class ValueSpecification;
+	class EAnnotation;
+	class EClassifier;
+	class EGenericType;
+	class EObject;
 }
 
 // namespace macro header include
@@ -70,7 +61,7 @@ namespace uml
 namespace ocl::Evaluations 
 {
 	
-	class OCL_API LetExpEval: virtual public OclExpEval
+	class OCL_API LetExpEval : virtual public OclExpEval
 	{
 		public:
  			LetExpEval(const LetExpEval &) {}
@@ -91,6 +82,8 @@ namespace ocl::Evaluations
 			//*********************************
 			// Attribute Getters & Setters
 			//*********************************
+			virtual std::string getVariable() const = 0;
+			virtual void setVariable (std::string _variable)= 0;
 
 			//*********************************
 			// Reference Getters & Setters
@@ -99,8 +92,6 @@ namespace ocl::Evaluations
 			virtual void setIn(std::shared_ptr<ocl::Evaluations::OclExpEval>) = 0;
 			virtual std::shared_ptr<ocl::Evaluations::OclExpEval> getInitExpression() const = 0;
 			virtual void setInitExpression(std::shared_ptr<ocl::Evaluations::OclExpEval>) = 0;
-			virtual std::shared_ptr<fUML::Semantics::SimpleClassifiers::StringValue> getVariable() const = 0;
-			virtual void setVariable(std::shared_ptr<fUML::Semantics::SimpleClassifiers::StringValue>) = 0;
 
 			//*********************************
 			// Union Reference Getters
@@ -122,13 +113,13 @@ namespace ocl::Evaluations
 			//*********************************
 			// Attribute Members
 			//*********************************
+			std::string m_variable= "";
 			
 			//*********************************
 			// Reference Members
 			//*********************************
 			std::shared_ptr<ocl::Evaluations::OclExpEval> m_in;
 			std::shared_ptr<ocl::Evaluations::OclExpEval> m_initExpression;
-			std::shared_ptr<fUML::Semantics::SimpleClassifiers::StringValue> m_variable;
 	};
 }
 #endif /* end of include guard: OCL_EVALUATIONS_LETEXPEVAL_HPP */

@@ -44,12 +44,11 @@ namespace ocl::Expressions
 	class IfExp;
 	class LoopExp;
 	class OperationCallExp;
-	class Variable;
+	class VarDeclarationExp;
 }
 namespace ecore 
 {
 	class EAnnotation;
-	class EAttribute;
 	class EClassifier;
 	class EGenericType;
 }
@@ -67,7 +66,7 @@ namespace ecore
 namespace ocl::Expressions 
 {
 	
-	class OCL_API NavigationCallExp: virtual public FeatureCallExp
+	class OCL_API NavigationCallExp : virtual public FeatureCallExp
 	{
 		public:
  			NavigationCallExp(const NavigationCallExp &) {}
@@ -88,12 +87,12 @@ namespace ocl::Expressions
 			//*********************************
 			// Attribute Getters & Setters
 			//*********************************
+			virtual std::string getNavigationSource() const = 0;
+			virtual void setNavigationSource (std::string _navigationSource)= 0;
 
 			//*********************************
 			// Reference Getters & Setters
 			//*********************************
-			virtual std::shared_ptr<ecore::EAttribute> getNavigationSource() const = 0;
-			virtual void setNavigationSource(std::shared_ptr<ecore::EAttribute>) = 0;
 			virtual std::shared_ptr<Bag<ocl::Expressions::OclExpression>> getQualifier() const = 0;
 
 			//*********************************
@@ -116,11 +115,11 @@ namespace ocl::Expressions
 			//*********************************
 			// Attribute Members
 			//*********************************
+			std::string m_navigationSource= "";
 			
 			//*********************************
 			// Reference Members
 			//*********************************
-			std::shared_ptr<ecore::EAttribute> m_navigationSource;
 			mutable std::shared_ptr<Bag<ocl::Expressions::OclExpression>> m_qualifier;
 	};
 }

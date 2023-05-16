@@ -35,14 +35,6 @@ namespace ocl::Expressions
 			virtual std::shared_ptr<ocl::Expressions::Variable> getThisVariablePtr() const;
 			virtual void setThisVariablePtr(std::weak_ptr<ocl::Expressions::Variable> thisVariablePtr);
 
-			//Additional constructors for the containments back reference
-			VariableImpl(std::weak_ptr<ocl::Expressions::IterateExp> par_baseExp);
-			//Additional constructors for the containments back reference
-			VariableImpl(std::weak_ptr<ocl::Expressions::LoopExp> par_loopExp);
-			//Additional constructors for the containments back reference
-			VariableImpl(std::weak_ptr<ocl::Expressions::ExpressionInOcl> par_ExpressionInOcl, const int reference_id);
-			//Additional constructors for the containments back reference
-			//Additional constructors for the containments back reference
 
 		public:
 			//destructor
@@ -59,24 +51,24 @@ namespace ocl::Expressions
 			//*********************************
 			// Reference Getters & Setters
 			//*********************************
-			virtual std::weak_ptr<ocl::Expressions::IterateExp> getBaseExp() const ;
-			virtual void setBaseExp(std::weak_ptr<ocl::Expressions::IterateExp>) ;
+			virtual std::shared_ptr<ocl::Expressions::IterateExp> getBaseExp() const ;
+			virtual void setBaseExp(std::shared_ptr<ocl::Expressions::IterateExp>) ;
 			virtual std::shared_ptr<ocl::Expressions::OclExpression> getInitExpression() const ;
 			virtual void setInitExpression(std::shared_ptr<ocl::Expressions::OclExpression>) ;
-			virtual std::weak_ptr<ocl::Expressions::LoopExp> getLoopExp() const ;
-			virtual void setLoopExp(std::weak_ptr<ocl::Expressions::LoopExp>) ;
+			virtual std::shared_ptr<ocl::Expressions::LoopExp> getLoopExp() const ;
+			virtual void setLoopExp(std::shared_ptr<ocl::Expressions::LoopExp>) ;
 			virtual std::shared_ptr<ocl::Expressions::VariableExp> getReferringExp() const ;
 			virtual void setReferringExp(std::shared_ptr<ocl::Expressions::VariableExp>) ;
 			virtual std::shared_ptr<ecore::EParameter> getRepresentedParameter() const ;
 			virtual void setRepresentedParameter(std::shared_ptr<ecore::EParameter>) ;
-			virtual std::weak_ptr<ocl::Expressions::ExpressionInOcl> getResultOwner() const ;
-			virtual void setResultOwner(std::weak_ptr<ocl::Expressions::ExpressionInOcl>) ;
-			virtual std::weak_ptr<ocl::Expressions::ExpressionInOcl> getSelfOwner() const ;
-			virtual void setSelfOwner(std::weak_ptr<ocl::Expressions::ExpressionInOcl>) ;
-			virtual std::shared_ptr<fUML::Semantics::Values::Value> getValue() const ;
-			virtual void setValue(std::shared_ptr<fUML::Semantics::Values::Value>) ;
-			virtual std::weak_ptr<ocl::Expressions::ExpressionInOcl> getVarOwner() const ;
-			virtual void setVarOwner(std::weak_ptr<ocl::Expressions::ExpressionInOcl>) ;
+			virtual std::shared_ptr<ocl::Expressions::ExpressionInOcl> getResultOwner() const ;
+			virtual void setResultOwner(std::shared_ptr<ocl::Expressions::ExpressionInOcl>) ;
+			virtual std::shared_ptr<ocl::Expressions::ExpressionInOcl> getSelfOwner() const ;
+			virtual void setSelfOwner(std::shared_ptr<ocl::Expressions::ExpressionInOcl>) ;
+			virtual std::shared_ptr<ecore::ETypedElement> getValue() const ;
+			virtual void setValue(std::shared_ptr<ecore::ETypedElement>) ;
+			virtual std::shared_ptr<ocl::Expressions::ExpressionInOcl> getVarOwner() const ;
+			virtual void setVarOwner(std::shared_ptr<ocl::Expressions::ExpressionInOcl>) ;
 			
 			//*********************************
 			// Union Reference Getters
@@ -86,7 +78,7 @@ namespace ocl::Expressions
 			// Container Getter
 			//*********************************
 			virtual std::shared_ptr<ecore::EObject> eContainer() const ; 
-			
+
 			//*********************************
 			// Persistence Functions
 			//*********************************
@@ -103,14 +95,14 @@ namespace ocl::Expressions
 			//*********************************
 			// EStructuralFeature Get/Set/IsSet
 			//*********************************
-			virtual Any eGet(int featureID, bool resolve, bool coreType) const ;
-			virtual bool eSet(int featureID, Any newValue) ;
+			virtual std::shared_ptr<Any> eGet(int featureID, bool resolve, bool coreType) const ;
+			virtual bool eSet(int featureID, std::shared_ptr<Any> newValue) ;
 			virtual bool internalEIsSet(int featureID) const ;
 
 			//*********************************
 			// EOperation Invoke
 			//*********************************
-			virtual Any eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments) ;
+			virtual std::shared_ptr<Any> eInvoke(int operationID, std::shared_ptr<Bag<Any>> arguments) ;
 
 		private:
 			std::weak_ptr<ocl::Expressions::Variable> m_thisVariablePtr;

@@ -46,18 +46,13 @@ namespace ocl::Expressions
 	class LoopExp;
 	class NavigationCallExp;
 	class OperationCallExp;
-	class Variable;
+	class VarDeclarationExp;
 }
 namespace ecore 
 {
 	class EAnnotation;
 	class EClassifier;
 	class EGenericType;
-}
-namespace uml 
-{
-	class CallOperationAction;
-	class SendSignalAction;
 }
 
 // namespace macro header include
@@ -73,7 +68,7 @@ namespace uml
 namespace ocl::Expressions 
 {
 	
-	class OCL_API MessageExp: virtual public OclExpression
+	class OCL_API MessageExp : virtual public OclExpression
 	{
 		public:
  			MessageExp(const MessageExp &) {}
@@ -94,15 +89,15 @@ namespace ocl::Expressions
 			//*********************************
 			// Attribute Getters & Setters
 			//*********************************
+			virtual std::string getCalledOperation() const = 0;
+			virtual void setCalledOperation (std::string _calledOperation)= 0;
+			virtual std::string getSentSignal() const = 0;
+			virtual void setSentSignal (std::string _sentSignal)= 0;
 
 			//*********************************
 			// Reference Getters & Setters
 			//*********************************
 			virtual std::shared_ptr<Bag<ocl::Expressions::OclExpression>> getArgument() const = 0;
-			virtual std::shared_ptr<uml::CallOperationAction> getCalledOperation() const = 0;
-			virtual void setCalledOperation(std::shared_ptr<uml::CallOperationAction>) = 0;
-			virtual std::shared_ptr<uml::SendSignalAction> getSentSignal() const = 0;
-			virtual void setSentSignal(std::shared_ptr<uml::SendSignalAction>) = 0;
 			virtual std::shared_ptr<ocl::Expressions::OclExpression> getTarget() const = 0;
 			virtual void setTarget(std::shared_ptr<ocl::Expressions::OclExpression>) = 0;
 
@@ -126,13 +121,13 @@ namespace ocl::Expressions
 			//*********************************
 			// Attribute Members
 			//*********************************
+			std::string m_calledOperation= "";
+			std::string m_sentSignal= "";
 			
 			//*********************************
 			// Reference Members
 			//*********************************
 			mutable std::shared_ptr<Bag<ocl::Expressions::OclExpression>> m_argument;
-			std::shared_ptr<uml::CallOperationAction> m_calledOperation;
-			std::shared_ptr<uml::SendSignalAction> m_sentSignal;
 			std::shared_ptr<ocl::Expressions::OclExpression> m_target;
 	};
 }

@@ -1,9 +1,13 @@
 
 #include "ocl/Expressions/impl/LoopExpImpl.hpp"
 #ifdef NDEBUG
-	#define DEBUG_MESSAGE(a) /**/
+	#define DEBUG_INFO(a)		/**/
+	#define DEBUG_WARNING(a)	/**/
+	#define DEBUG_ERROR(a)		/**/
 #else
-	#define DEBUG_MESSAGE(a) a
+	#define DEBUG_INFO(a) 		std::cout<<"[\e[0;32mInfo\e[0m]:\t\t"<<__PRETTY_FUNCTION__<<"\n\t\t  -- Message: "<<a<<std::endl;
+	#define DEBUG_WARNING(a) 	std::cout<<"[\e[0;33mWarning\e[0m]:\t"<<__PRETTY_FUNCTION__<<"\n\t\t  -- Message: "<<a<<std::endl;
+	#define DEBUG_ERROR(a)		std::cout<<"[\e[0;31mError\e[0m]:\t"<<__PRETTY_FUNCTION__<<"\n\t\t  -- Message: "<<a<<std::endl;
 #endif
 
 #ifdef ACTIVITY_DEBUG_ON
@@ -21,8 +25,8 @@
 #include "abstractDataTypes/Bag.hpp"
 
 
-#include "abstractDataTypes/AnyEObject.hpp"
-#include "abstractDataTypes/AnyEObjectBag.hpp"
+#include "ecore/EcoreAny.hpp"
+#include "ecore/EcoreContainerAny.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
@@ -34,9 +38,9 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
+#include "ocl/Evaluations/EvaluationsFactory.hpp"
 #include "ocl/Expressions/ExpressionsFactory.hpp"
 #include "ecore/ecoreFactory.hpp"
-#include "ocl/Evaluations/EvaluationsFactory.hpp"
 #include "ocl/Expressions/CallExp.hpp"
 #include "ocl/Expressions/CollectionRange.hpp"
 #include "ecore/EAnnotation.hpp"
@@ -49,7 +53,7 @@
 #include "ocl/Evaluations/OclExpEval.hpp"
 #include "ocl/Expressions/OclExpression.hpp"
 #include "ocl/Expressions/OperationCallExp.hpp"
-#include "ocl/Expressions/Variable.hpp"
+#include "ocl/Expressions/VarDeclarationExp.hpp"
 //Factories and Package includes
 #include "ocl/oclPackage.hpp"
 #include "ocl/Evaluations/EvaluationsPackage.hpp"
@@ -73,13 +77,6 @@ LoopExpImpl::~LoopExpImpl()
 #ifdef SHOW_DELETION
 	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete LoopExp "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
 #endif
-}
-
-//Additional constructor for the containments back reference
-LoopExpImpl::LoopExpImpl(std::weak_ptr<ocl::Expressions::CallExp> par_appliedElement)
-:LoopExpImpl()
-{
-	m_appliedElement = par_appliedElement;
 }
 
 //Additional constructor for the containments back reference
@@ -122,20 +119,25 @@ LoopExpImpl::LoopExpImpl(std::weak_ptr<ocl::Expressions::CollectionRange> par_Co
 }
 
 
-//Additional constructor for the containments back reference
-LoopExpImpl::LoopExpImpl(std::weak_ptr<ocl::Expressions::Variable> par_initializedElement)
-:LoopExpImpl()
-{
-	m_initializedElement = par_initializedElement;
-}
-
 
 //Additional constructor for the containments back reference
-LoopExpImpl::LoopExpImpl(std::weak_ptr<ocl::Expressions::LoopExp> par_loopBodyOwner)
+LoopExpImpl::LoopExpImpl(std::weak_ptr<ocl::Expressions::LoopExp> par_LoopExp, const int reference_id)
 :LoopExpImpl()
 {
-	m_loopBodyOwner = par_loopBodyOwner;
+	switch(reference_id)
+	{	
+	case ocl::Expressions::ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_LOOPBODYOWNER:
+		m_loopBodyOwner = par_LoopExp;
+		 return;
+	case ocl::Expressions::ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_LOOPEXP:
+		m_loopExp = par_LoopExp;
+		 return;
+	default:
+	std::cerr << __PRETTY_FUNCTION__ <<" Reference not found in class with the given ID" << std::endl;
+	}
+   
 }
+
 
 //Additional constructor for the containments back reference
 LoopExpImpl::LoopExpImpl(std::weak_ptr<ocl::Expressions::OperationCallExp> par_parentCall)
@@ -184,6 +186,9 @@ LoopExpImpl& LoopExpImpl::operator=(const LoopExpImpl & obj)
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy LoopExp "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
 	#endif
 	//Clone Attributes with (deep copy)
+	m_isCollectionOperation = obj.isIsCollectionOperation();
+	m_isImplCollectIterator = obj.isIsImplCollectIterator();
+	m_iterName = obj.getIterName();
 
 	//copy references with no containment (soft copy)
 	//Clone references with containment (deep copy)
@@ -194,21 +199,21 @@ LoopExpImpl& LoopExpImpl::operator=(const LoopExpImpl & obj)
 	}
 
 	//clone reference 'iterator'
-	std::shared_ptr<Bag<ocl::Expressions::Variable>> iteratorList = obj.getIterator();
+	std::shared_ptr<Bag<ocl::Expressions::OclExpression>> iteratorList = obj.getIterator();
 	if(iteratorList)
 	{
-		m_iterator.reset(new Bag<ocl::Expressions::Variable>());
+		m_iterator.reset(new Bag<ocl::Expressions::OclExpression>());
 		
 		
-		for(const std::shared_ptr<ocl::Expressions::Variable> iteratorindexElem: *iteratorList) 
+		for(const std::shared_ptr<ocl::Expressions::OclExpression> iteratorindexElem: *iteratorList) 
 		{
-			std::shared_ptr<ocl::Expressions::Variable> temp = std::dynamic_pointer_cast<ocl::Expressions::Variable>((iteratorindexElem)->copy());
+			std::shared_ptr<ocl::Expressions::OclExpression> temp = std::dynamic_pointer_cast<ocl::Expressions::OclExpression>((iteratorindexElem)->copy());
 			m_iterator->push_back(temp);
 		}
 	}
 	else
 	{
-		DEBUG_MESSAGE(std::cout << "Warning: container is nullptr iterator."<< std::endl;)
+		DEBUG_WARNING("container is nullptr for iterator.")
 	}
 	
 	
@@ -222,6 +227,38 @@ LoopExpImpl& LoopExpImpl::operator=(const LoopExpImpl & obj)
 //*********************************
 // Attribute Getters & Setters
 //*********************************
+/* Getter & Setter for attribute isCollectionOperation */
+bool LoopExpImpl::isIsCollectionOperation() const 
+{
+	return m_isCollectionOperation;
+}
+void LoopExpImpl::setIsCollectionOperation(bool _isCollectionOperation)
+{
+	m_isCollectionOperation = _isCollectionOperation;
+	
+}
+
+/* Getter & Setter for attribute isImplCollectIterator */
+bool LoopExpImpl::isIsImplCollectIterator() const 
+{
+	return m_isImplCollectIterator;
+}
+void LoopExpImpl::setIsImplCollectIterator(bool _isImplCollectIterator)
+{
+	m_isImplCollectIterator = _isImplCollectIterator;
+	
+}
+
+/* Getter & Setter for attribute iterName */
+std::string LoopExpImpl::getIterName() const 
+{
+	return m_iterName;
+}
+void LoopExpImpl::setIterName(std::string _iterName)
+{
+	m_iterName = _iterName;
+	
+}
 
 //*********************************
 // Reference Getters & Setters
@@ -238,11 +275,11 @@ void LoopExpImpl::setBody(std::shared_ptr<ocl::Expressions::OclExpression> _body
 }
 
 /* Getter & Setter for reference iterator */
-std::shared_ptr<Bag<ocl::Expressions::Variable>> LoopExpImpl::getIterator() const
+std::shared_ptr<Bag<ocl::Expressions::OclExpression>> LoopExpImpl::getIterator() const
 {
 	if(m_iterator == nullptr)
 	{
-		m_iterator.reset(new Bag<ocl::Expressions::Variable>());
+		m_iterator.reset(new Bag<ocl::Expressions::OclExpression>());
 		
 		
 	}
@@ -258,11 +295,6 @@ std::shared_ptr<Bag<ocl::Expressions::Variable>> LoopExpImpl::getIterator() cons
 //*********************************
 std::shared_ptr<ecore::EObject> LoopExpImpl::eContainer() const
 {
-	if(auto wp = m_appliedElement.lock())
-	{
-		return wp;
-	}
-
 	if(auto wp = m_elseOwner.lock())
 	{
 		return wp;
@@ -286,16 +318,16 @@ std::shared_ptr<ecore::EObject> LoopExpImpl::eContainer() const
 	}
 
 
-	if(auto wp = m_initializedElement.lock())
-	{
-		return wp;
-	}
-
 
 	if(auto wp = m_loopBodyOwner.lock())
 	{
 		return wp;
 	}
+	if(auto wp = m_loopExp.lock())
+	{
+		return wp;
+	}
+
 
 	if(auto wp = m_parentCall.lock())
 	{
@@ -336,6 +368,45 @@ void LoopExpImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> lo
 
 void LoopExpImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list)
 {
+	try
+	{
+		std::map<std::string, std::string>::const_iterator iter;
+	
+		iter = attr_list.find("isCollectionOperation");
+		if ( iter != attr_list.end() )
+		{
+			// this attribute is a 'bool'
+			bool value;
+			std::istringstream(iter->second) >> std::boolalpha >> value;
+			this->setIsCollectionOperation(value);
+		}
+
+		iter = attr_list.find("isImplCollectIterator");
+		if ( iter != attr_list.end() )
+		{
+			// this attribute is a 'bool'
+			bool value;
+			std::istringstream(iter->second) >> std::boolalpha >> value;
+			this->setIsImplCollectIterator(value);
+		}
+
+		iter = attr_list.find("iterName");
+		if ( iter != attr_list.end() )
+		{
+			// this attribute is a 'std::string'
+			std::string value;
+			value = iter->second;
+			this->setIterName(value);
+		}
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "| ERROR    | " << e.what() << std::endl;
+	}
+	catch (...) 
+	{
+		std::cout << "| ERROR    | " <<  "Exception occurred" << std::endl;
+	}
 
 	CallExpImpl::loadAttributes(loadHandler, attr_list);
 }
@@ -363,9 +434,10 @@ void LoopExpImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::in
   			std::string typeName = loadHandler->getCurrentXSITypeName();
 			if (typeName.empty())
 			{
-				typeName = "Variable";
+				std::cout << "| WARNING    | type if an eClassifiers node it empty" << std::endl;
+				return; // no type name given and reference type is abstract
 			}
-			loadHandler->handleChildContainer<ocl::Expressions::Variable>(this->getIterator());  
+			loadHandler->handleChildContainer<ocl::Expressions::OclExpression>(this->getIterator());  
 
 			return; 
 		}
@@ -409,6 +481,21 @@ void LoopExpImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHand
 	try
 	{
 		std::shared_ptr<ocl::Expressions::ExpressionsPackage> package = ocl::Expressions::ExpressionsPackage::eInstance();
+		// Add attributes
+		if ( this->eIsSet(package->getLoopExp_Attribute_isCollectionOperation()) )
+		{
+			saveHandler->addAttribute("isCollectionOperation", this->isIsCollectionOperation());
+		}
+
+		if ( this->eIsSet(package->getLoopExp_Attribute_isImplCollectIterator()) )
+		{
+			saveHandler->addAttribute("isImplCollectIterator", this->isIsImplCollectIterator());
+		}
+
+		if ( this->eIsSet(package->getLoopExp_Attribute_iterName()) )
+		{
+			saveHandler->addAttribute("iterName", this->getIterName());
+		}
 		//
 		// Add new tags (from references)
 		//
@@ -419,7 +506,7 @@ void LoopExpImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHand
 
 		// Save 'iterator'
 
-		saveHandler->addReferences<ocl::Expressions::Variable>("iterator", this->getIterator());
+		saveHandler->addReferences<ocl::Expressions::OclExpression>("iterator", this->getIterator());
 	}
 	catch (std::exception& e)
 	{
@@ -435,14 +522,20 @@ std::shared_ptr<ecore::EClass> LoopExpImpl::eStaticClass() const
 //*********************************
 // EStructuralFeature Get/Set/IsSet
 //*********************************
-Any LoopExpImpl::eGet(int featureID, bool resolve, bool coreType) const
+std::shared_ptr<Any> LoopExpImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 		case ocl::Expressions::ExpressionsPackage::LOOPEXP_ATTRIBUTE_BODY:
-			return eAny(getBody(),ocl::Expressions::ExpressionsPackage::OCLEXPRESSION_CLASS,false); //4723
+			return eAny(getBody(),ocl::Expressions::ExpressionsPackage::OCLEXPRESSION_CLASS,false); //4624
+		case ocl::Expressions::ExpressionsPackage::LOOPEXP_ATTRIBUTE_ISCOLLECTIONOPERATION:
+			return eAny(isIsCollectionOperation(),ecore::ecorePackage::EBOOLEAN_CLASS,false); //4627
+		case ocl::Expressions::ExpressionsPackage::LOOPEXP_ATTRIBUTE_ISIMPLCOLLECTITERATOR:
+			return eAny(isIsImplCollectIterator(),ecore::ecorePackage::EBOOLEAN_CLASS,false); //4628
+		case ocl::Expressions::ExpressionsPackage::LOOPEXP_ATTRIBUTE_ITERNAME:
+			return eAny(getIterName(),ecore::ecorePackage::ESTRING_CLASS,false); //4626
 		case ocl::Expressions::ExpressionsPackage::LOOPEXP_ATTRIBUTE_ITERATOR:
-			return eAnyBag(getIterator(),ocl::Expressions::ExpressionsPackage::VARIABLE_CLASS); //4724
+			return eEcoreContainerAny(getIterator(),ocl::Expressions::ExpressionsPackage::OCLEXPRESSION_CLASS); //4625
 	}
 	return CallExpImpl::eGet(featureID, resolve, coreType);
 }
@@ -452,61 +545,140 @@ bool LoopExpImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case ocl::Expressions::ExpressionsPackage::LOOPEXP_ATTRIBUTE_BODY:
-			return getBody() != nullptr; //4723
+			return getBody() != nullptr; //4624
+		case ocl::Expressions::ExpressionsPackage::LOOPEXP_ATTRIBUTE_ISCOLLECTIONOPERATION:
+			return isIsCollectionOperation() != false; //4627
+		case ocl::Expressions::ExpressionsPackage::LOOPEXP_ATTRIBUTE_ISIMPLCOLLECTITERATOR:
+			return isIsImplCollectIterator() != false; //4628
+		case ocl::Expressions::ExpressionsPackage::LOOPEXP_ATTRIBUTE_ITERNAME:
+			return getIterName() != ""; //4626
 		case ocl::Expressions::ExpressionsPackage::LOOPEXP_ATTRIBUTE_ITERATOR:
-			return getIterator() != nullptr; //4724
+			return getIterator() != nullptr; //4625
 	}
 	return CallExpImpl::internalEIsSet(featureID);
 }
 
-bool LoopExpImpl::eSet(int featureID, Any newValue)
+bool LoopExpImpl::eSet(int featureID, std::shared_ptr<Any> newValue)
 {
 	switch(featureID)
 	{
 		case ocl::Expressions::ExpressionsPackage::LOOPEXP_ATTRIBUTE_BODY:
 		{
-			// CAST Any to ocl::Expressions::OclExpression
-			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
-			std::shared_ptr<ocl::Expressions::OclExpression> _body = std::dynamic_pointer_cast<ocl::Expressions::OclExpression>(_temp);
-			setBody(_body); //4723
-			return true;
-		}
-		case ocl::Expressions::ExpressionsPackage::LOOPEXP_ATTRIBUTE_ITERATOR:
-		{
-			// CAST Any to Bag<ocl::Expressions::Variable>
-			if((newValue->isContainer()) && (ocl::Expressions::ExpressionsPackage::VARIABLE_CLASS ==newValue->getTypeId()))
-			{ 
+			std::shared_ptr<ecore::EcoreAny> ecoreAny = std::dynamic_pointer_cast<ecore::EcoreAny>(newValue);
+			if(ecoreAny)
+			{
 				try
 				{
-					std::shared_ptr<Bag<ocl::Expressions::Variable>> iteratorList= newValue->get<std::shared_ptr<Bag<ocl::Expressions::Variable>>>();
-					std::shared_ptr<Bag<ocl::Expressions::Variable>> _iterator=getIterator();
-					for(const std::shared_ptr<ocl::Expressions::Variable> indexIterator: *_iterator)
+					std::shared_ptr<ecore::EObject> eObject = ecoreAny->getAsEObject();
+					std::shared_ptr<ocl::Expressions::OclExpression> _body = std::dynamic_pointer_cast<ocl::Expressions::OclExpression>(eObject);
+					if(_body)
 					{
-						if (iteratorList->find(indexIterator) == -1)
-						{
-							_iterator->erase(indexIterator);
-						}
+						setBody(_body); //4624
 					}
-
-					for(const std::shared_ptr<ocl::Expressions::Variable> indexIterator: *iteratorList)
+					else
 					{
-						if (_iterator->find(indexIterator) == -1)
-						{
-							_iterator->add(indexIterator);
-						}
+						throw "Invalid argument";
 					}
 				}
 				catch(...)
 				{
-					DEBUG_MESSAGE(std::cout << "invalid Type to set of eAttributes."<< std::endl;)
+					DEBUG_ERROR("Invalid type stored in 'ecore::ecoreAny' for feature 'body'. Failed to set feature!")
 					return false;
 				}
 			}
 			else
 			{
+				DEBUG_ERROR("Invalid instance of 'ecore::ecoreAny' for feature 'body'. Failed to set feature!")
 				return false;
 			}
-			return true;
+		return true;
+		}
+		case ocl::Expressions::ExpressionsPackage::LOOPEXP_ATTRIBUTE_ISCOLLECTIONOPERATION:
+		{
+			try
+			{
+				bool _isCollectionOperation = newValue->get<bool>();
+				setIsCollectionOperation(_isCollectionOperation); //4627
+			}
+			catch(...)
+			{
+				DEBUG_ERROR("Invalid type stored in 'Any' for feature 'isCollectionOperation'. Failed to set feature!")
+				return false;
+			}
+		return true;
+		}
+		case ocl::Expressions::ExpressionsPackage::LOOPEXP_ATTRIBUTE_ISIMPLCOLLECTITERATOR:
+		{
+			try
+			{
+				bool _isImplCollectIterator = newValue->get<bool>();
+				setIsImplCollectIterator(_isImplCollectIterator); //4628
+			}
+			catch(...)
+			{
+				DEBUG_ERROR("Invalid type stored in 'Any' for feature 'isImplCollectIterator'. Failed to set feature!")
+				return false;
+			}
+		return true;
+		}
+		case ocl::Expressions::ExpressionsPackage::LOOPEXP_ATTRIBUTE_ITERNAME:
+		{
+			try
+			{
+				std::string _iterName = newValue->get<std::string>();
+				setIterName(_iterName); //4626
+			}
+			catch(...)
+			{
+				DEBUG_ERROR("Invalid type stored in 'Any' for feature 'iterName'. Failed to set feature!")
+				return false;
+			}
+		return true;
+		}
+		case ocl::Expressions::ExpressionsPackage::LOOPEXP_ATTRIBUTE_ITERATOR:
+		{
+			std::shared_ptr<ecore::EcoreContainerAny> ecoreContainerAny = std::dynamic_pointer_cast<ecore::EcoreContainerAny>(newValue);
+			if(ecoreContainerAny)
+			{
+				try
+				{
+					std::shared_ptr<Bag<ecore::EObject>> eObjectList = ecoreContainerAny->getAsEObjectContainer();
+	
+					if(eObjectList)
+					{
+						std::shared_ptr<Bag<ocl::Expressions::OclExpression>> _iterator = getIterator();
+	
+						for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
+						{
+							std::shared_ptr<ocl::Expressions::OclExpression> valueToAdd = std::dynamic_pointer_cast<ocl::Expressions::OclExpression>(anEObject);
+	
+							if (valueToAdd)
+							{
+								if(_iterator->find(valueToAdd) == -1)
+								{
+									_iterator->add(valueToAdd);
+								}
+								//else, valueToAdd is already present so it won't be added again
+							}
+							else
+							{
+								throw "Invalid argument";
+							}
+						}
+					}
+				}
+				catch(...)
+				{
+					DEBUG_ERROR("Invalid type stored in 'ecore::ecoreContainerAny' for feature 'iterator'. Failed to set feature!")
+					return false;
+				}
+			}
+			else
+			{
+				DEBUG_ERROR("Invalid instance of 'ecore::ecoreContainerAny' for feature 'iterator'. Failed to set feature!")
+				return false;
+			}
+		return true;
 		}
 	}
 
@@ -516,9 +688,9 @@ bool LoopExpImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any LoopExpImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+std::shared_ptr<Any> LoopExpImpl::eInvoke(int operationID, std::shared_ptr<Bag<Any>> arguments)
 {
-	Any result;
+	std::shared_ptr<Any> result;
  
   	switch(operationID)
 	{

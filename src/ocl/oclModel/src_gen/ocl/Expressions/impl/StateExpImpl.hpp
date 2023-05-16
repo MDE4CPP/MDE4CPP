@@ -36,17 +36,14 @@ namespace ocl::Expressions
 			virtual void setThisStateExpPtr(std::weak_ptr<ocl::Expressions::StateExp> thisStateExpPtr);
 
 			//Additional constructors for the containments back reference
-			StateExpImpl(std::weak_ptr<ocl::Expressions::CallExp> par_appliedElement);
-			//Additional constructors for the containments back reference
 			StateExpImpl(std::weak_ptr<ocl::Expressions::IfExp> par_IfExp, const int reference_id);
 			//Additional constructors for the containments back reference
 			StateExpImpl(std::weak_ptr<ocl::Expressions::CollectionRange> par_CollectionRange, const int reference_id);
 			//Additional constructors for the containments back reference
 			//Additional constructors for the containments back reference
-			StateExpImpl(std::weak_ptr<ocl::Expressions::Variable> par_initializedElement);
 			//Additional constructors for the containments back reference
+			StateExpImpl(std::weak_ptr<ocl::Expressions::LoopExp> par_LoopExp, const int reference_id);
 			//Additional constructors for the containments back reference
-			StateExpImpl(std::weak_ptr<ocl::Expressions::LoopExp> par_loopBodyOwner);
 			//Additional constructors for the containments back reference
 			StateExpImpl(std::weak_ptr<ocl::Expressions::OperationCallExp> par_parentCall);
 			//Additional constructors for the containments back reference
@@ -70,8 +67,8 @@ namespace ocl::Expressions
 			//*********************************
 			// Reference Getters & Setters
 			//*********************************
-			virtual std::shared_ptr<uml::State> getReferredState() const ;
-			virtual void setReferredState(std::shared_ptr<uml::State>) ;
+			virtual std::shared_ptr<ecore::EObject> getReferredState() const ;
+			virtual void setReferredState(std::shared_ptr<ecore::EObject>) ;
 			
 			//*********************************
 			// Union Reference Getters
@@ -81,7 +78,7 @@ namespace ocl::Expressions
 			// Container Getter
 			//*********************************
 			virtual std::shared_ptr<ecore::EObject> eContainer() const ; 
-			
+
 			//*********************************
 			// Persistence Functions
 			//*********************************
@@ -98,14 +95,14 @@ namespace ocl::Expressions
 			//*********************************
 			// EStructuralFeature Get/Set/IsSet
 			//*********************************
-			virtual Any eGet(int featureID, bool resolve, bool coreType) const ;
-			virtual bool eSet(int featureID, Any newValue) ;
+			virtual std::shared_ptr<Any> eGet(int featureID, bool resolve, bool coreType) const ;
+			virtual bool eSet(int featureID, std::shared_ptr<Any> newValue) ;
 			virtual bool internalEIsSet(int featureID) const ;
 
 			//*********************************
 			// EOperation Invoke
 			//*********************************
-			virtual Any eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments) ;
+			virtual std::shared_ptr<Any> eInvoke(int operationID, std::shared_ptr<Bag<Any>> arguments) ;
 
 		private:
 			std::weak_ptr<ocl::Expressions::StateExp> m_thisStateExpPtr;

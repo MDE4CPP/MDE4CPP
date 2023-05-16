@@ -33,28 +33,32 @@ namespace ocl
 }
 
 //Forward Declaration for used types 
-namespace ocl::Values 
+namespace ocl::Evaluations 
 {
 	class NameValueBinding;
 }
-namespace fUML::Semantics::Values 
+namespace ecore 
 {
-	class Value;
+	class EAnnotation;
+	class EClassifier;
+	class EGenericType;
+	class EObject;
 }
 
 // namespace macro header include
 #include "ocl/ocl.hpp"
 
+// base class includes
+#include "ecore/ETypedElement.hpp"
 
 
-#include "ecore/EModelElement.hpp"
 
 
 //*********************************
 namespace ocl::Evaluations 
 {
 	
-	class OCL_API EvalEnvironment : virtual public ecore::EModelElement
+	class OCL_API EvalEnvironment : virtual public ecore::ETypedElement
 	{
 		public:
  			EvalEnvironment(const EvalEnvironment &) {}
@@ -71,11 +75,11 @@ namespace ocl::Evaluations
 			//*********************************
 			// Operations
 			//*********************************
-			virtual void add(std::shared_ptr<ocl::Values::NameValueBinding> n) = 0;
-			virtual void addAll(std::shared_ptr<Bag<ocl::Values::NameValueBinding>> nvbs) = 0;
-			virtual std::shared_ptr<ocl::Values::NameValueBinding> find(std::string name) = 0;
-			virtual std::shared_ptr<fUML::Semantics::Values::Value> getValueOf(std::string n) = 0;
-			virtual void replace(std::shared_ptr<ocl::Values::NameValueBinding> n) = 0;
+			virtual void add(const std::shared_ptr<ocl::Evaluations::NameValueBinding>& n) = 0;
+			virtual void addAll(const std::shared_ptr<Bag<ocl::Evaluations::NameValueBinding>>& nvbs) = 0;
+			virtual std::shared_ptr<ocl::Evaluations::NameValueBinding> find(std::string name) = 0;
+			virtual std::shared_ptr<ecore::EObject> getValueOf(std::string n) = 0;
+			virtual void replace(const std::shared_ptr<ocl::Evaluations::NameValueBinding>& n) = 0;
 
 			//*********************************
 			// Attribute Getters & Setters
@@ -84,7 +88,7 @@ namespace ocl::Evaluations
 			//*********************************
 			// Reference Getters & Setters
 			//*********************************
-			virtual std::shared_ptr<Bag<ocl::Values::NameValueBinding>> getBindings() const = 0;
+			virtual std::shared_ptr<Bag<ocl::Evaluations::NameValueBinding>> getBindings() const = 0;
 
 			//*********************************
 			// Union Reference Getters
@@ -110,7 +114,7 @@ namespace ocl::Evaluations
 			//*********************************
 			// Reference Members
 			//*********************************
-			mutable std::shared_ptr<Bag<ocl::Values::NameValueBinding>> m_bindings;
+			mutable std::shared_ptr<Bag<ocl::Evaluations::NameValueBinding>> m_bindings;
 	};
 }
 #endif /* end of include guard: OCL_EVALUATIONS_EVALENVIRONMENT_HPP */

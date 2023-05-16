@@ -27,16 +27,6 @@ namespace ocl
 	{
 		class ExpressionsPackage;
 	}
-
-	namespace Types 
-	{
-		class TypesPackage;
-	}
-
-	namespace Values 
-	{
-		class ValuesPackage;
-	}
 }
 
 namespace ecore
@@ -63,8 +53,6 @@ namespace ocl
 			// SubPackages Getters
 			virtual std::shared_ptr<ocl::Evaluations::EvaluationsPackage> getEvaluations_Package() const ;
 			virtual std::shared_ptr<ocl::Expressions::ExpressionsPackage> getExpressions_Package() const ;
-			virtual std::shared_ptr<ocl::Types::TypesPackage> getTypes_Package() const ;
-			virtual std::shared_ptr<ocl::Values::ValuesPackage> getValues_Package() const ;
 			
 
 		private:

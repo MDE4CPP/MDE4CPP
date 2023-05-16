@@ -43,7 +43,7 @@ namespace ocl::Expressions
 	class IfExp;
 	class NavigationCallExp;
 	class OperationCallExp;
-	class Variable;
+	class VarDeclarationExp;
 }
 namespace ecore 
 {
@@ -58,6 +58,8 @@ namespace ecore
 // base class includes
 #include "ocl/Expressions/LoopExp.hpp"
 
+// enum includes
+#include "ocl/Expressions/SurroundingType.hpp"
 
 
 
@@ -65,7 +67,7 @@ namespace ecore
 namespace ocl::Expressions 
 {
 	
-	class OCL_API IteratorExp: virtual public LoopExp
+	class OCL_API IteratorExp : virtual public LoopExp
 	{
 		public:
  			IteratorExp(const IteratorExp &) {}
@@ -86,6 +88,8 @@ namespace ocl::Expressions
 			//*********************************
 			// Attribute Getters & Setters
 			//*********************************
+			virtual ocl::Expressions::SurroundingType getSourrundedBy() const = 0;
+			virtual void setSourrundedBy (ocl::Expressions::SurroundingType _sourrundedBy)= 0;
 
 			//*********************************
 			// Reference Getters & Setters
@@ -111,6 +115,7 @@ namespace ocl::Expressions
 			//*********************************
 			// Attribute Members
 			//*********************************
+			ocl::Expressions::SurroundingType m_sourrundedBy= ocl::Expressions::SurroundingType::PAREN;
 			
 			//*********************************
 			// Reference Members

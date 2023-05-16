@@ -44,7 +44,7 @@ namespace ocl::Expressions
 	class IfExp;
 	class NavigationCallExp;
 	class OperationCallExp;
-	class Variable;
+	class VarDeclarationExp;
 }
 namespace ecore 
 {
@@ -66,7 +66,7 @@ namespace ecore
 namespace ocl::Expressions 
 {
 	
-	class OCL_API LoopExp: virtual public CallExp
+	class OCL_API LoopExp : virtual public CallExp
 	{
 		public:
  			LoopExp(const LoopExp &) {}
@@ -87,13 +87,19 @@ namespace ocl::Expressions
 			//*********************************
 			// Attribute Getters & Setters
 			//*********************************
+			virtual bool isIsCollectionOperation() const = 0;
+			virtual void setIsCollectionOperation (bool _isCollectionOperation)= 0;
+			virtual bool isIsImplCollectIterator() const = 0;
+			virtual void setIsImplCollectIterator (bool _isImplCollectIterator)= 0;
+			virtual std::string getIterName() const = 0;
+			virtual void setIterName (std::string _iterName)= 0;
 
 			//*********************************
 			// Reference Getters & Setters
 			//*********************************
 			virtual std::shared_ptr<ocl::Expressions::OclExpression> getBody() const = 0;
 			virtual void setBody(std::shared_ptr<ocl::Expressions::OclExpression>) = 0;
-			virtual std::shared_ptr<Bag<ocl::Expressions::Variable>> getIterator() const = 0;
+			virtual std::shared_ptr<Bag<ocl::Expressions::OclExpression>> getIterator() const = 0;
 
 			//*********************************
 			// Union Reference Getters
@@ -115,12 +121,15 @@ namespace ocl::Expressions
 			//*********************************
 			// Attribute Members
 			//*********************************
+			bool m_isCollectionOperation= false;
+			bool m_isImplCollectIterator= false;
+			std::string m_iterName= "";
 			
 			//*********************************
 			// Reference Members
 			//*********************************
 			std::shared_ptr<ocl::Expressions::OclExpression> m_body;
-			mutable std::shared_ptr<Bag<ocl::Expressions::Variable>> m_iterator;
+			mutable std::shared_ptr<Bag<ocl::Expressions::OclExpression>> m_iterator;
 	};
 }
 #endif /* end of include guard: OCL_EXPRESSIONS_LOOPEXP_HPP */

@@ -44,7 +44,7 @@ namespace ocl::Expressions
 	class LoopExp;
 	class NavigationCallExp;
 	class OperationCallExp;
-	class Variable;
+	class VarDeclarationExp;
 }
 namespace ecore 
 {
@@ -66,7 +66,7 @@ namespace ecore
 namespace ocl::Expressions 
 {
 	
-	class OCL_API FeatureCallExp: virtual public CallExp
+	class OCL_API FeatureCallExp : virtual public CallExp
 	{
 		public:
  			FeatureCallExp(const FeatureCallExp &) {}
@@ -87,7 +87,7 @@ namespace ocl::Expressions
 			//*********************************
 			// Attribute Getters & Setters
 			//*********************************
-			virtual bool getIsPre() const = 0;
+			virtual bool isIsPre() const = 0;
 			virtual void setIsPre (bool _isPre)= 0;
 
 			//*********************************

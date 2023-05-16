@@ -37,20 +37,27 @@ namespace ocl::Evaluations
 	class EvalEnvironment;
 	class OclExpEval;
 }
+namespace ecore 
+{
+	class EAnnotation;
+	class EClassifier;
+	class EGenericType;
+}
 
 // namespace macro header include
 #include "ocl/ocl.hpp"
 
+// base class includes
+#include "ecore/ETypedElement.hpp"
 
 
-#include "ecore/EModelElement.hpp"
 
 
 //*********************************
 namespace ocl::Evaluations 
 {
 	
-	class OCL_API ExpressionInOclEval : virtual public ecore::EModelElement
+	class OCL_API ExpressionInOclEval : virtual public ecore::ETypedElement
 	{
 		public:
  			ExpressionInOclEval(const ExpressionInOclEval &) {}

@@ -42,17 +42,12 @@ namespace ocl::Expressions
 {
 	class OclExpression;
 }
-namespace fUML::Semantics::Loci 
+namespace ecore 
 {
-	class Locus;
-}
-namespace fUML::Semantics::Values 
-{
-	class Value;
-}
-namespace uml 
-{
-	class ValueSpecification;
+	class EAnnotation;
+	class EClassifier;
+	class EGenericType;
+	class EObject;
 }
 
 // namespace macro header include
@@ -68,7 +63,7 @@ namespace uml
 namespace ocl::Evaluations 
 {
 	
-	class OCL_API OclMessageExpEval: virtual public OclExpEval
+	class OCL_API OclMessageExpEval : virtual public OclExpEval
 	{
 		public:
  			OclMessageExpEval(const OclMessageExpEval &) {}

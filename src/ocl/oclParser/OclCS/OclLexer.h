@@ -1,5 +1,5 @@
 
-// Generated from OclLexer.g4 by ANTLR 4.9
+// Generated from OclLexer.g4 by ANTLR 4.12.0
 
 #pragma once
 
@@ -19,53 +19,46 @@ public:
     INV = 19, BODY = 20, POST = 21, INIT = 22, DERIVE = 23, COLLECTION = 24, 
     BAG = 25, ORDEREDSET = 26, SEQUENCE = 27, SET = 28, OCLBOOLEAN = 29, 
     OCLINTEGER = 30, OCLREAL = 31, OCLSTRING = 32, OCLUNLIMITEDNAT = 33, 
-    OCLANY = 34, OCLINVALID = 35, OCLMESSAGE = 36, OCLVOID = 37, OCLSTATE = 38, 
-    INT = 39, REAL = 40, BOOL = 41, STRING_LITERAL = 42, COLON = 43, COLONCOLON = 44, 
-    COMMA = 45, SEMI = 46, LPAREN = 47, RPAREN = 48, LBRACE = 49, RBRACE = 50, 
-    LBRACK = 51, RBRACK = 52, RARROW = 53, LT = 54, GT = 55, LTE = 56, GTE = 57, 
-    ASSIGN = 58, INEQUAL = 59, QUESTION = 60, STAR = 61, PLUS_ASSIGN = 62, 
-    PLUS = 63, KEYOR = 64, KEYAND = 65, IMPLIES = 66, RANGE = 67, DOT = 68, 
-    AT = 69, SLASH = 70, UNDERSCORE = 71, DHAT = 72, HAT = 73, MINUS = 74, 
-    NOT = 75, PIPE = 76, ID = 77, WS = 78, ERRCHAR = 79
+    SEQRANGE = 34, OCLANY = 35, OCLINVALID = 36, OCLMESSAGE = 37, OCLVOID = 38, 
+    OCLSTATE = 39, INT = 40, REAL = 41, BOOL = 42, STRING_LITERAL = 43, 
+    COLON = 44, COLONCOLON = 45, COMMA = 46, SEMI = 47, LPAREN = 48, RPAREN = 49, 
+    LBRACE = 50, RBRACE = 51, LBRACK = 52, RBRACK = 53, RARROW = 54, LT = 55, 
+    GT = 56, LTE = 57, GTE = 58, ASSIGN = 59, INEQUAL = 60, QUESTION = 61, 
+    STAR = 62, PLUS_ASSIGN = 63, PLUS = 64, KEYOR = 65, KEYAND = 66, IMPLIES = 67, 
+    RANGE = 68, DOT = 69, AT = 70, SLASH = 71, UNDERSCORE = 72, DHAT = 73, 
+    HAT = 74, MINUS = 75, NOT = 76, PIPE = 77, ID = 78, WS = 79, ERRCHAR = 80
   };
 
   explicit OclLexer(antlr4::CharStream *input);
-  ~OclLexer();
 
-  virtual std::string getGrammarFileName() const override;
-  virtual const std::vector<std::string>& getRuleNames() const override;
+  ~OclLexer() override;
 
-  virtual const std::vector<std::string>& getChannelNames() const override;
-  virtual const std::vector<std::string>& getModeNames() const override;
-  virtual const std::vector<std::string>& getTokenNames() const override; // deprecated, use vocabulary instead
-  virtual antlr4::dfa::Vocabulary& getVocabulary() const override;
 
-  virtual const std::vector<uint16_t> getSerializedATN() const override;
-  virtual const antlr4::atn::ATN& getATN() const override;
+  std::string getGrammarFileName() const override;
+
+  const std::vector<std::string>& getRuleNames() const override;
+
+  const std::vector<std::string>& getChannelNames() const override;
+
+  const std::vector<std::string>& getModeNames() const override;
+
+  const antlr4::dfa::Vocabulary& getVocabulary() const override;
+
+  antlr4::atn::SerializedATNView getSerializedATN() const override;
+
+  const antlr4::atn::ATN& getATN() const override;
+
+  // By default the static state used to implement the lexer is lazily initialized during the first
+  // call to the constructor. You can call this function if you wish to initialize the static state
+  // ahead of time.
+  static void initialize();
 
 private:
-  static std::vector<antlr4::dfa::DFA> _decisionToDFA;
-  static antlr4::atn::PredictionContextCache _sharedContextCache;
-  static std::vector<std::string> _ruleNames;
-  static std::vector<std::string> _tokenNames;
-  static std::vector<std::string> _channelNames;
-  static std::vector<std::string> _modeNames;
-
-  static std::vector<std::string> _literalNames;
-  static std::vector<std::string> _symbolicNames;
-  static antlr4::dfa::Vocabulary _vocabulary;
-  static antlr4::atn::ATN _atn;
-  static std::vector<uint16_t> _serializedATN;
-
 
   // Individual action functions triggered by action() above.
 
   // Individual semantic predicate functions triggered by sempred() above.
 
-  struct Initializer {
-    Initializer();
-  };
-  static Initializer _init;
 };
 
 }  // namespace OclCS

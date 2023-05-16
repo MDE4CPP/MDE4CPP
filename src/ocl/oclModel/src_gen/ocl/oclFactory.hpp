@@ -20,28 +20,13 @@ namespace ocl
 {
 	class oclPackage;
 }
-
-
-
-
-namespace ecore
+namespace ocl::Expressions
 {
-	class EPackage;
+	class ExpressionInOcl;
+	class IterateExp;
 }
 
 
-namespace fUML::Semantics::Activities
-{
-	class ObjectToken;
-}
-namespace fUML::Semantics::CommonBehavior
-{
-	class ParameterValue;
-}
-namespace fUML::Semantics::SimpleClassifiers
-{
-	class FeatureValue;
-}
 
 
 
@@ -57,9 +42,7 @@ namespace ocl
 		protected:
 			oclFactory(){}
 		
-			//Singleton Instance and Getter
-			private:
-				static std::shared_ptr<oclFactory> instance;
+			//Singleton Getter
 			public:
 				static std::shared_ptr<oclFactory> eInstance();
 		

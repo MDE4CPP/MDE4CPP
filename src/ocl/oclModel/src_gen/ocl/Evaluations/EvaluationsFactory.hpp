@@ -16,6 +16,11 @@
 #include "ecore/EFactory.hpp"
 #include "ocl/Evaluations/EvaluationsPackage.hpp"
 
+namespace ocl::Expressions
+{
+	class ExpressionInOcl;
+	class IterateExp;
+}
 
 
 
@@ -29,9 +34,7 @@ namespace ocl::Evaluations
 		protected:
 			EvaluationsFactory(){}
 		
-			//Singleton Instance and Getter
-			private:
-				static std::shared_ptr<EvaluationsFactory> instance;
+			//Singleton Getter
 			public:
 				static std::shared_ptr<EvaluationsFactory> eInstance();
 		
@@ -41,41 +44,227 @@ namespace ocl::Evaluations
 			virtual std::shared_ptr<ecore::EObject> create(std::shared_ptr<ecore::EClass> _class, std::shared_ptr<EObject> _container=nullptr, const int referenceID = -1) const = 0;
 
 			virtual std::shared_ptr<ocl::Evaluations::AssociationClassCallExpEval> createAssociationClassCallExpEval(const int metaElementID = EvaluationsPackage::ASSOCIATIONCLASSCALLEXPEVAL_CLASS) const = 0;
+			//Add as contained object
+			virtual std::shared_ptr<ocl::Evaluations::AssociationClassCallExpEval> createAssociationClassCallExpEval_as_contextVariable_in_ExpressionInOcl(std::shared_ptr<ocl::Expressions::ExpressionInOcl> par_ExpressionInOcl, const int metaElementID = EvaluationsPackage::ASSOCIATIONCLASSCALLEXPEVAL_CLASS) const = 0;
+			virtual std::shared_ptr<ocl::Evaluations::AssociationClassCallExpEval> createAssociationClassCallExpEval_as_parameterVariable_in_ExpressionInOcl(std::shared_ptr<ocl::Expressions::ExpressionInOcl> par_ExpressionInOcl, const int metaElementID = EvaluationsPackage::ASSOCIATIONCLASSCALLEXPEVAL_CLASS) const = 0;
+			virtual std::shared_ptr<ocl::Evaluations::AssociationClassCallExpEval> createAssociationClassCallExpEval_as_result_in_IterateExp(std::shared_ptr<ocl::Expressions::IterateExp> par_IterateExp, const int metaElementID = EvaluationsPackage::ASSOCIATIONCLASSCALLEXPEVAL_CLASS) const = 0;
+			virtual std::shared_ptr<ocl::Evaluations::AssociationClassCallExpEval> createAssociationClassCallExpEval_as_resultVariable_in_ExpressionInOcl(std::shared_ptr<ocl::Expressions::ExpressionInOcl> par_ExpressionInOcl, const int metaElementID = EvaluationsPackage::ASSOCIATIONCLASSCALLEXPEVAL_CLASS) const = 0;
 			virtual std::shared_ptr<ocl::Evaluations::AssociationEndCallExpEval> createAssociationEndCallExpEval(const int metaElementID = EvaluationsPackage::ASSOCIATIONENDCALLEXPEVAL_CLASS) const = 0;
+			//Add as contained object
+			virtual std::shared_ptr<ocl::Evaluations::AssociationEndCallExpEval> createAssociationEndCallExpEval_as_contextVariable_in_ExpressionInOcl(std::shared_ptr<ocl::Expressions::ExpressionInOcl> par_ExpressionInOcl, const int metaElementID = EvaluationsPackage::ASSOCIATIONENDCALLEXPEVAL_CLASS) const = 0;
+			virtual std::shared_ptr<ocl::Evaluations::AssociationEndCallExpEval> createAssociationEndCallExpEval_as_parameterVariable_in_ExpressionInOcl(std::shared_ptr<ocl::Expressions::ExpressionInOcl> par_ExpressionInOcl, const int metaElementID = EvaluationsPackage::ASSOCIATIONENDCALLEXPEVAL_CLASS) const = 0;
+			virtual std::shared_ptr<ocl::Evaluations::AssociationEndCallExpEval> createAssociationEndCallExpEval_as_result_in_IterateExp(std::shared_ptr<ocl::Expressions::IterateExp> par_IterateExp, const int metaElementID = EvaluationsPackage::ASSOCIATIONENDCALLEXPEVAL_CLASS) const = 0;
+			virtual std::shared_ptr<ocl::Evaluations::AssociationEndCallExpEval> createAssociationEndCallExpEval_as_resultVariable_in_ExpressionInOcl(std::shared_ptr<ocl::Expressions::ExpressionInOcl> par_ExpressionInOcl, const int metaElementID = EvaluationsPackage::ASSOCIATIONENDCALLEXPEVAL_CLASS) const = 0;
 			virtual std::shared_ptr<ocl::Evaluations::AttributeCallExpEval> createAttributeCallExpEval(const int metaElementID = EvaluationsPackage::ATTRIBUTECALLEXPEVAL_CLASS) const = 0;
+			//Add as contained object
+			virtual std::shared_ptr<ocl::Evaluations::AttributeCallExpEval> createAttributeCallExpEval_as_contextVariable_in_ExpressionInOcl(std::shared_ptr<ocl::Expressions::ExpressionInOcl> par_ExpressionInOcl, const int metaElementID = EvaluationsPackage::ATTRIBUTECALLEXPEVAL_CLASS) const = 0;
+			virtual std::shared_ptr<ocl::Evaluations::AttributeCallExpEval> createAttributeCallExpEval_as_parameterVariable_in_ExpressionInOcl(std::shared_ptr<ocl::Expressions::ExpressionInOcl> par_ExpressionInOcl, const int metaElementID = EvaluationsPackage::ATTRIBUTECALLEXPEVAL_CLASS) const = 0;
+			virtual std::shared_ptr<ocl::Evaluations::AttributeCallExpEval> createAttributeCallExpEval_as_result_in_IterateExp(std::shared_ptr<ocl::Expressions::IterateExp> par_IterateExp, const int metaElementID = EvaluationsPackage::ATTRIBUTECALLEXPEVAL_CLASS) const = 0;
+			virtual std::shared_ptr<ocl::Evaluations::AttributeCallExpEval> createAttributeCallExpEval_as_resultVariable_in_ExpressionInOcl(std::shared_ptr<ocl::Expressions::ExpressionInOcl> par_ExpressionInOcl, const int metaElementID = EvaluationsPackage::ATTRIBUTECALLEXPEVAL_CLASS) const = 0;
 			virtual std::shared_ptr<ocl::Evaluations::BooleanLiteralExpEval> createBooleanLiteralExpEval(const int metaElementID = EvaluationsPackage::BOOLEANLITERALEXPEVAL_CLASS) const = 0;
+			//Add as contained object
+			virtual std::shared_ptr<ocl::Evaluations::BooleanLiteralExpEval> createBooleanLiteralExpEval_as_contextVariable_in_ExpressionInOcl(std::shared_ptr<ocl::Expressions::ExpressionInOcl> par_ExpressionInOcl, const int metaElementID = EvaluationsPackage::BOOLEANLITERALEXPEVAL_CLASS) const = 0;
+			virtual std::shared_ptr<ocl::Evaluations::BooleanLiteralExpEval> createBooleanLiteralExpEval_as_parameterVariable_in_ExpressionInOcl(std::shared_ptr<ocl::Expressions::ExpressionInOcl> par_ExpressionInOcl, const int metaElementID = EvaluationsPackage::BOOLEANLITERALEXPEVAL_CLASS) const = 0;
+			virtual std::shared_ptr<ocl::Evaluations::BooleanLiteralExpEval> createBooleanLiteralExpEval_as_result_in_IterateExp(std::shared_ptr<ocl::Expressions::IterateExp> par_IterateExp, const int metaElementID = EvaluationsPackage::BOOLEANLITERALEXPEVAL_CLASS) const = 0;
+			virtual std::shared_ptr<ocl::Evaluations::BooleanLiteralExpEval> createBooleanLiteralExpEval_as_resultVariable_in_ExpressionInOcl(std::shared_ptr<ocl::Expressions::ExpressionInOcl> par_ExpressionInOcl, const int metaElementID = EvaluationsPackage::BOOLEANLITERALEXPEVAL_CLASS) const = 0;
 			virtual std::shared_ptr<ocl::Evaluations::CollectionItemEval> createCollectionItemEval(const int metaElementID = EvaluationsPackage::COLLECTIONITEMEVAL_CLASS) const = 0;
+			//Add as contained object
+			virtual std::shared_ptr<ocl::Evaluations::CollectionItemEval> createCollectionItemEval_as_contextVariable_in_ExpressionInOcl(std::shared_ptr<ocl::Expressions::ExpressionInOcl> par_ExpressionInOcl, const int metaElementID = EvaluationsPackage::COLLECTIONITEMEVAL_CLASS) const = 0;
+			virtual std::shared_ptr<ocl::Evaluations::CollectionItemEval> createCollectionItemEval_as_parameterVariable_in_ExpressionInOcl(std::shared_ptr<ocl::Expressions::ExpressionInOcl> par_ExpressionInOcl, const int metaElementID = EvaluationsPackage::COLLECTIONITEMEVAL_CLASS) const = 0;
+			virtual std::shared_ptr<ocl::Evaluations::CollectionItemEval> createCollectionItemEval_as_result_in_IterateExp(std::shared_ptr<ocl::Expressions::IterateExp> par_IterateExp, const int metaElementID = EvaluationsPackage::COLLECTIONITEMEVAL_CLASS) const = 0;
+			virtual std::shared_ptr<ocl::Evaluations::CollectionItemEval> createCollectionItemEval_as_resultVariable_in_ExpressionInOcl(std::shared_ptr<ocl::Expressions::ExpressionInOcl> par_ExpressionInOcl, const int metaElementID = EvaluationsPackage::COLLECTIONITEMEVAL_CLASS) const = 0;
 			virtual std::shared_ptr<ocl::Evaluations::CollectionLiteralExpEval> createCollectionLiteralExpEval(const int metaElementID = EvaluationsPackage::COLLECTIONLITERALEXPEVAL_CLASS) const = 0;
+			//Add as contained object
+			virtual std::shared_ptr<ocl::Evaluations::CollectionLiteralExpEval> createCollectionLiteralExpEval_as_contextVariable_in_ExpressionInOcl(std::shared_ptr<ocl::Expressions::ExpressionInOcl> par_ExpressionInOcl, const int metaElementID = EvaluationsPackage::COLLECTIONLITERALEXPEVAL_CLASS) const = 0;
+			virtual std::shared_ptr<ocl::Evaluations::CollectionLiteralExpEval> createCollectionLiteralExpEval_as_parameterVariable_in_ExpressionInOcl(std::shared_ptr<ocl::Expressions::ExpressionInOcl> par_ExpressionInOcl, const int metaElementID = EvaluationsPackage::COLLECTIONLITERALEXPEVAL_CLASS) const = 0;
+			virtual std::shared_ptr<ocl::Evaluations::CollectionLiteralExpEval> createCollectionLiteralExpEval_as_result_in_IterateExp(std::shared_ptr<ocl::Expressions::IterateExp> par_IterateExp, const int metaElementID = EvaluationsPackage::COLLECTIONLITERALEXPEVAL_CLASS) const = 0;
+			virtual std::shared_ptr<ocl::Evaluations::CollectionLiteralExpEval> createCollectionLiteralExpEval_as_resultVariable_in_ExpressionInOcl(std::shared_ptr<ocl::Expressions::ExpressionInOcl> par_ExpressionInOcl, const int metaElementID = EvaluationsPackage::COLLECTIONLITERALEXPEVAL_CLASS) const = 0;
 			virtual std::shared_ptr<ocl::Evaluations::CollectionLiteralPartEval> createCollectionLiteralPartEval(const int metaElementID = EvaluationsPackage::COLLECTIONLITERALPARTEVAL_CLASS) const = 0;
+			//Add as contained object
+			virtual std::shared_ptr<ocl::Evaluations::CollectionLiteralPartEval> createCollectionLiteralPartEval_as_contextVariable_in_ExpressionInOcl(std::shared_ptr<ocl::Expressions::ExpressionInOcl> par_ExpressionInOcl, const int metaElementID = EvaluationsPackage::COLLECTIONLITERALPARTEVAL_CLASS) const = 0;
+			virtual std::shared_ptr<ocl::Evaluations::CollectionLiteralPartEval> createCollectionLiteralPartEval_as_parameterVariable_in_ExpressionInOcl(std::shared_ptr<ocl::Expressions::ExpressionInOcl> par_ExpressionInOcl, const int metaElementID = EvaluationsPackage::COLLECTIONLITERALPARTEVAL_CLASS) const = 0;
+			virtual std::shared_ptr<ocl::Evaluations::CollectionLiteralPartEval> createCollectionLiteralPartEval_as_result_in_IterateExp(std::shared_ptr<ocl::Expressions::IterateExp> par_IterateExp, const int metaElementID = EvaluationsPackage::COLLECTIONLITERALPARTEVAL_CLASS) const = 0;
+			virtual std::shared_ptr<ocl::Evaluations::CollectionLiteralPartEval> createCollectionLiteralPartEval_as_resultVariable_in_ExpressionInOcl(std::shared_ptr<ocl::Expressions::ExpressionInOcl> par_ExpressionInOcl, const int metaElementID = EvaluationsPackage::COLLECTIONLITERALPARTEVAL_CLASS) const = 0;
 			virtual std::shared_ptr<ocl::Evaluations::CollectionRangeEval> createCollectionRangeEval(const int metaElementID = EvaluationsPackage::COLLECTIONRANGEEVAL_CLASS) const = 0;
+			//Add as contained object
+			virtual std::shared_ptr<ocl::Evaluations::CollectionRangeEval> createCollectionRangeEval_as_contextVariable_in_ExpressionInOcl(std::shared_ptr<ocl::Expressions::ExpressionInOcl> par_ExpressionInOcl, const int metaElementID = EvaluationsPackage::COLLECTIONRANGEEVAL_CLASS) const = 0;
+			virtual std::shared_ptr<ocl::Evaluations::CollectionRangeEval> createCollectionRangeEval_as_parameterVariable_in_ExpressionInOcl(std::shared_ptr<ocl::Expressions::ExpressionInOcl> par_ExpressionInOcl, const int metaElementID = EvaluationsPackage::COLLECTIONRANGEEVAL_CLASS) const = 0;
+			virtual std::shared_ptr<ocl::Evaluations::CollectionRangeEval> createCollectionRangeEval_as_result_in_IterateExp(std::shared_ptr<ocl::Expressions::IterateExp> par_IterateExp, const int metaElementID = EvaluationsPackage::COLLECTIONRANGEEVAL_CLASS) const = 0;
+			virtual std::shared_ptr<ocl::Evaluations::CollectionRangeEval> createCollectionRangeEval_as_resultVariable_in_ExpressionInOcl(std::shared_ptr<ocl::Expressions::ExpressionInOcl> par_ExpressionInOcl, const int metaElementID = EvaluationsPackage::COLLECTIONRANGEEVAL_CLASS) const = 0;
 			virtual std::shared_ptr<ocl::Evaluations::EnumLiteralExpEval> createEnumLiteralExpEval(const int metaElementID = EvaluationsPackage::ENUMLITERALEXPEVAL_CLASS) const = 0;
+			//Add as contained object
+			virtual std::shared_ptr<ocl::Evaluations::EnumLiteralExpEval> createEnumLiteralExpEval_as_contextVariable_in_ExpressionInOcl(std::shared_ptr<ocl::Expressions::ExpressionInOcl> par_ExpressionInOcl, const int metaElementID = EvaluationsPackage::ENUMLITERALEXPEVAL_CLASS) const = 0;
+			virtual std::shared_ptr<ocl::Evaluations::EnumLiteralExpEval> createEnumLiteralExpEval_as_parameterVariable_in_ExpressionInOcl(std::shared_ptr<ocl::Expressions::ExpressionInOcl> par_ExpressionInOcl, const int metaElementID = EvaluationsPackage::ENUMLITERALEXPEVAL_CLASS) const = 0;
+			virtual std::shared_ptr<ocl::Evaluations::EnumLiteralExpEval> createEnumLiteralExpEval_as_result_in_IterateExp(std::shared_ptr<ocl::Expressions::IterateExp> par_IterateExp, const int metaElementID = EvaluationsPackage::ENUMLITERALEXPEVAL_CLASS) const = 0;
+			virtual std::shared_ptr<ocl::Evaluations::EnumLiteralExpEval> createEnumLiteralExpEval_as_resultVariable_in_ExpressionInOcl(std::shared_ptr<ocl::Expressions::ExpressionInOcl> par_ExpressionInOcl, const int metaElementID = EvaluationsPackage::ENUMLITERALEXPEVAL_CLASS) const = 0;
 			virtual std::shared_ptr<ocl::Evaluations::EvalEnvironment> createEvalEnvironment(const int metaElementID = EvaluationsPackage::EVALENVIRONMENT_CLASS) const = 0;
+			//Add as contained object
+			virtual std::shared_ptr<ocl::Evaluations::EvalEnvironment> createEvalEnvironment_as_contextVariable_in_ExpressionInOcl(std::shared_ptr<ocl::Expressions::ExpressionInOcl> par_ExpressionInOcl, const int metaElementID = EvaluationsPackage::EVALENVIRONMENT_CLASS) const = 0;
+			virtual std::shared_ptr<ocl::Evaluations::EvalEnvironment> createEvalEnvironment_as_parameterVariable_in_ExpressionInOcl(std::shared_ptr<ocl::Expressions::ExpressionInOcl> par_ExpressionInOcl, const int metaElementID = EvaluationsPackage::EVALENVIRONMENT_CLASS) const = 0;
+			virtual std::shared_ptr<ocl::Evaluations::EvalEnvironment> createEvalEnvironment_as_result_in_IterateExp(std::shared_ptr<ocl::Expressions::IterateExp> par_IterateExp, const int metaElementID = EvaluationsPackage::EVALENVIRONMENT_CLASS) const = 0;
+			virtual std::shared_ptr<ocl::Evaluations::EvalEnvironment> createEvalEnvironment_as_resultVariable_in_ExpressionInOcl(std::shared_ptr<ocl::Expressions::ExpressionInOcl> par_ExpressionInOcl, const int metaElementID = EvaluationsPackage::EVALENVIRONMENT_CLASS) const = 0;
 			virtual std::shared_ptr<ocl::Evaluations::EvalNameSpace> createEvalNameSpace(const int metaElementID = EvaluationsPackage::EVALNAMESPACE_CLASS) const = 0;
+			//Add as contained object
+			virtual std::shared_ptr<ocl::Evaluations::EvalNameSpace> createEvalNameSpace_as_contextVariable_in_ExpressionInOcl(std::shared_ptr<ocl::Expressions::ExpressionInOcl> par_ExpressionInOcl, const int metaElementID = EvaluationsPackage::EVALNAMESPACE_CLASS) const = 0;
+			virtual std::shared_ptr<ocl::Evaluations::EvalNameSpace> createEvalNameSpace_as_parameterVariable_in_ExpressionInOcl(std::shared_ptr<ocl::Expressions::ExpressionInOcl> par_ExpressionInOcl, const int metaElementID = EvaluationsPackage::EVALNAMESPACE_CLASS) const = 0;
+			virtual std::shared_ptr<ocl::Evaluations::EvalNameSpace> createEvalNameSpace_as_result_in_IterateExp(std::shared_ptr<ocl::Expressions::IterateExp> par_IterateExp, const int metaElementID = EvaluationsPackage::EVALNAMESPACE_CLASS) const = 0;
+			virtual std::shared_ptr<ocl::Evaluations::EvalNameSpace> createEvalNameSpace_as_resultVariable_in_ExpressionInOcl(std::shared_ptr<ocl::Expressions::ExpressionInOcl> par_ExpressionInOcl, const int metaElementID = EvaluationsPackage::EVALNAMESPACE_CLASS) const = 0;
 			virtual std::shared_ptr<ocl::Evaluations::ExpressionInOclEval> createExpressionInOclEval(const int metaElementID = EvaluationsPackage::EXPRESSIONINOCLEVAL_CLASS) const = 0;
+			//Add as contained object
+			virtual std::shared_ptr<ocl::Evaluations::ExpressionInOclEval> createExpressionInOclEval_as_contextVariable_in_ExpressionInOcl(std::shared_ptr<ocl::Expressions::ExpressionInOcl> par_ExpressionInOcl, const int metaElementID = EvaluationsPackage::EXPRESSIONINOCLEVAL_CLASS) const = 0;
+			virtual std::shared_ptr<ocl::Evaluations::ExpressionInOclEval> createExpressionInOclEval_as_parameterVariable_in_ExpressionInOcl(std::shared_ptr<ocl::Expressions::ExpressionInOcl> par_ExpressionInOcl, const int metaElementID = EvaluationsPackage::EXPRESSIONINOCLEVAL_CLASS) const = 0;
+			virtual std::shared_ptr<ocl::Evaluations::ExpressionInOclEval> createExpressionInOclEval_as_result_in_IterateExp(std::shared_ptr<ocl::Expressions::IterateExp> par_IterateExp, const int metaElementID = EvaluationsPackage::EXPRESSIONINOCLEVAL_CLASS) const = 0;
+			virtual std::shared_ptr<ocl::Evaluations::ExpressionInOclEval> createExpressionInOclEval_as_resultVariable_in_ExpressionInOcl(std::shared_ptr<ocl::Expressions::ExpressionInOcl> par_ExpressionInOcl, const int metaElementID = EvaluationsPackage::EXPRESSIONINOCLEVAL_CLASS) const = 0;
 			virtual std::shared_ptr<ocl::Evaluations::IfExpEval> createIfExpEval(const int metaElementID = EvaluationsPackage::IFEXPEVAL_CLASS) const = 0;
+			//Add as contained object
+			virtual std::shared_ptr<ocl::Evaluations::IfExpEval> createIfExpEval_as_contextVariable_in_ExpressionInOcl(std::shared_ptr<ocl::Expressions::ExpressionInOcl> par_ExpressionInOcl, const int metaElementID = EvaluationsPackage::IFEXPEVAL_CLASS) const = 0;
+			virtual std::shared_ptr<ocl::Evaluations::IfExpEval> createIfExpEval_as_parameterVariable_in_ExpressionInOcl(std::shared_ptr<ocl::Expressions::ExpressionInOcl> par_ExpressionInOcl, const int metaElementID = EvaluationsPackage::IFEXPEVAL_CLASS) const = 0;
+			virtual std::shared_ptr<ocl::Evaluations::IfExpEval> createIfExpEval_as_result_in_IterateExp(std::shared_ptr<ocl::Expressions::IterateExp> par_IterateExp, const int metaElementID = EvaluationsPackage::IFEXPEVAL_CLASS) const = 0;
+			virtual std::shared_ptr<ocl::Evaluations::IfExpEval> createIfExpEval_as_resultVariable_in_ExpressionInOcl(std::shared_ptr<ocl::Expressions::ExpressionInOcl> par_ExpressionInOcl, const int metaElementID = EvaluationsPackage::IFEXPEVAL_CLASS) const = 0;
 			virtual std::shared_ptr<ocl::Evaluations::IntegerLiteralExpEval> createIntegerLiteralExpEval(const int metaElementID = EvaluationsPackage::INTEGERLITERALEXPEVAL_CLASS) const = 0;
+			//Add as contained object
+			virtual std::shared_ptr<ocl::Evaluations::IntegerLiteralExpEval> createIntegerLiteralExpEval_as_contextVariable_in_ExpressionInOcl(std::shared_ptr<ocl::Expressions::ExpressionInOcl> par_ExpressionInOcl, const int metaElementID = EvaluationsPackage::INTEGERLITERALEXPEVAL_CLASS) const = 0;
+			virtual std::shared_ptr<ocl::Evaluations::IntegerLiteralExpEval> createIntegerLiteralExpEval_as_parameterVariable_in_ExpressionInOcl(std::shared_ptr<ocl::Expressions::ExpressionInOcl> par_ExpressionInOcl, const int metaElementID = EvaluationsPackage::INTEGERLITERALEXPEVAL_CLASS) const = 0;
+			virtual std::shared_ptr<ocl::Evaluations::IntegerLiteralExpEval> createIntegerLiteralExpEval_as_result_in_IterateExp(std::shared_ptr<ocl::Expressions::IterateExp> par_IterateExp, const int metaElementID = EvaluationsPackage::INTEGERLITERALEXPEVAL_CLASS) const = 0;
+			virtual std::shared_ptr<ocl::Evaluations::IntegerLiteralExpEval> createIntegerLiteralExpEval_as_resultVariable_in_ExpressionInOcl(std::shared_ptr<ocl::Expressions::ExpressionInOcl> par_ExpressionInOcl, const int metaElementID = EvaluationsPackage::INTEGERLITERALEXPEVAL_CLASS) const = 0;
 			virtual std::shared_ptr<ocl::Evaluations::IterateExpEval> createIterateExpEval(const int metaElementID = EvaluationsPackage::ITERATEEXPEVAL_CLASS) const = 0;
+			//Add as contained object
+			virtual std::shared_ptr<ocl::Evaluations::IterateExpEval> createIterateExpEval_as_contextVariable_in_ExpressionInOcl(std::shared_ptr<ocl::Expressions::ExpressionInOcl> par_ExpressionInOcl, const int metaElementID = EvaluationsPackage::ITERATEEXPEVAL_CLASS) const = 0;
+			virtual std::shared_ptr<ocl::Evaluations::IterateExpEval> createIterateExpEval_as_parameterVariable_in_ExpressionInOcl(std::shared_ptr<ocl::Expressions::ExpressionInOcl> par_ExpressionInOcl, const int metaElementID = EvaluationsPackage::ITERATEEXPEVAL_CLASS) const = 0;
+			virtual std::shared_ptr<ocl::Evaluations::IterateExpEval> createIterateExpEval_as_result_in_IterateExp(std::shared_ptr<ocl::Expressions::IterateExp> par_IterateExp, const int metaElementID = EvaluationsPackage::ITERATEEXPEVAL_CLASS) const = 0;
+			virtual std::shared_ptr<ocl::Evaluations::IterateExpEval> createIterateExpEval_as_resultVariable_in_ExpressionInOcl(std::shared_ptr<ocl::Expressions::ExpressionInOcl> par_ExpressionInOcl, const int metaElementID = EvaluationsPackage::ITERATEEXPEVAL_CLASS) const = 0;
 			virtual std::shared_ptr<ocl::Evaluations::IteratorExpEval> createIteratorExpEval(const int metaElementID = EvaluationsPackage::ITERATOREXPEVAL_CLASS) const = 0;
+			//Add as contained object
+			virtual std::shared_ptr<ocl::Evaluations::IteratorExpEval> createIteratorExpEval_as_contextVariable_in_ExpressionInOcl(std::shared_ptr<ocl::Expressions::ExpressionInOcl> par_ExpressionInOcl, const int metaElementID = EvaluationsPackage::ITERATOREXPEVAL_CLASS) const = 0;
+			virtual std::shared_ptr<ocl::Evaluations::IteratorExpEval> createIteratorExpEval_as_parameterVariable_in_ExpressionInOcl(std::shared_ptr<ocl::Expressions::ExpressionInOcl> par_ExpressionInOcl, const int metaElementID = EvaluationsPackage::ITERATOREXPEVAL_CLASS) const = 0;
+			virtual std::shared_ptr<ocl::Evaluations::IteratorExpEval> createIteratorExpEval_as_result_in_IterateExp(std::shared_ptr<ocl::Expressions::IterateExp> par_IterateExp, const int metaElementID = EvaluationsPackage::ITERATOREXPEVAL_CLASS) const = 0;
+			virtual std::shared_ptr<ocl::Evaluations::IteratorExpEval> createIteratorExpEval_as_resultVariable_in_ExpressionInOcl(std::shared_ptr<ocl::Expressions::ExpressionInOcl> par_ExpressionInOcl, const int metaElementID = EvaluationsPackage::ITERATOREXPEVAL_CLASS) const = 0;
 			virtual std::shared_ptr<ocl::Evaluations::LetExpEval> createLetExpEval(const int metaElementID = EvaluationsPackage::LETEXPEVAL_CLASS) const = 0;
+			//Add as contained object
+			virtual std::shared_ptr<ocl::Evaluations::LetExpEval> createLetExpEval_as_contextVariable_in_ExpressionInOcl(std::shared_ptr<ocl::Expressions::ExpressionInOcl> par_ExpressionInOcl, const int metaElementID = EvaluationsPackage::LETEXPEVAL_CLASS) const = 0;
+			virtual std::shared_ptr<ocl::Evaluations::LetExpEval> createLetExpEval_as_parameterVariable_in_ExpressionInOcl(std::shared_ptr<ocl::Expressions::ExpressionInOcl> par_ExpressionInOcl, const int metaElementID = EvaluationsPackage::LETEXPEVAL_CLASS) const = 0;
+			virtual std::shared_ptr<ocl::Evaluations::LetExpEval> createLetExpEval_as_result_in_IterateExp(std::shared_ptr<ocl::Expressions::IterateExp> par_IterateExp, const int metaElementID = EvaluationsPackage::LETEXPEVAL_CLASS) const = 0;
+			virtual std::shared_ptr<ocl::Evaluations::LetExpEval> createLetExpEval_as_resultVariable_in_ExpressionInOcl(std::shared_ptr<ocl::Expressions::ExpressionInOcl> par_ExpressionInOcl, const int metaElementID = EvaluationsPackage::LETEXPEVAL_CLASS) const = 0;
 			virtual std::shared_ptr<ocl::Evaluations::LiteralExpEval> createLiteralExpEval(const int metaElementID = EvaluationsPackage::LITERALEXPEVAL_CLASS) const = 0;
+			//Add as contained object
+			virtual std::shared_ptr<ocl::Evaluations::LiteralExpEval> createLiteralExpEval_as_contextVariable_in_ExpressionInOcl(std::shared_ptr<ocl::Expressions::ExpressionInOcl> par_ExpressionInOcl, const int metaElementID = EvaluationsPackage::LITERALEXPEVAL_CLASS) const = 0;
+			virtual std::shared_ptr<ocl::Evaluations::LiteralExpEval> createLiteralExpEval_as_parameterVariable_in_ExpressionInOcl(std::shared_ptr<ocl::Expressions::ExpressionInOcl> par_ExpressionInOcl, const int metaElementID = EvaluationsPackage::LITERALEXPEVAL_CLASS) const = 0;
+			virtual std::shared_ptr<ocl::Evaluations::LiteralExpEval> createLiteralExpEval_as_result_in_IterateExp(std::shared_ptr<ocl::Expressions::IterateExp> par_IterateExp, const int metaElementID = EvaluationsPackage::LITERALEXPEVAL_CLASS) const = 0;
+			virtual std::shared_ptr<ocl::Evaluations::LiteralExpEval> createLiteralExpEval_as_resultVariable_in_ExpressionInOcl(std::shared_ptr<ocl::Expressions::ExpressionInOcl> par_ExpressionInOcl, const int metaElementID = EvaluationsPackage::LITERALEXPEVAL_CLASS) const = 0;
 			virtual std::shared_ptr<ocl::Evaluations::LoopExpEval> createLoopExpEval(const int metaElementID = EvaluationsPackage::LOOPEXPEVAL_CLASS) const = 0;
+			//Add as contained object
+			virtual std::shared_ptr<ocl::Evaluations::LoopExpEval> createLoopExpEval_as_contextVariable_in_ExpressionInOcl(std::shared_ptr<ocl::Expressions::ExpressionInOcl> par_ExpressionInOcl, const int metaElementID = EvaluationsPackage::LOOPEXPEVAL_CLASS) const = 0;
+			virtual std::shared_ptr<ocl::Evaluations::LoopExpEval> createLoopExpEval_as_parameterVariable_in_ExpressionInOcl(std::shared_ptr<ocl::Expressions::ExpressionInOcl> par_ExpressionInOcl, const int metaElementID = EvaluationsPackage::LOOPEXPEVAL_CLASS) const = 0;
+			virtual std::shared_ptr<ocl::Evaluations::LoopExpEval> createLoopExpEval_as_result_in_IterateExp(std::shared_ptr<ocl::Expressions::IterateExp> par_IterateExp, const int metaElementID = EvaluationsPackage::LOOPEXPEVAL_CLASS) const = 0;
+			virtual std::shared_ptr<ocl::Evaluations::LoopExpEval> createLoopExpEval_as_resultVariable_in_ExpressionInOcl(std::shared_ptr<ocl::Expressions::ExpressionInOcl> par_ExpressionInOcl, const int metaElementID = EvaluationsPackage::LOOPEXPEVAL_CLASS) const = 0;
 			virtual std::shared_ptr<ocl::Evaluations::ModelPropertyCallExpEval> createModelPropertyCallExpEval(const int metaElementID = EvaluationsPackage::MODELPROPERTYCALLEXPEVAL_CLASS) const = 0;
+			//Add as contained object
+			virtual std::shared_ptr<ocl::Evaluations::ModelPropertyCallExpEval> createModelPropertyCallExpEval_as_contextVariable_in_ExpressionInOcl(std::shared_ptr<ocl::Expressions::ExpressionInOcl> par_ExpressionInOcl, const int metaElementID = EvaluationsPackage::MODELPROPERTYCALLEXPEVAL_CLASS) const = 0;
+			virtual std::shared_ptr<ocl::Evaluations::ModelPropertyCallExpEval> createModelPropertyCallExpEval_as_parameterVariable_in_ExpressionInOcl(std::shared_ptr<ocl::Expressions::ExpressionInOcl> par_ExpressionInOcl, const int metaElementID = EvaluationsPackage::MODELPROPERTYCALLEXPEVAL_CLASS) const = 0;
+			virtual std::shared_ptr<ocl::Evaluations::ModelPropertyCallExpEval> createModelPropertyCallExpEval_as_result_in_IterateExp(std::shared_ptr<ocl::Expressions::IterateExp> par_IterateExp, const int metaElementID = EvaluationsPackage::MODELPROPERTYCALLEXPEVAL_CLASS) const = 0;
+			virtual std::shared_ptr<ocl::Evaluations::ModelPropertyCallExpEval> createModelPropertyCallExpEval_as_resultVariable_in_ExpressionInOcl(std::shared_ptr<ocl::Expressions::ExpressionInOcl> par_ExpressionInOcl, const int metaElementID = EvaluationsPackage::MODELPROPERTYCALLEXPEVAL_CLASS) const = 0;
+			virtual std::shared_ptr<ocl::Evaluations::NameValueBinding> createNameValueBinding(const int metaElementID = EvaluationsPackage::NAMEVALUEBINDING_CLASS) const = 0;
+			//Add as contained object
+			virtual std::shared_ptr<ocl::Evaluations::NameValueBinding> createNameValueBinding_as_contextVariable_in_ExpressionInOcl(std::shared_ptr<ocl::Expressions::ExpressionInOcl> par_ExpressionInOcl, const int metaElementID = EvaluationsPackage::NAMEVALUEBINDING_CLASS) const = 0;
+			virtual std::shared_ptr<ocl::Evaluations::NameValueBinding> createNameValueBinding_as_parameterVariable_in_ExpressionInOcl(std::shared_ptr<ocl::Expressions::ExpressionInOcl> par_ExpressionInOcl, const int metaElementID = EvaluationsPackage::NAMEVALUEBINDING_CLASS) const = 0;
+			virtual std::shared_ptr<ocl::Evaluations::NameValueBinding> createNameValueBinding_as_result_in_IterateExp(std::shared_ptr<ocl::Expressions::IterateExp> par_IterateExp, const int metaElementID = EvaluationsPackage::NAMEVALUEBINDING_CLASS) const = 0;
+			virtual std::shared_ptr<ocl::Evaluations::NameValueBinding> createNameValueBinding_as_resultVariable_in_ExpressionInOcl(std::shared_ptr<ocl::Expressions::ExpressionInOcl> par_ExpressionInOcl, const int metaElementID = EvaluationsPackage::NAMEVALUEBINDING_CLASS) const = 0;
 			virtual std::shared_ptr<ocl::Evaluations::NavigationCallExpEval> createNavigationCallExpEval(const int metaElementID = EvaluationsPackage::NAVIGATIONCALLEXPEVAL_CLASS) const = 0;
+			//Add as contained object
+			virtual std::shared_ptr<ocl::Evaluations::NavigationCallExpEval> createNavigationCallExpEval_as_contextVariable_in_ExpressionInOcl(std::shared_ptr<ocl::Expressions::ExpressionInOcl> par_ExpressionInOcl, const int metaElementID = EvaluationsPackage::NAVIGATIONCALLEXPEVAL_CLASS) const = 0;
+			virtual std::shared_ptr<ocl::Evaluations::NavigationCallExpEval> createNavigationCallExpEval_as_parameterVariable_in_ExpressionInOcl(std::shared_ptr<ocl::Expressions::ExpressionInOcl> par_ExpressionInOcl, const int metaElementID = EvaluationsPackage::NAVIGATIONCALLEXPEVAL_CLASS) const = 0;
+			virtual std::shared_ptr<ocl::Evaluations::NavigationCallExpEval> createNavigationCallExpEval_as_result_in_IterateExp(std::shared_ptr<ocl::Expressions::IterateExp> par_IterateExp, const int metaElementID = EvaluationsPackage::NAVIGATIONCALLEXPEVAL_CLASS) const = 0;
+			virtual std::shared_ptr<ocl::Evaluations::NavigationCallExpEval> createNavigationCallExpEval_as_resultVariable_in_ExpressionInOcl(std::shared_ptr<ocl::Expressions::ExpressionInOcl> par_ExpressionInOcl, const int metaElementID = EvaluationsPackage::NAVIGATIONCALLEXPEVAL_CLASS) const = 0;
 			virtual std::shared_ptr<ocl::Evaluations::NumericLiteralExpEval> createNumericLiteralExpEval(const int metaElementID = EvaluationsPackage::NUMERICLITERALEXPEVAL_CLASS) const = 0;
+			//Add as contained object
+			virtual std::shared_ptr<ocl::Evaluations::NumericLiteralExpEval> createNumericLiteralExpEval_as_contextVariable_in_ExpressionInOcl(std::shared_ptr<ocl::Expressions::ExpressionInOcl> par_ExpressionInOcl, const int metaElementID = EvaluationsPackage::NUMERICLITERALEXPEVAL_CLASS) const = 0;
+			virtual std::shared_ptr<ocl::Evaluations::NumericLiteralExpEval> createNumericLiteralExpEval_as_parameterVariable_in_ExpressionInOcl(std::shared_ptr<ocl::Expressions::ExpressionInOcl> par_ExpressionInOcl, const int metaElementID = EvaluationsPackage::NUMERICLITERALEXPEVAL_CLASS) const = 0;
+			virtual std::shared_ptr<ocl::Evaluations::NumericLiteralExpEval> createNumericLiteralExpEval_as_result_in_IterateExp(std::shared_ptr<ocl::Expressions::IterateExp> par_IterateExp, const int metaElementID = EvaluationsPackage::NUMERICLITERALEXPEVAL_CLASS) const = 0;
+			virtual std::shared_ptr<ocl::Evaluations::NumericLiteralExpEval> createNumericLiteralExpEval_as_resultVariable_in_ExpressionInOcl(std::shared_ptr<ocl::Expressions::ExpressionInOcl> par_ExpressionInOcl, const int metaElementID = EvaluationsPackage::NUMERICLITERALEXPEVAL_CLASS) const = 0;
 			virtual std::shared_ptr<ocl::Evaluations::OclExpEval> createOclExpEval(const int metaElementID = EvaluationsPackage::OCLEXPEVAL_CLASS) const = 0;
+			//Add as contained object
+			virtual std::shared_ptr<ocl::Evaluations::OclExpEval> createOclExpEval_as_contextVariable_in_ExpressionInOcl(std::shared_ptr<ocl::Expressions::ExpressionInOcl> par_ExpressionInOcl, const int metaElementID = EvaluationsPackage::OCLEXPEVAL_CLASS) const = 0;
+			virtual std::shared_ptr<ocl::Evaluations::OclExpEval> createOclExpEval_as_parameterVariable_in_ExpressionInOcl(std::shared_ptr<ocl::Expressions::ExpressionInOcl> par_ExpressionInOcl, const int metaElementID = EvaluationsPackage::OCLEXPEVAL_CLASS) const = 0;
+			virtual std::shared_ptr<ocl::Evaluations::OclExpEval> createOclExpEval_as_result_in_IterateExp(std::shared_ptr<ocl::Expressions::IterateExp> par_IterateExp, const int metaElementID = EvaluationsPackage::OCLEXPEVAL_CLASS) const = 0;
+			virtual std::shared_ptr<ocl::Evaluations::OclExpEval> createOclExpEval_as_resultVariable_in_ExpressionInOcl(std::shared_ptr<ocl::Expressions::ExpressionInOcl> par_ExpressionInOcl, const int metaElementID = EvaluationsPackage::OCLEXPEVAL_CLASS) const = 0;
 			virtual std::shared_ptr<ocl::Evaluations::OclMessageArgEval> createOclMessageArgEval(const int metaElementID = EvaluationsPackage::OCLMESSAGEARGEVAL_CLASS) const = 0;
+			//Add as contained object
+			virtual std::shared_ptr<ocl::Evaluations::OclMessageArgEval> createOclMessageArgEval_as_contextVariable_in_ExpressionInOcl(std::shared_ptr<ocl::Expressions::ExpressionInOcl> par_ExpressionInOcl, const int metaElementID = EvaluationsPackage::OCLMESSAGEARGEVAL_CLASS) const = 0;
+			virtual std::shared_ptr<ocl::Evaluations::OclMessageArgEval> createOclMessageArgEval_as_parameterVariable_in_ExpressionInOcl(std::shared_ptr<ocl::Expressions::ExpressionInOcl> par_ExpressionInOcl, const int metaElementID = EvaluationsPackage::OCLMESSAGEARGEVAL_CLASS) const = 0;
+			virtual std::shared_ptr<ocl::Evaluations::OclMessageArgEval> createOclMessageArgEval_as_result_in_IterateExp(std::shared_ptr<ocl::Expressions::IterateExp> par_IterateExp, const int metaElementID = EvaluationsPackage::OCLMESSAGEARGEVAL_CLASS) const = 0;
+			virtual std::shared_ptr<ocl::Evaluations::OclMessageArgEval> createOclMessageArgEval_as_resultVariable_in_ExpressionInOcl(std::shared_ptr<ocl::Expressions::ExpressionInOcl> par_ExpressionInOcl, const int metaElementID = EvaluationsPackage::OCLMESSAGEARGEVAL_CLASS) const = 0;
 			virtual std::shared_ptr<ocl::Evaluations::OclMessageExpEval> createOclMessageExpEval(const int metaElementID = EvaluationsPackage::OCLMESSAGEEXPEVAL_CLASS) const = 0;
+			//Add as contained object
+			virtual std::shared_ptr<ocl::Evaluations::OclMessageExpEval> createOclMessageExpEval_as_contextVariable_in_ExpressionInOcl(std::shared_ptr<ocl::Expressions::ExpressionInOcl> par_ExpressionInOcl, const int metaElementID = EvaluationsPackage::OCLMESSAGEEXPEVAL_CLASS) const = 0;
+			virtual std::shared_ptr<ocl::Evaluations::OclMessageExpEval> createOclMessageExpEval_as_parameterVariable_in_ExpressionInOcl(std::shared_ptr<ocl::Expressions::ExpressionInOcl> par_ExpressionInOcl, const int metaElementID = EvaluationsPackage::OCLMESSAGEEXPEVAL_CLASS) const = 0;
+			virtual std::shared_ptr<ocl::Evaluations::OclMessageExpEval> createOclMessageExpEval_as_result_in_IterateExp(std::shared_ptr<ocl::Expressions::IterateExp> par_IterateExp, const int metaElementID = EvaluationsPackage::OCLMESSAGEEXPEVAL_CLASS) const = 0;
+			virtual std::shared_ptr<ocl::Evaluations::OclMessageExpEval> createOclMessageExpEval_as_resultVariable_in_ExpressionInOcl(std::shared_ptr<ocl::Expressions::ExpressionInOcl> par_ExpressionInOcl, const int metaElementID = EvaluationsPackage::OCLMESSAGEEXPEVAL_CLASS) const = 0;
 			virtual std::shared_ptr<ocl::Evaluations::OperationCallExpEval> createOperationCallExpEval(const int metaElementID = EvaluationsPackage::OPERATIONCALLEXPEVAL_CLASS) const = 0;
+			//Add as contained object
+			virtual std::shared_ptr<ocl::Evaluations::OperationCallExpEval> createOperationCallExpEval_as_contextVariable_in_ExpressionInOcl(std::shared_ptr<ocl::Expressions::ExpressionInOcl> par_ExpressionInOcl, const int metaElementID = EvaluationsPackage::OPERATIONCALLEXPEVAL_CLASS) const = 0;
+			virtual std::shared_ptr<ocl::Evaluations::OperationCallExpEval> createOperationCallExpEval_as_parameterVariable_in_ExpressionInOcl(std::shared_ptr<ocl::Expressions::ExpressionInOcl> par_ExpressionInOcl, const int metaElementID = EvaluationsPackage::OPERATIONCALLEXPEVAL_CLASS) const = 0;
+			virtual std::shared_ptr<ocl::Evaluations::OperationCallExpEval> createOperationCallExpEval_as_result_in_IterateExp(std::shared_ptr<ocl::Expressions::IterateExp> par_IterateExp, const int metaElementID = EvaluationsPackage::OPERATIONCALLEXPEVAL_CLASS) const = 0;
+			virtual std::shared_ptr<ocl::Evaluations::OperationCallExpEval> createOperationCallExpEval_as_resultVariable_in_ExpressionInOcl(std::shared_ptr<ocl::Expressions::ExpressionInOcl> par_ExpressionInOcl, const int metaElementID = EvaluationsPackage::OPERATIONCALLEXPEVAL_CLASS) const = 0;
 			virtual std::shared_ptr<ocl::Evaluations::PrimitiveLiteralExpEval> createPrimitiveLiteralExpEval(const int metaElementID = EvaluationsPackage::PRIMITIVELITERALEXPEVAL_CLASS) const = 0;
+			//Add as contained object
+			virtual std::shared_ptr<ocl::Evaluations::PrimitiveLiteralExpEval> createPrimitiveLiteralExpEval_as_contextVariable_in_ExpressionInOcl(std::shared_ptr<ocl::Expressions::ExpressionInOcl> par_ExpressionInOcl, const int metaElementID = EvaluationsPackage::PRIMITIVELITERALEXPEVAL_CLASS) const = 0;
+			virtual std::shared_ptr<ocl::Evaluations::PrimitiveLiteralExpEval> createPrimitiveLiteralExpEval_as_parameterVariable_in_ExpressionInOcl(std::shared_ptr<ocl::Expressions::ExpressionInOcl> par_ExpressionInOcl, const int metaElementID = EvaluationsPackage::PRIMITIVELITERALEXPEVAL_CLASS) const = 0;
+			virtual std::shared_ptr<ocl::Evaluations::PrimitiveLiteralExpEval> createPrimitiveLiteralExpEval_as_result_in_IterateExp(std::shared_ptr<ocl::Expressions::IterateExp> par_IterateExp, const int metaElementID = EvaluationsPackage::PRIMITIVELITERALEXPEVAL_CLASS) const = 0;
+			virtual std::shared_ptr<ocl::Evaluations::PrimitiveLiteralExpEval> createPrimitiveLiteralExpEval_as_resultVariable_in_ExpressionInOcl(std::shared_ptr<ocl::Expressions::ExpressionInOcl> par_ExpressionInOcl, const int metaElementID = EvaluationsPackage::PRIMITIVELITERALEXPEVAL_CLASS) const = 0;
 			virtual std::shared_ptr<ocl::Evaluations::PropertyCallExpEval> createPropertyCallExpEval(const int metaElementID = EvaluationsPackage::PROPERTYCALLEXPEVAL_CLASS) const = 0;
+			//Add as contained object
+			virtual std::shared_ptr<ocl::Evaluations::PropertyCallExpEval> createPropertyCallExpEval_as_contextVariable_in_ExpressionInOcl(std::shared_ptr<ocl::Expressions::ExpressionInOcl> par_ExpressionInOcl, const int metaElementID = EvaluationsPackage::PROPERTYCALLEXPEVAL_CLASS) const = 0;
+			virtual std::shared_ptr<ocl::Evaluations::PropertyCallExpEval> createPropertyCallExpEval_as_parameterVariable_in_ExpressionInOcl(std::shared_ptr<ocl::Expressions::ExpressionInOcl> par_ExpressionInOcl, const int metaElementID = EvaluationsPackage::PROPERTYCALLEXPEVAL_CLASS) const = 0;
+			virtual std::shared_ptr<ocl::Evaluations::PropertyCallExpEval> createPropertyCallExpEval_as_result_in_IterateExp(std::shared_ptr<ocl::Expressions::IterateExp> par_IterateExp, const int metaElementID = EvaluationsPackage::PROPERTYCALLEXPEVAL_CLASS) const = 0;
+			virtual std::shared_ptr<ocl::Evaluations::PropertyCallExpEval> createPropertyCallExpEval_as_resultVariable_in_ExpressionInOcl(std::shared_ptr<ocl::Expressions::ExpressionInOcl> par_ExpressionInOcl, const int metaElementID = EvaluationsPackage::PROPERTYCALLEXPEVAL_CLASS) const = 0;
 			virtual std::shared_ptr<ocl::Evaluations::RealLiteralExpEval> createRealLiteralExpEval(const int metaElementID = EvaluationsPackage::REALLITERALEXPEVAL_CLASS) const = 0;
+			//Add as contained object
+			virtual std::shared_ptr<ocl::Evaluations::RealLiteralExpEval> createRealLiteralExpEval_as_contextVariable_in_ExpressionInOcl(std::shared_ptr<ocl::Expressions::ExpressionInOcl> par_ExpressionInOcl, const int metaElementID = EvaluationsPackage::REALLITERALEXPEVAL_CLASS) const = 0;
+			virtual std::shared_ptr<ocl::Evaluations::RealLiteralExpEval> createRealLiteralExpEval_as_parameterVariable_in_ExpressionInOcl(std::shared_ptr<ocl::Expressions::ExpressionInOcl> par_ExpressionInOcl, const int metaElementID = EvaluationsPackage::REALLITERALEXPEVAL_CLASS) const = 0;
+			virtual std::shared_ptr<ocl::Evaluations::RealLiteralExpEval> createRealLiteralExpEval_as_result_in_IterateExp(std::shared_ptr<ocl::Expressions::IterateExp> par_IterateExp, const int metaElementID = EvaluationsPackage::REALLITERALEXPEVAL_CLASS) const = 0;
+			virtual std::shared_ptr<ocl::Evaluations::RealLiteralExpEval> createRealLiteralExpEval_as_resultVariable_in_ExpressionInOcl(std::shared_ptr<ocl::Expressions::ExpressionInOcl> par_ExpressionInOcl, const int metaElementID = EvaluationsPackage::REALLITERALEXPEVAL_CLASS) const = 0;
 			virtual std::shared_ptr<ocl::Evaluations::StringLiteralExpEval> createStringLiteralExpEval(const int metaElementID = EvaluationsPackage::STRINGLITERALEXPEVAL_CLASS) const = 0;
+			//Add as contained object
+			virtual std::shared_ptr<ocl::Evaluations::StringLiteralExpEval> createStringLiteralExpEval_as_contextVariable_in_ExpressionInOcl(std::shared_ptr<ocl::Expressions::ExpressionInOcl> par_ExpressionInOcl, const int metaElementID = EvaluationsPackage::STRINGLITERALEXPEVAL_CLASS) const = 0;
+			virtual std::shared_ptr<ocl::Evaluations::StringLiteralExpEval> createStringLiteralExpEval_as_parameterVariable_in_ExpressionInOcl(std::shared_ptr<ocl::Expressions::ExpressionInOcl> par_ExpressionInOcl, const int metaElementID = EvaluationsPackage::STRINGLITERALEXPEVAL_CLASS) const = 0;
+			virtual std::shared_ptr<ocl::Evaluations::StringLiteralExpEval> createStringLiteralExpEval_as_result_in_IterateExp(std::shared_ptr<ocl::Expressions::IterateExp> par_IterateExp, const int metaElementID = EvaluationsPackage::STRINGLITERALEXPEVAL_CLASS) const = 0;
+			virtual std::shared_ptr<ocl::Evaluations::StringLiteralExpEval> createStringLiteralExpEval_as_resultVariable_in_ExpressionInOcl(std::shared_ptr<ocl::Expressions::ExpressionInOcl> par_ExpressionInOcl, const int metaElementID = EvaluationsPackage::STRINGLITERALEXPEVAL_CLASS) const = 0;
 			virtual std::shared_ptr<ocl::Evaluations::TupleLiteralExpEval> createTupleLiteralExpEval(const int metaElementID = EvaluationsPackage::TUPLELITERALEXPEVAL_CLASS) const = 0;
+			//Add as contained object
+			virtual std::shared_ptr<ocl::Evaluations::TupleLiteralExpEval> createTupleLiteralExpEval_as_contextVariable_in_ExpressionInOcl(std::shared_ptr<ocl::Expressions::ExpressionInOcl> par_ExpressionInOcl, const int metaElementID = EvaluationsPackage::TUPLELITERALEXPEVAL_CLASS) const = 0;
+			virtual std::shared_ptr<ocl::Evaluations::TupleLiteralExpEval> createTupleLiteralExpEval_as_parameterVariable_in_ExpressionInOcl(std::shared_ptr<ocl::Expressions::ExpressionInOcl> par_ExpressionInOcl, const int metaElementID = EvaluationsPackage::TUPLELITERALEXPEVAL_CLASS) const = 0;
+			virtual std::shared_ptr<ocl::Evaluations::TupleLiteralExpEval> createTupleLiteralExpEval_as_result_in_IterateExp(std::shared_ptr<ocl::Expressions::IterateExp> par_IterateExp, const int metaElementID = EvaluationsPackage::TUPLELITERALEXPEVAL_CLASS) const = 0;
+			virtual std::shared_ptr<ocl::Evaluations::TupleLiteralExpEval> createTupleLiteralExpEval_as_resultVariable_in_ExpressionInOcl(std::shared_ptr<ocl::Expressions::ExpressionInOcl> par_ExpressionInOcl, const int metaElementID = EvaluationsPackage::TUPLELITERALEXPEVAL_CLASS) const = 0;
 			virtual std::shared_ptr<ocl::Evaluations::TupleLiteralExpPartEval> createTupleLiteralExpPartEval(const int metaElementID = EvaluationsPackage::TUPLELITERALEXPPARTEVAL_CLASS) const = 0;
+			//Add as contained object
+			virtual std::shared_ptr<ocl::Evaluations::TupleLiteralExpPartEval> createTupleLiteralExpPartEval_as_contextVariable_in_ExpressionInOcl(std::shared_ptr<ocl::Expressions::ExpressionInOcl> par_ExpressionInOcl, const int metaElementID = EvaluationsPackage::TUPLELITERALEXPPARTEVAL_CLASS) const = 0;
+			virtual std::shared_ptr<ocl::Evaluations::TupleLiteralExpPartEval> createTupleLiteralExpPartEval_as_parameterVariable_in_ExpressionInOcl(std::shared_ptr<ocl::Expressions::ExpressionInOcl> par_ExpressionInOcl, const int metaElementID = EvaluationsPackage::TUPLELITERALEXPPARTEVAL_CLASS) const = 0;
+			virtual std::shared_ptr<ocl::Evaluations::TupleLiteralExpPartEval> createTupleLiteralExpPartEval_as_result_in_IterateExp(std::shared_ptr<ocl::Expressions::IterateExp> par_IterateExp, const int metaElementID = EvaluationsPackage::TUPLELITERALEXPPARTEVAL_CLASS) const = 0;
+			virtual std::shared_ptr<ocl::Evaluations::TupleLiteralExpPartEval> createTupleLiteralExpPartEval_as_resultVariable_in_ExpressionInOcl(std::shared_ptr<ocl::Expressions::ExpressionInOcl> par_ExpressionInOcl, const int metaElementID = EvaluationsPackage::TUPLELITERALEXPPARTEVAL_CLASS) const = 0;
 			virtual std::shared_ptr<ocl::Evaluations::UnlimitedNaturalLiteralExpEval> createUnlimitedNaturalLiteralExpEval(const int metaElementID = EvaluationsPackage::UNLIMITEDNATURALLITERALEXPEVAL_CLASS) const = 0;
+			//Add as contained object
+			virtual std::shared_ptr<ocl::Evaluations::UnlimitedNaturalLiteralExpEval> createUnlimitedNaturalLiteralExpEval_as_contextVariable_in_ExpressionInOcl(std::shared_ptr<ocl::Expressions::ExpressionInOcl> par_ExpressionInOcl, const int metaElementID = EvaluationsPackage::UNLIMITEDNATURALLITERALEXPEVAL_CLASS) const = 0;
+			virtual std::shared_ptr<ocl::Evaluations::UnlimitedNaturalLiteralExpEval> createUnlimitedNaturalLiteralExpEval_as_parameterVariable_in_ExpressionInOcl(std::shared_ptr<ocl::Expressions::ExpressionInOcl> par_ExpressionInOcl, const int metaElementID = EvaluationsPackage::UNLIMITEDNATURALLITERALEXPEVAL_CLASS) const = 0;
+			virtual std::shared_ptr<ocl::Evaluations::UnlimitedNaturalLiteralExpEval> createUnlimitedNaturalLiteralExpEval_as_result_in_IterateExp(std::shared_ptr<ocl::Expressions::IterateExp> par_IterateExp, const int metaElementID = EvaluationsPackage::UNLIMITEDNATURALLITERALEXPEVAL_CLASS) const = 0;
+			virtual std::shared_ptr<ocl::Evaluations::UnlimitedNaturalLiteralExpEval> createUnlimitedNaturalLiteralExpEval_as_resultVariable_in_ExpressionInOcl(std::shared_ptr<ocl::Expressions::ExpressionInOcl> par_ExpressionInOcl, const int metaElementID = EvaluationsPackage::UNLIMITEDNATURALLITERALEXPEVAL_CLASS) const = 0;
 			virtual std::shared_ptr<ocl::Evaluations::UnspecifiedValueExpEval> createUnspecifiedValueExpEval(const int metaElementID = EvaluationsPackage::UNSPECIFIEDVALUEEXPEVAL_CLASS) const = 0;
+			//Add as contained object
+			virtual std::shared_ptr<ocl::Evaluations::UnspecifiedValueExpEval> createUnspecifiedValueExpEval_as_contextVariable_in_ExpressionInOcl(std::shared_ptr<ocl::Expressions::ExpressionInOcl> par_ExpressionInOcl, const int metaElementID = EvaluationsPackage::UNSPECIFIEDVALUEEXPEVAL_CLASS) const = 0;
+			virtual std::shared_ptr<ocl::Evaluations::UnspecifiedValueExpEval> createUnspecifiedValueExpEval_as_parameterVariable_in_ExpressionInOcl(std::shared_ptr<ocl::Expressions::ExpressionInOcl> par_ExpressionInOcl, const int metaElementID = EvaluationsPackage::UNSPECIFIEDVALUEEXPEVAL_CLASS) const = 0;
+			virtual std::shared_ptr<ocl::Evaluations::UnspecifiedValueExpEval> createUnspecifiedValueExpEval_as_result_in_IterateExp(std::shared_ptr<ocl::Expressions::IterateExp> par_IterateExp, const int metaElementID = EvaluationsPackage::UNSPECIFIEDVALUEEXPEVAL_CLASS) const = 0;
+			virtual std::shared_ptr<ocl::Evaluations::UnspecifiedValueExpEval> createUnspecifiedValueExpEval_as_resultVariable_in_ExpressionInOcl(std::shared_ptr<ocl::Expressions::ExpressionInOcl> par_ExpressionInOcl, const int metaElementID = EvaluationsPackage::UNSPECIFIEDVALUEEXPEVAL_CLASS) const = 0;
 			virtual std::shared_ptr<ocl::Evaluations::VariableDeclEval> createVariableDeclEval(const int metaElementID = EvaluationsPackage::VARIABLEDECLEVAL_CLASS) const = 0;
+			//Add as contained object
+			virtual std::shared_ptr<ocl::Evaluations::VariableDeclEval> createVariableDeclEval_as_contextVariable_in_ExpressionInOcl(std::shared_ptr<ocl::Expressions::ExpressionInOcl> par_ExpressionInOcl, const int metaElementID = EvaluationsPackage::VARIABLEDECLEVAL_CLASS) const = 0;
+			virtual std::shared_ptr<ocl::Evaluations::VariableDeclEval> createVariableDeclEval_as_parameterVariable_in_ExpressionInOcl(std::shared_ptr<ocl::Expressions::ExpressionInOcl> par_ExpressionInOcl, const int metaElementID = EvaluationsPackage::VARIABLEDECLEVAL_CLASS) const = 0;
+			virtual std::shared_ptr<ocl::Evaluations::VariableDeclEval> createVariableDeclEval_as_result_in_IterateExp(std::shared_ptr<ocl::Expressions::IterateExp> par_IterateExp, const int metaElementID = EvaluationsPackage::VARIABLEDECLEVAL_CLASS) const = 0;
+			virtual std::shared_ptr<ocl::Evaluations::VariableDeclEval> createVariableDeclEval_as_resultVariable_in_ExpressionInOcl(std::shared_ptr<ocl::Expressions::ExpressionInOcl> par_ExpressionInOcl, const int metaElementID = EvaluationsPackage::VARIABLEDECLEVAL_CLASS) const = 0;
 			virtual std::shared_ptr<ocl::Evaluations::VariableExpEval> createVariableExpEval(const int metaElementID = EvaluationsPackage::VARIABLEEXPEVAL_CLASS) const = 0;
+			//Add as contained object
+			virtual std::shared_ptr<ocl::Evaluations::VariableExpEval> createVariableExpEval_as_contextVariable_in_ExpressionInOcl(std::shared_ptr<ocl::Expressions::ExpressionInOcl> par_ExpressionInOcl, const int metaElementID = EvaluationsPackage::VARIABLEEXPEVAL_CLASS) const = 0;
+			virtual std::shared_ptr<ocl::Evaluations::VariableExpEval> createVariableExpEval_as_parameterVariable_in_ExpressionInOcl(std::shared_ptr<ocl::Expressions::ExpressionInOcl> par_ExpressionInOcl, const int metaElementID = EvaluationsPackage::VARIABLEEXPEVAL_CLASS) const = 0;
+			virtual std::shared_ptr<ocl::Evaluations::VariableExpEval> createVariableExpEval_as_result_in_IterateExp(std::shared_ptr<ocl::Expressions::IterateExp> par_IterateExp, const int metaElementID = EvaluationsPackage::VARIABLEEXPEVAL_CLASS) const = 0;
+			virtual std::shared_ptr<ocl::Evaluations::VariableExpEval> createVariableExpEval_as_resultVariable_in_ExpressionInOcl(std::shared_ptr<ocl::Expressions::ExpressionInOcl> par_ExpressionInOcl, const int metaElementID = EvaluationsPackage::VARIABLEEXPEVAL_CLASS) const = 0;
 			
 	};
 }

@@ -58,6 +58,14 @@ OCLSTRING 		: OclString			;
 OCLUNLIMITEDNAT : OclUnlimitedNat	;
 
 // -----------------------------------
+
+//Sequence Range
+//neccessary because otherwise it can be missinterpreted as REAL
+
+SEQRANGE
+		 : Minus? DecimalNumeral Range
+		 ;
+
 // OCL Types
 
 OCLANY 			: OclAny		;

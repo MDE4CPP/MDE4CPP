@@ -1,9 +1,13 @@
 
 #include "ocl/Expressions/impl/LiteralExpImpl.hpp"
 #ifdef NDEBUG
-	#define DEBUG_MESSAGE(a) /**/
+	#define DEBUG_INFO(a)		/**/
+	#define DEBUG_WARNING(a)	/**/
+	#define DEBUG_ERROR(a)		/**/
 #else
-	#define DEBUG_MESSAGE(a) a
+	#define DEBUG_INFO(a) 		std::cout<<"[\e[0;32mInfo\e[0m]:\t\t"<<__PRETTY_FUNCTION__<<"\n\t\t  -- Message: "<<a<<std::endl;
+	#define DEBUG_WARNING(a) 	std::cout<<"[\e[0;33mWarning\e[0m]:\t"<<__PRETTY_FUNCTION__<<"\n\t\t  -- Message: "<<a<<std::endl;
+	#define DEBUG_ERROR(a)		std::cout<<"[\e[0;31mError\e[0m]:\t"<<__PRETTY_FUNCTION__<<"\n\t\t  -- Message: "<<a<<std::endl;
 #endif
 
 #ifdef ACTIVITY_DEBUG_ON
@@ -21,8 +25,8 @@
 #include "abstractDataTypes/Bag.hpp"
 
 
-#include "abstractDataTypes/AnyEObject.hpp"
-#include "abstractDataTypes/AnyEObjectBag.hpp"
+#include "ecore/EcoreAny.hpp"
+#include "ecore/EcoreContainerAny.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
@@ -34,9 +38,9 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "ocl/Expressions/ExpressionsFactory.hpp"
 #include "ocl/Evaluations/EvaluationsFactory.hpp"
 #include "ecore/ecoreFactory.hpp"
+#include "ocl/Expressions/ExpressionsFactory.hpp"
 #include "ocl/Expressions/CallExp.hpp"
 #include "ocl/Expressions/CollectionRange.hpp"
 #include "ecore/EAnnotation.hpp"
@@ -49,7 +53,7 @@
 #include "ocl/Evaluations/OclExpEval.hpp"
 #include "ocl/Expressions/OclExpression.hpp"
 #include "ocl/Expressions/OperationCallExp.hpp"
-#include "ocl/Expressions/Variable.hpp"
+#include "ocl/Expressions/VarDeclarationExp.hpp"
 //Factories and Package includes
 #include "ocl/oclPackage.hpp"
 #include "ocl/Evaluations/EvaluationsPackage.hpp"
@@ -73,13 +77,6 @@ LiteralExpImpl::~LiteralExpImpl()
 #ifdef SHOW_DELETION
 	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete LiteralExp "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
 #endif
-}
-
-//Additional constructor for the containments back reference
-LiteralExpImpl::LiteralExpImpl(std::weak_ptr<ocl::Expressions::CallExp> par_appliedElement)
-:LiteralExpImpl()
-{
-	m_appliedElement = par_appliedElement;
 }
 
 //Additional constructor for the containments back reference
@@ -122,20 +119,25 @@ LiteralExpImpl::LiteralExpImpl(std::weak_ptr<ocl::Expressions::CollectionRange> 
 }
 
 
-//Additional constructor for the containments back reference
-LiteralExpImpl::LiteralExpImpl(std::weak_ptr<ocl::Expressions::Variable> par_initializedElement)
-:LiteralExpImpl()
-{
-	m_initializedElement = par_initializedElement;
-}
-
 
 //Additional constructor for the containments back reference
-LiteralExpImpl::LiteralExpImpl(std::weak_ptr<ocl::Expressions::LoopExp> par_loopBodyOwner)
+LiteralExpImpl::LiteralExpImpl(std::weak_ptr<ocl::Expressions::LoopExp> par_LoopExp, const int reference_id)
 :LiteralExpImpl()
 {
-	m_loopBodyOwner = par_loopBodyOwner;
+	switch(reference_id)
+	{	
+	case ocl::Expressions::ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_LOOPBODYOWNER:
+		m_loopBodyOwner = par_LoopExp;
+		 return;
+	case ocl::Expressions::ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_LOOPEXP:
+		m_loopExp = par_LoopExp;
+		 return;
+	default:
+	std::cerr << __PRETTY_FUNCTION__ <<" Reference not found in class with the given ID" << std::endl;
+	}
+   
 }
+
 
 //Additional constructor for the containments back reference
 LiteralExpImpl::LiteralExpImpl(std::weak_ptr<ocl::Expressions::OperationCallExp> par_parentCall)
@@ -211,11 +213,6 @@ LiteralExpImpl& LiteralExpImpl::operator=(const LiteralExpImpl & obj)
 //*********************************
 std::shared_ptr<ecore::EObject> LiteralExpImpl::eContainer() const
 {
-	if(auto wp = m_appliedElement.lock())
-	{
-		return wp;
-	}
-
 	if(auto wp = m_elseOwner.lock())
 	{
 		return wp;
@@ -239,16 +236,16 @@ std::shared_ptr<ecore::EObject> LiteralExpImpl::eContainer() const
 	}
 
 
-	if(auto wp = m_initializedElement.lock())
-	{
-		return wp;
-	}
-
 
 	if(auto wp = m_loopBodyOwner.lock())
 	{
 		return wp;
 	}
+	if(auto wp = m_loopExp.lock())
+	{
+		return wp;
+	}
+
 
 	if(auto wp = m_parentCall.lock())
 	{
@@ -340,7 +337,7 @@ std::shared_ptr<ecore::EClass> LiteralExpImpl::eStaticClass() const
 //*********************************
 // EStructuralFeature Get/Set/IsSet
 //*********************************
-Any LiteralExpImpl::eGet(int featureID, bool resolve, bool coreType) const
+std::shared_ptr<Any> LiteralExpImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
@@ -356,7 +353,7 @@ bool LiteralExpImpl::internalEIsSet(int featureID) const
 	return OclExpressionImpl::internalEIsSet(featureID);
 }
 
-bool LiteralExpImpl::eSet(int featureID, Any newValue)
+bool LiteralExpImpl::eSet(int featureID, std::shared_ptr<Any> newValue)
 {
 	switch(featureID)
 	{
@@ -368,9 +365,9 @@ bool LiteralExpImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any LiteralExpImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+std::shared_ptr<Any> LiteralExpImpl::eInvoke(int operationID, std::shared_ptr<Bag<Any>> arguments)
 {
-	Any result;
+	std::shared_ptr<Any> result;
  
   	switch(operationID)
 	{

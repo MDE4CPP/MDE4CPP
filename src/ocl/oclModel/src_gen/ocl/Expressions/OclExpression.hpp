@@ -11,6 +11,7 @@
 #include <memory>
 #include <string>
 // forward declarations
+template<class T> class Bag; 
 
 
 //*********************************
@@ -45,7 +46,7 @@ namespace ocl::Expressions
 	class LoopExp;
 	class NavigationCallExp;
 	class OperationCallExp;
-	class Variable;
+	class VarDeclarationExp;
 }
 namespace ecore 
 {
@@ -67,16 +68,13 @@ namespace ecore
 namespace ocl::Expressions 
 {
 	
-	class OCL_API OclExpression: virtual public ecore::ETypedElement
+	class OCL_API OclExpression : virtual public ecore::ETypedElement
 	{
 		public:
  			OclExpression(const OclExpression &) {}
 
 		protected:
 			OclExpression(){}
-			//Additional constructors for the containments back reference
-			OclExpression(std::weak_ptr<ocl::Expressions::CallExp> par_appliedElement);
-
 			//Additional constructors for the containments back reference
 			OclExpression(std::weak_ptr<ocl::Expressions::IfExp> par_IfExp, const int reference_id);
 
@@ -86,12 +84,11 @@ namespace ocl::Expressions
 			//Additional constructors for the containments back reference
 
 			//Additional constructors for the containments back reference
-			OclExpression(std::weak_ptr<ocl::Expressions::Variable> par_initializedElement);
 
 			//Additional constructors for the containments back reference
+			OclExpression(std::weak_ptr<ocl::Expressions::LoopExp> par_LoopExp, const int reference_id);
 
 			//Additional constructors for the containments back reference
-			OclExpression(std::weak_ptr<ocl::Expressions::LoopExp> par_loopBodyOwner);
 
 			//Additional constructors for the containments back reference
 			OclExpression(std::weak_ptr<ocl::Expressions::OperationCallExp> par_parentCall);
@@ -121,22 +118,23 @@ namespace ocl::Expressions
 			//*********************************
 			// Reference Getters & Setters
 			//*********************************
-			virtual std::weak_ptr<ocl::Expressions::CallExp> getAppliedElement() const = 0;
-			virtual void setAppliedElement(std::weak_ptr<ocl::Expressions::CallExp>) = 0;
+			virtual std::shared_ptr<ocl::Expressions::CallExp> getAppliedElement() const = 0;
+			virtual void setAppliedElement(std::shared_ptr<ocl::Expressions::CallExp>) = 0;
 			virtual std::weak_ptr<ocl::Expressions::IfExp> getElseOwner() const = 0;
 			virtual void setElseOwner(std::weak_ptr<ocl::Expressions::IfExp>) = 0;
 			virtual std::weak_ptr<ocl::Expressions::CollectionRange> getFirstOwner() const = 0;
 			virtual void setFirstOwner(std::weak_ptr<ocl::Expressions::CollectionRange>) = 0;
 			virtual std::weak_ptr<ocl::Expressions::IfExp> getIfOwner() const = 0;
 			virtual void setIfOwner(std::weak_ptr<ocl::Expressions::IfExp>) = 0;
-			virtual std::weak_ptr<ocl::Expressions::Variable> getInitializedElement() const = 0;
-			virtual void setInitializedElement(std::weak_ptr<ocl::Expressions::Variable>) = 0;
+			virtual std::shared_ptr<Bag<ocl::Expressions::VarDeclarationExp>> getInitializedElement() const = 0;
 			virtual std::shared_ptr<ocl::Evaluations::OclExpEval> getInstance() const = 0;
 			virtual void setInstance(std::shared_ptr<ocl::Evaluations::OclExpEval>) = 0;
 			virtual std::weak_ptr<ocl::Expressions::CollectionRange> getLastOwner() const = 0;
 			virtual void setLastOwner(std::weak_ptr<ocl::Expressions::CollectionRange>) = 0;
 			virtual std::weak_ptr<ocl::Expressions::LoopExp> getLoopBodyOwner() const = 0;
 			virtual void setLoopBodyOwner(std::weak_ptr<ocl::Expressions::LoopExp>) = 0;
+			virtual std::weak_ptr<ocl::Expressions::LoopExp> getLoopExp() const = 0;
+			virtual void setLoopExp(std::weak_ptr<ocl::Expressions::LoopExp>) = 0;
 			virtual std::weak_ptr<ocl::Expressions::OperationCallExp> getParentCall() const = 0;
 			virtual void setParentCall(std::weak_ptr<ocl::Expressions::OperationCallExp>) = 0;
 			virtual std::weak_ptr<ocl::Expressions::NavigationCallExp> getParentNav() const = 0;
@@ -170,14 +168,15 @@ namespace ocl::Expressions
 			//*********************************
 			// Reference Members
 			//*********************************
-			std::weak_ptr<ocl::Expressions::CallExp> m_appliedElement;
+			std::shared_ptr<ocl::Expressions::CallExp> m_appliedElement;
 			std::weak_ptr<ocl::Expressions::IfExp> m_elseOwner;
 			std::weak_ptr<ocl::Expressions::CollectionRange> m_firstOwner;
 			std::weak_ptr<ocl::Expressions::IfExp> m_ifOwner;
-			std::weak_ptr<ocl::Expressions::Variable> m_initializedElement;
+			mutable std::shared_ptr<Bag<ocl::Expressions::VarDeclarationExp>> m_initializedElement;
 			std::shared_ptr<ocl::Evaluations::OclExpEval> m_instance;
 			std::weak_ptr<ocl::Expressions::CollectionRange> m_lastOwner;
 			std::weak_ptr<ocl::Expressions::LoopExp> m_loopBodyOwner;
+			std::weak_ptr<ocl::Expressions::LoopExp> m_loopExp;
 			std::weak_ptr<ocl::Expressions::OperationCallExp> m_parentCall;
 			std::weak_ptr<ocl::Expressions::NavigationCallExp> m_parentNav;
 			std::weak_ptr<ocl::Expressions::IfExp> m_thenOwner;

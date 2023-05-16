@@ -21,38 +21,58 @@ namespace ocl::Expressions
 	class AssociationClassCallExp;
 	class BooleanLiteralExp;
 	class CallExp;
+	class ClassifierContextDeclExp;
 	class CollectionItem;
 	class CollectionLiteralExp;
 	class CollectionLiteralPart;
+	class CollectionLiteralParts;
 	class CollectionRange;
+	class CollectionTypeExp;
+	class ContextDeclarationExp;
+	class DefExp;
 	class EnumLiteralExp;
 	class ExpressionInOcl;
 	class FeatureCallExp;
 	class IfExp;
 	class InfixedExp;
+	class InitOrDerValueExp;
+	class InitOrDerValueListExp;
 	class IntegerLiteralExp;
+	class InvOrDefExp;
 	class InvalidLiteralExp;
 	class IterateExp;
 	class IteratorExp;
 	class LetExp;
 	class LiteralExp;
 	class LoopExp;
+	class MessageArguments;
 	class MessageExp;
 	class NavigationCallExp;
 	class NullLiteralExp;
 	class NumericLiteralExp;
 	class OclExpression;
 	class OperationCallExp;
+	class OperationContextDeclExp;
+	class OperationContextExp;
+	class OperatorExp;
+	class PackageDeclarationExp;
+	class ParentedExp;
+	class PrePostBodyExp;
+	class PrePostBodyListExp;
+	class PrefixedExp;
 	class PrimitiveLiteralExp;
 	class PropertyCallExp;
+	class PropertyContextDeclExp;
 	class RealLiteralExp;
 	class StateExp;
 	class StringLiteralExp;
 	class TupleLiteralExp;
 	class TupleLiteralPart;
+	class TupleTypeExp;
 	class TypeExp;
 	class UnlimitedNaturalExp;
 	class UnspecifiedValueExp;
+	class VarDeclarationExp;
 	class Variable;
 	class VariableExp;}
 
@@ -79,8 +99,8 @@ namespace ocl::Expressions
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getAssociationClassCallExp_Class() const ;
 			
+			virtual std::shared_ptr<ecore::EAttribute> getAssociationClassCallExp_Attribute_referredAssociationClass() const ;
 			
-			virtual std::shared_ptr<ecore::EReference> getAssociationClassCallExp_Attribute_referredAssociationClass() const ;
 			
 			
 			// End Class AssociationClassCallExp
@@ -104,6 +124,17 @@ namespace ocl::Expressions
 			
 			
 			// End Class CallExp
+
+			// Begin Class ClassifierContextDeclExp
+			//Class and Feature Getter
+			virtual std::shared_ptr<ecore::EClass> getClassifierContextDeclExp_Class() const ;
+			
+			virtual std::shared_ptr<ecore::EAttribute> getClassifierContextDeclExp_Attribute_classifierName() const ;
+			
+			virtual std::shared_ptr<ecore::EReference> getClassifierContextDeclExp_Attribute_invOrDevExp() const ;
+			
+			
+			// End Class ClassifierContextDeclExp
 
 			// Begin Class CollectionItem
 			//Class and Feature Getter
@@ -135,6 +166,16 @@ namespace ocl::Expressions
 			
 			// End Class CollectionLiteralPart
 
+			// Begin Class CollectionLiteralParts
+			//Class and Feature Getter
+			virtual std::shared_ptr<ecore::EClass> getCollectionLiteralParts_Class() const ;
+			
+			
+			virtual std::shared_ptr<ecore::EReference> getCollectionLiteralParts_Attribute_literalParts() const ;
+			
+			
+			// End Class CollectionLiteralParts
+
 			// Begin Class CollectionRange
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getCollectionRange_Class() const ;
@@ -146,10 +187,41 @@ namespace ocl::Expressions
 			
 			// End Class CollectionRange
 
+			// Begin Class CollectionTypeExp
+			//Class and Feature Getter
+			virtual std::shared_ptr<ecore::EClass> getCollectionTypeExp_Class() const ;
+			
+			
+			virtual std::shared_ptr<ecore::EReference> getCollectionTypeExp_Attribute_innerType() const ;
+			
+			
+			// End Class CollectionTypeExp
+
+			// Begin Class ContextDeclarationExp
+			//Class and Feature Getter
+			virtual std::shared_ptr<ecore::EClass> getContextDeclarationExp_Class() const ;
+			
+			
+			
+			
+			// End Class ContextDeclarationExp
+
+			// Begin Class DefExp
+			//Class and Feature Getter
+			virtual std::shared_ptr<ecore::EClass> getDefExp_Class() const ;
+			
+			
+			virtual std::shared_ptr<ecore::EReference> getDefExp_Attribute_bodyExp() const ;
+			virtual std::shared_ptr<ecore::EReference> getDefExp_Attribute_frontExp() const ;
+			
+			
+			// End Class DefExp
+
 			// Begin Class EnumLiteralExp
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getEnumLiteralExp_Class() const ;
 			
+			virtual std::shared_ptr<ecore::EAttribute> getEnumLiteralExp_Attribute_referredEnumLiteralStr() const ;
 			
 			virtual std::shared_ptr<ecore::EReference> getEnumLiteralExp_Attribute_referredEnumLiteral() const ;
 			
@@ -201,6 +273,28 @@ namespace ocl::Expressions
 			
 			// End Class InfixedExp
 
+			// Begin Class InitOrDerValueExp
+			//Class and Feature Getter
+			virtual std::shared_ptr<ecore::EClass> getInitOrDerValueExp_Class() const ;
+			
+			virtual std::shared_ptr<ecore::EAttribute> getInitOrDerValueExp_Attribute_kind() const ;
+			
+			virtual std::shared_ptr<ecore::EReference> getInitOrDerValueExp_Attribute_bodyExpression() const ;
+			
+			
+			// End Class InitOrDerValueExp
+
+			// Begin Class InitOrDerValueListExp
+			//Class and Feature Getter
+			virtual std::shared_ptr<ecore::EClass> getInitOrDerValueListExp_Class() const ;
+			
+			
+			virtual std::shared_ptr<ecore::EReference> getInitOrDerValueListExp_Attribute_derExpressionList() const ;
+			virtual std::shared_ptr<ecore::EReference> getInitOrDerValueListExp_Attribute_initExpressionList() const ;
+			
+			
+			// End Class InitOrDerValueListExp
+
 			// Begin Class IntegerLiteralExp
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getIntegerLiteralExp_Class() const ;
@@ -210,6 +304,18 @@ namespace ocl::Expressions
 			
 			
 			// End Class IntegerLiteralExp
+
+			// Begin Class InvOrDefExp
+			//Class and Feature Getter
+			virtual std::shared_ptr<ecore::EClass> getInvOrDefExp_Class() const ;
+			
+			virtual std::shared_ptr<ecore::EAttribute> getInvOrDefExp_Attribute_kind() const ;
+			virtual std::shared_ptr<ecore::EAttribute> getInvOrDefExp_Attribute_name() const ;
+			
+			virtual std::shared_ptr<ecore::EReference> getInvOrDefExp_Attribute_referredExpression() const ;
+			
+			
+			// End Class InvOrDefExp
 
 			// Begin Class InvalidLiteralExp
 			//Class and Feature Getter
@@ -234,6 +340,7 @@ namespace ocl::Expressions
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getIteratorExp_Class() const ;
 			
+			virtual std::shared_ptr<ecore::EAttribute> getIteratorExp_Attribute_sourrundedBy() const ;
 			
 			
 			
@@ -245,7 +352,7 @@ namespace ocl::Expressions
 			
 			
 			virtual std::shared_ptr<ecore::EReference> getLetExp_Attribute_in() const ;
-			virtual std::shared_ptr<ecore::EReference> getLetExp_Attribute_variable() const ;
+			virtual std::shared_ptr<ecore::EReference> getLetExp_Attribute_variables() const ;
 			
 			
 			// End Class LetExp
@@ -263,6 +370,9 @@ namespace ocl::Expressions
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getLoopExp_Class() const ;
 			
+			virtual std::shared_ptr<ecore::EAttribute> getLoopExp_Attribute_isCollectionOperation() const ;
+			virtual std::shared_ptr<ecore::EAttribute> getLoopExp_Attribute_isImplCollectIterator() const ;
+			virtual std::shared_ptr<ecore::EAttribute> getLoopExp_Attribute_iterName() const ;
 			
 			virtual std::shared_ptr<ecore::EReference> getLoopExp_Attribute_body() const ;
 			virtual std::shared_ptr<ecore::EReference> getLoopExp_Attribute_iterator() const ;
@@ -270,14 +380,24 @@ namespace ocl::Expressions
 			
 			// End Class LoopExp
 
+			// Begin Class MessageArguments
+			//Class and Feature Getter
+			virtual std::shared_ptr<ecore::EClass> getMessageArguments_Class() const ;
+			
+			
+			virtual std::shared_ptr<ecore::EReference> getMessageArguments_Attribute_referredOclExpressions() const ;
+			
+			
+			// End Class MessageArguments
+
 			// Begin Class MessageExp
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getMessageExp_Class() const ;
 			
+			virtual std::shared_ptr<ecore::EAttribute> getMessageExp_Attribute_calledOperation() const ;
+			virtual std::shared_ptr<ecore::EAttribute> getMessageExp_Attribute_sentSignal() const ;
 			
 			virtual std::shared_ptr<ecore::EReference> getMessageExp_Attribute_argument() const ;
-			virtual std::shared_ptr<ecore::EReference> getMessageExp_Attribute_calledOperation() const ;
-			virtual std::shared_ptr<ecore::EReference> getMessageExp_Attribute_sentSignal() const ;
 			virtual std::shared_ptr<ecore::EReference> getMessageExp_Attribute_target() const ;
 			
 			
@@ -287,8 +407,8 @@ namespace ocl::Expressions
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getNavigationCallExp_Class() const ;
 			
+			virtual std::shared_ptr<ecore::EAttribute> getNavigationCallExp_Attribute_navigationSource() const ;
 			
-			virtual std::shared_ptr<ecore::EReference> getNavigationCallExp_Attribute_navigationSource() const ;
 			virtual std::shared_ptr<ecore::EReference> getNavigationCallExp_Attribute_qualifier() const ;
 			
 			
@@ -325,6 +445,7 @@ namespace ocl::Expressions
 			virtual std::shared_ptr<ecore::EReference> getOclExpression_Attribute_instance() const ;
 			virtual std::shared_ptr<ecore::EReference> getOclExpression_Attribute_lastOwner() const ;
 			virtual std::shared_ptr<ecore::EReference> getOclExpression_Attribute_loopBodyOwner() const ;
+			virtual std::shared_ptr<ecore::EReference> getOclExpression_Attribute_loopExp() const ;
 			virtual std::shared_ptr<ecore::EReference> getOclExpression_Attribute_parentCall() const ;
 			virtual std::shared_ptr<ecore::EReference> getOclExpression_Attribute_parentNav() const ;
 			virtual std::shared_ptr<ecore::EReference> getOclExpression_Attribute_thenOwner() const ;
@@ -337,12 +458,104 @@ namespace ocl::Expressions
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getOperationCallExp_Class() const ;
 			
+			virtual std::shared_ptr<ecore::EAttribute> getOperationCallExp_Attribute_isRArrow() const ;
+			virtual std::shared_ptr<ecore::EAttribute> getOperationCallExp_Attribute_referredOperation() const ;
 			
 			virtual std::shared_ptr<ecore::EReference> getOperationCallExp_Attribute_argument() const ;
-			virtual std::shared_ptr<ecore::EReference> getOperationCallExp_Attribute_referredOperation() const ;
 			
 			
 			// End Class OperationCallExp
+
+			// Begin Class OperationContextDeclExp
+			//Class and Feature Getter
+			virtual std::shared_ptr<ecore::EClass> getOperationContextDeclExp_Class() const ;
+			
+			
+			virtual std::shared_ptr<ecore::EReference> getOperationContextDeclExp_Attribute_operationContext() const ;
+			virtual std::shared_ptr<ecore::EReference> getOperationContextDeclExp_Attribute_prePostBodyExpressions() const ;
+			
+			
+			// End Class OperationContextDeclExp
+
+			// Begin Class OperationContextExp
+			//Class and Feature Getter
+			virtual std::shared_ptr<ecore::EClass> getOperationContextExp_Class() const ;
+			
+			virtual std::shared_ptr<ecore::EAttribute> getOperationContextExp_Attribute_operationName() const ;
+			
+			virtual std::shared_ptr<ecore::EReference> getOperationContextExp_Attribute_inputParameters() const ;
+			virtual std::shared_ptr<ecore::EReference> getOperationContextExp_Attribute_returnType() const ;
+			
+			
+			// End Class OperationContextExp
+
+			// Begin Class OperatorExp
+			//Class and Feature Getter
+			virtual std::shared_ptr<ecore::EClass> getOperatorExp_Class() const ;
+			
+			virtual std::shared_ptr<ecore::EAttribute> getOperatorExp_Attribute_operator() const ;
+			
+			virtual std::shared_ptr<ecore::EReference> getOperatorExp_Attribute_leftHandOperand() const ;
+			virtual std::shared_ptr<ecore::EReference> getOperatorExp_Attribute_rightHandOperand() const ;
+			
+			
+			// End Class OperatorExp
+
+			// Begin Class PackageDeclarationExp
+			//Class and Feature Getter
+			virtual std::shared_ptr<ecore::EClass> getPackageDeclarationExp_Class() const ;
+			
+			virtual std::shared_ptr<ecore::EAttribute> getPackageDeclarationExp_Attribute_path() const ;
+			
+			virtual std::shared_ptr<ecore::EReference> getPackageDeclarationExp_Attribute_contextDeclarations() const ;
+			
+			
+			// End Class PackageDeclarationExp
+
+			// Begin Class ParentedExp
+			//Class and Feature Getter
+			virtual std::shared_ptr<ecore::EClass> getParentedExp_Class() const ;
+			
+			
+			virtual std::shared_ptr<ecore::EReference> getParentedExp_Attribute_innerExp() const ;
+			
+			
+			// End Class ParentedExp
+
+			// Begin Class PrePostBodyExp
+			//Class and Feature Getter
+			virtual std::shared_ptr<ecore::EClass> getPrePostBodyExp_Class() const ;
+			
+			virtual std::shared_ptr<ecore::EAttribute> getPrePostBodyExp_Attribute_kind() const ;
+			virtual std::shared_ptr<ecore::EAttribute> getPrePostBodyExp_Attribute_name() const ;
+			
+			virtual std::shared_ptr<ecore::EReference> getPrePostBodyExp_Attribute_bodyExpression() const ;
+			
+			
+			// End Class PrePostBodyExp
+
+			// Begin Class PrePostBodyListExp
+			//Class and Feature Getter
+			virtual std::shared_ptr<ecore::EClass> getPrePostBodyListExp_Class() const ;
+			
+			
+			virtual std::shared_ptr<ecore::EReference> getPrePostBodyListExp_Attribute_bodyExpressionList() const ;
+			virtual std::shared_ptr<ecore::EReference> getPrePostBodyListExp_Attribute_postExpressionList() const ;
+			virtual std::shared_ptr<ecore::EReference> getPrePostBodyListExp_Attribute_preExpressionList() const ;
+			
+			
+			// End Class PrePostBodyListExp
+
+			// Begin Class PrefixedExp
+			//Class and Feature Getter
+			virtual std::shared_ptr<ecore::EClass> getPrefixedExp_Class() const ;
+			
+			virtual std::shared_ptr<ecore::EAttribute> getPrefixedExp_Attribute_unarySymbol() const ;
+			
+			virtual std::shared_ptr<ecore::EReference> getPrefixedExp_Attribute_referredExpression() const ;
+			
+			
+			// End Class PrefixedExp
 
 			// Begin Class PrimitiveLiteralExp
 			//Class and Feature Getter
@@ -358,11 +571,23 @@ namespace ocl::Expressions
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getPropertyCallExp_Class() const ;
 			
+			virtual std::shared_ptr<ecore::EAttribute> getPropertyCallExp_Attribute_referredProperty() const ;
 			
-			virtual std::shared_ptr<ecore::EReference> getPropertyCallExp_Attribute_referredProperty() const ;
 			
 			
 			// End Class PropertyCallExp
+
+			// Begin Class PropertyContextDeclExp
+			//Class and Feature Getter
+			virtual std::shared_ptr<ecore::EClass> getPropertyContextDeclExp_Class() const ;
+			
+			virtual std::shared_ptr<ecore::EAttribute> getPropertyContextDeclExp_Attribute_propName() const ;
+			
+			virtual std::shared_ptr<ecore::EReference> getPropertyContextDeclExp_Attribute_initOrDerValues() const ;
+			virtual std::shared_ptr<ecore::EReference> getPropertyContextDeclExp_Attribute_propType() const ;
+			
+			
+			// End Class PropertyContextDeclExp
 
 			// Begin Class RealLiteralExp
 			//Class and Feature Getter
@@ -408,18 +633,30 @@ namespace ocl::Expressions
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getTupleLiteralPart_Class() const ;
 			
+			virtual std::shared_ptr<ecore::EAttribute> getTupleLiteralPart_Attribute_tuplePartName() const ;
+			virtual std::shared_ptr<ecore::EAttribute> getTupleLiteralPart_Attribute_tuplePartType() const ;
 			
-			virtual std::shared_ptr<ecore::EReference> getTupleLiteralPart_Attribute_attribute() const ;
+			virtual std::shared_ptr<ecore::EReference> getTupleLiteralPart_Attribute_assignedOclExpression() const ;
 			
 			
 			// End Class TupleLiteralPart
+
+			// Begin Class TupleTypeExp
+			//Class and Feature Getter
+			virtual std::shared_ptr<ecore::EClass> getTupleTypeExp_Class() const ;
+			
+			
+			virtual std::shared_ptr<ecore::EReference> getTupleTypeExp_Attribute_part() const ;
+			
+			
+			// End Class TupleTypeExp
 
 			// Begin Class TypeExp
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getTypeExp_Class() const ;
 			
+			virtual std::shared_ptr<ecore::EAttribute> getTypeExp_Attribute_referredType() const ;
 			
-			virtual std::shared_ptr<ecore::EReference> getTypeExp_Attribute_referredType() const ;
 			
 			
 			// End Class TypeExp
@@ -443,6 +680,19 @@ namespace ocl::Expressions
 			
 			// End Class UnspecifiedValueExp
 
+			// Begin Class VarDeclarationExp
+			//Class and Feature Getter
+			virtual std::shared_ptr<ecore::EClass> getVarDeclarationExp_Class() const ;
+			
+			virtual std::shared_ptr<ecore::EAttribute> getVarDeclarationExp_Attribute_varName() const ;
+			
+			virtual std::shared_ptr<ecore::EReference> getVarDeclarationExp_Attribute_assignedOclExp() const ;
+			virtual std::shared_ptr<ecore::EReference> getVarDeclarationExp_Attribute_initExpression() const ;
+			virtual std::shared_ptr<ecore::EReference> getVarDeclarationExp_Attribute_varType() const ;
+			
+			
+			// End Class VarDeclarationExp
+
 			// Begin Class Variable
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getVariable_Class() const ;
@@ -465,22 +715,24 @@ namespace ocl::Expressions
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getVariableExp_Class() const ;
 			
+			virtual std::shared_ptr<ecore::EAttribute> getVariableExp_Attribute_referredVariable() const ;
 			
-			virtual std::shared_ptr<ecore::EReference> getVariableExp_Attribute_referredVariable() const ;
 			
 			
 			// End Class VariableExp
 
 			virtual std::shared_ptr<ecore::EEnum> getCollectionKind_Class() const ;
+			virtual std::shared_ptr<ecore::EEnum> getSurroundingType_Class() const ;
+			virtual std::shared_ptr<ecore::EEnum> getPrePostBody_Class() const ;
 			
 			// SubPackages Getters
 			
 
 		private:
-			std::shared_ptr<ecore::EClass> m_associationClassCallExp_Class = nullptr;std::shared_ptr<ecore::EClass> m_booleanLiteralExp_Class = nullptr;std::shared_ptr<ecore::EClass> m_callExp_Class = nullptr;std::shared_ptr<ecore::EClass> m_collectionItem_Class = nullptr;std::shared_ptr<ecore::EClass> m_collectionLiteralExp_Class = nullptr;std::shared_ptr<ecore::EClass> m_collectionLiteralPart_Class = nullptr;std::shared_ptr<ecore::EClass> m_collectionRange_Class = nullptr;std::shared_ptr<ecore::EClass> m_enumLiteralExp_Class = nullptr;std::shared_ptr<ecore::EClass> m_expressionInOcl_Class = nullptr;std::shared_ptr<ecore::EClass> m_featureCallExp_Class = nullptr;std::shared_ptr<ecore::EClass> m_ifExp_Class = nullptr;std::shared_ptr<ecore::EClass> m_infixedExp_Class = nullptr;std::shared_ptr<ecore::EClass> m_integerLiteralExp_Class = nullptr;std::shared_ptr<ecore::EClass> m_invalidLiteralExp_Class = nullptr;std::shared_ptr<ecore::EClass> m_iterateExp_Class = nullptr;std::shared_ptr<ecore::EClass> m_iteratorExp_Class = nullptr;std::shared_ptr<ecore::EClass> m_letExp_Class = nullptr;std::shared_ptr<ecore::EClass> m_literalExp_Class = nullptr;std::shared_ptr<ecore::EClass> m_loopExp_Class = nullptr;std::shared_ptr<ecore::EClass> m_messageExp_Class = nullptr;std::shared_ptr<ecore::EClass> m_navigationCallExp_Class = nullptr;std::shared_ptr<ecore::EClass> m_nullLiteralExp_Class = nullptr;std::shared_ptr<ecore::EClass> m_numericLiteralExp_Class = nullptr;std::shared_ptr<ecore::EClass> m_oclExpression_Class = nullptr;std::shared_ptr<ecore::EClass> m_operationCallExp_Class = nullptr;std::shared_ptr<ecore::EClass> m_primitiveLiteralExp_Class = nullptr;std::shared_ptr<ecore::EClass> m_propertyCallExp_Class = nullptr;std::shared_ptr<ecore::EClass> m_realLiteralExp_Class = nullptr;std::shared_ptr<ecore::EClass> m_stateExp_Class = nullptr;std::shared_ptr<ecore::EClass> m_stringLiteralExp_Class = nullptr;std::shared_ptr<ecore::EClass> m_tupleLiteralExp_Class = nullptr;std::shared_ptr<ecore::EClass> m_tupleLiteralPart_Class = nullptr;std::shared_ptr<ecore::EClass> m_typeExp_Class = nullptr;std::shared_ptr<ecore::EClass> m_unlimitedNaturalExp_Class = nullptr;std::shared_ptr<ecore::EClass> m_unspecifiedValueExp_Class = nullptr;std::shared_ptr<ecore::EClass> m_variable_Class = nullptr;std::shared_ptr<ecore::EClass> m_variableExp_Class = nullptr;
-			std::shared_ptr<ecore::EEnum> m_collectionKind_Class = nullptr;
-			std::shared_ptr<ecore::EAttribute> m_booleanLiteralExp_Attribute_booleanSymbol = nullptr;std::shared_ptr<ecore::EAttribute> m_integerLiteralExp_Attribute_integerSymbol = nullptr;std::shared_ptr<ecore::EAttribute> m_featureCallExp_Attribute_isPre = nullptr;std::shared_ptr<ecore::EAttribute> m_collectionLiteralExp_Attribute_kind = nullptr;std::shared_ptr<ecore::EAttribute> m_realLiteralExp_Attribute_realSymbol = nullptr;std::shared_ptr<ecore::EAttribute> m_stringLiteralExp_Attribute_stringSymbol = nullptr;std::shared_ptr<ecore::EAttribute> m_primitiveLiteralExp_Attribute_symbol = nullptr;std::shared_ptr<ecore::EAttribute> m_unlimitedNaturalExp_Attribute_unlimitedNaturalSymbol = nullptr;
-			std::shared_ptr<ecore::EReference> m_oclExpression_Attribute_appliedElement = nullptr;std::shared_ptr<ecore::EReference> m_operationCallExp_Attribute_argument = nullptr;std::shared_ptr<ecore::EReference> m_messageExp_Attribute_argument = nullptr;std::shared_ptr<ecore::EReference> m_tupleLiteralPart_Attribute_attribute = nullptr;std::shared_ptr<ecore::EReference> m_variable_Attribute_baseExp = nullptr;std::shared_ptr<ecore::EReference> m_loopExp_Attribute_body = nullptr;std::shared_ptr<ecore::EReference> m_expressionInOcl_Attribute_bodyExpression = nullptr;std::shared_ptr<ecore::EReference> m_messageExp_Attribute_calledOperation = nullptr;std::shared_ptr<ecore::EReference> m_ifExp_Attribute_condition = nullptr;std::shared_ptr<ecore::EReference> m_expressionInOcl_Attribute_contextVariable = nullptr;std::shared_ptr<ecore::EReference> m_ifExp_Attribute_elseExpression = nullptr;std::shared_ptr<ecore::EReference> m_oclExpression_Attribute_elseOwner = nullptr;std::shared_ptr<ecore::EReference> m_collectionRange_Attribute_first = nullptr;std::shared_ptr<ecore::EReference> m_oclExpression_Attribute_firstOwner = nullptr;std::shared_ptr<ecore::EReference> m_oclExpression_Attribute_ifOwner = nullptr;std::shared_ptr<ecore::EReference> m_letExp_Attribute_in = nullptr;std::shared_ptr<ecore::EReference> m_variable_Attribute_initExpression = nullptr;std::shared_ptr<ecore::EReference> m_oclExpression_Attribute_initializedElement = nullptr;std::shared_ptr<ecore::EReference> m_oclExpression_Attribute_instance = nullptr;std::shared_ptr<ecore::EReference> m_collectionItem_Attribute_item = nullptr;std::shared_ptr<ecore::EReference> m_loopExp_Attribute_iterator = nullptr;std::shared_ptr<ecore::EReference> m_collectionRange_Attribute_last = nullptr;std::shared_ptr<ecore::EReference> m_oclExpression_Attribute_lastOwner = nullptr;std::shared_ptr<ecore::EReference> m_oclExpression_Attribute_loopBodyOwner = nullptr;std::shared_ptr<ecore::EReference> m_variable_Attribute_loopExp = nullptr;std::shared_ptr<ecore::EReference> m_navigationCallExp_Attribute_navigationSource = nullptr;std::shared_ptr<ecore::EReference> m_expressionInOcl_Attribute_parameterVariable = nullptr;std::shared_ptr<ecore::EReference> m_oclExpression_Attribute_parentCall = nullptr;std::shared_ptr<ecore::EReference> m_oclExpression_Attribute_parentNav = nullptr;std::shared_ptr<ecore::EReference> m_collectionLiteralExp_Attribute_part = nullptr;std::shared_ptr<ecore::EReference> m_tupleLiteralExp_Attribute_part = nullptr;std::shared_ptr<ecore::EReference> m_navigationCallExp_Attribute_qualifier = nullptr;std::shared_ptr<ecore::EReference> m_associationClassCallExp_Attribute_referredAssociationClass = nullptr;std::shared_ptr<ecore::EReference> m_enumLiteralExp_Attribute_referredEnumLiteral = nullptr;std::shared_ptr<ecore::EReference> m_operationCallExp_Attribute_referredOperation = nullptr;std::shared_ptr<ecore::EReference> m_propertyCallExp_Attribute_referredProperty = nullptr;std::shared_ptr<ecore::EReference> m_stateExp_Attribute_referredState = nullptr;std::shared_ptr<ecore::EReference> m_typeExp_Attribute_referredType = nullptr;std::shared_ptr<ecore::EReference> m_variableExp_Attribute_referredVariable = nullptr;std::shared_ptr<ecore::EReference> m_variable_Attribute_referringExp = nullptr;std::shared_ptr<ecore::EReference> m_variable_Attribute_representedParameter = nullptr;std::shared_ptr<ecore::EReference> m_iterateExp_Attribute_result = nullptr;std::shared_ptr<ecore::EReference> m_variable_Attribute_resultOwner = nullptr;std::shared_ptr<ecore::EReference> m_expressionInOcl_Attribute_resultVariable = nullptr;std::shared_ptr<ecore::EReference> m_variable_Attribute_selfOwner = nullptr;std::shared_ptr<ecore::EReference> m_messageExp_Attribute_sentSignal = nullptr;std::shared_ptr<ecore::EReference> m_callExp_Attribute_source = nullptr;std::shared_ptr<ecore::EReference> m_infixedExp_Attribute_source = nullptr;std::shared_ptr<ecore::EReference> m_messageExp_Attribute_target = nullptr;std::shared_ptr<ecore::EReference> m_ifExp_Attribute_thenExpression = nullptr;std::shared_ptr<ecore::EReference> m_oclExpression_Attribute_thenOwner = nullptr;std::shared_ptr<ecore::EReference> m_oclExpression_Attribute_topExpression = nullptr;std::shared_ptr<ecore::EReference> m_variable_Attribute_value = nullptr;std::shared_ptr<ecore::EReference> m_variable_Attribute_varOwner = nullptr;std::shared_ptr<ecore::EReference> m_letExp_Attribute_variable = nullptr;
+			std::shared_ptr<ecore::EClass> m_associationClassCallExp_Class = nullptr;std::shared_ptr<ecore::EClass> m_booleanLiteralExp_Class = nullptr;std::shared_ptr<ecore::EClass> m_callExp_Class = nullptr;std::shared_ptr<ecore::EClass> m_classifierContextDeclExp_Class = nullptr;std::shared_ptr<ecore::EClass> m_collectionItem_Class = nullptr;std::shared_ptr<ecore::EClass> m_collectionLiteralExp_Class = nullptr;std::shared_ptr<ecore::EClass> m_collectionLiteralPart_Class = nullptr;std::shared_ptr<ecore::EClass> m_collectionLiteralParts_Class = nullptr;std::shared_ptr<ecore::EClass> m_collectionRange_Class = nullptr;std::shared_ptr<ecore::EClass> m_collectionTypeExp_Class = nullptr;std::shared_ptr<ecore::EClass> m_contextDeclarationExp_Class = nullptr;std::shared_ptr<ecore::EClass> m_defExp_Class = nullptr;std::shared_ptr<ecore::EClass> m_enumLiteralExp_Class = nullptr;std::shared_ptr<ecore::EClass> m_expressionInOcl_Class = nullptr;std::shared_ptr<ecore::EClass> m_featureCallExp_Class = nullptr;std::shared_ptr<ecore::EClass> m_ifExp_Class = nullptr;std::shared_ptr<ecore::EClass> m_infixedExp_Class = nullptr;std::shared_ptr<ecore::EClass> m_initOrDerValueExp_Class = nullptr;std::shared_ptr<ecore::EClass> m_initOrDerValueListExp_Class = nullptr;std::shared_ptr<ecore::EClass> m_integerLiteralExp_Class = nullptr;std::shared_ptr<ecore::EClass> m_invOrDefExp_Class = nullptr;std::shared_ptr<ecore::EClass> m_invalidLiteralExp_Class = nullptr;std::shared_ptr<ecore::EClass> m_iterateExp_Class = nullptr;std::shared_ptr<ecore::EClass> m_iteratorExp_Class = nullptr;std::shared_ptr<ecore::EClass> m_letExp_Class = nullptr;std::shared_ptr<ecore::EClass> m_literalExp_Class = nullptr;std::shared_ptr<ecore::EClass> m_loopExp_Class = nullptr;std::shared_ptr<ecore::EClass> m_messageArguments_Class = nullptr;std::shared_ptr<ecore::EClass> m_messageExp_Class = nullptr;std::shared_ptr<ecore::EClass> m_navigationCallExp_Class = nullptr;std::shared_ptr<ecore::EClass> m_nullLiteralExp_Class = nullptr;std::shared_ptr<ecore::EClass> m_numericLiteralExp_Class = nullptr;std::shared_ptr<ecore::EClass> m_oclExpression_Class = nullptr;std::shared_ptr<ecore::EClass> m_operationCallExp_Class = nullptr;std::shared_ptr<ecore::EClass> m_operationContextDeclExp_Class = nullptr;std::shared_ptr<ecore::EClass> m_operationContextExp_Class = nullptr;std::shared_ptr<ecore::EClass> m_operatorExp_Class = nullptr;std::shared_ptr<ecore::EClass> m_packageDeclarationExp_Class = nullptr;std::shared_ptr<ecore::EClass> m_parentedExp_Class = nullptr;std::shared_ptr<ecore::EClass> m_prePostBodyExp_Class = nullptr;std::shared_ptr<ecore::EClass> m_prePostBodyListExp_Class = nullptr;std::shared_ptr<ecore::EClass> m_prefixedExp_Class = nullptr;std::shared_ptr<ecore::EClass> m_primitiveLiteralExp_Class = nullptr;std::shared_ptr<ecore::EClass> m_propertyCallExp_Class = nullptr;std::shared_ptr<ecore::EClass> m_propertyContextDeclExp_Class = nullptr;std::shared_ptr<ecore::EClass> m_realLiteralExp_Class = nullptr;std::shared_ptr<ecore::EClass> m_stateExp_Class = nullptr;std::shared_ptr<ecore::EClass> m_stringLiteralExp_Class = nullptr;std::shared_ptr<ecore::EClass> m_tupleLiteralExp_Class = nullptr;std::shared_ptr<ecore::EClass> m_tupleLiteralPart_Class = nullptr;std::shared_ptr<ecore::EClass> m_tupleTypeExp_Class = nullptr;std::shared_ptr<ecore::EClass> m_typeExp_Class = nullptr;std::shared_ptr<ecore::EClass> m_unlimitedNaturalExp_Class = nullptr;std::shared_ptr<ecore::EClass> m_unspecifiedValueExp_Class = nullptr;std::shared_ptr<ecore::EClass> m_varDeclarationExp_Class = nullptr;std::shared_ptr<ecore::EClass> m_variable_Class = nullptr;std::shared_ptr<ecore::EClass> m_variableExp_Class = nullptr;
+			std::shared_ptr<ecore::EEnum> m_collectionKind_Class = nullptr;std::shared_ptr<ecore::EEnum> m_prePostBody_Class = nullptr;std::shared_ptr<ecore::EEnum> m_surroundingType_Class = nullptr;
+			std::shared_ptr<ecore::EAttribute> m_booleanLiteralExp_Attribute_booleanSymbol = nullptr;std::shared_ptr<ecore::EAttribute> m_messageExp_Attribute_calledOperation = nullptr;std::shared_ptr<ecore::EAttribute> m_classifierContextDeclExp_Attribute_classifierName = nullptr;std::shared_ptr<ecore::EAttribute> m_integerLiteralExp_Attribute_integerSymbol = nullptr;std::shared_ptr<ecore::EAttribute> m_loopExp_Attribute_isCollectionOperation = nullptr;std::shared_ptr<ecore::EAttribute> m_loopExp_Attribute_isImplCollectIterator = nullptr;std::shared_ptr<ecore::EAttribute> m_featureCallExp_Attribute_isPre = nullptr;std::shared_ptr<ecore::EAttribute> m_operationCallExp_Attribute_isRArrow = nullptr;std::shared_ptr<ecore::EAttribute> m_loopExp_Attribute_iterName = nullptr;std::shared_ptr<ecore::EAttribute> m_collectionLiteralExp_Attribute_kind = nullptr;std::shared_ptr<ecore::EAttribute> m_prePostBodyExp_Attribute_kind = nullptr;std::shared_ptr<ecore::EAttribute> m_initOrDerValueExp_Attribute_kind = nullptr;std::shared_ptr<ecore::EAttribute> m_invOrDefExp_Attribute_kind = nullptr;std::shared_ptr<ecore::EAttribute> m_prePostBodyExp_Attribute_name = nullptr;std::shared_ptr<ecore::EAttribute> m_invOrDefExp_Attribute_name = nullptr;std::shared_ptr<ecore::EAttribute> m_navigationCallExp_Attribute_navigationSource = nullptr;std::shared_ptr<ecore::EAttribute> m_operationContextExp_Attribute_operationName = nullptr;std::shared_ptr<ecore::EAttribute> m_operatorExp_Attribute_operator = nullptr;std::shared_ptr<ecore::EAttribute> m_packageDeclarationExp_Attribute_path = nullptr;std::shared_ptr<ecore::EAttribute> m_propertyContextDeclExp_Attribute_propName = nullptr;std::shared_ptr<ecore::EAttribute> m_realLiteralExp_Attribute_realSymbol = nullptr;std::shared_ptr<ecore::EAttribute> m_associationClassCallExp_Attribute_referredAssociationClass = nullptr;std::shared_ptr<ecore::EAttribute> m_enumLiteralExp_Attribute_referredEnumLiteralStr = nullptr;std::shared_ptr<ecore::EAttribute> m_operationCallExp_Attribute_referredOperation = nullptr;std::shared_ptr<ecore::EAttribute> m_propertyCallExp_Attribute_referredProperty = nullptr;std::shared_ptr<ecore::EAttribute> m_typeExp_Attribute_referredType = nullptr;std::shared_ptr<ecore::EAttribute> m_variableExp_Attribute_referredVariable = nullptr;std::shared_ptr<ecore::EAttribute> m_messageExp_Attribute_sentSignal = nullptr;std::shared_ptr<ecore::EAttribute> m_iteratorExp_Attribute_sourrundedBy = nullptr;std::shared_ptr<ecore::EAttribute> m_stringLiteralExp_Attribute_stringSymbol = nullptr;std::shared_ptr<ecore::EAttribute> m_primitiveLiteralExp_Attribute_symbol = nullptr;std::shared_ptr<ecore::EAttribute> m_tupleLiteralPart_Attribute_tuplePartName = nullptr;std::shared_ptr<ecore::EAttribute> m_tupleLiteralPart_Attribute_tuplePartType = nullptr;std::shared_ptr<ecore::EAttribute> m_prefixedExp_Attribute_unarySymbol = nullptr;std::shared_ptr<ecore::EAttribute> m_unlimitedNaturalExp_Attribute_unlimitedNaturalSymbol = nullptr;std::shared_ptr<ecore::EAttribute> m_varDeclarationExp_Attribute_varName = nullptr;
+			std::shared_ptr<ecore::EReference> m_oclExpression_Attribute_appliedElement = nullptr;std::shared_ptr<ecore::EReference> m_operationCallExp_Attribute_argument = nullptr;std::shared_ptr<ecore::EReference> m_messageExp_Attribute_argument = nullptr;std::shared_ptr<ecore::EReference> m_varDeclarationExp_Attribute_assignedOclExp = nullptr;std::shared_ptr<ecore::EReference> m_tupleLiteralPart_Attribute_assignedOclExpression = nullptr;std::shared_ptr<ecore::EReference> m_variable_Attribute_baseExp = nullptr;std::shared_ptr<ecore::EReference> m_loopExp_Attribute_body = nullptr;std::shared_ptr<ecore::EReference> m_defExp_Attribute_bodyExp = nullptr;std::shared_ptr<ecore::EReference> m_expressionInOcl_Attribute_bodyExpression = nullptr;std::shared_ptr<ecore::EReference> m_prePostBodyExp_Attribute_bodyExpression = nullptr;std::shared_ptr<ecore::EReference> m_initOrDerValueExp_Attribute_bodyExpression = nullptr;std::shared_ptr<ecore::EReference> m_prePostBodyListExp_Attribute_bodyExpressionList = nullptr;std::shared_ptr<ecore::EReference> m_ifExp_Attribute_condition = nullptr;std::shared_ptr<ecore::EReference> m_packageDeclarationExp_Attribute_contextDeclarations = nullptr;std::shared_ptr<ecore::EReference> m_expressionInOcl_Attribute_contextVariable = nullptr;std::shared_ptr<ecore::EReference> m_initOrDerValueListExp_Attribute_derExpressionList = nullptr;std::shared_ptr<ecore::EReference> m_ifExp_Attribute_elseExpression = nullptr;std::shared_ptr<ecore::EReference> m_oclExpression_Attribute_elseOwner = nullptr;std::shared_ptr<ecore::EReference> m_collectionRange_Attribute_first = nullptr;std::shared_ptr<ecore::EReference> m_oclExpression_Attribute_firstOwner = nullptr;std::shared_ptr<ecore::EReference> m_defExp_Attribute_frontExp = nullptr;std::shared_ptr<ecore::EReference> m_oclExpression_Attribute_ifOwner = nullptr;std::shared_ptr<ecore::EReference> m_letExp_Attribute_in = nullptr;std::shared_ptr<ecore::EReference> m_varDeclarationExp_Attribute_initExpression = nullptr;std::shared_ptr<ecore::EReference> m_variable_Attribute_initExpression = nullptr;std::shared_ptr<ecore::EReference> m_initOrDerValueListExp_Attribute_initExpressionList = nullptr;std::shared_ptr<ecore::EReference> m_propertyContextDeclExp_Attribute_initOrDerValues = nullptr;std::shared_ptr<ecore::EReference> m_oclExpression_Attribute_initializedElement = nullptr;std::shared_ptr<ecore::EReference> m_parentedExp_Attribute_innerExp = nullptr;std::shared_ptr<ecore::EReference> m_collectionTypeExp_Attribute_innerType = nullptr;std::shared_ptr<ecore::EReference> m_operationContextExp_Attribute_inputParameters = nullptr;std::shared_ptr<ecore::EReference> m_oclExpression_Attribute_instance = nullptr;std::shared_ptr<ecore::EReference> m_classifierContextDeclExp_Attribute_invOrDevExp = nullptr;std::shared_ptr<ecore::EReference> m_collectionItem_Attribute_item = nullptr;std::shared_ptr<ecore::EReference> m_loopExp_Attribute_iterator = nullptr;std::shared_ptr<ecore::EReference> m_collectionRange_Attribute_last = nullptr;std::shared_ptr<ecore::EReference> m_oclExpression_Attribute_lastOwner = nullptr;std::shared_ptr<ecore::EReference> m_operatorExp_Attribute_leftHandOperand = nullptr;std::shared_ptr<ecore::EReference> m_collectionLiteralParts_Attribute_literalParts = nullptr;std::shared_ptr<ecore::EReference> m_oclExpression_Attribute_loopBodyOwner = nullptr;std::shared_ptr<ecore::EReference> m_oclExpression_Attribute_loopExp = nullptr;std::shared_ptr<ecore::EReference> m_variable_Attribute_loopExp = nullptr;std::shared_ptr<ecore::EReference> m_operationContextDeclExp_Attribute_operationContext = nullptr;std::shared_ptr<ecore::EReference> m_expressionInOcl_Attribute_parameterVariable = nullptr;std::shared_ptr<ecore::EReference> m_oclExpression_Attribute_parentCall = nullptr;std::shared_ptr<ecore::EReference> m_oclExpression_Attribute_parentNav = nullptr;std::shared_ptr<ecore::EReference> m_tupleLiteralExp_Attribute_part = nullptr;std::shared_ptr<ecore::EReference> m_collectionLiteralExp_Attribute_part = nullptr;std::shared_ptr<ecore::EReference> m_tupleTypeExp_Attribute_part = nullptr;std::shared_ptr<ecore::EReference> m_prePostBodyListExp_Attribute_postExpressionList = nullptr;std::shared_ptr<ecore::EReference> m_prePostBodyListExp_Attribute_preExpressionList = nullptr;std::shared_ptr<ecore::EReference> m_operationContextDeclExp_Attribute_prePostBodyExpressions = nullptr;std::shared_ptr<ecore::EReference> m_propertyContextDeclExp_Attribute_propType = nullptr;std::shared_ptr<ecore::EReference> m_navigationCallExp_Attribute_qualifier = nullptr;std::shared_ptr<ecore::EReference> m_enumLiteralExp_Attribute_referredEnumLiteral = nullptr;std::shared_ptr<ecore::EReference> m_invOrDefExp_Attribute_referredExpression = nullptr;std::shared_ptr<ecore::EReference> m_prefixedExp_Attribute_referredExpression = nullptr;std::shared_ptr<ecore::EReference> m_messageArguments_Attribute_referredOclExpressions = nullptr;std::shared_ptr<ecore::EReference> m_stateExp_Attribute_referredState = nullptr;std::shared_ptr<ecore::EReference> m_variable_Attribute_referringExp = nullptr;std::shared_ptr<ecore::EReference> m_variable_Attribute_representedParameter = nullptr;std::shared_ptr<ecore::EReference> m_iterateExp_Attribute_result = nullptr;std::shared_ptr<ecore::EReference> m_variable_Attribute_resultOwner = nullptr;std::shared_ptr<ecore::EReference> m_expressionInOcl_Attribute_resultVariable = nullptr;std::shared_ptr<ecore::EReference> m_operationContextExp_Attribute_returnType = nullptr;std::shared_ptr<ecore::EReference> m_operatorExp_Attribute_rightHandOperand = nullptr;std::shared_ptr<ecore::EReference> m_variable_Attribute_selfOwner = nullptr;std::shared_ptr<ecore::EReference> m_callExp_Attribute_source = nullptr;std::shared_ptr<ecore::EReference> m_infixedExp_Attribute_source = nullptr;std::shared_ptr<ecore::EReference> m_messageExp_Attribute_target = nullptr;std::shared_ptr<ecore::EReference> m_ifExp_Attribute_thenExpression = nullptr;std::shared_ptr<ecore::EReference> m_oclExpression_Attribute_thenOwner = nullptr;std::shared_ptr<ecore::EReference> m_oclExpression_Attribute_topExpression = nullptr;std::shared_ptr<ecore::EReference> m_variable_Attribute_value = nullptr;std::shared_ptr<ecore::EReference> m_variable_Attribute_varOwner = nullptr;std::shared_ptr<ecore::EReference> m_varDeclarationExp_Attribute_varType = nullptr;std::shared_ptr<ecore::EReference> m_letExp_Attribute_variables = nullptr;
 			
 
 			friend class ExpressionsPackage;
@@ -500,38 +752,58 @@ namespace ocl::Expressions
 			void createAssociationClassCallExpContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory);
 			void createBooleanLiteralExpContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory);
 			void createCallExpContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory);
+			void createClassifierContextDeclExpContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory);
 			void createCollectionItemContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory);
 			void createCollectionLiteralExpContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory);
 			void createCollectionLiteralPartContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory);
+			void createCollectionLiteralPartsContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory);
 			void createCollectionRangeContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory);
+			void createCollectionTypeExpContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory);
+			void createContextDeclarationExpContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory);
+			void createDefExpContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory);
 			void createEnumLiteralExpContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory);
 			void createExpressionInOclContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory);
 			void createFeatureCallExpContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory);
 			void createIfExpContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory);
 			void createInfixedExpContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory);
+			void createInitOrDerValueExpContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory);
+			void createInitOrDerValueListExpContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory);
 			void createIntegerLiteralExpContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory);
+			void createInvOrDefExpContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory);
 			void createInvalidLiteralExpContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory);
 			void createIterateExpContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory);
 			void createIteratorExpContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory);
 			void createLetExpContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory);
 			void createLiteralExpContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory);
 			void createLoopExpContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory);
+			void createMessageArgumentsContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory);
 			void createMessageExpContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory);
 			void createNavigationCallExpContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory);
 			void createNullLiteralExpContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory);
 			void createNumericLiteralExpContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory);
 			void createOclExpressionContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory);
 			void createOperationCallExpContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory);
+			void createOperationContextDeclExpContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory);
+			void createOperationContextExpContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory);
+			void createOperatorExpContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory);
+			void createPackageDeclarationExpContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory);
+			void createParentedExpContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory);
+			void createPrePostBodyExpContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory);
+			void createPrePostBodyListExpContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory);
+			void createPrefixedExpContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory);
 			void createPrimitiveLiteralExpContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory);
 			void createPropertyCallExpContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory);
+			void createPropertyContextDeclExpContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory);
 			void createRealLiteralExpContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory);
 			void createStateExpContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory);
 			void createStringLiteralExpContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory);
 			void createTupleLiteralExpContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory);
 			void createTupleLiteralPartContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory);
+			void createTupleTypeExpContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory);
 			void createTypeExpContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory);
 			void createUnlimitedNaturalExpContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory);
 			void createUnspecifiedValueExpContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory);
+			void createVarDeclarationExpContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory);
 			void createVariableContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory);
 			void createVariableExpContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory);
 			void createPackageEDataTypes(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory);
@@ -539,38 +811,58 @@ namespace ocl::Expressions
 			void initializeAssociationClassCallExpContent();
 			void initializeBooleanLiteralExpContent();
 			void initializeCallExpContent();
+			void initializeClassifierContextDeclExpContent();
 			void initializeCollectionItemContent();
 			void initializeCollectionLiteralExpContent();
 			void initializeCollectionLiteralPartContent();
+			void initializeCollectionLiteralPartsContent();
 			void initializeCollectionRangeContent();
+			void initializeCollectionTypeExpContent();
+			void initializeContextDeclarationExpContent();
+			void initializeDefExpContent();
 			void initializeEnumLiteralExpContent();
 			void initializeExpressionInOclContent();
 			void initializeFeatureCallExpContent();
 			void initializeIfExpContent();
 			void initializeInfixedExpContent();
+			void initializeInitOrDerValueExpContent();
+			void initializeInitOrDerValueListExpContent();
 			void initializeIntegerLiteralExpContent();
+			void initializeInvOrDefExpContent();
 			void initializeInvalidLiteralExpContent();
 			void initializeIterateExpContent();
 			void initializeIteratorExpContent();
 			void initializeLetExpContent();
 			void initializeLiteralExpContent();
 			void initializeLoopExpContent();
+			void initializeMessageArgumentsContent();
 			void initializeMessageExpContent();
 			void initializeNavigationCallExpContent();
 			void initializeNullLiteralExpContent();
 			void initializeNumericLiteralExpContent();
 			void initializeOclExpressionContent();
 			void initializeOperationCallExpContent();
+			void initializeOperationContextDeclExpContent();
+			void initializeOperationContextExpContent();
+			void initializeOperatorExpContent();
+			void initializePackageDeclarationExpContent();
+			void initializeParentedExpContent();
+			void initializePrePostBodyExpContent();
+			void initializePrePostBodyListExpContent();
+			void initializePrefixedExpContent();
 			void initializePrimitiveLiteralExpContent();
 			void initializePropertyCallExpContent();
+			void initializePropertyContextDeclExpContent();
 			void initializeRealLiteralExpContent();
 			void initializeStateExpContent();
 			void initializeStringLiteralExpContent();
 			void initializeTupleLiteralExpContent();
 			void initializeTupleLiteralPartContent();
+			void initializeTupleTypeExpContent();
 			void initializeTypeExpContent();
 			void initializeUnlimitedNaturalExpContent();
 			void initializeUnspecifiedValueExpContent();
+			void initializeVarDeclarationExpContent();
 			void initializeVariableContent();
 			void initializeVariableExpContent();
 			void initializePackageEDataTypes();

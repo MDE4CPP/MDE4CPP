@@ -1,9 +1,13 @@
 
 #include "ocl/Expressions/impl/CollectionLiteralExpImpl.hpp"
 #ifdef NDEBUG
-	#define DEBUG_MESSAGE(a) /**/
+	#define DEBUG_INFO(a)		/**/
+	#define DEBUG_WARNING(a)	/**/
+	#define DEBUG_ERROR(a)		/**/
 #else
-	#define DEBUG_MESSAGE(a) a
+	#define DEBUG_INFO(a) 		std::cout<<"[\e[0;32mInfo\e[0m]:\t\t"<<__PRETTY_FUNCTION__<<"\n\t\t  -- Message: "<<a<<std::endl;
+	#define DEBUG_WARNING(a) 	std::cout<<"[\e[0;33mWarning\e[0m]:\t"<<__PRETTY_FUNCTION__<<"\n\t\t  -- Message: "<<a<<std::endl;
+	#define DEBUG_ERROR(a)		std::cout<<"[\e[0;31mError\e[0m]:\t"<<__PRETTY_FUNCTION__<<"\n\t\t  -- Message: "<<a<<std::endl;
 #endif
 
 #ifdef ACTIVITY_DEBUG_ON
@@ -21,8 +25,8 @@
 #include "abstractDataTypes/Bag.hpp"
 
 
-#include "abstractDataTypes/AnyEObject.hpp"
-#include "abstractDataTypes/AnyEObjectBag.hpp"
+#include "ecore/EcoreAny.hpp"
+#include "ecore/EcoreContainerAny.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
@@ -34,9 +38,9 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
+#include "ocl/Evaluations/EvaluationsFactory.hpp"
 #include "ocl/Expressions/ExpressionsFactory.hpp"
 #include "ecore/ecoreFactory.hpp"
-#include "ocl/Evaluations/EvaluationsFactory.hpp"
 #include "ocl/Expressions/CallExp.hpp"
 #include "ocl/Expressions/CollectionLiteralPart.hpp"
 #include "ocl/Expressions/CollectionRange.hpp"
@@ -50,7 +54,7 @@
 #include "ocl/Expressions/NavigationCallExp.hpp"
 #include "ocl/Evaluations/OclExpEval.hpp"
 #include "ocl/Expressions/OperationCallExp.hpp"
-#include "ocl/Expressions/Variable.hpp"
+#include "ocl/Expressions/VarDeclarationExp.hpp"
 //Factories and Package includes
 #include "ocl/oclPackage.hpp"
 #include "ocl/Evaluations/EvaluationsPackage.hpp"
@@ -74,13 +78,6 @@ CollectionLiteralExpImpl::~CollectionLiteralExpImpl()
 #ifdef SHOW_DELETION
 	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete CollectionLiteralExp "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
 #endif
-}
-
-//Additional constructor for the containments back reference
-CollectionLiteralExpImpl::CollectionLiteralExpImpl(std::weak_ptr<ocl::Expressions::CallExp> par_appliedElement)
-:CollectionLiteralExpImpl()
-{
-	m_appliedElement = par_appliedElement;
 }
 
 //Additional constructor for the containments back reference
@@ -123,20 +120,25 @@ CollectionLiteralExpImpl::CollectionLiteralExpImpl(std::weak_ptr<ocl::Expression
 }
 
 
-//Additional constructor for the containments back reference
-CollectionLiteralExpImpl::CollectionLiteralExpImpl(std::weak_ptr<ocl::Expressions::Variable> par_initializedElement)
-:CollectionLiteralExpImpl()
-{
-	m_initializedElement = par_initializedElement;
-}
-
 
 //Additional constructor for the containments back reference
-CollectionLiteralExpImpl::CollectionLiteralExpImpl(std::weak_ptr<ocl::Expressions::LoopExp> par_loopBodyOwner)
+CollectionLiteralExpImpl::CollectionLiteralExpImpl(std::weak_ptr<ocl::Expressions::LoopExp> par_LoopExp, const int reference_id)
 :CollectionLiteralExpImpl()
 {
-	m_loopBodyOwner = par_loopBodyOwner;
+	switch(reference_id)
+	{	
+	case ocl::Expressions::ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_LOOPBODYOWNER:
+		m_loopBodyOwner = par_LoopExp;
+		 return;
+	case ocl::Expressions::ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_LOOPEXP:
+		m_loopExp = par_LoopExp;
+		 return;
+	default:
+	std::cerr << __PRETTY_FUNCTION__ <<" Reference not found in class with the given ID" << std::endl;
+	}
+   
 }
+
 
 //Additional constructor for the containments back reference
 CollectionLiteralExpImpl::CollectionLiteralExpImpl(std::weak_ptr<ocl::Expressions::OperationCallExp> par_parentCall)
@@ -204,7 +206,7 @@ CollectionLiteralExpImpl& CollectionLiteralExpImpl::operator=(const CollectionLi
 	}
 	else
 	{
-		DEBUG_MESSAGE(std::cout << "Warning: container is nullptr part."<< std::endl;)
+		DEBUG_WARNING("container is nullptr for part.")
 	}
 	
 	return *this;
@@ -260,11 +262,6 @@ std::shared_ptr<Bag<ocl::Expressions::CollectionLiteralPart>> CollectionLiteralE
 //*********************************
 std::shared_ptr<ecore::EObject> CollectionLiteralExpImpl::eContainer() const
 {
-	if(auto wp = m_appliedElement.lock())
-	{
-		return wp;
-	}
-
 	if(auto wp = m_elseOwner.lock())
 	{
 		return wp;
@@ -288,16 +285,16 @@ std::shared_ptr<ecore::EObject> CollectionLiteralExpImpl::eContainer() const
 	}
 
 
-	if(auto wp = m_initializedElement.lock())
-	{
-		return wp;
-	}
-
 
 	if(auto wp = m_loopBodyOwner.lock())
 	{
 		return wp;
 	}
+	if(auto wp = m_loopExp.lock())
+	{
+		return wp;
+	}
+
 
 	if(auto wp = m_parentCall.lock())
 	{
@@ -488,14 +485,14 @@ std::shared_ptr<ecore::EClass> CollectionLiteralExpImpl::eStaticClass() const
 //*********************************
 // EStructuralFeature Get/Set/IsSet
 //*********************************
-Any CollectionLiteralExpImpl::eGet(int featureID, bool resolve, bool coreType) const
+std::shared_ptr<Any> CollectionLiteralExpImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 		case ocl::Expressions::ExpressionsPackage::COLLECTIONLITERALEXP_ATTRIBUTE_KIND:
-			return eAny(getKind(),ocl::Expressions::ExpressionsPackage::COLLECTIONKIND_CLASS,false); //1522
+			return eAny(getKind(),ocl::Expressions::ExpressionsPackage::COLLECTIONKIND_CLASS,false); //1223
 		case ocl::Expressions::ExpressionsPackage::COLLECTIONLITERALEXP_ATTRIBUTE_PART:
-			return eAnyBag(getPart(),ocl::Expressions::ExpressionsPackage::COLLECTIONLITERALPART_CLASS); //1523
+			return eEcoreContainerAny(getPart(),ocl::Expressions::ExpressionsPackage::COLLECTIONLITERALPART_CLASS); //1224
 	}
 	return LiteralExpImpl::eGet(featureID, resolve, coreType);
 }
@@ -505,60 +502,75 @@ bool CollectionLiteralExpImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case ocl::Expressions::ExpressionsPackage::COLLECTIONLITERALEXP_ATTRIBUTE_KIND:
-			return m_kind != ocl::Expressions::CollectionKind::COLLECTION;; //1522
+			return m_kind != ocl::Expressions::CollectionKind::COLLECTION;; //1223
 		case ocl::Expressions::ExpressionsPackage::COLLECTIONLITERALEXP_ATTRIBUTE_PART:
-			return getPart() != nullptr; //1523
+			return getPart() != nullptr; //1224
 	}
 	return LiteralExpImpl::internalEIsSet(featureID);
 }
 
-bool CollectionLiteralExpImpl::eSet(int featureID, Any newValue)
+bool CollectionLiteralExpImpl::eSet(int featureID, std::shared_ptr<Any> newValue)
 {
 	switch(featureID)
 	{
 		case ocl::Expressions::ExpressionsPackage::COLLECTIONLITERALEXP_ATTRIBUTE_KIND:
 		{
-			// CAST Any to ocl::Expressions::CollectionKind
-			ocl::Expressions::CollectionKind _kind = newValue->get<ocl::Expressions::CollectionKind>();
-			setKind(_kind); //1522
-			return true;
+			try
+			{
+				ocl::Expressions::CollectionKind _kind = newValue->get<ocl::Expressions::CollectionKind>();
+				setKind(_kind); //1223
+			}
+			catch(...)
+			{
+				DEBUG_ERROR("Invalid type stored in 'Any' for feature 'kind'. Failed to set feature!")
+				return false;
+			}
+		return true;
 		}
 		case ocl::Expressions::ExpressionsPackage::COLLECTIONLITERALEXP_ATTRIBUTE_PART:
 		{
-			// CAST Any to Bag<ocl::Expressions::CollectionLiteralPart>
-			if((newValue->isContainer()) && (ocl::Expressions::ExpressionsPackage::COLLECTIONLITERALPART_CLASS ==newValue->getTypeId()))
-			{ 
+			std::shared_ptr<ecore::EcoreContainerAny> ecoreContainerAny = std::dynamic_pointer_cast<ecore::EcoreContainerAny>(newValue);
+			if(ecoreContainerAny)
+			{
 				try
 				{
-					std::shared_ptr<Bag<ocl::Expressions::CollectionLiteralPart>> partList= newValue->get<std::shared_ptr<Bag<ocl::Expressions::CollectionLiteralPart>>>();
-					std::shared_ptr<Bag<ocl::Expressions::CollectionLiteralPart>> _part=getPart();
-					for(const std::shared_ptr<ocl::Expressions::CollectionLiteralPart> indexPart: *_part)
+					std::shared_ptr<Bag<ecore::EObject>> eObjectList = ecoreContainerAny->getAsEObjectContainer();
+	
+					if(eObjectList)
 					{
-						if (partList->find(indexPart) == -1)
+						std::shared_ptr<Bag<ocl::Expressions::CollectionLiteralPart>> _part = getPart();
+	
+						for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
 						{
-							_part->erase(indexPart);
-						}
-					}
-
-					for(const std::shared_ptr<ocl::Expressions::CollectionLiteralPart> indexPart: *partList)
-					{
-						if (_part->find(indexPart) == -1)
-						{
-							_part->add(indexPart);
+							std::shared_ptr<ocl::Expressions::CollectionLiteralPart> valueToAdd = std::dynamic_pointer_cast<ocl::Expressions::CollectionLiteralPart>(anEObject);
+	
+							if (valueToAdd)
+							{
+								if(_part->find(valueToAdd) == -1)
+								{
+									_part->add(valueToAdd);
+								}
+								//else, valueToAdd is already present so it won't be added again
+							}
+							else
+							{
+								throw "Invalid argument";
+							}
 						}
 					}
 				}
 				catch(...)
 				{
-					DEBUG_MESSAGE(std::cout << "invalid Type to set of eAttributes."<< std::endl;)
+					DEBUG_ERROR("Invalid type stored in 'ecore::ecoreContainerAny' for feature 'part'. Failed to set feature!")
 					return false;
 				}
 			}
 			else
 			{
+				DEBUG_ERROR("Invalid instance of 'ecore::ecoreContainerAny' for feature 'part'. Failed to set feature!")
 				return false;
 			}
-			return true;
+		return true;
 		}
 	}
 
@@ -568,9 +580,9 @@ bool CollectionLiteralExpImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any CollectionLiteralExpImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+std::shared_ptr<Any> CollectionLiteralExpImpl::eInvoke(int operationID, std::shared_ptr<Bag<Any>> arguments)
 {
-	Any result;
+	std::shared_ptr<Any> result;
  
   	switch(operationID)
 	{

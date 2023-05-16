@@ -45,7 +45,7 @@ namespace ocl::Expressions
 	class LoopExp;
 	class NavigationCallExp;
 	class OperationCallExp;
-	class Variable;
+	class VarDeclarationExp;
 }
 namespace ecore 
 {
@@ -67,7 +67,7 @@ namespace ecore
 namespace ocl::Expressions 
 {
 	
-	class OCL_API VariableExp: virtual public OclExpression
+	class OCL_API VariableExp : virtual public OclExpression
 	{
 		public:
  			VariableExp(const VariableExp &) {}
@@ -88,12 +88,12 @@ namespace ocl::Expressions
 			//*********************************
 			// Attribute Getters & Setters
 			//*********************************
+			virtual std::string getReferredVariable() const = 0;
+			virtual void setReferredVariable (std::string _referredVariable)= 0;
 
 			//*********************************
 			// Reference Getters & Setters
 			//*********************************
-			virtual std::shared_ptr<ocl::Expressions::Variable> getReferredVariable() const = 0;
-			virtual void setReferredVariable(std::shared_ptr<ocl::Expressions::Variable>) = 0;
 
 			//*********************************
 			// Union Reference Getters
@@ -115,11 +115,11 @@ namespace ocl::Expressions
 			//*********************************
 			// Attribute Members
 			//*********************************
+			std::string m_referredVariable= "";
 			
 			//*********************************
 			// Reference Members
 			//*********************************
-			std::shared_ptr<ocl::Expressions::Variable> m_referredVariable;
 	};
 }
 #endif /* end of include guard: OCL_EXPRESSIONS_VARIABLEEXP_HPP */

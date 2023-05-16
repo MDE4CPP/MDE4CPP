@@ -41,21 +41,12 @@ namespace ocl::Expressions
 {
 	class OclExpression;
 }
-namespace fUML::Semantics::Loci 
+namespace ecore 
 {
-	class Locus;
-}
-namespace fUML::Semantics::SimpleClassifiers 
-{
-	class StringValue;
-}
-namespace fUML::Semantics::Values 
-{
-	class Value;
-}
-namespace uml 
-{
-	class ValueSpecification;
+	class EAnnotation;
+	class EClassifier;
+	class EGenericType;
+	class EObject;
 }
 
 // namespace macro header include
@@ -71,7 +62,7 @@ namespace uml
 namespace ocl::Evaluations 
 {
 	
-	class OCL_API LoopExpEval: virtual public PropertyCallExpEval
+	class OCL_API LoopExpEval : virtual public PropertyCallExpEval
 	{
 		public:
  			LoopExpEval(const LoopExpEval &) {}
@@ -92,12 +83,12 @@ namespace ocl::Evaluations
 			//*********************************
 			// Attribute Getters & Setters
 			//*********************************
+			virtual std::shared_ptr<Bag<std::string>> getIterators() const = 0;
 
 			//*********************************
 			// Reference Getters & Setters
 			//*********************************
 			virtual std::shared_ptr<Bag<ocl::Evaluations::OclExpEval>> getBodyEvals() const = 0;
-			virtual std::shared_ptr<Bag<fUML::Semantics::SimpleClassifiers::StringValue>> getIterators() const = 0;
 
 			//*********************************
 			// Union Reference Getters
@@ -119,12 +110,12 @@ namespace ocl::Evaluations
 			//*********************************
 			// Attribute Members
 			//*********************************
+			mutable std::shared_ptr<Bag<std::string>> m_iterators;
 			
 			//*********************************
 			// Reference Members
 			//*********************************
 			mutable std::shared_ptr<Bag<ocl::Evaluations::OclExpEval>> m_bodyEvals;
-			mutable std::shared_ptr<Bag<fUML::Semantics::SimpleClassifiers::StringValue>> m_iterators;
 	};
 }
 #endif /* end of include guard: OCL_EVALUATIONS_LOOPEXPEVAL_HPP */

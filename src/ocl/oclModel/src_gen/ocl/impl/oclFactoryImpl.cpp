@@ -9,6 +9,17 @@
 
 using namespace ocl;
 
+std::shared_ptr<oclFactory> oclFactory::eInstance()
+{
+	static std::shared_ptr<oclFactory> instance;
+	if(!instance)
+	{
+		//create a new Factoryimplementation
+		instance.reset(oclFactoryImpl::create());
+	}	
+	return instance;
+}
+
 //*********************************
 // Constructor / Destructor
 //*********************************

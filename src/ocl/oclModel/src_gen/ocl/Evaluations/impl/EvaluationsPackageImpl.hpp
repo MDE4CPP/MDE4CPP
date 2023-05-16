@@ -38,6 +38,7 @@ namespace ocl::Evaluations
 	class LiteralExpEval;
 	class LoopExpEval;
 	class ModelPropertyCallExpEval;
+	class NameValueBinding;
 	class NavigationCallExpEval;
 	class NumericLiteralExpEval;
 	class OclExpEval;
@@ -78,8 +79,8 @@ namespace ocl::Evaluations
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getAssociationClassCallExpEval_Class() const ;
 			
+			virtual std::shared_ptr<ecore::EAttribute> getAssociationClassCallExpEval_Attribute_referredAssociationClass() const ;
 			
-			virtual std::shared_ptr<ecore::EReference> getAssociationClassCallExpEval_Attribute_referredAssociationClass() const ;
 			
 			
 			// End Class AssociationClassCallExpEval
@@ -88,8 +89,8 @@ namespace ocl::Evaluations
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getAssociationEndCallExpEval_Class() const ;
 			
+			virtual std::shared_ptr<ecore::EAttribute> getAssociationEndCallExpEval_Attribute_referredAssociationEnd() const ;
 			
-			virtual std::shared_ptr<ecore::EReference> getAssociationEndCallExpEval_Attribute_referredAssociationEnd() const ;
 			
 			
 			// End Class AssociationEndCallExpEval
@@ -98,8 +99,8 @@ namespace ocl::Evaluations
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getAttributeCallExpEval_Class() const ;
 			
+			virtual std::shared_ptr<ecore::EAttribute> getAttributeCallExpEval_Attribute_referredAttribute() const ;
 			
-			virtual std::shared_ptr<ecore::EReference> getAttributeCallExpEval_Attribute_referredAttribute() const ;
 			
 			
 			// End Class AttributeCallExpEval
@@ -172,7 +173,7 @@ namespace ocl::Evaluations
 			
 			virtual std::shared_ptr<ecore::EOperation> getEvalEnvironment_Operation_add_NameValueBinding() const ;
 			virtual std::shared_ptr<ecore::EOperation> getEvalEnvironment_Operation_addAll_NameValueBinding() const ;
-			virtual std::shared_ptr<ecore::EOperation> getEvalEnvironment_Operation_find_String() const ;
+			virtual std::shared_ptr<ecore::EOperation> getEvalEnvironment_Operation_find_EString() const ;
 			virtual std::shared_ptr<ecore::EOperation> getEvalEnvironment_Operation_getValueOf_EString() const ;
 			virtual std::shared_ptr<ecore::EOperation> getEvalEnvironment_Operation_replace_NameValueBinding() const ;
 			
@@ -242,10 +243,10 @@ namespace ocl::Evaluations
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getLetExpEval_Class() const ;
 			
+			virtual std::shared_ptr<ecore::EAttribute> getLetExpEval_Attribute_variable() const ;
 			
 			virtual std::shared_ptr<ecore::EReference> getLetExpEval_Attribute_in() const ;
 			virtual std::shared_ptr<ecore::EReference> getLetExpEval_Attribute_initExpression() const ;
-			virtual std::shared_ptr<ecore::EReference> getLetExpEval_Attribute_variable() const ;
 			
 			
 			// End Class LetExpEval
@@ -263,9 +264,9 @@ namespace ocl::Evaluations
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getLoopExpEval_Class() const ;
 			
+			virtual std::shared_ptr<ecore::EAttribute> getLoopExpEval_Attribute_iterators() const ;
 			
 			virtual std::shared_ptr<ecore::EReference> getLoopExpEval_Attribute_bodyEvals() const ;
-			virtual std::shared_ptr<ecore::EReference> getLoopExpEval_Attribute_iterators() const ;
 			
 			
 			// End Class LoopExpEval
@@ -280,12 +281,23 @@ namespace ocl::Evaluations
 			
 			// End Class ModelPropertyCallExpEval
 
+			// Begin Class NameValueBinding
+			//Class and Feature Getter
+			virtual std::shared_ptr<ecore::EClass> getNameValueBinding_Class() const ;
+			
+			virtual std::shared_ptr<ecore::EAttribute> getNameValueBinding_Attribute_name() const ;
+			
+			virtual std::shared_ptr<ecore::EReference> getNameValueBinding_Attribute_value() const ;
+			
+			
+			// End Class NameValueBinding
+
 			// Begin Class NavigationCallExpEval
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getNavigationCallExpEval_Class() const ;
 			
+			virtual std::shared_ptr<ecore::EAttribute> getNavigationCallExpEval_Attribute_navigationSource() const ;
 			
-			virtual std::shared_ptr<ecore::EReference> getNavigationCallExpEval_Attribute_navigationSource() const ;
 			virtual std::shared_ptr<ecore::EReference> getNavigationCallExpEval_Attribute_qualifiers() const ;
 			
 			
@@ -341,9 +353,9 @@ namespace ocl::Evaluations
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getOperationCallExpEval_Class() const ;
 			
+			virtual std::shared_ptr<ecore::EAttribute> getOperationCallExpEval_Attribute_referredOperation() const ;
 			
 			virtual std::shared_ptr<ecore::EReference> getOperationCallExpEval_Attribute_arguments() const ;
-			virtual std::shared_ptr<ecore::EReference> getOperationCallExpEval_Attribute_referredOperation() const ;
 			
 			
 			// End Class OperationCallExpEval
@@ -426,9 +438,9 @@ namespace ocl::Evaluations
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getVariableDeclEval_Class() const ;
 			
+			virtual std::shared_ptr<ecore::EAttribute> getVariableDeclEval_Attribute_name() const ;
 			
 			virtual std::shared_ptr<ecore::EReference> getVariableDeclEval_Attribute_initExp() const ;
-			virtual std::shared_ptr<ecore::EReference> getVariableDeclEval_Attribute_name() const ;
 			
 			
 			// End Class VariableDeclEval
@@ -437,8 +449,8 @@ namespace ocl::Evaluations
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getVariableExpEval_Class() const ;
 			
+			virtual std::shared_ptr<ecore::EAttribute> getVariableExpEval_Attribute_referredVariable() const ;
 			
-			virtual std::shared_ptr<ecore::EReference> getVariableExpEval_Attribute_referredVariable() const ;
 			
 			
 			// End Class VariableExpEval
@@ -448,11 +460,11 @@ namespace ocl::Evaluations
 			
 
 		private:
-			std::shared_ptr<ecore::EClass> m_associationClassCallExpEval_Class = nullptr;std::shared_ptr<ecore::EClass> m_associationEndCallExpEval_Class = nullptr;std::shared_ptr<ecore::EClass> m_attributeCallExpEval_Class = nullptr;std::shared_ptr<ecore::EClass> m_booleanLiteralExpEval_Class = nullptr;std::shared_ptr<ecore::EClass> m_collectionItemEval_Class = nullptr;std::shared_ptr<ecore::EClass> m_collectionLiteralExpEval_Class = nullptr;std::shared_ptr<ecore::EClass> m_collectionLiteralPartEval_Class = nullptr;std::shared_ptr<ecore::EClass> m_collectionRangeEval_Class = nullptr;std::shared_ptr<ecore::EClass> m_enumLiteralExpEval_Class = nullptr;std::shared_ptr<ecore::EClass> m_evalEnvironment_Class = nullptr;std::shared_ptr<ecore::EClass> m_evalNameSpace_Class = nullptr;std::shared_ptr<ecore::EClass> m_expressionInOclEval_Class = nullptr;std::shared_ptr<ecore::EClass> m_ifExpEval_Class = nullptr;std::shared_ptr<ecore::EClass> m_integerLiteralExpEval_Class = nullptr;std::shared_ptr<ecore::EClass> m_iterateExpEval_Class = nullptr;std::shared_ptr<ecore::EClass> m_iteratorExpEval_Class = nullptr;std::shared_ptr<ecore::EClass> m_letExpEval_Class = nullptr;std::shared_ptr<ecore::EClass> m_literalExpEval_Class = nullptr;std::shared_ptr<ecore::EClass> m_loopExpEval_Class = nullptr;std::shared_ptr<ecore::EClass> m_modelPropertyCallExpEval_Class = nullptr;std::shared_ptr<ecore::EClass> m_navigationCallExpEval_Class = nullptr;std::shared_ptr<ecore::EClass> m_numericLiteralExpEval_Class = nullptr;std::shared_ptr<ecore::EClass> m_oclExpEval_Class = nullptr;std::shared_ptr<ecore::EClass> m_oclMessageArgEval_Class = nullptr;std::shared_ptr<ecore::EClass> m_oclMessageExpEval_Class = nullptr;std::shared_ptr<ecore::EClass> m_operationCallExpEval_Class = nullptr;std::shared_ptr<ecore::EClass> m_primitiveLiteralExpEval_Class = nullptr;std::shared_ptr<ecore::EClass> m_propertyCallExpEval_Class = nullptr;std::shared_ptr<ecore::EClass> m_realLiteralExpEval_Class = nullptr;std::shared_ptr<ecore::EClass> m_stringLiteralExpEval_Class = nullptr;std::shared_ptr<ecore::EClass> m_tupleLiteralExpEval_Class = nullptr;std::shared_ptr<ecore::EClass> m_tupleLiteralExpPartEval_Class = nullptr;std::shared_ptr<ecore::EClass> m_unlimitedNaturalLiteralExpEval_Class = nullptr;std::shared_ptr<ecore::EClass> m_unspecifiedValueExpEval_Class = nullptr;std::shared_ptr<ecore::EClass> m_variableDeclEval_Class = nullptr;std::shared_ptr<ecore::EClass> m_variableExpEval_Class = nullptr;
+			std::shared_ptr<ecore::EClass> m_associationClassCallExpEval_Class = nullptr;std::shared_ptr<ecore::EClass> m_associationEndCallExpEval_Class = nullptr;std::shared_ptr<ecore::EClass> m_attributeCallExpEval_Class = nullptr;std::shared_ptr<ecore::EClass> m_booleanLiteralExpEval_Class = nullptr;std::shared_ptr<ecore::EClass> m_collectionItemEval_Class = nullptr;std::shared_ptr<ecore::EClass> m_collectionLiteralExpEval_Class = nullptr;std::shared_ptr<ecore::EClass> m_collectionLiteralPartEval_Class = nullptr;std::shared_ptr<ecore::EClass> m_collectionRangeEval_Class = nullptr;std::shared_ptr<ecore::EClass> m_enumLiteralExpEval_Class = nullptr;std::shared_ptr<ecore::EClass> m_evalEnvironment_Class = nullptr;std::shared_ptr<ecore::EClass> m_evalNameSpace_Class = nullptr;std::shared_ptr<ecore::EClass> m_expressionInOclEval_Class = nullptr;std::shared_ptr<ecore::EClass> m_ifExpEval_Class = nullptr;std::shared_ptr<ecore::EClass> m_integerLiteralExpEval_Class = nullptr;std::shared_ptr<ecore::EClass> m_iterateExpEval_Class = nullptr;std::shared_ptr<ecore::EClass> m_iteratorExpEval_Class = nullptr;std::shared_ptr<ecore::EClass> m_letExpEval_Class = nullptr;std::shared_ptr<ecore::EClass> m_literalExpEval_Class = nullptr;std::shared_ptr<ecore::EClass> m_loopExpEval_Class = nullptr;std::shared_ptr<ecore::EClass> m_modelPropertyCallExpEval_Class = nullptr;std::shared_ptr<ecore::EClass> m_nameValueBinding_Class = nullptr;std::shared_ptr<ecore::EClass> m_navigationCallExpEval_Class = nullptr;std::shared_ptr<ecore::EClass> m_numericLiteralExpEval_Class = nullptr;std::shared_ptr<ecore::EClass> m_oclExpEval_Class = nullptr;std::shared_ptr<ecore::EClass> m_oclMessageArgEval_Class = nullptr;std::shared_ptr<ecore::EClass> m_oclMessageExpEval_Class = nullptr;std::shared_ptr<ecore::EClass> m_operationCallExpEval_Class = nullptr;std::shared_ptr<ecore::EClass> m_primitiveLiteralExpEval_Class = nullptr;std::shared_ptr<ecore::EClass> m_propertyCallExpEval_Class = nullptr;std::shared_ptr<ecore::EClass> m_realLiteralExpEval_Class = nullptr;std::shared_ptr<ecore::EClass> m_stringLiteralExpEval_Class = nullptr;std::shared_ptr<ecore::EClass> m_tupleLiteralExpEval_Class = nullptr;std::shared_ptr<ecore::EClass> m_tupleLiteralExpPartEval_Class = nullptr;std::shared_ptr<ecore::EClass> m_unlimitedNaturalLiteralExpEval_Class = nullptr;std::shared_ptr<ecore::EClass> m_unspecifiedValueExpEval_Class = nullptr;std::shared_ptr<ecore::EClass> m_variableDeclEval_Class = nullptr;std::shared_ptr<ecore::EClass> m_variableExpEval_Class = nullptr;
 			
-			std::shared_ptr<ecore::EAttribute> m_oclMessageExpEval_Attribute_name = nullptr;
-			std::shared_ptr<ecore::EReference> m_oclMessageExpEval_Attribute_arguments = nullptr;std::shared_ptr<ecore::EReference> m_operationCallExpEval_Attribute_arguments = nullptr;std::shared_ptr<ecore::EReference> m_oclExpEval_Attribute_beforeEnvironment = nullptr;std::shared_ptr<ecore::EReference> m_evalEnvironment_Attribute_bindings = nullptr;std::shared_ptr<ecore::EReference> m_loopExpEval_Attribute_bodyEvals = nullptr;std::shared_ptr<ecore::EReference> m_ifExpEval_Attribute_condition = nullptr;std::shared_ptr<ecore::EReference> m_expressionInOclEval_Attribute_context = nullptr;std::shared_ptr<ecore::EReference> m_collectionLiteralPartEval_Attribute_element = nullptr;std::shared_ptr<ecore::EReference> m_ifExpEval_Attribute_elseExpression = nullptr;std::shared_ptr<ecore::EReference> m_expressionInOclEval_Attribute_environment = nullptr;std::shared_ptr<ecore::EReference> m_oclExpEval_Attribute_environment = nullptr;std::shared_ptr<ecore::EReference> m_oclMessageArgEval_Attribute_expression = nullptr;std::shared_ptr<ecore::EReference> m_collectionRangeEval_Attribute_first = nullptr;std::shared_ptr<ecore::EReference> m_letExpEval_Attribute_in = nullptr;std::shared_ptr<ecore::EReference> m_variableDeclEval_Attribute_initExp = nullptr;std::shared_ptr<ecore::EReference> m_letExpEval_Attribute_initExpression = nullptr;std::shared_ptr<ecore::EReference> m_collectionItemEval_Attribute_item = nullptr;std::shared_ptr<ecore::EReference> m_loopExpEval_Attribute_iterators = nullptr;std::shared_ptr<ecore::EReference> m_collectionRangeEval_Attribute_last = nullptr;std::shared_ptr<ecore::EReference> m_oclExpEval_Attribute_model = nullptr;std::shared_ptr<ecore::EReference> m_variableDeclEval_Attribute_name = nullptr;std::shared_ptr<ecore::EReference> m_navigationCallExpEval_Attribute_navigationSource = nullptr;std::shared_ptr<ecore::EReference> m_collectionLiteralExpEval_Attribute_parts = nullptr;std::shared_ptr<ecore::EReference> m_navigationCallExpEval_Attribute_qualifiers = nullptr;std::shared_ptr<ecore::EReference> m_associationClassCallExpEval_Attribute_referredAssociationClass = nullptr;std::shared_ptr<ecore::EReference> m_associationEndCallExpEval_Attribute_referredAssociationEnd = nullptr;std::shared_ptr<ecore::EReference> m_attributeCallExpEval_Attribute_referredAttribute = nullptr;std::shared_ptr<ecore::EReference> m_operationCallExpEval_Attribute_referredOperation = nullptr;std::shared_ptr<ecore::EReference> m_variableExpEval_Attribute_referredVariable = nullptr;std::shared_ptr<ecore::EReference> m_iterateExpEval_Attribute_result = nullptr;std::shared_ptr<ecore::EReference> m_oclExpEval_Attribute_resultValue = nullptr;std::shared_ptr<ecore::EReference> m_propertyCallExpEval_Attribute_source = nullptr;std::shared_ptr<ecore::EReference> m_oclMessageExpEval_Attribute_target = nullptr;std::shared_ptr<ecore::EReference> m_ifExpEval_Attribute_thenExpression = nullptr;std::shared_ptr<ecore::EReference> m_tupleLiteralExpEval_Attribute_tuplePart = nullptr;std::shared_ptr<ecore::EReference> m_oclMessageArgEval_Attribute_unspecified = nullptr;std::shared_ptr<ecore::EReference> m_oclMessageArgEval_Attribute_variable = nullptr;std::shared_ptr<ecore::EReference> m_letExpEval_Attribute_variable = nullptr;
-			std::shared_ptr<ecore::EOperation> m_evalEnvironment_Operation_add_NameValueBinding = nullptr;std::shared_ptr<ecore::EOperation> m_evalEnvironment_Operation_addAll_NameValueBinding = nullptr;std::shared_ptr<ecore::EOperation> m_modelPropertyCallExpEval_Operation_atPre = nullptr;std::shared_ptr<ecore::EOperation> m_evalEnvironment_Operation_find_String = nullptr;std::shared_ptr<ecore::EOperation> m_evalEnvironment_Operation_getValueOf_EString = nullptr;std::shared_ptr<ecore::EOperation> m_evalEnvironment_Operation_replace_NameValueBinding = nullptr;
+			std::shared_ptr<ecore::EAttribute> m_loopExpEval_Attribute_iterators = nullptr;std::shared_ptr<ecore::EAttribute> m_nameValueBinding_Attribute_name = nullptr;std::shared_ptr<ecore::EAttribute> m_oclMessageExpEval_Attribute_name = nullptr;std::shared_ptr<ecore::EAttribute> m_variableDeclEval_Attribute_name = nullptr;std::shared_ptr<ecore::EAttribute> m_navigationCallExpEval_Attribute_navigationSource = nullptr;std::shared_ptr<ecore::EAttribute> m_associationClassCallExpEval_Attribute_referredAssociationClass = nullptr;std::shared_ptr<ecore::EAttribute> m_associationEndCallExpEval_Attribute_referredAssociationEnd = nullptr;std::shared_ptr<ecore::EAttribute> m_attributeCallExpEval_Attribute_referredAttribute = nullptr;std::shared_ptr<ecore::EAttribute> m_operationCallExpEval_Attribute_referredOperation = nullptr;std::shared_ptr<ecore::EAttribute> m_variableExpEval_Attribute_referredVariable = nullptr;std::shared_ptr<ecore::EAttribute> m_letExpEval_Attribute_variable = nullptr;
+			std::shared_ptr<ecore::EReference> m_oclMessageExpEval_Attribute_arguments = nullptr;std::shared_ptr<ecore::EReference> m_operationCallExpEval_Attribute_arguments = nullptr;std::shared_ptr<ecore::EReference> m_oclExpEval_Attribute_beforeEnvironment = nullptr;std::shared_ptr<ecore::EReference> m_evalEnvironment_Attribute_bindings = nullptr;std::shared_ptr<ecore::EReference> m_loopExpEval_Attribute_bodyEvals = nullptr;std::shared_ptr<ecore::EReference> m_ifExpEval_Attribute_condition = nullptr;std::shared_ptr<ecore::EReference> m_expressionInOclEval_Attribute_context = nullptr;std::shared_ptr<ecore::EReference> m_collectionLiteralPartEval_Attribute_element = nullptr;std::shared_ptr<ecore::EReference> m_ifExpEval_Attribute_elseExpression = nullptr;std::shared_ptr<ecore::EReference> m_expressionInOclEval_Attribute_environment = nullptr;std::shared_ptr<ecore::EReference> m_oclExpEval_Attribute_environment = nullptr;std::shared_ptr<ecore::EReference> m_oclMessageArgEval_Attribute_expression = nullptr;std::shared_ptr<ecore::EReference> m_collectionRangeEval_Attribute_first = nullptr;std::shared_ptr<ecore::EReference> m_letExpEval_Attribute_in = nullptr;std::shared_ptr<ecore::EReference> m_variableDeclEval_Attribute_initExp = nullptr;std::shared_ptr<ecore::EReference> m_letExpEval_Attribute_initExpression = nullptr;std::shared_ptr<ecore::EReference> m_collectionItemEval_Attribute_item = nullptr;std::shared_ptr<ecore::EReference> m_collectionRangeEval_Attribute_last = nullptr;std::shared_ptr<ecore::EReference> m_oclExpEval_Attribute_model = nullptr;std::shared_ptr<ecore::EReference> m_collectionLiteralExpEval_Attribute_parts = nullptr;std::shared_ptr<ecore::EReference> m_navigationCallExpEval_Attribute_qualifiers = nullptr;std::shared_ptr<ecore::EReference> m_iterateExpEval_Attribute_result = nullptr;std::shared_ptr<ecore::EReference> m_oclExpEval_Attribute_resultValue = nullptr;std::shared_ptr<ecore::EReference> m_propertyCallExpEval_Attribute_source = nullptr;std::shared_ptr<ecore::EReference> m_oclMessageExpEval_Attribute_target = nullptr;std::shared_ptr<ecore::EReference> m_ifExpEval_Attribute_thenExpression = nullptr;std::shared_ptr<ecore::EReference> m_tupleLiteralExpEval_Attribute_tuplePart = nullptr;std::shared_ptr<ecore::EReference> m_oclMessageArgEval_Attribute_unspecified = nullptr;std::shared_ptr<ecore::EReference> m_nameValueBinding_Attribute_value = nullptr;std::shared_ptr<ecore::EReference> m_oclMessageArgEval_Attribute_variable = nullptr;
+			std::shared_ptr<ecore::EOperation> m_evalEnvironment_Operation_add_NameValueBinding = nullptr;std::shared_ptr<ecore::EOperation> m_evalEnvironment_Operation_addAll_NameValueBinding = nullptr;std::shared_ptr<ecore::EOperation> m_modelPropertyCallExpEval_Operation_atPre = nullptr;std::shared_ptr<ecore::EOperation> m_evalEnvironment_Operation_find_EString = nullptr;std::shared_ptr<ecore::EOperation> m_evalEnvironment_Operation_getValueOf_EString = nullptr;std::shared_ptr<ecore::EOperation> m_evalEnvironment_Operation_replace_NameValueBinding = nullptr;
 
 			friend class EvaluationsPackage;
 
@@ -488,6 +500,7 @@ namespace ocl::Evaluations
 			void createLiteralExpEvalContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory);
 			void createLoopExpEvalContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory);
 			void createModelPropertyCallExpEvalContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory);
+			void createNameValueBindingContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory);
 			void createNavigationCallExpEvalContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory);
 			void createNumericLiteralExpEvalContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory);
 			void createOclExpEvalContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory);
@@ -526,6 +539,7 @@ namespace ocl::Evaluations
 			void initializeLiteralExpEvalContent();
 			void initializeLoopExpEvalContent();
 			void initializeModelPropertyCallExpEvalContent();
+			void initializeNameValueBindingContent();
 			void initializeNavigationCallExpEvalContent();
 			void initializeNumericLiteralExpEvalContent();
 			void initializeOclExpEvalContent();

@@ -4,36 +4,44 @@
 
 #include "abstractDataTypes/SubsetUnion.hpp"
 //metametamodel classes
-#include "ecore/EParameter.hpp"
-#include "ecore/EEnumLiteral.hpp"
-#include "ecore/EEnum.hpp"
-#include "ecore/EOperation.hpp"
-#include "ecore/EDataType.hpp"
-#include "ecore/EPackage.hpp"
-#include "ecore/EAnnotation.hpp"
-#include "ecore/EClass.hpp"
-#include "ecore/EReference.hpp"
-#include "ecore/EStringToStringMapEntry.hpp"
-#include "ecore/EAttribute.hpp"
 #include "ecore/EGenericType.hpp"
+#include "ecore/EDataType.hpp"
+#include "ecore/EOperation.hpp"
+#include "ecore/EEnum.hpp"
+#include "ecore/EAttribute.hpp"
+#include "ecore/EParameter.hpp"
+#include "ecore/EPackage.hpp"
+#include "ecore/EReference.hpp"
+#include "ecore/EClass.hpp"
+#include "ecore/EEnumLiteral.hpp"
 
 //metamodel factory
 #include "ocl/oclFactory.hpp"
 
 //depending model packages
 #include "ecore/ecorePackage.hpp"
-#include "fUML/fUMLPackage.hpp"
-#include "types/typesPackage.hpp"
-#include "uml/umlPackage.hpp"
 #include "ocl/Evaluations/impl/EvaluationsPackageImpl.hpp"
 
 #include "ocl/Expressions/impl/ExpressionsPackageImpl.hpp"
 
-#include "ocl/Types/impl/TypesPackageImpl.hpp"
-
-#include "ocl/Values/impl/ValuesPackageImpl.hpp"
-
 using namespace ocl;
+
+//Singleton implementation 
+std::shared_ptr<oclPackage> oclPackage::eInstance()
+{
+	static std::shared_ptr<oclPackage> instance;
+	if(!instance)
+	{
+		//create a new Factoryimplementation
+		instance.reset(oclPackageImpl::create());
+		std::dynamic_pointer_cast<oclPackageImpl>(instance)->init(instance);
+	}	
+	return instance;
+}
+//static initialisation
+const std::string oclPackage::eNAME ="ocl";
+const std::string oclPackage::eNS_URI ="http://ocl4cpp/ocl";
+const std::string oclPackage::eNS_PREFIX ="ocl";
 
 bool oclPackageImpl::isInited = false;
 
@@ -74,14 +82,6 @@ std::shared_ptr<ocl::Evaluations::EvaluationsPackage> ocl::oclPackageImpl::getEv
 std::shared_ptr<ocl::Expressions::ExpressionsPackage> ocl::oclPackageImpl::getExpressions_Package() const
 {
 	return ocl::Expressions::ExpressionsPackage::eInstance();
-} 
-std::shared_ptr<ocl::Types::TypesPackage> ocl::oclPackageImpl::getTypes_Package() const
-{
-	return ocl::Types::TypesPackage::eInstance();
-} 
-std::shared_ptr<ocl::Values::ValuesPackage> ocl::oclPackageImpl::getValues_Package() const
-{
-	return ocl::Values::ValuesPackage::eInstance();
 } 
 
 

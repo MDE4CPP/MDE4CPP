@@ -17,14 +17,12 @@
 #include "../EvalEnvironment.hpp"
 
 #include "ocl/Evaluations/impl/EvaluationsFactoryImpl.hpp"
-
-#include "ecore/impl/EModelElementImpl.hpp"
+#include "ecore/impl/ETypedElementImpl.hpp"
 
 //*********************************
 namespace ocl::Evaluations 
 {
-	class OCL_API EvalEnvironmentImpl : virtual public ecore::EModelElementImpl,
-virtual public EvalEnvironment 
+	class OCL_API EvalEnvironmentImpl : virtual public ecore::ETypedElementImpl, virtual public EvalEnvironment 
 	{
 		public: 
 			EvalEnvironmentImpl(const EvalEnvironmentImpl & obj);
@@ -45,11 +43,11 @@ virtual public EvalEnvironment
 			//*********************************
 			// Operations
 			//*********************************
-			virtual void add(std::shared_ptr<ocl::Values::NameValueBinding> n) ;
-			virtual void addAll(std::shared_ptr<Bag<ocl::Values::NameValueBinding>> nvbs) ;
-			virtual std::shared_ptr<ocl::Values::NameValueBinding> find(std::string name) ;
-			virtual std::shared_ptr<fUML::Semantics::Values::Value> getValueOf(std::string n) ;
-			virtual void replace(std::shared_ptr<ocl::Values::NameValueBinding> n) ;
+			virtual void add(const std::shared_ptr<ocl::Evaluations::NameValueBinding>& n) ;
+			virtual void addAll(const std::shared_ptr<Bag<ocl::Evaluations::NameValueBinding>>& nvbs) ;
+			virtual std::shared_ptr<ocl::Evaluations::NameValueBinding> find(std::string name) ;
+			virtual std::shared_ptr<ecore::EObject> getValueOf(std::string n) ;
+			virtual void replace(const std::shared_ptr<ocl::Evaluations::NameValueBinding>& n) ;
 			
 			//*********************************
 			// Attribute Getters & Setters
@@ -58,7 +56,7 @@ virtual public EvalEnvironment
 			//*********************************
 			// Reference Getters & Setters
 			//*********************************
-			virtual std::shared_ptr<Bag<ocl::Values::NameValueBinding>> getBindings() const ;
+			virtual std::shared_ptr<Bag<ocl::Evaluations::NameValueBinding>> getBindings() const ;
 			
 			//*********************************
 			// Union Reference Getters
@@ -68,7 +66,7 @@ virtual public EvalEnvironment
 			// Container Getter
 			//*********************************
 			virtual std::shared_ptr<ecore::EObject> eContainer() const ; 
-			
+
 			//*********************************
 			// Persistence Functions
 			//*********************************
@@ -85,14 +83,14 @@ virtual public EvalEnvironment
 			//*********************************
 			// EStructuralFeature Get/Set/IsSet
 			//*********************************
-			virtual Any eGet(int featureID, bool resolve, bool coreType) const ;
-			virtual bool eSet(int featureID, Any newValue) ;
+			virtual std::shared_ptr<Any> eGet(int featureID, bool resolve, bool coreType) const ;
+			virtual bool eSet(int featureID, std::shared_ptr<Any> newValue) ;
 			virtual bool internalEIsSet(int featureID) const ;
 
 			//*********************************
 			// EOperation Invoke
 			//*********************************
-			virtual Any eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments) ;
+			virtual std::shared_ptr<Any> eInvoke(int operationID, std::shared_ptr<Bag<Any>> arguments) ;
 
 		private:
 			std::weak_ptr<ocl::Evaluations::EvalEnvironment> m_thisEvalEnvironmentPtr;

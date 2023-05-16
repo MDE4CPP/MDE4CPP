@@ -45,7 +45,7 @@ namespace ocl::Expressions
 	class LoopExp;
 	class NavigationCallExp;
 	class OperationCallExp;
-	class Variable;
+	class VarDeclarationExp;
 }
 namespace ecore 
 {
@@ -67,7 +67,7 @@ namespace ecore
 namespace ocl::Expressions 
 {
 	
-	class OCL_API BooleanLiteralExp: virtual public PrimitiveLiteralExp
+	class OCL_API BooleanLiteralExp : virtual public PrimitiveLiteralExp
 	{
 		public:
  			BooleanLiteralExp(const BooleanLiteralExp &) {}
@@ -88,7 +88,7 @@ namespace ocl::Expressions
 			//*********************************
 			// Attribute Getters & Setters
 			//*********************************
-			virtual bool getBooleanSymbol() const = 0;
+			virtual bool isBooleanSymbol() const = 0;
 			virtual void setBooleanSymbol (bool _booleanSymbol)= 0;
 
 			//*********************************

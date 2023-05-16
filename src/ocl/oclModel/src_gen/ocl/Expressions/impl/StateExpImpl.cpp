@@ -1,9 +1,13 @@
 
 #include "ocl/Expressions/impl/StateExpImpl.hpp"
 #ifdef NDEBUG
-	#define DEBUG_MESSAGE(a) /**/
+	#define DEBUG_INFO(a)		/**/
+	#define DEBUG_WARNING(a)	/**/
+	#define DEBUG_ERROR(a)		/**/
 #else
-	#define DEBUG_MESSAGE(a) a
+	#define DEBUG_INFO(a) 		std::cout<<"[\e[0;32mInfo\e[0m]:\t\t"<<__PRETTY_FUNCTION__<<"\n\t\t  -- Message: "<<a<<std::endl;
+	#define DEBUG_WARNING(a) 	std::cout<<"[\e[0;33mWarning\e[0m]:\t"<<__PRETTY_FUNCTION__<<"\n\t\t  -- Message: "<<a<<std::endl;
+	#define DEBUG_ERROR(a)		std::cout<<"[\e[0;31mError\e[0m]:\t"<<__PRETTY_FUNCTION__<<"\n\t\t  -- Message: "<<a<<std::endl;
 #endif
 
 #ifdef ACTIVITY_DEBUG_ON
@@ -21,8 +25,8 @@
 #include "abstractDataTypes/Bag.hpp"
 
 
-#include "abstractDataTypes/AnyEObject.hpp"
-#include "abstractDataTypes/AnyEObjectBag.hpp"
+#include "ecore/EcoreAny.hpp"
+#include "ecore/EcoreContainerAny.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
@@ -34,15 +38,15 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
+#include "ocl/Evaluations/EvaluationsFactory.hpp"
 #include "ocl/Expressions/ExpressionsFactory.hpp"
 #include "ecore/ecoreFactory.hpp"
-#include "uml/umlFactory.hpp"
-#include "ocl/Evaluations/EvaluationsFactory.hpp"
 #include "ocl/Expressions/CallExp.hpp"
 #include "ocl/Expressions/CollectionRange.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClassifier.hpp"
 #include "ecore/EGenericType.hpp"
+#include "ecore/EObject.hpp"
 #include "ocl/Expressions/ExpressionInOcl.hpp"
 #include "ocl/Expressions/IfExp.hpp"
 #include "ocl/Expressions/LoopExp.hpp"
@@ -50,14 +54,12 @@
 #include "ocl/Evaluations/OclExpEval.hpp"
 #include "ocl/Expressions/OclExpression.hpp"
 #include "ocl/Expressions/OperationCallExp.hpp"
-#include "uml/State.hpp"
-#include "ocl/Expressions/Variable.hpp"
+#include "ocl/Expressions/VarDeclarationExp.hpp"
 //Factories and Package includes
 #include "ocl/oclPackage.hpp"
 #include "ocl/Evaluations/EvaluationsPackage.hpp"
 #include "ocl/Expressions/ExpressionsPackage.hpp"
 #include "ecore/ecorePackage.hpp"
-#include "uml/umlPackage.hpp"
 
 using namespace ocl::Expressions;
 
@@ -76,13 +78,6 @@ StateExpImpl::~StateExpImpl()
 #ifdef SHOW_DELETION
 	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete StateExp "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
 #endif
-}
-
-//Additional constructor for the containments back reference
-StateExpImpl::StateExpImpl(std::weak_ptr<ocl::Expressions::CallExp> par_appliedElement)
-:StateExpImpl()
-{
-	m_appliedElement = par_appliedElement;
 }
 
 //Additional constructor for the containments back reference
@@ -125,20 +120,25 @@ StateExpImpl::StateExpImpl(std::weak_ptr<ocl::Expressions::CollectionRange> par_
 }
 
 
-//Additional constructor for the containments back reference
-StateExpImpl::StateExpImpl(std::weak_ptr<ocl::Expressions::Variable> par_initializedElement)
-:StateExpImpl()
-{
-	m_initializedElement = par_initializedElement;
-}
-
 
 //Additional constructor for the containments back reference
-StateExpImpl::StateExpImpl(std::weak_ptr<ocl::Expressions::LoopExp> par_loopBodyOwner)
+StateExpImpl::StateExpImpl(std::weak_ptr<ocl::Expressions::LoopExp> par_LoopExp, const int reference_id)
 :StateExpImpl()
 {
-	m_loopBodyOwner = par_loopBodyOwner;
+	switch(reference_id)
+	{	
+	case ocl::Expressions::ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_LOOPBODYOWNER:
+		m_loopBodyOwner = par_LoopExp;
+		 return;
+	case ocl::Expressions::ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_LOOPEXP:
+		m_loopExp = par_LoopExp;
+		 return;
+	default:
+	std::cerr << __PRETTY_FUNCTION__ <<" Reference not found in class with the given ID" << std::endl;
+	}
+   
 }
+
 
 //Additional constructor for the containments back reference
 StateExpImpl::StateExpImpl(std::weak_ptr<ocl::Expressions::OperationCallExp> par_parentCall)
@@ -214,11 +214,11 @@ std::shared_ptr<ecore::EObject> StateExpImpl::copy() const
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference referredState */
-std::shared_ptr<uml::State> StateExpImpl::getReferredState() const
+std::shared_ptr<ecore::EObject> StateExpImpl::getReferredState() const
 {
     return m_referredState;
 }
-void StateExpImpl::setReferredState(std::shared_ptr<uml::State> _referredState)
+void StateExpImpl::setReferredState(std::shared_ptr<ecore::EObject> _referredState)
 {
     m_referredState = _referredState;
 	
@@ -233,11 +233,6 @@ void StateExpImpl::setReferredState(std::shared_ptr<uml::State> _referredState)
 //*********************************
 std::shared_ptr<ecore::EObject> StateExpImpl::eContainer() const
 {
-	if(auto wp = m_appliedElement.lock())
-	{
-		return wp;
-	}
-
 	if(auto wp = m_elseOwner.lock())
 	{
 		return wp;
@@ -261,16 +256,16 @@ std::shared_ptr<ecore::EObject> StateExpImpl::eContainer() const
 	}
 
 
-	if(auto wp = m_initializedElement.lock())
-	{
-		return wp;
-	}
-
 
 	if(auto wp = m_loopBodyOwner.lock())
 	{
 		return wp;
 	}
+	if(auto wp = m_loopExp.lock())
+	{
+		return wp;
+	}
+
 
 	if(auto wp = m_parentCall.lock())
 	{
@@ -350,7 +345,7 @@ void StateExpImpl::resolveReferences(const int featureID, std::vector<std::share
 			if (references.size() == 1)
 			{
 				// Cast object to correct type
-				std::shared_ptr<uml::State> _referredState = std::dynamic_pointer_cast<uml::State>( references.front() );
+				std::shared_ptr<ecore::EObject> _referredState = std::dynamic_pointer_cast<ecore::EObject>( references.front() );
 				setReferredState(_referredState);
 			}
 			
@@ -381,7 +376,7 @@ void StateExpImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHan
 	{
 		std::shared_ptr<ocl::Expressions::ExpressionsPackage> package = ocl::Expressions::ExpressionsPackage::eInstance();
 	// Add references
-		saveHandler->addReference(this->getReferredState(), "referredState", getReferredState()->eClass() != uml::umlPackage::eInstance()->getState_Class()); 
+		saveHandler->addReference(this->getReferredState(),"referredState", getReferredState()->eClass() != ecore::ecorePackage::eInstance()->getEObject_Class());
 	}
 	catch (std::exception& e)
 	{
@@ -397,12 +392,12 @@ std::shared_ptr<ecore::EClass> StateExpImpl::eStaticClass() const
 //*********************************
 // EStructuralFeature Get/Set/IsSet
 //*********************************
-Any StateExpImpl::eGet(int featureID, bool resolve, bool coreType) const
+std::shared_ptr<Any> StateExpImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 		case ocl::Expressions::ExpressionsPackage::STATEEXP_ATTRIBUTE_REFERREDSTATE:
-			return eAny(getReferredState(),uml::umlPackage::STATE_CLASS,false); //8022
+			return eAny(getReferredState(),ecore::ecorePackage::EOBJECT_CLASS,false); //7923
 	}
 	return OclExpressionImpl::eGet(featureID, resolve, coreType);
 }
@@ -412,22 +407,45 @@ bool StateExpImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case ocl::Expressions::ExpressionsPackage::STATEEXP_ATTRIBUTE_REFERREDSTATE:
-			return getReferredState() != nullptr; //8022
+			return getReferredState() != nullptr; //7923
 	}
 	return OclExpressionImpl::internalEIsSet(featureID);
 }
 
-bool StateExpImpl::eSet(int featureID, Any newValue)
+bool StateExpImpl::eSet(int featureID, std::shared_ptr<Any> newValue)
 {
 	switch(featureID)
 	{
 		case ocl::Expressions::ExpressionsPackage::STATEEXP_ATTRIBUTE_REFERREDSTATE:
 		{
-			// CAST Any to uml::State
-			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
-			std::shared_ptr<uml::State> _referredState = std::dynamic_pointer_cast<uml::State>(_temp);
-			setReferredState(_referredState); //8022
-			return true;
+			std::shared_ptr<ecore::EcoreAny> ecoreAny = std::dynamic_pointer_cast<ecore::EcoreAny>(newValue);
+			if(ecoreAny)
+			{
+				try
+				{
+					std::shared_ptr<ecore::EObject> eObject = ecoreAny->getAsEObject();
+					std::shared_ptr<ecore::EObject> _referredState = std::dynamic_pointer_cast<ecore::EObject>(eObject);
+					if(_referredState)
+					{
+						setReferredState(_referredState); //7923
+					}
+					else
+					{
+						throw "Invalid argument";
+					}
+				}
+				catch(...)
+				{
+					DEBUG_ERROR("Invalid type stored in 'ecore::ecoreAny' for feature 'referredState'. Failed to set feature!")
+					return false;
+				}
+			}
+			else
+			{
+				DEBUG_ERROR("Invalid instance of 'ecore::ecoreAny' for feature 'referredState'. Failed to set feature!")
+				return false;
+			}
+		return true;
 		}
 	}
 
@@ -437,9 +455,9 @@ bool StateExpImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any StateExpImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+std::shared_ptr<Any> StateExpImpl::eInvoke(int operationID, std::shared_ptr<Bag<Any>> arguments)
 {
-	Any result;
+	std::shared_ptr<Any> result;
  
   	switch(operationID)
 	{

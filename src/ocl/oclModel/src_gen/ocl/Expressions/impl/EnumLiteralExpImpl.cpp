@@ -1,9 +1,13 @@
 
 #include "ocl/Expressions/impl/EnumLiteralExpImpl.hpp"
 #ifdef NDEBUG
-	#define DEBUG_MESSAGE(a) /**/
+	#define DEBUG_INFO(a)		/**/
+	#define DEBUG_WARNING(a)	/**/
+	#define DEBUG_ERROR(a)		/**/
 #else
-	#define DEBUG_MESSAGE(a) a
+	#define DEBUG_INFO(a) 		std::cout<<"[\e[0;32mInfo\e[0m]:\t\t"<<__PRETTY_FUNCTION__<<"\n\t\t  -- Message: "<<a<<std::endl;
+	#define DEBUG_WARNING(a) 	std::cout<<"[\e[0;33mWarning\e[0m]:\t"<<__PRETTY_FUNCTION__<<"\n\t\t  -- Message: "<<a<<std::endl;
+	#define DEBUG_ERROR(a)		std::cout<<"[\e[0;31mError\e[0m]:\t"<<__PRETTY_FUNCTION__<<"\n\t\t  -- Message: "<<a<<std::endl;
 #endif
 
 #ifdef ACTIVITY_DEBUG_ON
@@ -21,8 +25,8 @@
 #include "abstractDataTypes/Bag.hpp"
 
 
-#include "abstractDataTypes/AnyEObject.hpp"
-#include "abstractDataTypes/AnyEObjectBag.hpp"
+#include "ecore/EcoreAny.hpp"
+#include "ecore/EcoreContainerAny.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
@@ -34,16 +38,15 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
+#include "ocl/Evaluations/EvaluationsFactory.hpp"
 #include "ocl/Expressions/ExpressionsFactory.hpp"
 #include "ecore/ecoreFactory.hpp"
-#include "uml/umlFactory.hpp"
-#include "ocl/Evaluations/EvaluationsFactory.hpp"
 #include "ocl/Expressions/CallExp.hpp"
 #include "ocl/Expressions/CollectionRange.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClassifier.hpp"
+#include "ecore/EEnumLiteral.hpp"
 #include "ecore/EGenericType.hpp"
-#include "uml/EnumerationLiteral.hpp"
 #include "ocl/Expressions/ExpressionInOcl.hpp"
 #include "ocl/Expressions/IfExp.hpp"
 #include "ocl/Expressions/LiteralExp.hpp"
@@ -51,13 +54,12 @@
 #include "ocl/Expressions/NavigationCallExp.hpp"
 #include "ocl/Evaluations/OclExpEval.hpp"
 #include "ocl/Expressions/OperationCallExp.hpp"
-#include "ocl/Expressions/Variable.hpp"
+#include "ocl/Expressions/VarDeclarationExp.hpp"
 //Factories and Package includes
 #include "ocl/oclPackage.hpp"
 #include "ocl/Evaluations/EvaluationsPackage.hpp"
 #include "ocl/Expressions/ExpressionsPackage.hpp"
 #include "ecore/ecorePackage.hpp"
-#include "uml/umlPackage.hpp"
 
 using namespace ocl::Expressions;
 
@@ -76,13 +78,6 @@ EnumLiteralExpImpl::~EnumLiteralExpImpl()
 #ifdef SHOW_DELETION
 	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete EnumLiteralExp "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
 #endif
-}
-
-//Additional constructor for the containments back reference
-EnumLiteralExpImpl::EnumLiteralExpImpl(std::weak_ptr<ocl::Expressions::CallExp> par_appliedElement)
-:EnumLiteralExpImpl()
-{
-	m_appliedElement = par_appliedElement;
 }
 
 //Additional constructor for the containments back reference
@@ -125,20 +120,25 @@ EnumLiteralExpImpl::EnumLiteralExpImpl(std::weak_ptr<ocl::Expressions::Collectio
 }
 
 
-//Additional constructor for the containments back reference
-EnumLiteralExpImpl::EnumLiteralExpImpl(std::weak_ptr<ocl::Expressions::Variable> par_initializedElement)
-:EnumLiteralExpImpl()
-{
-	m_initializedElement = par_initializedElement;
-}
-
 
 //Additional constructor for the containments back reference
-EnumLiteralExpImpl::EnumLiteralExpImpl(std::weak_ptr<ocl::Expressions::LoopExp> par_loopBodyOwner)
+EnumLiteralExpImpl::EnumLiteralExpImpl(std::weak_ptr<ocl::Expressions::LoopExp> par_LoopExp, const int reference_id)
 :EnumLiteralExpImpl()
 {
-	m_loopBodyOwner = par_loopBodyOwner;
+	switch(reference_id)
+	{	
+	case ocl::Expressions::ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_LOOPBODYOWNER:
+		m_loopBodyOwner = par_LoopExp;
+		 return;
+	case ocl::Expressions::ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_LOOPEXP:
+		m_loopExp = par_LoopExp;
+		 return;
+	default:
+	std::cerr << __PRETTY_FUNCTION__ <<" Reference not found in class with the given ID" << std::endl;
+	}
+   
 }
+
 
 //Additional constructor for the containments back reference
 EnumLiteralExpImpl::EnumLiteralExpImpl(std::weak_ptr<ocl::Expressions::OperationCallExp> par_parentCall)
@@ -187,6 +187,7 @@ EnumLiteralExpImpl& EnumLiteralExpImpl::operator=(const EnumLiteralExpImpl & obj
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy EnumLiteralExp "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
 	#endif
 	//Clone Attributes with (deep copy)
+	m_referredEnumLiteralStr = obj.getReferredEnumLiteralStr();
 
 	//copy references with no containment (soft copy)
 	m_referredEnumLiteral  = obj.getReferredEnumLiteral();
@@ -209,16 +210,26 @@ std::shared_ptr<ecore::EObject> EnumLiteralExpImpl::copy() const
 //*********************************
 // Attribute Getters & Setters
 //*********************************
+/* Getter & Setter for attribute referredEnumLiteralStr */
+std::string EnumLiteralExpImpl::getReferredEnumLiteralStr() const 
+{
+	return m_referredEnumLiteralStr;
+}
+void EnumLiteralExpImpl::setReferredEnumLiteralStr(std::string _referredEnumLiteralStr)
+{
+	m_referredEnumLiteralStr = _referredEnumLiteralStr;
+	
+}
 
 //*********************************
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference referredEnumLiteral */
-std::shared_ptr<uml::EnumerationLiteral> EnumLiteralExpImpl::getReferredEnumLiteral() const
+std::shared_ptr<ecore::EEnumLiteral> EnumLiteralExpImpl::getReferredEnumLiteral() const
 {
     return m_referredEnumLiteral;
 }
-void EnumLiteralExpImpl::setReferredEnumLiteral(std::shared_ptr<uml::EnumerationLiteral> _referredEnumLiteral)
+void EnumLiteralExpImpl::setReferredEnumLiteral(std::shared_ptr<ecore::EEnumLiteral> _referredEnumLiteral)
 {
     m_referredEnumLiteral = _referredEnumLiteral;
 	
@@ -233,11 +244,6 @@ void EnumLiteralExpImpl::setReferredEnumLiteral(std::shared_ptr<uml::Enumeration
 //*********************************
 std::shared_ptr<ecore::EObject> EnumLiteralExpImpl::eContainer() const
 {
-	if(auto wp = m_appliedElement.lock())
-	{
-		return wp;
-	}
-
 	if(auto wp = m_elseOwner.lock())
 	{
 		return wp;
@@ -261,16 +267,16 @@ std::shared_ptr<ecore::EObject> EnumLiteralExpImpl::eContainer() const
 	}
 
 
-	if(auto wp = m_initializedElement.lock())
-	{
-		return wp;
-	}
-
 
 	if(auto wp = m_loopBodyOwner.lock())
 	{
 		return wp;
 	}
+	if(auto wp = m_loopExp.lock())
+	{
+		return wp;
+	}
+
 
 	if(auto wp = m_parentCall.lock())
 	{
@@ -314,6 +320,15 @@ void EnumLiteralExpImpl::loadAttributes(std::shared_ptr<persistence::interfaces:
 	try
 	{
 		std::map<std::string, std::string>::const_iterator iter;
+	
+		iter = attr_list.find("referredEnumLiteralStr");
+		if ( iter != attr_list.end() )
+		{
+			// this attribute is a 'std::string'
+			std::string value;
+			value = iter->second;
+			this->setReferredEnumLiteralStr(value);
+		}
 		std::shared_ptr<ecore::EClass> metaClass = this->eClass(); // get MetaClass
 		iter = attr_list.find("referredEnumLiteral");
 		if ( iter != attr_list.end() )
@@ -350,7 +365,7 @@ void EnumLiteralExpImpl::resolveReferences(const int featureID, std::vector<std:
 			if (references.size() == 1)
 			{
 				// Cast object to correct type
-				std::shared_ptr<uml::EnumerationLiteral> _referredEnumLiteral = std::dynamic_pointer_cast<uml::EnumerationLiteral>( references.front() );
+				std::shared_ptr<ecore::EEnumLiteral> _referredEnumLiteral = std::dynamic_pointer_cast<ecore::EEnumLiteral>( references.front() );
 				setReferredEnumLiteral(_referredEnumLiteral);
 			}
 			
@@ -382,8 +397,13 @@ void EnumLiteralExpImpl::saveContent(std::shared_ptr<persistence::interfaces::XS
 	try
 	{
 		std::shared_ptr<ocl::Expressions::ExpressionsPackage> package = ocl::Expressions::ExpressionsPackage::eInstance();
+		// Add attributes
+		if ( this->eIsSet(package->getEnumLiteralExp_Attribute_referredEnumLiteralStr()) )
+		{
+			saveHandler->addAttribute("referredEnumLiteralStr", this->getReferredEnumLiteralStr());
+		}
 	// Add references
-		saveHandler->addReference(this->getReferredEnumLiteral(), "referredEnumLiteral", getReferredEnumLiteral()->eClass() != uml::umlPackage::eInstance()->getEnumerationLiteral_Class()); 
+		saveHandler->addReference(this->getReferredEnumLiteral(),"referredEnumLiteral", getReferredEnumLiteral()->eClass() != ecore::ecorePackage::eInstance()->getEEnumLiteral_Class());
 	}
 	catch (std::exception& e)
 	{
@@ -399,12 +419,14 @@ std::shared_ptr<ecore::EClass> EnumLiteralExpImpl::eStaticClass() const
 //*********************************
 // EStructuralFeature Get/Set/IsSet
 //*********************************
-Any EnumLiteralExpImpl::eGet(int featureID, bool resolve, bool coreType) const
+std::shared_ptr<Any> EnumLiteralExpImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 		case ocl::Expressions::ExpressionsPackage::ENUMLITERALEXP_ATTRIBUTE_REFERREDENUMLITERAL:
-			return eAny(getReferredEnumLiteral(),uml::umlPackage::ENUMERATIONLITERAL_CLASS,false); //2422
+			return eAny(getReferredEnumLiteral(),ecore::ecorePackage::EENUMLITERAL_CLASS,false); //2223
+		case ocl::Expressions::ExpressionsPackage::ENUMLITERALEXP_ATTRIBUTE_REFERREDENUMLITERALSTR:
+			return eAny(getReferredEnumLiteralStr(),ecore::ecorePackage::ESTRING_CLASS,false); //2224
 	}
 	return LiteralExpImpl::eGet(featureID, resolve, coreType);
 }
@@ -414,22 +436,61 @@ bool EnumLiteralExpImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case ocl::Expressions::ExpressionsPackage::ENUMLITERALEXP_ATTRIBUTE_REFERREDENUMLITERAL:
-			return getReferredEnumLiteral() != nullptr; //2422
+			return getReferredEnumLiteral() != nullptr; //2223
+		case ocl::Expressions::ExpressionsPackage::ENUMLITERALEXP_ATTRIBUTE_REFERREDENUMLITERALSTR:
+			return getReferredEnumLiteralStr() != ""; //2224
 	}
 	return LiteralExpImpl::internalEIsSet(featureID);
 }
 
-bool EnumLiteralExpImpl::eSet(int featureID, Any newValue)
+bool EnumLiteralExpImpl::eSet(int featureID, std::shared_ptr<Any> newValue)
 {
 	switch(featureID)
 	{
 		case ocl::Expressions::ExpressionsPackage::ENUMLITERALEXP_ATTRIBUTE_REFERREDENUMLITERAL:
 		{
-			// CAST Any to uml::EnumerationLiteral
-			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
-			std::shared_ptr<uml::EnumerationLiteral> _referredEnumLiteral = std::dynamic_pointer_cast<uml::EnumerationLiteral>(_temp);
-			setReferredEnumLiteral(_referredEnumLiteral); //2422
-			return true;
+			std::shared_ptr<ecore::EcoreAny> ecoreAny = std::dynamic_pointer_cast<ecore::EcoreAny>(newValue);
+			if(ecoreAny)
+			{
+				try
+				{
+					std::shared_ptr<ecore::EObject> eObject = ecoreAny->getAsEObject();
+					std::shared_ptr<ecore::EEnumLiteral> _referredEnumLiteral = std::dynamic_pointer_cast<ecore::EEnumLiteral>(eObject);
+					if(_referredEnumLiteral)
+					{
+						setReferredEnumLiteral(_referredEnumLiteral); //2223
+					}
+					else
+					{
+						throw "Invalid argument";
+					}
+				}
+				catch(...)
+				{
+					DEBUG_ERROR("Invalid type stored in 'ecore::ecoreAny' for feature 'referredEnumLiteral'. Failed to set feature!")
+					return false;
+				}
+			}
+			else
+			{
+				DEBUG_ERROR("Invalid instance of 'ecore::ecoreAny' for feature 'referredEnumLiteral'. Failed to set feature!")
+				return false;
+			}
+		return true;
+		}
+		case ocl::Expressions::ExpressionsPackage::ENUMLITERALEXP_ATTRIBUTE_REFERREDENUMLITERALSTR:
+		{
+			try
+			{
+				std::string _referredEnumLiteralStr = newValue->get<std::string>();
+				setReferredEnumLiteralStr(_referredEnumLiteralStr); //2224
+			}
+			catch(...)
+			{
+				DEBUG_ERROR("Invalid type stored in 'Any' for feature 'referredEnumLiteralStr'. Failed to set feature!")
+				return false;
+			}
+		return true;
 		}
 	}
 
@@ -439,9 +500,9 @@ bool EnumLiteralExpImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any EnumLiteralExpImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+std::shared_ptr<Any> EnumLiteralExpImpl::eInvoke(int operationID, std::shared_ptr<Bag<Any>> arguments)
 {
-	Any result;
+	std::shared_ptr<Any> result;
  
   	switch(operationID)
 	{

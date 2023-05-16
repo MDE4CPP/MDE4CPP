@@ -45,7 +45,7 @@ namespace ocl::Expressions
 	class LoopExp;
 	class NavigationCallExp;
 	class OperationCallExp;
-	class Variable;
+	class VarDeclarationExp;
 }
 namespace ecore 
 {
@@ -67,7 +67,7 @@ namespace ecore
 namespace ocl::Expressions 
 {
 	
-	class OCL_API RealLiteralExp: virtual public NumericLiteralExp
+	class OCL_API RealLiteralExp : virtual public NumericLiteralExp
 	{
 		public:
  			RealLiteralExp(const RealLiteralExp &) {}
@@ -88,8 +88,8 @@ namespace ocl::Expressions
 			//*********************************
 			// Attribute Getters & Setters
 			//*********************************
-			virtual int getRealSymbol() const = 0;
-			virtual void setRealSymbol (int _realSymbol)= 0;
+			virtual double getRealSymbol() const = 0;
+			virtual void setRealSymbol (double _realSymbol)= 0;
 
 			//*********************************
 			// Reference Getters & Setters
@@ -115,7 +115,7 @@ namespace ocl::Expressions
 			//*********************************
 			// Attribute Members
 			//*********************************
-			int m_realSymbol= 0;
+			double m_realSymbol= 0;
 			
 			//*********************************
 			// Reference Members

@@ -17,14 +17,12 @@
 #include "../ExpressionInOclEval.hpp"
 
 #include "ocl/Evaluations/impl/EvaluationsFactoryImpl.hpp"
-
-#include "ecore/impl/EModelElementImpl.hpp"
+#include "ecore/impl/ETypedElementImpl.hpp"
 
 //*********************************
 namespace ocl::Evaluations 
 {
-	class OCL_API ExpressionInOclEvalImpl : virtual public ecore::EModelElementImpl,
-virtual public ExpressionInOclEval 
+	class OCL_API ExpressionInOclEvalImpl : virtual public ecore::ETypedElementImpl, virtual public ExpressionInOclEval 
 	{
 		public: 
 			ExpressionInOclEvalImpl(const ExpressionInOclEvalImpl & obj);
@@ -66,7 +64,7 @@ virtual public ExpressionInOclEval
 			// Container Getter
 			//*********************************
 			virtual std::shared_ptr<ecore::EObject> eContainer() const ; 
-			
+
 			//*********************************
 			// Persistence Functions
 			//*********************************
@@ -83,14 +81,14 @@ virtual public ExpressionInOclEval
 			//*********************************
 			// EStructuralFeature Get/Set/IsSet
 			//*********************************
-			virtual Any eGet(int featureID, bool resolve, bool coreType) const ;
-			virtual bool eSet(int featureID, Any newValue) ;
+			virtual std::shared_ptr<Any> eGet(int featureID, bool resolve, bool coreType) const ;
+			virtual bool eSet(int featureID, std::shared_ptr<Any> newValue) ;
 			virtual bool internalEIsSet(int featureID) const ;
 
 			//*********************************
 			// EOperation Invoke
 			//*********************************
-			virtual Any eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments) ;
+			virtual std::shared_ptr<Any> eInvoke(int operationID, std::shared_ptr<Bag<Any>> arguments) ;
 
 		private:
 			std::weak_ptr<ocl::Evaluations::ExpressionInOclEval> m_thisExpressionInOclEvalPtr;

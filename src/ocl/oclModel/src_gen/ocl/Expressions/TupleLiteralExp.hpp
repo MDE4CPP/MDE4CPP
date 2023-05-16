@@ -46,8 +46,7 @@ namespace ocl::Expressions
 	class LoopExp;
 	class NavigationCallExp;
 	class OperationCallExp;
-	class TupleLiteralPart;
-	class Variable;
+	class VarDeclarationExp;
 }
 namespace ecore 
 {
@@ -69,7 +68,7 @@ namespace ecore
 namespace ocl::Expressions 
 {
 	
-	class OCL_API TupleLiteralExp: virtual public LiteralExp
+	class OCL_API TupleLiteralExp : virtual public LiteralExp
 	{
 		public:
  			TupleLiteralExp(const TupleLiteralExp &) {}
@@ -94,7 +93,7 @@ namespace ocl::Expressions
 			//*********************************
 			// Reference Getters & Setters
 			//*********************************
-			virtual std::shared_ptr<Bag<ocl::Expressions::TupleLiteralPart>> getPart() const = 0;
+			virtual std::shared_ptr<Bag<ocl::Expressions::VarDeclarationExp>> getPart() const = 0;
 
 			//*********************************
 			// Union Reference Getters
@@ -120,7 +119,7 @@ namespace ocl::Expressions
 			//*********************************
 			// Reference Members
 			//*********************************
-			mutable std::shared_ptr<Bag<ocl::Expressions::TupleLiteralPart>> m_part;
+			mutable std::shared_ptr<Bag<ocl::Expressions::VarDeclarationExp>> m_part;
 	};
 }
 #endif /* end of include guard: OCL_EXPRESSIONS_TUPLELITERALEXP_HPP */

@@ -1,9 +1,13 @@
 
 #include "ocl/Expressions/impl/TupleLiteralPartImpl.hpp"
 #ifdef NDEBUG
-	#define DEBUG_MESSAGE(a) /**/
+	#define DEBUG_INFO(a)		/**/
+	#define DEBUG_WARNING(a)	/**/
+	#define DEBUG_ERROR(a)		/**/
 #else
-	#define DEBUG_MESSAGE(a) a
+	#define DEBUG_INFO(a) 		std::cout<<"[\e[0;32mInfo\e[0m]:\t\t"<<__PRETTY_FUNCTION__<<"\n\t\t  -- Message: "<<a<<std::endl;
+	#define DEBUG_WARNING(a) 	std::cout<<"[\e[0;33mWarning\e[0m]:\t"<<__PRETTY_FUNCTION__<<"\n\t\t  -- Message: "<<a<<std::endl;
+	#define DEBUG_ERROR(a)		std::cout<<"[\e[0;31mError\e[0m]:\t"<<__PRETTY_FUNCTION__<<"\n\t\t  -- Message: "<<a<<std::endl;
 #endif
 
 #ifdef ACTIVITY_DEBUG_ON
@@ -21,8 +25,8 @@
 #include "abstractDataTypes/Bag.hpp"
 
 
-#include "abstractDataTypes/AnyEObject.hpp"
-#include "abstractDataTypes/AnyEObjectBag.hpp"
+#include "ecore/EcoreAny.hpp"
+#include "ecore/EcoreContainerAny.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
@@ -35,11 +39,12 @@
 
 #include <exception> // used in Persistence
 #include "ecore/ecoreFactory.hpp"
+#include "ocl/Expressions/ExpressionsFactory.hpp"
 #include "ecore/EAnnotation.hpp"
-#include "ecore/EAttribute.hpp"
 #include "ecore/EClassifier.hpp"
 #include "ecore/EGenericType.hpp"
 #include "ecore/ETypedElement.hpp"
+#include "ocl/Expressions/OclExpression.hpp"
 //Factories and Package includes
 #include "ocl/oclPackage.hpp"
 #include "ocl/Expressions/ExpressionsPackage.hpp"
@@ -90,15 +95,12 @@ TupleLiteralPartImpl& TupleLiteralPartImpl::operator=(const TupleLiteralPartImpl
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy TupleLiteralPart "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
 	#endif
 	//Clone Attributes with (deep copy)
+	m_tuplePartName = obj.getTuplePartName();
+	m_tuplePartType = obj.getTuplePartType();
 
 	//copy references with no containment (soft copy)
+	m_assignedOclExpression  = obj.getAssignedOclExpression();
 	//Clone references with containment (deep copy)
-	//clone reference 'attribute'
-	if(obj.getAttribute()!=nullptr)
-	{
-		m_attribute = std::dynamic_pointer_cast<ecore::EAttribute>(obj.getAttribute()->copy());
-	}
-	
 	return *this;
 }
 
@@ -117,18 +119,39 @@ std::shared_ptr<ecore::EObject> TupleLiteralPartImpl::copy() const
 //*********************************
 // Attribute Getters & Setters
 //*********************************
+/* Getter & Setter for attribute tuplePartName */
+std::string TupleLiteralPartImpl::getTuplePartName() const 
+{
+	return m_tuplePartName;
+}
+void TupleLiteralPartImpl::setTuplePartName(std::string _tuplePartName)
+{
+	m_tuplePartName = _tuplePartName;
+	
+}
+
+/* Getter & Setter for attribute tuplePartType */
+std::string TupleLiteralPartImpl::getTuplePartType() const 
+{
+	return m_tuplePartType;
+}
+void TupleLiteralPartImpl::setTuplePartType(std::string _tuplePartType)
+{
+	m_tuplePartType = _tuplePartType;
+	
+}
 
 //*********************************
 // Reference Getters & Setters
 //*********************************
-/* Getter & Setter for reference attribute */
-std::shared_ptr<ecore::EAttribute> TupleLiteralPartImpl::getAttribute() const
+/* Getter & Setter for reference assignedOclExpression */
+std::shared_ptr<ocl::Expressions::OclExpression> TupleLiteralPartImpl::getAssignedOclExpression() const
 {
-    return m_attribute;
+    return m_assignedOclExpression;
 }
-void TupleLiteralPartImpl::setAttribute(std::shared_ptr<ecore::EAttribute> _attribute)
+void TupleLiteralPartImpl::setAssignedOclExpression(std::shared_ptr<ocl::Expressions::OclExpression> _assignedOclExpression)
 {
-    m_attribute = _attribute;
+    m_assignedOclExpression = _assignedOclExpression;
 	
 }
 
@@ -165,25 +188,33 @@ void TupleLiteralPartImpl::load(std::shared_ptr<persistence::interfaces::XLoadHa
 
 void TupleLiteralPartImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list)
 {
-
-	ecore::ETypedElementImpl::loadAttributes(loadHandler, attr_list);
-}
-
-void TupleLiteralPartImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
-{
-
 	try
 	{
-		if ( nodeName.compare("attribute") == 0 )
+		std::map<std::string, std::string>::const_iterator iter;
+	
+		iter = attr_list.find("tuplePartName");
+		if ( iter != attr_list.end() )
 		{
-  			std::string typeName = loadHandler->getCurrentXSITypeName();
-			if (typeName.empty())
-			{
-				typeName = "EAttribute";
-			}
-			loadHandler->handleChild(this->getAttribute());
+			// this attribute is a 'std::string'
+			std::string value;
+			value = iter->second;
+			this->setTuplePartName(value);
+		}
 
-			return; 
+		iter = attr_list.find("tuplePartType");
+		if ( iter != attr_list.end() )
+		{
+			// this attribute is a 'std::string'
+			std::string value;
+			value = iter->second;
+			this->setTuplePartType(value);
+		}
+		std::shared_ptr<ecore::EClass> metaClass = this->eClass(); // get MetaClass
+		iter = attr_list.find("assignedOclExpression");
+		if ( iter != attr_list.end() )
+		{
+			// add unresolvedReference to loadHandler's list
+			loadHandler->addUnresolvedReference(iter->second, loadHandler->getCurrentObject(), metaClass->getEStructuralFeature("assignedOclExpression")); // TODO use getEStructuralFeature() with id, for faster access to EStructuralFeature
 		}
 	}
 	catch (std::exception& e)
@@ -194,12 +225,33 @@ void TupleLiteralPartImpl::loadNode(std::string nodeName, std::shared_ptr<persis
 	{
 		std::cout << "| ERROR    | " <<  "Exception occurred" << std::endl;
 	}
+
+	ecore::ETypedElementImpl::loadAttributes(loadHandler, attr_list);
+}
+
+void TupleLiteralPartImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
+{
+
 	//load BasePackage Nodes
 	ecore::ETypedElementImpl::loadNode(nodeName, loadHandler);
 }
 
 void TupleLiteralPartImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
 {
+	switch(featureID)
+	{
+		case ocl::Expressions::ExpressionsPackage::TUPLELITERALPART_ATTRIBUTE_ASSIGNEDOCLEXPRESSION:
+		{
+			if (references.size() == 1)
+			{
+				// Cast object to correct type
+				std::shared_ptr<ocl::Expressions::OclExpression> _assignedOclExpression = std::dynamic_pointer_cast<ocl::Expressions::OclExpression>( references.front() );
+				setAssignedOclExpression(_assignedOclExpression);
+			}
+			
+			return;
+		}
+	}
 	ecore::ETypedElementImpl::resolveReferences(featureID, references);
 }
 
@@ -221,13 +273,18 @@ void TupleLiteralPartImpl::saveContent(std::shared_ptr<persistence::interfaces::
 	try
 	{
 		std::shared_ptr<ocl::Expressions::ExpressionsPackage> package = ocl::Expressions::ExpressionsPackage::eInstance();
-		//
-		// Add new tags (from references)
-		//
-		std::shared_ptr<ecore::EClass> metaClass = this->eClass();
-		// Save 'attribute'
+		// Add attributes
+		if ( this->eIsSet(package->getTupleLiteralPart_Attribute_tuplePartName()) )
+		{
+			saveHandler->addAttribute("tuplePartName", this->getTuplePartName());
+		}
 
-		saveHandler->addReference(this->getAttribute(), "attribute", getAttribute()->eClass() != ecore::ecorePackage::eInstance()->getEAttribute_Class());
+		if ( this->eIsSet(package->getTupleLiteralPart_Attribute_tuplePartType()) )
+		{
+			saveHandler->addAttribute("tuplePartType", this->getTuplePartType());
+		}
+	// Add references
+		saveHandler->addReference(this->getAssignedOclExpression(), "assignedOclExpression", getAssignedOclExpression()->eClass() != ocl::Expressions::ExpressionsPackage::eInstance()->getOclExpression_Class()); 
 	}
 	catch (std::exception& e)
 	{
@@ -243,12 +300,16 @@ std::shared_ptr<ecore::EClass> TupleLiteralPartImpl::eStaticClass() const
 //*********************************
 // EStructuralFeature Get/Set/IsSet
 //*********************************
-Any TupleLiteralPartImpl::eGet(int featureID, bool resolve, bool coreType) const
+std::shared_ptr<Any> TupleLiteralPartImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case ocl::Expressions::ExpressionsPackage::TUPLELITERALPART_ATTRIBUTE_ATTRIBUTE:
-			return eAny(getAttribute(),ecore::ecorePackage::EATTRIBUTE_CLASS,false); //8810
+		case ocl::Expressions::ExpressionsPackage::TUPLELITERALPART_ATTRIBUTE_ASSIGNEDOCLEXPRESSION:
+			return eAny(getAssignedOclExpression(),ocl::Expressions::ExpressionsPackage::OCLEXPRESSION_CLASS,false); //8612
+		case ocl::Expressions::ExpressionsPackage::TUPLELITERALPART_ATTRIBUTE_TUPLEPARTNAME:
+			return eAny(getTuplePartName(),ecore::ecorePackage::ESTRING_CLASS,false); //8610
+		case ocl::Expressions::ExpressionsPackage::TUPLELITERALPART_ATTRIBUTE_TUPLEPARTTYPE:
+			return eAny(getTuplePartType(),ecore::ecorePackage::ESTRING_CLASS,false); //8611
 	}
 	return ecore::ETypedElementImpl::eGet(featureID, resolve, coreType);
 }
@@ -257,23 +318,78 @@ bool TupleLiteralPartImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case ocl::Expressions::ExpressionsPackage::TUPLELITERALPART_ATTRIBUTE_ATTRIBUTE:
-			return getAttribute() != nullptr; //8810
+		case ocl::Expressions::ExpressionsPackage::TUPLELITERALPART_ATTRIBUTE_ASSIGNEDOCLEXPRESSION:
+			return getAssignedOclExpression() != nullptr; //8612
+		case ocl::Expressions::ExpressionsPackage::TUPLELITERALPART_ATTRIBUTE_TUPLEPARTNAME:
+			return getTuplePartName() != ""; //8610
+		case ocl::Expressions::ExpressionsPackage::TUPLELITERALPART_ATTRIBUTE_TUPLEPARTTYPE:
+			return getTuplePartType() != ""; //8611
 	}
 	return ecore::ETypedElementImpl::internalEIsSet(featureID);
 }
 
-bool TupleLiteralPartImpl::eSet(int featureID, Any newValue)
+bool TupleLiteralPartImpl::eSet(int featureID, std::shared_ptr<Any> newValue)
 {
 	switch(featureID)
 	{
-		case ocl::Expressions::ExpressionsPackage::TUPLELITERALPART_ATTRIBUTE_ATTRIBUTE:
+		case ocl::Expressions::ExpressionsPackage::TUPLELITERALPART_ATTRIBUTE_ASSIGNEDOCLEXPRESSION:
 		{
-			// CAST Any to ecore::EAttribute
-			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
-			std::shared_ptr<ecore::EAttribute> _attribute = std::dynamic_pointer_cast<ecore::EAttribute>(_temp);
-			setAttribute(_attribute); //8810
-			return true;
+			std::shared_ptr<ecore::EcoreAny> ecoreAny = std::dynamic_pointer_cast<ecore::EcoreAny>(newValue);
+			if(ecoreAny)
+			{
+				try
+				{
+					std::shared_ptr<ecore::EObject> eObject = ecoreAny->getAsEObject();
+					std::shared_ptr<ocl::Expressions::OclExpression> _assignedOclExpression = std::dynamic_pointer_cast<ocl::Expressions::OclExpression>(eObject);
+					if(_assignedOclExpression)
+					{
+						setAssignedOclExpression(_assignedOclExpression); //8612
+					}
+					else
+					{
+						throw "Invalid argument";
+					}
+				}
+				catch(...)
+				{
+					DEBUG_ERROR("Invalid type stored in 'ecore::ecoreAny' for feature 'assignedOclExpression'. Failed to set feature!")
+					return false;
+				}
+			}
+			else
+			{
+				DEBUG_ERROR("Invalid instance of 'ecore::ecoreAny' for feature 'assignedOclExpression'. Failed to set feature!")
+				return false;
+			}
+		return true;
+		}
+		case ocl::Expressions::ExpressionsPackage::TUPLELITERALPART_ATTRIBUTE_TUPLEPARTNAME:
+		{
+			try
+			{
+				std::string _tuplePartName = newValue->get<std::string>();
+				setTuplePartName(_tuplePartName); //8610
+			}
+			catch(...)
+			{
+				DEBUG_ERROR("Invalid type stored in 'Any' for feature 'tuplePartName'. Failed to set feature!")
+				return false;
+			}
+		return true;
+		}
+		case ocl::Expressions::ExpressionsPackage::TUPLELITERALPART_ATTRIBUTE_TUPLEPARTTYPE:
+		{
+			try
+			{
+				std::string _tuplePartType = newValue->get<std::string>();
+				setTuplePartType(_tuplePartType); //8611
+			}
+			catch(...)
+			{
+				DEBUG_ERROR("Invalid type stored in 'Any' for feature 'tuplePartType'. Failed to set feature!")
+				return false;
+			}
+		return true;
 		}
 	}
 
@@ -283,9 +399,9 @@ bool TupleLiteralPartImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any TupleLiteralPartImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+std::shared_ptr<Any> TupleLiteralPartImpl::eInvoke(int operationID, std::shared_ptr<Bag<Any>> arguments)
 {
-	Any result;
+	std::shared_ptr<Any> result;
  
   	switch(operationID)
 	{

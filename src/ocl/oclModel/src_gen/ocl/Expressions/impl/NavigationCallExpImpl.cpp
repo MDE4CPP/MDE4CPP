@@ -1,9 +1,13 @@
 
 #include "ocl/Expressions/impl/NavigationCallExpImpl.hpp"
 #ifdef NDEBUG
-	#define DEBUG_MESSAGE(a) /**/
+	#define DEBUG_INFO(a)		/**/
+	#define DEBUG_WARNING(a)	/**/
+	#define DEBUG_ERROR(a)		/**/
 #else
-	#define DEBUG_MESSAGE(a) a
+	#define DEBUG_INFO(a) 		std::cout<<"[\e[0;32mInfo\e[0m]:\t\t"<<__PRETTY_FUNCTION__<<"\n\t\t  -- Message: "<<a<<std::endl;
+	#define DEBUG_WARNING(a) 	std::cout<<"[\e[0;33mWarning\e[0m]:\t"<<__PRETTY_FUNCTION__<<"\n\t\t  -- Message: "<<a<<std::endl;
+	#define DEBUG_ERROR(a)		std::cout<<"[\e[0;31mError\e[0m]:\t"<<__PRETTY_FUNCTION__<<"\n\t\t  -- Message: "<<a<<std::endl;
 #endif
 
 #ifdef ACTIVITY_DEBUG_ON
@@ -21,8 +25,8 @@
 #include "abstractDataTypes/Bag.hpp"
 
 
-#include "abstractDataTypes/AnyEObject.hpp"
-#include "abstractDataTypes/AnyEObjectBag.hpp"
+#include "ecore/EcoreAny.hpp"
+#include "ecore/EcoreContainerAny.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
@@ -34,13 +38,12 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
+#include "ocl/Evaluations/EvaluationsFactory.hpp"
 #include "ocl/Expressions/ExpressionsFactory.hpp"
 #include "ecore/ecoreFactory.hpp"
-#include "ocl/Evaluations/EvaluationsFactory.hpp"
 #include "ocl/Expressions/CallExp.hpp"
 #include "ocl/Expressions/CollectionRange.hpp"
 #include "ecore/EAnnotation.hpp"
-#include "ecore/EAttribute.hpp"
 #include "ecore/EClassifier.hpp"
 #include "ecore/EGenericType.hpp"
 #include "ocl/Expressions/ExpressionInOcl.hpp"
@@ -51,7 +54,7 @@
 #include "ocl/Evaluations/OclExpEval.hpp"
 #include "ocl/Expressions/OclExpression.hpp"
 #include "ocl/Expressions/OperationCallExp.hpp"
-#include "ocl/Expressions/Variable.hpp"
+#include "ocl/Expressions/VarDeclarationExp.hpp"
 //Factories and Package includes
 #include "ocl/oclPackage.hpp"
 #include "ocl/Evaluations/EvaluationsPackage.hpp"
@@ -75,13 +78,6 @@ NavigationCallExpImpl::~NavigationCallExpImpl()
 #ifdef SHOW_DELETION
 	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete NavigationCallExp "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
 #endif
-}
-
-//Additional constructor for the containments back reference
-NavigationCallExpImpl::NavigationCallExpImpl(std::weak_ptr<ocl::Expressions::CallExp> par_appliedElement)
-:NavigationCallExpImpl()
-{
-	m_appliedElement = par_appliedElement;
 }
 
 //Additional constructor for the containments back reference
@@ -124,20 +120,25 @@ NavigationCallExpImpl::NavigationCallExpImpl(std::weak_ptr<ocl::Expressions::Col
 }
 
 
-//Additional constructor for the containments back reference
-NavigationCallExpImpl::NavigationCallExpImpl(std::weak_ptr<ocl::Expressions::Variable> par_initializedElement)
-:NavigationCallExpImpl()
-{
-	m_initializedElement = par_initializedElement;
-}
-
 
 //Additional constructor for the containments back reference
-NavigationCallExpImpl::NavigationCallExpImpl(std::weak_ptr<ocl::Expressions::LoopExp> par_loopBodyOwner)
+NavigationCallExpImpl::NavigationCallExpImpl(std::weak_ptr<ocl::Expressions::LoopExp> par_LoopExp, const int reference_id)
 :NavigationCallExpImpl()
 {
-	m_loopBodyOwner = par_loopBodyOwner;
+	switch(reference_id)
+	{	
+	case ocl::Expressions::ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_LOOPBODYOWNER:
+		m_loopBodyOwner = par_LoopExp;
+		 return;
+	case ocl::Expressions::ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_LOOPEXP:
+		m_loopExp = par_LoopExp;
+		 return;
+	default:
+	std::cerr << __PRETTY_FUNCTION__ <<" Reference not found in class with the given ID" << std::endl;
+	}
+   
 }
+
 
 //Additional constructor for the containments back reference
 NavigationCallExpImpl::NavigationCallExpImpl(std::weak_ptr<ocl::Expressions::OperationCallExp> par_parentCall)
@@ -186,9 +187,9 @@ NavigationCallExpImpl& NavigationCallExpImpl::operator=(const NavigationCallExpI
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy NavigationCallExp "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
 	#endif
 	//Clone Attributes with (deep copy)
+	m_navigationSource = obj.getNavigationSource();
 
 	//copy references with no containment (soft copy)
-	m_navigationSource  = obj.getNavigationSource();
 	//Clone references with containment (deep copy)
 	//clone reference 'qualifier'
 	std::shared_ptr<Bag<ocl::Expressions::OclExpression>> qualifierList = obj.getQualifier();
@@ -205,7 +206,7 @@ NavigationCallExpImpl& NavigationCallExpImpl::operator=(const NavigationCallExpI
 	}
 	else
 	{
-		DEBUG_MESSAGE(std::cout << "Warning: container is nullptr qualifier."<< std::endl;)
+		DEBUG_WARNING("container is nullptr for qualifier.")
 	}
 	
 	return *this;
@@ -218,21 +219,20 @@ NavigationCallExpImpl& NavigationCallExpImpl::operator=(const NavigationCallExpI
 //*********************************
 // Attribute Getters & Setters
 //*********************************
+/* Getter & Setter for attribute navigationSource */
+std::string NavigationCallExpImpl::getNavigationSource() const 
+{
+	return m_navigationSource;
+}
+void NavigationCallExpImpl::setNavigationSource(std::string _navigationSource)
+{
+	m_navigationSource = _navigationSource;
+	
+}
 
 //*********************************
 // Reference Getters & Setters
 //*********************************
-/* Getter & Setter for reference navigationSource */
-std::shared_ptr<ecore::EAttribute> NavigationCallExpImpl::getNavigationSource() const
-{
-    return m_navigationSource;
-}
-void NavigationCallExpImpl::setNavigationSource(std::shared_ptr<ecore::EAttribute> _navigationSource)
-{
-    m_navigationSource = _navigationSource;
-	
-}
-
 /* Getter & Setter for reference qualifier */
 std::shared_ptr<Bag<ocl::Expressions::OclExpression>> NavigationCallExpImpl::getQualifier() const
 {
@@ -254,11 +254,6 @@ std::shared_ptr<Bag<ocl::Expressions::OclExpression>> NavigationCallExpImpl::get
 //*********************************
 std::shared_ptr<ecore::EObject> NavigationCallExpImpl::eContainer() const
 {
-	if(auto wp = m_appliedElement.lock())
-	{
-		return wp;
-	}
-
 	if(auto wp = m_elseOwner.lock())
 	{
 		return wp;
@@ -282,16 +277,16 @@ std::shared_ptr<ecore::EObject> NavigationCallExpImpl::eContainer() const
 	}
 
 
-	if(auto wp = m_initializedElement.lock())
-	{
-		return wp;
-	}
-
 
 	if(auto wp = m_loopBodyOwner.lock())
 	{
 		return wp;
 	}
+	if(auto wp = m_loopExp.lock())
+	{
+		return wp;
+	}
+
 
 	if(auto wp = m_parentCall.lock())
 	{
@@ -335,12 +330,14 @@ void NavigationCallExpImpl::loadAttributes(std::shared_ptr<persistence::interfac
 	try
 	{
 		std::map<std::string, std::string>::const_iterator iter;
-		std::shared_ptr<ecore::EClass> metaClass = this->eClass(); // get MetaClass
+	
 		iter = attr_list.find("navigationSource");
 		if ( iter != attr_list.end() )
 		{
-			// add unresolvedReference to loadHandler's list
-			loadHandler->addUnresolvedReference(iter->second, loadHandler->getCurrentObject(), metaClass->getEStructuralFeature("navigationSource")); // TODO use getEStructuralFeature() with id, for faster access to EStructuralFeature
+			// this attribute is a 'std::string'
+			std::string value;
+			value = iter->second;
+			this->setNavigationSource(value);
 		}
 	}
 	catch (std::exception& e)
@@ -387,20 +384,6 @@ void NavigationCallExpImpl::loadNode(std::string nodeName, std::shared_ptr<persi
 
 void NavigationCallExpImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
 {
-	switch(featureID)
-	{
-		case ocl::Expressions::ExpressionsPackage::NAVIGATIONCALLEXP_ATTRIBUTE_NAVIGATIONSOURCE:
-		{
-			if (references.size() == 1)
-			{
-				// Cast object to correct type
-				std::shared_ptr<ecore::EAttribute> _navigationSource = std::dynamic_pointer_cast<ecore::EAttribute>( references.front() );
-				setNavigationSource(_navigationSource);
-			}
-			
-			return;
-		}
-	}
 	FeatureCallExpImpl::resolveReferences(featureID, references);
 }
 
@@ -428,8 +411,11 @@ void NavigationCallExpImpl::saveContent(std::shared_ptr<persistence::interfaces:
 	try
 	{
 		std::shared_ptr<ocl::Expressions::ExpressionsPackage> package = ocl::Expressions::ExpressionsPackage::eInstance();
-	// Add references
-		saveHandler->addReference(this->getNavigationSource(),"navigationSource", getNavigationSource()->eClass() != ecore::ecorePackage::eInstance()->getEAttribute_Class());
+		// Add attributes
+		if ( this->eIsSet(package->getNavigationCallExp_Attribute_navigationSource()) )
+		{
+			saveHandler->addAttribute("navigationSource", this->getNavigationSource());
+		}
 		//
 		// Add new tags (from references)
 		//
@@ -452,14 +438,14 @@ std::shared_ptr<ecore::EClass> NavigationCallExpImpl::eStaticClass() const
 //*********************************
 // EStructuralFeature Get/Set/IsSet
 //*********************************
-Any NavigationCallExpImpl::eGet(int featureID, bool resolve, bool coreType) const
+std::shared_ptr<Any> NavigationCallExpImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 		case ocl::Expressions::ExpressionsPackage::NAVIGATIONCALLEXP_ATTRIBUTE_NAVIGATIONSOURCE:
-			return eAny(getNavigationSource(),ecore::ecorePackage::EATTRIBUTE_CLASS,false); //5425
+			return eAny(getNavigationSource(),ecore::ecorePackage::ESTRING_CLASS,false); //5226
 		case ocl::Expressions::ExpressionsPackage::NAVIGATIONCALLEXP_ATTRIBUTE_QUALIFIER:
-			return eAnyBag(getQualifier(),ocl::Expressions::ExpressionsPackage::OCLEXPRESSION_CLASS); //5424
+			return eEcoreContainerAny(getQualifier(),ocl::Expressions::ExpressionsPackage::OCLEXPRESSION_CLASS); //5225
 	}
 	return FeatureCallExpImpl::eGet(featureID, resolve, coreType);
 }
@@ -469,61 +455,75 @@ bool NavigationCallExpImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case ocl::Expressions::ExpressionsPackage::NAVIGATIONCALLEXP_ATTRIBUTE_NAVIGATIONSOURCE:
-			return getNavigationSource() != nullptr; //5425
+			return getNavigationSource() != ""; //5226
 		case ocl::Expressions::ExpressionsPackage::NAVIGATIONCALLEXP_ATTRIBUTE_QUALIFIER:
-			return getQualifier() != nullptr; //5424
+			return getQualifier() != nullptr; //5225
 	}
 	return FeatureCallExpImpl::internalEIsSet(featureID);
 }
 
-bool NavigationCallExpImpl::eSet(int featureID, Any newValue)
+bool NavigationCallExpImpl::eSet(int featureID, std::shared_ptr<Any> newValue)
 {
 	switch(featureID)
 	{
 		case ocl::Expressions::ExpressionsPackage::NAVIGATIONCALLEXP_ATTRIBUTE_NAVIGATIONSOURCE:
 		{
-			// CAST Any to ecore::EAttribute
-			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
-			std::shared_ptr<ecore::EAttribute> _navigationSource = std::dynamic_pointer_cast<ecore::EAttribute>(_temp);
-			setNavigationSource(_navigationSource); //5425
-			return true;
+			try
+			{
+				std::string _navigationSource = newValue->get<std::string>();
+				setNavigationSource(_navigationSource); //5226
+			}
+			catch(...)
+			{
+				DEBUG_ERROR("Invalid type stored in 'Any' for feature 'navigationSource'. Failed to set feature!")
+				return false;
+			}
+		return true;
 		}
 		case ocl::Expressions::ExpressionsPackage::NAVIGATIONCALLEXP_ATTRIBUTE_QUALIFIER:
 		{
-			// CAST Any to Bag<ocl::Expressions::OclExpression>
-			if((newValue->isContainer()) && (ocl::Expressions::ExpressionsPackage::OCLEXPRESSION_CLASS ==newValue->getTypeId()))
-			{ 
+			std::shared_ptr<ecore::EcoreContainerAny> ecoreContainerAny = std::dynamic_pointer_cast<ecore::EcoreContainerAny>(newValue);
+			if(ecoreContainerAny)
+			{
 				try
 				{
-					std::shared_ptr<Bag<ocl::Expressions::OclExpression>> qualifierList= newValue->get<std::shared_ptr<Bag<ocl::Expressions::OclExpression>>>();
-					std::shared_ptr<Bag<ocl::Expressions::OclExpression>> _qualifier=getQualifier();
-					for(const std::shared_ptr<ocl::Expressions::OclExpression> indexQualifier: *_qualifier)
+					std::shared_ptr<Bag<ecore::EObject>> eObjectList = ecoreContainerAny->getAsEObjectContainer();
+	
+					if(eObjectList)
 					{
-						if (qualifierList->find(indexQualifier) == -1)
+						std::shared_ptr<Bag<ocl::Expressions::OclExpression>> _qualifier = getQualifier();
+	
+						for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
 						{
-							_qualifier->erase(indexQualifier);
-						}
-					}
-
-					for(const std::shared_ptr<ocl::Expressions::OclExpression> indexQualifier: *qualifierList)
-					{
-						if (_qualifier->find(indexQualifier) == -1)
-						{
-							_qualifier->add(indexQualifier);
+							std::shared_ptr<ocl::Expressions::OclExpression> valueToAdd = std::dynamic_pointer_cast<ocl::Expressions::OclExpression>(anEObject);
+	
+							if (valueToAdd)
+							{
+								if(_qualifier->find(valueToAdd) == -1)
+								{
+									_qualifier->add(valueToAdd);
+								}
+								//else, valueToAdd is already present so it won't be added again
+							}
+							else
+							{
+								throw "Invalid argument";
+							}
 						}
 					}
 				}
 				catch(...)
 				{
-					DEBUG_MESSAGE(std::cout << "invalid Type to set of eAttributes."<< std::endl;)
+					DEBUG_ERROR("Invalid type stored in 'ecore::ecoreContainerAny' for feature 'qualifier'. Failed to set feature!")
 					return false;
 				}
 			}
 			else
 			{
+				DEBUG_ERROR("Invalid instance of 'ecore::ecoreContainerAny' for feature 'qualifier'. Failed to set feature!")
 				return false;
 			}
-			return true;
+		return true;
 		}
 	}
 
@@ -533,9 +533,9 @@ bool NavigationCallExpImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any NavigationCallExpImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+std::shared_ptr<Any> NavigationCallExpImpl::eInvoke(int operationID, std::shared_ptr<Bag<Any>> arguments)
 {
-	Any result;
+	std::shared_ptr<Any> result;
  
   	switch(operationID)
 	{

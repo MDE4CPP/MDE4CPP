@@ -40,24 +40,18 @@ namespace ocl::Expressions
 {
 	class OclExpression;
 }
-namespace fUML::Semantics::Loci 
+namespace ecore 
 {
-	class Locus;
-}
-namespace fUML::Semantics::Values 
-{
-	class Value;
-}
-namespace uml 
-{
-	class ValueSpecification;
+	class EAnnotation;
+	class EClassifier;
+	class EGenericType;
+	class EObject;
 }
 
 // namespace macro header include
 #include "ocl/ocl.hpp"
 
 // base class includes
-#include "fUML/Semantics/Values/LiteralStringEvaluation.hpp"
 #include "ocl/Evaluations/PrimitiveLiteralExpEval.hpp"
 
 
@@ -67,7 +61,7 @@ namespace uml
 namespace ocl::Evaluations 
 {
 	
-	class OCL_API StringLiteralExpEval: virtual public fUML::Semantics::Values::LiteralStringEvaluation, virtual public PrimitiveLiteralExpEval
+	class OCL_API StringLiteralExpEval : virtual public PrimitiveLiteralExpEval
 	{
 		public:
  			StringLiteralExpEval(const StringLiteralExpEval &) {}

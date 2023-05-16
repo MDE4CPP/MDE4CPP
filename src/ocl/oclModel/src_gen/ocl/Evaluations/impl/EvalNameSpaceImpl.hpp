@@ -17,12 +17,12 @@
 #include "../EvalNameSpace.hpp"
 
 #include "ocl/Evaluations/impl/EvaluationsFactoryImpl.hpp"
-#include "fUML/Semantics/Values/impl/EvaluationImpl.hpp"
+#include "ocl/Evaluations/impl/OclExpEvalImpl.hpp"
 
 //*********************************
 namespace ocl::Evaluations 
 {
-	class OCL_API EvalNameSpaceImpl : virtual public fUML::Semantics::Values::EvaluationImpl, virtual public EvalNameSpace 
+	class OCL_API EvalNameSpaceImpl : virtual public OclExpEvalImpl, virtual public EvalNameSpace 
 	{
 		public: 
 			EvalNameSpaceImpl(const EvalNameSpaceImpl & obj);
@@ -60,7 +60,7 @@ namespace ocl::Evaluations
 			// Container Getter
 			//*********************************
 			virtual std::shared_ptr<ecore::EObject> eContainer() const ; 
-			
+
 			//*********************************
 			// Persistence Functions
 			//*********************************
@@ -77,14 +77,14 @@ namespace ocl::Evaluations
 			//*********************************
 			// EStructuralFeature Get/Set/IsSet
 			//*********************************
-			virtual Any eGet(int featureID, bool resolve, bool coreType) const ;
-			virtual bool eSet(int featureID, Any newValue) ;
+			virtual std::shared_ptr<Any> eGet(int featureID, bool resolve, bool coreType) const ;
+			virtual bool eSet(int featureID, std::shared_ptr<Any> newValue) ;
 			virtual bool internalEIsSet(int featureID) const ;
 
 			//*********************************
 			// EOperation Invoke
 			//*********************************
-			virtual Any eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments) ;
+			virtual std::shared_ptr<Any> eInvoke(int operationID, std::shared_ptr<Bag<Any>> arguments) ;
 
 		private:
 			std::weak_ptr<ocl::Evaluations::EvalNameSpace> m_thisEvalNameSpacePtr;

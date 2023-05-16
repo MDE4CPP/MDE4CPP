@@ -1,9 +1,13 @@
 
 #include "ocl/Evaluations/impl/OclMessageExpEvalImpl.hpp"
 #ifdef NDEBUG
-	#define DEBUG_MESSAGE(a) /**/
+	#define DEBUG_INFO(a)		/**/
+	#define DEBUG_WARNING(a)	/**/
+	#define DEBUG_ERROR(a)		/**/
 #else
-	#define DEBUG_MESSAGE(a) a
+	#define DEBUG_INFO(a) 		std::cout<<"[\e[0;32mInfo\e[0m]:\t\t"<<__PRETTY_FUNCTION__<<"\n\t\t  -- Message: "<<a<<std::endl;
+	#define DEBUG_WARNING(a) 	std::cout<<"[\e[0;33mWarning\e[0m]:\t"<<__PRETTY_FUNCTION__<<"\n\t\t  -- Message: "<<a<<std::endl;
+	#define DEBUG_ERROR(a)		std::cout<<"[\e[0;31mError\e[0m]:\t"<<__PRETTY_FUNCTION__<<"\n\t\t  -- Message: "<<a<<std::endl;
 #endif
 
 #ifdef ACTIVITY_DEBUG_ON
@@ -21,8 +25,8 @@
 #include "abstractDataTypes/Bag.hpp"
 
 
-#include "abstractDataTypes/AnyEObject.hpp"
-#include "abstractDataTypes/AnyEObjectBag.hpp"
+#include "ecore/EcoreAny.hpp"
+#include "ecore/EcoreContainerAny.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
@@ -35,24 +39,21 @@
 
 #include <exception> // used in Persistence
 #include "ocl/Evaluations/EvaluationsFactory.hpp"
+#include "ecore/ecoreFactory.hpp"
 #include "ocl/Expressions/ExpressionsFactory.hpp"
-#include "fUML/Semantics/Values/ValuesFactory.hpp"
-#include "uml/umlFactory.hpp"
-#include "fUML/Semantics/Loci/LociFactory.hpp"
+#include "ecore/EAnnotation.hpp"
+#include "ecore/EClassifier.hpp"
+#include "ecore/EGenericType.hpp"
+#include "ecore/EObject.hpp"
 #include "ocl/Evaluations/EvalEnvironment.hpp"
-#include "fUML/Semantics/Loci/Locus.hpp"
 #include "ocl/Evaluations/OclExpEval.hpp"
 #include "ocl/Expressions/OclExpression.hpp"
 #include "ocl/Evaluations/OclMessageArgEval.hpp"
-#include "fUML/Semantics/Values/Value.hpp"
-#include "uml/ValueSpecification.hpp"
 //Factories and Package includes
 #include "ocl/oclPackage.hpp"
 #include "ocl/Evaluations/EvaluationsPackage.hpp"
 #include "ocl/Expressions/ExpressionsPackage.hpp"
-#include "fUML/Semantics/Loci/LociPackage.hpp"
-#include "fUML/Semantics/Values/ValuesPackage.hpp"
-#include "uml/umlPackage.hpp"
+#include "ecore/ecorePackage.hpp"
 
 using namespace ocl::Evaluations;
 
@@ -278,9 +279,11 @@ void OclMessageExpEvalImpl::save(std::shared_ptr<persistence::interfaces::XSaveH
 
 	OclExpEvalImpl::saveContent(saveHandler);
 	
-	fUML::Semantics::Values::EvaluationImpl::saveContent(saveHandler);
+	ecore::ETypedElementImpl::saveContent(saveHandler);
 	
-	fUML::Semantics::Loci::SemanticVisitorImpl::saveContent(saveHandler);
+	ecore::ENamedElementImpl::saveContent(saveHandler);
+	
+	ecore::EModelElementImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);
 }
@@ -313,16 +316,16 @@ std::shared_ptr<ecore::EClass> OclMessageExpEvalImpl::eStaticClass() const
 //*********************************
 // EStructuralFeature Get/Set/IsSet
 //*********************************
-Any OclMessageExpEvalImpl::eGet(int featureID, bool resolve, bool coreType) const
+std::shared_ptr<Any> OclMessageExpEvalImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 		case ocl::Evaluations::EvaluationsPackage::OCLMESSAGEEXPEVAL_ATTRIBUTE_ARGUMENTS:
-			return eAnyBag(getArguments(),ocl::Evaluations::EvaluationsPackage::OCLMESSAGEARGEVAL_CLASS); //637
+			return eEcoreContainerAny(getArguments(),ocl::Evaluations::EvaluationsPackage::OCLMESSAGEARGEVAL_CLASS); //6015
 		case ocl::Evaluations::EvaluationsPackage::OCLMESSAGEEXPEVAL_ATTRIBUTE_NAME:
-			return eAny(getName(),ecore::ecorePackage::ESTRING_CLASS,false); //638
+			return eAny(getName(),ecore::ecorePackage::ESTRING_CLASS,false); //6016
 		case ocl::Evaluations::EvaluationsPackage::OCLMESSAGEEXPEVAL_ATTRIBUTE_TARGET:
-			return eAny(getTarget(),ocl::Evaluations::EvaluationsPackage::OCLEXPEVAL_CLASS,false); //636
+			return eAny(getTarget(),ocl::Evaluations::EvaluationsPackage::OCLEXPEVAL_CLASS,false); //6014
 	}
 	return OclExpEvalImpl::eGet(featureID, resolve, coreType);
 }
@@ -332,70 +335,108 @@ bool OclMessageExpEvalImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case ocl::Evaluations::EvaluationsPackage::OCLMESSAGEEXPEVAL_ATTRIBUTE_ARGUMENTS:
-			return getArguments() != nullptr; //637
+			return getArguments() != nullptr; //6015
 		case ocl::Evaluations::EvaluationsPackage::OCLMESSAGEEXPEVAL_ATTRIBUTE_NAME:
-			return getName() != ""; //638
+			return getName() != ""; //6016
 		case ocl::Evaluations::EvaluationsPackage::OCLMESSAGEEXPEVAL_ATTRIBUTE_TARGET:
-			return getTarget() != nullptr; //636
+			return getTarget() != nullptr; //6014
 	}
 	return OclExpEvalImpl::internalEIsSet(featureID);
 }
 
-bool OclMessageExpEvalImpl::eSet(int featureID, Any newValue)
+bool OclMessageExpEvalImpl::eSet(int featureID, std::shared_ptr<Any> newValue)
 {
 	switch(featureID)
 	{
 		case ocl::Evaluations::EvaluationsPackage::OCLMESSAGEEXPEVAL_ATTRIBUTE_ARGUMENTS:
 		{
-			// CAST Any to Bag<ocl::Evaluations::OclMessageArgEval>
-			if((newValue->isContainer()) && (ocl::Evaluations::EvaluationsPackage::OCLMESSAGEARGEVAL_CLASS ==newValue->getTypeId()))
-			{ 
+			std::shared_ptr<ecore::EcoreContainerAny> ecoreContainerAny = std::dynamic_pointer_cast<ecore::EcoreContainerAny>(newValue);
+			if(ecoreContainerAny)
+			{
 				try
 				{
-					std::shared_ptr<Bag<ocl::Evaluations::OclMessageArgEval>> argumentsList= newValue->get<std::shared_ptr<Bag<ocl::Evaluations::OclMessageArgEval>>>();
-					std::shared_ptr<Bag<ocl::Evaluations::OclMessageArgEval>> _arguments=getArguments();
-					for(const std::shared_ptr<ocl::Evaluations::OclMessageArgEval> indexArguments: *_arguments)
+					std::shared_ptr<Bag<ecore::EObject>> eObjectList = ecoreContainerAny->getAsEObjectContainer();
+	
+					if(eObjectList)
 					{
-						if (argumentsList->find(indexArguments) == -1)
+						std::shared_ptr<Bag<ocl::Evaluations::OclMessageArgEval>> _arguments = getArguments();
+	
+						for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
 						{
-							_arguments->erase(indexArguments);
-						}
-					}
-
-					for(const std::shared_ptr<ocl::Evaluations::OclMessageArgEval> indexArguments: *argumentsList)
-					{
-						if (_arguments->find(indexArguments) == -1)
-						{
-							_arguments->add(indexArguments);
+							std::shared_ptr<ocl::Evaluations::OclMessageArgEval> valueToAdd = std::dynamic_pointer_cast<ocl::Evaluations::OclMessageArgEval>(anEObject);
+	
+							if (valueToAdd)
+							{
+								if(_arguments->find(valueToAdd) == -1)
+								{
+									_arguments->add(valueToAdd);
+								}
+								//else, valueToAdd is already present so it won't be added again
+							}
+							else
+							{
+								throw "Invalid argument";
+							}
 						}
 					}
 				}
 				catch(...)
 				{
-					DEBUG_MESSAGE(std::cout << "invalid Type to set of eAttributes."<< std::endl;)
+					DEBUG_ERROR("Invalid type stored in 'ecore::ecoreContainerAny' for feature 'arguments'. Failed to set feature!")
 					return false;
 				}
 			}
 			else
 			{
+				DEBUG_ERROR("Invalid instance of 'ecore::ecoreContainerAny' for feature 'arguments'. Failed to set feature!")
 				return false;
 			}
-			return true;
+		return true;
 		}
 		case ocl::Evaluations::EvaluationsPackage::OCLMESSAGEEXPEVAL_ATTRIBUTE_NAME:
 		{
-			// CAST Any to std::string
-			std::string _name = newValue->get<std::string>();
-			setName(_name); //638
-			return true;
+			try
+			{
+				std::string _name = newValue->get<std::string>();
+				setName(_name); //6016
+			}
+			catch(...)
+			{
+				DEBUG_ERROR("Invalid type stored in 'Any' for feature 'name'. Failed to set feature!")
+				return false;
+			}
+		return true;
 		}
 		case ocl::Evaluations::EvaluationsPackage::OCLMESSAGEEXPEVAL_ATTRIBUTE_TARGET:
 		{
-			// CAST Any to ocl::Evaluations::OclExpEval
-			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
-			std::shared_ptr<ocl::Evaluations::OclExpEval> _target = std::dynamic_pointer_cast<ocl::Evaluations::OclExpEval>(_temp);
-			setTarget(_target); //636
-			return true;
+			std::shared_ptr<ecore::EcoreAny> ecoreAny = std::dynamic_pointer_cast<ecore::EcoreAny>(newValue);
+			if(ecoreAny)
+			{
+				try
+				{
+					std::shared_ptr<ecore::EObject> eObject = ecoreAny->getAsEObject();
+					std::shared_ptr<ocl::Evaluations::OclExpEval> _target = std::dynamic_pointer_cast<ocl::Evaluations::OclExpEval>(eObject);
+					if(_target)
+					{
+						setTarget(_target); //6014
+					}
+					else
+					{
+						throw "Invalid argument";
+					}
+				}
+				catch(...)
+				{
+					DEBUG_ERROR("Invalid type stored in 'ecore::ecoreAny' for feature 'target'. Failed to set feature!")
+					return false;
+				}
+			}
+			else
+			{
+				DEBUG_ERROR("Invalid instance of 'ecore::ecoreAny' for feature 'target'. Failed to set feature!")
+				return false;
+			}
+		return true;
 		}
 	}
 
@@ -405,9 +446,9 @@ bool OclMessageExpEvalImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any OclMessageExpEvalImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+std::shared_ptr<Any> OclMessageExpEvalImpl::eInvoke(int operationID, std::shared_ptr<Bag<Any>> arguments)
 {
-	Any result;
+	std::shared_ptr<Any> result;
  
   	switch(operationID)
 	{

@@ -1,9 +1,13 @@
 
 #include "ocl/Evaluations/impl/OperationCallExpEvalImpl.hpp"
 #ifdef NDEBUG
-	#define DEBUG_MESSAGE(a) /**/
+	#define DEBUG_INFO(a)		/**/
+	#define DEBUG_WARNING(a)	/**/
+	#define DEBUG_ERROR(a)		/**/
 #else
-	#define DEBUG_MESSAGE(a) a
+	#define DEBUG_INFO(a) 		std::cout<<"[\e[0;32mInfo\e[0m]:\t\t"<<__PRETTY_FUNCTION__<<"\n\t\t  -- Message: "<<a<<std::endl;
+	#define DEBUG_WARNING(a) 	std::cout<<"[\e[0;33mWarning\e[0m]:\t"<<__PRETTY_FUNCTION__<<"\n\t\t  -- Message: "<<a<<std::endl;
+	#define DEBUG_ERROR(a)		std::cout<<"[\e[0;31mError\e[0m]:\t"<<__PRETTY_FUNCTION__<<"\n\t\t  -- Message: "<<a<<std::endl;
 #endif
 
 #ifdef ACTIVITY_DEBUG_ON
@@ -21,8 +25,8 @@
 #include "abstractDataTypes/Bag.hpp"
 
 
-#include "abstractDataTypes/AnyEObject.hpp"
-#include "abstractDataTypes/AnyEObjectBag.hpp"
+#include "ecore/EcoreAny.hpp"
+#include "ecore/EcoreContainerAny.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
@@ -35,27 +39,21 @@
 
 #include <exception> // used in Persistence
 #include "ocl/Evaluations/EvaluationsFactory.hpp"
+#include "ecore/ecoreFactory.hpp"
 #include "ocl/Expressions/ExpressionsFactory.hpp"
-#include "fUML/Semantics/Values/ValuesFactory.hpp"
-#include "uml/umlFactory.hpp"
-#include "fUML/Semantics/Loci/LociFactory.hpp"
-#include "fUML/Semantics/SimpleClassifiers/SimpleClassifiersFactory.hpp"
+#include "ecore/EAnnotation.hpp"
+#include "ecore/EClassifier.hpp"
+#include "ecore/EGenericType.hpp"
+#include "ecore/EObject.hpp"
 #include "ocl/Evaluations/EvalEnvironment.hpp"
-#include "fUML/Semantics/Loci/Locus.hpp"
 #include "ocl/Evaluations/ModelPropertyCallExpEval.hpp"
 #include "ocl/Evaluations/OclExpEval.hpp"
 #include "ocl/Expressions/OclExpression.hpp"
-#include "fUML/Semantics/SimpleClassifiers/StringValue.hpp"
-#include "fUML/Semantics/Values/Value.hpp"
-#include "uml/ValueSpecification.hpp"
 //Factories and Package includes
 #include "ocl/oclPackage.hpp"
 #include "ocl/Evaluations/EvaluationsPackage.hpp"
 #include "ocl/Expressions/ExpressionsPackage.hpp"
-#include "fUML/Semantics/Loci/LociPackage.hpp"
-#include "fUML/Semantics/SimpleClassifiers/SimpleClassifiersPackage.hpp"
-#include "fUML/Semantics/Values/ValuesPackage.hpp"
-#include "uml/umlPackage.hpp"
+#include "ecore/ecorePackage.hpp"
 
 using namespace ocl::Evaluations;
 
@@ -102,10 +100,10 @@ OperationCallExpEvalImpl& OperationCallExpEvalImpl::operator=(const OperationCal
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy OperationCallExpEval "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
 	#endif
 	//Clone Attributes with (deep copy)
+	m_referredOperation = obj.getReferredOperation();
 
 	//copy references with no containment (soft copy)
 	m_arguments  = obj.getArguments();
-	m_referredOperation  = obj.getReferredOperation();
 	//Clone references with containment (deep copy)
 	return *this;
 }
@@ -125,6 +123,16 @@ std::shared_ptr<ecore::EObject> OperationCallExpEvalImpl::copy() const
 //*********************************
 // Attribute Getters & Setters
 //*********************************
+/* Getter & Setter for attribute referredOperation */
+std::string OperationCallExpEvalImpl::getReferredOperation() const 
+{
+	return m_referredOperation;
+}
+void OperationCallExpEvalImpl::setReferredOperation(std::string _referredOperation)
+{
+	m_referredOperation = _referredOperation;
+	
+}
 
 //*********************************
 // Reference Getters & Setters
@@ -139,17 +147,6 @@ std::shared_ptr<Bag<ocl::Evaluations::OclExpEval>> OperationCallExpEvalImpl::get
 		
 	}
     return m_arguments;
-}
-
-/* Getter & Setter for reference referredOperation */
-std::shared_ptr<fUML::Semantics::SimpleClassifiers::StringValue> OperationCallExpEvalImpl::getReferredOperation() const
-{
-    return m_referredOperation;
-}
-void OperationCallExpEvalImpl::setReferredOperation(std::shared_ptr<fUML::Semantics::SimpleClassifiers::StringValue> _referredOperation)
-{
-    m_referredOperation = _referredOperation;
-	
 }
 
 //*********************************
@@ -188,19 +185,21 @@ void OperationCallExpEvalImpl::loadAttributes(std::shared_ptr<persistence::inter
 	try
 	{
 		std::map<std::string, std::string>::const_iterator iter;
+	
+		iter = attr_list.find("referredOperation");
+		if ( iter != attr_list.end() )
+		{
+			// this attribute is a 'std::string'
+			std::string value;
+			value = iter->second;
+			this->setReferredOperation(value);
+		}
 		std::shared_ptr<ecore::EClass> metaClass = this->eClass(); // get MetaClass
 		iter = attr_list.find("arguments");
 		if ( iter != attr_list.end() )
 		{
 			// add unresolvedReference to loadHandler's list
 			loadHandler->addUnresolvedReference(iter->second, loadHandler->getCurrentObject(), metaClass->getEStructuralFeature("arguments")); // TODO use getEStructuralFeature() with id, for faster access to EStructuralFeature
-		}
-
-		iter = attr_list.find("referredOperation");
-		if ( iter != attr_list.end() )
-		{
-			// add unresolvedReference to loadHandler's list
-			loadHandler->addUnresolvedReference(iter->second, loadHandler->getCurrentObject(), metaClass->getEStructuralFeature("referredOperation")); // TODO use getEStructuralFeature() with id, for faster access to EStructuralFeature
 		}
 	}
 	catch (std::exception& e)
@@ -239,18 +238,6 @@ void OperationCallExpEvalImpl::resolveReferences(const int featureID, std::vecto
 			}
 			return;
 		}
-
-		case ocl::Evaluations::EvaluationsPackage::OPERATIONCALLEXPEVAL_ATTRIBUTE_REFERREDOPERATION:
-		{
-			if (references.size() == 1)
-			{
-				// Cast object to correct type
-				std::shared_ptr<fUML::Semantics::SimpleClassifiers::StringValue> _referredOperation = std::dynamic_pointer_cast<fUML::Semantics::SimpleClassifiers::StringValue>( references.front() );
-				setReferredOperation(_referredOperation);
-			}
-			
-			return;
-		}
 	}
 	ModelPropertyCallExpEvalImpl::resolveReferences(featureID, references);
 }
@@ -265,9 +252,11 @@ void OperationCallExpEvalImpl::save(std::shared_ptr<persistence::interfaces::XSa
 	
 	OclExpEvalImpl::saveContent(saveHandler);
 	
-	fUML::Semantics::Values::EvaluationImpl::saveContent(saveHandler);
+	ecore::ETypedElementImpl::saveContent(saveHandler);
 	
-	fUML::Semantics::Loci::SemanticVisitorImpl::saveContent(saveHandler);
+	ecore::ENamedElementImpl::saveContent(saveHandler);
+	
+	ecore::EModelElementImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);
 }
@@ -277,9 +266,13 @@ void OperationCallExpEvalImpl::saveContent(std::shared_ptr<persistence::interfac
 	try
 	{
 		std::shared_ptr<ocl::Evaluations::EvaluationsPackage> package = ocl::Evaluations::EvaluationsPackage::eInstance();
+		// Add attributes
+		if ( this->eIsSet(package->getOperationCallExpEval_Attribute_referredOperation()) )
+		{
+			saveHandler->addAttribute("referredOperation", this->getReferredOperation());
+		}
 	// Add references
 		saveHandler->addReferences<ocl::Evaluations::OclExpEval>("arguments", this->getArguments());
-		saveHandler->addReference(this->getReferredOperation(), "referredOperation", getReferredOperation()->eClass() != fUML::Semantics::SimpleClassifiers::SimpleClassifiersPackage::eInstance()->getStringValue_Class()); 
 	}
 	catch (std::exception& e)
 	{
@@ -295,14 +288,14 @@ std::shared_ptr<ecore::EClass> OperationCallExpEvalImpl::eStaticClass() const
 //*********************************
 // EStructuralFeature Get/Set/IsSet
 //*********************************
-Any OperationCallExpEvalImpl::eGet(int featureID, bool resolve, bool coreType) const
+std::shared_ptr<Any> OperationCallExpEvalImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 		case ocl::Evaluations::EvaluationsPackage::OPERATIONCALLEXPEVAL_ATTRIBUTE_ARGUMENTS:
-			return eAnyBag(getArguments(),ocl::Evaluations::EvaluationsPackage::OCLEXPEVAL_CLASS); //678
+			return eEcoreContainerAny(getArguments(),ocl::Evaluations::EvaluationsPackage::OCLEXPEVAL_CLASS); //6215
 		case ocl::Evaluations::EvaluationsPackage::OPERATIONCALLEXPEVAL_ATTRIBUTE_REFERREDOPERATION:
-			return eAny(getReferredOperation(),fUML::Semantics::SimpleClassifiers::SimpleClassifiersPackage::STRINGVALUE_CLASS,false); //677
+			return eAny(getReferredOperation(),ecore::ecorePackage::ESTRING_CLASS,false); //6216
 	}
 	return ModelPropertyCallExpEvalImpl::eGet(featureID, resolve, coreType);
 }
@@ -312,61 +305,75 @@ bool OperationCallExpEvalImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case ocl::Evaluations::EvaluationsPackage::OPERATIONCALLEXPEVAL_ATTRIBUTE_ARGUMENTS:
-			return getArguments() != nullptr; //678
+			return getArguments() != nullptr; //6215
 		case ocl::Evaluations::EvaluationsPackage::OPERATIONCALLEXPEVAL_ATTRIBUTE_REFERREDOPERATION:
-			return getReferredOperation() != nullptr; //677
+			return getReferredOperation() != ""; //6216
 	}
 	return ModelPropertyCallExpEvalImpl::internalEIsSet(featureID);
 }
 
-bool OperationCallExpEvalImpl::eSet(int featureID, Any newValue)
+bool OperationCallExpEvalImpl::eSet(int featureID, std::shared_ptr<Any> newValue)
 {
 	switch(featureID)
 	{
 		case ocl::Evaluations::EvaluationsPackage::OPERATIONCALLEXPEVAL_ATTRIBUTE_ARGUMENTS:
 		{
-			// CAST Any to Bag<ocl::Evaluations::OclExpEval>
-			if((newValue->isContainer()) && (ocl::Evaluations::EvaluationsPackage::OCLEXPEVAL_CLASS ==newValue->getTypeId()))
-			{ 
+			std::shared_ptr<ecore::EcoreContainerAny> ecoreContainerAny = std::dynamic_pointer_cast<ecore::EcoreContainerAny>(newValue);
+			if(ecoreContainerAny)
+			{
 				try
 				{
-					std::shared_ptr<Bag<ocl::Evaluations::OclExpEval>> argumentsList= newValue->get<std::shared_ptr<Bag<ocl::Evaluations::OclExpEval>>>();
-					std::shared_ptr<Bag<ocl::Evaluations::OclExpEval>> _arguments=getArguments();
-					for(const std::shared_ptr<ocl::Evaluations::OclExpEval> indexArguments: *_arguments)
+					std::shared_ptr<Bag<ecore::EObject>> eObjectList = ecoreContainerAny->getAsEObjectContainer();
+	
+					if(eObjectList)
 					{
-						if (argumentsList->find(indexArguments) == -1)
+						std::shared_ptr<Bag<ocl::Evaluations::OclExpEval>> _arguments = getArguments();
+	
+						for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
 						{
-							_arguments->erase(indexArguments);
-						}
-					}
-
-					for(const std::shared_ptr<ocl::Evaluations::OclExpEval> indexArguments: *argumentsList)
-					{
-						if (_arguments->find(indexArguments) == -1)
-						{
-							_arguments->add(indexArguments);
+							std::shared_ptr<ocl::Evaluations::OclExpEval> valueToAdd = std::dynamic_pointer_cast<ocl::Evaluations::OclExpEval>(anEObject);
+	
+							if (valueToAdd)
+							{
+								if(_arguments->find(valueToAdd) == -1)
+								{
+									_arguments->add(valueToAdd);
+								}
+								//else, valueToAdd is already present so it won't be added again
+							}
+							else
+							{
+								throw "Invalid argument";
+							}
 						}
 					}
 				}
 				catch(...)
 				{
-					DEBUG_MESSAGE(std::cout << "invalid Type to set of eAttributes."<< std::endl;)
+					DEBUG_ERROR("Invalid type stored in 'ecore::ecoreContainerAny' for feature 'arguments'. Failed to set feature!")
 					return false;
 				}
 			}
 			else
 			{
+				DEBUG_ERROR("Invalid instance of 'ecore::ecoreContainerAny' for feature 'arguments'. Failed to set feature!")
 				return false;
 			}
-			return true;
+		return true;
 		}
 		case ocl::Evaluations::EvaluationsPackage::OPERATIONCALLEXPEVAL_ATTRIBUTE_REFERREDOPERATION:
 		{
-			// CAST Any to fUML::Semantics::SimpleClassifiers::StringValue
-			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
-			std::shared_ptr<fUML::Semantics::SimpleClassifiers::StringValue> _referredOperation = std::dynamic_pointer_cast<fUML::Semantics::SimpleClassifiers::StringValue>(_temp);
-			setReferredOperation(_referredOperation); //677
-			return true;
+			try
+			{
+				std::string _referredOperation = newValue->get<std::string>();
+				setReferredOperation(_referredOperation); //6216
+			}
+			catch(...)
+			{
+				DEBUG_ERROR("Invalid type stored in 'Any' for feature 'referredOperation'. Failed to set feature!")
+				return false;
+			}
+		return true;
 		}
 	}
 
@@ -376,9 +383,9 @@ bool OperationCallExpEvalImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any OperationCallExpEvalImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+std::shared_ptr<Any> OperationCallExpEvalImpl::eInvoke(int operationID, std::shared_ptr<Bag<Any>> arguments)
 {
-	Any result;
+	std::shared_ptr<Any> result;
  
   	switch(operationID)
 	{

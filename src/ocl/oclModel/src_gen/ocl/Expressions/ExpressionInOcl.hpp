@@ -36,7 +36,6 @@ namespace ocl
 namespace ocl::Expressions 
 {
 	class OclExpression;
-	class Variable;
 }
 namespace ecore 
 {
@@ -58,7 +57,7 @@ namespace ecore
 namespace ocl::Expressions 
 {
 	
-	class OCL_API ExpressionInOcl: virtual public ecore::ETypedElement
+	class OCL_API ExpressionInOcl : virtual public ecore::ETypedElement
 	{
 		public:
  			ExpressionInOcl(const ExpressionInOcl &) {}
@@ -85,11 +84,11 @@ namespace ocl::Expressions
 			//*********************************
 			virtual std::shared_ptr<ocl::Expressions::OclExpression> getBodyExpression() const = 0;
 			virtual void setBodyExpression(std::shared_ptr<ocl::Expressions::OclExpression>) = 0;
-			virtual std::shared_ptr<ocl::Expressions::Variable> getContextVariable() const = 0;
-			virtual void setContextVariable(std::shared_ptr<ocl::Expressions::Variable>) = 0;
-			virtual std::shared_ptr<Bag<ocl::Expressions::Variable>> getParameterVariable() const = 0;
-			virtual std::shared_ptr<ocl::Expressions::Variable> getResultVariable() const = 0;
-			virtual void setResultVariable(std::shared_ptr<ocl::Expressions::Variable>) = 0;
+			virtual std::shared_ptr<ecore::ETypedElement> getContextVariable() const = 0;
+			virtual void setContextVariable(std::shared_ptr<ecore::ETypedElement>) = 0;
+			virtual std::shared_ptr<Bag<ecore::ETypedElement>> getParameterVariable() const = 0;
+			virtual std::shared_ptr<ecore::ETypedElement> getResultVariable() const = 0;
+			virtual void setResultVariable(std::shared_ptr<ecore::ETypedElement>) = 0;
 
 			//*********************************
 			// Union Reference Getters
@@ -116,9 +115,9 @@ namespace ocl::Expressions
 			// Reference Members
 			//*********************************
 			std::shared_ptr<ocl::Expressions::OclExpression> m_bodyExpression;
-			std::shared_ptr<ocl::Expressions::Variable> m_contextVariable;
-			mutable std::shared_ptr<Bag<ocl::Expressions::Variable>> m_parameterVariable;
-			std::shared_ptr<ocl::Expressions::Variable> m_resultVariable;
+			std::shared_ptr<ecore::ETypedElement> m_contextVariable;
+			mutable std::shared_ptr<Bag<ecore::ETypedElement>> m_parameterVariable;
+			std::shared_ptr<ecore::ETypedElement> m_resultVariable;
 	};
 }
 #endif /* end of include guard: OCL_EXPRESSIONS_EXPRESSIONINOCL_HPP */

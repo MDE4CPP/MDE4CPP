@@ -1,9 +1,13 @@
 
 #include "ocl/Expressions/impl/MessageExpImpl.hpp"
 #ifdef NDEBUG
-	#define DEBUG_MESSAGE(a) /**/
+	#define DEBUG_INFO(a)		/**/
+	#define DEBUG_WARNING(a)	/**/
+	#define DEBUG_ERROR(a)		/**/
 #else
-	#define DEBUG_MESSAGE(a) a
+	#define DEBUG_INFO(a) 		std::cout<<"[\e[0;32mInfo\e[0m]:\t\t"<<__PRETTY_FUNCTION__<<"\n\t\t  -- Message: "<<a<<std::endl;
+	#define DEBUG_WARNING(a) 	std::cout<<"[\e[0;33mWarning\e[0m]:\t"<<__PRETTY_FUNCTION__<<"\n\t\t  -- Message: "<<a<<std::endl;
+	#define DEBUG_ERROR(a)		std::cout<<"[\e[0;31mError\e[0m]:\t"<<__PRETTY_FUNCTION__<<"\n\t\t  -- Message: "<<a<<std::endl;
 #endif
 
 #ifdef ACTIVITY_DEBUG_ON
@@ -21,8 +25,8 @@
 #include "abstractDataTypes/Bag.hpp"
 
 
-#include "abstractDataTypes/AnyEObject.hpp"
-#include "abstractDataTypes/AnyEObjectBag.hpp"
+#include "ecore/EcoreAny.hpp"
+#include "ecore/EcoreContainerAny.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
@@ -34,12 +38,10 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
+#include "ocl/Evaluations/EvaluationsFactory.hpp"
 #include "ocl/Expressions/ExpressionsFactory.hpp"
 #include "ecore/ecoreFactory.hpp"
-#include "uml/umlFactory.hpp"
-#include "ocl/Evaluations/EvaluationsFactory.hpp"
 #include "ocl/Expressions/CallExp.hpp"
-#include "uml/CallOperationAction.hpp"
 #include "ocl/Expressions/CollectionRange.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClassifier.hpp"
@@ -51,14 +53,12 @@
 #include "ocl/Evaluations/OclExpEval.hpp"
 #include "ocl/Expressions/OclExpression.hpp"
 #include "ocl/Expressions/OperationCallExp.hpp"
-#include "uml/SendSignalAction.hpp"
-#include "ocl/Expressions/Variable.hpp"
+#include "ocl/Expressions/VarDeclarationExp.hpp"
 //Factories and Package includes
 #include "ocl/oclPackage.hpp"
 #include "ocl/Evaluations/EvaluationsPackage.hpp"
 #include "ocl/Expressions/ExpressionsPackage.hpp"
 #include "ecore/ecorePackage.hpp"
-#include "uml/umlPackage.hpp"
 
 using namespace ocl::Expressions;
 
@@ -77,13 +77,6 @@ MessageExpImpl::~MessageExpImpl()
 #ifdef SHOW_DELETION
 	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete MessageExp "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
 #endif
-}
-
-//Additional constructor for the containments back reference
-MessageExpImpl::MessageExpImpl(std::weak_ptr<ocl::Expressions::CallExp> par_appliedElement)
-:MessageExpImpl()
-{
-	m_appliedElement = par_appliedElement;
 }
 
 //Additional constructor for the containments back reference
@@ -126,20 +119,25 @@ MessageExpImpl::MessageExpImpl(std::weak_ptr<ocl::Expressions::CollectionRange> 
 }
 
 
-//Additional constructor for the containments back reference
-MessageExpImpl::MessageExpImpl(std::weak_ptr<ocl::Expressions::Variable> par_initializedElement)
-:MessageExpImpl()
-{
-	m_initializedElement = par_initializedElement;
-}
-
 
 //Additional constructor for the containments back reference
-MessageExpImpl::MessageExpImpl(std::weak_ptr<ocl::Expressions::LoopExp> par_loopBodyOwner)
+MessageExpImpl::MessageExpImpl(std::weak_ptr<ocl::Expressions::LoopExp> par_LoopExp, const int reference_id)
 :MessageExpImpl()
 {
-	m_loopBodyOwner = par_loopBodyOwner;
+	switch(reference_id)
+	{	
+	case ocl::Expressions::ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_LOOPBODYOWNER:
+		m_loopBodyOwner = par_LoopExp;
+		 return;
+	case ocl::Expressions::ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_LOOPEXP:
+		m_loopExp = par_LoopExp;
+		 return;
+	default:
+	std::cerr << __PRETTY_FUNCTION__ <<" Reference not found in class with the given ID" << std::endl;
+	}
+   
 }
+
 
 //Additional constructor for the containments back reference
 MessageExpImpl::MessageExpImpl(std::weak_ptr<ocl::Expressions::OperationCallExp> par_parentCall)
@@ -188,11 +186,11 @@ MessageExpImpl& MessageExpImpl::operator=(const MessageExpImpl & obj)
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy MessageExp "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
 	#endif
 	//Clone Attributes with (deep copy)
+	m_calledOperation = obj.getCalledOperation();
+	m_sentSignal = obj.getSentSignal();
 
 	//copy references with no containment (soft copy)
 	m_argument  = obj.getArgument();
-	m_calledOperation  = obj.getCalledOperation();
-	m_sentSignal  = obj.getSentSignal();
 	m_target  = obj.getTarget();
 	//Clone references with containment (deep copy)
 	return *this;
@@ -213,6 +211,27 @@ std::shared_ptr<ecore::EObject> MessageExpImpl::copy() const
 //*********************************
 // Attribute Getters & Setters
 //*********************************
+/* Getter & Setter for attribute calledOperation */
+std::string MessageExpImpl::getCalledOperation() const 
+{
+	return m_calledOperation;
+}
+void MessageExpImpl::setCalledOperation(std::string _calledOperation)
+{
+	m_calledOperation = _calledOperation;
+	
+}
+
+/* Getter & Setter for attribute sentSignal */
+std::string MessageExpImpl::getSentSignal() const 
+{
+	return m_sentSignal;
+}
+void MessageExpImpl::setSentSignal(std::string _sentSignal)
+{
+	m_sentSignal = _sentSignal;
+	
+}
 
 //*********************************
 // Reference Getters & Setters
@@ -227,28 +246,6 @@ std::shared_ptr<Bag<ocl::Expressions::OclExpression>> MessageExpImpl::getArgumen
 		
 	}
     return m_argument;
-}
-
-/* Getter & Setter for reference calledOperation */
-std::shared_ptr<uml::CallOperationAction> MessageExpImpl::getCalledOperation() const
-{
-    return m_calledOperation;
-}
-void MessageExpImpl::setCalledOperation(std::shared_ptr<uml::CallOperationAction> _calledOperation)
-{
-    m_calledOperation = _calledOperation;
-	
-}
-
-/* Getter & Setter for reference sentSignal */
-std::shared_ptr<uml::SendSignalAction> MessageExpImpl::getSentSignal() const
-{
-    return m_sentSignal;
-}
-void MessageExpImpl::setSentSignal(std::shared_ptr<uml::SendSignalAction> _sentSignal)
-{
-    m_sentSignal = _sentSignal;
-	
 }
 
 /* Getter & Setter for reference target */
@@ -271,11 +268,6 @@ void MessageExpImpl::setTarget(std::shared_ptr<ocl::Expressions::OclExpression> 
 //*********************************
 std::shared_ptr<ecore::EObject> MessageExpImpl::eContainer() const
 {
-	if(auto wp = m_appliedElement.lock())
-	{
-		return wp;
-	}
-
 	if(auto wp = m_elseOwner.lock())
 	{
 		return wp;
@@ -299,16 +291,16 @@ std::shared_ptr<ecore::EObject> MessageExpImpl::eContainer() const
 	}
 
 
-	if(auto wp = m_initializedElement.lock())
-	{
-		return wp;
-	}
-
 
 	if(auto wp = m_loopBodyOwner.lock())
 	{
 		return wp;
 	}
+	if(auto wp = m_loopExp.lock())
+	{
+		return wp;
+	}
+
 
 	if(auto wp = m_parentCall.lock())
 	{
@@ -352,26 +344,30 @@ void MessageExpImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLo
 	try
 	{
 		std::map<std::string, std::string>::const_iterator iter;
+	
+		iter = attr_list.find("calledOperation");
+		if ( iter != attr_list.end() )
+		{
+			// this attribute is a 'std::string'
+			std::string value;
+			value = iter->second;
+			this->setCalledOperation(value);
+		}
+
+		iter = attr_list.find("sentSignal");
+		if ( iter != attr_list.end() )
+		{
+			// this attribute is a 'std::string'
+			std::string value;
+			value = iter->second;
+			this->setSentSignal(value);
+		}
 		std::shared_ptr<ecore::EClass> metaClass = this->eClass(); // get MetaClass
 		iter = attr_list.find("argument");
 		if ( iter != attr_list.end() )
 		{
 			// add unresolvedReference to loadHandler's list
 			loadHandler->addUnresolvedReference(iter->second, loadHandler->getCurrentObject(), metaClass->getEStructuralFeature("argument")); // TODO use getEStructuralFeature() with id, for faster access to EStructuralFeature
-		}
-
-		iter = attr_list.find("calledOperation");
-		if ( iter != attr_list.end() )
-		{
-			// add unresolvedReference to loadHandler's list
-			loadHandler->addUnresolvedReference(iter->second, loadHandler->getCurrentObject(), metaClass->getEStructuralFeature("calledOperation")); // TODO use getEStructuralFeature() with id, for faster access to EStructuralFeature
-		}
-
-		iter = attr_list.find("sentSignal");
-		if ( iter != attr_list.end() )
-		{
-			// add unresolvedReference to loadHandler's list
-			loadHandler->addUnresolvedReference(iter->second, loadHandler->getCurrentObject(), metaClass->getEStructuralFeature("sentSignal")); // TODO use getEStructuralFeature() with id, for faster access to EStructuralFeature
 		}
 
 		iter = attr_list.find("target");
@@ -418,30 +414,6 @@ void MessageExpImpl::resolveReferences(const int featureID, std::vector<std::sha
 			return;
 		}
 
-		case ocl::Expressions::ExpressionsPackage::MESSAGEEXP_ATTRIBUTE_CALLEDOPERATION:
-		{
-			if (references.size() == 1)
-			{
-				// Cast object to correct type
-				std::shared_ptr<uml::CallOperationAction> _calledOperation = std::dynamic_pointer_cast<uml::CallOperationAction>( references.front() );
-				setCalledOperation(_calledOperation);
-			}
-			
-			return;
-		}
-
-		case ocl::Expressions::ExpressionsPackage::MESSAGEEXP_ATTRIBUTE_SENTSIGNAL:
-		{
-			if (references.size() == 1)
-			{
-				// Cast object to correct type
-				std::shared_ptr<uml::SendSignalAction> _sentSignal = std::dynamic_pointer_cast<uml::SendSignalAction>( references.front() );
-				setSentSignal(_sentSignal);
-			}
-			
-			return;
-		}
-
 		case ocl::Expressions::ExpressionsPackage::MESSAGEEXP_ATTRIBUTE_TARGET:
 		{
 			if (references.size() == 1)
@@ -477,10 +449,18 @@ void MessageExpImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveH
 	try
 	{
 		std::shared_ptr<ocl::Expressions::ExpressionsPackage> package = ocl::Expressions::ExpressionsPackage::eInstance();
+		// Add attributes
+		if ( this->eIsSet(package->getMessageExp_Attribute_calledOperation()) )
+		{
+			saveHandler->addAttribute("calledOperation", this->getCalledOperation());
+		}
+
+		if ( this->eIsSet(package->getMessageExp_Attribute_sentSignal()) )
+		{
+			saveHandler->addAttribute("sentSignal", this->getSentSignal());
+		}
 	// Add references
 		saveHandler->addReferences<ocl::Expressions::OclExpression>("argument", this->getArgument());
-		saveHandler->addReference(this->getCalledOperation(), "calledOperation", getCalledOperation()->eClass() != uml::umlPackage::eInstance()->getCallOperationAction_Class()); 
-		saveHandler->addReference(this->getSentSignal(), "sentSignal", getSentSignal()->eClass() != uml::umlPackage::eInstance()->getSendSignalAction_Class()); 
 		saveHandler->addReference(this->getTarget(), "target", getTarget()->eClass() != ocl::Expressions::ExpressionsPackage::eInstance()->getOclExpression_Class()); 
 	}
 	catch (std::exception& e)
@@ -497,18 +477,18 @@ std::shared_ptr<ecore::EClass> MessageExpImpl::eStaticClass() const
 //*********************************
 // EStructuralFeature Get/Set/IsSet
 //*********************************
-Any MessageExpImpl::eGet(int featureID, bool resolve, bool coreType) const
+std::shared_ptr<Any> MessageExpImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 		case ocl::Expressions::ExpressionsPackage::MESSAGEEXP_ATTRIBUTE_ARGUMENT:
-			return eAnyBag(getArgument(),ocl::Expressions::ExpressionsPackage::OCLEXPRESSION_CLASS); //4923
+			return eEcoreContainerAny(getArgument(),ocl::Expressions::ExpressionsPackage::OCLEXPRESSION_CLASS); //4924
 		case ocl::Expressions::ExpressionsPackage::MESSAGEEXP_ATTRIBUTE_CALLEDOPERATION:
-			return eAny(getCalledOperation(),uml::umlPackage::CALLOPERATIONACTION_CLASS,false); //4924
+			return eAny(getCalledOperation(),ecore::ecorePackage::ESTRING_CLASS,false); //4926
 		case ocl::Expressions::ExpressionsPackage::MESSAGEEXP_ATTRIBUTE_SENTSIGNAL:
-			return eAny(getSentSignal(),uml::umlPackage::SENDSIGNALACTION_CLASS,false); //4925
+			return eAny(getSentSignal(),ecore::ecorePackage::ESTRING_CLASS,false); //4925
 		case ocl::Expressions::ExpressionsPackage::MESSAGEEXP_ATTRIBUTE_TARGET:
-			return eAny(getTarget(),ocl::Expressions::ExpressionsPackage::OCLEXPRESSION_CLASS,false); //4922
+			return eAny(getTarget(),ocl::Expressions::ExpressionsPackage::OCLEXPRESSION_CLASS,false); //4923
 	}
 	return OclExpressionImpl::eGet(featureID, resolve, coreType);
 }
@@ -518,81 +498,124 @@ bool MessageExpImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case ocl::Expressions::ExpressionsPackage::MESSAGEEXP_ATTRIBUTE_ARGUMENT:
-			return getArgument() != nullptr; //4923
+			return getArgument() != nullptr; //4924
 		case ocl::Expressions::ExpressionsPackage::MESSAGEEXP_ATTRIBUTE_CALLEDOPERATION:
-			return getCalledOperation() != nullptr; //4924
+			return getCalledOperation() != ""; //4926
 		case ocl::Expressions::ExpressionsPackage::MESSAGEEXP_ATTRIBUTE_SENTSIGNAL:
-			return getSentSignal() != nullptr; //4925
+			return getSentSignal() != ""; //4925
 		case ocl::Expressions::ExpressionsPackage::MESSAGEEXP_ATTRIBUTE_TARGET:
-			return getTarget() != nullptr; //4922
+			return getTarget() != nullptr; //4923
 	}
 	return OclExpressionImpl::internalEIsSet(featureID);
 }
 
-bool MessageExpImpl::eSet(int featureID, Any newValue)
+bool MessageExpImpl::eSet(int featureID, std::shared_ptr<Any> newValue)
 {
 	switch(featureID)
 	{
 		case ocl::Expressions::ExpressionsPackage::MESSAGEEXP_ATTRIBUTE_ARGUMENT:
 		{
-			// CAST Any to Bag<ocl::Expressions::OclExpression>
-			if((newValue->isContainer()) && (ocl::Expressions::ExpressionsPackage::OCLEXPRESSION_CLASS ==newValue->getTypeId()))
-			{ 
+			std::shared_ptr<ecore::EcoreContainerAny> ecoreContainerAny = std::dynamic_pointer_cast<ecore::EcoreContainerAny>(newValue);
+			if(ecoreContainerAny)
+			{
 				try
 				{
-					std::shared_ptr<Bag<ocl::Expressions::OclExpression>> argumentList= newValue->get<std::shared_ptr<Bag<ocl::Expressions::OclExpression>>>();
-					std::shared_ptr<Bag<ocl::Expressions::OclExpression>> _argument=getArgument();
-					for(const std::shared_ptr<ocl::Expressions::OclExpression> indexArgument: *_argument)
+					std::shared_ptr<Bag<ecore::EObject>> eObjectList = ecoreContainerAny->getAsEObjectContainer();
+	
+					if(eObjectList)
 					{
-						if (argumentList->find(indexArgument) == -1)
+						std::shared_ptr<Bag<ocl::Expressions::OclExpression>> _argument = getArgument();
+	
+						for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
 						{
-							_argument->erase(indexArgument);
-						}
-					}
-
-					for(const std::shared_ptr<ocl::Expressions::OclExpression> indexArgument: *argumentList)
-					{
-						if (_argument->find(indexArgument) == -1)
-						{
-							_argument->add(indexArgument);
+							std::shared_ptr<ocl::Expressions::OclExpression> valueToAdd = std::dynamic_pointer_cast<ocl::Expressions::OclExpression>(anEObject);
+	
+							if (valueToAdd)
+							{
+								if(_argument->find(valueToAdd) == -1)
+								{
+									_argument->add(valueToAdd);
+								}
+								//else, valueToAdd is already present so it won't be added again
+							}
+							else
+							{
+								throw "Invalid argument";
+							}
 						}
 					}
 				}
 				catch(...)
 				{
-					DEBUG_MESSAGE(std::cout << "invalid Type to set of eAttributes."<< std::endl;)
+					DEBUG_ERROR("Invalid type stored in 'ecore::ecoreContainerAny' for feature 'argument'. Failed to set feature!")
 					return false;
 				}
 			}
 			else
 			{
+				DEBUG_ERROR("Invalid instance of 'ecore::ecoreContainerAny' for feature 'argument'. Failed to set feature!")
 				return false;
 			}
-			return true;
+		return true;
 		}
 		case ocl::Expressions::ExpressionsPackage::MESSAGEEXP_ATTRIBUTE_CALLEDOPERATION:
 		{
-			// CAST Any to uml::CallOperationAction
-			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
-			std::shared_ptr<uml::CallOperationAction> _calledOperation = std::dynamic_pointer_cast<uml::CallOperationAction>(_temp);
-			setCalledOperation(_calledOperation); //4924
-			return true;
+			try
+			{
+				std::string _calledOperation = newValue->get<std::string>();
+				setCalledOperation(_calledOperation); //4926
+			}
+			catch(...)
+			{
+				DEBUG_ERROR("Invalid type stored in 'Any' for feature 'calledOperation'. Failed to set feature!")
+				return false;
+			}
+		return true;
 		}
 		case ocl::Expressions::ExpressionsPackage::MESSAGEEXP_ATTRIBUTE_SENTSIGNAL:
 		{
-			// CAST Any to uml::SendSignalAction
-			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
-			std::shared_ptr<uml::SendSignalAction> _sentSignal = std::dynamic_pointer_cast<uml::SendSignalAction>(_temp);
-			setSentSignal(_sentSignal); //4925
-			return true;
+			try
+			{
+				std::string _sentSignal = newValue->get<std::string>();
+				setSentSignal(_sentSignal); //4925
+			}
+			catch(...)
+			{
+				DEBUG_ERROR("Invalid type stored in 'Any' for feature 'sentSignal'. Failed to set feature!")
+				return false;
+			}
+		return true;
 		}
 		case ocl::Expressions::ExpressionsPackage::MESSAGEEXP_ATTRIBUTE_TARGET:
 		{
-			// CAST Any to ocl::Expressions::OclExpression
-			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
-			std::shared_ptr<ocl::Expressions::OclExpression> _target = std::dynamic_pointer_cast<ocl::Expressions::OclExpression>(_temp);
-			setTarget(_target); //4922
-			return true;
+			std::shared_ptr<ecore::EcoreAny> ecoreAny = std::dynamic_pointer_cast<ecore::EcoreAny>(newValue);
+			if(ecoreAny)
+			{
+				try
+				{
+					std::shared_ptr<ecore::EObject> eObject = ecoreAny->getAsEObject();
+					std::shared_ptr<ocl::Expressions::OclExpression> _target = std::dynamic_pointer_cast<ocl::Expressions::OclExpression>(eObject);
+					if(_target)
+					{
+						setTarget(_target); //4923
+					}
+					else
+					{
+						throw "Invalid argument";
+					}
+				}
+				catch(...)
+				{
+					DEBUG_ERROR("Invalid type stored in 'ecore::ecoreAny' for feature 'target'. Failed to set feature!")
+					return false;
+				}
+			}
+			else
+			{
+				DEBUG_ERROR("Invalid instance of 'ecore::ecoreAny' for feature 'target'. Failed to set feature!")
+				return false;
+			}
+		return true;
 		}
 	}
 
@@ -602,9 +625,9 @@ bool MessageExpImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any MessageExpImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+std::shared_ptr<Any> MessageExpImpl::eInvoke(int operationID, std::shared_ptr<Bag<Any>> arguments)
 {
-	Any result;
+	std::shared_ptr<Any> result;
  
   	switch(operationID)
 	{

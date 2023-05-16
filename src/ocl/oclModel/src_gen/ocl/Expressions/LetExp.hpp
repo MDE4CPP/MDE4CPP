@@ -11,6 +11,7 @@
 #include <memory>
 #include <string>
 // forward declarations
+template<class T> class Bag; 
 
 
 //*********************************
@@ -45,7 +46,7 @@ namespace ocl::Expressions
 	class LoopExp;
 	class NavigationCallExp;
 	class OperationCallExp;
-	class Variable;
+	class VarDeclarationExp;
 }
 namespace ecore 
 {
@@ -67,7 +68,7 @@ namespace ecore
 namespace ocl::Expressions 
 {
 	
-	class OCL_API LetExp: virtual public OclExpression
+	class OCL_API LetExp : virtual public OclExpression
 	{
 		public:
  			LetExp(const LetExp &) {}
@@ -94,8 +95,7 @@ namespace ocl::Expressions
 			//*********************************
 			virtual std::shared_ptr<ocl::Expressions::OclExpression> getIn() const = 0;
 			virtual void setIn(std::shared_ptr<ocl::Expressions::OclExpression>) = 0;
-			virtual std::shared_ptr<ocl::Expressions::Variable> getVariable() const = 0;
-			virtual void setVariable(std::shared_ptr<ocl::Expressions::Variable>) = 0;
+			virtual std::shared_ptr<Bag<ocl::Expressions::VarDeclarationExp>> getVariables() const = 0;
 
 			//*********************************
 			// Union Reference Getters
@@ -122,7 +122,7 @@ namespace ocl::Expressions
 			// Reference Members
 			//*********************************
 			std::shared_ptr<ocl::Expressions::OclExpression> m_in;
-			std::shared_ptr<ocl::Expressions::Variable> m_variable;
+			mutable std::shared_ptr<Bag<ocl::Expressions::VarDeclarationExp>> m_variables;
 	};
 }
 #endif /* end of include guard: OCL_EXPRESSIONS_LETEXP_HPP */

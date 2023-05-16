@@ -32,24 +32,27 @@ namespace ocl
 }
 
 //Forward Declaration for used types 
-namespace fUML::Semantics::Loci 
+namespace ocl::Evaluations 
 {
-	class Locus;
+	class EvalEnvironment;
 }
-namespace fUML::Semantics::Values 
+namespace ocl::Expressions 
 {
-	class Value;
+	class OclExpression;
 }
-namespace uml 
+namespace ecore 
 {
-	class ValueSpecification;
+	class EAnnotation;
+	class EClassifier;
+	class EGenericType;
+	class EObject;
 }
 
 // namespace macro header include
 #include "ocl/ocl.hpp"
 
 // base class includes
-#include "fUML/Semantics/Values/Evaluation.hpp"
+#include "ocl/Evaluations/OclExpEval.hpp"
 
 
 
@@ -58,7 +61,7 @@ namespace uml
 namespace ocl::Evaluations 
 {
 	
-	class OCL_API CollectionLiteralPartEval: virtual public fUML::Semantics::Values::Evaluation
+	class OCL_API CollectionLiteralPartEval : virtual public OclExpEval
 	{
 		public:
  			CollectionLiteralPartEval(const CollectionLiteralPartEval &) {}
@@ -83,8 +86,8 @@ namespace ocl::Evaluations
 			//*********************************
 			// Reference Getters & Setters
 			//*********************************
-			virtual std::shared_ptr<fUML::Semantics::Values::Value> getElement() const = 0;
-			virtual void setElement(std::shared_ptr<fUML::Semantics::Values::Value>) = 0;
+			virtual std::shared_ptr<ecore::EObject> getElement() const = 0;
+			virtual void setElement(std::shared_ptr<ecore::EObject>) = 0;
 
 			//*********************************
 			// Union Reference Getters
@@ -110,7 +113,7 @@ namespace ocl::Evaluations
 			//*********************************
 			// Reference Members
 			//*********************************
-			std::shared_ptr<fUML::Semantics::Values::Value> m_element;
+			std::shared_ptr<ecore::EObject> m_element;
 	};
 }
 #endif /* end of include guard: OCL_EVALUATIONS_COLLECTIONLITERALPARTEVAL_HPP */

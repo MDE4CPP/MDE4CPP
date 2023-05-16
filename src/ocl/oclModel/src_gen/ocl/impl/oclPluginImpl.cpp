@@ -5,6 +5,24 @@
 
 using namespace ocl;
 
+//static initialisation
+std::shared_ptr<MDE4CPPPlugin> oclPlugin::eInstance()
+{
+	static std::shared_ptr<MDE4CPPPlugin> instance = nullptr;
+
+	if(instance==nullptr)
+	{
+		//create a new Singelton Instance
+		instance.reset(new oclPluginImpl());
+	}
+	return instance;
+}
+
+OCL_API std::shared_ptr<MDE4CPPPlugin> start()
+{
+	return oclPluginImpl::eInstance();
+}
+
 //*********************************
 // Constructor / Destructor
 //*********************************

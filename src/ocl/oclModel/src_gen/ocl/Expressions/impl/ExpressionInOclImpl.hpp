@@ -53,11 +53,11 @@ namespace ocl::Expressions
 			//*********************************
 			virtual std::shared_ptr<ocl::Expressions::OclExpression> getBodyExpression() const ;
 			virtual void setBodyExpression(std::shared_ptr<ocl::Expressions::OclExpression>) ;
-			virtual std::shared_ptr<ocl::Expressions::Variable> getContextVariable() const ;
-			virtual void setContextVariable(std::shared_ptr<ocl::Expressions::Variable>) ;
-			virtual std::shared_ptr<Bag<ocl::Expressions::Variable>> getParameterVariable() const ;
-			virtual std::shared_ptr<ocl::Expressions::Variable> getResultVariable() const ;
-			virtual void setResultVariable(std::shared_ptr<ocl::Expressions::Variable>) ;
+			virtual std::shared_ptr<ecore::ETypedElement> getContextVariable() const ;
+			virtual void setContextVariable(std::shared_ptr<ecore::ETypedElement>) ;
+			virtual std::shared_ptr<Bag<ecore::ETypedElement>> getParameterVariable() const ;
+			virtual std::shared_ptr<ecore::ETypedElement> getResultVariable() const ;
+			virtual void setResultVariable(std::shared_ptr<ecore::ETypedElement>) ;
 			
 			//*********************************
 			// Union Reference Getters
@@ -67,7 +67,7 @@ namespace ocl::Expressions
 			// Container Getter
 			//*********************************
 			virtual std::shared_ptr<ecore::EObject> eContainer() const ; 
-			
+
 			//*********************************
 			// Persistence Functions
 			//*********************************
@@ -84,14 +84,14 @@ namespace ocl::Expressions
 			//*********************************
 			// EStructuralFeature Get/Set/IsSet
 			//*********************************
-			virtual Any eGet(int featureID, bool resolve, bool coreType) const ;
-			virtual bool eSet(int featureID, Any newValue) ;
+			virtual std::shared_ptr<Any> eGet(int featureID, bool resolve, bool coreType) const ;
+			virtual bool eSet(int featureID, std::shared_ptr<Any> newValue) ;
 			virtual bool internalEIsSet(int featureID) const ;
 
 			//*********************************
 			// EOperation Invoke
 			//*********************************
-			virtual Any eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments) ;
+			virtual std::shared_ptr<Any> eInvoke(int operationID, std::shared_ptr<Bag<Any>> arguments) ;
 
 		private:
 			std::weak_ptr<ocl::Expressions::ExpressionInOcl> m_thisExpressionInOclPtr;

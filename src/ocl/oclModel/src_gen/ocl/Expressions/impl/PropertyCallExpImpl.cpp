@@ -1,9 +1,13 @@
 
 #include "ocl/Expressions/impl/PropertyCallExpImpl.hpp"
 #ifdef NDEBUG
-	#define DEBUG_MESSAGE(a) /**/
+	#define DEBUG_INFO(a)		/**/
+	#define DEBUG_WARNING(a)	/**/
+	#define DEBUG_ERROR(a)		/**/
 #else
-	#define DEBUG_MESSAGE(a) a
+	#define DEBUG_INFO(a) 		std::cout<<"[\e[0;32mInfo\e[0m]:\t\t"<<__PRETTY_FUNCTION__<<"\n\t\t  -- Message: "<<a<<std::endl;
+	#define DEBUG_WARNING(a) 	std::cout<<"[\e[0;33mWarning\e[0m]:\t"<<__PRETTY_FUNCTION__<<"\n\t\t  -- Message: "<<a<<std::endl;
+	#define DEBUG_ERROR(a)		std::cout<<"[\e[0;31mError\e[0m]:\t"<<__PRETTY_FUNCTION__<<"\n\t\t  -- Message: "<<a<<std::endl;
 #endif
 
 #ifdef ACTIVITY_DEBUG_ON
@@ -21,8 +25,8 @@
 #include "abstractDataTypes/Bag.hpp"
 
 
-#include "abstractDataTypes/AnyEObject.hpp"
-#include "abstractDataTypes/AnyEObjectBag.hpp"
+#include "ecore/EcoreAny.hpp"
+#include "ecore/EcoreContainerAny.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
@@ -34,13 +38,12 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
+#include "ocl/Evaluations/EvaluationsFactory.hpp"
 #include "ocl/Expressions/ExpressionsFactory.hpp"
 #include "ecore/ecoreFactory.hpp"
-#include "ocl/Evaluations/EvaluationsFactory.hpp"
 #include "ocl/Expressions/CallExp.hpp"
 #include "ocl/Expressions/CollectionRange.hpp"
 #include "ecore/EAnnotation.hpp"
-#include "ecore/EAttribute.hpp"
 #include "ecore/EClassifier.hpp"
 #include "ecore/EGenericType.hpp"
 #include "ocl/Expressions/ExpressionInOcl.hpp"
@@ -50,7 +53,7 @@
 #include "ocl/Evaluations/OclExpEval.hpp"
 #include "ocl/Expressions/OclExpression.hpp"
 #include "ocl/Expressions/OperationCallExp.hpp"
-#include "ocl/Expressions/Variable.hpp"
+#include "ocl/Expressions/VarDeclarationExp.hpp"
 //Factories and Package includes
 #include "ocl/oclPackage.hpp"
 #include "ocl/Evaluations/EvaluationsPackage.hpp"
@@ -74,13 +77,6 @@ PropertyCallExpImpl::~PropertyCallExpImpl()
 #ifdef SHOW_DELETION
 	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete PropertyCallExp "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
 #endif
-}
-
-//Additional constructor for the containments back reference
-PropertyCallExpImpl::PropertyCallExpImpl(std::weak_ptr<ocl::Expressions::CallExp> par_appliedElement)
-:PropertyCallExpImpl()
-{
-	m_appliedElement = par_appliedElement;
 }
 
 //Additional constructor for the containments back reference
@@ -123,20 +119,25 @@ PropertyCallExpImpl::PropertyCallExpImpl(std::weak_ptr<ocl::Expressions::Collect
 }
 
 
-//Additional constructor for the containments back reference
-PropertyCallExpImpl::PropertyCallExpImpl(std::weak_ptr<ocl::Expressions::Variable> par_initializedElement)
-:PropertyCallExpImpl()
-{
-	m_initializedElement = par_initializedElement;
-}
-
 
 //Additional constructor for the containments back reference
-PropertyCallExpImpl::PropertyCallExpImpl(std::weak_ptr<ocl::Expressions::LoopExp> par_loopBodyOwner)
+PropertyCallExpImpl::PropertyCallExpImpl(std::weak_ptr<ocl::Expressions::LoopExp> par_LoopExp, const int reference_id)
 :PropertyCallExpImpl()
 {
-	m_loopBodyOwner = par_loopBodyOwner;
+	switch(reference_id)
+	{	
+	case ocl::Expressions::ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_LOOPBODYOWNER:
+		m_loopBodyOwner = par_LoopExp;
+		 return;
+	case ocl::Expressions::ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_LOOPEXP:
+		m_loopExp = par_LoopExp;
+		 return;
+	default:
+	std::cerr << __PRETTY_FUNCTION__ <<" Reference not found in class with the given ID" << std::endl;
+	}
+   
 }
+
 
 //Additional constructor for the containments back reference
 PropertyCallExpImpl::PropertyCallExpImpl(std::weak_ptr<ocl::Expressions::OperationCallExp> par_parentCall)
@@ -185,9 +186,9 @@ PropertyCallExpImpl& PropertyCallExpImpl::operator=(const PropertyCallExpImpl & 
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy PropertyCallExp "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
 	#endif
 	//Clone Attributes with (deep copy)
+	m_referredProperty = obj.getReferredProperty();
 
 	//copy references with no containment (soft copy)
-	m_referredProperty  = obj.getReferredProperty();
 	//Clone references with containment (deep copy)
 	return *this;
 }
@@ -207,20 +208,20 @@ std::shared_ptr<ecore::EObject> PropertyCallExpImpl::copy() const
 //*********************************
 // Attribute Getters & Setters
 //*********************************
+/* Getter & Setter for attribute referredProperty */
+std::string PropertyCallExpImpl::getReferredProperty() const 
+{
+	return m_referredProperty;
+}
+void PropertyCallExpImpl::setReferredProperty(std::string _referredProperty)
+{
+	m_referredProperty = _referredProperty;
+	
+}
 
 //*********************************
 // Reference Getters & Setters
 //*********************************
-/* Getter & Setter for reference referredProperty */
-std::shared_ptr<ecore::EAttribute> PropertyCallExpImpl::getReferredProperty() const
-{
-    return m_referredProperty;
-}
-void PropertyCallExpImpl::setReferredProperty(std::shared_ptr<ecore::EAttribute> _referredProperty)
-{
-    m_referredProperty = _referredProperty;
-	
-}
 
 //*********************************
 // Union Getter
@@ -231,11 +232,6 @@ void PropertyCallExpImpl::setReferredProperty(std::shared_ptr<ecore::EAttribute>
 //*********************************
 std::shared_ptr<ecore::EObject> PropertyCallExpImpl::eContainer() const
 {
-	if(auto wp = m_appliedElement.lock())
-	{
-		return wp;
-	}
-
 	if(auto wp = m_elseOwner.lock())
 	{
 		return wp;
@@ -259,16 +255,16 @@ std::shared_ptr<ecore::EObject> PropertyCallExpImpl::eContainer() const
 	}
 
 
-	if(auto wp = m_initializedElement.lock())
-	{
-		return wp;
-	}
-
 
 	if(auto wp = m_loopBodyOwner.lock())
 	{
 		return wp;
 	}
+	if(auto wp = m_loopExp.lock())
+	{
+		return wp;
+	}
+
 
 	if(auto wp = m_parentCall.lock())
 	{
@@ -312,12 +308,14 @@ void PropertyCallExpImpl::loadAttributes(std::shared_ptr<persistence::interfaces
 	try
 	{
 		std::map<std::string, std::string>::const_iterator iter;
-		std::shared_ptr<ecore::EClass> metaClass = this->eClass(); // get MetaClass
+	
 		iter = attr_list.find("referredProperty");
 		if ( iter != attr_list.end() )
 		{
-			// add unresolvedReference to loadHandler's list
-			loadHandler->addUnresolvedReference(iter->second, loadHandler->getCurrentObject(), metaClass->getEStructuralFeature("referredProperty")); // TODO use getEStructuralFeature() with id, for faster access to EStructuralFeature
+			// this attribute is a 'std::string'
+			std::string value;
+			value = iter->second;
+			this->setReferredProperty(value);
 		}
 	}
 	catch (std::exception& e)
@@ -341,20 +339,6 @@ void PropertyCallExpImpl::loadNode(std::string nodeName, std::shared_ptr<persist
 
 void PropertyCallExpImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
 {
-	switch(featureID)
-	{
-		case ocl::Expressions::ExpressionsPackage::PROPERTYCALLEXP_ATTRIBUTE_REFERREDPROPERTY:
-		{
-			if (references.size() == 1)
-			{
-				// Cast object to correct type
-				std::shared_ptr<ecore::EAttribute> _referredProperty = std::dynamic_pointer_cast<ecore::EAttribute>( references.front() );
-				setReferredProperty(_referredProperty);
-			}
-			
-			return;
-		}
-	}
 	NavigationCallExpImpl::resolveReferences(featureID, references);
 }
 
@@ -384,8 +368,11 @@ void PropertyCallExpImpl::saveContent(std::shared_ptr<persistence::interfaces::X
 	try
 	{
 		std::shared_ptr<ocl::Expressions::ExpressionsPackage> package = ocl::Expressions::ExpressionsPackage::eInstance();
-	// Add references
-		saveHandler->addReference(this->getReferredProperty(),"referredProperty", getReferredProperty()->eClass() != ecore::ecorePackage::eInstance()->getEAttribute_Class());
+		// Add attributes
+		if ( this->eIsSet(package->getPropertyCallExp_Attribute_referredProperty()) )
+		{
+			saveHandler->addAttribute("referredProperty", this->getReferredProperty());
+		}
 	}
 	catch (std::exception& e)
 	{
@@ -401,12 +388,12 @@ std::shared_ptr<ecore::EClass> PropertyCallExpImpl::eStaticClass() const
 //*********************************
 // EStructuralFeature Get/Set/IsSet
 //*********************************
-Any PropertyCallExpImpl::eGet(int featureID, bool resolve, bool coreType) const
+std::shared_ptr<Any> PropertyCallExpImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 		case ocl::Expressions::ExpressionsPackage::PROPERTYCALLEXP_ATTRIBUTE_REFERREDPROPERTY:
-			return eAny(getReferredProperty(),ecore::ecorePackage::EATTRIBUTE_CLASS,false); //7226
+			return eAny(getReferredProperty(),ecore::ecorePackage::ESTRING_CLASS,false); //7427
 	}
 	return NavigationCallExpImpl::eGet(featureID, resolve, coreType);
 }
@@ -416,22 +403,28 @@ bool PropertyCallExpImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case ocl::Expressions::ExpressionsPackage::PROPERTYCALLEXP_ATTRIBUTE_REFERREDPROPERTY:
-			return getReferredProperty() != nullptr; //7226
+			return getReferredProperty() != ""; //7427
 	}
 	return NavigationCallExpImpl::internalEIsSet(featureID);
 }
 
-bool PropertyCallExpImpl::eSet(int featureID, Any newValue)
+bool PropertyCallExpImpl::eSet(int featureID, std::shared_ptr<Any> newValue)
 {
 	switch(featureID)
 	{
 		case ocl::Expressions::ExpressionsPackage::PROPERTYCALLEXP_ATTRIBUTE_REFERREDPROPERTY:
 		{
-			// CAST Any to ecore::EAttribute
-			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
-			std::shared_ptr<ecore::EAttribute> _referredProperty = std::dynamic_pointer_cast<ecore::EAttribute>(_temp);
-			setReferredProperty(_referredProperty); //7226
-			return true;
+			try
+			{
+				std::string _referredProperty = newValue->get<std::string>();
+				setReferredProperty(_referredProperty); //7427
+			}
+			catch(...)
+			{
+				DEBUG_ERROR("Invalid type stored in 'Any' for feature 'referredProperty'. Failed to set feature!")
+				return false;
+			}
+		return true;
 		}
 	}
 
@@ -441,9 +434,9 @@ bool PropertyCallExpImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any PropertyCallExpImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+std::shared_ptr<Any> PropertyCallExpImpl::eInvoke(int operationID, std::shared_ptr<Bag<Any>> arguments)
 {
-	Any result;
+	std::shared_ptr<Any> result;
  
   	switch(operationID)
 	{

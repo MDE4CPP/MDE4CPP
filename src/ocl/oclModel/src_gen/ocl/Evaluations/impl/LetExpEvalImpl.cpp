@@ -1,9 +1,13 @@
 
 #include "ocl/Evaluations/impl/LetExpEvalImpl.hpp"
 #ifdef NDEBUG
-	#define DEBUG_MESSAGE(a) /**/
+	#define DEBUG_INFO(a)		/**/
+	#define DEBUG_WARNING(a)	/**/
+	#define DEBUG_ERROR(a)		/**/
 #else
-	#define DEBUG_MESSAGE(a) a
+	#define DEBUG_INFO(a) 		std::cout<<"[\e[0;32mInfo\e[0m]:\t\t"<<__PRETTY_FUNCTION__<<"\n\t\t  -- Message: "<<a<<std::endl;
+	#define DEBUG_WARNING(a) 	std::cout<<"[\e[0;33mWarning\e[0m]:\t"<<__PRETTY_FUNCTION__<<"\n\t\t  -- Message: "<<a<<std::endl;
+	#define DEBUG_ERROR(a)		std::cout<<"[\e[0;31mError\e[0m]:\t"<<__PRETTY_FUNCTION__<<"\n\t\t  -- Message: "<<a<<std::endl;
 #endif
 
 #ifdef ACTIVITY_DEBUG_ON
@@ -18,10 +22,11 @@
 #include <iostream>
 #include <sstream>
 
+#include "abstractDataTypes/Bag.hpp"
 
 
-#include "abstractDataTypes/AnyEObject.hpp"
-#include "abstractDataTypes/AnyEObjectBag.hpp"
+#include "ecore/EcoreAny.hpp"
+#include "ecore/EcoreContainerAny.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
@@ -34,26 +39,20 @@
 
 #include <exception> // used in Persistence
 #include "ocl/Evaluations/EvaluationsFactory.hpp"
+#include "ecore/ecoreFactory.hpp"
 #include "ocl/Expressions/ExpressionsFactory.hpp"
-#include "fUML/Semantics/Values/ValuesFactory.hpp"
-#include "uml/umlFactory.hpp"
-#include "fUML/Semantics/Loci/LociFactory.hpp"
-#include "fUML/Semantics/SimpleClassifiers/SimpleClassifiersFactory.hpp"
+#include "ecore/EAnnotation.hpp"
+#include "ecore/EClassifier.hpp"
+#include "ecore/EGenericType.hpp"
+#include "ecore/EObject.hpp"
 #include "ocl/Evaluations/EvalEnvironment.hpp"
-#include "fUML/Semantics/Loci/Locus.hpp"
 #include "ocl/Evaluations/OclExpEval.hpp"
 #include "ocl/Expressions/OclExpression.hpp"
-#include "fUML/Semantics/SimpleClassifiers/StringValue.hpp"
-#include "fUML/Semantics/Values/Value.hpp"
-#include "uml/ValueSpecification.hpp"
 //Factories and Package includes
 #include "ocl/oclPackage.hpp"
 #include "ocl/Evaluations/EvaluationsPackage.hpp"
 #include "ocl/Expressions/ExpressionsPackage.hpp"
-#include "fUML/Semantics/Loci/LociPackage.hpp"
-#include "fUML/Semantics/SimpleClassifiers/SimpleClassifiersPackage.hpp"
-#include "fUML/Semantics/Values/ValuesPackage.hpp"
-#include "uml/umlPackage.hpp"
+#include "ecore/ecorePackage.hpp"
 
 using namespace ocl::Evaluations;
 
@@ -100,11 +99,11 @@ LetExpEvalImpl& LetExpEvalImpl::operator=(const LetExpEvalImpl & obj)
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy LetExpEval "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
 	#endif
 	//Clone Attributes with (deep copy)
+	m_variable = obj.getVariable();
 
 	//copy references with no containment (soft copy)
 	m_in  = obj.getIn();
 	m_initExpression  = obj.getInitExpression();
-	m_variable  = obj.getVariable();
 	//Clone references with containment (deep copy)
 	return *this;
 }
@@ -124,6 +123,16 @@ std::shared_ptr<ecore::EObject> LetExpEvalImpl::copy() const
 //*********************************
 // Attribute Getters & Setters
 //*********************************
+/* Getter & Setter for attribute variable */
+std::string LetExpEvalImpl::getVariable() const 
+{
+	return m_variable;
+}
+void LetExpEvalImpl::setVariable(std::string _variable)
+{
+	m_variable = _variable;
+	
+}
 
 //*********************************
 // Reference Getters & Setters
@@ -147,17 +156,6 @@ std::shared_ptr<ocl::Evaluations::OclExpEval> LetExpEvalImpl::getInitExpression(
 void LetExpEvalImpl::setInitExpression(std::shared_ptr<ocl::Evaluations::OclExpEval> _initExpression)
 {
     m_initExpression = _initExpression;
-	
-}
-
-/* Getter & Setter for reference variable */
-std::shared_ptr<fUML::Semantics::SimpleClassifiers::StringValue> LetExpEvalImpl::getVariable() const
-{
-    return m_variable;
-}
-void LetExpEvalImpl::setVariable(std::shared_ptr<fUML::Semantics::SimpleClassifiers::StringValue> _variable)
-{
-    m_variable = _variable;
 	
 }
 
@@ -197,6 +195,15 @@ void LetExpEvalImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLo
 	try
 	{
 		std::map<std::string, std::string>::const_iterator iter;
+	
+		iter = attr_list.find("variable");
+		if ( iter != attr_list.end() )
+		{
+			// this attribute is a 'std::string'
+			std::string value;
+			value = iter->second;
+			this->setVariable(value);
+		}
 		std::shared_ptr<ecore::EClass> metaClass = this->eClass(); // get MetaClass
 		iter = attr_list.find("in");
 		if ( iter != attr_list.end() )
@@ -210,13 +217,6 @@ void LetExpEvalImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLo
 		{
 			// add unresolvedReference to loadHandler's list
 			loadHandler->addUnresolvedReference(iter->second, loadHandler->getCurrentObject(), metaClass->getEStructuralFeature("initExpression")); // TODO use getEStructuralFeature() with id, for faster access to EStructuralFeature
-		}
-
-		iter = attr_list.find("variable");
-		if ( iter != attr_list.end() )
-		{
-			// add unresolvedReference to loadHandler's list
-			loadHandler->addUnresolvedReference(iter->second, loadHandler->getCurrentObject(), metaClass->getEStructuralFeature("variable")); // TODO use getEStructuralFeature() with id, for faster access to EStructuralFeature
 		}
 	}
 	catch (std::exception& e)
@@ -265,18 +265,6 @@ void LetExpEvalImpl::resolveReferences(const int featureID, std::vector<std::sha
 			
 			return;
 		}
-
-		case ocl::Evaluations::EvaluationsPackage::LETEXPEVAL_ATTRIBUTE_VARIABLE:
-		{
-			if (references.size() == 1)
-			{
-				// Cast object to correct type
-				std::shared_ptr<fUML::Semantics::SimpleClassifiers::StringValue> _variable = std::dynamic_pointer_cast<fUML::Semantics::SimpleClassifiers::StringValue>( references.front() );
-				setVariable(_variable);
-			}
-			
-			return;
-		}
 	}
 	OclExpEvalImpl::resolveReferences(featureID, references);
 }
@@ -287,9 +275,11 @@ void LetExpEvalImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler>
 
 	OclExpEvalImpl::saveContent(saveHandler);
 	
-	fUML::Semantics::Values::EvaluationImpl::saveContent(saveHandler);
+	ecore::ETypedElementImpl::saveContent(saveHandler);
 	
-	fUML::Semantics::Loci::SemanticVisitorImpl::saveContent(saveHandler);
+	ecore::ENamedElementImpl::saveContent(saveHandler);
+	
+	ecore::EModelElementImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);
 }
@@ -299,10 +289,14 @@ void LetExpEvalImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveH
 	try
 	{
 		std::shared_ptr<ocl::Evaluations::EvaluationsPackage> package = ocl::Evaluations::EvaluationsPackage::eInstance();
+		// Add attributes
+		if ( this->eIsSet(package->getLetExpEval_Attribute_variable()) )
+		{
+			saveHandler->addAttribute("variable", this->getVariable());
+		}
 	// Add references
 		saveHandler->addReference(this->getIn(), "in", getIn()->eClass() != ocl::Evaluations::EvaluationsPackage::eInstance()->getOclExpEval_Class()); 
 		saveHandler->addReference(this->getInitExpression(), "initExpression", getInitExpression()->eClass() != ocl::Evaluations::EvaluationsPackage::eInstance()->getOclExpEval_Class()); 
-		saveHandler->addReference(this->getVariable(), "variable", getVariable()->eClass() != fUML::Semantics::SimpleClassifiers::SimpleClassifiersPackage::eInstance()->getStringValue_Class()); 
 	}
 	catch (std::exception& e)
 	{
@@ -318,16 +312,16 @@ std::shared_ptr<ecore::EClass> LetExpEvalImpl::eStaticClass() const
 //*********************************
 // EStructuralFeature Get/Set/IsSet
 //*********************************
-Any LetExpEvalImpl::eGet(int featureID, bool resolve, bool coreType) const
+std::shared_ptr<Any> LetExpEvalImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 		case ocl::Evaluations::EvaluationsPackage::LETEXPEVAL_ATTRIBUTE_IN:
-			return eAny(getIn(),ocl::Evaluations::EvaluationsPackage::OCLEXPEVAL_CLASS,false); //436
+			return eAny(getIn(),ocl::Evaluations::EvaluationsPackage::OCLEXPEVAL_CLASS,false); //4314
 		case ocl::Evaluations::EvaluationsPackage::LETEXPEVAL_ATTRIBUTE_INITEXPRESSION:
-			return eAny(getInitExpression(),ocl::Evaluations::EvaluationsPackage::OCLEXPEVAL_CLASS,false); //437
+			return eAny(getInitExpression(),ocl::Evaluations::EvaluationsPackage::OCLEXPEVAL_CLASS,false); //4315
 		case ocl::Evaluations::EvaluationsPackage::LETEXPEVAL_ATTRIBUTE_VARIABLE:
-			return eAny(getVariable(),fUML::Semantics::SimpleClassifiers::SimpleClassifiersPackage::STRINGVALUE_CLASS,false); //438
+			return eAny(getVariable(),ecore::ecorePackage::ESTRING_CLASS,false); //4316
 	}
 	return OclExpEvalImpl::eGet(featureID, resolve, coreType);
 }
@@ -337,42 +331,94 @@ bool LetExpEvalImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case ocl::Evaluations::EvaluationsPackage::LETEXPEVAL_ATTRIBUTE_IN:
-			return getIn() != nullptr; //436
+			return getIn() != nullptr; //4314
 		case ocl::Evaluations::EvaluationsPackage::LETEXPEVAL_ATTRIBUTE_INITEXPRESSION:
-			return getInitExpression() != nullptr; //437
+			return getInitExpression() != nullptr; //4315
 		case ocl::Evaluations::EvaluationsPackage::LETEXPEVAL_ATTRIBUTE_VARIABLE:
-			return getVariable() != nullptr; //438
+			return getVariable() != ""; //4316
 	}
 	return OclExpEvalImpl::internalEIsSet(featureID);
 }
 
-bool LetExpEvalImpl::eSet(int featureID, Any newValue)
+bool LetExpEvalImpl::eSet(int featureID, std::shared_ptr<Any> newValue)
 {
 	switch(featureID)
 	{
 		case ocl::Evaluations::EvaluationsPackage::LETEXPEVAL_ATTRIBUTE_IN:
 		{
-			// CAST Any to ocl::Evaluations::OclExpEval
-			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
-			std::shared_ptr<ocl::Evaluations::OclExpEval> _in = std::dynamic_pointer_cast<ocl::Evaluations::OclExpEval>(_temp);
-			setIn(_in); //436
-			return true;
+			std::shared_ptr<ecore::EcoreAny> ecoreAny = std::dynamic_pointer_cast<ecore::EcoreAny>(newValue);
+			if(ecoreAny)
+			{
+				try
+				{
+					std::shared_ptr<ecore::EObject> eObject = ecoreAny->getAsEObject();
+					std::shared_ptr<ocl::Evaluations::OclExpEval> _in = std::dynamic_pointer_cast<ocl::Evaluations::OclExpEval>(eObject);
+					if(_in)
+					{
+						setIn(_in); //4314
+					}
+					else
+					{
+						throw "Invalid argument";
+					}
+				}
+				catch(...)
+				{
+					DEBUG_ERROR("Invalid type stored in 'ecore::ecoreAny' for feature 'in'. Failed to set feature!")
+					return false;
+				}
+			}
+			else
+			{
+				DEBUG_ERROR("Invalid instance of 'ecore::ecoreAny' for feature 'in'. Failed to set feature!")
+				return false;
+			}
+		return true;
 		}
 		case ocl::Evaluations::EvaluationsPackage::LETEXPEVAL_ATTRIBUTE_INITEXPRESSION:
 		{
-			// CAST Any to ocl::Evaluations::OclExpEval
-			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
-			std::shared_ptr<ocl::Evaluations::OclExpEval> _initExpression = std::dynamic_pointer_cast<ocl::Evaluations::OclExpEval>(_temp);
-			setInitExpression(_initExpression); //437
-			return true;
+			std::shared_ptr<ecore::EcoreAny> ecoreAny = std::dynamic_pointer_cast<ecore::EcoreAny>(newValue);
+			if(ecoreAny)
+			{
+				try
+				{
+					std::shared_ptr<ecore::EObject> eObject = ecoreAny->getAsEObject();
+					std::shared_ptr<ocl::Evaluations::OclExpEval> _initExpression = std::dynamic_pointer_cast<ocl::Evaluations::OclExpEval>(eObject);
+					if(_initExpression)
+					{
+						setInitExpression(_initExpression); //4315
+					}
+					else
+					{
+						throw "Invalid argument";
+					}
+				}
+				catch(...)
+				{
+					DEBUG_ERROR("Invalid type stored in 'ecore::ecoreAny' for feature 'initExpression'. Failed to set feature!")
+					return false;
+				}
+			}
+			else
+			{
+				DEBUG_ERROR("Invalid instance of 'ecore::ecoreAny' for feature 'initExpression'. Failed to set feature!")
+				return false;
+			}
+		return true;
 		}
 		case ocl::Evaluations::EvaluationsPackage::LETEXPEVAL_ATTRIBUTE_VARIABLE:
 		{
-			// CAST Any to fUML::Semantics::SimpleClassifiers::StringValue
-			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
-			std::shared_ptr<fUML::Semantics::SimpleClassifiers::StringValue> _variable = std::dynamic_pointer_cast<fUML::Semantics::SimpleClassifiers::StringValue>(_temp);
-			setVariable(_variable); //438
-			return true;
+			try
+			{
+				std::string _variable = newValue->get<std::string>();
+				setVariable(_variable); //4316
+			}
+			catch(...)
+			{
+				DEBUG_ERROR("Invalid type stored in 'Any' for feature 'variable'. Failed to set feature!")
+				return false;
+			}
+		return true;
 		}
 	}
 
@@ -382,9 +428,9 @@ bool LetExpEvalImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any LetExpEvalImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+std::shared_ptr<Any> LetExpEvalImpl::eInvoke(int operationID, std::shared_ptr<Bag<Any>> arguments)
 {
-	Any result;
+	std::shared_ptr<Any> result;
  
   	switch(operationID)
 	{

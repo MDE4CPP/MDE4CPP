@@ -14,13 +14,13 @@
 
 namespace ecore 
 {
-	class EEnumLiteral;
-	class EEnum;
-	class EDataType;
-	class EClass;
-	class EReference;
-	class EAttribute;
 	class EGenericType;
+	class EDataType;
+	class EEnum;
+	class EAttribute;
+	class EReference;
+	class EClass;
+	class EEnumLiteral;
 }
 
 namespace ocl::Expressions 
@@ -28,38 +28,58 @@ namespace ocl::Expressions
 	class AssociationClassCallExp;
 	class BooleanLiteralExp;
 	class CallExp;
+	class ClassifierContextDeclExp;
 	class CollectionItem;
 	class CollectionLiteralExp;
 	class CollectionLiteralPart;
+	class CollectionLiteralParts;
 	class CollectionRange;
+	class CollectionTypeExp;
+	class ContextDeclarationExp;
+	class DefExp;
 	class EnumLiteralExp;
 	class ExpressionInOcl;
 	class FeatureCallExp;
 	class IfExp;
 	class InfixedExp;
+	class InitOrDerValueExp;
+	class InitOrDerValueListExp;
 	class IntegerLiteralExp;
+	class InvOrDefExp;
 	class InvalidLiteralExp;
 	class IterateExp;
 	class IteratorExp;
 	class LetExp;
 	class LiteralExp;
 	class LoopExp;
+	class MessageArguments;
 	class MessageExp;
 	class NavigationCallExp;
 	class NullLiteralExp;
 	class NumericLiteralExp;
 	class OclExpression;
 	class OperationCallExp;
+	class OperationContextDeclExp;
+	class OperationContextExp;
+	class OperatorExp;
+	class PackageDeclarationExp;
+	class ParentedExp;
+	class PrePostBodyExp;
+	class PrePostBodyListExp;
+	class PrefixedExp;
 	class PrimitiveLiteralExp;
 	class PropertyCallExp;
+	class PropertyContextDeclExp;
 	class RealLiteralExp;
 	class StateExp;
 	class StringLiteralExp;
 	class TupleLiteralExp;
 	class TupleLiteralPart;
+	class TupleTypeExp;
 	class TypeExp;
 	class UnlimitedNaturalExp;
 	class UnspecifiedValueExp;
+	class VarDeclarationExp;
 	class Variable;
 	class VariableExp;
 }
@@ -89,17 +109,17 @@ namespace ocl::Expressions
 			// Begin Class AssociationClassCallExp
 			//Class and Feature IDs 
 			static const unsigned long ASSOCIATIONCLASSCALLEXP_CLASS = 870318929;
-			static const unsigned int ASSOCIATIONCLASSCALLEXP_CLASS_FEATURE_COUNT = 27;
+			static const unsigned int ASSOCIATIONCLASSCALLEXP_CLASS_FEATURE_COUNT = 28;
 			static const unsigned int ASSOCIATIONCLASSCALLEXP_CLASS_OPERATION_COUNT = 1;
-			
 			static const unsigned long ASSOCIATIONCLASSCALLEXP_ATTRIBUTE_REFERREDASSOCIATIONCLASS = 1611421372;
+			
 			
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getAssociationClassCallExp_Class() const = 0;
 			
+			virtual std::shared_ptr<ecore::EAttribute> getAssociationClassCallExp_Attribute_referredAssociationClass() const = 0;
 			
-			virtual std::shared_ptr<ecore::EReference> getAssociationClassCallExp_Attribute_referredAssociationClass() const = 0;
 			
 			
 			// End Class AssociationClassCallExp
@@ -108,7 +128,7 @@ namespace ocl::Expressions
 			// Begin Class BooleanLiteralExp
 			//Class and Feature IDs 
 			static const unsigned long BOOLEANLITERALEXP_CLASS = 225873423;
-			static const unsigned int BOOLEANLITERALEXP_CLASS_FEATURE_COUNT = 24;
+			static const unsigned int BOOLEANLITERALEXP_CLASS_FEATURE_COUNT = 25;
 			static const unsigned int BOOLEANLITERALEXP_CLASS_OPERATION_COUNT = 1;
 			static const unsigned long BOOLEANLITERALEXP_ATTRIBUTE_BOOLEANSYMBOL = 706947578;
 			
@@ -127,7 +147,7 @@ namespace ocl::Expressions
 			// Begin Class CallExp
 			//Class and Feature IDs 
 			static const unsigned long CALLEXP_CLASS = 1741533399;
-			static const unsigned int CALLEXP_CLASS_FEATURE_COUNT = 23;
+			static const unsigned int CALLEXP_CLASS_FEATURE_COUNT = 24;
 			static const unsigned int CALLEXP_CLASS_OPERATION_COUNT = 1;
 			
 			static const unsigned long CALLEXP_ATTRIBUTE_SOURCE = 262261326;
@@ -141,6 +161,27 @@ namespace ocl::Expressions
 			
 			
 			// End Class CallExp
+
+
+			// Begin Class ClassifierContextDeclExp
+			//Class and Feature IDs 
+			static const unsigned long CLASSIFIERCONTEXTDECLEXP_CLASS = 177038933;
+			static const unsigned int CLASSIFIERCONTEXTDECLEXP_CLASS_FEATURE_COUNT = 25;
+			static const unsigned int CLASSIFIERCONTEXTDECLEXP_CLASS_OPERATION_COUNT = 1;
+			static const unsigned long CLASSIFIERCONTEXTDECLEXP_ATTRIBUTE_CLASSIFIERNAME = 97873469;
+			
+			static const unsigned long CLASSIFIERCONTEXTDECLEXP_ATTRIBUTE_INVORDEVEXP = 788168130;
+			
+			
+			//Class and Feature Getter
+			virtual std::shared_ptr<ecore::EClass> getClassifierContextDeclExp_Class() const = 0;
+			
+			virtual std::shared_ptr<ecore::EAttribute> getClassifierContextDeclExp_Attribute_classifierName() const = 0;
+			
+			virtual std::shared_ptr<ecore::EReference> getClassifierContextDeclExp_Attribute_invOrDevExp() const = 0;
+			
+			
+			// End Class ClassifierContextDeclExp
 
 
 			// Begin Class CollectionItem
@@ -165,7 +206,7 @@ namespace ocl::Expressions
 			// Begin Class CollectionLiteralExp
 			//Class and Feature IDs 
 			static const unsigned long COLLECTIONLITERALEXP_CLASS = 658019569;
-			static const unsigned int COLLECTIONLITERALEXP_CLASS_FEATURE_COUNT = 24;
+			static const unsigned int COLLECTIONLITERALEXP_CLASS_FEATURE_COUNT = 25;
 			static const unsigned int COLLECTIONLITERALEXP_CLASS_OPERATION_COUNT = 1;
 			static const unsigned long COLLECTIONLITERALEXP_ATTRIBUTE_KIND = 1401702633;
 			
@@ -200,6 +241,25 @@ namespace ocl::Expressions
 			// End Class CollectionLiteralPart
 
 
+			// Begin Class CollectionLiteralParts
+			//Class and Feature IDs 
+			static const unsigned long COLLECTIONLITERALPARTS_CLASS = 1314417920;
+			static const unsigned int COLLECTIONLITERALPARTS_CLASS_FEATURE_COUNT = 11;
+			static const unsigned int COLLECTIONLITERALPARTS_CLASS_OPERATION_COUNT = 1;
+			
+			static const unsigned long COLLECTIONLITERALPARTS_ATTRIBUTE_LITERALPARTS = 750722289;
+			
+			
+			//Class and Feature Getter
+			virtual std::shared_ptr<ecore::EClass> getCollectionLiteralParts_Class() const = 0;
+			
+			
+			virtual std::shared_ptr<ecore::EReference> getCollectionLiteralParts_Attribute_literalParts() const = 0;
+			
+			
+			// End Class CollectionLiteralParts
+
+
 			// Begin Class CollectionRange
 			//Class and Feature IDs 
 			static const unsigned long COLLECTIONRANGE_CLASS = 1706418751;
@@ -221,11 +281,69 @@ namespace ocl::Expressions
 			// End Class CollectionRange
 
 
+			// Begin Class CollectionTypeExp
+			//Class and Feature IDs 
+			static const unsigned long COLLECTIONTYPEEXP_CLASS = 772996553;
+			static const unsigned int COLLECTIONTYPEEXP_CLASS_FEATURE_COUNT = 25;
+			static const unsigned int COLLECTIONTYPEEXP_CLASS_OPERATION_COUNT = 1;
+			
+			static const unsigned long COLLECTIONTYPEEXP_ATTRIBUTE_INNERTYPE = 239296152;
+			
+			
+			//Class and Feature Getter
+			virtual std::shared_ptr<ecore::EClass> getCollectionTypeExp_Class() const = 0;
+			
+			
+			virtual std::shared_ptr<ecore::EReference> getCollectionTypeExp_Attribute_innerType() const = 0;
+			
+			
+			// End Class CollectionTypeExp
+
+
+			// Begin Class ContextDeclarationExp
+			//Class and Feature IDs 
+			static const unsigned long CONTEXTDECLARATIONEXP_CLASS = 1893762976;
+			static const unsigned int CONTEXTDECLARATIONEXP_CLASS_FEATURE_COUNT = 23;
+			static const unsigned int CONTEXTDECLARATIONEXP_CLASS_OPERATION_COUNT = 1;
+			
+			
+			
+			//Class and Feature Getter
+			virtual std::shared_ptr<ecore::EClass> getContextDeclarationExp_Class() const = 0;
+			
+			
+			
+			
+			// End Class ContextDeclarationExp
+
+
+			// Begin Class DefExp
+			//Class and Feature IDs 
+			static const unsigned long DEFEXP_CLASS = 25602530;
+			static const unsigned int DEFEXP_CLASS_FEATURE_COUNT = 25;
+			static const unsigned int DEFEXP_CLASS_OPERATION_COUNT = 1;
+			
+			static const unsigned long DEFEXP_ATTRIBUTE_BODYEXP = 4487773;
+			static const unsigned long DEFEXP_ATTRIBUTE_FRONTEXP = 1655735114;
+			
+			
+			//Class and Feature Getter
+			virtual std::shared_ptr<ecore::EClass> getDefExp_Class() const = 0;
+			
+			
+			virtual std::shared_ptr<ecore::EReference> getDefExp_Attribute_bodyExp() const = 0;
+			virtual std::shared_ptr<ecore::EReference> getDefExp_Attribute_frontExp() const = 0;
+			
+			
+			// End Class DefExp
+
+
 			// Begin Class EnumLiteralExp
 			//Class and Feature IDs 
 			static const unsigned long ENUMLITERALEXP_CLASS = 1896746244;
-			static const unsigned int ENUMLITERALEXP_CLASS_FEATURE_COUNT = 23;
+			static const unsigned int ENUMLITERALEXP_CLASS_FEATURE_COUNT = 25;
 			static const unsigned int ENUMLITERALEXP_CLASS_OPERATION_COUNT = 1;
+			static const unsigned long ENUMLITERALEXP_ATTRIBUTE_REFERREDENUMLITERALSTR = 2046803845;
 			
 			static const unsigned long ENUMLITERALEXP_ATTRIBUTE_REFERREDENUMLITERAL = 1234340674;
 			
@@ -233,6 +351,7 @@ namespace ocl::Expressions
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getEnumLiteralExp_Class() const = 0;
 			
+			virtual std::shared_ptr<ecore::EAttribute> getEnumLiteralExp_Attribute_referredEnumLiteralStr() const = 0;
 			
 			virtual std::shared_ptr<ecore::EReference> getEnumLiteralExp_Attribute_referredEnumLiteral() const = 0;
 			
@@ -268,7 +387,7 @@ namespace ocl::Expressions
 			// Begin Class FeatureCallExp
 			//Class and Feature IDs 
 			static const unsigned long FEATURECALLEXP_CLASS = 108542242;
-			static const unsigned int FEATURECALLEXP_CLASS_FEATURE_COUNT = 24;
+			static const unsigned int FEATURECALLEXP_CLASS_FEATURE_COUNT = 25;
 			static const unsigned int FEATURECALLEXP_CLASS_OPERATION_COUNT = 1;
 			static const unsigned long FEATURECALLEXP_ATTRIBUTE_ISPRE = 896766523;
 			
@@ -287,7 +406,7 @@ namespace ocl::Expressions
 			// Begin Class IfExp
 			//Class and Feature IDs 
 			static const unsigned long IFEXP_CLASS = 327095557;
-			static const unsigned int IFEXP_CLASS_FEATURE_COUNT = 25;
+			static const unsigned int IFEXP_CLASS_FEATURE_COUNT = 26;
 			static const unsigned int IFEXP_CLASS_OPERATION_COUNT = 1;
 			
 			static const unsigned long IFEXP_ATTRIBUTE_CONDITION = 517729573;
@@ -310,7 +429,7 @@ namespace ocl::Expressions
 			// Begin Class InfixedExp
 			//Class and Feature IDs 
 			static const unsigned long INFIXEDEXP_CLASS = 938428434;
-			static const unsigned int INFIXEDEXP_CLASS_FEATURE_COUNT = 23;
+			static const unsigned int INFIXEDEXP_CLASS_FEATURE_COUNT = 24;
 			static const unsigned int INFIXEDEXP_CLASS_OPERATION_COUNT = 1;
 			
 			static const unsigned long INFIXEDEXP_ATTRIBUTE_SOURCE = 92983557;
@@ -326,10 +445,52 @@ namespace ocl::Expressions
 			// End Class InfixedExp
 
 
+			// Begin Class InitOrDerValueExp
+			//Class and Feature IDs 
+			static const unsigned long INITORDERVALUEEXP_CLASS = 1148053710;
+			static const unsigned int INITORDERVALUEEXP_CLASS_FEATURE_COUNT = 12;
+			static const unsigned int INITORDERVALUEEXP_CLASS_OPERATION_COUNT = 1;
+			static const unsigned long INITORDERVALUEEXP_ATTRIBUTE_KIND = 431418240;
+			
+			static const unsigned long INITORDERVALUEEXP_ATTRIBUTE_BODYEXPRESSION = 240927939;
+			
+			
+			//Class and Feature Getter
+			virtual std::shared_ptr<ecore::EClass> getInitOrDerValueExp_Class() const = 0;
+			
+			virtual std::shared_ptr<ecore::EAttribute> getInitOrDerValueExp_Attribute_kind() const = 0;
+			
+			virtual std::shared_ptr<ecore::EReference> getInitOrDerValueExp_Attribute_bodyExpression() const = 0;
+			
+			
+			// End Class InitOrDerValueExp
+
+
+			// Begin Class InitOrDerValueListExp
+			//Class and Feature IDs 
+			static const unsigned long INITORDERVALUELISTEXP_CLASS = 278609339;
+			static const unsigned int INITORDERVALUELISTEXP_CLASS_FEATURE_COUNT = 25;
+			static const unsigned int INITORDERVALUELISTEXP_CLASS_OPERATION_COUNT = 1;
+			
+			static const unsigned long INITORDERVALUELISTEXP_ATTRIBUTE_DEREXPRESSIONLIST = 1377702952;
+			static const unsigned long INITORDERVALUELISTEXP_ATTRIBUTE_INITEXPRESSIONLIST = 688538211;
+			
+			
+			//Class and Feature Getter
+			virtual std::shared_ptr<ecore::EClass> getInitOrDerValueListExp_Class() const = 0;
+			
+			
+			virtual std::shared_ptr<ecore::EReference> getInitOrDerValueListExp_Attribute_derExpressionList() const = 0;
+			virtual std::shared_ptr<ecore::EReference> getInitOrDerValueListExp_Attribute_initExpressionList() const = 0;
+			
+			
+			// End Class InitOrDerValueListExp
+
+
 			// Begin Class IntegerLiteralExp
 			//Class and Feature IDs 
 			static const unsigned long INTEGERLITERALEXP_CLASS = 274113150;
-			static const unsigned int INTEGERLITERALEXP_CLASS_FEATURE_COUNT = 24;
+			static const unsigned int INTEGERLITERALEXP_CLASS_FEATURE_COUNT = 25;
 			static const unsigned int INTEGERLITERALEXP_CLASS_OPERATION_COUNT = 1;
 			static const unsigned long INTEGERLITERALEXP_ATTRIBUTE_INTEGERSYMBOL = 601308936;
 			
@@ -345,10 +506,33 @@ namespace ocl::Expressions
 			// End Class IntegerLiteralExp
 
 
+			// Begin Class InvOrDefExp
+			//Class and Feature IDs 
+			static const unsigned long INVORDEFEXP_CLASS = 1877574182;
+			static const unsigned int INVORDEFEXP_CLASS_FEATURE_COUNT = 13;
+			static const unsigned int INVORDEFEXP_CLASS_OPERATION_COUNT = 1;
+			static const unsigned long INVORDEFEXP_ATTRIBUTE_KIND = 746607327;
+			static const unsigned long INVORDEFEXP_ATTRIBUTE_NAME = 1601024023;
+			
+			static const unsigned long INVORDEFEXP_ATTRIBUTE_REFERREDEXPRESSION = 1292573155;
+			
+			
+			//Class and Feature Getter
+			virtual std::shared_ptr<ecore::EClass> getInvOrDefExp_Class() const = 0;
+			
+			virtual std::shared_ptr<ecore::EAttribute> getInvOrDefExp_Attribute_kind() const = 0;
+			virtual std::shared_ptr<ecore::EAttribute> getInvOrDefExp_Attribute_name() const = 0;
+			
+			virtual std::shared_ptr<ecore::EReference> getInvOrDefExp_Attribute_referredExpression() const = 0;
+			
+			
+			// End Class InvOrDefExp
+
+
 			// Begin Class InvalidLiteralExp
 			//Class and Feature IDs 
 			static const unsigned long INVALIDLITERALEXP_CLASS = 1953131443;
-			static const unsigned int INVALIDLITERALEXP_CLASS_FEATURE_COUNT = 22;
+			static const unsigned int INVALIDLITERALEXP_CLASS_FEATURE_COUNT = 23;
 			static const unsigned int INVALIDLITERALEXP_CLASS_OPERATION_COUNT = 1;
 			
 			
@@ -365,7 +549,7 @@ namespace ocl::Expressions
 			// Begin Class IterateExp
 			//Class and Feature IDs 
 			static const unsigned long ITERATEEXP_CLASS = 1451014857;
-			static const unsigned int ITERATEEXP_CLASS_FEATURE_COUNT = 26;
+			static const unsigned int ITERATEEXP_CLASS_FEATURE_COUNT = 30;
 			static const unsigned int ITERATEEXP_CLASS_OPERATION_COUNT = 1;
 			
 			static const unsigned long ITERATEEXP_ATTRIBUTE_RESULT = 615489238;
@@ -384,14 +568,16 @@ namespace ocl::Expressions
 			// Begin Class IteratorExp
 			//Class and Feature IDs 
 			static const unsigned long ITERATOREXP_CLASS = 1427874836;
-			static const unsigned int ITERATOREXP_CLASS_FEATURE_COUNT = 25;
+			static const unsigned int ITERATOREXP_CLASS_FEATURE_COUNT = 30;
 			static const unsigned int ITERATOREXP_CLASS_OPERATION_COUNT = 1;
+			static const unsigned long ITERATOREXP_ATTRIBUTE_SOURRUNDEDBY = 1564644920;
 			
 			
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getIteratorExp_Class() const = 0;
 			
+			virtual std::shared_ptr<ecore::EAttribute> getIteratorExp_Attribute_sourrundedBy() const = 0;
 			
 			
 			
@@ -401,11 +587,11 @@ namespace ocl::Expressions
 			// Begin Class LetExp
 			//Class and Feature IDs 
 			static const unsigned long LETEXP_CLASS = 514305968;
-			static const unsigned int LETEXP_CLASS_FEATURE_COUNT = 24;
+			static const unsigned int LETEXP_CLASS_FEATURE_COUNT = 25;
 			static const unsigned int LETEXP_CLASS_OPERATION_COUNT = 1;
 			
 			static const unsigned long LETEXP_ATTRIBUTE_IN = 797393689;
-			static const unsigned long LETEXP_ATTRIBUTE_VARIABLE = 202694184;
+			static const unsigned long LETEXP_ATTRIBUTE_VARIABLES = 1342685287;
 			
 			
 			//Class and Feature Getter
@@ -413,7 +599,7 @@ namespace ocl::Expressions
 			
 			
 			virtual std::shared_ptr<ecore::EReference> getLetExp_Attribute_in() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getLetExp_Attribute_variable() const = 0;
+			virtual std::shared_ptr<ecore::EReference> getLetExp_Attribute_variables() const = 0;
 			
 			
 			// End Class LetExp
@@ -422,7 +608,7 @@ namespace ocl::Expressions
 			// Begin Class LiteralExp
 			//Class and Feature IDs 
 			static const unsigned long LITERALEXP_CLASS = 509208412;
-			static const unsigned int LITERALEXP_CLASS_FEATURE_COUNT = 22;
+			static const unsigned int LITERALEXP_CLASS_FEATURE_COUNT = 23;
 			static const unsigned int LITERALEXP_CLASS_OPERATION_COUNT = 1;
 			
 			
@@ -439,8 +625,11 @@ namespace ocl::Expressions
 			// Begin Class LoopExp
 			//Class and Feature IDs 
 			static const unsigned long LOOPEXP_CLASS = 1471094680;
-			static const unsigned int LOOPEXP_CLASS_FEATURE_COUNT = 25;
+			static const unsigned int LOOPEXP_CLASS_FEATURE_COUNT = 29;
 			static const unsigned int LOOPEXP_CLASS_OPERATION_COUNT = 1;
+			static const unsigned long LOOPEXP_ATTRIBUTE_ISCOLLECTIONOPERATION = 1438985341;
+			static const unsigned long LOOPEXP_ATTRIBUTE_ISIMPLCOLLECTITERATOR = 392564887;
+			static const unsigned long LOOPEXP_ATTRIBUTE_ITERNAME = 1026850176;
 			
 			static const unsigned long LOOPEXP_ATTRIBUTE_BODY = 1963099341;
 			static const unsigned long LOOPEXP_ATTRIBUTE_ITERATOR = 752442446;
@@ -449,6 +638,9 @@ namespace ocl::Expressions
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getLoopExp_Class() const = 0;
 			
+			virtual std::shared_ptr<ecore::EAttribute> getLoopExp_Attribute_isCollectionOperation() const = 0;
+			virtual std::shared_ptr<ecore::EAttribute> getLoopExp_Attribute_isImplCollectIterator() const = 0;
+			virtual std::shared_ptr<ecore::EAttribute> getLoopExp_Attribute_iterName() const = 0;
 			
 			virtual std::shared_ptr<ecore::EReference> getLoopExp_Attribute_body() const = 0;
 			virtual std::shared_ptr<ecore::EReference> getLoopExp_Attribute_iterator() const = 0;
@@ -457,25 +649,44 @@ namespace ocl::Expressions
 			// End Class LoopExp
 
 
+			// Begin Class MessageArguments
+			//Class and Feature IDs 
+			static const unsigned long MESSAGEARGUMENTS_CLASS = 1315040981;
+			static const unsigned int MESSAGEARGUMENTS_CLASS_FEATURE_COUNT = 11;
+			static const unsigned int MESSAGEARGUMENTS_CLASS_OPERATION_COUNT = 1;
+			
+			static const unsigned long MESSAGEARGUMENTS_ATTRIBUTE_REFERREDOCLEXPRESSIONS = 1256647516;
+			
+			
+			//Class and Feature Getter
+			virtual std::shared_ptr<ecore::EClass> getMessageArguments_Class() const = 0;
+			
+			
+			virtual std::shared_ptr<ecore::EReference> getMessageArguments_Attribute_referredOclExpressions() const = 0;
+			
+			
+			// End Class MessageArguments
+
+
 			// Begin Class MessageExp
 			//Class and Feature IDs 
 			static const unsigned long MESSAGEEXP_CLASS = 1834681541;
-			static const unsigned int MESSAGEEXP_CLASS_FEATURE_COUNT = 26;
+			static const unsigned int MESSAGEEXP_CLASS_FEATURE_COUNT = 27;
 			static const unsigned int MESSAGEEXP_CLASS_OPERATION_COUNT = 1;
-			
-			static const unsigned long MESSAGEEXP_ATTRIBUTE_ARGUMENT = 496237317;
 			static const unsigned long MESSAGEEXP_ATTRIBUTE_CALLEDOPERATION = 1324109781;
 			static const unsigned long MESSAGEEXP_ATTRIBUTE_SENTSIGNAL = 739537597;
+			
+			static const unsigned long MESSAGEEXP_ATTRIBUTE_ARGUMENT = 496237317;
 			static const unsigned long MESSAGEEXP_ATTRIBUTE_TARGET = 1851375845;
 			
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getMessageExp_Class() const = 0;
 			
+			virtual std::shared_ptr<ecore::EAttribute> getMessageExp_Attribute_calledOperation() const = 0;
+			virtual std::shared_ptr<ecore::EAttribute> getMessageExp_Attribute_sentSignal() const = 0;
 			
 			virtual std::shared_ptr<ecore::EReference> getMessageExp_Attribute_argument() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getMessageExp_Attribute_calledOperation() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getMessageExp_Attribute_sentSignal() const = 0;
 			virtual std::shared_ptr<ecore::EReference> getMessageExp_Attribute_target() const = 0;
 			
 			
@@ -485,18 +696,18 @@ namespace ocl::Expressions
 			// Begin Class NavigationCallExp
 			//Class and Feature IDs 
 			static const unsigned long NAVIGATIONCALLEXP_CLASS = 833199948;
-			static const unsigned int NAVIGATIONCALLEXP_CLASS_FEATURE_COUNT = 26;
+			static const unsigned int NAVIGATIONCALLEXP_CLASS_FEATURE_COUNT = 27;
 			static const unsigned int NAVIGATIONCALLEXP_CLASS_OPERATION_COUNT = 1;
-			
 			static const unsigned long NAVIGATIONCALLEXP_ATTRIBUTE_NAVIGATIONSOURCE = 1002734572;
+			
 			static const unsigned long NAVIGATIONCALLEXP_ATTRIBUTE_QUALIFIER = 1622968169;
 			
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getNavigationCallExp_Class() const = 0;
 			
+			virtual std::shared_ptr<ecore::EAttribute> getNavigationCallExp_Attribute_navigationSource() const = 0;
 			
-			virtual std::shared_ptr<ecore::EReference> getNavigationCallExp_Attribute_navigationSource() const = 0;
 			virtual std::shared_ptr<ecore::EReference> getNavigationCallExp_Attribute_qualifier() const = 0;
 			
 			
@@ -523,7 +734,7 @@ namespace ocl::Expressions
 			// Begin Class NumericLiteralExp
 			//Class and Feature IDs 
 			static const unsigned long NUMERICLITERALEXP_CLASS = 1020270764;
-			static const unsigned int NUMERICLITERALEXP_CLASS_FEATURE_COUNT = 23;
+			static const unsigned int NUMERICLITERALEXP_CLASS_FEATURE_COUNT = 24;
 			static const unsigned int NUMERICLITERALEXP_CLASS_OPERATION_COUNT = 1;
 			
 			
@@ -540,7 +751,7 @@ namespace ocl::Expressions
 			// Begin Class OclExpression
 			//Class and Feature IDs 
 			static const unsigned long OCLEXPRESSION_CLASS = 925307628;
-			static const unsigned int OCLEXPRESSION_CLASS_FEATURE_COUNT = 22;
+			static const unsigned int OCLEXPRESSION_CLASS_FEATURE_COUNT = 23;
 			static const unsigned int OCLEXPRESSION_CLASS_OPERATION_COUNT = 1;
 			
 			static const unsigned long OCLEXPRESSION_ATTRIBUTE_APPLIEDELEMENT = 1966681786;
@@ -551,6 +762,7 @@ namespace ocl::Expressions
 			static const unsigned long OCLEXPRESSION_ATTRIBUTE_INSTANCE = 1206712338;
 			static const unsigned long OCLEXPRESSION_ATTRIBUTE_LASTOWNER = 951704448;
 			static const unsigned long OCLEXPRESSION_ATTRIBUTE_LOOPBODYOWNER = 838355357;
+			static const unsigned long OCLEXPRESSION_ATTRIBUTE_LOOPEXP = 697480949;
 			static const unsigned long OCLEXPRESSION_ATTRIBUTE_PARENTCALL = 833189620;
 			static const unsigned long OCLEXPRESSION_ATTRIBUTE_PARENTNAV = 1594158668;
 			static const unsigned long OCLEXPRESSION_ATTRIBUTE_THENOWNER = 1118397415;
@@ -569,6 +781,7 @@ namespace ocl::Expressions
 			virtual std::shared_ptr<ecore::EReference> getOclExpression_Attribute_instance() const = 0;
 			virtual std::shared_ptr<ecore::EReference> getOclExpression_Attribute_lastOwner() const = 0;
 			virtual std::shared_ptr<ecore::EReference> getOclExpression_Attribute_loopBodyOwner() const = 0;
+			virtual std::shared_ptr<ecore::EReference> getOclExpression_Attribute_loopExp() const = 0;
 			virtual std::shared_ptr<ecore::EReference> getOclExpression_Attribute_parentCall() const = 0;
 			virtual std::shared_ptr<ecore::EReference> getOclExpression_Attribute_parentNav() const = 0;
 			virtual std::shared_ptr<ecore::EReference> getOclExpression_Attribute_thenOwner() const = 0;
@@ -581,28 +794,204 @@ namespace ocl::Expressions
 			// Begin Class OperationCallExp
 			//Class and Feature IDs 
 			static const unsigned long OPERATIONCALLEXP_CLASS = 1030298851;
-			static const unsigned int OPERATIONCALLEXP_CLASS_FEATURE_COUNT = 26;
+			static const unsigned int OPERATIONCALLEXP_CLASS_FEATURE_COUNT = 28;
 			static const unsigned int OPERATIONCALLEXP_CLASS_OPERATION_COUNT = 1;
+			static const unsigned long OPERATIONCALLEXP_ATTRIBUTE_ISRARROW = 346826187;
+			static const unsigned long OPERATIONCALLEXP_ATTRIBUTE_REFERREDOPERATION = 1507514076;
 			
 			static const unsigned long OPERATIONCALLEXP_ATTRIBUTE_ARGUMENT = 1004372983;
-			static const unsigned long OPERATIONCALLEXP_ATTRIBUTE_REFERREDOPERATION = 1507514076;
 			
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getOperationCallExp_Class() const = 0;
 			
+			virtual std::shared_ptr<ecore::EAttribute> getOperationCallExp_Attribute_isRArrow() const = 0;
+			virtual std::shared_ptr<ecore::EAttribute> getOperationCallExp_Attribute_referredOperation() const = 0;
 			
 			virtual std::shared_ptr<ecore::EReference> getOperationCallExp_Attribute_argument() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getOperationCallExp_Attribute_referredOperation() const = 0;
 			
 			
 			// End Class OperationCallExp
 
 
+			// Begin Class OperationContextDeclExp
+			//Class and Feature IDs 
+			static const unsigned long OPERATIONCONTEXTDECLEXP_CLASS = 131567262;
+			static const unsigned int OPERATIONCONTEXTDECLEXP_CLASS_FEATURE_COUNT = 25;
+			static const unsigned int OPERATIONCONTEXTDECLEXP_CLASS_OPERATION_COUNT = 1;
+			
+			static const unsigned long OPERATIONCONTEXTDECLEXP_ATTRIBUTE_OPERATIONCONTEXT = 17658166;
+			static const unsigned long OPERATIONCONTEXTDECLEXP_ATTRIBUTE_PREPOSTBODYEXPRESSIONS = 1793833568;
+			
+			
+			//Class and Feature Getter
+			virtual std::shared_ptr<ecore::EClass> getOperationContextDeclExp_Class() const = 0;
+			
+			
+			virtual std::shared_ptr<ecore::EReference> getOperationContextDeclExp_Attribute_operationContext() const = 0;
+			virtual std::shared_ptr<ecore::EReference> getOperationContextDeclExp_Attribute_prePostBodyExpressions() const = 0;
+			
+			
+			// End Class OperationContextDeclExp
+
+
+			// Begin Class OperationContextExp
+			//Class and Feature IDs 
+			static const unsigned long OPERATIONCONTEXTEXP_CLASS = 913814331;
+			static const unsigned int OPERATIONCONTEXTEXP_CLASS_FEATURE_COUNT = 26;
+			static const unsigned int OPERATIONCONTEXTEXP_CLASS_OPERATION_COUNT = 1;
+			static const unsigned long OPERATIONCONTEXTEXP_ATTRIBUTE_OPERATIONNAME = 2036304114;
+			
+			static const unsigned long OPERATIONCONTEXTEXP_ATTRIBUTE_INPUTPARAMETERS = 131292559;
+			static const unsigned long OPERATIONCONTEXTEXP_ATTRIBUTE_RETURNTYPE = 523001483;
+			
+			
+			//Class and Feature Getter
+			virtual std::shared_ptr<ecore::EClass> getOperationContextExp_Class() const = 0;
+			
+			virtual std::shared_ptr<ecore::EAttribute> getOperationContextExp_Attribute_operationName() const = 0;
+			
+			virtual std::shared_ptr<ecore::EReference> getOperationContextExp_Attribute_inputParameters() const = 0;
+			virtual std::shared_ptr<ecore::EReference> getOperationContextExp_Attribute_returnType() const = 0;
+			
+			
+			// End Class OperationContextExp
+
+
+			// Begin Class OperatorExp
+			//Class and Feature IDs 
+			static const unsigned long OPERATOREXP_CLASS = 836004917;
+			static const unsigned int OPERATOREXP_CLASS_FEATURE_COUNT = 26;
+			static const unsigned int OPERATOREXP_CLASS_OPERATION_COUNT = 1;
+			static const unsigned long OPERATOREXP_ATTRIBUTE_OPERATOR = 516748749;
+			
+			static const unsigned long OPERATOREXP_ATTRIBUTE_LEFTHANDOPERAND = 338039271;
+			static const unsigned long OPERATOREXP_ATTRIBUTE_RIGHTHANDOPERAND = 1968902642;
+			
+			
+			//Class and Feature Getter
+			virtual std::shared_ptr<ecore::EClass> getOperatorExp_Class() const = 0;
+			
+			virtual std::shared_ptr<ecore::EAttribute> getOperatorExp_Attribute_operator() const = 0;
+			
+			virtual std::shared_ptr<ecore::EReference> getOperatorExp_Attribute_leftHandOperand() const = 0;
+			virtual std::shared_ptr<ecore::EReference> getOperatorExp_Attribute_rightHandOperand() const = 0;
+			
+			
+			// End Class OperatorExp
+
+
+			// Begin Class PackageDeclarationExp
+			//Class and Feature IDs 
+			static const unsigned long PACKAGEDECLARATIONEXP_CLASS = 1001863463;
+			static const unsigned int PACKAGEDECLARATIONEXP_CLASS_FEATURE_COUNT = 25;
+			static const unsigned int PACKAGEDECLARATIONEXP_CLASS_OPERATION_COUNT = 1;
+			static const unsigned long PACKAGEDECLARATIONEXP_ATTRIBUTE_PATH = 1861459292;
+			
+			static const unsigned long PACKAGEDECLARATIONEXP_ATTRIBUTE_CONTEXTDECLARATIONS = 2095367727;
+			
+			
+			//Class and Feature Getter
+			virtual std::shared_ptr<ecore::EClass> getPackageDeclarationExp_Class() const = 0;
+			
+			virtual std::shared_ptr<ecore::EAttribute> getPackageDeclarationExp_Attribute_path() const = 0;
+			
+			virtual std::shared_ptr<ecore::EReference> getPackageDeclarationExp_Attribute_contextDeclarations() const = 0;
+			
+			
+			// End Class PackageDeclarationExp
+
+
+			// Begin Class ParentedExp
+			//Class and Feature IDs 
+			static const unsigned long PARENTEDEXP_CLASS = 1607032179;
+			static const unsigned int PARENTEDEXP_CLASS_FEATURE_COUNT = 24;
+			static const unsigned int PARENTEDEXP_CLASS_OPERATION_COUNT = 1;
+			
+			static const unsigned long PARENTEDEXP_ATTRIBUTE_INNEREXP = 1626994725;
+			
+			
+			//Class and Feature Getter
+			virtual std::shared_ptr<ecore::EClass> getParentedExp_Class() const = 0;
+			
+			
+			virtual std::shared_ptr<ecore::EReference> getParentedExp_Attribute_innerExp() const = 0;
+			
+			
+			// End Class ParentedExp
+
+
+			// Begin Class PrePostBodyExp
+			//Class and Feature IDs 
+			static const unsigned long PREPOSTBODYEXP_CLASS = 259352584;
+			static const unsigned int PREPOSTBODYEXP_CLASS_FEATURE_COUNT = 13;
+			static const unsigned int PREPOSTBODYEXP_CLASS_OPERATION_COUNT = 1;
+			static const unsigned long PREPOSTBODYEXP_ATTRIBUTE_KIND = 909707431;
+			static const unsigned long PREPOSTBODYEXP_ATTRIBUTE_NAME = 2005295072;
+			
+			static const unsigned long PREPOSTBODYEXP_ATTRIBUTE_BODYEXPRESSION = 592423762;
+			
+			
+			//Class and Feature Getter
+			virtual std::shared_ptr<ecore::EClass> getPrePostBodyExp_Class() const = 0;
+			
+			virtual std::shared_ptr<ecore::EAttribute> getPrePostBodyExp_Attribute_kind() const = 0;
+			virtual std::shared_ptr<ecore::EAttribute> getPrePostBodyExp_Attribute_name() const = 0;
+			
+			virtual std::shared_ptr<ecore::EReference> getPrePostBodyExp_Attribute_bodyExpression() const = 0;
+			
+			
+			// End Class PrePostBodyExp
+
+
+			// Begin Class PrePostBodyListExp
+			//Class and Feature IDs 
+			static const unsigned long PREPOSTBODYLISTEXP_CLASS = 828279823;
+			static const unsigned int PREPOSTBODYLISTEXP_CLASS_FEATURE_COUNT = 26;
+			static const unsigned int PREPOSTBODYLISTEXP_CLASS_OPERATION_COUNT = 1;
+			
+			static const unsigned long PREPOSTBODYLISTEXP_ATTRIBUTE_BODYEXPRESSIONLIST = 1893450999;
+			static const unsigned long PREPOSTBODYLISTEXP_ATTRIBUTE_POSTEXPRESSIONLIST = 80292389;
+			static const unsigned long PREPOSTBODYLISTEXP_ATTRIBUTE_PREEXPRESSIONLIST = 1469684052;
+			
+			
+			//Class and Feature Getter
+			virtual std::shared_ptr<ecore::EClass> getPrePostBodyListExp_Class() const = 0;
+			
+			
+			virtual std::shared_ptr<ecore::EReference> getPrePostBodyListExp_Attribute_bodyExpressionList() const = 0;
+			virtual std::shared_ptr<ecore::EReference> getPrePostBodyListExp_Attribute_postExpressionList() const = 0;
+			virtual std::shared_ptr<ecore::EReference> getPrePostBodyListExp_Attribute_preExpressionList() const = 0;
+			
+			
+			// End Class PrePostBodyListExp
+
+
+			// Begin Class PrefixedExp
+			//Class and Feature IDs 
+			static const unsigned long PREFIXEDEXP_CLASS = 1125981455;
+			static const unsigned int PREFIXEDEXP_CLASS_FEATURE_COUNT = 25;
+			static const unsigned int PREFIXEDEXP_CLASS_OPERATION_COUNT = 1;
+			static const unsigned long PREFIXEDEXP_ATTRIBUTE_UNARYSYMBOL = 1962846422;
+			
+			static const unsigned long PREFIXEDEXP_ATTRIBUTE_REFERREDEXPRESSION = 540980428;
+			
+			
+			//Class and Feature Getter
+			virtual std::shared_ptr<ecore::EClass> getPrefixedExp_Class() const = 0;
+			
+			virtual std::shared_ptr<ecore::EAttribute> getPrefixedExp_Attribute_unarySymbol() const = 0;
+			
+			virtual std::shared_ptr<ecore::EReference> getPrefixedExp_Attribute_referredExpression() const = 0;
+			
+			
+			// End Class PrefixedExp
+
+
 			// Begin Class PrimitiveLiteralExp
 			//Class and Feature IDs 
 			static const unsigned long PRIMITIVELITERALEXP_CLASS = 95355624;
-			static const unsigned int PRIMITIVELITERALEXP_CLASS_FEATURE_COUNT = 23;
+			static const unsigned int PRIMITIVELITERALEXP_CLASS_FEATURE_COUNT = 24;
 			static const unsigned int PRIMITIVELITERALEXP_CLASS_OPERATION_COUNT = 1;
 			static const unsigned long PRIMITIVELITERALEXP_ATTRIBUTE_SYMBOL = 1849725076;
 			
@@ -621,26 +1010,49 @@ namespace ocl::Expressions
 			// Begin Class PropertyCallExp
 			//Class and Feature IDs 
 			static const unsigned long PROPERTYCALLEXP_CLASS = 133065828;
-			static const unsigned int PROPERTYCALLEXP_CLASS_FEATURE_COUNT = 27;
+			static const unsigned int PROPERTYCALLEXP_CLASS_FEATURE_COUNT = 28;
 			static const unsigned int PROPERTYCALLEXP_CLASS_OPERATION_COUNT = 1;
-			
 			static const unsigned long PROPERTYCALLEXP_ATTRIBUTE_REFERREDPROPERTY = 1744153409;
+			
 			
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getPropertyCallExp_Class() const = 0;
 			
+			virtual std::shared_ptr<ecore::EAttribute> getPropertyCallExp_Attribute_referredProperty() const = 0;
 			
-			virtual std::shared_ptr<ecore::EReference> getPropertyCallExp_Attribute_referredProperty() const = 0;
 			
 			
 			// End Class PropertyCallExp
 
 
+			// Begin Class PropertyContextDeclExp
+			//Class and Feature IDs 
+			static const unsigned long PROPERTYCONTEXTDECLEXP_CLASS = 845442697;
+			static const unsigned int PROPERTYCONTEXTDECLEXP_CLASS_FEATURE_COUNT = 26;
+			static const unsigned int PROPERTYCONTEXTDECLEXP_CLASS_OPERATION_COUNT = 1;
+			static const unsigned long PROPERTYCONTEXTDECLEXP_ATTRIBUTE_PROPNAME = 1643705058;
+			
+			static const unsigned long PROPERTYCONTEXTDECLEXP_ATTRIBUTE_INITORDERVALUES = 477945014;
+			static const unsigned long PROPERTYCONTEXTDECLEXP_ATTRIBUTE_PROPTYPE = 266755643;
+			
+			
+			//Class and Feature Getter
+			virtual std::shared_ptr<ecore::EClass> getPropertyContextDeclExp_Class() const = 0;
+			
+			virtual std::shared_ptr<ecore::EAttribute> getPropertyContextDeclExp_Attribute_propName() const = 0;
+			
+			virtual std::shared_ptr<ecore::EReference> getPropertyContextDeclExp_Attribute_initOrDerValues() const = 0;
+			virtual std::shared_ptr<ecore::EReference> getPropertyContextDeclExp_Attribute_propType() const = 0;
+			
+			
+			// End Class PropertyContextDeclExp
+
+
 			// Begin Class RealLiteralExp
 			//Class and Feature IDs 
 			static const unsigned long REALLITERALEXP_CLASS = 470342449;
-			static const unsigned int REALLITERALEXP_CLASS_FEATURE_COUNT = 24;
+			static const unsigned int REALLITERALEXP_CLASS_FEATURE_COUNT = 25;
 			static const unsigned int REALLITERALEXP_CLASS_OPERATION_COUNT = 1;
 			static const unsigned long REALLITERALEXP_ATTRIBUTE_REALSYMBOL = 2107525011;
 			
@@ -659,7 +1071,7 @@ namespace ocl::Expressions
 			// Begin Class StateExp
 			//Class and Feature IDs 
 			static const unsigned long STATEEXP_CLASS = 2001706267;
-			static const unsigned int STATEEXP_CLASS_FEATURE_COUNT = 23;
+			static const unsigned int STATEEXP_CLASS_FEATURE_COUNT = 24;
 			static const unsigned int STATEEXP_CLASS_OPERATION_COUNT = 1;
 			
 			static const unsigned long STATEEXP_ATTRIBUTE_REFERREDSTATE = 1511244857;
@@ -678,7 +1090,7 @@ namespace ocl::Expressions
 			// Begin Class StringLiteralExp
 			//Class and Feature IDs 
 			static const unsigned long STRINGLITERALEXP_CLASS = 88304816;
-			static const unsigned int STRINGLITERALEXP_CLASS_FEATURE_COUNT = 24;
+			static const unsigned int STRINGLITERALEXP_CLASS_FEATURE_COUNT = 25;
 			static const unsigned int STRINGLITERALEXP_CLASS_OPERATION_COUNT = 1;
 			static const unsigned long STRINGLITERALEXP_ATTRIBUTE_STRINGSYMBOL = 1422848147;
 			
@@ -697,7 +1109,7 @@ namespace ocl::Expressions
 			// Begin Class TupleLiteralExp
 			//Class and Feature IDs 
 			static const unsigned long TUPLELITERALEXP_CLASS = 421328739;
-			static const unsigned int TUPLELITERALEXP_CLASS_FEATURE_COUNT = 23;
+			static const unsigned int TUPLELITERALEXP_CLASS_FEATURE_COUNT = 24;
 			static const unsigned int TUPLELITERALEXP_CLASS_OPERATION_COUNT = 1;
 			
 			static const unsigned long TUPLELITERALEXP_ATTRIBUTE_PART = 966522931;
@@ -716,36 +1128,59 @@ namespace ocl::Expressions
 			// Begin Class TupleLiteralPart
 			//Class and Feature IDs 
 			static const unsigned long TUPLELITERALPART_CLASS = 2008604788;
-			static const unsigned int TUPLELITERALPART_CLASS_FEATURE_COUNT = 11;
+			static const unsigned int TUPLELITERALPART_CLASS_FEATURE_COUNT = 13;
 			static const unsigned int TUPLELITERALPART_CLASS_OPERATION_COUNT = 1;
+			static const unsigned long TUPLELITERALPART_ATTRIBUTE_TUPLEPARTNAME = 389918892;
+			static const unsigned long TUPLELITERALPART_ATTRIBUTE_TUPLEPARTTYPE = 647568630;
 			
-			static const unsigned long TUPLELITERALPART_ATTRIBUTE_ATTRIBUTE = 1204576777;
+			static const unsigned long TUPLELITERALPART_ATTRIBUTE_ASSIGNEDOCLEXPRESSION = 187308644;
 			
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getTupleLiteralPart_Class() const = 0;
 			
+			virtual std::shared_ptr<ecore::EAttribute> getTupleLiteralPart_Attribute_tuplePartName() const = 0;
+			virtual std::shared_ptr<ecore::EAttribute> getTupleLiteralPart_Attribute_tuplePartType() const = 0;
 			
-			virtual std::shared_ptr<ecore::EReference> getTupleLiteralPart_Attribute_attribute() const = 0;
+			virtual std::shared_ptr<ecore::EReference> getTupleLiteralPart_Attribute_assignedOclExpression() const = 0;
 			
 			
 			// End Class TupleLiteralPart
 
 
+			// Begin Class TupleTypeExp
+			//Class and Feature IDs 
+			static const unsigned long TUPLETYPEEXP_CLASS = 2013827179;
+			static const unsigned int TUPLETYPEEXP_CLASS_FEATURE_COUNT = 25;
+			static const unsigned int TUPLETYPEEXP_CLASS_OPERATION_COUNT = 1;
+			
+			static const unsigned long TUPLETYPEEXP_ATTRIBUTE_PART = 1984058571;
+			
+			
+			//Class and Feature Getter
+			virtual std::shared_ptr<ecore::EClass> getTupleTypeExp_Class() const = 0;
+			
+			
+			virtual std::shared_ptr<ecore::EReference> getTupleTypeExp_Attribute_part() const = 0;
+			
+			
+			// End Class TupleTypeExp
+
+
 			// Begin Class TypeExp
 			//Class and Feature IDs 
 			static const unsigned long TYPEEXP_CLASS = 523410060;
-			static const unsigned int TYPEEXP_CLASS_FEATURE_COUNT = 23;
+			static const unsigned int TYPEEXP_CLASS_FEATURE_COUNT = 24;
 			static const unsigned int TYPEEXP_CLASS_OPERATION_COUNT = 1;
-			
 			static const unsigned long TYPEEXP_ATTRIBUTE_REFERREDTYPE = 1504284642;
+			
 			
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getTypeExp_Class() const = 0;
 			
+			virtual std::shared_ptr<ecore::EAttribute> getTypeExp_Attribute_referredType() const = 0;
 			
-			virtual std::shared_ptr<ecore::EReference> getTypeExp_Attribute_referredType() const = 0;
 			
 			
 			// End Class TypeExp
@@ -754,7 +1189,7 @@ namespace ocl::Expressions
 			// Begin Class UnlimitedNaturalExp
 			//Class and Feature IDs 
 			static const unsigned long UNLIMITEDNATURALEXP_CLASS = 521207252;
-			static const unsigned int UNLIMITEDNATURALEXP_CLASS_FEATURE_COUNT = 24;
+			static const unsigned int UNLIMITEDNATURALEXP_CLASS_FEATURE_COUNT = 25;
 			static const unsigned int UNLIMITEDNATURALEXP_CLASS_OPERATION_COUNT = 1;
 			static const unsigned long UNLIMITEDNATURALEXP_ATTRIBUTE_UNLIMITEDNATURALSYMBOL = 2029810217;
 			
@@ -773,7 +1208,7 @@ namespace ocl::Expressions
 			// Begin Class UnspecifiedValueExp
 			//Class and Feature IDs 
 			static const unsigned long UNSPECIFIEDVALUEEXP_CLASS = 233840348;
-			static const unsigned int UNSPECIFIEDVALUEEXP_CLASS_FEATURE_COUNT = 22;
+			static const unsigned int UNSPECIFIEDVALUEEXP_CLASS_FEATURE_COUNT = 23;
 			static const unsigned int UNSPECIFIEDVALUEEXP_CLASS_OPERATION_COUNT = 1;
 			
 			
@@ -785,6 +1220,31 @@ namespace ocl::Expressions
 			
 			
 			// End Class UnspecifiedValueExp
+
+
+			// Begin Class VarDeclarationExp
+			//Class and Feature IDs 
+			static const unsigned long VARDECLARATIONEXP_CLASS = 1889059730;
+			static const unsigned int VARDECLARATIONEXP_CLASS_FEATURE_COUNT = 27;
+			static const unsigned int VARDECLARATIONEXP_CLASS_OPERATION_COUNT = 1;
+			static const unsigned long VARDECLARATIONEXP_ATTRIBUTE_VARNAME = 1392819470;
+			
+			static const unsigned long VARDECLARATIONEXP_ATTRIBUTE_ASSIGNEDOCLEXP = 991428893;
+			static const unsigned long VARDECLARATIONEXP_ATTRIBUTE_INITEXPRESSION = 1580272397;
+			static const unsigned long VARDECLARATIONEXP_ATTRIBUTE_VARTYPE = 1769206454;
+			
+			
+			//Class and Feature Getter
+			virtual std::shared_ptr<ecore::EClass> getVarDeclarationExp_Class() const = 0;
+			
+			virtual std::shared_ptr<ecore::EAttribute> getVarDeclarationExp_Attribute_varName() const = 0;
+			
+			virtual std::shared_ptr<ecore::EReference> getVarDeclarationExp_Attribute_assignedOclExp() const = 0;
+			virtual std::shared_ptr<ecore::EReference> getVarDeclarationExp_Attribute_initExpression() const = 0;
+			virtual std::shared_ptr<ecore::EReference> getVarDeclarationExp_Attribute_varType() const = 0;
+			
+			
+			// End Class VarDeclarationExp
 
 
 			// Begin Class Variable
@@ -825,31 +1285,33 @@ namespace ocl::Expressions
 			// Begin Class VariableExp
 			//Class and Feature IDs 
 			static const unsigned long VARIABLEEXP_CLASS = 838051098;
-			static const unsigned int VARIABLEEXP_CLASS_FEATURE_COUNT = 23;
+			static const unsigned int VARIABLEEXP_CLASS_FEATURE_COUNT = 24;
 			static const unsigned int VARIABLEEXP_CLASS_OPERATION_COUNT = 1;
-			
 			static const unsigned long VARIABLEEXP_ATTRIBUTE_REFERREDVARIABLE = 1631929510;
+			
 			
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getVariableExp_Class() const = 0;
 			
+			virtual std::shared_ptr<ecore::EAttribute> getVariableExp_Attribute_referredVariable() const = 0;
 			
-			virtual std::shared_ptr<ecore::EReference> getVariableExp_Attribute_referredVariable() const = 0;
 			
 			
 			// End Class VariableExp
 
-			static const int COLLECTIONKIND_CLASS = 14;
+			static const int COLLECTIONKIND_CLASS = 11;
+			static const int PREPOSTBODY_CLASS = 68;
+			static const int SURROUNDINGTYPE_CLASS = 82;
 			
 			virtual std::shared_ptr<ecore::EEnum> getCollectionKind_Class() const = 0;
+			virtual std::shared_ptr<ecore::EEnum> getPrePostBody_Class() const = 0;
+			virtual std::shared_ptr<ecore::EEnum> getSurroundingType_Class() const = 0;
 			
 
 			
 
-			//Singleton Instance and Getter
-			private:
-				static std::shared_ptr<ExpressionsPackage> instance;
+			//Singleton Getter
 			public:
 				static std::shared_ptr<ExpressionsPackage> eInstance();
 	};

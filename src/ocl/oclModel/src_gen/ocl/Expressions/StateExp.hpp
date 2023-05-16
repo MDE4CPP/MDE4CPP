@@ -45,17 +45,14 @@ namespace ocl::Expressions
 	class LoopExp;
 	class NavigationCallExp;
 	class OperationCallExp;
-	class Variable;
+	class VarDeclarationExp;
 }
 namespace ecore 
 {
 	class EAnnotation;
 	class EClassifier;
 	class EGenericType;
-}
-namespace uml 
-{
-	class State;
+	class EObject;
 }
 
 // namespace macro header include
@@ -71,7 +68,7 @@ namespace uml
 namespace ocl::Expressions 
 {
 	
-	class OCL_API StateExp: virtual public OclExpression
+	class OCL_API StateExp : virtual public OclExpression
 	{
 		public:
  			StateExp(const StateExp &) {}
@@ -96,8 +93,8 @@ namespace ocl::Expressions
 			//*********************************
 			// Reference Getters & Setters
 			//*********************************
-			virtual std::shared_ptr<uml::State> getReferredState() const = 0;
-			virtual void setReferredState(std::shared_ptr<uml::State>) = 0;
+			virtual std::shared_ptr<ecore::EObject> getReferredState() const = 0;
+			virtual void setReferredState(std::shared_ptr<ecore::EObject>) = 0;
 
 			//*********************************
 			// Union Reference Getters
@@ -123,7 +120,7 @@ namespace ocl::Expressions
 			//*********************************
 			// Reference Members
 			//*********************************
-			std::shared_ptr<uml::State> m_referredState;
+			std::shared_ptr<ecore::EObject> m_referredState;
 	};
 }
 #endif /* end of include guard: OCL_EXPRESSIONS_STATEEXP_HPP */

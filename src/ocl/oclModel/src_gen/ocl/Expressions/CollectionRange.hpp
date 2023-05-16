@@ -56,7 +56,7 @@ namespace ecore
 namespace ocl::Expressions 
 {
 	
-	class OCL_API CollectionRange: virtual public CollectionLiteralPart
+	class OCL_API CollectionRange : virtual public CollectionLiteralPart
 	{
 		public:
  			CollectionRange(const CollectionRange &) {}

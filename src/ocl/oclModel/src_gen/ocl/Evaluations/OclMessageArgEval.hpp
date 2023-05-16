@@ -34,23 +34,26 @@ namespace ocl
 //Forward Declaration for used types 
 namespace ocl::Evaluations 
 {
-	class OclExpEval;
+	class EvalEnvironment;
 	class UnspecifiedValueExpEval;
 }
-namespace fUML::Semantics::Loci 
+namespace ocl::Expressions 
 {
-	class Locus;
+	class OclExpression;
 }
-namespace uml 
+namespace ecore 
 {
-	class ValueSpecification;
+	class EAnnotation;
+	class EClassifier;
+	class EGenericType;
+	class EObject;
 }
 
 // namespace macro header include
 #include "ocl/ocl.hpp"
 
 // base class includes
-#include "fUML/Semantics/Values/Evaluation.hpp"
+#include "ocl/Evaluations/OclExpEval.hpp"
 
 
 
@@ -59,7 +62,7 @@ namespace uml
 namespace ocl::Evaluations 
 {
 	
-	class OCL_API OclMessageArgEval: virtual public fUML::Semantics::Values::Evaluation
+	class OCL_API OclMessageArgEval : virtual public OclExpEval
 	{
 		public:
  			OclMessageArgEval(const OclMessageArgEval &) {}

@@ -1,9 +1,13 @@
 
 #include "ocl/Expressions/impl/FeatureCallExpImpl.hpp"
 #ifdef NDEBUG
-	#define DEBUG_MESSAGE(a) /**/
+	#define DEBUG_INFO(a)		/**/
+	#define DEBUG_WARNING(a)	/**/
+	#define DEBUG_ERROR(a)		/**/
 #else
-	#define DEBUG_MESSAGE(a) a
+	#define DEBUG_INFO(a) 		std::cout<<"[\e[0;32mInfo\e[0m]:\t\t"<<__PRETTY_FUNCTION__<<"\n\t\t  -- Message: "<<a<<std::endl;
+	#define DEBUG_WARNING(a) 	std::cout<<"[\e[0;33mWarning\e[0m]:\t"<<__PRETTY_FUNCTION__<<"\n\t\t  -- Message: "<<a<<std::endl;
+	#define DEBUG_ERROR(a)		std::cout<<"[\e[0;31mError\e[0m]:\t"<<__PRETTY_FUNCTION__<<"\n\t\t  -- Message: "<<a<<std::endl;
 #endif
 
 #ifdef ACTIVITY_DEBUG_ON
@@ -21,8 +25,8 @@
 #include "abstractDataTypes/Bag.hpp"
 
 
-#include "abstractDataTypes/AnyEObject.hpp"
-#include "abstractDataTypes/AnyEObjectBag.hpp"
+#include "ecore/EcoreAny.hpp"
+#include "ecore/EcoreContainerAny.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
@@ -34,9 +38,9 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
+#include "ocl/Evaluations/EvaluationsFactory.hpp"
 #include "ocl/Expressions/ExpressionsFactory.hpp"
 #include "ecore/ecoreFactory.hpp"
-#include "ocl/Evaluations/EvaluationsFactory.hpp"
 #include "ocl/Expressions/CallExp.hpp"
 #include "ocl/Expressions/CollectionRange.hpp"
 #include "ecore/EAnnotation.hpp"
@@ -49,7 +53,7 @@
 #include "ocl/Evaluations/OclExpEval.hpp"
 #include "ocl/Expressions/OclExpression.hpp"
 #include "ocl/Expressions/OperationCallExp.hpp"
-#include "ocl/Expressions/Variable.hpp"
+#include "ocl/Expressions/VarDeclarationExp.hpp"
 //Factories and Package includes
 #include "ocl/oclPackage.hpp"
 #include "ocl/Evaluations/EvaluationsPackage.hpp"
@@ -73,13 +77,6 @@ FeatureCallExpImpl::~FeatureCallExpImpl()
 #ifdef SHOW_DELETION
 	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete FeatureCallExp "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
 #endif
-}
-
-//Additional constructor for the containments back reference
-FeatureCallExpImpl::FeatureCallExpImpl(std::weak_ptr<ocl::Expressions::CallExp> par_appliedElement)
-:FeatureCallExpImpl()
-{
-	m_appliedElement = par_appliedElement;
 }
 
 //Additional constructor for the containments back reference
@@ -122,20 +119,25 @@ FeatureCallExpImpl::FeatureCallExpImpl(std::weak_ptr<ocl::Expressions::Collectio
 }
 
 
-//Additional constructor for the containments back reference
-FeatureCallExpImpl::FeatureCallExpImpl(std::weak_ptr<ocl::Expressions::Variable> par_initializedElement)
-:FeatureCallExpImpl()
-{
-	m_initializedElement = par_initializedElement;
-}
-
 
 //Additional constructor for the containments back reference
-FeatureCallExpImpl::FeatureCallExpImpl(std::weak_ptr<ocl::Expressions::LoopExp> par_loopBodyOwner)
+FeatureCallExpImpl::FeatureCallExpImpl(std::weak_ptr<ocl::Expressions::LoopExp> par_LoopExp, const int reference_id)
 :FeatureCallExpImpl()
 {
-	m_loopBodyOwner = par_loopBodyOwner;
+	switch(reference_id)
+	{	
+	case ocl::Expressions::ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_LOOPBODYOWNER:
+		m_loopBodyOwner = par_LoopExp;
+		 return;
+	case ocl::Expressions::ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_LOOPEXP:
+		m_loopExp = par_LoopExp;
+		 return;
+	default:
+	std::cerr << __PRETTY_FUNCTION__ <<" Reference not found in class with the given ID" << std::endl;
+	}
+   
 }
+
 
 //Additional constructor for the containments back reference
 FeatureCallExpImpl::FeatureCallExpImpl(std::weak_ptr<ocl::Expressions::OperationCallExp> par_parentCall)
@@ -184,7 +186,7 @@ FeatureCallExpImpl& FeatureCallExpImpl::operator=(const FeatureCallExpImpl & obj
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy FeatureCallExp "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
 	#endif
 	//Clone Attributes with (deep copy)
-	m_isPre = obj.getIsPre();
+	m_isPre = obj.isIsPre();
 
 	//copy references with no containment (soft copy)
 	//Clone references with containment (deep copy)
@@ -199,7 +201,7 @@ FeatureCallExpImpl& FeatureCallExpImpl::operator=(const FeatureCallExpImpl & obj
 // Attribute Getters & Setters
 //*********************************
 /* Getter & Setter for attribute isPre */
-bool FeatureCallExpImpl::getIsPre() const 
+bool FeatureCallExpImpl::isIsPre() const 
 {
 	return m_isPre;
 }
@@ -222,11 +224,6 @@ void FeatureCallExpImpl::setIsPre(bool _isPre)
 //*********************************
 std::shared_ptr<ecore::EObject> FeatureCallExpImpl::eContainer() const
 {
-	if(auto wp = m_appliedElement.lock())
-	{
-		return wp;
-	}
-
 	if(auto wp = m_elseOwner.lock())
 	{
 		return wp;
@@ -250,16 +247,16 @@ std::shared_ptr<ecore::EObject> FeatureCallExpImpl::eContainer() const
 	}
 
 
-	if(auto wp = m_initializedElement.lock())
-	{
-		return wp;
-	}
-
 
 	if(auto wp = m_loopBodyOwner.lock())
 	{
 		return wp;
 	}
+	if(auto wp = m_loopExp.lock())
+	{
+		return wp;
+	}
+
 
 	if(auto wp = m_parentCall.lock())
 	{
@@ -362,7 +359,7 @@ void FeatureCallExpImpl::saveContent(std::shared_ptr<persistence::interfaces::XS
 		// Add attributes
 		if ( this->eIsSet(package->getFeatureCallExp_Attribute_isPre()) )
 		{
-			saveHandler->addAttribute("isPre", this->getIsPre());
+			saveHandler->addAttribute("isPre", this->isIsPre());
 		}
 	}
 	catch (std::exception& e)
@@ -379,12 +376,12 @@ std::shared_ptr<ecore::EClass> FeatureCallExpImpl::eStaticClass() const
 //*********************************
 // EStructuralFeature Get/Set/IsSet
 //*********************************
-Any FeatureCallExpImpl::eGet(int featureID, bool resolve, bool coreType) const
+std::shared_ptr<Any> FeatureCallExpImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 		case ocl::Expressions::ExpressionsPackage::FEATURECALLEXP_ATTRIBUTE_ISPRE:
-			return eAny(getIsPre(),ecore::ecorePackage::EBOOLEAN_CLASS,false); //3023
+			return eAny(isIsPre(),ecore::ecorePackage::EBOOLEAN_CLASS,false); //2824
 	}
 	return CallExpImpl::eGet(featureID, resolve, coreType);
 }
@@ -394,21 +391,28 @@ bool FeatureCallExpImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case ocl::Expressions::ExpressionsPackage::FEATURECALLEXP_ATTRIBUTE_ISPRE:
-			return getIsPre() != false; //3023
+			return isIsPre() != false; //2824
 	}
 	return CallExpImpl::internalEIsSet(featureID);
 }
 
-bool FeatureCallExpImpl::eSet(int featureID, Any newValue)
+bool FeatureCallExpImpl::eSet(int featureID, std::shared_ptr<Any> newValue)
 {
 	switch(featureID)
 	{
 		case ocl::Expressions::ExpressionsPackage::FEATURECALLEXP_ATTRIBUTE_ISPRE:
 		{
-			// CAST Any to bool
-			bool _isPre = newValue->get<bool>();
-			setIsPre(_isPre); //3023
-			return true;
+			try
+			{
+				bool _isPre = newValue->get<bool>();
+				setIsPre(_isPre); //2824
+			}
+			catch(...)
+			{
+				DEBUG_ERROR("Invalid type stored in 'Any' for feature 'isPre'. Failed to set feature!")
+				return false;
+			}
+		return true;
 		}
 	}
 
@@ -418,9 +422,9 @@ bool FeatureCallExpImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any FeatureCallExpImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+std::shared_ptr<Any> FeatureCallExpImpl::eInvoke(int operationID, std::shared_ptr<Bag<Any>> arguments)
 {
-	Any result;
+	std::shared_ptr<Any> result;
  
   	switch(operationID)
 	{

@@ -34,26 +34,34 @@ namespace ocl
 //Forward Declaration for used types 
 namespace ocl::Evaluations 
 {
-	class OclExpEval;
+	class EvalEnvironment;
 }
-namespace fUML::Semantics::SimpleClassifiers 
+namespace ocl::Expressions 
 {
-	class StringValue;
+	class OclExpression;
+}
+namespace ecore 
+{
+	class EAnnotation;
+	class EClassifier;
+	class EGenericType;
+	class EObject;
 }
 
 // namespace macro header include
 #include "ocl/ocl.hpp"
 
+// base class includes
+#include "ocl/Evaluations/OclExpEval.hpp"
 
 
-#include "ecore/EModelElement.hpp"
 
 
 //*********************************
 namespace ocl::Evaluations 
 {
 	
-	class OCL_API VariableDeclEval : virtual public ecore::EModelElement
+	class OCL_API VariableDeclEval : virtual public OclExpEval
 	{
 		public:
  			VariableDeclEval(const VariableDeclEval &) {}
@@ -74,14 +82,14 @@ namespace ocl::Evaluations
 			//*********************************
 			// Attribute Getters & Setters
 			//*********************************
+			virtual std::string getName() const = 0;
+			virtual void setName (std::string _name)= 0;
 
 			//*********************************
 			// Reference Getters & Setters
 			//*********************************
 			virtual std::shared_ptr<ocl::Evaluations::OclExpEval> getInitExp() const = 0;
 			virtual void setInitExp(std::shared_ptr<ocl::Evaluations::OclExpEval>) = 0;
-			virtual std::shared_ptr<fUML::Semantics::SimpleClassifiers::StringValue> getName() const = 0;
-			virtual void setName(std::shared_ptr<fUML::Semantics::SimpleClassifiers::StringValue>) = 0;
 
 			//*********************************
 			// Union Reference Getters
@@ -103,12 +111,12 @@ namespace ocl::Evaluations
 			//*********************************
 			// Attribute Members
 			//*********************************
+			std::string m_name= "";
 			
 			//*********************************
 			// Reference Members
 			//*********************************
 			std::shared_ptr<ocl::Evaluations::OclExpEval> m_initExp;
-			std::shared_ptr<fUML::Semantics::SimpleClassifiers::StringValue> m_name;
 	};
 }
 #endif /* end of include guard: OCL_EVALUATIONS_VARIABLEDECLEVAL_HPP */

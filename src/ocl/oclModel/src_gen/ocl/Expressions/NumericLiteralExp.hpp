@@ -45,7 +45,7 @@ namespace ocl::Expressions
 	class LoopExp;
 	class NavigationCallExp;
 	class OperationCallExp;
-	class Variable;
+	class VarDeclarationExp;
 }
 namespace ecore 
 {
@@ -67,7 +67,7 @@ namespace ecore
 namespace ocl::Expressions 
 {
 	
-	class OCL_API NumericLiteralExp: virtual public PrimitiveLiteralExp
+	class OCL_API NumericLiteralExp : virtual public PrimitiveLiteralExp
 	{
 		public:
  			NumericLiteralExp(const NumericLiteralExp &) {}

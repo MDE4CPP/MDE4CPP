@@ -43,12 +43,11 @@ namespace ocl::Expressions
 	class IfExp;
 	class LoopExp;
 	class OperationCallExp;
-	class Variable;
+	class VarDeclarationExp;
 }
 namespace ecore 
 {
 	class EAnnotation;
-	class EAttribute;
 	class EClassifier;
 	class EGenericType;
 }
@@ -66,7 +65,7 @@ namespace ecore
 namespace ocl::Expressions 
 {
 	
-	class OCL_API PropertyCallExp: virtual public NavigationCallExp
+	class OCL_API PropertyCallExp : virtual public NavigationCallExp
 	{
 		public:
  			PropertyCallExp(const PropertyCallExp &) {}
@@ -87,12 +86,12 @@ namespace ocl::Expressions
 			//*********************************
 			// Attribute Getters & Setters
 			//*********************************
+			virtual std::string getReferredProperty() const = 0;
+			virtual void setReferredProperty (std::string _referredProperty)= 0;
 
 			//*********************************
 			// Reference Getters & Setters
 			//*********************************
-			virtual std::shared_ptr<ecore::EAttribute> getReferredProperty() const = 0;
-			virtual void setReferredProperty(std::shared_ptr<ecore::EAttribute>) = 0;
 
 			//*********************************
 			// Union Reference Getters
@@ -114,11 +113,11 @@ namespace ocl::Expressions
 			//*********************************
 			// Attribute Members
 			//*********************************
+			std::string m_referredProperty= "";
 			
 			//*********************************
 			// Reference Members
 			//*********************************
-			std::shared_ptr<ecore::EAttribute> m_referredProperty;
 	};
 }
 #endif /* end of include guard: OCL_EXPRESSIONS_PROPERTYCALLEXP_HPP */

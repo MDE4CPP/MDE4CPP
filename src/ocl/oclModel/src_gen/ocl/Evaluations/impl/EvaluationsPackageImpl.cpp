@@ -4,26 +4,39 @@
 
 #include "abstractDataTypes/SubsetUnion.hpp"
 //metametamodel classes
-#include "ecore/EParameter.hpp"
-#include "ecore/EOperation.hpp"
-#include "ecore/EDataType.hpp"
-#include "ecore/EAnnotation.hpp"
-#include "ecore/EClass.hpp"
-#include "ecore/EReference.hpp"
-#include "ecore/EStringToStringMapEntry.hpp"
-#include "ecore/EAttribute.hpp"
 #include "ecore/EGenericType.hpp"
+#include "ecore/EDataType.hpp"
+#include "ecore/EOperation.hpp"
+#include "ecore/EAttribute.hpp"
+#include "ecore/EParameter.hpp"
+#include "ecore/EReference.hpp"
+#include "ecore/EClass.hpp"
 
 //metamodel factory
 #include "ocl/Evaluations/EvaluationsFactory.hpp"
 
 //depending model packages
 #include "ecore/ecorePackage.hpp"
-#include "fUML/fUMLPackage.hpp"
 #include "ocl/oclPackage.hpp"
-#include "types/typesPackage.hpp"
 
 using namespace ocl::Evaluations;
+
+//Singleton implementation 
+std::shared_ptr<EvaluationsPackage> EvaluationsPackage::eInstance()
+{
+	static std::shared_ptr<EvaluationsPackage> instance;
+	if(!instance)
+	{
+		//create a new Factoryimplementation
+		instance.reset(EvaluationsPackageImpl::create());
+		std::dynamic_pointer_cast<EvaluationsPackageImpl>(instance)->init(instance);
+	}	
+	return instance;
+}
+//static initialisation
+const std::string EvaluationsPackage::eNAME ="Evaluations";
+const std::string EvaluationsPackage::eNS_URI ="http://ocl4cpp/ocl/evaluations.ecore";
+const std::string EvaluationsPackage::eNS_PREFIX ="ocl.evaluations";
 
 bool EvaluationsPackageImpl::isInited = false;
 
@@ -65,11 +78,11 @@ std::shared_ptr<ecore::EClass> ocl::Evaluations::EvaluationsPackageImpl::getAsso
 	return m_associationClassCallExpEval_Class;
 }
 
-
-std::shared_ptr<ecore::EReference> ocl::Evaluations::EvaluationsPackageImpl::getAssociationClassCallExpEval_Attribute_referredAssociationClass() const
+std::shared_ptr<ecore::EAttribute> ocl::Evaluations::EvaluationsPackageImpl::getAssociationClassCallExpEval_Attribute_referredAssociationClass() const
 {
 	return m_associationClassCallExpEval_Attribute_referredAssociationClass;
 }
+
 
 
 // End Class AssociationClassCallExpEval
@@ -80,11 +93,11 @@ std::shared_ptr<ecore::EClass> ocl::Evaluations::EvaluationsPackageImpl::getAsso
 	return m_associationEndCallExpEval_Class;
 }
 
-
-std::shared_ptr<ecore::EReference> ocl::Evaluations::EvaluationsPackageImpl::getAssociationEndCallExpEval_Attribute_referredAssociationEnd() const
+std::shared_ptr<ecore::EAttribute> ocl::Evaluations::EvaluationsPackageImpl::getAssociationEndCallExpEval_Attribute_referredAssociationEnd() const
 {
 	return m_associationEndCallExpEval_Attribute_referredAssociationEnd;
 }
+
 
 
 // End Class AssociationEndCallExpEval
@@ -95,11 +108,11 @@ std::shared_ptr<ecore::EClass> ocl::Evaluations::EvaluationsPackageImpl::getAttr
 	return m_attributeCallExpEval_Class;
 }
 
-
-std::shared_ptr<ecore::EReference> ocl::Evaluations::EvaluationsPackageImpl::getAttributeCallExpEval_Attribute_referredAttribute() const
+std::shared_ptr<ecore::EAttribute> ocl::Evaluations::EvaluationsPackageImpl::getAttributeCallExpEval_Attribute_referredAttribute() const
 {
 	return m_attributeCallExpEval_Attribute_referredAttribute;
 }
+
 
 
 // End Class AttributeCallExpEval
@@ -210,9 +223,9 @@ std::shared_ptr<ecore::EOperation> ocl::Evaluations::EvaluationsPackageImpl::get
 {
 	return m_evalEnvironment_Operation_addAll_NameValueBinding;
 }
-std::shared_ptr<ecore::EOperation> ocl::Evaluations::EvaluationsPackageImpl::getEvalEnvironment_Operation_find_String() const
+std::shared_ptr<ecore::EOperation> ocl::Evaluations::EvaluationsPackageImpl::getEvalEnvironment_Operation_find_EString() const
 {
-	return m_evalEnvironment_Operation_find_String;
+	return m_evalEnvironment_Operation_find_EString;
 }
 std::shared_ptr<ecore::EOperation> ocl::Evaluations::EvaluationsPackageImpl::getEvalEnvironment_Operation_getValueOf_EString() const
 {
@@ -321,6 +334,10 @@ std::shared_ptr<ecore::EClass> ocl::Evaluations::EvaluationsPackageImpl::getLetE
 	return m_letExpEval_Class;
 }
 
+std::shared_ptr<ecore::EAttribute> ocl::Evaluations::EvaluationsPackageImpl::getLetExpEval_Attribute_variable() const
+{
+	return m_letExpEval_Attribute_variable;
+}
 
 std::shared_ptr<ecore::EReference> ocl::Evaluations::EvaluationsPackageImpl::getLetExpEval_Attribute_in() const
 {
@@ -329,10 +346,6 @@ std::shared_ptr<ecore::EReference> ocl::Evaluations::EvaluationsPackageImpl::get
 std::shared_ptr<ecore::EReference> ocl::Evaluations::EvaluationsPackageImpl::getLetExpEval_Attribute_initExpression() const
 {
 	return m_letExpEval_Attribute_initExpression;
-}
-std::shared_ptr<ecore::EReference> ocl::Evaluations::EvaluationsPackageImpl::getLetExpEval_Attribute_variable() const
-{
-	return m_letExpEval_Attribute_variable;
 }
 
 
@@ -355,14 +368,14 @@ std::shared_ptr<ecore::EClass> ocl::Evaluations::EvaluationsPackageImpl::getLoop
 	return m_loopExpEval_Class;
 }
 
+std::shared_ptr<ecore::EAttribute> ocl::Evaluations::EvaluationsPackageImpl::getLoopExpEval_Attribute_iterators() const
+{
+	return m_loopExpEval_Attribute_iterators;
+}
 
 std::shared_ptr<ecore::EReference> ocl::Evaluations::EvaluationsPackageImpl::getLoopExpEval_Attribute_bodyEvals() const
 {
 	return m_loopExpEval_Attribute_bodyEvals;
-}
-std::shared_ptr<ecore::EReference> ocl::Evaluations::EvaluationsPackageImpl::getLoopExpEval_Attribute_iterators() const
-{
-	return m_loopExpEval_Attribute_iterators;
 }
 
 
@@ -383,17 +396,36 @@ std::shared_ptr<ecore::EOperation> ocl::Evaluations::EvaluationsPackageImpl::get
 
 // End Class ModelPropertyCallExpEval
 
+// Begin Class NameValueBinding
+std::shared_ptr<ecore::EClass> ocl::Evaluations::EvaluationsPackageImpl::getNameValueBinding_Class() const
+{
+	return m_nameValueBinding_Class;
+}
+
+std::shared_ptr<ecore::EAttribute> ocl::Evaluations::EvaluationsPackageImpl::getNameValueBinding_Attribute_name() const
+{
+	return m_nameValueBinding_Attribute_name;
+}
+
+std::shared_ptr<ecore::EReference> ocl::Evaluations::EvaluationsPackageImpl::getNameValueBinding_Attribute_value() const
+{
+	return m_nameValueBinding_Attribute_value;
+}
+
+
+// End Class NameValueBinding
+
 // Begin Class NavigationCallExpEval
 std::shared_ptr<ecore::EClass> ocl::Evaluations::EvaluationsPackageImpl::getNavigationCallExpEval_Class() const
 {
 	return m_navigationCallExpEval_Class;
 }
 
-
-std::shared_ptr<ecore::EReference> ocl::Evaluations::EvaluationsPackageImpl::getNavigationCallExpEval_Attribute_navigationSource() const
+std::shared_ptr<ecore::EAttribute> ocl::Evaluations::EvaluationsPackageImpl::getNavigationCallExpEval_Attribute_navigationSource() const
 {
 	return m_navigationCallExpEval_Attribute_navigationSource;
 }
+
 std::shared_ptr<ecore::EReference> ocl::Evaluations::EvaluationsPackageImpl::getNavigationCallExpEval_Attribute_qualifiers() const
 {
 	return m_navigationCallExpEval_Attribute_qualifiers;
@@ -492,14 +524,14 @@ std::shared_ptr<ecore::EClass> ocl::Evaluations::EvaluationsPackageImpl::getOper
 	return m_operationCallExpEval_Class;
 }
 
+std::shared_ptr<ecore::EAttribute> ocl::Evaluations::EvaluationsPackageImpl::getOperationCallExpEval_Attribute_referredOperation() const
+{
+	return m_operationCallExpEval_Attribute_referredOperation;
+}
 
 std::shared_ptr<ecore::EReference> ocl::Evaluations::EvaluationsPackageImpl::getOperationCallExpEval_Attribute_arguments() const
 {
 	return m_operationCallExpEval_Attribute_arguments;
-}
-std::shared_ptr<ecore::EReference> ocl::Evaluations::EvaluationsPackageImpl::getOperationCallExpEval_Attribute_referredOperation() const
-{
-	return m_operationCallExpEval_Attribute_referredOperation;
 }
 
 
@@ -607,14 +639,14 @@ std::shared_ptr<ecore::EClass> ocl::Evaluations::EvaluationsPackageImpl::getVari
 	return m_variableDeclEval_Class;
 }
 
+std::shared_ptr<ecore::EAttribute> ocl::Evaluations::EvaluationsPackageImpl::getVariableDeclEval_Attribute_name() const
+{
+	return m_variableDeclEval_Attribute_name;
+}
 
 std::shared_ptr<ecore::EReference> ocl::Evaluations::EvaluationsPackageImpl::getVariableDeclEval_Attribute_initExp() const
 {
 	return m_variableDeclEval_Attribute_initExp;
-}
-std::shared_ptr<ecore::EReference> ocl::Evaluations::EvaluationsPackageImpl::getVariableDeclEval_Attribute_name() const
-{
-	return m_variableDeclEval_Attribute_name;
 }
 
 
@@ -626,11 +658,11 @@ std::shared_ptr<ecore::EClass> ocl::Evaluations::EvaluationsPackageImpl::getVari
 	return m_variableExpEval_Class;
 }
 
-
-std::shared_ptr<ecore::EReference> ocl::Evaluations::EvaluationsPackageImpl::getVariableExpEval_Attribute_referredVariable() const
+std::shared_ptr<ecore::EAttribute> ocl::Evaluations::EvaluationsPackageImpl::getVariableExpEval_Attribute_referredVariable() const
 {
 	return m_variableExpEval_Attribute_referredVariable;
 }
+
 
 
 // End Class VariableExpEval

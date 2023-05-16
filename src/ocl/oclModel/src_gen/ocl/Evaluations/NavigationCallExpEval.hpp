@@ -41,21 +41,12 @@ namespace ocl::Expressions
 {
 	class OclExpression;
 }
-namespace fUML::Semantics::Loci 
+namespace ecore 
 {
-	class Locus;
-}
-namespace fUML::Semantics::SimpleClassifiers 
-{
-	class StringValue;
-}
-namespace fUML::Semantics::Values 
-{
-	class Value;
-}
-namespace uml 
-{
-	class ValueSpecification;
+	class EAnnotation;
+	class EClassifier;
+	class EGenericType;
+	class EObject;
 }
 
 // namespace macro header include
@@ -71,7 +62,7 @@ namespace uml
 namespace ocl::Evaluations 
 {
 	
-	class OCL_API NavigationCallExpEval: virtual public ModelPropertyCallExpEval
+	class OCL_API NavigationCallExpEval : virtual public ModelPropertyCallExpEval
 	{
 		public:
  			NavigationCallExpEval(const NavigationCallExpEval &) {}
@@ -92,12 +83,12 @@ namespace ocl::Evaluations
 			//*********************************
 			// Attribute Getters & Setters
 			//*********************************
+			virtual std::string getNavigationSource() const = 0;
+			virtual void setNavigationSource (std::string _navigationSource)= 0;
 
 			//*********************************
 			// Reference Getters & Setters
 			//*********************************
-			virtual std::shared_ptr<fUML::Semantics::SimpleClassifiers::StringValue> getNavigationSource() const = 0;
-			virtual void setNavigationSource(std::shared_ptr<fUML::Semantics::SimpleClassifiers::StringValue>) = 0;
 			virtual std::shared_ptr<Bag<ocl::Evaluations::OclExpEval>> getQualifiers() const = 0;
 
 			//*********************************
@@ -120,11 +111,11 @@ namespace ocl::Evaluations
 			//*********************************
 			// Attribute Members
 			//*********************************
+			std::string m_navigationSource= "";
 			
 			//*********************************
 			// Reference Members
 			//*********************************
-			std::shared_ptr<fUML::Semantics::SimpleClassifiers::StringValue> m_navigationSource;
 			mutable std::shared_ptr<Bag<ocl::Evaluations::OclExpEval>> m_qualifiers;
 	};
 }

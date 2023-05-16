@@ -34,19 +34,18 @@ namespace ocl
 //Forward Declaration for used types 
 namespace ocl::Evaluations 
 {
-	class OclExpEval;
+	class EvalEnvironment;
 }
-namespace fUML::Semantics::Loci 
+namespace ocl::Expressions 
 {
-	class Locus;
+	class OclExpression;
 }
-namespace fUML::Semantics::Values 
+namespace ecore 
 {
-	class Value;
-}
-namespace uml 
-{
-	class ValueSpecification;
+	class EAnnotation;
+	class EClassifier;
+	class EGenericType;
+	class EObject;
 }
 
 // namespace macro header include
@@ -62,7 +61,7 @@ namespace uml
 namespace ocl::Evaluations 
 {
 	
-	class OCL_API CollectionItemEval: virtual public CollectionLiteralPartEval
+	class OCL_API CollectionItemEval : virtual public CollectionLiteralPartEval
 	{
 		public:
  			CollectionItemEval(const CollectionItemEval &) {}
