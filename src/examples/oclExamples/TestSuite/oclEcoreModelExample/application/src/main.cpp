@@ -74,6 +74,61 @@ std::shared_ptr<Library_ecore::Library> createBookStore()
 	return lib;
 }
 
+//looks for the given (property) name in the given (EClass) context
+//returns nullptr if property with name is not found
+std::shared_ptr<Any> lookupPropertyName(const std::string& name, std::shared_ptr<Any> context) {
+
+    //try as ecoreAny
+    std::shared_ptr<ecore::EcoreAny> ecoreAny = std::dynamic_pointer_cast<ecore::EcoreAny>(context);
+
+    if (ecoreAny == nullptr) {
+        //TODO add error
+        //context have to be an ecoreAny
+        return nullptr;
+    }
+
+    //get eObject to get eClass
+    std::shared_ptr<ecore::EObject> eObject = ecoreAny->getAsEObject();
+
+    if (eObject == nullptr) {
+        //TODO add error can't get eObject out of ecoreAny
+        return nullptr;
+    }
+    
+    //try to get eClass
+    std::shared_ptr<ecore::EClass> eClass = eObject->eClass();
+
+    if (eClass == nullptr) {
+        //TODO add error
+        //eObject have no class
+        return nullptr;
+    }
+
+    //find property with given name
+    size_t size = eClass->getEAllStructuralFeatures()->size();
+
+    std::shared_ptr<ecore::EStructuralFeature> foundFeat;
+
+    for (size_t i = 0; i < size; i++) {
+        const std::shared_ptr<ecore::EStructuralFeature>& elem = eClass->getEAllStructuralFeatures()->at(i);
+        if (name == elem->getName()) {
+            foundFeat = elem;
+            break;
+        }
+    }
+
+    //check if found
+    if (foundFeat == nullptr) {
+        //TODO property name 'name' in eClass.getName() not found
+        return nullptr;
+    }
+
+    //get actual object
+    const std::shared_ptr<Any>& returnObject = eObject->eGet(foundFeat);
+
+    return returnObject;
+}
+
 int main() {
 
     std::shared_ptr<Library_ecore::Library> store = createBookStore();
@@ -215,8 +270,90 @@ int main() {
             }
         }   
     }
+
+    std::cout << "----------------------------------------------------------------------" << std::endl;
+
+    Utilities::ts ts4;
+    std::shared_ptr<Any> result4 = ts4.contextTest("self.close()", anyLib);
+
+
+    //read out result bag
     
-    
+    std::string openendName = "opened";
+    std::shared_ptr<ecore::EStructuralFeature> openedFeature = nullptr;
+
+    for(size_t i = 0; i < structTest->size(); i++) {
+
+        std::shared_ptr<ecore::EStructuralFeature> elem = structTest->at(i);
+        if (elem->getName() == openendName) {
+
+            openedFeature = elem;
+        }
+    }
+
+    std::shared_ptr<Any> openendTest = objLib->eGet(openedFeature);
+
+    if (openendTest->getTypeId() == ecore::ecorePackage::EBOOLEAN_CLASS) {
+
+        bool openStatus = openendTest->get<bool>();
+
+        std::cout << "Library is: " << openStatus << std::endl;
+
+    }
+
+    std::cout << "----------------------------------------------------------------------" << std::endl;
+
+    Utilities::ts ts5;
+    std::shared_ptr<Any> result5 = ts5.contextTest("if self.opened then 'offen' else 'geschlossen' endif", anyLib);
+
+    std::string answer = result5->get<std::string>();
+
+    std::cout << "Library is per OCL: " << answer << std::endl;
+
+    result4 = ts4.contextTest("self.open()", anyLib);
+
+    result5 = ts5.contextTest("if self.opened then 'offen' else 'geschlossen' endif", anyLib);
+
+    answer = result5->get<std::string>();
+
+    std::cout << "Library is per OCL: " << answer << std::endl;
+
+    std::shared_ptr<Library_ecore::Library_ecoreFactory> factory = Library_ecore::Library_ecoreFactory::eInstance();
+
+    std::cout << "----------------------------------------------------------------------" << std::endl;
+
+    Utilities::ts ts6;
+    //std::shared_ptr<Any> result6 = ts6.contextTest("self.writers[0].name", anyLib);
+    //std::shared_ptr<Any> result6 = ts6.contextTest("self.writers[].name", anyLib); // correctly nullptr '[]' on an collection without index always returns the Collection
+    std::shared_ptr<Any> result6 = ts6.contextTest("self.books[0, 3, 1, 5, 2, 5]", anyLib);
+    //std::shared_ptr<Any> result6 = ts6.contextTest("self.books[2]", anyLib);
+
+    if (result6 != nullptr) {
+
+        if (result6->getTypeId() == Library_ecore::Library_ecorePackage::BOOK_CLASS) {
+
+            std::shared_ptr<Any> titleAny = lookupPropertyName("title", result6);
+            std::string title = titleAny->get<std::string>();
+
+            std::cout << title << std::endl;
+        } else if (result6->isContainer()){
+
+            std::shared_ptr<Bag<Any>> resultBag = result6->get<std::shared_ptr<Bag<Any>>>();
+
+            for (size_t i = 0; i < resultBag->size(); i++)
+            {
+                std::shared_ptr<Any> titleAny = lookupPropertyName("title", resultBag->at(i));
+                std::string title = titleAny->get<std::string>();
+                std::cout << title << std::endl;
+            }
+        } else if (result6->getTypeId() == ecore::ecorePackage::ESTRING_CLASS) {
+
+            std::string strResult = result6->get<std::string>();
+            std::cout << "Str Result name: " << strResult << std::endl;
+        }
+
+    }
+
     
     return 0;
 

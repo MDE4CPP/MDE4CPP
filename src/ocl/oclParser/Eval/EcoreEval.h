@@ -43,6 +43,8 @@ namespace Eval {
             std::shared_ptr<Any> evalExpressionInOcl(std::shared_ptr<Any> exp);
 
             std::shared_ptr<Any> evalCollectionLiteralExp(std::shared_ptr<Any> exp);
+
+            std::shared_ptr<Any> evalIfExp(std::shared_ptr<Any> exp);
             
             std::shared_ptr<Any> evalVariableExp(std::shared_ptr<Any> exp);
 
@@ -80,6 +82,7 @@ namespace Eval {
             // ##########################        
             
             // in case in the OclExpression is 'appliedElement' set handle this here
+            // updating the contextVariable here
             std::shared_ptr<Any> handleAppliedElement(std::shared_ptr<ocl::Expressions::CallExp> appliedElement, std::shared_ptr<Any> parentResult);
 
             // do the collection operation

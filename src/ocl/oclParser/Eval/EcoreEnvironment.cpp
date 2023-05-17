@@ -5,6 +5,7 @@
 
 #include <ecore/EClass.hpp>
 #include <ecore/EAttribute.hpp>
+#include <ecore/EOperation.hpp>
 #include <ecore/EStructuralFeature.hpp>
 #include <ecore/EStringToStringMapEntry.hpp>
 #include <ecore/EcoreAny.hpp>
@@ -318,6 +319,62 @@ std::shared_ptr<Any> EcoreEnvironment::lookupPropertyName(const std::string& nam
     return returnObject;
 }
 
+//looks for the given (operation) name in the given (EClass) context
+//returns nullptr if operation with name is not found
+std::shared_ptr<Any> EcoreEnvironment::lookupOperationName(const std::string& name, std::shared_ptr<Any> context) {
+
+    //try as ecoreAny
+    std::shared_ptr<ecore::EcoreAny> ecoreAny = std::dynamic_pointer_cast<ecore::EcoreAny>(context);
+
+    if (ecoreAny == nullptr) {
+        //TODO add error
+        //context have to be an ecoreAny
+        return emptyResult();
+    }
+
+    //get eObject to get eClass
+    std::shared_ptr<ecore::EObject> eObject = ecoreAny->getAsEObject();
+
+    if (eObject == nullptr) {
+        //TODO add error can't get eObject out of ecoreAny
+        return emptyResult();
+    }
+    
+    //try to get eClass
+    std::shared_ptr<ecore::EClass> eClass = eObject->eClass();
+
+    if (eClass == nullptr) {
+        //TODO add error
+        //eObject have no class
+        return emptyResult();
+    }
+
+    //find operation with given name
+    size_t size = eClass->getEAllOperations()->size();
+
+    std::shared_ptr<ecore::EOperation> foundOp;
+
+    for (size_t i = 0; i < size; i++) {
+        const std::shared_ptr<ecore::EOperation>& elem = eClass->getEAllOperations()->at(i);
+        if (name == elem->getName()) {
+            foundOp = elem;
+            break;
+        }
+    }
+
+    //check if found
+    if (foundOp == nullptr) {
+        //TODO property name 'name' in eClass.getName() not found
+        return emptyResult();
+    }
+
+    //get actual object
+    const std::shared_ptr<Any>& returnObject = eEcoreAny(foundOp, foundOp->getMetaElementID());
+
+    return returnObject;
+
+}
+
 // look for a Type in the given Any
 //return nullptr if no type is found
 std::string EcoreEnvironment::getTypeName(const std::shared_ptr<Any>& argument) {
@@ -368,5 +425,32 @@ std::string EcoreEnvironment::getTypeName(const std::shared_ptr<Any>& argument) 
 
     // no type could identified
     return "";
+
+}
+
+// updates the context with the given name
+// if it is not nullptr
+bool EcoreEnvironment::updateContext(std::shared_ptr<Any> newContext) {
+
+    if (newContext != nullptr) {
+        m_context = newContext;
+        return true;
+    }
+    return false;
+
+}
+
+//searches in all namedElements for the given variable name
+std::shared_ptr<Any> EcoreEnvironment::lookupNamedElement(const std::string& name) {
+
+    if(m_namedElements.find(name) != m_namedElements.end()) {
+            return std::get<1>(m_namedElements.at(name));
+        }
+
+    if (m_parent != nullptr) {
+        return m_parent->lookupNamedElement(name);
+    }
+
+    return nullptr;
 
 }

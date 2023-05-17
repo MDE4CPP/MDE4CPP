@@ -129,9 +129,20 @@ namespace Eval {
             //returns nullptr if property with name is not found
             std::shared_ptr<Any> lookupPropertyName(const std::string& name, std::shared_ptr<Any> context);
 
+            //looks for the given (operation) name in the given (EClass) context
+            //returns nullptr if operation with name is not found
+            std::shared_ptr<Any> lookupOperationName(const std::string& name, std::shared_ptr<Any> context);
+
             // look for a Type in the given Any
             //return nullptr if no type is found
             std::string getTypeName(const std::shared_ptr<Any>& argument);
+
+            // updates the context with the given name
+            // if it is not nullptr
+            bool updateContext(std::shared_ptr<Any> newContext);
+
+            //searches in all namedElements for the given variable name
+            std::shared_ptr<Any> lookupNamedElement(const std::string& name);
 
         private:
             /*!

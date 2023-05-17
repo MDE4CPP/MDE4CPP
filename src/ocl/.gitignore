@@ -1,3 +1,7 @@
 /oclParser/OclCS/_alt/
 oclParser/Utilities/_alt
 /oclParser/src/
+.cproject
+.classpath
+.project
+.settings

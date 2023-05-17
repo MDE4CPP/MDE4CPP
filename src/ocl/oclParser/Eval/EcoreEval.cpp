@@ -5,6 +5,8 @@
 #include <ecore/EcoreAny.hpp>
 #include <ecore/EcoreContainerAny.hpp>
 #include <ecore/EStructuralFeature.hpp>
+#include <ecore/EOperation.hpp>
+#include <ecore/EObject.hpp>
 
 #include "../Utilities/ConstStrings.h"
 #include "../Utilities/OclConversion.h"
@@ -271,6 +273,95 @@ std::shared_ptr<Any> EcoreEval::evalCollectionLiteralExp(std::shared_ptr<Any> ex
     return defaultResult();
 }
 
+// ### evalIfExp ###
+// evaluate given ifExp
+std::shared_ptr<Any> EcoreEval::evalIfExp(std::shared_ptr<Any> exp) {
+
+    std::shared_ptr<ocl::Expressions::IfExp> ifExp = castEcoreArgument<ocl::Expressions::IfExp>(exp);
+
+    if (ifExp == nullptr) {
+        //TODO add error
+        //have to be an varExp
+        return defaultResult();
+    }
+
+    std::shared_ptr<ocl::Expressions::OclExpression> conditionExp = ifExp->getCondition();
+
+    //eval condition
+
+    //save current context
+    std::shared_ptr<Any> oldContext = m_env->getContextVariable();
+
+    //evaluate condition
+    std::shared_ptr<Any> conditionResult = visitNode(eEcoreAny(conditionExp, conditionExp->getMetaElementID()));
+    bool condition = false;
+
+    //reset context if neccessary
+    if (m_env->getContextVariable() != oldContext) {
+        m_env->setContextVariable(oldContext);
+    }
+
+    if (conditionResult == nullptr) {
+        //TODO add error
+        //condition can't be evaluated
+        return defaultResult();
+    } 
+    else if (conditionResult != nullptr && conditionResult->getTypeId() == ecore::ecorePackage::EBOOLEAN_CLASS) {
+        condition = conditionResult->get<bool>();
+
+    } else {
+        //TODO add error
+        //condition is not a bool
+        return defaultResult();
+    }
+
+    //actual if Expr
+
+    // neccessary to create an new environment to encapsulate variables inside the conditions
+    std::shared_ptr<EcoreEnvironment> bodyEnv = std::make_shared<EcoreEnvironment>(EcoreEnvironment(m_env, m_env->getSelfVariable()));
+    std::shared_ptr<EcoreEval> bodyEval = std::make_shared<EcoreEval>(EcoreEval(bodyEnv));
+
+    //TODO maybe encapsulatedEnv neccessary
+
+    if (condition) {
+
+        //evaluate thenExp
+
+        std::shared_ptr<ocl::Expressions::OclExpression> thenExp = ifExp->getThenExpression();
+
+        //eval thenExp
+        std::shared_ptr<Any> thenResult = bodyEval->visitNode(eEcoreAny(thenExp, thenExp->getMetaElementID()));      
+        
+        if (thenResult == nullptr) {
+            //TODO add error
+            //then Expr could not be evaluated
+            return defaultResult();
+        }
+
+        return thenResult;
+
+    } else {
+        //evaluate elseExp
+
+        std::shared_ptr<ocl::Expressions::OclExpression> elseExp = ifExp->getElseExpression();
+
+        //eval elseExp
+        std::shared_ptr<Any> elseResult = bodyEval->visitNode(eEcoreAny(elseExp, elseExp->getMetaElementID()));
+
+        if (elseResult == nullptr) {
+            //TODO add error
+            //else Expr could not be evaluated
+            return defaultResult();
+        }
+
+        return elseResult;
+    }
+
+    //TODO add error
+    return defaultResult();
+
+}
+
 // ### evalVariableExp ###
 // return the variable with the given name
 std::shared_ptr<Any> EcoreEval::evalVariableExp(std::shared_ptr<Any> exp) {
@@ -299,7 +390,7 @@ std::shared_ptr<Any> EcoreEval::evalVariableExp(std::shared_ptr<Any> exp) {
 
 }
 
-// ### evalPropertyCall ###
+// ### evalOperationCall ###
 // try to perform the operation
 std::shared_ptr<Any> EcoreEval::evalOperationCallExp(std::shared_ptr<Any> exp) {
 
@@ -327,7 +418,56 @@ std::shared_ptr<Any> EcoreEval::evalOperationCallExp(std::shared_ptr<Any> exp) {
         //TODO collection type
         return handleCollectionOperationsOverOpCall(operName, m_env->getContextVariable(), "", operArgs);
 
-    }
+    }  else {
+        // an default operation call
+        
+        //get the operation
+        const std::shared_ptr<Any>& eAnyOper = m_env->lookupOperationName(operName, m_env->getContextVariable());
+
+        if (eAnyOper == nullptr) {
+            //TODO operation could not be found in 'm_env->getContextVariable()'
+            return defaultResult();
+        }
+
+        // for later use in eInvoke
+        const std::shared_ptr<ecore::EOperation>& eOper = castEcoreArgument<ecore::EOperation>(eAnyOper);
+
+        //eval the arguments
+
+        //evaled Arguments for operation call
+        const std::shared_ptr<Bag<Any>>& evaledArgBag = std::make_shared<Bag<Any>>(Bag<Any>());
+        size_t argSize = operArgs->size();
+        //active element
+        std::shared_ptr<Any> evaledArg = nullptr;
+        //old context to handle context changes
+        std::shared_ptr<Any> oldContext = m_env->getContextVariable();
+        for (size_t i = 0; i < argSize; i++)
+        {
+            evaledArg = visitNode(eEcoreAny(operArgs->at(i), operArgs->at(i)->getMetaElementID()));
+            if (evaledArg == nullptr) {
+                //TODO add error
+                //evaluation of 'evalArg' failed
+                return defaultResult();
+            }
+            //add the result
+            evaledArgBag->add(evaledArg);
+
+            //reset context if it changes
+            if (m_env->getContextVariable() != oldContext) {
+                m_env->setContextVariable(oldContext);
+            }
+        }
+        
+        //call the operation and return result
+
+        //get the eObject of the current Context
+        const std::shared_ptr<ecore::EObject>& opCaller = castEcoreArgument<ecore::EObject>(m_env->getContextVariable());
+    
+        std::shared_ptr<Any> result = opCaller->eInvoke(eOper, evaledArgBag);
+
+        return result;
+
+    } //END of an default operation call
 
     return defaultResult();
 
@@ -365,7 +505,7 @@ std::shared_ptr<Any> EcoreEval::evalPropertyCallExp(std::shared_ptr<Any> exp) {
     //try to find the name in the env variables (including loop variables)
     if (currentContext == nullptr) {
 
-        currentContext = m_env->lookup(path->front());
+        currentContext = m_env->lookupNamedElement(path->front());
         if (currentContext != nullptr) {
             path->erase(path->begin());
             for (it = path->begin(); it != path->end(); ++it) {
@@ -468,15 +608,15 @@ std::shared_ptr<Any> EcoreEval::evalIteratorExp(std::shared_ptr<Any> exp) {
         return defaultResult();
     }
 
-    //check if it is an direct collection Operation
+    const std::shared_ptr<Any>& context = m_env->getContextVariable();
+
+    // ###                                                   ###
+    // ### check if it is an direct OCL collection Operation ###
+    // ###                                                   ###
+    
+    
     if (iteroExp->isIsCollectionOperation()) {
 
-        // ###                ###
-        // ### Pre Conditions ###
-        // ###                ###
-
-        const std::shared_ptr<Any>& context = m_env->getContextVariable();
-    
         //check if the context is an container of multiple values
         if (!context->isContainer()) {
 
@@ -484,6 +624,10 @@ std::shared_ptr<Any> EcoreEval::evalIteratorExp(std::shared_ptr<Any> exp) {
             //context of iterateExp is no container
             return defaultResult();
         }
+
+        // ###                ###
+        // ### Pre Conditions ###
+        // ###                ###
 
         //define loop vars
 
@@ -510,44 +654,6 @@ std::shared_ptr<Any> EcoreEval::evalIteratorExp(std::shared_ptr<Any> exp) {
             loopVars->add(varDeclElem2);
         }
 
-        //defines what kind the iterateable object is
-        // eObjBag or Any Bag
-        bool asEObjBag = false;
-        
-        //first variant get the context as EObjectContainer
-        std::shared_ptr<ecore::EcoreContainerAny> ecoreConAny = std::dynamic_pointer_cast<ecore::EcoreContainerAny>(context);
-        std::shared_ptr<Bag<ecore::EObject>> contextObjBag;
-
-        //second variant as Bag<Any>
-        std::shared_ptr<Bag<Any>> iterateBag;
-
-        size_t bagSize = 0;
-        
-        if (ecoreConAny != nullptr) {
-            //used later to choose the correct loop
-            asEObjBag = true;
-            // case 1 as eObjBag
-            contextObjBag = ecoreConAny->getAsEObjectContainer();
-            bagSize = contextObjBag->size();
-
-        } else {
-            // case 2 as iterateBag
-            try
-            {
-                iterateBag = context->get<std::shared_ptr<Bag<Any>>>();
-            }
-            catch(...){}
-
-            if (iterateBag == nullptr) {
-                //TODO add error
-                // can't cast context to a iteratable object
-                return defaultResult();
-            }
-            bagSize = iterateBag->size();
-        }
-
-        //TODO check if an bodyEnv have to be created
-        //TODO create all loop variants
         //reminder the case where no iterator is set will be handled as OperationCall
 
         // ###            ###
@@ -586,6 +692,179 @@ std::shared_ptr<Any> EcoreEval::evalIteratorExp(std::shared_ptr<Any> exp) {
     
 
     } // END of iteroExp->isIsCollectionOperation()
+
+    // ###                         ###
+    // ### indexing call           ###
+    // ### collection[oclExp, ...] ###
+    // ###                         ###
+
+    if (iteroExp->getSourrundedBy() == ocl::Expressions::SurroundingType::BRACKETS) {
+        
+        std::string collectionName = iteroExp->getIterName();
+        //update the context
+        std::shared_ptr<Any> collectionContext = m_env->lookupPropertyName(collectionName, context);
+        if (collectionContext == nullptr) {
+            //TODO add error
+            // collection 'collectionName' could not be found in 'context'
+            return defaultResult();
+        } else {
+            m_env->setContextVariable(collectionContext);
+        }
+        
+        
+        // ### defines what kind the iterateable object is ###
+        // ### eObjBag or Any Bag                          ###
+        bool asEObjBag = false;
+        
+        //first variant get the context as EObjectContainer
+        std::shared_ptr<ecore::EcoreContainerAny> ecoreConAny = std::dynamic_pointer_cast<ecore::EcoreContainerAny>(m_env->getContextVariable());
+        std::shared_ptr<Bag<ecore::EObject>> contextObjBag;
+
+        //second variant as Bag<Any>
+        std::shared_ptr<Bag<Any>> iterateBag;
+
+        size_t bagSize = 0;
+        
+        if (ecoreConAny != nullptr) {
+            //used later to choose the correct loop
+            asEObjBag = true;
+            // case 1 as eObjBag
+            contextObjBag = ecoreConAny->getAsEObjectContainer();
+            bagSize = contextObjBag->size();
+
+        } else {
+            // case 2 as iterateBag
+            try
+            {
+                iterateBag = context->get<std::shared_ptr<Bag<Any>>>();
+            }
+            catch(...){}
+
+            if (iterateBag == nullptr) {
+                //TODO add error
+                // can't cast context to a iteratable object
+                return defaultResult();
+            }
+            bagSize = iterateBag->size();
+        }
+        // END of defines what kind the iterateable object is
+
+        // ###                      ###
+        // ### qualifier evaluation ###
+        // ###                      ###
+        
+        // the qualifier are stored in the iteratorBag
+        std::shared_ptr<Bag<ocl::Expressions::OclExpression>> qualifierExpBag = iteroExp->getIterator();
+        size_t qualifierSize = qualifierExpBag->size();
+
+        //special case no qualifier means just return the complete collection
+        if (qualifierSize == 0) {
+            
+            //also 1 element will be returned as original collection
+            return collectionContext;
+            
+        } else if (qualifierSize == 1) {
+
+            //get the qualifiers as int
+            // one qualifier means return only the element 
+
+            //get the current result
+            std::shared_ptr<Any> qualExpResult = visitNode(eEcoreAny(qualifierExpBag->at(0), qualifierExpBag->at(0)->getMetaElementID()));
+            if (qualExpResult == nullptr) {
+                //TODO add error
+                // could not evaluate qualifier at 'i'
+                return defaultResult();
+            } else if (qualExpResult->getTypeId() != ecore::ecorePackage::EINT_CLASS) {
+                //TODO add error
+                // qualifier at 'i' have to be an int
+                return defaultResult();
+            }
+            int qualifier = qualExpResult->get<int>();
+
+            if (qualifier < 0 || (long long unsigned int)qualifier >= bagSize) {
+                //TODO add error
+                // index out of range or negative
+                return defaultResult();
+            }
+
+            // return the element at index
+            if (asEObjBag) {
+                return eEcoreAny(contextObjBag->at(qualifier), contextObjBag->at(qualifier)->getMetaElementID());
+            } else {
+                return iterateBag->at(qualifier);
+            }
+
+        } else {
+
+            // multiple qualifiers mean return a Bag with the elements
+
+            std::vector<int> qualifiers = {};           
+            //if the context have to be reset
+            std::shared_ptr<Any> old_context = m_env->getContextVariable();
+            for (size_t i = 0; i < qualifierSize; i++)
+            {
+                //get the current result
+                std::shared_ptr<Any> elemResult = visitNode(eEcoreAny(qualifierExpBag->at(i), qualifierExpBag->at(i)->getMetaElementID()));
+
+                //reset context if neccessary
+                if (m_env->getContextVariable() != old_context) {
+                    m_env->setContextVariable(old_context);
+                }
+
+                if (elemResult == nullptr) {
+                    //TODO add error
+                    // could not evaluate qualifier at 'i'
+                    return defaultResult();
+                } else if (elemResult->getTypeId() != ecore::ecorePackage::EINT_CLASS) {
+                    //TODO add error
+                    // qualifier at 'i' have to be an int
+                    return defaultResult();
+                }
+                int qualifier = elemResult->get<int>();
+                qualifiers.push_back(qualifier);
+            } //END of for (size_t i = 0; i < qualifierSize; i++)
+
+            std::shared_ptr<Bag<Any>> resultBag = std::make_shared<Bag<Any>>(Bag<Any>());
+            
+            size_t qualSize = qualifiers.size();
+            
+            //create the return bag
+            if (asEObjBag) {
+
+                //input is Bag<ecore::EObject>
+                
+                for (size_t i = 0; i < qualSize; i++)
+                {
+                    int index = qualifiers.at(i);
+                    if (index < 0 || (long long unsigned int)index >= bagSize) {
+                        //TODO add error
+                        // index out of range or negative
+                        return defaultResult();
+                    }
+                    resultBag->add(eEcoreAny(contextObjBag->at(index), contextObjBag->at(index)->getMetaElementID()));
+                }
+                return eAny(resultBag, 0, true);
+                
+            } else {
+                //input is Bag<Any>
+                for (size_t i = 0; i < qualSize; i++)
+                {
+                    int index = qualifiers.at(i);
+                    if (index < 0 || (long long unsigned int)index >= bagSize) {
+                        //TODO add error
+                        // index out of range or negative
+                        return defaultResult();
+                    }
+                    resultBag->add(iterateBag->at(index));
+                }
+                return eAny(resultBag, 0, true);
+            } // END of if (asEObjBag) else part
+        } //END of else: multiple qualifiers mean return a Bag with the elements
+    } // END of iteroExp->getSourrundedBy() == ocl::Expressions::SurroundingType::BRACKETS
+
+    //TODO add error
+    return defaultResult();
+
 }
 
 // ### evalIterateExp ###
@@ -1406,6 +1685,7 @@ std::shared_ptr<Any> EcoreEval::evalVarDeclExp(std::shared_ptr<Any> exp) {
 
 // ### handleAppliedElement ###
 // in case in the OclExpression is 'appliedElement' set handle this here
+// updating the contextVariable here
 std::shared_ptr<Any> EcoreEval::handleAppliedElement(std::shared_ptr<ocl::Expressions::CallExp> appliedElement, std::shared_ptr<Any> parentResult) {
 
     //'append' first variable to second variable
@@ -1451,10 +1731,10 @@ std::shared_ptr<Any> EcoreEval::handleCollectionOperationsOverOpCall(std::string
     //unpack the collection
     // as Bag<ecore::EObject>
     std::shared_ptr<ecore::EcoreContainerAny> eContAny = std::dynamic_pointer_cast<ecore::EcoreContainerAny>(collection);
-    std::shared_ptr<Bag<ecore::EObject>> eObjBag;
+    std::shared_ptr<Bag<ecore::EObject>> eObjBag = nullptr;
 
     //as Bag<Any>
-    std::shared_ptr<Bag<Any>> anyBag;
+    std::shared_ptr<Bag<Any>> anyBag = nullptr;
 
     // as Bag<ecore::EObject>
     if (eContAny != nullptr) {
@@ -1491,7 +1771,7 @@ std::shared_ptr<Any> EcoreEval::handleCollectionOperationsOverOpCall(std::string
     } else if (operName == Utilities::REJECT_OPER_NAME) {
         if (bodyArgs->size() != 1) {
             //TODO add error
-            //in this constellation only one arg is allowed ...->select(oneArg)
+            //in this constellation only one arg is allowed ...->reject(oneArg)
             return defaultResult();
         }
         result = oclSelectReject(false, bodyArgs->at(0), nullptr, collection, "");
@@ -1656,7 +1936,7 @@ std::shared_ptr<Any> EcoreEval::oclSelectReject(bool isSelect, std::shared_ptr<o
 
                 //add  the elem to the returnBag
                 // only if the bodyExp evaluates to true (select) or false (reject)
-                if (bodyResultBool && isSelect || !bodyResultBool && !isSelect) {
+                if ((bodyResultBool && isSelect) || (!bodyResultBool && !isSelect)) {
                     returnBag->add(eEcoreAny(elem, elem->getMetaElementID()));
                 }
             }// END of for (size_t i = 0; i < eObjBagSize; i++)
@@ -1688,7 +1968,7 @@ std::shared_ptr<Any> EcoreEval::oclSelectReject(bool isSelect, std::shared_ptr<o
 
                 //add the elem to the returnBag
                 // only if the bodyExp evaluates to true (select) or false (reject)
-                if (bodyResultBool && isSelect || !bodyResultBool && !isSelect) {
+                if ((bodyResultBool && isSelect) || (!bodyResultBool && !isSelect)) {
                     returnBag->add(elem);
                 }
             }// END of for (size_t i = 0; i < bagSize; i++)
@@ -1937,8 +2217,9 @@ std::shared_ptr<Any> EcoreEval::callEvalFunction(std::shared_ptr<Any> exp) {
         break;
 
     case ocl::Expressions::ExpressionsPackage::IFEXP_CLASS:
-        //TODO
+        //WIP
         //IfExpEval
+        result = evalIfExp(exp);
         break;
 
     case ocl::Expressions::ExpressionsPackage::VARIABLEEXP_CLASS:

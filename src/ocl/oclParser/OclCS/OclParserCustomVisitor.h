@@ -7,6 +7,7 @@
 #include <ocl/Expressions/PropertyCallExp.hpp>
 #include <ocl/Expressions/OperationCallExp.hpp>
 #include <ocl/Expressions/OperatorExp.hpp>
+#include <ocl/Expressions/IfExp.hpp>
 #include <ocl/Expressions/BooleanLiteralExp.hpp>
 
 #include "../Utilities/OclConversion.h"
@@ -359,7 +360,7 @@ public:
             std::shared_ptr<ocl::Expressions::CallExp> callExp = std::any_cast<T>(child);
             std::shared_ptr<ocl::Expressions::OclExpression> oclExp = Utilities::oclCV::exp2oclExp(parent);
 
-            //check if the parent is an operatorExp -> the aplliedExp can't be a Operand
+            //check if the parent is an operatorExp -> the apliedExp can't be a Operand
             std::shared_ptr<ocl::Expressions::OperatorExp> operaExp = std::dynamic_pointer_cast<ocl::Expressions::OperatorExp>(oclExp);
             bool isNotOperand = true;
             if (operaExp != nullptr) {
@@ -368,10 +369,25 @@ public:
                 }
             }
 
+            //check if it is an ifExpr
+            std::shared_ptr<ocl::Expressions::IfExp> ifExp = std::dynamic_pointer_cast<ocl::Expressions::IfExp>(oclExp);
+            bool isNotInIfExp = true;
+            if (ifExp != nullptr) {
+                //check condition
+                if (ifExp->getCondition() == callExp) {
+                    isNotInIfExp = false;
+                } else if (ifExp->getThenExpression() == callExp) {
+                    isNotInIfExp = false;
+                } else if (ifExp->getElseExpression() == callExp) {
+                    isNotInIfExp = false;
+                }
+            }
+
             //first check avoid: real qry: operation(elem), without check interpreted as -> operation(elem).elem
             //second check avoid: real qry: ...->iterate(sth-with-acc-and-elem), without check interpreted as ...->iterate(sth-with-acc-and-elem).acc
-            // thor check (isNotOperand): (x.y=z), without check interpreted as (x.y=z).x.y
-            if (oclExp != callExp->getParentCall().lock() && oclExp != callExp->getLoopBodyOwner().lock() && isNotOperand) {
+            //third check (isNotOperand): (x.y=z), without check interpreted as (x.y=z).x.y
+            //fourth check (isNotInIfExp): if x.y then z.t else z.w , e.g. without check interpreted as (if x.y then z.t else z.w).x.y
+            if (oclExp != callExp->getParentCall().lock() && oclExp != callExp->getLoopBodyOwner().lock() && isNotOperand && isNotInIfExp) {
 
                 // if there is already an 'applied_element' at the oclExp this element have to be the source of this propExp
                 while(oclExp->getAppliedElement() != nullptr) {
