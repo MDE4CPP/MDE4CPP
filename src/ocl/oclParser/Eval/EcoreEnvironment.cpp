@@ -129,7 +129,7 @@ std::shared_ptr<Any> EcoreEnvironment::lookupImplicit(const std::string& name)
 {
 
     for(auto &e : m_namedElements) {
-        if(e.first == (Utilities::CONST_IMPLICIT+name)) {
+        if(e.first == (Utilities::CONST_IMPLICIT_VAR+name)) {
             return std::get<1>(e.second);
         }
     }
@@ -157,7 +157,7 @@ std::shared_ptr<Any> EcoreEnvironment::lookupImplicit(const std::string& name)
 bool EcoreEnvironment::addElement(const std::string& name, std::shared_ptr<Any> elem, bool isImplicit, std::string type)
 {
     //check if implicit
-    std::string elemName = (isImplicit) ? (Utilities::CONST_IMPLICIT+name) : name;
+    std::string elemName = (isImplicit) ? (Utilities::CONST_IMPLICIT_VAR+name) : name;
     
     //check if name is given
     if(name.empty()) {
@@ -166,7 +166,7 @@ bool EcoreEnvironment::addElement(const std::string& name, std::shared_ptr<Any> 
         //repeat generating process until name is unique
         //in the env and self and (possible) context
         while (lookup(elemName) != nullptr) {
-            elemName = (isImplicit) ? (Utilities::CONST_IMPLICIT+name+generateName()) : generateName();
+            elemName = (isImplicit) ? (Utilities::CONST_IMPLICIT_VAR+name+generateName()) : generateName();
         }
         m_namedElements[elemName] = std::make_tuple(type, elem);
         return true;

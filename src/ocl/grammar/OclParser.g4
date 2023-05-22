@@ -340,7 +340,7 @@ tupleTypeCS
 // operation names in access to redefined operations.
 
 operationCallExpCS_A
-//	: 	simpleNameCS oclExpressionCS						// A
+//	: 	simpleNameCS oclExpressionCS						// A -> special OperatorExp in CustomVisitor
 	:	RARROW simpleNameCS LPAREN (oclExpressionCS (COMMA oclExpressionCS)*)? RPAREN   // B
 	|	DOT simpleNameCS LPAREN (oclExpressionCS (COMMA oclExpressionCS)*)? RPAREN			// C
 	|	DOT simpleNameCS isMarkedPreCS LPAREN (oclExpressionCS (COMMA oclExpressionCS)*)? RPAREN	// E
@@ -352,7 +352,7 @@ operationCallExpCS_B
 	: 	simpleNameCS LPAREN (oclExpressionCS (COMMA oclExpressionCS)*)? RPAREN								// D
 	|	simpleNameCS isMarkedPreCS LPAREN (oclExpressionCS (COMMA oclExpressionCS)*)? RPAREN	// F
 	|	pathNameCS LPAREN (oclExpressionCS (COMMA oclExpressionCS)*)? RPAREN	// G
-//	|	simpleNameCS oclExpressionCS	// H
+//	|	simpleNameCS oclExpressionCS	// H -> special OperatorExp/ prefixedExp in CustomVisitor
 	;
 	
 // -------------------------
@@ -481,6 +481,7 @@ binaryLiteralExpCS
 	|	INEQUAL	
 	|	KEYAND	
 	|	KEYOR
+	|   KEYXOR
 	|	IMPLIES
 	;
 	

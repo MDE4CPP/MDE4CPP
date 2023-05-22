@@ -795,6 +795,10 @@ namespace OclCS {
 
             varDecExp = std::any_cast<std::shared_ptr<ocl::Expressions::VarDeclarationExp>>(nextResult);
 
+            //add to the variabel list and set initExp in VarDecExp
+            letExp->getVariables()->add(varDecExp);
+            varDecExp->setInitExpression(letExp);
+
             // Debug
             // std::cout << "LetExp: set a VarDecExp" << std::endl;
 
@@ -817,10 +821,6 @@ namespace OclCS {
 
             }
         }
-
-        //add to the variabel list and set initExp in VarDecExp
-        letExp->getVariables()->add(varDecExp);
-        varDecExp->setInitExpression(letExp);
 
     }
 
@@ -995,6 +995,26 @@ namespace OclCS {
                 // Debug
                 // std::cout << "VarDeclarationExp: Set CollectionTypeExp as Type" << std::endl;
 
+            } else {
+
+                //get nextResult as (optional) assignedExp
+                std::shared_ptr<ocl::Expressions::OclExpression> oclExp = Utilities::oclCV::exp2oclExp(nextResult);
+                if (oclExp == nullptr) {
+
+                    //no cast was succesfull
+                    //either theres a wrong query
+                    //or an abstract oclExp was set as nextResult (see Utilities::oclCV::exp2oclExp())
+                    //TODO add error
+
+                } else {
+
+                    //append (optional) assigned OclExp
+                    varDecExp->setAssignedOclExp(oclExp);
+
+                    // Debug
+                    // std::cout << "VarDeclarationExp: Assign optional Expression" << std::endl;
+
+                }
             }
         } else {
 
@@ -2073,6 +2093,7 @@ namespace OclCS {
             // set the correct expression as "first" of collectionRange
             if (preExp != nullptr) {
                 colRa->setFirst(preExp);
+                preExp->setReferredExpression(intExp);
 
                 // Debug
                 // std::cout << "collectionRange: set PrefixedExp as first" << std::endl;

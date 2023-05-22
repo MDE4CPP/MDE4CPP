@@ -183,7 +183,7 @@ fragment Not 			: 'not'		;
 fragment Implies 		: 'implies'	;
 fragment KeyOr 			: 'or'		;
 fragment KeyAnd 		: 'and'		;
-fragment Xor 			: 'xor'		;
+fragment KeyXor 		: 'xor'		;
 
 fragment Package 		: 'package'		;
 fragment EndPackage		: 'endpackage'	;

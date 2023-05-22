@@ -42,7 +42,11 @@ namespace Eval {
 
             std::shared_ptr<Any> evalExpressionInOcl(std::shared_ptr<Any> exp);
 
+            std::shared_ptr<Any> evalTupleLiteralExp(std::shared_ptr<Any> exp);
+
             std::shared_ptr<Any> evalCollectionLiteralExp(std::shared_ptr<Any> exp);
+
+            std::shared_ptr<Any> evalLetExp(std::shared_ptr<Any> exp);
 
             std::shared_ptr<Any> evalIfExp(std::shared_ptr<Any> exp);
             
@@ -108,6 +112,11 @@ namespace Eval {
 
             //compare two floats
             bool floatCompare(double f1, double f2);
+
+            // try to find the given name inside a tuple
+            // return the value or nullptr
+            std::shared_ptr<Any> findInTuple(std::shared_ptr<Any> tuple, const std::string& name);
+
 
             // ############################
             // ### Collection functions ###

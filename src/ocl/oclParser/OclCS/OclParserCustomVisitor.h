@@ -8,6 +8,9 @@
 #include <ocl/Expressions/OperationCallExp.hpp>
 #include <ocl/Expressions/OperatorExp.hpp>
 #include <ocl/Expressions/IfExp.hpp>
+#include <ocl/Expressions/LetExp.hpp>
+#include <ocl/Expressions/PrefixedExp.hpp>
+#include <ocl/Expressions/VarDeclarationExp.hpp>
 #include <ocl/Expressions/BooleanLiteralExp.hpp>
 
 #include "../Utilities/OclConversion.h"
@@ -383,11 +386,46 @@ public:
                 }
             }
 
-            //first check avoid: real qry: operation(elem), without check interpreted as -> operation(elem).elem
-            //second check avoid: real qry: ...->iterate(sth-with-acc-and-elem), without check interpreted as ...->iterate(sth-with-acc-and-elem).acc
+            //check if it is an letExp
+            std::shared_ptr<ocl::Expressions::LetExp> letExp = std::dynamic_pointer_cast<ocl::Expressions::LetExp>(oclExp);
+            bool isNotInPart = true;
+            if (letExp != nullptr) {
+                if (letExp->getIn() == callExp) {
+                    isNotInPart = false;
+                }
+            }
+
+            //check if it is an prefixedExp
+            std::shared_ptr<ocl::Expressions::PrefixedExp> prefExp = std::dynamic_pointer_cast<ocl::Expressions::PrefixedExp>(oclExp);
+            bool isNotReferredPart = true;
+            if (prefExp != nullptr) {
+                if (prefExp->getReferredExpression() == callExp) {
+                    isNotReferredPart = false;
+                }
+            }
+
+            //check if it is an varDeclExp
+            std::shared_ptr<ocl::Expressions::VarDeclarationExp> varDeclExp = std::dynamic_pointer_cast<ocl::Expressions::VarDeclarationExp>(oclExp);
+            bool isNotAssignedPart = true;
+            if (varDeclExp != nullptr) {
+                if (varDeclExp->getAssignedOclExp() == callExp) {
+                    isNotAssignedPart = false;
+                }
+            }
+
+            // continued from underneath
             //third check (isNotOperand): (x.y=z), without check interpreted as (x.y=z).x.y
             //fourth check (isNotInIfExp): if x.y then z.t else z.w , e.g. without check interpreted as (if x.y then z.t else z.w).x.y
-            if (oclExp != callExp->getParentCall().lock() && oclExp != callExp->getLoopBodyOwner().lock() && isNotOperand && isNotInIfExp) {
+            //fifth check (isNotInPart): let ... in x, without check interpreted as (let ... in x).x (would return value of y instead of body x)
+            //sixth check (isNotReferredPart): somewhere above is y declared: x = not y, without check interpreted as x = (not y).y (would return value of y instead of x)
+            //seventh part (isNotAssignedPart): x = y, without check interpreted as (x = y).y (would return value of y instead of x)
+            bool valid = isNotOperand && isNotInIfExp && isNotInPart && isNotReferredPart && isNotAssignedPart;
+
+
+            //first check avoid: real qry: operation(elem), without check interpreted as -> operation(elem).elem
+            //second check avoid: real qry: ...->iterate(sth-with-acc-and-elem), without check interpreted as ...->iterate(sth-with-acc-and-elem).acc
+            // following see valid
+            if (oclExp != callExp->getParentCall().lock() && oclExp != callExp->getLoopBodyOwner().lock() && valid) {
 
                 // if there is already an 'applied_element' at the oclExp this element have to be the source of this propExp
                 while(oclExp->getAppliedElement() != nullptr) {

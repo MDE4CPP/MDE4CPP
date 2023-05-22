@@ -24,9 +24,10 @@ public:
     COLON = 44, COLONCOLON = 45, COMMA = 46, SEMI = 47, LPAREN = 48, RPAREN = 49, 
     LBRACE = 50, RBRACE = 51, LBRACK = 52, RBRACK = 53, RARROW = 54, LT = 55, 
     GT = 56, LTE = 57, GTE = 58, ASSIGN = 59, INEQUAL = 60, QUESTION = 61, 
-    STAR = 62, PLUS_ASSIGN = 63, PLUS = 64, KEYOR = 65, KEYAND = 66, IMPLIES = 67, 
-    RANGE = 68, DOT = 69, AT = 70, SLASH = 71, UNDERSCORE = 72, DHAT = 73, 
-    HAT = 74, MINUS = 75, NOT = 76, PIPE = 77, ID = 78, WS = 79, ERRCHAR = 80
+    STAR = 62, PLUS_ASSIGN = 63, PLUS = 64, KEYOR = 65, KEYAND = 66, KEYXOR = 67, 
+    IMPLIES = 68, RANGE = 69, DOT = 70, AT = 71, SLASH = 72, UNDERSCORE = 73, 
+    DHAT = 74, HAT = 75, MINUS = 76, NOT = 77, PIPE = 78, ID = 79, WS = 80, 
+    ERRCHAR = 81
   };
 
   enum {
@@ -903,6 +904,7 @@ public:
     antlr4::tree::TerminalNode *INEQUAL();
     antlr4::tree::TerminalNode *KEYAND();
     antlr4::tree::TerminalNode *KEYOR();
+    antlr4::tree::TerminalNode *KEYXOR();
     antlr4::tree::TerminalNode *IMPLIES();
 
 

@@ -16,6 +16,7 @@
 #include <ocl/Expressions/OperationCallExp.hpp>
 #include <ocl/Expressions/RealLiteralExp.hpp>
 #include <ocl/Expressions/IterateExp.hpp>
+#include <ocl/Expressions/TupleLiteralExp.hpp>
 #include <ocl/Expressions/CollectionLiteralExp.hpp>
 #include <ocl/Expressions/NullLiteralExp.hpp>
 #include <ocl/Expressions/InvalidLiteralExp.hpp>
@@ -134,6 +135,11 @@ std::shared_ptr<ocl::Expressions::OclExpression> oclCV::exp2oclExp(std::any exp)
 
     if (type == typeid(std::shared_ptr<ocl::Expressions::IterateExp>)) {
         std::shared_ptr<ocl::Expressions::IterateExp> oclExp = std::any_cast<std::shared_ptr<ocl::Expressions::IterateExp>>(exp);
+        return oclExp;
+    }
+
+    if (type == typeid(std::shared_ptr<ocl::Expressions::TupleLiteralExp>)) {
+        std::shared_ptr<ocl::Expressions::TupleLiteralExp> oclExp = std::any_cast<std::shared_ptr<ocl::Expressions::TupleLiteralExp>>(exp);
         return oclExp;
     }
 

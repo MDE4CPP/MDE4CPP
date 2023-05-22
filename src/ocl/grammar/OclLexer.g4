@@ -115,6 +115,7 @@ PLUS_ASSIGN	: PlusAssign	;
 PLUS		: Plus			;
 KEYOR		: KeyOr			;
 KEYAND		: KeyAnd		;
+KEYXOR		: KeyXor		;
 IMPLIES		: Implies		;
 RANGE		: Range			;
 DOT			: Dot			;

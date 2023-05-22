@@ -59,7 +59,7 @@ Not
 Implies
 KeyOr
 KeyAnd
-Xor
+KeyXor
 Package
 EndPackage
 Context
