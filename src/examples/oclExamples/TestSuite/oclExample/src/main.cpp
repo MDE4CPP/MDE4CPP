@@ -2,6 +2,7 @@
 #include <iostream>
 #include <sstream>
 #include <memory>
+#include <typeinfo>
 
 #include <ecore/EFactory.hpp>
 #include <ecore/EPackage.hpp>
@@ -70,6 +71,11 @@ bool testCasePrintable(std::string testname, std::string qry, std::string corRes
     
     std::cout << "--------------" << testname << "--------------" << std::endl;
     std::shared_ptr<Any> result = ts.contextTest(qry, context);
+    if (result == nullptr) {
+        std::cout << "Error: Result is nullptr. Query: " << qry << std::endl;
+        *counter = *counter+1;
+        return false;
+    }
     T testResult = result->get<T>();
     std::cout << "Input: " << qry << std::endl;
     std::cout << "(should be " << corResStr << "): " << testResult << std::endl;
@@ -83,6 +89,115 @@ bool failCounterFunction(int* counter, bool status) {
 
     *counter = status ? *counter : *counter+1;
     return status;
+
+}
+
+bool collectionTestCase(std::string testname, std::string qry, Bag<Any> targetResult, std::shared_ptr<Any> context, int* counter) {
+
+    Utilities::ts ts;
+    
+    std::cout << "--------------" << testname << "--------------" << std::endl;
+    std::shared_ptr<Any> result = ts.contextTest(qry, context);
+    std::cout << "Input: " << qry << std::endl;
+    
+    if (!result->isContainer()) {
+        std::cout << "Error: result is no Container!" << std::endl; 
+        *counter = *counter+1;
+        return false;
+    }
+
+    std::shared_ptr<Bag<Any>> collection = nullptr;
+    try
+    {
+        collection = result->get<std::shared_ptr<Bag<Any>>>();
+    }
+    catch(...){
+        std::cout << "Error: Result is no " << typeid(collection).name() << std::endl;
+        *counter = *counter+1;
+        return false;
+    }
+    
+    std::cout << "Begin elementwise check" << std::endl;
+
+    size_t bagSize = collection->size();
+
+    if (bagSize != targetResult.size()) {
+        std::cout << "Result collection is not equal sized to target collection" << std::endl;
+        std::cout << "Result collection size: " << bagSize << " target collection size: "  << targetResult.size() << std::endl;
+        *counter = *counter+1;
+        return false;
+    }
+
+    std::shared_ptr<Any> resultElem;
+    std::shared_ptr<Any> targetElem;
+
+    // check all elements
+    for (size_t i = 0; i < bagSize; i++)
+    {
+        resultElem = collection->at(i);
+        targetElem = targetResult.at(i);
+        if (resultElem->getTypeId() != targetElem->getTypeId()) {
+            std::cout << "Collection element at " << i << " have different type to target element!" << std::endl;
+            *counter = *counter+1;
+            return false;
+        }
+        if (resultElem->getTypeId() == ecore::ecorePackage::EINT_CLASS) {
+
+            int resultInt = resultElem->get<int>();
+            int targetInt = targetElem->get<int>();
+
+            if (resultInt != targetInt) {
+                std::cout << "Collection element at " << i << " is not equal to target result!" << std::endl;
+                std::cout << "Result element: " << resultInt << " targetElement: " << targetInt << std::endl;
+                *counter = *counter+1;
+                return false;
+            }
+        }
+        else if (resultElem->getTypeId() == ecore::ecorePackage::EBOOLEAN_CLASS) {
+
+            bool resultBoolean = resultElem->get<bool>();
+            bool targetBoolean = targetElem->get<bool>();
+
+            if (resultBoolean != targetBoolean) {
+                std::cout << "Collection element at " << i << " is not equal to target result!" << std::endl;
+                std::cout << "Result element: " << resultBoolean << " targetElement: " << targetBoolean << std::endl;
+                *counter = *counter+1;
+                return false;
+            }
+        }
+        else if (resultElem->getTypeId() == ecore::ecorePackage::EDOUBLE_CLASS) {
+
+            double resultDouble = resultElem->get<double>();
+            double targetDouble = targetElem->get<double>();
+
+            if (resultDouble != targetDouble) {
+                std::cout << "Collection element at " << i << " is not equal to target result!" << std::endl;
+                std::cout << "Result element: " << resultDouble << " targetElement: " << targetDouble << std::endl;
+                *counter = *counter+1;
+                return false;
+            }
+        }
+        else if (resultElem->getTypeId() == ecore::ecorePackage::ESTRING_CLASS) {
+
+            std::string resultString = resultElem->get<std::string>();
+            std::string targetString = targetElem->get<std::string>();
+
+            if (resultString != targetString) {
+                std::cout << "Collection element at " << i << " is not equal to target result!" << std::endl;
+                std::cout << "Result element: " << resultString << " targetElement: " << targetString << std::endl;
+                *counter = *counter+1;
+                return false;
+            }
+        } else {
+            std::cout << "Result is no primitive type. Currently unsupported!" << std::endl;
+            *counter = *counter+1;
+            return false;
+        }
+    } // END of for (size_t i = 0; i < bagSize; i++)
+     
+    std::cout << "All element checks succesfull!" << std::endl;
+    
+    return true;
 
 }
 
@@ -250,7 +365,122 @@ int main() {
     std::cout << (testCasePrintable<bool>("Equality Test","3.9<>3.9", "false", false, nullptr, failCounterPtr) ? PASS : FAIL) << std::endl;
     std::cout << (testCasePrintable<bool>("Equality Test","3.9=4.9", "false", false, nullptr, failCounterPtr) ? PASS : FAIL) << std::endl;
     std::cout << (testCasePrintable<bool>("Equality Test","3.9<>4.9", "true", true, nullptr, failCounterPtr) ? PASS : FAIL) << std::endl;
+
+    std::cout << (testCasePrintable<int>("If Expression Test","if true then 1 else 2 endif", "1", 1, nullptr, failCounterPtr) ? PASS : FAIL) << std::endl;
+    std::cout << (testCasePrintable<int>("If Expression Test","if false then 1 else 2 endif", "2", 2, nullptr, failCounterPtr) ? PASS : FAIL) << std::endl;
+    std::cout << (testCasePrintable<int>("If Expression Test","if 1<2 then 1+9 else 2*8 endif", "10", 10, nullptr, failCounterPtr) ? PASS : FAIL) << std::endl;
+    std::cout << (testCasePrintable<int>("If Expression Test","if 1>1 then 1+9 else 2*8 endif", "16", 16, nullptr, failCounterPtr) ? PASS : FAIL) << std::endl;
+
+    std::cout << (testCasePrintable<bool>("Logic Operator Test","true and true", "true", true, nullptr, failCounterPtr) ? PASS : FAIL) << std::endl;
+    std::cout << (testCasePrintable<bool>("Logic Operator Test","true and false", "false", false, nullptr, failCounterPtr) ? PASS : FAIL) << std::endl;
+    std::cout << (testCasePrintable<bool>("Logic Operator Test","false and true", "false", false, nullptr, failCounterPtr) ? PASS : FAIL) << std::endl;
+    std::cout << (testCasePrintable<bool>("Logic Operator Test","false and false", "false", false, nullptr, failCounterPtr) ? PASS : FAIL) << std::endl;
+
+    std::cout << (testCasePrintable<bool>("Logic Operator Test","true or true", "true", true, nullptr, failCounterPtr) ? PASS : FAIL) << std::endl;
+    std::cout << (testCasePrintable<bool>("Logic Operator Test","true or false", "true", true, nullptr, failCounterPtr) ? PASS : FAIL) << std::endl;
+    std::cout << (testCasePrintable<bool>("Logic Operator Test","false or true", "true", true, nullptr, failCounterPtr) ? PASS : FAIL) << std::endl;
+    std::cout << (testCasePrintable<bool>("Logic Operator Test","false or false", "false", false, nullptr, failCounterPtr) ? PASS : FAIL) << std::endl;
+
+    std::cout << (testCasePrintable<bool>("Logic Operator Test","true xor true", "false", false, nullptr, failCounterPtr) ? PASS : FAIL) << std::endl;
+    std::cout << (testCasePrintable<bool>("Logic Operator Test","true xor false", "true", true, nullptr, failCounterPtr) ? PASS : FAIL) << std::endl;
+    std::cout << (testCasePrintable<bool>("Logic Operator Test","false xor true", "true", true, nullptr, failCounterPtr) ? PASS : FAIL) << std::endl;
+    std::cout << (testCasePrintable<bool>("Logic Operator Test","false xor false", "false", false, nullptr, failCounterPtr) ? PASS : FAIL) << std::endl;
     
+    std::cout << (testCasePrintable<bool>("Logic Operator Test","true implies true", "true", true, nullptr, failCounterPtr) ? PASS : FAIL) << std::endl;
+    std::cout << (testCasePrintable<bool>("Logic Operator Test","true implies false", "false", false, nullptr, failCounterPtr) ? PASS : FAIL) << std::endl;
+    std::cout << (testCasePrintable<bool>("Logic Operator Test","false implies true", "true", true, nullptr, failCounterPtr) ? PASS : FAIL) << std::endl;
+    std::cout << (testCasePrintable<bool>("Logic Operator Test","false implies false", "true", true, nullptr, failCounterPtr) ? PASS : FAIL) << std::endl;
+////////////////////////////////////////////////////////////////////////////////
+    Bag<Any> collectionTest = Bag<Any>();
+    std::string testStr = "input";
+    std::shared_ptr<Any> anyString = eAny(testStr, ecore::ecorePackage::ESTRING_CLASS, false);
+    std::shared_ptr<Any> anyInt = eAny(42, ecore::ecorePackage::EINT_CLASS, false);
+    std::shared_ptr<Any> anyDouble = eAny(3.1415, ecore::ecorePackage::EDOUBLE_CLASS, false);
+    std::shared_ptr<Any> anyBoolean = eAny(true, ecore::ecorePackage::EBOOLEAN_CLASS, false);
+    collectionTest.add(anyString);
+    collectionTest.add(anyInt);
+    collectionTest.add(anyDouble);
+    collectionTest.add(anyBoolean);
+
+    std::cout << (collectionTestCase("Collection Test","Bag{'input', 42, 3.1415, true}", collectionTest, nullptr, failCounterPtr) ? PASS : FAIL) << std::endl;
+////////////////////////////////////////////////////////////////////////////////
+    collectionTest = Bag<Any>();
+    for (int i = 0; i <= 10; i++)
+    {
+        collectionTest.add(eAny(i, ecore::ecorePackage::EINT_CLASS, false));
+    }   
+    std::cout << (collectionTestCase("Collection Test","Sequence{0..10}", collectionTest, nullptr, failCounterPtr) ? PASS : FAIL) << std::endl;
+////////////////////////////////////////////////////////////////////////////////
+    collectionTest = Bag<Any>();
+    for (int i = 10; i >= 0; i--)
+    {
+        collectionTest.add(eAny(i, ecore::ecorePackage::EINT_CLASS, false));
+    }   
+    std::cout << (collectionTestCase("Collection Test","Sequence{10..0}", collectionTest, nullptr, failCounterPtr) ? PASS : FAIL) << std::endl;
+////////////////////////////////////////////////////////////////////////////////
+    collectionTest = Bag<Any>();
+    for (int i = -100; i <= 0; i++)
+    {
+        collectionTest.add(eAny(i, ecore::ecorePackage::EINT_CLASS, false));
+    }   
+    std::cout << (collectionTestCase("Collection Test","Sequence{-100..0}", collectionTest, nullptr, failCounterPtr) ? PASS : FAIL) << std::endl;
+////////////////////////////////////////////////////////////////////////////////
+    collectionTest = Bag<Any>();
+    for (int i = -100; i <= -10; i++)
+    {
+        collectionTest.add(eAny(i, ecore::ecorePackage::EINT_CLASS, false));
+    }   
+    std::cout << (collectionTestCase("Collection Test","Sequence{-100..-10}", collectionTest, nullptr, failCounterPtr) ? PASS : FAIL) << std::endl;
+////////////////////////////////////////////////////////////////////////////////
+    collectionTest = Bag<Any>();
+    for (int i = -10; i >= -100; i--)
+    {
+        collectionTest.add(eAny(i, ecore::ecorePackage::EINT_CLASS, false));
+    }   
+    std::cout << (collectionTestCase("Collection Test","Sequence{-10..-100}", collectionTest, nullptr, failCounterPtr) ? PASS : FAIL) << std::endl;
+////////////////////////////////////////////////////////////////////////////////
+    collectionTest = Bag<Any>();
+    for (int i = 100; i >= -100; i--)
+    {
+        collectionTest.add(eAny(i, ecore::ecorePackage::EINT_CLASS, false));
+    }   
+    std::cout << (collectionTestCase("Collection Test","Sequence{100..-100}", collectionTest, nullptr, failCounterPtr) ? PASS : FAIL) << std::endl;
+////////////////////////////////////////////////////////////////////////////////
+    collectionTest = Bag<Any>();
+    for (int i = 100; i >= -100; i--)
+    {
+        collectionTest.add(eAny(i, ecore::ecorePackage::EINT_CLASS, false));
+    }
+    for (int i = 3; i <= 3; i++)
+    {
+        collectionTest.add(eAny(i, ecore::ecorePackage::EINT_CLASS, false));
+    }
+    anyInt = eAny(4, ecore::ecorePackage::EINT_CLASS, false);
+    collectionTest.add(anyInt);
+    anyBoolean = eAny(true, ecore::ecorePackage::EBOOLEAN_CLASS, false);
+    collectionTest.add(anyBoolean);     
+    std::cout << (collectionTestCase("Collection Test","Sequence{100..-100, 3..3, 4, true}", collectionTest, nullptr, failCounterPtr) ? PASS : FAIL) << std::endl;
+////////////////////////////////////////////////////////////////////////////////
+
+    std::cout << (testCasePrintable<bool>("Let Expression Test","let test = true in test", "true", true, nullptr, failCounterPtr) ? PASS : FAIL) << std::endl;
+    std::cout << (testCasePrintable<bool>("Let Expression Test","let test = true in let z = not test in z", "false", false, nullptr, failCounterPtr) ? PASS : FAIL) << std::endl;
+    std::cout << (testCasePrintable<bool>("Let Expression Test","let test = true in let z = test in z", "true", true, nullptr, failCounterPtr) ? PASS : FAIL) << std::endl;
+    std::cout << (testCasePrintable<std::string>("Let Expression Test","let test = 'A lot of tests' in let z = (test+'!') in z", "A lot of tests!", "A lot of tests!", nullptr, failCounterPtr) ? PASS : FAIL) << std::endl;
+    std::cout << (testCasePrintable<std::string>("Let Expression Test","let test = 'A lot of tests' in if test = 'A lot of tests' then test+'!' else test+'?'", "A lot of tests!", "A lot of tests!", nullptr, failCounterPtr) ? PASS : FAIL) << std::endl;
+    std::cout << (testCasePrintable<bool>("Tuple Expression Test","Tuple{a = true, b = false}.a", "true", true, nullptr, failCounterPtr) ? PASS : FAIL) << std::endl;
+    std::cout << (testCasePrintable<bool>("Tuple Expression Test","Tuple{a = true, b = false}.b", "false", false, nullptr, failCounterPtr) ? PASS : FAIL) << std::endl;
+    std::cout << (testCasePrintable<int>("Tuple Expression Test","Tuple{a = true, b = false, c = 57}.c", "57", 57, nullptr, failCounterPtr) ? PASS : FAIL) << std::endl;
+    std::cout << (testCasePrintable<int>("Tuple and Let Expression Test","let t = Tuple{a = true, b = false, c = 57} in if t.a then t.c else t.b endif", "57", 57, nullptr, failCounterPtr) ? PASS : FAIL) << std::endl;
+    std::cout << (testCasePrintable<int>("Tuple and Let Expression Test","let t = Tuple{a = true, b = false, c = 57}.c in t", "57", 57, nullptr, failCounterPtr) ? PASS : FAIL) << std::endl;
+    
+// ////////////////////////////////////////////////////////////////////////////////
+// NOT IMPLEMENTED YET
+//     collectionTest = Bag<Any>();
+//     anyInt = eAny(42, ecore::ecorePackage::EINT_CLASS, false);
+//     collectionTest.add(anyInt);    
+//     std::cout << (collectionTestCase("Tuple and Collection Test","let s = Set{Tuple{a = true, b = false, c = 57}} in s->collect(c)", collectionTest, nullptr, failCounterPtr) ? PASS : FAIL) << std::endl;
+// ////////////////////////////////////////////////////////////////////////////////
+
 
     std::cout << "\nRESULT:" << std::endl;
     
@@ -262,9 +492,9 @@ int main() {
 
     } else {
 
-        std::cout << "########################" << std::endl;
-        std::cout << "### " << failCounter << " tests FAILED! ###" << std::endl;
-        std::cout << "########################" << std::endl;
+        std::cout << "#########################" << std::endl;
+        std::cout << "### " << failCounter << " test(s) FAILED! ###" << std::endl;
+        std::cout << "#########################" << std::endl;
 
     }
     
