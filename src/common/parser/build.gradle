@@ -67,9 +67,9 @@ task compileAntlr4(dependsOn: unzipAntlr4) {
 		exec {
 			workingDir "antlr4/antlr4-cpp-runtime-${antlr4Version}-source/.cmake"
 			if (System.properties['os.name'].toLowerCase().contains('windows')) {
-				commandLine 'cmd', '/c', 'cmake -G "MinGW Makefiles" -DCMAKE_CXX_STANDARD:STRING=17 -DCMAKE_BUILD_TYPE=Debug -DCMAKE_INSTALL_PREFIX=' + file("./antlr4/bin") + ' ' + file("./antlr4/antlr4-cpp-runtime-${antlr4Version}-source").absolutePath
+				commandLine 'cmd', '/c', 'cmake -G "MinGW Makefiles" -DCMAKE_CXX_STANDARD:STRING=17 -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=' + file("./antlr4/bin") + ' ' + file("./antlr4/antlr4-cpp-runtime-${antlr4Version}-source").absolutePath
 			} else {
-				commandLine '/bin/sh', '-c', 'cmake -G "Unix Makefiles" -DCMAKE_CXX_STANDARD:STRING=17 -DCMAKE_BUILD_TYPE=Debug -DCMAKE_INSTALL_PREFIX=' + file("./antlr4/bin") + ' ' + file("./antlr4/antlr4-cpp-runtime-${antlr4Version}-source").absolutePath
+				commandLine '/bin/sh', '-c', 'cmake -G "Unix Makefiles" -DCMAKE_CXX_STANDARD:STRING=17 -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=' + file("./antlr4/bin") + ' ' + file("./antlr4/antlr4-cpp-runtime-${antlr4Version}-source").absolutePath
 			}
 		}
 		exec {

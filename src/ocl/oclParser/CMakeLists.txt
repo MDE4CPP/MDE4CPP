@@ -31,31 +31,22 @@ ENDIF(APPLE)
 SET(CMAKE_CXX_FLAGS_DEBUG " -Og -ggdb ${ENABLED_DEBUG_MESSAGE}")
 SET(CMAKE_CXX_FLAGS_RELEASE " -O3  ${ENABLED_DEBUG_MESSAGE}")
 
-string(REPLACE "\\" "/" MDE4CPP_HOME $ENV{MDE4CPP_HOME})
+string(REPLACE "\\" "/" MDE4CPP_HOME "$ENV{MDE4CPP_HOME}")
 
 SET(SOURCE_FILES
 # Utilities
-	#Utilities/Environment.cpp
-    #Utilities/EnvironmentFactory.cpp
-    #Utilities/Ocl.cpp
-    #Utilities/OclReflection.cpp
-	#Utilities/Ocllog.cpp
 	Utilities/OclConversion.cpp
-	Utilities/test_query.cpp
+	Utilities/Ocl.cpp
 # OclCS
     OclCS/OclFragments.cpp
     OclCS/OclLexer.cpp
     OclCS/OclParser.cpp
-    #OclCS/OclParserBaseListener.cpp
     OclCS/OclParserBaseVisitor.cpp
-    #OclCS/OclParserCustomListener.cpp
     OclCS/OclParserCustomVisitor.cpp
-    #OclCS/OclParserListener.cpp
     OclCS/OclParserVisitor.cpp
 # Eval
 	Eval/EcoreEval.cpp
 	Eval/EcoreEnvironment.cpp
-	#Eval/EcoreNamedElement.cpp
 )
 
 INCLUDE_DIRECTORIES(

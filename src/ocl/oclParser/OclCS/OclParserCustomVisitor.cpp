@@ -1,6 +1,7 @@
 #include "OclParserCustomVisitor.h"
 
 #include <algorithm>
+#include <typeinfo>
 
 #include <ecore/ecoreFactory.hpp>
 #include <ecore/EEnum.hpp>

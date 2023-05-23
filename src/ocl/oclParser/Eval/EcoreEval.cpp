@@ -128,7 +128,7 @@ std::shared_ptr<Any> EcoreEval::visitNode(std::shared_ptr<Any> node) {
 
     if (nodeResult == nullptr) {
         //TODO
-        //error no case in oclCV::callEvalFunction successfull
+        // NullExp, OperationCall with non return function can be Nullptr
         return defaultResult();
 
     } else {
@@ -235,7 +235,7 @@ std::shared_ptr<Any> EcoreEval::evalExpressionInOcl(std::shared_ptr<Any> exp) {
 
     if (expInOcl->getBodyExpression() == nullptr) {
 
-        //TODO error
+        //TODO add error
         // no body expression means nothing to evaluate
         return defaultResult();
 
@@ -402,9 +402,7 @@ std::shared_ptr<Any> EcoreEval::evalCollectionLiteralExp(std::shared_ptr<Any> ex
     //2 possibilities
     std::shared_ptr<Bag<ocl::Expressions::CollectionLiteralPart>> parts = colLitExp->getPart();
     if (!parts->empty()) {
-        //TODO handle parts
-        //collection Item
-        //collection Range
+        //handle parts
 
         //evaluate each expression
         size_t partSize = parts->size();
@@ -427,6 +425,7 @@ std::shared_ptr<Any> EcoreEval::evalCollectionLiteralExp(std::shared_ptr<Any> ex
         for (size_t i = 0; i < partSize; i++)
         {
             elem = parts->at(i);
+            //collection Item
             item = std::dynamic_pointer_cast<ocl::Expressions::CollectionItem>(elem); 
             if (item != nullptr) {
 
@@ -439,10 +438,11 @@ std::shared_ptr<Any> EcoreEval::evalCollectionLiteralExp(std::shared_ptr<Any> ex
 
             } else {
 
+                //collection Range
                 range = std::dynamic_pointer_cast<ocl::Expressions::CollectionRange>(elem);
                 if (range == nullptr) {
                     //TODO add error
-                    // collection element could not be evaluated
+                    // collection element (range) could not be evaluated
                     return defaultResult();
                 }
 
@@ -576,8 +576,6 @@ std::shared_ptr<Any> EcoreEval::evalIfExp(std::shared_ptr<Any> exp) {
     std::shared_ptr<EcoreEnvironment> bodyEnv = std::make_shared<EcoreEnvironment>(EcoreEnvironment(m_env, m_env->getSelfVariable()));
     std::shared_ptr<EcoreEval> bodyEval = std::make_shared<EcoreEval>(EcoreEval(bodyEnv));
 
-    //TODO maybe encapsulatedEnv neccessary
-
     if (condition) {
 
         //evaluate thenExp
@@ -613,6 +611,7 @@ std::shared_ptr<Any> EcoreEval::evalIfExp(std::shared_ptr<Any> exp) {
     }
 
     //TODO add error
+    // result can't be returned in if Expr
     return defaultResult();
 
 }
@@ -635,8 +634,8 @@ std::shared_ptr<Any> EcoreEval::evalVariableExp(std::shared_ptr<Any> exp) {
 
     if (returnVar == nullptr) {
 
-        // TODO
-        // error given varName is not found
+        // TODO add error
+        // error given varName not found
         return defaultResult();
         
     }
@@ -653,7 +652,7 @@ std::shared_ptr<Any> EcoreEval::evalOperationCallExp(std::shared_ptr<Any> exp) {
 
     if (operExp == nullptr) {
         //TODO add error
-        //have to be propExp
+        //have to be operation Exp
         return defaultResult();
     }
 
@@ -680,7 +679,8 @@ std::shared_ptr<Any> EcoreEval::evalOperationCallExp(std::shared_ptr<Any> exp) {
         const std::shared_ptr<Any>& eAnyOper = m_env->lookupOperationName(operName, m_env->getContextVariable());
 
         if (eAnyOper == nullptr) {
-            //TODO operation could not be found in 'm_env->getContextVariable()'
+            //TODO add error
+            // operation could not be found in 'm_env->getContextVariable()'
             return defaultResult();
         }
 
@@ -1131,6 +1131,7 @@ std::shared_ptr<Any> EcoreEval::evalIteratorExp(std::shared_ptr<Any> exp) {
     } // END of iteroExp->getSourrundedBy() == ocl::Expressions::SurroundingType::BRACKETS
 
     //TODO add error
+    // coud not evaluate IteratorExp
     return defaultResult();
 
 }
@@ -1242,7 +1243,7 @@ std::shared_ptr<Any> EcoreEval::evalIterateExp(std::shared_ptr<Any> exp) {
         return defaultResult();
     }
 
-    // TODO distinguish between Collection types TODO //
+    // TODO distinguish between Collection types //
 
     // get the bodyExp
     std::shared_ptr<ocl::Expressions::OclExpression> bodyExp = iterExp->getBody();
@@ -1343,7 +1344,7 @@ std::shared_ptr<Any> EcoreEval::evalIterateExp(std::shared_ptr<Any> exp) {
         }
     } // end of second 2 cases with iterateBag
 
-    // TODO handle type specifications TODO //
+    // TODO handle type specifications //
 
 
 
@@ -1855,7 +1856,8 @@ std::shared_ptr<Any> EcoreEval::evalVarDeclExp(std::shared_ptr<Any> exp) {
 
             bool isAdded = m_env->addElement(varDecExp->getVarName(), assignedResult, false, colType->getReferredType());
             if (!isAdded) {
-                //TODO add error, the new variable name is already in use
+                //TODO add error
+                //the new variable name is already in use
                 return defaultResult(); 
             }
             //TODO check Container Type (Bag, Sequence, ...)
@@ -1876,7 +1878,8 @@ std::shared_ptr<Any> EcoreEval::evalVarDeclExp(std::shared_ptr<Any> exp) {
             //TODO check inner type and add correctly as type name
             bool isAdded = m_env->addElement(varDecExp->getVarName(), assignedResult, false, tupleType->getReferredType());
             if (!isAdded) {
-                //TODO add error, the new variable name is already in use
+                //TODO add error
+                // the new variable name is already in use
                 return defaultResult(); 
             }            
         }
@@ -1905,7 +1908,8 @@ std::shared_ptr<Any> EcoreEval::evalVarDeclExp(std::shared_ptr<Any> exp) {
         // try to add the new variable
         bool isAdded = m_env->addElement(varDecExp->getVarName(), assignedResult, false, initTypeName);
         if (!isAdded) {
-            //TODO add error, the new variable name is already in use
+            //TODO add error
+            // the new variable name is already in use
             return defaultResult(); 
         }
 
@@ -1924,7 +1928,8 @@ std::shared_ptr<Any> EcoreEval::evalVarDeclExp(std::shared_ptr<Any> exp) {
         // try to add as empty variable
         bool isAdded = m_env->addElement(varDecExp->getVarName(), nullptr, false, typeExp->getReferredType());
         if (!isAdded) {
-            //TODO add error, the new variable name is already in use
+            //TODO add error
+            // the new variable name is already in use
             return defaultResult(); 
         }
 
@@ -1942,7 +1947,8 @@ std::shared_ptr<Any> EcoreEval::evalVarDeclExp(std::shared_ptr<Any> exp) {
         // try to add as empty variable
         bool isAdded = m_env->addElement(varDecExp->getVarName(), assignedResult, false, m_env->getTypeName(assignedResult));
         if (!isAdded) {
-            //TODO add error, the new variable name is already in use
+            //TODO add error
+            // the new variable name is already in use
             return defaultResult(); 
         }
 
@@ -1960,7 +1966,8 @@ std::shared_ptr<Any> EcoreEval::evalVarDeclExp(std::shared_ptr<Any> exp) {
         // try to add as empty variable
         bool isAdded = m_env->addElement(varDecExp->getVarName(), nullptr, false, "");
         if (!isAdded) {
-            //TODO add error, the new variable name is already in use
+            //TODO add error
+            // the new variable name is already in use
             return defaultResult(); 
         }
 
@@ -2128,7 +2135,7 @@ std::shared_ptr<Any> EcoreEval::oclIncluding(std::shared_ptr<Bag<ocl::Expression
 
         //add into eObjBag
         // TODO type check currently this is UNSAFE
-        if (eObjBag != nullptr) {
+        else /*(eObjBag != nullptr)*/ {
             //try to cast as eObject
             std::shared_ptr<ecore::EObject> bodyObj = castEcoreArgument<ecore::EObject>(bodyResult);
             if (bodyObj != nullptr) {
@@ -2157,7 +2164,7 @@ std::shared_ptr<Any> EcoreEval::oclSelectReject(bool isSelect, std::shared_ptr<o
 
     if (num_loopVars > 1) {
         //TODO add error
-        // for 'select' at most 1 iterator variable is allowed
+        // for 'select'/'reject' at most 1 iterator variable is allowed
         return defaultResult();
     }
 
@@ -2183,7 +2190,7 @@ std::shared_ptr<Any> EcoreEval::oclSelectReject(bool isSelect, std::shared_ptr<o
 
         if (inputAnyBag == nullptr) {
             //TODO add error
-            //inputCollection could not be casted to iterable object
+            //inputCollection could not be casted to iterteable object
             return defaultResult();
         }
     }
@@ -2227,7 +2234,7 @@ std::shared_ptr<Any> EcoreEval::oclSelectReject(bool isSelect, std::shared_ptr<o
                     bodyResultBool = bodyResult->get<bool>();
                 } else {
                     //TODO add error
-                    //bodyExp of select operation could not be casted to bool
+                    //bodyExp of select/reject operation could not be casted to bool
                     return defaultResult();
                 }
 
@@ -2259,7 +2266,7 @@ std::shared_ptr<Any> EcoreEval::oclSelectReject(bool isSelect, std::shared_ptr<o
                     bodyResultBool = bodyResult->get<bool>();
                 } else {
                     //TODO add error
-                    //bodyExp of select operation could not be casted to bool
+                    //bodyExp of select/reject operation could not be casted to bool
                     return defaultResult();
                 }
 
@@ -2314,7 +2321,7 @@ std::shared_ptr<Any> EcoreEval::oclSelectReject(bool isSelect, std::shared_ptr<o
                     bodyResultBool = bodyResult->get<bool>();
                 } else {
                     //TODO add error
-                    //bodyExp of select operation could not be casted to bool
+                    //bodyExp of select/reject operation could not be casted to bool
                     return defaultResult();
                 }
                 //add  the elem to the returnBag
@@ -2356,7 +2363,7 @@ std::shared_ptr<Any> EcoreEval::oclSelectReject(bool isSelect, std::shared_ptr<o
                     bodyResultBool = bodyResult->get<bool>();
                 } else {
                     //TODO add error
-                    //bodyExp of select operation could not be casted to bool
+                    //bodyExp of select/reject operation could not be casted to bool
                     return defaultResult();
                 }
 
@@ -2462,7 +2469,7 @@ std::shared_ptr<Any> EcoreEval::callEvalFunction(std::shared_ptr<Any> exp) {
         break;
 
     case ocl::Expressions::ExpressionsPackage::OPERATIONCALLEXP_CLASS:
-        //TODO
+        //WIP
         //OperationCallExpEval
         //std::cout << "OperationCallEval" << std::endl;
         result = evalOperationCallExp(exp);
@@ -2481,14 +2488,14 @@ std::shared_ptr<Any> EcoreEval::callEvalFunction(std::shared_ptr<Any> exp) {
         break;
 
     case ocl::Expressions::ExpressionsPackage::ITERATOREXP_CLASS:
-        //TODO
+        //WIP
         //IteratorExpEval
         //std::cout << "IteratorExpEval" << std::endl;
         result = evalIteratorExp(exp);
         break;
 
     case ocl::Expressions::ExpressionsPackage::ITERATEEXP_CLASS:
-        //TODO
+        //WIP
         //IterateExpEval
         result = evalIterateExp(exp);
         break;
@@ -2600,7 +2607,7 @@ std::shared_ptr<Any> EcoreEval::callEvalFunction(std::shared_ptr<Any> exp) {
         break;
 
     case ocl::Expressions::ExpressionsPackage::VARDECLARATIONEXP_CLASS:
-        //TODO
+        //WIP
         //VarDeclExpEval
         result = evalVarDeclExp(exp);
         break;

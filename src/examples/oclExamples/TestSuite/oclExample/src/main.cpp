@@ -26,7 +26,8 @@
 #include <types/typesPackage.hpp>
 #include <primitivetypesReflection/PrimitiveTypesPackage.hpp>
 
-#include <oclParser/Utilities/test_query.h>
+//#include <oclParser/Utilities/test_query.h>
+#include <oclParser/Utilities/Ocl.h>
 
 // #include "Library_ecoreFactory.hpp"
 // #include "Library_ecorePackage.hpp"
@@ -49,10 +50,10 @@ bool floatCompare(double f1, double f2)
 
 bool testCasePrintableDouble(std::string testname, std::string qry, std::string corResStr, double targetResult, std::shared_ptr<Any> context, int* counter) {
   
-    Utilities::ts ts;
+    Utilities::Ocl ocl = Utilities::Ocl();
     
     std::cout << "--------------" << testname << "--------------" << std::endl;
-    std::shared_ptr<Any> result = ts.contextTest(qry, context);
+    std::shared_ptr<Any> result = ocl.debugQuery(qry, context);
     double testResult = result->get<double>();
     std::cout << "Input: " << qry << std::endl;
     std::cout << "(should be " << corResStr << "): " << testResult << std::endl;
@@ -67,10 +68,10 @@ bool testCasePrintableDouble(std::string testname, std::string qry, std::string 
 template <class T>
 bool testCasePrintable(std::string testname, std::string qry, std::string corResStr, T targetResult, std::shared_ptr<Any> context, int* counter) {
   
-    Utilities::ts ts;
+    Utilities::Ocl ocl = Utilities::Ocl();
     
     std::cout << "--------------" << testname << "--------------" << std::endl;
-    std::shared_ptr<Any> result = ts.contextTest(qry, context);
+    std::shared_ptr<Any> result = ocl.debugQuery(qry, context);
     if (result == nullptr) {
         std::cout << "Error: Result is nullptr. Query: " << qry << std::endl;
         *counter = *counter+1;
@@ -94,10 +95,10 @@ bool failCounterFunction(int* counter, bool status) {
 
 bool collectionTestCase(std::string testname, std::string qry, Bag<Any> targetResult, std::shared_ptr<Any> context, int* counter) {
 
-    Utilities::ts ts;
+    Utilities::Ocl ocl = Utilities::Ocl();
     
     std::cout << "--------------" << testname << "--------------" << std::endl;
-    std::shared_ptr<Any> result = ts.contextTest(qry, context);
+    std::shared_ptr<Any> result = ocl.debugQuery(qry, context);
     std::cout << "Input: " << qry << std::endl;
     
     if (!result->isContainer()) {

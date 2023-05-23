@@ -230,7 +230,7 @@ namespace Eval {
                 }
                 catch(...){}
                 
-                //division failed
+                //LT failed
                 return nullptr;
             }
 
@@ -249,7 +249,7 @@ namespace Eval {
                 }
                 catch(...){}
                 
-                //division failed
+                //LTE failed
                 return nullptr;
             }
 
@@ -268,7 +268,7 @@ namespace Eval {
                 }
                 catch(...){}
                 
-                //division failed
+                //GT failed
                 return nullptr;
             }
 
@@ -287,7 +287,7 @@ namespace Eval {
                 }
                 catch(...){}
                 
-                //division failed
+                //GTE failed
                 return nullptr;
             }
 
