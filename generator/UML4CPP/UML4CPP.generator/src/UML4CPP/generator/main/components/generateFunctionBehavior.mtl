@@ -76,5 +76,8 @@
 [for (aParameter : Parameter | aFunctionBehavior.ownedParameter)]
 [aParameter.generateParameterInitialization()/]
 [/for]
+[if (not isReflectionModel(aFunctionBehavior.getRootPackage()))]
+[aFunctionBehavior.memberName()/]->_setID([aFunctionBehavior.getMemberName().toUpperCase()/]);
+[/if]
 [aFunctionBehavior.generateStereotypeApplication()/]
 [/template]
