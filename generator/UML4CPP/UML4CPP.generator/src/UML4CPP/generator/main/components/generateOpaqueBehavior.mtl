@@ -24,6 +24,48 @@
 [import UML4CPP::generator::main::helpers::generalHelper /]
 [import UML4CPP::generator::main::helpers::keywords /]
 [import UML4CPP::generator::main::helpers::nameHelper /]
+[import UML4CPP::generator::main::components::generateStereotype /]
+
+[**
+ * Generate creation of metamodel instance for an OpaqueBehavior element
+ * 
+ * this includes:
+ * - creation of OpaqueBehavior
+ * - creation of OpaqueBehavior parameter
+*/]
+[template public generateOpaqueBehaviorCreation(aOpaqueBehavior : OpaqueBehavior)]
+[if (aOpaqueBehavior.owner = aOpaqueBehavior._package)]
+[aOpaqueBehavior.memberName()/] = factory->create[if(aOpaqueBehavior.oclIsKindOf(FunctionBehavior))]FunctionBehavior[else]OpaqueBehavior[/if]_as_ownedType_in_Package([aOpaqueBehavior._package.memberName()/]);
+[else]
+[aOpaqueBehavior.memberName()/] = factory->create[if(aOpaqueBehavior.oclIsKindOf(FunctionBehavior))]FunctionBehavior[else]OpaqueBehavior[/if]_as_ownedBehavior_in_BehavioredClassifier([aOpaqueBehavior.owner.oclAsType(NamedElement).memberName()/]);
+[/if]
+[for (aParameter : Parameter | aOpaqueBehavior.ownedParameter)]
+[aParameter.generateParameterCreation()/]
+[/for]
+[/template]
+
+[**
+ * Generate initialization of metamodel instance for an OpaqueBehavior element
+ * 
+ * this includes:
+ * - set OpaqueBehavior name
+ * - set OpaqueBehavior context
+ * - initialization of OpaqueBehavior parameter
+*/]
+[template public generateOpaqueBehaviorInitialization(aOpaqueBehavior : OpaqueBehavior)]
+[aOpaqueBehavior.memberName()/]->setName("[aOpaqueBehavior.metamodelElementName()/]");
+[if (not aOpaqueBehavior._context.oclIsUndefined())]
+[aOpaqueBehavior.memberName()/]->setContext([aOpaqueBehavior._context.memberName()/]);
+[/if]
+[for (aParameter : Parameter | aOpaqueBehavior.ownedParameter)]
+[aParameter.generateParameterInitialization()/]
+[/for]
+[if (not isReflectionModel(aOpaqueBehavior.getRootPackage()))]
+[aOpaqueBehavior.memberName()/]->_setID([aOpaqueBehavior.getMemberName().toUpperCase()/]);
+[/if]
+
+[aOpaqueBehavior.generateStereotypeApplication()/]
+[/template]
 
 [**
  * Generate method declaration from OpaqueBehavior
