@@ -136,7 +136,7 @@ std::weak_ptr<uml::Artifact> SourceImpl::getBase_Artifact() const
 // StructuralFeature Getter & Setter
 //**************************************
 //Get
-std::shared_ptr<Any> SourceImpl::get(std::shared_ptr<uml::Property> _property) const
+std::shared_ptr<Any> SourceImpl::get(const std::shared_ptr<uml::Property>& _property) const
 {
 	return this->get(_property->_getID());
 }
@@ -236,7 +236,7 @@ void SourceImpl::add(unsigned long _uID, const std::shared_ptr<Any>& value, int 
 }
 
 //Unset
-void SourceImpl::unset(std::shared_ptr<uml::Property> _property)
+void SourceImpl::unset(const std::shared_ptr<uml::Property>& _property)
 {
 	this->unset(_property->_getID());
 }

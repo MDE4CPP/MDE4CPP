@@ -212,7 +212,7 @@ int TextInputChannelImpl::readUnlimitedNatural(std::shared_ptr<FoundationalModel
 // StructuralFeature Getter & Setter
 //**************************************
 //Get
-std::shared_ptr<Any> TextInputChannelImpl::get(std::shared_ptr<uml::Property> _property) const
+std::shared_ptr<Any> TextInputChannelImpl::get(const std::shared_ptr<uml::Property>& _property) const
 {
 	return this->get(_property->_getID());
 }
@@ -272,7 +272,7 @@ void TextInputChannelImpl::add(unsigned long _uID, const std::shared_ptr<Any>& v
 }
 
 //Unset
-void TextInputChannelImpl::unset(std::shared_ptr<uml::Property> _property)
+void TextInputChannelImpl::unset(const std::shared_ptr<uml::Property>& _property)
 {
 	this->unset(_property->_getID());
 }

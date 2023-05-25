@@ -38,9 +38,9 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "ocl/Evaluations/EvaluationsFactory.hpp"
 #include "ocl/Expressions/ExpressionsFactory.hpp"
 #include "ecore/ecoreFactory.hpp"
+#include "ocl/Evaluations/EvaluationsFactory.hpp"
 #include "ocl/Expressions/CallExp.hpp"
 #include "ocl/Expressions/CollectionRange.hpp"
 #include "ecore/EAnnotation.hpp"
@@ -396,7 +396,7 @@ bool FeatureCallExpImpl::internalEIsSet(int featureID) const
 	return CallExpImpl::internalEIsSet(featureID);
 }
 
-bool FeatureCallExpImpl::eSet(int featureID, std::shared_ptr<Any> newValue)
+bool FeatureCallExpImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 {
 	switch(featureID)
 	{
@@ -422,7 +422,7 @@ bool FeatureCallExpImpl::eSet(int featureID, std::shared_ptr<Any> newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-std::shared_ptr<Any> FeatureCallExpImpl::eInvoke(int operationID, std::shared_ptr<Bag<Any>> arguments)
+std::shared_ptr<Any> FeatureCallExpImpl::eInvoke(int operationID, const std::shared_ptr<Bag<Any>>& arguments)
 {
 	std::shared_ptr<Any> result;
  

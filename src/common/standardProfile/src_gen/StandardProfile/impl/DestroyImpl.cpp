@@ -135,7 +135,7 @@ std::weak_ptr<uml::BehavioralFeature> DestroyImpl::getBase_BehavioralFeature() c
 // StructuralFeature Getter & Setter
 //**************************************
 //Get
-std::shared_ptr<Any> DestroyImpl::get(std::shared_ptr<uml::Property> _property) const
+std::shared_ptr<Any> DestroyImpl::get(const std::shared_ptr<uml::Property>& _property) const
 {
 	return this->get(_property->_getID());
 }
@@ -224,7 +224,7 @@ void DestroyImpl::add(unsigned long _uID, const std::shared_ptr<Any>& value, int
 }
 
 //Unset
-void DestroyImpl::unset(std::shared_ptr<uml::Property> _property)
+void DestroyImpl::unset(const std::shared_ptr<uml::Property>& _property)
 {
 	this->unset(_property->_getID());
 }

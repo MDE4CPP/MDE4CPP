@@ -38,9 +38,9 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "ocl/Evaluations/EvaluationsFactory.hpp"
-#include "ecore/ecoreFactory.hpp"
 #include "ocl/Expressions/ExpressionsFactory.hpp"
+#include "ecore/ecoreFactory.hpp"
+#include "ocl/Evaluations/EvaluationsFactory.hpp"
 #include "ocl/Expressions/CallExp.hpp"
 #include "ocl/Expressions/CollectionRange.hpp"
 #include "ecore/EAnnotation.hpp"
@@ -408,7 +408,7 @@ bool UnlimitedNaturalExpImpl::internalEIsSet(int featureID) const
 	return NumericLiteralExpImpl::internalEIsSet(featureID);
 }
 
-bool UnlimitedNaturalExpImpl::eSet(int featureID, std::shared_ptr<Any> newValue)
+bool UnlimitedNaturalExpImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 {
 	switch(featureID)
 	{
@@ -434,7 +434,7 @@ bool UnlimitedNaturalExpImpl::eSet(int featureID, std::shared_ptr<Any> newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-std::shared_ptr<Any> UnlimitedNaturalExpImpl::eInvoke(int operationID, std::shared_ptr<Bag<Any>> arguments)
+std::shared_ptr<Any> UnlimitedNaturalExpImpl::eInvoke(int operationID, const std::shared_ptr<Bag<Any>>& arguments)
 {
 	std::shared_ptr<Any> result;
  

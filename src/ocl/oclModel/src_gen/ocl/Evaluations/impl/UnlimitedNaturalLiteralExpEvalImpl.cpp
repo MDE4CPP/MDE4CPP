@@ -231,7 +231,7 @@ bool UnlimitedNaturalLiteralExpEvalImpl::internalEIsSet(int featureID) const
 	return NumericLiteralExpEvalImpl::internalEIsSet(featureID);
 }
 
-bool UnlimitedNaturalLiteralExpEvalImpl::eSet(int featureID, std::shared_ptr<Any> newValue)
+bool UnlimitedNaturalLiteralExpEvalImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 {
 	switch(featureID)
 	{
@@ -243,7 +243,7 @@ bool UnlimitedNaturalLiteralExpEvalImpl::eSet(int featureID, std::shared_ptr<Any
 //*********************************
 // EOperation Invoke
 //*********************************
-std::shared_ptr<Any> UnlimitedNaturalLiteralExpEvalImpl::eInvoke(int operationID, std::shared_ptr<Bag<Any>> arguments)
+std::shared_ptr<Any> UnlimitedNaturalLiteralExpEvalImpl::eInvoke(int operationID, const std::shared_ptr<Bag<Any>>& arguments)
 {
 	std::shared_ptr<Any> result;
  

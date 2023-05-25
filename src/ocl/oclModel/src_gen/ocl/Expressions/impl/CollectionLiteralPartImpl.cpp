@@ -209,7 +209,7 @@ bool CollectionLiteralPartImpl::internalEIsSet(int featureID) const
 	return ecore::ETypedElementImpl::internalEIsSet(featureID);
 }
 
-bool CollectionLiteralPartImpl::eSet(int featureID, std::shared_ptr<Any> newValue)
+bool CollectionLiteralPartImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 {
 	switch(featureID)
 	{
@@ -221,7 +221,7 @@ bool CollectionLiteralPartImpl::eSet(int featureID, std::shared_ptr<Any> newValu
 //*********************************
 // EOperation Invoke
 //*********************************
-std::shared_ptr<Any> CollectionLiteralPartImpl::eInvoke(int operationID, std::shared_ptr<Bag<Any>> arguments)
+std::shared_ptr<Any> CollectionLiteralPartImpl::eInvoke(int operationID, const std::shared_ptr<Bag<Any>>& arguments)
 {
 	std::shared_ptr<Any> result;
  

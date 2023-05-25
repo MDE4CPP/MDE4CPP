@@ -71,7 +71,7 @@ namespace UML4CPPProfile
 			// StructuralFeature Getter & Setter
 			//**************************************
 			//Get
-			virtual std::shared_ptr<Any> get(std::shared_ptr<uml::Property> _property) const ;
+			virtual std::shared_ptr<Any> get(const std::shared_ptr<uml::Property>& _property) const ;
 			virtual std::shared_ptr<Any> get(std::string _qualifiedName) const ;
 			virtual std::shared_ptr<Any> get(unsigned long _uID) const ;
 			//Set
@@ -83,7 +83,7 @@ namespace UML4CPPProfile
 			virtual void add(std::string _qualifiedName, const std::shared_ptr<Any>& value, int insertAt = -1) ;
 			virtual void add(unsigned long _uID, const std::shared_ptr<Any>& value, int insertAt = -1) ;
 			//Unset
-			virtual void unset(std::shared_ptr<uml::Property> _property) ;
+			virtual void unset(const std::shared_ptr<uml::Property>& _property) ;
 			virtual void unset(std::string _qualifiedName) ;
 			virtual void unset(unsigned long _uID) ;
 			//Remove

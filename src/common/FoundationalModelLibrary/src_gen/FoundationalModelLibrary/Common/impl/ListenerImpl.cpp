@@ -110,7 +110,7 @@ void ListenerImpl::destroy()
 // StructuralFeature Getter & Setter
 //**************************************
 //Get
-std::shared_ptr<Any> ListenerImpl::get(std::shared_ptr<uml::Property> _property) const
+std::shared_ptr<Any> ListenerImpl::get(const std::shared_ptr<uml::Property>& _property) const
 {
 	return this->get(_property->_getID());
 }
@@ -159,7 +159,7 @@ void ListenerImpl::add(unsigned long _uID, const std::shared_ptr<Any>& value, in
 }
 
 //Unset
-void ListenerImpl::unset(std::shared_ptr<uml::Property> _property)
+void ListenerImpl::unset(const std::shared_ptr<uml::Property>& _property)
 {
 	this->unset(_property->_getID());
 }

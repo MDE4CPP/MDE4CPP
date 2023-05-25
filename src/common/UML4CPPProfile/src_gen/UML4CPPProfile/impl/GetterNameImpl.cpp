@@ -152,7 +152,7 @@ std::string GetterNameImpl::getGetterName() const
 // StructuralFeature Getter & Setter
 //**************************************
 //Get
-std::shared_ptr<Any> GetterNameImpl::get(std::shared_ptr<uml::Property> _property) const
+std::shared_ptr<Any> GetterNameImpl::get(const std::shared_ptr<uml::Property>& _property) const
 {
 	return this->get(_property->_getID());
 }
@@ -257,7 +257,7 @@ void GetterNameImpl::add(unsigned long _uID, const std::shared_ptr<Any>& value, 
 }
 
 //Unset
-void GetterNameImpl::unset(std::shared_ptr<uml::Property> _property)
+void GetterNameImpl::unset(const std::shared_ptr<uml::Property>& _property)
 {
 	this->unset(_property->_getID());
 }

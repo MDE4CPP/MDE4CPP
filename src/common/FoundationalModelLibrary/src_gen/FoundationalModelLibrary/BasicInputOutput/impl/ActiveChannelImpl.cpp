@@ -111,7 +111,7 @@ void ActiveChannelImpl::destroy()
 // StructuralFeature Getter & Setter
 //**************************************
 //Get
-std::shared_ptr<Any> ActiveChannelImpl::get(std::shared_ptr<uml::Property> _property) const
+std::shared_ptr<Any> ActiveChannelImpl::get(const std::shared_ptr<uml::Property>& _property) const
 {
 	return this->get(_property->_getID());
 }
@@ -171,7 +171,7 @@ void ActiveChannelImpl::add(unsigned long _uID, const std::shared_ptr<Any>& valu
 }
 
 //Unset
-void ActiveChannelImpl::unset(std::shared_ptr<uml::Property> _property)
+void ActiveChannelImpl::unset(const std::shared_ptr<uml::Property>& _property)
 {
 	this->unset(_property->_getID());
 }

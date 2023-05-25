@@ -275,7 +275,7 @@ bool CollectionLiteralPartEvalImpl::internalEIsSet(int featureID) const
 	return OclExpEvalImpl::internalEIsSet(featureID);
 }
 
-bool CollectionLiteralPartEvalImpl::eSet(int featureID, std::shared_ptr<Any> newValue)
+bool CollectionLiteralPartEvalImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 {
 	switch(featureID)
 	{
@@ -318,7 +318,7 @@ bool CollectionLiteralPartEvalImpl::eSet(int featureID, std::shared_ptr<Any> new
 //*********************************
 // EOperation Invoke
 //*********************************
-std::shared_ptr<Any> CollectionLiteralPartEvalImpl::eInvoke(int operationID, std::shared_ptr<Bag<Any>> arguments)
+std::shared_ptr<Any> CollectionLiteralPartEvalImpl::eInvoke(int operationID, const std::shared_ptr<Bag<Any>>& arguments)
 {
 	std::shared_ptr<Any> result;
  

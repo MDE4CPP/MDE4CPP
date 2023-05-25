@@ -135,7 +135,7 @@ std::weak_ptr<uml::Class> SingletonImpl::getBase_Class() const
 // StructuralFeature Getter & Setter
 //**************************************
 //Get
-std::shared_ptr<Any> SingletonImpl::get(std::shared_ptr<uml::Property> _property) const
+std::shared_ptr<Any> SingletonImpl::get(const std::shared_ptr<uml::Property>& _property) const
 {
 	return this->get(_property->_getID());
 }
@@ -224,7 +224,7 @@ void SingletonImpl::add(unsigned long _uID, const std::shared_ptr<Any>& value, i
 }
 
 //Unset
-void SingletonImpl::unset(std::shared_ptr<uml::Property> _property)
+void SingletonImpl::unset(const std::shared_ptr<uml::Property>& _property)
 {
 	this->unset(_property->_getID());
 }

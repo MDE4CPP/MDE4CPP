@@ -135,7 +135,7 @@ std::weak_ptr<uml::Class> FocusImpl::getBase_Class() const
 // StructuralFeature Getter & Setter
 //**************************************
 //Get
-std::shared_ptr<Any> FocusImpl::get(std::shared_ptr<uml::Property> _property) const
+std::shared_ptr<Any> FocusImpl::get(const std::shared_ptr<uml::Property>& _property) const
 {
 	return this->get(_property->_getID());
 }
@@ -224,7 +224,7 @@ void FocusImpl::add(unsigned long _uID, const std::shared_ptr<Any>& value, int i
 }
 
 //Unset
-void FocusImpl::unset(std::shared_ptr<uml::Property> _property)
+void FocusImpl::unset(const std::shared_ptr<uml::Property>& _property)
 {
 	this->unset(_property->_getID());
 }

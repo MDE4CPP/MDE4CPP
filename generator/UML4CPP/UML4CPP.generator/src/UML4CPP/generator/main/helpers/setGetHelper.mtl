@@ -34,7 +34,7 @@
 */]
 [template public generateeGetSetDel(aClass : Class,impl : Boolean)]
 //Get
-virtual std::shared_ptr<Any> get(std::shared_ptr<uml::Property> _property) const [abstractSuffix(impl)/];
+virtual std::shared_ptr<Any> get(const std::shared_ptr<uml::Property>& _property) const [abstractSuffix(impl)/];
 virtual std::shared_ptr<Any> get(std::string _qualifiedName) const [abstractSuffix(impl)/];
 virtual std::shared_ptr<Any> get(unsigned long _uID) const [abstractSuffix(impl)/];
 //Set
@@ -92,7 +92,7 @@ virtual std::shared_ptr<Any> invoke(const std::shared_ptr<uml::OpaqueBehavior>& 
 [/template]
 
 [template private generateGetImplementation(aClass : Class)]
-std::shared_ptr<Any> [aClass.name.toUpperFirst().concat('Impl')/]::get(std::shared_ptr<uml::Property> _property) const
+std::shared_ptr<Any> [aClass.name.toUpperFirst().concat('Impl')/]::get(const std::shared_ptr<uml::Property>& _property) const
 {
 	return this->get(_property->_getID());
 }

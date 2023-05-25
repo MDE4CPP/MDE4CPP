@@ -38,8 +38,8 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "ocl/Evaluations/EvaluationsFactory.hpp"
 #include "ecore/ecoreFactory.hpp"
+#include "ocl/Evaluations/EvaluationsFactory.hpp"
 #include "ocl/Expressions/ExpressionsFactory.hpp"
 #include "ocl/Evaluations/CollectionLiteralPartEval.hpp"
 #include "ecore/EAnnotation.hpp"
@@ -281,7 +281,7 @@ bool CollectionLiteralExpEvalImpl::internalEIsSet(int featureID) const
 	return LiteralExpEvalImpl::internalEIsSet(featureID);
 }
 
-bool CollectionLiteralExpEvalImpl::eSet(int featureID, std::shared_ptr<Any> newValue)
+bool CollectionLiteralExpEvalImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 {
 	switch(featureID)
 	{
@@ -338,7 +338,7 @@ bool CollectionLiteralExpEvalImpl::eSet(int featureID, std::shared_ptr<Any> newV
 //*********************************
 // EOperation Invoke
 //*********************************
-std::shared_ptr<Any> CollectionLiteralExpEvalImpl::eInvoke(int operationID, std::shared_ptr<Bag<Any>> arguments)
+std::shared_ptr<Any> CollectionLiteralExpEvalImpl::eInvoke(int operationID, const std::shared_ptr<Bag<Any>>& arguments)
 {
 	std::shared_ptr<Any> result;
  

@@ -38,8 +38,8 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "ocl/Expressions/ExpressionsFactory.hpp"
 #include "ecore/ecoreFactory.hpp"
+#include "ocl/Expressions/ExpressionsFactory.hpp"
 #include "ocl/Expressions/CollectionLiteralPart.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClassifier.hpp"
@@ -272,7 +272,7 @@ bool CollectionLiteralPartsImpl::internalEIsSet(int featureID) const
 	return ecore::ETypedElementImpl::internalEIsSet(featureID);
 }
 
-bool CollectionLiteralPartsImpl::eSet(int featureID, std::shared_ptr<Any> newValue)
+bool CollectionLiteralPartsImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 {
 	switch(featureID)
 	{
@@ -329,7 +329,7 @@ bool CollectionLiteralPartsImpl::eSet(int featureID, std::shared_ptr<Any> newVal
 //*********************************
 // EOperation Invoke
 //*********************************
-std::shared_ptr<Any> CollectionLiteralPartsImpl::eInvoke(int operationID, std::shared_ptr<Bag<Any>> arguments)
+std::shared_ptr<Any> CollectionLiteralPartsImpl::eInvoke(int operationID, const std::shared_ptr<Bag<Any>>& arguments)
 {
 	std::shared_ptr<Any> result;
  

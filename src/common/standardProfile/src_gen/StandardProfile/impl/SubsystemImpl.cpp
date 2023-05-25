@@ -135,7 +135,7 @@ std::weak_ptr<uml::Component> SubsystemImpl::getBase_Component() const
 // StructuralFeature Getter & Setter
 //**************************************
 //Get
-std::shared_ptr<Any> SubsystemImpl::get(std::shared_ptr<uml::Property> _property) const
+std::shared_ptr<Any> SubsystemImpl::get(const std::shared_ptr<uml::Property>& _property) const
 {
 	return this->get(_property->_getID());
 }
@@ -224,7 +224,7 @@ void SubsystemImpl::add(unsigned long _uID, const std::shared_ptr<Any>& value, i
 }
 
 //Unset
-void SubsystemImpl::unset(std::shared_ptr<uml::Property> _property)
+void SubsystemImpl::unset(const std::shared_ptr<uml::Property>& _property)
 {
 	this->unset(_property->_getID());
 }

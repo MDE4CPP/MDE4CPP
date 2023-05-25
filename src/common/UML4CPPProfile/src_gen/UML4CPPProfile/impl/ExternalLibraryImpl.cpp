@@ -180,7 +180,7 @@ std::string ExternalLibraryImpl::getLibraryPath() const
 // StructuralFeature Getter & Setter
 //**************************************
 //Get
-std::shared_ptr<Any> ExternalLibraryImpl::get(std::shared_ptr<uml::Property> _property) const
+std::shared_ptr<Any> ExternalLibraryImpl::get(const std::shared_ptr<uml::Property>& _property) const
 {
 	return this->get(_property->_getID());
 }
@@ -317,7 +317,7 @@ void ExternalLibraryImpl::add(unsigned long _uID, const std::shared_ptr<Any>& va
 }
 
 //Unset
-void ExternalLibraryImpl::unset(std::shared_ptr<uml::Property> _property)
+void ExternalLibraryImpl::unset(const std::shared_ptr<uml::Property>& _property)
 {
 	this->unset(_property->_getID());
 }

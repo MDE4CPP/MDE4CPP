@@ -193,7 +193,7 @@ void TextOutputChannelImpl::writeUnlimitedNatural(int value,std::shared_ptr<Foun
 // StructuralFeature Getter & Setter
 //**************************************
 //Get
-std::shared_ptr<Any> TextOutputChannelImpl::get(std::shared_ptr<uml::Property> _property) const
+std::shared_ptr<Any> TextOutputChannelImpl::get(const std::shared_ptr<uml::Property>& _property) const
 {
 	return this->get(_property->_getID());
 }
@@ -253,7 +253,7 @@ void TextOutputChannelImpl::add(unsigned long _uID, const std::shared_ptr<Any>& 
 }
 
 //Unset
-void TextOutputChannelImpl::unset(std::shared_ptr<uml::Property> _property)
+void TextOutputChannelImpl::unset(const std::shared_ptr<uml::Property>& _property)
 {
 	this->unset(_property->_getID());
 }

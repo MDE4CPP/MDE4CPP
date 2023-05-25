@@ -135,7 +135,7 @@ std::weak_ptr<uml::Abstraction> RefineImpl::getBase_Abstraction() const
 // StructuralFeature Getter & Setter
 //**************************************
 //Get
-std::shared_ptr<Any> RefineImpl::get(std::shared_ptr<uml::Property> _property) const
+std::shared_ptr<Any> RefineImpl::get(const std::shared_ptr<uml::Property>& _property) const
 {
 	return this->get(_property->_getID());
 }
@@ -224,7 +224,7 @@ void RefineImpl::add(unsigned long _uID, const std::shared_ptr<Any>& value, int 
 }
 
 //Unset
-void RefineImpl::unset(std::shared_ptr<uml::Property> _property)
+void RefineImpl::unset(const std::shared_ptr<uml::Property>& _property)
 {
 	this->unset(_property->_getID());
 }

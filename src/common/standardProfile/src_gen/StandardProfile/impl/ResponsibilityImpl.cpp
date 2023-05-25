@@ -135,7 +135,7 @@ std::weak_ptr<uml::Usage> ResponsibilityImpl::getBase_Usage() const
 // StructuralFeature Getter & Setter
 //**************************************
 //Get
-std::shared_ptr<Any> ResponsibilityImpl::get(std::shared_ptr<uml::Property> _property) const
+std::shared_ptr<Any> ResponsibilityImpl::get(const std::shared_ptr<uml::Property>& _property) const
 {
 	return this->get(_property->_getID());
 }
@@ -224,7 +224,7 @@ void ResponsibilityImpl::add(unsigned long _uID, const std::shared_ptr<Any>& val
 }
 
 //Unset
-void ResponsibilityImpl::unset(std::shared_ptr<uml::Property> _property)
+void ResponsibilityImpl::unset(const std::shared_ptr<uml::Property>& _property)
 {
 	this->unset(_property->_getID());
 }

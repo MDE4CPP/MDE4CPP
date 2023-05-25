@@ -135,7 +135,7 @@ std::weak_ptr<uml::NamedElement> NonExecutableImpl::getBase_NamedElement() const
 // StructuralFeature Getter & Setter
 //**************************************
 //Get
-std::shared_ptr<Any> NonExecutableImpl::get(std::shared_ptr<uml::Property> _property) const
+std::shared_ptr<Any> NonExecutableImpl::get(const std::shared_ptr<uml::Property>& _property) const
 {
 	return this->get(_property->_getID());
 }
@@ -224,7 +224,7 @@ void NonExecutableImpl::add(unsigned long _uID, const std::shared_ptr<Any>& valu
 }
 
 //Unset
-void NonExecutableImpl::unset(std::shared_ptr<uml::Property> _property)
+void NonExecutableImpl::unset(const std::shared_ptr<uml::Property>& _property)
 {
 	this->unset(_property->_getID());
 }

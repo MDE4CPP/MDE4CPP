@@ -227,7 +227,7 @@ bool PrimitiveLiteralExpEvalImpl::internalEIsSet(int featureID) const
 	return LiteralExpEvalImpl::internalEIsSet(featureID);
 }
 
-bool PrimitiveLiteralExpEvalImpl::eSet(int featureID, std::shared_ptr<Any> newValue)
+bool PrimitiveLiteralExpEvalImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 {
 	switch(featureID)
 	{
@@ -239,7 +239,7 @@ bool PrimitiveLiteralExpEvalImpl::eSet(int featureID, std::shared_ptr<Any> newVa
 //*********************************
 // EOperation Invoke
 //*********************************
-std::shared_ptr<Any> PrimitiveLiteralExpEvalImpl::eInvoke(int operationID, std::shared_ptr<Bag<Any>> arguments)
+std::shared_ptr<Any> PrimitiveLiteralExpEvalImpl::eInvoke(int operationID, const std::shared_ptr<Bag<Any>>& arguments)
 {
 	std::shared_ptr<Any> result;
  

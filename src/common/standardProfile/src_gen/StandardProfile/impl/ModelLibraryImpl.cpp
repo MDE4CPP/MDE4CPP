@@ -135,7 +135,7 @@ std::weak_ptr<uml::Package> ModelLibraryImpl::getBase_Package() const
 // StructuralFeature Getter & Setter
 //**************************************
 //Get
-std::shared_ptr<Any> ModelLibraryImpl::get(std::shared_ptr<uml::Property> _property) const
+std::shared_ptr<Any> ModelLibraryImpl::get(const std::shared_ptr<uml::Property>& _property) const
 {
 	return this->get(_property->_getID());
 }
@@ -224,7 +224,7 @@ void ModelLibraryImpl::add(unsigned long _uID, const std::shared_ptr<Any>& value
 }
 
 //Unset
-void ModelLibraryImpl::unset(std::shared_ptr<uml::Property> _property)
+void ModelLibraryImpl::unset(const std::shared_ptr<uml::Property>& _property)
 {
 	this->unset(_property->_getID());
 }

@@ -111,7 +111,7 @@ void StandardInputChannelImpl::destroy()
 // StructuralFeature Getter & Setter
 //**************************************
 //Get
-std::shared_ptr<Any> StandardInputChannelImpl::get(std::shared_ptr<uml::Property> _property) const
+std::shared_ptr<Any> StandardInputChannelImpl::get(const std::shared_ptr<uml::Property>& _property) const
 {
 	return this->get(_property->_getID());
 }
@@ -171,7 +171,7 @@ void StandardInputChannelImpl::add(unsigned long _uID, const std::shared_ptr<Any
 }
 
 //Unset
-void StandardInputChannelImpl::unset(std::shared_ptr<uml::Property> _property)
+void StandardInputChannelImpl::unset(const std::shared_ptr<uml::Property>& _property)
 {
 	this->unset(_property->_getID());
 }

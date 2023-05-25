@@ -38,8 +38,8 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "ocl/Evaluations/EvaluationsFactory.hpp"
 #include "ecore/ecoreFactory.hpp"
+#include "ocl/Evaluations/EvaluationsFactory.hpp"
 #include "ocl/Expressions/ExpressionsFactory.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClassifier.hpp"
@@ -312,7 +312,7 @@ bool OperationCallExpEvalImpl::internalEIsSet(int featureID) const
 	return ModelPropertyCallExpEvalImpl::internalEIsSet(featureID);
 }
 
-bool OperationCallExpEvalImpl::eSet(int featureID, std::shared_ptr<Any> newValue)
+bool OperationCallExpEvalImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 {
 	switch(featureID)
 	{
@@ -383,7 +383,7 @@ bool OperationCallExpEvalImpl::eSet(int featureID, std::shared_ptr<Any> newValue
 //*********************************
 // EOperation Invoke
 //*********************************
-std::shared_ptr<Any> OperationCallExpEvalImpl::eInvoke(int operationID, std::shared_ptr<Bag<Any>> arguments)
+std::shared_ptr<Any> OperationCallExpEvalImpl::eInvoke(int operationID, const std::shared_ptr<Bag<Any>>& arguments)
 {
 	std::shared_ptr<Any> result;
  

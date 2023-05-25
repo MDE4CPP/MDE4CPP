@@ -1018,6 +1018,8 @@ void BasicInputOutputPackageImpl::initializePackageClasses()
 	foundationalModelLibrary_BasicInputOutput_TextInputChannel_fb_peekCharacter_errorStatus->setUpper(1);
 	foundationalModelLibrary_BasicInputOutput_TextInputChannel_fb_peekCharacter_errorStatus->setDirection(uml::ParameterDirectionKind::OUT);
 	
+	foundationalModelLibrary_BasicInputOutput_TextInputChannel_fb_peekCharacter->_setID(TEXTINPUTCHANNEL_FUNCTIONBEHAVIOR_FB_PEEKCHARACTER);
+	
 	
 
 	//fb_readBoolean
@@ -1036,6 +1038,8 @@ void BasicInputOutputPackageImpl::initializePackageClasses()
 	foundationalModelLibrary_BasicInputOutput_TextInputChannel_fb_readBoolean_errorStatus->setLower(0);
 	foundationalModelLibrary_BasicInputOutput_TextInputChannel_fb_readBoolean_errorStatus->setUpper(1);
 	foundationalModelLibrary_BasicInputOutput_TextInputChannel_fb_readBoolean_errorStatus->setDirection(uml::ParameterDirectionKind::OUT);
+	
+	foundationalModelLibrary_BasicInputOutput_TextInputChannel_fb_readBoolean->_setID(TEXTINPUTCHANNEL_FUNCTIONBEHAVIOR_FB_READBOOLEAN);
 	
 	
 
@@ -1056,6 +1060,8 @@ void BasicInputOutputPackageImpl::initializePackageClasses()
 	foundationalModelLibrary_BasicInputOutput_TextInputChannel_fb_readCharacter_errorStatus->setUpper(1);
 	foundationalModelLibrary_BasicInputOutput_TextInputChannel_fb_readCharacter_errorStatus->setDirection(uml::ParameterDirectionKind::OUT);
 	
+	foundationalModelLibrary_BasicInputOutput_TextInputChannel_fb_readCharacter->_setID(TEXTINPUTCHANNEL_FUNCTIONBEHAVIOR_FB_READCHARACTER);
+	
 	
 
 	//fb_readInteger
@@ -1075,6 +1081,8 @@ void BasicInputOutputPackageImpl::initializePackageClasses()
 	foundationalModelLibrary_BasicInputOutput_TextInputChannel_fb_readInteger_errorStatus->setUpper(1);
 	foundationalModelLibrary_BasicInputOutput_TextInputChannel_fb_readInteger_errorStatus->setDirection(uml::ParameterDirectionKind::OUT);
 	
+	foundationalModelLibrary_BasicInputOutput_TextInputChannel_fb_readInteger->_setID(TEXTINPUTCHANNEL_FUNCTIONBEHAVIOR_FB_READINTEGER);
+	
 	
 
 	//fb_readLine
@@ -1093,6 +1101,8 @@ void BasicInputOutputPackageImpl::initializePackageClasses()
 	foundationalModelLibrary_BasicInputOutput_TextInputChannel_fb_readLine_errorStatus->setLower(0);
 	foundationalModelLibrary_BasicInputOutput_TextInputChannel_fb_readLine_errorStatus->setUpper(1);
 	foundationalModelLibrary_BasicInputOutput_TextInputChannel_fb_readLine_errorStatus->setDirection(uml::ParameterDirectionKind::OUT);
+	
+	foundationalModelLibrary_BasicInputOutput_TextInputChannel_fb_readLine->_setID(TEXTINPUTCHANNEL_FUNCTIONBEHAVIOR_FB_READLINE);
 	
 	
 
@@ -1298,6 +1308,8 @@ void BasicInputOutputPackageImpl::initializePackageClasses()
 	foundationalModelLibrary_BasicInputOutput_TextOutputChannel_fb_writeBoolean_errorStatus->setUpper(1);
 	foundationalModelLibrary_BasicInputOutput_TextOutputChannel_fb_writeBoolean_errorStatus->setDirection(uml::ParameterDirectionKind::OUT);
 	
+	foundationalModelLibrary_BasicInputOutput_TextOutputChannel_fb_writeBoolean->_setID(TEXTOUTPUTCHANNEL_FUNCTIONBEHAVIOR_FB_WRITEBOOLEAN);
+	
 	
 
 	//fb_writeInteger
@@ -1316,6 +1328,8 @@ void BasicInputOutputPackageImpl::initializePackageClasses()
 	foundationalModelLibrary_BasicInputOutput_TextOutputChannel_fb_writeInteger_errorStatus->setLower(0);
 	foundationalModelLibrary_BasicInputOutput_TextOutputChannel_fb_writeInteger_errorStatus->setUpper(1);
 	foundationalModelLibrary_BasicInputOutput_TextOutputChannel_fb_writeInteger_errorStatus->setDirection(uml::ParameterDirectionKind::OUT);
+	
+	foundationalModelLibrary_BasicInputOutput_TextOutputChannel_fb_writeInteger->_setID(TEXTOUTPUTCHANNEL_FUNCTIONBEHAVIOR_FB_WRITEINTEGER);
 	
 	
 
@@ -1336,6 +1350,8 @@ void BasicInputOutputPackageImpl::initializePackageClasses()
 	foundationalModelLibrary_BasicInputOutput_TextOutputChannel_fb_writeLine_errorStatus->setUpper(1);
 	foundationalModelLibrary_BasicInputOutput_TextOutputChannel_fb_writeLine_errorStatus->setDirection(uml::ParameterDirectionKind::OUT);
 	
+	foundationalModelLibrary_BasicInputOutput_TextOutputChannel_fb_writeLine->_setID(TEXTOUTPUTCHANNEL_FUNCTIONBEHAVIOR_FB_WRITELINE);
+	
 	
 
 	//fb_writeNewLine
@@ -1347,6 +1363,8 @@ void BasicInputOutputPackageImpl::initializePackageClasses()
 	foundationalModelLibrary_BasicInputOutput_TextOutputChannel_fb_writeNewLine_errorStatus->setLower(0);
 	foundationalModelLibrary_BasicInputOutput_TextOutputChannel_fb_writeNewLine_errorStatus->setUpper(1);
 	foundationalModelLibrary_BasicInputOutput_TextOutputChannel_fb_writeNewLine_errorStatus->setDirection(uml::ParameterDirectionKind::OUT);
+	
+	foundationalModelLibrary_BasicInputOutput_TextOutputChannel_fb_writeNewLine->_setID(TEXTOUTPUTCHANNEL_FUNCTIONBEHAVIOR_FB_WRITENEWLINE);
 	
 	
 
@@ -1366,6 +1384,8 @@ void BasicInputOutputPackageImpl::initializePackageClasses()
 	foundationalModelLibrary_BasicInputOutput_TextOutputChannel_fb_writeString_errorStatus->setLower(0);
 	foundationalModelLibrary_BasicInputOutput_TextOutputChannel_fb_writeString_errorStatus->setUpper(1);
 	foundationalModelLibrary_BasicInputOutput_TextOutputChannel_fb_writeString_errorStatus->setDirection(uml::ParameterDirectionKind::OUT);
+	
+	foundationalModelLibrary_BasicInputOutput_TextOutputChannel_fb_writeString->_setID(TEXTOUTPUTCHANNEL_FUNCTIONBEHAVIOR_FB_WRITESTRING);
 	
 	
 

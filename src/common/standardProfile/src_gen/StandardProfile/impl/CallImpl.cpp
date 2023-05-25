@@ -135,7 +135,7 @@ std::weak_ptr<uml::Usage> CallImpl::getBase_Usage() const
 // StructuralFeature Getter & Setter
 //**************************************
 //Get
-std::shared_ptr<Any> CallImpl::get(std::shared_ptr<uml::Property> _property) const
+std::shared_ptr<Any> CallImpl::get(const std::shared_ptr<uml::Property>& _property) const
 {
 	return this->get(_property->_getID());
 }
@@ -224,7 +224,7 @@ void CallImpl::add(unsigned long _uID, const std::shared_ptr<Any>& value, int in
 }
 
 //Unset
-void CallImpl::unset(std::shared_ptr<uml::Property> _property)
+void CallImpl::unset(const std::shared_ptr<uml::Property>& _property)
 {
 	this->unset(_property->_getID());
 }

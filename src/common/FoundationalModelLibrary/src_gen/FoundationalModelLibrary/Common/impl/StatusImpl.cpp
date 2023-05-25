@@ -130,7 +130,7 @@ std::string StatusImpl::getDescription() const
 // StructuralFeature Getter & Setter
 //**************************************
 //Get
-std::shared_ptr<Any> StatusImpl::get(std::shared_ptr<uml::Property> _property) const
+std::shared_ptr<Any> StatusImpl::get(const std::shared_ptr<uml::Property>& _property) const
 {
 	return this->get(_property->_getID());
 }
@@ -234,7 +234,7 @@ void StatusImpl::add(unsigned long _uID, const std::shared_ptr<Any>& value, int 
 }
 
 //Unset
-void StatusImpl::unset(std::shared_ptr<uml::Property> _property)
+void StatusImpl::unset(const std::shared_ptr<uml::Property>& _property)
 {
 	this->unset(_property->_getID());
 }

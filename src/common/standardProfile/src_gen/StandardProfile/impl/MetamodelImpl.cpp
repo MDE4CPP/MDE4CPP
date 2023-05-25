@@ -135,7 +135,7 @@ std::weak_ptr<uml::Model> MetamodelImpl::getBase_Model() const
 // StructuralFeature Getter & Setter
 //**************************************
 //Get
-std::shared_ptr<Any> MetamodelImpl::get(std::shared_ptr<uml::Property> _property) const
+std::shared_ptr<Any> MetamodelImpl::get(const std::shared_ptr<uml::Property>& _property) const
 {
 	return this->get(_property->_getID());
 }
@@ -224,7 +224,7 @@ void MetamodelImpl::add(unsigned long _uID, const std::shared_ptr<Any>& value, i
 }
 
 //Unset
-void MetamodelImpl::unset(std::shared_ptr<uml::Property> _property)
+void MetamodelImpl::unset(const std::shared_ptr<uml::Property>& _property)
 {
 	this->unset(_property->_getID());
 }

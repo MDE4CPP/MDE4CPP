@@ -135,7 +135,7 @@ std::shared_ptr<uml::Element> DoNotGenerateImpl::getBase_Element() const
 // StructuralFeature Getter & Setter
 //**************************************
 //Get
-std::shared_ptr<Any> DoNotGenerateImpl::get(std::shared_ptr<uml::Property> _property) const
+std::shared_ptr<Any> DoNotGenerateImpl::get(const std::shared_ptr<uml::Property>& _property) const
 {
 	return this->get(_property->_getID());
 }
@@ -224,7 +224,7 @@ void DoNotGenerateImpl::add(unsigned long _uID, const std::shared_ptr<Any>& valu
 }
 
 //Unset
-void DoNotGenerateImpl::unset(std::shared_ptr<uml::Property> _property)
+void DoNotGenerateImpl::unset(const std::shared_ptr<uml::Property>& _property)
 {
 	this->unset(_property->_getID());
 }

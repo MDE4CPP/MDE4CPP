@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:description="http://www.eclipse.org/sirius/description/1.1.0" xmlns:description_1="http://www.eclipse.org/sirius/diagram/description/1.1.0" xmlns:diagram="http://www.eclipse.org/sirius/diagram/1.1.0" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:notation="http://www.eclipse.org/gmf/runtime/1.0.2/notation" xmlns:style="http://www.eclipse.org/sirius/diagram/description/style/1.1.0" xmlns:uml="http://www.eclipse.org/uml2/5.0.0/UML" xmlns:viewpoint="http://www.eclipse.org/sirius/1.1.0" xsi:schemaLocation="http://www.eclipse.org/sirius/description/1.1.0 http://www.eclipse.org/sirius/1.1.0#//description http://www.eclipse.org/sirius/diagram/description/1.1.0 http://www.eclipse.org/sirius/diagram/1.1.0#//description http://www.eclipse.org/sirius/diagram/description/style/1.1.0 http://www.eclipse.org/sirius/diagram/1.1.0#//description/style">
-  <viewpoint:DAnalysis uid="_N4vjYKH6EeeTK-b87Aiybw" selectedViews="_OInLYKH6EeeTK-b87Aiybw _OI77gKH6EeeTK-b87Aiybw _OJCCIKH6EeeTK-b87Aiybw _OJR5wKH6EeeTK-b87Aiybw _OJYAYKH6EeeTK-b87Aiybw _49EVUGziEemZetaN1L-LFw" version="14.1.0.201810161215">
+<xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:UML4CPPProfile="http://www.tu-ilmenau.de/sse/UML4CPPProfile" xmlns:description="http://www.eclipse.org/sirius/description/1.1.0" xmlns:description_1="http://www.eclipse.org/sirius/diagram/description/1.1.0" xmlns:diagram="http://www.eclipse.org/sirius/diagram/1.1.0" xmlns:notation="http://www.eclipse.org/gmf/runtime/1.0.3/notation" xmlns:style="http://www.eclipse.org/sirius/diagram/description/style/1.1.0" xmlns:uml="http://www.eclipse.org/uml2/5.0.0/UML" xmlns:viewpoint="http://www.eclipse.org/sirius/1.1.0" xsi:schemaLocation="http://www.tu-ilmenau.de/sse/UML4CPPProfile ../../../../common/UML4CPPProfile/model/UML4CPPProfile.uml#_v75nIfp7EeuavpF89IQaUg http://www.eclipse.org/sirius/description/1.1.0 http://www.eclipse.org/sirius/1.1.0#//description http://www.eclipse.org/sirius/diagram/description/1.1.0 http://www.eclipse.org/sirius/diagram/1.1.0#//description http://www.eclipse.org/sirius/diagram/description/style/1.1.0 http://www.eclipse.org/sirius/diagram/1.1.0#//description/style">
+  <viewpoint:DAnalysis uid="_N4vjYKH6EeeTK-b87Aiybw" selectedViews="_OInLYKH6EeeTK-b87Aiybw _OI77gKH6EeeTK-b87Aiybw _OJCCIKH6EeeTK-b87Aiybw _OJR5wKH6EeeTK-b87Aiybw _OJYAYKH6EeeTK-b87Aiybw _49EVUGziEemZetaN1L-LFw" version="14.5.1.202106111100">
     <semanticResources>CalcModel.uml</semanticResources>
     <semanticResources>pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml</semanticResources>
     <semanticResources>pathmap://UML_PROFILES/UML2.profile.uml</semanticResources>
@@ -21,11 +21,11 @@
     </ownedViews>
     <ownedViews xmi:type="viewpoint:DView" uid="_OJCCIKH6EeeTK-b87Aiybw">
       <viewpoint xmi:type="description:Viewpoint" href="platform:/plugin/org.obeonetwork.dsl.uml2.design/description/uml2.odesign#//@ownedViewpoints[name='Design']"/>
-      <ownedRepresentationDescriptors xmi:type="viewpoint:DRepresentationDescriptor" uid="_QxM-QKH6EeeTK-b87Aiybw" name="CheckIfPrime Activity Diagram" repPath="#_QxPagKH6EeeTK-b87Aiybw">
+      <ownedRepresentationDescriptors xmi:type="viewpoint:DRepresentationDescriptor" uid="_QxM-QKH6EeeTK-b87Aiybw" name="CheckIfPrime Activity Diagram" repPath="#_QxPagKH6EeeTK-b87Aiybw" changeId="34e44be0-2811-484b-848b-b7244c104dfa">
         <description xmi:type="description_1:DiagramDescription" href="platform:/plugin/org.obeonetwork.dsl.uml2.design/description/uml2.odesign#//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Activity%20Diagram']"/>
         <target xmi:type="uml:Activity" href="CalcModel.uml#_196CMIxoEeazCdUXohZ79Q"/>
       </ownedRepresentationDescriptors>
-      <ownedRepresentationDescriptors xmi:type="viewpoint:DRepresentationDescriptor" uid="_f_N_cVGWEeqeyKUsnKD-hQ" name="CalcModel Class Diagram" repPath="#_f_DnYFGWEeqeyKUsnKD-hQ">
+      <ownedRepresentationDescriptors xmi:type="viewpoint:DRepresentationDescriptor" uid="_f_N_cVGWEeqeyKUsnKD-hQ" name="CalcModel Class Diagram" repPath="#_f_DnYFGWEeqeyKUsnKD-hQ" changeId="0764e95b-c0f0-45f9-9506-e5a115badebb">
         <description xmi:type="description_1:DiagramDescription" href="platform:/plugin/org.obeonetwork.dsl.uml2.design/description/uml2.odesign#//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Class%20Diagram']"/>
         <target xmi:type="uml:Model" href="CalcModel.uml#_lTky4IxoEeazCdUXohZ79Q"/>
       </ownedRepresentationDescriptors>
@@ -38,13 +38,13 @@
     </ownedViews>
     <ownedViews xmi:type="viewpoint:DView" uid="_49EVUGziEemZetaN1L-LFw">
       <viewpoint xmi:type="description:Viewpoint" href="platform:/plugin/org.obeonetwork.dsl.uml2.core.design/description/uml2core.odesign#//@ownedViewpoints[name='Reused']"/>
-      <ownedRepresentationDescriptors xmi:type="viewpoint:DRepresentationDescriptor" uid="_BWHD4GzjEemZetaN1L-LFw" name="CheckIfPrime Activity Diagram" repPath="#_BUMYUGzjEemZetaN1L-LFw">
+      <ownedRepresentationDescriptors xmi:type="viewpoint:DRepresentationDescriptor" uid="_BWHD4GzjEemZetaN1L-LFw" name="CheckIfPrime Activity Diagram" repPath="#_BUMYUGzjEemZetaN1L-LFw" changeId="2a2e0fcc-01e0-4cda-848c-489812e33423">
         <description xmi:type="description_1:DiagramDescription" href="platform:/plugin/org.obeonetwork.dsl.uml2.core.design/description/uml2core.odesign#//@ownedViewpoints[name='Reused']/@ownedRepresentations[name='Activity%20Diagram']"/>
         <target xmi:type="uml:Activity" href="CalcModel.uml#_196CMIxoEeazCdUXohZ79Q"/>
       </ownedRepresentationDescriptors>
     </ownedViews>
   </viewpoint:DAnalysis>
-  <diagram:DSemanticDiagram uid="_QxPagKH6EeeTK-b87Aiybw" name="CheckIfPrime Activity Diagram">
+  <diagram:DSemanticDiagram uid="_QxPagKH6EeeTK-b87Aiybw">
     <ownedAnnotationEntries xmi:type="description:AnnotationEntry" uid="_QxQBkKH6EeeTK-b87Aiybw" source="DANNOTATION_CUSTOMIZATION_KEY">
       <data xmi:type="diagram:ComputedStyleDescriptionRegistry" uid="_QxQBkaH6EeeTK-b87Aiybw"/>
     </ownedAnnotationEntries>
@@ -1034,7 +1034,7 @@
     <activatedLayers xmi:type="description_1:Layer" href="platform:/plugin/org.obeonetwork.dsl.uml2.design/description/uml2.odesign#//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Activity%20Diagram']/@defaultLayer"/>
     <target xmi:type="uml:Activity" href="CalcModel.uml#_196CMIxoEeazCdUXohZ79Q"/>
   </diagram:DSemanticDiagram>
-  <diagram:DSemanticDiagram uid="_BUMYUGzjEemZetaN1L-LFw" name="CheckIfPrime Activity Diagram">
+  <diagram:DSemanticDiagram uid="_BUMYUGzjEemZetaN1L-LFw">
     <ownedAnnotationEntries xmi:type="description:AnnotationEntry" uid="_BWCLZWzjEemZetaN1L-LFw" source="DANNOTATION_CUSTOMIZATION_KEY">
       <data xmi:type="diagram:ComputedStyleDescriptionRegistry" uid="_BWCLZmzjEemZetaN1L-LFw"/>
     </ownedAnnotationEntries>
@@ -1559,7 +1559,8 @@
     <ownedDiagramElements xmi:type="diagram:DNodeContainer" uid="_BUbo4GzjEemZetaN1L-LFw" name="CheckIfPrime">
       <target xmi:type="uml:Activity" href="CalcModel.uml#_196CMIxoEeazCdUXohZ79Q"/>
       <semanticElements xmi:type="uml:Activity" href="CalcModel.uml#_196CMIxoEeazCdUXohZ79Q"/>
-      <semanticElements xmi:type="ecore:EAnnotation" href="CalcModel.uml#_rF3qgAGwEeuJAuxe-SDWBA"/>
+      <semanticElements xmi:type="uml:Stereotype" href="../../../../common/UML4CPPProfile/model/UML4CPPProfile.uml#_HhOckN_3EeuA4LhN5TVPjw"/>
+      <semanticElements xmi:type="UML4CPPProfile:MainBehavior" href="CalcModel.uml#_uw9gUOMJEeur7cjoMTUC9A"/>
       <ownedStyle xmi:type="diagram:FlatContainerStyle" uid="_BVcVgGzjEemZetaN1L-LFw" labelSize="9" showIcon="false" borderSize="1" borderSizeComputationExpression="1" backgroundStyle="Liquid" foregroundColor="255,255,255">
         <description xmi:type="style:FlatContainerStyleDescription" href="platform:/plugin/org.obeonetwork.dsl.uml2.core.design/description/uml2core.odesign#//@ownedViewpoints[name='Reused']/@ownedRepresentations[name='Activity%20Diagram']/@defaultLayer/@containerMappings[name='AD_Activity']/@style"/>
       </ownedStyle>
@@ -1864,7 +1865,7 @@
       </ownedStyle>
       <actualMapping xmi:type="description_1:EdgeMapping" href="platform:/plugin/org.obeonetwork.dsl.uml2.core.design/description/uml2core.odesign#//@ownedViewpoints[name='Reused']/@ownedRepresentations[name='Activity%20Diagram']/@defaultLayer/@edgeMappings[name='AD_ControlFlow']"/>
     </ownedDiagramElements>
-    <ownedDiagramElements xmi:type="diagram:DEdge" uid="_BV7dtGzjEemZetaN1L-LFw" sourceNode="_BVxssGzjEemZetaN1L-LFw" targetNode="_BVupYWzjEemZetaN1L-LFw">
+    <ownedDiagramElements xmi:type="diagram:DEdge" uid="_BV7dtGzjEemZetaN1L-LFw" name="[true] " sourceNode="_BVxssGzjEemZetaN1L-LFw" targetNode="_BVupYWzjEemZetaN1L-LFw">
       <target xmi:type="uml:ControlFlow" href="CalcModel.uml#_ZZjacIx0EeazCdUXohZ79Q"/>
       <semanticElements xmi:type="uml:ControlFlow" href="CalcModel.uml#_ZZjacIx0EeazCdUXohZ79Q"/>
       <semanticElements xmi:type="uml:LiteralBoolean" href="CalcModel.uml#_ZZjacYx0EeazCdUXohZ79Q"/>
@@ -1884,7 +1885,7 @@
       </ownedStyle>
       <actualMapping xmi:type="description_1:EdgeMapping" href="platform:/plugin/org.obeonetwork.dsl.uml2.core.design/description/uml2core.odesign#//@ownedViewpoints[name='Reused']/@ownedRepresentations[name='Activity%20Diagram']/@defaultLayer/@edgeMappings[name='AD_ControlFlow']"/>
     </ownedDiagramElements>
-    <ownedDiagramElements xmi:type="diagram:DEdge" uid="_BV9S4GzjEemZetaN1L-LFw" sourceNode="_BVxssGzjEemZetaN1L-LFw" targetNode="_BVgm8GzjEemZetaN1L-LFw">
+    <ownedDiagramElements xmi:type="diagram:DEdge" uid="_BV9S4GzjEemZetaN1L-LFw" name="[false] " sourceNode="_BVxssGzjEemZetaN1L-LFw" targetNode="_BVgm8GzjEemZetaN1L-LFw">
       <target xmi:type="uml:ControlFlow" href="CalcModel.uml#_xEha8Ix0EeazCdUXohZ79Q"/>
       <semanticElements xmi:type="uml:ControlFlow" href="CalcModel.uml#_xEha8Ix0EeazCdUXohZ79Q"/>
       <semanticElements xmi:type="uml:LiteralBoolean" href="CalcModel.uml#_xEiCAIx0EeazCdUXohZ79Q"/>
@@ -1894,7 +1895,7 @@
       </ownedStyle>
       <actualMapping xmi:type="description_1:EdgeMapping" href="platform:/plugin/org.obeonetwork.dsl.uml2.core.design/description/uml2core.odesign#//@ownedViewpoints[name='Reused']/@ownedRepresentations[name='Activity%20Diagram']/@defaultLayer/@edgeMappings[name='AD_ControlFlow']"/>
     </ownedDiagramElements>
-    <ownedDiagramElements xmi:type="diagram:DEdge" uid="_BV958mzjEemZetaN1L-LFw" sourceNode="_BV2lMmzjEemZetaN1L-LFw" targetNode="_BVvQcmzjEemZetaN1L-LFw">
+    <ownedDiagramElements xmi:type="diagram:DEdge" uid="_BV958mzjEemZetaN1L-LFw" name="[false] " sourceNode="_BV2lMmzjEemZetaN1L-LFw" targetNode="_BVvQcmzjEemZetaN1L-LFw">
       <target xmi:type="uml:ControlFlow" href="CalcModel.uml#_P49YgIx1EeazCdUXohZ79Q"/>
       <semanticElements xmi:type="uml:ControlFlow" href="CalcModel.uml#_P49YgIx1EeazCdUXohZ79Q"/>
       <semanticElements xmi:type="uml:LiteralBoolean" href="CalcModel.uml#_P49YgYx1EeazCdUXohZ79Q"/>
@@ -1924,7 +1925,7 @@
       </ownedStyle>
       <actualMapping xmi:type="description_1:EdgeMapping" href="platform:/plugin/org.obeonetwork.dsl.uml2.core.design/description/uml2core.odesign#//@ownedViewpoints[name='Reused']/@ownedRepresentations[name='Activity%20Diagram']/@defaultLayer/@edgeMappings[name='AD_ControlFlow']"/>
     </ownedDiagramElements>
-    <ownedDiagramElements xmi:type="diagram:DEdge" uid="_BV_IEmzjEemZetaN1L-LFw" sourceNode="_BV3zUmzjEemZetaN1L-LFw" targetNode="_BV0I8GzjEemZetaN1L-LFw">
+    <ownedDiagramElements xmi:type="diagram:DEdge" uid="_BV_IEmzjEemZetaN1L-LFw" name="[true] " sourceNode="_BV3zUmzjEemZetaN1L-LFw" targetNode="_BV0I8GzjEemZetaN1L-LFw">
       <target xmi:type="uml:ControlFlow" href="CalcModel.uml#_VwIh4I7TEeajycJcSh2X6Q"/>
       <semanticElements xmi:type="uml:ControlFlow" href="CalcModel.uml#_VwIh4I7TEeajycJcSh2X6Q"/>
       <semanticElements xmi:type="uml:LiteralBoolean" href="CalcModel.uml#_t1mtEI7TEeajycJcSh2X6Q"/>
@@ -1934,7 +1935,7 @@
       </ownedStyle>
       <actualMapping xmi:type="description_1:EdgeMapping" href="platform:/plugin/org.obeonetwork.dsl.uml2.core.design/description/uml2core.odesign#//@ownedViewpoints[name='Reused']/@ownedRepresentations[name='Activity%20Diagram']/@defaultLayer/@edgeMappings[name='AD_ControlFlow']"/>
     </ownedDiagramElements>
-    <ownedDiagramElements xmi:type="diagram:DEdge" uid="_BV_IF2zjEemZetaN1L-LFw" sourceNode="_BV3zUmzjEemZetaN1L-LFw" targetNode="_BVuCUGzjEemZetaN1L-LFw">
+    <ownedDiagramElements xmi:type="diagram:DEdge" uid="_BV_IF2zjEemZetaN1L-LFw" name="[false] " sourceNode="_BV3zUmzjEemZetaN1L-LFw" targetNode="_BVuCUGzjEemZetaN1L-LFw">
       <target xmi:type="uml:ControlFlow" href="CalcModel.uml#_WsgDgI7TEeajycJcSh2X6Q"/>
       <semanticElements xmi:type="uml:ControlFlow" href="CalcModel.uml#_WsgDgI7TEeajycJcSh2X6Q"/>
       <semanticElements xmi:type="uml:LiteralBoolean" href="CalcModel.uml#_rhCpcI7TEeajycJcSh2X6Q"/>
@@ -1954,7 +1955,7 @@
       </ownedStyle>
       <actualMapping xmi:type="description_1:EdgeMapping" href="platform:/plugin/org.obeonetwork.dsl.uml2.core.design/description/uml2core.odesign#//@ownedViewpoints[name='Reused']/@ownedRepresentations[name='Activity%20Diagram']/@defaultLayer/@edgeMappings[name='AD_ControlFlow']"/>
     </ownedDiagramElements>
-    <ownedDiagramElements xmi:type="diagram:DEdge" uid="_BWAWMGzjEemZetaN1L-LFw" sourceNode="_BV2lMmzjEemZetaN1L-LFw" targetNode="_BV0I8GzjEemZetaN1L-LFw">
+    <ownedDiagramElements xmi:type="diagram:DEdge" uid="_BWAWMGzjEemZetaN1L-LFw" name="[true] " sourceNode="_BV2lMmzjEemZetaN1L-LFw" targetNode="_BV0I8GzjEemZetaN1L-LFw">
       <target xmi:type="uml:ControlFlow" href="CalcModel.uml#_sxrVcI7UEeajycJcSh2X6Q"/>
       <semanticElements xmi:type="uml:ControlFlow" href="CalcModel.uml#_sxrVcI7UEeajycJcSh2X6Q"/>
       <semanticElements xmi:type="uml:LiteralBoolean" href="CalcModel.uml#_3PLPEI7UEeajycJcSh2X6Q"/>
@@ -2016,7 +2017,7 @@
     <activatedLayers xmi:type="description_1:Layer" href="platform:/plugin/org.obeonetwork.dsl.uml2.core.design/description/uml2core.odesign#//@ownedViewpoints[name='Reused']/@ownedRepresentations[name='Activity%20Diagram']/@defaultLayer"/>
     <target xmi:type="uml:Activity" href="CalcModel.uml#_196CMIxoEeazCdUXohZ79Q"/>
   </diagram:DSemanticDiagram>
-  <diagram:DSemanticDiagram uid="_f_DnYFGWEeqeyKUsnKD-hQ" name="CalcModel Class Diagram">
+  <diagram:DSemanticDiagram uid="_f_DnYFGWEeqeyKUsnKD-hQ">
     <ownedAnnotationEntries xmi:type="description:AnnotationEntry" uid="_f_NYYFGWEeqeyKUsnKD-hQ" source="DANNOTATION_CUSTOMIZATION_KEY">
       <data xmi:type="diagram:ComputedStyleDescriptionRegistry" uid="_f_NYYVGWEeqeyKUsnKD-hQ"/>
     </ownedAnnotationEntries>
