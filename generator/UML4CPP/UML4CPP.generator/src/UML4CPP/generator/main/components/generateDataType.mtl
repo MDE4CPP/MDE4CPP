@@ -84,7 +84,7 @@ virtual void add(const std::shared_ptr<uml::Property>& _property, const std::sha
 virtual void add(std::string _qualifiedName, const std::shared_ptr<Any>& value, int insertAt = -1) [abstractSuffix(impl)/];
 virtual void add(unsigned long _uID, const std::shared_ptr<Any>& value, int insertAt = -1) [abstractSuffix(impl)/];
 //Unset
-virtual void unset(std::shared_ptr<uml::Property> _property) [abstractSuffix(impl)/];
+virtual void unset(const std::shared_ptr<uml::Property>& _property) [abstractSuffix(impl)/];
 virtual void unset(std::string _qualifiedName) [abstractSuffix(impl)/];
 virtual void unset(unsigned long _uID) [abstractSuffix(impl)/];
 //Remove
@@ -457,14 +457,14 @@ void [aDataType.name.toUpperFirst().concat('Impl')/]::add(unsigned long _uID, co
 
 [/if]
 [for (general : Classifier | aDataType.general->reject(oclIsUndefined() and name.oclIsUndefined()))]
-	//Call set() for base class [general.name/]
+	//Call add() for base class [general.name/]
 	[general.generateNamespaceName(true)/]Impl::add(_uID, value, insertAt);
 [/for]
 }
 [/template]
 
 [template private generateUnSetImplementation(aDataType : DataType)]
-void [aDataType.name.toUpperFirst().concat('Impl')/]::unset(std::shared_ptr<uml::Property> _property)
+void [aDataType.name.toUpperFirst().concat('Impl')/]::unset(const std::shared_ptr<uml::Property>& _property)
 {
 	this->unset(_property->_getID());
 }
@@ -582,7 +582,7 @@ void [aDataType.name.toUpperFirst().concat('Impl')/]::remove(unsigned long _uID,
 
 [/if]
 [for (general : Classifier | aDataType.general->reject(oclIsUndefined() and name.oclIsUndefined()))]
-	//Call set() for base class [general.name/]
+	//Call remove() for base class [general.name/]
 	[general.generateNamespaceName(true)/]Impl::remove(_uID, value);
 [/for]
 }
