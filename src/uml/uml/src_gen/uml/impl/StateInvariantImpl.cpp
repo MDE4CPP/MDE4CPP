@@ -164,7 +164,7 @@ std::shared_ptr<uml::Constraint> StateInvariantImpl::getInvariant() const
 {
     return m_invariant;
 }
-void StateInvariantImpl::setInvariant(std::shared_ptr<uml::Constraint> _invariant)
+void StateInvariantImpl::setInvariant(const std::shared_ptr<uml::Constraint>& _invariant)
 {
     m_invariant = _invariant;
 	

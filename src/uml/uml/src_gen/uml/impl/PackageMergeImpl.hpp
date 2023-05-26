@@ -65,7 +65,7 @@ namespace uml
 			<p>From package UML::Packages.</p>
 			*/
 			
-			virtual void setMergedPackage(std::shared_ptr<uml::Package>) ;
+			virtual void setMergedPackage(const std::shared_ptr<uml::Package>&) ;
 			/*!
 			References the Package that is being extended with the contents of the merged package of the PackageMerge.
 			<p>From package UML::Packages.</p>

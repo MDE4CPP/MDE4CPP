@@ -560,7 +560,7 @@ std::shared_ptr<ecore::EAttribute> EClassImpl::getEIDAttribute() const
 {
     return m_eIDAttribute;
 }
-void EClassImpl::setEIDAttribute(std::shared_ptr<ecore::EAttribute> _eIDAttribute)
+void EClassImpl::setEIDAttribute(const std::shared_ptr<ecore::EAttribute>& _eIDAttribute)
 {
     m_eIDAttribute = _eIDAttribute;
 	

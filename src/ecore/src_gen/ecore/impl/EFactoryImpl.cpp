@@ -553,7 +553,7 @@ std::shared_ptr<ecore::EPackage> EFactoryImpl::getEPackage() const
 {
     return m_ePackage;
 }
-void EFactoryImpl::setEPackage(std::shared_ptr<ecore::EPackage> _ePackage)
+void EFactoryImpl::setEPackage(const std::shared_ptr<ecore::EPackage>& _ePackage)
 {
     m_ePackage = _ePackage;
 	

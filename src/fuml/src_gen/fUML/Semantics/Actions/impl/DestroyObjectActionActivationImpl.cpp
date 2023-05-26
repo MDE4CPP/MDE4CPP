@@ -273,7 +273,7 @@ std::shared_ptr<uml::DestroyObjectAction> DestroyObjectActionActivationImpl::get
 {
     return m_destroyObjectAction;
 }
-void DestroyObjectActionActivationImpl::setDestroyObjectAction(std::shared_ptr<uml::DestroyObjectAction> _destroyObjectAction)
+void DestroyObjectActionActivationImpl::setDestroyObjectAction(const std::shared_ptr<uml::DestroyObjectAction>& _destroyObjectAction)
 {
     m_destroyObjectAction = _destroyObjectAction;
 	//additional setter call for redefined reference ActionActivation::action

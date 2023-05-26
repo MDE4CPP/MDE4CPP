@@ -180,7 +180,7 @@ std::shared_ptr<uml::ValueSpecification> JoinNodeImpl::getJoinSpec() const
 {
     return m_joinSpec;
 }
-void JoinNodeImpl::setJoinSpec(std::shared_ptr<uml::ValueSpecification> _joinSpec)
+void JoinNodeImpl::setJoinSpec(const std::shared_ptr<uml::ValueSpecification>& _joinSpec)
 {
     m_joinSpec = _joinSpec;
 	

@@ -77,7 +77,7 @@ namespace uml
 			<p>From package UML::Classification.</p>
 			*/
 			
-			virtual void setGeneral(std::shared_ptr<uml::Classifier>) ;
+			virtual void setGeneral(const std::shared_ptr<uml::Classifier>&) ;
 			/*!
 			Represents a set of instances of Generalization.  A Generalization may appear in many GeneralizationSets.
 			<p>From package UML::Classification.</p>

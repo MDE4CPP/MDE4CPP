@@ -214,7 +214,7 @@ std::shared_ptr<ocl::Expressions::OclExpression> CallExpImpl::getSource() const
 {
     return m_source;
 }
-void CallExpImpl::setSource(std::shared_ptr<ocl::Expressions::OclExpression> _source)
+void CallExpImpl::setSource(const std::shared_ptr<ocl::Expressions::OclExpression>& _source)
 {
     m_source = _source;
 	

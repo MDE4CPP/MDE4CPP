@@ -149,7 +149,7 @@ std::shared_ptr<uml::TemplateParameter> ParameterableElementImpl::getTemplatePar
 {
     return m_templateParameter;
 }
-void ParameterableElementImpl::setTemplateParameter(std::shared_ptr<uml::TemplateParameter> _templateParameter)
+void ParameterableElementImpl::setTemplateParameter(const std::shared_ptr<uml::TemplateParameter>& _templateParameter)
 {
     m_templateParameter = _templateParameter;
 	

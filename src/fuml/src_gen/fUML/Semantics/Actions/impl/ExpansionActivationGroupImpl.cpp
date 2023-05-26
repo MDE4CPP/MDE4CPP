@@ -257,7 +257,7 @@ std::shared_ptr<fUML::Semantics::Actions::ExpansionRegionActivation> ExpansionAc
 {
     return m_regionActivation;
 }
-void ExpansionActivationGroupImpl::setRegionActivation(std::shared_ptr<fUML::Semantics::Actions::ExpansionRegionActivation> _regionActivation)
+void ExpansionActivationGroupImpl::setRegionActivation(const std::shared_ptr<fUML::Semantics::Actions::ExpansionRegionActivation>& _regionActivation)
 {
     m_regionActivation = _regionActivation;
 	

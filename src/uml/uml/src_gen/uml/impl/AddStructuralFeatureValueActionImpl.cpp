@@ -184,7 +184,7 @@ std::shared_ptr<uml::InputPin> AddStructuralFeatureValueActionImpl::getInsertAt(
 {
     return m_insertAt;
 }
-void AddStructuralFeatureValueActionImpl::setInsertAt(std::shared_ptr<uml::InputPin> _insertAt)
+void AddStructuralFeatureValueActionImpl::setInsertAt(const std::shared_ptr<uml::InputPin>& _insertAt)
 {
     m_insertAt = _insertAt;
 	

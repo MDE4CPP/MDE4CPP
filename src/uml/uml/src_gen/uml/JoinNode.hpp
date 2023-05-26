@@ -116,7 +116,7 @@ namespace uml
 			<p>From package UML::Activities.</p>
 			*/
 			
-			virtual void setJoinSpec(std::shared_ptr<uml::ValueSpecification>) = 0;
+			virtual void setJoinSpec(const std::shared_ptr<uml::ValueSpecification>&) = 0;
 
 			//*********************************
 			// Union Reference Getters

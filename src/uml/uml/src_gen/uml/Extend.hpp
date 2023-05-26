@@ -109,7 +109,7 @@ namespace uml
 			<p>From package UML::UseCases.</p>
 			*/
 			
-			virtual void setCondition(std::shared_ptr<uml::Constraint>) = 0;
+			virtual void setCondition(const std::shared_ptr<uml::Constraint>&) = 0;
 			/*!
 			The UseCase that is being extended.
 			<p>From package UML::UseCases.</p>
@@ -121,7 +121,7 @@ namespace uml
 			<p>From package UML::UseCases.</p>
 			*/
 			
-			virtual void setExtendedCase(std::shared_ptr<uml::UseCase>) = 0;
+			virtual void setExtendedCase(const std::shared_ptr<uml::UseCase>&) = 0;
 			/*!
 			The UseCase that represents the extension and owns the Extend relationship.
 			<p>From package UML::UseCases.</p>

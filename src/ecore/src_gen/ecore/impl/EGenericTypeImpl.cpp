@@ -159,7 +159,7 @@ std::shared_ptr<ecore::EClassifier> EGenericTypeImpl::getEClassifier() const
 {
     return m_eClassifier;
 }
-void EGenericTypeImpl::setEClassifier(std::shared_ptr<ecore::EClassifier> _eClassifier)
+void EGenericTypeImpl::setEClassifier(const std::shared_ptr<ecore::EClassifier>& _eClassifier)
 {
     m_eClassifier = _eClassifier;
 	
@@ -170,7 +170,7 @@ std::shared_ptr<ecore::EGenericType> EGenericTypeImpl::getELowerBound() const
 {
     return m_eLowerBound;
 }
-void EGenericTypeImpl::setELowerBound(std::shared_ptr<ecore::EGenericType> _eLowerBound)
+void EGenericTypeImpl::setELowerBound(const std::shared_ptr<ecore::EGenericType>& _eLowerBound)
 {
     m_eLowerBound = _eLowerBound;
 	
@@ -181,7 +181,7 @@ std::shared_ptr<ecore::EClassifier> EGenericTypeImpl::getERawType() const
 {
     return m_eRawType;
 }
-void EGenericTypeImpl::setERawType(std::shared_ptr<ecore::EClassifier> _eRawType)
+void EGenericTypeImpl::setERawType(const std::shared_ptr<ecore::EClassifier>& _eRawType)
 {
     m_eRawType = _eRawType;
 	
@@ -204,7 +204,7 @@ std::shared_ptr<ecore::ETypeParameter> EGenericTypeImpl::getETypeParameter() con
 {
     return m_eTypeParameter;
 }
-void EGenericTypeImpl::setETypeParameter(std::shared_ptr<ecore::ETypeParameter> _eTypeParameter)
+void EGenericTypeImpl::setETypeParameter(const std::shared_ptr<ecore::ETypeParameter>& _eTypeParameter)
 {
     m_eTypeParameter = _eTypeParameter;
 	
@@ -215,7 +215,7 @@ std::shared_ptr<ecore::EGenericType> EGenericTypeImpl::getEUpperBound() const
 {
     return m_eUpperBound;
 }
-void EGenericTypeImpl::setEUpperBound(std::shared_ptr<ecore::EGenericType> _eUpperBound)
+void EGenericTypeImpl::setEUpperBound(const std::shared_ptr<ecore::EGenericType>& _eUpperBound)
 {
     m_eUpperBound = _eUpperBound;
 	

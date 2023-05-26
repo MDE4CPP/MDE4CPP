@@ -98,7 +98,7 @@ namespace uml
 			<p>From package UML::CommonBehavior.</p>
 			*/
 			
-			virtual void setEvent(std::shared_ptr<uml::Event>) = 0;
+			virtual void setEvent(const std::shared_ptr<uml::Event>&) = 0;
 			/*!
 			A optional Port of through which the given effect is detected.
 			<p>From package UML::CommonBehavior.</p>

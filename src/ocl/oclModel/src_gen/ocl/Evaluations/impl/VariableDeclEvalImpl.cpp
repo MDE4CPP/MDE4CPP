@@ -141,7 +141,7 @@ std::shared_ptr<ocl::Evaluations::OclExpEval> VariableDeclEvalImpl::getInitExp()
 {
     return m_initExp;
 }
-void VariableDeclEvalImpl::setInitExp(std::shared_ptr<ocl::Evaluations::OclExpEval> _initExp)
+void VariableDeclEvalImpl::setInitExp(const std::shared_ptr<ocl::Evaluations::OclExpEval>& _initExp)
 {
     m_initExp = _initExp;
 	

@@ -85,7 +85,7 @@ namespace fUML::Semantics::Activities
 			virtual std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> getHeldTokens() const ;
 			virtual std::shared_ptr<Bag<fUML::Semantics::Activities::ActivityEdgeInstance>> getIncomingEdges() const ;
 			virtual std::shared_ptr<uml::ActivityNode> getNode() const ;
-			virtual void setNode(std::shared_ptr<uml::ActivityNode>) ;
+			virtual void setNode(const std::shared_ptr<uml::ActivityNode>&) ;
 			virtual std::shared_ptr<Bag<fUML::Semantics::Activities::ActivityEdgeInstance>> getOutgoingEdges() const ;
 			
 			//*********************************

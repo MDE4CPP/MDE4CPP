@@ -163,7 +163,7 @@ std::shared_ptr<uml::PackageableElement> ManifestationImpl::getUtilizedElement()
 {
     return m_utilizedElement;
 }
-void ManifestationImpl::setUtilizedElement(std::shared_ptr<uml::PackageableElement> _utilizedElement)
+void ManifestationImpl::setUtilizedElement(const std::shared_ptr<uml::PackageableElement>& _utilizedElement)
 {
     m_utilizedElement = _utilizedElement;
 	

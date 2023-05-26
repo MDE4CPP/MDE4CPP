@@ -65,7 +65,7 @@ namespace uml
 			<p>From package UML::SimpleClassifiers.</p>
 			*/
 			
-			virtual void setSignal(std::shared_ptr<uml::Signal>) ;
+			virtual void setSignal(const std::shared_ptr<uml::Signal>&) ;
 			
 			//*********************************
 			// Union Reference Getters

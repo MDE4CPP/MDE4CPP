@@ -69,7 +69,7 @@ namespace uml
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual void setBehavior(std::shared_ptr<uml::Behavior>) ;
+			virtual void setBehavior(const std::shared_ptr<uml::Behavior>&) ;
 			
 			//*********************************
 			// Union Reference Getters

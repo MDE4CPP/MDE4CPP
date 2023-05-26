@@ -150,12 +150,12 @@ namespace uml
 			Retrieves the first operation with the specified name, parameter names, and parameter types from this classifier.
 			*/
 			 
-			virtual std::shared_ptr<uml::Operation> getOperation(std::string name, std::shared_ptr<Bag<std::string>> parameterNames, const std::shared_ptr<Bag<uml::Type>>& parameterTypes) ;
+			virtual std::shared_ptr<uml::Operation> getOperation(std::string name, const std::shared_ptr<Bag<std::string>>& parameterNames, const std::shared_ptr<Bag<uml::Type>>& parameterTypes) ;
 			/*!
 			Retrieves the first operation with the specified name, parameter names, and parameter types from this classifier, ignoring case if indicated.
 			*/
 			 
-			virtual std::shared_ptr<uml::Operation> getOperation(std::string name, std::shared_ptr<Bag<std::string>> parameterNames, const std::shared_ptr<Bag<uml::Type>>& parameterTypes, bool ignoreCase) ;
+			virtual std::shared_ptr<uml::Operation> getOperation(std::string name, const std::shared_ptr<Bag<std::string>>& parameterNames, const std::shared_ptr<Bag<uml::Type>>& parameterTypes, bool ignoreCase) ;
 			/*!
 			Retrieves the operations of this classifier.
 			*/
@@ -305,7 +305,7 @@ namespace uml
 			<p>From package UML::Classification.</p>
 			*/
 			
-			virtual void setRepresentation(std::shared_ptr<uml::CollaborationUse>) ;
+			virtual void setRepresentation(const std::shared_ptr<uml::CollaborationUse>&) ;
 			/*!
 			The Substitutions owned by this Classifier.
 			<p>From package UML::Classification.</p>

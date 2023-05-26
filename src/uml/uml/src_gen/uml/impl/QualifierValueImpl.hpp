@@ -63,7 +63,7 @@ namespace uml
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual void setQualifier(std::shared_ptr<uml::Property>) ;
+			virtual void setQualifier(const std::shared_ptr<uml::Property>&) ;
 			/*!
 			The InputPin from which the specified value for the qualifier is taken.
 			<p>From package UML::Actions.</p>
@@ -75,7 +75,7 @@ namespace uml
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual void setValue(std::shared_ptr<uml::InputPin>) ;
+			virtual void setValue(const std::shared_ptr<uml::InputPin>&) ;
 			
 			//*********************************
 			// Union Reference Getters

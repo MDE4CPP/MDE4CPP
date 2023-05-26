@@ -137,7 +137,7 @@ std::shared_ptr<ocl::Expressions::OclExpression> InitOrDerValueExpImpl::getBodyE
 {
     return m_bodyExpression;
 }
-void InitOrDerValueExpImpl::setBodyExpression(std::shared_ptr<ocl::Expressions::OclExpression> _bodyExpression)
+void InitOrDerValueExpImpl::setBodyExpression(const std::shared_ptr<ocl::Expressions::OclExpression>& _bodyExpression)
 {
     m_bodyExpression = _bodyExpression;
 	

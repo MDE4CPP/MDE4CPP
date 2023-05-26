@@ -231,7 +231,7 @@ std::shared_ptr<ocl::Expressions::InitOrDerValueListExp> PropertyContextDeclExpI
 {
     return m_initOrDerValues;
 }
-void PropertyContextDeclExpImpl::setInitOrDerValues(std::shared_ptr<ocl::Expressions::InitOrDerValueListExp> _initOrDerValues)
+void PropertyContextDeclExpImpl::setInitOrDerValues(const std::shared_ptr<ocl::Expressions::InitOrDerValueListExp>& _initOrDerValues)
 {
     m_initOrDerValues = _initOrDerValues;
 	
@@ -242,7 +242,7 @@ std::shared_ptr<ocl::Expressions::TypeExp> PropertyContextDeclExpImpl::getPropTy
 {
     return m_propType;
 }
-void PropertyContextDeclExpImpl::setPropType(std::shared_ptr<ocl::Expressions::TypeExp> _propType)
+void PropertyContextDeclExpImpl::setPropType(const std::shared_ptr<ocl::Expressions::TypeExp>& _propType)
 {
     m_propType = _propType;
 	

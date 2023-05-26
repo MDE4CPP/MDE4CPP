@@ -55,11 +55,11 @@ namespace fUML::Semantics::Actions
 			// Reference Getters & Setters
 			//*********************************
 			virtual std::shared_ptr<uml::ReadSelfAction> getReadSelfAction() const ;
-			virtual void setReadSelfAction(std::shared_ptr<uml::ReadSelfAction>) ;
+			virtual void setReadSelfAction(const std::shared_ptr<uml::ReadSelfAction>&) ;
 			/*Additional Setter for 'ActionActivation::action' redefined by reference 'readSelfAction'*/
-			virtual void setAction(std::shared_ptr<uml::Action>) ;
+			virtual void setAction(const std::shared_ptr<uml::Action>&) ;
 			/*Additional Setter for 'ActivityNodeActivation::node' redefined by reference 'readSelfAction'*/
-			virtual void setNode(std::shared_ptr<uml::ActivityNode>) ;
+			virtual void setNode(const std::shared_ptr<uml::ActivityNode>&) ;
 			
 			//*********************************
 			// Union Reference Getters

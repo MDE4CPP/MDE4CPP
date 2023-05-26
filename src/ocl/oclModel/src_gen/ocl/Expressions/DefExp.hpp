@@ -93,9 +93,9 @@ namespace ocl::Expressions
 			// Reference Getters & Setters
 			//*********************************
 			virtual std::shared_ptr<ocl::Expressions::OclExpression> getBodyExp() const = 0;
-			virtual void setBodyExp(std::shared_ptr<ocl::Expressions::OclExpression>) = 0;
+			virtual void setBodyExp(const std::shared_ptr<ocl::Expressions::OclExpression>&) = 0;
 			virtual std::shared_ptr<ocl::Expressions::OclExpression> getFrontExp() const = 0;
-			virtual void setFrontExp(std::shared_ptr<ocl::Expressions::OclExpression>) = 0;
+			virtual void setFrontExp(const std::shared_ptr<ocl::Expressions::OclExpression>&) = 0;
 
 			//*********************************
 			// Union Reference Getters

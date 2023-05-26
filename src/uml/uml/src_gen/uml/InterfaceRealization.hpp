@@ -114,7 +114,7 @@ namespace uml
 			<p>From package UML::SimpleClassifiers.</p>
 			*/
 			
-			virtual void setContract(std::shared_ptr<uml::Interface>) = 0;
+			virtual void setContract(const std::shared_ptr<uml::Interface>&) = 0;
 			/*!
 			References the BehavioredClassifier that owns this InterfaceRealization, i.e., the BehavioredClassifier that realizes the Interface to which it refers.
 			<p>From package UML::SimpleClassifiers.</p>

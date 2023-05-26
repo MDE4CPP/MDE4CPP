@@ -193,7 +193,7 @@ std::shared_ptr<ecore::EGenericType> ETypedElementImpl::getEGenericType() const
 {
     return m_eGenericType;
 }
-void ETypedElementImpl::setEGenericType(std::shared_ptr<ecore::EGenericType> _eGenericType)
+void ETypedElementImpl::setEGenericType(const std::shared_ptr<ecore::EGenericType>& _eGenericType)
 {
     m_eGenericType = _eGenericType;
 	
@@ -204,7 +204,7 @@ std::shared_ptr<ecore::EClassifier> ETypedElementImpl::getEType() const
 {
     return m_eType;
 }
-void ETypedElementImpl::setEType(std::shared_ptr<ecore::EClassifier> _eType)
+void ETypedElementImpl::setEType(const std::shared_ptr<ecore::EClassifier>& _eType)
 {
     m_eType = _eType;
 	

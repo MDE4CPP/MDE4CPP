@@ -76,7 +76,7 @@ namespace uml
 			<p>From package UML::Interactions.</p>
 			*/
 			
-			virtual void setGuard(std::shared_ptr<uml::InteractionConstraint>) ;
+			virtual void setGuard(const std::shared_ptr<uml::InteractionConstraint>&) ;
 			
 			//*********************************
 			// Union Reference Getters

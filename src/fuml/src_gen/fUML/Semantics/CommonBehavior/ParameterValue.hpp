@@ -78,7 +78,7 @@ namespace fUML::Semantics::CommonBehavior
 			// Reference Getters & Setters
 			//*********************************
 			virtual std::shared_ptr<uml::Parameter> getParameter() const = 0;
-			virtual void setParameter(std::shared_ptr<uml::Parameter>) = 0;
+			virtual void setParameter(const std::shared_ptr<uml::Parameter>&) = 0;
 
 			//*********************************
 			// Union Reference Getters

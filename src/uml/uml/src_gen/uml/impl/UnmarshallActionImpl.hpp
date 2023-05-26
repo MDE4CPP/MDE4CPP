@@ -69,7 +69,7 @@ namespace uml
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual void setObject(std::shared_ptr<uml::InputPin>) ;
+			virtual void setObject(const std::shared_ptr<uml::InputPin>&) ;
 			/*!
 			The OutputPins on which are placed the values of the StructuralFeatures of the input object.
 			<p>From package UML::Actions.</p>
@@ -87,7 +87,7 @@ namespace uml
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual void setUnmarshallType(std::shared_ptr<uml::Classifier>) ;
+			virtual void setUnmarshallType(const std::shared_ptr<uml::Classifier>&) ;
 			
 			//*********************************
 			// Union Reference Getters

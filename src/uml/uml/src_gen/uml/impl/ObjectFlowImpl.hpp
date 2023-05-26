@@ -93,7 +93,7 @@ namespace uml
 			<p>From package UML::Activities.</p>
 			*/
 			
-			virtual void setSelection(std::shared_ptr<uml::Behavior>) ;
+			virtual void setSelection(const std::shared_ptr<uml::Behavior>&) ;
 			/*!
 			A Behavior used to change or replace object tokens flowing along the ObjectFlow.
 			<p>From package UML::Activities.</p>
@@ -105,7 +105,7 @@ namespace uml
 			<p>From package UML::Activities.</p>
 			*/
 			
-			virtual void setTransformation(std::shared_ptr<uml::Behavior>) ;
+			virtual void setTransformation(const std::shared_ptr<uml::Behavior>&) ;
 			
 			//*********************************
 			// Union Reference Getters

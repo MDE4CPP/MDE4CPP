@@ -78,7 +78,7 @@ namespace ecore
 			virtual std::shared_ptr<Subset<ecore::EAttribute, ecore::EStructuralFeature>> getEAttributes() const ;
 			virtual std::shared_ptr<Bag<ecore::EGenericType>> getEGenericSuperTypes() const ;
 			virtual std::shared_ptr<ecore::EAttribute> getEIDAttribute() const ;
-			virtual void setEIDAttribute(std::shared_ptr<ecore::EAttribute>) ;
+			virtual void setEIDAttribute(const std::shared_ptr<ecore::EAttribute>&) ;
 			virtual std::shared_ptr<Subset<ecore::EOperation, ecore::EObject>> getEOperations() const ;
 			virtual std::shared_ptr<Subset<ecore::EReference, ecore::EStructuralFeature>> getEReferences() const ;
 			

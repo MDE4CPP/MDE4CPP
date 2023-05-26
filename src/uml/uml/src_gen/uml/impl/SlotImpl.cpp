@@ -170,7 +170,7 @@ std::shared_ptr<uml::StructuralFeature> SlotImpl::getDefiningFeature() const
 {
     return m_definingFeature;
 }
-void SlotImpl::setDefiningFeature(std::shared_ptr<uml::StructuralFeature> _definingFeature)
+void SlotImpl::setDefiningFeature(const std::shared_ptr<uml::StructuralFeature>& _definingFeature)
 {
     m_definingFeature = _definingFeature;
 	

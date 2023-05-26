@@ -62,7 +62,7 @@ virtual public ActivityEdgeInstance
 			// Reference Getters & Setters
 			//*********************************
 			virtual std::shared_ptr<uml::ActivityEdge> getEdge() const ;
-			virtual void setEdge(std::shared_ptr<uml::ActivityEdge>) ;
+			virtual void setEdge(const std::shared_ptr<uml::ActivityEdge>&) ;
 			virtual std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup> getGroup() const ;
 			virtual void setGroup(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup>) ;
 			virtual std::shared_ptr<Bag<fUML::Semantics::Activities::Offer>> getOffers() const ;

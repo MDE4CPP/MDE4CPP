@@ -132,7 +132,7 @@ std::shared_ptr<ocl::Evaluations::VariableDeclEval> IterateExpEvalImpl::getResul
 {
     return m_result;
 }
-void IterateExpEvalImpl::setResult(std::shared_ptr<ocl::Evaluations::VariableDeclEval> _result)
+void IterateExpEvalImpl::setResult(const std::shared_ptr<ocl::Evaluations::VariableDeclEval>& _result)
 {
     m_result = _result;
 	

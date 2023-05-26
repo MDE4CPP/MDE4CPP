@@ -191,7 +191,7 @@ std::shared_ptr<uml::Classifier> ReadIsClassifiedObjectActionImpl::getClassifier
 {
     return m_classifier;
 }
-void ReadIsClassifiedObjectActionImpl::setClassifier(std::shared_ptr<uml::Classifier> _classifier)
+void ReadIsClassifiedObjectActionImpl::setClassifier(const std::shared_ptr<uml::Classifier>& _classifier)
 {
     m_classifier = _classifier;
 	
@@ -202,7 +202,7 @@ std::shared_ptr<uml::InputPin> ReadIsClassifiedObjectActionImpl::getObject() con
 {
     return m_object;
 }
-void ReadIsClassifiedObjectActionImpl::setObject(std::shared_ptr<uml::InputPin> _object)
+void ReadIsClassifiedObjectActionImpl::setObject(const std::shared_ptr<uml::InputPin>& _object)
 {
     m_object = _object;
 	
@@ -213,7 +213,7 @@ std::shared_ptr<uml::OutputPin> ReadIsClassifiedObjectActionImpl::getResult() co
 {
     return m_result;
 }
-void ReadIsClassifiedObjectActionImpl::setResult(std::shared_ptr<uml::OutputPin> _result)
+void ReadIsClassifiedObjectActionImpl::setResult(const std::shared_ptr<uml::OutputPin>& _result)
 {
     m_result = _result;
 	

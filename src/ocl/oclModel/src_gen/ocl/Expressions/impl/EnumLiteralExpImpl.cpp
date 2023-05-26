@@ -229,7 +229,7 @@ std::shared_ptr<ecore::EEnumLiteral> EnumLiteralExpImpl::getReferredEnumLiteral(
 {
     return m_referredEnumLiteral;
 }
-void EnumLiteralExpImpl::setReferredEnumLiteral(std::shared_ptr<ecore::EEnumLiteral> _referredEnumLiteral)
+void EnumLiteralExpImpl::setReferredEnumLiteral(const std::shared_ptr<ecore::EEnumLiteral>& _referredEnumLiteral)
 {
     m_referredEnumLiteral = _referredEnumLiteral;
 	

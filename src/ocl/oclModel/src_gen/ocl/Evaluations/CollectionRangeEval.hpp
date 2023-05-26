@@ -87,9 +87,9 @@ namespace ocl::Evaluations
 			// Reference Getters & Setters
 			//*********************************
 			virtual std::shared_ptr<ocl::Evaluations::OclExpEval> getFirst() const = 0;
-			virtual void setFirst(std::shared_ptr<ocl::Evaluations::OclExpEval>) = 0;
+			virtual void setFirst(const std::shared_ptr<ocl::Evaluations::OclExpEval>&) = 0;
 			virtual std::shared_ptr<ocl::Evaluations::OclExpEval> getLast() const = 0;
-			virtual void setLast(std::shared_ptr<ocl::Evaluations::OclExpEval>) = 0;
+			virtual void setLast(const std::shared_ptr<ocl::Evaluations::OclExpEval>&) = 0;
 
 			//*********************************
 			// Union Reference Getters

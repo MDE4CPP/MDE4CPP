@@ -345,7 +345,7 @@ std::shared_ptr<uml::Property> InterfaceImpl::createOwnedAttribute(std::string n
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-std::shared_ptr<uml::Operation> InterfaceImpl::createOwnedOperation(std::string name, std::shared_ptr<Bag<std::string>> parameterNames, const std::shared_ptr<Bag<uml::Type>>& parameterTypes, const std::shared_ptr<uml::Type>& returnType)
+std::shared_ptr<uml::Operation> InterfaceImpl::createOwnedOperation(std::string name, const std::shared_ptr<Bag<std::string>>& parameterNames, const std::shared_ptr<Bag<uml::Type>>& parameterTypes, const std::shared_ptr<uml::Type>& returnType)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -446,7 +446,7 @@ std::shared_ptr<uml::ProtocolStateMachine> InterfaceImpl::getProtocol() const
 {
     return m_protocol;
 }
-void InterfaceImpl::setProtocol(std::shared_ptr<uml::ProtocolStateMachine> _protocol)
+void InterfaceImpl::setProtocol(const std::shared_ptr<uml::ProtocolStateMachine>& _protocol)
 {
     m_protocol = _protocol;
 	

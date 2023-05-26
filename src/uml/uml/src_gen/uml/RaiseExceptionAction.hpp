@@ -107,7 +107,7 @@ namespace uml
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual void setException(std::shared_ptr<uml::InputPin>) = 0;
+			virtual void setException(const std::shared_ptr<uml::InputPin>&) = 0;
 
 			//*********************************
 			// Union Reference Getters

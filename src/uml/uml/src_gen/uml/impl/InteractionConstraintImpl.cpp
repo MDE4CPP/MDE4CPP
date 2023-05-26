@@ -182,7 +182,7 @@ std::shared_ptr<uml::ValueSpecification> InteractionConstraintImpl::getMaxint() 
 {
     return m_maxint;
 }
-void InteractionConstraintImpl::setMaxint(std::shared_ptr<uml::ValueSpecification> _maxint)
+void InteractionConstraintImpl::setMaxint(const std::shared_ptr<uml::ValueSpecification>& _maxint)
 {
     m_maxint = _maxint;
 	
@@ -193,7 +193,7 @@ std::shared_ptr<uml::ValueSpecification> InteractionConstraintImpl::getMinint() 
 {
     return m_minint;
 }
-void InteractionConstraintImpl::setMinint(std::shared_ptr<uml::ValueSpecification> _minint)
+void InteractionConstraintImpl::setMinint(const std::shared_ptr<uml::ValueSpecification>& _minint)
 {
     m_minint = _minint;
 	

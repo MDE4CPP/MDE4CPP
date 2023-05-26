@@ -98,7 +98,7 @@ namespace uml
 			<p>From package UML::Deployments.</p>
 			*/
 			
-			virtual void setUtilizedElement(std::shared_ptr<uml::PackageableElement>) = 0;
+			virtual void setUtilizedElement(const std::shared_ptr<uml::PackageableElement>&) = 0;
 
 			//*********************************
 			// Union Reference Getters

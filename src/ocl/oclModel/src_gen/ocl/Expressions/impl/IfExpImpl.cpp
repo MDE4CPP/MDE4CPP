@@ -236,7 +236,7 @@ std::shared_ptr<ocl::Expressions::OclExpression> IfExpImpl::getCondition() const
 {
     return m_condition;
 }
-void IfExpImpl::setCondition(std::shared_ptr<ocl::Expressions::OclExpression> _condition)
+void IfExpImpl::setCondition(const std::shared_ptr<ocl::Expressions::OclExpression>& _condition)
 {
     m_condition = _condition;
 	
@@ -247,7 +247,7 @@ std::shared_ptr<ocl::Expressions::OclExpression> IfExpImpl::getElseExpression() 
 {
     return m_elseExpression;
 }
-void IfExpImpl::setElseExpression(std::shared_ptr<ocl::Expressions::OclExpression> _elseExpression)
+void IfExpImpl::setElseExpression(const std::shared_ptr<ocl::Expressions::OclExpression>& _elseExpression)
 {
     m_elseExpression = _elseExpression;
 	
@@ -258,7 +258,7 @@ std::shared_ptr<ocl::Expressions::OclExpression> IfExpImpl::getThenExpression() 
 {
     return m_thenExpression;
 }
-void IfExpImpl::setThenExpression(std::shared_ptr<ocl::Expressions::OclExpression> _thenExpression)
+void IfExpImpl::setThenExpression(const std::shared_ptr<ocl::Expressions::OclExpression>& _thenExpression)
 {
     m_thenExpression = _thenExpression;
 	

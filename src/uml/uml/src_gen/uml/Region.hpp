@@ -152,7 +152,7 @@ namespace uml
 			<p>From package UML::StateMachines.</p>
 			*/
 			
-			virtual void setExtendedRegion(std::shared_ptr<uml::Region>) = 0;
+			virtual void setExtendedRegion(const std::shared_ptr<uml::Region>&) = 0;
 			/*!
 			The State that owns the Region. If a Region is owned by a State, then it cannot also be owned by a StateMachine.
 			<p>From package UML::StateMachines.</p>

@@ -100,7 +100,7 @@ namespace uml
 			<p>From package UML::Interactions.</p>
 			*/
 			
-			virtual void setExecution(std::shared_ptr<uml::ExecutionSpecification>) = 0;
+			virtual void setExecution(const std::shared_ptr<uml::ExecutionSpecification>&) = 0;
 
 			//*********************************
 			// Union Reference Getters

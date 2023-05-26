@@ -69,7 +69,7 @@ namespace uml
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual void setOperation(std::shared_ptr<uml::Operation>) ;
+			virtual void setOperation(const std::shared_ptr<uml::Operation>&) ;
 			/*!
 			The InputPin that provides the target object to which the Operation call request is sent.
 			<p>From package UML::Actions.</p>
@@ -81,7 +81,7 @@ namespace uml
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual void setTarget(std::shared_ptr<uml::InputPin>) ;
+			virtual void setTarget(const std::shared_ptr<uml::InputPin>&) ;
 			
 			//*********************************
 			// Union Reference Getters

@@ -213,7 +213,7 @@ std::shared_ptr<uml::Port> InvocationActionImpl::getOnPort() const
 {
     return m_onPort;
 }
-void InvocationActionImpl::setOnPort(std::shared_ptr<uml::Port> _onPort)
+void InvocationActionImpl::setOnPort(const std::shared_ptr<uml::Port>& _onPort)
 {
     m_onPort = _onPort;
 	

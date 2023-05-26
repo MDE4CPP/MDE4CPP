@@ -109,7 +109,7 @@ namespace uml
 			<p>From package UML::Values.</p>
 			*/
 			
-			virtual void setEvent(std::shared_ptr<uml::NamedElement>) = 0;
+			virtual void setEvent(const std::shared_ptr<uml::NamedElement>&) = 0;
 
 			//*********************************
 			// Union Reference Getters

@@ -108,7 +108,7 @@ namespace uml
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual void setReplyToCall(std::shared_ptr<uml::Trigger>) = 0;
+			virtual void setReplyToCall(const std::shared_ptr<uml::Trigger>&) = 0;
 			/*!
 			A list of InputPins providing the values for the output (inout, out, and return) Parameters of the Operation. These values are returned to the caller.
 			<p>From package UML::Actions.</p>
@@ -126,7 +126,7 @@ namespace uml
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual void setReturnInformation(std::shared_ptr<uml::InputPin>) = 0;
+			virtual void setReturnInformation(const std::shared_ptr<uml::InputPin>&) = 0;
 
 			//*********************************
 			// Union Reference Getters

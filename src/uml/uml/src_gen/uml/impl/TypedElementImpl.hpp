@@ -65,7 +65,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual void setType(std::shared_ptr<uml::Type>) ;
+			virtual void setType(const std::shared_ptr<uml::Type>&) ;
 			
 			//*********************************
 			// Union Reference Getters

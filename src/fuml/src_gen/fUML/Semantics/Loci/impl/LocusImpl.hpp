@@ -61,10 +61,10 @@ virtual public Locus
 			// Reference Getters & Setters
 			//*********************************
 			virtual std::shared_ptr<fUML::Semantics::Loci::Executor> getExecutor() const ;
-			virtual void setExecutor(std::shared_ptr<fUML::Semantics::Loci::Executor>) ;
+			virtual void setExecutor(const std::shared_ptr<fUML::Semantics::Loci::Executor>&) ;
 			virtual std::shared_ptr<Bag<uml::Element>> getExtensionalValues() const ;
 			virtual std::shared_ptr<fUML::Semantics::Loci::ExecutionFactory> getFactory() const ;
-			virtual void setFactory(std::shared_ptr<fUML::Semantics::Loci::ExecutionFactory>) ;
+			virtual void setFactory(const std::shared_ptr<fUML::Semantics::Loci::ExecutionFactory>&) ;
 			
 			//*********************************
 			// Union Reference Getters

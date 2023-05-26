@@ -52,9 +52,9 @@ namespace ocl::Evaluations
 			// Reference Getters & Setters
 			//*********************************
 			virtual std::shared_ptr<ocl::Evaluations::OclExpEval> getContext() const ;
-			virtual void setContext(std::shared_ptr<ocl::Evaluations::OclExpEval>) ;
+			virtual void setContext(const std::shared_ptr<ocl::Evaluations::OclExpEval>&) ;
 			virtual std::shared_ptr<ocl::Evaluations::EvalEnvironment> getEnvironment() const ;
-			virtual void setEnvironment(std::shared_ptr<ocl::Evaluations::EvalEnvironment>) ;
+			virtual void setEnvironment(const std::shared_ptr<ocl::Evaluations::EvalEnvironment>&) ;
 			
 			//*********************************
 			// Union Reference Getters

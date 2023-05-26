@@ -142,7 +142,7 @@ std::shared_ptr<ocl::Evaluations::OclExpEval> LetExpEvalImpl::getIn() const
 {
     return m_in;
 }
-void LetExpEvalImpl::setIn(std::shared_ptr<ocl::Evaluations::OclExpEval> _in)
+void LetExpEvalImpl::setIn(const std::shared_ptr<ocl::Evaluations::OclExpEval>& _in)
 {
     m_in = _in;
 	
@@ -153,7 +153,7 @@ std::shared_ptr<ocl::Evaluations::OclExpEval> LetExpEvalImpl::getInitExpression(
 {
     return m_initExpression;
 }
-void LetExpEvalImpl::setInitExpression(std::shared_ptr<ocl::Evaluations::OclExpEval> _initExpression)
+void LetExpEvalImpl::setInitExpression(const std::shared_ptr<ocl::Evaluations::OclExpEval>& _initExpression)
 {
     m_initExpression = _initExpression;
 	

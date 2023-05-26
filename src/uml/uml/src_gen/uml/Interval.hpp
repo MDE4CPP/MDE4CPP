@@ -100,7 +100,7 @@ namespace uml
 			<p>From package UML::Values.</p>
 			*/
 			
-			virtual void setMax(std::shared_ptr<uml::ValueSpecification>) = 0;
+			virtual void setMax(const std::shared_ptr<uml::ValueSpecification>&) = 0;
 			/*!
 			Refers to the ValueSpecification denoting the minimum value of the range.
 			<p>From package UML::Values.</p>
@@ -112,7 +112,7 @@ namespace uml
 			<p>From package UML::Values.</p>
 			*/
 			
-			virtual void setMin(std::shared_ptr<uml::ValueSpecification>) = 0;
+			virtual void setMin(const std::shared_ptr<uml::ValueSpecification>&) = 0;
 
 			//*********************************
 			// Union Reference Getters

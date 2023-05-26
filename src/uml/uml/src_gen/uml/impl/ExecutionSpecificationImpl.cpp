@@ -152,7 +152,7 @@ std::shared_ptr<uml::OccurrenceSpecification> ExecutionSpecificationImpl::getFin
 {
     return m_finish;
 }
-void ExecutionSpecificationImpl::setFinish(std::shared_ptr<uml::OccurrenceSpecification> _finish)
+void ExecutionSpecificationImpl::setFinish(const std::shared_ptr<uml::OccurrenceSpecification>& _finish)
 {
     m_finish = _finish;
 	
@@ -163,7 +163,7 @@ std::shared_ptr<uml::OccurrenceSpecification> ExecutionSpecificationImpl::getSta
 {
     return m_start;
 }
-void ExecutionSpecificationImpl::setStart(std::shared_ptr<uml::OccurrenceSpecification> _start)
+void ExecutionSpecificationImpl::setStart(const std::shared_ptr<uml::OccurrenceSpecification>& _start)
 {
     m_start = _start;
 	

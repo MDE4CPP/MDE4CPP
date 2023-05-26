@@ -217,7 +217,7 @@ std::shared_ptr<ocl::Expressions::TypeExp> CollectionTypeExpImpl::getInnerType()
 {
     return m_innerType;
 }
-void CollectionTypeExpImpl::setInnerType(std::shared_ptr<ocl::Expressions::TypeExp> _innerType)
+void CollectionTypeExpImpl::setInnerType(const std::shared_ptr<ocl::Expressions::TypeExp>& _innerType)
 {
     m_innerType = _innerType;
 	

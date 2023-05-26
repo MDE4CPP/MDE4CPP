@@ -192,7 +192,7 @@ std::shared_ptr<uml::Collaboration> CollaborationUseImpl::getType() const
 {
     return m_type;
 }
-void CollaborationUseImpl::setType(std::shared_ptr<uml::Collaboration> _type)
+void CollaborationUseImpl::setType(const std::shared_ptr<uml::Collaboration>& _type)
 {
     m_type = _type;
 	

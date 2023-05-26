@@ -172,7 +172,7 @@ std::shared_ptr<uml::Classifier> SubstitutionImpl::getContract() const
 {
     return m_contract;
 }
-void SubstitutionImpl::setContract(std::shared_ptr<uml::Classifier> _contract)
+void SubstitutionImpl::setContract(const std::shared_ptr<uml::Classifier>& _contract)
 {
     m_contract = _contract;
 	

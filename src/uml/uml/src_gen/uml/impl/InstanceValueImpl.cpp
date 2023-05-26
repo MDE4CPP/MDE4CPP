@@ -176,7 +176,7 @@ std::shared_ptr<uml::InstanceSpecification> InstanceValueImpl::getInstance() con
 {
     return m_instance;
 }
-void InstanceValueImpl::setInstance(std::shared_ptr<uml::InstanceSpecification> _instance)
+void InstanceValueImpl::setInstance(const std::shared_ptr<uml::InstanceSpecification>& _instance)
 {
     m_instance = _instance;
 	

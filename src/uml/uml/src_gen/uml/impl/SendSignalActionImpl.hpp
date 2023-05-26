@@ -69,7 +69,7 @@ namespace uml
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual void setSignal(std::shared_ptr<uml::Signal>) ;
+			virtual void setSignal(const std::shared_ptr<uml::Signal>&) ;
 			/*!
 			The InputPin that provides the target object to which the Signal instance is sent.
 			<p>From package UML::Actions.</p>
@@ -81,7 +81,7 @@ namespace uml
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual void setTarget(std::shared_ptr<uml::InputPin>) ;
+			virtual void setTarget(const std::shared_ptr<uml::InputPin>&) ;
 			
 			//*********************************
 			// Union Reference Getters

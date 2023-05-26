@@ -166,7 +166,7 @@ std::shared_ptr<uml::ReadExtentAction> ReadExtentActionActivationImpl::getReadEx
 {
     return m_readExtentAction;
 }
-void ReadExtentActionActivationImpl::setReadExtentAction(std::shared_ptr<uml::ReadExtentAction> _readExtentAction)
+void ReadExtentActionActivationImpl::setReadExtentAction(const std::shared_ptr<uml::ReadExtentAction>& _readExtentAction)
 {
     m_readExtentAction = _readExtentAction;
 	//additional setter call for redefined reference ActionActivation::action

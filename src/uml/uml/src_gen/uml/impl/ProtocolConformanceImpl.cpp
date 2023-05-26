@@ -141,7 +141,7 @@ std::shared_ptr<uml::ProtocolStateMachine> ProtocolConformanceImpl::getGeneralMa
 {
     return m_generalMachine;
 }
-void ProtocolConformanceImpl::setGeneralMachine(std::shared_ptr<uml::ProtocolStateMachine> _generalMachine)
+void ProtocolConformanceImpl::setGeneralMachine(const std::shared_ptr<uml::ProtocolStateMachine>& _generalMachine)
 {
     m_generalMachine = _generalMachine;
 	

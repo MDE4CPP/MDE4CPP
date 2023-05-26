@@ -81,7 +81,7 @@ namespace uml
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual void setCollection(std::shared_ptr<uml::InputPin>) ;
+			virtual void setCollection(const std::shared_ptr<uml::InputPin>&) ;
 			/*!
 			A Behavior that is repreatedly applied to two elements of the input collection to produce a value that is of the same type as elements of the collection.
 			<p>From package UML::Actions.</p>
@@ -93,7 +93,7 @@ namespace uml
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual void setReducer(std::shared_ptr<uml::Behavior>) ;
+			virtual void setReducer(const std::shared_ptr<uml::Behavior>&) ;
 			/*!
 			The output pin on which the result value is placed.
 			<p>From package UML::Actions.</p>
@@ -105,7 +105,7 @@ namespace uml
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual void setResult(std::shared_ptr<uml::OutputPin>) ;
+			virtual void setResult(const std::shared_ptr<uml::OutputPin>&) ;
 			
 			//*********************************
 			// Union Reference Getters

@@ -218,7 +218,7 @@ std::shared_ptr<ecore::EObject> StateExpImpl::getReferredState() const
 {
     return m_referredState;
 }
-void StateExpImpl::setReferredState(std::shared_ptr<ecore::EObject> _referredState)
+void StateExpImpl::setReferredState(const std::shared_ptr<ecore::EObject>& _referredState)
 {
     m_referredState = _referredState;
 	

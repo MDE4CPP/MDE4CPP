@@ -423,7 +423,7 @@ std::shared_ptr<uml::Association> PropertyImpl::getAssociation() const
 {
     return m_association;
 }
-void PropertyImpl::setAssociation(std::shared_ptr<uml::Association> _association)
+void PropertyImpl::setAssociation(const std::shared_ptr<uml::Association>& _association)
 {
     m_association = _association;
 	
@@ -467,7 +467,7 @@ std::shared_ptr<uml::ValueSpecification> PropertyImpl::getDefaultValue() const
 {
     return m_defaultValue;
 }
-void PropertyImpl::setDefaultValue(std::shared_ptr<uml::ValueSpecification> _defaultValue)
+void PropertyImpl::setDefaultValue(const std::shared_ptr<uml::ValueSpecification>& _defaultValue)
 {
     m_defaultValue = _defaultValue;
 	
@@ -489,7 +489,7 @@ std::shared_ptr<uml::Property> PropertyImpl::getOpposite() const
 {
     return m_opposite;
 }
-void PropertyImpl::setOpposite(std::shared_ptr<uml::Property> _opposite)
+void PropertyImpl::setOpposite(const std::shared_ptr<uml::Property>& _opposite)
 {
     m_opposite = _opposite;
 	

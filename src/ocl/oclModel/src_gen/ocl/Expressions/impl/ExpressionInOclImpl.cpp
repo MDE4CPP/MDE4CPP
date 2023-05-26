@@ -164,7 +164,7 @@ std::shared_ptr<ocl::Expressions::OclExpression> ExpressionInOclImpl::getBodyExp
 {
     return m_bodyExpression;
 }
-void ExpressionInOclImpl::setBodyExpression(std::shared_ptr<ocl::Expressions::OclExpression> _bodyExpression)
+void ExpressionInOclImpl::setBodyExpression(const std::shared_ptr<ocl::Expressions::OclExpression>& _bodyExpression)
 {
     m_bodyExpression = _bodyExpression;
 	
@@ -175,7 +175,7 @@ std::shared_ptr<ecore::ETypedElement> ExpressionInOclImpl::getContextVariable() 
 {
     return m_contextVariable;
 }
-void ExpressionInOclImpl::setContextVariable(std::shared_ptr<ecore::ETypedElement> _contextVariable)
+void ExpressionInOclImpl::setContextVariable(const std::shared_ptr<ecore::ETypedElement>& _contextVariable)
 {
     m_contextVariable = _contextVariable;
 	
@@ -198,7 +198,7 @@ std::shared_ptr<ecore::ETypedElement> ExpressionInOclImpl::getResultVariable() c
 {
     return m_resultVariable;
 }
-void ExpressionInOclImpl::setResultVariable(std::shared_ptr<ecore::ETypedElement> _resultVariable)
+void ExpressionInOclImpl::setResultVariable(const std::shared_ptr<ecore::ETypedElement>& _resultVariable)
 {
     m_resultVariable = _resultVariable;
 	

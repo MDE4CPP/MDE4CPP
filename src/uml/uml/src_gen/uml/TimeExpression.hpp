@@ -103,7 +103,7 @@ namespace uml
 			<p>From package UML::Values.</p>
 			*/
 			
-			virtual void setExpr(std::shared_ptr<uml::ValueSpecification>) = 0;
+			virtual void setExpr(const std::shared_ptr<uml::ValueSpecification>&) = 0;
 			/*!
 			Refers to the Observations that are involved in the computation of the TimeExpression value.
 			<p>From package UML::Values.</p>

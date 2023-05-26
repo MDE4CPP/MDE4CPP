@@ -150,7 +150,7 @@ namespace uml
 			<p>From package UML::StructuredClassifiers.</p>
 			*/
 			
-			virtual void setType(std::shared_ptr<uml::Association>) = 0;
+			virtual void setType(const std::shared_ptr<uml::Association>&) = 0;
 
 			//*********************************
 			// Union Reference Getters

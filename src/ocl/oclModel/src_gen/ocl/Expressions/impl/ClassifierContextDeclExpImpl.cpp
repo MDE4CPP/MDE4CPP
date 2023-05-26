@@ -229,7 +229,7 @@ std::shared_ptr<ocl::Expressions::InvOrDefExp> ClassifierContextDeclExpImpl::get
 {
     return m_invOrDevExp;
 }
-void ClassifierContextDeclExpImpl::setInvOrDevExp(std::shared_ptr<ocl::Expressions::InvOrDefExp> _invOrDevExp)
+void ClassifierContextDeclExpImpl::setInvOrDevExp(const std::shared_ptr<ocl::Expressions::InvOrDefExp>& _invOrDevExp)
 {
     m_invOrDevExp = _invOrDevExp;
 	

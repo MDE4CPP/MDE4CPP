@@ -61,9 +61,9 @@ namespace ecore
 			//*********************************
 			virtual std::shared_ptr<Bag<ecore::EAttribute>> getEKeys() const ;
 			virtual std::shared_ptr<ecore::EReference> getEOpposite() const ;
-			virtual void setEOpposite(std::shared_ptr<ecore::EReference>) ;
+			virtual void setEOpposite(const std::shared_ptr<ecore::EReference>&) ;
 			virtual std::shared_ptr<ecore::EClass> getEReferenceType() const ;
-			virtual void setEReferenceType(std::shared_ptr<ecore::EClass>) ;
+			virtual void setEReferenceType(const std::shared_ptr<ecore::EClass>&) ;
 			
 			//*********************************
 			// Union Reference Getters

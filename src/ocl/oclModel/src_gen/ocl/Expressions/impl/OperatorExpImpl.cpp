@@ -229,7 +229,7 @@ std::shared_ptr<ocl::Expressions::OclExpression> OperatorExpImpl::getLeftHandOpe
 {
     return m_leftHandOperand;
 }
-void OperatorExpImpl::setLeftHandOperand(std::shared_ptr<ocl::Expressions::OclExpression> _leftHandOperand)
+void OperatorExpImpl::setLeftHandOperand(const std::shared_ptr<ocl::Expressions::OclExpression>& _leftHandOperand)
 {
     m_leftHandOperand = _leftHandOperand;
 	
@@ -240,7 +240,7 @@ std::shared_ptr<ocl::Expressions::OclExpression> OperatorExpImpl::getRightHandOp
 {
     return m_rightHandOperand;
 }
-void OperatorExpImpl::setRightHandOperand(std::shared_ptr<ocl::Expressions::OclExpression> _rightHandOperand)
+void OperatorExpImpl::setRightHandOperand(const std::shared_ptr<ocl::Expressions::OclExpression>& _rightHandOperand)
 {
     m_rightHandOperand = _rightHandOperand;
 	

@@ -115,7 +115,7 @@ namespace uml
 			<p>From package UML::Interactions.</p>
 			*/
 			
-			virtual void setRefersTo(std::shared_ptr<uml::Interaction>) = 0;
+			virtual void setRefersTo(const std::shared_ptr<uml::Interaction>&) = 0;
 			/*!
 			The value of the executed Interaction.
 			<p>From package UML::Interactions.</p>
@@ -127,7 +127,7 @@ namespace uml
 			<p>From package UML::Interactions.</p>
 			*/
 			
-			virtual void setReturnValue(std::shared_ptr<uml::ValueSpecification>) = 0;
+			virtual void setReturnValue(const std::shared_ptr<uml::ValueSpecification>&) = 0;
 			/*!
 			The recipient of the return value.
 			<p>From package UML::Interactions.</p>
@@ -139,7 +139,7 @@ namespace uml
 			<p>From package UML::Interactions.</p>
 			*/
 			
-			virtual void setReturnValueRecipient(std::shared_ptr<uml::Property>) = 0;
+			virtual void setReturnValueRecipient(const std::shared_ptr<uml::Property>&) = 0;
 
 			//*********************************
 			// Union Reference Getters

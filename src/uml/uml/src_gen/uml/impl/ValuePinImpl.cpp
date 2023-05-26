@@ -244,7 +244,7 @@ std::shared_ptr<uml::ValueSpecification> ValuePinImpl::getValue() const
 {
     return m_value;
 }
-void ValuePinImpl::setValue(std::shared_ptr<uml::ValueSpecification> _value)
+void ValuePinImpl::setValue(const std::shared_ptr<uml::ValueSpecification>& _value)
 {
     m_value = _value;
 	

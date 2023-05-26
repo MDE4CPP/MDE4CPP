@@ -69,7 +69,7 @@ namespace uml
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual void setObject(std::shared_ptr<uml::InputPin>) ;
+			virtual void setObject(const std::shared_ptr<uml::InputPin>&) ;
 			/*!
 			The StructuralFeature to be read or written.
 			<p>From package UML::Actions.</p>
@@ -81,7 +81,7 @@ namespace uml
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual void setStructuralFeature(std::shared_ptr<uml::StructuralFeature>) ;
+			virtual void setStructuralFeature(const std::shared_ptr<uml::StructuralFeature>&) ;
 			
 			//*********************************
 			// Union Reference Getters

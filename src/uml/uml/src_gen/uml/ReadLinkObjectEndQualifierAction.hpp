@@ -108,7 +108,7 @@ namespace uml
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual void setObject(std::shared_ptr<uml::InputPin>) = 0;
+			virtual void setObject(const std::shared_ptr<uml::InputPin>&) = 0;
 			/*!
 			The qualifier Property to be read.
 			<p>From package UML::Actions.</p>
@@ -120,7 +120,7 @@ namespace uml
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual void setQualifier(std::shared_ptr<uml::Property>) = 0;
+			virtual void setQualifier(const std::shared_ptr<uml::Property>&) = 0;
 			/*!
 			The OutputPin where the result value is placed.
 			<p>From package UML::Actions.</p>
@@ -132,7 +132,7 @@ namespace uml
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual void setResult(std::shared_ptr<uml::OutputPin>) = 0;
+			virtual void setResult(const std::shared_ptr<uml::OutputPin>&) = 0;
 
 			//*********************************
 			// Union Reference Getters

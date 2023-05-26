@@ -151,7 +151,7 @@ std::shared_ptr<uml::ParameterableElement> TemplateParameterImpl::getDefault() c
 {
     return m_default;
 }
-void TemplateParameterImpl::setDefault(std::shared_ptr<uml::ParameterableElement> _default)
+void TemplateParameterImpl::setDefault(const std::shared_ptr<uml::ParameterableElement>& _default)
 {
     m_default = _default;
 	
@@ -162,7 +162,7 @@ std::shared_ptr<uml::ParameterableElement> TemplateParameterImpl::getOwnedDefaul
 {
     return m_ownedDefault;
 }
-void TemplateParameterImpl::setOwnedDefault(std::shared_ptr<uml::ParameterableElement> _ownedDefault)
+void TemplateParameterImpl::setOwnedDefault(const std::shared_ptr<uml::ParameterableElement>& _ownedDefault)
 {
     m_ownedDefault = _ownedDefault;
 	
@@ -173,7 +173,7 @@ std::shared_ptr<uml::ParameterableElement> TemplateParameterImpl::getOwnedParame
 {
     return m_ownedParameteredElement;
 }
-void TemplateParameterImpl::setOwnedParameteredElement(std::shared_ptr<uml::ParameterableElement> _ownedParameteredElement)
+void TemplateParameterImpl::setOwnedParameteredElement(const std::shared_ptr<uml::ParameterableElement>& _ownedParameteredElement)
 {
     m_ownedParameteredElement = _ownedParameteredElement;
 	
@@ -184,7 +184,7 @@ std::shared_ptr<uml::ParameterableElement> TemplateParameterImpl::getParametered
 {
     return m_parameteredElement;
 }
-void TemplateParameterImpl::setParameteredElement(std::shared_ptr<uml::ParameterableElement> _parameteredElement)
+void TemplateParameterImpl::setParameteredElement(const std::shared_ptr<uml::ParameterableElement>& _parameteredElement)
 {
     m_parameteredElement = _parameteredElement;
 	

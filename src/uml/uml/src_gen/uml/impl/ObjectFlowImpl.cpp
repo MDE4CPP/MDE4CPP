@@ -188,7 +188,7 @@ std::shared_ptr<uml::Behavior> ObjectFlowImpl::getSelection() const
 {
     return m_selection;
 }
-void ObjectFlowImpl::setSelection(std::shared_ptr<uml::Behavior> _selection)
+void ObjectFlowImpl::setSelection(const std::shared_ptr<uml::Behavior>& _selection)
 {
     m_selection = _selection;
 	
@@ -199,7 +199,7 @@ std::shared_ptr<uml::Behavior> ObjectFlowImpl::getTransformation() const
 {
     return m_transformation;
 }
-void ObjectFlowImpl::setTransformation(std::shared_ptr<uml::Behavior> _transformation)
+void ObjectFlowImpl::setTransformation(const std::shared_ptr<uml::Behavior>& _transformation)
 {
     m_transformation = _transformation;
 	

@@ -108,7 +108,7 @@ namespace uml
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual void setRegionAsInput(std::shared_ptr<uml::ExpansionRegion>) = 0;
+			virtual void setRegionAsInput(const std::shared_ptr<uml::ExpansionRegion>&) = 0;
 			/*!
 			The ExpansionRegion for which the ExpansionNode is an output.
 			<p>From package UML::Actions.</p>
@@ -120,7 +120,7 @@ namespace uml
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual void setRegionAsOutput(std::shared_ptr<uml::ExpansionRegion>) = 0;
+			virtual void setRegionAsOutput(const std::shared_ptr<uml::ExpansionRegion>&) = 0;
 
 			//*********************************
 			// Union Reference Getters

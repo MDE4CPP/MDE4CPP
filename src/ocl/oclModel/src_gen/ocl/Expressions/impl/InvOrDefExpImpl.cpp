@@ -149,7 +149,7 @@ std::shared_ptr<ocl::Expressions::OclExpression> InvOrDefExpImpl::getReferredExp
 {
     return m_referredExpression;
 }
-void InvOrDefExpImpl::setReferredExpression(std::shared_ptr<ocl::Expressions::OclExpression> _referredExpression)
+void InvOrDefExpImpl::setReferredExpression(const std::shared_ptr<ocl::Expressions::OclExpression>& _referredExpression)
 {
     m_referredExpression = _referredExpression;
 	

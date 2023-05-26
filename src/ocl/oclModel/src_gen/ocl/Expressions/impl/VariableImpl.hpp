@@ -52,23 +52,23 @@ namespace ocl::Expressions
 			// Reference Getters & Setters
 			//*********************************
 			virtual std::shared_ptr<ocl::Expressions::IterateExp> getBaseExp() const ;
-			virtual void setBaseExp(std::shared_ptr<ocl::Expressions::IterateExp>) ;
+			virtual void setBaseExp(const std::shared_ptr<ocl::Expressions::IterateExp>&) ;
 			virtual std::shared_ptr<ocl::Expressions::OclExpression> getInitExpression() const ;
-			virtual void setInitExpression(std::shared_ptr<ocl::Expressions::OclExpression>) ;
+			virtual void setInitExpression(const std::shared_ptr<ocl::Expressions::OclExpression>&) ;
 			virtual std::shared_ptr<ocl::Expressions::LoopExp> getLoopExp() const ;
-			virtual void setLoopExp(std::shared_ptr<ocl::Expressions::LoopExp>) ;
+			virtual void setLoopExp(const std::shared_ptr<ocl::Expressions::LoopExp>&) ;
 			virtual std::shared_ptr<ocl::Expressions::VariableExp> getReferringExp() const ;
-			virtual void setReferringExp(std::shared_ptr<ocl::Expressions::VariableExp>) ;
+			virtual void setReferringExp(const std::shared_ptr<ocl::Expressions::VariableExp>&) ;
 			virtual std::shared_ptr<ecore::EParameter> getRepresentedParameter() const ;
-			virtual void setRepresentedParameter(std::shared_ptr<ecore::EParameter>) ;
+			virtual void setRepresentedParameter(const std::shared_ptr<ecore::EParameter>&) ;
 			virtual std::shared_ptr<ocl::Expressions::ExpressionInOcl> getResultOwner() const ;
-			virtual void setResultOwner(std::shared_ptr<ocl::Expressions::ExpressionInOcl>) ;
+			virtual void setResultOwner(const std::shared_ptr<ocl::Expressions::ExpressionInOcl>&) ;
 			virtual std::shared_ptr<ocl::Expressions::ExpressionInOcl> getSelfOwner() const ;
-			virtual void setSelfOwner(std::shared_ptr<ocl::Expressions::ExpressionInOcl>) ;
+			virtual void setSelfOwner(const std::shared_ptr<ocl::Expressions::ExpressionInOcl>&) ;
 			virtual std::shared_ptr<ecore::ETypedElement> getValue() const ;
-			virtual void setValue(std::shared_ptr<ecore::ETypedElement>) ;
+			virtual void setValue(const std::shared_ptr<ecore::ETypedElement>&) ;
 			virtual std::shared_ptr<ocl::Expressions::ExpressionInOcl> getVarOwner() const ;
-			virtual void setVarOwner(std::shared_ptr<ocl::Expressions::ExpressionInOcl>) ;
+			virtual void setVarOwner(const std::shared_ptr<ocl::Expressions::ExpressionInOcl>&) ;
 			
 			//*********************************
 			// Union Reference Getters

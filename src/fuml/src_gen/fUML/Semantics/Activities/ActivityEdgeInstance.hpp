@@ -91,7 +91,7 @@ namespace fUML::Semantics::Activities
 			// Reference Getters & Setters
 			//*********************************
 			virtual std::shared_ptr<uml::ActivityEdge> getEdge() const = 0;
-			virtual void setEdge(std::shared_ptr<uml::ActivityEdge>) = 0;
+			virtual void setEdge(const std::shared_ptr<uml::ActivityEdge>&) = 0;
 			virtual std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup> getGroup() const = 0;
 			virtual void setGroup(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup>) = 0;
 			virtual std::shared_ptr<Bag<fUML::Semantics::Activities::Offer>> getOffers() const = 0;

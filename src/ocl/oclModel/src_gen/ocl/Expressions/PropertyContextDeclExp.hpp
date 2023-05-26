@@ -97,9 +97,9 @@ namespace ocl::Expressions
 			// Reference Getters & Setters
 			//*********************************
 			virtual std::shared_ptr<ocl::Expressions::InitOrDerValueListExp> getInitOrDerValues() const = 0;
-			virtual void setInitOrDerValues(std::shared_ptr<ocl::Expressions::InitOrDerValueListExp>) = 0;
+			virtual void setInitOrDerValues(const std::shared_ptr<ocl::Expressions::InitOrDerValueListExp>&) = 0;
 			virtual std::shared_ptr<ocl::Expressions::TypeExp> getPropType() const = 0;
-			virtual void setPropType(std::shared_ptr<ocl::Expressions::TypeExp>) = 0;
+			virtual void setPropType(const std::shared_ptr<ocl::Expressions::TypeExp>&) = 0;
 
 			//*********************************
 			// Union Reference Getters

@@ -166,7 +166,7 @@ std::shared_ptr<uml::Profile> ProfileApplicationImpl::getAppliedProfile() const
 {
     return m_appliedProfile;
 }
-void ProfileApplicationImpl::setAppliedProfile(std::shared_ptr<uml::Profile> _appliedProfile)
+void ProfileApplicationImpl::setAppliedProfile(const std::shared_ptr<uml::Profile>& _appliedProfile)
 {
     m_appliedProfile = _appliedProfile;
 	

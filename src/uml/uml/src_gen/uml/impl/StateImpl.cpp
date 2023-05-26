@@ -441,7 +441,7 @@ std::shared_ptr<uml::Behavior> StateImpl::getDoActivity() const
 {
     return m_doActivity;
 }
-void StateImpl::setDoActivity(std::shared_ptr<uml::Behavior> _doActivity)
+void StateImpl::setDoActivity(const std::shared_ptr<uml::Behavior>& _doActivity)
 {
     m_doActivity = _doActivity;
 	
@@ -452,7 +452,7 @@ std::shared_ptr<uml::Behavior> StateImpl::getEntry() const
 {
     return m_entry;
 }
-void StateImpl::setEntry(std::shared_ptr<uml::Behavior> _entry)
+void StateImpl::setEntry(const std::shared_ptr<uml::Behavior>& _entry)
 {
     m_entry = _entry;
 	
@@ -463,7 +463,7 @@ std::shared_ptr<uml::Behavior> StateImpl::getExit() const
 {
     return m_exit;
 }
-void StateImpl::setExit(std::shared_ptr<uml::Behavior> _exit)
+void StateImpl::setExit(const std::shared_ptr<uml::Behavior>& _exit)
 {
     m_exit = _exit;
 	
@@ -474,7 +474,7 @@ std::shared_ptr<uml::State> StateImpl::getRedefinedState() const
 {
     return m_redefinedState;
 }
-void StateImpl::setRedefinedState(std::shared_ptr<uml::State> _redefinedState)
+void StateImpl::setRedefinedState(const std::shared_ptr<uml::State>& _redefinedState)
 {
     m_redefinedState = _redefinedState;
 	
@@ -506,7 +506,7 @@ std::shared_ptr<uml::Constraint> StateImpl::getStateInvariant() const
 {
     return m_stateInvariant;
 }
-void StateImpl::setStateInvariant(std::shared_ptr<uml::Constraint> _stateInvariant)
+void StateImpl::setStateInvariant(const std::shared_ptr<uml::Constraint>& _stateInvariant)
 {
     m_stateInvariant = _stateInvariant;
 	
@@ -517,7 +517,7 @@ std::shared_ptr<uml::StateMachine> StateImpl::getSubmachine() const
 {
     return m_submachine;
 }
-void StateImpl::setSubmachine(std::shared_ptr<uml::StateMachine> _submachine)
+void StateImpl::setSubmachine(const std::shared_ptr<uml::StateMachine>& _submachine)
 {
     m_submachine = _submachine;
 	

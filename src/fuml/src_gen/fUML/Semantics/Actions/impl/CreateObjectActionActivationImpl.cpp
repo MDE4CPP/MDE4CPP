@@ -186,7 +186,7 @@ std::shared_ptr<uml::CreateObjectAction> CreateObjectActionActivationImpl::getCr
 {
     return m_createObjectAction;
 }
-void CreateObjectActionActivationImpl::setCreateObjectAction(std::shared_ptr<uml::CreateObjectAction> _createObjectAction)
+void CreateObjectActionActivationImpl::setCreateObjectAction(const std::shared_ptr<uml::CreateObjectAction>& _createObjectAction)
 {
     m_createObjectAction = _createObjectAction;
 	//additional setter call for redefined reference ActionActivation::action

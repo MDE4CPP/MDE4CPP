@@ -202,7 +202,7 @@ std::shared_ptr<uml::Behavior> ObjectNodeImpl::getSelection() const
 {
     return m_selection;
 }
-void ObjectNodeImpl::setSelection(std::shared_ptr<uml::Behavior> _selection)
+void ObjectNodeImpl::setSelection(const std::shared_ptr<uml::Behavior>& _selection)
 {
     m_selection = _selection;
 	
@@ -213,7 +213,7 @@ std::shared_ptr<uml::ValueSpecification> ObjectNodeImpl::getUpperBound() const
 {
     return m_upperBound;
 }
-void ObjectNodeImpl::setUpperBound(std::shared_ptr<uml::ValueSpecification> _upperBound)
+void ObjectNodeImpl::setUpperBound(const std::shared_ptr<uml::ValueSpecification>& _upperBound)
 {
     m_upperBound = _upperBound;
 	

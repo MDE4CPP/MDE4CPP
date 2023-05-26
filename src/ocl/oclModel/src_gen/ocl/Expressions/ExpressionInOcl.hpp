@@ -83,12 +83,12 @@ namespace ocl::Expressions
 			// Reference Getters & Setters
 			//*********************************
 			virtual std::shared_ptr<ocl::Expressions::OclExpression> getBodyExpression() const = 0;
-			virtual void setBodyExpression(std::shared_ptr<ocl::Expressions::OclExpression>) = 0;
+			virtual void setBodyExpression(const std::shared_ptr<ocl::Expressions::OclExpression>&) = 0;
 			virtual std::shared_ptr<ecore::ETypedElement> getContextVariable() const = 0;
-			virtual void setContextVariable(std::shared_ptr<ecore::ETypedElement>) = 0;
+			virtual void setContextVariable(const std::shared_ptr<ecore::ETypedElement>&) = 0;
 			virtual std::shared_ptr<Bag<ecore::ETypedElement>> getParameterVariable() const = 0;
 			virtual std::shared_ptr<ecore::ETypedElement> getResultVariable() const = 0;
-			virtual void setResultVariable(std::shared_ptr<ecore::ETypedElement>) = 0;
+			virtual void setResultVariable(const std::shared_ptr<ecore::ETypedElement>&) = 0;
 
 			//*********************************
 			// Union Reference Getters

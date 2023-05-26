@@ -236,7 +236,7 @@ std::shared_ptr<uml::ValueSpecification> InstanceSpecificationImpl::getSpecifica
 {
     return m_specification;
 }
-void InstanceSpecificationImpl::setSpecification(std::shared_ptr<uml::ValueSpecification> _specification)
+void InstanceSpecificationImpl::setSpecification(const std::shared_ptr<uml::ValueSpecification>& _specification)
 {
     m_specification = _specification;
 	

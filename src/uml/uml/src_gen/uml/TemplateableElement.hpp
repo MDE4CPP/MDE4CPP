@@ -108,7 +108,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual void setOwnedTemplateSignature(std::shared_ptr<uml::TemplateSignature>) = 0;
+			virtual void setOwnedTemplateSignature(const std::shared_ptr<uml::TemplateSignature>&) = 0;
 			/*!
 			The optional TemplateBindings from this TemplateableElement to one or more templates.
 			<p>From package UML::CommonStructure.</p>

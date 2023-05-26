@@ -74,7 +74,7 @@ namespace uml
 			<p>From package UML::StateMachines.</p>
 			*/
 			
-			virtual void setPostCondition(std::shared_ptr<uml::Constraint>) ;
+			virtual void setPostCondition(const std::shared_ptr<uml::Constraint>&) ;
 			/*!
 			Specifies the precondition of the Transition. It specifies the Condition that should be verified before triggering the Transition. This guard condition added to the source State will be evaluated as part of the precondition of the Operation referred by the Transition if any.
 			<p>From package UML::StateMachines.</p>
@@ -86,7 +86,7 @@ namespace uml
 			<p>From package UML::StateMachines.</p>
 			*/
 			
-			virtual void setPreCondition(std::shared_ptr<uml::Constraint>) ;
+			virtual void setPreCondition(const std::shared_ptr<uml::Constraint>&) ;
 			/*!
 			This association refers to the associated Operation. It is derived from the Operation of the CallEvent Trigger when applicable.
 			<p>From package UML::StateMachines.</p>

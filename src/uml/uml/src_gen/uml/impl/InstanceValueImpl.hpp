@@ -73,7 +73,7 @@ namespace uml
 			<p>From package UML::Classification.</p>
 			*/
 			
-			virtual void setInstance(std::shared_ptr<uml::InstanceSpecification>) ;
+			virtual void setInstance(const std::shared_ptr<uml::InstanceSpecification>&) ;
 			
 			//*********************************
 			// Union Reference Getters

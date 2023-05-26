@@ -166,7 +166,7 @@ std::shared_ptr<uml::Behavior> DecisionNodeImpl::getDecisionInput() const
 {
     return m_decisionInput;
 }
-void DecisionNodeImpl::setDecisionInput(std::shared_ptr<uml::Behavior> _decisionInput)
+void DecisionNodeImpl::setDecisionInput(const std::shared_ptr<uml::Behavior>& _decisionInput)
 {
     m_decisionInput = _decisionInput;
 	
@@ -177,7 +177,7 @@ std::shared_ptr<uml::ObjectFlow> DecisionNodeImpl::getDecisionInputFlow() const
 {
     return m_decisionInputFlow;
 }
-void DecisionNodeImpl::setDecisionInputFlow(std::shared_ptr<uml::ObjectFlow> _decisionInputFlow)
+void DecisionNodeImpl::setDecisionInputFlow(const std::shared_ptr<uml::ObjectFlow>& _decisionInputFlow)
 {
     m_decisionInputFlow = _decisionInputFlow;
 	

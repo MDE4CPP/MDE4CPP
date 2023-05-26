@@ -92,9 +92,9 @@ namespace fUML::Semantics::Actions
 			virtual std::weak_ptr<fUML::Semantics::Actions::ActionActivation> getActionActivation() const = 0;
 			virtual void setActionActivation(std::weak_ptr<fUML::Semantics::Actions::ActionActivation>) = 0;
 			virtual std::shared_ptr<uml::Pin> getPin() const = 0;
-			virtual void setPin(std::shared_ptr<uml::Pin>) = 0;
+			virtual void setPin(const std::shared_ptr<uml::Pin>&) = 0;
 			/*Additional Setter for 'ActivityNodeActivation::node' redefined by reference 'pin'*/
-			virtual void setNode(std::shared_ptr<uml::ActivityNode>) = 0;
+			virtual void setNode(const std::shared_ptr<uml::ActivityNode>&) = 0;
 
 			//*********************************
 			// Union Reference Getters

@@ -149,7 +149,7 @@ std::shared_ptr<ocl::Expressions::OclExpression> PrePostBodyExpImpl::getBodyExpr
 {
     return m_bodyExpression;
 }
-void PrePostBodyExpImpl::setBodyExpression(std::shared_ptr<ocl::Expressions::OclExpression> _bodyExpression)
+void PrePostBodyExpImpl::setBodyExpression(const std::shared_ptr<ocl::Expressions::OclExpression>& _bodyExpression)
 {
     m_bodyExpression = _bodyExpression;
 	

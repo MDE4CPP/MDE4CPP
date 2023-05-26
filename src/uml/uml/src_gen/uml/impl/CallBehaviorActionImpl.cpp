@@ -169,7 +169,7 @@ std::shared_ptr<uml::Behavior> CallBehaviorActionImpl::getBehavior() const
 {
     return m_behavior;
 }
-void CallBehaviorActionImpl::setBehavior(std::shared_ptr<uml::Behavior> _behavior)
+void CallBehaviorActionImpl::setBehavior(const std::shared_ptr<uml::Behavior>& _behavior)
 {
     m_behavior = _behavior;
 	

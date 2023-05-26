@@ -271,7 +271,7 @@ std::shared_ptr<uml::StringExpression> NamedElementImpl::getNameExpression() con
 {
     return m_nameExpression;
 }
-void NamedElementImpl::setNameExpression(std::shared_ptr<uml::StringExpression> _nameExpression)
+void NamedElementImpl::setNameExpression(const std::shared_ptr<uml::StringExpression>& _nameExpression)
 {
     m_nameExpression = _nameExpression;
 	

@@ -173,7 +173,7 @@ std::shared_ptr<uml::OutputPin> AcceptCallActionImpl::getReturnInformation() con
 {
     return m_returnInformation;
 }
-void AcceptCallActionImpl::setReturnInformation(std::shared_ptr<uml::OutputPin> _returnInformation)
+void AcceptCallActionImpl::setReturnInformation(const std::shared_ptr<uml::OutputPin>& _returnInformation)
 {
     m_returnInformation = _returnInformation;
 	

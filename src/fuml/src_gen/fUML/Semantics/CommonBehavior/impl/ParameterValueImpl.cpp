@@ -170,7 +170,7 @@ std::shared_ptr<uml::Parameter> ParameterValueImpl::getParameter() const
 {
     return m_parameter;
 }
-void ParameterValueImpl::setParameter(std::shared_ptr<uml::Parameter> _parameter)
+void ParameterValueImpl::setParameter(const std::shared_ptr<uml::Parameter>& _parameter)
 {
     m_parameter = _parameter;
 	

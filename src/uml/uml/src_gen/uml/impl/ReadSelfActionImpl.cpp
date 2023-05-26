@@ -172,7 +172,7 @@ std::shared_ptr<uml::OutputPin> ReadSelfActionImpl::getResult() const
 {
     return m_result;
 }
-void ReadSelfActionImpl::setResult(std::shared_ptr<uml::OutputPin> _result)
+void ReadSelfActionImpl::setResult(const std::shared_ptr<uml::OutputPin>& _result)
 {
     m_result = _result;
 	

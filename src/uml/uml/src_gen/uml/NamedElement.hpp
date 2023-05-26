@@ -222,7 +222,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual void setNameExpression(std::shared_ptr<uml::StringExpression>) = 0;
+			virtual void setNameExpression(const std::shared_ptr<uml::StringExpression>&) = 0;
 			
 
 			//*********************************

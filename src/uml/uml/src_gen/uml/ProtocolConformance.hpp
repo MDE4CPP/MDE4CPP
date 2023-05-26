@@ -97,7 +97,7 @@ namespace uml
 			<p>From package UML::StateMachines.</p>
 			*/
 			
-			virtual void setGeneralMachine(std::shared_ptr<uml::ProtocolStateMachine>) = 0;
+			virtual void setGeneralMachine(const std::shared_ptr<uml::ProtocolStateMachine>&) = 0;
 			/*!
 			Specifies the ProtocolStateMachine which conforms to the general ProtocolStateMachine.
 			<p>From package UML::StateMachines.</p>

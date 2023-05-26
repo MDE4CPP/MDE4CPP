@@ -165,7 +165,7 @@ std::shared_ptr<uml::InputPin> WriteVariableActionImpl::getValue() const
 {
     return m_value;
 }
-void WriteVariableActionImpl::setValue(std::shared_ptr<uml::InputPin> _value)
+void WriteVariableActionImpl::setValue(const std::shared_ptr<uml::InputPin>& _value)
 {
     m_value = _value;
 	

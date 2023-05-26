@@ -140,7 +140,7 @@ std::shared_ptr<uml::ObjectNode> ExceptionHandlerImpl::getExceptionInput() const
 {
     return m_exceptionInput;
 }
-void ExceptionHandlerImpl::setExceptionInput(std::shared_ptr<uml::ObjectNode> _exceptionInput)
+void ExceptionHandlerImpl::setExceptionInput(const std::shared_ptr<uml::ObjectNode>& _exceptionInput)
 {
     m_exceptionInput = _exceptionInput;
 	
@@ -163,7 +163,7 @@ std::shared_ptr<uml::ExecutableNode> ExceptionHandlerImpl::getHandlerBody() cons
 {
     return m_handlerBody;
 }
-void ExceptionHandlerImpl::setHandlerBody(std::shared_ptr<uml::ExecutableNode> _handlerBody)
+void ExceptionHandlerImpl::setHandlerBody(const std::shared_ptr<uml::ExecutableNode>& _handlerBody)
 {
     m_handlerBody = _handlerBody;
 	

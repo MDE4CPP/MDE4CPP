@@ -238,7 +238,7 @@ std::shared_ptr<ocl::Expressions::OclExpression> VarDeclarationExpImpl::getAssig
 {
     return m_assignedOclExp;
 }
-void VarDeclarationExpImpl::setAssignedOclExp(std::shared_ptr<ocl::Expressions::OclExpression> _assignedOclExp)
+void VarDeclarationExpImpl::setAssignedOclExp(const std::shared_ptr<ocl::Expressions::OclExpression>& _assignedOclExp)
 {
     m_assignedOclExp = _assignedOclExp;
 	
@@ -260,7 +260,7 @@ std::shared_ptr<ocl::Expressions::TypeExp> VarDeclarationExpImpl::getVarType() c
 {
     return m_varType;
 }
-void VarDeclarationExpImpl::setVarType(std::shared_ptr<ocl::Expressions::TypeExp> _varType)
+void VarDeclarationExpImpl::setVarType(const std::shared_ptr<ocl::Expressions::TypeExp>& _varType)
 {
     m_varType = _varType;
 	

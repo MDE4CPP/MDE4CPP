@@ -184,7 +184,7 @@ std::shared_ptr<uml::InputPin> AddVariableValueActionImpl::getInsertAt() const
 {
     return m_insertAt;
 }
-void AddVariableValueActionImpl::setInsertAt(std::shared_ptr<uml::InputPin> _insertAt)
+void AddVariableValueActionImpl::setInsertAt(const std::shared_ptr<uml::InputPin>& _insertAt)
 {
     m_insertAt = _insertAt;
 	

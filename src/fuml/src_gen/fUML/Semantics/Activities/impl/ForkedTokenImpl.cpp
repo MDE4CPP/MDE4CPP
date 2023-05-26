@@ -211,7 +211,7 @@ std::shared_ptr<fUML::Semantics::Activities::Token> ForkedTokenImpl::getBaseToke
 {
     return m_baseToken;
 }
-void ForkedTokenImpl::setBaseToken(std::shared_ptr<fUML::Semantics::Activities::Token> _baseToken)
+void ForkedTokenImpl::setBaseToken(const std::shared_ptr<fUML::Semantics::Activities::Token>& _baseToken)
 {
     m_baseToken = _baseToken;
 	

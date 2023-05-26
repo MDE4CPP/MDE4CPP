@@ -69,7 +69,7 @@ namespace uml
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual void setEnd(std::shared_ptr<uml::Property>) ;
+			virtual void setEnd(const std::shared_ptr<uml::Property>&) ;
 			/*!
 			The input pin from which the link object is obtained.
 			<p>From package UML::Actions.</p>
@@ -81,7 +81,7 @@ namespace uml
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual void setObject(std::shared_ptr<uml::InputPin>) ;
+			virtual void setObject(const std::shared_ptr<uml::InputPin>&) ;
 			/*!
 			The OutputPin where the result value is placed.
 			<p>From package UML::Actions.</p>
@@ -93,7 +93,7 @@ namespace uml
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual void setResult(std::shared_ptr<uml::OutputPin>) ;
+			virtual void setResult(const std::shared_ptr<uml::OutputPin>&) ;
 			
 			//*********************************
 			// Union Reference Getters

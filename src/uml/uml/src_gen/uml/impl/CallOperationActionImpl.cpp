@@ -175,7 +175,7 @@ std::shared_ptr<uml::Operation> CallOperationActionImpl::getOperation() const
 {
     return m_operation;
 }
-void CallOperationActionImpl::setOperation(std::shared_ptr<uml::Operation> _operation)
+void CallOperationActionImpl::setOperation(const std::shared_ptr<uml::Operation>& _operation)
 {
     m_operation = _operation;
 	
@@ -186,7 +186,7 @@ std::shared_ptr<uml::InputPin> CallOperationActionImpl::getTarget() const
 {
     return m_target;
 }
-void CallOperationActionImpl::setTarget(std::shared_ptr<uml::InputPin> _target)
+void CallOperationActionImpl::setTarget(const std::shared_ptr<uml::InputPin>& _target)
 {
     m_target = _target;
 	

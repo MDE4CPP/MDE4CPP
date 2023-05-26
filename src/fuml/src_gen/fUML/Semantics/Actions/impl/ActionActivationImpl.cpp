@@ -710,7 +710,7 @@ std::shared_ptr<uml::Action> ActionActivationImpl::getAction() const
 {
     return m_action;
 }
-void ActionActivationImpl::setAction(std::shared_ptr<uml::Action> _action)
+void ActionActivationImpl::setAction(const std::shared_ptr<uml::Action>& _action)
 {
     m_action = _action;
 	//additional setter call for redefined reference ActivityNodeActivation::node

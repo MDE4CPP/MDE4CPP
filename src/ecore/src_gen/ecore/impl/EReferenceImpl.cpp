@@ -183,7 +183,7 @@ std::shared_ptr<ecore::EReference> EReferenceImpl::getEOpposite() const
 {
     return m_eOpposite;
 }
-void EReferenceImpl::setEOpposite(std::shared_ptr<ecore::EReference> _eOpposite)
+void EReferenceImpl::setEOpposite(const std::shared_ptr<ecore::EReference>& _eOpposite)
 {
     m_eOpposite = _eOpposite;
 	
@@ -194,7 +194,7 @@ std::shared_ptr<ecore::EClass> EReferenceImpl::getEReferenceType() const
 {
     return m_eReferenceType;
 }
-void EReferenceImpl::setEReferenceType(std::shared_ptr<ecore::EClass> _eReferenceType)
+void EReferenceImpl::setEReferenceType(const std::shared_ptr<ecore::EClass>& _eReferenceType)
 {
     m_eReferenceType = _eReferenceType;
 	

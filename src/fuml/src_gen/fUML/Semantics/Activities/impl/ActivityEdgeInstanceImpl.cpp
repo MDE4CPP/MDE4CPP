@@ -263,7 +263,7 @@ std::shared_ptr<uml::ActivityEdge> ActivityEdgeInstanceImpl::getEdge() const
 {
     return m_edge;
 }
-void ActivityEdgeInstanceImpl::setEdge(std::shared_ptr<uml::ActivityEdge> _edge)
+void ActivityEdgeInstanceImpl::setEdge(const std::shared_ptr<uml::ActivityEdge>& _edge)
 {
     m_edge = _edge;
 	

@@ -69,7 +69,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual void setMapping(std::shared_ptr<uml::OpaqueExpression>) ;
+			virtual void setMapping(const std::shared_ptr<uml::OpaqueExpression>&) ;
 			
 			//*********************************
 			// Union Reference Getters

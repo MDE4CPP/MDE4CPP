@@ -144,7 +144,7 @@ std::shared_ptr<ocl::Expressions::IterateExp> VariableImpl::getBaseExp() const
 {
     return m_baseExp;
 }
-void VariableImpl::setBaseExp(std::shared_ptr<ocl::Expressions::IterateExp> _baseExp)
+void VariableImpl::setBaseExp(const std::shared_ptr<ocl::Expressions::IterateExp>& _baseExp)
 {
     m_baseExp = _baseExp;
 	
@@ -155,7 +155,7 @@ std::shared_ptr<ocl::Expressions::OclExpression> VariableImpl::getInitExpression
 {
     return m_initExpression;
 }
-void VariableImpl::setInitExpression(std::shared_ptr<ocl::Expressions::OclExpression> _initExpression)
+void VariableImpl::setInitExpression(const std::shared_ptr<ocl::Expressions::OclExpression>& _initExpression)
 {
     m_initExpression = _initExpression;
 	
@@ -166,7 +166,7 @@ std::shared_ptr<ocl::Expressions::LoopExp> VariableImpl::getLoopExp() const
 {
     return m_loopExp;
 }
-void VariableImpl::setLoopExp(std::shared_ptr<ocl::Expressions::LoopExp> _loopExp)
+void VariableImpl::setLoopExp(const std::shared_ptr<ocl::Expressions::LoopExp>& _loopExp)
 {
     m_loopExp = _loopExp;
 	
@@ -177,7 +177,7 @@ std::shared_ptr<ocl::Expressions::VariableExp> VariableImpl::getReferringExp() c
 {
     return m_referringExp;
 }
-void VariableImpl::setReferringExp(std::shared_ptr<ocl::Expressions::VariableExp> _referringExp)
+void VariableImpl::setReferringExp(const std::shared_ptr<ocl::Expressions::VariableExp>& _referringExp)
 {
     m_referringExp = _referringExp;
 	
@@ -188,7 +188,7 @@ std::shared_ptr<ecore::EParameter> VariableImpl::getRepresentedParameter() const
 {
     return m_representedParameter;
 }
-void VariableImpl::setRepresentedParameter(std::shared_ptr<ecore::EParameter> _representedParameter)
+void VariableImpl::setRepresentedParameter(const std::shared_ptr<ecore::EParameter>& _representedParameter)
 {
     m_representedParameter = _representedParameter;
 	
@@ -199,7 +199,7 @@ std::shared_ptr<ocl::Expressions::ExpressionInOcl> VariableImpl::getResultOwner(
 {
     return m_resultOwner;
 }
-void VariableImpl::setResultOwner(std::shared_ptr<ocl::Expressions::ExpressionInOcl> _resultOwner)
+void VariableImpl::setResultOwner(const std::shared_ptr<ocl::Expressions::ExpressionInOcl>& _resultOwner)
 {
     m_resultOwner = _resultOwner;
 	
@@ -210,7 +210,7 @@ std::shared_ptr<ocl::Expressions::ExpressionInOcl> VariableImpl::getSelfOwner() 
 {
     return m_selfOwner;
 }
-void VariableImpl::setSelfOwner(std::shared_ptr<ocl::Expressions::ExpressionInOcl> _selfOwner)
+void VariableImpl::setSelfOwner(const std::shared_ptr<ocl::Expressions::ExpressionInOcl>& _selfOwner)
 {
     m_selfOwner = _selfOwner;
 	
@@ -221,7 +221,7 @@ std::shared_ptr<ecore::ETypedElement> VariableImpl::getValue() const
 {
     return m_value;
 }
-void VariableImpl::setValue(std::shared_ptr<ecore::ETypedElement> _value)
+void VariableImpl::setValue(const std::shared_ptr<ecore::ETypedElement>& _value)
 {
     m_value = _value;
 	
@@ -232,7 +232,7 @@ std::shared_ptr<ocl::Expressions::ExpressionInOcl> VariableImpl::getVarOwner() c
 {
     return m_varOwner;
 }
-void VariableImpl::setVarOwner(std::shared_ptr<ocl::Expressions::ExpressionInOcl> _varOwner)
+void VariableImpl::setVarOwner(const std::shared_ptr<ocl::Expressions::ExpressionInOcl>& _varOwner)
 {
     m_varOwner = _varOwner;
 	

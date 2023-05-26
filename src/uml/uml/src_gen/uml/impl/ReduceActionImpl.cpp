@@ -192,7 +192,7 @@ std::shared_ptr<uml::InputPin> ReduceActionImpl::getCollection() const
 {
     return m_collection;
 }
-void ReduceActionImpl::setCollection(std::shared_ptr<uml::InputPin> _collection)
+void ReduceActionImpl::setCollection(const std::shared_ptr<uml::InputPin>& _collection)
 {
     m_collection = _collection;
 	
@@ -203,7 +203,7 @@ std::shared_ptr<uml::Behavior> ReduceActionImpl::getReducer() const
 {
     return m_reducer;
 }
-void ReduceActionImpl::setReducer(std::shared_ptr<uml::Behavior> _reducer)
+void ReduceActionImpl::setReducer(const std::shared_ptr<uml::Behavior>& _reducer)
 {
     m_reducer = _reducer;
 	
@@ -214,7 +214,7 @@ std::shared_ptr<uml::OutputPin> ReduceActionImpl::getResult() const
 {
     return m_result;
 }
-void ReduceActionImpl::setResult(std::shared_ptr<uml::OutputPin> _result)
+void ReduceActionImpl::setResult(const std::shared_ptr<uml::OutputPin>& _result)
 {
     m_result = _result;
 	

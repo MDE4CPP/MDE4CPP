@@ -150,7 +150,7 @@ std::shared_ptr<uml::Signal> ReceptionImpl::getSignal() const
 {
     return m_signal;
 }
-void ReceptionImpl::setSignal(std::shared_ptr<uml::Signal> _signal)
+void ReceptionImpl::setSignal(const std::shared_ptr<uml::Signal>& _signal)
 {
     m_signal = _signal;
 	

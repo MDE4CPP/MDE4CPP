@@ -69,7 +69,7 @@ namespace uml
 			<p>From package UML::Interactions.</p>
 			*/
 			
-			virtual void setFinish(std::shared_ptr<uml::OccurrenceSpecification>) ;
+			virtual void setFinish(const std::shared_ptr<uml::OccurrenceSpecification>&) ;
 			/*!
 			References the OccurrenceSpecification that designates the start of the Action or Behavior.
 			<p>From package UML::Interactions.</p>
@@ -81,7 +81,7 @@ namespace uml
 			<p>From package UML::Interactions.</p>
 			*/
 			
-			virtual void setStart(std::shared_ptr<uml::OccurrenceSpecification>) ;
+			virtual void setStart(const std::shared_ptr<uml::OccurrenceSpecification>&) ;
 			
 			//*********************************
 			// Union Reference Getters

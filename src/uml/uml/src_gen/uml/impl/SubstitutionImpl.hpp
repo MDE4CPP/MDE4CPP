@@ -71,7 +71,7 @@ namespace uml
 			<p>From package UML::Classification.</p>
 			*/
 			
-			virtual void setContract(std::shared_ptr<uml::Classifier>) ;
+			virtual void setContract(const std::shared_ptr<uml::Classifier>&) ;
 			/*!
 			Instances of the substituting classifier are runtime substitutable where instances of the contract classifier are expected.
 			<p>From package UML::Classification.</p>

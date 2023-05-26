@@ -217,7 +217,7 @@ std::shared_ptr<ocl::Expressions::OclExpression> InfixedExpImpl::getSource() con
 {
     return m_source;
 }
-void InfixedExpImpl::setSource(std::shared_ptr<ocl::Expressions::OclExpression> _source)
+void InfixedExpImpl::setSource(const std::shared_ptr<ocl::Expressions::OclExpression>& _source)
 {
     m_source = _source;
 	

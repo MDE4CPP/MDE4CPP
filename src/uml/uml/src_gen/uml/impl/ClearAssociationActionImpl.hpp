@@ -69,7 +69,7 @@ namespace uml
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual void setAssociation(std::shared_ptr<uml::Association>) ;
+			virtual void setAssociation(const std::shared_ptr<uml::Association>&) ;
 			/*!
 			The InputPin that gives the object whose participation in the Association is to be cleared.
 			<p>From package UML::Actions.</p>
@@ -81,7 +81,7 @@ namespace uml
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual void setObject(std::shared_ptr<uml::InputPin>) ;
+			virtual void setObject(const std::shared_ptr<uml::InputPin>&) ;
 			
 			//*********************************
 			// Union Reference Getters

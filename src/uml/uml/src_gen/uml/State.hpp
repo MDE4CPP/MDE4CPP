@@ -191,7 +191,7 @@ namespace uml
 			<p>From package UML::StateMachines.</p>
 			*/
 			
-			virtual void setDoActivity(std::shared_ptr<uml::Behavior>) = 0;
+			virtual void setDoActivity(const std::shared_ptr<uml::Behavior>&) = 0;
 			/*!
 			An optional Behavior that is executed whenever this State is entered regardless of the Transition taken to reach the State. If defined, entry Behaviors are always executed to completion prior to any internal Behavior or Transitions performed within the State.
 			<p>From package UML::StateMachines.</p>
@@ -203,7 +203,7 @@ namespace uml
 			<p>From package UML::StateMachines.</p>
 			*/
 			
-			virtual void setEntry(std::shared_ptr<uml::Behavior>) = 0;
+			virtual void setEntry(const std::shared_ptr<uml::Behavior>&) = 0;
 			/*!
 			An optional Behavior that is executed whenever this State is exited regardless of which Transition was taken out of the State. If defined, exit Behaviors are always executed to completion only after all internal and transition Behaviors have completed execution.
 			<p>From package UML::StateMachines.</p>
@@ -215,7 +215,7 @@ namespace uml
 			<p>From package UML::StateMachines.</p>
 			*/
 			
-			virtual void setExit(std::shared_ptr<uml::Behavior>) = 0;
+			virtual void setExit(const std::shared_ptr<uml::Behavior>&) = 0;
 			/*!
 			The State of which this State is a redefinition.
 			<p>From package UML::StateMachines.</p>
@@ -227,7 +227,7 @@ namespace uml
 			<p>From package UML::StateMachines.</p>
 			*/
 			
-			virtual void setRedefinedState(std::shared_ptr<uml::State>) = 0;
+			virtual void setRedefinedState(const std::shared_ptr<uml::State>&) = 0;
 			/*!
 			The Regions owned directly by the State.
 			<p>From package UML::StateMachines.</p>
@@ -245,7 +245,7 @@ namespace uml
 			<p>From package UML::StateMachines.</p>
 			*/
 			
-			virtual void setStateInvariant(std::shared_ptr<uml::Constraint>) = 0;
+			virtual void setStateInvariant(const std::shared_ptr<uml::Constraint>&) = 0;
 			/*!
 			The StateMachine that is to be inserted in place of the (submachine) State.
 			<p>From package UML::StateMachines.</p>
@@ -257,7 +257,7 @@ namespace uml
 			<p>From package UML::StateMachines.</p>
 			*/
 			
-			virtual void setSubmachine(std::shared_ptr<uml::StateMachine>) = 0;
+			virtual void setSubmachine(const std::shared_ptr<uml::StateMachine>&) = 0;
 
 			//*********************************
 			// Union Reference Getters

@@ -69,7 +69,7 @@ namespace uml
 			<p>From package UML::Interactions.</p>
 			*/
 			
-			virtual void setInvariant(std::shared_ptr<uml::Constraint>) ;
+			virtual void setInvariant(const std::shared_ptr<uml::Constraint>&) ;
 			
 			//*********************************
 			// Union Reference Getters

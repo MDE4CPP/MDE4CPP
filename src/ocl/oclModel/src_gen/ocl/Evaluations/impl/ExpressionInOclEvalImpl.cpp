@@ -128,7 +128,7 @@ std::shared_ptr<ocl::Evaluations::OclExpEval> ExpressionInOclEvalImpl::getContex
 {
     return m_context;
 }
-void ExpressionInOclEvalImpl::setContext(std::shared_ptr<ocl::Evaluations::OclExpEval> _context)
+void ExpressionInOclEvalImpl::setContext(const std::shared_ptr<ocl::Evaluations::OclExpEval>& _context)
 {
     m_context = _context;
 	
@@ -139,7 +139,7 @@ std::shared_ptr<ocl::Evaluations::EvalEnvironment> ExpressionInOclEvalImpl::getE
 {
     return m_environment;
 }
-void ExpressionInOclEvalImpl::setEnvironment(std::shared_ptr<ocl::Evaluations::EvalEnvironment> _environment)
+void ExpressionInOclEvalImpl::setEnvironment(const std::shared_ptr<ocl::Evaluations::EvalEnvironment>& _environment)
 {
     m_environment = _environment;
 	

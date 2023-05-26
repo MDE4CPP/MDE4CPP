@@ -223,7 +223,7 @@ std::shared_ptr<ecore::ETypedElement> IterateExpImpl::getResult() const
 {
     return m_result;
 }
-void IterateExpImpl::setResult(std::shared_ptr<ecore::ETypedElement> _result)
+void IterateExpImpl::setResult(const std::shared_ptr<ecore::ETypedElement>& _result)
 {
     m_result = _result;
 	

@@ -133,7 +133,7 @@ std::shared_ptr<ocl::Evaluations::EvalEnvironment> OclExpEvalImpl::getBeforeEnvi
 {
     return m_beforeEnvironment;
 }
-void OclExpEvalImpl::setBeforeEnvironment(std::shared_ptr<ocl::Evaluations::EvalEnvironment> _beforeEnvironment)
+void OclExpEvalImpl::setBeforeEnvironment(const std::shared_ptr<ocl::Evaluations::EvalEnvironment>& _beforeEnvironment)
 {
     m_beforeEnvironment = _beforeEnvironment;
 	
@@ -144,7 +144,7 @@ std::shared_ptr<ocl::Evaluations::EvalEnvironment> OclExpEvalImpl::getEnvironmen
 {
     return m_environment;
 }
-void OclExpEvalImpl::setEnvironment(std::shared_ptr<ocl::Evaluations::EvalEnvironment> _environment)
+void OclExpEvalImpl::setEnvironment(const std::shared_ptr<ocl::Evaluations::EvalEnvironment>& _environment)
 {
     m_environment = _environment;
 	
@@ -155,7 +155,7 @@ std::shared_ptr<ocl::Expressions::OclExpression> OclExpEvalImpl::getModel() cons
 {
     return m_model;
 }
-void OclExpEvalImpl::setModel(std::shared_ptr<ocl::Expressions::OclExpression> _model)
+void OclExpEvalImpl::setModel(const std::shared_ptr<ocl::Expressions::OclExpression>& _model)
 {
     m_model = _model;
 	
@@ -166,7 +166,7 @@ std::shared_ptr<ecore::EObject> OclExpEvalImpl::getResultValue() const
 {
     return m_resultValue;
 }
-void OclExpEvalImpl::setResultValue(std::shared_ptr<ecore::EObject> _resultValue)
+void OclExpEvalImpl::setResultValue(const std::shared_ptr<ecore::EObject>& _resultValue)
 {
     m_resultValue = _resultValue;
 	

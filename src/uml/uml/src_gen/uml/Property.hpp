@@ -275,7 +275,7 @@ namespace uml
 			<p>From package UML::Classification.</p>
 			*/
 			
-			virtual void setAssociation(std::shared_ptr<uml::Association>) = 0;
+			virtual void setAssociation(const std::shared_ptr<uml::Association>&) = 0;
 			/*!
 			Designates the optional association end that owns a qualifier attribute.
 			<p>From package UML::Classification.</p>
@@ -323,7 +323,7 @@ namespace uml
 			<p>From package UML::Classification.</p>
 			*/
 			
-			virtual void setDefaultValue(std::shared_ptr<uml::ValueSpecification>) = 0;
+			virtual void setDefaultValue(const std::shared_ptr<uml::ValueSpecification>&) = 0;
 			/*!
 			The Interface that owns this Property, if any.
 			<p>From package UML::Classification.</p>
@@ -347,7 +347,7 @@ namespace uml
 			<p>From package UML::Classification.</p>
 			*/
 			
-			virtual void setOpposite(std::shared_ptr<uml::Property>) = 0;
+			virtual void setOpposite(const std::shared_ptr<uml::Property>&) = 0;
 			/*!
 			The owning association of this property, if any.
 			<p>From package UML::Classification.</p>

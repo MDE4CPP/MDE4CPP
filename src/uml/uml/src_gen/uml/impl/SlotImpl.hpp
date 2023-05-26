@@ -65,7 +65,7 @@ namespace uml
 			<p>From package UML::Classification.</p>
 			*/
 			
-			virtual void setDefiningFeature(std::shared_ptr<uml::StructuralFeature>) ;
+			virtual void setDefiningFeature(const std::shared_ptr<uml::StructuralFeature>&) ;
 			/*!
 			The InstanceSpecification that owns this Slot.
 			<p>From package UML::Classification.</p>

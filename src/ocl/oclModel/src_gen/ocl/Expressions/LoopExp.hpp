@@ -98,7 +98,7 @@ namespace ocl::Expressions
 			// Reference Getters & Setters
 			//*********************************
 			virtual std::shared_ptr<ocl::Expressions::OclExpression> getBody() const = 0;
-			virtual void setBody(std::shared_ptr<ocl::Expressions::OclExpression>) = 0;
+			virtual void setBody(const std::shared_ptr<ocl::Expressions::OclExpression>&) = 0;
 			virtual std::shared_ptr<Bag<ocl::Expressions::OclExpression>> getIterator() const = 0;
 
 			//*********************************

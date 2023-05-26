@@ -149,7 +149,7 @@ namespace uml
 			<p>From package UML::Activities.</p>
 			*/
 			
-			virtual void setRepresents(std::shared_ptr<uml::Element>) = 0;
+			virtual void setRepresents(const std::shared_ptr<uml::Element>&) = 0;
 			/*!
 			Other ActivityPartitions immediately contained in this ActivityPartition (as its subgroups).
 			<p>From package UML::Activities.</p>

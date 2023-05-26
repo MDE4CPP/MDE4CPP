@@ -208,7 +208,7 @@ std::shared_ptr<uml::ValueSpecification> MultiplicityElementImpl::getLowerValue(
 {
     return m_lowerValue;
 }
-void MultiplicityElementImpl::setLowerValue(std::shared_ptr<uml::ValueSpecification> _lowerValue)
+void MultiplicityElementImpl::setLowerValue(const std::shared_ptr<uml::ValueSpecification>& _lowerValue)
 {
     m_lowerValue = _lowerValue;
 	
@@ -219,7 +219,7 @@ std::shared_ptr<uml::ValueSpecification> MultiplicityElementImpl::getUpperValue(
 {
     return m_upperValue;
 }
-void MultiplicityElementImpl::setUpperValue(std::shared_ptr<uml::ValueSpecification> _upperValue)
+void MultiplicityElementImpl::setUpperValue(const std::shared_ptr<uml::ValueSpecification>& _upperValue)
 {
     m_upperValue = _upperValue;
 	

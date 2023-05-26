@@ -172,7 +172,7 @@ std::shared_ptr<uml::InputPin> StartClassifierBehaviorActionImpl::getObject() co
 {
     return m_object;
 }
-void StartClassifierBehaviorActionImpl::setObject(std::shared_ptr<uml::InputPin> _object)
+void StartClassifierBehaviorActionImpl::setObject(const std::shared_ptr<uml::InputPin>& _object)
 {
     m_object = _object;
 	

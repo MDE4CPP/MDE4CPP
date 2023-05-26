@@ -178,7 +178,7 @@ namespace uml
 			<p>From package UML::CommonBehavior.</p>
 			*/
 			
-			virtual void setContext(std::shared_ptr<uml::BehavioredClassifier>) = 0;
+			virtual void setContext(const std::shared_ptr<uml::BehavioredClassifier>&) = 0;
 			/*!
 			References a list of Parameters to the Behavior which describes the order and type of arguments that can be given when the Behavior is invoked and of the values which will be returned when the Behavior completes its execution.
 			<p>From package UML::CommonBehavior.</p>
@@ -220,7 +220,7 @@ namespace uml
 			<p>From package UML::CommonBehavior.</p>
 			*/
 			
-			virtual void setSpecification(std::shared_ptr<uml::BehavioralFeature>) = 0;
+			virtual void setSpecification(const std::shared_ptr<uml::BehavioralFeature>&) = 0;
 
 			//*********************************
 			// Union Reference Getters

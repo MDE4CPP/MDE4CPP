@@ -220,7 +220,7 @@ std::shared_ptr<ocl::Expressions::OperationContextExp> OperationContextDeclExpIm
 {
     return m_operationContext;
 }
-void OperationContextDeclExpImpl::setOperationContext(std::shared_ptr<ocl::Expressions::OperationContextExp> _operationContext)
+void OperationContextDeclExpImpl::setOperationContext(const std::shared_ptr<ocl::Expressions::OperationContextExp>& _operationContext)
 {
     m_operationContext = _operationContext;
 	
@@ -231,7 +231,7 @@ std::shared_ptr<ocl::Expressions::PrePostBodyListExp> OperationContextDeclExpImp
 {
     return m_prePostBodyExpressions;
 }
-void OperationContextDeclExpImpl::setPrePostBodyExpressions(std::shared_ptr<ocl::Expressions::PrePostBodyListExp> _prePostBodyExpressions)
+void OperationContextDeclExpImpl::setPrePostBodyExpressions(const std::shared_ptr<ocl::Expressions::PrePostBodyListExp>& _prePostBodyExpressions)
 {
     m_prePostBodyExpressions = _prePostBodyExpressions;
 	

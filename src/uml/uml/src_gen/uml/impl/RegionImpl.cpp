@@ -252,7 +252,7 @@ std::shared_ptr<uml::Region> RegionImpl::getExtendedRegion() const
 {
     return m_extendedRegion;
 }
-void RegionImpl::setExtendedRegion(std::shared_ptr<uml::Region> _extendedRegion)
+void RegionImpl::setExtendedRegion(const std::shared_ptr<uml::Region>& _extendedRegion)
 {
     m_extendedRegion = _extendedRegion;
 	

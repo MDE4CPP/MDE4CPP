@@ -141,7 +141,7 @@ std::shared_ptr<uml::Package> PackageMergeImpl::getMergedPackage() const
 {
     return m_mergedPackage;
 }
-void PackageMergeImpl::setMergedPackage(std::shared_ptr<uml::Package> _mergedPackage)
+void PackageMergeImpl::setMergedPackage(const std::shared_ptr<uml::Package>& _mergedPackage)
 {
     m_mergedPackage = _mergedPackage;
 	

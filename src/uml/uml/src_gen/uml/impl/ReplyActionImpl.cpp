@@ -207,7 +207,7 @@ std::shared_ptr<uml::Trigger> ReplyActionImpl::getReplyToCall() const
 {
     return m_replyToCall;
 }
-void ReplyActionImpl::setReplyToCall(std::shared_ptr<uml::Trigger> _replyToCall)
+void ReplyActionImpl::setReplyToCall(const std::shared_ptr<uml::Trigger>& _replyToCall)
 {
     m_replyToCall = _replyToCall;
 	
@@ -239,7 +239,7 @@ std::shared_ptr<uml::InputPin> ReplyActionImpl::getReturnInformation() const
 {
     return m_returnInformation;
 }
-void ReplyActionImpl::setReturnInformation(std::shared_ptr<uml::InputPin> _returnInformation)
+void ReplyActionImpl::setReturnInformation(const std::shared_ptr<uml::InputPin>& _returnInformation)
 {
     m_returnInformation = _returnInformation;
 	

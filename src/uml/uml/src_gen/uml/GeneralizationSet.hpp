@@ -130,7 +130,7 @@ namespace uml
 			<p>From package UML::Classification.</p>
 			*/
 			
-			virtual void setPowertype(std::shared_ptr<uml::Classifier>) = 0;
+			virtual void setPowertype(const std::shared_ptr<uml::Classifier>&) = 0;
 
 			//*********************************
 			// Union Reference Getters

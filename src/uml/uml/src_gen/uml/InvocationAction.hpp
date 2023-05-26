@@ -114,7 +114,7 @@ namespace uml
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual void setOnPort(std::shared_ptr<uml::Port>) = 0;
+			virtual void setOnPort(const std::shared_ptr<uml::Port>&) = 0;
 
 			//*********************************
 			// Union Reference Getters

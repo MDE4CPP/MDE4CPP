@@ -206,7 +206,7 @@ std::shared_ptr<uml::ReadStructuralFeatureAction> ReadStructuralFeatureActionAct
 {
     return m_readStructuralFeatureAction;
 }
-void ReadStructuralFeatureActionActivationImpl::setReadStructuralFeatureAction(std::shared_ptr<uml::ReadStructuralFeatureAction> _readStructuralFeatureAction)
+void ReadStructuralFeatureActionActivationImpl::setReadStructuralFeatureAction(const std::shared_ptr<uml::ReadStructuralFeatureAction>& _readStructuralFeatureAction)
 {
     m_readStructuralFeatureAction = _readStructuralFeatureAction;
 	//additional setter call for redefined reference ActionActivation::action

@@ -111,7 +111,7 @@ namespace uml
 			<p>From package UML::StateMachines.</p>
 			*/
 			
-			virtual void setEffect(std::shared_ptr<uml::Behavior>) ;
+			virtual void setEffect(const std::shared_ptr<uml::Behavior>&) ;
 			/*!
 			A guard is a Constraint that provides a fine-grained control over the firing of the Transition. The guard is evaluated when an Event occurrence is dispatched by the StateMachine. If the guard is true at that time, the Transition may be enabled, otherwise, it is disabled. Guards should be pure expressions without side effects. Guard expressions with side effects are ill formed.
 			<p>From package UML::StateMachines.</p>
@@ -123,7 +123,7 @@ namespace uml
 			<p>From package UML::StateMachines.</p>
 			*/
 			
-			virtual void setGuard(std::shared_ptr<uml::Constraint>) ;
+			virtual void setGuard(const std::shared_ptr<uml::Constraint>&) ;
 			/*!
 			The Transition that is redefined by this Transition.
 			<p>From package UML::StateMachines.</p>
@@ -135,7 +135,7 @@ namespace uml
 			<p>From package UML::StateMachines.</p>
 			*/
 			
-			virtual void setRedefinedTransition(std::shared_ptr<uml::Transition>) ;
+			virtual void setRedefinedTransition(const std::shared_ptr<uml::Transition>&) ;
 			/*!
 			Designates the originating Vertex (State or Pseudostate) of the Transition.
 			<p>From package UML::StateMachines.</p>
@@ -147,7 +147,7 @@ namespace uml
 			<p>From package UML::StateMachines.</p>
 			*/
 			
-			virtual void setSource(std::shared_ptr<uml::Vertex>) ;
+			virtual void setSource(const std::shared_ptr<uml::Vertex>&) ;
 			/*!
 			Designates the target Vertex that is reached when the Transition is taken.
 			<p>From package UML::StateMachines.</p>
@@ -159,7 +159,7 @@ namespace uml
 			<p>From package UML::StateMachines.</p>
 			*/
 			
-			virtual void setTarget(std::shared_ptr<uml::Vertex>) ;
+			virtual void setTarget(const std::shared_ptr<uml::Vertex>&) ;
 			/*!
 			Specifies the Triggers that may fire the transition.
 			<p>From package UML::StateMachines.</p>

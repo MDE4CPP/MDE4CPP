@@ -173,7 +173,7 @@ std::shared_ptr<uml::OutputPin> CreateLinkObjectActionImpl::getResult() const
 {
     return m_result;
 }
-void CreateLinkObjectActionImpl::setResult(std::shared_ptr<uml::OutputPin> _result)
+void CreateLinkObjectActionImpl::setResult(const std::shared_ptr<uml::OutputPin>& _result)
 {
     m_result = _result;
 	

@@ -55,7 +55,7 @@ namespace ocl::Evaluations
 			//*********************************
 			virtual std::shared_ptr<Bag<ocl::Evaluations::OclMessageArgEval>> getArguments() const ;
 			virtual std::shared_ptr<ocl::Evaluations::OclExpEval> getTarget() const ;
-			virtual void setTarget(std::shared_ptr<ocl::Evaluations::OclExpEval>) ;
+			virtual void setTarget(const std::shared_ptr<ocl::Evaluations::OclExpEval>&) ;
 			
 			//*********************************
 			// Union Reference Getters

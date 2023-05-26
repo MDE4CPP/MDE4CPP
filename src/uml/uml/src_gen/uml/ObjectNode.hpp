@@ -140,7 +140,7 @@ namespace uml
 			<p>From package UML::Activities.</p>
 			*/
 			
-			virtual void setSelection(std::shared_ptr<uml::Behavior>) = 0;
+			virtual void setSelection(const std::shared_ptr<uml::Behavior>&) = 0;
 			/*!
 			The maximum number of tokens that may be held by this ObjectNode. Tokens cannot flow into the ObjectNode if the upperBound is reached. If no upperBound is specified, then there is no limit on how many tokens the ObjectNode can hold.
 			<p>From package UML::Activities.</p>
@@ -152,7 +152,7 @@ namespace uml
 			<p>From package UML::Activities.</p>
 			*/
 			
-			virtual void setUpperBound(std::shared_ptr<uml::ValueSpecification>) = 0;
+			virtual void setUpperBound(const std::shared_ptr<uml::ValueSpecification>&) = 0;
 
 			//*********************************
 			// Union Reference Getters

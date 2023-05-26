@@ -253,7 +253,7 @@ std::shared_ptr<ocl::Expressions::OclExpression> MessageExpImpl::getTarget() con
 {
     return m_target;
 }
-void MessageExpImpl::setTarget(std::shared_ptr<ocl::Expressions::OclExpression> _target)
+void MessageExpImpl::setTarget(const std::shared_ptr<ocl::Expressions::OclExpression>& _target)
 {
     m_target = _target;
 	

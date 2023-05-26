@@ -126,7 +126,7 @@ namespace uml
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual void setObject(std::shared_ptr<uml::InputPin>) = 0;
+			virtual void setObject(const std::shared_ptr<uml::InputPin>&) = 0;
 			/*!
 			A set of Classifiers to be removed from the Classifiers of the given object.
 			<p>From package UML::Actions.</p>

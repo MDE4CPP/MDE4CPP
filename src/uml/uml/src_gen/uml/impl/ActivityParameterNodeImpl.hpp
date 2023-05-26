@@ -69,7 +69,7 @@ namespace uml
 			<p>From package UML::Activities.</p>
 			*/
 			
-			virtual void setParameter(std::shared_ptr<uml::Parameter>) ;
+			virtual void setParameter(const std::shared_ptr<uml::Parameter>&) ;
 			
 			//*********************************
 			// Union Reference Getters

@@ -54,7 +54,7 @@ namespace ocl::Evaluations
 			// Reference Getters & Setters
 			//*********************************
 			virtual std::shared_ptr<ocl::Evaluations::OclExpEval> getInitExp() const ;
-			virtual void setInitExp(std::shared_ptr<ocl::Evaluations::OclExpEval>) ;
+			virtual void setInitExp(const std::shared_ptr<ocl::Evaluations::OclExpEval>&) ;
 			
 			//*********************************
 			// Union Reference Getters

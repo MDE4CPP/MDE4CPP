@@ -89,9 +89,9 @@ namespace ecore
 			// Reference Getters & Setters
 			//*********************************
 			virtual std::shared_ptr<ecore::EGenericType> getEGenericType() const = 0;
-			virtual void setEGenericType(std::shared_ptr<ecore::EGenericType>) = 0;
+			virtual void setEGenericType(const std::shared_ptr<ecore::EGenericType>&) = 0;
 			virtual std::shared_ptr<ecore::EClassifier> getEType() const = 0;
-			virtual void setEType(std::shared_ptr<ecore::EClassifier>) = 0;
+			virtual void setEType(const std::shared_ptr<ecore::EClassifier>&) = 0;
 
 			//*********************************
 			// Union Reference Getters

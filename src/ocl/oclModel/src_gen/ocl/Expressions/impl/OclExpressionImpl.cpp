@@ -238,7 +238,7 @@ std::shared_ptr<ocl::Expressions::CallExp> OclExpressionImpl::getAppliedElement(
 {
     return m_appliedElement;
 }
-void OclExpressionImpl::setAppliedElement(std::shared_ptr<ocl::Expressions::CallExp> _appliedElement)
+void OclExpressionImpl::setAppliedElement(const std::shared_ptr<ocl::Expressions::CallExp>& _appliedElement)
 {
     m_appliedElement = _appliedElement;
 	
@@ -294,7 +294,7 @@ std::shared_ptr<ocl::Evaluations::OclExpEval> OclExpressionImpl::getInstance() c
 {
     return m_instance;
 }
-void OclExpressionImpl::setInstance(std::shared_ptr<ocl::Evaluations::OclExpEval> _instance)
+void OclExpressionImpl::setInstance(const std::shared_ptr<ocl::Evaluations::OclExpEval>& _instance)
 {
     m_instance = _instance;
 	

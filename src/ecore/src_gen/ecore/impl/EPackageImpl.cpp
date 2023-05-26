@@ -248,7 +248,7 @@ std::shared_ptr<ecore::EFactory> EPackageImpl::getEFactoryInstance() const
 {
     return m_eFactoryInstance;
 }
-void EPackageImpl::setEFactoryInstance(std::shared_ptr<ecore::EFactory> _eFactoryInstance)
+void EPackageImpl::setEFactoryInstance(const std::shared_ptr<ecore::EFactory>& _eFactoryInstance)
 {
     m_eFactoryInstance = _eFactoryInstance;
 	

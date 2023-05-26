@@ -297,7 +297,7 @@ std::shared_ptr<fUML::Semantics::Loci::Executor> LocusImpl::getExecutor() const
 {
     return m_executor;
 }
-void LocusImpl::setExecutor(std::shared_ptr<fUML::Semantics::Loci::Executor> _executor)
+void LocusImpl::setExecutor(const std::shared_ptr<fUML::Semantics::Loci::Executor>& _executor)
 {
     m_executor = _executor;
 	
@@ -320,7 +320,7 @@ std::shared_ptr<fUML::Semantics::Loci::ExecutionFactory> LocusImpl::getFactory()
 {
     return m_factory;
 }
-void LocusImpl::setFactory(std::shared_ptr<fUML::Semantics::Loci::ExecutionFactory> _factory)
+void LocusImpl::setFactory(const std::shared_ptr<fUML::Semantics::Loci::ExecutionFactory>& _factory)
 {
     m_factory = _factory;
 	

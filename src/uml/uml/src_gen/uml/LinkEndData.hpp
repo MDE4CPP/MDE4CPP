@@ -101,7 +101,7 @@ namespace uml
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual void setEnd(std::shared_ptr<uml::Property>) = 0;
+			virtual void setEnd(const std::shared_ptr<uml::Property>&) = 0;
 			/*!
 			A set of QualifierValues used to provide values for the qualifiers of the end.
 			<p>From package UML::Actions.</p>
@@ -119,7 +119,7 @@ namespace uml
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual void setValue(std::shared_ptr<uml::InputPin>) = 0;
+			virtual void setValue(const std::shared_ptr<uml::InputPin>&) = 0;
 
 			//*********************************
 			// Union Reference Getters

@@ -172,7 +172,7 @@ std::shared_ptr<uml::OutputPin> WriteStructuralFeatureActionImpl::getResult() co
 {
     return m_result;
 }
-void WriteStructuralFeatureActionImpl::setResult(std::shared_ptr<uml::OutputPin> _result)
+void WriteStructuralFeatureActionImpl::setResult(const std::shared_ptr<uml::OutputPin>& _result)
 {
     m_result = _result;
 	
@@ -183,7 +183,7 @@ std::shared_ptr<uml::InputPin> WriteStructuralFeatureActionImpl::getValue() cons
 {
     return m_value;
 }
-void WriteStructuralFeatureActionImpl::setValue(std::shared_ptr<uml::InputPin> _value)
+void WriteStructuralFeatureActionImpl::setValue(const std::shared_ptr<uml::InputPin>& _value)
 {
     m_value = _value;
 	

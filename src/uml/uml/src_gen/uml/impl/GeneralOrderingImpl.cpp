@@ -140,7 +140,7 @@ std::shared_ptr<uml::OccurrenceSpecification> GeneralOrderingImpl::getAfter() co
 {
     return m_after;
 }
-void GeneralOrderingImpl::setAfter(std::shared_ptr<uml::OccurrenceSpecification> _after)
+void GeneralOrderingImpl::setAfter(const std::shared_ptr<uml::OccurrenceSpecification>& _after)
 {
     m_after = _after;
 	
@@ -151,7 +151,7 @@ std::shared_ptr<uml::OccurrenceSpecification> GeneralOrderingImpl::getBefore() c
 {
     return m_before;
 }
-void GeneralOrderingImpl::setBefore(std::shared_ptr<uml::OccurrenceSpecification> _before)
+void GeneralOrderingImpl::setBefore(const std::shared_ptr<uml::OccurrenceSpecification>& _before)
 {
     m_before = _before;
 	

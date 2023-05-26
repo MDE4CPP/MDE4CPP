@@ -159,7 +159,7 @@ std::shared_ptr<uml::ExecutionSpecification> ExecutionOccurrenceSpecificationImp
 {
     return m_execution;
 }
-void ExecutionOccurrenceSpecificationImpl::setExecution(std::shared_ptr<uml::ExecutionSpecification> _execution)
+void ExecutionOccurrenceSpecificationImpl::setExecution(const std::shared_ptr<uml::ExecutionSpecification>& _execution)
 {
     m_execution = _execution;
 	

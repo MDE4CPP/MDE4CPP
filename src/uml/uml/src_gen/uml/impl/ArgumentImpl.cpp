@@ -129,7 +129,7 @@ std::shared_ptr<uml::Object> ArgumentImpl::getValue() const
 {
     return m_value;
 }
-void ArgumentImpl::setValue(std::shared_ptr<uml::Object> _value)
+void ArgumentImpl::setValue(const std::shared_ptr<uml::Object>& _value)
 {
     m_value = _value;
 	

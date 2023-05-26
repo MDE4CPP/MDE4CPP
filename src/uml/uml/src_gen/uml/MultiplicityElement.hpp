@@ -184,7 +184,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual void setLowerValue(std::shared_ptr<uml::ValueSpecification>) = 0;
+			virtual void setLowerValue(const std::shared_ptr<uml::ValueSpecification>&) = 0;
 			/*!
 			The specification of the upper bound for this multiplicity.
 			<p>From package UML::CommonStructure.</p>
@@ -196,7 +196,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual void setUpperValue(std::shared_ptr<uml::ValueSpecification>) = 0;
+			virtual void setUpperValue(const std::shared_ptr<uml::ValueSpecification>&) = 0;
 
 			//*********************************
 			// Union Reference Getters

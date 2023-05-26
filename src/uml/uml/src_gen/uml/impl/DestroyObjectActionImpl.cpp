@@ -195,7 +195,7 @@ std::shared_ptr<uml::InputPin> DestroyObjectActionImpl::getTarget() const
 {
     return m_target;
 }
-void DestroyObjectActionImpl::setTarget(std::shared_ptr<uml::InputPin> _target)
+void DestroyObjectActionImpl::setTarget(const std::shared_ptr<uml::InputPin>& _target)
 {
     m_target = _target;
 	

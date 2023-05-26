@@ -258,7 +258,7 @@ std::shared_ptr<uml::Behavior> BehavioredClassifierImpl::getClassifierBehavior()
 {
     return m_classifierBehavior;
 }
-void BehavioredClassifierImpl::setClassifierBehavior(std::shared_ptr<uml::Behavior> _classifierBehavior)
+void BehavioredClassifierImpl::setClassifierBehavior(const std::shared_ptr<uml::Behavior>& _classifierBehavior)
 {
     m_classifierBehavior = _classifierBehavior;
 	

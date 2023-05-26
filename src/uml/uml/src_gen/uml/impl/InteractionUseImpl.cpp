@@ -276,7 +276,7 @@ std::shared_ptr<uml::Interaction> InteractionUseImpl::getRefersTo() const
 {
     return m_refersTo;
 }
-void InteractionUseImpl::setRefersTo(std::shared_ptr<uml::Interaction> _refersTo)
+void InteractionUseImpl::setRefersTo(const std::shared_ptr<uml::Interaction>& _refersTo)
 {
     m_refersTo = _refersTo;
 	
@@ -287,7 +287,7 @@ std::shared_ptr<uml::ValueSpecification> InteractionUseImpl::getReturnValue() co
 {
     return m_returnValue;
 }
-void InteractionUseImpl::setReturnValue(std::shared_ptr<uml::ValueSpecification> _returnValue)
+void InteractionUseImpl::setReturnValue(const std::shared_ptr<uml::ValueSpecification>& _returnValue)
 {
     m_returnValue = _returnValue;
 	
@@ -298,7 +298,7 @@ std::shared_ptr<uml::Property> InteractionUseImpl::getReturnValueRecipient() con
 {
     return m_returnValueRecipient;
 }
-void InteractionUseImpl::setReturnValueRecipient(std::shared_ptr<uml::Property> _returnValueRecipient)
+void InteractionUseImpl::setReturnValueRecipient(const std::shared_ptr<uml::Property>& _returnValueRecipient)
 {
     m_returnValueRecipient = _returnValueRecipient;
 	

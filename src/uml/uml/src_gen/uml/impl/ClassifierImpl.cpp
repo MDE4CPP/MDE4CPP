@@ -567,12 +567,12 @@ std::shared_ptr<Bag<uml::NamedElement>> ClassifierImpl::getInheritedMembers()
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-std::shared_ptr<uml::Operation> ClassifierImpl::getOperation(std::string name, std::shared_ptr<Bag<std::string>> parameterNames, const std::shared_ptr<Bag<uml::Type>>& parameterTypes)
+std::shared_ptr<uml::Operation> ClassifierImpl::getOperation(std::string name, const std::shared_ptr<Bag<std::string>>& parameterNames, const std::shared_ptr<Bag<uml::Type>>& parameterTypes)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-std::shared_ptr<uml::Operation> ClassifierImpl::getOperation(std::string name, std::shared_ptr<Bag<std::string>> parameterNames, const std::shared_ptr<Bag<uml::Type>>& parameterTypes, bool ignoreCase)
+std::shared_ptr<uml::Operation> ClassifierImpl::getOperation(std::string name, const std::shared_ptr<Bag<std::string>>& parameterNames, const std::shared_ptr<Bag<uml::Type>>& parameterTypes, bool ignoreCase)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -809,7 +809,7 @@ std::shared_ptr<uml::CollaborationUse> ClassifierImpl::getRepresentation() const
 {
     return m_representation;
 }
-void ClassifierImpl::setRepresentation(std::shared_ptr<uml::CollaborationUse> _representation)
+void ClassifierImpl::setRepresentation(const std::shared_ptr<uml::CollaborationUse>& _representation)
 {
     m_representation = _representation;
 	

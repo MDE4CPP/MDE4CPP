@@ -126,7 +126,7 @@ namespace uml
 			<p>From package UML::Packages.</p>
 			*/
 			
-			virtual void setAppliedProfile(std::shared_ptr<uml::Profile>) = 0;
+			virtual void setAppliedProfile(const std::shared_ptr<uml::Profile>&) = 0;
 			/*!
 			The package that owns the profile application.
 			<p>From package UML::Packages.</p>

@@ -166,7 +166,7 @@ namespace uml
 			<p>From package UML::Classification.</p>
 			*/
 			
-			virtual void setDefaultValue(std::shared_ptr<uml::ValueSpecification>) ;
+			virtual void setDefaultValue(const std::shared_ptr<uml::ValueSpecification>&) ;
 			/*!
 			The Operation owning this parameter.
 			<p>From package UML::Classification.</p>

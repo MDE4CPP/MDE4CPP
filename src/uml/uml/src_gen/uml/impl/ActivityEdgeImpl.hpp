@@ -81,7 +81,7 @@ namespace uml
 			<p>From package UML::Activities.</p>
 			*/
 			
-			virtual void setGuard(std::shared_ptr<uml::ValueSpecification>) ;
+			virtual void setGuard(const std::shared_ptr<uml::ValueSpecification>&) ;
 			
 			/*!
 			ActivityPartitions containing the ActivityEdge.
@@ -112,7 +112,7 @@ namespace uml
 			<p>From package UML::Activities.</p>
 			*/
 			
-			virtual void setInterrupts(std::shared_ptr<uml::InterruptibleActivityRegion>) ;
+			virtual void setInterrupts(const std::shared_ptr<uml::InterruptibleActivityRegion>&) ;
 			/*!
 			ActivityEdges from a generalization of the Activity containing this ActivityEdge that are redefined by this ActivityEdge.
 			<p>From package UML::Activities.</p>
@@ -130,7 +130,7 @@ namespace uml
 			<p>From package UML::Activities.</p>
 			*/
 			
-			virtual void setSource(std::shared_ptr<uml::ActivityNode>) ;
+			virtual void setSource(const std::shared_ptr<uml::ActivityNode>&) ;
 			/*!
 			The ActivityNode to which tokens are put when they traverse the ActivityEdge.
 			<p>From package UML::Activities.</p>
@@ -142,7 +142,7 @@ namespace uml
 			<p>From package UML::Activities.</p>
 			*/
 			
-			virtual void setTarget(std::shared_ptr<uml::ActivityNode>) ;
+			virtual void setTarget(const std::shared_ptr<uml::ActivityNode>&) ;
 			/*!
 			The minimum number of tokens that must traverse the ActivityEdge at the same time. If no weight is specified, this is equivalent to specifying a constant value of 1.
 			<p>From package UML::Activities.</p>
@@ -154,7 +154,7 @@ namespace uml
 			<p>From package UML::Activities.</p>
 			*/
 			
-			virtual void setWeight(std::shared_ptr<uml::ValueSpecification>) ;
+			virtual void setWeight(const std::shared_ptr<uml::ValueSpecification>&) ;
 			
 			//*********************************
 			// Union Reference Getters

@@ -85,7 +85,7 @@ namespace uml
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual void setFromAction(std::shared_ptr<uml::Action>) ;
+			virtual void setFromAction(const std::shared_ptr<uml::Action>&) ;
 			
 			//*********************************
 			// Union Reference Getters

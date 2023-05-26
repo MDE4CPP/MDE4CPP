@@ -199,7 +199,7 @@ std::shared_ptr<uml::Pin> PinActivationImpl::getPin() const
 {
     return m_pin;
 }
-void PinActivationImpl::setPin(std::shared_ptr<uml::Pin> _pin)
+void PinActivationImpl::setPin(const std::shared_ptr<uml::Pin>& _pin)
 {
     m_pin = _pin;
 	//additional setter call for redefined reference ActivityNodeActivation::node

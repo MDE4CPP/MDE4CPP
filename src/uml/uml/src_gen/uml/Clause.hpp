@@ -105,7 +105,7 @@ namespace uml
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual void setDecider(std::shared_ptr<uml::OutputPin>) = 0;
+			virtual void setDecider(const std::shared_ptr<uml::OutputPin>&) = 0;
 			/*!
 			A set of Clauses whose tests must all evaluate to false before this Clause can evaluate its test.
 			<p>From package UML::Actions.</p>

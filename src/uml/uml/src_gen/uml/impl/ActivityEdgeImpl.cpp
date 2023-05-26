@@ -238,7 +238,7 @@ std::shared_ptr<uml::ValueSpecification> ActivityEdgeImpl::getGuard() const
 {
     return m_guard;
 }
-void ActivityEdgeImpl::setGuard(std::shared_ptr<uml::ValueSpecification> _guard)
+void ActivityEdgeImpl::setGuard(const std::shared_ptr<uml::ValueSpecification>& _guard)
 {
     m_guard = _guard;
 	
@@ -283,7 +283,7 @@ std::shared_ptr<uml::InterruptibleActivityRegion> ActivityEdgeImpl::getInterrupt
 {
     return m_interrupts;
 }
-void ActivityEdgeImpl::setInterrupts(std::shared_ptr<uml::InterruptibleActivityRegion> _interrupts)
+void ActivityEdgeImpl::setInterrupts(const std::shared_ptr<uml::InterruptibleActivityRegion>& _interrupts)
 {
     m_interrupts = _interrupts;
 	
@@ -315,7 +315,7 @@ std::shared_ptr<uml::ActivityNode> ActivityEdgeImpl::getSource() const
 {
     return m_source;
 }
-void ActivityEdgeImpl::setSource(std::shared_ptr<uml::ActivityNode> _source)
+void ActivityEdgeImpl::setSource(const std::shared_ptr<uml::ActivityNode>& _source)
 {
     m_source = _source;
 	
@@ -326,7 +326,7 @@ std::shared_ptr<uml::ActivityNode> ActivityEdgeImpl::getTarget() const
 {
     return m_target;
 }
-void ActivityEdgeImpl::setTarget(std::shared_ptr<uml::ActivityNode> _target)
+void ActivityEdgeImpl::setTarget(const std::shared_ptr<uml::ActivityNode>& _target)
 {
     m_target = _target;
 	
@@ -337,7 +337,7 @@ std::shared_ptr<uml::ValueSpecification> ActivityEdgeImpl::getWeight() const
 {
     return m_weight;
 }
-void ActivityEdgeImpl::setWeight(std::shared_ptr<uml::ValueSpecification> _weight)
+void ActivityEdgeImpl::setWeight(const std::shared_ptr<uml::ValueSpecification>& _weight)
 {
     m_weight = _weight;
 	

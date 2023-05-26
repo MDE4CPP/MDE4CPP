@@ -202,7 +202,7 @@ std::shared_ptr<uml::ReadIsClassifiedObjectAction> ReadIsClassifiedObjectActionA
 {
     return m_readIsClassifiedObjectAction;
 }
-void ReadIsClassifiedObjectActionActivationImpl::setReadIsClassifiedObjectAction(std::shared_ptr<uml::ReadIsClassifiedObjectAction> _readIsClassifiedObjectAction)
+void ReadIsClassifiedObjectActionActivationImpl::setReadIsClassifiedObjectAction(const std::shared_ptr<uml::ReadIsClassifiedObjectAction>& _readIsClassifiedObjectAction)
 {
     m_readIsClassifiedObjectAction = _readIsClassifiedObjectAction;
 	//additional setter call for redefined reference ActionActivation::action

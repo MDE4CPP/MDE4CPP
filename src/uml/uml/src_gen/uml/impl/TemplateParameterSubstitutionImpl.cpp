@@ -145,7 +145,7 @@ std::shared_ptr<uml::ParameterableElement> TemplateParameterSubstitutionImpl::ge
 {
     return m_actual;
 }
-void TemplateParameterSubstitutionImpl::setActual(std::shared_ptr<uml::ParameterableElement> _actual)
+void TemplateParameterSubstitutionImpl::setActual(const std::shared_ptr<uml::ParameterableElement>& _actual)
 {
     m_actual = _actual;
 	
@@ -156,7 +156,7 @@ std::shared_ptr<uml::TemplateParameter> TemplateParameterSubstitutionImpl::getFo
 {
     return m_formal;
 }
-void TemplateParameterSubstitutionImpl::setFormal(std::shared_ptr<uml::TemplateParameter> _formal)
+void TemplateParameterSubstitutionImpl::setFormal(const std::shared_ptr<uml::TemplateParameter>& _formal)
 {
     m_formal = _formal;
 	
@@ -167,7 +167,7 @@ std::shared_ptr<uml::ParameterableElement> TemplateParameterSubstitutionImpl::ge
 {
     return m_ownedActual;
 }
-void TemplateParameterSubstitutionImpl::setOwnedActual(std::shared_ptr<uml::ParameterableElement> _ownedActual)
+void TemplateParameterSubstitutionImpl::setOwnedActual(const std::shared_ptr<uml::ParameterableElement>& _ownedActual)
 {
     m_ownedActual = _ownedActual;
 	

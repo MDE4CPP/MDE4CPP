@@ -314,7 +314,7 @@ std::shared_ptr<uml::ProtocolStateMachine> PortImpl::getProtocol() const
 {
     return m_protocol;
 }
-void PortImpl::setProtocol(std::shared_ptr<uml::ProtocolStateMachine> _protocol)
+void PortImpl::setProtocol(const std::shared_ptr<uml::ProtocolStateMachine>& _protocol)
 {
     m_protocol = _protocol;
 	

@@ -320,7 +320,7 @@ std::shared_ptr<uml::AddStructuralFeatureValueAction> AddStructuralFeatureValueA
 {
     return m_addStructuralFeatureValueAction;
 }
-void AddStructuralFeatureValueActionActivationImpl::setAddStructuralFeatureValueAction(std::shared_ptr<uml::AddStructuralFeatureValueAction> _addStructuralFeatureValueAction)
+void AddStructuralFeatureValueActionActivationImpl::setAddStructuralFeatureValueAction(const std::shared_ptr<uml::AddStructuralFeatureValueAction>& _addStructuralFeatureValueAction)
 {
     m_addStructuralFeatureValueAction = _addStructuralFeatureValueAction;
 	//additional setter call for redefined reference ActionActivation::action

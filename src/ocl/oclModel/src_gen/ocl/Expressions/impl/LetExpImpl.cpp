@@ -241,7 +241,7 @@ std::shared_ptr<ocl::Expressions::OclExpression> LetExpImpl::getIn() const
 {
     return m_in;
 }
-void LetExpImpl::setIn(std::shared_ptr<ocl::Expressions::OclExpression> _in)
+void LetExpImpl::setIn(const std::shared_ptr<ocl::Expressions::OclExpression>& _in)
 {
     m_in = _in;
 	

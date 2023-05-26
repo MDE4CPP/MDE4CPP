@@ -107,7 +107,7 @@ namespace uml
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual void setClassifier(std::shared_ptr<uml::Classifier>) = 0;
+			virtual void setClassifier(const std::shared_ptr<uml::Classifier>&) = 0;
 			/*!
 			The OutputPin on which the newly created object is placed.
 			<p>From package UML::Actions.</p>
@@ -119,7 +119,7 @@ namespace uml
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual void setResult(std::shared_ptr<uml::OutputPin>) = 0;
+			virtual void setResult(const std::shared_ptr<uml::OutputPin>&) = 0;
 
 			//*********************************
 			// Union Reference Getters

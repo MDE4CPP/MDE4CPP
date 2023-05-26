@@ -217,7 +217,7 @@ std::shared_ptr<ocl::Expressions::OclExpression> ParentedExpImpl::getInnerExp() 
 {
     return m_innerExp;
 }
-void ParentedExpImpl::setInnerExp(std::shared_ptr<ocl::Expressions::OclExpression> _innerExp)
+void ParentedExpImpl::setInnerExp(const std::shared_ptr<ocl::Expressions::OclExpression>& _innerExp)
 {
     m_innerExp = _innerExp;
 	

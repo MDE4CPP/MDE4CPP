@@ -95,11 +95,11 @@ namespace fUML::Semantics::Actions
 			// Reference Getters & Setters
 			//*********************************
 			virtual std::shared_ptr<uml::DestroyObjectAction> getDestroyObjectAction() const = 0;
-			virtual void setDestroyObjectAction(std::shared_ptr<uml::DestroyObjectAction>) = 0;
+			virtual void setDestroyObjectAction(const std::shared_ptr<uml::DestroyObjectAction>&) = 0;
 			/*Additional Setter for 'ActionActivation::action' redefined by reference 'destroyObjectAction'*/
-			virtual void setAction(std::shared_ptr<uml::Action>) = 0;
+			virtual void setAction(const std::shared_ptr<uml::Action>&) = 0;
 			/*Additional Setter for 'ActivityNodeActivation::node' redefined by reference 'destroyObjectAction'*/
-			virtual void setNode(std::shared_ptr<uml::ActivityNode>) = 0;
+			virtual void setNode(const std::shared_ptr<uml::ActivityNode>&) = 0;
 
 			//*********************************
 			// Union Reference Getters

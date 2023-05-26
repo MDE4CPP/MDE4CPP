@@ -52,11 +52,11 @@ namespace ocl::Evaluations
 			// Reference Getters & Setters
 			//*********************************
 			virtual std::shared_ptr<ocl::Evaluations::OclExpEval> getCondition() const ;
-			virtual void setCondition(std::shared_ptr<ocl::Evaluations::OclExpEval>) ;
+			virtual void setCondition(const std::shared_ptr<ocl::Evaluations::OclExpEval>&) ;
 			virtual std::shared_ptr<ocl::Evaluations::OclExpEval> getElseExpression() const ;
-			virtual void setElseExpression(std::shared_ptr<ocl::Evaluations::OclExpEval>) ;
+			virtual void setElseExpression(const std::shared_ptr<ocl::Evaluations::OclExpEval>&) ;
 			virtual std::shared_ptr<ocl::Evaluations::OclExpEval> getThenExpression() const ;
-			virtual void setThenExpression(std::shared_ptr<ocl::Evaluations::OclExpEval>) ;
+			virtual void setThenExpression(const std::shared_ptr<ocl::Evaluations::OclExpEval>&) ;
 			
 			//*********************************
 			// Union Reference Getters

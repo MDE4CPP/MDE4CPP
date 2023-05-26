@@ -60,11 +60,11 @@ namespace fUML::Semantics::Actions
 			// Reference Getters & Setters
 			//*********************************
 			virtual std::shared_ptr<uml::CallAction> getCallAction() const ;
-			virtual void setCallAction(std::shared_ptr<uml::CallAction>) ;
+			virtual void setCallAction(const std::shared_ptr<uml::CallAction>&) ;
 			/*Additional Setter for 'ActionActivation::action' redefined by reference 'callAction'*/
-			virtual void setAction(std::shared_ptr<uml::Action>) ;
+			virtual void setAction(const std::shared_ptr<uml::Action>&) ;
 			/*Additional Setter for 'ActivityNodeActivation::node' redefined by reference 'callAction'*/
-			virtual void setNode(std::shared_ptr<uml::ActivityNode>) ;
+			virtual void setNode(const std::shared_ptr<uml::ActivityNode>&) ;
 			
 			
 			//*********************************

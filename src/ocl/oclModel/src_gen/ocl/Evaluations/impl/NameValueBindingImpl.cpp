@@ -136,7 +136,7 @@ std::shared_ptr<ecore::EObject> NameValueBindingImpl::getValue() const
 {
     return m_value;
 }
-void NameValueBindingImpl::setValue(std::shared_ptr<ecore::EObject> _value)
+void NameValueBindingImpl::setValue(const std::shared_ptr<ecore::EObject>& _value)
 {
     m_value = _value;
 	

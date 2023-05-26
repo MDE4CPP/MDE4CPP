@@ -169,7 +169,7 @@ std::shared_ptr<uml::Signal> BroadcastSignalActionImpl::getSignal() const
 {
     return m_signal;
 }
-void BroadcastSignalActionImpl::setSignal(std::shared_ptr<uml::Signal> _signal)
+void BroadcastSignalActionImpl::setSignal(const std::shared_ptr<uml::Signal>& _signal)
 {
     m_signal = _signal;
 	

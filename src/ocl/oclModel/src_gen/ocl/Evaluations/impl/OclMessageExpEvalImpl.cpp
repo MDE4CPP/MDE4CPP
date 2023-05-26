@@ -155,7 +155,7 @@ std::shared_ptr<ocl::Evaluations::OclExpEval> OclMessageExpEvalImpl::getTarget()
 {
     return m_target;
 }
-void OclMessageExpEvalImpl::setTarget(std::shared_ptr<ocl::Evaluations::OclExpEval> _target)
+void OclMessageExpEvalImpl::setTarget(const std::shared_ptr<ocl::Evaluations::OclExpEval>& _target)
 {
     m_target = _target;
 	

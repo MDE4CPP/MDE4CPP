@@ -200,7 +200,7 @@ std::shared_ptr<uml::ValueSpecification> ConstraintImpl::getSpecification() cons
 {
     return m_specification;
 }
-void ConstraintImpl::setSpecification(std::shared_ptr<uml::ValueSpecification> _specification)
+void ConstraintImpl::setSpecification(const std::shared_ptr<uml::ValueSpecification>& _specification)
 {
     m_specification = _specification;
 	

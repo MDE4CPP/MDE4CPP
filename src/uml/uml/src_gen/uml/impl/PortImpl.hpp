@@ -144,7 +144,7 @@ namespace uml
 			<p>From package UML::StructuredClassifiers.</p>
 			*/
 			
-			virtual void setProtocol(std::shared_ptr<uml::ProtocolStateMachine>) ;
+			virtual void setProtocol(const std::shared_ptr<uml::ProtocolStateMachine>&) ;
 			/*!
 			The Interfaces specifying the set of Operations and Receptions that the EncapsulatedCclassifier offers to its environment via this Port, and which it will handle either directly or by forwarding it to a part of its internal structure. This association is derived according to the value of isConjugated. If isConjugated is false, provided is derived as the union of the sets of Interfaces realized by the type of the port and its supertypes, or directly from the type of the Port if the Port is typed by an Interface. If isConjugated is true, it is derived as the union of the sets of Interfaces used by the type of the Port and its supertypes.
 			<p>From package UML::StructuredClassifiers.</p>

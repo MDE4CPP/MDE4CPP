@@ -170,7 +170,7 @@ std::shared_ptr<uml::ReadSelfAction> ReadSelfActionActivationImpl::getReadSelfAc
 {
     return m_readSelfAction;
 }
-void ReadSelfActionActivationImpl::setReadSelfAction(std::shared_ptr<uml::ReadSelfAction> _readSelfAction)
+void ReadSelfActionActivationImpl::setReadSelfAction(const std::shared_ptr<uml::ReadSelfAction>& _readSelfAction)
 {
     m_readSelfAction = _readSelfAction;
 	//additional setter call for redefined reference ActionActivation::action

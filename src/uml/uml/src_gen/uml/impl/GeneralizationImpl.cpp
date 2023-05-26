@@ -154,7 +154,7 @@ std::shared_ptr<uml::Classifier> GeneralizationImpl::getGeneral() const
 {
     return m_general;
 }
-void GeneralizationImpl::setGeneral(std::shared_ptr<uml::Classifier> _general)
+void GeneralizationImpl::setGeneral(const std::shared_ptr<uml::Classifier>& _general)
 {
     m_general = _general;
 	

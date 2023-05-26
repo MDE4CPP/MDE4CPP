@@ -105,7 +105,7 @@ namespace uml
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual void setDestroyAt(std::shared_ptr<uml::InputPin>) = 0;
+			virtual void setDestroyAt(const std::shared_ptr<uml::InputPin>&) = 0;
 
 			//*********************************
 			// Union Reference Getters

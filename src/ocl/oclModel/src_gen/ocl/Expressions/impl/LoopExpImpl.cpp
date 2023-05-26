@@ -268,7 +268,7 @@ std::shared_ptr<ocl::Expressions::OclExpression> LoopExpImpl::getBody() const
 {
     return m_body;
 }
-void LoopExpImpl::setBody(std::shared_ptr<ocl::Expressions::OclExpression> _body)
+void LoopExpImpl::setBody(const std::shared_ptr<ocl::Expressions::OclExpression>& _body)
 {
     m_body = _body;
 	

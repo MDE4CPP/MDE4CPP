@@ -244,7 +244,7 @@ std::shared_ptr<uml::Behavior> OpaqueExpressionImpl::getBehavior() const
 {
     return m_behavior;
 }
-void OpaqueExpressionImpl::setBehavior(std::shared_ptr<uml::Behavior> _behavior)
+void OpaqueExpressionImpl::setBehavior(const std::shared_ptr<uml::Behavior>& _behavior)
 {
     m_behavior = _behavior;
 	

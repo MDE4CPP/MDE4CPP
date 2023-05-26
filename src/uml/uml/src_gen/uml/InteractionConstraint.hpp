@@ -99,7 +99,7 @@ namespace uml
 			<p>From package UML::Interactions.</p>
 			*/
 			
-			virtual void setMaxint(std::shared_ptr<uml::ValueSpecification>) = 0;
+			virtual void setMaxint(const std::shared_ptr<uml::ValueSpecification>&) = 0;
 			/*!
 			The minimum number of iterations of a loop
 			<p>From package UML::Interactions.</p>
@@ -111,7 +111,7 @@ namespace uml
 			<p>From package UML::Interactions.</p>
 			*/
 			
-			virtual void setMinint(std::shared_ptr<uml::ValueSpecification>) = 0;
+			virtual void setMinint(const std::shared_ptr<uml::ValueSpecification>&) = 0;
 
 			//*********************************
 			// Union Reference Getters

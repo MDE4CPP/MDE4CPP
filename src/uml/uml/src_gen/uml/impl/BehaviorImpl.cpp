@@ -388,7 +388,7 @@ std::shared_ptr<uml::BehavioredClassifier> BehaviorImpl::getContext() const
 {
     return m_context;
 }
-void BehaviorImpl::setContext(std::shared_ptr<uml::BehavioredClassifier> _context)
+void BehaviorImpl::setContext(const std::shared_ptr<uml::BehavioredClassifier>& _context)
 {
     m_context = _context;
 	
@@ -504,7 +504,7 @@ std::shared_ptr<uml::BehavioralFeature> BehaviorImpl::getSpecification() const
 {
     return m_specification;
 }
-void BehaviorImpl::setSpecification(std::shared_ptr<uml::BehavioralFeature> _specification)
+void BehaviorImpl::setSpecification(const std::shared_ptr<uml::BehavioralFeature>& _specification)
 {
     m_specification = _specification;
 	

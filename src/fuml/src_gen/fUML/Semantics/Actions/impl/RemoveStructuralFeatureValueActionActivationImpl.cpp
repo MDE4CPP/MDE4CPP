@@ -207,7 +207,7 @@ std::shared_ptr<uml::RemoveStructuralFeatureValueAction> RemoveStructuralFeature
 {
     return m_removeStructuralFeatureValueAction;
 }
-void RemoveStructuralFeatureValueActionActivationImpl::setRemoveStructuralFeatureValueAction(std::shared_ptr<uml::RemoveStructuralFeatureValueAction> _removeStructuralFeatureValueAction)
+void RemoveStructuralFeatureValueActionActivationImpl::setRemoveStructuralFeatureValueAction(const std::shared_ptr<uml::RemoveStructuralFeatureValueAction>& _removeStructuralFeatureValueAction)
 {
     m_removeStructuralFeatureValueAction = _removeStructuralFeatureValueAction;
 	//additional setter call for redefined reference ActionActivation::action

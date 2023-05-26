@@ -289,7 +289,7 @@ std::shared_ptr<uml::Association> ConnectorImpl::getType() const
 {
     return m_type;
 }
-void ConnectorImpl::setType(std::shared_ptr<uml::Association> _type)
+void ConnectorImpl::setType(const std::shared_ptr<uml::Association>& _type)
 {
     m_type = _type;
 	

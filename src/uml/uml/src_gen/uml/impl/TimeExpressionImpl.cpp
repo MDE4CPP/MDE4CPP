@@ -182,7 +182,7 @@ std::shared_ptr<uml::ValueSpecification> TimeExpressionImpl::getExpr() const
 {
     return m_expr;
 }
-void TimeExpressionImpl::setExpr(std::shared_ptr<uml::ValueSpecification> _expr)
+void TimeExpressionImpl::setExpr(const std::shared_ptr<uml::ValueSpecification>& _expr)
 {
     m_expr = _expr;
 	

@@ -172,7 +172,7 @@ std::shared_ptr<uml::InputPin> RaiseExceptionActionImpl::getException() const
 {
     return m_exception;
 }
-void RaiseExceptionActionImpl::setException(std::shared_ptr<uml::InputPin> _exception)
+void RaiseExceptionActionImpl::setException(const std::shared_ptr<uml::InputPin>& _exception)
 {
     m_exception = _exception;
 	

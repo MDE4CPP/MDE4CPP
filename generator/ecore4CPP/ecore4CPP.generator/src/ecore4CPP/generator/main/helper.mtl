@@ -64,13 +64,24 @@
 [query public isOfAnyType(anETypedElement : ETypedElement) : EBoolean = (anETypedElement.eType.name.replace('java.lang.', '').replace('java.util.','').transformTypeName() = 'Any')/]
 [query public isAnyType(anEClassifier : EClassifier) : EBoolean = (anEClassifier.name.replace('java.lang.', '').replace('java.util.','').transformTypeName() = 'Any') /]
 
-
+[**
+ * Helper for determining if a Parameter/ERefferenc/EAttribute is a shared pointer
+*/]
+[query public isSharedPtr(anETypedElement : ETypedElement) : EBoolean =
+	if (anETypedElement.oclIsKindOf(EReference)) then	
+		not anETypedElement.oclAsType(EReference).isBackReference()
+	else
+		anETypedElement.eType.oclIsKindOf(EClass) or anETypedElement.eType.isAnyType() or (anETypedElement.upperBound <> 1)
+	endif
+/]
 
 [**
- * Helper for determining if a Parameter is a shared pointer
+ * Helper for type generation
 */]
-[query public isSharedPtr(aParameter : EParameter) : EBoolean = aParameter.eType.oclIsKindOf(EClass) or aParameter.eType.isAnyType()/]
-[query public isSharedPtr(anAttribute : EAttribute) : EBoolean = anAttribute.eType.oclIsKindOf(EClass) or anAttribute.eType.isAnyType()/]
+[query private isShared(aReference : EReference) : Boolean = aReference.hasKey(keySharedAggregation())/]
+[query public isBackReference(aReference:EReference) : Boolean = aReference.container or isShared()/]
+[query public hasAbstractType(aReference : EReference) : Boolean = if (aReference.eType.oclIsKindOf(EClass)) then eType.oclAsType(EClass).abstract else false endif /]
+
 [**
  * check and get key value from sourcegen eannotation
 */]

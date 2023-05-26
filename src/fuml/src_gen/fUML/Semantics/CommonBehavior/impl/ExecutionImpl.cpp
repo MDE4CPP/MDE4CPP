@@ -296,7 +296,7 @@ if(!m_behavior)
 return m_behavior;
 	//end of body
 }
-void ExecutionImpl::setBehavior(std::shared_ptr<uml::Behavior> _behavior)
+void ExecutionImpl::setBehavior(const std::shared_ptr<uml::Behavior>& _behavior)
 {
     m_behavior = _behavior;
 	
@@ -307,7 +307,7 @@ std::shared_ptr<uml::Element> ExecutionImpl::getContext() const
 {
     return m_context;
 }
-void ExecutionImpl::setContext(std::shared_ptr<uml::Element> _context)
+void ExecutionImpl::setContext(const std::shared_ptr<uml::Element>& _context)
 {
     m_context = _context;
 	
@@ -318,7 +318,7 @@ std::shared_ptr<fUML::Semantics::Loci::Locus> ExecutionImpl::getLocus() const
 {
     return m_locus;
 }
-void ExecutionImpl::setLocus(std::shared_ptr<fUML::Semantics::Loci::Locus> _locus)
+void ExecutionImpl::setLocus(const std::shared_ptr<fUML::Semantics::Loci::Locus>& _locus)
 {
     m_locus = _locus;
 	

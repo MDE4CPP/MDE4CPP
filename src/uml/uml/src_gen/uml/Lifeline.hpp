@@ -116,7 +116,7 @@ namespace uml
 			<p>From package UML::Interactions.</p>
 			*/
 			
-			virtual void setDecomposedAs(std::shared_ptr<uml::PartDecomposition>) = 0;
+			virtual void setDecomposedAs(const std::shared_ptr<uml::PartDecomposition>&) = 0;
 			/*!
 			References the Interaction enclosing this Lifeline.
 			<p>From package UML::Interactions.</p>
@@ -140,7 +140,7 @@ namespace uml
 			<p>From package UML::Interactions.</p>
 			*/
 			
-			virtual void setRepresents(std::shared_ptr<uml::ConnectableElement>) = 0;
+			virtual void setRepresents(const std::shared_ptr<uml::ConnectableElement>&) = 0;
 			/*!
 			If the referenced ConnectableElement is multivalued, then this specifies the specific individual part within that set.
 			<p>From package UML::Interactions.</p>
@@ -152,7 +152,7 @@ namespace uml
 			<p>From package UML::Interactions.</p>
 			*/
 			
-			virtual void setSelector(std::shared_ptr<uml::ValueSpecification>) = 0;
+			virtual void setSelector(const std::shared_ptr<uml::ValueSpecification>&) = 0;
 
 			//*********************************
 			// Union Reference Getters

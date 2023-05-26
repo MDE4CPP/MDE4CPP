@@ -65,7 +65,7 @@ namespace uml
 			<p>From package UML::Activities.</p>
 			*/
 			
-			virtual void setExceptionInput(std::shared_ptr<uml::ObjectNode>) ;
+			virtual void setExceptionInput(const std::shared_ptr<uml::ObjectNode>&) ;
 			/*!
 			The Classifiers whose instances the ExceptionHandler catches as exceptions. If an exception occurs whose type is any exceptionType, the ExceptionHandler catches the exception and executes the handlerBody.
 			<p>From package UML::Activities.</p>
@@ -83,7 +83,7 @@ namespace uml
 			<p>From package UML::Activities.</p>
 			*/
 			
-			virtual void setHandlerBody(std::shared_ptr<uml::ExecutableNode>) ;
+			virtual void setHandlerBody(const std::shared_ptr<uml::ExecutableNode>&) ;
 			/*!
 			The ExecutableNode protected by the ExceptionHandler. If an exception propagates out of the protectedNode and has a type matching one of the exceptionTypes, then it is caught by this ExceptionHandler.
 			<p>From package UML::Activities.</p>

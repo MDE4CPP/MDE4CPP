@@ -197,7 +197,7 @@ std::shared_ptr<uml::InputPin> ReclassifyObjectActionImpl::getObject() const
 {
     return m_object;
 }
-void ReclassifyObjectActionImpl::setObject(std::shared_ptr<uml::InputPin> _object)
+void ReclassifyObjectActionImpl::setObject(const std::shared_ptr<uml::InputPin>& _object)
 {
     m_object = _object;
 	

@@ -208,7 +208,7 @@ std::shared_ptr<uml::TemplateSignature> TemplateBindingImpl::getSignature() cons
 {
     return m_signature;
 }
-void TemplateBindingImpl::setSignature(std::shared_ptr<uml::TemplateSignature> _signature)
+void TemplateBindingImpl::setSignature(const std::shared_ptr<uml::TemplateSignature>& _signature)
 {
     m_signature = _signature;
 	

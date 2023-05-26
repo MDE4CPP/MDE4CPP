@@ -558,7 +558,7 @@ std::shared_ptr<uml::ActivityNode> ActivityNodeActivationImpl::getNode() const
 {
     return m_node;
 }
-void ActivityNodeActivationImpl::setNode(std::shared_ptr<uml::ActivityNode> _node)
+void ActivityNodeActivationImpl::setNode(const std::shared_ptr<uml::ActivityNode>& _node)
 {
     m_node = _node;
 	

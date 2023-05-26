@@ -436,7 +436,7 @@ std::shared_ptr<uml::Constraint> OperationImpl::getBodyCondition() const
 {
     return m_bodyCondition;
 }
-void OperationImpl::setBodyCondition(std::shared_ptr<uml::Constraint> _bodyCondition)
+void OperationImpl::setBodyCondition(const std::shared_ptr<uml::Constraint>& _bodyCondition)
 {
     m_bodyCondition = _bodyCondition;
 	

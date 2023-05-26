@@ -173,7 +173,7 @@ std::shared_ptr<uml::Classifier> ReadExtentActionImpl::getClassifier() const
 {
     return m_classifier;
 }
-void ReadExtentActionImpl::setClassifier(std::shared_ptr<uml::Classifier> _classifier)
+void ReadExtentActionImpl::setClassifier(const std::shared_ptr<uml::Classifier>& _classifier)
 {
     m_classifier = _classifier;
 	
@@ -184,7 +184,7 @@ std::shared_ptr<uml::OutputPin> ReadExtentActionImpl::getResult() const
 {
     return m_result;
 }
-void ReadExtentActionImpl::setResult(std::shared_ptr<uml::OutputPin> _result)
+void ReadExtentActionImpl::setResult(const std::shared_ptr<uml::OutputPin>& _result)
 {
     m_result = _result;
 	

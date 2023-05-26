@@ -228,7 +228,7 @@ std::shared_ptr<ocl::Expressions::OclExpression> PrefixedExpImpl::getReferredExp
 {
     return m_referredExpression;
 }
-void PrefixedExpImpl::setReferredExpression(std::shared_ptr<ocl::Expressions::OclExpression> _referredExpression)
+void PrefixedExpImpl::setReferredExpression(const std::shared_ptr<ocl::Expressions::OclExpression>& _referredExpression)
 {
     m_referredExpression = _referredExpression;
 	

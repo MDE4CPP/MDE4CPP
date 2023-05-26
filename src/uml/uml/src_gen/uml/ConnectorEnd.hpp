@@ -108,7 +108,7 @@ namespace uml
 			<p>From package UML::StructuredClassifiers.</p>
 			*/
 			
-			virtual void setPartWithPort(std::shared_ptr<uml::Property>) = 0;
+			virtual void setPartWithPort(const std::shared_ptr<uml::Property>&) = 0;
 			/*!
 			The ConnectableElement attached at this ConnectorEnd. When an instance of the containing Classifier is created, a link may (depending on the multiplicities) be created to an instance of the Classifier that types this ConnectableElement.
 			<p>From package UML::StructuredClassifiers.</p>
@@ -120,7 +120,7 @@ namespace uml
 			<p>From package UML::StructuredClassifiers.</p>
 			*/
 			
-			virtual void setRole(std::shared_ptr<uml::ConnectableElement>) = 0;
+			virtual void setRole(const std::shared_ptr<uml::ConnectableElement>&) = 0;
 
 			//*********************************
 			// Union Reference Getters

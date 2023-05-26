@@ -218,7 +218,7 @@ std::shared_ptr<ocl::Expressions::OclExpression> DefExpImpl::getBodyExp() const
 {
     return m_bodyExp;
 }
-void DefExpImpl::setBodyExp(std::shared_ptr<ocl::Expressions::OclExpression> _bodyExp)
+void DefExpImpl::setBodyExp(const std::shared_ptr<ocl::Expressions::OclExpression>& _bodyExp)
 {
     m_bodyExp = _bodyExp;
 	
@@ -229,7 +229,7 @@ std::shared_ptr<ocl::Expressions::OclExpression> DefExpImpl::getFrontExp() const
 {
     return m_frontExp;
 }
-void DefExpImpl::setFrontExp(std::shared_ptr<ocl::Expressions::OclExpression> _frontExp)
+void DefExpImpl::setFrontExp(const std::shared_ptr<ocl::Expressions::OclExpression>& _frontExp)
 {
     m_frontExp = _frontExp;
 	

@@ -413,7 +413,7 @@ std::shared_ptr<uml::CallOperationAction> CallOperationActionActivationImpl::get
 {
     return m_callOperationAction;
 }
-void CallOperationActionActivationImpl::setCallOperationAction(std::shared_ptr<uml::CallOperationAction> _callOperationAction)
+void CallOperationActionActivationImpl::setCallOperationAction(const std::shared_ptr<uml::CallOperationAction>& _callOperationAction)
 {
     m_callOperationAction = _callOperationAction;
 	//additional setter call for redefined reference CallActionActivation::callAction

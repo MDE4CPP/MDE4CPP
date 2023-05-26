@@ -184,7 +184,7 @@ std::shared_ptr<uml::InputPin> RemoveVariableValueActionImpl::getRemoveAt() cons
 {
     return m_removeAt;
 }
-void RemoveVariableValueActionImpl::setRemoveAt(std::shared_ptr<uml::InputPin> _removeAt)
+void RemoveVariableValueActionImpl::setRemoveAt(const std::shared_ptr<uml::InputPin>& _removeAt)
 {
     m_removeAt = _removeAt;
 	

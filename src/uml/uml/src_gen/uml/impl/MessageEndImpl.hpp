@@ -124,7 +124,7 @@ namespace uml
 			<p>From package UML::Interactions.</p>
 			*/
 			
-			virtual void setMessage(std::shared_ptr<uml::Message>) ;
+			virtual void setMessage(const std::shared_ptr<uml::Message>&) ;
 			
 			//*********************************
 			// Union Reference Getters

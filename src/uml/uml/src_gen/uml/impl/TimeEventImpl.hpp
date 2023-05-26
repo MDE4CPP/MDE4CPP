@@ -81,7 +81,7 @@ namespace uml
 			<p>From package UML::CommonBehavior.</p>
 			*/
 			
-			virtual void setWhen(std::shared_ptr<uml::TimeExpression>) ;
+			virtual void setWhen(const std::shared_ptr<uml::TimeExpression>&) ;
 			
 			//*********************************
 			// Union Reference Getters

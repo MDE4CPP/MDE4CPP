@@ -141,7 +141,7 @@ std::shared_ptr<uml::InputPin> LinkEndCreationDataImpl::getInsertAt() const
 {
     return m_insertAt;
 }
-void LinkEndCreationDataImpl::setInsertAt(std::shared_ptr<uml::InputPin> _insertAt)
+void LinkEndCreationDataImpl::setInsertAt(const std::shared_ptr<uml::InputPin>& _insertAt)
 {
     m_insertAt = _insertAt;
 	

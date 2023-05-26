@@ -194,7 +194,7 @@ std::shared_ptr<uml::Classifier> GeneralizationSetImpl::getPowertype() const
 {
     return m_powertype;
 }
-void GeneralizationSetImpl::setPowertype(std::shared_ptr<uml::Classifier> _powertype)
+void GeneralizationSetImpl::setPowertype(const std::shared_ptr<uml::Classifier>& _powertype)
 {
     m_powertype = _powertype;
 	

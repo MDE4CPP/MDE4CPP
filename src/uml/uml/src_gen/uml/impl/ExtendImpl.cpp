@@ -164,7 +164,7 @@ std::shared_ptr<uml::Constraint> ExtendImpl::getCondition() const
 {
     return m_condition;
 }
-void ExtendImpl::setCondition(std::shared_ptr<uml::Constraint> _condition)
+void ExtendImpl::setCondition(const std::shared_ptr<uml::Constraint>& _condition)
 {
     m_condition = _condition;
 	
@@ -175,7 +175,7 @@ std::shared_ptr<uml::UseCase> ExtendImpl::getExtendedCase() const
 {
     return m_extendedCase;
 }
-void ExtendImpl::setExtendedCase(std::shared_ptr<uml::UseCase> _extendedCase)
+void ExtendImpl::setExtendedCase(const std::shared_ptr<uml::UseCase>& _extendedCase)
 {
     m_extendedCase = _extendedCase;
 	

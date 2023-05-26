@@ -180,7 +180,7 @@ std::shared_ptr<uml::OutputPin> ValueSpecificationActionImpl::getResult() const
 {
     return m_result;
 }
-void ValueSpecificationActionImpl::setResult(std::shared_ptr<uml::OutputPin> _result)
+void ValueSpecificationActionImpl::setResult(const std::shared_ptr<uml::OutputPin>& _result)
 {
     m_result = _result;
 	
@@ -191,7 +191,7 @@ std::shared_ptr<uml::ValueSpecification> ValueSpecificationActionImpl::getValue(
 {
     return m_value;
 }
-void ValueSpecificationActionImpl::setValue(std::shared_ptr<uml::ValueSpecification> _value)
+void ValueSpecificationActionImpl::setValue(const std::shared_ptr<uml::ValueSpecification>& _value)
 {
     m_value = _value;
 	

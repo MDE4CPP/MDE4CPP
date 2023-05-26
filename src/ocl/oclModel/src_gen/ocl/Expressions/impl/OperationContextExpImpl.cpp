@@ -242,7 +242,7 @@ std::shared_ptr<ocl::Expressions::TypeExp> OperationContextExpImpl::getReturnTyp
 {
     return m_returnType;
 }
-void OperationContextExpImpl::setReturnType(std::shared_ptr<ocl::Expressions::TypeExp> _returnType)
+void OperationContextExpImpl::setReturnType(const std::shared_ptr<ocl::Expressions::TypeExp>& _returnType)
 {
     m_returnType = _returnType;
 	

@@ -173,7 +173,7 @@ std::shared_ptr<uml::OutputPin> ClearStructuralFeatureActionImpl::getResult() co
 {
     return m_result;
 }
-void ClearStructuralFeatureActionImpl::setResult(std::shared_ptr<uml::OutputPin> _result)
+void ClearStructuralFeatureActionImpl::setResult(const std::shared_ptr<uml::OutputPin>& _result)
 {
     m_result = _result;
 	

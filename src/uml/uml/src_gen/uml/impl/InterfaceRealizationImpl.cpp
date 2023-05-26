@@ -173,7 +173,7 @@ std::shared_ptr<uml::Interface> InterfaceRealizationImpl::getContract() const
 {
     return m_contract;
 }
-void InterfaceRealizationImpl::setContract(std::shared_ptr<uml::Interface> _contract)
+void InterfaceRealizationImpl::setContract(const std::shared_ptr<uml::Interface>& _contract)
 {
     m_contract = _contract;
 	

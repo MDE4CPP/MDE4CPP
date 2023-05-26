@@ -172,7 +172,7 @@ std::shared_ptr<uml::PartDecomposition> LifelineImpl::getDecomposedAs() const
 {
     return m_decomposedAs;
 }
-void LifelineImpl::setDecomposedAs(std::shared_ptr<uml::PartDecomposition> _decomposedAs)
+void LifelineImpl::setDecomposedAs(const std::shared_ptr<uml::PartDecomposition>& _decomposedAs)
 {
     m_decomposedAs = _decomposedAs;
 	
@@ -194,7 +194,7 @@ std::shared_ptr<uml::ConnectableElement> LifelineImpl::getRepresents() const
 {
     return m_represents;
 }
-void LifelineImpl::setRepresents(std::shared_ptr<uml::ConnectableElement> _represents)
+void LifelineImpl::setRepresents(const std::shared_ptr<uml::ConnectableElement>& _represents)
 {
     m_represents = _represents;
 	
@@ -205,7 +205,7 @@ std::shared_ptr<uml::ValueSpecification> LifelineImpl::getSelector() const
 {
     return m_selector;
 }
-void LifelineImpl::setSelector(std::shared_ptr<uml::ValueSpecification> _selector)
+void LifelineImpl::setSelector(const std::shared_ptr<uml::ValueSpecification>& _selector)
 {
     m_selector = _selector;
 	

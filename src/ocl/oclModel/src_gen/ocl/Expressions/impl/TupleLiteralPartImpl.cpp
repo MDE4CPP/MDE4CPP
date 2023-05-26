@@ -149,7 +149,7 @@ std::shared_ptr<ocl::Expressions::OclExpression> TupleLiteralPartImpl::getAssign
 {
     return m_assignedOclExpression;
 }
-void TupleLiteralPartImpl::setAssignedOclExpression(std::shared_ptr<ocl::Expressions::OclExpression> _assignedOclExpression)
+void TupleLiteralPartImpl::setAssignedOclExpression(const std::shared_ptr<ocl::Expressions::OclExpression>& _assignedOclExpression)
 {
     m_assignedOclExpression = _assignedOclExpression;
 	

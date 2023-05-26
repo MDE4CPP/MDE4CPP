@@ -99,7 +99,7 @@ namespace uml
 			<p>From package UML::CommonBehavior.</p>
 			*/
 			
-			virtual void setChangeExpression(std::shared_ptr<uml::ValueSpecification>) = 0;
+			virtual void setChangeExpression(const std::shared_ptr<uml::ValueSpecification>&) = 0;
 
 			//*********************************
 			// Union Reference Getters

@@ -62,11 +62,11 @@ namespace fUML::Semantics::CommonBehavior
 			// Reference Getters & Setters
 			//*********************************
 			virtual std::shared_ptr<uml::Behavior> getBehavior() const ;
-			virtual void setBehavior(std::shared_ptr<uml::Behavior>) ;
+			virtual void setBehavior(const std::shared_ptr<uml::Behavior>&) ;
 			virtual std::shared_ptr<uml::Element> getContext() const ;
-			virtual void setContext(std::shared_ptr<uml::Element>) ;
+			virtual void setContext(const std::shared_ptr<uml::Element>&) ;
 			virtual std::shared_ptr<fUML::Semantics::Loci::Locus> getLocus() const ;
-			virtual void setLocus(std::shared_ptr<fUML::Semantics::Loci::Locus>) ;
+			virtual void setLocus(const std::shared_ptr<fUML::Semantics::Loci::Locus>&) ;
 			
 			virtual std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> getParameterValues() const ;
 			virtual std::shared_ptr<Bag<uml::Classifier>> getTypes() const ;

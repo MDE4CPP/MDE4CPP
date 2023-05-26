@@ -153,7 +153,7 @@ std::shared_ptr<uml::Package> PackageImportImpl::getImportedPackage() const
 {
     return m_importedPackage;
 }
-void PackageImportImpl::setImportedPackage(std::shared_ptr<uml::Package> _importedPackage)
+void PackageImportImpl::setImportedPackage(const std::shared_ptr<uml::Package>& _importedPackage)
 {
     m_importedPackage = _importedPackage;
 	

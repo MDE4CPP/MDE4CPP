@@ -98,7 +98,7 @@ namespace uml
 			<p>From package UML::Interactions.</p>
 			*/
 			
-			virtual void setConnector(std::shared_ptr<uml::Connector>) ;
+			virtual void setConnector(const std::shared_ptr<uml::Connector>&) ;
 			/*!
 			The enclosing Interaction owning the Message.
 			<p>From package UML::Interactions.</p>
@@ -122,7 +122,7 @@ namespace uml
 			<p>From package UML::Interactions.</p>
 			*/
 			
-			virtual void setReceiveEvent(std::shared_ptr<uml::MessageEnd>) ;
+			virtual void setReceiveEvent(const std::shared_ptr<uml::MessageEnd>&) ;
 			/*!
 			References the Sending of the Message.
 			<p>From package UML::Interactions.</p>
@@ -134,7 +134,7 @@ namespace uml
 			<p>From package UML::Interactions.</p>
 			*/
 			
-			virtual void setSendEvent(std::shared_ptr<uml::MessageEnd>) ;
+			virtual void setSendEvent(const std::shared_ptr<uml::MessageEnd>&) ;
 			/*!
 			The signature of the Message is the specification of its content. It refers either an Operation or a Signal.
 			<p>From package UML::Interactions.</p>
@@ -146,7 +146,7 @@ namespace uml
 			<p>From package UML::Interactions.</p>
 			*/
 			
-			virtual void setSignature(std::shared_ptr<uml::NamedElement>) ;
+			virtual void setSignature(const std::shared_ptr<uml::NamedElement>&) ;
 			
 			//*********************************
 			// Union Reference Getters

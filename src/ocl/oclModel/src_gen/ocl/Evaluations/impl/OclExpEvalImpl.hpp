@@ -52,13 +52,13 @@ namespace ocl::Evaluations
 			// Reference Getters & Setters
 			//*********************************
 			virtual std::shared_ptr<ocl::Evaluations::EvalEnvironment> getBeforeEnvironment() const ;
-			virtual void setBeforeEnvironment(std::shared_ptr<ocl::Evaluations::EvalEnvironment>) ;
+			virtual void setBeforeEnvironment(const std::shared_ptr<ocl::Evaluations::EvalEnvironment>&) ;
 			virtual std::shared_ptr<ocl::Evaluations::EvalEnvironment> getEnvironment() const ;
-			virtual void setEnvironment(std::shared_ptr<ocl::Evaluations::EvalEnvironment>) ;
+			virtual void setEnvironment(const std::shared_ptr<ocl::Evaluations::EvalEnvironment>&) ;
 			virtual std::shared_ptr<ocl::Expressions::OclExpression> getModel() const ;
-			virtual void setModel(std::shared_ptr<ocl::Expressions::OclExpression>) ;
+			virtual void setModel(const std::shared_ptr<ocl::Expressions::OclExpression>&) ;
 			virtual std::shared_ptr<ecore::EObject> getResultValue() const ;
-			virtual void setResultValue(std::shared_ptr<ecore::EObject>) ;
+			virtual void setResultValue(const std::shared_ptr<ecore::EObject>&) ;
 			
 			//*********************************
 			// Union Reference Getters

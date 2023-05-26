@@ -162,7 +162,7 @@ std::shared_ptr<uml::OpaqueExpression> AbstractionImpl::getMapping() const
 {
     return m_mapping;
 }
-void AbstractionImpl::setMapping(std::shared_ptr<uml::OpaqueExpression> _mapping)
+void AbstractionImpl::setMapping(const std::shared_ptr<uml::OpaqueExpression>& _mapping)
 {
     m_mapping = _mapping;
 	

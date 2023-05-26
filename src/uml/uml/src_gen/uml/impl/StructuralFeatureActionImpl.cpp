@@ -166,7 +166,7 @@ std::shared_ptr<uml::InputPin> StructuralFeatureActionImpl::getObject() const
 {
     return m_object;
 }
-void StructuralFeatureActionImpl::setObject(std::shared_ptr<uml::InputPin> _object)
+void StructuralFeatureActionImpl::setObject(const std::shared_ptr<uml::InputPin>& _object)
 {
     m_object = _object;
 	
@@ -177,7 +177,7 @@ std::shared_ptr<uml::StructuralFeature> StructuralFeatureActionImpl::getStructur
 {
     return m_structuralFeature;
 }
-void StructuralFeatureActionImpl::setStructuralFeature(std::shared_ptr<uml::StructuralFeature> _structuralFeature)
+void StructuralFeatureActionImpl::setStructuralFeature(const std::shared_ptr<uml::StructuralFeature>& _structuralFeature)
 {
     m_structuralFeature = _structuralFeature;
 	

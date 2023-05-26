@@ -95,9 +95,9 @@ namespace ocl::Expressions
 			// Reference Getters & Setters
 			//*********************************
 			virtual std::shared_ptr<ocl::Expressions::OclExpression> getLeftHandOperand() const = 0;
-			virtual void setLeftHandOperand(std::shared_ptr<ocl::Expressions::OclExpression>) = 0;
+			virtual void setLeftHandOperand(const std::shared_ptr<ocl::Expressions::OclExpression>&) = 0;
 			virtual std::shared_ptr<ocl::Expressions::OclExpression> getRightHandOperand() const = 0;
-			virtual void setRightHandOperand(std::shared_ptr<ocl::Expressions::OclExpression>) = 0;
+			virtual void setRightHandOperand(const std::shared_ptr<ocl::Expressions::OclExpression>&) = 0;
 
 			//*********************************
 			// Union Reference Getters

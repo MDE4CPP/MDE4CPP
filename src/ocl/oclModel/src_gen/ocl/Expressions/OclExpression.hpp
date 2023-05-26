@@ -119,7 +119,7 @@ namespace ocl::Expressions
 			// Reference Getters & Setters
 			//*********************************
 			virtual std::shared_ptr<ocl::Expressions::CallExp> getAppliedElement() const = 0;
-			virtual void setAppliedElement(std::shared_ptr<ocl::Expressions::CallExp>) = 0;
+			virtual void setAppliedElement(const std::shared_ptr<ocl::Expressions::CallExp>&) = 0;
 			virtual std::weak_ptr<ocl::Expressions::IfExp> getElseOwner() const = 0;
 			virtual void setElseOwner(std::weak_ptr<ocl::Expressions::IfExp>) = 0;
 			virtual std::weak_ptr<ocl::Expressions::CollectionRange> getFirstOwner() const = 0;
@@ -128,7 +128,7 @@ namespace ocl::Expressions
 			virtual void setIfOwner(std::weak_ptr<ocl::Expressions::IfExp>) = 0;
 			virtual std::shared_ptr<Bag<ocl::Expressions::VarDeclarationExp>> getInitializedElement() const = 0;
 			virtual std::shared_ptr<ocl::Evaluations::OclExpEval> getInstance() const = 0;
-			virtual void setInstance(std::shared_ptr<ocl::Evaluations::OclExpEval>) = 0;
+			virtual void setInstance(const std::shared_ptr<ocl::Evaluations::OclExpEval>&) = 0;
 			virtual std::weak_ptr<ocl::Expressions::CollectionRange> getLastOwner() const = 0;
 			virtual void setLastOwner(std::weak_ptr<ocl::Expressions::CollectionRange>) = 0;
 			virtual std::weak_ptr<ocl::Expressions::LoopExp> getLoopBodyOwner() const = 0;

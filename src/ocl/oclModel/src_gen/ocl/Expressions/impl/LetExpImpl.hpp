@@ -68,7 +68,7 @@ namespace ocl::Expressions
 			// Reference Getters & Setters
 			//*********************************
 			virtual std::shared_ptr<ocl::Expressions::OclExpression> getIn() const ;
-			virtual void setIn(std::shared_ptr<ocl::Expressions::OclExpression>) ;
+			virtual void setIn(const std::shared_ptr<ocl::Expressions::OclExpression>&) ;
 			virtual std::shared_ptr<Bag<ocl::Expressions::VarDeclarationExp>> getVariables() const ;
 			
 			//*********************************

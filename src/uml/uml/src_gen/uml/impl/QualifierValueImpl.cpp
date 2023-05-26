@@ -129,7 +129,7 @@ std::shared_ptr<uml::Property> QualifierValueImpl::getQualifier() const
 {
     return m_qualifier;
 }
-void QualifierValueImpl::setQualifier(std::shared_ptr<uml::Property> _qualifier)
+void QualifierValueImpl::setQualifier(const std::shared_ptr<uml::Property>& _qualifier)
 {
     m_qualifier = _qualifier;
 	
@@ -140,7 +140,7 @@ std::shared_ptr<uml::InputPin> QualifierValueImpl::getValue() const
 {
     return m_value;
 }
-void QualifierValueImpl::setValue(std::shared_ptr<uml::InputPin> _value)
+void QualifierValueImpl::setValue(const std::shared_ptr<uml::InputPin>& _value)
 {
     m_value = _value;
 	

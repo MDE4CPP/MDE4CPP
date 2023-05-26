@@ -130,7 +130,7 @@ std::shared_ptr<ecore::EObject> CollectionLiteralPartEvalImpl::getElement() cons
 {
     return m_element;
 }
-void CollectionLiteralPartEvalImpl::setElement(std::shared_ptr<ecore::EObject> _element)
+void CollectionLiteralPartEvalImpl::setElement(const std::shared_ptr<ecore::EObject>& _element)
 {
     m_element = _element;
 	

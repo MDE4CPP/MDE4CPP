@@ -141,7 +141,7 @@ std::shared_ptr<uml::InputPin> LinkEndDestructionDataImpl::getDestroyAt() const
 {
     return m_destroyAt;
 }
-void LinkEndDestructionDataImpl::setDestroyAt(std::shared_ptr<uml::InputPin> _destroyAt)
+void LinkEndDestructionDataImpl::setDestroyAt(const std::shared_ptr<uml::InputPin>& _destroyAt)
 {
     m_destroyAt = _destroyAt;
 	

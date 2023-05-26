@@ -199,7 +199,7 @@ std::shared_ptr<uml::ClearStructuralFeatureAction> ClearStructuralFeatureActionA
 {
     return m_clearStructuralFeatureAction;
 }
-void ClearStructuralFeatureActionActivationImpl::setClearStructuralFeatureAction(std::shared_ptr<uml::ClearStructuralFeatureAction> _clearStructuralFeatureAction)
+void ClearStructuralFeatureActionActivationImpl::setClearStructuralFeatureAction(const std::shared_ptr<uml::ClearStructuralFeatureAction>& _clearStructuralFeatureAction)
 {
     m_clearStructuralFeatureAction = _clearStructuralFeatureAction;
 	//additional setter call for redefined reference ActionActivation::action

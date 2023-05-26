@@ -65,7 +65,7 @@ namespace uml
 			<p>From package UML::Interactions.</p>
 			*/
 			
-			virtual void setAfter(std::shared_ptr<uml::OccurrenceSpecification>) ;
+			virtual void setAfter(const std::shared_ptr<uml::OccurrenceSpecification>&) ;
 			/*!
 			The OccurrenceSpecification referenced comes before the OccurrenceSpecification referenced by after.
 			<p>From package UML::Interactions.</p>
@@ -77,7 +77,7 @@ namespace uml
 			<p>From package UML::Interactions.</p>
 			*/
 			
-			virtual void setBefore(std::shared_ptr<uml::OccurrenceSpecification>) ;
+			virtual void setBefore(const std::shared_ptr<uml::OccurrenceSpecification>&) ;
 			
 			//*********************************
 			// Union Reference Getters

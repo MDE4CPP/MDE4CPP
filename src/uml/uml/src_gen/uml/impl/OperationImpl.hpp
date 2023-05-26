@@ -158,7 +158,7 @@ namespace uml
 			<p>From package UML::Classification.</p>
 			*/
 			
-			virtual void setBodyCondition(std::shared_ptr<uml::Constraint>) ;
+			virtual void setBodyCondition(const std::shared_ptr<uml::Constraint>&) ;
 			/*!
 			The Class that owns this operation, if any.
 			<p>From package UML::Classification.</p>

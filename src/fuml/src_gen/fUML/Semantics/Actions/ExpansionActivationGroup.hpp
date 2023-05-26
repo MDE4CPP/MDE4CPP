@@ -98,7 +98,7 @@ namespace fUML::Semantics::Actions
 			virtual std::shared_ptr<Bag<fUML::Semantics::Actions::ExpansionNodeActivation>> getGroupInputs() const = 0;
 			virtual std::shared_ptr<Bag<fUML::Semantics::Actions::ExpansionNodeActivation>> getGroupOutputs() const = 0;
 			virtual std::shared_ptr<fUML::Semantics::Actions::ExpansionRegionActivation> getRegionActivation() const = 0;
-			virtual void setRegionActivation(std::shared_ptr<fUML::Semantics::Actions::ExpansionRegionActivation>) = 0;
+			virtual void setRegionActivation(const std::shared_ptr<fUML::Semantics::Actions::ExpansionRegionActivation>&) = 0;
 			virtual std::shared_ptr<Bag<fUML::Semantics::Actions::OutputPinActivation>> getRegionInputs() const = 0;
 
 			//*********************************

@@ -123,7 +123,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual void setTemplateParameter(std::shared_ptr<uml::TemplateParameter>) = 0;
+			virtual void setTemplateParameter(const std::shared_ptr<uml::TemplateParameter>&) = 0;
 
 			//*********************************
 			// Union Reference Getters

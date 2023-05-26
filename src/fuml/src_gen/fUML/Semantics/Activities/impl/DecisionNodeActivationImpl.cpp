@@ -532,7 +532,7 @@ std::shared_ptr<uml::DecisionNode> DecisionNodeActivationImpl::getDecisionNode()
 {
     return m_decisionNode;
 }
-void DecisionNodeActivationImpl::setDecisionNode(std::shared_ptr<uml::DecisionNode> _decisionNode)
+void DecisionNodeActivationImpl::setDecisionNode(const std::shared_ptr<uml::DecisionNode>& _decisionNode)
 {
     m_decisionNode = _decisionNode;
 	//additional setter call for redefined reference ActivityNodeActivation::node

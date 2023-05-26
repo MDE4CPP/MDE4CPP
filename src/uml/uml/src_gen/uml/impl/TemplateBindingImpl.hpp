@@ -83,7 +83,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual void setSignature(std::shared_ptr<uml::TemplateSignature>) ;
+			virtual void setSignature(const std::shared_ptr<uml::TemplateSignature>&) ;
 			
 			//*********************************
 			// Union Reference Getters

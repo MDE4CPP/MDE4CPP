@@ -244,7 +244,7 @@ std::shared_ptr<uml::Action> ActionInputPinImpl::getFromAction() const
 {
     return m_fromAction;
 }
-void ActionInputPinImpl::setFromAction(std::shared_ptr<uml::Action> _fromAction)
+void ActionInputPinImpl::setFromAction(const std::shared_ptr<uml::Action>& _fromAction)
 {
     m_fromAction = _fromAction;
 	

@@ -160,7 +160,7 @@ std::shared_ptr<uml::Variable> VariableActionImpl::getVariable() const
 {
     return m_variable;
 }
-void VariableActionImpl::setVariable(std::shared_ptr<uml::Variable> _variable)
+void VariableActionImpl::setVariable(const std::shared_ptr<uml::Variable>& _variable)
 {
     m_variable = _variable;
 	

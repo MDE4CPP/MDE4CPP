@@ -100,7 +100,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual void setImportedElement(std::shared_ptr<uml::PackageableElement>) ;
+			virtual void setImportedElement(const std::shared_ptr<uml::PackageableElement>&) ;
 			/*!
 			Specifies the Namespace that imports a PackageableElement from another Namespace.
 			<p>From package UML::CommonStructure.</p>

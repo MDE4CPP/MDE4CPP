@@ -266,7 +266,7 @@ std::shared_ptr<uml::OutputPin> LoopNodeImpl::getDecider() const
 {
     return m_decider;
 }
-void LoopNodeImpl::setDecider(std::shared_ptr<uml::OutputPin> _decider)
+void LoopNodeImpl::setDecider(const std::shared_ptr<uml::OutputPin>& _decider)
 {
     m_decider = _decider;
 	

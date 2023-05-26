@@ -318,7 +318,7 @@ std::shared_ptr<uml::Element> ActivityPartitionImpl::getRepresents() const
 {
     return m_represents;
 }
-void ActivityPartitionImpl::setRepresents(std::shared_ptr<uml::Element> _represents)
+void ActivityPartitionImpl::setRepresents(const std::shared_ptr<uml::Element>& _represents)
 {
     m_represents = _represents;
 	

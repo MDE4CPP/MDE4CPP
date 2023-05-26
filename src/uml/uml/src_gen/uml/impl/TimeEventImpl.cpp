@@ -173,7 +173,7 @@ std::shared_ptr<uml::TimeExpression> TimeEventImpl::getWhen() const
 {
     return m_when;
 }
-void TimeEventImpl::setWhen(std::shared_ptr<uml::TimeExpression> _when)
+void TimeEventImpl::setWhen(const std::shared_ptr<uml::TimeExpression>& _when)
 {
     m_when = _when;
 	

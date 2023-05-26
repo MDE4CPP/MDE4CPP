@@ -154,7 +154,7 @@ std::shared_ptr<uml::UseCase> IncludeImpl::getAddition() const
 {
     return m_addition;
 }
-void IncludeImpl::setAddition(std::shared_ptr<uml::UseCase> _addition)
+void IncludeImpl::setAddition(const std::shared_ptr<uml::UseCase>& _addition)
 {
     m_addition = _addition;
 	

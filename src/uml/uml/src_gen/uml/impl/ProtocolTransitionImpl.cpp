@@ -173,7 +173,7 @@ std::shared_ptr<uml::Constraint> ProtocolTransitionImpl::getPostCondition() cons
 {
     return m_postCondition;
 }
-void ProtocolTransitionImpl::setPostCondition(std::shared_ptr<uml::Constraint> _postCondition)
+void ProtocolTransitionImpl::setPostCondition(const std::shared_ptr<uml::Constraint>& _postCondition)
 {
     m_postCondition = _postCondition;
 	
@@ -184,7 +184,7 @@ std::shared_ptr<uml::Constraint> ProtocolTransitionImpl::getPreCondition() const
 {
     return m_preCondition;
 }
-void ProtocolTransitionImpl::setPreCondition(std::shared_ptr<uml::Constraint> _preCondition)
+void ProtocolTransitionImpl::setPreCondition(const std::shared_ptr<uml::Constraint>& _preCondition)
 {
     m_preCondition = _preCondition;
 	

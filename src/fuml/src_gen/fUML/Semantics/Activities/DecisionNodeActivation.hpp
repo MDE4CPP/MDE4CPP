@@ -102,9 +102,9 @@ namespace fUML::Semantics::Activities
 			//*********************************
 			
 			virtual std::shared_ptr<uml::DecisionNode> getDecisionNode() const = 0;
-			virtual void setDecisionNode(std::shared_ptr<uml::DecisionNode>) = 0;
+			virtual void setDecisionNode(const std::shared_ptr<uml::DecisionNode>&) = 0;
 			/*Additional Setter for 'ActivityNodeActivation::node' redefined by reference 'decisionNode'*/
-			virtual void setNode(std::shared_ptr<uml::ActivityNode>) = 0;
+			virtual void setNode(const std::shared_ptr<uml::ActivityNode>&) = 0;
 
 			//*********************************
 			// Union Reference Getters

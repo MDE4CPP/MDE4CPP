@@ -56,7 +56,7 @@ virtual public ParameterValue
 			// Reference Getters & Setters
 			//*********************************
 			virtual std::shared_ptr<uml::Parameter> getParameter() const ;
-			virtual void setParameter(std::shared_ptr<uml::Parameter>) ;
+			virtual void setParameter(const std::shared_ptr<uml::Parameter>&) ;
 			
 			//*********************************
 			// Union Reference Getters

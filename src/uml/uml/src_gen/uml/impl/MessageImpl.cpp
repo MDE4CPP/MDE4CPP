@@ -229,7 +229,7 @@ std::shared_ptr<uml::Connector> MessageImpl::getConnector() const
 {
     return m_connector;
 }
-void MessageImpl::setConnector(std::shared_ptr<uml::Connector> _connector)
+void MessageImpl::setConnector(const std::shared_ptr<uml::Connector>& _connector)
 {
     m_connector = _connector;
 	
@@ -251,7 +251,7 @@ std::shared_ptr<uml::MessageEnd> MessageImpl::getReceiveEvent() const
 {
     return m_receiveEvent;
 }
-void MessageImpl::setReceiveEvent(std::shared_ptr<uml::MessageEnd> _receiveEvent)
+void MessageImpl::setReceiveEvent(const std::shared_ptr<uml::MessageEnd>& _receiveEvent)
 {
     m_receiveEvent = _receiveEvent;
 	
@@ -262,7 +262,7 @@ std::shared_ptr<uml::MessageEnd> MessageImpl::getSendEvent() const
 {
     return m_sendEvent;
 }
-void MessageImpl::setSendEvent(std::shared_ptr<uml::MessageEnd> _sendEvent)
+void MessageImpl::setSendEvent(const std::shared_ptr<uml::MessageEnd>& _sendEvent)
 {
     m_sendEvent = _sendEvent;
 	
@@ -273,7 +273,7 @@ std::shared_ptr<uml::NamedElement> MessageImpl::getSignature() const
 {
     return m_signature;
 }
-void MessageImpl::setSignature(std::shared_ptr<uml::NamedElement> _signature)
+void MessageImpl::setSignature(const std::shared_ptr<uml::NamedElement>& _signature)
 {
     m_signature = _signature;
 	

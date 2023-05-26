@@ -168,7 +168,7 @@ std::shared_ptr<uml::NamedElement> TimeObservationImpl::getEvent() const
 {
     return m_event;
 }
-void TimeObservationImpl::setEvent(std::shared_ptr<uml::NamedElement> _event)
+void TimeObservationImpl::setEvent(const std::shared_ptr<uml::NamedElement>& _event)
 {
     m_event = _event;
 	

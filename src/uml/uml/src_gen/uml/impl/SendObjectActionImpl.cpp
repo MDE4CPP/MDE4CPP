@@ -180,7 +180,7 @@ std::shared_ptr<uml::InputPin> SendObjectActionImpl::getRequest() const
 {
     return m_request;
 }
-void SendObjectActionImpl::setRequest(std::shared_ptr<uml::InputPin> _request)
+void SendObjectActionImpl::setRequest(const std::shared_ptr<uml::InputPin>& _request)
 {
     m_request = _request;
 	
@@ -191,7 +191,7 @@ std::shared_ptr<uml::InputPin> SendObjectActionImpl::getTarget() const
 {
     return m_target;
 }
-void SendObjectActionImpl::setTarget(std::shared_ptr<uml::InputPin> _target)
+void SendObjectActionImpl::setTarget(const std::shared_ptr<uml::InputPin>& _target)
 {
     m_target = _target;
 	

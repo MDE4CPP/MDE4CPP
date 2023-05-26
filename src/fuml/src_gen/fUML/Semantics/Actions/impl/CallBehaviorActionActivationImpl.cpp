@@ -194,7 +194,7 @@ std::shared_ptr<uml::CallBehaviorAction> CallBehaviorActionActivationImpl::getCa
 {
     return m_callBehaviorAction;
 }
-void CallBehaviorActionActivationImpl::setCallBehaviorAction(std::shared_ptr<uml::CallBehaviorAction> _callBehaviorAction)
+void CallBehaviorActionActivationImpl::setCallBehaviorAction(const std::shared_ptr<uml::CallBehaviorAction>& _callBehaviorAction)
 {
     m_callBehaviorAction = _callBehaviorAction;
 	//additional setter call for redefined reference CallActionActivation::callAction

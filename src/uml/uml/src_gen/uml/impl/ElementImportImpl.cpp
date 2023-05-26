@@ -169,7 +169,7 @@ std::shared_ptr<uml::PackageableElement> ElementImportImpl::getImportedElement()
 {
     return m_importedElement;
 }
-void ElementImportImpl::setImportedElement(std::shared_ptr<uml::PackageableElement> _importedElement)
+void ElementImportImpl::setImportedElement(const std::shared_ptr<uml::PackageableElement>& _importedElement)
 {
     m_importedElement = _importedElement;
 	

@@ -106,7 +106,7 @@ namespace uml
 			<p>From package UML::UseCases.</p>
 			*/
 			
-			virtual void setAddition(std::shared_ptr<uml::UseCase>) = 0;
+			virtual void setAddition(const std::shared_ptr<uml::UseCase>&) = 0;
 			/*!
 			The UseCase which includes the addition and owns the Include relationship.
 			<p>From package UML::UseCases.</p>

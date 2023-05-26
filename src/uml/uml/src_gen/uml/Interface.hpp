@@ -103,7 +103,7 @@ namespace uml
 			Creates an operation with the specified name, parameter names, parameter types, and return type (or null) as an owned operation of this interface.
 			*/
 			 
-			virtual std::shared_ptr<uml::Operation> createOwnedOperation(std::string name, std::shared_ptr<Bag<std::string>> parameterNames, const std::shared_ptr<Bag<uml::Type>>& parameterTypes, const std::shared_ptr<uml::Type>& returnType) = 0;
+			virtual std::shared_ptr<uml::Operation> createOwnedOperation(std::string name, const std::shared_ptr<Bag<std::string>>& parameterNames, const std::shared_ptr<Bag<uml::Type>>& parameterTypes, const std::shared_ptr<uml::Type>& returnType) = 0;
 
 			//*********************************
 			// Attribute Getters & Setters
@@ -147,7 +147,7 @@ namespace uml
 			<p>From package UML::SimpleClassifiers.</p>
 			*/
 			
-			virtual void setProtocol(std::shared_ptr<uml::ProtocolStateMachine>) = 0;
+			virtual void setProtocol(const std::shared_ptr<uml::ProtocolStateMachine>&) = 0;
 			/*!
 			References all the Interfaces redefined by this Interface.
 			<p>From package UML::SimpleClassifiers.</p>

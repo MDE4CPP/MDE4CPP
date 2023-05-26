@@ -184,7 +184,7 @@ std::shared_ptr<uml::InputPin> RemoveStructuralFeatureValueActionImpl::getRemove
 {
     return m_removeAt;
 }
-void RemoveStructuralFeatureValueActionImpl::setRemoveAt(std::shared_ptr<uml::InputPin> _removeAt)
+void RemoveStructuralFeatureValueActionImpl::setRemoveAt(const std::shared_ptr<uml::InputPin>& _removeAt)
 {
     m_removeAt = _removeAt;
 	

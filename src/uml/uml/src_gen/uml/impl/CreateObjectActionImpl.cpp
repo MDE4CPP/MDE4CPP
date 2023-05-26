@@ -173,7 +173,7 @@ std::shared_ptr<uml::Classifier> CreateObjectActionImpl::getClassifier() const
 {
     return m_classifier;
 }
-void CreateObjectActionImpl::setClassifier(std::shared_ptr<uml::Classifier> _classifier)
+void CreateObjectActionImpl::setClassifier(const std::shared_ptr<uml::Classifier>& _classifier)
 {
     m_classifier = _classifier;
 	
@@ -184,7 +184,7 @@ std::shared_ptr<uml::OutputPin> CreateObjectActionImpl::getResult() const
 {
     return m_result;
 }
-void CreateObjectActionImpl::setResult(std::shared_ptr<uml::OutputPin> _result)
+void CreateObjectActionImpl::setResult(const std::shared_ptr<uml::OutputPin>& _result)
 {
     m_result = _result;
 	

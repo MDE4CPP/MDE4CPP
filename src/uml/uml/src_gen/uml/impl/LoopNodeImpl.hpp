@@ -96,7 +96,7 @@ namespace uml
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual void setDecider(std::shared_ptr<uml::OutputPin>) ;
+			virtual void setDecider(const std::shared_ptr<uml::OutputPin>&) ;
 			/*!
 			A list of OutputPins that hold the values of the loop variables during an execution of the loop. When the test fails, the values are moved to the result OutputPins of the loop.
 			<p>From package UML::Actions.</p>

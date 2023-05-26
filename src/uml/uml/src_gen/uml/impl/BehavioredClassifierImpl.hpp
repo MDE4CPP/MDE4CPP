@@ -80,7 +80,7 @@ namespace uml
 			<p>From package UML::SimpleClassifiers.</p>
 			*/
 			
-			virtual void setClassifierBehavior(std::shared_ptr<uml::Behavior>) ;
+			virtual void setClassifierBehavior(const std::shared_ptr<uml::Behavior>&) ;
 			/*!
 			The set of InterfaceRealizations owned by the BehavioredClassifier. Interface realizations reference the Interfaces of which the BehavioredClassifier is an implementation.
 			<p>From package UML::SimpleClassifiers.</p>

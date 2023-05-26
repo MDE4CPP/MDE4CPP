@@ -206,7 +206,7 @@ std::shared_ptr<uml::InputPin> UnmarshallActionImpl::getObject() const
 {
     return m_object;
 }
-void UnmarshallActionImpl::setObject(std::shared_ptr<uml::InputPin> _object)
+void UnmarshallActionImpl::setObject(const std::shared_ptr<uml::InputPin>& _object)
 {
     m_object = _object;
 	
@@ -238,7 +238,7 @@ std::shared_ptr<uml::Classifier> UnmarshallActionImpl::getUnmarshallType() const
 {
     return m_unmarshallType;
 }
-void UnmarshallActionImpl::setUnmarshallType(std::shared_ptr<uml::Classifier> _unmarshallType)
+void UnmarshallActionImpl::setUnmarshallType(const std::shared_ptr<uml::Classifier>& _unmarshallType)
 {
     m_unmarshallType = _unmarshallType;
 	

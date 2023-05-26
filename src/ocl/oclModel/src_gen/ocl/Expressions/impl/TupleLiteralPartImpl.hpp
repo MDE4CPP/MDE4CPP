@@ -56,7 +56,7 @@ namespace ocl::Expressions
 			// Reference Getters & Setters
 			//*********************************
 			virtual std::shared_ptr<ocl::Expressions::OclExpression> getAssignedOclExpression() const ;
-			virtual void setAssignedOclExpression(std::shared_ptr<ocl::Expressions::OclExpression>) ;
+			virtual void setAssignedOclExpression(const std::shared_ptr<ocl::Expressions::OclExpression>&) ;
 			
 			//*********************************
 			// Union Reference Getters

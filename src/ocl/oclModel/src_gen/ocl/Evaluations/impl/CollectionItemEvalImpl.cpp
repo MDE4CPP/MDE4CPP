@@ -131,7 +131,7 @@ std::shared_ptr<ocl::Evaluations::OclExpEval> CollectionItemEvalImpl::getItem() 
 {
     return m_item;
 }
-void CollectionItemEvalImpl::setItem(std::shared_ptr<ocl::Evaluations::OclExpEval> _item)
+void CollectionItemEvalImpl::setItem(const std::shared_ptr<ocl::Evaluations::OclExpEval>& _item)
 {
     m_item = _item;
 	
