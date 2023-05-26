@@ -166,7 +166,7 @@ void ReadSelfActionActivationImpl::doAction()
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference readSelfAction */
-std::shared_ptr<uml::ReadSelfAction> ReadSelfActionActivationImpl::getReadSelfAction() const
+const std::shared_ptr<uml::ReadSelfAction>& ReadSelfActionActivationImpl::getReadSelfAction() const
 {
     return m_readSelfAction;
 }
@@ -177,7 +177,7 @@ void ReadSelfActionActivationImpl::setReadSelfAction(const std::shared_ptr<uml::
 	fUML::Semantics::Actions::ActionActivationImpl::setAction(_readSelfAction);
 }
 /*Additional Setter for redefined reference 'ActionActivation::action'*/
-void ReadSelfActionActivationImpl::setAction(std::shared_ptr<uml::Action> _action)
+void ReadSelfActionActivationImpl::setAction(const std::shared_ptr<uml::Action>& _action)
 {
 	std::shared_ptr<uml::ReadSelfAction> _readSelfAction = std::dynamic_pointer_cast<uml::ReadSelfAction>(_action);
 	if(_readSelfAction)
@@ -193,7 +193,7 @@ void ReadSelfActionActivationImpl::setAction(std::shared_ptr<uml::Action> _actio
 	}
 }
 /*Additional Setter for redefined reference 'ActivityNodeActivation::node'*/
-void ReadSelfActionActivationImpl::setNode(std::shared_ptr<uml::ActivityNode> _node)
+void ReadSelfActionActivationImpl::setNode(const std::shared_ptr<uml::ActivityNode>& _node)
 {
 	std::shared_ptr<uml::ReadSelfAction> _readSelfAction = std::dynamic_pointer_cast<uml::ReadSelfAction>(_node);
 	if(_readSelfAction)

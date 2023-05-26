@@ -131,19 +131,19 @@ namespace uml
 			<p>From package UML::Activities.</p>
 			*/
 			
-			virtual std::shared_ptr<Subset<uml::ActivityEdge, uml::ActivityEdge>> getEdge() const = 0;
+			virtual const std::shared_ptr<Subset<uml::ActivityEdge, uml::ActivityEdge>>& getEdge() const = 0;
 			/*!
 			ActivityNodes immediately contained in the ActivityPartition.
 			<p>From package UML::Activities.</p>
 			*/
 			
-			virtual std::shared_ptr<Subset<uml::ActivityNode, uml::ActivityNode>> getNode() const = 0;
+			virtual const std::shared_ptr<Subset<uml::ActivityNode, uml::ActivityNode>>& getNode() const = 0;
 			/*!
 			An Element represented by the functionality modeled within the ActivityPartition.
 			<p>From package UML::Activities.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::Element> getRepresents() const = 0;
+			virtual const std::shared_ptr<uml::Element>& getRepresents() const = 0;
 			/*!
 			An Element represented by the functionality modeled within the ActivityPartition.
 			<p>From package UML::Activities.</p>
@@ -155,7 +155,7 @@ namespace uml
 			<p>From package UML::Activities.</p>
 			*/
 			
-			virtual std::shared_ptr<Subset<uml::ActivityPartition, uml::ActivityGroup>> getSubpartition() const = 0;
+			virtual const std::shared_ptr<Subset<uml::ActivityPartition, uml::ActivityGroup>>& getSubpartition() const = 0;
 			/*!
 			Other ActivityPartitions immediately containing this ActivityPartition (as its superGroups).
 			<p>From package UML::Activities.</p>

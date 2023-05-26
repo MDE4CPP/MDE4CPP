@@ -169,7 +169,7 @@ std::shared_ptr<ecore::EObject> ReadExtentActionImpl::copy() const
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference classifier */
-std::shared_ptr<uml::Classifier> ReadExtentActionImpl::getClassifier() const
+const std::shared_ptr<uml::Classifier>& ReadExtentActionImpl::getClassifier() const
 {
     return m_classifier;
 }
@@ -180,7 +180,7 @@ void ReadExtentActionImpl::setClassifier(const std::shared_ptr<uml::Classifier>&
 }
 
 /* Getter & Setter for reference result */
-std::shared_ptr<uml::OutputPin> ReadExtentActionImpl::getResult() const
+const std::shared_ptr<uml::OutputPin>& ReadExtentActionImpl::getResult() const
 {
     return m_result;
 }

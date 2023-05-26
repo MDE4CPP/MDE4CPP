@@ -132,7 +132,7 @@ void NameValueBindingImpl::setName(std::string _name)
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference value */
-std::shared_ptr<ecore::EObject> NameValueBindingImpl::getValue() const
+const std::shared_ptr<ecore::EObject>& NameValueBindingImpl::getValue() const
 {
     return m_value;
 }

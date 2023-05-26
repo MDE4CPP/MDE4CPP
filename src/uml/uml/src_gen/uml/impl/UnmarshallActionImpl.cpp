@@ -202,7 +202,7 @@ std::shared_ptr<ecore::EObject> UnmarshallActionImpl::copy() const
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference object */
-std::shared_ptr<uml::InputPin> UnmarshallActionImpl::getObject() const
+const std::shared_ptr<uml::InputPin>& UnmarshallActionImpl::getObject() const
 {
     return m_object;
 }
@@ -213,7 +213,7 @@ void UnmarshallActionImpl::setObject(const std::shared_ptr<uml::InputPin>& _obje
 }
 
 /* Getter & Setter for reference result */
-std::shared_ptr<Subset<uml::OutputPin, uml::OutputPin>> UnmarshallActionImpl::getResult() const
+const std::shared_ptr<Subset<uml::OutputPin, uml::OutputPin>>& UnmarshallActionImpl::getResult() const
 {
 	if(m_result == nullptr)
 	{
@@ -234,7 +234,7 @@ std::shared_ptr<Subset<uml::OutputPin, uml::OutputPin>> UnmarshallActionImpl::ge
 }
 
 /* Getter & Setter for reference unmarshallType */
-std::shared_ptr<uml::Classifier> UnmarshallActionImpl::getUnmarshallType() const
+const std::shared_ptr<uml::Classifier>& UnmarshallActionImpl::getUnmarshallType() const
 {
     return m_unmarshallType;
 }

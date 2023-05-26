@@ -121,7 +121,7 @@ namespace uml
 			<p>From package UML::Activities.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::ValueSpecification> getGuard() const = 0;
+			virtual const std::shared_ptr<uml::ValueSpecification>& getGuard() const = 0;
 			/*!
 			A ValueSpecification that is evaluated to determine if a token can traverse the ActivityEdge. If an ActivityEdge has no guard, then there is no restriction on tokens traversing the edge.
 			<p>From package UML::Activities.</p>
@@ -134,7 +134,7 @@ namespace uml
 			<p>From package UML::Activities.</p>
 			*/
 			
-			virtual std::shared_ptr<Subset<uml::ActivityPartition, uml::ActivityGroup>> getInPartition() const = 0;
+			virtual const std::shared_ptr<Subset<uml::ActivityPartition, uml::ActivityGroup>>& getInPartition() const = 0;
 			/*!
 			The StructuredActivityNode containing the ActivityEdge, if it is owned by a StructuredActivityNode.
 			<p>From package UML::Activities.</p>
@@ -152,7 +152,7 @@ namespace uml
 			<p>From package UML::Activities.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::InterruptibleActivityRegion> getInterrupts() const = 0;
+			virtual const std::shared_ptr<uml::InterruptibleActivityRegion>& getInterrupts() const = 0;
 			/*!
 			The InterruptibleActivityRegion for which this ActivityEdge is an interruptingEdge.
 			<p>From package UML::Activities.</p>
@@ -164,13 +164,13 @@ namespace uml
 			<p>From package UML::Activities.</p>
 			*/
 			
-			virtual std::shared_ptr<Subset<uml::ActivityEdge, uml::RedefinableElement>> getRedefinedEdge() const = 0;
+			virtual const std::shared_ptr<Subset<uml::ActivityEdge, uml::RedefinableElement>>& getRedefinedEdge() const = 0;
 			/*!
 			The ActivityNode from which tokens are taken when they traverse the ActivityEdge.
 			<p>From package UML::Activities.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::ActivityNode> getSource() const = 0;
+			virtual const std::shared_ptr<uml::ActivityNode>& getSource() const = 0;
 			/*!
 			The ActivityNode from which tokens are taken when they traverse the ActivityEdge.
 			<p>From package UML::Activities.</p>
@@ -182,7 +182,7 @@ namespace uml
 			<p>From package UML::Activities.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::ActivityNode> getTarget() const = 0;
+			virtual const std::shared_ptr<uml::ActivityNode>& getTarget() const = 0;
 			/*!
 			The ActivityNode to which tokens are put when they traverse the ActivityEdge.
 			<p>From package UML::Activities.</p>
@@ -194,7 +194,7 @@ namespace uml
 			<p>From package UML::Activities.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::ValueSpecification> getWeight() const = 0;
+			virtual const std::shared_ptr<uml::ValueSpecification>& getWeight() const = 0;
 			/*!
 			The minimum number of tokens that must traverse the ActivityEdge at the same time. If no weight is specified, this is equivalent to specifying a constant value of 1.
 			<p>From package UML::Activities.</p>

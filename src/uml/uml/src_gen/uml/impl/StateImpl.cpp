@@ -374,7 +374,7 @@ bool StateImpl::getIsSubmachineState() const
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference connection */
-std::shared_ptr<Subset<uml::ConnectionPointReference, uml::NamedElement>> StateImpl::getConnection() const
+const std::shared_ptr<Subset<uml::ConnectionPointReference, uml::NamedElement>>& StateImpl::getConnection() const
 {
 	if(m_connection == nullptr)
 	{
@@ -395,7 +395,7 @@ std::shared_ptr<Subset<uml::ConnectionPointReference, uml::NamedElement>> StateI
 }
 
 /* Getter & Setter for reference connectionPoint */
-std::shared_ptr<Subset<uml::Pseudostate, uml::NamedElement>> StateImpl::getConnectionPoint() const
+const std::shared_ptr<Subset<uml::Pseudostate, uml::NamedElement>>& StateImpl::getConnectionPoint() const
 {
 	if(m_connectionPoint == nullptr)
 	{
@@ -416,7 +416,7 @@ std::shared_ptr<Subset<uml::Pseudostate, uml::NamedElement>> StateImpl::getConne
 }
 
 /* Getter & Setter for reference deferrableTrigger */
-std::shared_ptr<Subset<uml::Trigger, uml::Element>> StateImpl::getDeferrableTrigger() const
+const std::shared_ptr<Subset<uml::Trigger, uml::Element>>& StateImpl::getDeferrableTrigger() const
 {
 	if(m_deferrableTrigger == nullptr)
 	{
@@ -437,7 +437,7 @@ std::shared_ptr<Subset<uml::Trigger, uml::Element>> StateImpl::getDeferrableTrig
 }
 
 /* Getter & Setter for reference doActivity */
-std::shared_ptr<uml::Behavior> StateImpl::getDoActivity() const
+const std::shared_ptr<uml::Behavior>& StateImpl::getDoActivity() const
 {
     return m_doActivity;
 }
@@ -448,7 +448,7 @@ void StateImpl::setDoActivity(const std::shared_ptr<uml::Behavior>& _doActivity)
 }
 
 /* Getter & Setter for reference entry */
-std::shared_ptr<uml::Behavior> StateImpl::getEntry() const
+const std::shared_ptr<uml::Behavior>& StateImpl::getEntry() const
 {
     return m_entry;
 }
@@ -459,7 +459,7 @@ void StateImpl::setEntry(const std::shared_ptr<uml::Behavior>& _entry)
 }
 
 /* Getter & Setter for reference exit */
-std::shared_ptr<uml::Behavior> StateImpl::getExit() const
+const std::shared_ptr<uml::Behavior>& StateImpl::getExit() const
 {
     return m_exit;
 }
@@ -470,7 +470,7 @@ void StateImpl::setExit(const std::shared_ptr<uml::Behavior>& _exit)
 }
 
 /* Getter & Setter for reference redefinedState */
-std::shared_ptr<uml::State> StateImpl::getRedefinedState() const
+const std::shared_ptr<uml::State>& StateImpl::getRedefinedState() const
 {
     return m_redefinedState;
 }
@@ -481,7 +481,7 @@ void StateImpl::setRedefinedState(const std::shared_ptr<uml::State>& _redefinedS
 }
 
 /* Getter & Setter for reference region */
-std::shared_ptr<Subset<uml::Region, uml::NamedElement>> StateImpl::getRegion() const
+const std::shared_ptr<Subset<uml::Region, uml::NamedElement>>& StateImpl::getRegion() const
 {
 	if(m_region == nullptr)
 	{
@@ -502,7 +502,7 @@ std::shared_ptr<Subset<uml::Region, uml::NamedElement>> StateImpl::getRegion() c
 }
 
 /* Getter & Setter for reference stateInvariant */
-std::shared_ptr<uml::Constraint> StateImpl::getStateInvariant() const
+const std::shared_ptr<uml::Constraint>& StateImpl::getStateInvariant() const
 {
     return m_stateInvariant;
 }
@@ -513,7 +513,7 @@ void StateImpl::setStateInvariant(const std::shared_ptr<uml::Constraint>& _state
 }
 
 /* Getter & Setter for reference submachine */
-std::shared_ptr<uml::StateMachine> StateImpl::getSubmachine() const
+const std::shared_ptr<uml::StateMachine>& StateImpl::getSubmachine() const
 {
     return m_submachine;
 }

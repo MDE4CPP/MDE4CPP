@@ -166,25 +166,25 @@ namespace uml
 			<p>From package UML::StateMachines.</p>
 			*/
 			
-			virtual std::shared_ptr<Subset<uml::Pseudostate, uml::NamedElement>> getConnectionPoint() const = 0;
+			virtual const std::shared_ptr<Subset<uml::Pseudostate, uml::NamedElement>>& getConnectionPoint() const = 0;
 			/*!
 			The StateMachines of which this is an extension.
 			<p>From package UML::StateMachines.</p>
 			*/
 			
-			virtual std::shared_ptr<Bag<uml::StateMachine>> getExtendedStateMachine() const = 0;
+			virtual const std::shared_ptr<Bag<uml::StateMachine>>& getExtendedStateMachine() const = 0;
 			/*!
 			The Regions owned directly by the StateMachine.
 			<p>From package UML::StateMachines.</p>
 			*/
 			
-			virtual std::shared_ptr<Subset<uml::Region, uml::NamedElement>> getRegion() const = 0;
+			virtual const std::shared_ptr<Subset<uml::Region, uml::NamedElement>>& getRegion() const = 0;
 			/*!
 			References the submachine(s) in case of a submachine State. Multiple machines are referenced in case of a concurrent State.
 			<p>From package UML::StateMachines.</p>
 			*/
 			
-			virtual std::shared_ptr<Bag<uml::State>> getSubmachineState() const = 0;
+			virtual const std::shared_ptr<Bag<uml::State>>& getSubmachineState() const = 0;
 
 			//*********************************
 			// Union Reference Getters

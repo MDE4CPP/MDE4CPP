@@ -271,7 +271,7 @@ std::string StereotypeImpl::getKeyword(bool localize)
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference icon */
-std::shared_ptr<Subset<uml::Image, uml::Element>> StereotypeImpl::getIcon() const
+const std::shared_ptr<Subset<uml::Image, uml::Element>>& StereotypeImpl::getIcon() const
 {
 	if(m_icon == nullptr)
 	{
@@ -292,7 +292,7 @@ std::shared_ptr<Subset<uml::Image, uml::Element>> StereotypeImpl::getIcon() cons
 }
 
 /* Getter & Setter for reference profile */
-std::shared_ptr<uml::Profile> StereotypeImpl::getProfile() const
+const std::shared_ptr<uml::Profile>& StereotypeImpl::getProfile() const
 {
     return m_profile;
 }

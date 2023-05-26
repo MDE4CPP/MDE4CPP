@@ -116,13 +116,13 @@ namespace uml
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual std::shared_ptr<Bag<uml::ExpansionNode>> getInputElement() const = 0;
+			virtual const std::shared_ptr<Bag<uml::ExpansionNode>>& getInputElement() const = 0;
 			/*!
 			The ExpansionNodes that form the output collections of the ExpansionRegion.
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual std::shared_ptr<Bag<uml::ExpansionNode>> getOutputElement() const = 0;
+			virtual const std::shared_ptr<Bag<uml::ExpansionNode>>& getOutputElement() const = 0;
 
 			//*********************************
 			// Union Reference Getters

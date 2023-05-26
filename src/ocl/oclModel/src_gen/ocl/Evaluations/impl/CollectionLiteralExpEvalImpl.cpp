@@ -127,7 +127,7 @@ std::shared_ptr<ecore::EObject> CollectionLiteralExpEvalImpl::copy() const
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference parts */
-std::shared_ptr<Bag<ocl::Evaluations::CollectionLiteralPartEval>> CollectionLiteralExpEvalImpl::getParts() const
+const std::shared_ptr<Bag<ocl::Evaluations::CollectionLiteralPartEval>>& CollectionLiteralExpEvalImpl::getParts() const
 {
 	if(m_parts == nullptr)
 	{

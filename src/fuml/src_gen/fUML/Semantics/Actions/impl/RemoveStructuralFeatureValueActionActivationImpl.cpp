@@ -203,7 +203,7 @@ void RemoveStructuralFeatureValueActionActivationImpl::doAction()
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference removeStructuralFeatureValueAction */
-std::shared_ptr<uml::RemoveStructuralFeatureValueAction> RemoveStructuralFeatureValueActionActivationImpl::getRemoveStructuralFeatureValueAction() const
+const std::shared_ptr<uml::RemoveStructuralFeatureValueAction>& RemoveStructuralFeatureValueActionActivationImpl::getRemoveStructuralFeatureValueAction() const
 {
     return m_removeStructuralFeatureValueAction;
 }
@@ -214,7 +214,7 @@ void RemoveStructuralFeatureValueActionActivationImpl::setRemoveStructuralFeatur
 	fUML::Semantics::Actions::ActionActivationImpl::setAction(_removeStructuralFeatureValueAction);
 }
 /*Additional Setter for redefined reference 'ActionActivation::action'*/
-void RemoveStructuralFeatureValueActionActivationImpl::setAction(std::shared_ptr<uml::Action> _action)
+void RemoveStructuralFeatureValueActionActivationImpl::setAction(const std::shared_ptr<uml::Action>& _action)
 {
 	std::shared_ptr<uml::RemoveStructuralFeatureValueAction> _removeStructuralFeatureValueAction = std::dynamic_pointer_cast<uml::RemoveStructuralFeatureValueAction>(_action);
 	if(_removeStructuralFeatureValueAction)
@@ -230,7 +230,7 @@ void RemoveStructuralFeatureValueActionActivationImpl::setAction(std::shared_ptr
 	}
 }
 /*Additional Setter for redefined reference 'ActivityNodeActivation::node'*/
-void RemoveStructuralFeatureValueActionActivationImpl::setNode(std::shared_ptr<uml::ActivityNode> _node)
+void RemoveStructuralFeatureValueActionActivationImpl::setNode(const std::shared_ptr<uml::ActivityNode>& _node)
 {
 	std::shared_ptr<uml::RemoveStructuralFeatureValueAction> _removeStructuralFeatureValueAction = std::dynamic_pointer_cast<uml::RemoveStructuralFeatureValueAction>(_node);
 	if(_removeStructuralFeatureValueAction)

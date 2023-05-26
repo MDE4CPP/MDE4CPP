@@ -174,7 +174,7 @@ std::shared_ptr<ecore::EObject> DurationConstraintImpl::copy() const
 // Attribute Getters & Setters
 //*********************************
 /* Getter & Setter for attribute firstEvent */
-std::shared_ptr<Bag<bool>> DurationConstraintImpl::isFirstEvent() const 
+const std::shared_ptr<Bag<bool>>& DurationConstraintImpl::isFirstEvent() const 
 {
 	if(m_firstEvent == nullptr)
 	{

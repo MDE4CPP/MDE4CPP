@@ -241,7 +241,7 @@ void BehavioralFeatureImpl::setIsAbstract(bool _isAbstract)
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference method */
-std::shared_ptr<Bag<uml::Behavior>> BehavioralFeatureImpl::getMethod() const
+const std::shared_ptr<Bag<uml::Behavior>>& BehavioralFeatureImpl::getMethod() const
 {
 	if(m_method == nullptr)
 	{
@@ -253,7 +253,7 @@ std::shared_ptr<Bag<uml::Behavior>> BehavioralFeatureImpl::getMethod() const
 }
 
 /* Getter & Setter for reference ownedParameter */
-std::shared_ptr<Subset<uml::Parameter, uml::NamedElement>> BehavioralFeatureImpl::getOwnedParameter() const
+const std::shared_ptr<Subset<uml::Parameter, uml::NamedElement>>& BehavioralFeatureImpl::getOwnedParameter() const
 {
 	if(m_ownedParameter == nullptr)
 	{
@@ -274,7 +274,7 @@ std::shared_ptr<Subset<uml::Parameter, uml::NamedElement>> BehavioralFeatureImpl
 }
 
 /* Getter & Setter for reference ownedParameterSet */
-std::shared_ptr<Subset<uml::ParameterSet, uml::NamedElement>> BehavioralFeatureImpl::getOwnedParameterSet() const
+const std::shared_ptr<Subset<uml::ParameterSet, uml::NamedElement>>& BehavioralFeatureImpl::getOwnedParameterSet() const
 {
 	if(m_ownedParameterSet == nullptr)
 	{
@@ -295,7 +295,7 @@ std::shared_ptr<Subset<uml::ParameterSet, uml::NamedElement>> BehavioralFeatureI
 }
 
 /* Getter & Setter for reference raisedException */
-std::shared_ptr<Bag<uml::Type>> BehavioralFeatureImpl::getRaisedException() const
+const std::shared_ptr<Bag<uml::Type>>& BehavioralFeatureImpl::getRaisedException() const
 {
 	if(m_raisedException == nullptr)
 	{

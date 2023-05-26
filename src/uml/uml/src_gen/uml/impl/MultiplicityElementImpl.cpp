@@ -204,7 +204,7 @@ void MultiplicityElementImpl::setUpper(int _upper)
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference lowerValue */
-std::shared_ptr<uml::ValueSpecification> MultiplicityElementImpl::getLowerValue() const
+const std::shared_ptr<uml::ValueSpecification>& MultiplicityElementImpl::getLowerValue() const
 {
     return m_lowerValue;
 }
@@ -215,7 +215,7 @@ void MultiplicityElementImpl::setLowerValue(const std::shared_ptr<uml::ValueSpec
 }
 
 /* Getter & Setter for reference upperValue */
-std::shared_ptr<uml::ValueSpecification> MultiplicityElementImpl::getUpperValue() const
+const std::shared_ptr<uml::ValueSpecification>& MultiplicityElementImpl::getUpperValue() const
 {
     return m_upperValue;
 }

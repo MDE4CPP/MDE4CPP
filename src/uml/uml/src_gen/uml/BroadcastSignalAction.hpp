@@ -102,7 +102,7 @@ namespace uml
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::Signal> getSignal() const = 0;
+			virtual const std::shared_ptr<uml::Signal>& getSignal() const = 0;
 			/*!
 			The Signal whose instances are to be sent.
 			<p>From package UML::Actions.</p>

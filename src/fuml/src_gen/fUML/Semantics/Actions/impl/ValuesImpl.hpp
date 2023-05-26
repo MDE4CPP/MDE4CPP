@@ -49,7 +49,7 @@ virtual public Values
 			//*********************************
 			// Attribute Getters & Setters
 			//*********************************
-			virtual std::shared_ptr<Bag<Any>> getValues() const ;
+			virtual const std::shared_ptr<Bag<Any>>& getValues() const ;
 			
 			//*********************************
 			// Reference Getters & Setters

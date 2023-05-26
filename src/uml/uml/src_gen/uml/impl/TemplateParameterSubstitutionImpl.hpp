@@ -59,7 +59,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::ParameterableElement> getActual() const ;
+			virtual const std::shared_ptr<uml::ParameterableElement>& getActual() const ;
 			/*!
 			The ParameterableElement that is the actual parameter for this TemplateParameterSubstitution.
 			<p>From package UML::CommonStructure.</p>
@@ -71,7 +71,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::TemplateParameter> getFormal() const ;
+			virtual const std::shared_ptr<uml::TemplateParameter>& getFormal() const ;
 			/*!
 			The formal TemplateParameter that is associated with this TemplateParameterSubstitution.
 			<p>From package UML::CommonStructure.</p>
@@ -83,7 +83,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::ParameterableElement> getOwnedActual() const ;
+			virtual const std::shared_ptr<uml::ParameterableElement>& getOwnedActual() const ;
 			/*!
 			The ParameterableElement that is owned by this TemplateParameterSubstitution as its actual parameter.
 			<p>From package UML::CommonStructure.</p>

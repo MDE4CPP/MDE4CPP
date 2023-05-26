@@ -244,7 +244,7 @@ void ConditionalNodeImpl::setIsDeterminate(bool _isDeterminate)
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference clause */
-std::shared_ptr<Subset<uml::Clause, uml::Element>> ConditionalNodeImpl::getClause() const
+const std::shared_ptr<Subset<uml::Clause, uml::Element>>& ConditionalNodeImpl::getClause() const
 {
 	if(m_clause == nullptr)
 	{
@@ -265,7 +265,7 @@ std::shared_ptr<Subset<uml::Clause, uml::Element>> ConditionalNodeImpl::getClaus
 }
 
 /* Getter & Setter for reference result */
-std::shared_ptr<Bag<uml::OutputPin>> ConditionalNodeImpl::getResult() const
+const std::shared_ptr<Bag<uml::OutputPin>>& ConditionalNodeImpl::getResult() const
 {
 	//Getter call of redefined container reference StructuredActivityNode::structuredNodeOutput 
 	return uml::StructuredActivityNodeImpl::getStructuredNodeOutput();

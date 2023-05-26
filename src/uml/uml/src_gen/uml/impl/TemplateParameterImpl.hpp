@@ -59,7 +59,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::ParameterableElement> getDefault() const ;
+			virtual const std::shared_ptr<uml::ParameterableElement>& getDefault() const ;
 			/*!
 			The ParameterableElement that is the default for this formal TemplateParameter.
 			<p>From package UML::CommonStructure.</p>
@@ -71,7 +71,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::ParameterableElement> getOwnedDefault() const ;
+			virtual const std::shared_ptr<uml::ParameterableElement>& getOwnedDefault() const ;
 			/*!
 			The ParameterableElement that is owned by this TemplateParameter for the purpose of providing a default.
 			<p>From package UML::CommonStructure.</p>
@@ -83,7 +83,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::ParameterableElement> getOwnedParameteredElement() const ;
+			virtual const std::shared_ptr<uml::ParameterableElement>& getOwnedParameteredElement() const ;
 			/*!
 			The ParameterableElement that is owned by this TemplateParameter for the purpose of exposing it as the parameteredElement.
 			<p>From package UML::CommonStructure.</p>
@@ -95,7 +95,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::ParameterableElement> getParameteredElement() const ;
+			virtual const std::shared_ptr<uml::ParameterableElement>& getParameteredElement() const ;
 			/*!
 			The ParameterableElement exposed by this TemplateParameter.
 			<p>From package UML::CommonStructure.</p>

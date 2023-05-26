@@ -114,13 +114,13 @@ namespace uml
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual std::shared_ptr<Subset<uml::OutputPin, uml::OutputPin>> getResult() const = 0;
+			virtual const std::shared_ptr<Subset<uml::OutputPin, uml::OutputPin>>& getResult() const = 0;
 			/*!
 			The Triggers specifying the Events of which the AcceptEventAction waits for occurrences.
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual std::shared_ptr<Subset<uml::Trigger, uml::Element>> getTrigger() const = 0;
+			virtual const std::shared_ptr<Subset<uml::Trigger, uml::Element>>& getTrigger() const = 0;
 
 			//*********************************
 			// Union Reference Getters

@@ -128,7 +128,7 @@ void EObjectContainerImpl::setContainer(const std::shared_ptr<Bag<ecore::EObject
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference container */
-std::shared_ptr<Bag<ecore::EObject>> EObjectContainerImpl::getContainer() const
+const std::shared_ptr<Bag<ecore::EObject>>& EObjectContainerImpl::getContainer() const
 {
 	if(m_container == nullptr)
 	{

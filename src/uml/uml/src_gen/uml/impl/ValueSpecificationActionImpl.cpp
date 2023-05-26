@@ -176,7 +176,7 @@ std::shared_ptr<ecore::EObject> ValueSpecificationActionImpl::copy() const
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference result */
-std::shared_ptr<uml::OutputPin> ValueSpecificationActionImpl::getResult() const
+const std::shared_ptr<uml::OutputPin>& ValueSpecificationActionImpl::getResult() const
 {
     return m_result;
 }
@@ -187,7 +187,7 @@ void ValueSpecificationActionImpl::setResult(const std::shared_ptr<uml::OutputPi
 }
 
 /* Getter & Setter for reference value */
-std::shared_ptr<uml::ValueSpecification> ValueSpecificationActionImpl::getValue() const
+const std::shared_ptr<uml::ValueSpecification>& ValueSpecificationActionImpl::getValue() const
 {
     return m_value;
 }

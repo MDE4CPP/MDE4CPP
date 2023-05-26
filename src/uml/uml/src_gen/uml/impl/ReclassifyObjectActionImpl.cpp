@@ -181,7 +181,7 @@ void ReclassifyObjectActionImpl::setIsReplaceAll(bool _isReplaceAll)
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference newClassifier */
-std::shared_ptr<Bag<uml::Classifier>> ReclassifyObjectActionImpl::getNewClassifier() const
+const std::shared_ptr<Bag<uml::Classifier>>& ReclassifyObjectActionImpl::getNewClassifier() const
 {
 	if(m_newClassifier == nullptr)
 	{
@@ -193,7 +193,7 @@ std::shared_ptr<Bag<uml::Classifier>> ReclassifyObjectActionImpl::getNewClassifi
 }
 
 /* Getter & Setter for reference object */
-std::shared_ptr<uml::InputPin> ReclassifyObjectActionImpl::getObject() const
+const std::shared_ptr<uml::InputPin>& ReclassifyObjectActionImpl::getObject() const
 {
     return m_object;
 }
@@ -204,7 +204,7 @@ void ReclassifyObjectActionImpl::setObject(const std::shared_ptr<uml::InputPin>&
 }
 
 /* Getter & Setter for reference oldClassifier */
-std::shared_ptr<Bag<uml::Classifier>> ReclassifyObjectActionImpl::getOldClassifier() const
+const std::shared_ptr<Bag<uml::Classifier>>& ReclassifyObjectActionImpl::getOldClassifier() const
 {
 	if(m_oldClassifier == nullptr)
 	{

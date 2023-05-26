@@ -240,7 +240,7 @@ std::shared_ptr<ecore::EObject> ValuePinImpl::copy() const
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference value */
-std::shared_ptr<uml::ValueSpecification> ValuePinImpl::getValue() const
+const std::shared_ptr<uml::ValueSpecification>& ValuePinImpl::getValue() const
 {
     return m_value;
 }

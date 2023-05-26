@@ -208,7 +208,7 @@ void CallActionImpl::setIsSynchronous(bool _isSynchronous)
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference result */
-std::shared_ptr<Subset<uml::OutputPin, uml::OutputPin>> CallActionImpl::getResult() const
+const std::shared_ptr<Subset<uml::OutputPin, uml::OutputPin>>& CallActionImpl::getResult() const
 {
 	if(m_result == nullptr)
 	{

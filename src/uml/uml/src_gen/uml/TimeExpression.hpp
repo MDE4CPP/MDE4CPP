@@ -97,7 +97,7 @@ namespace uml
 			<p>From package UML::Values.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::ValueSpecification> getExpr() const = 0;
+			virtual const std::shared_ptr<uml::ValueSpecification>& getExpr() const = 0;
 			/*!
 			A ValueSpecification that evaluates to the value of the TimeExpression.
 			<p>From package UML::Values.</p>
@@ -109,7 +109,7 @@ namespace uml
 			<p>From package UML::Values.</p>
 			*/
 			
-			virtual std::shared_ptr<Bag<uml::Observation>> getObservation() const = 0;
+			virtual const std::shared_ptr<Bag<uml::Observation>>& getObservation() const = 0;
 
 			//*********************************
 			// Union Reference Getters

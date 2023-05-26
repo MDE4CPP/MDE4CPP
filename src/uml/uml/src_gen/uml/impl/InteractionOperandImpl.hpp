@@ -64,13 +64,13 @@ namespace uml
 			<p>From package UML::Interactions.</p>
 			*/
 			
-			virtual std::shared_ptr<Subset<uml::InteractionFragment, uml::NamedElement>> getFragment() const ;
+			virtual const std::shared_ptr<Subset<uml::InteractionFragment, uml::NamedElement>>& getFragment() const ;
 			/*!
 			Constraint of the operand.
 			<p>From package UML::Interactions.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::InteractionConstraint> getGuard() const ;
+			virtual const std::shared_ptr<uml::InteractionConstraint>& getGuard() const ;
 			/*!
 			Constraint of the operand.
 			<p>From package UML::Interactions.</p>

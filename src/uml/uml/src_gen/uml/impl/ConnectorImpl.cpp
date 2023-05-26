@@ -220,7 +220,7 @@ uml::ConnectorKind ConnectorImpl::getKind() const
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference contract */
-std::shared_ptr<Bag<uml::Behavior>> ConnectorImpl::getContract() const
+const std::shared_ptr<Bag<uml::Behavior>>& ConnectorImpl::getContract() const
 {
 	if(m_contract == nullptr)
 	{
@@ -232,7 +232,7 @@ std::shared_ptr<Bag<uml::Behavior>> ConnectorImpl::getContract() const
 }
 
 /* Getter & Setter for reference end */
-std::shared_ptr<Subset<uml::ConnectorEnd, uml::Element>> ConnectorImpl::getEnd() const
+const std::shared_ptr<Subset<uml::ConnectorEnd, uml::Element>>& ConnectorImpl::getEnd() const
 {
 	if(m_end == nullptr)
 	{
@@ -253,7 +253,7 @@ std::shared_ptr<Subset<uml::ConnectorEnd, uml::Element>> ConnectorImpl::getEnd()
 }
 
 /* Getter & Setter for reference redefinedConnector */
-std::shared_ptr<Subset<uml::Connector, uml::RedefinableElement>> ConnectorImpl::getRedefinedConnector() const
+const std::shared_ptr<Subset<uml::Connector, uml::RedefinableElement>>& ConnectorImpl::getRedefinedConnector() const
 {
 	if(m_redefinedConnector == nullptr)
 	{
@@ -285,7 +285,7 @@ void ConnectorImpl::setStructuredClassifier(std::weak_ptr<uml::StructuredClassif
 }
 
 /* Getter & Setter for reference type */
-std::shared_ptr<uml::Association> ConnectorImpl::getType() const
+const std::shared_ptr<uml::Association>& ConnectorImpl::getType() const
 {
     return m_type;
 }

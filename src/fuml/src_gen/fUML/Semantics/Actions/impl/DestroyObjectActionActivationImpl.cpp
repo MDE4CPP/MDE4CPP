@@ -269,7 +269,7 @@ bool DestroyObjectActionActivationImpl::objectIsComposite(const std::shared_ptr<
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference destroyObjectAction */
-std::shared_ptr<uml::DestroyObjectAction> DestroyObjectActionActivationImpl::getDestroyObjectAction() const
+const std::shared_ptr<uml::DestroyObjectAction>& DestroyObjectActionActivationImpl::getDestroyObjectAction() const
 {
     return m_destroyObjectAction;
 }
@@ -280,7 +280,7 @@ void DestroyObjectActionActivationImpl::setDestroyObjectAction(const std::shared
 	fUML::Semantics::Actions::ActionActivationImpl::setAction(_destroyObjectAction);
 }
 /*Additional Setter for redefined reference 'ActionActivation::action'*/
-void DestroyObjectActionActivationImpl::setAction(std::shared_ptr<uml::Action> _action)
+void DestroyObjectActionActivationImpl::setAction(const std::shared_ptr<uml::Action>& _action)
 {
 	std::shared_ptr<uml::DestroyObjectAction> _destroyObjectAction = std::dynamic_pointer_cast<uml::DestroyObjectAction>(_action);
 	if(_destroyObjectAction)
@@ -296,7 +296,7 @@ void DestroyObjectActionActivationImpl::setAction(std::shared_ptr<uml::Action> _
 	}
 }
 /*Additional Setter for redefined reference 'ActivityNodeActivation::node'*/
-void DestroyObjectActionActivationImpl::setNode(std::shared_ptr<uml::ActivityNode> _node)
+void DestroyObjectActionActivationImpl::setNode(const std::shared_ptr<uml::ActivityNode>& _node)
 {
 	std::shared_ptr<uml::DestroyObjectAction> _destroyObjectAction = std::dynamic_pointer_cast<uml::DestroyObjectAction>(_node);
 	if(_destroyObjectAction)

@@ -61,11 +61,11 @@ namespace fUML::Semantics::Actions
 			//*********************************
 			// Reference Getters & Setters
 			//*********************************
-			virtual std::shared_ptr<Bag<fUML::Semantics::Actions::ExpansionNodeActivation>> getGroupInputs() const ;
-			virtual std::shared_ptr<Bag<fUML::Semantics::Actions::ExpansionNodeActivation>> getGroupOutputs() const ;
-			virtual std::shared_ptr<fUML::Semantics::Actions::ExpansionRegionActivation> getRegionActivation() const ;
+			virtual const std::shared_ptr<Bag<fUML::Semantics::Actions::ExpansionNodeActivation>>& getGroupInputs() const ;
+			virtual const std::shared_ptr<Bag<fUML::Semantics::Actions::ExpansionNodeActivation>>& getGroupOutputs() const ;
+			virtual const std::shared_ptr<fUML::Semantics::Actions::ExpansionRegionActivation>& getRegionActivation() const ;
 			virtual void setRegionActivation(const std::shared_ptr<fUML::Semantics::Actions::ExpansionRegionActivation>&) ;
-			virtual std::shared_ptr<Bag<fUML::Semantics::Actions::OutputPinActivation>> getRegionInputs() const ;
+			virtual const std::shared_ptr<Bag<fUML::Semantics::Actions::OutputPinActivation>>& getRegionInputs() const ;
 			
 			//*********************************
 			// Union Reference Getters

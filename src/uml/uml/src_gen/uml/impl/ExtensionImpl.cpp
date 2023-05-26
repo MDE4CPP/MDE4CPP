@@ -211,7 +211,7 @@ bool ExtensionImpl::getIsRequired() const
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference metaclass */
-std::shared_ptr<uml::Class> ExtensionImpl::getMetaclass() const
+const std::shared_ptr<uml::Class>& ExtensionImpl::getMetaclass() const
 {
     return m_metaclass;
 }

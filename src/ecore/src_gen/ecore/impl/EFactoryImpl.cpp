@@ -549,7 +549,7 @@ std::shared_ptr<Any> EFactoryImpl::createFromString(const std::shared_ptr<ecore:
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference ePackage */
-std::shared_ptr<ecore::EPackage> EFactoryImpl::getEPackage() const
+const std::shared_ptr<ecore::EPackage>& EFactoryImpl::getEPackage() const
 {
     return m_ePackage;
 }

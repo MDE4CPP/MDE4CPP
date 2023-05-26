@@ -137,7 +137,7 @@ void VariableDeclEvalImpl::setName(std::string _name)
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference initExp */
-std::shared_ptr<ocl::Evaluations::OclExpEval> VariableDeclEvalImpl::getInitExp() const
+const std::shared_ptr<ocl::Evaluations::OclExpEval>& VariableDeclEvalImpl::getInitExp() const
 {
     return m_initExp;
 }

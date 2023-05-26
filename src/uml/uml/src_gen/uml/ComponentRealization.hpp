@@ -120,7 +120,7 @@ namespace uml
 			<p>From package UML::StructuredClassifiers.</p>
 			*/
 			
-			virtual std::shared_ptr<Subset<uml::Classifier, uml::NamedElement /*Subset does not reference a union*/>> getRealizingClassifier() const = 0;
+			virtual const std::shared_ptr<Subset<uml::Classifier, uml::NamedElement /*Subset does not reference a union*/>>& getRealizingClassifier() const = 0;
 
 			//*********************************
 			// Union Reference Getters

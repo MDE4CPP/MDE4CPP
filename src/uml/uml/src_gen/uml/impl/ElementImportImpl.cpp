@@ -165,7 +165,7 @@ void ElementImportImpl::setVisibility(uml::VisibilityKind _visibility)
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference importedElement */
-std::shared_ptr<uml::PackageableElement> ElementImportImpl::getImportedElement() const
+const std::shared_ptr<uml::PackageableElement>& ElementImportImpl::getImportedElement() const
 {
     return m_importedElement;
 }

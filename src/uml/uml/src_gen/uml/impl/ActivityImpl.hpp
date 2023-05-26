@@ -90,34 +90,34 @@ namespace uml
 			<p>From package UML::Activities.</p>
 			*/
 			
-			virtual std::shared_ptr<Subset<uml::ActivityEdge, uml::Element>> getEdge() const ;
+			virtual const std::shared_ptr<Subset<uml::ActivityEdge, uml::Element>>& getEdge() const ;
 			
 			/*!
 			ActivityNodes coordinated by the Activity.
 			<p>From package UML::Activities.</p>
 			*/
 			
-			virtual std::shared_ptr<SubsetUnion<uml::ActivityNode, uml::Element>> getNode() const ;
-			virtual std::shared_ptr<SubsetUnion<uml::ActivityGroup, uml::ActivityGroup>> getOwnedGroup() const ;
-			virtual std::shared_ptr<Subset<uml::ActivityNode, uml::ActivityNode /*Subset does not reference a union*/>> getOwnedNode() const ;
+			virtual const std::shared_ptr<SubsetUnion<uml::ActivityNode, uml::Element>>& getNode() const ;
+			virtual const std::shared_ptr<SubsetUnion<uml::ActivityGroup, uml::ActivityGroup>>& getOwnedGroup() const ;
+			virtual const std::shared_ptr<Subset<uml::ActivityNode, uml::ActivityNode /*Subset does not reference a union*/>>& getOwnedNode() const ;
 			/*!
 			Top-level ActivityPartitions in the Activity.
 			<p>From package UML::Activities.</p>
 			*/
 			
-			virtual std::shared_ptr<Subset<uml::ActivityPartition, uml::ActivityGroup /*Subset does not reference a union*/, uml::ActivityGroup>> getPartition() const ;
+			virtual const std::shared_ptr<Subset<uml::ActivityPartition, uml::ActivityGroup /*Subset does not reference a union*/, uml::ActivityGroup>>& getPartition() const ;
 			/*!
 			Top-level StructuredActivityNodes in the Activity.
 			<p>From package UML::Activities.</p>
 			*/
 			
-			virtual std::shared_ptr<Subset<uml::StructuredActivityNode, uml::ActivityGroup, uml::ActivityNode /*Subset does not reference a union*/>> getStructuredNode() const ;
+			virtual const std::shared_ptr<Subset<uml::StructuredActivityNode, uml::ActivityGroup, uml::ActivityNode /*Subset does not reference a union*/>>& getStructuredNode() const ;
 			/*!
 			Top-level Variables defined by the Activity.
 			<p>From package UML::Activities.</p>
 			*/
 			
-			virtual std::shared_ptr<Subset<uml::Variable, uml::NamedElement>> getVariable() const ;
+			virtual const std::shared_ptr<Subset<uml::Variable, uml::NamedElement>>& getVariable() const ;
 			
 			//*********************************
 			// Union Reference Getters

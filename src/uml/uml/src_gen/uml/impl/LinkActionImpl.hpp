@@ -70,13 +70,13 @@ namespace uml
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual std::shared_ptr<Subset<uml::LinkEndData, uml::Element>> getEndData() const ;
+			virtual const std::shared_ptr<Subset<uml::LinkEndData, uml::Element>>& getEndData() const ;
 			/*!
 			InputPins used by the LinkEndData of the LinkAction.
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual std::shared_ptr<Subset<uml::InputPin, uml::InputPin>> getInputValue() const ;
+			virtual const std::shared_ptr<Subset<uml::InputPin, uml::InputPin>>& getInputValue() const ;
 			
 			//*********************************
 			// Union Reference Getters

@@ -264,7 +264,7 @@ void LoopExpImpl::setIterName(std::string _iterName)
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference body */
-std::shared_ptr<ocl::Expressions::OclExpression> LoopExpImpl::getBody() const
+const std::shared_ptr<ocl::Expressions::OclExpression>& LoopExpImpl::getBody() const
 {
     return m_body;
 }
@@ -275,7 +275,7 @@ void LoopExpImpl::setBody(const std::shared_ptr<ocl::Expressions::OclExpression>
 }
 
 /* Getter & Setter for reference iterator */
-std::shared_ptr<Bag<ocl::Expressions::OclExpression>> LoopExpImpl::getIterator() const
+const std::shared_ptr<Bag<ocl::Expressions::OclExpression>>& LoopExpImpl::getIterator() const
 {
 	if(m_iterator == nullptr)
 	{

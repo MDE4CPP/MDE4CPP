@@ -67,7 +67,7 @@ namespace uml
 			<p>From package UML::Classification.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::InstanceSpecification> getInstance() const ;
+			virtual const std::shared_ptr<uml::InstanceSpecification>& getInstance() const ;
 			/*!
 			The InstanceSpecification that represents the specified value.
 			<p>From package UML::Classification.</p>

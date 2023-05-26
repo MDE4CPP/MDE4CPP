@@ -239,7 +239,7 @@ void TransitionImpl::setContainer(std::weak_ptr<uml::Region> _container)
 }
 
 /* Getter & Setter for reference effect */
-std::shared_ptr<uml::Behavior> TransitionImpl::getEffect() const
+const std::shared_ptr<uml::Behavior>& TransitionImpl::getEffect() const
 {
     return m_effect;
 }
@@ -250,7 +250,7 @@ void TransitionImpl::setEffect(const std::shared_ptr<uml::Behavior>& _effect)
 }
 
 /* Getter & Setter for reference guard */
-std::shared_ptr<uml::Constraint> TransitionImpl::getGuard() const
+const std::shared_ptr<uml::Constraint>& TransitionImpl::getGuard() const
 {
     return m_guard;
 }
@@ -261,7 +261,7 @@ void TransitionImpl::setGuard(const std::shared_ptr<uml::Constraint>& _guard)
 }
 
 /* Getter & Setter for reference redefinedTransition */
-std::shared_ptr<uml::Transition> TransitionImpl::getRedefinedTransition() const
+const std::shared_ptr<uml::Transition>& TransitionImpl::getRedefinedTransition() const
 {
     return m_redefinedTransition;
 }
@@ -272,7 +272,7 @@ void TransitionImpl::setRedefinedTransition(const std::shared_ptr<uml::Transitio
 }
 
 /* Getter & Setter for reference source */
-std::shared_ptr<uml::Vertex> TransitionImpl::getSource() const
+const std::shared_ptr<uml::Vertex>& TransitionImpl::getSource() const
 {
     return m_source;
 }
@@ -283,7 +283,7 @@ void TransitionImpl::setSource(const std::shared_ptr<uml::Vertex>& _source)
 }
 
 /* Getter & Setter for reference target */
-std::shared_ptr<uml::Vertex> TransitionImpl::getTarget() const
+const std::shared_ptr<uml::Vertex>& TransitionImpl::getTarget() const
 {
     return m_target;
 }
@@ -294,7 +294,7 @@ void TransitionImpl::setTarget(const std::shared_ptr<uml::Vertex>& _target)
 }
 
 /* Getter & Setter for reference trigger */
-std::shared_ptr<Subset<uml::Trigger, uml::Element>> TransitionImpl::getTrigger() const
+const std::shared_ptr<Subset<uml::Trigger, uml::Element>>& TransitionImpl::getTrigger() const
 {
 	if(m_trigger == nullptr)
 	{

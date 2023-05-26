@@ -53,16 +53,16 @@ virtual public EGenericType
 			//*********************************
 			// Reference Getters & Setters
 			//*********************************
-			virtual std::shared_ptr<ecore::EClassifier> getEClassifier() const ;
+			virtual const std::shared_ptr<ecore::EClassifier>& getEClassifier() const ;
 			virtual void setEClassifier(const std::shared_ptr<ecore::EClassifier>&) ;
-			virtual std::shared_ptr<ecore::EGenericType> getELowerBound() const ;
+			virtual const std::shared_ptr<ecore::EGenericType>& getELowerBound() const ;
 			virtual void setELowerBound(const std::shared_ptr<ecore::EGenericType>&) ;
-			virtual std::shared_ptr<ecore::EClassifier> getERawType() const ;
+			virtual const std::shared_ptr<ecore::EClassifier>& getERawType() const ;
 			virtual void setERawType(const std::shared_ptr<ecore::EClassifier>&) ;
-			virtual std::shared_ptr<Bag<ecore::EGenericType>> getETypeArguments() const ;
-			virtual std::shared_ptr<ecore::ETypeParameter> getETypeParameter() const ;
+			virtual const std::shared_ptr<Bag<ecore::EGenericType>>& getETypeArguments() const ;
+			virtual const std::shared_ptr<ecore::ETypeParameter>& getETypeParameter() const ;
 			virtual void setETypeParameter(const std::shared_ptr<ecore::ETypeParameter>&) ;
-			virtual std::shared_ptr<ecore::EGenericType> getEUpperBound() const ;
+			virtual const std::shared_ptr<ecore::EGenericType>& getEUpperBound() const ;
 			virtual void setEUpperBound(const std::shared_ptr<ecore::EGenericType>&) ;
 			
 			//*********************************

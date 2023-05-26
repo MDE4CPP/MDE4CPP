@@ -90,7 +90,7 @@ namespace fUML::Semantics::Actions
 			//*********************************
 			// Reference Getters & Setters
 			//*********************************
-			virtual std::shared_ptr<uml::ClearStructuralFeatureAction> getClearStructuralFeatureAction() const = 0;
+			virtual const std::shared_ptr<uml::ClearStructuralFeatureAction>& getClearStructuralFeatureAction() const = 0;
 			virtual void setClearStructuralFeatureAction(const std::shared_ptr<uml::ClearStructuralFeatureAction>&) = 0;
 			/*Additional Setter for 'ActionActivation::action' redefined by reference 'clearStructuralFeatureAction'*/
 			virtual void setAction(const std::shared_ptr<uml::Action>&) = 0;

@@ -54,7 +54,7 @@ namespace ecore
 			//*********************************
 			virtual bool isChangeable() const ;
 			virtual void setChangeable (bool _changeable);
-			virtual std::shared_ptr<Any> getDefaultValue() const ;
+			virtual const std::shared_ptr<Any>& getDefaultValue() const ;
 			virtual void setDefaultValue (const std::shared_ptr<Any>& _defaultValue);
 			virtual std::string getDefaultValueLiteral() const ;
 			virtual void setDefaultValueLiteral (std::string _defaultValueLiteral);

@@ -432,7 +432,7 @@ int OperationImpl::getUpper() const
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference bodyCondition */
-std::shared_ptr<uml::Constraint> OperationImpl::getBodyCondition() const
+const std::shared_ptr<uml::Constraint>& OperationImpl::getBodyCondition() const
 {
     return m_bodyCondition;
 }
@@ -476,14 +476,14 @@ void OperationImpl::setInterface(std::weak_ptr<uml::Interface> _interface)
 }
 
 /* Getter & Setter for reference ownedParameter */
-std::shared_ptr<Bag<uml::Parameter>> OperationImpl::getProperty_OwnedParameter() const
+const std::shared_ptr<Bag<uml::Parameter>>& OperationImpl::getProperty_OwnedParameter() const
 {
 	//Getter call of redefined container reference BehavioralFeature::ownedParameter 
 	return uml::BehavioralFeatureImpl::getOwnedParameter();
 }
 
 /* Getter & Setter for reference postcondition */
-std::shared_ptr<Subset<uml::Constraint, uml::Constraint /*Subset does not reference a union*/>> OperationImpl::getPostcondition() const
+const std::shared_ptr<Subset<uml::Constraint, uml::Constraint /*Subset does not reference a union*/>>& OperationImpl::getPostcondition() const
 {
 	if(m_postcondition == nullptr)
 	{
@@ -504,7 +504,7 @@ std::shared_ptr<Subset<uml::Constraint, uml::Constraint /*Subset does not refere
 }
 
 /* Getter & Setter for reference precondition */
-std::shared_ptr<Subset<uml::Constraint, uml::Constraint /*Subset does not reference a union*/>> OperationImpl::getPrecondition() const
+const std::shared_ptr<Subset<uml::Constraint, uml::Constraint /*Subset does not reference a union*/>>& OperationImpl::getPrecondition() const
 {
 	if(m_precondition == nullptr)
 	{
@@ -525,7 +525,7 @@ std::shared_ptr<Subset<uml::Constraint, uml::Constraint /*Subset does not refere
 }
 
 /* Getter & Setter for reference redefinedOperation */
-std::shared_ptr<Subset<uml::Operation, uml::RedefinableElement>> OperationImpl::getRedefinedOperation() const
+const std::shared_ptr<Subset<uml::Operation, uml::RedefinableElement>>& OperationImpl::getRedefinedOperation() const
 {
 	if(m_redefinedOperation == nullptr)
 	{
@@ -546,7 +546,7 @@ std::shared_ptr<Subset<uml::Operation, uml::RedefinableElement>> OperationImpl::
 }
 
 /* Getter & Setter for reference type */
-std::shared_ptr<uml::Type> OperationImpl::getType() const
+const std::shared_ptr<uml::Type>& OperationImpl::getType() const
 {
     return m_type;
 }

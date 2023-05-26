@@ -100,7 +100,7 @@ namespace uml
 			<p>From package UML::UseCases.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::UseCase> getAddition() const = 0;
+			virtual const std::shared_ptr<uml::UseCase>& getAddition() const = 0;
 			/*!
 			The UseCase that is to be included.
 			<p>From package UML::UseCases.</p>

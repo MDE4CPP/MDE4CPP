@@ -94,8 +94,8 @@ namespace ocl::Expressions
 			//*********************************
 			// Reference Getters & Setters
 			//*********************************
-			virtual std::shared_ptr<Bag<ocl::Expressions::InitOrDerValueExp>> getDerExpressionList() const = 0;
-			virtual std::shared_ptr<Bag<ocl::Expressions::InitOrDerValueExp>> getInitExpressionList() const = 0;
+			virtual const std::shared_ptr<Bag<ocl::Expressions::InitOrDerValueExp>>& getDerExpressionList() const = 0;
+			virtual const std::shared_ptr<Bag<ocl::Expressions::InitOrDerValueExp>>& getInitExpressionList() const = 0;
 
 			//*********************************
 			// Union Reference Getters

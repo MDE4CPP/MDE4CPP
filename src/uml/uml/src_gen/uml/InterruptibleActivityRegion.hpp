@@ -94,13 +94,13 @@ namespace uml
 			<p>From package UML::Activities.</p>
 			*/
 			
-			virtual std::shared_ptr<Bag<uml::ActivityEdge>> getInterruptingEdge() const = 0;
+			virtual const std::shared_ptr<Bag<uml::ActivityEdge>>& getInterruptingEdge() const = 0;
 			/*!
 			ActivityNodes immediately contained in the InterruptibleActivityRegion.
 			<p>From package UML::Activities.</p>
 			*/
 			
-			virtual std::shared_ptr<Subset<uml::ActivityNode, uml::ActivityNode>> getNode() const = 0;
+			virtual const std::shared_ptr<Subset<uml::ActivityNode, uml::ActivityNode>>& getNode() const = 0;
 
 			//*********************************
 			// Union Reference Getters

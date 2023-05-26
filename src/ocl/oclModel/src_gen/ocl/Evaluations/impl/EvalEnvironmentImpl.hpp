@@ -56,7 +56,7 @@ namespace ocl::Evaluations
 			//*********************************
 			// Reference Getters & Setters
 			//*********************************
-			virtual std::shared_ptr<Bag<ocl::Evaluations::NameValueBinding>> getBindings() const ;
+			virtual const std::shared_ptr<Bag<ocl::Evaluations::NameValueBinding>>& getBindings() const ;
 			
 			//*********************************
 			// Union Reference Getters

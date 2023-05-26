@@ -240,7 +240,7 @@ std::shared_ptr<ecore::EObject> ActionInputPinImpl::copy() const
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference fromAction */
-std::shared_ptr<uml::Action> ActionInputPinImpl::getFromAction() const
+const std::shared_ptr<uml::Action>& ActionInputPinImpl::getFromAction() const
 {
     return m_fromAction;
 }

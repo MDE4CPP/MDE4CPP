@@ -384,7 +384,7 @@ void BehaviorImpl::setBehavioredClassifier(std::weak_ptr<uml::BehavioredClassifi
 }
 
 /* Getter & Setter for reference context */
-std::shared_ptr<uml::BehavioredClassifier> BehaviorImpl::getContext() const
+const std::shared_ptr<uml::BehavioredClassifier>& BehaviorImpl::getContext() const
 {
     return m_context;
 }
@@ -395,7 +395,7 @@ void BehaviorImpl::setContext(const std::shared_ptr<uml::BehavioredClassifier>& 
 }
 
 /* Getter & Setter for reference ownedParameter */
-std::shared_ptr<Subset<uml::Parameter, uml::NamedElement>> BehaviorImpl::getOwnedParameter() const
+const std::shared_ptr<Subset<uml::Parameter, uml::NamedElement>>& BehaviorImpl::getOwnedParameter() const
 {
 	if(m_ownedParameter == nullptr)
 	{
@@ -416,7 +416,7 @@ std::shared_ptr<Subset<uml::Parameter, uml::NamedElement>> BehaviorImpl::getOwne
 }
 
 /* Getter & Setter for reference ownedParameterSet */
-std::shared_ptr<Subset<uml::ParameterSet, uml::NamedElement>> BehaviorImpl::getOwnedParameterSet() const
+const std::shared_ptr<Subset<uml::ParameterSet, uml::NamedElement>>& BehaviorImpl::getOwnedParameterSet() const
 {
 	if(m_ownedParameterSet == nullptr)
 	{
@@ -437,7 +437,7 @@ std::shared_ptr<Subset<uml::ParameterSet, uml::NamedElement>> BehaviorImpl::getO
 }
 
 /* Getter & Setter for reference postcondition */
-std::shared_ptr<Subset<uml::Constraint, uml::Constraint /*Subset does not reference a union*/>> BehaviorImpl::getPostcondition() const
+const std::shared_ptr<Subset<uml::Constraint, uml::Constraint /*Subset does not reference a union*/>>& BehaviorImpl::getPostcondition() const
 {
 	if(m_postcondition == nullptr)
 	{
@@ -458,7 +458,7 @@ std::shared_ptr<Subset<uml::Constraint, uml::Constraint /*Subset does not refere
 }
 
 /* Getter & Setter for reference precondition */
-std::shared_ptr<Subset<uml::Constraint, uml::Constraint /*Subset does not reference a union*/>> BehaviorImpl::getPrecondition() const
+const std::shared_ptr<Subset<uml::Constraint, uml::Constraint /*Subset does not reference a union*/>>& BehaviorImpl::getPrecondition() const
 {
 	if(m_precondition == nullptr)
 	{
@@ -479,7 +479,7 @@ std::shared_ptr<Subset<uml::Constraint, uml::Constraint /*Subset does not refere
 }
 
 /* Getter & Setter for reference redefinedBehavior */
-std::shared_ptr<Subset<uml::Behavior, uml::Classifier /*Subset does not reference a union*/>> BehaviorImpl::getRedefinedBehavior() const
+const std::shared_ptr<Subset<uml::Behavior, uml::Classifier /*Subset does not reference a union*/>>& BehaviorImpl::getRedefinedBehavior() const
 {
 	if(m_redefinedBehavior == nullptr)
 	{
@@ -500,7 +500,7 @@ std::shared_ptr<Subset<uml::Behavior, uml::Classifier /*Subset does not referenc
 }
 
 /* Getter & Setter for reference specification */
-std::shared_ptr<uml::BehavioralFeature> BehaviorImpl::getSpecification() const
+const std::shared_ptr<uml::BehavioralFeature>& BehaviorImpl::getSpecification() const
 {
     return m_specification;
 }

@@ -255,7 +255,7 @@ void NamedElementImpl::setVisibility(uml::VisibilityKind _visibility)
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference clientDependency */
-std::shared_ptr<Bag<uml::Dependency>> NamedElementImpl::getClientDependency() const
+const std::shared_ptr<Bag<uml::Dependency>>& NamedElementImpl::getClientDependency() const
 {
 	if(m_clientDependency == nullptr)
 	{
@@ -267,7 +267,7 @@ std::shared_ptr<Bag<uml::Dependency>> NamedElementImpl::getClientDependency() co
 }
 
 /* Getter & Setter for reference nameExpression */
-std::shared_ptr<uml::StringExpression> NamedElementImpl::getNameExpression() const
+const std::shared_ptr<uml::StringExpression>& NamedElementImpl::getNameExpression() const
 {
     return m_nameExpression;
 }

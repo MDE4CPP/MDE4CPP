@@ -167,25 +167,25 @@ namespace uml
 			<p>From package UML::StateMachines.</p>
 			*/
 			
-			virtual std::shared_ptr<Subset<uml::ConnectionPointReference, uml::NamedElement>> getConnection() const = 0;
+			virtual const std::shared_ptr<Subset<uml::ConnectionPointReference, uml::NamedElement>>& getConnection() const = 0;
 			/*!
 			The entry and exit Pseudostates of a composite State. These can only be entry or exit Pseudostates, and they must have different names. They can only be defined for composite States.
 			<p>From package UML::StateMachines.</p>
 			*/
 			
-			virtual std::shared_ptr<Subset<uml::Pseudostate, uml::NamedElement>> getConnectionPoint() const = 0;
+			virtual const std::shared_ptr<Subset<uml::Pseudostate, uml::NamedElement>>& getConnectionPoint() const = 0;
 			/*!
 			A list of Triggers that are candidates to be retained by the StateMachine if they trigger no Transitions out of the State (not consumed). A deferred Trigger is retained until the StateMachine reaches a State configuration where it is no longer deferred.
 			<p>From package UML::StateMachines.</p>
 			*/
 			
-			virtual std::shared_ptr<Subset<uml::Trigger, uml::Element>> getDeferrableTrigger() const = 0;
+			virtual const std::shared_ptr<Subset<uml::Trigger, uml::Element>>& getDeferrableTrigger() const = 0;
 			/*!
 			An optional Behavior that is executed while being in the State. The execution starts when this State is entered, and ceases either by itself when done, or when the State is exited, whichever comes first.
 			<p>From package UML::StateMachines.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::Behavior> getDoActivity() const = 0;
+			virtual const std::shared_ptr<uml::Behavior>& getDoActivity() const = 0;
 			/*!
 			An optional Behavior that is executed while being in the State. The execution starts when this State is entered, and ceases either by itself when done, or when the State is exited, whichever comes first.
 			<p>From package UML::StateMachines.</p>
@@ -197,7 +197,7 @@ namespace uml
 			<p>From package UML::StateMachines.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::Behavior> getEntry() const = 0;
+			virtual const std::shared_ptr<uml::Behavior>& getEntry() const = 0;
 			/*!
 			An optional Behavior that is executed whenever this State is entered regardless of the Transition taken to reach the State. If defined, entry Behaviors are always executed to completion prior to any internal Behavior or Transitions performed within the State.
 			<p>From package UML::StateMachines.</p>
@@ -209,7 +209,7 @@ namespace uml
 			<p>From package UML::StateMachines.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::Behavior> getExit() const = 0;
+			virtual const std::shared_ptr<uml::Behavior>& getExit() const = 0;
 			/*!
 			An optional Behavior that is executed whenever this State is exited regardless of which Transition was taken out of the State. If defined, exit Behaviors are always executed to completion only after all internal and transition Behaviors have completed execution.
 			<p>From package UML::StateMachines.</p>
@@ -221,7 +221,7 @@ namespace uml
 			<p>From package UML::StateMachines.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::State> getRedefinedState() const = 0;
+			virtual const std::shared_ptr<uml::State>& getRedefinedState() const = 0;
 			/*!
 			The State of which this State is a redefinition.
 			<p>From package UML::StateMachines.</p>
@@ -233,13 +233,13 @@ namespace uml
 			<p>From package UML::StateMachines.</p>
 			*/
 			
-			virtual std::shared_ptr<Subset<uml::Region, uml::NamedElement>> getRegion() const = 0;
+			virtual const std::shared_ptr<Subset<uml::Region, uml::NamedElement>>& getRegion() const = 0;
 			/*!
 			Specifies conditions that are always true when this State is the current State. In ProtocolStateMachines state invariants are additional conditions to the preconditions of the outgoing Transitions, and to the postcondition of the incoming Transitions.
 			<p>From package UML::StateMachines.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::Constraint> getStateInvariant() const = 0;
+			virtual const std::shared_ptr<uml::Constraint>& getStateInvariant() const = 0;
 			/*!
 			Specifies conditions that are always true when this State is the current State. In ProtocolStateMachines state invariants are additional conditions to the preconditions of the outgoing Transitions, and to the postcondition of the incoming Transitions.
 			<p>From package UML::StateMachines.</p>
@@ -251,7 +251,7 @@ namespace uml
 			<p>From package UML::StateMachines.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::StateMachine> getSubmachine() const = 0;
+			virtual const std::shared_ptr<uml::StateMachine>& getSubmachine() const = 0;
 			/*!
 			The StateMachine that is to be inserted in place of the (submachine) State.
 			<p>From package UML::StateMachines.</p>

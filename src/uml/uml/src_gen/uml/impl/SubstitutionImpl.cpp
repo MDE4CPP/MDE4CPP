@@ -168,7 +168,7 @@ std::shared_ptr<ecore::EObject> SubstitutionImpl::copy() const
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference contract */
-std::shared_ptr<uml::Classifier> SubstitutionImpl::getContract() const
+const std::shared_ptr<uml::Classifier>& SubstitutionImpl::getContract() const
 {
     return m_contract;
 }

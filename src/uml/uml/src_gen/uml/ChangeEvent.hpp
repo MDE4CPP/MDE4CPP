@@ -93,7 +93,7 @@ namespace uml
 			<p>From package UML::CommonBehavior.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::ValueSpecification> getChangeExpression() const = 0;
+			virtual const std::shared_ptr<uml::ValueSpecification>& getChangeExpression() const = 0;
 			/*!
 			A Boolean-valued ValueSpecification that will result in a ChangeEvent whenever its value changes from false to true.
 			<p>From package UML::CommonBehavior.</p>

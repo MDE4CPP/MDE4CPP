@@ -190,7 +190,7 @@ std::shared_ptr<Bag<uml::Parameter>> CallBehaviorActionActivationImpl::retrieveC
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference callBehaviorAction */
-std::shared_ptr<uml::CallBehaviorAction> CallBehaviorActionActivationImpl::getCallBehaviorAction() const
+const std::shared_ptr<uml::CallBehaviorAction>& CallBehaviorActionActivationImpl::getCallBehaviorAction() const
 {
     return m_callBehaviorAction;
 }
@@ -201,7 +201,7 @@ void CallBehaviorActionActivationImpl::setCallBehaviorAction(const std::shared_p
 	fUML::Semantics::Actions::CallActionActivationImpl::setCallAction(_callBehaviorAction);
 }
 /*Additional Setter for redefined reference 'CallActionActivation::callAction'*/
-void CallBehaviorActionActivationImpl::setCallAction(std::shared_ptr<uml::CallAction> _callAction)
+void CallBehaviorActionActivationImpl::setCallAction(const std::shared_ptr<uml::CallAction>& _callAction)
 {
 	std::shared_ptr<uml::CallBehaviorAction> _callBehaviorAction = std::dynamic_pointer_cast<uml::CallBehaviorAction>(_callAction);
 	if(_callBehaviorAction)
@@ -217,7 +217,7 @@ void CallBehaviorActionActivationImpl::setCallAction(std::shared_ptr<uml::CallAc
 	}
 }
 /*Additional Setter for redefined reference 'ActionActivation::action'*/
-void CallBehaviorActionActivationImpl::setAction(std::shared_ptr<uml::Action> _action)
+void CallBehaviorActionActivationImpl::setAction(const std::shared_ptr<uml::Action>& _action)
 {
 	std::shared_ptr<uml::CallBehaviorAction> _callBehaviorAction = std::dynamic_pointer_cast<uml::CallBehaviorAction>(_action);
 	if(_callBehaviorAction)
@@ -233,7 +233,7 @@ void CallBehaviorActionActivationImpl::setAction(std::shared_ptr<uml::Action> _a
 	}
 }
 /*Additional Setter for redefined reference 'ActivityNodeActivation::node'*/
-void CallBehaviorActionActivationImpl::setNode(std::shared_ptr<uml::ActivityNode> _node)
+void CallBehaviorActionActivationImpl::setNode(const std::shared_ptr<uml::ActivityNode>& _node)
 {
 	std::shared_ptr<uml::CallBehaviorAction> _callBehaviorAction = std::dynamic_pointer_cast<uml::CallBehaviorAction>(_node);
 	if(_callBehaviorAction)

@@ -53,7 +53,7 @@ namespace ecore
 			//*********************************
 			// Reference Getters & Setters
 			//*********************************
-			virtual std::shared_ptr<Bag<ecore::EObject>> getContainer() const ;
+			virtual const std::shared_ptr<Bag<ecore::EObject>>& getContainer() const ;
 			
 			//*********************************
 			// Union Reference Getters

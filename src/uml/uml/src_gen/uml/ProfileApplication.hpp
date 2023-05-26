@@ -120,7 +120,7 @@ namespace uml
 			<p>From package UML::Packages.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::Profile> getAppliedProfile() const = 0;
+			virtual const std::shared_ptr<uml::Profile>& getAppliedProfile() const = 0;
 			/*!
 			References the Profiles that are applied to a Package through this ProfileApplication.
 			<p>From package UML::Packages.</p>

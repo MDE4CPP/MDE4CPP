@@ -63,7 +63,7 @@ namespace uml
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::OutputPin> getResult() const ;
+			virtual const std::shared_ptr<uml::OutputPin>& getResult() const ;
 			/*!
 			The OutputPin on which is put the input object as modified by the WriteStructuralFeatureAction.
 			<p>From package UML::Actions.</p>
@@ -75,7 +75,7 @@ namespace uml
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::InputPin> getValue() const ;
+			virtual const std::shared_ptr<uml::InputPin>& getValue() const ;
 			/*!
 			The InputPin that provides the value to be added or removed from the StructuralFeature.
 			<p>From package UML::Actions.</p>

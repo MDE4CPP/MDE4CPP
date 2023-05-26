@@ -59,7 +59,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::shared_ptr<Subset<uml::TemplateParameter, uml::Element, uml::TemplateParameter>> getOwnedParameter() const ;
+			virtual const std::shared_ptr<Subset<uml::TemplateParameter, uml::Element, uml::TemplateParameter>>& getOwnedParameter() const ;
 			
 			/*!
 			The TemplateableElement that owns this TemplateSignature.

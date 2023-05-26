@@ -409,7 +409,7 @@ return behavior->getOwnedParameter();
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference callOperationAction */
-std::shared_ptr<uml::CallOperationAction> CallOperationActionActivationImpl::getCallOperationAction() const
+const std::shared_ptr<uml::CallOperationAction>& CallOperationActionActivationImpl::getCallOperationAction() const
 {
     return m_callOperationAction;
 }
@@ -420,7 +420,7 @@ void CallOperationActionActivationImpl::setCallOperationAction(const std::shared
 	fUML::Semantics::Actions::CallActionActivationImpl::setCallAction(_callOperationAction);
 }
 /*Additional Setter for redefined reference 'CallActionActivation::callAction'*/
-void CallOperationActionActivationImpl::setCallAction(std::shared_ptr<uml::CallAction> _callAction)
+void CallOperationActionActivationImpl::setCallAction(const std::shared_ptr<uml::CallAction>& _callAction)
 {
 	std::shared_ptr<uml::CallOperationAction> _callOperationAction = std::dynamic_pointer_cast<uml::CallOperationAction>(_callAction);
 	if(_callOperationAction)
@@ -436,7 +436,7 @@ void CallOperationActionActivationImpl::setCallAction(std::shared_ptr<uml::CallA
 	}
 }
 /*Additional Setter for redefined reference 'ActionActivation::action'*/
-void CallOperationActionActivationImpl::setAction(std::shared_ptr<uml::Action> _action)
+void CallOperationActionActivationImpl::setAction(const std::shared_ptr<uml::Action>& _action)
 {
 	std::shared_ptr<uml::CallOperationAction> _callOperationAction = std::dynamic_pointer_cast<uml::CallOperationAction>(_action);
 	if(_callOperationAction)
@@ -452,7 +452,7 @@ void CallOperationActionActivationImpl::setAction(std::shared_ptr<uml::Action> _
 	}
 }
 /*Additional Setter for redefined reference 'ActivityNodeActivation::node'*/
-void CallOperationActionActivationImpl::setNode(std::shared_ptr<uml::ActivityNode> _node)
+void CallOperationActionActivationImpl::setNode(const std::shared_ptr<uml::ActivityNode>& _node)
 {
 	std::shared_ptr<uml::CallOperationAction> _callOperationAction = std::dynamic_pointer_cast<uml::CallOperationAction>(_node);
 	if(_callOperationAction)

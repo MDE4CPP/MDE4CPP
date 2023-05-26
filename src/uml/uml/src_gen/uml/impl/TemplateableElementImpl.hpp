@@ -71,7 +71,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::TemplateSignature> getOwnedTemplateSignature() const ;
+			virtual const std::shared_ptr<uml::TemplateSignature>& getOwnedTemplateSignature() const ;
 			/*!
 			The optional TemplateSignature specifying the formal TemplateParameters for this TemplateableElement. If a TemplateableElement has a TemplateSignature, then it is a template.
 			<p>From package UML::CommonStructure.</p>
@@ -83,7 +83,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::shared_ptr<Subset<uml::TemplateBinding, uml::Element>> getTemplateBinding() const ;
+			virtual const std::shared_ptr<Subset<uml::TemplateBinding, uml::Element>>& getTemplateBinding() const ;
 			
 			//*********************************
 			// Union Reference Getters

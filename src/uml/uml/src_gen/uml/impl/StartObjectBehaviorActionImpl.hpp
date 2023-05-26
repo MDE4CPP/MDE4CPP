@@ -77,7 +77,7 @@ namespace uml
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::InputPin> getObject() const ;
+			virtual const std::shared_ptr<uml::InputPin>& getObject() const ;
 			/*!
 			An InputPin that holds the object that is either a Behavior to be started or has a classifierBehavior to be started.
 			<p>From package UML::Actions.</p>

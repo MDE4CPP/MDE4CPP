@@ -170,7 +170,7 @@ std::shared_ptr<ecore::EObject> ClearAssociationActionImpl::copy() const
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference association */
-std::shared_ptr<uml::Association> ClearAssociationActionImpl::getAssociation() const
+const std::shared_ptr<uml::Association>& ClearAssociationActionImpl::getAssociation() const
 {
     return m_association;
 }
@@ -181,7 +181,7 @@ void ClearAssociationActionImpl::setAssociation(const std::shared_ptr<uml::Assoc
 }
 
 /* Getter & Setter for reference object */
-std::shared_ptr<uml::InputPin> ClearAssociationActionImpl::getObject() const
+const std::shared_ptr<uml::InputPin>& ClearAssociationActionImpl::getObject() const
 {
     return m_object;
 }

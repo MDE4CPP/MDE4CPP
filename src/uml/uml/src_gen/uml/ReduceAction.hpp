@@ -114,7 +114,7 @@ namespace uml
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::InputPin> getCollection() const = 0;
+			virtual const std::shared_ptr<uml::InputPin>& getCollection() const = 0;
 			/*!
 			The InputPin that provides the collection to be reduced.
 			<p>From package UML::Actions.</p>
@@ -126,7 +126,7 @@ namespace uml
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::Behavior> getReducer() const = 0;
+			virtual const std::shared_ptr<uml::Behavior>& getReducer() const = 0;
 			/*!
 			A Behavior that is repreatedly applied to two elements of the input collection to produce a value that is of the same type as elements of the collection.
 			<p>From package UML::Actions.</p>
@@ -138,7 +138,7 @@ namespace uml
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::OutputPin> getResult() const = 0;
+			virtual const std::shared_ptr<uml::OutputPin>& getResult() const = 0;
 			/*!
 			The output pin on which the result value is placed.
 			<p>From package UML::Actions.</p>

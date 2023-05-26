@@ -62,13 +62,13 @@ namespace uml
 			<p>From package UML::CommonBehavior.</p>
 			*/
 			 
-			virtual std::shared_ptr<Bag<std::string>> getBody() const ;
+			virtual const std::shared_ptr<Bag<std::string>>& getBody() const ;
 			/*!
 			Languages the body strings use in the same order as the body strings.
 			<p>From package UML::CommonBehavior.</p>
 			*/
 			 
-			virtual std::shared_ptr<Bag<std::string>> getLanguage() const ;
+			virtual const std::shared_ptr<Bag<std::string>>& getLanguage() const ;
 			
 			//*********************************
 			// Reference Getters & Setters

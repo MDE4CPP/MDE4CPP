@@ -356,7 +356,7 @@ void ClassImpl::setIsActive(bool _isActive)
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference extension */
-std::shared_ptr<Bag<uml::Extension>> ClassImpl::getExtension() const
+const std::shared_ptr<Bag<uml::Extension>>& ClassImpl::getExtension() const
 {
 	if(m_extension == nullptr)
 	{
@@ -368,7 +368,7 @@ std::shared_ptr<Bag<uml::Extension>> ClassImpl::getExtension() const
 }
 
 /* Getter & Setter for reference nestedClassifier */
-std::shared_ptr<Subset<uml::Classifier, uml::NamedElement>> ClassImpl::getNestedClassifier() const
+const std::shared_ptr<Subset<uml::Classifier, uml::NamedElement>>& ClassImpl::getNestedClassifier() const
 {
 	if(m_nestedClassifier == nullptr)
 	{
@@ -389,14 +389,14 @@ std::shared_ptr<Subset<uml::Classifier, uml::NamedElement>> ClassImpl::getNested
 }
 
 /* Getter & Setter for reference ownedAttribute */
-std::shared_ptr<Subset<uml::Property, uml::ConnectableElement, uml::NamedElement, uml::Property>> ClassImpl::getClass_OwnedAttribute() const
+const std::shared_ptr<Subset<uml::Property, uml::ConnectableElement, uml::NamedElement, uml::Property>>& ClassImpl::getClass_OwnedAttribute() const
 {
 	//Getter call of redefined container reference StructuredClassifier::ownedAttribute 
 	return uml::StructuredClassifierImpl::getOwnedAttribute();
 }
 
 /* Getter & Setter for reference ownedOperation */
-std::shared_ptr<Subset<uml::Operation, uml::Feature, uml::NamedElement>> ClassImpl::getOwnedOperation() const
+const std::shared_ptr<Subset<uml::Operation, uml::Feature, uml::NamedElement>>& ClassImpl::getOwnedOperation() const
 {
 	if(m_ownedOperation == nullptr)
 	{
@@ -417,7 +417,7 @@ std::shared_ptr<Subset<uml::Operation, uml::Feature, uml::NamedElement>> ClassIm
 }
 
 /* Getter & Setter for reference ownedReception */
-std::shared_ptr<Subset<uml::Reception, uml::Feature, uml::NamedElement>> ClassImpl::getOwnedReception() const
+const std::shared_ptr<Subset<uml::Reception, uml::Feature, uml::NamedElement>>& ClassImpl::getOwnedReception() const
 {
 	if(m_ownedReception == nullptr)
 	{
@@ -438,7 +438,7 @@ std::shared_ptr<Subset<uml::Reception, uml::Feature, uml::NamedElement>> ClassIm
 }
 
 /* Getter & Setter for reference superClass */
-std::shared_ptr<Bag<uml::Class>> ClassImpl::getSuperClass() const
+const std::shared_ptr<Bag<uml::Class>>& ClassImpl::getSuperClass() const
 {
 	//Cast conversion from redefined container reference Classifier::general 
 	std::shared_ptr<Bag<uml::Class>> superClass(new Bag<uml::Class>());

@@ -67,7 +67,7 @@ namespace uml
 			<p>From package UML::Values.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::ValueSpecification> getMax() const ;
+			virtual const std::shared_ptr<uml::ValueSpecification>& getMax() const ;
 			/*!
 			Refers to the ValueSpecification denoting the maximum value of the range.
 			<p>From package UML::Values.</p>
@@ -79,7 +79,7 @@ namespace uml
 			<p>From package UML::Values.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::ValueSpecification> getMin() const ;
+			virtual const std::shared_ptr<uml::ValueSpecification>& getMin() const ;
 			/*!
 			Refers to the ValueSpecification denoting the minimum value of the range.
 			<p>From package UML::Values.</p>

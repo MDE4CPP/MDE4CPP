@@ -105,7 +105,7 @@ namespace uml
 			<p>From package UML::StateMachines.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::Behavior> getEffect() const ;
+			virtual const std::shared_ptr<uml::Behavior>& getEffect() const ;
 			/*!
 			Specifies an optional behavior to be performed when the Transition fires.
 			<p>From package UML::StateMachines.</p>
@@ -117,7 +117,7 @@ namespace uml
 			<p>From package UML::StateMachines.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::Constraint> getGuard() const ;
+			virtual const std::shared_ptr<uml::Constraint>& getGuard() const ;
 			/*!
 			A guard is a Constraint that provides a fine-grained control over the firing of the Transition. The guard is evaluated when an Event occurrence is dispatched by the StateMachine. If the guard is true at that time, the Transition may be enabled, otherwise, it is disabled. Guards should be pure expressions without side effects. Guard expressions with side effects are ill formed.
 			<p>From package UML::StateMachines.</p>
@@ -129,7 +129,7 @@ namespace uml
 			<p>From package UML::StateMachines.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::Transition> getRedefinedTransition() const ;
+			virtual const std::shared_ptr<uml::Transition>& getRedefinedTransition() const ;
 			/*!
 			The Transition that is redefined by this Transition.
 			<p>From package UML::StateMachines.</p>
@@ -141,7 +141,7 @@ namespace uml
 			<p>From package UML::StateMachines.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::Vertex> getSource() const ;
+			virtual const std::shared_ptr<uml::Vertex>& getSource() const ;
 			/*!
 			Designates the originating Vertex (State or Pseudostate) of the Transition.
 			<p>From package UML::StateMachines.</p>
@@ -153,7 +153,7 @@ namespace uml
 			<p>From package UML::StateMachines.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::Vertex> getTarget() const ;
+			virtual const std::shared_ptr<uml::Vertex>& getTarget() const ;
 			/*!
 			Designates the target Vertex that is reached when the Transition is taken.
 			<p>From package UML::StateMachines.</p>
@@ -165,7 +165,7 @@ namespace uml
 			<p>From package UML::StateMachines.</p>
 			*/
 			
-			virtual std::shared_ptr<Subset<uml::Trigger, uml::Element>> getTrigger() const ;
+			virtual const std::shared_ptr<Subset<uml::Trigger, uml::Element>>& getTrigger() const ;
 			
 			//*********************************
 			// Union Reference Getters

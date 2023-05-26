@@ -66,13 +66,13 @@ namespace uml
 			<p>From package UML::Deployments.</p>
 			*/
 			
-			virtual std::shared_ptr<Bag<uml::PackageableElement>> getDeployedElement() const ;
+			virtual const std::shared_ptr<Bag<uml::PackageableElement>>& getDeployedElement() const ;
 			/*!
 			The set of Deployments for a DeploymentTarget.
 			<p>From package UML::Deployments.</p>
 			*/
 			
-			virtual std::shared_ptr<Subset<uml::Deployment, uml::Element>> getDeployment() const ;
+			virtual const std::shared_ptr<Subset<uml::Deployment, uml::Element>>& getDeployment() const ;
 			
 			//*********************************
 			// Union Reference Getters

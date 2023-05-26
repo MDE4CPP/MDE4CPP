@@ -108,13 +108,13 @@ namespace uml
 			<p>From package UML::Interactions.</p>
 			*/
 			
-			virtual std::shared_ptr<Subset<uml::Gate, uml::Element>> getCfragmentGate() const = 0;
+			virtual const std::shared_ptr<Subset<uml::Gate, uml::Element>>& getCfragmentGate() const = 0;
 			/*!
 			The set of operands of the combined fragment.
 			<p>From package UML::Interactions.</p>
 			*/
 			
-			virtual std::shared_ptr<Subset<uml::InteractionOperand, uml::Element>> getOperand() const = 0;
+			virtual const std::shared_ptr<Subset<uml::InteractionOperand, uml::Element>>& getOperand() const = 0;
 
 			//*********************************
 			// Union Reference Getters

@@ -706,7 +706,7 @@ void ActionActivationImpl::setFiring(bool _firing)
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference action */
-std::shared_ptr<uml::Action> ActionActivationImpl::getAction() const
+const std::shared_ptr<uml::Action>& ActionActivationImpl::getAction() const
 {
     return m_action;
 }
@@ -717,7 +717,7 @@ void ActionActivationImpl::setAction(const std::shared_ptr<uml::Action>& _action
 	fUML::Semantics::Activities::ActivityNodeActivationImpl::setNode(_action);
 }
 /*Additional Setter for redefined reference 'ActivityNodeActivation::node'*/
-void ActionActivationImpl::setNode(std::shared_ptr<uml::ActivityNode> _node)
+void ActionActivationImpl::setNode(const std::shared_ptr<uml::ActivityNode>& _node)
 {
 	std::shared_ptr<uml::Action> _action = std::dynamic_pointer_cast<uml::Action>(_node);
 	if(_action)
@@ -734,7 +734,7 @@ void ActionActivationImpl::setNode(std::shared_ptr<uml::ActivityNode> _node)
 }
 
 /* Getter & Setter for reference inputPinActivation */
-std::shared_ptr<Subset<fUML::Semantics::Actions::InputPinActivation, fUML::Semantics::Actions::PinActivation>> ActionActivationImpl::getInputPinActivation() const
+const std::shared_ptr<Subset<fUML::Semantics::Actions::InputPinActivation, fUML::Semantics::Actions::PinActivation>>& ActionActivationImpl::getInputPinActivation() const
 {
 	if(m_inputPinActivation == nullptr)
 	{
@@ -755,7 +755,7 @@ std::shared_ptr<Subset<fUML::Semantics::Actions::InputPinActivation, fUML::Seman
 }
 
 /* Getter & Setter for reference outputPinActivation */
-std::shared_ptr<Subset<fUML::Semantics::Actions::OutputPinActivation, fUML::Semantics::Actions::PinActivation>> ActionActivationImpl::getOutputPinActivation() const
+const std::shared_ptr<Subset<fUML::Semantics::Actions::OutputPinActivation, fUML::Semantics::Actions::PinActivation>>& ActionActivationImpl::getOutputPinActivation() const
 {
 	if(m_outputPinActivation == nullptr)
 	{

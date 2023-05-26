@@ -69,7 +69,7 @@ namespace ocl::Expressions
 			//*********************************
 			// Reference Getters & Setters
 			//*********************************
-			virtual std::shared_ptr<Bag<ocl::Expressions::ContextDeclarationExp>> getContextDeclarations() const ;
+			virtual const std::shared_ptr<Bag<ocl::Expressions::ContextDeclarationExp>>& getContextDeclarations() const ;
 			
 			//*********************************
 			// Union Reference Getters

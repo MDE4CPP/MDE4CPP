@@ -176,7 +176,7 @@ void JoinNodeImpl::setIsCombineDuplicate(bool _isCombineDuplicate)
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference joinSpec */
-std::shared_ptr<uml::ValueSpecification> JoinNodeImpl::getJoinSpec() const
+const std::shared_ptr<uml::ValueSpecification>& JoinNodeImpl::getJoinSpec() const
 {
     return m_joinSpec;
 }

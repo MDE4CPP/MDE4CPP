@@ -50,7 +50,7 @@
 [template private _generateAttributeGetterDecleration(anEAttribute : EAttribute, impl : Boolean) ? (hasGetter()) post(trim())]
 [printInfo(anEAttribute.eStructuralFeatureGetterGenerationMessage(), 4)/]
 [anEAttribute.generateDocumentation()/] 
-virtual [anEAttribute.generateStructuralFeatureType(true)/] [anEAttribute.GetterName()/]() const [abstractSufix(impl)/];
+virtual [if(anEAttribute.isSharedPtr())]const [/if][anEAttribute.generateStructuralFeatureType(true)/][if(anEAttribute.isSharedPtr())]&[/if] [anEAttribute.GetterName()/]() const [abstractSufix(impl)/];
 [/template]
 
 [template private _generateAttributeSetterDecleration(anEAttribute : EAttribute, impl : Boolean) ? ((hasSetter() or(impl and hasImplSetterOnly()))) post(trim())]
@@ -134,7 +134,7 @@ virtual void [anEAttribute.SetterName()/] ([if(anEAttribute.isSharedPtr())]const
 
 [template private _generateAttributeGetterImplementation(anEAttribute : EAttribute)? (hasGetter()) post(trim())]
 [printInfo(anEAttribute.eStructuralFeatureGetterGenerationMessage(), 4)/]
-[anEAttribute.generateStructuralFeatureType(true)/] [anEAttribute.eContainingClass.name.toUpperFirst()/]Impl::[anEAttribute.GetterName()/]() const 
+[if(anEAttribute.isSharedPtr())]const [/if][anEAttribute.generateStructuralFeatureType(true)/][if(anEAttribute.isSharedPtr())]&[/if] [anEAttribute.eContainingClass.name.toUpperFirst()/]Impl::[anEAttribute.GetterName()/]() const 
 {
 [if (hasKey(keyGetterBody()))]
 	//generated from [keyGetterBody()/] annotation

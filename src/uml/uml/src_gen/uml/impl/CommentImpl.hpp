@@ -69,7 +69,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::shared_ptr<Bag<uml::Element>> getAnnotatedElement() const ;
+			virtual const std::shared_ptr<Bag<uml::Element>>& getAnnotatedElement() const ;
 			
 			//*********************************
 			// Union Reference Getters

@@ -145,7 +145,7 @@ void PrePostBodyExpImpl::setName(std::string _name)
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference bodyExpression */
-std::shared_ptr<ocl::Expressions::OclExpression> PrePostBodyExpImpl::getBodyExpression() const
+const std::shared_ptr<ocl::Expressions::OclExpression>& PrePostBodyExpImpl::getBodyExpression() const
 {
     return m_bodyExpression;
 }

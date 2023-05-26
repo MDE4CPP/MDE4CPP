@@ -63,7 +63,7 @@ namespace uml
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::Operation> getOperation() const ;
+			virtual const std::shared_ptr<uml::Operation>& getOperation() const ;
 			/*!
 			The Operation being invoked.
 			<p>From package UML::Actions.</p>
@@ -75,7 +75,7 @@ namespace uml
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::InputPin> getTarget() const ;
+			virtual const std::shared_ptr<uml::InputPin>& getTarget() const ;
 			/*!
 			The InputPin that provides the target object to which the Operation call request is sent.
 			<p>From package UML::Actions.</p>

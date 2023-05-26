@@ -71,7 +71,7 @@ namespace uml
 			<p>From package UML::Classification.</p>
 			*/
 			
-			virtual std::shared_ptr<Bag<uml::Classifier>> getConstrainingClassifier() const ;
+			virtual const std::shared_ptr<Bag<uml::Classifier>>& getConstrainingClassifier() const ;
 			
 			//*********************************
 			// Union Reference Getters

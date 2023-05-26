@@ -103,7 +103,7 @@ namespace uml
 			<p>From package UML::UseCases.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::Constraint> getCondition() const = 0;
+			virtual const std::shared_ptr<uml::Constraint>& getCondition() const = 0;
 			/*!
 			References the condition that must hold when the first ExtensionPoint is reached for the extension to take place. If no constraint is associated with the Extend relationship, the extension is unconditional.
 			<p>From package UML::UseCases.</p>
@@ -115,7 +115,7 @@ namespace uml
 			<p>From package UML::UseCases.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::UseCase> getExtendedCase() const = 0;
+			virtual const std::shared_ptr<uml::UseCase>& getExtendedCase() const = 0;
 			/*!
 			The UseCase that is being extended.
 			<p>From package UML::UseCases.</p>
@@ -139,7 +139,7 @@ namespace uml
 			<p>From package UML::UseCases.</p>
 			*/
 			
-			virtual std::shared_ptr<Bag<uml::ExtensionPoint>> getExtensionLocation() const = 0;
+			virtual const std::shared_ptr<Bag<uml::ExtensionPoint>>& getExtensionLocation() const = 0;
 
 			//*********************************
 			// Union Reference Getters

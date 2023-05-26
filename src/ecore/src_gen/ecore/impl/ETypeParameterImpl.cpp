@@ -141,7 +141,7 @@ std::shared_ptr<ecore::EObject> ETypeParameterImpl::copy() const
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference eBounds */
-std::shared_ptr<Bag<ecore::EGenericType>> ETypeParameterImpl::getEBounds() const
+const std::shared_ptr<Bag<ecore::EGenericType>>& ETypeParameterImpl::getEBounds() const
 {
 	if(m_eBounds == nullptr)
 	{

@@ -225,7 +225,7 @@ void ClassifierContextDeclExpImpl::setClassifierName(std::string _classifierName
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference invOrDevExp */
-std::shared_ptr<ocl::Expressions::InvOrDefExp> ClassifierContextDeclExpImpl::getInvOrDevExp() const
+const std::shared_ptr<ocl::Expressions::InvOrDefExp>& ClassifierContextDeclExpImpl::getInvOrDevExp() const
 {
     return m_invOrDevExp;
 }

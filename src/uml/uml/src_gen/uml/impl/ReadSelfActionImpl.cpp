@@ -168,7 +168,7 @@ std::shared_ptr<ecore::EObject> ReadSelfActionImpl::copy() const
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference result */
-std::shared_ptr<uml::OutputPin> ReadSelfActionImpl::getResult() const
+const std::shared_ptr<uml::OutputPin>& ReadSelfActionImpl::getResult() const
 {
     return m_result;
 }

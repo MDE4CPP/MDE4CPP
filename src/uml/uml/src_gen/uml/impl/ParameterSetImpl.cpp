@@ -168,7 +168,7 @@ std::shared_ptr<ecore::EObject> ParameterSetImpl::copy() const
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference condition */
-std::shared_ptr<Subset<uml::Constraint, uml::Element>> ParameterSetImpl::getCondition() const
+const std::shared_ptr<Subset<uml::Constraint, uml::Element>>& ParameterSetImpl::getCondition() const
 {
 	if(m_condition == nullptr)
 	{
@@ -189,7 +189,7 @@ std::shared_ptr<Subset<uml::Constraint, uml::Element>> ParameterSetImpl::getCond
 }
 
 /* Getter & Setter for reference parameter */
-std::shared_ptr<Bag<uml::Parameter>> ParameterSetImpl::getParameter() const
+const std::shared_ptr<Bag<uml::Parameter>>& ParameterSetImpl::getParameter() const
 {
 	if(m_parameter == nullptr)
 	{

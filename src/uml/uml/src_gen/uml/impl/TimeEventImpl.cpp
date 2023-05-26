@@ -169,7 +169,7 @@ void TimeEventImpl::setIsRelative(bool _isRelative)
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference when */
-std::shared_ptr<uml::TimeExpression> TimeEventImpl::getWhen() const
+const std::shared_ptr<uml::TimeExpression>& TimeEventImpl::getWhen() const
 {
     return m_when;
 }

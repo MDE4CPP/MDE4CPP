@@ -126,7 +126,7 @@ std::shared_ptr<ecore::EObject> PropertyCallExpEvalImpl::copy() const
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference source */
-std::shared_ptr<ocl::Evaluations::OclExpEval> PropertyCallExpEvalImpl::getSource() const
+const std::shared_ptr<ocl::Evaluations::OclExpEval>& PropertyCallExpEvalImpl::getSource() const
 {
     return m_source;
 }

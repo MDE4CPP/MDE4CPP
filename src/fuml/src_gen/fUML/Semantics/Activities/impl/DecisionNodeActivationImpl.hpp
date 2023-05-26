@@ -65,7 +65,7 @@ namespace fUML::Semantics::Activities
 			// Reference Getters & Setters
 			//*********************************
 			
-			virtual std::shared_ptr<uml::DecisionNode> getDecisionNode() const ;
+			virtual const std::shared_ptr<uml::DecisionNode>& getDecisionNode() const ;
 			virtual void setDecisionNode(const std::shared_ptr<uml::DecisionNode>&) ;
 			/*Additional Setter for 'ActivityNodeActivation::node' redefined by reference 'decisionNode'*/
 			virtual void setNode(const std::shared_ptr<uml::ActivityNode>&) ;

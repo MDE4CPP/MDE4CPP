@@ -126,19 +126,19 @@ namespace uml
 			<p>From package UML::StructuredClassifiers.</p>
 			*/
 			
-			virtual std::shared_ptr<SubsetUnion<uml::Property, uml::ConnectableElement, uml::NamedElement, uml::Property>> getOwnedAttribute() const = 0;
+			virtual const std::shared_ptr<SubsetUnion<uml::Property, uml::ConnectableElement, uml::NamedElement, uml::Property>>& getOwnedAttribute() const = 0;
 			/*!
 			The connectors owned by the StructuredClassifier.
 			<p>From package UML::StructuredClassifiers.</p>
 			*/
 			
-			virtual std::shared_ptr<Subset<uml::Connector, uml::Feature, uml::NamedElement>> getOwnedConnector() const = 0;
+			virtual const std::shared_ptr<Subset<uml::Connector, uml::Feature, uml::NamedElement>>& getOwnedConnector() const = 0;
 			/*!
 			The Properties specifying instances that the StructuredClassifier owns by composition. This collection is derived, selecting those owned Properties where isComposite is true.
 			<p>From package UML::StructuredClassifiers.</p>
 			*/
 			
-			virtual std::shared_ptr<Bag<uml::Property>> getPart() const = 0;
+			virtual const std::shared_ptr<Bag<uml::Property>>& getPart() const = 0;
 			
 
 			//*********************************

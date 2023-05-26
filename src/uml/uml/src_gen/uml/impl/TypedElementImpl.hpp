@@ -59,7 +59,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::Type> getType() const ;
+			virtual const std::shared_ptr<uml::Type>& getType() const ;
 			/*!
 			The type of the TypedElement.
 			<p>From package UML::CommonStructure.</p>

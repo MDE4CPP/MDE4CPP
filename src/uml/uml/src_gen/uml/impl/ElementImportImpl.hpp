@@ -94,7 +94,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::PackageableElement> getImportedElement() const ;
+			virtual const std::shared_ptr<uml::PackageableElement>& getImportedElement() const ;
 			/*!
 			Specifies the PackageableElement whose name is to be added to a Namespace.
 			<p>From package UML::CommonStructure.</p>

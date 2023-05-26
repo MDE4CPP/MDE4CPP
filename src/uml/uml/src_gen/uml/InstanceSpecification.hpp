@@ -99,19 +99,19 @@ namespace uml
 			<p>From package UML::Classification.</p>
 			*/
 			
-			virtual std::shared_ptr<Bag<uml::Classifier>> getClassifier() const = 0;
+			virtual const std::shared_ptr<Bag<uml::Classifier>>& getClassifier() const = 0;
 			/*!
 			A Slot giving the value or values of a StructuralFeature of the instance. An InstanceSpecification can have one Slot per StructuralFeature of its Classifiers, including inherited features. It is not necessary to model a Slot for every StructuralFeature, in which case the InstanceSpecification is a partial description.
 			<p>From package UML::Classification.</p>
 			*/
 			
-			virtual std::shared_ptr<Subset<uml::Slot, uml::Element>> getSlot() const = 0;
+			virtual const std::shared_ptr<Subset<uml::Slot, uml::Element>>& getSlot() const = 0;
 			/*!
 			A specification of how to compute, derive, or construct the instance.
 			<p>From package UML::Classification.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::ValueSpecification> getSpecification() const = 0;
+			virtual const std::shared_ptr<uml::ValueSpecification>& getSpecification() const = 0;
 			/*!
 			A specification of how to compute, derive, or construct the instance.
 			<p>From package UML::Classification.</p>

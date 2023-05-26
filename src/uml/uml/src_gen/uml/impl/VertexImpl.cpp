@@ -175,7 +175,7 @@ void VertexImpl::setContainer(std::weak_ptr<uml::Region> _container)
 }
 
 /* Getter & Setter for reference incoming */
-std::shared_ptr<Bag<uml::Transition>> VertexImpl::getIncoming() const
+const std::shared_ptr<Bag<uml::Transition>>& VertexImpl::getIncoming() const
 {
 	if(m_incoming == nullptr)
 	{
@@ -187,7 +187,7 @@ std::shared_ptr<Bag<uml::Transition>> VertexImpl::getIncoming() const
 }
 
 /* Getter & Setter for reference outgoing */
-std::shared_ptr<Bag<uml::Transition>> VertexImpl::getOutgoing() const
+const std::shared_ptr<Bag<uml::Transition>>& VertexImpl::getOutgoing() const
 {
 	if(m_outgoing == nullptr)
 	{

@@ -54,7 +54,7 @@ namespace fUML::Semantics::Actions
 			//*********************************
 			// Reference Getters & Setters
 			//*********************************
-			virtual std::shared_ptr<uml::RemoveStructuralFeatureValueAction> getRemoveStructuralFeatureValueAction() const ;
+			virtual const std::shared_ptr<uml::RemoveStructuralFeatureValueAction>& getRemoveStructuralFeatureValueAction() const ;
 			virtual void setRemoveStructuralFeatureValueAction(const std::shared_ptr<uml::RemoveStructuralFeatureValueAction>&) ;
 			/*Additional Setter for 'ActionActivation::action' redefined by reference 'removeStructuralFeatureValueAction'*/
 			virtual void setAction(const std::shared_ptr<uml::Action>&) ;

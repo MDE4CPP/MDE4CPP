@@ -145,7 +145,7 @@ void ParameterableElementImpl::setOwningTemplateParameter(std::weak_ptr<uml::Tem
 }
 
 /* Getter & Setter for reference templateParameter */
-std::shared_ptr<uml::TemplateParameter> ParameterableElementImpl::getTemplateParameter() const
+const std::shared_ptr<uml::TemplateParameter>& ParameterableElementImpl::getTemplateParameter() const
 {
     return m_templateParameter;
 }

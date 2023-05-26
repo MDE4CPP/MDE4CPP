@@ -149,13 +149,13 @@ void ConnectorEndImpl::setConnector(std::weak_ptr<uml::Connector> _connector)
 }
 
 /* Getter & Setter for reference definingEnd */
-std::shared_ptr<uml::Property> ConnectorEndImpl::getDefiningEnd() const
+const std::shared_ptr<uml::Property>& ConnectorEndImpl::getDefiningEnd() const
 {
     return m_definingEnd;
 }
 
 /* Getter & Setter for reference partWithPort */
-std::shared_ptr<uml::Property> ConnectorEndImpl::getPartWithPort() const
+const std::shared_ptr<uml::Property>& ConnectorEndImpl::getPartWithPort() const
 {
     return m_partWithPort;
 }
@@ -166,7 +166,7 @@ void ConnectorEndImpl::setPartWithPort(const std::shared_ptr<uml::Property>& _pa
 }
 
 /* Getter & Setter for reference role */
-std::shared_ptr<uml::ConnectableElement> ConnectorEndImpl::getRole() const
+const std::shared_ptr<uml::ConnectableElement>& ConnectorEndImpl::getRole() const
 {
     return m_role;
 }

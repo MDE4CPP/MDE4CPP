@@ -373,7 +373,7 @@ void StructuredActivityNodeActivationImpl::terminateAll()
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference activationGroup */
-std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup> StructuredActivityNodeActivationImpl::getActivationGroup() const
+const std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup>& StructuredActivityNodeActivationImpl::getActivationGroup() const
 {
     return m_activationGroup;
 }

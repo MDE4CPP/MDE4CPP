@@ -138,7 +138,7 @@ namespace uml
 			<p>From package UML::StructuredClassifiers.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::ProtocolStateMachine> getProtocol() const ;
+			virtual const std::shared_ptr<uml::ProtocolStateMachine>& getProtocol() const ;
 			/*!
 			An optional ProtocolStateMachine which describes valid interactions at this interaction point.
 			<p>From package UML::StructuredClassifiers.</p>
@@ -150,19 +150,19 @@ namespace uml
 			<p>From package UML::StructuredClassifiers.</p>
 			*/
 			
-			virtual std::shared_ptr<Bag<uml::Interface>> getProvided() const ;
+			virtual const std::shared_ptr<Bag<uml::Interface>>& getProvided() const ;
 			/*!
 			A Port may be redefined when its containing EncapsulatedClassifier is specialized. The redefining Port may have additional Interfaces to those that are associated with the redefined Port or it may replace an Interface by one of its subtypes.
 			<p>From package UML::StructuredClassifiers.</p>
 			*/
 			
-			virtual std::shared_ptr<Subset<uml::Port, uml::Property /*Subset does not reference a union*/>> getRedefinedPort() const ;
+			virtual const std::shared_ptr<Subset<uml::Port, uml::Property /*Subset does not reference a union*/>>& getRedefinedPort() const ;
 			/*!
 			The Interfaces specifying the set of Operations and Receptions that the EncapsulatedCassifier expects its environment to handle via this port. This association is derived according to the value of isConjugated. If isConjugated is false, required is derived as the union of the sets of Interfaces used by the type of the Port and its supertypes. If isConjugated is true, it is derived as the union of the sets of Interfaces realized by the type of the Port and its supertypes, or directly from the type of the Port if the Port is typed by an Interface.
 			<p>From package UML::StructuredClassifiers.</p>
 			*/
 			
-			virtual std::shared_ptr<Bag<uml::Interface>> getRequired() const ;
+			virtual const std::shared_ptr<Bag<uml::Interface>>& getRequired() const ;
 			
 			//*********************************
 			// Union Reference Getters

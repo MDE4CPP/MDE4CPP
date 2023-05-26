@@ -225,7 +225,7 @@ void EnumLiteralExpImpl::setReferredEnumLiteralStr(std::string _referredEnumLite
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference referredEnumLiteral */
-std::shared_ptr<ecore::EEnumLiteral> EnumLiteralExpImpl::getReferredEnumLiteral() const
+const std::shared_ptr<ecore::EEnumLiteral>& EnumLiteralExpImpl::getReferredEnumLiteral() const
 {
     return m_referredEnumLiteral;
 }

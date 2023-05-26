@@ -172,7 +172,7 @@ std::shared_ptr<ecore::EObject> InstanceValueImpl::copy() const
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference instance */
-std::shared_ptr<uml::InstanceSpecification> InstanceValueImpl::getInstance() const
+const std::shared_ptr<uml::InstanceSpecification>& InstanceValueImpl::getInstance() const
 {
     return m_instance;
 }

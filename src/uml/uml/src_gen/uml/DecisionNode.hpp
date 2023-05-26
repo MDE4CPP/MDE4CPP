@@ -98,7 +98,7 @@ namespace uml
 			<p>From package UML::Activities.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::Behavior> getDecisionInput() const = 0;
+			virtual const std::shared_ptr<uml::Behavior>& getDecisionInput() const = 0;
 			/*!
 			A Behavior that is executed to provide an input to guard ValueSpecifications on ActivityEdges outgoing from the DecisionNode.
 			<p>From package UML::Activities.</p>
@@ -110,7 +110,7 @@ namespace uml
 			<p>From package UML::Activities.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::ObjectFlow> getDecisionInputFlow() const = 0;
+			virtual const std::shared_ptr<uml::ObjectFlow>& getDecisionInputFlow() const = 0;
 			/*!
 			An additional ActivityEdge incoming to the DecisionNode that provides a decision input value for the guards ValueSpecifications on ActivityEdges outgoing from the DecisionNode.
 			<p>From package UML::Activities.</p>

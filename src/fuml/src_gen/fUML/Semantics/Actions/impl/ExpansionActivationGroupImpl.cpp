@@ -229,7 +229,7 @@ void ExpansionActivationGroupImpl::setIndex(int _index)
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference groupInputs */
-std::shared_ptr<Bag<fUML::Semantics::Actions::ExpansionNodeActivation>> ExpansionActivationGroupImpl::getGroupInputs() const
+const std::shared_ptr<Bag<fUML::Semantics::Actions::ExpansionNodeActivation>>& ExpansionActivationGroupImpl::getGroupInputs() const
 {
 	if(m_groupInputs == nullptr)
 	{
@@ -241,7 +241,7 @@ std::shared_ptr<Bag<fUML::Semantics::Actions::ExpansionNodeActivation>> Expansio
 }
 
 /* Getter & Setter for reference groupOutputs */
-std::shared_ptr<Bag<fUML::Semantics::Actions::ExpansionNodeActivation>> ExpansionActivationGroupImpl::getGroupOutputs() const
+const std::shared_ptr<Bag<fUML::Semantics::Actions::ExpansionNodeActivation>>& ExpansionActivationGroupImpl::getGroupOutputs() const
 {
 	if(m_groupOutputs == nullptr)
 	{
@@ -253,7 +253,7 @@ std::shared_ptr<Bag<fUML::Semantics::Actions::ExpansionNodeActivation>> Expansio
 }
 
 /* Getter & Setter for reference regionActivation */
-std::shared_ptr<fUML::Semantics::Actions::ExpansionRegionActivation> ExpansionActivationGroupImpl::getRegionActivation() const
+const std::shared_ptr<fUML::Semantics::Actions::ExpansionRegionActivation>& ExpansionActivationGroupImpl::getRegionActivation() const
 {
     return m_regionActivation;
 }
@@ -264,7 +264,7 @@ void ExpansionActivationGroupImpl::setRegionActivation(const std::shared_ptr<fUM
 }
 
 /* Getter & Setter for reference regionInputs */
-std::shared_ptr<Bag<fUML::Semantics::Actions::OutputPinActivation>> ExpansionActivationGroupImpl::getRegionInputs() const
+const std::shared_ptr<Bag<fUML::Semantics::Actions::OutputPinActivation>>& ExpansionActivationGroupImpl::getRegionInputs() const
 {
 	if(m_regionInputs == nullptr)
 	{

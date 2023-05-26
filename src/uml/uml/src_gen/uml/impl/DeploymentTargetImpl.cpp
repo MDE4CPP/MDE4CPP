@@ -164,7 +164,7 @@ std::shared_ptr<Bag<uml::PackageableElement>> DeploymentTargetImpl::getDeployedE
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference deployedElement */
-std::shared_ptr<Bag<uml::PackageableElement>> DeploymentTargetImpl::getDeployedElement() const
+const std::shared_ptr<Bag<uml::PackageableElement>>& DeploymentTargetImpl::getDeployedElement() const
 {
 	if(m_deployedElement == nullptr)
 	{
@@ -176,7 +176,7 @@ std::shared_ptr<Bag<uml::PackageableElement>> DeploymentTargetImpl::getDeployedE
 }
 
 /* Getter & Setter for reference deployment */
-std::shared_ptr<Subset<uml::Deployment, uml::Element>> DeploymentTargetImpl::getDeployment() const
+const std::shared_ptr<Subset<uml::Deployment, uml::Element>>& DeploymentTargetImpl::getDeployment() const
 {
 	if(m_deployment == nullptr)
 	{

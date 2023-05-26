@@ -53,7 +53,7 @@ namespace ocl::Evaluations
 			//*********************************
 			// Reference Getters & Setters
 			//*********************************
-			virtual std::shared_ptr<Bag<ocl::Evaluations::OclExpEval>> getArguments() const ;
+			virtual const std::shared_ptr<Bag<ocl::Evaluations::OclExpEval>>& getArguments() const ;
 			
 			//*********************************
 			// Union Reference Getters

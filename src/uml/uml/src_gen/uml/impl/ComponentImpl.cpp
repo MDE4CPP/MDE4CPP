@@ -299,7 +299,7 @@ void ComponentImpl::setIsIndirectlyInstantiated(bool _isIndirectlyInstantiated)
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference packagedElement */
-std::shared_ptr<Subset<uml::PackageableElement, uml::NamedElement>> ComponentImpl::getPackagedElement() const
+const std::shared_ptr<Subset<uml::PackageableElement, uml::NamedElement>>& ComponentImpl::getPackagedElement() const
 {
 	if(m_packagedElement == nullptr)
 	{
@@ -320,7 +320,7 @@ std::shared_ptr<Subset<uml::PackageableElement, uml::NamedElement>> ComponentImp
 }
 
 /* Getter & Setter for reference provided */
-std::shared_ptr<Bag<uml::Interface>> ComponentImpl::getProvided() const
+const std::shared_ptr<Bag<uml::Interface>>& ComponentImpl::getProvided() const
 {
 	if(m_provided == nullptr)
 	{
@@ -332,7 +332,7 @@ std::shared_ptr<Bag<uml::Interface>> ComponentImpl::getProvided() const
 }
 
 /* Getter & Setter for reference realization */
-std::shared_ptr<Subset<uml::ComponentRealization, uml::Element>> ComponentImpl::getRealization() const
+const std::shared_ptr<Subset<uml::ComponentRealization, uml::Element>>& ComponentImpl::getRealization() const
 {
 	if(m_realization == nullptr)
 	{
@@ -353,7 +353,7 @@ std::shared_ptr<Subset<uml::ComponentRealization, uml::Element>> ComponentImpl::
 }
 
 /* Getter & Setter for reference required */
-std::shared_ptr<Bag<uml::Interface>> ComponentImpl::getRequired() const
+const std::shared_ptr<Bag<uml::Interface>>& ComponentImpl::getRequired() const
 {
 	if(m_required == nullptr)
 	{

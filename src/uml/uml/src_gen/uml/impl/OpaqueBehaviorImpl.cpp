@@ -222,7 +222,7 @@ std::shared_ptr<ecore::EObject> OpaqueBehaviorImpl::copy() const
 // Attribute Getters & Setters
 //*********************************
 /* Getter & Setter for attribute body */
-std::shared_ptr<Bag<std::string>> OpaqueBehaviorImpl::getBody() const 
+const std::shared_ptr<Bag<std::string>>& OpaqueBehaviorImpl::getBody() const 
 {
 	if(m_body == nullptr)
 	{
@@ -232,7 +232,7 @@ std::shared_ptr<Bag<std::string>> OpaqueBehaviorImpl::getBody() const
 }
 
 /* Getter & Setter for attribute language */
-std::shared_ptr<Bag<std::string>> OpaqueBehaviorImpl::getLanguage() const 
+const std::shared_ptr<Bag<std::string>>& OpaqueBehaviorImpl::getLanguage() const 
 {
 	if(m_language == nullptr)
 	{

@@ -145,7 +145,7 @@ void ClassifierTemplateParameterImpl::setAllowSubstitutable(bool _allowSubstitut
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference constrainingClassifier */
-std::shared_ptr<Bag<uml::Classifier>> ClassifierTemplateParameterImpl::getConstrainingClassifier() const
+const std::shared_ptr<Bag<uml::Classifier>>& ClassifierTemplateParameterImpl::getConstrainingClassifier() const
 {
 	if(m_constrainingClassifier == nullptr)
 	{

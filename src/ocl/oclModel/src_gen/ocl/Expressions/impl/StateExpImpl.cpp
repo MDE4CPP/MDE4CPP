@@ -214,7 +214,7 @@ std::shared_ptr<ecore::EObject> StateExpImpl::copy() const
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference referredState */
-std::shared_ptr<ecore::EObject> StateExpImpl::getReferredState() const
+const std::shared_ptr<ecore::EObject>& StateExpImpl::getReferredState() const
 {
     return m_referredState;
 }

@@ -156,7 +156,7 @@ std::shared_ptr<ecore::EObject> ConnectionPointReferenceImpl::copy() const
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference entry */
-std::shared_ptr<Bag<uml::Pseudostate>> ConnectionPointReferenceImpl::getEntry() const
+const std::shared_ptr<Bag<uml::Pseudostate>>& ConnectionPointReferenceImpl::getEntry() const
 {
 	if(m_entry == nullptr)
 	{
@@ -168,7 +168,7 @@ std::shared_ptr<Bag<uml::Pseudostate>> ConnectionPointReferenceImpl::getEntry() 
 }
 
 /* Getter & Setter for reference exit */
-std::shared_ptr<Bag<uml::Pseudostate>> ConnectionPointReferenceImpl::getExit() const
+const std::shared_ptr<Bag<uml::Pseudostate>>& ConnectionPointReferenceImpl::getExit() const
 {
 	if(m_exit == nullptr)
 	{

@@ -63,7 +63,7 @@ namespace uml
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::InputPin> getObject() const ;
+			virtual const std::shared_ptr<uml::InputPin>& getObject() const ;
 			/*!
 			The InputPin that gives the object to be unmarshalled.
 			<p>From package UML::Actions.</p>
@@ -75,13 +75,13 @@ namespace uml
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual std::shared_ptr<Subset<uml::OutputPin, uml::OutputPin>> getResult() const ;
+			virtual const std::shared_ptr<Subset<uml::OutputPin, uml::OutputPin>>& getResult() const ;
 			/*!
 			The type of the object to be unmarshalled.
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::Classifier> getUnmarshallType() const ;
+			virtual const std::shared_ptr<uml::Classifier>& getUnmarshallType() const ;
 			/*!
 			The type of the object to be unmarshalled.
 			<p>From package UML::Actions.</p>

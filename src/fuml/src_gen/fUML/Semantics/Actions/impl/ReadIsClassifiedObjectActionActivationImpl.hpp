@@ -54,7 +54,7 @@ namespace fUML::Semantics::Actions
 			//*********************************
 			// Reference Getters & Setters
 			//*********************************
-			virtual std::shared_ptr<uml::ReadIsClassifiedObjectAction> getReadIsClassifiedObjectAction() const ;
+			virtual const std::shared_ptr<uml::ReadIsClassifiedObjectAction>& getReadIsClassifiedObjectAction() const ;
 			virtual void setReadIsClassifiedObjectAction(const std::shared_ptr<uml::ReadIsClassifiedObjectAction>&) ;
 			/*Additional Setter for 'ActionActivation::action' redefined by reference 'readIsClassifiedObjectAction'*/
 			virtual void setAction(const std::shared_ptr<uml::Action>&) ;

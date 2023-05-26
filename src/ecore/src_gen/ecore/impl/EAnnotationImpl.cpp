@@ -190,7 +190,7 @@ void EAnnotationImpl::setSource(std::string _source)
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference contents */
-std::shared_ptr<Subset<ecore::EObject, ecore::EObject>> EAnnotationImpl::getContents() const
+const std::shared_ptr<Subset<ecore::EObject, ecore::EObject>>& EAnnotationImpl::getContents() const
 {
 	if(m_contents == nullptr)
 	{
@@ -222,7 +222,7 @@ void EAnnotationImpl::setEModelElement(std::weak_ptr<ecore::EModelElement> _eMod
 }
 
 /* Getter & Setter for reference references */
-std::shared_ptr<Bag<ecore::EObject>> EAnnotationImpl::getReferences() const
+const std::shared_ptr<Bag<ecore::EObject>>& EAnnotationImpl::getReferences() const
 {
 	if(m_references == nullptr)
 	{

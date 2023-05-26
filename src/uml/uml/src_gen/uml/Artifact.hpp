@@ -130,25 +130,25 @@ namespace uml
 			<p>From package UML::Deployments.</p>
 			*/
 			
-			virtual std::shared_ptr<Subset<uml::Manifestation, uml::Element>> getManifestation() const = 0;
+			virtual const std::shared_ptr<Subset<uml::Manifestation, uml::Element>>& getManifestation() const = 0;
 			/*!
 			The Artifacts that are defined (nested) within the Artifact. The association is a specialization of the ownedMember association from Namespace to NamedElement.
 			<p>From package UML::Deployments.</p>
 			*/
 			
-			virtual std::shared_ptr<Subset<uml::Artifact, uml::NamedElement>> getNestedArtifact() const = 0;
+			virtual const std::shared_ptr<Subset<uml::Artifact, uml::NamedElement>>& getNestedArtifact() const = 0;
 			/*!
 			The attributes or association ends defined for the Artifact. The association is a specialization of the ownedMember association.
 			<p>From package UML::Deployments.</p>
 			*/
 			
-			virtual std::shared_ptr<Subset<uml::Property, uml::NamedElement, uml::Property>> getOwnedAttribute() const = 0;
+			virtual const std::shared_ptr<Subset<uml::Property, uml::NamedElement, uml::Property>>& getOwnedAttribute() const = 0;
 			/*!
 			The Operations defined for the Artifact. The association is a specialization of the ownedMember association.
 			<p>From package UML::Deployments.</p>
 			*/
 			
-			virtual std::shared_ptr<Subset<uml::Operation, uml::Feature, uml::NamedElement>> getOwnedOperation() const = 0;
+			virtual const std::shared_ptr<Subset<uml::Operation, uml::Feature, uml::NamedElement>>& getOwnedOperation() const = 0;
 
 			//*********************************
 			// Union Reference Getters

@@ -130,7 +130,7 @@ std::shared_ptr<ecore::EObject> EEnumLiteralImpl::copy() const
 // Attribute Getters & Setters
 //*********************************
 /* Getter & Setter for attribute instance */
-std::shared_ptr<Any> EEnumLiteralImpl::getInstance() const 
+const std::shared_ptr<Any>& EEnumLiteralImpl::getInstance() const 
 {
 	return m_instance;
 }

@@ -69,8 +69,8 @@ namespace ocl::Expressions
 			//*********************************
 			// Reference Getters & Setters
 			//*********************************
-			virtual std::shared_ptr<Bag<ocl::Expressions::VarDeclarationExp>> getInputParameters() const ;
-			virtual std::shared_ptr<ocl::Expressions::TypeExp> getReturnType() const ;
+			virtual const std::shared_ptr<Bag<ocl::Expressions::VarDeclarationExp>>& getInputParameters() const ;
+			virtual const std::shared_ptr<ocl::Expressions::TypeExp>& getReturnType() const ;
 			virtual void setReturnType(const std::shared_ptr<ocl::Expressions::TypeExp>&) ;
 			
 			//*********************************

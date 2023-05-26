@@ -124,19 +124,19 @@ namespace uml
 			<p>From package UML::StructuredClassifiers.</p>
 			*/
 			
-			virtual std::shared_ptr<Bag<uml::Behavior>> getContract() const = 0;
+			virtual const std::shared_ptr<Bag<uml::Behavior>>& getContract() const = 0;
 			/*!
 			A Connector has at least two ConnectorEnds, each representing the participation of instances of the Classifiers typing the ConnectableElements attached to the end. The set of ConnectorEnds is ordered.
 			<p>From package UML::StructuredClassifiers.</p>
 			*/
 			
-			virtual std::shared_ptr<Subset<uml::ConnectorEnd, uml::Element>> getEnd() const = 0;
+			virtual const std::shared_ptr<Subset<uml::ConnectorEnd, uml::Element>>& getEnd() const = 0;
 			/*!
 			A Connector may be redefined when its containing Classifier is specialized. The redefining Connector may have a type that specializes the type of the redefined Connector. The types of the ConnectorEnds of the redefining Connector may specialize the types of the ConnectorEnds of the redefined Connector. The properties of the ConnectorEnds of the redefining Connector may be replaced.
 			<p>From package UML::StructuredClassifiers.</p>
 			*/
 			
-			virtual std::shared_ptr<Subset<uml::Connector, uml::RedefinableElement>> getRedefinedConnector() const = 0;
+			virtual const std::shared_ptr<Subset<uml::Connector, uml::RedefinableElement>>& getRedefinedConnector() const = 0;
 			virtual std::weak_ptr<uml::StructuredClassifier> getStructuredClassifier() const = 0;
 			virtual void setStructuredClassifier(std::weak_ptr<uml::StructuredClassifier>) = 0;
 			/*!
@@ -144,7 +144,7 @@ namespace uml
 			<p>From package UML::StructuredClassifiers.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::Association> getType() const = 0;
+			virtual const std::shared_ptr<uml::Association>& getType() const = 0;
 			/*!
 			An optional Association that classifies links corresponding to this Connector.
 			<p>From package UML::StructuredClassifiers.</p>

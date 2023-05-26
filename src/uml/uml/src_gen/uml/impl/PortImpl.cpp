@@ -310,7 +310,7 @@ void PortImpl::setIsService(bool _isService)
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference protocol */
-std::shared_ptr<uml::ProtocolStateMachine> PortImpl::getProtocol() const
+const std::shared_ptr<uml::ProtocolStateMachine>& PortImpl::getProtocol() const
 {
     return m_protocol;
 }
@@ -321,7 +321,7 @@ void PortImpl::setProtocol(const std::shared_ptr<uml::ProtocolStateMachine>& _pr
 }
 
 /* Getter & Setter for reference provided */
-std::shared_ptr<Bag<uml::Interface>> PortImpl::getProvided() const
+const std::shared_ptr<Bag<uml::Interface>>& PortImpl::getProvided() const
 {
 	if(m_provided == nullptr)
 	{
@@ -333,7 +333,7 @@ std::shared_ptr<Bag<uml::Interface>> PortImpl::getProvided() const
 }
 
 /* Getter & Setter for reference redefinedPort */
-std::shared_ptr<Subset<uml::Port, uml::Property /*Subset does not reference a union*/>> PortImpl::getRedefinedPort() const
+const std::shared_ptr<Subset<uml::Port, uml::Property /*Subset does not reference a union*/>>& PortImpl::getRedefinedPort() const
 {
 	if(m_redefinedPort == nullptr)
 	{
@@ -354,7 +354,7 @@ std::shared_ptr<Subset<uml::Port, uml::Property /*Subset does not reference a un
 }
 
 /* Getter & Setter for reference required */
-std::shared_ptr<Bag<uml::Interface>> PortImpl::getRequired() const
+const std::shared_ptr<Bag<uml::Interface>>& PortImpl::getRequired() const
 {
 	if(m_required == nullptr)
 	{

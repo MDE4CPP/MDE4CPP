@@ -285,7 +285,7 @@ bool StateMachineImpl::ancestor(const std::shared_ptr<uml::Vertex>& s1, const st
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference connectionPoint */
-std::shared_ptr<Subset<uml::Pseudostate, uml::NamedElement>> StateMachineImpl::getConnectionPoint() const
+const std::shared_ptr<Subset<uml::Pseudostate, uml::NamedElement>>& StateMachineImpl::getConnectionPoint() const
 {
 	if(m_connectionPoint == nullptr)
 	{
@@ -306,7 +306,7 @@ std::shared_ptr<Subset<uml::Pseudostate, uml::NamedElement>> StateMachineImpl::g
 }
 
 /* Getter & Setter for reference extendedStateMachine */
-std::shared_ptr<Bag<uml::StateMachine>> StateMachineImpl::getExtendedStateMachine() const
+const std::shared_ptr<Bag<uml::StateMachine>>& StateMachineImpl::getExtendedStateMachine() const
 {
 	//Cast conversion from redefined container reference Behavior::redefinedBehavior 
 	std::shared_ptr<Bag<uml::StateMachine>> extendedStateMachine(new Bag<uml::StateMachine>());
@@ -328,7 +328,7 @@ std::shared_ptr<Bag<uml::StateMachine>> StateMachineImpl::getExtendedStateMachin
 }
 
 /* Getter & Setter for reference region */
-std::shared_ptr<Subset<uml::Region, uml::NamedElement>> StateMachineImpl::getRegion() const
+const std::shared_ptr<Subset<uml::Region, uml::NamedElement>>& StateMachineImpl::getRegion() const
 {
 	if(m_region == nullptr)
 	{
@@ -349,7 +349,7 @@ std::shared_ptr<Subset<uml::Region, uml::NamedElement>> StateMachineImpl::getReg
 }
 
 /* Getter & Setter for reference submachineState */
-std::shared_ptr<Bag<uml::State>> StateMachineImpl::getSubmachineState() const
+const std::shared_ptr<Bag<uml::State>>& StateMachineImpl::getSubmachineState() const
 {
 	if(m_submachineState == nullptr)
 	{

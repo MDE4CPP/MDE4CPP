@@ -626,7 +626,7 @@ void ActivityNodeActivationGroupImpl::setContainingNodeActivation(std::weak_ptr<
 }
 
 /* Getter & Setter for reference edgeInstances */
-std::shared_ptr<Bag<fUML::Semantics::Activities::ActivityEdgeInstance>> ActivityNodeActivationGroupImpl::getEdgeInstances() const
+const std::shared_ptr<Bag<fUML::Semantics::Activities::ActivityEdgeInstance>>& ActivityNodeActivationGroupImpl::getEdgeInstances() const
 {
 	if(m_edgeInstances == nullptr)
 	{
@@ -638,7 +638,7 @@ std::shared_ptr<Bag<fUML::Semantics::Activities::ActivityEdgeInstance>> Activity
 }
 
 /* Getter & Setter for reference nodeActivations */
-std::shared_ptr<Bag<fUML::Semantics::Activities::ActivityNodeActivation>> ActivityNodeActivationGroupImpl::getNodeActivations() const
+const std::shared_ptr<Bag<fUML::Semantics::Activities::ActivityNodeActivation>>& ActivityNodeActivationGroupImpl::getNodeActivations() const
 {
 	if(m_nodeActivations == nullptr)
 	{
@@ -650,7 +650,7 @@ std::shared_ptr<Bag<fUML::Semantics::Activities::ActivityNodeActivation>> Activi
 }
 
 /* Getter & Setter for reference suspendedActivations */
-std::shared_ptr<Bag<fUML::Semantics::Activities::ActivityNodeActivation>> ActivityNodeActivationGroupImpl::getSuspendedActivations() const
+const std::shared_ptr<Bag<fUML::Semantics::Activities::ActivityNodeActivation>>& ActivityNodeActivationGroupImpl::getSuspendedActivations() const
 {
 	if(m_suspendedActivations == nullptr)
 	{

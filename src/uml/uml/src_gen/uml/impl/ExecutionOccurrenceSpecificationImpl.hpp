@@ -63,7 +63,7 @@ namespace uml
 			<p>From package UML::Interactions.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::ExecutionSpecification> getExecution() const ;
+			virtual const std::shared_ptr<uml::ExecutionSpecification>& getExecution() const ;
 			/*!
 			References the execution specification describing the execution that is started or finished at this execution event.
 			<p>From package UML::Interactions.</p>

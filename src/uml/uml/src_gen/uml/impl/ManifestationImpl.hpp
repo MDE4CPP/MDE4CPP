@@ -63,7 +63,7 @@ namespace uml
 			<p>From package UML::Deployments.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::PackageableElement> getUtilizedElement() const ;
+			virtual const std::shared_ptr<uml::PackageableElement>& getUtilizedElement() const ;
 			/*!
 			The model element that is utilized in the manifestation in an Artifact.
 			<p>From package UML::Deployments.</p>

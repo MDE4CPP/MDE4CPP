@@ -63,19 +63,19 @@ namespace uml
 			<p>From package UML::Interactions.</p>
 			*/
 			
-			virtual std::shared_ptr<Subset<uml::Gate, uml::Element>> getActualGate() const ;
+			virtual const std::shared_ptr<Subset<uml::Gate, uml::Element>>& getActualGate() const ;
 			/*!
 			The actual arguments of the Interaction.
 			<p>From package UML::Interactions.</p>
 			*/
 			
-			virtual std::shared_ptr<Subset<uml::ValueSpecification, uml::Element>> getArgument() const ;
+			virtual const std::shared_ptr<Subset<uml::ValueSpecification, uml::Element>>& getArgument() const ;
 			/*!
 			Refers to the Interaction that defines its meaning.
 			<p>From package UML::Interactions.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::Interaction> getRefersTo() const ;
+			virtual const std::shared_ptr<uml::Interaction>& getRefersTo() const ;
 			/*!
 			Refers to the Interaction that defines its meaning.
 			<p>From package UML::Interactions.</p>
@@ -87,7 +87,7 @@ namespace uml
 			<p>From package UML::Interactions.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::ValueSpecification> getReturnValue() const ;
+			virtual const std::shared_ptr<uml::ValueSpecification>& getReturnValue() const ;
 			/*!
 			The value of the executed Interaction.
 			<p>From package UML::Interactions.</p>
@@ -99,7 +99,7 @@ namespace uml
 			<p>From package UML::Interactions.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::Property> getReturnValueRecipient() const ;
+			virtual const std::shared_ptr<uml::Property>& getReturnValueRecipient() const ;
 			/*!
 			The recipient of the return value.
 			<p>From package UML::Interactions.</p>

@@ -98,43 +98,43 @@ namespace uml
 			<p>From package UML::InformationFlows.</p>
 			*/
 			
-			virtual std::shared_ptr<Bag<uml::Classifier>> getConveyed() const = 0;
+			virtual const std::shared_ptr<Bag<uml::Classifier>>& getConveyed() const = 0;
 			/*!
 			Defines from which source the conveyed InformationItems are initiated.
 			<p>From package UML::InformationFlows.</p>
 			*/
 			
-			virtual std::shared_ptr<Subset<uml::NamedElement, uml::Element>> getInformationSource() const = 0;
+			virtual const std::shared_ptr<Subset<uml::NamedElement, uml::Element>>& getInformationSource() const = 0;
 			/*!
 			Defines to which target the conveyed InformationItems are directed.
 			<p>From package UML::InformationFlows.</p>
 			*/
 			
-			virtual std::shared_ptr<Subset<uml::NamedElement, uml::Element>> getInformationTarget() const = 0;
+			virtual const std::shared_ptr<Subset<uml::NamedElement, uml::Element>>& getInformationTarget() const = 0;
 			/*!
 			Determines which Relationship will realize the specified flow.
 			<p>From package UML::InformationFlows.</p>
 			*/
 			
-			virtual std::shared_ptr<Bag<uml::Relationship>> getRealization() const = 0;
+			virtual const std::shared_ptr<Bag<uml::Relationship>>& getRealization() const = 0;
 			/*!
 			Determines which ActivityEdges will realize the specified flow.
 			<p>From package UML::InformationFlows.</p>
 			*/
 			
-			virtual std::shared_ptr<Bag<uml::ActivityEdge>> getRealizingActivityEdge() const = 0;
+			virtual const std::shared_ptr<Bag<uml::ActivityEdge>>& getRealizingActivityEdge() const = 0;
 			/*!
 			Determines which Connectors will realize the specified flow.
 			<p>From package UML::InformationFlows.</p>
 			*/
 			
-			virtual std::shared_ptr<Bag<uml::Connector>> getRealizingConnector() const = 0;
+			virtual const std::shared_ptr<Bag<uml::Connector>>& getRealizingConnector() const = 0;
 			/*!
 			Determines which Messages will realize the specified flow.
 			<p>From package UML::InformationFlows.</p>
 			*/
 			
-			virtual std::shared_ptr<Bag<uml::Message>> getRealizingMessage() const = 0;
+			virtual const std::shared_ptr<Bag<uml::Message>>& getRealizingMessage() const = 0;
 
 			//*********************************
 			// Union Reference Getters

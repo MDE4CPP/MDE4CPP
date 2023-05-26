@@ -145,7 +145,7 @@ void InvOrDefExpImpl::setName(std::string _name)
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference referredExpression */
-std::shared_ptr<ocl::Expressions::OclExpression> InvOrDefExpImpl::getReferredExpression() const
+const std::shared_ptr<ocl::Expressions::OclExpression>& InvOrDefExpImpl::getReferredExpression() const
 {
     return m_referredExpression;
 }

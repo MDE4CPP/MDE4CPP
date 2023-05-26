@@ -180,7 +180,7 @@ InteractionFragmentImpl& InteractionFragmentImpl::operator=(const InteractionFra
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference covered */
-std::shared_ptr<Bag<uml::Lifeline>> InteractionFragmentImpl::getCovered() const
+const std::shared_ptr<Bag<uml::Lifeline>>& InteractionFragmentImpl::getCovered() const
 {
 	if(m_covered == nullptr)
 	{
@@ -214,7 +214,7 @@ void InteractionFragmentImpl::setEnclosingOperand(std::weak_ptr<uml::Interaction
 }
 
 /* Getter & Setter for reference generalOrdering */
-std::shared_ptr<Subset<uml::GeneralOrdering, uml::Element>> InteractionFragmentImpl::getGeneralOrdering() const
+const std::shared_ptr<Subset<uml::GeneralOrdering, uml::Element>>& InteractionFragmentImpl::getGeneralOrdering() const
 {
 	if(m_generalOrdering == nullptr)
 	{

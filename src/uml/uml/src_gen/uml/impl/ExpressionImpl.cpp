@@ -213,7 +213,7 @@ void ExpressionImpl::setSymbol(std::string _symbol)
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference operand */
-std::shared_ptr<Subset<uml::ValueSpecification, uml::Element>> ExpressionImpl::getOperand() const
+const std::shared_ptr<Subset<uml::ValueSpecification, uml::Element>>& ExpressionImpl::getOperand() const
 {
 	if(m_operand == nullptr)
 	{

@@ -168,7 +168,7 @@ std::shared_ptr<ecore::EObject> StartClassifierBehaviorActionImpl::copy() const
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference object */
-std::shared_ptr<uml::InputPin> StartClassifierBehaviorActionImpl::getObject() const
+const std::shared_ptr<uml::InputPin>& StartClassifierBehaviorActionImpl::getObject() const
 {
     return m_object;
 }

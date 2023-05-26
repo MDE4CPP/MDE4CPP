@@ -51,7 +51,7 @@ namespace ocl::Evaluations
 			//*********************************
 			// Reference Getters & Setters
 			//*********************************
-			virtual std::shared_ptr<ecore::EObject> getElement() const ;
+			virtual const std::shared_ptr<ecore::EObject>& getElement() const ;
 			virtual void setElement(const std::shared_ptr<ecore::EObject>&) ;
 			
 			//*********************************

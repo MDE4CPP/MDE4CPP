@@ -180,7 +180,7 @@ void RemoveStructuralFeatureValueActionImpl::setIsRemoveDuplicates(bool _isRemov
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference removeAt */
-std::shared_ptr<uml::InputPin> RemoveStructuralFeatureValueActionImpl::getRemoveAt() const
+const std::shared_ptr<uml::InputPin>& RemoveStructuralFeatureValueActionImpl::getRemoveAt() const
 {
     return m_removeAt;
 }

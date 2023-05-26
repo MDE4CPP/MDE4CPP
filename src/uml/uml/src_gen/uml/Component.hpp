@@ -175,25 +175,25 @@ namespace uml
 			<p>From package UML::StructuredClassifiers.</p>
 			*/
 			
-			virtual std::shared_ptr<Subset<uml::PackageableElement, uml::NamedElement>> getPackagedElement() const = 0;
+			virtual const std::shared_ptr<Subset<uml::PackageableElement, uml::NamedElement>>& getPackagedElement() const = 0;
 			/*!
 			The Interfaces that the Component exposes to its environment. These Interfaces may be Realized by the Component or any of its realizingClassifiers, or they may be the Interfaces that are provided by its public Ports.
 			<p>From package UML::StructuredClassifiers.</p>
 			*/
 			
-			virtual std::shared_ptr<Bag<uml::Interface>> getProvided() const = 0;
+			virtual const std::shared_ptr<Bag<uml::Interface>>& getProvided() const = 0;
 			/*!
 			The set of Realizations owned by the Component. Realizations reference the Classifiers of which the Component is an abstraction; i.e., that realize its behavior.
 			<p>From package UML::StructuredClassifiers.</p>
 			*/
 			
-			virtual std::shared_ptr<Subset<uml::ComponentRealization, uml::Element>> getRealization() const = 0;
+			virtual const std::shared_ptr<Subset<uml::ComponentRealization, uml::Element>>& getRealization() const = 0;
 			/*!
 			The Interfaces that the Component requires from other Components in its environment in order to be able to offer its full set of provided functionality. These Interfaces may be used by the Component or any of its realizingClassifiers, or they may be the Interfaces that are required by its public Ports.
 			<p>From package UML::StructuredClassifiers.</p>
 			*/
 			
-			virtual std::shared_ptr<Bag<uml::Interface>> getRequired() const = 0;
+			virtual const std::shared_ptr<Bag<uml::Interface>>& getRequired() const = 0;
 
 			//*********************************
 			// Union Reference Getters

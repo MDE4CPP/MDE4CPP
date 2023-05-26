@@ -169,7 +169,7 @@ std::shared_ptr<ecore::EObject> AcceptCallActionImpl::copy() const
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference returnInformation */
-std::shared_ptr<uml::OutputPin> AcceptCallActionImpl::getReturnInformation() const
+const std::shared_ptr<uml::OutputPin>& AcceptCallActionImpl::getReturnInformation() const
 {
     return m_returnInformation;
 }

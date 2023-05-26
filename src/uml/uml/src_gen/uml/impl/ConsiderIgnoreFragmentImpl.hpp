@@ -63,7 +63,7 @@ namespace uml
 			<p>From package UML::Interactions.</p>
 			*/
 			
-			virtual std::shared_ptr<Bag<uml::NamedElement>> getMessage() const ;
+			virtual const std::shared_ptr<Bag<uml::NamedElement>>& getMessage() const ;
 			
 			//*********************************
 			// Union Reference Getters

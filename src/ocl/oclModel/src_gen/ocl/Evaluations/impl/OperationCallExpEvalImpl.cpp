@@ -138,7 +138,7 @@ void OperationCallExpEvalImpl::setReferredOperation(std::string _referredOperati
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference arguments */
-std::shared_ptr<Bag<ocl::Evaluations::OclExpEval>> OperationCallExpEvalImpl::getArguments() const
+const std::shared_ptr<Bag<ocl::Evaluations::OclExpEval>>& OperationCallExpEvalImpl::getArguments() const
 {
 	if(m_arguments == nullptr)
 	{

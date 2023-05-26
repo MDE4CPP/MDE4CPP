@@ -102,7 +102,7 @@ namespace uml
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::OutputPin> getResult() const = 0;
+			virtual const std::shared_ptr<uml::OutputPin>& getResult() const = 0;
 			/*!
 			The OutputPin on which is put the input object as modified by the ClearStructuralFeatureAction.
 			<p>From package UML::Actions.</p>

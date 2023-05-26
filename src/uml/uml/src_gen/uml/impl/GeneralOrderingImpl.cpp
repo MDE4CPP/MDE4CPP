@@ -136,7 +136,7 @@ std::shared_ptr<ecore::EObject> GeneralOrderingImpl::copy() const
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference after */
-std::shared_ptr<uml::OccurrenceSpecification> GeneralOrderingImpl::getAfter() const
+const std::shared_ptr<uml::OccurrenceSpecification>& GeneralOrderingImpl::getAfter() const
 {
     return m_after;
 }
@@ -147,7 +147,7 @@ void GeneralOrderingImpl::setAfter(const std::shared_ptr<uml::OccurrenceSpecific
 }
 
 /* Getter & Setter for reference before */
-std::shared_ptr<uml::OccurrenceSpecification> GeneralOrderingImpl::getBefore() const
+const std::shared_ptr<uml::OccurrenceSpecification>& GeneralOrderingImpl::getBefore() const
 {
     return m_before;
 }

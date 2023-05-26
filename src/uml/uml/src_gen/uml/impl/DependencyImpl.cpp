@@ -207,7 +207,7 @@ std::shared_ptr<ecore::EObject> DependencyImpl::copy() const
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference client */
-std::shared_ptr<SubsetUnion<uml::NamedElement, uml::Element>> DependencyImpl::getClient() const
+const std::shared_ptr<SubsetUnion<uml::NamedElement, uml::Element>>& DependencyImpl::getClient() const
 {
 	if(m_client == nullptr)
 	{
@@ -228,7 +228,7 @@ std::shared_ptr<SubsetUnion<uml::NamedElement, uml::Element>> DependencyImpl::ge
 }
 
 /* Getter & Setter for reference supplier */
-std::shared_ptr<SubsetUnion<uml::NamedElement, uml::Element>> DependencyImpl::getSupplier() const
+const std::shared_ptr<SubsetUnion<uml::NamedElement, uml::Element>>& DependencyImpl::getSupplier() const
 {
 	if(m_supplier == nullptr)
 	{

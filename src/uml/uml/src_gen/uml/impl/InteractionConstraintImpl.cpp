@@ -178,7 +178,7 @@ std::shared_ptr<ecore::EObject> InteractionConstraintImpl::copy() const
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference maxint */
-std::shared_ptr<uml::ValueSpecification> InteractionConstraintImpl::getMaxint() const
+const std::shared_ptr<uml::ValueSpecification>& InteractionConstraintImpl::getMaxint() const
 {
     return m_maxint;
 }
@@ -189,7 +189,7 @@ void InteractionConstraintImpl::setMaxint(const std::shared_ptr<uml::ValueSpecif
 }
 
 /* Getter & Setter for reference minint */
-std::shared_ptr<uml::ValueSpecification> InteractionConstraintImpl::getMinint() const
+const std::shared_ptr<uml::ValueSpecification>& InteractionConstraintImpl::getMinint() const
 {
     return m_minint;
 }

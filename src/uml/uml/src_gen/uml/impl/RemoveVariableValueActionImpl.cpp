@@ -180,7 +180,7 @@ void RemoveVariableValueActionImpl::setIsRemoveDuplicates(bool _isRemoveDuplicat
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference removeAt */
-std::shared_ptr<uml::InputPin> RemoveVariableValueActionImpl::getRemoveAt() const
+const std::shared_ptr<uml::InputPin>& RemoveVariableValueActionImpl::getRemoveAt() const
 {
     return m_removeAt;
 }

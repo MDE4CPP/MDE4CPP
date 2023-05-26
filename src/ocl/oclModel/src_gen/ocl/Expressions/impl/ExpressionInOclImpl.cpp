@@ -160,7 +160,7 @@ std::shared_ptr<ecore::EObject> ExpressionInOclImpl::copy() const
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference bodyExpression */
-std::shared_ptr<ocl::Expressions::OclExpression> ExpressionInOclImpl::getBodyExpression() const
+const std::shared_ptr<ocl::Expressions::OclExpression>& ExpressionInOclImpl::getBodyExpression() const
 {
     return m_bodyExpression;
 }
@@ -171,7 +171,7 @@ void ExpressionInOclImpl::setBodyExpression(const std::shared_ptr<ocl::Expressio
 }
 
 /* Getter & Setter for reference contextVariable */
-std::shared_ptr<ecore::ETypedElement> ExpressionInOclImpl::getContextVariable() const
+const std::shared_ptr<ecore::ETypedElement>& ExpressionInOclImpl::getContextVariable() const
 {
     return m_contextVariable;
 }
@@ -182,7 +182,7 @@ void ExpressionInOclImpl::setContextVariable(const std::shared_ptr<ecore::ETyped
 }
 
 /* Getter & Setter for reference parameterVariable */
-std::shared_ptr<Bag<ecore::ETypedElement>> ExpressionInOclImpl::getParameterVariable() const
+const std::shared_ptr<Bag<ecore::ETypedElement>>& ExpressionInOclImpl::getParameterVariable() const
 {
 	if(m_parameterVariable == nullptr)
 	{
@@ -194,7 +194,7 @@ std::shared_ptr<Bag<ecore::ETypedElement>> ExpressionInOclImpl::getParameterVari
 }
 
 /* Getter & Setter for reference resultVariable */
-std::shared_ptr<ecore::ETypedElement> ExpressionInOclImpl::getResultVariable() const
+const std::shared_ptr<ecore::ETypedElement>& ExpressionInOclImpl::getResultVariable() const
 {
     return m_resultVariable;
 }

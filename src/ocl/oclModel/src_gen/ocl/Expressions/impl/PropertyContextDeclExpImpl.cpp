@@ -227,7 +227,7 @@ void PropertyContextDeclExpImpl::setPropName(std::string _propName)
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference initOrDerValues */
-std::shared_ptr<ocl::Expressions::InitOrDerValueListExp> PropertyContextDeclExpImpl::getInitOrDerValues() const
+const std::shared_ptr<ocl::Expressions::InitOrDerValueListExp>& PropertyContextDeclExpImpl::getInitOrDerValues() const
 {
     return m_initOrDerValues;
 }
@@ -238,7 +238,7 @@ void PropertyContextDeclExpImpl::setInitOrDerValues(const std::shared_ptr<ocl::E
 }
 
 /* Getter & Setter for reference propType */
-std::shared_ptr<ocl::Expressions::TypeExp> PropertyContextDeclExpImpl::getPropType() const
+const std::shared_ptr<ocl::Expressions::TypeExp>& PropertyContextDeclExpImpl::getPropType() const
 {
     return m_propType;
 }

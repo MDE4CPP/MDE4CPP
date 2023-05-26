@@ -191,7 +191,7 @@ void DestroyObjectActionImpl::setIsDestroyOwnedObjects(bool _isDestroyOwnedObjec
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference target */
-std::shared_ptr<uml::InputPin> DestroyObjectActionImpl::getTarget() const
+const std::shared_ptr<uml::InputPin>& DestroyObjectActionImpl::getTarget() const
 {
     return m_target;
 }

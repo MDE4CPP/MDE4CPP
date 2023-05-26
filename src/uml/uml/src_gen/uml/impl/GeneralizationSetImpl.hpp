@@ -87,13 +87,13 @@ namespace uml
 			<p>From package UML::Classification.</p>
 			*/
 			
-			virtual std::shared_ptr<Bag<uml::Generalization>> getGeneralization() const ;
+			virtual const std::shared_ptr<Bag<uml::Generalization>>& getGeneralization() const ;
 			/*!
 			Designates the Classifier that is defined as the power type for the associated GeneralizationSet, if there is one.
 			<p>From package UML::Classification.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::Classifier> getPowertype() const ;
+			virtual const std::shared_ptr<uml::Classifier>& getPowertype() const ;
 			/*!
 			Designates the Classifier that is defined as the power type for the associated GeneralizationSet, if there is one.
 			<p>From package UML::Classification.</p>

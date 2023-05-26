@@ -162,7 +162,7 @@ std::shared_ptr<Bag<uml::InputPin>> LinkEndDataImpl::allPins()
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference end */
-std::shared_ptr<uml::Property> LinkEndDataImpl::getEnd() const
+const std::shared_ptr<uml::Property>& LinkEndDataImpl::getEnd() const
 {
     return m_end;
 }
@@ -173,7 +173,7 @@ void LinkEndDataImpl::setEnd(const std::shared_ptr<uml::Property>& _end)
 }
 
 /* Getter & Setter for reference qualifier */
-std::shared_ptr<Subset<uml::QualifierValue, uml::Element>> LinkEndDataImpl::getQualifier() const
+const std::shared_ptr<Subset<uml::QualifierValue, uml::Element>>& LinkEndDataImpl::getQualifier() const
 {
 	if(m_qualifier == nullptr)
 	{
@@ -194,7 +194,7 @@ std::shared_ptr<Subset<uml::QualifierValue, uml::Element>> LinkEndDataImpl::getQ
 }
 
 /* Getter & Setter for reference value */
-std::shared_ptr<uml::InputPin> LinkEndDataImpl::getValue() const
+const std::shared_ptr<uml::InputPin>& LinkEndDataImpl::getValue() const
 {
     return m_value;
 }

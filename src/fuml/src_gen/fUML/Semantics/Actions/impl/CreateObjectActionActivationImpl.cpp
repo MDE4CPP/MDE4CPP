@@ -182,7 +182,7 @@ else
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference createObjectAction */
-std::shared_ptr<uml::CreateObjectAction> CreateObjectActionActivationImpl::getCreateObjectAction() const
+const std::shared_ptr<uml::CreateObjectAction>& CreateObjectActionActivationImpl::getCreateObjectAction() const
 {
     return m_createObjectAction;
 }
@@ -193,7 +193,7 @@ void CreateObjectActionActivationImpl::setCreateObjectAction(const std::shared_p
 	fUML::Semantics::Actions::ActionActivationImpl::setAction(_createObjectAction);
 }
 /*Additional Setter for redefined reference 'ActionActivation::action'*/
-void CreateObjectActionActivationImpl::setAction(std::shared_ptr<uml::Action> _action)
+void CreateObjectActionActivationImpl::setAction(const std::shared_ptr<uml::Action>& _action)
 {
 	std::shared_ptr<uml::CreateObjectAction> _createObjectAction = std::dynamic_pointer_cast<uml::CreateObjectAction>(_action);
 	if(_createObjectAction)
@@ -209,7 +209,7 @@ void CreateObjectActionActivationImpl::setAction(std::shared_ptr<uml::Action> _a
 	}
 }
 /*Additional Setter for redefined reference 'ActivityNodeActivation::node'*/
-void CreateObjectActionActivationImpl::setNode(std::shared_ptr<uml::ActivityNode> _node)
+void CreateObjectActionActivationImpl::setNode(const std::shared_ptr<uml::ActivityNode>& _node)
 {
 	std::shared_ptr<uml::CreateObjectAction> _createObjectAction = std::dynamic_pointer_cast<uml::CreateObjectAction>(_node);
 	if(_createObjectAction)

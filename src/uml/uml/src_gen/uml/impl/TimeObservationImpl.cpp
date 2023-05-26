@@ -164,7 +164,7 @@ void TimeObservationImpl::setFirstEvent(bool _firstEvent)
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference event */
-std::shared_ptr<uml::NamedElement> TimeObservationImpl::getEvent() const
+const std::shared_ptr<uml::NamedElement>& TimeObservationImpl::getEvent() const
 {
     return m_event;
 }

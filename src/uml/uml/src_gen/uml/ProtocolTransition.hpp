@@ -108,7 +108,7 @@ namespace uml
 			<p>From package UML::StateMachines.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::Constraint> getPostCondition() const = 0;
+			virtual const std::shared_ptr<uml::Constraint>& getPostCondition() const = 0;
 			/*!
 			Specifies the post condition of the Transition which is the Condition that should be obtained once the Transition is triggered. This post condition is part of the post condition of the Operation connected to the Transition.
 			<p>From package UML::StateMachines.</p>
@@ -120,7 +120,7 @@ namespace uml
 			<p>From package UML::StateMachines.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::Constraint> getPreCondition() const = 0;
+			virtual const std::shared_ptr<uml::Constraint>& getPreCondition() const = 0;
 			/*!
 			Specifies the precondition of the Transition. It specifies the Condition that should be verified before triggering the Transition. This guard condition added to the source State will be evaluated as part of the precondition of the Operation referred by the Transition if any.
 			<p>From package UML::StateMachines.</p>
@@ -132,7 +132,7 @@ namespace uml
 			<p>From package UML::StateMachines.</p>
 			*/
 			
-			virtual std::shared_ptr<Bag<uml::Operation>> getReferred() const = 0;
+			virtual const std::shared_ptr<Bag<uml::Operation>>& getReferred() const = 0;
 
 			//*********************************
 			// Union Reference Getters

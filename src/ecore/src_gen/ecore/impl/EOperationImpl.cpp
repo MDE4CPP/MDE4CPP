@@ -260,7 +260,7 @@ std::weak_ptr<ecore::EClass> EOperationImpl::getEContainingClass() const
 }
 
 /* Getter & Setter for reference eExceptions */
-std::shared_ptr<Bag<ecore::EClassifier>> EOperationImpl::getEExceptions() const
+const std::shared_ptr<Bag<ecore::EClassifier>>& EOperationImpl::getEExceptions() const
 {
 	if(m_eExceptions == nullptr)
 	{
@@ -272,7 +272,7 @@ std::shared_ptr<Bag<ecore::EClassifier>> EOperationImpl::getEExceptions() const
 }
 
 /* Getter & Setter for reference eGenericExceptions */
-std::shared_ptr<Bag<ecore::EGenericType>> EOperationImpl::getEGenericExceptions() const
+const std::shared_ptr<Bag<ecore::EGenericType>>& EOperationImpl::getEGenericExceptions() const
 {
 	if(m_eGenericExceptions == nullptr)
 	{
@@ -284,7 +284,7 @@ std::shared_ptr<Bag<ecore::EGenericType>> EOperationImpl::getEGenericExceptions(
 }
 
 /* Getter & Setter for reference eParameters */
-std::shared_ptr<Subset<ecore::EParameter, ecore::EObject>> EOperationImpl::getEParameters() const
+const std::shared_ptr<Subset<ecore::EParameter, ecore::EObject>>& EOperationImpl::getEParameters() const
 {
 	if(m_eParameters == nullptr)
 	{
@@ -305,7 +305,7 @@ std::shared_ptr<Subset<ecore::EParameter, ecore::EObject>> EOperationImpl::getEP
 }
 
 /* Getter & Setter for reference eTypeParameters */
-std::shared_ptr<Bag<ecore::ETypeParameter>> EOperationImpl::getETypeParameters() const
+const std::shared_ptr<Bag<ecore::ETypeParameter>>& EOperationImpl::getETypeParameters() const
 {
 	if(m_eTypeParameters == nullptr)
 	{

@@ -150,7 +150,7 @@ bool ObjectTokenImpl::isControl()
 // Attribute Getters & Setters
 //*********************************
 /* Getter & Setter for attribute value */
-std::shared_ptr<Any> ObjectTokenImpl::getValue() const 
+const std::shared_ptr<Any>& ObjectTokenImpl::getValue() const 
 {
 	return m_value;
 }
@@ -209,7 +209,7 @@ void ObjectTokenImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XL
 		if ( iter != attr_list.end() )
 		{
 			// TODO this attribute has a non handle type
-			std::cout << "| ERROR    | " << __PRETTY_FUNCTION__ << " handle type of 'value'" << " org.eclipse.emf.ecore.impl.EDataTypeImpl@4096aa05 (name: EJavaObject) (instanceClassName: java.lang.Object) (serializable: true)" << std::endl; 
+			std::cout << "| ERROR    | " << __PRETTY_FUNCTION__ << " handle type of 'value'" << " org.eclipse.emf.ecore.impl.EDataTypeImpl@12ffd1de (name: EJavaObject) (instanceClassName: java.lang.Object) (serializable: true)" << std::endl; 
 			std::shared_ptr<Any> value; 			this->setValue(value);
 		}
 	}

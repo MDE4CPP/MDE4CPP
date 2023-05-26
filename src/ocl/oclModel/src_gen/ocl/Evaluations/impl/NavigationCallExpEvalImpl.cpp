@@ -138,7 +138,7 @@ void NavigationCallExpEvalImpl::setNavigationSource(std::string _navigationSourc
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference qualifiers */
-std::shared_ptr<Bag<ocl::Evaluations::OclExpEval>> NavigationCallExpEvalImpl::getQualifiers() const
+const std::shared_ptr<Bag<ocl::Evaluations::OclExpEval>>& NavigationCallExpEvalImpl::getQualifiers() const
 {
 	if(m_qualifiers == nullptr)
 	{

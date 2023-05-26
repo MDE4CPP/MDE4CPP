@@ -119,11 +119,11 @@ namespace fUML::Semantics::Activities
 			//*********************************
 			virtual std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup> getGroup() const = 0;
 			virtual void setGroup(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup>) = 0;
-			virtual std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> getHeldTokens() const = 0;
-			virtual std::shared_ptr<Bag<fUML::Semantics::Activities::ActivityEdgeInstance>> getIncomingEdges() const = 0;
-			virtual std::shared_ptr<uml::ActivityNode> getNode() const = 0;
+			virtual const std::shared_ptr<Bag<fUML::Semantics::Activities::Token>>& getHeldTokens() const = 0;
+			virtual const std::shared_ptr<Bag<fUML::Semantics::Activities::ActivityEdgeInstance>>& getIncomingEdges() const = 0;
+			virtual const std::shared_ptr<uml::ActivityNode>& getNode() const = 0;
 			virtual void setNode(const std::shared_ptr<uml::ActivityNode>&) = 0;
-			virtual std::shared_ptr<Bag<fUML::Semantics::Activities::ActivityEdgeInstance>> getOutgoingEdges() const = 0;
+			virtual const std::shared_ptr<Bag<fUML::Semantics::Activities::ActivityEdgeInstance>>& getOutgoingEdges() const = 0;
 
 			//*********************************
 			// Union Reference Getters

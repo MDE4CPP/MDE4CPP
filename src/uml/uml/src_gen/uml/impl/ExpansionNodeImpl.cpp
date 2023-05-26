@@ -165,7 +165,7 @@ std::shared_ptr<ecore::EObject> ExpansionNodeImpl::copy() const
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference regionAsInput */
-std::shared_ptr<uml::ExpansionRegion> ExpansionNodeImpl::getRegionAsInput() const
+const std::shared_ptr<uml::ExpansionRegion>& ExpansionNodeImpl::getRegionAsInput() const
 {
     return m_regionAsInput;
 }
@@ -176,7 +176,7 @@ void ExpansionNodeImpl::setRegionAsInput(const std::shared_ptr<uml::ExpansionReg
 }
 
 /* Getter & Setter for reference regionAsOutput */
-std::shared_ptr<uml::ExpansionRegion> ExpansionNodeImpl::getRegionAsOutput() const
+const std::shared_ptr<uml::ExpansionRegion>& ExpansionNodeImpl::getRegionAsOutput() const
 {
     return m_regionAsOutput;
 }

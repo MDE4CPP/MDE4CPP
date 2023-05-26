@@ -248,7 +248,7 @@ std::shared_ptr<uml::Classifier> RegionImpl::redefinitionContext()
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference extendedRegion */
-std::shared_ptr<uml::Region> RegionImpl::getExtendedRegion() const
+const std::shared_ptr<uml::Region>& RegionImpl::getExtendedRegion() const
 {
     return m_extendedRegion;
 }
@@ -281,7 +281,7 @@ void RegionImpl::setStateMachine(std::weak_ptr<uml::StateMachine> _stateMachine)
 }
 
 /* Getter & Setter for reference subvertex */
-std::shared_ptr<Subset<uml::Vertex, uml::NamedElement>> RegionImpl::getSubvertex() const
+const std::shared_ptr<Subset<uml::Vertex, uml::NamedElement>>& RegionImpl::getSubvertex() const
 {
 	if(m_subvertex == nullptr)
 	{
@@ -302,7 +302,7 @@ std::shared_ptr<Subset<uml::Vertex, uml::NamedElement>> RegionImpl::getSubvertex
 }
 
 /* Getter & Setter for reference transition */
-std::shared_ptr<Subset<uml::Transition, uml::NamedElement>> RegionImpl::getTransition() const
+const std::shared_ptr<Subset<uml::Transition, uml::NamedElement>>& RegionImpl::getTransition() const
 {
 	if(m_transition == nullptr)
 	{

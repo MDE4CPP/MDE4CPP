@@ -63,13 +63,13 @@ namespace uml
 			<p>From package UML::StateMachines.</p>
 			*/
 			
-			virtual std::shared_ptr<Bag<uml::Pseudostate>> getEntry() const ;
+			virtual const std::shared_ptr<Bag<uml::Pseudostate>>& getEntry() const ;
 			/*!
 			The exitPoints kind Pseudostates corresponding to this connection point.
 			<p>From package UML::StateMachines.</p>
 			*/
 			
-			virtual std::shared_ptr<Bag<uml::Pseudostate>> getExit() const ;
+			virtual const std::shared_ptr<Bag<uml::Pseudostate>>& getExit() const ;
 			/*!
 			The State in which the ConnectionPointReference is defined.
 			<p>From package UML::StateMachines.</p>

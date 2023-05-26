@@ -102,7 +102,7 @@ namespace fUML::Semantics::Actions
 			//*********************************
 			// Reference Getters & Setters
 			//*********************************
-			virtual std::shared_ptr<uml::CallBehaviorAction> getCallBehaviorAction() const = 0;
+			virtual const std::shared_ptr<uml::CallBehaviorAction>& getCallBehaviorAction() const = 0;
 			virtual void setCallBehaviorAction(const std::shared_ptr<uml::CallBehaviorAction>&) = 0;
 			/*Additional Setter for 'CallActionActivation::callAction' redefined by reference 'callBehaviorAction'*/
 			virtual void setCallAction(const std::shared_ptr<uml::CallAction>&) = 0;

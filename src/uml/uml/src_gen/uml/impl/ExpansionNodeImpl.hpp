@@ -63,7 +63,7 @@ namespace uml
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::ExpansionRegion> getRegionAsInput() const ;
+			virtual const std::shared_ptr<uml::ExpansionRegion>& getRegionAsInput() const ;
 			/*!
 			The ExpansionRegion for which the ExpansionNode is an input.
 			<p>From package UML::Actions.</p>
@@ -75,7 +75,7 @@ namespace uml
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::ExpansionRegion> getRegionAsOutput() const ;
+			virtual const std::shared_ptr<uml::ExpansionRegion>& getRegionAsOutput() const ;
 			/*!
 			The ExpansionRegion for which the ExpansionNode is an output.
 			<p>From package UML::Actions.</p>

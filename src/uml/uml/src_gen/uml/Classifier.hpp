@@ -300,50 +300,50 @@ namespace uml
 			<p>From package UML::Classification.</p>
 			*/
 			
-			virtual std::shared_ptr<SubsetUnion<uml::CollaborationUse, uml::Element>> getCollaborationUse() const = 0;
+			virtual const std::shared_ptr<SubsetUnion<uml::CollaborationUse, uml::Element>>& getCollaborationUse() const = 0;
 			
 			/*!
 			The generalizing Classifiers for this Classifier.
 			<p>From package UML::Classification.</p>
 			*/
 			
-			virtual std::shared_ptr<Bag<uml::Classifier>> getGeneral() const = 0;
+			virtual const std::shared_ptr<Bag<uml::Classifier>>& getGeneral() const = 0;
 			/*!
 			The Generalization relationships for this Classifier. These Generalizations navigate to more general Classifiers in the generalization hierarchy.
 			<p>From package UML::Classification.</p>
 			*/
 			
-			virtual std::shared_ptr<Subset<uml::Generalization, uml::Element>> getGeneralization() const = 0;
+			virtual const std::shared_ptr<Subset<uml::Generalization, uml::Element>>& getGeneralization() const = 0;
 			/*!
 			All elements inherited by this Classifier from its general Classifiers.
 			<p>From package UML::Classification.</p>
 			*/
 			
-			virtual std::shared_ptr<Subset<uml::NamedElement, uml::NamedElement>> getInheritedMember() const = 0;
+			virtual const std::shared_ptr<Subset<uml::NamedElement, uml::NamedElement>>& getInheritedMember() const = 0;
 			/*!
 			The UseCases owned by this classifier.
 			<p>From package UML::Classification.</p>
 			*/
 			
-			virtual std::shared_ptr<Subset<uml::UseCase, uml::NamedElement>> getOwnedUseCase() const = 0;
+			virtual const std::shared_ptr<Subset<uml::UseCase, uml::NamedElement>>& getOwnedUseCase() const = 0;
 			/*!
 			The GeneralizationSet of which this Classifier is a power type.
 			<p>From package UML::Classification.</p>
 			*/
 			
-			virtual std::shared_ptr<Bag<uml::GeneralizationSet>> getPowertypeExtent() const = 0;
+			virtual const std::shared_ptr<Bag<uml::GeneralizationSet>>& getPowertypeExtent() const = 0;
 			/*!
 			The Classifiers redefined by this Classifier.
 			<p>From package UML::Classification.</p>
 			*/
 			
-			virtual std::shared_ptr<SubsetUnion<uml::Classifier, uml::RedefinableElement>> getRedefinedClassifier() const = 0;
+			virtual const std::shared_ptr<SubsetUnion<uml::Classifier, uml::RedefinableElement>>& getRedefinedClassifier() const = 0;
 			/*!
 			A CollaborationUse which indicates the Collaboration that represents this Classifier.
 			<p>From package UML::Classification.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::CollaborationUse> getRepresentation() const = 0;
+			virtual const std::shared_ptr<uml::CollaborationUse>& getRepresentation() const = 0;
 			/*!
 			A CollaborationUse which indicates the Collaboration that represents this Classifier.
 			<p>From package UML::Classification.</p>
@@ -355,13 +355,13 @@ namespace uml
 			<p>From package UML::Classification.</p>
 			*/
 			
-			virtual std::shared_ptr<Subset<uml::Substitution, uml::Element>> getSubstitution() const = 0;
+			virtual const std::shared_ptr<Subset<uml::Substitution, uml::Element>>& getSubstitution() const = 0;
 			/*!
 			The set of UseCases for which this Classifier is the subject.
 			<p>From package UML::Classification.</p>
 			*/
 			
-			virtual std::shared_ptr<Bag<uml::UseCase>> getUseCase() const = 0;
+			virtual const std::shared_ptr<Bag<uml::UseCase>>& getUseCase() const = 0;
 
 			//*********************************
 			// Union Reference Getters

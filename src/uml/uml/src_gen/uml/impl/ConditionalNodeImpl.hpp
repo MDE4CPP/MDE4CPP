@@ -90,13 +90,13 @@ namespace uml
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual std::shared_ptr<Subset<uml::Clause, uml::Element>> getClause() const ;
+			virtual const std::shared_ptr<Subset<uml::Clause, uml::Element>>& getClause() const ;
 			/*!
 			The OutputPins that onto which are moved values from the bodyOutputs of the Clause selected for execution.
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual std::shared_ptr<Bag<uml::OutputPin>> getResult() const ;
+			virtual const std::shared_ptr<Bag<uml::OutputPin>>& getResult() const ;
 			
 			//*********************************
 			// Union Reference Getters

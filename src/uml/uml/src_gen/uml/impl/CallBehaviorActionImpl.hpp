@@ -63,7 +63,7 @@ namespace uml
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::Behavior> getBehavior() const ;
+			virtual const std::shared_ptr<uml::Behavior>& getBehavior() const ;
 			/*!
 			The Behavior being invoked.
 			<p>From package UML::Actions.</p>

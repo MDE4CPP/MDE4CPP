@@ -145,7 +145,7 @@ void EAttributeImpl::setID(bool _iD)
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference eAttributeType */
-std::shared_ptr<ecore::EDataType> EAttributeImpl::getEAttributeType() const
+const std::shared_ptr<ecore::EDataType>& EAttributeImpl::getEAttributeType() const
 {
     return m_eAttributeType;
 }

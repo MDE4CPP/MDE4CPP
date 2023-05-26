@@ -180,7 +180,7 @@ void AddVariableValueActionImpl::setIsReplaceAll(bool _isReplaceAll)
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference insertAt */
-std::shared_ptr<uml::InputPin> AddVariableValueActionImpl::getInsertAt() const
+const std::shared_ptr<uml::InputPin>& AddVariableValueActionImpl::getInsertAt() const
 {
     return m_insertAt;
 }

@@ -183,7 +183,7 @@ void TemplateBindingImpl::setBoundElement(std::weak_ptr<uml::TemplateableElement
 }
 
 /* Getter & Setter for reference parameterSubstitution */
-std::shared_ptr<Subset<uml::TemplateParameterSubstitution, uml::Element>> TemplateBindingImpl::getParameterSubstitution() const
+const std::shared_ptr<Subset<uml::TemplateParameterSubstitution, uml::Element>>& TemplateBindingImpl::getParameterSubstitution() const
 {
 	if(m_parameterSubstitution == nullptr)
 	{
@@ -204,7 +204,7 @@ std::shared_ptr<Subset<uml::TemplateParameterSubstitution, uml::Element>> Templa
 }
 
 /* Getter & Setter for reference signature */
-std::shared_ptr<uml::TemplateSignature> TemplateBindingImpl::getSignature() const
+const std::shared_ptr<uml::TemplateSignature>& TemplateBindingImpl::getSignature() const
 {
     return m_signature;
 }

@@ -160,7 +160,7 @@ std::shared_ptr<ecore::EObject> StateInvariantImpl::copy() const
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference invariant */
-std::shared_ptr<uml::Constraint> StateInvariantImpl::getInvariant() const
+const std::shared_ptr<uml::Constraint>& StateInvariantImpl::getInvariant() const
 {
     return m_invariant;
 }

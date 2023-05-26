@@ -128,7 +128,7 @@ std::shared_ptr<ecore::EObject> IterateExpEvalImpl::copy() const
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference result */
-std::shared_ptr<ocl::Evaluations::VariableDeclEval> IterateExpEvalImpl::getResult() const
+const std::shared_ptr<ocl::Evaluations::VariableDeclEval>& IterateExpEvalImpl::getResult() const
 {
     return m_result;
 }

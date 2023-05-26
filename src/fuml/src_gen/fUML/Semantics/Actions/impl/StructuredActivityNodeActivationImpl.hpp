@@ -67,7 +67,7 @@ namespace fUML::Semantics::Actions
 			//*********************************
 			// Reference Getters & Setters
 			//*********************************
-			virtual std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup> getActivationGroup() const ;
+			virtual const std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup>& getActivationGroup() const ;
 			virtual void setActivationGroup(const std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup>&) ;
 			
 			//*********************************

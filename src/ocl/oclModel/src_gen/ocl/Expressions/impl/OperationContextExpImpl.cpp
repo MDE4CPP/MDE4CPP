@@ -226,7 +226,7 @@ void OperationContextExpImpl::setOperationName(std::string _operationName)
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference inputParameters */
-std::shared_ptr<Bag<ocl::Expressions::VarDeclarationExp>> OperationContextExpImpl::getInputParameters() const
+const std::shared_ptr<Bag<ocl::Expressions::VarDeclarationExp>>& OperationContextExpImpl::getInputParameters() const
 {
 	if(m_inputParameters == nullptr)
 	{
@@ -238,7 +238,7 @@ std::shared_ptr<Bag<ocl::Expressions::VarDeclarationExp>> OperationContextExpImp
 }
 
 /* Getter & Setter for reference returnType */
-std::shared_ptr<ocl::Expressions::TypeExp> OperationContextExpImpl::getReturnType() const
+const std::shared_ptr<ocl::Expressions::TypeExp>& OperationContextExpImpl::getReturnType() const
 {
     return m_returnType;
 }

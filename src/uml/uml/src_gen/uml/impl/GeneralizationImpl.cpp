@@ -150,7 +150,7 @@ void GeneralizationImpl::setIsSubstitutable(bool _isSubstitutable)
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference general */
-std::shared_ptr<uml::Classifier> GeneralizationImpl::getGeneral() const
+const std::shared_ptr<uml::Classifier>& GeneralizationImpl::getGeneral() const
 {
     return m_general;
 }
@@ -161,7 +161,7 @@ void GeneralizationImpl::setGeneral(const std::shared_ptr<uml::Classifier>& _gen
 }
 
 /* Getter & Setter for reference generalizationSet */
-std::shared_ptr<Bag<uml::GeneralizationSet>> GeneralizationImpl::getGeneralizationSet() const
+const std::shared_ptr<Bag<uml::GeneralizationSet>>& GeneralizationImpl::getGeneralizationSet() const
 {
 	if(m_generalizationSet == nullptr)
 	{

@@ -169,7 +169,7 @@ std::shared_ptr<ecore::EObject> ReadVariableActionImpl::copy() const
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference result */
-std::shared_ptr<uml::OutputPin> ReadVariableActionImpl::getResult() const
+const std::shared_ptr<uml::OutputPin>& ReadVariableActionImpl::getResult() const
 {
     return m_result;
 }

@@ -237,7 +237,7 @@ std::shared_ptr<ecore::EObject> ProtocolStateMachineImpl::copy() const
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference conformance */
-std::shared_ptr<Subset<uml::ProtocolConformance, uml::Element>> ProtocolStateMachineImpl::getConformance() const
+const std::shared_ptr<Subset<uml::ProtocolConformance, uml::Element>>& ProtocolStateMachineImpl::getConformance() const
 {
 	if(m_conformance == nullptr)
 	{

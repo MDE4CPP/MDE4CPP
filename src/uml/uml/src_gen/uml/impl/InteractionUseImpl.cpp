@@ -230,7 +230,7 @@ std::shared_ptr<ecore::EObject> InteractionUseImpl::copy() const
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference actualGate */
-std::shared_ptr<Subset<uml::Gate, uml::Element>> InteractionUseImpl::getActualGate() const
+const std::shared_ptr<Subset<uml::Gate, uml::Element>>& InteractionUseImpl::getActualGate() const
 {
 	if(m_actualGate == nullptr)
 	{
@@ -251,7 +251,7 @@ std::shared_ptr<Subset<uml::Gate, uml::Element>> InteractionUseImpl::getActualGa
 }
 
 /* Getter & Setter for reference argument */
-std::shared_ptr<Subset<uml::ValueSpecification, uml::Element>> InteractionUseImpl::getArgument() const
+const std::shared_ptr<Subset<uml::ValueSpecification, uml::Element>>& InteractionUseImpl::getArgument() const
 {
 	if(m_argument == nullptr)
 	{
@@ -272,7 +272,7 @@ std::shared_ptr<Subset<uml::ValueSpecification, uml::Element>> InteractionUseImp
 }
 
 /* Getter & Setter for reference refersTo */
-std::shared_ptr<uml::Interaction> InteractionUseImpl::getRefersTo() const
+const std::shared_ptr<uml::Interaction>& InteractionUseImpl::getRefersTo() const
 {
     return m_refersTo;
 }
@@ -283,7 +283,7 @@ void InteractionUseImpl::setRefersTo(const std::shared_ptr<uml::Interaction>& _r
 }
 
 /* Getter & Setter for reference returnValue */
-std::shared_ptr<uml::ValueSpecification> InteractionUseImpl::getReturnValue() const
+const std::shared_ptr<uml::ValueSpecification>& InteractionUseImpl::getReturnValue() const
 {
     return m_returnValue;
 }
@@ -294,7 +294,7 @@ void InteractionUseImpl::setReturnValue(const std::shared_ptr<uml::ValueSpecific
 }
 
 /* Getter & Setter for reference returnValueRecipient */
-std::shared_ptr<uml::Property> InteractionUseImpl::getReturnValueRecipient() const
+const std::shared_ptr<uml::Property>& InteractionUseImpl::getReturnValueRecipient() const
 {
     return m_returnValueRecipient;
 }

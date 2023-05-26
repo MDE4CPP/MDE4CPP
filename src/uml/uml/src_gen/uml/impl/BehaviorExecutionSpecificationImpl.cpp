@@ -156,7 +156,7 @@ std::shared_ptr<ecore::EObject> BehaviorExecutionSpecificationImpl::copy() const
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference behavior */
-std::shared_ptr<uml::Behavior> BehaviorExecutionSpecificationImpl::getBehavior() const
+const std::shared_ptr<uml::Behavior>& BehaviorExecutionSpecificationImpl::getBehavior() const
 {
     return m_behavior;
 }

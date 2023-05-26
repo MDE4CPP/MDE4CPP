@@ -114,7 +114,7 @@ namespace uml
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::InputPin> getRemoveAt() const = 0;
+			virtual const std::shared_ptr<uml::InputPin>& getRemoveAt() const = 0;
 			/*!
 			An InputPin that provides the position of an existing value to remove in ordered, nonunique structural features. The type of the removeAt InputPin is UnlimitedNatural, but the value cannot be zero or unlimited.
 			<p>From package UML::Actions.</p>

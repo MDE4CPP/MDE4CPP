@@ -102,7 +102,7 @@ namespace uml
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::InputPin> getObject() const = 0;
+			virtual const std::shared_ptr<uml::InputPin>& getObject() const = 0;
 			/*!
 			The InputPin from which the object whose StructuralFeature is to be read or written is obtained.
 			<p>From package UML::Actions.</p>
@@ -114,7 +114,7 @@ namespace uml
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::StructuralFeature> getStructuralFeature() const = 0;
+			virtual const std::shared_ptr<uml::StructuralFeature>& getStructuralFeature() const = 0;
 			/*!
 			The StructuralFeature to be read or written.
 			<p>From package UML::Actions.</p>

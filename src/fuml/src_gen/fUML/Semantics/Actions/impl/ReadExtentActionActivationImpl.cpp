@@ -162,7 +162,7 @@ this->putTokens(action->getResult(), values);
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference readExtentAction */
-std::shared_ptr<uml::ReadExtentAction> ReadExtentActionActivationImpl::getReadExtentAction() const
+const std::shared_ptr<uml::ReadExtentAction>& ReadExtentActionActivationImpl::getReadExtentAction() const
 {
     return m_readExtentAction;
 }
@@ -173,7 +173,7 @@ void ReadExtentActionActivationImpl::setReadExtentAction(const std::shared_ptr<u
 	fUML::Semantics::Actions::ActionActivationImpl::setAction(_readExtentAction);
 }
 /*Additional Setter for redefined reference 'ActionActivation::action'*/
-void ReadExtentActionActivationImpl::setAction(std::shared_ptr<uml::Action> _action)
+void ReadExtentActionActivationImpl::setAction(const std::shared_ptr<uml::Action>& _action)
 {
 	std::shared_ptr<uml::ReadExtentAction> _readExtentAction = std::dynamic_pointer_cast<uml::ReadExtentAction>(_action);
 	if(_readExtentAction)
@@ -189,7 +189,7 @@ void ReadExtentActionActivationImpl::setAction(std::shared_ptr<uml::Action> _act
 	}
 }
 /*Additional Setter for redefined reference 'ActivityNodeActivation::node'*/
-void ReadExtentActionActivationImpl::setNode(std::shared_ptr<uml::ActivityNode> _node)
+void ReadExtentActionActivationImpl::setNode(const std::shared_ptr<uml::ActivityNode>& _node)
 {
 	std::shared_ptr<uml::ReadExtentAction> _readExtentAction = std::dynamic_pointer_cast<uml::ReadExtentAction>(_node);
 	if(_readExtentAction)

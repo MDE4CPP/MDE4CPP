@@ -90,7 +90,7 @@ namespace uml
 			<p>From package UML::Interactions.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::OccurrenceSpecification> getAfter() const = 0;
+			virtual const std::shared_ptr<uml::OccurrenceSpecification>& getAfter() const = 0;
 			/*!
 			The OccurrenceSpecification referenced comes after the OccurrenceSpecification referenced by before.
 			<p>From package UML::Interactions.</p>
@@ -102,7 +102,7 @@ namespace uml
 			<p>From package UML::Interactions.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::OccurrenceSpecification> getBefore() const = 0;
+			virtual const std::shared_ptr<uml::OccurrenceSpecification>& getBefore() const = 0;
 			/*!
 			The OccurrenceSpecification referenced comes before the OccurrenceSpecification referenced by after.
 			<p>From package UML::Interactions.</p>

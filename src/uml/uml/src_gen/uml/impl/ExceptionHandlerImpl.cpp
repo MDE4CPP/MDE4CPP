@@ -136,7 +136,7 @@ std::shared_ptr<ecore::EObject> ExceptionHandlerImpl::copy() const
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference exceptionInput */
-std::shared_ptr<uml::ObjectNode> ExceptionHandlerImpl::getExceptionInput() const
+const std::shared_ptr<uml::ObjectNode>& ExceptionHandlerImpl::getExceptionInput() const
 {
     return m_exceptionInput;
 }
@@ -147,7 +147,7 @@ void ExceptionHandlerImpl::setExceptionInput(const std::shared_ptr<uml::ObjectNo
 }
 
 /* Getter & Setter for reference exceptionType */
-std::shared_ptr<Bag<uml::Classifier>> ExceptionHandlerImpl::getExceptionType() const
+const std::shared_ptr<Bag<uml::Classifier>>& ExceptionHandlerImpl::getExceptionType() const
 {
 	if(m_exceptionType == nullptr)
 	{
@@ -159,7 +159,7 @@ std::shared_ptr<Bag<uml::Classifier>> ExceptionHandlerImpl::getExceptionType() c
 }
 
 /* Getter & Setter for reference handlerBody */
-std::shared_ptr<uml::ExecutableNode> ExceptionHandlerImpl::getHandlerBody() const
+const std::shared_ptr<uml::ExecutableNode>& ExceptionHandlerImpl::getHandlerBody() const
 {
     return m_handlerBody;
 }

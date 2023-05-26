@@ -102,7 +102,7 @@ namespace uml
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::Association> getAssociation() const = 0;
+			virtual const std::shared_ptr<uml::Association>& getAssociation() const = 0;
 			/*!
 			The Association to be cleared.
 			<p>From package UML::Actions.</p>
@@ -114,7 +114,7 @@ namespace uml
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::InputPin> getObject() const = 0;
+			virtual const std::shared_ptr<uml::InputPin>& getObject() const = 0;
 			/*!
 			The InputPin that gives the object whose participation in the Association is to be cleared.
 			<p>From package UML::Actions.</p>

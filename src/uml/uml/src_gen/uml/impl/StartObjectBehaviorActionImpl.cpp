@@ -174,7 +174,7 @@ std::shared_ptr<uml::Behavior> StartObjectBehaviorActionImpl::behavior()
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference object */
-std::shared_ptr<uml::InputPin> StartObjectBehaviorActionImpl::getObject() const
+const std::shared_ptr<uml::InputPin>& StartObjectBehaviorActionImpl::getObject() const
 {
     return m_object;
 }

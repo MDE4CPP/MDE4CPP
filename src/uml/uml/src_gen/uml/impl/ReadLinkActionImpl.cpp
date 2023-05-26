@@ -174,7 +174,7 @@ std::shared_ptr<Bag<uml::Property>> ReadLinkActionImpl::openEnd()
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference result */
-std::shared_ptr<uml::OutputPin> ReadLinkActionImpl::getResult() const
+const std::shared_ptr<uml::OutputPin>& ReadLinkActionImpl::getResult() const
 {
     return m_result;
 }

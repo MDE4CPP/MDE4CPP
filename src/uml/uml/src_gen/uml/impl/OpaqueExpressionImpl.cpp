@@ -217,7 +217,7 @@ int OpaqueExpressionImpl::value()
 // Attribute Getters & Setters
 //*********************************
 /* Getter & Setter for attribute body */
-std::shared_ptr<Bag<std::string>> OpaqueExpressionImpl::getBody() const 
+const std::shared_ptr<Bag<std::string>>& OpaqueExpressionImpl::getBody() const 
 {
 	if(m_body == nullptr)
 	{
@@ -227,7 +227,7 @@ std::shared_ptr<Bag<std::string>> OpaqueExpressionImpl::getBody() const
 }
 
 /* Getter & Setter for attribute language */
-std::shared_ptr<Bag<std::string>> OpaqueExpressionImpl::getLanguage() const 
+const std::shared_ptr<Bag<std::string>>& OpaqueExpressionImpl::getLanguage() const 
 {
 	if(m_language == nullptr)
 	{
@@ -240,7 +240,7 @@ std::shared_ptr<Bag<std::string>> OpaqueExpressionImpl::getLanguage() const
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference behavior */
-std::shared_ptr<uml::Behavior> OpaqueExpressionImpl::getBehavior() const
+const std::shared_ptr<uml::Behavior>& OpaqueExpressionImpl::getBehavior() const
 {
     return m_behavior;
 }
@@ -251,7 +251,7 @@ void OpaqueExpressionImpl::setBehavior(const std::shared_ptr<uml::Behavior>& _be
 }
 
 /* Getter & Setter for reference result */
-std::shared_ptr<uml::Parameter> OpaqueExpressionImpl::getResult() const
+const std::shared_ptr<uml::Parameter>& OpaqueExpressionImpl::getResult() const
 {
     return m_result;
 }

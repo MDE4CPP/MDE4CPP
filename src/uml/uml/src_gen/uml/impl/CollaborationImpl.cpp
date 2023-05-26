@@ -212,7 +212,7 @@ std::shared_ptr<ecore::EObject> CollaborationImpl::copy() const
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference collaborationRole */
-std::shared_ptr<Subset<uml::ConnectableElement, uml::ConnectableElement>> CollaborationImpl::getCollaborationRole() const
+const std::shared_ptr<Subset<uml::ConnectableElement, uml::ConnectableElement>>& CollaborationImpl::getCollaborationRole() const
 {
 	if(m_collaborationRole == nullptr)
 	{

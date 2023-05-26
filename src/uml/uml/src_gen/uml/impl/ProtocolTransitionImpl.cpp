@@ -169,7 +169,7 @@ std::shared_ptr<Bag<uml::Operation>> ProtocolTransitionImpl::getReferreds()
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference postCondition */
-std::shared_ptr<uml::Constraint> ProtocolTransitionImpl::getPostCondition() const
+const std::shared_ptr<uml::Constraint>& ProtocolTransitionImpl::getPostCondition() const
 {
     return m_postCondition;
 }
@@ -180,7 +180,7 @@ void ProtocolTransitionImpl::setPostCondition(const std::shared_ptr<uml::Constra
 }
 
 /* Getter & Setter for reference preCondition */
-std::shared_ptr<uml::Constraint> ProtocolTransitionImpl::getPreCondition() const
+const std::shared_ptr<uml::Constraint>& ProtocolTransitionImpl::getPreCondition() const
 {
     return m_preCondition;
 }
@@ -191,7 +191,7 @@ void ProtocolTransitionImpl::setPreCondition(const std::shared_ptr<uml::Constrai
 }
 
 /* Getter & Setter for reference referred */
-std::shared_ptr<Bag<uml::Operation>> ProtocolTransitionImpl::getReferred() const
+const std::shared_ptr<Bag<uml::Operation>>& ProtocolTransitionImpl::getReferred() const
 {
 	if(m_referred == nullptr)
 	{

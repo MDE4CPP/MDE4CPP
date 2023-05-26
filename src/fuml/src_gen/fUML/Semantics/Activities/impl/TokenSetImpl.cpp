@@ -117,7 +117,7 @@ std::shared_ptr<ecore::EObject> TokenSetImpl::copy() const
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference tokens */
-std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> TokenSetImpl::getTokens() const
+const std::shared_ptr<Bag<fUML::Semantics::Activities::Token>>& TokenSetImpl::getTokens() const
 {
 	if(m_tokens == nullptr)
 	{

@@ -127,7 +127,7 @@ std::shared_ptr<ecore::EObject> TupleLiteralExpEvalImpl::copy() const
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference tuplePart */
-std::shared_ptr<Bag<ocl::Evaluations::VariableDeclEval>> TupleLiteralExpEvalImpl::getTuplePart() const
+const std::shared_ptr<Bag<ocl::Evaluations::VariableDeclEval>>& TupleLiteralExpEvalImpl::getTuplePart() const
 {
 	if(m_tuplePart == nullptr)
 	{

@@ -114,7 +114,7 @@ namespace uml
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::InputPin> getInsertAt() const = 0;
+			virtual const std::shared_ptr<uml::InputPin>& getInsertAt() const = 0;
 			/*!
 			The InputPin that gives the position at which to insert a new value or move an existing value in ordered Variables. The type of the insertAt InputPin is UnlimitedNatural, but the value cannot be zero. It is omitted for unordered Variables.
 			<p>From package UML::Actions.</p>

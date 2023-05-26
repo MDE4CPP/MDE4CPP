@@ -93,7 +93,7 @@ namespace ocl::Expressions
 			//*********************************
 			// Reference Getters & Setters
 			//*********************************
-			virtual std::shared_ptr<ecore::EObject> getReferredState() const = 0;
+			virtual const std::shared_ptr<ecore::EObject>& getReferredState() const = 0;
 			virtual void setReferredState(const std::shared_ptr<ecore::EObject>&) = 0;
 
 			//*********************************

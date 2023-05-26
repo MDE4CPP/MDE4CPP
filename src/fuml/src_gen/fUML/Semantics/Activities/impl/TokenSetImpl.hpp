@@ -53,7 +53,7 @@ virtual public TokenSet
 			//*********************************
 			// Reference Getters & Setters
 			//*********************************
-			virtual std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> getTokens() const ;
+			virtual const std::shared_ptr<Bag<fUML::Semantics::Activities::Token>>& getTokens() const ;
 			
 			//*********************************
 			// Union Reference Getters

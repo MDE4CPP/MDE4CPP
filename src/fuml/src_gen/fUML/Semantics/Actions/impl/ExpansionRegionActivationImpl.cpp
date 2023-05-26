@@ -572,7 +572,7 @@ void ExpansionRegionActivationImpl::setNext(int _next)
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference activationGroups */
-std::shared_ptr<Bag<fUML::Semantics::Actions::ExpansionActivationGroup>> ExpansionRegionActivationImpl::getActivationGroups() const
+const std::shared_ptr<Bag<fUML::Semantics::Actions::ExpansionActivationGroup>>& ExpansionRegionActivationImpl::getActivationGroups() const
 {
 	if(m_activationGroups == nullptr)
 	{
@@ -584,7 +584,7 @@ std::shared_ptr<Bag<fUML::Semantics::Actions::ExpansionActivationGroup>> Expansi
 }
 
 /* Getter & Setter for reference inputExpansionTokens */
-std::shared_ptr<Bag<fUML::Semantics::Activities::TokenSet>> ExpansionRegionActivationImpl::getInputExpansionTokens() const
+const std::shared_ptr<Bag<fUML::Semantics::Activities::TokenSet>>& ExpansionRegionActivationImpl::getInputExpansionTokens() const
 {
 	if(m_inputExpansionTokens == nullptr)
 	{
@@ -596,7 +596,7 @@ std::shared_ptr<Bag<fUML::Semantics::Activities::TokenSet>> ExpansionRegionActiv
 }
 
 /* Getter & Setter for reference inputTokens */
-std::shared_ptr<Bag<fUML::Semantics::Activities::TokenSet>> ExpansionRegionActivationImpl::getInputTokens() const
+const std::shared_ptr<Bag<fUML::Semantics::Activities::TokenSet>>& ExpansionRegionActivationImpl::getInputTokens() const
 {
 	if(m_inputTokens == nullptr)
 	{

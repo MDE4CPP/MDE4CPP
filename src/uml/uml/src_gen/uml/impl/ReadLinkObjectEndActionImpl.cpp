@@ -177,7 +177,7 @@ std::shared_ptr<ecore::EObject> ReadLinkObjectEndActionImpl::copy() const
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference end */
-std::shared_ptr<uml::Property> ReadLinkObjectEndActionImpl::getEnd() const
+const std::shared_ptr<uml::Property>& ReadLinkObjectEndActionImpl::getEnd() const
 {
     return m_end;
 }
@@ -188,7 +188,7 @@ void ReadLinkObjectEndActionImpl::setEnd(const std::shared_ptr<uml::Property>& _
 }
 
 /* Getter & Setter for reference object */
-std::shared_ptr<uml::InputPin> ReadLinkObjectEndActionImpl::getObject() const
+const std::shared_ptr<uml::InputPin>& ReadLinkObjectEndActionImpl::getObject() const
 {
     return m_object;
 }
@@ -199,7 +199,7 @@ void ReadLinkObjectEndActionImpl::setObject(const std::shared_ptr<uml::InputPin>
 }
 
 /* Getter & Setter for reference result */
-std::shared_ptr<uml::OutputPin> ReadLinkObjectEndActionImpl::getResult() const
+const std::shared_ptr<uml::OutputPin>& ReadLinkObjectEndActionImpl::getResult() const
 {
     return m_result;
 }

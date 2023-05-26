@@ -101,7 +101,7 @@ namespace uml
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::InputPin> getException() const = 0;
+			virtual const std::shared_ptr<uml::InputPin>& getException() const = 0;
 			/*!
 			An InputPin whose value becomes the exception object.
 			<p>From package UML::Actions.</p>

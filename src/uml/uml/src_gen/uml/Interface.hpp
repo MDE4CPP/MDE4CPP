@@ -117,31 +117,31 @@ namespace uml
 			<p>From package UML::SimpleClassifiers.</p>
 			*/
 			
-			virtual std::shared_ptr<Subset<uml::Classifier, uml::NamedElement>> getNestedClassifier() const = 0;
+			virtual const std::shared_ptr<Subset<uml::Classifier, uml::NamedElement>>& getNestedClassifier() const = 0;
 			/*!
 			The attributes (i.e., the Properties) owned by the Interface.
 			<p>From package UML::SimpleClassifiers.</p>
 			*/
 			
-			virtual std::shared_ptr<Subset<uml::Property, uml::NamedElement, uml::Property>> getOwnedAttribute() const = 0;
+			virtual const std::shared_ptr<Subset<uml::Property, uml::NamedElement, uml::Property>>& getOwnedAttribute() const = 0;
 			/*!
 			The Operations owned by the Interface.
 			<p>From package UML::SimpleClassifiers.</p>
 			*/
 			
-			virtual std::shared_ptr<Subset<uml::Operation, uml::Feature, uml::NamedElement>> getOwnedOperation() const = 0;
+			virtual const std::shared_ptr<Subset<uml::Operation, uml::Feature, uml::NamedElement>>& getOwnedOperation() const = 0;
 			/*!
 			Receptions that objects providing this Interface are willing to accept.
 			<p>From package UML::SimpleClassifiers.</p>
 			*/
 			
-			virtual std::shared_ptr<Subset<uml::Reception, uml::Feature, uml::NamedElement>> getOwnedReception() const = 0;
+			virtual const std::shared_ptr<Subset<uml::Reception, uml::Feature, uml::NamedElement>>& getOwnedReception() const = 0;
 			/*!
 			References a ProtocolStateMachine specifying the legal sequences of the invocation of the BehavioralFeatures described in the Interface.
 			<p>From package UML::SimpleClassifiers.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::ProtocolStateMachine> getProtocol() const = 0;
+			virtual const std::shared_ptr<uml::ProtocolStateMachine>& getProtocol() const = 0;
 			/*!
 			References a ProtocolStateMachine specifying the legal sequences of the invocation of the BehavioralFeatures described in the Interface.
 			<p>From package UML::SimpleClassifiers.</p>
@@ -153,7 +153,7 @@ namespace uml
 			<p>From package UML::SimpleClassifiers.</p>
 			*/
 			
-			virtual std::shared_ptr<Subset<uml::Interface, uml::Classifier /*Subset does not reference a union*/>> getRedefinedInterface() const = 0;
+			virtual const std::shared_ptr<Subset<uml::Interface, uml::Classifier /*Subset does not reference a union*/>>& getRedefinedInterface() const = 0;
 
 			//*********************************
 			// Union Reference Getters

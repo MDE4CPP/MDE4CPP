@@ -92,7 +92,7 @@ namespace ocl::Expressions
 			//*********************************
 			// Reference Getters & Setters
 			//*********************************
-			virtual std::shared_ptr<ocl::Expressions::TypeExp> getInnerType() const = 0;
+			virtual const std::shared_ptr<ocl::Expressions::TypeExp>& getInnerType() const = 0;
 			virtual void setInnerType(const std::shared_ptr<ocl::Expressions::TypeExp>&) = 0;
 
 			//*********************************

@@ -53,7 +53,7 @@ namespace ecore
 			//*********************************
 			// Reference Getters & Setters
 			//*********************************
-			virtual std::shared_ptr<Subset<ecore::EAnnotation, ecore::EObject>> getEAnnotations() const ;
+			virtual const std::shared_ptr<Subset<ecore::EAnnotation, ecore::EObject>>& getEAnnotations() const ;
 			
 			//*********************************
 			// Union Reference Getters

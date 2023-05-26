@@ -129,13 +129,13 @@ namespace uml
 			<p>From package UML::Interactions.</p>
 			*/
 			
-			virtual std::shared_ptr<Subset<uml::ValueSpecification, uml::Element>> getArgument() const = 0;
+			virtual const std::shared_ptr<Subset<uml::ValueSpecification, uml::Element>>& getArgument() const = 0;
 			/*!
 			The Connector on which this Message is sent.
 			<p>From package UML::Interactions.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::Connector> getConnector() const = 0;
+			virtual const std::shared_ptr<uml::Connector>& getConnector() const = 0;
 			/*!
 			The Connector on which this Message is sent.
 			<p>From package UML::Interactions.</p>
@@ -159,7 +159,7 @@ namespace uml
 			<p>From package UML::Interactions.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::MessageEnd> getReceiveEvent() const = 0;
+			virtual const std::shared_ptr<uml::MessageEnd>& getReceiveEvent() const = 0;
 			/*!
 			References the Receiving of the Message.
 			<p>From package UML::Interactions.</p>
@@ -171,7 +171,7 @@ namespace uml
 			<p>From package UML::Interactions.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::MessageEnd> getSendEvent() const = 0;
+			virtual const std::shared_ptr<uml::MessageEnd>& getSendEvent() const = 0;
 			/*!
 			References the Sending of the Message.
 			<p>From package UML::Interactions.</p>
@@ -183,7 +183,7 @@ namespace uml
 			<p>From package UML::Interactions.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::NamedElement> getSignature() const = 0;
+			virtual const std::shared_ptr<uml::NamedElement>& getSignature() const = 0;
 			/*!
 			The signature of the Message is the specification of its content. It refers either an Operation or a Signal.
 			<p>From package UML::Interactions.</p>

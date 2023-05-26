@@ -164,7 +164,7 @@ std::shared_ptr<ecore::EObject> ActivityParameterNodeImpl::copy() const
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference parameter */
-std::shared_ptr<uml::Parameter> ActivityParameterNodeImpl::getParameter() const
+const std::shared_ptr<uml::Parameter>& ActivityParameterNodeImpl::getParameter() const
 {
     return m_parameter;
 }

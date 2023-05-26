@@ -160,7 +160,7 @@ std::shared_ptr<ecore::EObject> ExtendImpl::copy() const
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference condition */
-std::shared_ptr<uml::Constraint> ExtendImpl::getCondition() const
+const std::shared_ptr<uml::Constraint>& ExtendImpl::getCondition() const
 {
     return m_condition;
 }
@@ -171,7 +171,7 @@ void ExtendImpl::setCondition(const std::shared_ptr<uml::Constraint>& _condition
 }
 
 /* Getter & Setter for reference extendedCase */
-std::shared_ptr<uml::UseCase> ExtendImpl::getExtendedCase() const
+const std::shared_ptr<uml::UseCase>& ExtendImpl::getExtendedCase() const
 {
     return m_extendedCase;
 }
@@ -193,7 +193,7 @@ void ExtendImpl::setExtension(std::weak_ptr<uml::UseCase> _extension)
 }
 
 /* Getter & Setter for reference extensionLocation */
-std::shared_ptr<Bag<uml::ExtensionPoint>> ExtendImpl::getExtensionLocation() const
+const std::shared_ptr<Bag<uml::ExtensionPoint>>& ExtendImpl::getExtensionLocation() const
 {
 	if(m_extensionLocation == nullptr)
 	{

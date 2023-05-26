@@ -71,7 +71,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::Package> getImportedPackage() const ;
+			virtual const std::shared_ptr<uml::Package>& getImportedPackage() const ;
 			/*!
 			Specifies the Package whose members are imported into a Namespace.
 			<p>From package UML::CommonStructure.</p>

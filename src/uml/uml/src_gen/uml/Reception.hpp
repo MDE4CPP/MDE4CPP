@@ -99,7 +99,7 @@ namespace uml
 			<p>From package UML::SimpleClassifiers.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::Signal> getSignal() const = 0;
+			virtual const std::shared_ptr<uml::Signal>& getSignal() const = 0;
 			/*!
 			The Signal that this Reception handles.
 			<p>From package UML::SimpleClassifiers.</p>

@@ -272,7 +272,7 @@ void ActivityPartitionImpl::setIsExternal(bool _isExternal)
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference edge */
-std::shared_ptr<Subset<uml::ActivityEdge, uml::ActivityEdge>> ActivityPartitionImpl::getEdge() const
+const std::shared_ptr<Subset<uml::ActivityEdge, uml::ActivityEdge>>& ActivityPartitionImpl::getEdge() const
 {
 	if(m_edge == nullptr)
 	{
@@ -293,7 +293,7 @@ std::shared_ptr<Subset<uml::ActivityEdge, uml::ActivityEdge>> ActivityPartitionI
 }
 
 /* Getter & Setter for reference node */
-std::shared_ptr<Subset<uml::ActivityNode, uml::ActivityNode>> ActivityPartitionImpl::getNode() const
+const std::shared_ptr<Subset<uml::ActivityNode, uml::ActivityNode>>& ActivityPartitionImpl::getNode() const
 {
 	if(m_node == nullptr)
 	{
@@ -314,7 +314,7 @@ std::shared_ptr<Subset<uml::ActivityNode, uml::ActivityNode>> ActivityPartitionI
 }
 
 /* Getter & Setter for reference represents */
-std::shared_ptr<uml::Element> ActivityPartitionImpl::getRepresents() const
+const std::shared_ptr<uml::Element>& ActivityPartitionImpl::getRepresents() const
 {
     return m_represents;
 }
@@ -325,7 +325,7 @@ void ActivityPartitionImpl::setRepresents(const std::shared_ptr<uml::Element>& _
 }
 
 /* Getter & Setter for reference subpartition */
-std::shared_ptr<Subset<uml::ActivityPartition, uml::ActivityGroup>> ActivityPartitionImpl::getSubpartition() const
+const std::shared_ptr<Subset<uml::ActivityPartition, uml::ActivityGroup>>& ActivityPartitionImpl::getSubpartition() const
 {
 	if(m_subpartition == nullptr)
 	{

@@ -163,13 +163,13 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::shared_ptr<SubsetUnion<uml::ElementImport, uml::Element>> getElementImport() const = 0;
+			virtual const std::shared_ptr<SubsetUnion<uml::ElementImport, uml::Element>>& getElementImport() const = 0;
 			/*!
 			References the PackageableElements that are members of this Namespace as a result of either PackageImports or ElementImports.
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::shared_ptr<Subset<uml::PackageableElement, uml::NamedElement>> getImportedMember() const = 0;
+			virtual const std::shared_ptr<Subset<uml::PackageableElement, uml::NamedElement>>& getImportedMember() const = 0;
 			
 			
 			/*!
@@ -177,13 +177,13 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::shared_ptr<SubsetUnion<uml::Constraint, uml::NamedElement>> getOwnedRule() const = 0;
+			virtual const std::shared_ptr<SubsetUnion<uml::Constraint, uml::NamedElement>>& getOwnedRule() const = 0;
 			/*!
 			References the PackageImports owned by the Namespace.
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::shared_ptr<SubsetUnion<uml::PackageImport, uml::Element>> getPackageImport() const = 0;
+			virtual const std::shared_ptr<SubsetUnion<uml::PackageImport, uml::Element>>& getPackageImport() const = 0;
 
 			//*********************************
 			// Union Reference Getters

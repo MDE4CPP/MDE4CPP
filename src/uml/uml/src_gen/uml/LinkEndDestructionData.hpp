@@ -99,7 +99,7 @@ namespace uml
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::InputPin> getDestroyAt() const = 0;
+			virtual const std::shared_ptr<uml::InputPin>& getDestroyAt() const = 0;
 			/*!
 			The InputPin that provides the position of an existing link to be destroyed in an ordered, nonunique Association end. The type of the destroyAt InputPin is UnlimitedNatural, but the value cannot be zero or unlimited.
 			<p>From package UML::Actions.</p>

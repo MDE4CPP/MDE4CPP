@@ -139,13 +139,13 @@ namespace uml
 			<p>From package UML::StateMachines.</p>
 			*/
 			
-			virtual std::shared_ptr<Bag<uml::Transition>> getIncoming() const ;
+			virtual const std::shared_ptr<Bag<uml::Transition>>& getIncoming() const ;
 			/*!
 			Specifies the Transitions departing from this Vertex.
 			<p>From package UML::StateMachines.</p>
 			*/
 			
-			virtual std::shared_ptr<Bag<uml::Transition>> getOutgoing() const ;
+			virtual const std::shared_ptr<Bag<uml::Transition>>& getOutgoing() const ;
 			
 			//*********************************
 			// Union Reference Getters

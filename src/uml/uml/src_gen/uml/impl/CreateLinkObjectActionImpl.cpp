@@ -169,7 +169,7 @@ std::shared_ptr<ecore::EObject> CreateLinkObjectActionImpl::copy() const
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference result */
-std::shared_ptr<uml::OutputPin> CreateLinkObjectActionImpl::getResult() const
+const std::shared_ptr<uml::OutputPin>& CreateLinkObjectActionImpl::getResult() const
 {
     return m_result;
 }

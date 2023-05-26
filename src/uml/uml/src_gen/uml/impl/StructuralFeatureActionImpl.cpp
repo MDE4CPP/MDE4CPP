@@ -162,7 +162,7 @@ StructuralFeatureActionImpl& StructuralFeatureActionImpl::operator=(const Struct
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference object */
-std::shared_ptr<uml::InputPin> StructuralFeatureActionImpl::getObject() const
+const std::shared_ptr<uml::InputPin>& StructuralFeatureActionImpl::getObject() const
 {
     return m_object;
 }
@@ -173,7 +173,7 @@ void StructuralFeatureActionImpl::setObject(const std::shared_ptr<uml::InputPin>
 }
 
 /* Getter & Setter for reference structuralFeature */
-std::shared_ptr<uml::StructuralFeature> StructuralFeatureActionImpl::getStructuralFeature() const
+const std::shared_ptr<uml::StructuralFeature>& StructuralFeatureActionImpl::getStructuralFeature() const
 {
     return m_structuralFeature;
 }

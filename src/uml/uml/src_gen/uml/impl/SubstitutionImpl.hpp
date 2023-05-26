@@ -65,7 +65,7 @@ namespace uml
 			<p>From package UML::Classification.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::Classifier> getContract() const ;
+			virtual const std::shared_ptr<uml::Classifier>& getContract() const ;
 			/*!
 			The contract with which the substituting classifier complies.
 			<p>From package UML::Classification.</p>

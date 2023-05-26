@@ -237,7 +237,7 @@ void MessageExpImpl::setSentSignal(std::string _sentSignal)
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference argument */
-std::shared_ptr<Bag<ocl::Expressions::OclExpression>> MessageExpImpl::getArgument() const
+const std::shared_ptr<Bag<ocl::Expressions::OclExpression>>& MessageExpImpl::getArgument() const
 {
 	if(m_argument == nullptr)
 	{
@@ -249,7 +249,7 @@ std::shared_ptr<Bag<ocl::Expressions::OclExpression>> MessageExpImpl::getArgumen
 }
 
 /* Getter & Setter for reference target */
-std::shared_ptr<ocl::Expressions::OclExpression> MessageExpImpl::getTarget() const
+const std::shared_ptr<ocl::Expressions::OclExpression>& MessageExpImpl::getTarget() const
 {
     return m_target;
 }

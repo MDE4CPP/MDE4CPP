@@ -75,7 +75,7 @@ namespace uml
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::Classifier> getClassifier() const ;
+			virtual const std::shared_ptr<uml::Classifier>& getClassifier() const ;
 			/*!
 			The Classifier against which the classification of the input object is tested.
 			<p>From package UML::Actions.</p>
@@ -87,7 +87,7 @@ namespace uml
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::InputPin> getObject() const ;
+			virtual const std::shared_ptr<uml::InputPin>& getObject() const ;
 			/*!
 			The InputPin that holds the object whose classification is to be tested.
 			<p>From package UML::Actions.</p>
@@ -99,7 +99,7 @@ namespace uml
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::OutputPin> getResult() const ;
+			virtual const std::shared_ptr<uml::OutputPin>& getResult() const ;
 			/*!
 			The OutputPin that holds the Boolean result of the test.
 			<p>From package UML::Actions.</p>

@@ -88,13 +88,13 @@ namespace uml
 			<p>From package UML::Classification.</p>
 			*/
 			
-			virtual std::shared_ptr<Subset<uml::RedefinableTemplateSignature, uml::RedefinableElement>> getExtendedSignature() const ;
+			virtual const std::shared_ptr<Subset<uml::RedefinableTemplateSignature, uml::RedefinableElement>>& getExtendedSignature() const ;
 			/*!
 			The formal template parameters of the extended signatures.
 			<p>From package UML::Classification.</p>
 			*/
 			
-			virtual std::shared_ptr<Subset<uml::TemplateParameter, uml::TemplateParameter>> getInheritedParameter() const ;
+			virtual const std::shared_ptr<Subset<uml::TemplateParameter, uml::TemplateParameter>>& getInheritedParameter() const ;
 			
 			//*********************************
 			// Union Reference Getters

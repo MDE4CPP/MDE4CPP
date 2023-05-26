@@ -127,7 +127,7 @@ std::shared_ptr<ecore::EObject> CollectionItemImpl::copy() const
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference item */
-std::shared_ptr<ocl::Expressions::OclExpression> CollectionItemImpl::getItem() const
+const std::shared_ptr<ocl::Expressions::OclExpression>& CollectionItemImpl::getItem() const
 {
     return m_item;
 }

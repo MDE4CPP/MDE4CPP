@@ -126,7 +126,7 @@ std::shared_ptr<ecore::EObject> CollectionLiteralPartEvalImpl::copy() const
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference element */
-std::shared_ptr<ecore::EObject> CollectionLiteralPartEvalImpl::getElement() const
+const std::shared_ptr<ecore::EObject>& CollectionLiteralPartEvalImpl::getElement() const
 {
     return m_element;
 }

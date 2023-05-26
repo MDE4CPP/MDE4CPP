@@ -50,12 +50,12 @@ virtual public ParameterValue
 			//*********************************
 			// Attribute Getters & Setters
 			//*********************************
-			virtual std::shared_ptr<Bag<Any>> getValues() const ;
+			virtual const std::shared_ptr<Bag<Any>>& getValues() const ;
 			
 			//*********************************
 			// Reference Getters & Setters
 			//*********************************
-			virtual std::shared_ptr<uml::Parameter> getParameter() const ;
+			virtual const std::shared_ptr<uml::Parameter>& getParameter() const ;
 			virtual void setParameter(const std::shared_ptr<uml::Parameter>&) ;
 			
 			//*********************************

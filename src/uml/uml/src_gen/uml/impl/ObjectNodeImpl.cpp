@@ -186,7 +186,7 @@ void ObjectNodeImpl::setOrdering(uml::ObjectNodeOrderingKind _ordering)
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference inState */
-std::shared_ptr<Bag<uml::State>> ObjectNodeImpl::getInState() const
+const std::shared_ptr<Bag<uml::State>>& ObjectNodeImpl::getInState() const
 {
 	if(m_inState == nullptr)
 	{
@@ -198,7 +198,7 @@ std::shared_ptr<Bag<uml::State>> ObjectNodeImpl::getInState() const
 }
 
 /* Getter & Setter for reference selection */
-std::shared_ptr<uml::Behavior> ObjectNodeImpl::getSelection() const
+const std::shared_ptr<uml::Behavior>& ObjectNodeImpl::getSelection() const
 {
     return m_selection;
 }
@@ -209,7 +209,7 @@ void ObjectNodeImpl::setSelection(const std::shared_ptr<uml::Behavior>& _selecti
 }
 
 /* Getter & Setter for reference upperBound */
-std::shared_ptr<uml::ValueSpecification> ObjectNodeImpl::getUpperBound() const
+const std::shared_ptr<uml::ValueSpecification>& ObjectNodeImpl::getUpperBound() const
 {
     return m_upperBound;
 }

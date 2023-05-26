@@ -137,7 +137,7 @@ std::shared_ptr<ecore::EObject> TriggerImpl::copy() const
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference event */
-std::shared_ptr<uml::Event> TriggerImpl::getEvent() const
+const std::shared_ptr<uml::Event>& TriggerImpl::getEvent() const
 {
     return m_event;
 }
@@ -148,7 +148,7 @@ void TriggerImpl::setEvent(const std::shared_ptr<uml::Event>& _event)
 }
 
 /* Getter & Setter for reference port */
-std::shared_ptr<Bag<uml::Port>> TriggerImpl::getPort() const
+const std::shared_ptr<Bag<uml::Port>>& TriggerImpl::getPort() const
 {
 	if(m_port == nullptr)
 	{

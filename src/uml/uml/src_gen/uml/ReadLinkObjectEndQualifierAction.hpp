@@ -102,7 +102,7 @@ namespace uml
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::InputPin> getObject() const = 0;
+			virtual const std::shared_ptr<uml::InputPin>& getObject() const = 0;
 			/*!
 			The InputPin from which the link object is obtained.
 			<p>From package UML::Actions.</p>
@@ -114,7 +114,7 @@ namespace uml
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::Property> getQualifier() const = 0;
+			virtual const std::shared_ptr<uml::Property>& getQualifier() const = 0;
 			/*!
 			The qualifier Property to be read.
 			<p>From package UML::Actions.</p>
@@ -126,7 +126,7 @@ namespace uml
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::OutputPin> getResult() const = 0;
+			virtual const std::shared_ptr<uml::OutputPin>& getResult() const = 0;
 			/*!
 			The OutputPin where the result value is placed.
 			<p>From package UML::Actions.</p>

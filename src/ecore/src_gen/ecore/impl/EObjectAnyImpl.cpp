@@ -117,7 +117,7 @@ std::shared_ptr<ecore::EObject> EObjectAnyImpl::copy() const
 // Attribute Getters & Setters
 //*********************************
 /* Getter & Setter for attribute any */
-std::shared_ptr<Any> EObjectAnyImpl::getAny() const 
+const std::shared_ptr<Any>& EObjectAnyImpl::getAny() const 
 {
 	return m_any;
 }

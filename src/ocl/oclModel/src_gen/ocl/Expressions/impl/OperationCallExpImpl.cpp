@@ -254,7 +254,7 @@ void OperationCallExpImpl::setReferredOperation(std::string _referredOperation)
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference argument */
-std::shared_ptr<Bag<ocl::Expressions::OclExpression>> OperationCallExpImpl::getArgument() const
+const std::shared_ptr<Bag<ocl::Expressions::OclExpression>>& OperationCallExpImpl::getArgument() const
 {
 	if(m_argument == nullptr)
 	{

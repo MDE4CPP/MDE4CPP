@@ -189,7 +189,7 @@ void ETypedElementImpl::setUpperBound(int _upperBound)
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference eGenericType */
-std::shared_ptr<ecore::EGenericType> ETypedElementImpl::getEGenericType() const
+const std::shared_ptr<ecore::EGenericType>& ETypedElementImpl::getEGenericType() const
 {
     return m_eGenericType;
 }
@@ -200,7 +200,7 @@ void ETypedElementImpl::setEGenericType(const std::shared_ptr<ecore::EGenericTyp
 }
 
 /* Getter & Setter for reference eType */
-std::shared_ptr<ecore::EClassifier> ETypedElementImpl::getEType() const
+const std::shared_ptr<ecore::EClassifier>& ETypedElementImpl::getEType() const
 {
     return m_eType;
 }

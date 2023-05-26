@@ -204,7 +204,7 @@ void MessageImpl::setMessageSort(uml::MessageSort _messageSort)
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference argument */
-std::shared_ptr<Subset<uml::ValueSpecification, uml::Element>> MessageImpl::getArgument() const
+const std::shared_ptr<Subset<uml::ValueSpecification, uml::Element>>& MessageImpl::getArgument() const
 {
 	if(m_argument == nullptr)
 	{
@@ -225,7 +225,7 @@ std::shared_ptr<Subset<uml::ValueSpecification, uml::Element>> MessageImpl::getA
 }
 
 /* Getter & Setter for reference connector */
-std::shared_ptr<uml::Connector> MessageImpl::getConnector() const
+const std::shared_ptr<uml::Connector>& MessageImpl::getConnector() const
 {
     return m_connector;
 }
@@ -247,7 +247,7 @@ void MessageImpl::setInteraction(std::weak_ptr<uml::Interaction> _interaction)
 }
 
 /* Getter & Setter for reference receiveEvent */
-std::shared_ptr<uml::MessageEnd> MessageImpl::getReceiveEvent() const
+const std::shared_ptr<uml::MessageEnd>& MessageImpl::getReceiveEvent() const
 {
     return m_receiveEvent;
 }
@@ -258,7 +258,7 @@ void MessageImpl::setReceiveEvent(const std::shared_ptr<uml::MessageEnd>& _recei
 }
 
 /* Getter & Setter for reference sendEvent */
-std::shared_ptr<uml::MessageEnd> MessageImpl::getSendEvent() const
+const std::shared_ptr<uml::MessageEnd>& MessageImpl::getSendEvent() const
 {
     return m_sendEvent;
 }
@@ -269,7 +269,7 @@ void MessageImpl::setSendEvent(const std::shared_ptr<uml::MessageEnd>& _sendEven
 }
 
 /* Getter & Setter for reference signature */
-std::shared_ptr<uml::NamedElement> MessageImpl::getSignature() const
+const std::shared_ptr<uml::NamedElement>& MessageImpl::getSignature() const
 {
     return m_signature;
 }

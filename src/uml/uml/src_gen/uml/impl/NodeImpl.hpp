@@ -75,7 +75,7 @@ namespace uml
 			<p>From package UML::Deployments.</p>
 			*/
 			
-			virtual std::shared_ptr<Subset<uml::Node, uml::NamedElement>> getNestedNode() const ;
+			virtual const std::shared_ptr<Subset<uml::Node, uml::NamedElement>>& getNestedNode() const ;
 			
 			//*********************************
 			// Union Reference Getters

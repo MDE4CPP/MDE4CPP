@@ -63,7 +63,7 @@ namespace uml
 			<p>From package UML::Interactions.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::OccurrenceSpecification> getFinish() const ;
+			virtual const std::shared_ptr<uml::OccurrenceSpecification>& getFinish() const ;
 			/*!
 			References the OccurrenceSpecification that designates the finish of the Action or Behavior.
 			<p>From package UML::Interactions.</p>
@@ -75,7 +75,7 @@ namespace uml
 			<p>From package UML::Interactions.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::OccurrenceSpecification> getStart() const ;
+			virtual const std::shared_ptr<uml::OccurrenceSpecification>& getStart() const ;
 			/*!
 			References the OccurrenceSpecification that designates the start of the Action or Behavior.
 			<p>From package UML::Interactions.</p>

@@ -59,10 +59,10 @@ namespace ecore
 			//*********************************
 			// Reference Getters & Setters
 			//*********************************
-			virtual std::shared_ptr<Subset<ecore::EClassifier, ecore::EObject>> getEClassifiers() const ;
-			virtual std::shared_ptr<ecore::EFactory> getEFactoryInstance() const ;
+			virtual const std::shared_ptr<Subset<ecore::EClassifier, ecore::EObject>>& getEClassifiers() const ;
+			virtual const std::shared_ptr<ecore::EFactory>& getEFactoryInstance() const ;
 			virtual void setEFactoryInstance(const std::shared_ptr<ecore::EFactory>&) ;
-			virtual std::shared_ptr<Bag<ecore::EPackage>> getESubpackages() const ;
+			virtual const std::shared_ptr<Bag<ecore::EPackage>>& getESubpackages() const ;
 			virtual std::weak_ptr<ecore::EPackage> getESuperPackage() const ;
 			
 			//*********************************

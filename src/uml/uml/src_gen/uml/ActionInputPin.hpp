@@ -110,7 +110,7 @@ namespace uml
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::Action> getFromAction() const = 0;
+			virtual const std::shared_ptr<uml::Action>& getFromAction() const = 0;
 			/*!
 			The Action used to provide the values of the ActionInputPin.
 			<p>From package UML::Actions.</p>

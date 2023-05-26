@@ -78,9 +78,9 @@ virtual public ActivityNodeActivationGroup
 			virtual void setActivityExecution(std::weak_ptr<fUML::Semantics::Activities::ActivityExecution>) ;
 			virtual std::weak_ptr<fUML::Semantics::Actions::StructuredActivityNodeActivation> getContainingNodeActivation() const ;
 			virtual void setContainingNodeActivation(std::weak_ptr<fUML::Semantics::Actions::StructuredActivityNodeActivation>) ;
-			virtual std::shared_ptr<Bag<fUML::Semantics::Activities::ActivityEdgeInstance>> getEdgeInstances() const ;
-			virtual std::shared_ptr<Bag<fUML::Semantics::Activities::ActivityNodeActivation>> getNodeActivations() const ;
-			virtual std::shared_ptr<Bag<fUML::Semantics::Activities::ActivityNodeActivation>> getSuspendedActivations() const ;
+			virtual const std::shared_ptr<Bag<fUML::Semantics::Activities::ActivityEdgeInstance>>& getEdgeInstances() const ;
+			virtual const std::shared_ptr<Bag<fUML::Semantics::Activities::ActivityNodeActivation>>& getNodeActivations() const ;
+			virtual const std::shared_ptr<Bag<fUML::Semantics::Activities::ActivityNodeActivation>>& getSuspendedActivations() const ;
 			
 			//*********************************
 			// Union Reference Getters

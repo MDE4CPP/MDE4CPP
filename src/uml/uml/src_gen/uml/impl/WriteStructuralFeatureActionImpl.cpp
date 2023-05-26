@@ -168,7 +168,7 @@ WriteStructuralFeatureActionImpl& WriteStructuralFeatureActionImpl::operator=(co
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference result */
-std::shared_ptr<uml::OutputPin> WriteStructuralFeatureActionImpl::getResult() const
+const std::shared_ptr<uml::OutputPin>& WriteStructuralFeatureActionImpl::getResult() const
 {
     return m_result;
 }
@@ -179,7 +179,7 @@ void WriteStructuralFeatureActionImpl::setResult(const std::shared_ptr<uml::Outp
 }
 
 /* Getter & Setter for reference value */
-std::shared_ptr<uml::InputPin> WriteStructuralFeatureActionImpl::getValue() const
+const std::shared_ptr<uml::InputPin>& WriteStructuralFeatureActionImpl::getValue() const
 {
     return m_value;
 }

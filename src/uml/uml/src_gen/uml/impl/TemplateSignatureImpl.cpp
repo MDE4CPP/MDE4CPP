@@ -165,7 +165,7 @@ std::shared_ptr<ecore::EObject> TemplateSignatureImpl::copy() const
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference ownedParameter */
-std::shared_ptr<Subset<uml::TemplateParameter, uml::Element, uml::TemplateParameter>> TemplateSignatureImpl::getOwnedParameter() const
+const std::shared_ptr<Subset<uml::TemplateParameter, uml::Element, uml::TemplateParameter>>& TemplateSignatureImpl::getOwnedParameter() const
 {
 	if(m_ownedParameter == nullptr)
 	{

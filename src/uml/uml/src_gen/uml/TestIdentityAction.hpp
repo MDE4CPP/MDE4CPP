@@ -101,7 +101,7 @@ namespace uml
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::InputPin> getFirst() const = 0;
+			virtual const std::shared_ptr<uml::InputPin>& getFirst() const = 0;
 			/*!
 			The InputPin on which the first input object is placed.
 			<p>From package UML::Actions.</p>
@@ -113,7 +113,7 @@ namespace uml
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::OutputPin> getResult() const = 0;
+			virtual const std::shared_ptr<uml::OutputPin>& getResult() const = 0;
 			/*!
 			The OutputPin whose Boolean value indicates whether the two input objects are identical.
 			<p>From package UML::Actions.</p>
@@ -125,7 +125,7 @@ namespace uml
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::InputPin> getSecond() const = 0;
+			virtual const std::shared_ptr<uml::InputPin>& getSecond() const = 0;
 			/*!
 			The OutputPin on which the second input object is placed.
 			<p>From package UML::Actions.</p>

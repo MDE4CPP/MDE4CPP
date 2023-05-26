@@ -250,7 +250,7 @@ void ActivityExecutionImpl::terminate()
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference activationGroup */
-std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup> ActivityExecutionImpl::getActivationGroup() const
+const std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup>& ActivityExecutionImpl::getActivationGroup() const
 {
     return m_activationGroup;
 }
@@ -261,7 +261,7 @@ void ActivityExecutionImpl::setActivationGroup(const std::shared_ptr<fUML::Seman
 }
 
 /* Getter & Setter for reference activity */
-std::shared_ptr<uml::Activity> ActivityExecutionImpl::getActivity() const
+const std::shared_ptr<uml::Activity>& ActivityExecutionImpl::getActivity() const
 {
 	//generated from getterBody annotation
 if(!m_activity)
@@ -279,7 +279,7 @@ void ActivityExecutionImpl::setActivity(const std::shared_ptr<uml::Activity>& _a
 	fUML::Semantics::CommonBehavior::ExecutionImpl::setBehavior(_activity);
 }
 /*Additional Setter for redefined reference 'Execution::behavior'*/
-void ActivityExecutionImpl::setBehavior(std::shared_ptr<uml::Behavior> _behavior)
+void ActivityExecutionImpl::setBehavior(const std::shared_ptr<uml::Behavior>& _behavior)
 {
 	std::shared_ptr<uml::Activity> _activity = std::dynamic_pointer_cast<uml::Activity>(_behavior);
 	if(_activity)

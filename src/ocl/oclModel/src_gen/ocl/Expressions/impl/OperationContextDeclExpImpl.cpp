@@ -216,7 +216,7 @@ std::shared_ptr<ecore::EObject> OperationContextDeclExpImpl::copy() const
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference operationContext */
-std::shared_ptr<ocl::Expressions::OperationContextExp> OperationContextDeclExpImpl::getOperationContext() const
+const std::shared_ptr<ocl::Expressions::OperationContextExp>& OperationContextDeclExpImpl::getOperationContext() const
 {
     return m_operationContext;
 }
@@ -227,7 +227,7 @@ void OperationContextDeclExpImpl::setOperationContext(const std::shared_ptr<ocl:
 }
 
 /* Getter & Setter for reference prePostBodyExpressions */
-std::shared_ptr<ocl::Expressions::PrePostBodyListExp> OperationContextDeclExpImpl::getPrePostBodyExpressions() const
+const std::shared_ptr<ocl::Expressions::PrePostBodyListExp>& OperationContextDeclExpImpl::getPrePostBodyExpressions() const
 {
     return m_prePostBodyExpressions;
 }

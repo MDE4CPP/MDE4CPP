@@ -85,7 +85,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::TemplateParameter> getTemplateParameter() const ;
+			virtual const std::shared_ptr<uml::TemplateParameter>& getTemplateParameter() const ;
 			/*!
 			The TemplateParameter that exposes this ParameterableElement as a formal parameter.
 			<p>From package UML::CommonStructure.</p>

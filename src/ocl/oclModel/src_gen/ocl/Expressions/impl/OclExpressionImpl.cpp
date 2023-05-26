@@ -234,7 +234,7 @@ OclExpressionImpl& OclExpressionImpl::operator=(const OclExpressionImpl & obj)
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference appliedElement */
-std::shared_ptr<ocl::Expressions::CallExp> OclExpressionImpl::getAppliedElement() const
+const std::shared_ptr<ocl::Expressions::CallExp>& OclExpressionImpl::getAppliedElement() const
 {
     return m_appliedElement;
 }
@@ -278,7 +278,7 @@ void OclExpressionImpl::setIfOwner(std::weak_ptr<ocl::Expressions::IfExp> _ifOwn
 }
 
 /* Getter & Setter for reference initializedElement */
-std::shared_ptr<Bag<ocl::Expressions::VarDeclarationExp>> OclExpressionImpl::getInitializedElement() const
+const std::shared_ptr<Bag<ocl::Expressions::VarDeclarationExp>>& OclExpressionImpl::getInitializedElement() const
 {
 	if(m_initializedElement == nullptr)
 	{
@@ -290,7 +290,7 @@ std::shared_ptr<Bag<ocl::Expressions::VarDeclarationExp>> OclExpressionImpl::get
 }
 
 /* Getter & Setter for reference instance */
-std::shared_ptr<ocl::Evaluations::OclExpEval> OclExpressionImpl::getInstance() const
+const std::shared_ptr<ocl::Evaluations::OclExpEval>& OclExpressionImpl::getInstance() const
 {
     return m_instance;
 }

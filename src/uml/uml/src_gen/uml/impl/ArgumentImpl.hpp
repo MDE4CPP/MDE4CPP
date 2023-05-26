@@ -54,7 +54,7 @@ virtual public Argument
 			//*********************************
 			// Reference Getters & Setters
 			//*********************************
-			virtual std::shared_ptr<uml::Object> getValue() const ;
+			virtual const std::shared_ptr<uml::Object>& getValue() const ;
 			virtual void setValue(const std::shared_ptr<uml::Object>&) ;
 			
 			//*********************************

@@ -103,25 +103,25 @@ namespace uml
 			<p>From package UML::Classification.</p>
 			*/
 			
-			virtual std::shared_ptr<Bag<uml::Behavior>> getMethod() const ;
+			virtual const std::shared_ptr<Bag<uml::Behavior>>& getMethod() const ;
 			/*!
 			The ordered set of formal Parameters of this BehavioralFeature.
 			<p>From package UML::Classification.</p>
 			*/
 			
-			virtual std::shared_ptr<Subset<uml::Parameter, uml::NamedElement>> getOwnedParameter() const ;
+			virtual const std::shared_ptr<Subset<uml::Parameter, uml::NamedElement>>& getOwnedParameter() const ;
 			/*!
 			The ParameterSets owned by this BehavioralFeature.
 			<p>From package UML::Classification.</p>
 			*/
 			
-			virtual std::shared_ptr<Subset<uml::ParameterSet, uml::NamedElement>> getOwnedParameterSet() const ;
+			virtual const std::shared_ptr<Subset<uml::ParameterSet, uml::NamedElement>>& getOwnedParameterSet() const ;
 			/*!
 			The Types representing exceptions that may be raised during an invocation of this BehavioralFeature.
 			<p>From package UML::Classification.</p>
 			*/
 			
-			virtual std::shared_ptr<Bag<uml::Type>> getRaisedException() const ;
+			virtual const std::shared_ptr<Bag<uml::Type>>& getRaisedException() const ;
 			
 			//*********************************
 			// Union Reference Getters

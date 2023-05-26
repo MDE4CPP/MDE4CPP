@@ -66,11 +66,11 @@ virtual public ExecutionFactory
 			//*********************************
 			// Reference Getters & Setters
 			//*********************************
-			virtual std::shared_ptr<Bag<uml::PrimitiveType>> getBuiltInTypes() const ;
+			virtual const std::shared_ptr<Bag<uml::PrimitiveType>>& getBuiltInTypes() const ;
 			virtual std::weak_ptr<fUML::Semantics::Loci::Locus> getLocus() const ;
 			virtual void setLocus(std::weak_ptr<fUML::Semantics::Loci::Locus>) ;
 			
-			virtual std::shared_ptr<Bag<fUML::Semantics::Loci::SemanticStrategy>> getStrategies() const ;
+			virtual const std::shared_ptr<Bag<fUML::Semantics::Loci::SemanticStrategy>>& getStrategies() const ;
 			
 			//*********************************
 			// Union Reference Getters

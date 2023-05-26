@@ -63,7 +63,7 @@ namespace uml
 			<p>From package UML::CommonBehavior.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::Signal> getSignal() const ;
+			virtual const std::shared_ptr<uml::Signal>& getSignal() const ;
 			/*!
 			The specific Signal that is associated with this SignalEvent.
 			<p>From package UML::CommonBehavior.</p>

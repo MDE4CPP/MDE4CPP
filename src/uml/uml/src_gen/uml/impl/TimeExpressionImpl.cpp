@@ -178,7 +178,7 @@ std::shared_ptr<ecore::EObject> TimeExpressionImpl::copy() const
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference expr */
-std::shared_ptr<uml::ValueSpecification> TimeExpressionImpl::getExpr() const
+const std::shared_ptr<uml::ValueSpecification>& TimeExpressionImpl::getExpr() const
 {
     return m_expr;
 }
@@ -189,7 +189,7 @@ void TimeExpressionImpl::setExpr(const std::shared_ptr<uml::ValueSpecification>&
 }
 
 /* Getter & Setter for reference observation */
-std::shared_ptr<Bag<uml::Observation>> TimeExpressionImpl::getObservation() const
+const std::shared_ptr<Bag<uml::Observation>>& TimeExpressionImpl::getObservation() const
 {
 	if(m_observation == nullptr)
 	{

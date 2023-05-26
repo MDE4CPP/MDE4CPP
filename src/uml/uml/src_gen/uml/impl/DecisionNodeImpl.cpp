@@ -162,7 +162,7 @@ std::shared_ptr<ecore::EObject> DecisionNodeImpl::copy() const
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference decisionInput */
-std::shared_ptr<uml::Behavior> DecisionNodeImpl::getDecisionInput() const
+const std::shared_ptr<uml::Behavior>& DecisionNodeImpl::getDecisionInput() const
 {
     return m_decisionInput;
 }
@@ -173,7 +173,7 @@ void DecisionNodeImpl::setDecisionInput(const std::shared_ptr<uml::Behavior>& _d
 }
 
 /* Getter & Setter for reference decisionInputFlow */
-std::shared_ptr<uml::ObjectFlow> DecisionNodeImpl::getDecisionInputFlow() const
+const std::shared_ptr<uml::ObjectFlow>& DecisionNodeImpl::getDecisionInputFlow() const
 {
     return m_decisionInputFlow;
 }

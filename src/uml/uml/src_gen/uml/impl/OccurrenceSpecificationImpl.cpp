@@ -161,7 +161,7 @@ void OccurrenceSpecificationImpl::setCovered(const std::shared_ptr<uml::Lifeline
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference toAfter */
-std::shared_ptr<Bag<uml::GeneralOrdering>> OccurrenceSpecificationImpl::getToAfter() const
+const std::shared_ptr<Bag<uml::GeneralOrdering>>& OccurrenceSpecificationImpl::getToAfter() const
 {
 	if(m_toAfter == nullptr)
 	{
@@ -173,7 +173,7 @@ std::shared_ptr<Bag<uml::GeneralOrdering>> OccurrenceSpecificationImpl::getToAft
 }
 
 /* Getter & Setter for reference toBefore */
-std::shared_ptr<Bag<uml::GeneralOrdering>> OccurrenceSpecificationImpl::getToBefore() const
+const std::shared_ptr<Bag<uml::GeneralOrdering>>& OccurrenceSpecificationImpl::getToBefore() const
 {
 	if(m_toBefore == nullptr)
 	{

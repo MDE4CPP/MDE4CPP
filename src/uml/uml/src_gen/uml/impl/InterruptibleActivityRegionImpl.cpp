@@ -179,7 +179,7 @@ std::shared_ptr<ecore::EObject> InterruptibleActivityRegionImpl::copy() const
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference interruptingEdge */
-std::shared_ptr<Bag<uml::ActivityEdge>> InterruptibleActivityRegionImpl::getInterruptingEdge() const
+const std::shared_ptr<Bag<uml::ActivityEdge>>& InterruptibleActivityRegionImpl::getInterruptingEdge() const
 {
 	if(m_interruptingEdge == nullptr)
 	{
@@ -191,7 +191,7 @@ std::shared_ptr<Bag<uml::ActivityEdge>> InterruptibleActivityRegionImpl::getInte
 }
 
 /* Getter & Setter for reference node */
-std::shared_ptr<Subset<uml::ActivityNode, uml::ActivityNode>> InterruptibleActivityRegionImpl::getNode() const
+const std::shared_ptr<Subset<uml::ActivityNode, uml::ActivityNode>>& InterruptibleActivityRegionImpl::getNode() const
 {
 	if(m_node == nullptr)
 	{

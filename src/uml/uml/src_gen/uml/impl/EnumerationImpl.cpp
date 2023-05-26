@@ -214,7 +214,7 @@ std::shared_ptr<ecore::EObject> EnumerationImpl::copy() const
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference ownedLiteral */
-std::shared_ptr<Subset<uml::EnumerationLiteral, uml::NamedElement>> EnumerationImpl::getOwnedLiteral() const
+const std::shared_ptr<Subset<uml::EnumerationLiteral, uml::NamedElement>>& EnumerationImpl::getOwnedLiteral() const
 {
 	if(m_ownedLiteral == nullptr)
 	{

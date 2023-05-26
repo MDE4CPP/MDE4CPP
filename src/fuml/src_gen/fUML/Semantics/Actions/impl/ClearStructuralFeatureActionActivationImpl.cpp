@@ -195,7 +195,7 @@ void ClearStructuralFeatureActionActivationImpl::doAction()
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference clearStructuralFeatureAction */
-std::shared_ptr<uml::ClearStructuralFeatureAction> ClearStructuralFeatureActionActivationImpl::getClearStructuralFeatureAction() const
+const std::shared_ptr<uml::ClearStructuralFeatureAction>& ClearStructuralFeatureActionActivationImpl::getClearStructuralFeatureAction() const
 {
     return m_clearStructuralFeatureAction;
 }
@@ -206,7 +206,7 @@ void ClearStructuralFeatureActionActivationImpl::setClearStructuralFeatureAction
 	fUML::Semantics::Actions::ActionActivationImpl::setAction(_clearStructuralFeatureAction);
 }
 /*Additional Setter for redefined reference 'ActionActivation::action'*/
-void ClearStructuralFeatureActionActivationImpl::setAction(std::shared_ptr<uml::Action> _action)
+void ClearStructuralFeatureActionActivationImpl::setAction(const std::shared_ptr<uml::Action>& _action)
 {
 	std::shared_ptr<uml::ClearStructuralFeatureAction> _clearStructuralFeatureAction = std::dynamic_pointer_cast<uml::ClearStructuralFeatureAction>(_action);
 	if(_clearStructuralFeatureAction)
@@ -222,7 +222,7 @@ void ClearStructuralFeatureActionActivationImpl::setAction(std::shared_ptr<uml::
 	}
 }
 /*Additional Setter for redefined reference 'ActivityNodeActivation::node'*/
-void ClearStructuralFeatureActionActivationImpl::setNode(std::shared_ptr<uml::ActivityNode> _node)
+void ClearStructuralFeatureActionActivationImpl::setNode(const std::shared_ptr<uml::ActivityNode>& _node)
 {
 	std::shared_ptr<uml::ClearStructuralFeatureAction> _clearStructuralFeatureAction = std::dynamic_pointer_cast<uml::ClearStructuralFeatureAction>(_node);
 	if(_clearStructuralFeatureAction)

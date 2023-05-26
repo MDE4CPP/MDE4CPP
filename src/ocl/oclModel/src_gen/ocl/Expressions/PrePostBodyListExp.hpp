@@ -94,9 +94,9 @@ namespace ocl::Expressions
 			//*********************************
 			// Reference Getters & Setters
 			//*********************************
-			virtual std::shared_ptr<Bag<ocl::Expressions::PrePostBodyExp>> getBodyExpressionList() const = 0;
-			virtual std::shared_ptr<Bag<ocl::Expressions::PrePostBodyExp>> getPostExpressionList() const = 0;
-			virtual std::shared_ptr<Bag<ocl::Expressions::PrePostBodyExp>> getPreExpressionList() const = 0;
+			virtual const std::shared_ptr<Bag<ocl::Expressions::PrePostBodyExp>>& getBodyExpressionList() const = 0;
+			virtual const std::shared_ptr<Bag<ocl::Expressions::PrePostBodyExp>>& getPostExpressionList() const = 0;
+			virtual const std::shared_ptr<Bag<ocl::Expressions::PrePostBodyExp>>& getPreExpressionList() const = 0;
 
 			//*********************************
 			// Union Reference Getters

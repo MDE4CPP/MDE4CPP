@@ -227,7 +227,7 @@ void StringExpressionImpl::setOwningExpression(std::weak_ptr<uml::StringExpressi
 }
 
 /* Getter & Setter for reference subExpression */
-std::shared_ptr<Subset<uml::StringExpression, uml::Element>> StringExpressionImpl::getSubExpression() const
+const std::shared_ptr<Subset<uml::StringExpression, uml::Element>>& StringExpressionImpl::getSubExpression() const
 {
 	if(m_subExpression == nullptr)
 	{

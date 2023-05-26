@@ -150,7 +150,7 @@ std::shared_ptr<ecore::EObject> IncludeImpl::copy() const
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference addition */
-std::shared_ptr<uml::UseCase> IncludeImpl::getAddition() const
+const std::shared_ptr<uml::UseCase>& IncludeImpl::getAddition() const
 {
     return m_addition;
 }

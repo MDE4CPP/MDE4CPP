@@ -158,7 +158,7 @@ std::shared_ptr<ecore::EObject> ChangeEventImpl::copy() const
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference changeExpression */
-std::shared_ptr<uml::ValueSpecification> ChangeEventImpl::getChangeExpression() const
+const std::shared_ptr<uml::ValueSpecification>& ChangeEventImpl::getChangeExpression() const
 {
     return m_changeExpression;
 }

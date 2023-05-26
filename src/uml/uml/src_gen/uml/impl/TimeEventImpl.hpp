@@ -75,7 +75,7 @@ namespace uml
 			<p>From package UML::CommonBehavior.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::TimeExpression> getWhen() const ;
+			virtual const std::shared_ptr<uml::TimeExpression>& getWhen() const ;
 			/*!
 			Specifies the time of the TimeEvent.
 			<p>From package UML::CommonBehavior.</p>

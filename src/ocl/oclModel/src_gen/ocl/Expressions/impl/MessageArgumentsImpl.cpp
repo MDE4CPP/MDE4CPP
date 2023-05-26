@@ -122,7 +122,7 @@ std::shared_ptr<ecore::EObject> MessageArgumentsImpl::copy() const
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference referredOclExpressions */
-std::shared_ptr<Bag<ocl::Expressions::OclExpression>> MessageArgumentsImpl::getReferredOclExpressions() const
+const std::shared_ptr<Bag<ocl::Expressions::OclExpression>>& MessageArgumentsImpl::getReferredOclExpressions() const
 {
 	if(m_referredOclExpressions == nullptr)
 	{

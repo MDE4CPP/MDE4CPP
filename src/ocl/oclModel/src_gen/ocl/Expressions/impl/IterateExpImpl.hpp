@@ -67,7 +67,7 @@ namespace ocl::Expressions
 			//*********************************
 			// Reference Getters & Setters
 			//*********************************
-			virtual std::shared_ptr<ecore::ETypedElement> getResult() const ;
+			virtual const std::shared_ptr<ecore::ETypedElement>& getResult() const ;
 			virtual void setResult(const std::shared_ptr<ecore::ETypedElement>&) ;
 			
 			//*********************************

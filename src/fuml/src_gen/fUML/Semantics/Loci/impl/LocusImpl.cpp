@@ -293,7 +293,7 @@ std::shared_ptr<Bag<uml::Element>> LocusImpl::retrieveExtent(const std::shared_p
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference executor */
-std::shared_ptr<fUML::Semantics::Loci::Executor> LocusImpl::getExecutor() const
+const std::shared_ptr<fUML::Semantics::Loci::Executor>& LocusImpl::getExecutor() const
 {
     return m_executor;
 }
@@ -304,7 +304,7 @@ void LocusImpl::setExecutor(const std::shared_ptr<fUML::Semantics::Loci::Executo
 }
 
 /* Getter & Setter for reference extensionalValues */
-std::shared_ptr<Bag<uml::Element>> LocusImpl::getExtensionalValues() const
+const std::shared_ptr<Bag<uml::Element>>& LocusImpl::getExtensionalValues() const
 {
 	if(m_extensionalValues == nullptr)
 	{
@@ -316,7 +316,7 @@ std::shared_ptr<Bag<uml::Element>> LocusImpl::getExtensionalValues() const
 }
 
 /* Getter & Setter for reference factory */
-std::shared_ptr<fUML::Semantics::Loci::ExecutionFactory> LocusImpl::getFactory() const
+const std::shared_ptr<fUML::Semantics::Loci::ExecutionFactory>& LocusImpl::getFactory() const
 {
     return m_factory;
 }

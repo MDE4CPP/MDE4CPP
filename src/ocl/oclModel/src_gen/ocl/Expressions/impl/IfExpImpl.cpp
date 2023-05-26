@@ -232,7 +232,7 @@ std::shared_ptr<ecore::EObject> IfExpImpl::copy() const
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference condition */
-std::shared_ptr<ocl::Expressions::OclExpression> IfExpImpl::getCondition() const
+const std::shared_ptr<ocl::Expressions::OclExpression>& IfExpImpl::getCondition() const
 {
     return m_condition;
 }
@@ -243,7 +243,7 @@ void IfExpImpl::setCondition(const std::shared_ptr<ocl::Expressions::OclExpressi
 }
 
 /* Getter & Setter for reference elseExpression */
-std::shared_ptr<ocl::Expressions::OclExpression> IfExpImpl::getElseExpression() const
+const std::shared_ptr<ocl::Expressions::OclExpression>& IfExpImpl::getElseExpression() const
 {
     return m_elseExpression;
 }
@@ -254,7 +254,7 @@ void IfExpImpl::setElseExpression(const std::shared_ptr<ocl::Expressions::OclExp
 }
 
 /* Getter & Setter for reference thenExpression */
-std::shared_ptr<ocl::Expressions::OclExpression> IfExpImpl::getThenExpression() const
+const std::shared_ptr<ocl::Expressions::OclExpression>& IfExpImpl::getThenExpression() const
 {
     return m_thenExpression;
 }

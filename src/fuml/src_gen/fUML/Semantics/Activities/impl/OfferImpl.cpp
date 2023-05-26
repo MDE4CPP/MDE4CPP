@@ -205,7 +205,7 @@ std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> OfferImpl::retrieveOffe
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference offeredTokens */
-std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> OfferImpl::getOfferedTokens() const
+const std::shared_ptr<Bag<fUML::Semantics::Activities::Token>>& OfferImpl::getOfferedTokens() const
 {
 	if(m_offeredTokens == nullptr)
 	{

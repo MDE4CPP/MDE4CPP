@@ -125,7 +125,7 @@ std::shared_ptr<ecore::EObject> QualifierValueImpl::copy() const
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference qualifier */
-std::shared_ptr<uml::Property> QualifierValueImpl::getQualifier() const
+const std::shared_ptr<uml::Property>& QualifierValueImpl::getQualifier() const
 {
     return m_qualifier;
 }
@@ -136,7 +136,7 @@ void QualifierValueImpl::setQualifier(const std::shared_ptr<uml::Property>& _qua
 }
 
 /* Getter & Setter for reference value */
-std::shared_ptr<uml::InputPin> QualifierValueImpl::getValue() const
+const std::shared_ptr<uml::InputPin>& QualifierValueImpl::getValue() const
 {
     return m_value;
 }

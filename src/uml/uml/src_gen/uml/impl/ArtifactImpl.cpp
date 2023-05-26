@@ -336,7 +336,7 @@ void ArtifactImpl::setFileName(std::string _fileName)
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference manifestation */
-std::shared_ptr<Subset<uml::Manifestation, uml::Element>> ArtifactImpl::getManifestation() const
+const std::shared_ptr<Subset<uml::Manifestation, uml::Element>>& ArtifactImpl::getManifestation() const
 {
 	if(m_manifestation == nullptr)
 	{
@@ -357,7 +357,7 @@ std::shared_ptr<Subset<uml::Manifestation, uml::Element>> ArtifactImpl::getManif
 }
 
 /* Getter & Setter for reference nestedArtifact */
-std::shared_ptr<Subset<uml::Artifact, uml::NamedElement>> ArtifactImpl::getNestedArtifact() const
+const std::shared_ptr<Subset<uml::Artifact, uml::NamedElement>>& ArtifactImpl::getNestedArtifact() const
 {
 	if(m_nestedArtifact == nullptr)
 	{
@@ -378,7 +378,7 @@ std::shared_ptr<Subset<uml::Artifact, uml::NamedElement>> ArtifactImpl::getNeste
 }
 
 /* Getter & Setter for reference ownedAttribute */
-std::shared_ptr<Subset<uml::Property, uml::NamedElement, uml::Property>> ArtifactImpl::getOwnedAttribute() const
+const std::shared_ptr<Subset<uml::Property, uml::NamedElement, uml::Property>>& ArtifactImpl::getOwnedAttribute() const
 {
 	if(m_ownedAttribute == nullptr)
 	{
@@ -399,7 +399,7 @@ std::shared_ptr<Subset<uml::Property, uml::NamedElement, uml::Property>> Artifac
 }
 
 /* Getter & Setter for reference ownedOperation */
-std::shared_ptr<Subset<uml::Operation, uml::Feature, uml::NamedElement>> ArtifactImpl::getOwnedOperation() const
+const std::shared_ptr<Subset<uml::Operation, uml::Feature, uml::NamedElement>>& ArtifactImpl::getOwnedOperation() const
 {
 	if(m_ownedOperation == nullptr)
 	{

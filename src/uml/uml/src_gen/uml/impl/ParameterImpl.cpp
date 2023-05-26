@@ -284,7 +284,7 @@ void ParameterImpl::setBehavior(std::weak_ptr<uml::Behavior> _behavior)
 }
 
 /* Getter & Setter for reference defaultValue */
-std::shared_ptr<uml::ValueSpecification> ParameterImpl::getDefaultValue() const
+const std::shared_ptr<uml::ValueSpecification>& ParameterImpl::getDefaultValue() const
 {
     return m_defaultValue;
 }
@@ -301,7 +301,7 @@ std::weak_ptr<uml::Operation> ParameterImpl::getOperation() const
 }
 
 /* Getter & Setter for reference parameterSet */
-std::shared_ptr<Bag<uml::ParameterSet>> ParameterImpl::getParameterSet() const
+const std::shared_ptr<Bag<uml::ParameterSet>>& ParameterImpl::getParameterSet() const
 {
 	if(m_parameterSet == nullptr)
 	{

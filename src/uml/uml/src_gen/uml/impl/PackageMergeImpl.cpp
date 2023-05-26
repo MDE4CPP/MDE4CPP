@@ -137,7 +137,7 @@ std::shared_ptr<ecore::EObject> PackageMergeImpl::copy() const
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference mergedPackage */
-std::shared_ptr<uml::Package> PackageMergeImpl::getMergedPackage() const
+const std::shared_ptr<uml::Package>& PackageMergeImpl::getMergedPackage() const
 {
     return m_mergedPackage;
 }

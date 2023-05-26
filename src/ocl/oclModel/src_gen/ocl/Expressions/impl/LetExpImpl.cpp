@@ -237,7 +237,7 @@ std::shared_ptr<ecore::EObject> LetExpImpl::copy() const
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference in */
-std::shared_ptr<ocl::Expressions::OclExpression> LetExpImpl::getIn() const
+const std::shared_ptr<ocl::Expressions::OclExpression>& LetExpImpl::getIn() const
 {
     return m_in;
 }
@@ -248,7 +248,7 @@ void LetExpImpl::setIn(const std::shared_ptr<ocl::Expressions::OclExpression>& _
 }
 
 /* Getter & Setter for reference variables */
-std::shared_ptr<Bag<ocl::Expressions::VarDeclarationExp>> LetExpImpl::getVariables() const
+const std::shared_ptr<Bag<ocl::Expressions::VarDeclarationExp>>& LetExpImpl::getVariables() const
 {
 	if(m_variables == nullptr)
 	{

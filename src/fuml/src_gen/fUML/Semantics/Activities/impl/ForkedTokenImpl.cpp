@@ -207,7 +207,7 @@ void ForkedTokenImpl::setRemainingOffersCount(int _remainingOffersCount)
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference baseToken */
-std::shared_ptr<fUML::Semantics::Activities::Token> ForkedTokenImpl::getBaseToken() const
+const std::shared_ptr<fUML::Semantics::Activities::Token>& ForkedTokenImpl::getBaseToken() const
 {
     return m_baseToken;
 }

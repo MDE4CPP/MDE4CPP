@@ -57,7 +57,7 @@ namespace ecore
 			//*********************************
 			// Reference Getters & Setters
 			//*********************************
-			virtual std::shared_ptr<Subset<ecore::EEnumLiteral, ecore::EObject>> getELiterals() const ;
+			virtual const std::shared_ptr<Subset<ecore::EEnumLiteral, ecore::EObject>>& getELiterals() const ;
 			
 			//*********************************
 			// Union Reference Getters

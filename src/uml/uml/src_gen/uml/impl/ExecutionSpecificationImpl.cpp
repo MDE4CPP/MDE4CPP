@@ -148,7 +148,7 @@ ExecutionSpecificationImpl& ExecutionSpecificationImpl::operator=(const Executio
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference finish */
-std::shared_ptr<uml::OccurrenceSpecification> ExecutionSpecificationImpl::getFinish() const
+const std::shared_ptr<uml::OccurrenceSpecification>& ExecutionSpecificationImpl::getFinish() const
 {
     return m_finish;
 }
@@ -159,7 +159,7 @@ void ExecutionSpecificationImpl::setFinish(const std::shared_ptr<uml::Occurrence
 }
 
 /* Getter & Setter for reference start */
-std::shared_ptr<uml::OccurrenceSpecification> ExecutionSpecificationImpl::getStart() const
+const std::shared_ptr<uml::OccurrenceSpecification>& ExecutionSpecificationImpl::getStart() const
 {
     return m_start;
 }

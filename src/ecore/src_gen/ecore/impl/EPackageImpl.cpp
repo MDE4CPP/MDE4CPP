@@ -223,7 +223,7 @@ void EPackageImpl::setNsURI(std::string _nsURI)
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference eClassifiers */
-std::shared_ptr<Subset<ecore::EClassifier, ecore::EObject>> EPackageImpl::getEClassifiers() const
+const std::shared_ptr<Subset<ecore::EClassifier, ecore::EObject>>& EPackageImpl::getEClassifiers() const
 {
 	if(m_eClassifiers == nullptr)
 	{
@@ -244,7 +244,7 @@ std::shared_ptr<Subset<ecore::EClassifier, ecore::EObject>> EPackageImpl::getECl
 }
 
 /* Getter & Setter for reference eFactoryInstance */
-std::shared_ptr<ecore::EFactory> EPackageImpl::getEFactoryInstance() const
+const std::shared_ptr<ecore::EFactory>& EPackageImpl::getEFactoryInstance() const
 {
     return m_eFactoryInstance;
 }
@@ -255,7 +255,7 @@ void EPackageImpl::setEFactoryInstance(const std::shared_ptr<ecore::EFactory>& _
 }
 
 /* Getter & Setter for reference eSubpackages */
-std::shared_ptr<Bag<ecore::EPackage>> EPackageImpl::getESubpackages() const
+const std::shared_ptr<Bag<ecore::EPackage>>& EPackageImpl::getESubpackages() const
 {
 	if(m_eSubpackages == nullptr)
 	{

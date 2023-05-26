@@ -103,7 +103,7 @@ namespace uml
 			<p>From package UML::InformationFlows.</p>
 			*/
 			
-			virtual std::shared_ptr<Bag<uml::Classifier>> getRepresented() const = 0;
+			virtual const std::shared_ptr<Bag<uml::Classifier>>& getRepresented() const = 0;
 
 			//*********************************
 			// Union Reference Getters

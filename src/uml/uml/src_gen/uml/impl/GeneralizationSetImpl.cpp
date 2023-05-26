@@ -178,7 +178,7 @@ void GeneralizationSetImpl::setIsDisjoint(bool _isDisjoint)
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference generalization */
-std::shared_ptr<Bag<uml::Generalization>> GeneralizationSetImpl::getGeneralization() const
+const std::shared_ptr<Bag<uml::Generalization>>& GeneralizationSetImpl::getGeneralization() const
 {
 	if(m_generalization == nullptr)
 	{
@@ -190,7 +190,7 @@ std::shared_ptr<Bag<uml::Generalization>> GeneralizationSetImpl::getGeneralizati
 }
 
 /* Getter & Setter for reference powertype */
-std::shared_ptr<uml::Classifier> GeneralizationSetImpl::getPowertype() const
+const std::shared_ptr<uml::Classifier>& GeneralizationSetImpl::getPowertype() const
 {
     return m_powertype;
 }

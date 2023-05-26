@@ -180,7 +180,7 @@ std::shared_ptr<ecore::EObject> InformationItemImpl::copy() const
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference represented */
-std::shared_ptr<Bag<uml::Classifier>> InformationItemImpl::getRepresented() const
+const std::shared_ptr<Bag<uml::Classifier>>& InformationItemImpl::getRepresented() const
 {
 	if(m_represented == nullptr)
 	{

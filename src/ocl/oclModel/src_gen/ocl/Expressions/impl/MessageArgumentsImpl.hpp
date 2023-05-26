@@ -51,7 +51,7 @@ namespace ocl::Expressions
 			//*********************************
 			// Reference Getters & Setters
 			//*********************************
-			virtual std::shared_ptr<Bag<ocl::Expressions::OclExpression>> getReferredOclExpressions() const ;
+			virtual const std::shared_ptr<Bag<ocl::Expressions::OclExpression>>& getReferredOclExpressions() const ;
 			
 			//*********************************
 			// Union Reference Getters

@@ -162,7 +162,7 @@ void ProfileApplicationImpl::setIsStrict(bool _isStrict)
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference appliedProfile */
-std::shared_ptr<uml::Profile> ProfileApplicationImpl::getAppliedProfile() const
+const std::shared_ptr<uml::Profile>& ProfileApplicationImpl::getAppliedProfile() const
 {
     return m_appliedProfile;
 }

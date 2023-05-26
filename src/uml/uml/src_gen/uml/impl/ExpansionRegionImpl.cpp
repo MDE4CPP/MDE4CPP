@@ -201,7 +201,7 @@ void ExpansionRegionImpl::setMode(uml::ExpansionKind _mode)
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference inputElement */
-std::shared_ptr<Bag<uml::ExpansionNode>> ExpansionRegionImpl::getInputElement() const
+const std::shared_ptr<Bag<uml::ExpansionNode>>& ExpansionRegionImpl::getInputElement() const
 {
 	if(m_inputElement == nullptr)
 	{
@@ -213,7 +213,7 @@ std::shared_ptr<Bag<uml::ExpansionNode>> ExpansionRegionImpl::getInputElement() 
 }
 
 /* Getter & Setter for reference outputElement */
-std::shared_ptr<Bag<uml::ExpansionNode>> ExpansionRegionImpl::getOutputElement() const
+const std::shared_ptr<Bag<uml::ExpansionNode>>& ExpansionRegionImpl::getOutputElement() const
 {
 	if(m_outputElement == nullptr)
 	{

@@ -93,7 +93,7 @@ namespace uml
 			<p>From package UML::Interactions.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::ValueSpecification> getMaxint() const = 0;
+			virtual const std::shared_ptr<uml::ValueSpecification>& getMaxint() const = 0;
 			/*!
 			The maximum number of iterations of a loop
 			<p>From package UML::Interactions.</p>
@@ -105,7 +105,7 @@ namespace uml
 			<p>From package UML::Interactions.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::ValueSpecification> getMinint() const = 0;
+			virtual const std::shared_ptr<uml::ValueSpecification>& getMinint() const = 0;
 			/*!
 			The minimum number of iterations of a loop
 			<p>From package UML::Interactions.</p>

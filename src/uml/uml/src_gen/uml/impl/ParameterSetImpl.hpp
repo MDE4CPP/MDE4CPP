@@ -59,13 +59,13 @@ namespace uml
 			<p>From package UML::Classification.</p>
 			*/
 			
-			virtual std::shared_ptr<Subset<uml::Constraint, uml::Element>> getCondition() const ;
+			virtual const std::shared_ptr<Subset<uml::Constraint, uml::Element>>& getCondition() const ;
 			/*!
 			Parameters in the ParameterSet.
 			<p>From package UML::Classification.</p>
 			*/
 			
-			virtual std::shared_ptr<Bag<uml::Parameter>> getParameter() const ;
+			virtual const std::shared_ptr<Bag<uml::Parameter>>& getParameter() const ;
 			
 			//*********************************
 			// Union Reference Getters

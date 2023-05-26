@@ -100,7 +100,7 @@ namespace uml
 			<p>From package UML::StateMachines.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::Region> getExtendedRegion() const ;
+			virtual const std::shared_ptr<uml::Region>& getExtendedRegion() const ;
 			/*!
 			The region of which this region is an extension.
 			<p>From package UML::StateMachines.</p>
@@ -136,13 +136,13 @@ namespace uml
 			<p>From package UML::StateMachines.</p>
 			*/
 			
-			virtual std::shared_ptr<Subset<uml::Vertex, uml::NamedElement>> getSubvertex() const ;
+			virtual const std::shared_ptr<Subset<uml::Vertex, uml::NamedElement>>& getSubvertex() const ;
 			/*!
 			The set of Transitions owned by the Region.
 			<p>From package UML::StateMachines.</p>
 			*/
 			
-			virtual std::shared_ptr<Subset<uml::Transition, uml::NamedElement>> getTransition() const ;
+			virtual const std::shared_ptr<Subset<uml::Transition, uml::NamedElement>>& getTransition() const ;
 			
 			//*********************************
 			// Union Reference Getters

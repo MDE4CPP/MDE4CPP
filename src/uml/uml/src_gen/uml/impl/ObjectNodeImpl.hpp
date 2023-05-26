@@ -88,13 +88,13 @@ namespace uml
 			<p>From package UML::Activities.</p>
 			*/
 			
-			virtual std::shared_ptr<Bag<uml::State>> getInState() const ;
+			virtual const std::shared_ptr<Bag<uml::State>>& getInState() const ;
 			/*!
 			A Behavior used to select tokens to be offered on outgoing ActivityEdges.
 			<p>From package UML::Activities.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::Behavior> getSelection() const ;
+			virtual const std::shared_ptr<uml::Behavior>& getSelection() const ;
 			/*!
 			A Behavior used to select tokens to be offered on outgoing ActivityEdges.
 			<p>From package UML::Activities.</p>
@@ -106,7 +106,7 @@ namespace uml
 			<p>From package UML::Activities.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::ValueSpecification> getUpperBound() const ;
+			virtual const std::shared_ptr<uml::ValueSpecification>& getUpperBound() const ;
 			/*!
 			The maximum number of tokens that may be held by this ObjectNode. Tokens cannot flow into the ObjectNode if the upperBound is reached. If no upperBound is specified, then there is no limit on how many tokens the ObjectNode can hold.
 			<p>From package UML::Activities.</p>

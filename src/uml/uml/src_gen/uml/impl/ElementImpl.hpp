@@ -245,7 +245,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::shared_ptr<Subset<uml::Comment, uml::Element>> getOwnedComment() const ;
+			virtual const std::shared_ptr<Subset<uml::Comment, uml::Element>>& getOwnedComment() const ;
 			
 			
 			

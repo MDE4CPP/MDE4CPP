@@ -154,7 +154,7 @@ bool EClassifierImpl::isInstance(const std::shared_ptr<Any>& object) const
 // Attribute Getters & Setters
 //*********************************
 /* Getter & Setter for attribute defaultValue */
-std::shared_ptr<Any> EClassifierImpl::getDefaultValue() const 
+const std::shared_ptr<Any>& EClassifierImpl::getDefaultValue() const 
 {
 	return m_defaultValue;
 }
@@ -202,7 +202,7 @@ std::weak_ptr<ecore::EPackage> EClassifierImpl::getEPackage() const
 }
 
 /* Getter & Setter for reference eTypeParameters */
-std::shared_ptr<Bag<ecore::ETypeParameter>> EClassifierImpl::getETypeParameters() const
+const std::shared_ptr<Bag<ecore::ETypeParameter>>& EClassifierImpl::getETypeParameters() const
 {
 	if(m_eTypeParameters == nullptr)
 	{

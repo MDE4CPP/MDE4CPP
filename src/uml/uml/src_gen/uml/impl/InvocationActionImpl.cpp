@@ -188,7 +188,7 @@ InvocationActionImpl& InvocationActionImpl::operator=(const InvocationActionImpl
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference argument */
-std::shared_ptr<SubsetUnion<uml::InputPin, uml::InputPin>> InvocationActionImpl::getArgument() const
+const std::shared_ptr<SubsetUnion<uml::InputPin, uml::InputPin>>& InvocationActionImpl::getArgument() const
 {
 	if(m_argument == nullptr)
 	{
@@ -209,7 +209,7 @@ std::shared_ptr<SubsetUnion<uml::InputPin, uml::InputPin>> InvocationActionImpl:
 }
 
 /* Getter & Setter for reference onPort */
-std::shared_ptr<uml::Port> InvocationActionImpl::getOnPort() const
+const std::shared_ptr<uml::Port>& InvocationActionImpl::getOnPort() const
 {
     return m_onPort;
 }

@@ -147,32 +147,32 @@ namespace uml
 			<p>From package UML::StructuredClassifiers.</p>
 			*/
 			
-			virtual std::shared_ptr<Bag<uml::Extension>> getExtension() const = 0;
+			virtual const std::shared_ptr<Bag<uml::Extension>>& getExtension() const = 0;
 			/*!
 			The Classifiers owned by the Class that are not ownedBehaviors.
 			<p>From package UML::StructuredClassifiers.</p>
 			*/
 			
-			virtual std::shared_ptr<Subset<uml::Classifier, uml::NamedElement>> getNestedClassifier() const = 0;
-			virtual std::shared_ptr<Subset<uml::Property, uml::ConnectableElement, uml::NamedElement, uml::Property>> getClass_OwnedAttribute() const = 0;
+			virtual const std::shared_ptr<Subset<uml::Classifier, uml::NamedElement>>& getNestedClassifier() const = 0;
+			virtual const std::shared_ptr<Subset<uml::Property, uml::ConnectableElement, uml::NamedElement, uml::Property>>& getClass_OwnedAttribute() const = 0;
 			/*!
 			The Operations owned by the Class.
 			<p>From package UML::StructuredClassifiers.</p>
 			*/
 			
-			virtual std::shared_ptr<Subset<uml::Operation, uml::Feature, uml::NamedElement>> getOwnedOperation() const = 0;
+			virtual const std::shared_ptr<Subset<uml::Operation, uml::Feature, uml::NamedElement>>& getOwnedOperation() const = 0;
 			/*!
 			The Receptions owned by the Class.
 			<p>From package UML::StructuredClassifiers.</p>
 			*/
 			
-			virtual std::shared_ptr<Subset<uml::Reception, uml::Feature, uml::NamedElement>> getOwnedReception() const = 0;
+			virtual const std::shared_ptr<Subset<uml::Reception, uml::Feature, uml::NamedElement>>& getOwnedReception() const = 0;
 			/*!
 			The superclasses of a Class, derived from its Generalizations.
 			<p>From package UML::StructuredClassifiers.</p>
 			*/
 			
-			virtual std::shared_ptr<Bag<uml::Class>> getSuperClass() const = 0;
+			virtual const std::shared_ptr<Bag<uml::Class>>& getSuperClass() const = 0;
 
 			//*********************************
 			// Union Reference Getters

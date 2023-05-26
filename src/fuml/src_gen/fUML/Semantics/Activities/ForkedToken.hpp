@@ -84,7 +84,7 @@ namespace fUML::Semantics::Activities
 			//*********************************
 			// Reference Getters & Setters
 			//*********************************
-			virtual std::shared_ptr<fUML::Semantics::Activities::Token> getBaseToken() const = 0;
+			virtual const std::shared_ptr<fUML::Semantics::Activities::Token>& getBaseToken() const = 0;
 			virtual void setBaseToken(const std::shared_ptr<fUML::Semantics::Activities::Token>&) = 0;
 
 			//*********************************

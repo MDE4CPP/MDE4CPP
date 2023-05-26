@@ -410,7 +410,7 @@ void EClassImpl::setInterface(bool _interface)
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference eAllAttributes */
-std::shared_ptr<Bag<ecore::EAttribute>> EClassImpl::getEAllAttributes() const
+const std::shared_ptr<Bag<ecore::EAttribute>>& EClassImpl::getEAllAttributes() const
 {
 	//generated from getterBody annotation
     std::shared_ptr<Bag<ecore::EAttribute> > eAllAttributes(new Bag<ecore::EAttribute>());
@@ -428,7 +428,7 @@ std::shared_ptr<Bag<ecore::EAttribute>> EClassImpl::getEAllAttributes() const
 }
 
 /* Getter & Setter for reference eAllContainments */
-std::shared_ptr<Bag<ecore::EReference>> EClassImpl::getEAllContainments() const
+const std::shared_ptr<Bag<ecore::EReference>>& EClassImpl::getEAllContainments() const
 {
 	if(m_eAllContainments == nullptr)
 	{
@@ -440,7 +440,7 @@ std::shared_ptr<Bag<ecore::EReference>> EClassImpl::getEAllContainments() const
 }
 
 /* Getter & Setter for reference eAllGenericSuperTypes */
-std::shared_ptr<Bag<ecore::EGenericType>> EClassImpl::getEAllGenericSuperTypes() const
+const std::shared_ptr<Bag<ecore::EGenericType>>& EClassImpl::getEAllGenericSuperTypes() const
 {
 	if(m_eAllGenericSuperTypes == nullptr)
 	{
@@ -452,7 +452,7 @@ std::shared_ptr<Bag<ecore::EGenericType>> EClassImpl::getEAllGenericSuperTypes()
 }
 
 /* Getter & Setter for reference eAllOperations */
-std::shared_ptr<Bag<ecore::EOperation>> EClassImpl::getEAllOperations() const
+const std::shared_ptr<Bag<ecore::EOperation>>& EClassImpl::getEAllOperations() const
 {
 	//generated from getterBody annotation
 std::shared_ptr< Bag<ecore::EOperation> > eAllOperations(new Bag<ecore::EOperation> () );
@@ -470,7 +470,7 @@ std::shared_ptr< Bag<ecore::EOperation> > eAllOperations(new Bag<ecore::EOperati
 }
 
 /* Getter & Setter for reference eAllReferences */
-std::shared_ptr<Bag<ecore::EReference>> EClassImpl::getEAllReferences() const
+const std::shared_ptr<Bag<ecore::EReference>>& EClassImpl::getEAllReferences() const
 {
 	//generated from getterBody annotation
     std::shared_ptr<Bag<ecore::EReference> > eAllReferences(new Bag<ecore::EReference>());
@@ -488,7 +488,7 @@ std::shared_ptr<Bag<ecore::EReference>> EClassImpl::getEAllReferences() const
 }
 
 /* Getter & Setter for reference eAllStructuralFeatures */
-std::shared_ptr<Bag<ecore::EStructuralFeature>> EClassImpl::getEAllStructuralFeatures() const
+const std::shared_ptr<Bag<ecore::EStructuralFeature>>& EClassImpl::getEAllStructuralFeatures() const
 {
 	//generated from getterBody annotation
 std::shared_ptr< Bag<ecore::EStructuralFeature> > eAllStructuralFeatures( new Bag<ecore::EStructuralFeature> ());
@@ -506,7 +506,7 @@ std::shared_ptr< Bag<ecore::EStructuralFeature> > eAllStructuralFeatures( new Ba
 }
 
 /* Getter & Setter for reference eAllSuperTypes */
-std::shared_ptr<Bag<ecore::EClass>> EClassImpl::getEAllSuperTypes() const
+const std::shared_ptr<Bag<ecore::EClass>>& EClassImpl::getEAllSuperTypes() const
 {
 	//generated from getterBody annotation
 std::shared_ptr< Bag<ecore::EClass> > eAllSuperTypes(new Bag<ecore::EClass>  ());
@@ -523,7 +523,7 @@ std::shared_ptr< Bag<ecore::EClass> > eAllSuperTypes(new Bag<ecore::EClass>  ())
 }
 
 /* Getter & Setter for reference eAttributes */
-std::shared_ptr<Subset<ecore::EAttribute, ecore::EStructuralFeature>> EClassImpl::getEAttributes() const
+const std::shared_ptr<Subset<ecore::EAttribute, ecore::EStructuralFeature>>& EClassImpl::getEAttributes() const
 {
 	if(m_eAttributes == nullptr)
 	{
@@ -544,7 +544,7 @@ std::shared_ptr<Subset<ecore::EAttribute, ecore::EStructuralFeature>> EClassImpl
 }
 
 /* Getter & Setter for reference eGenericSuperTypes */
-std::shared_ptr<Bag<ecore::EGenericType>> EClassImpl::getEGenericSuperTypes() const
+const std::shared_ptr<Bag<ecore::EGenericType>>& EClassImpl::getEGenericSuperTypes() const
 {
 	if(m_eGenericSuperTypes == nullptr)
 	{
@@ -556,7 +556,7 @@ std::shared_ptr<Bag<ecore::EGenericType>> EClassImpl::getEGenericSuperTypes() co
 }
 
 /* Getter & Setter for reference eIDAttribute */
-std::shared_ptr<ecore::EAttribute> EClassImpl::getEIDAttribute() const
+const std::shared_ptr<ecore::EAttribute>& EClassImpl::getEIDAttribute() const
 {
     return m_eIDAttribute;
 }
@@ -567,7 +567,7 @@ void EClassImpl::setEIDAttribute(const std::shared_ptr<ecore::EAttribute>& _eIDA
 }
 
 /* Getter & Setter for reference eOperations */
-std::shared_ptr<Subset<ecore::EOperation, ecore::EObject>> EClassImpl::getEOperations() const
+const std::shared_ptr<Subset<ecore::EOperation, ecore::EObject>>& EClassImpl::getEOperations() const
 {
 	if(m_eOperations == nullptr)
 	{
@@ -588,7 +588,7 @@ std::shared_ptr<Subset<ecore::EOperation, ecore::EObject>> EClassImpl::getEOpera
 }
 
 /* Getter & Setter for reference eReferences */
-std::shared_ptr<Subset<ecore::EReference, ecore::EStructuralFeature>> EClassImpl::getEReferences() const
+const std::shared_ptr<Subset<ecore::EReference, ecore::EStructuralFeature>>& EClassImpl::getEReferences() const
 {
 	if(m_eReferences == nullptr)
 	{
@@ -611,7 +611,7 @@ std::shared_ptr<Subset<ecore::EReference, ecore::EStructuralFeature>> EClassImpl
 /* Getter & Setter for reference eStructuralFeatures */
 
 /* Getter & Setter for reference eSuperTypes */
-std::shared_ptr<Bag<ecore::EClass>> EClassImpl::getESuperTypes() const
+const std::shared_ptr<Bag<ecore::EClass>>& EClassImpl::getESuperTypes() const
 {
 	if(m_eSuperTypes == nullptr)
 	{

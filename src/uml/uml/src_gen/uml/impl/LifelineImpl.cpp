@@ -156,7 +156,7 @@ std::shared_ptr<ecore::EObject> LifelineImpl::copy() const
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference coveredBy */
-std::shared_ptr<Bag<uml::InteractionFragment>> LifelineImpl::getCoveredBy() const
+const std::shared_ptr<Bag<uml::InteractionFragment>>& LifelineImpl::getCoveredBy() const
 {
 	if(m_coveredBy == nullptr)
 	{
@@ -168,7 +168,7 @@ std::shared_ptr<Bag<uml::InteractionFragment>> LifelineImpl::getCoveredBy() cons
 }
 
 /* Getter & Setter for reference decomposedAs */
-std::shared_ptr<uml::PartDecomposition> LifelineImpl::getDecomposedAs() const
+const std::shared_ptr<uml::PartDecomposition>& LifelineImpl::getDecomposedAs() const
 {
     return m_decomposedAs;
 }
@@ -190,7 +190,7 @@ void LifelineImpl::setInteraction(std::weak_ptr<uml::Interaction> _interaction)
 }
 
 /* Getter & Setter for reference represents */
-std::shared_ptr<uml::ConnectableElement> LifelineImpl::getRepresents() const
+const std::shared_ptr<uml::ConnectableElement>& LifelineImpl::getRepresents() const
 {
     return m_represents;
 }
@@ -201,7 +201,7 @@ void LifelineImpl::setRepresents(const std::shared_ptr<uml::ConnectableElement>&
 }
 
 /* Getter & Setter for reference selector */
-std::shared_ptr<uml::ValueSpecification> LifelineImpl::getSelector() const
+const std::shared_ptr<uml::ValueSpecification>& LifelineImpl::getSelector() const
 {
     return m_selector;
 }

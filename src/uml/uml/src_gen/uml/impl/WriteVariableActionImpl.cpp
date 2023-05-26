@@ -161,7 +161,7 @@ WriteVariableActionImpl& WriteVariableActionImpl::operator=(const WriteVariableA
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference value */
-std::shared_ptr<uml::InputPin> WriteVariableActionImpl::getValue() const
+const std::shared_ptr<uml::InputPin>& WriteVariableActionImpl::getValue() const
 {
     return m_value;
 }

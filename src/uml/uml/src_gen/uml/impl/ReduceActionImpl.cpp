@@ -188,7 +188,7 @@ void ReduceActionImpl::setIsOrdered(bool _isOrdered)
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference collection */
-std::shared_ptr<uml::InputPin> ReduceActionImpl::getCollection() const
+const std::shared_ptr<uml::InputPin>& ReduceActionImpl::getCollection() const
 {
     return m_collection;
 }
@@ -199,7 +199,7 @@ void ReduceActionImpl::setCollection(const std::shared_ptr<uml::InputPin>& _coll
 }
 
 /* Getter & Setter for reference reducer */
-std::shared_ptr<uml::Behavior> ReduceActionImpl::getReducer() const
+const std::shared_ptr<uml::Behavior>& ReduceActionImpl::getReducer() const
 {
     return m_reducer;
 }
@@ -210,7 +210,7 @@ void ReduceActionImpl::setReducer(const std::shared_ptr<uml::Behavior>& _reducer
 }
 
 /* Getter & Setter for reference result */
-std::shared_ptr<uml::OutputPin> ReduceActionImpl::getResult() const
+const std::shared_ptr<uml::OutputPin>& ReduceActionImpl::getResult() const
 {
     return m_result;
 }

@@ -59,7 +59,7 @@ namespace uml
 			<p>From package UML::Packages.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::Package> getMergedPackage() const ;
+			virtual const std::shared_ptr<uml::Package>& getMergedPackage() const ;
 			/*!
 			References the Package that is to be merged with the receiving package of the PackageMerge.
 			<p>From package UML::Packages.</p>

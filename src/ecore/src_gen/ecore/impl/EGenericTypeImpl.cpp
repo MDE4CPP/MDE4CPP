@@ -155,7 +155,7 @@ bool EGenericTypeImpl::isInstance(const std::shared_ptr<Any>& object) const
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference eClassifier */
-std::shared_ptr<ecore::EClassifier> EGenericTypeImpl::getEClassifier() const
+const std::shared_ptr<ecore::EClassifier>& EGenericTypeImpl::getEClassifier() const
 {
     return m_eClassifier;
 }
@@ -166,7 +166,7 @@ void EGenericTypeImpl::setEClassifier(const std::shared_ptr<ecore::EClassifier>&
 }
 
 /* Getter & Setter for reference eLowerBound */
-std::shared_ptr<ecore::EGenericType> EGenericTypeImpl::getELowerBound() const
+const std::shared_ptr<ecore::EGenericType>& EGenericTypeImpl::getELowerBound() const
 {
     return m_eLowerBound;
 }
@@ -177,7 +177,7 @@ void EGenericTypeImpl::setELowerBound(const std::shared_ptr<ecore::EGenericType>
 }
 
 /* Getter & Setter for reference eRawType */
-std::shared_ptr<ecore::EClassifier> EGenericTypeImpl::getERawType() const
+const std::shared_ptr<ecore::EClassifier>& EGenericTypeImpl::getERawType() const
 {
     return m_eRawType;
 }
@@ -188,7 +188,7 @@ void EGenericTypeImpl::setERawType(const std::shared_ptr<ecore::EClassifier>& _e
 }
 
 /* Getter & Setter for reference eTypeArguments */
-std::shared_ptr<Bag<ecore::EGenericType>> EGenericTypeImpl::getETypeArguments() const
+const std::shared_ptr<Bag<ecore::EGenericType>>& EGenericTypeImpl::getETypeArguments() const
 {
 	if(m_eTypeArguments == nullptr)
 	{
@@ -200,7 +200,7 @@ std::shared_ptr<Bag<ecore::EGenericType>> EGenericTypeImpl::getETypeArguments() 
 }
 
 /* Getter & Setter for reference eTypeParameter */
-std::shared_ptr<ecore::ETypeParameter> EGenericTypeImpl::getETypeParameter() const
+const std::shared_ptr<ecore::ETypeParameter>& EGenericTypeImpl::getETypeParameter() const
 {
     return m_eTypeParameter;
 }
@@ -211,7 +211,7 @@ void EGenericTypeImpl::setETypeParameter(const std::shared_ptr<ecore::ETypeParam
 }
 
 /* Getter & Setter for reference eUpperBound */
-std::shared_ptr<ecore::EGenericType> EGenericTypeImpl::getEUpperBound() const
+const std::shared_ptr<ecore::EGenericType>& EGenericTypeImpl::getEUpperBound() const
 {
     return m_eUpperBound;
 }

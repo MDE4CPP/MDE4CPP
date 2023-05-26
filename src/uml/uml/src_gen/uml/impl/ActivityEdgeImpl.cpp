@@ -234,7 +234,7 @@ void ActivityEdgeImpl::setActivity(std::weak_ptr<uml::Activity> _activity)
 }
 
 /* Getter & Setter for reference guard */
-std::shared_ptr<uml::ValueSpecification> ActivityEdgeImpl::getGuard() const
+const std::shared_ptr<uml::ValueSpecification>& ActivityEdgeImpl::getGuard() const
 {
     return m_guard;
 }
@@ -247,7 +247,7 @@ void ActivityEdgeImpl::setGuard(const std::shared_ptr<uml::ValueSpecification>& 
 /* Getter & Setter for reference inGroup */
 
 /* Getter & Setter for reference inPartition */
-std::shared_ptr<Subset<uml::ActivityPartition, uml::ActivityGroup>> ActivityEdgeImpl::getInPartition() const
+const std::shared_ptr<Subset<uml::ActivityPartition, uml::ActivityGroup>>& ActivityEdgeImpl::getInPartition() const
 {
 	if(m_inPartition == nullptr)
 	{
@@ -279,7 +279,7 @@ void ActivityEdgeImpl::setInStructuredNode(std::weak_ptr<uml::StructuredActivity
 }
 
 /* Getter & Setter for reference interrupts */
-std::shared_ptr<uml::InterruptibleActivityRegion> ActivityEdgeImpl::getInterrupts() const
+const std::shared_ptr<uml::InterruptibleActivityRegion>& ActivityEdgeImpl::getInterrupts() const
 {
     return m_interrupts;
 }
@@ -290,7 +290,7 @@ void ActivityEdgeImpl::setInterrupts(const std::shared_ptr<uml::InterruptibleAct
 }
 
 /* Getter & Setter for reference redefinedEdge */
-std::shared_ptr<Subset<uml::ActivityEdge, uml::RedefinableElement>> ActivityEdgeImpl::getRedefinedEdge() const
+const std::shared_ptr<Subset<uml::ActivityEdge, uml::RedefinableElement>>& ActivityEdgeImpl::getRedefinedEdge() const
 {
 	if(m_redefinedEdge == nullptr)
 	{
@@ -311,7 +311,7 @@ std::shared_ptr<Subset<uml::ActivityEdge, uml::RedefinableElement>> ActivityEdge
 }
 
 /* Getter & Setter for reference source */
-std::shared_ptr<uml::ActivityNode> ActivityEdgeImpl::getSource() const
+const std::shared_ptr<uml::ActivityNode>& ActivityEdgeImpl::getSource() const
 {
     return m_source;
 }
@@ -322,7 +322,7 @@ void ActivityEdgeImpl::setSource(const std::shared_ptr<uml::ActivityNode>& _sour
 }
 
 /* Getter & Setter for reference target */
-std::shared_ptr<uml::ActivityNode> ActivityEdgeImpl::getTarget() const
+const std::shared_ptr<uml::ActivityNode>& ActivityEdgeImpl::getTarget() const
 {
     return m_target;
 }
@@ -333,7 +333,7 @@ void ActivityEdgeImpl::setTarget(const std::shared_ptr<uml::ActivityNode>& _targ
 }
 
 /* Getter & Setter for reference weight */
-std::shared_ptr<uml::ValueSpecification> ActivityEdgeImpl::getWeight() const
+const std::shared_ptr<uml::ValueSpecification>& ActivityEdgeImpl::getWeight() const
 {
     return m_weight;
 }

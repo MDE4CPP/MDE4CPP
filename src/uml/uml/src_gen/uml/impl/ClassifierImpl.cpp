@@ -674,7 +674,7 @@ void ClassifierImpl::setIsFinalSpecialization(bool _isFinalSpecialization)
 /* Getter & Setter for reference attribute */
 
 /* Getter & Setter for reference collaborationUse */
-std::shared_ptr<SubsetUnion<uml::CollaborationUse, uml::Element>> ClassifierImpl::getCollaborationUse() const
+const std::shared_ptr<SubsetUnion<uml::CollaborationUse, uml::Element>>& ClassifierImpl::getCollaborationUse() const
 {
 	if(m_collaborationUse == nullptr)
 	{
@@ -697,7 +697,7 @@ std::shared_ptr<SubsetUnion<uml::CollaborationUse, uml::Element>> ClassifierImpl
 /* Getter & Setter for reference feature */
 
 /* Getter & Setter for reference general */
-std::shared_ptr<Bag<uml::Classifier>> ClassifierImpl::getGeneral() const
+const std::shared_ptr<Bag<uml::Classifier>>& ClassifierImpl::getGeneral() const
 {
 	if(m_general == nullptr)
 	{
@@ -709,7 +709,7 @@ std::shared_ptr<Bag<uml::Classifier>> ClassifierImpl::getGeneral() const
 }
 
 /* Getter & Setter for reference generalization */
-std::shared_ptr<Subset<uml::Generalization, uml::Element>> ClassifierImpl::getGeneralization() const
+const std::shared_ptr<Subset<uml::Generalization, uml::Element>>& ClassifierImpl::getGeneralization() const
 {
 	if(m_generalization == nullptr)
 	{
@@ -730,7 +730,7 @@ std::shared_ptr<Subset<uml::Generalization, uml::Element>> ClassifierImpl::getGe
 }
 
 /* Getter & Setter for reference inheritedMember */
-std::shared_ptr<Subset<uml::NamedElement, uml::NamedElement>> ClassifierImpl::getInheritedMember() const
+const std::shared_ptr<Subset<uml::NamedElement, uml::NamedElement>>& ClassifierImpl::getInheritedMember() const
 {
 	if(m_inheritedMember == nullptr)
 	{
@@ -751,7 +751,7 @@ std::shared_ptr<Subset<uml::NamedElement, uml::NamedElement>> ClassifierImpl::ge
 }
 
 /* Getter & Setter for reference ownedUseCase */
-std::shared_ptr<Subset<uml::UseCase, uml::NamedElement>> ClassifierImpl::getOwnedUseCase() const
+const std::shared_ptr<Subset<uml::UseCase, uml::NamedElement>>& ClassifierImpl::getOwnedUseCase() const
 {
 	if(m_ownedUseCase == nullptr)
 	{
@@ -772,7 +772,7 @@ std::shared_ptr<Subset<uml::UseCase, uml::NamedElement>> ClassifierImpl::getOwne
 }
 
 /* Getter & Setter for reference powertypeExtent */
-std::shared_ptr<Bag<uml::GeneralizationSet>> ClassifierImpl::getPowertypeExtent() const
+const std::shared_ptr<Bag<uml::GeneralizationSet>>& ClassifierImpl::getPowertypeExtent() const
 {
 	if(m_powertypeExtent == nullptr)
 	{
@@ -784,7 +784,7 @@ std::shared_ptr<Bag<uml::GeneralizationSet>> ClassifierImpl::getPowertypeExtent(
 }
 
 /* Getter & Setter for reference redefinedClassifier */
-std::shared_ptr<SubsetUnion<uml::Classifier, uml::RedefinableElement>> ClassifierImpl::getRedefinedClassifier() const
+const std::shared_ptr<SubsetUnion<uml::Classifier, uml::RedefinableElement>>& ClassifierImpl::getRedefinedClassifier() const
 {
 	if(m_redefinedClassifier == nullptr)
 	{
@@ -805,7 +805,7 @@ std::shared_ptr<SubsetUnion<uml::Classifier, uml::RedefinableElement>> Classifie
 }
 
 /* Getter & Setter for reference representation */
-std::shared_ptr<uml::CollaborationUse> ClassifierImpl::getRepresentation() const
+const std::shared_ptr<uml::CollaborationUse>& ClassifierImpl::getRepresentation() const
 {
     return m_representation;
 }
@@ -816,7 +816,7 @@ void ClassifierImpl::setRepresentation(const std::shared_ptr<uml::CollaborationU
 }
 
 /* Getter & Setter for reference substitution */
-std::shared_ptr<Subset<uml::Substitution, uml::Element>> ClassifierImpl::getSubstitution() const
+const std::shared_ptr<Subset<uml::Substitution, uml::Element>>& ClassifierImpl::getSubstitution() const
 {
 	if(m_substitution == nullptr)
 	{
@@ -837,7 +837,7 @@ std::shared_ptr<Subset<uml::Substitution, uml::Element>> ClassifierImpl::getSubs
 }
 
 /* Getter & Setter for reference useCase */
-std::shared_ptr<Bag<uml::UseCase>> ClassifierImpl::getUseCase() const
+const std::shared_ptr<Bag<uml::UseCase>>& ClassifierImpl::getUseCase() const
 {
 	if(m_useCase == nullptr)
 	{

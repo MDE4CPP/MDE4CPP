@@ -102,7 +102,7 @@ namespace uml
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::OutputPin> getResult() const = 0;
+			virtual const std::shared_ptr<uml::OutputPin>& getResult() const = 0;
 			/*!
 			The OutputPin on which the result value is placed.
 			<p>From package UML::Actions.</p>
@@ -114,7 +114,7 @@ namespace uml
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::ValueSpecification> getValue() const = 0;
+			virtual const std::shared_ptr<uml::ValueSpecification>& getValue() const = 0;
 			/*!
 			The ValueSpecification to be evaluated.
 			<p>From package UML::Actions.</p>

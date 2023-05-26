@@ -215,7 +215,7 @@ std::shared_ptr<ecore::EObject> InitOrDerValueListExpImpl::copy() const
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference derExpressionList */
-std::shared_ptr<Bag<ocl::Expressions::InitOrDerValueExp>> InitOrDerValueListExpImpl::getDerExpressionList() const
+const std::shared_ptr<Bag<ocl::Expressions::InitOrDerValueExp>>& InitOrDerValueListExpImpl::getDerExpressionList() const
 {
 	if(m_derExpressionList == nullptr)
 	{
@@ -227,7 +227,7 @@ std::shared_ptr<Bag<ocl::Expressions::InitOrDerValueExp>> InitOrDerValueListExpI
 }
 
 /* Getter & Setter for reference initExpressionList */
-std::shared_ptr<Bag<ocl::Expressions::InitOrDerValueExp>> InitOrDerValueListExpImpl::getInitExpressionList() const
+const std::shared_ptr<Bag<ocl::Expressions::InitOrDerValueExp>>& InitOrDerValueListExpImpl::getInitExpressionList() const
 {
 	if(m_initExpressionList == nullptr)
 	{

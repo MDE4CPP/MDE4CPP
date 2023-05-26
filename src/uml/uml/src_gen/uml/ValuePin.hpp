@@ -110,7 +110,7 @@ namespace uml
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::ValueSpecification> getValue() const = 0;
+			virtual const std::shared_ptr<uml::ValueSpecification>& getValue() const = 0;
 			/*!
 			The ValueSpecification that is evaluated to obtain the value that the ValuePin will provide.
 			<p>From package UML::Actions.</p>

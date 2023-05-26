@@ -68,21 +68,21 @@ namespace ecore
 			//*********************************
 			// Reference Getters & Setters
 			//*********************************
-			virtual std::shared_ptr<Bag<ecore::EAttribute>> getEAllAttributes() const ;
-			virtual std::shared_ptr<Bag<ecore::EReference>> getEAllContainments() const ;
-			virtual std::shared_ptr<Bag<ecore::EGenericType>> getEAllGenericSuperTypes() const ;
-			virtual std::shared_ptr<Bag<ecore::EOperation>> getEAllOperations() const ;
-			virtual std::shared_ptr<Bag<ecore::EReference>> getEAllReferences() const ;
-			virtual std::shared_ptr<Bag<ecore::EStructuralFeature>> getEAllStructuralFeatures() const ;
-			virtual std::shared_ptr<Bag<ecore::EClass>> getEAllSuperTypes() const ;
-			virtual std::shared_ptr<Subset<ecore::EAttribute, ecore::EStructuralFeature>> getEAttributes() const ;
-			virtual std::shared_ptr<Bag<ecore::EGenericType>> getEGenericSuperTypes() const ;
-			virtual std::shared_ptr<ecore::EAttribute> getEIDAttribute() const ;
+			virtual const std::shared_ptr<Bag<ecore::EAttribute>>& getEAllAttributes() const ;
+			virtual const std::shared_ptr<Bag<ecore::EReference>>& getEAllContainments() const ;
+			virtual const std::shared_ptr<Bag<ecore::EGenericType>>& getEAllGenericSuperTypes() const ;
+			virtual const std::shared_ptr<Bag<ecore::EOperation>>& getEAllOperations() const ;
+			virtual const std::shared_ptr<Bag<ecore::EReference>>& getEAllReferences() const ;
+			virtual const std::shared_ptr<Bag<ecore::EStructuralFeature>>& getEAllStructuralFeatures() const ;
+			virtual const std::shared_ptr<Bag<ecore::EClass>>& getEAllSuperTypes() const ;
+			virtual const std::shared_ptr<Subset<ecore::EAttribute, ecore::EStructuralFeature>>& getEAttributes() const ;
+			virtual const std::shared_ptr<Bag<ecore::EGenericType>>& getEGenericSuperTypes() const ;
+			virtual const std::shared_ptr<ecore::EAttribute>& getEIDAttribute() const ;
 			virtual void setEIDAttribute(const std::shared_ptr<ecore::EAttribute>&) ;
-			virtual std::shared_ptr<Subset<ecore::EOperation, ecore::EObject>> getEOperations() const ;
-			virtual std::shared_ptr<Subset<ecore::EReference, ecore::EStructuralFeature>> getEReferences() const ;
+			virtual const std::shared_ptr<Subset<ecore::EOperation, ecore::EObject>>& getEOperations() const ;
+			virtual const std::shared_ptr<Subset<ecore::EReference, ecore::EStructuralFeature>>& getEReferences() const ;
 			
-			virtual std::shared_ptr<Bag<ecore::EClass>> getESuperTypes() const ;
+			virtual const std::shared_ptr<Bag<ecore::EClass>>& getESuperTypes() const ;
 			
 			//*********************************
 			// Union Reference Getters

@@ -169,7 +169,7 @@ std::shared_ptr<ecore::EObject> CreateObjectActionImpl::copy() const
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference classifier */
-std::shared_ptr<uml::Classifier> CreateObjectActionImpl::getClassifier() const
+const std::shared_ptr<uml::Classifier>& CreateObjectActionImpl::getClassifier() const
 {
     return m_classifier;
 }
@@ -180,7 +180,7 @@ void CreateObjectActionImpl::setClassifier(const std::shared_ptr<uml::Classifier
 }
 
 /* Getter & Setter for reference result */
-std::shared_ptr<uml::OutputPin> CreateObjectActionImpl::getResult() const
+const std::shared_ptr<uml::OutputPin>& CreateObjectActionImpl::getResult() const
 {
     return m_result;
 }

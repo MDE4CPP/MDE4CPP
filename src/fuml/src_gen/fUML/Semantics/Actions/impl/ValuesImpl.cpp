@@ -122,7 +122,7 @@ std::shared_ptr<ecore::EObject> ValuesImpl::copy() const
 // Attribute Getters & Setters
 //*********************************
 /* Getter & Setter for attribute values */
-std::shared_ptr<Bag<Any>> ValuesImpl::getValues() const 
+const std::shared_ptr<Bag<Any>>& ValuesImpl::getValues() const 
 {
 	if(m_values == nullptr)
 	{

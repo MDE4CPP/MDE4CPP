@@ -59,7 +59,7 @@ namespace uml
 			<p>From package UML::Activities.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::ObjectNode> getExceptionInput() const ;
+			virtual const std::shared_ptr<uml::ObjectNode>& getExceptionInput() const ;
 			/*!
 			An ObjectNode within the handlerBody. When the ExceptionHandler catches an exception, the exception token is placed on this ObjectNode, causing the handlerBody to execute.
 			<p>From package UML::Activities.</p>
@@ -71,13 +71,13 @@ namespace uml
 			<p>From package UML::Activities.</p>
 			*/
 			
-			virtual std::shared_ptr<Bag<uml::Classifier>> getExceptionType() const ;
+			virtual const std::shared_ptr<Bag<uml::Classifier>>& getExceptionType() const ;
 			/*!
 			An ExecutableNode that is executed if the ExceptionHandler catches an exception.
 			<p>From package UML::Activities.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::ExecutableNode> getHandlerBody() const ;
+			virtual const std::shared_ptr<uml::ExecutableNode>& getHandlerBody() const ;
 			/*!
 			An ExecutableNode that is executed if the ExceptionHandler catches an exception.
 			<p>From package UML::Activities.</p>

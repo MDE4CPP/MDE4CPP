@@ -133,7 +133,7 @@ void InitOrDerValueExpImpl::setKind(std::string _kind)
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference bodyExpression */
-std::shared_ptr<ocl::Expressions::OclExpression> InitOrDerValueExpImpl::getBodyExpression() const
+const std::shared_ptr<ocl::Expressions::OclExpression>& InitOrDerValueExpImpl::getBodyExpression() const
 {
     return m_bodyExpression;
 }

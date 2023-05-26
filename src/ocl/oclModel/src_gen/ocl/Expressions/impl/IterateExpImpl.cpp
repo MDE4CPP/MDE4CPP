@@ -219,7 +219,7 @@ std::shared_ptr<ecore::EObject> IterateExpImpl::copy() const
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference result */
-std::shared_ptr<ecore::ETypedElement> IterateExpImpl::getResult() const
+const std::shared_ptr<ecore::ETypedElement>& IterateExpImpl::getResult() const
 {
     return m_result;
 }

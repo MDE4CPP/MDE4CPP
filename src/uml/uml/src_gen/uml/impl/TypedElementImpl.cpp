@@ -127,7 +127,7 @@ TypedElementImpl& TypedElementImpl::operator=(const TypedElementImpl & obj)
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference type */
-std::shared_ptr<uml::Type> TypedElementImpl::getType() const
+const std::shared_ptr<uml::Type>& TypedElementImpl::getType() const
 {
     return m_type;
 }

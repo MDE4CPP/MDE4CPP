@@ -156,7 +156,7 @@ std::shared_ptr<ecore::EObject> ActionExecutionSpecificationImpl::copy() const
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference action */
-std::shared_ptr<uml::Action> ActionExecutionSpecificationImpl::getAction() const
+const std::shared_ptr<uml::Action>& ActionExecutionSpecificationImpl::getAction() const
 {
     return m_action;
 }

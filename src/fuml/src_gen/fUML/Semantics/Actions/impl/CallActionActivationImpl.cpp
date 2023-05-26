@@ -325,7 +325,7 @@ void CallActionActivationImpl::terminate()
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference callAction */
-std::shared_ptr<uml::CallAction> CallActionActivationImpl::getCallAction() const
+const std::shared_ptr<uml::CallAction>& CallActionActivationImpl::getCallAction() const
 {
     return m_callAction;
 }
@@ -336,7 +336,7 @@ void CallActionActivationImpl::setCallAction(const std::shared_ptr<uml::CallActi
 	fUML::Semantics::Actions::ActionActivationImpl::setAction(_callAction);
 }
 /*Additional Setter for redefined reference 'ActionActivation::action'*/
-void CallActionActivationImpl::setAction(std::shared_ptr<uml::Action> _action)
+void CallActionActivationImpl::setAction(const std::shared_ptr<uml::Action>& _action)
 {
 	std::shared_ptr<uml::CallAction> _callAction = std::dynamic_pointer_cast<uml::CallAction>(_action);
 	if(_callAction)
@@ -352,7 +352,7 @@ void CallActionActivationImpl::setAction(std::shared_ptr<uml::Action> _action)
 	}
 }
 /*Additional Setter for redefined reference 'ActivityNodeActivation::node'*/
-void CallActionActivationImpl::setNode(std::shared_ptr<uml::ActivityNode> _node)
+void CallActionActivationImpl::setNode(const std::shared_ptr<uml::ActivityNode>& _node)
 {
 	std::shared_ptr<uml::CallAction> _callAction = std::dynamic_pointer_cast<uml::CallAction>(_node);
 	if(_callAction)

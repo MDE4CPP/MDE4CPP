@@ -176,7 +176,7 @@ std::shared_ptr<ecore::EObject> SendObjectActionImpl::copy() const
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference request */
-std::shared_ptr<uml::InputPin> SendObjectActionImpl::getRequest() const
+const std::shared_ptr<uml::InputPin>& SendObjectActionImpl::getRequest() const
 {
     return m_request;
 }
@@ -187,7 +187,7 @@ void SendObjectActionImpl::setRequest(const std::shared_ptr<uml::InputPin>& _req
 }
 
 /* Getter & Setter for reference target */
-std::shared_ptr<uml::InputPin> SendObjectActionImpl::getTarget() const
+const std::shared_ptr<uml::InputPin>& SendObjectActionImpl::getTarget() const
 {
     return m_target;
 }

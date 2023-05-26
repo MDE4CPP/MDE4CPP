@@ -172,7 +172,7 @@ std::shared_ptr<ecore::EObject> IntervalImpl::copy() const
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference max */
-std::shared_ptr<uml::ValueSpecification> IntervalImpl::getMax() const
+const std::shared_ptr<uml::ValueSpecification>& IntervalImpl::getMax() const
 {
     return m_max;
 }
@@ -183,7 +183,7 @@ void IntervalImpl::setMax(const std::shared_ptr<uml::ValueSpecification>& _max)
 }
 
 /* Getter & Setter for reference min */
-std::shared_ptr<uml::ValueSpecification> IntervalImpl::getMin() const
+const std::shared_ptr<uml::ValueSpecification>& IntervalImpl::getMin() const
 {
     return m_min;
 }

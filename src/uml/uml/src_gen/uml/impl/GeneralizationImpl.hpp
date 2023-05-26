@@ -71,7 +71,7 @@ namespace uml
 			<p>From package UML::Classification.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::Classifier> getGeneral() const ;
+			virtual const std::shared_ptr<uml::Classifier>& getGeneral() const ;
 			/*!
 			The general classifier in the Generalization relationship.
 			<p>From package UML::Classification.</p>
@@ -83,7 +83,7 @@ namespace uml
 			<p>From package UML::Classification.</p>
 			*/
 			
-			virtual std::shared_ptr<Bag<uml::GeneralizationSet>> getGeneralizationSet() const ;
+			virtual const std::shared_ptr<Bag<uml::GeneralizationSet>>& getGeneralizationSet() const ;
 			/*!
 			The specializing Classifier in the Generalization relationship.
 			<p>From package UML::Classification.</p>

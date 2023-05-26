@@ -171,7 +171,7 @@ std::shared_ptr<ecore::EObject> SendSignalActionImpl::copy() const
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference signal */
-std::shared_ptr<uml::Signal> SendSignalActionImpl::getSignal() const
+const std::shared_ptr<uml::Signal>& SendSignalActionImpl::getSignal() const
 {
     return m_signal;
 }
@@ -182,7 +182,7 @@ void SendSignalActionImpl::setSignal(const std::shared_ptr<uml::Signal>& _signal
 }
 
 /* Getter & Setter for reference target */
-std::shared_ptr<uml::InputPin> SendSignalActionImpl::getTarget() const
+const std::shared_ptr<uml::InputPin>& SendSignalActionImpl::getTarget() const
 {
     return m_target;
 }

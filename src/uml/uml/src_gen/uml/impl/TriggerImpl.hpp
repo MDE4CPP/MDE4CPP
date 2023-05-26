@@ -59,7 +59,7 @@ namespace uml
 			<p>From package UML::CommonBehavior.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::Event> getEvent() const ;
+			virtual const std::shared_ptr<uml::Event>& getEvent() const ;
 			/*!
 			The Event that detected by the Trigger.
 			<p>From package UML::CommonBehavior.</p>
@@ -71,7 +71,7 @@ namespace uml
 			<p>From package UML::CommonBehavior.</p>
 			*/
 			
-			virtual std::shared_ptr<Bag<uml::Port>> getPort() const ;
+			virtual const std::shared_ptr<Bag<uml::Port>>& getPort() const ;
 			
 			//*********************************
 			// Union Reference Getters

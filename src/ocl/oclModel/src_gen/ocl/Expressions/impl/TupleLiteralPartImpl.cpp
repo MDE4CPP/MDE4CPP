@@ -145,7 +145,7 @@ void TupleLiteralPartImpl::setTuplePartType(std::string _tuplePartType)
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference assignedOclExpression */
-std::shared_ptr<ocl::Expressions::OclExpression> TupleLiteralPartImpl::getAssignedOclExpression() const
+const std::shared_ptr<ocl::Expressions::OclExpression>& TupleLiteralPartImpl::getAssignedOclExpression() const
 {
     return m_assignedOclExpression;
 }

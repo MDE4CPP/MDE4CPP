@@ -167,7 +167,7 @@ std::shared_ptr<ecore::EObject> CollaborationUseImpl::copy() const
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference roleBinding */
-std::shared_ptr<Subset<uml::Dependency, uml::Element>> CollaborationUseImpl::getRoleBinding() const
+const std::shared_ptr<Subset<uml::Dependency, uml::Element>>& CollaborationUseImpl::getRoleBinding() const
 {
 	if(m_roleBinding == nullptr)
 	{
@@ -188,7 +188,7 @@ std::shared_ptr<Subset<uml::Dependency, uml::Element>> CollaborationUseImpl::get
 }
 
 /* Getter & Setter for reference type */
-std::shared_ptr<uml::Collaboration> CollaborationUseImpl::getType() const
+const std::shared_ptr<uml::Collaboration>& CollaborationUseImpl::getType() const
 {
     return m_type;
 }

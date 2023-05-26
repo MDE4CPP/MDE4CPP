@@ -82,7 +82,7 @@ namespace ecore
 			//*********************************
 			// Reference Getters & Setters
 			//*********************************
-			virtual std::shared_ptr<ecore::EPackage> getEPackage() const = 0;
+			virtual const std::shared_ptr<ecore::EPackage>& getEPackage() const = 0;
 			virtual void setEPackage(const std::shared_ptr<ecore::EPackage>&) = 0;
 
 			//*********************************

@@ -159,7 +159,7 @@ std::shared_ptr<ecore::EObject> ManifestationImpl::copy() const
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference utilizedElement */
-std::shared_ptr<uml::PackageableElement> ManifestationImpl::getUtilizedElement() const
+const std::shared_ptr<uml::PackageableElement>& ManifestationImpl::getUtilizedElement() const
 {
     return m_utilizedElement;
 }

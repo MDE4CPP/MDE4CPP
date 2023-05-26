@@ -63,7 +63,7 @@ namespace uml
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::Variable> getVariable() const ;
+			virtual const std::shared_ptr<uml::Variable>& getVariable() const ;
 			/*!
 			The Variable to be read or written.
 			<p>From package UML::Actions.</p>

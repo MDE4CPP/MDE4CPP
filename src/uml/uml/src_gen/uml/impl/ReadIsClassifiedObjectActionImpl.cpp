@@ -187,7 +187,7 @@ void ReadIsClassifiedObjectActionImpl::setIsDirect(bool _isDirect)
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference classifier */
-std::shared_ptr<uml::Classifier> ReadIsClassifiedObjectActionImpl::getClassifier() const
+const std::shared_ptr<uml::Classifier>& ReadIsClassifiedObjectActionImpl::getClassifier() const
 {
     return m_classifier;
 }
@@ -198,7 +198,7 @@ void ReadIsClassifiedObjectActionImpl::setClassifier(const std::shared_ptr<uml::
 }
 
 /* Getter & Setter for reference object */
-std::shared_ptr<uml::InputPin> ReadIsClassifiedObjectActionImpl::getObject() const
+const std::shared_ptr<uml::InputPin>& ReadIsClassifiedObjectActionImpl::getObject() const
 {
     return m_object;
 }
@@ -209,7 +209,7 @@ void ReadIsClassifiedObjectActionImpl::setObject(const std::shared_ptr<uml::Inpu
 }
 
 /* Getter & Setter for reference result */
-std::shared_ptr<uml::OutputPin> ReadIsClassifiedObjectActionImpl::getResult() const
+const std::shared_ptr<uml::OutputPin>& ReadIsClassifiedObjectActionImpl::getResult() const
 {
     return m_result;
 }

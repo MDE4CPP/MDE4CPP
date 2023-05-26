@@ -102,7 +102,7 @@ namespace uml
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::OutputPin> getReturnInformation() const = 0;
+			virtual const std::shared_ptr<uml::OutputPin>& getReturnInformation() const = 0;
 			/*!
 			An OutputPin where a value is placed containing sufficient information to perform a subsequent ReplyAction and return control to the caller. The contents of this value are opaque. It can be passed and copied but it cannot be manipulated by the model.
 			<p>From package UML::Actions.</p>

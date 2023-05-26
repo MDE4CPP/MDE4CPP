@@ -230,7 +230,7 @@ void CombinedFragmentImpl::setInteractionOperator(uml::InteractionOperatorKind _
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference cfragmentGate */
-std::shared_ptr<Subset<uml::Gate, uml::Element>> CombinedFragmentImpl::getCfragmentGate() const
+const std::shared_ptr<Subset<uml::Gate, uml::Element>>& CombinedFragmentImpl::getCfragmentGate() const
 {
 	if(m_cfragmentGate == nullptr)
 	{
@@ -251,7 +251,7 @@ std::shared_ptr<Subset<uml::Gate, uml::Element>> CombinedFragmentImpl::getCfragm
 }
 
 /* Getter & Setter for reference operand */
-std::shared_ptr<Subset<uml::InteractionOperand, uml::Element>> CombinedFragmentImpl::getOperand() const
+const std::shared_ptr<Subset<uml::InteractionOperand, uml::Element>>& CombinedFragmentImpl::getOperand() const
 {
 	if(m_operand == nullptr)
 	{

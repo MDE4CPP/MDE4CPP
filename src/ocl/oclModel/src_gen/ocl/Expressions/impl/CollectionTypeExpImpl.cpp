@@ -213,7 +213,7 @@ std::shared_ptr<ecore::EObject> CollectionTypeExpImpl::copy() const
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference innerType */
-std::shared_ptr<ocl::Expressions::TypeExp> CollectionTypeExpImpl::getInnerType() const
+const std::shared_ptr<ocl::Expressions::TypeExp>& CollectionTypeExpImpl::getInnerType() const
 {
     return m_innerType;
 }

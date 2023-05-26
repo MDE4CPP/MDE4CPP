@@ -453,7 +453,7 @@ void ActivityImpl::setIsSingleExecution(bool _isSingleExecution)
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference edge */
-std::shared_ptr<Subset<uml::ActivityEdge, uml::Element>> ActivityImpl::getEdge() const
+const std::shared_ptr<Subset<uml::ActivityEdge, uml::Element>>& ActivityImpl::getEdge() const
 {
 	if(m_edge == nullptr)
 	{
@@ -476,7 +476,7 @@ std::shared_ptr<Subset<uml::ActivityEdge, uml::Element>> ActivityImpl::getEdge()
 /* Getter & Setter for reference group */
 
 /* Getter & Setter for reference node */
-std::shared_ptr<SubsetUnion<uml::ActivityNode, uml::Element>> ActivityImpl::getNode() const
+const std::shared_ptr<SubsetUnion<uml::ActivityNode, uml::Element>>& ActivityImpl::getNode() const
 {
 	if(m_node == nullptr)
 	{
@@ -497,7 +497,7 @@ std::shared_ptr<SubsetUnion<uml::ActivityNode, uml::Element>> ActivityImpl::getN
 }
 
 /* Getter & Setter for reference ownedGroup */
-std::shared_ptr<SubsetUnion<uml::ActivityGroup, uml::ActivityGroup>> ActivityImpl::getOwnedGroup() const
+const std::shared_ptr<SubsetUnion<uml::ActivityGroup, uml::ActivityGroup>>& ActivityImpl::getOwnedGroup() const
 {
 	if(m_ownedGroup == nullptr)
 	{
@@ -518,7 +518,7 @@ std::shared_ptr<SubsetUnion<uml::ActivityGroup, uml::ActivityGroup>> ActivityImp
 }
 
 /* Getter & Setter for reference ownedNode */
-std::shared_ptr<Subset<uml::ActivityNode, uml::ActivityNode /*Subset does not reference a union*/>> ActivityImpl::getOwnedNode() const
+const std::shared_ptr<Subset<uml::ActivityNode, uml::ActivityNode /*Subset does not reference a union*/>>& ActivityImpl::getOwnedNode() const
 {
 	if(m_ownedNode == nullptr)
 	{
@@ -539,7 +539,7 @@ std::shared_ptr<Subset<uml::ActivityNode, uml::ActivityNode /*Subset does not re
 }
 
 /* Getter & Setter for reference partition */
-std::shared_ptr<Subset<uml::ActivityPartition, uml::ActivityGroup /*Subset does not reference a union*/, uml::ActivityGroup>> ActivityImpl::getPartition() const
+const std::shared_ptr<Subset<uml::ActivityPartition, uml::ActivityGroup /*Subset does not reference a union*/, uml::ActivityGroup>>& ActivityImpl::getPartition() const
 {
 	if(m_partition == nullptr)
 	{
@@ -560,7 +560,7 @@ std::shared_ptr<Subset<uml::ActivityPartition, uml::ActivityGroup /*Subset does 
 }
 
 /* Getter & Setter for reference structuredNode */
-std::shared_ptr<Subset<uml::StructuredActivityNode, uml::ActivityGroup, uml::ActivityNode /*Subset does not reference a union*/>> ActivityImpl::getStructuredNode() const
+const std::shared_ptr<Subset<uml::StructuredActivityNode, uml::ActivityGroup, uml::ActivityNode /*Subset does not reference a union*/>>& ActivityImpl::getStructuredNode() const
 {
 	if(m_structuredNode == nullptr)
 	{
@@ -581,7 +581,7 @@ std::shared_ptr<Subset<uml::StructuredActivityNode, uml::ActivityGroup, uml::Act
 }
 
 /* Getter & Setter for reference variable */
-std::shared_ptr<Subset<uml::Variable, uml::NamedElement>> ActivityImpl::getVariable() const
+const std::shared_ptr<Subset<uml::Variable, uml::NamedElement>>& ActivityImpl::getVariable() const
 {
 	if(m_variable == nullptr)
 	{

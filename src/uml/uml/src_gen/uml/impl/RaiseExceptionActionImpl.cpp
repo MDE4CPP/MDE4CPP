@@ -168,7 +168,7 @@ std::shared_ptr<ecore::EObject> RaiseExceptionActionImpl::copy() const
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference exception */
-std::shared_ptr<uml::InputPin> RaiseExceptionActionImpl::getException() const
+const std::shared_ptr<uml::InputPin>& RaiseExceptionActionImpl::getException() const
 {
     return m_exception;
 }

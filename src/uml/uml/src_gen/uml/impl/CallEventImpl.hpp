@@ -63,7 +63,7 @@ namespace uml
 			<p>From package UML::CommonBehavior.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::Operation> getOperation() const ;
+			virtual const std::shared_ptr<uml::Operation>& getOperation() const ;
 			/*!
 			Designates the Operation whose invocation raised the CalEvent.
 			<p>From package UML::CommonBehavior.</p>

@@ -165,7 +165,7 @@ std::shared_ptr<ecore::EObject> BroadcastSignalActionImpl::copy() const
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference signal */
-std::shared_ptr<uml::Signal> BroadcastSignalActionImpl::getSignal() const
+const std::shared_ptr<uml::Signal>& BroadcastSignalActionImpl::getSignal() const
 {
     return m_signal;
 }

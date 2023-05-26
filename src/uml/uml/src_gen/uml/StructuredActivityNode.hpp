@@ -132,31 +132,31 @@ namespace uml
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual std::shared_ptr<Subset<uml::ActivityEdge, uml::ActivityEdge, uml::Element>> getEdge() const = 0;
+			virtual const std::shared_ptr<Subset<uml::ActivityEdge, uml::ActivityEdge, uml::Element>>& getEdge() const = 0;
 			/*!
 			The ActivityNodes immediately contained in the StructuredActivityNode.
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual std::shared_ptr<Subset<uml::ActivityNode, uml::ActivityNode, uml::Element>> getNode() const = 0;
+			virtual const std::shared_ptr<Subset<uml::ActivityNode, uml::ActivityNode, uml::Element>>& getNode() const = 0;
 			/*!
 			The InputPins owned by the StructuredActivityNode.
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual std::shared_ptr<Subset<uml::InputPin, uml::InputPin>> getStructuredNodeInput() const = 0;
+			virtual const std::shared_ptr<Subset<uml::InputPin, uml::InputPin>>& getStructuredNodeInput() const = 0;
 			/*!
 			The OutputPins owned by the StructuredActivityNode.
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual std::shared_ptr<Subset<uml::OutputPin, uml::OutputPin>> getStructuredNodeOutput() const = 0;
+			virtual const std::shared_ptr<Subset<uml::OutputPin, uml::OutputPin>>& getStructuredNodeOutput() const = 0;
 			/*!
 			The Variables defined in the scope of the StructuredActivityNode.
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual std::shared_ptr<Subset<uml::Variable, uml::NamedElement>> getVariable() const = 0;
+			virtual const std::shared_ptr<Subset<uml::Variable, uml::NamedElement>>& getVariable() const = 0;
 
 			//*********************************
 			// Union Reference Getters

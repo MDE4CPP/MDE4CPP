@@ -70,7 +70,7 @@ namespace uml
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::OutputPin> getResult() const ;
+			virtual const std::shared_ptr<uml::OutputPin>& getResult() const ;
 			/*!
 			The OutputPin on which the objects retrieved from the "open" end of those links whose values on other ends are given by the endData.
 			<p>From package UML::Actions.</p>

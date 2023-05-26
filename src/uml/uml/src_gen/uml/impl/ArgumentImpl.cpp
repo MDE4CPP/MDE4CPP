@@ -125,7 +125,7 @@ void ArgumentImpl::setName(std::string _name)
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference value */
-std::shared_ptr<uml::Object> ArgumentImpl::getValue() const
+const std::shared_ptr<uml::Object>& ArgumentImpl::getValue() const
 {
     return m_value;
 }

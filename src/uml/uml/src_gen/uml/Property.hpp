@@ -269,7 +269,7 @@ namespace uml
 			<p>From package UML::Classification.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::Association> getAssociation() const = 0;
+			virtual const std::shared_ptr<uml::Association>& getAssociation() const = 0;
 			/*!
 			The Association of which this Property is a member, if any.
 			<p>From package UML::Classification.</p>
@@ -317,7 +317,7 @@ namespace uml
 			<p>From package UML::Classification.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::ValueSpecification> getDefaultValue() const = 0;
+			virtual const std::shared_ptr<uml::ValueSpecification>& getDefaultValue() const = 0;
 			/*!
 			A ValueSpecification that is evaluated to give a default value for the Property when an instance of the owning Classifier is instantiated.
 			<p>From package UML::Classification.</p>
@@ -341,7 +341,7 @@ namespace uml
 			<p>From package UML::Classification.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::Property> getOpposite() const = 0;
+			virtual const std::shared_ptr<uml::Property>& getOpposite() const = 0;
 			/*!
 			In the case where the Property is one end of a binary association this gives the other end.
 			<p>From package UML::Classification.</p>
@@ -365,19 +365,19 @@ namespace uml
 			<p>From package UML::Classification.</p>
 			*/
 			
-			virtual std::shared_ptr<Subset<uml::Property, uml::Element>> getQualifier() const = 0;
+			virtual const std::shared_ptr<Subset<uml::Property, uml::Element>>& getQualifier() const = 0;
 			/*!
 			The properties that are redefined by this property, if any.
 			<p>From package UML::Classification.</p>
 			*/
 			
-			virtual std::shared_ptr<SubsetUnion<uml::Property, uml::RedefinableElement>> getRedefinedProperty() const = 0;
+			virtual const std::shared_ptr<SubsetUnion<uml::Property, uml::RedefinableElement>>& getRedefinedProperty() const = 0;
 			/*!
 			The properties of which this Property is constrained to be a subset, if any.
 			<p>From package UML::Classification.</p>
 			*/
 			
-			virtual std::shared_ptr<Bag<uml::Property>> getSubsettedProperty() const = 0;
+			virtual const std::shared_ptr<Bag<uml::Property>>& getSubsettedProperty() const = 0;
 
 			//*********************************
 			// Union Reference Getters

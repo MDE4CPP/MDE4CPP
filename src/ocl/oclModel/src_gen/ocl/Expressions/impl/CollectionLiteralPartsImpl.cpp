@@ -122,7 +122,7 @@ std::shared_ptr<ecore::EObject> CollectionLiteralPartsImpl::copy() const
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference literalParts */
-std::shared_ptr<Bag<ocl::Expressions::CollectionLiteralPart>> CollectionLiteralPartsImpl::getLiteralParts() const
+const std::shared_ptr<Bag<ocl::Expressions::CollectionLiteralPart>>& CollectionLiteralPartsImpl::getLiteralParts() const
 {
 	if(m_literalParts == nullptr)
 	{

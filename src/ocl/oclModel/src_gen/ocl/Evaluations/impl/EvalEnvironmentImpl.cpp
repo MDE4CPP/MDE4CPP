@@ -147,7 +147,7 @@ void EvalEnvironmentImpl::replace(const std::shared_ptr<ocl::Evaluations::NameVa
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference bindings */
-std::shared_ptr<Bag<ocl::Evaluations::NameValueBinding>> EvalEnvironmentImpl::getBindings() const
+const std::shared_ptr<Bag<ocl::Evaluations::NameValueBinding>>& EvalEnvironmentImpl::getBindings() const
 {
 	if(m_bindings == nullptr)
 	{

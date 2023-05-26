@@ -47,12 +47,12 @@ namespace ocl::Evaluations
 			//*********************************
 			// Attribute Getters & Setters
 			//*********************************
-			virtual std::shared_ptr<Bag<std::string>> getIterators() const ;
+			virtual const std::shared_ptr<Bag<std::string>>& getIterators() const ;
 			
 			//*********************************
 			// Reference Getters & Setters
 			//*********************************
-			virtual std::shared_ptr<Bag<ocl::Evaluations::OclExpEval>> getBodyEvals() const ;
+			virtual const std::shared_ptr<Bag<ocl::Evaluations::OclExpEval>>& getBodyEvals() const ;
 			
 			//*********************************
 			// Union Reference Getters

@@ -234,7 +234,7 @@ void VarDeclarationExpImpl::setVarName(std::string _varName)
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference assignedOclExp */
-std::shared_ptr<ocl::Expressions::OclExpression> VarDeclarationExpImpl::getAssignedOclExp() const
+const std::shared_ptr<ocl::Expressions::OclExpression>& VarDeclarationExpImpl::getAssignedOclExp() const
 {
     return m_assignedOclExp;
 }
@@ -256,7 +256,7 @@ void VarDeclarationExpImpl::setInitExpression(std::weak_ptr<ocl::Expressions::Oc
 }
 
 /* Getter & Setter for reference varType */
-std::shared_ptr<ocl::Expressions::TypeExp> VarDeclarationExpImpl::getVarType() const
+const std::shared_ptr<ocl::Expressions::TypeExp>& VarDeclarationExpImpl::getVarType() const
 {
     return m_varType;
 }

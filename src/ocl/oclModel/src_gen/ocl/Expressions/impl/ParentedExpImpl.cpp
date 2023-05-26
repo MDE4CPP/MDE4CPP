@@ -213,7 +213,7 @@ std::shared_ptr<ecore::EObject> ParentedExpImpl::copy() const
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference innerExp */
-std::shared_ptr<ocl::Expressions::OclExpression> ParentedExpImpl::getInnerExp() const
+const std::shared_ptr<ocl::Expressions::OclExpression>& ParentedExpImpl::getInnerExp() const
 {
     return m_innerExp;
 }

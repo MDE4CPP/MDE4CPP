@@ -59,10 +59,10 @@ namespace ecore
 			//*********************************
 			// Reference Getters & Setters
 			//*********************************
-			virtual std::shared_ptr<Bag<ecore::EAttribute>> getEKeys() const ;
-			virtual std::shared_ptr<ecore::EReference> getEOpposite() const ;
+			virtual const std::shared_ptr<Bag<ecore::EAttribute>>& getEKeys() const ;
+			virtual const std::shared_ptr<ecore::EReference>& getEOpposite() const ;
 			virtual void setEOpposite(const std::shared_ptr<ecore::EReference>&) ;
-			virtual std::shared_ptr<ecore::EClass> getEReferenceType() const ;
+			virtual const std::shared_ptr<ecore::EClass>& getEReferenceType() const ;
 			virtual void setEReferenceType(const std::shared_ptr<ecore::EClass>&) ;
 			
 			//*********************************

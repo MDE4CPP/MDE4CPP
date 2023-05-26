@@ -153,7 +153,7 @@ std::shared_ptr<ecore::EObject> CallEventImpl::copy() const
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference operation */
-std::shared_ptr<uml::Operation> CallEventImpl::getOperation() const
+const std::shared_ptr<uml::Operation>& CallEventImpl::getOperation() const
 {
     return m_operation;
 }

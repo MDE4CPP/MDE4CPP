@@ -100,13 +100,13 @@ namespace uml
 			<p>From package UML::Interactions.</p>
 			*/
 			
-			virtual std::shared_ptr<Bag<uml::GeneralOrdering>> getToAfter() const = 0;
+			virtual const std::shared_ptr<Bag<uml::GeneralOrdering>>& getToAfter() const = 0;
 			/*!
 			References the GeneralOrderings that specify EventOcurrences that must occur before this OccurrenceSpecification.
 			<p>From package UML::Interactions.</p>
 			*/
 			
-			virtual std::shared_ptr<Bag<uml::GeneralOrdering>> getToBefore() const = 0;
+			virtual const std::shared_ptr<Bag<uml::GeneralOrdering>>& getToBefore() const = 0;
 
 			//*********************************
 			// Union Reference Getters

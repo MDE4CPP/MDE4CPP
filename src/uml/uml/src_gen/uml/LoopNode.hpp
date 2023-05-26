@@ -115,19 +115,19 @@ namespace uml
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual std::shared_ptr<Bag<uml::OutputPin>> getBodyOutput() const = 0;
+			virtual const std::shared_ptr<Bag<uml::OutputPin>>& getBodyOutput() const = 0;
 			/*!
 			The set of ExecutableNodes that perform the repetitive computations of the loop. The bodyPart is executed as long as the test section produces a true value.
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual std::shared_ptr<Bag<uml::ExecutableNode>> getBodyPart() const = 0;
+			virtual const std::shared_ptr<Bag<uml::ExecutableNode>>& getBodyPart() const = 0;
 			/*!
 			An OutputPin on an Action in the test section whose Boolean value determines whether to continue executing the loop bodyPart.
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::OutputPin> getDecider() const = 0;
+			virtual const std::shared_ptr<uml::OutputPin>& getDecider() const = 0;
 			/*!
 			An OutputPin on an Action in the test section whose Boolean value determines whether to continue executing the loop bodyPart.
 			<p>From package UML::Actions.</p>
@@ -139,31 +139,31 @@ namespace uml
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual std::shared_ptr<Subset<uml::OutputPin, uml::Element>> getLoopVariable() const = 0;
+			virtual const std::shared_ptr<Subset<uml::OutputPin, uml::Element>>& getLoopVariable() const = 0;
 			/*!
 			A list of InputPins whose values are moved into the loopVariable Pins before the first iteration of the loop.
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual std::shared_ptr<Bag<uml::InputPin>> getLoopVariableInput() const = 0;
+			virtual const std::shared_ptr<Bag<uml::InputPin>>& getLoopVariableInput() const = 0;
 			/*!
 			A list of OutputPins that receive the loopVariable values after the last iteration of the loop and constitute the output of the LoopNode.
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual std::shared_ptr<Bag<uml::OutputPin>> getResult() const = 0;
+			virtual const std::shared_ptr<Bag<uml::OutputPin>>& getResult() const = 0;
 			/*!
 			The set of ExecutableNodes executed before the first iteration of the loop, in order to initialize values or perform other setup computations.
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual std::shared_ptr<Bag<uml::ExecutableNode>> getSetupPart() const = 0;
+			virtual const std::shared_ptr<Bag<uml::ExecutableNode>>& getSetupPart() const = 0;
 			/*!
 			The set of ExecutableNodes executed in order to provide the test result for the loop.
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual std::shared_ptr<Bag<uml::ExecutableNode>> getTest() const = 0;
+			virtual const std::shared_ptr<Bag<uml::ExecutableNode>>& getTest() const = 0;
 
 			//*********************************
 			// Union Reference Getters

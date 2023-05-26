@@ -224,7 +224,7 @@ void PrefixedExpImpl::setUnarySymbol(std::string _unarySymbol)
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference referredExpression */
-std::shared_ptr<ocl::Expressions::OclExpression> PrefixedExpImpl::getReferredExpression() const
+const std::shared_ptr<ocl::Expressions::OclExpression>& PrefixedExpImpl::getReferredExpression() const
 {
     return m_referredExpression;
 }

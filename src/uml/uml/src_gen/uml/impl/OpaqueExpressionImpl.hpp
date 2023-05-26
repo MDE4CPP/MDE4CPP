@@ -95,13 +95,13 @@ namespace uml
 			<p>From package UML::Values.</p>
 			*/
 			 
-			virtual std::shared_ptr<Bag<std::string>> getBody() const ;
+			virtual const std::shared_ptr<Bag<std::string>>& getBody() const ;
 			/*!
 			Specifies the languages used to express the textual bodies of the OpaqueExpression.  Languages are matched to body Strings by order. The interpretation of the body depends on the languages. If the languages are unspecified, they may be implicit from the expression body or the context.
 			<p>From package UML::Values.</p>
 			*/
 			 
-			virtual std::shared_ptr<Bag<std::string>> getLanguage() const ;
+			virtual const std::shared_ptr<Bag<std::string>>& getLanguage() const ;
 			
 			//*********************************
 			// Reference Getters & Setters
@@ -111,7 +111,7 @@ namespace uml
 			<p>From package UML::Values.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::Behavior> getBehavior() const ;
+			virtual const std::shared_ptr<uml::Behavior>& getBehavior() const ;
 			/*!
 			Specifies the behavior of the OpaqueExpression as a UML Behavior.
 			<p>From package UML::Values.</p>
@@ -123,7 +123,7 @@ namespace uml
 			<p>From package UML::Values.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::Parameter> getResult() const ;
+			virtual const std::shared_ptr<uml::Parameter>& getResult() const ;
 			
 			//*********************************
 			// Union Reference Getters

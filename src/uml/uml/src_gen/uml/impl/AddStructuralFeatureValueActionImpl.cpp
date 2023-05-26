@@ -180,7 +180,7 @@ void AddStructuralFeatureValueActionImpl::setIsReplaceAll(bool _isReplaceAll)
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference insertAt */
-std::shared_ptr<uml::InputPin> AddStructuralFeatureValueActionImpl::getInsertAt() const
+const std::shared_ptr<uml::InputPin>& AddStructuralFeatureValueActionImpl::getInsertAt() const
 {
     return m_insertAt;
 }

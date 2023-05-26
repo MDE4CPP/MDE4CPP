@@ -136,7 +136,7 @@ std::shared_ptr<ecore::EObject> LoopExpEvalImpl::copy() const
 // Attribute Getters & Setters
 //*********************************
 /* Getter & Setter for attribute iterators */
-std::shared_ptr<Bag<std::string>> LoopExpEvalImpl::getIterators() const 
+const std::shared_ptr<Bag<std::string>>& LoopExpEvalImpl::getIterators() const 
 {
 	if(m_iterators == nullptr)
 	{
@@ -149,7 +149,7 @@ std::shared_ptr<Bag<std::string>> LoopExpEvalImpl::getIterators() const
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference bodyEvals */
-std::shared_ptr<Bag<ocl::Evaluations::OclExpEval>> LoopExpEvalImpl::getBodyEvals() const
+const std::shared_ptr<Bag<ocl::Evaluations::OclExpEval>>& LoopExpEvalImpl::getBodyEvals() const
 {
 	if(m_bodyEvals == nullptr)
 	{

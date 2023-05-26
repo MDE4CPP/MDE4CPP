@@ -165,7 +165,7 @@ std::shared_ptr<ecore::EObject> CallBehaviorActionImpl::copy() const
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference behavior */
-std::shared_ptr<uml::Behavior> CallBehaviorActionImpl::getBehavior() const
+const std::shared_ptr<uml::Behavior>& CallBehaviorActionImpl::getBehavior() const
 {
     return m_behavior;
 }

@@ -419,7 +419,7 @@ void PropertyImpl::setIsID(bool _isID)
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference association */
-std::shared_ptr<uml::Association> PropertyImpl::getAssociation() const
+const std::shared_ptr<uml::Association>& PropertyImpl::getAssociation() const
 {
     return m_association;
 }
@@ -463,7 +463,7 @@ void PropertyImpl::setDatatype(std::weak_ptr<uml::DataType> _datatype)
 }
 
 /* Getter & Setter for reference defaultValue */
-std::shared_ptr<uml::ValueSpecification> PropertyImpl::getDefaultValue() const
+const std::shared_ptr<uml::ValueSpecification>& PropertyImpl::getDefaultValue() const
 {
     return m_defaultValue;
 }
@@ -485,7 +485,7 @@ void PropertyImpl::setInterface(std::weak_ptr<uml::Interface> _interface)
 }
 
 /* Getter & Setter for reference opposite */
-std::shared_ptr<uml::Property> PropertyImpl::getOpposite() const
+const std::shared_ptr<uml::Property>& PropertyImpl::getOpposite() const
 {
     return m_opposite;
 }
@@ -507,7 +507,7 @@ void PropertyImpl::setOwningAssociation(std::weak_ptr<uml::Association> _owningA
 }
 
 /* Getter & Setter for reference qualifier */
-std::shared_ptr<Subset<uml::Property, uml::Element>> PropertyImpl::getQualifier() const
+const std::shared_ptr<Subset<uml::Property, uml::Element>>& PropertyImpl::getQualifier() const
 {
 	if(m_qualifier == nullptr)
 	{
@@ -528,7 +528,7 @@ std::shared_ptr<Subset<uml::Property, uml::Element>> PropertyImpl::getQualifier(
 }
 
 /* Getter & Setter for reference redefinedProperty */
-std::shared_ptr<SubsetUnion<uml::Property, uml::RedefinableElement>> PropertyImpl::getRedefinedProperty() const
+const std::shared_ptr<SubsetUnion<uml::Property, uml::RedefinableElement>>& PropertyImpl::getRedefinedProperty() const
 {
 	if(m_redefinedProperty == nullptr)
 	{
@@ -549,7 +549,7 @@ std::shared_ptr<SubsetUnion<uml::Property, uml::RedefinableElement>> PropertyImp
 }
 
 /* Getter & Setter for reference subsettedProperty */
-std::shared_ptr<Bag<uml::Property>> PropertyImpl::getSubsettedProperty() const
+const std::shared_ptr<Bag<uml::Property>>& PropertyImpl::getSubsettedProperty() const
 {
 	if(m_subsettedProperty == nullptr)
 	{

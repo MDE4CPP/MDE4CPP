@@ -82,7 +82,7 @@ namespace ecore
 			//*********************************
 			// Attribute Getters & Setters
 			//*********************************
-			virtual std::shared_ptr<Any> getDefaultValue() const = 0;
+			virtual const std::shared_ptr<Any>& getDefaultValue() const = 0;
 			virtual void setDefaultValue (const std::shared_ptr<Any>& _defaultValue)= 0;
 			virtual void * getInstanceClass() const = 0;
 			virtual std::string getInstanceClassName() const = 0;
@@ -94,7 +94,7 @@ namespace ecore
 			// Reference Getters & Setters
 			//*********************************
 			virtual std::weak_ptr<ecore::EPackage> getEPackage() const = 0;
-			virtual std::shared_ptr<Bag<ecore::ETypeParameter>> getETypeParameters() const = 0;
+			virtual const std::shared_ptr<Bag<ecore::ETypeParameter>>& getETypeParameters() const = 0;
 
 			//*********************************
 			// Union Reference Getters

@@ -177,7 +177,7 @@ std::shared_ptr<ecore::EObject> ReadLinkObjectEndQualifierActionImpl::copy() con
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference object */
-std::shared_ptr<uml::InputPin> ReadLinkObjectEndQualifierActionImpl::getObject() const
+const std::shared_ptr<uml::InputPin>& ReadLinkObjectEndQualifierActionImpl::getObject() const
 {
     return m_object;
 }
@@ -188,7 +188,7 @@ void ReadLinkObjectEndQualifierActionImpl::setObject(const std::shared_ptr<uml::
 }
 
 /* Getter & Setter for reference qualifier */
-std::shared_ptr<uml::Property> ReadLinkObjectEndQualifierActionImpl::getQualifier() const
+const std::shared_ptr<uml::Property>& ReadLinkObjectEndQualifierActionImpl::getQualifier() const
 {
     return m_qualifier;
 }
@@ -199,7 +199,7 @@ void ReadLinkObjectEndQualifierActionImpl::setQualifier(const std::shared_ptr<um
 }
 
 /* Getter & Setter for reference result */
-std::shared_ptr<uml::OutputPin> ReadLinkObjectEndQualifierActionImpl::getResult() const
+const std::shared_ptr<uml::OutputPin>& ReadLinkObjectEndQualifierActionImpl::getResult() const
 {
     return m_result;
 }

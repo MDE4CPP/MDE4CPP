@@ -95,7 +95,7 @@ namespace uml
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::Property> getEnd() const = 0;
+			virtual const std::shared_ptr<uml::Property>& getEnd() const = 0;
 			/*!
 			The Association end for which this LinkEndData specifies values.
 			<p>From package UML::Actions.</p>
@@ -107,13 +107,13 @@ namespace uml
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual std::shared_ptr<Subset<uml::QualifierValue, uml::Element>> getQualifier() const = 0;
+			virtual const std::shared_ptr<Subset<uml::QualifierValue, uml::Element>>& getQualifier() const = 0;
 			/*!
 			The InputPin that provides the specified value for the given end. This InputPin is omitted if the LinkEndData specifies the "open" end for a ReadLinkAction.
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::InputPin> getValue() const = 0;
+			virtual const std::shared_ptr<uml::InputPin>& getValue() const = 0;
 			/*!
 			The InputPin that provides the specified value for the given end. This InputPin is omitted if the LinkEndData specifies the "open" end for a ReadLinkAction.
 			<p>From package UML::Actions.</p>

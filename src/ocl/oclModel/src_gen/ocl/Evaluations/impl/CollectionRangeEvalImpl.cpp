@@ -128,7 +128,7 @@ std::shared_ptr<ecore::EObject> CollectionRangeEvalImpl::copy() const
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference first */
-std::shared_ptr<ocl::Evaluations::OclExpEval> CollectionRangeEvalImpl::getFirst() const
+const std::shared_ptr<ocl::Evaluations::OclExpEval>& CollectionRangeEvalImpl::getFirst() const
 {
     return m_first;
 }
@@ -139,7 +139,7 @@ void CollectionRangeEvalImpl::setFirst(const std::shared_ptr<ocl::Evaluations::O
 }
 
 /* Getter & Setter for reference last */
-std::shared_ptr<ocl::Evaluations::OclExpEval> CollectionRangeEvalImpl::getLast() const
+const std::shared_ptr<ocl::Evaluations::OclExpEval>& CollectionRangeEvalImpl::getLast() const
 {
     return m_last;
 }

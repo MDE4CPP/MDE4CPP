@@ -66,7 +66,7 @@ namespace uml
 			<p>From package UML::StateMachines.</p>
 			*/
 			
-			virtual std::shared_ptr<Subset<uml::ProtocolConformance, uml::Element>> getConformance() const ;
+			virtual const std::shared_ptr<Subset<uml::ProtocolConformance, uml::Element>>& getConformance() const ;
 			
 			//*********************************
 			// Union Reference Getters

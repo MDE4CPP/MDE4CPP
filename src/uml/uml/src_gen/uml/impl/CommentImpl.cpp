@@ -133,7 +133,7 @@ void CommentImpl::setBody(std::string _body)
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference annotatedElement */
-std::shared_ptr<Bag<uml::Element>> CommentImpl::getAnnotatedElement() const
+const std::shared_ptr<Bag<uml::Element>>& CommentImpl::getAnnotatedElement() const
 {
 	if(m_annotatedElement == nullptr)
 	{

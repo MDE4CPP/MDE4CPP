@@ -113,9 +113,9 @@ namespace fUML::Semantics::Activities
 			virtual void setActivityExecution(std::weak_ptr<fUML::Semantics::Activities::ActivityExecution>) = 0;
 			virtual std::weak_ptr<fUML::Semantics::Actions::StructuredActivityNodeActivation> getContainingNodeActivation() const = 0;
 			virtual void setContainingNodeActivation(std::weak_ptr<fUML::Semantics::Actions::StructuredActivityNodeActivation>) = 0;
-			virtual std::shared_ptr<Bag<fUML::Semantics::Activities::ActivityEdgeInstance>> getEdgeInstances() const = 0;
-			virtual std::shared_ptr<Bag<fUML::Semantics::Activities::ActivityNodeActivation>> getNodeActivations() const = 0;
-			virtual std::shared_ptr<Bag<fUML::Semantics::Activities::ActivityNodeActivation>> getSuspendedActivations() const = 0;
+			virtual const std::shared_ptr<Bag<fUML::Semantics::Activities::ActivityEdgeInstance>>& getEdgeInstances() const = 0;
+			virtual const std::shared_ptr<Bag<fUML::Semantics::Activities::ActivityNodeActivation>>& getNodeActivations() const = 0;
+			virtual const std::shared_ptr<Bag<fUML::Semantics::Activities::ActivityNodeActivation>>& getSuspendedActivations() const = 0;
 
 			//*********************************
 			// Union Reference Getters

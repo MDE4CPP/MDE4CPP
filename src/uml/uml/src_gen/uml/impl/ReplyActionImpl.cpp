@@ -203,7 +203,7 @@ std::shared_ptr<ecore::EObject> ReplyActionImpl::copy() const
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference replyToCall */
-std::shared_ptr<uml::Trigger> ReplyActionImpl::getReplyToCall() const
+const std::shared_ptr<uml::Trigger>& ReplyActionImpl::getReplyToCall() const
 {
     return m_replyToCall;
 }
@@ -214,7 +214,7 @@ void ReplyActionImpl::setReplyToCall(const std::shared_ptr<uml::Trigger>& _reply
 }
 
 /* Getter & Setter for reference replyValue */
-std::shared_ptr<Subset<uml::InputPin, uml::InputPin>> ReplyActionImpl::getReplyValue() const
+const std::shared_ptr<Subset<uml::InputPin, uml::InputPin>>& ReplyActionImpl::getReplyValue() const
 {
 	if(m_replyValue == nullptr)
 	{
@@ -235,7 +235,7 @@ std::shared_ptr<Subset<uml::InputPin, uml::InputPin>> ReplyActionImpl::getReplyV
 }
 
 /* Getter & Setter for reference returnInformation */
-std::shared_ptr<uml::InputPin> ReplyActionImpl::getReturnInformation() const
+const std::shared_ptr<uml::InputPin>& ReplyActionImpl::getReturnInformation() const
 {
     return m_returnInformation;
 }

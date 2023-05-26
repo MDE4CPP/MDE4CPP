@@ -257,7 +257,7 @@ std::shared_ptr<Bag<uml::Property>> StructuredClassifierImpl::getParts()
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference ownedAttribute */
-std::shared_ptr<SubsetUnion<uml::Property, uml::ConnectableElement, uml::NamedElement, uml::Property>> StructuredClassifierImpl::getOwnedAttribute() const
+const std::shared_ptr<SubsetUnion<uml::Property, uml::ConnectableElement, uml::NamedElement, uml::Property>>& StructuredClassifierImpl::getOwnedAttribute() const
 {
 	if(m_ownedAttribute == nullptr)
 	{
@@ -278,7 +278,7 @@ std::shared_ptr<SubsetUnion<uml::Property, uml::ConnectableElement, uml::NamedEl
 }
 
 /* Getter & Setter for reference ownedConnector */
-std::shared_ptr<Subset<uml::Connector, uml::Feature, uml::NamedElement>> StructuredClassifierImpl::getOwnedConnector() const
+const std::shared_ptr<Subset<uml::Connector, uml::Feature, uml::NamedElement>>& StructuredClassifierImpl::getOwnedConnector() const
 {
 	if(m_ownedConnector == nullptr)
 	{
@@ -299,7 +299,7 @@ std::shared_ptr<Subset<uml::Connector, uml::Feature, uml::NamedElement>> Structu
 }
 
 /* Getter & Setter for reference part */
-std::shared_ptr<Bag<uml::Property>> StructuredClassifierImpl::getPart() const
+const std::shared_ptr<Bag<uml::Property>>& StructuredClassifierImpl::getPart() const
 {
 	//generated from getterBody annotation
 	std::shared_ptr<SubsetUnion<uml::Property, uml::ConnectableElement, uml::NamedElement, uml::Property>> ownedAttribute = this->getOwnedAttribute();

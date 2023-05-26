@@ -182,7 +182,7 @@ std::shared_ptr<ecore::EObject> TestIdentityActionImpl::copy() const
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference first */
-std::shared_ptr<uml::InputPin> TestIdentityActionImpl::getFirst() const
+const std::shared_ptr<uml::InputPin>& TestIdentityActionImpl::getFirst() const
 {
     return m_first;
 }
@@ -193,7 +193,7 @@ void TestIdentityActionImpl::setFirst(const std::shared_ptr<uml::InputPin>& _fir
 }
 
 /* Getter & Setter for reference result */
-std::shared_ptr<uml::OutputPin> TestIdentityActionImpl::getResult() const
+const std::shared_ptr<uml::OutputPin>& TestIdentityActionImpl::getResult() const
 {
     return m_result;
 }
@@ -204,7 +204,7 @@ void TestIdentityActionImpl::setResult(const std::shared_ptr<uml::OutputPin>& _r
 }
 
 /* Getter & Setter for reference second */
-std::shared_ptr<uml::InputPin> TestIdentityActionImpl::getSecond() const
+const std::shared_ptr<uml::InputPin>& TestIdentityActionImpl::getSecond() const
 {
     return m_second;
 }

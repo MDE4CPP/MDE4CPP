@@ -139,7 +139,7 @@ void OclMessageExpEvalImpl::setName(std::string _name)
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference arguments */
-std::shared_ptr<Bag<ocl::Evaluations::OclMessageArgEval>> OclMessageExpEvalImpl::getArguments() const
+const std::shared_ptr<Bag<ocl::Evaluations::OclMessageArgEval>>& OclMessageExpEvalImpl::getArguments() const
 {
 	if(m_arguments == nullptr)
 	{
@@ -151,7 +151,7 @@ std::shared_ptr<Bag<ocl::Evaluations::OclMessageArgEval>> OclMessageExpEvalImpl:
 }
 
 /* Getter & Setter for reference target */
-std::shared_ptr<ocl::Evaluations::OclExpEval> OclMessageExpEvalImpl::getTarget() const
+const std::shared_ptr<ocl::Evaluations::OclExpEval>& OclMessageExpEvalImpl::getTarget() const
 {
     return m_target;
 }

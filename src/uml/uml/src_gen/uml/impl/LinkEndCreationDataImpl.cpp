@@ -137,7 +137,7 @@ void LinkEndCreationDataImpl::setIsReplaceAll(bool _isReplaceAll)
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference insertAt */
-std::shared_ptr<uml::InputPin> LinkEndCreationDataImpl::getInsertAt() const
+const std::shared_ptr<uml::InputPin>& LinkEndCreationDataImpl::getInsertAt() const
 {
     return m_insertAt;
 }

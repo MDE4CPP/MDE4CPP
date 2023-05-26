@@ -153,7 +153,7 @@ std::shared_ptr<ecore::EObject> SignalEventImpl::copy() const
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference signal */
-std::shared_ptr<uml::Signal> SignalEventImpl::getSignal() const
+const std::shared_ptr<uml::Signal>& SignalEventImpl::getSignal() const
 {
     return m_signal;
 }

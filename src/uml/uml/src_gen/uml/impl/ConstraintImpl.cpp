@@ -173,7 +173,7 @@ std::shared_ptr<ecore::EObject> ConstraintImpl::copy() const
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference constrainedElement */
-std::shared_ptr<Bag<uml::Element>> ConstraintImpl::getConstrainedElement() const
+const std::shared_ptr<Bag<uml::Element>>& ConstraintImpl::getConstrainedElement() const
 {
 	if(m_constrainedElement == nullptr)
 	{
@@ -196,7 +196,7 @@ void ConstraintImpl::setContext(std::weak_ptr<uml::Namespace> _context)
 }
 
 /* Getter & Setter for reference specification */
-std::shared_ptr<uml::ValueSpecification> ConstraintImpl::getSpecification() const
+const std::shared_ptr<uml::ValueSpecification>& ConstraintImpl::getSpecification() const
 {
     return m_specification;
 }

@@ -71,25 +71,25 @@ namespace uml
 			<p>From package UML::UseCases.</p>
 			*/
 			
-			virtual std::shared_ptr<Subset<uml::Extend, uml::NamedElement>> getExtend() const ;
+			virtual const std::shared_ptr<Subset<uml::Extend, uml::NamedElement>>& getExtend() const ;
 			/*!
 			The ExtensionPoints owned by this UseCase.
 			<p>From package UML::UseCases.</p>
 			*/
 			
-			virtual std::shared_ptr<Subset<uml::ExtensionPoint, uml::NamedElement>> getExtensionPoint() const ;
+			virtual const std::shared_ptr<Subset<uml::ExtensionPoint, uml::NamedElement>>& getExtensionPoint() const ;
 			/*!
 			The Include relationships owned by this UseCase.
 			<p>From package UML::UseCases.</p>
 			*/
 			
-			virtual std::shared_ptr<Subset<uml::Include, uml::NamedElement>> getInclude() const ;
+			virtual const std::shared_ptr<Subset<uml::Include, uml::NamedElement>>& getInclude() const ;
 			/*!
 			The subjects to which this UseCase applies. Each subject or its parts realize all the UseCases that apply to it.
 			<p>From package UML::UseCases.</p>
 			*/
 			
-			virtual std::shared_ptr<Bag<uml::Classifier>> getSubject() const ;
+			virtual const std::shared_ptr<Bag<uml::Classifier>>& getSubject() const ;
 			
 			//*********************************
 			// Union Reference Getters

@@ -222,7 +222,7 @@ std::shared_ptr<ecore::EObject> DeploymentImpl::copy() const
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference configuration */
-std::shared_ptr<Subset<uml::DeploymentSpecification, uml::Element>> DeploymentImpl::getConfiguration() const
+const std::shared_ptr<Subset<uml::DeploymentSpecification, uml::Element>>& DeploymentImpl::getConfiguration() const
 {
 	if(m_configuration == nullptr)
 	{
@@ -243,7 +243,7 @@ std::shared_ptr<Subset<uml::DeploymentSpecification, uml::Element>> DeploymentIm
 }
 
 /* Getter & Setter for reference deployedArtifact */
-std::shared_ptr<Subset<uml::DeployedArtifact, uml::NamedElement /*Subset does not reference a union*/>> DeploymentImpl::getDeployedArtifact() const
+const std::shared_ptr<Subset<uml::DeployedArtifact, uml::NamedElement /*Subset does not reference a union*/>>& DeploymentImpl::getDeployedArtifact() const
 {
 	if(m_deployedArtifact == nullptr)
 	{

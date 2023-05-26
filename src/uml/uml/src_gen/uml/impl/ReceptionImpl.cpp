@@ -146,7 +146,7 @@ std::shared_ptr<ecore::EObject> ReceptionImpl::copy() const
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference signal */
-std::shared_ptr<uml::Signal> ReceptionImpl::getSignal() const
+const std::shared_ptr<uml::Signal>& ReceptionImpl::getSignal() const
 {
     return m_signal;
 }

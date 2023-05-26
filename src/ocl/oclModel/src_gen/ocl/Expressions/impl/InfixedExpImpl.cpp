@@ -213,7 +213,7 @@ std::shared_ptr<ecore::EObject> InfixedExpImpl::copy() const
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference source */
-std::shared_ptr<ocl::Expressions::OclExpression> InfixedExpImpl::getSource() const
+const std::shared_ptr<ocl::Expressions::OclExpression>& InfixedExpImpl::getSource() const
 {
     return m_source;
 }

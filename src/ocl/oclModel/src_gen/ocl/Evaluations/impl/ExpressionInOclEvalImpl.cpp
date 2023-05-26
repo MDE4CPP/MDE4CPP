@@ -124,7 +124,7 @@ std::shared_ptr<ecore::EObject> ExpressionInOclEvalImpl::copy() const
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference context */
-std::shared_ptr<ocl::Evaluations::OclExpEval> ExpressionInOclEvalImpl::getContext() const
+const std::shared_ptr<ocl::Evaluations::OclExpEval>& ExpressionInOclEvalImpl::getContext() const
 {
     return m_context;
 }
@@ -135,7 +135,7 @@ void ExpressionInOclEvalImpl::setContext(const std::shared_ptr<ocl::Evaluations:
 }
 
 /* Getter & Setter for reference environment */
-std::shared_ptr<ocl::Evaluations::EvalEnvironment> ExpressionInOclEvalImpl::getEnvironment() const
+const std::shared_ptr<ocl::Evaluations::EvalEnvironment>& ExpressionInOclEvalImpl::getEnvironment() const
 {
     return m_environment;
 }

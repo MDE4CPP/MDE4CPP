@@ -225,7 +225,7 @@ void OperatorExpImpl::setOperator(std::string _operator)
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference leftHandOperand */
-std::shared_ptr<ocl::Expressions::OclExpression> OperatorExpImpl::getLeftHandOperand() const
+const std::shared_ptr<ocl::Expressions::OclExpression>& OperatorExpImpl::getLeftHandOperand() const
 {
     return m_leftHandOperand;
 }
@@ -236,7 +236,7 @@ void OperatorExpImpl::setLeftHandOperand(const std::shared_ptr<ocl::Expressions:
 }
 
 /* Getter & Setter for reference rightHandOperand */
-std::shared_ptr<ocl::Expressions::OclExpression> OperatorExpImpl::getRightHandOperand() const
+const std::shared_ptr<ocl::Expressions::OclExpression>& OperatorExpImpl::getRightHandOperand() const
 {
     return m_rightHandOperand;
 }

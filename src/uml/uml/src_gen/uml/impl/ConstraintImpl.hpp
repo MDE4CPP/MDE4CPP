@@ -64,7 +64,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::shared_ptr<Bag<uml::Element>> getConstrainedElement() const ;
+			virtual const std::shared_ptr<Bag<uml::Element>>& getConstrainedElement() const ;
 			/*!
 			Specifies the Namespace that owns the Constraint.
 			<p>From package UML::CommonStructure.</p>
@@ -82,7 +82,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::ValueSpecification> getSpecification() const ;
+			virtual const std::shared_ptr<uml::ValueSpecification>& getSpecification() const ;
 			/*!
 			A condition that must be true when evaluated in order for the Constraint to be satisfied.
 			<p>From package UML::CommonStructure.</p>

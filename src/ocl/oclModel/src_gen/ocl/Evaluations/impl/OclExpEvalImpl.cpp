@@ -129,7 +129,7 @@ std::shared_ptr<ecore::EObject> OclExpEvalImpl::copy() const
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference beforeEnvironment */
-std::shared_ptr<ocl::Evaluations::EvalEnvironment> OclExpEvalImpl::getBeforeEnvironment() const
+const std::shared_ptr<ocl::Evaluations::EvalEnvironment>& OclExpEvalImpl::getBeforeEnvironment() const
 {
     return m_beforeEnvironment;
 }
@@ -140,7 +140,7 @@ void OclExpEvalImpl::setBeforeEnvironment(const std::shared_ptr<ocl::Evaluations
 }
 
 /* Getter & Setter for reference environment */
-std::shared_ptr<ocl::Evaluations::EvalEnvironment> OclExpEvalImpl::getEnvironment() const
+const std::shared_ptr<ocl::Evaluations::EvalEnvironment>& OclExpEvalImpl::getEnvironment() const
 {
     return m_environment;
 }
@@ -151,7 +151,7 @@ void OclExpEvalImpl::setEnvironment(const std::shared_ptr<ocl::Evaluations::Eval
 }
 
 /* Getter & Setter for reference model */
-std::shared_ptr<ocl::Expressions::OclExpression> OclExpEvalImpl::getModel() const
+const std::shared_ptr<ocl::Expressions::OclExpression>& OclExpEvalImpl::getModel() const
 {
     return m_model;
 }
@@ -162,7 +162,7 @@ void OclExpEvalImpl::setModel(const std::shared_ptr<ocl::Expressions::OclExpress
 }
 
 /* Getter & Setter for reference resultValue */
-std::shared_ptr<ecore::EObject> OclExpEvalImpl::getResultValue() const
+const std::shared_ptr<ecore::EObject>& OclExpEvalImpl::getResultValue() const
 {
     return m_resultValue;
 }

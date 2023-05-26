@@ -239,7 +239,7 @@ void AcceptEventActionImpl::setIsUnmarshall(bool _isUnmarshall)
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference result */
-std::shared_ptr<Subset<uml::OutputPin, uml::OutputPin>> AcceptEventActionImpl::getResult() const
+const std::shared_ptr<Subset<uml::OutputPin, uml::OutputPin>>& AcceptEventActionImpl::getResult() const
 {
 	if(m_result == nullptr)
 	{
@@ -260,7 +260,7 @@ std::shared_ptr<Subset<uml::OutputPin, uml::OutputPin>> AcceptEventActionImpl::g
 }
 
 /* Getter & Setter for reference trigger */
-std::shared_ptr<Subset<uml::Trigger, uml::Element>> AcceptEventActionImpl::getTrigger() const
+const std::shared_ptr<Subset<uml::Trigger, uml::Element>>& AcceptEventActionImpl::getTrigger() const
 {
 	if(m_trigger == nullptr)
 	{

@@ -210,7 +210,7 @@ CallExpImpl& CallExpImpl::operator=(const CallExpImpl & obj)
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference source */
-std::shared_ptr<ocl::Expressions::OclExpression> CallExpImpl::getSource() const
+const std::shared_ptr<ocl::Expressions::OclExpression>& CallExpImpl::getSource() const
 {
     return m_source;
 }

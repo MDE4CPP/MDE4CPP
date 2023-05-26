@@ -63,13 +63,13 @@ namespace uml
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual std::shared_ptr<SubsetUnion<uml::InputPin, uml::InputPin>> getArgument() const ;
+			virtual const std::shared_ptr<SubsetUnion<uml::InputPin, uml::InputPin>>& getArgument() const ;
 			/*!
 			For CallOperationActions, SendSignalActions, and SendObjectActions, an optional Port of the target object through which the invocation request is sent.
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::Port> getOnPort() const ;
+			virtual const std::shared_ptr<uml::Port>& getOnPort() const ;
 			/*!
 			For CallOperationActions, SendSignalActions, and SendObjectActions, an optional Port of the target object through which the invocation request is sent.
 			<p>From package UML::Actions.</p>

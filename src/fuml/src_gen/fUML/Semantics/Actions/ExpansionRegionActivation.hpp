@@ -109,9 +109,9 @@ namespace fUML::Semantics::Actions
 			//*********************************
 			// Reference Getters & Setters
 			//*********************************
-			virtual std::shared_ptr<Bag<fUML::Semantics::Actions::ExpansionActivationGroup>> getActivationGroups() const = 0;
-			virtual std::shared_ptr<Bag<fUML::Semantics::Activities::TokenSet>> getInputExpansionTokens() const = 0;
-			virtual std::shared_ptr<Bag<fUML::Semantics::Activities::TokenSet>> getInputTokens() const = 0;
+			virtual const std::shared_ptr<Bag<fUML::Semantics::Actions::ExpansionActivationGroup>>& getActivationGroups() const = 0;
+			virtual const std::shared_ptr<Bag<fUML::Semantics::Activities::TokenSet>>& getInputExpansionTokens() const = 0;
+			virtual const std::shared_ptr<Bag<fUML::Semantics::Activities::TokenSet>>& getInputTokens() const = 0;
 
 			//*********************************
 			// Union Reference Getters

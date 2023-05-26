@@ -101,7 +101,7 @@ namespace uml
 			<p>From package UML::StructuredClassifiers.</p>
 			*/
 			
-			virtual std::shared_ptr<Bag<uml::ConnectorEnd>> getEnd() const = 0;
+			virtual const std::shared_ptr<Bag<uml::ConnectorEnd>>& getEnd() const = 0;
 
 			//*********************************
 			// Union Reference Getters

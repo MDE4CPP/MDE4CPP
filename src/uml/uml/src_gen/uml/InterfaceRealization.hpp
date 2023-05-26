@@ -108,7 +108,7 @@ namespace uml
 			<p>From package UML::SimpleClassifiers.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::Interface> getContract() const = 0;
+			virtual const std::shared_ptr<uml::Interface>& getContract() const = 0;
 			/*!
 			References the Interface specifying the conformance contract.
 			<p>From package UML::SimpleClassifiers.</p>

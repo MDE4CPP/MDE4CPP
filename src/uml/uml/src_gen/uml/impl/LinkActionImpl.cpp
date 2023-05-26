@@ -225,7 +225,7 @@ std::shared_ptr<uml::Association> LinkActionImpl::association()
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference endData */
-std::shared_ptr<Subset<uml::LinkEndData, uml::Element>> LinkActionImpl::getEndData() const
+const std::shared_ptr<Subset<uml::LinkEndData, uml::Element>>& LinkActionImpl::getEndData() const
 {
 	if(m_endData == nullptr)
 	{
@@ -246,7 +246,7 @@ std::shared_ptr<Subset<uml::LinkEndData, uml::Element>> LinkActionImpl::getEndDa
 }
 
 /* Getter & Setter for reference inputValue */
-std::shared_ptr<Subset<uml::InputPin, uml::InputPin>> LinkActionImpl::getInputValue() const
+const std::shared_ptr<Subset<uml::InputPin, uml::InputPin>>& LinkActionImpl::getInputValue() const
 {
 	if(m_inputValue == nullptr)
 	{

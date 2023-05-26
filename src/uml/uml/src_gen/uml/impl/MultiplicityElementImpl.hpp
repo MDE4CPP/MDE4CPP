@@ -149,7 +149,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::ValueSpecification> getLowerValue() const ;
+			virtual const std::shared_ptr<uml::ValueSpecification>& getLowerValue() const ;
 			/*!
 			The specification of the lower bound for this multiplicity.
 			<p>From package UML::CommonStructure.</p>
@@ -161,7 +161,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::ValueSpecification> getUpperValue() const ;
+			virtual const std::shared_ptr<uml::ValueSpecification>& getUpperValue() const ;
 			/*!
 			The specification of the upper bound for this multiplicity.
 			<p>From package UML::CommonStructure.</p>

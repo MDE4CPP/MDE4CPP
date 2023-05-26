@@ -178,7 +178,7 @@ std::shared_ptr<ecore::EObject> DurationImpl::copy() const
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference expr */
-std::shared_ptr<uml::ValueSpecification> DurationImpl::getExpr() const
+const std::shared_ptr<uml::ValueSpecification>& DurationImpl::getExpr() const
 {
     return m_expr;
 }
@@ -189,7 +189,7 @@ void DurationImpl::setExpr(const std::shared_ptr<uml::ValueSpecification>& _expr
 }
 
 /* Getter & Setter for reference observation */
-std::shared_ptr<Bag<uml::Observation>> DurationImpl::getObservation() const
+const std::shared_ptr<Bag<uml::Observation>>& DurationImpl::getObservation() const
 {
 	if(m_observation == nullptr)
 	{

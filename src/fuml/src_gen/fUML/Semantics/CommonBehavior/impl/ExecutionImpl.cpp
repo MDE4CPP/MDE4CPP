@@ -285,7 +285,7 @@ void ExecutionImpl::terminate()
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference behavior */
-std::shared_ptr<uml::Behavior> ExecutionImpl::getBehavior() const
+const std::shared_ptr<uml::Behavior>& ExecutionImpl::getBehavior() const
 {
 	//generated from getterBody annotation
 if(!m_behavior)
@@ -303,7 +303,7 @@ void ExecutionImpl::setBehavior(const std::shared_ptr<uml::Behavior>& _behavior)
 }
 
 /* Getter & Setter for reference context */
-std::shared_ptr<uml::Element> ExecutionImpl::getContext() const
+const std::shared_ptr<uml::Element>& ExecutionImpl::getContext() const
 {
     return m_context;
 }
@@ -314,7 +314,7 @@ void ExecutionImpl::setContext(const std::shared_ptr<uml::Element>& _context)
 }
 
 /* Getter & Setter for reference locus */
-std::shared_ptr<fUML::Semantics::Loci::Locus> ExecutionImpl::getLocus() const
+const std::shared_ptr<fUML::Semantics::Loci::Locus>& ExecutionImpl::getLocus() const
 {
     return m_locus;
 }
@@ -327,7 +327,7 @@ void ExecutionImpl::setLocus(const std::shared_ptr<fUML::Semantics::Loci::Locus>
 
 
 /* Getter & Setter for reference parameterValues */
-std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> ExecutionImpl::getParameterValues() const
+const std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>>& ExecutionImpl::getParameterValues() const
 {
 	if(m_parameterValues == nullptr)
 	{
@@ -339,7 +339,7 @@ std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> ExecutionI
 }
 
 /* Getter & Setter for reference types */
-std::shared_ptr<Bag<uml::Classifier>> ExecutionImpl::getTypes() const
+const std::shared_ptr<Bag<uml::Classifier>>& ExecutionImpl::getTypes() const
 {
 	if(m_types == nullptr)
 	{

@@ -87,7 +87,7 @@ namespace uml
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::InputPin> getTarget() const ;
+			virtual const std::shared_ptr<uml::InputPin>& getTarget() const ;
 			/*!
 			The InputPin providing the object to be destroyed.
 			<p>From package UML::Actions.</p>

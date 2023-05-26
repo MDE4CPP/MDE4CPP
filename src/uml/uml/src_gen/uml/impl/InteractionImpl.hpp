@@ -71,31 +71,31 @@ namespace uml
 			<p>From package UML::Interactions.</p>
 			*/
 			
-			virtual std::shared_ptr<Subset<uml::Action, uml::Element>> getAction() const ;
+			virtual const std::shared_ptr<Subset<uml::Action, uml::Element>>& getAction() const ;
 			/*!
 			Specifies the gates that form the message interface between this Interaction and any InteractionUses which reference it.
 			<p>From package UML::Interactions.</p>
 			*/
 			
-			virtual std::shared_ptr<Subset<uml::Gate, uml::NamedElement>> getFormalGate() const ;
+			virtual const std::shared_ptr<Subset<uml::Gate, uml::NamedElement>>& getFormalGate() const ;
 			/*!
 			The ordered set of fragments in the Interaction.
 			<p>From package UML::Interactions.</p>
 			*/
 			
-			virtual std::shared_ptr<Subset<uml::InteractionFragment, uml::NamedElement>> getFragment() const ;
+			virtual const std::shared_ptr<Subset<uml::InteractionFragment, uml::NamedElement>>& getFragment() const ;
 			/*!
 			Specifies the participants in this Interaction.
 			<p>From package UML::Interactions.</p>
 			*/
 			
-			virtual std::shared_ptr<Subset<uml::Lifeline, uml::NamedElement>> getLifeline() const ;
+			virtual const std::shared_ptr<Subset<uml::Lifeline, uml::NamedElement>>& getLifeline() const ;
 			/*!
 			The Messages contained in this Interaction.
 			<p>From package UML::Interactions.</p>
 			*/
 			
-			virtual std::shared_ptr<Subset<uml::Message, uml::NamedElement>> getMessage() const ;
+			virtual const std::shared_ptr<Subset<uml::Message, uml::NamedElement>>& getMessage() const ;
 			
 			//*********************************
 			// Union Reference Getters

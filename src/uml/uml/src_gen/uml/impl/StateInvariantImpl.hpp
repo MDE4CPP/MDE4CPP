@@ -63,7 +63,7 @@ namespace uml
 			<p>From package UML::Interactions.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::Constraint> getInvariant() const ;
+			virtual const std::shared_ptr<uml::Constraint>& getInvariant() const ;
 			/*!
 			A Constraint that should hold at runtime for this StateInvariant.
 			<p>From package UML::Interactions.</p>

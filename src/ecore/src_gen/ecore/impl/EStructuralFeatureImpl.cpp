@@ -151,7 +151,7 @@ void EStructuralFeatureImpl::setChangeable(bool _changeable)
 }
 
 /* Getter & Setter for attribute defaultValue */
-std::shared_ptr<Any> EStructuralFeatureImpl::getDefaultValue() const 
+const std::shared_ptr<Any>& EStructuralFeatureImpl::getDefaultValue() const 
 {
 	return m_defaultValue;
 }

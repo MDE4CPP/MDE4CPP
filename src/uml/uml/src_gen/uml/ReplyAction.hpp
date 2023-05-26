@@ -102,7 +102,7 @@ namespace uml
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::Trigger> getReplyToCall() const = 0;
+			virtual const std::shared_ptr<uml::Trigger>& getReplyToCall() const = 0;
 			/*!
 			The Trigger specifying the Operation whose call is being replied to.
 			<p>From package UML::Actions.</p>
@@ -114,13 +114,13 @@ namespace uml
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual std::shared_ptr<Subset<uml::InputPin, uml::InputPin>> getReplyValue() const = 0;
+			virtual const std::shared_ptr<Subset<uml::InputPin, uml::InputPin>>& getReplyValue() const = 0;
 			/*!
 			An InputPin that holds the return information value produced by an earlier AcceptCallAction.
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::InputPin> getReturnInformation() const = 0;
+			virtual const std::shared_ptr<uml::InputPin>& getReturnInformation() const = 0;
 			/*!
 			An InputPin that holds the return information value produced by an earlier AcceptCallAction.
 			<p>From package UML::Actions.</p>

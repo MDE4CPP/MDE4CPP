@@ -71,13 +71,13 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::shared_ptr<Subset<uml::TemplateParameterSubstitution, uml::Element>> getParameterSubstitution() const ;
+			virtual const std::shared_ptr<Subset<uml::TemplateParameterSubstitution, uml::Element>>& getParameterSubstitution() const ;
 			/*!
 			The TemplateSignature for the template that is the target of this TemplateBinding.
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::TemplateSignature> getSignature() const ;
+			virtual const std::shared_ptr<uml::TemplateSignature>& getSignature() const ;
 			/*!
 			The TemplateSignature for the template that is the target of this TemplateBinding.
 			<p>From package UML::CommonStructure.</p>

@@ -167,7 +167,7 @@ void EReferenceImpl::setResolveProxies(bool _resolveProxies)
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference eKeys */
-std::shared_ptr<Bag<ecore::EAttribute>> EReferenceImpl::getEKeys() const
+const std::shared_ptr<Bag<ecore::EAttribute>>& EReferenceImpl::getEKeys() const
 {
 	if(m_eKeys == nullptr)
 	{
@@ -179,7 +179,7 @@ std::shared_ptr<Bag<ecore::EAttribute>> EReferenceImpl::getEKeys() const
 }
 
 /* Getter & Setter for reference eOpposite */
-std::shared_ptr<ecore::EReference> EReferenceImpl::getEOpposite() const
+const std::shared_ptr<ecore::EReference>& EReferenceImpl::getEOpposite() const
 {
     return m_eOpposite;
 }
@@ -190,7 +190,7 @@ void EReferenceImpl::setEOpposite(const std::shared_ptr<ecore::EReference>& _eOp
 }
 
 /* Getter & Setter for reference eReferenceType */
-std::shared_ptr<ecore::EClass> EReferenceImpl::getEReferenceType() const
+const std::shared_ptr<ecore::EClass>& EReferenceImpl::getEReferenceType() const
 {
     return m_eReferenceType;
 }

@@ -162,7 +162,7 @@ std::shared_ptr<ecore::EObject> DurationObservationImpl::copy() const
 // Attribute Getters & Setters
 //*********************************
 /* Getter & Setter for attribute firstEvent */
-std::shared_ptr<Bag<bool>> DurationObservationImpl::isFirstEvent() const 
+const std::shared_ptr<Bag<bool>>& DurationObservationImpl::isFirstEvent() const 
 {
 	if(m_firstEvent == nullptr)
 	{
@@ -175,7 +175,7 @@ std::shared_ptr<Bag<bool>> DurationObservationImpl::isFirstEvent() const
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference event */
-std::shared_ptr<Bag<uml::NamedElement>> DurationObservationImpl::getEvent() const
+const std::shared_ptr<Bag<uml::NamedElement>>& DurationObservationImpl::getEvent() const
 {
 	if(m_event == nullptr)
 	{

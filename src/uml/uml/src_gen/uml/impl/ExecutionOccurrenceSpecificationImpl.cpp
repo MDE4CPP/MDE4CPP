@@ -155,7 +155,7 @@ std::shared_ptr<ecore::EObject> ExecutionOccurrenceSpecificationImpl::copy() con
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference execution */
-std::shared_ptr<uml::ExecutionSpecification> ExecutionOccurrenceSpecificationImpl::getExecution() const
+const std::shared_ptr<uml::ExecutionSpecification>& ExecutionOccurrenceSpecificationImpl::getExecution() const
 {
     return m_execution;
 }

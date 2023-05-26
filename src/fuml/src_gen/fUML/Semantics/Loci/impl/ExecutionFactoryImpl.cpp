@@ -637,7 +637,7 @@ std::shared_ptr<fUML::Semantics::Loci::SemanticVisitor> ExecutionFactoryImpl::in
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference builtInTypes */
-std::shared_ptr<Bag<uml::PrimitiveType>> ExecutionFactoryImpl::getBuiltInTypes() const
+const std::shared_ptr<Bag<uml::PrimitiveType>>& ExecutionFactoryImpl::getBuiltInTypes() const
 {
 	if(m_builtInTypes == nullptr)
 	{
@@ -662,7 +662,7 @@ void ExecutionFactoryImpl::setLocus(std::weak_ptr<fUML::Semantics::Loci::Locus> 
 
 
 /* Getter & Setter for reference strategies */
-std::shared_ptr<Bag<fUML::Semantics::Loci::SemanticStrategy>> ExecutionFactoryImpl::getStrategies() const
+const std::shared_ptr<Bag<fUML::Semantics::Loci::SemanticStrategy>>& ExecutionFactoryImpl::getStrategies() const
 {
 	if(m_strategies == nullptr)
 	{

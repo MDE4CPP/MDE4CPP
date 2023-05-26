@@ -169,7 +169,7 @@ std::shared_ptr<ecore::EObject> InterfaceRealizationImpl::copy() const
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference contract */
-std::shared_ptr<uml::Interface> InterfaceRealizationImpl::getContract() const
+const std::shared_ptr<uml::Interface>& InterfaceRealizationImpl::getContract() const
 {
     return m_contract;
 }

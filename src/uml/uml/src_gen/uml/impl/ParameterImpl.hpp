@@ -160,7 +160,7 @@ namespace uml
 			<p>From package UML::Classification.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::ValueSpecification> getDefaultValue() const ;
+			virtual const std::shared_ptr<uml::ValueSpecification>& getDefaultValue() const ;
 			/*!
 			Specifies a ValueSpecification that represents a value to be used when no argument is supplied for the Parameter.
 			<p>From package UML::Classification.</p>
@@ -178,7 +178,7 @@ namespace uml
 			<p>From package UML::Classification.</p>
 			*/
 			
-			virtual std::shared_ptr<Bag<uml::ParameterSet>> getParameterSet() const ;
+			virtual const std::shared_ptr<Bag<uml::ParameterSet>>& getParameterSet() const ;
 			
 			//*********************************
 			// Union Reference Getters

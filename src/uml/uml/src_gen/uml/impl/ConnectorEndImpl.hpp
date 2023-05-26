@@ -62,13 +62,13 @@ namespace uml
 			<p>From package UML::StructuredClassifiers.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::Property> getDefiningEnd() const ;
+			virtual const std::shared_ptr<uml::Property>& getDefiningEnd() const ;
 			/*!
 			Indicates the role of the internal structure of a Classifier with the Port to which the ConnectorEnd is attached.
 			<p>From package UML::StructuredClassifiers.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::Property> getPartWithPort() const ;
+			virtual const std::shared_ptr<uml::Property>& getPartWithPort() const ;
 			/*!
 			Indicates the role of the internal structure of a Classifier with the Port to which the ConnectorEnd is attached.
 			<p>From package UML::StructuredClassifiers.</p>
@@ -80,7 +80,7 @@ namespace uml
 			<p>From package UML::StructuredClassifiers.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::ConnectableElement> getRole() const ;
+			virtual const std::shared_ptr<uml::ConnectableElement>& getRole() const ;
 			/*!
 			The ConnectableElement attached at this ConnectorEnd. When an instance of the containing Classifier is created, a link may (depending on the multiplicities) be created to an instance of the Classifier that types this ConnectableElement.
 			<p>From package UML::StructuredClassifiers.</p>

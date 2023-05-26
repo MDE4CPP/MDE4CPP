@@ -184,7 +184,7 @@ void ObjectFlowImpl::setIsMultireceive(bool _isMultireceive)
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference selection */
-std::shared_ptr<uml::Behavior> ObjectFlowImpl::getSelection() const
+const std::shared_ptr<uml::Behavior>& ObjectFlowImpl::getSelection() const
 {
     return m_selection;
 }
@@ -195,7 +195,7 @@ void ObjectFlowImpl::setSelection(const std::shared_ptr<uml::Behavior>& _selecti
 }
 
 /* Getter & Setter for reference transformation */
-std::shared_ptr<uml::Behavior> ObjectFlowImpl::getTransformation() const
+const std::shared_ptr<uml::Behavior>& ObjectFlowImpl::getTransformation() const
 {
     return m_transformation;
 }

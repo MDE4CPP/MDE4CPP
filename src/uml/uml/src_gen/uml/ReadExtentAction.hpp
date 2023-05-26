@@ -101,7 +101,7 @@ namespace uml
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::Classifier> getClassifier() const = 0;
+			virtual const std::shared_ptr<uml::Classifier>& getClassifier() const = 0;
 			/*!
 			The Classifier whose instances are to be retrieved.
 			<p>From package UML::Actions.</p>
@@ -113,7 +113,7 @@ namespace uml
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::OutputPin> getResult() const = 0;
+			virtual const std::shared_ptr<uml::OutputPin>& getResult() const = 0;
 			/*!
 			The OutputPin on which the Classifier instances are placed.
 			<p>From package UML::Actions.</p>

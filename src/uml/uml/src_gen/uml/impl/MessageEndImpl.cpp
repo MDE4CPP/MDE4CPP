@@ -148,7 +148,7 @@ std::shared_ptr<Bag<uml::MessageEnd>> MessageEndImpl::oppositeEnd()
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference message */
-std::shared_ptr<uml::Message> MessageEndImpl::getMessage() const
+const std::shared_ptr<uml::Message>& MessageEndImpl::getMessage() const
 {
     return m_message;
 }

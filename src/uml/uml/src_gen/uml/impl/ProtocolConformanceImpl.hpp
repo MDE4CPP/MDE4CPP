@@ -59,7 +59,7 @@ namespace uml
 			<p>From package UML::StateMachines.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::ProtocolStateMachine> getGeneralMachine() const ;
+			virtual const std::shared_ptr<uml::ProtocolStateMachine>& getGeneralMachine() const ;
 			/*!
 			Specifies the ProtocolStateMachine to which the specific ProtocolStateMachine conforms.
 			<p>From package UML::StateMachines.</p>

@@ -90,7 +90,7 @@ namespace fUML::Semantics::Actions
 			//*********************************
 			// Reference Getters & Setters
 			//*********************************
-			virtual std::shared_ptr<uml::CreateObjectAction> getCreateObjectAction() const = 0;
+			virtual const std::shared_ptr<uml::CreateObjectAction>& getCreateObjectAction() const = 0;
 			virtual void setCreateObjectAction(const std::shared_ptr<uml::CreateObjectAction>&) = 0;
 			/*Additional Setter for 'ActionActivation::action' redefined by reference 'createObjectAction'*/
 			virtual void setAction(const std::shared_ptr<uml::Action>&) = 0;

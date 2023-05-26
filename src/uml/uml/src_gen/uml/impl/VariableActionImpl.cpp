@@ -156,7 +156,7 @@ VariableActionImpl& VariableActionImpl::operator=(const VariableActionImpl & obj
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference variable */
-std::shared_ptr<uml::Variable> VariableActionImpl::getVariable() const
+const std::shared_ptr<uml::Variable>& VariableActionImpl::getVariable() const
 {
     return m_variable;
 }

@@ -137,7 +137,7 @@ void LinkEndDestructionDataImpl::setIsDestroyDuplicates(bool _isDestroyDuplicate
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference destroyAt */
-std::shared_ptr<uml::InputPin> LinkEndDestructionDataImpl::getDestroyAt() const
+const std::shared_ptr<uml::InputPin>& LinkEndDestructionDataImpl::getDestroyAt() const
 {
     return m_destroyAt;
 }

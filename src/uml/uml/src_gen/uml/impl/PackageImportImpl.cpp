@@ -149,7 +149,7 @@ void PackageImportImpl::setVisibility(uml::VisibilityKind _visibility)
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference importedPackage */
-std::shared_ptr<uml::Package> PackageImportImpl::getImportedPackage() const
+const std::shared_ptr<uml::Package>& PackageImportImpl::getImportedPackage() const
 {
     return m_importedPackage;
 }

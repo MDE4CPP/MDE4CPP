@@ -195,7 +195,7 @@ void PinActivationImpl::setActionActivation(std::weak_ptr<fUML::Semantics::Actio
 }
 
 /* Getter & Setter for reference pin */
-std::shared_ptr<uml::Pin> PinActivationImpl::getPin() const
+const std::shared_ptr<uml::Pin>& PinActivationImpl::getPin() const
 {
     return m_pin;
 }
@@ -206,7 +206,7 @@ void PinActivationImpl::setPin(const std::shared_ptr<uml::Pin>& _pin)
 	fUML::Semantics::Activities::ActivityNodeActivationImpl::setNode(_pin);
 }
 /*Additional Setter for redefined reference 'ActivityNodeActivation::node'*/
-void PinActivationImpl::setNode(std::shared_ptr<uml::ActivityNode> _node)
+void PinActivationImpl::setNode(const std::shared_ptr<uml::ActivityNode>& _node)
 {
 	std::shared_ptr<uml::Pin> _pin = std::dynamic_pointer_cast<uml::Pin>(_node);
 	if(_pin)

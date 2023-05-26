@@ -65,13 +65,13 @@ namespace uml
 			<p>From package UML::Deployments.</p>
 			*/
 			
-			virtual std::shared_ptr<Subset<uml::DeploymentSpecification, uml::Element>> getConfiguration() const ;
+			virtual const std::shared_ptr<Subset<uml::DeploymentSpecification, uml::Element>>& getConfiguration() const ;
 			/*!
 			The Artifacts that are deployed onto a Node. This association specializes the supplier association.
 			<p>From package UML::Deployments.</p>
 			*/
 			
-			virtual std::shared_ptr<Subset<uml::DeployedArtifact, uml::NamedElement /*Subset does not reference a union*/>> getDeployedArtifact() const ;
+			virtual const std::shared_ptr<Subset<uml::DeployedArtifact, uml::NamedElement /*Subset does not reference a union*/>>& getDeployedArtifact() const ;
 			/*!
 			The DeployedTarget which is the target of a Deployment.
 			<p>From package UML::Deployments.</p>

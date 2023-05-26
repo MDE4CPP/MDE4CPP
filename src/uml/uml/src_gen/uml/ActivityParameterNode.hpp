@@ -102,7 +102,7 @@ namespace uml
 			<p>From package UML::Activities.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::Parameter> getParameter() const = 0;
+			virtual const std::shared_ptr<uml::Parameter>& getParameter() const = 0;
 			/*!
 			The Parameter for which the ActivityParameterNode will be accepting or providing values.
 			<p>From package UML::Activities.</p>

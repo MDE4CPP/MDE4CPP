@@ -166,7 +166,7 @@ std::shared_ptr<ecore::EObject> SlotImpl::copy() const
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference definingFeature */
-std::shared_ptr<uml::StructuralFeature> SlotImpl::getDefiningFeature() const
+const std::shared_ptr<uml::StructuralFeature>& SlotImpl::getDefiningFeature() const
 {
     return m_definingFeature;
 }
@@ -188,7 +188,7 @@ void SlotImpl::setOwningInstance(std::weak_ptr<uml::InstanceSpecification> _owni
 }
 
 /* Getter & Setter for reference value */
-std::shared_ptr<Subset<uml::ValueSpecification, uml::Element>> SlotImpl::getValue() const
+const std::shared_ptr<Subset<uml::ValueSpecification, uml::Element>>& SlotImpl::getValue() const
 {
 	if(m_value == nullptr)
 	{

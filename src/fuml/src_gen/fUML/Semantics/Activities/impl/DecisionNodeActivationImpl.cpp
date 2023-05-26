@@ -528,7 +528,7 @@ bool DecisionNodeActivationImpl::test(const std::shared_ptr<uml::ValueSpecificat
 
 
 /* Getter & Setter for reference decisionNode */
-std::shared_ptr<uml::DecisionNode> DecisionNodeActivationImpl::getDecisionNode() const
+const std::shared_ptr<uml::DecisionNode>& DecisionNodeActivationImpl::getDecisionNode() const
 {
     return m_decisionNode;
 }
@@ -539,7 +539,7 @@ void DecisionNodeActivationImpl::setDecisionNode(const std::shared_ptr<uml::Deci
 	fUML::Semantics::Activities::ActivityNodeActivationImpl::setNode(_decisionNode);
 }
 /*Additional Setter for redefined reference 'ActivityNodeActivation::node'*/
-void DecisionNodeActivationImpl::setNode(std::shared_ptr<uml::ActivityNode> _node)
+void DecisionNodeActivationImpl::setNode(const std::shared_ptr<uml::ActivityNode>& _node)
 {
 	std::shared_ptr<uml::DecisionNode> _decisionNode = std::dynamic_pointer_cast<uml::DecisionNode>(_node);
 	if(_decisionNode)

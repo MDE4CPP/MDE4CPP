@@ -59,7 +59,7 @@ namespace uml
 			<p>From package UML::Values.</p>
 			*/
 			 
-			virtual std::shared_ptr<Bag<bool>> isFirstEvent() const ;
+			virtual const std::shared_ptr<Bag<bool>>& isFirstEvent() const ;
 			
 			//*********************************
 			// Reference Getters & Setters
@@ -69,7 +69,7 @@ namespace uml
 			<p>From package UML::Values.</p>
 			*/
 			
-			virtual std::shared_ptr<Bag<uml::NamedElement>> getEvent() const ;
+			virtual const std::shared_ptr<Bag<uml::NamedElement>>& getEvent() const ;
 			
 			//*********************************
 			// Union Reference Getters

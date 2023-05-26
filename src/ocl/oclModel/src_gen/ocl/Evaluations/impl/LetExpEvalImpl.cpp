@@ -138,7 +138,7 @@ void LetExpEvalImpl::setVariable(std::string _variable)
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference in */
-std::shared_ptr<ocl::Evaluations::OclExpEval> LetExpEvalImpl::getIn() const
+const std::shared_ptr<ocl::Evaluations::OclExpEval>& LetExpEvalImpl::getIn() const
 {
     return m_in;
 }
@@ -149,7 +149,7 @@ void LetExpEvalImpl::setIn(const std::shared_ptr<ocl::Evaluations::OclExpEval>& 
 }
 
 /* Getter & Setter for reference initExpression */
-std::shared_ptr<ocl::Evaluations::OclExpEval> LetExpEvalImpl::getInitExpression() const
+const std::shared_ptr<ocl::Evaluations::OclExpEval>& LetExpEvalImpl::getInitExpression() const
 {
     return m_initExpression;
 }

@@ -249,7 +249,7 @@ void ActionImpl::setIsLocallyReentrant(bool _isLocallyReentrant)
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference context */
-std::shared_ptr<uml::Classifier> ActionImpl::getContext() const
+const std::shared_ptr<uml::Classifier>& ActionImpl::getContext() const
 {
     return m_context;
 }
@@ -257,7 +257,7 @@ std::shared_ptr<uml::Classifier> ActionImpl::getContext() const
 /* Getter & Setter for reference input */
 
 /* Getter & Setter for reference localPostcondition */
-std::shared_ptr<Subset<uml::Constraint, uml::Element>> ActionImpl::getLocalPostcondition() const
+const std::shared_ptr<Subset<uml::Constraint, uml::Element>>& ActionImpl::getLocalPostcondition() const
 {
 	if(m_localPostcondition == nullptr)
 	{
@@ -278,7 +278,7 @@ std::shared_ptr<Subset<uml::Constraint, uml::Element>> ActionImpl::getLocalPostc
 }
 
 /* Getter & Setter for reference localPrecondition */
-std::shared_ptr<Subset<uml::Constraint, uml::Element>> ActionImpl::getLocalPrecondition() const
+const std::shared_ptr<Subset<uml::Constraint, uml::Element>>& ActionImpl::getLocalPrecondition() const
 {
 	if(m_localPrecondition == nullptr)
 	{

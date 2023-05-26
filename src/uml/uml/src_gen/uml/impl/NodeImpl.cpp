@@ -234,7 +234,7 @@ std::shared_ptr<Bag<uml::CommunicationPath>> NodeImpl::getCommunicationPaths()
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference nestedNode */
-std::shared_ptr<Subset<uml::Node, uml::NamedElement>> NodeImpl::getNestedNode() const
+const std::shared_ptr<Subset<uml::Node, uml::NamedElement>>& NodeImpl::getNestedNode() const
 {
 	if(m_nestedNode == nullptr)
 	{

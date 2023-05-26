@@ -63,7 +63,7 @@ namespace uml
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::InputPin> getRequest() const ;
+			virtual const std::shared_ptr<uml::InputPin>& getRequest() const ;
 			/*!
 			The request object, which is transmitted to the target object. The object may be copied in transmission, so identity might not be preserved.
 			<p>From package UML::Actions.</p>
@@ -75,7 +75,7 @@ namespace uml
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::InputPin> getTarget() const ;
+			virtual const std::shared_ptr<uml::InputPin>& getTarget() const ;
 			/*!
 			The target object to which the object is sent.
 			<p>From package UML::Actions.</p>

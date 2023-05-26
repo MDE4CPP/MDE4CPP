@@ -233,7 +233,7 @@ void RedefinableTemplateSignatureImpl::setTemplate(std::weak_ptr<uml::Templateab
 }
 
 /* Getter & Setter for reference extendedSignature */
-std::shared_ptr<Subset<uml::RedefinableTemplateSignature, uml::RedefinableElement>> RedefinableTemplateSignatureImpl::getExtendedSignature() const
+const std::shared_ptr<Subset<uml::RedefinableTemplateSignature, uml::RedefinableElement>>& RedefinableTemplateSignatureImpl::getExtendedSignature() const
 {
 	if(m_extendedSignature == nullptr)
 	{
@@ -254,7 +254,7 @@ std::shared_ptr<Subset<uml::RedefinableTemplateSignature, uml::RedefinableElemen
 }
 
 /* Getter & Setter for reference inheritedParameter */
-std::shared_ptr<Subset<uml::TemplateParameter, uml::TemplateParameter>> RedefinableTemplateSignatureImpl::getInheritedParameter() const
+const std::shared_ptr<Subset<uml::TemplateParameter, uml::TemplateParameter>>& RedefinableTemplateSignatureImpl::getInheritedParameter() const
 {
 	if(m_inheritedParameter == nullptr)
 	{

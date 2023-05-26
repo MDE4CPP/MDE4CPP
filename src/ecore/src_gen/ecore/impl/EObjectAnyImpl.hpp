@@ -48,7 +48,7 @@ namespace ecore
 			//*********************************
 			// Attribute Getters & Setters
 			//*********************************
-			virtual std::shared_ptr<Any> getAny() const ;
+			virtual const std::shared_ptr<Any>& getAny() const ;
 			virtual void setAny (const std::shared_ptr<Any>& _any);
 			
 			//*********************************

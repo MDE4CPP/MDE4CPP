@@ -150,7 +150,7 @@ namespace uml
 			<p>From package UML::Interactions.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::Message> getMessage() const = 0;
+			virtual const std::shared_ptr<uml::Message>& getMessage() const = 0;
 			/*!
 			References a Message.
 			<p>From package UML::Interactions.</p>

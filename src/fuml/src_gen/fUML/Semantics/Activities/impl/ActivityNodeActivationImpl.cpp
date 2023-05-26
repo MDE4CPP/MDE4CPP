@@ -530,7 +530,7 @@ void ActivityNodeActivationImpl::setGroup(std::weak_ptr<fUML::Semantics::Activit
 }
 
 /* Getter & Setter for reference heldTokens */
-std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> ActivityNodeActivationImpl::getHeldTokens() const
+const std::shared_ptr<Bag<fUML::Semantics::Activities::Token>>& ActivityNodeActivationImpl::getHeldTokens() const
 {
 	if(m_heldTokens == nullptr)
 	{
@@ -542,7 +542,7 @@ std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> ActivityNodeActivationI
 }
 
 /* Getter & Setter for reference incomingEdges */
-std::shared_ptr<Bag<fUML::Semantics::Activities::ActivityEdgeInstance>> ActivityNodeActivationImpl::getIncomingEdges() const
+const std::shared_ptr<Bag<fUML::Semantics::Activities::ActivityEdgeInstance>>& ActivityNodeActivationImpl::getIncomingEdges() const
 {
 	if(m_incomingEdges == nullptr)
 	{
@@ -554,7 +554,7 @@ std::shared_ptr<Bag<fUML::Semantics::Activities::ActivityEdgeInstance>> Activity
 }
 
 /* Getter & Setter for reference node */
-std::shared_ptr<uml::ActivityNode> ActivityNodeActivationImpl::getNode() const
+const std::shared_ptr<uml::ActivityNode>& ActivityNodeActivationImpl::getNode() const
 {
     return m_node;
 }
@@ -565,7 +565,7 @@ void ActivityNodeActivationImpl::setNode(const std::shared_ptr<uml::ActivityNode
 }
 
 /* Getter & Setter for reference outgoingEdges */
-std::shared_ptr<Bag<fUML::Semantics::Activities::ActivityEdgeInstance>> ActivityNodeActivationImpl::getOutgoingEdges() const
+const std::shared_ptr<Bag<fUML::Semantics::Activities::ActivityEdgeInstance>>& ActivityNodeActivationImpl::getOutgoingEdges() const
 {
 	if(m_outgoingEdges == nullptr)
 	{

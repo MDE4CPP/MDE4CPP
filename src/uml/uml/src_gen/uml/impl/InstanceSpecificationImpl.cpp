@@ -199,7 +199,7 @@ std::shared_ptr<ecore::EObject> InstanceSpecificationImpl::copy() const
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference classifier */
-std::shared_ptr<Bag<uml::Classifier>> InstanceSpecificationImpl::getClassifier() const
+const std::shared_ptr<Bag<uml::Classifier>>& InstanceSpecificationImpl::getClassifier() const
 {
 	if(m_classifier == nullptr)
 	{
@@ -211,7 +211,7 @@ std::shared_ptr<Bag<uml::Classifier>> InstanceSpecificationImpl::getClassifier()
 }
 
 /* Getter & Setter for reference slot */
-std::shared_ptr<Subset<uml::Slot, uml::Element>> InstanceSpecificationImpl::getSlot() const
+const std::shared_ptr<Subset<uml::Slot, uml::Element>>& InstanceSpecificationImpl::getSlot() const
 {
 	if(m_slot == nullptr)
 	{
@@ -232,7 +232,7 @@ std::shared_ptr<Subset<uml::Slot, uml::Element>> InstanceSpecificationImpl::getS
 }
 
 /* Getter & Setter for reference specification */
-std::shared_ptr<uml::ValueSpecification> InstanceSpecificationImpl::getSpecification() const
+const std::shared_ptr<uml::ValueSpecification>& InstanceSpecificationImpl::getSpecification() const
 {
     return m_specification;
 }

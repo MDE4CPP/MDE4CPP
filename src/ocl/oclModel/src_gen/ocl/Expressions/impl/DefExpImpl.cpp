@@ -214,7 +214,7 @@ std::shared_ptr<ecore::EObject> DefExpImpl::copy() const
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference bodyExp */
-std::shared_ptr<ocl::Expressions::OclExpression> DefExpImpl::getBodyExp() const
+const std::shared_ptr<ocl::Expressions::OclExpression>& DefExpImpl::getBodyExp() const
 {
     return m_bodyExp;
 }
@@ -225,7 +225,7 @@ void DefExpImpl::setBodyExp(const std::shared_ptr<ocl::Expressions::OclExpressio
 }
 
 /* Getter & Setter for reference frontExp */
-std::shared_ptr<ocl::Expressions::OclExpression> DefExpImpl::getFrontExp() const
+const std::shared_ptr<ocl::Expressions::OclExpression>& DefExpImpl::getFrontExp() const
 {
     return m_frontExp;
 }

@@ -67,11 +67,11 @@ namespace ocl::Expressions
 			//*********************************
 			// Reference Getters & Setters
 			//*********************************
-			virtual std::shared_ptr<ocl::Expressions::OclExpression> getCondition() const ;
+			virtual const std::shared_ptr<ocl::Expressions::OclExpression>& getCondition() const ;
 			virtual void setCondition(const std::shared_ptr<ocl::Expressions::OclExpression>&) ;
-			virtual std::shared_ptr<ocl::Expressions::OclExpression> getElseExpression() const ;
+			virtual const std::shared_ptr<ocl::Expressions::OclExpression>& getElseExpression() const ;
 			virtual void setElseExpression(const std::shared_ptr<ocl::Expressions::OclExpression>&) ;
-			virtual std::shared_ptr<ocl::Expressions::OclExpression> getThenExpression() const ;
+			virtual const std::shared_ptr<ocl::Expressions::OclExpression>& getThenExpression() const ;
 			virtual void setThenExpression(const std::shared_ptr<ocl::Expressions::OclExpression>&) ;
 			
 			//*********************************

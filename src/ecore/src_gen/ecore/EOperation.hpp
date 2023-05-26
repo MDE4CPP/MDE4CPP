@@ -90,10 +90,10 @@ namespace ecore
 			// Reference Getters & Setters
 			//*********************************
 			virtual std::weak_ptr<ecore::EClass> getEContainingClass() const = 0;
-			virtual std::shared_ptr<Bag<ecore::EClassifier>> getEExceptions() const = 0;
-			virtual std::shared_ptr<Bag<ecore::EGenericType>> getEGenericExceptions() const = 0;
-			virtual std::shared_ptr<Subset<ecore::EParameter, ecore::EObject>> getEParameters() const = 0;
-			virtual std::shared_ptr<Bag<ecore::ETypeParameter>> getETypeParameters() const = 0;
+			virtual const std::shared_ptr<Bag<ecore::EClassifier>>& getEExceptions() const = 0;
+			virtual const std::shared_ptr<Bag<ecore::EGenericType>>& getEGenericExceptions() const = 0;
+			virtual const std::shared_ptr<Subset<ecore::EParameter, ecore::EObject>>& getEParameters() const = 0;
+			virtual const std::shared_ptr<Bag<ecore::ETypeParameter>>& getETypeParameters() const = 0;
 
 			//*********************************
 			// Union Reference Getters

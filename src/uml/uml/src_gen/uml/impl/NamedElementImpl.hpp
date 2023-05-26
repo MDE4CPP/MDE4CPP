@@ -170,13 +170,13 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::shared_ptr<Bag<uml::Dependency>> getClientDependency() const ;
+			virtual const std::shared_ptr<Bag<uml::Dependency>>& getClientDependency() const ;
 			/*!
 			The StringExpression used to define the name of this NamedElement.
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::StringExpression> getNameExpression() const ;
+			virtual const std::shared_ptr<uml::StringExpression>& getNameExpression() const ;
 			/*!
 			The StringExpression used to define the name of this NamedElement.
 			<p>From package UML::CommonStructure.</p>

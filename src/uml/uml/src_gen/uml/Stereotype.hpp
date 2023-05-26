@@ -165,13 +165,13 @@ namespace uml
 			<p>From package UML::Packages.</p>
 			*/
 			
-			virtual std::shared_ptr<Subset<uml::Image, uml::Element>> getIcon() const = 0;
+			virtual const std::shared_ptr<Subset<uml::Image, uml::Element>>& getIcon() const = 0;
 			/*!
 			The profile that directly or indirectly contains this stereotype.
 			<p>From package UML::Packages.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::Profile> getProfile() const = 0;
+			virtual const std::shared_ptr<uml::Profile>& getProfile() const = 0;
 
 			//*********************************
 			// Union Reference Getters

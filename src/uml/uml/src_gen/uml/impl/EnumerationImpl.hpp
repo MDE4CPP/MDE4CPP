@@ -64,7 +64,7 @@ namespace uml
 			<p>From package UML::SimpleClassifiers.</p>
 			*/
 			
-			virtual std::shared_ptr<Subset<uml::EnumerationLiteral, uml::NamedElement>> getOwnedLiteral() const ;
+			virtual const std::shared_ptr<Subset<uml::EnumerationLiteral, uml::NamedElement>>& getOwnedLiteral() const ;
 			
 			//*********************************
 			// Union Reference Getters

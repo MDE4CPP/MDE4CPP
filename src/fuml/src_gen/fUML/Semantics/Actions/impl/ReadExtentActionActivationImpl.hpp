@@ -54,7 +54,7 @@ namespace fUML::Semantics::Actions
 			//*********************************
 			// Reference Getters & Setters
 			//*********************************
-			virtual std::shared_ptr<uml::ReadExtentAction> getReadExtentAction() const ;
+			virtual const std::shared_ptr<uml::ReadExtentAction>& getReadExtentAction() const ;
 			virtual void setReadExtentAction(const std::shared_ptr<uml::ReadExtentAction>&) ;
 			/*Additional Setter for 'ActionActivation::action' redefined by reference 'readExtentAction'*/
 			virtual void setAction(const std::shared_ptr<uml::Action>&) ;

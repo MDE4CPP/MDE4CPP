@@ -158,7 +158,7 @@ std::shared_ptr<ecore::EObject> AbstractionImpl::copy() const
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference mapping */
-std::shared_ptr<uml::OpaqueExpression> AbstractionImpl::getMapping() const
+const std::shared_ptr<uml::OpaqueExpression>& AbstractionImpl::getMapping() const
 {
     return m_mapping;
 }

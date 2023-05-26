@@ -65,7 +65,7 @@ namespace uml
 			<p>From package UML::StructuredClassifiers.</p>
 			*/
 			
-			virtual std::shared_ptr<Subset<uml::ConnectableElement, uml::ConnectableElement>> getCollaborationRole() const ;
+			virtual const std::shared_ptr<Subset<uml::ConnectableElement, uml::ConnectableElement>>& getCollaborationRole() const ;
 			
 			//*********************************
 			// Union Reference Getters

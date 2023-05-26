@@ -374,7 +374,7 @@ void StructuredActivityNodeImpl::setMustIsolate(bool _mustIsolate)
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference edge */
-std::shared_ptr<Subset<uml::ActivityEdge, uml::ActivityEdge, uml::Element>> StructuredActivityNodeImpl::getEdge() const
+const std::shared_ptr<Subset<uml::ActivityEdge, uml::ActivityEdge, uml::Element>>& StructuredActivityNodeImpl::getEdge() const
 {
 	if(m_edge == nullptr)
 	{
@@ -395,7 +395,7 @@ std::shared_ptr<Subset<uml::ActivityEdge, uml::ActivityEdge, uml::Element>> Stru
 }
 
 /* Getter & Setter for reference node */
-std::shared_ptr<Subset<uml::ActivityNode, uml::ActivityNode, uml::Element>> StructuredActivityNodeImpl::getNode() const
+const std::shared_ptr<Subset<uml::ActivityNode, uml::ActivityNode, uml::Element>>& StructuredActivityNodeImpl::getNode() const
 {
 	if(m_node == nullptr)
 	{
@@ -416,7 +416,7 @@ std::shared_ptr<Subset<uml::ActivityNode, uml::ActivityNode, uml::Element>> Stru
 }
 
 /* Getter & Setter for reference structuredNodeInput */
-std::shared_ptr<Subset<uml::InputPin, uml::InputPin>> StructuredActivityNodeImpl::getStructuredNodeInput() const
+const std::shared_ptr<Subset<uml::InputPin, uml::InputPin>>& StructuredActivityNodeImpl::getStructuredNodeInput() const
 {
 	if(m_structuredNodeInput == nullptr)
 	{
@@ -437,7 +437,7 @@ std::shared_ptr<Subset<uml::InputPin, uml::InputPin>> StructuredActivityNodeImpl
 }
 
 /* Getter & Setter for reference structuredNodeOutput */
-std::shared_ptr<Subset<uml::OutputPin, uml::OutputPin>> StructuredActivityNodeImpl::getStructuredNodeOutput() const
+const std::shared_ptr<Subset<uml::OutputPin, uml::OutputPin>>& StructuredActivityNodeImpl::getStructuredNodeOutput() const
 {
 	if(m_structuredNodeOutput == nullptr)
 	{
@@ -458,7 +458,7 @@ std::shared_ptr<Subset<uml::OutputPin, uml::OutputPin>> StructuredActivityNodeIm
 }
 
 /* Getter & Setter for reference variable */
-std::shared_ptr<Subset<uml::Variable, uml::NamedElement>> StructuredActivityNodeImpl::getVariable() const
+const std::shared_ptr<Subset<uml::Variable, uml::NamedElement>>& StructuredActivityNodeImpl::getVariable() const
 {
 	if(m_variable == nullptr)
 	{

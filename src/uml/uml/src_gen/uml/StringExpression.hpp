@@ -129,7 +129,7 @@ namespace uml
 			<p>From package UML::Values.</p>
 			*/
 			
-			virtual std::shared_ptr<Subset<uml::StringExpression, uml::Element>> getSubExpression() const = 0;
+			virtual const std::shared_ptr<Subset<uml::StringExpression, uml::Element>>& getSubExpression() const = 0;
 
 			//*********************************
 			// Union Reference Getters

@@ -103,7 +103,7 @@ namespace uml
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::Signal> getSignal() const = 0;
+			virtual const std::shared_ptr<uml::Signal>& getSignal() const = 0;
 			/*!
 			The Signal whose instance is transmitted to the target.
 			<p>From package UML::Actions.</p>
@@ -115,7 +115,7 @@ namespace uml
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::InputPin> getTarget() const = 0;
+			virtual const std::shared_ptr<uml::InputPin>& getTarget() const = 0;
 			/*!
 			The InputPin that provides the target object to which the Signal instance is sent.
 			<p>From package UML::Actions.</p>

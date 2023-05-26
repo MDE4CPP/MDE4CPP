@@ -69,7 +69,7 @@ namespace ocl::Expressions
 			//*********************************
 			// Reference Getters & Setters
 			//*********************************
-			virtual std::shared_ptr<ocl::Expressions::InvOrDefExp> getInvOrDevExp() const ;
+			virtual const std::shared_ptr<ocl::Expressions::InvOrDefExp>& getInvOrDevExp() const ;
 			virtual void setInvOrDevExp(const std::shared_ptr<ocl::Expressions::InvOrDefExp>&) ;
 			
 			//*********************************

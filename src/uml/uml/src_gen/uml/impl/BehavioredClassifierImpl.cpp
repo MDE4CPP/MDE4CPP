@@ -254,7 +254,7 @@ std::shared_ptr<Bag<uml::Interface>> BehavioredClassifierImpl::getImplementedInt
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference classifierBehavior */
-std::shared_ptr<uml::Behavior> BehavioredClassifierImpl::getClassifierBehavior() const
+const std::shared_ptr<uml::Behavior>& BehavioredClassifierImpl::getClassifierBehavior() const
 {
     return m_classifierBehavior;
 }
@@ -265,7 +265,7 @@ void BehavioredClassifierImpl::setClassifierBehavior(const std::shared_ptr<uml::
 }
 
 /* Getter & Setter for reference interfaceRealization */
-std::shared_ptr<Subset<uml::InterfaceRealization, uml::Element>> BehavioredClassifierImpl::getInterfaceRealization() const
+const std::shared_ptr<Subset<uml::InterfaceRealization, uml::Element>>& BehavioredClassifierImpl::getInterfaceRealization() const
 {
 	if(m_interfaceRealization == nullptr)
 	{
@@ -286,7 +286,7 @@ std::shared_ptr<Subset<uml::InterfaceRealization, uml::Element>> BehavioredClass
 }
 
 /* Getter & Setter for reference ownedBehavior */
-std::shared_ptr<SubsetUnion<uml::Behavior, uml::NamedElement>> BehavioredClassifierImpl::getOwnedBehavior() const
+const std::shared_ptr<SubsetUnion<uml::Behavior, uml::NamedElement>>& BehavioredClassifierImpl::getOwnedBehavior() const
 {
 	if(m_ownedBehavior == nullptr)
 	{

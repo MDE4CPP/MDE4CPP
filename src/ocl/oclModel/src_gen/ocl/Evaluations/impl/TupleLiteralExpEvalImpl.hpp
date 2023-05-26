@@ -51,7 +51,7 @@ namespace ocl::Evaluations
 			//*********************************
 			// Reference Getters & Setters
 			//*********************************
-			virtual std::shared_ptr<Bag<ocl::Evaluations::VariableDeclEval>> getTuplePart() const ;
+			virtual const std::shared_ptr<Bag<ocl::Evaluations::VariableDeclEval>>& getTuplePart() const ;
 			
 			//*********************************
 			// Union Reference Getters

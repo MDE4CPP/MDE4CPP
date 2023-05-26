@@ -122,7 +122,7 @@ namespace uml
 			<p>From package UML::Activities.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::Behavior> getSelection() const = 0;
+			virtual const std::shared_ptr<uml::Behavior>& getSelection() const = 0;
 			/*!
 			A Behavior used to select tokens from a source ObjectNode.
 			<p>From package UML::Activities.</p>
@@ -134,7 +134,7 @@ namespace uml
 			<p>From package UML::Activities.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::Behavior> getTransformation() const = 0;
+			virtual const std::shared_ptr<uml::Behavior>& getTransformation() const = 0;
 			/*!
 			A Behavior used to change or replace object tokens flowing along the ObjectFlow.
 			<p>From package UML::Activities.</p>

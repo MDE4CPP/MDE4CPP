@@ -104,13 +104,13 @@ namespace uml
 			<p>From package UML::Interactions.</p>
 			*/
 			
-			virtual std::shared_ptr<Bag<uml::InteractionFragment>> getCoveredBy() const = 0;
+			virtual const std::shared_ptr<Bag<uml::InteractionFragment>>& getCoveredBy() const = 0;
 			/*!
 			References the Interaction that represents the decomposition.
 			<p>From package UML::Interactions.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::PartDecomposition> getDecomposedAs() const = 0;
+			virtual const std::shared_ptr<uml::PartDecomposition>& getDecomposedAs() const = 0;
 			/*!
 			References the Interaction that represents the decomposition.
 			<p>From package UML::Interactions.</p>
@@ -134,7 +134,7 @@ namespace uml
 			<p>From package UML::Interactions.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::ConnectableElement> getRepresents() const = 0;
+			virtual const std::shared_ptr<uml::ConnectableElement>& getRepresents() const = 0;
 			/*!
 			References the ConnectableElement within the classifier that contains the enclosing interaction.
 			<p>From package UML::Interactions.</p>
@@ -146,7 +146,7 @@ namespace uml
 			<p>From package UML::Interactions.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::ValueSpecification> getSelector() const = 0;
+			virtual const std::shared_ptr<uml::ValueSpecification>& getSelector() const = 0;
 			/*!
 			If the referenced ConnectableElement is multivalued, then this specifies the specific individual part within that set.
 			<p>From package UML::Interactions.</p>

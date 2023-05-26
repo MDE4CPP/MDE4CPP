@@ -242,7 +242,7 @@ void CollectionLiteralExpImpl::setKind(ocl::Expressions::CollectionKind _kind)
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference part */
-std::shared_ptr<Bag<ocl::Expressions::CollectionLiteralPart>> CollectionLiteralExpImpl::getPart() const
+const std::shared_ptr<Bag<ocl::Expressions::CollectionLiteralPart>>& CollectionLiteralExpImpl::getPart() const
 {
 	if(m_part == nullptr)
 	{

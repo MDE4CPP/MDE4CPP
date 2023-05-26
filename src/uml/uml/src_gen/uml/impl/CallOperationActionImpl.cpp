@@ -171,7 +171,7 @@ std::shared_ptr<ecore::EObject> CallOperationActionImpl::copy() const
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference operation */
-std::shared_ptr<uml::Operation> CallOperationActionImpl::getOperation() const
+const std::shared_ptr<uml::Operation>& CallOperationActionImpl::getOperation() const
 {
     return m_operation;
 }
@@ -182,7 +182,7 @@ void CallOperationActionImpl::setOperation(const std::shared_ptr<uml::Operation>
 }
 
 /* Getter & Setter for reference target */
-std::shared_ptr<uml::InputPin> CallOperationActionImpl::getTarget() const
+const std::shared_ptr<uml::InputPin>& CallOperationActionImpl::getTarget() const
 {
     return m_target;
 }

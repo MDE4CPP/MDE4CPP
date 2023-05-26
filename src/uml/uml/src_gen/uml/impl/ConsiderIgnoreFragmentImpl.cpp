@@ -156,7 +156,7 @@ std::shared_ptr<ecore::EObject> ConsiderIgnoreFragmentImpl::copy() const
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference message */
-std::shared_ptr<Bag<uml::NamedElement>> ConsiderIgnoreFragmentImpl::getMessage() const
+const std::shared_ptr<Bag<uml::NamedElement>>& ConsiderIgnoreFragmentImpl::getMessage() const
 {
 	if(m_message == nullptr)
 	{

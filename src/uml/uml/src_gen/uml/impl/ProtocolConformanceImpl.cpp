@@ -137,7 +137,7 @@ std::shared_ptr<ecore::EObject> ProtocolConformanceImpl::copy() const
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference generalMachine */
-std::shared_ptr<uml::ProtocolStateMachine> ProtocolConformanceImpl::getGeneralMachine() const
+const std::shared_ptr<uml::ProtocolStateMachine>& ProtocolConformanceImpl::getGeneralMachine() const
 {
     return m_generalMachine;
 }

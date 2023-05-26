@@ -230,7 +230,7 @@ std::shared_ptr<ecore::EObject> TupleLiteralExpImpl::copy() const
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference part */
-std::shared_ptr<Bag<ocl::Expressions::VarDeclarationExp>> TupleLiteralExpImpl::getPart() const
+const std::shared_ptr<Bag<ocl::Expressions::VarDeclarationExp>>& TupleLiteralExpImpl::getPart() const
 {
 	if(m_part == nullptr)
 	{

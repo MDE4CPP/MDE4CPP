@@ -95,7 +95,7 @@ namespace ocl::Expressions
 			//*********************************
 			// Reference Getters & Setters
 			//*********************************
-			virtual std::shared_ptr<ecore::EEnumLiteral> getReferredEnumLiteral() const = 0;
+			virtual const std::shared_ptr<ecore::EEnumLiteral>& getReferredEnumLiteral() const = 0;
 			virtual void setReferredEnumLiteral(const std::shared_ptr<ecore::EEnumLiteral>&) = 0;
 
 			//*********************************

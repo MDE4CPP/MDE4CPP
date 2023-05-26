@@ -198,7 +198,7 @@ void ReadIsClassifiedObjectActionActivationImpl::doAction()
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference readIsClassifiedObjectAction */
-std::shared_ptr<uml::ReadIsClassifiedObjectAction> ReadIsClassifiedObjectActionActivationImpl::getReadIsClassifiedObjectAction() const
+const std::shared_ptr<uml::ReadIsClassifiedObjectAction>& ReadIsClassifiedObjectActionActivationImpl::getReadIsClassifiedObjectAction() const
 {
     return m_readIsClassifiedObjectAction;
 }
@@ -209,7 +209,7 @@ void ReadIsClassifiedObjectActionActivationImpl::setReadIsClassifiedObjectAction
 	fUML::Semantics::Actions::ActionActivationImpl::setAction(_readIsClassifiedObjectAction);
 }
 /*Additional Setter for redefined reference 'ActionActivation::action'*/
-void ReadIsClassifiedObjectActionActivationImpl::setAction(std::shared_ptr<uml::Action> _action)
+void ReadIsClassifiedObjectActionActivationImpl::setAction(const std::shared_ptr<uml::Action>& _action)
 {
 	std::shared_ptr<uml::ReadIsClassifiedObjectAction> _readIsClassifiedObjectAction = std::dynamic_pointer_cast<uml::ReadIsClassifiedObjectAction>(_action);
 	if(_readIsClassifiedObjectAction)
@@ -225,7 +225,7 @@ void ReadIsClassifiedObjectActionActivationImpl::setAction(std::shared_ptr<uml::
 	}
 }
 /*Additional Setter for redefined reference 'ActivityNodeActivation::node'*/
-void ReadIsClassifiedObjectActionActivationImpl::setNode(std::shared_ptr<uml::ActivityNode> _node)
+void ReadIsClassifiedObjectActionActivationImpl::setNode(const std::shared_ptr<uml::ActivityNode>& _node)
 {
 	std::shared_ptr<uml::ReadIsClassifiedObjectAction> _readIsClassifiedObjectAction = std::dynamic_pointer_cast<uml::ReadIsClassifiedObjectAction>(_node);
 	if(_readIsClassifiedObjectAction)

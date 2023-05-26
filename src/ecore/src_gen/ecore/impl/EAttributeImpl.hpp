@@ -56,7 +56,7 @@ namespace ecore
 			//*********************************
 			// Reference Getters & Setters
 			//*********************************
-			virtual std::shared_ptr<ecore::EDataType> getEAttributeType() const ;
+			virtual const std::shared_ptr<ecore::EDataType>& getEAttributeType() const ;
 			
 			//*********************************
 			// Union Reference Getters

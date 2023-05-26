@@ -57,7 +57,7 @@ namespace uml
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::Property> getQualifier() const ;
+			virtual const std::shared_ptr<uml::Property>& getQualifier() const ;
 			/*!
 			The qualifier Property for which the value is to be specified.
 			<p>From package UML::Actions.</p>
@@ -69,7 +69,7 @@ namespace uml
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::InputPin> getValue() const ;
+			virtual const std::shared_ptr<uml::InputPin>& getValue() const ;
 			/*!
 			The InputPin from which the specified value for the qualifier is taken.
 			<p>From package UML::Actions.</p>

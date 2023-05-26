@@ -102,11 +102,11 @@ namespace fUML::Semantics::Loci
 			//*********************************
 			// Reference Getters & Setters
 			//*********************************
-			virtual std::shared_ptr<Bag<uml::PrimitiveType>> getBuiltInTypes() const = 0;
+			virtual const std::shared_ptr<Bag<uml::PrimitiveType>>& getBuiltInTypes() const = 0;
 			virtual std::weak_ptr<fUML::Semantics::Loci::Locus> getLocus() const = 0;
 			virtual void setLocus(std::weak_ptr<fUML::Semantics::Loci::Locus>) = 0;
 			
-			virtual std::shared_ptr<Bag<fUML::Semantics::Loci::SemanticStrategy>> getStrategies() const = 0;
+			virtual const std::shared_ptr<Bag<fUML::Semantics::Loci::SemanticStrategy>>& getStrategies() const = 0;
 
 			//*********************************
 			// Union Reference Getters

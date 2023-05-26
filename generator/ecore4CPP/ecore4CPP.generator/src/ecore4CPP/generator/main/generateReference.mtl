@@ -50,7 +50,7 @@
 [template private _generateReferenceGetterDeclaretaion(anEReference : EReference, impl : EBoolean)? (hasGetter() and (not isUnion())) post(trim())]
 [printInfo(anEReference.eStructuralFeatureGetterGenerationMessage(), 4)/]
 [anEReference.generateDocumentation()/]
-virtual [anEReference.generateReferenceType()/] [anEReference.GetterName()/]() const [abstractSufix(impl)/];
+virtual [if(anEReference.isSharedPtr())]const [/if][anEReference.generateReferenceType()/][if(anEReference.isSharedPtr())]&[/if] [anEReference.GetterName()/]() const [abstractSufix(impl)/];
 [/template]
 
 [template private _generateReferenceSetterDeclaretaion(anEReference : EReference, impl : EBoolean) ? ( hasSetter()) post(trim())]
@@ -153,7 +153,7 @@ m_[eReference.name/].reset(new [eReference.generateReferenceType(false)/]());
 
 [template private _generateReferenceGetterImplementation(anEReference : EReference) ? (hasGetter() and (not isUnion())) post(trim())]
 [printInfo(anEReference.eStructuralFeatureGetterGenerationMessage(), 4)/]
-[anEReference.generateReferenceType()/] [anEReference.eContainingClass.name.toUpperFirst()/]Impl::[anEReference.GetterName()/]() const
+[if(anEReference.isSharedPtr())]const [/if][anEReference.generateReferenceType()/][if(anEReference.isSharedPtr())]&[/if] [anEReference.eContainingClass.name.toUpperFirst()/]Impl::[anEReference.GetterName()/]() const
 {
 [if (hasKey(keyGetterBody()))]
 	//generated from [keyGetterBody()/] annotation
@@ -231,7 +231,7 @@ m_[redefinedEReference.name/] = this->[if(anEReference.hasGetter())][anEReferenc
 [/template]
 
 [template private _generateRedefinedReferenceSetterImplementation(redefinedEReference : EReference, anEReference : EReference) ? (anEReference.hasSetter() and redefinedEReference.hasSetter()) post(trim())]
-void [anEReference.eContainingClass.name.toUpperFirst()/]Impl::[redefinedEReference.SetterName()/]([redefinedEReference.generateReferenceType()/] _[redefinedEReference.name/])
+void [anEReference.eContainingClass.name.toUpperFirst()/]Impl::[redefinedEReference.SetterName()/]([if(anEReference.isSharedPtr())]const [/if][redefinedEReference.generateReferenceType()/][if(anEReference.isSharedPtr())]&[/if] _[redefinedEReference.name/])
 {
 	[if(redefinedEReference.isBackReference())]
 	std::shared_ptr<[anEReference.eGenericType.generateCppType(false)/]> _[anEReference.name/] = std::dynamic_pointer_cast<[anEReference.eGenericType.generateCppType(false)/]>(_[redefinedEReference.name/].lock());

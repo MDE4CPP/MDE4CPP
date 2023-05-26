@@ -225,7 +225,7 @@ void PackageDeclarationExpImpl::setPath(std::string _path)
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference contextDeclarations */
-std::shared_ptr<Bag<ocl::Expressions::ContextDeclarationExp>> PackageDeclarationExpImpl::getContextDeclarations() const
+const std::shared_ptr<Bag<ocl::Expressions::ContextDeclarationExp>>& PackageDeclarationExpImpl::getContextDeclarations() const
 {
 	if(m_contextDeclarations == nullptr)
 	{

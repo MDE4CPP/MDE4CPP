@@ -53,8 +53,8 @@ namespace ocl::Evaluations
 			//*********************************
 			// Reference Getters & Setters
 			//*********************************
-			virtual std::shared_ptr<Bag<ocl::Evaluations::OclMessageArgEval>> getArguments() const ;
-			virtual std::shared_ptr<ocl::Evaluations::OclExpEval> getTarget() const ;
+			virtual const std::shared_ptr<Bag<ocl::Evaluations::OclMessageArgEval>>& getArguments() const ;
+			virtual const std::shared_ptr<ocl::Evaluations::OclExpEval>& getTarget() const ;
 			virtual void setTarget(const std::shared_ptr<ocl::Evaluations::OclExpEval>&) ;
 			
 			//*********************************

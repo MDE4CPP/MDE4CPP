@@ -110,7 +110,7 @@ namespace uml
 			<p>From package UML::Activities.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::ValueSpecification> getJoinSpec() const = 0;
+			virtual const std::shared_ptr<uml::ValueSpecification>& getJoinSpec() const = 0;
 			/*!
 			A ValueSpecification giving the condition under which the JoinNode will offer a token on its outgoing ActivityEdge. If no joinSpec is specified, then the JoinNode will offer an outgoing token if tokens are offered on all of its incoming ActivityEdges (an "and" condition).
 			<p>From package UML::Activities.</p>

@@ -114,13 +114,13 @@ namespace uml
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual std::shared_ptr<Bag<uml::Classifier>> getNewClassifier() const = 0;
+			virtual const std::shared_ptr<Bag<uml::Classifier>>& getNewClassifier() const = 0;
 			/*!
 			The InputPin that holds the object to be reclassified.
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::InputPin> getObject() const = 0;
+			virtual const std::shared_ptr<uml::InputPin>& getObject() const = 0;
 			/*!
 			The InputPin that holds the object to be reclassified.
 			<p>From package UML::Actions.</p>
@@ -132,7 +132,7 @@ namespace uml
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual std::shared_ptr<Bag<uml::Classifier>> getOldClassifier() const = 0;
+			virtual const std::shared_ptr<Bag<uml::Classifier>>& getOldClassifier() const = 0;
 
 			//*********************************
 			// Union Reference Getters

@@ -208,7 +208,7 @@ namespace uml
 			<p>From package UML::Classification.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::Constraint> getBodyCondition() const = 0;
+			virtual const std::shared_ptr<uml::Constraint>& getBodyCondition() const = 0;
 			/*!
 			An optional Constraint on the result values of an invocation of this Operation.
 			<p>From package UML::Classification.</p>
@@ -251,31 +251,31 @@ namespace uml
 			*/
 			
 			virtual void setInterface(std::weak_ptr<uml::Interface>) = 0;
-			virtual std::shared_ptr<Bag<uml::Parameter>> getProperty_OwnedParameter() const = 0;
+			virtual const std::shared_ptr<Bag<uml::Parameter>>& getProperty_OwnedParameter() const = 0;
 			/*!
 			An optional set of Constraints specifying the state of the system when the Operation is completed.
 			<p>From package UML::Classification.</p>
 			*/
 			
-			virtual std::shared_ptr<Subset<uml::Constraint, uml::Constraint /*Subset does not reference a union*/>> getPostcondition() const = 0;
+			virtual const std::shared_ptr<Subset<uml::Constraint, uml::Constraint /*Subset does not reference a union*/>>& getPostcondition() const = 0;
 			/*!
 			An optional set of Constraints on the state of the system when the Operation is invoked.
 			<p>From package UML::Classification.</p>
 			*/
 			
-			virtual std::shared_ptr<Subset<uml::Constraint, uml::Constraint /*Subset does not reference a union*/>> getPrecondition() const = 0;
+			virtual const std::shared_ptr<Subset<uml::Constraint, uml::Constraint /*Subset does not reference a union*/>>& getPrecondition() const = 0;
 			/*!
 			The Operations that are redefined by this Operation.
 			<p>From package UML::Classification.</p>
 			*/
 			
-			virtual std::shared_ptr<Subset<uml::Operation, uml::RedefinableElement>> getRedefinedOperation() const = 0;
+			virtual const std::shared_ptr<Subset<uml::Operation, uml::RedefinableElement>>& getRedefinedOperation() const = 0;
 			/*!
 			The return type of the operation, if present. This information is derived from the return result for this Operation.
 			<p>From package UML::Classification.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::Type> getType() const = 0;
+			virtual const std::shared_ptr<uml::Type>& getType() const = 0;
 
 			//*********************************
 			// Union Reference Getters

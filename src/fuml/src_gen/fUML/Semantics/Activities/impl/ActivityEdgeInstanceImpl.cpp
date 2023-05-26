@@ -259,7 +259,7 @@ std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> ActivityEdgeInstanceImp
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference edge */
-std::shared_ptr<uml::ActivityEdge> ActivityEdgeInstanceImpl::getEdge() const
+const std::shared_ptr<uml::ActivityEdge>& ActivityEdgeInstanceImpl::getEdge() const
 {
     return m_edge;
 }
@@ -281,7 +281,7 @@ void ActivityEdgeInstanceImpl::setGroup(std::weak_ptr<fUML::Semantics::Activitie
 }
 
 /* Getter & Setter for reference offers */
-std::shared_ptr<Bag<fUML::Semantics::Activities::Offer>> ActivityEdgeInstanceImpl::getOffers() const
+const std::shared_ptr<Bag<fUML::Semantics::Activities::Offer>>& ActivityEdgeInstanceImpl::getOffers() const
 {
 	if(m_offers == nullptr)
 	{

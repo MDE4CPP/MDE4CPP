@@ -182,7 +182,7 @@ ExecutableNodeImpl& ExecutableNodeImpl::operator=(const ExecutableNodeImpl & obj
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference handler */
-std::shared_ptr<Subset<uml::ExceptionHandler, uml::Element>> ExecutableNodeImpl::getHandler() const
+const std::shared_ptr<Subset<uml::ExceptionHandler, uml::Element>>& ExecutableNodeImpl::getHandler() const
 {
 	if(m_handler == nullptr)
 	{

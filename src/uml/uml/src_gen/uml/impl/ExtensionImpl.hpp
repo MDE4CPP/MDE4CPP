@@ -95,7 +95,7 @@ namespace uml
 			<p>From package UML::Packages.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::Class> getMetaclass() const ;
+			virtual const std::shared_ptr<uml::Class>& getMetaclass() const ;
 			
 			//*********************************
 			// Union Reference Getters

@@ -59,13 +59,13 @@ namespace uml
 			<p>From package UML::StructuredClassifiers.</p>
 			*/
 			
-			virtual std::shared_ptr<Subset<uml::Dependency, uml::Element>> getRoleBinding() const ;
+			virtual const std::shared_ptr<Subset<uml::Dependency, uml::Element>>& getRoleBinding() const ;
 			/*!
 			The Collaboration which is used in this CollaborationUse. The Collaboration defines the cooperation between its roles which are mapped to ConnectableElements relating to the Classifier owning the CollaborationUse.
 			<p>From package UML::StructuredClassifiers.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::Collaboration> getType() const ;
+			virtual const std::shared_ptr<uml::Collaboration>& getType() const ;
 			/*!
 			The Collaboration which is used in this CollaborationUse. The Collaboration defines the cooperation between its roles which are mapped to ConnectableElements relating to the Classifier owning the CollaborationUse.
 			<p>From package UML::StructuredClassifiers.</p>

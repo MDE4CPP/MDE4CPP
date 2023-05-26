@@ -153,7 +153,7 @@ return newValue;
 // Attribute Getters & Setters
 //*********************************
 /* Getter & Setter for attribute values */
-std::shared_ptr<Bag<Any>> ParameterValueImpl::getValues() const 
+const std::shared_ptr<Bag<Any>>& ParameterValueImpl::getValues() const 
 {
 	if(m_values == nullptr)
 	{
@@ -166,7 +166,7 @@ std::shared_ptr<Bag<Any>> ParameterValueImpl::getValues() const
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference parameter */
-std::shared_ptr<uml::Parameter> ParameterValueImpl::getParameter() const
+const std::shared_ptr<uml::Parameter>& ParameterValueImpl::getParameter() const
 {
     return m_parameter;
 }

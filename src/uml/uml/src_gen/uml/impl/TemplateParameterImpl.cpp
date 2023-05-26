@@ -147,7 +147,7 @@ std::shared_ptr<ecore::EObject> TemplateParameterImpl::copy() const
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference default */
-std::shared_ptr<uml::ParameterableElement> TemplateParameterImpl::getDefault() const
+const std::shared_ptr<uml::ParameterableElement>& TemplateParameterImpl::getDefault() const
 {
     return m_default;
 }
@@ -158,7 +158,7 @@ void TemplateParameterImpl::setDefault(const std::shared_ptr<uml::ParameterableE
 }
 
 /* Getter & Setter for reference ownedDefault */
-std::shared_ptr<uml::ParameterableElement> TemplateParameterImpl::getOwnedDefault() const
+const std::shared_ptr<uml::ParameterableElement>& TemplateParameterImpl::getOwnedDefault() const
 {
     return m_ownedDefault;
 }
@@ -169,7 +169,7 @@ void TemplateParameterImpl::setOwnedDefault(const std::shared_ptr<uml::Parameter
 }
 
 /* Getter & Setter for reference ownedParameteredElement */
-std::shared_ptr<uml::ParameterableElement> TemplateParameterImpl::getOwnedParameteredElement() const
+const std::shared_ptr<uml::ParameterableElement>& TemplateParameterImpl::getOwnedParameteredElement() const
 {
     return m_ownedParameteredElement;
 }
@@ -180,7 +180,7 @@ void TemplateParameterImpl::setOwnedParameteredElement(const std::shared_ptr<uml
 }
 
 /* Getter & Setter for reference parameteredElement */
-std::shared_ptr<uml::ParameterableElement> TemplateParameterImpl::getParameteredElement() const
+const std::shared_ptr<uml::ParameterableElement>& TemplateParameterImpl::getParameteredElement() const
 {
     return m_parameteredElement;
 }

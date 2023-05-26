@@ -216,7 +216,7 @@ std::shared_ptr<ecore::EObject> PrePostBodyListExpImpl::copy() const
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference bodyExpressionList */
-std::shared_ptr<Bag<ocl::Expressions::PrePostBodyExp>> PrePostBodyListExpImpl::getBodyExpressionList() const
+const std::shared_ptr<Bag<ocl::Expressions::PrePostBodyExp>>& PrePostBodyListExpImpl::getBodyExpressionList() const
 {
 	if(m_bodyExpressionList == nullptr)
 	{
@@ -228,7 +228,7 @@ std::shared_ptr<Bag<ocl::Expressions::PrePostBodyExp>> PrePostBodyListExpImpl::g
 }
 
 /* Getter & Setter for reference postExpressionList */
-std::shared_ptr<Bag<ocl::Expressions::PrePostBodyExp>> PrePostBodyListExpImpl::getPostExpressionList() const
+const std::shared_ptr<Bag<ocl::Expressions::PrePostBodyExp>>& PrePostBodyListExpImpl::getPostExpressionList() const
 {
 	if(m_postExpressionList == nullptr)
 	{
@@ -240,7 +240,7 @@ std::shared_ptr<Bag<ocl::Expressions::PrePostBodyExp>> PrePostBodyListExpImpl::g
 }
 
 /* Getter & Setter for reference preExpressionList */
-std::shared_ptr<Bag<ocl::Expressions::PrePostBodyExp>> PrePostBodyListExpImpl::getPreExpressionList() const
+const std::shared_ptr<Bag<ocl::Expressions::PrePostBodyExp>>& PrePostBodyListExpImpl::getPreExpressionList() const
 {
 	if(m_preExpressionList == nullptr)
 	{

@@ -58,7 +58,7 @@ virtual public Offer
 			//*********************************
 			// Reference Getters & Setters
 			//*********************************
-			virtual std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> getOfferedTokens() const ;
+			virtual const std::shared_ptr<Bag<fUML::Semantics::Activities::Token>>& getOfferedTokens() const ;
 			
 			//*********************************
 			// Union Reference Getters

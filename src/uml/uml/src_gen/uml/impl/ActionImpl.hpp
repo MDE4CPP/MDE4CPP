@@ -101,20 +101,20 @@ namespace uml
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::Classifier> getContext() const ;
+			virtual const std::shared_ptr<uml::Classifier>& getContext() const ;
 			
 			/*!
 			A Constraint that must be satisfied when execution of the Action is completed.
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual std::shared_ptr<Subset<uml::Constraint, uml::Element>> getLocalPostcondition() const ;
+			virtual const std::shared_ptr<Subset<uml::Constraint, uml::Element>>& getLocalPostcondition() const ;
 			/*!
 			A Constraint that must be satisfied when execution of the Action is started.
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual std::shared_ptr<Subset<uml::Constraint, uml::Element>> getLocalPrecondition() const ;
+			virtual const std::shared_ptr<Subset<uml::Constraint, uml::Element>>& getLocalPrecondition() const ;
 			
 			
 			//*********************************
