@@ -22,6 +22,7 @@
 
 [import UML4CPP::generator::main::components::generateType /]
 [import UML4CPP::generator::main::helpers::nameHelper /]
+[import UML4CPP::generator::main::helpers::generalHelper /]
 [import UML4CPP::generator::main::components::generateProperty /]
 
 [template public generatePropertyDestruction(aProperty : Property)]

@@ -51,7 +51,7 @@ namespace ecore
 			// Attribute Getters & Setters
 			//*********************************
 			virtual std::shared_ptr<Any> getInstance() const ;
-			virtual void setInstance (std::shared_ptr<Any> _instance);
+			virtual void setInstance (const std::shared_ptr<Any>& _instance);
 			virtual std::string getLiteral() const ;
 			virtual void setLiteral (std::string _literal);
 			virtual int getValue() const ;

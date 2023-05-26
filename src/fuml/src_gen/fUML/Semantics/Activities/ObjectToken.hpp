@@ -76,7 +76,7 @@ namespace fUML::Semantics::Activities
 			// Attribute Getters & Setters
 			//*********************************
 			virtual std::shared_ptr<Any> getValue() const = 0;
-			virtual void setValue (std::shared_ptr<Any> _value)= 0;
+			virtual void setValue (const std::shared_ptr<Any>& _value)= 0;
 
 			//*********************************
 			// Reference Getters & Setters

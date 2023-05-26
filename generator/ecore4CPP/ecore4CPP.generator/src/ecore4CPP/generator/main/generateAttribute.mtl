@@ -56,7 +56,7 @@ virtual [anEAttribute.generateStructuralFeatureType(true)/] [anEAttribute.Getter
 [template private _generateAttributeSetterDecleration(anEAttribute : EAttribute, impl : Boolean) ? ((hasSetter() or(impl and hasImplSetterOnly()))) post(trim())]
 [printInfo(anEAttribute.eStructuralFeatureSetterGenerationMessage(), 4)/]
 [anEAttribute.generateDocumentation()/] 
-virtual void [anEAttribute.SetterName()/] ([anEAttribute.generateStructuralFeatureType(true)/] _[anEAttribute.name/])[abstractSufix(impl)/];
+virtual void [anEAttribute.SetterName()/] ([if(anEAttribute.isSharedPtr())]const [/if][anEAttribute.generateStructuralFeatureType(true)/][if(anEAttribute.isSharedPtr())]&[/if] _[anEAttribute.name/])[abstractSufix(impl)/];
 [/template]
 
 [***###########################################################################################
@@ -167,7 +167,7 @@ m_[anEAttribute.name/].reset(new [anEAttribute.generateStructuralFeatureType(fal
 
 [template private _generateAttributeSetterImplementation(anEAttribute : EAttribute) ? ((hasSetter() or(hasImplSetterOnly()))) post(trim())]
 [printInfo(anEAttribute.eStructuralFeatureSetterGenerationMessage(), 4)/]
-void [anEAttribute.eContainingClass.name.toUpperFirst()/]Impl::[anEAttribute.SetterName()/]([anEAttribute.generateStructuralFeatureType(true)/] _[anEAttribute.name/])
+void [anEAttribute.eContainingClass.name.toUpperFirst()/]Impl::[anEAttribute.SetterName()/]([if(anEAttribute.isSharedPtr())]const [/if][anEAttribute.generateStructuralFeatureType(true)/][if(anEAttribute.isSharedPtr())]&[/if] _[anEAttribute.name/])
 {
 	[if (hasKey(keySetterBody()))]
 	//generated from [keySetterBody()/] annotation
@@ -202,7 +202,7 @@ m_[redefinedEAttribute.name/] = this->[if(anEAttribute.hasGetter())][anEAttribut
 [/template]
 
 [template private _generateRedefinedAttributeSetterImplementation(redefinedEAttribute : EAttribute, anEAttribute : EAttribute) ? (( hasSetter() or(hasImplSetterOnly()))) post(trim())]
-void [anEAttribute.eContainingClass.name.toUpperFirst()/]Impl::[redefinedEAttribute.SetterName()/]([anEAttribute.generateStructuralFeatureType(true)/] _[anEAttribute.name/])
+void [anEAttribute.eContainingClass.name.toUpperFirst()/]Impl::[redefinedEAttribute.SetterName()/]([if(anEAttribute.isSharedPtr())]const [/if][anEAttribute.generateStructuralFeatureType(true)/][if(anEAttribute.isSharedPtr())]&[/if] _[anEAttribute.name/])
 {
 	std::shared_ptr<[anEAttribute.eGenericType.generateCppType(true)/]> _[anEAttribute.name/] = std::dynamic_pointer_cast<[anEAttribute.eGenericType.generateCppType(true)/]>(_[redefinedEAttribute.name/]);
 	if(_[anEAttribute.name/])

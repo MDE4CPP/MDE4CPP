@@ -121,7 +121,7 @@ std::shared_ptr<Any> EObjectAnyImpl::getAny() const
 {
 	return m_any;
 }
-void EObjectAnyImpl::setAny(std::shared_ptr<Any> _any)
+void EObjectAnyImpl::setAny(const std::shared_ptr<Any>& _any)
 {
 	m_any = _any;
 	
@@ -176,7 +176,7 @@ void EObjectAnyImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLo
 		if ( iter != attr_list.end() )
 		{
 			// TODO this attribute has a non handle type
-			std::cout << "| ERROR    | " << __PRETTY_FUNCTION__ << " handle type of 'any'" << " org.eclipse.emf.ecore.impl.EDataTypeImpl@4d23015c (name: EJavaObject) (instanceClassName: java.lang.Object) (serializable: true)" << std::endl; 
+			std::cout << "| ERROR    | " << __PRETTY_FUNCTION__ << " handle type of 'any'" << " org.eclipse.emf.ecore.impl.EDataTypeImpl@ecfbe91 (name: EJavaObject) (instanceClassName: java.lang.Object) (serializable: true)" << std::endl; 
 			std::shared_ptr<Any> value; 			this->setAny(value);
 		}
 	}

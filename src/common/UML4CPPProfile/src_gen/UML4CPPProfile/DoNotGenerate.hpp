@@ -36,7 +36,7 @@ namespace UML4CPPProfile
 			// Getter Setter
 			//*********************************
 			virtual std::shared_ptr<uml::Element> getBase_Element() const  = 0;
-			virtual void setBase_Element(std::shared_ptr<uml::Element> _base_Element) = 0;
+			virtual void setBase_Element(const std::shared_ptr<uml::Element>& _base_Element) = 0;
 			
 			
 			

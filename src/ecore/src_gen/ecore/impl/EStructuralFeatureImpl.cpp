@@ -155,7 +155,7 @@ std::shared_ptr<Any> EStructuralFeatureImpl::getDefaultValue() const
 {
 	return m_defaultValue;
 }
-void EStructuralFeatureImpl::setDefaultValue(std::shared_ptr<Any> _defaultValue)
+void EStructuralFeatureImpl::setDefaultValue(const std::shared_ptr<Any>& _defaultValue)
 {
 	m_defaultValue = _defaultValue;
 	

@@ -158,7 +158,7 @@ std::shared_ptr<Any> EClassifierImpl::getDefaultValue() const
 {
 	return m_defaultValue;
 }
-void EClassifierImpl::setDefaultValue(std::shared_ptr<Any> _defaultValue)
+void EClassifierImpl::setDefaultValue(const std::shared_ptr<Any>& _defaultValue)
 {
 	m_defaultValue = _defaultValue;
 	

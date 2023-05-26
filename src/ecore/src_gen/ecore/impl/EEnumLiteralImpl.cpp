@@ -134,7 +134,7 @@ std::shared_ptr<Any> EEnumLiteralImpl::getInstance() const
 {
 	return m_instance;
 }
-void EEnumLiteralImpl::setInstance(std::shared_ptr<Any> _instance)
+void EEnumLiteralImpl::setInstance(const std::shared_ptr<Any>& _instance)
 {
 	m_instance = _instance;
 	

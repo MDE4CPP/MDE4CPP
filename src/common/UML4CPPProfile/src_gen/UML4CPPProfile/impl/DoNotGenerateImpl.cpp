@@ -111,7 +111,7 @@ void DoNotGenerateImpl::destroy()
 //*********************************
 // Attribute Setter Getter
 //*********************************
-void DoNotGenerateImpl::setBase_Element(std::shared_ptr<uml::Element> _base_Element)
+void DoNotGenerateImpl::setBase_Element(const std::shared_ptr<uml::Element>& _base_Element)
 {
 	m_base_Element = _base_Element;
 	

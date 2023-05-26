@@ -1,0 +1,74 @@
+[comment encoding = Cp1252 /]
+[module transformTypeName('http://www.eclipse.org/emf/2002/Ecore')/]
+
+[template public transformTypeName(name: String) ? ((name = 'EBoolean') or (name = 'EBooleanObject') or (name = 'Boolean'))]
+bool
+[/template]
+ 
+[template public transformTypeName(name: String) ? ((name = 'UnlimitedNatural' ))]
+int
+[/template]
+
+[template public transformTypeName(name: String) ? (name = 'EResource')]
+int
+[/template]
+
+[template public transformTypeName(name: String) ? ((name = 'EInt') or (name = 'EIntegerObject') or (name = 'EBigInteger') or (name = 'Integer'))]
+int
+[/template]
+
+[template public transformTypeName(name: String) ? ((name = 'EDouble') or (name = 'EDoubleObject')or (name = 'EBigDecimal') or (name = 'Real'))]
+double
+[/template]
+
+[template public transformTypeName(name: String) ? ((name = 'ELong') or (name = 'ELongObject') )]
+long
+[/template]
+
+[template public transformTypeName(name: String) ? ((name = 'EByte') or (name = 'EByteObject') )]
+char
+[/template]
+
+[template public transformTypeName(name: String) ? ((name = 'EByteArray'))]
+char
+[/template]
+
+[template public transformTypeName(name: String) ? ((name = 'EChar') or (name = 'ECharacterObject') )]
+char
+[/template]
+
+[template public transformTypeName(name: String) ? ((name = 'EFloat') or (name = 'EFloatObject') )]
+float
+[/template]
+
+[template public transformTypeName(name: String) ? (name = 'EEList')]
+std::list
+[/template]
+
+[template public transformTypeName(name: String) ? (name = 'EDate')]
+int
+[/template]
+
+[template public transformTypeName(name: String) ? (name = 'EMap')]
+std::map
+[/template]
+
+[template public transformTypeName(name: String) ? (name = 'EJavaObject')]
+Any
+[/template]
+
+[template public transformTypeName(name: String) ? (name = 'ETreeIterator')]
+Bag
+[/template]
+
+[template public transformTypeName(name: String) ? (name = 'EJavaClass')]
+void * 
+[/template]
+
+[template public transformTypeName(name: String) ? ((name = 'EEnumerator') or (name = 'EDiagnosticChain'))]
+Any
+[/template]
+
+[template public transformTypeName(name: String) ? ((name = 'EString') or (name = 'String') )]
+std::string
+[/template]
