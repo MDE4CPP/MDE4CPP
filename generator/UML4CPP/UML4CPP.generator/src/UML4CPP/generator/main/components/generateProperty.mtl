@@ -46,10 +46,10 @@
 */]
 [template public generateAttributeAccessorsDeclaration(aProperty : Property, impl : Boolean)]
 [if (not aProperty.isUnion())]
-virtual [aProperty.generateCppType()/] [aProperty.getterName()/]() const [abstractSuffix(impl)/];
+virtual [aProperty.generateAccessorType()/] [aProperty.getterName()/]() const [abstractSuffix(impl)/];
 [/if]
 [if (aProperty.hasSetter())]
-virtual void [aProperty.setterName()/]([if(aProperty.isConstRef())]const [/if][aProperty.generateCppType()/][if(aProperty.isConstRef())]&[/if] _[aProperty.name/])[abstractSuffix(impl)/];
+virtual void [aProperty.setterName()/]([aProperty.generateAccessorType()/] _[aProperty.name/])[abstractSuffix(impl)/];
 [/if]
 [/template]
 
@@ -87,7 +87,7 @@ m_[aProperty.name/].reset(new Bag<[aProperty.type.transformType()/]>());
 [/template]
 
 [template public generateAttributeGetterImplementationCpp(aProperty : Property, aClassifier : Classifier)]
-[aProperty.generateCppType()/] [aClassifier.name.toUpperFirst()/]Impl::[aProperty.getterName()/]() const 
+[aProperty.generateAccessorType()/] [aClassifier.name.toUpperFirst()/]Impl::[aProperty.getterName()/]() const 
 {
 [if (aProperty.upper <> 1)]
 	if(m_[aProperty.name/] == nullptr)
@@ -101,7 +101,7 @@ m_[aProperty.name/].reset(new Bag<[aProperty.type.transformType()/]>());
 [/template]
 
 [template public generateAttributeGetterImplementationCpp(aProperty : Property, aInterface : Interface)]
-[aProperty.generateCppType()/] [aInterface.name.toUpperFirst()/]Impl::[aProperty.getterName()/]() const 
+[aProperty.generateAccessorType()/] [aInterface.name.toUpperFirst()/]Impl::[aProperty.getterName()/]() const 
 {
 	return m_[aProperty.name/];
 }
@@ -122,7 +122,7 @@ std::weak_ptr<[compositeOwnerClass.generateCppRawType(true)/]> [aClass.name.toUp
 [/template]
 
 [template public generateAttributeSetterImplementationCpp(aProperty : Property, aClassifier : Classifier) ? (aProperty.hasSetter())]
-void [aClassifier.name.toUpperFirst()/]Impl::[aProperty.setterName()/]([if(aProperty.isConstRef())]const [/if][aProperty.generateCppType()/][if(aProperty.isConstRef())]&[/if] _[aProperty.name/])
+void [aClassifier.name.toUpperFirst()/]Impl::[aProperty.setterName()/]([aProperty.generateAccessorType()/] _[aProperty.name/])
 {
 	m_[aProperty.name/] = _[aProperty.name/];
 	[aProperty.generateRedefinedPropertySet(aClassifier)/]
@@ -172,7 +172,7 @@ m_[redefinedProperty.name/] = this->[aProperty.getterName()/]()[if(aProperty.isB
 [/template]
 
 [template public generateAttributeSetterImplementationCpp(aProperty : Property, aInterface : Interface) ? (aProperty.hasSetter())]
-void [aInterface.name.toUpperFirst()/]Impl::[aProperty.setterName()/]([if(aProperty.isConstRef())]const [/if][aProperty.generateCppType()/][if(aProperty.isConstRef())]&[/if] _[aProperty.name/])
+void [aInterface.name.toUpperFirst()/]Impl::[aProperty.setterName()/]([if(aProperty.isSharedPtr())]const [/if][aProperty.generateCppType()/][if(aProperty.isSharedPtr())]&[/if] _[aProperty.name/])
 {
 	m_[aProperty.name/] = _[aProperty.name/];
 }
@@ -245,6 +245,12 @@ void [aClass.name.toUpperFirst()/]Impl::set[compositeOwnerClass.name.toUpperFirs
 [template public addInterfaceAttribute(aProperty : Property, aClass : Class)]
 [aClass.memberName()/]->getOwnedAttribute()->push_back([if (aClass.getNearestPackage() = aProperty.getNearestPackage())][aProperty.memberName()/][else][aProperty.generatePackageGetterCall()/][/if]);
 [/template]
+
+[**
+ * generates the type for the Getter/Setter of an Attribute 
+*/]
+
+[template private generateAccessorType(aProperty : Property) post(trim())][if(aProperty.isSharedPtr())]const [/if][aProperty.generateCppType()/][if(aProperty.isSharedPtr())]&[/if][/template]
 
 [**
  * generate default values for properties with primitive type or enumeration type

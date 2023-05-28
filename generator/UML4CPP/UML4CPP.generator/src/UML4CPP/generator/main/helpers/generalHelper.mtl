@@ -203,9 +203,9 @@ types::typesPackage::[aClassifier.name.toUpperCase()/]_CLASS
 [/template]
 
 [**
- * query for determining if a Parameter should be a const-reference
+ * query for determining if a Parameter is a shared_ptr
 * /]
-[query public isConstRef(aProperty : Property) : Boolean = (not aProperty.isBackReference()) and (aProperty.type.oclIsUndefined() or ((not aProperty.type.isPrimitive()) and (not aProperty.type.oclIsKindOf(Enumeration))) or  (aProperty.upper <> 1)) /]
+[query public isSharedPtr(aProperty : Property) : Boolean = (not aProperty.isBackReference()) and (aProperty.type.oclIsUndefined() or ((not aProperty.type.isPrimitive()) and (not aProperty.type.oclIsKindOf(Enumeration))) or  (aProperty.upper <> 1)) /]
 
 [**
  * check if a property is back reference of composition 
