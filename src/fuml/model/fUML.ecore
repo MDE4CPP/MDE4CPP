@@ -2846,6 +2846,7 @@
           <eAnnotations source="http://tu-ilmenau.de/see/codegen">
             <details key="body" value="return this->getBaseToken()->getValue();"/>
             <details key="const"/>
+            <details key="forceConstRefReturn"/>
           </eAnnotations>
         </eOperations>
         <eOperations name="_copy" lowerBound="1" eType="#//Semantics/Activities/Token">
@@ -3057,6 +3058,7 @@
           <eAnnotations source="http://tu-ilmenau.de/see/codegen">
             <details key="body" value="return nullptr;"/>
             <details key="const"/>
+            <details key="forceConstRefReturn"/>
           </eAnnotations>
         </eOperations>
         <eStructuralFeatures xsi:type="ecore:EReference" name="holder" ordered="false"

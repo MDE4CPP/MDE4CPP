@@ -137,7 +137,7 @@ bool ForkedTokenImpl::equals(const std::shared_ptr<fUML::Semantics::Activities::
 	//end of body
 }
 
-std::shared_ptr<Any> ForkedTokenImpl::getValue() const
+const std::shared_ptr<Any>& ForkedTokenImpl::getValue() const
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation

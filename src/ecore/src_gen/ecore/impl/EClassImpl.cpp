@@ -410,7 +410,7 @@ void EClassImpl::setInterface(bool _interface)
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference eAllAttributes */
-const std::shared_ptr<Bag<ecore::EAttribute>>& EClassImpl::getEAllAttributes() const
+std::shared_ptr<Bag<ecore::EAttribute>> EClassImpl::getEAllAttributes() const
 {
 	//generated from getterBody annotation
     std::shared_ptr<Bag<ecore::EAttribute> > eAllAttributes(new Bag<ecore::EAttribute>());
@@ -452,7 +452,7 @@ const std::shared_ptr<Bag<ecore::EGenericType>>& EClassImpl::getEAllGenericSuper
 }
 
 /* Getter & Setter for reference eAllOperations */
-const std::shared_ptr<Bag<ecore::EOperation>>& EClassImpl::getEAllOperations() const
+std::shared_ptr<Bag<ecore::EOperation>> EClassImpl::getEAllOperations() const
 {
 	//generated from getterBody annotation
 std::shared_ptr< Bag<ecore::EOperation> > eAllOperations(new Bag<ecore::EOperation> () );
@@ -470,7 +470,7 @@ std::shared_ptr< Bag<ecore::EOperation> > eAllOperations(new Bag<ecore::EOperati
 }
 
 /* Getter & Setter for reference eAllReferences */
-const std::shared_ptr<Bag<ecore::EReference>>& EClassImpl::getEAllReferences() const
+std::shared_ptr<Bag<ecore::EReference>> EClassImpl::getEAllReferences() const
 {
 	//generated from getterBody annotation
     std::shared_ptr<Bag<ecore::EReference> > eAllReferences(new Bag<ecore::EReference>());
@@ -488,7 +488,7 @@ const std::shared_ptr<Bag<ecore::EReference>>& EClassImpl::getEAllReferences() c
 }
 
 /* Getter & Setter for reference eAllStructuralFeatures */
-const std::shared_ptr<Bag<ecore::EStructuralFeature>>& EClassImpl::getEAllStructuralFeatures() const
+std::shared_ptr<Bag<ecore::EStructuralFeature>> EClassImpl::getEAllStructuralFeatures() const
 {
 	//generated from getterBody annotation
 std::shared_ptr< Bag<ecore::EStructuralFeature> > eAllStructuralFeatures( new Bag<ecore::EStructuralFeature> ());
@@ -506,7 +506,7 @@ std::shared_ptr< Bag<ecore::EStructuralFeature> > eAllStructuralFeatures( new Ba
 }
 
 /* Getter & Setter for reference eAllSuperTypes */
-const std::shared_ptr<Bag<ecore::EClass>>& EClassImpl::getEAllSuperTypes() const
+std::shared_ptr<Bag<ecore::EClass>> EClassImpl::getEAllSuperTypes() const
 {
 	//generated from getterBody annotation
 std::shared_ptr< Bag<ecore::EClass> > eAllSuperTypes(new Bag<ecore::EClass>  ());

@@ -50,7 +50,7 @@
 [template private _generateAttributeGetterDecleration(anEAttribute : EAttribute, impl : Boolean) ? (hasGetter()) post(trim())]
 [printInfo(anEAttribute.eStructuralFeatureGetterGenerationMessage(), 4)/]
 [anEAttribute.generateDocumentation()/] 
-virtual [if(anEAttribute.isSharedPtr())]const [/if][anEAttribute.generateStructuralFeatureType(true)/][if(anEAttribute.isSharedPtr())]&[/if] [anEAttribute.GetterName()/]() const [abstractSufix(impl)/];
+virtual [anEAttribute.generateGetterReturnType()/] [anEAttribute.GetterName()/]() const [abstractSufix(impl)/];
 [/template]
 
 [template private _generateAttributeSetterDecleration(anEAttribute : EAttribute, impl : Boolean) ? ((hasSetter() or(impl and hasImplSetterOnly()))) post(trim())]
@@ -134,7 +134,7 @@ virtual void [anEAttribute.SetterName()/] ([if(anEAttribute.isSharedPtr())]const
 
 [template private _generateAttributeGetterImplementation(anEAttribute : EAttribute)? (hasGetter()) post(trim())]
 [printInfo(anEAttribute.eStructuralFeatureGetterGenerationMessage(), 4)/]
-[if(anEAttribute.isSharedPtr())]const [/if][anEAttribute.generateStructuralFeatureType(true)/][if(anEAttribute.isSharedPtr())]&[/if] [anEAttribute.eContainingClass.name.toUpperFirst()/]Impl::[anEAttribute.GetterName()/]() const 
+[anEAttribute.generateGetterReturnType()/] [anEAttribute.eContainingClass.name.toUpperFirst()/]Impl::[anEAttribute.GetterName()/]() const 
 {
 [if (hasKey(keyGetterBody()))]
 	//generated from [keyGetterBody()/] annotation
@@ -272,6 +272,8 @@ void [anEAttribute.eContainingClass.name.toUpperFirst()/]Impl::[redefinedEAttrib
 [anEAttribute.getClassMemberName()/]->_setID([anEAttribute.getStaticAttributeIDName()/]);
 
 [/template]
+
+[template private generateGetterReturnType(anEAttribute : EAttribute) post(trim())][if(anEAttribute.isReturnSharedPtr())]const [/if][anEAttribute.generateStructuralFeatureType(true)/][if(anEAttribute.isReturnSharedPtr())]&[/if][/template]
 
 [template public generateStaticAttributeID(anEAttribute : EAttribute)]
 static const unsigned long [anEAttribute.getStaticAttributeIDName()/] = [anEAttribute.generateNamespaceDefinition().generatePolynomialRollingHash(false)/];

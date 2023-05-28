@@ -65,7 +65,12 @@
 [query public isAnyType(anEClassifier : EClassifier) : EBoolean = (anEClassifier.name.replace('java.lang.', '').replace('java.util.','').transformTypeName() = 'Any') /]
 
 [**
- * Helper for determining if a Parameter/ERefferenc/EAttribute is a shared pointer
+ * Helper for determining if a anETypedElement (Parameter/ERefferenc/EAttribute) should be a shared pointer; allows the normal isSharedPointer query to be suppressed if the anETypedElement has a "suppressConstRefReturn"-Annotation
+*/]
+[query public isReturnSharedPtr(anETypedElement : ETypedElement) : EBoolean = (not hasKey(suppressConstRefReturn())) and isSharedPtr() /]
+
+[**
+ * Helper for determining if a anETypedElement (Parameter/ERefferenc/EAttribute) should be a shared pointer
 */]
 [query public isSharedPtr(anETypedElement : ETypedElement) : EBoolean =
 	if (anETypedElement.oclIsKindOf(EReference)) then	

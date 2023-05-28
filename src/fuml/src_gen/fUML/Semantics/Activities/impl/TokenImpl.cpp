@@ -126,7 +126,7 @@ bool TokenImpl::equals(const std::shared_ptr<fUML::Semantics::Activities::Token>
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-std::shared_ptr<Any> TokenImpl::getValue() const
+const std::shared_ptr<Any>& TokenImpl::getValue() const
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
