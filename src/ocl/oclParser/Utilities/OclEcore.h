@@ -1,8 +1,10 @@
-#ifndef OCL_H
-#define OCL_H
+#ifndef OCLECORE_H
+#define OCLECORE_H
 
 #include <memory>
 #include <string>
+
+#include "OCLInterface.h"
 
 #include <abstractDataTypes/Any.hpp>
 #include <ecore/EObject.hpp>
@@ -30,11 +32,11 @@ using namespace OclCS;
 namespace Utilities
 {
     
-    class Ocl
+    class OclEcore: public OCLInterface
     {   
         public:
-        Ocl();
-        virtual ~Ocl();
+        OclEcore();
+        virtual ~OclEcore();
 
         //TODO add an SyntaxError Check
         //bool checkSyntax(const std::string& oclStr);
@@ -59,6 +61,8 @@ namespace Utilities
 
         // Ecore Environment
         std::shared_ptr<Eval::EcoreEnvironment> m_env;
+        //context element is in OCLInterface
+        // std::shared_ptr<Any> context;
     };
     
     

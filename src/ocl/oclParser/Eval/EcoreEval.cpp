@@ -190,7 +190,7 @@ std::shared_ptr<Any> EcoreEval::findInTuple(std::shared_ptr<Any> tuple, const st
     }
     catch(...){}
 
-    // cast not sucessfull
+    // cast not successful
     if (castedTupleBag == nullptr) {
         return nullptr;
     }
@@ -267,7 +267,7 @@ std::shared_ptr<Any> EcoreEval::evalTupleLiteralExp(std::shared_ptr<Any> exp) {
     }
 
     //basic structure of tuples
-    // to be able to reffer values inside a tuple with a name,
+    // to be able to refer values inside a tuple with a name,
     // each tuple element have to be a (name,value) pair
     // std::shared_ptr<Bag<std::tuple<std::string, std::shared_ptr<Any>>>> result in (std::tuple<std::string, std::shared_ptr<Any>>, ...)
     // without shared_ptr/ std -> Bag<tuple<string, Any>> result in (tuple<string, Any>, ...)
@@ -323,7 +323,7 @@ std::shared_ptr<Any> EcoreEval::evalTupleLiteralExp(std::shared_ptr<Any> exp) {
             names.push_back(name);
         } else {
             //TODO add error
-            //tryed to assign twice (or more) the same name in one tuple
+            //tried to assign twice (or more) the same name in one tuple
             return defaultResult();
         }
 
@@ -345,7 +345,7 @@ std::shared_ptr<Any> EcoreEval::evalTupleLiteralExp(std::shared_ptr<Any> exp) {
         //TODO type check for each elem
         //elem->getVarType();
 
-        //reset context if neccessary
+        //reset context if necessary
         if (m_env->getContextVariable() != oldContext) {
             m_env->setContextVariable(oldContext);
         }        
@@ -551,7 +551,7 @@ std::shared_ptr<Any> EcoreEval::evalIfExp(std::shared_ptr<Any> exp) {
     std::shared_ptr<Any> conditionResult = visitNode(eEcoreAny(conditionExp, conditionExp->getMetaElementID()));
     bool condition = false;
 
-    //reset context if neccessary
+    //reset context if necessary
     if (m_env->getContextVariable() != oldContext) {
         m_env->setContextVariable(oldContext);
     }
@@ -572,7 +572,7 @@ std::shared_ptr<Any> EcoreEval::evalIfExp(std::shared_ptr<Any> exp) {
 
     //actual if Expr
 
-    // neccessary to create an new environment to encapsulate variables inside the conditions
+    // necessary to create an new environment to encapsulate variables inside the conditions
     std::shared_ptr<EcoreEnvironment> bodyEnv = std::make_shared<EcoreEnvironment>(EcoreEnvironment(m_env, m_env->getSelfVariable()));
     std::shared_ptr<EcoreEval> bodyEval = std::make_shared<EcoreEval>(EcoreEval(bodyEnv));
 
@@ -1226,7 +1226,7 @@ std::shared_ptr<Any> EcoreEval::evalIterateExp(std::shared_ptr<Any> exp) {
     }
 
     //apply the oclExp to every element in the eObjContainer
-    // neccessary to create an new environment to encapsulate loop variables
+    // necessary to create an new environment to encapsulate loop variables
     std::shared_ptr<EcoreEnvironment> bodyEnv = std::make_shared<EcoreEnvironment>(EcoreEnvironment(m_env, m_env->getSelfVariable()));
     std::shared_ptr<EcoreEval> bodyEval = std::make_shared<EcoreEval>(EcoreEval(bodyEnv));
 

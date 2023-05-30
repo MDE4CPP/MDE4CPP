@@ -1,4 +1,4 @@
-#include "Ocl.h" 
+#include "OclEcore.h" 
 
 #include <memory>
 #include <any>
@@ -22,7 +22,7 @@ using namespace OclCS;
 using namespace antlr4;
 using namespace Eval;
 
-Ocl::Ocl()
+OclEcore::OclEcore()
 {
     m_stream = new antlr4::ANTLRInputStream();
     m_lexer = new OclCS::OclLexer(m_stream);
@@ -37,7 +37,7 @@ Ocl::Ocl()
     //m_parser->addErrorListener(...);
 }
 
-Ocl::~Ocl()
+OclEcore::~OclEcore()
 {
     if (m_parser != nullptr) {
         delete(m_parser);
@@ -55,7 +55,7 @@ Ocl::~Ocl()
     m_env=nullptr;
 }
 
-void Ocl::parse(const std::string& oclStr) {
+void OclEcore::parse(const std::string& oclStr) {
 
     m_stream->load(oclStr);
     m_lexer->setInputStream(m_stream);
@@ -76,15 +76,13 @@ void Ocl::parse(const std::string& oclStr) {
 
 //TODO check if Ecore or UML Model
 //currently only Ecore is supported
-std::shared_ptr<Any> Ocl::query(const std::string& oclStr, std::shared_ptr<Any> context) {
+std::shared_ptr<Any> OclEcore::query(const std::string& oclStr, std::shared_ptr<Any> context) {
 
+    setContext(context);
+    
     // antlr4 parsing of input
     parse(oclStr);
 
-    // environment creation for Ecore
-    m_env = std::make_shared<Eval::EcoreEnvironment>(Eval::EcoreEnvironment(nullptr, context));
-
-    
     // get the root node from antlr4 parsing
     OclCS::OclParser::ExpressionInOclCSContext* m_root = m_parser->expressionInOclCS();
     //m_root->setErrorListener(...);
@@ -94,8 +92,11 @@ std::shared_ptr<Any> Ocl::query(const std::string& oclStr, std::shared_ptr<Any> 
     std::any returnTree = visitor.visit(dynamic_cast<antlr4::ParserRuleContext*>(m_root));
     //TODO check errors
 
+    // environment creation for Ecore
+    m_env = std::make_shared<Eval::EcoreEnvironment>(Eval::EcoreEnvironment(nullptr, context));
+
     // create evaluation Environment for Ecore
-    Eval::EcoreEval testEval(m_env);
+    Eval::EcoreEval eval(m_env);
 
     // try to cast abstract Syntax Tree
     std::shared_ptr<ocl::Expressions::ExpressionInOcl> rootNode = nullptr;
@@ -109,19 +110,18 @@ std::shared_ptr<Any> Ocl::query(const std::string& oclStr, std::shared_ptr<Any> 
     // do the query on the actual model
     std::shared_ptr<Any> qryInput = eEcoreAny<std::shared_ptr<ocl::Expressions::ExpressionInOcl>>(rootNode, rootNode->getMetaElementID());
     //TODO check errors
-    return testEval.visitNode(qryInput);
+    return eval.visitNode(qryInput);
 
 }
 
 // query an OCL Expression on an given Model
 // with extra Debug Info
-std::shared_ptr<Any> Ocl::debugQuery(const std::string& oclStr, std::shared_ptr<Any> context) {
+std::shared_ptr<Any> OclEcore::debugQuery(const std::string& oclStr, std::shared_ptr<Any> context) {
 
+    setContext(context);
+    
     // antlr4 parsing of input
     parse(oclStr);
-
-    // environment creation for Ecore
-    m_env = std::make_shared<Eval::EcoreEnvironment>(Eval::EcoreEnvironment(nullptr, context));
 
     // get the root node from antlr4 parsing
     OclCS::OclParser::ExpressionInOclCSContext* m_root = m_parser->expressionInOclCS();
@@ -139,8 +139,11 @@ std::shared_ptr<Any> Ocl::debugQuery(const std::string& oclStr, std::shared_ptr<
         throw("Error: Root node is nullptr!");
     }
 
+    // environment creation for Ecore
+    m_env = std::make_shared<Eval::EcoreEnvironment>(Eval::EcoreEnvironment(nullptr, context));
+
     // create evaluation Environment for Ecore
-    Eval::EcoreEval testEval(m_env);
+    Eval::EcoreEval eval(m_env);
 
     // try to cast abstract Syntax Tree
     std::shared_ptr<ocl::Expressions::ExpressionInOcl> rootNode = nullptr;
@@ -154,6 +157,6 @@ std::shared_ptr<Any> Ocl::debugQuery(const std::string& oclStr, std::shared_ptr<
     // do the query on the actual model
     std::shared_ptr<Any> qryInput = eEcoreAny<std::shared_ptr<ocl::Expressions::ExpressionInOcl>>(rootNode, rootNode->getMetaElementID());
     //TODO check errors
-    return testEval.visitNode(qryInput);
+    return eval.visitNode(qryInput);
 
 }
