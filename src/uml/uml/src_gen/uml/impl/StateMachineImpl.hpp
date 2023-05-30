@@ -120,7 +120,7 @@ namespace uml
 			<p>From package UML::StateMachines.</p>
 			*/
 			
-			virtual const std::shared_ptr<Bag<uml::StateMachine>>& getExtendedStateMachine() const ;
+			virtual std::shared_ptr<Bag<uml::StateMachine>> getExtendedStateMachine() const ;
 			/*!
 			The Regions owned directly by the StateMachine.
 			<p>From package UML::StateMachines.</p>

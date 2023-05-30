@@ -476,7 +476,7 @@ void OperationImpl::setInterface(std::weak_ptr<uml::Interface> _interface)
 }
 
 /* Getter & Setter for reference ownedParameter */
-const std::shared_ptr<Bag<uml::Parameter>>& OperationImpl::getProperty_OwnedParameter() const
+std::shared_ptr<Bag<uml::Parameter>> OperationImpl::getProperty_OwnedParameter() const
 {
 	//Getter call of redefined container reference BehavioralFeature::ownedParameter 
 	return uml::BehavioralFeatureImpl::getOwnedParameter();

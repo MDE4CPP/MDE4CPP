@@ -306,7 +306,7 @@ const std::shared_ptr<Subset<uml::Pseudostate, uml::NamedElement>>& StateMachine
 }
 
 /* Getter & Setter for reference extendedStateMachine */
-const std::shared_ptr<Bag<uml::StateMachine>>& StateMachineImpl::getExtendedStateMachine() const
+std::shared_ptr<Bag<uml::StateMachine>> StateMachineImpl::getExtendedStateMachine() const
 {
 	//Cast conversion from redefined container reference Behavior::redefinedBehavior 
 	std::shared_ptr<Bag<uml::StateMachine>> extendedStateMachine(new Bag<uml::StateMachine>());

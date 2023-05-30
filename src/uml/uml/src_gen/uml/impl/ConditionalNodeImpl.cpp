@@ -265,7 +265,7 @@ const std::shared_ptr<Subset<uml::Clause, uml::Element>>& ConditionalNodeImpl::g
 }
 
 /* Getter & Setter for reference result */
-const std::shared_ptr<Bag<uml::OutputPin>>& ConditionalNodeImpl::getResult() const
+std::shared_ptr<Bag<uml::OutputPin>> ConditionalNodeImpl::getResult() const
 {
 	//Getter call of redefined container reference StructuredActivityNode::structuredNodeOutput 
 	return uml::StructuredActivityNodeImpl::getStructuredNodeOutput();

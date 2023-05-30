@@ -189,7 +189,7 @@ std::shared_ptr<ecore::EObject> SequenceNodeImpl::copy() const
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference executableNode */
-const std::shared_ptr<Bag<uml::ExecutableNode>>& SequenceNodeImpl::getExecutableNode() const
+std::shared_ptr<Bag<uml::ExecutableNode>> SequenceNodeImpl::getExecutableNode() const
 {
 	//Cast conversion from redefined container reference StructuredActivityNode::node 
 	std::shared_ptr<Bag<uml::ExecutableNode>> executableNode(new Bag<uml::ExecutableNode>());

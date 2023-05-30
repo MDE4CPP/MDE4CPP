@@ -431,11 +431,15 @@
         <details key="documentation" value="The superclasses of a Class, derived from its Generalizations.&#xA;&lt;p>From package UML::StructuredClassifiers.&lt;/p>"/>
       </eAnnotations>
       <eAnnotations source="redefines" references="#//Classifier/general"/>
+      <eAnnotations source="http://tu-ilmenau.de/see/codegen">
+        <details key="suppressConstRefReturn"/>
+      </eAnnotations>
     </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EReference" name="ownedAttribute" upperBound="-1"
         eType="#//Property" containment="true" eOpposite="#//Property/class">
       <eAnnotations source="http://tu-ilmenau.de/see/codegen">
         <details key="getterName" value="getClass_OwnedAttribute"/>
+        <details key="suppressConstRefReturn"/>
       </eAnnotations>
       <eAnnotations source="subsets" references="#//Classifier/attribute #//Namespace/ownedMember #//StructuredClassifier/role"/>
       <eAnnotations source="redefines" references="#//StructuredClassifier/ownedAttribute"/>
@@ -5067,6 +5071,7 @@
         eType="#//Parameter" containment="true" eOpposite="#//Parameter/operation">
       <eAnnotations source="http://tu-ilmenau.de/see/codegen">
         <details key="getterName" value="getProperty_OwnedParameter"/>
+        <details key="suppressConstRefReturn"/>
       </eAnnotations>
       <eAnnotations source="redefines" references="#//BehavioralFeature/ownedParameter"/>
     </eStructuralFeatures>
@@ -5989,6 +5994,9 @@
         <details key="documentation" value="The StateMachines of which this is an extension.&#xA;&lt;p>From package UML::StateMachines.&lt;/p>"/>
       </eAnnotations>
       <eAnnotations source="redefines" references="#//Behavior/redefinedBehavior"/>
+      <eAnnotations source="http://tu-ilmenau.de/see/codegen">
+        <details key="suppressConstRefReturn"/>
+      </eAnnotations>
     </eStructuralFeatures>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Pseudostate" eSuperTypes="#//Vertex">
@@ -8195,6 +8203,7 @@
       </eAnnotations>
       <eAnnotations source="http://tu-ilmenau.de/see/codegen">
         <details key="getterBody" value="&#x9;std::shared_ptr&lt;SubsetUnion&lt;uml::Property, uml::ConnectableElement, uml::NamedElement, uml::Property>> ownedAttribute = this->getOwnedAttribute();&#xA;&#x9;std::shared_ptr&lt;Bag&lt;uml::Property>> ownedParts(new Bag&lt;uml::Property>());&#xA;&#xA;&#x9;Bag&lt;uml::Property>::iterator ownedAttributeIter = ownedAttribute->begin();&#xA;&#x9;Bag&lt;uml::Property>::iterator ownedAttributeEnd = ownedAttribute->end();&#xA;&#xA;&#x9;while (ownedAttributeIter != ownedAttributeEnd)&#xA;&#x9;{&#xA;&#x9;&#x9;if((*ownedAttributeIter)->isComposite())&#xA;&#x9;&#x9;{&#xA;&#x9;&#x9;&#x9;ownedParts->add(*ownedAttributeIter);&#xA;&#x9;&#x9;}&#xA;&#xA;&#x9;&#x9;ownedAttributeIter++;&#xA;&#x9;}&#xA;&#xA;&#x9;return ownedParts;"/>
+        <details key="suppressConstRefReturn"/>
       </eAnnotations>
     </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EReference" name="role" ordered="false" upperBound="-1"
@@ -8925,6 +8934,7 @@
       <eAnnotations source="subsets" references="#//StructuredClassifier/ownedAttribute"/>
       <eAnnotations source="http://tu-ilmenau.de/see/codegen">
         <details key="getterBody" value="&#x9;std::shared_ptr&lt;SubsetUnion&lt;uml::Property, uml::ConnectableElement, uml::NamedElement, uml::Property>> ownedAttribute = this->getOwnedAttribute();&#xA;&#x9;std::shared_ptr&lt;Subset&lt;uml::Port, uml::Property>> ownedPort(new Subset&lt;uml::Port, uml::Property>());&#xA;&#x9;ownedPort->initSubset(ownedAttribute);&#xA;&#xA;&#x9;Bag&lt;uml::Property>::iterator ownedAttributeIter = ownedAttribute->begin();&#xA;&#x9;Bag&lt;uml::Property>::iterator ownedAttributeEnd = ownedAttribute->end();&#xA;&#xA;&#x9;while (ownedAttributeIter != ownedAttributeEnd)&#xA;&#x9;{&#xA;&#x9;&#x9;std::shared_ptr&lt;uml::Port> port = std::dynamic_pointer_cast&lt;uml::Port>(*ownedAttributeIter);&#xA;&#xA;&#x9;&#x9;if(port)&#xA;&#x9;&#x9;{&#xA;&#x9;&#x9;&#x9;ownedPort->add(port);&#xA;&#x9;&#x9;}&#xA;&#xA;&#x9;&#x9;ownedAttributeIter++;&#xA;&#x9;}&#xA;&#xA;&#x9;return ownedPort;"/>
+        <details key="suppressConstRefReturn"/>
       </eAnnotations>
     </eStructuralFeatures>
   </eClassifiers>
@@ -11788,6 +11798,9 @@
         <details key="documentation" value="The OutputPins that onto which are moved values from the bodyOutputs of the Clause selected for execution.&#xA;&lt;p>From package UML::Actions.&lt;/p>"/>
       </eAnnotations>
       <eAnnotations source="redefines" references="#//StructuredActivityNode/structuredNodeOutput"/>
+      <eAnnotations source="http://tu-ilmenau.de/see/codegen">
+        <details key="suppressConstRefReturn"/>
+      </eAnnotations>
     </eStructuralFeatures>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="CreateLinkAction" eSuperTypes="#//WriteLinkAction">
@@ -12461,6 +12474,9 @@
         <details key="documentation" value="A list of InputPins whose values are moved into the loopVariable Pins before the first iteration of the loop.&#xA;&lt;p>From package UML::Actions.&lt;/p>"/>
       </eAnnotations>
       <eAnnotations source="redefines" references="#//StructuredActivityNode/structuredNodeInput"/>
+      <eAnnotations source="http://tu-ilmenau.de/see/codegen">
+        <details key="suppressConstRefReturn"/>
+      </eAnnotations>
     </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EReference" name="result" upperBound="-1"
         eType="#//OutputPin" containment="true">
@@ -12468,6 +12484,9 @@
         <details key="documentation" value="A list of OutputPins that receive the loopVariable values after the last iteration of the loop and constitute the output of the LoopNode.&#xA;&lt;p>From package UML::Actions.&lt;/p>"/>
       </eAnnotations>
       <eAnnotations source="redefines" references="#//StructuredActivityNode/structuredNodeOutput"/>
+      <eAnnotations source="http://tu-ilmenau.de/see/codegen">
+        <details key="suppressConstRefReturn"/>
+      </eAnnotations>
     </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EReference" name="setupPart" ordered="false"
         upperBound="-1" eType="#//ExecutableNode">
@@ -13822,6 +13841,9 @@
         <details key="documentation" value="The ordered set of ExecutableNodes to be sequenced.&#xA;&lt;p>From package UML::Actions.&lt;/p>"/>
       </eAnnotations>
       <eAnnotations source="redefines" references="#//StructuredActivityNode/node"/>
+      <eAnnotations source="http://tu-ilmenau.de/see/codegen">
+        <details key="suppressConstRefReturn"/>
+      </eAnnotations>
     </eStructuralFeatures>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="StartClassifierBehaviorAction" eSuperTypes="#//Action">

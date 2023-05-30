@@ -130,7 +130,9 @@ const std::shared_ptr<Any>& TokenImpl::getValue() const
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
-	return nullptr;
+	static const std::shared_ptr<Any> nullPointer = nullptr;
+
+return nullPointer;
 	//end of body
 }
 

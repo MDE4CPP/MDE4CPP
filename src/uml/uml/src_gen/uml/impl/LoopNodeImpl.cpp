@@ -294,14 +294,14 @@ const std::shared_ptr<Subset<uml::OutputPin, uml::Element>>& LoopNodeImpl::getLo
 }
 
 /* Getter & Setter for reference loopVariableInput */
-const std::shared_ptr<Bag<uml::InputPin>>& LoopNodeImpl::getLoopVariableInput() const
+std::shared_ptr<Bag<uml::InputPin>> LoopNodeImpl::getLoopVariableInput() const
 {
 	//Getter call of redefined container reference StructuredActivityNode::structuredNodeInput 
 	return uml::StructuredActivityNodeImpl::getStructuredNodeInput();
 }
 
 /* Getter & Setter for reference result */
-const std::shared_ptr<Bag<uml::OutputPin>>& LoopNodeImpl::getResult() const
+std::shared_ptr<Bag<uml::OutputPin>> LoopNodeImpl::getResult() const
 {
 	//Getter call of redefined container reference StructuredActivityNode::structuredNodeOutput 
 	return uml::StructuredActivityNodeImpl::getStructuredNodeOutput();

@@ -3056,7 +3056,7 @@
         </eOperations>
         <eOperations name="getValue" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject">
           <eAnnotations source="http://tu-ilmenau.de/see/codegen">
-            <details key="body" value="return nullptr;"/>
+            <details key="body" value="static const std::shared_ptr&lt;Any> nullPointer = nullptr;&#xA;&#xA;return nullPointer;"/>
             <details key="const"/>
             <details key="forceConstRefReturn"/>
           </eAnnotations>

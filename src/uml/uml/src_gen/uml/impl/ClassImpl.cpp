@@ -389,7 +389,7 @@ const std::shared_ptr<Subset<uml::Classifier, uml::NamedElement>>& ClassImpl::ge
 }
 
 /* Getter & Setter for reference ownedAttribute */
-const std::shared_ptr<Subset<uml::Property, uml::ConnectableElement, uml::NamedElement, uml::Property>>& ClassImpl::getClass_OwnedAttribute() const
+std::shared_ptr<Subset<uml::Property, uml::ConnectableElement, uml::NamedElement, uml::Property>> ClassImpl::getClass_OwnedAttribute() const
 {
 	//Getter call of redefined container reference StructuredClassifier::ownedAttribute 
 	return uml::StructuredClassifierImpl::getOwnedAttribute();
@@ -438,7 +438,7 @@ const std::shared_ptr<Subset<uml::Reception, uml::Feature, uml::NamedElement>>& 
 }
 
 /* Getter & Setter for reference superClass */
-const std::shared_ptr<Bag<uml::Class>>& ClassImpl::getSuperClass() const
+std::shared_ptr<Bag<uml::Class>> ClassImpl::getSuperClass() const
 {
 	//Cast conversion from redefined container reference Classifier::general 
 	std::shared_ptr<Bag<uml::Class>> superClass(new Bag<uml::Class>());

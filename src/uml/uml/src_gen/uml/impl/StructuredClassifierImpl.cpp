@@ -299,7 +299,7 @@ const std::shared_ptr<Subset<uml::Connector, uml::Feature, uml::NamedElement>>& 
 }
 
 /* Getter & Setter for reference part */
-const std::shared_ptr<Bag<uml::Property>>& StructuredClassifierImpl::getPart() const
+std::shared_ptr<Bag<uml::Property>> StructuredClassifierImpl::getPart() const
 {
 	//generated from getterBody annotation
 	std::shared_ptr<SubsetUnion<uml::Property, uml::ConnectableElement, uml::NamedElement, uml::Property>> ownedAttribute = this->getOwnedAttribute();
