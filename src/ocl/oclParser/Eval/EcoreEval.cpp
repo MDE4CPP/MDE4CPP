@@ -980,8 +980,8 @@ std::shared_ptr<Any> EcoreEval::evalIteratorExp(std::shared_ptr<Any> exp) {
         }
         
         
-        // ### defines what kind the iterateable object is ###
-        // ### eObjBag or Any Bag                          ###
+        // ### defines what kind the iterable object is ###
+        // ### eObjBag or Any Bag                       ###
         bool asEObjBag = false;
         
         //first variant get the context as EObjectContainer
@@ -1010,12 +1010,12 @@ std::shared_ptr<Any> EcoreEval::evalIteratorExp(std::shared_ptr<Any> exp) {
 
             if (iterateBag == nullptr) {
                 //TODO add error
-                // can't cast context to a iteratable object
+                // can't cast context to a iterable object
                 return defaultResult();
             }
             bagSize = iterateBag->size();
         }
-        // END of defines what kind the iterateable object is
+        // END of defines what kind the iterable object is
 
         // ###                      ###
         // ### qualifier evaluation ###
@@ -1064,7 +1064,7 @@ std::shared_ptr<Any> EcoreEval::evalIteratorExp(std::shared_ptr<Any> exp) {
 
         } else {
 
-            // multiple qualifiers mean return a Bag with the elements
+            // multiple qualifiers means return a Bag with the elements
 
             std::vector<int> qualifiers = {};           
             //if the context have to be reset
@@ -1074,7 +1074,7 @@ std::shared_ptr<Any> EcoreEval::evalIteratorExp(std::shared_ptr<Any> exp) {
                 //get the current result
                 std::shared_ptr<Any> elemResult = visitNode(eEcoreAny(qualifierExpBag->at(i), qualifierExpBag->at(i)->getMetaElementID()));
 
-                //reset context if neccessary
+                //reset context if necessary
                 if (m_env->getContextVariable() != old_context) {
                     m_env->setContextVariable(old_context);
                 }
@@ -1128,10 +1128,10 @@ std::shared_ptr<Any> EcoreEval::evalIteratorExp(std::shared_ptr<Any> exp) {
                 return eAny(resultBag, 0, true);
             } // END of if (asEObjBag) else part
         } //END of else: multiple qualifiers mean return a Bag with the elements
-    } // END of iteroExp->getSourrundedBy() == ocl::Expressions::SurroundingType::BRACKETS
+    } // END of iteroExp->getSurroundedBy() == ocl::Expressions::SurroundingType::BRACKETS
 
     //TODO add error
-    // coud not evaluate IteratorExp
+    // could not evaluate IteratorExp
     return defaultResult();
 
 }

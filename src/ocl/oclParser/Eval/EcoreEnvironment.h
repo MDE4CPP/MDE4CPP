@@ -35,25 +35,8 @@ namespace Eval {
             */
            std::shared_ptr<Any> lookup(const std::string& name);
 
-           // TODO
             /*!
-            * \brief Find an Object in the given context (self) based on its name
-            * \param names
-            * \return nullptr if the element is not found.
-            */
-            //std::shared_ptr<Any> lookupExternal(const std::string& name);
-
-            /*!
-            * \brief Find a named element in the current environment or recursively in its parent environment, based on a path name.
-            * \param names
-            * \return nullptr if the element is not found.
-            */
-            //std::shared_ptr<ecore::EObject> lookupPathName(std::vector<std::string>& names);
-            //std::shared_ptr<ecore::EObject> lookupPathName(const std::string& name);
-            //std::shared_ptr<ecore::EObject> lookupPathName(std::shared_ptr<ecore::EPackage> package, std::vector<std::string>& names);
-
-            /*!
-            * \brief Find a Object in the current environment or recursively in its parent environment, based on a single name and the implicity.
+            * \brief Find a Object in the current environment or recursively in its parent environment, based on a single name and the implicitly.
             * \param name
             * \return nullptr if the element is not found.
             */
@@ -63,17 +46,17 @@ namespace Eval {
             * \brief This operation results in a new environment that has the current one as its parent.
             * \return a new environment.
             */
-            //std::shared_ptr<EcoreEnvironment> nestedEnvironment();
+            std::shared_ptr<EcoreEnvironment> nestedEnvironment();
 
             /*!
-            * \brief Add a new object to the environment. The type can be set to "".
+            * \brief Add a new object to the environment. The type can be set to "" if unknown.
             * \return true if the element is added, false if the element is already contained
             */
             bool addElement(const std::string& name, std::shared_ptr<Any> elem, bool isImplicit, std::string type);
 
             /*!
             * \brief Allowing changing namedElements.
-            * \return true if successfull false if not
+            * \return true if successful false if not
             */
             bool changeNamedElement(const std::string& name, std::shared_ptr<Any> newElem);
 
@@ -118,7 +101,7 @@ namespace Eval {
 
             static const std::string SELF_VARIABLE_NAME;
 
-            // ### non OCL functions ###
+            // ### non OCL spec functions ###
 
             // looks for a VariableName directly in self
             // returns nullptr if variable with given name is not found
@@ -139,6 +122,7 @@ namespace Eval {
 
             // updates the context with the given name
             // if it is not nullptr
+            // return true if successful
             bool updateContext(std::shared_ptr<Any> newContext);
 
             //searches in all namedElements for the given variable name
@@ -176,6 +160,8 @@ namespace Eval {
             int m_generatorInt = 0;
             // returns an empty any (nullptr)
             std::shared_ptr<Any> emptyResult();
+            //get 'this' as parameter
+            std::shared_ptr<EcoreEnvironment> getThisEnv();
 
     };
 

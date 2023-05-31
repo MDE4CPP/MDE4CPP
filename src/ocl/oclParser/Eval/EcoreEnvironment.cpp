@@ -71,57 +71,11 @@ std::shared_ptr<Any> EcoreEnvironment::lookup(const std::string& name) {
 
     return result;
 
-    // result = lookupExternal(name);
-    // if (result != nullptr) {
-    //     return result; 
-    // } else {
-    //     return emptyResult();
-    // }
-
-
 }
 
-/*!
-* \brief Find an Object in the given context (self) based on its name
-* \param names
-* \return nullptr if the element is not found.
-*/
-// WIP
-// std::shared_ptr<Any> EcoreEnvironment::lookupExternal(const std::string& name) {
-
-//     unsigned long long elemId = m_self->getTypeId();
-
-//     switch (elemId)
-//     {
-//     case ecore::ecorePackage::ECLASS_CLASS:
-//         //TODO work with EClass
-//         break;
-//     case ecore::ecorePackage::EATTRIBUTE_CLASS:
-//         //TODO work with EAttribute
-//         break;
-//     case ecore::ecorePackage::EREFERENCE_CLASS:
-//         //TODO work with EReference
-//         break;
-//     case ecore::ecorePackage::EOPERATION_CLASS:
-//         //TODO work with EOperation
-//         break;
-//     case ecore::ecorePackage::EPACKAGE_CLASS:
-//         //TODO work with EPackage
-//         break;
-//     case ecore::ecorePackage::ECLASSIFIER_CLASS:
-//         //TODO work with EClassifier
-//         break;
-//     case ecore::ecorePackage::EOBJECT_CLASS:
-//         //TODO work with EObject
-//         break;
-//     }
-
-//     return emptyResult();
-
-// }
 
 /*!
-* \brief Find a Object in the current environment or recursively in its parent environment, based on a single name and the implicity.
+* \brief Find a Object in the current environment or recursively in its parent environment, based on a single name and the implicitly.
 * \param name
 * \return nullptr if the element is not found.
 */
@@ -140,18 +94,16 @@ std::shared_ptr<Any> EcoreEnvironment::lookupImplicit(const std::string& name)
 * \brief This operation results in a new environment that has the current one as its parent.
 * \return a new environment.
 */
-// TODO this als Parameter
-// std::shared_ptr<EcoreEnvironment> EcoreEnvironment::nestedEnvironment()
-// {
-//     std::shared_ptr<EcoreEnvironment> sharedEnv = std::shared_ptr<EcoreEnvironment>(this);
-//     EcoreEnvironment newEnv = EcoreEnvironment(sharedEnv);
-//     std::shared_ptr<EcoreEnvironment> input = std::make_shared<EcoreEnvironment>(newEnv);
+std::shared_ptr<EcoreEnvironment> EcoreEnvironment::nestedEnvironment()
+{
+    EcoreEnvironment newEnv = EcoreEnvironment(getThisEnv(), m_self);
+    std::shared_ptr<EcoreEnvironment> returnEnv = std::make_shared<EcoreEnvironment>(newEnv);
     
-//     return std::make_shared<EcoreEnvironment>(input);
-// }
+    return returnEnv;
+}
 
 /*!
-* \brief Add a new object to the environment. The type can be set to "".
+* \brief Add a new object to the environment. The type can be set to "" if unknown.
 * \return true if the element is added, false if the element is already contained
 */
 bool EcoreEnvironment::addElement(const std::string& name, std::shared_ptr<Any> elem, bool isImplicit, std::string type)
@@ -186,7 +138,7 @@ bool EcoreEnvironment::addElement(const std::string& name, std::shared_ptr<Any> 
 
 /*!
 * \brief Allowing changing namedElements. Used in loops for the loop elem.
-* \return true if successfull false if not
+* \return true if successful false if not
 */
 bool EcoreEnvironment::changeNamedElement(const std::string& name, std::shared_ptr<Any> newElem) {
     
@@ -453,4 +405,9 @@ std::shared_ptr<Any> EcoreEnvironment::lookupNamedElement(const std::string& nam
 
     return nullptr;
 
+}
+
+//get 'this' as parameter
+std::shared_ptr<EcoreEnvironment> EcoreEnvironment::getThisEnv() {
+    return std::shared_ptr<EcoreEnvironment>(this);
 }
