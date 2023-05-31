@@ -183,7 +183,7 @@ void SendSignalActionActivationImpl::doAction()
 		DEBUG_MESSAGE(std::cout <<  "begin accessing signal."<< std::endl;)
  		std::shared_ptr<Bag<uml::Property> > attributes = signal->getOwnedAttribute();
 		DEBUG_MESSAGE(std::cout <<  "begin accessing action for Inputs."<< std::endl;)
- 		std::shared_ptr<Bag<uml::InputPin>> argumentPins = action-getArgument();
+ 		std::shared_ptr<Bag<uml::InputPin>> argumentPins = action->getArgument();
 		int i = 0;
 		int beginIter = 0;
 		DEBUG_MESSAGE(std::cout <<  "begin accessing attributes of signal."<< std::endl;)
