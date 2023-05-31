@@ -369,6 +369,10 @@ namespace StandardProfile
 			void createPackageStereotypes(std::shared_ptr<uml::Package> standardProfile, std::shared_ptr<uml::umlFactory> factory);
 			void createPackageValueSpecifications(std::shared_ptr<uml::Package> standardProfile, std::shared_ptr<uml::umlFactory> factory);
 
+			// Signal additions
+			void createPackageSignals(std::shared_ptr<uml::Package> standardProfile, std::shared_ptr<uml::umlFactory> factory);
+			void createPackageSignalEvents(std::shared_ptr<uml::Package> standardProfile, std::shared_ptr<uml::umlFactory> factory);
+
 			void initializePackageActivities();
 			void initializePackageClasses();
 			void initializePackageAssociations();
@@ -379,6 +383,10 @@ namespace StandardProfile
 			void initializePackageNestedPackages();
 			void initializePackageStereotypes();
 			void initializePackageValueSpecifications();
+
+			// Signal additions
+			void initializePackageSignals();
+			void initializePackageSignalEvents();
 	};
 }
 #endif /* end of include guard: STANDARDPROFILE_METAMODELPACKAGEIMPL_HPP */

@@ -103,6 +103,10 @@ namespace [subPackage.generateNamespace(false)/]
 			void createPackageStereotypes(std::shared_ptr<uml::Package> [aPackage.memberName()/], std::shared_ptr<uml::umlFactory> factory);
 			void createPackageValueSpecifications(std::shared_ptr<uml::Package> [aPackage.memberName()/], std::shared_ptr<uml::umlFactory> factory);
 
+			// Signal additions
+			void createPackageSignals(std::shared_ptr<uml::Package> [aPackage.memberName()/], std::shared_ptr<uml::umlFactory> factory);
+			void createPackageSignalEvents(std::shared_ptr<uml::Package> [aPackage.memberName()/], std::shared_ptr<uml::umlFactory> factory);
+
 			void initializePackageActivities();
 [for (anActivity : Activity | (aPackage.allOwnedElements()->filter(Activity)->sortedBy(myQualifiedName())))]
 			void initializeActivity_[anActivity.memberName()/]();
@@ -116,6 +120,10 @@ namespace [subPackage.generateNamespace(false)/]
 			void initializePackageNestedPackages();
 			void initializePackageStereotypes();
 			void initializePackageValueSpecifications();
+
+			// Signal additions
+			void initializePackageSignals();
+			void initializePackageSignalEvents();
 	};
 [if (not aPackage.isIgnoreNamespace())]}[/if]
 [endGuard(aPackage,'MetaModelPackageImpl')/]

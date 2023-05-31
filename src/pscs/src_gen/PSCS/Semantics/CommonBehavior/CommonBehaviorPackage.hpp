@@ -14,15 +14,15 @@
 
 namespace ecore 
 {
-	class EParameter;
-	class EOperation;
-	class EDataType;
-	class EAnnotation;
-	class EClass;
-	class EReference;
 	class EStringToStringMapEntry;
+	class EAnnotation;
 	class EAttribute;
+	class EReference;
 	class EGenericType;
+	class EOperation;
+	class EClass;
+	class EParameter;
+	class EDataType;
 }
 
 namespace PSCS::Semantics::CommonBehavior 
@@ -57,7 +57,7 @@ namespace PSCS::Semantics::CommonBehavior
 			//Class and Feature IDs 
 			static const unsigned long CS_CALLEVENTEXECUTION_CLASS = 329007207;
 			static const unsigned int CS_CALLEVENTEXECUTION_CLASS_FEATURE_COUNT = 9;
-			static const unsigned int CS_CALLEVENTEXECUTION_CLASS_OPERATION_COUNT = 59;
+			static const unsigned int CS_CALLEVENTEXECUTION_CLASS_OPERATION_COUNT = 63;
 			
 			static const unsigned long CS_CALLEVENTEXECUTION_ATTRIBUTE_INTERACTIONPOINT = 1605974358;
 			
@@ -82,7 +82,7 @@ namespace PSCS::Semantics::CommonBehavior
 			//Class and Feature IDs 
 			static const unsigned long CS_EVENTOCCURRENCE_CLASS = 619124533;
 			static const unsigned int CS_EVENTOCCURRENCE_CLASS_FEATURE_COUNT = 5;
-			static const unsigned int CS_EVENTOCCURRENCE_CLASS_OPERATION_COUNT = 10;
+			static const unsigned int CS_EVENTOCCURRENCE_CLASS_OPERATION_COUNT = 11;
 			static const unsigned long CS_EVENTOCCURRENCE_ATTRIBUTE_PROPAGATIONINWARD = 2052308718;
 			
 			static const unsigned long CS_EVENTOCCURRENCE_ATTRIBUTE_INTERACTIONPOINT = 1624726150;

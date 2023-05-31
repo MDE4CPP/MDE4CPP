@@ -27,6 +27,9 @@
 
 
 
+// Hard include of Primitive Type to account for Signals setting up their Attributes
+#include "uml/PrimitiveType.hpp"
+
 using namespace UML4CPPProfile;
 
 UML4CPPProfilePackageImpl::UML4CPPProfilePackageImpl()
@@ -86,6 +89,9 @@ void UML4CPPProfilePackageImpl::createPackageContents(std::shared_ptr<uml::Packa
 	createPackagePrimitiveTypes(uML4CPPProfile, factory);
 	createPackageEnumerationLiterals(uML4CPPProfile, factory);
 	createPackageInterfaceRealizations(uML4CPPProfile, factory);
+
+	createPackageSignals(uML4CPPProfile, factory);
+	createPackageSignalEvents(uML4CPPProfile, factory);
 }
 
 void UML4CPPProfilePackageImpl::createPackageActivities(std::shared_ptr<uml::Package> uML4CPPProfile, std::shared_ptr<uml::umlFactory> factory)
@@ -103,6 +109,24 @@ void UML4CPPProfilePackageImpl::createPackageClasses(std::shared_ptr<uml::Packag
 //Opaque Behaviors
 
 } 
+
+void UML4CPPProfilePackageImpl::createPackageSignals(std::shared_ptr<uml::Package> uML4CPPProfile, std::shared_ptr<uml::umlFactory> factory)
+{
+	std::shared_ptr<uml::Constraint> con = nullptr;
+	std::shared_ptr<uml::OpaqueExpression> oe = nullptr;
+
+
+//-------------------------------------------
+//Opaque Behaviors
+
+}
+
+void UML4CPPProfilePackageImpl::createPackageSignalEvents(std::shared_ptr<uml::Package> uML4CPPProfile, std::shared_ptr<uml::umlFactory> factory)
+{
+	std::shared_ptr<uml::Constraint> con = nullptr;
+	std::shared_ptr<uml::OpaqueExpression> oe = nullptr;
+
+}
 
 void UML4CPPProfilePackageImpl::createPackageAssociations(std::shared_ptr<uml::Package> uML4CPPProfile, std::shared_ptr<uml::umlFactory> factory)
 {
@@ -213,6 +237,10 @@ void UML4CPPProfilePackageImpl::initializePackageContents(std::shared_ptr<uml::P
 	initializePackageNestedPackages();
 	initializePackageStereotypes();
 	initializePackageValueSpecifications();
+
+	initializePackageSignals();
+	initializePackageSignalEvents();
+
 	
 }
 
@@ -223,6 +251,27 @@ void UML4CPPProfilePackageImpl::initializePackageActivities()
 
 
 void UML4CPPProfilePackageImpl::initializePackageClasses()
+{
+	std::shared_ptr<uml::Generalization> gen = nullptr;
+
+
+//-------------------------------------------
+//Opaque Behaviors
+
+}
+
+
+void UML4CPPProfilePackageImpl::initializePackageSignals()
+{
+	std::shared_ptr<uml::Generalization> gen = nullptr;
+
+
+//-------------------------------------------
+//Opaque Behaviors
+
+}
+
+void UML4CPPProfilePackageImpl::initializePackageSignalEvents()
 {
 	std::shared_ptr<uml::Generalization> gen = nullptr;
 

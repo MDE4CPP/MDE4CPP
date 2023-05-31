@@ -10,16 +10,22 @@
 
 
 
+
 //Forward Declaration for used types
 namespace uml 
 {
 	class Property;
 }
 
-// base class includes
+// base class includes 
 #include "uml/Stereotype.hpp"
 
 
+
+
+
+// include object activation
+#include "fUML/Semantics/CommonBehavior/ObjectActivation.hpp"
 
 namespace UML4CPPProfile
 {
@@ -46,6 +52,12 @@ namespace UML4CPPProfile
 			// Operations
 			//*********************************
 			
+
+			//*********************************
+			// ObjectActivation Forwarder SetGet
+			//*********************************
+			// Getter for Active Class
+			virtual bool GetIsActive() const = 0;
 			
 		protected:
 			//*********************************
@@ -54,6 +66,8 @@ namespace UML4CPPProfile
 			std::weak_ptr<uml::Property> m_base_Property;
 			std::string m_setterName;
 			
+			
+
 			
 
 		public:

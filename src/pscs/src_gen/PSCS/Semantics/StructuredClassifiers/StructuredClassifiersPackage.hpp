@@ -14,16 +14,16 @@
 
 namespace ecore 
 {
-	class EParameter;
-	class EEnumLiteral;
+	class EStringToStringMapEntry;
+	class EAnnotation;
+	class EReference;
+	class EGenericType;
 	class EEnum;
 	class EOperation;
-	class EDataType;
-	class EAnnotation;
 	class EClass;
-	class EReference;
-	class EStringToStringMapEntry;
-	class EGenericType;
+	class EParameter;
+	class EDataType;
+	class EEnumLiteral;
 }
 
 namespace PSCS::Semantics::StructuredClassifiers 
@@ -103,7 +103,7 @@ namespace PSCS::Semantics::StructuredClassifiers
 			//Class and Feature IDs 
 			static const unsigned long CS_INTERACTIONPOINT_CLASS = 314391515;
 			static const unsigned int CS_INTERACTIONPOINT_CLASS_FEATURE_COUNT = 3;
-			static const unsigned int CS_INTERACTIONPOINT_CLASS_OPERATION_COUNT = 39;
+			static const unsigned int CS_INTERACTIONPOINT_CLASS_OPERATION_COUNT = 43;
 			
 			static const unsigned long CS_INTERACTIONPOINT_ATTRIBUTE_DEFININGPORT = 342702236;
 			static const unsigned long CS_INTERACTIONPOINT_ATTRIBUTE_OWNER = 165744507;
@@ -132,7 +132,7 @@ namespace PSCS::Semantics::StructuredClassifiers
 			//Class and Feature IDs 
 			static const unsigned long CS_LINK_CLASS = 225228270;
 			static const unsigned int CS_LINK_CLASS_FEATURE_COUNT = 3;
-			static const unsigned int CS_LINK_CLASS_OPERATION_COUNT = 36;
+			static const unsigned int CS_LINK_CLASS_OPERATION_COUNT = 40;
 			
 			
 			static const unsigned int CS_LINK_OPERATION_GETFEATURE_VALUE = 3546412222;
@@ -174,7 +174,7 @@ namespace PSCS::Semantics::StructuredClassifiers
 			//Class and Feature IDs 
 			static const unsigned long CS_OBJECT_CLASS = 1305137753;
 			static const unsigned int CS_OBJECT_CLASS_FEATURE_COUNT = 4;
-			static const unsigned int CS_OBJECT_CLASS_OPERATION_COUNT = 60;
+			static const unsigned int CS_OBJECT_CLASS_OPERATION_COUNT = 64;
 			
 			
 			static const unsigned int CS_OBJECT_OPERATION_CHECKALLPARENTS_CLASSIFIER_CLASSIFIER = 1038258742;
@@ -237,7 +237,7 @@ namespace PSCS::Semantics::StructuredClassifiers
 			//Class and Feature IDs 
 			static const unsigned long CS_REFERENCE_CLASS = 1875601966;
 			static const unsigned int CS_REFERENCE_CLASS_FEATURE_COUNT = 2;
-			static const unsigned int CS_REFERENCE_CLASS_OPERATION_COUNT = 44;
+			static const unsigned int CS_REFERENCE_CLASS_OPERATION_COUNT = 48;
 			
 			static const unsigned long CS_REFERENCE_ATTRIBUTE_COMPOSITEREFERENT = 1632489384;
 			

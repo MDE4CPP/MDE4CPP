@@ -778,6 +778,38 @@ void ActivitiesPackageImpl::initializeActivityNodeActivationContent()
 	m_activityNodeActivation_Operation_getTokens->setUnique(true);
 	m_activityNodeActivation_Operation_getTokens->setOrdered(false);
 	
+	m_activityNodeActivation_Operation_initialize_ActivityNode_ActivityNodeActivationGroup->setName("initialize");
+	{ 	std::shared_ptr<ecore::ecoreFactory> factory = ecore::ecoreFactory::eInstance();
+		std::shared_ptr<ecore::EClass> unknownClass = factory ->createEClass(-1);
+	   	unknownClass->setName("invalid");
+		unknownClass->setAbstract(true);
+		unknownClass->setInterface(true);
+		m_activityNodeActivation_Operation_initialize_ActivityNode_ActivityNodeActivationGroup->setEType(unknownClass);
+	}
+	m_activityNodeActivation_Operation_initialize_ActivityNode_ActivityNodeActivationGroup->setLowerBound(0);
+	m_activityNodeActivation_Operation_initialize_ActivityNode_ActivityNodeActivationGroup->setUpperBound(1);
+	m_activityNodeActivation_Operation_initialize_ActivityNode_ActivityNodeActivationGroup->setUnique(true);
+	m_activityNodeActivation_Operation_initialize_ActivityNode_ActivityNodeActivationGroup->setOrdered(true);
+	{
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_activityNodeActivation_Operation_initialize_ActivityNode_ActivityNodeActivationGroup);
+		parameter->setName("node");
+		parameter->setEType(nullptr);
+		parameter->setLowerBound(0);
+		parameter->setUpperBound(1);
+		parameter->setUnique(true);
+		parameter->setOrdered(true);
+	}
+	
+	{
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_activityNodeActivation_Operation_initialize_ActivityNode_ActivityNodeActivationGroup);
+		parameter->setName("group");
+		parameter->setEType(nullptr);
+		parameter->setLowerBound(0);
+		parameter->setUpperBound(1);
+		parameter->setUnique(true);
+		parameter->setOrdered(true);
+	}
+	
 	m_activityNodeActivation_Operation_isReady->setName("isReady");
 	m_activityNodeActivation_Operation_isReady->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_activityNodeActivation_Operation_isReady->setLowerBound(1);

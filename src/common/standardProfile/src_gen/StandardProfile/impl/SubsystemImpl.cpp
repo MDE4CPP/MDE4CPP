@@ -268,3 +268,16 @@ void SubsystemImpl::setThisSubsystemPtr(std::weak_ptr<Subsystem> thisSubsystemPt
 	m_thisSubsystemPtr = thisSubsystemPtr;
 	setThisStereotypePtr(thisSubsystemPtr);
 }
+
+
+//*********************************
+// ObjectActivation Forwarder Impl
+//*********************************
+// Getter for Active Class
+bool SubsystemImpl::GetIsActive() const
+{
+		return false;
+
+}
+
+

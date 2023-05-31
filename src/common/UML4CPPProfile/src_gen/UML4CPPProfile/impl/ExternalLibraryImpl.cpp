@@ -323,3 +323,16 @@ void ExternalLibraryImpl::setThisExternalLibraryPtr(std::weak_ptr<ExternalLibrar
 	m_thisExternalLibraryPtr = thisExternalLibraryPtr;
 	setThisStereotypePtr(thisExternalLibraryPtr);
 }
+
+
+//*********************************
+// ObjectActivation Forwarder Impl
+//*********************************
+// Getter for Active Class
+bool ExternalLibraryImpl::GetIsActive() const
+{
+		return false;
+
+}
+
+

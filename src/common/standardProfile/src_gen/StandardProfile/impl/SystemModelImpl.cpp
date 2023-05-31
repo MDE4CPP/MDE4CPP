@@ -268,3 +268,16 @@ void SystemModelImpl::setThisSystemModelPtr(std::weak_ptr<SystemModel> thisSyste
 	m_thisSystemModelPtr = thisSystemModelPtr;
 	setThisStereotypePtr(thisSystemModelPtr);
 }
+
+
+//*********************************
+// ObjectActivation Forwarder Impl
+//*********************************
+// Getter for Active Class
+bool SystemModelImpl::GetIsActive() const
+{
+		return false;
+
+}
+
+

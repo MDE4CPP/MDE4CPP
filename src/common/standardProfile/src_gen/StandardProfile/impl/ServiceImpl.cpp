@@ -268,3 +268,16 @@ void ServiceImpl::setThisServicePtr(std::weak_ptr<Service> thisServicePtr)
 	m_thisServicePtr = thisServicePtr;
 	setThisStereotypePtr(thisServicePtr);
 }
+
+
+//*********************************
+// ObjectActivation Forwarder Impl
+//*********************************
+// Getter for Active Class
+bool ServiceImpl::GetIsActive() const
+{
+		return false;
+
+}
+
+

@@ -363,5 +363,32 @@ void [className/]::destroy()
 [aClass.generateInvokeImpl()/]
 
 [aClass.generateGetThisPtrCPP()/]
+
+
+//*********************************
+// ObjectActivation Forwarder Impl
+//*********************************
+[if (aClass.isActive) ]
+	std::shared_ptr<fUML::Semantics::CommonBehavior::ObjectActivation> [className/]::getObjectActivation() const
+	{
+	    return m_objectActivation;
+	}
+	void [className/]::setObjectActivation(std::shared_ptr<fUML::Semantics::CommonBehavior::ObjectActivation> _objectActivation)
+	{
+	    m_objectActivation = _objectActivation;
+	}
+[/if]
+// Getter for Active Class
+bool [className/]::GetIsActive() const
+{
+	[if (aClass.isActive) ]
+		return true;
+	[else]
+		return false;
+	[/if]
+
+}
+
+
 [/file]
 [/template]

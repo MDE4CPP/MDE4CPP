@@ -25,6 +25,9 @@
 
 
 
+// Hard include of Primitive Type to account for Signals setting up their Attributes
+#include "uml/PrimitiveType.hpp"
+
 using namespace StandardProfile;
 
 StandardProfilePackageImpl::StandardProfilePackageImpl()
@@ -84,6 +87,9 @@ void StandardProfilePackageImpl::createPackageContents(std::shared_ptr<uml::Pack
 	createPackagePrimitiveTypes(standardProfile, factory);
 	createPackageEnumerationLiterals(standardProfile, factory);
 	createPackageInterfaceRealizations(standardProfile, factory);
+
+	createPackageSignals(standardProfile, factory);
+	createPackageSignalEvents(standardProfile, factory);
 }
 
 void StandardProfilePackageImpl::createPackageActivities(std::shared_ptr<uml::Package> standardProfile, std::shared_ptr<uml::umlFactory> factory)
@@ -101,6 +107,24 @@ void StandardProfilePackageImpl::createPackageClasses(std::shared_ptr<uml::Packa
 //Opaque Behaviors
 
 } 
+
+void StandardProfilePackageImpl::createPackageSignals(std::shared_ptr<uml::Package> standardProfile, std::shared_ptr<uml::umlFactory> factory)
+{
+	std::shared_ptr<uml::Constraint> con = nullptr;
+	std::shared_ptr<uml::OpaqueExpression> oe = nullptr;
+
+
+//-------------------------------------------
+//Opaque Behaviors
+
+}
+
+void StandardProfilePackageImpl::createPackageSignalEvents(std::shared_ptr<uml::Package> standardProfile, std::shared_ptr<uml::umlFactory> factory)
+{
+	std::shared_ptr<uml::Constraint> con = nullptr;
+	std::shared_ptr<uml::OpaqueExpression> oe = nullptr;
+
+}
 
 void StandardProfilePackageImpl::createPackageAssociations(std::shared_ptr<uml::Package> standardProfile, std::shared_ptr<uml::umlFactory> factory)
 {
@@ -425,6 +449,10 @@ void StandardProfilePackageImpl::initializePackageContents(std::shared_ptr<uml::
 	initializePackageNestedPackages();
 	initializePackageStereotypes();
 	initializePackageValueSpecifications();
+
+	initializePackageSignals();
+	initializePackageSignalEvents();
+
 	
 }
 
@@ -435,6 +463,27 @@ void StandardProfilePackageImpl::initializePackageActivities()
 
 
 void StandardProfilePackageImpl::initializePackageClasses()
+{
+	std::shared_ptr<uml::Generalization> gen = nullptr;
+
+
+//-------------------------------------------
+//Opaque Behaviors
+
+}
+
+
+void StandardProfilePackageImpl::initializePackageSignals()
+{
+	std::shared_ptr<uml::Generalization> gen = nullptr;
+
+
+//-------------------------------------------
+//Opaque Behaviors
+
+}
+
+void StandardProfilePackageImpl::initializePackageSignalEvents()
 {
 	std::shared_ptr<uml::Generalization> gen = nullptr;
 

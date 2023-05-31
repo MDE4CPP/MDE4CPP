@@ -34,6 +34,9 @@
 #include "ecore/EPackage.hpp"
 #include "ecore/EReference.hpp"
 
+// Hard include of Primitive Type to account for Signals setting up their Attributes
+#include "uml/PrimitiveType.hpp"
+
 using namespace Ecore;
 
 EcorePackageImpl::EcorePackageImpl()
@@ -93,6 +96,9 @@ void EcorePackageImpl::createPackageContents(std::shared_ptr<uml::Package> ecore
 	createPackagePrimitiveTypes(ecore, factory);
 	createPackageEnumerationLiterals(ecore, factory);
 	createPackageInterfaceRealizations(ecore, factory);
+
+	createPackageSignals(ecore, factory);
+	createPackageSignalEvents(ecore, factory);
 }
 
 void EcorePackageImpl::createPackageActivities(std::shared_ptr<uml::Package> ecore, std::shared_ptr<uml::umlFactory> factory)
@@ -513,6 +519,24 @@ void EcorePackageImpl::createPackageClasses(std::shared_ptr<uml::Package> ecore,
 //Opaque Behaviors
 
 } 
+
+void EcorePackageImpl::createPackageSignals(std::shared_ptr<uml::Package> ecore, std::shared_ptr<uml::umlFactory> factory)
+{
+	std::shared_ptr<uml::Constraint> con = nullptr;
+	std::shared_ptr<uml::OpaqueExpression> oe = nullptr;
+
+
+//-------------------------------------------
+//Opaque Behaviors
+
+}
+
+void EcorePackageImpl::createPackageSignalEvents(std::shared_ptr<uml::Package> ecore, std::shared_ptr<uml::umlFactory> factory)
+{
+	std::shared_ptr<uml::Constraint> con = nullptr;
+	std::shared_ptr<uml::OpaqueExpression> oe = nullptr;
+
+}
 
 void EcorePackageImpl::createPackageAssociations(std::shared_ptr<uml::Package> ecore, std::shared_ptr<uml::umlFactory> factory)
 {
@@ -1142,6 +1166,10 @@ void EcorePackageImpl::initializePackageContents(std::shared_ptr<uml::Package> e
 	initializePackageNestedPackages();
 	initializePackageStereotypes();
 	initializePackageValueSpecifications();
+
+	initializePackageSignals();
+	initializePackageSignalEvents();
+
 	
 }
 
@@ -2964,6 +2992,27 @@ void EcorePackageImpl::initializePackageClasses()
 	
 	
 	
+
+
+//-------------------------------------------
+//Opaque Behaviors
+
+}
+
+
+void EcorePackageImpl::initializePackageSignals()
+{
+	std::shared_ptr<uml::Generalization> gen = nullptr;
+
+
+//-------------------------------------------
+//Opaque Behaviors
+
+}
+
+void EcorePackageImpl::initializePackageSignalEvents()
+{
+	std::shared_ptr<uml::Generalization> gen = nullptr;
 
 
 //-------------------------------------------

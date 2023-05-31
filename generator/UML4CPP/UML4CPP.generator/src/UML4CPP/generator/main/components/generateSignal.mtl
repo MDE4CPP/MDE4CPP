@@ -1,0 +1,338 @@
+[comment encoding = UTF-8 /]
+[**
+ * Copyright (c) 2017 TU Ilmenau, Systems and Software Engineering Group
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), 
+ * to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, 
+ * and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+ * 
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, 
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, 
+ * WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+ *
+ ****************************************************************************************************************************************************************
+ * 
+ * module for generation of UML Class artefacts
+ * 
+ */]
+[module generateSignal('http://www.eclipse.org/uml2/5.0.0/UML')]
+
+[import UML4CPP::generator::main::components::generateConstraint /]
+[import UML4CPP::generator::main::components::generateType /]
+[import UML4CPP::generator::main::components::generateInterface /]
+[import UML4CPP::generator::main::components::generateStereotype /]
+[import UML4CPP::generator::main::components::generateEnumeration /]
+[import UML4CPP::generator::main::helpers::generalHelper /]
+[import UML4CPP::generator::main::helpers::nameHelper /]
+[import UML4CPP::generator::main::helpers::IDHelper /]
+[import UML4CPP::generator::main::components::generateOperation /]
+[import UML4CPP::generator::main::profiles::uml4CPPProfileHelper /]
+[import UML4CPP::generator::main::profiles::strategyHelper /]
+[import UML4CPP::generator::main::helpers::isGeneratableHelper /]
+
+
+[** 
+ * get all signals that has parts or ports of type aClass (= composite properties; attributes connected to a composition association are rejected)
+*/]
+[query public hasOwnerProperty(aClass : Classifier, ownerClass : Signal) : Boolean = (aClass.attribute->select(type = ownerClass)->size() > 0) /]
+[query public getOwnerProperties(aClass : Classifier, ownerClass : Signal) : OrderedSet(Property) = aClass.attribute->select(type = ownerClass)->sortedBy(qualifiedName)/]
+
+[** 
+ * get all associations where aSignal is memberType
+*/]
+[query private getAssociationsToClass(aSignal : Signal) : Set(Association) = aSignal.getNearestPackage().ownedMember->select(oclIsKindOf(Association))->asOrderedSet() /]
+[query private isCompositionForClass(anAssociation : Association, aSignal : Signal) : Boolean = anAssociation.memberEnd->select(type = aSignal and isComposite and (not owner.oclIsKindOf(Association)))->size() > 0/]
+[query public getCompositeProperty(anAssociation : Association, aSignal : Signal) : Property = anAssociation.memberEnd->select(type = aSignal and isComposite and (not owner.oclIsKindOf(Association)))->first() /]
+[query public getCompositionsToSignal(aSignal : Signal) : Set(Association) = getAssociationsToClass()->select(isCompositionForClass(aSignal))->asOrderedSet()->sortedBy(myQualifiedName()) /]
+[**
+ * //isCompositionForClass?
+*/]
+
+
+[**
+ * template to generate create function declarations
+*/]
+[template public generateSignalCreate(aSignal : Signal,impl : Boolean)]
+//START Create methods for signal [aSignal.name/]
+virtual std::shared_ptr<[aSignal.generateCppType(true)/]> create[aSignal.name.toUpperFirst()/](const int metaElementID = [aSignal.getNearestPackage().name/]Package::[aSignal.getMemberName().toUpperCase()/]) const [abstractSuffix(impl)/];
+[for (anAssociation : Association | aSignal.getCompositionsToSignal())] [comment for each association, that is a composition to aClass/]
+	[let containerProperty : Property = anAssociation.getCompositeProperty(aSignal)]
+		[if (not containerProperty.opposite.oclIsUndefined())]
+			[let containmentProperty : Property = containerProperty.opposite]
+virtual std::shared_ptr<[aSignal.generateCppType(true)/]> create[aSignal.name.toUpperFirst()/]_as_[containerProperty.name/]_in_[containmentProperty.type.name.toUpperFirst()/]([containmentProperty.generateCppType()/] par_[containmentProperty.name.toLowerFirst()/], const int metaElementID = [aSignal.getNearestPackage().name/]Package::[aSignal.getMemberName().toUpperCase()/]) const [abstractSuffix(impl)/] ; 
+			[/let]
+		[/if]
+	[/let]
+[/for]
+//END Create methods for signal [aSignal.name/]
+[/template]
+
+[**
+ * generate creation of meta model instance for an Signal element
+ * 
+ * this includes:
+ * - creation of Signal
+ * - creation of Signal constraints
+*/]
+[template public generateSignalCreation(aSignal : Signal)]
+[aSignal.memberName()/] = factory->createSignal_as_ownedType_in_Package([aSignal.ancestors(Package)->first().memberName()/], [aSignal._package.generateNamespace(true)/]::[aSignal._package.myNamespaceName()/]Package::[aSignal.getMemberName().toUpperCase()/]);
+[if (aSignal.ownedRule->size() > 0)]
+//constraints
+[for (aConstraint : Constraint | aSignal.ownedRule->sortedBy(name)) separator('\n')]
+[aConstraint.generateConstraintCreation()/]
+[/for][/if]
+[/template]
+
+[template public generateSignalEventCreation(aSignalEvent : SignalEvent)]
+[aSignalEvent.memberName()/] = factory->createSignalEvent_as_packagedElement_in_Package([aSignalEvent.ancestors(Package)->first().memberName()/], [aSignalEvent.ancestors(Package)->first().generateNamespace(true)/]::[aSignalEvent.ancestors(Package)->first().myNamespaceName()/]Package::[aSignalEvent.getMemberName().toUpperCase()/]);
+[/template]
+[**
+ * generate initialization of meta model instance for an Signal element
+ * 
+ * this includes:
+ * - set Signal name
+ * - set isAbstract flag
+ * - create and initialize generalization
+*/]
+[comment] For now disabled to get the creation working. This has issues with superSignal and superClass, since apparently signals can't have that aswell?
+	[template public generateSignalInitialization(aSignal : Signal)]
+	[aSignal.memberName()/]->setName("[aSignal.name/]");
+	[aSignal.memberName()/]->setIsAbstract([aSignal.isAbstract/]);
+	[for (superSignal : Signal | aSignal.superSignal->asOrderedSet()->sortedBy(myQualifiedName())) before ('\n') separator ('\n')]
+	gen = uml::umlFactory::eInstance()->createGeneralization_as_generalization_in_Classifier([aSignal.generatePackageGetterCall(aSignal)/]);
+	gen->setGeneral([superSignal.generatePackageGetterCall(aSignal)/]);
+	[/for]
+	[aSignal.generateStereotypeApplication()/]
+	[/template]
+[/comment]
+
+
+[**
+ * generate static meta data:
+ * - index of Signal
+ * - feature count
+ * - operation count
+*/]
+[template public generateStaticSignalID(aSignal : Signal)]
+//Signal [aSignal.generateNamespaceName(true)/]
+static const unsigned long [aSignal.getMemberName().toUpperCase()/] = [aSignal.transformType().generatePolynomialRollingHash()/];
+static const unsigned int [aSignal.getMemberName().toUpperCase()/]_FEATURE_COUNT = [aSignal.allFeatures()->size()/];
+[/template]
+
+[template public generateStaticSignalEventID(aSignalEvent : SignalEvent)]
+//SignalEvent .. [aSignalEvent.getMemberName().toUpperCase()/]
+static const unsigned long [aSignalEvent.getMemberName().toUpperCase()/] = 1; //aSignalEvent.generatePolynomialRollingHash()/;
+[/template]
+[**
+ * generate static meta data for all Signals in a package:
+ * - index of Signal
+ * - feature count
+ * - operation count
+*/]
+[template public generateStaticPackageIDs_signal(aPackage : Package)]
+[for (s : Signal | aPackage.ownedElement->selectByType(Signal)->reject(isDoNotGenerateElement())->sortedBy(name))]
+	[generateStaticSignalID(s)/]
+	[comment  Properties of s/]
+	[for (aProperty : Property | s.ownedAttribute) before('//Properties\n')]
+	static const unsigned long [aProperty.getMemberName().toUpperCase()/] = [aProperty.generateNamespaceName(true).generatePolynomialRollingHash()/];
+	[/for]
+[/for]
+[for (aSignal : Signal | aPackage.allOwnedElements()->selectByType(Stereotype)->reject(isDoNotGenerateElement())->sortedBy(name)->reject(name.oclIsInvalid() or name = ''))]
+	[generateStaticSignalID(aSignal)/]
+[/for]
+[for (anInterface :Interface | aPackage.allOwnedElements()->selectByType(Interface)->reject(isDoNotGenerateElement())->sortedBy(name)->reject(name.oclIsInvalid() or name = ''))]
+	[generateStaticInterfaceID(anInterface)/]
+[/for]
+[for (anEnumeration : Enumeration | aPackage.allOwnedElements()->selectByType(Enumeration)->reject(isDoNotGenerateElement())->sortedBy(name)->reject(name.oclIsInvalid() or name = ''))]
+	[generateStaticEnumerationID(anEnumeration)/]
+[/for]
+
+[/template]
+
+[template public generateStaticPackageIDs_signalEvent(aPackage : Package)]
+[for (s : SignalEvent | aPackage.ownedElement->selectByType(SignalEvent)->reject(isDoNotGenerateElement())->sortedBy(name))]
+	[generateStaticSignalEventID(s)/]
+[/for]
+[for (aSignalEvent : SignalEvent | aPackage.allOwnedElements()->selectByType(Stereotype)->reject(isDoNotGenerateElement())->sortedBy(name)->reject(name.oclIsInvalid() or name = ''))]
+	[generateStaticSignalEventID(aSignalEvent)/]
+[/for]
+[for (anInterface :Interface | aPackage.allOwnedElements()->selectByType(Interface)->reject(isDoNotGenerateElement())->sortedBy(name)->reject(name.oclIsInvalid() or name = ''))]
+	[generateStaticInterfaceID(anInterface)/]
+[/for]
+[for (anEnumeration : Enumeration | aPackage.allOwnedElements()->selectByType(Enumeration)->reject(isDoNotGenerateElement())->sortedBy(name)->reject(name.oclIsInvalid() or name = ''))]
+	[generateStaticEnumerationID(anEnumeration)/]
+[/for]
+
+[/template]
+
+
+
+
+
+[**
+ * There should be a way to denote superSignal, since Signals can be children of other Signals. For now SuperClass is commented out
+*/]
+[**
+ * generate initialization of meta model instance for an Signal element
+ * 
+ * this includes:
+ * - set signal name
+ * - set isAbstract flag
+ * - create and initialize generalization
+*/]
+[template public generateSignalInitialization(aSignal : Signal)]
+[aSignal.memberName()/]->setName("[aSignal.name/]");
+[aSignal.memberName()/]->setIsAbstract([aSignal.isAbstract/]);
+[comment]
+	[for (superClass : Class | aSignal.superClass->asOrderedSet()->sortedBy(myQualifiedName())) before ('\n') separator ('\n')]
+	gen = uml::umlFactory::eInstance()->createGeneralization_as_generalization_in_Classifier([aSignal.generatePackageGetterCall(aSignal)/]);
+	gen->setGeneral([superClass.generatePackageGetterCall(aClass)/]);
+	[/for]
+[/comment]
+[aSignal.generateStereotypeApplication()/]
+[/template]
+
+[template public generateSignalEventInitialization(aSignalEvent : SignalEvent)]
+[aSignalEvent.memberName()/]->setName("[aSignalEvent.name/]");
+// set the reference to the signal
+[aSignalEvent.memberName()/]->setSignal( [aSignalEvent.signal.memberName()/] );
+
+[aSignalEvent.generateStereotypeApplication()/]
+
+[/template]
+
+[**
+ * generate function declaration for getThisPtr and setThisPtr functions
+*/]
+[template public generateThisPtrFunctionDeclaration(aSignal : Signal)]
+virtual std::shared_ptr<[aSignal.name.toUpperFirst()/]> [generateGetThisPtrPropertyGetterName()/]();
+virtual void [generateGetThisPtrPropertySetterName()/](std::weak_ptr<[aSignal.name.toUpperFirst()/]> [generateGetThisPtrPropertyName()/]);
+[/template]
+
+[**
+ * generate function implementation for getThisPtr and setThisPtr functions
+*/]
+[template public generateGetThisPtrCPP(aSignal: Signal)]
+std::shared_ptr<[aSignal.name.toUpperFirst()/]> [aSignal.name.toUpperFirst()/]Impl::[generateGetThisPtrPropertyGetterName()/]()
+{
+	return m_[generateGetThisPtrPropertyName()/].lock();
+}
+void [aSignal.name.toUpperFirst()/]Impl::[generateGetThisPtrPropertySetterName()/](std::weak_ptr<[aSignal.name.toUpperFirst()/]> [generateGetThisPtrPropertyName()/])
+{
+	m_[generateGetThisPtrPropertyName()/] = [generateGetThisPtrPropertyName()/];
+[comment]
+	[for (superClass : Class | aClass.superClass->asOrderedSet()->sortedBy(name))]
+		[superClass.generateGetThisPtrPropertySetterName()/]([aClass.generateGetThisPtrPropertyName()/]);
+	[/for]
+	[if (aClass.superClass->isEmpty() and not aClass.oclIsKindOf(Stereotype))]
+		setThisElementPtr([aClass.generateGetThisPtrPropertyName()/]);
+	[elseif (aClass.superClass->isEmpty() and aClass.oclIsKindOf(Stereotype))]
+		setThisStereotypePtr([aClass.generateGetThisPtrPropertyName()/]);
+	[/if]
+[/comment]
+}
+[/template]
+
+[**
+ * queries for thisPtrNames
+*/]
+[query public generateGetThisPtrPropertyName(aSignal : Signal) : String = 'this'.concat(aSignal.name.toUpperFirst()).concat('Ptr')/]
+[query public generateGetThisPtrPropertySetterName(aSignal : Signal) : String = 'set'.concat(generateGetThisPtrPropertyName().toUpperFirst())/]
+[query public generateGetThisPtrPropertyGetterName(aSignal : Signal) : String = 'get'.concat(generateGetThisPtrPropertyName().toUpperFirst())/]
+
+[**
+ * queries for retireving the Package of a Signal
+*/]
+[query public getPackage(aPackagedElement : PackageableElement) : Package = aPackagedElement.owner.oclAsType(Package) /]
+[query public getRootPackage(aPackagedElement : PackageableElement) : Package = if(aPackagedElement.getPackage().getSuperPackage().oclIsUndefined()) then aPackagedElement.getPackage() else aPackagedElement.getPackage().getRootPackage() endif /]
+
+[**
+ * queries if aClassifier inherits from baseClassifier (directly or indirectly
+*/]
+[query public inheritsFrom(aClassifier : Classifier, baseClassifier : Classifier) : Boolean = 
+	if(aClassifier.general->size() > 0 ) then if(aClassifier.general->includes(baseClassifier)) then true else aClassifier.general.inheritsFrom(baseClassifier) endif else false endif/]
+
+
+
+[**
+ * Templates and Queries for generating the Subset/Union functionalities of a Signal
+*/]
+[template public generateUnionGetterCpp(aSignal : Signal)]
+[aSignal.getUnionProperties()->sortedBy(name).generateUnionGetterCpp(aSignal)/]
+
+[/template]
+
+[template public generateUnionGetterCpp(aProperty : Property, aSignal: Signal) ? (aProperty.isUnion())]
+[aProperty.generateCppType()/] [aSignal.name.toUpperFirst()/]Impl::[aProperty.getterName()/]() const
+{
+[if (not (aProperty.upper = 1))]
+	if(m_[aProperty.name/] == nullptr)
+	{
+		[aProperty.generateContainerPropertyInit()/]
+		[aProperty.generateSubsetUnionInit()/]
+	}
+[/if]
+	return m_[aProperty.name/];
+}
+
+
+[/template]
+
+[template public generateUnionGetterDeclaretaion(aSignal : Signal, impl : Boolean)]
+[aSignal.getUnionProperties()->sortedBy(name).generateUnionGetterDeclaretaionBag(impl)/]
+[/template]
+
+[template public generateUnionGetterDeclaretaionBag(aProperty : Property, impl : Boolean) ? (isUnion())]
+virtual [aProperty.generateCppType()/] [aProperty.getterName()/]() const [abstractSuffix(impl)/];
+
+[/template]
+
+[query public getUnionProperties(aSignal : Signal) : Set(Property) = OrderedSet{aSignal.getSubsetedUnionProperties(),aSignal.attribute->select(isUnion())}->flatten()->sortedBy(name) /]
+
+[query public getSubsetedUnionProperties(aSignal : Signal): Set(Property) =  aSignal.allAttributes()->select(if isSubset() then not subsettedProperty->forAll(p | not p.isUnion()) else false endif ).subsettedProperty->asOrderedSet()->sortedBy(name)/]
+[query public getSubsetsForUnion(aSignal : Class, union : Property): Set(Property) =  aSignal.allAttributes()->select(if isSubset() then not subsettedProperty->forAll(p | not (p = union)) else false endif ).oclAsType(Property)->asOrderedSet()->sortedBy(name)/]
+
+[**
+ * generates the lazy creation functionality for Subsets, Unions and SubsetUnions
+*/]
+[template public generateContainerPropertyInit(aProperty : Property)? (not (aProperty.upper = 1))]
+[if(aProperty.isSubsetUnion())]
+/*SubsetUnion*/
+m_[aProperty.name/].reset(new SubsetUnion<[aProperty.type.generateCppType(true)/], [aProperty.generateSubsetTypes()/] >());
+#ifdef SHOW_SUBSET_UNION
+	std::cout << "Initialising shared pointer SubsetUnion: " << "m_[aProperty.name/] - SubsetUnion<[aProperty.generateCppType()/], [aProperty.generateSubsetTypes()/] >()" << std::endl;
+#endif
+[elseif(aProperty.isSubset())]
+/*Subset*/
+m_[aProperty.name/].reset(new Subset<[aProperty.type.generateCppType(true)/], [aProperty.generateSubsetTypes()/] >());
+#ifdef SHOW_SUBSET_UNION
+	std::cout << "Initialising shared pointer Subset: " << "m_[aProperty.name/] - Subset<[aProperty.generateCppType()/], [aProperty.generateSubsetTypes()/] >()" << std::endl;
+#endif
+[elseif(aProperty.isUnion())]
+/*Union*/
+m_[aProperty.name/].reset(new Union<[aProperty.type.generateCppType(true)/]>());
+	#ifdef SHOW_SUBSET_UNION
+	std::cout << "Initialising Union: " << "m_[aProperty.name/] - Union<[aProperty.generateCppType()/]>()" << std::endl;
+#endif
+[else]
+m_[aProperty.name/].reset(new Bag<[aProperty.type.generateCppType(true)/]>());
+[/if]
+[/template]
+
+[template public generateSubsetUnionInit(aProperty : Property)? (not (aProperty.upper = 1))]
+[if(aProperty.isSubsetUnion())]
+/*SubsetUnion*/
+[aProperty.getterName()/]()->initSubsetUnion([aProperty.generateSubsetElements()/]);
+#ifdef SHOW_SUBSET_UNION
+	std::cout << "Initialising value SubsetUnion: " << "m_[aProperty.name/] - SubsetUnion<[aProperty.generateCppType()/], [aProperty.generateSubsetTypes()/] >([aProperty.generateSubsetElements()/])" << std::endl;
+#endif
+[elseif(aProperty.isSubset())]
+/*Subset*/
+[aProperty.getterName()/]()->initSubset([aProperty.generateSubsetElements()/]);
+#ifdef SHOW_SUBSET_UNION
+	std::cout << "Initialising value Subset: " << "m_[aProperty.name/] - Subset<[aProperty.generateCppType()/], [aProperty.generateSubsetTypes()/] >([aProperty.generateSubsetElements()/])" << std::endl;
+#endif
+[/if]
+[/template]

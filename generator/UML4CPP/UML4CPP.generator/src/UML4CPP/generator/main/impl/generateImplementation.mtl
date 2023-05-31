@@ -37,3 +37,13 @@
 [aClass.generateClassCpp()/]
 [/if]
 [/template]
+
+[comment]
+	[template public generateImplementation(aSignal : Signal)]
+	[aSignal.generateImplementationHeader()/]
+	[aSignal.generateImplementationSource()/]
+	[if (aSignal.isSingleton())]
+	[aSignal.generateClassCpp()/]
+	[/if]
+	[/template]
+[/comment]

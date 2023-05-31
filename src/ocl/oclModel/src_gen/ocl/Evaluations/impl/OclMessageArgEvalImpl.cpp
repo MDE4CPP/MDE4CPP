@@ -36,8 +36,8 @@
 
 #include <exception> // used in Persistence
 #include "ocl/Evaluations/EvaluationsFactory.hpp"
-#include "uml/umlFactory.hpp"
 #include "fUML/Semantics/Loci/LociFactory.hpp"
+#include "uml/umlFactory.hpp"
 #include "fUML/Semantics/Values/Evaluation.hpp"
 #include "fUML/Semantics/Loci/Locus.hpp"
 #include "ocl/Evaluations/OclExpEval.hpp"

@@ -789,6 +789,13 @@ void SimpleClassifiersPackageImpl::initializeSignalInstanceContent()
 	m_signalInstance_Operation__copy->setUnique(true);
 	m_signalInstance_Operation__copy->setOrdered(true);
 	
+	m_signalInstance_Operation_getTypes->setName("getTypes");
+	m_signalInstance_Operation_getTypes->setEType(uml::umlPackage::eInstance()->getClassifier_Class());
+	m_signalInstance_Operation_getTypes->setLowerBound(0);
+	m_signalInstance_Operation_getTypes->setUpperBound(-1);
+	m_signalInstance_Operation_getTypes->setUnique(true);
+	m_signalInstance_Operation_getTypes->setOrdered(false);
+	
 	m_signalInstance_Operation_new_->setName("new_");
 	m_signalInstance_Operation_new_->setEType(fUML::Semantics::Values::ValuesPackage::eInstance()->getValue_Class());
 	m_signalInstance_Operation_new_->setLowerBound(1);
@@ -937,6 +944,38 @@ void SimpleClassifiersPackageImpl::initializeStructuredValueContent()
 	m_structuredValue_Operation_createFeatureValues->setUnique(true);
 	m_structuredValue_Operation_createFeatureValues->setOrdered(true);
 	
+	m_structuredValue_Operation_getMemberFeatures_Classifier->setName("getMemberFeatures");
+	m_structuredValue_Operation_getMemberFeatures_Classifier->setEType(uml::umlPackage::eInstance()->getStructuralFeature_Class());
+	m_structuredValue_Operation_getMemberFeatures_Classifier->setLowerBound(0);
+	m_structuredValue_Operation_getMemberFeatures_Classifier->setUpperBound(-1);
+	m_structuredValue_Operation_getMemberFeatures_Classifier->setUnique(true);
+	m_structuredValue_Operation_getMemberFeatures_Classifier->setOrdered(false);
+	{
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_structuredValue_Operation_getMemberFeatures_Classifier);
+		parameter->setName("type");
+		parameter->setEType(uml::umlPackage::eInstance()->getClassifier_Class());
+		parameter->setLowerBound(0);
+		parameter->setUpperBound(1);
+		parameter->setUnique(true);
+		parameter->setOrdered(true);
+	}
+	
+	m_structuredValue_Operation_getStructuralFeatureForType_Classifier->setName("getStructuralFeatureForType");
+	m_structuredValue_Operation_getStructuralFeatureForType_Classifier->setEType(uml::umlPackage::eInstance()->getStructuralFeature_Class());
+	m_structuredValue_Operation_getStructuralFeatureForType_Classifier->setLowerBound(0);
+	m_structuredValue_Operation_getStructuralFeatureForType_Classifier->setUpperBound(-1);
+	m_structuredValue_Operation_getStructuralFeatureForType_Classifier->setUnique(true);
+	m_structuredValue_Operation_getStructuralFeatureForType_Classifier->setOrdered(false);
+	{
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_structuredValue_Operation_getStructuralFeatureForType_Classifier);
+		parameter->setName("type");
+		parameter->setEType(uml::umlPackage::eInstance()->getClassifier_Class());
+		parameter->setLowerBound(0);
+		parameter->setUpperBound(1);
+		parameter->setUnique(true);
+		parameter->setOrdered(true);
+	}
+	
 	m_structuredValue_Operation_getValues_StructuralFeature_FeatureValue->setName("getValues");
 	m_structuredValue_Operation_getValues_StructuralFeature_FeatureValue->setEType(fUML::Semantics::Values::ValuesPackage::eInstance()->getValue_Class());
 	m_structuredValue_Operation_getValues_StructuralFeature_FeatureValue->setLowerBound(0);
@@ -1017,6 +1056,13 @@ void SimpleClassifiersPackageImpl::initializeStructuredValueContent()
 	m_structuredValue_Operation_retrieveFeatureValues->setUpperBound(-1);
 	m_structuredValue_Operation_retrieveFeatureValues->setUnique(true);
 	m_structuredValue_Operation_retrieveFeatureValues->setOrdered(false);
+	
+	m_structuredValue_Operation_retrieveStructuralFeatures->setName("retrieveStructuralFeatures");
+	m_structuredValue_Operation_retrieveStructuralFeatures->setEType(uml::umlPackage::eInstance()->getStructuralFeature_Class());
+	m_structuredValue_Operation_retrieveStructuralFeatures->setLowerBound(0);
+	m_structuredValue_Operation_retrieveStructuralFeatures->setUpperBound(-1);
+	m_structuredValue_Operation_retrieveStructuralFeatures->setUnique(true);
+	m_structuredValue_Operation_retrieveStructuralFeatures->setOrdered(false);
 	
 	m_structuredValue_Operation_setFeatureValue_StructuralFeature_EInt->setName("setFeatureValue");
 	{ 	std::shared_ptr<ecore::ecoreFactory> factory = ecore::ecoreFactory::eInstance();

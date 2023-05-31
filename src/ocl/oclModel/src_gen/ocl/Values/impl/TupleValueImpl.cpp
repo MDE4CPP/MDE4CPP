@@ -34,8 +34,8 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "ocl/Types/TypesFactory.hpp"
 #include "ocl/Values/ValuesFactory.hpp"
+#include "ocl/Types/TypesFactory.hpp"
 #include "ocl/Values/NameValueBinding.hpp"
 #include "ocl/Values/StaticValue.hpp"
 #include "ocl/Types/TupleType.hpp"
@@ -43,8 +43,8 @@
 //Factories and Package includes
 #include "ocl/oclPackage.hpp"
 #include "ocl/Types/TypesPackage.hpp"
-#include "ocl/Values/ValuesPackage.hpp"
 #include "fUML/Semantics/Values/ValuesPackage.hpp"
+#include "ocl/Values/ValuesPackage.hpp"
 
 using namespace ocl::Values;
 

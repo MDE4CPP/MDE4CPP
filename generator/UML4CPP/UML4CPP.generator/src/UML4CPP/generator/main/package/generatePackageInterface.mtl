@@ -28,6 +28,8 @@
 [import UML4CPP::generator::main::profiles::uml4CPPProfileHelper /]
 [import UML4CPP::generator::main::profiles::strategyHelper /]
 
+[import UML4CPP::generator::main::components::generateSignal /]
+
 [template public generatePackageInterface(aPackage : Package) {packageName : String = aPackage.name.concat('Package');}]
 [file (aPackage.generateNamespacePath(false).concat('/').concat(packageName).concat('.hpp'), false, 'UTF-8')]
 [startGuard(aPackage,'MetaModelPackage')/]
@@ -83,6 +85,10 @@ namespace [subPackage.generateNamespace(false)/]
 			[if (not isReflectionModel(aPackage))]
 			//Static IDs
 			[generateStaticPackageIDs(aPackage)/]
+			// Static IDs for Signals
+			[generateStaticPackageIDs_signal(aPackage)/]
+			// Static IDs for SignalEvents
+			[generateStaticPackageIDs_signalEvent(aPackage)/]
 			[/if]
 	};
 [if (not aPackage.isIgnoreNamespace())]}[/if]

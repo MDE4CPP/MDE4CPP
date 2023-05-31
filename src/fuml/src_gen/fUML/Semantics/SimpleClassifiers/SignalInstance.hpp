@@ -38,6 +38,7 @@ namespace fUML::Semantics::SimpleClassifiers
 }
 namespace uml 
 {
+	class Classifier;
 	class Signal;
 }
 
@@ -72,6 +73,7 @@ namespace fUML::Semantics::SimpleClassifiers
 			// Operations
 			//*********************************
 			virtual std::shared_ptr<fUML::Semantics::Values::Value> _copy() = 0;
+			virtual std::shared_ptr<Bag<uml::Classifier> > getTypes() const = 0;
 			virtual std::shared_ptr<fUML::Semantics::Values::Value> new_() = 0;
 
 			//*********************************

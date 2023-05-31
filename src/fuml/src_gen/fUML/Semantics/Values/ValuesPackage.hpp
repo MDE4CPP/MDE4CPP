@@ -219,9 +219,10 @@ namespace fUML::Semantics::Values
 			//Class and Feature IDs 
 			static const unsigned long VALUE_CLASS = 856918907;
 			static const unsigned int VALUE_CLASS_FEATURE_COUNT = 0;
-			static const unsigned int VALUE_CLASS_OPERATION_COUNT = 11;
+			static const unsigned int VALUE_CLASS_OPERATION_COUNT = 12;
 			
 			
+			static const unsigned int VALUE_OPERATION_ISINSTANCEOF_CLASSIFIER = 708485784;
 			static const unsigned int VALUE_OPERATION__COPY = 611324517;
 			static const unsigned int VALUE_OPERATION_CHECKALLPARENTS_CLASSIFIER_CLASSIFIER = 4163434821;
 			static const unsigned int VALUE_OPERATION_EQUALS_VALUE = 1172438202;
@@ -237,6 +238,7 @@ namespace fUML::Semantics::Values
 			
 			
 			
+			virtual std::shared_ptr<ecore::EOperation> getValue_Operation_isInstanceOf_Classifier() const = 0;
 			virtual std::shared_ptr<ecore::EOperation> getValue_Operation__copy() const = 0;
 			virtual std::shared_ptr<ecore::EOperation> getValue_Operation_checkAllParents_Classifier_Classifier() const = 0;
 			virtual std::shared_ptr<ecore::EOperation> getValue_Operation_equals_Value() const = 0;

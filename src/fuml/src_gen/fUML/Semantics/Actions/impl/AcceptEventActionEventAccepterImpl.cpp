@@ -36,6 +36,7 @@
 #include "fUML/Semantics/Actions/ActionsFactory.hpp"
 #include "fUML/Semantics/Actions/AcceptEventActionActivation.hpp"
 #include "fUML/Semantics/CommonBehavior/EventAccepter.hpp"
+#include "fUML/Semantics/CommonBehavior/EventOccurrence.hpp"
 //Factories and Package includes
 #include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/SemanticsPackage.hpp"
@@ -105,6 +106,37 @@ std::shared_ptr<ecore::EObject> AcceptEventActionEventAccepterImpl::copy() const
 //*********************************
 // Operations
 //*********************************
+void AcceptEventActionEventAccepterImpl::accept(std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccurrence> eventOccurence)
+{
+	//ADD_COUNT(__PRETTY_FUNCTION__)
+	//generated from body annotation
+	// Accept an event occurrence and forward it to the action activation.
+	DEBUG_MESSAGE(std::cout <<  std::string(__PRETTY_FUNCTION__)<< std::endl;)
+	std::shared_ptr<fUML::Semantics::Actions::AcceptEventActionActivation> actionActivation = getActionActivation();
+	if(actionActivation != nullptr)
+	{
+		DEBUG_MESSAGE(std::cout << "found ActionActivation" << std::endl; )
+		actionActivation->accept(eventOccurence);
+	}
+	//end of body
+}
+
+bool AcceptEventActionEventAccepterImpl::match(std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccurrence> eventOccurence)
+{
+	//ADD_COUNT(__PRETTY_FUNCTION__)
+	//generated from body annotation
+	// Return true if the given event occurrence matches a trigger of the accept event action of the action activation.
+	DEBUG_MESSAGE(std::cout <<  std::string(__PRETTY_FUNCTION__)<< std::endl;)
+	bool result = false;
+	std::shared_ptr<fUML::Semantics::Actions::AcceptEventActionActivation> actionActivation = getActionActivation();
+	if(actionActivation != nullptr)
+	{
+		DEBUG_MESSAGE(std::cout << "found ActionActivation." << std::endl; )
+		result = actionActivation->match(eventOccurence);
+	}
+	return result;
+	//end of body
+}
 
 //*********************************
 // Attribute Getters & Setters
@@ -283,6 +315,28 @@ Any AcceptEventActionEventAccepterImpl::eInvoke(int operationID, std::shared_ptr
  
   	switch(operationID)
 	{
+		// fUML::Semantics::Actions::AcceptEventActionEventAccepter::accept(fUML::Semantics::CommonBehavior::EventOccurrence): 1652417433
+		case ActionsPackage::ACCEPTEVENTACTIONEVENTACCEPTER_OPERATION_ACCEPT_EVENTOCCURRENCE:
+		{
+			//Retrieve input parameter 'eventOccurence'
+			//parameter 0
+			std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccurrence> incoming_param_eventOccurence;
+			std::list<Any>::const_iterator incoming_param_eventOccurence_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_eventOccurence = (*incoming_param_eventOccurence_arguments_citer)->get<std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccurrence> >();
+			this->accept(incoming_param_eventOccurence);
+			break;
+		}
+		// fUML::Semantics::Actions::AcceptEventActionEventAccepter::match(fUML::Semantics::CommonBehavior::EventOccurrence) : bool: 3640997648
+		case ActionsPackage::ACCEPTEVENTACTIONEVENTACCEPTER_OPERATION_MATCH_EVENTOCCURRENCE:
+		{
+			//Retrieve input parameter 'eventOccurence'
+			//parameter 0
+			std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccurrence> incoming_param_eventOccurence;
+			std::list<Any>::const_iterator incoming_param_eventOccurence_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_eventOccurence = (*incoming_param_eventOccurence_arguments_citer)->get<std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccurrence> >();
+			result = eAny(this->match(incoming_param_eventOccurence),0,false);
+			break;
+		}
 
 		default:
 		{

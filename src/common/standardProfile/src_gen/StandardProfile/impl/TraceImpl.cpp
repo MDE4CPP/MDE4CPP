@@ -268,3 +268,16 @@ void TraceImpl::setThisTracePtr(std::weak_ptr<Trace> thisTracePtr)
 	m_thisTracePtr = thisTracePtr;
 	setThisStereotypePtr(thisTracePtr);
 }
+
+
+//*********************************
+// ObjectActivation Forwarder Impl
+//*********************************
+// Getter for Active Class
+bool TraceImpl::GetIsActive() const
+{
+		return false;
+
+}
+
+

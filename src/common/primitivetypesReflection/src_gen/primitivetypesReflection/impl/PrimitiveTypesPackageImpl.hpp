@@ -74,6 +74,10 @@ namespace PrimitiveTypes
 			void createPackageStereotypes(std::shared_ptr<uml::Package> primitiveTypes, std::shared_ptr<uml::umlFactory> factory);
 			void createPackageValueSpecifications(std::shared_ptr<uml::Package> primitiveTypes, std::shared_ptr<uml::umlFactory> factory);
 
+			// Signal additions
+			void createPackageSignals(std::shared_ptr<uml::Package> primitiveTypes, std::shared_ptr<uml::umlFactory> factory);
+			void createPackageSignalEvents(std::shared_ptr<uml::Package> primitiveTypes, std::shared_ptr<uml::umlFactory> factory);
+
 			void initializePackageActivities();
 			void initializePackageClasses();
 			void initializePackageAssociations();
@@ -84,6 +88,10 @@ namespace PrimitiveTypes
 			void initializePackageNestedPackages();
 			void initializePackageStereotypes();
 			void initializePackageValueSpecifications();
+
+			// Signal additions
+			void initializePackageSignals();
+			void initializePackageSignalEvents();
 	};
 }
 #endif /* end of include guard: PRIMITIVETYPES_METAMODELPACKAGEIMPL_HPP */

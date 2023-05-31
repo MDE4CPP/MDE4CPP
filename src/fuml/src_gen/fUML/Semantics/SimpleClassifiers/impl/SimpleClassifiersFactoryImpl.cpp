@@ -20,7 +20,6 @@
 #include "fUML/Semantics/Activities/ActivitiesPackage.hpp"
 #include "fUML/Semantics/Activities/ObjectToken.hpp"
 #include "fUML/Semantics/CommonBehavior/CommonBehaviorPackage.hpp"
-#include "fUML/Semantics/CommonBehavior/ObjectActivation.hpp"
 #include "fUML/Semantics/CommonBehavior/ParameterValue.hpp"
 
 
@@ -254,12 +253,6 @@ std::shared_ptr<ecore::EObject> SimpleClassifiersFactoryImpl::create(const int m
 			{
 				switch(referenceID)
 				{
-					//SignalInstance has eventPool as a containment
-					case  fUML::Semantics::CommonBehavior::CommonBehaviorPackage::OBJECTACTIVATION_ATTRIBUTE_EVENTPOOL:	
-					{
-						std::shared_ptr<fUML::Semantics::CommonBehavior::ObjectActivation> castedContainer = std::dynamic_pointer_cast<fUML::Semantics::CommonBehavior::ObjectActivation> (container);;
-						return this->createSignalInstance_as_eventPool_in_ObjectActivation(castedContainer,metaElementID);
-					}
 					//SignalInstance has value as a containment
 					case  fUML::Semantics::Activities::ActivitiesPackage::OBJECTTOKEN_ATTRIBUTE_VALUE:	
 					{
@@ -636,19 +629,6 @@ std::shared_ptr<fUML::Semantics::SimpleClassifiers::SignalInstance> SimpleClassi
 	element->setMetaElementID(metaElementID);
 	element->setThisSignalInstancePtr(element);
 	return element;
-}
-std::shared_ptr<fUML::Semantics::SimpleClassifiers::SignalInstance> SimpleClassifiersFactoryImpl::createSignalInstance_as_eventPool_in_ObjectActivation(std::shared_ptr<fUML::Semantics::CommonBehavior::ObjectActivation> par_ObjectActivation, const int metaElementID) const
-{
-	std::shared_ptr<fUML::Semantics::SimpleClassifiers::SignalInstanceImpl> element(new fUML::Semantics::SimpleClassifiers::SignalInstanceImpl());
-	element->setMetaElementID(metaElementID);
-	if(nullptr != par_ObjectActivation)
-	{
-		par_ObjectActivation->getEventPool()->push_back(element);
-	}
-	
-	element->setThisSignalInstancePtr(element);
-	return element;
-	
 }
 std::shared_ptr<fUML::Semantics::SimpleClassifiers::SignalInstance> SimpleClassifiersFactoryImpl::createSignalInstance_as_value_in_ObjectToken(std::shared_ptr<fUML::Semantics::Activities::ObjectToken> par_ObjectToken, const int metaElementID) const
 {

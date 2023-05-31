@@ -59,8 +59,8 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "fUML/Semantics/Actions/ActionsFactory.hpp"
 #include "fUML/Semantics/Activities/ActivitiesFactory.hpp"
+#include "fUML/Semantics/Actions/ActionsFactory.hpp"
 #include "uml/umlFactory.hpp"
 #include "uml/Action.hpp"
 #include "fUML/Semantics/Activities/ActivityEdgeInstance.hpp"
@@ -406,6 +406,16 @@ std::shared_ptr<Bag<fUML::Semantics::Values::Value> > ActionActivationImpl::getT
     }
 
     return values;
+	//end of body
+}
+
+void ActionActivationImpl::initialize(std::shared_ptr<uml::ActivityNode> node,std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup> group)
+{
+	//ADD_COUNT(__PRETTY_FUNCTION__)
+	//generated from body annotation
+	// Initialize this action activation to be not firing.
+ActivityNodeActivationImpl::initialize(node, group);
+this->setFiring(false);
 	//end of body
 }
 
@@ -1247,6 +1257,22 @@ Any ActionActivationImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any
 			incoming_param_pin = (*incoming_param_pin_arguments_citer)->get<std::shared_ptr<uml::InputPin> >();
 			std::shared_ptr<Bag<fUML::Semantics::Values::Value> > resultList = this->getTokens(incoming_param_pin);
 			return eAnyBag(resultList,fUML::Semantics::Values::ValuesPackage::VALUE_CLASS);
+			break;
+		}
+		// fUML::Semantics::Actions::ActionActivation::initialize(uml::ActivityNode, fUML::Semantics::Activities::ActivityNodeActivationGroup): 3900248630
+		case ActionsPackage::ACTIONACTIVATION_OPERATION_INITIALIZE_ACTIVITYNODE_ACTIVITYNODEACTIVATIONGROUP:
+		{
+			//Retrieve input parameter 'node'
+			//parameter 0
+			std::shared_ptr<uml::ActivityNode> incoming_param_node;
+			std::list<Any>::const_iterator incoming_param_node_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_node = (*incoming_param_node_arguments_citer)->get<std::shared_ptr<uml::ActivityNode> >();
+			//Retrieve input parameter 'group'
+			//parameter 1
+			std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup> incoming_param_group;
+			std::list<Any>::const_iterator incoming_param_group_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_group = (*incoming_param_group_arguments_citer)->get<std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup> >();
+			this->initialize(incoming_param_node,incoming_param_group);
 			break;
 		}
 		// fUML::Semantics::Actions::ActionActivation::isFirng() : bool: 392760869

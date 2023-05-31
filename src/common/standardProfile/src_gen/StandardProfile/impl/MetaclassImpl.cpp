@@ -268,3 +268,16 @@ void MetaclassImpl::setThisMetaclassPtr(std::weak_ptr<Metaclass> thisMetaclassPt
 	m_thisMetaclassPtr = thisMetaclassPtr;
 	setThisStereotypePtr(thisMetaclassPtr);
 }
+
+
+//*********************************
+// ObjectActivation Forwarder Impl
+//*********************************
+// Getter for Active Class
+bool MetaclassImpl::GetIsActive() const
+{
+		return false;
+
+}
+
+

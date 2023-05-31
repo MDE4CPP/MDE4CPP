@@ -23,7 +23,7 @@ IF("$ENV{DEBUG_MESSAGE_ACTIVITY_DEBUGGER}" EQUAL "1")
 	SET(ENABLED_DEBUG_MESSAGE "${ENABLED_DEBUG_MESSAGE} -DACTIVITY_DEBUG_ON")
 ENDIF()
 
-SET(CMAKE_CXX_FLAGS "-Wall -Wno-overloaded-virtual -Wdeprecated-declarations -fmax-errors=5")
+SET(CMAKE_CXX_FLAGS "-Wall -Wno-narrowing -Wno-overloaded-virtual -Wdeprecated-declarations -fmax-errors=5")
 IF(APPLE)
   string(APPEND CMAKE_CXX_FLAGS " -Qunused-arguments")
 ENDIF(APPLE)

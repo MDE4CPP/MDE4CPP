@@ -36,8 +36,8 @@
 #include "fUML/Semantics/Values/Value.hpp"
 //Factories and Package includes
 #include "ocl/oclPackage.hpp"
-#include "ocl/Values/ValuesPackage.hpp"
 #include "fUML/Semantics/Values/ValuesPackage.hpp"
+#include "ocl/Values/ValuesPackage.hpp"
 
 using namespace ocl::Values;
 
@@ -231,7 +231,7 @@ void AnyValueImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoad
 		if ( iter != attr_list.end() )
 		{
 			// TODO this attribute has a non handle type
-			std::cout << "| ERROR    | " << __PRETTY_FUNCTION__ << " handle type of 'value'" << " org.eclipse.emf.ecore.impl.EDataTypeImpl@37b72ea (name: EJavaObject) (instanceClassName: java.lang.Object) (serializable: true)" << std::endl; 
+			std::cout << "| ERROR    | " << __PRETTY_FUNCTION__ << " handle type of 'value'" << " org.eclipse.emf.ecore.impl.EDataTypeImpl@50a3d0f6 (name: EJavaObject) (instanceClassName: java.lang.Object) (serializable: true)" << std::endl; 
 			Any value; 			this->setValue(value);
 		}
 	}

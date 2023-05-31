@@ -346,6 +346,10 @@ std::shared_ptr<ecore::EOperation> fUML::Semantics::SimpleClassifiers::SimpleCla
 {
 	return m_signalInstance_Operation__copy;
 }
+std::shared_ptr<ecore::EOperation> fUML::Semantics::SimpleClassifiers::SimpleClassifiersPackageImpl::getSignalInstance_Operation_getTypes() const
+{
+	return m_signalInstance_Operation_getTypes;
+}
 std::shared_ptr<ecore::EOperation> fUML::Semantics::SimpleClassifiers::SimpleClassifiersPackageImpl::getSignalInstance_Operation_new_() const
 {
 	return m_signalInstance_Operation_new_;
@@ -404,6 +408,14 @@ std::shared_ptr<ecore::EOperation> fUML::Semantics::SimpleClassifiers::SimpleCla
 {
 	return m_structuredValue_Operation_createFeatureValues;
 }
+std::shared_ptr<ecore::EOperation> fUML::Semantics::SimpleClassifiers::SimpleClassifiersPackageImpl::getStructuredValue_Operation_getMemberFeatures_Classifier() const
+{
+	return m_structuredValue_Operation_getMemberFeatures_Classifier;
+}
+std::shared_ptr<ecore::EOperation> fUML::Semantics::SimpleClassifiers::SimpleClassifiersPackageImpl::getStructuredValue_Operation_getStructuralFeatureForType_Classifier() const
+{
+	return m_structuredValue_Operation_getStructuralFeatureForType_Classifier;
+}
 std::shared_ptr<ecore::EOperation> fUML::Semantics::SimpleClassifiers::SimpleClassifiersPackageImpl::getStructuredValue_Operation_getValues_StructuralFeature_FeatureValue() const
 {
 	return m_structuredValue_Operation_getValues_StructuralFeature_FeatureValue;
@@ -419,6 +431,10 @@ std::shared_ptr<ecore::EOperation> fUML::Semantics::SimpleClassifiers::SimpleCla
 std::shared_ptr<ecore::EOperation> fUML::Semantics::SimpleClassifiers::SimpleClassifiersPackageImpl::getStructuredValue_Operation_retrieveFeatureValues() const
 {
 	return m_structuredValue_Operation_retrieveFeatureValues;
+}
+std::shared_ptr<ecore::EOperation> fUML::Semantics::SimpleClassifiers::SimpleClassifiersPackageImpl::getStructuredValue_Operation_retrieveStructuralFeatures() const
+{
+	return m_structuredValue_Operation_retrieveStructuralFeatures;
 }
 std::shared_ptr<ecore::EOperation> fUML::Semantics::SimpleClassifiers::SimpleClassifiersPackageImpl::getStructuredValue_Operation_setFeatureValue_StructuralFeature_EInt() const
 {

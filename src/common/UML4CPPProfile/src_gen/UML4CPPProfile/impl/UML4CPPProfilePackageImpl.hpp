@@ -147,6 +147,10 @@ namespace UML4CPPProfile
 			void createPackageStereotypes(std::shared_ptr<uml::Package> uML4CPPProfile, std::shared_ptr<uml::umlFactory> factory);
 			void createPackageValueSpecifications(std::shared_ptr<uml::Package> uML4CPPProfile, std::shared_ptr<uml::umlFactory> factory);
 
+			// Signal additions
+			void createPackageSignals(std::shared_ptr<uml::Package> uML4CPPProfile, std::shared_ptr<uml::umlFactory> factory);
+			void createPackageSignalEvents(std::shared_ptr<uml::Package> uML4CPPProfile, std::shared_ptr<uml::umlFactory> factory);
+
 			void initializePackageActivities();
 			void initializePackageClasses();
 			void initializePackageAssociations();
@@ -157,6 +161,10 @@ namespace UML4CPPProfile
 			void initializePackageNestedPackages();
 			void initializePackageStereotypes();
 			void initializePackageValueSpecifications();
+
+			// Signal additions
+			void initializePackageSignals();
+			void initializePackageSignalEvents();
 	};
 }
 #endif /* end of include guard: UML4CPPPROFILE_METAMODELPACKAGEIMPL_HPP */

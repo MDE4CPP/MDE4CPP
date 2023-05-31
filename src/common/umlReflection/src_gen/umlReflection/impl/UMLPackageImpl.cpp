@@ -43,6 +43,9 @@
 #include "ecore/EPackage.hpp"
 #include "ecore/EReference.hpp"
 
+// Hard include of Primitive Type to account for Signals setting up their Attributes
+#include "uml/PrimitiveType.hpp"
+
 using namespace UML;
 
 UMLPackageImpl::UMLPackageImpl()
@@ -102,6 +105,9 @@ void UMLPackageImpl::createPackageContents(std::shared_ptr<uml::Package> uML)
 	createPackagePrimitiveTypes(uML, factory);
 	createPackageEnumerationLiterals(uML, factory);
 	createPackageInterfaceRealizations(uML, factory);
+
+	createPackageSignals(uML, factory);
+	createPackageSignalEvents(uML, factory);
 }
 
 void UMLPackageImpl::createPackageActivities(std::shared_ptr<uml::Package> uML, std::shared_ptr<uml::umlFactory> factory)
@@ -10233,6 +10239,24 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 
 } 
 
+void UMLPackageImpl::createPackageSignals(std::shared_ptr<uml::Package> uML, std::shared_ptr<uml::umlFactory> factory)
+{
+	std::shared_ptr<uml::Constraint> con = nullptr;
+	std::shared_ptr<uml::OpaqueExpression> oe = nullptr;
+
+
+//-------------------------------------------
+//Opaque Behaviors
+
+}
+
+void UMLPackageImpl::createPackageSignalEvents(std::shared_ptr<uml::Package> uML, std::shared_ptr<uml::umlFactory> factory)
+{
+	std::shared_ptr<uml::Constraint> con = nullptr;
+	std::shared_ptr<uml::OpaqueExpression> oe = nullptr;
+
+}
+
 void UMLPackageImpl::createPackageAssociations(std::shared_ptr<uml::Package> uML, std::shared_ptr<uml::umlFactory> factory)
 {
 	//A_action_actionExecutionSpecification
@@ -16631,6 +16655,10 @@ void UMLPackageImpl::initializePackageContents(std::shared_ptr<uml::Package> uML
 	initializePackageNestedPackages();
 	initializePackageStereotypes();
 	initializePackageValueSpecifications();
+
+	initializePackageSignals();
+	initializePackageSignalEvents();
+
 	
 }
 
@@ -33343,6 +33371,27 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_WriteVariableAction_value->setAssociation(get_UML_A_value_writeVariableAction());
 	
 	
+
+
+//-------------------------------------------
+//Opaque Behaviors
+
+}
+
+
+void UMLPackageImpl::initializePackageSignals()
+{
+	std::shared_ptr<uml::Generalization> gen = nullptr;
+
+
+//-------------------------------------------
+//Opaque Behaviors
+
+}
+
+void UMLPackageImpl::initializePackageSignalEvents()
+{
+	std::shared_ptr<uml::Generalization> gen = nullptr;
 
 
 //-------------------------------------------

@@ -268,3 +268,16 @@ void ProcessImpl::setThisProcessPtr(std::weak_ptr<Process> thisProcessPtr)
 	m_thisProcessPtr = thisProcessPtr;
 	setThisStereotypePtr(thisProcessPtr);
 }
+
+
+//*********************************
+// ObjectActivation Forwarder Impl
+//*********************************
+// Getter for Active Class
+bool ProcessImpl::GetIsActive() const
+{
+		return false;
+
+}
+
+

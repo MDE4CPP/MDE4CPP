@@ -33,7 +33,9 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
+#include "fUML/Semantics/CommonBehavior/EventOccurrence.hpp"
 #include "fUML/Semantics/CommonBehavior/GetNextEventStrategy.hpp"
+#include "fUML/Semantics/CommonBehavior/ObjectActivation.hpp"
 //Factories and Package includes
 #include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/SemanticsPackage.hpp"
@@ -101,6 +103,15 @@ std::shared_ptr<ecore::EObject> FIFOGetNextEventStrategyImpl::copy() const
 //*********************************
 // Operations
 //*********************************
+std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccurrence> FIFOGetNextEventStrategyImpl::retrieveNextEvent(std::shared_ptr<fUML::Semantics::CommonBehavior::ObjectActivation> objectActivation)
+{
+	//ADD_COUNT(__PRETTY_FUNCTION__)
+	//generated from body annotation
+	std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccurrence> eventOccurrence = objectActivation->getEventPool()->at(0);
+	objectActivation->getEventPool()->erase(0);
+	return eventOccurrence;
+	//end of body
+}
 
 //*********************************
 // Attribute Getters & Setters
@@ -224,6 +235,17 @@ Any FIFOGetNextEventStrategyImpl::eInvoke(int operationID, std::shared_ptr<std::
  
   	switch(operationID)
 	{
+		// fUML::Semantics::CommonBehavior::FIFOGetNextEventStrategy::retrieveNextEvent(fUML::Semantics::CommonBehavior::ObjectActivation) : fUML::Semantics::CommonBehavior::EventOccurrence: 2695220542
+		case CommonBehaviorPackage::FIFOGETNEXTEVENTSTRATEGY_OPERATION_RETRIEVENEXTEVENT_OBJECTACTIVATION:
+		{
+			//Retrieve input parameter 'objectActivation'
+			//parameter 0
+			std::shared_ptr<fUML::Semantics::CommonBehavior::ObjectActivation> incoming_param_objectActivation;
+			std::list<Any>::const_iterator incoming_param_objectActivation_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_objectActivation = (*incoming_param_objectActivation_arguments_citer)->get<std::shared_ptr<fUML::Semantics::CommonBehavior::ObjectActivation> >();
+			result = eAnyObject(this->retrieveNextEvent(incoming_param_objectActivation), fUML::Semantics::CommonBehavior::CommonBehaviorPackage::EVENTOCCURRENCE_CLASS);
+			break;
+		}
 
 		default:
 		{

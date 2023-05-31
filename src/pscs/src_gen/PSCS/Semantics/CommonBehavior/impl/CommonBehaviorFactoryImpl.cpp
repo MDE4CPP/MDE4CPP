@@ -13,6 +13,7 @@
 #include "fUML/Semantics/Activities/DecisionNodeActivation.hpp"
 #include "fUML/Semantics/Activities/ObjectToken.hpp"
 #include "fUML/Semantics/CommonBehavior/CommonBehaviorPackage.hpp"
+#include "fUML/Semantics/CommonBehavior/ObjectActivation.hpp"
 #include "fUML/Semantics/CommonBehavior/ParameterValue.hpp"
 #include "fUML/Semantics/Loci/LociPackage.hpp"
 #include "fUML/Semantics/Loci/Locus.hpp"
@@ -103,8 +104,16 @@ std::shared_ptr<ecore::EObject> CommonBehaviorFactoryImpl::create(const int meta
 		}
 		case CommonBehaviorPackage::CS_EVENTOCCURRENCE_CLASS:
 		{
+			if (nullptr == container)
+			{
 				return this->createCS_EventOccurrence(metaElementID);
-			
+			}
+			else
+			{
+				std::shared_ptr<fUML::Semantics::CommonBehavior::ObjectActivation> castedContainer = std::dynamic_pointer_cast<fUML::Semantics::CommonBehavior::ObjectActivation>(container);
+				assert(castedContainer);
+				return std::shared_ptr<PSCS::Semantics::CommonBehavior::CS_EventOccurrence>(this->createCS_EventOccurrence_as_eventPool_in_ObjectActivation(castedContainer,metaElementID));
+			}
 			break;
 		}
 	default:
@@ -226,5 +235,18 @@ std::shared_ptr<PSCS::Semantics::CommonBehavior::CS_EventOccurrence> CommonBehav
 	element->setMetaElementID(metaElementID);
 	element->setThisCS_EventOccurrencePtr(element);
 	return element;
+}
+std::shared_ptr<PSCS::Semantics::CommonBehavior::CS_EventOccurrence> CommonBehaviorFactoryImpl::createCS_EventOccurrence_as_eventPool_in_ObjectActivation(std::shared_ptr<fUML::Semantics::CommonBehavior::ObjectActivation> par_ObjectActivation, const int metaElementID) const
+{
+	std::shared_ptr<PSCS::Semantics::CommonBehavior::CS_EventOccurrenceImpl> element(new PSCS::Semantics::CommonBehavior::CS_EventOccurrenceImpl());
+	element->setMetaElementID(metaElementID);
+	if(nullptr != par_ObjectActivation)
+	{
+		par_ObjectActivation->getEventPool()->push_back(element);
+	}
+	
+	element->setThisCS_EventOccurrencePtr(element);
+	return element;
+	
 }
 

@@ -268,3 +268,16 @@ void DestroyImpl::setThisDestroyPtr(std::weak_ptr<Destroy> thisDestroyPtr)
 	m_thisDestroyPtr = thisDestroyPtr;
 	setThisStereotypePtr(thisDestroyPtr);
 }
+
+
+//*********************************
+// ObjectActivation Forwarder Impl
+//*********************************
+// Getter for Active Class
+bool DestroyImpl::GetIsActive() const
+{
+		return false;
+
+}
+
+

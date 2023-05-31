@@ -268,3 +268,16 @@ void ResponsibilityImpl::setThisResponsibilityPtr(std::weak_ptr<Responsibility> 
 	m_thisResponsibilityPtr = thisResponsibilityPtr;
 	setThisStereotypePtr(thisResponsibilityPtr);
 }
+
+
+//*********************************
+// ObjectActivation Forwarder Impl
+//*********************************
+// Getter for Active Class
+bool ResponsibilityImpl::GetIsActive() const
+{
+		return false;
+
+}
+
+

@@ -35,6 +35,7 @@ namespace fUML::Semantics::Activities
 }
 namespace fUML::Semantics::CommonBehavior
 {
+	class ObjectActivation;
 	class ParameterValue;
 }
 namespace fUML::Semantics::Loci

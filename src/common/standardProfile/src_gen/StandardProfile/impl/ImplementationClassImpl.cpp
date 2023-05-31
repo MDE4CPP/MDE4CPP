@@ -268,3 +268,16 @@ void ImplementationClassImpl::setThisImplementationClassPtr(std::weak_ptr<Implem
 	m_thisImplementationClassPtr = thisImplementationClassPtr;
 	setThisStereotypePtr(thisImplementationClassPtr);
 }
+
+
+//*********************************
+// ObjectActivation Forwarder Impl
+//*********************************
+// Getter for Active Class
+bool ImplementationClassImpl::GetIsActive() const
+{
+		return false;
+
+}
+
+

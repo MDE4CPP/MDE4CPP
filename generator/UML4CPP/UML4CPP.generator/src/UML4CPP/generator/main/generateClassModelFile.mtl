@@ -36,6 +36,7 @@
 [file (aPackage.generateNamespacePath(false).concat('/').concat(aClass.name.toUpperFirst()).concat('.hpp'), false, 'UTF-8')]
 [startGuard(aClass)/]
 
+
 [generateAbstractDataTypesForwardDeclaration()/]
 
 [if (not aClass.getRootPackage().allOwnedElements()->filter(Usage)->isEmpty())]
@@ -63,7 +64,7 @@
 [/for]
 [/if]
 
-// base class includes
+// base class includes 
 [if (aClass.superClass->isEmpty())]
 #include "uml/[aClass.getGeneralSuperClassName()/].hpp"
 [else]
@@ -94,6 +95,11 @@
 #include "[elements.getNearestPackage().generateNamespacePath(false)/]/[elements.name.toUpperFirst().concat('.hpp')/]"[/for]
 [/if]
 
+
+
+// include object activation
+#include "fUML/Semantics/CommonBehavior/ObjectActivation.hpp"
+
 [if (not aClass.getNearestPackage().isIgnoreNamespace())]
 namespace [aPackage.generateNamespace(false)/]
 {
@@ -120,6 +126,16 @@ virtual public [sClass.getClassifierName(aClass, false, sClass.getNearestPackage
 			// Operations
 			//*********************************
 			[aClass.ownedOperation->sortedBy(name).generateOperationDecl(false)/]
+
+			//*********************************
+			// ObjectActivation Forwarder SetGet
+			//*********************************
+			[if (aClass.isActive)]
+				virtual std::shared_ptr<fUML::Semantics::CommonBehavior::ObjectActivation> getObjectActivation() const = 0;
+				virtual void setObjectActivation(std::shared_ptr<fUML::Semantics::CommonBehavior::ObjectActivation>) = 0;
+			[/if]
+			// Getter for Active Class
+			virtual bool GetIsActive() const = 0;
 			
 		protected:
 			//*********************************
@@ -127,6 +143,8 @@ virtual public [sClass.getClassifierName(aClass, false, sClass.getNearestPackage
 			//*********************************
 			[aClass.ownedAttribute->sortedBy(name).generateAttributeProtectedMember()/]
 			[aClass.getImplicitCompositeOwners()->sortedBy(name).generateCompositeOwnerAttributeProtectedMember() /]
+
+			
 
 		public:
 			//*********************************

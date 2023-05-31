@@ -46,6 +46,7 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
+#include "uml/Classifier.hpp"
 #include "fUML/Semantics/SimpleClassifiers/FeatureValue.hpp"
 #include "uml/StructuralFeature.hpp"
 #include "fUML/Semantics/Values/Value.hpp"
@@ -147,6 +148,69 @@ void StructuredValueImpl::createFeatureValues()
 	//end of body
 }
 
+std::shared_ptr<Bag<uml::StructuralFeature> > StructuredValueImpl::getMemberFeatures(std::shared_ptr<uml::Classifier> type)
+{
+	//ADD_COUNT(__PRETTY_FUNCTION__)
+	//generated from body annotation
+	// Return the features for this structured value that are members of the
+// given type. (That is, they are owned or inherited by the given type,
+// excluding private features of supertypes that are not inherited.)
+std::shared_ptr<Bag<uml::StructuralFeature> > features = retrieveStructuralFeatures();
+std::shared_ptr<Bag<uml::StructuralFeature> > memberFeatures = std::make_shared<Bag<uml::StructuralFeature> >();
+if (type != nullptr) {
+ std::shared_ptr<Bag<uml::NamedElement> > members = type->getMember();
+ for (int i = 0; i < features->size(); i++) {
+std::shared_ptr<uml::StructuralFeature> feature = features->at(i);
+ bool isMember = false;
+ int k = 1;
+ while (( k <= members->size() ) && !isMember) {
+ std::shared_ptr<uml::NamedElement> member = members->at(k-1);
+ isMember = (feature == member);
+ k = k + 1;
+ }
+ if (isMember) {
+ memberFeatures->add(feature);
+ }
+ }
+}
+return memberFeatures;
+
+
+	//end of body
+}
+
+std::shared_ptr<Bag<uml::StructuralFeature> > StructuredValueImpl::getStructuralFeatureForType(std::shared_ptr<uml::Classifier> type)
+{
+	//ADD_COUNT(__PRETTY_FUNCTION__)
+	//generated from body annotation
+	// Get all structural features of the given type and all of its
+// supertypes (including private features that are not inherited).
+std::shared_ptr<Bag<uml::StructuralFeature>> features = std::make_shared<Bag<uml::StructuralFeature>>();
+// Get feature values for the owned structural features of the given type.
+std::shared_ptr<Bag<uml::NamedElement>> ownedMembers = type->getOwnedMember();
+for (int j = 0; j < ownedMembers->size(); j++) {
+ std::shared_ptr<uml::NamedElement> ownedMember = ownedMembers->at(j);
+std::shared_ptr<uml::StructuralFeature> structuralMember = std::dynamic_pointer_cast<uml::StructuralFeature>(ownedMember); 
+if (structuralMember) {
+ features->add(structuralMember);
+ }
+}
+// Add features for the structural features of the supertypes
+// of the given type. (Note that the features for supertypes
+// always come after the owned features.)
+std::shared_ptr<Bag<uml::Classifier>> supertypes = type->getGenerals();
+for (int i = 0; i < supertypes->size(); i++) {
+ std::shared_ptr<uml::Classifier> supertype = supertypes->at(i);
+ std::shared_ptr<Bag<uml::StructuralFeature>> supertypeFeatures = getStructuralFeatureForType(supertype);
+ for (int j = 0; j < supertypeFeatures->size(); j++) {
+ std::shared_ptr<uml::StructuralFeature> supertypeFeature = supertypeFeatures->at(j);
+ features->add(supertypeFeature);
+ }
+}
+return features;
+	//end of body
+}
+
 std::shared_ptr<Bag<fUML::Semantics::Values::Value> > StructuredValueImpl::getValues(std::shared_ptr<uml::StructuralFeature> feature,std::shared_ptr<Bag<fUML::Semantics::SimpleClassifiers::FeatureValue>> featureValues)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
@@ -165,6 +229,29 @@ std::shared_ptr<fUML::Semantics::SimpleClassifiers::FeatureValue> StructuredValu
 std::shared_ptr<Bag<fUML::Semantics::SimpleClassifiers::FeatureValue> > StructuredValueImpl::retrieveFeatureValues()
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
+}
+
+std::shared_ptr<Bag<uml::StructuralFeature> > StructuredValueImpl::retrieveStructuralFeatures()
+{
+	//ADD_COUNT(__PRETTY_FUNCTION__)
+	//generated from body annotation
+	// Get all structural features of the types of this structured
+// value and all of their supertypes (including private features
+// that are not inherited).
+std::shared_ptr<Bag<uml::StructuralFeature>> features = std::make_shared<Bag<uml::StructuralFeature>>();
+std::shared_ptr<Bag<uml::Classifier> > types = getTypes();
+for (int i = 0; i < types->size(); i++)
+ {
+ std::shared_ptr<uml::Classifier> type = types->at(i);
+ std::shared_ptr<Bag<uml::StructuralFeature>> typeFeatures = getStructuralFeatureForType(type);
+ for (int j = 0; j < typeFeatures->size(); j++) 
+{
+ std::shared_ptr<uml::StructuralFeature> supertypeFeature = typeFeatures->at(j);
+ features->add( supertypeFeature );
+ }
+}
+return features;
+	//end of body
 }
 
 void StructuredValueImpl::setFeatureValue(std::shared_ptr<uml::StructuralFeature> feature,std::shared_ptr<Bag<fUML::Semantics::Values::Value>> values,int position)
@@ -364,6 +451,30 @@ Any StructuredValueImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>
 			this->createFeatureValues();
 			break;
 		}
+		// fUML::Semantics::SimpleClassifiers::StructuredValue::getMemberFeatures(uml::Classifier) : uml::StructuralFeature[*]: 1309752345
+		case SimpleClassifiersPackage::STRUCTUREDVALUE_OPERATION_GETMEMBERFEATURES_CLASSIFIER:
+		{
+			//Retrieve input parameter 'type'
+			//parameter 0
+			std::shared_ptr<uml::Classifier> incoming_param_type;
+			std::list<Any>::const_iterator incoming_param_type_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_type = (*incoming_param_type_arguments_citer)->get<std::shared_ptr<uml::Classifier> >();
+			std::shared_ptr<Bag<uml::StructuralFeature> > resultList = this->getMemberFeatures(incoming_param_type);
+			return eAnyBag(resultList,uml::umlPackage::STRUCTURALFEATURE_CLASS);
+			break;
+		}
+		// fUML::Semantics::SimpleClassifiers::StructuredValue::getStructuralFeatureForType(uml::Classifier) : uml::StructuralFeature[*]: 4241902516
+		case SimpleClassifiersPackage::STRUCTUREDVALUE_OPERATION_GETSTRUCTURALFEATUREFORTYPE_CLASSIFIER:
+		{
+			//Retrieve input parameter 'type'
+			//parameter 0
+			std::shared_ptr<uml::Classifier> incoming_param_type;
+			std::list<Any>::const_iterator incoming_param_type_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_type = (*incoming_param_type_arguments_citer)->get<std::shared_ptr<uml::Classifier> >();
+			std::shared_ptr<Bag<uml::StructuralFeature> > resultList = this->getStructuralFeatureForType(incoming_param_type);
+			return eAnyBag(resultList,uml::umlPackage::STRUCTURALFEATURE_CLASS);
+			break;
+		}
 		// fUML::Semantics::SimpleClassifiers::StructuredValue::getValues(uml::StructuralFeature, fUML::Semantics::SimpleClassifiers::FeatureValue[*]) : fUML::Semantics::Values::Value[*]: 3849835591
 		case SimpleClassifiersPackage::STRUCTUREDVALUE_OPERATION_GETVALUES_STRUCTURALFEATURE_FEATUREVALUE:
 		{
@@ -413,6 +524,13 @@ Any StructuredValueImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>
 		{
 			std::shared_ptr<Bag<fUML::Semantics::SimpleClassifiers::FeatureValue> > resultList = this->retrieveFeatureValues();
 			return eAnyBag(resultList,fUML::Semantics::SimpleClassifiers::SimpleClassifiersPackage::FEATUREVALUE_CLASS);
+			break;
+		}
+		// fUML::Semantics::SimpleClassifiers::StructuredValue::retrieveStructuralFeatures() : uml::StructuralFeature[*]: 3859098145
+		case SimpleClassifiersPackage::STRUCTUREDVALUE_OPERATION_RETRIEVESTRUCTURALFEATURES:
+		{
+			std::shared_ptr<Bag<uml::StructuralFeature> > resultList = this->retrieveStructuralFeatures();
+			return eAnyBag(resultList,uml::umlPackage::STRUCTURALFEATURE_CLASS);
 			break;
 		}
 		// fUML::Semantics::SimpleClassifiers::StructuredValue::setFeatureValue(uml::StructuralFeature, fUML::Semantics::Values::Value[*], int): 3826465969

@@ -49,6 +49,9 @@
 #include "uml/impl/[aClass.getGeneralSuperClassName()/]Impl.hpp"
 [/if]
 
+// include object activation
+#include "fUML/Semantics/CommonBehavior/ObjectActivation.hpp"
+
 class AnyObject;
 typedef std::shared_ptr<AnyObject> Any;
 
@@ -123,10 +126,29 @@ virtual public [sClass.getClassifierName(aClass, false, sClass.getNearestPackage
 			//*********************************
 			[aClass.generateUnionGetterDeclaretaion(true)/]
 
+			
+			//*********************************
+			// ObjectActivation Forwarder SetGet
+			//*********************************
+			[if (aClass.isActive)]			
+				virtual std::shared_ptr<fUML::Semantics::CommonBehavior::ObjectActivation> getObjectActivation() const;
+				virtual void setObjectActivation(std::shared_ptr<fUML::Semantics::CommonBehavior::ObjectActivation>);
+			[/if]
+			// Getter for Active Class
+			virtual bool GetIsActive() const;
+
 		protected:
 			virtual std::shared_ptr<uml::Class> getMetaClass() const;
 			virtual void instantiate();
 			virtual void destroy();
+
+
+			//*********************************
+			// ObjectActivation Forwarder
+			//*********************************
+			[if (aClass.isActive)]
+				std::shared_ptr<fUML::Semantics::CommonBehavior::ObjectActivation> m_objectActivation;
+			[/if]
 
 		public:
 			//*********************************

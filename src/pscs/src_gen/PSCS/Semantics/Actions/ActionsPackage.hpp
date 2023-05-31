@@ -14,14 +14,14 @@
 
 namespace ecore 
 {
-	class EParameter;
-	class EOperation;
-	class EDataType;
-	class EAnnotation;
-	class EClass;
-	class EReference;
 	class EStringToStringMapEntry;
+	class EAnnotation;
+	class EReference;
 	class EGenericType;
+	class EOperation;
+	class EClass;
+	class EParameter;
+	class EDataType;
 }
 
 namespace PSCS::Semantics::Actions 
@@ -67,7 +67,7 @@ namespace PSCS::Semantics::Actions
 			//Class and Feature IDs 
 			static const unsigned long CS_ACCEPTCALLACTIONACTIVATION_CLASS = 465654510;
 			static const unsigned int CS_ACCEPTCALLACTIONACTIVATION_CLASS_FEATURE_COUNT = 13;
-			static const unsigned int CS_ACCEPTCALLACTIONACTIVATION_CLASS_OPERATION_COUNT = 57;
+			static const unsigned int CS_ACCEPTCALLACTIONACTIVATION_CLASS_OPERATION_COUNT = 59;
 			
 			
 			static const unsigned int CS_ACCEPTCALLACTIONACTIVATION_OPERATION_ACCEPT_EVENTOCCURRENCE = 2621330370;
@@ -86,7 +86,7 @@ namespace PSCS::Semantics::Actions
 			//Class and Feature IDs 
 			static const unsigned long CS_ACCEPTEVENTACTIONACTIVATION_CLASS = 967219298;
 			static const unsigned int CS_ACCEPTEVENTACTIONACTIVATION_CLASS_FEATURE_COUNT = 13;
-			static const unsigned int CS_ACCEPTEVENTACTIONACTIVATION_CLASS_OPERATION_COUNT = 56;
+			static const unsigned int CS_ACCEPTEVENTACTIONACTIVATION_CLASS_OPERATION_COUNT = 58;
 			
 			
 			static const unsigned int CS_ACCEPTEVENTACTIONACTIVATION_OPERATION_ACCEPT_EVENTOCCURRENCE = 1744804804;
@@ -105,7 +105,7 @@ namespace PSCS::Semantics::Actions
 			//Class and Feature IDs 
 			static const unsigned long CS_ADDSTRUCTURALFEATUREVALUEACTIONACTIVATION_CLASS = 666852493;
 			static const unsigned int CS_ADDSTRUCTURALFEATUREVALUEACTIONACTIVATION_CLASS_FEATURE_COUNT = 12;
-			static const unsigned int CS_ADDSTRUCTURALFEATUREVALUEACTIONACTIVATION_CLASS_OPERATION_COUNT = 55;
+			static const unsigned int CS_ADDSTRUCTURALFEATUREVALUEACTIONACTIVATION_CLASS_OPERATION_COUNT = 57;
 			
 			
 			static const unsigned int CS_ADDSTRUCTURALFEATUREVALUEACTIONACTIVATION_OPERATION_DOACTION = 2459034463;
@@ -126,7 +126,7 @@ namespace PSCS::Semantics::Actions
 			//Class and Feature IDs 
 			static const unsigned long CS_CALLOPERATIONACTIONACTIVATION_CLASS = 359462383;
 			static const unsigned int CS_CALLOPERATIONACTIONACTIVATION_CLASS_FEATURE_COUNT = 14;
-			static const unsigned int CS_CALLOPERATIONACTIONACTIVATION_CLASS_OPERATION_COUNT = 58;
+			static const unsigned int CS_CALLOPERATIONACTIONACTIVATION_CLASS_OPERATION_COUNT = 60;
 			
 			
 			static const unsigned int CS_CALLOPERATIONACTIONACTIVATION_OPERATION__ISCREATE_OPERATION = 1345774800;
@@ -155,7 +155,7 @@ namespace PSCS::Semantics::Actions
 			//Class and Feature IDs 
 			static const unsigned long CS_CLEARSTRUCTURALFEATUREACTIONACTIVATION_CLASS = 116608301;
 			static const unsigned int CS_CLEARSTRUCTURALFEATUREACTIONACTIVATION_CLASS_FEATURE_COUNT = 11;
-			static const unsigned int CS_CLEARSTRUCTURALFEATUREACTIONACTIVATION_CLASS_OPERATION_COUNT = 55;
+			static const unsigned int CS_CLEARSTRUCTURALFEATUREACTIONACTIVATION_CLASS_OPERATION_COUNT = 57;
 			
 			
 			static const unsigned int CS_CLEARSTRUCTURALFEATUREACTIONACTIVATION_OPERATION_DOACTION = 1473569464;
@@ -199,7 +199,7 @@ namespace PSCS::Semantics::Actions
 			//Class and Feature IDs 
 			static const unsigned long CS_CREATELINKACTIONACTIVATION_CLASS = 606847404;
 			static const unsigned int CS_CREATELINKACTIONACTIVATION_CLASS_FEATURE_COUNT = 11;
-			static const unsigned int CS_CREATELINKACTIONACTIVATION_CLASS_OPERATION_COUNT = 51;
+			static const unsigned int CS_CREATELINKACTIONACTIVATION_CLASS_OPERATION_COUNT = 53;
 			
 			
 			static const unsigned int CS_CREATELINKACTIONACTIVATION_OPERATION_DOACTION = 3584940798;
@@ -218,7 +218,7 @@ namespace PSCS::Semantics::Actions
 			//Class and Feature IDs 
 			static const unsigned long CS_CREATEOBJECTACTIONACTIVATION_CLASS = 1438312354;
 			static const unsigned int CS_CREATEOBJECTACTIONACTIVATION_CLASS_FEATURE_COUNT = 12;
-			static const unsigned int CS_CREATEOBJECTACTIONACTIVATION_CLASS_OPERATION_COUNT = 49;
+			static const unsigned int CS_CREATEOBJECTACTIONACTIVATION_CLASS_OPERATION_COUNT = 51;
 			
 			
 			static const unsigned int CS_CREATEOBJECTACTIONACTIVATION_OPERATION_DOACTION = 1795145183;
@@ -288,7 +288,7 @@ namespace PSCS::Semantics::Actions
 			//Class and Feature IDs 
 			static const unsigned long CS_READEXTENTACTIONACTIVATION_CLASS = 1846972855;
 			static const unsigned int CS_READEXTENTACTIONACTIVATION_CLASS_FEATURE_COUNT = 11;
-			static const unsigned int CS_READEXTENTACTIONACTIVATION_CLASS_OPERATION_COUNT = 48;
+			static const unsigned int CS_READEXTENTACTIONACTIVATION_CLASS_OPERATION_COUNT = 50;
 			
 			
 			static const unsigned int CS_READEXTENTACTIONACTIVATION_OPERATION_DOACTION = 212290264;
@@ -307,7 +307,7 @@ namespace PSCS::Semantics::Actions
 			//Class and Feature IDs 
 			static const unsigned long CS_READSELFACTIONACTIVATION_CLASS = 1154790487;
 			static const unsigned int CS_READSELFACTIONACTIVATION_CLASS_FEATURE_COUNT = 12;
-			static const unsigned int CS_READSELFACTIONACTIVATION_CLASS_OPERATION_COUNT = 49;
+			static const unsigned int CS_READSELFACTIONACTIVATION_CLASS_OPERATION_COUNT = 51;
 			
 			
 			static const unsigned int CS_READSELFACTIONACTIVATION_OPERATION_DOACTION = 1702243650;
@@ -326,7 +326,7 @@ namespace PSCS::Semantics::Actions
 			//Class and Feature IDs 
 			static const unsigned long CS_REMOVESTRUCTURALFEATUREVALUEACTIONACTIVATION_CLASS = 1505686076;
 			static const unsigned int CS_REMOVESTRUCTURALFEATUREVALUEACTIONACTIVATION_CLASS_FEATURE_COUNT = 12;
-			static const unsigned int CS_REMOVESTRUCTURALFEATUREVALUEACTIONACTIVATION_CLASS_OPERATION_COUNT = 56;
+			static const unsigned int CS_REMOVESTRUCTURALFEATUREVALUEACTIONACTIVATION_CLASS_OPERATION_COUNT = 58;
 			
 			
 			static const unsigned int CS_REMOVESTRUCTURALFEATUREVALUEACTIONACTIVATION_OPERATION_DOACTION = 1253243884;
@@ -349,7 +349,7 @@ namespace PSCS::Semantics::Actions
 			//Class and Feature IDs 
 			static const unsigned long CS_SENDSIGNALACTIONACTIVATION_CLASS = 263661846;
 			static const unsigned int CS_SENDSIGNALACTIONACTIVATION_CLASS_FEATURE_COUNT = 11;
-			static const unsigned int CS_SENDSIGNALACTIONACTIVATION_CLASS_OPERATION_COUNT = 49;
+			static const unsigned int CS_SENDSIGNALACTIONACTIVATION_CLASS_OPERATION_COUNT = 51;
 			
 			
 			static const unsigned int CS_SENDSIGNALACTIONACTIVATION_OPERATION_DOACTION = 796983372;

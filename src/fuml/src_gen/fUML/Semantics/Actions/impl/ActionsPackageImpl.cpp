@@ -147,6 +147,14 @@ std::shared_ptr<ecore::EReference> fUML::Semantics::Actions::ActionsPackageImpl:
 	return m_acceptEventActionEventAccepter_Attribute_actionActivation;
 }
 
+std::shared_ptr<ecore::EOperation> fUML::Semantics::Actions::ActionsPackageImpl::getAcceptEventActionEventAccepter_Operation_accept_EventOccurrence() const
+{
+	return m_acceptEventActionEventAccepter_Operation_accept_EventOccurrence;
+}
+std::shared_ptr<ecore::EOperation> fUML::Semantics::Actions::ActionsPackageImpl::getAcceptEventActionEventAccepter_Operation_match_EventOccurrence() const
+{
+	return m_acceptEventActionEventAccepter_Operation_match_EventOccurrence;
+}
 
 // End Class AcceptEventActionEventAccepter
 
@@ -205,6 +213,10 @@ std::shared_ptr<ecore::EOperation> fUML::Semantics::Actions::ActionsPackageImpl:
 std::shared_ptr<ecore::EOperation> fUML::Semantics::Actions::ActionsPackageImpl::getActionActivation_Operation_getTokens_InputPin() const
 {
 	return m_actionActivation_Operation_getTokens_InputPin;
+}
+std::shared_ptr<ecore::EOperation> fUML::Semantics::Actions::ActionsPackageImpl::getActionActivation_Operation_initialize_ActivityNode_ActivityNodeActivationGroup() const
+{
+	return m_actionActivation_Operation_initialize_ActivityNode_ActivityNodeActivationGroup;
 }
 std::shared_ptr<ecore::EOperation> fUML::Semantics::Actions::ActionsPackageImpl::getActionActivation_Operation_isFirng() const
 {

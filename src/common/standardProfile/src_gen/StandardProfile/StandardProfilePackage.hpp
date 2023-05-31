@@ -319,6 +319,12 @@ namespace StandardProfile
 				static const unsigned int UTILITY_CLASS_OPERATION_COUNT = 0;
 			
 			
+			// Static IDs for Signals
+			
+			
+			// Static IDs for SignalEvents
+			
+			
 	};
 }
 #endif /* end of include guard: STANDARDPROFILE_METAMODELPACKAGE_HPP */

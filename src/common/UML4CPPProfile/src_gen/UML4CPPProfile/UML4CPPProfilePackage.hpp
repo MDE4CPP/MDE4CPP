@@ -124,6 +124,12 @@ namespace UML4CPPProfile
 				static const unsigned int UML4CPPPACKAGE_CLASS_OPERATION_COUNT = 0;
 			
 			
+			// Static IDs for Signals
+			
+			
+			// Static IDs for SignalEvents
+			
+			
 	};
 }
 #endif /* end of include guard: UML4CPPPROFILE_METAMODELPACKAGE_HPP */

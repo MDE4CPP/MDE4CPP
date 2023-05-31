@@ -17,7 +17,7 @@
 #include <cassert>
 #include <iostream>
 #include <sstream>
-#include <stdexcept>
+
 #include "abstractDataTypes/Subset.hpp"
 
 
@@ -29,13 +29,22 @@
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
+//Includes from codegen annotation
+#include "uml/AcceptEventAction.hpp"
+#include "fUML/Semantics/SimpleClassifiers/SignalInstance.hpp"
+#include "fUML/Semantics/CommonBehavior/SignalEventOccurrence.hpp"
+#include "uml/Trigger.hpp"
+#include "fUML/Semantics/CommonBehavior/ParameterValue.hpp"
+#include "fUML/Semantics/StructuredClassifiers/Object.hpp"
+
+#include "fUML/Semantics/Actions/AcceptEventActionEventAccepter.hpp"
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "fUML/Semantics/Actions/ActionsFactory.hpp"
 #include "fUML/Semantics/Activities/ActivitiesFactory.hpp"
+#include "fUML/Semantics/Actions/ActionsFactory.hpp"
 #include "uml/umlFactory.hpp"
 #include "fUML/Semantics/Actions/AcceptEventActionEventAccepter.hpp"
 #include "uml/Action.hpp"
@@ -128,42 +137,184 @@ std::shared_ptr<ecore::EObject> AcceptEventActionActivationImpl::copy() const
 //*********************************
 void AcceptEventActionActivationImpl::accept(std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccurrence> eventOccurrence)
 {
-	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
+	//ADD_COUNT(__PRETTY_FUNCTION__)
+	//generated from body annotation
+	// Accept the given event occurrence.
+	// If the action does not unmarshall, then, if the event occurrence is
+	// a signal event occurrence, place the signal instance of the signal
+	// event occurrence on the result pin, if any.
+	// If the action does unmarshall, then get the parameter values of the
+	// event occurrence, and place the values for each parameter on the
+	// corresponding output pin.
+	// Concurrently fire all output pins while offering a single control token.
+	// If there are no incoming edges, then re-register this accept event action
+	// execution with the context object.
+	DEBUG_MESSAGE(std::cout <<  std::string(__PRETTY_FUNCTION__)<< std::endl;)
+	std::shared_ptr<uml::AcceptEventAction> action = std::dynamic_pointer_cast<uml::AcceptEventAction>( getNode() );
+	std::shared_ptr<Bag<uml::OutputPin>> resultPins = action->getResult();
+	if ( isRunning() )
+	{
+		DEBUG_MESSAGE(std::cout <<"Action is running." << std::endl; )
+		if ( !action->getIsUnmarshall() )
+		{
+			DEBUG_MESSAGE(std::cout << "Action isn't unmarshalling." << std::endl; )
+			std::shared_ptr<fUML::Semantics::CommonBehavior::SignalEventOccurrence> signalEventOccurrence = std::dynamic_pointer_cast<fUML::Semantics::CommonBehavior::SignalEventOccurrence>(eventOccurrence);
+			if (signalEventOccurrence != nullptr)
+			{
+				DEBUG_MESSAGE(std::cout <<"found signalEventOccurence." << std::endl; )
+				std::shared_ptr<fUML::Semantics::SimpleClassifiers::SignalInstance> signalInstance = signalEventOccurrence->getSignalInstance();
+				if(signalInstance != nullptr)
+				{
+					DEBUG_MESSAGE(std::cout << "found SignalInstance." << std::endl; )
+					// std::shared_ptr<Bag<fUML::Semantics::SimpleClassifiers::SignalInstance> > result = std::make_shared<Bag<fUML::Semantics::SimpleClassifiers::SignalInstance> >();
+					std::shared_ptr<Bag<fUML::Semantics::Values::Value> > result = std::make_shared<Bag<fUML::Semantics::Values::Value> >();
+					result->add( signalInstance );
+					if (resultPins->size() > 0) 
+					{
+						putTokens(resultPins->at(0), result);
+					}
+				}
+			}
+		}
+		else
+		{
+			DEBUG_MESSAGE(std::cout << "Is unmarshalling." << std::endl; )
+
+			std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue> > parameterValues = eventOccurrence->getParameterValues(   action->getTrigger()->at(0)->getEvent()  );//action.trigger.get(0).event);
+			for(unsigned int i = 0; i < parameterValues->size(); i++)
+			{
+				std::shared_ptr<fUML::Semantics::CommonBehavior::ParameterValue> parameterValue = parameterValues->at(i);
+			// Line unneeded double declaration?
+			//	std::shared_ptr<Bag<uml::OutputPin> > resultPins = action->getResult();
+				if(resultPins)
+				{
+					std::shared_ptr<uml::OutputPin> resultPin = resultPins->at(i);
+					putTokens(resultPin, parameterValue->getValues() );
+				}
+				
+			}
+		}
+		sendOffers();
+		setWaiting( false );
+		receiveOffer();
+		resume();
+		}
+	//end of body
 }
 
 void AcceptEventActionActivationImpl::doAction()
 {
-	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
+	//ADD_COUNT(__PRETTY_FUNCTION__)
+	//generated from body annotation
+	// Do nothing. [This will never be called.]
+	DEBUG_MESSAGE(std::cout <<  std::string(__PRETTY_FUNCTION__)<< std::endl;)
+	return;
+	//end of body
 }
 
 void AcceptEventActionActivationImpl::fire(std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> incomingTokens)
 {
-	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
+	//ADD_COUNT(__PRETTY_FUNCTION__)
+	//generated from body annotation
+	// Register the event accepter for this accept event action activation with the context object of the enclosing activity execution and wait for an event to be accepted.DEBUG_MESSAGE(std::cout <<  std::string(__PRETTY_FUNCTION__)<< std::endl;)
+	DEBUG_MESSAGE(std::cout <<  std::string(__PRETTY_FUNCTION__)<< std::endl;)
+	if(getExecutionContext() )
+	{
+			DEBUG_MESSAGE(std::cout <<"ExecutionContext found." << std::endl; )
+		if( getEventAccepter() )
+		{
+			DEBUG_MESSAGE(std::cout << "EventAccepter found." << std::endl; )
+			getExecutionContext()->_register( getEventAccepter() );
+			DEBUG_MESSAGE(std::cout <<"registered EventAccepter." << std::endl; )
+			setWaiting( true );
+			setFiring( false );
+			suspend();
+		}
+		else
+		{
+			DEBUG_MESSAGE(std::cout << "No EventAccepter found." << std::endl; )
+		}
+	}
+	else
+	{	
+		DEBUG_MESSAGE(std::cout << "No ExecutionContext found." << std::endl; )
+	}
+	//end of body
 }
 
 void AcceptEventActionActivationImpl::initialize(std::shared_ptr<uml::ActivityNode> node,std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup> group)
 {
-	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
+	//ADD_COUNT(__PRETTY_FUNCTION__)
+	//generated from body annotation
+	// Initialize this accept event action activation to be not waiting for an event.
+	DEBUG_MESSAGE(std::cout <<  std::string(__PRETTY_FUNCTION__)<< std::endl;)
+	ActionActivationImpl::initialize(node, group);
+	setWaiting(false);
+	//end of body
 }
 
 bool AcceptEventActionActivationImpl::isReady()
 {
-	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
+	//ADD_COUNT(__PRETTY_FUNCTION__)
+	//generated from body annotation
+	// An accept event action activation is ready to fire only if it is not already waiting for an event.
+	DEBUG_MESSAGE(std::cout <<  std::string(__PRETTY_FUNCTION__)<< std::endl;)
+	bool ready = ActionActivationImpl::isReady();
+	if ( isWaiting() ) 
+	{
+		DEBUG_MESSAGE(std::cout << "AcceptEventActionActivation is waiting."<< std::endl; )
+ 		ready = false;
+	} 
+	return ready;
+	//end of body
 }
 
 bool AcceptEventActionActivationImpl::match(std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccurrence> eventOccurrence)
 {
-	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
+	//ADD_COUNT(__PRETTY_FUNCTION__)
+	//generated from body annotation
+	// Return true if the given event occurrence matches a trigger of the accept event action of this activation.
+	DEBUG_MESSAGE(std::cout <<  std::string(__PRETTY_FUNCTION__)<< std::endl;)
+	std::shared_ptr<uml::AcceptEventAction> action = std::dynamic_pointer_cast<uml::AcceptEventAction>( getNode() );
+	std::shared_ptr<Bag<uml::Trigger>> triggers; 
+	if(action != nullptr)
+	{
+		triggers = action->getTrigger();
+	}
+	return eventOccurrence->matchAny(triggers);
+	//end of body
 }
 
 void AcceptEventActionActivationImpl::run()
 {
-	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
+	//ADD_COUNT(__PRETTY_FUNCTION__)
+	//generated from body annotation
+	// Create an event accepter and initialize waiting to false.
+	DEBUG_MESSAGE(std::cout <<  std::string(__PRETTY_FUNCTION__)<< std::endl;)
+	ActionActivationImpl::run();
+	std::shared_ptr<fUML::Semantics::Actions::AcceptEventActionEventAccepter> eventAccepter(fUML::Semantics::Actions::ActionsFactory::eInstance()->createAcceptEventActionEventAccepter() );
+	if(eventAccepter)
+	{
+		eventAccepter->setActionActivation( getThisAcceptEventActionActivationPtr() );
+	}
+	setEventAccepter(eventAccepter);
+	setWaiting(false);
+	//end of body
 }
 
 void AcceptEventActionActivationImpl::terminate()
 {
-	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
+	//ADD_COUNT(__PRETTY_FUNCTION__)
+	//generated from body annotation
+	// Terminate this action and unregister its event accepter.
+	DEBUG_MESSAGE(std::cout <<  std::string(__PRETTY_FUNCTION__)<< std::endl;)
+	ActionActivationImpl::terminate();
+	if ( isWaiting() )
+	{
+		getExecutionContext()->unregister( getEventAccepter() );
+		setWaiting(false);
+	}
+	//end of body
 }
 
 //*********************************

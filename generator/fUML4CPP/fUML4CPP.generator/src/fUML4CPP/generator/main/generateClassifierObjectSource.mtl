@@ -253,6 +253,40 @@ std::shared_ptr<Bag<PSCS::Semantics::StructuredClassifiers::CS_Object>> [classNa
 	return directContainers;
 }
 
+// Object Activation getter/setter forwarder implementations
+
+std::shared_ptr<fUML::Semantics::CommonBehavior::ObjectActivation> [className/]::getObjectActivation() const
+{
+	if( getMyClassValue() )
+	{
+		if( getMyClassValue()->GetIsActive() )
+		{
+			return getMyClassValue()->getObjectActivation();	// should only get if MyClassValue is active aswell
+		}
+		else
+		{
+			return PSCS::Semantics::StructuredClassifiers::CS_ObjectImpl::getObjectActivation();
+		}
+	}
+	else
+	{
+		return PSCS::Semantics::StructuredClassifiers::CS_ObjectImpl::getObjectActivation();
+	}
+}	
+void [className/]::setObjectActivation(std::shared_ptr<fUML::Semantics::CommonBehavior::ObjectActivation> _objectActivation)
+{
+	if( getMyClassValue() )
+	{
+		if( getMyClassValue()->GetIsActive() )
+		{
+			getMyClassValue()->setObjectActivation(_objectActivation);	// should only set if MyClassValue is active aswell
+		}
+	}
+	PSCS::Semantics::StructuredClassifiers::CS_ObjectImpl::setObjectActivation(_objectActivation);
+}
+
+
+
 [let attributes : OrderedSet(Property) = aClassifier.getMyAttributes() ]
 [if (attributes->size() > 0)]
 std::shared_ptr<Bag<PSCS::Semantics::StructuredClassifiers::CS_Link>> [className/]::getLinks(std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_InteractionPoint> interactionPoint)

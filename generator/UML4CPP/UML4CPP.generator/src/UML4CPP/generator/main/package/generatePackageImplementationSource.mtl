@@ -45,6 +45,8 @@
 [import UML4CPP::generator::main::profiles::uml4CPPProfileHelper /]
 [import UML4CPP::generator::main::helpers::isGeneratableHelper /]
 
+[import UML4CPP::generator::main::components::generateSignal /]
+
 
 [query public getAllAppliedStereotypes(aPackage : Package) : Set(Stereotype) = OrderedSet{
 								aPackage.getElementsBelongingToPackage().getGeneratableAppliedStereotypes(),
@@ -67,6 +69,9 @@
 								aPackage.getElementsBelongingToPackage()->selectByKind(Interface).ownedAttribute->select(not type.oclIsUndefined()).type.eClass(), 
 								aPackage.getElementsBelongingToPackage()->selectByKind(Class).ownedOperation.ownedParameter->select(not type.oclIsUndefined()).type.eClass(),
 								aPackage.getElementsBelongingToPackage()->selectByKind(Class).ownedAttribute->select(not type.oclIsUndefined()).type.eClass(),
+
+								aPackage.getElementsBelongingToPackage()->selectByKind(Signal).ownedAttribute->select(not type.oclIsUndefined()).type.eClass(),
+
 								aPackage.getElementsBelongingToPackage()->selectByKind(Class).ownedOperation.method->reject(oclIsUndefined()).eClass(),
 								aPackage.getElementsBelongingToPackage()->selectByKind(Class).ownedBehavior->filter(OpaqueBehavior).ownedParameter->select(not type.oclIsUndefined()).type.eClass(),
 								aPackage.getElementsBelongingToPackage()->selectByKind(Class).ownedElement->filter(InterfaceRealization).supplier.oclAsType(Interface).ownedAttribute.eClass(),
@@ -135,6 +140,9 @@
 #include "[stereo._package.generateNamespacePath(true)/]/[stereo.name/].hpp"
 [/for]
 
+// Hard include of Primitive Type to account for Signals setting up their Attributes
+#include "uml/PrimitiveType.hpp"
+
 [if (not aPackage.isIgnoreNamespace())]using namespace [aPackage.generateNamespace(false)/];[/if]
 
 [packageName/]::[packageName/]()
@@ -194,6 +202,9 @@ void [packageName/]::createPackageContents(std::shared_ptr<uml::Package> [aPacka
 	createPackagePrimitiveTypes([aPackage.memberName()/], factory);
 	createPackageEnumerationLiterals([aPackage.memberName()/], factory);
 	createPackageInterfaceRealizations([aPackage.memberName()/], factory);
+
+	createPackageSignals([aPackage.memberName()/], factory);
+	createPackageSignalEvents([aPackage.memberName()/], factory);
 }
 
 void [packageName/]::createPackageActivities(std::shared_ptr<uml::Package> [aPackage.memberName()/], std::shared_ptr<uml::umlFactory> factory)
@@ -258,6 +269,63 @@ void [packageName/]::createPackageClasses(std::shared_ptr<uml::Package> [aPackag
 	[anOpaqueBehavior.generateOpaqueBehaviorCreation()/]
 [/for]
 } 
+
+[comment]Only Signals[/comment]
+void [packageName/]::createPackageSignals(std::shared_ptr<uml::Package> [aPackage.memberName()/], std::shared_ptr<uml::umlFactory> factory)
+{
+	std::shared_ptr<uml::Constraint> con = nullptr;
+	std::shared_ptr<uml::OpaqueExpression> oe = nullptr;
+
+[for (aSignal : Signal | (aPackage.ownedMember->filter(Signal)->reject(oclIsKindOf(Stereotype)))->select(isGeneratable())->asOrderedSet()->sortedBy(myQualifiedName())) separator ('\n    //-------------------------------------------\n')]
+	//[aSignal.name/]
+	[aSignal.generateSignalCreation()/]
+
+	[for (anProperty : Property | aSignal.ownedAttribute->sortedBy(name)) before ('    // '.concat(aSignal.name).concat(' attributes\n'))]
+	//[anProperty.name/]
+	[comment]
+ 		instead of calling it on the anProperty, call it directly, since properties have no reference to the owning signal apparently 
+	[/comment]
+	[anProperty.memberName()/] = factory->createProperty_as_ownedAttribute_in_Signal([aSignal.memberName()/]);
+	[/for]
+	[comment] Signals don't have connectors or operations, so those can't be recognized?
+		[for (aConnector : Connector | aSignal.ownedConnector->sortedBy(name)) before ('    // '.concat(aSignal.name).concat(' connectors\n'))]
+		//[aConnector.name/]
+		[aConnector.memberName()/] = factory->createConnector_as_ownedConnector_in_StructuredClassifier([aSignal.memberName()/]);
+		[aConnector.generateConnectorCreation()/]
+		[/for]
+		[for (anOperation : Operation | aSignal.ownedOperation->sortedBy(name)) before ('    // '.concat(aSignal.name).concat(' operations\n')) separator('\n')]
+		//[anOperation.name/]
+		[anOperation.generateOperationCreation()/]
+		[/for] 
+	[/comment]
+	[for (aOpaqueBehavior : OpaqueBehavior | aSignal.ownedElement->filter(OpaqueBehavior)->sortedBy(myQualifiedName())) before ('    // '.concat(aSignal.name).concat(' opaque behaviors\n'))  separator('\n')]
+	//[aOpaqueBehavior.name/]
+	[aOpaqueBehavior.generateOpaqueBehaviorCreation()/]
+	[/for]
+[/for]
+
+//-------------------------------------------
+//Opaque Behaviors
+
+[for (anOpaqueBehavior : OpaqueBehavior | aPackage.ownedMember->filter(OpaqueBehavior))]
+	//[anOpaqueBehavior.name/]
+	[anOpaqueBehavior.generateOpaqueBehaviorCreation()/]
+[/for]
+}
+
+[comment]Only SignalEvents[/comment]
+void [packageName/]::createPackageSignalEvents(std::shared_ptr<uml::Package> [aPackage.memberName()/], std::shared_ptr<uml::umlFactory> factory)
+{
+	std::shared_ptr<uml::Constraint> con = nullptr;
+	std::shared_ptr<uml::OpaqueExpression> oe = nullptr;
+
+[for (aSignalEvent : SignalEvent | (aPackage.ownedMember->filter(SignalEvent)->reject(oclIsKindOf(Stereotype)))->select(isGeneratable())->asOrderedSet()->sortedBy(myQualifiedName())) separator ('\n    //-------------------------------------------\n')]
+	//[aSignalEvent.name/]
+	[aSignalEvent.generateSignalEventCreation()/]
+
+	//[aSignalEvent.signal.memberName()/] = factory->createSignal_as_ownedElement_in_Element([aSignalEvent.memberName()/]);
+[/for]
+}
 
 [comment]Only Associations[/comment]
 void [packageName/]::createPackageAssociations(std::shared_ptr<uml::Package> [aPackage.memberName()/], std::shared_ptr<uml::umlFactory> factory)
@@ -357,6 +425,10 @@ void [packageName/]::initializePackageContents(std::shared_ptr<uml::Package> [aP
 	initializePackageNestedPackages();
 	initializePackageStereotypes();
 	initializePackageValueSpecifications();
+
+	initializePackageSignals();
+	initializePackageSignalEvents();
+
 	[if (not aPackage.oclIsKindOf(Profile))][aPackage.generateStereotypeApplication()/][/if]
 }
 
@@ -418,6 +490,73 @@ void [packageName/]::initializePackageClasses()
 	[for (aAttribute : Property | aClass.ownedElement->filter(InterfaceRealization)->sortedBy(myQualifiedName()).supplier.oclAsType(Interface).ownedAttribute->sortedBy(myQualifiedName())) separator ('\n')] 
 	[if (aClass.ownedAttribute->select(name=aAttribute.name)->size() = 0)][aAttribute.addInterfaceAttribute(aClass)/][/if]
 	[/for]
+[/for]
+
+//-------------------------------------------
+//Opaque Behaviors
+
+[for (anOpaqueBehavior : OpaqueBehavior | aPackage.ownedMember->filter(OpaqueBehavior))]
+	//[anOpaqueBehavior.name/]
+	[anOpaqueBehavior.generateOpaqueBehaviorInitialization()/]
+[/for]
+}
+
+
+[comment]Only Signals[/comment]
+void [packageName/]::initializePackageSignals()
+{
+	std::shared_ptr<uml::Generalization> gen = nullptr;
+
+[for (aSignal : Signal | (aPackage.ownedMember->filter(Signal)->reject(oclIsKindOf(Stereotype)))->select(isGeneratable())->sortedBy(myQualifiedName())) separator ('\n    //-------------------------------------------\n')]
+	//	signal [aSignal.name/]
+	[aSignal.generateSignalInitialization()/]
+	[for (anProperty : Property | aSignal.ownedAttribute->sortedBy(name)) before ('    // '.concat(aSignal.name).concat(' attributes\n')) after ('\n')]
+	//[anProperty.name/]
+	[anProperty.generateAttributeInitialization()/]
+	[/for]
+	[comment]
+		[for (aConnector : Connector | aClass.ownedConnector->sortedBy(name)) before ('    // '.concat(aClass.name).concat(' connectors\n')) after ('\n')]
+		//[aConnector.name/]
+		[aConnector.generateConnectorInitialization()/]
+		[/for]
+		[for (anOperation : Operation | aClass.ownedOperation->sortedBy(name)) before ('    // '.concat(aClass.name).concat(' operations\n')) separator('\n')]
+		//[anOperation.name/]
+		[anOperation.initalizeOperation()/]
+		[/for]
+	[/comment]
+	[for (aOpaqueBehavior : OpaqueBehavior | aSignal.ownedElement->filter(OpaqueBehavior)->sortedBy(myQualifiedName())) before ('    // '.concat(aSignal.name).concat(' opaque behaviors\n'))  separator('\n')]
+	//[aOpaqueBehavior.name/]
+	[if (aOpaqueBehavior.oclIsKindOf(FunctionBehavior))]
+	[aOpaqueBehavior.oclAsType(FunctionBehavior).generateFunctionBehaviorInitialization()/]
+	[else]
+	[aOpaqueBehavior.generateOpaqueBehaviorInitialization()/]
+	[/if]
+	[/for]
+	[comment] Disabled since no Interfacces
+		[for (aAttribute : Property | aSignal.ownedElement->filter(InterfaceRealization)->sortedBy(myQualifiedName()).supplier.oclAsType(Interface).ownedAttribute->sortedBy(myQualifiedName())) separator ('\n')] 
+		[if (aClass.ownedAttribute->select(name=aAttribute.name)->size() = 0)][aAttribute.addInterfaceAttribute(aClass)/][/if]
+		[/for]
+	[/comment]
+[/for]
+
+//-------------------------------------------
+//Opaque Behaviors
+
+[for (anOpaqueBehavior : OpaqueBehavior | aPackage.ownedMember->filter(OpaqueBehavior))]
+	//[anOpaqueBehavior.name/]
+	[anOpaqueBehavior.generateOpaqueBehaviorInitialization()/]
+[/for]
+}
+
+[comment]Only SignalEvents[/comment]
+void [packageName/]::initializePackageSignalEvents()
+{
+	std::shared_ptr<uml::Generalization> gen = nullptr;
+
+[for (aSignalEvent : SignalEvent | (aPackage.ownedMember->filter(SignalEvent)->reject(oclIsKindOf(Stereotype)))->select(isGeneratable())->sortedBy(myQualifiedName())) separator ('\n    //-------------------------------------------\n')]
+	//	signalEvent [aSignalEvent.name/]
+	[aSignalEvent.generateSignalEventInitialization()/]
+	
 [/for]
 
 //-------------------------------------------
