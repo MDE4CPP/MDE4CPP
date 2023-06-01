@@ -539,7 +539,7 @@ bool ProfileImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 	
 							if (valueToAdd)
 							{
-								if(_metaclassReference->find(valueToAdd) == -1)
+								if(!(_metaclassReference->includes(valueToAdd)))
 								{
 									_metaclassReference->add(valueToAdd);
 								}
@@ -584,7 +584,7 @@ bool ProfileImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 	
 							if (valueToAdd)
 							{
-								if(_metamodelReference->find(valueToAdd) == -1)
+								if(!(_metamodelReference->includes(valueToAdd)))
 								{
 									_metamodelReference->add(valueToAdd);
 								}

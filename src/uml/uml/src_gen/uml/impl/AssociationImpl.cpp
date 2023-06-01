@@ -707,7 +707,7 @@ bool AssociationImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 	
 							if (valueToAdd)
 							{
-								if(_memberEnd->find(valueToAdd) == -1)
+								if(!(_memberEnd->includes(valueToAdd)))
 								{
 									_memberEnd->add(valueToAdd);
 								}
@@ -752,7 +752,7 @@ bool AssociationImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 	
 							if (valueToAdd)
 							{
-								if(_navigableOwnedEnd->find(valueToAdd) == -1)
+								if(!(_navigableOwnedEnd->includes(valueToAdd)))
 								{
 									_navigableOwnedEnd->add(valueToAdd);
 								}
@@ -797,7 +797,7 @@ bool AssociationImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 	
 							if (valueToAdd)
 							{
-								if(_ownedEnd->find(valueToAdd) == -1)
+								if(!(_ownedEnd->includes(valueToAdd)))
 								{
 									_ownedEnd->add(valueToAdd);
 								}

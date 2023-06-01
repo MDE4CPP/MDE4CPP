@@ -371,7 +371,7 @@ bool OfferImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 	
 							if (valueToAdd)
 							{
-								if(_offeredTokens->find(valueToAdd) == -1)
+								if(!(_offeredTokens->includes(valueToAdd)))
 								{
 									_offeredTokens->add(valueToAdd);
 								}

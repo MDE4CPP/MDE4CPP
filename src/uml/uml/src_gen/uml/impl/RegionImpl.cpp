@@ -706,7 +706,7 @@ bool RegionImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 	
 							if (valueToAdd)
 							{
-								if(_subvertex->find(valueToAdd) == -1)
+								if(!(_subvertex->includes(valueToAdd)))
 								{
 									_subvertex->add(valueToAdd);
 								}
@@ -751,7 +751,7 @@ bool RegionImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 	
 							if (valueToAdd)
 							{
-								if(_transition->find(valueToAdd) == -1)
+								if(!(_transition->includes(valueToAdd)))
 								{
 									_transition->add(valueToAdd);
 								}

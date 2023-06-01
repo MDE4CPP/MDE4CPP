@@ -467,7 +467,7 @@ bool PackageDeclarationExpImpl::eSet(int featureID,  const std::shared_ptr<Any>&
 	
 							if (valueToAdd)
 							{
-								if(_contextDeclarations->find(valueToAdd) == -1)
+								if(!(_contextDeclarations->includes(valueToAdd)))
 								{
 									_contextDeclarations->add(valueToAdd);
 								}

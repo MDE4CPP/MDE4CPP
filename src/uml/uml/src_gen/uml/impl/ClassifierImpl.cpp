@@ -1372,7 +1372,7 @@ bool ClassifierImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 	
 							if (valueToAdd)
 							{
-								if(_collaborationUse->find(valueToAdd) == -1)
+								if(!(_collaborationUse->includes(valueToAdd)))
 								{
 									_collaborationUse->add(valueToAdd);
 								}
@@ -1417,7 +1417,7 @@ bool ClassifierImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 	
 							if (valueToAdd)
 							{
-								if(_general->find(valueToAdd) == -1)
+								if(!(_general->includes(valueToAdd)))
 								{
 									_general->add(valueToAdd);
 								}
@@ -1462,7 +1462,7 @@ bool ClassifierImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 	
 							if (valueToAdd)
 							{
-								if(_generalization->find(valueToAdd) == -1)
+								if(!(_generalization->includes(valueToAdd)))
 								{
 									_generalization->add(valueToAdd);
 								}
@@ -1535,7 +1535,7 @@ bool ClassifierImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 	
 							if (valueToAdd)
 							{
-								if(_ownedUseCase->find(valueToAdd) == -1)
+								if(!(_ownedUseCase->includes(valueToAdd)))
 								{
 									_ownedUseCase->add(valueToAdd);
 								}
@@ -1580,7 +1580,7 @@ bool ClassifierImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 	
 							if (valueToAdd)
 							{
-								if(_powertypeExtent->find(valueToAdd) == -1)
+								if(!(_powertypeExtent->includes(valueToAdd)))
 								{
 									_powertypeExtent->add(valueToAdd);
 								}
@@ -1625,7 +1625,7 @@ bool ClassifierImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 	
 							if (valueToAdd)
 							{
-								if(_redefinedClassifier->find(valueToAdd) == -1)
+								if(!(_redefinedClassifier->includes(valueToAdd)))
 								{
 									_redefinedClassifier->add(valueToAdd);
 								}
@@ -1701,7 +1701,7 @@ bool ClassifierImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 	
 							if (valueToAdd)
 							{
-								if(_substitution->find(valueToAdd) == -1)
+								if(!(_substitution->includes(valueToAdd)))
 								{
 									_substitution->add(valueToAdd);
 								}
@@ -1746,7 +1746,7 @@ bool ClassifierImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 	
 							if (valueToAdd)
 							{
-								if(_useCase->find(valueToAdd) == -1)
+								if(!(_useCase->includes(valueToAdd)))
 								{
 									_useCase->add(valueToAdd);
 								}

@@ -616,7 +616,7 @@ bool ActivityEdgeInstanceImpl::eSet(int featureID,  const std::shared_ptr<Any>& 
 	
 							if (valueToAdd)
 							{
-								if(_offers->find(valueToAdd) == -1)
+								if(!(_offers->includes(valueToAdd)))
 								{
 									_offers->add(valueToAdd);
 								}

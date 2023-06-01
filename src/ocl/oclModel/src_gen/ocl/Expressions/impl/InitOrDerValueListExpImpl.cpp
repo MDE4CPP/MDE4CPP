@@ -477,7 +477,7 @@ bool InitOrDerValueListExpImpl::eSet(int featureID,  const std::shared_ptr<Any>&
 	
 							if (valueToAdd)
 							{
-								if(_derExpressionList->find(valueToAdd) == -1)
+								if(!(_derExpressionList->includes(valueToAdd)))
 								{
 									_derExpressionList->add(valueToAdd);
 								}
@@ -522,7 +522,7 @@ bool InitOrDerValueListExpImpl::eSet(int featureID,  const std::shared_ptr<Any>&
 	
 							if (valueToAdd)
 							{
-								if(_initExpressionList->find(valueToAdd) == -1)
+								if(!(_initExpressionList->includes(valueToAdd)))
 								{
 									_initExpressionList->add(valueToAdd);
 								}

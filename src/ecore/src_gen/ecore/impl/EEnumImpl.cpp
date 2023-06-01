@@ -394,7 +394,7 @@ bool EEnumImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 	
 							if (valueToAdd)
 							{
-								if(_eLiterals->find(valueToAdd) == -1)
+								if(!(_eLiterals->includes(valueToAdd)))
 								{
 									_eLiterals->add(valueToAdd);
 								}

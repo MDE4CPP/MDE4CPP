@@ -516,7 +516,7 @@ bool PrePostBodyListExpImpl::eSet(int featureID,  const std::shared_ptr<Any>& ne
 	
 							if (valueToAdd)
 							{
-								if(_bodyExpressionList->find(valueToAdd) == -1)
+								if(!(_bodyExpressionList->includes(valueToAdd)))
 								{
 									_bodyExpressionList->add(valueToAdd);
 								}
@@ -561,7 +561,7 @@ bool PrePostBodyListExpImpl::eSet(int featureID,  const std::shared_ptr<Any>& ne
 	
 							if (valueToAdd)
 							{
-								if(_postExpressionList->find(valueToAdd) == -1)
+								if(!(_postExpressionList->includes(valueToAdd)))
 								{
 									_postExpressionList->add(valueToAdd);
 								}
@@ -606,7 +606,7 @@ bool PrePostBodyListExpImpl::eSet(int featureID,  const std::shared_ptr<Any>& ne
 	
 							if (valueToAdd)
 							{
-								if(_preExpressionList->find(valueToAdd) == -1)
+								if(!(_preExpressionList->includes(valueToAdd)))
 								{
 									_preExpressionList->add(valueToAdd);
 								}

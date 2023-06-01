@@ -439,7 +439,7 @@ bool TupleTypeExpImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue
 	
 							if (valueToAdd)
 							{
-								if(_part->find(valueToAdd) == -1)
+								if(!(_part->includes(valueToAdd)))
 								{
 									_part->add(valueToAdd);
 								}

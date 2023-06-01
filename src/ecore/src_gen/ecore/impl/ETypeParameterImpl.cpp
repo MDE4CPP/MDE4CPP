@@ -310,7 +310,7 @@ bool ETypeParameterImpl::eSet(int featureID,  const std::shared_ptr<Any>& newVal
 	
 							if (valueToAdd)
 							{
-								if(_eBounds->find(valueToAdd) == -1)
+								if(!(_eBounds->includes(valueToAdd)))
 								{
 									_eBounds->add(valueToAdd);
 								}

@@ -588,7 +588,7 @@ bool EGenericTypeImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue
 	
 							if (valueToAdd)
 							{
-								if(_eTypeArguments->find(valueToAdd) == -1)
+								if(!(_eTypeArguments->includes(valueToAdd)))
 								{
 									_eTypeArguments->add(valueToAdd);
 								}

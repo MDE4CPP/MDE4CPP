@@ -402,7 +402,7 @@ bool ParameterSetImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue
 	
 							if (valueToAdd)
 							{
-								if(_condition->find(valueToAdd) == -1)
+								if(!(_condition->includes(valueToAdd)))
 								{
 									_condition->add(valueToAdd);
 								}
@@ -447,7 +447,7 @@ bool ParameterSetImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue
 	
 							if (valueToAdd)
 							{
-								if(_parameter->find(valueToAdd) == -1)
+								if(!(_parameter->includes(valueToAdd)))
 								{
 									_parameter->add(valueToAdd);
 								}

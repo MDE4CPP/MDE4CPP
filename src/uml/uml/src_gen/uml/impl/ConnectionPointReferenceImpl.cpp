@@ -418,7 +418,7 @@ bool ConnectionPointReferenceImpl::eSet(int featureID,  const std::shared_ptr<An
 	
 							if (valueToAdd)
 							{
-								if(_entry->find(valueToAdd) == -1)
+								if(!(_entry->includes(valueToAdd)))
 								{
 									_entry->add(valueToAdd);
 								}
@@ -463,7 +463,7 @@ bool ConnectionPointReferenceImpl::eSet(int featureID,  const std::shared_ptr<An
 	
 							if (valueToAdd)
 							{
-								if(_exit->find(valueToAdd) == -1)
+								if(!(_exit->includes(valueToAdd)))
 								{
 									_exit->add(valueToAdd);
 								}

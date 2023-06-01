@@ -354,7 +354,7 @@ bool LoopExpEvalImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 	
 							if (valueToAdd)
 							{
-								if(_bodyEvals->find(valueToAdd) == -1)
+								if(!(_bodyEvals->includes(valueToAdd)))
 								{
 									_bodyEvals->add(valueToAdd);
 								}
@@ -391,7 +391,7 @@ bool LoopExpEvalImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 				{
 					if (valueToAdd)
 					{
-						if(_iterators->find(valueToAdd) == -1)
+						if(!(_iterators->includes(valueToAdd)))
 						{
 							_iterators->add(valueToAdd);
 						}

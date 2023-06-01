@@ -367,7 +367,7 @@ bool OclMessageExpEvalImpl::eSet(int featureID,  const std::shared_ptr<Any>& new
 	
 							if (valueToAdd)
 							{
-								if(_arguments->find(valueToAdd) == -1)
+								if(!(_arguments->includes(valueToAdd)))
 								{
 									_arguments->add(valueToAdd);
 								}

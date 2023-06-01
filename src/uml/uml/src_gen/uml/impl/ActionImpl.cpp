@@ -629,7 +629,7 @@ bool ActionImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 	
 							if (valueToAdd)
 							{
-								if(_localPostcondition->find(valueToAdd) == -1)
+								if(!(_localPostcondition->includes(valueToAdd)))
 								{
 									_localPostcondition->add(valueToAdd);
 								}
@@ -674,7 +674,7 @@ bool ActionImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 	
 							if (valueToAdd)
 							{
-								if(_localPrecondition->find(valueToAdd) == -1)
+								if(!(_localPrecondition->includes(valueToAdd)))
 								{
 									_localPrecondition->add(valueToAdd);
 								}

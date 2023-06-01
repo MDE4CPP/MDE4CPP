@@ -467,7 +467,7 @@ bool LinkActionImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 	
 							if (valueToAdd)
 							{
-								if(_endData->find(valueToAdd) == -1)
+								if(!(_endData->includes(valueToAdd)))
 								{
 									_endData->add(valueToAdd);
 								}
@@ -512,7 +512,7 @@ bool LinkActionImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 	
 							if (valueToAdd)
 							{
-								if(_inputValue->find(valueToAdd) == -1)
+								if(!(_inputValue->includes(valueToAdd)))
 								{
 									_inputValue->add(valueToAdd);
 								}

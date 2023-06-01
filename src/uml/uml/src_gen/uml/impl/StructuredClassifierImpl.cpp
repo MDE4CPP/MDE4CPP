@@ -560,7 +560,7 @@ bool StructuredClassifierImpl::eSet(int featureID,  const std::shared_ptr<Any>& 
 	
 							if (valueToAdd)
 							{
-								if(_ownedAttribute->find(valueToAdd) == -1)
+								if(!(_ownedAttribute->includes(valueToAdd)))
 								{
 									_ownedAttribute->add(valueToAdd);
 								}
@@ -605,7 +605,7 @@ bool StructuredClassifierImpl::eSet(int featureID,  const std::shared_ptr<Any>& 
 	
 							if (valueToAdd)
 							{
-								if(_ownedConnector->find(valueToAdd) == -1)
+								if(!(_ownedConnector->includes(valueToAdd)))
 								{
 									_ownedConnector->add(valueToAdd);
 								}

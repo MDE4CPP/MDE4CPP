@@ -385,7 +385,7 @@ bool TriggerImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 	
 							if (valueToAdd)
 							{
-								if(_port->find(valueToAdd) == -1)
+								if(!(_port->includes(valueToAdd)))
 								{
 									_port->add(valueToAdd);
 								}

@@ -1033,7 +1033,7 @@ bool ActivityImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 	
 							if (valueToAdd)
 							{
-								if(_edge->find(valueToAdd) == -1)
+								if(!(_edge->includes(valueToAdd)))
 								{
 									_edge->add(valueToAdd);
 								}
@@ -1078,7 +1078,7 @@ bool ActivityImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 	
 							if (valueToAdd)
 							{
-								if(_group->find(valueToAdd) == -1)
+								if(!(_group->includes(valueToAdd)))
 								{
 									_group->add(valueToAdd);
 								}
@@ -1151,7 +1151,7 @@ bool ActivityImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 	
 							if (valueToAdd)
 							{
-								if(_node->find(valueToAdd) == -1)
+								if(!(_node->includes(valueToAdd)))
 								{
 									_node->add(valueToAdd);
 								}
@@ -1196,7 +1196,7 @@ bool ActivityImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 	
 							if (valueToAdd)
 							{
-								if(_ownedGroup->find(valueToAdd) == -1)
+								if(!(_ownedGroup->includes(valueToAdd)))
 								{
 									_ownedGroup->add(valueToAdd);
 								}
@@ -1241,7 +1241,7 @@ bool ActivityImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 	
 							if (valueToAdd)
 							{
-								if(_ownedNode->find(valueToAdd) == -1)
+								if(!(_ownedNode->includes(valueToAdd)))
 								{
 									_ownedNode->add(valueToAdd);
 								}
@@ -1286,7 +1286,7 @@ bool ActivityImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 	
 							if (valueToAdd)
 							{
-								if(_partition->find(valueToAdd) == -1)
+								if(!(_partition->includes(valueToAdd)))
 								{
 									_partition->add(valueToAdd);
 								}
@@ -1331,7 +1331,7 @@ bool ActivityImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 	
 							if (valueToAdd)
 							{
-								if(_structuredNode->find(valueToAdd) == -1)
+								if(!(_structuredNode->includes(valueToAdd)))
 								{
 									_structuredNode->add(valueToAdd);
 								}
@@ -1376,7 +1376,7 @@ bool ActivityImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 	
 							if (valueToAdd)
 							{
-								if(_variable->find(valueToAdd) == -1)
+								if(!(_variable->includes(valueToAdd)))
 								{
 									_variable->add(valueToAdd);
 								}

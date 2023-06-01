@@ -295,7 +295,7 @@ bool MessageArgumentsImpl::eSet(int featureID,  const std::shared_ptr<Any>& newV
 	
 							if (valueToAdd)
 							{
-								if(_referredOclExpressions->find(valueToAdd) == -1)
+								if(!(_referredOclExpressions->includes(valueToAdd)))
 								{
 									_referredOclExpressions->add(valueToAdd);
 								}

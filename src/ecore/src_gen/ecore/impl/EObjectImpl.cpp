@@ -548,7 +548,7 @@ bool EObjectImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 	
 							if (valueToAdd)
 							{
-								if(_eContentUnion->find(valueToAdd) == -1)
+								if(!(_eContentUnion->includes(valueToAdd)))
 								{
 									_eContentUnion->add(valueToAdd);
 								}

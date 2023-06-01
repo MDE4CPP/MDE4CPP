@@ -513,7 +513,7 @@ bool InstanceSpecificationImpl::eSet(int featureID,  const std::shared_ptr<Any>&
 	
 							if (valueToAdd)
 							{
-								if(_classifier->find(valueToAdd) == -1)
+								if(!(_classifier->includes(valueToAdd)))
 								{
 									_classifier->add(valueToAdd);
 								}
@@ -558,7 +558,7 @@ bool InstanceSpecificationImpl::eSet(int featureID,  const std::shared_ptr<Any>&
 	
 							if (valueToAdd)
 							{
-								if(_slot->find(valueToAdd) == -1)
+								if(!(_slot->includes(valueToAdd)))
 								{
 									_slot->add(valueToAdd);
 								}

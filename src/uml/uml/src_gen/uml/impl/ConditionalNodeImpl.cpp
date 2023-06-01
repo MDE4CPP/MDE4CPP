@@ -535,7 +535,7 @@ bool ConditionalNodeImpl::eSet(int featureID,  const std::shared_ptr<Any>& newVa
 	
 							if (valueToAdd)
 							{
-								if(_clause->find(valueToAdd) == -1)
+								if(!(_clause->includes(valueToAdd)))
 								{
 									_clause->add(valueToAdd);
 								}
@@ -608,7 +608,7 @@ bool ConditionalNodeImpl::eSet(int featureID,  const std::shared_ptr<Any>& newVa
 	
 							if (valueToAdd)
 							{
-								if(_result->find(valueToAdd) == -1)
+								if(!(_result->includes(valueToAdd)))
 								{
 									_result->add(valueToAdd);
 								}

@@ -1043,7 +1043,7 @@ bool EClassImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 	
 							if (valueToAdd)
 							{
-								if(_eAttributes->find(valueToAdd) == -1)
+								if(!(_eAttributes->includes(valueToAdd)))
 								{
 									_eAttributes->add(valueToAdd);
 								}
@@ -1088,7 +1088,7 @@ bool EClassImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 	
 							if (valueToAdd)
 							{
-								if(_eGenericSuperTypes->find(valueToAdd) == -1)
+								if(!(_eGenericSuperTypes->includes(valueToAdd)))
 								{
 									_eGenericSuperTypes->add(valueToAdd);
 								}
@@ -1164,7 +1164,7 @@ bool EClassImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 	
 							if (valueToAdd)
 							{
-								if(_eOperations->find(valueToAdd) == -1)
+								if(!(_eOperations->includes(valueToAdd)))
 								{
 									_eOperations->add(valueToAdd);
 								}
@@ -1209,7 +1209,7 @@ bool EClassImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 	
 							if (valueToAdd)
 							{
-								if(_eReferences->find(valueToAdd) == -1)
+								if(!(_eReferences->includes(valueToAdd)))
 								{
 									_eReferences->add(valueToAdd);
 								}
@@ -1254,7 +1254,7 @@ bool EClassImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 	
 							if (valueToAdd)
 							{
-								if(_eStructuralFeatures->find(valueToAdd) == -1)
+								if(!(_eStructuralFeatures->includes(valueToAdd)))
 								{
 									_eStructuralFeatures->add(valueToAdd);
 								}
@@ -1299,7 +1299,7 @@ bool EClassImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 	
 							if (valueToAdd)
 							{
-								if(_eSuperTypes->find(valueToAdd) == -1)
+								if(!(_eSuperTypes->includes(valueToAdd)))
 								{
 									_eSuperTypes->add(valueToAdd);
 								}

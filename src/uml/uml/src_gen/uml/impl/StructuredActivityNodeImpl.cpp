@@ -819,7 +819,7 @@ bool StructuredActivityNodeImpl::eSet(int featureID,  const std::shared_ptr<Any>
 	
 							if (valueToAdd)
 							{
-								if(_edge->find(valueToAdd) == -1)
+								if(!(_edge->includes(valueToAdd)))
 								{
 									_edge->add(valueToAdd);
 								}
@@ -878,7 +878,7 @@ bool StructuredActivityNodeImpl::eSet(int featureID,  const std::shared_ptr<Any>
 	
 							if (valueToAdd)
 							{
-								if(_node->find(valueToAdd) == -1)
+								if(!(_node->includes(valueToAdd)))
 								{
 									_node->add(valueToAdd);
 								}
@@ -923,7 +923,7 @@ bool StructuredActivityNodeImpl::eSet(int featureID,  const std::shared_ptr<Any>
 	
 							if (valueToAdd)
 							{
-								if(_structuredNodeInput->find(valueToAdd) == -1)
+								if(!(_structuredNodeInput->includes(valueToAdd)))
 								{
 									_structuredNodeInput->add(valueToAdd);
 								}
@@ -968,7 +968,7 @@ bool StructuredActivityNodeImpl::eSet(int featureID,  const std::shared_ptr<Any>
 	
 							if (valueToAdd)
 							{
-								if(_structuredNodeOutput->find(valueToAdd) == -1)
+								if(!(_structuredNodeOutput->includes(valueToAdd)))
 								{
 									_structuredNodeOutput->add(valueToAdd);
 								}
@@ -1013,7 +1013,7 @@ bool StructuredActivityNodeImpl::eSet(int featureID,  const std::shared_ptr<Any>
 	
 							if (valueToAdd)
 							{
-								if(_variable->find(valueToAdd) == -1)
+								if(!(_variable->includes(valueToAdd)))
 								{
 									_variable->add(valueToAdd);
 								}

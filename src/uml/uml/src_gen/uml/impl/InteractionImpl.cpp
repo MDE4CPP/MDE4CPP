@@ -811,7 +811,7 @@ bool InteractionImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 	
 							if (valueToAdd)
 							{
-								if(_action->find(valueToAdd) == -1)
+								if(!(_action->includes(valueToAdd)))
 								{
 									_action->add(valueToAdd);
 								}
@@ -856,7 +856,7 @@ bool InteractionImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 	
 							if (valueToAdd)
 							{
-								if(_formalGate->find(valueToAdd) == -1)
+								if(!(_formalGate->includes(valueToAdd)))
 								{
 									_formalGate->add(valueToAdd);
 								}
@@ -901,7 +901,7 @@ bool InteractionImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 	
 							if (valueToAdd)
 							{
-								if(_fragment->find(valueToAdd) == -1)
+								if(!(_fragment->includes(valueToAdd)))
 								{
 									_fragment->add(valueToAdd);
 								}
@@ -946,7 +946,7 @@ bool InteractionImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 	
 							if (valueToAdd)
 							{
-								if(_lifeline->find(valueToAdd) == -1)
+								if(!(_lifeline->includes(valueToAdd)))
 								{
 									_lifeline->add(valueToAdd);
 								}
@@ -991,7 +991,7 @@ bool InteractionImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 	
 							if (valueToAdd)
 							{
-								if(_message->find(valueToAdd) == -1)
+								if(!(_message->includes(valueToAdd)))
 								{
 									_message->add(valueToAdd);
 								}

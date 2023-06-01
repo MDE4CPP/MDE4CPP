@@ -398,7 +398,7 @@ bool CollaborationUseImpl::eSet(int featureID,  const std::shared_ptr<Any>& newV
 	
 							if (valueToAdd)
 							{
-								if(_roleBinding->find(valueToAdd) == -1)
+								if(!(_roleBinding->includes(valueToAdd)))
 								{
 									_roleBinding->add(valueToAdd);
 								}

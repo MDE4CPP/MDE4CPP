@@ -511,7 +511,7 @@ bool StringExpressionImpl::eSet(int featureID,  const std::shared_ptr<Any>& newV
 	
 							if (valueToAdd)
 							{
-								if(_subExpression->find(valueToAdd) == -1)
+								if(!(_subExpression->includes(valueToAdd)))
 								{
 									_subExpression->add(valueToAdd);
 								}

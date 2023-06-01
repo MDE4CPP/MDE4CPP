@@ -39,8 +39,8 @@
 
 #include <exception> // used in Persistence
 #include "ecore/ecoreFactory.hpp"
-#include "ocl/Evaluations/EvaluationsFactory.hpp"
 #include "ocl/Expressions/ExpressionsFactory.hpp"
+#include "ocl/Evaluations/EvaluationsFactory.hpp"
 #include "ocl/Evaluations/CollectionLiteralPartEval.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClassifier.hpp"
@@ -304,7 +304,7 @@ bool CollectionLiteralExpEvalImpl::eSet(int featureID,  const std::shared_ptr<An
 	
 							if (valueToAdd)
 							{
-								if(_parts->find(valueToAdd) == -1)
+								if(!(_parts->includes(valueToAdd)))
 								{
 									_parts->add(valueToAdd);
 								}

@@ -843,7 +843,7 @@ bool ExpansionRegionActivationImpl::eSet(int featureID,  const std::shared_ptr<A
 	
 							if (valueToAdd)
 							{
-								if(_activationGroups->find(valueToAdd) == -1)
+								if(!(_activationGroups->includes(valueToAdd)))
 								{
 									_activationGroups->add(valueToAdd);
 								}
@@ -888,7 +888,7 @@ bool ExpansionRegionActivationImpl::eSet(int featureID,  const std::shared_ptr<A
 	
 							if (valueToAdd)
 							{
-								if(_inputExpansionTokens->find(valueToAdd) == -1)
+								if(!(_inputExpansionTokens->includes(valueToAdd)))
 								{
 									_inputExpansionTokens->add(valueToAdd);
 								}
@@ -933,7 +933,7 @@ bool ExpansionRegionActivationImpl::eSet(int featureID,  const std::shared_ptr<A
 	
 							if (valueToAdd)
 							{
-								if(_inputTokens->find(valueToAdd) == -1)
+								if(!(_inputTokens->includes(valueToAdd)))
 								{
 									_inputTokens->add(valueToAdd);
 								}

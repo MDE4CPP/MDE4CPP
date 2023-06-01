@@ -733,7 +733,7 @@ bool ArtifactImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 	
 							if (valueToAdd)
 							{
-								if(_manifestation->find(valueToAdd) == -1)
+								if(!(_manifestation->includes(valueToAdd)))
 								{
 									_manifestation->add(valueToAdd);
 								}
@@ -778,7 +778,7 @@ bool ArtifactImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 	
 							if (valueToAdd)
 							{
-								if(_nestedArtifact->find(valueToAdd) == -1)
+								if(!(_nestedArtifact->includes(valueToAdd)))
 								{
 									_nestedArtifact->add(valueToAdd);
 								}
@@ -823,7 +823,7 @@ bool ArtifactImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 	
 							if (valueToAdd)
 							{
-								if(_ownedAttribute->find(valueToAdd) == -1)
+								if(!(_ownedAttribute->includes(valueToAdd)))
 								{
 									_ownedAttribute->add(valueToAdd);
 								}
@@ -868,7 +868,7 @@ bool ArtifactImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 	
 							if (valueToAdd)
 							{
-								if(_ownedOperation->find(valueToAdd) == -1)
+								if(!(_ownedOperation->includes(valueToAdd)))
 								{
 									_ownedOperation->add(valueToAdd);
 								}

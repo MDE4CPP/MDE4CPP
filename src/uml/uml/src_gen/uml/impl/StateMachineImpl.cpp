@@ -649,7 +649,7 @@ bool StateMachineImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue
 	
 							if (valueToAdd)
 							{
-								if(_connectionPoint->find(valueToAdd) == -1)
+								if(!(_connectionPoint->includes(valueToAdd)))
 								{
 									_connectionPoint->add(valueToAdd);
 								}
@@ -694,7 +694,7 @@ bool StateMachineImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue
 	
 							if (valueToAdd)
 							{
-								if(_extendedStateMachine->find(valueToAdd) == -1)
+								if(!(_extendedStateMachine->includes(valueToAdd)))
 								{
 									_extendedStateMachine->add(valueToAdd);
 								}
@@ -739,7 +739,7 @@ bool StateMachineImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue
 	
 							if (valueToAdd)
 							{
-								if(_region->find(valueToAdd) == -1)
+								if(!(_region->includes(valueToAdd)))
 								{
 									_region->add(valueToAdd);
 								}
@@ -784,7 +784,7 @@ bool StateMachineImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue
 	
 							if (valueToAdd)
 							{
-								if(_submachineState->find(valueToAdd) == -1)
+								if(!(_submachineState->includes(valueToAdd)))
 								{
 									_submachineState->add(valueToAdd);
 								}

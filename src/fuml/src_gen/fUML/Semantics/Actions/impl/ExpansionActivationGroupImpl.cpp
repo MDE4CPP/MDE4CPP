@@ -536,7 +536,7 @@ bool ExpansionActivationGroupImpl::eSet(int featureID,  const std::shared_ptr<An
 	
 							if (valueToAdd)
 							{
-								if(_groupInputs->find(valueToAdd) == -1)
+								if(!(_groupInputs->includes(valueToAdd)))
 								{
 									_groupInputs->add(valueToAdd);
 								}
@@ -581,7 +581,7 @@ bool ExpansionActivationGroupImpl::eSet(int featureID,  const std::shared_ptr<An
 	
 							if (valueToAdd)
 							{
-								if(_groupOutputs->find(valueToAdd) == -1)
+								if(!(_groupOutputs->includes(valueToAdd)))
 								{
 									_groupOutputs->add(valueToAdd);
 								}
@@ -671,7 +671,7 @@ bool ExpansionActivationGroupImpl::eSet(int featureID,  const std::shared_ptr<An
 	
 							if (valueToAdd)
 							{
-								if(_regionInputs->find(valueToAdd) == -1)
+								if(!(_regionInputs->includes(valueToAdd)))
 								{
 									_regionInputs->add(valueToAdd);
 								}

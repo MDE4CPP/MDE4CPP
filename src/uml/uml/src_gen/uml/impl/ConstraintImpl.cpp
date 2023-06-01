@@ -447,7 +447,7 @@ bool ConstraintImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 	
 							if (valueToAdd)
 							{
-								if(_constrainedElement->find(valueToAdd) == -1)
+								if(!(_constrainedElement->includes(valueToAdd)))
 								{
 									_constrainedElement->add(valueToAdd);
 								}

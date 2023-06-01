@@ -738,7 +738,7 @@ bool PortImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 	
 							if (valueToAdd)
 							{
-								if(_redefinedPort->find(valueToAdd) == -1)
+								if(!(_redefinedPort->includes(valueToAdd)))
 								{
 									_redefinedPort->add(valueToAdd);
 								}

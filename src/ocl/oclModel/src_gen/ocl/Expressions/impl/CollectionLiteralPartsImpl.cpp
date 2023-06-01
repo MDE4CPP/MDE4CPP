@@ -295,7 +295,7 @@ bool CollectionLiteralPartsImpl::eSet(int featureID,  const std::shared_ptr<Any>
 	
 							if (valueToAdd)
 							{
-								if(_literalParts->find(valueToAdd) == -1)
+								if(!(_literalParts->includes(valueToAdd)))
 								{
 									_literalParts->add(valueToAdd);
 								}

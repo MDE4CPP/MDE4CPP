@@ -361,7 +361,7 @@ bool DeploymentTargetImpl::eSet(int featureID,  const std::shared_ptr<Any>& newV
 	
 							if (valueToAdd)
 							{
-								if(_deployment->find(valueToAdd) == -1)
+								if(!(_deployment->includes(valueToAdd)))
 								{
 									_deployment->add(valueToAdd);
 								}

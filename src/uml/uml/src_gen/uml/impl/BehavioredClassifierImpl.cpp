@@ -586,7 +586,7 @@ bool BehavioredClassifierImpl::eSet(int featureID,  const std::shared_ptr<Any>& 
 	
 							if (valueToAdd)
 							{
-								if(_interfaceRealization->find(valueToAdd) == -1)
+								if(!(_interfaceRealization->includes(valueToAdd)))
 								{
 									_interfaceRealization->add(valueToAdd);
 								}
@@ -631,7 +631,7 @@ bool BehavioredClassifierImpl::eSet(int featureID,  const std::shared_ptr<Any>& 
 	
 							if (valueToAdd)
 							{
-								if(_ownedBehavior->find(valueToAdd) == -1)
+								if(!(_ownedBehavior->includes(valueToAdd)))
 								{
 									_ownedBehavior->add(valueToAdd);
 								}

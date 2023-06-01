@@ -680,7 +680,7 @@ bool ActivityPartitionImpl::eSet(int featureID,  const std::shared_ptr<Any>& new
 	
 							if (valueToAdd)
 							{
-								if(_edge->find(valueToAdd) == -1)
+								if(!(_edge->includes(valueToAdd)))
 								{
 									_edge->add(valueToAdd);
 								}
@@ -753,7 +753,7 @@ bool ActivityPartitionImpl::eSet(int featureID,  const std::shared_ptr<Any>& new
 	
 							if (valueToAdd)
 							{
-								if(_node->find(valueToAdd) == -1)
+								if(!(_node->includes(valueToAdd)))
 								{
 									_node->add(valueToAdd);
 								}
@@ -829,7 +829,7 @@ bool ActivityPartitionImpl::eSet(int featureID,  const std::shared_ptr<Any>& new
 	
 							if (valueToAdd)
 							{
-								if(_subpartition->find(valueToAdd) == -1)
+								if(!(_subpartition->includes(valueToAdd)))
 								{
 									_subpartition->add(valueToAdd);
 								}

@@ -301,7 +301,7 @@ bool EObjectContainerImpl::eSet(int featureID,  const std::shared_ptr<Any>& newV
 	
 							if (valueToAdd)
 							{
-								if(_container->find(valueToAdd) == -1)
+								if(!(_container->includes(valueToAdd)))
 								{
 									_container->add(valueToAdd);
 								}

@@ -517,7 +517,7 @@ bool ReplyActionImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 	
 							if (valueToAdd)
 							{
-								if(_replyValue->find(valueToAdd) == -1)
+								if(!(_replyValue->includes(valueToAdd)))
 								{
 									_replyValue->add(valueToAdd);
 								}

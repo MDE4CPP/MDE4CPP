@@ -484,7 +484,7 @@ bool InteractionFragmentImpl::eSet(int featureID,  const std::shared_ptr<Any>& n
 	
 							if (valueToAdd)
 							{
-								if(_covered->find(valueToAdd) == -1)
+								if(!(_covered->includes(valueToAdd)))
 								{
 									_covered->add(valueToAdd);
 								}
@@ -591,7 +591,7 @@ bool InteractionFragmentImpl::eSet(int featureID,  const std::shared_ptr<Any>& n
 	
 							if (valueToAdd)
 							{
-								if(_generalOrdering->find(valueToAdd) == -1)
+								if(!(_generalOrdering->includes(valueToAdd)))
 								{
 									_generalOrdering->add(valueToAdd);
 								}

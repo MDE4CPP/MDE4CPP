@@ -468,7 +468,7 @@ bool ComponentRealizationImpl::eSet(int featureID,  const std::shared_ptr<Any>& 
 	
 							if (valueToAdd)
 							{
-								if(_realizingClassifier->find(valueToAdd) == -1)
+								if(!(_realizingClassifier->includes(valueToAdd)))
 								{
 									_realizingClassifier->add(valueToAdd);
 								}

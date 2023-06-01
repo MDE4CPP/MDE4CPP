@@ -979,7 +979,7 @@ bool ActivityNodeActivationGroupImpl::eSet(int featureID,  const std::shared_ptr
 	
 							if (valueToAdd)
 							{
-								if(_edgeInstances->find(valueToAdd) == -1)
+								if(!(_edgeInstances->includes(valueToAdd)))
 								{
 									_edgeInstances->add(valueToAdd);
 								}
@@ -1024,7 +1024,7 @@ bool ActivityNodeActivationGroupImpl::eSet(int featureID,  const std::shared_ptr
 	
 							if (valueToAdd)
 							{
-								if(_nodeActivations->find(valueToAdd) == -1)
+								if(!(_nodeActivations->includes(valueToAdd)))
 								{
 									_nodeActivations->add(valueToAdd);
 								}
@@ -1069,7 +1069,7 @@ bool ActivityNodeActivationGroupImpl::eSet(int featureID,  const std::shared_ptr
 	
 							if (valueToAdd)
 							{
-								if(_suspendedActivations->find(valueToAdd) == -1)
+								if(!(_suspendedActivations->includes(valueToAdd)))
 								{
 									_suspendedActivations->add(valueToAdd);
 								}

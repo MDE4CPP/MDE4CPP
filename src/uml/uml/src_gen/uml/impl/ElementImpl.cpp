@@ -616,7 +616,7 @@ bool ElementImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 	
 							if (valueToAdd)
 							{
-								if(_ownedComment->find(valueToAdd) == -1)
+								if(!(_ownedComment->includes(valueToAdd)))
 								{
 									_ownedComment->add(valueToAdd);
 								}

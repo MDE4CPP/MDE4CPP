@@ -539,7 +539,7 @@ bool EPackageImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 	
 							if (valueToAdd)
 							{
-								if(_eClassifiers->find(valueToAdd) == -1)
+								if(!(_eClassifiers->includes(valueToAdd)))
 								{
 									_eClassifiers->add(valueToAdd);
 								}
@@ -615,7 +615,7 @@ bool EPackageImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 	
 							if (valueToAdd)
 							{
-								if(_eSubpackages->find(valueToAdd) == -1)
+								if(!(_eSubpackages->includes(valueToAdd)))
 								{
 									_eSubpackages->add(valueToAdd);
 								}

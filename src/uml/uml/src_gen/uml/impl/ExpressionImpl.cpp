@@ -451,7 +451,7 @@ bool ExpressionImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 	
 							if (valueToAdd)
 							{
-								if(_operand->find(valueToAdd) == -1)
+								if(!(_operand->includes(valueToAdd)))
 								{
 									_operand->add(valueToAdd);
 								}

@@ -453,7 +453,7 @@ bool EClassifierImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 	
 							if (valueToAdd)
 							{
-								if(_eTypeParameters->find(valueToAdd) == -1)
+								if(!(_eTypeParameters->includes(valueToAdd)))
 								{
 									_eTypeParameters->add(valueToAdd);
 								}

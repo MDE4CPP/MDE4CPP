@@ -403,7 +403,7 @@ bool TemplateableElementImpl::eSet(int featureID,  const std::shared_ptr<Any>& n
 	
 							if (valueToAdd)
 							{
-								if(_templateBinding->find(valueToAdd) == -1)
+								if(!(_templateBinding->includes(valueToAdd)))
 								{
 									_templateBinding->add(valueToAdd);
 								}

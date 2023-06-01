@@ -890,7 +890,7 @@ bool ActivityNodeActivationImpl::eSet(int featureID,  const std::shared_ptr<Any>
 	
 							if (valueToAdd)
 							{
-								if(_heldTokens->find(valueToAdd) == -1)
+								if(!(_heldTokens->includes(valueToAdd)))
 								{
 									_heldTokens->add(valueToAdd);
 								}
@@ -935,7 +935,7 @@ bool ActivityNodeActivationImpl::eSet(int featureID,  const std::shared_ptr<Any>
 	
 							if (valueToAdd)
 							{
-								if(_incomingEdges->find(valueToAdd) == -1)
+								if(!(_incomingEdges->includes(valueToAdd)))
 								{
 									_incomingEdges->add(valueToAdd);
 								}
@@ -1011,7 +1011,7 @@ bool ActivityNodeActivationImpl::eSet(int featureID,  const std::shared_ptr<Any>
 	
 							if (valueToAdd)
 							{
-								if(_outgoingEdges->find(valueToAdd) == -1)
+								if(!(_outgoingEdges->includes(valueToAdd)))
 								{
 									_outgoingEdges->add(valueToAdd);
 								}

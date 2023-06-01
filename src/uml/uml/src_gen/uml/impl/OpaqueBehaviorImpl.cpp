@@ -456,7 +456,7 @@ bool OpaqueBehaviorImpl::eSet(int featureID,  const std::shared_ptr<Any>& newVal
 				{
 					if (valueToAdd)
 					{
-						if(_body->find(valueToAdd) == -1)
+						if(!(_body->includes(valueToAdd)))
 						{
 							_body->add(valueToAdd);
 						}
@@ -486,7 +486,7 @@ bool OpaqueBehaviorImpl::eSet(int featureID,  const std::shared_ptr<Any>& newVal
 				{
 					if (valueToAdd)
 					{
-						if(_language->find(valueToAdd) == -1)
+						if(!(_language->includes(valueToAdd)))
 						{
 							_language->add(valueToAdd);
 						}

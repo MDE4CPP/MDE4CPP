@@ -331,7 +331,7 @@ bool EModelElementImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValu
 	
 							if (valueToAdd)
 							{
-								if(_eAnnotations->find(valueToAdd) == -1)
+								if(!(_eAnnotations->includes(valueToAdd)))
 								{
 									_eAnnotations->add(valueToAdd);
 								}

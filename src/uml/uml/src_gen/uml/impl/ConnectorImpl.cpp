@@ -579,7 +579,7 @@ bool ConnectorImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 	
 							if (valueToAdd)
 							{
-								if(_contract->find(valueToAdd) == -1)
+								if(!(_contract->includes(valueToAdd)))
 								{
 									_contract->add(valueToAdd);
 								}
@@ -624,7 +624,7 @@ bool ConnectorImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 	
 							if (valueToAdd)
 							{
-								if(_end->find(valueToAdd) == -1)
+								if(!(_end->includes(valueToAdd)))
 								{
 									_end->add(valueToAdd);
 								}
@@ -669,7 +669,7 @@ bool ConnectorImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 	
 							if (valueToAdd)
 							{
-								if(_redefinedConnector->find(valueToAdd) == -1)
+								if(!(_redefinedConnector->includes(valueToAdd)))
 								{
 									_redefinedConnector->add(valueToAdd);
 								}

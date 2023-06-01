@@ -406,7 +406,7 @@ bool SequenceNodeImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue
 	
 							if (valueToAdd)
 							{
-								if(_executableNode->find(valueToAdd) == -1)
+								if(!(_executableNode->includes(valueToAdd)))
 								{
 									_executableNode->add(valueToAdd);
 								}

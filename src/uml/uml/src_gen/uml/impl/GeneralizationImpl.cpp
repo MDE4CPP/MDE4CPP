@@ -448,7 +448,7 @@ bool GeneralizationImpl::eSet(int featureID,  const std::shared_ptr<Any>& newVal
 	
 							if (valueToAdd)
 							{
-								if(_generalizationSet->find(valueToAdd) == -1)
+								if(!(_generalizationSet->includes(valueToAdd)))
 								{
 									_generalizationSet->add(valueToAdd);
 								}

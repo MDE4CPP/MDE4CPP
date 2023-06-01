@@ -461,7 +461,7 @@ bool DurationImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 	
 							if (valueToAdd)
 							{
-								if(_observation->find(valueToAdd) == -1)
+								if(!(_observation->includes(valueToAdd)))
 								{
 									_observation->add(valueToAdd);
 								}

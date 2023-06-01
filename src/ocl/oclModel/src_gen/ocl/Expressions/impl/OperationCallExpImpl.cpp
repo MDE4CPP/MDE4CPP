@@ -523,7 +523,7 @@ bool OperationCallExpImpl::eSet(int featureID,  const std::shared_ptr<Any>& newV
 	
 							if (valueToAdd)
 							{
-								if(_argument->find(valueToAdd) == -1)
+								if(!(_argument->includes(valueToAdd)))
 								{
 									_argument->add(valueToAdd);
 								}

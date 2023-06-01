@@ -524,7 +524,7 @@ bool RedefinableTemplateSignatureImpl::eSet(int featureID,  const std::shared_pt
 	
 							if (valueToAdd)
 							{
-								if(_extendedSignature->find(valueToAdd) == -1)
+								if(!(_extendedSignature->includes(valueToAdd)))
 								{
 									_extendedSignature->add(valueToAdd);
 								}

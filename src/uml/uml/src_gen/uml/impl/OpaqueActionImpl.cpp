@@ -556,7 +556,7 @@ bool OpaqueActionImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue
 				{
 					if (valueToAdd)
 					{
-						if(_body->find(valueToAdd) == -1)
+						if(!(_body->includes(valueToAdd)))
 						{
 							_body->add(valueToAdd);
 						}
@@ -594,7 +594,7 @@ bool OpaqueActionImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue
 	
 							if (valueToAdd)
 							{
-								if(_inputValue->find(valueToAdd) == -1)
+								if(!(_inputValue->includes(valueToAdd)))
 								{
 									_inputValue->add(valueToAdd);
 								}
@@ -631,7 +631,7 @@ bool OpaqueActionImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue
 				{
 					if (valueToAdd)
 					{
-						if(_language->find(valueToAdd) == -1)
+						if(!(_language->includes(valueToAdd)))
 						{
 							_language->add(valueToAdd);
 						}
@@ -669,7 +669,7 @@ bool OpaqueActionImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue
 	
 							if (valueToAdd)
 							{
-								if(_outputValue->find(valueToAdd) == -1)
+								if(!(_outputValue->includes(valueToAdd)))
 								{
 									_outputValue->add(valueToAdd);
 								}

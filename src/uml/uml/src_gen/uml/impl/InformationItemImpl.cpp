@@ -387,7 +387,7 @@ bool InformationItemImpl::eSet(int featureID,  const std::shared_ptr<Any>& newVa
 	
 							if (valueToAdd)
 							{
-								if(_represented->find(valueToAdd) == -1)
+								if(!(_represented->includes(valueToAdd)))
 								{
 									_represented->add(valueToAdd);
 								}

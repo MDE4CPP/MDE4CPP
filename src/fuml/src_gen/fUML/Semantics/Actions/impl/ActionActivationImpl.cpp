@@ -1094,7 +1094,7 @@ bool ActionActivationImpl::eSet(int featureID,  const std::shared_ptr<Any>& newV
 	
 							if (valueToAdd)
 							{
-								if(_inputPinActivation->find(valueToAdd) == -1)
+								if(!(_inputPinActivation->includes(valueToAdd)))
 								{
 									_inputPinActivation->add(valueToAdd);
 								}
@@ -1139,7 +1139,7 @@ bool ActionActivationImpl::eSet(int featureID,  const std::shared_ptr<Any>& newV
 	
 							if (valueToAdd)
 							{
-								if(_outputPinActivation->find(valueToAdd) == -1)
+								if(!(_outputPinActivation->includes(valueToAdd)))
 								{
 									_outputPinActivation->add(valueToAdd);
 								}
@@ -1184,7 +1184,7 @@ bool ActionActivationImpl::eSet(int featureID,  const std::shared_ptr<Any>& newV
 	
 							if (valueToAdd)
 							{
-								if(_pinActivation->find(valueToAdd) == -1)
+								if(!(_pinActivation->includes(valueToAdd)))
 								{
 									_pinActivation->add(valueToAdd);
 								}

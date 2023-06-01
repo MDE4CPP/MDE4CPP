@@ -1123,7 +1123,7 @@ bool OperationImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 	
 							if (valueToAdd)
 							{
-								if(_ownedParameter->find(valueToAdd) == -1)
+								if(!(_ownedParameter->includes(valueToAdd)))
 								{
 									_ownedParameter->add(valueToAdd);
 								}
@@ -1168,7 +1168,7 @@ bool OperationImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 	
 							if (valueToAdd)
 							{
-								if(_postcondition->find(valueToAdd) == -1)
+								if(!(_postcondition->includes(valueToAdd)))
 								{
 									_postcondition->add(valueToAdd);
 								}
@@ -1213,7 +1213,7 @@ bool OperationImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 	
 							if (valueToAdd)
 							{
-								if(_precondition->find(valueToAdd) == -1)
+								if(!(_precondition->includes(valueToAdd)))
 								{
 									_precondition->add(valueToAdd);
 								}
@@ -1258,7 +1258,7 @@ bool OperationImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 	
 							if (valueToAdd)
 							{
-								if(_redefinedOperation->find(valueToAdd) == -1)
+								if(!(_redefinedOperation->includes(valueToAdd)))
 								{
 									_redefinedOperation->add(valueToAdd);
 								}

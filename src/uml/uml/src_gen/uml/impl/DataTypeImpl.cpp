@@ -504,7 +504,7 @@ bool DataTypeImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 	
 							if (valueToAdd)
 							{
-								if(_ownedAttribute->find(valueToAdd) == -1)
+								if(!(_ownedAttribute->includes(valueToAdd)))
 								{
 									_ownedAttribute->add(valueToAdd);
 								}
@@ -549,7 +549,7 @@ bool DataTypeImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 	
 							if (valueToAdd)
 							{
-								if(_ownedOperation->find(valueToAdd) == -1)
+								if(!(_ownedOperation->includes(valueToAdd)))
 								{
 									_ownedOperation->add(valueToAdd);
 								}

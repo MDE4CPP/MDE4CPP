@@ -811,7 +811,7 @@ bool ClassImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 	
 							if (valueToAdd)
 							{
-								if(_nestedClassifier->find(valueToAdd) == -1)
+								if(!(_nestedClassifier->includes(valueToAdd)))
 								{
 									_nestedClassifier->add(valueToAdd);
 								}
@@ -856,7 +856,7 @@ bool ClassImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 	
 							if (valueToAdd)
 							{
-								if(_ownedAttribute->find(valueToAdd) == -1)
+								if(!(_ownedAttribute->includes(valueToAdd)))
 								{
 									_ownedAttribute->add(valueToAdd);
 								}
@@ -901,7 +901,7 @@ bool ClassImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 	
 							if (valueToAdd)
 							{
-								if(_ownedOperation->find(valueToAdd) == -1)
+								if(!(_ownedOperation->includes(valueToAdd)))
 								{
 									_ownedOperation->add(valueToAdd);
 								}
@@ -946,7 +946,7 @@ bool ClassImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 	
 							if (valueToAdd)
 							{
-								if(_ownedReception->find(valueToAdd) == -1)
+								if(!(_ownedReception->includes(valueToAdd)))
 								{
 									_ownedReception->add(valueToAdd);
 								}
@@ -991,7 +991,7 @@ bool ClassImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 	
 							if (valueToAdd)
 							{
-								if(_superClass->find(valueToAdd) == -1)
+								if(!(_superClass->includes(valueToAdd)))
 								{
 									_superClass->add(valueToAdd);
 								}

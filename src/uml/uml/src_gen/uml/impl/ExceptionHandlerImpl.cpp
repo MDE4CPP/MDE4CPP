@@ -447,7 +447,7 @@ bool ExceptionHandlerImpl::eSet(int featureID,  const std::shared_ptr<Any>& newV
 	
 							if (valueToAdd)
 							{
-								if(_exceptionType->find(valueToAdd) == -1)
+								if(!(_exceptionType->includes(valueToAdd)))
 								{
 									_exceptionType->add(valueToAdd);
 								}

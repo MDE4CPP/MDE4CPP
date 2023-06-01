@@ -494,7 +494,7 @@ bool StereotypeImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 	
 							if (valueToAdd)
 							{
-								if(_icon->find(valueToAdd) == -1)
+								if(!(_icon->includes(valueToAdd)))
 								{
 									_icon->add(valueToAdd);
 								}

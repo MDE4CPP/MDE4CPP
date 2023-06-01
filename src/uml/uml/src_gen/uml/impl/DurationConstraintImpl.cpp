@@ -359,7 +359,7 @@ bool DurationConstraintImpl::eSet(int featureID,  const std::shared_ptr<Any>& ne
 				{
 					if (valueToAdd)
 					{
-						if(_firstEvent->find(valueToAdd) == -1)
+						if(!(_firstEvent->includes(valueToAdd)))
 						{
 							_firstEvent->add(valueToAdd);
 						}

@@ -335,7 +335,7 @@ bool OperationCallExpEvalImpl::eSet(int featureID,  const std::shared_ptr<Any>& 
 	
 							if (valueToAdd)
 							{
-								if(_arguments->find(valueToAdd) == -1)
+								if(!(_arguments->includes(valueToAdd)))
 								{
 									_arguments->add(valueToAdd);
 								}

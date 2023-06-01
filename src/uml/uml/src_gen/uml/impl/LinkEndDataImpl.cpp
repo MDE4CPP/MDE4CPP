@@ -452,7 +452,7 @@ bool LinkEndDataImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 	
 							if (valueToAdd)
 							{
-								if(_qualifier->find(valueToAdd) == -1)
+								if(!(_qualifier->includes(valueToAdd)))
 								{
 									_qualifier->add(valueToAdd);
 								}

@@ -548,7 +548,7 @@ bool ObjectNodeImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 	
 							if (valueToAdd)
 							{
-								if(_inState->find(valueToAdd) == -1)
+								if(!(_inState->includes(valueToAdd)))
 								{
 									_inState->add(valueToAdd);
 								}

@@ -632,7 +632,7 @@ bool ComponentImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 	
 							if (valueToAdd)
 							{
-								if(_packagedElement->find(valueToAdd) == -1)
+								if(!(_packagedElement->includes(valueToAdd)))
 								{
 									_packagedElement->add(valueToAdd);
 								}
@@ -677,7 +677,7 @@ bool ComponentImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 	
 							if (valueToAdd)
 							{
-								if(_realization->find(valueToAdd) == -1)
+								if(!(_realization->includes(valueToAdd)))
 								{
 									_realization->add(valueToAdd);
 								}

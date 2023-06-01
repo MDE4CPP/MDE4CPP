@@ -570,7 +570,7 @@ bool EOperationImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 	
 							if (valueToAdd)
 							{
-								if(_eExceptions->find(valueToAdd) == -1)
+								if(!(_eExceptions->includes(valueToAdd)))
 								{
 									_eExceptions->add(valueToAdd);
 								}
@@ -615,7 +615,7 @@ bool EOperationImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 	
 							if (valueToAdd)
 							{
-								if(_eGenericExceptions->find(valueToAdd) == -1)
+								if(!(_eGenericExceptions->includes(valueToAdd)))
 								{
 									_eGenericExceptions->add(valueToAdd);
 								}
@@ -660,7 +660,7 @@ bool EOperationImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 	
 							if (valueToAdd)
 							{
-								if(_eParameters->find(valueToAdd) == -1)
+								if(!(_eParameters->includes(valueToAdd)))
 								{
 									_eParameters->add(valueToAdd);
 								}
@@ -705,7 +705,7 @@ bool EOperationImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 	
 							if (valueToAdd)
 							{
-								if(_eTypeParameters->find(valueToAdd) == -1)
+								if(!(_eTypeParameters->includes(valueToAdd)))
 								{
 									_eTypeParameters->add(valueToAdd);
 								}

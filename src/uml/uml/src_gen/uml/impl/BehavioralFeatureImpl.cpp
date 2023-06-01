@@ -667,7 +667,7 @@ bool BehavioralFeatureImpl::eSet(int featureID,  const std::shared_ptr<Any>& new
 	
 							if (valueToAdd)
 							{
-								if(_method->find(valueToAdd) == -1)
+								if(!(_method->includes(valueToAdd)))
 								{
 									_method->add(valueToAdd);
 								}
@@ -712,7 +712,7 @@ bool BehavioralFeatureImpl::eSet(int featureID,  const std::shared_ptr<Any>& new
 	
 							if (valueToAdd)
 							{
-								if(_ownedParameter->find(valueToAdd) == -1)
+								if(!(_ownedParameter->includes(valueToAdd)))
 								{
 									_ownedParameter->add(valueToAdd);
 								}
@@ -757,7 +757,7 @@ bool BehavioralFeatureImpl::eSet(int featureID,  const std::shared_ptr<Any>& new
 	
 							if (valueToAdd)
 							{
-								if(_ownedParameterSet->find(valueToAdd) == -1)
+								if(!(_ownedParameterSet->includes(valueToAdd)))
 								{
 									_ownedParameterSet->add(valueToAdd);
 								}
@@ -802,7 +802,7 @@ bool BehavioralFeatureImpl::eSet(int featureID,  const std::shared_ptr<Any>& new
 	
 							if (valueToAdd)
 							{
-								if(_raisedException->find(valueToAdd) == -1)
+								if(!(_raisedException->includes(valueToAdd)))
 								{
 									_raisedException->add(valueToAdd);
 								}

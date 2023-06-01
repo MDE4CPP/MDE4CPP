@@ -45,26 +45,20 @@ SET(SOURCE_FILES
 	Common/impl/StatusImpl.cpp
 	
 	
-	# Package of FoundationalModelLibrary::BasicInputOutput
-	BasicInputOutput/impl/BasicInputOutputPackageImpl.cpp
-	# Factory of FoundationalModelLibrary::BasicInputOutput
-	BasicInputOutput/impl/BasicInputOutputFactoryImpl.cpp
-	# Contents of FoundationalModelLibrary::BasicInputOutput
-	BasicInputOutput/impl/ActiveChannelImpl.cpp
-	BasicInputOutput/impl/ChannelImpl.cpp
-	BasicInputOutput/impl/InputChannelImpl.cpp
-	BasicInputOutput/impl/OutputChannelImpl.cpp
-	BasicInputOutput/impl/StandardInputChannelImpl.cpp
-	BasicInputOutput/impl/StandardOutputChannelImpl.cpp
-	BasicInputOutput/impl/TextInputChannelImpl.cpp
-	BasicInputOutput/impl/TextOutputChannelImpl.cpp
-	
-	
 	# Package of FoundationalModelLibrary::PrimitiveBehaviors
 	PrimitiveBehaviors/impl/PrimitiveBehaviorsPackageImpl.cpp
 	# Factory of FoundationalModelLibrary::PrimitiveBehaviors
 	PrimitiveBehaviors/impl/PrimitiveBehaviorsFactoryImpl.cpp
 	# Contents of FoundationalModelLibrary::PrimitiveBehaviors
+	
+	# Package of FoundationalModelLibrary::PrimitiveBehaviors::IntegerFunctions
+	PrimitiveBehaviors/IntegerFunctions/impl/IntegerFunctionsPackageImpl.cpp
+	# Factory of FoundationalModelLibrary::PrimitiveBehaviors::IntegerFunctions
+	PrimitiveBehaviors/IntegerFunctions/impl/IntegerFunctionsFactoryImpl.cpp
+	# Global functions of FoundationalModelLibrary::PrimitiveBehaviors::IntegerFunctions
+	PrimitiveBehaviors/IntegerFunctions/_GlobalFunctions.cpp
+	# Contents of FoundationalModelLibrary::PrimitiveBehaviors::IntegerFunctions
+	
 	
 	# Package of FoundationalModelLibrary::PrimitiveBehaviors::UnlimitedNaturalFunctions
 	PrimitiveBehaviors/UnlimitedNaturalFunctions/impl/UnlimitedNaturalFunctionsPackageImpl.cpp
@@ -84,6 +78,15 @@ SET(SOURCE_FILES
 	# Contents of FoundationalModelLibrary::PrimitiveBehaviors::BooleanFunctions
 	
 	
+	# Package of FoundationalModelLibrary::PrimitiveBehaviors::StringFunctions
+	PrimitiveBehaviors/StringFunctions/impl/StringFunctionsPackageImpl.cpp
+	# Factory of FoundationalModelLibrary::PrimitiveBehaviors::StringFunctions
+	PrimitiveBehaviors/StringFunctions/impl/StringFunctionsFactoryImpl.cpp
+	# Global functions of FoundationalModelLibrary::PrimitiveBehaviors::StringFunctions
+	PrimitiveBehaviors/StringFunctions/_GlobalFunctions.cpp
+	# Contents of FoundationalModelLibrary::PrimitiveBehaviors::StringFunctions
+	
+	
 	# Package of FoundationalModelLibrary::PrimitiveBehaviors::RealFunctions
 	PrimitiveBehaviors/RealFunctions/impl/RealFunctionsPackageImpl.cpp
 	# Factory of FoundationalModelLibrary::PrimitiveBehaviors::RealFunctions
@@ -93,23 +96,20 @@ SET(SOURCE_FILES
 	# Contents of FoundationalModelLibrary::PrimitiveBehaviors::RealFunctions
 	
 	
-	# Package of FoundationalModelLibrary::PrimitiveBehaviors::IntegerFunctions
-	PrimitiveBehaviors/IntegerFunctions/impl/IntegerFunctionsPackageImpl.cpp
-	# Factory of FoundationalModelLibrary::PrimitiveBehaviors::IntegerFunctions
-	PrimitiveBehaviors/IntegerFunctions/impl/IntegerFunctionsFactoryImpl.cpp
-	# Global functions of FoundationalModelLibrary::PrimitiveBehaviors::IntegerFunctions
-	PrimitiveBehaviors/IntegerFunctions/_GlobalFunctions.cpp
-	# Contents of FoundationalModelLibrary::PrimitiveBehaviors::IntegerFunctions
 	
-	
-	# Package of FoundationalModelLibrary::PrimitiveBehaviors::StringFunctions
-	PrimitiveBehaviors/StringFunctions/impl/StringFunctionsPackageImpl.cpp
-	# Factory of FoundationalModelLibrary::PrimitiveBehaviors::StringFunctions
-	PrimitiveBehaviors/StringFunctions/impl/StringFunctionsFactoryImpl.cpp
-	# Global functions of FoundationalModelLibrary::PrimitiveBehaviors::StringFunctions
-	PrimitiveBehaviors/StringFunctions/_GlobalFunctions.cpp
-	# Contents of FoundationalModelLibrary::PrimitiveBehaviors::StringFunctions
-	
+	# Package of FoundationalModelLibrary::BasicInputOutput
+	BasicInputOutput/impl/BasicInputOutputPackageImpl.cpp
+	# Factory of FoundationalModelLibrary::BasicInputOutput
+	BasicInputOutput/impl/BasicInputOutputFactoryImpl.cpp
+	# Contents of FoundationalModelLibrary::BasicInputOutput
+	BasicInputOutput/impl/ActiveChannelImpl.cpp
+	BasicInputOutput/impl/ChannelImpl.cpp
+	BasicInputOutput/impl/InputChannelImpl.cpp
+	BasicInputOutput/impl/OutputChannelImpl.cpp
+	BasicInputOutput/impl/StandardInputChannelImpl.cpp
+	BasicInputOutput/impl/StandardOutputChannelImpl.cpp
+	BasicInputOutput/impl/TextInputChannelImpl.cpp
+	BasicInputOutput/impl/TextOutputChannelImpl.cpp
 	
 	
 	

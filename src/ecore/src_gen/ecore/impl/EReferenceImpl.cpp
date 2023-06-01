@@ -477,7 +477,7 @@ bool EReferenceImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 	
 							if (valueToAdd)
 							{
-								if(_eKeys->find(valueToAdd) == -1)
+								if(!(_eKeys->includes(valueToAdd)))
 								{
 									_eKeys->add(valueToAdd);
 								}

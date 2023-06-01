@@ -359,7 +359,7 @@ bool ClassifierTemplateParameterImpl::eSet(int featureID,  const std::shared_ptr
 	
 							if (valueToAdd)
 							{
-								if(_constrainingClassifier->find(valueToAdd) == -1)
+								if(!(_constrainingClassifier->includes(valueToAdd)))
 								{
 									_constrainingClassifier->add(valueToAdd);
 								}

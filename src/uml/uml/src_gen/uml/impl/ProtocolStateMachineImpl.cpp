@@ -459,7 +459,7 @@ bool ProtocolStateMachineImpl::eSet(int featureID,  const std::shared_ptr<Any>& 
 	
 							if (valueToAdd)
 							{
-								if(_conformance->find(valueToAdd) == -1)
+								if(!(_conformance->includes(valueToAdd)))
 								{
 									_conformance->add(valueToAdd);
 								}

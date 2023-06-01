@@ -1032,7 +1032,7 @@ bool PackageImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 	
 							if (valueToAdd)
 							{
-								if(_nestedPackage->find(valueToAdd) == -1)
+								if(!(_nestedPackage->includes(valueToAdd)))
 								{
 									_nestedPackage->add(valueToAdd);
 								}
@@ -1108,7 +1108,7 @@ bool PackageImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 	
 							if (valueToAdd)
 							{
-								if(_ownedType->find(valueToAdd) == -1)
+								if(!(_ownedType->includes(valueToAdd)))
 								{
 									_ownedType->add(valueToAdd);
 								}
@@ -1153,7 +1153,7 @@ bool PackageImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 	
 							if (valueToAdd)
 							{
-								if(_packageMerge->find(valueToAdd) == -1)
+								if(!(_packageMerge->includes(valueToAdd)))
 								{
 									_packageMerge->add(valueToAdd);
 								}
@@ -1198,7 +1198,7 @@ bool PackageImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 	
 							if (valueToAdd)
 							{
-								if(_packagedElement->find(valueToAdd) == -1)
+								if(!(_packagedElement->includes(valueToAdd)))
 								{
 									_packagedElement->add(valueToAdd);
 								}
@@ -1243,7 +1243,7 @@ bool PackageImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 	
 							if (valueToAdd)
 							{
-								if(_profileApplication->find(valueToAdd) == -1)
+								if(!(_profileApplication->includes(valueToAdd)))
 								{
 									_profileApplication->add(valueToAdd);
 								}

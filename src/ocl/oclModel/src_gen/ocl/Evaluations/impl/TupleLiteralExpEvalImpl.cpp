@@ -304,7 +304,7 @@ bool TupleLiteralExpEvalImpl::eSet(int featureID,  const std::shared_ptr<Any>& n
 	
 							if (valueToAdd)
 							{
-								if(_tuplePart->find(valueToAdd) == -1)
+								if(!(_tuplePart->includes(valueToAdd)))
 								{
 									_tuplePart->add(valueToAdd);
 								}

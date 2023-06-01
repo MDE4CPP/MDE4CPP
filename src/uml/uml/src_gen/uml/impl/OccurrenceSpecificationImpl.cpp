@@ -393,7 +393,7 @@ bool OccurrenceSpecificationImpl::eSet(int featureID,  const std::shared_ptr<Any
 	
 							if (valueToAdd)
 							{
-								if(_toAfter->find(valueToAdd) == -1)
+								if(!(_toAfter->includes(valueToAdd)))
 								{
 									_toAfter->add(valueToAdd);
 								}
@@ -438,7 +438,7 @@ bool OccurrenceSpecificationImpl::eSet(int featureID,  const std::shared_ptr<Any
 	
 							if (valueToAdd)
 							{
-								if(_toBefore->find(valueToAdd) == -1)
+								if(!(_toBefore->includes(valueToAdd)))
 								{
 									_toBefore->add(valueToAdd);
 								}

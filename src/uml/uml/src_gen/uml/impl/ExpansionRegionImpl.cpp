@@ -496,7 +496,7 @@ bool ExpansionRegionImpl::eSet(int featureID,  const std::shared_ptr<Any>& newVa
 	
 							if (valueToAdd)
 							{
-								if(_inputElement->find(valueToAdd) == -1)
+								if(!(_inputElement->includes(valueToAdd)))
 								{
 									_inputElement->add(valueToAdd);
 								}
@@ -555,7 +555,7 @@ bool ExpansionRegionImpl::eSet(int featureID,  const std::shared_ptr<Any>& newVa
 	
 							if (valueToAdd)
 							{
-								if(_outputElement->find(valueToAdd) == -1)
+								if(!(_outputElement->includes(valueToAdd)))
 								{
 									_outputElement->add(valueToAdd);
 								}

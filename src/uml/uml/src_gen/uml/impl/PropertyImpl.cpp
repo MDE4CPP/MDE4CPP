@@ -1463,7 +1463,7 @@ bool PropertyImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 	
 							if (valueToAdd)
 							{
-								if(_qualifier->find(valueToAdd) == -1)
+								if(!(_qualifier->includes(valueToAdd)))
 								{
 									_qualifier->add(valueToAdd);
 								}
@@ -1508,7 +1508,7 @@ bool PropertyImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 	
 							if (valueToAdd)
 							{
-								if(_redefinedProperty->find(valueToAdd) == -1)
+								if(!(_redefinedProperty->includes(valueToAdd)))
 								{
 									_redefinedProperty->add(valueToAdd);
 								}
@@ -1553,7 +1553,7 @@ bool PropertyImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 	
 							if (valueToAdd)
 							{
-								if(_subsettedProperty->find(valueToAdd) == -1)
+								if(!(_subsettedProperty->includes(valueToAdd)))
 								{
 									_subsettedProperty->add(valueToAdd);
 								}

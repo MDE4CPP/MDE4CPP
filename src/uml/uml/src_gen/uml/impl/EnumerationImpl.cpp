@@ -422,7 +422,7 @@ bool EnumerationImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 	
 							if (valueToAdd)
 							{
-								if(_ownedLiteral->find(valueToAdd) == -1)
+								if(!(_ownedLiteral->includes(valueToAdd)))
 								{
 									_ownedLiteral->add(valueToAdd);
 								}

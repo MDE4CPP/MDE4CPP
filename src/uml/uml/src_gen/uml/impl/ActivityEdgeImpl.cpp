@@ -799,7 +799,7 @@ bool ActivityEdgeImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue
 	
 							if (valueToAdd)
 							{
-								if(_inPartition->find(valueToAdd) == -1)
+								if(!(_inPartition->includes(valueToAdd)))
 								{
 									_inPartition->add(valueToAdd);
 								}
@@ -906,7 +906,7 @@ bool ActivityEdgeImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue
 	
 							if (valueToAdd)
 							{
-								if(_redefinedEdge->find(valueToAdd) == -1)
+								if(!(_redefinedEdge->includes(valueToAdd)))
 								{
 									_redefinedEdge->add(valueToAdd);
 								}

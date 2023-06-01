@@ -587,7 +587,7 @@ bool InteractionUseImpl::eSet(int featureID,  const std::shared_ptr<Any>& newVal
 	
 							if (valueToAdd)
 							{
-								if(_actualGate->find(valueToAdd) == -1)
+								if(!(_actualGate->includes(valueToAdd)))
 								{
 									_actualGate->add(valueToAdd);
 								}
@@ -632,7 +632,7 @@ bool InteractionUseImpl::eSet(int featureID,  const std::shared_ptr<Any>& newVal
 	
 							if (valueToAdd)
 							{
-								if(_argument->find(valueToAdd) == -1)
+								if(!(_argument->includes(valueToAdd)))
 								{
 									_argument->add(valueToAdd);
 								}

@@ -477,7 +477,7 @@ bool DependencyImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 	
 							if (valueToAdd)
 							{
-								if(_client->find(valueToAdd) == -1)
+								if(!(_client->includes(valueToAdd)))
 								{
 									_client->add(valueToAdd);
 								}
@@ -522,7 +522,7 @@ bool DependencyImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 	
 							if (valueToAdd)
 							{
-								if(_supplier->find(valueToAdd) == -1)
+								if(!(_supplier->includes(valueToAdd)))
 								{
 									_supplier->add(valueToAdd);
 								}

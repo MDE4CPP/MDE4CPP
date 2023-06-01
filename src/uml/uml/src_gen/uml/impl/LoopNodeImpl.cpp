@@ -728,7 +728,7 @@ bool LoopNodeImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 	
 							if (valueToAdd)
 							{
-								if(_bodyOutput->find(valueToAdd) == -1)
+								if(!(_bodyOutput->includes(valueToAdd)))
 								{
 									_bodyOutput->add(valueToAdd);
 								}
@@ -773,7 +773,7 @@ bool LoopNodeImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 	
 							if (valueToAdd)
 							{
-								if(_bodyPart->find(valueToAdd) == -1)
+								if(!(_bodyPart->includes(valueToAdd)))
 								{
 									_bodyPart->add(valueToAdd);
 								}
@@ -863,7 +863,7 @@ bool LoopNodeImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 	
 							if (valueToAdd)
 							{
-								if(_loopVariable->find(valueToAdd) == -1)
+								if(!(_loopVariable->includes(valueToAdd)))
 								{
 									_loopVariable->add(valueToAdd);
 								}
@@ -908,7 +908,7 @@ bool LoopNodeImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 	
 							if (valueToAdd)
 							{
-								if(_loopVariableInput->find(valueToAdd) == -1)
+								if(!(_loopVariableInput->includes(valueToAdd)))
 								{
 									_loopVariableInput->add(valueToAdd);
 								}
@@ -953,7 +953,7 @@ bool LoopNodeImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 	
 							if (valueToAdd)
 							{
-								if(_result->find(valueToAdd) == -1)
+								if(!(_result->includes(valueToAdd)))
 								{
 									_result->add(valueToAdd);
 								}
@@ -998,7 +998,7 @@ bool LoopNodeImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 	
 							if (valueToAdd)
 							{
-								if(_setupPart->find(valueToAdd) == -1)
+								if(!(_setupPart->includes(valueToAdd)))
 								{
 									_setupPart->add(valueToAdd);
 								}
@@ -1043,7 +1043,7 @@ bool LoopNodeImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 	
 							if (valueToAdd)
 							{
-								if(_test->find(valueToAdd) == -1)
+								if(!(_test->includes(valueToAdd)))
 								{
 									_test->add(valueToAdd);
 								}

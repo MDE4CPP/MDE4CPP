@@ -722,7 +722,7 @@ bool ActivityNodeImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue
 	
 							if (valueToAdd)
 							{
-								if(_inInterruptibleRegion->find(valueToAdd) == -1)
+								if(!(_inInterruptibleRegion->includes(valueToAdd)))
 								{
 									_inInterruptibleRegion->add(valueToAdd);
 								}
@@ -767,7 +767,7 @@ bool ActivityNodeImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue
 	
 							if (valueToAdd)
 							{
-								if(_inPartition->find(valueToAdd) == -1)
+								if(!(_inPartition->includes(valueToAdd)))
 								{
 									_inPartition->add(valueToAdd);
 								}
@@ -843,7 +843,7 @@ bool ActivityNodeImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue
 	
 							if (valueToAdd)
 							{
-								if(_incoming->find(valueToAdd) == -1)
+								if(!(_incoming->includes(valueToAdd)))
 								{
 									_incoming->add(valueToAdd);
 								}
@@ -888,7 +888,7 @@ bool ActivityNodeImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue
 	
 							if (valueToAdd)
 							{
-								if(_outgoing->find(valueToAdd) == -1)
+								if(!(_outgoing->includes(valueToAdd)))
 								{
 									_outgoing->add(valueToAdd);
 								}
@@ -933,7 +933,7 @@ bool ActivityNodeImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue
 	
 							if (valueToAdd)
 							{
-								if(_redefinedNode->find(valueToAdd) == -1)
+								if(!(_redefinedNode->includes(valueToAdd)))
 								{
 									_redefinedNode->add(valueToAdd);
 								}

@@ -503,7 +503,7 @@ bool OperationContextExpImpl::eSet(int featureID,  const std::shared_ptr<Any>& n
 	
 							if (valueToAdd)
 							{
-								if(_inputParameters->find(valueToAdd) == -1)
+								if(!(_inputParameters->includes(valueToAdd)))
 								{
 									_inputParameters->add(valueToAdd);
 								}

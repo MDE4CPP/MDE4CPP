@@ -474,7 +474,7 @@ bool EAnnotationImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 	
 							if (valueToAdd)
 							{
-								if(_contents->find(valueToAdd) == -1)
+								if(!(_contents->includes(valueToAdd)))
 								{
 									_contents->add(valueToAdd);
 								}
@@ -564,7 +564,7 @@ bool EAnnotationImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 	
 							if (valueToAdd)
 							{
-								if(_references->find(valueToAdd) == -1)
+								if(!(_references->includes(valueToAdd)))
 								{
 									_references->add(valueToAdd);
 								}

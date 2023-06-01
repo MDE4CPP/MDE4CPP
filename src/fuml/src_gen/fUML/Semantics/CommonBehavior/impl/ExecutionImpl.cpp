@@ -726,7 +726,7 @@ bool ExecutionImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 	
 							if (valueToAdd)
 							{
-								if(_parameterValues->find(valueToAdd) == -1)
+								if(!(_parameterValues->includes(valueToAdd)))
 								{
 									_parameterValues->add(valueToAdd);
 								}
@@ -771,7 +771,7 @@ bool ExecutionImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 	
 							if (valueToAdd)
 							{
-								if(_types->find(valueToAdd) == -1)
+								if(!(_types->includes(valueToAdd)))
 								{
 									_types->add(valueToAdd);
 								}

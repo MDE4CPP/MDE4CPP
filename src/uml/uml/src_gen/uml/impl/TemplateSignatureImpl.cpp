@@ -431,7 +431,7 @@ bool TemplateSignatureImpl::eSet(int featureID,  const std::shared_ptr<Any>& new
 	
 							if (valueToAdd)
 							{
-								if(_ownedParameter->find(valueToAdd) == -1)
+								if(!(_ownedParameter->includes(valueToAdd)))
 								{
 									_ownedParameter->add(valueToAdd);
 								}
@@ -476,7 +476,7 @@ bool TemplateSignatureImpl::eSet(int featureID,  const std::shared_ptr<Any>& new
 	
 							if (valueToAdd)
 							{
-								if(_parameter->find(valueToAdd) == -1)
+								if(!(_parameter->includes(valueToAdd)))
 								{
 									_parameter->add(valueToAdd);
 								}

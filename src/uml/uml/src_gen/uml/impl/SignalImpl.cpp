@@ -422,7 +422,7 @@ bool SignalImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 	
 							if (valueToAdd)
 							{
-								if(_ownedAttribute->find(valueToAdd) == -1)
+								if(!(_ownedAttribute->includes(valueToAdd)))
 								{
 									_ownedAttribute->add(valueToAdd);
 								}

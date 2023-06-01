@@ -488,7 +488,7 @@ bool SlotImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 	
 							if (valueToAdd)
 							{
-								if(_value->find(valueToAdd) == -1)
+								if(!(_value->includes(valueToAdd)))
 								{
 									_value->add(valueToAdd);
 								}

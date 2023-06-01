@@ -677,7 +677,7 @@ bool InformationFlowImpl::eSet(int featureID,  const std::shared_ptr<Any>& newVa
 	
 							if (valueToAdd)
 							{
-								if(_conveyed->find(valueToAdd) == -1)
+								if(!(_conveyed->includes(valueToAdd)))
 								{
 									_conveyed->add(valueToAdd);
 								}
@@ -722,7 +722,7 @@ bool InformationFlowImpl::eSet(int featureID,  const std::shared_ptr<Any>& newVa
 	
 							if (valueToAdd)
 							{
-								if(_informationSource->find(valueToAdd) == -1)
+								if(!(_informationSource->includes(valueToAdd)))
 								{
 									_informationSource->add(valueToAdd);
 								}
@@ -767,7 +767,7 @@ bool InformationFlowImpl::eSet(int featureID,  const std::shared_ptr<Any>& newVa
 	
 							if (valueToAdd)
 							{
-								if(_informationTarget->find(valueToAdd) == -1)
+								if(!(_informationTarget->includes(valueToAdd)))
 								{
 									_informationTarget->add(valueToAdd);
 								}
@@ -812,7 +812,7 @@ bool InformationFlowImpl::eSet(int featureID,  const std::shared_ptr<Any>& newVa
 	
 							if (valueToAdd)
 							{
-								if(_realization->find(valueToAdd) == -1)
+								if(!(_realization->includes(valueToAdd)))
 								{
 									_realization->add(valueToAdd);
 								}
@@ -857,7 +857,7 @@ bool InformationFlowImpl::eSet(int featureID,  const std::shared_ptr<Any>& newVa
 	
 							if (valueToAdd)
 							{
-								if(_realizingActivityEdge->find(valueToAdd) == -1)
+								if(!(_realizingActivityEdge->includes(valueToAdd)))
 								{
 									_realizingActivityEdge->add(valueToAdd);
 								}
@@ -902,7 +902,7 @@ bool InformationFlowImpl::eSet(int featureID,  const std::shared_ptr<Any>& newVa
 	
 							if (valueToAdd)
 							{
-								if(_realizingConnector->find(valueToAdd) == -1)
+								if(!(_realizingConnector->includes(valueToAdd)))
 								{
 									_realizingConnector->add(valueToAdd);
 								}
@@ -947,7 +947,7 @@ bool InformationFlowImpl::eSet(int featureID,  const std::shared_ptr<Any>& newVa
 	
 							if (valueToAdd)
 							{
-								if(_realizingMessage->find(valueToAdd) == -1)
+								if(!(_realizingMessage->includes(valueToAdd)))
 								{
 									_realizingMessage->add(valueToAdd);
 								}

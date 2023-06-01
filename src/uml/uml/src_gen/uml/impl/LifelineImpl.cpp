@@ -487,7 +487,7 @@ bool LifelineImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 	
 							if (valueToAdd)
 							{
-								if(_coveredBy->find(valueToAdd) == -1)
+								if(!(_coveredBy->includes(valueToAdd)))
 								{
 									_coveredBy->add(valueToAdd);
 								}

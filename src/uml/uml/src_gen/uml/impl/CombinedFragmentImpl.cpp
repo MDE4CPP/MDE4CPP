@@ -593,7 +593,7 @@ bool CombinedFragmentImpl::eSet(int featureID,  const std::shared_ptr<Any>& newV
 	
 							if (valueToAdd)
 							{
-								if(_cfragmentGate->find(valueToAdd) == -1)
+								if(!(_cfragmentGate->includes(valueToAdd)))
 								{
 									_cfragmentGate->add(valueToAdd);
 								}
@@ -652,7 +652,7 @@ bool CombinedFragmentImpl::eSet(int featureID,  const std::shared_ptr<Any>& newV
 	
 							if (valueToAdd)
 							{
-								if(_operand->find(valueToAdd) == -1)
+								if(!(_operand->includes(valueToAdd)))
 								{
 									_operand->add(valueToAdd);
 								}

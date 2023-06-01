@@ -484,7 +484,7 @@ bool ExpressionInOclImpl::eSet(int featureID,  const std::shared_ptr<Any>& newVa
 	
 							if (valueToAdd)
 							{
-								if(_parameterVariable->find(valueToAdd) == -1)
+								if(!(_parameterVariable->includes(valueToAdd)))
 								{
 									_parameterVariable->add(valueToAdd);
 								}

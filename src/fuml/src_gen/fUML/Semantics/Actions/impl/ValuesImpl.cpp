@@ -261,7 +261,7 @@ bool ValuesImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 				{
 					if (valueToAdd)
 					{
-						if(_values->find(valueToAdd) == -1)
+						if(!(_values->includes(valueToAdd)))
 						{
 							_values->add(valueToAdd);
 						}

@@ -494,7 +494,7 @@ bool ReclassifyObjectActionImpl::eSet(int featureID,  const std::shared_ptr<Any>
 	
 							if (valueToAdd)
 							{
-								if(_newClassifier->find(valueToAdd) == -1)
+								if(!(_newClassifier->includes(valueToAdd)))
 								{
 									_newClassifier->add(valueToAdd);
 								}
@@ -570,7 +570,7 @@ bool ReclassifyObjectActionImpl::eSet(int featureID,  const std::shared_ptr<Any>
 	
 							if (valueToAdd)
 							{
-								if(_oldClassifier->find(valueToAdd) == -1)
+								if(!(_oldClassifier->includes(valueToAdd)))
 								{
 									_oldClassifier->add(valueToAdd);
 								}

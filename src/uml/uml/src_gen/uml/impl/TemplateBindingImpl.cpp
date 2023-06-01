@@ -466,7 +466,7 @@ bool TemplateBindingImpl::eSet(int featureID,  const std::shared_ptr<Any>& newVa
 	
 							if (valueToAdd)
 							{
-								if(_parameterSubstitution->find(valueToAdd) == -1)
+								if(!(_parameterSubstitution->includes(valueToAdd)))
 								{
 									_parameterSubstitution->add(valueToAdd);
 								}

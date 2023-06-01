@@ -349,7 +349,7 @@ bool NavigationCallExpEvalImpl::eSet(int featureID,  const std::shared_ptr<Any>&
 	
 							if (valueToAdd)
 							{
-								if(_qualifiers->find(valueToAdd) == -1)
+								if(!(_qualifiers->includes(valueToAdd)))
 								{
 									_qualifiers->add(valueToAdd);
 								}

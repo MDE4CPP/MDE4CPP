@@ -377,7 +377,7 @@ bool ExecutableNodeImpl::eSet(int featureID,  const std::shared_ptr<Any>& newVal
 	
 							if (valueToAdd)
 							{
-								if(_handler->find(valueToAdd) == -1)
+								if(!(_handler->includes(valueToAdd)))
 								{
 									_handler->add(valueToAdd);
 								}

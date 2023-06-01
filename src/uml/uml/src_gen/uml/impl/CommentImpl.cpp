@@ -326,7 +326,7 @@ bool CommentImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 	
 							if (valueToAdd)
 							{
-								if(_annotatedElement->find(valueToAdd) == -1)
+								if(!(_annotatedElement->includes(valueToAdd)))
 								{
 									_annotatedElement->add(valueToAdd);
 								}

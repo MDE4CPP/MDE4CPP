@@ -492,7 +492,7 @@ bool ClauseImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 	
 							if (valueToAdd)
 							{
-								if(_body->find(valueToAdd) == -1)
+								if(!(_body->includes(valueToAdd)))
 								{
 									_body->add(valueToAdd);
 								}
@@ -537,7 +537,7 @@ bool ClauseImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 	
 							if (valueToAdd)
 							{
-								if(_bodyOutput->find(valueToAdd) == -1)
+								if(!(_bodyOutput->includes(valueToAdd)))
 								{
 									_bodyOutput->add(valueToAdd);
 								}
@@ -613,7 +613,7 @@ bool ClauseImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 	
 							if (valueToAdd)
 							{
-								if(_predecessorClause->find(valueToAdd) == -1)
+								if(!(_predecessorClause->includes(valueToAdd)))
 								{
 									_predecessorClause->add(valueToAdd);
 								}
@@ -658,7 +658,7 @@ bool ClauseImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 	
 							if (valueToAdd)
 							{
-								if(_successorClause->find(valueToAdd) == -1)
+								if(!(_successorClause->includes(valueToAdd)))
 								{
 									_successorClause->add(valueToAdd);
 								}
@@ -703,7 +703,7 @@ bool ClauseImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 	
 							if (valueToAdd)
 							{
-								if(_test->find(valueToAdd) == -1)
+								if(!(_test->includes(valueToAdd)))
 								{
 									_test->add(valueToAdd);
 								}

@@ -877,7 +877,7 @@ bool ExecutionFactoryImpl::eSet(int featureID,  const std::shared_ptr<Any>& newV
 	
 							if (valueToAdd)
 							{
-								if(_builtInTypes->find(valueToAdd) == -1)
+								if(!(_builtInTypes->includes(valueToAdd)))
 								{
 									_builtInTypes->add(valueToAdd);
 								}
@@ -953,7 +953,7 @@ bool ExecutionFactoryImpl::eSet(int featureID,  const std::shared_ptr<Any>& newV
 	
 							if (valueToAdd)
 							{
-								if(_strategies->find(valueToAdd) == -1)
+								if(!(_strategies->includes(valueToAdd)))
 								{
 									_strategies->add(valueToAdd);
 								}

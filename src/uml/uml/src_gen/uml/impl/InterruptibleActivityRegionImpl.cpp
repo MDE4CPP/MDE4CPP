@@ -420,7 +420,7 @@ bool InterruptibleActivityRegionImpl::eSet(int featureID,  const std::shared_ptr
 	
 							if (valueToAdd)
 							{
-								if(_interruptingEdge->find(valueToAdd) == -1)
+								if(!(_interruptingEdge->includes(valueToAdd)))
 								{
 									_interruptingEdge->add(valueToAdd);
 								}
@@ -465,7 +465,7 @@ bool InterruptibleActivityRegionImpl::eSet(int featureID,  const std::shared_ptr
 	
 							if (valueToAdd)
 							{
-								if(_node->find(valueToAdd) == -1)
+								if(!(_node->includes(valueToAdd)))
 								{
 									_node->add(valueToAdd);
 								}

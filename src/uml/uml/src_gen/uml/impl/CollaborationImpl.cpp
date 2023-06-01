@@ -448,7 +448,7 @@ bool CollaborationImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValu
 	
 							if (valueToAdd)
 							{
-								if(_collaborationRole->find(valueToAdd) == -1)
+								if(!(_collaborationRole->includes(valueToAdd)))
 								{
 									_collaborationRole->add(valueToAdd);
 								}

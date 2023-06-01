@@ -957,7 +957,7 @@ bool OclExpressionImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValu
 	
 							if (valueToAdd)
 							{
-								if(_initializedElement->find(valueToAdd) == -1)
+								if(!(_initializedElement->includes(valueToAdd)))
 								{
 									_initializedElement->add(valueToAdd);
 								}

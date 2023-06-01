@@ -984,7 +984,7 @@ bool BehaviorImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 	
 							if (valueToAdd)
 							{
-								if(_ownedParameter->find(valueToAdd) == -1)
+								if(!(_ownedParameter->includes(valueToAdd)))
 								{
 									_ownedParameter->add(valueToAdd);
 								}
@@ -1029,7 +1029,7 @@ bool BehaviorImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 	
 							if (valueToAdd)
 							{
-								if(_ownedParameterSet->find(valueToAdd) == -1)
+								if(!(_ownedParameterSet->includes(valueToAdd)))
 								{
 									_ownedParameterSet->add(valueToAdd);
 								}
@@ -1074,7 +1074,7 @@ bool BehaviorImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 	
 							if (valueToAdd)
 							{
-								if(_postcondition->find(valueToAdd) == -1)
+								if(!(_postcondition->includes(valueToAdd)))
 								{
 									_postcondition->add(valueToAdd);
 								}
@@ -1119,7 +1119,7 @@ bool BehaviorImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 	
 							if (valueToAdd)
 							{
-								if(_precondition->find(valueToAdd) == -1)
+								if(!(_precondition->includes(valueToAdd)))
 								{
 									_precondition->add(valueToAdd);
 								}
@@ -1164,7 +1164,7 @@ bool BehaviorImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 	
 							if (valueToAdd)
 							{
-								if(_redefinedBehavior->find(valueToAdd) == -1)
+								if(!(_redefinedBehavior->includes(valueToAdd)))
 								{
 									_redefinedBehavior->add(valueToAdd);
 								}

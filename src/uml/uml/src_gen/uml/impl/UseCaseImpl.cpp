@@ -635,7 +635,7 @@ bool UseCaseImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 	
 							if (valueToAdd)
 							{
-								if(_extend->find(valueToAdd) == -1)
+								if(!(_extend->includes(valueToAdd)))
 								{
 									_extend->add(valueToAdd);
 								}
@@ -680,7 +680,7 @@ bool UseCaseImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 	
 							if (valueToAdd)
 							{
-								if(_extensionPoint->find(valueToAdd) == -1)
+								if(!(_extensionPoint->includes(valueToAdd)))
 								{
 									_extensionPoint->add(valueToAdd);
 								}
@@ -725,7 +725,7 @@ bool UseCaseImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 	
 							if (valueToAdd)
 							{
-								if(_include->find(valueToAdd) == -1)
+								if(!(_include->includes(valueToAdd)))
 								{
 									_include->add(valueToAdd);
 								}
@@ -770,7 +770,7 @@ bool UseCaseImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 	
 							if (valueToAdd)
 							{
-								if(_subject->find(valueToAdd) == -1)
+								if(!(_subject->includes(valueToAdd)))
 								{
 									_subject->add(valueToAdd);
 								}

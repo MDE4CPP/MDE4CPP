@@ -545,7 +545,7 @@ bool LocusImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 	
 							if (valueToAdd)
 							{
-								if(_extensionalValues->find(valueToAdd) == -1)
+								if(!(_extensionalValues->includes(valueToAdd)))
 								{
 									_extensionalValues->add(valueToAdd);
 								}

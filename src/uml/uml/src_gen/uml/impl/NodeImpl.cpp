@@ -465,7 +465,7 @@ bool NodeImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 	
 							if (valueToAdd)
 							{
-								if(_nestedNode->find(valueToAdd) == -1)
+								if(!(_nestedNode->includes(valueToAdd)))
 								{
 									_nestedNode->add(valueToAdd);
 								}

@@ -964,7 +964,7 @@ bool StateImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 	
 							if (valueToAdd)
 							{
-								if(_connection->find(valueToAdd) == -1)
+								if(!(_connection->includes(valueToAdd)))
 								{
 									_connection->add(valueToAdd);
 								}
@@ -1009,7 +1009,7 @@ bool StateImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 	
 							if (valueToAdd)
 							{
-								if(_connectionPoint->find(valueToAdd) == -1)
+								if(!(_connectionPoint->includes(valueToAdd)))
 								{
 									_connectionPoint->add(valueToAdd);
 								}
@@ -1054,7 +1054,7 @@ bool StateImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 	
 							if (valueToAdd)
 							{
-								if(_deferrableTrigger->find(valueToAdd) == -1)
+								if(!(_deferrableTrigger->includes(valueToAdd)))
 								{
 									_deferrableTrigger->add(valueToAdd);
 								}
@@ -1223,7 +1223,7 @@ bool StateImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 	
 							if (valueToAdd)
 							{
-								if(_region->find(valueToAdd) == -1)
+								if(!(_region->includes(valueToAdd)))
 								{
 									_region->add(valueToAdd);
 								}

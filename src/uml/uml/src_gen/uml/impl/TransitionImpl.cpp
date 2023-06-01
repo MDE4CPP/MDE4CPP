@@ -897,7 +897,7 @@ bool TransitionImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 	
 							if (valueToAdd)
 							{
-								if(_trigger->find(valueToAdd) == -1)
+								if(!(_trigger->includes(valueToAdd)))
 								{
 									_trigger->add(valueToAdd);
 								}

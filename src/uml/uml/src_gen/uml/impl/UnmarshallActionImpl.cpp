@@ -516,7 +516,7 @@ bool UnmarshallActionImpl::eSet(int featureID,  const std::shared_ptr<Any>& newV
 	
 							if (valueToAdd)
 							{
-								if(_result->find(valueToAdd) == -1)
+								if(!(_result->includes(valueToAdd)))
 								{
 									_result->add(valueToAdd);
 								}

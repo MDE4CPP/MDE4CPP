@@ -517,7 +517,7 @@ bool DeploymentImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 	
 							if (valueToAdd)
 							{
-								if(_configuration->find(valueToAdd) == -1)
+								if(!(_configuration->includes(valueToAdd)))
 								{
 									_configuration->add(valueToAdd);
 								}
@@ -562,7 +562,7 @@ bool DeploymentImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 	
 							if (valueToAdd)
 							{
-								if(_deployedArtifact->find(valueToAdd) == -1)
+								if(!(_deployedArtifact->includes(valueToAdd)))
 								{
 									_deployedArtifact->add(valueToAdd);
 								}

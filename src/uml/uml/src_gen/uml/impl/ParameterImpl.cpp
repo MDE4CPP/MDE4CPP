@@ -854,7 +854,7 @@ bool ParameterImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 	
 							if (valueToAdd)
 							{
-								if(_parameterSet->find(valueToAdd) == -1)
+								if(!(_parameterSet->includes(valueToAdd)))
 								{
 									_parameterSet->add(valueToAdd);
 								}

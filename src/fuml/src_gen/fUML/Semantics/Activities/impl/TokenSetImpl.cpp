@@ -283,7 +283,7 @@ bool TokenSetImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 	
 							if (valueToAdd)
 							{
-								if(_tokens->find(valueToAdd) == -1)
+								if(!(_tokens->includes(valueToAdd)))
 								{
 									_tokens->add(valueToAdd);
 								}

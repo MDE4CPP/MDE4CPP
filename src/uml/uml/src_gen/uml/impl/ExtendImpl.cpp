@@ -568,7 +568,7 @@ bool ExtendImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 	
 							if (valueToAdd)
 							{
-								if(_extensionLocation->find(valueToAdd) == -1)
+								if(!(_extensionLocation->includes(valueToAdd)))
 								{
 									_extensionLocation->add(valueToAdd);
 								}

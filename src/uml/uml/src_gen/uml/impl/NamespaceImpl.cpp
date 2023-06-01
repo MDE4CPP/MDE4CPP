@@ -658,7 +658,7 @@ bool NamespaceImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 	
 							if (valueToAdd)
 							{
-								if(_elementImport->find(valueToAdd) == -1)
+								if(!(_elementImport->includes(valueToAdd)))
 								{
 									_elementImport->add(valueToAdd);
 								}
@@ -703,7 +703,7 @@ bool NamespaceImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 	
 							if (valueToAdd)
 							{
-								if(_ownedRule->find(valueToAdd) == -1)
+								if(!(_ownedRule->includes(valueToAdd)))
 								{
 									_ownedRule->add(valueToAdd);
 								}
@@ -748,7 +748,7 @@ bool NamespaceImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 	
 							if (valueToAdd)
 							{
-								if(_packageImport->find(valueToAdd) == -1)
+								if(!(_packageImport->includes(valueToAdd)))
 								{
 									_packageImport->add(valueToAdd);
 								}

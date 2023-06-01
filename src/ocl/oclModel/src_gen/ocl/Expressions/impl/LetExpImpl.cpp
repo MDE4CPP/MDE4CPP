@@ -516,7 +516,7 @@ bool LetExpImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 	
 							if (valueToAdd)
 							{
-								if(_variables->find(valueToAdd) == -1)
+								if(!(_variables->includes(valueToAdd)))
 								{
 									_variables->add(valueToAdd);
 								}

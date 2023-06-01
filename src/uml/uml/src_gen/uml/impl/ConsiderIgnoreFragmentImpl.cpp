@@ -352,7 +352,7 @@ bool ConsiderIgnoreFragmentImpl::eSet(int featureID,  const std::shared_ptr<Any>
 	
 							if (valueToAdd)
 							{
-								if(_message->find(valueToAdd) == -1)
+								if(!(_message->includes(valueToAdd)))
 								{
 									_message->add(valueToAdd);
 								}

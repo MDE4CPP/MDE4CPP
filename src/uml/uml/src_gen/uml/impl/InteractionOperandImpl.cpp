@@ -445,7 +445,7 @@ bool InteractionOperandImpl::eSet(int featureID,  const std::shared_ptr<Any>& ne
 	
 							if (valueToAdd)
 							{
-								if(_fragment->find(valueToAdd) == -1)
+								if(!(_fragment->includes(valueToAdd)))
 								{
 									_fragment->add(valueToAdd);
 								}
