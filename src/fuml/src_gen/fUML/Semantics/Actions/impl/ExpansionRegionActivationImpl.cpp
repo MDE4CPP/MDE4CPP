@@ -837,7 +837,7 @@ bool ExpansionRegionActivationImpl::eSet(int featureID,  const std::shared_ptr<A
 					{
 						std::shared_ptr<Bag<fUML::Semantics::Actions::ExpansionActivationGroup>> _activationGroups = getActivationGroups();
 	
-						for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
+						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{
 							std::shared_ptr<fUML::Semantics::Actions::ExpansionActivationGroup> valueToAdd = std::dynamic_pointer_cast<fUML::Semantics::Actions::ExpansionActivationGroup>(anEObject);
 	
@@ -882,7 +882,7 @@ bool ExpansionRegionActivationImpl::eSet(int featureID,  const std::shared_ptr<A
 					{
 						std::shared_ptr<Bag<fUML::Semantics::Activities::TokenSet>> _inputExpansionTokens = getInputExpansionTokens();
 	
-						for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
+						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{
 							std::shared_ptr<fUML::Semantics::Activities::TokenSet> valueToAdd = std::dynamic_pointer_cast<fUML::Semantics::Activities::TokenSet>(anEObject);
 	
@@ -927,7 +927,7 @@ bool ExpansionRegionActivationImpl::eSet(int featureID,  const std::shared_ptr<A
 					{
 						std::shared_ptr<Bag<fUML::Semantics::Activities::TokenSet>> _inputTokens = getInputTokens();
 	
-						for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
+						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{
 							std::shared_ptr<fUML::Semantics::Activities::TokenSet> valueToAdd = std::dynamic_pointer_cast<fUML::Semantics::Activities::TokenSet>(anEObject);
 	

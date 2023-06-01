@@ -176,7 +176,7 @@ EncapsulatedClassifierImpl& EncapsulatedClassifierImpl::operator=(const Encapsul
 			std::cout << "Initialising value Subset: " << "m_ownedPort - Subset<uml::Port, uml::Property /*Subset does not reference a union*/ >(getOwnedAttribute())" << std::endl;
 		#endif
 		
-		for(const std::shared_ptr<uml::Port> ownedPortindexElem: *ownedPortList) 
+		for(const std::shared_ptr<uml::Port>& ownedPortindexElem: *ownedPortList) 
 		{
 			std::shared_ptr<uml::Port> temp = std::dynamic_pointer_cast<uml::Port>((ownedPortindexElem)->copy());
 			m_ownedPort->push_back(temp);

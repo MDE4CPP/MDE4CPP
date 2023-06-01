@@ -441,7 +441,7 @@ bool ExceptionHandlerImpl::eSet(int featureID,  const std::shared_ptr<Any>& newV
 					{
 						std::shared_ptr<Bag<uml::Classifier>> _exceptionType = getExceptionType();
 	
-						for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
+						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{
 							std::shared_ptr<uml::Classifier> valueToAdd = std::dynamic_pointer_cast<uml::Classifier>(anEObject);
 	

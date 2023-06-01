@@ -365,7 +365,7 @@ bool OfferImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 					{
 						std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> _offeredTokens = getOfferedTokens();
 	
-						for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
+						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{
 							std::shared_ptr<fUML::Semantics::Activities::Token> valueToAdd = std::dynamic_pointer_cast<fUML::Semantics::Activities::Token>(anEObject);
 	

@@ -79,7 +79,7 @@ std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> Foundation
 			activityExecution->getParameterValues()->clear();
 			activityExecution->setContext(context);
 	
-			for(std::shared_ptr<fUML::Semantics::CommonBehavior::ParameterValue> inputParameterValue : *inputs)
+			for(const std::shared_ptr<fUML::Semantics::CommonBehavior::ParameterValue>& inputParameterValue : *inputs)
 		    {
 		        activityExecution->setParameterValue(inputParameterValue);
 		    }
@@ -124,7 +124,7 @@ std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> Foundation
 		std::shared_ptr<Bag<Any>> outputArguments(new Bag<Any>());
 		std::shared_ptr<Any> result;
 
-		for(std::shared_ptr<fUML::Semantics::CommonBehavior::ParameterValue> parameterValue : *inputs)
+		for(const std::shared_ptr<fUML::Semantics::CommonBehavior::ParameterValue>& parameterValue : *inputs)
 		{
 			inputArguments->add(parameterValue->getValues()->at(0));
 		}

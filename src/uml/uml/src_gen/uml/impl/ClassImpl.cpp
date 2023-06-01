@@ -186,7 +186,7 @@ ClassImpl& ClassImpl::operator=(const ClassImpl & obj)
 			std::cout << "Initialising value Subset: " << "m_nestedClassifier - Subset<uml::Classifier, uml::NamedElement >(getOwnedMember())" << std::endl;
 		#endif
 		
-		for(const std::shared_ptr<uml::Classifier> nestedClassifierindexElem: *nestedClassifierList) 
+		for(const std::shared_ptr<uml::Classifier>& nestedClassifierindexElem: *nestedClassifierList) 
 		{
 			std::shared_ptr<uml::Classifier> temp = std::dynamic_pointer_cast<uml::Classifier>((nestedClassifierindexElem)->copy());
 			m_nestedClassifier->push_back(temp);
@@ -213,7 +213,7 @@ ClassImpl& ClassImpl::operator=(const ClassImpl & obj)
 			std::cout << "Initialising value Subset: " << "m_ownedOperation - Subset<uml::Operation, uml::Feature, uml::NamedElement >(getFeature(), getOwnedMember())" << std::endl;
 		#endif
 		
-		for(const std::shared_ptr<uml::Operation> ownedOperationindexElem: *ownedOperationList) 
+		for(const std::shared_ptr<uml::Operation>& ownedOperationindexElem: *ownedOperationList) 
 		{
 			std::shared_ptr<uml::Operation> temp = std::dynamic_pointer_cast<uml::Operation>((ownedOperationindexElem)->copy());
 			m_ownedOperation->push_back(temp);
@@ -240,7 +240,7 @@ ClassImpl& ClassImpl::operator=(const ClassImpl & obj)
 			std::cout << "Initialising value Subset: " << "m_ownedReception - Subset<uml::Reception, uml::Feature, uml::NamedElement >(getFeature(), getOwnedMember())" << std::endl;
 		#endif
 		
-		for(const std::shared_ptr<uml::Reception> ownedReceptionindexElem: *ownedReceptionList) 
+		for(const std::shared_ptr<uml::Reception>& ownedReceptionindexElem: *ownedReceptionList) 
 		{
 			std::shared_ptr<uml::Reception> temp = std::dynamic_pointer_cast<uml::Reception>((ownedReceptionindexElem)->copy());
 			m_ownedReception->push_back(temp);
@@ -805,7 +805,7 @@ bool ClassImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 					{
 						std::shared_ptr<Bag<uml::Classifier>> _nestedClassifier = getNestedClassifier();
 	
-						for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
+						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{
 							std::shared_ptr<uml::Classifier> valueToAdd = std::dynamic_pointer_cast<uml::Classifier>(anEObject);
 	
@@ -850,7 +850,7 @@ bool ClassImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 					{
 						std::shared_ptr<Bag<uml::Property>> _ownedAttribute = getClass_OwnedAttribute();
 	
-						for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
+						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{
 							std::shared_ptr<uml::Property> valueToAdd = std::dynamic_pointer_cast<uml::Property>(anEObject);
 	
@@ -895,7 +895,7 @@ bool ClassImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 					{
 						std::shared_ptr<Bag<uml::Operation>> _ownedOperation = getOwnedOperation();
 	
-						for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
+						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{
 							std::shared_ptr<uml::Operation> valueToAdd = std::dynamic_pointer_cast<uml::Operation>(anEObject);
 	
@@ -940,7 +940,7 @@ bool ClassImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 					{
 						std::shared_ptr<Bag<uml::Reception>> _ownedReception = getOwnedReception();
 	
-						for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
+						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{
 							std::shared_ptr<uml::Reception> valueToAdd = std::dynamic_pointer_cast<uml::Reception>(anEObject);
 	
@@ -985,7 +985,7 @@ bool ClassImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 					{
 						std::shared_ptr<Bag<uml::Class>> _superClass = getSuperClass();
 	
-						for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
+						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{
 							std::shared_ptr<uml::Class> valueToAdd = std::dynamic_pointer_cast<uml::Class>(anEObject);
 	

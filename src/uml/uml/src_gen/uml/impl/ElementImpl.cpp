@@ -128,7 +128,7 @@ ElementImpl& ElementImpl::operator=(const ElementImpl & obj)
 			std::cout << "Initialising value Subset: " << "m_ownedComment - Subset<uml::Comment, uml::Element >(getOwnedElement())" << std::endl;
 		#endif
 		
-		for(const std::shared_ptr<uml::Comment> ownedCommentindexElem: *ownedCommentList) 
+		for(const std::shared_ptr<uml::Comment>& ownedCommentindexElem: *ownedCommentList) 
 		{
 			std::shared_ptr<uml::Comment> temp = std::dynamic_pointer_cast<uml::Comment>((ownedCommentindexElem)->copy());
 			m_ownedComment->push_back(temp);
@@ -610,7 +610,7 @@ bool ElementImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 					{
 						std::shared_ptr<Bag<uml::Comment>> _ownedComment = getOwnedComment();
 	
-						for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
+						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{
 							std::shared_ptr<uml::Comment> valueToAdd = std::dynamic_pointer_cast<uml::Comment>(anEObject);
 	

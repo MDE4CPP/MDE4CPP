@@ -157,7 +157,7 @@ ComponentRealizationImpl& ComponentRealizationImpl::operator=(const ComponentRea
 			std::cout << "Initialising value Subset: " << "m_realizingClassifier - Subset<uml::Classifier, uml::NamedElement /*Subset does not reference a union*/ >(getClient())" << std::endl;
 		#endif
 		
-		for(const std::shared_ptr<uml::Classifier> realizingClassifierindexElem: *realizingClassifierList) 
+		for(const std::shared_ptr<uml::Classifier>& realizingClassifierindexElem: *realizingClassifierList) 
 		{
 			std::shared_ptr<uml::Classifier> temp = std::dynamic_pointer_cast<uml::Classifier>((realizingClassifierindexElem)->copy());
 			m_realizingClassifier->push_back(temp);
@@ -462,7 +462,7 @@ bool ComponentRealizationImpl::eSet(int featureID,  const std::shared_ptr<Any>& 
 					{
 						std::shared_ptr<Bag<uml::Classifier>> _realizingClassifier = getRealizingClassifier();
 	
-						for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
+						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{
 							std::shared_ptr<uml::Classifier> valueToAdd = std::dynamic_pointer_cast<uml::Classifier>(anEObject);
 	

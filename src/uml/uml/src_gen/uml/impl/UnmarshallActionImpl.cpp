@@ -162,7 +162,7 @@ UnmarshallActionImpl& UnmarshallActionImpl::operator=(const UnmarshallActionImpl
 			std::cout << "Initialising value Subset: " << "m_result - Subset<uml::OutputPin, uml::OutputPin >(getOutput())" << std::endl;
 		#endif
 		
-		for(const std::shared_ptr<uml::OutputPin> resultindexElem: *resultList) 
+		for(const std::shared_ptr<uml::OutputPin>& resultindexElem: *resultList) 
 		{
 			std::shared_ptr<uml::OutputPin> temp = std::dynamic_pointer_cast<uml::OutputPin>((resultindexElem)->copy());
 			m_result->push_back(temp);
@@ -510,7 +510,7 @@ bool UnmarshallActionImpl::eSet(int featureID,  const std::shared_ptr<Any>& newV
 					{
 						std::shared_ptr<Bag<uml::OutputPin>> _result = getResult();
 	
-						for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
+						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{
 							std::shared_ptr<uml::OutputPin> valueToAdd = std::dynamic_pointer_cast<uml::OutputPin>(anEObject);
 	

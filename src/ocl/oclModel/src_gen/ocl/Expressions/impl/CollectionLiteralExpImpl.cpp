@@ -198,7 +198,7 @@ CollectionLiteralExpImpl& CollectionLiteralExpImpl::operator=(const CollectionLi
 		m_part.reset(new Bag<ocl::Expressions::CollectionLiteralPart>());
 		
 		
-		for(const std::shared_ptr<ocl::Expressions::CollectionLiteralPart> partindexElem: *partList) 
+		for(const std::shared_ptr<ocl::Expressions::CollectionLiteralPart>& partindexElem: *partList) 
 		{
 			std::shared_ptr<ocl::Expressions::CollectionLiteralPart> temp = std::dynamic_pointer_cast<ocl::Expressions::CollectionLiteralPart>((partindexElem)->copy());
 			m_part->push_back(temp);
@@ -540,7 +540,7 @@ bool CollectionLiteralExpImpl::eSet(int featureID,  const std::shared_ptr<Any>& 
 					{
 						std::shared_ptr<Bag<ocl::Expressions::CollectionLiteralPart>> _part = getPart();
 	
-						for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
+						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{
 							std::shared_ptr<ocl::Expressions::CollectionLiteralPart> valueToAdd = std::dynamic_pointer_cast<ocl::Expressions::CollectionLiteralPart>(anEObject);
 	

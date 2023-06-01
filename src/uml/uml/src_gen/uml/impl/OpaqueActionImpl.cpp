@@ -140,7 +140,7 @@ OpaqueActionImpl& OpaqueActionImpl::operator=(const OpaqueActionImpl & obj)
 	if(bodyList)
 	{	
 		m_body.reset(new Bag<std::string>());
-		for(const std::shared_ptr<std::string> it: *bodyList) 
+		for(const std::shared_ptr<std::string>& it: *bodyList) 
 		{
 			m_body->push_back(it);
 		}
@@ -153,7 +153,7 @@ OpaqueActionImpl& OpaqueActionImpl::operator=(const OpaqueActionImpl & obj)
 	if(languageList)
 	{	
 		m_language.reset(new Bag<std::string>());
-		for(const std::shared_ptr<std::string> it: *languageList) 
+		for(const std::shared_ptr<std::string>& it: *languageList) 
 		{
 			m_language->push_back(it);
 		}
@@ -181,7 +181,7 @@ OpaqueActionImpl& OpaqueActionImpl::operator=(const OpaqueActionImpl & obj)
 			std::cout << "Initialising value Subset: " << "m_inputValue - Subset<uml::InputPin, uml::InputPin >(getInput())" << std::endl;
 		#endif
 		
-		for(const std::shared_ptr<uml::InputPin> inputValueindexElem: *inputValueList) 
+		for(const std::shared_ptr<uml::InputPin>& inputValueindexElem: *inputValueList) 
 		{
 			std::shared_ptr<uml::InputPin> temp = std::dynamic_pointer_cast<uml::InputPin>((inputValueindexElem)->copy());
 			m_inputValue->push_back(temp);
@@ -208,7 +208,7 @@ OpaqueActionImpl& OpaqueActionImpl::operator=(const OpaqueActionImpl & obj)
 			std::cout << "Initialising value Subset: " << "m_outputValue - Subset<uml::OutputPin, uml::OutputPin >(getOutput())" << std::endl;
 		#endif
 		
-		for(const std::shared_ptr<uml::OutputPin> outputValueindexElem: *outputValueList) 
+		for(const std::shared_ptr<uml::OutputPin>& outputValueindexElem: *outputValueList) 
 		{
 			std::shared_ptr<uml::OutputPin> temp = std::dynamic_pointer_cast<uml::OutputPin>((outputValueindexElem)->copy());
 			m_outputValue->push_back(temp);
@@ -552,7 +552,7 @@ bool OpaqueActionImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue
 				std::shared_ptr<Bag<std::string>> _bodyList = newValue->get<std::shared_ptr<Bag<std::string>>>();
 				std::shared_ptr<Bag<std::string>> _body = getBody();
 				
-				for(const std::shared_ptr<std::string> valueToAdd: *_bodyList)
+				for(const std::shared_ptr<std::string>& valueToAdd: *_bodyList)
 				{
 					if (valueToAdd)
 					{
@@ -588,7 +588,7 @@ bool OpaqueActionImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue
 					{
 						std::shared_ptr<Bag<uml::InputPin>> _inputValue = getInputValue();
 	
-						for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
+						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{
 							std::shared_ptr<uml::InputPin> valueToAdd = std::dynamic_pointer_cast<uml::InputPin>(anEObject);
 	
@@ -627,7 +627,7 @@ bool OpaqueActionImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue
 				std::shared_ptr<Bag<std::string>> _languageList = newValue->get<std::shared_ptr<Bag<std::string>>>();
 				std::shared_ptr<Bag<std::string>> _language = getLanguage();
 				
-				for(const std::shared_ptr<std::string> valueToAdd: *_languageList)
+				for(const std::shared_ptr<std::string>& valueToAdd: *_languageList)
 				{
 					if (valueToAdd)
 					{
@@ -663,7 +663,7 @@ bool OpaqueActionImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue
 					{
 						std::shared_ptr<Bag<uml::OutputPin>> _outputValue = getOutputValue();
 	
-						for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
+						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{
 							std::shared_ptr<uml::OutputPin> valueToAdd = std::dynamic_pointer_cast<uml::OutputPin>(anEObject);
 	

@@ -157,7 +157,7 @@ ReplyActionImpl& ReplyActionImpl::operator=(const ReplyActionImpl & obj)
 			std::cout << "Initialising value Subset: " << "m_replyValue - Subset<uml::InputPin, uml::InputPin >(getInput())" << std::endl;
 		#endif
 		
-		for(const std::shared_ptr<uml::InputPin> replyValueindexElem: *replyValueList) 
+		for(const std::shared_ptr<uml::InputPin>& replyValueindexElem: *replyValueList) 
 		{
 			std::shared_ptr<uml::InputPin> temp = std::dynamic_pointer_cast<uml::InputPin>((replyValueindexElem)->copy());
 			m_replyValue->push_back(temp);
@@ -511,7 +511,7 @@ bool ReplyActionImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 					{
 						std::shared_ptr<Bag<uml::InputPin>> _replyValue = getReplyValue();
 	
-						for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
+						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{
 							std::shared_ptr<uml::InputPin> valueToAdd = std::dynamic_pointer_cast<uml::InputPin>(anEObject);
 	

@@ -130,7 +130,7 @@ ExecutionImpl& ExecutionImpl::operator=(const ExecutionImpl & obj)
 		m_parameterValues.reset(new Bag<fUML::Semantics::CommonBehavior::ParameterValue>());
 		
 		
-		for(const std::shared_ptr<fUML::Semantics::CommonBehavior::ParameterValue> parameterValuesindexElem: *parameterValuesList) 
+		for(const std::shared_ptr<fUML::Semantics::CommonBehavior::ParameterValue>& parameterValuesindexElem: *parameterValuesList) 
 		{
 			std::shared_ptr<fUML::Semantics::CommonBehavior::ParameterValue> temp = std::dynamic_pointer_cast<fUML::Semantics::CommonBehavior::ParameterValue>((parameterValuesindexElem)->copy());
 			m_parameterValues->push_back(temp);
@@ -720,7 +720,7 @@ bool ExecutionImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 					{
 						std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> _parameterValues = getParameterValues();
 	
-						for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
+						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{
 							std::shared_ptr<fUML::Semantics::CommonBehavior::ParameterValue> valueToAdd = std::dynamic_pointer_cast<fUML::Semantics::CommonBehavior::ParameterValue>(anEObject);
 	
@@ -765,7 +765,7 @@ bool ExecutionImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 					{
 						std::shared_ptr<Bag<uml::Classifier>> _types = getTypes();
 	
-						for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
+						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{
 							std::shared_ptr<uml::Classifier> valueToAdd = std::dynamic_pointer_cast<uml::Classifier>(anEObject);
 	

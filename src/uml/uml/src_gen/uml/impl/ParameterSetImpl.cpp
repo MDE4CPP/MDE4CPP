@@ -129,7 +129,7 @@ ParameterSetImpl& ParameterSetImpl::operator=(const ParameterSetImpl & obj)
 			std::cout << "Initialising value Subset: " << "m_condition - Subset<uml::Constraint, uml::Element >(getOwnedElement())" << std::endl;
 		#endif
 		
-		for(const std::shared_ptr<uml::Constraint> conditionindexElem: *conditionList) 
+		for(const std::shared_ptr<uml::Constraint>& conditionindexElem: *conditionList) 
 		{
 			std::shared_ptr<uml::Constraint> temp = std::dynamic_pointer_cast<uml::Constraint>((conditionindexElem)->copy());
 			m_condition->push_back(temp);
@@ -396,7 +396,7 @@ bool ParameterSetImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue
 					{
 						std::shared_ptr<Bag<uml::Constraint>> _condition = getCondition();
 	
-						for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
+						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{
 							std::shared_ptr<uml::Constraint> valueToAdd = std::dynamic_pointer_cast<uml::Constraint>(anEObject);
 	
@@ -441,7 +441,7 @@ bool ParameterSetImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue
 					{
 						std::shared_ptr<Bag<uml::Parameter>> _parameter = getParameter();
 	
-						for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
+						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{
 							std::shared_ptr<uml::Parameter> valueToAdd = std::dynamic_pointer_cast<uml::Parameter>(anEObject);
 	

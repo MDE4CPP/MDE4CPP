@@ -151,7 +151,7 @@ ExecutableNodeImpl& ExecutableNodeImpl::operator=(const ExecutableNodeImpl & obj
 			std::cout << "Initialising value Subset: " << "m_handler - Subset<uml::ExceptionHandler, uml::Element >(getOwnedElement())" << std::endl;
 		#endif
 		
-		for(const std::shared_ptr<uml::ExceptionHandler> handlerindexElem: *handlerList) 
+		for(const std::shared_ptr<uml::ExceptionHandler>& handlerindexElem: *handlerList) 
 		{
 			std::shared_ptr<uml::ExceptionHandler> temp = std::dynamic_pointer_cast<uml::ExceptionHandler>((handlerindexElem)->copy());
 			m_handler->push_back(temp);
@@ -371,7 +371,7 @@ bool ExecutableNodeImpl::eSet(int featureID,  const std::shared_ptr<Any>& newVal
 					{
 						std::shared_ptr<Bag<uml::ExceptionHandler>> _handler = getHandler();
 	
-						for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
+						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{
 							std::shared_ptr<uml::ExceptionHandler> valueToAdd = std::dynamic_pointer_cast<uml::ExceptionHandler>(anEObject);
 	

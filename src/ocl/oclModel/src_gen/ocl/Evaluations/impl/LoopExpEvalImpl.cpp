@@ -104,7 +104,7 @@ LoopExpEvalImpl& LoopExpEvalImpl::operator=(const LoopExpEvalImpl & obj)
 	if(iteratorsList)
 	{	
 		m_iterators.reset(new Bag<std::string>());
-		for(const std::shared_ptr<std::string> it: *iteratorsList) 
+		for(const std::shared_ptr<std::string>& it: *iteratorsList) 
 		{
 			m_iterators->push_back(it);
 		}
@@ -348,7 +348,7 @@ bool LoopExpEvalImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 					{
 						std::shared_ptr<Bag<ocl::Evaluations::OclExpEval>> _bodyEvals = getBodyEvals();
 	
-						for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
+						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{
 							std::shared_ptr<ocl::Evaluations::OclExpEval> valueToAdd = std::dynamic_pointer_cast<ocl::Evaluations::OclExpEval>(anEObject);
 	
@@ -387,7 +387,7 @@ bool LoopExpEvalImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 				std::shared_ptr<Bag<std::string>> _iteratorsList = newValue->get<std::shared_ptr<Bag<std::string>>>();
 				std::shared_ptr<Bag<std::string>> _iterators = getIterators();
 				
-				for(const std::shared_ptr<std::string> valueToAdd: *_iteratorsList)
+				for(const std::shared_ptr<std::string>& valueToAdd: *_iteratorsList)
 				{
 					if (valueToAdd)
 					{

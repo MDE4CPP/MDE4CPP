@@ -871,7 +871,7 @@ bool ExecutionFactoryImpl::eSet(int featureID,  const std::shared_ptr<Any>& newV
 					{
 						std::shared_ptr<Bag<uml::PrimitiveType>> _builtInTypes = getBuiltInTypes();
 	
-						for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
+						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{
 							std::shared_ptr<uml::PrimitiveType> valueToAdd = std::dynamic_pointer_cast<uml::PrimitiveType>(anEObject);
 	
@@ -947,7 +947,7 @@ bool ExecutionFactoryImpl::eSet(int featureID,  const std::shared_ptr<Any>& newV
 					{
 						std::shared_ptr<Bag<fUML::Semantics::Loci::SemanticStrategy>> _strategies = getStrategies();
 	
-						for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
+						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{
 							std::shared_ptr<fUML::Semantics::Loci::SemanticStrategy> valueToAdd = std::dynamic_pointer_cast<fUML::Semantics::Loci::SemanticStrategy>(anEObject);
 	

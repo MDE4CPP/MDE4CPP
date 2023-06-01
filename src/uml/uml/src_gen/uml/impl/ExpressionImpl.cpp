@@ -164,7 +164,7 @@ ExpressionImpl& ExpressionImpl::operator=(const ExpressionImpl & obj)
 			std::cout << "Initialising value Subset: " << "m_operand - Subset<uml::ValueSpecification, uml::Element >(getOwnedElement())" << std::endl;
 		#endif
 		
-		for(const std::shared_ptr<uml::ValueSpecification> operandindexElem: *operandList) 
+		for(const std::shared_ptr<uml::ValueSpecification>& operandindexElem: *operandList) 
 		{
 			std::shared_ptr<uml::ValueSpecification> temp = std::dynamic_pointer_cast<uml::ValueSpecification>((operandindexElem)->copy());
 			m_operand->push_back(temp);
@@ -445,7 +445,7 @@ bool ExpressionImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 					{
 						std::shared_ptr<Bag<uml::ValueSpecification>> _operand = getOperand();
 	
-						for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
+						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{
 							std::shared_ptr<uml::ValueSpecification> valueToAdd = std::dynamic_pointer_cast<uml::ValueSpecification>(anEObject);
 	

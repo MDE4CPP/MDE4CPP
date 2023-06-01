@@ -295,7 +295,7 @@ bool EObjectContainerImpl::eSet(int featureID,  const std::shared_ptr<Any>& newV
 					{
 						std::shared_ptr<Bag<ecore::EObject>> _container = getContainer();
 	
-						for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
+						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{
 							std::shared_ptr<ecore::EObject> valueToAdd = std::dynamic_pointer_cast<ecore::EObject>(anEObject);
 	

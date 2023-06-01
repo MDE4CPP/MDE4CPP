@@ -132,7 +132,7 @@ NamespaceImpl& NamespaceImpl::operator=(const NamespaceImpl & obj)
 			std::cout << "Initialising value SubsetUnion: " << "m_elementImport - SubsetUnion<uml::ElementImport, uml::Element >(getOwnedElement())" << std::endl;
 		#endif
 		
-		for(const std::shared_ptr<uml::ElementImport> elementImportindexElem: *elementImportList) 
+		for(const std::shared_ptr<uml::ElementImport>& elementImportindexElem: *elementImportList) 
 		{
 			std::shared_ptr<uml::ElementImport> temp = std::dynamic_pointer_cast<uml::ElementImport>((elementImportindexElem)->copy());
 			m_elementImport->push_back(temp);
@@ -159,7 +159,7 @@ NamespaceImpl& NamespaceImpl::operator=(const NamespaceImpl & obj)
 			std::cout << "Initialising value Subset: " << "m_importedMember - Subset<uml::PackageableElement, uml::NamedElement >(getMember())" << std::endl;
 		#endif
 		
-		for(const std::shared_ptr<uml::PackageableElement> importedMemberindexElem: *importedMemberList) 
+		for(const std::shared_ptr<uml::PackageableElement>& importedMemberindexElem: *importedMemberList) 
 		{
 			std::shared_ptr<uml::PackageableElement> temp = std::dynamic_pointer_cast<uml::PackageableElement>((importedMemberindexElem)->copy());
 			m_importedMember->push_back(temp);
@@ -186,7 +186,7 @@ NamespaceImpl& NamespaceImpl::operator=(const NamespaceImpl & obj)
 			std::cout << "Initialising value SubsetUnion: " << "m_ownedRule - SubsetUnion<uml::Constraint, uml::NamedElement >(getOwnedMember())" << std::endl;
 		#endif
 		
-		for(const std::shared_ptr<uml::Constraint> ownedRuleindexElem: *ownedRuleList) 
+		for(const std::shared_ptr<uml::Constraint>& ownedRuleindexElem: *ownedRuleList) 
 		{
 			std::shared_ptr<uml::Constraint> temp = std::dynamic_pointer_cast<uml::Constraint>((ownedRuleindexElem)->copy());
 			m_ownedRule->push_back(temp);
@@ -213,7 +213,7 @@ NamespaceImpl& NamespaceImpl::operator=(const NamespaceImpl & obj)
 			std::cout << "Initialising value SubsetUnion: " << "m_packageImport - SubsetUnion<uml::PackageImport, uml::Element >(getOwnedElement())" << std::endl;
 		#endif
 		
-		for(const std::shared_ptr<uml::PackageImport> packageImportindexElem: *packageImportList) 
+		for(const std::shared_ptr<uml::PackageImport>& packageImportindexElem: *packageImportList) 
 		{
 			std::shared_ptr<uml::PackageImport> temp = std::dynamic_pointer_cast<uml::PackageImport>((packageImportindexElem)->copy());
 			m_packageImport->push_back(temp);
@@ -652,7 +652,7 @@ bool NamespaceImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 					{
 						std::shared_ptr<Bag<uml::ElementImport>> _elementImport = getElementImport();
 	
-						for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
+						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{
 							std::shared_ptr<uml::ElementImport> valueToAdd = std::dynamic_pointer_cast<uml::ElementImport>(anEObject);
 	
@@ -697,7 +697,7 @@ bool NamespaceImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 					{
 						std::shared_ptr<Bag<uml::Constraint>> _ownedRule = getOwnedRule();
 	
-						for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
+						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{
 							std::shared_ptr<uml::Constraint> valueToAdd = std::dynamic_pointer_cast<uml::Constraint>(anEObject);
 	
@@ -742,7 +742,7 @@ bool NamespaceImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 					{
 						std::shared_ptr<Bag<uml::PackageImport>> _packageImport = getPackageImport();
 	
-						for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
+						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{
 							std::shared_ptr<uml::PackageImport> valueToAdd = std::dynamic_pointer_cast<uml::PackageImport>(anEObject);
 	

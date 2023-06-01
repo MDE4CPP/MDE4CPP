@@ -298,7 +298,7 @@ bool CollectionLiteralExpEvalImpl::eSet(int featureID,  const std::shared_ptr<An
 					{
 						std::shared_ptr<Bag<ocl::Evaluations::CollectionLiteralPartEval>> _parts = getParts();
 	
-						for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
+						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{
 							std::shared_ptr<ocl::Evaluations::CollectionLiteralPartEval> valueToAdd = std::dynamic_pointer_cast<ocl::Evaluations::CollectionLiteralPartEval>(anEObject);
 	

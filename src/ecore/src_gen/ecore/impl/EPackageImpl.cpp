@@ -129,7 +129,7 @@ EPackageImpl& EPackageImpl::operator=(const EPackageImpl & obj)
 			std::cout << "Initialising value Subset: " << "m_eClassifiers - Subset<ecore::EClassifier, ecore::EObject >(getEContentUnion())" << std::endl;
 		#endif
 		
-		for(const std::shared_ptr<ecore::EClassifier> eClassifiersindexElem: *eClassifiersList) 
+		for(const std::shared_ptr<ecore::EClassifier>& eClassifiersindexElem: *eClassifiersList) 
 		{
 			std::shared_ptr<ecore::EClassifier> temp = std::dynamic_pointer_cast<ecore::EClassifier>((eClassifiersindexElem)->copy());
 			m_eClassifiers->push_back(temp);
@@ -147,7 +147,7 @@ EPackageImpl& EPackageImpl::operator=(const EPackageImpl & obj)
 		m_eSubpackages.reset(new Bag<ecore::EPackage>());
 		
 		
-		for(const std::shared_ptr<ecore::EPackage> eSubpackagesindexElem: *eSubpackagesList) 
+		for(const std::shared_ptr<ecore::EPackage>& eSubpackagesindexElem: *eSubpackagesList) 
 		{
 			std::shared_ptr<ecore::EPackage> temp = std::dynamic_pointer_cast<ecore::EPackage>((eSubpackagesindexElem)->copy());
 			m_eSubpackages->push_back(temp);
@@ -533,7 +533,7 @@ bool EPackageImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 					{
 						std::shared_ptr<Bag<ecore::EClassifier>> _eClassifiers = getEClassifiers();
 	
-						for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
+						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{
 							std::shared_ptr<ecore::EClassifier> valueToAdd = std::dynamic_pointer_cast<ecore::EClassifier>(anEObject);
 	
@@ -609,7 +609,7 @@ bool EPackageImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 					{
 						std::shared_ptr<Bag<ecore::EPackage>> _eSubpackages = getESubpackages();
 	
-						for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
+						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{
 							std::shared_ptr<ecore::EPackage> valueToAdd = std::dynamic_pointer_cast<ecore::EPackage>(anEObject);
 	

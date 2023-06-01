@@ -196,7 +196,7 @@ TupleLiteralExpImpl& TupleLiteralExpImpl::operator=(const TupleLiteralExpImpl & 
 		m_part.reset(new Bag<ocl::Expressions::VarDeclarationExp>());
 		
 		
-		for(const std::shared_ptr<ocl::Expressions::VarDeclarationExp> partindexElem: *partList) 
+		for(const std::shared_ptr<ocl::Expressions::VarDeclarationExp>& partindexElem: *partList) 
 		{
 			std::shared_ptr<ocl::Expressions::VarDeclarationExp> temp = std::dynamic_pointer_cast<ocl::Expressions::VarDeclarationExp>((partindexElem)->copy());
 			m_part->push_back(temp);
@@ -442,7 +442,7 @@ bool TupleLiteralExpImpl::eSet(int featureID,  const std::shared_ptr<Any>& newVa
 					{
 						std::shared_ptr<Bag<ocl::Expressions::VarDeclarationExp>> _part = getPart();
 	
-						for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
+						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{
 							std::shared_ptr<ocl::Expressions::VarDeclarationExp> valueToAdd = std::dynamic_pointer_cast<ocl::Expressions::VarDeclarationExp>(anEObject);
 	

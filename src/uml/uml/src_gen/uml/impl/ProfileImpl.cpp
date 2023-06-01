@@ -175,7 +175,7 @@ ProfileImpl& ProfileImpl::operator=(const ProfileImpl & obj)
 			std::cout << "Initialising value Subset: " << "m_metaclassReference - Subset<uml::ElementImport, uml::ElementImport /*Subset does not reference a union*/ >(getElementImport())" << std::endl;
 		#endif
 		
-		for(const std::shared_ptr<uml::ElementImport> metaclassReferenceindexElem: *metaclassReferenceList) 
+		for(const std::shared_ptr<uml::ElementImport>& metaclassReferenceindexElem: *metaclassReferenceList) 
 		{
 			std::shared_ptr<uml::ElementImport> temp = std::dynamic_pointer_cast<uml::ElementImport>((metaclassReferenceindexElem)->copy());
 			m_metaclassReference->push_back(temp);
@@ -202,7 +202,7 @@ ProfileImpl& ProfileImpl::operator=(const ProfileImpl & obj)
 			std::cout << "Initialising value Subset: " << "m_metamodelReference - Subset<uml::PackageImport, uml::PackageImport /*Subset does not reference a union*/ >(getPackageImport())" << std::endl;
 		#endif
 		
-		for(const std::shared_ptr<uml::PackageImport> metamodelReferenceindexElem: *metamodelReferenceList) 
+		for(const std::shared_ptr<uml::PackageImport>& metamodelReferenceindexElem: *metamodelReferenceList) 
 		{
 			std::shared_ptr<uml::PackageImport> temp = std::dynamic_pointer_cast<uml::PackageImport>((metamodelReferenceindexElem)->copy());
 			m_metamodelReference->push_back(temp);
@@ -533,7 +533,7 @@ bool ProfileImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 					{
 						std::shared_ptr<Bag<uml::ElementImport>> _metaclassReference = getMetaclassReference();
 	
-						for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
+						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{
 							std::shared_ptr<uml::ElementImport> valueToAdd = std::dynamic_pointer_cast<uml::ElementImport>(anEObject);
 	
@@ -578,7 +578,7 @@ bool ProfileImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 					{
 						std::shared_ptr<Bag<uml::PackageImport>> _metamodelReference = getMetamodelReference();
 	
-						for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
+						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{
 							std::shared_ptr<uml::PackageImport> valueToAdd = std::dynamic_pointer_cast<uml::PackageImport>(anEObject);
 	

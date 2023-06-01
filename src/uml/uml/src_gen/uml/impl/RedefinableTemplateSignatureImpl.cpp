@@ -141,7 +141,7 @@ RedefinableTemplateSignatureImpl& RedefinableTemplateSignatureImpl::operator=(co
 			std::cout << "Initialising value Subset: " << "m_extendedSignature - Subset<uml::RedefinableTemplateSignature, uml::RedefinableElement >(getRedefinedElement())" << std::endl;
 		#endif
 		
-		for(const std::shared_ptr<uml::RedefinableTemplateSignature> extendedSignatureindexElem: *extendedSignatureList) 
+		for(const std::shared_ptr<uml::RedefinableTemplateSignature>& extendedSignatureindexElem: *extendedSignatureList) 
 		{
 			std::shared_ptr<uml::RedefinableTemplateSignature> temp = std::dynamic_pointer_cast<uml::RedefinableTemplateSignature>((extendedSignatureindexElem)->copy());
 			m_extendedSignature->push_back(temp);
@@ -168,7 +168,7 @@ RedefinableTemplateSignatureImpl& RedefinableTemplateSignatureImpl::operator=(co
 			std::cout << "Initialising value Subset: " << "m_inheritedParameter - Subset<uml::TemplateParameter, uml::TemplateParameter >(getParameter())" << std::endl;
 		#endif
 		
-		for(const std::shared_ptr<uml::TemplateParameter> inheritedParameterindexElem: *inheritedParameterList) 
+		for(const std::shared_ptr<uml::TemplateParameter>& inheritedParameterindexElem: *inheritedParameterList) 
 		{
 			std::shared_ptr<uml::TemplateParameter> temp = std::dynamic_pointer_cast<uml::TemplateParameter>((inheritedParameterindexElem)->copy());
 			m_inheritedParameter->push_back(temp);
@@ -518,7 +518,7 @@ bool RedefinableTemplateSignatureImpl::eSet(int featureID,  const std::shared_pt
 					{
 						std::shared_ptr<Bag<uml::RedefinableTemplateSignature>> _extendedSignature = getExtendedSignature();
 	
-						for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
+						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{
 							std::shared_ptr<uml::RedefinableTemplateSignature> valueToAdd = std::dynamic_pointer_cast<uml::RedefinableTemplateSignature>(anEObject);
 	

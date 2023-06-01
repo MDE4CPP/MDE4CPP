@@ -150,7 +150,7 @@ OpaqueExpressionImpl& OpaqueExpressionImpl::operator=(const OpaqueExpressionImpl
 	if(bodyList)
 	{	
 		m_body.reset(new Bag<std::string>());
-		for(const std::shared_ptr<std::string> it: *bodyList) 
+		for(const std::shared_ptr<std::string>& it: *bodyList) 
 		{
 			m_body->push_back(it);
 		}
@@ -163,7 +163,7 @@ OpaqueExpressionImpl& OpaqueExpressionImpl::operator=(const OpaqueExpressionImpl
 	if(languageList)
 	{	
 		m_language.reset(new Bag<std::string>());
-		for(const std::shared_ptr<std::string> it: *languageList) 
+		for(const std::shared_ptr<std::string>& it: *languageList) 
 		{
 			m_language->push_back(it);
 		}
@@ -524,7 +524,7 @@ bool OpaqueExpressionImpl::eSet(int featureID,  const std::shared_ptr<Any>& newV
 				std::shared_ptr<Bag<std::string>> _bodyList = newValue->get<std::shared_ptr<Bag<std::string>>>();
 				std::shared_ptr<Bag<std::string>> _body = getBody();
 				
-				for(const std::shared_ptr<std::string> valueToAdd: *_bodyList)
+				for(const std::shared_ptr<std::string>& valueToAdd: *_bodyList)
 				{
 					if (valueToAdd)
 					{
@@ -554,7 +554,7 @@ bool OpaqueExpressionImpl::eSet(int featureID,  const std::shared_ptr<Any>& newV
 				std::shared_ptr<Bag<std::string>> _languageList = newValue->get<std::shared_ptr<Bag<std::string>>>();
 				std::shared_ptr<Bag<std::string>> _language = getLanguage();
 				
-				for(const std::shared_ptr<std::string> valueToAdd: *_languageList)
+				for(const std::shared_ptr<std::string>& valueToAdd: *_languageList)
 				{
 					if (valueToAdd)
 					{

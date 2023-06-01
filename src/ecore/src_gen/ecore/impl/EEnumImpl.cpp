@@ -125,7 +125,7 @@ EEnumImpl& EEnumImpl::operator=(const EEnumImpl & obj)
 			std::cout << "Initialising value Subset: " << "m_eLiterals - Subset<ecore::EEnumLiteral, ecore::EObject >(getEContentUnion())" << std::endl;
 		#endif
 		
-		for(const std::shared_ptr<ecore::EEnumLiteral> eLiteralsindexElem: *eLiteralsList) 
+		for(const std::shared_ptr<ecore::EEnumLiteral>& eLiteralsindexElem: *eLiteralsList) 
 		{
 			std::shared_ptr<ecore::EEnumLiteral> temp = std::dynamic_pointer_cast<ecore::EEnumLiteral>((eLiteralsindexElem)->copy());
 			m_eLiterals->push_back(temp);
@@ -388,7 +388,7 @@ bool EEnumImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 					{
 						std::shared_ptr<Bag<ecore::EEnumLiteral>> _eLiterals = getELiterals();
 	
-						for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
+						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{
 							std::shared_ptr<ecore::EEnumLiteral> valueToAdd = std::dynamic_pointer_cast<ecore::EEnumLiteral>(anEObject);
 	

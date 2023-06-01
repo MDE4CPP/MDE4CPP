@@ -199,7 +199,7 @@ StateMachineImpl& StateMachineImpl::operator=(const StateMachineImpl & obj)
 			std::cout << "Initialising value Subset: " << "m_connectionPoint - Subset<uml::Pseudostate, uml::NamedElement >(getOwnedMember())" << std::endl;
 		#endif
 		
-		for(const std::shared_ptr<uml::Pseudostate> connectionPointindexElem: *connectionPointList) 
+		for(const std::shared_ptr<uml::Pseudostate>& connectionPointindexElem: *connectionPointList) 
 		{
 			std::shared_ptr<uml::Pseudostate> temp = std::dynamic_pointer_cast<uml::Pseudostate>((connectionPointindexElem)->copy());
 			m_connectionPoint->push_back(temp);
@@ -226,7 +226,7 @@ StateMachineImpl& StateMachineImpl::operator=(const StateMachineImpl & obj)
 			std::cout << "Initialising value Subset: " << "m_region - Subset<uml::Region, uml::NamedElement >(getOwnedMember())" << std::endl;
 		#endif
 		
-		for(const std::shared_ptr<uml::Region> regionindexElem: *regionList) 
+		for(const std::shared_ptr<uml::Region>& regionindexElem: *regionList) 
 		{
 			std::shared_ptr<uml::Region> temp = std::dynamic_pointer_cast<uml::Region>((regionindexElem)->copy());
 			m_region->push_back(temp);
@@ -643,7 +643,7 @@ bool StateMachineImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue
 					{
 						std::shared_ptr<Bag<uml::Pseudostate>> _connectionPoint = getConnectionPoint();
 	
-						for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
+						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{
 							std::shared_ptr<uml::Pseudostate> valueToAdd = std::dynamic_pointer_cast<uml::Pseudostate>(anEObject);
 	
@@ -688,7 +688,7 @@ bool StateMachineImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue
 					{
 						std::shared_ptr<Bag<uml::StateMachine>> _extendedStateMachine = getExtendedStateMachine();
 	
-						for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
+						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{
 							std::shared_ptr<uml::StateMachine> valueToAdd = std::dynamic_pointer_cast<uml::StateMachine>(anEObject);
 	
@@ -733,7 +733,7 @@ bool StateMachineImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue
 					{
 						std::shared_ptr<Bag<uml::Region>> _region = getRegion();
 	
-						for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
+						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{
 							std::shared_ptr<uml::Region> valueToAdd = std::dynamic_pointer_cast<uml::Region>(anEObject);
 	
@@ -778,7 +778,7 @@ bool StateMachineImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue
 					{
 						std::shared_ptr<Bag<uml::State>> _submachineState = getSubmachineState();
 	
-						for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
+						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{
 							std::shared_ptr<uml::State> valueToAdd = std::dynamic_pointer_cast<uml::State>(anEObject);
 	

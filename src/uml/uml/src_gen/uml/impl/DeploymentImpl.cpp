@@ -156,7 +156,7 @@ DeploymentImpl& DeploymentImpl::operator=(const DeploymentImpl & obj)
 			std::cout << "Initialising value Subset: " << "m_configuration - Subset<uml::DeploymentSpecification, uml::Element >(getOwnedElement())" << std::endl;
 		#endif
 		
-		for(const std::shared_ptr<uml::DeploymentSpecification> configurationindexElem: *configurationList) 
+		for(const std::shared_ptr<uml::DeploymentSpecification>& configurationindexElem: *configurationList) 
 		{
 			std::shared_ptr<uml::DeploymentSpecification> temp = std::dynamic_pointer_cast<uml::DeploymentSpecification>((configurationindexElem)->copy());
 			m_configuration->push_back(temp);
@@ -183,7 +183,7 @@ DeploymentImpl& DeploymentImpl::operator=(const DeploymentImpl & obj)
 			std::cout << "Initialising value Subset: " << "m_deployedArtifact - Subset<uml::DeployedArtifact, uml::NamedElement /*Subset does not reference a union*/ >(getSupplier())" << std::endl;
 		#endif
 		
-		for(const std::shared_ptr<uml::DeployedArtifact> deployedArtifactindexElem: *deployedArtifactList) 
+		for(const std::shared_ptr<uml::DeployedArtifact>& deployedArtifactindexElem: *deployedArtifactList) 
 		{
 			std::shared_ptr<uml::DeployedArtifact> temp = std::dynamic_pointer_cast<uml::DeployedArtifact>((deployedArtifactindexElem)->copy());
 			m_deployedArtifact->push_back(temp);
@@ -511,7 +511,7 @@ bool DeploymentImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 					{
 						std::shared_ptr<Bag<uml::DeploymentSpecification>> _configuration = getConfiguration();
 	
-						for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
+						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{
 							std::shared_ptr<uml::DeploymentSpecification> valueToAdd = std::dynamic_pointer_cast<uml::DeploymentSpecification>(anEObject);
 	
@@ -556,7 +556,7 @@ bool DeploymentImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 					{
 						std::shared_ptr<Bag<uml::DeployedArtifact>> _deployedArtifact = getDeployedArtifact();
 	
-						for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
+						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{
 							std::shared_ptr<uml::DeployedArtifact> valueToAdd = std::dynamic_pointer_cast<uml::DeployedArtifact>(anEObject);
 	

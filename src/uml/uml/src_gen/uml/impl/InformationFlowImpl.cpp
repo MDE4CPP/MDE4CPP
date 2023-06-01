@@ -157,7 +157,7 @@ InformationFlowImpl& InformationFlowImpl::operator=(const InformationFlowImpl & 
 			std::cout << "Initialising value Subset: " << "m_informationSource - Subset<uml::NamedElement, uml::Element >(getSource())" << std::endl;
 		#endif
 		
-		for(const std::shared_ptr<uml::NamedElement> informationSourceindexElem: *informationSourceList) 
+		for(const std::shared_ptr<uml::NamedElement>& informationSourceindexElem: *informationSourceList) 
 		{
 			std::shared_ptr<uml::NamedElement> temp = std::dynamic_pointer_cast<uml::NamedElement>((informationSourceindexElem)->copy());
 			m_informationSource->push_back(temp);
@@ -184,7 +184,7 @@ InformationFlowImpl& InformationFlowImpl::operator=(const InformationFlowImpl & 
 			std::cout << "Initialising value Subset: " << "m_informationTarget - Subset<uml::NamedElement, uml::Element >(getTarget())" << std::endl;
 		#endif
 		
-		for(const std::shared_ptr<uml::NamedElement> informationTargetindexElem: *informationTargetList) 
+		for(const std::shared_ptr<uml::NamedElement>& informationTargetindexElem: *informationTargetList) 
 		{
 			std::shared_ptr<uml::NamedElement> temp = std::dynamic_pointer_cast<uml::NamedElement>((informationTargetindexElem)->copy());
 			m_informationTarget->push_back(temp);
@@ -671,7 +671,7 @@ bool InformationFlowImpl::eSet(int featureID,  const std::shared_ptr<Any>& newVa
 					{
 						std::shared_ptr<Bag<uml::Classifier>> _conveyed = getConveyed();
 	
-						for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
+						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{
 							std::shared_ptr<uml::Classifier> valueToAdd = std::dynamic_pointer_cast<uml::Classifier>(anEObject);
 	
@@ -716,7 +716,7 @@ bool InformationFlowImpl::eSet(int featureID,  const std::shared_ptr<Any>& newVa
 					{
 						std::shared_ptr<Bag<uml::NamedElement>> _informationSource = getInformationSource();
 	
-						for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
+						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{
 							std::shared_ptr<uml::NamedElement> valueToAdd = std::dynamic_pointer_cast<uml::NamedElement>(anEObject);
 	
@@ -761,7 +761,7 @@ bool InformationFlowImpl::eSet(int featureID,  const std::shared_ptr<Any>& newVa
 					{
 						std::shared_ptr<Bag<uml::NamedElement>> _informationTarget = getInformationTarget();
 	
-						for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
+						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{
 							std::shared_ptr<uml::NamedElement> valueToAdd = std::dynamic_pointer_cast<uml::NamedElement>(anEObject);
 	
@@ -806,7 +806,7 @@ bool InformationFlowImpl::eSet(int featureID,  const std::shared_ptr<Any>& newVa
 					{
 						std::shared_ptr<Bag<uml::Relationship>> _realization = getRealization();
 	
-						for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
+						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{
 							std::shared_ptr<uml::Relationship> valueToAdd = std::dynamic_pointer_cast<uml::Relationship>(anEObject);
 	
@@ -851,7 +851,7 @@ bool InformationFlowImpl::eSet(int featureID,  const std::shared_ptr<Any>& newVa
 					{
 						std::shared_ptr<Bag<uml::ActivityEdge>> _realizingActivityEdge = getRealizingActivityEdge();
 	
-						for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
+						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{
 							std::shared_ptr<uml::ActivityEdge> valueToAdd = std::dynamic_pointer_cast<uml::ActivityEdge>(anEObject);
 	
@@ -896,7 +896,7 @@ bool InformationFlowImpl::eSet(int featureID,  const std::shared_ptr<Any>& newVa
 					{
 						std::shared_ptr<Bag<uml::Connector>> _realizingConnector = getRealizingConnector();
 	
-						for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
+						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{
 							std::shared_ptr<uml::Connector> valueToAdd = std::dynamic_pointer_cast<uml::Connector>(anEObject);
 	
@@ -941,7 +941,7 @@ bool InformationFlowImpl::eSet(int featureID,  const std::shared_ptr<Any>& newVa
 					{
 						std::shared_ptr<Bag<uml::Message>> _realizingMessage = getRealizingMessage();
 	
-						for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
+						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{
 							std::shared_ptr<uml::Message> valueToAdd = std::dynamic_pointer_cast<uml::Message>(anEObject);
 	

@@ -119,7 +119,7 @@ LinkEndDataImpl& LinkEndDataImpl::operator=(const LinkEndDataImpl & obj)
 			std::cout << "Initialising value Subset: " << "m_qualifier - Subset<uml::QualifierValue, uml::Element >(getOwnedElement())" << std::endl;
 		#endif
 		
-		for(const std::shared_ptr<uml::QualifierValue> qualifierindexElem: *qualifierList) 
+		for(const std::shared_ptr<uml::QualifierValue>& qualifierindexElem: *qualifierList) 
 		{
 			std::shared_ptr<uml::QualifierValue> temp = std::dynamic_pointer_cast<uml::QualifierValue>((qualifierindexElem)->copy());
 			m_qualifier->push_back(temp);
@@ -446,7 +446,7 @@ bool LinkEndDataImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 					{
 						std::shared_ptr<Bag<uml::QualifierValue>> _qualifier = getQualifier();
 	
-						for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
+						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{
 							std::shared_ptr<uml::QualifierValue> valueToAdd = std::dynamic_pointer_cast<uml::QualifierValue>(anEObject);
 	

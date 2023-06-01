@@ -121,7 +121,7 @@ EOperationImpl& EOperationImpl::operator=(const EOperationImpl & obj)
 		m_eGenericExceptions.reset(new Bag<ecore::EGenericType>());
 		
 		
-		for(const std::shared_ptr<ecore::EGenericType> eGenericExceptionsindexElem: *eGenericExceptionsList) 
+		for(const std::shared_ptr<ecore::EGenericType>& eGenericExceptionsindexElem: *eGenericExceptionsList) 
 		{
 			std::shared_ptr<ecore::EGenericType> temp = std::dynamic_pointer_cast<ecore::EGenericType>((eGenericExceptionsindexElem)->copy());
 			m_eGenericExceptions->push_back(temp);
@@ -148,7 +148,7 @@ EOperationImpl& EOperationImpl::operator=(const EOperationImpl & obj)
 			std::cout << "Initialising value Subset: " << "m_eParameters - Subset<ecore::EParameter, ecore::EObject >(getEContentUnion())" << std::endl;
 		#endif
 		
-		for(const std::shared_ptr<ecore::EParameter> eParametersindexElem: *eParametersList) 
+		for(const std::shared_ptr<ecore::EParameter>& eParametersindexElem: *eParametersList) 
 		{
 			std::shared_ptr<ecore::EParameter> temp = std::dynamic_pointer_cast<ecore::EParameter>((eParametersindexElem)->copy());
 			m_eParameters->push_back(temp);
@@ -166,7 +166,7 @@ EOperationImpl& EOperationImpl::operator=(const EOperationImpl & obj)
 		m_eTypeParameters.reset(new Bag<ecore::ETypeParameter>());
 		
 		
-		for(const std::shared_ptr<ecore::ETypeParameter> eTypeParametersindexElem: *eTypeParametersList) 
+		for(const std::shared_ptr<ecore::ETypeParameter>& eTypeParametersindexElem: *eTypeParametersList) 
 		{
 			std::shared_ptr<ecore::ETypeParameter> temp = std::dynamic_pointer_cast<ecore::ETypeParameter>((eTypeParametersindexElem)->copy());
 			m_eTypeParameters->push_back(temp);
@@ -564,7 +564,7 @@ bool EOperationImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 					{
 						std::shared_ptr<Bag<ecore::EClassifier>> _eExceptions = getEExceptions();
 	
-						for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
+						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{
 							std::shared_ptr<ecore::EClassifier> valueToAdd = std::dynamic_pointer_cast<ecore::EClassifier>(anEObject);
 	
@@ -609,7 +609,7 @@ bool EOperationImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 					{
 						std::shared_ptr<Bag<ecore::EGenericType>> _eGenericExceptions = getEGenericExceptions();
 	
-						for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
+						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{
 							std::shared_ptr<ecore::EGenericType> valueToAdd = std::dynamic_pointer_cast<ecore::EGenericType>(anEObject);
 	
@@ -654,7 +654,7 @@ bool EOperationImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 					{
 						std::shared_ptr<Bag<ecore::EParameter>> _eParameters = getEParameters();
 	
-						for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
+						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{
 							std::shared_ptr<ecore::EParameter> valueToAdd = std::dynamic_pointer_cast<ecore::EParameter>(anEObject);
 	
@@ -699,7 +699,7 @@ bool EOperationImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 					{
 						std::shared_ptr<Bag<ecore::ETypeParameter>> _eTypeParameters = getETypeParameters();
 	
-						for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
+						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{
 							std::shared_ptr<ecore::ETypeParameter> valueToAdd = std::dynamic_pointer_cast<ecore::ETypeParameter>(anEObject);
 	

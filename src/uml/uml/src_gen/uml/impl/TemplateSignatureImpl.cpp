@@ -126,7 +126,7 @@ TemplateSignatureImpl& TemplateSignatureImpl::operator=(const TemplateSignatureI
 			std::cout << "Initialising value Subset: " << "m_ownedParameter - Subset<uml::TemplateParameter, uml::Element, uml::TemplateParameter >(getOwnedElement(), getParameter())" << std::endl;
 		#endif
 		
-		for(const std::shared_ptr<uml::TemplateParameter> ownedParameterindexElem: *ownedParameterList) 
+		for(const std::shared_ptr<uml::TemplateParameter>& ownedParameterindexElem: *ownedParameterList) 
 		{
 			std::shared_ptr<uml::TemplateParameter> temp = std::dynamic_pointer_cast<uml::TemplateParameter>((ownedParameterindexElem)->copy());
 			m_ownedParameter->push_back(temp);
@@ -425,7 +425,7 @@ bool TemplateSignatureImpl::eSet(int featureID,  const std::shared_ptr<Any>& new
 					{
 						std::shared_ptr<Bag<uml::TemplateParameter>> _ownedParameter = getOwnedParameter();
 	
-						for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
+						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{
 							std::shared_ptr<uml::TemplateParameter> valueToAdd = std::dynamic_pointer_cast<uml::TemplateParameter>(anEObject);
 	
@@ -470,7 +470,7 @@ bool TemplateSignatureImpl::eSet(int featureID,  const std::shared_ptr<Any>& new
 					{
 						std::shared_ptr<Bag<uml::TemplateParameter>> _parameter = getParameter();
 	
-						for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
+						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{
 							std::shared_ptr<uml::TemplateParameter> valueToAdd = std::dynamic_pointer_cast<uml::TemplateParameter>(anEObject);
 	

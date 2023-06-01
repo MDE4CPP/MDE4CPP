@@ -155,7 +155,7 @@ ActivityNodeImpl& ActivityNodeImpl::operator=(const ActivityNodeImpl & obj)
 			std::cout << "Initialising value Subset: " << "m_inInterruptibleRegion - Subset<uml::InterruptibleActivityRegion, uml::ActivityGroup >(getInGroup())" << std::endl;
 		#endif
 		
-		for(const std::shared_ptr<uml::InterruptibleActivityRegion> inInterruptibleRegionindexElem: *inInterruptibleRegionList) 
+		for(const std::shared_ptr<uml::InterruptibleActivityRegion>& inInterruptibleRegionindexElem: *inInterruptibleRegionList) 
 		{
 			std::shared_ptr<uml::InterruptibleActivityRegion> temp = std::dynamic_pointer_cast<uml::InterruptibleActivityRegion>((inInterruptibleRegionindexElem)->copy());
 			m_inInterruptibleRegion->push_back(temp);
@@ -182,7 +182,7 @@ ActivityNodeImpl& ActivityNodeImpl::operator=(const ActivityNodeImpl & obj)
 			std::cout << "Initialising value Subset: " << "m_inPartition - Subset<uml::ActivityPartition, uml::ActivityGroup >(getInGroup())" << std::endl;
 		#endif
 		
-		for(const std::shared_ptr<uml::ActivityPartition> inPartitionindexElem: *inPartitionList) 
+		for(const std::shared_ptr<uml::ActivityPartition>& inPartitionindexElem: *inPartitionList) 
 		{
 			std::shared_ptr<uml::ActivityPartition> temp = std::dynamic_pointer_cast<uml::ActivityPartition>((inPartitionindexElem)->copy());
 			m_inPartition->push_back(temp);
@@ -209,7 +209,7 @@ ActivityNodeImpl& ActivityNodeImpl::operator=(const ActivityNodeImpl & obj)
 			std::cout << "Initialising value Subset: " << "m_redefinedNode - Subset<uml::ActivityNode, uml::RedefinableElement >(getRedefinedElement())" << std::endl;
 		#endif
 		
-		for(const std::shared_ptr<uml::ActivityNode> redefinedNodeindexElem: *redefinedNodeList) 
+		for(const std::shared_ptr<uml::ActivityNode>& redefinedNodeindexElem: *redefinedNodeList) 
 		{
 			std::shared_ptr<uml::ActivityNode> temp = std::dynamic_pointer_cast<uml::ActivityNode>((redefinedNodeindexElem)->copy());
 			m_redefinedNode->push_back(temp);
@@ -716,7 +716,7 @@ bool ActivityNodeImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue
 					{
 						std::shared_ptr<Bag<uml::InterruptibleActivityRegion>> _inInterruptibleRegion = getInInterruptibleRegion();
 	
-						for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
+						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{
 							std::shared_ptr<uml::InterruptibleActivityRegion> valueToAdd = std::dynamic_pointer_cast<uml::InterruptibleActivityRegion>(anEObject);
 	
@@ -761,7 +761,7 @@ bool ActivityNodeImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue
 					{
 						std::shared_ptr<Bag<uml::ActivityPartition>> _inPartition = getInPartition();
 	
-						for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
+						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{
 							std::shared_ptr<uml::ActivityPartition> valueToAdd = std::dynamic_pointer_cast<uml::ActivityPartition>(anEObject);
 	
@@ -837,7 +837,7 @@ bool ActivityNodeImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue
 					{
 						std::shared_ptr<Bag<uml::ActivityEdge>> _incoming = getIncoming();
 	
-						for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
+						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{
 							std::shared_ptr<uml::ActivityEdge> valueToAdd = std::dynamic_pointer_cast<uml::ActivityEdge>(anEObject);
 	
@@ -882,7 +882,7 @@ bool ActivityNodeImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue
 					{
 						std::shared_ptr<Bag<uml::ActivityEdge>> _outgoing = getOutgoing();
 	
-						for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
+						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{
 							std::shared_ptr<uml::ActivityEdge> valueToAdd = std::dynamic_pointer_cast<uml::ActivityEdge>(anEObject);
 	
@@ -927,7 +927,7 @@ bool ActivityNodeImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue
 					{
 						std::shared_ptr<Bag<uml::ActivityNode>> _redefinedNode = getRedefinedNode();
 	
-						for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
+						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{
 							std::shared_ptr<uml::ActivityNode> valueToAdd = std::dynamic_pointer_cast<uml::ActivityNode>(anEObject);
 	

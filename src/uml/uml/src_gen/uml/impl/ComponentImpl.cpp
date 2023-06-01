@@ -188,7 +188,7 @@ ComponentImpl& ComponentImpl::operator=(const ComponentImpl & obj)
 			std::cout << "Initialising value Subset: " << "m_packagedElement - Subset<uml::PackageableElement, uml::NamedElement >(getOwnedMember())" << std::endl;
 		#endif
 		
-		for(const std::shared_ptr<uml::PackageableElement> packagedElementindexElem: *packagedElementList) 
+		for(const std::shared_ptr<uml::PackageableElement>& packagedElementindexElem: *packagedElementList) 
 		{
 			std::shared_ptr<uml::PackageableElement> temp = std::dynamic_pointer_cast<uml::PackageableElement>((packagedElementindexElem)->copy());
 			m_packagedElement->push_back(temp);
@@ -215,7 +215,7 @@ ComponentImpl& ComponentImpl::operator=(const ComponentImpl & obj)
 			std::cout << "Initialising value Subset: " << "m_realization - Subset<uml::ComponentRealization, uml::Element >(getOwnedElement())" << std::endl;
 		#endif
 		
-		for(const std::shared_ptr<uml::ComponentRealization> realizationindexElem: *realizationList) 
+		for(const std::shared_ptr<uml::ComponentRealization>& realizationindexElem: *realizationList) 
 		{
 			std::shared_ptr<uml::ComponentRealization> temp = std::dynamic_pointer_cast<uml::ComponentRealization>((realizationindexElem)->copy());
 			m_realization->push_back(temp);
@@ -626,7 +626,7 @@ bool ComponentImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 					{
 						std::shared_ptr<Bag<uml::PackageableElement>> _packagedElement = getPackagedElement();
 	
-						for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
+						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{
 							std::shared_ptr<uml::PackageableElement> valueToAdd = std::dynamic_pointer_cast<uml::PackageableElement>(anEObject);
 	
@@ -671,7 +671,7 @@ bool ComponentImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 					{
 						std::shared_ptr<Bag<uml::ComponentRealization>> _realization = getRealization();
 	
-						for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
+						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{
 							std::shared_ptr<uml::ComponentRealization> valueToAdd = std::dynamic_pointer_cast<uml::ComponentRealization>(anEObject);
 	

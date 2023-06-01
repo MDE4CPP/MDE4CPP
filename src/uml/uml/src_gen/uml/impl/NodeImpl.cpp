@@ -186,7 +186,7 @@ NodeImpl& NodeImpl::operator=(const NodeImpl & obj)
 			std::cout << "Initialising value Subset: " << "m_nestedNode - Subset<uml::Node, uml::NamedElement >(getOwnedMember())" << std::endl;
 		#endif
 		
-		for(const std::shared_ptr<uml::Node> nestedNodeindexElem: *nestedNodeList) 
+		for(const std::shared_ptr<uml::Node>& nestedNodeindexElem: *nestedNodeList) 
 		{
 			std::shared_ptr<uml::Node> temp = std::dynamic_pointer_cast<uml::Node>((nestedNodeindexElem)->copy());
 			m_nestedNode->push_back(temp);
@@ -459,7 +459,7 @@ bool NodeImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 					{
 						std::shared_ptr<Bag<uml::Node>> _nestedNode = getNestedNode();
 	
-						for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
+						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{
 							std::shared_ptr<uml::Node> valueToAdd = std::dynamic_pointer_cast<uml::Node>(anEObject);
 	

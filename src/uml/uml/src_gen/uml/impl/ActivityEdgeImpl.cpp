@@ -163,7 +163,7 @@ ActivityEdgeImpl& ActivityEdgeImpl::operator=(const ActivityEdgeImpl & obj)
 			std::cout << "Initialising value Subset: " << "m_inPartition - Subset<uml::ActivityPartition, uml::ActivityGroup >(getInGroup())" << std::endl;
 		#endif
 		
-		for(const std::shared_ptr<uml::ActivityPartition> inPartitionindexElem: *inPartitionList) 
+		for(const std::shared_ptr<uml::ActivityPartition>& inPartitionindexElem: *inPartitionList) 
 		{
 			std::shared_ptr<uml::ActivityPartition> temp = std::dynamic_pointer_cast<uml::ActivityPartition>((inPartitionindexElem)->copy());
 			m_inPartition->push_back(temp);
@@ -190,7 +190,7 @@ ActivityEdgeImpl& ActivityEdgeImpl::operator=(const ActivityEdgeImpl & obj)
 			std::cout << "Initialising value Subset: " << "m_redefinedEdge - Subset<uml::ActivityEdge, uml::RedefinableElement >(getRedefinedElement())" << std::endl;
 		#endif
 		
-		for(const std::shared_ptr<uml::ActivityEdge> redefinedEdgeindexElem: *redefinedEdgeList) 
+		for(const std::shared_ptr<uml::ActivityEdge>& redefinedEdgeindexElem: *redefinedEdgeList) 
 		{
 			std::shared_ptr<uml::ActivityEdge> temp = std::dynamic_pointer_cast<uml::ActivityEdge>((redefinedEdgeindexElem)->copy());
 			m_redefinedEdge->push_back(temp);
@@ -793,7 +793,7 @@ bool ActivityEdgeImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue
 					{
 						std::shared_ptr<Bag<uml::ActivityPartition>> _inPartition = getInPartition();
 	
-						for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
+						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{
 							std::shared_ptr<uml::ActivityPartition> valueToAdd = std::dynamic_pointer_cast<uml::ActivityPartition>(anEObject);
 	
@@ -900,7 +900,7 @@ bool ActivityEdgeImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue
 					{
 						std::shared_ptr<Bag<uml::ActivityEdge>> _redefinedEdge = getRedefinedEdge();
 	
-						for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
+						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{
 							std::shared_ptr<uml::ActivityEdge> valueToAdd = std::dynamic_pointer_cast<uml::ActivityEdge>(anEObject);
 	

@@ -183,7 +183,7 @@ ConditionalNodeImpl& ConditionalNodeImpl::operator=(const ConditionalNodeImpl & 
 			std::cout << "Initialising value Subset: " << "m_clause - Subset<uml::Clause, uml::Element >(getOwnedElement())" << std::endl;
 		#endif
 		
-		for(const std::shared_ptr<uml::Clause> clauseindexElem: *clauseList) 
+		for(const std::shared_ptr<uml::Clause>& clauseindexElem: *clauseList) 
 		{
 			std::shared_ptr<uml::Clause> temp = std::dynamic_pointer_cast<uml::Clause>((clauseindexElem)->copy());
 			m_clause->push_back(temp);
@@ -529,7 +529,7 @@ bool ConditionalNodeImpl::eSet(int featureID,  const std::shared_ptr<Any>& newVa
 					{
 						std::shared_ptr<Bag<uml::Clause>> _clause = getClause();
 	
-						for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
+						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{
 							std::shared_ptr<uml::Clause> valueToAdd = std::dynamic_pointer_cast<uml::Clause>(anEObject);
 	
@@ -602,7 +602,7 @@ bool ConditionalNodeImpl::eSet(int featureID,  const std::shared_ptr<Any>& newVa
 					{
 						std::shared_ptr<Bag<uml::OutputPin>> _result = getResult();
 	
-						for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
+						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{
 							std::shared_ptr<uml::OutputPin> valueToAdd = std::dynamic_pointer_cast<uml::OutputPin>(anEObject);
 	

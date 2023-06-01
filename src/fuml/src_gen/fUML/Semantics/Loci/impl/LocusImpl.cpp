@@ -125,7 +125,7 @@ LocusImpl& LocusImpl::operator=(const LocusImpl & obj)
 		m_extensionalValues.reset(new Bag<uml::Element>());
 		
 		
-		for(const std::shared_ptr<uml::Element> extensionalValuesindexElem: *extensionalValuesList) 
+		for(const std::shared_ptr<uml::Element>& extensionalValuesindexElem: *extensionalValuesList) 
 		{
 			std::shared_ptr<uml::Element> temp = std::dynamic_pointer_cast<uml::Element>((extensionalValuesindexElem)->copy());
 			m_extensionalValues->push_back(temp);
@@ -539,7 +539,7 @@ bool LocusImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 					{
 						std::shared_ptr<Bag<uml::Element>> _extensionalValues = getExtensionalValues();
 	
-						for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
+						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{
 							std::shared_ptr<uml::Element> valueToAdd = std::dynamic_pointer_cast<uml::Element>(anEObject);
 	

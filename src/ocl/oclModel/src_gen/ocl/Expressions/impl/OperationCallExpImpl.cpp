@@ -199,7 +199,7 @@ OperationCallExpImpl& OperationCallExpImpl::operator=(const OperationCallExpImpl
 		m_argument.reset(new Bag<ocl::Expressions::OclExpression>());
 		
 		
-		for(const std::shared_ptr<ocl::Expressions::OclExpression> argumentindexElem: *argumentList) 
+		for(const std::shared_ptr<ocl::Expressions::OclExpression>& argumentindexElem: *argumentList) 
 		{
 			std::shared_ptr<ocl::Expressions::OclExpression> temp = std::dynamic_pointer_cast<ocl::Expressions::OclExpression>((argumentindexElem)->copy());
 			m_argument->push_back(temp);
@@ -517,7 +517,7 @@ bool OperationCallExpImpl::eSet(int featureID,  const std::shared_ptr<Any>& newV
 					{
 						std::shared_ptr<Bag<ocl::Expressions::OclExpression>> _argument = getArgument();
 	
-						for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
+						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{
 							std::shared_ptr<ocl::Expressions::OclExpression> valueToAdd = std::dynamic_pointer_cast<ocl::Expressions::OclExpression>(anEObject);
 	

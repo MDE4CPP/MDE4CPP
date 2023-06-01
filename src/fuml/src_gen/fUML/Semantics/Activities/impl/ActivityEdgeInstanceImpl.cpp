@@ -610,7 +610,7 @@ bool ActivityEdgeInstanceImpl::eSet(int featureID,  const std::shared_ptr<Any>& 
 					{
 						std::shared_ptr<Bag<fUML::Semantics::Activities::Offer>> _offers = getOffers();
 	
-						for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
+						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{
 							std::shared_ptr<fUML::Semantics::Activities::Offer> valueToAdd = std::dynamic_pointer_cast<fUML::Semantics::Activities::Offer>(anEObject);
 	

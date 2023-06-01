@@ -143,7 +143,7 @@ ActivityNodeActivationGroupImpl& ActivityNodeActivationGroupImpl::operator=(cons
 		m_edgeInstances.reset(new Bag<fUML::Semantics::Activities::ActivityEdgeInstance>());
 		
 		
-		for(const std::shared_ptr<fUML::Semantics::Activities::ActivityEdgeInstance> edgeInstancesindexElem: *edgeInstancesList) 
+		for(const std::shared_ptr<fUML::Semantics::Activities::ActivityEdgeInstance>& edgeInstancesindexElem: *edgeInstancesList) 
 		{
 			std::shared_ptr<fUML::Semantics::Activities::ActivityEdgeInstance> temp = std::dynamic_pointer_cast<fUML::Semantics::Activities::ActivityEdgeInstance>((edgeInstancesindexElem)->copy());
 			m_edgeInstances->push_back(temp);
@@ -161,7 +161,7 @@ ActivityNodeActivationGroupImpl& ActivityNodeActivationGroupImpl::operator=(cons
 		m_nodeActivations.reset(new Bag<fUML::Semantics::Activities::ActivityNodeActivation>());
 		
 		
-		for(const std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivation> nodeActivationsindexElem: *nodeActivationsList) 
+		for(const std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivation>& nodeActivationsindexElem: *nodeActivationsList) 
 		{
 			std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivation> temp = std::dynamic_pointer_cast<fUML::Semantics::Activities::ActivityNodeActivation>((nodeActivationsindexElem)->copy());
 			m_nodeActivations->push_back(temp);
@@ -581,7 +581,7 @@ void ActivityNodeActivationGroupImpl::terminateAll()
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
 	std::shared_ptr<Bag<fUML::Semantics::Activities::ActivityNodeActivation>> nodeActivations = this->getNodeActivations();
-for (std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivation> nodeActivation : *nodeActivations) 
+for (const std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivation>& nodeActivation : *nodeActivations) 
 {
           nodeActivation->terminate();
 }
@@ -589,7 +589,7 @@ for (std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivation> nodeAc
 this->getSuspendedActivations()->clear();
 
 std::shared_ptr<Bag<fUML::Semantics::Activities::ActivityEdgeInstance>> edgeInstances = this->getEdgeInstances();
-for(std::shared_ptr<fUML::Semantics::Activities::ActivityEdgeInstance> edgeInstance : *edgeInstances)
+for(const std::shared_ptr<fUML::Semantics::Activities::ActivityEdgeInstance>& edgeInstance : *edgeInstances)
 {
 	edgeInstance->getOffers()->clear();
 }
@@ -973,7 +973,7 @@ bool ActivityNodeActivationGroupImpl::eSet(int featureID,  const std::shared_ptr
 					{
 						std::shared_ptr<Bag<fUML::Semantics::Activities::ActivityEdgeInstance>> _edgeInstances = getEdgeInstances();
 	
-						for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
+						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{
 							std::shared_ptr<fUML::Semantics::Activities::ActivityEdgeInstance> valueToAdd = std::dynamic_pointer_cast<fUML::Semantics::Activities::ActivityEdgeInstance>(anEObject);
 	
@@ -1018,7 +1018,7 @@ bool ActivityNodeActivationGroupImpl::eSet(int featureID,  const std::shared_ptr
 					{
 						std::shared_ptr<Bag<fUML::Semantics::Activities::ActivityNodeActivation>> _nodeActivations = getNodeActivations();
 	
-						for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
+						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{
 							std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivation> valueToAdd = std::dynamic_pointer_cast<fUML::Semantics::Activities::ActivityNodeActivation>(anEObject);
 	
@@ -1063,7 +1063,7 @@ bool ActivityNodeActivationGroupImpl::eSet(int featureID,  const std::shared_ptr
 					{
 						std::shared_ptr<Bag<fUML::Semantics::Activities::ActivityNodeActivation>> _suspendedActivations = getSuspendedActivations();
 	
-						for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
+						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{
 							std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivation> valueToAdd = std::dynamic_pointer_cast<fUML::Semantics::Activities::ActivityNodeActivation>(anEObject);
 	

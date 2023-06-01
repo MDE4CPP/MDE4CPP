@@ -289,7 +289,7 @@ bool CollectionLiteralPartsImpl::eSet(int featureID,  const std::shared_ptr<Any>
 					{
 						std::shared_ptr<Bag<ocl::Expressions::CollectionLiteralPart>> _literalParts = getLiteralParts();
 	
-						for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
+						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{
 							std::shared_ptr<ocl::Expressions::CollectionLiteralPart> valueToAdd = std::dynamic_pointer_cast<ocl::Expressions::CollectionLiteralPart>(anEObject);
 	

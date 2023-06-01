@@ -130,7 +130,7 @@ EAnnotationImpl& EAnnotationImpl::operator=(const EAnnotationImpl & obj)
 			std::cout << "Initialising value Subset: " << "m_contents - Subset<ecore::EObject, ecore::EObject >(getEContentUnion())" << std::endl;
 		#endif
 		
-		for(const std::shared_ptr<ecore::EObject> contentsindexElem: *contentsList) 
+		for(const std::shared_ptr<ecore::EObject>& contentsindexElem: *contentsList) 
 		{
 			std::shared_ptr<ecore::EObject> temp = std::dynamic_pointer_cast<ecore::EObject>((contentsindexElem)->copy());
 			m_contents->push_back(temp);
@@ -468,7 +468,7 @@ bool EAnnotationImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 					{
 						std::shared_ptr<Bag<ecore::EObject>> _contents = getContents();
 	
-						for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
+						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{
 							std::shared_ptr<ecore::EObject> valueToAdd = std::dynamic_pointer_cast<ecore::EObject>(anEObject);
 	
@@ -558,7 +558,7 @@ bool EAnnotationImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 					{
 						std::shared_ptr<Bag<ecore::EObject>> _references = getReferences();
 	
-						for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
+						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{
 							std::shared_ptr<ecore::EObject> valueToAdd = std::dynamic_pointer_cast<ecore::EObject>(anEObject);
 	

@@ -145,7 +145,7 @@ ConnectorImpl& ConnectorImpl::operator=(const ConnectorImpl & obj)
 			std::cout << "Initialising value Subset: " << "m_end - Subset<uml::ConnectorEnd, uml::Element >(getOwnedElement())" << std::endl;
 		#endif
 		
-		for(const std::shared_ptr<uml::ConnectorEnd> endindexElem: *endList) 
+		for(const std::shared_ptr<uml::ConnectorEnd>& endindexElem: *endList) 
 		{
 			std::shared_ptr<uml::ConnectorEnd> temp = std::dynamic_pointer_cast<uml::ConnectorEnd>((endindexElem)->copy());
 			m_end->push_back(temp);
@@ -172,7 +172,7 @@ ConnectorImpl& ConnectorImpl::operator=(const ConnectorImpl & obj)
 			std::cout << "Initialising value Subset: " << "m_redefinedConnector - Subset<uml::Connector, uml::RedefinableElement >(getRedefinedElement())" << std::endl;
 		#endif
 		
-		for(const std::shared_ptr<uml::Connector> redefinedConnectorindexElem: *redefinedConnectorList) 
+		for(const std::shared_ptr<uml::Connector>& redefinedConnectorindexElem: *redefinedConnectorList) 
 		{
 			std::shared_ptr<uml::Connector> temp = std::dynamic_pointer_cast<uml::Connector>((redefinedConnectorindexElem)->copy());
 			m_redefinedConnector->push_back(temp);
@@ -573,7 +573,7 @@ bool ConnectorImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 					{
 						std::shared_ptr<Bag<uml::Behavior>> _contract = getContract();
 	
-						for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
+						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{
 							std::shared_ptr<uml::Behavior> valueToAdd = std::dynamic_pointer_cast<uml::Behavior>(anEObject);
 	
@@ -618,7 +618,7 @@ bool ConnectorImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 					{
 						std::shared_ptr<Bag<uml::ConnectorEnd>> _end = getEnd();
 	
-						for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
+						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{
 							std::shared_ptr<uml::ConnectorEnd> valueToAdd = std::dynamic_pointer_cast<uml::ConnectorEnd>(anEObject);
 	
@@ -663,7 +663,7 @@ bool ConnectorImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 					{
 						std::shared_ptr<Bag<uml::Connector>> _redefinedConnector = getRedefinedConnector();
 	
-						for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
+						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{
 							std::shared_ptr<uml::Connector> valueToAdd = std::dynamic_pointer_cast<uml::Connector>(anEObject);
 	

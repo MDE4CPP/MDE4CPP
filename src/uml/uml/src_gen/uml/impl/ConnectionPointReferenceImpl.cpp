@@ -412,7 +412,7 @@ bool ConnectionPointReferenceImpl::eSet(int featureID,  const std::shared_ptr<An
 					{
 						std::shared_ptr<Bag<uml::Pseudostate>> _entry = getEntry();
 	
-						for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
+						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{
 							std::shared_ptr<uml::Pseudostate> valueToAdd = std::dynamic_pointer_cast<uml::Pseudostate>(anEObject);
 	
@@ -457,7 +457,7 @@ bool ConnectionPointReferenceImpl::eSet(int featureID,  const std::shared_ptr<An
 					{
 						std::shared_ptr<Bag<uml::Pseudostate>> _exit = getExit();
 	
-						for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
+						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{
 							std::shared_ptr<uml::Pseudostate> valueToAdd = std::dynamic_pointer_cast<uml::Pseudostate>(anEObject);
 	

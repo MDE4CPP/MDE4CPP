@@ -91,7 +91,7 @@ ValuesImpl& ValuesImpl::operator=(const ValuesImpl & obj)
 	if(valuesList)
 	{	
 		m_values.reset(new Bag<Any>());
-		for(const std::shared_ptr<Any> it: *valuesList) 
+		for(const std::shared_ptr<Any>& it: *valuesList) 
 		{
 			m_values->push_back(it);
 		}
@@ -257,7 +257,7 @@ bool ValuesImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 				std::shared_ptr<Bag<Any>> _valuesList = newValue->get<std::shared_ptr<Bag<Any>>>();
 				std::shared_ptr<Bag<Any>> _values = getValues();
 				
-				for(const std::shared_ptr<Any> valueToAdd: *_valuesList)
+				for(const std::shared_ptr<Any>& valueToAdd: *_valuesList)
 				{
 					if (valueToAdd)
 					{

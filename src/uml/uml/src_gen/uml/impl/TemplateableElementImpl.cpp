@@ -123,7 +123,7 @@ TemplateableElementImpl& TemplateableElementImpl::operator=(const TemplateableEl
 			std::cout << "Initialising value Subset: " << "m_templateBinding - Subset<uml::TemplateBinding, uml::Element >(getOwnedElement())" << std::endl;
 		#endif
 		
-		for(const std::shared_ptr<uml::TemplateBinding> templateBindingindexElem: *templateBindingList) 
+		for(const std::shared_ptr<uml::TemplateBinding>& templateBindingindexElem: *templateBindingList) 
 		{
 			std::shared_ptr<uml::TemplateBinding> temp = std::dynamic_pointer_cast<uml::TemplateBinding>((templateBindingindexElem)->copy());
 			m_templateBinding->push_back(temp);
@@ -397,7 +397,7 @@ bool TemplateableElementImpl::eSet(int featureID,  const std::shared_ptr<Any>& n
 					{
 						std::shared_ptr<Bag<uml::TemplateBinding>> _templateBinding = getTemplateBinding();
 	
-						for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
+						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{
 							std::shared_ptr<uml::TemplateBinding> valueToAdd = std::dynamic_pointer_cast<uml::TemplateBinding>(anEObject);
 	

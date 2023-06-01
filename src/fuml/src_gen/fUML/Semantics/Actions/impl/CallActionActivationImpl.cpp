@@ -229,7 +229,7 @@ void CallActionActivationImpl::doAction()
 			{
 				std::shared_ptr<fUML::Semantics::Actions::InputPinActivation> activation =inputActivationList->at(inputPinNumber);
 				std::shared_ptr<Bag<fUML::Semantics::Activities::Token> > tokenList = activation->takeUnofferedTokens();
-				for(std::shared_ptr<fUML::Semantics::Activities::Token> token : *tokenList)
+				for(const std::shared_ptr<fUML::Semantics::Activities::Token>& token : *tokenList)
 				{
 					std::shared_ptr<Any> value = token->getValue();
 					if(value != nullptr)

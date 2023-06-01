@@ -130,7 +130,7 @@ DurationObservationImpl& DurationObservationImpl::operator=(const DurationObserv
 	if(firstEventList)
 	{	
 		m_firstEvent.reset(new Bag<bool>());
-		for(const std::shared_ptr<bool> it: *firstEventList) 
+		for(const std::shared_ptr<bool>& it: *firstEventList) 
 		{
 			m_firstEvent->push_back(it);
 		}
@@ -394,7 +394,7 @@ bool DurationObservationImpl::eSet(int featureID,  const std::shared_ptr<Any>& n
 					{
 						std::shared_ptr<Bag<uml::NamedElement>> _event = getEvent();
 	
-						for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
+						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{
 							std::shared_ptr<uml::NamedElement> valueToAdd = std::dynamic_pointer_cast<uml::NamedElement>(anEObject);
 	
@@ -433,7 +433,7 @@ bool DurationObservationImpl::eSet(int featureID,  const std::shared_ptr<Any>& n
 				std::shared_ptr<Bag<bool>> _firstEventList = newValue->get<std::shared_ptr<Bag<bool>>>();
 				std::shared_ptr<Bag<bool>> _firstEvent = isFirstEvent();
 				
-				for(const std::shared_ptr<bool> valueToAdd: *_firstEventList)
+				for(const std::shared_ptr<bool>& valueToAdd: *_firstEventList)
 				{
 					if (valueToAdd)
 					{

@@ -145,7 +145,7 @@ MessageImpl& MessageImpl::operator=(const MessageImpl & obj)
 			std::cout << "Initialising value Subset: " << "m_argument - Subset<uml::ValueSpecification, uml::Element >(getOwnedElement())" << std::endl;
 		#endif
 		
-		for(const std::shared_ptr<uml::ValueSpecification> argumentindexElem: *argumentList) 
+		for(const std::shared_ptr<uml::ValueSpecification>& argumentindexElem: *argumentList) 
 		{
 			std::shared_ptr<uml::ValueSpecification> temp = std::dynamic_pointer_cast<uml::ValueSpecification>((argumentindexElem)->copy());
 			m_argument->push_back(temp);
@@ -641,7 +641,7 @@ bool MessageImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 					{
 						std::shared_ptr<Bag<uml::ValueSpecification>> _argument = getArgument();
 	
-						for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
+						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{
 							std::shared_ptr<uml::ValueSpecification> valueToAdd = std::dynamic_pointer_cast<uml::ValueSpecification>(anEObject);
 	

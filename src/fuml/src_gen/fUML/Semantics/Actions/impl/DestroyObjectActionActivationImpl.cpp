@@ -215,7 +215,7 @@ void DestroyObjectActionActivationImpl::doAction()
 		if(destroyTarget)
 		{
 			std::shared_ptr<Bag<Any>> tokens = this->takeTokens(destroyTarget);
-			for(std::shared_ptr<Any> value : *tokens)
+			for(const std::shared_ptr<Any>& value : *tokens)
 			{
 				this->destroyObject(value, action->getIsDestroyLinks(), action->getIsDestroyOwnedObjects());
 			}

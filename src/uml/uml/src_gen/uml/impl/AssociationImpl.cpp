@@ -176,7 +176,7 @@ AssociationImpl& AssociationImpl::operator=(const AssociationImpl & obj)
 			std::cout << "Initialising value Subset: " << "m_endType - Subset<uml::Type, uml::Element >(getRelatedElement())" << std::endl;
 		#endif
 		
-		for(const std::shared_ptr<uml::Type> endTypeindexElem: *endTypeList) 
+		for(const std::shared_ptr<uml::Type>& endTypeindexElem: *endTypeList) 
 		{
 			std::shared_ptr<uml::Type> temp = std::dynamic_pointer_cast<uml::Type>((endTypeindexElem)->copy());
 			m_endType->push_back(temp);
@@ -203,7 +203,7 @@ AssociationImpl& AssociationImpl::operator=(const AssociationImpl & obj)
 			std::cout << "Initialising value SubsetUnion: " << "m_memberEnd - SubsetUnion<uml::Property, uml::NamedElement >(getMember())" << std::endl;
 		#endif
 		
-		for(const std::shared_ptr<uml::Property> memberEndindexElem: *memberEndList) 
+		for(const std::shared_ptr<uml::Property>& memberEndindexElem: *memberEndList) 
 		{
 			std::shared_ptr<uml::Property> temp = std::dynamic_pointer_cast<uml::Property>((memberEndindexElem)->copy());
 			m_memberEnd->push_back(temp);
@@ -230,7 +230,7 @@ AssociationImpl& AssociationImpl::operator=(const AssociationImpl & obj)
 			std::cout << "Initialising value Subset: " << "m_navigableOwnedEnd - Subset<uml::Property, uml::Property /*Subset does not reference a union*/ >(getOwnedEnd())" << std::endl;
 		#endif
 		
-		for(const std::shared_ptr<uml::Property> navigableOwnedEndindexElem: *navigableOwnedEndList) 
+		for(const std::shared_ptr<uml::Property>& navigableOwnedEndindexElem: *navigableOwnedEndList) 
 		{
 			std::shared_ptr<uml::Property> temp = std::dynamic_pointer_cast<uml::Property>((navigableOwnedEndindexElem)->copy());
 			m_navigableOwnedEnd->push_back(temp);
@@ -257,7 +257,7 @@ AssociationImpl& AssociationImpl::operator=(const AssociationImpl & obj)
 			std::cout << "Initialising value SubsetUnion: " << "m_ownedEnd - SubsetUnion<uml::Property, uml::Feature, uml::NamedElement, uml::Property /*Subset does not reference a union*/ >(getFeature(), getOwnedMember(), getMemberEnd())" << std::endl;
 		#endif
 		
-		for(const std::shared_ptr<uml::Property> ownedEndindexElem: *ownedEndList) 
+		for(const std::shared_ptr<uml::Property>& ownedEndindexElem: *ownedEndList) 
 		{
 			std::shared_ptr<uml::Property> temp = std::dynamic_pointer_cast<uml::Property>((ownedEndindexElem)->copy());
 			m_ownedEnd->push_back(temp);
@@ -701,7 +701,7 @@ bool AssociationImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 					{
 						std::shared_ptr<Bag<uml::Property>> _memberEnd = getMemberEnd();
 	
-						for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
+						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{
 							std::shared_ptr<uml::Property> valueToAdd = std::dynamic_pointer_cast<uml::Property>(anEObject);
 	
@@ -746,7 +746,7 @@ bool AssociationImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 					{
 						std::shared_ptr<Bag<uml::Property>> _navigableOwnedEnd = getNavigableOwnedEnd();
 	
-						for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
+						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{
 							std::shared_ptr<uml::Property> valueToAdd = std::dynamic_pointer_cast<uml::Property>(anEObject);
 	
@@ -791,7 +791,7 @@ bool AssociationImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 					{
 						std::shared_ptr<Bag<uml::Property>> _ownedEnd = getOwnedEnd();
 	
-						for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
+						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{
 							std::shared_ptr<uml::Property> valueToAdd = std::dynamic_pointer_cast<uml::Property>(anEObject);
 	

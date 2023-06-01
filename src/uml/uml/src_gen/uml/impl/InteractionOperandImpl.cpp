@@ -153,7 +153,7 @@ InteractionOperandImpl& InteractionOperandImpl::operator=(const InteractionOpera
 			std::cout << "Initialising value Subset: " << "m_fragment - Subset<uml::InteractionFragment, uml::NamedElement >(getOwnedMember())" << std::endl;
 		#endif
 		
-		for(const std::shared_ptr<uml::InteractionFragment> fragmentindexElem: *fragmentList) 
+		for(const std::shared_ptr<uml::InteractionFragment>& fragmentindexElem: *fragmentList) 
 		{
 			std::shared_ptr<uml::InteractionFragment> temp = std::dynamic_pointer_cast<uml::InteractionFragment>((fragmentindexElem)->copy());
 			m_fragment->push_back(temp);
@@ -439,7 +439,7 @@ bool InteractionOperandImpl::eSet(int featureID,  const std::shared_ptr<Any>& ne
 					{
 						std::shared_ptr<Bag<uml::InteractionFragment>> _fragment = getFragment();
 	
-						for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
+						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{
 							std::shared_ptr<uml::InteractionFragment> valueToAdd = std::dynamic_pointer_cast<uml::InteractionFragment>(anEObject);
 	

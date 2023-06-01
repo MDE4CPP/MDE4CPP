@@ -195,7 +195,7 @@ OperationImpl& OperationImpl::operator=(const OperationImpl & obj)
 			std::cout << "Initialising value Subset: " << "m_postcondition - Subset<uml::Constraint, uml::Constraint /*Subset does not reference a union*/ >(getOwnedRule())" << std::endl;
 		#endif
 		
-		for(const std::shared_ptr<uml::Constraint> postconditionindexElem: *postconditionList) 
+		for(const std::shared_ptr<uml::Constraint>& postconditionindexElem: *postconditionList) 
 		{
 			std::shared_ptr<uml::Constraint> temp = std::dynamic_pointer_cast<uml::Constraint>((postconditionindexElem)->copy());
 			m_postcondition->push_back(temp);
@@ -222,7 +222,7 @@ OperationImpl& OperationImpl::operator=(const OperationImpl & obj)
 			std::cout << "Initialising value Subset: " << "m_precondition - Subset<uml::Constraint, uml::Constraint /*Subset does not reference a union*/ >(getOwnedRule())" << std::endl;
 		#endif
 		
-		for(const std::shared_ptr<uml::Constraint> preconditionindexElem: *preconditionList) 
+		for(const std::shared_ptr<uml::Constraint>& preconditionindexElem: *preconditionList) 
 		{
 			std::shared_ptr<uml::Constraint> temp = std::dynamic_pointer_cast<uml::Constraint>((preconditionindexElem)->copy());
 			m_precondition->push_back(temp);
@@ -249,7 +249,7 @@ OperationImpl& OperationImpl::operator=(const OperationImpl & obj)
 			std::cout << "Initialising value Subset: " << "m_redefinedOperation - Subset<uml::Operation, uml::RedefinableElement >(getRedefinedElement())" << std::endl;
 		#endif
 		
-		for(const std::shared_ptr<uml::Operation> redefinedOperationindexElem: *redefinedOperationList) 
+		for(const std::shared_ptr<uml::Operation>& redefinedOperationindexElem: *redefinedOperationList) 
 		{
 			std::shared_ptr<uml::Operation> temp = std::dynamic_pointer_cast<uml::Operation>((redefinedOperationindexElem)->copy());
 			m_redefinedOperation->push_back(temp);
@@ -337,7 +337,7 @@ std::shared_ptr<uml::Parameter> OperationImpl::returnResult()
 	std::shared_ptr<Bag<uml::Parameter>> ownedParameters = this->getOwnedParameter();
 	std::shared_ptr<uml::Parameter> returnResult;
 
-	for(std::shared_ptr<uml::Parameter> p : *ownedParameters)
+	for(const std::shared_ptr<uml::Parameter>& p : *ownedParameters)
 	{
 		if(p->getDirection() == uml::ParameterDirectionKind::RETURN)
 		{
@@ -1117,7 +1117,7 @@ bool OperationImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 					{
 						std::shared_ptr<Bag<uml::Parameter>> _ownedParameter = getProperty_OwnedParameter();
 	
-						for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
+						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{
 							std::shared_ptr<uml::Parameter> valueToAdd = std::dynamic_pointer_cast<uml::Parameter>(anEObject);
 	
@@ -1162,7 +1162,7 @@ bool OperationImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 					{
 						std::shared_ptr<Bag<uml::Constraint>> _postcondition = getPostcondition();
 	
-						for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
+						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{
 							std::shared_ptr<uml::Constraint> valueToAdd = std::dynamic_pointer_cast<uml::Constraint>(anEObject);
 	
@@ -1207,7 +1207,7 @@ bool OperationImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 					{
 						std::shared_ptr<Bag<uml::Constraint>> _precondition = getPrecondition();
 	
-						for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
+						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{
 							std::shared_ptr<uml::Constraint> valueToAdd = std::dynamic_pointer_cast<uml::Constraint>(anEObject);
 	
@@ -1252,7 +1252,7 @@ bool OperationImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 					{
 						std::shared_ptr<Bag<uml::Operation>> _redefinedOperation = getRedefinedOperation();
 	
-						for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
+						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{
 							std::shared_ptr<uml::Operation> valueToAdd = std::dynamic_pointer_cast<uml::Operation>(anEObject);
 	

@@ -174,7 +174,7 @@ DataTypeImpl& DataTypeImpl::operator=(const DataTypeImpl & obj)
 			std::cout << "Initialising value Subset: " << "m_ownedAttribute - Subset<uml::Property, uml::NamedElement, uml::Property >(getOwnedMember(), getAttribute())" << std::endl;
 		#endif
 		
-		for(const std::shared_ptr<uml::Property> ownedAttributeindexElem: *ownedAttributeList) 
+		for(const std::shared_ptr<uml::Property>& ownedAttributeindexElem: *ownedAttributeList) 
 		{
 			std::shared_ptr<uml::Property> temp = std::dynamic_pointer_cast<uml::Property>((ownedAttributeindexElem)->copy());
 			m_ownedAttribute->push_back(temp);
@@ -201,7 +201,7 @@ DataTypeImpl& DataTypeImpl::operator=(const DataTypeImpl & obj)
 			std::cout << "Initialising value Subset: " << "m_ownedOperation - Subset<uml::Operation, uml::Feature, uml::NamedElement >(getFeature(), getOwnedMember())" << std::endl;
 		#endif
 		
-		for(const std::shared_ptr<uml::Operation> ownedOperationindexElem: *ownedOperationList) 
+		for(const std::shared_ptr<uml::Operation>& ownedOperationindexElem: *ownedOperationList) 
 		{
 			std::shared_ptr<uml::Operation> temp = std::dynamic_pointer_cast<uml::Operation>((ownedOperationindexElem)->copy());
 			m_ownedOperation->push_back(temp);
@@ -498,7 +498,7 @@ bool DataTypeImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 					{
 						std::shared_ptr<Bag<uml::Property>> _ownedAttribute = getOwnedAttribute();
 	
-						for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
+						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{
 							std::shared_ptr<uml::Property> valueToAdd = std::dynamic_pointer_cast<uml::Property>(anEObject);
 	
@@ -543,7 +543,7 @@ bool DataTypeImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 					{
 						std::shared_ptr<Bag<uml::Operation>> _ownedOperation = getOwnedOperation();
 	
-						for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
+						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{
 							std::shared_ptr<uml::Operation> valueToAdd = std::dynamic_pointer_cast<uml::Operation>(anEObject);
 	

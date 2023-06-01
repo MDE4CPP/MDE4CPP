@@ -159,7 +159,7 @@ ActionImpl& ActionImpl::operator=(const ActionImpl & obj)
 			std::cout << "Initialising value Subset: " << "m_localPostcondition - Subset<uml::Constraint, uml::Element >(getOwnedElement())" << std::endl;
 		#endif
 		
-		for(const std::shared_ptr<uml::Constraint> localPostconditionindexElem: *localPostconditionList) 
+		for(const std::shared_ptr<uml::Constraint>& localPostconditionindexElem: *localPostconditionList) 
 		{
 			std::shared_ptr<uml::Constraint> temp = std::dynamic_pointer_cast<uml::Constraint>((localPostconditionindexElem)->copy());
 			m_localPostcondition->push_back(temp);
@@ -186,7 +186,7 @@ ActionImpl& ActionImpl::operator=(const ActionImpl & obj)
 			std::cout << "Initialising value Subset: " << "m_localPrecondition - Subset<uml::Constraint, uml::Element >(getOwnedElement())" << std::endl;
 		#endif
 		
-		for(const std::shared_ptr<uml::Constraint> localPreconditionindexElem: *localPreconditionList) 
+		for(const std::shared_ptr<uml::Constraint>& localPreconditionindexElem: *localPreconditionList) 
 		{
 			std::shared_ptr<uml::Constraint> temp = std::dynamic_pointer_cast<uml::Constraint>((localPreconditionindexElem)->copy());
 			m_localPrecondition->push_back(temp);
@@ -623,7 +623,7 @@ bool ActionImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 					{
 						std::shared_ptr<Bag<uml::Constraint>> _localPostcondition = getLocalPostcondition();
 	
-						for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
+						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{
 							std::shared_ptr<uml::Constraint> valueToAdd = std::dynamic_pointer_cast<uml::Constraint>(anEObject);
 	
@@ -668,7 +668,7 @@ bool ActionImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 					{
 						std::shared_ptr<Bag<uml::Constraint>> _localPrecondition = getLocalPrecondition();
 	
-						for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
+						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{
 							std::shared_ptr<uml::Constraint> valueToAdd = std::dynamic_pointer_cast<uml::Constraint>(anEObject);
 	

@@ -202,7 +202,7 @@ BehaviorImpl& BehaviorImpl::operator=(const BehaviorImpl & obj)
 			std::cout << "Initialising value Subset: " << "m_ownedParameter - Subset<uml::Parameter, uml::NamedElement >(getOwnedMember())" << std::endl;
 		#endif
 		
-		for(const std::shared_ptr<uml::Parameter> ownedParameterindexElem: *ownedParameterList) 
+		for(const std::shared_ptr<uml::Parameter>& ownedParameterindexElem: *ownedParameterList) 
 		{
 			std::shared_ptr<uml::Parameter> temp = std::dynamic_pointer_cast<uml::Parameter>((ownedParameterindexElem)->copy());
 			m_ownedParameter->push_back(temp);
@@ -229,7 +229,7 @@ BehaviorImpl& BehaviorImpl::operator=(const BehaviorImpl & obj)
 			std::cout << "Initialising value Subset: " << "m_ownedParameterSet - Subset<uml::ParameterSet, uml::NamedElement >(getOwnedMember())" << std::endl;
 		#endif
 		
-		for(const std::shared_ptr<uml::ParameterSet> ownedParameterSetindexElem: *ownedParameterSetList) 
+		for(const std::shared_ptr<uml::ParameterSet>& ownedParameterSetindexElem: *ownedParameterSetList) 
 		{
 			std::shared_ptr<uml::ParameterSet> temp = std::dynamic_pointer_cast<uml::ParameterSet>((ownedParameterSetindexElem)->copy());
 			m_ownedParameterSet->push_back(temp);
@@ -256,7 +256,7 @@ BehaviorImpl& BehaviorImpl::operator=(const BehaviorImpl & obj)
 			std::cout << "Initialising value Subset: " << "m_postcondition - Subset<uml::Constraint, uml::Constraint /*Subset does not reference a union*/ >(getOwnedRule())" << std::endl;
 		#endif
 		
-		for(const std::shared_ptr<uml::Constraint> postconditionindexElem: *postconditionList) 
+		for(const std::shared_ptr<uml::Constraint>& postconditionindexElem: *postconditionList) 
 		{
 			std::shared_ptr<uml::Constraint> temp = std::dynamic_pointer_cast<uml::Constraint>((postconditionindexElem)->copy());
 			m_postcondition->push_back(temp);
@@ -283,7 +283,7 @@ BehaviorImpl& BehaviorImpl::operator=(const BehaviorImpl & obj)
 			std::cout << "Initialising value Subset: " << "m_precondition - Subset<uml::Constraint, uml::Constraint /*Subset does not reference a union*/ >(getOwnedRule())" << std::endl;
 		#endif
 		
-		for(const std::shared_ptr<uml::Constraint> preconditionindexElem: *preconditionList) 
+		for(const std::shared_ptr<uml::Constraint>& preconditionindexElem: *preconditionList) 
 		{
 			std::shared_ptr<uml::Constraint> temp = std::dynamic_pointer_cast<uml::Constraint>((preconditionindexElem)->copy());
 			m_precondition->push_back(temp);
@@ -310,7 +310,7 @@ BehaviorImpl& BehaviorImpl::operator=(const BehaviorImpl & obj)
 			std::cout << "Initialising value Subset: " << "m_redefinedBehavior - Subset<uml::Behavior, uml::Classifier /*Subset does not reference a union*/ >(getRedefinedClassifier())" << std::endl;
 		#endif
 		
-		for(const std::shared_ptr<uml::Behavior> redefinedBehaviorindexElem: *redefinedBehaviorList) 
+		for(const std::shared_ptr<uml::Behavior>& redefinedBehaviorindexElem: *redefinedBehaviorList) 
 		{
 			std::shared_ptr<uml::Behavior> temp = std::dynamic_pointer_cast<uml::Behavior>((redefinedBehaviorindexElem)->copy());
 			m_redefinedBehavior->push_back(temp);
@@ -978,7 +978,7 @@ bool BehaviorImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 					{
 						std::shared_ptr<Bag<uml::Parameter>> _ownedParameter = getOwnedParameter();
 	
-						for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
+						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{
 							std::shared_ptr<uml::Parameter> valueToAdd = std::dynamic_pointer_cast<uml::Parameter>(anEObject);
 	
@@ -1023,7 +1023,7 @@ bool BehaviorImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 					{
 						std::shared_ptr<Bag<uml::ParameterSet>> _ownedParameterSet = getOwnedParameterSet();
 	
-						for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
+						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{
 							std::shared_ptr<uml::ParameterSet> valueToAdd = std::dynamic_pointer_cast<uml::ParameterSet>(anEObject);
 	
@@ -1068,7 +1068,7 @@ bool BehaviorImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 					{
 						std::shared_ptr<Bag<uml::Constraint>> _postcondition = getPostcondition();
 	
-						for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
+						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{
 							std::shared_ptr<uml::Constraint> valueToAdd = std::dynamic_pointer_cast<uml::Constraint>(anEObject);
 	
@@ -1113,7 +1113,7 @@ bool BehaviorImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 					{
 						std::shared_ptr<Bag<uml::Constraint>> _precondition = getPrecondition();
 	
-						for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
+						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{
 							std::shared_ptr<uml::Constraint> valueToAdd = std::dynamic_pointer_cast<uml::Constraint>(anEObject);
 	
@@ -1158,7 +1158,7 @@ bool BehaviorImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 					{
 						std::shared_ptr<Bag<uml::Behavior>> _redefinedBehavior = getRedefinedBehavior();
 	
-						for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
+						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{
 							std::shared_ptr<uml::Behavior> valueToAdd = std::dynamic_pointer_cast<uml::Behavior>(anEObject);
 	

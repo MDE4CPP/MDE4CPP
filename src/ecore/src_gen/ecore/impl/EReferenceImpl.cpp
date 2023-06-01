@@ -471,7 +471,7 @@ bool EReferenceImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 					{
 						std::shared_ptr<Bag<ecore::EAttribute>> _eKeys = getEKeys();
 	
-						for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
+						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{
 							std::shared_ptr<ecore::EAttribute> valueToAdd = std::dynamic_pointer_cast<ecore::EAttribute>(anEObject);
 	

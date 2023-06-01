@@ -202,7 +202,7 @@ LetExpImpl& LetExpImpl::operator=(const LetExpImpl & obj)
 		m_variables.reset(new Bag<ocl::Expressions::VarDeclarationExp>());
 		
 		
-		for(const std::shared_ptr<ocl::Expressions::VarDeclarationExp> variablesindexElem: *variablesList) 
+		for(const std::shared_ptr<ocl::Expressions::VarDeclarationExp>& variablesindexElem: *variablesList) 
 		{
 			std::shared_ptr<ocl::Expressions::VarDeclarationExp> temp = std::dynamic_pointer_cast<ocl::Expressions::VarDeclarationExp>((variablesindexElem)->copy());
 			m_variables->push_back(temp);
@@ -510,7 +510,7 @@ bool LetExpImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 					{
 						std::shared_ptr<Bag<ocl::Expressions::VarDeclarationExp>> _variables = getVariables();
 	
-						for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
+						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{
 							std::shared_ptr<ocl::Expressions::VarDeclarationExp> valueToAdd = std::dynamic_pointer_cast<ocl::Expressions::VarDeclarationExp>(anEObject);
 	

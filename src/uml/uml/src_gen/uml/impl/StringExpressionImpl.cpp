@@ -177,7 +177,7 @@ StringExpressionImpl& StringExpressionImpl::operator=(const StringExpressionImpl
 			std::cout << "Initialising value Subset: " << "m_subExpression - Subset<uml::StringExpression, uml::Element >(getOwnedElement())" << std::endl;
 		#endif
 		
-		for(const std::shared_ptr<uml::StringExpression> subExpressionindexElem: *subExpressionList) 
+		for(const std::shared_ptr<uml::StringExpression>& subExpressionindexElem: *subExpressionList) 
 		{
 			std::shared_ptr<uml::StringExpression> temp = std::dynamic_pointer_cast<uml::StringExpression>((subExpressionindexElem)->copy());
 			m_subExpression->push_back(temp);
@@ -505,7 +505,7 @@ bool StringExpressionImpl::eSet(int featureID,  const std::shared_ptr<Any>& newV
 					{
 						std::shared_ptr<Bag<uml::StringExpression>> _subExpression = getSubExpression();
 	
-						for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
+						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{
 							std::shared_ptr<uml::StringExpression> valueToAdd = std::dynamic_pointer_cast<uml::StringExpression>(anEObject);
 	

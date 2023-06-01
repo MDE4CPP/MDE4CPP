@@ -438,7 +438,7 @@ bool GeneralizationSetImpl::eSet(int featureID,  const std::shared_ptr<Any>& new
 					{
 						std::shared_ptr<Bag<uml::Generalization>> _generalization = getGeneralization();
 	
-						for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
+						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{
 							std::shared_ptr<uml::Generalization> valueToAdd = std::dynamic_pointer_cast<uml::Generalization>(anEObject);
 	

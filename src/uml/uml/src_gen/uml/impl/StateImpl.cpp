@@ -156,7 +156,7 @@ StateImpl& StateImpl::operator=(const StateImpl & obj)
 			std::cout << "Initialising value Subset: " << "m_connection - Subset<uml::ConnectionPointReference, uml::NamedElement >(getOwnedMember())" << std::endl;
 		#endif
 		
-		for(const std::shared_ptr<uml::ConnectionPointReference> connectionindexElem: *connectionList) 
+		for(const std::shared_ptr<uml::ConnectionPointReference>& connectionindexElem: *connectionList) 
 		{
 			std::shared_ptr<uml::ConnectionPointReference> temp = std::dynamic_pointer_cast<uml::ConnectionPointReference>((connectionindexElem)->copy());
 			m_connection->push_back(temp);
@@ -183,7 +183,7 @@ StateImpl& StateImpl::operator=(const StateImpl & obj)
 			std::cout << "Initialising value Subset: " << "m_connectionPoint - Subset<uml::Pseudostate, uml::NamedElement >(getOwnedMember())" << std::endl;
 		#endif
 		
-		for(const std::shared_ptr<uml::Pseudostate> connectionPointindexElem: *connectionPointList) 
+		for(const std::shared_ptr<uml::Pseudostate>& connectionPointindexElem: *connectionPointList) 
 		{
 			std::shared_ptr<uml::Pseudostate> temp = std::dynamic_pointer_cast<uml::Pseudostate>((connectionPointindexElem)->copy());
 			m_connectionPoint->push_back(temp);
@@ -210,7 +210,7 @@ StateImpl& StateImpl::operator=(const StateImpl & obj)
 			std::cout << "Initialising value Subset: " << "m_deferrableTrigger - Subset<uml::Trigger, uml::Element >(getOwnedElement())" << std::endl;
 		#endif
 		
-		for(const std::shared_ptr<uml::Trigger> deferrableTriggerindexElem: *deferrableTriggerList) 
+		for(const std::shared_ptr<uml::Trigger>& deferrableTriggerindexElem: *deferrableTriggerList) 
 		{
 			std::shared_ptr<uml::Trigger> temp = std::dynamic_pointer_cast<uml::Trigger>((deferrableTriggerindexElem)->copy());
 			m_deferrableTrigger->push_back(temp);
@@ -261,7 +261,7 @@ StateImpl& StateImpl::operator=(const StateImpl & obj)
 			std::cout << "Initialising value Subset: " << "m_region - Subset<uml::Region, uml::NamedElement >(getOwnedMember())" << std::endl;
 		#endif
 		
-		for(const std::shared_ptr<uml::Region> regionindexElem: *regionList) 
+		for(const std::shared_ptr<uml::Region>& regionindexElem: *regionList) 
 		{
 			std::shared_ptr<uml::Region> temp = std::dynamic_pointer_cast<uml::Region>((regionindexElem)->copy());
 			m_region->push_back(temp);
@@ -958,7 +958,7 @@ bool StateImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 					{
 						std::shared_ptr<Bag<uml::ConnectionPointReference>> _connection = getConnection();
 	
-						for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
+						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{
 							std::shared_ptr<uml::ConnectionPointReference> valueToAdd = std::dynamic_pointer_cast<uml::ConnectionPointReference>(anEObject);
 	
@@ -1003,7 +1003,7 @@ bool StateImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 					{
 						std::shared_ptr<Bag<uml::Pseudostate>> _connectionPoint = getConnectionPoint();
 	
-						for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
+						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{
 							std::shared_ptr<uml::Pseudostate> valueToAdd = std::dynamic_pointer_cast<uml::Pseudostate>(anEObject);
 	
@@ -1048,7 +1048,7 @@ bool StateImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 					{
 						std::shared_ptr<Bag<uml::Trigger>> _deferrableTrigger = getDeferrableTrigger();
 	
-						for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
+						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{
 							std::shared_ptr<uml::Trigger> valueToAdd = std::dynamic_pointer_cast<uml::Trigger>(anEObject);
 	
@@ -1217,7 +1217,7 @@ bool StateImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 					{
 						std::shared_ptr<Bag<uml::Region>> _region = getRegion();
 	
-						for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
+						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{
 							std::shared_ptr<uml::Region> valueToAdd = std::dynamic_pointer_cast<uml::Region>(anEObject);
 	

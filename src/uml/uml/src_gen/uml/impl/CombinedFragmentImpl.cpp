@@ -148,7 +148,7 @@ CombinedFragmentImpl& CombinedFragmentImpl::operator=(const CombinedFragmentImpl
 			std::cout << "Initialising value Subset: " << "m_cfragmentGate - Subset<uml::Gate, uml::Element >(getOwnedElement())" << std::endl;
 		#endif
 		
-		for(const std::shared_ptr<uml::Gate> cfragmentGateindexElem: *cfragmentGateList) 
+		for(const std::shared_ptr<uml::Gate>& cfragmentGateindexElem: *cfragmentGateList) 
 		{
 			std::shared_ptr<uml::Gate> temp = std::dynamic_pointer_cast<uml::Gate>((cfragmentGateindexElem)->copy());
 			m_cfragmentGate->push_back(temp);
@@ -175,7 +175,7 @@ CombinedFragmentImpl& CombinedFragmentImpl::operator=(const CombinedFragmentImpl
 			std::cout << "Initialising value Subset: " << "m_operand - Subset<uml::InteractionOperand, uml::Element >(getOwnedElement())" << std::endl;
 		#endif
 		
-		for(const std::shared_ptr<uml::InteractionOperand> operandindexElem: *operandList) 
+		for(const std::shared_ptr<uml::InteractionOperand>& operandindexElem: *operandList) 
 		{
 			std::shared_ptr<uml::InteractionOperand> temp = std::dynamic_pointer_cast<uml::InteractionOperand>((operandindexElem)->copy());
 			m_operand->push_back(temp);
@@ -587,7 +587,7 @@ bool CombinedFragmentImpl::eSet(int featureID,  const std::shared_ptr<Any>& newV
 					{
 						std::shared_ptr<Bag<uml::Gate>> _cfragmentGate = getCfragmentGate();
 	
-						for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
+						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{
 							std::shared_ptr<uml::Gate> valueToAdd = std::dynamic_pointer_cast<uml::Gate>(anEObject);
 	
@@ -646,7 +646,7 @@ bool CombinedFragmentImpl::eSet(int featureID,  const std::shared_ptr<Any>& newV
 					{
 						std::shared_ptr<Bag<uml::InteractionOperand>> _operand = getOperand();
 	
-						for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
+						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{
 							std::shared_ptr<uml::InteractionOperand> valueToAdd = std::dynamic_pointer_cast<uml::InteractionOperand>(anEObject);
 	

@@ -314,7 +314,7 @@ bool EvalEnvironmentImpl::eSet(int featureID,  const std::shared_ptr<Any>& newVa
 					{
 						std::shared_ptr<Bag<ocl::Evaluations::NameValueBinding>> _bindings = getBindings();
 	
-						for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
+						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{
 							std::shared_ptr<ocl::Evaluations::NameValueBinding> valueToAdd = std::dynamic_pointer_cast<ocl::Evaluations::NameValueBinding>(anEObject);
 	

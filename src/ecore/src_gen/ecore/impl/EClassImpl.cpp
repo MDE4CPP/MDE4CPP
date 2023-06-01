@@ -141,7 +141,7 @@ EClassImpl& EClassImpl::operator=(const EClassImpl & obj)
 			std::cout << "Initialising value Subset: " << "m_eAttributes - Subset<ecore::EAttribute, ecore::EStructuralFeature >(getEStructuralFeatures())" << std::endl;
 		#endif
 		
-		for(const std::shared_ptr<ecore::EAttribute> eAttributesindexElem: *eAttributesList) 
+		for(const std::shared_ptr<ecore::EAttribute>& eAttributesindexElem: *eAttributesList) 
 		{
 			std::shared_ptr<ecore::EAttribute> temp = std::dynamic_pointer_cast<ecore::EAttribute>((eAttributesindexElem)->copy());
 			m_eAttributes->push_back(temp);
@@ -159,7 +159,7 @@ EClassImpl& EClassImpl::operator=(const EClassImpl & obj)
 		m_eGenericSuperTypes.reset(new Bag<ecore::EGenericType>());
 		
 		
-		for(const std::shared_ptr<ecore::EGenericType> eGenericSuperTypesindexElem: *eGenericSuperTypesList) 
+		for(const std::shared_ptr<ecore::EGenericType>& eGenericSuperTypesindexElem: *eGenericSuperTypesList) 
 		{
 			std::shared_ptr<ecore::EGenericType> temp = std::dynamic_pointer_cast<ecore::EGenericType>((eGenericSuperTypesindexElem)->copy());
 			m_eGenericSuperTypes->push_back(temp);
@@ -186,7 +186,7 @@ EClassImpl& EClassImpl::operator=(const EClassImpl & obj)
 			std::cout << "Initialising value Subset: " << "m_eOperations - Subset<ecore::EOperation, ecore::EObject >(getEContentUnion())" << std::endl;
 		#endif
 		
-		for(const std::shared_ptr<ecore::EOperation> eOperationsindexElem: *eOperationsList) 
+		for(const std::shared_ptr<ecore::EOperation>& eOperationsindexElem: *eOperationsList) 
 		{
 			std::shared_ptr<ecore::EOperation> temp = std::dynamic_pointer_cast<ecore::EOperation>((eOperationsindexElem)->copy());
 			m_eOperations->push_back(temp);
@@ -213,7 +213,7 @@ EClassImpl& EClassImpl::operator=(const EClassImpl & obj)
 			std::cout << "Initialising value Subset: " << "m_eReferences - Subset<ecore::EReference, ecore::EStructuralFeature >(getEStructuralFeatures())" << std::endl;
 		#endif
 		
-		for(const std::shared_ptr<ecore::EReference> eReferencesindexElem: *eReferencesList) 
+		for(const std::shared_ptr<ecore::EReference>& eReferencesindexElem: *eReferencesList) 
 		{
 			std::shared_ptr<ecore::EReference> temp = std::dynamic_pointer_cast<ecore::EReference>((eReferencesindexElem)->copy());
 			m_eReferences->push_back(temp);
@@ -279,7 +279,7 @@ std::shared_ptr<ecore::EStructuralFeature> EClassImpl::getEStructuralFeature(std
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
 	    std::shared_ptr<Bag<EStructuralFeature > > eAllFeat = getEAllStructuralFeatures();
-    for(std::shared_ptr<EStructuralFeature> f: *eAllFeat)
+    for(const std::shared_ptr<EStructuralFeature>& f: *eAllFeat)
     {
         if(f->getName()==featureName)
         {
@@ -309,7 +309,7 @@ int EClassImpl::getFeatureID(const std::shared_ptr<ecore::EStructuralFeature>& f
     if(index != -1)
     {
         index = 0;
-        for(const std::shared_ptr<EStructuralFeature> iter: *eAllFeat)
+        for(const std::shared_ptr<EStructuralFeature>& iter: *eAllFeat)
         {
            if (feature == iter)
            {
@@ -345,7 +345,7 @@ int EClassImpl::getOperationID(const std::shared_ptr<ecore::EOperation>& operati
     if(index != -1)
     {
         index = 0;
-        for(const std::shared_ptr<ecore::EOperation>iter: *eAllOps)
+        for(const std::shared_ptr<ecore::EOperation>& iter: *eAllOps)
         {
            if (operation == iter)
            {
@@ -372,7 +372,7 @@ bool EClassImpl::isSuperTypeOf(const std::shared_ptr<ecore::EClass>& someClass) 
 		return true;
 	}
 	std::shared_ptr< Bag<ecore::EClass > > list = someClass->getEAllSuperTypes();
-    for(const std::shared_ptr< ecore::EClass> index: *list)
+    for(const std::shared_ptr<ecore::EClass>& index: *list)
     {
 	    if ((index).get()==this) return true;
     }
@@ -1037,7 +1037,7 @@ bool EClassImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 					{
 						std::shared_ptr<Bag<ecore::EAttribute>> _eAttributes = getEAttributes();
 	
-						for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
+						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{
 							std::shared_ptr<ecore::EAttribute> valueToAdd = std::dynamic_pointer_cast<ecore::EAttribute>(anEObject);
 	
@@ -1082,7 +1082,7 @@ bool EClassImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 					{
 						std::shared_ptr<Bag<ecore::EGenericType>> _eGenericSuperTypes = getEGenericSuperTypes();
 	
-						for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
+						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{
 							std::shared_ptr<ecore::EGenericType> valueToAdd = std::dynamic_pointer_cast<ecore::EGenericType>(anEObject);
 	
@@ -1158,7 +1158,7 @@ bool EClassImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 					{
 						std::shared_ptr<Bag<ecore::EOperation>> _eOperations = getEOperations();
 	
-						for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
+						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{
 							std::shared_ptr<ecore::EOperation> valueToAdd = std::dynamic_pointer_cast<ecore::EOperation>(anEObject);
 	
@@ -1203,7 +1203,7 @@ bool EClassImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 					{
 						std::shared_ptr<Bag<ecore::EReference>> _eReferences = getEReferences();
 	
-						for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
+						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{
 							std::shared_ptr<ecore::EReference> valueToAdd = std::dynamic_pointer_cast<ecore::EReference>(anEObject);
 	
@@ -1248,7 +1248,7 @@ bool EClassImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 					{
 						std::shared_ptr<Bag<ecore::EStructuralFeature>> _eStructuralFeatures = getEStructuralFeatures();
 	
-						for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
+						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{
 							std::shared_ptr<ecore::EStructuralFeature> valueToAdd = std::dynamic_pointer_cast<ecore::EStructuralFeature>(anEObject);
 	
@@ -1293,7 +1293,7 @@ bool EClassImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 					{
 						std::shared_ptr<Bag<ecore::EClass>> _eSuperTypes = getESuperTypes();
 	
-						for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
+						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{
 							std::shared_ptr<ecore::EClass> valueToAdd = std::dynamic_pointer_cast<ecore::EClass>(anEObject);
 	
