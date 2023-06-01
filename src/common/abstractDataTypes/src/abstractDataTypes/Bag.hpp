@@ -1,5 +1,5 @@
 /*
- * Set.h
+ * Bag.h
  *
  *  Created on: 12.05.2017
  *      Author: frbe5612
@@ -18,32 +18,33 @@
 	#define DEBUG_ERROR(a)		std::cout<<"[\e[0;31mError\e[0m]:\t"<<__PRETTY_FUNCTION__<<"\n\t\t  -- Message: "<<a<<std::endl;
 #endif
 
-#include <memory>
-#include <vector>
+#include <algorithm>
 #include <iostream>
+#include <memory>
 #include <stdexcept>
+#include <vector>
 
 template <class T>
 class Bag
 {
 	protected:
-		std::vector<std::shared_ptr<T> > m_bag;
+		std::vector<std::shared_ptr<T>> m_bag;
 
 	public:
-		typedef typename std::vector<std::shared_ptr<T> >::iterator iterator;
+		typedef typename std::vector<std::shared_ptr<T>>::iterator iterator;
 
 		Bag()
 		{
 		}
 
-		Bag(const Bag<T> &b)
+		Bag(const Bag<T>& b)
 		{
 			insert(b);
 		}
 
 		virtual ~Bag()
 		{
-			clear();
+			this->clear();
 		}
 
 		Bag<T> * copy() const
@@ -51,48 +52,47 @@ class Bag
 			return new Bag<T>(*this);
 		}
 
-		void insert(const Bag<T> &b)
+		iterator insert(const Bag<T>& b)
 		{
 #ifndef NDEBUG
 			// The debug version check if an inserted element is already present in the collection.
 			for (auto i = b.cbegin(); i != b.cend(); i++)
 			{
-				if (find(*i) > -1)
+				if (this->includes(*i))
 				{
 					//	DEBUG_WARNING("Element " << *i << " already present.")
 				}
 			}
 #endif
-			m_bag.insert(m_bag.cend(), b.cbegin(), b.cend());
+			return m_bag.insert(m_bag.cend(), b.cbegin(), b.cend());
 		}
 
-		void insert(iterator a, iterator b, iterator c)
+		iterator insert(iterator a, iterator b, iterator c)
 		{
 #ifndef NDEBUG
 			// The debug version check if an inserted element is already present in the collection.
 			for (auto i = b; i != c; i++)
 			{
-				if (find(*i) > -1)
+				if (this->includes(*i))
 				{
 					//	DEBUG_WARNING("Element " << *i << " already present.")
 				}
 			}
 #endif
-			m_bag.insert(a, b, c);
+			return m_bag.insert(a, b, c);
 		}
 
-		void insert(iterator a, std::shared_ptr<T> b)
+		iterator insert(iterator a, const std::shared_ptr<T>& b)
 		{
 #ifndef NDEBUG
 			// The debug version check if an inserted element is already present in the collection.
-			int i = find(b);
 
-			if (i > -1)
+			if (this->includes(b))
 			{
-				//	DEBUG_WARNING("Element " << *i << " already present.")
+				//	DEBUG_WARNING("Element " << b << " already present.")
 			}
 #endif
-			m_bag.insert(a, b);
+			return m_bag.insert(a, b);
 		}
 
 		bool empty()
@@ -107,11 +107,6 @@ class Bag
 
 		void clear()
 		{
-			const unsigned int size = m_bag.size();
-			for (unsigned int i = 0; i < size; i++)
-			{
-				m_bag[i].reset();
-			}
 			m_bag.clear();
 		}
 
@@ -125,12 +120,12 @@ class Bag
 			return m_bag.max_size();
 		}
 
-		const std::shared_ptr<T> operator [] (unsigned int n) const
+		const std::shared_ptr<T>& operator [] (unsigned int n) const
 		{
 			return m_bag[n];
 		}
 
-		const std::shared_ptr<T> at(unsigned int n) const
+		const std::shared_ptr<T>& at(unsigned int n) const
 		{
 #ifndef NDEBUG
 			if (n < m_bag.size())
@@ -143,11 +138,11 @@ class Bag
 #endif
 		}
 
-		virtual void add(std::shared_ptr<T> el)
+		virtual void add(const std::shared_ptr<T>& el)
 		{
 #ifndef NDEBUG
 			// The debug version check if an inserted element is already present in the collection.
-			if (find(el) > -1)
+			if (this->includes(el))
 			{
 				//	DEBUG_WARNING("Element " << el << " already present.")
 			}
@@ -155,84 +150,67 @@ class Bag
 			m_bag.push_back(el);
 		}
 
-		virtual void add(std::shared_ptr<T> el, int index)
+		virtual void add(const std::shared_ptr<T>& el, int index)
 		{
 			if(index < 0)
 			{
-				add(el);
+				this->add(el);
 			}
 			else
 			{
-				insert(begin() + index, el);
+				this->insert(begin() + index, el);
 			}
 		}
 
-		virtual void push_back(std::shared_ptr<T> el)
+		virtual void push_back(const std::shared_ptr<T>& el)
 		{
-			add(el);
+			m_bag.push_back(el);
 		}
 
-		virtual void erase(iterator el)
+		iterator erase(iterator el)
 		{
-			m_bag.erase(el);
+			return m_bag.erase(el);
 		}
 
-		virtual void erase(std::shared_ptr<T> el)
+		virtual iterator erase(const std::shared_ptr<T>& el)
 		{
-			int res = find(el);
+			iterator it = std::find(m_bag.begin(), m_bag.end(), el);
 
-			if (res < 0)
-			{
-				return;
-			}
-			m_bag.erase(m_bag.begin() + res);
+			return m_bag.erase(it);
 		}
 
-		int find(std::shared_ptr<T> el)
+		iterator find(const std::shared_ptr<T>& el)
 		{
-			const int size = m_bag.size();
-
-			if (size == 0)
-			{
-				return -1;
-			}
-			volatile bool found = false;
-			int first_index     = -1;
-			int iteration       = 0;
-			int my_index = -1;
-			int i;
-
-			do
-			{
-				{
-					i = iteration++;
-				}
-
-				if (i < size && m_bag[i] == el)
-				{
-					found    = true;
-					my_index = i;
-				}
-			}
-			while (!found && i < size);
-
-			if (my_index != -1)
-			{
-				if (first_index == -1 || my_index < first_index)
-				{
-					first_index = my_index;
-				}
-			}
-			return first_index;
+			return std::find(m_bag.begin(), m_bag.end(), el);
 		} // find
+
+		bool includes(const std::shared_ptr<T>& el)
+		{
+			return (find(el) != m_bag.end());
+		}
+
+		int index_of(const std::shared_ptr<T>& el)
+		{
+			return index_of(find(el));
+		}
+
+		int index_of(iterator it)
+		{
+			if(it != m_bag.end())
+			{
+				return (it - m_bag.begin());
+			}
+
+			return -1;
+		}
 
 		template <class U>
 		Bag(Bag<U> const &u)
 		{
-			this->m_bag = u.m_bag;
+			m_bag = u.m_bag;
 		}
 
-		typedef typename std::vector<std::shared_ptr<T> >::const_iterator const_iterator;
+		typedef typename std::vector<std::shared_ptr<T>>::const_iterator const_iterator;
 
 		virtual const_iterator cbegin() const
 		{

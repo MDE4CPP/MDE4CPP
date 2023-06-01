@@ -189,7 +189,7 @@ void [aClass.name.toUpperFirst().concat('Impl')/]::set(unsigned long _uID, const
 				{
 					if (valueToAdd)
 					{
-						if(_[aProperty.name.toLowerFirst()/]->find(valueToAdd) == -1)
+						if(!(_[aProperty.name.toLowerFirst()/]->includes(valueToAdd)))
 						{
 							_[aProperty.name.toLowerFirst()/]->add(valueToAdd);
 						}
@@ -232,7 +232,7 @@ void [aClass.name.toUpperFirst().concat('Impl')/]::set(unsigned long _uID, const
 				{
 					if (valueToAdd)
 					{
-						if(_[aProperty.name.toLowerFirst()/]->find(valueToAdd) == -1)
+						if(!(_[aProperty.name.toLowerFirst()/]->includes(valueToAdd)))
 						{
 							_[aProperty.name.toLowerFirst()/]->add(valueToAdd);
 						}
@@ -300,7 +300,7 @@ void [aClass.name.toUpperFirst().concat('Impl')/]::set(unsigned long _uID, const
 	
 							if (valueToAdd)
 							{
-								if(_[aProperty.name.toLowerFirst()/]->find(valueToAdd) == -1)
+								if(!(_[aProperty.name.toLowerFirst()/]->includes(valueToAdd)))
 								{
 									_[aProperty.name.toLowerFirst()/]->add(valueToAdd);
 								}
@@ -445,7 +445,7 @@ void [aClass.name.toUpperFirst().concat('Impl')/]::add(unsigned long _uID, const
 
 			[if (aProperty.isUnique)]
 			// [aProperty.name/] is unique
-			if(this->[aProperty.getterName()/]()->find(valueToAdd) == -1)
+			if(!(this->[aProperty.getterName()/]()->includes(valueToAdd)))
 			{
 				this->[aProperty.getterName()/]()->add(valueToAdd, insertAt);
 			}

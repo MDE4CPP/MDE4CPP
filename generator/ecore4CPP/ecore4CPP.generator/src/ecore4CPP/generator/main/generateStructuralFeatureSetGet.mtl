@@ -152,7 +152,7 @@ bool [aClass.name.toUpperFirst().concat('Impl')/]::eSet(int featureID,  const st
 				{
 					if (valueToAdd)
 					{
-						if(_[anEStructuralFeature.name.toLowerFirst()/]->find(valueToAdd) == -1)
+						if(!(_[anEStructuralFeature.name.toLowerFirst()/]->includes(valueToAdd)))
 						{
 							_[anEStructuralFeature.name.toLowerFirst()/]->add(valueToAdd);
 						}
@@ -220,7 +220,7 @@ bool [aClass.name.toUpperFirst().concat('Impl')/]::eSet(int featureID,  const st
 	
 							if (valueToAdd)
 							{
-								if(_[anEStructuralFeature.name.toLowerFirst()/]->find(valueToAdd) == -1)
+								if(!(_[anEStructuralFeature.name.toLowerFirst()/]->includes(valueToAdd)))
 								{
 									_[anEStructuralFeature.name.toLowerFirst()/]->add(valueToAdd);
 								}

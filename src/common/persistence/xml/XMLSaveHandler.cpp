@@ -258,7 +258,7 @@ void XMLSaveHandler::addReference(const std::shared_ptr<ecore::EObject> object, 
 		return;
 	}
 
-	if (m_savedObjects->find(object) != -1)
+	if (m_savedObjects->includes(object))
 	{
 		return;
 	}
