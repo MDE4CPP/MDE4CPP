@@ -9,6 +9,17 @@
 
 using namespace PSCS;
 
+std::shared_ptr<PSCSFactory> PSCSFactory::eInstance()
+{
+	static std::shared_ptr<PSCSFactory> instance;
+	if(!instance)
+	{
+		//create a new Factoryimplementation
+		instance.reset(PSCSFactoryImpl::create());
+	}	
+	return instance;
+}
+
 //*********************************
 // Constructor / Destructor
 //*********************************

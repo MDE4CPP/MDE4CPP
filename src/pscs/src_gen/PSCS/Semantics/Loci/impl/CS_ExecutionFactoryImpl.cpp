@@ -1,9 +1,13 @@
 
 #include "PSCS/Semantics/Loci/impl/CS_ExecutionFactoryImpl.hpp"
 #ifdef NDEBUG
-	#define DEBUG_MESSAGE(a) /**/
+	#define DEBUG_INFO(a)		/**/
+	#define DEBUG_WARNING(a)	/**/
+	#define DEBUG_ERROR(a)		/**/
 #else
-	#define DEBUG_MESSAGE(a) a
+	#define DEBUG_INFO(a) 		std::cout<<"[\e[0;32mInfo\e[0m]:\t\t"<<__PRETTY_FUNCTION__<<"\n\t\t  -- Message: "<<a<<std::endl;
+	#define DEBUG_WARNING(a) 	std::cout<<"[\e[0;33mWarning\e[0m]:\t"<<__PRETTY_FUNCTION__<<"\n\t\t  -- Message: "<<a<<std::endl;
+	#define DEBUG_ERROR(a)		std::cout<<"[\e[0;31mError\e[0m]:\t"<<__PRETTY_FUNCTION__<<"\n\t\t  -- Message: "<<a<<std::endl;
 #endif
 
 #ifdef ACTIVITY_DEBUG_ON
@@ -21,8 +25,8 @@
 #include "abstractDataTypes/Bag.hpp"
 
 
-#include "abstractDataTypes/AnyEObject.hpp"
-#include "abstractDataTypes/AnyEObjectBag.hpp"
+#include "ecore/EcoreAny.hpp"
+#include "ecore/EcoreContainerAny.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
@@ -33,8 +37,8 @@
 #include "fUML/fUMLFactory.hpp"
 #include "uml/umlFactory.hpp"
 #include "uml/umlPackage.hpp"
-#include "fUML/Semantics/StructuredClassifiers/ExtensionalValue.hpp"
-#include "fUML/Semantics/CommonBehavior/CommonBehaviorPackage.hpp"
+//#include "fUML/Semantics/StructuredClassifiers/ExtensionalValue.hpp"
+//#include "fUML/Semantics/CommonBehavior/CommonBehaviorPackage.hpp"
 
 #include "uml/ReadExtentAction.hpp"
 #include "uml/AddStructuralFeatureValueAction.hpp"
@@ -50,8 +54,9 @@
 #include "uml/OpaqueExpression.hpp"
 #include "uml/RemoveStructuralFeatureValueAction.hpp"
 #include "uml/Classifier.hpp"
-#include "fUML/Semantics/CommonBehavior/CallEventBehavior.hpp"
+//#include "fUML/Semantics/CommonBehavior/CallEventBehavior.hpp"
 
+/*
 #include "PSCS/Semantics/Actions/CS_ReadExtentActionActivation.hpp"
 #include "PSCS/Semantics/Actions/CS_AddStructuralFeatureValueActionActivation.hpp"
 #include "PSCS/Semantics/Actions/CS_ClearStructuralFeatureActionActivation.hpp"
@@ -70,21 +75,20 @@
 #include "PSCS/Semantics/Actions/ActionsFactory.hpp"
 #include "PSCS/Semantics/Classification/ClassificationFactory.hpp"
 #include "PSCS/Semantics/Values/ValuesFactory.hpp"
+*/
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
 #include "uml/umlFactory.hpp"
-#include "fUML/Semantics/Loci/LociFactory.hpp"
 #include "fUML/Semantics/CommonBehavior/CommonBehaviorFactory.hpp"
+#include "fUML/Semantics/Loci/LociFactory.hpp"
 #include "uml/Class.hpp"
 #include "uml/Classifier.hpp"
 #include "uml/Element.hpp"
 #include "fUML/Semantics/Loci/ExecutionFactory.hpp"
 #include "fUML/Semantics/Loci/Locus.hpp"
-#include "fUML/Semantics/StructuredClassifiers/Object.hpp"
-#include "fUML/Semantics/CommonBehavior/OpaqueBehaviorExecution.hpp"
 #include "uml/Package.hpp"
 #include "uml/PrimitiveType.hpp"
 #include "fUML/Semantics/Loci/SemanticStrategy.hpp"
@@ -92,10 +96,8 @@
 //Factories and Package includes
 #include "PSCS/Semantics/SemanticsPackage.hpp"
 #include "PSCS/PSCSPackage.hpp"
-#include "fUML/Semantics/CommonBehavior/CommonBehaviorPackage.hpp"
-#include "PSCS/Semantics/Loci/LociPackage.hpp"
 #include "fUML/Semantics/Loci/LociPackage.hpp"
-#include "fUML/Semantics/StructuredClassifiers/StructuredClassifiersPackage.hpp"
+#include "PSCS/Semantics/Loci/LociPackage.hpp"
 #include "uml/umlPackage.hpp"
 
 using namespace PSCS::Semantics::Loci;
@@ -167,27 +169,27 @@ std::shared_ptr<ecore::EObject> CS_ExecutionFactoryImpl::copy() const
 //*********************************
 // Operations
 //*********************************
-std::shared_ptr<fUML::Semantics::StructuredClassifiers::Object> CS_ExecutionFactoryImpl::getStereotypeApplication(std::shared_ptr<uml::Class> stereotype,std::shared_ptr<uml::Element> element)
+std::shared_ptr<uml::Element> CS_ExecutionFactoryImpl::getStereotypeApplication(const std::shared_ptr<uml::Class>& stereotype, const std::shared_ptr<uml::Element>& element)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
-			std::shared_ptr<Bag<fUML::Semantics::StructuredClassifiers::ExtensionalValue>> extent = this->getLocus().lock()->retrieveExtent(stereotype);
+		/*std::shared_ptr<Bag<fUML::Semantics::StructuredClassifiers::ExtensionalValue>> extent = this->getLocus().lock()->retrieveExtent(stereotype);
 	std::shared_ptr<fUML::Semantics::StructuredClassifiers::Object> extensionObject = nullptr;
 	unsigned int i = 1;
 	while((i <= extent->size()) && (extensionObject == nullptr)) {
 		std::shared_ptr<fUML::Semantics::StructuredClassifiers::ExtensionalValue> object = extent->at(i-1);
 		
 	//Aktuell nicht funktionfähig, unbekannte Variable "baseEnd"
-		/*if(object->retrieveFeatureValue(baseEnd)->getValues()->at(0)->equals(element)) {
+		if(object->retrieveFeatureValue(baseEnd)->getValues()->at(0)->equals(element)) {
 			extensionObject = dynamic_pointer_cast<fUML::Object>(object);
-		}*/
+		}
 		i++;
 	}
-	return extensionObject;
+	return extensionObject;*/
 	//end of body
 }
 
-std::shared_ptr<uml::Classifier> CS_ExecutionFactoryImpl::getStereotypeClass(std::string profileName,std::string stereotypeName)
+std::shared_ptr<uml::Classifier> CS_ExecutionFactoryImpl::getStereotypeClass(std::string profileName, std::string stereotypeName)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -195,7 +197,7 @@ std::shared_ptr<uml::Classifier> CS_ExecutionFactoryImpl::getStereotypeClass(std
 	//end of body
 }
 
-std::shared_ptr<fUML::Semantics::Loci::SemanticVisitor> CS_ExecutionFactoryImpl::instantiateVisitor(std::shared_ptr<uml::Element> element)
+std::shared_ptr<fUML::Semantics::Loci::SemanticVisitor> CS_ExecutionFactoryImpl::instantiateVisitor(const std::shared_ptr<uml::Element>& element)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -207,74 +209,74 @@ std::shared_ptr<fUML::Semantics::Loci::SemanticVisitor> CS_ExecutionFactoryImpl:
 	{
 		case uml::umlPackage::READEXTENTACTION_CLASS: 
 		{
-			visitor = PSCS::Semantics::Actions::ActionsFactory::eInstance()->createCS_ReadExtentActionActivation();
+			//visitor = PSCS::Semantics::Actions::ActionsFactory::eInstance()->createCS_ReadExtentActionActivation();
 			break;
 		}
 		case uml::umlPackage::ADDSTRUCTURALFEATUREVALUEACTION_CLASS:
 		{
-			visitor = PSCS::Semantics::Actions::ActionsFactory::eInstance()->createCS_AddStructuralFeatureValueActionActivation();
+			//visitor = PSCS::Semantics::Actions::ActionsFactory::eInstance()->createCS_AddStructuralFeatureValueActionActivation();
 			break;
 		}
 		case uml::umlPackage::CLEARSTRUCTURALFEATUREACTION_CLASS:
 		{
-			visitor = PSCS::Semantics::Actions::ActionsFactory::eInstance()->createCS_ClearStructuralFeatureActionActivation();
+			//visitor = PSCS::Semantics::Actions::ActionsFactory::eInstance()->createCS_ClearStructuralFeatureActionActivation();
 			break;
 		}
 		case uml::umlPackage::CREATELINKACTION_CLASS:
 		{
-			visitor = PSCS::Semantics::Actions::ActionsFactory::eInstance()->createCS_CreateLinkActionActivation();
+			//visitor = PSCS::Semantics::Actions::ActionsFactory::eInstance()->createCS_CreateLinkActionActivation();
 			break;
 		}
 		case uml::umlPackage::CREATEOBJECTACTION_CLASS:
 		{
-			visitor = PSCS::Semantics::Actions::ActionsFactory::eInstance()->createCS_CreateObjectActionActivation();
+			//visitor = PSCS::Semantics::Actions::ActionsFactory::eInstance()->createCS_CreateObjectActionActivation();
 			break;
 		}
 		case uml::umlPackage::READSELFACTION_CLASS:
 		{
-			visitor = PSCS::Semantics::Actions::ActionsFactory::eInstance()->createCS_ReadSelfActionActivation();
+			//visitor = PSCS::Semantics::Actions::ActionsFactory::eInstance()->createCS_ReadSelfActionActivation();
 			break;
 		}
 		case uml::umlPackage::ACCEPTCALLACTION_CLASS:
 		{
-			visitor = PSCS::Semantics::Actions::ActionsFactory::eInstance()->createCS_AcceptCallActionActivation();
+			//visitor = PSCS::Semantics::Actions::ActionsFactory::eInstance()->createCS_AcceptCallActionActivation();
 			break;
 		}
 		case uml::umlPackage::INSTANCEVALUE_CLASS:
 		{
-			visitor = PSCS::Semantics::Classification::ClassificationFactory::eInstance()->createCS_InstanceValueEvaluation();
+			//visitor = PSCS::Semantics::Classification::ClassificationFactory::eInstance()->createCS_InstanceValueEvaluation();
 			break;
 		}
 		case uml::umlPackage::ACCEPTEVENTACTION_CLASS: 
 		{
-			visitor = PSCS::Semantics::Actions::ActionsFactory::eInstance()->createCS_AcceptEventActionActivation();
+			//visitor = PSCS::Semantics::Actions::ActionsFactory::eInstance()->createCS_AcceptEventActionActivation();
 			break;
 		}
 		case uml::umlPackage::CALLOPERATIONACTION_CLASS:
 		{
-			visitor = PSCS::Semantics::Actions::ActionsFactory::eInstance()->createCS_CallOperationActionActivation();
+			//visitor = PSCS::Semantics::Actions::ActionsFactory::eInstance()->createCS_CallOperationActionActivation();
 			break;
 		}
 		case uml::umlPackage::SENDSIGNALACTION_CLASS:
 		{
-			visitor = PSCS::Semantics::Actions::ActionsFactory::eInstance()->createCS_SendSignalActionActivation();
+			//visitor = PSCS::Semantics::Actions::ActionsFactory::eInstance()->createCS_SendSignalActionActivation();
 			break;
 		}
 		case uml::umlPackage::OPAQUEEXPRESSION_CLASS:
 		{
-			visitor = PSCS::Semantics::Values::ValuesFactory::eInstance()->createCS_OpaqueExpressionEvaluation();
+			//visitor = PSCS::Semantics::Values::ValuesFactory::eInstance()->createCS_OpaqueExpressionEvaluation();
 			break;
 		}
 		case uml::umlPackage::REMOVESTRUCTURALFEATUREVALUEACTION_CLASS:
 		{
-			visitor = PSCS::Semantics::Actions::ActionsFactory::eInstance()->createCS_RemoveStructuralFeatureValueActionActivation();
+			//visitor = PSCS::Semantics::Actions::ActionsFactory::eInstance()->createCS_RemoveStructuralFeatureValueActionActivation();
 			break;
 		}
-		case fUML::Semantics::CommonBehavior::CommonBehaviorPackage::CALLEVENTBEHAVIOR_CLASS:
+		/*case fUML::Semantics::CommonBehavior::CommonBehaviorPackage::CALLEVENTBEHAVIOR_CLASS:
 		{
 			visitor = PSCS::Semantics::CommonBehavior::CommonBehaviorFactory::eInstance()->createCS_CallEventExecution();
 			break;
-		}
+		}*/
 		default:
 		{
 			visitor = fUML::Semantics::Loci::ExecutionFactoryImpl::instantiateVisitor(element);
@@ -293,7 +295,7 @@ std::shared_ptr<fUML::Semantics::Loci::SemanticVisitor> CS_ExecutionFactoryImpl:
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference appliedProfiles */
-std::shared_ptr<Bag<uml::Package>> CS_ExecutionFactoryImpl::getAppliedProfiles() const
+const std::shared_ptr<Bag<uml::Package>>& CS_ExecutionFactoryImpl::getAppliedProfiles() const
 {
 	if(m_appliedProfiles == nullptr)
 	{
@@ -423,12 +425,12 @@ std::shared_ptr<ecore::EClass> CS_ExecutionFactoryImpl::eStaticClass() const
 //*********************************
 // EStructuralFeature Get/Set/IsSet
 //*********************************
-Any CS_ExecutionFactoryImpl::eGet(int featureID, bool resolve, bool coreType) const
+std::shared_ptr<Any> CS_ExecutionFactoryImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 		case PSCS::Semantics::Loci::LociPackage::CS_EXECUTIONFACTORY_ATTRIBUTE_APPLIEDPROFILES:
-			return eAnyBag(getAppliedProfiles(),uml::umlPackage::PACKAGE_CLASS); //144
+			return eEcoreContainerAny(getAppliedProfiles(),uml::umlPackage::PACKAGE_CLASS); //144
 	}
 	return fUML::Semantics::Loci::ExecutionFactoryImpl::eGet(featureID, resolve, coreType);
 }
@@ -443,46 +445,54 @@ bool CS_ExecutionFactoryImpl::internalEIsSet(int featureID) const
 	return fUML::Semantics::Loci::ExecutionFactoryImpl::internalEIsSet(featureID);
 }
 
-bool CS_ExecutionFactoryImpl::eSet(int featureID, Any newValue)
+bool CS_ExecutionFactoryImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 {
 	switch(featureID)
 	{
 		case PSCS::Semantics::Loci::LociPackage::CS_EXECUTIONFACTORY_ATTRIBUTE_APPLIEDPROFILES:
 		{
-			// CAST Any to Bag<uml::Package>
-			if((newValue->isContainer()) && (uml::umlPackage::PACKAGE_CLASS ==newValue->getTypeId()))
-			{ 
+			std::shared_ptr<ecore::EcoreContainerAny> ecoreContainerAny = std::dynamic_pointer_cast<ecore::EcoreContainerAny>(newValue);
+			if(ecoreContainerAny)
+			{
 				try
 				{
-					std::shared_ptr<Bag<uml::Package>> appliedProfilesList= newValue->get<std::shared_ptr<Bag<uml::Package>>>();
-					std::shared_ptr<Bag<uml::Package>> _appliedProfiles=getAppliedProfiles();
-					for(const std::shared_ptr<uml::Package> indexAppliedProfiles: *_appliedProfiles)
+					std::shared_ptr<Bag<ecore::EObject>> eObjectList = ecoreContainerAny->getAsEObjectContainer();
+	
+					if(eObjectList)
 					{
-						if (appliedProfilesList->find(indexAppliedProfiles) == -1)
+						std::shared_ptr<Bag<uml::Package>> _appliedProfiles = getAppliedProfiles();
+	
+						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{
-							_appliedProfiles->erase(indexAppliedProfiles);
-						}
-					}
-
-					for(const std::shared_ptr<uml::Package> indexAppliedProfiles: *appliedProfilesList)
-					{
-						if (_appliedProfiles->find(indexAppliedProfiles) == -1)
-						{
-							_appliedProfiles->add(indexAppliedProfiles);
+							std::shared_ptr<uml::Package> valueToAdd = std::dynamic_pointer_cast<uml::Package>(anEObject);
+	
+							if (valueToAdd)
+							{
+								if(!(_appliedProfiles->includes(valueToAdd)))
+								{
+									_appliedProfiles->add(valueToAdd);
+								}
+								//else, valueToAdd is already present so it won't be added again
+							}
+							else
+							{
+								throw "Invalid argument";
+							}
 						}
 					}
 				}
 				catch(...)
 				{
-					DEBUG_MESSAGE(std::cout << "invalid Type to set of eAttributes."<< std::endl;)
+					DEBUG_ERROR("Invalid type stored in 'ecore::ecoreContainerAny' for feature 'appliedProfiles'. Failed to set feature!")
 					return false;
 				}
 			}
 			else
 			{
+				DEBUG_ERROR("Invalid instance of 'ecore::ecoreContainerAny' for feature 'appliedProfiles'. Failed to set feature!")
 				return false;
 			}
-			return true;
+		return true;
 		}
 	}
 
@@ -492,26 +502,68 @@ bool CS_ExecutionFactoryImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any CS_ExecutionFactoryImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+std::shared_ptr<Any> CS_ExecutionFactoryImpl::eInvoke(int operationID, const std::shared_ptr<Bag<Any>>& arguments)
 {
-	Any result;
+	std::shared_ptr<Any> result;
  
   	switch(operationID)
 	{
-		// PSCS::Semantics::Loci::CS_ExecutionFactory::getStereotypeApplication(uml::Class, uml::Element) : fUML::Semantics::StructuredClassifiers::Object: 96017842
+		// PSCS::Semantics::Loci::CS_ExecutionFactory::getStereotypeApplication(uml::Class, uml::Element) : uml::Element: 3905128951
 		case LociPackage::CS_EXECUTIONFACTORY_OPERATION_GETSTEREOTYPEAPPLICATION_CLASS_ELEMENT:
 		{
 			//Retrieve input parameter 'stereotype'
 			//parameter 0
 			std::shared_ptr<uml::Class> incoming_param_stereotype;
-			std::list<Any>::const_iterator incoming_param_stereotype_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_stereotype = (*incoming_param_stereotype_arguments_citer)->get<std::shared_ptr<uml::Class> >();
+			Bag<Any>::const_iterator incoming_param_stereotype_arguments_citer = std::next(arguments->begin(), 0);
+			{
+				std::shared_ptr<ecore::EcoreAny> ecoreAny = std::dynamic_pointer_cast<ecore::EcoreAny>((*incoming_param_stereotype_arguments_citer));
+				if(ecoreAny)
+				{
+					try
+					{
+						std::shared_ptr<ecore::EObject> _temp = ecoreAny->getAsEObject();
+						incoming_param_stereotype = std::dynamic_pointer_cast<uml::Class>(_temp);
+					}
+					catch(...)
+					{
+						DEBUG_ERROR("Invalid type stored in 'ecore::EcoreAny' for parameter 'stereotype'. Failed to invoke operation 'getStereotypeApplication'!")
+						return nullptr;
+					}
+				}
+				else
+				{
+					DEBUG_ERROR("Invalid instance of 'ecore::EcoreAny' for parameter 'stereotype'. Failed to invoke operation 'getStereotypeApplication'!")
+					return nullptr;
+				}
+			}
+		
 			//Retrieve input parameter 'element'
 			//parameter 1
 			std::shared_ptr<uml::Element> incoming_param_element;
-			std::list<Any>::const_iterator incoming_param_element_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_element = (*incoming_param_element_arguments_citer)->get<std::shared_ptr<uml::Element> >();
-			result = eAnyObject(this->getStereotypeApplication(incoming_param_stereotype,incoming_param_element), fUML::Semantics::StructuredClassifiers::StructuredClassifiersPackage::OBJECT_CLASS);
+			Bag<Any>::const_iterator incoming_param_element_arguments_citer = std::next(arguments->begin(), 1);
+			{
+				std::shared_ptr<ecore::EcoreAny> ecoreAny = std::dynamic_pointer_cast<ecore::EcoreAny>((*incoming_param_element_arguments_citer));
+				if(ecoreAny)
+				{
+					try
+					{
+						std::shared_ptr<ecore::EObject> _temp = ecoreAny->getAsEObject();
+						incoming_param_element = std::dynamic_pointer_cast<uml::Element>(_temp);
+					}
+					catch(...)
+					{
+						DEBUG_ERROR("Invalid type stored in 'ecore::EcoreAny' for parameter 'element'. Failed to invoke operation 'getStereotypeApplication'!")
+						return nullptr;
+					}
+				}
+				else
+				{
+					DEBUG_ERROR("Invalid instance of 'ecore::EcoreAny' for parameter 'element'. Failed to invoke operation 'getStereotypeApplication'!")
+					return nullptr;
+				}
+			}
+		
+			result = eEcoreAny(this->getStereotypeApplication(incoming_param_stereotype,incoming_param_element), uml::umlPackage::ELEMENT_CLASS);
 			break;
 		}
 		// PSCS::Semantics::Loci::CS_ExecutionFactory::getStereotypeClass(std::string, std::string) : uml::Classifier: 2486099920
@@ -520,14 +572,32 @@ Any CS_ExecutionFactoryImpl::eInvoke(int operationID, std::shared_ptr<std::list<
 			//Retrieve input parameter 'profileName'
 			//parameter 0
 			std::string incoming_param_profileName;
-			std::list<Any>::const_iterator incoming_param_profileName_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_profileName = (*incoming_param_profileName_arguments_citer)->get<std::string >();
+			Bag<Any>::const_iterator incoming_param_profileName_arguments_citer = std::next(arguments->begin(), 0);
+			try
+			{
+				incoming_param_profileName = (*incoming_param_profileName_arguments_citer)->get<std::string>();
+			}
+			catch(...)
+			{
+				DEBUG_ERROR("Invalid type stored in 'Any' for parameter 'profileName'. Failed to invoke operation 'getStereotypeClass'!")
+				return nullptr;
+			}
+		
 			//Retrieve input parameter 'stereotypeName'
 			//parameter 1
 			std::string incoming_param_stereotypeName;
-			std::list<Any>::const_iterator incoming_param_stereotypeName_arguments_citer = std::next(arguments->begin(), 1);
-			incoming_param_stereotypeName = (*incoming_param_stereotypeName_arguments_citer)->get<std::string >();
-			result = eAnyObject(this->getStereotypeClass(incoming_param_profileName,incoming_param_stereotypeName), uml::umlPackage::CLASSIFIER_CLASS);
+			Bag<Any>::const_iterator incoming_param_stereotypeName_arguments_citer = std::next(arguments->begin(), 1);
+			try
+			{
+				incoming_param_stereotypeName = (*incoming_param_stereotypeName_arguments_citer)->get<std::string>();
+			}
+			catch(...)
+			{
+				DEBUG_ERROR("Invalid type stored in 'Any' for parameter 'stereotypeName'. Failed to invoke operation 'getStereotypeClass'!")
+				return nullptr;
+			}
+		
+			result = eEcoreAny(this->getStereotypeClass(incoming_param_profileName,incoming_param_stereotypeName), uml::umlPackage::CLASSIFIER_CLASS);
 			break;
 		}
 		// PSCS::Semantics::Loci::CS_ExecutionFactory::instantiateVisitor(uml::Element) : fUML::Semantics::Loci::SemanticVisitor: 3579698249
@@ -536,9 +606,30 @@ Any CS_ExecutionFactoryImpl::eInvoke(int operationID, std::shared_ptr<std::list<
 			//Retrieve input parameter 'element'
 			//parameter 0
 			std::shared_ptr<uml::Element> incoming_param_element;
-			std::list<Any>::const_iterator incoming_param_element_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_element = (*incoming_param_element_arguments_citer)->get<std::shared_ptr<uml::Element> >();
-			result = eAnyObject(this->instantiateVisitor(incoming_param_element), fUML::Semantics::Loci::LociPackage::SEMANTICVISITOR_CLASS);
+			Bag<Any>::const_iterator incoming_param_element_arguments_citer = std::next(arguments->begin(), 0);
+			{
+				std::shared_ptr<ecore::EcoreAny> ecoreAny = std::dynamic_pointer_cast<ecore::EcoreAny>((*incoming_param_element_arguments_citer));
+				if(ecoreAny)
+				{
+					try
+					{
+						std::shared_ptr<ecore::EObject> _temp = ecoreAny->getAsEObject();
+						incoming_param_element = std::dynamic_pointer_cast<uml::Element>(_temp);
+					}
+					catch(...)
+					{
+						DEBUG_ERROR("Invalid type stored in 'ecore::EcoreAny' for parameter 'element'. Failed to invoke operation 'instantiateVisitor'!")
+						return nullptr;
+					}
+				}
+				else
+				{
+					DEBUG_ERROR("Invalid instance of 'ecore::EcoreAny' for parameter 'element'. Failed to invoke operation 'instantiateVisitor'!")
+					return nullptr;
+				}
+			}
+		
+			result = eEcoreAny(this->instantiateVisitor(incoming_param_element), fUML::Semantics::Loci::LociPackage::SEMANTICVISITOR_CLASS);
 			break;
 		}
 

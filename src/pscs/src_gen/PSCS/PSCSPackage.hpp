@@ -14,18 +14,18 @@
 
 namespace ecore 
 {
-	class EParameter;
 	class EEnumLiteral;
-	class EEnum;
-	class EOperation;
+	class EParameter;
 	class EDataType;
-	class EPackage;
-	class EAnnotation;
-	class EClass;
-	class EReference;
 	class EStringToStringMapEntry;
-	class EAttribute;
 	class EGenericType;
+	class EReference;
+	class EOperation;
+	class EAttribute;
+	class EEnum;
+	class EAnnotation;
+	class EPackage;
+	class EClass;
 }
 
 namespace PSCS 
@@ -65,9 +65,7 @@ namespace PSCS
 			virtual std::shared_ptr<PSCS::Semantics::SemanticsPackage> getSemantics_Package() const = 0;
 			
 
-			//Singleton Instance and Getter
-			private:
-				static std::shared_ptr<PSCSPackage> instance;
+			//Singleton Getter
 			public:
 				static std::shared_ptr<PSCSPackage> eInstance();
 	};

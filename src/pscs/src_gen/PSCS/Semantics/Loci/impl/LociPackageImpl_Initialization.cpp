@@ -5,13 +5,13 @@
 #include "abstractDataTypes/SubsetUnion.hpp"
 //metametamodel classes
 #include "ecore/EParameter.hpp"
-#include "ecore/EOperation.hpp"
 #include "ecore/EDataType.hpp"
-#include "ecore/EAnnotation.hpp"
-#include "ecore/EClass.hpp"
-#include "ecore/EReference.hpp"
 #include "ecore/EStringToStringMapEntry.hpp"
 #include "ecore/EGenericType.hpp"
+#include "ecore/EReference.hpp"
+#include "ecore/EOperation.hpp"
+#include "ecore/EAnnotation.hpp"
+#include "ecore/EClass.hpp"
 
 // metametamodel factory
 #include "ecore/ecoreFactory.hpp"
@@ -20,7 +20,6 @@
 
 #include "fUML/Semantics/CommonBehavior/CommonBehaviorPackage.hpp"
 #include "fUML/Semantics/Loci/LociPackage.hpp"
-#include "fUML/Semantics/StructuredClassifiers/StructuredClassifiersPackage.hpp"
 #include "ecore/ecorePackage.hpp"
 #include "fUML/fUMLPackage.hpp"
 #include "uml/umlPackage.hpp"
@@ -62,7 +61,15 @@ void LociPackageImpl::initializeCS_ExecutionFactoryContent()
 	m_cS_ExecutionFactory_Class->setAbstract(false);
 	m_cS_ExecutionFactory_Class->setInterface(false);
 	
+	m_cS_ExecutionFactory_Class->_setID(CS_EXECUTIONFACTORY_CLASS);
 	
+	/*
+	 * EAttributes
+	 */
+	
+	/*
+	 * EReferences
+	 */
 	m_cS_ExecutionFactory_Attribute_appliedProfiles->setName("appliedProfiles");
 	m_cS_ExecutionFactory_Attribute_appliedProfiles->setEType(uml::umlPackage::eInstance()->getPackage_Class());
 	m_cS_ExecutionFactory_Attribute_appliedProfiles->setLowerBound(0);
@@ -76,22 +83,22 @@ void LociPackageImpl::initializeCS_ExecutionFactoryContent()
 	m_cS_ExecutionFactory_Attribute_appliedProfiles->setOrdered(false);
 	m_cS_ExecutionFactory_Attribute_appliedProfiles->setContainment(false);
 	m_cS_ExecutionFactory_Attribute_appliedProfiles->setResolveProxies(true);
-	{
-		std::string defaultValue = "";
-		if (!defaultValue.empty())
-		{
-			m_cS_ExecutionFactory_Attribute_appliedProfiles->setDefaultValueLiteral(defaultValue);
-		}				
-			//undefined otherEnd
-			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
-	}
+	m_cS_ExecutionFactory_Attribute_appliedProfiles->setDefaultValueLiteral("");	
 	
+	m_cS_ExecutionFactory_Attribute_appliedProfiles->_setID(CS_EXECUTIONFACTORY_ATTRIBUTE_APPLIEDPROFILES);
+	
+	/*
+	 * EOperations
+	 */
 	m_cS_ExecutionFactory_Operation_getStereotypeApplication_Class_Element->setName("getStereotypeApplication");
-	m_cS_ExecutionFactory_Operation_getStereotypeApplication_Class_Element->setEType(fUML::Semantics::StructuredClassifiers::StructuredClassifiersPackage::eInstance()->getObject_Class());
+	m_cS_ExecutionFactory_Operation_getStereotypeApplication_Class_Element->setEType(uml::umlPackage::eInstance()->getElement_Class());
 	m_cS_ExecutionFactory_Operation_getStereotypeApplication_Class_Element->setLowerBound(1);
 	m_cS_ExecutionFactory_Operation_getStereotypeApplication_Class_Element->setUpperBound(1);
 	m_cS_ExecutionFactory_Operation_getStereotypeApplication_Class_Element->setUnique(true);
 	m_cS_ExecutionFactory_Operation_getStereotypeApplication_Class_Element->setOrdered(false);
+	
+	m_cS_ExecutionFactory_Operation_getStereotypeApplication_Class_Element->_setID(CS_EXECUTIONFACTORY_OPERATION_GETSTEREOTYPEAPPLICATION_CLASS_ELEMENT);
+	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_cS_ExecutionFactory_Operation_getStereotypeApplication_Class_Element);
 		parameter->setName("stereotype");
@@ -118,6 +125,9 @@ void LociPackageImpl::initializeCS_ExecutionFactoryContent()
 	m_cS_ExecutionFactory_Operation_getStereotypeClass_EString_EString->setUpperBound(1);
 	m_cS_ExecutionFactory_Operation_getStereotypeClass_EString_EString->setUnique(true);
 	m_cS_ExecutionFactory_Operation_getStereotypeClass_EString_EString->setOrdered(false);
+	
+	m_cS_ExecutionFactory_Operation_getStereotypeClass_EString_EString->_setID(CS_EXECUTIONFACTORY_OPERATION_GETSTEREOTYPECLASS_ESTRING_ESTRING);
+	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_cS_ExecutionFactory_Operation_getStereotypeClass_EString_EString);
 		parameter->setName("profileName");
@@ -144,6 +154,9 @@ void LociPackageImpl::initializeCS_ExecutionFactoryContent()
 	m_cS_ExecutionFactory_Operation_instantiateVisitor_Element->setUpperBound(1);
 	m_cS_ExecutionFactory_Operation_instantiateVisitor_Element->setUnique(true);
 	m_cS_ExecutionFactory_Operation_instantiateVisitor_Element->setOrdered(false);
+	
+	m_cS_ExecutionFactory_Operation_instantiateVisitor_Element->_setID(CS_EXECUTIONFACTORY_OPERATION_INSTANTIATEVISITOR_ELEMENT);
+	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_cS_ExecutionFactory_Operation_instantiateVisitor_Element);
 		parameter->setName("element");
@@ -163,14 +176,28 @@ void LociPackageImpl::initializeCS_ExecutorContent()
 	m_cS_Executor_Class->setAbstract(false);
 	m_cS_Executor_Class->setInterface(false);
 	
+	m_cS_Executor_Class->_setID(CS_EXECUTOR_CLASS);
 	
+	/*
+	 * EAttributes
+	 */
 	
+	/*
+	 * EReferences
+	 */
+	
+	/*
+	 * EOperations
+	 */
 	m_cS_Executor_Operation_start_Class_ParameterValue->setName("start");
-	m_cS_Executor_Operation_start_Class_ParameterValue->setEType(fUML::Semantics::StructuredClassifiers::StructuredClassifiersPackage::eInstance()->getReference_Class());
+	m_cS_Executor_Operation_start_Class_ParameterValue->setEType(uml::umlPackage::eInstance()->getElement_Class());
 	m_cS_Executor_Operation_start_Class_ParameterValue->setLowerBound(1);
 	m_cS_Executor_Operation_start_Class_ParameterValue->setUpperBound(1);
 	m_cS_Executor_Operation_start_Class_ParameterValue->setUnique(true);
 	m_cS_Executor_Operation_start_Class_ParameterValue->setOrdered(true);
+	
+	m_cS_Executor_Operation_start_Class_ParameterValue->_setID(CS_EXECUTOR_OPERATION_START_CLASS_PARAMETERVALUE);
+	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_cS_Executor_Operation_start_Class_ParameterValue);
 		parameter->setName("type");
@@ -200,14 +227,28 @@ void LociPackageImpl::initializeCS_LocusContent()
 	m_cS_Locus_Class->setAbstract(false);
 	m_cS_Locus_Class->setInterface(false);
 	
+	m_cS_Locus_Class->_setID(CS_LOCUS_CLASS);
 	
+	/*
+	 * EAttributes
+	 */
 	
+	/*
+	 * EReferences
+	 */
+	
+	/*
+	 * EOperations
+	 */
 	m_cS_Locus_Operation_instantiate_Class->setName("instantiate");
-	m_cS_Locus_Operation_instantiate_Class->setEType(fUML::Semantics::StructuredClassifiers::StructuredClassifiersPackage::eInstance()->getObject_Class());
+	m_cS_Locus_Operation_instantiate_Class->setEType(uml::umlPackage::eInstance()->getElement_Class());
 	m_cS_Locus_Operation_instantiate_Class->setLowerBound(1);
 	m_cS_Locus_Operation_instantiate_Class->setUpperBound(1);
 	m_cS_Locus_Operation_instantiate_Class->setUnique(true);
 	m_cS_Locus_Operation_instantiate_Class->setOrdered(false);
+	
+	m_cS_Locus_Operation_instantiate_Class->_setID(CS_LOCUS_OPERATION_INSTANTIATE_CLASS);
+	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_cS_Locus_Operation_instantiate_Class);
 		parameter->setName("type");
