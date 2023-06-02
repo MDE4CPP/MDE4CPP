@@ -299,23 +299,23 @@ void CommonPackageImpl::initializePackageValueSpecifications()
 {
 }
 
-std::shared_ptr<uml::Class> CommonPackageImpl::get_FoundationalModelLibrary_Common_Listener()
+const std::shared_ptr<uml::Class>& CommonPackageImpl::get_FoundationalModelLibrary_Common_Listener()
 {
 	return foundationalModelLibrary_Common_Listener;
 }
-std::shared_ptr<uml::DataType> CommonPackageImpl::get_FoundationalModelLibrary_Common_Status()
+const std::shared_ptr<uml::DataType>& CommonPackageImpl::get_FoundationalModelLibrary_Common_Status()
 {
 	return foundationalModelLibrary_Common_Status;
 }
-std::shared_ptr<uml::Property> CommonPackageImpl::get_FoundationalModelLibrary_Common_Status_code()
+const std::shared_ptr<uml::Property>& CommonPackageImpl::get_FoundationalModelLibrary_Common_Status_code()
 {
 	return foundationalModelLibrary_Common_Status_code;
 }
-std::shared_ptr<uml::Property> CommonPackageImpl::get_FoundationalModelLibrary_Common_Status_context()
+const std::shared_ptr<uml::Property>& CommonPackageImpl::get_FoundationalModelLibrary_Common_Status_context()
 {
 	return foundationalModelLibrary_Common_Status_context;
 }
-std::shared_ptr<uml::Property> CommonPackageImpl::get_FoundationalModelLibrary_Common_Status_description()
+const std::shared_ptr<uml::Property>& CommonPackageImpl::get_FoundationalModelLibrary_Common_Status_description()
 {
 	return foundationalModelLibrary_Common_Status_description;
 }

@@ -338,51 +338,51 @@ void StringFunctionsPackageImpl::initializePackageValueSpecifications()
 	foundationalModelLibrary_PrimitiveBehaviors_StringFunctions_Substring_result_lowerValue_LiteralInteger_FoundationalModelLibrary_PrimitiveBehaviors_StringFunctions_Substring_result->setValue(0);
 }
 
-std::shared_ptr<uml::FunctionBehavior> StringFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_StringFunctions_Concat()
+const std::shared_ptr<uml::FunctionBehavior>& StringFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_StringFunctions_Concat()
 {
 	return foundationalModelLibrary_PrimitiveBehaviors_StringFunctions_Concat;
 }
-std::shared_ptr<uml::Parameter> StringFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_StringFunctions_Concat_result()
+const std::shared_ptr<uml::Parameter>& StringFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_StringFunctions_Concat_result()
 {
 	return foundationalModelLibrary_PrimitiveBehaviors_StringFunctions_Concat_result;
 }
-std::shared_ptr<uml::Parameter> StringFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_StringFunctions_Concat_x()
+const std::shared_ptr<uml::Parameter>& StringFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_StringFunctions_Concat_x()
 {
 	return foundationalModelLibrary_PrimitiveBehaviors_StringFunctions_Concat_x;
 }
-std::shared_ptr<uml::Parameter> StringFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_StringFunctions_Concat_y()
+const std::shared_ptr<uml::Parameter>& StringFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_StringFunctions_Concat_y()
 {
 	return foundationalModelLibrary_PrimitiveBehaviors_StringFunctions_Concat_y;
 }
-std::shared_ptr<uml::FunctionBehavior> StringFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_StringFunctions_Size()
+const std::shared_ptr<uml::FunctionBehavior>& StringFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_StringFunctions_Size()
 {
 	return foundationalModelLibrary_PrimitiveBehaviors_StringFunctions_Size;
 }
-std::shared_ptr<uml::Parameter> StringFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_StringFunctions_Size_result()
+const std::shared_ptr<uml::Parameter>& StringFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_StringFunctions_Size_result()
 {
 	return foundationalModelLibrary_PrimitiveBehaviors_StringFunctions_Size_result;
 }
-std::shared_ptr<uml::Parameter> StringFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_StringFunctions_Size_x()
+const std::shared_ptr<uml::Parameter>& StringFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_StringFunctions_Size_x()
 {
 	return foundationalModelLibrary_PrimitiveBehaviors_StringFunctions_Size_x;
 }
-std::shared_ptr<uml::FunctionBehavior> StringFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_StringFunctions_Substring()
+const std::shared_ptr<uml::FunctionBehavior>& StringFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_StringFunctions_Substring()
 {
 	return foundationalModelLibrary_PrimitiveBehaviors_StringFunctions_Substring;
 }
-std::shared_ptr<uml::Parameter> StringFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_StringFunctions_Substring_lower()
+const std::shared_ptr<uml::Parameter>& StringFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_StringFunctions_Substring_lower()
 {
 	return foundationalModelLibrary_PrimitiveBehaviors_StringFunctions_Substring_lower;
 }
-std::shared_ptr<uml::Parameter> StringFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_StringFunctions_Substring_result()
+const std::shared_ptr<uml::Parameter>& StringFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_StringFunctions_Substring_result()
 {
 	return foundationalModelLibrary_PrimitiveBehaviors_StringFunctions_Substring_result;
 }
-std::shared_ptr<uml::Parameter> StringFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_StringFunctions_Substring_upper()
+const std::shared_ptr<uml::Parameter>& StringFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_StringFunctions_Substring_upper()
 {
 	return foundationalModelLibrary_PrimitiveBehaviors_StringFunctions_Substring_upper;
 }
-std::shared_ptr<uml::Parameter> StringFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_StringFunctions_Substring_x()
+const std::shared_ptr<uml::Parameter>& StringFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_StringFunctions_Substring_x()
 {
 	return foundationalModelLibrary_PrimitiveBehaviors_StringFunctions_Substring_x;
 }

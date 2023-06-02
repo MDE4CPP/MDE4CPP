@@ -93,21 +93,21 @@ namespace fUML::Semantics::Activities
 			static const unsigned long ACTIVITYEDGEINSTANCE_OPERATION_TAKEOFFEREDTOKENS_EINT = 1787668928;
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getActivityEdgeInstance_Class() const = 0;
+			virtual const std::shared_ptr<ecore::EClass>& getActivityEdgeInstance_Class() const = 0;
 			
 			
-			virtual std::shared_ptr<ecore::EReference> getActivityEdgeInstance_Attribute_edge() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getActivityEdgeInstance_Attribute_group() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getActivityEdgeInstance_Attribute_offers() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getActivityEdgeInstance_Attribute_source() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getActivityEdgeInstance_Attribute_target() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getActivityEdgeInstance_Attribute_edge() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getActivityEdgeInstance_Attribute_group() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getActivityEdgeInstance_Attribute_offers() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getActivityEdgeInstance_Attribute_source() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getActivityEdgeInstance_Attribute_target() const = 0;
 			
-			virtual std::shared_ptr<ecore::EOperation> getActivityEdgeInstance_Operation_countOfferedValue() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getActivityEdgeInstance_Operation_getOfferedTokens() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getActivityEdgeInstance_Operation_hasOffer() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getActivityEdgeInstance_Operation_sendOffer_Token() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getActivityEdgeInstance_Operation_takeOfferedTokens() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getActivityEdgeInstance_Operation_takeOfferedTokens_EInt() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getActivityEdgeInstance_Operation_countOfferedValue() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getActivityEdgeInstance_Operation_getOfferedTokens() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getActivityEdgeInstance_Operation_hasOffer() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getActivityEdgeInstance_Operation_sendOffer_Token() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getActivityEdgeInstance_Operation_takeOfferedTokens() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getActivityEdgeInstance_Operation_takeOfferedTokens_EInt() const = 0;
 			
 			// End Class ActivityEdgeInstance
 
@@ -127,16 +127,16 @@ namespace fUML::Semantics::Activities
 			static const unsigned long ACTIVITYEXECUTION_OPERATION_TERMINATE = 1105822471;
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getActivityExecution_Class() const = 0;
+			virtual const std::shared_ptr<ecore::EClass>& getActivityExecution_Class() const = 0;
 			
 			
-			virtual std::shared_ptr<ecore::EReference> getActivityExecution_Attribute_activationGroup() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getActivityExecution_Attribute_activity() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getActivityExecution_Attribute_activationGroup() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getActivityExecution_Attribute_activity() const = 0;
 			
-			virtual std::shared_ptr<ecore::EOperation> getActivityExecution_Operation__copy() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getActivityExecution_Operation_execute() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getActivityExecution_Operation_new_() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getActivityExecution_Operation_terminate() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getActivityExecution_Operation__copy() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getActivityExecution_Operation_execute() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getActivityExecution_Operation_new_() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getActivityExecution_Operation_terminate() const = 0;
 			
 			// End Class ActivityExecution
 
@@ -151,11 +151,11 @@ namespace fUML::Semantics::Activities
 			static const unsigned long ACTIVITYFINALNODEACTIVATION_OPERATION_FIRE_TOKEN = 3991177345;
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getActivityFinalNodeActivation_Class() const = 0;
+			virtual const std::shared_ptr<ecore::EClass>& getActivityFinalNodeActivation_Class() const = 0;
 			
 			
 			
-			virtual std::shared_ptr<ecore::EOperation> getActivityFinalNodeActivation_Operation_fire_Token() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getActivityFinalNodeActivation_Operation_fire_Token() const = 0;
 			
 			// End Class ActivityFinalNodeActivation
 
@@ -200,41 +200,41 @@ namespace fUML::Semantics::Activities
 			static const unsigned long ACTIVITYNODEACTIVATION_OPERATION_TERMINATE = 1536647187;
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getActivityNodeActivation_Class() const = 0;
+			virtual const std::shared_ptr<ecore::EClass>& getActivityNodeActivation_Class() const = 0;
 			
-			virtual std::shared_ptr<ecore::EAttribute> getActivityNodeActivation_Attribute_running() const = 0;
+			virtual const std::shared_ptr<ecore::EAttribute>& getActivityNodeActivation_Attribute_running() const = 0;
 			
-			virtual std::shared_ptr<ecore::EReference> getActivityNodeActivation_Attribute_group() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getActivityNodeActivation_Attribute_heldTokens() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getActivityNodeActivation_Attribute_incomingEdges() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getActivityNodeActivation_Attribute_node() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getActivityNodeActivation_Attribute_outgoingEdges() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getActivityNodeActivation_Attribute_group() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getActivityNodeActivation_Attribute_heldTokens() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getActivityNodeActivation_Attribute_incomingEdges() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getActivityNodeActivation_Attribute_node() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getActivityNodeActivation_Attribute_outgoingEdges() const = 0;
 			
-			virtual std::shared_ptr<ecore::EOperation> getActivityNodeActivation_Operation_addIncomingEdge_ActivityEdgeInstance() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getActivityNodeActivation_Operation_addOutgoingEdge_ActivityEdgeInstance() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getActivityNodeActivation_Operation_addToken_Token() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getActivityNodeActivation_Operation_addTokens_Token() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getActivityNodeActivation_Operation_clearTokens() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getActivityNodeActivation_Operation_createEdgeInstances() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getActivityNodeActivation_Operation_createNodeActivations() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getActivityNodeActivation_Operation_fire_Token() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getActivityNodeActivation_Operation_getActivityExecution() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getActivityNodeActivation_Operation_getExecutionContext() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getActivityNodeActivation_Operation_getExecutionLocus() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getActivityNodeActivation_Operation_getNodeActivation_ActivityNode() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getActivityNodeActivation_Operation_getRunning() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getActivityNodeActivation_Operation_getTokens() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getActivityNodeActivation_Operation_isReady() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getActivityNodeActivation_Operation_isSourceFor_ActivityEdgeInstance() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getActivityNodeActivation_Operation_receiveOffer() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getActivityNodeActivation_Operation_removeToken_Token() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getActivityNodeActivation_Operation_resume() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getActivityNodeActivation_Operation_run() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getActivityNodeActivation_Operation_sendOffers_Token() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getActivityNodeActivation_Operation_suspend() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getActivityNodeActivation_Operation_takeOfferedTokens() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getActivityNodeActivation_Operation_takeTokens() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getActivityNodeActivation_Operation_terminate() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getActivityNodeActivation_Operation_addIncomingEdge_ActivityEdgeInstance() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getActivityNodeActivation_Operation_addOutgoingEdge_ActivityEdgeInstance() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getActivityNodeActivation_Operation_addToken_Token() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getActivityNodeActivation_Operation_addTokens_Token() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getActivityNodeActivation_Operation_clearTokens() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getActivityNodeActivation_Operation_createEdgeInstances() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getActivityNodeActivation_Operation_createNodeActivations() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getActivityNodeActivation_Operation_fire_Token() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getActivityNodeActivation_Operation_getActivityExecution() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getActivityNodeActivation_Operation_getExecutionContext() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getActivityNodeActivation_Operation_getExecutionLocus() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getActivityNodeActivation_Operation_getNodeActivation_ActivityNode() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getActivityNodeActivation_Operation_getRunning() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getActivityNodeActivation_Operation_getTokens() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getActivityNodeActivation_Operation_isReady() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getActivityNodeActivation_Operation_isSourceFor_ActivityEdgeInstance() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getActivityNodeActivation_Operation_receiveOffer() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getActivityNodeActivation_Operation_removeToken_Token() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getActivityNodeActivation_Operation_resume() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getActivityNodeActivation_Operation_run() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getActivityNodeActivation_Operation_sendOffers_Token() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getActivityNodeActivation_Operation_suspend() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getActivityNodeActivation_Operation_takeOfferedTokens() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getActivityNodeActivation_Operation_takeTokens() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getActivityNodeActivation_Operation_terminate() const = 0;
 			
 			// End Class ActivityNodeActivation
 
@@ -270,32 +270,32 @@ namespace fUML::Semantics::Activities
 			static const unsigned long ACTIVITYNODEACTIVATIONGROUP_OPERATION_TERMINATEALL = 2675640689;
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getActivityNodeActivationGroup_Class() const = 0;
+			virtual const std::shared_ptr<ecore::EClass>& getActivityNodeActivationGroup_Class() const = 0;
 			
 			
-			virtual std::shared_ptr<ecore::EReference> getActivityNodeActivationGroup_Attribute_activityExecution() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getActivityNodeActivationGroup_Attribute_containingNodeActivation() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getActivityNodeActivationGroup_Attribute_edgeInstances() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getActivityNodeActivationGroup_Attribute_nodeActivations() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getActivityNodeActivationGroup_Attribute_suspendedActivations() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getActivityNodeActivationGroup_Attribute_activityExecution() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getActivityNodeActivationGroup_Attribute_containingNodeActivation() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getActivityNodeActivationGroup_Attribute_edgeInstances() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getActivityNodeActivationGroup_Attribute_nodeActivations() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getActivityNodeActivationGroup_Attribute_suspendedActivations() const = 0;
 			
-			virtual std::shared_ptr<ecore::EOperation> getActivityNodeActivationGroup_Operation_activate_ActivityNode_ActivityEdge() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getActivityNodeActivationGroup_Operation_addEdgeInstance_ActivityEdgeInstance() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getActivityNodeActivationGroup_Operation_addNodeActivation_ActivityNodeActivation() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getActivityNodeActivationGroup_Operation_checkIncomingEdges_ActivityEdgeInstance_ActivityNodeActivation() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getActivityNodeActivationGroup_Operation_createEdgeInstance_ActivityEdge() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getActivityNodeActivationGroup_Operation_createNodeActivation_ActivityNode() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getActivityNodeActivationGroup_Operation_createNodeActivations_ActivityNode() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getActivityNodeActivationGroup_Operation_getNodeActivation_ActivityNode() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getActivityNodeActivationGroup_Operation_getOutputParameterNodeActivations() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getActivityNodeActivationGroup_Operation_hasSourceFor_ActivityEdgeInstance() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getActivityNodeActivationGroup_Operation_isSuspended() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getActivityNodeActivationGroup_Operation_resume_ActivityNodeActivation() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getActivityNodeActivationGroup_Operation_retrieveActivityExecution() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getActivityNodeActivationGroup_Operation_run_ActivityNodeActivation() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getActivityNodeActivationGroup_Operation_runNodes_ActivityNode() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getActivityNodeActivationGroup_Operation_suspend_ActivityNodeActivation() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getActivityNodeActivationGroup_Operation_terminateAll() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getActivityNodeActivationGroup_Operation_activate_ActivityNode_ActivityEdge() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getActivityNodeActivationGroup_Operation_addEdgeInstance_ActivityEdgeInstance() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getActivityNodeActivationGroup_Operation_addNodeActivation_ActivityNodeActivation() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getActivityNodeActivationGroup_Operation_checkIncomingEdges_ActivityEdgeInstance_ActivityNodeActivation() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getActivityNodeActivationGroup_Operation_createEdgeInstance_ActivityEdge() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getActivityNodeActivationGroup_Operation_createNodeActivation_ActivityNode() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getActivityNodeActivationGroup_Operation_createNodeActivations_ActivityNode() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getActivityNodeActivationGroup_Operation_getNodeActivation_ActivityNode() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getActivityNodeActivationGroup_Operation_getOutputParameterNodeActivations() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getActivityNodeActivationGroup_Operation_hasSourceFor_ActivityEdgeInstance() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getActivityNodeActivationGroup_Operation_isSuspended() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getActivityNodeActivationGroup_Operation_resume_ActivityNodeActivation() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getActivityNodeActivationGroup_Operation_retrieveActivityExecution() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getActivityNodeActivationGroup_Operation_run_ActivityNodeActivation() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getActivityNodeActivationGroup_Operation_runNodes_ActivityNode() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getActivityNodeActivationGroup_Operation_suspend_ActivityNodeActivation() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getActivityNodeActivationGroup_Operation_terminateAll() const = 0;
 			
 			// End Class ActivityNodeActivationGroup
 
@@ -311,12 +311,12 @@ namespace fUML::Semantics::Activities
 			static const unsigned long ACTIVITYPARAMETERNODEACTIVATION_OPERATION_FIRE_TOKEN = 1225512580;
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getActivityParameterNodeActivation_Class() const = 0;
+			virtual const std::shared_ptr<ecore::EClass>& getActivityParameterNodeActivation_Class() const = 0;
 			
 			
 			
-			virtual std::shared_ptr<ecore::EOperation> getActivityParameterNodeActivation_Operation_clearTokens() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getActivityParameterNodeActivation_Operation_fire_Token() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getActivityParameterNodeActivation_Operation_clearTokens() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getActivityParameterNodeActivation_Operation_fire_Token() const = 0;
 			
 			// End Class ActivityParameterNodeActivation
 
@@ -331,11 +331,11 @@ namespace fUML::Semantics::Activities
 			static const unsigned long CENTRALBUFFERNODEACTIVATION_OPERATION_FIRE_TOKEN = 3196789593;
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getCentralBufferNodeActivation_Class() const = 0;
+			virtual const std::shared_ptr<ecore::EClass>& getCentralBufferNodeActivation_Class() const = 0;
 			
 			
 			
-			virtual std::shared_ptr<ecore::EOperation> getCentralBufferNodeActivation_Operation_fire_Token() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getCentralBufferNodeActivation_Operation_fire_Token() const = 0;
 			
 			// End Class CentralBufferNodeActivation
 
@@ -350,11 +350,11 @@ namespace fUML::Semantics::Activities
 			static const unsigned long CONTROLNODEACTIVATION_OPERATION_FIRE_TOKEN = 1708232627;
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getControlNodeActivation_Class() const = 0;
+			virtual const std::shared_ptr<ecore::EClass>& getControlNodeActivation_Class() const = 0;
 			
 			
 			
-			virtual std::shared_ptr<ecore::EOperation> getControlNodeActivation_Operation_fire_Token() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getControlNodeActivation_Operation_fire_Token() const = 0;
 			
 			// End Class ControlNodeActivation
 
@@ -371,13 +371,13 @@ namespace fUML::Semantics::Activities
 			static const unsigned long CONTROLTOKEN_OPERATION_ISCONTROL = 972980650;
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getControlToken_Class() const = 0;
+			virtual const std::shared_ptr<ecore::EClass>& getControlToken_Class() const = 0;
 			
 			
 			
-			virtual std::shared_ptr<ecore::EOperation> getControlToken_Operation__copy() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getControlToken_Operation_equals_Token() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getControlToken_Operation_isControl() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getControlToken_Operation__copy() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getControlToken_Operation_equals_Token() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getControlToken_Operation_isControl() const = 0;
 			
 			// End Class ControlToken
 
@@ -393,12 +393,12 @@ namespace fUML::Semantics::Activities
 			static const unsigned long DATASTORENODEACTIVATION_OPERATION_REMOVETOKEN_TOKEN = 4235365301;
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getDataStoreNodeActivation_Class() const = 0;
+			virtual const std::shared_ptr<ecore::EClass>& getDataStoreNodeActivation_Class() const = 0;
 			
 			
 			
-			virtual std::shared_ptr<ecore::EOperation> getDataStoreNodeActivation_Operation_addToken_Token() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getDataStoreNodeActivation_Operation_removeToken_Token() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getDataStoreNodeActivation_Operation_addToken_Token() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getDataStoreNodeActivation_Operation_removeToken_Token() const = 0;
 			
 			// End Class DataStoreNodeActivation
 
@@ -423,21 +423,21 @@ namespace fUML::Semantics::Activities
 			static const unsigned long DECISIONNODEACTIVATION_OPERATION_TEST_VALUESPECIFICATION_EJAVAOBJECT = 2379610281;
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getDecisionNodeActivation_Class() const = 0;
+			virtual const std::shared_ptr<ecore::EClass>& getDecisionNodeActivation_Class() const = 0;
 			
 			
-			virtual std::shared_ptr<ecore::EReference> getDecisionNodeActivation_Attribute_decisionNode() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getDecisionNodeActivation_Attribute_decisionNode() const = 0;
 			
-			virtual std::shared_ptr<ecore::EOperation> getDecisionNodeActivation_Operation_executeDecisionInputBehavior_EJavaObject_EJavaObject() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getDecisionNodeActivation_Operation_fire_Token() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getDecisionNodeActivation_Operation_getDecisionInputFlowInstance() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getDecisionNodeActivation_Operation_getDecisionInputFlowValue() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getDecisionNodeActivation_Operation_getDecisionValues_Token() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getDecisionNodeActivation_Operation_hasObjectFlowInput() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getDecisionNodeActivation_Operation_isReady() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getDecisionNodeActivation_Operation_removeJoinedControlTokens_Token() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getDecisionNodeActivation_Operation_takeOfferedTokens() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getDecisionNodeActivation_Operation_test_ValueSpecification_EJavaObject() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getDecisionNodeActivation_Operation_executeDecisionInputBehavior_EJavaObject_EJavaObject() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getDecisionNodeActivation_Operation_fire_Token() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getDecisionNodeActivation_Operation_getDecisionInputFlowInstance() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getDecisionNodeActivation_Operation_getDecisionInputFlowValue() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getDecisionNodeActivation_Operation_getDecisionValues_Token() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getDecisionNodeActivation_Operation_hasObjectFlowInput() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getDecisionNodeActivation_Operation_isReady() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getDecisionNodeActivation_Operation_removeJoinedControlTokens_Token() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getDecisionNodeActivation_Operation_takeOfferedTokens() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getDecisionNodeActivation_Operation_test_ValueSpecification_EJavaObject() const = 0;
 			
 			// End Class DecisionNodeActivation
 
@@ -451,7 +451,7 @@ namespace fUML::Semantics::Activities
 			
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getFlowFinalNodeActivation_Class() const = 0;
+			virtual const std::shared_ptr<ecore::EClass>& getFlowFinalNodeActivation_Class() const = 0;
 			
 			
 			
@@ -470,12 +470,12 @@ namespace fUML::Semantics::Activities
 			static const unsigned long FORKNODEACTIVATION_OPERATION_TERMINATE = 3793874788;
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getForkNodeActivation_Class() const = 0;
+			virtual const std::shared_ptr<ecore::EClass>& getForkNodeActivation_Class() const = 0;
 			
 			
 			
-			virtual std::shared_ptr<ecore::EOperation> getForkNodeActivation_Operation_fire_Token() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getForkNodeActivation_Operation_terminate() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getForkNodeActivation_Operation_fire_Token() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getForkNodeActivation_Operation_terminate() const = 0;
 			
 			// End Class ForkNodeActivation
 
@@ -497,18 +497,18 @@ namespace fUML::Semantics::Activities
 			static const unsigned long FORKEDTOKEN_OPERATION_WITHDRAW = 3679135667;
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getForkedToken_Class() const = 0;
+			virtual const std::shared_ptr<ecore::EClass>& getForkedToken_Class() const = 0;
 			
-			virtual std::shared_ptr<ecore::EAttribute> getForkedToken_Attribute_baseTokenIsWithdrawn() const = 0;
-			virtual std::shared_ptr<ecore::EAttribute> getForkedToken_Attribute_remainingOffersCount() const = 0;
+			virtual const std::shared_ptr<ecore::EAttribute>& getForkedToken_Attribute_baseTokenIsWithdrawn() const = 0;
+			virtual const std::shared_ptr<ecore::EAttribute>& getForkedToken_Attribute_remainingOffersCount() const = 0;
 			
-			virtual std::shared_ptr<ecore::EReference> getForkedToken_Attribute_baseToken() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getForkedToken_Attribute_baseToken() const = 0;
 			
-			virtual std::shared_ptr<ecore::EOperation> getForkedToken_Operation__copy() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getForkedToken_Operation_equals_Token() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getForkedToken_Operation_getValue() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getForkedToken_Operation_isControl() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getForkedToken_Operation_withdraw() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getForkedToken_Operation__copy() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getForkedToken_Operation_equals_Token() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getForkedToken_Operation_getValue() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getForkedToken_Operation_isControl() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getForkedToken_Operation_withdraw() const = 0;
 			
 			// End Class ForkedToken
 
@@ -523,11 +523,11 @@ namespace fUML::Semantics::Activities
 			static const unsigned long INITIALNODEACTIVATION_OPERATION_FIRE_TOKEN = 3439352700;
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getInitialNodeActivation_Class() const = 0;
+			virtual const std::shared_ptr<ecore::EClass>& getInitialNodeActivation_Class() const = 0;
 			
 			
 			
-			virtual std::shared_ptr<ecore::EOperation> getInitialNodeActivation_Operation_fire_Token() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getInitialNodeActivation_Operation_fire_Token() const = 0;
 			
 			// End Class InitialNodeActivation
 
@@ -543,12 +543,12 @@ namespace fUML::Semantics::Activities
 			static const unsigned long JOINNODEACTIVATION_OPERATION_ISREADY = 1408588552;
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getJoinNodeActivation_Class() const = 0;
+			virtual const std::shared_ptr<ecore::EClass>& getJoinNodeActivation_Class() const = 0;
 			
 			
 			
-			virtual std::shared_ptr<ecore::EOperation> getJoinNodeActivation_Operation_fire_Token() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getJoinNodeActivation_Operation_isReady() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getJoinNodeActivation_Operation_fire_Token() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getJoinNodeActivation_Operation_isReady() const = 0;
 			
 			// End Class JoinNodeActivation
 
@@ -562,7 +562,7 @@ namespace fUML::Semantics::Activities
 			
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getMergeNodeActivation_Class() const = 0;
+			virtual const std::shared_ptr<ecore::EClass>& getMergeNodeActivation_Class() const = 0;
 			
 			
 			
@@ -591,22 +591,22 @@ namespace fUML::Semantics::Activities
 			static const unsigned long OBJECTNODEACTIVATION_OPERATION_TERMINATE = 2022976081;
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getObjectNodeActivation_Class() const = 0;
+			virtual const std::shared_ptr<ecore::EClass>& getObjectNodeActivation_Class() const = 0;
 			
-			virtual std::shared_ptr<ecore::EAttribute> getObjectNodeActivation_Attribute_offeredTokenCount() const = 0;
+			virtual const std::shared_ptr<ecore::EAttribute>& getObjectNodeActivation_Attribute_offeredTokenCount() const = 0;
 			
 			
-			virtual std::shared_ptr<ecore::EOperation> getObjectNodeActivation_Operation_addToken_Token() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getObjectNodeActivation_Operation_clearTokens() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getObjectNodeActivation_Operation_countOfferedValues() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getObjectNodeActivation_Operation_countUnofferedTokens() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getObjectNodeActivation_Operation_getUnofferedTokens() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getObjectNodeActivation_Operation_removeToken_Token() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getObjectNodeActivation_Operation_run() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getObjectNodeActivation_Operation_sendOffers_Token() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getObjectNodeActivation_Operation_sendUnofferedTokens() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getObjectNodeActivation_Operation_takeUnofferedTokens() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getObjectNodeActivation_Operation_terminate() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getObjectNodeActivation_Operation_addToken_Token() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getObjectNodeActivation_Operation_clearTokens() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getObjectNodeActivation_Operation_countOfferedValues() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getObjectNodeActivation_Operation_countUnofferedTokens() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getObjectNodeActivation_Operation_getUnofferedTokens() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getObjectNodeActivation_Operation_removeToken_Token() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getObjectNodeActivation_Operation_run() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getObjectNodeActivation_Operation_sendOffers_Token() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getObjectNodeActivation_Operation_sendUnofferedTokens() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getObjectNodeActivation_Operation_takeUnofferedTokens() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getObjectNodeActivation_Operation_terminate() const = 0;
 			
 			// End Class ObjectNodeActivation
 
@@ -624,14 +624,14 @@ namespace fUML::Semantics::Activities
 			static const unsigned long OBJECTTOKEN_OPERATION_ISCONTROL = 3725482608;
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getObjectToken_Class() const = 0;
+			virtual const std::shared_ptr<ecore::EClass>& getObjectToken_Class() const = 0;
 			
-			virtual std::shared_ptr<ecore::EAttribute> getObjectToken_Attribute_value() const = 0;
+			virtual const std::shared_ptr<ecore::EAttribute>& getObjectToken_Attribute_value() const = 0;
 			
 			
-			virtual std::shared_ptr<ecore::EOperation> getObjectToken_Operation__copy() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getObjectToken_Operation_equals_Token() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getObjectToken_Operation_isControl() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getObjectToken_Operation__copy() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getObjectToken_Operation_equals_Token() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getObjectToken_Operation_isControl() const = 0;
 			
 			// End Class ObjectToken
 
@@ -651,16 +651,16 @@ namespace fUML::Semantics::Activities
 			static const unsigned long OFFER_OPERATION_RETRIEVEOFFEREDTOKENS = 1383812745;
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getOffer_Class() const = 0;
+			virtual const std::shared_ptr<ecore::EClass>& getOffer_Class() const = 0;
 			
 			
-			virtual std::shared_ptr<ecore::EReference> getOffer_Attribute_offeredTokens() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getOffer_Attribute_offeredTokens() const = 0;
 			
-			virtual std::shared_ptr<ecore::EOperation> getOffer_Operation_countOfferedValues() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getOffer_Operation_hasTokens() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getOffer_Operation_removeOfferedValues_EInt() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getOffer_Operation_removeWithdrawnTokens() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getOffer_Operation_retrieveOfferedTokens() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getOffer_Operation_countOfferedValues() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getOffer_Operation_hasTokens() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getOffer_Operation_removeOfferedValues_EInt() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getOffer_Operation_removeWithdrawnTokens() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getOffer_Operation_retrieveOfferedTokens() const = 0;
 			
 			// End Class Offer
 
@@ -682,18 +682,18 @@ namespace fUML::Semantics::Activities
 			static const unsigned long TOKEN_OPERATION_WITHDRAW = 81284716;
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getToken_Class() const = 0;
+			virtual const std::shared_ptr<ecore::EClass>& getToken_Class() const = 0;
 			
-			virtual std::shared_ptr<ecore::EAttribute> getToken_Attribute_withdrawn() const = 0;
+			virtual const std::shared_ptr<ecore::EAttribute>& getToken_Attribute_withdrawn() const = 0;
 			
-			virtual std::shared_ptr<ecore::EReference> getToken_Attribute_holder() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getToken_Attribute_holder() const = 0;
 			
-			virtual std::shared_ptr<ecore::EOperation> getToken_Operation__copy() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getToken_Operation_equals_Token() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getToken_Operation_getValue() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getToken_Operation_isControl() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getToken_Operation_transfer_ActivityNodeActivation() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getToken_Operation_withdraw() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getToken_Operation__copy() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getToken_Operation_equals_Token() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getToken_Operation_getValue() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getToken_Operation_isControl() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getToken_Operation_transfer_ActivityNodeActivation() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getToken_Operation_withdraw() const = 0;
 			
 			// End Class Token
 
@@ -708,10 +708,10 @@ namespace fUML::Semantics::Activities
 			
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getTokenSet_Class() const = 0;
+			virtual const std::shared_ptr<ecore::EClass>& getTokenSet_Class() const = 0;
 			
 			
-			virtual std::shared_ptr<ecore::EReference> getTokenSet_Attribute_tokens() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getTokenSet_Attribute_tokens() const = 0;
 			
 			
 			// End Class TokenSet

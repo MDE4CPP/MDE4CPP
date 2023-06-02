@@ -77,62 +77,62 @@ void CommonBehaviorPackageImpl::init(std::shared_ptr<ecore::EPackage> package)
 
 
 // Begin Class Execution
-std::shared_ptr<ecore::EClass> fUML::Semantics::CommonBehavior::CommonBehaviorPackageImpl::getExecution_Class() const
+const std::shared_ptr<ecore::EClass>& fUML::Semantics::CommonBehavior::CommonBehaviorPackageImpl::getExecution_Class() const
 {
 	return m_execution_Class;
 }
 
 
-std::shared_ptr<ecore::EReference> fUML::Semantics::CommonBehavior::CommonBehaviorPackageImpl::getExecution_Attribute_behavior() const
+const std::shared_ptr<ecore::EReference>& fUML::Semantics::CommonBehavior::CommonBehaviorPackageImpl::getExecution_Attribute_behavior() const
 {
 	return m_execution_Attribute_behavior;
 }
-std::shared_ptr<ecore::EReference> fUML::Semantics::CommonBehavior::CommonBehaviorPackageImpl::getExecution_Attribute_context() const
+const std::shared_ptr<ecore::EReference>& fUML::Semantics::CommonBehavior::CommonBehaviorPackageImpl::getExecution_Attribute_context() const
 {
 	return m_execution_Attribute_context;
 }
-std::shared_ptr<ecore::EReference> fUML::Semantics::CommonBehavior::CommonBehaviorPackageImpl::getExecution_Attribute_locus() const
+const std::shared_ptr<ecore::EReference>& fUML::Semantics::CommonBehavior::CommonBehaviorPackageImpl::getExecution_Attribute_locus() const
 {
 	return m_execution_Attribute_locus;
 }
-std::shared_ptr<ecore::EReference> fUML::Semantics::CommonBehavior::CommonBehaviorPackageImpl::getExecution_Attribute_parameterValues() const
+const std::shared_ptr<ecore::EReference>& fUML::Semantics::CommonBehavior::CommonBehaviorPackageImpl::getExecution_Attribute_parameterValues() const
 {
 	return m_execution_Attribute_parameterValues;
 }
-std::shared_ptr<ecore::EReference> fUML::Semantics::CommonBehavior::CommonBehaviorPackageImpl::getExecution_Attribute_types() const
+const std::shared_ptr<ecore::EReference>& fUML::Semantics::CommonBehavior::CommonBehaviorPackageImpl::getExecution_Attribute_types() const
 {
 	return m_execution_Attribute_types;
 }
 
-std::shared_ptr<ecore::EOperation> fUML::Semantics::CommonBehavior::CommonBehaviorPackageImpl::getExecution_Operation__copy() const
+const std::shared_ptr<ecore::EOperation>& fUML::Semantics::CommonBehavior::CommonBehaviorPackageImpl::getExecution_Operation__copy() const
 {
 	return m_execution_Operation__copy;
 }
-std::shared_ptr<ecore::EOperation> fUML::Semantics::CommonBehavior::CommonBehaviorPackageImpl::getExecution_Operation_destroy() const
+const std::shared_ptr<ecore::EOperation>& fUML::Semantics::CommonBehavior::CommonBehaviorPackageImpl::getExecution_Operation_destroy() const
 {
 	return m_execution_Operation_destroy;
 }
-std::shared_ptr<ecore::EOperation> fUML::Semantics::CommonBehavior::CommonBehaviorPackageImpl::getExecution_Operation_execute() const
+const std::shared_ptr<ecore::EOperation>& fUML::Semantics::CommonBehavior::CommonBehaviorPackageImpl::getExecution_Operation_execute() const
 {
 	return m_execution_Operation_execute;
 }
-std::shared_ptr<ecore::EOperation> fUML::Semantics::CommonBehavior::CommonBehaviorPackageImpl::getExecution_Operation_getOutputParameterValues() const
+const std::shared_ptr<ecore::EOperation>& fUML::Semantics::CommonBehavior::CommonBehaviorPackageImpl::getExecution_Operation_getOutputParameterValues() const
 {
 	return m_execution_Operation_getOutputParameterValues;
 }
-std::shared_ptr<ecore::EOperation> fUML::Semantics::CommonBehavior::CommonBehaviorPackageImpl::getExecution_Operation_getParameterValue_Parameter() const
+const std::shared_ptr<ecore::EOperation>& fUML::Semantics::CommonBehavior::CommonBehaviorPackageImpl::getExecution_Operation_getParameterValue_Parameter() const
 {
 	return m_execution_Operation_getParameterValue_Parameter;
 }
-std::shared_ptr<ecore::EOperation> fUML::Semantics::CommonBehavior::CommonBehaviorPackageImpl::getExecution_Operation_new_() const
+const std::shared_ptr<ecore::EOperation>& fUML::Semantics::CommonBehavior::CommonBehaviorPackageImpl::getExecution_Operation_new_() const
 {
 	return m_execution_Operation_new_;
 }
-std::shared_ptr<ecore::EOperation> fUML::Semantics::CommonBehavior::CommonBehaviorPackageImpl::getExecution_Operation_setParameterValue_ParameterValue() const
+const std::shared_ptr<ecore::EOperation>& fUML::Semantics::CommonBehavior::CommonBehaviorPackageImpl::getExecution_Operation_setParameterValue_ParameterValue() const
 {
 	return m_execution_Operation_setParameterValue_ParameterValue;
 }
-std::shared_ptr<ecore::EOperation> fUML::Semantics::CommonBehavior::CommonBehaviorPackageImpl::getExecution_Operation_terminate() const
+const std::shared_ptr<ecore::EOperation>& fUML::Semantics::CommonBehavior::CommonBehaviorPackageImpl::getExecution_Operation_terminate() const
 {
 	return m_execution_Operation_terminate;
 }
@@ -140,22 +140,22 @@ std::shared_ptr<ecore::EOperation> fUML::Semantics::CommonBehavior::CommonBehavi
 // End Class Execution
 
 // Begin Class ParameterValue
-std::shared_ptr<ecore::EClass> fUML::Semantics::CommonBehavior::CommonBehaviorPackageImpl::getParameterValue_Class() const
+const std::shared_ptr<ecore::EClass>& fUML::Semantics::CommonBehavior::CommonBehaviorPackageImpl::getParameterValue_Class() const
 {
 	return m_parameterValue_Class;
 }
 
-std::shared_ptr<ecore::EAttribute> fUML::Semantics::CommonBehavior::CommonBehaviorPackageImpl::getParameterValue_Attribute_values() const
+const std::shared_ptr<ecore::EAttribute>& fUML::Semantics::CommonBehavior::CommonBehaviorPackageImpl::getParameterValue_Attribute_values() const
 {
 	return m_parameterValue_Attribute_values;
 }
 
-std::shared_ptr<ecore::EReference> fUML::Semantics::CommonBehavior::CommonBehaviorPackageImpl::getParameterValue_Attribute_parameter() const
+const std::shared_ptr<ecore::EReference>& fUML::Semantics::CommonBehavior::CommonBehaviorPackageImpl::getParameterValue_Attribute_parameter() const
 {
 	return m_parameterValue_Attribute_parameter;
 }
 
-std::shared_ptr<ecore::EOperation> fUML::Semantics::CommonBehavior::CommonBehaviorPackageImpl::getParameterValue_Operation__copy() const
+const std::shared_ptr<ecore::EOperation>& fUML::Semantics::CommonBehavior::CommonBehaviorPackageImpl::getParameterValue_Operation__copy() const
 {
 	return m_parameterValue_Operation__copy;
 }

@@ -65,195 +65,195 @@ namespace fUML::Semantics::Actions
 
 			// Begin Class ActionActivation
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getActionActivation_Class() const ;
+			virtual const std::shared_ptr<ecore::EClass>& getActionActivation_Class() const ;
 			
-			virtual std::shared_ptr<ecore::EAttribute> getActionActivation_Attribute_firing() const ;
+			virtual const std::shared_ptr<ecore::EAttribute>& getActionActivation_Attribute_firing() const ;
 			
-			virtual std::shared_ptr<ecore::EReference> getActionActivation_Attribute_action() const ;
-			virtual std::shared_ptr<ecore::EReference> getActionActivation_Attribute_inputPinActivation() const ;
-			virtual std::shared_ptr<ecore::EReference> getActionActivation_Attribute_outputPinActivation() const ;
-			virtual std::shared_ptr<ecore::EReference> getActionActivation_Attribute_pinActivation() const ;
+			virtual const std::shared_ptr<ecore::EReference>& getActionActivation_Attribute_action() const ;
+			virtual const std::shared_ptr<ecore::EReference>& getActionActivation_Attribute_inputPinActivation() const ;
+			virtual const std::shared_ptr<ecore::EReference>& getActionActivation_Attribute_outputPinActivation() const ;
+			virtual const std::shared_ptr<ecore::EReference>& getActionActivation_Attribute_pinActivation() const ;
 			
-			virtual std::shared_ptr<ecore::EOperation> getActionActivation_Operation_addOutgoingEdge_ActivityEdgeInstance() const ;
-			virtual std::shared_ptr<ecore::EOperation> getActionActivation_Operation_addPinActivation_PinActivation() const ;
-			virtual std::shared_ptr<ecore::EOperation> getActionActivation_Operation_completeAction() const ;
-			virtual std::shared_ptr<ecore::EOperation> getActionActivation_Operation_createNodeActivations() const ;
-			virtual std::shared_ptr<ecore::EOperation> getActionActivation_Operation_doAction() const ;
-			virtual std::shared_ptr<ecore::EOperation> getActionActivation_Operation_fire_Token() const ;
-			virtual std::shared_ptr<ecore::EOperation> getActionActivation_Operation_getTokens_InputPin() const ;
-			virtual std::shared_ptr<ecore::EOperation> getActionActivation_Operation_isFirng() const ;
-			virtual std::shared_ptr<ecore::EOperation> getActionActivation_Operation_isReady() const ;
-			virtual std::shared_ptr<ecore::EOperation> getActionActivation_Operation_isSourceFor_ActivityEdgeInstance() const ;
-			virtual std::shared_ptr<ecore::EOperation> getActionActivation_Operation_putToken_OutputPin_EJavaObject() const ;
-			virtual std::shared_ptr<ecore::EOperation> getActionActivation_Operation_putTokens_OutputPin_EJavaObject() const ;
-			virtual std::shared_ptr<ecore::EOperation> getActionActivation_Operation_retrievePinActivation_Pin() const ;
-			virtual std::shared_ptr<ecore::EOperation> getActionActivation_Operation_run() const ;
-			virtual std::shared_ptr<ecore::EOperation> getActionActivation_Operation_sendOffers() const ;
-			virtual std::shared_ptr<ecore::EOperation> getActionActivation_Operation_takeOfferedTokens() const ;
-			virtual std::shared_ptr<ecore::EOperation> getActionActivation_Operation_takeTokens_InputPin() const ;
-			virtual std::shared_ptr<ecore::EOperation> getActionActivation_Operation_terminate() const ;
-			virtual std::shared_ptr<ecore::EOperation> getActionActivation_Operation_valueParticipatesInLink_EJavaObject_Element() const ;
+			virtual const std::shared_ptr<ecore::EOperation>& getActionActivation_Operation_addOutgoingEdge_ActivityEdgeInstance() const ;
+			virtual const std::shared_ptr<ecore::EOperation>& getActionActivation_Operation_addPinActivation_PinActivation() const ;
+			virtual const std::shared_ptr<ecore::EOperation>& getActionActivation_Operation_completeAction() const ;
+			virtual const std::shared_ptr<ecore::EOperation>& getActionActivation_Operation_createNodeActivations() const ;
+			virtual const std::shared_ptr<ecore::EOperation>& getActionActivation_Operation_doAction() const ;
+			virtual const std::shared_ptr<ecore::EOperation>& getActionActivation_Operation_fire_Token() const ;
+			virtual const std::shared_ptr<ecore::EOperation>& getActionActivation_Operation_getTokens_InputPin() const ;
+			virtual const std::shared_ptr<ecore::EOperation>& getActionActivation_Operation_isFirng() const ;
+			virtual const std::shared_ptr<ecore::EOperation>& getActionActivation_Operation_isReady() const ;
+			virtual const std::shared_ptr<ecore::EOperation>& getActionActivation_Operation_isSourceFor_ActivityEdgeInstance() const ;
+			virtual const std::shared_ptr<ecore::EOperation>& getActionActivation_Operation_putToken_OutputPin_EJavaObject() const ;
+			virtual const std::shared_ptr<ecore::EOperation>& getActionActivation_Operation_putTokens_OutputPin_EJavaObject() const ;
+			virtual const std::shared_ptr<ecore::EOperation>& getActionActivation_Operation_retrievePinActivation_Pin() const ;
+			virtual const std::shared_ptr<ecore::EOperation>& getActionActivation_Operation_run() const ;
+			virtual const std::shared_ptr<ecore::EOperation>& getActionActivation_Operation_sendOffers() const ;
+			virtual const std::shared_ptr<ecore::EOperation>& getActionActivation_Operation_takeOfferedTokens() const ;
+			virtual const std::shared_ptr<ecore::EOperation>& getActionActivation_Operation_takeTokens_InputPin() const ;
+			virtual const std::shared_ptr<ecore::EOperation>& getActionActivation_Operation_terminate() const ;
+			virtual const std::shared_ptr<ecore::EOperation>& getActionActivation_Operation_valueParticipatesInLink_EJavaObject_Element() const ;
 			
 			// End Class ActionActivation
 
 			// Begin Class AddStructuralFeatureValueActionActivation
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getAddStructuralFeatureValueActionActivation_Class() const ;
+			virtual const std::shared_ptr<ecore::EClass>& getAddStructuralFeatureValueActionActivation_Class() const ;
 			
 			
-			virtual std::shared_ptr<ecore::EReference> getAddStructuralFeatureValueActionActivation_Attribute_addStructuralFeatureValueAction() const ;
+			virtual const std::shared_ptr<ecore::EReference>& getAddStructuralFeatureValueActionActivation_Attribute_addStructuralFeatureValueAction() const ;
 			
-			virtual std::shared_ptr<ecore::EOperation> getAddStructuralFeatureValueActionActivation_Operation_doAction() const ;
+			virtual const std::shared_ptr<ecore::EOperation>& getAddStructuralFeatureValueActionActivation_Operation_doAction() const ;
 			
 			// End Class AddStructuralFeatureValueActionActivation
 
 			// Begin Class CallActionActivation
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getCallActionActivation_Class() const ;
+			virtual const std::shared_ptr<ecore::EClass>& getCallActionActivation_Class() const ;
 			
 			
-			virtual std::shared_ptr<ecore::EReference> getCallActionActivation_Attribute_callAction() const ;
+			virtual const std::shared_ptr<ecore::EReference>& getCallActionActivation_Attribute_callAction() const ;
 			
-			virtual std::shared_ptr<ecore::EOperation> getCallActionActivation_Operation_doAction() const ;
-			virtual std::shared_ptr<ecore::EOperation> getCallActionActivation_Operation_doCall_ParameterValue() const ;
-			virtual std::shared_ptr<ecore::EOperation> getCallActionActivation_Operation_retrieveCallParameters() const ;
-			virtual std::shared_ptr<ecore::EOperation> getCallActionActivation_Operation_terminate() const ;
+			virtual const std::shared_ptr<ecore::EOperation>& getCallActionActivation_Operation_doAction() const ;
+			virtual const std::shared_ptr<ecore::EOperation>& getCallActionActivation_Operation_doCall_ParameterValue() const ;
+			virtual const std::shared_ptr<ecore::EOperation>& getCallActionActivation_Operation_retrieveCallParameters() const ;
+			virtual const std::shared_ptr<ecore::EOperation>& getCallActionActivation_Operation_terminate() const ;
 			
 			// End Class CallActionActivation
 
 			// Begin Class CallBehaviorActionActivation
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getCallBehaviorActionActivation_Class() const ;
+			virtual const std::shared_ptr<ecore::EClass>& getCallBehaviorActionActivation_Class() const ;
 			
 			
-			virtual std::shared_ptr<ecore::EReference> getCallBehaviorActionActivation_Attribute_callBehaviorAction() const ;
+			virtual const std::shared_ptr<ecore::EReference>& getCallBehaviorActionActivation_Attribute_callBehaviorAction() const ;
 			
-			virtual std::shared_ptr<ecore::EOperation> getCallBehaviorActionActivation_Operation_doCall_ParameterValue() const ;
-			virtual std::shared_ptr<ecore::EOperation> getCallBehaviorActionActivation_Operation_retrieveBehavior() const ;
-			virtual std::shared_ptr<ecore::EOperation> getCallBehaviorActionActivation_Operation_retrieveCallParameters() const ;
+			virtual const std::shared_ptr<ecore::EOperation>& getCallBehaviorActionActivation_Operation_doCall_ParameterValue() const ;
+			virtual const std::shared_ptr<ecore::EOperation>& getCallBehaviorActionActivation_Operation_retrieveBehavior() const ;
+			virtual const std::shared_ptr<ecore::EOperation>& getCallBehaviorActionActivation_Operation_retrieveCallParameters() const ;
 			
 			// End Class CallBehaviorActionActivation
 
 			// Begin Class CallOperationActionActivation
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getCallOperationActionActivation_Class() const ;
+			virtual const std::shared_ptr<ecore::EClass>& getCallOperationActionActivation_Class() const ;
 			
 			
-			virtual std::shared_ptr<ecore::EReference> getCallOperationActionActivation_Attribute_callOperationAction() const ;
+			virtual const std::shared_ptr<ecore::EReference>& getCallOperationActionActivation_Attribute_callOperationAction() const ;
 			
-			virtual std::shared_ptr<ecore::EOperation> getCallOperationActionActivation_Operation_doCall_ParameterValue() const ;
-			virtual std::shared_ptr<ecore::EOperation> getCallOperationActionActivation_Operation_retrieveBehavior() const ;
-			virtual std::shared_ptr<ecore::EOperation> getCallOperationActionActivation_Operation_retrieveCallParameters() const ;
+			virtual const std::shared_ptr<ecore::EOperation>& getCallOperationActionActivation_Operation_doCall_ParameterValue() const ;
+			virtual const std::shared_ptr<ecore::EOperation>& getCallOperationActionActivation_Operation_retrieveBehavior() const ;
+			virtual const std::shared_ptr<ecore::EOperation>& getCallOperationActionActivation_Operation_retrieveCallParameters() const ;
 			
 			// End Class CallOperationActionActivation
 
 			// Begin Class ClearStructuralFeatureActionActivation
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getClearStructuralFeatureActionActivation_Class() const ;
+			virtual const std::shared_ptr<ecore::EClass>& getClearStructuralFeatureActionActivation_Class() const ;
 			
 			
-			virtual std::shared_ptr<ecore::EReference> getClearStructuralFeatureActionActivation_Attribute_clearStructuralFeatureAction() const ;
+			virtual const std::shared_ptr<ecore::EReference>& getClearStructuralFeatureActionActivation_Attribute_clearStructuralFeatureAction() const ;
 			
-			virtual std::shared_ptr<ecore::EOperation> getClearStructuralFeatureActionActivation_Operation_doAction() const ;
+			virtual const std::shared_ptr<ecore::EOperation>& getClearStructuralFeatureActionActivation_Operation_doAction() const ;
 			
 			// End Class ClearStructuralFeatureActionActivation
 
 			// Begin Class CreateObjectActionActivation
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getCreateObjectActionActivation_Class() const ;
+			virtual const std::shared_ptr<ecore::EClass>& getCreateObjectActionActivation_Class() const ;
 			
 			
-			virtual std::shared_ptr<ecore::EReference> getCreateObjectActionActivation_Attribute_createObjectAction() const ;
+			virtual const std::shared_ptr<ecore::EReference>& getCreateObjectActionActivation_Attribute_createObjectAction() const ;
 			
-			virtual std::shared_ptr<ecore::EOperation> getCreateObjectActionActivation_Operation_doAction() const ;
+			virtual const std::shared_ptr<ecore::EOperation>& getCreateObjectActionActivation_Operation_doAction() const ;
 			
 			// End Class CreateObjectActionActivation
 
 			// Begin Class DestroyObjectActionActivation
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getDestroyObjectActionActivation_Class() const ;
+			virtual const std::shared_ptr<ecore::EClass>& getDestroyObjectActionActivation_Class() const ;
 			
 			
-			virtual std::shared_ptr<ecore::EReference> getDestroyObjectActionActivation_Attribute_destroyObjectAction() const ;
+			virtual const std::shared_ptr<ecore::EReference>& getDestroyObjectActionActivation_Attribute_destroyObjectAction() const ;
 			
-			virtual std::shared_ptr<ecore::EOperation> getDestroyObjectActionActivation_Operation_destroyObject_EJavaObject_EBoolean() const ;
-			virtual std::shared_ptr<ecore::EOperation> getDestroyObjectActionActivation_Operation_doAction() const ;
-			virtual std::shared_ptr<ecore::EOperation> getDestroyObjectActionActivation_Operation_objectIsComposite_Element_Element() const ;
+			virtual const std::shared_ptr<ecore::EOperation>& getDestroyObjectActionActivation_Operation_destroyObject_EJavaObject_EBoolean() const ;
+			virtual const std::shared_ptr<ecore::EOperation>& getDestroyObjectActionActivation_Operation_doAction() const ;
+			virtual const std::shared_ptr<ecore::EOperation>& getDestroyObjectActionActivation_Operation_objectIsComposite_Element_Element() const ;
 			
 			// End Class DestroyObjectActionActivation
 
 			// Begin Class ExpansionActivationGroup
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getExpansionActivationGroup_Class() const ;
+			virtual const std::shared_ptr<ecore::EClass>& getExpansionActivationGroup_Class() const ;
 			
-			virtual std::shared_ptr<ecore::EAttribute> getExpansionActivationGroup_Attribute_index() const ;
+			virtual const std::shared_ptr<ecore::EAttribute>& getExpansionActivationGroup_Attribute_index() const ;
 			
-			virtual std::shared_ptr<ecore::EReference> getExpansionActivationGroup_Attribute_groupInputs() const ;
-			virtual std::shared_ptr<ecore::EReference> getExpansionActivationGroup_Attribute_groupOutputs() const ;
-			virtual std::shared_ptr<ecore::EReference> getExpansionActivationGroup_Attribute_regionActivation() const ;
-			virtual std::shared_ptr<ecore::EReference> getExpansionActivationGroup_Attribute_regionInputs() const ;
+			virtual const std::shared_ptr<ecore::EReference>& getExpansionActivationGroup_Attribute_groupInputs() const ;
+			virtual const std::shared_ptr<ecore::EReference>& getExpansionActivationGroup_Attribute_groupOutputs() const ;
+			virtual const std::shared_ptr<ecore::EReference>& getExpansionActivationGroup_Attribute_regionActivation() const ;
+			virtual const std::shared_ptr<ecore::EReference>& getExpansionActivationGroup_Attribute_regionInputs() const ;
 			
-			virtual std::shared_ptr<ecore::EOperation> getExpansionActivationGroup_Operation_getActivityExecution() const ;
-			virtual std::shared_ptr<ecore::EOperation> getExpansionActivationGroup_Operation_getNodeActivation_ActivityNode() const ;
-			virtual std::shared_ptr<ecore::EOperation> getExpansionActivationGroup_Operation_resume_ActivityNodeActivation() const ;
-			virtual std::shared_ptr<ecore::EOperation> getExpansionActivationGroup_Operation_suspend_ActivityNodeActivation() const ;
+			virtual const std::shared_ptr<ecore::EOperation>& getExpansionActivationGroup_Operation_getActivityExecution() const ;
+			virtual const std::shared_ptr<ecore::EOperation>& getExpansionActivationGroup_Operation_getNodeActivation_ActivityNode() const ;
+			virtual const std::shared_ptr<ecore::EOperation>& getExpansionActivationGroup_Operation_resume_ActivityNodeActivation() const ;
+			virtual const std::shared_ptr<ecore::EOperation>& getExpansionActivationGroup_Operation_suspend_ActivityNodeActivation() const ;
 			
 			// End Class ExpansionActivationGroup
 
 			// Begin Class ExpansionNodeActivation
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getExpansionNodeActivation_Class() const ;
+			virtual const std::shared_ptr<ecore::EClass>& getExpansionNodeActivation_Class() const ;
 			
 			
 			
-			virtual std::shared_ptr<ecore::EOperation> getExpansionNodeActivation_Operation_fire_Token() const ;
-			virtual std::shared_ptr<ecore::EOperation> getExpansionNodeActivation_Operation_getExpansionRegionActivation() const ;
-			virtual std::shared_ptr<ecore::EOperation> getExpansionNodeActivation_Operation_isReady() const ;
-			virtual std::shared_ptr<ecore::EOperation> getExpansionNodeActivation_Operation_receiveOffer() const ;
+			virtual const std::shared_ptr<ecore::EOperation>& getExpansionNodeActivation_Operation_fire_Token() const ;
+			virtual const std::shared_ptr<ecore::EOperation>& getExpansionNodeActivation_Operation_getExpansionRegionActivation() const ;
+			virtual const std::shared_ptr<ecore::EOperation>& getExpansionNodeActivation_Operation_isReady() const ;
+			virtual const std::shared_ptr<ecore::EOperation>& getExpansionNodeActivation_Operation_receiveOffer() const ;
 			
 			// End Class ExpansionNodeActivation
 
 			// Begin Class ExpansionRegionActivation
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getExpansionRegionActivation_Class() const ;
+			virtual const std::shared_ptr<ecore::EClass>& getExpansionRegionActivation_Class() const ;
 			
-			virtual std::shared_ptr<ecore::EAttribute> getExpansionRegionActivation_Attribute_next() const ;
+			virtual const std::shared_ptr<ecore::EAttribute>& getExpansionRegionActivation_Attribute_next() const ;
 			
-			virtual std::shared_ptr<ecore::EReference> getExpansionRegionActivation_Attribute_activationGroups() const ;
-			virtual std::shared_ptr<ecore::EReference> getExpansionRegionActivation_Attribute_inputExpansionTokens() const ;
-			virtual std::shared_ptr<ecore::EReference> getExpansionRegionActivation_Attribute_inputTokens() const ;
+			virtual const std::shared_ptr<ecore::EReference>& getExpansionRegionActivation_Attribute_activationGroups() const ;
+			virtual const std::shared_ptr<ecore::EReference>& getExpansionRegionActivation_Attribute_inputExpansionTokens() const ;
+			virtual const std::shared_ptr<ecore::EReference>& getExpansionRegionActivation_Attribute_inputTokens() const ;
 			
-			virtual std::shared_ptr<ecore::EOperation> getExpansionRegionActivation_Operation_doAction() const ;
-			virtual std::shared_ptr<ecore::EOperation> getExpansionRegionActivation_Operation_doOutput() const ;
-			virtual std::shared_ptr<ecore::EOperation> getExpansionRegionActivation_Operation_doStructuredActivity() const ;
-			virtual std::shared_ptr<ecore::EOperation> getExpansionRegionActivation_Operation_getExpansionNodeActivation_ExpansionNode() const ;
-			virtual std::shared_ptr<ecore::EOperation> getExpansionRegionActivation_Operation_isSuspended() const ;
-			virtual std::shared_ptr<ecore::EOperation> getExpansionRegionActivation_Operation_numberOfValues() const ;
-			virtual std::shared_ptr<ecore::EOperation> getExpansionRegionActivation_Operation_resume_ExpansionActivationGroup() const ;
-			virtual std::shared_ptr<ecore::EOperation> getExpansionRegionActivation_Operation_runGroup_ExpansionActivationGroup() const ;
-			virtual std::shared_ptr<ecore::EOperation> getExpansionRegionActivation_Operation_runIterative() const ;
-			virtual std::shared_ptr<ecore::EOperation> getExpansionRegionActivation_Operation_runParallel() const ;
-			virtual std::shared_ptr<ecore::EOperation> getExpansionRegionActivation_Operation_sendOffers() const ;
-			virtual std::shared_ptr<ecore::EOperation> getExpansionRegionActivation_Operation_takeOfferedTokens() const ;
-			virtual std::shared_ptr<ecore::EOperation> getExpansionRegionActivation_Operation_terminate() const ;
-			virtual std::shared_ptr<ecore::EOperation> getExpansionRegionActivation_Operation_terminateGroup_ExpansionActivationGroup() const ;
+			virtual const std::shared_ptr<ecore::EOperation>& getExpansionRegionActivation_Operation_doAction() const ;
+			virtual const std::shared_ptr<ecore::EOperation>& getExpansionRegionActivation_Operation_doOutput() const ;
+			virtual const std::shared_ptr<ecore::EOperation>& getExpansionRegionActivation_Operation_doStructuredActivity() const ;
+			virtual const std::shared_ptr<ecore::EOperation>& getExpansionRegionActivation_Operation_getExpansionNodeActivation_ExpansionNode() const ;
+			virtual const std::shared_ptr<ecore::EOperation>& getExpansionRegionActivation_Operation_isSuspended() const ;
+			virtual const std::shared_ptr<ecore::EOperation>& getExpansionRegionActivation_Operation_numberOfValues() const ;
+			virtual const std::shared_ptr<ecore::EOperation>& getExpansionRegionActivation_Operation_resume_ExpansionActivationGroup() const ;
+			virtual const std::shared_ptr<ecore::EOperation>& getExpansionRegionActivation_Operation_runGroup_ExpansionActivationGroup() const ;
+			virtual const std::shared_ptr<ecore::EOperation>& getExpansionRegionActivation_Operation_runIterative() const ;
+			virtual const std::shared_ptr<ecore::EOperation>& getExpansionRegionActivation_Operation_runParallel() const ;
+			virtual const std::shared_ptr<ecore::EOperation>& getExpansionRegionActivation_Operation_sendOffers() const ;
+			virtual const std::shared_ptr<ecore::EOperation>& getExpansionRegionActivation_Operation_takeOfferedTokens() const ;
+			virtual const std::shared_ptr<ecore::EOperation>& getExpansionRegionActivation_Operation_terminate() const ;
+			virtual const std::shared_ptr<ecore::EOperation>& getExpansionRegionActivation_Operation_terminateGroup_ExpansionActivationGroup() const ;
 			
 			// End Class ExpansionRegionActivation
 
 			// Begin Class InputPinActivation
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getInputPinActivation_Class() const ;
+			virtual const std::shared_ptr<ecore::EClass>& getInputPinActivation_Class() const ;
 			
 			
 			
-			virtual std::shared_ptr<ecore::EOperation> getInputPinActivation_Operation_isReady() const ;
-			virtual std::shared_ptr<ecore::EOperation> getInputPinActivation_Operation_receiveOffer() const ;
+			virtual const std::shared_ptr<ecore::EOperation>& getInputPinActivation_Operation_isReady() const ;
+			virtual const std::shared_ptr<ecore::EOperation>& getInputPinActivation_Operation_receiveOffer() const ;
 			
 			// End Class InputPinActivation
 
 			// Begin Class InvocationActionActivation
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getInvocationActionActivation_Class() const ;
+			virtual const std::shared_ptr<ecore::EClass>& getInvocationActionActivation_Class() const ;
 			
 			
 			
@@ -262,7 +262,7 @@ namespace fUML::Semantics::Actions
 
 			// Begin Class OutputPinActivation
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getOutputPinActivation_Class() const ;
+			virtual const std::shared_ptr<ecore::EClass>& getOutputPinActivation_Class() const ;
 			
 			
 			
@@ -271,124 +271,124 @@ namespace fUML::Semantics::Actions
 
 			// Begin Class PinActivation
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getPinActivation_Class() const ;
+			virtual const std::shared_ptr<ecore::EClass>& getPinActivation_Class() const ;
 			
 			
-			virtual std::shared_ptr<ecore::EReference> getPinActivation_Attribute_actionActivation() const ;
-			virtual std::shared_ptr<ecore::EReference> getPinActivation_Attribute_pin() const ;
+			virtual const std::shared_ptr<ecore::EReference>& getPinActivation_Attribute_actionActivation() const ;
+			virtual const std::shared_ptr<ecore::EReference>& getPinActivation_Attribute_pin() const ;
 			
-			virtual std::shared_ptr<ecore::EOperation> getPinActivation_Operation_fire_Token() const ;
-			virtual std::shared_ptr<ecore::EOperation> getPinActivation_Operation_takeOfferedTokens() const ;
+			virtual const std::shared_ptr<ecore::EOperation>& getPinActivation_Operation_fire_Token() const ;
+			virtual const std::shared_ptr<ecore::EOperation>& getPinActivation_Operation_takeOfferedTokens() const ;
 			
 			// End Class PinActivation
 
 			// Begin Class ReadExtentActionActivation
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getReadExtentActionActivation_Class() const ;
+			virtual const std::shared_ptr<ecore::EClass>& getReadExtentActionActivation_Class() const ;
 			
 			
-			virtual std::shared_ptr<ecore::EReference> getReadExtentActionActivation_Attribute_readExtentAction() const ;
+			virtual const std::shared_ptr<ecore::EReference>& getReadExtentActionActivation_Attribute_readExtentAction() const ;
 			
-			virtual std::shared_ptr<ecore::EOperation> getReadExtentActionActivation_Operation_doAction() const ;
+			virtual const std::shared_ptr<ecore::EOperation>& getReadExtentActionActivation_Operation_doAction() const ;
 			
 			// End Class ReadExtentActionActivation
 
 			// Begin Class ReadIsClassifiedObjectActionActivation
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getReadIsClassifiedObjectActionActivation_Class() const ;
+			virtual const std::shared_ptr<ecore::EClass>& getReadIsClassifiedObjectActionActivation_Class() const ;
 			
 			
-			virtual std::shared_ptr<ecore::EReference> getReadIsClassifiedObjectActionActivation_Attribute_readIsClassifiedObjectAction() const ;
+			virtual const std::shared_ptr<ecore::EReference>& getReadIsClassifiedObjectActionActivation_Attribute_readIsClassifiedObjectAction() const ;
 			
-			virtual std::shared_ptr<ecore::EOperation> getReadIsClassifiedObjectActionActivation_Operation_doAction() const ;
+			virtual const std::shared_ptr<ecore::EOperation>& getReadIsClassifiedObjectActionActivation_Operation_doAction() const ;
 			
 			// End Class ReadIsClassifiedObjectActionActivation
 
 			// Begin Class ReadSelfActionActivation
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getReadSelfActionActivation_Class() const ;
+			virtual const std::shared_ptr<ecore::EClass>& getReadSelfActionActivation_Class() const ;
 			
 			
-			virtual std::shared_ptr<ecore::EReference> getReadSelfActionActivation_Attribute_readSelfAction() const ;
+			virtual const std::shared_ptr<ecore::EReference>& getReadSelfActionActivation_Attribute_readSelfAction() const ;
 			
-			virtual std::shared_ptr<ecore::EOperation> getReadSelfActionActivation_Operation_doAction() const ;
+			virtual const std::shared_ptr<ecore::EOperation>& getReadSelfActionActivation_Operation_doAction() const ;
 			
 			// End Class ReadSelfActionActivation
 
 			// Begin Class ReadStructuralFeatureActionActivation
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getReadStructuralFeatureActionActivation_Class() const ;
+			virtual const std::shared_ptr<ecore::EClass>& getReadStructuralFeatureActionActivation_Class() const ;
 			
 			
-			virtual std::shared_ptr<ecore::EReference> getReadStructuralFeatureActionActivation_Attribute_readStructuralFeatureAction() const ;
+			virtual const std::shared_ptr<ecore::EReference>& getReadStructuralFeatureActionActivation_Attribute_readStructuralFeatureAction() const ;
 			
-			virtual std::shared_ptr<ecore::EOperation> getReadStructuralFeatureActionActivation_Operation_doAction() const ;
+			virtual const std::shared_ptr<ecore::EOperation>& getReadStructuralFeatureActionActivation_Operation_doAction() const ;
 			
 			// End Class ReadStructuralFeatureActionActivation
 
 			// Begin Class RemoveStructuralFeatureValueActionActivation
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getRemoveStructuralFeatureValueActionActivation_Class() const ;
+			virtual const std::shared_ptr<ecore::EClass>& getRemoveStructuralFeatureValueActionActivation_Class() const ;
 			
 			
-			virtual std::shared_ptr<ecore::EReference> getRemoveStructuralFeatureValueActionActivation_Attribute_removeStructuralFeatureValueAction() const ;
+			virtual const std::shared_ptr<ecore::EReference>& getRemoveStructuralFeatureValueActionActivation_Attribute_removeStructuralFeatureValueAction() const ;
 			
-			virtual std::shared_ptr<ecore::EOperation> getRemoveStructuralFeatureValueActionActivation_Operation_doAction() const ;
+			virtual const std::shared_ptr<ecore::EOperation>& getRemoveStructuralFeatureValueActionActivation_Operation_doAction() const ;
 			
 			// End Class RemoveStructuralFeatureValueActionActivation
 
 			// Begin Class StructuralFeatureActionActivation
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getStructuralFeatureActionActivation_Class() const ;
+			virtual const std::shared_ptr<ecore::EClass>& getStructuralFeatureActionActivation_Class() const ;
 			
 			
 			
-			virtual std::shared_ptr<ecore::EOperation> getStructuralFeatureActionActivation_Operation_getAssociation_StructuralFeature() const ;
-			virtual std::shared_ptr<ecore::EOperation> getStructuralFeatureActionActivation_Operation_getMatchingLinks_Association_EJavaObject() const ;
-			virtual std::shared_ptr<ecore::EOperation> getStructuralFeatureActionActivation_Operation_getMatchingLinksForEndValue_Association_EJavaObject() const ;
-			virtual std::shared_ptr<ecore::EOperation> getStructuralFeatureActionActivation_Operation_getOppositeEnd_Association_StructuralFeature() const ;
+			virtual const std::shared_ptr<ecore::EOperation>& getStructuralFeatureActionActivation_Operation_getAssociation_StructuralFeature() const ;
+			virtual const std::shared_ptr<ecore::EOperation>& getStructuralFeatureActionActivation_Operation_getMatchingLinks_Association_EJavaObject() const ;
+			virtual const std::shared_ptr<ecore::EOperation>& getStructuralFeatureActionActivation_Operation_getMatchingLinksForEndValue_Association_EJavaObject() const ;
+			virtual const std::shared_ptr<ecore::EOperation>& getStructuralFeatureActionActivation_Operation_getOppositeEnd_Association_StructuralFeature() const ;
 			
 			// End Class StructuralFeatureActionActivation
 
 			// Begin Class StructuredActivityNodeActivation
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getStructuredActivityNodeActivation_Class() const ;
+			virtual const std::shared_ptr<ecore::EClass>& getStructuredActivityNodeActivation_Class() const ;
 			
 			
-			virtual std::shared_ptr<ecore::EReference> getStructuredActivityNodeActivation_Attribute_activationGroup() const ;
+			virtual const std::shared_ptr<ecore::EReference>& getStructuredActivityNodeActivation_Attribute_activationGroup() const ;
 			
-			virtual std::shared_ptr<ecore::EOperation> getStructuredActivityNodeActivation_Operation_completeAction() const ;
-			virtual std::shared_ptr<ecore::EOperation> getStructuredActivityNodeActivation_Operation_createEdgeInstances() const ;
-			virtual std::shared_ptr<ecore::EOperation> getStructuredActivityNodeActivation_Operation_createNodeActivations() const ;
-			virtual std::shared_ptr<ecore::EOperation> getStructuredActivityNodeActivation_Operation_doAction() const ;
-			virtual std::shared_ptr<ecore::EOperation> getStructuredActivityNodeActivation_Operation_doStructuredActivity() const ;
-			virtual std::shared_ptr<ecore::EOperation> getStructuredActivityNodeActivation_Operation_getNodeActivation_ActivityNode() const ;
-			virtual std::shared_ptr<ecore::EOperation> getStructuredActivityNodeActivation_Operation_getPinValues_OutputPin() const ;
-			virtual std::shared_ptr<ecore::EOperation> getStructuredActivityNodeActivation_Operation_isSourceFor_ActivityEdgeInstance() const ;
-			virtual std::shared_ptr<ecore::EOperation> getStructuredActivityNodeActivation_Operation_isSuspended() const ;
-			virtual std::shared_ptr<ecore::EOperation> getStructuredActivityNodeActivation_Operation_makeActivityNodeList_ExecutableNode() const ;
-			virtual std::shared_ptr<ecore::EOperation> getStructuredActivityNodeActivation_Operation_putPinValues_OutputPin_EJavaObject() const ;
-			virtual std::shared_ptr<ecore::EOperation> getStructuredActivityNodeActivation_Operation_resume() const ;
-			virtual std::shared_ptr<ecore::EOperation> getStructuredActivityNodeActivation_Operation_terminate() const ;
-			virtual std::shared_ptr<ecore::EOperation> getStructuredActivityNodeActivation_Operation_terminateAll() const ;
+			virtual const std::shared_ptr<ecore::EOperation>& getStructuredActivityNodeActivation_Operation_completeAction() const ;
+			virtual const std::shared_ptr<ecore::EOperation>& getStructuredActivityNodeActivation_Operation_createEdgeInstances() const ;
+			virtual const std::shared_ptr<ecore::EOperation>& getStructuredActivityNodeActivation_Operation_createNodeActivations() const ;
+			virtual const std::shared_ptr<ecore::EOperation>& getStructuredActivityNodeActivation_Operation_doAction() const ;
+			virtual const std::shared_ptr<ecore::EOperation>& getStructuredActivityNodeActivation_Operation_doStructuredActivity() const ;
+			virtual const std::shared_ptr<ecore::EOperation>& getStructuredActivityNodeActivation_Operation_getNodeActivation_ActivityNode() const ;
+			virtual const std::shared_ptr<ecore::EOperation>& getStructuredActivityNodeActivation_Operation_getPinValues_OutputPin() const ;
+			virtual const std::shared_ptr<ecore::EOperation>& getStructuredActivityNodeActivation_Operation_isSourceFor_ActivityEdgeInstance() const ;
+			virtual const std::shared_ptr<ecore::EOperation>& getStructuredActivityNodeActivation_Operation_isSuspended() const ;
+			virtual const std::shared_ptr<ecore::EOperation>& getStructuredActivityNodeActivation_Operation_makeActivityNodeList_ExecutableNode() const ;
+			virtual const std::shared_ptr<ecore::EOperation>& getStructuredActivityNodeActivation_Operation_putPinValues_OutputPin_EJavaObject() const ;
+			virtual const std::shared_ptr<ecore::EOperation>& getStructuredActivityNodeActivation_Operation_resume() const ;
+			virtual const std::shared_ptr<ecore::EOperation>& getStructuredActivityNodeActivation_Operation_terminate() const ;
+			virtual const std::shared_ptr<ecore::EOperation>& getStructuredActivityNodeActivation_Operation_terminateAll() const ;
 			
 			// End Class StructuredActivityNodeActivation
 
 			// Begin Class ValueSpecificationActionActivation
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getValueSpecificationActionActivation_Class() const ;
+			virtual const std::shared_ptr<ecore::EClass>& getValueSpecificationActionActivation_Class() const ;
 			
 			
 			
-			virtual std::shared_ptr<ecore::EOperation> getValueSpecificationActionActivation_Operation_doAction() const ;
+			virtual const std::shared_ptr<ecore::EOperation>& getValueSpecificationActionActivation_Operation_doAction() const ;
 			
 			// End Class ValueSpecificationActionActivation
 
 			// Begin Class Values
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getValues_Class() const ;
+			virtual const std::shared_ptr<ecore::EClass>& getValues_Class() const ;
 			
-			virtual std::shared_ptr<ecore::EAttribute> getValues_Attribute_values() const ;
+			virtual const std::shared_ptr<ecore::EAttribute>& getValues_Attribute_values() const ;
 			
 			
 			
@@ -396,11 +396,11 @@ namespace fUML::Semantics::Actions
 
 			// Begin Class WriteStructuralFeatureActionActivation
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getWriteStructuralFeatureActionActivation_Class() const ;
+			virtual const std::shared_ptr<ecore::EClass>& getWriteStructuralFeatureActionActivation_Class() const ;
 			
 			
 			
-			virtual std::shared_ptr<ecore::EOperation> getWriteStructuralFeatureActionActivation_Operation_position_EJavaObject_EInt() const ;
+			virtual const std::shared_ptr<ecore::EOperation>& getWriteStructuralFeatureActionActivation_Operation_position_EJavaObject_EInt() const ;
 			
 			// End Class WriteStructuralFeatureActionActivation
 

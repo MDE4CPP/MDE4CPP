@@ -64,13 +64,13 @@ namespace fUML::Semantics::StructuredClassifiers
 			static const unsigned long DISPATCHSTRATEGY_OPERATION_RETRIEVEMETHOD_ELEMENT_OPERATION = 2607212722;
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getDispatchStrategy_Class() const = 0;
+			virtual const std::shared_ptr<ecore::EClass>& getDispatchStrategy_Class() const = 0;
 			
 			
 			
-			virtual std::shared_ptr<ecore::EOperation> getDispatchStrategy_Operation_dispatch_Element_Operation() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getDispatchStrategy_Operation_getName() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getDispatchStrategy_Operation_retrieveMethod_Element_Operation() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getDispatchStrategy_Operation_dispatch_Element_Operation() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getDispatchStrategy_Operation_getName() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getDispatchStrategy_Operation_retrieveMethod_Element_Operation() const = 0;
 			
 			// End Class DispatchStrategy
 
@@ -86,12 +86,12 @@ namespace fUML::Semantics::StructuredClassifiers
 			static const unsigned long REDEFINITIONBASEDDISPATCHSTRATEGY_OPERATION_RETRIEVEMETHOD_ELEMENT_OPERATION = 4193381461;
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getRedefinitionBasedDispatchStrategy_Class() const = 0;
+			virtual const std::shared_ptr<ecore::EClass>& getRedefinitionBasedDispatchStrategy_Class() const = 0;
 			
 			
 			
-			virtual std::shared_ptr<ecore::EOperation> getRedefinitionBasedDispatchStrategy_Operation_operationsMatch_Operation_Operation() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getRedefinitionBasedDispatchStrategy_Operation_retrieveMethod_Element_Operation() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getRedefinitionBasedDispatchStrategy_Operation_operationsMatch_Operation_Operation() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getRedefinitionBasedDispatchStrategy_Operation_retrieveMethod_Element_Operation() const = 0;
 			
 			// End Class RedefinitionBasedDispatchStrategy
 

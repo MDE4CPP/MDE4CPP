@@ -29,11 +29,11 @@ namespace FoundationalModelLibrary::Common
 			virtual ~CommonPackageImpl();
 
 			//getter for the ownedMember
-			virtual std::shared_ptr<uml::Class> get_FoundationalModelLibrary_Common_Listener();  
-			virtual std::shared_ptr<uml::DataType> get_FoundationalModelLibrary_Common_Status();  
-			virtual std::shared_ptr<uml::Property> get_FoundationalModelLibrary_Common_Status_code();  
-			virtual std::shared_ptr<uml::Property> get_FoundationalModelLibrary_Common_Status_context();  
-			virtual std::shared_ptr<uml::Property> get_FoundationalModelLibrary_Common_Status_description();  
+			virtual const std::shared_ptr<uml::Class>& get_FoundationalModelLibrary_Common_Listener();  
+			virtual const std::shared_ptr<uml::DataType>& get_FoundationalModelLibrary_Common_Status();  
+			virtual const std::shared_ptr<uml::Property>& get_FoundationalModelLibrary_Common_Status_code();  
+			virtual const std::shared_ptr<uml::Property>& get_FoundationalModelLibrary_Common_Status_context();  
+			virtual const std::shared_ptr<uml::Property>& get_FoundationalModelLibrary_Common_Status_description();  
 			
 			
 

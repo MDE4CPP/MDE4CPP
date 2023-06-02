@@ -442,103 +442,103 @@ void BooleanFunctionsPackageImpl::initializePackageValueSpecifications()
 	foundationalModelLibrary_PrimitiveBehaviors_BooleanFunctions_ToBoolean_result_lowerValue_LiteralInteger_FoundationalModelLibrary_PrimitiveBehaviors_BooleanFunctions_ToBoolean_result->setValue(0);
 }
 
-std::shared_ptr<uml::FunctionBehavior> BooleanFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_BooleanFunctions_And()
+const std::shared_ptr<uml::FunctionBehavior>& BooleanFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_BooleanFunctions_And()
 {
 	return foundationalModelLibrary_PrimitiveBehaviors_BooleanFunctions_And;
 }
-std::shared_ptr<uml::Parameter> BooleanFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_BooleanFunctions_And_result()
+const std::shared_ptr<uml::Parameter>& BooleanFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_BooleanFunctions_And_result()
 {
 	return foundationalModelLibrary_PrimitiveBehaviors_BooleanFunctions_And_result;
 }
-std::shared_ptr<uml::Parameter> BooleanFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_BooleanFunctions_And_x()
+const std::shared_ptr<uml::Parameter>& BooleanFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_BooleanFunctions_And_x()
 {
 	return foundationalModelLibrary_PrimitiveBehaviors_BooleanFunctions_And_x;
 }
-std::shared_ptr<uml::Parameter> BooleanFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_BooleanFunctions_And_y()
+const std::shared_ptr<uml::Parameter>& BooleanFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_BooleanFunctions_And_y()
 {
 	return foundationalModelLibrary_PrimitiveBehaviors_BooleanFunctions_And_y;
 }
-std::shared_ptr<uml::FunctionBehavior> BooleanFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_BooleanFunctions_Implies()
+const std::shared_ptr<uml::FunctionBehavior>& BooleanFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_BooleanFunctions_Implies()
 {
 	return foundationalModelLibrary_PrimitiveBehaviors_BooleanFunctions_Implies;
 }
-std::shared_ptr<uml::Parameter> BooleanFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_BooleanFunctions_Implies_result()
+const std::shared_ptr<uml::Parameter>& BooleanFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_BooleanFunctions_Implies_result()
 {
 	return foundationalModelLibrary_PrimitiveBehaviors_BooleanFunctions_Implies_result;
 }
-std::shared_ptr<uml::Parameter> BooleanFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_BooleanFunctions_Implies_x()
+const std::shared_ptr<uml::Parameter>& BooleanFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_BooleanFunctions_Implies_x()
 {
 	return foundationalModelLibrary_PrimitiveBehaviors_BooleanFunctions_Implies_x;
 }
-std::shared_ptr<uml::Parameter> BooleanFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_BooleanFunctions_Implies_y()
+const std::shared_ptr<uml::Parameter>& BooleanFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_BooleanFunctions_Implies_y()
 {
 	return foundationalModelLibrary_PrimitiveBehaviors_BooleanFunctions_Implies_y;
 }
-std::shared_ptr<uml::FunctionBehavior> BooleanFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_BooleanFunctions_Not()
+const std::shared_ptr<uml::FunctionBehavior>& BooleanFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_BooleanFunctions_Not()
 {
 	return foundationalModelLibrary_PrimitiveBehaviors_BooleanFunctions_Not;
 }
-std::shared_ptr<uml::Parameter> BooleanFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_BooleanFunctions_Not_result()
+const std::shared_ptr<uml::Parameter>& BooleanFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_BooleanFunctions_Not_result()
 {
 	return foundationalModelLibrary_PrimitiveBehaviors_BooleanFunctions_Not_result;
 }
-std::shared_ptr<uml::Parameter> BooleanFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_BooleanFunctions_Not_x()
+const std::shared_ptr<uml::Parameter>& BooleanFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_BooleanFunctions_Not_x()
 {
 	return foundationalModelLibrary_PrimitiveBehaviors_BooleanFunctions_Not_x;
 }
-std::shared_ptr<uml::FunctionBehavior> BooleanFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_BooleanFunctions_Or()
+const std::shared_ptr<uml::FunctionBehavior>& BooleanFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_BooleanFunctions_Or()
 {
 	return foundationalModelLibrary_PrimitiveBehaviors_BooleanFunctions_Or;
 }
-std::shared_ptr<uml::Parameter> BooleanFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_BooleanFunctions_Or_result()
+const std::shared_ptr<uml::Parameter>& BooleanFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_BooleanFunctions_Or_result()
 {
 	return foundationalModelLibrary_PrimitiveBehaviors_BooleanFunctions_Or_result;
 }
-std::shared_ptr<uml::Parameter> BooleanFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_BooleanFunctions_Or_x()
+const std::shared_ptr<uml::Parameter>& BooleanFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_BooleanFunctions_Or_x()
 {
 	return foundationalModelLibrary_PrimitiveBehaviors_BooleanFunctions_Or_x;
 }
-std::shared_ptr<uml::Parameter> BooleanFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_BooleanFunctions_Or_y()
+const std::shared_ptr<uml::Parameter>& BooleanFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_BooleanFunctions_Or_y()
 {
 	return foundationalModelLibrary_PrimitiveBehaviors_BooleanFunctions_Or_y;
 }
-std::shared_ptr<uml::FunctionBehavior> BooleanFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_BooleanFunctions_ToBoolean()
+const std::shared_ptr<uml::FunctionBehavior>& BooleanFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_BooleanFunctions_ToBoolean()
 {
 	return foundationalModelLibrary_PrimitiveBehaviors_BooleanFunctions_ToBoolean;
 }
-std::shared_ptr<uml::Parameter> BooleanFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_BooleanFunctions_ToBoolean_result()
+const std::shared_ptr<uml::Parameter>& BooleanFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_BooleanFunctions_ToBoolean_result()
 {
 	return foundationalModelLibrary_PrimitiveBehaviors_BooleanFunctions_ToBoolean_result;
 }
-std::shared_ptr<uml::Parameter> BooleanFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_BooleanFunctions_ToBoolean_x()
+const std::shared_ptr<uml::Parameter>& BooleanFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_BooleanFunctions_ToBoolean_x()
 {
 	return foundationalModelLibrary_PrimitiveBehaviors_BooleanFunctions_ToBoolean_x;
 }
-std::shared_ptr<uml::FunctionBehavior> BooleanFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_BooleanFunctions_ToString()
+const std::shared_ptr<uml::FunctionBehavior>& BooleanFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_BooleanFunctions_ToString()
 {
 	return foundationalModelLibrary_PrimitiveBehaviors_BooleanFunctions_ToString;
 }
-std::shared_ptr<uml::Parameter> BooleanFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_BooleanFunctions_ToString_result()
+const std::shared_ptr<uml::Parameter>& BooleanFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_BooleanFunctions_ToString_result()
 {
 	return foundationalModelLibrary_PrimitiveBehaviors_BooleanFunctions_ToString_result;
 }
-std::shared_ptr<uml::Parameter> BooleanFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_BooleanFunctions_ToString_x()
+const std::shared_ptr<uml::Parameter>& BooleanFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_BooleanFunctions_ToString_x()
 {
 	return foundationalModelLibrary_PrimitiveBehaviors_BooleanFunctions_ToString_x;
 }
-std::shared_ptr<uml::FunctionBehavior> BooleanFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_BooleanFunctions_Xor()
+const std::shared_ptr<uml::FunctionBehavior>& BooleanFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_BooleanFunctions_Xor()
 {
 	return foundationalModelLibrary_PrimitiveBehaviors_BooleanFunctions_Xor;
 }
-std::shared_ptr<uml::Parameter> BooleanFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_BooleanFunctions_Xor_result()
+const std::shared_ptr<uml::Parameter>& BooleanFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_BooleanFunctions_Xor_result()
 {
 	return foundationalModelLibrary_PrimitiveBehaviors_BooleanFunctions_Xor_result;
 }
-std::shared_ptr<uml::Parameter> BooleanFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_BooleanFunctions_Xor_x()
+const std::shared_ptr<uml::Parameter>& BooleanFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_BooleanFunctions_Xor_x()
 {
 	return foundationalModelLibrary_PrimitiveBehaviors_BooleanFunctions_Xor_x;
 }
-std::shared_ptr<uml::Parameter> BooleanFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_BooleanFunctions_Xor_y()
+const std::shared_ptr<uml::Parameter>& BooleanFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_BooleanFunctions_Xor_y()
 {
 	return foundationalModelLibrary_PrimitiveBehaviors_BooleanFunctions_Xor_y;
 }

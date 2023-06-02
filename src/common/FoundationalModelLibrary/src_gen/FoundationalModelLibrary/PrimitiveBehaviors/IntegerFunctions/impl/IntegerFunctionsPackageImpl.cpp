@@ -790,271 +790,271 @@ void IntegerFunctionsPackageImpl::initializePackageValueSpecifications()
 	foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_divide_result_lowerValue_LiteralInteger_FoundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_divide_result->setValue(0);
 }
 
-std::shared_ptr<uml::FunctionBehavior> IntegerFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_Abs()
+const std::shared_ptr<uml::FunctionBehavior>& IntegerFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_Abs()
 {
 	return foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_Abs;
 }
-std::shared_ptr<uml::Parameter> IntegerFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_Abs_result()
+const std::shared_ptr<uml::Parameter>& IntegerFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_Abs_result()
 {
 	return foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_Abs_result;
 }
-std::shared_ptr<uml::Parameter> IntegerFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_Abs_x()
+const std::shared_ptr<uml::Parameter>& IntegerFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_Abs_x()
 {
 	return foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_Abs_x;
 }
-std::shared_ptr<uml::FunctionBehavior> IntegerFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_Div()
+const std::shared_ptr<uml::FunctionBehavior>& IntegerFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_Div()
 {
 	return foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_Div;
 }
-std::shared_ptr<uml::Parameter> IntegerFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_Div_result()
+const std::shared_ptr<uml::Parameter>& IntegerFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_Div_result()
 {
 	return foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_Div_result;
 }
-std::shared_ptr<uml::Parameter> IntegerFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_Div_x()
+const std::shared_ptr<uml::Parameter>& IntegerFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_Div_x()
 {
 	return foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_Div_x;
 }
-std::shared_ptr<uml::Parameter> IntegerFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_Div_y()
+const std::shared_ptr<uml::Parameter>& IntegerFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_Div_y()
 {
 	return foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_Div_y;
 }
-std::shared_ptr<uml::FunctionBehavior> IntegerFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_Max()
+const std::shared_ptr<uml::FunctionBehavior>& IntegerFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_Max()
 {
 	return foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_Max;
 }
-std::shared_ptr<uml::Parameter> IntegerFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_Max_result()
+const std::shared_ptr<uml::Parameter>& IntegerFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_Max_result()
 {
 	return foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_Max_result;
 }
-std::shared_ptr<uml::Parameter> IntegerFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_Max_x()
+const std::shared_ptr<uml::Parameter>& IntegerFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_Max_x()
 {
 	return foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_Max_x;
 }
-std::shared_ptr<uml::Parameter> IntegerFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_Max_y()
+const std::shared_ptr<uml::Parameter>& IntegerFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_Max_y()
 {
 	return foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_Max_y;
 }
-std::shared_ptr<uml::FunctionBehavior> IntegerFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_Min()
+const std::shared_ptr<uml::FunctionBehavior>& IntegerFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_Min()
 {
 	return foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_Min;
 }
-std::shared_ptr<uml::Parameter> IntegerFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_Min_result()
+const std::shared_ptr<uml::Parameter>& IntegerFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_Min_result()
 {
 	return foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_Min_result;
 }
-std::shared_ptr<uml::Parameter> IntegerFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_Min_x()
+const std::shared_ptr<uml::Parameter>& IntegerFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_Min_x()
 {
 	return foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_Min_x;
 }
-std::shared_ptr<uml::Parameter> IntegerFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_Min_y()
+const std::shared_ptr<uml::Parameter>& IntegerFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_Min_y()
 {
 	return foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_Min_y;
 }
-std::shared_ptr<uml::FunctionBehavior> IntegerFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_Mod()
+const std::shared_ptr<uml::FunctionBehavior>& IntegerFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_Mod()
 {
 	return foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_Mod;
 }
-std::shared_ptr<uml::Parameter> IntegerFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_Mod_result()
+const std::shared_ptr<uml::Parameter>& IntegerFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_Mod_result()
 {
 	return foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_Mod_result;
 }
-std::shared_ptr<uml::Parameter> IntegerFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_Mod_x()
+const std::shared_ptr<uml::Parameter>& IntegerFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_Mod_x()
 {
 	return foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_Mod_x;
 }
-std::shared_ptr<uml::Parameter> IntegerFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_Mod_y()
+const std::shared_ptr<uml::Parameter>& IntegerFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_Mod_y()
 {
 	return foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_Mod_y;
 }
-std::shared_ptr<uml::FunctionBehavior> IntegerFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_Neg()
+const std::shared_ptr<uml::FunctionBehavior>& IntegerFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_Neg()
 {
 	return foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_Neg;
 }
-std::shared_ptr<uml::Parameter> IntegerFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_Neg_result()
+const std::shared_ptr<uml::Parameter>& IntegerFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_Neg_result()
 {
 	return foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_Neg_result;
 }
-std::shared_ptr<uml::Parameter> IntegerFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_Neg_x()
+const std::shared_ptr<uml::Parameter>& IntegerFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_Neg_x()
 {
 	return foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_Neg_x;
 }
-std::shared_ptr<uml::FunctionBehavior> IntegerFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_ToInteger()
+const std::shared_ptr<uml::FunctionBehavior>& IntegerFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_ToInteger()
 {
 	return foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_ToInteger;
 }
-std::shared_ptr<uml::Parameter> IntegerFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_ToInteger_result()
+const std::shared_ptr<uml::Parameter>& IntegerFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_ToInteger_result()
 {
 	return foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_ToInteger_result;
 }
-std::shared_ptr<uml::Parameter> IntegerFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_ToInteger_x()
+const std::shared_ptr<uml::Parameter>& IntegerFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_ToInteger_x()
 {
 	return foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_ToInteger_x;
 }
-std::shared_ptr<uml::FunctionBehavior> IntegerFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_ToString()
+const std::shared_ptr<uml::FunctionBehavior>& IntegerFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_ToString()
 {
 	return foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_ToString;
 }
-std::shared_ptr<uml::Parameter> IntegerFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_ToString_result()
+const std::shared_ptr<uml::Parameter>& IntegerFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_ToString_result()
 {
 	return foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_ToString_result;
 }
-std::shared_ptr<uml::Parameter> IntegerFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_ToString_x()
+const std::shared_ptr<uml::Parameter>& IntegerFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_ToString_x()
 {
 	return foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_ToString_x;
 }
-std::shared_ptr<uml::FunctionBehavior> IntegerFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_ToUnlimitedNatural()
+const std::shared_ptr<uml::FunctionBehavior>& IntegerFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_ToUnlimitedNatural()
 {
 	return foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_ToUnlimitedNatural;
 }
-std::shared_ptr<uml::Parameter> IntegerFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_ToUnlimitedNatural_result()
+const std::shared_ptr<uml::Parameter>& IntegerFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_ToUnlimitedNatural_result()
 {
 	return foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_ToUnlimitedNatural_result;
 }
-std::shared_ptr<uml::Parameter> IntegerFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_ToUnlimitedNatural_x()
+const std::shared_ptr<uml::Parameter>& IntegerFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_ToUnlimitedNatural_x()
 {
 	return foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_ToUnlimitedNatural_x;
 }
-std::shared_ptr<uml::FunctionBehavior> IntegerFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_divide()
+const std::shared_ptr<uml::FunctionBehavior>& IntegerFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_divide()
 {
 	return foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_divide;
 }
-std::shared_ptr<uml::Parameter> IntegerFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_divide_result()
+const std::shared_ptr<uml::Parameter>& IntegerFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_divide_result()
 {
 	return foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_divide_result;
 }
-std::shared_ptr<uml::Parameter> IntegerFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_divide_x()
+const std::shared_ptr<uml::Parameter>& IntegerFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_divide_x()
 {
 	return foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_divide_x;
 }
-std::shared_ptr<uml::Parameter> IntegerFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_divide_y()
+const std::shared_ptr<uml::Parameter>& IntegerFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_divide_y()
 {
 	return foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_divide_y;
 }
-std::shared_ptr<uml::FunctionBehavior> IntegerFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_equals()
+const std::shared_ptr<uml::FunctionBehavior>& IntegerFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_equals()
 {
 	return foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_equals;
 }
-std::shared_ptr<uml::Parameter> IntegerFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_equals_result()
+const std::shared_ptr<uml::Parameter>& IntegerFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_equals_result()
 {
 	return foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_equals_result;
 }
-std::shared_ptr<uml::Parameter> IntegerFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_equals_x()
+const std::shared_ptr<uml::Parameter>& IntegerFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_equals_x()
 {
 	return foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_equals_x;
 }
-std::shared_ptr<uml::Parameter> IntegerFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_equals_y()
+const std::shared_ptr<uml::Parameter>& IntegerFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_equals_y()
 {
 	return foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_equals_y;
 }
-std::shared_ptr<uml::FunctionBehavior> IntegerFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_greaterOrEqual()
+const std::shared_ptr<uml::FunctionBehavior>& IntegerFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_greaterOrEqual()
 {
 	return foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_greaterOrEqual;
 }
-std::shared_ptr<uml::Parameter> IntegerFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_greaterOrEqual_result()
+const std::shared_ptr<uml::Parameter>& IntegerFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_greaterOrEqual_result()
 {
 	return foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_greaterOrEqual_result;
 }
-std::shared_ptr<uml::Parameter> IntegerFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_greaterOrEqual_x()
+const std::shared_ptr<uml::Parameter>& IntegerFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_greaterOrEqual_x()
 {
 	return foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_greaterOrEqual_x;
 }
-std::shared_ptr<uml::Parameter> IntegerFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_greaterOrEqual_y()
+const std::shared_ptr<uml::Parameter>& IntegerFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_greaterOrEqual_y()
 {
 	return foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_greaterOrEqual_y;
 }
-std::shared_ptr<uml::FunctionBehavior> IntegerFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_greaterThan()
+const std::shared_ptr<uml::FunctionBehavior>& IntegerFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_greaterThan()
 {
 	return foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_greaterThan;
 }
-std::shared_ptr<uml::Parameter> IntegerFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_greaterThan_result()
+const std::shared_ptr<uml::Parameter>& IntegerFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_greaterThan_result()
 {
 	return foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_greaterThan_result;
 }
-std::shared_ptr<uml::Parameter> IntegerFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_greaterThan_x()
+const std::shared_ptr<uml::Parameter>& IntegerFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_greaterThan_x()
 {
 	return foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_greaterThan_x;
 }
-std::shared_ptr<uml::Parameter> IntegerFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_greaterThan_y()
+const std::shared_ptr<uml::Parameter>& IntegerFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_greaterThan_y()
 {
 	return foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_greaterThan_y;
 }
-std::shared_ptr<uml::FunctionBehavior> IntegerFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_lessOrEqual()
+const std::shared_ptr<uml::FunctionBehavior>& IntegerFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_lessOrEqual()
 {
 	return foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_lessOrEqual;
 }
-std::shared_ptr<uml::Parameter> IntegerFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_lessOrEqual_result()
+const std::shared_ptr<uml::Parameter>& IntegerFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_lessOrEqual_result()
 {
 	return foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_lessOrEqual_result;
 }
-std::shared_ptr<uml::Parameter> IntegerFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_lessOrEqual_x()
+const std::shared_ptr<uml::Parameter>& IntegerFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_lessOrEqual_x()
 {
 	return foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_lessOrEqual_x;
 }
-std::shared_ptr<uml::Parameter> IntegerFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_lessOrEqual_y()
+const std::shared_ptr<uml::Parameter>& IntegerFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_lessOrEqual_y()
 {
 	return foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_lessOrEqual_y;
 }
-std::shared_ptr<uml::FunctionBehavior> IntegerFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_lessThan()
+const std::shared_ptr<uml::FunctionBehavior>& IntegerFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_lessThan()
 {
 	return foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_lessThan;
 }
-std::shared_ptr<uml::Parameter> IntegerFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_lessThan_result()
+const std::shared_ptr<uml::Parameter>& IntegerFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_lessThan_result()
 {
 	return foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_lessThan_result;
 }
-std::shared_ptr<uml::Parameter> IntegerFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_lessThan_x()
+const std::shared_ptr<uml::Parameter>& IntegerFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_lessThan_x()
 {
 	return foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_lessThan_x;
 }
-std::shared_ptr<uml::Parameter> IntegerFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_lessThan_y()
+const std::shared_ptr<uml::Parameter>& IntegerFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_lessThan_y()
 {
 	return foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_lessThan_y;
 }
-std::shared_ptr<uml::FunctionBehavior> IntegerFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_minus()
+const std::shared_ptr<uml::FunctionBehavior>& IntegerFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_minus()
 {
 	return foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_minus;
 }
-std::shared_ptr<uml::Parameter> IntegerFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_minus_result()
+const std::shared_ptr<uml::Parameter>& IntegerFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_minus_result()
 {
 	return foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_minus_result;
 }
-std::shared_ptr<uml::Parameter> IntegerFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_minus_x()
+const std::shared_ptr<uml::Parameter>& IntegerFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_minus_x()
 {
 	return foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_minus_x;
 }
-std::shared_ptr<uml::Parameter> IntegerFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_minus_y()
+const std::shared_ptr<uml::Parameter>& IntegerFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_minus_y()
 {
 	return foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_minus_y;
 }
-std::shared_ptr<uml::FunctionBehavior> IntegerFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_plus()
+const std::shared_ptr<uml::FunctionBehavior>& IntegerFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_plus()
 {
 	return foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_plus;
 }
-std::shared_ptr<uml::Parameter> IntegerFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_plus_result()
+const std::shared_ptr<uml::Parameter>& IntegerFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_plus_result()
 {
 	return foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_plus_result;
 }
-std::shared_ptr<uml::Parameter> IntegerFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_plus_x()
+const std::shared_ptr<uml::Parameter>& IntegerFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_plus_x()
 {
 	return foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_plus_x;
 }
-std::shared_ptr<uml::Parameter> IntegerFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_plus_y()
+const std::shared_ptr<uml::Parameter>& IntegerFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_plus_y()
 {
 	return foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_plus_y;
 }
-std::shared_ptr<uml::FunctionBehavior> IntegerFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_times()
+const std::shared_ptr<uml::FunctionBehavior>& IntegerFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_times()
 {
 	return foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_times;
 }
-std::shared_ptr<uml::Parameter> IntegerFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_times_result()
+const std::shared_ptr<uml::Parameter>& IntegerFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_times_result()
 {
 	return foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_times_result;
 }
-std::shared_ptr<uml::Parameter> IntegerFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_times_x()
+const std::shared_ptr<uml::Parameter>& IntegerFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_times_x()
 {
 	return foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_times_x;
 }
-std::shared_ptr<uml::Parameter> IntegerFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_times_y()
+const std::shared_ptr<uml::Parameter>& IntegerFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_times_y()
 {
 	return foundationalModelLibrary_PrimitiveBehaviors_IntegerFunctions_times_y;
 }

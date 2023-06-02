@@ -75,23 +75,23 @@ namespace fUML::Semantics::CommonBehavior
 			static const unsigned long EXECUTION_OPERATION_TERMINATE = 1246638906;
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getExecution_Class() const = 0;
+			virtual const std::shared_ptr<ecore::EClass>& getExecution_Class() const = 0;
 			
 			
-			virtual std::shared_ptr<ecore::EReference> getExecution_Attribute_behavior() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getExecution_Attribute_context() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getExecution_Attribute_locus() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getExecution_Attribute_parameterValues() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getExecution_Attribute_types() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getExecution_Attribute_behavior() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getExecution_Attribute_context() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getExecution_Attribute_locus() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getExecution_Attribute_parameterValues() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getExecution_Attribute_types() const = 0;
 			
-			virtual std::shared_ptr<ecore::EOperation> getExecution_Operation__copy() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getExecution_Operation_destroy() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getExecution_Operation_execute() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getExecution_Operation_getOutputParameterValues() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getExecution_Operation_getParameterValue_Parameter() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getExecution_Operation_new_() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getExecution_Operation_setParameterValue_ParameterValue() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getExecution_Operation_terminate() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getExecution_Operation__copy() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getExecution_Operation_destroy() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getExecution_Operation_execute() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getExecution_Operation_getOutputParameterValues() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getExecution_Operation_getParameterValue_Parameter() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getExecution_Operation_new_() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getExecution_Operation_setParameterValue_ParameterValue() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getExecution_Operation_terminate() const = 0;
 			
 			// End Class Execution
 
@@ -108,13 +108,13 @@ namespace fUML::Semantics::CommonBehavior
 			static const unsigned long PARAMETERVALUE_OPERATION__COPY = 2742640749;
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getParameterValue_Class() const = 0;
+			virtual const std::shared_ptr<ecore::EClass>& getParameterValue_Class() const = 0;
 			
-			virtual std::shared_ptr<ecore::EAttribute> getParameterValue_Attribute_values() const = 0;
+			virtual const std::shared_ptr<ecore::EAttribute>& getParameterValue_Attribute_values() const = 0;
 			
-			virtual std::shared_ptr<ecore::EReference> getParameterValue_Attribute_parameter() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getParameterValue_Attribute_parameter() const = 0;
 			
-			virtual std::shared_ptr<ecore::EOperation> getParameterValue_Operation__copy() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getParameterValue_Operation__copy() const = 0;
 			
 			// End Class ParameterValue
 

@@ -75,22 +75,22 @@ void StructuredClassifiersPackageImpl::init(std::shared_ptr<ecore::EPackage> pac
 
 
 // Begin Class DispatchStrategy
-std::shared_ptr<ecore::EClass> fUML::Semantics::StructuredClassifiers::StructuredClassifiersPackageImpl::getDispatchStrategy_Class() const
+const std::shared_ptr<ecore::EClass>& fUML::Semantics::StructuredClassifiers::StructuredClassifiersPackageImpl::getDispatchStrategy_Class() const
 {
 	return m_dispatchStrategy_Class;
 }
 
 
 
-std::shared_ptr<ecore::EOperation> fUML::Semantics::StructuredClassifiers::StructuredClassifiersPackageImpl::getDispatchStrategy_Operation_dispatch_Element_Operation() const
+const std::shared_ptr<ecore::EOperation>& fUML::Semantics::StructuredClassifiers::StructuredClassifiersPackageImpl::getDispatchStrategy_Operation_dispatch_Element_Operation() const
 {
 	return m_dispatchStrategy_Operation_dispatch_Element_Operation;
 }
-std::shared_ptr<ecore::EOperation> fUML::Semantics::StructuredClassifiers::StructuredClassifiersPackageImpl::getDispatchStrategy_Operation_getName() const
+const std::shared_ptr<ecore::EOperation>& fUML::Semantics::StructuredClassifiers::StructuredClassifiersPackageImpl::getDispatchStrategy_Operation_getName() const
 {
 	return m_dispatchStrategy_Operation_getName;
 }
-std::shared_ptr<ecore::EOperation> fUML::Semantics::StructuredClassifiers::StructuredClassifiersPackageImpl::getDispatchStrategy_Operation_retrieveMethod_Element_Operation() const
+const std::shared_ptr<ecore::EOperation>& fUML::Semantics::StructuredClassifiers::StructuredClassifiersPackageImpl::getDispatchStrategy_Operation_retrieveMethod_Element_Operation() const
 {
 	return m_dispatchStrategy_Operation_retrieveMethod_Element_Operation;
 }
@@ -98,18 +98,18 @@ std::shared_ptr<ecore::EOperation> fUML::Semantics::StructuredClassifiers::Struc
 // End Class DispatchStrategy
 
 // Begin Class RedefinitionBasedDispatchStrategy
-std::shared_ptr<ecore::EClass> fUML::Semantics::StructuredClassifiers::StructuredClassifiersPackageImpl::getRedefinitionBasedDispatchStrategy_Class() const
+const std::shared_ptr<ecore::EClass>& fUML::Semantics::StructuredClassifiers::StructuredClassifiersPackageImpl::getRedefinitionBasedDispatchStrategy_Class() const
 {
 	return m_redefinitionBasedDispatchStrategy_Class;
 }
 
 
 
-std::shared_ptr<ecore::EOperation> fUML::Semantics::StructuredClassifiers::StructuredClassifiersPackageImpl::getRedefinitionBasedDispatchStrategy_Operation_operationsMatch_Operation_Operation() const
+const std::shared_ptr<ecore::EOperation>& fUML::Semantics::StructuredClassifiers::StructuredClassifiersPackageImpl::getRedefinitionBasedDispatchStrategy_Operation_operationsMatch_Operation_Operation() const
 {
 	return m_redefinitionBasedDispatchStrategy_Operation_operationsMatch_Operation_Operation;
 }
-std::shared_ptr<ecore::EOperation> fUML::Semantics::StructuredClassifiers::StructuredClassifiersPackageImpl::getRedefinitionBasedDispatchStrategy_Operation_retrieveMethod_Element_Operation() const
+const std::shared_ptr<ecore::EOperation>& fUML::Semantics::StructuredClassifiers::StructuredClassifiersPackageImpl::getRedefinitionBasedDispatchStrategy_Operation_retrieveMethod_Element_Operation() const
 {
 	return m_redefinitionBasedDispatchStrategy_Operation_retrieveMethod_Element_Operation;
 }

@@ -758,259 +758,259 @@ void RealFunctionsPackageImpl::initializePackageValueSpecifications()
 	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_divide_result_lowerValue_LiteralInteger_FoundationalModelLibrary_PrimitiveBehaviors_RealFunctions_divide_result->setValue(0);
 }
 
-std::shared_ptr<uml::FunctionBehavior> RealFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_RealFunctions_Abs()
+const std::shared_ptr<uml::FunctionBehavior>& RealFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_RealFunctions_Abs()
 {
 	return foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_Abs;
 }
-std::shared_ptr<uml::Parameter> RealFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_RealFunctions_Abs_result()
+const std::shared_ptr<uml::Parameter>& RealFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_RealFunctions_Abs_result()
 {
 	return foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_Abs_result;
 }
-std::shared_ptr<uml::Parameter> RealFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_RealFunctions_Abs_x()
+const std::shared_ptr<uml::Parameter>& RealFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_RealFunctions_Abs_x()
 {
 	return foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_Abs_x;
 }
-std::shared_ptr<uml::FunctionBehavior> RealFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_RealFunctions_Floor()
+const std::shared_ptr<uml::FunctionBehavior>& RealFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_RealFunctions_Floor()
 {
 	return foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_Floor;
 }
-std::shared_ptr<uml::Parameter> RealFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_RealFunctions_Floor_result()
+const std::shared_ptr<uml::Parameter>& RealFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_RealFunctions_Floor_result()
 {
 	return foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_Floor_result;
 }
-std::shared_ptr<uml::Parameter> RealFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_RealFunctions_Floor_x()
+const std::shared_ptr<uml::Parameter>& RealFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_RealFunctions_Floor_x()
 {
 	return foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_Floor_x;
 }
-std::shared_ptr<uml::FunctionBehavior> RealFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_RealFunctions_Inv()
+const std::shared_ptr<uml::FunctionBehavior>& RealFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_RealFunctions_Inv()
 {
 	return foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_Inv;
 }
-std::shared_ptr<uml::Parameter> RealFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_RealFunctions_Inv_result()
+const std::shared_ptr<uml::Parameter>& RealFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_RealFunctions_Inv_result()
 {
 	return foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_Inv_result;
 }
-std::shared_ptr<uml::Parameter> RealFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_RealFunctions_Inv_x()
+const std::shared_ptr<uml::Parameter>& RealFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_RealFunctions_Inv_x()
 {
 	return foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_Inv_x;
 }
-std::shared_ptr<uml::FunctionBehavior> RealFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_RealFunctions_Max()
+const std::shared_ptr<uml::FunctionBehavior>& RealFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_RealFunctions_Max()
 {
 	return foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_Max;
 }
-std::shared_ptr<uml::Parameter> RealFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_RealFunctions_Max_result()
+const std::shared_ptr<uml::Parameter>& RealFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_RealFunctions_Max_result()
 {
 	return foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_Max_result;
 }
-std::shared_ptr<uml::Parameter> RealFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_RealFunctions_Max_x()
+const std::shared_ptr<uml::Parameter>& RealFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_RealFunctions_Max_x()
 {
 	return foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_Max_x;
 }
-std::shared_ptr<uml::Parameter> RealFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_RealFunctions_Max_y()
+const std::shared_ptr<uml::Parameter>& RealFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_RealFunctions_Max_y()
 {
 	return foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_Max_y;
 }
-std::shared_ptr<uml::FunctionBehavior> RealFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_RealFunctions_Min()
+const std::shared_ptr<uml::FunctionBehavior>& RealFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_RealFunctions_Min()
 {
 	return foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_Min;
 }
-std::shared_ptr<uml::Parameter> RealFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_RealFunctions_Min_result()
+const std::shared_ptr<uml::Parameter>& RealFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_RealFunctions_Min_result()
 {
 	return foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_Min_result;
 }
-std::shared_ptr<uml::Parameter> RealFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_RealFunctions_Min_x()
+const std::shared_ptr<uml::Parameter>& RealFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_RealFunctions_Min_x()
 {
 	return foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_Min_x;
 }
-std::shared_ptr<uml::Parameter> RealFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_RealFunctions_Min_y()
+const std::shared_ptr<uml::Parameter>& RealFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_RealFunctions_Min_y()
 {
 	return foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_Min_y;
 }
-std::shared_ptr<uml::FunctionBehavior> RealFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_RealFunctions_Neg()
+const std::shared_ptr<uml::FunctionBehavior>& RealFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_RealFunctions_Neg()
 {
 	return foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_Neg;
 }
-std::shared_ptr<uml::Parameter> RealFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_RealFunctions_Neg_result()
+const std::shared_ptr<uml::Parameter>& RealFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_RealFunctions_Neg_result()
 {
 	return foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_Neg_result;
 }
-std::shared_ptr<uml::Parameter> RealFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_RealFunctions_Neg_x()
+const std::shared_ptr<uml::Parameter>& RealFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_RealFunctions_Neg_x()
 {
 	return foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_Neg_x;
 }
-std::shared_ptr<uml::FunctionBehavior> RealFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_RealFunctions_Round()
+const std::shared_ptr<uml::FunctionBehavior>& RealFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_RealFunctions_Round()
 {
 	return foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_Round;
 }
-std::shared_ptr<uml::Parameter> RealFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_RealFunctions_Round_result()
+const std::shared_ptr<uml::Parameter>& RealFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_RealFunctions_Round_result()
 {
 	return foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_Round_result;
 }
-std::shared_ptr<uml::Parameter> RealFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_RealFunctions_Round_x()
+const std::shared_ptr<uml::Parameter>& RealFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_RealFunctions_Round_x()
 {
 	return foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_Round_x;
 }
-std::shared_ptr<uml::FunctionBehavior> RealFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_RealFunctions_ToInteger()
+const std::shared_ptr<uml::FunctionBehavior>& RealFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_RealFunctions_ToInteger()
 {
 	return foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_ToInteger;
 }
-std::shared_ptr<uml::Parameter> RealFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_RealFunctions_ToInteger_result()
+const std::shared_ptr<uml::Parameter>& RealFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_RealFunctions_ToInteger_result()
 {
 	return foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_ToInteger_result;
 }
-std::shared_ptr<uml::Parameter> RealFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_RealFunctions_ToInteger_x()
+const std::shared_ptr<uml::Parameter>& RealFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_RealFunctions_ToInteger_x()
 {
 	return foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_ToInteger_x;
 }
-std::shared_ptr<uml::FunctionBehavior> RealFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_RealFunctions_ToReal()
+const std::shared_ptr<uml::FunctionBehavior>& RealFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_RealFunctions_ToReal()
 {
 	return foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_ToReal;
 }
-std::shared_ptr<uml::Parameter> RealFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_RealFunctions_ToReal_result()
+const std::shared_ptr<uml::Parameter>& RealFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_RealFunctions_ToReal_result()
 {
 	return foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_ToReal_result;
 }
-std::shared_ptr<uml::Parameter> RealFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_RealFunctions_ToReal_x()
+const std::shared_ptr<uml::Parameter>& RealFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_RealFunctions_ToReal_x()
 {
 	return foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_ToReal_x;
 }
-std::shared_ptr<uml::FunctionBehavior> RealFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_RealFunctions_ToString()
+const std::shared_ptr<uml::FunctionBehavior>& RealFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_RealFunctions_ToString()
 {
 	return foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_ToString;
 }
-std::shared_ptr<uml::Parameter> RealFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_RealFunctions_ToString_result()
+const std::shared_ptr<uml::Parameter>& RealFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_RealFunctions_ToString_result()
 {
 	return foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_ToString_result;
 }
-std::shared_ptr<uml::Parameter> RealFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_RealFunctions_ToString_x()
+const std::shared_ptr<uml::Parameter>& RealFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_RealFunctions_ToString_x()
 {
 	return foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_ToString_x;
 }
-std::shared_ptr<uml::FunctionBehavior> RealFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_RealFunctions_divide()
+const std::shared_ptr<uml::FunctionBehavior>& RealFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_RealFunctions_divide()
 {
 	return foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_divide;
 }
-std::shared_ptr<uml::Parameter> RealFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_RealFunctions_divide_result()
+const std::shared_ptr<uml::Parameter>& RealFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_RealFunctions_divide_result()
 {
 	return foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_divide_result;
 }
-std::shared_ptr<uml::Parameter> RealFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_RealFunctions_divide_x()
+const std::shared_ptr<uml::Parameter>& RealFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_RealFunctions_divide_x()
 {
 	return foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_divide_x;
 }
-std::shared_ptr<uml::Parameter> RealFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_RealFunctions_divide_y()
+const std::shared_ptr<uml::Parameter>& RealFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_RealFunctions_divide_y()
 {
 	return foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_divide_y;
 }
-std::shared_ptr<uml::FunctionBehavior> RealFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_RealFunctions_greaterOrEqual()
+const std::shared_ptr<uml::FunctionBehavior>& RealFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_RealFunctions_greaterOrEqual()
 {
 	return foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_greaterOrEqual;
 }
-std::shared_ptr<uml::Parameter> RealFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_RealFunctions_greaterOrEqual_result()
+const std::shared_ptr<uml::Parameter>& RealFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_RealFunctions_greaterOrEqual_result()
 {
 	return foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_greaterOrEqual_result;
 }
-std::shared_ptr<uml::Parameter> RealFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_RealFunctions_greaterOrEqual_x()
+const std::shared_ptr<uml::Parameter>& RealFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_RealFunctions_greaterOrEqual_x()
 {
 	return foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_greaterOrEqual_x;
 }
-std::shared_ptr<uml::Parameter> RealFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_RealFunctions_greaterOrEqual_y()
+const std::shared_ptr<uml::Parameter>& RealFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_RealFunctions_greaterOrEqual_y()
 {
 	return foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_greaterOrEqual_y;
 }
-std::shared_ptr<uml::FunctionBehavior> RealFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_RealFunctions_greaterThan()
+const std::shared_ptr<uml::FunctionBehavior>& RealFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_RealFunctions_greaterThan()
 {
 	return foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_greaterThan;
 }
-std::shared_ptr<uml::Parameter> RealFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_RealFunctions_greaterThan_result()
+const std::shared_ptr<uml::Parameter>& RealFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_RealFunctions_greaterThan_result()
 {
 	return foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_greaterThan_result;
 }
-std::shared_ptr<uml::Parameter> RealFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_RealFunctions_greaterThan_x()
+const std::shared_ptr<uml::Parameter>& RealFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_RealFunctions_greaterThan_x()
 {
 	return foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_greaterThan_x;
 }
-std::shared_ptr<uml::Parameter> RealFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_RealFunctions_greaterThan_y()
+const std::shared_ptr<uml::Parameter>& RealFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_RealFunctions_greaterThan_y()
 {
 	return foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_greaterThan_y;
 }
-std::shared_ptr<uml::FunctionBehavior> RealFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_RealFunctions_lessOrEqual()
+const std::shared_ptr<uml::FunctionBehavior>& RealFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_RealFunctions_lessOrEqual()
 {
 	return foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_lessOrEqual;
 }
-std::shared_ptr<uml::Parameter> RealFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_RealFunctions_lessOrEqual_result()
+const std::shared_ptr<uml::Parameter>& RealFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_RealFunctions_lessOrEqual_result()
 {
 	return foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_lessOrEqual_result;
 }
-std::shared_ptr<uml::Parameter> RealFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_RealFunctions_lessOrEqual_x()
+const std::shared_ptr<uml::Parameter>& RealFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_RealFunctions_lessOrEqual_x()
 {
 	return foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_lessOrEqual_x;
 }
-std::shared_ptr<uml::Parameter> RealFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_RealFunctions_lessOrEqual_y()
+const std::shared_ptr<uml::Parameter>& RealFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_RealFunctions_lessOrEqual_y()
 {
 	return foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_lessOrEqual_y;
 }
-std::shared_ptr<uml::FunctionBehavior> RealFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_RealFunctions_lessThan()
+const std::shared_ptr<uml::FunctionBehavior>& RealFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_RealFunctions_lessThan()
 {
 	return foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_lessThan;
 }
-std::shared_ptr<uml::Parameter> RealFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_RealFunctions_lessThan_result()
+const std::shared_ptr<uml::Parameter>& RealFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_RealFunctions_lessThan_result()
 {
 	return foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_lessThan_result;
 }
-std::shared_ptr<uml::Parameter> RealFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_RealFunctions_lessThan_x()
+const std::shared_ptr<uml::Parameter>& RealFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_RealFunctions_lessThan_x()
 {
 	return foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_lessThan_x;
 }
-std::shared_ptr<uml::Parameter> RealFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_RealFunctions_lessThan_y()
+const std::shared_ptr<uml::Parameter>& RealFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_RealFunctions_lessThan_y()
 {
 	return foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_lessThan_y;
 }
-std::shared_ptr<uml::FunctionBehavior> RealFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_RealFunctions_minus()
+const std::shared_ptr<uml::FunctionBehavior>& RealFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_RealFunctions_minus()
 {
 	return foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_minus;
 }
-std::shared_ptr<uml::Parameter> RealFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_RealFunctions_minus_result()
+const std::shared_ptr<uml::Parameter>& RealFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_RealFunctions_minus_result()
 {
 	return foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_minus_result;
 }
-std::shared_ptr<uml::Parameter> RealFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_RealFunctions_minus_x()
+const std::shared_ptr<uml::Parameter>& RealFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_RealFunctions_minus_x()
 {
 	return foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_minus_x;
 }
-std::shared_ptr<uml::Parameter> RealFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_RealFunctions_minus_y()
+const std::shared_ptr<uml::Parameter>& RealFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_RealFunctions_minus_y()
 {
 	return foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_minus_y;
 }
-std::shared_ptr<uml::FunctionBehavior> RealFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_RealFunctions_plus()
+const std::shared_ptr<uml::FunctionBehavior>& RealFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_RealFunctions_plus()
 {
 	return foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_plus;
 }
-std::shared_ptr<uml::Parameter> RealFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_RealFunctions_plus_result()
+const std::shared_ptr<uml::Parameter>& RealFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_RealFunctions_plus_result()
 {
 	return foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_plus_result;
 }
-std::shared_ptr<uml::Parameter> RealFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_RealFunctions_plus_x()
+const std::shared_ptr<uml::Parameter>& RealFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_RealFunctions_plus_x()
 {
 	return foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_plus_x;
 }
-std::shared_ptr<uml::Parameter> RealFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_RealFunctions_plus_y()
+const std::shared_ptr<uml::Parameter>& RealFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_RealFunctions_plus_y()
 {
 	return foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_plus_y;
 }
-std::shared_ptr<uml::FunctionBehavior> RealFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_RealFunctions_times()
+const std::shared_ptr<uml::FunctionBehavior>& RealFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_RealFunctions_times()
 {
 	return foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_times;
 }
-std::shared_ptr<uml::Parameter> RealFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_RealFunctions_times_result()
+const std::shared_ptr<uml::Parameter>& RealFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_RealFunctions_times_result()
 {
 	return foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_times_result;
 }
-std::shared_ptr<uml::Parameter> RealFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_RealFunctions_times_x()
+const std::shared_ptr<uml::Parameter>& RealFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_RealFunctions_times_x()
 {
 	return foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_times_x;
 }
-std::shared_ptr<uml::Parameter> RealFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_RealFunctions_times_y()
+const std::shared_ptr<uml::Parameter>& RealFunctionsPackageImpl::get_FoundationalModelLibrary_PrimitiveBehaviors_RealFunctions_times_y()
 {
 	return foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_times_y;
 }

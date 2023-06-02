@@ -30,31 +30,31 @@ namespace FoundationalModelLibrary::PrimitiveBehaviors::BooleanFunctions
 			virtual ~BooleanFunctionsPackageImpl();
 
 			//getter for the ownedMember
-			virtual std::shared_ptr<uml::FunctionBehavior> get_FoundationalModelLibrary_PrimitiveBehaviors_BooleanFunctions_And();  
-			virtual std::shared_ptr<uml::Parameter> get_FoundationalModelLibrary_PrimitiveBehaviors_BooleanFunctions_And_result();  
-			virtual std::shared_ptr<uml::Parameter> get_FoundationalModelLibrary_PrimitiveBehaviors_BooleanFunctions_And_x();  
-			virtual std::shared_ptr<uml::Parameter> get_FoundationalModelLibrary_PrimitiveBehaviors_BooleanFunctions_And_y();  
-			virtual std::shared_ptr<uml::FunctionBehavior> get_FoundationalModelLibrary_PrimitiveBehaviors_BooleanFunctions_Implies();  
-			virtual std::shared_ptr<uml::Parameter> get_FoundationalModelLibrary_PrimitiveBehaviors_BooleanFunctions_Implies_result();  
-			virtual std::shared_ptr<uml::Parameter> get_FoundationalModelLibrary_PrimitiveBehaviors_BooleanFunctions_Implies_x();  
-			virtual std::shared_ptr<uml::Parameter> get_FoundationalModelLibrary_PrimitiveBehaviors_BooleanFunctions_Implies_y();  
-			virtual std::shared_ptr<uml::FunctionBehavior> get_FoundationalModelLibrary_PrimitiveBehaviors_BooleanFunctions_Not();  
-			virtual std::shared_ptr<uml::Parameter> get_FoundationalModelLibrary_PrimitiveBehaviors_BooleanFunctions_Not_result();  
-			virtual std::shared_ptr<uml::Parameter> get_FoundationalModelLibrary_PrimitiveBehaviors_BooleanFunctions_Not_x();  
-			virtual std::shared_ptr<uml::FunctionBehavior> get_FoundationalModelLibrary_PrimitiveBehaviors_BooleanFunctions_Or();  
-			virtual std::shared_ptr<uml::Parameter> get_FoundationalModelLibrary_PrimitiveBehaviors_BooleanFunctions_Or_result();  
-			virtual std::shared_ptr<uml::Parameter> get_FoundationalModelLibrary_PrimitiveBehaviors_BooleanFunctions_Or_x();  
-			virtual std::shared_ptr<uml::Parameter> get_FoundationalModelLibrary_PrimitiveBehaviors_BooleanFunctions_Or_y();  
-			virtual std::shared_ptr<uml::FunctionBehavior> get_FoundationalModelLibrary_PrimitiveBehaviors_BooleanFunctions_ToBoolean();  
-			virtual std::shared_ptr<uml::Parameter> get_FoundationalModelLibrary_PrimitiveBehaviors_BooleanFunctions_ToBoolean_result();  
-			virtual std::shared_ptr<uml::Parameter> get_FoundationalModelLibrary_PrimitiveBehaviors_BooleanFunctions_ToBoolean_x();  
-			virtual std::shared_ptr<uml::FunctionBehavior> get_FoundationalModelLibrary_PrimitiveBehaviors_BooleanFunctions_ToString();  
-			virtual std::shared_ptr<uml::Parameter> get_FoundationalModelLibrary_PrimitiveBehaviors_BooleanFunctions_ToString_result();  
-			virtual std::shared_ptr<uml::Parameter> get_FoundationalModelLibrary_PrimitiveBehaviors_BooleanFunctions_ToString_x();  
-			virtual std::shared_ptr<uml::FunctionBehavior> get_FoundationalModelLibrary_PrimitiveBehaviors_BooleanFunctions_Xor();  
-			virtual std::shared_ptr<uml::Parameter> get_FoundationalModelLibrary_PrimitiveBehaviors_BooleanFunctions_Xor_result();  
-			virtual std::shared_ptr<uml::Parameter> get_FoundationalModelLibrary_PrimitiveBehaviors_BooleanFunctions_Xor_x();  
-			virtual std::shared_ptr<uml::Parameter> get_FoundationalModelLibrary_PrimitiveBehaviors_BooleanFunctions_Xor_y();  
+			virtual const std::shared_ptr<uml::FunctionBehavior>& get_FoundationalModelLibrary_PrimitiveBehaviors_BooleanFunctions_And();  
+			virtual const std::shared_ptr<uml::Parameter>& get_FoundationalModelLibrary_PrimitiveBehaviors_BooleanFunctions_And_result();  
+			virtual const std::shared_ptr<uml::Parameter>& get_FoundationalModelLibrary_PrimitiveBehaviors_BooleanFunctions_And_x();  
+			virtual const std::shared_ptr<uml::Parameter>& get_FoundationalModelLibrary_PrimitiveBehaviors_BooleanFunctions_And_y();  
+			virtual const std::shared_ptr<uml::FunctionBehavior>& get_FoundationalModelLibrary_PrimitiveBehaviors_BooleanFunctions_Implies();  
+			virtual const std::shared_ptr<uml::Parameter>& get_FoundationalModelLibrary_PrimitiveBehaviors_BooleanFunctions_Implies_result();  
+			virtual const std::shared_ptr<uml::Parameter>& get_FoundationalModelLibrary_PrimitiveBehaviors_BooleanFunctions_Implies_x();  
+			virtual const std::shared_ptr<uml::Parameter>& get_FoundationalModelLibrary_PrimitiveBehaviors_BooleanFunctions_Implies_y();  
+			virtual const std::shared_ptr<uml::FunctionBehavior>& get_FoundationalModelLibrary_PrimitiveBehaviors_BooleanFunctions_Not();  
+			virtual const std::shared_ptr<uml::Parameter>& get_FoundationalModelLibrary_PrimitiveBehaviors_BooleanFunctions_Not_result();  
+			virtual const std::shared_ptr<uml::Parameter>& get_FoundationalModelLibrary_PrimitiveBehaviors_BooleanFunctions_Not_x();  
+			virtual const std::shared_ptr<uml::FunctionBehavior>& get_FoundationalModelLibrary_PrimitiveBehaviors_BooleanFunctions_Or();  
+			virtual const std::shared_ptr<uml::Parameter>& get_FoundationalModelLibrary_PrimitiveBehaviors_BooleanFunctions_Or_result();  
+			virtual const std::shared_ptr<uml::Parameter>& get_FoundationalModelLibrary_PrimitiveBehaviors_BooleanFunctions_Or_x();  
+			virtual const std::shared_ptr<uml::Parameter>& get_FoundationalModelLibrary_PrimitiveBehaviors_BooleanFunctions_Or_y();  
+			virtual const std::shared_ptr<uml::FunctionBehavior>& get_FoundationalModelLibrary_PrimitiveBehaviors_BooleanFunctions_ToBoolean();  
+			virtual const std::shared_ptr<uml::Parameter>& get_FoundationalModelLibrary_PrimitiveBehaviors_BooleanFunctions_ToBoolean_result();  
+			virtual const std::shared_ptr<uml::Parameter>& get_FoundationalModelLibrary_PrimitiveBehaviors_BooleanFunctions_ToBoolean_x();  
+			virtual const std::shared_ptr<uml::FunctionBehavior>& get_FoundationalModelLibrary_PrimitiveBehaviors_BooleanFunctions_ToString();  
+			virtual const std::shared_ptr<uml::Parameter>& get_FoundationalModelLibrary_PrimitiveBehaviors_BooleanFunctions_ToString_result();  
+			virtual const std::shared_ptr<uml::Parameter>& get_FoundationalModelLibrary_PrimitiveBehaviors_BooleanFunctions_ToString_x();  
+			virtual const std::shared_ptr<uml::FunctionBehavior>& get_FoundationalModelLibrary_PrimitiveBehaviors_BooleanFunctions_Xor();  
+			virtual const std::shared_ptr<uml::Parameter>& get_FoundationalModelLibrary_PrimitiveBehaviors_BooleanFunctions_Xor_result();  
+			virtual const std::shared_ptr<uml::Parameter>& get_FoundationalModelLibrary_PrimitiveBehaviors_BooleanFunctions_Xor_x();  
+			virtual const std::shared_ptr<uml::Parameter>& get_FoundationalModelLibrary_PrimitiveBehaviors_BooleanFunctions_Xor_y();  
 			
 			
 

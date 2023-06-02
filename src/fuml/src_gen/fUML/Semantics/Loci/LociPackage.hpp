@@ -68,12 +68,12 @@ namespace fUML::Semantics::Loci
 			static const unsigned long CHOICESTRATEGY_OPERATION_GETNAME = 1209409598;
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getChoiceStrategy_Class() const = 0;
+			virtual const std::shared_ptr<ecore::EClass>& getChoiceStrategy_Class() const = 0;
 			
 			
 			
-			virtual std::shared_ptr<ecore::EOperation> getChoiceStrategy_Operation_choose_EInt() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getChoiceStrategy_Operation_getName() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getChoiceStrategy_Operation_choose_EInt() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getChoiceStrategy_Operation_getName() const = 0;
 			
 			// End Class ChoiceStrategy
 
@@ -97,20 +97,20 @@ namespace fUML::Semantics::Loci
 			static const unsigned long EXECUTIONFACTORY_OPERATION_INSTANTIATEVISITOR_ELEMENT = 442268567;
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getExecutionFactory_Class() const = 0;
+			virtual const std::shared_ptr<ecore::EClass>& getExecutionFactory_Class() const = 0;
 			
 			
-			virtual std::shared_ptr<ecore::EReference> getExecutionFactory_Attribute_builtInTypes() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getExecutionFactory_Attribute_locus() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getExecutionFactory_Attribute_strategies() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getExecutionFactory_Attribute_builtInTypes() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getExecutionFactory_Attribute_locus() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getExecutionFactory_Attribute_strategies() const = 0;
 			
-			virtual std::shared_ptr<ecore::EOperation> getExecutionFactory_Operation_addBuiltInType_PrimitiveType() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getExecutionFactory_Operation_assignStrategy_SemanticStrategy() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getExecutionFactory_Operation_createExecution_Behavior_Element() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getExecutionFactory_Operation_getBuiltInType_EString() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getExecutionFactory_Operation_getStrategy_EString() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getExecutionFactory_Operation_getStrategyIndex_EString() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getExecutionFactory_Operation_instantiateVisitor_Element() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getExecutionFactory_Operation_addBuiltInType_PrimitiveType() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getExecutionFactory_Operation_assignStrategy_SemanticStrategy() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getExecutionFactory_Operation_createExecution_Behavior_Element() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getExecutionFactory_Operation_getBuiltInType_EString() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getExecutionFactory_Operation_getStrategy_EString() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getExecutionFactory_Operation_getStrategyIndex_EString() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getExecutionFactory_Operation_instantiateVisitor_Element() const = 0;
 			
 			// End Class ExecutionFactory
 
@@ -128,14 +128,14 @@ namespace fUML::Semantics::Loci
 			static const unsigned long EXECUTOR_OPERATION_START_CLASS_PARAMETERVALUE = 2158458358;
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getExecutor_Class() const = 0;
+			virtual const std::shared_ptr<ecore::EClass>& getExecutor_Class() const = 0;
 			
 			
-			virtual std::shared_ptr<ecore::EReference> getExecutor_Attribute_locus() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getExecutor_Attribute_locus() const = 0;
 			
-			virtual std::shared_ptr<ecore::EOperation> getExecutor_Operation_evaluate_ValueSpecification() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getExecutor_Operation_execute_Behavior_ParameterValue() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getExecutor_Operation_start_Class_ParameterValue() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getExecutor_Operation_evaluate_ValueSpecification() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getExecutor_Operation_execute_Behavior_ParameterValue() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getExecutor_Operation_start_Class_ParameterValue() const = 0;
 			
 			// End Class Executor
 
@@ -150,11 +150,11 @@ namespace fUML::Semantics::Loci
 			static const unsigned long FIRSTCHOICESTRATEGY_OPERATION_CHOOSE_EINT = 1235408894;
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getFirstChoiceStrategy_Class() const = 0;
+			virtual const std::shared_ptr<ecore::EClass>& getFirstChoiceStrategy_Class() const = 0;
 			
 			
 			
-			virtual std::shared_ptr<ecore::EOperation> getFirstChoiceStrategy_Operation_choose_EInt() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getFirstChoiceStrategy_Operation_choose_EInt() const = 0;
 			
 			// End Class FirstChoiceStrategy
 
@@ -178,20 +178,20 @@ namespace fUML::Semantics::Loci
 			static const unsigned long LOCUS_OPERATION_RETRIEVEEXTENT_CLASSIFIER = 844948954;
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getLocus_Class() const = 0;
+			virtual const std::shared_ptr<ecore::EClass>& getLocus_Class() const = 0;
 			
 			
-			virtual std::shared_ptr<ecore::EReference> getLocus_Attribute_executor() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getLocus_Attribute_extensionalValues() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getLocus_Attribute_factory() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getLocus_Attribute_executor() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getLocus_Attribute_extensionalValues() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getLocus_Attribute_factory() const = 0;
 			
-			virtual std::shared_ptr<ecore::EOperation> getLocus_Operation_add_Element() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getLocus_Operation_assignExecutor_Executor() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getLocus_Operation_assignFactory_ExecutionFactory() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getLocus_Operation_conforms_Classifier_Classifier() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getLocus_Operation_instantiate_Class() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getLocus_Operation_remove_Element() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getLocus_Operation_retrieveExtent_Classifier() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getLocus_Operation_add_Element() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getLocus_Operation_assignExecutor_Executor() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getLocus_Operation_assignFactory_ExecutionFactory() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getLocus_Operation_conforms_Classifier_Classifier() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getLocus_Operation_instantiate_Class() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getLocus_Operation_remove_Element() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getLocus_Operation_retrieveExtent_Classifier() const = 0;
 			
 			// End Class Locus
 
@@ -206,11 +206,11 @@ namespace fUML::Semantics::Loci
 			static const unsigned long SEMANTICSTRATEGY_OPERATION_GETNAME = 3310607623;
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getSemanticStrategy_Class() const = 0;
+			virtual const std::shared_ptr<ecore::EClass>& getSemanticStrategy_Class() const = 0;
 			
 			
 			
-			virtual std::shared_ptr<ecore::EOperation> getSemanticStrategy_Operation_getName() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getSemanticStrategy_Operation_getName() const = 0;
 			
 			// End Class SemanticStrategy
 
@@ -226,12 +226,12 @@ namespace fUML::Semantics::Loci
 			static const unsigned long SEMANTICVISITOR_OPERATION__ENDISOLATION = 3956519543;
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getSemanticVisitor_Class() const = 0;
+			virtual const std::shared_ptr<ecore::EClass>& getSemanticVisitor_Class() const = 0;
 			
 			
 			
-			virtual std::shared_ptr<ecore::EOperation> getSemanticVisitor_Operation__beginIsolation() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getSemanticVisitor_Operation__endIsolation() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getSemanticVisitor_Operation__beginIsolation() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getSemanticVisitor_Operation__endIsolation() const = 0;
 			
 			// End Class SemanticVisitor
 

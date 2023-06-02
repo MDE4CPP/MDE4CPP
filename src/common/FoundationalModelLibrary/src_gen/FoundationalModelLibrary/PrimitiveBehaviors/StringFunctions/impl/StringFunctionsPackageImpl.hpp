@@ -30,18 +30,18 @@ namespace FoundationalModelLibrary::PrimitiveBehaviors::StringFunctions
 			virtual ~StringFunctionsPackageImpl();
 
 			//getter for the ownedMember
-			virtual std::shared_ptr<uml::FunctionBehavior> get_FoundationalModelLibrary_PrimitiveBehaviors_StringFunctions_Concat();  
-			virtual std::shared_ptr<uml::Parameter> get_FoundationalModelLibrary_PrimitiveBehaviors_StringFunctions_Concat_result();  
-			virtual std::shared_ptr<uml::Parameter> get_FoundationalModelLibrary_PrimitiveBehaviors_StringFunctions_Concat_x();  
-			virtual std::shared_ptr<uml::Parameter> get_FoundationalModelLibrary_PrimitiveBehaviors_StringFunctions_Concat_y();  
-			virtual std::shared_ptr<uml::FunctionBehavior> get_FoundationalModelLibrary_PrimitiveBehaviors_StringFunctions_Size();  
-			virtual std::shared_ptr<uml::Parameter> get_FoundationalModelLibrary_PrimitiveBehaviors_StringFunctions_Size_result();  
-			virtual std::shared_ptr<uml::Parameter> get_FoundationalModelLibrary_PrimitiveBehaviors_StringFunctions_Size_x();  
-			virtual std::shared_ptr<uml::FunctionBehavior> get_FoundationalModelLibrary_PrimitiveBehaviors_StringFunctions_Substring();  
-			virtual std::shared_ptr<uml::Parameter> get_FoundationalModelLibrary_PrimitiveBehaviors_StringFunctions_Substring_lower();  
-			virtual std::shared_ptr<uml::Parameter> get_FoundationalModelLibrary_PrimitiveBehaviors_StringFunctions_Substring_result();  
-			virtual std::shared_ptr<uml::Parameter> get_FoundationalModelLibrary_PrimitiveBehaviors_StringFunctions_Substring_upper();  
-			virtual std::shared_ptr<uml::Parameter> get_FoundationalModelLibrary_PrimitiveBehaviors_StringFunctions_Substring_x();  
+			virtual const std::shared_ptr<uml::FunctionBehavior>& get_FoundationalModelLibrary_PrimitiveBehaviors_StringFunctions_Concat();  
+			virtual const std::shared_ptr<uml::Parameter>& get_FoundationalModelLibrary_PrimitiveBehaviors_StringFunctions_Concat_result();  
+			virtual const std::shared_ptr<uml::Parameter>& get_FoundationalModelLibrary_PrimitiveBehaviors_StringFunctions_Concat_x();  
+			virtual const std::shared_ptr<uml::Parameter>& get_FoundationalModelLibrary_PrimitiveBehaviors_StringFunctions_Concat_y();  
+			virtual const std::shared_ptr<uml::FunctionBehavior>& get_FoundationalModelLibrary_PrimitiveBehaviors_StringFunctions_Size();  
+			virtual const std::shared_ptr<uml::Parameter>& get_FoundationalModelLibrary_PrimitiveBehaviors_StringFunctions_Size_result();  
+			virtual const std::shared_ptr<uml::Parameter>& get_FoundationalModelLibrary_PrimitiveBehaviors_StringFunctions_Size_x();  
+			virtual const std::shared_ptr<uml::FunctionBehavior>& get_FoundationalModelLibrary_PrimitiveBehaviors_StringFunctions_Substring();  
+			virtual const std::shared_ptr<uml::Parameter>& get_FoundationalModelLibrary_PrimitiveBehaviors_StringFunctions_Substring_lower();  
+			virtual const std::shared_ptr<uml::Parameter>& get_FoundationalModelLibrary_PrimitiveBehaviors_StringFunctions_Substring_result();  
+			virtual const std::shared_ptr<uml::Parameter>& get_FoundationalModelLibrary_PrimitiveBehaviors_StringFunctions_Substring_upper();  
+			virtual const std::shared_ptr<uml::Parameter>& get_FoundationalModelLibrary_PrimitiveBehaviors_StringFunctions_Substring_x();  
 			
 			
 

@@ -29,11 +29,11 @@ namespace PrimitiveTypes
 			virtual ~PrimitiveTypesPackageImpl();
 
 			//getter for the ownedMember
-			virtual std::shared_ptr<uml::PrimitiveType> get_PrimitiveTypes_Boolean();  
-			virtual std::shared_ptr<uml::PrimitiveType> get_PrimitiveTypes_Integer();  
-			virtual std::shared_ptr<uml::PrimitiveType> get_PrimitiveTypes_Real();  
-			virtual std::shared_ptr<uml::PrimitiveType> get_PrimitiveTypes_String();  
-			virtual std::shared_ptr<uml::PrimitiveType> get_PrimitiveTypes_UnlimitedNatural();  
+			virtual const std::shared_ptr<uml::PrimitiveType>& get_PrimitiveTypes_Boolean();  
+			virtual const std::shared_ptr<uml::PrimitiveType>& get_PrimitiveTypes_Integer();  
+			virtual const std::shared_ptr<uml::PrimitiveType>& get_PrimitiveTypes_Real();  
+			virtual const std::shared_ptr<uml::PrimitiveType>& get_PrimitiveTypes_String();  
+			virtual const std::shared_ptr<uml::PrimitiveType>& get_PrimitiveTypes_UnlimitedNatural();  
 			
 			
 
