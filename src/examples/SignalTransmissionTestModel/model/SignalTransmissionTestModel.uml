@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xmi:XMI xmi:version="20131001" xmlns:xmi="http://www.omg.org/spec/XMI/20131001" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:UML4CPPProfile="http://www.tu-ilmenau.de/sse/UML4CPPProfile" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:uml="http://www.eclipse.org/uml2/5.0.0/UML" xsi:schemaLocation="http://www.tu-ilmenau.de/sse/UML4CPPProfile ../../../src/common/UML4CPPProfile/model/UML4CPPProfile.uml#_v75nIfp7EeuavpF89IQaUg">
+<xmi:XMI xmi:version="20131001" xmlns:xmi="http://www.omg.org/spec/XMI/20131001" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:UML4CPPProfile="http://www.tu-ilmenau.de/sse/UML4CPPProfile" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:uml="http://www.eclipse.org/uml2/5.0.0/UML" xsi:schemaLocation="http://www.tu-ilmenau.de/sse/UML4CPPProfile ../../../common/UML4CPPProfile/model/UML4CPPProfile.uml#_v75nIfp7EeuavpF89IQaUg">
   <uml:Model xmi:id="_lM22kGnaEe2MrfadaKpUJA" name="SignalTransmissionTestModel">
     <packagedElement xmi:type="uml:Signal" xmi:id="_nrnGEGncEe2MrfadaKpUJA" name="MySignal">
       <ownedAttribute xmi:id="_fVup0HUMEe2haNFi-eR7qA" name="MySignalInteger">
@@ -100,9 +100,9 @@ return i;</body>
     </packagedElement>
     <profileApplication xmi:id="_vnwAUO4tEe2PGuN-jxM8YA">
       <eAnnotations xmi:id="_vnwnYO4tEe2PGuN-jxM8YA" source="http://www.eclipse.org/uml2/2.0.0/UML">
-        <references xmi:type="ecore:EPackage" href="../../../src/common/UML4CPPProfile/model/UML4CPPProfile.uml#_v75nIfp7EeuavpF89IQaUg"/>
+        <references xmi:type="ecore:EPackage" href="../../../common/UML4CPPProfile/model/UML4CPPProfile.uml#_v75nIfp7EeuavpF89IQaUg"/>
       </eAnnotations>
-      <appliedProfile href="../../../src/common/UML4CPPProfile/model/UML4CPPProfile.uml#_0"/>
+      <appliedProfile href="../../../common/UML4CPPProfile/model/UML4CPPProfile.uml#_0"/>
     </profileApplication>
   </uml:Model>
   <UML4CPPProfile:NonExecutable xmi:id="_ekx9oKw5Ee2D07xmcN1IJA"/>
