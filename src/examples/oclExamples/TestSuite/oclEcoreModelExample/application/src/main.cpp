@@ -1009,6 +1009,58 @@ bool testCases() {
 
     }// end of Test Case 14
 
+    {// Test Case 15
+
+        std::cout << "\n-------------------------------------Test Case: " << counter << "---------------------------------" << std::endl;
+
+		int oldCopiesValue = bookList->at(2)->getCopies();
+        bookList->at(2)->setCopies(50);
+        
+        Utilities::OclEcore ocl;
+		std::string query1 = "let z = self.books[2].countCopies() in self.books[2].addCopies(z)";
+		std::shared_ptr<Any> result = ocl.debugQuery(query1, anyLib);
+        std::string query2 = "self.books[2].countCopies()";
+        result = ocl.debugQuery(query2, anyLib);
+		std::cout << "\nQuery 1/2: " << query1 << std::endl;
+        std::cout << "\nQuery 2/2: " << query2 << std::endl;
+        int bookCopies = 100;
+        int resultInt = -1;
+        thisPassed = true;
+
+        try
+        {
+            if (result != nullptr) {
+                resultInt = result->get<int>();
+            } else {
+                throw("Result is nullptr!");
+            }
+            
+        }
+        catch(...)
+        {
+            std::cout << "Result value is no Integer!" << std::endl;
+            thisPassed = false;
+        }
+
+        if (resultInt != bookCopies) {
+            std::cout << "Number of copies is not correct!" << std::endl;
+            std::cout << "Have to be: " << bookCopies << std::endl;
+			std::cout << "Got: " << resultInt << std::endl;
+            thisPassed = false;
+        }
+
+
+        bookList->at(2)->setCopies(oldCopiesValue);
+
+        allPassed = (allPassed) ? thisPassed : allPassed;
+        failCounter += (!thisPassed) ? 1 : 0;
+        std::string res = thisPassed ? "PASSED!" : "FAILED!";
+        std::cout << res << std::endl;
+		std::cout << "-------------------------------------End of Test Case: " << counter << "---------------------------------" << std::endl;
+		counter++;
+
+    }// end of Test Case 15
+
 	if (!allPassed) {
 		std::cout << "##################################" << std::endl;
 		std::cout << "Not all Test cases were successful!" << std::endl;
