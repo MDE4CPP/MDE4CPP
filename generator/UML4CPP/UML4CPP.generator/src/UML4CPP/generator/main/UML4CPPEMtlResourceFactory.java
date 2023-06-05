@@ -78,6 +78,7 @@ public class UML4CPPEMtlResourceFactory extends EMtlResourceFactoryImpl {
 		initializeHelpersEmtls(resourcePathPrefix);
 		initializeInterfacesEmtls(resourcePathPrefix);
 		initializeMainApplicationEmtls(resourcePathPrefix);
+		initializeModelExecutionEmtls(resourcePathPrefix);
 		initializeModelFactoryEmtls(resourcePathPrefix);
 		initializeModelGlobalFunctionsEmtls(resourcePathPrefix);
 		initializeModelPackageEmtls(resourcePathPrefix);
@@ -193,6 +194,12 @@ public class UML4CPPEMtlResourceFactory extends EMtlResourceFactoryImpl {
 								"generateMainApplicationSource"
 								};
 		generateFilePathMapData(moduleNames, "main_application", resourcePathPrefix);
+	}
+	
+	private void initializeModelExecutionEmtls(String resourcePathPrefix)
+	{
+		String[] moduleNames = {"model_execution"};
+		generateFilePathMapData(moduleNames, "model_execution", resourcePathPrefix);
 	}
 	
 	private void initializeModelFactoryEmtls(String resourcePathPrefix)
