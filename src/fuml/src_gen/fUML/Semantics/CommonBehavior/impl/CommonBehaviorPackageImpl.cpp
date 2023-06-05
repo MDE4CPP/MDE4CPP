@@ -76,6 +76,60 @@ void CommonBehaviorPackageImpl::init(std::shared_ptr<ecore::EPackage> package)
 
 
 
+// Begin Class EventAccepter
+const std::shared_ptr<ecore::EClass>& fUML::Semantics::CommonBehavior::CommonBehaviorPackageImpl::getEventAccepter_Class() const
+{
+	return m_eventAccepter_Class;
+}
+
+
+
+const std::shared_ptr<ecore::EOperation>& fUML::Semantics::CommonBehavior::CommonBehaviorPackageImpl::getEventAccepter_Operation_accept_Element() const
+{
+	return m_eventAccepter_Operation_accept_Element;
+}
+const std::shared_ptr<ecore::EOperation>& fUML::Semantics::CommonBehavior::CommonBehaviorPackageImpl::getEventAccepter_Operation_match_Element() const
+{
+	return m_eventAccepter_Operation_match_Element;
+}
+
+// End Class EventAccepter
+
+// Begin Class EventOccurrence
+const std::shared_ptr<ecore::EClass>& fUML::Semantics::CommonBehavior::CommonBehaviorPackageImpl::getEventOccurrence_Class() const
+{
+	return m_eventOccurrence_Class;
+}
+
+
+const std::shared_ptr<ecore::EReference>& fUML::Semantics::CommonBehavior::CommonBehaviorPackageImpl::getEventOccurrence_Attribute_target() const
+{
+	return m_eventOccurrence_Attribute_target;
+}
+
+const std::shared_ptr<ecore::EOperation>& fUML::Semantics::CommonBehavior::CommonBehaviorPackageImpl::getEventOccurrence_Operation_doSend() const
+{
+	return m_eventOccurrence_Operation_doSend;
+}
+const std::shared_ptr<ecore::EOperation>& fUML::Semantics::CommonBehavior::CommonBehaviorPackageImpl::getEventOccurrence_Operation_getParameterValues() const
+{
+	return m_eventOccurrence_Operation_getParameterValues;
+}
+const std::shared_ptr<ecore::EOperation>& fUML::Semantics::CommonBehavior::CommonBehaviorPackageImpl::getEventOccurrence_Operation_match_Trigger() const
+{
+	return m_eventOccurrence_Operation_match_Trigger;
+}
+const std::shared_ptr<ecore::EOperation>& fUML::Semantics::CommonBehavior::CommonBehaviorPackageImpl::getEventOccurrence_Operation_matchAny_Trigger() const
+{
+	return m_eventOccurrence_Operation_matchAny_Trigger;
+}
+const std::shared_ptr<ecore::EOperation>& fUML::Semantics::CommonBehavior::CommonBehaviorPackageImpl::getEventOccurrence_Operation_sendTo_Element() const
+{
+	return m_eventOccurrence_Operation_sendTo_Element;
+}
+
+// End Class EventOccurrence
+
 // Begin Class Execution
 const std::shared_ptr<ecore::EClass>& fUML::Semantics::CommonBehavior::CommonBehaviorPackageImpl::getExecution_Class() const
 {

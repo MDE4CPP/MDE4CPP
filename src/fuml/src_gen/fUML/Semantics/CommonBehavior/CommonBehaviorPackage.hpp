@@ -27,6 +27,8 @@ namespace ecore
 
 namespace fUML::Semantics::CommonBehavior 
 {
+	class EventAccepter;
+	class EventOccurrence;
 	class Execution;
 	class ParameterValue;
 }
@@ -52,6 +54,56 @@ namespace fUML::Semantics::CommonBehavior
 			static const std::string eNAME;
 			static const std::string eNS_URI;
 			static const std::string eNS_PREFIX;
+
+			// Begin Class EventAccepter
+			//Class and Feature IDs 
+			static const unsigned long EVENTACCEPTER_CLASS = 720513438;
+			static const unsigned int EVENTACCEPTER_CLASS_FEATURE_COUNT = 0;
+			static const unsigned int EVENTACCEPTER_CLASS_OPERATION_COUNT = 2;
+			
+			
+			static const unsigned long EVENTACCEPTER_OPERATION_ACCEPT_ELEMENT = 276753846;
+			static const unsigned long EVENTACCEPTER_OPERATION_MATCH_ELEMENT = 2574095009;
+			
+			//Class and Feature Getter
+			virtual const std::shared_ptr<ecore::EClass>& getEventAccepter_Class() const = 0;
+			
+			
+			
+			virtual const std::shared_ptr<ecore::EOperation>& getEventAccepter_Operation_accept_Element() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getEventAccepter_Operation_match_Element() const = 0;
+			
+			// End Class EventAccepter
+
+
+			// Begin Class EventOccurrence
+			//Class and Feature IDs 
+			static const unsigned long EVENTOCCURRENCE_CLASS = 1863789533;
+			static const unsigned int EVENTOCCURRENCE_CLASS_FEATURE_COUNT = 1;
+			static const unsigned int EVENTOCCURRENCE_CLASS_OPERATION_COUNT = 5;
+			
+			static const unsigned long EVENTOCCURRENCE_ATTRIBUTE_TARGET = 468696969;
+			
+			static const unsigned long EVENTOCCURRENCE_OPERATION_DOSEND = 905542773;
+			static const unsigned long EVENTOCCURRENCE_OPERATION_GETPARAMETERVALUES = 2905522987;
+			static const unsigned long EVENTOCCURRENCE_OPERATION_MATCH_TRIGGER = 3505679709;
+			static const unsigned long EVENTOCCURRENCE_OPERATION_MATCHANY_TRIGGER = 2005940351;
+			static const unsigned long EVENTOCCURRENCE_OPERATION_SENDTO_ELEMENT = 2881178737;
+			
+			//Class and Feature Getter
+			virtual const std::shared_ptr<ecore::EClass>& getEventOccurrence_Class() const = 0;
+			
+			
+			virtual const std::shared_ptr<ecore::EReference>& getEventOccurrence_Attribute_target() const = 0;
+			
+			virtual const std::shared_ptr<ecore::EOperation>& getEventOccurrence_Operation_doSend() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getEventOccurrence_Operation_getParameterValues() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getEventOccurrence_Operation_match_Trigger() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getEventOccurrence_Operation_matchAny_Trigger() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getEventOccurrence_Operation_sendTo_Element() const = 0;
+			
+			// End Class EventOccurrence
+
 
 			// Begin Class Execution
 			//Class and Feature IDs 

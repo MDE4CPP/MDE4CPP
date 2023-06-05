@@ -43,6 +43,10 @@ namespace fUML::Semantics::Actions
 			virtual std::shared_ptr<ecore::EObject> create(const int classID,  std::shared_ptr<ecore::EObject> container = nullptr, const int referenceID = -1) const = 0;
 			virtual std::shared_ptr<ecore::EObject> create(std::shared_ptr<ecore::EClass> _class, std::shared_ptr<EObject> _container=nullptr, const int referenceID = -1) const = 0;
 
+			virtual std::shared_ptr<fUML::Semantics::Actions::AcceptEventActionActivation> createAcceptEventActionActivation(const int metaElementID = ActionsPackage::ACCEPTEVENTACTIONACTIVATION_CLASS) const = 0;
+			//Add as contained object
+			virtual std::shared_ptr<fUML::Semantics::Actions::AcceptEventActionActivation> createAcceptEventActionActivation_as_nodeActivations_in_ActivityNodeActivationGroup(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup> par_ActivityNodeActivationGroup, const int metaElementID = ActionsPackage::ACCEPTEVENTACTIONACTIVATION_CLASS) const = 0;
+			virtual std::shared_ptr<fUML::Semantics::Actions::AcceptEventActionEventAccepter> createAcceptEventActionEventAccepter(const int metaElementID = ActionsPackage::ACCEPTEVENTACTIONEVENTACCEPTER_CLASS) const = 0;
 			virtual std::shared_ptr<fUML::Semantics::Actions::AddStructuralFeatureValueActionActivation> createAddStructuralFeatureValueActionActivation(const int metaElementID = ActionsPackage::ADDSTRUCTURALFEATUREVALUEACTIONACTIVATION_CLASS) const = 0;
 			//Add as contained object
 			virtual std::shared_ptr<fUML::Semantics::Actions::AddStructuralFeatureValueActionActivation> createAddStructuralFeatureValueActionActivation_as_nodeActivations_in_ActivityNodeActivationGroup(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup> par_ActivityNodeActivationGroup, const int metaElementID = ActionsPackage::ADDSTRUCTURALFEATUREVALUEACTIONACTIVATION_CLASS) const = 0;
@@ -94,6 +98,9 @@ namespace fUML::Semantics::Actions
 			virtual std::shared_ptr<fUML::Semantics::Actions::RemoveStructuralFeatureValueActionActivation> createRemoveStructuralFeatureValueActionActivation(const int metaElementID = ActionsPackage::REMOVESTRUCTURALFEATUREVALUEACTIONACTIVATION_CLASS) const = 0;
 			//Add as contained object
 			virtual std::shared_ptr<fUML::Semantics::Actions::RemoveStructuralFeatureValueActionActivation> createRemoveStructuralFeatureValueActionActivation_as_nodeActivations_in_ActivityNodeActivationGroup(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup> par_ActivityNodeActivationGroup, const int metaElementID = ActionsPackage::REMOVESTRUCTURALFEATUREVALUEACTIONACTIVATION_CLASS) const = 0;
+			virtual std::shared_ptr<fUML::Semantics::Actions::SendSignalActionActivation> createSendSignalActionActivation(const int metaElementID = ActionsPackage::SENDSIGNALACTIONACTIVATION_CLASS) const = 0;
+			//Add as contained object
+			virtual std::shared_ptr<fUML::Semantics::Actions::SendSignalActionActivation> createSendSignalActionActivation_as_nodeActivations_in_ActivityNodeActivationGroup(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup> par_ActivityNodeActivationGroup, const int metaElementID = ActionsPackage::SENDSIGNALACTIONACTIVATION_CLASS) const = 0;
 			virtual std::shared_ptr<fUML::Semantics::Actions::StructuredActivityNodeActivation> createStructuredActivityNodeActivation(const int metaElementID = ActionsPackage::STRUCTUREDACTIVITYNODEACTIVATION_CLASS) const = 0;
 			//Add as contained object
 			virtual std::shared_ptr<fUML::Semantics::Actions::StructuredActivityNodeActivation> createStructuredActivityNodeActivation_as_nodeActivations_in_ActivityNodeActivationGroup(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup> par_ActivityNodeActivationGroup, const int metaElementID = ActionsPackage::STRUCTUREDACTIVITYNODEACTIVATION_CLASS) const = 0;

@@ -36,11 +36,37 @@ void CommonBehaviorPackageImpl::createPackageContents(std::shared_ptr<ecore::EPa
 
 	std::shared_ptr<ecore::ecoreFactory> factory = ecore::ecoreFactory::eInstance();
 
+	createEventAccepterContent(package, factory);
+	createEventOccurrenceContent(package, factory);
 	createExecutionContent(package, factory);
 	createParameterValueContent(package, factory);
 
 	createPackageEDataTypes(package, factory);
 
+}
+
+void CommonBehaviorPackageImpl::createEventAccepterContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory)
+{
+	m_eventAccepter_Class = factory->createEClass_as_eClassifiers_in_EPackage(package, EVENTACCEPTER_CLASS);
+	
+	
+	m_eventAccepter_Operation_accept_Element = factory->createEOperation_as_eOperations_in_EClass(m_eventAccepter_Class, EVENTACCEPTER_OPERATION_ACCEPT_ELEMENT);
+	m_eventAccepter_Operation_match_Element = factory->createEOperation_as_eOperations_in_EClass(m_eventAccepter_Class, EVENTACCEPTER_OPERATION_MATCH_ELEMENT);
+	
+}
+
+void CommonBehaviorPackageImpl::createEventOccurrenceContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory)
+{
+	m_eventOccurrence_Class = factory->createEClass_as_eClassifiers_in_EPackage(package, EVENTOCCURRENCE_CLASS);
+	
+	m_eventOccurrence_Attribute_target = factory->createEReference_as_eReferences_in_EClass(m_eventOccurrence_Class, EVENTOCCURRENCE_ATTRIBUTE_TARGET);
+	
+	m_eventOccurrence_Operation_doSend = factory->createEOperation_as_eOperations_in_EClass(m_eventOccurrence_Class, EVENTOCCURRENCE_OPERATION_DOSEND);
+	m_eventOccurrence_Operation_getParameterValues = factory->createEOperation_as_eOperations_in_EClass(m_eventOccurrence_Class, EVENTOCCURRENCE_OPERATION_GETPARAMETERVALUES);
+	m_eventOccurrence_Operation_match_Trigger = factory->createEOperation_as_eOperations_in_EClass(m_eventOccurrence_Class, EVENTOCCURRENCE_OPERATION_MATCH_TRIGGER);
+	m_eventOccurrence_Operation_matchAny_Trigger = factory->createEOperation_as_eOperations_in_EClass(m_eventOccurrence_Class, EVENTOCCURRENCE_OPERATION_MATCHANY_TRIGGER);
+	m_eventOccurrence_Operation_sendTo_Element = factory->createEOperation_as_eOperations_in_EClass(m_eventOccurrence_Class, EVENTOCCURRENCE_OPERATION_SENDTO_ELEMENT);
+	
 }
 
 void CommonBehaviorPackageImpl::createExecutionContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory)

@@ -27,6 +27,8 @@ namespace ecore
 
 namespace fUML::Semantics::Actions 
 {
+	class AcceptEventActionActivation;
+	class AcceptEventActionEventAccepter;
 	class ActionActivation;
 	class AddStructuralFeatureValueActionActivation;
 	class CallActionActivation;
@@ -47,6 +49,7 @@ namespace fUML::Semantics::Actions
 	class ReadSelfActionActivation;
 	class ReadStructuralFeatureActionActivation;
 	class RemoveStructuralFeatureValueActionActivation;
+	class SendSignalActionActivation;
 	class StructuralFeatureActionActivation;
 	class StructuredActivityNodeActivation;
 	class ValueSpecificationActionActivation;
@@ -75,6 +78,62 @@ namespace fUML::Semantics::Actions
 			static const std::string eNAME;
 			static const std::string eNS_URI;
 			static const std::string eNS_PREFIX;
+
+			// Begin Class AcceptEventActionActivation
+			//Class and Feature IDs 
+			static const unsigned long ACCEPTEVENTACTIONACTIVATION_CLASS = 1811945832;
+			static const unsigned int ACCEPTEVENTACTIONACTIVATION_CLASS_FEATURE_COUNT = 13;
+			static const unsigned int ACCEPTEVENTACTIONACTIVATION_CLASS_OPERATION_COUNT = 54;
+			static const unsigned long ACCEPTEVENTACTIONACTIVATION_ATTRIBUTE_WAITING = 1674329142;
+			
+			static const unsigned long ACCEPTEVENTACTIONACTIVATION_ATTRIBUTE_EVENTACCEPTER = 312513207;
+			
+			static const unsigned long ACCEPTEVENTACTIONACTIVATION_OPERATION_ACCEPT_EVENTOCCURRENCE = 3708275754;
+			static const unsigned long ACCEPTEVENTACTIONACTIVATION_OPERATION_DOACTION = 2150655828;
+			static const unsigned long ACCEPTEVENTACTIONACTIVATION_OPERATION_FIRE_TOKEN = 2626905848;
+			static const unsigned long ACCEPTEVENTACTIONACTIVATION_OPERATION_INITIALIZE_ACTIVITYNODE_ACTIVITYNODEACTIVATIONGROUP = 124765928;
+			static const unsigned long ACCEPTEVENTACTIONACTIVATION_OPERATION_ISREADY = 2864583542;
+			static const unsigned long ACCEPTEVENTACTIONACTIVATION_OPERATION_MATCH_EVENTOCCURRENCE = 2008096317;
+			static const unsigned long ACCEPTEVENTACTIONACTIVATION_OPERATION_RUN = 689637052;
+			static const unsigned long ACCEPTEVENTACTIONACTIVATION_OPERATION_TERMINATE = 3496128276;
+			
+			//Class and Feature Getter
+			virtual const std::shared_ptr<ecore::EClass>& getAcceptEventActionActivation_Class() const = 0;
+			
+			virtual const std::shared_ptr<ecore::EAttribute>& getAcceptEventActionActivation_Attribute_waiting() const = 0;
+			
+			virtual const std::shared_ptr<ecore::EReference>& getAcceptEventActionActivation_Attribute_eventAccepter() const = 0;
+			
+			virtual const std::shared_ptr<ecore::EOperation>& getAcceptEventActionActivation_Operation_accept_EventOccurrence() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getAcceptEventActionActivation_Operation_doAction() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getAcceptEventActionActivation_Operation_fire_Token() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getAcceptEventActionActivation_Operation_initialize_ActivityNode_ActivityNodeActivationGroup() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getAcceptEventActionActivation_Operation_isReady() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getAcceptEventActionActivation_Operation_match_EventOccurrence() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getAcceptEventActionActivation_Operation_run() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getAcceptEventActionActivation_Operation_terminate() const = 0;
+			
+			// End Class AcceptEventActionActivation
+
+
+			// Begin Class AcceptEventActionEventAccepter
+			//Class and Feature IDs 
+			static const unsigned long ACCEPTEVENTACTIONEVENTACCEPTER_CLASS = 704487621;
+			static const unsigned int ACCEPTEVENTACTIONEVENTACCEPTER_CLASS_FEATURE_COUNT = 1;
+			static const unsigned int ACCEPTEVENTACTIONEVENTACCEPTER_CLASS_OPERATION_COUNT = 2;
+			
+			static const unsigned long ACCEPTEVENTACTIONEVENTACCEPTER_ATTRIBUTE_ACTIONACTIVATION = 766478756;
+			
+			
+			//Class and Feature Getter
+			virtual const std::shared_ptr<ecore::EClass>& getAcceptEventActionEventAccepter_Class() const = 0;
+			
+			
+			virtual const std::shared_ptr<ecore::EReference>& getAcceptEventActionEventAccepter_Attribute_actionActivation() const = 0;
+			
+			
+			// End Class AcceptEventActionEventAccepter
+
 
 			// Begin Class ActionActivation
 			//Class and Feature IDs 
@@ -602,6 +661,25 @@ namespace fUML::Semantics::Actions
 			virtual const std::shared_ptr<ecore::EOperation>& getRemoveStructuralFeatureValueActionActivation_Operation_doAction() const = 0;
 			
 			// End Class RemoveStructuralFeatureValueActionActivation
+
+
+			// Begin Class SendSignalActionActivation
+			//Class and Feature IDs 
+			static const unsigned long SENDSIGNALACTIONACTIVATION_CLASS = 2140099606;
+			static const unsigned int SENDSIGNALACTIONACTIVATION_CLASS_FEATURE_COUNT = 11;
+			static const unsigned int SENDSIGNALACTIONACTIVATION_CLASS_OPERATION_COUNT = 47;
+			
+			
+			static const unsigned long SENDSIGNALACTIONACTIVATION_OPERATION_DOACTION = 4006251730;
+			
+			//Class and Feature Getter
+			virtual const std::shared_ptr<ecore::EClass>& getSendSignalActionActivation_Class() const = 0;
+			
+			
+			
+			virtual const std::shared_ptr<ecore::EOperation>& getSendSignalActionActivation_Operation_doAction() const = 0;
+			
+			// End Class SendSignalActionActivation
 
 
 			// Begin Class StructuralFeatureActionActivation

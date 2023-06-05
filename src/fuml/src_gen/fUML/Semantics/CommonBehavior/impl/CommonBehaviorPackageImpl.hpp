@@ -18,6 +18,8 @@
 
 namespace fUML::Semantics::CommonBehavior 
 {
+	class EventAccepter;
+	class EventOccurrence;
 	class Execution;
 	class ParameterValue;}
 
@@ -39,6 +41,32 @@ namespace fUML::Semantics::CommonBehavior
 
 		public:
 			virtual ~CommonBehaviorPackageImpl();
+
+			// Begin Class EventAccepter
+			//Class and Feature Getter
+			virtual const std::shared_ptr<ecore::EClass>& getEventAccepter_Class() const ;
+			
+			
+			
+			virtual const std::shared_ptr<ecore::EOperation>& getEventAccepter_Operation_accept_Element() const ;
+			virtual const std::shared_ptr<ecore::EOperation>& getEventAccepter_Operation_match_Element() const ;
+			
+			// End Class EventAccepter
+
+			// Begin Class EventOccurrence
+			//Class and Feature Getter
+			virtual const std::shared_ptr<ecore::EClass>& getEventOccurrence_Class() const ;
+			
+			
+			virtual const std::shared_ptr<ecore::EReference>& getEventOccurrence_Attribute_target() const ;
+			
+			virtual const std::shared_ptr<ecore::EOperation>& getEventOccurrence_Operation_doSend() const ;
+			virtual const std::shared_ptr<ecore::EOperation>& getEventOccurrence_Operation_getParameterValues() const ;
+			virtual const std::shared_ptr<ecore::EOperation>& getEventOccurrence_Operation_match_Trigger() const ;
+			virtual const std::shared_ptr<ecore::EOperation>& getEventOccurrence_Operation_matchAny_Trigger() const ;
+			virtual const std::shared_ptr<ecore::EOperation>& getEventOccurrence_Operation_sendTo_Element() const ;
+			
+			// End Class EventOccurrence
 
 			// Begin Class Execution
 			//Class and Feature Getter
@@ -79,11 +107,11 @@ namespace fUML::Semantics::CommonBehavior
 			
 
 		private:
-			std::shared_ptr<ecore::EClass> m_execution_Class = nullptr;std::shared_ptr<ecore::EClass> m_parameterValue_Class = nullptr;
+			std::shared_ptr<ecore::EClass> m_eventAccepter_Class = nullptr;std::shared_ptr<ecore::EClass> m_eventOccurrence_Class = nullptr;std::shared_ptr<ecore::EClass> m_execution_Class = nullptr;std::shared_ptr<ecore::EClass> m_parameterValue_Class = nullptr;
 			
 			std::shared_ptr<ecore::EAttribute> m_parameterValue_Attribute_values = nullptr;
-			std::shared_ptr<ecore::EReference> m_execution_Attribute_behavior = nullptr;std::shared_ptr<ecore::EReference> m_execution_Attribute_context = nullptr;std::shared_ptr<ecore::EReference> m_execution_Attribute_locus = nullptr;std::shared_ptr<ecore::EReference> m_parameterValue_Attribute_parameter = nullptr;std::shared_ptr<ecore::EReference> m_execution_Attribute_parameterValues = nullptr;std::shared_ptr<ecore::EReference> m_execution_Attribute_types = nullptr;
-			std::shared_ptr<ecore::EOperation> m_execution_Operation__copy = nullptr;std::shared_ptr<ecore::EOperation> m_parameterValue_Operation__copy = nullptr;std::shared_ptr<ecore::EOperation> m_execution_Operation_destroy = nullptr;std::shared_ptr<ecore::EOperation> m_execution_Operation_execute = nullptr;std::shared_ptr<ecore::EOperation> m_execution_Operation_getOutputParameterValues = nullptr;std::shared_ptr<ecore::EOperation> m_execution_Operation_getParameterValue_Parameter = nullptr;std::shared_ptr<ecore::EOperation> m_execution_Operation_new_ = nullptr;std::shared_ptr<ecore::EOperation> m_execution_Operation_setParameterValue_ParameterValue = nullptr;std::shared_ptr<ecore::EOperation> m_execution_Operation_terminate = nullptr;
+			std::shared_ptr<ecore::EReference> m_execution_Attribute_behavior = nullptr;std::shared_ptr<ecore::EReference> m_execution_Attribute_context = nullptr;std::shared_ptr<ecore::EReference> m_execution_Attribute_locus = nullptr;std::shared_ptr<ecore::EReference> m_parameterValue_Attribute_parameter = nullptr;std::shared_ptr<ecore::EReference> m_execution_Attribute_parameterValues = nullptr;std::shared_ptr<ecore::EReference> m_eventOccurrence_Attribute_target = nullptr;std::shared_ptr<ecore::EReference> m_execution_Attribute_types = nullptr;
+			std::shared_ptr<ecore::EOperation> m_execution_Operation__copy = nullptr;std::shared_ptr<ecore::EOperation> m_parameterValue_Operation__copy = nullptr;std::shared_ptr<ecore::EOperation> m_eventAccepter_Operation_accept_Element = nullptr;std::shared_ptr<ecore::EOperation> m_execution_Operation_destroy = nullptr;std::shared_ptr<ecore::EOperation> m_eventOccurrence_Operation_doSend = nullptr;std::shared_ptr<ecore::EOperation> m_execution_Operation_execute = nullptr;std::shared_ptr<ecore::EOperation> m_execution_Operation_getOutputParameterValues = nullptr;std::shared_ptr<ecore::EOperation> m_execution_Operation_getParameterValue_Parameter = nullptr;std::shared_ptr<ecore::EOperation> m_eventOccurrence_Operation_getParameterValues = nullptr;std::shared_ptr<ecore::EOperation> m_eventAccepter_Operation_match_Element = nullptr;std::shared_ptr<ecore::EOperation> m_eventOccurrence_Operation_match_Trigger = nullptr;std::shared_ptr<ecore::EOperation> m_eventOccurrence_Operation_matchAny_Trigger = nullptr;std::shared_ptr<ecore::EOperation> m_execution_Operation_new_ = nullptr;std::shared_ptr<ecore::EOperation> m_eventOccurrence_Operation_sendTo_Element = nullptr;std::shared_ptr<ecore::EOperation> m_execution_Operation_setParameterValue_ParameterValue = nullptr;std::shared_ptr<ecore::EOperation> m_execution_Operation_terminate = nullptr;
 
 			friend class CommonBehaviorPackage;
 
@@ -99,10 +127,14 @@ namespace fUML::Semantics::CommonBehavior
 			void initializePackageContents();
 
 		private:
+			void createEventAccepterContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory);
+			void createEventOccurrenceContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory);
 			void createExecutionContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory);
 			void createParameterValueContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory);
 			void createPackageEDataTypes(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory);
 
+			void initializeEventAccepterContent();
+			void initializeEventOccurrenceContent();
 			void initializeExecutionContent();
 			void initializeParameterValueContent();
 			void initializePackageEDataTypes();

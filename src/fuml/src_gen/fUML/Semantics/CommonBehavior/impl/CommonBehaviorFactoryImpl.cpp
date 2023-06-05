@@ -4,6 +4,8 @@
 
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EClass.hpp"
+#include "fUML/Semantics/CommonBehavior/impl/EventAccepterImpl.hpp"
+#include "fUML/Semantics/CommonBehavior/impl/EventOccurrenceImpl.hpp"
 #include "fUML/Semantics/CommonBehavior/impl/ExecutionImpl.hpp"
 #include "fUML/Semantics/CommonBehavior/impl/ParameterValueImpl.hpp"
 
@@ -32,6 +34,7 @@ std::shared_ptr<CommonBehaviorFactory> CommonBehaviorFactory::eInstance()
 
 CommonBehaviorFactoryImpl::CommonBehaviorFactoryImpl()
 {
+	m_idMap.insert(std::make_pair("fUML::Semantics::CommonBehavior::EventOccurrence", CommonBehaviorPackage::EVENTOCCURRENCE_CLASS));
 	m_idMap.insert(std::make_pair("fUML::Semantics::CommonBehavior::ParameterValue", CommonBehaviorPackage::PARAMETERVALUE_CLASS));
 }
 
@@ -52,6 +55,12 @@ std::shared_ptr<ecore::EObject> CommonBehaviorFactoryImpl::create(const int meta
 {
 	switch(metaElementID)
 	{
+		case CommonBehaviorPackage::EVENTOCCURRENCE_CLASS:
+		{
+				return this->createEventOccurrence(metaElementID);
+			
+			break;
+		}
 		case CommonBehaviorPackage::PARAMETERVALUE_CLASS:
 		{
 			if (nullptr == container)
@@ -94,6 +103,13 @@ std::shared_ptr<ecore::EObject> CommonBehaviorFactoryImpl::create(std::string _c
     return nullptr;
 }
 
+std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccurrence> CommonBehaviorFactoryImpl::createEventOccurrence(const int metaElementID/*=-1*/) const
+{
+	std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccurrenceImpl> element(new fUML::Semantics::CommonBehavior::EventOccurrenceImpl());
+	element->setMetaElementID(metaElementID);
+	element->setThisEventOccurrencePtr(element);
+	return element;
+}
 std::shared_ptr<fUML::Semantics::CommonBehavior::ParameterValue> CommonBehaviorFactoryImpl::createParameterValue(const int metaElementID/*=-1*/) const
 {
 	std::shared_ptr<fUML::Semantics::CommonBehavior::ParameterValueImpl> element(new fUML::Semantics::CommonBehavior::ParameterValueImpl());

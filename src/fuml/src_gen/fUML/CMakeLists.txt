@@ -78,6 +78,8 @@ SET(SOURCE_FILES
 # Package plugin
 	impl/fUMLPluginImpl.cpp
 # Package content
+	Semantics/Actions/impl/AcceptEventActionActivationImpl.cpp
+	Semantics/Actions/impl/AcceptEventActionEventAccepterImpl.cpp
 	Semantics/Actions/impl/ActionActivationImpl.cpp
 	Semantics/Activities/impl/ActivityEdgeInstanceImpl.cpp
 	Semantics/Activities/impl/ActivityExecutionImpl.cpp
@@ -99,6 +101,8 @@ SET(SOURCE_FILES
 	Semantics/Activities/impl/DecisionNodeActivationImpl.cpp
 	Semantics/Actions/impl/DestroyObjectActionActivationImpl.cpp
 	Semantics/StructuredClassifiers/impl/DispatchStrategyImpl.cpp
+	Semantics/CommonBehavior/impl/EventAccepterImpl.cpp
+	Semantics/CommonBehavior/impl/EventOccurrenceImpl.cpp
 	Semantics/CommonBehavior/impl/ExecutionImpl.cpp
 	Semantics/Loci/impl/ExecutionFactoryImpl.cpp
 	Semantics/Loci/impl/ExecutorImpl.cpp
@@ -129,6 +133,7 @@ SET(SOURCE_FILES
 	Semantics/Actions/impl/RemoveStructuralFeatureValueActionActivationImpl.cpp
 	Semantics/Loci/impl/SemanticStrategyImpl.cpp
 	Semantics/Loci/impl/SemanticVisitorImpl.cpp
+	Semantics/Actions/impl/SendSignalActionActivationImpl.cpp
 	Semantics/Actions/impl/StructuralFeatureActionActivationImpl.cpp
 	Semantics/Actions/impl/StructuredActivityNodeActivationImpl.cpp
 	Semantics/Activities/impl/TokenImpl.cpp

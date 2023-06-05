@@ -15,7 +15,9 @@
 #include "fUML/Semantics/CommonBehavior/CommonBehaviorFactory.hpp"
 
 namespace CommonBehavior 
-{	class Execution;
+{	class EventAccepter;
+	class EventOccurrence;
+	class Execution;
 	class ParameterValue;
 }
 
@@ -39,6 +41,7 @@ namespace fUML::Semantics::CommonBehavior
 			virtual std::shared_ptr<ecore::EObject> create(std::shared_ptr<ecore::EClass> _class, std::shared_ptr<EObject> _container=nullptr, const int referenceID = -1) const;
 
 			//Creator functions
+			 virtual std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccurrence> createEventOccurrence(const int metaElementID = CommonBehaviorPackage::EVENTOCCURRENCE_CLASS) const ;
 			 virtual std::shared_ptr<fUML::Semantics::CommonBehavior::ParameterValue> createParameterValue(const int metaElementID = CommonBehaviorPackage::PARAMETERVALUE_CLASS) const ;
 			 //Add as contained object
 			 virtual std::shared_ptr<fUML::Semantics::CommonBehavior::ParameterValue> createParameterValue_as_parameterValues_in_Execution(std::shared_ptr<fUML::Semantics::CommonBehavior::Execution> par_Execution, const int metaElementID = CommonBehaviorPackage::PARAMETERVALUE_CLASS) const ;

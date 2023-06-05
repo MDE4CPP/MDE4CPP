@@ -76,6 +76,72 @@ void ActionsPackageImpl::init(std::shared_ptr<ecore::EPackage> package)
 
 
 
+// Begin Class AcceptEventActionActivation
+const std::shared_ptr<ecore::EClass>& fUML::Semantics::Actions::ActionsPackageImpl::getAcceptEventActionActivation_Class() const
+{
+	return m_acceptEventActionActivation_Class;
+}
+
+const std::shared_ptr<ecore::EAttribute>& fUML::Semantics::Actions::ActionsPackageImpl::getAcceptEventActionActivation_Attribute_waiting() const
+{
+	return m_acceptEventActionActivation_Attribute_waiting;
+}
+
+const std::shared_ptr<ecore::EReference>& fUML::Semantics::Actions::ActionsPackageImpl::getAcceptEventActionActivation_Attribute_eventAccepter() const
+{
+	return m_acceptEventActionActivation_Attribute_eventAccepter;
+}
+
+const std::shared_ptr<ecore::EOperation>& fUML::Semantics::Actions::ActionsPackageImpl::getAcceptEventActionActivation_Operation_accept_EventOccurrence() const
+{
+	return m_acceptEventActionActivation_Operation_accept_EventOccurrence;
+}
+const std::shared_ptr<ecore::EOperation>& fUML::Semantics::Actions::ActionsPackageImpl::getAcceptEventActionActivation_Operation_doAction() const
+{
+	return m_acceptEventActionActivation_Operation_doAction;
+}
+const std::shared_ptr<ecore::EOperation>& fUML::Semantics::Actions::ActionsPackageImpl::getAcceptEventActionActivation_Operation_fire_Token() const
+{
+	return m_acceptEventActionActivation_Operation_fire_Token;
+}
+const std::shared_ptr<ecore::EOperation>& fUML::Semantics::Actions::ActionsPackageImpl::getAcceptEventActionActivation_Operation_initialize_ActivityNode_ActivityNodeActivationGroup() const
+{
+	return m_acceptEventActionActivation_Operation_initialize_ActivityNode_ActivityNodeActivationGroup;
+}
+const std::shared_ptr<ecore::EOperation>& fUML::Semantics::Actions::ActionsPackageImpl::getAcceptEventActionActivation_Operation_isReady() const
+{
+	return m_acceptEventActionActivation_Operation_isReady;
+}
+const std::shared_ptr<ecore::EOperation>& fUML::Semantics::Actions::ActionsPackageImpl::getAcceptEventActionActivation_Operation_match_EventOccurrence() const
+{
+	return m_acceptEventActionActivation_Operation_match_EventOccurrence;
+}
+const std::shared_ptr<ecore::EOperation>& fUML::Semantics::Actions::ActionsPackageImpl::getAcceptEventActionActivation_Operation_run() const
+{
+	return m_acceptEventActionActivation_Operation_run;
+}
+const std::shared_ptr<ecore::EOperation>& fUML::Semantics::Actions::ActionsPackageImpl::getAcceptEventActionActivation_Operation_terminate() const
+{
+	return m_acceptEventActionActivation_Operation_terminate;
+}
+
+// End Class AcceptEventActionActivation
+
+// Begin Class AcceptEventActionEventAccepter
+const std::shared_ptr<ecore::EClass>& fUML::Semantics::Actions::ActionsPackageImpl::getAcceptEventActionEventAccepter_Class() const
+{
+	return m_acceptEventActionEventAccepter_Class;
+}
+
+
+const std::shared_ptr<ecore::EReference>& fUML::Semantics::Actions::ActionsPackageImpl::getAcceptEventActionEventAccepter_Attribute_actionActivation() const
+{
+	return m_acceptEventActionEventAccepter_Attribute_actionActivation;
+}
+
+
+// End Class AcceptEventActionEventAccepter
+
 // Begin Class ActionActivation
 const std::shared_ptr<ecore::EClass>& fUML::Semantics::Actions::ActionsPackageImpl::getActionActivation_Class() const
 {
@@ -671,6 +737,21 @@ const std::shared_ptr<ecore::EOperation>& fUML::Semantics::Actions::ActionsPacka
 }
 
 // End Class RemoveStructuralFeatureValueActionActivation
+
+// Begin Class SendSignalActionActivation
+const std::shared_ptr<ecore::EClass>& fUML::Semantics::Actions::ActionsPackageImpl::getSendSignalActionActivation_Class() const
+{
+	return m_sendSignalActionActivation_Class;
+}
+
+
+
+const std::shared_ptr<ecore::EOperation>& fUML::Semantics::Actions::ActionsPackageImpl::getSendSignalActionActivation_Operation_doAction() const
+{
+	return m_sendSignalActionActivation_Operation_doAction;
+}
+
+// End Class SendSignalActionActivation
 
 // Begin Class StructuralFeatureActionActivation
 const std::shared_ptr<ecore::EClass>& fUML::Semantics::Actions::ActionsPackageImpl::getStructuralFeatureActionActivation_Class() const
