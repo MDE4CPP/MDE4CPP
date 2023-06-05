@@ -1,0 +1,103 @@
+[comment encoding = UTF-8 /]
+[**
+ * Copyright (c) 2017 TU Ilmenau, Systems and Software Engineering Group
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), 
+ * to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, 
+ * and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+ * 
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, 
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, 
+ * WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+ *
+ ****************************************************************************************************************************************************************
+ * 
+ * module for generation of UML Signal artefacts
+ * 
+ */]
+[module generateSignal('http://www.eclipse.org/uml2/5.0.0/UML')]
+
+[import UML4CPP::generator::main::components::generateConstraint /]
+[import UML4CPP::generator::main::components::generateType /]
+[import UML4CPP::generator::main::components::generateInterface /]
+[import UML4CPP::generator::main::components::generateStereotype /]
+[import UML4CPP::generator::main::components::generateEnumeration /]
+[import UML4CPP::generator::main::helpers::generalHelper /]
+[import UML4CPP::generator::main::helpers::nameHelper /]
+[import UML4CPP::generator::main::helpers::IDHelper /]
+[import UML4CPP::generator::main::components::generateOperation /]
+[import UML4CPP::generator::main::profiles::uml4CPPProfileHelper /]
+[import UML4CPP::generator::main::profiles::strategyHelper /]
+[import UML4CPP::generator::main::helpers::isGeneratableHelper /]
+
+[**
+ * template to generate create function declarations
+*/]
+[template public generateSignalCreate(aSignal : Signal, impl : Boolean)]
+//START Create methods for signal [aSignal.name/]
+virtual std::shared_ptr<[aSignal.generateCppRawType(true)/]> create[aSignal.name.toUpperFirst()/](const int metaElementID = [aSignal.getNearestPackage().name/]Package::[aSignal.getMemberName().toUpperCase()/]) const [abstractSuffix(impl)/];
+[for (anAssociation : Association | aSignal.getCompositionsToSignal())] [comment for each association, that is a composition to aClass/]
+	[let containerProperty : Property = anAssociation.getCompositeProperty(aSignal)]
+		[if (not containerProperty.opposite.oclIsUndefined())]
+			[let containmentProperty : Property = containerProperty.opposite]
+virtual std::shared_ptr<[aSignal.generateCppRawType(true)/]> create[aSignal.name.toUpperFirst()/]_as_[containerProperty.name/]_in_[containmentProperty.type.name.toUpperFirst()/]([containmentProperty.generateCppType()/] par_[containmentProperty.name.toLowerFirst()/], const int metaElementID = [aSignal.getNearestPackage().name/]Package::[aSignal.getMemberName().toUpperCase()/]) const [abstractSuffix(impl)/] ; 
+			[/let]
+		[/if]
+	[/let]
+[/for]
+//END Create methods for signal [aSignal.name/]
+[/template]
+
+[**
+ * generate creation of meta model instance for an Signal element
+ * 
+ * this includes:
+ * - creation of Signal
+ * - creation of Signal constraints
+*/]
+[template public generateSignalCreation(aSignal : Signal)]
+[aSignal.memberName()/] = factory->createSignal_as_ownedType_in_Package([aSignal.ancestors(Package)->first().memberName()/], [aSignal._package.generateNamespace(true)/]::[aSignal._package.myNamespaceName()/]Package::[aSignal.getMemberName().toUpperCase()/]);
+[if (aSignal.ownedRule->size() > 0)]
+//constraints
+[for (aConstraint : Constraint | aSignal.ownedRule->sortedBy(name)) separator('\n')]
+[aConstraint.generateConstraintCreation()/]
+[/for][/if]
+[/template]
+
+[template public generateStaticSignalID(aSignal : Signal)]
+//Signal [aSignal.generateNamespaceName(true)/]
+static const unsigned long [aSignal.getMemberName().toUpperCase()/] = [aSignal.transformType().generatePolynomialRollingHash()/];
+static const unsigned int [aSignal.getMemberName().toUpperCase()/]_FEATURE_COUNT = [aSignal.allFeatures()->size()/];
+[/template]
+
+[**
+ * generate initialization of meta model instance for an Signal element
+ * 
+ * this includes:
+ * - set signal name
+ * - set isAbstract flag
+ * - create and initialize generalization
+*/]
+[template public generateSignalInitialization(aSignal : Signal)]
+[aSignal.memberName()/]->setName("[aSignal.name/]");
+[aSignal.memberName()/]->setIsAbstract([aSignal.isAbstract/]);
+[aSignal.generateStereotypeApplication()/]
+[/template]
+
+[template public generateSignalEventInitialization(aSignalEvent : SignalEvent)]
+[aSignalEvent.memberName()/]->setName("[aSignalEvent.name/]");
+// set the reference to the signal
+[aSignalEvent.memberName()/]->setSignal([aSignalEvent.signal.memberName()/]);
+
+[aSignalEvent.generateStereotypeApplication()/]
+[/template]
+
+[** 
+ * get all associations where aSignal is memberType
+*/]
+[query private getAssociationsToClass(aSignal : Signal) : Set(Association) = aSignal.getNearestPackage().ownedMember->select(oclIsKindOf(Association))->asOrderedSet() /]
+[query private isCompositionForClass(anAssociation : Association, aSignal : Signal) : Boolean = anAssociation.memberEnd->select(type = aSignal and isComposite and (not owner.oclIsKindOf(Association)))->size() > 0/]
+[query public getCompositeProperty(anAssociation : Association, aSignal : Signal) : Property = anAssociation.memberEnd->select(type = aSignal and isComposite and (not owner.oclIsKindOf(Association)))->first() /]
+[query public getCompositionsToSignal(aSignal : Signal) : Set(Association) = getAssociationsToClass()->select(isCompositionForClass(aSignal))->asOrderedSet()->sortedBy(myQualifiedName()) /]

@@ -248,11 +248,20 @@ fUML::Semantics::Actions::ExpansionNodeActivation
 [/template]
 
 [comment Actions /]
+[template private generateCorrespondingActivityNodeActivationCPPType(anActivityNode : ActivityNode) ? (anActivityNode.oclIsKindOf(AcceptEventAction))]
+fUML::Semantics::Actions::AcceptEventActionActivation
+[/template]
+[template private generateCorrespondingActivityNodeActivationCPPType(anActivityNode : ActivityNode) ? (anActivityNode.oclIsKindOf(AddStructuralFeatureValueAction))]
+fUML::Semantics::Actions::AddStructuralFeatureValueActionActivation
+[/template]
 [template private generateCorrespondingActivityNodeActivationCPPType(anActivityNode : ActivityNode) ? (anActivityNode.oclIsKindOf(CallOperationAction))]
 fUML::Semantics::Actions::CallOperationActionActivation
 [/template]
 [template private generateCorrespondingActivityNodeActivationCPPType(anActivityNode : ActivityNode) ? (anActivityNode.oclIsKindOf(CallBehaviorAction))]
 fUML::Semantics::Actions::CallBehaviorActionActivation
+[/template]
+[template private generateCorrespondingActivityNodeActivationCPPType(anActivityNode : ActivityNode) ? (anActivityNode.oclIsKindOf(ClearStructuralFeatureAction))]
+fUML::Semantics::Actions::ClearStructuralFeatureActionActivation
 [/template]
 [template private generateCorrespondingActivityNodeActivationCPPType(anActivityNode : ActivityNode) ? (anActivityNode.oclIsKindOf(CreateObjectAction))]
 fUML::Semantics::Actions::CreateObjectActionActivation
@@ -266,20 +275,17 @@ fUML::Semantics::Actions::ReadExtentActionActivation
 [template private generateCorrespondingActivityNodeActivationCPPType(anActivityNode : ActivityNode) ? (anActivityNode.oclIsKindOf(ReadSelfAction))]
 fUML::Semantics::Actions::ReadSelfActionActivation
 [/template]
-[template private generateCorrespondingActivityNodeActivationCPPType(anActivityNode : ActivityNode) ? (anActivityNode.oclIsKindOf(ValueSpecificationAction))]
-fUML::Semantics::Actions::ValueSpecificationActionActivation
-[/template]
 [template private generateCorrespondingActivityNodeActivationCPPType(anActivityNode : ActivityNode) ? (anActivityNode.oclIsKindOf(ReadStructuralFeatureAction))]
 fUML::Semantics::Actions::ReadStructuralFeatureActionActivation
-[/template]
-[template private generateCorrespondingActivityNodeActivationCPPType(anActivityNode : ActivityNode) ? (anActivityNode.oclIsKindOf(AddStructuralFeatureValueAction))]
-fUML::Semantics::Actions::AddStructuralFeatureValueActionActivation
 [/template]
 [template private generateCorrespondingActivityNodeActivationCPPType(anActivityNode : ActivityNode) ? (anActivityNode.oclIsKindOf(RemoveStructuralFeatureValueAction))]
 fUML::Semantics::Actions::RemoveStructuralFeatureValueActionActivation
 [/template]
-[template private generateCorrespondingActivityNodeActivationCPPType(anActivityNode : ActivityNode) ? (anActivityNode.oclIsKindOf(ClearStructuralFeatureAction))]
-fUML::Semantics::Actions::ClearStructuralFeatureActionActivation
+[template private generateCorrespondingActivityNodeActivationCPPType(anActivityNode : ActivityNode) ? (anActivityNode.oclIsKindOf(SendSignalAction))]
+fUML::Semantics::Actions::SendSignalActionActivation
+[/template]
+[template private generateCorrespondingActivityNodeActivationCPPType(anActivityNode : ActivityNode) ? (anActivityNode.oclIsKindOf(ValueSpecificationAction))]
+fUML::Semantics::Actions::ValueSpecificationActionActivation
 [/template]
 
 [comment Structured Activity Nodes /]

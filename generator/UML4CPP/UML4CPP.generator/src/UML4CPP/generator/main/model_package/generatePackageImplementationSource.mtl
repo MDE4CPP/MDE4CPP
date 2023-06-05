@@ -35,6 +35,7 @@
 [import UML4CPP::generator::main::components::generateOperation /]
 [import UML4CPP::generator::main::components::generatePrimitivetype /]
 [import UML4CPP::generator::main::components::generateProperty /]
+[import UML4CPP::generator::main::components::generateSignal /]
 [import UML4CPP::generator::main::components::generateStereotype /]
 [import UML4CPP::generator::main::components::generateType /]
 [import UML4CPP::generator::main::components::generateValueSpecification /]
@@ -75,6 +76,7 @@
 								aPackage.getElementsBelongingToPackage()->selectByKind(Class).generalization.eClass(),
 								aPackage.getElementsBelongingToPackage()->selectByKind(DataType).ownedOperation.ownedParameter->reject(p : Parameter | p.type.oclIsUndefined()).type.eClass(), 
 								aPackage.getElementsBelongingToPackage()->selectByKind(DataType).ownedAttribute->reject(p : Property | p.type.oclIsUndefined()).type.eClass(),
+								aPackage.getElementsBelongingToPackage()->selectByKind(Signal).ownedAttribute->select(not type.oclIsUndefined()).type.eClass(),
 								aPackage.getElementsBelongingToPackage()->selectByKind(Association).memberEnd.eClass(),
 								aPackage.getElementsBelongingToPackage()->selectByKind(ConnectorEnd).role->reject(oclIsUndefined()).eClass(),
 								aPackage.getElementsBelongingToPackage()->selectByKind(StructuralFeatureAction).structuralFeature.eClass(),
@@ -199,11 +201,13 @@ void [packageName/]::createPackageContents(std::shared_ptr<uml::Package> [aPacka
 	createPackageDataTypes([aPackage.memberName()/], factory);
 	createPackageDependencies([aPackage.memberName()/], factory);
 	createPackageEnumerationLiterals([aPackage.memberName()/], factory);
+	createPackageEvents([aPackage.memberName()/], factory);
 	createPackageValueSpecifications([aPackage.memberName()/], factory);
 	createPackageInstanceSpecifications([aPackage.memberName()/], factory);
 	createPackageInterfaces([aPackage.memberName()/], factory);
 	createPackageInterfaceRealizations([aPackage.memberName()/], factory);
 	createPackagePrimitiveTypes([aPackage.memberName()/], factory);
+	createPackageSignals([aPackage.memberName()/], factory);
 	createPackageStereotypes([aPackage.memberName()/], factory);
 }
 
@@ -279,6 +283,23 @@ void [packageName/]::createPackageClasses(std::shared_ptr<uml::Package> [aPackag
 [/for]
 }
 
+[comment]Only Signals[/comment]
+void [packageName/]::createPackageSignals(std::shared_ptr<uml::Package> [aPackage.memberName()/], std::shared_ptr<uml::umlFactory> factory)
+{
+	std::shared_ptr<uml::Constraint> con = nullptr;
+	std::shared_ptr<uml::OpaqueExpression> oe = nullptr;
+
+[for (aSignal : Signal | (aPackage.ownedMember->filter(Signal)->reject(oclIsKindOf(Stereotype)))->select(isGeneratable())->asOrderedSet()->sortedBy(myQualifiedName())) separator ('\n    //-------------------------------------------\n')]
+	//[aSignal.name/]
+	[aSignal.generateSignalCreation()/]
+
+	[for (anProperty : Property | aSignal.ownedAttribute->sortedBy(name)) before ('    // '.concat(aSignal.name).concat(' attributes\n'))]
+	//[anProperty.name/]
+	[anProperty.memberName()/] = factory->createProperty_as_ownedAttribute_in_Signal([aSignal.memberName()/]);
+	[/for]
+[/for]
+}
+
 [comment]Only DataTypes[/comment]
 void [packageName/]::createPackageDataTypes(std::shared_ptr<uml::Package> [aPackage.memberName()/], std::shared_ptr<uml::umlFactory> factory)
 {
@@ -309,6 +330,15 @@ void [packageName/]::createPackageEnumerationLiterals(std::shared_ptr<uml::Packa
 [if (aPackage.ownedMember->filter(Enumeration)->size() > 0)]
 	[aPackage.ownedMember->filter(Enumeration)->sortedBy(memberName()).generateEnumerationCreation()/]
 [/if]
+}
+
+[comment]Only Events[/comment]
+void [packageName/]::createPackageEvents(std::shared_ptr<uml::Package> [aPackage.memberName()/], std::shared_ptr<uml::umlFactory> factory)
+{
+[for (aSignalEvent : SignalEvent | (aPackage.ownedMember->filter(SignalEvent))->select(isGeneratable())->asOrderedSet()->sortedBy(myQualifiedName())) separator ('\n    //-------------------------------------------\n')]
+	//[aSignalEvent.name/]
+	[aSignalEvent.memberName()/] = factory->createSignalEvent_as_packagedElement_in_Package([aSignalEvent.ancestors(Package)->first().memberName()/]);
+[/for]
 }
 
 void [packageName/]::createPackageInstanceSpecifications(std::shared_ptr<uml::Package> [aPackage.memberName()/], std::shared_ptr<uml::umlFactory> factory)
@@ -380,10 +410,12 @@ void [packageName/]::initializePackageContents(std::shared_ptr<uml::Package> [aP
 	initializePackageClasses();
 	initializePackageDataTypes();
 	initializePackageDependencies();
+	initializePackageEvents();
 	initializePackageInstanceSpecifications();
 	initializePackageInterfaceRealizations();
 	initializePackageInterfaces();
 	initializePackageNestedPackages();
+	initializePackageSignals();
 	initializePackageStereotypes();
 	initializePackageValueSpecifications();
 	[if (not aPackage.oclIsKindOf(Profile))][aPackage.generateStereotypeApplication()/][/if]
@@ -462,6 +494,29 @@ void [packageName/]::initializePackageClasses()
 [/for]
 }
 
+[comment]Only Signals[/comment]
+void [packageName/]::initializePackageSignals()
+{
+	std::shared_ptr<uml::Generalization> gen = nullptr;
+
+[for (aSignal : Signal | (aPackage.ownedMember->filter(Signal)->reject(oclIsKindOf(Stereotype)))->select(isGeneratable())->sortedBy(myQualifiedName())) separator ('\n    //-------------------------------------------\n')]
+	//	signal [aSignal.name/]
+	[aSignal.generateSignalInitialization()/]
+	[for (anProperty : Property | aSignal.ownedAttribute->sortedBy(name)) before ('    // '.concat(aSignal.name).concat(' attributes\n')) after ('\n')]
+	//[anProperty.name/]
+	[anProperty.generateAttributeInitialization()/]
+	[/for]
+[/for]
+
+//-------------------------------------------
+//Opaque Behaviors
+
+[for (anOpaqueBehavior : OpaqueBehavior | aPackage.ownedMember->filter(OpaqueBehavior))]
+	//[anOpaqueBehavior.name/]
+	[anOpaqueBehavior.generateOpaqueBehaviorInitialization()/]
+[/for]
+}
+
 [comment]Only DataTypes[/comment]
 void [packageName/]::initializePackageDataTypes()
 {
@@ -502,6 +557,15 @@ void [packageName/]::initializePackageDependencies()
 	[aDependency.generateDependencyInitialization()/]
 
 	[aDependency.ownedElement->sortedBy(name).generateStereotypeApplication()/]
+[/for]
+}
+
+[comment]Only Events[/comment]
+void [packageName/]::initializePackageEvents()
+{
+[for (aSignalEvent : SignalEvent | (aPackage.ownedMember->filter(SignalEvent)->reject(oclIsKindOf(Stereotype)))->select(isGeneratable())->sortedBy(myQualifiedName())) separator ('\n    //-------------------------------------------\n')]
+	//	SignalEvent [aSignalEvent.name/]
+	[aSignalEvent.generateSignalEventInitialization()/]
 [/for]
 }
 
