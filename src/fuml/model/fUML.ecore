@@ -1020,9 +1020,6 @@
             eType="#//Semantics/CommonBehavior/ObjectActivation"/>
       </eClassifiers>
       <eClassifiers xsi:type="ecore:EClass" name="EventAccepter" abstract="true">
-        <eAnnotations source="http://tu-ilmenau.de/see/codegen">
-          <details key="doNotGenerate" value="Class 'EventAccepter' is excluded from generation because event handling is currently not supported."/>
-        </eAnnotations>
         <eOperations name="accept" ordered="false" lowerBound="1">
           <eParameters name="signalInstance" ordered="false" lowerBound="1" eType="ecore:EClass http://www.eclipse.org/uml2/5.0.0/UML#//Element"/>
         </eOperations>
@@ -1031,9 +1028,6 @@
         </eOperations>
       </eClassifiers>
       <eClassifiers xsi:type="ecore:EClass" name="EventOccurrence">
-        <eAnnotations source="http://tu-ilmenau.de/see/codegen">
-          <details key="doNotGenerate" value="Class 'EventOccurrence' is excluded from generation because event handling is currently not supported."/>
-        </eAnnotations>
         <eOperations name="doSend" lowerBound="1"/>
         <eOperations name="getParameterValues" upperBound="-1" eType="#//Semantics/CommonBehavior/ParameterValue"/>
         <eOperations name="match" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
@@ -1296,9 +1290,6 @@
     <eSubpackages name="Actions" nsURI="http:///fUML_Semantics/Semantics/Actions.ecore"
         nsPrefix="fUML_Semantics.Semantics.Actions">
       <eClassifiers xsi:type="ecore:EClass" name="AcceptEventActionActivation" eSuperTypes="#//Semantics/Actions/ActionActivation">
-        <eAnnotations source="http://tu-ilmenau.de/see/codegen">
-          <details key="doNotGenerate" value="Class 'AcceptEventActionActivation' is excluded from generation because event handling is currently not supported."/>
-        </eAnnotations>
         <eOperations name="accept" ordered="false" lowerBound="1">
           <eParameters name="eventOccurrence" ordered="false" lowerBound="1" eType="#//Semantics/CommonBehavior/EventOccurrence"/>
         </eOperations>
@@ -1323,9 +1314,6 @@
       </eClassifiers>
       <eClassifiers xsi:type="ecore:EClass" name="AcceptEventActionEventAccepter"
           eSuperTypes="#//Semantics/CommonBehavior/EventAccepter">
-        <eAnnotations source="http://tu-ilmenau.de/see/codegen">
-          <details key="doNotGenerate" value="Class 'AcceptEventActionEventAccepter' is excluded from generation because event handling is currently not supported."/>
-        </eAnnotations>
         <eStructuralFeatures xsi:type="ecore:EReference" name="actionActivation" ordered="false"
             lowerBound="1" eType="#//Semantics/Actions/AcceptEventActionActivation"/>
       </eClassifiers>
@@ -2092,9 +2080,6 @@
             lowerBound="1" eType="#//Semantics/CommonBehavior/CallEventOccurrence"/>
       </eClassifiers>
       <eClassifiers xsi:type="ecore:EClass" name="SendSignalActionActivation" eSuperTypes="#//Semantics/Actions/InvocationActionActivation">
-        <eAnnotations source="http://tu-ilmenau.de/see/codegen">
-          <details key="doNotGenerate" value="Class 'SendSignalActionActivation' is excluded from generation because event handling is currently not supported."/>
-        </eAnnotations>
         <eOperations name="doAction" ordered="false" lowerBound="1"/>
       </eClassifiers>
       <eClassifiers xsi:type="ecore:EClass" name="StartClassifierBehaviorActionActivation"
