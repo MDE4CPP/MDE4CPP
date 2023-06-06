@@ -90,11 +90,13 @@ void PrimitiveTypesPackageImpl::createPackageContents(std::shared_ptr<uml::Packa
 	createPackageDataTypes(primitiveTypes, factory);
 	createPackageDependencies(primitiveTypes, factory);
 	createPackageEnumerationLiterals(primitiveTypes, factory);
+	createPackageEvents(primitiveTypes, factory);
 	createPackageValueSpecifications(primitiveTypes, factory);
 	createPackageInstanceSpecifications(primitiveTypes, factory);
 	createPackageInterfaces(primitiveTypes, factory);
 	createPackageInterfaceRealizations(primitiveTypes, factory);
 	createPackagePrimitiveTypes(primitiveTypes, factory);
+	createPackageSignals(primitiveTypes, factory);
 	createPackageStereotypes(primitiveTypes, factory);
 }
 
@@ -118,6 +120,13 @@ void PrimitiveTypesPackageImpl::createPackageClasses(std::shared_ptr<uml::Packag
 
 }
 
+void PrimitiveTypesPackageImpl::createPackageSignals(std::shared_ptr<uml::Package> primitiveTypes, std::shared_ptr<uml::umlFactory> factory)
+{
+	std::shared_ptr<uml::Constraint> con = nullptr;
+	std::shared_ptr<uml::OpaqueExpression> oe = nullptr;
+
+}
+
 void PrimitiveTypesPackageImpl::createPackageDataTypes(std::shared_ptr<uml::Package> primitiveTypes, std::shared_ptr<uml::umlFactory> factory)
 {
 }
@@ -127,6 +136,10 @@ void PrimitiveTypesPackageImpl::createPackageDependencies(std::shared_ptr<uml::P
 }
 
 void PrimitiveTypesPackageImpl::createPackageEnumerationLiterals(std::shared_ptr<uml::Package> primitiveTypes, std::shared_ptr<uml::umlFactory> factory)
+{
+}
+
+void PrimitiveTypesPackageImpl::createPackageEvents(std::shared_ptr<uml::Package> primitiveTypes, std::shared_ptr<uml::umlFactory> factory)
 {
 }
 
@@ -185,10 +198,12 @@ void PrimitiveTypesPackageImpl::initializePackageContents(std::shared_ptr<uml::P
 	initializePackageClasses();
 	initializePackageDataTypes();
 	initializePackageDependencies();
+	initializePackageEvents();
 	initializePackageInstanceSpecifications();
 	initializePackageInterfaceRealizations();
 	initializePackageInterfaces();
 	initializePackageNestedPackages();
+	initializePackageSignals();
 	initializePackageStereotypes();
 	initializePackageValueSpecifications();
 	
@@ -214,6 +229,16 @@ void PrimitiveTypesPackageImpl::initializePackageClasses()
 
 }
 
+void PrimitiveTypesPackageImpl::initializePackageSignals()
+{
+	std::shared_ptr<uml::Generalization> gen = nullptr;
+
+
+//-------------------------------------------
+//Opaque Behaviors
+
+}
+
 void PrimitiveTypesPackageImpl::initializePackageDataTypes()
 {
 	std::shared_ptr<uml::Generalization> gen = nullptr;
@@ -221,6 +246,10 @@ void PrimitiveTypesPackageImpl::initializePackageDataTypes()
 }
 
 void PrimitiveTypesPackageImpl::initializePackageDependencies()
+{
+}
+
+void PrimitiveTypesPackageImpl::initializePackageEvents()
 {
 }
 

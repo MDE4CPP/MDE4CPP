@@ -91,11 +91,13 @@ void FoundationalModelLibraryPackageImpl::createPackageContents(std::shared_ptr<
 	createPackageDataTypes(foundationalModelLibrary, factory);
 	createPackageDependencies(foundationalModelLibrary, factory);
 	createPackageEnumerationLiterals(foundationalModelLibrary, factory);
+	createPackageEvents(foundationalModelLibrary, factory);
 	createPackageValueSpecifications(foundationalModelLibrary, factory);
 	createPackageInstanceSpecifications(foundationalModelLibrary, factory);
 	createPackageInterfaces(foundationalModelLibrary, factory);
 	createPackageInterfaceRealizations(foundationalModelLibrary, factory);
 	createPackagePrimitiveTypes(foundationalModelLibrary, factory);
+	createPackageSignals(foundationalModelLibrary, factory);
 	createPackageStereotypes(foundationalModelLibrary, factory);
 }
 
@@ -119,6 +121,13 @@ void FoundationalModelLibraryPackageImpl::createPackageClasses(std::shared_ptr<u
 
 }
 
+void FoundationalModelLibraryPackageImpl::createPackageSignals(std::shared_ptr<uml::Package> foundationalModelLibrary, std::shared_ptr<uml::umlFactory> factory)
+{
+	std::shared_ptr<uml::Constraint> con = nullptr;
+	std::shared_ptr<uml::OpaqueExpression> oe = nullptr;
+
+}
+
 void FoundationalModelLibraryPackageImpl::createPackageDataTypes(std::shared_ptr<uml::Package> foundationalModelLibrary, std::shared_ptr<uml::umlFactory> factory)
 {
 }
@@ -128,6 +137,10 @@ void FoundationalModelLibraryPackageImpl::createPackageDependencies(std::shared_
 }
 
 void FoundationalModelLibraryPackageImpl::createPackageEnumerationLiterals(std::shared_ptr<uml::Package> foundationalModelLibrary, std::shared_ptr<uml::umlFactory> factory)
+{
+}
+
+void FoundationalModelLibraryPackageImpl::createPackageEvents(std::shared_ptr<uml::Package> foundationalModelLibrary, std::shared_ptr<uml::umlFactory> factory)
 {
 }
 
@@ -172,10 +185,12 @@ void FoundationalModelLibraryPackageImpl::initializePackageContents(std::shared_
 	initializePackageClasses();
 	initializePackageDataTypes();
 	initializePackageDependencies();
+	initializePackageEvents();
 	initializePackageInstanceSpecifications();
 	initializePackageInterfaceRealizations();
 	initializePackageInterfaces();
 	initializePackageNestedPackages();
+	initializePackageSignals();
 	initializePackageStereotypes();
 	initializePackageValueSpecifications();
 	
@@ -201,6 +216,16 @@ void FoundationalModelLibraryPackageImpl::initializePackageClasses()
 
 }
 
+void FoundationalModelLibraryPackageImpl::initializePackageSignals()
+{
+	std::shared_ptr<uml::Generalization> gen = nullptr;
+
+
+//-------------------------------------------
+//Opaque Behaviors
+
+}
+
 void FoundationalModelLibraryPackageImpl::initializePackageDataTypes()
 {
 	std::shared_ptr<uml::Generalization> gen = nullptr;
@@ -208,6 +233,10 @@ void FoundationalModelLibraryPackageImpl::initializePackageDataTypes()
 }
 
 void FoundationalModelLibraryPackageImpl::initializePackageDependencies()
+{
+}
+
+void FoundationalModelLibraryPackageImpl::initializePackageEvents()
 {
 }
 

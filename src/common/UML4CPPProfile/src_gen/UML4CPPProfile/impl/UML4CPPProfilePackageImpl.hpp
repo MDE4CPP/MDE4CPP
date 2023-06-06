@@ -141,10 +141,12 @@ namespace UML4CPPProfile
 			void createPackageAssociations(std::shared_ptr<uml::Package> uML4CPPProfile, std::shared_ptr<uml::umlFactory> factory);
 			void createPackageDependencies(std::shared_ptr<uml::Package> uML4CPPProfile, std::shared_ptr<uml::umlFactory> factory);
 			void createPackageEnumerationLiterals(std::shared_ptr<uml::Package> uML4CPPProfile, std::shared_ptr<uml::umlFactory> factory);
+			void createPackageEvents(std::shared_ptr<uml::Package> uML4CPPProfile, std::shared_ptr<uml::umlFactory> factory);
 			void createPackageInstanceSpecifications(std::shared_ptr<uml::Package> uML4CPPProfile, std::shared_ptr<uml::umlFactory> factory);
 			void createPackageInterfaceRealizations(std::shared_ptr<uml::Package> uML4CPPProfile, std::shared_ptr<uml::umlFactory> factory);
 			void createPackageInterfaces(std::shared_ptr<uml::Package> uML4CPPProfile, std::shared_ptr<uml::umlFactory> factory);
 			void createPackagePrimitiveTypes(std::shared_ptr<uml::Package> uML4CPPProfile, std::shared_ptr<uml::umlFactory> factory);
+			void createPackageSignals(std::shared_ptr<uml::Package> uML4CPPProfile, std::shared_ptr<uml::umlFactory> factory);
 			void createPackageStereotypes(std::shared_ptr<uml::Package> uML4CPPProfile, std::shared_ptr<uml::umlFactory> factory);
 			void createPackageValueSpecifications(std::shared_ptr<uml::Package> uML4CPPProfile, std::shared_ptr<uml::umlFactory> factory);
 
@@ -153,10 +155,12 @@ namespace UML4CPPProfile
 			void initializePackageDataTypes();
 			void initializePackageAssociations();
 			void initializePackageDependencies();
+			void initializePackageEvents();
 			void initializePackageInstanceSpecifications();
 			void initializePackageInterfaceRealizations();
 			void initializePackageInterfaces();
 			void initializePackageNestedPackages();
+			void initializePackageSignals();
 			void initializePackageStereotypes();
 			void initializePackageValueSpecifications();
 	};

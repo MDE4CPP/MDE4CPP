@@ -9,11 +9,12 @@ task buildFoundationalModelLibrary() {
 
 	dependsOn project.tasks.getByPath('model:generateFoundationalModelLibrary')
 	dependsOn project.tasks.getByPath('src_gen:compileFoundationalModelLibrary')
-	dependsOn getRootProject().getTasksByName('buildEcore', true)
-	dependsOn getRootProject().getTasksByName('buildUml', true)
 	dependsOn getRootProject().getTasksByName('buildFUML', true)
 	dependsOn getRootProject().getTasksByName('buildEcoreReflection', true)
+	dependsOn getRootProject().getTasksByName('buildUml', true)
+	dependsOn getRootProject().getTasksByName('buildPSCS', true)
 	dependsOn getRootProject().getTasksByName('buildPrimitivetypesReflection', true)
+	dependsOn getRootProject().getTasksByName('buildEcore', true)
 	dependsOn getRootProject().getTasksByName('buildUmlReflection', true)
 }
 

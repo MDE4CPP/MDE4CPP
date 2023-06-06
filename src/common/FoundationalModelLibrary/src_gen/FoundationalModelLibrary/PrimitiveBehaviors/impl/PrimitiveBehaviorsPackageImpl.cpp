@@ -94,11 +94,13 @@ void PrimitiveBehaviorsPackageImpl::createPackageContents(std::shared_ptr<uml::P
 	createPackageDataTypes(foundationalModelLibrary_PrimitiveBehaviors, factory);
 	createPackageDependencies(foundationalModelLibrary_PrimitiveBehaviors, factory);
 	createPackageEnumerationLiterals(foundationalModelLibrary_PrimitiveBehaviors, factory);
+	createPackageEvents(foundationalModelLibrary_PrimitiveBehaviors, factory);
 	createPackageValueSpecifications(foundationalModelLibrary_PrimitiveBehaviors, factory);
 	createPackageInstanceSpecifications(foundationalModelLibrary_PrimitiveBehaviors, factory);
 	createPackageInterfaces(foundationalModelLibrary_PrimitiveBehaviors, factory);
 	createPackageInterfaceRealizations(foundationalModelLibrary_PrimitiveBehaviors, factory);
 	createPackagePrimitiveTypes(foundationalModelLibrary_PrimitiveBehaviors, factory);
+	createPackageSignals(foundationalModelLibrary_PrimitiveBehaviors, factory);
 	createPackageStereotypes(foundationalModelLibrary_PrimitiveBehaviors, factory);
 }
 
@@ -122,6 +124,13 @@ void PrimitiveBehaviorsPackageImpl::createPackageClasses(std::shared_ptr<uml::Pa
 
 }
 
+void PrimitiveBehaviorsPackageImpl::createPackageSignals(std::shared_ptr<uml::Package> foundationalModelLibrary_PrimitiveBehaviors, std::shared_ptr<uml::umlFactory> factory)
+{
+	std::shared_ptr<uml::Constraint> con = nullptr;
+	std::shared_ptr<uml::OpaqueExpression> oe = nullptr;
+
+}
+
 void PrimitiveBehaviorsPackageImpl::createPackageDataTypes(std::shared_ptr<uml::Package> foundationalModelLibrary_PrimitiveBehaviors, std::shared_ptr<uml::umlFactory> factory)
 {
 }
@@ -131,6 +140,10 @@ void PrimitiveBehaviorsPackageImpl::createPackageDependencies(std::shared_ptr<um
 }
 
 void PrimitiveBehaviorsPackageImpl::createPackageEnumerationLiterals(std::shared_ptr<uml::Package> foundationalModelLibrary_PrimitiveBehaviors, std::shared_ptr<uml::umlFactory> factory)
+{
+}
+
+void PrimitiveBehaviorsPackageImpl::createPackageEvents(std::shared_ptr<uml::Package> foundationalModelLibrary_PrimitiveBehaviors, std::shared_ptr<uml::umlFactory> factory)
 {
 }
 
@@ -176,10 +189,12 @@ void PrimitiveBehaviorsPackageImpl::initializePackageContents(std::shared_ptr<um
 	initializePackageClasses();
 	initializePackageDataTypes();
 	initializePackageDependencies();
+	initializePackageEvents();
 	initializePackageInstanceSpecifications();
 	initializePackageInterfaceRealizations();
 	initializePackageInterfaces();
 	initializePackageNestedPackages();
+	initializePackageSignals();
 	initializePackageStereotypes();
 	initializePackageValueSpecifications();
 	
@@ -205,6 +220,16 @@ void PrimitiveBehaviorsPackageImpl::initializePackageClasses()
 
 }
 
+void PrimitiveBehaviorsPackageImpl::initializePackageSignals()
+{
+	std::shared_ptr<uml::Generalization> gen = nullptr;
+
+
+//-------------------------------------------
+//Opaque Behaviors
+
+}
+
 void PrimitiveBehaviorsPackageImpl::initializePackageDataTypes()
 {
 	std::shared_ptr<uml::Generalization> gen = nullptr;
@@ -212,6 +237,10 @@ void PrimitiveBehaviorsPackageImpl::initializePackageDataTypes()
 }
 
 void PrimitiveBehaviorsPackageImpl::initializePackageDependencies()
+{
+}
+
+void PrimitiveBehaviorsPackageImpl::initializePackageEvents()
 {
 }
 

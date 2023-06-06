@@ -96,11 +96,13 @@ void StandardProfilePackageImpl::createPackageContents(std::shared_ptr<uml::Pack
 	createPackageDataTypes(standardProfile, factory);
 	createPackageDependencies(standardProfile, factory);
 	createPackageEnumerationLiterals(standardProfile, factory);
+	createPackageEvents(standardProfile, factory);
 	createPackageValueSpecifications(standardProfile, factory);
 	createPackageInstanceSpecifications(standardProfile, factory);
 	createPackageInterfaces(standardProfile, factory);
 	createPackageInterfaceRealizations(standardProfile, factory);
 	createPackagePrimitiveTypes(standardProfile, factory);
+	createPackageSignals(standardProfile, factory);
 	createPackageStereotypes(standardProfile, factory);
 }
 
@@ -124,6 +126,13 @@ void StandardProfilePackageImpl::createPackageClasses(std::shared_ptr<uml::Packa
 
 }
 
+void StandardProfilePackageImpl::createPackageSignals(std::shared_ptr<uml::Package> standardProfile, std::shared_ptr<uml::umlFactory> factory)
+{
+	std::shared_ptr<uml::Constraint> con = nullptr;
+	std::shared_ptr<uml::OpaqueExpression> oe = nullptr;
+
+}
+
 void StandardProfilePackageImpl::createPackageDataTypes(std::shared_ptr<uml::Package> standardProfile, std::shared_ptr<uml::umlFactory> factory)
 {
 }
@@ -133,6 +142,10 @@ void StandardProfilePackageImpl::createPackageDependencies(std::shared_ptr<uml::
 }
 
 void StandardProfilePackageImpl::createPackageEnumerationLiterals(std::shared_ptr<uml::Package> standardProfile, std::shared_ptr<uml::umlFactory> factory)
+{
+}
+
+void StandardProfilePackageImpl::createPackageEvents(std::shared_ptr<uml::Package> standardProfile, std::shared_ptr<uml::umlFactory> factory)
 {
 }
 
@@ -442,10 +455,12 @@ void StandardProfilePackageImpl::initializePackageContents(std::shared_ptr<uml::
 	initializePackageClasses();
 	initializePackageDataTypes();
 	initializePackageDependencies();
+	initializePackageEvents();
 	initializePackageInstanceSpecifications();
 	initializePackageInterfaceRealizations();
 	initializePackageInterfaces();
 	initializePackageNestedPackages();
+	initializePackageSignals();
 	initializePackageStereotypes();
 	initializePackageValueSpecifications();
 	
@@ -471,6 +486,16 @@ void StandardProfilePackageImpl::initializePackageClasses()
 
 }
 
+void StandardProfilePackageImpl::initializePackageSignals()
+{
+	std::shared_ptr<uml::Generalization> gen = nullptr;
+
+
+//-------------------------------------------
+//Opaque Behaviors
+
+}
+
 void StandardProfilePackageImpl::initializePackageDataTypes()
 {
 	std::shared_ptr<uml::Generalization> gen = nullptr;
@@ -478,6 +503,10 @@ void StandardProfilePackageImpl::initializePackageDataTypes()
 }
 
 void StandardProfilePackageImpl::initializePackageDependencies()
+{
+}
+
+void StandardProfilePackageImpl::initializePackageEvents()
 {
 }
 

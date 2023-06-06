@@ -109,11 +109,13 @@ void BasicInputOutputPackageImpl::createPackageContents(std::shared_ptr<uml::Pac
 	createPackageDataTypes(foundationalModelLibrary_BasicInputOutput, factory);
 	createPackageDependencies(foundationalModelLibrary_BasicInputOutput, factory);
 	createPackageEnumerationLiterals(foundationalModelLibrary_BasicInputOutput, factory);
+	createPackageEvents(foundationalModelLibrary_BasicInputOutput, factory);
 	createPackageValueSpecifications(foundationalModelLibrary_BasicInputOutput, factory);
 	createPackageInstanceSpecifications(foundationalModelLibrary_BasicInputOutput, factory);
 	createPackageInterfaces(foundationalModelLibrary_BasicInputOutput, factory);
 	createPackageInterfaceRealizations(foundationalModelLibrary_BasicInputOutput, factory);
 	createPackagePrimitiveTypes(foundationalModelLibrary_BasicInputOutput, factory);
+	createPackageSignals(foundationalModelLibrary_BasicInputOutput, factory);
 	createPackageStereotypes(foundationalModelLibrary_BasicInputOutput, factory);
 }
 
@@ -364,6 +366,13 @@ void BasicInputOutputPackageImpl::createPackageClasses(std::shared_ptr<uml::Pack
 
 }
 
+void BasicInputOutputPackageImpl::createPackageSignals(std::shared_ptr<uml::Package> foundationalModelLibrary_BasicInputOutput, std::shared_ptr<uml::umlFactory> factory)
+{
+	std::shared_ptr<uml::Constraint> con = nullptr;
+	std::shared_ptr<uml::OpaqueExpression> oe = nullptr;
+
+}
+
 void BasicInputOutputPackageImpl::createPackageDataTypes(std::shared_ptr<uml::Package> foundationalModelLibrary_BasicInputOutput, std::shared_ptr<uml::umlFactory> factory)
 {
 }
@@ -373,6 +382,10 @@ void BasicInputOutputPackageImpl::createPackageDependencies(std::shared_ptr<uml:
 }
 
 void BasicInputOutputPackageImpl::createPackageEnumerationLiterals(std::shared_ptr<uml::Package> foundationalModelLibrary_BasicInputOutput, std::shared_ptr<uml::umlFactory> factory)
+{
+}
+
+void BasicInputOutputPackageImpl::createPackageEvents(std::shared_ptr<uml::Package> foundationalModelLibrary_BasicInputOutput, std::shared_ptr<uml::umlFactory> factory)
 {
 }
 
@@ -560,10 +573,12 @@ void BasicInputOutputPackageImpl::initializePackageContents(std::shared_ptr<uml:
 	initializePackageClasses();
 	initializePackageDataTypes();
 	initializePackageDependencies();
+	initializePackageEvents();
 	initializePackageInstanceSpecifications();
 	initializePackageInterfaceRealizations();
 	initializePackageInterfaces();
 	initializePackageNestedPackages();
+	initializePackageSignals();
 	initializePackageStereotypes();
 	initializePackageValueSpecifications();
 	
@@ -1394,6 +1409,16 @@ void BasicInputOutputPackageImpl::initializePackageClasses()
 
 }
 
+void BasicInputOutputPackageImpl::initializePackageSignals()
+{
+	std::shared_ptr<uml::Generalization> gen = nullptr;
+
+
+//-------------------------------------------
+//Opaque Behaviors
+
+}
+
 void BasicInputOutputPackageImpl::initializePackageDataTypes()
 {
 	std::shared_ptr<uml::Generalization> gen = nullptr;
@@ -1401,6 +1426,10 @@ void BasicInputOutputPackageImpl::initializePackageDataTypes()
 }
 
 void BasicInputOutputPackageImpl::initializePackageDependencies()
+{
+}
+
+void BasicInputOutputPackageImpl::initializePackageEvents()
 {
 }
 

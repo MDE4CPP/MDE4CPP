@@ -62,7 +62,7 @@ std::shared_ptr<ecore::EObject>  ListenerImpl::copy() const
 ListenerImpl& ListenerImpl::operator=(const ListenerImpl & obj)
 {
 	//call overloaded =Operator for each base class
-	uml::ElementImpl::operator=(obj);
+	fUML::MDE4CPP_Extensions::FUML_ObjectImpl::operator=(obj);
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy Listener "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;

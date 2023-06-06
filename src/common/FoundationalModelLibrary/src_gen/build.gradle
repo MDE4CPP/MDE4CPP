@@ -54,16 +54,6 @@ task compileFoundationalModelLibrary(type: tui.sse.mde4cpp.MDE4CPPCompile) {
 	dependsOn getRootProject().getTasksByName('deliverBasicInterfaces', true)
 
 
-	// dependency to model 'ecore'
-	def ecore = getRootProject().getTasksByName('compileEcore', true)
-	dependsOn ecore
-	inputs.files(ecore.outputs)
-
-	// dependency to model 'uml'
-	def uml = getRootProject().getTasksByName('compileUml', true)
-	dependsOn uml
-	inputs.files(uml.outputs)
-
 	// dependency to model 'fUML'
 	def fUML = getRootProject().getTasksByName('compileFUML', true)
 	dependsOn fUML
@@ -74,10 +64,25 @@ task compileFoundationalModelLibrary(type: tui.sse.mde4cpp.MDE4CPPCompile) {
 	dependsOn ecoreReflection
 	inputs.files(ecoreReflection.outputs)
 
+	// dependency to model 'uml'
+	def uml = getRootProject().getTasksByName('compileUml', true)
+	dependsOn uml
+	inputs.files(uml.outputs)
+
+	// dependency to model 'PSCS'
+	def PSCS = getRootProject().getTasksByName('compilePSCS', true)
+	dependsOn PSCS
+	inputs.files(PSCS.outputs)
+
 	// dependency to model 'primitivetypesReflection'
 	def primitivetypesReflection = getRootProject().getTasksByName('compilePrimitivetypesReflection', true)
 	dependsOn primitivetypesReflection
 	inputs.files(primitivetypesReflection.outputs)
+
+	// dependency to model 'ecore'
+	def ecore = getRootProject().getTasksByName('compileEcore', true)
+	dependsOn ecore
+	inputs.files(ecore.outputs)
 
 	// dependency to model 'umlReflection'
 	def umlReflection = getRootProject().getTasksByName('compileUmlReflection', true)

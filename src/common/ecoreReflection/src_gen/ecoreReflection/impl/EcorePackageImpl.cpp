@@ -105,11 +105,13 @@ void EcorePackageImpl::createPackageContents(std::shared_ptr<uml::Package> ecore
 	createPackageDataTypes(ecore, factory);
 	createPackageDependencies(ecore, factory);
 	createPackageEnumerationLiterals(ecore, factory);
+	createPackageEvents(ecore, factory);
 	createPackageValueSpecifications(ecore, factory);
 	createPackageInstanceSpecifications(ecore, factory);
 	createPackageInterfaces(ecore, factory);
 	createPackageInterfaceRealizations(ecore, factory);
 	createPackagePrimitiveTypes(ecore, factory);
+	createPackageSignals(ecore, factory);
 	createPackageStereotypes(ecore, factory);
 }
 
@@ -694,6 +696,13 @@ void EcorePackageImpl::createPackageClasses(std::shared_ptr<uml::Package> ecore,
 
 }
 
+void EcorePackageImpl::createPackageSignals(std::shared_ptr<uml::Package> ecore, std::shared_ptr<uml::umlFactory> factory)
+{
+	std::shared_ptr<uml::Constraint> con = nullptr;
+	std::shared_ptr<uml::OpaqueExpression> oe = nullptr;
+
+}
+
 void EcorePackageImpl::createPackageDataTypes(std::shared_ptr<uml::Package> ecore, std::shared_ptr<uml::umlFactory> factory)
 {
 }
@@ -703,6 +712,10 @@ void EcorePackageImpl::createPackageDependencies(std::shared_ptr<uml::Package> e
 }
 
 void EcorePackageImpl::createPackageEnumerationLiterals(std::shared_ptr<uml::Package> ecore, std::shared_ptr<uml::umlFactory> factory)
+{
+}
+
+void EcorePackageImpl::createPackageEvents(std::shared_ptr<uml::Package> ecore, std::shared_ptr<uml::umlFactory> factory)
 {
 }
 
@@ -1159,10 +1172,12 @@ void EcorePackageImpl::initializePackageContents(std::shared_ptr<uml::Package> e
 	initializePackageClasses();
 	initializePackageDataTypes();
 	initializePackageDependencies();
+	initializePackageEvents();
 	initializePackageInstanceSpecifications();
 	initializePackageInterfaceRealizations();
 	initializePackageInterfaces();
 	initializePackageNestedPackages();
+	initializePackageSignals();
 	initializePackageStereotypes();
 	initializePackageValueSpecifications();
 	
@@ -3276,6 +3291,16 @@ void EcorePackageImpl::initializePackageClasses()
 
 }
 
+void EcorePackageImpl::initializePackageSignals()
+{
+	std::shared_ptr<uml::Generalization> gen = nullptr;
+
+
+//-------------------------------------------
+//Opaque Behaviors
+
+}
+
 void EcorePackageImpl::initializePackageDataTypes()
 {
 	std::shared_ptr<uml::Generalization> gen = nullptr;
@@ -3283,6 +3308,10 @@ void EcorePackageImpl::initializePackageDataTypes()
 }
 
 void EcorePackageImpl::initializePackageDependencies()
+{
+}
+
+void EcorePackageImpl::initializePackageEvents()
 {
 }
 

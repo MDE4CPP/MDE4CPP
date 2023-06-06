@@ -63,7 +63,7 @@ std::shared_ptr<ecore::EObject>  StatusImpl::copy() const
 StatusImpl& StatusImpl::operator=(const StatusImpl & obj)
 {
 	//call overloaded =Operator for each base class
-	uml::ElementImpl::operator=(obj);
+	fUML::MDE4CPP_Extensions::FUML_ObjectImpl::operator=(obj);
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy Status "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;

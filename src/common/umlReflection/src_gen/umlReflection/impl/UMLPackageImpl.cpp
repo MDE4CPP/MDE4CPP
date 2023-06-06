@@ -114,11 +114,13 @@ void UMLPackageImpl::createPackageContents(std::shared_ptr<uml::Package> uML)
 	createPackageDataTypes(uML, factory);
 	createPackageDependencies(uML, factory);
 	createPackageEnumerationLiterals(uML, factory);
+	createPackageEvents(uML, factory);
 	createPackageValueSpecifications(uML, factory);
 	createPackageInstanceSpecifications(uML, factory);
 	createPackageInterfaces(uML, factory);
 	createPackageInterfaceRealizations(uML, factory);
 	createPackagePrimitiveTypes(uML, factory);
+	createPackageSignals(uML, factory);
 	createPackageStereotypes(uML, factory);
 }
 
@@ -11925,6 +11927,13 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 
 }
 
+void UMLPackageImpl::createPackageSignals(std::shared_ptr<uml::Package> uML, std::shared_ptr<uml::umlFactory> factory)
+{
+	std::shared_ptr<uml::Constraint> con = nullptr;
+	std::shared_ptr<uml::OpaqueExpression> oe = nullptr;
+
+}
+
 void UMLPackageImpl::createPackageDataTypes(std::shared_ptr<uml::Package> uML, std::shared_ptr<uml::umlFactory> factory)
 {
 }
@@ -12161,6 +12170,10 @@ void UMLPackageImpl::createPackageEnumerationLiterals(std::shared_ptr<uml::Packa
 	uML_VisibilityKind_public->setName("public");
 	uML_VisibilityKind_public->getClassifier()->push_back(uML_VisibilityKind);
 	
+}
+
+void UMLPackageImpl::createPackageEvents(std::shared_ptr<uml::Package> uML, std::shared_ptr<uml::umlFactory> factory)
+{
 }
 
 void UMLPackageImpl::createPackageInstanceSpecifications(std::shared_ptr<uml::Package> uML, std::shared_ptr<uml::umlFactory> factory)
@@ -16648,10 +16661,12 @@ void UMLPackageImpl::initializePackageContents(std::shared_ptr<uml::Package> uML
 	initializePackageClasses();
 	initializePackageDataTypes();
 	initializePackageDependencies();
+	initializePackageEvents();
 	initializePackageInstanceSpecifications();
 	initializePackageInterfaceRealizations();
 	initializePackageInterfaces();
 	initializePackageNestedPackages();
+	initializePackageSignals();
 	initializePackageStereotypes();
 	initializePackageValueSpecifications();
 	
@@ -36306,6 +36321,16 @@ void UMLPackageImpl::initializePackageClasses()
 
 }
 
+void UMLPackageImpl::initializePackageSignals()
+{
+	std::shared_ptr<uml::Generalization> gen = nullptr;
+
+
+//-------------------------------------------
+//Opaque Behaviors
+
+}
+
 void UMLPackageImpl::initializePackageDataTypes()
 {
 	std::shared_ptr<uml::Generalization> gen = nullptr;
@@ -36313,6 +36338,10 @@ void UMLPackageImpl::initializePackageDataTypes()
 }
 
 void UMLPackageImpl::initializePackageDependencies()
+{
+}
+
+void UMLPackageImpl::initializePackageEvents()
 {
 }
 

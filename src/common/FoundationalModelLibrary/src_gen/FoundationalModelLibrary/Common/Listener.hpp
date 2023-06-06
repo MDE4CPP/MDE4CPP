@@ -12,13 +12,13 @@
 
 
 // base class includes
-#include "uml/Element.hpp"
+#include "fUML/MDE4CPP_Extensions/FUML_Object.hpp"
 
 
 
 namespace FoundationalModelLibrary::Common
 {
-	class Listener : virtual public uml::Element 
+	class Listener : virtual public fUML::MDE4CPP_Extensions::FUML_Object 
 	{
 		protected:
 			Listener(){}

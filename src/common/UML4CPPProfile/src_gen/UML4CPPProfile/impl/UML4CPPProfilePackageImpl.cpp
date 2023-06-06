@@ -98,11 +98,13 @@ void UML4CPPProfilePackageImpl::createPackageContents(std::shared_ptr<uml::Packa
 	createPackageDataTypes(uML4CPPProfile, factory);
 	createPackageDependencies(uML4CPPProfile, factory);
 	createPackageEnumerationLiterals(uML4CPPProfile, factory);
+	createPackageEvents(uML4CPPProfile, factory);
 	createPackageValueSpecifications(uML4CPPProfile, factory);
 	createPackageInstanceSpecifications(uML4CPPProfile, factory);
 	createPackageInterfaces(uML4CPPProfile, factory);
 	createPackageInterfaceRealizations(uML4CPPProfile, factory);
 	createPackagePrimitiveTypes(uML4CPPProfile, factory);
+	createPackageSignals(uML4CPPProfile, factory);
 	createPackageStereotypes(uML4CPPProfile, factory);
 }
 
@@ -126,6 +128,13 @@ void UML4CPPProfilePackageImpl::createPackageClasses(std::shared_ptr<uml::Packag
 
 }
 
+void UML4CPPProfilePackageImpl::createPackageSignals(std::shared_ptr<uml::Package> uML4CPPProfile, std::shared_ptr<uml::umlFactory> factory)
+{
+	std::shared_ptr<uml::Constraint> con = nullptr;
+	std::shared_ptr<uml::OpaqueExpression> oe = nullptr;
+
+}
+
 void UML4CPPProfilePackageImpl::createPackageDataTypes(std::shared_ptr<uml::Package> uML4CPPProfile, std::shared_ptr<uml::umlFactory> factory)
 {
 }
@@ -135,6 +144,10 @@ void UML4CPPProfilePackageImpl::createPackageDependencies(std::shared_ptr<uml::P
 }
 
 void UML4CPPProfilePackageImpl::createPackageEnumerationLiterals(std::shared_ptr<uml::Package> uML4CPPProfile, std::shared_ptr<uml::umlFactory> factory)
+{
+}
+
+void UML4CPPProfilePackageImpl::createPackageEvents(std::shared_ptr<uml::Package> uML4CPPProfile, std::shared_ptr<uml::umlFactory> factory)
 {
 }
 
@@ -230,10 +243,12 @@ void UML4CPPProfilePackageImpl::initializePackageContents(std::shared_ptr<uml::P
 	initializePackageClasses();
 	initializePackageDataTypes();
 	initializePackageDependencies();
+	initializePackageEvents();
 	initializePackageInstanceSpecifications();
 	initializePackageInterfaceRealizations();
 	initializePackageInterfaces();
 	initializePackageNestedPackages();
+	initializePackageSignals();
 	initializePackageStereotypes();
 	initializePackageValueSpecifications();
 	
@@ -259,6 +274,16 @@ void UML4CPPProfilePackageImpl::initializePackageClasses()
 
 }
 
+void UML4CPPProfilePackageImpl::initializePackageSignals()
+{
+	std::shared_ptr<uml::Generalization> gen = nullptr;
+
+
+//-------------------------------------------
+//Opaque Behaviors
+
+}
+
 void UML4CPPProfilePackageImpl::initializePackageDataTypes()
 {
 	std::shared_ptr<uml::Generalization> gen = nullptr;
@@ -266,6 +291,10 @@ void UML4CPPProfilePackageImpl::initializePackageDataTypes()
 }
 
 void UML4CPPProfilePackageImpl::initializePackageDependencies()
+{
+}
+
+void UML4CPPProfilePackageImpl::initializePackageEvents()
 {
 }
 
