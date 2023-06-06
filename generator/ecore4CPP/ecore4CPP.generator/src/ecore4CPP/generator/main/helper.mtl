@@ -158,7 +158,7 @@
 */]
 
 [query public generateTypeClass(anEClass : EClass, ignoreNamespace : Boolean) : String = if (ignoreNamespace) then anEClass.name else anEClass.generateNamespaceDefinition().concat('::').concat(anEClass.name) endif /]
-[query public generateTypeClass(anEClass : EClass) : String = anEClass.generateTypeClass(anEClass.ePackage = anEClass.getRootPackage()) /]
+[query public generateTypeClass(anEClass : EClass) : String = anEClass.generateTypeClass(false) /]
 
 [query public metaModelTypeString(anENamedElement : ENamedElement, anEPackage : EPackage) : String = anENamedElement.eClass().generateTypeClass(anEPackage = anENamedElement.eClass()) /]
 
