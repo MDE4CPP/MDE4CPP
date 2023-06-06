@@ -39,7 +39,7 @@ task build[packageName.toUpperFirst()/]() {
 [if(aPackage.hasMainBehavior())]
 	dependsOn project.tasks.getByPath('application:compileApplicationFor[packageName.toUpperFirst()/]')
 [/if]
-[for (packName : String | aPackage.metaModelLibrariesNames()) ? (not(packName = aPackage.getPackageName()))]
+[for (packName : String | aPackage.metaModelLibrariesNames()->reject(name : String | aPackage.getAllSubPackageNames()->includes(name))) ? (not(packName = aPackage.getPackageName()))]
 	dependsOn getRootProject().getTasksByName('build[packName.toUpperFirst()/]', true)
 [/for]
 }
@@ -136,7 +136,7 @@ task compile[packageName.toUpperFirst()/](type: tui.sse.mde4cpp.MDE4CPPCompile) 
 	/]
 	dependsOn getRootProject().getTasksByName('deliverBasicInterfaces', true)
 
-[for (packName : String | aPackage.metaModelLibrariesNames()) ? (not(packName = aPackage.getPackageName()))]
+[for (packName : String | aPackage.metaModelLibrariesNames()->reject(name : String | aPackage.getAllSubPackageNames()->includes(name))) ? (not(packName = aPackage.getPackageName()))]
 
 	// dependency to model '[packName/]'
 	def [packName/] = getRootProject().getTasksByName('compile[packName.toUpperFirst()/]', true)
@@ -172,6 +172,6 @@ task clean {
 [/template]
 
 [template private generateRelatedModelNameList(aPackage : Package) post (trim())]
-[for (packName : String | aPackage.metaModelLibrariesNames()) separator (', ') ? (not(packName = aPackage.getPackageName()))]
+[for (packName : String | aPackage.metaModelLibrariesNames()->reject(name : String | aPackage.getAllSubPackageNames()->includes(name))) separator (', ') ? (not(packName = aPackage.getPackageName()))]
 '[packName/]'[/for]
 [/template]
