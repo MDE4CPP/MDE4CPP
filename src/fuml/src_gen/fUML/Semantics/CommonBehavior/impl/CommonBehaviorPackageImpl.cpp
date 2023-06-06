@@ -4,15 +4,15 @@
 
 #include "abstractDataTypes/SubsetUnion.hpp"
 //metametamodel classes
+#include "ecore/EStringToStringMapEntry.hpp"
+#include "ecore/EAnnotation.hpp"
+#include "ecore/EAttribute.hpp"
+#include "ecore/EReference.hpp"
+#include "ecore/EGenericType.hpp"
+#include "ecore/EOperation.hpp"
+#include "ecore/EClass.hpp"
 #include "ecore/EParameter.hpp"
 #include "ecore/EDataType.hpp"
-#include "ecore/EStringToStringMapEntry.hpp"
-#include "ecore/EGenericType.hpp"
-#include "ecore/EReference.hpp"
-#include "ecore/EOperation.hpp"
-#include "ecore/EAttribute.hpp"
-#include "ecore/EAnnotation.hpp"
-#include "ecore/EClass.hpp"
 
 //metamodel factory
 #include "fUML/Semantics/CommonBehavior/CommonBehaviorFactory.hpp"
@@ -75,6 +75,41 @@ void CommonBehaviorPackageImpl::init(std::shared_ptr<ecore::EPackage> package)
 }
 
 
+
+// Begin Class ClassifierBehaviorExecution
+const std::shared_ptr<ecore::EClass>& fUML::Semantics::CommonBehavior::CommonBehaviorPackageImpl::getClassifierBehaviorExecution_Class() const
+{
+	return m_classifierBehaviorExecution_Class;
+}
+
+
+const std::shared_ptr<ecore::EReference>& fUML::Semantics::CommonBehavior::CommonBehaviorPackageImpl::getClassifierBehaviorExecution_Attribute_classifier() const
+{
+	return m_classifierBehaviorExecution_Attribute_classifier;
+}
+const std::shared_ptr<ecore::EReference>& fUML::Semantics::CommonBehavior::CommonBehaviorPackageImpl::getClassifierBehaviorExecution_Attribute_execution() const
+{
+	return m_classifierBehaviorExecution_Attribute_execution;
+}
+const std::shared_ptr<ecore::EReference>& fUML::Semantics::CommonBehavior::CommonBehaviorPackageImpl::getClassifierBehaviorExecution_Attribute_objectActivation() const
+{
+	return m_classifierBehaviorExecution_Attribute_objectActivation;
+}
+
+const std::shared_ptr<ecore::EOperation>& fUML::Semantics::CommonBehavior::CommonBehaviorPackageImpl::getClassifierBehaviorExecution_Operation__startObjectBehavior() const
+{
+	return m_classifierBehaviorExecution_Operation__startObjectBehavior;
+}
+const std::shared_ptr<ecore::EOperation>& fUML::Semantics::CommonBehavior::CommonBehaviorPackageImpl::getClassifierBehaviorExecution_Operation_execute_Class_ParameterValue() const
+{
+	return m_classifierBehaviorExecution_Operation_execute_Class_ParameterValue;
+}
+const std::shared_ptr<ecore::EOperation>& fUML::Semantics::CommonBehavior::CommonBehaviorPackageImpl::getClassifierBehaviorExecution_Operation_terminate() const
+{
+	return m_classifierBehaviorExecution_Operation_terminate;
+}
+
+// End Class ClassifierBehaviorExecution
 
 // Begin Class EventAccepter
 const std::shared_ptr<ecore::EClass>& fUML::Semantics::CommonBehavior::CommonBehaviorPackageImpl::getEventAccepter_Class() const
@@ -192,6 +227,69 @@ const std::shared_ptr<ecore::EOperation>& fUML::Semantics::CommonBehavior::Commo
 }
 
 // End Class Execution
+
+// Begin Class ObjectActivation
+const std::shared_ptr<ecore::EClass>& fUML::Semantics::CommonBehavior::CommonBehaviorPackageImpl::getObjectActivation_Class() const
+{
+	return m_objectActivation_Class;
+}
+
+
+const std::shared_ptr<ecore::EReference>& fUML::Semantics::CommonBehavior::CommonBehaviorPackageImpl::getObjectActivation_Attribute_classifierBehaviorExecutions() const
+{
+	return m_objectActivation_Attribute_classifierBehaviorExecutions;
+}
+const std::shared_ptr<ecore::EReference>& fUML::Semantics::CommonBehavior::CommonBehaviorPackageImpl::getObjectActivation_Attribute_eventPool() const
+{
+	return m_objectActivation_Attribute_eventPool;
+}
+const std::shared_ptr<ecore::EReference>& fUML::Semantics::CommonBehavior::CommonBehaviorPackageImpl::getObjectActivation_Attribute_object() const
+{
+	return m_objectActivation_Attribute_object;
+}
+const std::shared_ptr<ecore::EReference>& fUML::Semantics::CommonBehavior::CommonBehaviorPackageImpl::getObjectActivation_Attribute_waitingEventAccepters() const
+{
+	return m_objectActivation_Attribute_waitingEventAccepters;
+}
+
+const std::shared_ptr<ecore::EOperation>& fUML::Semantics::CommonBehavior::CommonBehaviorPackageImpl::getObjectActivation_Operation__register_EventAccepter() const
+{
+	return m_objectActivation_Operation__register_EventAccepter;
+}
+const std::shared_ptr<ecore::EOperation>& fUML::Semantics::CommonBehavior::CommonBehaviorPackageImpl::getObjectActivation_Operation__send_EJavaObject() const
+{
+	return m_objectActivation_Operation__send_EJavaObject;
+}
+const std::shared_ptr<ecore::EOperation>& fUML::Semantics::CommonBehavior::CommonBehaviorPackageImpl::getObjectActivation_Operation__startObjectBehavior() const
+{
+	return m_objectActivation_Operation__startObjectBehavior;
+}
+const std::shared_ptr<ecore::EOperation>& fUML::Semantics::CommonBehavior::CommonBehaviorPackageImpl::getObjectActivation_Operation_dispatchNextEvent() const
+{
+	return m_objectActivation_Operation_dispatchNextEvent;
+}
+const std::shared_ptr<ecore::EOperation>& fUML::Semantics::CommonBehavior::CommonBehaviorPackageImpl::getObjectActivation_Operation_retrieveNextEvent() const
+{
+	return m_objectActivation_Operation_retrieveNextEvent;
+}
+const std::shared_ptr<ecore::EOperation>& fUML::Semantics::CommonBehavior::CommonBehaviorPackageImpl::getObjectActivation_Operation_send_Element() const
+{
+	return m_objectActivation_Operation_send_Element;
+}
+const std::shared_ptr<ecore::EOperation>& fUML::Semantics::CommonBehavior::CommonBehaviorPackageImpl::getObjectActivation_Operation_startBehavior_Class_ParameterValue() const
+{
+	return m_objectActivation_Operation_startBehavior_Class_ParameterValue;
+}
+const std::shared_ptr<ecore::EOperation>& fUML::Semantics::CommonBehavior::CommonBehaviorPackageImpl::getObjectActivation_Operation_stop() const
+{
+	return m_objectActivation_Operation_stop;
+}
+const std::shared_ptr<ecore::EOperation>& fUML::Semantics::CommonBehavior::CommonBehaviorPackageImpl::getObjectActivation_Operation_unregister_EventAccepter() const
+{
+	return m_objectActivation_Operation_unregister_EventAccepter;
+}
+
+// End Class ObjectActivation
 
 // Begin Class ParameterValue
 const std::shared_ptr<ecore::EClass>& fUML::Semantics::CommonBehavior::CommonBehaviorPackageImpl::getParameterValue_Class() const

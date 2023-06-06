@@ -4,15 +4,15 @@
 
 #include "abstractDataTypes/SubsetUnion.hpp"
 //metametamodel classes
+#include "ecore/EStringToStringMapEntry.hpp"
+#include "ecore/EAnnotation.hpp"
+#include "ecore/EAttribute.hpp"
+#include "ecore/EReference.hpp"
+#include "ecore/EGenericType.hpp"
+#include "ecore/EOperation.hpp"
+#include "ecore/EClass.hpp"
 #include "ecore/EParameter.hpp"
 #include "ecore/EDataType.hpp"
-#include "ecore/EStringToStringMapEntry.hpp"
-#include "ecore/EGenericType.hpp"
-#include "ecore/EReference.hpp"
-#include "ecore/EOperation.hpp"
-#include "ecore/EAttribute.hpp"
-#include "ecore/EAnnotation.hpp"
-#include "ecore/EClass.hpp"
 
 // metametamodel factory
 #include "ecore/ecoreFactory.hpp"
@@ -47,13 +47,152 @@ void CommonBehaviorPackageImpl::initializePackageContents()
 	
 
  	// Initialize classes and features; add operations and parameters
+	initializeClassifierBehaviorExecutionContent();
 	initializeEventAccepterContent();
 	initializeEventOccurrenceContent();
 	initializeExecutionContent();
+	initializeObjectActivationContent();
 	initializeParameterValueContent();
 
 	initializePackageEDataTypes();
 
+}
+
+void CommonBehaviorPackageImpl::initializeClassifierBehaviorExecutionContent()
+{
+	m_classifierBehaviorExecution_Class->setName("ClassifierBehaviorExecution");
+	m_classifierBehaviorExecution_Class->setAbstract(false);
+	m_classifierBehaviorExecution_Class->setInterface(false);
+	
+	m_classifierBehaviorExecution_Class->_setID(CLASSIFIERBEHAVIOREXECUTION_CLASS);
+	
+	/*
+	 * EAttributes
+	 */
+	
+	/*
+	 * EReferences
+	 */
+	m_classifierBehaviorExecution_Attribute_classifier->setName("classifier");
+	m_classifierBehaviorExecution_Attribute_classifier->setEType(uml::umlPackage::eInstance()->getClass_Class());
+	m_classifierBehaviorExecution_Attribute_classifier->setLowerBound(1);
+	m_classifierBehaviorExecution_Attribute_classifier->setUpperBound(1);
+	m_classifierBehaviorExecution_Attribute_classifier->setTransient(false);
+	m_classifierBehaviorExecution_Attribute_classifier->setVolatile(false);
+	m_classifierBehaviorExecution_Attribute_classifier->setChangeable(true);
+	m_classifierBehaviorExecution_Attribute_classifier->setUnsettable(false);
+	m_classifierBehaviorExecution_Attribute_classifier->setUnique(true);
+	m_classifierBehaviorExecution_Attribute_classifier->setDerived(false);
+	m_classifierBehaviorExecution_Attribute_classifier->setOrdered(false);
+	m_classifierBehaviorExecution_Attribute_classifier->setContainment(false);
+	m_classifierBehaviorExecution_Attribute_classifier->setResolveProxies(true);
+	m_classifierBehaviorExecution_Attribute_classifier->setDefaultValueLiteral("");	
+	
+	m_classifierBehaviorExecution_Attribute_classifier->_setID(CLASSIFIERBEHAVIOREXECUTION_ATTRIBUTE_CLASSIFIER);
+	m_classifierBehaviorExecution_Attribute_execution->setName("execution");
+	m_classifierBehaviorExecution_Attribute_execution->setEType(getExecution_Class());
+	m_classifierBehaviorExecution_Attribute_execution->setLowerBound(1);
+	m_classifierBehaviorExecution_Attribute_execution->setUpperBound(1);
+	m_classifierBehaviorExecution_Attribute_execution->setTransient(false);
+	m_classifierBehaviorExecution_Attribute_execution->setVolatile(false);
+	m_classifierBehaviorExecution_Attribute_execution->setChangeable(true);
+	m_classifierBehaviorExecution_Attribute_execution->setUnsettable(false);
+	m_classifierBehaviorExecution_Attribute_execution->setUnique(true);
+	m_classifierBehaviorExecution_Attribute_execution->setDerived(false);
+	m_classifierBehaviorExecution_Attribute_execution->setOrdered(false);
+	m_classifierBehaviorExecution_Attribute_execution->setContainment(false);
+	m_classifierBehaviorExecution_Attribute_execution->setResolveProxies(true);
+	m_classifierBehaviorExecution_Attribute_execution->setDefaultValueLiteral("");	
+	
+	m_classifierBehaviorExecution_Attribute_execution->_setID(CLASSIFIERBEHAVIOREXECUTION_ATTRIBUTE_EXECUTION);
+	m_classifierBehaviorExecution_Attribute_objectActivation->setName("objectActivation");
+	m_classifierBehaviorExecution_Attribute_objectActivation->setEType(getObjectActivation_Class());
+	m_classifierBehaviorExecution_Attribute_objectActivation->setLowerBound(0);
+	m_classifierBehaviorExecution_Attribute_objectActivation->setUpperBound(1);
+	m_classifierBehaviorExecution_Attribute_objectActivation->setTransient(false);
+	m_classifierBehaviorExecution_Attribute_objectActivation->setVolatile(false);
+	m_classifierBehaviorExecution_Attribute_objectActivation->setChangeable(true);
+	m_classifierBehaviorExecution_Attribute_objectActivation->setUnsettable(false);
+	m_classifierBehaviorExecution_Attribute_objectActivation->setUnique(true);
+	m_classifierBehaviorExecution_Attribute_objectActivation->setDerived(false);
+	m_classifierBehaviorExecution_Attribute_objectActivation->setOrdered(false);
+	m_classifierBehaviorExecution_Attribute_objectActivation->setContainment(false);
+	m_classifierBehaviorExecution_Attribute_objectActivation->setResolveProxies(true);
+	m_classifierBehaviorExecution_Attribute_objectActivation->setDefaultValueLiteral("");	
+	
+	m_classifierBehaviorExecution_Attribute_objectActivation->_setID(CLASSIFIERBEHAVIOREXECUTION_ATTRIBUTE_OBJECTACTIVATION);
+	
+	/*
+	 * EOperations
+	 */
+	m_classifierBehaviorExecution_Operation__startObjectBehavior->setName("_startObjectBehavior");
+	{ 	std::shared_ptr<ecore::ecoreFactory> factory = ecore::ecoreFactory::eInstance();
+		std::shared_ptr<ecore::EClass> unknownClass = factory ->createEClass(-1);
+	   	unknownClass->setName("invalid");
+		unknownClass->setAbstract(true);
+		unknownClass->setInterface(true);
+		m_classifierBehaviorExecution_Operation__startObjectBehavior->setEType(unknownClass);
+	}
+	m_classifierBehaviorExecution_Operation__startObjectBehavior->setLowerBound(1);
+	m_classifierBehaviorExecution_Operation__startObjectBehavior->setUpperBound(1);
+	m_classifierBehaviorExecution_Operation__startObjectBehavior->setUnique(true);
+	m_classifierBehaviorExecution_Operation__startObjectBehavior->setOrdered(false);
+	
+	m_classifierBehaviorExecution_Operation__startObjectBehavior->_setID(CLASSIFIERBEHAVIOREXECUTION_OPERATION__STARTOBJECTBEHAVIOR);
+	
+	
+	m_classifierBehaviorExecution_Operation_execute_Class_ParameterValue->setName("execute");
+	{ 	std::shared_ptr<ecore::ecoreFactory> factory = ecore::ecoreFactory::eInstance();
+		std::shared_ptr<ecore::EClass> unknownClass = factory ->createEClass(-1);
+	   	unknownClass->setName("invalid");
+		unknownClass->setAbstract(true);
+		unknownClass->setInterface(true);
+		m_classifierBehaviorExecution_Operation_execute_Class_ParameterValue->setEType(unknownClass);
+	}
+	m_classifierBehaviorExecution_Operation_execute_Class_ParameterValue->setLowerBound(1);
+	m_classifierBehaviorExecution_Operation_execute_Class_ParameterValue->setUpperBound(1);
+	m_classifierBehaviorExecution_Operation_execute_Class_ParameterValue->setUnique(true);
+	m_classifierBehaviorExecution_Operation_execute_Class_ParameterValue->setOrdered(false);
+	
+	m_classifierBehaviorExecution_Operation_execute_Class_ParameterValue->_setID(CLASSIFIERBEHAVIOREXECUTION_OPERATION_EXECUTE_CLASS_PARAMETERVALUE);
+	
+	{
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_classifierBehaviorExecution_Operation_execute_Class_ParameterValue);
+		parameter->setName("classifier");
+		parameter->setEType(nullptr);
+		parameter->setLowerBound(0);
+		parameter->setUpperBound(1);
+		parameter->setUnique(true);
+		parameter->setOrdered(true);
+	}
+	
+	{
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_classifierBehaviorExecution_Operation_execute_Class_ParameterValue);
+		parameter->setName("inputs");
+		parameter->setEType(nullptr);
+		parameter->setLowerBound(0);
+		parameter->setUpperBound(1);
+		parameter->setUnique(true);
+		parameter->setOrdered(true);
+	}
+	
+	m_classifierBehaviorExecution_Operation_terminate->setName("terminate");
+	{ 	std::shared_ptr<ecore::ecoreFactory> factory = ecore::ecoreFactory::eInstance();
+		std::shared_ptr<ecore::EClass> unknownClass = factory ->createEClass(-1);
+	   	unknownClass->setName("invalid");
+		unknownClass->setAbstract(true);
+		unknownClass->setInterface(true);
+		m_classifierBehaviorExecution_Operation_terminate->setEType(unknownClass);
+	}
+	m_classifierBehaviorExecution_Operation_terminate->setLowerBound(1);
+	m_classifierBehaviorExecution_Operation_terminate->setUpperBound(1);
+	m_classifierBehaviorExecution_Operation_terminate->setUnique(true);
+	m_classifierBehaviorExecution_Operation_terminate->setOrdered(false);
+	
+	m_classifierBehaviorExecution_Operation_terminate->_setID(CLASSIFIERBEHAVIOREXECUTION_OPERATION_TERMINATE);
+	
+	
+	
 }
 
 void CommonBehaviorPackageImpl::initializeEventAccepterContent()
@@ -469,6 +608,285 @@ void CommonBehaviorPackageImpl::initializeExecutionContent()
 	
 	m_execution_Operation_terminate->_setID(EXECUTION_OPERATION_TERMINATE);
 	
+	
+	
+}
+
+void CommonBehaviorPackageImpl::initializeObjectActivationContent()
+{
+	m_objectActivation_Class->setName("ObjectActivation");
+	m_objectActivation_Class->setAbstract(false);
+	m_objectActivation_Class->setInterface(false);
+	
+	m_objectActivation_Class->_setID(OBJECTACTIVATION_CLASS);
+	
+	/*
+	 * EAttributes
+	 */
+	
+	/*
+	 * EReferences
+	 */
+	m_objectActivation_Attribute_classifierBehaviorExecutions->setName("classifierBehaviorExecutions");
+	m_objectActivation_Attribute_classifierBehaviorExecutions->setEType(getClassifierBehaviorExecution_Class());
+	m_objectActivation_Attribute_classifierBehaviorExecutions->setLowerBound(0);
+	m_objectActivation_Attribute_classifierBehaviorExecutions->setUpperBound(-1);
+	m_objectActivation_Attribute_classifierBehaviorExecutions->setTransient(false);
+	m_objectActivation_Attribute_classifierBehaviorExecutions->setVolatile(false);
+	m_objectActivation_Attribute_classifierBehaviorExecutions->setChangeable(true);
+	m_objectActivation_Attribute_classifierBehaviorExecutions->setUnsettable(false);
+	m_objectActivation_Attribute_classifierBehaviorExecutions->setUnique(true);
+	m_objectActivation_Attribute_classifierBehaviorExecutions->setDerived(false);
+	m_objectActivation_Attribute_classifierBehaviorExecutions->setOrdered(false);
+	m_objectActivation_Attribute_classifierBehaviorExecutions->setContainment(true);
+	m_objectActivation_Attribute_classifierBehaviorExecutions->setResolveProxies(true);
+	m_objectActivation_Attribute_classifierBehaviorExecutions->setDefaultValueLiteral("");	
+	
+	m_objectActivation_Attribute_classifierBehaviorExecutions->_setID(OBJECTACTIVATION_ATTRIBUTE_CLASSIFIERBEHAVIOREXECUTIONS);
+	m_objectActivation_Attribute_eventPool->setName("eventPool");
+	m_objectActivation_Attribute_eventPool->setEType(uml::umlPackage::eInstance()->getElement_Class());
+	m_objectActivation_Attribute_eventPool->setLowerBound(0);
+	m_objectActivation_Attribute_eventPool->setUpperBound(-1);
+	m_objectActivation_Attribute_eventPool->setTransient(false);
+	m_objectActivation_Attribute_eventPool->setVolatile(false);
+	m_objectActivation_Attribute_eventPool->setChangeable(true);
+	m_objectActivation_Attribute_eventPool->setUnsettable(false);
+	m_objectActivation_Attribute_eventPool->setUnique(true);
+	m_objectActivation_Attribute_eventPool->setDerived(false);
+	m_objectActivation_Attribute_eventPool->setOrdered(false);
+	m_objectActivation_Attribute_eventPool->setContainment(true);
+	m_objectActivation_Attribute_eventPool->setResolveProxies(true);
+	m_objectActivation_Attribute_eventPool->setDefaultValueLiteral("");	
+	
+	m_objectActivation_Attribute_eventPool->_setID(OBJECTACTIVATION_ATTRIBUTE_EVENTPOOL);
+	m_objectActivation_Attribute_object->setName("object");
+	m_objectActivation_Attribute_object->setEType(uml::umlPackage::eInstance()->getElement_Class());
+	m_objectActivation_Attribute_object->setLowerBound(1);
+	m_objectActivation_Attribute_object->setUpperBound(1);
+	m_objectActivation_Attribute_object->setTransient(false);
+	m_objectActivation_Attribute_object->setVolatile(false);
+	m_objectActivation_Attribute_object->setChangeable(true);
+	m_objectActivation_Attribute_object->setUnsettable(false);
+	m_objectActivation_Attribute_object->setUnique(true);
+	m_objectActivation_Attribute_object->setDerived(false);
+	m_objectActivation_Attribute_object->setOrdered(false);
+	m_objectActivation_Attribute_object->setContainment(false);
+	m_objectActivation_Attribute_object->setResolveProxies(true);
+	m_objectActivation_Attribute_object->setDefaultValueLiteral("");	
+	
+	m_objectActivation_Attribute_object->_setID(OBJECTACTIVATION_ATTRIBUTE_OBJECT);
+	m_objectActivation_Attribute_waitingEventAccepters->setName("waitingEventAccepters");
+	m_objectActivation_Attribute_waitingEventAccepters->setEType(getEventAccepter_Class());
+	m_objectActivation_Attribute_waitingEventAccepters->setLowerBound(0);
+	m_objectActivation_Attribute_waitingEventAccepters->setUpperBound(-1);
+	m_objectActivation_Attribute_waitingEventAccepters->setTransient(false);
+	m_objectActivation_Attribute_waitingEventAccepters->setVolatile(false);
+	m_objectActivation_Attribute_waitingEventAccepters->setChangeable(true);
+	m_objectActivation_Attribute_waitingEventAccepters->setUnsettable(false);
+	m_objectActivation_Attribute_waitingEventAccepters->setUnique(true);
+	m_objectActivation_Attribute_waitingEventAccepters->setDerived(false);
+	m_objectActivation_Attribute_waitingEventAccepters->setOrdered(false);
+	m_objectActivation_Attribute_waitingEventAccepters->setContainment(false);
+	m_objectActivation_Attribute_waitingEventAccepters->setResolveProxies(true);
+	m_objectActivation_Attribute_waitingEventAccepters->setDefaultValueLiteral("");	
+	
+	m_objectActivation_Attribute_waitingEventAccepters->_setID(OBJECTACTIVATION_ATTRIBUTE_WAITINGEVENTACCEPTERS);
+	
+	/*
+	 * EOperations
+	 */
+	m_objectActivation_Operation__register_EventAccepter->setName("_register");
+	{ 	std::shared_ptr<ecore::ecoreFactory> factory = ecore::ecoreFactory::eInstance();
+		std::shared_ptr<ecore::EClass> unknownClass = factory ->createEClass(-1);
+	   	unknownClass->setName("invalid");
+		unknownClass->setAbstract(true);
+		unknownClass->setInterface(true);
+		m_objectActivation_Operation__register_EventAccepter->setEType(unknownClass);
+	}
+	m_objectActivation_Operation__register_EventAccepter->setLowerBound(1);
+	m_objectActivation_Operation__register_EventAccepter->setUpperBound(1);
+	m_objectActivation_Operation__register_EventAccepter->setUnique(true);
+	m_objectActivation_Operation__register_EventAccepter->setOrdered(false);
+	
+	m_objectActivation_Operation__register_EventAccepter->_setID(OBJECTACTIVATION_OPERATION__REGISTER_EVENTACCEPTER);
+	
+	{
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_objectActivation_Operation__register_EventAccepter);
+		parameter->setName("accepter");
+		parameter->setEType(nullptr);
+		parameter->setLowerBound(0);
+		parameter->setUpperBound(1);
+		parameter->setUnique(true);
+		parameter->setOrdered(true);
+	}
+	
+	m_objectActivation_Operation__send_EJavaObject->setName("_send");
+	{ 	std::shared_ptr<ecore::ecoreFactory> factory = ecore::ecoreFactory::eInstance();
+		std::shared_ptr<ecore::EClass> unknownClass = factory ->createEClass(-1);
+	   	unknownClass->setName("invalid");
+		unknownClass->setAbstract(true);
+		unknownClass->setInterface(true);
+		m_objectActivation_Operation__send_EJavaObject->setEType(unknownClass);
+	}
+	m_objectActivation_Operation__send_EJavaObject->setLowerBound(1);
+	m_objectActivation_Operation__send_EJavaObject->setUpperBound(1);
+	m_objectActivation_Operation__send_EJavaObject->setUnique(true);
+	m_objectActivation_Operation__send_EJavaObject->setOrdered(false);
+	
+	m_objectActivation_Operation__send_EJavaObject->_setID(OBJECTACTIVATION_OPERATION__SEND_EJAVAOBJECT);
+	
+	{
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_objectActivation_Operation__send_EJavaObject);
+		parameter->setName("signal");
+		parameter->setEType(nullptr);
+		parameter->setLowerBound(0);
+		parameter->setUpperBound(1);
+		parameter->setUnique(true);
+		parameter->setOrdered(true);
+	}
+	
+	m_objectActivation_Operation__startObjectBehavior->setName("_startObjectBehavior");
+	{ 	std::shared_ptr<ecore::ecoreFactory> factory = ecore::ecoreFactory::eInstance();
+		std::shared_ptr<ecore::EClass> unknownClass = factory ->createEClass(-1);
+	   	unknownClass->setName("invalid");
+		unknownClass->setAbstract(true);
+		unknownClass->setInterface(true);
+		m_objectActivation_Operation__startObjectBehavior->setEType(unknownClass);
+	}
+	m_objectActivation_Operation__startObjectBehavior->setLowerBound(1);
+	m_objectActivation_Operation__startObjectBehavior->setUpperBound(1);
+	m_objectActivation_Operation__startObjectBehavior->setUnique(true);
+	m_objectActivation_Operation__startObjectBehavior->setOrdered(false);
+	
+	m_objectActivation_Operation__startObjectBehavior->_setID(OBJECTACTIVATION_OPERATION__STARTOBJECTBEHAVIOR);
+	
+	
+	m_objectActivation_Operation_dispatchNextEvent->setName("dispatchNextEvent");
+	{ 	std::shared_ptr<ecore::ecoreFactory> factory = ecore::ecoreFactory::eInstance();
+		std::shared_ptr<ecore::EClass> unknownClass = factory ->createEClass(-1);
+	   	unknownClass->setName("invalid");
+		unknownClass->setAbstract(true);
+		unknownClass->setInterface(true);
+		m_objectActivation_Operation_dispatchNextEvent->setEType(unknownClass);
+	}
+	m_objectActivation_Operation_dispatchNextEvent->setLowerBound(1);
+	m_objectActivation_Operation_dispatchNextEvent->setUpperBound(1);
+	m_objectActivation_Operation_dispatchNextEvent->setUnique(true);
+	m_objectActivation_Operation_dispatchNextEvent->setOrdered(false);
+	
+	m_objectActivation_Operation_dispatchNextEvent->_setID(OBJECTACTIVATION_OPERATION_DISPATCHNEXTEVENT);
+	
+	
+	m_objectActivation_Operation_retrieveNextEvent->setName("retrieveNextEvent");
+	m_objectActivation_Operation_retrieveNextEvent->setEType(uml::umlPackage::eInstance()->getElement_Class());
+	m_objectActivation_Operation_retrieveNextEvent->setLowerBound(1);
+	m_objectActivation_Operation_retrieveNextEvent->setUpperBound(1);
+	m_objectActivation_Operation_retrieveNextEvent->setUnique(true);
+	m_objectActivation_Operation_retrieveNextEvent->setOrdered(false);
+	
+	m_objectActivation_Operation_retrieveNextEvent->_setID(OBJECTACTIVATION_OPERATION_RETRIEVENEXTEVENT);
+	
+	
+	m_objectActivation_Operation_send_Element->setName("send");
+	{ 	std::shared_ptr<ecore::ecoreFactory> factory = ecore::ecoreFactory::eInstance();
+		std::shared_ptr<ecore::EClass> unknownClass = factory ->createEClass(-1);
+	   	unknownClass->setName("invalid");
+		unknownClass->setAbstract(true);
+		unknownClass->setInterface(true);
+		m_objectActivation_Operation_send_Element->setEType(unknownClass);
+	}
+	m_objectActivation_Operation_send_Element->setLowerBound(1);
+	m_objectActivation_Operation_send_Element->setUpperBound(1);
+	m_objectActivation_Operation_send_Element->setUnique(true);
+	m_objectActivation_Operation_send_Element->setOrdered(true);
+	
+	m_objectActivation_Operation_send_Element->_setID(OBJECTACTIVATION_OPERATION_SEND_ELEMENT);
+	
+	{
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_objectActivation_Operation_send_Element);
+		parameter->setName("signalInstance");
+		parameter->setEType(nullptr);
+		parameter->setLowerBound(0);
+		parameter->setUpperBound(1);
+		parameter->setUnique(true);
+		parameter->setOrdered(true);
+	}
+	
+	m_objectActivation_Operation_startBehavior_Class_ParameterValue->setName("startBehavior");
+	{ 	std::shared_ptr<ecore::ecoreFactory> factory = ecore::ecoreFactory::eInstance();
+		std::shared_ptr<ecore::EClass> unknownClass = factory ->createEClass(-1);
+	   	unknownClass->setName("invalid");
+		unknownClass->setAbstract(true);
+		unknownClass->setInterface(true);
+		m_objectActivation_Operation_startBehavior_Class_ParameterValue->setEType(unknownClass);
+	}
+	m_objectActivation_Operation_startBehavior_Class_ParameterValue->setLowerBound(1);
+	m_objectActivation_Operation_startBehavior_Class_ParameterValue->setUpperBound(1);
+	m_objectActivation_Operation_startBehavior_Class_ParameterValue->setUnique(true);
+	m_objectActivation_Operation_startBehavior_Class_ParameterValue->setOrdered(false);
+	
+	m_objectActivation_Operation_startBehavior_Class_ParameterValue->_setID(OBJECTACTIVATION_OPERATION_STARTBEHAVIOR_CLASS_PARAMETERVALUE);
+	
+	{
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_objectActivation_Operation_startBehavior_Class_ParameterValue);
+		parameter->setName("classifier");
+		parameter->setEType(nullptr);
+		parameter->setLowerBound(0);
+		parameter->setUpperBound(1);
+		parameter->setUnique(true);
+		parameter->setOrdered(true);
+	}
+	
+	{
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_objectActivation_Operation_startBehavior_Class_ParameterValue);
+		parameter->setName("inputs");
+		parameter->setEType(nullptr);
+		parameter->setLowerBound(0);
+		parameter->setUpperBound(1);
+		parameter->setUnique(true);
+		parameter->setOrdered(true);
+	}
+	
+	m_objectActivation_Operation_stop->setName("stop");
+	{ 	std::shared_ptr<ecore::ecoreFactory> factory = ecore::ecoreFactory::eInstance();
+		std::shared_ptr<ecore::EClass> unknownClass = factory ->createEClass(-1);
+	   	unknownClass->setName("invalid");
+		unknownClass->setAbstract(true);
+		unknownClass->setInterface(true);
+		m_objectActivation_Operation_stop->setEType(unknownClass);
+	}
+	m_objectActivation_Operation_stop->setLowerBound(1);
+	m_objectActivation_Operation_stop->setUpperBound(1);
+	m_objectActivation_Operation_stop->setUnique(true);
+	m_objectActivation_Operation_stop->setOrdered(false);
+	
+	m_objectActivation_Operation_stop->_setID(OBJECTACTIVATION_OPERATION_STOP);
+	
+	
+	m_objectActivation_Operation_unregister_EventAccepter->setName("unregister");
+	{ 	std::shared_ptr<ecore::ecoreFactory> factory = ecore::ecoreFactory::eInstance();
+		std::shared_ptr<ecore::EClass> unknownClass = factory ->createEClass(-1);
+	   	unknownClass->setName("invalid");
+		unknownClass->setAbstract(true);
+		unknownClass->setInterface(true);
+		m_objectActivation_Operation_unregister_EventAccepter->setEType(unknownClass);
+	}
+	m_objectActivation_Operation_unregister_EventAccepter->setLowerBound(1);
+	m_objectActivation_Operation_unregister_EventAccepter->setUpperBound(1);
+	m_objectActivation_Operation_unregister_EventAccepter->setUnique(true);
+	m_objectActivation_Operation_unregister_EventAccepter->setOrdered(false);
+	
+	m_objectActivation_Operation_unregister_EventAccepter->_setID(OBJECTACTIVATION_OPERATION_UNREGISTER_EVENTACCEPTER);
+	
+	{
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_objectActivation_Operation_unregister_EventAccepter);
+		parameter->setName("accepter");
+		parameter->setEType(nullptr);
+		parameter->setLowerBound(0);
+		parameter->setUpperBound(1);
+		parameter->setUnique(true);
+		parameter->setOrdered(true);
+	}
 	
 	
 }

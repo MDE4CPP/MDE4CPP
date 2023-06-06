@@ -29,6 +29,8 @@
 
 #include "fUML/Semantics/Actions/ActionsPackage.hpp"
 #include "fUML/Semantics/Actions/StructuredActivityNodeActivation.hpp"
+#include "fUML/Semantics/CommonBehavior/CommonBehaviorPackage.hpp"
+#include "fUML/Semantics/CommonBehavior/ObjectActivation.hpp"
 #include "fUML/Semantics/Loci/LociPackage.hpp"
 #include "fUML/Semantics/Loci/Locus.hpp"
 
@@ -111,9 +113,23 @@ std::shared_ptr<ecore::EObject> ActivitiesFactoryImpl::create(const int metaElem
 			}
 			else
 			{
-				std::shared_ptr<fUML::Semantics::Loci::Locus> castedContainer = std::dynamic_pointer_cast<fUML::Semantics::Loci::Locus>(container);
-				assert(castedContainer);
-				return std::shared_ptr<fUML::Semantics::Activities::ActivityExecution>(this->createActivityExecution_as_extensionalValues_in_Locus(castedContainer,metaElementID));
+				switch(referenceID)
+				{
+					//ActivityExecution has eventPool as a containment
+					case  fUML::Semantics::CommonBehavior::CommonBehaviorPackage::OBJECTACTIVATION_ATTRIBUTE_EVENTPOOL:	
+					{
+						std::shared_ptr<fUML::Semantics::CommonBehavior::ObjectActivation> castedContainer = std::dynamic_pointer_cast<fUML::Semantics::CommonBehavior::ObjectActivation> (container);
+						return this->createActivityExecution_as_eventPool_in_ObjectActivation(castedContainer,metaElementID);
+					}
+					//ActivityExecution has extensionalValues as a containment
+					case  fUML::Semantics::Loci::LociPackage::LOCUS_ATTRIBUTE_EXTENSIONALVALUES:	
+					{
+						std::shared_ptr<fUML::Semantics::Loci::Locus> castedContainer = std::dynamic_pointer_cast<fUML::Semantics::Loci::Locus> (container);
+						return this->createActivityExecution_as_extensionalValues_in_Locus(castedContainer,metaElementID);
+					}
+					default:
+						std::cerr << __PRETTY_FUNCTION__ << "ERROR: Reference type not found." << std::endl;
+				}	
 			}
 			break;
 		}
@@ -393,6 +409,19 @@ std::shared_ptr<fUML::Semantics::Activities::ActivityExecution> ActivitiesFactor
 	element->setMetaElementID(metaElementID);
 	element->setThisActivityExecutionPtr(element);
 	return element;
+}
+std::shared_ptr<fUML::Semantics::Activities::ActivityExecution> ActivitiesFactoryImpl::createActivityExecution_as_eventPool_in_ObjectActivation(std::shared_ptr<fUML::Semantics::CommonBehavior::ObjectActivation> par_ObjectActivation, const int metaElementID) const
+{
+	std::shared_ptr<fUML::Semantics::Activities::ActivityExecutionImpl> element(new fUML::Semantics::Activities::ActivityExecutionImpl());
+	element->setMetaElementID(metaElementID);
+	if(nullptr != par_ObjectActivation)
+	{
+		par_ObjectActivation->getEventPool()->push_back(element);
+	}
+	
+	element->setThisActivityExecutionPtr(element);
+	return element;
+	
 }
 std::shared_ptr<fUML::Semantics::Activities::ActivityExecution> ActivitiesFactoryImpl::createActivityExecution_as_extensionalValues_in_Locus(std::shared_ptr<fUML::Semantics::Loci::Locus> par_Locus, const int metaElementID) const
 {

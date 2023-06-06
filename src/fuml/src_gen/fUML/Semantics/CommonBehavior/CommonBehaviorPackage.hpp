@@ -14,22 +14,24 @@
 
 namespace ecore 
 {
+	class EStringToStringMapEntry;
+	class EAnnotation;
+	class EAttribute;
+	class EReference;
+	class EGenericType;
+	class EOperation;
+	class EClass;
 	class EParameter;
 	class EDataType;
-	class EStringToStringMapEntry;
-	class EGenericType;
-	class EReference;
-	class EOperation;
-	class EAttribute;
-	class EAnnotation;
-	class EClass;
 }
 
 namespace fUML::Semantics::CommonBehavior 
 {
+	class ClassifierBehaviorExecution;
 	class EventAccepter;
 	class EventOccurrence;
 	class Execution;
+	class ObjectActivation;
 	class ParameterValue;
 }
  
@@ -54,6 +56,35 @@ namespace fUML::Semantics::CommonBehavior
 			static const std::string eNAME;
 			static const std::string eNS_URI;
 			static const std::string eNS_PREFIX;
+
+			// Begin Class ClassifierBehaviorExecution
+			//Class and Feature IDs 
+			static const unsigned long CLASSIFIERBEHAVIOREXECUTION_CLASS = 1551835842;
+			static const unsigned int CLASSIFIERBEHAVIOREXECUTION_CLASS_FEATURE_COUNT = 3;
+			static const unsigned int CLASSIFIERBEHAVIOREXECUTION_CLASS_OPERATION_COUNT = 3;
+			
+			static const unsigned long CLASSIFIERBEHAVIOREXECUTION_ATTRIBUTE_CLASSIFIER = 524148996;
+			static const unsigned long CLASSIFIERBEHAVIOREXECUTION_ATTRIBUTE_EXECUTION = 958412789;
+			static const unsigned long CLASSIFIERBEHAVIOREXECUTION_ATTRIBUTE_OBJECTACTIVATION = 1518692052;
+			
+			static const unsigned long CLASSIFIERBEHAVIOREXECUTION_OPERATION__STARTOBJECTBEHAVIOR = 3631119842;
+			static const unsigned long CLASSIFIERBEHAVIOREXECUTION_OPERATION_EXECUTE_CLASS_PARAMETERVALUE = 98640831;
+			static const unsigned long CLASSIFIERBEHAVIOREXECUTION_OPERATION_TERMINATE = 4162680347;
+			
+			//Class and Feature Getter
+			virtual const std::shared_ptr<ecore::EClass>& getClassifierBehaviorExecution_Class() const = 0;
+			
+			
+			virtual const std::shared_ptr<ecore::EReference>& getClassifierBehaviorExecution_Attribute_classifier() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getClassifierBehaviorExecution_Attribute_execution() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getClassifierBehaviorExecution_Attribute_objectActivation() const = 0;
+			
+			virtual const std::shared_ptr<ecore::EOperation>& getClassifierBehaviorExecution_Operation__startObjectBehavior() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getClassifierBehaviorExecution_Operation_execute_Class_ParameterValue() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getClassifierBehaviorExecution_Operation_terminate() const = 0;
+			
+			// End Class ClassifierBehaviorExecution
+
 
 			// Begin Class EventAccepter
 			//Class and Feature IDs 
@@ -146,6 +177,49 @@ namespace fUML::Semantics::CommonBehavior
 			virtual const std::shared_ptr<ecore::EOperation>& getExecution_Operation_terminate() const = 0;
 			
 			// End Class Execution
+
+
+			// Begin Class ObjectActivation
+			//Class and Feature IDs 
+			static const unsigned long OBJECTACTIVATION_CLASS = 1754020883;
+			static const unsigned int OBJECTACTIVATION_CLASS_FEATURE_COUNT = 4;
+			static const unsigned int OBJECTACTIVATION_CLASS_OPERATION_COUNT = 9;
+			
+			static const unsigned long OBJECTACTIVATION_ATTRIBUTE_CLASSIFIERBEHAVIOREXECUTIONS = 470972086;
+			static const unsigned long OBJECTACTIVATION_ATTRIBUTE_EVENTPOOL = 1340800468;
+			static const unsigned long OBJECTACTIVATION_ATTRIBUTE_OBJECT = 1526874106;
+			static const unsigned long OBJECTACTIVATION_ATTRIBUTE_WAITINGEVENTACCEPTERS = 343315370;
+			
+			static const unsigned long OBJECTACTIVATION_OPERATION__REGISTER_EVENTACCEPTER = 1841170159;
+			static const unsigned long OBJECTACTIVATION_OPERATION__SEND_EJAVAOBJECT = 3568620231;
+			static const unsigned long OBJECTACTIVATION_OPERATION__STARTOBJECTBEHAVIOR = 3886431562;
+			static const unsigned long OBJECTACTIVATION_OPERATION_DISPATCHNEXTEVENT = 3009954687;
+			static const unsigned long OBJECTACTIVATION_OPERATION_RETRIEVENEXTEVENT = 2723579027;
+			static const unsigned long OBJECTACTIVATION_OPERATION_SEND_ELEMENT = 1663035856;
+			static const unsigned long OBJECTACTIVATION_OPERATION_STARTBEHAVIOR_CLASS_PARAMETERVALUE = 3087048988;
+			static const unsigned long OBJECTACTIVATION_OPERATION_STOP = 2767061188;
+			static const unsigned long OBJECTACTIVATION_OPERATION_UNREGISTER_EVENTACCEPTER = 1357284263;
+			
+			//Class and Feature Getter
+			virtual const std::shared_ptr<ecore::EClass>& getObjectActivation_Class() const = 0;
+			
+			
+			virtual const std::shared_ptr<ecore::EReference>& getObjectActivation_Attribute_classifierBehaviorExecutions() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getObjectActivation_Attribute_eventPool() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getObjectActivation_Attribute_object() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getObjectActivation_Attribute_waitingEventAccepters() const = 0;
+			
+			virtual const std::shared_ptr<ecore::EOperation>& getObjectActivation_Operation__register_EventAccepter() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getObjectActivation_Operation__send_EJavaObject() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getObjectActivation_Operation__startObjectBehavior() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getObjectActivation_Operation_dispatchNextEvent() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getObjectActivation_Operation_retrieveNextEvent() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getObjectActivation_Operation_send_Element() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getObjectActivation_Operation_startBehavior_Class_ParameterValue() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getObjectActivation_Operation_stop() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getObjectActivation_Operation_unregister_EventAccepter() const = 0;
+			
+			// End Class ObjectActivation
 
 
 			// Begin Class ParameterValue

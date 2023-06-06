@@ -20,6 +20,10 @@ namespace fUML::Semantics::Actions
 {
 	class StructuredActivityNodeActivation;
 }
+namespace fUML::Semantics::CommonBehavior
+{
+	class ObjectActivation;
+}
 namespace fUML::Semantics::Loci
 {
 	class Locus;
@@ -51,6 +55,7 @@ namespace fUML::Semantics::Activities
 			virtual std::shared_ptr<fUML::Semantics::Activities::ActivityEdgeInstance> createActivityEdgeInstance_as_edgeInstances_in_ActivityNodeActivationGroup(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup> par_ActivityNodeActivationGroup, const int metaElementID = ActivitiesPackage::ACTIVITYEDGEINSTANCE_CLASS) const = 0;
 			virtual std::shared_ptr<fUML::Semantics::Activities::ActivityExecution> createActivityExecution(const int metaElementID = ActivitiesPackage::ACTIVITYEXECUTION_CLASS) const = 0;
 			//Add as contained object
+			virtual std::shared_ptr<fUML::Semantics::Activities::ActivityExecution> createActivityExecution_as_eventPool_in_ObjectActivation(std::shared_ptr<fUML::Semantics::CommonBehavior::ObjectActivation> par_ObjectActivation, const int metaElementID = ActivitiesPackage::ACTIVITYEXECUTION_CLASS) const = 0;
 			virtual std::shared_ptr<fUML::Semantics::Activities::ActivityExecution> createActivityExecution_as_extensionalValues_in_Locus(std::shared_ptr<fUML::Semantics::Loci::Locus> par_Locus, const int metaElementID = ActivitiesPackage::ACTIVITYEXECUTION_CLASS) const = 0;
 			virtual std::shared_ptr<fUML::Semantics::Activities::ActivityFinalNodeActivation> createActivityFinalNodeActivation(const int metaElementID = ActivitiesPackage::ACTIVITYFINALNODEACTIVATION_CLASS) const = 0;
 			//Add as contained object

@@ -35,6 +35,7 @@ namespace fUML
 //Forward Declaration for used types 
 namespace fUML::Semantics::CommonBehavior 
 {
+	class ObjectActivation;
 	class ParameterValue;
 }
 namespace fUML::Semantics::Loci 

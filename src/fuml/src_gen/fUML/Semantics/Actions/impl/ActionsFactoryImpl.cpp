@@ -271,7 +271,7 @@ std::shared_ptr<ecore::EObject> ActionsFactoryImpl::create(const int metaElement
 					//InputPinActivation has inputPinActivation as a containment
 					case  fUML::Semantics::Actions::ActionsPackage::ACTIONACTIVATION_ATTRIBUTE_INPUTPINACTIVATION:	
 					{
-						std::shared_ptr<fUML::Semantics::Actions::ActionActivation> castedContainer = std::dynamic_pointer_cast<fUML::Semantics::Actions::ActionActivation> (container);;
+						std::shared_ptr<fUML::Semantics::Actions::ActionActivation> castedContainer = std::dynamic_pointer_cast<fUML::Semantics::Actions::ActionActivation> (container);
 						return this->createInputPinActivation_as_inputPinActivation_in_ActionActivation(castedContainer,metaElementID);
 					}
 					//InputPinActivation has nodeActivations as a containment
@@ -305,7 +305,7 @@ std::shared_ptr<ecore::EObject> ActionsFactoryImpl::create(const int metaElement
 					//OutputPinActivation has outputPinActivation as a containment
 					case  fUML::Semantics::Actions::ActionsPackage::ACTIONACTIVATION_ATTRIBUTE_OUTPUTPINACTIVATION:	
 					{
-						std::shared_ptr<fUML::Semantics::Actions::ActionActivation> castedContainer = std::dynamic_pointer_cast<fUML::Semantics::Actions::ActionActivation> (container);;
+						std::shared_ptr<fUML::Semantics::Actions::ActionActivation> castedContainer = std::dynamic_pointer_cast<fUML::Semantics::Actions::ActionActivation> (container);
 						return this->createOutputPinActivation_as_outputPinActivation_in_ActionActivation(castedContainer,metaElementID);
 					}
 					default:

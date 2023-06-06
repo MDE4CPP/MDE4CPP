@@ -20,6 +20,20 @@ namespace fUML
 {
 	class fUMLPackage;
 }
+namespace fUML::Semantics::CommonBehavior
+{
+	class ObjectActivation;
+}
+namespace fUML::Semantics::Loci
+{
+	class Locus;
+}
+namespace uml
+{
+	class DirectedRelationship;
+}
+
+
 namespace fUML::Semantics::Activities
 {
 	class ActivityExecution;
@@ -31,6 +45,10 @@ namespace fUML::Semantics::Actions
 {
 	class StructuredActivityNodeActivation;
 }
+namespace fUML::Semantics::CommonBehavior
+{
+	class ObjectActivation;
+}
 namespace fUML::Semantics::Loci
 {
 	class Locus;
@@ -42,6 +60,10 @@ namespace fUML::Semantics::Loci
 namespace fUML::Semantics::Loci
 {
 	class Locus;
+}
+namespace fUML::MDE4CPP_Extensions
+{
+	class FUML_Object;
 }
 namespace uml
 {

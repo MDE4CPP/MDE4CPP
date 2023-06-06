@@ -63,8 +63,8 @@
 #include "fUML/Semantics/Actions/PinActivation.hpp"
 #include "fUML/Semantics/Activities/Token.hpp"
 //Factories and Package includes
-#include "fUML/Semantics/SemanticsPackage.hpp"
 #include "fUML/fUMLPackage.hpp"
+#include "fUML/Semantics/SemanticsPackage.hpp"
 #include "fUML/Semantics/Actions/ActionsPackage.hpp"
 #include "fUML/Semantics/Activities/ActivitiesPackage.hpp"
 #include "uml/umlPackage.hpp"
@@ -503,7 +503,7 @@ std::shared_ptr<Any> StructuredActivityNodeActivationImpl::eGet(int featureID, b
 	switch(featureID)
 	{
 		case fUML::Semantics::Actions::ActionsPackage::STRUCTUREDACTIVITYNODEACTIVATION_ATTRIBUTE_ACTIVATIONGROUP:
-			return eAny(getActivationGroup(),fUML::Semantics::Activities::ActivitiesPackage::ACTIVITYNODEACTIVATIONGROUP_CLASS,false); //11111
+			return eAny(getActivationGroup(),fUML::Semantics::Activities::ActivitiesPackage::ACTIVITYNODEACTIVATIONGROUP_CLASS,false); //11211
 	}
 	return ActionActivationImpl::eGet(featureID, resolve, coreType);
 }
@@ -513,7 +513,7 @@ bool StructuredActivityNodeActivationImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case fUML::Semantics::Actions::ActionsPackage::STRUCTUREDACTIVITYNODEACTIVATION_ATTRIBUTE_ACTIVATIONGROUP:
-			return getActivationGroup() != nullptr; //11111
+			return getActivationGroup() != nullptr; //11211
 	}
 	return ActionActivationImpl::internalEIsSet(featureID);
 }
@@ -533,7 +533,7 @@ bool StructuredActivityNodeActivationImpl::eSet(int featureID,  const std::share
 					std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup> _activationGroup = std::dynamic_pointer_cast<fUML::Semantics::Activities::ActivityNodeActivationGroup>(eObject);
 					if(_activationGroup)
 					{
-						setActivationGroup(_activationGroup); //11111
+						setActivationGroup(_activationGroup); //11211
 					}
 					else
 					{

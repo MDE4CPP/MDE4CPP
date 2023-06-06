@@ -4,13 +4,17 @@
 
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EClass.hpp"
+#include "fUML/Semantics/CommonBehavior/impl/ClassifierBehaviorExecutionImpl.hpp"
 #include "fUML/Semantics/CommonBehavior/impl/EventAccepterImpl.hpp"
 #include "fUML/Semantics/CommonBehavior/impl/EventOccurrenceImpl.hpp"
 #include "fUML/Semantics/CommonBehavior/impl/ExecutionImpl.hpp"
+#include "fUML/Semantics/CommonBehavior/impl/ObjectActivationImpl.hpp"
 #include "fUML/Semantics/CommonBehavior/impl/ParameterValueImpl.hpp"
 
 #include "fUML/Semantics/Loci/LociPackage.hpp"
 #include "fUML/Semantics/Loci/Locus.hpp"
+#include "fUML/MDE4CPP_Extensions/MDE4CPP_ExtensionsPackage.hpp"
+#include "fUML/MDE4CPP_Extensions/FUML_Object.hpp"
 #include "uml/umlPackage.hpp"
 #include "uml/DirectedRelationship.hpp"
 
@@ -34,7 +38,9 @@ std::shared_ptr<CommonBehaviorFactory> CommonBehaviorFactory::eInstance()
 
 CommonBehaviorFactoryImpl::CommonBehaviorFactoryImpl()
 {
+	m_idMap.insert(std::make_pair("fUML::Semantics::CommonBehavior::ClassifierBehaviorExecution", CommonBehaviorPackage::CLASSIFIERBEHAVIOREXECUTION_CLASS));
 	m_idMap.insert(std::make_pair("fUML::Semantics::CommonBehavior::EventOccurrence", CommonBehaviorPackage::EVENTOCCURRENCE_CLASS));
+	m_idMap.insert(std::make_pair("fUML::Semantics::CommonBehavior::ObjectActivation", CommonBehaviorPackage::OBJECTACTIVATION_CLASS));
 	m_idMap.insert(std::make_pair("fUML::Semantics::CommonBehavior::ParameterValue", CommonBehaviorPackage::PARAMETERVALUE_CLASS));
 }
 
@@ -55,10 +61,38 @@ std::shared_ptr<ecore::EObject> CommonBehaviorFactoryImpl::create(const int meta
 {
 	switch(metaElementID)
 	{
+		case CommonBehaviorPackage::CLASSIFIERBEHAVIOREXECUTION_CLASS:
+		{
+			if (nullptr == container)
+			{
+				return this->createClassifierBehaviorExecution(metaElementID);
+			}
+			else
+			{
+				std::shared_ptr<fUML::Semantics::CommonBehavior::ObjectActivation> castedContainer = std::dynamic_pointer_cast<fUML::Semantics::CommonBehavior::ObjectActivation>(container);
+				assert(castedContainer);
+				return std::shared_ptr<fUML::Semantics::CommonBehavior::ClassifierBehaviorExecution>(this->createClassifierBehaviorExecution_as_classifierBehaviorExecutions_in_ObjectActivation(castedContainer,metaElementID));
+			}
+			break;
+		}
 		case CommonBehaviorPackage::EVENTOCCURRENCE_CLASS:
 		{
 				return this->createEventOccurrence(metaElementID);
 			
+			break;
+		}
+		case CommonBehaviorPackage::OBJECTACTIVATION_CLASS:
+		{
+			if (nullptr == container)
+			{
+				return this->createObjectActivation(metaElementID);
+			}
+			else
+			{
+				std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_Object> castedContainer = std::dynamic_pointer_cast<fUML::MDE4CPP_Extensions::FUML_Object>(container);
+				assert(castedContainer);
+				return std::shared_ptr<fUML::Semantics::CommonBehavior::ObjectActivation>(this->createObjectActivation_as_objectActivation_in_FUML_Object(castedContainer,metaElementID));
+			}
 			break;
 		}
 		case CommonBehaviorPackage::PARAMETERVALUE_CLASS:
@@ -103,12 +137,52 @@ std::shared_ptr<ecore::EObject> CommonBehaviorFactoryImpl::create(std::string _c
     return nullptr;
 }
 
+std::shared_ptr<fUML::Semantics::CommonBehavior::ClassifierBehaviorExecution> CommonBehaviorFactoryImpl::createClassifierBehaviorExecution(const int metaElementID/*=-1*/) const
+{
+	std::shared_ptr<fUML::Semantics::CommonBehavior::ClassifierBehaviorExecutionImpl> element(new fUML::Semantics::CommonBehavior::ClassifierBehaviorExecutionImpl());
+	element->setMetaElementID(metaElementID);
+	element->setThisClassifierBehaviorExecutionPtr(element);
+	return element;
+}
+std::shared_ptr<fUML::Semantics::CommonBehavior::ClassifierBehaviorExecution> CommonBehaviorFactoryImpl::createClassifierBehaviorExecution_as_classifierBehaviorExecutions_in_ObjectActivation(std::shared_ptr<fUML::Semantics::CommonBehavior::ObjectActivation> par_ObjectActivation, const int metaElementID) const
+{
+	std::shared_ptr<fUML::Semantics::CommonBehavior::ClassifierBehaviorExecutionImpl> element(new fUML::Semantics::CommonBehavior::ClassifierBehaviorExecutionImpl());
+	element->setMetaElementID(metaElementID);
+	if(nullptr != par_ObjectActivation)
+	{
+		par_ObjectActivation->getClassifierBehaviorExecutions()->push_back(element);
+	}
+	
+	element->setThisClassifierBehaviorExecutionPtr(element);
+	return element;
+	
+}
 std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccurrence> CommonBehaviorFactoryImpl::createEventOccurrence(const int metaElementID/*=-1*/) const
 {
 	std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccurrenceImpl> element(new fUML::Semantics::CommonBehavior::EventOccurrenceImpl());
 	element->setMetaElementID(metaElementID);
 	element->setThisEventOccurrencePtr(element);
 	return element;
+}
+std::shared_ptr<fUML::Semantics::CommonBehavior::ObjectActivation> CommonBehaviorFactoryImpl::createObjectActivation(const int metaElementID/*=-1*/) const
+{
+	std::shared_ptr<fUML::Semantics::CommonBehavior::ObjectActivationImpl> element(new fUML::Semantics::CommonBehavior::ObjectActivationImpl());
+	element->setMetaElementID(metaElementID);
+	element->setThisObjectActivationPtr(element);
+	return element;
+}
+std::shared_ptr<fUML::Semantics::CommonBehavior::ObjectActivation> CommonBehaviorFactoryImpl::createObjectActivation_as_objectActivation_in_FUML_Object(std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_Object> par_FUML_Object, const int metaElementID) const
+{
+	std::shared_ptr<fUML::Semantics::CommonBehavior::ObjectActivationImpl> element(new fUML::Semantics::CommonBehavior::ObjectActivationImpl());
+	element->setMetaElementID(metaElementID);
+	if(nullptr != par_FUML_Object)
+	{
+		par_FUML_Object->setObjectActivation(element);
+	}
+	
+	element->setThisObjectActivationPtr(element);
+	return element;
+	
 }
 std::shared_ptr<fUML::Semantics::CommonBehavior::ParameterValue> CommonBehaviorFactoryImpl::createParameterValue(const int metaElementID/*=-1*/) const
 {
