@@ -21,6 +21,7 @@
 
 [import UML4CPP::generator::main::helpers::keywords /]
 [import UML4CPP::generator::main::profiles::uml4CPPProfileHelper /]
+[import UML4CPP::generator::main::model_execution::model_execution /]
 
 [** 
  *  queries to generate qualified name, required for elements without defined name
@@ -235,7 +236,47 @@
 
 [query public getStaticClassID_Name(aNamedElement : NamedElement) : String = if ((aNamedElement.oclIsUndefined()) or (aNamedElement.name.oclIsUndefined())) then '' else ', '.concat(aNamedElement.myQualifiedTypeName(true)) endif/]
 
-[query public getGeneralSuperClassName(aClassifier : Classifier) : String = if (aClassifier.oclIsKindOf(Stereotype)) then 'Stereotype' else 'Element' endif /]
+[query public getGeneralSuperClassName(aClassifier : Classifier) : String = 
+	if(isFUMLExecutable())
+	then
+		'fUML::MDE4CPP_Extensions::FUML_Object'
+	else
+		if(aClassifier.oclIsKindOf(Stereotype)) 
+		then 
+			'uml::Stereotype'
+		else
+			'uml::Element' 
+		endif
+	endif 
+/]
+
+[query public getGeneralSuperClassInterfaceInclude(aClassifier : Classifier) : String = 
+	if(isFUMLExecutable())
+	then
+		'fUML/MDE4CPP_Extensions/FUML_Object.hpp'
+	else
+		if(aClassifier.oclIsKindOf(Stereotype)) 
+		then 
+			'uml/Stereotype.hpp'
+		else
+			'uml/Element.hpp' 
+		endif
+	endif 
+/]
+
+[query public getGeneralSuperClassImplInclude(aClassifier : Classifier) : String = 
+	if(isFUMLExecutable())
+	then
+		'fUML/MDE4CPP_Extensions/impl/FUML_ObjectImpl.hpp'
+	else
+		if(aClassifier.oclIsKindOf(Stereotype)) 
+		then 
+			'uml/impl/StereotypeImpl.hpp'
+		else
+			'uml/impl/ElementImpl.hpp' 
+		endif
+	endif 
+/]
 
 [**
  * generate member name based on myQualifiedName

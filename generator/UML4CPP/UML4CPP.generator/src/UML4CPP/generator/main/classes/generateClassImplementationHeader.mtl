@@ -41,7 +41,7 @@
 #include "[sClass.getNearestPackage().generateNamespacePath(false)/]/impl/[sClass.name.toUpperFirst()/]Impl.hpp"
 [/for]
 [if (aClass.superClass->isEmpty())]
-#include "uml/impl/[aClass.getGeneralSuperClassName()/]Impl.hpp"
+#include "[aClass.getGeneralSuperClassImplInclude()/]"
 [/if]
 
 class Any;
@@ -62,7 +62,7 @@ namespace uml
 [/if]
 	class [className/] [for (sClass : Class | aClass.superClass->reject(oclIsUndefined() and name.oclIsUndefined())) before (':') separator (',')]
 virtual public [sClass.getClassifierName(aClass, false, sClass.getNearestPackage().isIgnoreNamespace())/]Impl[/for][if (aClass.superClass->isEmpty())]
- : virtual public uml::[aClass.getGeneralSuperClassName()/]Impl[/if], virtual public [aClass.name.toUpperFirst()/]
+ : virtual public [aClass.getGeneralSuperClassName()/]Impl[/if], virtual public [aClass.name.toUpperFirst()/]
 	{
 		public: 
 			[className/](const [className/] & obj);

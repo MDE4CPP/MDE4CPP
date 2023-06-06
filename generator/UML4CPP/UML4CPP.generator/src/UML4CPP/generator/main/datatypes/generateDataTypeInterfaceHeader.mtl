@@ -68,7 +68,7 @@ class [aClassifier.name.toUpperFirst()/];
 
 // base class includes
 [if (aDataType.general->isEmpty())]
-#include "uml/[aDataType.getGeneralSuperClassName()/].hpp"
+#include "[aDataType.getGeneralSuperClassInterfaceInclude()/]"
 [else]
 [for (general : Classifier| aDataType.general->asOrderedSet()->sortedBy(myQualifiedName()))]
 #include "[general.getNearestPackage().generateNamespacePath(false)/]/[general.name.toUpperFirst().concat('.hpp')/]"
@@ -92,7 +92,7 @@ class [aClassifier.name.toUpperFirst()/];
 namespace [containingPackage.generateNamespace(false)/]
 {
 [/if]
-	struct [aDataType.name.toUpperFirst()/] [if (aDataType.general->isEmpty())] : virtual public uml::[aDataType.getGeneralSuperClassName()/] [aDataType.generateInterfaceExtensions()/]
+	struct [aDataType.name.toUpperFirst()/] [if (aDataType.general->isEmpty())] : virtual public [aDataType.getGeneralSuperClassName()/] [aDataType.generateInterfaceExtensions()/]
 [else][for (general : Classifier | aDataType.general->reject(oclIsUndefined() and name.oclIsUndefined())->asOrderedSet()->sortedBy(myQualifiedName())) before (':') separator (',')]
 virtual public [general.getClassifierName(aDataType, false, general.getNearestPackage().isIgnoreNamespace())/][/for]
 [/if]

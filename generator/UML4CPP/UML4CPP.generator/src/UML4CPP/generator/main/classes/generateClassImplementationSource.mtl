@@ -210,7 +210,7 @@ std::shared_ptr<ecore::EObject>  [className/]::copy() const
 {
 [if (aClass.superClass->isEmpty())]
 	//call overloaded =Operator for each base class
-	uml::[aClass.getGeneralSuperClassName()/]Impl::operator=(obj);
+	[aClass.getGeneralSuperClassName()/]Impl::operator=(obj);
 [else]
 	//call overloaded =Operator for each base class
 	[for (sClass : Class | aClass.superClass->reject(oclIsUndefined() and name.oclIsUndefined()))]

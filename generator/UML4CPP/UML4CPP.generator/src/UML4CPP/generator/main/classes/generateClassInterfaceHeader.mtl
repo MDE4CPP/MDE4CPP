@@ -78,7 +78,7 @@ namespace [aPackage.generateNamespace(true)/]
 
 // base class includes
 [if (aClass.superClass->isEmpty())]
-#include "uml/[aClass.getGeneralSuperClassName()/].hpp"
+#include "[aClass.getGeneralSuperClassInterfaceInclude()/]"
 [else]
 [for (elements : Classifier| aClass.superClass->asOrderedSet()->sortedBy(myQualifiedName()))]
 #include "[elements.getNearestPackage().generateNamespacePath(false)/]/[elements.name.toUpperFirst().concat('.hpp')/]"
@@ -104,7 +104,7 @@ namespace [aPackage.generateNamespace(true)/]
 namespace [aPackage.generateNamespace(false)/]
 {
 [/if]
-	class [aClass.name.toUpperFirst()/] [if (aClass.superClass->isEmpty())] : virtual public uml::[aClass.getGeneralSuperClassName()/] [aClass.generateInterfaceExtensions()/]
+	class [aClass.name.toUpperFirst()/] [if (aClass.superClass->isEmpty())] : virtual public [aClass.getGeneralSuperClassName()/] [aClass.generateInterfaceExtensions()/]
 [else][for (sClass : Class | aClass.superClass->reject(oclIsUndefined() and name.oclIsUndefined())->asOrderedSet()->sortedBy(myQualifiedName())) before (':') separator (',')]
 virtual public [sClass.getClassifierName(aClass, false, sClass.getNearestPackage().isIgnoreNamespace())/][/for]
 [/if]
