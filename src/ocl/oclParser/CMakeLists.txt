@@ -37,8 +37,7 @@ SET(SOURCE_FILES
 # Utilities
 	Utilities/OclConversion.cpp
 	Utilities/OclEcore.cpp
-	Utilities/OclUml.cpp
-	#Utilities/OCLInterface.h
+	#Utilities/OclUml.cpp
 # OclCS
     OclCS/OclFragments.cpp
     OclCS/OclLexer.cpp

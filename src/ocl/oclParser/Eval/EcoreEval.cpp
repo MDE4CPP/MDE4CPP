@@ -1153,6 +1153,14 @@ std::shared_ptr<Any> EcoreEval::evalIterateExp(std::shared_ptr<Any> exp) {
     // ###                ###
 
     const std::shared_ptr<Any>& context = m_env->getContextVariable();
+
+    //check if context is present
+    if (context == nullptr) {
+
+        //TODO add erro
+        //context is nullptr
+        return defaultResult();
+    }
     
     //check if the context is an container of multiple values
     if (!context->isContainer()) {
