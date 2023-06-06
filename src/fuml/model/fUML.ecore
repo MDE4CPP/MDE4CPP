@@ -1003,9 +1003,6 @@
         <eStructuralFeatures xsi:type="ecore:EReference" name="objectActivation" eType="#//Semantics/CommonBehavior/ObjectActivation"/>
       </eClassifiers>
       <eClassifiers xsi:type="ecore:EClass" name="ClassifierBehaviorExecution">
-        <eAnnotations source="http://tu-ilmenau.de/see/codegen">
-          <details key="doNotGenerate" value="Class 'ClassifierBehaviorExecution' is excluded from generation because event handling is currently not supported."/>
-        </eAnnotations>
         <eOperations name="execute" ordered="false" lowerBound="1">
           <eParameters name="classifier" ordered="false" upperBound="-1" eType="ecore:EClass http://www.eclipse.org/uml2/5.0.0/UML#//Class"/>
           <eParameters name="inputs" ordered="false" upperBound="-1" eType="#//Semantics/CommonBehavior/ParameterValue"/>
@@ -1177,55 +1174,25 @@
       <eClassifiers xsi:type="ecore:EClass" name="ObjectActivation">
         <eAnnotations source="http://tu-ilmenau.de/see/codegen">
           <details key="implIncludes" value="#include &quot;fUML/Semantics/CommonBehavior/ClassifierBehaviorExecution.hpp&quot;&#xA;#include &quot;fUML/Semantics/SimpleClassifiers/SimpleClassifiersPackage.hpp&quot;&#xA;&#xA;#include &quot;uml/Behavior.hpp&quot;&#xA;#include &quot;uml/Class.hpp&quot;"/>
-          <details key="doNotGenerate" value="Class 'ObjectActivation' is excluded from generation because event handling is currently not supported."/>
         </eAnnotations>
         <eOperations name="startBehavior" ordered="false" lowerBound="1">
-          <eAnnotations source="http://tu-ilmenau.de/see/codegen">
-            <details key="body" value="this->_startObjectBehavior();&#xA;&#xA;&#x9;if (classifier == nullptr)&#xA;&#x9;{&#xA;    &#x9;DEBUG_MESSAGE(std::cout&lt;&lt;&quot;[startBehavior] Starting behavior for all classifiers...&quot;&lt;&lt;std::endl;)&#xA;&#x9;&#x9;// *** Start all classifier behaviors concurrently. ***&#xA;&#x9;&#x9;std::shared_ptr&lt;Bag&lt;uml::Classifier> > types = this->getObject()->getTypes();&#xA;        std::vector&lt;std::shared_ptr&lt;uml::Classifier>>::iterator i;&#xA;        for (i = types->begin(); i!=types->end(); ++i) &#xA;        {&#xA;        &#x9;std::shared_ptr&lt;uml::Class> type = std::dynamic_pointer_cast&lt;uml::Class> (*i);&#xA;        &#x9;if ((std::dynamic_pointer_cast&lt;uml::Behavior>(type) != nullptr) || (type->getClassifierBehavior() != nullptr))&#xA;            {&#xA;            &#x9;std::shared_ptr&lt;Bag&lt;fUML::Semantics::CommonBehavior::ParameterValue> > parameterValue(new Bag&lt;fUML::Semantics::CommonBehavior::ParameterValue>());&#xA;            &#x9;this->startBehavior(type, parameterValue);&#xA;            }&#xA;        }&#xA;&#x9;}&#xA;&#x9;else&#xA;&#x9;{&#xA;    &#x9;DEBUG_MESSAGE(std::cout&lt;&lt;&quot;[startBehavior] Starting behavior for &quot;&lt;&lt; classifier->getName() &lt;&lt; &quot;...&quot;&lt;&lt;std::endl;)&#xA;&#xA;&#x9;&#x9;bool notYetStarted = true;&#xA;        unsigned int i = 0;&#xA;        while (notYetStarted &amp;&amp; i &lt; this->getClassifierBehaviorExecutions()->size())&#xA;        {&#xA;        &#x9;notYetStarted = (this->getClassifierBehaviorExecutions()->at(i)->getClassifier() != classifier);&#xA;            i = i + 1;&#xA;        }&#xA;&#xA;        if (notYetStarted)&#xA;        {&#xA;        &#x9;std::shared_ptr&lt;fUML::Semantics::CommonBehavior::ClassifierBehaviorExecution> newExecution(fUML::Semantics::CommonBehavior::CommonBehaviorFactory::eInstance()->createClassifierBehaviorExecution());&#xA;        &#x9;newExecution->setObjectActivation(getThisObjectActivationPtr());&#xA;        &#x9;this->getClassifierBehaviorExecutions()->push_back(newExecution);&#xA;        &#x9;//newExecution->execute(classifier, inputs);&#xA;        }&#xA;&#x9;}"/>
-          </eAnnotations>
           <eParameters name="classifier" ordered="false" eType="ecore:EClass http://www.eclipse.org/uml2/5.0.0/UML#//Class"/>
           <eParameters name="inputs" ordered="false" upperBound="-1" eType="#//Semantics/CommonBehavior/ParameterValue"/>
         </eOperations>
-        <eOperations name="stop" ordered="false" lowerBound="1">
-          <eAnnotations source="http://tu-ilmenau.de/see/codegen">
-            <details key="body" value="std::shared_ptr&lt;Bag&lt;fUML::Semantics::CommonBehavior::ClassifierBehaviorExecution> > classifierBehaviorExecutions = this->getClassifierBehaviorExecutions();&#xA;    for (unsigned int i = 0; i &lt; classifierBehaviorExecutions->size(); i++) &#xA;    {&#xA;    &#x9;std::shared_ptr&lt;fUML::Semantics::CommonBehavior::ClassifierBehaviorExecution> classifierBehaviorExecution = classifierBehaviorExecutions->at(i);&#xA;        classifierBehaviorExecution->terminate();&#xA;    }"/>
-          </eAnnotations>
-        </eOperations>
+        <eOperations name="stop" ordered="false" lowerBound="1"/>
         <eOperations name="_register" ordered="false" lowerBound="1">
-          <eAnnotations source="http://tu-ilmenau.de/see/codegen">
-            <details key="body" value="    DEBUG_MESSAGE(std::cout&lt;&lt;&quot;[register] object = &quot; &lt;&lt; this->getObject()&lt;&lt;std::endl;)&#xD;&#xA;    DEBUG_MESSAGE(std::cout&lt;&lt;&quot;[register] accepter = &quot; &lt;&lt; accepter&lt;&lt;std::endl;)&#xD;&#xA;&#xD;&#xA;    this->getWaitingEventAccepters()->push_back(accepter);"/>
-          </eAnnotations>
           <eParameters name="accepter" ordered="false" lowerBound="1" eType="#//Semantics/CommonBehavior/EventAccepter"/>
         </eOperations>
         <eOperations name="unregister" ordered="false" lowerBound="1">
-          <eAnnotations source="http://tu-ilmenau.de/see/codegen">
-            <details key="body" value="&#x9;DEBUG_MESSAGE(std::cout&lt;&lt;&quot;[unregister] object = &quot; &lt;&lt; this->getObject()&lt;&lt;std::endl;)&#xD;&#xA;    DEBUG_MESSAGE(std::cout&lt;&lt;&quot;[unregister] accepter = &quot; &lt;&lt; accepter&lt;&lt;std::endl;)&#xD;&#xA;&#xD;&#xA;    bool notFound = true;&#xD;&#xA;    unsigned int i = 0;&#xD;&#xA;    while (notFound &amp;&amp; i &lt; this->getWaitingEventAccepters()->size()) {&#xD;&#xA;        if (this->getWaitingEventAccepters()->at(i) == accepter) {&#xD;&#xA;            this->getWaitingEventAccepters()->erase(this->getWaitingEventAccepters()->begin() + i);&#xD;&#xA;            notFound = false;&#xD;&#xA;        }&#xD;&#xA;        i = i + 1;&#xD;&#xA;    }"/>
-          </eAnnotations>
           <eParameters name="accepter" ordered="false" lowerBound="1" eType="#//Semantics/CommonBehavior/EventAccepter"/>
         </eOperations>
         <eOperations name="send" lowerBound="1">
-          <eAnnotations source="http://tu-ilmenau.de/see/codegen">
-            <details key="body" value="this->getEventPool()->push_back(std::dynamic_pointer_cast&lt;fUML::Semantics::SimpleClassifiers::SignalInstance>(signalInstance->copy()));&#xA;    //_send(new ArrivalSignal());"/>
-          </eAnnotations>
           <eParameters name="signalInstance" ordered="false" lowerBound="1" eType="ecore:EClass http://www.eclipse.org/uml2/5.0.0/UML#//Element"/>
         </eOperations>
-        <eOperations name="dispatchNextEvent" ordered="false" lowerBound="1">
-          <eAnnotations source="http://tu-ilmenau.de/see/codegen">
-            <details key="body" value=""/>
-          </eAnnotations>
-        </eOperations>
-        <eOperations name="retrieveNextEvent" ordered="false" lowerBound="1" eType="ecore:EClass http://www.eclipse.org/uml2/5.0.0/UML#//Element">
-          <eAnnotations source="http://tu-ilmenau.de/see/codegen"/>
-        </eOperations>
-        <eOperations name="_startObjectBehavior" ordered="false" lowerBound="1">
-          <eAnnotations source="http://tu-ilmenau.de/see/codegen">
-            <details key="body" value="//this->behavior._startObjectBehavior();"/>
-          </eAnnotations>
-        </eOperations>
+        <eOperations name="dispatchNextEvent" ordered="false" lowerBound="1"/>
+        <eOperations name="retrieveNextEvent" ordered="false" lowerBound="1" eType="ecore:EClass http://www.eclipse.org/uml2/5.0.0/UML#//Element"/>
+        <eOperations name="_startObjectBehavior" ordered="false" lowerBound="1"/>
         <eOperations name="_send" ordered="false" lowerBound="1">
-          <eAnnotations source="http://tu-ilmenau.de/see/codegen">
-            <details key="body" value=""/>
-          </eAnnotations>
           <eParameters name="signal" ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
         </eOperations>
         <eStructuralFeatures xsi:type="ecore:EReference" name="waitingEventAccepters"
@@ -3283,5 +3250,14 @@
         </eOperations>
       </eClassifiers>
     </eSubpackages>
+  </eSubpackages>
+  <eSubpackages name="MDE4CPP_Extensions" nsPrefix="fUML_Semantics.Semantics.MDE4CPP_Extensions">
+    <eClassifiers xsi:type="ecore:EClass" name="FUML_Object" abstract="true" eSuperTypes="http://www.eclipse.org/uml2/5.0.0/UML#//Element">
+      <eAnnotations source="MDE4CPP_Substitutes" references="#//Semantics/StructuredClassifiers/Object">
+        <details key="doc" value="This class is meant to provide an interface defining fUML-specific functionality of fUML::Semantics::StructuredClassifiers::Object&#xA;to generated UML model classes within MDE4CPP. Thus, it can be understood as a substitution of fUML::Semantics::StructuredClassifiers::Object."/>
+      </eAnnotations>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="objectActivation" ordered="false"
+          eType="#//Semantics/CommonBehavior/ObjectActivation" containment="true"/>
+    </eClassifiers>
   </eSubpackages>
 </ecore:EPackage>
