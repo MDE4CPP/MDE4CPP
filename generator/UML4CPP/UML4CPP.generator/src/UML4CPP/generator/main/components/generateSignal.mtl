@@ -83,6 +83,9 @@ static const unsigned int [aSignal.getMemberName().toUpperCase()/]_FEATURE_COUNT
 [template public generateSignalInitialization(aSignal : Signal)]
 [aSignal.memberName()/]->setName("[aSignal.name/]");
 [aSignal.memberName()/]->setIsAbstract([aSignal.isAbstract/]);
+[if (not isReflectionModel(aSignal.getRootPackage()))]
+[aSignal.memberName()/]->_setID([aSignal.getMemberName().toUpperCase()/]);
+[/if]
 [aSignal.generateStereotypeApplication()/]
 [/template]
 
