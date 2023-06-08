@@ -35,6 +35,9 @@ namespace FoundationalModelLibrary::BasicInputOutput
 			//*********************************
 			// Operations
 			//*********************************
+			// fUML-specific Operations
+			const std::shared_ptr<Bag<uml::Classifier>>& getTypes() const = 0;
+
 		protected:
 			//*********************************
 			// Members

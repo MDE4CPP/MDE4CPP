@@ -189,6 +189,25 @@ void TextOutputChannelImpl::writeUnlimitedNatural(int value,std::shared_ptr<Foun
 
 }
 
+// fUML-specific Operations
+const std::shared_ptr<Bag<uml::Classifier>>& TextOutputChannelImpl::getTypes() const
+{
+	static std::shared_ptr<Bag<uml::Classifier>> types;
+
+	if(!types)
+	{
+		types.reset();
+		// Add type of self 'TextOutputChannel' : Class
+		types->add(FoundationalModelLibrary::BasicInputOutput::BasicInputOutputPackage::eInstance()->get_FoundationalModelLibrary_BasicInputOutput_TextOutputChannel());
+		// Add base type 'OutputChannel' : Class
+		types->add(FoundationalModelLibrary::BasicInputOutput::BasicInputOutputPackage::eInstance()->get_FoundationalModelLibrary_BasicInputOutput_OutputChannel());
+		// Add base type 'Channel' : Class
+		types->add(FoundationalModelLibrary::BasicInputOutput::BasicInputOutputPackage::eInstance()->get_FoundationalModelLibrary_BasicInputOutput_Channel());
+	}
+
+	return types;
+}
+
 //**************************************
 // StructuralFeature Getter & Setter
 //**************************************

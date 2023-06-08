@@ -24,6 +24,7 @@ namespace FoundationalModelLibrary
 			// Operations
 			//*********************************
 			virtual std::shared_ptr<uml::Element> instantiate(const std::shared_ptr<uml::Class>&) = 0;
+			virtual std::shared_ptr<uml::Element> instantiate(const std::shared_ptr<uml::Signal>&) = 0;
 	};
 }
 #endif /* end of include guard: FOUNDATIONALMODELLIBRARY_LOCUS_HPP */

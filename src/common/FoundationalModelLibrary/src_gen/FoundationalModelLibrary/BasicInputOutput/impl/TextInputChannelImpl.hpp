@@ -55,6 +55,9 @@ namespace FoundationalModelLibrary::BasicInputOutput
 			virtual double readReal(std::shared_ptr<FoundationalModelLibrary::Common::Status> errorStatus) ;
 			virtual int readUnlimitedNatural(std::shared_ptr<FoundationalModelLibrary::Common::Status> errorStatus) ;
 
+			// fUML-specific Operations
+			const std::shared_ptr<Bag<uml::Classifier>>& getTypes() const;
+
 			//*********************************
 			// Attributes Getter Setter
 			//*********************************

@@ -12,13 +12,13 @@
 
 
 // base class includes
-#include "fUML/MDE4CPP_Extensions/FUML_Object.hpp"
+#include "uml/Element.hpp"
 
 
 
 namespace FoundationalModelLibrary::Common
 {
-	struct Status : virtual public fUML::MDE4CPP_Extensions::FUML_Object 
+	struct Status : virtual public uml::Element 
 	{
 		protected:
 			Status(){}

@@ -197,6 +197,16 @@ std::shared_ptr<uml::Element> FoundationalModelLibraryExecPluginImpl::instantiat
 	return this->m_locus->instantiate(type);
 }
 
+std::shared_ptr<uml::Element> FoundationalModelLibraryExecPluginImpl::instantiateSignal(std::shared_ptr<uml::Signal> type)
+{
+	if(!m_IsInitialized)
+	{
+		initialize();
+	}
+
+	return this->m_locus->instantiate(type);
+}
+
 std::shared_ptr<Any> FoundationalModelLibraryExecPluginImpl::evaluateSpecification(std::shared_ptr<uml::ValueSpecification> specification)
 {
 	return this->m_executor->evaluate(specification);

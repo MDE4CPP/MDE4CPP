@@ -106,6 +106,21 @@ void ListenerImpl::destroy()
 //*********************************
 // Operations
 //*********************************
+// fUML-specific Operations
+const std::shared_ptr<Bag<uml::Classifier>>& ListenerImpl::getTypes() const
+{
+	static std::shared_ptr<Bag<uml::Classifier>> types;
+
+	if(!types)
+	{
+		types.reset();
+		// Add type of self 'Listener' : Class
+		types->add(FoundationalModelLibrary::Common::CommonPackage::eInstance()->get_FoundationalModelLibrary_Common_Listener());
+	}
+
+	return types;
+}
+
 //**************************************
 // StructuralFeature Getter & Setter
 //**************************************

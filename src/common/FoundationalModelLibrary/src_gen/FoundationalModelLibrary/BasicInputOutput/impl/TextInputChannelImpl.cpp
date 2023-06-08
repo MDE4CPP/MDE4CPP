@@ -208,6 +208,25 @@ int TextInputChannelImpl::readUnlimitedNatural(std::shared_ptr<FoundationalModel
 	return ReturnResult;
 }
 
+// fUML-specific Operations
+const std::shared_ptr<Bag<uml::Classifier>>& TextInputChannelImpl::getTypes() const
+{
+	static std::shared_ptr<Bag<uml::Classifier>> types;
+
+	if(!types)
+	{
+		types.reset();
+		// Add type of self 'TextInputChannel' : Class
+		types->add(FoundationalModelLibrary::BasicInputOutput::BasicInputOutputPackage::eInstance()->get_FoundationalModelLibrary_BasicInputOutput_TextInputChannel());
+		// Add base type 'InputChannel' : Class
+		types->add(FoundationalModelLibrary::BasicInputOutput::BasicInputOutputPackage::eInstance()->get_FoundationalModelLibrary_BasicInputOutput_InputChannel());
+		// Add base type 'Channel' : Class
+		types->add(FoundationalModelLibrary::BasicInputOutput::BasicInputOutputPackage::eInstance()->get_FoundationalModelLibrary_BasicInputOutput_Channel());
+	}
+
+	return types;
+}
+
 //**************************************
 // StructuralFeature Getter & Setter
 //**************************************
