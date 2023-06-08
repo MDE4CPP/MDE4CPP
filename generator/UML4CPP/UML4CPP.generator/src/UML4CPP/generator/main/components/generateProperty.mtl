@@ -271,4 +271,7 @@ void [aClass.name.toUpperFirst()/]Impl::set[compositeOwnerClass.name.toUpperFirs
 [aProperty.type.getNearestPackage().generateNamespace(true)/]::[aProperty.type.name/]::[aProperty.default.toUpper()/] /*defined default value*/
 [/template]
 
+[comment] Has to be done that way, because Eclipse does not set meta-property 'Feature::featuringClassifier' for Signals for some reason.
 [query public getFeaturingClassifier(aProperty : Property) : Classifier = aProperty.featuringClassifier->asSequence()->first() /]
+[/comment]
+[query public getFeaturingClassifier(aProperty : Property) : Classifier = aProperty.ancestors(Classifier)->first() /]

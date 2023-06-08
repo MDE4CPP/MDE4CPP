@@ -65,7 +65,7 @@ originalName : String = aPackage.generateNamespacePath(false);
 #include "[signalPackage.generateNamespacePath(true)/]/[signalPackage.myNamespaceName()/]Package.hpp"
 [/for]
 [for (aSignal : Signal | aPackage.getInstantiatableSignalsOwnedByPackage()->sortedBy(myQualifiedName()))]
-//#include "[aSignal._package.generateNamespacePath(true)/]/[aSignal.name.toUpperFirst()/].hpp"
+#include "[aSignal._package.generateNamespacePath(true)/]/[aSignal.name.toUpperFirst()/].hpp"
 [/for]
 [let externalPackageList : Set(Package) = aPackage.getSignalPackagesOfSendSignalActions()->reject(p : Package | p = aPackage)->reject(p : Package | aPackage.allOwnedElements()->filter(Package)->includes(p))]
 [if (externalPackageList->size() > 0)]
@@ -189,9 +189,8 @@ std::shared_ptr<uml::Element> [packageName/]LocusImpl::instantiate(const std::sh
 			[let className : String = aSignal.name.toUpperFirst()]
 			case [packageNamespace/]::[signalPackage.myNamespaceName()/]Package::[aSignal.getMemberName().toUpperCase()/]:
 			{
-				//std::shared_ptr<[signalPackage.generateNamespace(false)/]::[className/]> instance = [packageNamespace/]::[signalPackage.myNamespaceName()/]Factory::eInstance()->create[aSignal.name.toUpperFirst()/]();
-				//return instance;
-				return nullptr;
+				std::shared_ptr<[signalPackage.generateNamespace(false)/]::[className/]> instance = [packageNamespace/]::[signalPackage.myNamespaceName()/]Factory::eInstance()->create[aSignal.name.toUpperFirst()/]();
+				return instance;
 			}
 			[/let]
 		[/for]
@@ -225,7 +224,6 @@ std::shared_ptr<uml::Element> [packageName/]LocusImpl::instantiate(const std::sh
 		{
 			DEBUG_INFO("Execution plugin '" << executionPlugin->eNAME() << "' is accessable.")
 
-			//TODO: implement ExecutionPlugin::instatiateSignal(uml::Signal)
 			return executionPlugin->instantiateSignal(type);
 		}
 		else { DEBUG_ERROR("Plugin '" << plugin->eNAME() << "' is not an execution plugin!") }

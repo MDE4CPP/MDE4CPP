@@ -1,0 +1,207 @@
+[comment encoding = UTF-8 /]
+[module generateSignalImplementationSource('http://www.eclipse.org/uml2/5.0.0/UML')]
+
+[import UML4CPP::generator::main::helpers::nameHelper /]
+[import UML4CPP::generator::main::helpers::generalHelper /]
+[import UML4CPP::generator::main::profiles::uml4CPPProfileHelper /]
+[import UML4CPP::generator::main::components::generateOperation /]
+[import UML4CPP::generator::main::components::generateOpaqueBehavior /]
+[import UML4CPP::generator::main::components::generateProperty /]
+[import UML4CPP::generator::main::components::generateClass /]
+[import UML4CPP::generator::main::components::generateType /]
+[import UML4CPP::generator::main::components::generateSignal /]
+[import UML4CPP::generator::main::helpers::keywords /]
+
+[template public generateSignalImplementationSource(aSignal : Signal) {signalName : String = aSignal.name.toUpperFirst().concat('Impl'); containingPackage : Package = aSignal.ancestors()->filter(Package)->first();}]
+[file (containingPackage.generateNamespacePath(false) + '/impl/' + signalName + '.cpp', false, 'UTF-8')]
+#include "[containingPackage.generateNamespacePath(false)/]/impl/[signalName.concat('.hpp')/]"
+
+[defineDebugMacro()/]
+
+//General includes
+#include <iostream>
+[generateAbstractDataTypesIncludes()/]
+#include "abstractDataTypes/SubsetUnion.hpp"
+#include "util/util.hpp"
+#include "uml/UMLAny.hpp"
+#include "uml/UMLContainerAny.hpp"
+#include "uml/Property.hpp"
+#include "uml/Operation.hpp"
+#include "uml/OpaqueBehavior.hpp"
+#include "uml/FunctionBehavior.hpp"
+#include "uml/Parameter.hpp"
+#include "[containingPackage.generateNamespacePath(false)/]/[containingPackage.name.concat('Factory')/].hpp"
+#include "[containingPackage.generateNamespacePath(false)/]/impl/[containingPackage.name.concat('PackageImpl')/].hpp"
+#include "[aSignal.eClass().ePackage.name/]/[aSignal.eClass().name/].hpp"
+[if (aSignal.ownedAttribute->reject(type.oclIsUndefined())->select(hasSetter())->select(type.oclIsKindOf(Enumeration))->size() > 0)]
+#include "uml/EnumerationLiteral.hpp"
+[/if]
+[comment Package for used PrimitiveTypes /]
+[if (aSignal.includes()->filter(PrimitiveType)->size() > 0)]
+
+//Package for used PrimitiveTypes
+#include "types/typesPackage.hpp"
+[/if]
+[comment Packages for used (non-primitive) Types /]
+[for (containingPackage : Package | aSignal.includes()->select(t : Type | t.oclIsKindOf(Class) or t.oclIsKindOf(Interface) or t.oclIsKindOf(Enumeration))._package->sortedBy(myQualifiedName()))before('\n//Packages for used (non-primitive) Types\n')]
+#include "[containingPackage.generateNamespacePath(true)/]/[containingPackage.myNamespaceName()/]Package.hpp"
+[/for]
+[comment Packages of external Interfaces realized by this Signal /]
+[for (externalPackage : Package | 
+		aSignal.collectAllRealizedInterfaces().ownedAttribute.getNearestPackage()
+		->addAll(aSignal.collectAllRealizedInterfaces().ownedOperation.getNearestPackage())
+		->flatten()->asSet()->reject(p : Package | p = containingPackage))
+	before('\n//external Interfaces realized by this class\n')]
+#include "[externalPackage.generateNamespacePath(true)/]/[externalPackage.myNamespaceName()/]Package.hpp"
+[/for]
+[comment Used Types /]
+[for (cl : Type | aSignal.includes()->select(t : Type | t.oclIsKindOf(Class) or t.oclIsKindOf(Interface) or t.oclIsKindOf(Enumeration) or t.oclIsTypeOf(Signal))->sortedBy(myQualifiedName())) before('\n//Used Types\n')]
+[if (cl.getNearestPackage().hasIncludePath())]
+#include "[cl.getNearestPackage().getIncludePath()/]"
+[else]
+#include "[cl.getNearestPackage().generateNamespacePath(true)/]/[cl.name.toUpperFirst()/].hpp"
+[/if]
+[/for]
+[comment PackgeImpl and Factories included from types of attributes, operation parameters and imports /]
+[for (typePackage : Package | aSignal.includes()->filter(Class).getNearestPackage()->reject(pack : Package | pack = containingPackage)->asSet()->sortedBy(myQualifiedName())) before('\n//Packges and Factories included from types of attributes, operation parameters, imports and composite owner classes\n')]
+#include "[typePackage.generateNamespacePath(true)/]/[typePackage.myNamespaceName().concat('Factory')/].hpp"
+#include "[typePackage.generateNamespacePath(true)/]/impl/[typePackage.myNamespaceName().concat('PackageImpl')/].hpp"
+[/for]
+[comment Packages of included Enumerations /]
+[for (aPackage : Package | aSignal.ownedAttribute->reject(type.oclIsUndefined())->select(type.oclIsKindOf(Enumeration)).type._package->flatten()->reject(pack : Package | pack = containingPackage)->sortedBy(name)) before('\n//Packages of included Enumerations\n')]
+#include "[aPackage.generateNamespacePath(false)/]/[aPackage.getPackageName()/]Package.hpp"
+[/for]
+[comment Includes from InstanceValues /]
+[for (instVal : InstanceValue | aSignal.ownedAttribute.defaultValue->reject(oclIsUndefined())->selectByType(InstanceValue)->reject(type.oclIsUndefined() or type.oclIsKindOf(Enumeration))->sortedBy(myQualifiedName())) before('\n//Includes from InstanceValues\n') after('\n')]
+#include "[instVal.type._package.generateNamespacePath(false)/]/[instVal.type._package.getPackageName()/]Factory.hpp"
+#include "[instVal.type._package.generateNamespacePath(true)/]/[instVal.type.name/].hpp"
+[/for]
+
+[if (not containingPackage.isIgnoreNamespace())]using namespace [containingPackage.generateNamespace(false)/];[/if]
+
+//*********************************
+// Constructor / Destructor
+//*********************************
+[signalName/]::[signalName/]()
+{
+	/*
+	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
+	*/
+	DEBUG_INFO("Instance of '[aSignal.name.toUpperFirst()/]' is created.")
+	//***********************************
+}
+
+[signalName/]::~[signalName/]()
+{
+	DEBUG_INFO("Instance of '[aSignal.name.toUpperFirst()/]' is destroyed.")
+}
+
+[signalName/]::[signalName/](const [signalName/] & obj):[signalName/]()
+{
+	*this = obj;
+}
+
+std::shared_ptr<ecore::EObject>  [signalName/]::copy() const
+{
+	std::shared_ptr<[signalName/]> element(new [signalName/]());
+	*element=(*this);
+	return element;
+}
+
+[signalName/]& [signalName/]::operator=(const [signalName/] & obj)
+{
+[if (aSignal.general->isEmpty())]
+	//call overloaded =Operator for each base class
+	[aSignal.getGeneralSuperClassName()/]Impl::operator=(obj);
+[else]
+	//call overloaded =Operator for each base class
+	[for (general : Classifier | aSignal.general->reject(oclIsUndefined() and name.oclIsUndefined()))]
+	[general.getClassifierName(aSignal, false, general.getNearestPackage().isIgnoreNamespace())/]Impl::operator=(obj);
+	[/for]
+[/if]
+	//create copy of all Attributes
+	#ifdef SHOW_COPIES
+	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy [aSignal.name.toUpperFirst()/] "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
+	#endif
+
+	//copy attributes with no containment (soft copy)
+[for (aProperty : Property | aSignal.ownedAttribute->select(isBackReference() or not (isComposite() or isSubset()))->asOrderedSet()->sortedBy(name))]
+	m_[aProperty.name/] = obj.[aProperty.getterName()/]();
+[/for]
+
+	//clone attributes with containment (deep copy)
+[for (aProperty : Property | aSignal.ownedAttribute->select((isComposite() or isSubset()) and not (isUnion() or isBackReference()))->asOrderedSet()->sortedBy(name))]
+[if (aProperty.upper = 1)]
+[if (not (aProperty.type.isPrimitive() or aProperty.type.oclIsKindOf(Enumeration)))]
+	if (obj.[aProperty.getterName()/]() != nullptr)
+	{
+	[/if]	m_[aProperty.name/] = [if (not (aProperty.type.isPrimitive() or aProperty.type.oclIsKindOf(Enumeration)))]std::dynamic_pointer_cast<[aProperty.type.generateCppRawType(true)/]>([/if]obj.[aProperty.getterName()/]()[if (not (aProperty.type.isPrimitive() or aProperty.type.oclIsKindOf(Enumeration)))]->copy())[/if];
+[if (not (aProperty.type.isPrimitive() or aProperty.type.oclIsKindOf(Enumeration)))]
+	}
+[/if]
+[else]
+	[aProperty.generateCppType()/] [aProperty.name/]List = obj.[aProperty.getterName()/]();
+	Bag<[aProperty.type.generateCppRawType(true)/]>::iterator [aProperty.name/]Iter = [aProperty.name/]List->begin();
+	Bag<[aProperty.type.generateCppRawType(true)/]>::iterator [aProperty.name/]End = [aProperty.name/]List->end();
+	while ([aProperty.name/]Iter != [aProperty.name/]End) 
+	{
+[if (aProperty.type.isPrimitive())]
+		std::shared_ptr<[aProperty.type.generateCppRawType(true)/]> temp(new [aProperty.type.generateCppRawType(true)/](*(*[aProperty.name/]Iter)));
+[else]
+		std::shared_ptr<[aProperty.type.generateCppRawType(true)/]> temp = std::dynamic_pointer_cast<[aProperty.type.generateCppRawType(true)/]>((*[aProperty.name/]Iter)->copy());
+[/if]
+		[aProperty.getterName()/]()->push_back(temp);
+		[aProperty.name/]Iter++;
+	}
+[/if]
+[/for]
+[for (anAttribute : Property | aSignal.ownedAttribute->select(isSubset()))]
+	[anAttribute.generateSubsetUnionInit()/]
+[/for]
+
+	return *this;
+}
+
+[if (isSingleton())]
+[aSignal.name.toUpperFirst()/]* [signalName/]::create()
+{
+	return new [signalName/]();
+}
+[/if]
+
+//*********************************
+// Attribute Setter Getter
+//*********************************
+[for (aAttribute : Property | aSignal.ownedAttribute->sortedBy(myQualifiedName())) separator ('\n')]
+[aAttribute.generateAttributeSetterImplementationCpp()/]
+[aAttribute.generateAttributeGetterImplementationCpp()/]
+[/for]
+[for (anInterface : Interface | aSignal.directlyRealizedInterfaces()->sortedBy(myQualifiedName()))] [for (aAttribute : Property | anInterface.ownedAttribute->sortedBy(myQualifiedName())) separator ('\n')] [if (aSignal.ownedAttribute->select(name=aAttribute.name)->size() = 0)]
+[aAttribute.generateAttributeSetterImplementationCpp(aSignal)/]
+[aAttribute.generateAttributeGetterImplementationCpp(aSignal)/]
+[/if][/for][/for]
+
+//*********************************
+// Union Getter
+//*********************************
+[aSignal.generateUnionGetterCpp()/]
+
+//**************************************
+// StructuralFeature Getter & Setter
+//**************************************
+[aSignal.generateeGetSetImpl()/]
+
+[/file]
+[/template]
+
+[query private includes(aSignal : Signal)  : Set(Type) = OrderedSet
+{
+	aSignal.member->selectByKind(TypedElement)->reject(tE : TypedElement | tE.type.oclIsUndefined()).type, 
+	aSignal.getAllAttributes()->reject(p : Property | p.type.oclIsUndefined()).type, 
+	aSignal.importedMember
+}->flatten() /]
+
+[query private includes(anInterface : Interface)  : Set(Type) = OrderedSet{anInterface.member->selectByKind(TypedElement)->select(not type.oclIsUndefined()).type, anInterface.ownedOperation.ownedParameter.type}->flatten() /]
+
+[query private getAllAttributes(anInterface : Interface) : Set(Property) = OrderedSet{anInterface.ownedAttribute, anInterface.generalization.general->selectByType(Interface).getAllAttributes()} /]
+[query private getAllAttributes(aSignal : Signal) : Set(Property) = OrderedSet{aSignal.ownedAttribute, aSignal.general->selectByKind(Classifier).getAllAttributes(), aSignal.directlyRealizedInterfaces().getAllAttributes()}->flatten() /]

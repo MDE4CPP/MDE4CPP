@@ -1,0 +1,79 @@
+[comment encoding = UTF-8 /]
+[module generateSignalImplementationHeader('http://www.eclipse.org/uml2/5.0.0/UML')]
+
+[import UML4CPP::generator::main::helpers::nameHelper /]
+[import UML4CPP::generator::main::helpers::generalHelper /]
+[import UML4CPP::generator::main::profiles::uml4CPPProfileHelper /]
+[import UML4CPP::generator::main::components::generateProperty /]
+[import UML4CPP::generator::main::components::generateClass /]
+[import UML4CPP::generator::main::components::generateSignal /]
+
+[template public generateSignalImplementationHeader(aSignal : Signal) {dataTypeName : String = aSignal.name.toUpperFirst() + 'Impl'; containingPackage : Package = aSignal.ancestors()->filter(Package)->first()}]
+[file (containingPackage.generateNamespacePath(false) + '/impl/' + dataTypeName + '.hpp', false, 'UTF-8')]
+[startGuard(dataTypeName)/]
+
+//Model includes
+#include "../[aSignal.name.toUpperFirst().concat('.hpp')/]"
+[for (general : Classifier | aSignal.general->asOrderedSet()->sortedBy(myQualifiedName()))]
+#include "[general.getNearestPackage().generateNamespacePath(false)/]/impl/[general.name.toUpperFirst()/]Impl.hpp"
+[/for]
+[if (aSignal.general->isEmpty())]
+#include "[aSignal.getGeneralSuperClassImplInclude()/]"
+[/if]
+
+class Any;
+
+namespace uml
+{
+	class Property;
+	class Operation;
+[if (aSignal.ownedAttribute->reject(type.oclIsUndefined())->select(hasSetter())->select(type.oclIsKindOf(Enumeration))->size() > 0)]
+	class EnumerationLiteral;
+[/if]
+}
+
+//*********************************
+[if (not containingPackage.isIgnoreNamespace())]namespace [containingPackage.generateNamespace(false)/]
+{
+[/if]
+	struct [dataTypeName/] [for (general : Classifier | aSignal.general->reject(oclIsUndefined() and name.oclIsUndefined())) before (':') separator (',')]
+virtual public [general.getClassifierName(aSignal, false, general.getNearestPackage().isIgnoreNamespace())/]Impl[/for][if (aSignal.general->isEmpty())]
+ : virtual public [aSignal.getGeneralSuperClassName()/]Impl[/if], virtual public [aSignal.name.toUpperFirst()/]
+	{
+		public: 
+			[dataTypeName/](const [dataTypeName/] & obj);
+			virtual std::shared_ptr<ecore::EObject> copy() const;  
+			[dataTypeName/]& operator=([dataTypeName/] const&);
+
+		protected:
+			friend class [aSignal.getNearestPackage().myNamespaceName().concat('FactoryImpl')/];
+
+			//constructor
+			[dataTypeName/]();
+
+		public:
+
+			//destructor
+			virtual ~[dataTypeName/]();
+
+			//*********************************
+			// Attributes Getter Setter
+			//*********************************
+			[aSignal.ownedAttribute.generateAttributeAccessorsDeclaration(true)/]
+			
+			//*********************************
+			// Union Getter
+			//*********************************
+			[aSignal.generateUnionGetterDeclaretaion(true)/]
+
+		public:
+			//**************************************
+			// StructuralFeature Getter & Setter
+			//**************************************
+			[aSignal.generateeGetSetDel(true)/]
+
+	};
+[if (not containingPackage.isIgnoreNamespace())]}[/if]
+[endGuard(dataTypeName)/]
+[/file]
+[/template]

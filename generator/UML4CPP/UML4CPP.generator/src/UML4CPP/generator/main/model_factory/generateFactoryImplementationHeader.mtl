@@ -22,6 +22,7 @@
 [import UML4CPP::generator::main::components::generateClass /]
 [import UML4CPP::generator::main::components::generateDataType /]
 [import UML4CPP::generator::main::components::generateInterface /]
+[import UML4CPP::generator::main::components::generateSignal /]
 [import UML4CPP::generator::main::helpers::collectionHelper /]
 [import UML4CPP::generator::main::helpers::generalHelper /]
 [import UML4CPP::generator::main::helpers::nameHelper /]

@@ -170,12 +170,14 @@
 	->addAll(collectPackageClassesForFactoryInternal(aPackage).getImplicitCompositeOwners())
 	->addAll(collectPackageStereotypesForFactory(aPackage))
 	->addAll(collectPackageDataTypesForFactory(aPackage))
+	->addAll(collectPackageSignalsForFactory(aPackage))
 	->sortedBy(myQualifiedName()) 
 /]
 [query public collectPackageClassifiersForFactoryFunctions(aPackage : Package) : OrderedSet(Classifier) = 
 	collectPackageClassesForFactoryInternal(aPackage)
 	->addAll(collectPackageStereotypesForFactory(aPackage))
 	->addAll(collectPackageDataTypesForFactory(aPackage))
+	->addAll(collectPackageSignalsForFactory(aPackage))
 	->reject(isSingleton() or isAbstract = true)
 	->sortedBy(myQualifiedName()) 
 /]
@@ -190,6 +192,10 @@
 [query private collectPackageDataTypesForFactory(aPackage : Package) : Set(DataType) = 
 	aPackage.ownedMember
 	->selectByType(DataType)
+/]
+[query private collectPackageSignalsForFactory(aPackage : Package) : Set(Signal) = 
+	aPackage.ownedMember
+	->selectByType(Signal)
 /]
 [query public collectPackageInterfacesForFactory(aPackage : Package) : OrderedSet(Interface) = 
 	aPackage.ownedMember
