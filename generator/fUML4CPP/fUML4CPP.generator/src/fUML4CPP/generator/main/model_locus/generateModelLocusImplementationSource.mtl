@@ -38,6 +38,7 @@ originalName : String = aPackage.generateNamespacePath(false);
 
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "uml/Class.hpp"
+#include "uml/Signal.hpp"
 
 [for (classPackage : Package | aPackage.getInstantiatableClassifiersOwnedByPackage()._package->asSet()->sortedBy(myQualifiedName()))]
 #include "[classPackage.generateNamespacePath(true)/]/[classPackage.myNamespaceName()/]Factory.hpp"
@@ -47,6 +48,26 @@ originalName : String = aPackage.generateNamespacePath(false);
 #include "[aClassifier._package.generateNamespacePath(true)/]/[aClassifier.name.toUpperFirst()/].hpp"
 [/for]
 [let externalPackageList : Set(Package) = aPackage.getClassifierPackagesOfCreateObjectAction()->reject(p : Package | p = aPackage)->reject(p : Package | aPackage.allOwnedElements()->filter(Package)->includes(p))]
+[if (externalPackageList->size() > 0)]
+	[for (externalPackage : Package | externalPackageList)]
+		[if (externalPackage.isReflectionModel())]
+#include "[externalPackage.generateNamespacePath(false)/]/[externalPackage.name/]Package.hpp"
+		[else]
+#include "[externalPackage.generateNamespacePath(true)/]/[externalPackage.myNamespaceName()/]Package.hpp"
+		[/if]
+	[/for]
+#include "pluginFramework/PluginFramework.hpp"
+#include "pluginFramework/UMLExecutionModelPlugin.hpp"
+[/if]
+[/let]
+[for (signalPackage : Package | aPackage.getInstantiatableSignalsOwnedByPackage()._package->asSet()->sortedBy(myQualifiedName()))]
+#include "[signalPackage.generateNamespacePath(true)/]/[signalPackage.myNamespaceName()/]Factory.hpp"
+#include "[signalPackage.generateNamespacePath(true)/]/[signalPackage.myNamespaceName()/]Package.hpp"
+[/for]
+[for (aSignal : Signal | aPackage.getInstantiatableSignalsOwnedByPackage()->sortedBy(myQualifiedName()))]
+//#include "[aSignal._package.generateNamespacePath(true)/]/[aSignal.name.toUpperFirst()/].hpp"
+[/for]
+[let externalPackageList : Set(Package) = aPackage.getSignalPackagesOfSendSignalActions()->reject(p : Package | p = aPackage)->reject(p : Package | aPackage.allOwnedElements()->filter(Package)->includes(p))]
 [if (externalPackageList->size() > 0)]
 	[for (externalPackage : Package | externalPackageList)]
 		[if (externalPackage.isReflectionModel())]
@@ -146,6 +167,77 @@ std::shared_ptr<uml::Element> [packageName/]LocusImpl::instantiate(const std::sh
 	//return PSCS::Semantics::Loci::CS_LocusImpl::instantiate(type);
 }
 
+std::shared_ptr<uml::Element> [packageName/]LocusImpl::instantiate(const std::shared_ptr<uml::Signal>&  type)
+{
+[if (aPackage.getInstantiatableSignalsOwnedByPackage()->size() > 0)]
+	std::shared_ptr<uml::Package> typePackage = type->getPackage().lock();
+
+	//Model-internal signals
+[let internalPackages : OrderedSet(Package) = aPackage.getInstantiatableSignalsOwnedByPackage()._package->sortedBy(myQualifiedName())->asOrderedSet()]
+[if (internalPackages->size() = 0)]
+	//No internal signals
+[else]
+[for (signalPackage : Package | internalPackages)]
+[let packageNamespace : String = signalPackage.generateNamespace(true)]
+	[getIfElseIfString(internalPackages->indexOf(signalPackage))/](typePackage == [signalPackage.generateNamespace(false)/]::[signalPackage.name/]Package::eInstance())
+	{	
+		[let signalsOfPackage : OrderedSet(Signal) = aPackage.getInstantiatableSignalsOwnedByPackage()->select(s : Signal | s._package = signalPackage)->sortedBy(myQualifiedName())]
+		[if (signalsOfPackage->size() = 0)]
+		//Package does not contain any signals
+		[else]
+		[for (aSignal : Signal | signalsOfPackage) before('\t\tswitch(type->_getID())\n\t\t{\n') after('\t\t}\n')]
+			[let className : String = aSignal.name.toUpperFirst()]
+			case [packageNamespace/]::[signalPackage.myNamespaceName()/]Package::[aSignal.getMemberName().toUpperCase()/]:
+			{
+				//std::shared_ptr<[signalPackage.generateNamespace(false)/]::[className/]> instance = [packageNamespace/]::[signalPackage.myNamespaceName()/]Factory::eInstance()->create[aSignal.name.toUpperFirst()/]();
+				//return instance;
+				return nullptr;
+			}
+			[/let]
+		[/for]
+		[/if]
+		[/let]
+	}
+[/let]
+[/for]
+[/if]
+[/let]
+	//Model-external types
+[let externalPackageList : Set(Package) = aPackage.getSignalPackagesOfSendSignalActions()->reject(p : Package | p = aPackage)->reject(p : Package | aPackage.allOwnedElements()->filter(Package)->includes(p))]
+[if (externalPackageList->size() = 0)]
+	//No external types used in Activities of this model
+[else]
+	std::shared_ptr<PluginFramework> pluginFramework = PluginFramework::eInstance();
+	std::string pluginName;
+	[for (externalPackage : Package | externalPackageList) before('\n') after('\n')]
+	if(typePackage == [externalPackage.generateNamespace(false)/]::[externalPackage.name/]Package::eInstance()) 
+	{
+		pluginName = "[externalPackage.getRootPackage().name/]Exec";
+	}
+	[/for]
+	std::shared_ptr<MDE4CPPPlugin> plugin = pluginFramework->findPluginByName(pluginName);
+	if (plugin)
+	{
+		DEBUG_INFO("Plugin '" << plugin->eNAME() << "' found.")
+
+		std::shared_ptr<UMLExecutionModelPlugin> executionPlugin = std::dynamic_pointer_cast<UMLExecutionModelPlugin>(plugin);
+		if (executionPlugin)
+		{
+			DEBUG_INFO("Execution plugin '" << executionPlugin->eNAME() << "' is accessable.")
+
+			//TODO: implement ExecutionPlugin::instatiateSignal(uml::Signal)
+			return executionPlugin->instantiateSignal(type);
+		}
+		else { DEBUG_ERROR("Plugin '" << plugin->eNAME() << "' is not an execution plugin!") }
+	}
+	else { DEBUG_ERROR("Plugin '" << pluginName << "' not found!") }
+[/if]
+[/let]
+
+[/if]
+	return fUML::Semantics::Loci::LocusImpl::instantiate(type);
+}
+
 void [packageName/]LocusImpl::setThisLocusPtr(std::weak_ptr</*PSCS::Semantics::Loci::CS_Locus*/fUML::Semantics::Loci::Locus> thisLocusPtr)
 {
 	/*PSCS::Semantics::Loci::CS_LocusImpl::setThisLocusPtr(thisLocusPtr)*/ fUML::Semantics::Loci::LocusImpl::setThisLocusPtr(thisLocusPtr);
@@ -165,5 +257,17 @@ void [packageName/]LocusImpl::setThisLocusPtr(std::weak_ptr</*PSCS::Semantics::L
 	->asSet() /]
 [query private getClassifiersOfCreateObjectActionForPackage(aPackage : Package, classifierPackage : Package) : Set(Classifier) = aPackage.getClassifiersOfCreateObjectAction()->select(c : Classifier | c.getNearestPackage() = classifierPackage)->sortedBy(name) /]
 [query private getClassifierPackagesOfCreateObjectAction(aPackage : Package) : Set(Package) = aPackage.getClassifiersOfCreateObjectAction().getNamespace()->asSet()->flatten()->sortedBy(name) /]
+
+[query private getInstantiatableSignalsOwnedByPackage(aPackage : Package) : Set(Signal) =
+	aPackage.allOwnedElements()->selectByType(Signal)
+	->select(isGeneratable())->reject(hasStereotypeApplied(QN_STEREOTYPE_NONEXECUTABLE()))
+/]
+[query private getSignalsOfSendSignalAction(aPackage : Package) : Set(Signal) =
+	aPackage.allOwnedElements()->filter(SendSignalAction).signal
+	->select(isGeneratable())->reject(hasStereotypeApplied(QN_STEREOTYPE_NONEXECUTABLE()))
+	->asSet()
+/]
+[query private getSignalPackagesOfSendSignalActions(aPackage : Package) : Set(Package) = aPackage.getSignalsOfSendSignalAction().getNamespace()->asSet()->flatten()->sortedBy(name) /]
+
 
 [query private getIfElseIfString(index : Integer) : String = if(index = 1) then 'if' else 'else if' endif /]
