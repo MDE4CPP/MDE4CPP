@@ -22,8 +22,11 @@ namespace fUML::Semantics::CommonBehavior
 	class EventAccepter;
 	class EventOccurrence;
 	class Execution;
+	class FIFOGetNextEventStrategy;
+	class GetNextEventStrategy;
 	class ObjectActivation;
-	class ParameterValue;}
+	class ParameterValue;
+	class SignalEventOccurrence;}
 
 namespace ecore
 {
@@ -65,8 +68,8 @@ namespace fUML::Semantics::CommonBehavior
 			
 			
 			
-			virtual const std::shared_ptr<ecore::EOperation>& getEventAccepter_Operation_accept_Element() const ;
-			virtual const std::shared_ptr<ecore::EOperation>& getEventAccepter_Operation_match_Element() const ;
+			virtual const std::shared_ptr<ecore::EOperation>& getEventAccepter_Operation_accept_EventOccurrence() const ;
+			virtual const std::shared_ptr<ecore::EOperation>& getEventAccepter_Operation_match_EventOccurrence() const ;
 			
 			// End Class EventAccepter
 
@@ -78,7 +81,7 @@ namespace fUML::Semantics::CommonBehavior
 			virtual const std::shared_ptr<ecore::EReference>& getEventOccurrence_Attribute_target() const ;
 			
 			virtual const std::shared_ptr<ecore::EOperation>& getEventOccurrence_Operation_doSend() const ;
-			virtual const std::shared_ptr<ecore::EOperation>& getEventOccurrence_Operation_getParameterValues() const ;
+			virtual const std::shared_ptr<ecore::EOperation>& getEventOccurrence_Operation_getParameterValues_Event() const ;
 			virtual const std::shared_ptr<ecore::EOperation>& getEventOccurrence_Operation_match_Trigger() const ;
 			virtual const std::shared_ptr<ecore::EOperation>& getEventOccurrence_Operation_matchAny_Trigger() const ;
 			virtual const std::shared_ptr<ecore::EOperation>& getEventOccurrence_Operation_sendTo_Element() const ;
@@ -107,6 +110,27 @@ namespace fUML::Semantics::CommonBehavior
 			
 			// End Class Execution
 
+			// Begin Class FIFOGetNextEventStrategy
+			//Class and Feature Getter
+			virtual const std::shared_ptr<ecore::EClass>& getFIFOGetNextEventStrategy_Class() const ;
+			
+			
+			
+			virtual const std::shared_ptr<ecore::EOperation>& getFIFOGetNextEventStrategy_Operation_retrieveNextEvent_ObjectActivation() const ;
+			
+			// End Class FIFOGetNextEventStrategy
+
+			// Begin Class GetNextEventStrategy
+			//Class and Feature Getter
+			virtual const std::shared_ptr<ecore::EClass>& getGetNextEventStrategy_Class() const ;
+			
+			
+			
+			virtual const std::shared_ptr<ecore::EOperation>& getGetNextEventStrategy_Operation_getName() const ;
+			virtual const std::shared_ptr<ecore::EOperation>& getGetNextEventStrategy_Operation_retrieveNextEvent_ObjectActivation() const ;
+			
+			// End Class GetNextEventStrategy
+
 			// Begin Class ObjectActivation
 			//Class and Feature Getter
 			virtual const std::shared_ptr<ecore::EClass>& getObjectActivation_Class() const ;
@@ -118,11 +142,10 @@ namespace fUML::Semantics::CommonBehavior
 			virtual const std::shared_ptr<ecore::EReference>& getObjectActivation_Attribute_waitingEventAccepters() const ;
 			
 			virtual const std::shared_ptr<ecore::EOperation>& getObjectActivation_Operation__register_EventAccepter() const ;
-			virtual const std::shared_ptr<ecore::EOperation>& getObjectActivation_Operation__send_EJavaObject() const ;
 			virtual const std::shared_ptr<ecore::EOperation>& getObjectActivation_Operation__startObjectBehavior() const ;
 			virtual const std::shared_ptr<ecore::EOperation>& getObjectActivation_Operation_dispatchNextEvent() const ;
 			virtual const std::shared_ptr<ecore::EOperation>& getObjectActivation_Operation_retrieveNextEvent() const ;
-			virtual const std::shared_ptr<ecore::EOperation>& getObjectActivation_Operation_send_Element() const ;
+			virtual const std::shared_ptr<ecore::EOperation>& getObjectActivation_Operation_send_EventOccurrence() const ;
 			virtual const std::shared_ptr<ecore::EOperation>& getObjectActivation_Operation_startBehavior_Class_ParameterValue() const ;
 			virtual const std::shared_ptr<ecore::EOperation>& getObjectActivation_Operation_stop() const ;
 			virtual const std::shared_ptr<ecore::EOperation>& getObjectActivation_Operation_unregister_EventAccepter() const ;
@@ -141,16 +164,28 @@ namespace fUML::Semantics::CommonBehavior
 			
 			// End Class ParameterValue
 
+			// Begin Class SignalEventOccurrence
+			//Class and Feature Getter
+			virtual const std::shared_ptr<ecore::EClass>& getSignalEventOccurrence_Class() const ;
+			
+			
+			virtual const std::shared_ptr<ecore::EReference>& getSignalEventOccurrence_Attribute_signalInstance() const ;
+			
+			virtual const std::shared_ptr<ecore::EOperation>& getSignalEventOccurrence_Operation_getParameterValues_Event() const ;
+			virtual const std::shared_ptr<ecore::EOperation>& getSignalEventOccurrence_Operation_match_Trigger() const ;
+			
+			// End Class SignalEventOccurrence
+
 			
 			// SubPackages Getters
 			
 
 		private:
-			std::shared_ptr<ecore::EClass> m_classifierBehaviorExecution_Class = nullptr;std::shared_ptr<ecore::EClass> m_eventAccepter_Class = nullptr;std::shared_ptr<ecore::EClass> m_eventOccurrence_Class = nullptr;std::shared_ptr<ecore::EClass> m_execution_Class = nullptr;std::shared_ptr<ecore::EClass> m_objectActivation_Class = nullptr;std::shared_ptr<ecore::EClass> m_parameterValue_Class = nullptr;
+			std::shared_ptr<ecore::EClass> m_classifierBehaviorExecution_Class = nullptr;std::shared_ptr<ecore::EClass> m_eventAccepter_Class = nullptr;std::shared_ptr<ecore::EClass> m_eventOccurrence_Class = nullptr;std::shared_ptr<ecore::EClass> m_execution_Class = nullptr;std::shared_ptr<ecore::EClass> m_fIFOGetNextEventStrategy_Class = nullptr;std::shared_ptr<ecore::EClass> m_getNextEventStrategy_Class = nullptr;std::shared_ptr<ecore::EClass> m_objectActivation_Class = nullptr;std::shared_ptr<ecore::EClass> m_parameterValue_Class = nullptr;std::shared_ptr<ecore::EClass> m_signalEventOccurrence_Class = nullptr;
 			
 			std::shared_ptr<ecore::EAttribute> m_parameterValue_Attribute_values = nullptr;
-			std::shared_ptr<ecore::EReference> m_execution_Attribute_behavior = nullptr;std::shared_ptr<ecore::EReference> m_classifierBehaviorExecution_Attribute_classifier = nullptr;std::shared_ptr<ecore::EReference> m_objectActivation_Attribute_classifierBehaviorExecutions = nullptr;std::shared_ptr<ecore::EReference> m_execution_Attribute_context = nullptr;std::shared_ptr<ecore::EReference> m_objectActivation_Attribute_eventPool = nullptr;std::shared_ptr<ecore::EReference> m_classifierBehaviorExecution_Attribute_execution = nullptr;std::shared_ptr<ecore::EReference> m_execution_Attribute_locus = nullptr;std::shared_ptr<ecore::EReference> m_objectActivation_Attribute_object = nullptr;std::shared_ptr<ecore::EReference> m_classifierBehaviorExecution_Attribute_objectActivation = nullptr;std::shared_ptr<ecore::EReference> m_parameterValue_Attribute_parameter = nullptr;std::shared_ptr<ecore::EReference> m_execution_Attribute_parameterValues = nullptr;std::shared_ptr<ecore::EReference> m_eventOccurrence_Attribute_target = nullptr;std::shared_ptr<ecore::EReference> m_execution_Attribute_types = nullptr;std::shared_ptr<ecore::EReference> m_objectActivation_Attribute_waitingEventAccepters = nullptr;
-			std::shared_ptr<ecore::EOperation> m_execution_Operation__copy = nullptr;std::shared_ptr<ecore::EOperation> m_parameterValue_Operation__copy = nullptr;std::shared_ptr<ecore::EOperation> m_objectActivation_Operation__register_EventAccepter = nullptr;std::shared_ptr<ecore::EOperation> m_objectActivation_Operation__send_EJavaObject = nullptr;std::shared_ptr<ecore::EOperation> m_classifierBehaviorExecution_Operation__startObjectBehavior = nullptr;std::shared_ptr<ecore::EOperation> m_objectActivation_Operation__startObjectBehavior = nullptr;std::shared_ptr<ecore::EOperation> m_eventAccepter_Operation_accept_Element = nullptr;std::shared_ptr<ecore::EOperation> m_execution_Operation_destroy = nullptr;std::shared_ptr<ecore::EOperation> m_objectActivation_Operation_dispatchNextEvent = nullptr;std::shared_ptr<ecore::EOperation> m_eventOccurrence_Operation_doSend = nullptr;std::shared_ptr<ecore::EOperation> m_classifierBehaviorExecution_Operation_execute_Class_ParameterValue = nullptr;std::shared_ptr<ecore::EOperation> m_execution_Operation_execute = nullptr;std::shared_ptr<ecore::EOperation> m_execution_Operation_getOutputParameterValues = nullptr;std::shared_ptr<ecore::EOperation> m_execution_Operation_getParameterValue_Parameter = nullptr;std::shared_ptr<ecore::EOperation> m_eventOccurrence_Operation_getParameterValues = nullptr;std::shared_ptr<ecore::EOperation> m_eventAccepter_Operation_match_Element = nullptr;std::shared_ptr<ecore::EOperation> m_eventOccurrence_Operation_match_Trigger = nullptr;std::shared_ptr<ecore::EOperation> m_eventOccurrence_Operation_matchAny_Trigger = nullptr;std::shared_ptr<ecore::EOperation> m_execution_Operation_new_ = nullptr;std::shared_ptr<ecore::EOperation> m_objectActivation_Operation_retrieveNextEvent = nullptr;std::shared_ptr<ecore::EOperation> m_objectActivation_Operation_send_Element = nullptr;std::shared_ptr<ecore::EOperation> m_eventOccurrence_Operation_sendTo_Element = nullptr;std::shared_ptr<ecore::EOperation> m_execution_Operation_setParameterValue_ParameterValue = nullptr;std::shared_ptr<ecore::EOperation> m_objectActivation_Operation_startBehavior_Class_ParameterValue = nullptr;std::shared_ptr<ecore::EOperation> m_objectActivation_Operation_stop = nullptr;std::shared_ptr<ecore::EOperation> m_classifierBehaviorExecution_Operation_terminate = nullptr;std::shared_ptr<ecore::EOperation> m_execution_Operation_terminate = nullptr;std::shared_ptr<ecore::EOperation> m_objectActivation_Operation_unregister_EventAccepter = nullptr;
+			std::shared_ptr<ecore::EReference> m_execution_Attribute_behavior = nullptr;std::shared_ptr<ecore::EReference> m_classifierBehaviorExecution_Attribute_classifier = nullptr;std::shared_ptr<ecore::EReference> m_objectActivation_Attribute_classifierBehaviorExecutions = nullptr;std::shared_ptr<ecore::EReference> m_execution_Attribute_context = nullptr;std::shared_ptr<ecore::EReference> m_objectActivation_Attribute_eventPool = nullptr;std::shared_ptr<ecore::EReference> m_classifierBehaviorExecution_Attribute_execution = nullptr;std::shared_ptr<ecore::EReference> m_execution_Attribute_locus = nullptr;std::shared_ptr<ecore::EReference> m_objectActivation_Attribute_object = nullptr;std::shared_ptr<ecore::EReference> m_classifierBehaviorExecution_Attribute_objectActivation = nullptr;std::shared_ptr<ecore::EReference> m_parameterValue_Attribute_parameter = nullptr;std::shared_ptr<ecore::EReference> m_execution_Attribute_parameterValues = nullptr;std::shared_ptr<ecore::EReference> m_signalEventOccurrence_Attribute_signalInstance = nullptr;std::shared_ptr<ecore::EReference> m_eventOccurrence_Attribute_target = nullptr;std::shared_ptr<ecore::EReference> m_execution_Attribute_types = nullptr;std::shared_ptr<ecore::EReference> m_objectActivation_Attribute_waitingEventAccepters = nullptr;
+			std::shared_ptr<ecore::EOperation> m_execution_Operation__copy = nullptr;std::shared_ptr<ecore::EOperation> m_parameterValue_Operation__copy = nullptr;std::shared_ptr<ecore::EOperation> m_objectActivation_Operation__register_EventAccepter = nullptr;std::shared_ptr<ecore::EOperation> m_classifierBehaviorExecution_Operation__startObjectBehavior = nullptr;std::shared_ptr<ecore::EOperation> m_objectActivation_Operation__startObjectBehavior = nullptr;std::shared_ptr<ecore::EOperation> m_eventAccepter_Operation_accept_EventOccurrence = nullptr;std::shared_ptr<ecore::EOperation> m_execution_Operation_destroy = nullptr;std::shared_ptr<ecore::EOperation> m_objectActivation_Operation_dispatchNextEvent = nullptr;std::shared_ptr<ecore::EOperation> m_eventOccurrence_Operation_doSend = nullptr;std::shared_ptr<ecore::EOperation> m_classifierBehaviorExecution_Operation_execute_Class_ParameterValue = nullptr;std::shared_ptr<ecore::EOperation> m_execution_Operation_execute = nullptr;std::shared_ptr<ecore::EOperation> m_getNextEventStrategy_Operation_getName = nullptr;std::shared_ptr<ecore::EOperation> m_execution_Operation_getOutputParameterValues = nullptr;std::shared_ptr<ecore::EOperation> m_execution_Operation_getParameterValue_Parameter = nullptr;std::shared_ptr<ecore::EOperation> m_eventOccurrence_Operation_getParameterValues_Event = nullptr;std::shared_ptr<ecore::EOperation> m_signalEventOccurrence_Operation_getParameterValues_Event = nullptr;std::shared_ptr<ecore::EOperation> m_eventAccepter_Operation_match_EventOccurrence = nullptr;std::shared_ptr<ecore::EOperation> m_eventOccurrence_Operation_match_Trigger = nullptr;std::shared_ptr<ecore::EOperation> m_signalEventOccurrence_Operation_match_Trigger = nullptr;std::shared_ptr<ecore::EOperation> m_eventOccurrence_Operation_matchAny_Trigger = nullptr;std::shared_ptr<ecore::EOperation> m_execution_Operation_new_ = nullptr;std::shared_ptr<ecore::EOperation> m_fIFOGetNextEventStrategy_Operation_retrieveNextEvent_ObjectActivation = nullptr;std::shared_ptr<ecore::EOperation> m_getNextEventStrategy_Operation_retrieveNextEvent_ObjectActivation = nullptr;std::shared_ptr<ecore::EOperation> m_objectActivation_Operation_retrieveNextEvent = nullptr;std::shared_ptr<ecore::EOperation> m_objectActivation_Operation_send_EventOccurrence = nullptr;std::shared_ptr<ecore::EOperation> m_eventOccurrence_Operation_sendTo_Element = nullptr;std::shared_ptr<ecore::EOperation> m_execution_Operation_setParameterValue_ParameterValue = nullptr;std::shared_ptr<ecore::EOperation> m_objectActivation_Operation_startBehavior_Class_ParameterValue = nullptr;std::shared_ptr<ecore::EOperation> m_objectActivation_Operation_stop = nullptr;std::shared_ptr<ecore::EOperation> m_classifierBehaviorExecution_Operation_terminate = nullptr;std::shared_ptr<ecore::EOperation> m_execution_Operation_terminate = nullptr;std::shared_ptr<ecore::EOperation> m_objectActivation_Operation_unregister_EventAccepter = nullptr;
 
 			friend class CommonBehaviorPackage;
 
@@ -170,16 +205,22 @@ namespace fUML::Semantics::CommonBehavior
 			void createEventAccepterContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory);
 			void createEventOccurrenceContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory);
 			void createExecutionContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory);
+			void createFIFOGetNextEventStrategyContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory);
+			void createGetNextEventStrategyContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory);
 			void createObjectActivationContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory);
 			void createParameterValueContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory);
+			void createSignalEventOccurrenceContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory);
 			void createPackageEDataTypes(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory);
 
 			void initializeClassifierBehaviorExecutionContent();
 			void initializeEventAccepterContent();
 			void initializeEventOccurrenceContent();
 			void initializeExecutionContent();
+			void initializeFIFOGetNextEventStrategyContent();
+			void initializeGetNextEventStrategyContent();
 			void initializeObjectActivationContent();
 			void initializeParameterValueContent();
+			void initializeSignalEventOccurrenceContent();
 			void initializePackageEDataTypes();
 
 

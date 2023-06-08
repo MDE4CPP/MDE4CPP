@@ -48,6 +48,7 @@ namespace uml
 {
 	class Action;
 	class ActivityNode;
+	class SendSignalAction;
 }
 
 // namespace macro header include
@@ -89,6 +90,12 @@ namespace fUML::Semantics::Actions
 			//*********************************
 			// Reference Getters & Setters
 			//*********************************
+			virtual const std::shared_ptr<uml::SendSignalAction>& getSendSignalAction() const = 0;
+			virtual void setSendSignalAction(const std::shared_ptr<uml::SendSignalAction>&) = 0;
+			/*Additional Setter for 'ActionActivation::action' redefined by reference 'sendSignalAction'*/
+			virtual void setAction(const std::shared_ptr<uml::Action>&) = 0;
+			/*Additional Setter for 'ActivityNodeActivation::node' redefined by reference 'sendSignalAction'*/
+			virtual void setNode(const std::shared_ptr<uml::ActivityNode>&) = 0;
 
 			//*********************************
 			// Union Reference Getters
@@ -114,6 +121,7 @@ namespace fUML::Semantics::Actions
 			//*********************************
 			// Reference Members
 			//*********************************
+			std::shared_ptr<uml::SendSignalAction> m_sendSignalAction;
 	};
 }
 #endif /* end of include guard: FUML_SEMANTICS_ACTIONS_SENDSIGNALACTIONACTIVATION_HPP */

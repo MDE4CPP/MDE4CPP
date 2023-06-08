@@ -4,10 +4,12 @@
 
 #include "abstractDataTypes/SubsetUnion.hpp"
 //metametamodel classes
+#include "ecore/EParameter.hpp"
 #include "ecore/EStringToStringMapEntry.hpp"
-#include "ecore/EAnnotation.hpp"
-#include "ecore/EReference.hpp"
 #include "ecore/EGenericType.hpp"
+#include "ecore/EReference.hpp"
+#include "ecore/EOperation.hpp"
+#include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 
 //metamodel factory
@@ -78,11 +80,35 @@ const std::shared_ptr<ecore::EClass>& fUML::MDE4CPP_Extensions::MDE4CPP_Extensio
 }
 
 
+const std::shared_ptr<ecore::EReference>& fUML::MDE4CPP_Extensions::MDE4CPP_ExtensionsPackageImpl::getFUML_Object_Attribute_locus() const
+{
+	return m_fUML_Object_Attribute_locus;
+}
 const std::shared_ptr<ecore::EReference>& fUML::MDE4CPP_Extensions::MDE4CPP_ExtensionsPackageImpl::getFUML_Object_Attribute_objectActivation() const
 {
 	return m_fUML_Object_Attribute_objectActivation;
 }
 
+const std::shared_ptr<ecore::EOperation>& fUML::MDE4CPP_Extensions::MDE4CPP_ExtensionsPackageImpl::getFUML_Object_Operation__register_EventAccepter() const
+{
+	return m_fUML_Object_Operation__register_EventAccepter;
+}
+const std::shared_ptr<ecore::EOperation>& fUML::MDE4CPP_Extensions::MDE4CPP_ExtensionsPackageImpl::getFUML_Object_Operation_getTypes() const
+{
+	return m_fUML_Object_Operation_getTypes;
+}
+const std::shared_ptr<ecore::EOperation>& fUML::MDE4CPP_Extensions::MDE4CPP_ExtensionsPackageImpl::getFUML_Object_Operation_send_EventOccurrence() const
+{
+	return m_fUML_Object_Operation_send_EventOccurrence;
+}
+const std::shared_ptr<ecore::EOperation>& fUML::MDE4CPP_Extensions::MDE4CPP_ExtensionsPackageImpl::getFUML_Object_Operation_startBehavior_Class_ParameterValue() const
+{
+	return m_fUML_Object_Operation_startBehavior_Class_ParameterValue;
+}
+const std::shared_ptr<ecore::EOperation>& fUML::MDE4CPP_Extensions::MDE4CPP_ExtensionsPackageImpl::getFUML_Object_Operation_unregister_EventAccepter() const
+{
+	return m_fUML_Object_Operation_unregister_EventAccepter;
+}
 
 // End Class FUML_Object
 

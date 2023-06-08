@@ -46,11 +46,10 @@ virtual public ObjectActivation
 			// Operations
 			//*********************************
 			virtual void _register(const std::shared_ptr<fUML::Semantics::CommonBehavior::EventAccepter>& accepter) ;
-			virtual void _send(const std::shared_ptr<Any>& signal) ;
 			virtual void _startObjectBehavior() ;
 			virtual void dispatchNextEvent() ;
-			virtual std::shared_ptr<uml::Element> retrieveNextEvent() ;
-			virtual void send(const std::shared_ptr<uml::Element>& signalInstance) ;
+			virtual std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccurrence> retrieveNextEvent() ;
+			virtual void send(const std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccurrence>& eventOccurrence) ;
 			virtual void startBehavior(const std::shared_ptr<uml::Class>& classifier, const std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>>& inputs) ;
 			virtual void stop() ;
 			virtual void unregister(const std::shared_ptr<fUML::Semantics::CommonBehavior::EventAccepter>& accepter) ;
@@ -63,9 +62,9 @@ virtual public ObjectActivation
 			// Reference Getters & Setters
 			//*********************************
 			virtual const std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ClassifierBehaviorExecution>>& getClassifierBehaviorExecutions() const ;
-			virtual const std::shared_ptr<Bag<uml::Element>>& getEventPool() const ;
-			virtual const std::shared_ptr<uml::Element>& getObject() const ;
-			virtual void setObject(const std::shared_ptr<uml::Element>&) ;
+			virtual const std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::EventOccurrence>>& getEventPool() const ;
+			virtual const std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_Object>& getObject() const ;
+			virtual void setObject(const std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_Object>&) ;
 			virtual const std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::EventAccepter>>& getWaitingEventAccepters() const ;
 			
 			//*********************************

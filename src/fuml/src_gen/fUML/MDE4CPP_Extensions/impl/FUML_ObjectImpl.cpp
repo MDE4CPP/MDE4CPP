@@ -38,16 +38,24 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "ecore/ecoreFactory.hpp"
 #include "uml/umlFactory.hpp"
+#include "fUML/Semantics/Loci/LociFactory.hpp"
+#include "ecore/ecoreFactory.hpp"
 #include "fUML/Semantics/CommonBehavior/CommonBehaviorFactory.hpp"
+#include "uml/Class.hpp"
+#include "uml/Classifier.hpp"
 #include "uml/Comment.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "uml/Element.hpp"
+#include "fUML/Semantics/CommonBehavior/EventAccepter.hpp"
+#include "fUML/Semantics/CommonBehavior/EventOccurrence.hpp"
+#include "fUML/Semantics/Loci/Locus.hpp"
 #include "fUML/Semantics/CommonBehavior/ObjectActivation.hpp"
+#include "fUML/Semantics/CommonBehavior/ParameterValue.hpp"
 //Factories and Package includes
 #include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/CommonBehavior/CommonBehaviorPackage.hpp"
+#include "fUML/Semantics/Loci/LociPackage.hpp"
 #include "fUML/MDE4CPP_Extensions/MDE4CPP_ExtensionsPackage.hpp"
 #include "ecore/ecorePackage.hpp"
 #include "uml/umlPackage.hpp"
@@ -99,6 +107,7 @@ FUML_ObjectImpl& FUML_ObjectImpl::operator=(const FUML_ObjectImpl & obj)
 	//Clone Attributes with (deep copy)
 
 	//copy references with no containment (soft copy)
+	m_locus  = obj.getLocus();
 	//Clone references with containment (deep copy)
 	//clone reference 'objectActivation'
 	if(obj.getObjectActivation()!=nullptr)
@@ -112,6 +121,81 @@ FUML_ObjectImpl& FUML_ObjectImpl::operator=(const FUML_ObjectImpl & obj)
 //*********************************
 // Operations
 //*********************************
+void FUML_ObjectImpl::_register(const std::shared_ptr<fUML::Semantics::CommonBehavior::EventAccepter>& accepter)
+{
+	//ADD_COUNT(__PRETTY_FUNCTION__)
+	//generated from body annotation
+	    if(this->getObjectActivation() != nullptr)
+    {
+        this->getObjectActivation()->_register(accepter);
+    }
+	//end of body
+}
+
+const std::shared_ptr<Bag<uml::Classifier>>& FUML_ObjectImpl::getTypes() const
+{
+	//ADD_COUNT(__PRETTY_FUNCTION__)
+	//generated from body annotation
+	static const std::shared_ptr<Bag<uml::Classifier>> nullPointer = nullptr;
+
+return nullPointer;
+	//end of body
+}
+
+void FUML_ObjectImpl::send(const std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccurrence>& eventOccurrence)
+{
+	//ADD_COUNT(__PRETTY_FUNCTION__)
+	//generated from body annotation
+	// If the object is active, add the given event occurrence to the event pool and signal that a new event occurrence has arrived.
+	// std::shared_ptr<fUML::Semantics::CommonBehavior::ObjectActivation> objectActivation = getObjectActivation();
+
+	DEBUG_INFO("sending through object...")
+
+	if(this->getObjectActivation() != nullptr) {
+		DEBUG_INFO("object Activation found...")
+ 		this->getObjectActivation()->send(eventOccurrence);
+	}
+	else
+	{
+		DEBUG_INFO(" no object Activation found, creating a new one for debugging purposes, so you can send to non-active objects...")
+
+		std::shared_ptr<fUML::Semantics::CommonBehavior::ObjectActivation> TempObjectActivation = fUML::Semantics::CommonBehavior::CommonBehaviorFactory::eInstance()->createObjectActivation();
+      	
+
+		this->setObjectActivation( TempObjectActivation );
+       		this->getObjectActivation()->setObject(getThisFUML_ObjectPtr());
+	
+ 		this->getObjectActivation()->send(eventOccurrence);
+	}
+
+
+	//end of body
+}
+
+void FUML_ObjectImpl::startBehavior(const std::shared_ptr<uml::Class>& classifier, const std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>>& inputs)
+{
+	//ADD_COUNT(__PRETTY_FUNCTION__)
+	//generated from body annotation
+	if(this->getObjectActivation() == nullptr) 
+    {
+        this->setObjectActivation(std::shared_ptr<fUML::Semantics::CommonBehavior::ObjectActivation>(fUML::Semantics::CommonBehavior::CommonBehaviorFactory::eInstance()->createObjectActivation()));
+        this->getObjectActivation()->setObject(getThisFUML_ObjectPtr());
+    }
+
+    this->getObjectActivation()->startBehavior(classifier, inputs);
+	//end of body
+}
+
+void FUML_ObjectImpl::unregister(const std::shared_ptr<fUML::Semantics::CommonBehavior::EventAccepter>& accepter)
+{
+	//ADD_COUNT(__PRETTY_FUNCTION__)
+	//generated from body annotation
+	    if(this->getObjectActivation() != nullptr)
+    {
+        this->getObjectActivation()->unregister(accepter);
+    }
+	//end of body
+}
 
 //*********************************
 // Attribute Getters & Setters
@@ -120,6 +204,17 @@ FUML_ObjectImpl& FUML_ObjectImpl::operator=(const FUML_ObjectImpl & obj)
 //*********************************
 // Reference Getters & Setters
 //*********************************
+/* Getter & Setter for reference locus */
+const std::shared_ptr<fUML::Semantics::Loci::Locus>& FUML_ObjectImpl::getLocus() const
+{
+    return m_locus;
+}
+void FUML_ObjectImpl::setLocus(const std::shared_ptr<fUML::Semantics::Loci::Locus>& _locus)
+{
+    m_locus = _locus;
+	
+}
+
 /* Getter & Setter for reference objectActivation */
 const std::shared_ptr<fUML::Semantics::CommonBehavior::ObjectActivation>& FUML_ObjectImpl::getObjectActivation() const
 {
@@ -164,6 +259,25 @@ void FUML_ObjectImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler
 
 void FUML_ObjectImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list)
 {
+	try
+	{
+		std::map<std::string, std::string>::const_iterator iter;
+		std::shared_ptr<ecore::EClass> metaClass = this->eClass(); // get MetaClass
+		iter = attr_list.find("locus");
+		if ( iter != attr_list.end() )
+		{
+			// add unresolvedReference to loadHandler's list
+			loadHandler->addUnresolvedReference(iter->second, loadHandler->getCurrentObject(), metaClass->getEStructuralFeature("locus")); // TODO use getEStructuralFeature() with id, for faster access to EStructuralFeature
+		}
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "| ERROR    | " << e.what() << std::endl;
+	}
+	catch (...) 
+	{
+		std::cout << "| ERROR    | " <<  "Exception occurred" << std::endl;
+	}
 
 	uml::ElementImpl::loadAttributes(loadHandler, attr_list);
 }
@@ -199,6 +313,20 @@ void FUML_ObjectImpl::loadNode(std::string nodeName, std::shared_ptr<persistence
 
 void FUML_ObjectImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
 {
+	switch(featureID)
+	{
+		case fUML::MDE4CPP_Extensions::MDE4CPP_ExtensionsPackage::FUML_OBJECT_ATTRIBUTE_LOCUS:
+		{
+			if (references.size() == 1)
+			{
+				// Cast object to correct type
+				std::shared_ptr<fUML::Semantics::Loci::Locus> _locus = std::dynamic_pointer_cast<fUML::Semantics::Loci::Locus>( references.front() );
+				setLocus(_locus);
+			}
+			
+			return;
+		}
+	}
 	uml::ElementImpl::resolveReferences(featureID, references);
 }
 
@@ -218,6 +346,8 @@ void FUML_ObjectImpl::saveContent(std::shared_ptr<persistence::interfaces::XSave
 	try
 	{
 		std::shared_ptr<fUML::MDE4CPP_Extensions::MDE4CPP_ExtensionsPackage> package = fUML::MDE4CPP_Extensions::MDE4CPP_ExtensionsPackage::eInstance();
+	// Add references
+		saveHandler->addReference(this->getLocus(), "locus", getLocus()->eClass() != fUML::Semantics::Loci::LociPackage::eInstance()->getLocus_Class()); 
 		//
 		// Add new tags (from references)
 		//
@@ -244,8 +374,10 @@ std::shared_ptr<Any> FUML_ObjectImpl::eGet(int featureID, bool resolve, bool cor
 {
 	switch(featureID)
 	{
+		case fUML::MDE4CPP_Extensions::MDE4CPP_ExtensionsPackage::FUML_OBJECT_ATTRIBUTE_LOCUS:
+			return eAny(getLocus(),fUML::Semantics::Loci::LociPackage::LOCUS_CLASS,false); //544
 		case fUML::MDE4CPP_Extensions::MDE4CPP_ExtensionsPackage::FUML_OBJECT_ATTRIBUTE_OBJECTACTIVATION:
-			return eAny(getObjectActivation(),fUML::Semantics::CommonBehavior::CommonBehaviorPackage::OBJECTACTIVATION_CLASS,false); //544
+			return eAny(getObjectActivation(),fUML::Semantics::CommonBehavior::CommonBehaviorPackage::OBJECTACTIVATION_CLASS,false); //545
 	}
 	return uml::ElementImpl::eGet(featureID, resolve, coreType);
 }
@@ -254,8 +386,10 @@ bool FUML_ObjectImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
+		case fUML::MDE4CPP_Extensions::MDE4CPP_ExtensionsPackage::FUML_OBJECT_ATTRIBUTE_LOCUS:
+			return getLocus() != nullptr; //544
 		case fUML::MDE4CPP_Extensions::MDE4CPP_ExtensionsPackage::FUML_OBJECT_ATTRIBUTE_OBJECTACTIVATION:
-			return getObjectActivation() != nullptr; //544
+			return getObjectActivation() != nullptr; //545
 	}
 	return uml::ElementImpl::internalEIsSet(featureID);
 }
@@ -264,6 +398,37 @@ bool FUML_ObjectImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 {
 	switch(featureID)
 	{
+		case fUML::MDE4CPP_Extensions::MDE4CPP_ExtensionsPackage::FUML_OBJECT_ATTRIBUTE_LOCUS:
+		{
+			std::shared_ptr<ecore::EcoreAny> ecoreAny = std::dynamic_pointer_cast<ecore::EcoreAny>(newValue);
+			if(ecoreAny)
+			{
+				try
+				{
+					std::shared_ptr<ecore::EObject> eObject = ecoreAny->getAsEObject();
+					std::shared_ptr<fUML::Semantics::Loci::Locus> _locus = std::dynamic_pointer_cast<fUML::Semantics::Loci::Locus>(eObject);
+					if(_locus)
+					{
+						setLocus(_locus); //544
+					}
+					else
+					{
+						throw "Invalid argument";
+					}
+				}
+				catch(...)
+				{
+					DEBUG_ERROR("Invalid type stored in 'ecore::ecoreAny' for feature 'locus'. Failed to set feature!")
+					return false;
+				}
+			}
+			else
+			{
+				DEBUG_ERROR("Invalid instance of 'ecore::ecoreAny' for feature 'locus'. Failed to set feature!")
+				return false;
+			}
+		return true;
+		}
 		case fUML::MDE4CPP_Extensions::MDE4CPP_ExtensionsPackage::FUML_OBJECT_ATTRIBUTE_OBJECTACTIVATION:
 		{
 			std::shared_ptr<ecore::EcoreAny> ecoreAny = std::dynamic_pointer_cast<ecore::EcoreAny>(newValue);
@@ -275,7 +440,7 @@ bool FUML_ObjectImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 					std::shared_ptr<fUML::Semantics::CommonBehavior::ObjectActivation> _objectActivation = std::dynamic_pointer_cast<fUML::Semantics::CommonBehavior::ObjectActivation>(eObject);
 					if(_objectActivation)
 					{
-						setObjectActivation(_objectActivation); //544
+						setObjectActivation(_objectActivation); //545
 					}
 					else
 					{
@@ -309,6 +474,176 @@ std::shared_ptr<Any> FUML_ObjectImpl::eInvoke(int operationID, const std::shared
  
   	switch(operationID)
 	{
+		// fUML::MDE4CPP_Extensions::FUML_Object::_register(fUML::Semantics::CommonBehavior::EventAccepter): 2307607380
+		case MDE4CPP_ExtensionsPackage::FUML_OBJECT_OPERATION__REGISTER_EVENTACCEPTER:
+		{
+			//Retrieve input parameter 'accepter'
+			//parameter 0
+			std::shared_ptr<fUML::Semantics::CommonBehavior::EventAccepter> incoming_param_accepter;
+			Bag<Any>::const_iterator incoming_param_accepter_arguments_citer = std::next(arguments->begin(), 0);
+			{
+				std::shared_ptr<ecore::EcoreAny> ecoreAny = std::dynamic_pointer_cast<ecore::EcoreAny>((*incoming_param_accepter_arguments_citer));
+				if(ecoreAny)
+				{
+					try
+					{
+						std::shared_ptr<ecore::EObject> _temp = ecoreAny->getAsEObject();
+						incoming_param_accepter = std::dynamic_pointer_cast<fUML::Semantics::CommonBehavior::EventAccepter>(_temp);
+					}
+					catch(...)
+					{
+						DEBUG_ERROR("Invalid type stored in 'ecore::EcoreAny' for parameter 'accepter'. Failed to invoke operation '_register'!")
+						return nullptr;
+					}
+				}
+				else
+				{
+					DEBUG_ERROR("Invalid instance of 'ecore::EcoreAny' for parameter 'accepter'. Failed to invoke operation '_register'!")
+					return nullptr;
+				}
+			}
+		
+			this->_register(incoming_param_accepter);
+			break;
+		}
+		// fUML::MDE4CPP_Extensions::FUML_Object::getTypes() : uml::Classifier[*] {const}: 1742598842
+		case MDE4CPP_ExtensionsPackage::FUML_OBJECT_OPERATION_GETTYPES:
+		{
+			std::shared_ptr<Bag<uml::Classifier>> resultList = this->getTypes();
+			return eEcoreContainerAny(resultList,uml::umlPackage::CLASSIFIER_CLASS);
+			break;
+		}
+		// fUML::MDE4CPP_Extensions::FUML_Object::send(fUML::Semantics::CommonBehavior::EventOccurrence): 1595242616
+		case MDE4CPP_ExtensionsPackage::FUML_OBJECT_OPERATION_SEND_EVENTOCCURRENCE:
+		{
+			//Retrieve input parameter 'eventOccurrence'
+			//parameter 0
+			std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccurrence> incoming_param_eventOccurrence;
+			Bag<Any>::const_iterator incoming_param_eventOccurrence_arguments_citer = std::next(arguments->begin(), 0);
+			{
+				std::shared_ptr<ecore::EcoreAny> ecoreAny = std::dynamic_pointer_cast<ecore::EcoreAny>((*incoming_param_eventOccurrence_arguments_citer));
+				if(ecoreAny)
+				{
+					try
+					{
+						std::shared_ptr<ecore::EObject> _temp = ecoreAny->getAsEObject();
+						incoming_param_eventOccurrence = std::dynamic_pointer_cast<fUML::Semantics::CommonBehavior::EventOccurrence>(_temp);
+					}
+					catch(...)
+					{
+						DEBUG_ERROR("Invalid type stored in 'ecore::EcoreAny' for parameter 'eventOccurrence'. Failed to invoke operation 'send'!")
+						return nullptr;
+					}
+				}
+				else
+				{
+					DEBUG_ERROR("Invalid instance of 'ecore::EcoreAny' for parameter 'eventOccurrence'. Failed to invoke operation 'send'!")
+					return nullptr;
+				}
+			}
+		
+			this->send(incoming_param_eventOccurrence);
+			break;
+		}
+		// fUML::MDE4CPP_Extensions::FUML_Object::startBehavior(uml::Class, fUML::Semantics::CommonBehavior::ParameterValue[*]): 692191281
+		case MDE4CPP_ExtensionsPackage::FUML_OBJECT_OPERATION_STARTBEHAVIOR_CLASS_PARAMETERVALUE:
+		{
+			//Retrieve input parameter 'classifier'
+			//parameter 0
+			std::shared_ptr<uml::Class> incoming_param_classifier;
+			Bag<Any>::const_iterator incoming_param_classifier_arguments_citer = std::next(arguments->begin(), 0);
+			{
+				std::shared_ptr<ecore::EcoreAny> ecoreAny = std::dynamic_pointer_cast<ecore::EcoreAny>((*incoming_param_classifier_arguments_citer));
+				if(ecoreAny)
+				{
+					try
+					{
+						std::shared_ptr<ecore::EObject> _temp = ecoreAny->getAsEObject();
+						incoming_param_classifier = std::dynamic_pointer_cast<uml::Class>(_temp);
+					}
+					catch(...)
+					{
+						DEBUG_ERROR("Invalid type stored in 'ecore::EcoreAny' for parameter 'classifier'. Failed to invoke operation 'startBehavior'!")
+						return nullptr;
+					}
+				}
+				else
+				{
+					DEBUG_ERROR("Invalid instance of 'ecore::EcoreAny' for parameter 'classifier'. Failed to invoke operation 'startBehavior'!")
+					return nullptr;
+				}
+			}
+		
+			//Retrieve input parameter 'inputs'
+			//parameter 1
+			std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> incoming_param_inputs;
+			Bag<Any>::const_iterator incoming_param_inputs_arguments_citer = std::next(arguments->begin(), 1);
+			{
+				std::shared_ptr<ecore::EcoreContainerAny> ecoreContainerAny = std::dynamic_pointer_cast<ecore::EcoreContainerAny>((*incoming_param_inputs_arguments_citer));
+				if(ecoreContainerAny)
+				{
+					try
+					{
+						std::shared_ptr<Bag<ecore::EObject>> eObjectList = ecoreContainerAny->getAsEObjectContainer();
+				
+						if(eObjectList)
+						{
+							incoming_param_inputs.reset();
+							for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
+							{
+								std::shared_ptr<fUML::Semantics::CommonBehavior::ParameterValue> _temp = std::dynamic_pointer_cast<fUML::Semantics::CommonBehavior::ParameterValue>(anEObject);
+								incoming_param_inputs->add(_temp);
+							}
+						}
+					}
+					catch(...)
+					{
+						DEBUG_ERROR("Invalid type stored in 'ecore::EcoreContainerAny' for parameter 'inputs'. Failed to invoke operation 'startBehavior'!")
+						return nullptr;
+					}
+				}
+				else
+				{
+					DEBUG_ERROR("Invalid instance of 'ecore::EcoreContainerAny' for parameter 'inputs'. Failed to invoke operation 'startBehavior'!")
+					return nullptr;
+				}
+			}
+		
+			this->startBehavior(incoming_param_classifier,incoming_param_inputs);
+			break;
+		}
+		// fUML::MDE4CPP_Extensions::FUML_Object::unregister(fUML::Semantics::CommonBehavior::EventAccepter): 1214480524
+		case MDE4CPP_ExtensionsPackage::FUML_OBJECT_OPERATION_UNREGISTER_EVENTACCEPTER:
+		{
+			//Retrieve input parameter 'accepter'
+			//parameter 0
+			std::shared_ptr<fUML::Semantics::CommonBehavior::EventAccepter> incoming_param_accepter;
+			Bag<Any>::const_iterator incoming_param_accepter_arguments_citer = std::next(arguments->begin(), 0);
+			{
+				std::shared_ptr<ecore::EcoreAny> ecoreAny = std::dynamic_pointer_cast<ecore::EcoreAny>((*incoming_param_accepter_arguments_citer));
+				if(ecoreAny)
+				{
+					try
+					{
+						std::shared_ptr<ecore::EObject> _temp = ecoreAny->getAsEObject();
+						incoming_param_accepter = std::dynamic_pointer_cast<fUML::Semantics::CommonBehavior::EventAccepter>(_temp);
+					}
+					catch(...)
+					{
+						DEBUG_ERROR("Invalid type stored in 'ecore::EcoreAny' for parameter 'accepter'. Failed to invoke operation 'unregister'!")
+						return nullptr;
+					}
+				}
+				else
+				{
+					DEBUG_ERROR("Invalid instance of 'ecore::EcoreAny' for parameter 'accepter'. Failed to invoke operation 'unregister'!")
+					return nullptr;
+				}
+			}
+		
+			this->unregister(incoming_param_accepter);
+			break;
+		}
 
 		default:
 		{

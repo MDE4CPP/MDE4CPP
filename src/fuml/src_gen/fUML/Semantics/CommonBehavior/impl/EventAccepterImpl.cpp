@@ -37,12 +37,11 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "uml/Element.hpp"
+#include "fUML/Semantics/CommonBehavior/EventOccurrence.hpp"
 //Factories and Package includes
-#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/SemanticsPackage.hpp"
+#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/CommonBehavior/CommonBehaviorPackage.hpp"
-#include "uml/umlPackage.hpp"
 
 using namespace fUML::Semantics::CommonBehavior;
 
@@ -98,12 +97,12 @@ EventAccepterImpl& EventAccepterImpl::operator=(const EventAccepterImpl & obj)
 //*********************************
 // Operations
 //*********************************
-void EventAccepterImpl::accept(const std::shared_ptr<uml::Element>& signalInstance)
+void EventAccepterImpl::accept(const std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccurrence>& eventOccurrence)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool EventAccepterImpl::match(const std::shared_ptr<uml::Element>& signalInstance)
+bool EventAccepterImpl::match(const std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccurrence>& eventOccurrence)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -225,68 +224,68 @@ std::shared_ptr<Any> EventAccepterImpl::eInvoke(int operationID, const std::shar
  
   	switch(operationID)
 	{
-		// fUML::Semantics::CommonBehavior::EventAccepter::accept(uml::Element): 276753846
-		case CommonBehaviorPackage::EVENTACCEPTER_OPERATION_ACCEPT_ELEMENT:
+		// fUML::Semantics::CommonBehavior::EventAccepter::accept(fUML::Semantics::CommonBehavior::EventOccurrence): 1902800013
+		case CommonBehaviorPackage::EVENTACCEPTER_OPERATION_ACCEPT_EVENTOCCURRENCE:
 		{
-			//Retrieve input parameter 'signalInstance'
+			//Retrieve input parameter 'eventOccurrence'
 			//parameter 0
-			std::shared_ptr<uml::Element> incoming_param_signalInstance;
-			Bag<Any>::const_iterator incoming_param_signalInstance_arguments_citer = std::next(arguments->begin(), 0);
+			std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccurrence> incoming_param_eventOccurrence;
+			Bag<Any>::const_iterator incoming_param_eventOccurrence_arguments_citer = std::next(arguments->begin(), 0);
 			{
-				std::shared_ptr<ecore::EcoreAny> ecoreAny = std::dynamic_pointer_cast<ecore::EcoreAny>((*incoming_param_signalInstance_arguments_citer));
+				std::shared_ptr<ecore::EcoreAny> ecoreAny = std::dynamic_pointer_cast<ecore::EcoreAny>((*incoming_param_eventOccurrence_arguments_citer));
 				if(ecoreAny)
 				{
 					try
 					{
 						std::shared_ptr<ecore::EObject> _temp = ecoreAny->getAsEObject();
-						incoming_param_signalInstance = std::dynamic_pointer_cast<uml::Element>(_temp);
+						incoming_param_eventOccurrence = std::dynamic_pointer_cast<fUML::Semantics::CommonBehavior::EventOccurrence>(_temp);
 					}
 					catch(...)
 					{
-						DEBUG_ERROR("Invalid type stored in 'ecore::EcoreAny' for parameter 'signalInstance'. Failed to invoke operation 'accept'!")
+						DEBUG_ERROR("Invalid type stored in 'ecore::EcoreAny' for parameter 'eventOccurrence'. Failed to invoke operation 'accept'!")
 						return nullptr;
 					}
 				}
 				else
 				{
-					DEBUG_ERROR("Invalid instance of 'ecore::EcoreAny' for parameter 'signalInstance'. Failed to invoke operation 'accept'!")
+					DEBUG_ERROR("Invalid instance of 'ecore::EcoreAny' for parameter 'eventOccurrence'. Failed to invoke operation 'accept'!")
 					return nullptr;
 				}
 			}
 		
-			this->accept(incoming_param_signalInstance);
+			this->accept(incoming_param_eventOccurrence);
 			break;
 		}
-		// fUML::Semantics::CommonBehavior::EventAccepter::match(uml::Element) : bool: 2574095009
-		case CommonBehaviorPackage::EVENTACCEPTER_OPERATION_MATCH_ELEMENT:
+		// fUML::Semantics::CommonBehavior::EventAccepter::match(fUML::Semantics::CommonBehavior::EventOccurrence) : bool: 1694626268
+		case CommonBehaviorPackage::EVENTACCEPTER_OPERATION_MATCH_EVENTOCCURRENCE:
 		{
-			//Retrieve input parameter 'signalInstance'
+			//Retrieve input parameter 'eventOccurrence'
 			//parameter 0
-			std::shared_ptr<uml::Element> incoming_param_signalInstance;
-			Bag<Any>::const_iterator incoming_param_signalInstance_arguments_citer = std::next(arguments->begin(), 0);
+			std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccurrence> incoming_param_eventOccurrence;
+			Bag<Any>::const_iterator incoming_param_eventOccurrence_arguments_citer = std::next(arguments->begin(), 0);
 			{
-				std::shared_ptr<ecore::EcoreAny> ecoreAny = std::dynamic_pointer_cast<ecore::EcoreAny>((*incoming_param_signalInstance_arguments_citer));
+				std::shared_ptr<ecore::EcoreAny> ecoreAny = std::dynamic_pointer_cast<ecore::EcoreAny>((*incoming_param_eventOccurrence_arguments_citer));
 				if(ecoreAny)
 				{
 					try
 					{
 						std::shared_ptr<ecore::EObject> _temp = ecoreAny->getAsEObject();
-						incoming_param_signalInstance = std::dynamic_pointer_cast<uml::Element>(_temp);
+						incoming_param_eventOccurrence = std::dynamic_pointer_cast<fUML::Semantics::CommonBehavior::EventOccurrence>(_temp);
 					}
 					catch(...)
 					{
-						DEBUG_ERROR("Invalid type stored in 'ecore::EcoreAny' for parameter 'signalInstance'. Failed to invoke operation 'match'!")
+						DEBUG_ERROR("Invalid type stored in 'ecore::EcoreAny' for parameter 'eventOccurrence'. Failed to invoke operation 'match'!")
 						return nullptr;
 					}
 				}
 				else
 				{
-					DEBUG_ERROR("Invalid instance of 'ecore::EcoreAny' for parameter 'signalInstance'. Failed to invoke operation 'match'!")
+					DEBUG_ERROR("Invalid instance of 'ecore::EcoreAny' for parameter 'eventOccurrence'. Failed to invoke operation 'match'!")
 					return nullptr;
 				}
 			}
 		
-			result = eAny(this->match(incoming_param_signalInstance), 0, false);
+			result = eAny(this->match(incoming_param_eventOccurrence), 0, false);
 			break;
 		}
 

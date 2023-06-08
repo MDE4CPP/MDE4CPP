@@ -6,8 +6,6 @@
 #include "ecore/EClass.hpp"
 #include "fUML/MDE4CPP_Extensions/impl/FUML_ObjectImpl.hpp"
 
-#include "fUML/Semantics/CommonBehavior/CommonBehaviorPackage.hpp"
-#include "fUML/Semantics/CommonBehavior/ObjectActivation.hpp"
 #include "fUML/Semantics/Loci/LociPackage.hpp"
 #include "fUML/Semantics/Loci/Locus.hpp"
 #include "uml/umlPackage.hpp"

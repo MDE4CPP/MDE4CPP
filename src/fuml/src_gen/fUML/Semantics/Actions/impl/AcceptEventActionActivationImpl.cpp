@@ -21,7 +21,7 @@
 #include <cassert>
 #include <iostream>
 #include <sstream>
-#include <stdexcept>
+
 #include "abstractDataTypes/Subset.hpp"
 
 
@@ -33,14 +33,25 @@
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
+//Includes from codegen annotation
+#include "uml/AcceptEventAction.hpp"
+#include "uml/Trigger.hpp"
+#include "uml/UMLAny.hpp"
+//#include "fUML/Semantics/SimpleClassifiers/SignalInstance.hpp"
+#include "fUML/Semantics/CommonBehavior/SignalEventOccurrence.hpp"
+#include "fUML/Semantics/CommonBehavior/ParameterValue.hpp"
+//#include "fUML/Semantics/StructuredClassifiers/Object.hpp"
+#include "fUML/Semantics/Actions/AcceptEventActionEventAccepter.hpp"
+#include "fUML/MDE4CPP_Extensions/FUML_Object.hpp"
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
 #include "fUML/Semantics/Actions/ActionsFactory.hpp"
-#include "fUML/Semantics/Activities/ActivitiesFactory.hpp"
 #include "uml/umlFactory.hpp"
+#include "fUML/Semantics/Activities/ActivitiesFactory.hpp"
+#include "uml/AcceptEventAction.hpp"
 #include "fUML/Semantics/Actions/AcceptEventActionEventAccepter.hpp"
 #include "uml/Action.hpp"
 #include "fUML/Semantics/Actions/ActionActivation.hpp"
@@ -53,8 +64,8 @@
 #include "fUML/Semantics/Actions/PinActivation.hpp"
 #include "fUML/Semantics/Activities/Token.hpp"
 //Factories and Package includes
-#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/SemanticsPackage.hpp"
+#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/Actions/ActionsPackage.hpp"
 #include "fUML/Semantics/Activities/ActivitiesPackage.hpp"
 #include "fUML/Semantics/CommonBehavior/CommonBehaviorPackage.hpp"
@@ -114,6 +125,7 @@ AcceptEventActionActivationImpl& AcceptEventActionActivationImpl::operator=(cons
 	m_waiting = obj.isWaiting();
 
 	//copy references with no containment (soft copy)
+	m_acceptEventAction  = obj.getAcceptEventAction();
 	m_eventAccepter  = obj.getEventAccepter();
 	//Clone references with containment (deep copy)
 	return *this;
@@ -132,42 +144,181 @@ std::shared_ptr<ecore::EObject> AcceptEventActionActivationImpl::copy() const
 //*********************************
 void AcceptEventActionActivationImpl::accept(const std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccurrence>& eventOccurrence)
 {
-	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
+	//ADD_COUNT(__PRETTY_FUNCTION__)
+	//generated from body annotation
+	// Accept the given event occurrence.
+	// If the action does not unmarshall, then, if the event occurrence is
+	// a signal event occurrence, place the signal instance of the signal
+	// event occurrence on the result pin, if any.
+	// If the action does unmarshall, then get the parameter values of the
+	// event occurrence, and place the values for each parameter on the
+	// corresponding output pin.
+	// Concurrently fire all output pins while offering a single control token.
+	// If there are no incoming edges, then re-register this accept event action
+	// execution with the context object.
+
+	const std::shared_ptr<uml::AcceptEventAction>& action = this->getAcceptEventAction();
+	const std::shared_ptr<Bag<uml::OutputPin>>& resultPins = action->getResult();
+	if (this->isRunning())
+	{
+		DEBUG_INFO("Action is running.")
+		if (!action->getIsUnmarshall())
+		{
+			DEBUG_INFO("Action isn't unmarshalling.")
+			std::shared_ptr<fUML::Semantics::CommonBehavior::SignalEventOccurrence> signalEventOccurrence = std::dynamic_pointer_cast<fUML::Semantics::CommonBehavior::SignalEventOccurrence>(eventOccurrence);
+			if (signalEventOccurrence != nullptr)
+			{
+				DEBUG_INFO("found signalEventOccurence.")
+				const std::shared_ptr<uml::Element>& signalInstance = signalEventOccurrence->getSignalInstance();
+				if(signalInstance != nullptr)
+				{
+					DEBUG_INFO("found SignalInstance.")
+					std::shared_ptr<Bag<Any>> result(new Bag<Any>());
+					std::shared_ptr<Any> value = eUMLAny(signalInstance, signalInstance->_getID());
+					if (resultPins->size() > 0) 
+					{
+						putTokens(resultPins->at(0), result);
+					}
+				}
+			}
+		}
+		else
+		{
+			DEBUG_INFO("Is unmarshalling.")
+
+			std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> parameterValues = eventOccurrence->getParameterValues(action->getTrigger()->at(0)->getEvent());
+			for(unsigned int i = 0; i < parameterValues->size(); i++)
+			{
+				const std::shared_ptr<fUML::Semantics::CommonBehavior::ParameterValue>& parameterValue = parameterValues->at(i);
+
+				if(resultPins)
+				{
+					const std::shared_ptr<uml::OutputPin>& resultPin = resultPins->at(i);
+					putTokens(resultPin, parameterValue->getValues());
+				}
+			}
+		}
+
+		this->sendOffers();
+		this->setWaiting(false);
+		this->receiveOffer();
+		this->resume();
+	}
+	//end of body
 }
 
 void AcceptEventActionActivationImpl::doAction()
 {
-	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
+	//ADD_COUNT(__PRETTY_FUNCTION__)
+	//generated from body annotation
+	// Do nothing. [This will never be called.]
+	return;
+	//end of body
 }
 
 void AcceptEventActionActivationImpl::fire(const std::shared_ptr<Bag<fUML::Semantics::Activities::Token>>& incomingTokens)
 {
-	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
+	//ADD_COUNT(__PRETTY_FUNCTION__)
+	//generated from body annotation
+	// Register the event accepter for this accept event action activation with the context object of the enclosing activity execution and wait for an event to be accepted.
+const std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_Object> executionContext = std::dynamic_pointer_cast<fUML::MDE4CPP_Extensions::FUML_Object>(this->getExecutionContext());
+const std::shared_ptr<fUML::Semantics::Actions::AcceptEventActionEventAccepter>& eventAccepter = this->getEventAccepter();
+
+	if(executionContext)
+	{
+		DEBUG_INFO("ExecutionContext found.")
+		if(eventAccepter)
+		{
+			DEBUG_INFO("EventAccepter found.")
+			executionContext->_register(eventAccepter);
+			DEBUG_INFO("registered EventAccepter.")
+			this->setWaiting(true);
+			this->setFiring(false);
+			this->suspend();
+		}
+		else
+		{
+			DEBUG_WARNING("No EventAccepter found.")
+		}
+	}
+	else
+	{	
+		DEBUG_WARNING("No ExecutionContext found.")
+	}
+	//end of body
 }
 
 void AcceptEventActionActivationImpl::initialize(const std::shared_ptr<uml::ActivityNode>& node, const std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup>& group)
 {
-	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
+	//ADD_COUNT(__PRETTY_FUNCTION__)
+	//generated from body annotation
+	// Initialize this accept event action activation to be not waiting for an event.
+
+//Nothing to do here, Activations are initialized in model-specific ExecutionFactory.
+
+	//ActionActivationImpl::initialize(node, group);
+	//this->setWaiting(false);
+	//end of body
 }
 
 bool AcceptEventActionActivationImpl::isReady()
 {
-	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
+	//ADD_COUNT(__PRETTY_FUNCTION__)
+	//generated from body annotation
+	// An accept event action activation is ready to fire only if it is not already waiting for an event.
+	bool ready = ActionActivationImpl::isReady();
+	if (this->isWaiting()) 
+	{
+		DEBUG_INFO("AcceptEventActionActivation is waiting.")
+ 		ready = false;
+	} 
+	return ready;
+	//end of body
 }
 
 bool AcceptEventActionActivationImpl::match(const std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccurrence>& eventOccurrence)
 {
-	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
+	//ADD_COUNT(__PRETTY_FUNCTION__)
+	//generated from body annotation
+	// Return true if the given event occurrence matches a trigger of the accept event action of this activation.
+	const std::shared_ptr<uml::AcceptEventAction>& action = this->getAcceptEventAction();
+	std::shared_ptr<Bag<uml::Trigger>> triggers; 
+	if(action != nullptr)
+	{
+		triggers = action->getTrigger();
+	}
+	return eventOccurrence->matchAny(triggers);
+	//end of body
 }
 
 void AcceptEventActionActivationImpl::run()
 {
-	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
+	//ADD_COUNT(__PRETTY_FUNCTION__)
+	//generated from body annotation
+	// Create an event accepter and initialize waiting to false.
+	ActionActivationImpl::run();
+	std::shared_ptr<fUML::Semantics::Actions::AcceptEventActionEventAccepter> eventAccepter = fUML::Semantics::Actions::ActionsFactory::eInstance()->createAcceptEventActionEventAccepter();
+
+	eventAccepter->setActionActivation(getThisAcceptEventActionActivationPtr());
+
+	this->setEventAccepter(eventAccepter);
+	this->setWaiting(false);
+	//end of body
 }
 
 void AcceptEventActionActivationImpl::terminate()
 {
-	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
+	//ADD_COUNT(__PRETTY_FUNCTION__)
+	//generated from body annotation
+	// Terminate this action and unregister its event accepter.
+	ActionActivationImpl::terminate();
+	if (this->isWaiting())
+	{
+		std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_Object> executionContext = std::dynamic_pointer_cast<fUML::MDE4CPP_Extensions::FUML_Object>(this->getExecutionContext());
+		executionContext->unregister(this->getEventAccepter());
+		this->setWaiting(false);
+	}
+	//end of body
 }
 
 //*********************************
@@ -187,6 +338,50 @@ void AcceptEventActionActivationImpl::setWaiting(bool _waiting)
 //*********************************
 // Reference Getters & Setters
 //*********************************
+/* Getter & Setter for reference acceptEventAction */
+const std::shared_ptr<uml::AcceptEventAction>& AcceptEventActionActivationImpl::getAcceptEventAction() const
+{
+    return m_acceptEventAction;
+}
+void AcceptEventActionActivationImpl::setAcceptEventAction(const std::shared_ptr<uml::AcceptEventAction>& _acceptEventAction)
+{
+    m_acceptEventAction = _acceptEventAction;
+	//additional setter call for redefined reference ActionActivation::action
+	fUML::Semantics::Actions::ActionActivationImpl::setAction(_acceptEventAction);
+}
+/*Additional Setter for redefined reference 'ActionActivation::action'*/
+void AcceptEventActionActivationImpl::setAction(const std::shared_ptr<uml::Action>& _action)
+{
+	std::shared_ptr<uml::AcceptEventAction> _acceptEventAction = std::dynamic_pointer_cast<uml::AcceptEventAction>(_action);
+	if(_acceptEventAction)
+	{
+		m_acceptEventAction = _acceptEventAction;
+
+		//additional setter call for redefined reference ActionActivation::action
+		fUML::Semantics::Actions::ActionActivationImpl::setAction(_acceptEventAction);
+	}
+	else
+	{
+		std::cerr<<"[AcceptEventActionActivation::setAction] : Could not set action because provided action was not of type 'std::shared_ptr<uml::AcceptEventAction>'"<<std::endl;
+	}
+}
+/*Additional Setter for redefined reference 'ActivityNodeActivation::node'*/
+void AcceptEventActionActivationImpl::setNode(const std::shared_ptr<uml::ActivityNode>& _node)
+{
+	std::shared_ptr<uml::AcceptEventAction> _acceptEventAction = std::dynamic_pointer_cast<uml::AcceptEventAction>(_node);
+	if(_acceptEventAction)
+	{
+		m_acceptEventAction = _acceptEventAction;
+
+		//additional setter call for redefined reference ActionActivation::action
+		fUML::Semantics::Actions::ActionActivationImpl::setNode(_node);
+	}
+	else
+	{
+		std::cerr<<"[AcceptEventActionActivation::setNode] : Could not set node because provided node was not of type 'std::shared_ptr<uml::AcceptEventAction>'"<<std::endl;
+	}
+}
+
 /* Getter & Setter for reference eventAccepter */
 const std::shared_ptr<fUML::Semantics::Actions::AcceptEventActionEventAccepter>& AcceptEventActionActivationImpl::getEventAccepter() const
 {
@@ -248,6 +443,13 @@ void AcceptEventActionActivationImpl::loadAttributes(std::shared_ptr<persistence
 			this->setWaiting(value);
 		}
 		std::shared_ptr<ecore::EClass> metaClass = this->eClass(); // get MetaClass
+		iter = attr_list.find("acceptEventAction");
+		if ( iter != attr_list.end() )
+		{
+			// add unresolvedReference to loadHandler's list
+			loadHandler->addUnresolvedReference(iter->second, loadHandler->getCurrentObject(), metaClass->getEStructuralFeature("acceptEventAction")); // TODO use getEStructuralFeature() with id, for faster access to EStructuralFeature
+		}
+
 		iter = attr_list.find("eventAccepter");
 		if ( iter != attr_list.end() )
 		{
@@ -278,6 +480,18 @@ void AcceptEventActionActivationImpl::resolveReferences(const int featureID, std
 {
 	switch(featureID)
 	{
+		case fUML::Semantics::Actions::ActionsPackage::ACCEPTEVENTACTIONACTIVATION_ATTRIBUTE_ACCEPTEVENTACTION:
+		{
+			if (references.size() == 1)
+			{
+				// Cast object to correct type
+				std::shared_ptr<uml::AcceptEventAction> _acceptEventAction = std::dynamic_pointer_cast<uml::AcceptEventAction>( references.front() );
+				setAcceptEventAction(_acceptEventAction);
+			}
+			
+			return;
+		}
+
 		case fUML::Semantics::Actions::ActionsPackage::ACCEPTEVENTACTIONACTIVATION_ATTRIBUTE_EVENTACCEPTER:
 		{
 			if (references.size() == 1)
@@ -317,6 +531,7 @@ void AcceptEventActionActivationImpl::saveContent(std::shared_ptr<persistence::i
 			saveHandler->addAttribute("waiting", this->isWaiting());
 		}
 	// Add references
+		saveHandler->addReference(this->getAcceptEventAction(), "acceptEventAction", getAcceptEventAction()->eClass() != uml::umlPackage::eInstance()->getAcceptEventAction_Class()); 
 		saveHandler->addReference(this->getEventAccepter(), "eventAccepter", getEventAccepter()->eClass() != fUML::Semantics::Actions::ActionsPackage::eInstance()->getAcceptEventActionEventAccepter_Class()); 
 	}
 	catch (std::exception& e)
@@ -337,6 +552,8 @@ std::shared_ptr<Any> AcceptEventActionActivationImpl::eGet(int featureID, bool r
 {
 	switch(featureID)
 	{
+		case fUML::Semantics::Actions::ActionsPackage::ACCEPTEVENTACTIONACTIVATION_ATTRIBUTE_ACCEPTEVENTACTION:
+			return eAny(getAcceptEventAction(),uml::umlPackage::ACCEPTEVENTACTION_CLASS,false); //313
 		case fUML::Semantics::Actions::ActionsPackage::ACCEPTEVENTACTIONACTIVATION_ATTRIBUTE_EVENTACCEPTER:
 			return eAny(getEventAccepter(),fUML::Semantics::Actions::ActionsPackage::ACCEPTEVENTACTIONEVENTACCEPTER_CLASS,false); //311
 		case fUML::Semantics::Actions::ActionsPackage::ACCEPTEVENTACTIONACTIVATION_ATTRIBUTE_WAITING:
@@ -349,6 +566,8 @@ bool AcceptEventActionActivationImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
+		case fUML::Semantics::Actions::ActionsPackage::ACCEPTEVENTACTIONACTIVATION_ATTRIBUTE_ACCEPTEVENTACTION:
+			return getAcceptEventAction() != nullptr; //313
 		case fUML::Semantics::Actions::ActionsPackage::ACCEPTEVENTACTIONACTIVATION_ATTRIBUTE_EVENTACCEPTER:
 			return getEventAccepter() != nullptr; //311
 		case fUML::Semantics::Actions::ActionsPackage::ACCEPTEVENTACTIONACTIVATION_ATTRIBUTE_WAITING:
@@ -361,6 +580,37 @@ bool AcceptEventActionActivationImpl::eSet(int featureID,  const std::shared_ptr
 {
 	switch(featureID)
 	{
+		case fUML::Semantics::Actions::ActionsPackage::ACCEPTEVENTACTIONACTIVATION_ATTRIBUTE_ACCEPTEVENTACTION:
+		{
+			std::shared_ptr<ecore::EcoreAny> ecoreAny = std::dynamic_pointer_cast<ecore::EcoreAny>(newValue);
+			if(ecoreAny)
+			{
+				try
+				{
+					std::shared_ptr<ecore::EObject> eObject = ecoreAny->getAsEObject();
+					std::shared_ptr<uml::AcceptEventAction> _acceptEventAction = std::dynamic_pointer_cast<uml::AcceptEventAction>(eObject);
+					if(_acceptEventAction)
+					{
+						setAcceptEventAction(_acceptEventAction); //313
+					}
+					else
+					{
+						throw "Invalid argument";
+					}
+				}
+				catch(...)
+				{
+					DEBUG_ERROR("Invalid type stored in 'ecore::ecoreAny' for feature 'acceptEventAction'. Failed to set feature!")
+					return false;
+				}
+			}
+			else
+			{
+				DEBUG_ERROR("Invalid instance of 'ecore::ecoreAny' for feature 'acceptEventAction'. Failed to set feature!")
+				return false;
+			}
+		return true;
+		}
 		case fUML::Semantics::Actions::ActionsPackage::ACCEPTEVENTACTIONACTIVATION_ATTRIBUTE_EVENTACCEPTER:
 		{
 			std::shared_ptr<ecore::EcoreAny> ecoreAny = std::dynamic_pointer_cast<ecore::EcoreAny>(newValue);

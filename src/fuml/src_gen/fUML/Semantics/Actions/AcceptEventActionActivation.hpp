@@ -52,6 +52,7 @@ namespace fUML::Semantics::CommonBehavior
 }
 namespace uml 
 {
+	class AcceptEventAction;
 	class Action;
 	class ActivityNode;
 }
@@ -104,6 +105,12 @@ namespace fUML::Semantics::Actions
 			//*********************************
 			// Reference Getters & Setters
 			//*********************************
+			virtual const std::shared_ptr<uml::AcceptEventAction>& getAcceptEventAction() const = 0;
+			virtual void setAcceptEventAction(const std::shared_ptr<uml::AcceptEventAction>&) = 0;
+			/*Additional Setter for 'ActionActivation::action' redefined by reference 'acceptEventAction'*/
+			virtual void setAction(const std::shared_ptr<uml::Action>&) = 0;
+			/*Additional Setter for 'ActivityNodeActivation::node' redefined by reference 'acceptEventAction'*/
+			virtual void setNode(const std::shared_ptr<uml::ActivityNode>&) = 0;
 			virtual const std::shared_ptr<fUML::Semantics::Actions::AcceptEventActionEventAccepter>& getEventAccepter() const = 0;
 			virtual void setEventAccepter(const std::shared_ptr<fUML::Semantics::Actions::AcceptEventActionEventAccepter>&) = 0;
 
@@ -132,6 +139,7 @@ namespace fUML::Semantics::Actions
 			//*********************************
 			// Reference Members
 			//*********************************
+			std::shared_ptr<uml::AcceptEventAction> m_acceptEventAction;
 			std::shared_ptr<fUML::Semantics::Actions::AcceptEventActionEventAccepter> m_eventAccepter;
 	};
 }

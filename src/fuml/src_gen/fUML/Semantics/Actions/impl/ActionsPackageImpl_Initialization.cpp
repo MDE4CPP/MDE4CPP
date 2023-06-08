@@ -4,15 +4,15 @@
 
 #include "abstractDataTypes/SubsetUnion.hpp"
 //metametamodel classes
-#include "ecore/EStringToStringMapEntry.hpp"
-#include "ecore/EAnnotation.hpp"
-#include "ecore/EAttribute.hpp"
-#include "ecore/EReference.hpp"
-#include "ecore/EGenericType.hpp"
-#include "ecore/EOperation.hpp"
-#include "ecore/EClass.hpp"
 #include "ecore/EParameter.hpp"
 #include "ecore/EDataType.hpp"
+#include "ecore/EStringToStringMapEntry.hpp"
+#include "ecore/EGenericType.hpp"
+#include "ecore/EReference.hpp"
+#include "ecore/EOperation.hpp"
+#include "ecore/EAttribute.hpp"
+#include "ecore/EAnnotation.hpp"
+#include "ecore/EClass.hpp"
 
 // metametamodel factory
 #include "ecore/ecoreFactory.hpp"
@@ -138,6 +138,22 @@ void ActionsPackageImpl::initializeAcceptEventActionActivationContent()
 	/*
 	 * EReferences
 	 */
+	m_acceptEventActionActivation_Attribute_acceptEventAction->setName("acceptEventAction");
+	m_acceptEventActionActivation_Attribute_acceptEventAction->setEType(uml::umlPackage::eInstance()->getAcceptEventAction_Class());
+	m_acceptEventActionActivation_Attribute_acceptEventAction->setLowerBound(1);
+	m_acceptEventActionActivation_Attribute_acceptEventAction->setUpperBound(1);
+	m_acceptEventActionActivation_Attribute_acceptEventAction->setTransient(false);
+	m_acceptEventActionActivation_Attribute_acceptEventAction->setVolatile(false);
+	m_acceptEventActionActivation_Attribute_acceptEventAction->setChangeable(true);
+	m_acceptEventActionActivation_Attribute_acceptEventAction->setUnsettable(false);
+	m_acceptEventActionActivation_Attribute_acceptEventAction->setUnique(true);
+	m_acceptEventActionActivation_Attribute_acceptEventAction->setDerived(false);
+	m_acceptEventActionActivation_Attribute_acceptEventAction->setOrdered(true);
+	m_acceptEventActionActivation_Attribute_acceptEventAction->setContainment(false);
+	m_acceptEventActionActivation_Attribute_acceptEventAction->setResolveProxies(true);
+	m_acceptEventActionActivation_Attribute_acceptEventAction->setDefaultValueLiteral("");	
+	
+	m_acceptEventActionActivation_Attribute_acceptEventAction->_setID(ACCEPTEVENTACTIONACTIVATION_ATTRIBUTE_ACCEPTEVENTACTION);
 	m_acceptEventActionActivation_Attribute_eventAccepter->setName("eventAccepter");
 	m_acceptEventActionActivation_Attribute_eventAccepter->setEType(getAcceptEventActionEventAccepter_Class());
 	m_acceptEventActionActivation_Attribute_eventAccepter->setLowerBound(0);
@@ -358,6 +374,50 @@ void ActionsPackageImpl::initializeAcceptEventActionEventAccepterContent()
 	/*
 	 * EOperations
 	 */
+	m_acceptEventActionEventAccepter_Operation_accept_EventOccurrence->setName("accept");
+	{ 	std::shared_ptr<ecore::ecoreFactory> factory = ecore::ecoreFactory::eInstance();
+		std::shared_ptr<ecore::EClass> unknownClass = factory ->createEClass(-1);
+	   	unknownClass->setName("invalid");
+		unknownClass->setAbstract(true);
+		unknownClass->setInterface(true);
+		m_acceptEventActionEventAccepter_Operation_accept_EventOccurrence->setEType(unknownClass);
+	}
+	m_acceptEventActionEventAccepter_Operation_accept_EventOccurrence->setLowerBound(1);
+	m_acceptEventActionEventAccepter_Operation_accept_EventOccurrence->setUpperBound(1);
+	m_acceptEventActionEventAccepter_Operation_accept_EventOccurrence->setUnique(true);
+	m_acceptEventActionEventAccepter_Operation_accept_EventOccurrence->setOrdered(false);
+	
+	m_acceptEventActionEventAccepter_Operation_accept_EventOccurrence->_setID(ACCEPTEVENTACTIONEVENTACCEPTER_OPERATION_ACCEPT_EVENTOCCURRENCE);
+	
+	{
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_acceptEventActionEventAccepter_Operation_accept_EventOccurrence);
+		parameter->setName("eventOccurrence");
+		parameter->setEType(nullptr);
+		parameter->setLowerBound(0);
+		parameter->setUpperBound(1);
+		parameter->setUnique(true);
+		parameter->setOrdered(true);
+	}
+	
+	m_acceptEventActionEventAccepter_Operation_match_EventOccurrence->setName("match");
+	m_acceptEventActionEventAccepter_Operation_match_EventOccurrence->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
+	m_acceptEventActionEventAccepter_Operation_match_EventOccurrence->setLowerBound(1);
+	m_acceptEventActionEventAccepter_Operation_match_EventOccurrence->setUpperBound(1);
+	m_acceptEventActionEventAccepter_Operation_match_EventOccurrence->setUnique(true);
+	m_acceptEventActionEventAccepter_Operation_match_EventOccurrence->setOrdered(false);
+	
+	m_acceptEventActionEventAccepter_Operation_match_EventOccurrence->_setID(ACCEPTEVENTACTIONEVENTACCEPTER_OPERATION_MATCH_EVENTOCCURRENCE);
+	
+	{
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_acceptEventActionEventAccepter_Operation_match_EventOccurrence);
+		parameter->setName("eventOccurrence");
+		parameter->setEType(fUML::Semantics::CommonBehavior::CommonBehaviorPackage::eInstance()->getEventOccurrence_Class());
+		parameter->setLowerBound(0);
+		parameter->setUpperBound(1);
+		parameter->setUnique(true);
+		parameter->setOrdered(true);
+	}
+	
 	
 }
 
@@ -2430,6 +2490,22 @@ void ActionsPackageImpl::initializeSendSignalActionActivationContent()
 	/*
 	 * EReferences
 	 */
+	m_sendSignalActionActivation_Attribute_sendSignalAction->setName("sendSignalAction");
+	m_sendSignalActionActivation_Attribute_sendSignalAction->setEType(uml::umlPackage::eInstance()->getSendSignalAction_Class());
+	m_sendSignalActionActivation_Attribute_sendSignalAction->setLowerBound(1);
+	m_sendSignalActionActivation_Attribute_sendSignalAction->setUpperBound(1);
+	m_sendSignalActionActivation_Attribute_sendSignalAction->setTransient(false);
+	m_sendSignalActionActivation_Attribute_sendSignalAction->setVolatile(false);
+	m_sendSignalActionActivation_Attribute_sendSignalAction->setChangeable(true);
+	m_sendSignalActionActivation_Attribute_sendSignalAction->setUnsettable(false);
+	m_sendSignalActionActivation_Attribute_sendSignalAction->setUnique(true);
+	m_sendSignalActionActivation_Attribute_sendSignalAction->setDerived(false);
+	m_sendSignalActionActivation_Attribute_sendSignalAction->setOrdered(true);
+	m_sendSignalActionActivation_Attribute_sendSignalAction->setContainment(false);
+	m_sendSignalActionActivation_Attribute_sendSignalAction->setResolveProxies(true);
+	m_sendSignalActionActivation_Attribute_sendSignalAction->setDefaultValueLiteral("");	
+	
+	m_sendSignalActionActivation_Attribute_sendSignalAction->_setID(SENDSIGNALACTIONACTIVATION_ATTRIBUTE_SENDSIGNALACTION);
 	
 	/*
 	 * EOperations

@@ -7,15 +7,15 @@
 
 #include "abstractDataTypes/SubsetUnion.hpp"
 //metametamodel classes
-#include "ecore/EStringToStringMapEntry.hpp"
-#include "ecore/EAnnotation.hpp"
-#include "ecore/EAttribute.hpp"
-#include "ecore/EReference.hpp"
-#include "ecore/EGenericType.hpp"
-#include "ecore/EOperation.hpp"
-#include "ecore/EClass.hpp"
 #include "ecore/EParameter.hpp"
 #include "ecore/EDataType.hpp"
+#include "ecore/EStringToStringMapEntry.hpp"
+#include "ecore/EGenericType.hpp"
+#include "ecore/EReference.hpp"
+#include "ecore/EOperation.hpp"
+#include "ecore/EAttribute.hpp"
+#include "ecore/EAnnotation.hpp"
+#include "ecore/EClass.hpp"
 
 //depending model packages
 #include "ecore/ecorePackage.hpp"
@@ -74,6 +74,7 @@ void ActionsPackageImpl::createAcceptEventActionActivationContent(std::shared_pt
 	m_acceptEventActionActivation_Class = factory->createEClass_as_eClassifiers_in_EPackage(package, ACCEPTEVENTACTIONACTIVATION_CLASS);
 	m_acceptEventActionActivation_Attribute_waiting = factory->createEAttribute_as_eAttributes_in_EClass(m_acceptEventActionActivation_Class, ACCEPTEVENTACTIONACTIVATION_ATTRIBUTE_WAITING);
 	
+	m_acceptEventActionActivation_Attribute_acceptEventAction = factory->createEReference_as_eReferences_in_EClass(m_acceptEventActionActivation_Class, ACCEPTEVENTACTIONACTIVATION_ATTRIBUTE_ACCEPTEVENTACTION);
 	m_acceptEventActionActivation_Attribute_eventAccepter = factory->createEReference_as_eReferences_in_EClass(m_acceptEventActionActivation_Class, ACCEPTEVENTACTIONACTIVATION_ATTRIBUTE_EVENTACCEPTER);
 	
 	m_acceptEventActionActivation_Operation_accept_EventOccurrence = factory->createEOperation_as_eOperations_in_EClass(m_acceptEventActionActivation_Class, ACCEPTEVENTACTIONACTIVATION_OPERATION_ACCEPT_EVENTOCCURRENCE);
@@ -93,6 +94,8 @@ void ActionsPackageImpl::createAcceptEventActionEventAccepterContent(std::shared
 	
 	m_acceptEventActionEventAccepter_Attribute_actionActivation = factory->createEReference_as_eReferences_in_EClass(m_acceptEventActionEventAccepter_Class, ACCEPTEVENTACTIONEVENTACCEPTER_ATTRIBUTE_ACTIONACTIVATION);
 	
+	m_acceptEventActionEventAccepter_Operation_accept_EventOccurrence = factory->createEOperation_as_eOperations_in_EClass(m_acceptEventActionEventAccepter_Class, ACCEPTEVENTACTIONEVENTACCEPTER_OPERATION_ACCEPT_EVENTOCCURRENCE);
+	m_acceptEventActionEventAccepter_Operation_match_EventOccurrence = factory->createEOperation_as_eOperations_in_EClass(m_acceptEventActionEventAccepter_Class, ACCEPTEVENTACTIONEVENTACCEPTER_OPERATION_MATCH_EVENTOCCURRENCE);
 	
 }
 
@@ -354,6 +357,7 @@ void ActionsPackageImpl::createSendSignalActionActivationContent(std::shared_ptr
 {
 	m_sendSignalActionActivation_Class = factory->createEClass_as_eClassifiers_in_EPackage(package, SENDSIGNALACTIONACTIVATION_CLASS);
 	
+	m_sendSignalActionActivation_Attribute_sendSignalAction = factory->createEReference_as_eReferences_in_EClass(m_sendSignalActionActivation_Class, SENDSIGNALACTIONACTIVATION_ATTRIBUTE_SENDSIGNALACTION);
 	
 	m_sendSignalActionActivation_Operation_doAction = factory->createEOperation_as_eOperations_in_EClass(m_sendSignalActionActivation_Class, SENDSIGNALACTIONACTIVATION_OPERATION_DOACTION);
 	

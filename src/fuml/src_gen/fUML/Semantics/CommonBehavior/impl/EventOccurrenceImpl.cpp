@@ -33,6 +33,8 @@
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
+//Includes from codegen annotation
+#include "fUML/MDE4CPP_Extensions/FUML_Object.hpp"
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
@@ -40,11 +42,12 @@
 #include <exception> // used in Persistence
 #include "uml/umlFactory.hpp"
 #include "uml/Element.hpp"
+#include "uml/Event.hpp"
 #include "fUML/Semantics/CommonBehavior/ParameterValue.hpp"
 #include "uml/Trigger.hpp"
 //Factories and Package includes
-#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/SemanticsPackage.hpp"
+#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/CommonBehavior/CommonBehaviorPackage.hpp"
 #include "uml/umlPackage.hpp"
 
@@ -113,10 +116,24 @@ std::shared_ptr<ecore::EObject> EventOccurrenceImpl::copy() const
 //*********************************
 void EventOccurrenceImpl::doSend()
 {
-	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
+	//ADD_COUNT(__PRETTY_FUNCTION__)
+	//generated from body annotation
+	// Send this event occurrence to the target reference.
+
+	const std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_Object>& target = std::dynamic_pointer_cast<fUML::MDE4CPP_Extensions::FUML_Object>(this->getTarget());
+	if(target != nullptr)
+	{
+		DEBUG_INFO("found target != nullptr, sending...")
+		target->send(getThisEventOccurrencePtr());
+	}
+	else
+	{
+		DEBUG_INFO(" no target found..")
+	}
+	//end of body
 }
 
-std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> EventOccurrenceImpl::getParameterValues()
+std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> EventOccurrenceImpl::getParameterValues(const std::shared_ptr<uml::Event>& event)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -128,12 +145,43 @@ bool EventOccurrenceImpl::match(const std::shared_ptr<uml::Trigger>& trigger)
 
 bool EventOccurrenceImpl::matchAny(const std::shared_ptr<Bag<uml::Trigger>>& triggers)
 {
-	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
+	//ADD_COUNT(__PRETTY_FUNCTION__)
+	//generated from body annotation
+	// Check that at least one of the given triggers is matched by this event occurrence.
+
+	bool matches = false;
+	if(triggers != nullptr)
+	{
+		DEBUG_INFO("Found some Triggers. Matching...")
+
+		for(const std::shared_ptr<uml::Trigger>& trigger : *triggers)
+		{
+			if(match(trigger))
+			{
+				DEBUG_INFO("Found a matching Trigger.")
+
+				matches = true;
+				break;
+			}
+		}
+	}
+	return matches;
+	//end of body
 }
 
 void EventOccurrenceImpl::sendTo(const std::shared_ptr<uml::Element>& target)
 {
-	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
+	//ADD_COUNT(__PRETTY_FUNCTION__)
+	//generated from body annotation
+	// Set the target reference and start the SendingBehavior, which will send this event occurrence to the target.
+
+	this->setTarget(target);
+	// Should also be _startObjectBehavior() to start it async. Just doSend for now	
+	DEBUG_INFO("Starting Sending..")
+
+	this->doSend();
+	//_startObjectBehavior();
+	//end of body
 }
 
 //*********************************
@@ -339,10 +387,36 @@ std::shared_ptr<Any> EventOccurrenceImpl::eInvoke(int operationID, const std::sh
 			this->doSend();
 			break;
 		}
-		// fUML::Semantics::CommonBehavior::EventOccurrence::getParameterValues() : fUML::Semantics::CommonBehavior::ParameterValue[*]: 2905522987
-		case CommonBehaviorPackage::EVENTOCCURRENCE_OPERATION_GETPARAMETERVALUES:
+		// fUML::Semantics::CommonBehavior::EventOccurrence::getParameterValues(uml::Event) : fUML::Semantics::CommonBehavior::ParameterValue[*]: 3047471155
+		case CommonBehaviorPackage::EVENTOCCURRENCE_OPERATION_GETPARAMETERVALUES_EVENT:
 		{
-			std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> resultList = this->getParameterValues();
+			//Retrieve input parameter 'event'
+			//parameter 0
+			std::shared_ptr<uml::Event> incoming_param_event;
+			Bag<Any>::const_iterator incoming_param_event_arguments_citer = std::next(arguments->begin(), 0);
+			{
+				std::shared_ptr<ecore::EcoreAny> ecoreAny = std::dynamic_pointer_cast<ecore::EcoreAny>((*incoming_param_event_arguments_citer));
+				if(ecoreAny)
+				{
+					try
+					{
+						std::shared_ptr<ecore::EObject> _temp = ecoreAny->getAsEObject();
+						incoming_param_event = std::dynamic_pointer_cast<uml::Event>(_temp);
+					}
+					catch(...)
+					{
+						DEBUG_ERROR("Invalid type stored in 'ecore::EcoreAny' for parameter 'event'. Failed to invoke operation 'getParameterValues'!")
+						return nullptr;
+					}
+				}
+				else
+				{
+					DEBUG_ERROR("Invalid instance of 'ecore::EcoreAny' for parameter 'event'. Failed to invoke operation 'getParameterValues'!")
+					return nullptr;
+				}
+			}
+		
+			std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> resultList = this->getParameterValues(incoming_param_event);
 			return eEcoreContainerAny(resultList,fUML::Semantics::CommonBehavior::CommonBehaviorPackage::PARAMETERVALUE_CLASS);
 			break;
 		}

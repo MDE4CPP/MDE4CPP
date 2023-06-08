@@ -46,7 +46,7 @@ virtual public EventOccurrence
 			// Operations
 			//*********************************
 			virtual void doSend() ;
-			virtual std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> getParameterValues() ;
+			virtual std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> getParameterValues(const std::shared_ptr<uml::Event>& event) ;
 			virtual bool match(const std::shared_ptr<uml::Trigger>& trigger) ;
 			virtual bool matchAny(const std::shared_ptr<Bag<uml::Trigger>>& triggers) ;
 			virtual void sendTo(const std::shared_ptr<uml::Element>& target) ;

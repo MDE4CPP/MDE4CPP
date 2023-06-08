@@ -16,10 +16,6 @@
 #include "ecore/EFactory.hpp"
 #include "fUML/MDE4CPP_Extensions/MDE4CPP_ExtensionsPackage.hpp"
 
-namespace fUML::Semantics::CommonBehavior
-{
-	class ObjectActivation;
-}
 namespace fUML::Semantics::Loci
 {
 	class Locus;

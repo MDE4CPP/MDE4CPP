@@ -14,14 +14,14 @@
 
 namespace ecore 
 {
-	class EStringToStringMapEntry;
-	class EAnnotation;
-	class EReference;
-	class EGenericType;
-	class EOperation;
-	class EClass;
 	class EParameter;
 	class EDataType;
+	class EStringToStringMapEntry;
+	class EGenericType;
+	class EReference;
+	class EOperation;
+	class EAnnotation;
+	class EClass;
 }
 
 namespace fUML::Semantics::Loci 
@@ -163,7 +163,7 @@ namespace fUML::Semantics::Loci
 			//Class and Feature IDs 
 			static const unsigned long LOCUS_CLASS = 274444621;
 			static const unsigned int LOCUS_CLASS_FEATURE_COUNT = 3;
-			static const unsigned int LOCUS_CLASS_OPERATION_COUNT = 7;
+			static const unsigned int LOCUS_CLASS_OPERATION_COUNT = 8;
 			
 			static const unsigned long LOCUS_ATTRIBUTE_EXECUTOR = 1079111157;
 			static const unsigned long LOCUS_ATTRIBUTE_EXTENSIONALVALUES = 1315349633;
@@ -174,6 +174,7 @@ namespace fUML::Semantics::Loci
 			static const unsigned long LOCUS_OPERATION_ASSIGNFACTORY_EXECUTIONFACTORY = 2681202388;
 			static const unsigned long LOCUS_OPERATION_CONFORMS_CLASSIFIER_CLASSIFIER = 2253046160;
 			static const unsigned long LOCUS_OPERATION_INSTANTIATE_CLASS = 928635219;
+			static const unsigned long LOCUS_OPERATION_INSTANTIATE_SIGNAL = 1112226127;
 			static const unsigned long LOCUS_OPERATION_REMOVE_ELEMENT = 2186013543;
 			static const unsigned long LOCUS_OPERATION_RETRIEVEEXTENT_CLASSIFIER = 844948954;
 			
@@ -190,6 +191,7 @@ namespace fUML::Semantics::Loci
 			virtual const std::shared_ptr<ecore::EOperation>& getLocus_Operation_assignFactory_ExecutionFactory() const = 0;
 			virtual const std::shared_ptr<ecore::EOperation>& getLocus_Operation_conforms_Classifier_Classifier() const = 0;
 			virtual const std::shared_ptr<ecore::EOperation>& getLocus_Operation_instantiate_Class() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getLocus_Operation_instantiate_Signal() const = 0;
 			virtual const std::shared_ptr<ecore::EOperation>& getLocus_Operation_remove_Element() const = 0;
 			virtual const std::shared_ptr<ecore::EOperation>& getLocus_Operation_retrieveExtent_Classifier() const = 0;
 			

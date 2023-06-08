@@ -45,8 +45,8 @@ virtual public EventAccepter
 			//*********************************
 			// Operations
 			//*********************************
-			virtual void accept(const std::shared_ptr<uml::Element>& signalInstance) ;
-			virtual bool match(const std::shared_ptr<uml::Element>& signalInstance) ;
+			virtual void accept(const std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccurrence>& eventOccurrence) ;
+			virtual bool match(const std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccurrence>& eventOccurrence) ;
 			
 			//*********************************
 			// Attribute Getters & Setters

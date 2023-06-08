@@ -51,16 +51,17 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "fUML/Semantics/Loci/LociFactory.hpp"
 #include "uml/umlFactory.hpp"
+#include "fUML/Semantics/Loci/LociFactory.hpp"
 #include "uml/Class.hpp"
 #include "uml/Classifier.hpp"
 #include "uml/Element.hpp"
 #include "fUML/Semantics/Loci/ExecutionFactory.hpp"
 #include "fUML/Semantics/Loci/Executor.hpp"
+#include "uml/Signal.hpp"
 //Factories and Package includes
-#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/SemanticsPackage.hpp"
+#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/Loci/LociPackage.hpp"
 #include "uml/umlPackage.hpp"
 
@@ -232,6 +233,18 @@ std::shared_ptr<uml::Element> LocusImpl::instantiate(const std::shared_ptr<uml::
 */
 
 /*
+ * This method is implemented in every model-specific locus
+ */
+
+return nullptr;
+	//end of body
+}
+
+std::shared_ptr<uml::Element> LocusImpl::instantiate(const std::shared_ptr<uml::Signal>& type)
+{
+	//ADD_COUNT(__PRETTY_FUNCTION__)
+	//generated from body annotation
+	/*
  * This method is implemented in every model-specific locus
  */
 
@@ -785,6 +798,38 @@ std::shared_ptr<Any> LocusImpl::eInvoke(int operationID, const std::shared_ptr<B
 					{
 						std::shared_ptr<ecore::EObject> _temp = ecoreAny->getAsEObject();
 						incoming_param_type = std::dynamic_pointer_cast<uml::Class>(_temp);
+					}
+					catch(...)
+					{
+						DEBUG_ERROR("Invalid type stored in 'ecore::EcoreAny' for parameter 'type'. Failed to invoke operation 'instantiate'!")
+						return nullptr;
+					}
+				}
+				else
+				{
+					DEBUG_ERROR("Invalid instance of 'ecore::EcoreAny' for parameter 'type'. Failed to invoke operation 'instantiate'!")
+					return nullptr;
+				}
+			}
+		
+			result = eEcoreAny(this->instantiate(incoming_param_type), uml::umlPackage::ELEMENT_CLASS);
+			break;
+		}
+		// fUML::Semantics::Loci::Locus::instantiate(uml::Signal) : uml::Element: 1112226127
+		case LociPackage::LOCUS_OPERATION_INSTANTIATE_SIGNAL:
+		{
+			//Retrieve input parameter 'type'
+			//parameter 0
+			std::shared_ptr<uml::Signal> incoming_param_type;
+			Bag<Any>::const_iterator incoming_param_type_arguments_citer = std::next(arguments->begin(), 0);
+			{
+				std::shared_ptr<ecore::EcoreAny> ecoreAny = std::dynamic_pointer_cast<ecore::EcoreAny>((*incoming_param_type_arguments_citer));
+				if(ecoreAny)
+				{
+					try
+					{
+						std::shared_ptr<ecore::EObject> _temp = ecoreAny->getAsEObject();
+						incoming_param_type = std::dynamic_pointer_cast<uml::Signal>(_temp);
 					}
 					catch(...)
 					{

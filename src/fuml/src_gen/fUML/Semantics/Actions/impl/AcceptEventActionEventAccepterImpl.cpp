@@ -40,9 +40,10 @@
 #include "fUML/Semantics/Actions/ActionsFactory.hpp"
 #include "fUML/Semantics/Actions/AcceptEventActionActivation.hpp"
 #include "fUML/Semantics/CommonBehavior/EventAccepter.hpp"
+#include "fUML/Semantics/CommonBehavior/EventOccurrence.hpp"
 //Factories and Package includes
-#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/SemanticsPackage.hpp"
+#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/Actions/ActionsPackage.hpp"
 #include "fUML/Semantics/CommonBehavior/CommonBehaviorPackage.hpp"
 
@@ -109,6 +110,35 @@ std::shared_ptr<ecore::EObject> AcceptEventActionEventAccepterImpl::copy() const
 //*********************************
 // Operations
 //*********************************
+void AcceptEventActionEventAccepterImpl::accept(const std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccurrence>& eventOccurrence)
+{
+	//ADD_COUNT(__PRETTY_FUNCTION__)
+	//generated from body annotation
+	// Accept an event occurrence and forward it to the action activation.
+	const std::shared_ptr<fUML::Semantics::Actions::AcceptEventActionActivation>& actionActivation = this->getActionActivation();
+	if(actionActivation != nullptr)
+	{
+		DEBUG_INFO("found ActionActivation")
+		actionActivation->accept(eventOccurrence);
+	}
+	//end of body
+}
+
+bool AcceptEventActionEventAccepterImpl::match(const std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccurrence>& eventOccurrence)
+{
+	//ADD_COUNT(__PRETTY_FUNCTION__)
+	//generated from body annotation
+	// Return true if the given event occurrence matches a trigger of the accept event action of the action activation.
+	bool result = false;
+	const std::shared_ptr<fUML::Semantics::Actions::AcceptEventActionActivation>& actionActivation = this->getActionActivation();
+	if(actionActivation != nullptr)
+	{
+		DEBUG_INFO("found ActionActivation.")
+		result = actionActivation->match(eventOccurrence);
+	}
+	return result;
+	//end of body
+}
 
 //*********************************
 // Attribute Getters & Setters
@@ -310,6 +340,70 @@ std::shared_ptr<Any> AcceptEventActionEventAccepterImpl::eInvoke(int operationID
  
   	switch(operationID)
 	{
+		// fUML::Semantics::Actions::AcceptEventActionEventAccepter::accept(fUML::Semantics::CommonBehavior::EventOccurrence): 1652417433
+		case ActionsPackage::ACCEPTEVENTACTIONEVENTACCEPTER_OPERATION_ACCEPT_EVENTOCCURRENCE:
+		{
+			//Retrieve input parameter 'eventOccurrence'
+			//parameter 0
+			std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccurrence> incoming_param_eventOccurrence;
+			Bag<Any>::const_iterator incoming_param_eventOccurrence_arguments_citer = std::next(arguments->begin(), 0);
+			{
+				std::shared_ptr<ecore::EcoreAny> ecoreAny = std::dynamic_pointer_cast<ecore::EcoreAny>((*incoming_param_eventOccurrence_arguments_citer));
+				if(ecoreAny)
+				{
+					try
+					{
+						std::shared_ptr<ecore::EObject> _temp = ecoreAny->getAsEObject();
+						incoming_param_eventOccurrence = std::dynamic_pointer_cast<fUML::Semantics::CommonBehavior::EventOccurrence>(_temp);
+					}
+					catch(...)
+					{
+						DEBUG_ERROR("Invalid type stored in 'ecore::EcoreAny' for parameter 'eventOccurrence'. Failed to invoke operation 'accept'!")
+						return nullptr;
+					}
+				}
+				else
+				{
+					DEBUG_ERROR("Invalid instance of 'ecore::EcoreAny' for parameter 'eventOccurrence'. Failed to invoke operation 'accept'!")
+					return nullptr;
+				}
+			}
+		
+			this->accept(incoming_param_eventOccurrence);
+			break;
+		}
+		// fUML::Semantics::Actions::AcceptEventActionEventAccepter::match(fUML::Semantics::CommonBehavior::EventOccurrence) : bool: 3640997648
+		case ActionsPackage::ACCEPTEVENTACTIONEVENTACCEPTER_OPERATION_MATCH_EVENTOCCURRENCE:
+		{
+			//Retrieve input parameter 'eventOccurrence'
+			//parameter 0
+			std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccurrence> incoming_param_eventOccurrence;
+			Bag<Any>::const_iterator incoming_param_eventOccurrence_arguments_citer = std::next(arguments->begin(), 0);
+			{
+				std::shared_ptr<ecore::EcoreAny> ecoreAny = std::dynamic_pointer_cast<ecore::EcoreAny>((*incoming_param_eventOccurrence_arguments_citer));
+				if(ecoreAny)
+				{
+					try
+					{
+						std::shared_ptr<ecore::EObject> _temp = ecoreAny->getAsEObject();
+						incoming_param_eventOccurrence = std::dynamic_pointer_cast<fUML::Semantics::CommonBehavior::EventOccurrence>(_temp);
+					}
+					catch(...)
+					{
+						DEBUG_ERROR("Invalid type stored in 'ecore::EcoreAny' for parameter 'eventOccurrence'. Failed to invoke operation 'match'!")
+						return nullptr;
+					}
+				}
+				else
+				{
+					DEBUG_ERROR("Invalid instance of 'ecore::EcoreAny' for parameter 'eventOccurrence'. Failed to invoke operation 'match'!")
+					return nullptr;
+				}
+			}
+		
+			result = eAny(this->match(incoming_param_eventOccurrence), 0, false);
+			break;
+		}
 
 		default:
 		{

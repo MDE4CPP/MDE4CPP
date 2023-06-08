@@ -14,15 +14,15 @@
 
 namespace ecore 
 {
-	class EStringToStringMapEntry;
-	class EAnnotation;
-	class EAttribute;
-	class EReference;
-	class EGenericType;
-	class EOperation;
-	class EClass;
 	class EParameter;
 	class EDataType;
+	class EStringToStringMapEntry;
+	class EGenericType;
+	class EReference;
+	class EOperation;
+	class EAttribute;
+	class EAnnotation;
+	class EClass;
 }
 
 namespace fUML::Semantics::Actions 
@@ -82,10 +82,11 @@ namespace fUML::Semantics::Actions
 			// Begin Class AcceptEventActionActivation
 			//Class and Feature IDs 
 			static const unsigned long ACCEPTEVENTACTIONACTIVATION_CLASS = 1811945832;
-			static const unsigned int ACCEPTEVENTACTIONACTIVATION_CLASS_FEATURE_COUNT = 13;
+			static const unsigned int ACCEPTEVENTACTIONACTIVATION_CLASS_FEATURE_COUNT = 14;
 			static const unsigned int ACCEPTEVENTACTIONACTIVATION_CLASS_OPERATION_COUNT = 54;
 			static const unsigned long ACCEPTEVENTACTIONACTIVATION_ATTRIBUTE_WAITING = 1674329142;
 			
+			static const unsigned long ACCEPTEVENTACTIONACTIVATION_ATTRIBUTE_ACCEPTEVENTACTION = 1717391082;
 			static const unsigned long ACCEPTEVENTACTIONACTIVATION_ATTRIBUTE_EVENTACCEPTER = 312513207;
 			
 			static const unsigned long ACCEPTEVENTACTIONACTIVATION_OPERATION_ACCEPT_EVENTOCCURRENCE = 3708275754;
@@ -102,6 +103,7 @@ namespace fUML::Semantics::Actions
 			
 			virtual const std::shared_ptr<ecore::EAttribute>& getAcceptEventActionActivation_Attribute_waiting() const = 0;
 			
+			virtual const std::shared_ptr<ecore::EReference>& getAcceptEventActionActivation_Attribute_acceptEventAction() const = 0;
 			virtual const std::shared_ptr<ecore::EReference>& getAcceptEventActionActivation_Attribute_eventAccepter() const = 0;
 			
 			virtual const std::shared_ptr<ecore::EOperation>& getAcceptEventActionActivation_Operation_accept_EventOccurrence() const = 0;
@@ -120,10 +122,12 @@ namespace fUML::Semantics::Actions
 			//Class and Feature IDs 
 			static const unsigned long ACCEPTEVENTACTIONEVENTACCEPTER_CLASS = 704487621;
 			static const unsigned int ACCEPTEVENTACTIONEVENTACCEPTER_CLASS_FEATURE_COUNT = 1;
-			static const unsigned int ACCEPTEVENTACTIONEVENTACCEPTER_CLASS_OPERATION_COUNT = 2;
+			static const unsigned int ACCEPTEVENTACTIONEVENTACCEPTER_CLASS_OPERATION_COUNT = 4;
 			
 			static const unsigned long ACCEPTEVENTACTIONEVENTACCEPTER_ATTRIBUTE_ACTIONACTIVATION = 766478756;
 			
+			static const unsigned long ACCEPTEVENTACTIONEVENTACCEPTER_OPERATION_ACCEPT_EVENTOCCURRENCE = 1652417433;
+			static const unsigned long ACCEPTEVENTACTIONEVENTACCEPTER_OPERATION_MATCH_EVENTOCCURRENCE = 3640997648;
 			
 			//Class and Feature Getter
 			virtual const std::shared_ptr<ecore::EClass>& getAcceptEventActionEventAccepter_Class() const = 0;
@@ -131,6 +135,8 @@ namespace fUML::Semantics::Actions
 			
 			virtual const std::shared_ptr<ecore::EReference>& getAcceptEventActionEventAccepter_Attribute_actionActivation() const = 0;
 			
+			virtual const std::shared_ptr<ecore::EOperation>& getAcceptEventActionEventAccepter_Operation_accept_EventOccurrence() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getAcceptEventActionEventAccepter_Operation_match_EventOccurrence() const = 0;
 			
 			// End Class AcceptEventActionEventAccepter
 
@@ -666,9 +672,10 @@ namespace fUML::Semantics::Actions
 			// Begin Class SendSignalActionActivation
 			//Class and Feature IDs 
 			static const unsigned long SENDSIGNALACTIONACTIVATION_CLASS = 2140099606;
-			static const unsigned int SENDSIGNALACTIONACTIVATION_CLASS_FEATURE_COUNT = 11;
+			static const unsigned int SENDSIGNALACTIONACTIVATION_CLASS_FEATURE_COUNT = 12;
 			static const unsigned int SENDSIGNALACTIONACTIVATION_CLASS_OPERATION_COUNT = 47;
 			
+			static const unsigned long SENDSIGNALACTIONACTIVATION_ATTRIBUTE_SENDSIGNALACTION = 927487604;
 			
 			static const unsigned long SENDSIGNALACTIONACTIVATION_OPERATION_DOACTION = 4006251730;
 			
@@ -676,6 +683,7 @@ namespace fUML::Semantics::Actions
 			virtual const std::shared_ptr<ecore::EClass>& getSendSignalActionActivation_Class() const = 0;
 			
 			
+			virtual const std::shared_ptr<ecore::EReference>& getSendSignalActionActivation_Attribute_sendSignalAction() const = 0;
 			
 			virtual const std::shared_ptr<ecore::EOperation>& getSendSignalActionActivation_Operation_doAction() const = 0;
 			

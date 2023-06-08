@@ -14,10 +14,12 @@
 
 namespace ecore 
 {
+	class EParameter;
 	class EStringToStringMapEntry;
-	class EAnnotation;
-	class EReference;
 	class EGenericType;
+	class EReference;
+	class EOperation;
+	class EAnnotation;
 	class EClass;
 }
 
@@ -51,18 +53,30 @@ namespace fUML::MDE4CPP_Extensions
 			// Begin Class FUML_Object
 			//Class and Feature IDs 
 			static const unsigned long FUML_OBJECT_CLASS = 1012292556;
-			static const unsigned int FUML_OBJECT_CLASS_FEATURE_COUNT = 5;
-			static const unsigned int FUML_OBJECT_CLASS_OPERATION_COUNT = 37;
+			static const unsigned int FUML_OBJECT_CLASS_FEATURE_COUNT = 6;
+			static const unsigned int FUML_OBJECT_CLASS_OPERATION_COUNT = 42;
 			
+			static const unsigned long FUML_OBJECT_ATTRIBUTE_LOCUS = 121078438;
 			static const unsigned long FUML_OBJECT_ATTRIBUTE_OBJECTACTIVATION = 1242096493;
 			
+			static const unsigned long FUML_OBJECT_OPERATION__REGISTER_EVENTACCEPTER = 2307607380;
+			static const unsigned long FUML_OBJECT_OPERATION_GETTYPES = 1742598842;
+			static const unsigned long FUML_OBJECT_OPERATION_SEND_EVENTOCCURRENCE = 1595242616;
+			static const unsigned long FUML_OBJECT_OPERATION_STARTBEHAVIOR_CLASS_PARAMETERVALUE = 692191281;
+			static const unsigned long FUML_OBJECT_OPERATION_UNREGISTER_EVENTACCEPTER = 1214480524;
 			
 			//Class and Feature Getter
 			virtual const std::shared_ptr<ecore::EClass>& getFUML_Object_Class() const = 0;
 			
 			
+			virtual const std::shared_ptr<ecore::EReference>& getFUML_Object_Attribute_locus() const = 0;
 			virtual const std::shared_ptr<ecore::EReference>& getFUML_Object_Attribute_objectActivation() const = 0;
 			
+			virtual const std::shared_ptr<ecore::EOperation>& getFUML_Object_Operation__register_EventAccepter() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getFUML_Object_Operation_getTypes() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getFUML_Object_Operation_send_EventOccurrence() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getFUML_Object_Operation_startBehavior_Class_ParameterValue() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getFUML_Object_Operation_unregister_EventAccepter() const = 0;
 			
 			// End Class FUML_Object
 

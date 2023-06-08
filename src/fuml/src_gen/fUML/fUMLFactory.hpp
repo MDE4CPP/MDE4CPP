@@ -20,10 +20,6 @@ namespace fUML
 {
 	class fUMLPackage;
 }
-namespace fUML::Semantics::CommonBehavior
-{
-	class ObjectActivation;
-}
 namespace fUML::Semantics::Loci
 {
 	class Locus;
@@ -44,10 +40,6 @@ namespace fUML::Semantics::Activities
 namespace fUML::Semantics::Actions
 {
 	class StructuredActivityNodeActivation;
-}
-namespace fUML::Semantics::CommonBehavior
-{
-	class ObjectActivation;
 }
 namespace fUML::Semantics::Loci
 {

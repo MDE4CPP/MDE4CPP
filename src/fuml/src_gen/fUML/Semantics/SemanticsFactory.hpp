@@ -27,10 +27,6 @@ namespace fUML::Semantics::Actions
 {
 	class StructuredActivityNodeActivation;
 }
-namespace fUML::Semantics::CommonBehavior
-{
-	class ObjectActivation;
-}
 namespace fUML::Semantics::Loci
 {
 	class Locus;

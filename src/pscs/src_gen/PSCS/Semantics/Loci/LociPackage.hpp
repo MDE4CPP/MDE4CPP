@@ -14,14 +14,14 @@
 
 namespace ecore 
 {
-	class EStringToStringMapEntry;
-	class EAnnotation;
-	class EReference;
-	class EGenericType;
-	class EOperation;
-	class EClass;
 	class EParameter;
 	class EDataType;
+	class EStringToStringMapEntry;
+	class EGenericType;
+	class EReference;
+	class EOperation;
+	class EAnnotation;
+	class EClass;
 }
 
 namespace PSCS::Semantics::Loci 
@@ -101,7 +101,7 @@ namespace PSCS::Semantics::Loci
 			//Class and Feature IDs 
 			static const unsigned long CS_LOCUS_CLASS = 264779363;
 			static const unsigned int CS_LOCUS_CLASS_FEATURE_COUNT = 3;
-			static const unsigned int CS_LOCUS_CLASS_OPERATION_COUNT = 8;
+			static const unsigned int CS_LOCUS_CLASS_OPERATION_COUNT = 9;
 			
 			
 			static const unsigned long CS_LOCUS_OPERATION_INSTANTIATE_CLASS = 3534104789;

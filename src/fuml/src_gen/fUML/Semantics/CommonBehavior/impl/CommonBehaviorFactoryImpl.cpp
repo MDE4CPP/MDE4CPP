@@ -8,8 +8,11 @@
 #include "fUML/Semantics/CommonBehavior/impl/EventAccepterImpl.hpp"
 #include "fUML/Semantics/CommonBehavior/impl/EventOccurrenceImpl.hpp"
 #include "fUML/Semantics/CommonBehavior/impl/ExecutionImpl.hpp"
+#include "fUML/Semantics/CommonBehavior/impl/FIFOGetNextEventStrategyImpl.hpp"
+#include "fUML/Semantics/CommonBehavior/impl/GetNextEventStrategyImpl.hpp"
 #include "fUML/Semantics/CommonBehavior/impl/ObjectActivationImpl.hpp"
 #include "fUML/Semantics/CommonBehavior/impl/ParameterValueImpl.hpp"
+#include "fUML/Semantics/CommonBehavior/impl/SignalEventOccurrenceImpl.hpp"
 
 #include "fUML/Semantics/Loci/LociPackage.hpp"
 #include "fUML/Semantics/Loci/Locus.hpp"
@@ -40,8 +43,10 @@ CommonBehaviorFactoryImpl::CommonBehaviorFactoryImpl()
 {
 	m_idMap.insert(std::make_pair("fUML::Semantics::CommonBehavior::ClassifierBehaviorExecution", CommonBehaviorPackage::CLASSIFIERBEHAVIOREXECUTION_CLASS));
 	m_idMap.insert(std::make_pair("fUML::Semantics::CommonBehavior::EventOccurrence", CommonBehaviorPackage::EVENTOCCURRENCE_CLASS));
+	m_idMap.insert(std::make_pair("fUML::Semantics::CommonBehavior::FIFOGetNextEventStrategy", CommonBehaviorPackage::FIFOGETNEXTEVENTSTRATEGY_CLASS));
 	m_idMap.insert(std::make_pair("fUML::Semantics::CommonBehavior::ObjectActivation", CommonBehaviorPackage::OBJECTACTIVATION_CLASS));
 	m_idMap.insert(std::make_pair("fUML::Semantics::CommonBehavior::ParameterValue", CommonBehaviorPackage::PARAMETERVALUE_CLASS));
+	m_idMap.insert(std::make_pair("fUML::Semantics::CommonBehavior::SignalEventOccurrence", CommonBehaviorPackage::SIGNALEVENTOCCURRENCE_CLASS));
 }
 
 CommonBehaviorFactoryImpl::~CommonBehaviorFactoryImpl()
@@ -77,7 +82,21 @@ std::shared_ptr<ecore::EObject> CommonBehaviorFactoryImpl::create(const int meta
 		}
 		case CommonBehaviorPackage::EVENTOCCURRENCE_CLASS:
 		{
+			if (nullptr == container)
+			{
 				return this->createEventOccurrence(metaElementID);
+			}
+			else
+			{
+				std::shared_ptr<fUML::Semantics::CommonBehavior::ObjectActivation> castedContainer = std::dynamic_pointer_cast<fUML::Semantics::CommonBehavior::ObjectActivation>(container);
+				assert(castedContainer);
+				return std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccurrence>(this->createEventOccurrence_as_eventPool_in_ObjectActivation(castedContainer,metaElementID));
+			}
+			break;
+		}
+		case CommonBehaviorPackage::FIFOGETNEXTEVENTSTRATEGY_CLASS:
+		{
+				return this->createFIFOGetNextEventStrategy(metaElementID);
 			
 			break;
 		}
@@ -106,6 +125,20 @@ std::shared_ptr<ecore::EObject> CommonBehaviorFactoryImpl::create(const int meta
 				std::shared_ptr<fUML::Semantics::CommonBehavior::Execution> castedContainer = std::dynamic_pointer_cast<fUML::Semantics::CommonBehavior::Execution>(container);
 				assert(castedContainer);
 				return std::shared_ptr<fUML::Semantics::CommonBehavior::ParameterValue>(this->createParameterValue_as_parameterValues_in_Execution(castedContainer,metaElementID));
+			}
+			break;
+		}
+		case CommonBehaviorPackage::SIGNALEVENTOCCURRENCE_CLASS:
+		{
+			if (nullptr == container)
+			{
+				return this->createSignalEventOccurrence(metaElementID);
+			}
+			else
+			{
+				std::shared_ptr<fUML::Semantics::CommonBehavior::ObjectActivation> castedContainer = std::dynamic_pointer_cast<fUML::Semantics::CommonBehavior::ObjectActivation>(container);
+				assert(castedContainer);
+				return std::shared_ptr<fUML::Semantics::CommonBehavior::SignalEventOccurrence>(this->createSignalEventOccurrence_as_eventPool_in_ObjectActivation(castedContainer,metaElementID));
 			}
 			break;
 		}
@@ -164,6 +197,26 @@ std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccurrence> CommonBehavior
 	element->setThisEventOccurrencePtr(element);
 	return element;
 }
+std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccurrence> CommonBehaviorFactoryImpl::createEventOccurrence_as_eventPool_in_ObjectActivation(std::shared_ptr<fUML::Semantics::CommonBehavior::ObjectActivation> par_ObjectActivation, const int metaElementID) const
+{
+	std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccurrenceImpl> element(new fUML::Semantics::CommonBehavior::EventOccurrenceImpl());
+	element->setMetaElementID(metaElementID);
+	if(nullptr != par_ObjectActivation)
+	{
+		par_ObjectActivation->getEventPool()->push_back(element);
+	}
+	
+	element->setThisEventOccurrencePtr(element);
+	return element;
+	
+}
+std::shared_ptr<fUML::Semantics::CommonBehavior::FIFOGetNextEventStrategy> CommonBehaviorFactoryImpl::createFIFOGetNextEventStrategy(const int metaElementID/*=-1*/) const
+{
+	std::shared_ptr<fUML::Semantics::CommonBehavior::FIFOGetNextEventStrategyImpl> element(new fUML::Semantics::CommonBehavior::FIFOGetNextEventStrategyImpl());
+	element->setMetaElementID(metaElementID);
+	element->setThisFIFOGetNextEventStrategyPtr(element);
+	return element;
+}
 std::shared_ptr<fUML::Semantics::CommonBehavior::ObjectActivation> CommonBehaviorFactoryImpl::createObjectActivation(const int metaElementID/*=-1*/) const
 {
 	std::shared_ptr<fUML::Semantics::CommonBehavior::ObjectActivationImpl> element(new fUML::Semantics::CommonBehavior::ObjectActivationImpl());
@@ -201,6 +254,26 @@ std::shared_ptr<fUML::Semantics::CommonBehavior::ParameterValue> CommonBehaviorF
 	}
 	
 	element->setThisParameterValuePtr(element);
+	return element;
+	
+}
+std::shared_ptr<fUML::Semantics::CommonBehavior::SignalEventOccurrence> CommonBehaviorFactoryImpl::createSignalEventOccurrence(const int metaElementID/*=-1*/) const
+{
+	std::shared_ptr<fUML::Semantics::CommonBehavior::SignalEventOccurrenceImpl> element(new fUML::Semantics::CommonBehavior::SignalEventOccurrenceImpl());
+	element->setMetaElementID(metaElementID);
+	element->setThisSignalEventOccurrencePtr(element);
+	return element;
+}
+std::shared_ptr<fUML::Semantics::CommonBehavior::SignalEventOccurrence> CommonBehaviorFactoryImpl::createSignalEventOccurrence_as_eventPool_in_ObjectActivation(std::shared_ptr<fUML::Semantics::CommonBehavior::ObjectActivation> par_ObjectActivation, const int metaElementID) const
+{
+	std::shared_ptr<fUML::Semantics::CommonBehavior::SignalEventOccurrenceImpl> element(new fUML::Semantics::CommonBehavior::SignalEventOccurrenceImpl());
+	element->setMetaElementID(metaElementID);
+	if(nullptr != par_ObjectActivation)
+	{
+		par_ObjectActivation->getEventPool()->push_back(element);
+	}
+	
+	element->setThisSignalEventOccurrencePtr(element);
 	return element;
 	
 }

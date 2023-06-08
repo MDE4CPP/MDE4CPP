@@ -43,6 +43,11 @@ namespace fUML::MDE4CPP_Extensions
 			//*********************************
 			// Operations
 			//*********************************
+			virtual void _register(const std::shared_ptr<fUML::Semantics::CommonBehavior::EventAccepter>& accepter) ;
+			virtual const std::shared_ptr<Bag<uml::Classifier>>& getTypes() const ;
+			virtual void send(const std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccurrence>& eventOccurrence) ;
+			virtual void startBehavior(const std::shared_ptr<uml::Class>& classifier, const std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>>& inputs) ;
+			virtual void unregister(const std::shared_ptr<fUML::Semantics::CommonBehavior::EventAccepter>& accepter) ;
 			
 			//*********************************
 			// Attribute Getters & Setters
@@ -51,6 +56,8 @@ namespace fUML::MDE4CPP_Extensions
 			//*********************************
 			// Reference Getters & Setters
 			//*********************************
+			virtual const std::shared_ptr<fUML::Semantics::Loci::Locus>& getLocus() const ;
+			virtual void setLocus(const std::shared_ptr<fUML::Semantics::Loci::Locus>&) ;
 			virtual const std::shared_ptr<fUML::Semantics::CommonBehavior::ObjectActivation>& getObjectActivation() const ;
 			virtual void setObjectActivation(const std::shared_ptr<fUML::Semantics::CommonBehavior::ObjectActivation>&) ;
 			

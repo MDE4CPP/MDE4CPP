@@ -11,6 +11,7 @@
 #include <memory>
 #include <string>
 // forward declarations
+template<class T> class Bag; 
 
 
 //*********************************
@@ -34,7 +35,14 @@ namespace fUML
 //Forward Declaration for used types 
 namespace fUML::Semantics::CommonBehavior 
 {
+	class EventAccepter;
+	class EventOccurrence;
 	class ObjectActivation;
+	class ParameterValue;
+}
+namespace fUML::Semantics::Loci 
+{
+	class Locus;
 }
 namespace ecore 
 {
@@ -42,6 +50,8 @@ namespace ecore
 }
 namespace uml 
 {
+	class Class;
+	class Classifier;
 	class Comment;
 }
 
@@ -75,6 +85,11 @@ namespace fUML::MDE4CPP_Extensions
 			//*********************************
 			// Operations
 			//*********************************
+			virtual void _register(const std::shared_ptr<fUML::Semantics::CommonBehavior::EventAccepter>& accepter) = 0;
+			virtual const std::shared_ptr<Bag<uml::Classifier>>& getTypes() const = 0;
+			virtual void send(const std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccurrence>& eventOccurrence) = 0;
+			virtual void startBehavior(const std::shared_ptr<uml::Class>& classifier, const std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>>& inputs) = 0;
+			virtual void unregister(const std::shared_ptr<fUML::Semantics::CommonBehavior::EventAccepter>& accepter) = 0;
 
 			//*********************************
 			// Attribute Getters & Setters
@@ -83,6 +98,8 @@ namespace fUML::MDE4CPP_Extensions
 			//*********************************
 			// Reference Getters & Setters
 			//*********************************
+			virtual const std::shared_ptr<fUML::Semantics::Loci::Locus>& getLocus() const = 0;
+			virtual void setLocus(const std::shared_ptr<fUML::Semantics::Loci::Locus>&) = 0;
 			virtual const std::shared_ptr<fUML::Semantics::CommonBehavior::ObjectActivation>& getObjectActivation() const = 0;
 			virtual void setObjectActivation(const std::shared_ptr<fUML::Semantics::CommonBehavior::ObjectActivation>&) = 0;
 
@@ -110,6 +127,7 @@ namespace fUML::MDE4CPP_Extensions
 			//*********************************
 			// Reference Members
 			//*********************************
+			std::shared_ptr<fUML::Semantics::Loci::Locus> m_locus;
 			std::shared_ptr<fUML::Semantics::CommonBehavior::ObjectActivation> m_objectActivation;
 	};
 }

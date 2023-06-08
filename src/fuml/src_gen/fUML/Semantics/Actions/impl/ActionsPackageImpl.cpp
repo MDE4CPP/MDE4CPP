@@ -4,15 +4,15 @@
 
 #include "abstractDataTypes/SubsetUnion.hpp"
 //metametamodel classes
-#include "ecore/EStringToStringMapEntry.hpp"
-#include "ecore/EAnnotation.hpp"
-#include "ecore/EAttribute.hpp"
-#include "ecore/EReference.hpp"
-#include "ecore/EGenericType.hpp"
-#include "ecore/EOperation.hpp"
-#include "ecore/EClass.hpp"
 #include "ecore/EParameter.hpp"
 #include "ecore/EDataType.hpp"
+#include "ecore/EStringToStringMapEntry.hpp"
+#include "ecore/EGenericType.hpp"
+#include "ecore/EReference.hpp"
+#include "ecore/EOperation.hpp"
+#include "ecore/EAttribute.hpp"
+#include "ecore/EAnnotation.hpp"
+#include "ecore/EClass.hpp"
 
 //metamodel factory
 #include "fUML/Semantics/Actions/ActionsFactory.hpp"
@@ -87,6 +87,10 @@ const std::shared_ptr<ecore::EAttribute>& fUML::Semantics::Actions::ActionsPacka
 	return m_acceptEventActionActivation_Attribute_waiting;
 }
 
+const std::shared_ptr<ecore::EReference>& fUML::Semantics::Actions::ActionsPackageImpl::getAcceptEventActionActivation_Attribute_acceptEventAction() const
+{
+	return m_acceptEventActionActivation_Attribute_acceptEventAction;
+}
 const std::shared_ptr<ecore::EReference>& fUML::Semantics::Actions::ActionsPackageImpl::getAcceptEventActionActivation_Attribute_eventAccepter() const
 {
 	return m_acceptEventActionActivation_Attribute_eventAccepter;
@@ -139,6 +143,14 @@ const std::shared_ptr<ecore::EReference>& fUML::Semantics::Actions::ActionsPacka
 	return m_acceptEventActionEventAccepter_Attribute_actionActivation;
 }
 
+const std::shared_ptr<ecore::EOperation>& fUML::Semantics::Actions::ActionsPackageImpl::getAcceptEventActionEventAccepter_Operation_accept_EventOccurrence() const
+{
+	return m_acceptEventActionEventAccepter_Operation_accept_EventOccurrence;
+}
+const std::shared_ptr<ecore::EOperation>& fUML::Semantics::Actions::ActionsPackageImpl::getAcceptEventActionEventAccepter_Operation_match_EventOccurrence() const
+{
+	return m_acceptEventActionEventAccepter_Operation_match_EventOccurrence;
+}
 
 // End Class AcceptEventActionEventAccepter
 
@@ -745,6 +757,10 @@ const std::shared_ptr<ecore::EClass>& fUML::Semantics::Actions::ActionsPackageIm
 }
 
 
+const std::shared_ptr<ecore::EReference>& fUML::Semantics::Actions::ActionsPackageImpl::getSendSignalActionActivation_Attribute_sendSignalAction() const
+{
+	return m_sendSignalActionActivation_Attribute_sendSignalAction;
+}
 
 const std::shared_ptr<ecore::EOperation>& fUML::Semantics::Actions::ActionsPackageImpl::getSendSignalActionActivation_Operation_doAction() const
 {

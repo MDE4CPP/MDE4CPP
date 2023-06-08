@@ -21,7 +21,7 @@
 #include <cassert>
 #include <iostream>
 #include <sstream>
-#include <stdexcept>
+
 #include "abstractDataTypes/Bag.hpp"
 
 
@@ -36,6 +36,10 @@
 //Includes from codegen annotation
 #include "fUML/Semantics/CommonBehavior/ClassifierBehaviorExecution.hpp"
 #include "fUML/Semantics/SimpleClassifiers/SimpleClassifiersPackage.hpp"
+#include "fUML/Semantics/Loci/ChoiceStrategy.hpp"
+#include "fUML/Semantics/Loci/Locus.hpp"
+#include "fUML/Semantics/Loci/ExecutionFactory.hpp"
+#include "fUML/Semantics/CommonBehavior/GetNextEventStrategy.hpp"
 
 #include "uml/Behavior.hpp"
 #include "uml/Class.hpp"
@@ -45,16 +49,18 @@
 
 #include <exception> // used in Persistence
 #include "fUML/Semantics/CommonBehavior/CommonBehaviorFactory.hpp"
-#include "uml/umlFactory.hpp"
+#include "fUML/MDE4CPP_Extensions/MDE4CPP_ExtensionsFactory.hpp"
 #include "uml/Class.hpp"
 #include "fUML/Semantics/CommonBehavior/ClassifierBehaviorExecution.hpp"
-#include "uml/Element.hpp"
 #include "fUML/Semantics/CommonBehavior/EventAccepter.hpp"
+#include "fUML/Semantics/CommonBehavior/EventOccurrence.hpp"
+#include "fUML/MDE4CPP_Extensions/FUML_Object.hpp"
 #include "fUML/Semantics/CommonBehavior/ParameterValue.hpp"
 //Factories and Package includes
-#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/SemanticsPackage.hpp"
+#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/CommonBehavior/CommonBehaviorPackage.hpp"
+#include "fUML/MDE4CPP_Extensions/MDE4CPP_ExtensionsPackage.hpp"
 #include "uml/umlPackage.hpp"
 
 using namespace fUML::Semantics::CommonBehavior;
@@ -126,15 +132,15 @@ ObjectActivationImpl& ObjectActivationImpl::operator=(const ObjectActivationImpl
 	}
 
 	//clone reference 'eventPool'
-	std::shared_ptr<Bag<uml::Element>> eventPoolList = obj.getEventPool();
+	std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::EventOccurrence>> eventPoolList = obj.getEventPool();
 	if(eventPoolList)
 	{
-		m_eventPool.reset(new Bag<uml::Element>());
+		m_eventPool.reset(new Bag<fUML::Semantics::CommonBehavior::EventOccurrence>());
 		
 		
-		for(const std::shared_ptr<uml::Element>& eventPoolindexElem: *eventPoolList) 
+		for(const std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccurrence>& eventPoolindexElem: *eventPoolList) 
 		{
-			std::shared_ptr<uml::Element> temp = std::dynamic_pointer_cast<uml::Element>((eventPoolindexElem)->copy());
+			std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccurrence> temp = std::dynamic_pointer_cast<fUML::Semantics::CommonBehavior::EventOccurrence>((eventPoolindexElem)->copy());
 			m_eventPool->push_back(temp);
 		}
 	}
@@ -160,47 +166,163 @@ std::shared_ptr<ecore::EObject> ObjectActivationImpl::copy() const
 //*********************************
 void ObjectActivationImpl::_register(const std::shared_ptr<fUML::Semantics::CommonBehavior::EventAccepter>& accepter)
 {
-	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
-}
+	//ADD_COUNT(__PRETTY_FUNCTION__)
+	//generated from body annotation
+	    DEBUG_INFO("object = " << this->getObject())
+    DEBUG_INFO("accepter = " << accepter)
 
-void ObjectActivationImpl::_send(const std::shared_ptr<Any>& signal)
-{
-	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
+    this->getWaitingEventAccepters()->push_back(accepter);
+
+	// For now, try running dispatch directly
+	DEBUG_INFO(" Directly dispatching next event.");
+	this->dispatchNextEvent();
+	//end of body
 }
 
 void ObjectActivationImpl::_startObjectBehavior()
 {
-	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
+	//ADD_COUNT(__PRETTY_FUNCTION__)
+	//generated from body annotation
+	//What to do here??
+return;
+	//end of body
 }
 
 void ObjectActivationImpl::dispatchNextEvent()
 {
-	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
+	//ADD_COUNT(__PRETTY_FUNCTION__)
+	//generated from body annotation
+	// Get the next event occurrence out of the event pool.
+	// If there are one or more waiting event accepters with triggers that
+	// match the event occurrence, then dispatch it to exactly one of those
+	// waiting accepters.
+	if (getEventPool()->size() > 0)
+	{	
+		DEBUG_INFO("Event Pool not empty.")
+
+ 		std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccurrence> eventOccurrence = retrieveNextEvent();
+		std::vector<int> matchingEventAccepterIndexes;
+
+ 		const std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::EventAccepter>>& waitingEventAccepters = this->getWaitingEventAccepters();
+		unsigned int waitingEventAcceptersSize = waitingEventAccepters->size();
+
+		for (unsigned int i = 0; i < waitingEventAcceptersSize; i++)
+		{
+			DEBUG_INFO("checking next eventAccepter.")
+
+ 			const std::shared_ptr<fUML::Semantics::CommonBehavior::EventAccepter>& eventAccepter = waitingEventAccepters->at(i);
+ 			if (eventAccepter->match(eventOccurrence))
+			{
+				DEBUG_INFO("EventAccepter matches!")
+				matchingEventAccepterIndexes.push_back(i);
+			}
+		}
+		if (matchingEventAccepterIndexes.size() > 0)
+		{
+			DEBUG_INFO("At least one EventAccepter matches! Accepting...")
+
+ 		// *** Choose one matching event accepter non-deterministically. ***
+		std::shared_ptr<fUML::Semantics::Loci::ChoiceStrategy> Strategy = std::dynamic_pointer_cast<fUML::Semantics::Loci::ChoiceStrategy>(getObject()->getLocus()->getFactory()->getStrategy("choice") );
+		int j = Strategy->choose(matchingEventAccepterIndexes.size());
+		int k = matchingEventAccepterIndexes.at(j - 1);
+		std::shared_ptr<fUML::Semantics::CommonBehavior::EventAccepter> selectedEventAccepter = waitingEventAccepters->at(k);
+		waitingEventAccepters->erase(waitingEventAccepters->begin() + k);
+		selectedEventAccepter->accept(eventOccurrence);
+		}
+	}
+	//end of body
 }
 
-std::shared_ptr<uml::Element> ObjectActivationImpl::retrieveNextEvent()
+std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccurrence> ObjectActivationImpl::retrieveNextEvent()
 {
-	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
+	//ADD_COUNT(__PRETTY_FUNCTION__)
+	//generated from body annotation
+	// Get the next event from the event pool, using a get next event strategy.
+
+	std::shared_ptr<fUML::Semantics::CommonBehavior::GetNextEventStrategy> Strategy = std::dynamic_pointer_cast<fUML::Semantics::CommonBehavior::GetNextEventStrategy>(getObject()->getLocus()->getFactory()->getStrategy("getNextEvent") );
+	return Strategy->retrieveNextEvent(getThisObjectActivationPtr());
+
+	//end of body
 }
 
-void ObjectActivationImpl::send(const std::shared_ptr<uml::Element>& signalInstance)
+void ObjectActivationImpl::send(const std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccurrence>& eventOccurrence)
 {
-	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
+	//ADD_COUNT(__PRETTY_FUNCTION__)
+	//generated from body annotation
+	this->getEventPool()->push_back(std::dynamic_pointer_cast<fUML::Semantics::CommonBehavior::EventOccurrence>(eventOccurrence->copy()));
+	//end of body
 }
 
 void ObjectActivationImpl::startBehavior(const std::shared_ptr<uml::Class>& classifier, const std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>>& inputs)
 {
-	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
+	//ADD_COUNT(__PRETTY_FUNCTION__)
+	//generated from body annotation
+		if (classifier == nullptr)
+	{
+    		DEBUG_INFO(" Starting behavior for all classifiers...")
+		// *** Start all classifier behaviors concurrently. ***
+		const std::shared_ptr<Bag<uml::Classifier>>& types = this->getObject()->getTypes();
+
+        	for (const std::shared_ptr<uml::Classifier>& classifier : *types)
+       		{
+        		std::shared_ptr<uml::Class> type = std::dynamic_pointer_cast<uml::Class>(classifier);
+        		if ((std::dynamic_pointer_cast<uml::Behavior>(type) != nullptr) || (type->getClassifierBehavior() != nullptr))
+            		{
+            			std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue> > parameterValue(new Bag<fUML::Semantics::CommonBehavior::ParameterValue>());
+            			this->startBehavior(type, parameterValue);
+            		}
+        	}
+	}
+	else
+	{
+    	DEBUG_INFO("Starting behavior for "<< classifier->getName())
+
+		bool notYetStarted = true;
+        	unsigned int i = 0;
+		unsigned int classifierBehaviorExecutionsSize = this->getClassifierBehaviorExecutions()->size();
+        	while (notYetStarted && i < classifierBehaviorExecutionsSize)
+       		{
+        		notYetStarted = (this->getClassifierBehaviorExecutions()->at(i)->getClassifier() != classifier);
+           	 	i = i + 1;
+        	}
+
+        	if (notYetStarted)
+        	{	
+        		std::shared_ptr<fUML::Semantics::CommonBehavior::ClassifierBehaviorExecution> newExecution(fUML::Semantics::CommonBehavior::CommonBehaviorFactory::eInstance()->createClassifierBehaviorExecution());
+        		newExecution->setObjectActivation(getThisObjectActivationPtr());
+        		this->getClassifierBehaviorExecutions()->push_back(newExecution);
+		
+			std::shared_ptr<Bag<uml::Class>> classifierBag;
+			classifierBag->add(classifier);
+        		newExecution->execute(classifierBag, inputs);
+
+			dispatchNextEvent();
+        	}
+	}
+	//end of body
 }
 
 void ObjectActivationImpl::stop()
 {
-	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
+	//ADD_COUNT(__PRETTY_FUNCTION__)
+	//generated from body annotation
+	const std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ClassifierBehaviorExecution>>& classifierBehaviorExecutions = this->getClassifierBehaviorExecutions();
+    for (const std::shared_ptr<fUML::Semantics::CommonBehavior::ClassifierBehaviorExecution>& classifierBehaviorExecution : *classifierBehaviorExecutions) 
+    {
+        classifierBehaviorExecution->terminate();
+    }
+	//end of body
 }
 
 void ObjectActivationImpl::unregister(const std::shared_ptr<fUML::Semantics::CommonBehavior::EventAccepter>& accepter)
 {
-	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
+	//ADD_COUNT(__PRETTY_FUNCTION__)
+	//generated from body annotation
+	DEBUG_INFO("object = " << this->getObject())
+	DEBUG_INFO("accepter = " << accepter)
+	this->getWaitingEventAccepters()->erase(accepter);
+
+	//end of body
 }
 
 //*********************************
@@ -223,11 +345,11 @@ const std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ClassifierBehaviorExe
 }
 
 /* Getter & Setter for reference eventPool */
-const std::shared_ptr<Bag<uml::Element>>& ObjectActivationImpl::getEventPool() const
+const std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::EventOccurrence>>& ObjectActivationImpl::getEventPool() const
 {
 	if(m_eventPool == nullptr)
 	{
-		m_eventPool.reset(new Bag<uml::Element>());
+		m_eventPool.reset(new Bag<fUML::Semantics::CommonBehavior::EventOccurrence>());
 		
 		
 	}
@@ -235,11 +357,11 @@ const std::shared_ptr<Bag<uml::Element>>& ObjectActivationImpl::getEventPool() c
 }
 
 /* Getter & Setter for reference object */
-const std::shared_ptr<uml::Element>& ObjectActivationImpl::getObject() const
+const std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_Object>& ObjectActivationImpl::getObject() const
 {
     return m_object;
 }
-void ObjectActivationImpl::setObject(const std::shared_ptr<uml::Element>& _object)
+void ObjectActivationImpl::setObject(const std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_Object>& _object)
 {
     m_object = _object;
 	
@@ -342,10 +464,9 @@ void ObjectActivationImpl::loadNode(std::string nodeName, std::shared_ptr<persis
   			std::string typeName = loadHandler->getCurrentXSITypeName();
 			if (typeName.empty())
 			{
-				std::cout << "| WARNING    | type if an eClassifiers node it empty" << std::endl;
-				return; // no type name given and reference type is abstract
+				typeName = "EventOccurrence";
 			}
-			loadHandler->handleChildContainer<uml::Element>(this->getEventPool());  
+			loadHandler->handleChildContainer<fUML::Semantics::CommonBehavior::EventOccurrence>(this->getEventPool());  
 
 			return; 
 		}
@@ -370,7 +491,7 @@ void ObjectActivationImpl::resolveReferences(const int featureID, std::vector<st
 			if (references.size() == 1)
 			{
 				// Cast object to correct type
-				std::shared_ptr<uml::Element> _object = std::dynamic_pointer_cast<uml::Element>( references.front() );
+				std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_Object> _object = std::dynamic_pointer_cast<fUML::MDE4CPP_Extensions::FUML_Object>( references.front() );
 				setObject(_object);
 			}
 			
@@ -407,7 +528,7 @@ void ObjectActivationImpl::saveContent(std::shared_ptr<persistence::interfaces::
 	{
 		std::shared_ptr<fUML::Semantics::CommonBehavior::CommonBehaviorPackage> package = fUML::Semantics::CommonBehavior::CommonBehaviorPackage::eInstance();
 	// Add references
-		saveHandler->addReference(this->getObject(), "object", getObject()->eClass() != uml::umlPackage::eInstance()->getElement_Class()); 
+		saveHandler->addReference(this->getObject(), "object", getObject()->eClass() != fUML::MDE4CPP_Extensions::MDE4CPP_ExtensionsPackage::eInstance()->getFUML_Object_Class()); 
 		saveHandler->addReferences<fUML::Semantics::CommonBehavior::EventAccepter>("waitingEventAccepters", this->getWaitingEventAccepters());
 		//
 		// Add new tags (from references)
@@ -419,7 +540,7 @@ void ObjectActivationImpl::saveContent(std::shared_ptr<persistence::interfaces::
 
 		// Save 'eventPool'
 
-		saveHandler->addReferences<uml::Element>("eventPool", this->getEventPool());
+		saveHandler->addReferences<fUML::Semantics::CommonBehavior::EventOccurrence>("eventPool", this->getEventPool());
 	}
 	catch (std::exception& e)
 	{
@@ -442,9 +563,9 @@ std::shared_ptr<Any> ObjectActivationImpl::eGet(int featureID, bool resolve, boo
 		case fUML::Semantics::CommonBehavior::CommonBehaviorPackage::OBJECTACTIVATION_ATTRIBUTE_CLASSIFIERBEHAVIOREXECUTIONS:
 			return eEcoreContainerAny(getClassifierBehaviorExecutions(),fUML::Semantics::CommonBehavior::CommonBehaviorPackage::CLASSIFIERBEHAVIOREXECUTION_CLASS); //813
 		case fUML::Semantics::CommonBehavior::CommonBehaviorPackage::OBJECTACTIVATION_ATTRIBUTE_EVENTPOOL:
-			return eEcoreContainerAny(getEventPool(),uml::umlPackage::ELEMENT_CLASS); //811
+			return eEcoreContainerAny(getEventPool(),fUML::Semantics::CommonBehavior::CommonBehaviorPackage::EVENTOCCURRENCE_CLASS); //811
 		case fUML::Semantics::CommonBehavior::CommonBehaviorPackage::OBJECTACTIVATION_ATTRIBUTE_OBJECT:
-			return eAny(getObject(),uml::umlPackage::ELEMENT_CLASS,false); //812
+			return eAny(getObject(),fUML::MDE4CPP_Extensions::MDE4CPP_ExtensionsPackage::FUML_OBJECT_CLASS,false); //812
 		case fUML::Semantics::CommonBehavior::CommonBehaviorPackage::OBJECTACTIVATION_ATTRIBUTE_WAITINGEVENTACCEPTERS:
 			return eEcoreContainerAny(getWaitingEventAccepters(),fUML::Semantics::CommonBehavior::CommonBehaviorPackage::EVENTACCEPTER_CLASS); //810
 	}
@@ -527,11 +648,11 @@ bool ObjectActivationImpl::eSet(int featureID,  const std::shared_ptr<Any>& newV
 	
 					if(eObjectList)
 					{
-						std::shared_ptr<Bag<uml::Element>> _eventPool = getEventPool();
+						std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::EventOccurrence>> _eventPool = getEventPool();
 	
 						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{
-							std::shared_ptr<uml::Element> valueToAdd = std::dynamic_pointer_cast<uml::Element>(anEObject);
+							std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccurrence> valueToAdd = std::dynamic_pointer_cast<fUML::Semantics::CommonBehavior::EventOccurrence>(anEObject);
 	
 							if (valueToAdd)
 							{
@@ -569,7 +690,7 @@ bool ObjectActivationImpl::eSet(int featureID,  const std::shared_ptr<Any>& newV
 				try
 				{
 					std::shared_ptr<ecore::EObject> eObject = ecoreAny->getAsEObject();
-					std::shared_ptr<uml::Element> _object = std::dynamic_pointer_cast<uml::Element>(eObject);
+					std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_Object> _object = std::dynamic_pointer_cast<fUML::MDE4CPP_Extensions::FUML_Object>(eObject);
 					if(_object)
 					{
 						setObject(_object); //812
@@ -683,26 +804,6 @@ std::shared_ptr<Any> ObjectActivationImpl::eInvoke(int operationID, const std::s
 			this->_register(incoming_param_accepter);
 			break;
 		}
-		// fUML::Semantics::CommonBehavior::ObjectActivation::_send(Any): 3568620231
-		case CommonBehaviorPackage::OBJECTACTIVATION_OPERATION__SEND_EJAVAOBJECT:
-		{
-			//Retrieve input parameter 'signal'
-			//parameter 0
-			std::shared_ptr<Any> incoming_param_signal;
-			Bag<Any>::const_iterator incoming_param_signal_arguments_citer = std::next(arguments->begin(), 0);
-			try
-			{
-				incoming_param_signal = (*incoming_param_signal_arguments_citer)->get<std::shared_ptr<Any>>();
-			}
-			catch(...)
-			{
-				DEBUG_ERROR("Invalid type stored in 'Any' for parameter 'signal'. Failed to invoke operation '_send'!")
-				return nullptr;
-			}
-		
-			this->_send(incoming_param_signal);
-			break;
-		}
 		// fUML::Semantics::CommonBehavior::ObjectActivation::_startObjectBehavior(): 3886431562
 		case CommonBehaviorPackage::OBJECTACTIVATION_OPERATION__STARTOBJECTBEHAVIOR:
 		{
@@ -715,42 +816,42 @@ std::shared_ptr<Any> ObjectActivationImpl::eInvoke(int operationID, const std::s
 			this->dispatchNextEvent();
 			break;
 		}
-		// fUML::Semantics::CommonBehavior::ObjectActivation::retrieveNextEvent() : uml::Element: 2723579027
+		// fUML::Semantics::CommonBehavior::ObjectActivation::retrieveNextEvent() : fUML::Semantics::CommonBehavior::EventOccurrence: 1574821122
 		case CommonBehaviorPackage::OBJECTACTIVATION_OPERATION_RETRIEVENEXTEVENT:
 		{
-			result = eEcoreAny(this->retrieveNextEvent(), uml::umlPackage::ELEMENT_CLASS);
+			result = eEcoreAny(this->retrieveNextEvent(), fUML::Semantics::CommonBehavior::CommonBehaviorPackage::EVENTOCCURRENCE_CLASS);
 			break;
 		}
-		// fUML::Semantics::CommonBehavior::ObjectActivation::send(uml::Element): 1663035856
-		case CommonBehaviorPackage::OBJECTACTIVATION_OPERATION_SEND_ELEMENT:
+		// fUML::Semantics::CommonBehavior::ObjectActivation::send(fUML::Semantics::CommonBehavior::EventOccurrence): 1944136787
+		case CommonBehaviorPackage::OBJECTACTIVATION_OPERATION_SEND_EVENTOCCURRENCE:
 		{
-			//Retrieve input parameter 'signalInstance'
+			//Retrieve input parameter 'eventOccurrence'
 			//parameter 0
-			std::shared_ptr<uml::Element> incoming_param_signalInstance;
-			Bag<Any>::const_iterator incoming_param_signalInstance_arguments_citer = std::next(arguments->begin(), 0);
+			std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccurrence> incoming_param_eventOccurrence;
+			Bag<Any>::const_iterator incoming_param_eventOccurrence_arguments_citer = std::next(arguments->begin(), 0);
 			{
-				std::shared_ptr<ecore::EcoreAny> ecoreAny = std::dynamic_pointer_cast<ecore::EcoreAny>((*incoming_param_signalInstance_arguments_citer));
+				std::shared_ptr<ecore::EcoreAny> ecoreAny = std::dynamic_pointer_cast<ecore::EcoreAny>((*incoming_param_eventOccurrence_arguments_citer));
 				if(ecoreAny)
 				{
 					try
 					{
 						std::shared_ptr<ecore::EObject> _temp = ecoreAny->getAsEObject();
-						incoming_param_signalInstance = std::dynamic_pointer_cast<uml::Element>(_temp);
+						incoming_param_eventOccurrence = std::dynamic_pointer_cast<fUML::Semantics::CommonBehavior::EventOccurrence>(_temp);
 					}
 					catch(...)
 					{
-						DEBUG_ERROR("Invalid type stored in 'ecore::EcoreAny' for parameter 'signalInstance'. Failed to invoke operation 'send'!")
+						DEBUG_ERROR("Invalid type stored in 'ecore::EcoreAny' for parameter 'eventOccurrence'. Failed to invoke operation 'send'!")
 						return nullptr;
 					}
 				}
 				else
 				{
-					DEBUG_ERROR("Invalid instance of 'ecore::EcoreAny' for parameter 'signalInstance'. Failed to invoke operation 'send'!")
+					DEBUG_ERROR("Invalid instance of 'ecore::EcoreAny' for parameter 'eventOccurrence'. Failed to invoke operation 'send'!")
 					return nullptr;
 				}
 			}
 		
-			this->send(incoming_param_signalInstance);
+			this->send(incoming_param_eventOccurrence);
 			break;
 		}
 		// fUML::Semantics::CommonBehavior::ObjectActivation::startBehavior(uml::Class, fUML::Semantics::CommonBehavior::ParameterValue[*]): 3087048988

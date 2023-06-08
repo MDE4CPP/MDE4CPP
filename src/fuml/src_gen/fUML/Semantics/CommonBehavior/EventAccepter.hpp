@@ -32,9 +32,9 @@ namespace fUML
 }
 
 //Forward Declaration for used types 
-namespace uml 
+namespace fUML::Semantics::CommonBehavior 
 {
-	class Element;
+	class EventOccurrence;
 }
 
 // namespace macro header include
@@ -66,8 +66,8 @@ namespace fUML::Semantics::CommonBehavior
 			//*********************************
 			// Operations
 			//*********************************
-			virtual void accept(const std::shared_ptr<uml::Element>& signalInstance) = 0;
-			virtual bool match(const std::shared_ptr<uml::Element>& signalInstance) = 0;
+			virtual void accept(const std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccurrence>& eventOccurrence) = 0;
+			virtual bool match(const std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccurrence>& eventOccurrence) = 0;
 
 			//*********************************
 			// Attribute Getters & Setters

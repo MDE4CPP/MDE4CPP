@@ -63,6 +63,12 @@ namespace fUML::Semantics::Actions
 			//*********************************
 			// Reference Getters & Setters
 			//*********************************
+			virtual const std::shared_ptr<uml::AcceptEventAction>& getAcceptEventAction() const ;
+			virtual void setAcceptEventAction(const std::shared_ptr<uml::AcceptEventAction>&) ;
+			/*Additional Setter for 'ActionActivation::action' redefined by reference 'acceptEventAction'*/
+			virtual void setAction(const std::shared_ptr<uml::Action>&) ;
+			/*Additional Setter for 'ActivityNodeActivation::node' redefined by reference 'acceptEventAction'*/
+			virtual void setNode(const std::shared_ptr<uml::ActivityNode>&) ;
 			virtual const std::shared_ptr<fUML::Semantics::Actions::AcceptEventActionEventAccepter>& getEventAccepter() const ;
 			virtual void setEventAccepter(const std::shared_ptr<fUML::Semantics::Actions::AcceptEventActionEventAccepter>&) ;
 			
