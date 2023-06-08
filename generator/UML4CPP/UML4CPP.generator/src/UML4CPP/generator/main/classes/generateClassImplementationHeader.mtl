@@ -30,6 +30,7 @@
 [import UML4CPP::generator::main::helpers::setGetHelper /]
 [import UML4CPP::generator::main::validation::validation/]
 [import UML4CPP::generator::main::profiles::uml4CPPProfileHelper /]
+[import UML4CPP::generator::main::model_execution::model_execution /]
 
 [template public generateClassImplementationHeader(aClass : Class) {className : String = aClass.name.toUpperFirst().concat('Impl'); aPackage : Package = aClass.ancestors()->filter(Package)->first()}]
 [file (aPackage.generateNamespacePath(false).concat('/impl/').concat(className).concat('.hpp'), false, 'UTF-8')]
@@ -110,6 +111,11 @@ virtual public [sClass.getClassifierName(aClass, false, sClass.getNearestPackage
 			[for (anOpaqueBehavior : OpaqueBehavior | aClass.collectOpaqueBehaviorsContexedByClass()->sortedBy(name)) before('\t\t\t//Methods defined by OpaqueBehaviors\n') after('\n')]
 			[anOpaqueBehavior.generateMethodDeclaration(true)/]
 			[/for]
+			[if (isFUMLExecutable())]
+			// fUML-specific Operations
+			const std::shared_ptr<Bag<uml::Classifier>>& getTypes() const;
+
+			[/if]
 			//*********************************
 			// Attributes Getter Setter
 			//*********************************
