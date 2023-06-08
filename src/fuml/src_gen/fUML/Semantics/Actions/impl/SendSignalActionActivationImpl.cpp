@@ -193,9 +193,18 @@ void SendSignalActionActivationImpl::doAction()
  			const std::shared_ptr< uml::InputPin>& argumentPin = argumentPins->at(i);
 			std::shared_ptr<Bag<Any>> values = takeTokens(argumentPin);
 
+			unsigned int upperOfFeature = attribute->getUpper();
+
 			for(const std::shared_ptr<Any>& value : *values)
 			{
-				signalInstance->add(attribute, value, 0);
+				if(upperOfFeature == 1)
+				{
+					signalInstance->set(attribute, value);
+				}
+				else
+				{
+					signalInstance->add(attribute, value);
+				}
 			}
  		}
 
