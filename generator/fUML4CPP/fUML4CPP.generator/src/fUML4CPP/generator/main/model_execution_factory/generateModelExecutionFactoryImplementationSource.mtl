@@ -177,7 +177,9 @@ newActivationGroup->addNodeActivation([anActivityNode.getActivityNodeActivationV
 	[anActivityNode.getActivityNodeActivationVariableName()/]->addPinActivation([aPin.getActivityNodeActivationVariableName()/]);
 	newActivationGroup->addNodeActivation([aPin.getActivityNodeActivationVariableName()/]);
 	[/for]
-	[if(anAction.oclIsKindOf(StructuredActivityNode))]
+	[if(anAction.oclIsKindOf(AcceptEventAction))]
+	[anActivityNode.getActivityNodeActivationVariableName()/]->setWaiting(false);
+	[elseif(anAction.oclIsKindOf(StructuredActivityNode))]
 	[let aStructuredActivityNode : StructuredActivityNode = anAction.oclAsType(StructuredActivityNode)]
 		[for (aNestedActivityNode : ActivityNode | aStructuredActivityNode.node) before('//Create nested ActivityNodeActivations\n')]
 	[aNestedActivityNode.generateActivityNodeActivationCreation()/]
@@ -185,7 +187,7 @@ newActivationGroup->addNodeActivation([anActivityNode.getActivityNodeActivationV
 		[for (aNestedActivityEdge : ActivityEdge | aStructuredActivityNode.edge) before('//Create nested ActivityEdgeInstances\n')]
 	[aNestedActivityEdge.generateActivityEdgeInstanceCreation()/]
 		[/for]
-	[/let]
+	[/let]	
 	[/if]
 [/let]
 [/if]
