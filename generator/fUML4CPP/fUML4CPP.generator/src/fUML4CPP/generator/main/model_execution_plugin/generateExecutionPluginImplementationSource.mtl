@@ -152,6 +152,16 @@ std::shared_ptr<uml::Element> [packageName/]::instantiateClass(std::shared_ptr<u
 	return this->m_locus->instantiate(type);
 }
 
+std::shared_ptr<uml::Element> [packageName/]::instantiateSignal(std::shared_ptr<uml::Signal> type)
+{
+	if(!m_IsInitialized)
+	{
+		initialize();
+	}
+
+	return this->m_locus->instantiate(type);
+}
+
 std::shared_ptr<Any> [packageName/]::evaluateSpecification(std::shared_ptr<uml::ValueSpecification> specification)
 {
 	return this->m_executor->evaluate(specification);
