@@ -247,7 +247,7 @@ void [aClass.name.toUpperFirst()/]Impl::set[compositeOwnerClass.name.toUpperFirs
 [/template]
 
 [**
- * generates the type for the Getter/Setter of an Attribute 
+ * generates the type for the Getter/Setter of a Property
 */]
 
 [template private generateAccessorType(aProperty : Property) post(trim())][if(aProperty.isSharedPtr())]const [/if][aProperty.generateCppType()/][if(aProperty.isSharedPtr())]&[/if][/template]
