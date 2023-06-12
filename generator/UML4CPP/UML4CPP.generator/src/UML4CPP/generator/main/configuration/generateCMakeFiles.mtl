@@ -193,6 +193,9 @@ TARGET_LINK_LIBRARIES(${PROJECT_NAME}
 [for (aDataType : DataType | aPackage.ownedElement->selectByType(DataType)->select(isGeneratable())->sortedBy(myQualifiedName()))]
 [if(not isRoot)][aPackage.generateNamespacePathWithoutRoot(false)/]/[/if]impl/[aDataType.name.toUpperFirst()/]Impl.cpp
 [/for]
+[for (aSignal : Signal | aPackage.ownedElement->selectByType(Signal)->select(isGeneratable())->sortedBy(myQualifiedName()))]
+[if(not isRoot)][aPackage.generateNamespacePathWithoutRoot(false)/]/[/if]impl/[aSignal.name.toUpperFirst()/]Impl.cpp
+[/for]
 [/template]
 
 [query private buildModeCMakeProperty(debugMode : Boolean) : String = if (debugMode) then 'debug' else 'optimized' endif/]

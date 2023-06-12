@@ -152,6 +152,16 @@ std::shared_ptr<uml::Element> [packageName/]::instantiateClass(std::shared_ptr<u
 	return this->m_locus->instantiate(type);
 }
 
+std::shared_ptr<uml::Element> [packageName/]::instantiateSignal(std::shared_ptr<uml::Signal> type)
+{
+	if(!m_IsInitialized)
+	{
+		initialize();
+	}
+
+	return this->m_locus->instantiate(type);
+}
+
 std::shared_ptr<Any> [packageName/]::evaluateSpecification(std::shared_ptr<uml::ValueSpecification> specification)
 {
 	return this->m_executor->evaluate(specification);
@@ -304,14 +314,14 @@ std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue> > pList(new
 [if (aParameter.upper <> 1)]
 	[if (aParameter.type.oclIsKindOf(PrimitiveType) or aParameter.type.oclIsKindOf(Enumeration))]
 	[aParameter.generateCppType(false)/] elementList = [aParameter.name/]->get<[aParameter.generateCppType(false)/]>();
-	for([aParameter.type.generateCppRawType(false)/] anElement : *elementList)
+	for(const [aParameter.type.generateCppRawType(false)/]& anElement : *elementList)
 	{
 		[aParameter.name/]_parameterValue->getValues()->add(eAny(anElement, [aParameter.name/]->getTypeId(), false));
 	}
 	[else]
 	std::shared_ptr<uml::UMLContainerAny> umlContainerAny = std::dynamic_pointer_cast<uml::UMLContainerAny>([aParameter.name/]);
 	std::shared_ptr<Bag<uml::Element>> elementList = umlContainerAny->getAsElementContainer();
-	for(std::shared_ptr<uml::Element> anElement : *elementList)
+	for(const std::shared_ptr<uml::Element>& anElement : *elementList)
 	{
 		[aParameter.name/]_parameterValue->getValues()->add(eUMLAny(anElement, [aParameter.name/]->getTypeId()));
 	}
@@ -332,7 +342,7 @@ std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> outputPara
 std::shared_ptr<Any> returnValue;
 std::shared_ptr<uml::Parameter> returnParameter = [par.generatePackageGetterCall()/];
 
-for(std::shared_ptr<fUML::Semantics::CommonBehavior::ParameterValue> parameterValue : *outputParameterValues)
+for(const std::shared_ptr<fUML::Semantics::CommonBehavior::ParameterValue>& parameterValue : *outputParameterValues)
 {
 	if(returnParameter == parameterValue->getParameter())
 	{

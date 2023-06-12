@@ -387,13 +387,13 @@ bool OccurrenceSpecificationImpl::eSet(int featureID,  const std::shared_ptr<Any
 					{
 						std::shared_ptr<Bag<uml::GeneralOrdering>> _toAfter = getToAfter();
 	
-						for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
+						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{
 							std::shared_ptr<uml::GeneralOrdering> valueToAdd = std::dynamic_pointer_cast<uml::GeneralOrdering>(anEObject);
 	
 							if (valueToAdd)
 							{
-								if(_toAfter->find(valueToAdd) == -1)
+								if(!(_toAfter->includes(valueToAdd)))
 								{
 									_toAfter->add(valueToAdd);
 								}
@@ -432,13 +432,13 @@ bool OccurrenceSpecificationImpl::eSet(int featureID,  const std::shared_ptr<Any
 					{
 						std::shared_ptr<Bag<uml::GeneralOrdering>> _toBefore = getToBefore();
 	
-						for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
+						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{
 							std::shared_ptr<uml::GeneralOrdering> valueToAdd = std::dynamic_pointer_cast<uml::GeneralOrdering>(anEObject);
 	
 							if (valueToAdd)
 							{
-								if(_toBefore->find(valueToAdd) == -1)
+								if(!(_toBefore->includes(valueToAdd)))
 								{
 									_toBefore->add(valueToAdd);
 								}

@@ -128,7 +128,7 @@ ActivityNodeActivationImpl& ActivityNodeActivationImpl::operator=(const Activity
 		m_heldTokens.reset(new Bag<fUML::Semantics::Activities::Token>());
 		
 		
-		for(const std::shared_ptr<fUML::Semantics::Activities::Token> heldTokensindexElem: *heldTokensList) 
+		for(const std::shared_ptr<fUML::Semantics::Activities::Token>& heldTokensindexElem: *heldTokensList) 
 		{
 			std::shared_ptr<fUML::Semantics::Activities::Token> temp = std::dynamic_pointer_cast<fUML::Semantics::Activities::Token>((heldTokensindexElem)->copy());
 			m_heldTokens->push_back(temp);
@@ -198,7 +198,7 @@ void ActivityNodeActivationImpl::addTokens(const std::shared_ptr<Bag<fUML::Seman
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
-	for(std::shared_ptr<fUML::Semantics::Activities::Token> token: *tokens)
+	for(const std::shared_ptr<fUML::Semantics::Activities::Token>& token: *tokens)
     {
         this->addToken(token);
     }
@@ -410,8 +410,8 @@ void ActivityNodeActivationImpl::sendOffers(const std::shared_ptr<Bag<fUML::Sema
 	if (tokens->size() > 0) 
 	{
         // *** Send all outgoing offers concurrently. ***
-		std::shared_ptr<Bag<fUML::Semantics::Activities::ActivityEdgeInstance> > outgoingEdgeList = this->getOutgoingEdges();
-        for(std::shared_ptr<fUML::Semantics::Activities::ActivityEdgeInstance> outgoingEdge : *outgoingEdgeList)
+	std::shared_ptr<Bag<fUML::Semantics::Activities::ActivityEdgeInstance> > outgoingEdgeList = this->getOutgoingEdges();
+        for(const std::shared_ptr<fUML::Semantics::Activities::ActivityEdgeInstance>& outgoingEdge : *outgoingEdgeList)
         {
 		auto target=outgoingEdge->getTarget().lock();
 		if(!target){
@@ -459,7 +459,7 @@ std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> ActivityNodeActivationI
 
 	DEBUG_INFO(((this->getNode() == nullptr) ? "Anonymous node" : (this->getNode()->eClass()->getName() + " '" + this->getNode()->getName() + "'")) << " has " << incomingEdgeList->size() << " incoming edges.")
 
-	for(std::shared_ptr<fUML::Semantics::Activities::ActivityEdgeInstance> incomingEdge : *incomingEdgeList)
+	for(const std::shared_ptr<fUML::Semantics::Activities::ActivityEdgeInstance>& incomingEdge : *incomingEdgeList)
 	{
 		auto vec = incomingEdge->takeOfferedTokens();
 		allTokens->insert(allTokens->end(), vec->begin(), vec->end());
@@ -884,13 +884,13 @@ bool ActivityNodeActivationImpl::eSet(int featureID,  const std::shared_ptr<Any>
 					{
 						std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> _heldTokens = getHeldTokens();
 	
-						for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
+						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{
 							std::shared_ptr<fUML::Semantics::Activities::Token> valueToAdd = std::dynamic_pointer_cast<fUML::Semantics::Activities::Token>(anEObject);
 	
 							if (valueToAdd)
 							{
-								if(_heldTokens->find(valueToAdd) == -1)
+								if(!(_heldTokens->includes(valueToAdd)))
 								{
 									_heldTokens->add(valueToAdd);
 								}
@@ -929,13 +929,13 @@ bool ActivityNodeActivationImpl::eSet(int featureID,  const std::shared_ptr<Any>
 					{
 						std::shared_ptr<Bag<fUML::Semantics::Activities::ActivityEdgeInstance>> _incomingEdges = getIncomingEdges();
 	
-						for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
+						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{
 							std::shared_ptr<fUML::Semantics::Activities::ActivityEdgeInstance> valueToAdd = std::dynamic_pointer_cast<fUML::Semantics::Activities::ActivityEdgeInstance>(anEObject);
 	
 							if (valueToAdd)
 							{
-								if(_incomingEdges->find(valueToAdd) == -1)
+								if(!(_incomingEdges->includes(valueToAdd)))
 								{
 									_incomingEdges->add(valueToAdd);
 								}
@@ -1005,13 +1005,13 @@ bool ActivityNodeActivationImpl::eSet(int featureID,  const std::shared_ptr<Any>
 					{
 						std::shared_ptr<Bag<fUML::Semantics::Activities::ActivityEdgeInstance>> _outgoingEdges = getOutgoingEdges();
 	
-						for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
+						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{
 							std::shared_ptr<fUML::Semantics::Activities::ActivityEdgeInstance> valueToAdd = std::dynamic_pointer_cast<fUML::Semantics::Activities::ActivityEdgeInstance>(anEObject);
 	
 							if (valueToAdd)
 							{
-								if(_outgoingEdges->find(valueToAdd) == -1)
+								if(!(_outgoingEdges->includes(valueToAdd)))
 								{
 									_outgoingEdges->add(valueToAdd);
 								}

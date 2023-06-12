@@ -151,7 +151,7 @@ InteractionUseImpl& InteractionUseImpl::operator=(const InteractionUseImpl & obj
 			std::cout << "Initialising value Subset: " << "m_actualGate - Subset<uml::Gate, uml::Element >(getOwnedElement())" << std::endl;
 		#endif
 		
-		for(const std::shared_ptr<uml::Gate> actualGateindexElem: *actualGateList) 
+		for(const std::shared_ptr<uml::Gate>& actualGateindexElem: *actualGateList) 
 		{
 			std::shared_ptr<uml::Gate> temp = std::dynamic_pointer_cast<uml::Gate>((actualGateindexElem)->copy());
 			m_actualGate->push_back(temp);
@@ -178,7 +178,7 @@ InteractionUseImpl& InteractionUseImpl::operator=(const InteractionUseImpl & obj
 			std::cout << "Initialising value Subset: " << "m_argument - Subset<uml::ValueSpecification, uml::Element >(getOwnedElement())" << std::endl;
 		#endif
 		
-		for(const std::shared_ptr<uml::ValueSpecification> argumentindexElem: *argumentList) 
+		for(const std::shared_ptr<uml::ValueSpecification>& argumentindexElem: *argumentList) 
 		{
 			std::shared_ptr<uml::ValueSpecification> temp = std::dynamic_pointer_cast<uml::ValueSpecification>((argumentindexElem)->copy());
 			m_argument->push_back(temp);
@@ -581,13 +581,13 @@ bool InteractionUseImpl::eSet(int featureID,  const std::shared_ptr<Any>& newVal
 					{
 						std::shared_ptr<Bag<uml::Gate>> _actualGate = getActualGate();
 	
-						for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
+						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{
 							std::shared_ptr<uml::Gate> valueToAdd = std::dynamic_pointer_cast<uml::Gate>(anEObject);
 	
 							if (valueToAdd)
 							{
-								if(_actualGate->find(valueToAdd) == -1)
+								if(!(_actualGate->includes(valueToAdd)))
 								{
 									_actualGate->add(valueToAdd);
 								}
@@ -626,13 +626,13 @@ bool InteractionUseImpl::eSet(int featureID,  const std::shared_ptr<Any>& newVal
 					{
 						std::shared_ptr<Bag<uml::ValueSpecification>> _argument = getArgument();
 	
-						for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
+						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{
 							std::shared_ptr<uml::ValueSpecification> valueToAdd = std::dynamic_pointer_cast<uml::ValueSpecification>(anEObject);
 	
 							if (valueToAdd)
 							{
-								if(_argument->find(valueToAdd) == -1)
+								if(!(_argument->includes(valueToAdd)))
 								{
 									_argument->add(valueToAdd);
 								}

@@ -194,7 +194,7 @@ PortImpl& PortImpl::operator=(const PortImpl & obj)
 			std::cout << "Initialising value Subset: " << "m_redefinedPort - Subset<uml::Port, uml::Property /*Subset does not reference a union*/ >(getRedefinedProperty())" << std::endl;
 		#endif
 		
-		for(const std::shared_ptr<uml::Port> redefinedPortindexElem: *redefinedPortList) 
+		for(const std::shared_ptr<uml::Port>& redefinedPortindexElem: *redefinedPortList) 
 		{
 			std::shared_ptr<uml::Port> temp = std::dynamic_pointer_cast<uml::Port>((redefinedPortindexElem)->copy());
 			m_redefinedPort->push_back(temp);
@@ -732,13 +732,13 @@ bool PortImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 					{
 						std::shared_ptr<Bag<uml::Port>> _redefinedPort = getRedefinedPort();
 	
-						for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
+						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{
 							std::shared_ptr<uml::Port> valueToAdd = std::dynamic_pointer_cast<uml::Port>(anEObject);
 	
 							if (valueToAdd)
 							{
-								if(_redefinedPort->find(valueToAdd) == -1)
+								if(!(_redefinedPort->includes(valueToAdd)))
 								{
 									_redefinedPort->add(valueToAdd);
 								}

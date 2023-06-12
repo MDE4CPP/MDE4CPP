@@ -105,11 +105,13 @@ void EcorePackageImpl::createPackageContents(std::shared_ptr<uml::Package> ecore
 	createPackageDataTypes(ecore, factory);
 	createPackageDependencies(ecore, factory);
 	createPackageEnumerationLiterals(ecore, factory);
+	createPackageEvents(ecore, factory);
 	createPackageValueSpecifications(ecore, factory);
 	createPackageInstanceSpecifications(ecore, factory);
 	createPackageInterfaces(ecore, factory);
 	createPackageInterfaceRealizations(ecore, factory);
 	createPackagePrimitiveTypes(ecore, factory);
+	createPackageSignals(ecore, factory);
 	createPackageStereotypes(ecore, factory);
 }
 
@@ -694,6 +696,13 @@ void EcorePackageImpl::createPackageClasses(std::shared_ptr<uml::Package> ecore,
 
 }
 
+void EcorePackageImpl::createPackageSignals(std::shared_ptr<uml::Package> ecore, std::shared_ptr<uml::umlFactory> factory)
+{
+	std::shared_ptr<uml::Constraint> con = nullptr;
+	std::shared_ptr<uml::OpaqueExpression> oe = nullptr;
+
+}
+
 void EcorePackageImpl::createPackageDataTypes(std::shared_ptr<uml::Package> ecore, std::shared_ptr<uml::umlFactory> factory)
 {
 }
@@ -703,6 +712,10 @@ void EcorePackageImpl::createPackageDependencies(std::shared_ptr<uml::Package> e
 }
 
 void EcorePackageImpl::createPackageEnumerationLiterals(std::shared_ptr<uml::Package> ecore, std::shared_ptr<uml::umlFactory> factory)
+{
+}
+
+void EcorePackageImpl::createPackageEvents(std::shared_ptr<uml::Package> ecore, std::shared_ptr<uml::umlFactory> factory)
 {
 }
 
@@ -1159,10 +1172,12 @@ void EcorePackageImpl::initializePackageContents(std::shared_ptr<uml::Package> e
 	initializePackageClasses();
 	initializePackageDataTypes();
 	initializePackageDependencies();
+	initializePackageEvents();
 	initializePackageInstanceSpecifications();
 	initializePackageInterfaceRealizations();
 	initializePackageInterfaces();
 	initializePackageNestedPackages();
+	initializePackageSignals();
 	initializePackageStereotypes();
 	initializePackageValueSpecifications();
 	
@@ -3276,6 +3291,16 @@ void EcorePackageImpl::initializePackageClasses()
 
 }
 
+void EcorePackageImpl::initializePackageSignals()
+{
+	std::shared_ptr<uml::Generalization> gen = nullptr;
+
+
+//-------------------------------------------
+//Opaque Behaviors
+
+}
+
 void EcorePackageImpl::initializePackageDataTypes()
 {
 	std::shared_ptr<uml::Generalization> gen = nullptr;
@@ -3283,6 +3308,10 @@ void EcorePackageImpl::initializePackageDataTypes()
 }
 
 void EcorePackageImpl::initializePackageDependencies()
+{
+}
+
+void EcorePackageImpl::initializePackageEvents()
 {
 }
 
@@ -3624,1223 +3653,1223 @@ void EcorePackageImpl::initializePackageValueSpecifications()
 	ecore_ETypedElement_upperBound_lowerValue_LiteralInteger_Ecore_ETypedElement_upperBound->setValue(0);
 }
 
-std::shared_ptr<uml::Association> EcorePackageImpl::get_A_Ecore_EAnnotation_eAnnotations_Ecore_EModelElement_eModelElement()
+const std::shared_ptr<uml::Association>& EcorePackageImpl::get_A_Ecore_EAnnotation_eAnnotations_Ecore_EModelElement_eModelElement()
 {
 	return a_Ecore_EAnnotation_eAnnotations_Ecore_EModelElement_eModelElement;
 }
-std::shared_ptr<uml::Association> EcorePackageImpl::get_A_Ecore_EAttribute_eAllAttributes_eClass()
+const std::shared_ptr<uml::Association>& EcorePackageImpl::get_A_Ecore_EAttribute_eAllAttributes_eClass()
 {
 	return a_Ecore_EAttribute_eAllAttributes_eClass;
 }
-std::shared_ptr<uml::Property> EcorePackageImpl::get_A_Ecore_EAttribute_eAllAttributes_eClass_eClass()
+const std::shared_ptr<uml::Property>& EcorePackageImpl::get_A_Ecore_EAttribute_eAllAttributes_eClass_eClass()
 {
 	return a_Ecore_EAttribute_eAllAttributes_eClass_eClass;
 }
-std::shared_ptr<uml::Association> EcorePackageImpl::get_A_Ecore_EAttribute_eAttributes_eClass()
+const std::shared_ptr<uml::Association>& EcorePackageImpl::get_A_Ecore_EAttribute_eAttributes_eClass()
 {
 	return a_Ecore_EAttribute_eAttributes_eClass;
 }
-std::shared_ptr<uml::Property> EcorePackageImpl::get_A_Ecore_EAttribute_eAttributes_eClass_eClass()
+const std::shared_ptr<uml::Property>& EcorePackageImpl::get_A_Ecore_EAttribute_eAttributes_eClass_eClass()
 {
 	return a_Ecore_EAttribute_eAttributes_eClass_eClass;
 }
-std::shared_ptr<uml::Association> EcorePackageImpl::get_A_Ecore_EAttribute_eIDAttribute_eClass()
+const std::shared_ptr<uml::Association>& EcorePackageImpl::get_A_Ecore_EAttribute_eIDAttribute_eClass()
 {
 	return a_Ecore_EAttribute_eIDAttribute_eClass;
 }
-std::shared_ptr<uml::Property> EcorePackageImpl::get_A_Ecore_EAttribute_eIDAttribute_eClass_eClass()
+const std::shared_ptr<uml::Property>& EcorePackageImpl::get_A_Ecore_EAttribute_eIDAttribute_eClass_eClass()
 {
 	return a_Ecore_EAttribute_eIDAttribute_eClass_eClass;
 }
-std::shared_ptr<uml::Association> EcorePackageImpl::get_A_Ecore_EAttribute_eKeys_eReference()
+const std::shared_ptr<uml::Association>& EcorePackageImpl::get_A_Ecore_EAttribute_eKeys_eReference()
 {
 	return a_Ecore_EAttribute_eKeys_eReference;
 }
-std::shared_ptr<uml::Property> EcorePackageImpl::get_A_Ecore_EAttribute_eKeys_eReference_eReference()
+const std::shared_ptr<uml::Property>& EcorePackageImpl::get_A_Ecore_EAttribute_eKeys_eReference_eReference()
 {
 	return a_Ecore_EAttribute_eKeys_eReference_eReference;
 }
-std::shared_ptr<uml::Association> EcorePackageImpl::get_A_Ecore_EClass_eAllSuperTypes_eClass()
+const std::shared_ptr<uml::Association>& EcorePackageImpl::get_A_Ecore_EClass_eAllSuperTypes_eClass()
 {
 	return a_Ecore_EClass_eAllSuperTypes_eClass;
 }
-std::shared_ptr<uml::Property> EcorePackageImpl::get_A_Ecore_EClass_eAllSuperTypes_eClass_eClass()
+const std::shared_ptr<uml::Property>& EcorePackageImpl::get_A_Ecore_EClass_eAllSuperTypes_eClass_eClass()
 {
 	return a_Ecore_EClass_eAllSuperTypes_eClass_eClass;
 }
-std::shared_ptr<uml::Association> EcorePackageImpl::get_A_Ecore_EClass_eReferenceType_eReference()
+const std::shared_ptr<uml::Association>& EcorePackageImpl::get_A_Ecore_EClass_eReferenceType_eReference()
 {
 	return a_Ecore_EClass_eReferenceType_eReference;
 }
-std::shared_ptr<uml::Property> EcorePackageImpl::get_A_Ecore_EClass_eReferenceType_eReference_eReference()
+const std::shared_ptr<uml::Property>& EcorePackageImpl::get_A_Ecore_EClass_eReferenceType_eReference_eReference()
 {
 	return a_Ecore_EClass_eReferenceType_eReference_eReference;
 }
-std::shared_ptr<uml::Association> EcorePackageImpl::get_A_Ecore_EClass_eSuperTypes_eClass()
+const std::shared_ptr<uml::Association>& EcorePackageImpl::get_A_Ecore_EClass_eSuperTypes_eClass()
 {
 	return a_Ecore_EClass_eSuperTypes_eClass;
 }
-std::shared_ptr<uml::Property> EcorePackageImpl::get_A_Ecore_EClass_eSuperTypes_eClass_eClass()
+const std::shared_ptr<uml::Property>& EcorePackageImpl::get_A_Ecore_EClass_eSuperTypes_eClass_eClass()
 {
 	return a_Ecore_EClass_eSuperTypes_eClass_eClass;
 }
-std::shared_ptr<uml::Association> EcorePackageImpl::get_A_Ecore_EClassifier_eClassifier_eGenericType()
+const std::shared_ptr<uml::Association>& EcorePackageImpl::get_A_Ecore_EClassifier_eClassifier_eGenericType()
 {
 	return a_Ecore_EClassifier_eClassifier_eGenericType;
 }
-std::shared_ptr<uml::Property> EcorePackageImpl::get_A_Ecore_EClassifier_eClassifier_eGenericType_eGenericType()
+const std::shared_ptr<uml::Property>& EcorePackageImpl::get_A_Ecore_EClassifier_eClassifier_eGenericType_eGenericType()
 {
 	return a_Ecore_EClassifier_eClassifier_eGenericType_eGenericType;
 }
-std::shared_ptr<uml::Association> EcorePackageImpl::get_A_Ecore_EClassifier_eClassifiers_Ecore_EPackage_ePackage()
+const std::shared_ptr<uml::Association>& EcorePackageImpl::get_A_Ecore_EClassifier_eClassifiers_Ecore_EPackage_ePackage()
 {
 	return a_Ecore_EClassifier_eClassifiers_Ecore_EPackage_ePackage;
 }
-std::shared_ptr<uml::Association> EcorePackageImpl::get_A_Ecore_EClassifier_eExceptions_eOperation()
+const std::shared_ptr<uml::Association>& EcorePackageImpl::get_A_Ecore_EClassifier_eExceptions_eOperation()
 {
 	return a_Ecore_EClassifier_eExceptions_eOperation;
 }
-std::shared_ptr<uml::Property> EcorePackageImpl::get_A_Ecore_EClassifier_eExceptions_eOperation_eOperation()
+const std::shared_ptr<uml::Property>& EcorePackageImpl::get_A_Ecore_EClassifier_eExceptions_eOperation_eOperation()
 {
 	return a_Ecore_EClassifier_eExceptions_eOperation_eOperation;
 }
-std::shared_ptr<uml::Association> EcorePackageImpl::get_A_Ecore_EClassifier_eRawType_eGenericType()
+const std::shared_ptr<uml::Association>& EcorePackageImpl::get_A_Ecore_EClassifier_eRawType_eGenericType()
 {
 	return a_Ecore_EClassifier_eRawType_eGenericType;
 }
-std::shared_ptr<uml::Property> EcorePackageImpl::get_A_Ecore_EClassifier_eRawType_eGenericType_eGenericType()
+const std::shared_ptr<uml::Property>& EcorePackageImpl::get_A_Ecore_EClassifier_eRawType_eGenericType_eGenericType()
 {
 	return a_Ecore_EClassifier_eRawType_eGenericType_eGenericType;
 }
-std::shared_ptr<uml::Association> EcorePackageImpl::get_A_Ecore_EClassifier_eType_eTypedElement()
+const std::shared_ptr<uml::Association>& EcorePackageImpl::get_A_Ecore_EClassifier_eType_eTypedElement()
 {
 	return a_Ecore_EClassifier_eType_eTypedElement;
 }
-std::shared_ptr<uml::Property> EcorePackageImpl::get_A_Ecore_EClassifier_eType_eTypedElement_eTypedElement()
+const std::shared_ptr<uml::Property>& EcorePackageImpl::get_A_Ecore_EClassifier_eType_eTypedElement_eTypedElement()
 {
 	return a_Ecore_EClassifier_eType_eTypedElement_eTypedElement;
 }
-std::shared_ptr<uml::Association> EcorePackageImpl::get_A_Ecore_EDataType_eAttributeType_eAttribute()
+const std::shared_ptr<uml::Association>& EcorePackageImpl::get_A_Ecore_EDataType_eAttributeType_eAttribute()
 {
 	return a_Ecore_EDataType_eAttributeType_eAttribute;
 }
-std::shared_ptr<uml::Property> EcorePackageImpl::get_A_Ecore_EDataType_eAttributeType_eAttribute_eAttribute()
+const std::shared_ptr<uml::Property>& EcorePackageImpl::get_A_Ecore_EDataType_eAttributeType_eAttribute_eAttribute()
 {
 	return a_Ecore_EDataType_eAttributeType_eAttribute_eAttribute;
 }
-std::shared_ptr<uml::Association> EcorePackageImpl::get_A_Ecore_EEnumLiteral_eLiterals_Ecore_EEnum_eEnum()
+const std::shared_ptr<uml::Association>& EcorePackageImpl::get_A_Ecore_EEnumLiteral_eLiterals_Ecore_EEnum_eEnum()
 {
 	return a_Ecore_EEnumLiteral_eLiterals_Ecore_EEnum_eEnum;
 }
-std::shared_ptr<uml::Association> EcorePackageImpl::get_A_Ecore_EGenericType_eAllGenericSuperTypes_eClass()
+const std::shared_ptr<uml::Association>& EcorePackageImpl::get_A_Ecore_EGenericType_eAllGenericSuperTypes_eClass()
 {
 	return a_Ecore_EGenericType_eAllGenericSuperTypes_eClass;
 }
-std::shared_ptr<uml::Property> EcorePackageImpl::get_A_Ecore_EGenericType_eAllGenericSuperTypes_eClass_eClass()
+const std::shared_ptr<uml::Property>& EcorePackageImpl::get_A_Ecore_EGenericType_eAllGenericSuperTypes_eClass_eClass()
 {
 	return a_Ecore_EGenericType_eAllGenericSuperTypes_eClass_eClass;
 }
-std::shared_ptr<uml::Association> EcorePackageImpl::get_A_Ecore_EGenericType_eBounds_eTypeParameter()
+const std::shared_ptr<uml::Association>& EcorePackageImpl::get_A_Ecore_EGenericType_eBounds_eTypeParameter()
 {
 	return a_Ecore_EGenericType_eBounds_eTypeParameter;
 }
-std::shared_ptr<uml::Property> EcorePackageImpl::get_A_Ecore_EGenericType_eBounds_eTypeParameter_eTypeParameter()
+const std::shared_ptr<uml::Property>& EcorePackageImpl::get_A_Ecore_EGenericType_eBounds_eTypeParameter_eTypeParameter()
 {
 	return a_Ecore_EGenericType_eBounds_eTypeParameter_eTypeParameter;
 }
-std::shared_ptr<uml::Association> EcorePackageImpl::get_A_Ecore_EGenericType_eGenericExceptions_eOperation()
+const std::shared_ptr<uml::Association>& EcorePackageImpl::get_A_Ecore_EGenericType_eGenericExceptions_eOperation()
 {
 	return a_Ecore_EGenericType_eGenericExceptions_eOperation;
 }
-std::shared_ptr<uml::Property> EcorePackageImpl::get_A_Ecore_EGenericType_eGenericExceptions_eOperation_eOperation()
+const std::shared_ptr<uml::Property>& EcorePackageImpl::get_A_Ecore_EGenericType_eGenericExceptions_eOperation_eOperation()
 {
 	return a_Ecore_EGenericType_eGenericExceptions_eOperation_eOperation;
 }
-std::shared_ptr<uml::Association> EcorePackageImpl::get_A_Ecore_EGenericType_eGenericSuperTypes_eClass()
+const std::shared_ptr<uml::Association>& EcorePackageImpl::get_A_Ecore_EGenericType_eGenericSuperTypes_eClass()
 {
 	return a_Ecore_EGenericType_eGenericSuperTypes_eClass;
 }
-std::shared_ptr<uml::Property> EcorePackageImpl::get_A_Ecore_EGenericType_eGenericSuperTypes_eClass_eClass()
+const std::shared_ptr<uml::Property>& EcorePackageImpl::get_A_Ecore_EGenericType_eGenericSuperTypes_eClass_eClass()
 {
 	return a_Ecore_EGenericType_eGenericSuperTypes_eClass_eClass;
 }
-std::shared_ptr<uml::Association> EcorePackageImpl::get_A_Ecore_EGenericType_eGenericType_eTypedElement()
+const std::shared_ptr<uml::Association>& EcorePackageImpl::get_A_Ecore_EGenericType_eGenericType_eTypedElement()
 {
 	return a_Ecore_EGenericType_eGenericType_eTypedElement;
 }
-std::shared_ptr<uml::Property> EcorePackageImpl::get_A_Ecore_EGenericType_eGenericType_eTypedElement_eTypedElement()
+const std::shared_ptr<uml::Property>& EcorePackageImpl::get_A_Ecore_EGenericType_eGenericType_eTypedElement_eTypedElement()
 {
 	return a_Ecore_EGenericType_eGenericType_eTypedElement_eTypedElement;
 }
-std::shared_ptr<uml::Association> EcorePackageImpl::get_A_Ecore_EGenericType_eLowerBound_eGenericType()
+const std::shared_ptr<uml::Association>& EcorePackageImpl::get_A_Ecore_EGenericType_eLowerBound_eGenericType()
 {
 	return a_Ecore_EGenericType_eLowerBound_eGenericType;
 }
-std::shared_ptr<uml::Property> EcorePackageImpl::get_A_Ecore_EGenericType_eLowerBound_eGenericType_eGenericType()
+const std::shared_ptr<uml::Property>& EcorePackageImpl::get_A_Ecore_EGenericType_eLowerBound_eGenericType_eGenericType()
 {
 	return a_Ecore_EGenericType_eLowerBound_eGenericType_eGenericType;
 }
-std::shared_ptr<uml::Association> EcorePackageImpl::get_A_Ecore_EGenericType_eTypeArguments_eGenericType()
+const std::shared_ptr<uml::Association>& EcorePackageImpl::get_A_Ecore_EGenericType_eTypeArguments_eGenericType()
 {
 	return a_Ecore_EGenericType_eTypeArguments_eGenericType;
 }
-std::shared_ptr<uml::Property> EcorePackageImpl::get_A_Ecore_EGenericType_eTypeArguments_eGenericType_eGenericType()
+const std::shared_ptr<uml::Property>& EcorePackageImpl::get_A_Ecore_EGenericType_eTypeArguments_eGenericType_eGenericType()
 {
 	return a_Ecore_EGenericType_eTypeArguments_eGenericType_eGenericType;
 }
-std::shared_ptr<uml::Association> EcorePackageImpl::get_A_Ecore_EGenericType_eUpperBound_eGenericType()
+const std::shared_ptr<uml::Association>& EcorePackageImpl::get_A_Ecore_EGenericType_eUpperBound_eGenericType()
 {
 	return a_Ecore_EGenericType_eUpperBound_eGenericType;
 }
-std::shared_ptr<uml::Property> EcorePackageImpl::get_A_Ecore_EGenericType_eUpperBound_eGenericType_eGenericType()
+const std::shared_ptr<uml::Property>& EcorePackageImpl::get_A_Ecore_EGenericType_eUpperBound_eGenericType_eGenericType()
 {
 	return a_Ecore_EGenericType_eUpperBound_eGenericType_eGenericType;
 }
-std::shared_ptr<uml::Association> EcorePackageImpl::get_A_Ecore_EObject_contents_eAnnotation()
+const std::shared_ptr<uml::Association>& EcorePackageImpl::get_A_Ecore_EObject_contents_eAnnotation()
 {
 	return a_Ecore_EObject_contents_eAnnotation;
 }
-std::shared_ptr<uml::Property> EcorePackageImpl::get_A_Ecore_EObject_contents_eAnnotation_eAnnotation()
+const std::shared_ptr<uml::Property>& EcorePackageImpl::get_A_Ecore_EObject_contents_eAnnotation_eAnnotation()
 {
 	return a_Ecore_EObject_contents_eAnnotation_eAnnotation;
 }
-std::shared_ptr<uml::Association> EcorePackageImpl::get_A_Ecore_EObject_references_eAnnotation()
+const std::shared_ptr<uml::Association>& EcorePackageImpl::get_A_Ecore_EObject_references_eAnnotation()
 {
 	return a_Ecore_EObject_references_eAnnotation;
 }
-std::shared_ptr<uml::Property> EcorePackageImpl::get_A_Ecore_EObject_references_eAnnotation_eAnnotation()
+const std::shared_ptr<uml::Property>& EcorePackageImpl::get_A_Ecore_EObject_references_eAnnotation_eAnnotation()
 {
 	return a_Ecore_EObject_references_eAnnotation_eAnnotation;
 }
-std::shared_ptr<uml::Association> EcorePackageImpl::get_A_Ecore_EOperation_eAllOperations_eClass()
+const std::shared_ptr<uml::Association>& EcorePackageImpl::get_A_Ecore_EOperation_eAllOperations_eClass()
 {
 	return a_Ecore_EOperation_eAllOperations_eClass;
 }
-std::shared_ptr<uml::Property> EcorePackageImpl::get_A_Ecore_EOperation_eAllOperations_eClass_eClass()
+const std::shared_ptr<uml::Property>& EcorePackageImpl::get_A_Ecore_EOperation_eAllOperations_eClass_eClass()
 {
 	return a_Ecore_EOperation_eAllOperations_eClass_eClass;
 }
-std::shared_ptr<uml::Association> EcorePackageImpl::get_A_Ecore_EOperation_eOperations_Ecore_EClass_eContainingClass()
+const std::shared_ptr<uml::Association>& EcorePackageImpl::get_A_Ecore_EOperation_eOperations_Ecore_EClass_eContainingClass()
 {
 	return a_Ecore_EOperation_eOperations_Ecore_EClass_eContainingClass;
 }
-std::shared_ptr<uml::Association> EcorePackageImpl::get_A_Ecore_EPackage_ePackage_Ecore_EFactory_eFactoryInstance()
+const std::shared_ptr<uml::Association>& EcorePackageImpl::get_A_Ecore_EPackage_ePackage_Ecore_EFactory_eFactoryInstance()
 {
 	return a_Ecore_EPackage_ePackage_Ecore_EFactory_eFactoryInstance;
 }
-std::shared_ptr<uml::Association> EcorePackageImpl::get_A_Ecore_EPackage_eSubpackages_Ecore_EPackage_eSuperPackage()
+const std::shared_ptr<uml::Association>& EcorePackageImpl::get_A_Ecore_EPackage_eSubpackages_Ecore_EPackage_eSuperPackage()
 {
 	return a_Ecore_EPackage_eSubpackages_Ecore_EPackage_eSuperPackage;
 }
-std::shared_ptr<uml::Association> EcorePackageImpl::get_A_Ecore_EParameter_eParameters_Ecore_EOperation_eOperation()
+const std::shared_ptr<uml::Association>& EcorePackageImpl::get_A_Ecore_EParameter_eParameters_Ecore_EOperation_eOperation()
 {
 	return a_Ecore_EParameter_eParameters_Ecore_EOperation_eOperation;
 }
-std::shared_ptr<uml::Association> EcorePackageImpl::get_A_Ecore_EReference_eAllContainments_eClass()
+const std::shared_ptr<uml::Association>& EcorePackageImpl::get_A_Ecore_EReference_eAllContainments_eClass()
 {
 	return a_Ecore_EReference_eAllContainments_eClass;
 }
-std::shared_ptr<uml::Property> EcorePackageImpl::get_A_Ecore_EReference_eAllContainments_eClass_eClass()
+const std::shared_ptr<uml::Property>& EcorePackageImpl::get_A_Ecore_EReference_eAllContainments_eClass_eClass()
 {
 	return a_Ecore_EReference_eAllContainments_eClass_eClass;
 }
-std::shared_ptr<uml::Association> EcorePackageImpl::get_A_Ecore_EReference_eAllReferences_eClass()
+const std::shared_ptr<uml::Association>& EcorePackageImpl::get_A_Ecore_EReference_eAllReferences_eClass()
 {
 	return a_Ecore_EReference_eAllReferences_eClass;
 }
-std::shared_ptr<uml::Property> EcorePackageImpl::get_A_Ecore_EReference_eAllReferences_eClass_eClass()
+const std::shared_ptr<uml::Property>& EcorePackageImpl::get_A_Ecore_EReference_eAllReferences_eClass_eClass()
 {
 	return a_Ecore_EReference_eAllReferences_eClass_eClass;
 }
-std::shared_ptr<uml::Association> EcorePackageImpl::get_A_Ecore_EReference_eOpposite_eReference()
+const std::shared_ptr<uml::Association>& EcorePackageImpl::get_A_Ecore_EReference_eOpposite_eReference()
 {
 	return a_Ecore_EReference_eOpposite_eReference;
 }
-std::shared_ptr<uml::Property> EcorePackageImpl::get_A_Ecore_EReference_eOpposite_eReference_eReference()
+const std::shared_ptr<uml::Property>& EcorePackageImpl::get_A_Ecore_EReference_eOpposite_eReference_eReference()
 {
 	return a_Ecore_EReference_eOpposite_eReference_eReference;
 }
-std::shared_ptr<uml::Association> EcorePackageImpl::get_A_Ecore_EReference_eReferences_eClass()
+const std::shared_ptr<uml::Association>& EcorePackageImpl::get_A_Ecore_EReference_eReferences_eClass()
 {
 	return a_Ecore_EReference_eReferences_eClass;
 }
-std::shared_ptr<uml::Property> EcorePackageImpl::get_A_Ecore_EReference_eReferences_eClass_eClass()
+const std::shared_ptr<uml::Property>& EcorePackageImpl::get_A_Ecore_EReference_eReferences_eClass_eClass()
 {
 	return a_Ecore_EReference_eReferences_eClass_eClass;
 }
-std::shared_ptr<uml::Association> EcorePackageImpl::get_A_Ecore_EStringToStringMapEntry_details_eAnnotation()
+const std::shared_ptr<uml::Association>& EcorePackageImpl::get_A_Ecore_EStringToStringMapEntry_details_eAnnotation()
 {
 	return a_Ecore_EStringToStringMapEntry_details_eAnnotation;
 }
-std::shared_ptr<uml::Property> EcorePackageImpl::get_A_Ecore_EStringToStringMapEntry_details_eAnnotation_eAnnotation()
+const std::shared_ptr<uml::Property>& EcorePackageImpl::get_A_Ecore_EStringToStringMapEntry_details_eAnnotation_eAnnotation()
 {
 	return a_Ecore_EStringToStringMapEntry_details_eAnnotation_eAnnotation;
 }
-std::shared_ptr<uml::Association> EcorePackageImpl::get_A_Ecore_EStructuralFeature_eAllStructuralFeatures_eClass()
+const std::shared_ptr<uml::Association>& EcorePackageImpl::get_A_Ecore_EStructuralFeature_eAllStructuralFeatures_eClass()
 {
 	return a_Ecore_EStructuralFeature_eAllStructuralFeatures_eClass;
 }
-std::shared_ptr<uml::Property> EcorePackageImpl::get_A_Ecore_EStructuralFeature_eAllStructuralFeatures_eClass_eClass()
+const std::shared_ptr<uml::Property>& EcorePackageImpl::get_A_Ecore_EStructuralFeature_eAllStructuralFeatures_eClass_eClass()
 {
 	return a_Ecore_EStructuralFeature_eAllStructuralFeatures_eClass_eClass;
 }
-std::shared_ptr<uml::Association> EcorePackageImpl::get_A_Ecore_EStructuralFeature_eStructuralFeatures_Ecore_EClass_eContainingClass()
+const std::shared_ptr<uml::Association>& EcorePackageImpl::get_A_Ecore_EStructuralFeature_eStructuralFeatures_Ecore_EClass_eContainingClass()
 {
 	return a_Ecore_EStructuralFeature_eStructuralFeatures_Ecore_EClass_eContainingClass;
 }
-std::shared_ptr<uml::Association> EcorePackageImpl::get_A_Ecore_ETypeParameter_eTypeParameter_eGenericType()
+const std::shared_ptr<uml::Association>& EcorePackageImpl::get_A_Ecore_ETypeParameter_eTypeParameter_eGenericType()
 {
 	return a_Ecore_ETypeParameter_eTypeParameter_eGenericType;
 }
-std::shared_ptr<uml::Property> EcorePackageImpl::get_A_Ecore_ETypeParameter_eTypeParameter_eGenericType_eGenericType()
+const std::shared_ptr<uml::Property>& EcorePackageImpl::get_A_Ecore_ETypeParameter_eTypeParameter_eGenericType_eGenericType()
 {
 	return a_Ecore_ETypeParameter_eTypeParameter_eGenericType_eGenericType;
 }
-std::shared_ptr<uml::Association> EcorePackageImpl::get_A_Ecore_ETypeParameter_eTypeParameters_eClassifier()
+const std::shared_ptr<uml::Association>& EcorePackageImpl::get_A_Ecore_ETypeParameter_eTypeParameters_eClassifier()
 {
 	return a_Ecore_ETypeParameter_eTypeParameters_eClassifier;
 }
-std::shared_ptr<uml::Property> EcorePackageImpl::get_A_Ecore_ETypeParameter_eTypeParameters_eClassifier_eClassifier()
+const std::shared_ptr<uml::Property>& EcorePackageImpl::get_A_Ecore_ETypeParameter_eTypeParameters_eClassifier_eClassifier()
 {
 	return a_Ecore_ETypeParameter_eTypeParameters_eClassifier_eClassifier;
 }
-std::shared_ptr<uml::Association> EcorePackageImpl::get_A_Ecore_ETypeParameter_eTypeParameters_eOperation()
+const std::shared_ptr<uml::Association>& EcorePackageImpl::get_A_Ecore_ETypeParameter_eTypeParameters_eOperation()
 {
 	return a_Ecore_ETypeParameter_eTypeParameters_eOperation;
 }
-std::shared_ptr<uml::Property> EcorePackageImpl::get_A_Ecore_ETypeParameter_eTypeParameters_eOperation_eOperation()
+const std::shared_ptr<uml::Property>& EcorePackageImpl::get_A_Ecore_ETypeParameter_eTypeParameters_eOperation_eOperation()
 {
 	return a_Ecore_ETypeParameter_eTypeParameters_eOperation_eOperation;
 }
-std::shared_ptr<uml::Class> EcorePackageImpl::get_Ecore_EAnnotation()
+const std::shared_ptr<uml::Class>& EcorePackageImpl::get_Ecore_EAnnotation()
 {
 	return ecore_EAnnotation;
 }
-std::shared_ptr<uml::Property> EcorePackageImpl::get_Ecore_EAnnotation_contents()
+const std::shared_ptr<uml::Property>& EcorePackageImpl::get_Ecore_EAnnotation_contents()
 {
 	return ecore_EAnnotation_contents;
 }
-std::shared_ptr<uml::Property> EcorePackageImpl::get_Ecore_EAnnotation_details()
+const std::shared_ptr<uml::Property>& EcorePackageImpl::get_Ecore_EAnnotation_details()
 {
 	return ecore_EAnnotation_details;
 }
-std::shared_ptr<uml::Property> EcorePackageImpl::get_Ecore_EAnnotation_eModelElement()
+const std::shared_ptr<uml::Property>& EcorePackageImpl::get_Ecore_EAnnotation_eModelElement()
 {
 	return ecore_EAnnotation_eModelElement;
 }
-std::shared_ptr<uml::Property> EcorePackageImpl::get_Ecore_EAnnotation_references()
+const std::shared_ptr<uml::Property>& EcorePackageImpl::get_Ecore_EAnnotation_references()
 {
 	return ecore_EAnnotation_references;
 }
-std::shared_ptr<uml::Property> EcorePackageImpl::get_Ecore_EAnnotation_source()
+const std::shared_ptr<uml::Property>& EcorePackageImpl::get_Ecore_EAnnotation_source()
 {
 	return ecore_EAnnotation_source;
 }
-std::shared_ptr<uml::Class> EcorePackageImpl::get_Ecore_EAttribute()
+const std::shared_ptr<uml::Class>& EcorePackageImpl::get_Ecore_EAttribute()
 {
 	return ecore_EAttribute;
 }
-std::shared_ptr<uml::Property> EcorePackageImpl::get_Ecore_EAttribute_eAttributeType()
+const std::shared_ptr<uml::Property>& EcorePackageImpl::get_Ecore_EAttribute_eAttributeType()
 {
 	return ecore_EAttribute_eAttributeType;
 }
-std::shared_ptr<uml::Property> EcorePackageImpl::get_Ecore_EAttribute_id()
+const std::shared_ptr<uml::Property>& EcorePackageImpl::get_Ecore_EAttribute_id()
 {
 	return ecore_EAttribute_id;
 }
-std::shared_ptr<uml::PrimitiveType> EcorePackageImpl::get_Ecore_EBigDecimal()
+const std::shared_ptr<uml::PrimitiveType>& EcorePackageImpl::get_Ecore_EBigDecimal()
 {
 	return ecore_EBigDecimal;
 }
-std::shared_ptr<uml::PrimitiveType> EcorePackageImpl::get_Ecore_EBigInteger()
+const std::shared_ptr<uml::PrimitiveType>& EcorePackageImpl::get_Ecore_EBigInteger()
 {
 	return ecore_EBigInteger;
 }
-std::shared_ptr<uml::PrimitiveType> EcorePackageImpl::get_Ecore_EBoolean()
+const std::shared_ptr<uml::PrimitiveType>& EcorePackageImpl::get_Ecore_EBoolean()
 {
 	return ecore_EBoolean;
 }
-std::shared_ptr<uml::PrimitiveType> EcorePackageImpl::get_Ecore_EBooleanObject()
+const std::shared_ptr<uml::PrimitiveType>& EcorePackageImpl::get_Ecore_EBooleanObject()
 {
 	return ecore_EBooleanObject;
 }
-std::shared_ptr<uml::PrimitiveType> EcorePackageImpl::get_Ecore_EByte()
+const std::shared_ptr<uml::PrimitiveType>& EcorePackageImpl::get_Ecore_EByte()
 {
 	return ecore_EByte;
 }
-std::shared_ptr<uml::PrimitiveType> EcorePackageImpl::get_Ecore_EByteArray()
+const std::shared_ptr<uml::PrimitiveType>& EcorePackageImpl::get_Ecore_EByteArray()
 {
 	return ecore_EByteArray;
 }
-std::shared_ptr<uml::PrimitiveType> EcorePackageImpl::get_Ecore_EByteObject()
+const std::shared_ptr<uml::PrimitiveType>& EcorePackageImpl::get_Ecore_EByteObject()
 {
 	return ecore_EByteObject;
 }
-std::shared_ptr<uml::PrimitiveType> EcorePackageImpl::get_Ecore_EChar()
+const std::shared_ptr<uml::PrimitiveType>& EcorePackageImpl::get_Ecore_EChar()
 {
 	return ecore_EChar;
 }
-std::shared_ptr<uml::PrimitiveType> EcorePackageImpl::get_Ecore_ECharacterObject()
+const std::shared_ptr<uml::PrimitiveType>& EcorePackageImpl::get_Ecore_ECharacterObject()
 {
 	return ecore_ECharacterObject;
 }
-std::shared_ptr<uml::Class> EcorePackageImpl::get_Ecore_EClass()
+const std::shared_ptr<uml::Class>& EcorePackageImpl::get_Ecore_EClass()
 {
 	return ecore_EClass;
 }
-std::shared_ptr<uml::Property> EcorePackageImpl::get_Ecore_EClass_abstract()
+const std::shared_ptr<uml::Property>& EcorePackageImpl::get_Ecore_EClass_abstract()
 {
 	return ecore_EClass_abstract;
 }
-std::shared_ptr<uml::Property> EcorePackageImpl::get_Ecore_EClass_eAllAttributes()
+const std::shared_ptr<uml::Property>& EcorePackageImpl::get_Ecore_EClass_eAllAttributes()
 {
 	return ecore_EClass_eAllAttributes;
 }
-std::shared_ptr<uml::Property> EcorePackageImpl::get_Ecore_EClass_eAllContainments()
+const std::shared_ptr<uml::Property>& EcorePackageImpl::get_Ecore_EClass_eAllContainments()
 {
 	return ecore_EClass_eAllContainments;
 }
-std::shared_ptr<uml::Property> EcorePackageImpl::get_Ecore_EClass_eAllGenericSuperTypes()
+const std::shared_ptr<uml::Property>& EcorePackageImpl::get_Ecore_EClass_eAllGenericSuperTypes()
 {
 	return ecore_EClass_eAllGenericSuperTypes;
 }
-std::shared_ptr<uml::Property> EcorePackageImpl::get_Ecore_EClass_eAllOperations()
+const std::shared_ptr<uml::Property>& EcorePackageImpl::get_Ecore_EClass_eAllOperations()
 {
 	return ecore_EClass_eAllOperations;
 }
-std::shared_ptr<uml::Property> EcorePackageImpl::get_Ecore_EClass_eAllReferences()
+const std::shared_ptr<uml::Property>& EcorePackageImpl::get_Ecore_EClass_eAllReferences()
 {
 	return ecore_EClass_eAllReferences;
 }
-std::shared_ptr<uml::Property> EcorePackageImpl::get_Ecore_EClass_eAllStructuralFeatures()
+const std::shared_ptr<uml::Property>& EcorePackageImpl::get_Ecore_EClass_eAllStructuralFeatures()
 {
 	return ecore_EClass_eAllStructuralFeatures;
 }
-std::shared_ptr<uml::Property> EcorePackageImpl::get_Ecore_EClass_eAllSuperTypes()
+const std::shared_ptr<uml::Property>& EcorePackageImpl::get_Ecore_EClass_eAllSuperTypes()
 {
 	return ecore_EClass_eAllSuperTypes;
 }
-std::shared_ptr<uml::Property> EcorePackageImpl::get_Ecore_EClass_eAttributes()
+const std::shared_ptr<uml::Property>& EcorePackageImpl::get_Ecore_EClass_eAttributes()
 {
 	return ecore_EClass_eAttributes;
 }
-std::shared_ptr<uml::Property> EcorePackageImpl::get_Ecore_EClass_eGenericSuperTypes()
+const std::shared_ptr<uml::Property>& EcorePackageImpl::get_Ecore_EClass_eGenericSuperTypes()
 {
 	return ecore_EClass_eGenericSuperTypes;
 }
-std::shared_ptr<uml::Property> EcorePackageImpl::get_Ecore_EClass_eIDAttribute()
+const std::shared_ptr<uml::Property>& EcorePackageImpl::get_Ecore_EClass_eIDAttribute()
 {
 	return ecore_EClass_eIDAttribute;
 }
-std::shared_ptr<uml::Property> EcorePackageImpl::get_Ecore_EClass_eOperations()
+const std::shared_ptr<uml::Property>& EcorePackageImpl::get_Ecore_EClass_eOperations()
 {
 	return ecore_EClass_eOperations;
 }
-std::shared_ptr<uml::Property> EcorePackageImpl::get_Ecore_EClass_eReferences()
+const std::shared_ptr<uml::Property>& EcorePackageImpl::get_Ecore_EClass_eReferences()
 {
 	return ecore_EClass_eReferences;
 }
-std::shared_ptr<uml::Property> EcorePackageImpl::get_Ecore_EClass_eStructuralFeatures()
+const std::shared_ptr<uml::Property>& EcorePackageImpl::get_Ecore_EClass_eStructuralFeatures()
 {
 	return ecore_EClass_eStructuralFeatures;
 }
-std::shared_ptr<uml::Property> EcorePackageImpl::get_Ecore_EClass_eSuperTypes()
+const std::shared_ptr<uml::Property>& EcorePackageImpl::get_Ecore_EClass_eSuperTypes()
 {
 	return ecore_EClass_eSuperTypes;
 }
-std::shared_ptr<uml::Operation> EcorePackageImpl::get_Ecore_EClass_getEStructuralFeature_EInt_EInt()
+const std::shared_ptr<uml::Operation>& EcorePackageImpl::get_Ecore_EClass_getEStructuralFeature_EInt_EInt()
 {
 	return ecore_EClass_getEStructuralFeature_EInt_EInt;
 }
-std::shared_ptr<uml::Parameter> EcorePackageImpl::get_Ecore_EClass_getEStructuralFeature_EInt_EInt_featureID()
+const std::shared_ptr<uml::Parameter>& EcorePackageImpl::get_Ecore_EClass_getEStructuralFeature_EInt_EInt_featureID()
 {
 	return ecore_EClass_getEStructuralFeature_EInt_EInt_featureID;
 }
-std::shared_ptr<uml::Parameter> EcorePackageImpl::get_Ecore_EClass_getEStructuralFeature_EInt_EIntreturn()
+const std::shared_ptr<uml::Parameter>& EcorePackageImpl::get_Ecore_EClass_getEStructuralFeature_EInt_EIntreturn()
 {
 	return ecore_EClass_getEStructuralFeature_EInt_EIntreturn;
 }
-std::shared_ptr<uml::Operation> EcorePackageImpl::get_Ecore_EClass_getEStructuralFeature_EString_EString()
+const std::shared_ptr<uml::Operation>& EcorePackageImpl::get_Ecore_EClass_getEStructuralFeature_EString_EString()
 {
 	return ecore_EClass_getEStructuralFeature_EString_EString;
 }
-std::shared_ptr<uml::Parameter> EcorePackageImpl::get_Ecore_EClass_getEStructuralFeature_EString_EString_featureName()
+const std::shared_ptr<uml::Parameter>& EcorePackageImpl::get_Ecore_EClass_getEStructuralFeature_EString_EString_featureName()
 {
 	return ecore_EClass_getEStructuralFeature_EString_EString_featureName;
 }
-std::shared_ptr<uml::Parameter> EcorePackageImpl::get_Ecore_EClass_getEStructuralFeature_EString_EStringreturn()
+const std::shared_ptr<uml::Parameter>& EcorePackageImpl::get_Ecore_EClass_getEStructuralFeature_EString_EStringreturn()
 {
 	return ecore_EClass_getEStructuralFeature_EString_EStringreturn;
 }
-std::shared_ptr<uml::Operation> EcorePackageImpl::get_Ecore_EClass_getFeatureCount__()
+const std::shared_ptr<uml::Operation>& EcorePackageImpl::get_Ecore_EClass_getFeatureCount__()
 {
 	return ecore_EClass_getFeatureCount__;
 }
-std::shared_ptr<uml::Parameter> EcorePackageImpl::get_Ecore_EClass_getFeatureCount__return()
+const std::shared_ptr<uml::Parameter>& EcorePackageImpl::get_Ecore_EClass_getFeatureCount__return()
 {
 	return ecore_EClass_getFeatureCount__return;
 }
-std::shared_ptr<uml::Operation> EcorePackageImpl::get_Ecore_EClass_getFeatureID_EStructuralFeature_EStructuralFeature()
+const std::shared_ptr<uml::Operation>& EcorePackageImpl::get_Ecore_EClass_getFeatureID_EStructuralFeature_EStructuralFeature()
 {
 	return ecore_EClass_getFeatureID_EStructuralFeature_EStructuralFeature;
 }
-std::shared_ptr<uml::Parameter> EcorePackageImpl::get_Ecore_EClass_getFeatureID_EStructuralFeature_EStructuralFeature_feature()
+const std::shared_ptr<uml::Parameter>& EcorePackageImpl::get_Ecore_EClass_getFeatureID_EStructuralFeature_EStructuralFeature_feature()
 {
 	return ecore_EClass_getFeatureID_EStructuralFeature_EStructuralFeature_feature;
 }
-std::shared_ptr<uml::Parameter> EcorePackageImpl::get_Ecore_EClass_getFeatureID_EStructuralFeature_EStructuralFeaturereturn()
+const std::shared_ptr<uml::Parameter>& EcorePackageImpl::get_Ecore_EClass_getFeatureID_EStructuralFeature_EStructuralFeaturereturn()
 {
 	return ecore_EClass_getFeatureID_EStructuralFeature_EStructuralFeaturereturn;
 }
-std::shared_ptr<uml::Property> EcorePackageImpl::get_Ecore_EClass_interface()
+const std::shared_ptr<uml::Property>& EcorePackageImpl::get_Ecore_EClass_interface()
 {
 	return ecore_EClass_interface;
 }
-std::shared_ptr<uml::Operation> EcorePackageImpl::get_Ecore_EClass_isSuperTypeOf_EClass_EClass()
+const std::shared_ptr<uml::Operation>& EcorePackageImpl::get_Ecore_EClass_isSuperTypeOf_EClass_EClass()
 {
 	return ecore_EClass_isSuperTypeOf_EClass_EClass;
 }
-std::shared_ptr<uml::Parameter> EcorePackageImpl::get_Ecore_EClass_isSuperTypeOf_EClass_EClass_someClass()
+const std::shared_ptr<uml::Parameter>& EcorePackageImpl::get_Ecore_EClass_isSuperTypeOf_EClass_EClass_someClass()
 {
 	return ecore_EClass_isSuperTypeOf_EClass_EClass_someClass;
 }
-std::shared_ptr<uml::Parameter> EcorePackageImpl::get_Ecore_EClass_isSuperTypeOf_EClass_EClassreturn()
+const std::shared_ptr<uml::Parameter>& EcorePackageImpl::get_Ecore_EClass_isSuperTypeOf_EClass_EClassreturn()
 {
 	return ecore_EClass_isSuperTypeOf_EClass_EClassreturn;
 }
-std::shared_ptr<uml::Class> EcorePackageImpl::get_Ecore_EClassifier()
+const std::shared_ptr<uml::Class>& EcorePackageImpl::get_Ecore_EClassifier()
 {
 	return ecore_EClassifier;
 }
-std::shared_ptr<uml::PrimitiveType> EcorePackageImpl::get_Ecore_EClassifier_EJavaClass_Wildcard()
+const std::shared_ptr<uml::PrimitiveType>& EcorePackageImpl::get_Ecore_EClassifier_EJavaClass_Wildcard()
 {
 	return ecore_EClassifier_EJavaClass_Wildcard;
 }
-std::shared_ptr<uml::Class> EcorePackageImpl::get_Ecore_EClassifier_Wildcard()
+const std::shared_ptr<uml::Class>& EcorePackageImpl::get_Ecore_EClassifier_Wildcard()
 {
 	return ecore_EClassifier_Wildcard;
 }
-std::shared_ptr<uml::Property> EcorePackageImpl::get_Ecore_EClassifier_defaultValue()
+const std::shared_ptr<uml::Property>& EcorePackageImpl::get_Ecore_EClassifier_defaultValue()
 {
 	return ecore_EClassifier_defaultValue;
 }
-std::shared_ptr<uml::Property> EcorePackageImpl::get_Ecore_EClassifier_ePackage()
+const std::shared_ptr<uml::Property>& EcorePackageImpl::get_Ecore_EClassifier_ePackage()
 {
 	return ecore_EClassifier_ePackage;
 }
-std::shared_ptr<uml::Property> EcorePackageImpl::get_Ecore_EClassifier_eTypeParameters()
+const std::shared_ptr<uml::Property>& EcorePackageImpl::get_Ecore_EClassifier_eTypeParameters()
 {
 	return ecore_EClassifier_eTypeParameters;
 }
-std::shared_ptr<uml::Operation> EcorePackageImpl::get_Ecore_EClassifier_getClassifierID__()
+const std::shared_ptr<uml::Operation>& EcorePackageImpl::get_Ecore_EClassifier_getClassifierID__()
 {
 	return ecore_EClassifier_getClassifierID__;
 }
-std::shared_ptr<uml::Parameter> EcorePackageImpl::get_Ecore_EClassifier_getClassifierID__return()
+const std::shared_ptr<uml::Parameter>& EcorePackageImpl::get_Ecore_EClassifier_getClassifierID__return()
 {
 	return ecore_EClassifier_getClassifierID__return;
 }
-std::shared_ptr<uml::Property> EcorePackageImpl::get_Ecore_EClassifier_instanceClass()
+const std::shared_ptr<uml::Property>& EcorePackageImpl::get_Ecore_EClassifier_instanceClass()
 {
 	return ecore_EClassifier_instanceClass;
 }
-std::shared_ptr<uml::Property> EcorePackageImpl::get_Ecore_EClassifier_instanceClassName()
+const std::shared_ptr<uml::Property>& EcorePackageImpl::get_Ecore_EClassifier_instanceClassName()
 {
 	return ecore_EClassifier_instanceClassName;
 }
-std::shared_ptr<uml::Property> EcorePackageImpl::get_Ecore_EClassifier_instanceTypeName()
+const std::shared_ptr<uml::Property>& EcorePackageImpl::get_Ecore_EClassifier_instanceTypeName()
 {
 	return ecore_EClassifier_instanceTypeName;
 }
-std::shared_ptr<uml::Operation> EcorePackageImpl::get_Ecore_EClassifier_isInstance_EJavaObject_EJavaObject()
+const std::shared_ptr<uml::Operation>& EcorePackageImpl::get_Ecore_EClassifier_isInstance_EJavaObject_EJavaObject()
 {
 	return ecore_EClassifier_isInstance_EJavaObject_EJavaObject;
 }
-std::shared_ptr<uml::Parameter> EcorePackageImpl::get_Ecore_EClassifier_isInstance_EJavaObject_EJavaObject_object()
+const std::shared_ptr<uml::Parameter>& EcorePackageImpl::get_Ecore_EClassifier_isInstance_EJavaObject_EJavaObject_object()
 {
 	return ecore_EClassifier_isInstance_EJavaObject_EJavaObject_object;
 }
-std::shared_ptr<uml::Parameter> EcorePackageImpl::get_Ecore_EClassifier_isInstance_EJavaObject_EJavaObjectreturn()
+const std::shared_ptr<uml::Parameter>& EcorePackageImpl::get_Ecore_EClassifier_isInstance_EJavaObject_EJavaObjectreturn()
 {
 	return ecore_EClassifier_isInstance_EJavaObject_EJavaObjectreturn;
 }
-std::shared_ptr<uml::Class> EcorePackageImpl::get_Ecore_EDataType()
+const std::shared_ptr<uml::Class>& EcorePackageImpl::get_Ecore_EDataType()
 {
 	return ecore_EDataType;
 }
-std::shared_ptr<uml::Property> EcorePackageImpl::get_Ecore_EDataType_serializable()
+const std::shared_ptr<uml::Property>& EcorePackageImpl::get_Ecore_EDataType_serializable()
 {
 	return ecore_EDataType_serializable;
 }
-std::shared_ptr<uml::PrimitiveType> EcorePackageImpl::get_Ecore_EDate()
+const std::shared_ptr<uml::PrimitiveType>& EcorePackageImpl::get_Ecore_EDate()
 {
 	return ecore_EDate;
 }
-std::shared_ptr<uml::PrimitiveType> EcorePackageImpl::get_Ecore_EDiagnosticChain()
+const std::shared_ptr<uml::PrimitiveType>& EcorePackageImpl::get_Ecore_EDiagnosticChain()
 {
 	return ecore_EDiagnosticChain;
 }
-std::shared_ptr<uml::PrimitiveType> EcorePackageImpl::get_Ecore_EDouble()
+const std::shared_ptr<uml::PrimitiveType>& EcorePackageImpl::get_Ecore_EDouble()
 {
 	return ecore_EDouble;
 }
-std::shared_ptr<uml::PrimitiveType> EcorePackageImpl::get_Ecore_EDoubleObject()
+const std::shared_ptr<uml::PrimitiveType>& EcorePackageImpl::get_Ecore_EDoubleObject()
 {
 	return ecore_EDoubleObject;
 }
-std::shared_ptr<uml::PrimitiveType> EcorePackageImpl::get_Ecore_EEList()
+const std::shared_ptr<uml::PrimitiveType>& EcorePackageImpl::get_Ecore_EEList()
 {
 	return ecore_EEList;
 }
-std::shared_ptr<uml::Class> EcorePackageImpl::get_Ecore_EEList_E()
+const std::shared_ptr<uml::Class>& EcorePackageImpl::get_Ecore_EEList_E()
 {
 	return ecore_EEList_E;
 }
-std::shared_ptr<uml::RedefinableTemplateSignature> EcorePackageImpl::get_Ecore_EEList_RedefinableTemplateSignature()
+const std::shared_ptr<uml::RedefinableTemplateSignature>& EcorePackageImpl::get_Ecore_EEList_RedefinableTemplateSignature()
 {
 	return ecore_EEList_RedefinableTemplateSignature;
 }
-std::shared_ptr<uml::Class> EcorePackageImpl::get_Ecore_EEnum()
+const std::shared_ptr<uml::Class>& EcorePackageImpl::get_Ecore_EEnum()
 {
 	return ecore_EEnum;
 }
-std::shared_ptr<uml::Class> EcorePackageImpl::get_Ecore_EEnumLiteral()
+const std::shared_ptr<uml::Class>& EcorePackageImpl::get_Ecore_EEnumLiteral()
 {
 	return ecore_EEnumLiteral;
 }
-std::shared_ptr<uml::Property> EcorePackageImpl::get_Ecore_EEnumLiteral_eEnum()
+const std::shared_ptr<uml::Property>& EcorePackageImpl::get_Ecore_EEnumLiteral_eEnum()
 {
 	return ecore_EEnumLiteral_eEnum;
 }
-std::shared_ptr<uml::Property> EcorePackageImpl::get_Ecore_EEnumLiteral_instance()
+const std::shared_ptr<uml::Property>& EcorePackageImpl::get_Ecore_EEnumLiteral_instance()
 {
 	return ecore_EEnumLiteral_instance;
 }
-std::shared_ptr<uml::Property> EcorePackageImpl::get_Ecore_EEnumLiteral_literal()
+const std::shared_ptr<uml::Property>& EcorePackageImpl::get_Ecore_EEnumLiteral_literal()
 {
 	return ecore_EEnumLiteral_literal;
 }
-std::shared_ptr<uml::Property> EcorePackageImpl::get_Ecore_EEnumLiteral_value()
+const std::shared_ptr<uml::Property>& EcorePackageImpl::get_Ecore_EEnumLiteral_value()
 {
 	return ecore_EEnumLiteral_value;
 }
-std::shared_ptr<uml::Property> EcorePackageImpl::get_Ecore_EEnum_eLiterals()
+const std::shared_ptr<uml::Property>& EcorePackageImpl::get_Ecore_EEnum_eLiterals()
 {
 	return ecore_EEnum_eLiterals;
 }
-std::shared_ptr<uml::Operation> EcorePackageImpl::get_Ecore_EEnum_getEEnumLiteralByLiteral_EString_EString()
+const std::shared_ptr<uml::Operation>& EcorePackageImpl::get_Ecore_EEnum_getEEnumLiteralByLiteral_EString_EString()
 {
 	return ecore_EEnum_getEEnumLiteralByLiteral_EString_EString;
 }
-std::shared_ptr<uml::Parameter> EcorePackageImpl::get_Ecore_EEnum_getEEnumLiteralByLiteral_EString_EString_literal()
+const std::shared_ptr<uml::Parameter>& EcorePackageImpl::get_Ecore_EEnum_getEEnumLiteralByLiteral_EString_EString_literal()
 {
 	return ecore_EEnum_getEEnumLiteralByLiteral_EString_EString_literal;
 }
-std::shared_ptr<uml::Parameter> EcorePackageImpl::get_Ecore_EEnum_getEEnumLiteralByLiteral_EString_EStringreturn()
+const std::shared_ptr<uml::Parameter>& EcorePackageImpl::get_Ecore_EEnum_getEEnumLiteralByLiteral_EString_EStringreturn()
 {
 	return ecore_EEnum_getEEnumLiteralByLiteral_EString_EStringreturn;
 }
-std::shared_ptr<uml::Operation> EcorePackageImpl::get_Ecore_EEnum_getEEnumLiteral_EInt_EInt()
+const std::shared_ptr<uml::Operation>& EcorePackageImpl::get_Ecore_EEnum_getEEnumLiteral_EInt_EInt()
 {
 	return ecore_EEnum_getEEnumLiteral_EInt_EInt;
 }
-std::shared_ptr<uml::Parameter> EcorePackageImpl::get_Ecore_EEnum_getEEnumLiteral_EInt_EInt_value()
+const std::shared_ptr<uml::Parameter>& EcorePackageImpl::get_Ecore_EEnum_getEEnumLiteral_EInt_EInt_value()
 {
 	return ecore_EEnum_getEEnumLiteral_EInt_EInt_value;
 }
-std::shared_ptr<uml::Parameter> EcorePackageImpl::get_Ecore_EEnum_getEEnumLiteral_EInt_EIntreturn()
+const std::shared_ptr<uml::Parameter>& EcorePackageImpl::get_Ecore_EEnum_getEEnumLiteral_EInt_EIntreturn()
 {
 	return ecore_EEnum_getEEnumLiteral_EInt_EIntreturn;
 }
-std::shared_ptr<uml::Operation> EcorePackageImpl::get_Ecore_EEnum_getEEnumLiteral_EString_EString()
+const std::shared_ptr<uml::Operation>& EcorePackageImpl::get_Ecore_EEnum_getEEnumLiteral_EString_EString()
 {
 	return ecore_EEnum_getEEnumLiteral_EString_EString;
 }
-std::shared_ptr<uml::Parameter> EcorePackageImpl::get_Ecore_EEnum_getEEnumLiteral_EString_EString_name()
+const std::shared_ptr<uml::Parameter>& EcorePackageImpl::get_Ecore_EEnum_getEEnumLiteral_EString_EString_name()
 {
 	return ecore_EEnum_getEEnumLiteral_EString_EString_name;
 }
-std::shared_ptr<uml::Parameter> EcorePackageImpl::get_Ecore_EEnum_getEEnumLiteral_EString_EStringreturn()
+const std::shared_ptr<uml::Parameter>& EcorePackageImpl::get_Ecore_EEnum_getEEnumLiteral_EString_EStringreturn()
 {
 	return ecore_EEnum_getEEnumLiteral_EString_EStringreturn;
 }
-std::shared_ptr<uml::PrimitiveType> EcorePackageImpl::get_Ecore_EEnumerator()
+const std::shared_ptr<uml::PrimitiveType>& EcorePackageImpl::get_Ecore_EEnumerator()
 {
 	return ecore_EEnumerator;
 }
-std::shared_ptr<uml::Class> EcorePackageImpl::get_Ecore_EFactory()
+const std::shared_ptr<uml::Class>& EcorePackageImpl::get_Ecore_EFactory()
 {
 	return ecore_EFactory;
 }
-std::shared_ptr<uml::Operation> EcorePackageImpl::get_Ecore_EFactory_convertToString_EDataType_EJavaObject_EDataType_EJavaObject()
+const std::shared_ptr<uml::Operation>& EcorePackageImpl::get_Ecore_EFactory_convertToString_EDataType_EJavaObject_EDataType_EJavaObject()
 {
 	return ecore_EFactory_convertToString_EDataType_EJavaObject_EDataType_EJavaObject;
 }
-std::shared_ptr<uml::Parameter> EcorePackageImpl::get_Ecore_EFactory_convertToString_EDataType_EJavaObject_EDataType_EJavaObject_eDataType()
+const std::shared_ptr<uml::Parameter>& EcorePackageImpl::get_Ecore_EFactory_convertToString_EDataType_EJavaObject_EDataType_EJavaObject_eDataType()
 {
 	return ecore_EFactory_convertToString_EDataType_EJavaObject_EDataType_EJavaObject_eDataType;
 }
-std::shared_ptr<uml::Parameter> EcorePackageImpl::get_Ecore_EFactory_convertToString_EDataType_EJavaObject_EDataType_EJavaObject_instanceValue()
+const std::shared_ptr<uml::Parameter>& EcorePackageImpl::get_Ecore_EFactory_convertToString_EDataType_EJavaObject_EDataType_EJavaObject_instanceValue()
 {
 	return ecore_EFactory_convertToString_EDataType_EJavaObject_EDataType_EJavaObject_instanceValue;
 }
-std::shared_ptr<uml::Parameter> EcorePackageImpl::get_Ecore_EFactory_convertToString_EDataType_EJavaObject_EDataType_EJavaObjectreturn()
+const std::shared_ptr<uml::Parameter>& EcorePackageImpl::get_Ecore_EFactory_convertToString_EDataType_EJavaObject_EDataType_EJavaObjectreturn()
 {
 	return ecore_EFactory_convertToString_EDataType_EJavaObject_EDataType_EJavaObjectreturn;
 }
-std::shared_ptr<uml::Operation> EcorePackageImpl::get_Ecore_EFactory_createFromString_EDataType_EString_EDataType_EString()
+const std::shared_ptr<uml::Operation>& EcorePackageImpl::get_Ecore_EFactory_createFromString_EDataType_EString_EDataType_EString()
 {
 	return ecore_EFactory_createFromString_EDataType_EString_EDataType_EString;
 }
-std::shared_ptr<uml::Parameter> EcorePackageImpl::get_Ecore_EFactory_createFromString_EDataType_EString_EDataType_EString_eDataType()
+const std::shared_ptr<uml::Parameter>& EcorePackageImpl::get_Ecore_EFactory_createFromString_EDataType_EString_EDataType_EString_eDataType()
 {
 	return ecore_EFactory_createFromString_EDataType_EString_EDataType_EString_eDataType;
 }
-std::shared_ptr<uml::Parameter> EcorePackageImpl::get_Ecore_EFactory_createFromString_EDataType_EString_EDataType_EString_literalValue()
+const std::shared_ptr<uml::Parameter>& EcorePackageImpl::get_Ecore_EFactory_createFromString_EDataType_EString_EDataType_EString_literalValue()
 {
 	return ecore_EFactory_createFromString_EDataType_EString_EDataType_EString_literalValue;
 }
-std::shared_ptr<uml::Parameter> EcorePackageImpl::get_Ecore_EFactory_createFromString_EDataType_EString_EDataType_EStringreturn()
+const std::shared_ptr<uml::Parameter>& EcorePackageImpl::get_Ecore_EFactory_createFromString_EDataType_EString_EDataType_EStringreturn()
 {
 	return ecore_EFactory_createFromString_EDataType_EString_EDataType_EStringreturn;
 }
-std::shared_ptr<uml::Operation> EcorePackageImpl::get_Ecore_EFactory_create_EClass_EClass()
+const std::shared_ptr<uml::Operation>& EcorePackageImpl::get_Ecore_EFactory_create_EClass_EClass()
 {
 	return ecore_EFactory_create_EClass_EClass;
 }
-std::shared_ptr<uml::Parameter> EcorePackageImpl::get_Ecore_EFactory_create_EClass_EClass_eClass()
+const std::shared_ptr<uml::Parameter>& EcorePackageImpl::get_Ecore_EFactory_create_EClass_EClass_eClass()
 {
 	return ecore_EFactory_create_EClass_EClass_eClass;
 }
-std::shared_ptr<uml::Parameter> EcorePackageImpl::get_Ecore_EFactory_create_EClass_EClassreturn()
+const std::shared_ptr<uml::Parameter>& EcorePackageImpl::get_Ecore_EFactory_create_EClass_EClassreturn()
 {
 	return ecore_EFactory_create_EClass_EClassreturn;
 }
-std::shared_ptr<uml::Property> EcorePackageImpl::get_Ecore_EFactory_ePackage()
+const std::shared_ptr<uml::Property>& EcorePackageImpl::get_Ecore_EFactory_ePackage()
 {
 	return ecore_EFactory_ePackage;
 }
-std::shared_ptr<uml::PrimitiveType> EcorePackageImpl::get_Ecore_EFeatureMap()
+const std::shared_ptr<uml::PrimitiveType>& EcorePackageImpl::get_Ecore_EFeatureMap()
 {
 	return ecore_EFeatureMap;
 }
-std::shared_ptr<uml::PrimitiveType> EcorePackageImpl::get_Ecore_EFeatureMapEntry()
+const std::shared_ptr<uml::PrimitiveType>& EcorePackageImpl::get_Ecore_EFeatureMapEntry()
 {
 	return ecore_EFeatureMapEntry;
 }
-std::shared_ptr<uml::PrimitiveType> EcorePackageImpl::get_Ecore_EFloat()
+const std::shared_ptr<uml::PrimitiveType>& EcorePackageImpl::get_Ecore_EFloat()
 {
 	return ecore_EFloat;
 }
-std::shared_ptr<uml::PrimitiveType> EcorePackageImpl::get_Ecore_EFloatObject()
+const std::shared_ptr<uml::PrimitiveType>& EcorePackageImpl::get_Ecore_EFloatObject()
 {
 	return ecore_EFloatObject;
 }
-std::shared_ptr<uml::Class> EcorePackageImpl::get_Ecore_EGenericType()
+const std::shared_ptr<uml::Class>& EcorePackageImpl::get_Ecore_EGenericType()
 {
 	return ecore_EGenericType;
 }
-std::shared_ptr<uml::Property> EcorePackageImpl::get_Ecore_EGenericType_eClassifier()
+const std::shared_ptr<uml::Property>& EcorePackageImpl::get_Ecore_EGenericType_eClassifier()
 {
 	return ecore_EGenericType_eClassifier;
 }
-std::shared_ptr<uml::Property> EcorePackageImpl::get_Ecore_EGenericType_eLowerBound()
+const std::shared_ptr<uml::Property>& EcorePackageImpl::get_Ecore_EGenericType_eLowerBound()
 {
 	return ecore_EGenericType_eLowerBound;
 }
-std::shared_ptr<uml::Property> EcorePackageImpl::get_Ecore_EGenericType_eRawType()
+const std::shared_ptr<uml::Property>& EcorePackageImpl::get_Ecore_EGenericType_eRawType()
 {
 	return ecore_EGenericType_eRawType;
 }
-std::shared_ptr<uml::Property> EcorePackageImpl::get_Ecore_EGenericType_eTypeArguments()
+const std::shared_ptr<uml::Property>& EcorePackageImpl::get_Ecore_EGenericType_eTypeArguments()
 {
 	return ecore_EGenericType_eTypeArguments;
 }
-std::shared_ptr<uml::Property> EcorePackageImpl::get_Ecore_EGenericType_eTypeParameter()
+const std::shared_ptr<uml::Property>& EcorePackageImpl::get_Ecore_EGenericType_eTypeParameter()
 {
 	return ecore_EGenericType_eTypeParameter;
 }
-std::shared_ptr<uml::Property> EcorePackageImpl::get_Ecore_EGenericType_eUpperBound()
+const std::shared_ptr<uml::Property>& EcorePackageImpl::get_Ecore_EGenericType_eUpperBound()
 {
 	return ecore_EGenericType_eUpperBound;
 }
-std::shared_ptr<uml::PrimitiveType> EcorePackageImpl::get_Ecore_EInt()
+const std::shared_ptr<uml::PrimitiveType>& EcorePackageImpl::get_Ecore_EInt()
 {
 	return ecore_EInt;
 }
-std::shared_ptr<uml::PrimitiveType> EcorePackageImpl::get_Ecore_EIntegerObject()
+const std::shared_ptr<uml::PrimitiveType>& EcorePackageImpl::get_Ecore_EIntegerObject()
 {
 	return ecore_EIntegerObject;
 }
-std::shared_ptr<uml::PrimitiveType> EcorePackageImpl::get_Ecore_EInvocationTargetException()
+const std::shared_ptr<uml::PrimitiveType>& EcorePackageImpl::get_Ecore_EInvocationTargetException()
 {
 	return ecore_EInvocationTargetException;
 }
-std::shared_ptr<uml::PrimitiveType> EcorePackageImpl::get_Ecore_EJavaClass()
+const std::shared_ptr<uml::PrimitiveType>& EcorePackageImpl::get_Ecore_EJavaClass()
 {
 	return ecore_EJavaClass;
 }
-std::shared_ptr<uml::RedefinableTemplateSignature> EcorePackageImpl::get_Ecore_EJavaClass_RedefinableTemplateSignature()
+const std::shared_ptr<uml::RedefinableTemplateSignature>& EcorePackageImpl::get_Ecore_EJavaClass_RedefinableTemplateSignature()
 {
 	return ecore_EJavaClass_RedefinableTemplateSignature;
 }
-std::shared_ptr<uml::Class> EcorePackageImpl::get_Ecore_EJavaClass_T()
+const std::shared_ptr<uml::Class>& EcorePackageImpl::get_Ecore_EJavaClass_T()
 {
 	return ecore_EJavaClass_T;
 }
-std::shared_ptr<uml::PrimitiveType> EcorePackageImpl::get_Ecore_EJavaObject()
+const std::shared_ptr<uml::PrimitiveType>& EcorePackageImpl::get_Ecore_EJavaObject()
 {
 	return ecore_EJavaObject;
 }
-std::shared_ptr<uml::PrimitiveType> EcorePackageImpl::get_Ecore_ELong()
+const std::shared_ptr<uml::PrimitiveType>& EcorePackageImpl::get_Ecore_ELong()
 {
 	return ecore_ELong;
 }
-std::shared_ptr<uml::PrimitiveType> EcorePackageImpl::get_Ecore_ELongObject()
+const std::shared_ptr<uml::PrimitiveType>& EcorePackageImpl::get_Ecore_ELongObject()
 {
 	return ecore_ELongObject;
 }
-std::shared_ptr<uml::PrimitiveType> EcorePackageImpl::get_Ecore_EMap()
+const std::shared_ptr<uml::PrimitiveType>& EcorePackageImpl::get_Ecore_EMap()
 {
 	return ecore_EMap;
 }
-std::shared_ptr<uml::Class> EcorePackageImpl::get_Ecore_EMap_K()
+const std::shared_ptr<uml::Class>& EcorePackageImpl::get_Ecore_EMap_K()
 {
 	return ecore_EMap_K;
 }
-std::shared_ptr<uml::RedefinableTemplateSignature> EcorePackageImpl::get_Ecore_EMap_RedefinableTemplateSignature()
+const std::shared_ptr<uml::RedefinableTemplateSignature>& EcorePackageImpl::get_Ecore_EMap_RedefinableTemplateSignature()
 {
 	return ecore_EMap_RedefinableTemplateSignature;
 }
-std::shared_ptr<uml::Class> EcorePackageImpl::get_Ecore_EMap_V()
+const std::shared_ptr<uml::Class>& EcorePackageImpl::get_Ecore_EMap_V()
 {
 	return ecore_EMap_V;
 }
-std::shared_ptr<uml::Class> EcorePackageImpl::get_Ecore_EModelElement()
+const std::shared_ptr<uml::Class>& EcorePackageImpl::get_Ecore_EModelElement()
 {
 	return ecore_EModelElement;
 }
-std::shared_ptr<uml::Property> EcorePackageImpl::get_Ecore_EModelElement_eAnnotations()
+const std::shared_ptr<uml::Property>& EcorePackageImpl::get_Ecore_EModelElement_eAnnotations()
 {
 	return ecore_EModelElement_eAnnotations;
 }
-std::shared_ptr<uml::Operation> EcorePackageImpl::get_Ecore_EModelElement_getEAnnotation_EString_EString()
+const std::shared_ptr<uml::Operation>& EcorePackageImpl::get_Ecore_EModelElement_getEAnnotation_EString_EString()
 {
 	return ecore_EModelElement_getEAnnotation_EString_EString;
 }
-std::shared_ptr<uml::Parameter> EcorePackageImpl::get_Ecore_EModelElement_getEAnnotation_EString_EString_source()
+const std::shared_ptr<uml::Parameter>& EcorePackageImpl::get_Ecore_EModelElement_getEAnnotation_EString_EString_source()
 {
 	return ecore_EModelElement_getEAnnotation_EString_EString_source;
 }
-std::shared_ptr<uml::Parameter> EcorePackageImpl::get_Ecore_EModelElement_getEAnnotation_EString_EStringreturn()
+const std::shared_ptr<uml::Parameter>& EcorePackageImpl::get_Ecore_EModelElement_getEAnnotation_EString_EStringreturn()
 {
 	return ecore_EModelElement_getEAnnotation_EString_EStringreturn;
 }
-std::shared_ptr<uml::Class> EcorePackageImpl::get_Ecore_ENamedElement()
+const std::shared_ptr<uml::Class>& EcorePackageImpl::get_Ecore_ENamedElement()
 {
 	return ecore_ENamedElement;
 }
-std::shared_ptr<uml::Property> EcorePackageImpl::get_Ecore_ENamedElement_name()
+const std::shared_ptr<uml::Property>& EcorePackageImpl::get_Ecore_ENamedElement_name()
 {
 	return ecore_ENamedElement_name;
 }
-std::shared_ptr<uml::Class> EcorePackageImpl::get_Ecore_EObject()
+const std::shared_ptr<uml::Class>& EcorePackageImpl::get_Ecore_EObject()
 {
 	return ecore_EObject;
 }
-std::shared_ptr<uml::PrimitiveType> EcorePackageImpl::get_Ecore_EObject_EEList_EObject()
+const std::shared_ptr<uml::PrimitiveType>& EcorePackageImpl::get_Ecore_EObject_EEList_EObject()
 {
 	return ecore_EObject_EEList_EObject;
 }
-std::shared_ptr<uml::PrimitiveType> EcorePackageImpl::get_Ecore_EObject_ETreeIterator_EObject()
+const std::shared_ptr<uml::PrimitiveType>& EcorePackageImpl::get_Ecore_EObject_ETreeIterator_EObject()
 {
 	return ecore_EObject_ETreeIterator_EObject;
 }
-std::shared_ptr<uml::Operation> EcorePackageImpl::get_Ecore_EObject_eAllContents__()
+const std::shared_ptr<uml::Operation>& EcorePackageImpl::get_Ecore_EObject_eAllContents__()
 {
 	return ecore_EObject_eAllContents__;
 }
-std::shared_ptr<uml::Parameter> EcorePackageImpl::get_Ecore_EObject_eAllContents__return()
+const std::shared_ptr<uml::Parameter>& EcorePackageImpl::get_Ecore_EObject_eAllContents__return()
 {
 	return ecore_EObject_eAllContents__return;
 }
-std::shared_ptr<uml::Operation> EcorePackageImpl::get_Ecore_EObject_eClass__()
+const std::shared_ptr<uml::Operation>& EcorePackageImpl::get_Ecore_EObject_eClass__()
 {
 	return ecore_EObject_eClass__;
 }
-std::shared_ptr<uml::Parameter> EcorePackageImpl::get_Ecore_EObject_eClass__return()
+const std::shared_ptr<uml::Parameter>& EcorePackageImpl::get_Ecore_EObject_eClass__return()
 {
 	return ecore_EObject_eClass__return;
 }
-std::shared_ptr<uml::Operation> EcorePackageImpl::get_Ecore_EObject_eContainer__()
+const std::shared_ptr<uml::Operation>& EcorePackageImpl::get_Ecore_EObject_eContainer__()
 {
 	return ecore_EObject_eContainer__;
 }
-std::shared_ptr<uml::Parameter> EcorePackageImpl::get_Ecore_EObject_eContainer__return()
+const std::shared_ptr<uml::Parameter>& EcorePackageImpl::get_Ecore_EObject_eContainer__return()
 {
 	return ecore_EObject_eContainer__return;
 }
-std::shared_ptr<uml::Operation> EcorePackageImpl::get_Ecore_EObject_eContainingFeature__()
+const std::shared_ptr<uml::Operation>& EcorePackageImpl::get_Ecore_EObject_eContainingFeature__()
 {
 	return ecore_EObject_eContainingFeature__;
 }
-std::shared_ptr<uml::Parameter> EcorePackageImpl::get_Ecore_EObject_eContainingFeature__return()
+const std::shared_ptr<uml::Parameter>& EcorePackageImpl::get_Ecore_EObject_eContainingFeature__return()
 {
 	return ecore_EObject_eContainingFeature__return;
 }
-std::shared_ptr<uml::Operation> EcorePackageImpl::get_Ecore_EObject_eContainmentFeature__()
+const std::shared_ptr<uml::Operation>& EcorePackageImpl::get_Ecore_EObject_eContainmentFeature__()
 {
 	return ecore_EObject_eContainmentFeature__;
 }
-std::shared_ptr<uml::Parameter> EcorePackageImpl::get_Ecore_EObject_eContainmentFeature__return()
+const std::shared_ptr<uml::Parameter>& EcorePackageImpl::get_Ecore_EObject_eContainmentFeature__return()
 {
 	return ecore_EObject_eContainmentFeature__return;
 }
-std::shared_ptr<uml::Operation> EcorePackageImpl::get_Ecore_EObject_eContents__()
+const std::shared_ptr<uml::Operation>& EcorePackageImpl::get_Ecore_EObject_eContents__()
 {
 	return ecore_EObject_eContents__;
 }
-std::shared_ptr<uml::Parameter> EcorePackageImpl::get_Ecore_EObject_eContents__return()
+const std::shared_ptr<uml::Parameter>& EcorePackageImpl::get_Ecore_EObject_eContents__return()
 {
 	return ecore_EObject_eContents__return;
 }
-std::shared_ptr<uml::Operation> EcorePackageImpl::get_Ecore_EObject_eCrossReferences__()
+const std::shared_ptr<uml::Operation>& EcorePackageImpl::get_Ecore_EObject_eCrossReferences__()
 {
 	return ecore_EObject_eCrossReferences__;
 }
-std::shared_ptr<uml::Parameter> EcorePackageImpl::get_Ecore_EObject_eCrossReferences__return()
+const std::shared_ptr<uml::Parameter>& EcorePackageImpl::get_Ecore_EObject_eCrossReferences__return()
 {
 	return ecore_EObject_eCrossReferences__return;
 }
-std::shared_ptr<uml::Operation> EcorePackageImpl::get_Ecore_EObject_eGet_EStructuralFeature_EBoolean_EStructuralFeature_EBoolean()
+const std::shared_ptr<uml::Operation>& EcorePackageImpl::get_Ecore_EObject_eGet_EStructuralFeature_EBoolean_EStructuralFeature_EBoolean()
 {
 	return ecore_EObject_eGet_EStructuralFeature_EBoolean_EStructuralFeature_EBoolean;
 }
-std::shared_ptr<uml::Parameter> EcorePackageImpl::get_Ecore_EObject_eGet_EStructuralFeature_EBoolean_EStructuralFeature_EBoolean_feature()
+const std::shared_ptr<uml::Parameter>& EcorePackageImpl::get_Ecore_EObject_eGet_EStructuralFeature_EBoolean_EStructuralFeature_EBoolean_feature()
 {
 	return ecore_EObject_eGet_EStructuralFeature_EBoolean_EStructuralFeature_EBoolean_feature;
 }
-std::shared_ptr<uml::Parameter> EcorePackageImpl::get_Ecore_EObject_eGet_EStructuralFeature_EBoolean_EStructuralFeature_EBoolean_resolve()
+const std::shared_ptr<uml::Parameter>& EcorePackageImpl::get_Ecore_EObject_eGet_EStructuralFeature_EBoolean_EStructuralFeature_EBoolean_resolve()
 {
 	return ecore_EObject_eGet_EStructuralFeature_EBoolean_EStructuralFeature_EBoolean_resolve;
 }
-std::shared_ptr<uml::Parameter> EcorePackageImpl::get_Ecore_EObject_eGet_EStructuralFeature_EBoolean_EStructuralFeature_EBooleanreturn()
+const std::shared_ptr<uml::Parameter>& EcorePackageImpl::get_Ecore_EObject_eGet_EStructuralFeature_EBoolean_EStructuralFeature_EBooleanreturn()
 {
 	return ecore_EObject_eGet_EStructuralFeature_EBoolean_EStructuralFeature_EBooleanreturn;
 }
-std::shared_ptr<uml::Operation> EcorePackageImpl::get_Ecore_EObject_eGet_EStructuralFeature_EStructuralFeature()
+const std::shared_ptr<uml::Operation>& EcorePackageImpl::get_Ecore_EObject_eGet_EStructuralFeature_EStructuralFeature()
 {
 	return ecore_EObject_eGet_EStructuralFeature_EStructuralFeature;
 }
-std::shared_ptr<uml::Parameter> EcorePackageImpl::get_Ecore_EObject_eGet_EStructuralFeature_EStructuralFeature_feature()
+const std::shared_ptr<uml::Parameter>& EcorePackageImpl::get_Ecore_EObject_eGet_EStructuralFeature_EStructuralFeature_feature()
 {
 	return ecore_EObject_eGet_EStructuralFeature_EStructuralFeature_feature;
 }
-std::shared_ptr<uml::Parameter> EcorePackageImpl::get_Ecore_EObject_eGet_EStructuralFeature_EStructuralFeaturereturn()
+const std::shared_ptr<uml::Parameter>& EcorePackageImpl::get_Ecore_EObject_eGet_EStructuralFeature_EStructuralFeaturereturn()
 {
 	return ecore_EObject_eGet_EStructuralFeature_EStructuralFeaturereturn;
 }
-std::shared_ptr<uml::Operation> EcorePackageImpl::get_Ecore_EObject_eIsProxy__()
+const std::shared_ptr<uml::Operation>& EcorePackageImpl::get_Ecore_EObject_eIsProxy__()
 {
 	return ecore_EObject_eIsProxy__;
 }
-std::shared_ptr<uml::Parameter> EcorePackageImpl::get_Ecore_EObject_eIsProxy__return()
+const std::shared_ptr<uml::Parameter>& EcorePackageImpl::get_Ecore_EObject_eIsProxy__return()
 {
 	return ecore_EObject_eIsProxy__return;
 }
-std::shared_ptr<uml::Operation> EcorePackageImpl::get_Ecore_EObject_eIsSet_EStructuralFeature_EStructuralFeature()
+const std::shared_ptr<uml::Operation>& EcorePackageImpl::get_Ecore_EObject_eIsSet_EStructuralFeature_EStructuralFeature()
 {
 	return ecore_EObject_eIsSet_EStructuralFeature_EStructuralFeature;
 }
-std::shared_ptr<uml::Parameter> EcorePackageImpl::get_Ecore_EObject_eIsSet_EStructuralFeature_EStructuralFeature_feature()
+const std::shared_ptr<uml::Parameter>& EcorePackageImpl::get_Ecore_EObject_eIsSet_EStructuralFeature_EStructuralFeature_feature()
 {
 	return ecore_EObject_eIsSet_EStructuralFeature_EStructuralFeature_feature;
 }
-std::shared_ptr<uml::Parameter> EcorePackageImpl::get_Ecore_EObject_eIsSet_EStructuralFeature_EStructuralFeaturereturn()
+const std::shared_ptr<uml::Parameter>& EcorePackageImpl::get_Ecore_EObject_eIsSet_EStructuralFeature_EStructuralFeaturereturn()
 {
 	return ecore_EObject_eIsSet_EStructuralFeature_EStructuralFeaturereturn;
 }
-std::shared_ptr<uml::Operation> EcorePackageImpl::get_Ecore_EObject_eResource__()
+const std::shared_ptr<uml::Operation>& EcorePackageImpl::get_Ecore_EObject_eResource__()
 {
 	return ecore_EObject_eResource__;
 }
-std::shared_ptr<uml::Parameter> EcorePackageImpl::get_Ecore_EObject_eResource__return()
+const std::shared_ptr<uml::Parameter>& EcorePackageImpl::get_Ecore_EObject_eResource__return()
 {
 	return ecore_EObject_eResource__return;
 }
-std::shared_ptr<uml::Operation> EcorePackageImpl::get_Ecore_EObject_eSet_EStructuralFeature_EJavaObject_EStructuralFeature_EJavaObject()
+const std::shared_ptr<uml::Operation>& EcorePackageImpl::get_Ecore_EObject_eSet_EStructuralFeature_EJavaObject_EStructuralFeature_EJavaObject()
 {
 	return ecore_EObject_eSet_EStructuralFeature_EJavaObject_EStructuralFeature_EJavaObject;
 }
-std::shared_ptr<uml::Parameter> EcorePackageImpl::get_Ecore_EObject_eSet_EStructuralFeature_EJavaObject_EStructuralFeature_EJavaObject_feature()
+const std::shared_ptr<uml::Parameter>& EcorePackageImpl::get_Ecore_EObject_eSet_EStructuralFeature_EJavaObject_EStructuralFeature_EJavaObject_feature()
 {
 	return ecore_EObject_eSet_EStructuralFeature_EJavaObject_EStructuralFeature_EJavaObject_feature;
 }
-std::shared_ptr<uml::Parameter> EcorePackageImpl::get_Ecore_EObject_eSet_EStructuralFeature_EJavaObject_EStructuralFeature_EJavaObject_newValue()
+const std::shared_ptr<uml::Parameter>& EcorePackageImpl::get_Ecore_EObject_eSet_EStructuralFeature_EJavaObject_EStructuralFeature_EJavaObject_newValue()
 {
 	return ecore_EObject_eSet_EStructuralFeature_EJavaObject_EStructuralFeature_EJavaObject_newValue;
 }
-std::shared_ptr<uml::Parameter> EcorePackageImpl::get_Ecore_EObject_eSet_EStructuralFeature_EJavaObject_EStructuralFeature_EJavaObjectreturn()
+const std::shared_ptr<uml::Parameter>& EcorePackageImpl::get_Ecore_EObject_eSet_EStructuralFeature_EJavaObject_EStructuralFeature_EJavaObjectreturn()
 {
 	return ecore_EObject_eSet_EStructuralFeature_EJavaObject_EStructuralFeature_EJavaObjectreturn;
 }
-std::shared_ptr<uml::Operation> EcorePackageImpl::get_Ecore_EObject_eUnset_EStructuralFeature_EStructuralFeature()
+const std::shared_ptr<uml::Operation>& EcorePackageImpl::get_Ecore_EObject_eUnset_EStructuralFeature_EStructuralFeature()
 {
 	return ecore_EObject_eUnset_EStructuralFeature_EStructuralFeature;
 }
-std::shared_ptr<uml::Parameter> EcorePackageImpl::get_Ecore_EObject_eUnset_EStructuralFeature_EStructuralFeature_feature()
+const std::shared_ptr<uml::Parameter>& EcorePackageImpl::get_Ecore_EObject_eUnset_EStructuralFeature_EStructuralFeature_feature()
 {
 	return ecore_EObject_eUnset_EStructuralFeature_EStructuralFeature_feature;
 }
-std::shared_ptr<uml::Parameter> EcorePackageImpl::get_Ecore_EObject_eUnset_EStructuralFeature_EStructuralFeaturereturn()
+const std::shared_ptr<uml::Parameter>& EcorePackageImpl::get_Ecore_EObject_eUnset_EStructuralFeature_EStructuralFeaturereturn()
 {
 	return ecore_EObject_eUnset_EStructuralFeature_EStructuralFeaturereturn;
 }
-std::shared_ptr<uml::Class> EcorePackageImpl::get_Ecore_EOperation()
+const std::shared_ptr<uml::Class>& EcorePackageImpl::get_Ecore_EOperation()
 {
 	return ecore_EOperation;
 }
-std::shared_ptr<uml::Property> EcorePackageImpl::get_Ecore_EOperation_eContainingClass()
+const std::shared_ptr<uml::Property>& EcorePackageImpl::get_Ecore_EOperation_eContainingClass()
 {
 	return ecore_EOperation_eContainingClass;
 }
-std::shared_ptr<uml::Property> EcorePackageImpl::get_Ecore_EOperation_eExceptions()
+const std::shared_ptr<uml::Property>& EcorePackageImpl::get_Ecore_EOperation_eExceptions()
 {
 	return ecore_EOperation_eExceptions;
 }
-std::shared_ptr<uml::Property> EcorePackageImpl::get_Ecore_EOperation_eGenericExceptions()
+const std::shared_ptr<uml::Property>& EcorePackageImpl::get_Ecore_EOperation_eGenericExceptions()
 {
 	return ecore_EOperation_eGenericExceptions;
 }
-std::shared_ptr<uml::Property> EcorePackageImpl::get_Ecore_EOperation_eParameters()
+const std::shared_ptr<uml::Property>& EcorePackageImpl::get_Ecore_EOperation_eParameters()
 {
 	return ecore_EOperation_eParameters;
 }
-std::shared_ptr<uml::Property> EcorePackageImpl::get_Ecore_EOperation_eTypeParameters()
+const std::shared_ptr<uml::Property>& EcorePackageImpl::get_Ecore_EOperation_eTypeParameters()
 {
 	return ecore_EOperation_eTypeParameters;
 }
-std::shared_ptr<uml::Class> EcorePackageImpl::get_Ecore_EPackage()
+const std::shared_ptr<uml::Class>& EcorePackageImpl::get_Ecore_EPackage()
 {
 	return ecore_EPackage;
 }
-std::shared_ptr<uml::Property> EcorePackageImpl::get_Ecore_EPackage_eClassifiers()
+const std::shared_ptr<uml::Property>& EcorePackageImpl::get_Ecore_EPackage_eClassifiers()
 {
 	return ecore_EPackage_eClassifiers;
 }
-std::shared_ptr<uml::Property> EcorePackageImpl::get_Ecore_EPackage_eFactoryInstance()
+const std::shared_ptr<uml::Property>& EcorePackageImpl::get_Ecore_EPackage_eFactoryInstance()
 {
 	return ecore_EPackage_eFactoryInstance;
 }
-std::shared_ptr<uml::Property> EcorePackageImpl::get_Ecore_EPackage_eSubpackages()
+const std::shared_ptr<uml::Property>& EcorePackageImpl::get_Ecore_EPackage_eSubpackages()
 {
 	return ecore_EPackage_eSubpackages;
 }
-std::shared_ptr<uml::Property> EcorePackageImpl::get_Ecore_EPackage_eSuperPackage()
+const std::shared_ptr<uml::Property>& EcorePackageImpl::get_Ecore_EPackage_eSuperPackage()
 {
 	return ecore_EPackage_eSuperPackage;
 }
-std::shared_ptr<uml::Operation> EcorePackageImpl::get_Ecore_EPackage_getEClassifier_EString_EString()
+const std::shared_ptr<uml::Operation>& EcorePackageImpl::get_Ecore_EPackage_getEClassifier_EString_EString()
 {
 	return ecore_EPackage_getEClassifier_EString_EString;
 }
-std::shared_ptr<uml::Parameter> EcorePackageImpl::get_Ecore_EPackage_getEClassifier_EString_EString_name()
+const std::shared_ptr<uml::Parameter>& EcorePackageImpl::get_Ecore_EPackage_getEClassifier_EString_EString_name()
 {
 	return ecore_EPackage_getEClassifier_EString_EString_name;
 }
-std::shared_ptr<uml::Parameter> EcorePackageImpl::get_Ecore_EPackage_getEClassifier_EString_EStringreturn()
+const std::shared_ptr<uml::Parameter>& EcorePackageImpl::get_Ecore_EPackage_getEClassifier_EString_EStringreturn()
 {
 	return ecore_EPackage_getEClassifier_EString_EStringreturn;
 }
-std::shared_ptr<uml::Property> EcorePackageImpl::get_Ecore_EPackage_nsPrefix()
+const std::shared_ptr<uml::Property>& EcorePackageImpl::get_Ecore_EPackage_nsPrefix()
 {
 	return ecore_EPackage_nsPrefix;
 }
-std::shared_ptr<uml::Property> EcorePackageImpl::get_Ecore_EPackage_nsURI()
+const std::shared_ptr<uml::Property>& EcorePackageImpl::get_Ecore_EPackage_nsURI()
 {
 	return ecore_EPackage_nsURI;
 }
-std::shared_ptr<uml::Class> EcorePackageImpl::get_Ecore_EParameter()
+const std::shared_ptr<uml::Class>& EcorePackageImpl::get_Ecore_EParameter()
 {
 	return ecore_EParameter;
 }
-std::shared_ptr<uml::Property> EcorePackageImpl::get_Ecore_EParameter_eOperation()
+const std::shared_ptr<uml::Property>& EcorePackageImpl::get_Ecore_EParameter_eOperation()
 {
 	return ecore_EParameter_eOperation;
 }
-std::shared_ptr<uml::Class> EcorePackageImpl::get_Ecore_EReference()
+const std::shared_ptr<uml::Class>& EcorePackageImpl::get_Ecore_EReference()
 {
 	return ecore_EReference;
 }
-std::shared_ptr<uml::Property> EcorePackageImpl::get_Ecore_EReference_container()
+const std::shared_ptr<uml::Property>& EcorePackageImpl::get_Ecore_EReference_container()
 {
 	return ecore_EReference_container;
 }
-std::shared_ptr<uml::Property> EcorePackageImpl::get_Ecore_EReference_containment()
+const std::shared_ptr<uml::Property>& EcorePackageImpl::get_Ecore_EReference_containment()
 {
 	return ecore_EReference_containment;
 }
-std::shared_ptr<uml::Property> EcorePackageImpl::get_Ecore_EReference_eKeys()
+const std::shared_ptr<uml::Property>& EcorePackageImpl::get_Ecore_EReference_eKeys()
 {
 	return ecore_EReference_eKeys;
 }
-std::shared_ptr<uml::Property> EcorePackageImpl::get_Ecore_EReference_eOpposite()
+const std::shared_ptr<uml::Property>& EcorePackageImpl::get_Ecore_EReference_eOpposite()
 {
 	return ecore_EReference_eOpposite;
 }
-std::shared_ptr<uml::Property> EcorePackageImpl::get_Ecore_EReference_eReferenceType()
+const std::shared_ptr<uml::Property>& EcorePackageImpl::get_Ecore_EReference_eReferenceType()
 {
 	return ecore_EReference_eReferenceType;
 }
-std::shared_ptr<uml::Property> EcorePackageImpl::get_Ecore_EReference_resolveProxies()
+const std::shared_ptr<uml::Property>& EcorePackageImpl::get_Ecore_EReference_resolveProxies()
 {
 	return ecore_EReference_resolveProxies;
 }
-std::shared_ptr<uml::PrimitiveType> EcorePackageImpl::get_Ecore_EResource()
+const std::shared_ptr<uml::PrimitiveType>& EcorePackageImpl::get_Ecore_EResource()
 {
 	return ecore_EResource;
 }
-std::shared_ptr<uml::PrimitiveType> EcorePackageImpl::get_Ecore_EResourceSet()
+const std::shared_ptr<uml::PrimitiveType>& EcorePackageImpl::get_Ecore_EResourceSet()
 {
 	return ecore_EResourceSet;
 }
-std::shared_ptr<uml::PrimitiveType> EcorePackageImpl::get_Ecore_EShort()
+const std::shared_ptr<uml::PrimitiveType>& EcorePackageImpl::get_Ecore_EShort()
 {
 	return ecore_EShort;
 }
-std::shared_ptr<uml::PrimitiveType> EcorePackageImpl::get_Ecore_EShortObject()
+const std::shared_ptr<uml::PrimitiveType>& EcorePackageImpl::get_Ecore_EShortObject()
 {
 	return ecore_EShortObject;
 }
-std::shared_ptr<uml::PrimitiveType> EcorePackageImpl::get_Ecore_EString()
+const std::shared_ptr<uml::PrimitiveType>& EcorePackageImpl::get_Ecore_EString()
 {
 	return ecore_EString;
 }
-std::shared_ptr<uml::Class> EcorePackageImpl::get_Ecore_EStringToStringMapEntry()
+const std::shared_ptr<uml::Class>& EcorePackageImpl::get_Ecore_EStringToStringMapEntry()
 {
 	return ecore_EStringToStringMapEntry;
 }
-std::shared_ptr<uml::Property> EcorePackageImpl::get_Ecore_EStringToStringMapEntry_key()
+const std::shared_ptr<uml::Property>& EcorePackageImpl::get_Ecore_EStringToStringMapEntry_key()
 {
 	return ecore_EStringToStringMapEntry_key;
 }
-std::shared_ptr<uml::Property> EcorePackageImpl::get_Ecore_EStringToStringMapEntry_value()
+const std::shared_ptr<uml::Property>& EcorePackageImpl::get_Ecore_EStringToStringMapEntry_value()
 {
 	return ecore_EStringToStringMapEntry_value;
 }
-std::shared_ptr<uml::Class> EcorePackageImpl::get_Ecore_EStructuralFeature()
+const std::shared_ptr<uml::Class>& EcorePackageImpl::get_Ecore_EStructuralFeature()
 {
 	return ecore_EStructuralFeature;
 }
-std::shared_ptr<uml::PrimitiveType> EcorePackageImpl::get_Ecore_EStructuralFeature_EJavaClass_Wildcard()
+const std::shared_ptr<uml::PrimitiveType>& EcorePackageImpl::get_Ecore_EStructuralFeature_EJavaClass_Wildcard()
 {
 	return ecore_EStructuralFeature_EJavaClass_Wildcard;
 }
-std::shared_ptr<uml::Class> EcorePackageImpl::get_Ecore_EStructuralFeature_Wildcard()
+const std::shared_ptr<uml::Class>& EcorePackageImpl::get_Ecore_EStructuralFeature_Wildcard()
 {
 	return ecore_EStructuralFeature_Wildcard;
 }
-std::shared_ptr<uml::Property> EcorePackageImpl::get_Ecore_EStructuralFeature_changeable()
+const std::shared_ptr<uml::Property>& EcorePackageImpl::get_Ecore_EStructuralFeature_changeable()
 {
 	return ecore_EStructuralFeature_changeable;
 }
-std::shared_ptr<uml::Property> EcorePackageImpl::get_Ecore_EStructuralFeature_defaultValue()
+const std::shared_ptr<uml::Property>& EcorePackageImpl::get_Ecore_EStructuralFeature_defaultValue()
 {
 	return ecore_EStructuralFeature_defaultValue;
 }
-std::shared_ptr<uml::Property> EcorePackageImpl::get_Ecore_EStructuralFeature_defaultValueLiteral()
+const std::shared_ptr<uml::Property>& EcorePackageImpl::get_Ecore_EStructuralFeature_defaultValueLiteral()
 {
 	return ecore_EStructuralFeature_defaultValueLiteral;
 }
-std::shared_ptr<uml::Property> EcorePackageImpl::get_Ecore_EStructuralFeature_derived()
+const std::shared_ptr<uml::Property>& EcorePackageImpl::get_Ecore_EStructuralFeature_derived()
 {
 	return ecore_EStructuralFeature_derived;
 }
-std::shared_ptr<uml::Property> EcorePackageImpl::get_Ecore_EStructuralFeature_eContainingClass()
+const std::shared_ptr<uml::Property>& EcorePackageImpl::get_Ecore_EStructuralFeature_eContainingClass()
 {
 	return ecore_EStructuralFeature_eContainingClass;
 }
-std::shared_ptr<uml::Operation> EcorePackageImpl::get_Ecore_EStructuralFeature_getContainerClass__()
+const std::shared_ptr<uml::Operation>& EcorePackageImpl::get_Ecore_EStructuralFeature_getContainerClass__()
 {
 	return ecore_EStructuralFeature_getContainerClass__;
 }
-std::shared_ptr<uml::Parameter> EcorePackageImpl::get_Ecore_EStructuralFeature_getContainerClass__return()
+const std::shared_ptr<uml::Parameter>& EcorePackageImpl::get_Ecore_EStructuralFeature_getContainerClass__return()
 {
 	return ecore_EStructuralFeature_getContainerClass__return;
 }
-std::shared_ptr<uml::Operation> EcorePackageImpl::get_Ecore_EStructuralFeature_getFeatureID__()
+const std::shared_ptr<uml::Operation>& EcorePackageImpl::get_Ecore_EStructuralFeature_getFeatureID__()
 {
 	return ecore_EStructuralFeature_getFeatureID__;
 }
-std::shared_ptr<uml::Parameter> EcorePackageImpl::get_Ecore_EStructuralFeature_getFeatureID__return()
+const std::shared_ptr<uml::Parameter>& EcorePackageImpl::get_Ecore_EStructuralFeature_getFeatureID__return()
 {
 	return ecore_EStructuralFeature_getFeatureID__return;
 }
-std::shared_ptr<uml::Property> EcorePackageImpl::get_Ecore_EStructuralFeature_transient()
+const std::shared_ptr<uml::Property>& EcorePackageImpl::get_Ecore_EStructuralFeature_transient()
 {
 	return ecore_EStructuralFeature_transient;
 }
-std::shared_ptr<uml::Property> EcorePackageImpl::get_Ecore_EStructuralFeature_unsettable()
+const std::shared_ptr<uml::Property>& EcorePackageImpl::get_Ecore_EStructuralFeature_unsettable()
 {
 	return ecore_EStructuralFeature_unsettable;
 }
-std::shared_ptr<uml::Property> EcorePackageImpl::get_Ecore_EStructuralFeature_volatile()
+const std::shared_ptr<uml::Property>& EcorePackageImpl::get_Ecore_EStructuralFeature_volatile()
 {
 	return ecore_EStructuralFeature_volatile;
 }
-std::shared_ptr<uml::PrimitiveType> EcorePackageImpl::get_Ecore_ETreeIterator()
+const std::shared_ptr<uml::PrimitiveType>& EcorePackageImpl::get_Ecore_ETreeIterator()
 {
 	return ecore_ETreeIterator;
 }
-std::shared_ptr<uml::Class> EcorePackageImpl::get_Ecore_ETreeIterator_E()
+const std::shared_ptr<uml::Class>& EcorePackageImpl::get_Ecore_ETreeIterator_E()
 {
 	return ecore_ETreeIterator_E;
 }
-std::shared_ptr<uml::RedefinableTemplateSignature> EcorePackageImpl::get_Ecore_ETreeIterator_RedefinableTemplateSignature()
+const std::shared_ptr<uml::RedefinableTemplateSignature>& EcorePackageImpl::get_Ecore_ETreeIterator_RedefinableTemplateSignature()
 {
 	return ecore_ETreeIterator_RedefinableTemplateSignature;
 }
-std::shared_ptr<uml::Class> EcorePackageImpl::get_Ecore_ETypeParameter()
+const std::shared_ptr<uml::Class>& EcorePackageImpl::get_Ecore_ETypeParameter()
 {
 	return ecore_ETypeParameter;
 }
-std::shared_ptr<uml::Property> EcorePackageImpl::get_Ecore_ETypeParameter_eBounds()
+const std::shared_ptr<uml::Property>& EcorePackageImpl::get_Ecore_ETypeParameter_eBounds()
 {
 	return ecore_ETypeParameter_eBounds;
 }
-std::shared_ptr<uml::Class> EcorePackageImpl::get_Ecore_ETypedElement()
+const std::shared_ptr<uml::Class>& EcorePackageImpl::get_Ecore_ETypedElement()
 {
 	return ecore_ETypedElement;
 }
-std::shared_ptr<uml::Property> EcorePackageImpl::get_Ecore_ETypedElement_eGenericType()
+const std::shared_ptr<uml::Property>& EcorePackageImpl::get_Ecore_ETypedElement_eGenericType()
 {
 	return ecore_ETypedElement_eGenericType;
 }
-std::shared_ptr<uml::Property> EcorePackageImpl::get_Ecore_ETypedElement_eType()
+const std::shared_ptr<uml::Property>& EcorePackageImpl::get_Ecore_ETypedElement_eType()
 {
 	return ecore_ETypedElement_eType;
 }
-std::shared_ptr<uml::Property> EcorePackageImpl::get_Ecore_ETypedElement_lowerBound()
+const std::shared_ptr<uml::Property>& EcorePackageImpl::get_Ecore_ETypedElement_lowerBound()
 {
 	return ecore_ETypedElement_lowerBound;
 }
-std::shared_ptr<uml::Property> EcorePackageImpl::get_Ecore_ETypedElement_many()
+const std::shared_ptr<uml::Property>& EcorePackageImpl::get_Ecore_ETypedElement_many()
 {
 	return ecore_ETypedElement_many;
 }
-std::shared_ptr<uml::Property> EcorePackageImpl::get_Ecore_ETypedElement_ordered()
+const std::shared_ptr<uml::Property>& EcorePackageImpl::get_Ecore_ETypedElement_ordered()
 {
 	return ecore_ETypedElement_ordered;
 }
-std::shared_ptr<uml::Property> EcorePackageImpl::get_Ecore_ETypedElement_required()
+const std::shared_ptr<uml::Property>& EcorePackageImpl::get_Ecore_ETypedElement_required()
 {
 	return ecore_ETypedElement_required;
 }
-std::shared_ptr<uml::Property> EcorePackageImpl::get_Ecore_ETypedElement_unique()
+const std::shared_ptr<uml::Property>& EcorePackageImpl::get_Ecore_ETypedElement_unique()
 {
 	return ecore_ETypedElement_unique;
 }
-std::shared_ptr<uml::Property> EcorePackageImpl::get_Ecore_ETypedElement_upperBound()
+const std::shared_ptr<uml::Property>& EcorePackageImpl::get_Ecore_ETypedElement_upperBound()
 {
 	return ecore_ETypedElement_upperBound;
 }

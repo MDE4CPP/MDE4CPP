@@ -30,6 +30,7 @@
 [import UML4CPP::generator::main::helpers::setGetHelper /]
 [import UML4CPP::generator::main::validation::validation/]
 [import UML4CPP::generator::main::profiles::uml4CPPProfileHelper /]
+[import UML4CPP::generator::main::model_execution::model_execution /]
 
 [template public generateClassImplementationHeader(aClass : Class) {className : String = aClass.name.toUpperFirst().concat('Impl'); aPackage : Package = aClass.ancestors()->filter(Package)->first()}]
 [file (aPackage.generateNamespacePath(false).concat('/impl/').concat(className).concat('.hpp'), false, 'UTF-8')]
@@ -41,7 +42,7 @@
 #include "[sClass.getNearestPackage().generateNamespacePath(false)/]/impl/[sClass.name.toUpperFirst()/]Impl.hpp"
 [/for]
 [if (aClass.superClass->isEmpty())]
-#include "uml/impl/[aClass.getGeneralSuperClassName()/]Impl.hpp"
+#include "[aClass.getGeneralSuperClassImplInclude()/]"
 [/if]
 
 class Any;
@@ -62,7 +63,7 @@ namespace uml
 [/if]
 	class [className/] [for (sClass : Class | aClass.superClass->reject(oclIsUndefined() and name.oclIsUndefined())) before (':') separator (',')]
 virtual public [sClass.getClassifierName(aClass, false, sClass.getNearestPackage().isIgnoreNamespace())/]Impl[/for][if (aClass.superClass->isEmpty())]
- : virtual public uml::[aClass.getGeneralSuperClassName()/]Impl[/if], virtual public [aClass.name.toUpperFirst()/]
+ : virtual public [aClass.getGeneralSuperClassName()/]Impl[/if], virtual public [aClass.name.toUpperFirst()/]
 	{
 		public: 
 			[className/](const [className/] & obj);
@@ -110,6 +111,11 @@ virtual public [sClass.getClassifierName(aClass, false, sClass.getNearestPackage
 			[for (anOpaqueBehavior : OpaqueBehavior | aClass.collectOpaqueBehaviorsContexedByClass()->sortedBy(name)) before('\t\t\t//Methods defined by OpaqueBehaviors\n') after('\n')]
 			[anOpaqueBehavior.generateMethodDeclaration(true)/]
 			[/for]
+			[if (isFUMLExecutable())]
+			// fUML-specific Operations
+			const std::shared_ptr<Bag<uml::Classifier>>& getTypes() const;
+
+			[/if]
 			//*********************************
 			// Attributes Getter Setter
 			//*********************************

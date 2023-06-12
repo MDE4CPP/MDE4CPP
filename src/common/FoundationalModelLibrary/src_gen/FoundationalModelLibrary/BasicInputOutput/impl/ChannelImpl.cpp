@@ -62,7 +62,7 @@ std::shared_ptr<ecore::EObject>  ChannelImpl::copy() const
 ChannelImpl& ChannelImpl::operator=(const ChannelImpl & obj)
 {
 	//call overloaded =Operator for each base class
-	uml::ElementImpl::operator=(obj);
+	fUML::MDE4CPP_Extensions::FUML_ObjectImpl::operator=(obj);
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy Channel "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
@@ -106,6 +106,21 @@ void ChannelImpl::destroy()
 //*********************************
 // Operations
 //*********************************
+// fUML-specific Operations
+const std::shared_ptr<Bag<uml::Classifier>>& ChannelImpl::getTypes() const
+{
+	static std::shared_ptr<Bag<uml::Classifier>> types;
+
+	if(!types)
+	{
+		types.reset();
+		// Add type of self 'Channel' : Class
+		types->add(FoundationalModelLibrary::BasicInputOutput::BasicInputOutputPackage::eInstance()->get_FoundationalModelLibrary_BasicInputOutput_Channel());
+	}
+
+	return types;
+}
+
 //**************************************
 // StructuralFeature Getter & Setter
 //**************************************

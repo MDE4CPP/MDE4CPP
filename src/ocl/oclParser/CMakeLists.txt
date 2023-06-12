@@ -36,7 +36,8 @@ string(REPLACE "\\" "/" MDE4CPP_HOME "$ENV{MDE4CPP_HOME}")
 SET(SOURCE_FILES
 # Utilities
 	Utilities/OclConversion.cpp
-	Utilities/Ocl.cpp
+	Utilities/OclEcore.cpp
+	#Utilities/OclUml.cpp
 # OclCS
     OclCS/OclFragments.cpp
     OclCS/OclLexer.cpp

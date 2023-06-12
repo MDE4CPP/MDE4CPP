@@ -44,112 +44,112 @@ namespace FoundationalModelLibrary::BasicInputOutput
 			static const std::string eNS_PREFIX;
 
 			//getter for the ownedMember
-			virtual std::shared_ptr<uml::Class> get_FoundationalModelLibrary_BasicInputOutput_ActiveChannel() = 0;  
-			virtual std::shared_ptr<uml::Class> get_FoundationalModelLibrary_BasicInputOutput_Channel() = 0;  
-			virtual std::shared_ptr<uml::Class> get_FoundationalModelLibrary_BasicInputOutput_InputChannel() = 0;  
-			virtual std::shared_ptr<uml::Class> get_FoundationalModelLibrary_BasicInputOutput_OutputChannel() = 0;  
-			virtual std::shared_ptr<uml::Activity> get_FoundationalModelLibrary_BasicInputOutput_ReadLine() = 0;  
-			virtual std::shared_ptr<uml::ActivityParameterNode> get_FoundationalModelLibrary_BasicInputOutput_ReadLine_ActivityParameterNode_errorStatus() = 0;  
-			virtual std::shared_ptr<uml::ActivityParameterNode> get_FoundationalModelLibrary_BasicInputOutput_ReadLine_ActivityParameterNode_result() = 0;  
-			virtual std::shared_ptr<uml::CallOperationAction> get_FoundationalModelLibrary_BasicInputOutput_ReadLine_CallOperationAction_Call_readLine() = 0;  
-			virtual std::shared_ptr<uml::CreateObjectAction> get_FoundationalModelLibrary_BasicInputOutput_ReadLine_CreateObjectAction_Create_StandardInputChannel() = 0;  
-			virtual std::shared_ptr<uml::Parameter> get_FoundationalModelLibrary_BasicInputOutput_ReadLine_errorStatus() = 0;  
-			virtual std::shared_ptr<uml::Parameter> get_FoundationalModelLibrary_BasicInputOutput_ReadLine_result() = 0;  
-			virtual std::shared_ptr<uml::Class> get_FoundationalModelLibrary_BasicInputOutput_StandardInputChannel() = 0;  
-			virtual std::shared_ptr<uml::Class> get_FoundationalModelLibrary_BasicInputOutput_StandardOutputChannel() = 0;  
-			virtual std::shared_ptr<uml::Class> get_FoundationalModelLibrary_BasicInputOutput_TextInputChannel() = 0;  
-			virtual std::shared_ptr<uml::FunctionBehavior> get_FoundationalModelLibrary_BasicInputOutput_TextInputChannel_fb_peekCharacter() = 0;  
-			virtual std::shared_ptr<uml::Parameter> get_FoundationalModelLibrary_BasicInputOutput_TextInputChannel_fb_peekCharacter_ReturnResult() = 0;  
-			virtual std::shared_ptr<uml::Parameter> get_FoundationalModelLibrary_BasicInputOutput_TextInputChannel_fb_peekCharacter_errorStatus() = 0;  
-			virtual std::shared_ptr<uml::FunctionBehavior> get_FoundationalModelLibrary_BasicInputOutput_TextInputChannel_fb_readBoolean() = 0;  
-			virtual std::shared_ptr<uml::Parameter> get_FoundationalModelLibrary_BasicInputOutput_TextInputChannel_fb_readBoolean_ReturnResult() = 0;  
-			virtual std::shared_ptr<uml::Parameter> get_FoundationalModelLibrary_BasicInputOutput_TextInputChannel_fb_readBoolean_errorStatus() = 0;  
-			virtual std::shared_ptr<uml::FunctionBehavior> get_FoundationalModelLibrary_BasicInputOutput_TextInputChannel_fb_readCharacter() = 0;  
-			virtual std::shared_ptr<uml::Parameter> get_FoundationalModelLibrary_BasicInputOutput_TextInputChannel_fb_readCharacter_ReturnResult() = 0;  
-			virtual std::shared_ptr<uml::Parameter> get_FoundationalModelLibrary_BasicInputOutput_TextInputChannel_fb_readCharacter_errorStatus() = 0;  
-			virtual std::shared_ptr<uml::FunctionBehavior> get_FoundationalModelLibrary_BasicInputOutput_TextInputChannel_fb_readInteger() = 0;  
-			virtual std::shared_ptr<uml::Parameter> get_FoundationalModelLibrary_BasicInputOutput_TextInputChannel_fb_readInteger_ReturnResult() = 0;  
-			virtual std::shared_ptr<uml::Parameter> get_FoundationalModelLibrary_BasicInputOutput_TextInputChannel_fb_readInteger_errorStatus() = 0;  
-			virtual std::shared_ptr<uml::FunctionBehavior> get_FoundationalModelLibrary_BasicInputOutput_TextInputChannel_fb_readLine() = 0;  
-			virtual std::shared_ptr<uml::Parameter> get_FoundationalModelLibrary_BasicInputOutput_TextInputChannel_fb_readLine_ReturnResult() = 0;  
-			virtual std::shared_ptr<uml::Parameter> get_FoundationalModelLibrary_BasicInputOutput_TextInputChannel_fb_readLine_errorStatus() = 0;  
-			virtual std::shared_ptr<uml::Parameter> get_FoundationalModelLibrary_BasicInputOutput_TextInputChannel_peekCharacter_ReturnResult() = 0;  
-			virtual std::shared_ptr<uml::Operation> get_FoundationalModelLibrary_BasicInputOutput_TextInputChannel_peekCharacter_Status_Status() = 0;  
-			virtual std::shared_ptr<uml::Parameter> get_FoundationalModelLibrary_BasicInputOutput_TextInputChannel_peekCharacter_Status_Status_errorStatus() = 0;  
-			virtual std::shared_ptr<uml::Parameter> get_FoundationalModelLibrary_BasicInputOutput_TextInputChannel_readBoolean_ReturnResult() = 0;  
-			virtual std::shared_ptr<uml::Operation> get_FoundationalModelLibrary_BasicInputOutput_TextInputChannel_readBoolean_Status_Status() = 0;  
-			virtual std::shared_ptr<uml::Parameter> get_FoundationalModelLibrary_BasicInputOutput_TextInputChannel_readBoolean_Status_Status_errorStatus() = 0;  
-			virtual std::shared_ptr<uml::Parameter> get_FoundationalModelLibrary_BasicInputOutput_TextInputChannel_readCharacter_ReturnResult() = 0;  
-			virtual std::shared_ptr<uml::Operation> get_FoundationalModelLibrary_BasicInputOutput_TextInputChannel_readCharacter_Status_Status() = 0;  
-			virtual std::shared_ptr<uml::Parameter> get_FoundationalModelLibrary_BasicInputOutput_TextInputChannel_readCharacter_Status_Status_errorStatus() = 0;  
-			virtual std::shared_ptr<uml::Parameter> get_FoundationalModelLibrary_BasicInputOutput_TextInputChannel_readInteger_ReturnResult() = 0;  
-			virtual std::shared_ptr<uml::Operation> get_FoundationalModelLibrary_BasicInputOutput_TextInputChannel_readInteger_Status_Status() = 0;  
-			virtual std::shared_ptr<uml::Parameter> get_FoundationalModelLibrary_BasicInputOutput_TextInputChannel_readInteger_Status_Status_errorStatus() = 0;  
-			virtual std::shared_ptr<uml::Parameter> get_FoundationalModelLibrary_BasicInputOutput_TextInputChannel_readLine_ReturnResult() = 0;  
-			virtual std::shared_ptr<uml::Operation> get_FoundationalModelLibrary_BasicInputOutput_TextInputChannel_readLine_Status_Status() = 0;  
-			virtual std::shared_ptr<uml::Parameter> get_FoundationalModelLibrary_BasicInputOutput_TextInputChannel_readLine_Status_Status_errorStatus() = 0;  
-			virtual std::shared_ptr<uml::Parameter> get_FoundationalModelLibrary_BasicInputOutput_TextInputChannel_readReal_ReturnResult() = 0;  
-			virtual std::shared_ptr<uml::Operation> get_FoundationalModelLibrary_BasicInputOutput_TextInputChannel_readReal_Status_Status() = 0;  
-			virtual std::shared_ptr<uml::Parameter> get_FoundationalModelLibrary_BasicInputOutput_TextInputChannel_readReal_Status_Status_errorStatus() = 0;  
-			virtual std::shared_ptr<uml::Parameter> get_FoundationalModelLibrary_BasicInputOutput_TextInputChannel_readUnlimitedNatural_ReturnResult() = 0;  
-			virtual std::shared_ptr<uml::Operation> get_FoundationalModelLibrary_BasicInputOutput_TextInputChannel_readUnlimitedNatural_Status_Status() = 0;  
-			virtual std::shared_ptr<uml::Parameter> get_FoundationalModelLibrary_BasicInputOutput_TextInputChannel_readUnlimitedNatural_Status_Status_errorStatus() = 0;  
-			virtual std::shared_ptr<uml::Class> get_FoundationalModelLibrary_BasicInputOutput_TextOutputChannel() = 0;  
-			virtual std::shared_ptr<uml::FunctionBehavior> get_FoundationalModelLibrary_BasicInputOutput_TextOutputChannel_fb_writeBoolean() = 0;  
-			virtual std::shared_ptr<uml::Parameter> get_FoundationalModelLibrary_BasicInputOutput_TextOutputChannel_fb_writeBoolean_errorStatus() = 0;  
-			virtual std::shared_ptr<uml::Parameter> get_FoundationalModelLibrary_BasicInputOutput_TextOutputChannel_fb_writeBoolean_value() = 0;  
-			virtual std::shared_ptr<uml::FunctionBehavior> get_FoundationalModelLibrary_BasicInputOutput_TextOutputChannel_fb_writeInteger() = 0;  
-			virtual std::shared_ptr<uml::Parameter> get_FoundationalModelLibrary_BasicInputOutput_TextOutputChannel_fb_writeInteger_errorStatus() = 0;  
-			virtual std::shared_ptr<uml::Parameter> get_FoundationalModelLibrary_BasicInputOutput_TextOutputChannel_fb_writeInteger_value() = 0;  
-			virtual std::shared_ptr<uml::FunctionBehavior> get_FoundationalModelLibrary_BasicInputOutput_TextOutputChannel_fb_writeLine() = 0;  
-			virtual std::shared_ptr<uml::Parameter> get_FoundationalModelLibrary_BasicInputOutput_TextOutputChannel_fb_writeLine_errorStatus() = 0;  
-			virtual std::shared_ptr<uml::Parameter> get_FoundationalModelLibrary_BasicInputOutput_TextOutputChannel_fb_writeLine_value() = 0;  
-			virtual std::shared_ptr<uml::FunctionBehavior> get_FoundationalModelLibrary_BasicInputOutput_TextOutputChannel_fb_writeNewLine() = 0;  
-			virtual std::shared_ptr<uml::Parameter> get_FoundationalModelLibrary_BasicInputOutput_TextOutputChannel_fb_writeNewLine_errorStatus() = 0;  
-			virtual std::shared_ptr<uml::FunctionBehavior> get_FoundationalModelLibrary_BasicInputOutput_TextOutputChannel_fb_writeString() = 0;  
-			virtual std::shared_ptr<uml::Parameter> get_FoundationalModelLibrary_BasicInputOutput_TextOutputChannel_fb_writeString_errorStatus() = 0;  
-			virtual std::shared_ptr<uml::Parameter> get_FoundationalModelLibrary_BasicInputOutput_TextOutputChannel_fb_writeString_value() = 0;  
-			virtual std::shared_ptr<uml::Operation> get_FoundationalModelLibrary_BasicInputOutput_TextOutputChannel_writeBoolean_Boolean_Status_Boolean_Status() = 0;  
-			virtual std::shared_ptr<uml::Parameter> get_FoundationalModelLibrary_BasicInputOutput_TextOutputChannel_writeBoolean_Boolean_Status_Boolean_Status_errorStatus() = 0;  
-			virtual std::shared_ptr<uml::Parameter> get_FoundationalModelLibrary_BasicInputOutput_TextOutputChannel_writeBoolean_Boolean_Status_Boolean_Status_value() = 0;  
-			virtual std::shared_ptr<uml::Operation> get_FoundationalModelLibrary_BasicInputOutput_TextOutputChannel_writeInteger_Integer_Status_Integer_Status() = 0;  
-			virtual std::shared_ptr<uml::Parameter> get_FoundationalModelLibrary_BasicInputOutput_TextOutputChannel_writeInteger_Integer_Status_Integer_Status_errorStatus() = 0;  
-			virtual std::shared_ptr<uml::Parameter> get_FoundationalModelLibrary_BasicInputOutput_TextOutputChannel_writeInteger_Integer_Status_Integer_Status_value() = 0;  
-			virtual std::shared_ptr<uml::Operation> get_FoundationalModelLibrary_BasicInputOutput_TextOutputChannel_writeLine_String_Status_String_Status() = 0;  
-			virtual std::shared_ptr<uml::Parameter> get_FoundationalModelLibrary_BasicInputOutput_TextOutputChannel_writeLine_String_Status_String_Status_errorStatus() = 0;  
-			virtual std::shared_ptr<uml::Parameter> get_FoundationalModelLibrary_BasicInputOutput_TextOutputChannel_writeLine_String_Status_String_Status_value() = 0;  
-			virtual std::shared_ptr<uml::Operation> get_FoundationalModelLibrary_BasicInputOutput_TextOutputChannel_writeNewLine_Status_Status() = 0;  
-			virtual std::shared_ptr<uml::Parameter> get_FoundationalModelLibrary_BasicInputOutput_TextOutputChannel_writeNewLine_Status_Status_errorStatus() = 0;  
-			virtual std::shared_ptr<uml::Operation> get_FoundationalModelLibrary_BasicInputOutput_TextOutputChannel_writeReal_Real_Status_Real_Status() = 0;  
-			virtual std::shared_ptr<uml::Parameter> get_FoundationalModelLibrary_BasicInputOutput_TextOutputChannel_writeReal_Real_Status_Real_Status_errorStatus() = 0;  
-			virtual std::shared_ptr<uml::Parameter> get_FoundationalModelLibrary_BasicInputOutput_TextOutputChannel_writeReal_Real_Status_Real_Status_value() = 0;  
-			virtual std::shared_ptr<uml::Operation> get_FoundationalModelLibrary_BasicInputOutput_TextOutputChannel_writeString_String_Status_String_Status() = 0;  
-			virtual std::shared_ptr<uml::Parameter> get_FoundationalModelLibrary_BasicInputOutput_TextOutputChannel_writeString_String_Status_String_Status_errorStatus() = 0;  
-			virtual std::shared_ptr<uml::Parameter> get_FoundationalModelLibrary_BasicInputOutput_TextOutputChannel_writeString_String_Status_String_Status_value() = 0;  
-			virtual std::shared_ptr<uml::Operation> get_FoundationalModelLibrary_BasicInputOutput_TextOutputChannel_writeUnlimitedNatural_UnlimitedNatural_Status_UnlimitedNatural_Status() = 0;  
-			virtual std::shared_ptr<uml::Parameter> get_FoundationalModelLibrary_BasicInputOutput_TextOutputChannel_writeUnlimitedNatural_UnlimitedNatural_Status_UnlimitedNatural_Status_errorStatus() = 0;  
-			virtual std::shared_ptr<uml::Parameter> get_FoundationalModelLibrary_BasicInputOutput_TextOutputChannel_writeUnlimitedNatural_UnlimitedNatural_Status_UnlimitedNatural_Status_value() = 0;  
-			virtual std::shared_ptr<uml::Activity> get_FoundationalModelLibrary_BasicInputOutput_WriteLine() = 0;  
-			virtual std::shared_ptr<uml::ActivityParameterNode> get_FoundationalModelLibrary_BasicInputOutput_WriteLine_ActivityParameterNode_errorStatus() = 0;  
-			virtual std::shared_ptr<uml::ActivityParameterNode> get_FoundationalModelLibrary_BasicInputOutput_WriteLine_ActivityParameterNode_value() = 0;  
-			virtual std::shared_ptr<uml::CallOperationAction> get_FoundationalModelLibrary_BasicInputOutput_WriteLine_CallOperationAction_Call_writeLine() = 0;  
-			virtual std::shared_ptr<uml::CreateObjectAction> get_FoundationalModelLibrary_BasicInputOutput_WriteLine_CreateObjectAction_Create_StandardOutputChannel() = 0;  
-			virtual std::shared_ptr<uml::Parameter> get_FoundationalModelLibrary_BasicInputOutput_WriteLine_errorStatus() = 0;  
-			virtual std::shared_ptr<uml::Parameter> get_FoundationalModelLibrary_BasicInputOutput_WriteLine_value() = 0;  
-			virtual std::shared_ptr<uml::InputPin> get_InputPin_ReadLine_ReadLine_Call_readLine_target() = 0;  
-			virtual std::shared_ptr<uml::InputPin> get_InputPin_WriteLine_WriteLine_Call_writeLine_target() = 0;  
-			virtual std::shared_ptr<uml::InputPin> get_InputPin_WriteLine_WriteLine_Call_writeLine_value() = 0;  
-			virtual std::shared_ptr<uml::ObjectFlow> get_OF_FoundationalModelLibrary_BasicInputOutput_WriteLine_ActivityParameterNode_value_InputPin_WriteLine_WriteLine_Call_writeLine_value() = 0;  
-			virtual std::shared_ptr<uml::ObjectFlow> get_OF_OutputPin_ReadLine_ReadLine_Call_readLine_ReturnResult_FoundationalModelLibrary_BasicInputOutput_ReadLine_ActivityParameterNode_result() = 0;  
-			virtual std::shared_ptr<uml::ObjectFlow> get_OF_OutputPin_ReadLine_ReadLine_Call_readLine_errorStatus_FoundationalModelLibrary_BasicInputOutput_ReadLine_ActivityParameterNode_errorStatus() = 0;  
-			virtual std::shared_ptr<uml::ObjectFlow> get_OF_OutputPin_ReadLine_ReadLine_Create_StandardInputChannel_result_InputPin_ReadLine_ReadLine_Call_readLine_target() = 0;  
-			virtual std::shared_ptr<uml::ObjectFlow> get_OF_OutputPin_WriteLine_WriteLine_Call_writeLine_errorStatus_FoundationalModelLibrary_BasicInputOutput_WriteLine_ActivityParameterNode_errorStatus() = 0;  
-			virtual std::shared_ptr<uml::ObjectFlow> get_OF_OutputPin_WriteLine_WriteLine_Create_StandardOutputChannel_result_InputPin_WriteLine_WriteLine_Call_writeLine_target() = 0;  
-			virtual std::shared_ptr<uml::OutputPin> get_OutputPin_ReadLine_ReadLine_Call_readLine_ReturnResult() = 0;  
-			virtual std::shared_ptr<uml::OutputPin> get_OutputPin_ReadLine_ReadLine_Call_readLine_errorStatus() = 0;  
-			virtual std::shared_ptr<uml::OutputPin> get_OutputPin_ReadLine_ReadLine_Create_StandardInputChannel_result() = 0;  
-			virtual std::shared_ptr<uml::OutputPin> get_OutputPin_WriteLine_WriteLine_Call_writeLine_errorStatus() = 0;  
-			virtual std::shared_ptr<uml::OutputPin> get_OutputPin_WriteLine_WriteLine_Create_StandardOutputChannel_result() = 0;  
+			virtual const std::shared_ptr<uml::Class>& get_FoundationalModelLibrary_BasicInputOutput_ActiveChannel() = 0;  
+			virtual const std::shared_ptr<uml::Class>& get_FoundationalModelLibrary_BasicInputOutput_Channel() = 0;  
+			virtual const std::shared_ptr<uml::Class>& get_FoundationalModelLibrary_BasicInputOutput_InputChannel() = 0;  
+			virtual const std::shared_ptr<uml::Class>& get_FoundationalModelLibrary_BasicInputOutput_OutputChannel() = 0;  
+			virtual const std::shared_ptr<uml::Activity>& get_FoundationalModelLibrary_BasicInputOutput_ReadLine() = 0;  
+			virtual const std::shared_ptr<uml::ActivityParameterNode>& get_FoundationalModelLibrary_BasicInputOutput_ReadLine_ActivityParameterNode_errorStatus() = 0;  
+			virtual const std::shared_ptr<uml::ActivityParameterNode>& get_FoundationalModelLibrary_BasicInputOutput_ReadLine_ActivityParameterNode_result() = 0;  
+			virtual const std::shared_ptr<uml::CallOperationAction>& get_FoundationalModelLibrary_BasicInputOutput_ReadLine_CallOperationAction_Call_readLine() = 0;  
+			virtual const std::shared_ptr<uml::CreateObjectAction>& get_FoundationalModelLibrary_BasicInputOutput_ReadLine_CreateObjectAction_Create_StandardInputChannel() = 0;  
+			virtual const std::shared_ptr<uml::Parameter>& get_FoundationalModelLibrary_BasicInputOutput_ReadLine_errorStatus() = 0;  
+			virtual const std::shared_ptr<uml::Parameter>& get_FoundationalModelLibrary_BasicInputOutput_ReadLine_result() = 0;  
+			virtual const std::shared_ptr<uml::Class>& get_FoundationalModelLibrary_BasicInputOutput_StandardInputChannel() = 0;  
+			virtual const std::shared_ptr<uml::Class>& get_FoundationalModelLibrary_BasicInputOutput_StandardOutputChannel() = 0;  
+			virtual const std::shared_ptr<uml::Class>& get_FoundationalModelLibrary_BasicInputOutput_TextInputChannel() = 0;  
+			virtual const std::shared_ptr<uml::FunctionBehavior>& get_FoundationalModelLibrary_BasicInputOutput_TextInputChannel_fb_peekCharacter() = 0;  
+			virtual const std::shared_ptr<uml::Parameter>& get_FoundationalModelLibrary_BasicInputOutput_TextInputChannel_fb_peekCharacter_ReturnResult() = 0;  
+			virtual const std::shared_ptr<uml::Parameter>& get_FoundationalModelLibrary_BasicInputOutput_TextInputChannel_fb_peekCharacter_errorStatus() = 0;  
+			virtual const std::shared_ptr<uml::FunctionBehavior>& get_FoundationalModelLibrary_BasicInputOutput_TextInputChannel_fb_readBoolean() = 0;  
+			virtual const std::shared_ptr<uml::Parameter>& get_FoundationalModelLibrary_BasicInputOutput_TextInputChannel_fb_readBoolean_ReturnResult() = 0;  
+			virtual const std::shared_ptr<uml::Parameter>& get_FoundationalModelLibrary_BasicInputOutput_TextInputChannel_fb_readBoolean_errorStatus() = 0;  
+			virtual const std::shared_ptr<uml::FunctionBehavior>& get_FoundationalModelLibrary_BasicInputOutput_TextInputChannel_fb_readCharacter() = 0;  
+			virtual const std::shared_ptr<uml::Parameter>& get_FoundationalModelLibrary_BasicInputOutput_TextInputChannel_fb_readCharacter_ReturnResult() = 0;  
+			virtual const std::shared_ptr<uml::Parameter>& get_FoundationalModelLibrary_BasicInputOutput_TextInputChannel_fb_readCharacter_errorStatus() = 0;  
+			virtual const std::shared_ptr<uml::FunctionBehavior>& get_FoundationalModelLibrary_BasicInputOutput_TextInputChannel_fb_readInteger() = 0;  
+			virtual const std::shared_ptr<uml::Parameter>& get_FoundationalModelLibrary_BasicInputOutput_TextInputChannel_fb_readInteger_ReturnResult() = 0;  
+			virtual const std::shared_ptr<uml::Parameter>& get_FoundationalModelLibrary_BasicInputOutput_TextInputChannel_fb_readInteger_errorStatus() = 0;  
+			virtual const std::shared_ptr<uml::FunctionBehavior>& get_FoundationalModelLibrary_BasicInputOutput_TextInputChannel_fb_readLine() = 0;  
+			virtual const std::shared_ptr<uml::Parameter>& get_FoundationalModelLibrary_BasicInputOutput_TextInputChannel_fb_readLine_ReturnResult() = 0;  
+			virtual const std::shared_ptr<uml::Parameter>& get_FoundationalModelLibrary_BasicInputOutput_TextInputChannel_fb_readLine_errorStatus() = 0;  
+			virtual const std::shared_ptr<uml::Parameter>& get_FoundationalModelLibrary_BasicInputOutput_TextInputChannel_peekCharacter_ReturnResult() = 0;  
+			virtual const std::shared_ptr<uml::Operation>& get_FoundationalModelLibrary_BasicInputOutput_TextInputChannel_peekCharacter_Status_Status() = 0;  
+			virtual const std::shared_ptr<uml::Parameter>& get_FoundationalModelLibrary_BasicInputOutput_TextInputChannel_peekCharacter_Status_Status_errorStatus() = 0;  
+			virtual const std::shared_ptr<uml::Parameter>& get_FoundationalModelLibrary_BasicInputOutput_TextInputChannel_readBoolean_ReturnResult() = 0;  
+			virtual const std::shared_ptr<uml::Operation>& get_FoundationalModelLibrary_BasicInputOutput_TextInputChannel_readBoolean_Status_Status() = 0;  
+			virtual const std::shared_ptr<uml::Parameter>& get_FoundationalModelLibrary_BasicInputOutput_TextInputChannel_readBoolean_Status_Status_errorStatus() = 0;  
+			virtual const std::shared_ptr<uml::Parameter>& get_FoundationalModelLibrary_BasicInputOutput_TextInputChannel_readCharacter_ReturnResult() = 0;  
+			virtual const std::shared_ptr<uml::Operation>& get_FoundationalModelLibrary_BasicInputOutput_TextInputChannel_readCharacter_Status_Status() = 0;  
+			virtual const std::shared_ptr<uml::Parameter>& get_FoundationalModelLibrary_BasicInputOutput_TextInputChannel_readCharacter_Status_Status_errorStatus() = 0;  
+			virtual const std::shared_ptr<uml::Parameter>& get_FoundationalModelLibrary_BasicInputOutput_TextInputChannel_readInteger_ReturnResult() = 0;  
+			virtual const std::shared_ptr<uml::Operation>& get_FoundationalModelLibrary_BasicInputOutput_TextInputChannel_readInteger_Status_Status() = 0;  
+			virtual const std::shared_ptr<uml::Parameter>& get_FoundationalModelLibrary_BasicInputOutput_TextInputChannel_readInteger_Status_Status_errorStatus() = 0;  
+			virtual const std::shared_ptr<uml::Parameter>& get_FoundationalModelLibrary_BasicInputOutput_TextInputChannel_readLine_ReturnResult() = 0;  
+			virtual const std::shared_ptr<uml::Operation>& get_FoundationalModelLibrary_BasicInputOutput_TextInputChannel_readLine_Status_Status() = 0;  
+			virtual const std::shared_ptr<uml::Parameter>& get_FoundationalModelLibrary_BasicInputOutput_TextInputChannel_readLine_Status_Status_errorStatus() = 0;  
+			virtual const std::shared_ptr<uml::Parameter>& get_FoundationalModelLibrary_BasicInputOutput_TextInputChannel_readReal_ReturnResult() = 0;  
+			virtual const std::shared_ptr<uml::Operation>& get_FoundationalModelLibrary_BasicInputOutput_TextInputChannel_readReal_Status_Status() = 0;  
+			virtual const std::shared_ptr<uml::Parameter>& get_FoundationalModelLibrary_BasicInputOutput_TextInputChannel_readReal_Status_Status_errorStatus() = 0;  
+			virtual const std::shared_ptr<uml::Parameter>& get_FoundationalModelLibrary_BasicInputOutput_TextInputChannel_readUnlimitedNatural_ReturnResult() = 0;  
+			virtual const std::shared_ptr<uml::Operation>& get_FoundationalModelLibrary_BasicInputOutput_TextInputChannel_readUnlimitedNatural_Status_Status() = 0;  
+			virtual const std::shared_ptr<uml::Parameter>& get_FoundationalModelLibrary_BasicInputOutput_TextInputChannel_readUnlimitedNatural_Status_Status_errorStatus() = 0;  
+			virtual const std::shared_ptr<uml::Class>& get_FoundationalModelLibrary_BasicInputOutput_TextOutputChannel() = 0;  
+			virtual const std::shared_ptr<uml::FunctionBehavior>& get_FoundationalModelLibrary_BasicInputOutput_TextOutputChannel_fb_writeBoolean() = 0;  
+			virtual const std::shared_ptr<uml::Parameter>& get_FoundationalModelLibrary_BasicInputOutput_TextOutputChannel_fb_writeBoolean_errorStatus() = 0;  
+			virtual const std::shared_ptr<uml::Parameter>& get_FoundationalModelLibrary_BasicInputOutput_TextOutputChannel_fb_writeBoolean_value() = 0;  
+			virtual const std::shared_ptr<uml::FunctionBehavior>& get_FoundationalModelLibrary_BasicInputOutput_TextOutputChannel_fb_writeInteger() = 0;  
+			virtual const std::shared_ptr<uml::Parameter>& get_FoundationalModelLibrary_BasicInputOutput_TextOutputChannel_fb_writeInteger_errorStatus() = 0;  
+			virtual const std::shared_ptr<uml::Parameter>& get_FoundationalModelLibrary_BasicInputOutput_TextOutputChannel_fb_writeInteger_value() = 0;  
+			virtual const std::shared_ptr<uml::FunctionBehavior>& get_FoundationalModelLibrary_BasicInputOutput_TextOutputChannel_fb_writeLine() = 0;  
+			virtual const std::shared_ptr<uml::Parameter>& get_FoundationalModelLibrary_BasicInputOutput_TextOutputChannel_fb_writeLine_errorStatus() = 0;  
+			virtual const std::shared_ptr<uml::Parameter>& get_FoundationalModelLibrary_BasicInputOutput_TextOutputChannel_fb_writeLine_value() = 0;  
+			virtual const std::shared_ptr<uml::FunctionBehavior>& get_FoundationalModelLibrary_BasicInputOutput_TextOutputChannel_fb_writeNewLine() = 0;  
+			virtual const std::shared_ptr<uml::Parameter>& get_FoundationalModelLibrary_BasicInputOutput_TextOutputChannel_fb_writeNewLine_errorStatus() = 0;  
+			virtual const std::shared_ptr<uml::FunctionBehavior>& get_FoundationalModelLibrary_BasicInputOutput_TextOutputChannel_fb_writeString() = 0;  
+			virtual const std::shared_ptr<uml::Parameter>& get_FoundationalModelLibrary_BasicInputOutput_TextOutputChannel_fb_writeString_errorStatus() = 0;  
+			virtual const std::shared_ptr<uml::Parameter>& get_FoundationalModelLibrary_BasicInputOutput_TextOutputChannel_fb_writeString_value() = 0;  
+			virtual const std::shared_ptr<uml::Operation>& get_FoundationalModelLibrary_BasicInputOutput_TextOutputChannel_writeBoolean_Boolean_Status_Boolean_Status() = 0;  
+			virtual const std::shared_ptr<uml::Parameter>& get_FoundationalModelLibrary_BasicInputOutput_TextOutputChannel_writeBoolean_Boolean_Status_Boolean_Status_errorStatus() = 0;  
+			virtual const std::shared_ptr<uml::Parameter>& get_FoundationalModelLibrary_BasicInputOutput_TextOutputChannel_writeBoolean_Boolean_Status_Boolean_Status_value() = 0;  
+			virtual const std::shared_ptr<uml::Operation>& get_FoundationalModelLibrary_BasicInputOutput_TextOutputChannel_writeInteger_Integer_Status_Integer_Status() = 0;  
+			virtual const std::shared_ptr<uml::Parameter>& get_FoundationalModelLibrary_BasicInputOutput_TextOutputChannel_writeInteger_Integer_Status_Integer_Status_errorStatus() = 0;  
+			virtual const std::shared_ptr<uml::Parameter>& get_FoundationalModelLibrary_BasicInputOutput_TextOutputChannel_writeInteger_Integer_Status_Integer_Status_value() = 0;  
+			virtual const std::shared_ptr<uml::Operation>& get_FoundationalModelLibrary_BasicInputOutput_TextOutputChannel_writeLine_String_Status_String_Status() = 0;  
+			virtual const std::shared_ptr<uml::Parameter>& get_FoundationalModelLibrary_BasicInputOutput_TextOutputChannel_writeLine_String_Status_String_Status_errorStatus() = 0;  
+			virtual const std::shared_ptr<uml::Parameter>& get_FoundationalModelLibrary_BasicInputOutput_TextOutputChannel_writeLine_String_Status_String_Status_value() = 0;  
+			virtual const std::shared_ptr<uml::Operation>& get_FoundationalModelLibrary_BasicInputOutput_TextOutputChannel_writeNewLine_Status_Status() = 0;  
+			virtual const std::shared_ptr<uml::Parameter>& get_FoundationalModelLibrary_BasicInputOutput_TextOutputChannel_writeNewLine_Status_Status_errorStatus() = 0;  
+			virtual const std::shared_ptr<uml::Operation>& get_FoundationalModelLibrary_BasicInputOutput_TextOutputChannel_writeReal_Real_Status_Real_Status() = 0;  
+			virtual const std::shared_ptr<uml::Parameter>& get_FoundationalModelLibrary_BasicInputOutput_TextOutputChannel_writeReal_Real_Status_Real_Status_errorStatus() = 0;  
+			virtual const std::shared_ptr<uml::Parameter>& get_FoundationalModelLibrary_BasicInputOutput_TextOutputChannel_writeReal_Real_Status_Real_Status_value() = 0;  
+			virtual const std::shared_ptr<uml::Operation>& get_FoundationalModelLibrary_BasicInputOutput_TextOutputChannel_writeString_String_Status_String_Status() = 0;  
+			virtual const std::shared_ptr<uml::Parameter>& get_FoundationalModelLibrary_BasicInputOutput_TextOutputChannel_writeString_String_Status_String_Status_errorStatus() = 0;  
+			virtual const std::shared_ptr<uml::Parameter>& get_FoundationalModelLibrary_BasicInputOutput_TextOutputChannel_writeString_String_Status_String_Status_value() = 0;  
+			virtual const std::shared_ptr<uml::Operation>& get_FoundationalModelLibrary_BasicInputOutput_TextOutputChannel_writeUnlimitedNatural_UnlimitedNatural_Status_UnlimitedNatural_Status() = 0;  
+			virtual const std::shared_ptr<uml::Parameter>& get_FoundationalModelLibrary_BasicInputOutput_TextOutputChannel_writeUnlimitedNatural_UnlimitedNatural_Status_UnlimitedNatural_Status_errorStatus() = 0;  
+			virtual const std::shared_ptr<uml::Parameter>& get_FoundationalModelLibrary_BasicInputOutput_TextOutputChannel_writeUnlimitedNatural_UnlimitedNatural_Status_UnlimitedNatural_Status_value() = 0;  
+			virtual const std::shared_ptr<uml::Activity>& get_FoundationalModelLibrary_BasicInputOutput_WriteLine() = 0;  
+			virtual const std::shared_ptr<uml::ActivityParameterNode>& get_FoundationalModelLibrary_BasicInputOutput_WriteLine_ActivityParameterNode_errorStatus() = 0;  
+			virtual const std::shared_ptr<uml::ActivityParameterNode>& get_FoundationalModelLibrary_BasicInputOutput_WriteLine_ActivityParameterNode_value() = 0;  
+			virtual const std::shared_ptr<uml::CallOperationAction>& get_FoundationalModelLibrary_BasicInputOutput_WriteLine_CallOperationAction_Call_writeLine() = 0;  
+			virtual const std::shared_ptr<uml::CreateObjectAction>& get_FoundationalModelLibrary_BasicInputOutput_WriteLine_CreateObjectAction_Create_StandardOutputChannel() = 0;  
+			virtual const std::shared_ptr<uml::Parameter>& get_FoundationalModelLibrary_BasicInputOutput_WriteLine_errorStatus() = 0;  
+			virtual const std::shared_ptr<uml::Parameter>& get_FoundationalModelLibrary_BasicInputOutput_WriteLine_value() = 0;  
+			virtual const std::shared_ptr<uml::InputPin>& get_InputPin_ReadLine_ReadLine_Call_readLine_target() = 0;  
+			virtual const std::shared_ptr<uml::InputPin>& get_InputPin_WriteLine_WriteLine_Call_writeLine_target() = 0;  
+			virtual const std::shared_ptr<uml::InputPin>& get_InputPin_WriteLine_WriteLine_Call_writeLine_value() = 0;  
+			virtual const std::shared_ptr<uml::ObjectFlow>& get_OF_FoundationalModelLibrary_BasicInputOutput_WriteLine_ActivityParameterNode_value_InputPin_WriteLine_WriteLine_Call_writeLine_value() = 0;  
+			virtual const std::shared_ptr<uml::ObjectFlow>& get_OF_OutputPin_ReadLine_ReadLine_Call_readLine_ReturnResult_FoundationalModelLibrary_BasicInputOutput_ReadLine_ActivityParameterNode_result() = 0;  
+			virtual const std::shared_ptr<uml::ObjectFlow>& get_OF_OutputPin_ReadLine_ReadLine_Call_readLine_errorStatus_FoundationalModelLibrary_BasicInputOutput_ReadLine_ActivityParameterNode_errorStatus() = 0;  
+			virtual const std::shared_ptr<uml::ObjectFlow>& get_OF_OutputPin_ReadLine_ReadLine_Create_StandardInputChannel_result_InputPin_ReadLine_ReadLine_Call_readLine_target() = 0;  
+			virtual const std::shared_ptr<uml::ObjectFlow>& get_OF_OutputPin_WriteLine_WriteLine_Call_writeLine_errorStatus_FoundationalModelLibrary_BasicInputOutput_WriteLine_ActivityParameterNode_errorStatus() = 0;  
+			virtual const std::shared_ptr<uml::ObjectFlow>& get_OF_OutputPin_WriteLine_WriteLine_Create_StandardOutputChannel_result_InputPin_WriteLine_WriteLine_Call_writeLine_target() = 0;  
+			virtual const std::shared_ptr<uml::OutputPin>& get_OutputPin_ReadLine_ReadLine_Call_readLine_ReturnResult() = 0;  
+			virtual const std::shared_ptr<uml::OutputPin>& get_OutputPin_ReadLine_ReadLine_Call_readLine_errorStatus() = 0;  
+			virtual const std::shared_ptr<uml::OutputPin>& get_OutputPin_ReadLine_ReadLine_Create_StandardInputChannel_result() = 0;  
+			virtual const std::shared_ptr<uml::OutputPin>& get_OutputPin_WriteLine_WriteLine_Call_writeLine_errorStatus() = 0;  
+			virtual const std::shared_ptr<uml::OutputPin>& get_OutputPin_WriteLine_WriteLine_Create_StandardOutputChannel_result() = 0;  
 			
 			
 
@@ -215,20 +215,20 @@ namespace FoundationalModelLibrary::BasicInputOutput
 			//FoundationalModelLibrary::BasicInputOutput::TextInputChannel::readUnlimitedNatural(FoundationalModelLibrary::Common::Status) : int
 			static const unsigned long TEXTINPUTCHANNEL_OPERATION_READUNLIMITEDNATURAL_STATUS = 604257804;
 			//Behaviors
-				//FunctionBehavior FoundationalModelLibrary::BasicInputOutput::TextInputChannel::fb_peekCharacter
-			static const unsigned long TEXTINPUTCHANNEL_FUNCTIONBEHAVIOR_FB_PEEKCHARACTER = 548795195;
-			static const unsigned int TEXTINPUTCHANNEL_FUNCTIONBEHAVIOR_FB_PEEKCHARACTER_FEATURE_COUNT = 0;
-			static const unsigned int TEXTINPUTCHANNEL_FUNCTIONBEHAVIOR_FB_PEEKCHARACTER_OPERATION_COUNT = 0;
-			
 				//FunctionBehavior FoundationalModelLibrary::BasicInputOutput::TextInputChannel::fb_readLine
-				static const unsigned long TEXTINPUTCHANNEL_FUNCTIONBEHAVIOR_FB_READLINE = 1471477029;
-				static const unsigned int TEXTINPUTCHANNEL_FUNCTIONBEHAVIOR_FB_READLINE_FEATURE_COUNT = 0;
-				static const unsigned int TEXTINPUTCHANNEL_FUNCTIONBEHAVIOR_FB_READLINE_OPERATION_COUNT = 0;
-				
+			static const unsigned long TEXTINPUTCHANNEL_FUNCTIONBEHAVIOR_FB_READLINE = 1471477029;
+			static const unsigned int TEXTINPUTCHANNEL_FUNCTIONBEHAVIOR_FB_READLINE_FEATURE_COUNT = 0;
+			static const unsigned int TEXTINPUTCHANNEL_FUNCTIONBEHAVIOR_FB_READLINE_OPERATION_COUNT = 0;
+			
 				//FunctionBehavior FoundationalModelLibrary::BasicInputOutput::TextInputChannel::fb_readInteger
 				static const unsigned long TEXTINPUTCHANNEL_FUNCTIONBEHAVIOR_FB_READINTEGER = 446400749;
 				static const unsigned int TEXTINPUTCHANNEL_FUNCTIONBEHAVIOR_FB_READINTEGER_FEATURE_COUNT = 0;
 				static const unsigned int TEXTINPUTCHANNEL_FUNCTIONBEHAVIOR_FB_READINTEGER_OPERATION_COUNT = 0;
+				
+				//FunctionBehavior FoundationalModelLibrary::BasicInputOutput::TextInputChannel::fb_peekCharacter
+				static const unsigned long TEXTINPUTCHANNEL_FUNCTIONBEHAVIOR_FB_PEEKCHARACTER = 548795195;
+				static const unsigned int TEXTINPUTCHANNEL_FUNCTIONBEHAVIOR_FB_PEEKCHARACTER_FEATURE_COUNT = 0;
+				static const unsigned int TEXTINPUTCHANNEL_FUNCTIONBEHAVIOR_FB_PEEKCHARACTER_OPERATION_COUNT = 0;
 				
 				//FunctionBehavior FoundationalModelLibrary::BasicInputOutput::TextInputChannel::fb_readCharacter
 				static const unsigned long TEXTINPUTCHANNEL_FUNCTIONBEHAVIOR_FB_READCHARACTER = 586469930;
@@ -261,30 +261,30 @@ namespace FoundationalModelLibrary::BasicInputOutput
 			//FoundationalModelLibrary::BasicInputOutput::TextOutputChannel::writeUnlimitedNatural(int, FoundationalModelLibrary::Common::Status)
 			static const unsigned long TEXTOUTPUTCHANNEL_OPERATION_WRITEUNLIMITEDNATURAL_UNLIMITEDNATURAL_STATUS = 1732555673;
 			//Behaviors
-				//FunctionBehavior FoundationalModelLibrary::BasicInputOutput::TextOutputChannel::fb_writeString
-			static const unsigned long TEXTOUTPUTCHANNEL_FUNCTIONBEHAVIOR_FB_WRITESTRING = 512413595;
-			static const unsigned int TEXTOUTPUTCHANNEL_FUNCTIONBEHAVIOR_FB_WRITESTRING_FEATURE_COUNT = 0;
-			static const unsigned int TEXTOUTPUTCHANNEL_FUNCTIONBEHAVIOR_FB_WRITESTRING_OPERATION_COUNT = 0;
+				//FunctionBehavior FoundationalModelLibrary::BasicInputOutput::TextOutputChannel::fb_writeInteger
+			static const unsigned long TEXTOUTPUTCHANNEL_FUNCTIONBEHAVIOR_FB_WRITEINTEGER = 1102967664;
+			static const unsigned int TEXTOUTPUTCHANNEL_FUNCTIONBEHAVIOR_FB_WRITEINTEGER_FEATURE_COUNT = 0;
+			static const unsigned int TEXTOUTPUTCHANNEL_FUNCTIONBEHAVIOR_FB_WRITEINTEGER_OPERATION_COUNT = 0;
 			
 				//FunctionBehavior FoundationalModelLibrary::BasicInputOutput::TextOutputChannel::fb_writeLine
 				static const unsigned long TEXTOUTPUTCHANNEL_FUNCTIONBEHAVIOR_FB_WRITELINE = 766667557;
 				static const unsigned int TEXTOUTPUTCHANNEL_FUNCTIONBEHAVIOR_FB_WRITELINE_FEATURE_COUNT = 0;
 				static const unsigned int TEXTOUTPUTCHANNEL_FUNCTIONBEHAVIOR_FB_WRITELINE_OPERATION_COUNT = 0;
 				
-				//FunctionBehavior FoundationalModelLibrary::BasicInputOutput::TextOutputChannel::fb_writeBoolean
-				static const unsigned long TEXTOUTPUTCHANNEL_FUNCTIONBEHAVIOR_FB_WRITEBOOLEAN = 54149987;
-				static const unsigned int TEXTOUTPUTCHANNEL_FUNCTIONBEHAVIOR_FB_WRITEBOOLEAN_FEATURE_COUNT = 0;
-				static const unsigned int TEXTOUTPUTCHANNEL_FUNCTIONBEHAVIOR_FB_WRITEBOOLEAN_OPERATION_COUNT = 0;
-				
 				//FunctionBehavior FoundationalModelLibrary::BasicInputOutput::TextOutputChannel::fb_writeNewLine
 				static const unsigned long TEXTOUTPUTCHANNEL_FUNCTIONBEHAVIOR_FB_WRITENEWLINE = 1078171085;
 				static const unsigned int TEXTOUTPUTCHANNEL_FUNCTIONBEHAVIOR_FB_WRITENEWLINE_FEATURE_COUNT = 0;
 				static const unsigned int TEXTOUTPUTCHANNEL_FUNCTIONBEHAVIOR_FB_WRITENEWLINE_OPERATION_COUNT = 0;
 				
-				//FunctionBehavior FoundationalModelLibrary::BasicInputOutput::TextOutputChannel::fb_writeInteger
-				static const unsigned long TEXTOUTPUTCHANNEL_FUNCTIONBEHAVIOR_FB_WRITEINTEGER = 1102967664;
-				static const unsigned int TEXTOUTPUTCHANNEL_FUNCTIONBEHAVIOR_FB_WRITEINTEGER_FEATURE_COUNT = 0;
-				static const unsigned int TEXTOUTPUTCHANNEL_FUNCTIONBEHAVIOR_FB_WRITEINTEGER_OPERATION_COUNT = 0;
+				//FunctionBehavior FoundationalModelLibrary::BasicInputOutput::TextOutputChannel::fb_writeString
+				static const unsigned long TEXTOUTPUTCHANNEL_FUNCTIONBEHAVIOR_FB_WRITESTRING = 512413595;
+				static const unsigned int TEXTOUTPUTCHANNEL_FUNCTIONBEHAVIOR_FB_WRITESTRING_FEATURE_COUNT = 0;
+				static const unsigned int TEXTOUTPUTCHANNEL_FUNCTIONBEHAVIOR_FB_WRITESTRING_OPERATION_COUNT = 0;
+				
+				//FunctionBehavior FoundationalModelLibrary::BasicInputOutput::TextOutputChannel::fb_writeBoolean
+				static const unsigned long TEXTOUTPUTCHANNEL_FUNCTIONBEHAVIOR_FB_WRITEBOOLEAN = 54149987;
+				static const unsigned int TEXTOUTPUTCHANNEL_FUNCTIONBEHAVIOR_FB_WRITEBOOLEAN_FEATURE_COUNT = 0;
+				static const unsigned int TEXTOUTPUTCHANNEL_FUNCTIONBEHAVIOR_FB_WRITEBOOLEAN_OPERATION_COUNT = 0;
 				
 			
 			//Activity FoundationalModelLibrary::BasicInputOutput::WriteLine

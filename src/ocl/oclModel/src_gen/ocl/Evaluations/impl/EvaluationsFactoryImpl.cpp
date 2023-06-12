@@ -135,25 +135,25 @@ std::shared_ptr<ecore::EObject> EvaluationsFactoryImpl::create(const int metaEle
 					//AssociationClassCallExpEval has contextVariable as a containment
 					case  ocl::Expressions::ExpressionsPackage::EXPRESSIONINOCL_ATTRIBUTE_CONTEXTVARIABLE:	
 					{
-						std::shared_ptr<ocl::Expressions::ExpressionInOcl> castedContainer = std::dynamic_pointer_cast<ocl::Expressions::ExpressionInOcl> (container);;
+						std::shared_ptr<ocl::Expressions::ExpressionInOcl> castedContainer = std::dynamic_pointer_cast<ocl::Expressions::ExpressionInOcl> (container);
 						return this->createAssociationClassCallExpEval_as_contextVariable_in_ExpressionInOcl(castedContainer,metaElementID);
 					}
 					//AssociationClassCallExpEval has parameterVariable as a containment
 					case  ocl::Expressions::ExpressionsPackage::EXPRESSIONINOCL_ATTRIBUTE_PARAMETERVARIABLE:	
 					{
-						std::shared_ptr<ocl::Expressions::ExpressionInOcl> castedContainer = std::dynamic_pointer_cast<ocl::Expressions::ExpressionInOcl> (container);;
+						std::shared_ptr<ocl::Expressions::ExpressionInOcl> castedContainer = std::dynamic_pointer_cast<ocl::Expressions::ExpressionInOcl> (container);
 						return this->createAssociationClassCallExpEval_as_parameterVariable_in_ExpressionInOcl(castedContainer,metaElementID);
 					}
 					//AssociationClassCallExpEval has result as a containment
 					case  ocl::Expressions::ExpressionsPackage::ITERATEEXP_ATTRIBUTE_RESULT:	
 					{
-						std::shared_ptr<ocl::Expressions::IterateExp> castedContainer = std::dynamic_pointer_cast<ocl::Expressions::IterateExp> (container);;
+						std::shared_ptr<ocl::Expressions::IterateExp> castedContainer = std::dynamic_pointer_cast<ocl::Expressions::IterateExp> (container);
 						return this->createAssociationClassCallExpEval_as_result_in_IterateExp(castedContainer,metaElementID);
 					}
 					//AssociationClassCallExpEval has resultVariable as a containment
 					case  ocl::Expressions::ExpressionsPackage::EXPRESSIONINOCL_ATTRIBUTE_RESULTVARIABLE:	
 					{
-						std::shared_ptr<ocl::Expressions::ExpressionInOcl> castedContainer = std::dynamic_pointer_cast<ocl::Expressions::ExpressionInOcl> (container);;
+						std::shared_ptr<ocl::Expressions::ExpressionInOcl> castedContainer = std::dynamic_pointer_cast<ocl::Expressions::ExpressionInOcl> (container);
 						return this->createAssociationClassCallExpEval_as_resultVariable_in_ExpressionInOcl(castedContainer,metaElementID);
 					}
 					default:
@@ -175,25 +175,25 @@ std::shared_ptr<ecore::EObject> EvaluationsFactoryImpl::create(const int metaEle
 					//AssociationEndCallExpEval has contextVariable as a containment
 					case  ocl::Expressions::ExpressionsPackage::EXPRESSIONINOCL_ATTRIBUTE_CONTEXTVARIABLE:	
 					{
-						std::shared_ptr<ocl::Expressions::ExpressionInOcl> castedContainer = std::dynamic_pointer_cast<ocl::Expressions::ExpressionInOcl> (container);;
+						std::shared_ptr<ocl::Expressions::ExpressionInOcl> castedContainer = std::dynamic_pointer_cast<ocl::Expressions::ExpressionInOcl> (container);
 						return this->createAssociationEndCallExpEval_as_contextVariable_in_ExpressionInOcl(castedContainer,metaElementID);
 					}
 					//AssociationEndCallExpEval has parameterVariable as a containment
 					case  ocl::Expressions::ExpressionsPackage::EXPRESSIONINOCL_ATTRIBUTE_PARAMETERVARIABLE:	
 					{
-						std::shared_ptr<ocl::Expressions::ExpressionInOcl> castedContainer = std::dynamic_pointer_cast<ocl::Expressions::ExpressionInOcl> (container);;
+						std::shared_ptr<ocl::Expressions::ExpressionInOcl> castedContainer = std::dynamic_pointer_cast<ocl::Expressions::ExpressionInOcl> (container);
 						return this->createAssociationEndCallExpEval_as_parameterVariable_in_ExpressionInOcl(castedContainer,metaElementID);
 					}
 					//AssociationEndCallExpEval has result as a containment
 					case  ocl::Expressions::ExpressionsPackage::ITERATEEXP_ATTRIBUTE_RESULT:	
 					{
-						std::shared_ptr<ocl::Expressions::IterateExp> castedContainer = std::dynamic_pointer_cast<ocl::Expressions::IterateExp> (container);;
+						std::shared_ptr<ocl::Expressions::IterateExp> castedContainer = std::dynamic_pointer_cast<ocl::Expressions::IterateExp> (container);
 						return this->createAssociationEndCallExpEval_as_result_in_IterateExp(castedContainer,metaElementID);
 					}
 					//AssociationEndCallExpEval has resultVariable as a containment
 					case  ocl::Expressions::ExpressionsPackage::EXPRESSIONINOCL_ATTRIBUTE_RESULTVARIABLE:	
 					{
-						std::shared_ptr<ocl::Expressions::ExpressionInOcl> castedContainer = std::dynamic_pointer_cast<ocl::Expressions::ExpressionInOcl> (container);;
+						std::shared_ptr<ocl::Expressions::ExpressionInOcl> castedContainer = std::dynamic_pointer_cast<ocl::Expressions::ExpressionInOcl> (container);
 						return this->createAssociationEndCallExpEval_as_resultVariable_in_ExpressionInOcl(castedContainer,metaElementID);
 					}
 					default:
@@ -215,25 +215,25 @@ std::shared_ptr<ecore::EObject> EvaluationsFactoryImpl::create(const int metaEle
 					//AttributeCallExpEval has contextVariable as a containment
 					case  ocl::Expressions::ExpressionsPackage::EXPRESSIONINOCL_ATTRIBUTE_CONTEXTVARIABLE:	
 					{
-						std::shared_ptr<ocl::Expressions::ExpressionInOcl> castedContainer = std::dynamic_pointer_cast<ocl::Expressions::ExpressionInOcl> (container);;
+						std::shared_ptr<ocl::Expressions::ExpressionInOcl> castedContainer = std::dynamic_pointer_cast<ocl::Expressions::ExpressionInOcl> (container);
 						return this->createAttributeCallExpEval_as_contextVariable_in_ExpressionInOcl(castedContainer,metaElementID);
 					}
 					//AttributeCallExpEval has parameterVariable as a containment
 					case  ocl::Expressions::ExpressionsPackage::EXPRESSIONINOCL_ATTRIBUTE_PARAMETERVARIABLE:	
 					{
-						std::shared_ptr<ocl::Expressions::ExpressionInOcl> castedContainer = std::dynamic_pointer_cast<ocl::Expressions::ExpressionInOcl> (container);;
+						std::shared_ptr<ocl::Expressions::ExpressionInOcl> castedContainer = std::dynamic_pointer_cast<ocl::Expressions::ExpressionInOcl> (container);
 						return this->createAttributeCallExpEval_as_parameterVariable_in_ExpressionInOcl(castedContainer,metaElementID);
 					}
 					//AttributeCallExpEval has result as a containment
 					case  ocl::Expressions::ExpressionsPackage::ITERATEEXP_ATTRIBUTE_RESULT:	
 					{
-						std::shared_ptr<ocl::Expressions::IterateExp> castedContainer = std::dynamic_pointer_cast<ocl::Expressions::IterateExp> (container);;
+						std::shared_ptr<ocl::Expressions::IterateExp> castedContainer = std::dynamic_pointer_cast<ocl::Expressions::IterateExp> (container);
 						return this->createAttributeCallExpEval_as_result_in_IterateExp(castedContainer,metaElementID);
 					}
 					//AttributeCallExpEval has resultVariable as a containment
 					case  ocl::Expressions::ExpressionsPackage::EXPRESSIONINOCL_ATTRIBUTE_RESULTVARIABLE:	
 					{
-						std::shared_ptr<ocl::Expressions::ExpressionInOcl> castedContainer = std::dynamic_pointer_cast<ocl::Expressions::ExpressionInOcl> (container);;
+						std::shared_ptr<ocl::Expressions::ExpressionInOcl> castedContainer = std::dynamic_pointer_cast<ocl::Expressions::ExpressionInOcl> (container);
 						return this->createAttributeCallExpEval_as_resultVariable_in_ExpressionInOcl(castedContainer,metaElementID);
 					}
 					default:
@@ -255,25 +255,25 @@ std::shared_ptr<ecore::EObject> EvaluationsFactoryImpl::create(const int metaEle
 					//BooleanLiteralExpEval has contextVariable as a containment
 					case  ocl::Expressions::ExpressionsPackage::EXPRESSIONINOCL_ATTRIBUTE_CONTEXTVARIABLE:	
 					{
-						std::shared_ptr<ocl::Expressions::ExpressionInOcl> castedContainer = std::dynamic_pointer_cast<ocl::Expressions::ExpressionInOcl> (container);;
+						std::shared_ptr<ocl::Expressions::ExpressionInOcl> castedContainer = std::dynamic_pointer_cast<ocl::Expressions::ExpressionInOcl> (container);
 						return this->createBooleanLiteralExpEval_as_contextVariable_in_ExpressionInOcl(castedContainer,metaElementID);
 					}
 					//BooleanLiteralExpEval has parameterVariable as a containment
 					case  ocl::Expressions::ExpressionsPackage::EXPRESSIONINOCL_ATTRIBUTE_PARAMETERVARIABLE:	
 					{
-						std::shared_ptr<ocl::Expressions::ExpressionInOcl> castedContainer = std::dynamic_pointer_cast<ocl::Expressions::ExpressionInOcl> (container);;
+						std::shared_ptr<ocl::Expressions::ExpressionInOcl> castedContainer = std::dynamic_pointer_cast<ocl::Expressions::ExpressionInOcl> (container);
 						return this->createBooleanLiteralExpEval_as_parameterVariable_in_ExpressionInOcl(castedContainer,metaElementID);
 					}
 					//BooleanLiteralExpEval has result as a containment
 					case  ocl::Expressions::ExpressionsPackage::ITERATEEXP_ATTRIBUTE_RESULT:	
 					{
-						std::shared_ptr<ocl::Expressions::IterateExp> castedContainer = std::dynamic_pointer_cast<ocl::Expressions::IterateExp> (container);;
+						std::shared_ptr<ocl::Expressions::IterateExp> castedContainer = std::dynamic_pointer_cast<ocl::Expressions::IterateExp> (container);
 						return this->createBooleanLiteralExpEval_as_result_in_IterateExp(castedContainer,metaElementID);
 					}
 					//BooleanLiteralExpEval has resultVariable as a containment
 					case  ocl::Expressions::ExpressionsPackage::EXPRESSIONINOCL_ATTRIBUTE_RESULTVARIABLE:	
 					{
-						std::shared_ptr<ocl::Expressions::ExpressionInOcl> castedContainer = std::dynamic_pointer_cast<ocl::Expressions::ExpressionInOcl> (container);;
+						std::shared_ptr<ocl::Expressions::ExpressionInOcl> castedContainer = std::dynamic_pointer_cast<ocl::Expressions::ExpressionInOcl> (container);
 						return this->createBooleanLiteralExpEval_as_resultVariable_in_ExpressionInOcl(castedContainer,metaElementID);
 					}
 					default:
@@ -295,25 +295,25 @@ std::shared_ptr<ecore::EObject> EvaluationsFactoryImpl::create(const int metaEle
 					//CollectionItemEval has contextVariable as a containment
 					case  ocl::Expressions::ExpressionsPackage::EXPRESSIONINOCL_ATTRIBUTE_CONTEXTVARIABLE:	
 					{
-						std::shared_ptr<ocl::Expressions::ExpressionInOcl> castedContainer = std::dynamic_pointer_cast<ocl::Expressions::ExpressionInOcl> (container);;
+						std::shared_ptr<ocl::Expressions::ExpressionInOcl> castedContainer = std::dynamic_pointer_cast<ocl::Expressions::ExpressionInOcl> (container);
 						return this->createCollectionItemEval_as_contextVariable_in_ExpressionInOcl(castedContainer,metaElementID);
 					}
 					//CollectionItemEval has parameterVariable as a containment
 					case  ocl::Expressions::ExpressionsPackage::EXPRESSIONINOCL_ATTRIBUTE_PARAMETERVARIABLE:	
 					{
-						std::shared_ptr<ocl::Expressions::ExpressionInOcl> castedContainer = std::dynamic_pointer_cast<ocl::Expressions::ExpressionInOcl> (container);;
+						std::shared_ptr<ocl::Expressions::ExpressionInOcl> castedContainer = std::dynamic_pointer_cast<ocl::Expressions::ExpressionInOcl> (container);
 						return this->createCollectionItemEval_as_parameterVariable_in_ExpressionInOcl(castedContainer,metaElementID);
 					}
 					//CollectionItemEval has result as a containment
 					case  ocl::Expressions::ExpressionsPackage::ITERATEEXP_ATTRIBUTE_RESULT:	
 					{
-						std::shared_ptr<ocl::Expressions::IterateExp> castedContainer = std::dynamic_pointer_cast<ocl::Expressions::IterateExp> (container);;
+						std::shared_ptr<ocl::Expressions::IterateExp> castedContainer = std::dynamic_pointer_cast<ocl::Expressions::IterateExp> (container);
 						return this->createCollectionItemEval_as_result_in_IterateExp(castedContainer,metaElementID);
 					}
 					//CollectionItemEval has resultVariable as a containment
 					case  ocl::Expressions::ExpressionsPackage::EXPRESSIONINOCL_ATTRIBUTE_RESULTVARIABLE:	
 					{
-						std::shared_ptr<ocl::Expressions::ExpressionInOcl> castedContainer = std::dynamic_pointer_cast<ocl::Expressions::ExpressionInOcl> (container);;
+						std::shared_ptr<ocl::Expressions::ExpressionInOcl> castedContainer = std::dynamic_pointer_cast<ocl::Expressions::ExpressionInOcl> (container);
 						return this->createCollectionItemEval_as_resultVariable_in_ExpressionInOcl(castedContainer,metaElementID);
 					}
 					default:
@@ -335,25 +335,25 @@ std::shared_ptr<ecore::EObject> EvaluationsFactoryImpl::create(const int metaEle
 					//CollectionLiteralExpEval has contextVariable as a containment
 					case  ocl::Expressions::ExpressionsPackage::EXPRESSIONINOCL_ATTRIBUTE_CONTEXTVARIABLE:	
 					{
-						std::shared_ptr<ocl::Expressions::ExpressionInOcl> castedContainer = std::dynamic_pointer_cast<ocl::Expressions::ExpressionInOcl> (container);;
+						std::shared_ptr<ocl::Expressions::ExpressionInOcl> castedContainer = std::dynamic_pointer_cast<ocl::Expressions::ExpressionInOcl> (container);
 						return this->createCollectionLiteralExpEval_as_contextVariable_in_ExpressionInOcl(castedContainer,metaElementID);
 					}
 					//CollectionLiteralExpEval has parameterVariable as a containment
 					case  ocl::Expressions::ExpressionsPackage::EXPRESSIONINOCL_ATTRIBUTE_PARAMETERVARIABLE:	
 					{
-						std::shared_ptr<ocl::Expressions::ExpressionInOcl> castedContainer = std::dynamic_pointer_cast<ocl::Expressions::ExpressionInOcl> (container);;
+						std::shared_ptr<ocl::Expressions::ExpressionInOcl> castedContainer = std::dynamic_pointer_cast<ocl::Expressions::ExpressionInOcl> (container);
 						return this->createCollectionLiteralExpEval_as_parameterVariable_in_ExpressionInOcl(castedContainer,metaElementID);
 					}
 					//CollectionLiteralExpEval has result as a containment
 					case  ocl::Expressions::ExpressionsPackage::ITERATEEXP_ATTRIBUTE_RESULT:	
 					{
-						std::shared_ptr<ocl::Expressions::IterateExp> castedContainer = std::dynamic_pointer_cast<ocl::Expressions::IterateExp> (container);;
+						std::shared_ptr<ocl::Expressions::IterateExp> castedContainer = std::dynamic_pointer_cast<ocl::Expressions::IterateExp> (container);
 						return this->createCollectionLiteralExpEval_as_result_in_IterateExp(castedContainer,metaElementID);
 					}
 					//CollectionLiteralExpEval has resultVariable as a containment
 					case  ocl::Expressions::ExpressionsPackage::EXPRESSIONINOCL_ATTRIBUTE_RESULTVARIABLE:	
 					{
-						std::shared_ptr<ocl::Expressions::ExpressionInOcl> castedContainer = std::dynamic_pointer_cast<ocl::Expressions::ExpressionInOcl> (container);;
+						std::shared_ptr<ocl::Expressions::ExpressionInOcl> castedContainer = std::dynamic_pointer_cast<ocl::Expressions::ExpressionInOcl> (container);
 						return this->createCollectionLiteralExpEval_as_resultVariable_in_ExpressionInOcl(castedContainer,metaElementID);
 					}
 					default:
@@ -375,25 +375,25 @@ std::shared_ptr<ecore::EObject> EvaluationsFactoryImpl::create(const int metaEle
 					//CollectionLiteralPartEval has contextVariable as a containment
 					case  ocl::Expressions::ExpressionsPackage::EXPRESSIONINOCL_ATTRIBUTE_CONTEXTVARIABLE:	
 					{
-						std::shared_ptr<ocl::Expressions::ExpressionInOcl> castedContainer = std::dynamic_pointer_cast<ocl::Expressions::ExpressionInOcl> (container);;
+						std::shared_ptr<ocl::Expressions::ExpressionInOcl> castedContainer = std::dynamic_pointer_cast<ocl::Expressions::ExpressionInOcl> (container);
 						return this->createCollectionLiteralPartEval_as_contextVariable_in_ExpressionInOcl(castedContainer,metaElementID);
 					}
 					//CollectionLiteralPartEval has parameterVariable as a containment
 					case  ocl::Expressions::ExpressionsPackage::EXPRESSIONINOCL_ATTRIBUTE_PARAMETERVARIABLE:	
 					{
-						std::shared_ptr<ocl::Expressions::ExpressionInOcl> castedContainer = std::dynamic_pointer_cast<ocl::Expressions::ExpressionInOcl> (container);;
+						std::shared_ptr<ocl::Expressions::ExpressionInOcl> castedContainer = std::dynamic_pointer_cast<ocl::Expressions::ExpressionInOcl> (container);
 						return this->createCollectionLiteralPartEval_as_parameterVariable_in_ExpressionInOcl(castedContainer,metaElementID);
 					}
 					//CollectionLiteralPartEval has result as a containment
 					case  ocl::Expressions::ExpressionsPackage::ITERATEEXP_ATTRIBUTE_RESULT:	
 					{
-						std::shared_ptr<ocl::Expressions::IterateExp> castedContainer = std::dynamic_pointer_cast<ocl::Expressions::IterateExp> (container);;
+						std::shared_ptr<ocl::Expressions::IterateExp> castedContainer = std::dynamic_pointer_cast<ocl::Expressions::IterateExp> (container);
 						return this->createCollectionLiteralPartEval_as_result_in_IterateExp(castedContainer,metaElementID);
 					}
 					//CollectionLiteralPartEval has resultVariable as a containment
 					case  ocl::Expressions::ExpressionsPackage::EXPRESSIONINOCL_ATTRIBUTE_RESULTVARIABLE:	
 					{
-						std::shared_ptr<ocl::Expressions::ExpressionInOcl> castedContainer = std::dynamic_pointer_cast<ocl::Expressions::ExpressionInOcl> (container);;
+						std::shared_ptr<ocl::Expressions::ExpressionInOcl> castedContainer = std::dynamic_pointer_cast<ocl::Expressions::ExpressionInOcl> (container);
 						return this->createCollectionLiteralPartEval_as_resultVariable_in_ExpressionInOcl(castedContainer,metaElementID);
 					}
 					default:
@@ -415,25 +415,25 @@ std::shared_ptr<ecore::EObject> EvaluationsFactoryImpl::create(const int metaEle
 					//CollectionRangeEval has contextVariable as a containment
 					case  ocl::Expressions::ExpressionsPackage::EXPRESSIONINOCL_ATTRIBUTE_CONTEXTVARIABLE:	
 					{
-						std::shared_ptr<ocl::Expressions::ExpressionInOcl> castedContainer = std::dynamic_pointer_cast<ocl::Expressions::ExpressionInOcl> (container);;
+						std::shared_ptr<ocl::Expressions::ExpressionInOcl> castedContainer = std::dynamic_pointer_cast<ocl::Expressions::ExpressionInOcl> (container);
 						return this->createCollectionRangeEval_as_contextVariable_in_ExpressionInOcl(castedContainer,metaElementID);
 					}
 					//CollectionRangeEval has parameterVariable as a containment
 					case  ocl::Expressions::ExpressionsPackage::EXPRESSIONINOCL_ATTRIBUTE_PARAMETERVARIABLE:	
 					{
-						std::shared_ptr<ocl::Expressions::ExpressionInOcl> castedContainer = std::dynamic_pointer_cast<ocl::Expressions::ExpressionInOcl> (container);;
+						std::shared_ptr<ocl::Expressions::ExpressionInOcl> castedContainer = std::dynamic_pointer_cast<ocl::Expressions::ExpressionInOcl> (container);
 						return this->createCollectionRangeEval_as_parameterVariable_in_ExpressionInOcl(castedContainer,metaElementID);
 					}
 					//CollectionRangeEval has result as a containment
 					case  ocl::Expressions::ExpressionsPackage::ITERATEEXP_ATTRIBUTE_RESULT:	
 					{
-						std::shared_ptr<ocl::Expressions::IterateExp> castedContainer = std::dynamic_pointer_cast<ocl::Expressions::IterateExp> (container);;
+						std::shared_ptr<ocl::Expressions::IterateExp> castedContainer = std::dynamic_pointer_cast<ocl::Expressions::IterateExp> (container);
 						return this->createCollectionRangeEval_as_result_in_IterateExp(castedContainer,metaElementID);
 					}
 					//CollectionRangeEval has resultVariable as a containment
 					case  ocl::Expressions::ExpressionsPackage::EXPRESSIONINOCL_ATTRIBUTE_RESULTVARIABLE:	
 					{
-						std::shared_ptr<ocl::Expressions::ExpressionInOcl> castedContainer = std::dynamic_pointer_cast<ocl::Expressions::ExpressionInOcl> (container);;
+						std::shared_ptr<ocl::Expressions::ExpressionInOcl> castedContainer = std::dynamic_pointer_cast<ocl::Expressions::ExpressionInOcl> (container);
 						return this->createCollectionRangeEval_as_resultVariable_in_ExpressionInOcl(castedContainer,metaElementID);
 					}
 					default:
@@ -455,25 +455,25 @@ std::shared_ptr<ecore::EObject> EvaluationsFactoryImpl::create(const int metaEle
 					//EnumLiteralExpEval has contextVariable as a containment
 					case  ocl::Expressions::ExpressionsPackage::EXPRESSIONINOCL_ATTRIBUTE_CONTEXTVARIABLE:	
 					{
-						std::shared_ptr<ocl::Expressions::ExpressionInOcl> castedContainer = std::dynamic_pointer_cast<ocl::Expressions::ExpressionInOcl> (container);;
+						std::shared_ptr<ocl::Expressions::ExpressionInOcl> castedContainer = std::dynamic_pointer_cast<ocl::Expressions::ExpressionInOcl> (container);
 						return this->createEnumLiteralExpEval_as_contextVariable_in_ExpressionInOcl(castedContainer,metaElementID);
 					}
 					//EnumLiteralExpEval has parameterVariable as a containment
 					case  ocl::Expressions::ExpressionsPackage::EXPRESSIONINOCL_ATTRIBUTE_PARAMETERVARIABLE:	
 					{
-						std::shared_ptr<ocl::Expressions::ExpressionInOcl> castedContainer = std::dynamic_pointer_cast<ocl::Expressions::ExpressionInOcl> (container);;
+						std::shared_ptr<ocl::Expressions::ExpressionInOcl> castedContainer = std::dynamic_pointer_cast<ocl::Expressions::ExpressionInOcl> (container);
 						return this->createEnumLiteralExpEval_as_parameterVariable_in_ExpressionInOcl(castedContainer,metaElementID);
 					}
 					//EnumLiteralExpEval has result as a containment
 					case  ocl::Expressions::ExpressionsPackage::ITERATEEXP_ATTRIBUTE_RESULT:	
 					{
-						std::shared_ptr<ocl::Expressions::IterateExp> castedContainer = std::dynamic_pointer_cast<ocl::Expressions::IterateExp> (container);;
+						std::shared_ptr<ocl::Expressions::IterateExp> castedContainer = std::dynamic_pointer_cast<ocl::Expressions::IterateExp> (container);
 						return this->createEnumLiteralExpEval_as_result_in_IterateExp(castedContainer,metaElementID);
 					}
 					//EnumLiteralExpEval has resultVariable as a containment
 					case  ocl::Expressions::ExpressionsPackage::EXPRESSIONINOCL_ATTRIBUTE_RESULTVARIABLE:	
 					{
-						std::shared_ptr<ocl::Expressions::ExpressionInOcl> castedContainer = std::dynamic_pointer_cast<ocl::Expressions::ExpressionInOcl> (container);;
+						std::shared_ptr<ocl::Expressions::ExpressionInOcl> castedContainer = std::dynamic_pointer_cast<ocl::Expressions::ExpressionInOcl> (container);
 						return this->createEnumLiteralExpEval_as_resultVariable_in_ExpressionInOcl(castedContainer,metaElementID);
 					}
 					default:
@@ -495,25 +495,25 @@ std::shared_ptr<ecore::EObject> EvaluationsFactoryImpl::create(const int metaEle
 					//EvalEnvironment has contextVariable as a containment
 					case  ocl::Expressions::ExpressionsPackage::EXPRESSIONINOCL_ATTRIBUTE_CONTEXTVARIABLE:	
 					{
-						std::shared_ptr<ocl::Expressions::ExpressionInOcl> castedContainer = std::dynamic_pointer_cast<ocl::Expressions::ExpressionInOcl> (container);;
+						std::shared_ptr<ocl::Expressions::ExpressionInOcl> castedContainer = std::dynamic_pointer_cast<ocl::Expressions::ExpressionInOcl> (container);
 						return this->createEvalEnvironment_as_contextVariable_in_ExpressionInOcl(castedContainer,metaElementID);
 					}
 					//EvalEnvironment has parameterVariable as a containment
 					case  ocl::Expressions::ExpressionsPackage::EXPRESSIONINOCL_ATTRIBUTE_PARAMETERVARIABLE:	
 					{
-						std::shared_ptr<ocl::Expressions::ExpressionInOcl> castedContainer = std::dynamic_pointer_cast<ocl::Expressions::ExpressionInOcl> (container);;
+						std::shared_ptr<ocl::Expressions::ExpressionInOcl> castedContainer = std::dynamic_pointer_cast<ocl::Expressions::ExpressionInOcl> (container);
 						return this->createEvalEnvironment_as_parameterVariable_in_ExpressionInOcl(castedContainer,metaElementID);
 					}
 					//EvalEnvironment has result as a containment
 					case  ocl::Expressions::ExpressionsPackage::ITERATEEXP_ATTRIBUTE_RESULT:	
 					{
-						std::shared_ptr<ocl::Expressions::IterateExp> castedContainer = std::dynamic_pointer_cast<ocl::Expressions::IterateExp> (container);;
+						std::shared_ptr<ocl::Expressions::IterateExp> castedContainer = std::dynamic_pointer_cast<ocl::Expressions::IterateExp> (container);
 						return this->createEvalEnvironment_as_result_in_IterateExp(castedContainer,metaElementID);
 					}
 					//EvalEnvironment has resultVariable as a containment
 					case  ocl::Expressions::ExpressionsPackage::EXPRESSIONINOCL_ATTRIBUTE_RESULTVARIABLE:	
 					{
-						std::shared_ptr<ocl::Expressions::ExpressionInOcl> castedContainer = std::dynamic_pointer_cast<ocl::Expressions::ExpressionInOcl> (container);;
+						std::shared_ptr<ocl::Expressions::ExpressionInOcl> castedContainer = std::dynamic_pointer_cast<ocl::Expressions::ExpressionInOcl> (container);
 						return this->createEvalEnvironment_as_resultVariable_in_ExpressionInOcl(castedContainer,metaElementID);
 					}
 					default:
@@ -535,25 +535,25 @@ std::shared_ptr<ecore::EObject> EvaluationsFactoryImpl::create(const int metaEle
 					//EvalNameSpace has contextVariable as a containment
 					case  ocl::Expressions::ExpressionsPackage::EXPRESSIONINOCL_ATTRIBUTE_CONTEXTVARIABLE:	
 					{
-						std::shared_ptr<ocl::Expressions::ExpressionInOcl> castedContainer = std::dynamic_pointer_cast<ocl::Expressions::ExpressionInOcl> (container);;
+						std::shared_ptr<ocl::Expressions::ExpressionInOcl> castedContainer = std::dynamic_pointer_cast<ocl::Expressions::ExpressionInOcl> (container);
 						return this->createEvalNameSpace_as_contextVariable_in_ExpressionInOcl(castedContainer,metaElementID);
 					}
 					//EvalNameSpace has parameterVariable as a containment
 					case  ocl::Expressions::ExpressionsPackage::EXPRESSIONINOCL_ATTRIBUTE_PARAMETERVARIABLE:	
 					{
-						std::shared_ptr<ocl::Expressions::ExpressionInOcl> castedContainer = std::dynamic_pointer_cast<ocl::Expressions::ExpressionInOcl> (container);;
+						std::shared_ptr<ocl::Expressions::ExpressionInOcl> castedContainer = std::dynamic_pointer_cast<ocl::Expressions::ExpressionInOcl> (container);
 						return this->createEvalNameSpace_as_parameterVariable_in_ExpressionInOcl(castedContainer,metaElementID);
 					}
 					//EvalNameSpace has result as a containment
 					case  ocl::Expressions::ExpressionsPackage::ITERATEEXP_ATTRIBUTE_RESULT:	
 					{
-						std::shared_ptr<ocl::Expressions::IterateExp> castedContainer = std::dynamic_pointer_cast<ocl::Expressions::IterateExp> (container);;
+						std::shared_ptr<ocl::Expressions::IterateExp> castedContainer = std::dynamic_pointer_cast<ocl::Expressions::IterateExp> (container);
 						return this->createEvalNameSpace_as_result_in_IterateExp(castedContainer,metaElementID);
 					}
 					//EvalNameSpace has resultVariable as a containment
 					case  ocl::Expressions::ExpressionsPackage::EXPRESSIONINOCL_ATTRIBUTE_RESULTVARIABLE:	
 					{
-						std::shared_ptr<ocl::Expressions::ExpressionInOcl> castedContainer = std::dynamic_pointer_cast<ocl::Expressions::ExpressionInOcl> (container);;
+						std::shared_ptr<ocl::Expressions::ExpressionInOcl> castedContainer = std::dynamic_pointer_cast<ocl::Expressions::ExpressionInOcl> (container);
 						return this->createEvalNameSpace_as_resultVariable_in_ExpressionInOcl(castedContainer,metaElementID);
 					}
 					default:
@@ -575,25 +575,25 @@ std::shared_ptr<ecore::EObject> EvaluationsFactoryImpl::create(const int metaEle
 					//ExpressionInOclEval has contextVariable as a containment
 					case  ocl::Expressions::ExpressionsPackage::EXPRESSIONINOCL_ATTRIBUTE_CONTEXTVARIABLE:	
 					{
-						std::shared_ptr<ocl::Expressions::ExpressionInOcl> castedContainer = std::dynamic_pointer_cast<ocl::Expressions::ExpressionInOcl> (container);;
+						std::shared_ptr<ocl::Expressions::ExpressionInOcl> castedContainer = std::dynamic_pointer_cast<ocl::Expressions::ExpressionInOcl> (container);
 						return this->createExpressionInOclEval_as_contextVariable_in_ExpressionInOcl(castedContainer,metaElementID);
 					}
 					//ExpressionInOclEval has parameterVariable as a containment
 					case  ocl::Expressions::ExpressionsPackage::EXPRESSIONINOCL_ATTRIBUTE_PARAMETERVARIABLE:	
 					{
-						std::shared_ptr<ocl::Expressions::ExpressionInOcl> castedContainer = std::dynamic_pointer_cast<ocl::Expressions::ExpressionInOcl> (container);;
+						std::shared_ptr<ocl::Expressions::ExpressionInOcl> castedContainer = std::dynamic_pointer_cast<ocl::Expressions::ExpressionInOcl> (container);
 						return this->createExpressionInOclEval_as_parameterVariable_in_ExpressionInOcl(castedContainer,metaElementID);
 					}
 					//ExpressionInOclEval has result as a containment
 					case  ocl::Expressions::ExpressionsPackage::ITERATEEXP_ATTRIBUTE_RESULT:	
 					{
-						std::shared_ptr<ocl::Expressions::IterateExp> castedContainer = std::dynamic_pointer_cast<ocl::Expressions::IterateExp> (container);;
+						std::shared_ptr<ocl::Expressions::IterateExp> castedContainer = std::dynamic_pointer_cast<ocl::Expressions::IterateExp> (container);
 						return this->createExpressionInOclEval_as_result_in_IterateExp(castedContainer,metaElementID);
 					}
 					//ExpressionInOclEval has resultVariable as a containment
 					case  ocl::Expressions::ExpressionsPackage::EXPRESSIONINOCL_ATTRIBUTE_RESULTVARIABLE:	
 					{
-						std::shared_ptr<ocl::Expressions::ExpressionInOcl> castedContainer = std::dynamic_pointer_cast<ocl::Expressions::ExpressionInOcl> (container);;
+						std::shared_ptr<ocl::Expressions::ExpressionInOcl> castedContainer = std::dynamic_pointer_cast<ocl::Expressions::ExpressionInOcl> (container);
 						return this->createExpressionInOclEval_as_resultVariable_in_ExpressionInOcl(castedContainer,metaElementID);
 					}
 					default:
@@ -615,25 +615,25 @@ std::shared_ptr<ecore::EObject> EvaluationsFactoryImpl::create(const int metaEle
 					//IfExpEval has contextVariable as a containment
 					case  ocl::Expressions::ExpressionsPackage::EXPRESSIONINOCL_ATTRIBUTE_CONTEXTVARIABLE:	
 					{
-						std::shared_ptr<ocl::Expressions::ExpressionInOcl> castedContainer = std::dynamic_pointer_cast<ocl::Expressions::ExpressionInOcl> (container);;
+						std::shared_ptr<ocl::Expressions::ExpressionInOcl> castedContainer = std::dynamic_pointer_cast<ocl::Expressions::ExpressionInOcl> (container);
 						return this->createIfExpEval_as_contextVariable_in_ExpressionInOcl(castedContainer,metaElementID);
 					}
 					//IfExpEval has parameterVariable as a containment
 					case  ocl::Expressions::ExpressionsPackage::EXPRESSIONINOCL_ATTRIBUTE_PARAMETERVARIABLE:	
 					{
-						std::shared_ptr<ocl::Expressions::ExpressionInOcl> castedContainer = std::dynamic_pointer_cast<ocl::Expressions::ExpressionInOcl> (container);;
+						std::shared_ptr<ocl::Expressions::ExpressionInOcl> castedContainer = std::dynamic_pointer_cast<ocl::Expressions::ExpressionInOcl> (container);
 						return this->createIfExpEval_as_parameterVariable_in_ExpressionInOcl(castedContainer,metaElementID);
 					}
 					//IfExpEval has result as a containment
 					case  ocl::Expressions::ExpressionsPackage::ITERATEEXP_ATTRIBUTE_RESULT:	
 					{
-						std::shared_ptr<ocl::Expressions::IterateExp> castedContainer = std::dynamic_pointer_cast<ocl::Expressions::IterateExp> (container);;
+						std::shared_ptr<ocl::Expressions::IterateExp> castedContainer = std::dynamic_pointer_cast<ocl::Expressions::IterateExp> (container);
 						return this->createIfExpEval_as_result_in_IterateExp(castedContainer,metaElementID);
 					}
 					//IfExpEval has resultVariable as a containment
 					case  ocl::Expressions::ExpressionsPackage::EXPRESSIONINOCL_ATTRIBUTE_RESULTVARIABLE:	
 					{
-						std::shared_ptr<ocl::Expressions::ExpressionInOcl> castedContainer = std::dynamic_pointer_cast<ocl::Expressions::ExpressionInOcl> (container);;
+						std::shared_ptr<ocl::Expressions::ExpressionInOcl> castedContainer = std::dynamic_pointer_cast<ocl::Expressions::ExpressionInOcl> (container);
 						return this->createIfExpEval_as_resultVariable_in_ExpressionInOcl(castedContainer,metaElementID);
 					}
 					default:
@@ -655,25 +655,25 @@ std::shared_ptr<ecore::EObject> EvaluationsFactoryImpl::create(const int metaEle
 					//IntegerLiteralExpEval has contextVariable as a containment
 					case  ocl::Expressions::ExpressionsPackage::EXPRESSIONINOCL_ATTRIBUTE_CONTEXTVARIABLE:	
 					{
-						std::shared_ptr<ocl::Expressions::ExpressionInOcl> castedContainer = std::dynamic_pointer_cast<ocl::Expressions::ExpressionInOcl> (container);;
+						std::shared_ptr<ocl::Expressions::ExpressionInOcl> castedContainer = std::dynamic_pointer_cast<ocl::Expressions::ExpressionInOcl> (container);
 						return this->createIntegerLiteralExpEval_as_contextVariable_in_ExpressionInOcl(castedContainer,metaElementID);
 					}
 					//IntegerLiteralExpEval has parameterVariable as a containment
 					case  ocl::Expressions::ExpressionsPackage::EXPRESSIONINOCL_ATTRIBUTE_PARAMETERVARIABLE:	
 					{
-						std::shared_ptr<ocl::Expressions::ExpressionInOcl> castedContainer = std::dynamic_pointer_cast<ocl::Expressions::ExpressionInOcl> (container);;
+						std::shared_ptr<ocl::Expressions::ExpressionInOcl> castedContainer = std::dynamic_pointer_cast<ocl::Expressions::ExpressionInOcl> (container);
 						return this->createIntegerLiteralExpEval_as_parameterVariable_in_ExpressionInOcl(castedContainer,metaElementID);
 					}
 					//IntegerLiteralExpEval has result as a containment
 					case  ocl::Expressions::ExpressionsPackage::ITERATEEXP_ATTRIBUTE_RESULT:	
 					{
-						std::shared_ptr<ocl::Expressions::IterateExp> castedContainer = std::dynamic_pointer_cast<ocl::Expressions::IterateExp> (container);;
+						std::shared_ptr<ocl::Expressions::IterateExp> castedContainer = std::dynamic_pointer_cast<ocl::Expressions::IterateExp> (container);
 						return this->createIntegerLiteralExpEval_as_result_in_IterateExp(castedContainer,metaElementID);
 					}
 					//IntegerLiteralExpEval has resultVariable as a containment
 					case  ocl::Expressions::ExpressionsPackage::EXPRESSIONINOCL_ATTRIBUTE_RESULTVARIABLE:	
 					{
-						std::shared_ptr<ocl::Expressions::ExpressionInOcl> castedContainer = std::dynamic_pointer_cast<ocl::Expressions::ExpressionInOcl> (container);;
+						std::shared_ptr<ocl::Expressions::ExpressionInOcl> castedContainer = std::dynamic_pointer_cast<ocl::Expressions::ExpressionInOcl> (container);
 						return this->createIntegerLiteralExpEval_as_resultVariable_in_ExpressionInOcl(castedContainer,metaElementID);
 					}
 					default:
@@ -695,25 +695,25 @@ std::shared_ptr<ecore::EObject> EvaluationsFactoryImpl::create(const int metaEle
 					//IterateExpEval has contextVariable as a containment
 					case  ocl::Expressions::ExpressionsPackage::EXPRESSIONINOCL_ATTRIBUTE_CONTEXTVARIABLE:	
 					{
-						std::shared_ptr<ocl::Expressions::ExpressionInOcl> castedContainer = std::dynamic_pointer_cast<ocl::Expressions::ExpressionInOcl> (container);;
+						std::shared_ptr<ocl::Expressions::ExpressionInOcl> castedContainer = std::dynamic_pointer_cast<ocl::Expressions::ExpressionInOcl> (container);
 						return this->createIterateExpEval_as_contextVariable_in_ExpressionInOcl(castedContainer,metaElementID);
 					}
 					//IterateExpEval has parameterVariable as a containment
 					case  ocl::Expressions::ExpressionsPackage::EXPRESSIONINOCL_ATTRIBUTE_PARAMETERVARIABLE:	
 					{
-						std::shared_ptr<ocl::Expressions::ExpressionInOcl> castedContainer = std::dynamic_pointer_cast<ocl::Expressions::ExpressionInOcl> (container);;
+						std::shared_ptr<ocl::Expressions::ExpressionInOcl> castedContainer = std::dynamic_pointer_cast<ocl::Expressions::ExpressionInOcl> (container);
 						return this->createIterateExpEval_as_parameterVariable_in_ExpressionInOcl(castedContainer,metaElementID);
 					}
 					//IterateExpEval has result as a containment
 					case  ocl::Expressions::ExpressionsPackage::ITERATEEXP_ATTRIBUTE_RESULT:	
 					{
-						std::shared_ptr<ocl::Expressions::IterateExp> castedContainer = std::dynamic_pointer_cast<ocl::Expressions::IterateExp> (container);;
+						std::shared_ptr<ocl::Expressions::IterateExp> castedContainer = std::dynamic_pointer_cast<ocl::Expressions::IterateExp> (container);
 						return this->createIterateExpEval_as_result_in_IterateExp(castedContainer,metaElementID);
 					}
 					//IterateExpEval has resultVariable as a containment
 					case  ocl::Expressions::ExpressionsPackage::EXPRESSIONINOCL_ATTRIBUTE_RESULTVARIABLE:	
 					{
-						std::shared_ptr<ocl::Expressions::ExpressionInOcl> castedContainer = std::dynamic_pointer_cast<ocl::Expressions::ExpressionInOcl> (container);;
+						std::shared_ptr<ocl::Expressions::ExpressionInOcl> castedContainer = std::dynamic_pointer_cast<ocl::Expressions::ExpressionInOcl> (container);
 						return this->createIterateExpEval_as_resultVariable_in_ExpressionInOcl(castedContainer,metaElementID);
 					}
 					default:
@@ -735,25 +735,25 @@ std::shared_ptr<ecore::EObject> EvaluationsFactoryImpl::create(const int metaEle
 					//IteratorExpEval has contextVariable as a containment
 					case  ocl::Expressions::ExpressionsPackage::EXPRESSIONINOCL_ATTRIBUTE_CONTEXTVARIABLE:	
 					{
-						std::shared_ptr<ocl::Expressions::ExpressionInOcl> castedContainer = std::dynamic_pointer_cast<ocl::Expressions::ExpressionInOcl> (container);;
+						std::shared_ptr<ocl::Expressions::ExpressionInOcl> castedContainer = std::dynamic_pointer_cast<ocl::Expressions::ExpressionInOcl> (container);
 						return this->createIteratorExpEval_as_contextVariable_in_ExpressionInOcl(castedContainer,metaElementID);
 					}
 					//IteratorExpEval has parameterVariable as a containment
 					case  ocl::Expressions::ExpressionsPackage::EXPRESSIONINOCL_ATTRIBUTE_PARAMETERVARIABLE:	
 					{
-						std::shared_ptr<ocl::Expressions::ExpressionInOcl> castedContainer = std::dynamic_pointer_cast<ocl::Expressions::ExpressionInOcl> (container);;
+						std::shared_ptr<ocl::Expressions::ExpressionInOcl> castedContainer = std::dynamic_pointer_cast<ocl::Expressions::ExpressionInOcl> (container);
 						return this->createIteratorExpEval_as_parameterVariable_in_ExpressionInOcl(castedContainer,metaElementID);
 					}
 					//IteratorExpEval has result as a containment
 					case  ocl::Expressions::ExpressionsPackage::ITERATEEXP_ATTRIBUTE_RESULT:	
 					{
-						std::shared_ptr<ocl::Expressions::IterateExp> castedContainer = std::dynamic_pointer_cast<ocl::Expressions::IterateExp> (container);;
+						std::shared_ptr<ocl::Expressions::IterateExp> castedContainer = std::dynamic_pointer_cast<ocl::Expressions::IterateExp> (container);
 						return this->createIteratorExpEval_as_result_in_IterateExp(castedContainer,metaElementID);
 					}
 					//IteratorExpEval has resultVariable as a containment
 					case  ocl::Expressions::ExpressionsPackage::EXPRESSIONINOCL_ATTRIBUTE_RESULTVARIABLE:	
 					{
-						std::shared_ptr<ocl::Expressions::ExpressionInOcl> castedContainer = std::dynamic_pointer_cast<ocl::Expressions::ExpressionInOcl> (container);;
+						std::shared_ptr<ocl::Expressions::ExpressionInOcl> castedContainer = std::dynamic_pointer_cast<ocl::Expressions::ExpressionInOcl> (container);
 						return this->createIteratorExpEval_as_resultVariable_in_ExpressionInOcl(castedContainer,metaElementID);
 					}
 					default:
@@ -775,25 +775,25 @@ std::shared_ptr<ecore::EObject> EvaluationsFactoryImpl::create(const int metaEle
 					//LetExpEval has contextVariable as a containment
 					case  ocl::Expressions::ExpressionsPackage::EXPRESSIONINOCL_ATTRIBUTE_CONTEXTVARIABLE:	
 					{
-						std::shared_ptr<ocl::Expressions::ExpressionInOcl> castedContainer = std::dynamic_pointer_cast<ocl::Expressions::ExpressionInOcl> (container);;
+						std::shared_ptr<ocl::Expressions::ExpressionInOcl> castedContainer = std::dynamic_pointer_cast<ocl::Expressions::ExpressionInOcl> (container);
 						return this->createLetExpEval_as_contextVariable_in_ExpressionInOcl(castedContainer,metaElementID);
 					}
 					//LetExpEval has parameterVariable as a containment
 					case  ocl::Expressions::ExpressionsPackage::EXPRESSIONINOCL_ATTRIBUTE_PARAMETERVARIABLE:	
 					{
-						std::shared_ptr<ocl::Expressions::ExpressionInOcl> castedContainer = std::dynamic_pointer_cast<ocl::Expressions::ExpressionInOcl> (container);;
+						std::shared_ptr<ocl::Expressions::ExpressionInOcl> castedContainer = std::dynamic_pointer_cast<ocl::Expressions::ExpressionInOcl> (container);
 						return this->createLetExpEval_as_parameterVariable_in_ExpressionInOcl(castedContainer,metaElementID);
 					}
 					//LetExpEval has result as a containment
 					case  ocl::Expressions::ExpressionsPackage::ITERATEEXP_ATTRIBUTE_RESULT:	
 					{
-						std::shared_ptr<ocl::Expressions::IterateExp> castedContainer = std::dynamic_pointer_cast<ocl::Expressions::IterateExp> (container);;
+						std::shared_ptr<ocl::Expressions::IterateExp> castedContainer = std::dynamic_pointer_cast<ocl::Expressions::IterateExp> (container);
 						return this->createLetExpEval_as_result_in_IterateExp(castedContainer,metaElementID);
 					}
 					//LetExpEval has resultVariable as a containment
 					case  ocl::Expressions::ExpressionsPackage::EXPRESSIONINOCL_ATTRIBUTE_RESULTVARIABLE:	
 					{
-						std::shared_ptr<ocl::Expressions::ExpressionInOcl> castedContainer = std::dynamic_pointer_cast<ocl::Expressions::ExpressionInOcl> (container);;
+						std::shared_ptr<ocl::Expressions::ExpressionInOcl> castedContainer = std::dynamic_pointer_cast<ocl::Expressions::ExpressionInOcl> (container);
 						return this->createLetExpEval_as_resultVariable_in_ExpressionInOcl(castedContainer,metaElementID);
 					}
 					default:
@@ -815,25 +815,25 @@ std::shared_ptr<ecore::EObject> EvaluationsFactoryImpl::create(const int metaEle
 					//LiteralExpEval has contextVariable as a containment
 					case  ocl::Expressions::ExpressionsPackage::EXPRESSIONINOCL_ATTRIBUTE_CONTEXTVARIABLE:	
 					{
-						std::shared_ptr<ocl::Expressions::ExpressionInOcl> castedContainer = std::dynamic_pointer_cast<ocl::Expressions::ExpressionInOcl> (container);;
+						std::shared_ptr<ocl::Expressions::ExpressionInOcl> castedContainer = std::dynamic_pointer_cast<ocl::Expressions::ExpressionInOcl> (container);
 						return this->createLiteralExpEval_as_contextVariable_in_ExpressionInOcl(castedContainer,metaElementID);
 					}
 					//LiteralExpEval has parameterVariable as a containment
 					case  ocl::Expressions::ExpressionsPackage::EXPRESSIONINOCL_ATTRIBUTE_PARAMETERVARIABLE:	
 					{
-						std::shared_ptr<ocl::Expressions::ExpressionInOcl> castedContainer = std::dynamic_pointer_cast<ocl::Expressions::ExpressionInOcl> (container);;
+						std::shared_ptr<ocl::Expressions::ExpressionInOcl> castedContainer = std::dynamic_pointer_cast<ocl::Expressions::ExpressionInOcl> (container);
 						return this->createLiteralExpEval_as_parameterVariable_in_ExpressionInOcl(castedContainer,metaElementID);
 					}
 					//LiteralExpEval has result as a containment
 					case  ocl::Expressions::ExpressionsPackage::ITERATEEXP_ATTRIBUTE_RESULT:	
 					{
-						std::shared_ptr<ocl::Expressions::IterateExp> castedContainer = std::dynamic_pointer_cast<ocl::Expressions::IterateExp> (container);;
+						std::shared_ptr<ocl::Expressions::IterateExp> castedContainer = std::dynamic_pointer_cast<ocl::Expressions::IterateExp> (container);
 						return this->createLiteralExpEval_as_result_in_IterateExp(castedContainer,metaElementID);
 					}
 					//LiteralExpEval has resultVariable as a containment
 					case  ocl::Expressions::ExpressionsPackage::EXPRESSIONINOCL_ATTRIBUTE_RESULTVARIABLE:	
 					{
-						std::shared_ptr<ocl::Expressions::ExpressionInOcl> castedContainer = std::dynamic_pointer_cast<ocl::Expressions::ExpressionInOcl> (container);;
+						std::shared_ptr<ocl::Expressions::ExpressionInOcl> castedContainer = std::dynamic_pointer_cast<ocl::Expressions::ExpressionInOcl> (container);
 						return this->createLiteralExpEval_as_resultVariable_in_ExpressionInOcl(castedContainer,metaElementID);
 					}
 					default:
@@ -855,25 +855,25 @@ std::shared_ptr<ecore::EObject> EvaluationsFactoryImpl::create(const int metaEle
 					//LoopExpEval has contextVariable as a containment
 					case  ocl::Expressions::ExpressionsPackage::EXPRESSIONINOCL_ATTRIBUTE_CONTEXTVARIABLE:	
 					{
-						std::shared_ptr<ocl::Expressions::ExpressionInOcl> castedContainer = std::dynamic_pointer_cast<ocl::Expressions::ExpressionInOcl> (container);;
+						std::shared_ptr<ocl::Expressions::ExpressionInOcl> castedContainer = std::dynamic_pointer_cast<ocl::Expressions::ExpressionInOcl> (container);
 						return this->createLoopExpEval_as_contextVariable_in_ExpressionInOcl(castedContainer,metaElementID);
 					}
 					//LoopExpEval has parameterVariable as a containment
 					case  ocl::Expressions::ExpressionsPackage::EXPRESSIONINOCL_ATTRIBUTE_PARAMETERVARIABLE:	
 					{
-						std::shared_ptr<ocl::Expressions::ExpressionInOcl> castedContainer = std::dynamic_pointer_cast<ocl::Expressions::ExpressionInOcl> (container);;
+						std::shared_ptr<ocl::Expressions::ExpressionInOcl> castedContainer = std::dynamic_pointer_cast<ocl::Expressions::ExpressionInOcl> (container);
 						return this->createLoopExpEval_as_parameterVariable_in_ExpressionInOcl(castedContainer,metaElementID);
 					}
 					//LoopExpEval has result as a containment
 					case  ocl::Expressions::ExpressionsPackage::ITERATEEXP_ATTRIBUTE_RESULT:	
 					{
-						std::shared_ptr<ocl::Expressions::IterateExp> castedContainer = std::dynamic_pointer_cast<ocl::Expressions::IterateExp> (container);;
+						std::shared_ptr<ocl::Expressions::IterateExp> castedContainer = std::dynamic_pointer_cast<ocl::Expressions::IterateExp> (container);
 						return this->createLoopExpEval_as_result_in_IterateExp(castedContainer,metaElementID);
 					}
 					//LoopExpEval has resultVariable as a containment
 					case  ocl::Expressions::ExpressionsPackage::EXPRESSIONINOCL_ATTRIBUTE_RESULTVARIABLE:	
 					{
-						std::shared_ptr<ocl::Expressions::ExpressionInOcl> castedContainer = std::dynamic_pointer_cast<ocl::Expressions::ExpressionInOcl> (container);;
+						std::shared_ptr<ocl::Expressions::ExpressionInOcl> castedContainer = std::dynamic_pointer_cast<ocl::Expressions::ExpressionInOcl> (container);
 						return this->createLoopExpEval_as_resultVariable_in_ExpressionInOcl(castedContainer,metaElementID);
 					}
 					default:
@@ -895,25 +895,25 @@ std::shared_ptr<ecore::EObject> EvaluationsFactoryImpl::create(const int metaEle
 					//ModelPropertyCallExpEval has contextVariable as a containment
 					case  ocl::Expressions::ExpressionsPackage::EXPRESSIONINOCL_ATTRIBUTE_CONTEXTVARIABLE:	
 					{
-						std::shared_ptr<ocl::Expressions::ExpressionInOcl> castedContainer = std::dynamic_pointer_cast<ocl::Expressions::ExpressionInOcl> (container);;
+						std::shared_ptr<ocl::Expressions::ExpressionInOcl> castedContainer = std::dynamic_pointer_cast<ocl::Expressions::ExpressionInOcl> (container);
 						return this->createModelPropertyCallExpEval_as_contextVariable_in_ExpressionInOcl(castedContainer,metaElementID);
 					}
 					//ModelPropertyCallExpEval has parameterVariable as a containment
 					case  ocl::Expressions::ExpressionsPackage::EXPRESSIONINOCL_ATTRIBUTE_PARAMETERVARIABLE:	
 					{
-						std::shared_ptr<ocl::Expressions::ExpressionInOcl> castedContainer = std::dynamic_pointer_cast<ocl::Expressions::ExpressionInOcl> (container);;
+						std::shared_ptr<ocl::Expressions::ExpressionInOcl> castedContainer = std::dynamic_pointer_cast<ocl::Expressions::ExpressionInOcl> (container);
 						return this->createModelPropertyCallExpEval_as_parameterVariable_in_ExpressionInOcl(castedContainer,metaElementID);
 					}
 					//ModelPropertyCallExpEval has result as a containment
 					case  ocl::Expressions::ExpressionsPackage::ITERATEEXP_ATTRIBUTE_RESULT:	
 					{
-						std::shared_ptr<ocl::Expressions::IterateExp> castedContainer = std::dynamic_pointer_cast<ocl::Expressions::IterateExp> (container);;
+						std::shared_ptr<ocl::Expressions::IterateExp> castedContainer = std::dynamic_pointer_cast<ocl::Expressions::IterateExp> (container);
 						return this->createModelPropertyCallExpEval_as_result_in_IterateExp(castedContainer,metaElementID);
 					}
 					//ModelPropertyCallExpEval has resultVariable as a containment
 					case  ocl::Expressions::ExpressionsPackage::EXPRESSIONINOCL_ATTRIBUTE_RESULTVARIABLE:	
 					{
-						std::shared_ptr<ocl::Expressions::ExpressionInOcl> castedContainer = std::dynamic_pointer_cast<ocl::Expressions::ExpressionInOcl> (container);;
+						std::shared_ptr<ocl::Expressions::ExpressionInOcl> castedContainer = std::dynamic_pointer_cast<ocl::Expressions::ExpressionInOcl> (container);
 						return this->createModelPropertyCallExpEval_as_resultVariable_in_ExpressionInOcl(castedContainer,metaElementID);
 					}
 					default:
@@ -935,25 +935,25 @@ std::shared_ptr<ecore::EObject> EvaluationsFactoryImpl::create(const int metaEle
 					//NameValueBinding has contextVariable as a containment
 					case  ocl::Expressions::ExpressionsPackage::EXPRESSIONINOCL_ATTRIBUTE_CONTEXTVARIABLE:	
 					{
-						std::shared_ptr<ocl::Expressions::ExpressionInOcl> castedContainer = std::dynamic_pointer_cast<ocl::Expressions::ExpressionInOcl> (container);;
+						std::shared_ptr<ocl::Expressions::ExpressionInOcl> castedContainer = std::dynamic_pointer_cast<ocl::Expressions::ExpressionInOcl> (container);
 						return this->createNameValueBinding_as_contextVariable_in_ExpressionInOcl(castedContainer,metaElementID);
 					}
 					//NameValueBinding has parameterVariable as a containment
 					case  ocl::Expressions::ExpressionsPackage::EXPRESSIONINOCL_ATTRIBUTE_PARAMETERVARIABLE:	
 					{
-						std::shared_ptr<ocl::Expressions::ExpressionInOcl> castedContainer = std::dynamic_pointer_cast<ocl::Expressions::ExpressionInOcl> (container);;
+						std::shared_ptr<ocl::Expressions::ExpressionInOcl> castedContainer = std::dynamic_pointer_cast<ocl::Expressions::ExpressionInOcl> (container);
 						return this->createNameValueBinding_as_parameterVariable_in_ExpressionInOcl(castedContainer,metaElementID);
 					}
 					//NameValueBinding has result as a containment
 					case  ocl::Expressions::ExpressionsPackage::ITERATEEXP_ATTRIBUTE_RESULT:	
 					{
-						std::shared_ptr<ocl::Expressions::IterateExp> castedContainer = std::dynamic_pointer_cast<ocl::Expressions::IterateExp> (container);;
+						std::shared_ptr<ocl::Expressions::IterateExp> castedContainer = std::dynamic_pointer_cast<ocl::Expressions::IterateExp> (container);
 						return this->createNameValueBinding_as_result_in_IterateExp(castedContainer,metaElementID);
 					}
 					//NameValueBinding has resultVariable as a containment
 					case  ocl::Expressions::ExpressionsPackage::EXPRESSIONINOCL_ATTRIBUTE_RESULTVARIABLE:	
 					{
-						std::shared_ptr<ocl::Expressions::ExpressionInOcl> castedContainer = std::dynamic_pointer_cast<ocl::Expressions::ExpressionInOcl> (container);;
+						std::shared_ptr<ocl::Expressions::ExpressionInOcl> castedContainer = std::dynamic_pointer_cast<ocl::Expressions::ExpressionInOcl> (container);
 						return this->createNameValueBinding_as_resultVariable_in_ExpressionInOcl(castedContainer,metaElementID);
 					}
 					default:
@@ -975,25 +975,25 @@ std::shared_ptr<ecore::EObject> EvaluationsFactoryImpl::create(const int metaEle
 					//NavigationCallExpEval has contextVariable as a containment
 					case  ocl::Expressions::ExpressionsPackage::EXPRESSIONINOCL_ATTRIBUTE_CONTEXTVARIABLE:	
 					{
-						std::shared_ptr<ocl::Expressions::ExpressionInOcl> castedContainer = std::dynamic_pointer_cast<ocl::Expressions::ExpressionInOcl> (container);;
+						std::shared_ptr<ocl::Expressions::ExpressionInOcl> castedContainer = std::dynamic_pointer_cast<ocl::Expressions::ExpressionInOcl> (container);
 						return this->createNavigationCallExpEval_as_contextVariable_in_ExpressionInOcl(castedContainer,metaElementID);
 					}
 					//NavigationCallExpEval has parameterVariable as a containment
 					case  ocl::Expressions::ExpressionsPackage::EXPRESSIONINOCL_ATTRIBUTE_PARAMETERVARIABLE:	
 					{
-						std::shared_ptr<ocl::Expressions::ExpressionInOcl> castedContainer = std::dynamic_pointer_cast<ocl::Expressions::ExpressionInOcl> (container);;
+						std::shared_ptr<ocl::Expressions::ExpressionInOcl> castedContainer = std::dynamic_pointer_cast<ocl::Expressions::ExpressionInOcl> (container);
 						return this->createNavigationCallExpEval_as_parameterVariable_in_ExpressionInOcl(castedContainer,metaElementID);
 					}
 					//NavigationCallExpEval has result as a containment
 					case  ocl::Expressions::ExpressionsPackage::ITERATEEXP_ATTRIBUTE_RESULT:	
 					{
-						std::shared_ptr<ocl::Expressions::IterateExp> castedContainer = std::dynamic_pointer_cast<ocl::Expressions::IterateExp> (container);;
+						std::shared_ptr<ocl::Expressions::IterateExp> castedContainer = std::dynamic_pointer_cast<ocl::Expressions::IterateExp> (container);
 						return this->createNavigationCallExpEval_as_result_in_IterateExp(castedContainer,metaElementID);
 					}
 					//NavigationCallExpEval has resultVariable as a containment
 					case  ocl::Expressions::ExpressionsPackage::EXPRESSIONINOCL_ATTRIBUTE_RESULTVARIABLE:	
 					{
-						std::shared_ptr<ocl::Expressions::ExpressionInOcl> castedContainer = std::dynamic_pointer_cast<ocl::Expressions::ExpressionInOcl> (container);;
+						std::shared_ptr<ocl::Expressions::ExpressionInOcl> castedContainer = std::dynamic_pointer_cast<ocl::Expressions::ExpressionInOcl> (container);
 						return this->createNavigationCallExpEval_as_resultVariable_in_ExpressionInOcl(castedContainer,metaElementID);
 					}
 					default:
@@ -1015,25 +1015,25 @@ std::shared_ptr<ecore::EObject> EvaluationsFactoryImpl::create(const int metaEle
 					//NumericLiteralExpEval has contextVariable as a containment
 					case  ocl::Expressions::ExpressionsPackage::EXPRESSIONINOCL_ATTRIBUTE_CONTEXTVARIABLE:	
 					{
-						std::shared_ptr<ocl::Expressions::ExpressionInOcl> castedContainer = std::dynamic_pointer_cast<ocl::Expressions::ExpressionInOcl> (container);;
+						std::shared_ptr<ocl::Expressions::ExpressionInOcl> castedContainer = std::dynamic_pointer_cast<ocl::Expressions::ExpressionInOcl> (container);
 						return this->createNumericLiteralExpEval_as_contextVariable_in_ExpressionInOcl(castedContainer,metaElementID);
 					}
 					//NumericLiteralExpEval has parameterVariable as a containment
 					case  ocl::Expressions::ExpressionsPackage::EXPRESSIONINOCL_ATTRIBUTE_PARAMETERVARIABLE:	
 					{
-						std::shared_ptr<ocl::Expressions::ExpressionInOcl> castedContainer = std::dynamic_pointer_cast<ocl::Expressions::ExpressionInOcl> (container);;
+						std::shared_ptr<ocl::Expressions::ExpressionInOcl> castedContainer = std::dynamic_pointer_cast<ocl::Expressions::ExpressionInOcl> (container);
 						return this->createNumericLiteralExpEval_as_parameterVariable_in_ExpressionInOcl(castedContainer,metaElementID);
 					}
 					//NumericLiteralExpEval has result as a containment
 					case  ocl::Expressions::ExpressionsPackage::ITERATEEXP_ATTRIBUTE_RESULT:	
 					{
-						std::shared_ptr<ocl::Expressions::IterateExp> castedContainer = std::dynamic_pointer_cast<ocl::Expressions::IterateExp> (container);;
+						std::shared_ptr<ocl::Expressions::IterateExp> castedContainer = std::dynamic_pointer_cast<ocl::Expressions::IterateExp> (container);
 						return this->createNumericLiteralExpEval_as_result_in_IterateExp(castedContainer,metaElementID);
 					}
 					//NumericLiteralExpEval has resultVariable as a containment
 					case  ocl::Expressions::ExpressionsPackage::EXPRESSIONINOCL_ATTRIBUTE_RESULTVARIABLE:	
 					{
-						std::shared_ptr<ocl::Expressions::ExpressionInOcl> castedContainer = std::dynamic_pointer_cast<ocl::Expressions::ExpressionInOcl> (container);;
+						std::shared_ptr<ocl::Expressions::ExpressionInOcl> castedContainer = std::dynamic_pointer_cast<ocl::Expressions::ExpressionInOcl> (container);
 						return this->createNumericLiteralExpEval_as_resultVariable_in_ExpressionInOcl(castedContainer,metaElementID);
 					}
 					default:
@@ -1055,25 +1055,25 @@ std::shared_ptr<ecore::EObject> EvaluationsFactoryImpl::create(const int metaEle
 					//OclExpEval has contextVariable as a containment
 					case  ocl::Expressions::ExpressionsPackage::EXPRESSIONINOCL_ATTRIBUTE_CONTEXTVARIABLE:	
 					{
-						std::shared_ptr<ocl::Expressions::ExpressionInOcl> castedContainer = std::dynamic_pointer_cast<ocl::Expressions::ExpressionInOcl> (container);;
+						std::shared_ptr<ocl::Expressions::ExpressionInOcl> castedContainer = std::dynamic_pointer_cast<ocl::Expressions::ExpressionInOcl> (container);
 						return this->createOclExpEval_as_contextVariable_in_ExpressionInOcl(castedContainer,metaElementID);
 					}
 					//OclExpEval has parameterVariable as a containment
 					case  ocl::Expressions::ExpressionsPackage::EXPRESSIONINOCL_ATTRIBUTE_PARAMETERVARIABLE:	
 					{
-						std::shared_ptr<ocl::Expressions::ExpressionInOcl> castedContainer = std::dynamic_pointer_cast<ocl::Expressions::ExpressionInOcl> (container);;
+						std::shared_ptr<ocl::Expressions::ExpressionInOcl> castedContainer = std::dynamic_pointer_cast<ocl::Expressions::ExpressionInOcl> (container);
 						return this->createOclExpEval_as_parameterVariable_in_ExpressionInOcl(castedContainer,metaElementID);
 					}
 					//OclExpEval has result as a containment
 					case  ocl::Expressions::ExpressionsPackage::ITERATEEXP_ATTRIBUTE_RESULT:	
 					{
-						std::shared_ptr<ocl::Expressions::IterateExp> castedContainer = std::dynamic_pointer_cast<ocl::Expressions::IterateExp> (container);;
+						std::shared_ptr<ocl::Expressions::IterateExp> castedContainer = std::dynamic_pointer_cast<ocl::Expressions::IterateExp> (container);
 						return this->createOclExpEval_as_result_in_IterateExp(castedContainer,metaElementID);
 					}
 					//OclExpEval has resultVariable as a containment
 					case  ocl::Expressions::ExpressionsPackage::EXPRESSIONINOCL_ATTRIBUTE_RESULTVARIABLE:	
 					{
-						std::shared_ptr<ocl::Expressions::ExpressionInOcl> castedContainer = std::dynamic_pointer_cast<ocl::Expressions::ExpressionInOcl> (container);;
+						std::shared_ptr<ocl::Expressions::ExpressionInOcl> castedContainer = std::dynamic_pointer_cast<ocl::Expressions::ExpressionInOcl> (container);
 						return this->createOclExpEval_as_resultVariable_in_ExpressionInOcl(castedContainer,metaElementID);
 					}
 					default:
@@ -1095,25 +1095,25 @@ std::shared_ptr<ecore::EObject> EvaluationsFactoryImpl::create(const int metaEle
 					//OclMessageArgEval has contextVariable as a containment
 					case  ocl::Expressions::ExpressionsPackage::EXPRESSIONINOCL_ATTRIBUTE_CONTEXTVARIABLE:	
 					{
-						std::shared_ptr<ocl::Expressions::ExpressionInOcl> castedContainer = std::dynamic_pointer_cast<ocl::Expressions::ExpressionInOcl> (container);;
+						std::shared_ptr<ocl::Expressions::ExpressionInOcl> castedContainer = std::dynamic_pointer_cast<ocl::Expressions::ExpressionInOcl> (container);
 						return this->createOclMessageArgEval_as_contextVariable_in_ExpressionInOcl(castedContainer,metaElementID);
 					}
 					//OclMessageArgEval has parameterVariable as a containment
 					case  ocl::Expressions::ExpressionsPackage::EXPRESSIONINOCL_ATTRIBUTE_PARAMETERVARIABLE:	
 					{
-						std::shared_ptr<ocl::Expressions::ExpressionInOcl> castedContainer = std::dynamic_pointer_cast<ocl::Expressions::ExpressionInOcl> (container);;
+						std::shared_ptr<ocl::Expressions::ExpressionInOcl> castedContainer = std::dynamic_pointer_cast<ocl::Expressions::ExpressionInOcl> (container);
 						return this->createOclMessageArgEval_as_parameterVariable_in_ExpressionInOcl(castedContainer,metaElementID);
 					}
 					//OclMessageArgEval has result as a containment
 					case  ocl::Expressions::ExpressionsPackage::ITERATEEXP_ATTRIBUTE_RESULT:	
 					{
-						std::shared_ptr<ocl::Expressions::IterateExp> castedContainer = std::dynamic_pointer_cast<ocl::Expressions::IterateExp> (container);;
+						std::shared_ptr<ocl::Expressions::IterateExp> castedContainer = std::dynamic_pointer_cast<ocl::Expressions::IterateExp> (container);
 						return this->createOclMessageArgEval_as_result_in_IterateExp(castedContainer,metaElementID);
 					}
 					//OclMessageArgEval has resultVariable as a containment
 					case  ocl::Expressions::ExpressionsPackage::EXPRESSIONINOCL_ATTRIBUTE_RESULTVARIABLE:	
 					{
-						std::shared_ptr<ocl::Expressions::ExpressionInOcl> castedContainer = std::dynamic_pointer_cast<ocl::Expressions::ExpressionInOcl> (container);;
+						std::shared_ptr<ocl::Expressions::ExpressionInOcl> castedContainer = std::dynamic_pointer_cast<ocl::Expressions::ExpressionInOcl> (container);
 						return this->createOclMessageArgEval_as_resultVariable_in_ExpressionInOcl(castedContainer,metaElementID);
 					}
 					default:
@@ -1135,25 +1135,25 @@ std::shared_ptr<ecore::EObject> EvaluationsFactoryImpl::create(const int metaEle
 					//OclMessageExpEval has contextVariable as a containment
 					case  ocl::Expressions::ExpressionsPackage::EXPRESSIONINOCL_ATTRIBUTE_CONTEXTVARIABLE:	
 					{
-						std::shared_ptr<ocl::Expressions::ExpressionInOcl> castedContainer = std::dynamic_pointer_cast<ocl::Expressions::ExpressionInOcl> (container);;
+						std::shared_ptr<ocl::Expressions::ExpressionInOcl> castedContainer = std::dynamic_pointer_cast<ocl::Expressions::ExpressionInOcl> (container);
 						return this->createOclMessageExpEval_as_contextVariable_in_ExpressionInOcl(castedContainer,metaElementID);
 					}
 					//OclMessageExpEval has parameterVariable as a containment
 					case  ocl::Expressions::ExpressionsPackage::EXPRESSIONINOCL_ATTRIBUTE_PARAMETERVARIABLE:	
 					{
-						std::shared_ptr<ocl::Expressions::ExpressionInOcl> castedContainer = std::dynamic_pointer_cast<ocl::Expressions::ExpressionInOcl> (container);;
+						std::shared_ptr<ocl::Expressions::ExpressionInOcl> castedContainer = std::dynamic_pointer_cast<ocl::Expressions::ExpressionInOcl> (container);
 						return this->createOclMessageExpEval_as_parameterVariable_in_ExpressionInOcl(castedContainer,metaElementID);
 					}
 					//OclMessageExpEval has result as a containment
 					case  ocl::Expressions::ExpressionsPackage::ITERATEEXP_ATTRIBUTE_RESULT:	
 					{
-						std::shared_ptr<ocl::Expressions::IterateExp> castedContainer = std::dynamic_pointer_cast<ocl::Expressions::IterateExp> (container);;
+						std::shared_ptr<ocl::Expressions::IterateExp> castedContainer = std::dynamic_pointer_cast<ocl::Expressions::IterateExp> (container);
 						return this->createOclMessageExpEval_as_result_in_IterateExp(castedContainer,metaElementID);
 					}
 					//OclMessageExpEval has resultVariable as a containment
 					case  ocl::Expressions::ExpressionsPackage::EXPRESSIONINOCL_ATTRIBUTE_RESULTVARIABLE:	
 					{
-						std::shared_ptr<ocl::Expressions::ExpressionInOcl> castedContainer = std::dynamic_pointer_cast<ocl::Expressions::ExpressionInOcl> (container);;
+						std::shared_ptr<ocl::Expressions::ExpressionInOcl> castedContainer = std::dynamic_pointer_cast<ocl::Expressions::ExpressionInOcl> (container);
 						return this->createOclMessageExpEval_as_resultVariable_in_ExpressionInOcl(castedContainer,metaElementID);
 					}
 					default:
@@ -1175,25 +1175,25 @@ std::shared_ptr<ecore::EObject> EvaluationsFactoryImpl::create(const int metaEle
 					//OperationCallExpEval has contextVariable as a containment
 					case  ocl::Expressions::ExpressionsPackage::EXPRESSIONINOCL_ATTRIBUTE_CONTEXTVARIABLE:	
 					{
-						std::shared_ptr<ocl::Expressions::ExpressionInOcl> castedContainer = std::dynamic_pointer_cast<ocl::Expressions::ExpressionInOcl> (container);;
+						std::shared_ptr<ocl::Expressions::ExpressionInOcl> castedContainer = std::dynamic_pointer_cast<ocl::Expressions::ExpressionInOcl> (container);
 						return this->createOperationCallExpEval_as_contextVariable_in_ExpressionInOcl(castedContainer,metaElementID);
 					}
 					//OperationCallExpEval has parameterVariable as a containment
 					case  ocl::Expressions::ExpressionsPackage::EXPRESSIONINOCL_ATTRIBUTE_PARAMETERVARIABLE:	
 					{
-						std::shared_ptr<ocl::Expressions::ExpressionInOcl> castedContainer = std::dynamic_pointer_cast<ocl::Expressions::ExpressionInOcl> (container);;
+						std::shared_ptr<ocl::Expressions::ExpressionInOcl> castedContainer = std::dynamic_pointer_cast<ocl::Expressions::ExpressionInOcl> (container);
 						return this->createOperationCallExpEval_as_parameterVariable_in_ExpressionInOcl(castedContainer,metaElementID);
 					}
 					//OperationCallExpEval has result as a containment
 					case  ocl::Expressions::ExpressionsPackage::ITERATEEXP_ATTRIBUTE_RESULT:	
 					{
-						std::shared_ptr<ocl::Expressions::IterateExp> castedContainer = std::dynamic_pointer_cast<ocl::Expressions::IterateExp> (container);;
+						std::shared_ptr<ocl::Expressions::IterateExp> castedContainer = std::dynamic_pointer_cast<ocl::Expressions::IterateExp> (container);
 						return this->createOperationCallExpEval_as_result_in_IterateExp(castedContainer,metaElementID);
 					}
 					//OperationCallExpEval has resultVariable as a containment
 					case  ocl::Expressions::ExpressionsPackage::EXPRESSIONINOCL_ATTRIBUTE_RESULTVARIABLE:	
 					{
-						std::shared_ptr<ocl::Expressions::ExpressionInOcl> castedContainer = std::dynamic_pointer_cast<ocl::Expressions::ExpressionInOcl> (container);;
+						std::shared_ptr<ocl::Expressions::ExpressionInOcl> castedContainer = std::dynamic_pointer_cast<ocl::Expressions::ExpressionInOcl> (container);
 						return this->createOperationCallExpEval_as_resultVariable_in_ExpressionInOcl(castedContainer,metaElementID);
 					}
 					default:
@@ -1215,25 +1215,25 @@ std::shared_ptr<ecore::EObject> EvaluationsFactoryImpl::create(const int metaEle
 					//PrimitiveLiteralExpEval has contextVariable as a containment
 					case  ocl::Expressions::ExpressionsPackage::EXPRESSIONINOCL_ATTRIBUTE_CONTEXTVARIABLE:	
 					{
-						std::shared_ptr<ocl::Expressions::ExpressionInOcl> castedContainer = std::dynamic_pointer_cast<ocl::Expressions::ExpressionInOcl> (container);;
+						std::shared_ptr<ocl::Expressions::ExpressionInOcl> castedContainer = std::dynamic_pointer_cast<ocl::Expressions::ExpressionInOcl> (container);
 						return this->createPrimitiveLiteralExpEval_as_contextVariable_in_ExpressionInOcl(castedContainer,metaElementID);
 					}
 					//PrimitiveLiteralExpEval has parameterVariable as a containment
 					case  ocl::Expressions::ExpressionsPackage::EXPRESSIONINOCL_ATTRIBUTE_PARAMETERVARIABLE:	
 					{
-						std::shared_ptr<ocl::Expressions::ExpressionInOcl> castedContainer = std::dynamic_pointer_cast<ocl::Expressions::ExpressionInOcl> (container);;
+						std::shared_ptr<ocl::Expressions::ExpressionInOcl> castedContainer = std::dynamic_pointer_cast<ocl::Expressions::ExpressionInOcl> (container);
 						return this->createPrimitiveLiteralExpEval_as_parameterVariable_in_ExpressionInOcl(castedContainer,metaElementID);
 					}
 					//PrimitiveLiteralExpEval has result as a containment
 					case  ocl::Expressions::ExpressionsPackage::ITERATEEXP_ATTRIBUTE_RESULT:	
 					{
-						std::shared_ptr<ocl::Expressions::IterateExp> castedContainer = std::dynamic_pointer_cast<ocl::Expressions::IterateExp> (container);;
+						std::shared_ptr<ocl::Expressions::IterateExp> castedContainer = std::dynamic_pointer_cast<ocl::Expressions::IterateExp> (container);
 						return this->createPrimitiveLiteralExpEval_as_result_in_IterateExp(castedContainer,metaElementID);
 					}
 					//PrimitiveLiteralExpEval has resultVariable as a containment
 					case  ocl::Expressions::ExpressionsPackage::EXPRESSIONINOCL_ATTRIBUTE_RESULTVARIABLE:	
 					{
-						std::shared_ptr<ocl::Expressions::ExpressionInOcl> castedContainer = std::dynamic_pointer_cast<ocl::Expressions::ExpressionInOcl> (container);;
+						std::shared_ptr<ocl::Expressions::ExpressionInOcl> castedContainer = std::dynamic_pointer_cast<ocl::Expressions::ExpressionInOcl> (container);
 						return this->createPrimitiveLiteralExpEval_as_resultVariable_in_ExpressionInOcl(castedContainer,metaElementID);
 					}
 					default:
@@ -1255,25 +1255,25 @@ std::shared_ptr<ecore::EObject> EvaluationsFactoryImpl::create(const int metaEle
 					//PropertyCallExpEval has contextVariable as a containment
 					case  ocl::Expressions::ExpressionsPackage::EXPRESSIONINOCL_ATTRIBUTE_CONTEXTVARIABLE:	
 					{
-						std::shared_ptr<ocl::Expressions::ExpressionInOcl> castedContainer = std::dynamic_pointer_cast<ocl::Expressions::ExpressionInOcl> (container);;
+						std::shared_ptr<ocl::Expressions::ExpressionInOcl> castedContainer = std::dynamic_pointer_cast<ocl::Expressions::ExpressionInOcl> (container);
 						return this->createPropertyCallExpEval_as_contextVariable_in_ExpressionInOcl(castedContainer,metaElementID);
 					}
 					//PropertyCallExpEval has parameterVariable as a containment
 					case  ocl::Expressions::ExpressionsPackage::EXPRESSIONINOCL_ATTRIBUTE_PARAMETERVARIABLE:	
 					{
-						std::shared_ptr<ocl::Expressions::ExpressionInOcl> castedContainer = std::dynamic_pointer_cast<ocl::Expressions::ExpressionInOcl> (container);;
+						std::shared_ptr<ocl::Expressions::ExpressionInOcl> castedContainer = std::dynamic_pointer_cast<ocl::Expressions::ExpressionInOcl> (container);
 						return this->createPropertyCallExpEval_as_parameterVariable_in_ExpressionInOcl(castedContainer,metaElementID);
 					}
 					//PropertyCallExpEval has result as a containment
 					case  ocl::Expressions::ExpressionsPackage::ITERATEEXP_ATTRIBUTE_RESULT:	
 					{
-						std::shared_ptr<ocl::Expressions::IterateExp> castedContainer = std::dynamic_pointer_cast<ocl::Expressions::IterateExp> (container);;
+						std::shared_ptr<ocl::Expressions::IterateExp> castedContainer = std::dynamic_pointer_cast<ocl::Expressions::IterateExp> (container);
 						return this->createPropertyCallExpEval_as_result_in_IterateExp(castedContainer,metaElementID);
 					}
 					//PropertyCallExpEval has resultVariable as a containment
 					case  ocl::Expressions::ExpressionsPackage::EXPRESSIONINOCL_ATTRIBUTE_RESULTVARIABLE:	
 					{
-						std::shared_ptr<ocl::Expressions::ExpressionInOcl> castedContainer = std::dynamic_pointer_cast<ocl::Expressions::ExpressionInOcl> (container);;
+						std::shared_ptr<ocl::Expressions::ExpressionInOcl> castedContainer = std::dynamic_pointer_cast<ocl::Expressions::ExpressionInOcl> (container);
 						return this->createPropertyCallExpEval_as_resultVariable_in_ExpressionInOcl(castedContainer,metaElementID);
 					}
 					default:
@@ -1295,25 +1295,25 @@ std::shared_ptr<ecore::EObject> EvaluationsFactoryImpl::create(const int metaEle
 					//RealLiteralExpEval has contextVariable as a containment
 					case  ocl::Expressions::ExpressionsPackage::EXPRESSIONINOCL_ATTRIBUTE_CONTEXTVARIABLE:	
 					{
-						std::shared_ptr<ocl::Expressions::ExpressionInOcl> castedContainer = std::dynamic_pointer_cast<ocl::Expressions::ExpressionInOcl> (container);;
+						std::shared_ptr<ocl::Expressions::ExpressionInOcl> castedContainer = std::dynamic_pointer_cast<ocl::Expressions::ExpressionInOcl> (container);
 						return this->createRealLiteralExpEval_as_contextVariable_in_ExpressionInOcl(castedContainer,metaElementID);
 					}
 					//RealLiteralExpEval has parameterVariable as a containment
 					case  ocl::Expressions::ExpressionsPackage::EXPRESSIONINOCL_ATTRIBUTE_PARAMETERVARIABLE:	
 					{
-						std::shared_ptr<ocl::Expressions::ExpressionInOcl> castedContainer = std::dynamic_pointer_cast<ocl::Expressions::ExpressionInOcl> (container);;
+						std::shared_ptr<ocl::Expressions::ExpressionInOcl> castedContainer = std::dynamic_pointer_cast<ocl::Expressions::ExpressionInOcl> (container);
 						return this->createRealLiteralExpEval_as_parameterVariable_in_ExpressionInOcl(castedContainer,metaElementID);
 					}
 					//RealLiteralExpEval has result as a containment
 					case  ocl::Expressions::ExpressionsPackage::ITERATEEXP_ATTRIBUTE_RESULT:	
 					{
-						std::shared_ptr<ocl::Expressions::IterateExp> castedContainer = std::dynamic_pointer_cast<ocl::Expressions::IterateExp> (container);;
+						std::shared_ptr<ocl::Expressions::IterateExp> castedContainer = std::dynamic_pointer_cast<ocl::Expressions::IterateExp> (container);
 						return this->createRealLiteralExpEval_as_result_in_IterateExp(castedContainer,metaElementID);
 					}
 					//RealLiteralExpEval has resultVariable as a containment
 					case  ocl::Expressions::ExpressionsPackage::EXPRESSIONINOCL_ATTRIBUTE_RESULTVARIABLE:	
 					{
-						std::shared_ptr<ocl::Expressions::ExpressionInOcl> castedContainer = std::dynamic_pointer_cast<ocl::Expressions::ExpressionInOcl> (container);;
+						std::shared_ptr<ocl::Expressions::ExpressionInOcl> castedContainer = std::dynamic_pointer_cast<ocl::Expressions::ExpressionInOcl> (container);
 						return this->createRealLiteralExpEval_as_resultVariable_in_ExpressionInOcl(castedContainer,metaElementID);
 					}
 					default:
@@ -1335,25 +1335,25 @@ std::shared_ptr<ecore::EObject> EvaluationsFactoryImpl::create(const int metaEle
 					//StringLiteralExpEval has contextVariable as a containment
 					case  ocl::Expressions::ExpressionsPackage::EXPRESSIONINOCL_ATTRIBUTE_CONTEXTVARIABLE:	
 					{
-						std::shared_ptr<ocl::Expressions::ExpressionInOcl> castedContainer = std::dynamic_pointer_cast<ocl::Expressions::ExpressionInOcl> (container);;
+						std::shared_ptr<ocl::Expressions::ExpressionInOcl> castedContainer = std::dynamic_pointer_cast<ocl::Expressions::ExpressionInOcl> (container);
 						return this->createStringLiteralExpEval_as_contextVariable_in_ExpressionInOcl(castedContainer,metaElementID);
 					}
 					//StringLiteralExpEval has parameterVariable as a containment
 					case  ocl::Expressions::ExpressionsPackage::EXPRESSIONINOCL_ATTRIBUTE_PARAMETERVARIABLE:	
 					{
-						std::shared_ptr<ocl::Expressions::ExpressionInOcl> castedContainer = std::dynamic_pointer_cast<ocl::Expressions::ExpressionInOcl> (container);;
+						std::shared_ptr<ocl::Expressions::ExpressionInOcl> castedContainer = std::dynamic_pointer_cast<ocl::Expressions::ExpressionInOcl> (container);
 						return this->createStringLiteralExpEval_as_parameterVariable_in_ExpressionInOcl(castedContainer,metaElementID);
 					}
 					//StringLiteralExpEval has result as a containment
 					case  ocl::Expressions::ExpressionsPackage::ITERATEEXP_ATTRIBUTE_RESULT:	
 					{
-						std::shared_ptr<ocl::Expressions::IterateExp> castedContainer = std::dynamic_pointer_cast<ocl::Expressions::IterateExp> (container);;
+						std::shared_ptr<ocl::Expressions::IterateExp> castedContainer = std::dynamic_pointer_cast<ocl::Expressions::IterateExp> (container);
 						return this->createStringLiteralExpEval_as_result_in_IterateExp(castedContainer,metaElementID);
 					}
 					//StringLiteralExpEval has resultVariable as a containment
 					case  ocl::Expressions::ExpressionsPackage::EXPRESSIONINOCL_ATTRIBUTE_RESULTVARIABLE:	
 					{
-						std::shared_ptr<ocl::Expressions::ExpressionInOcl> castedContainer = std::dynamic_pointer_cast<ocl::Expressions::ExpressionInOcl> (container);;
+						std::shared_ptr<ocl::Expressions::ExpressionInOcl> castedContainer = std::dynamic_pointer_cast<ocl::Expressions::ExpressionInOcl> (container);
 						return this->createStringLiteralExpEval_as_resultVariable_in_ExpressionInOcl(castedContainer,metaElementID);
 					}
 					default:
@@ -1375,25 +1375,25 @@ std::shared_ptr<ecore::EObject> EvaluationsFactoryImpl::create(const int metaEle
 					//TupleLiteralExpEval has contextVariable as a containment
 					case  ocl::Expressions::ExpressionsPackage::EXPRESSIONINOCL_ATTRIBUTE_CONTEXTVARIABLE:	
 					{
-						std::shared_ptr<ocl::Expressions::ExpressionInOcl> castedContainer = std::dynamic_pointer_cast<ocl::Expressions::ExpressionInOcl> (container);;
+						std::shared_ptr<ocl::Expressions::ExpressionInOcl> castedContainer = std::dynamic_pointer_cast<ocl::Expressions::ExpressionInOcl> (container);
 						return this->createTupleLiteralExpEval_as_contextVariable_in_ExpressionInOcl(castedContainer,metaElementID);
 					}
 					//TupleLiteralExpEval has parameterVariable as a containment
 					case  ocl::Expressions::ExpressionsPackage::EXPRESSIONINOCL_ATTRIBUTE_PARAMETERVARIABLE:	
 					{
-						std::shared_ptr<ocl::Expressions::ExpressionInOcl> castedContainer = std::dynamic_pointer_cast<ocl::Expressions::ExpressionInOcl> (container);;
+						std::shared_ptr<ocl::Expressions::ExpressionInOcl> castedContainer = std::dynamic_pointer_cast<ocl::Expressions::ExpressionInOcl> (container);
 						return this->createTupleLiteralExpEval_as_parameterVariable_in_ExpressionInOcl(castedContainer,metaElementID);
 					}
 					//TupleLiteralExpEval has result as a containment
 					case  ocl::Expressions::ExpressionsPackage::ITERATEEXP_ATTRIBUTE_RESULT:	
 					{
-						std::shared_ptr<ocl::Expressions::IterateExp> castedContainer = std::dynamic_pointer_cast<ocl::Expressions::IterateExp> (container);;
+						std::shared_ptr<ocl::Expressions::IterateExp> castedContainer = std::dynamic_pointer_cast<ocl::Expressions::IterateExp> (container);
 						return this->createTupleLiteralExpEval_as_result_in_IterateExp(castedContainer,metaElementID);
 					}
 					//TupleLiteralExpEval has resultVariable as a containment
 					case  ocl::Expressions::ExpressionsPackage::EXPRESSIONINOCL_ATTRIBUTE_RESULTVARIABLE:	
 					{
-						std::shared_ptr<ocl::Expressions::ExpressionInOcl> castedContainer = std::dynamic_pointer_cast<ocl::Expressions::ExpressionInOcl> (container);;
+						std::shared_ptr<ocl::Expressions::ExpressionInOcl> castedContainer = std::dynamic_pointer_cast<ocl::Expressions::ExpressionInOcl> (container);
 						return this->createTupleLiteralExpEval_as_resultVariable_in_ExpressionInOcl(castedContainer,metaElementID);
 					}
 					default:
@@ -1415,25 +1415,25 @@ std::shared_ptr<ecore::EObject> EvaluationsFactoryImpl::create(const int metaEle
 					//TupleLiteralExpPartEval has contextVariable as a containment
 					case  ocl::Expressions::ExpressionsPackage::EXPRESSIONINOCL_ATTRIBUTE_CONTEXTVARIABLE:	
 					{
-						std::shared_ptr<ocl::Expressions::ExpressionInOcl> castedContainer = std::dynamic_pointer_cast<ocl::Expressions::ExpressionInOcl> (container);;
+						std::shared_ptr<ocl::Expressions::ExpressionInOcl> castedContainer = std::dynamic_pointer_cast<ocl::Expressions::ExpressionInOcl> (container);
 						return this->createTupleLiteralExpPartEval_as_contextVariable_in_ExpressionInOcl(castedContainer,metaElementID);
 					}
 					//TupleLiteralExpPartEval has parameterVariable as a containment
 					case  ocl::Expressions::ExpressionsPackage::EXPRESSIONINOCL_ATTRIBUTE_PARAMETERVARIABLE:	
 					{
-						std::shared_ptr<ocl::Expressions::ExpressionInOcl> castedContainer = std::dynamic_pointer_cast<ocl::Expressions::ExpressionInOcl> (container);;
+						std::shared_ptr<ocl::Expressions::ExpressionInOcl> castedContainer = std::dynamic_pointer_cast<ocl::Expressions::ExpressionInOcl> (container);
 						return this->createTupleLiteralExpPartEval_as_parameterVariable_in_ExpressionInOcl(castedContainer,metaElementID);
 					}
 					//TupleLiteralExpPartEval has result as a containment
 					case  ocl::Expressions::ExpressionsPackage::ITERATEEXP_ATTRIBUTE_RESULT:	
 					{
-						std::shared_ptr<ocl::Expressions::IterateExp> castedContainer = std::dynamic_pointer_cast<ocl::Expressions::IterateExp> (container);;
+						std::shared_ptr<ocl::Expressions::IterateExp> castedContainer = std::dynamic_pointer_cast<ocl::Expressions::IterateExp> (container);
 						return this->createTupleLiteralExpPartEval_as_result_in_IterateExp(castedContainer,metaElementID);
 					}
 					//TupleLiteralExpPartEval has resultVariable as a containment
 					case  ocl::Expressions::ExpressionsPackage::EXPRESSIONINOCL_ATTRIBUTE_RESULTVARIABLE:	
 					{
-						std::shared_ptr<ocl::Expressions::ExpressionInOcl> castedContainer = std::dynamic_pointer_cast<ocl::Expressions::ExpressionInOcl> (container);;
+						std::shared_ptr<ocl::Expressions::ExpressionInOcl> castedContainer = std::dynamic_pointer_cast<ocl::Expressions::ExpressionInOcl> (container);
 						return this->createTupleLiteralExpPartEval_as_resultVariable_in_ExpressionInOcl(castedContainer,metaElementID);
 					}
 					default:
@@ -1455,25 +1455,25 @@ std::shared_ptr<ecore::EObject> EvaluationsFactoryImpl::create(const int metaEle
 					//UnlimitedNaturalLiteralExpEval has contextVariable as a containment
 					case  ocl::Expressions::ExpressionsPackage::EXPRESSIONINOCL_ATTRIBUTE_CONTEXTVARIABLE:	
 					{
-						std::shared_ptr<ocl::Expressions::ExpressionInOcl> castedContainer = std::dynamic_pointer_cast<ocl::Expressions::ExpressionInOcl> (container);;
+						std::shared_ptr<ocl::Expressions::ExpressionInOcl> castedContainer = std::dynamic_pointer_cast<ocl::Expressions::ExpressionInOcl> (container);
 						return this->createUnlimitedNaturalLiteralExpEval_as_contextVariable_in_ExpressionInOcl(castedContainer,metaElementID);
 					}
 					//UnlimitedNaturalLiteralExpEval has parameterVariable as a containment
 					case  ocl::Expressions::ExpressionsPackage::EXPRESSIONINOCL_ATTRIBUTE_PARAMETERVARIABLE:	
 					{
-						std::shared_ptr<ocl::Expressions::ExpressionInOcl> castedContainer = std::dynamic_pointer_cast<ocl::Expressions::ExpressionInOcl> (container);;
+						std::shared_ptr<ocl::Expressions::ExpressionInOcl> castedContainer = std::dynamic_pointer_cast<ocl::Expressions::ExpressionInOcl> (container);
 						return this->createUnlimitedNaturalLiteralExpEval_as_parameterVariable_in_ExpressionInOcl(castedContainer,metaElementID);
 					}
 					//UnlimitedNaturalLiteralExpEval has result as a containment
 					case  ocl::Expressions::ExpressionsPackage::ITERATEEXP_ATTRIBUTE_RESULT:	
 					{
-						std::shared_ptr<ocl::Expressions::IterateExp> castedContainer = std::dynamic_pointer_cast<ocl::Expressions::IterateExp> (container);;
+						std::shared_ptr<ocl::Expressions::IterateExp> castedContainer = std::dynamic_pointer_cast<ocl::Expressions::IterateExp> (container);
 						return this->createUnlimitedNaturalLiteralExpEval_as_result_in_IterateExp(castedContainer,metaElementID);
 					}
 					//UnlimitedNaturalLiteralExpEval has resultVariable as a containment
 					case  ocl::Expressions::ExpressionsPackage::EXPRESSIONINOCL_ATTRIBUTE_RESULTVARIABLE:	
 					{
-						std::shared_ptr<ocl::Expressions::ExpressionInOcl> castedContainer = std::dynamic_pointer_cast<ocl::Expressions::ExpressionInOcl> (container);;
+						std::shared_ptr<ocl::Expressions::ExpressionInOcl> castedContainer = std::dynamic_pointer_cast<ocl::Expressions::ExpressionInOcl> (container);
 						return this->createUnlimitedNaturalLiteralExpEval_as_resultVariable_in_ExpressionInOcl(castedContainer,metaElementID);
 					}
 					default:
@@ -1495,25 +1495,25 @@ std::shared_ptr<ecore::EObject> EvaluationsFactoryImpl::create(const int metaEle
 					//UnspecifiedValueExpEval has contextVariable as a containment
 					case  ocl::Expressions::ExpressionsPackage::EXPRESSIONINOCL_ATTRIBUTE_CONTEXTVARIABLE:	
 					{
-						std::shared_ptr<ocl::Expressions::ExpressionInOcl> castedContainer = std::dynamic_pointer_cast<ocl::Expressions::ExpressionInOcl> (container);;
+						std::shared_ptr<ocl::Expressions::ExpressionInOcl> castedContainer = std::dynamic_pointer_cast<ocl::Expressions::ExpressionInOcl> (container);
 						return this->createUnspecifiedValueExpEval_as_contextVariable_in_ExpressionInOcl(castedContainer,metaElementID);
 					}
 					//UnspecifiedValueExpEval has parameterVariable as a containment
 					case  ocl::Expressions::ExpressionsPackage::EXPRESSIONINOCL_ATTRIBUTE_PARAMETERVARIABLE:	
 					{
-						std::shared_ptr<ocl::Expressions::ExpressionInOcl> castedContainer = std::dynamic_pointer_cast<ocl::Expressions::ExpressionInOcl> (container);;
+						std::shared_ptr<ocl::Expressions::ExpressionInOcl> castedContainer = std::dynamic_pointer_cast<ocl::Expressions::ExpressionInOcl> (container);
 						return this->createUnspecifiedValueExpEval_as_parameterVariable_in_ExpressionInOcl(castedContainer,metaElementID);
 					}
 					//UnspecifiedValueExpEval has result as a containment
 					case  ocl::Expressions::ExpressionsPackage::ITERATEEXP_ATTRIBUTE_RESULT:	
 					{
-						std::shared_ptr<ocl::Expressions::IterateExp> castedContainer = std::dynamic_pointer_cast<ocl::Expressions::IterateExp> (container);;
+						std::shared_ptr<ocl::Expressions::IterateExp> castedContainer = std::dynamic_pointer_cast<ocl::Expressions::IterateExp> (container);
 						return this->createUnspecifiedValueExpEval_as_result_in_IterateExp(castedContainer,metaElementID);
 					}
 					//UnspecifiedValueExpEval has resultVariable as a containment
 					case  ocl::Expressions::ExpressionsPackage::EXPRESSIONINOCL_ATTRIBUTE_RESULTVARIABLE:	
 					{
-						std::shared_ptr<ocl::Expressions::ExpressionInOcl> castedContainer = std::dynamic_pointer_cast<ocl::Expressions::ExpressionInOcl> (container);;
+						std::shared_ptr<ocl::Expressions::ExpressionInOcl> castedContainer = std::dynamic_pointer_cast<ocl::Expressions::ExpressionInOcl> (container);
 						return this->createUnspecifiedValueExpEval_as_resultVariable_in_ExpressionInOcl(castedContainer,metaElementID);
 					}
 					default:
@@ -1535,25 +1535,25 @@ std::shared_ptr<ecore::EObject> EvaluationsFactoryImpl::create(const int metaEle
 					//VariableDeclEval has contextVariable as a containment
 					case  ocl::Expressions::ExpressionsPackage::EXPRESSIONINOCL_ATTRIBUTE_CONTEXTVARIABLE:	
 					{
-						std::shared_ptr<ocl::Expressions::ExpressionInOcl> castedContainer = std::dynamic_pointer_cast<ocl::Expressions::ExpressionInOcl> (container);;
+						std::shared_ptr<ocl::Expressions::ExpressionInOcl> castedContainer = std::dynamic_pointer_cast<ocl::Expressions::ExpressionInOcl> (container);
 						return this->createVariableDeclEval_as_contextVariable_in_ExpressionInOcl(castedContainer,metaElementID);
 					}
 					//VariableDeclEval has parameterVariable as a containment
 					case  ocl::Expressions::ExpressionsPackage::EXPRESSIONINOCL_ATTRIBUTE_PARAMETERVARIABLE:	
 					{
-						std::shared_ptr<ocl::Expressions::ExpressionInOcl> castedContainer = std::dynamic_pointer_cast<ocl::Expressions::ExpressionInOcl> (container);;
+						std::shared_ptr<ocl::Expressions::ExpressionInOcl> castedContainer = std::dynamic_pointer_cast<ocl::Expressions::ExpressionInOcl> (container);
 						return this->createVariableDeclEval_as_parameterVariable_in_ExpressionInOcl(castedContainer,metaElementID);
 					}
 					//VariableDeclEval has result as a containment
 					case  ocl::Expressions::ExpressionsPackage::ITERATEEXP_ATTRIBUTE_RESULT:	
 					{
-						std::shared_ptr<ocl::Expressions::IterateExp> castedContainer = std::dynamic_pointer_cast<ocl::Expressions::IterateExp> (container);;
+						std::shared_ptr<ocl::Expressions::IterateExp> castedContainer = std::dynamic_pointer_cast<ocl::Expressions::IterateExp> (container);
 						return this->createVariableDeclEval_as_result_in_IterateExp(castedContainer,metaElementID);
 					}
 					//VariableDeclEval has resultVariable as a containment
 					case  ocl::Expressions::ExpressionsPackage::EXPRESSIONINOCL_ATTRIBUTE_RESULTVARIABLE:	
 					{
-						std::shared_ptr<ocl::Expressions::ExpressionInOcl> castedContainer = std::dynamic_pointer_cast<ocl::Expressions::ExpressionInOcl> (container);;
+						std::shared_ptr<ocl::Expressions::ExpressionInOcl> castedContainer = std::dynamic_pointer_cast<ocl::Expressions::ExpressionInOcl> (container);
 						return this->createVariableDeclEval_as_resultVariable_in_ExpressionInOcl(castedContainer,metaElementID);
 					}
 					default:
@@ -1575,25 +1575,25 @@ std::shared_ptr<ecore::EObject> EvaluationsFactoryImpl::create(const int metaEle
 					//VariableExpEval has contextVariable as a containment
 					case  ocl::Expressions::ExpressionsPackage::EXPRESSIONINOCL_ATTRIBUTE_CONTEXTVARIABLE:	
 					{
-						std::shared_ptr<ocl::Expressions::ExpressionInOcl> castedContainer = std::dynamic_pointer_cast<ocl::Expressions::ExpressionInOcl> (container);;
+						std::shared_ptr<ocl::Expressions::ExpressionInOcl> castedContainer = std::dynamic_pointer_cast<ocl::Expressions::ExpressionInOcl> (container);
 						return this->createVariableExpEval_as_contextVariable_in_ExpressionInOcl(castedContainer,metaElementID);
 					}
 					//VariableExpEval has parameterVariable as a containment
 					case  ocl::Expressions::ExpressionsPackage::EXPRESSIONINOCL_ATTRIBUTE_PARAMETERVARIABLE:	
 					{
-						std::shared_ptr<ocl::Expressions::ExpressionInOcl> castedContainer = std::dynamic_pointer_cast<ocl::Expressions::ExpressionInOcl> (container);;
+						std::shared_ptr<ocl::Expressions::ExpressionInOcl> castedContainer = std::dynamic_pointer_cast<ocl::Expressions::ExpressionInOcl> (container);
 						return this->createVariableExpEval_as_parameterVariable_in_ExpressionInOcl(castedContainer,metaElementID);
 					}
 					//VariableExpEval has result as a containment
 					case  ocl::Expressions::ExpressionsPackage::ITERATEEXP_ATTRIBUTE_RESULT:	
 					{
-						std::shared_ptr<ocl::Expressions::IterateExp> castedContainer = std::dynamic_pointer_cast<ocl::Expressions::IterateExp> (container);;
+						std::shared_ptr<ocl::Expressions::IterateExp> castedContainer = std::dynamic_pointer_cast<ocl::Expressions::IterateExp> (container);
 						return this->createVariableExpEval_as_result_in_IterateExp(castedContainer,metaElementID);
 					}
 					//VariableExpEval has resultVariable as a containment
 					case  ocl::Expressions::ExpressionsPackage::EXPRESSIONINOCL_ATTRIBUTE_RESULTVARIABLE:	
 					{
-						std::shared_ptr<ocl::Expressions::ExpressionInOcl> castedContainer = std::dynamic_pointer_cast<ocl::Expressions::ExpressionInOcl> (container);;
+						std::shared_ptr<ocl::Expressions::ExpressionInOcl> castedContainer = std::dynamic_pointer_cast<ocl::Expressions::ExpressionInOcl> (container);
 						return this->createVariableExpEval_as_resultVariable_in_ExpressionInOcl(castedContainer,metaElementID);
 					}
 					default:

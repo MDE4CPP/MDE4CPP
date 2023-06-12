@@ -7,15 +7,15 @@
 
 #include "abstractDataTypes/SubsetUnion.hpp"
 //metametamodel classes
-#include "ecore/EReference.hpp"
-#include "ecore/EAnnotation.hpp"
-#include "ecore/EAttribute.hpp"
-#include "ecore/EDataType.hpp"
-#include "ecore/EGenericType.hpp"
-#include "ecore/EClass.hpp"
-#include "ecore/EStringToStringMapEntry.hpp"
-#include "ecore/EOperation.hpp"
 #include "ecore/EParameter.hpp"
+#include "ecore/EDataType.hpp"
+#include "ecore/EStringToStringMapEntry.hpp"
+#include "ecore/EGenericType.hpp"
+#include "ecore/EReference.hpp"
+#include "ecore/EOperation.hpp"
+#include "ecore/EAttribute.hpp"
+#include "ecore/EAnnotation.hpp"
+#include "ecore/EClass.hpp"
 
 //depending model packages
 #include "ecore/ecorePackage.hpp"
@@ -36,6 +36,8 @@ void ActionsPackageImpl::createPackageContents(std::shared_ptr<ecore::EPackage> 
 
 	std::shared_ptr<ecore::ecoreFactory> factory = ecore::ecoreFactory::eInstance();
 
+	createAcceptEventActionActivationContent(package, factory);
+	createAcceptEventActionEventAccepterContent(package, factory);
 	createActionActivationContent(package, factory);
 	createAddStructuralFeatureValueActionActivationContent(package, factory);
 	createCallActionActivationContent(package, factory);
@@ -56,6 +58,7 @@ void ActionsPackageImpl::createPackageContents(std::shared_ptr<ecore::EPackage> 
 	createReadSelfActionActivationContent(package, factory);
 	createReadStructuralFeatureActionActivationContent(package, factory);
 	createRemoveStructuralFeatureValueActionActivationContent(package, factory);
+	createSendSignalActionActivationContent(package, factory);
 	createStructuralFeatureActionActivationContent(package, factory);
 	createStructuredActivityNodeActivationContent(package, factory);
 	createValueSpecificationActionActivationContent(package, factory);
@@ -64,6 +67,36 @@ void ActionsPackageImpl::createPackageContents(std::shared_ptr<ecore::EPackage> 
 
 	createPackageEDataTypes(package, factory);
 
+}
+
+void ActionsPackageImpl::createAcceptEventActionActivationContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory)
+{
+	m_acceptEventActionActivation_Class = factory->createEClass_as_eClassifiers_in_EPackage(package, ACCEPTEVENTACTIONACTIVATION_CLASS);
+	m_acceptEventActionActivation_Attribute_waiting = factory->createEAttribute_as_eAttributes_in_EClass(m_acceptEventActionActivation_Class, ACCEPTEVENTACTIONACTIVATION_ATTRIBUTE_WAITING);
+	
+	m_acceptEventActionActivation_Attribute_acceptEventAction = factory->createEReference_as_eReferences_in_EClass(m_acceptEventActionActivation_Class, ACCEPTEVENTACTIONACTIVATION_ATTRIBUTE_ACCEPTEVENTACTION);
+	m_acceptEventActionActivation_Attribute_eventAccepter = factory->createEReference_as_eReferences_in_EClass(m_acceptEventActionActivation_Class, ACCEPTEVENTACTIONACTIVATION_ATTRIBUTE_EVENTACCEPTER);
+	
+	m_acceptEventActionActivation_Operation_accept_EventOccurrence = factory->createEOperation_as_eOperations_in_EClass(m_acceptEventActionActivation_Class, ACCEPTEVENTACTIONACTIVATION_OPERATION_ACCEPT_EVENTOCCURRENCE);
+	m_acceptEventActionActivation_Operation_doAction = factory->createEOperation_as_eOperations_in_EClass(m_acceptEventActionActivation_Class, ACCEPTEVENTACTIONACTIVATION_OPERATION_DOACTION);
+	m_acceptEventActionActivation_Operation_fire_Token = factory->createEOperation_as_eOperations_in_EClass(m_acceptEventActionActivation_Class, ACCEPTEVENTACTIONACTIVATION_OPERATION_FIRE_TOKEN);
+	m_acceptEventActionActivation_Operation_initialize_ActivityNode_ActivityNodeActivationGroup = factory->createEOperation_as_eOperations_in_EClass(m_acceptEventActionActivation_Class, ACCEPTEVENTACTIONACTIVATION_OPERATION_INITIALIZE_ACTIVITYNODE_ACTIVITYNODEACTIVATIONGROUP);
+	m_acceptEventActionActivation_Operation_isReady = factory->createEOperation_as_eOperations_in_EClass(m_acceptEventActionActivation_Class, ACCEPTEVENTACTIONACTIVATION_OPERATION_ISREADY);
+	m_acceptEventActionActivation_Operation_match_EventOccurrence = factory->createEOperation_as_eOperations_in_EClass(m_acceptEventActionActivation_Class, ACCEPTEVENTACTIONACTIVATION_OPERATION_MATCH_EVENTOCCURRENCE);
+	m_acceptEventActionActivation_Operation_run = factory->createEOperation_as_eOperations_in_EClass(m_acceptEventActionActivation_Class, ACCEPTEVENTACTIONACTIVATION_OPERATION_RUN);
+	m_acceptEventActionActivation_Operation_terminate = factory->createEOperation_as_eOperations_in_EClass(m_acceptEventActionActivation_Class, ACCEPTEVENTACTIONACTIVATION_OPERATION_TERMINATE);
+	
+}
+
+void ActionsPackageImpl::createAcceptEventActionEventAccepterContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory)
+{
+	m_acceptEventActionEventAccepter_Class = factory->createEClass_as_eClassifiers_in_EPackage(package, ACCEPTEVENTACTIONEVENTACCEPTER_CLASS);
+	
+	m_acceptEventActionEventAccepter_Attribute_actionActivation = factory->createEReference_as_eReferences_in_EClass(m_acceptEventActionEventAccepter_Class, ACCEPTEVENTACTIONEVENTACCEPTER_ATTRIBUTE_ACTIONACTIVATION);
+	
+	m_acceptEventActionEventAccepter_Operation_accept_EventOccurrence = factory->createEOperation_as_eOperations_in_EClass(m_acceptEventActionEventAccepter_Class, ACCEPTEVENTACTIONEVENTACCEPTER_OPERATION_ACCEPT_EVENTOCCURRENCE);
+	m_acceptEventActionEventAccepter_Operation_match_EventOccurrence = factory->createEOperation_as_eOperations_in_EClass(m_acceptEventActionEventAccepter_Class, ACCEPTEVENTACTIONEVENTACCEPTER_OPERATION_MATCH_EVENTOCCURRENCE);
+	
 }
 
 void ActionsPackageImpl::createActionActivationContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory)
@@ -317,6 +350,16 @@ void ActionsPackageImpl::createRemoveStructuralFeatureValueActionActivationConte
 	m_removeStructuralFeatureValueActionActivation_Attribute_removeStructuralFeatureValueAction = factory->createEReference_as_eReferences_in_EClass(m_removeStructuralFeatureValueActionActivation_Class, REMOVESTRUCTURALFEATUREVALUEACTIONACTIVATION_ATTRIBUTE_REMOVESTRUCTURALFEATUREVALUEACTION);
 	
 	m_removeStructuralFeatureValueActionActivation_Operation_doAction = factory->createEOperation_as_eOperations_in_EClass(m_removeStructuralFeatureValueActionActivation_Class, REMOVESTRUCTURALFEATUREVALUEACTIONACTIVATION_OPERATION_DOACTION);
+	
+}
+
+void ActionsPackageImpl::createSendSignalActionActivationContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory)
+{
+	m_sendSignalActionActivation_Class = factory->createEClass_as_eClassifiers_in_EPackage(package, SENDSIGNALACTIONACTIVATION_CLASS);
+	
+	m_sendSignalActionActivation_Attribute_sendSignalAction = factory->createEReference_as_eReferences_in_EClass(m_sendSignalActionActivation_Class, SENDSIGNALACTIONACTIVATION_ATTRIBUTE_SENDSIGNALACTION);
+	
+	m_sendSignalActionActivation_Operation_doAction = factory->createEOperation_as_eOperations_in_EClass(m_sendSignalActionActivation_Class, SENDSIGNALACTIONACTIVATION_OPERATION_DOACTION);
 	
 }
 

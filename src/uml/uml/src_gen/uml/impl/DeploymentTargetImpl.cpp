@@ -129,7 +129,7 @@ DeploymentTargetImpl& DeploymentTargetImpl::operator=(const DeploymentTargetImpl
 			std::cout << "Initialising value Subset: " << "m_deployment - Subset<uml::Deployment, uml::Element >(getOwnedElement())" << std::endl;
 		#endif
 		
-		for(const std::shared_ptr<uml::Deployment> deploymentindexElem: *deploymentList) 
+		for(const std::shared_ptr<uml::Deployment>& deploymentindexElem: *deploymentList) 
 		{
 			std::shared_ptr<uml::Deployment> temp = std::dynamic_pointer_cast<uml::Deployment>((deploymentindexElem)->copy());
 			m_deployment->push_back(temp);
@@ -355,13 +355,13 @@ bool DeploymentTargetImpl::eSet(int featureID,  const std::shared_ptr<Any>& newV
 					{
 						std::shared_ptr<Bag<uml::Deployment>> _deployment = getDeployment();
 	
-						for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
+						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{
 							std::shared_ptr<uml::Deployment> valueToAdd = std::dynamic_pointer_cast<uml::Deployment>(anEObject);
 	
 							if (valueToAdd)
 							{
-								if(_deployment->find(valueToAdd) == -1)
+								if(!(_deployment->includes(valueToAdd)))
 								{
 									_deployment->add(valueToAdd);
 								}

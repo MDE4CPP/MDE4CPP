@@ -91,7 +91,7 @@ ValuesImpl& ValuesImpl::operator=(const ValuesImpl & obj)
 	if(valuesList)
 	{	
 		m_values.reset(new Bag<Any>());
-		for(const std::shared_ptr<Any> it: *valuesList) 
+		for(const std::shared_ptr<Any>& it: *valuesList) 
 		{
 			m_values->push_back(it);
 		}
@@ -231,7 +231,7 @@ std::shared_ptr<Any> ValuesImpl::eGet(int featureID, bool resolve, bool coreType
 	switch(featureID)
 	{
 		case fUML::Semantics::Actions::ActionsPackage::VALUES_ATTRIBUTE_VALUES:
-			return eAny(getValues(),ecore::ecorePackage::EJAVAOBJECT_CLASS,true); //1190
+			return eAny(getValues(),ecore::ecorePackage::EJAVAOBJECT_CLASS,true); //1200
 	}
 	return ecore::EObjectImpl::eGet(featureID, resolve, coreType);
 }
@@ -241,7 +241,7 @@ bool ValuesImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case fUML::Semantics::Actions::ActionsPackage::VALUES_ATTRIBUTE_VALUES:
-			return getValues() != nullptr; //1190
+			return getValues() != nullptr; //1200
 	}
 	return ecore::EObjectImpl::internalEIsSet(featureID);
 }
@@ -257,11 +257,11 @@ bool ValuesImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 				std::shared_ptr<Bag<Any>> _valuesList = newValue->get<std::shared_ptr<Bag<Any>>>();
 				std::shared_ptr<Bag<Any>> _values = getValues();
 				
-				for(const std::shared_ptr<Any> valueToAdd: *_valuesList)
+				for(const std::shared_ptr<Any>& valueToAdd: *_valuesList)
 				{
 					if (valueToAdd)
 					{
-						if(_values->find(valueToAdd) == -1)
+						if(!(_values->includes(valueToAdd)))
 						{
 							_values->add(valueToAdd);
 						}

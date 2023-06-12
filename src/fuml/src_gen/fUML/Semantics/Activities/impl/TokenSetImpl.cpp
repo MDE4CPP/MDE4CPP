@@ -245,7 +245,7 @@ std::shared_ptr<Any> TokenSetImpl::eGet(int featureID, bool resolve, bool coreTy
 	switch(featureID)
 	{
 		case fUML::Semantics::Activities::ActivitiesPackage::TOKENSET_ATTRIBUTE_TOKENS:
-			return eEcoreContainerAny(getTokens(),fUML::Semantics::Activities::ActivitiesPackage::TOKEN_CLASS); //1150
+			return eEcoreContainerAny(getTokens(),fUML::Semantics::Activities::ActivitiesPackage::TOKEN_CLASS); //1160
 	}
 	return ecore::EObjectImpl::eGet(featureID, resolve, coreType);
 }
@@ -255,7 +255,7 @@ bool TokenSetImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case fUML::Semantics::Activities::ActivitiesPackage::TOKENSET_ATTRIBUTE_TOKENS:
-			return getTokens() != nullptr; //1150
+			return getTokens() != nullptr; //1160
 	}
 	return ecore::EObjectImpl::internalEIsSet(featureID);
 }
@@ -277,13 +277,13 @@ bool TokenSetImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 					{
 						std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> _tokens = getTokens();
 	
-						for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
+						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{
 							std::shared_ptr<fUML::Semantics::Activities::Token> valueToAdd = std::dynamic_pointer_cast<fUML::Semantics::Activities::Token>(anEObject);
 	
 							if (valueToAdd)
 							{
-								if(_tokens->find(valueToAdd) == -1)
+								if(!(_tokens->includes(valueToAdd)))
 								{
 									_tokens->add(valueToAdd);
 								}

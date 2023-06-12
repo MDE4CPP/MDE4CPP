@@ -9,7 +9,7 @@
 
 //Model includes
 #include "../Listener.hpp"
-#include "uml/impl/ElementImpl.hpp"
+#include "fUML/MDE4CPP_Extensions/impl/FUML_ObjectImpl.hpp"
 
 class Any;
 
@@ -23,7 +23,7 @@ namespace uml
 //*********************************
 namespace FoundationalModelLibrary::Common
 {
-	class ListenerImpl : virtual public uml::ElementImpl, virtual public Listener
+	class ListenerImpl : virtual public fUML::MDE4CPP_Extensions::FUML_ObjectImpl, virtual public Listener
 	{
 		public: 
 			ListenerImpl(const ListenerImpl & obj);
@@ -46,6 +46,9 @@ namespace FoundationalModelLibrary::Common
 			//*********************************
 			// Operations
 			//*********************************
+			// fUML-specific Operations
+			const std::shared_ptr<Bag<uml::Classifier>>& getTypes() const;
+
 			//*********************************
 			// Attributes Getter Setter
 			//*********************************

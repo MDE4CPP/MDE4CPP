@@ -190,7 +190,7 @@ std::shared_ptr<Any> EcoreEval::findInTuple(std::shared_ptr<Any> tuple, const st
     }
     catch(...){}
 
-    // cast not sucessfull
+    // cast not successful
     if (castedTupleBag == nullptr) {
         return nullptr;
     }
@@ -267,7 +267,7 @@ std::shared_ptr<Any> EcoreEval::evalTupleLiteralExp(std::shared_ptr<Any> exp) {
     }
 
     //basic structure of tuples
-    // to be able to reffer values inside a tuple with a name,
+    // to be able to refer values inside a tuple with a name,
     // each tuple element have to be a (name,value) pair
     // std::shared_ptr<Bag<std::tuple<std::string, std::shared_ptr<Any>>>> result in (std::tuple<std::string, std::shared_ptr<Any>>, ...)
     // without shared_ptr/ std -> Bag<tuple<string, Any>> result in (tuple<string, Any>, ...)
@@ -323,7 +323,7 @@ std::shared_ptr<Any> EcoreEval::evalTupleLiteralExp(std::shared_ptr<Any> exp) {
             names.push_back(name);
         } else {
             //TODO add error
-            //tryed to assign twice (or more) the same name in one tuple
+            //tried to assign twice (or more) the same name in one tuple
             return defaultResult();
         }
 
@@ -345,7 +345,7 @@ std::shared_ptr<Any> EcoreEval::evalTupleLiteralExp(std::shared_ptr<Any> exp) {
         //TODO type check for each elem
         //elem->getVarType();
 
-        //reset context if neccessary
+        //reset context if necessary
         if (m_env->getContextVariable() != oldContext) {
             m_env->setContextVariable(oldContext);
         }        
@@ -551,7 +551,7 @@ std::shared_ptr<Any> EcoreEval::evalIfExp(std::shared_ptr<Any> exp) {
     std::shared_ptr<Any> conditionResult = visitNode(eEcoreAny(conditionExp, conditionExp->getMetaElementID()));
     bool condition = false;
 
-    //reset context if neccessary
+    //reset context if necessary
     if (m_env->getContextVariable() != oldContext) {
         m_env->setContextVariable(oldContext);
     }
@@ -572,7 +572,7 @@ std::shared_ptr<Any> EcoreEval::evalIfExp(std::shared_ptr<Any> exp) {
 
     //actual if Expr
 
-    // neccessary to create an new environment to encapsulate variables inside the conditions
+    // necessary to create an new environment to encapsulate variables inside the conditions
     std::shared_ptr<EcoreEnvironment> bodyEnv = std::make_shared<EcoreEnvironment>(EcoreEnvironment(m_env, m_env->getSelfVariable()));
     std::shared_ptr<EcoreEval> bodyEval = std::make_shared<EcoreEval>(EcoreEval(bodyEnv));
 
@@ -980,8 +980,8 @@ std::shared_ptr<Any> EcoreEval::evalIteratorExp(std::shared_ptr<Any> exp) {
         }
         
         
-        // ### defines what kind the iterateable object is ###
-        // ### eObjBag or Any Bag                          ###
+        // ### defines what kind the iterable object is ###
+        // ### eObjBag or Any Bag                       ###
         bool asEObjBag = false;
         
         //first variant get the context as EObjectContainer
@@ -1010,12 +1010,12 @@ std::shared_ptr<Any> EcoreEval::evalIteratorExp(std::shared_ptr<Any> exp) {
 
             if (iterateBag == nullptr) {
                 //TODO add error
-                // can't cast context to a iteratable object
+                // can't cast context to a iterable object
                 return defaultResult();
             }
             bagSize = iterateBag->size();
         }
-        // END of defines what kind the iterateable object is
+        // END of defines what kind the iterable object is
 
         // ###                      ###
         // ### qualifier evaluation ###
@@ -1064,7 +1064,7 @@ std::shared_ptr<Any> EcoreEval::evalIteratorExp(std::shared_ptr<Any> exp) {
 
         } else {
 
-            // multiple qualifiers mean return a Bag with the elements
+            // multiple qualifiers means return a Bag with the elements
 
             std::vector<int> qualifiers = {};           
             //if the context have to be reset
@@ -1074,7 +1074,7 @@ std::shared_ptr<Any> EcoreEval::evalIteratorExp(std::shared_ptr<Any> exp) {
                 //get the current result
                 std::shared_ptr<Any> elemResult = visitNode(eEcoreAny(qualifierExpBag->at(i), qualifierExpBag->at(i)->getMetaElementID()));
 
-                //reset context if neccessary
+                //reset context if necessary
                 if (m_env->getContextVariable() != old_context) {
                     m_env->setContextVariable(old_context);
                 }
@@ -1128,10 +1128,10 @@ std::shared_ptr<Any> EcoreEval::evalIteratorExp(std::shared_ptr<Any> exp) {
                 return eAny(resultBag, 0, true);
             } // END of if (asEObjBag) else part
         } //END of else: multiple qualifiers mean return a Bag with the elements
-    } // END of iteroExp->getSourrundedBy() == ocl::Expressions::SurroundingType::BRACKETS
+    } // END of iteroExp->getSurroundedBy() == ocl::Expressions::SurroundingType::BRACKETS
 
     //TODO add error
-    // coud not evaluate IteratorExp
+    // could not evaluate IteratorExp
     return defaultResult();
 
 }
@@ -1153,6 +1153,14 @@ std::shared_ptr<Any> EcoreEval::evalIterateExp(std::shared_ptr<Any> exp) {
     // ###                ###
 
     const std::shared_ptr<Any>& context = m_env->getContextVariable();
+
+    //check if context is present
+    if (context == nullptr) {
+
+        //TODO add erro
+        //context is nullptr
+        return defaultResult();
+    }
     
     //check if the context is an container of multiple values
     if (!context->isContainer()) {
@@ -1226,7 +1234,7 @@ std::shared_ptr<Any> EcoreEval::evalIterateExp(std::shared_ptr<Any> exp) {
     }
 
     //apply the oclExp to every element in the eObjContainer
-    // neccessary to create an new environment to encapsulate loop variables
+    // necessary to create an new environment to encapsulate loop variables
     std::shared_ptr<EcoreEnvironment> bodyEnv = std::make_shared<EcoreEnvironment>(EcoreEnvironment(m_env, m_env->getSelfVariable()));
     std::shared_ptr<EcoreEval> bodyEval = std::make_shared<EcoreEval>(EcoreEval(bodyEnv));
 

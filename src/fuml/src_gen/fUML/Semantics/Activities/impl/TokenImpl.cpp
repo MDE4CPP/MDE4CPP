@@ -130,7 +130,9 @@ const std::shared_ptr<Any>& TokenImpl::getValue() const
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
-	return nullptr;
+	static const std::shared_ptr<Any> nullPointer = nullptr;
+
+return nullPointer;
 	//end of body
 }
 
@@ -332,10 +334,10 @@ std::shared_ptr<Any> TokenImpl::eGet(int featureID, bool resolve, bool coreType)
 		case fUML::Semantics::Activities::ActivitiesPackage::TOKEN_ATTRIBUTE_HOLDER:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getHolder().lock();
-			return eEcoreAny(returnValue,fUML::Semantics::Activities::ActivitiesPackage::ACTIVITYNODEACTIVATION_CLASS); //1140
+			return eEcoreAny(returnValue,fUML::Semantics::Activities::ActivitiesPackage::ACTIVITYNODEACTIVATION_CLASS); //1150
 		}
 		case fUML::Semantics::Activities::ActivitiesPackage::TOKEN_ATTRIBUTE_WITHDRAWN:
-			return eAny(isWithdrawn(),ecore::ecorePackage::EBOOLEAN_CLASS,false); //1141
+			return eAny(isWithdrawn(),ecore::ecorePackage::EBOOLEAN_CLASS,false); //1151
 	}
 	return ecore::EObjectImpl::eGet(featureID, resolve, coreType);
 }
@@ -345,9 +347,9 @@ bool TokenImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case fUML::Semantics::Activities::ActivitiesPackage::TOKEN_ATTRIBUTE_HOLDER:
-			return getHolder().lock() != nullptr; //1140
+			return getHolder().lock() != nullptr; //1150
 		case fUML::Semantics::Activities::ActivitiesPackage::TOKEN_ATTRIBUTE_WITHDRAWN:
-			return isWithdrawn() != true; //1141
+			return isWithdrawn() != true; //1151
 	}
 	return ecore::EObjectImpl::internalEIsSet(featureID);
 }
@@ -367,7 +369,7 @@ bool TokenImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 					std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivation> _holder = std::dynamic_pointer_cast<fUML::Semantics::Activities::ActivityNodeActivation>(eObject);
 					if(_holder)
 					{
-						setHolder(_holder); //1140
+						setHolder(_holder); //1150
 					}
 					else
 					{
@@ -392,7 +394,7 @@ bool TokenImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 			try
 			{
 				bool _withdrawn = newValue->get<bool>();
-				setWithdrawn(_withdrawn); //1141
+				setWithdrawn(_withdrawn); //1151
 			}
 			catch(...)
 			{

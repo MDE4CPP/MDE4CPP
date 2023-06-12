@@ -189,7 +189,7 @@ std::shared_ptr<ecore::EObject> SequenceNodeImpl::copy() const
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference executableNode */
-const std::shared_ptr<Bag<uml::ExecutableNode>>& SequenceNodeImpl::getExecutableNode() const
+std::shared_ptr<Bag<uml::ExecutableNode>> SequenceNodeImpl::getExecutableNode() const
 {
 	//Cast conversion from redefined container reference StructuredActivityNode::node 
 	std::shared_ptr<Bag<uml::ExecutableNode>> executableNode(new Bag<uml::ExecutableNode>());
@@ -400,13 +400,13 @@ bool SequenceNodeImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue
 					{
 						std::shared_ptr<Bag<uml::ExecutableNode>> _executableNode = getExecutableNode();
 	
-						for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
+						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{
 							std::shared_ptr<uml::ExecutableNode> valueToAdd = std::dynamic_pointer_cast<uml::ExecutableNode>(anEObject);
 	
 							if (valueToAdd)
 							{
-								if(_executableNode->find(valueToAdd) == -1)
+								if(!(_executableNode->includes(valueToAdd)))
 								{
 									_executableNode->add(valueToAdd);
 								}

@@ -40,12 +40,12 @@ namespace types
 			virtual ~typesPackageImpl();
 
 
-			virtual std::shared_ptr<ecore::EDataType> getBoolean_Class() const ;
-			virtual std::shared_ptr<ecore::EDataType> getInteger_Class() const ;
-			virtual std::shared_ptr<ecore::EDataType> getReal_Class() const ;
-			virtual std::shared_ptr<ecore::EDataType> getString_Class() const ;
-			virtual std::shared_ptr<ecore::EDataType> getUnlimitedNatural_Class() const ;
-			virtual std::shared_ptr<ecore::EDataType> getAny_Class() const ;
+			virtual const std::shared_ptr<ecore::EDataType>& getBoolean_Class() const ;
+			virtual const std::shared_ptr<ecore::EDataType>& getInteger_Class() const ;
+			virtual const std::shared_ptr<ecore::EDataType>& getReal_Class() const ;
+			virtual const std::shared_ptr<ecore::EDataType>& getString_Class() const ;
+			virtual const std::shared_ptr<ecore::EDataType>& getUnlimitedNatural_Class() const ;
+			virtual const std::shared_ptr<ecore::EDataType>& getAny_Class() const ;
 			
 			// SubPackages Getters
 			

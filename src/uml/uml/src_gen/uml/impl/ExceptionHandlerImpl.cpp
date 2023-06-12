@@ -441,13 +441,13 @@ bool ExceptionHandlerImpl::eSet(int featureID,  const std::shared_ptr<Any>& newV
 					{
 						std::shared_ptr<Bag<uml::Classifier>> _exceptionType = getExceptionType();
 	
-						for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
+						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{
 							std::shared_ptr<uml::Classifier> valueToAdd = std::dynamic_pointer_cast<uml::Classifier>(anEObject);
 	
 							if (valueToAdd)
 							{
-								if(_exceptionType->find(valueToAdd) == -1)
+								if(!(_exceptionType->includes(valueToAdd)))
 								{
 									_exceptionType->add(valueToAdd);
 								}

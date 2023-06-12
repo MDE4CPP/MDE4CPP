@@ -848,13 +848,13 @@ bool ParameterImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 					{
 						std::shared_ptr<Bag<uml::ParameterSet>> _parameterSet = getParameterSet();
 	
-						for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
+						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{
 							std::shared_ptr<uml::ParameterSet> valueToAdd = std::dynamic_pointer_cast<uml::ParameterSet>(anEObject);
 	
 							if (valueToAdd)
 							{
-								if(_parameterSet->find(valueToAdd) == -1)
+								if(!(_parameterSet->includes(valueToAdd)))
 								{
 									_parameterSet->add(valueToAdd);
 								}

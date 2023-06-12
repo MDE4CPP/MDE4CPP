@@ -1,0 +1,112 @@
+[comment encoding = UTF-8 /]
+[module generateSignalInterfaceHeader('http://www.eclipse.org/uml2/5.0.0/UML')]
+
+[import UML4CPP::generator::main::components::generateClass /]
+[import UML4CPP::generator::main::components::generateInterfaceRealization /]
+[import UML4CPP::generator::main::components::generateProperty /]
+[import UML4CPP::generator::main::components::generateSignal /]
+[import UML4CPP::generator::main::components::generateType /]
+[import UML4CPP::generator::main::helpers::generalHelper /]
+[import UML4CPP::generator::main::helpers::nameHelper /]
+[import UML4CPP::generator::main::validation::validation/]
+[import UML4CPP::generator::main::profiles::uml4CPPProfileHelper /]
+[import UML4CPP::generator::main::model_execution::model_execution /]
+
+[template public generateSignalInterfaceHeader(aSignal : Signal) {containingPackage : Package = aSignal.ancestors()->filter(Package)->first();}]
+[file (containingPackage.generateNamespacePath(false).concat('/').concat(aSignal.name.toUpperFirst()).concat('.hpp'), false, 'UTF-8')]
+[startGuard(aSignal)/]
+
+[generateAbstractDataTypesForwardDeclaration()/]
+
+[if (not aSignal.getRootPackage().allOwnedElements()->filter(Usage)->isEmpty())]
+//********************
+// usage
+[for (usage : Usage| aSignal.getRootPackage().allOwnedElements()->filter(Usage)->asOrderedSet()->sortedBy(myQualifiedName()))]
+[if (not (usage.supplier->asOrderedSet()->first() = aSignal))]
+#include "[usage.getNearestPackage().generateNamespacePath(false)/]/[usage.supplier.name/].hpp"
+[/if][/for][/if]
+
+[let classifiersForForwardDeclaration : Set(Classifier) = Set
+{
+	aSignal.includes()->filter(Class),
+	aSignal.includes()->filter(Interface),
+	aSignal.includes()->selectByType(DataType)
+}->flatten()]
+	[if (classifiersForForwardDeclaration->size() > 0)]
+//Forward declarations for used types
+		[for (aPackage : Package | classifiersForForwardDeclaration.getNearestPackage()->sortedBy(name))]
+			[if (not aPackage.isIgnoreNamespace())]
+namespace [aPackage.generateNamespace(true)/] 
+{
+			[/if]
+			[for (aClassifier : Classifier | classifiersForForwardDeclaration->select(c : Classifier | getNearestPackage() = aPackage))]
+[if (not aPackage.isIgnoreNamespace())]['\t'/][/if][if (aClassifier.oclIsTypeOf(DataType))]struct[else]class[/if] [aClassifier.name.toUpperFirst()/];
+			[/for]
+			[if (not aPackage.isIgnoreNamespace())]
+}
+			[/if]
+		[/for]
+	[/if]
+[/let]
+
+// base class includes
+[if (aSignal.general->isEmpty())]
+#include "[aSignal.getGeneralSuperClassInterfaceInclude()/]"
+[else]
+[for (general : Classifier| aSignal.general->asOrderedSet()->sortedBy(myQualifiedName()))]
+#include "[general.getNearestPackage().generateNamespacePath(false)/]/[general.name.toUpperFirst().concat('.hpp')/]"
+[/for]
+[/if]
+
+[if (not aSignal.directlyRealizedInterfaces()->isEmpty())]
+// Interface realization
+[for (aNamedElement : NamedElement | aSignal.directlyRealizedInterfaces()->select(not oclIsUndefined() and not name.oclIsUndefined()))]
+#include "[aNamedElement.getNearestPackage().generateNamespacePath(false)/]/[aNamedElement.name.toUpperFirst()/].hpp"
+[/for]
+[/if]
+
+[if (aSignal.includes()->selectByKind(Enumeration)->size() > 0)]
+// enum includes
+[for (elements : Enumeration | aSignal.includes()->selectByKind(Enumeration)->asOrderedSet()->sortedBy(myQualifiedName())) separator ('\n')]
+#include "[elements.getNearestPackage().generateNamespacePath(false)/]/[elements.name.toUpperFirst().concat('.hpp')/]"[/for]
+[/if]
+
+[if (not aSignal.getNearestPackage().isIgnoreNamespace())]
+namespace [containingPackage.generateNamespace(false)/]
+{
+[/if]
+	struct [aSignal.name.toUpperFirst()/] [if (aSignal.general->isEmpty())] : virtual public [aSignal.getGeneralSuperClassName()/] [aSignal.generateInterfaceExtensions()/]
+[else][for (general : Classifier | aSignal.general->reject(oclIsUndefined() and name.oclIsUndefined())->asOrderedSet()->sortedBy(myQualifiedName())) before (':') separator (',')]
+virtual public [general.getClassifierName(aSignal, false, general.getNearestPackage().isIgnoreNamespace())/][/for]
+[/if]
+	{
+		protected:
+			[aSignal.name.toUpperFirst()/](){}
+
+		public:
+			//destructor
+			virtual ~[aSignal.name.toUpperFirst()/]() {}
+
+			//*********************************
+			// Getter Setter
+			//*********************************
+			[aSignal.ownedAttribute->sortedBy(name).generateAttributeAccessorsDeclaration(false)/]
+			
+		protected:
+			//*********************************
+			// Members
+			//*********************************
+			[aSignal.ownedAttribute->sortedBy(name).generateAttributeProtectedMember()/]
+
+		public:
+			//*********************************
+			// Union Getter
+			//*********************************
+			[aSignal.generateUnionGetterDeclaretaion(false)/]	
+	};
+[if (not aSignal.getNearestPackage().isIgnoreNamespace())]}[/if]
+[endGuard(aSignal)/]
+[/file]
+[/template]
+
+[query private includes(aSignal : Signal) : Set(Type) = aSignal.ownedAttribute.type->asSet() /]

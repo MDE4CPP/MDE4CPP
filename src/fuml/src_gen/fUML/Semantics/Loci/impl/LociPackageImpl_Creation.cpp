@@ -7,14 +7,14 @@
 
 #include "abstractDataTypes/SubsetUnion.hpp"
 //metametamodel classes
-#include "ecore/EReference.hpp"
-#include "ecore/EAnnotation.hpp"
-#include "ecore/EDataType.hpp"
-#include "ecore/EGenericType.hpp"
-#include "ecore/EClass.hpp"
-#include "ecore/EStringToStringMapEntry.hpp"
-#include "ecore/EOperation.hpp"
 #include "ecore/EParameter.hpp"
+#include "ecore/EDataType.hpp"
+#include "ecore/EStringToStringMapEntry.hpp"
+#include "ecore/EGenericType.hpp"
+#include "ecore/EReference.hpp"
+#include "ecore/EOperation.hpp"
+#include "ecore/EAnnotation.hpp"
+#include "ecore/EClass.hpp"
 
 //depending model packages
 #include "ecore/ecorePackage.hpp"
@@ -108,6 +108,7 @@ void LociPackageImpl::createLocusContent(std::shared_ptr<ecore::EPackage> packag
 	m_locus_Operation_assignFactory_ExecutionFactory = factory->createEOperation_as_eOperations_in_EClass(m_locus_Class, LOCUS_OPERATION_ASSIGNFACTORY_EXECUTIONFACTORY);
 	m_locus_Operation_conforms_Classifier_Classifier = factory->createEOperation_as_eOperations_in_EClass(m_locus_Class, LOCUS_OPERATION_CONFORMS_CLASSIFIER_CLASSIFIER);
 	m_locus_Operation_instantiate_Class = factory->createEOperation_as_eOperations_in_EClass(m_locus_Class, LOCUS_OPERATION_INSTANTIATE_CLASS);
+	m_locus_Operation_instantiate_Signal = factory->createEOperation_as_eOperations_in_EClass(m_locus_Class, LOCUS_OPERATION_INSTANTIATE_SIGNAL);
 	m_locus_Operation_remove_Element = factory->createEOperation_as_eOperations_in_EClass(m_locus_Class, LOCUS_OPERATION_REMOVE_ELEMENT);
 	m_locus_Operation_retrieveExtent_Classifier = factory->createEOperation_as_eOperations_in_EClass(m_locus_Class, LOCUS_OPERATION_RETRIEVEEXTENT_CLASSIFIER);
 	

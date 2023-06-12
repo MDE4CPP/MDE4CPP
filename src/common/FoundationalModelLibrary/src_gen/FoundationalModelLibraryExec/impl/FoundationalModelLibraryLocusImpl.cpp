@@ -13,6 +13,7 @@
 
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "uml/Class.hpp"
+#include "uml/Signal.hpp"
 
 #include "FoundationalModelLibrary/BasicInputOutput/BasicInputOutputFactory.hpp"
 #include "FoundationalModelLibrary/BasicInputOutput/BasicInputOutputPackage.hpp"
@@ -75,6 +76,11 @@ std::shared_ptr<uml::Element> FoundationalModelLibraryLocusImpl::instantiate(con
 
 	return fUML::Semantics::Loci::LocusImpl::instantiate(type);
 	//return PSCS::Semantics::Loci::CS_LocusImpl::instantiate(type);
+}
+
+std::shared_ptr<uml::Element> FoundationalModelLibraryLocusImpl::instantiate(const std::shared_ptr<uml::Signal>&  type)
+{
+	return fUML::Semantics::Loci::LocusImpl::instantiate(type);
 }
 
 void FoundationalModelLibraryLocusImpl::setThisLocusPtr(std::weak_ptr</*PSCS::Semantics::Loci::CS_Locus*/fUML::Semantics::Loci::Locus> thisLocusPtr)

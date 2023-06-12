@@ -37,14 +37,10 @@ namespace fUML::Semantics::Loci
 	class ExecutionFactory;
 	class Executor;
 }
-namespace fUML::Semantics::StructuredClassifiers 
-{
-	class ExtensionalValue;
-	class Object;
-}
 namespace uml 
 {
 	class Class;
+	class Element;
 }
 
 // namespace macro header include
@@ -60,7 +56,7 @@ namespace uml
 namespace PSCS::Semantics::Loci 
 {
 	
-	class PSCS_API CS_Locus: virtual public fUML::Semantics::Loci::Locus
+	class PSCS_API CS_Locus : virtual public fUML::Semantics::Loci::Locus
 	{
 		public:
  			CS_Locus(const CS_Locus &) {}
@@ -77,7 +73,7 @@ namespace PSCS::Semantics::Loci
 			//*********************************
 			// Operations
 			//*********************************
-			virtual std::shared_ptr<fUML::Semantics::StructuredClassifiers::Object> instantiate(std::shared_ptr<uml::Class> type) = 0;
+			virtual std::shared_ptr<uml::Element> instantiate(const std::shared_ptr<uml::Class>& type) = 0;
 
 			//*********************************
 			// Attribute Getters & Setters

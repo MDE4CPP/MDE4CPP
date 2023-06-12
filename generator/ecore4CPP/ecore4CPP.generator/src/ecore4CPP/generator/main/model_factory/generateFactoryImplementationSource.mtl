@@ -161,7 +161,7 @@ std::shared_ptr<[needNamespace(anEPackage, 'EObject')/]> [className/]::create(co
 					{
 						[if not (aReference.oclIsUndefined() or aReference.eContainingClass.oclIsUndefined())]
 							[if (aReference.eOpposite->isEmpty())]
-						std::shared_ptr<[aReference.eContainingClass.generateTypeClass()/]> castedContainer = std::dynamic_pointer_cast<[aReference.eContainingClass.generateTypeClass()/]> (container);;
+						std::shared_ptr<[aReference.eContainingClass.generateTypeClass()/]> castedContainer = std::dynamic_pointer_cast<[aReference.eContainingClass.generateTypeClass()/]> (container);
 							[else]
 						[aReference.eOpposite.pointertype()/]<[aReference.eOpposite.eGenericType.generateCppType(false)/]> castedContainer = std::dynamic_pointer_cast<[aReference.eOpposite.eGenericType.generateCppType(false)/]> (container);
 							[/if]
@@ -265,7 +265,7 @@ std::shared_ptr<[anEClass.generateTypeClass()/]Impl> element(new [anEClass.gener
 	[/if] 
 [/if]
 element->setMetaElementID(metaElementID);
-[if ((currentCompositionOrSubsetToClass.containment) or (currentCompositionOrSubsetToClass.hasSubset()) )] [comment sollte immer eine Komposition oder ein Subset sein. Die +berprüfng, ob es der rchtige Typ ist/]
+[if ((currentCompositionOrSubsetToClass.containment) or (currentCompositionOrSubsetToClass.hasSubset()) )] [comment sollte immer eine Komposition oder ein Subset sein. Die +berprï¿½fng, ob es der rchtige Typ ist/]
 	[if (currentCompositionOrSubsetToClass.eOpposite->isEmpty())] 
 if(nullptr != par_[currentCompositionOrSubsetToClass.eContainingClass.name/])
 {

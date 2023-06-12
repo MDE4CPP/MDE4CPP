@@ -148,11 +148,11 @@ bool [aClass.name.toUpperFirst().concat('Impl')/]::eSet(int featureID,  const st
 				[anEStructuralFeature.generateStructuralFeatureType(true)/] _[anEStructuralFeature.name/]List = newValue->get<[anEStructuralFeature.generateStructuralFeatureType(true)/]>();
 				[anEStructuralFeature.generateStructuralFeatureType(true)/] _[anEStructuralFeature.name.toLowerFirst()/] = [anEStructuralFeature.GetterName()/]();
 				
-				for(const std::shared_ptr<[anEStructuralFeature.eGenericType.generateCppType(false)/]> valueToAdd: *_[anEStructuralFeature.name/]List)
+				for(const std::shared_ptr<[anEStructuralFeature.eGenericType.generateCppType(false)/]>& valueToAdd: *_[anEStructuralFeature.name/]List)
 				{
 					if (valueToAdd)
 					{
-						if(_[anEStructuralFeature.name.toLowerFirst()/]->find(valueToAdd) == -1)
+						if(!(_[anEStructuralFeature.name.toLowerFirst()/]->includes(valueToAdd)))
 						{
 							_[anEStructuralFeature.name.toLowerFirst()/]->add(valueToAdd);
 						}
@@ -214,13 +214,13 @@ bool [aClass.name.toUpperFirst().concat('Impl')/]::eSet(int featureID,  const st
 					{
 						std::shared_ptr<[anEStructuralFeature.generateStructuralFeatureType(false)/]> _[anEStructuralFeature.name.toLowerFirst()/] = [anEStructuralFeature.GetterName()/]();
 	
-						for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
+						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{
 							std::shared_ptr<[anEStructuralFeature.eGenericType.generateCppType(false)/]> valueToAdd = std::dynamic_pointer_cast<[anEStructuralFeature.eGenericType.generateCppType(false)/]>(anEObject);
 	
 							if (valueToAdd)
 							{
-								if(_[anEStructuralFeature.name.toLowerFirst()/]->find(valueToAdd) == -1)
+								if(!(_[anEStructuralFeature.name.toLowerFirst()/]->includes(valueToAdd)))
 								{
 									_[anEStructuralFeature.name.toLowerFirst()/]->add(valueToAdd);
 								}

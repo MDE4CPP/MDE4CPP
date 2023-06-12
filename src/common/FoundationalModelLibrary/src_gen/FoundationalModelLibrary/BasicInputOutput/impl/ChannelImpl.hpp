@@ -9,7 +9,7 @@
 
 //Model includes
 #include "../Channel.hpp"
-#include "uml/impl/ElementImpl.hpp"
+#include "fUML/MDE4CPP_Extensions/impl/FUML_ObjectImpl.hpp"
 
 class Any;
 
@@ -23,7 +23,7 @@ namespace uml
 //*********************************
 namespace FoundationalModelLibrary::BasicInputOutput
 {
-	class ChannelImpl : virtual public uml::ElementImpl, virtual public Channel
+	class ChannelImpl : virtual public fUML::MDE4CPP_Extensions::FUML_ObjectImpl, virtual public Channel
 	{
 		public: 
 			ChannelImpl(const ChannelImpl & obj);
@@ -46,6 +46,9 @@ namespace FoundationalModelLibrary::BasicInputOutput
 			//*********************************
 			// Operations
 			//*********************************
+			// fUML-specific Operations
+			const std::shared_ptr<Bag<uml::Classifier>>& getTypes() const;
+
 			//*********************************
 			// Attributes Getter Setter
 			//*********************************

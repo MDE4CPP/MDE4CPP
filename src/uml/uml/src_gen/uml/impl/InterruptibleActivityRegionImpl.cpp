@@ -146,7 +146,7 @@ InterruptibleActivityRegionImpl& InterruptibleActivityRegionImpl::operator=(cons
 			std::cout << "Initialising value Subset: " << "m_node - Subset<uml::ActivityNode, uml::ActivityNode >(getContainedNode())" << std::endl;
 		#endif
 		
-		for(const std::shared_ptr<uml::ActivityNode> nodeindexElem: *nodeList) 
+		for(const std::shared_ptr<uml::ActivityNode>& nodeindexElem: *nodeList) 
 		{
 			std::shared_ptr<uml::ActivityNode> temp = std::dynamic_pointer_cast<uml::ActivityNode>((nodeindexElem)->copy());
 			m_node->push_back(temp);
@@ -414,13 +414,13 @@ bool InterruptibleActivityRegionImpl::eSet(int featureID,  const std::shared_ptr
 					{
 						std::shared_ptr<Bag<uml::ActivityEdge>> _interruptingEdge = getInterruptingEdge();
 	
-						for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
+						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{
 							std::shared_ptr<uml::ActivityEdge> valueToAdd = std::dynamic_pointer_cast<uml::ActivityEdge>(anEObject);
 	
 							if (valueToAdd)
 							{
-								if(_interruptingEdge->find(valueToAdd) == -1)
+								if(!(_interruptingEdge->includes(valueToAdd)))
 								{
 									_interruptingEdge->add(valueToAdd);
 								}
@@ -459,13 +459,13 @@ bool InterruptibleActivityRegionImpl::eSet(int featureID,  const std::shared_ptr
 					{
 						std::shared_ptr<Bag<uml::ActivityNode>> _node = getNode();
 	
-						for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
+						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{
 							std::shared_ptr<uml::ActivityNode> valueToAdd = std::dynamic_pointer_cast<uml::ActivityNode>(anEObject);
 	
 							if (valueToAdd)
 							{
-								if(_node->find(valueToAdd) == -1)
+								if(!(_node->includes(valueToAdd)))
 								{
 									_node->add(valueToAdd);
 								}

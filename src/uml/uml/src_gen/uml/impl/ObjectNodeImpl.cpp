@@ -542,13 +542,13 @@ bool ObjectNodeImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 					{
 						std::shared_ptr<Bag<uml::State>> _inState = getInState();
 	
-						for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
+						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{
 							std::shared_ptr<uml::State> valueToAdd = std::dynamic_pointer_cast<uml::State>(anEObject);
 	
 							if (valueToAdd)
 							{
-								if(_inState->find(valueToAdd) == -1)
+								if(!(_inState->includes(valueToAdd)))
 								{
 									_inState->add(valueToAdd);
 								}

@@ -54,9 +54,9 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
+#include "fUML/Semantics/Actions/ActionsFactory.hpp"
 #include "uml/umlFactory.hpp"
 #include "fUML/Semantics/Activities/ActivitiesFactory.hpp"
-#include "fUML/Semantics/Actions/ActionsFactory.hpp"
 #include "fUML/Semantics/CommonBehavior/CommonBehaviorFactory.hpp"
 #include "uml/Action.hpp"
 #include "fUML/Semantics/Activities/ActivityEdgeInstance.hpp"
@@ -229,7 +229,7 @@ void CallActionActivationImpl::doAction()
 			{
 				std::shared_ptr<fUML::Semantics::Actions::InputPinActivation> activation =inputActivationList->at(inputPinNumber);
 				std::shared_ptr<Bag<fUML::Semantics::Activities::Token> > tokenList = activation->takeUnofferedTokens();
-				for(std::shared_ptr<fUML::Semantics::Activities::Token> token : *tokenList)
+				for(const std::shared_ptr<fUML::Semantics::Activities::Token>& token : *tokenList)
 				{
 					std::shared_ptr<Any> value = token->getValue();
 					if(value != nullptr)

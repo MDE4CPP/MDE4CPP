@@ -32,7 +32,7 @@
 #include "[general.getNearestPackage().generateNamespacePath(false)/]/impl/[general.name.toUpperFirst()/]Impl.hpp"
 [/for]
 [if (aDataType.general->isEmpty())]
-#include "uml/impl/[aDataType.getGeneralSuperClassName()/]Impl.hpp"
+#include "[aDataType.getGeneralSuperClassImplInclude()/]"
 [/if]
 
 class Any;
@@ -52,7 +52,7 @@ namespace uml
 [/if]
 	struct [dataTypeName/] [for (general : Classifier | aDataType.general->reject(oclIsUndefined() and name.oclIsUndefined())) before (':') separator (',')]
 virtual public [general.getClassifierName(aDataType, false, general.getNearestPackage().isIgnoreNamespace())/]Impl[/for][if (aDataType.general->isEmpty())]
- : virtual public uml::[aDataType.getGeneralSuperClassName()/]Impl[/if], virtual public [aDataType.name.toUpperFirst()/]
+ : virtual public [aDataType.getGeneralSuperClassName()/]Impl[/if], virtual public [aDataType.name.toUpperFirst()/]
 	{
 		public: 
 			[dataTypeName/](const [dataTypeName/] & obj);

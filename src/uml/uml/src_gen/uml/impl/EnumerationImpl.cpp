@@ -175,7 +175,7 @@ EnumerationImpl& EnumerationImpl::operator=(const EnumerationImpl & obj)
 			std::cout << "Initialising value Subset: " << "m_ownedLiteral - Subset<uml::EnumerationLiteral, uml::NamedElement >(getOwnedMember())" << std::endl;
 		#endif
 		
-		for(const std::shared_ptr<uml::EnumerationLiteral> ownedLiteralindexElem: *ownedLiteralList) 
+		for(const std::shared_ptr<uml::EnumerationLiteral>& ownedLiteralindexElem: *ownedLiteralList) 
 		{
 			std::shared_ptr<uml::EnumerationLiteral> temp = std::dynamic_pointer_cast<uml::EnumerationLiteral>((ownedLiteralindexElem)->copy());
 			m_ownedLiteral->push_back(temp);
@@ -416,13 +416,13 @@ bool EnumerationImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 					{
 						std::shared_ptr<Bag<uml::EnumerationLiteral>> _ownedLiteral = getOwnedLiteral();
 	
-						for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
+						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{
 							std::shared_ptr<uml::EnumerationLiteral> valueToAdd = std::dynamic_pointer_cast<uml::EnumerationLiteral>(anEObject);
 	
 							if (valueToAdd)
 							{
-								if(_ownedLiteral->find(valueToAdd) == -1)
+								if(!(_ownedLiteral->includes(valueToAdd)))
 								{
 									_ownedLiteral->add(valueToAdd);
 								}

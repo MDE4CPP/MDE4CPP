@@ -486,13 +486,13 @@ bool ClauseImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 					{
 						std::shared_ptr<Bag<uml::ExecutableNode>> _body = getBody();
 	
-						for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
+						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{
 							std::shared_ptr<uml::ExecutableNode> valueToAdd = std::dynamic_pointer_cast<uml::ExecutableNode>(anEObject);
 	
 							if (valueToAdd)
 							{
-								if(_body->find(valueToAdd) == -1)
+								if(!(_body->includes(valueToAdd)))
 								{
 									_body->add(valueToAdd);
 								}
@@ -531,13 +531,13 @@ bool ClauseImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 					{
 						std::shared_ptr<Bag<uml::OutputPin>> _bodyOutput = getBodyOutput();
 	
-						for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
+						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{
 							std::shared_ptr<uml::OutputPin> valueToAdd = std::dynamic_pointer_cast<uml::OutputPin>(anEObject);
 	
 							if (valueToAdd)
 							{
-								if(_bodyOutput->find(valueToAdd) == -1)
+								if(!(_bodyOutput->includes(valueToAdd)))
 								{
 									_bodyOutput->add(valueToAdd);
 								}
@@ -607,13 +607,13 @@ bool ClauseImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 					{
 						std::shared_ptr<Bag<uml::Clause>> _predecessorClause = getPredecessorClause();
 	
-						for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
+						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{
 							std::shared_ptr<uml::Clause> valueToAdd = std::dynamic_pointer_cast<uml::Clause>(anEObject);
 	
 							if (valueToAdd)
 							{
-								if(_predecessorClause->find(valueToAdd) == -1)
+								if(!(_predecessorClause->includes(valueToAdd)))
 								{
 									_predecessorClause->add(valueToAdd);
 								}
@@ -652,13 +652,13 @@ bool ClauseImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 					{
 						std::shared_ptr<Bag<uml::Clause>> _successorClause = getSuccessorClause();
 	
-						for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
+						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{
 							std::shared_ptr<uml::Clause> valueToAdd = std::dynamic_pointer_cast<uml::Clause>(anEObject);
 	
 							if (valueToAdd)
 							{
-								if(_successorClause->find(valueToAdd) == -1)
+								if(!(_successorClause->includes(valueToAdd)))
 								{
 									_successorClause->add(valueToAdd);
 								}
@@ -697,13 +697,13 @@ bool ClauseImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 					{
 						std::shared_ptr<Bag<uml::ExecutableNode>> _test = getTest();
 	
-						for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
+						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{
 							std::shared_ptr<uml::ExecutableNode> valueToAdd = std::dynamic_pointer_cast<uml::ExecutableNode>(anEObject);
 	
 							if (valueToAdd)
 							{
-								if(_test->find(valueToAdd) == -1)
+								if(!(_test->includes(valueToAdd)))
 								{
 									_test->add(valueToAdd);
 								}

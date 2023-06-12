@@ -107,7 +107,7 @@ ETypeParameterImpl& ETypeParameterImpl::operator=(const ETypeParameterImpl & obj
 		m_eBounds.reset(new Bag<ecore::EGenericType>());
 		
 		
-		for(const std::shared_ptr<ecore::EGenericType> eBoundsindexElem: *eBoundsList) 
+		for(const std::shared_ptr<ecore::EGenericType>& eBoundsindexElem: *eBoundsList) 
 		{
 			std::shared_ptr<ecore::EGenericType> temp = std::dynamic_pointer_cast<ecore::EGenericType>((eBoundsindexElem)->copy());
 			m_eBounds->push_back(temp);
@@ -304,13 +304,13 @@ bool ETypeParameterImpl::eSet(int featureID,  const std::shared_ptr<Any>& newVal
 					{
 						std::shared_ptr<Bag<ecore::EGenericType>> _eBounds = getEBounds();
 	
-						for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
+						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{
 							std::shared_ptr<ecore::EGenericType> valueToAdd = std::dynamic_pointer_cast<ecore::EGenericType>(anEObject);
 	
 							if (valueToAdd)
 							{
-								if(_eBounds->find(valueToAdd) == -1)
+								if(!(_eBounds->includes(valueToAdd)))
 								{
 									_eBounds->add(valueToAdd);
 								}

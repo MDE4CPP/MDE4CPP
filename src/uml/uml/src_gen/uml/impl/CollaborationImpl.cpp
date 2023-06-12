@@ -179,7 +179,7 @@ CollaborationImpl& CollaborationImpl::operator=(const CollaborationImpl & obj)
 			std::cout << "Initialising value Subset: " << "m_collaborationRole - Subset<uml::ConnectableElement, uml::ConnectableElement >(getRole())" << std::endl;
 		#endif
 		
-		for(const std::shared_ptr<uml::ConnectableElement> collaborationRoleindexElem: *collaborationRoleList) 
+		for(const std::shared_ptr<uml::ConnectableElement>& collaborationRoleindexElem: *collaborationRoleList) 
 		{
 			std::shared_ptr<uml::ConnectableElement> temp = std::dynamic_pointer_cast<uml::ConnectableElement>((collaborationRoleindexElem)->copy());
 			m_collaborationRole->push_back(temp);
@@ -442,13 +442,13 @@ bool CollaborationImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValu
 					{
 						std::shared_ptr<Bag<uml::ConnectableElement>> _collaborationRole = getCollaborationRole();
 	
-						for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
+						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{
 							std::shared_ptr<uml::ConnectableElement> valueToAdd = std::dynamic_pointer_cast<uml::ConnectableElement>(anEObject);
 	
 							if (valueToAdd)
 							{
-								if(_collaborationRole->find(valueToAdd) == -1)
+								if(!(_collaborationRole->includes(valueToAdd)))
 								{
 									_collaborationRole->add(valueToAdd);
 								}

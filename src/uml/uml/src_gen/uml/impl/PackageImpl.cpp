@@ -179,7 +179,7 @@ PackageImpl& PackageImpl::operator=(const PackageImpl & obj)
 			std::cout << "Initialising value Subset: " << "m_nestedPackage - Subset<uml::Package, uml::PackageableElement /*Subset does not reference a union*/ >(getPackagedElement())" << std::endl;
 		#endif
 		
-		for(const std::shared_ptr<uml::Package> nestedPackageindexElem: *nestedPackageList) 
+		for(const std::shared_ptr<uml::Package>& nestedPackageindexElem: *nestedPackageList) 
 		{
 			std::shared_ptr<uml::Package> temp = std::dynamic_pointer_cast<uml::Package>((nestedPackageindexElem)->copy());
 			m_nestedPackage->push_back(temp);
@@ -206,7 +206,7 @@ PackageImpl& PackageImpl::operator=(const PackageImpl & obj)
 			std::cout << "Initialising value Subset: " << "m_ownedStereotype - Subset<uml::Stereotype, uml::PackageableElement /*Subset does not reference a union*/ >(getPackagedElement())" << std::endl;
 		#endif
 		
-		for(const std::shared_ptr<uml::Stereotype> ownedStereotypeindexElem: *ownedStereotypeList) 
+		for(const std::shared_ptr<uml::Stereotype>& ownedStereotypeindexElem: *ownedStereotypeList) 
 		{
 			std::shared_ptr<uml::Stereotype> temp = std::dynamic_pointer_cast<uml::Stereotype>((ownedStereotypeindexElem)->copy());
 			m_ownedStereotype->push_back(temp);
@@ -233,7 +233,7 @@ PackageImpl& PackageImpl::operator=(const PackageImpl & obj)
 			std::cout << "Initialising value Subset: " << "m_ownedType - Subset<uml::Type, uml::PackageableElement /*Subset does not reference a union*/ >(getPackagedElement())" << std::endl;
 		#endif
 		
-		for(const std::shared_ptr<uml::Type> ownedTypeindexElem: *ownedTypeList) 
+		for(const std::shared_ptr<uml::Type>& ownedTypeindexElem: *ownedTypeList) 
 		{
 			std::shared_ptr<uml::Type> temp = std::dynamic_pointer_cast<uml::Type>((ownedTypeindexElem)->copy());
 			m_ownedType->push_back(temp);
@@ -260,7 +260,7 @@ PackageImpl& PackageImpl::operator=(const PackageImpl & obj)
 			std::cout << "Initialising value Subset: " << "m_packageMerge - Subset<uml::PackageMerge, uml::Element >(getOwnedElement())" << std::endl;
 		#endif
 		
-		for(const std::shared_ptr<uml::PackageMerge> packageMergeindexElem: *packageMergeList) 
+		for(const std::shared_ptr<uml::PackageMerge>& packageMergeindexElem: *packageMergeList) 
 		{
 			std::shared_ptr<uml::PackageMerge> temp = std::dynamic_pointer_cast<uml::PackageMerge>((packageMergeindexElem)->copy());
 			m_packageMerge->push_back(temp);
@@ -287,7 +287,7 @@ PackageImpl& PackageImpl::operator=(const PackageImpl & obj)
 			std::cout << "Initialising value SubsetUnion: " << "m_packagedElement - SubsetUnion<uml::PackageableElement, uml::NamedElement >(getOwnedMember())" << std::endl;
 		#endif
 		
-		for(const std::shared_ptr<uml::PackageableElement> packagedElementindexElem: *packagedElementList) 
+		for(const std::shared_ptr<uml::PackageableElement>& packagedElementindexElem: *packagedElementList) 
 		{
 			std::shared_ptr<uml::PackageableElement> temp = std::dynamic_pointer_cast<uml::PackageableElement>((packagedElementindexElem)->copy());
 			m_packagedElement->push_back(temp);
@@ -314,7 +314,7 @@ PackageImpl& PackageImpl::operator=(const PackageImpl & obj)
 			std::cout << "Initialising value Subset: " << "m_profileApplication - Subset<uml::ProfileApplication, uml::Element >(getOwnedElement())" << std::endl;
 		#endif
 		
-		for(const std::shared_ptr<uml::ProfileApplication> profileApplicationindexElem: *profileApplicationList) 
+		for(const std::shared_ptr<uml::ProfileApplication>& profileApplicationindexElem: *profileApplicationList) 
 		{
 			std::shared_ptr<uml::ProfileApplication> temp = std::dynamic_pointer_cast<uml::ProfileApplication>((profileApplicationindexElem)->copy());
 			m_profileApplication->push_back(temp);
@@ -1026,13 +1026,13 @@ bool PackageImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 					{
 						std::shared_ptr<Bag<uml::Package>> _nestedPackage = getNestedPackage();
 	
-						for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
+						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{
 							std::shared_ptr<uml::Package> valueToAdd = std::dynamic_pointer_cast<uml::Package>(anEObject);
 	
 							if (valueToAdd)
 							{
-								if(_nestedPackage->find(valueToAdd) == -1)
+								if(!(_nestedPackage->includes(valueToAdd)))
 								{
 									_nestedPackage->add(valueToAdd);
 								}
@@ -1102,13 +1102,13 @@ bool PackageImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 					{
 						std::shared_ptr<Bag<uml::Type>> _ownedType = getOwnedType();
 	
-						for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
+						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{
 							std::shared_ptr<uml::Type> valueToAdd = std::dynamic_pointer_cast<uml::Type>(anEObject);
 	
 							if (valueToAdd)
 							{
-								if(_ownedType->find(valueToAdd) == -1)
+								if(!(_ownedType->includes(valueToAdd)))
 								{
 									_ownedType->add(valueToAdd);
 								}
@@ -1147,13 +1147,13 @@ bool PackageImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 					{
 						std::shared_ptr<Bag<uml::PackageMerge>> _packageMerge = getPackageMerge();
 	
-						for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
+						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{
 							std::shared_ptr<uml::PackageMerge> valueToAdd = std::dynamic_pointer_cast<uml::PackageMerge>(anEObject);
 	
 							if (valueToAdd)
 							{
-								if(_packageMerge->find(valueToAdd) == -1)
+								if(!(_packageMerge->includes(valueToAdd)))
 								{
 									_packageMerge->add(valueToAdd);
 								}
@@ -1192,13 +1192,13 @@ bool PackageImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 					{
 						std::shared_ptr<Bag<uml::PackageableElement>> _packagedElement = getPackagedElement();
 	
-						for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
+						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{
 							std::shared_ptr<uml::PackageableElement> valueToAdd = std::dynamic_pointer_cast<uml::PackageableElement>(anEObject);
 	
 							if (valueToAdd)
 							{
-								if(_packagedElement->find(valueToAdd) == -1)
+								if(!(_packagedElement->includes(valueToAdd)))
 								{
 									_packagedElement->add(valueToAdd);
 								}
@@ -1237,13 +1237,13 @@ bool PackageImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 					{
 						std::shared_ptr<Bag<uml::ProfileApplication>> _profileApplication = getProfileApplication();
 	
-						for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
+						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{
 							std::shared_ptr<uml::ProfileApplication> valueToAdd = std::dynamic_pointer_cast<uml::ProfileApplication>(anEObject);
 	
 							if (valueToAdd)
 							{
-								if(_profileApplication->find(valueToAdd) == -1)
+								if(!(_profileApplication->includes(valueToAdd)))
 								{
 									_profileApplication->add(valueToAdd);
 								}

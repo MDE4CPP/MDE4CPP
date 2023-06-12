@@ -333,7 +333,7 @@ std::shared_ptr<Any> OfferImpl::eGet(int featureID, bool resolve, bool coreType)
 	switch(featureID)
 	{
 		case fUML::Semantics::Activities::ActivitiesPackage::OFFER_ATTRIBUTE_OFFEREDTOKENS:
-			return eEcoreContainerAny(getOfferedTokens(),fUML::Semantics::Activities::ActivitiesPackage::TOKEN_CLASS); //830
+			return eEcoreContainerAny(getOfferedTokens(),fUML::Semantics::Activities::ActivitiesPackage::TOKEN_CLASS); //840
 	}
 	return ecore::EObjectImpl::eGet(featureID, resolve, coreType);
 }
@@ -343,7 +343,7 @@ bool OfferImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case fUML::Semantics::Activities::ActivitiesPackage::OFFER_ATTRIBUTE_OFFEREDTOKENS:
-			return getOfferedTokens() != nullptr; //830
+			return getOfferedTokens() != nullptr; //840
 	}
 	return ecore::EObjectImpl::internalEIsSet(featureID);
 }
@@ -365,13 +365,13 @@ bool OfferImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 					{
 						std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> _offeredTokens = getOfferedTokens();
 	
-						for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
+						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{
 							std::shared_ptr<fUML::Semantics::Activities::Token> valueToAdd = std::dynamic_pointer_cast<fUML::Semantics::Activities::Token>(anEObject);
 	
 							if (valueToAdd)
 							{
-								if(_offeredTokens->find(valueToAdd) == -1)
+								if(!(_offeredTokens->includes(valueToAdd)))
 								{
 									_offeredTokens->add(valueToAdd);
 								}

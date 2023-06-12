@@ -35,6 +35,7 @@
 [import UML4CPP::generator::main::pscs::generateConnectorPatternsInstantiation/]
 [import UML4CPP::generator::main::pscs::generateDestruction/]
 [import UML4CPP::generator::main::profiles::uml4CPPProfileHelper /]
+[import UML4CPP::generator::main::model_execution::model_execution /]
 
 [query private includes(aClass : Class)  : Set(Type) = OrderedSet
 {
@@ -210,7 +211,7 @@ std::shared_ptr<ecore::EObject>  [className/]::copy() const
 {
 [if (aClass.superClass->isEmpty())]
 	//call overloaded =Operator for each base class
-	uml::[aClass.getGeneralSuperClassName()/]Impl::operator=(obj);
+	[aClass.getGeneralSuperClassName()/]Impl::operator=(obj);
 [else]
 	//call overloaded =Operator for each base class
 	[for (sClass : Class | aClass.superClass->reject(oclIsUndefined() and name.oclIsUndefined()))]
@@ -366,6 +367,27 @@ void [className/]::destroy()
 [for (anOpaqueBehavior : OpaqueBehavior | aClass.collectOpaqueBehaviorsContexedByClass()->sortedBy(name)) separator('\n') after('\n')]
 [anOpaqueBehavior.generateOpaqueBehaviorImplementation()/]
 [/for]
+[if (isFUMLExecutable())]
+// fUML-specific Operations
+const std::shared_ptr<Bag<uml::Classifier>>& [className/]::getTypes() const
+{
+	static std::shared_ptr<Bag<uml::Classifier>> types;
+
+	if(!types)
+	{
+		types.reset();
+		// Add type of self '[aClass.name/]' : Class
+		types->add([aClass.generatePackageGetterCall()/]);
+		[for (parent : Classifier | aClass.allParents())]
+		// Add base type '[parent.name/]' : [parent.eClass().name/]
+		types->add([parent.generatePackageGetterCall()/]);
+		[/for]
+	}
+
+	return types;
+}
+
+[/if]
 //**************************************
 // StructuralFeature Getter & Setter
 //**************************************

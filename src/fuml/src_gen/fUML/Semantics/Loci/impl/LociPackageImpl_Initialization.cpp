@@ -4,14 +4,14 @@
 
 #include "abstractDataTypes/SubsetUnion.hpp"
 //metametamodel classes
-#include "ecore/EReference.hpp"
-#include "ecore/EAnnotation.hpp"
-#include "ecore/EDataType.hpp"
-#include "ecore/EGenericType.hpp"
-#include "ecore/EClass.hpp"
-#include "ecore/EStringToStringMapEntry.hpp"
-#include "ecore/EOperation.hpp"
 #include "ecore/EParameter.hpp"
+#include "ecore/EDataType.hpp"
+#include "ecore/EStringToStringMapEntry.hpp"
+#include "ecore/EGenericType.hpp"
+#include "ecore/EReference.hpp"
+#include "ecore/EOperation.hpp"
+#include "ecore/EAnnotation.hpp"
+#include "ecore/EClass.hpp"
 
 // metametamodel factory
 #include "ecore/ecoreFactory.hpp"
@@ -688,6 +688,25 @@ void LociPackageImpl::initializeLocusContent()
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_locus_Operation_instantiate_Class);
 		parameter->setName("type");
 		parameter->setEType(uml::umlPackage::eInstance()->getClass_Class());
+		parameter->setLowerBound(0);
+		parameter->setUpperBound(1);
+		parameter->setUnique(true);
+		parameter->setOrdered(true);
+	}
+	
+	m_locus_Operation_instantiate_Signal->setName("instantiate");
+	m_locus_Operation_instantiate_Signal->setEType(uml::umlPackage::eInstance()->getElement_Class());
+	m_locus_Operation_instantiate_Signal->setLowerBound(1);
+	m_locus_Operation_instantiate_Signal->setUpperBound(1);
+	m_locus_Operation_instantiate_Signal->setUnique(true);
+	m_locus_Operation_instantiate_Signal->setOrdered(false);
+	
+	m_locus_Operation_instantiate_Signal->_setID(LOCUS_OPERATION_INSTANTIATE_SIGNAL);
+	
+	{
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_locus_Operation_instantiate_Signal);
+		parameter->setName("type");
+		parameter->setEType(uml::umlPackage::eInstance()->getSignal_Class());
 		parameter->setLowerBound(0);
 		parameter->setUpperBound(1);
 		parameter->setUnique(true);

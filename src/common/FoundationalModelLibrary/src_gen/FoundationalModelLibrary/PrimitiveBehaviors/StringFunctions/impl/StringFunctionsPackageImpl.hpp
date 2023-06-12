@@ -30,18 +30,18 @@ namespace FoundationalModelLibrary::PrimitiveBehaviors::StringFunctions
 			virtual ~StringFunctionsPackageImpl();
 
 			//getter for the ownedMember
-			virtual std::shared_ptr<uml::FunctionBehavior> get_FoundationalModelLibrary_PrimitiveBehaviors_StringFunctions_Concat();  
-			virtual std::shared_ptr<uml::Parameter> get_FoundationalModelLibrary_PrimitiveBehaviors_StringFunctions_Concat_result();  
-			virtual std::shared_ptr<uml::Parameter> get_FoundationalModelLibrary_PrimitiveBehaviors_StringFunctions_Concat_x();  
-			virtual std::shared_ptr<uml::Parameter> get_FoundationalModelLibrary_PrimitiveBehaviors_StringFunctions_Concat_y();  
-			virtual std::shared_ptr<uml::FunctionBehavior> get_FoundationalModelLibrary_PrimitiveBehaviors_StringFunctions_Size();  
-			virtual std::shared_ptr<uml::Parameter> get_FoundationalModelLibrary_PrimitiveBehaviors_StringFunctions_Size_result();  
-			virtual std::shared_ptr<uml::Parameter> get_FoundationalModelLibrary_PrimitiveBehaviors_StringFunctions_Size_x();  
-			virtual std::shared_ptr<uml::FunctionBehavior> get_FoundationalModelLibrary_PrimitiveBehaviors_StringFunctions_Substring();  
-			virtual std::shared_ptr<uml::Parameter> get_FoundationalModelLibrary_PrimitiveBehaviors_StringFunctions_Substring_lower();  
-			virtual std::shared_ptr<uml::Parameter> get_FoundationalModelLibrary_PrimitiveBehaviors_StringFunctions_Substring_result();  
-			virtual std::shared_ptr<uml::Parameter> get_FoundationalModelLibrary_PrimitiveBehaviors_StringFunctions_Substring_upper();  
-			virtual std::shared_ptr<uml::Parameter> get_FoundationalModelLibrary_PrimitiveBehaviors_StringFunctions_Substring_x();  
+			virtual const std::shared_ptr<uml::FunctionBehavior>& get_FoundationalModelLibrary_PrimitiveBehaviors_StringFunctions_Concat();  
+			virtual const std::shared_ptr<uml::Parameter>& get_FoundationalModelLibrary_PrimitiveBehaviors_StringFunctions_Concat_result();  
+			virtual const std::shared_ptr<uml::Parameter>& get_FoundationalModelLibrary_PrimitiveBehaviors_StringFunctions_Concat_x();  
+			virtual const std::shared_ptr<uml::Parameter>& get_FoundationalModelLibrary_PrimitiveBehaviors_StringFunctions_Concat_y();  
+			virtual const std::shared_ptr<uml::FunctionBehavior>& get_FoundationalModelLibrary_PrimitiveBehaviors_StringFunctions_Size();  
+			virtual const std::shared_ptr<uml::Parameter>& get_FoundationalModelLibrary_PrimitiveBehaviors_StringFunctions_Size_result();  
+			virtual const std::shared_ptr<uml::Parameter>& get_FoundationalModelLibrary_PrimitiveBehaviors_StringFunctions_Size_x();  
+			virtual const std::shared_ptr<uml::FunctionBehavior>& get_FoundationalModelLibrary_PrimitiveBehaviors_StringFunctions_Substring();  
+			virtual const std::shared_ptr<uml::Parameter>& get_FoundationalModelLibrary_PrimitiveBehaviors_StringFunctions_Substring_lower();  
+			virtual const std::shared_ptr<uml::Parameter>& get_FoundationalModelLibrary_PrimitiveBehaviors_StringFunctions_Substring_result();  
+			virtual const std::shared_ptr<uml::Parameter>& get_FoundationalModelLibrary_PrimitiveBehaviors_StringFunctions_Substring_upper();  
+			virtual const std::shared_ptr<uml::Parameter>& get_FoundationalModelLibrary_PrimitiveBehaviors_StringFunctions_Substring_x();  
 			
 			
 
@@ -84,10 +84,12 @@ namespace FoundationalModelLibrary::PrimitiveBehaviors::StringFunctions
 			void createPackageAssociations(std::shared_ptr<uml::Package> foundationalModelLibrary_PrimitiveBehaviors_StringFunctions, std::shared_ptr<uml::umlFactory> factory);
 			void createPackageDependencies(std::shared_ptr<uml::Package> foundationalModelLibrary_PrimitiveBehaviors_StringFunctions, std::shared_ptr<uml::umlFactory> factory);
 			void createPackageEnumerationLiterals(std::shared_ptr<uml::Package> foundationalModelLibrary_PrimitiveBehaviors_StringFunctions, std::shared_ptr<uml::umlFactory> factory);
+			void createPackageEvents(std::shared_ptr<uml::Package> foundationalModelLibrary_PrimitiveBehaviors_StringFunctions, std::shared_ptr<uml::umlFactory> factory);
 			void createPackageInstanceSpecifications(std::shared_ptr<uml::Package> foundationalModelLibrary_PrimitiveBehaviors_StringFunctions, std::shared_ptr<uml::umlFactory> factory);
 			void createPackageInterfaceRealizations(std::shared_ptr<uml::Package> foundationalModelLibrary_PrimitiveBehaviors_StringFunctions, std::shared_ptr<uml::umlFactory> factory);
 			void createPackageInterfaces(std::shared_ptr<uml::Package> foundationalModelLibrary_PrimitiveBehaviors_StringFunctions, std::shared_ptr<uml::umlFactory> factory);
 			void createPackagePrimitiveTypes(std::shared_ptr<uml::Package> foundationalModelLibrary_PrimitiveBehaviors_StringFunctions, std::shared_ptr<uml::umlFactory> factory);
+			void createPackageSignals(std::shared_ptr<uml::Package> foundationalModelLibrary_PrimitiveBehaviors_StringFunctions, std::shared_ptr<uml::umlFactory> factory);
 			void createPackageStereotypes(std::shared_ptr<uml::Package> foundationalModelLibrary_PrimitiveBehaviors_StringFunctions, std::shared_ptr<uml::umlFactory> factory);
 			void createPackageValueSpecifications(std::shared_ptr<uml::Package> foundationalModelLibrary_PrimitiveBehaviors_StringFunctions, std::shared_ptr<uml::umlFactory> factory);
 
@@ -96,10 +98,12 @@ namespace FoundationalModelLibrary::PrimitiveBehaviors::StringFunctions
 			void initializePackageDataTypes();
 			void initializePackageAssociations();
 			void initializePackageDependencies();
+			void initializePackageEvents();
 			void initializePackageInstanceSpecifications();
 			void initializePackageInterfaceRealizations();
 			void initializePackageInterfaces();
 			void initializePackageNestedPackages();
+			void initializePackageSignals();
 			void initializePackageStereotypes();
 			void initializePackageValueSpecifications();
 	};

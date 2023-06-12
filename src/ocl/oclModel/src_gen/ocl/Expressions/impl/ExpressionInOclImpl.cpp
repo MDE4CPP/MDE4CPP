@@ -117,7 +117,7 @@ ExpressionInOclImpl& ExpressionInOclImpl::operator=(const ExpressionInOclImpl & 
 		m_parameterVariable.reset(new Bag<ecore::ETypedElement>());
 		
 		
-		for(const std::shared_ptr<ecore::ETypedElement> parameterVariableindexElem: *parameterVariableList) 
+		for(const std::shared_ptr<ecore::ETypedElement>& parameterVariableindexElem: *parameterVariableList) 
 		{
 			std::shared_ptr<ecore::ETypedElement> temp = std::dynamic_pointer_cast<ecore::ETypedElement>((parameterVariableindexElem)->copy());
 			m_parameterVariable->push_back(temp);
@@ -478,13 +478,13 @@ bool ExpressionInOclImpl::eSet(int featureID,  const std::shared_ptr<Any>& newVa
 					{
 						std::shared_ptr<Bag<ecore::ETypedElement>> _parameterVariable = getParameterVariable();
 	
-						for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
+						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{
 							std::shared_ptr<ecore::ETypedElement> valueToAdd = std::dynamic_pointer_cast<ecore::ETypedElement>(anEObject);
 	
 							if (valueToAdd)
 							{
-								if(_parameterVariable->find(valueToAdd) == -1)
+								if(!(_parameterVariable->includes(valueToAdd)))
 								{
 									_parameterVariable->add(valueToAdd);
 								}

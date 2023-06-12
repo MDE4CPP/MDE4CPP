@@ -127,7 +127,7 @@ SlotImpl& SlotImpl::operator=(const SlotImpl & obj)
 			std::cout << "Initialising value Subset: " << "m_value - Subset<uml::ValueSpecification, uml::Element >(getOwnedElement())" << std::endl;
 		#endif
 		
-		for(const std::shared_ptr<uml::ValueSpecification> valueindexElem: *valueList) 
+		for(const std::shared_ptr<uml::ValueSpecification>& valueindexElem: *valueList) 
 		{
 			std::shared_ptr<uml::ValueSpecification> temp = std::dynamic_pointer_cast<uml::ValueSpecification>((valueindexElem)->copy());
 			m_value->push_back(temp);
@@ -482,13 +482,13 @@ bool SlotImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 					{
 						std::shared_ptr<Bag<uml::ValueSpecification>> _value = getValue();
 	
-						for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
+						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{
 							std::shared_ptr<uml::ValueSpecification> valueToAdd = std::dynamic_pointer_cast<uml::ValueSpecification>(anEObject);
 	
 							if (valueToAdd)
 							{
-								if(_value->find(valueToAdd) == -1)
+								if(!(_value->includes(valueToAdd)))
 								{
 									_value->add(valueToAdd);
 								}

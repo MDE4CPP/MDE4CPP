@@ -4,15 +4,15 @@
 
 #include "abstractDataTypes/SubsetUnion.hpp"
 //metametamodel classes
-#include "ecore/EReference.hpp"
-#include "ecore/EAnnotation.hpp"
-#include "ecore/EAttribute.hpp"
-#include "ecore/EDataType.hpp"
-#include "ecore/EGenericType.hpp"
-#include "ecore/EClass.hpp"
-#include "ecore/EStringToStringMapEntry.hpp"
-#include "ecore/EOperation.hpp"
 #include "ecore/EParameter.hpp"
+#include "ecore/EDataType.hpp"
+#include "ecore/EStringToStringMapEntry.hpp"
+#include "ecore/EGenericType.hpp"
+#include "ecore/EReference.hpp"
+#include "ecore/EOperation.hpp"
+#include "ecore/EAttribute.hpp"
+#include "ecore/EAnnotation.hpp"
+#include "ecore/EClass.hpp"
 
 //metamodel factory
 #include "fUML/Semantics/CommonBehavior/CommonBehaviorFactory.hpp"
@@ -76,89 +76,294 @@ void CommonBehaviorPackageImpl::init(std::shared_ptr<ecore::EPackage> package)
 
 
 
+// Begin Class ClassifierBehaviorExecution
+const std::shared_ptr<ecore::EClass>& fUML::Semantics::CommonBehavior::CommonBehaviorPackageImpl::getClassifierBehaviorExecution_Class() const
+{
+	return m_classifierBehaviorExecution_Class;
+}
+
+
+const std::shared_ptr<ecore::EReference>& fUML::Semantics::CommonBehavior::CommonBehaviorPackageImpl::getClassifierBehaviorExecution_Attribute_classifier() const
+{
+	return m_classifierBehaviorExecution_Attribute_classifier;
+}
+const std::shared_ptr<ecore::EReference>& fUML::Semantics::CommonBehavior::CommonBehaviorPackageImpl::getClassifierBehaviorExecution_Attribute_execution() const
+{
+	return m_classifierBehaviorExecution_Attribute_execution;
+}
+const std::shared_ptr<ecore::EReference>& fUML::Semantics::CommonBehavior::CommonBehaviorPackageImpl::getClassifierBehaviorExecution_Attribute_objectActivation() const
+{
+	return m_classifierBehaviorExecution_Attribute_objectActivation;
+}
+
+const std::shared_ptr<ecore::EOperation>& fUML::Semantics::CommonBehavior::CommonBehaviorPackageImpl::getClassifierBehaviorExecution_Operation__startObjectBehavior() const
+{
+	return m_classifierBehaviorExecution_Operation__startObjectBehavior;
+}
+const std::shared_ptr<ecore::EOperation>& fUML::Semantics::CommonBehavior::CommonBehaviorPackageImpl::getClassifierBehaviorExecution_Operation_execute_Class_ParameterValue() const
+{
+	return m_classifierBehaviorExecution_Operation_execute_Class_ParameterValue;
+}
+const std::shared_ptr<ecore::EOperation>& fUML::Semantics::CommonBehavior::CommonBehaviorPackageImpl::getClassifierBehaviorExecution_Operation_terminate() const
+{
+	return m_classifierBehaviorExecution_Operation_terminate;
+}
+
+// End Class ClassifierBehaviorExecution
+
+// Begin Class EventAccepter
+const std::shared_ptr<ecore::EClass>& fUML::Semantics::CommonBehavior::CommonBehaviorPackageImpl::getEventAccepter_Class() const
+{
+	return m_eventAccepter_Class;
+}
+
+
+
+const std::shared_ptr<ecore::EOperation>& fUML::Semantics::CommonBehavior::CommonBehaviorPackageImpl::getEventAccepter_Operation_accept_EventOccurrence() const
+{
+	return m_eventAccepter_Operation_accept_EventOccurrence;
+}
+const std::shared_ptr<ecore::EOperation>& fUML::Semantics::CommonBehavior::CommonBehaviorPackageImpl::getEventAccepter_Operation_match_EventOccurrence() const
+{
+	return m_eventAccepter_Operation_match_EventOccurrence;
+}
+
+// End Class EventAccepter
+
+// Begin Class EventOccurrence
+const std::shared_ptr<ecore::EClass>& fUML::Semantics::CommonBehavior::CommonBehaviorPackageImpl::getEventOccurrence_Class() const
+{
+	return m_eventOccurrence_Class;
+}
+
+
+const std::shared_ptr<ecore::EReference>& fUML::Semantics::CommonBehavior::CommonBehaviorPackageImpl::getEventOccurrence_Attribute_target() const
+{
+	return m_eventOccurrence_Attribute_target;
+}
+
+const std::shared_ptr<ecore::EOperation>& fUML::Semantics::CommonBehavior::CommonBehaviorPackageImpl::getEventOccurrence_Operation_doSend() const
+{
+	return m_eventOccurrence_Operation_doSend;
+}
+const std::shared_ptr<ecore::EOperation>& fUML::Semantics::CommonBehavior::CommonBehaviorPackageImpl::getEventOccurrence_Operation_getParameterValues_Event() const
+{
+	return m_eventOccurrence_Operation_getParameterValues_Event;
+}
+const std::shared_ptr<ecore::EOperation>& fUML::Semantics::CommonBehavior::CommonBehaviorPackageImpl::getEventOccurrence_Operation_match_Trigger() const
+{
+	return m_eventOccurrence_Operation_match_Trigger;
+}
+const std::shared_ptr<ecore::EOperation>& fUML::Semantics::CommonBehavior::CommonBehaviorPackageImpl::getEventOccurrence_Operation_matchAny_Trigger() const
+{
+	return m_eventOccurrence_Operation_matchAny_Trigger;
+}
+const std::shared_ptr<ecore::EOperation>& fUML::Semantics::CommonBehavior::CommonBehaviorPackageImpl::getEventOccurrence_Operation_sendTo_Element() const
+{
+	return m_eventOccurrence_Operation_sendTo_Element;
+}
+
+// End Class EventOccurrence
+
 // Begin Class Execution
-std::shared_ptr<ecore::EClass> fUML::Semantics::CommonBehavior::CommonBehaviorPackageImpl::getExecution_Class() const
+const std::shared_ptr<ecore::EClass>& fUML::Semantics::CommonBehavior::CommonBehaviorPackageImpl::getExecution_Class() const
 {
 	return m_execution_Class;
 }
 
 
-std::shared_ptr<ecore::EReference> fUML::Semantics::CommonBehavior::CommonBehaviorPackageImpl::getExecution_Attribute_behavior() const
+const std::shared_ptr<ecore::EReference>& fUML::Semantics::CommonBehavior::CommonBehaviorPackageImpl::getExecution_Attribute_behavior() const
 {
 	return m_execution_Attribute_behavior;
 }
-std::shared_ptr<ecore::EReference> fUML::Semantics::CommonBehavior::CommonBehaviorPackageImpl::getExecution_Attribute_context() const
+const std::shared_ptr<ecore::EReference>& fUML::Semantics::CommonBehavior::CommonBehaviorPackageImpl::getExecution_Attribute_context() const
 {
 	return m_execution_Attribute_context;
 }
-std::shared_ptr<ecore::EReference> fUML::Semantics::CommonBehavior::CommonBehaviorPackageImpl::getExecution_Attribute_locus() const
+const std::shared_ptr<ecore::EReference>& fUML::Semantics::CommonBehavior::CommonBehaviorPackageImpl::getExecution_Attribute_locus() const
 {
 	return m_execution_Attribute_locus;
 }
-std::shared_ptr<ecore::EReference> fUML::Semantics::CommonBehavior::CommonBehaviorPackageImpl::getExecution_Attribute_parameterValues() const
+const std::shared_ptr<ecore::EReference>& fUML::Semantics::CommonBehavior::CommonBehaviorPackageImpl::getExecution_Attribute_parameterValues() const
 {
 	return m_execution_Attribute_parameterValues;
 }
-std::shared_ptr<ecore::EReference> fUML::Semantics::CommonBehavior::CommonBehaviorPackageImpl::getExecution_Attribute_types() const
+const std::shared_ptr<ecore::EReference>& fUML::Semantics::CommonBehavior::CommonBehaviorPackageImpl::getExecution_Attribute_types() const
 {
 	return m_execution_Attribute_types;
 }
 
-std::shared_ptr<ecore::EOperation> fUML::Semantics::CommonBehavior::CommonBehaviorPackageImpl::getExecution_Operation__copy() const
+const std::shared_ptr<ecore::EOperation>& fUML::Semantics::CommonBehavior::CommonBehaviorPackageImpl::getExecution_Operation__copy() const
 {
 	return m_execution_Operation__copy;
 }
-std::shared_ptr<ecore::EOperation> fUML::Semantics::CommonBehavior::CommonBehaviorPackageImpl::getExecution_Operation_destroy() const
+const std::shared_ptr<ecore::EOperation>& fUML::Semantics::CommonBehavior::CommonBehaviorPackageImpl::getExecution_Operation_destroy() const
 {
 	return m_execution_Operation_destroy;
 }
-std::shared_ptr<ecore::EOperation> fUML::Semantics::CommonBehavior::CommonBehaviorPackageImpl::getExecution_Operation_execute() const
+const std::shared_ptr<ecore::EOperation>& fUML::Semantics::CommonBehavior::CommonBehaviorPackageImpl::getExecution_Operation_execute() const
 {
 	return m_execution_Operation_execute;
 }
-std::shared_ptr<ecore::EOperation> fUML::Semantics::CommonBehavior::CommonBehaviorPackageImpl::getExecution_Operation_getOutputParameterValues() const
+const std::shared_ptr<ecore::EOperation>& fUML::Semantics::CommonBehavior::CommonBehaviorPackageImpl::getExecution_Operation_getOutputParameterValues() const
 {
 	return m_execution_Operation_getOutputParameterValues;
 }
-std::shared_ptr<ecore::EOperation> fUML::Semantics::CommonBehavior::CommonBehaviorPackageImpl::getExecution_Operation_getParameterValue_Parameter() const
+const std::shared_ptr<ecore::EOperation>& fUML::Semantics::CommonBehavior::CommonBehaviorPackageImpl::getExecution_Operation_getParameterValue_Parameter() const
 {
 	return m_execution_Operation_getParameterValue_Parameter;
 }
-std::shared_ptr<ecore::EOperation> fUML::Semantics::CommonBehavior::CommonBehaviorPackageImpl::getExecution_Operation_new_() const
+const std::shared_ptr<ecore::EOperation>& fUML::Semantics::CommonBehavior::CommonBehaviorPackageImpl::getExecution_Operation_new_() const
 {
 	return m_execution_Operation_new_;
 }
-std::shared_ptr<ecore::EOperation> fUML::Semantics::CommonBehavior::CommonBehaviorPackageImpl::getExecution_Operation_setParameterValue_ParameterValue() const
+const std::shared_ptr<ecore::EOperation>& fUML::Semantics::CommonBehavior::CommonBehaviorPackageImpl::getExecution_Operation_setParameterValue_ParameterValue() const
 {
 	return m_execution_Operation_setParameterValue_ParameterValue;
 }
-std::shared_ptr<ecore::EOperation> fUML::Semantics::CommonBehavior::CommonBehaviorPackageImpl::getExecution_Operation_terminate() const
+const std::shared_ptr<ecore::EOperation>& fUML::Semantics::CommonBehavior::CommonBehaviorPackageImpl::getExecution_Operation_terminate() const
 {
 	return m_execution_Operation_terminate;
 }
 
 // End Class Execution
 
+// Begin Class FIFOGetNextEventStrategy
+const std::shared_ptr<ecore::EClass>& fUML::Semantics::CommonBehavior::CommonBehaviorPackageImpl::getFIFOGetNextEventStrategy_Class() const
+{
+	return m_fIFOGetNextEventStrategy_Class;
+}
+
+
+
+const std::shared_ptr<ecore::EOperation>& fUML::Semantics::CommonBehavior::CommonBehaviorPackageImpl::getFIFOGetNextEventStrategy_Operation_retrieveNextEvent_ObjectActivation() const
+{
+	return m_fIFOGetNextEventStrategy_Operation_retrieveNextEvent_ObjectActivation;
+}
+
+// End Class FIFOGetNextEventStrategy
+
+// Begin Class GetNextEventStrategy
+const std::shared_ptr<ecore::EClass>& fUML::Semantics::CommonBehavior::CommonBehaviorPackageImpl::getGetNextEventStrategy_Class() const
+{
+	return m_getNextEventStrategy_Class;
+}
+
+
+
+const std::shared_ptr<ecore::EOperation>& fUML::Semantics::CommonBehavior::CommonBehaviorPackageImpl::getGetNextEventStrategy_Operation_getName() const
+{
+	return m_getNextEventStrategy_Operation_getName;
+}
+const std::shared_ptr<ecore::EOperation>& fUML::Semantics::CommonBehavior::CommonBehaviorPackageImpl::getGetNextEventStrategy_Operation_retrieveNextEvent_ObjectActivation() const
+{
+	return m_getNextEventStrategy_Operation_retrieveNextEvent_ObjectActivation;
+}
+
+// End Class GetNextEventStrategy
+
+// Begin Class ObjectActivation
+const std::shared_ptr<ecore::EClass>& fUML::Semantics::CommonBehavior::CommonBehaviorPackageImpl::getObjectActivation_Class() const
+{
+	return m_objectActivation_Class;
+}
+
+
+const std::shared_ptr<ecore::EReference>& fUML::Semantics::CommonBehavior::CommonBehaviorPackageImpl::getObjectActivation_Attribute_classifierBehaviorExecutions() const
+{
+	return m_objectActivation_Attribute_classifierBehaviorExecutions;
+}
+const std::shared_ptr<ecore::EReference>& fUML::Semantics::CommonBehavior::CommonBehaviorPackageImpl::getObjectActivation_Attribute_eventPool() const
+{
+	return m_objectActivation_Attribute_eventPool;
+}
+const std::shared_ptr<ecore::EReference>& fUML::Semantics::CommonBehavior::CommonBehaviorPackageImpl::getObjectActivation_Attribute_object() const
+{
+	return m_objectActivation_Attribute_object;
+}
+const std::shared_ptr<ecore::EReference>& fUML::Semantics::CommonBehavior::CommonBehaviorPackageImpl::getObjectActivation_Attribute_waitingEventAccepters() const
+{
+	return m_objectActivation_Attribute_waitingEventAccepters;
+}
+
+const std::shared_ptr<ecore::EOperation>& fUML::Semantics::CommonBehavior::CommonBehaviorPackageImpl::getObjectActivation_Operation__register_EventAccepter() const
+{
+	return m_objectActivation_Operation__register_EventAccepter;
+}
+const std::shared_ptr<ecore::EOperation>& fUML::Semantics::CommonBehavior::CommonBehaviorPackageImpl::getObjectActivation_Operation__startObjectBehavior() const
+{
+	return m_objectActivation_Operation__startObjectBehavior;
+}
+const std::shared_ptr<ecore::EOperation>& fUML::Semantics::CommonBehavior::CommonBehaviorPackageImpl::getObjectActivation_Operation_dispatchNextEvent() const
+{
+	return m_objectActivation_Operation_dispatchNextEvent;
+}
+const std::shared_ptr<ecore::EOperation>& fUML::Semantics::CommonBehavior::CommonBehaviorPackageImpl::getObjectActivation_Operation_retrieveNextEvent() const
+{
+	return m_objectActivation_Operation_retrieveNextEvent;
+}
+const std::shared_ptr<ecore::EOperation>& fUML::Semantics::CommonBehavior::CommonBehaviorPackageImpl::getObjectActivation_Operation_send_EventOccurrence() const
+{
+	return m_objectActivation_Operation_send_EventOccurrence;
+}
+const std::shared_ptr<ecore::EOperation>& fUML::Semantics::CommonBehavior::CommonBehaviorPackageImpl::getObjectActivation_Operation_startBehavior_Class_ParameterValue() const
+{
+	return m_objectActivation_Operation_startBehavior_Class_ParameterValue;
+}
+const std::shared_ptr<ecore::EOperation>& fUML::Semantics::CommonBehavior::CommonBehaviorPackageImpl::getObjectActivation_Operation_stop() const
+{
+	return m_objectActivation_Operation_stop;
+}
+const std::shared_ptr<ecore::EOperation>& fUML::Semantics::CommonBehavior::CommonBehaviorPackageImpl::getObjectActivation_Operation_unregister_EventAccepter() const
+{
+	return m_objectActivation_Operation_unregister_EventAccepter;
+}
+
+// End Class ObjectActivation
+
 // Begin Class ParameterValue
-std::shared_ptr<ecore::EClass> fUML::Semantics::CommonBehavior::CommonBehaviorPackageImpl::getParameterValue_Class() const
+const std::shared_ptr<ecore::EClass>& fUML::Semantics::CommonBehavior::CommonBehaviorPackageImpl::getParameterValue_Class() const
 {
 	return m_parameterValue_Class;
 }
 
-std::shared_ptr<ecore::EAttribute> fUML::Semantics::CommonBehavior::CommonBehaviorPackageImpl::getParameterValue_Attribute_values() const
+const std::shared_ptr<ecore::EAttribute>& fUML::Semantics::CommonBehavior::CommonBehaviorPackageImpl::getParameterValue_Attribute_values() const
 {
 	return m_parameterValue_Attribute_values;
 }
 
-std::shared_ptr<ecore::EReference> fUML::Semantics::CommonBehavior::CommonBehaviorPackageImpl::getParameterValue_Attribute_parameter() const
+const std::shared_ptr<ecore::EReference>& fUML::Semantics::CommonBehavior::CommonBehaviorPackageImpl::getParameterValue_Attribute_parameter() const
 {
 	return m_parameterValue_Attribute_parameter;
 }
 
-std::shared_ptr<ecore::EOperation> fUML::Semantics::CommonBehavior::CommonBehaviorPackageImpl::getParameterValue_Operation__copy() const
+const std::shared_ptr<ecore::EOperation>& fUML::Semantics::CommonBehavior::CommonBehaviorPackageImpl::getParameterValue_Operation__copy() const
 {
 	return m_parameterValue_Operation__copy;
 }
 
 // End Class ParameterValue
+
+// Begin Class SignalEventOccurrence
+const std::shared_ptr<ecore::EClass>& fUML::Semantics::CommonBehavior::CommonBehaviorPackageImpl::getSignalEventOccurrence_Class() const
+{
+	return m_signalEventOccurrence_Class;
+}
+
+
+const std::shared_ptr<ecore::EReference>& fUML::Semantics::CommonBehavior::CommonBehaviorPackageImpl::getSignalEventOccurrence_Attribute_signalInstance() const
+{
+	return m_signalEventOccurrence_Attribute_signalInstance;
+}
+
+const std::shared_ptr<ecore::EOperation>& fUML::Semantics::CommonBehavior::CommonBehaviorPackageImpl::getSignalEventOccurrence_Operation_getParameterValues_Event() const
+{
+	return m_signalEventOccurrence_Operation_getParameterValues_Event;
+}
+const std::shared_ptr<ecore::EOperation>& fUML::Semantics::CommonBehavior::CommonBehaviorPackageImpl::getSignalEventOccurrence_Operation_match_Trigger() const
+{
+	return m_signalEventOccurrence_Operation_match_Trigger;
+}
+
+// End Class SignalEventOccurrence
 

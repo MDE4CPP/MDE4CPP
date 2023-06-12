@@ -97,7 +97,7 @@ ParameterValueImpl& ParameterValueImpl::operator=(const ParameterValueImpl & obj
 	if(valuesList)
 	{	
 		m_values.reset(new Bag<Any>());
-		for(const std::shared_ptr<Any> it: *valuesList) 
+		for(const std::shared_ptr<Any>& it: *valuesList) 
 		{
 			m_values->push_back(it);
 		}
@@ -307,9 +307,9 @@ std::shared_ptr<Any> ParameterValueImpl::eGet(int featureID, bool resolve, bool 
 	switch(featureID)
 	{
 		case fUML::Semantics::CommonBehavior::CommonBehaviorPackage::PARAMETERVALUE_ATTRIBUTE_PARAMETER:
-			return eAny(getParameter(),uml::umlPackage::PARAMETER_CLASS,false); //860
+			return eAny(getParameter(),uml::umlPackage::PARAMETER_CLASS,false); //870
 		case fUML::Semantics::CommonBehavior::CommonBehaviorPackage::PARAMETERVALUE_ATTRIBUTE_VALUES:
-			return eAny(getValues(),ecore::ecorePackage::EJAVAOBJECT_CLASS,true); //861
+			return eAny(getValues(),ecore::ecorePackage::EJAVAOBJECT_CLASS,true); //871
 	}
 	return ecore::EObjectImpl::eGet(featureID, resolve, coreType);
 }
@@ -319,9 +319,9 @@ bool ParameterValueImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case fUML::Semantics::CommonBehavior::CommonBehaviorPackage::PARAMETERVALUE_ATTRIBUTE_PARAMETER:
-			return getParameter() != nullptr; //860
+			return getParameter() != nullptr; //870
 		case fUML::Semantics::CommonBehavior::CommonBehaviorPackage::PARAMETERVALUE_ATTRIBUTE_VALUES:
-			return getValues() != nullptr; //861
+			return getValues() != nullptr; //871
 	}
 	return ecore::EObjectImpl::internalEIsSet(featureID);
 }
@@ -341,7 +341,7 @@ bool ParameterValueImpl::eSet(int featureID,  const std::shared_ptr<Any>& newVal
 					std::shared_ptr<uml::Parameter> _parameter = std::dynamic_pointer_cast<uml::Parameter>(eObject);
 					if(_parameter)
 					{
-						setParameter(_parameter); //860
+						setParameter(_parameter); //870
 					}
 					else
 					{
@@ -368,11 +368,11 @@ bool ParameterValueImpl::eSet(int featureID,  const std::shared_ptr<Any>& newVal
 				std::shared_ptr<Bag<Any>> _valuesList = newValue->get<std::shared_ptr<Bag<Any>>>();
 				std::shared_ptr<Bag<Any>> _values = getValues();
 				
-				for(const std::shared_ptr<Any> valueToAdd: *_valuesList)
+				for(const std::shared_ptr<Any>& valueToAdd: *_valuesList)
 				{
 					if (valueToAdd)
 					{
-						if(_values->find(valueToAdd) == -1)
+						if(!(_values->includes(valueToAdd)))
 						{
 							_values->add(valueToAdd);
 						}

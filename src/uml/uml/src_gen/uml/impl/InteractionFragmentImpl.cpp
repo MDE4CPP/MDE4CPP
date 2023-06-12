@@ -149,7 +149,7 @@ InteractionFragmentImpl& InteractionFragmentImpl::operator=(const InteractionFra
 			std::cout << "Initialising value Subset: " << "m_generalOrdering - Subset<uml::GeneralOrdering, uml::Element >(getOwnedElement())" << std::endl;
 		#endif
 		
-		for(const std::shared_ptr<uml::GeneralOrdering> generalOrderingindexElem: *generalOrderingList) 
+		for(const std::shared_ptr<uml::GeneralOrdering>& generalOrderingindexElem: *generalOrderingList) 
 		{
 			std::shared_ptr<uml::GeneralOrdering> temp = std::dynamic_pointer_cast<uml::GeneralOrdering>((generalOrderingindexElem)->copy());
 			m_generalOrdering->push_back(temp);
@@ -478,13 +478,13 @@ bool InteractionFragmentImpl::eSet(int featureID,  const std::shared_ptr<Any>& n
 					{
 						std::shared_ptr<Bag<uml::Lifeline>> _covered = getCovered();
 	
-						for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
+						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{
 							std::shared_ptr<uml::Lifeline> valueToAdd = std::dynamic_pointer_cast<uml::Lifeline>(anEObject);
 	
 							if (valueToAdd)
 							{
-								if(_covered->find(valueToAdd) == -1)
+								if(!(_covered->includes(valueToAdd)))
 								{
 									_covered->add(valueToAdd);
 								}
@@ -585,13 +585,13 @@ bool InteractionFragmentImpl::eSet(int featureID,  const std::shared_ptr<Any>& n
 					{
 						std::shared_ptr<Bag<uml::GeneralOrdering>> _generalOrdering = getGeneralOrdering();
 	
-						for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
+						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{
 							std::shared_ptr<uml::GeneralOrdering> valueToAdd = std::dynamic_pointer_cast<uml::GeneralOrdering>(anEObject);
 	
 							if (valueToAdd)
 							{
-								if(_generalOrdering->find(valueToAdd) == -1)
+								if(!(_generalOrdering->includes(valueToAdd)))
 								{
 									_generalOrdering->add(valueToAdd);
 								}

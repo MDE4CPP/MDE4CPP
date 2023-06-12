@@ -1,0 +1,60 @@
+[comment encoding = UTF-8 /]
+[**
+ * Copyright (c) 2019 TU Ilmenau, Systems and Software Engineering Group
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), 
+ * to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, 
+ * and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+ * 
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, 
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, 
+ * WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+ *
+ ****************************************************************************************************************************************************************
+ * 
+ * module to provide queries triggering the functions of the service Class ExecutableModelService 
+ * 
+ */]
+[module model_execution('http://www.eclipse.org/uml2/5.0.0/UML')/]
+
+[comment set executable model level to NONE /]
+[query public setIsNoneExecutable(anOclAny: OclAny) : OclVoid
+	= invoke('UML4CPP.generator.main.model_execution.ExecutableModelService', 'setIsNoneExecutable()', Sequence{})
+/]
+
+[comment set executable model level to FUML /]
+[query public setIsFUMLExecutable(anOclAny: OclAny) : OclVoid
+	= invoke('UML4CPP.generator.main.model_execution.ExecutableModelService', 'setIsFUMLExecutable()', Sequence{})
+/]
+
+[comment set executable model level to PSCS /]
+[query public setIsPSCSExecutable(anOclAny: OclAny) : OclVoid
+	= invoke('UML4CPP.generator.main.model_execution.ExecutableModelService', 'setIsPSCSExecutable()', Sequence{})
+/]
+
+[comment set executable model level to PSSM /]
+[query public setIsPSSMExecutable(anOclAny: OclAny) : OclVoid
+	= invoke('UML4CPP.generator.main.model_execution.ExecutableModelService', 'setIsPSSMExecutable()', Sequence{})
+/]
+
+[comment determines whether the model is configured as none-executable /]
+[query public isExecutableModel(anOclAny: OclAny) : Boolean
+	= invoke('UML4CPP.generator.main.model_execution.ExecutableModelService', 'isExecutableModel()', Sequence{})
+/]
+
+[comment determines whether the model is configured as FUML-executable (delivers the same result as query 'isExecutableModel') /]
+[query public isFUMLExecutable(anOclAny: OclAny) : Boolean
+	= invoke('UML4CPP.generator.main.model_execution.ExecutableModelService', 'isFUMLExecutable()', Sequence{})
+/]
+
+[comment determines whether the model is configured as PSCS-executable /]
+[query public isPSCSExecutable(anOclAny: OclAny) : Boolean
+	= invoke('UML4CPP.generator.main.model_execution.ExecutableModelService', 'isPSCSExecutable()', Sequence{})
+/]
+
+[comment determines whether the model is configured as PSCS-executable /]
+[query public isPSSMExecutable(anOclAny: OclAny) : Boolean
+	= invoke('UML4CPP.generator.main.model_execution.ExecutableModelService', 'isPSSMExecutable()', Sequence{})
+/]

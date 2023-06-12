@@ -176,7 +176,7 @@ StructuredClassifierImpl& StructuredClassifierImpl::operator=(const StructuredCl
 			std::cout << "Initialising value SubsetUnion: " << "m_ownedAttribute - SubsetUnion<uml::Property, uml::ConnectableElement, uml::NamedElement, uml::Property >(getRole(), getOwnedMember(), getAttribute())" << std::endl;
 		#endif
 		
-		for(const std::shared_ptr<uml::Property> ownedAttributeindexElem: *ownedAttributeList) 
+		for(const std::shared_ptr<uml::Property>& ownedAttributeindexElem: *ownedAttributeList) 
 		{
 			std::shared_ptr<uml::Property> temp = std::dynamic_pointer_cast<uml::Property>((ownedAttributeindexElem)->copy());
 			m_ownedAttribute->push_back(temp);
@@ -203,7 +203,7 @@ StructuredClassifierImpl& StructuredClassifierImpl::operator=(const StructuredCl
 			std::cout << "Initialising value Subset: " << "m_ownedConnector - Subset<uml::Connector, uml::Feature, uml::NamedElement >(getFeature(), getOwnedMember())" << std::endl;
 		#endif
 		
-		for(const std::shared_ptr<uml::Connector> ownedConnectorindexElem: *ownedConnectorList) 
+		for(const std::shared_ptr<uml::Connector>& ownedConnectorindexElem: *ownedConnectorList) 
 		{
 			std::shared_ptr<uml::Connector> temp = std::dynamic_pointer_cast<uml::Connector>((ownedConnectorindexElem)->copy());
 			m_ownedConnector->push_back(temp);
@@ -299,7 +299,7 @@ const std::shared_ptr<Subset<uml::Connector, uml::Feature, uml::NamedElement>>& 
 }
 
 /* Getter & Setter for reference part */
-const std::shared_ptr<Bag<uml::Property>>& StructuredClassifierImpl::getPart() const
+std::shared_ptr<Bag<uml::Property>> StructuredClassifierImpl::getPart() const
 {
 	//generated from getterBody annotation
 	std::shared_ptr<SubsetUnion<uml::Property, uml::ConnectableElement, uml::NamedElement, uml::Property>> ownedAttribute = this->getOwnedAttribute();
@@ -554,13 +554,13 @@ bool StructuredClassifierImpl::eSet(int featureID,  const std::shared_ptr<Any>& 
 					{
 						std::shared_ptr<Bag<uml::Property>> _ownedAttribute = getOwnedAttribute();
 	
-						for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
+						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{
 							std::shared_ptr<uml::Property> valueToAdd = std::dynamic_pointer_cast<uml::Property>(anEObject);
 	
 							if (valueToAdd)
 							{
-								if(_ownedAttribute->find(valueToAdd) == -1)
+								if(!(_ownedAttribute->includes(valueToAdd)))
 								{
 									_ownedAttribute->add(valueToAdd);
 								}
@@ -599,13 +599,13 @@ bool StructuredClassifierImpl::eSet(int featureID,  const std::shared_ptr<Any>& 
 					{
 						std::shared_ptr<Bag<uml::Connector>> _ownedConnector = getOwnedConnector();
 	
-						for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
+						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{
 							std::shared_ptr<uml::Connector> valueToAdd = std::dynamic_pointer_cast<uml::Connector>(anEObject);
 	
 							if (valueToAdd)
 							{
-								if(_ownedConnector->find(valueToAdd) == -1)
+								if(!(_ownedConnector->includes(valueToAdd)))
 								{
 									_ownedConnector->add(valueToAdd);
 								}

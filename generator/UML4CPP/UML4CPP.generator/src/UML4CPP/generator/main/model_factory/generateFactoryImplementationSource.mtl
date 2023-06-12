@@ -224,6 +224,18 @@ std::shared_ptr<[aDataType.generateCppRawType(true)/]> [className/]::create[aDat
 }
 
 [/for]
+[for (aSignal : Signal | aPackage.collectPackageClassifiersForFactoryFunctions()->selectByKind(Signal)->select(isGeneratable()))]
+//--------------------------
+//create-Functions for signal '[aSignal.name/]'
+//--------------------------
+std::shared_ptr<[aSignal.generateCppRawType(true)/]> [className/]::create[aSignal.name.toUpperFirst()/](const int metaElementID/*=-1*/) const
+{
+	std::shared_ptr<[aSignal.generateCppRawType(true)/]Impl> element(new [aSignal.generateCppRawType(true)/]Impl());
+	element->setMetaElementID(metaElementID);
+	return element;
+}
+
+[/for]
 
 std::shared_ptr<[aPackage.name.concat('Package')/]> [className/]::get[aPackage.name.concat('Package')/]()
 {

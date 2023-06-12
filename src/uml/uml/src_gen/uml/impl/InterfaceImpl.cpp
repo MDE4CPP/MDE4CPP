@@ -177,7 +177,7 @@ InterfaceImpl& InterfaceImpl::operator=(const InterfaceImpl & obj)
 			std::cout << "Initialising value Subset: " << "m_nestedClassifier - Subset<uml::Classifier, uml::NamedElement >(getOwnedMember())" << std::endl;
 		#endif
 		
-		for(const std::shared_ptr<uml::Classifier> nestedClassifierindexElem: *nestedClassifierList) 
+		for(const std::shared_ptr<uml::Classifier>& nestedClassifierindexElem: *nestedClassifierList) 
 		{
 			std::shared_ptr<uml::Classifier> temp = std::dynamic_pointer_cast<uml::Classifier>((nestedClassifierindexElem)->copy());
 			m_nestedClassifier->push_back(temp);
@@ -204,7 +204,7 @@ InterfaceImpl& InterfaceImpl::operator=(const InterfaceImpl & obj)
 			std::cout << "Initialising value Subset: " << "m_ownedAttribute - Subset<uml::Property, uml::NamedElement, uml::Property >(getOwnedMember(), getAttribute())" << std::endl;
 		#endif
 		
-		for(const std::shared_ptr<uml::Property> ownedAttributeindexElem: *ownedAttributeList) 
+		for(const std::shared_ptr<uml::Property>& ownedAttributeindexElem: *ownedAttributeList) 
 		{
 			std::shared_ptr<uml::Property> temp = std::dynamic_pointer_cast<uml::Property>((ownedAttributeindexElem)->copy());
 			m_ownedAttribute->push_back(temp);
@@ -231,7 +231,7 @@ InterfaceImpl& InterfaceImpl::operator=(const InterfaceImpl & obj)
 			std::cout << "Initialising value Subset: " << "m_ownedOperation - Subset<uml::Operation, uml::Feature, uml::NamedElement >(getFeature(), getOwnedMember())" << std::endl;
 		#endif
 		
-		for(const std::shared_ptr<uml::Operation> ownedOperationindexElem: *ownedOperationList) 
+		for(const std::shared_ptr<uml::Operation>& ownedOperationindexElem: *ownedOperationList) 
 		{
 			std::shared_ptr<uml::Operation> temp = std::dynamic_pointer_cast<uml::Operation>((ownedOperationindexElem)->copy());
 			m_ownedOperation->push_back(temp);
@@ -258,7 +258,7 @@ InterfaceImpl& InterfaceImpl::operator=(const InterfaceImpl & obj)
 			std::cout << "Initialising value Subset: " << "m_ownedReception - Subset<uml::Reception, uml::Feature, uml::NamedElement >(getFeature(), getOwnedMember())" << std::endl;
 		#endif
 		
-		for(const std::shared_ptr<uml::Reception> ownedReceptionindexElem: *ownedReceptionList) 
+		for(const std::shared_ptr<uml::Reception>& ownedReceptionindexElem: *ownedReceptionList) 
 		{
 			std::shared_ptr<uml::Reception> temp = std::dynamic_pointer_cast<uml::Reception>((ownedReceptionindexElem)->copy());
 			m_ownedReception->push_back(temp);
@@ -291,7 +291,7 @@ InterfaceImpl& InterfaceImpl::operator=(const InterfaceImpl & obj)
 			std::cout << "Initialising value Subset: " << "m_redefinedInterface - Subset<uml::Interface, uml::Classifier /*Subset does not reference a union*/ >(getRedefinedClassifier())" << std::endl;
 		#endif
 		
-		for(const std::shared_ptr<uml::Interface> redefinedInterfaceindexElem: *redefinedInterfaceList) 
+		for(const std::shared_ptr<uml::Interface>& redefinedInterfaceindexElem: *redefinedInterfaceList) 
 		{
 			std::shared_ptr<uml::Interface> temp = std::dynamic_pointer_cast<uml::Interface>((redefinedInterfaceindexElem)->copy());
 			m_redefinedInterface->push_back(temp);
@@ -784,13 +784,13 @@ bool InterfaceImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 					{
 						std::shared_ptr<Bag<uml::Classifier>> _nestedClassifier = getNestedClassifier();
 	
-						for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
+						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{
 							std::shared_ptr<uml::Classifier> valueToAdd = std::dynamic_pointer_cast<uml::Classifier>(anEObject);
 	
 							if (valueToAdd)
 							{
-								if(_nestedClassifier->find(valueToAdd) == -1)
+								if(!(_nestedClassifier->includes(valueToAdd)))
 								{
 									_nestedClassifier->add(valueToAdd);
 								}
@@ -829,13 +829,13 @@ bool InterfaceImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 					{
 						std::shared_ptr<Bag<uml::Property>> _ownedAttribute = getOwnedAttribute();
 	
-						for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
+						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{
 							std::shared_ptr<uml::Property> valueToAdd = std::dynamic_pointer_cast<uml::Property>(anEObject);
 	
 							if (valueToAdd)
 							{
-								if(_ownedAttribute->find(valueToAdd) == -1)
+								if(!(_ownedAttribute->includes(valueToAdd)))
 								{
 									_ownedAttribute->add(valueToAdd);
 								}
@@ -874,13 +874,13 @@ bool InterfaceImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 					{
 						std::shared_ptr<Bag<uml::Operation>> _ownedOperation = getOwnedOperation();
 	
-						for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
+						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{
 							std::shared_ptr<uml::Operation> valueToAdd = std::dynamic_pointer_cast<uml::Operation>(anEObject);
 	
 							if (valueToAdd)
 							{
-								if(_ownedOperation->find(valueToAdd) == -1)
+								if(!(_ownedOperation->includes(valueToAdd)))
 								{
 									_ownedOperation->add(valueToAdd);
 								}
@@ -919,13 +919,13 @@ bool InterfaceImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 					{
 						std::shared_ptr<Bag<uml::Reception>> _ownedReception = getOwnedReception();
 	
-						for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
+						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{
 							std::shared_ptr<uml::Reception> valueToAdd = std::dynamic_pointer_cast<uml::Reception>(anEObject);
 	
 							if (valueToAdd)
 							{
-								if(_ownedReception->find(valueToAdd) == -1)
+								if(!(_ownedReception->includes(valueToAdd)))
 								{
 									_ownedReception->add(valueToAdd);
 								}
@@ -995,13 +995,13 @@ bool InterfaceImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 					{
 						std::shared_ptr<Bag<uml::Interface>> _redefinedInterface = getRedefinedInterface();
 	
-						for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
+						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{
 							std::shared_ptr<uml::Interface> valueToAdd = std::dynamic_pointer_cast<uml::Interface>(anEObject);
 	
 							if (valueToAdd)
 							{
-								if(_redefinedInterface->find(valueToAdd) == -1)
+								if(!(_redefinedInterface->includes(valueToAdd)))
 								{
 									_redefinedInterface->add(valueToAdd);
 								}

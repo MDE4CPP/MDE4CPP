@@ -23,50 +23,50 @@ class SubsetUnion : public Subset<T, U ...>, public Union<T>
 		{
 		}
 
-		SubsetUnion(std::shared_ptr<Union<U> > ... u) :
+		SubsetUnion(const std::shared_ptr<Union<U>>& ... u) :
 			Subset<T, U ...>(u ...), Union<T>()
 		{
 		}
 
-		void initSubsetUnion(std::shared_ptr<Union<U> > ... u)
+		void initSubsetUnion(const std::shared_ptr<Union<U>>& ... u)
 		{
 			Subset<T,U ... >::initSubset(u ...);
 		}
 
-		typedef typename std::vector<std::shared_ptr<T> >::iterator iterator;
+		typedef typename std::vector<std::shared_ptr<T>>::iterator iterator;
 
 		virtual ~SubsetUnion()
 		{
 		}
 
-		virtual void push_back(std::shared_ptr<T> el)
+		virtual void push_back(const std::shared_ptr<T>& el)
 		{
-			add(el);
+			this->add(el);
 		}
 
-		virtual void add(std::shared_ptr<T> el)
+		virtual void add(const std::shared_ptr<T>& el)
 		{
 			Subset<T, U ...>::add(el);
 		}
 
-		void insert(const Bag<T> &b)
+		iterator insert(const Bag<T>& b)
 		{
-			Subset<T, U ...>::insert(b);
+			return Subset<T, U ...>::insert(b);
 		}
 
-		void insert(iterator a, iterator b, iterator c)
+		iterator insert(iterator a, iterator b, iterator c)
 		{
-			Subset<T, U ...>::insert(a, b, c);
+			return Subset<T, U ...>::insert(a, b, c);
 		}
 
-		void insert(iterator a, std::shared_ptr<T> b)
+		iterator insert(iterator a, const std::shared_ptr<T>& b)
 		{
-			Subset<T, U ...>::insert(a, b);
+			return Subset<T, U ...>::insert(a, b);
 		}
 
-		virtual void erase(std::shared_ptr<T> el)
+		virtual iterator erase(const std::shared_ptr<T>& el)
 		{
-			Subset<T, U ...>::erase(el);
+			return Subset<T, U ...>::erase(el);
 		}
 };
 

@@ -12,13 +12,13 @@
 
 
 // base class includes
-#include "uml/Element.hpp"
+#include "fUML/MDE4CPP_Extensions/FUML_Object.hpp"
 
 
 
 namespace FoundationalModelLibrary::BasicInputOutput
 {
-	class Channel : virtual public uml::Element 
+	class Channel : virtual public fUML::MDE4CPP_Extensions::FUML_Object 
 	{
 		protected:
 			Channel(){}
@@ -36,6 +36,9 @@ namespace FoundationalModelLibrary::BasicInputOutput
 			//*********************************
 			// Operations
 			//*********************************
+			// fUML-specific Operations
+			const std::shared_ptr<Bag<uml::Classifier>>& getTypes() const = 0;
+
 		protected:
 			//*********************************
 			// Members

@@ -218,7 +218,7 @@ InteractionImpl& InteractionImpl::operator=(const InteractionImpl & obj)
 			std::cout << "Initialising value Subset: " << "m_action - Subset<uml::Action, uml::Element >(getOwnedElement())" << std::endl;
 		#endif
 		
-		for(const std::shared_ptr<uml::Action> actionindexElem: *actionList) 
+		for(const std::shared_ptr<uml::Action>& actionindexElem: *actionList) 
 		{
 			std::shared_ptr<uml::Action> temp = std::dynamic_pointer_cast<uml::Action>((actionindexElem)->copy());
 			m_action->push_back(temp);
@@ -245,7 +245,7 @@ InteractionImpl& InteractionImpl::operator=(const InteractionImpl & obj)
 			std::cout << "Initialising value Subset: " << "m_formalGate - Subset<uml::Gate, uml::NamedElement >(getOwnedMember())" << std::endl;
 		#endif
 		
-		for(const std::shared_ptr<uml::Gate> formalGateindexElem: *formalGateList) 
+		for(const std::shared_ptr<uml::Gate>& formalGateindexElem: *formalGateList) 
 		{
 			std::shared_ptr<uml::Gate> temp = std::dynamic_pointer_cast<uml::Gate>((formalGateindexElem)->copy());
 			m_formalGate->push_back(temp);
@@ -272,7 +272,7 @@ InteractionImpl& InteractionImpl::operator=(const InteractionImpl & obj)
 			std::cout << "Initialising value Subset: " << "m_fragment - Subset<uml::InteractionFragment, uml::NamedElement >(getOwnedMember())" << std::endl;
 		#endif
 		
-		for(const std::shared_ptr<uml::InteractionFragment> fragmentindexElem: *fragmentList) 
+		for(const std::shared_ptr<uml::InteractionFragment>& fragmentindexElem: *fragmentList) 
 		{
 			std::shared_ptr<uml::InteractionFragment> temp = std::dynamic_pointer_cast<uml::InteractionFragment>((fragmentindexElem)->copy());
 			m_fragment->push_back(temp);
@@ -299,7 +299,7 @@ InteractionImpl& InteractionImpl::operator=(const InteractionImpl & obj)
 			std::cout << "Initialising value Subset: " << "m_lifeline - Subset<uml::Lifeline, uml::NamedElement >(getOwnedMember())" << std::endl;
 		#endif
 		
-		for(const std::shared_ptr<uml::Lifeline> lifelineindexElem: *lifelineList) 
+		for(const std::shared_ptr<uml::Lifeline>& lifelineindexElem: *lifelineList) 
 		{
 			std::shared_ptr<uml::Lifeline> temp = std::dynamic_pointer_cast<uml::Lifeline>((lifelineindexElem)->copy());
 			m_lifeline->push_back(temp);
@@ -326,7 +326,7 @@ InteractionImpl& InteractionImpl::operator=(const InteractionImpl & obj)
 			std::cout << "Initialising value Subset: " << "m_message - Subset<uml::Message, uml::NamedElement >(getOwnedMember())" << std::endl;
 		#endif
 		
-		for(const std::shared_ptr<uml::Message> messageindexElem: *messageList) 
+		for(const std::shared_ptr<uml::Message>& messageindexElem: *messageList) 
 		{
 			std::shared_ptr<uml::Message> temp = std::dynamic_pointer_cast<uml::Message>((messageindexElem)->copy());
 			m_message->push_back(temp);
@@ -805,13 +805,13 @@ bool InteractionImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 					{
 						std::shared_ptr<Bag<uml::Action>> _action = getAction();
 	
-						for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
+						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{
 							std::shared_ptr<uml::Action> valueToAdd = std::dynamic_pointer_cast<uml::Action>(anEObject);
 	
 							if (valueToAdd)
 							{
-								if(_action->find(valueToAdd) == -1)
+								if(!(_action->includes(valueToAdd)))
 								{
 									_action->add(valueToAdd);
 								}
@@ -850,13 +850,13 @@ bool InteractionImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 					{
 						std::shared_ptr<Bag<uml::Gate>> _formalGate = getFormalGate();
 	
-						for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
+						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{
 							std::shared_ptr<uml::Gate> valueToAdd = std::dynamic_pointer_cast<uml::Gate>(anEObject);
 	
 							if (valueToAdd)
 							{
-								if(_formalGate->find(valueToAdd) == -1)
+								if(!(_formalGate->includes(valueToAdd)))
 								{
 									_formalGate->add(valueToAdd);
 								}
@@ -895,13 +895,13 @@ bool InteractionImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 					{
 						std::shared_ptr<Bag<uml::InteractionFragment>> _fragment = getFragment();
 	
-						for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
+						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{
 							std::shared_ptr<uml::InteractionFragment> valueToAdd = std::dynamic_pointer_cast<uml::InteractionFragment>(anEObject);
 	
 							if (valueToAdd)
 							{
-								if(_fragment->find(valueToAdd) == -1)
+								if(!(_fragment->includes(valueToAdd)))
 								{
 									_fragment->add(valueToAdd);
 								}
@@ -940,13 +940,13 @@ bool InteractionImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 					{
 						std::shared_ptr<Bag<uml::Lifeline>> _lifeline = getLifeline();
 	
-						for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
+						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{
 							std::shared_ptr<uml::Lifeline> valueToAdd = std::dynamic_pointer_cast<uml::Lifeline>(anEObject);
 	
 							if (valueToAdd)
 							{
-								if(_lifeline->find(valueToAdd) == -1)
+								if(!(_lifeline->includes(valueToAdd)))
 								{
 									_lifeline->add(valueToAdd);
 								}
@@ -985,13 +985,13 @@ bool InteractionImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 					{
 						std::shared_ptr<Bag<uml::Message>> _message = getMessage();
 	
-						for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
+						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{
 							std::shared_ptr<uml::Message> valueToAdd = std::dynamic_pointer_cast<uml::Message>(anEObject);
 	
 							if (valueToAdd)
 							{
-								if(_message->find(valueToAdd) == -1)
+								if(!(_message->includes(valueToAdd)))
 								{
 									_message->add(valueToAdd);
 								}

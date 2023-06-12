@@ -198,7 +198,7 @@ NavigationCallExpImpl& NavigationCallExpImpl::operator=(const NavigationCallExpI
 		m_qualifier.reset(new Bag<ocl::Expressions::OclExpression>());
 		
 		
-		for(const std::shared_ptr<ocl::Expressions::OclExpression> qualifierindexElem: *qualifierList) 
+		for(const std::shared_ptr<ocl::Expressions::OclExpression>& qualifierindexElem: *qualifierList) 
 		{
 			std::shared_ptr<ocl::Expressions::OclExpression> temp = std::dynamic_pointer_cast<ocl::Expressions::OclExpression>((qualifierindexElem)->copy());
 			m_qualifier->push_back(temp);
@@ -493,13 +493,13 @@ bool NavigationCallExpImpl::eSet(int featureID,  const std::shared_ptr<Any>& new
 					{
 						std::shared_ptr<Bag<ocl::Expressions::OclExpression>> _qualifier = getQualifier();
 	
-						for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
+						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{
 							std::shared_ptr<ocl::Expressions::OclExpression> valueToAdd = std::dynamic_pointer_cast<ocl::Expressions::OclExpression>(anEObject);
 	
 							if (valueToAdd)
 							{
-								if(_qualifier->find(valueToAdd) == -1)
+								if(!(_qualifier->includes(valueToAdd)))
 								{
 									_qualifier->add(valueToAdd);
 								}

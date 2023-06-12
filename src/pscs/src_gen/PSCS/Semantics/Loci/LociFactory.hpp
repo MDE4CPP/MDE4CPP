@@ -33,9 +33,7 @@ namespace PSCS::Semantics::Loci
 		protected:
 			LociFactory(){}
 		
-			//Singleton Instance and Getter
-			private:
-				static std::shared_ptr<LociFactory> instance;
+			//Singleton Getter
 			public:
 				static std::shared_ptr<LociFactory> eInstance();
 		

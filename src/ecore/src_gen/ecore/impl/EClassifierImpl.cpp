@@ -120,7 +120,7 @@ EClassifierImpl& EClassifierImpl::operator=(const EClassifierImpl & obj)
 		m_eTypeParameters.reset(new Bag<ecore::ETypeParameter>());
 		
 		
-		for(const std::shared_ptr<ecore::ETypeParameter> eTypeParametersindexElem: *eTypeParametersList) 
+		for(const std::shared_ptr<ecore::ETypeParameter>& eTypeParametersindexElem: *eTypeParametersList) 
 		{
 			std::shared_ptr<ecore::ETypeParameter> temp = std::dynamic_pointer_cast<ecore::ETypeParameter>((eTypeParametersindexElem)->copy());
 			m_eTypeParameters->push_back(temp);
@@ -447,13 +447,13 @@ bool EClassifierImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 					{
 						std::shared_ptr<Bag<ecore::ETypeParameter>> _eTypeParameters = getETypeParameters();
 	
-						for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
+						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{
 							std::shared_ptr<ecore::ETypeParameter> valueToAdd = std::dynamic_pointer_cast<ecore::ETypeParameter>(anEObject);
 	
 							if (valueToAdd)
 							{
-								if(_eTypeParameters->find(valueToAdd) == -1)
+								if(!(_eTypeParameters->includes(valueToAdd)))
 								{
 									_eTypeParameters->add(valueToAdd);
 								}

@@ -201,7 +201,7 @@ ActivityImpl& ActivityImpl::operator=(const ActivityImpl & obj)
 			std::cout << "Initialising value Subset: " << "m_edge - Subset<uml::ActivityEdge, uml::Element >(getOwnedElement())" << std::endl;
 		#endif
 		
-		for(const std::shared_ptr<uml::ActivityEdge> edgeindexElem: *edgeList) 
+		for(const std::shared_ptr<uml::ActivityEdge>& edgeindexElem: *edgeList) 
 		{
 			std::shared_ptr<uml::ActivityEdge> temp = std::dynamic_pointer_cast<uml::ActivityEdge>((edgeindexElem)->copy());
 			m_edge->push_back(temp);
@@ -228,7 +228,7 @@ ActivityImpl& ActivityImpl::operator=(const ActivityImpl & obj)
 			std::cout << "Initialising value SubsetUnion: " << "m_node - SubsetUnion<uml::ActivityNode, uml::Element >(getOwnedElement())" << std::endl;
 		#endif
 		
-		for(const std::shared_ptr<uml::ActivityNode> nodeindexElem: *nodeList) 
+		for(const std::shared_ptr<uml::ActivityNode>& nodeindexElem: *nodeList) 
 		{
 			std::shared_ptr<uml::ActivityNode> temp = std::dynamic_pointer_cast<uml::ActivityNode>((nodeindexElem)->copy());
 			m_node->push_back(temp);
@@ -255,7 +255,7 @@ ActivityImpl& ActivityImpl::operator=(const ActivityImpl & obj)
 			std::cout << "Initialising value SubsetUnion: " << "m_ownedGroup - SubsetUnion<uml::ActivityGroup, uml::ActivityGroup >(getGroup())" << std::endl;
 		#endif
 		
-		for(const std::shared_ptr<uml::ActivityGroup> ownedGroupindexElem: *ownedGroupList) 
+		for(const std::shared_ptr<uml::ActivityGroup>& ownedGroupindexElem: *ownedGroupList) 
 		{
 			std::shared_ptr<uml::ActivityGroup> temp = std::dynamic_pointer_cast<uml::ActivityGroup>((ownedGroupindexElem)->copy());
 			m_ownedGroup->push_back(temp);
@@ -282,7 +282,7 @@ ActivityImpl& ActivityImpl::operator=(const ActivityImpl & obj)
 			std::cout << "Initialising value Subset: " << "m_ownedNode - Subset<uml::ActivityNode, uml::ActivityNode /*Subset does not reference a union*/ >(getNode())" << std::endl;
 		#endif
 		
-		for(const std::shared_ptr<uml::ActivityNode> ownedNodeindexElem: *ownedNodeList) 
+		for(const std::shared_ptr<uml::ActivityNode>& ownedNodeindexElem: *ownedNodeList) 
 		{
 			std::shared_ptr<uml::ActivityNode> temp = std::dynamic_pointer_cast<uml::ActivityNode>((ownedNodeindexElem)->copy());
 			m_ownedNode->push_back(temp);
@@ -294,22 +294,22 @@ ActivityImpl& ActivityImpl::operator=(const ActivityImpl & obj)
 	}
 
 	//clone reference 'partition'
-	std::shared_ptr<Subset<uml::ActivityPartition, uml::ActivityGroup /*Subset does not reference a union*/, uml::ActivityGroup>> partitionList = obj.getPartition();
+	std::shared_ptr<Subset<uml::ActivityPartition, uml::ActivityGroup, uml::ActivityGroup /*Subset does not reference a union*/>> partitionList = obj.getPartition();
 	if(partitionList)
 	{
 		/*Subset*/
-		m_partition.reset(new Subset<uml::ActivityPartition, uml::ActivityGroup /*Subset does not reference a union*/, uml::ActivityGroup >());
+		m_partition.reset(new Subset<uml::ActivityPartition, uml::ActivityGroup, uml::ActivityGroup /*Subset does not reference a union*/ >());
 		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising shared pointer Subset: " << "m_partition - Subset<uml::ActivityPartition, uml::ActivityGroup /*Subset does not reference a union*/, uml::ActivityGroup >()" << std::endl;
+			std::cout << "Initialising shared pointer Subset: " << "m_partition - Subset<uml::ActivityPartition, uml::ActivityGroup, uml::ActivityGroup /*Subset does not reference a union*/ >()" << std::endl;
 		#endif
 		
 		/*Subset*/
-		getPartition()->initSubset(getOwnedGroup(), getGroup());
+		getPartition()->initSubset(getGroup(), getOwnedGroup());
 		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising value Subset: " << "m_partition - Subset<uml::ActivityPartition, uml::ActivityGroup /*Subset does not reference a union*/, uml::ActivityGroup >(getOwnedGroup(), getGroup())" << std::endl;
+			std::cout << "Initialising value Subset: " << "m_partition - Subset<uml::ActivityPartition, uml::ActivityGroup, uml::ActivityGroup /*Subset does not reference a union*/ >(getGroup(), getOwnedGroup())" << std::endl;
 		#endif
 		
-		for(const std::shared_ptr<uml::ActivityPartition> partitionindexElem: *partitionList) 
+		for(const std::shared_ptr<uml::ActivityPartition>& partitionindexElem: *partitionList) 
 		{
 			std::shared_ptr<uml::ActivityPartition> temp = std::dynamic_pointer_cast<uml::ActivityPartition>((partitionindexElem)->copy());
 			m_partition->push_back(temp);
@@ -336,7 +336,7 @@ ActivityImpl& ActivityImpl::operator=(const ActivityImpl & obj)
 			std::cout << "Initialising value Subset: " << "m_structuredNode - Subset<uml::StructuredActivityNode, uml::ActivityGroup, uml::ActivityNode /*Subset does not reference a union*/ >(getGroup(), getNode())" << std::endl;
 		#endif
 		
-		for(const std::shared_ptr<uml::StructuredActivityNode> structuredNodeindexElem: *structuredNodeList) 
+		for(const std::shared_ptr<uml::StructuredActivityNode>& structuredNodeindexElem: *structuredNodeList) 
 		{
 			std::shared_ptr<uml::StructuredActivityNode> temp = std::dynamic_pointer_cast<uml::StructuredActivityNode>((structuredNodeindexElem)->copy());
 			m_structuredNode->push_back(temp);
@@ -363,7 +363,7 @@ ActivityImpl& ActivityImpl::operator=(const ActivityImpl & obj)
 			std::cout << "Initialising value Subset: " << "m_variable - Subset<uml::Variable, uml::NamedElement >(getOwnedMember())" << std::endl;
 		#endif
 		
-		for(const std::shared_ptr<uml::Variable> variableindexElem: *variableList) 
+		for(const std::shared_ptr<uml::Variable>& variableindexElem: *variableList) 
 		{
 			std::shared_ptr<uml::Variable> temp = std::dynamic_pointer_cast<uml::Variable>((variableindexElem)->copy());
 			m_variable->push_back(temp);
@@ -539,20 +539,20 @@ const std::shared_ptr<Subset<uml::ActivityNode, uml::ActivityNode /*Subset does 
 }
 
 /* Getter & Setter for reference partition */
-const std::shared_ptr<Subset<uml::ActivityPartition, uml::ActivityGroup /*Subset does not reference a union*/, uml::ActivityGroup>>& ActivityImpl::getPartition() const
+const std::shared_ptr<Subset<uml::ActivityPartition, uml::ActivityGroup, uml::ActivityGroup /*Subset does not reference a union*/>>& ActivityImpl::getPartition() const
 {
 	if(m_partition == nullptr)
 	{
 		/*Subset*/
-		m_partition.reset(new Subset<uml::ActivityPartition, uml::ActivityGroup /*Subset does not reference a union*/, uml::ActivityGroup >());
+		m_partition.reset(new Subset<uml::ActivityPartition, uml::ActivityGroup, uml::ActivityGroup /*Subset does not reference a union*/ >());
 		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising shared pointer Subset: " << "m_partition - Subset<uml::ActivityPartition, uml::ActivityGroup /*Subset does not reference a union*/, uml::ActivityGroup >()" << std::endl;
+			std::cout << "Initialising shared pointer Subset: " << "m_partition - Subset<uml::ActivityPartition, uml::ActivityGroup, uml::ActivityGroup /*Subset does not reference a union*/ >()" << std::endl;
 		#endif
 		
 		/*Subset*/
-		getPartition()->initSubset(getOwnedGroup(), getGroup());
+		getPartition()->initSubset(getGroup(), getOwnedGroup());
 		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising value Subset: " << "m_partition - Subset<uml::ActivityPartition, uml::ActivityGroup /*Subset does not reference a union*/, uml::ActivityGroup >(getOwnedGroup(), getGroup())" << std::endl;
+			std::cout << "Initialising value Subset: " << "m_partition - Subset<uml::ActivityPartition, uml::ActivityGroup, uml::ActivityGroup /*Subset does not reference a union*/ >(getGroup(), getOwnedGroup())" << std::endl;
 		#endif
 		
 	}
@@ -835,7 +835,7 @@ void ActivityImpl::resolveReferences(const int featureID, std::vector<std::share
 	{
 		case uml::umlPackage::ACTIVITY_ATTRIBUTE_PARTITION:
 		{
-			std::shared_ptr<Subset<uml::ActivityPartition, uml::ActivityGroup /*Subset does not reference a union*/, uml::ActivityGroup>> _partition = getPartition();
+			std::shared_ptr<Subset<uml::ActivityPartition, uml::ActivityGroup, uml::ActivityGroup /*Subset does not reference a union*/>> _partition = getPartition();
 			for(std::shared_ptr<ecore::EObject> ref : references)
 			{
 				std::shared_ptr<uml::ActivityPartition>  _r = std::dynamic_pointer_cast<uml::ActivityPartition>(ref);
@@ -1027,13 +1027,13 @@ bool ActivityImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 					{
 						std::shared_ptr<Bag<uml::ActivityEdge>> _edge = getEdge();
 	
-						for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
+						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{
 							std::shared_ptr<uml::ActivityEdge> valueToAdd = std::dynamic_pointer_cast<uml::ActivityEdge>(anEObject);
 	
 							if (valueToAdd)
 							{
-								if(_edge->find(valueToAdd) == -1)
+								if(!(_edge->includes(valueToAdd)))
 								{
 									_edge->add(valueToAdd);
 								}
@@ -1072,13 +1072,13 @@ bool ActivityImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 					{
 						std::shared_ptr<Bag<uml::ActivityGroup>> _group = getGroup();
 	
-						for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
+						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{
 							std::shared_ptr<uml::ActivityGroup> valueToAdd = std::dynamic_pointer_cast<uml::ActivityGroup>(anEObject);
 	
 							if (valueToAdd)
 							{
-								if(_group->find(valueToAdd) == -1)
+								if(!(_group->includes(valueToAdd)))
 								{
 									_group->add(valueToAdd);
 								}
@@ -1145,13 +1145,13 @@ bool ActivityImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 					{
 						std::shared_ptr<Bag<uml::ActivityNode>> _node = getNode();
 	
-						for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
+						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{
 							std::shared_ptr<uml::ActivityNode> valueToAdd = std::dynamic_pointer_cast<uml::ActivityNode>(anEObject);
 	
 							if (valueToAdd)
 							{
-								if(_node->find(valueToAdd) == -1)
+								if(!(_node->includes(valueToAdd)))
 								{
 									_node->add(valueToAdd);
 								}
@@ -1190,13 +1190,13 @@ bool ActivityImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 					{
 						std::shared_ptr<Bag<uml::ActivityGroup>> _ownedGroup = getOwnedGroup();
 	
-						for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
+						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{
 							std::shared_ptr<uml::ActivityGroup> valueToAdd = std::dynamic_pointer_cast<uml::ActivityGroup>(anEObject);
 	
 							if (valueToAdd)
 							{
-								if(_ownedGroup->find(valueToAdd) == -1)
+								if(!(_ownedGroup->includes(valueToAdd)))
 								{
 									_ownedGroup->add(valueToAdd);
 								}
@@ -1235,13 +1235,13 @@ bool ActivityImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 					{
 						std::shared_ptr<Bag<uml::ActivityNode>> _ownedNode = getOwnedNode();
 	
-						for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
+						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{
 							std::shared_ptr<uml::ActivityNode> valueToAdd = std::dynamic_pointer_cast<uml::ActivityNode>(anEObject);
 	
 							if (valueToAdd)
 							{
-								if(_ownedNode->find(valueToAdd) == -1)
+								if(!(_ownedNode->includes(valueToAdd)))
 								{
 									_ownedNode->add(valueToAdd);
 								}
@@ -1280,13 +1280,13 @@ bool ActivityImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 					{
 						std::shared_ptr<Bag<uml::ActivityPartition>> _partition = getPartition();
 	
-						for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
+						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{
 							std::shared_ptr<uml::ActivityPartition> valueToAdd = std::dynamic_pointer_cast<uml::ActivityPartition>(anEObject);
 	
 							if (valueToAdd)
 							{
-								if(_partition->find(valueToAdd) == -1)
+								if(!(_partition->includes(valueToAdd)))
 								{
 									_partition->add(valueToAdd);
 								}
@@ -1325,13 +1325,13 @@ bool ActivityImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 					{
 						std::shared_ptr<Bag<uml::StructuredActivityNode>> _structuredNode = getStructuredNode();
 	
-						for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
+						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{
 							std::shared_ptr<uml::StructuredActivityNode> valueToAdd = std::dynamic_pointer_cast<uml::StructuredActivityNode>(anEObject);
 	
 							if (valueToAdd)
 							{
-								if(_structuredNode->find(valueToAdd) == -1)
+								if(!(_structuredNode->includes(valueToAdd)))
 								{
 									_structuredNode->add(valueToAdd);
 								}
@@ -1370,13 +1370,13 @@ bool ActivityImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 					{
 						std::shared_ptr<Bag<uml::Variable>> _variable = getVariable();
 	
-						for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
+						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{
 							std::shared_ptr<uml::Variable> valueToAdd = std::dynamic_pointer_cast<uml::Variable>(anEObject);
 	
 							if (valueToAdd)
 							{
-								if(_variable->find(valueToAdd) == -1)
+								if(!(_variable->includes(valueToAdd)))
 								{
 									_variable->add(valueToAdd);
 								}

@@ -298,13 +298,13 @@ bool TupleLiteralExpEvalImpl::eSet(int featureID,  const std::shared_ptr<Any>& n
 					{
 						std::shared_ptr<Bag<ocl::Evaluations::VariableDeclEval>> _tuplePart = getTuplePart();
 	
-						for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
+						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{
 							std::shared_ptr<ocl::Evaluations::VariableDeclEval> valueToAdd = std::dynamic_pointer_cast<ocl::Evaluations::VariableDeclEval>(anEObject);
 	
 							if (valueToAdd)
 							{
-								if(_tuplePart->find(valueToAdd) == -1)
+								if(!(_tuplePart->includes(valueToAdd)))
 								{
 									_tuplePart->add(valueToAdd);
 								}

@@ -45,6 +45,20 @@
 [**
  * generate elements for AddStructuralFeatureValueAction
 */]
+[template private generateActivityNodeSpecial(anActivityNode : ActivityNode) ? (oclIsKindOf(AcceptEventAction))]
+[let action : AcceptEventAction = self.oclAsType(AcceptEventAction)]
+	[for (trigger : Trigger | action.trigger)]
+		[trigger.memberName()/] = factory->create[trigger.eClass().name/]_as_trigger_in_AcceptEventAction([trigger.owner.oclAsType(NamedElement).memberName()/]);
+	[/for]
+	[for (resultPin : OutputPin | action.result)]
+		[resultPin.memberName()/] = factory->create[resultPin.eClass().name/]_as_result_in_AcceptEventAction([resultPin.owner.oclAsType(NamedElement).memberName()/]);
+	[/for]
+[/let]
+[/template]
+
+[**
+ * generate elements for AddStructuralFeatureValueAction
+*/]
 [template private generateActivityNodeSpecial(anActivityNode : ActivityNode) ? (oclIsKindOf(AddStructuralFeatureValueAction))]
 [let action : AddStructuralFeatureValueAction = self.oclAsType(AddStructuralFeatureValueAction)]
 	[action.object.memberName()/] = factory->create[action.object.eClass().name/]_as_object_in_StructuralFeatureAction([action.memberName()/]);
@@ -173,6 +187,19 @@
 [/template]
 
 [**
+ * generate elements for SendSignalAction
+*/]
+[template private generateActivityNodeSpecial(anActivityNode : ActivityNode) ? (oclIsKindOf(SendSignalAction))]
+[let action : SendSignalAction = self.oclAsType(SendSignalAction)]
+	[action.target.memberName()/] = factory->create[action.target.eClass().name/]_as_target_in_SendSignalAction([action.target.owner.oclAsType(NamedElement).memberName()/]);
+	[action.memberName()/]->getInput()->push_back([action.target.memberName()/]);
+	[for (argumentPin : InputPin | action.argument)]
+	[argumentPin.memberName()/] = factory->create[argumentPin.eClass().name/]_as_argument_in_InvocationAction([argumentPin.owner.oclAsType(NamedElement).memberName()/]);
+	[/for]
+[/let]
+[/template]
+
+[**
  * generate elements for ValueSpecificationAction
 */]
 [template private generateActivityNodeSpecial(anActivityNode : ActivityNode) ? (oclIsKindOf(ValueSpecificationAction))]
@@ -213,6 +240,26 @@
 [anActivityNode.memberName()/]->setName("[anActivityNode.metamodelElementName()/]");
 [anActivityNode.initializeActivityNodeSpecial(anActivityNode)/]
 [anActivityNode.generateStereotypeApplication()/]
+[/template]
+
+[**
+ * generate initialization of meta model instance for a AcceptEventActions
+ * 
+ * this includes:
+ * - initialize pins
+ * - adding signal events to the corresponding triggers of the action
+ * - set isUnmarshall
+*/]
+[template private initializeActivityNodeSpecial(anActivityNode : ActivityNode) ? (oclIsKindOf(AcceptEventAction))]
+[let action : AcceptEventAction = self.oclAsType(AcceptEventAction)]
+[for (trigger : Trigger | action.trigger) ]
+[let signalEvent : SignalEvent = trigger.event.oclAsType(SignalEvent)]
+	[trigger.memberName()/]->setEvent([signalEvent.generatePackageGetterCall()/]);
+[/let]
+[/for]
+	[action.output.initializePin()/]
+	[action.memberName()/]->setIsUnmarshall([action.isUnmarshall/]);
+[/let]
 [/template]
 
 [**
@@ -428,6 +475,20 @@
 	[action.output.initializePin()/]
 	[action.memberName()/]->setStructuralFeature([action.structuralFeature.generatePackageGetterCall()/]);
 	[action.memberName()/]->setIsRemoveDuplicates([action.isRemoveDuplicates/]);
+[/let]
+[/template]
+
+[**
+ * generate initialization of meta model instance for a SendSignalAction
+ * 
+ * this includes:
+ * - initialize pins
+ * - set signal
+*/]
+[template private initializeActivityNodeSpecial(anActivityNode : ActivityNode) ? (oclIsKindOf(SendSignalAction))]
+[let action : SendSignalAction = self.oclAsType(SendSignalAction)]
+	[action.input.initializePin()/]
+	[action.generatePackageGetterCall()/]->setSignal( [action.signal.generatePackageGetterCall()/] );
 [/let]
 [/template]
 

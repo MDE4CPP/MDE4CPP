@@ -198,7 +198,7 @@ ProtocolStateMachineImpl& ProtocolStateMachineImpl::operator=(const ProtocolStat
 			std::cout << "Initialising value Subset: " << "m_conformance - Subset<uml::ProtocolConformance, uml::Element >(getOwnedElement())" << std::endl;
 		#endif
 		
-		for(const std::shared_ptr<uml::ProtocolConformance> conformanceindexElem: *conformanceList) 
+		for(const std::shared_ptr<uml::ProtocolConformance>& conformanceindexElem: *conformanceList) 
 		{
 			std::shared_ptr<uml::ProtocolConformance> temp = std::dynamic_pointer_cast<uml::ProtocolConformance>((conformanceindexElem)->copy());
 			m_conformance->push_back(temp);
@@ -453,13 +453,13 @@ bool ProtocolStateMachineImpl::eSet(int featureID,  const std::shared_ptr<Any>& 
 					{
 						std::shared_ptr<Bag<uml::ProtocolConformance>> _conformance = getConformance();
 	
-						for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
+						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{
 							std::shared_ptr<uml::ProtocolConformance> valueToAdd = std::dynamic_pointer_cast<uml::ProtocolConformance>(anEObject);
 	
 							if (valueToAdd)
 							{
-								if(_conformance->find(valueToAdd) == -1)
+								if(!(_conformance->includes(valueToAdd)))
 								{
 									_conformance->add(valueToAdd);
 								}

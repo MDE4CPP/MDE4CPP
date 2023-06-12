@@ -128,7 +128,7 @@ CollaborationUseImpl& CollaborationUseImpl::operator=(const CollaborationUseImpl
 			std::cout << "Initialising value Subset: " << "m_roleBinding - Subset<uml::Dependency, uml::Element >(getOwnedElement())" << std::endl;
 		#endif
 		
-		for(const std::shared_ptr<uml::Dependency> roleBindingindexElem: *roleBindingList) 
+		for(const std::shared_ptr<uml::Dependency>& roleBindingindexElem: *roleBindingList) 
 		{
 			std::shared_ptr<uml::Dependency> temp = std::dynamic_pointer_cast<uml::Dependency>((roleBindingindexElem)->copy());
 			m_roleBinding->push_back(temp);
@@ -392,13 +392,13 @@ bool CollaborationUseImpl::eSet(int featureID,  const std::shared_ptr<Any>& newV
 					{
 						std::shared_ptr<Bag<uml::Dependency>> _roleBinding = getRoleBinding();
 	
-						for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
+						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{
 							std::shared_ptr<uml::Dependency> valueToAdd = std::dynamic_pointer_cast<uml::Dependency>(anEObject);
 	
 							if (valueToAdd)
 							{
-								if(_roleBinding->find(valueToAdd) == -1)
+								if(!(_roleBinding->includes(valueToAdd)))
 								{
 									_roleBinding->add(valueToAdd);
 								}

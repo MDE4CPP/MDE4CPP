@@ -27,7 +27,7 @@
 #include <primitivetypesReflection/PrimitiveTypesPackage.hpp>
 
 //#include <oclParser/Utilities/test_query.h>
-#include <oclParser/Utilities/Ocl.h>
+#include <oclParser/Utilities/OclEcore.h>
 
 // #include "Library_ecoreFactory.hpp"
 // #include "Library_ecorePackage.hpp"
@@ -50,7 +50,7 @@ bool floatCompare(double f1, double f2)
 
 bool testCasePrintableDouble(std::string testname, std::string qry, std::string corResStr, double targetResult, std::shared_ptr<Any> context, int* counter) {
   
-    Utilities::Ocl ocl = Utilities::Ocl();
+    Utilities::OclEcore ocl = Utilities::OclEcore();
     
     std::cout << "--------------" << testname << "--------------" << std::endl;
     std::shared_ptr<Any> result = ocl.debugQuery(qry, context);
@@ -68,7 +68,7 @@ bool testCasePrintableDouble(std::string testname, std::string qry, std::string 
 template <class T>
 bool testCasePrintable(std::string testname, std::string qry, std::string corResStr, T targetResult, std::shared_ptr<Any> context, int* counter) {
   
-    Utilities::Ocl ocl = Utilities::Ocl();
+    Utilities::OclEcore ocl = Utilities::OclEcore();
     
     std::cout << "--------------" << testname << "--------------" << std::endl;
     std::shared_ptr<Any> result = ocl.debugQuery(qry, context);
@@ -95,7 +95,7 @@ bool failCounterFunction(int* counter, bool status) {
 
 bool collectionTestCase(std::string testname, std::string qry, Bag<Any> targetResult, std::shared_ptr<Any> context, int* counter) {
 
-    Utilities::Ocl ocl = Utilities::Ocl();
+    Utilities::OclEcore ocl = Utilities::OclEcore();
     
     std::cout << "--------------" << testname << "--------------" << std::endl;
     std::shared_ptr<Any> result = ocl.debugQuery(qry, context);

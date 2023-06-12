@@ -142,7 +142,7 @@ BehavioralFeatureImpl& BehavioralFeatureImpl::operator=(const BehavioralFeatureI
 			std::cout << "Initialising value Subset: " << "m_ownedParameter - Subset<uml::Parameter, uml::NamedElement >(getOwnedMember())" << std::endl;
 		#endif
 		
-		for(const std::shared_ptr<uml::Parameter> ownedParameterindexElem: *ownedParameterList) 
+		for(const std::shared_ptr<uml::Parameter>& ownedParameterindexElem: *ownedParameterList) 
 		{
 			std::shared_ptr<uml::Parameter> temp = std::dynamic_pointer_cast<uml::Parameter>((ownedParameterindexElem)->copy());
 			m_ownedParameter->push_back(temp);
@@ -169,7 +169,7 @@ BehavioralFeatureImpl& BehavioralFeatureImpl::operator=(const BehavioralFeatureI
 			std::cout << "Initialising value Subset: " << "m_ownedParameterSet - Subset<uml::ParameterSet, uml::NamedElement >(getOwnedMember())" << std::endl;
 		#endif
 		
-		for(const std::shared_ptr<uml::ParameterSet> ownedParameterSetindexElem: *ownedParameterSetList) 
+		for(const std::shared_ptr<uml::ParameterSet>& ownedParameterSetindexElem: *ownedParameterSetList) 
 		{
 			std::shared_ptr<uml::ParameterSet> temp = std::dynamic_pointer_cast<uml::ParameterSet>((ownedParameterSetindexElem)->copy());
 			m_ownedParameterSet->push_back(temp);
@@ -661,13 +661,13 @@ bool BehavioralFeatureImpl::eSet(int featureID,  const std::shared_ptr<Any>& new
 					{
 						std::shared_ptr<Bag<uml::Behavior>> _method = getMethod();
 	
-						for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
+						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{
 							std::shared_ptr<uml::Behavior> valueToAdd = std::dynamic_pointer_cast<uml::Behavior>(anEObject);
 	
 							if (valueToAdd)
 							{
-								if(_method->find(valueToAdd) == -1)
+								if(!(_method->includes(valueToAdd)))
 								{
 									_method->add(valueToAdd);
 								}
@@ -706,13 +706,13 @@ bool BehavioralFeatureImpl::eSet(int featureID,  const std::shared_ptr<Any>& new
 					{
 						std::shared_ptr<Bag<uml::Parameter>> _ownedParameter = getOwnedParameter();
 	
-						for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
+						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{
 							std::shared_ptr<uml::Parameter> valueToAdd = std::dynamic_pointer_cast<uml::Parameter>(anEObject);
 	
 							if (valueToAdd)
 							{
-								if(_ownedParameter->find(valueToAdd) == -1)
+								if(!(_ownedParameter->includes(valueToAdd)))
 								{
 									_ownedParameter->add(valueToAdd);
 								}
@@ -751,13 +751,13 @@ bool BehavioralFeatureImpl::eSet(int featureID,  const std::shared_ptr<Any>& new
 					{
 						std::shared_ptr<Bag<uml::ParameterSet>> _ownedParameterSet = getOwnedParameterSet();
 	
-						for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
+						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{
 							std::shared_ptr<uml::ParameterSet> valueToAdd = std::dynamic_pointer_cast<uml::ParameterSet>(anEObject);
 	
 							if (valueToAdd)
 							{
-								if(_ownedParameterSet->find(valueToAdd) == -1)
+								if(!(_ownedParameterSet->includes(valueToAdd)))
 								{
 									_ownedParameterSet->add(valueToAdd);
 								}
@@ -796,13 +796,13 @@ bool BehavioralFeatureImpl::eSet(int featureID,  const std::shared_ptr<Any>& new
 					{
 						std::shared_ptr<Bag<uml::Type>> _raisedException = getRaisedException();
 	
-						for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
+						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{
 							std::shared_ptr<uml::Type> valueToAdd = std::dynamic_pointer_cast<uml::Type>(anEObject);
 	
 							if (valueToAdd)
 							{
-								if(_raisedException->find(valueToAdd) == -1)
+								if(!(_raisedException->includes(valueToAdd)))
 								{
 									_raisedException->add(valueToAdd);
 								}

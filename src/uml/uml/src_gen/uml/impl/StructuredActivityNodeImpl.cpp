@@ -184,7 +184,7 @@ StructuredActivityNodeImpl& StructuredActivityNodeImpl::operator=(const Structur
 			std::cout << "Initialising value Subset: " << "m_edge - Subset<uml::ActivityEdge, uml::ActivityEdge, uml::Element >(getContainedEdge(), getOwnedElement())" << std::endl;
 		#endif
 		
-		for(const std::shared_ptr<uml::ActivityEdge> edgeindexElem: *edgeList) 
+		for(const std::shared_ptr<uml::ActivityEdge>& edgeindexElem: *edgeList) 
 		{
 			std::shared_ptr<uml::ActivityEdge> temp = std::dynamic_pointer_cast<uml::ActivityEdge>((edgeindexElem)->copy());
 			m_edge->push_back(temp);
@@ -211,7 +211,7 @@ StructuredActivityNodeImpl& StructuredActivityNodeImpl::operator=(const Structur
 			std::cout << "Initialising value Subset: " << "m_node - Subset<uml::ActivityNode, uml::ActivityNode, uml::Element >(getContainedNode(), getOwnedElement())" << std::endl;
 		#endif
 		
-		for(const std::shared_ptr<uml::ActivityNode> nodeindexElem: *nodeList) 
+		for(const std::shared_ptr<uml::ActivityNode>& nodeindexElem: *nodeList) 
 		{
 			std::shared_ptr<uml::ActivityNode> temp = std::dynamic_pointer_cast<uml::ActivityNode>((nodeindexElem)->copy());
 			m_node->push_back(temp);
@@ -238,7 +238,7 @@ StructuredActivityNodeImpl& StructuredActivityNodeImpl::operator=(const Structur
 			std::cout << "Initialising value Subset: " << "m_structuredNodeInput - Subset<uml::InputPin, uml::InputPin >(getInput())" << std::endl;
 		#endif
 		
-		for(const std::shared_ptr<uml::InputPin> structuredNodeInputindexElem: *structuredNodeInputList) 
+		for(const std::shared_ptr<uml::InputPin>& structuredNodeInputindexElem: *structuredNodeInputList) 
 		{
 			std::shared_ptr<uml::InputPin> temp = std::dynamic_pointer_cast<uml::InputPin>((structuredNodeInputindexElem)->copy());
 			m_structuredNodeInput->push_back(temp);
@@ -265,7 +265,7 @@ StructuredActivityNodeImpl& StructuredActivityNodeImpl::operator=(const Structur
 			std::cout << "Initialising value Subset: " << "m_structuredNodeOutput - Subset<uml::OutputPin, uml::OutputPin >(getOutput())" << std::endl;
 		#endif
 		
-		for(const std::shared_ptr<uml::OutputPin> structuredNodeOutputindexElem: *structuredNodeOutputList) 
+		for(const std::shared_ptr<uml::OutputPin>& structuredNodeOutputindexElem: *structuredNodeOutputList) 
 		{
 			std::shared_ptr<uml::OutputPin> temp = std::dynamic_pointer_cast<uml::OutputPin>((structuredNodeOutputindexElem)->copy());
 			m_structuredNodeOutput->push_back(temp);
@@ -292,7 +292,7 @@ StructuredActivityNodeImpl& StructuredActivityNodeImpl::operator=(const Structur
 			std::cout << "Initialising value Subset: " << "m_variable - Subset<uml::Variable, uml::NamedElement >(getOwnedMember())" << std::endl;
 		#endif
 		
-		for(const std::shared_ptr<uml::Variable> variableindexElem: *variableList) 
+		for(const std::shared_ptr<uml::Variable>& variableindexElem: *variableList) 
 		{
 			std::shared_ptr<uml::Variable> temp = std::dynamic_pointer_cast<uml::Variable>((variableindexElem)->copy());
 			m_variable->push_back(temp);
@@ -813,13 +813,13 @@ bool StructuredActivityNodeImpl::eSet(int featureID,  const std::shared_ptr<Any>
 					{
 						std::shared_ptr<Bag<uml::ActivityEdge>> _edge = getEdge();
 	
-						for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
+						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{
 							std::shared_ptr<uml::ActivityEdge> valueToAdd = std::dynamic_pointer_cast<uml::ActivityEdge>(anEObject);
 	
 							if (valueToAdd)
 							{
-								if(_edge->find(valueToAdd) == -1)
+								if(!(_edge->includes(valueToAdd)))
 								{
 									_edge->add(valueToAdd);
 								}
@@ -872,13 +872,13 @@ bool StructuredActivityNodeImpl::eSet(int featureID,  const std::shared_ptr<Any>
 					{
 						std::shared_ptr<Bag<uml::ActivityNode>> _node = getNode();
 	
-						for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
+						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{
 							std::shared_ptr<uml::ActivityNode> valueToAdd = std::dynamic_pointer_cast<uml::ActivityNode>(anEObject);
 	
 							if (valueToAdd)
 							{
-								if(_node->find(valueToAdd) == -1)
+								if(!(_node->includes(valueToAdd)))
 								{
 									_node->add(valueToAdd);
 								}
@@ -917,13 +917,13 @@ bool StructuredActivityNodeImpl::eSet(int featureID,  const std::shared_ptr<Any>
 					{
 						std::shared_ptr<Bag<uml::InputPin>> _structuredNodeInput = getStructuredNodeInput();
 	
-						for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
+						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{
 							std::shared_ptr<uml::InputPin> valueToAdd = std::dynamic_pointer_cast<uml::InputPin>(anEObject);
 	
 							if (valueToAdd)
 							{
-								if(_structuredNodeInput->find(valueToAdd) == -1)
+								if(!(_structuredNodeInput->includes(valueToAdd)))
 								{
 									_structuredNodeInput->add(valueToAdd);
 								}
@@ -962,13 +962,13 @@ bool StructuredActivityNodeImpl::eSet(int featureID,  const std::shared_ptr<Any>
 					{
 						std::shared_ptr<Bag<uml::OutputPin>> _structuredNodeOutput = getStructuredNodeOutput();
 	
-						for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
+						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{
 							std::shared_ptr<uml::OutputPin> valueToAdd = std::dynamic_pointer_cast<uml::OutputPin>(anEObject);
 	
 							if (valueToAdd)
 							{
-								if(_structuredNodeOutput->find(valueToAdd) == -1)
+								if(!(_structuredNodeOutput->includes(valueToAdd)))
 								{
 									_structuredNodeOutput->add(valueToAdd);
 								}
@@ -1007,13 +1007,13 @@ bool StructuredActivityNodeImpl::eSet(int featureID,  const std::shared_ptr<Any>
 					{
 						std::shared_ptr<Bag<uml::Variable>> _variable = getVariable();
 	
-						for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
+						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{
 							std::shared_ptr<uml::Variable> valueToAdd = std::dynamic_pointer_cast<uml::Variable>(anEObject);
 	
 							if (valueToAdd)
 							{
-								if(_variable->find(valueToAdd) == -1)
+								if(!(_variable->includes(valueToAdd)))
 								{
 									_variable->add(valueToAdd);
 								}

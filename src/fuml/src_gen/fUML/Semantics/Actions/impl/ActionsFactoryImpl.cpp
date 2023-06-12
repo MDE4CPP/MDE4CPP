@@ -4,6 +4,8 @@
 
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EClass.hpp"
+#include "fUML/Semantics/Actions/impl/AcceptEventActionActivationImpl.hpp"
+#include "fUML/Semantics/Actions/impl/AcceptEventActionEventAccepterImpl.hpp"
 #include "fUML/Semantics/Actions/impl/ActionActivationImpl.hpp"
 #include "fUML/Semantics/Actions/impl/AddStructuralFeatureValueActionActivationImpl.hpp"
 #include "fUML/Semantics/Actions/impl/CallActionActivationImpl.hpp"
@@ -24,6 +26,7 @@
 #include "fUML/Semantics/Actions/impl/ReadSelfActionActivationImpl.hpp"
 #include "fUML/Semantics/Actions/impl/ReadStructuralFeatureActionActivationImpl.hpp"
 #include "fUML/Semantics/Actions/impl/RemoveStructuralFeatureValueActionActivationImpl.hpp"
+#include "fUML/Semantics/Actions/impl/SendSignalActionActivationImpl.hpp"
 #include "fUML/Semantics/Actions/impl/StructuralFeatureActionActivationImpl.hpp"
 #include "fUML/Semantics/Actions/impl/StructuredActivityNodeActivationImpl.hpp"
 #include "fUML/Semantics/Actions/impl/ValueSpecificationActionActivationImpl.hpp"
@@ -54,6 +57,8 @@ std::shared_ptr<ActionsFactory> ActionsFactory::eInstance()
 
 ActionsFactoryImpl::ActionsFactoryImpl()
 {
+	m_idMap.insert(std::make_pair("fUML::Semantics::Actions::AcceptEventActionActivation", ActionsPackage::ACCEPTEVENTACTIONACTIVATION_CLASS));
+	m_idMap.insert(std::make_pair("fUML::Semantics::Actions::AcceptEventActionEventAccepter", ActionsPackage::ACCEPTEVENTACTIONEVENTACCEPTER_CLASS));
 	m_idMap.insert(std::make_pair("fUML::Semantics::Actions::AddStructuralFeatureValueActionActivation", ActionsPackage::ADDSTRUCTURALFEATUREVALUEACTIONACTIVATION_CLASS));
 	m_idMap.insert(std::make_pair("fUML::Semantics::Actions::CallBehaviorActionActivation", ActionsPackage::CALLBEHAVIORACTIONACTIVATION_CLASS));
 	m_idMap.insert(std::make_pair("fUML::Semantics::Actions::CallOperationActionActivation", ActionsPackage::CALLOPERATIONACTIONACTIVATION_CLASS));
@@ -70,6 +75,7 @@ ActionsFactoryImpl::ActionsFactoryImpl()
 	m_idMap.insert(std::make_pair("fUML::Semantics::Actions::ReadSelfActionActivation", ActionsPackage::READSELFACTIONACTIVATION_CLASS));
 	m_idMap.insert(std::make_pair("fUML::Semantics::Actions::ReadStructuralFeatureActionActivation", ActionsPackage::READSTRUCTURALFEATUREACTIONACTIVATION_CLASS));
 	m_idMap.insert(std::make_pair("fUML::Semantics::Actions::RemoveStructuralFeatureValueActionActivation", ActionsPackage::REMOVESTRUCTURALFEATUREVALUEACTIONACTIVATION_CLASS));
+	m_idMap.insert(std::make_pair("fUML::Semantics::Actions::SendSignalActionActivation", ActionsPackage::SENDSIGNALACTIONACTIVATION_CLASS));
 	m_idMap.insert(std::make_pair("fUML::Semantics::Actions::StructuredActivityNodeActivation", ActionsPackage::STRUCTUREDACTIVITYNODEACTIVATION_CLASS));
 	m_idMap.insert(std::make_pair("fUML::Semantics::Actions::ValueSpecificationActionActivation", ActionsPackage::VALUESPECIFICATIONACTIONACTIVATION_CLASS));
 	m_idMap.insert(std::make_pair("fUML::Semantics::Actions::Values", ActionsPackage::VALUES_CLASS));
@@ -92,6 +98,26 @@ std::shared_ptr<ecore::EObject> ActionsFactoryImpl::create(const int metaElement
 {
 	switch(metaElementID)
 	{
+		case ActionsPackage::ACCEPTEVENTACTIONACTIVATION_CLASS:
+		{
+			if (nullptr == container)
+			{
+				return this->createAcceptEventActionActivation(metaElementID);
+			}
+			else
+			{
+				std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup> castedContainer = std::dynamic_pointer_cast<fUML::Semantics::Activities::ActivityNodeActivationGroup>(container);
+				assert(castedContainer);
+				return std::shared_ptr<fUML::Semantics::Actions::AcceptEventActionActivation>(this->createAcceptEventActionActivation_as_nodeActivations_in_ActivityNodeActivationGroup(castedContainer,metaElementID));
+			}
+			break;
+		}
+		case ActionsPackage::ACCEPTEVENTACTIONEVENTACCEPTER_CLASS:
+		{
+				return this->createAcceptEventActionEventAccepter(metaElementID);
+			
+			break;
+		}
 		case ActionsPackage::ADDSTRUCTURALFEATUREVALUEACTIONACTIVATION_CLASS:
 		{
 			if (nullptr == container)
@@ -245,7 +271,7 @@ std::shared_ptr<ecore::EObject> ActionsFactoryImpl::create(const int metaElement
 					//InputPinActivation has inputPinActivation as a containment
 					case  fUML::Semantics::Actions::ActionsPackage::ACTIONACTIVATION_ATTRIBUTE_INPUTPINACTIVATION:	
 					{
-						std::shared_ptr<fUML::Semantics::Actions::ActionActivation> castedContainer = std::dynamic_pointer_cast<fUML::Semantics::Actions::ActionActivation> (container);;
+						std::shared_ptr<fUML::Semantics::Actions::ActionActivation> castedContainer = std::dynamic_pointer_cast<fUML::Semantics::Actions::ActionActivation> (container);
 						return this->createInputPinActivation_as_inputPinActivation_in_ActionActivation(castedContainer,metaElementID);
 					}
 					//InputPinActivation has nodeActivations as a containment
@@ -279,7 +305,7 @@ std::shared_ptr<ecore::EObject> ActionsFactoryImpl::create(const int metaElement
 					//OutputPinActivation has outputPinActivation as a containment
 					case  fUML::Semantics::Actions::ActionsPackage::ACTIONACTIVATION_ATTRIBUTE_OUTPUTPINACTIVATION:	
 					{
-						std::shared_ptr<fUML::Semantics::Actions::ActionActivation> castedContainer = std::dynamic_pointer_cast<fUML::Semantics::Actions::ActionActivation> (container);;
+						std::shared_ptr<fUML::Semantics::Actions::ActionActivation> castedContainer = std::dynamic_pointer_cast<fUML::Semantics::Actions::ActionActivation> (container);
 						return this->createOutputPinActivation_as_outputPinActivation_in_ActionActivation(castedContainer,metaElementID);
 					}
 					default:
@@ -358,6 +384,20 @@ std::shared_ptr<ecore::EObject> ActionsFactoryImpl::create(const int metaElement
 			}
 			break;
 		}
+		case ActionsPackage::SENDSIGNALACTIONACTIVATION_CLASS:
+		{
+			if (nullptr == container)
+			{
+				return this->createSendSignalActionActivation(metaElementID);
+			}
+			else
+			{
+				std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup> castedContainer = std::dynamic_pointer_cast<fUML::Semantics::Activities::ActivityNodeActivationGroup>(container);
+				assert(castedContainer);
+				return std::shared_ptr<fUML::Semantics::Actions::SendSignalActionActivation>(this->createSendSignalActionActivation_as_nodeActivations_in_ActivityNodeActivationGroup(castedContainer,metaElementID));
+			}
+			break;
+		}
 		case ActionsPackage::STRUCTUREDACTIVITYNODEACTIVATION_CLASS:
 		{
 			if (nullptr == container)
@@ -420,6 +460,33 @@ std::shared_ptr<ecore::EObject> ActionsFactoryImpl::create(std::string _classNam
     return nullptr;
 }
 
+std::shared_ptr<fUML::Semantics::Actions::AcceptEventActionActivation> ActionsFactoryImpl::createAcceptEventActionActivation(const int metaElementID/*=-1*/) const
+{
+	std::shared_ptr<fUML::Semantics::Actions::AcceptEventActionActivationImpl> element(new fUML::Semantics::Actions::AcceptEventActionActivationImpl());
+	element->setMetaElementID(metaElementID);
+	element->setThisAcceptEventActionActivationPtr(element);
+	return element;
+}
+std::shared_ptr<fUML::Semantics::Actions::AcceptEventActionActivation> ActionsFactoryImpl::createAcceptEventActionActivation_as_nodeActivations_in_ActivityNodeActivationGroup(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup> par_ActivityNodeActivationGroup, const int metaElementID) const
+{
+	std::shared_ptr<fUML::Semantics::Actions::AcceptEventActionActivationImpl> element(new fUML::Semantics::Actions::AcceptEventActionActivationImpl(par_ActivityNodeActivationGroup));
+	element->setMetaElementID(metaElementID);
+	if(auto wp = par_ActivityNodeActivationGroup.lock())
+	{
+		wp->getNodeActivations()->push_back(element);
+	}
+	
+	element->setThisAcceptEventActionActivationPtr(element);
+	return element;
+	
+}
+std::shared_ptr<fUML::Semantics::Actions::AcceptEventActionEventAccepter> ActionsFactoryImpl::createAcceptEventActionEventAccepter(const int metaElementID/*=-1*/) const
+{
+	std::shared_ptr<fUML::Semantics::Actions::AcceptEventActionEventAccepterImpl> element(new fUML::Semantics::Actions::AcceptEventActionEventAccepterImpl());
+	element->setMetaElementID(metaElementID);
+	element->setThisAcceptEventActionEventAccepterPtr(element);
+	return element;
+}
 std::shared_ptr<fUML::Semantics::Actions::AddStructuralFeatureValueActionActivation> ActionsFactoryImpl::createAddStructuralFeatureValueActionActivation(const int metaElementID/*=-1*/) const
 {
 	std::shared_ptr<fUML::Semantics::Actions::AddStructuralFeatureValueActionActivationImpl> element(new fUML::Semantics::Actions::AddStructuralFeatureValueActionActivationImpl());
@@ -776,6 +843,26 @@ std::shared_ptr<fUML::Semantics::Actions::RemoveStructuralFeatureValueActionActi
 	}
 	
 	element->setThisRemoveStructuralFeatureValueActionActivationPtr(element);
+	return element;
+	
+}
+std::shared_ptr<fUML::Semantics::Actions::SendSignalActionActivation> ActionsFactoryImpl::createSendSignalActionActivation(const int metaElementID/*=-1*/) const
+{
+	std::shared_ptr<fUML::Semantics::Actions::SendSignalActionActivationImpl> element(new fUML::Semantics::Actions::SendSignalActionActivationImpl());
+	element->setMetaElementID(metaElementID);
+	element->setThisSendSignalActionActivationPtr(element);
+	return element;
+}
+std::shared_ptr<fUML::Semantics::Actions::SendSignalActionActivation> ActionsFactoryImpl::createSendSignalActionActivation_as_nodeActivations_in_ActivityNodeActivationGroup(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup> par_ActivityNodeActivationGroup, const int metaElementID) const
+{
+	std::shared_ptr<fUML::Semantics::Actions::SendSignalActionActivationImpl> element(new fUML::Semantics::Actions::SendSignalActionActivationImpl(par_ActivityNodeActivationGroup));
+	element->setMetaElementID(metaElementID);
+	if(auto wp = par_ActivityNodeActivationGroup.lock())
+	{
+		wp->getNodeActivations()->push_back(element);
+	}
+	
+	element->setThisSendSignalActionActivationPtr(element);
 	return element;
 	
 }

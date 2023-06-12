@@ -116,28 +116,10 @@ INSTALL(DIRECTORY . DESTINATION ${MDE4CPP_HOME}/application/include/${PROJECT_NA
 [/template]
 
 [template private generatePackageSourceFilesToCompile(aPackage : Package, packOnly : Boolean, isRoot : Boolean)]
-[comment] Obsolete
-#ClassifierObject classes for Package [aPackage.generateNamespace(false)/]
-[for (aClassifier : Classifier | getClassifiersForObjectClasses()->select(isGeneratable())->sortedBy(name))]
-[if(not isRoot)]../[aPackage.generateNamespacePath(false)/]Exec/[/if][aClassifier.name.toUpperFirst()/]Object.cpp
-[/for]
-[/comment]
 #Strategy classes for Package [aPackage.generateNamespace(false)/]
 [for (aClass : Class | getPackageClasses()->select(isStrategyClass())->sortedBy(name))]
 [if(not isRoot)]../[aPackage.generateNamespacePath(false)/]Exec/[/if][aClass.name.toUpperFirst()/].cpp
 [/for]
-[comment] Obsolete
-[if (not packOnly)]
-#OpaqueBehaviorExecution classes for Package [aPackage.generateNamespace(false)/]
-	[for (anOpaqueBehavior : OpaqueBehavior | aPackage.getPackageOpaqueBehaviors()->reject(isDoNotGenerateElement())->reject(hasStereotypeApplied(QN_STEREOTYPE_NONEXECUTABLE()))->sortedBy(name))]
-[if(not isRoot)]../[aPackage.generateNamespacePath(false)/]Exec/[/if][anOpaqueBehavior.generateOpaqueBehaviorExecutionName()/].cpp
-	[/for]
-#OperationExecution classes for Package [aPackage.generateNamespace(false)/]
-	[for (anOperation : Operation | aPackage.getPackageOperations()->reject(isDoNotGenerateElement())->reject(hasStereotypeApplied(QN_STEREOTYPE_NONEXECUTABLE()))->sortedBy(name))]
-[if(not isRoot)]../[aPackage.generateNamespacePath(false)/]Exec/[/if][anOperation.generateOperationExecutionName()->sortedBy(name)/].cpp
-	[/for]
-[/if]
-[/comment]
 [for (subPackage : Package | aPackage.ownedElement->filter(Package))]
 [subPackage.generatePackageSourceFilesToCompile(packOnly, false)/]
 [/for]

@@ -353,13 +353,13 @@ bool ClassifierTemplateParameterImpl::eSet(int featureID,  const std::shared_ptr
 					{
 						std::shared_ptr<Bag<uml::Classifier>> _constrainingClassifier = getConstrainingClassifier();
 	
-						for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
+						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{
 							std::shared_ptr<uml::Classifier> valueToAdd = std::dynamic_pointer_cast<uml::Classifier>(anEObject);
 	
 							if (valueToAdd)
 							{
-								if(_constrainingClassifier->find(valueToAdd) == -1)
+								if(!(_constrainingClassifier->includes(valueToAdd)))
 								{
 									_constrainingClassifier->add(valueToAdd);
 								}

@@ -361,13 +361,13 @@ bool OclMessageExpEvalImpl::eSet(int featureID,  const std::shared_ptr<Any>& new
 					{
 						std::shared_ptr<Bag<ocl::Evaluations::OclMessageArgEval>> _arguments = getArguments();
 	
-						for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
+						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{
 							std::shared_ptr<ocl::Evaluations::OclMessageArgEval> valueToAdd = std::dynamic_pointer_cast<ocl::Evaluations::OclMessageArgEval>(anEObject);
 	
 							if (valueToAdd)
 							{
-								if(_arguments->find(valueToAdd) == -1)
+								if(!(_arguments->includes(valueToAdd)))
 								{
 									_arguments->add(valueToAdd);
 								}

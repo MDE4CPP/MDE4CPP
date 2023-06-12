@@ -179,7 +179,7 @@ UseCaseImpl& UseCaseImpl::operator=(const UseCaseImpl & obj)
 			std::cout << "Initialising value Subset: " << "m_extend - Subset<uml::Extend, uml::NamedElement >(getOwnedMember())" << std::endl;
 		#endif
 		
-		for(const std::shared_ptr<uml::Extend> extendindexElem: *extendList) 
+		for(const std::shared_ptr<uml::Extend>& extendindexElem: *extendList) 
 		{
 			std::shared_ptr<uml::Extend> temp = std::dynamic_pointer_cast<uml::Extend>((extendindexElem)->copy());
 			m_extend->push_back(temp);
@@ -206,7 +206,7 @@ UseCaseImpl& UseCaseImpl::operator=(const UseCaseImpl & obj)
 			std::cout << "Initialising value Subset: " << "m_extensionPoint - Subset<uml::ExtensionPoint, uml::NamedElement >(getOwnedMember())" << std::endl;
 		#endif
 		
-		for(const std::shared_ptr<uml::ExtensionPoint> extensionPointindexElem: *extensionPointList) 
+		for(const std::shared_ptr<uml::ExtensionPoint>& extensionPointindexElem: *extensionPointList) 
 		{
 			std::shared_ptr<uml::ExtensionPoint> temp = std::dynamic_pointer_cast<uml::ExtensionPoint>((extensionPointindexElem)->copy());
 			m_extensionPoint->push_back(temp);
@@ -233,7 +233,7 @@ UseCaseImpl& UseCaseImpl::operator=(const UseCaseImpl & obj)
 			std::cout << "Initialising value Subset: " << "m_include - Subset<uml::Include, uml::NamedElement >(getOwnedMember())" << std::endl;
 		#endif
 		
-		for(const std::shared_ptr<uml::Include> includeindexElem: *includeList) 
+		for(const std::shared_ptr<uml::Include>& includeindexElem: *includeList) 
 		{
 			std::shared_ptr<uml::Include> temp = std::dynamic_pointer_cast<uml::Include>((includeindexElem)->copy());
 			m_include->push_back(temp);
@@ -629,13 +629,13 @@ bool UseCaseImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 					{
 						std::shared_ptr<Bag<uml::Extend>> _extend = getExtend();
 	
-						for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
+						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{
 							std::shared_ptr<uml::Extend> valueToAdd = std::dynamic_pointer_cast<uml::Extend>(anEObject);
 	
 							if (valueToAdd)
 							{
-								if(_extend->find(valueToAdd) == -1)
+								if(!(_extend->includes(valueToAdd)))
 								{
 									_extend->add(valueToAdd);
 								}
@@ -674,13 +674,13 @@ bool UseCaseImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 					{
 						std::shared_ptr<Bag<uml::ExtensionPoint>> _extensionPoint = getExtensionPoint();
 	
-						for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
+						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{
 							std::shared_ptr<uml::ExtensionPoint> valueToAdd = std::dynamic_pointer_cast<uml::ExtensionPoint>(anEObject);
 	
 							if (valueToAdd)
 							{
-								if(_extensionPoint->find(valueToAdd) == -1)
+								if(!(_extensionPoint->includes(valueToAdd)))
 								{
 									_extensionPoint->add(valueToAdd);
 								}
@@ -719,13 +719,13 @@ bool UseCaseImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 					{
 						std::shared_ptr<Bag<uml::Include>> _include = getInclude();
 	
-						for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
+						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{
 							std::shared_ptr<uml::Include> valueToAdd = std::dynamic_pointer_cast<uml::Include>(anEObject);
 	
 							if (valueToAdd)
 							{
-								if(_include->find(valueToAdd) == -1)
+								if(!(_include->includes(valueToAdd)))
 								{
 									_include->add(valueToAdd);
 								}
@@ -764,13 +764,13 @@ bool UseCaseImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 					{
 						std::shared_ptr<Bag<uml::Classifier>> _subject = getSubject();
 	
-						for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
+						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{
 							std::shared_ptr<uml::Classifier> valueToAdd = std::dynamic_pointer_cast<uml::Classifier>(anEObject);
 	
 							if (valueToAdd)
 							{
-								if(_subject->find(valueToAdd) == -1)
+								if(!(_subject->includes(valueToAdd)))
 								{
 									_subject->add(valueToAdd);
 								}

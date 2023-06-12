@@ -1,0 +1,651 @@
+[comment encoding = UTF-8 /]
+[**
+ * Copyright (c) 2017 TU Ilmenau, Systems and Software Engineering Group
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), 
+ * to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, 
+ * and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+ * 
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, 
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, 
+ * WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+ *
+ ****************************************************************************************************************************************************************
+ * 
+ * module for generation of UML Signal artefacts
+ * 
+ */]
+[module generateSignal('http://www.eclipse.org/uml2/5.0.0/UML')]
+
+[import UML4CPP::generator::main::components::generateConstraint /]
+[import UML4CPP::generator::main::components::generateType /]
+[import UML4CPP::generator::main::components::generateInterface /]
+[import UML4CPP::generator::main::components::generateStereotype /]
+[import UML4CPP::generator::main::components::generateEnumeration /]
+[import UML4CPP::generator::main::helpers::generalHelper /]
+[import UML4CPP::generator::main::helpers::nameHelper /]
+[import UML4CPP::generator::main::helpers::IDHelper /]
+[import UML4CPP::generator::main::components::generateOperation /]
+[import UML4CPP::generator::main::profiles::uml4CPPProfileHelper /]
+[import UML4CPP::generator::main::profiles::strategyHelper /]
+[import UML4CPP::generator::main::helpers::isGeneratableHelper /]
+[import UML4CPP::generator::main::components::generateStructuralFeature /]
+
+[**
+ * template to generate C++ fragment of interface names, which extend a Signal
+*/]
+[template public generateInterfaceExtensions(aSignal : Signal) post (trim())]
+[for (aSupplier : NamedElement | aSignal.directlyRealizedInterfaces()->reject(oclIsUndefined() or name.oclIsUndefined())) before(',') separator (',')]
+public [if (not aSupplier.namespace.oclIsInvalid())][aSupplier.getNearestPackage().generateNamespace(false)/]::[/if][aSupplier.name/][/for]
+[/template]
+
+[**
+ * template to generate header include of template class Bag for a Signal element
+ * include of 'Bag' is only required, if at least one property or operation parameter has an upper bound > 1
+*/]
+[template public generateAbstractDataTypesIncludes(aSignal : Signal)]
+[if (aSignal.ownedAttribute->select(upper <> 1 and not isSubset() and not isUnion())->size() > 0)]
+#include "abstractDataTypes/Bag.hpp"
+[/if]
+[if (aSignal.ownedAttribute->select((isSubset() and not isSubsetUnion()) or ((not opposite.oclIsUndefined()) and (opposite.isSubset())))->size() > 0)]
+#include "abstractDataTypes/Subset.hpp"
+[/if]
+[if (aSignal.ownedAttribute->select(isSubsetUnion() or ((not opposite.oclIsUndefined()) and (opposite.isSubsetUnion())))->size() > 0)]
+#include "abstractDataTypes/SubsetUnion.hpp"
+[/if]
+[if (aSignal.ownedAttribute->select((isUnion() and not isSubsetUnion()) or ((not opposite.oclIsUndefined()) and (opposite.isUnion() and (not opposite.isSubsetUnion()))))->size() > 0)]
+#include "abstractDataTypes/Union.hpp"[/if]
+[/template]
+
+[** 
+ * Get all Interfaces (direct or indirect) that are realized by aSignal
+*/]
+[query public collectAllRealizedInterfaces(aSignal : Signal) : Set(Interface) = aSignal.directlyRealizedInterfaces()->addAll(aSignal.directlyRealizedInterfaces().getAllBaseInterfaces())->flatten()->asSet() /]
+
+[**
+ * template to generate create function declarations
+*/]
+[template public generateClassifierCreate(aClassifier : Classifier, impl : Boolean) ? (aClassifier.oclIsTypeOf(Signal))]
+[let aSignal : Signal = aClassifier.oclAsType(Signal)]
+//START Create methods for signal [aSignal.name/]
+virtual std::shared_ptr<[aSignal.generateCppRawType(true)/]> create[aSignal.name.toUpperFirst()/](const int metaElementID = [aSignal.getNearestPackage().name/]Package::[aSignal.getMemberName().toUpperCase()/]) const [abstractSuffix(impl)/];
+[for (anAssociation : Association | aSignal.getCompositionsToSignal())] [comment for each association, that is a composition to aClass/]
+	[let containerProperty : Property = anAssociation.getCompositeProperty(aSignal)]
+		[if (not containerProperty.opposite.oclIsUndefined())]
+			[let containmentProperty : Property = containerProperty.opposite]
+virtual std::shared_ptr<[aSignal.generateCppRawType(true)/]> create[aSignal.name.toUpperFirst()/]_as_[containerProperty.name/]_in_[containmentProperty.type.name.toUpperFirst()/]([containmentProperty.generateCppType()/] par_[containmentProperty.name.toLowerFirst()/], const int metaElementID = [aSignal.getNearestPackage().name/]Package::[aSignal.getMemberName().toUpperCase()/]) const [abstractSuffix(impl)/] ; 
+			[/let]
+		[/if]
+	[/let]
+[/for]
+//END Create methods for signal [aSignal.name/]
+[/let]
+
+[/template]
+
+[**
+ * generate creation of meta model instance for an Signal element
+ * 
+ * this includes:
+ * - creation of Signal
+ * - creation of Signal constraints
+*/]
+[template public generateSignalCreation(aSignal : Signal)]
+[aSignal.memberName()/] = factory->createSignal_as_ownedType_in_Package([aSignal.ancestors(Package)->first().memberName()/], [aSignal._package.generateNamespace(true)/]::[aSignal._package.myNamespaceName()/]Package::[aSignal.getMemberName().toUpperCase()/]);
+[if (aSignal.ownedRule->size() > 0)]
+//constraints
+[for (aConstraint : Constraint | aSignal.ownedRule->sortedBy(name)) separator('\n')]
+[aConstraint.generateConstraintCreation()/]
+[/for][/if]
+[/template]
+
+[template public generateStaticSignalID(aSignal : Signal)]
+//Signal [aSignal.generateNamespaceName(true)/]
+static const unsigned long [aSignal.getMemberName().toUpperCase()/] = [aSignal.transformType().generatePolynomialRollingHash()/];
+static const unsigned int [aSignal.getMemberName().toUpperCase()/]_FEATURE_COUNT = [aSignal.allFeatures()->size()/];
+[/template]
+
+[**
+ * generate initialization of meta model instance for an Signal element
+ * 
+ * this includes:
+ * - set signal name
+ * - set isAbstract flag
+ * - create and initialize generalization
+*/]
+[template public generateSignalInitialization(aSignal : Signal)]
+[aSignal.memberName()/]->setName("[aSignal.name/]");
+[aSignal.memberName()/]->setIsAbstract([aSignal.isAbstract/]);
+[if (not isReflectionModel(aSignal.getRootPackage()))]
+[aSignal.memberName()/]->_setID([aSignal.getMemberName().toUpperCase()/]);
+[/if]
+[aSignal.generateStereotypeApplication()/]
+[/template]
+
+[template public generateSignalEventInitialization(aSignalEvent : SignalEvent)]
+[aSignalEvent.memberName()/]->setName("[aSignalEvent.name/]");
+// set the reference to the signal
+[aSignalEvent.memberName()/]->setSignal([aSignalEvent.signal.memberName()/]);
+
+[aSignalEvent.generateStereotypeApplication()/]
+[/template]
+
+[**
+ * generate get, set and unset function declaration
+*/]
+[template public generateeGetSetDel(aSignal : Signal, impl : Boolean)]
+//Get
+virtual std::shared_ptr<Any> get(const std::shared_ptr<uml::Property>& _property) const [abstractSuffix(impl)/];
+virtual std::shared_ptr<Any> get(std::string _qualifiedName) const [abstractSuffix(impl)/];
+virtual std::shared_ptr<Any> get(unsigned long _uID) const [abstractSuffix(impl)/];
+//Set
+virtual void set(const std::shared_ptr<uml::Property>& _property, const std::shared_ptr<Any>& value) [abstractSuffix(impl)/];
+virtual void set(std::string _qualifiedName, const std::shared_ptr<Any>& value) [abstractSuffix(impl)/];
+virtual void set(unsigned long _uID, const std::shared_ptr<Any>& value) [abstractSuffix(impl)/];
+//Add
+virtual void add(const std::shared_ptr<uml::Property>& _property, const std::shared_ptr<Any>& value, int insertAt = -1) [abstractSuffix(impl)/];
+virtual void add(std::string _qualifiedName, const std::shared_ptr<Any>& value, int insertAt = -1) [abstractSuffix(impl)/];
+virtual void add(unsigned long _uID, const std::shared_ptr<Any>& value, int insertAt = -1) [abstractSuffix(impl)/];
+//Unset
+virtual void unset(const std::shared_ptr<uml::Property>& _property) [abstractSuffix(impl)/];
+virtual void unset(std::string _qualifiedName) [abstractSuffix(impl)/];
+virtual void unset(unsigned long _uID) [abstractSuffix(impl)/];
+//Remove
+virtual void remove(const std::shared_ptr<uml::Property>& _property, const std::shared_ptr<Any>& value) [abstractSuffix(impl)/];
+virtual void remove(std::string _qualifiedName, const std::shared_ptr<Any>& value) [abstractSuffix(impl)/];
+virtual void remove(unsigned long _uID, const std::shared_ptr<Any>& value) [abstractSuffix(impl)/];
+[/template]
+
+[query private getPropertiesForGetAndSet(aSignal : Signal) : OrderedSet(Property) = aSignal.attribute->addAll(aSignal.directlyRealizedInterfaces().attribute)->reject(isDoNotGenerateElement())->sortedBy(myQualifiedName())/]
+
+[**
+ * generate get, set and unset function implementation
+*/]
+[template public generateeGetSetImpl(aSignal : Signal)]
+//Get
+[aSignal.generateGetImplementation()/]
+
+//Set
+[aSignal.generateSetImplementation()/]
+
+//Add
+[aSignal.generateAddImplementation()/]
+
+//Unset
+[aSignal.generateUnSetImplementation()/]
+
+//Remove
+[aSignal.generateRemoveImplementation()/]
+[/template]
+
+[template private generateGetImplementation(aSignal : Signal)]
+std::shared_ptr<Any> [aSignal.name.toUpperFirst().concat('Impl')/]::get(const std::shared_ptr<uml::Property>& _property) const
+{
+	return this->get(_property->_getID());
+}
+
+std::shared_ptr<Any> [aSignal.name.toUpperFirst().concat('Impl')/]::get(std::string _qualifiedName) const
+{
+	unsigned long uID = util::Util::polynomialRollingHash(_qualifiedName);
+	return this->get(uID);
+}
+
+std::shared_ptr<Any> [aSignal.name.toUpperFirst().concat('Impl')/]::get(unsigned long _uID) const
+{
+[if (not aSignal.getPropertiesForGetAndSet()->isEmpty())]
+	switch(_uID)
+	{
+		[for (aProperty : Property | aSignal.getPropertiesForGetAndSet())]
+		case [aProperty.getNearestPackage().generateNamespace(true)/]::[aProperty.getNearestPackage().getPackageName()/]Package::[aProperty.getMemberName().toUpperCase()/]:
+			[if (aProperty.type.oclIsUndefined())]
+			return eAny(this->[aProperty.getterName()/](), -1, [if(aProperty.upper = 1)]false[else]true[/if]);
+			[elseif(aProperty.type.oclIsKindOf(PrimitiveType) or aProperty.type.oclIsKindOf(Enumeration))]
+			return eAny(this->[aProperty.getterName()/](), [aProperty.type.oclAsType(Classifier).generateStaticClassifierIDAccess()/], [if(aProperty.upper = 1)]false[else]true[/if]);
+			[else]
+			return [if(aProperty.upper = 1)]eUMLAny[else]eUMLContainerAny[/if](this->[aProperty.getterName()/]()[if(aProperty.isBackReference())].lock()[/if], [aProperty.type.oclAsType(Classifier).generateStaticClassifierIDAccess()/]);
+			[/if]
+		[/for]
+	}
+
+[/if]
+[let classifierList : OrderedSet(Classifier) = aSignal.general->reject(oclIsUndefined() and name.oclIsUndefined())->sortedBy(name)]
+[if (classifierList->size() > 0)]
+	std::shared_ptr<Any> result;
+	[for (general : Classifier | aSignal.general->reject(oclIsUndefined() and name.oclIsUndefined()))]
+	//Call get() for base class [general.name/]
+	result = [general.generateNamespaceName(true)/]Impl::get(_uID);
+	if (result != nullptr)
+	{
+		return result;
+	}
+	[/for]
+	return result;
+[else]
+	return eAny(nullptr, -1, false);
+[/if]
+[/let]
+}
+[/template]
+
+[template private generateSetImplementation(aSignal : Signal)]
+void [aSignal.name.toUpperFirst().concat('Impl')/]::set(const std::shared_ptr<uml::Property>& _property, const std::shared_ptr<Any>& value)
+{
+	this->set(_property->_getID(), value);
+}
+
+void [aSignal.name.toUpperFirst().concat('Impl')/]::set(std::string _qualifiedName,const std::shared_ptr<Any>& value)
+{
+	unsigned long uID = util::Util::polynomialRollingHash(_qualifiedName);
+	this->set(uID, value);
+}
+
+void [aSignal.name.toUpperFirst().concat('Impl')/]::set(unsigned long _uID, const std::shared_ptr<Any>& value)
+{
+[if (not aSignal.getPropertiesForGetAndSet()->select(hasSetter())->isEmpty())]
+	switch(_uID)
+	{
+		[for (aProperty : Property | aSignal.getPropertiesForGetAndSet()->select(hasSetter()))]
+		case [aProperty.getNearestPackage().generateNamespace(true)/]::[aProperty.getNearestPackage().getPackageName()/]Package::[aProperty.getMemberName().toUpperCase()/]:
+		{
+		[comment aProperty has no type. i.e. is of any type /]
+		[if (aProperty.type.oclIsUndefined())]
+			[comment anEStructuralFeature is a single-instanced value /]
+			[if (aProperty.upper = 1)]
+			try
+			{
+				std::shared_ptr<Any> _[aProperty.name/] = value->get<std::shared_ptr<Any>>();
+				[aProperty.setterName()/](_[aProperty.name/]);
+			}
+			catch(...)
+			{
+				DEBUG_ERROR("Invalid type stored in 'Any' for property '[aProperty.name/]'. Failed to set property!")
+				return;
+			}
+			[else]
+			[comment aProperty is a bag value /]
+			try
+			{
+				std::shared_ptr<Bag<Any>> _[aProperty.name/]List = value->get<std::shared_ptr<Bag<Any>>();
+				std::shared_ptr<Bag<Any>> _[aProperty.name.toLowerFirst()/] = [aProperty.getterName()/]();
+				
+				for(const std::shared_ptr<Any> valueToAdd: *_[aProperty.name/]List)
+				{
+					if (valueToAdd)
+					{
+						if(!(_[aProperty.name.toLowerFirst()/]->includes(valueToAdd)))
+						{
+							_[aProperty.name.toLowerFirst()/]->add(valueToAdd);
+						}
+						//else, valueToAdd is already present so it won't be added again
+					}
+					else
+					{
+						throw "Invalid argument";
+					}
+				}
+			}
+			catch(...)
+			{
+				DEBUG_ERROR("Invalid type stored in 'Any' for property '[aProperty.name/]'. Failed to set property!")
+				return;
+			}
+			[/if]
+		[comment aProperty is typed by an a PrimitiveType or Enumeration /]
+		[elseif (aProperty.type.oclIsKindOf(PrimitiveType) or aProperty.type.oclIsKindOf(Enumeration))]
+			[comment anEStructuralFeature is a single-instanced value /]
+			[if (aProperty.upper = 1)]
+			try
+			{
+				[aProperty.type.generateCppRawType(false)/] _[aProperty.name/] = value->get<[aProperty.type.generateCppRawType(false)/]>();
+				[aProperty.setterName()/](_[aProperty.name/]);
+			}
+			catch(...)
+			{
+				DEBUG_ERROR("Invalid type stored in 'Any' for property '[aProperty.name/]'. Failed to set property!")
+				return;
+			}
+			[else]
+			[comment aProperty is a bag value /]
+			try
+			{
+				std::shared_ptr<Bag<[aProperty.type.generateCppRawType(true)/]>> _[aProperty.name/]List = value->get<std::shared_ptr<Bag<[aProperty.type.generateCppRawType(true)/]>>();
+				std::shared_ptr<Bag<[aProperty.type.generateCppRawType(true)/]>> _[aProperty.name.toLowerFirst()/] = [aProperty.getterName()/]();
+				
+				for(const std::shared_ptr<[aProperty.type.generateCppRawType(true)/]> valueToAdd: *_[aProperty.name/]List)
+				{
+					if (valueToAdd)
+					{
+						if(!(_[aProperty.name.toLowerFirst()/]->includes(valueToAdd)))
+						{
+							_[aProperty.name.toLowerFirst()/]->add(valueToAdd);
+						}
+						//else, valueToAdd is already present so it won't be added again
+					}
+					else
+					{
+						throw "Invalid argument";
+					}
+				}
+			}
+			catch(...)
+			{
+				DEBUG_ERROR("Invalid type stored in 'Any' for property '[aProperty.name/]'. Failed to set property!")
+				return;
+			}
+			[/if]	
+		[comment aProperty is typed by a Class or an Interface /]
+		[else]
+			[comment aProperty is a single-instanced value /]
+			[if (aProperty.upper = 1)]
+			std::shared_ptr<uml::UMLAny> umlAny = std::dynamic_pointer_cast<uml::UMLAny>(value);
+			if(umlAny)
+			{
+				try
+				{
+					std::shared_ptr<uml::Element> element = umlAny->getAsElement();
+					std::shared_ptr<[aProperty.type.generateCppRawType(true)/]> _[aProperty.name/] = std::dynamic_pointer_cast<[aProperty.type.generateCppRawType(true)/]>(umlAny);
+					if(_[aProperty.name/])
+					{
+						[aProperty.setterName()/](_[aProperty.name/]);
+					}			
+					else
+					{
+						throw "Invalid argument";
+					}		
+				}
+				catch(...)
+				{
+					DEBUG_ERROR("Invalid type stored in 'uml::UMLAny' for property '[aProperty.name/]'. Failed to set property!")
+					return;
+				}
+			}
+			else
+			{
+				DEBUG_ERROR("Invalid instance of 'uml::UMLAny' for property '[aProperty.name/]'. Failed to set property!")
+				return;
+			}
+			[comment aProperty is a bag value /]
+			[else]
+			std::shared_ptr<uml::UMLContainerAny> umlContainerAny = std::dynamic_pointer_cast<uml::UMLContainerAny>(value);
+			if(umlContainerAny)
+			{
+				try
+				{
+					std::shared_ptr<Bag<uml::Element>> elementList = umlContainerAny->getAsElementContainer();
+	
+					if(elementList)
+					{
+						std::shared_ptr<[aProperty.type.generateCppRawType(true)/]> _[aProperty.name.toLowerFirst()/] = [aProperty.getterName()/]();
+	
+						for(const std::shared_ptr<uml::Element> anElement: *elementList)
+						{
+							std::shared_ptr<[aProperty.type.generateCppRawType(true)/]> valueToAdd = std::dynamic_pointer_cast<[aProperty.type.generateCppRawType(true)/]>(anElement);
+	
+							if (valueToAdd)
+							{
+								if(!(_[aProperty.name.toLowerFirst()/]->includes(valueToAdd)))
+								{
+									_[aProperty.name.toLowerFirst()/]->add(valueToAdd);
+								}
+								//else, valueToAdd is already present so it won't be added again
+							}
+							else
+							{
+								throw "Invalid argument";
+							}
+						}
+					}
+				}
+				catch(...)
+				{
+					DEBUG_ERROR("Invalid type stored in 'uml::UMLContainerAny' for property '[aProperty.name/]'. Failed to set property!")
+					return;
+				}
+			}
+			else
+			{
+				DEBUG_ERROR("Invalid instance of 'uml::UMLContainerAny' for property '[aProperty.name/]'. Failed to set property!")
+				return;
+			}
+			[/if]
+		[/if]
+		break;
+		}
+		[/for]
+	}
+[/if]
+[for (general : Classifier | aSignal.general->reject(oclIsUndefined() and name.oclIsUndefined()))]
+	//Call set() for base class [general.name/]
+	[general.generateNamespaceName(true)/]Impl::set(_uID, value);
+[/for]
+}
+[/template]
+
+[template private generateAddImplementation(aSignal : Signal)]
+void [aSignal.name.toUpperFirst().concat('Impl')/]::add(const std::shared_ptr<uml::Property>& _property, const std::shared_ptr<Any>& value, int insertAt /*= -1*/)
+{
+	this->add(_property->_getID(), value);
+}
+
+void [aSignal.name.toUpperFirst().concat('Impl')/]::add(std::string _qualifiedName, const std::shared_ptr<Any>& value, int insertAt /*= -1*/)
+{
+	unsigned long uID = util::Util::polynomialRollingHash(_qualifiedName);
+	this->add(uID, value);
+}
+
+void [aSignal.name.toUpperFirst().concat('Impl')/]::add(unsigned long _uID, const std::shared_ptr<Any>& value, int insertAt /*= -1*/)
+{
+[if (not aSignal.getPropertiesForGetAndSet()->select(p : Property | (not p.isReadOnly) and p.upper <> 1)->isEmpty())]
+	switch(_uID)
+	{
+		[for (aProperty : Property | aSignal.getPropertiesForGetAndSet()->select(p : Property | (not p.isReadOnly) and p.upper <> 1))]
+		case [aProperty.getNearestPackage().generateNamespace(true)/]::[aProperty.getNearestPackage().getPackageName()/]Package::[aProperty.getMemberName().toUpperCase()/]:
+		{
+			[if (aProperty.type.oclIsUndefined())]
+			std::shared_ptr<Any> valueToAdd;
+			[else]
+			[aProperty.type.generateCppRawType(false)/] valueToAdd;
+			[/if]
+			if(value->isContainer())
+			{
+				[if (aProperty.type.oclIsUndefined())]
+				std::shared_ptr<Bag<Any>> container = value->get<std::shared_ptr<Bag<Any>>>();
+				if(container && !(container->empty()))
+				{
+						// If a non-empty container is passed, the first value of the container will be added to the property
+						valueToAdd = container->at(0);
+				}
+				[elseif (aProperty.type.oclIsKindOf(PrimitiveType) or aProperty.type.oclIsKindOf(Enumeration))]
+				std::shared_ptr<Bag<[aProperty.type.generateCppRawType(true)/]>> container = value->get<std::shared_ptr<Bag<[aProperty.type.generateCppRawType(true)/]>>>();
+				if(container && !(container->empty()))
+				{
+						// If a non-empty container is passed, the first value of the container will be added to the property
+						valueToAdd = [if(aProperty.type.isPrimitive() or aProperty.type.oclIsKindOf(Enumeration))]*([/if]container->at(0)[if(aProperty.type.isPrimitive() or aProperty.type.oclIsKindOf(Enumeration))])[/if];
+				}
+				[else]
+				std::shared_ptr<uml::UMLContainerAny> umlContainerAny = std::dynamic_pointer_cast<uml::UMLContainerAny>(value);
+				if(umlContainerAny)
+				{
+					std::shared_ptr<Bag<uml::Element>> container = umlContainerAny->getAsElementContainer();
+					if(container && !(container->empty()))
+					{
+						// If a non-empty container is passed, the first value of the container will be added to the property
+						std::shared_ptr<uml::Element> firstElement = container->at(0);
+						valueToAdd = std::dynamic_pointer_cast<[aProperty.type.generateCppRawType(true)/]>(firstElement);
+					}
+				}
+				[/if]
+			}
+			else
+			{
+				[if (aProperty.type.oclIsUndefined())]
+				valueToAdd = value->get<std::shared_ptr<Any>>();
+				[elseif (aProperty.type.oclIsKindOf(PrimitiveType) or aProperty.type.oclIsKindOf(Enumeration))]
+				valueToAdd = value->get<[aProperty.type.generateCppRawType(false)/]>();
+				[else]
+				std::shared_ptr<uml::UMLAny> umlAny = std::dynamic_pointer_cast<uml::UMLAny>(value);
+				if(umlAny)
+				{
+					std::shared_ptr<uml::Element> element = umlAny->getAsElement();
+					valueToAdd = std::dynamic_pointer_cast<[aProperty.type.generateCppRawType(true)/]>(element);
+				}
+				[/if]
+			}
+
+			[if (aProperty.isUnique)]
+			// [aProperty.name/] is unique
+			if(!(this->[aProperty.getterName()/]()->includes(valueToAdd)))
+			{
+				this->[aProperty.getterName()/]()->add(valueToAdd, insertAt);
+			}
+			[else]
+			this->[aProperty.getterName()/]()->add(valueToAdd, insertAt);
+			[/if]
+
+			return;
+		}
+		[/for]
+	}
+
+[/if]
+[for (general : Classifier | aSignal.general->reject(oclIsUndefined() and name.oclIsUndefined()))]
+	//Call add() for base class [general.name/]
+	[general.generateNamespaceName(true)/]Impl::add(_uID, value, insertAt);
+[/for]
+}
+[/template]
+
+[template private generateUnSetImplementation(aSignal : Signal)]
+void [aSignal.name.toUpperFirst().concat('Impl')/]::unset(const std::shared_ptr<uml::Property>& _property)
+{
+	this->unset(_property->_getID());
+}
+
+void [aSignal.name.toUpperFirst().concat('Impl')/]::unset(std::string _qualifiedName)
+{
+	unsigned long uID = util::Util::polynomialRollingHash(_qualifiedName);
+	this->unset(uID);
+}
+
+void [aSignal.name.toUpperFirst().concat('Impl')/]::unset(unsigned long _uID)
+{
+[if ((not aSignal.getPropertiesForGetAndSet()->select(p : Property | p.type.oclIsUndefined() or ((not p.type.oclIsKindOf(PrimitiveType)) and (not p.type.oclIsKindOf(Enumeration))))->isEmpty()))]
+	switch(_uID)
+	{
+		[for (aProperty : Property | aSignal.getPropertiesForGetAndSet()->select(p : Property | p.type.oclIsUndefined() or ((not p.type.oclIsKindOf(PrimitiveType)) and (not p.type.oclIsKindOf(Enumeration)))))]
+		case [aProperty.getNearestPackage().generateNamespace(true)/]::[aProperty.getNearestPackage().getPackageName()/]Package::[aProperty.getMemberName().toUpperCase()/]:
+		{
+			[if (aProperty.upper = 1)]
+			m_[aProperty.name/].reset();
+			[else]
+			m_[aProperty.name/]->clear();
+			[/if]
+			return;
+		}
+		[/for]
+	}
+
+[/if]
+	[for (general : Classifier | aSignal.general->reject(oclIsUndefined() and name.oclIsUndefined()))]
+	//Call unset() for base class [general.name/]
+	[general.generateNamespaceName(true)/]Impl::unset(_uID);
+	[/for]
+}
+[/template]
+
+[template public generateRemoveImplementation(aSignal : Signal)]
+void [aSignal.name.toUpperFirst().concat('Impl')/]::remove(const std::shared_ptr<uml::Property>& _property, const std::shared_ptr<Any>& value)
+{
+	this->remove(_property->_getID(), value);
+}
+
+void [aSignal.name.toUpperFirst().concat('Impl')/]::remove(std::string _qualifiedName, const std::shared_ptr<Any>& value)
+{
+	unsigned long uID = util::Util::polynomialRollingHash(_qualifiedName);
+	this->remove(uID, value);
+}
+
+void [aSignal.name.toUpperFirst().concat('Impl')/]::remove(unsigned long _uID, const std::shared_ptr<Any>& value)
+{
+[if (not aSignal.getPropertiesForGetAndSet()->select(p : Property | (not p.isReadOnly) and p.upper <> 1)->isEmpty())]
+	switch(_uID)
+	{
+		[for (aProperty : Property | aSignal.getPropertiesForGetAndSet()->select(p : Property | (not p.isReadOnly) and p.upper <> 1))]
+		case [aProperty.getNearestPackage().generateNamespace(true)/]::[aProperty.getNearestPackage().getPackageName()/]Package::[aProperty.getMemberName().toUpperCase()/]:
+		{
+			[if (aProperty.type.oclIsUndefined())]
+			std::shared_ptr<Any> valueToRemove;
+			[else]
+			[aProperty.type.generateCppRawType(false)/] valueToRemove;
+			[/if]
+			if(value->isContainer())
+			{
+				[if (aProperty.type.oclIsUndefined())]
+				std::shared_ptr<Bag<Any>> container = value->get<std::shared_ptr<Bag<Any>>>();
+				if(container && !(container->empty()))
+				{
+					// If a non-empty container is passed, the first value of the container will be removed from the property
+					valueToRemove = container->at(0);
+				}
+				[elseif (aProperty.type.oclIsKindOf(PrimitiveType) or aProperty.type.oclIsKindOf(Enumeration))]
+				std::shared_ptr<Bag<[aProperty.type.generateCppRawType(true)/]>> container = value->get<std::shared_ptr<Bag<[aProperty.type.generateCppRawType(true)/]>>>();
+				if(container && !(container->empty()))
+				{
+						// If a non-empty container is passed, the first value of the container will be removed from the property
+						valueToRemove = [if(aProperty.type.isPrimitive() or aProperty.type.oclIsKindOf(Enumeration))]*([/if]container->at(0)[if(aProperty.type.isPrimitive() or aProperty.type.oclIsKindOf(Enumeration))])[/if];
+				}
+				[else]
+				std::shared_ptr<uml::UMLContainerAny> umlContainerAny = std::dynamic_pointer_cast<uml::UMLContainerAny>(value);
+				if(umlContainerAny)
+				{
+					std::shared_ptr<Bag<uml::Element>> container = umlContainerAny->getAsElementContainer();
+					if(container && !(container->empty()))
+					{
+						// If a non-empty container is passed, the first value of the container will be removed from the property
+						std::shared_ptr<uml::Element> firstElement = container->at(0);
+						valueToRemove = std::dynamic_pointer_cast<[aProperty.type.generateCppRawType(true)/]>(firstElement);
+					}
+				}
+				[/if]
+			}
+			else
+			{
+				[if (aProperty.type.oclIsUndefined())]
+				valueToRemove = value->get<std::shared_ptr<Any>>();
+				[elseif (aProperty.type.oclIsKindOf(PrimitiveType) or aProperty.type.oclIsKindOf(Enumeration))]
+				valueToRemove = value->get<[aProperty.type.generateCppRawType(false)/]>();
+				[else]
+				std::shared_ptr<uml::UMLAny> umlAny = std::dynamic_pointer_cast<uml::UMLAny>(value);
+				if(umlAny)
+				{
+					std::shared_ptr<uml::Element> element = umlAny->getAsElement();
+					valueToRemove = std::dynamic_pointer_cast<[aProperty.type.generateCppRawType(true)/]>(element);
+				}
+				[/if]
+			}
+
+
+			this->[aProperty.getterName()/]()->erase(valueToRemove);
+
+			return;
+		}
+		[/for]
+	}
+
+[/if]
+[for (general : Classifier | aSignal.general->reject(oclIsUndefined() and name.oclIsUndefined()))]
+	//Call remove() for base class [general.name/]
+	[general.generateNamespaceName(true)/]Impl::remove(_uID, value);
+[/for]
+}
+[/template]
+
+[** 
+ * get all associations where aSignal is memberType
+*/]
+[query private getAssociationsToClass(aSignal : Signal) : Set(Association) = aSignal.getNearestPackage().ownedMember->select(oclIsKindOf(Association))->asOrderedSet() /]
+[query private isCompositionForClass(anAssociation : Association, aSignal : Signal) : Boolean = anAssociation.memberEnd->select(type = aSignal and isComposite and (not owner.oclIsKindOf(Association)))->size() > 0/]
+[query public getCompositeProperty(anAssociation : Association, aSignal : Signal) : Property = anAssociation.memberEnd->select(type = aSignal and isComposite and (not owner.oclIsKindOf(Association)))->first() /]
+[query public getCompositionsToSignal(aSignal : Signal) : Set(Association) = getAssociationsToClass()->select(isCompositionForClass(aSignal))->asOrderedSet()->sortedBy(myQualifiedName()) /]

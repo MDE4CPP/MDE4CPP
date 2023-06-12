@@ -213,7 +213,7 @@ PropertyImpl& PropertyImpl::operator=(const PropertyImpl & obj)
 			std::cout << "Initialising value Subset: " << "m_qualifier - Subset<uml::Property, uml::Element >(getOwnedElement())" << std::endl;
 		#endif
 		
-		for(const std::shared_ptr<uml::Property> qualifierindexElem: *qualifierList) 
+		for(const std::shared_ptr<uml::Property>& qualifierindexElem: *qualifierList) 
 		{
 			std::shared_ptr<uml::Property> temp = std::dynamic_pointer_cast<uml::Property>((qualifierindexElem)->copy());
 			m_qualifier->push_back(temp);
@@ -240,7 +240,7 @@ PropertyImpl& PropertyImpl::operator=(const PropertyImpl & obj)
 			std::cout << "Initialising value SubsetUnion: " << "m_redefinedProperty - SubsetUnion<uml::Property, uml::RedefinableElement >(getRedefinedElement())" << std::endl;
 		#endif
 		
-		for(const std::shared_ptr<uml::Property> redefinedPropertyindexElem: *redefinedPropertyList) 
+		for(const std::shared_ptr<uml::Property>& redefinedPropertyindexElem: *redefinedPropertyList) 
 		{
 			std::shared_ptr<uml::Property> temp = std::dynamic_pointer_cast<uml::Property>((redefinedPropertyindexElem)->copy());
 			m_redefinedProperty->push_back(temp);
@@ -1457,13 +1457,13 @@ bool PropertyImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 					{
 						std::shared_ptr<Bag<uml::Property>> _qualifier = getQualifier();
 	
-						for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
+						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{
 							std::shared_ptr<uml::Property> valueToAdd = std::dynamic_pointer_cast<uml::Property>(anEObject);
 	
 							if (valueToAdd)
 							{
-								if(_qualifier->find(valueToAdd) == -1)
+								if(!(_qualifier->includes(valueToAdd)))
 								{
 									_qualifier->add(valueToAdd);
 								}
@@ -1502,13 +1502,13 @@ bool PropertyImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 					{
 						std::shared_ptr<Bag<uml::Property>> _redefinedProperty = getRedefinedProperty();
 	
-						for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
+						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{
 							std::shared_ptr<uml::Property> valueToAdd = std::dynamic_pointer_cast<uml::Property>(anEObject);
 	
 							if (valueToAdd)
 							{
-								if(_redefinedProperty->find(valueToAdd) == -1)
+								if(!(_redefinedProperty->includes(valueToAdd)))
 								{
 									_redefinedProperty->add(valueToAdd);
 								}
@@ -1547,13 +1547,13 @@ bool PropertyImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 					{
 						std::shared_ptr<Bag<uml::Property>> _subsettedProperty = getSubsettedProperty();
 	
-						for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
+						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{
 							std::shared_ptr<uml::Property> valueToAdd = std::dynamic_pointer_cast<uml::Property>(anEObject);
 	
 							if (valueToAdd)
 							{
-								if(_subsettedProperty->find(valueToAdd) == -1)
+								if(!(_subsettedProperty->includes(valueToAdd)))
 								{
 									_subsettedProperty->add(valueToAdd);
 								}

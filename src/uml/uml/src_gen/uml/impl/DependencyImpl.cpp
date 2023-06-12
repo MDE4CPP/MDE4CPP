@@ -147,7 +147,7 @@ DependencyImpl& DependencyImpl::operator=(const DependencyImpl & obj)
 			std::cout << "Initialising value SubsetUnion: " << "m_client - SubsetUnion<uml::NamedElement, uml::Element >(getSource())" << std::endl;
 		#endif
 		
-		for(const std::shared_ptr<uml::NamedElement> clientindexElem: *clientList) 
+		for(const std::shared_ptr<uml::NamedElement>& clientindexElem: *clientList) 
 		{
 			std::shared_ptr<uml::NamedElement> temp = std::dynamic_pointer_cast<uml::NamedElement>((clientindexElem)->copy());
 			m_client->push_back(temp);
@@ -174,7 +174,7 @@ DependencyImpl& DependencyImpl::operator=(const DependencyImpl & obj)
 			std::cout << "Initialising value SubsetUnion: " << "m_supplier - SubsetUnion<uml::NamedElement, uml::Element >(getTarget())" << std::endl;
 		#endif
 		
-		for(const std::shared_ptr<uml::NamedElement> supplierindexElem: *supplierList) 
+		for(const std::shared_ptr<uml::NamedElement>& supplierindexElem: *supplierList) 
 		{
 			std::shared_ptr<uml::NamedElement> temp = std::dynamic_pointer_cast<uml::NamedElement>((supplierindexElem)->copy());
 			m_supplier->push_back(temp);
@@ -471,13 +471,13 @@ bool DependencyImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 					{
 						std::shared_ptr<Bag<uml::NamedElement>> _client = getClient();
 	
-						for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
+						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{
 							std::shared_ptr<uml::NamedElement> valueToAdd = std::dynamic_pointer_cast<uml::NamedElement>(anEObject);
 	
 							if (valueToAdd)
 							{
-								if(_client->find(valueToAdd) == -1)
+								if(!(_client->includes(valueToAdd)))
 								{
 									_client->add(valueToAdd);
 								}
@@ -516,13 +516,13 @@ bool DependencyImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 					{
 						std::shared_ptr<Bag<uml::NamedElement>> _supplier = getSupplier();
 	
-						for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
+						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{
 							std::shared_ptr<uml::NamedElement> valueToAdd = std::dynamic_pointer_cast<uml::NamedElement>(anEObject);
 	
 							if (valueToAdd)
 							{
-								if(_supplier->find(valueToAdd) == -1)
+								if(!(_supplier->includes(valueToAdd)))
 								{
 									_supplier->add(valueToAdd);
 								}

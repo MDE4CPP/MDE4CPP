@@ -78,12 +78,14 @@ public class UML4CPPEMtlResourceFactory extends EMtlResourceFactoryImpl {
 		initializeHelpersEmtls(resourcePathPrefix);
 		initializeInterfacesEmtls(resourcePathPrefix);
 		initializeMainApplicationEmtls(resourcePathPrefix);
+		initializeModelExecutionEmtls(resourcePathPrefix);
 		initializeModelFactoryEmtls(resourcePathPrefix);
 		initializeModelGlobalFunctionsEmtls(resourcePathPrefix);
 		initializeModelPackageEmtls(resourcePathPrefix);
 		initializeModelPluginEmtls(resourcePathPrefix);
 		initializeProfilesEmtls(resourcePathPrefix);
 		initializePscsEmtls(resourcePathPrefix);
+		initializeSignalsEmtls(resourcePathPrefix);
 		initializeValidationEmtls(resourcePathPrefix);
 	}
 	
@@ -125,7 +127,8 @@ public class UML4CPPEMtlResourceFactory extends EMtlResourceFactoryImpl {
 								"generateOperation",
 								"generateParameter",
 								"generatePrimitivetype", 
-								"generateProperty", 
+								"generateProperty",
+								"generateSignal",
 								"generateStereotype",
 								"generateStructuralFeature",
 								"generateType",
@@ -194,6 +197,12 @@ public class UML4CPPEMtlResourceFactory extends EMtlResourceFactoryImpl {
 		generateFilePathMapData(moduleNames, "main_application", resourcePathPrefix);
 	}
 	
+	private void initializeModelExecutionEmtls(String resourcePathPrefix)
+	{
+		String[] moduleNames = {"model_execution"};
+		generateFilePathMapData(moduleNames, "model_execution", resourcePathPrefix);
+	}
+	
 	private void initializeModelFactoryEmtls(String resourcePathPrefix)
 	{
 		String[] moduleNames = {"generateFactoryFiles",
@@ -253,6 +262,15 @@ public class UML4CPPEMtlResourceFactory extends EMtlResourceFactoryImpl {
         generateFilePathMapData(moduleNames, "pscs", resourcePathPrefix);
     }
 
+	private void initializeSignalsEmtls(String resourcePathPrefix)
+	{
+		String[] moduleNames = {"generateSignalFiles",
+								"generateSignalImplementationHeader",
+								"generateSignalImplementationSource",
+								"generateSignalInterfaceHeader"
+								};
+		generateFilePathMapData(moduleNames, "signals", resourcePathPrefix);
+	}
 	
 	private void initializeValidationEmtls(String resourcePathPrefix)
 	{

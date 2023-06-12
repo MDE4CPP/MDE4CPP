@@ -58,6 +58,7 @@
 #include "uml/Element.hpp"
 #include "fUML/Semantics/Loci/ExecutionFactory.hpp"
 #include "fUML/Semantics/Loci/Executor.hpp"
+#include "uml/Signal.hpp"
 //Factories and Package includes
 #include "fUML/Semantics/SemanticsPackage.hpp"
 #include "fUML/fUMLPackage.hpp"
@@ -125,7 +126,7 @@ LocusImpl& LocusImpl::operator=(const LocusImpl & obj)
 		m_extensionalValues.reset(new Bag<uml::Element>());
 		
 		
-		for(const std::shared_ptr<uml::Element> extensionalValuesindexElem: *extensionalValuesList) 
+		for(const std::shared_ptr<uml::Element>& extensionalValuesindexElem: *extensionalValuesList) 
 		{
 			std::shared_ptr<uml::Element> temp = std::dynamic_pointer_cast<uml::Element>((extensionalValuesindexElem)->copy());
 			m_extensionalValues->push_back(temp);
@@ -232,6 +233,18 @@ std::shared_ptr<uml::Element> LocusImpl::instantiate(const std::shared_ptr<uml::
 */
 
 /*
+ * This method is implemented in every model-specific locus
+ */
+
+return nullptr;
+	//end of body
+}
+
+std::shared_ptr<uml::Element> LocusImpl::instantiate(const std::shared_ptr<uml::Signal>& type)
+{
+	//ADD_COUNT(__PRETTY_FUNCTION__)
+	//generated from body annotation
+	/*
  * This method is implemented in every model-specific locus
  */
 
@@ -468,11 +481,11 @@ std::shared_ptr<Any> LocusImpl::eGet(int featureID, bool resolve, bool coreType)
 	switch(featureID)
 	{
 		case fUML::Semantics::Loci::LociPackage::LOCUS_ATTRIBUTE_EXECUTOR:
-			return eAny(getExecutor(),fUML::Semantics::Loci::LociPackage::EXECUTOR_CLASS,false); //760
+			return eAny(getExecutor(),fUML::Semantics::Loci::LociPackage::EXECUTOR_CLASS,false); //770
 		case fUML::Semantics::Loci::LociPackage::LOCUS_ATTRIBUTE_EXTENSIONALVALUES:
-			return eEcoreContainerAny(getExtensionalValues(),uml::umlPackage::ELEMENT_CLASS); //762
+			return eEcoreContainerAny(getExtensionalValues(),uml::umlPackage::ELEMENT_CLASS); //772
 		case fUML::Semantics::Loci::LociPackage::LOCUS_ATTRIBUTE_FACTORY:
-			return eAny(getFactory(),fUML::Semantics::Loci::LociPackage::EXECUTIONFACTORY_CLASS,false); //761
+			return eAny(getFactory(),fUML::Semantics::Loci::LociPackage::EXECUTIONFACTORY_CLASS,false); //771
 	}
 	return ecore::EObjectImpl::eGet(featureID, resolve, coreType);
 }
@@ -482,11 +495,11 @@ bool LocusImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case fUML::Semantics::Loci::LociPackage::LOCUS_ATTRIBUTE_EXECUTOR:
-			return getExecutor() != nullptr; //760
+			return getExecutor() != nullptr; //770
 		case fUML::Semantics::Loci::LociPackage::LOCUS_ATTRIBUTE_EXTENSIONALVALUES:
-			return getExtensionalValues() != nullptr; //762
+			return getExtensionalValues() != nullptr; //772
 		case fUML::Semantics::Loci::LociPackage::LOCUS_ATTRIBUTE_FACTORY:
-			return getFactory() != nullptr; //761
+			return getFactory() != nullptr; //771
 	}
 	return ecore::EObjectImpl::internalEIsSet(featureID);
 }
@@ -506,7 +519,7 @@ bool LocusImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 					std::shared_ptr<fUML::Semantics::Loci::Executor> _executor = std::dynamic_pointer_cast<fUML::Semantics::Loci::Executor>(eObject);
 					if(_executor)
 					{
-						setExecutor(_executor); //760
+						setExecutor(_executor); //770
 					}
 					else
 					{
@@ -539,13 +552,13 @@ bool LocusImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 					{
 						std::shared_ptr<Bag<uml::Element>> _extensionalValues = getExtensionalValues();
 	
-						for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
+						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{
 							std::shared_ptr<uml::Element> valueToAdd = std::dynamic_pointer_cast<uml::Element>(anEObject);
 	
 							if (valueToAdd)
 							{
-								if(_extensionalValues->find(valueToAdd) == -1)
+								if(!(_extensionalValues->includes(valueToAdd)))
 								{
 									_extensionalValues->add(valueToAdd);
 								}
@@ -582,7 +595,7 @@ bool LocusImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 					std::shared_ptr<fUML::Semantics::Loci::ExecutionFactory> _factory = std::dynamic_pointer_cast<fUML::Semantics::Loci::ExecutionFactory>(eObject);
 					if(_factory)
 					{
-						setFactory(_factory); //761
+						setFactory(_factory); //771
 					}
 					else
 					{
@@ -785,6 +798,38 @@ std::shared_ptr<Any> LocusImpl::eInvoke(int operationID, const std::shared_ptr<B
 					{
 						std::shared_ptr<ecore::EObject> _temp = ecoreAny->getAsEObject();
 						incoming_param_type = std::dynamic_pointer_cast<uml::Class>(_temp);
+					}
+					catch(...)
+					{
+						DEBUG_ERROR("Invalid type stored in 'ecore::EcoreAny' for parameter 'type'. Failed to invoke operation 'instantiate'!")
+						return nullptr;
+					}
+				}
+				else
+				{
+					DEBUG_ERROR("Invalid instance of 'ecore::EcoreAny' for parameter 'type'. Failed to invoke operation 'instantiate'!")
+					return nullptr;
+				}
+			}
+		
+			result = eEcoreAny(this->instantiate(incoming_param_type), uml::umlPackage::ELEMENT_CLASS);
+			break;
+		}
+		// fUML::Semantics::Loci::Locus::instantiate(uml::Signal) : uml::Element: 1112226127
+		case LociPackage::LOCUS_OPERATION_INSTANTIATE_SIGNAL:
+		{
+			//Retrieve input parameter 'type'
+			//parameter 0
+			std::shared_ptr<uml::Signal> incoming_param_type;
+			Bag<Any>::const_iterator incoming_param_type_arguments_citer = std::next(arguments->begin(), 0);
+			{
+				std::shared_ptr<ecore::EcoreAny> ecoreAny = std::dynamic_pointer_cast<ecore::EcoreAny>((*incoming_param_type_arguments_citer));
+				if(ecoreAny)
+				{
+					try
+					{
+						std::shared_ptr<ecore::EObject> _temp = ecoreAny->getAsEObject();
+						incoming_param_type = std::dynamic_pointer_cast<uml::Signal>(_temp);
 					}
 					catch(...)
 					{

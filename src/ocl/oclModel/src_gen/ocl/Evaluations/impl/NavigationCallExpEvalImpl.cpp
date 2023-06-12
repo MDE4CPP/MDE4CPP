@@ -343,13 +343,13 @@ bool NavigationCallExpEvalImpl::eSet(int featureID,  const std::shared_ptr<Any>&
 					{
 						std::shared_ptr<Bag<ocl::Evaluations::OclExpEval>> _qualifiers = getQualifiers();
 	
-						for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
+						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{
 							std::shared_ptr<ocl::Evaluations::OclExpEval> valueToAdd = std::dynamic_pointer_cast<ocl::Evaluations::OclExpEval>(anEObject);
 	
 							if (valueToAdd)
 							{
-								if(_qualifiers->find(valueToAdd) == -1)
+								if(!(_qualifiers->includes(valueToAdd)))
 								{
 									_qualifiers->add(valueToAdd);
 								}

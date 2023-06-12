@@ -38,8 +38,8 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "ecore/ecoreFactory.hpp"
 #include "ocl/Evaluations/EvaluationsFactory.hpp"
+#include "ecore/ecoreFactory.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClassifier.hpp"
 #include "ecore/EGenericType.hpp"
@@ -314,13 +314,13 @@ bool EvalEnvironmentImpl::eSet(int featureID,  const std::shared_ptr<Any>& newVa
 					{
 						std::shared_ptr<Bag<ocl::Evaluations::NameValueBinding>> _bindings = getBindings();
 	
-						for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
+						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{
 							std::shared_ptr<ocl::Evaluations::NameValueBinding> valueToAdd = std::dynamic_pointer_cast<ocl::Evaluations::NameValueBinding>(anEObject);
 	
 							if (valueToAdd)
 							{
-								if(_bindings->find(valueToAdd) == -1)
+								if(!(_bindings->includes(valueToAdd)))
 								{
 									_bindings->add(valueToAdd);
 								}

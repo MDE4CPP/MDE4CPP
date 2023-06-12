@@ -46,9 +46,9 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "fUML/Semantics/Activities/ActivitiesFactory.hpp"
 #include "fUML/Semantics/Actions/ActionsFactory.hpp"
 #include "uml/umlFactory.hpp"
+#include "fUML/Semantics/Activities/ActivitiesFactory.hpp"
 #include "uml/Action.hpp"
 #include "fUML/Semantics/Actions/ActionActivation.hpp"
 #include "fUML/Semantics/Activities/ActivityEdgeInstance.hpp"
@@ -837,13 +837,13 @@ bool ExpansionRegionActivationImpl::eSet(int featureID,  const std::shared_ptr<A
 					{
 						std::shared_ptr<Bag<fUML::Semantics::Actions::ExpansionActivationGroup>> _activationGroups = getActivationGroups();
 	
-						for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
+						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{
 							std::shared_ptr<fUML::Semantics::Actions::ExpansionActivationGroup> valueToAdd = std::dynamic_pointer_cast<fUML::Semantics::Actions::ExpansionActivationGroup>(anEObject);
 	
 							if (valueToAdd)
 							{
-								if(_activationGroups->find(valueToAdd) == -1)
+								if(!(_activationGroups->includes(valueToAdd)))
 								{
 									_activationGroups->add(valueToAdd);
 								}
@@ -882,13 +882,13 @@ bool ExpansionRegionActivationImpl::eSet(int featureID,  const std::shared_ptr<A
 					{
 						std::shared_ptr<Bag<fUML::Semantics::Activities::TokenSet>> _inputExpansionTokens = getInputExpansionTokens();
 	
-						for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
+						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{
 							std::shared_ptr<fUML::Semantics::Activities::TokenSet> valueToAdd = std::dynamic_pointer_cast<fUML::Semantics::Activities::TokenSet>(anEObject);
 	
 							if (valueToAdd)
 							{
-								if(_inputExpansionTokens->find(valueToAdd) == -1)
+								if(!(_inputExpansionTokens->includes(valueToAdd)))
 								{
 									_inputExpansionTokens->add(valueToAdd);
 								}
@@ -927,13 +927,13 @@ bool ExpansionRegionActivationImpl::eSet(int featureID,  const std::shared_ptr<A
 					{
 						std::shared_ptr<Bag<fUML::Semantics::Activities::TokenSet>> _inputTokens = getInputTokens();
 	
-						for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
+						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{
 							std::shared_ptr<fUML::Semantics::Activities::TokenSet> valueToAdd = std::dynamic_pointer_cast<fUML::Semantics::Activities::TokenSet>(anEObject);
 	
 							if (valueToAdd)
 							{
-								if(_inputTokens->find(valueToAdd) == -1)
+								if(!(_inputTokens->includes(valueToAdd)))
 								{
 									_inputTokens->add(valueToAdd);
 								}

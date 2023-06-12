@@ -29,11 +29,11 @@ namespace FoundationalModelLibrary::Common
 			virtual ~CommonPackageImpl();
 
 			//getter for the ownedMember
-			virtual std::shared_ptr<uml::Class> get_FoundationalModelLibrary_Common_Listener();  
-			virtual std::shared_ptr<uml::DataType> get_FoundationalModelLibrary_Common_Status();  
-			virtual std::shared_ptr<uml::Property> get_FoundationalModelLibrary_Common_Status_code();  
-			virtual std::shared_ptr<uml::Property> get_FoundationalModelLibrary_Common_Status_context();  
-			virtual std::shared_ptr<uml::Property> get_FoundationalModelLibrary_Common_Status_description();  
+			virtual const std::shared_ptr<uml::Class>& get_FoundationalModelLibrary_Common_Listener();  
+			virtual const std::shared_ptr<uml::DataType>& get_FoundationalModelLibrary_Common_Status();  
+			virtual const std::shared_ptr<uml::Property>& get_FoundationalModelLibrary_Common_Status_code();  
+			virtual const std::shared_ptr<uml::Property>& get_FoundationalModelLibrary_Common_Status_context();  
+			virtual const std::shared_ptr<uml::Property>& get_FoundationalModelLibrary_Common_Status_description();  
 			
 			
 
@@ -68,10 +68,12 @@ namespace FoundationalModelLibrary::Common
 			void createPackageAssociations(std::shared_ptr<uml::Package> foundationalModelLibrary_Common, std::shared_ptr<uml::umlFactory> factory);
 			void createPackageDependencies(std::shared_ptr<uml::Package> foundationalModelLibrary_Common, std::shared_ptr<uml::umlFactory> factory);
 			void createPackageEnumerationLiterals(std::shared_ptr<uml::Package> foundationalModelLibrary_Common, std::shared_ptr<uml::umlFactory> factory);
+			void createPackageEvents(std::shared_ptr<uml::Package> foundationalModelLibrary_Common, std::shared_ptr<uml::umlFactory> factory);
 			void createPackageInstanceSpecifications(std::shared_ptr<uml::Package> foundationalModelLibrary_Common, std::shared_ptr<uml::umlFactory> factory);
 			void createPackageInterfaceRealizations(std::shared_ptr<uml::Package> foundationalModelLibrary_Common, std::shared_ptr<uml::umlFactory> factory);
 			void createPackageInterfaces(std::shared_ptr<uml::Package> foundationalModelLibrary_Common, std::shared_ptr<uml::umlFactory> factory);
 			void createPackagePrimitiveTypes(std::shared_ptr<uml::Package> foundationalModelLibrary_Common, std::shared_ptr<uml::umlFactory> factory);
+			void createPackageSignals(std::shared_ptr<uml::Package> foundationalModelLibrary_Common, std::shared_ptr<uml::umlFactory> factory);
 			void createPackageStereotypes(std::shared_ptr<uml::Package> foundationalModelLibrary_Common, std::shared_ptr<uml::umlFactory> factory);
 			void createPackageValueSpecifications(std::shared_ptr<uml::Package> foundationalModelLibrary_Common, std::shared_ptr<uml::umlFactory> factory);
 
@@ -80,10 +82,12 @@ namespace FoundationalModelLibrary::Common
 			void initializePackageDataTypes();
 			void initializePackageAssociations();
 			void initializePackageDependencies();
+			void initializePackageEvents();
 			void initializePackageInstanceSpecifications();
 			void initializePackageInterfaceRealizations();
 			void initializePackageInterfaces();
 			void initializePackageNestedPackages();
+			void initializePackageSignals();
 			void initializePackageStereotypes();
 			void initializePackageValueSpecifications();
 	};

@@ -379,13 +379,13 @@ bool TriggerImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 					{
 						std::shared_ptr<Bag<uml::Port>> _port = getPort();
 	
-						for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
+						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{
 							std::shared_ptr<uml::Port> valueToAdd = std::dynamic_pointer_cast<uml::Port>(anEObject);
 	
 							if (valueToAdd)
 							{
-								if(_port->find(valueToAdd) == -1)
+								if(!(_port->includes(valueToAdd)))
 								{
 									_port->add(valueToAdd);
 								}

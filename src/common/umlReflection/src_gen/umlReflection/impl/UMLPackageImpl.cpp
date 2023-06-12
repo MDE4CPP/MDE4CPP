@@ -114,11 +114,13 @@ void UMLPackageImpl::createPackageContents(std::shared_ptr<uml::Package> uML)
 	createPackageDataTypes(uML, factory);
 	createPackageDependencies(uML, factory);
 	createPackageEnumerationLiterals(uML, factory);
+	createPackageEvents(uML, factory);
 	createPackageValueSpecifications(uML, factory);
 	createPackageInstanceSpecifications(uML, factory);
 	createPackageInterfaces(uML, factory);
 	createPackageInterfaceRealizations(uML, factory);
 	createPackagePrimitiveTypes(uML, factory);
+	createPackageSignals(uML, factory);
 	createPackageStereotypes(uML, factory);
 }
 
@@ -11925,6 +11927,13 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 
 }
 
+void UMLPackageImpl::createPackageSignals(std::shared_ptr<uml::Package> uML, std::shared_ptr<uml::umlFactory> factory)
+{
+	std::shared_ptr<uml::Constraint> con = nullptr;
+	std::shared_ptr<uml::OpaqueExpression> oe = nullptr;
+
+}
+
 void UMLPackageImpl::createPackageDataTypes(std::shared_ptr<uml::Package> uML, std::shared_ptr<uml::umlFactory> factory)
 {
 }
@@ -12161,6 +12170,10 @@ void UMLPackageImpl::createPackageEnumerationLiterals(std::shared_ptr<uml::Packa
 	uML_VisibilityKind_public->setName("public");
 	uML_VisibilityKind_public->getClassifier()->push_back(uML_VisibilityKind);
 	
+}
+
+void UMLPackageImpl::createPackageEvents(std::shared_ptr<uml::Package> uML, std::shared_ptr<uml::umlFactory> factory)
+{
 }
 
 void UMLPackageImpl::createPackageInstanceSpecifications(std::shared_ptr<uml::Package> uML, std::shared_ptr<uml::umlFactory> factory)
@@ -16648,10 +16661,12 @@ void UMLPackageImpl::initializePackageContents(std::shared_ptr<uml::Package> uML
 	initializePackageClasses();
 	initializePackageDataTypes();
 	initializePackageDependencies();
+	initializePackageEvents();
 	initializePackageInstanceSpecifications();
 	initializePackageInterfaceRealizations();
 	initializePackageInterfaces();
 	initializePackageNestedPackages();
+	initializePackageSignals();
 	initializePackageStereotypes();
 	initializePackageValueSpecifications();
 	
@@ -36306,6 +36321,16 @@ void UMLPackageImpl::initializePackageClasses()
 
 }
 
+void UMLPackageImpl::initializePackageSignals()
+{
+	std::shared_ptr<uml::Generalization> gen = nullptr;
+
+
+//-------------------------------------------
+//Opaque Behaviors
+
+}
+
 void UMLPackageImpl::initializePackageDataTypes()
 {
 	std::shared_ptr<uml::Generalization> gen = nullptr;
@@ -36313,6 +36338,10 @@ void UMLPackageImpl::initializePackageDataTypes()
 }
 
 void UMLPackageImpl::initializePackageDependencies()
+{
+}
+
+void UMLPackageImpl::initializePackageEvents()
 {
 }
 
@@ -41107,13003 +41136,13003 @@ void UMLPackageImpl::initializePackageValueSpecifications()
 	
 }
 
-std::shared_ptr<uml::Association> UMLPackageImpl::get_UML_A_action_actionExecutionSpecification()
+const std::shared_ptr<uml::Association>& UMLPackageImpl::get_UML_A_action_actionExecutionSpecification()
 {
 	return uML_A_action_actionExecutionSpecification;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_A_action_actionExecutionSpecification_actionExecutionSpecification()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_A_action_actionExecutionSpecification_actionExecutionSpecification()
 {
 	return uML_A_action_actionExecutionSpecification_actionExecutionSpecification;
 }
-std::shared_ptr<uml::Association> UMLPackageImpl::get_UML_A_action_interaction()
+const std::shared_ptr<uml::Association>& UMLPackageImpl::get_UML_A_action_interaction()
 {
 	return uML_A_action_interaction;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_A_action_interaction_interaction()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_A_action_interaction_interaction()
 {
 	return uML_A_action_interaction_interaction;
 }
-std::shared_ptr<uml::Association> UMLPackageImpl::get_UML_A_actualGate_interactionUse()
+const std::shared_ptr<uml::Association>& UMLPackageImpl::get_UML_A_actualGate_interactionUse()
 {
 	return uML_A_actualGate_interactionUse;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_A_actualGate_interactionUse_interactionUse()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_A_actualGate_interactionUse_interactionUse()
 {
 	return uML_A_actualGate_interactionUse_interactionUse;
 }
-std::shared_ptr<uml::Association> UMLPackageImpl::get_UML_A_actual_templateParameterSubstitution()
+const std::shared_ptr<uml::Association>& UMLPackageImpl::get_UML_A_actual_templateParameterSubstitution()
 {
 	return uML_A_actual_templateParameterSubstitution;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_A_actual_templateParameterSubstitution_templateParameterSubstitution()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_A_actual_templateParameterSubstitution_templateParameterSubstitution()
 {
 	return uML_A_actual_templateParameterSubstitution_templateParameterSubstitution;
 }
-std::shared_ptr<uml::Association> UMLPackageImpl::get_UML_A_addition_include()
+const std::shared_ptr<uml::Association>& UMLPackageImpl::get_UML_A_addition_include()
 {
 	return uML_A_addition_include;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_A_addition_include_include()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_A_addition_include_include()
 {
 	return uML_A_addition_include_include;
 }
-std::shared_ptr<uml::Association> UMLPackageImpl::get_UML_A_annotatedElement_comment()
+const std::shared_ptr<uml::Association>& UMLPackageImpl::get_UML_A_annotatedElement_comment()
 {
 	return uML_A_annotatedElement_comment;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_A_annotatedElement_comment_comment()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_A_annotatedElement_comment_comment()
 {
 	return uML_A_annotatedElement_comment_comment;
 }
-std::shared_ptr<uml::Association> UMLPackageImpl::get_UML_A_appliedProfile_profileApplication()
+const std::shared_ptr<uml::Association>& UMLPackageImpl::get_UML_A_appliedProfile_profileApplication()
 {
 	return uML_A_appliedProfile_profileApplication;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_A_appliedProfile_profileApplication_profileApplication()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_A_appliedProfile_profileApplication_profileApplication()
 {
 	return uML_A_appliedProfile_profileApplication_profileApplication;
 }
-std::shared_ptr<uml::Association> UMLPackageImpl::get_UML_A_argument_interactionUse()
+const std::shared_ptr<uml::Association>& UMLPackageImpl::get_UML_A_argument_interactionUse()
 {
 	return uML_A_argument_interactionUse;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_A_argument_interactionUse_interactionUse()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_A_argument_interactionUse_interactionUse()
 {
 	return uML_A_argument_interactionUse_interactionUse;
 }
-std::shared_ptr<uml::Association> UMLPackageImpl::get_UML_A_argument_invocationAction()
+const std::shared_ptr<uml::Association>& UMLPackageImpl::get_UML_A_argument_invocationAction()
 {
 	return uML_A_argument_invocationAction;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_A_argument_invocationAction_invocationAction()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_A_argument_invocationAction_invocationAction()
 {
 	return uML_A_argument_invocationAction_invocationAction;
 }
-std::shared_ptr<uml::Association> UMLPackageImpl::get_UML_A_argument_message()
+const std::shared_ptr<uml::Association>& UMLPackageImpl::get_UML_A_argument_message()
 {
 	return uML_A_argument_message;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_A_argument_message_message()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_A_argument_message_message()
 {
 	return uML_A_argument_message_message;
 }
-std::shared_ptr<uml::Association> UMLPackageImpl::get_UML_A_association_clearAssociationAction()
+const std::shared_ptr<uml::Association>& UMLPackageImpl::get_UML_A_association_clearAssociationAction()
 {
 	return uML_A_association_clearAssociationAction;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_A_association_clearAssociationAction_clearAssociationAction()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_A_association_clearAssociationAction_clearAssociationAction()
 {
 	return uML_A_association_clearAssociationAction_clearAssociationAction;
 }
-std::shared_ptr<uml::Association> UMLPackageImpl::get_UML_A_attribute_classifier()
+const std::shared_ptr<uml::Association>& UMLPackageImpl::get_UML_A_attribute_classifier()
 {
 	return uML_A_attribute_classifier;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_A_attribute_classifier_classifier()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_A_attribute_classifier_classifier()
 {
 	return uML_A_attribute_classifier_classifier;
 }
-std::shared_ptr<uml::Association> UMLPackageImpl::get_UML_A_before_toAfter()
+const std::shared_ptr<uml::Association>& UMLPackageImpl::get_UML_A_before_toAfter()
 {
 	return uML_A_before_toAfter;
 }
-std::shared_ptr<uml::Association> UMLPackageImpl::get_UML_A_behavior_behaviorExecutionSpecification()
+const std::shared_ptr<uml::Association>& UMLPackageImpl::get_UML_A_behavior_behaviorExecutionSpecification()
 {
 	return uML_A_behavior_behaviorExecutionSpecification;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_A_behavior_behaviorExecutionSpecification_behaviorExecutionSpecification()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_A_behavior_behaviorExecutionSpecification_behaviorExecutionSpecification()
 {
 	return uML_A_behavior_behaviorExecutionSpecification_behaviorExecutionSpecification;
 }
-std::shared_ptr<uml::Association> UMLPackageImpl::get_UML_A_behavior_callBehaviorAction()
+const std::shared_ptr<uml::Association>& UMLPackageImpl::get_UML_A_behavior_callBehaviorAction()
 {
 	return uML_A_behavior_callBehaviorAction;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_A_behavior_callBehaviorAction_callBehaviorAction()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_A_behavior_callBehaviorAction_callBehaviorAction()
 {
 	return uML_A_behavior_callBehaviorAction_callBehaviorAction;
 }
-std::shared_ptr<uml::Association> UMLPackageImpl::get_UML_A_behavior_opaqueExpression()
+const std::shared_ptr<uml::Association>& UMLPackageImpl::get_UML_A_behavior_opaqueExpression()
 {
 	return uML_A_behavior_opaqueExpression;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_A_behavior_opaqueExpression_opaqueExpression()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_A_behavior_opaqueExpression_opaqueExpression()
 {
 	return uML_A_behavior_opaqueExpression_opaqueExpression;
 }
-std::shared_ptr<uml::Association> UMLPackageImpl::get_UML_A_bodyCondition_bodyContext()
+const std::shared_ptr<uml::Association>& UMLPackageImpl::get_UML_A_bodyCondition_bodyContext()
 {
 	return uML_A_bodyCondition_bodyContext;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_A_bodyCondition_bodyContext_bodyContext()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_A_bodyCondition_bodyContext_bodyContext()
 {
 	return uML_A_bodyCondition_bodyContext_bodyContext;
 }
-std::shared_ptr<uml::Association> UMLPackageImpl::get_UML_A_bodyOutput_clause()
+const std::shared_ptr<uml::Association>& UMLPackageImpl::get_UML_A_bodyOutput_clause()
 {
 	return uML_A_bodyOutput_clause;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_A_bodyOutput_clause_clause()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_A_bodyOutput_clause_clause()
 {
 	return uML_A_bodyOutput_clause_clause;
 }
-std::shared_ptr<uml::Association> UMLPackageImpl::get_UML_A_bodyOutput_loopNode()
+const std::shared_ptr<uml::Association>& UMLPackageImpl::get_UML_A_bodyOutput_loopNode()
 {
 	return uML_A_bodyOutput_loopNode;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_A_bodyOutput_loopNode_loopNode()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_A_bodyOutput_loopNode_loopNode()
 {
 	return uML_A_bodyOutput_loopNode_loopNode;
 }
-std::shared_ptr<uml::Association> UMLPackageImpl::get_UML_A_bodyPart_loopNode()
+const std::shared_ptr<uml::Association>& UMLPackageImpl::get_UML_A_bodyPart_loopNode()
 {
 	return uML_A_bodyPart_loopNode;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_A_bodyPart_loopNode_loopNode()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_A_bodyPart_loopNode_loopNode()
 {
 	return uML_A_bodyPart_loopNode_loopNode;
 }
-std::shared_ptr<uml::Association> UMLPackageImpl::get_UML_A_body_clause()
+const std::shared_ptr<uml::Association>& UMLPackageImpl::get_UML_A_body_clause()
 {
 	return uML_A_body_clause;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_A_body_clause_clause()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_A_body_clause_clause()
 {
 	return uML_A_body_clause_clause;
 }
-std::shared_ptr<uml::Association> UMLPackageImpl::get_UML_A_cfragmentGate_combinedFragment()
+const std::shared_ptr<uml::Association>& UMLPackageImpl::get_UML_A_cfragmentGate_combinedFragment()
 {
 	return uML_A_cfragmentGate_combinedFragment;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_A_cfragmentGate_combinedFragment_combinedFragment()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_A_cfragmentGate_combinedFragment_combinedFragment()
 {
 	return uML_A_cfragmentGate_combinedFragment_combinedFragment;
 }
-std::shared_ptr<uml::Association> UMLPackageImpl::get_UML_A_changeExpression_changeEvent()
+const std::shared_ptr<uml::Association>& UMLPackageImpl::get_UML_A_changeExpression_changeEvent()
 {
 	return uML_A_changeExpression_changeEvent;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_A_changeExpression_changeEvent_changeEvent()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_A_changeExpression_changeEvent_changeEvent()
 {
 	return uML_A_changeExpression_changeEvent_changeEvent;
 }
-std::shared_ptr<uml::Association> UMLPackageImpl::get_UML_A_classifierBehavior_behavioredClassifier()
+const std::shared_ptr<uml::Association>& UMLPackageImpl::get_UML_A_classifierBehavior_behavioredClassifier()
 {
 	return uML_A_classifierBehavior_behavioredClassifier;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_A_classifierBehavior_behavioredClassifier_behavioredClassifier()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_A_classifierBehavior_behavioredClassifier_behavioredClassifier()
 {
 	return uML_A_classifierBehavior_behavioredClassifier_behavioredClassifier;
 }
-std::shared_ptr<uml::Association> UMLPackageImpl::get_UML_A_classifier_createObjectAction()
+const std::shared_ptr<uml::Association>& UMLPackageImpl::get_UML_A_classifier_createObjectAction()
 {
 	return uML_A_classifier_createObjectAction;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_A_classifier_createObjectAction_createObjectAction()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_A_classifier_createObjectAction_createObjectAction()
 {
 	return uML_A_classifier_createObjectAction_createObjectAction;
 }
-std::shared_ptr<uml::Association> UMLPackageImpl::get_UML_A_classifier_enumerationLiteral()
+const std::shared_ptr<uml::Association>& UMLPackageImpl::get_UML_A_classifier_enumerationLiteral()
 {
 	return uML_A_classifier_enumerationLiteral;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_A_classifier_enumerationLiteral_enumerationLiteral()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_A_classifier_enumerationLiteral_enumerationLiteral()
 {
 	return uML_A_classifier_enumerationLiteral_enumerationLiteral;
 }
-std::shared_ptr<uml::Association> UMLPackageImpl::get_UML_A_classifier_instanceSpecification()
+const std::shared_ptr<uml::Association>& UMLPackageImpl::get_UML_A_classifier_instanceSpecification()
 {
 	return uML_A_classifier_instanceSpecification;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_A_classifier_instanceSpecification_instanceSpecification()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_A_classifier_instanceSpecification_instanceSpecification()
 {
 	return uML_A_classifier_instanceSpecification_instanceSpecification;
 }
-std::shared_ptr<uml::Association> UMLPackageImpl::get_UML_A_classifier_readExtentAction()
+const std::shared_ptr<uml::Association>& UMLPackageImpl::get_UML_A_classifier_readExtentAction()
 {
 	return uML_A_classifier_readExtentAction;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_A_classifier_readExtentAction_readExtentAction()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_A_classifier_readExtentAction_readExtentAction()
 {
 	return uML_A_classifier_readExtentAction_readExtentAction;
 }
-std::shared_ptr<uml::Association> UMLPackageImpl::get_UML_A_classifier_readIsClassifiedObjectAction()
+const std::shared_ptr<uml::Association>& UMLPackageImpl::get_UML_A_classifier_readIsClassifiedObjectAction()
 {
 	return uML_A_classifier_readIsClassifiedObjectAction;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_A_classifier_readIsClassifiedObjectAction_readIsClassifiedObjectAction()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_A_classifier_readIsClassifiedObjectAction_readIsClassifiedObjectAction()
 {
 	return uML_A_classifier_readIsClassifiedObjectAction_readIsClassifiedObjectAction;
 }
-std::shared_ptr<uml::Association> UMLPackageImpl::get_UML_A_classifier_templateParameter_parameteredElement()
+const std::shared_ptr<uml::Association>& UMLPackageImpl::get_UML_A_classifier_templateParameter_parameteredElement()
 {
 	return uML_A_classifier_templateParameter_parameteredElement;
 }
-std::shared_ptr<uml::Association> UMLPackageImpl::get_UML_A_clause_conditionalNode()
+const std::shared_ptr<uml::Association>& UMLPackageImpl::get_UML_A_clause_conditionalNode()
 {
 	return uML_A_clause_conditionalNode;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_A_clause_conditionalNode_conditionalNode()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_A_clause_conditionalNode_conditionalNode()
 {
 	return uML_A_clause_conditionalNode_conditionalNode;
 }
-std::shared_ptr<uml::Association> UMLPackageImpl::get_UML_A_clientDependency_client()
+const std::shared_ptr<uml::Association>& UMLPackageImpl::get_UML_A_clientDependency_client()
 {
 	return uML_A_clientDependency_client;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_A_clientDependency_client_dependency()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_A_clientDependency_client_dependency()
 {
 	return uML_A_clientDependency_client_dependency;
 }
-std::shared_ptr<uml::Association> UMLPackageImpl::get_UML_A_collaborationRole_collaboration()
+const std::shared_ptr<uml::Association>& UMLPackageImpl::get_UML_A_collaborationRole_collaboration()
 {
 	return uML_A_collaborationRole_collaboration;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_A_collaborationRole_collaboration_collaboration()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_A_collaborationRole_collaboration_collaboration()
 {
 	return uML_A_collaborationRole_collaboration_collaboration;
 }
-std::shared_ptr<uml::Association> UMLPackageImpl::get_UML_A_collaborationUse_classifier()
+const std::shared_ptr<uml::Association>& UMLPackageImpl::get_UML_A_collaborationUse_classifier()
 {
 	return uML_A_collaborationUse_classifier;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_A_collaborationUse_classifier_classifier()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_A_collaborationUse_classifier_classifier()
 {
 	return uML_A_collaborationUse_classifier_classifier;
 }
-std::shared_ptr<uml::Association> UMLPackageImpl::get_UML_A_collection_reduceAction()
+const std::shared_ptr<uml::Association>& UMLPackageImpl::get_UML_A_collection_reduceAction()
 {
 	return uML_A_collection_reduceAction;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_A_collection_reduceAction_reduceAction()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_A_collection_reduceAction_reduceAction()
 {
 	return uML_A_collection_reduceAction_reduceAction;
 }
-std::shared_ptr<uml::Association> UMLPackageImpl::get_UML_A_condition_extend()
+const std::shared_ptr<uml::Association>& UMLPackageImpl::get_UML_A_condition_extend()
 {
 	return uML_A_condition_extend;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_A_condition_extend_extend()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_A_condition_extend_extend()
 {
 	return uML_A_condition_extend_extend;
 }
-std::shared_ptr<uml::Association> UMLPackageImpl::get_UML_A_condition_parameterSet()
+const std::shared_ptr<uml::Association>& UMLPackageImpl::get_UML_A_condition_parameterSet()
 {
 	return uML_A_condition_parameterSet;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_A_condition_parameterSet_parameterSet()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_A_condition_parameterSet_parameterSet()
 {
 	return uML_A_condition_parameterSet_parameterSet;
 }
-std::shared_ptr<uml::Association> UMLPackageImpl::get_UML_A_configuration_deployment()
+const std::shared_ptr<uml::Association>& UMLPackageImpl::get_UML_A_configuration_deployment()
 {
 	return uML_A_configuration_deployment;
 }
-std::shared_ptr<uml::Association> UMLPackageImpl::get_UML_A_conformance_specificMachine()
+const std::shared_ptr<uml::Association>& UMLPackageImpl::get_UML_A_conformance_specificMachine()
 {
 	return uML_A_conformance_specificMachine;
 }
-std::shared_ptr<uml::Association> UMLPackageImpl::get_UML_A_connectableElement_templateParameter_parameteredElement()
+const std::shared_ptr<uml::Association>& UMLPackageImpl::get_UML_A_connectableElement_templateParameter_parameteredElement()
 {
 	return uML_A_connectableElement_templateParameter_parameteredElement;
 }
-std::shared_ptr<uml::Association> UMLPackageImpl::get_UML_A_connectionPoint_state()
+const std::shared_ptr<uml::Association>& UMLPackageImpl::get_UML_A_connectionPoint_state()
 {
 	return uML_A_connectionPoint_state;
 }
-std::shared_ptr<uml::Association> UMLPackageImpl::get_UML_A_connectionPoint_stateMachine()
+const std::shared_ptr<uml::Association>& UMLPackageImpl::get_UML_A_connectionPoint_stateMachine()
 {
 	return uML_A_connectionPoint_stateMachine;
 }
-std::shared_ptr<uml::Association> UMLPackageImpl::get_UML_A_connection_state()
+const std::shared_ptr<uml::Association>& UMLPackageImpl::get_UML_A_connection_state()
 {
 	return uML_A_connection_state;
 }
-std::shared_ptr<uml::Association> UMLPackageImpl::get_UML_A_connector_message()
+const std::shared_ptr<uml::Association>& UMLPackageImpl::get_UML_A_connector_message()
 {
 	return uML_A_connector_message;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_A_connector_message_message()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_A_connector_message_message()
 {
 	return uML_A_connector_message_message;
 }
-std::shared_ptr<uml::Association> UMLPackageImpl::get_UML_A_constrainedElement_constraint()
+const std::shared_ptr<uml::Association>& UMLPackageImpl::get_UML_A_constrainedElement_constraint()
 {
 	return uML_A_constrainedElement_constraint;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_A_constrainedElement_constraint_constraint()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_A_constrainedElement_constraint_constraint()
 {
 	return uML_A_constrainedElement_constraint_constraint;
 }
-std::shared_ptr<uml::Association> UMLPackageImpl::get_UML_A_constrainingClassifier_classifierTemplateParameter()
+const std::shared_ptr<uml::Association>& UMLPackageImpl::get_UML_A_constrainingClassifier_classifierTemplateParameter()
 {
 	return uML_A_constrainingClassifier_classifierTemplateParameter;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_A_constrainingClassifier_classifierTemplateParameter_classifierTemplateParameter()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_A_constrainingClassifier_classifierTemplateParameter_classifierTemplateParameter()
 {
 	return uML_A_constrainingClassifier_classifierTemplateParameter_classifierTemplateParameter;
 }
-std::shared_ptr<uml::Association> UMLPackageImpl::get_UML_A_containedEdge_inGroup()
+const std::shared_ptr<uml::Association>& UMLPackageImpl::get_UML_A_containedEdge_inGroup()
 {
 	return uML_A_containedEdge_inGroup;
 }
-std::shared_ptr<uml::Association> UMLPackageImpl::get_UML_A_containedNode_inGroup()
+const std::shared_ptr<uml::Association>& UMLPackageImpl::get_UML_A_containedNode_inGroup()
 {
 	return uML_A_containedNode_inGroup;
 }
-std::shared_ptr<uml::Association> UMLPackageImpl::get_UML_A_context_action()
+const std::shared_ptr<uml::Association>& UMLPackageImpl::get_UML_A_context_action()
 {
 	return uML_A_context_action;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_A_context_action_action()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_A_context_action_action()
 {
 	return uML_A_context_action_action;
 }
-std::shared_ptr<uml::Association> UMLPackageImpl::get_UML_A_context_behavior()
+const std::shared_ptr<uml::Association>& UMLPackageImpl::get_UML_A_context_behavior()
 {
 	return uML_A_context_behavior;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_A_context_behavior_behavior()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_A_context_behavior_behavior()
 {
 	return uML_A_context_behavior_behavior;
 }
-std::shared_ptr<uml::Association> UMLPackageImpl::get_UML_A_contract_connector()
+const std::shared_ptr<uml::Association>& UMLPackageImpl::get_UML_A_contract_connector()
 {
 	return uML_A_contract_connector;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_A_contract_connector_connector()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_A_contract_connector_connector()
 {
 	return uML_A_contract_connector_connector;
 }
-std::shared_ptr<uml::Association> UMLPackageImpl::get_UML_A_contract_interfaceRealization()
+const std::shared_ptr<uml::Association>& UMLPackageImpl::get_UML_A_contract_interfaceRealization()
 {
 	return uML_A_contract_interfaceRealization;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_A_contract_interfaceRealization_interfaceRealization()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_A_contract_interfaceRealization_interfaceRealization()
 {
 	return uML_A_contract_interfaceRealization_interfaceRealization;
 }
-std::shared_ptr<uml::Association> UMLPackageImpl::get_UML_A_contract_substitution()
+const std::shared_ptr<uml::Association>& UMLPackageImpl::get_UML_A_contract_substitution()
 {
 	return uML_A_contract_substitution;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_A_contract_substitution_substitution()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_A_contract_substitution_substitution()
 {
 	return uML_A_contract_substitution_substitution;
 }
-std::shared_ptr<uml::Association> UMLPackageImpl::get_UML_A_conveyed_conveyingFlow()
+const std::shared_ptr<uml::Association>& UMLPackageImpl::get_UML_A_conveyed_conveyingFlow()
 {
 	return uML_A_conveyed_conveyingFlow;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_A_conveyed_conveyingFlow_conveyingFlow()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_A_conveyed_conveyingFlow_conveyingFlow()
 {
 	return uML_A_conveyed_conveyingFlow_conveyingFlow;
 }
-std::shared_ptr<uml::Association> UMLPackageImpl::get_UML_A_covered_coveredBy()
+const std::shared_ptr<uml::Association>& UMLPackageImpl::get_UML_A_covered_coveredBy()
 {
 	return uML_A_covered_coveredBy;
 }
-std::shared_ptr<uml::Association> UMLPackageImpl::get_UML_A_covered_events()
+const std::shared_ptr<uml::Association>& UMLPackageImpl::get_UML_A_covered_events()
 {
 	return uML_A_covered_events;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_A_covered_events_events()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_A_covered_events_events()
 {
 	return uML_A_covered_events_events;
 }
-std::shared_ptr<uml::Association> UMLPackageImpl::get_UML_A_covered_stateInvariant()
+const std::shared_ptr<uml::Association>& UMLPackageImpl::get_UML_A_covered_stateInvariant()
 {
 	return uML_A_covered_stateInvariant;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_A_covered_stateInvariant_stateInvariant()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_A_covered_stateInvariant_stateInvariant()
 {
 	return uML_A_covered_stateInvariant_stateInvariant;
 }
-std::shared_ptr<uml::Association> UMLPackageImpl::get_UML_A_decider_clause()
+const std::shared_ptr<uml::Association>& UMLPackageImpl::get_UML_A_decider_clause()
 {
 	return uML_A_decider_clause;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_A_decider_clause_clause()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_A_decider_clause_clause()
 {
 	return uML_A_decider_clause_clause;
 }
-std::shared_ptr<uml::Association> UMLPackageImpl::get_UML_A_decider_loopNode()
+const std::shared_ptr<uml::Association>& UMLPackageImpl::get_UML_A_decider_loopNode()
 {
 	return uML_A_decider_loopNode;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_A_decider_loopNode_loopNode()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_A_decider_loopNode_loopNode()
 {
 	return uML_A_decider_loopNode_loopNode;
 }
-std::shared_ptr<uml::Association> UMLPackageImpl::get_UML_A_decisionInputFlow_decisionNode()
+const std::shared_ptr<uml::Association>& UMLPackageImpl::get_UML_A_decisionInputFlow_decisionNode()
 {
 	return uML_A_decisionInputFlow_decisionNode;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_A_decisionInputFlow_decisionNode_decisionNode()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_A_decisionInputFlow_decisionNode_decisionNode()
 {
 	return uML_A_decisionInputFlow_decisionNode_decisionNode;
 }
-std::shared_ptr<uml::Association> UMLPackageImpl::get_UML_A_decisionInput_decisionNode()
+const std::shared_ptr<uml::Association>& UMLPackageImpl::get_UML_A_decisionInput_decisionNode()
 {
 	return uML_A_decisionInput_decisionNode;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_A_decisionInput_decisionNode_decisionNode()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_A_decisionInput_decisionNode_decisionNode()
 {
 	return uML_A_decisionInput_decisionNode_decisionNode;
 }
-std::shared_ptr<uml::Association> UMLPackageImpl::get_UML_A_decomposedAs_lifeline()
+const std::shared_ptr<uml::Association>& UMLPackageImpl::get_UML_A_decomposedAs_lifeline()
 {
 	return uML_A_decomposedAs_lifeline;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_A_decomposedAs_lifeline_lifeline()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_A_decomposedAs_lifeline_lifeline()
 {
 	return uML_A_decomposedAs_lifeline_lifeline;
 }
-std::shared_ptr<uml::Association> UMLPackageImpl::get_UML_A_defaultValue_owningParameter()
+const std::shared_ptr<uml::Association>& UMLPackageImpl::get_UML_A_defaultValue_owningParameter()
 {
 	return uML_A_defaultValue_owningParameter;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_A_defaultValue_owningParameter_owningParameter()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_A_defaultValue_owningParameter_owningParameter()
 {
 	return uML_A_defaultValue_owningParameter_owningParameter;
 }
-std::shared_ptr<uml::Association> UMLPackageImpl::get_UML_A_defaultValue_owningProperty()
+const std::shared_ptr<uml::Association>& UMLPackageImpl::get_UML_A_defaultValue_owningProperty()
 {
 	return uML_A_defaultValue_owningProperty;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_A_defaultValue_owningProperty_owningProperty()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_A_defaultValue_owningProperty_owningProperty()
 {
 	return uML_A_defaultValue_owningProperty_owningProperty;
 }
-std::shared_ptr<uml::Association> UMLPackageImpl::get_UML_A_default_templateParameter()
+const std::shared_ptr<uml::Association>& UMLPackageImpl::get_UML_A_default_templateParameter()
 {
 	return uML_A_default_templateParameter;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_A_default_templateParameter_templateParameter()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_A_default_templateParameter_templateParameter()
 {
 	return uML_A_default_templateParameter_templateParameter;
 }
-std::shared_ptr<uml::Association> UMLPackageImpl::get_UML_A_deferrableTrigger_state()
+const std::shared_ptr<uml::Association>& UMLPackageImpl::get_UML_A_deferrableTrigger_state()
 {
 	return uML_A_deferrableTrigger_state;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_A_deferrableTrigger_state_state()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_A_deferrableTrigger_state_state()
 {
 	return uML_A_deferrableTrigger_state_state;
 }
-std::shared_ptr<uml::Association> UMLPackageImpl::get_UML_A_definingEnd_connectorEnd()
+const std::shared_ptr<uml::Association>& UMLPackageImpl::get_UML_A_definingEnd_connectorEnd()
 {
 	return uML_A_definingEnd_connectorEnd;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_A_definingEnd_connectorEnd_connectorEnd()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_A_definingEnd_connectorEnd_connectorEnd()
 {
 	return uML_A_definingEnd_connectorEnd_connectorEnd;
 }
-std::shared_ptr<uml::Association> UMLPackageImpl::get_UML_A_definingFeature_slot()
+const std::shared_ptr<uml::Association>& UMLPackageImpl::get_UML_A_definingFeature_slot()
 {
 	return uML_A_definingFeature_slot;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_A_definingFeature_slot_slot()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_A_definingFeature_slot_slot()
 {
 	return uML_A_definingFeature_slot_slot;
 }
-std::shared_ptr<uml::Association> UMLPackageImpl::get_UML_A_deployedArtifact_deploymentForArtifact()
+const std::shared_ptr<uml::Association>& UMLPackageImpl::get_UML_A_deployedArtifact_deploymentForArtifact()
 {
 	return uML_A_deployedArtifact_deploymentForArtifact;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_A_deployedArtifact_deploymentForArtifact_deploymentForArtifact()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_A_deployedArtifact_deploymentForArtifact_deploymentForArtifact()
 {
 	return uML_A_deployedArtifact_deploymentForArtifact_deploymentForArtifact;
 }
-std::shared_ptr<uml::Association> UMLPackageImpl::get_UML_A_deployedElement_deploymentTarget()
+const std::shared_ptr<uml::Association>& UMLPackageImpl::get_UML_A_deployedElement_deploymentTarget()
 {
 	return uML_A_deployedElement_deploymentTarget;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_A_deployedElement_deploymentTarget_deploymentTarget()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_A_deployedElement_deploymentTarget_deploymentTarget()
 {
 	return uML_A_deployedElement_deploymentTarget_deploymentTarget;
 }
-std::shared_ptr<uml::Association> UMLPackageImpl::get_UML_A_deployment_location()
+const std::shared_ptr<uml::Association>& UMLPackageImpl::get_UML_A_deployment_location()
 {
 	return uML_A_deployment_location;
 }
-std::shared_ptr<uml::Association> UMLPackageImpl::get_UML_A_destroyAt_linkEndDestructionData()
+const std::shared_ptr<uml::Association>& UMLPackageImpl::get_UML_A_destroyAt_linkEndDestructionData()
 {
 	return uML_A_destroyAt_linkEndDestructionData;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_A_destroyAt_linkEndDestructionData_linkEndDestructionData()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_A_destroyAt_linkEndDestructionData_linkEndDestructionData()
 {
 	return uML_A_destroyAt_linkEndDestructionData_linkEndDestructionData;
 }
-std::shared_ptr<uml::Association> UMLPackageImpl::get_UML_A_doActivity_state()
+const std::shared_ptr<uml::Association>& UMLPackageImpl::get_UML_A_doActivity_state()
 {
 	return uML_A_doActivity_state;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_A_doActivity_state_state()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_A_doActivity_state_state()
 {
 	return uML_A_doActivity_state_state;
 }
-std::shared_ptr<uml::Association> UMLPackageImpl::get_UML_A_edge_activity()
+const std::shared_ptr<uml::Association>& UMLPackageImpl::get_UML_A_edge_activity()
 {
 	return uML_A_edge_activity;
 }
-std::shared_ptr<uml::Association> UMLPackageImpl::get_UML_A_edge_inPartition()
+const std::shared_ptr<uml::Association>& UMLPackageImpl::get_UML_A_edge_inPartition()
 {
 	return uML_A_edge_inPartition;
 }
-std::shared_ptr<uml::Association> UMLPackageImpl::get_UML_A_edge_inStructuredNode()
+const std::shared_ptr<uml::Association>& UMLPackageImpl::get_UML_A_edge_inStructuredNode()
 {
 	return uML_A_edge_inStructuredNode;
 }
-std::shared_ptr<uml::Association> UMLPackageImpl::get_UML_A_effect_transition()
+const std::shared_ptr<uml::Association>& UMLPackageImpl::get_UML_A_effect_transition()
 {
 	return uML_A_effect_transition;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_A_effect_transition_transition()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_A_effect_transition_transition()
 {
 	return uML_A_effect_transition_transition;
 }
-std::shared_ptr<uml::Association> UMLPackageImpl::get_UML_A_elementImport_importingNamespace()
+const std::shared_ptr<uml::Association>& UMLPackageImpl::get_UML_A_elementImport_importingNamespace()
 {
 	return uML_A_elementImport_importingNamespace;
 }
-std::shared_ptr<uml::Association> UMLPackageImpl::get_UML_A_endData_createLinkAction()
+const std::shared_ptr<uml::Association>& UMLPackageImpl::get_UML_A_endData_createLinkAction()
 {
 	return uML_A_endData_createLinkAction;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_A_endData_createLinkAction_createLinkAction()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_A_endData_createLinkAction_createLinkAction()
 {
 	return uML_A_endData_createLinkAction_createLinkAction;
 }
-std::shared_ptr<uml::Association> UMLPackageImpl::get_UML_A_endData_destroyLinkAction()
+const std::shared_ptr<uml::Association>& UMLPackageImpl::get_UML_A_endData_destroyLinkAction()
 {
 	return uML_A_endData_destroyLinkAction;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_A_endData_destroyLinkAction_destroyLinkAction()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_A_endData_destroyLinkAction_destroyLinkAction()
 {
 	return uML_A_endData_destroyLinkAction_destroyLinkAction;
 }
-std::shared_ptr<uml::Association> UMLPackageImpl::get_UML_A_endData_linkAction()
+const std::shared_ptr<uml::Association>& UMLPackageImpl::get_UML_A_endData_linkAction()
 {
 	return uML_A_endData_linkAction;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_A_endData_linkAction_linkAction()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_A_endData_linkAction_linkAction()
 {
 	return uML_A_endData_linkAction_linkAction;
 }
-std::shared_ptr<uml::Association> UMLPackageImpl::get_UML_A_endType_association()
+const std::shared_ptr<uml::Association>& UMLPackageImpl::get_UML_A_endType_association()
 {
 	return uML_A_endType_association;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_A_endType_association_association()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_A_endType_association_association()
 {
 	return uML_A_endType_association_association;
 }
-std::shared_ptr<uml::Association> UMLPackageImpl::get_UML_A_end_connector()
+const std::shared_ptr<uml::Association>& UMLPackageImpl::get_UML_A_end_connector()
 {
 	return uML_A_end_connector;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_A_end_connector_connector()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_A_end_connector_connector()
 {
 	return uML_A_end_connector_connector;
 }
-std::shared_ptr<uml::Association> UMLPackageImpl::get_UML_A_end_linkEndData()
+const std::shared_ptr<uml::Association>& UMLPackageImpl::get_UML_A_end_linkEndData()
 {
 	return uML_A_end_linkEndData;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_A_end_linkEndData_linkEndData()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_A_end_linkEndData_linkEndData()
 {
 	return uML_A_end_linkEndData_linkEndData;
 }
-std::shared_ptr<uml::Association> UMLPackageImpl::get_UML_A_end_readLinkObjectEndAction()
+const std::shared_ptr<uml::Association>& UMLPackageImpl::get_UML_A_end_readLinkObjectEndAction()
 {
 	return uML_A_end_readLinkObjectEndAction;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_A_end_readLinkObjectEndAction_readLinkObjectEndAction()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_A_end_readLinkObjectEndAction_readLinkObjectEndAction()
 {
 	return uML_A_end_readLinkObjectEndAction_readLinkObjectEndAction;
 }
-std::shared_ptr<uml::Association> UMLPackageImpl::get_UML_A_end_role()
+const std::shared_ptr<uml::Association>& UMLPackageImpl::get_UML_A_end_role()
 {
 	return uML_A_end_role;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_A_end_role_end()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_A_end_role_end()
 {
 	return uML_A_end_role_end;
 }
-std::shared_ptr<uml::Association> UMLPackageImpl::get_UML_A_entry_connectionPointReference()
+const std::shared_ptr<uml::Association>& UMLPackageImpl::get_UML_A_entry_connectionPointReference()
 {
 	return uML_A_entry_connectionPointReference;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_A_entry_connectionPointReference_connectionPointReference()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_A_entry_connectionPointReference_connectionPointReference()
 {
 	return uML_A_entry_connectionPointReference_connectionPointReference;
 }
-std::shared_ptr<uml::Association> UMLPackageImpl::get_UML_A_entry_state()
+const std::shared_ptr<uml::Association>& UMLPackageImpl::get_UML_A_entry_state()
 {
 	return uML_A_entry_state;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_A_entry_state_state()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_A_entry_state_state()
 {
 	return uML_A_entry_state_state;
 }
-std::shared_ptr<uml::Association> UMLPackageImpl::get_UML_A_event_durationObservation()
+const std::shared_ptr<uml::Association>& UMLPackageImpl::get_UML_A_event_durationObservation()
 {
 	return uML_A_event_durationObservation;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_A_event_durationObservation_durationObservation()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_A_event_durationObservation_durationObservation()
 {
 	return uML_A_event_durationObservation_durationObservation;
 }
-std::shared_ptr<uml::Association> UMLPackageImpl::get_UML_A_event_timeObservation()
+const std::shared_ptr<uml::Association>& UMLPackageImpl::get_UML_A_event_timeObservation()
 {
 	return uML_A_event_timeObservation;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_A_event_timeObservation_timeObservation()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_A_event_timeObservation_timeObservation()
 {
 	return uML_A_event_timeObservation_timeObservation;
 }
-std::shared_ptr<uml::Association> UMLPackageImpl::get_UML_A_event_trigger()
+const std::shared_ptr<uml::Association>& UMLPackageImpl::get_UML_A_event_trigger()
 {
 	return uML_A_event_trigger;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_A_event_trigger_trigger()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_A_event_trigger_trigger()
 {
 	return uML_A_event_trigger_trigger;
 }
-std::shared_ptr<uml::Association> UMLPackageImpl::get_UML_A_exceptionInput_exceptionHandler()
+const std::shared_ptr<uml::Association>& UMLPackageImpl::get_UML_A_exceptionInput_exceptionHandler()
 {
 	return uML_A_exceptionInput_exceptionHandler;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_A_exceptionInput_exceptionHandler_exceptionHandler()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_A_exceptionInput_exceptionHandler_exceptionHandler()
 {
 	return uML_A_exceptionInput_exceptionHandler_exceptionHandler;
 }
-std::shared_ptr<uml::Association> UMLPackageImpl::get_UML_A_exceptionType_exceptionHandler()
+const std::shared_ptr<uml::Association>& UMLPackageImpl::get_UML_A_exceptionType_exceptionHandler()
 {
 	return uML_A_exceptionType_exceptionHandler;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_A_exceptionType_exceptionHandler_exceptionHandler()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_A_exceptionType_exceptionHandler_exceptionHandler()
 {
 	return uML_A_exceptionType_exceptionHandler_exceptionHandler;
 }
-std::shared_ptr<uml::Association> UMLPackageImpl::get_UML_A_exception_raiseExceptionAction()
+const std::shared_ptr<uml::Association>& UMLPackageImpl::get_UML_A_exception_raiseExceptionAction()
 {
 	return uML_A_exception_raiseExceptionAction;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_A_exception_raiseExceptionAction_raiseExceptionAction()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_A_exception_raiseExceptionAction_raiseExceptionAction()
 {
 	return uML_A_exception_raiseExceptionAction_raiseExceptionAction;
 }
-std::shared_ptr<uml::Association> UMLPackageImpl::get_UML_A_executableNode_sequenceNode()
+const std::shared_ptr<uml::Association>& UMLPackageImpl::get_UML_A_executableNode_sequenceNode()
 {
 	return uML_A_executableNode_sequenceNode;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_A_executableNode_sequenceNode_sequenceNode()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_A_executableNode_sequenceNode_sequenceNode()
 {
 	return uML_A_executableNode_sequenceNode_sequenceNode;
 }
-std::shared_ptr<uml::Association> UMLPackageImpl::get_UML_A_execution_executionOccurrenceSpecification()
+const std::shared_ptr<uml::Association>& UMLPackageImpl::get_UML_A_execution_executionOccurrenceSpecification()
 {
 	return uML_A_execution_executionOccurrenceSpecification;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_A_execution_executionOccurrenceSpecification_executionOccurrenceSpecification()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_A_execution_executionOccurrenceSpecification_executionOccurrenceSpecification()
 {
 	return uML_A_execution_executionOccurrenceSpecification_executionOccurrenceSpecification;
 }
-std::shared_ptr<uml::Association> UMLPackageImpl::get_UML_A_exit_connectionPointReference()
+const std::shared_ptr<uml::Association>& UMLPackageImpl::get_UML_A_exit_connectionPointReference()
 {
 	return uML_A_exit_connectionPointReference;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_A_exit_connectionPointReference_connectionPointReference()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_A_exit_connectionPointReference_connectionPointReference()
 {
 	return uML_A_exit_connectionPointReference_connectionPointReference;
 }
-std::shared_ptr<uml::Association> UMLPackageImpl::get_UML_A_exit_state()
+const std::shared_ptr<uml::Association>& UMLPackageImpl::get_UML_A_exit_state()
 {
 	return uML_A_exit_state;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_A_exit_state_state()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_A_exit_state_state()
 {
 	return uML_A_exit_state_state;
 }
-std::shared_ptr<uml::Association> UMLPackageImpl::get_UML_A_expr_duration()
+const std::shared_ptr<uml::Association>& UMLPackageImpl::get_UML_A_expr_duration()
 {
 	return uML_A_expr_duration;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_A_expr_duration_duration()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_A_expr_duration_duration()
 {
 	return uML_A_expr_duration_duration;
 }
-std::shared_ptr<uml::Association> UMLPackageImpl::get_UML_A_expr_timeExpression()
+const std::shared_ptr<uml::Association>& UMLPackageImpl::get_UML_A_expr_timeExpression()
 {
 	return uML_A_expr_timeExpression;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_A_expr_timeExpression_timeExpression()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_A_expr_timeExpression_timeExpression()
 {
 	return uML_A_expr_timeExpression_timeExpression;
 }
-std::shared_ptr<uml::Association> UMLPackageImpl::get_UML_A_extend_extension()
+const std::shared_ptr<uml::Association>& UMLPackageImpl::get_UML_A_extend_extension()
 {
 	return uML_A_extend_extension;
 }
-std::shared_ptr<uml::Association> UMLPackageImpl::get_UML_A_extendedCase_extend()
+const std::shared_ptr<uml::Association>& UMLPackageImpl::get_UML_A_extendedCase_extend()
 {
 	return uML_A_extendedCase_extend;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_A_extendedCase_extend_extend()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_A_extendedCase_extend_extend()
 {
 	return uML_A_extendedCase_extend_extend;
 }
-std::shared_ptr<uml::Association> UMLPackageImpl::get_UML_A_extendedRegion_region()
+const std::shared_ptr<uml::Association>& UMLPackageImpl::get_UML_A_extendedRegion_region()
 {
 	return uML_A_extendedRegion_region;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_A_extendedRegion_region_region()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_A_extendedRegion_region_region()
 {
 	return uML_A_extendedRegion_region_region;
 }
-std::shared_ptr<uml::Association> UMLPackageImpl::get_UML_A_extendedSignature_redefinableTemplateSignature()
+const std::shared_ptr<uml::Association>& UMLPackageImpl::get_UML_A_extendedSignature_redefinableTemplateSignature()
 {
 	return uML_A_extendedSignature_redefinableTemplateSignature;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_A_extendedSignature_redefinableTemplateSignature_redefinableTemplateSignature()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_A_extendedSignature_redefinableTemplateSignature_redefinableTemplateSignature()
 {
 	return uML_A_extendedSignature_redefinableTemplateSignature_redefinableTemplateSignature;
 }
-std::shared_ptr<uml::Association> UMLPackageImpl::get_UML_A_extendedStateMachine_stateMachine()
+const std::shared_ptr<uml::Association>& UMLPackageImpl::get_UML_A_extendedStateMachine_stateMachine()
 {
 	return uML_A_extendedStateMachine_stateMachine;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_A_extendedStateMachine_stateMachine_stateMachine()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_A_extendedStateMachine_stateMachine_stateMachine()
 {
 	return uML_A_extendedStateMachine_stateMachine_stateMachine;
 }
-std::shared_ptr<uml::Association> UMLPackageImpl::get_UML_A_extensionLocation_extension()
+const std::shared_ptr<uml::Association>& UMLPackageImpl::get_UML_A_extensionLocation_extension()
 {
 	return uML_A_extensionLocation_extension;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_A_extensionLocation_extension_extension()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_A_extensionLocation_extension_extension()
 {
 	return uML_A_extensionLocation_extension_extension;
 }
-std::shared_ptr<uml::Association> UMLPackageImpl::get_UML_A_extensionPoint_useCase()
+const std::shared_ptr<uml::Association>& UMLPackageImpl::get_UML_A_extensionPoint_useCase()
 {
 	return uML_A_extensionPoint_useCase;
 }
-std::shared_ptr<uml::Association> UMLPackageImpl::get_UML_A_extension_metaclass()
+const std::shared_ptr<uml::Association>& UMLPackageImpl::get_UML_A_extension_metaclass()
 {
 	return uML_A_extension_metaclass;
 }
-std::shared_ptr<uml::Association> UMLPackageImpl::get_UML_A_feature_featuringClassifier()
+const std::shared_ptr<uml::Association>& UMLPackageImpl::get_UML_A_feature_featuringClassifier()
 {
 	return uML_A_feature_featuringClassifier;
 }
-std::shared_ptr<uml::Association> UMLPackageImpl::get_UML_A_finish_executionSpecification()
+const std::shared_ptr<uml::Association>& UMLPackageImpl::get_UML_A_finish_executionSpecification()
 {
 	return uML_A_finish_executionSpecification;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_A_finish_executionSpecification_executionSpecification()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_A_finish_executionSpecification_executionSpecification()
 {
 	return uML_A_finish_executionSpecification_executionSpecification;
 }
-std::shared_ptr<uml::Association> UMLPackageImpl::get_UML_A_first_testIdentityAction()
+const std::shared_ptr<uml::Association>& UMLPackageImpl::get_UML_A_first_testIdentityAction()
 {
 	return uML_A_first_testIdentityAction;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_A_first_testIdentityAction_testIdentityAction()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_A_first_testIdentityAction_testIdentityAction()
 {
 	return uML_A_first_testIdentityAction_testIdentityAction;
 }
-std::shared_ptr<uml::Association> UMLPackageImpl::get_UML_A_formalGate_interaction()
+const std::shared_ptr<uml::Association>& UMLPackageImpl::get_UML_A_formalGate_interaction()
 {
 	return uML_A_formalGate_interaction;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_A_formalGate_interaction_interaction()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_A_formalGate_interaction_interaction()
 {
 	return uML_A_formalGate_interaction_interaction;
 }
-std::shared_ptr<uml::Association> UMLPackageImpl::get_UML_A_formal_templateParameterSubstitution()
+const std::shared_ptr<uml::Association>& UMLPackageImpl::get_UML_A_formal_templateParameterSubstitution()
 {
 	return uML_A_formal_templateParameterSubstitution;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_A_formal_templateParameterSubstitution_templateParameterSubstitution()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_A_formal_templateParameterSubstitution_templateParameterSubstitution()
 {
 	return uML_A_formal_templateParameterSubstitution_templateParameterSubstitution;
 }
-std::shared_ptr<uml::Association> UMLPackageImpl::get_UML_A_fragment_enclosingInteraction()
+const std::shared_ptr<uml::Association>& UMLPackageImpl::get_UML_A_fragment_enclosingInteraction()
 {
 	return uML_A_fragment_enclosingInteraction;
 }
-std::shared_ptr<uml::Association> UMLPackageImpl::get_UML_A_fragment_enclosingOperand()
+const std::shared_ptr<uml::Association>& UMLPackageImpl::get_UML_A_fragment_enclosingOperand()
 {
 	return uML_A_fragment_enclosingOperand;
 }
-std::shared_ptr<uml::Association> UMLPackageImpl::get_UML_A_fromAction_actionInputPin()
+const std::shared_ptr<uml::Association>& UMLPackageImpl::get_UML_A_fromAction_actionInputPin()
 {
 	return uML_A_fromAction_actionInputPin;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_A_fromAction_actionInputPin_actionInputPin()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_A_fromAction_actionInputPin_actionInputPin()
 {
 	return uML_A_fromAction_actionInputPin_actionInputPin;
 }
-std::shared_ptr<uml::Association> UMLPackageImpl::get_UML_A_generalMachine_protocolConformance()
+const std::shared_ptr<uml::Association>& UMLPackageImpl::get_UML_A_generalMachine_protocolConformance()
 {
 	return uML_A_generalMachine_protocolConformance;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_A_generalMachine_protocolConformance_protocolConformance()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_A_generalMachine_protocolConformance_protocolConformance()
 {
 	return uML_A_generalMachine_protocolConformance_protocolConformance;
 }
-std::shared_ptr<uml::Association> UMLPackageImpl::get_UML_A_generalOrdering_interactionFragment()
+const std::shared_ptr<uml::Association>& UMLPackageImpl::get_UML_A_generalOrdering_interactionFragment()
 {
 	return uML_A_generalOrdering_interactionFragment;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_A_generalOrdering_interactionFragment_interactionFragment()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_A_generalOrdering_interactionFragment_interactionFragment()
 {
 	return uML_A_generalOrdering_interactionFragment_interactionFragment;
 }
-std::shared_ptr<uml::Association> UMLPackageImpl::get_UML_A_general_classifier()
+const std::shared_ptr<uml::Association>& UMLPackageImpl::get_UML_A_general_classifier()
 {
 	return uML_A_general_classifier;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_A_general_classifier_classifier()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_A_general_classifier_classifier()
 {
 	return uML_A_general_classifier_classifier;
 }
-std::shared_ptr<uml::Association> UMLPackageImpl::get_UML_A_general_generalization()
+const std::shared_ptr<uml::Association>& UMLPackageImpl::get_UML_A_general_generalization()
 {
 	return uML_A_general_generalization;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_A_general_generalization_generalization()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_A_general_generalization_generalization()
 {
 	return uML_A_general_generalization_generalization;
 }
-std::shared_ptr<uml::Association> UMLPackageImpl::get_UML_A_generalizationSet_generalization()
+const std::shared_ptr<uml::Association>& UMLPackageImpl::get_UML_A_generalizationSet_generalization()
 {
 	return uML_A_generalizationSet_generalization;
 }
-std::shared_ptr<uml::Association> UMLPackageImpl::get_UML_A_generalization_specific()
+const std::shared_ptr<uml::Association>& UMLPackageImpl::get_UML_A_generalization_specific()
 {
 	return uML_A_generalization_specific;
 }
-std::shared_ptr<uml::Association> UMLPackageImpl::get_UML_A_group_inActivity()
+const std::shared_ptr<uml::Association>& UMLPackageImpl::get_UML_A_group_inActivity()
 {
 	return uML_A_group_inActivity;
 }
-std::shared_ptr<uml::Association> UMLPackageImpl::get_UML_A_guard_activityEdge()
+const std::shared_ptr<uml::Association>& UMLPackageImpl::get_UML_A_guard_activityEdge()
 {
 	return uML_A_guard_activityEdge;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_A_guard_activityEdge_activityEdge()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_A_guard_activityEdge_activityEdge()
 {
 	return uML_A_guard_activityEdge_activityEdge;
 }
-std::shared_ptr<uml::Association> UMLPackageImpl::get_UML_A_guard_interactionOperand()
+const std::shared_ptr<uml::Association>& UMLPackageImpl::get_UML_A_guard_interactionOperand()
 {
 	return uML_A_guard_interactionOperand;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_A_guard_interactionOperand_interactionOperand()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_A_guard_interactionOperand_interactionOperand()
 {
 	return uML_A_guard_interactionOperand_interactionOperand;
 }
-std::shared_ptr<uml::Association> UMLPackageImpl::get_UML_A_guard_transition()
+const std::shared_ptr<uml::Association>& UMLPackageImpl::get_UML_A_guard_transition()
 {
 	return uML_A_guard_transition;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_A_guard_transition_transition()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_A_guard_transition_transition()
 {
 	return uML_A_guard_transition_transition;
 }
-std::shared_ptr<uml::Association> UMLPackageImpl::get_UML_A_handlerBody_exceptionHandler()
+const std::shared_ptr<uml::Association>& UMLPackageImpl::get_UML_A_handlerBody_exceptionHandler()
 {
 	return uML_A_handlerBody_exceptionHandler;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_A_handlerBody_exceptionHandler_exceptionHandler()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_A_handlerBody_exceptionHandler_exceptionHandler()
 {
 	return uML_A_handlerBody_exceptionHandler_exceptionHandler;
 }
-std::shared_ptr<uml::Association> UMLPackageImpl::get_UML_A_handler_protectedNode()
+const std::shared_ptr<uml::Association>& UMLPackageImpl::get_UML_A_handler_protectedNode()
 {
 	return uML_A_handler_protectedNode;
 }
-std::shared_ptr<uml::Association> UMLPackageImpl::get_UML_A_icon_stereotype()
+const std::shared_ptr<uml::Association>& UMLPackageImpl::get_UML_A_icon_stereotype()
 {
 	return uML_A_icon_stereotype;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_A_icon_stereotype_stereotype()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_A_icon_stereotype_stereotype()
 {
 	return uML_A_icon_stereotype_stereotype;
 }
-std::shared_ptr<uml::Association> UMLPackageImpl::get_UML_A_importedElement_import()
+const std::shared_ptr<uml::Association>& UMLPackageImpl::get_UML_A_importedElement_import()
 {
 	return uML_A_importedElement_import;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_A_importedElement_import_import()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_A_importedElement_import_import()
 {
 	return uML_A_importedElement_import_import;
 }
-std::shared_ptr<uml::Association> UMLPackageImpl::get_UML_A_importedMember_namespace()
+const std::shared_ptr<uml::Association>& UMLPackageImpl::get_UML_A_importedMember_namespace()
 {
 	return uML_A_importedMember_namespace;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_A_importedMember_namespace_namespace()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_A_importedMember_namespace_namespace()
 {
 	return uML_A_importedMember_namespace_namespace;
 }
-std::shared_ptr<uml::Association> UMLPackageImpl::get_UML_A_importedPackage_packageImport()
+const std::shared_ptr<uml::Association>& UMLPackageImpl::get_UML_A_importedPackage_packageImport()
 {
 	return uML_A_importedPackage_packageImport;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_A_importedPackage_packageImport_packageImport()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_A_importedPackage_packageImport_packageImport()
 {
 	return uML_A_importedPackage_packageImport_packageImport;
 }
-std::shared_ptr<uml::Association> UMLPackageImpl::get_UML_A_inInterruptibleRegion_node()
+const std::shared_ptr<uml::Association>& UMLPackageImpl::get_UML_A_inInterruptibleRegion_node()
 {
 	return uML_A_inInterruptibleRegion_node;
 }
-std::shared_ptr<uml::Association> UMLPackageImpl::get_UML_A_inPartition_node()
+const std::shared_ptr<uml::Association>& UMLPackageImpl::get_UML_A_inPartition_node()
 {
 	return uML_A_inPartition_node;
 }
-std::shared_ptr<uml::Association> UMLPackageImpl::get_UML_A_inState_objectNode()
+const std::shared_ptr<uml::Association>& UMLPackageImpl::get_UML_A_inState_objectNode()
 {
 	return uML_A_inState_objectNode;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_A_inState_objectNode_objectNode()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_A_inState_objectNode_objectNode()
 {
 	return uML_A_inState_objectNode_objectNode;
 }
-std::shared_ptr<uml::Association> UMLPackageImpl::get_UML_A_include_includingCase()
+const std::shared_ptr<uml::Association>& UMLPackageImpl::get_UML_A_include_includingCase()
 {
 	return uML_A_include_includingCase;
 }
-std::shared_ptr<uml::Association> UMLPackageImpl::get_UML_A_incoming_target_node()
+const std::shared_ptr<uml::Association>& UMLPackageImpl::get_UML_A_incoming_target_node()
 {
 	return uML_A_incoming_target_node;
 }
-std::shared_ptr<uml::Association> UMLPackageImpl::get_UML_A_incoming_target_vertex()
+const std::shared_ptr<uml::Association>& UMLPackageImpl::get_UML_A_incoming_target_vertex()
 {
 	return uML_A_incoming_target_vertex;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_A_incoming_target_vertex_incoming()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_A_incoming_target_vertex_incoming()
 {
 	return uML_A_incoming_target_vertex_incoming;
 }
-std::shared_ptr<uml::Association> UMLPackageImpl::get_UML_A_informationSource_informationFlow()
+const std::shared_ptr<uml::Association>& UMLPackageImpl::get_UML_A_informationSource_informationFlow()
 {
 	return uML_A_informationSource_informationFlow;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_A_informationSource_informationFlow_informationFlow()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_A_informationSource_informationFlow_informationFlow()
 {
 	return uML_A_informationSource_informationFlow_informationFlow;
 }
-std::shared_ptr<uml::Association> UMLPackageImpl::get_UML_A_informationTarget_informationFlow()
+const std::shared_ptr<uml::Association>& UMLPackageImpl::get_UML_A_informationTarget_informationFlow()
 {
 	return uML_A_informationTarget_informationFlow;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_A_informationTarget_informationFlow_informationFlow()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_A_informationTarget_informationFlow_informationFlow()
 {
 	return uML_A_informationTarget_informationFlow_informationFlow;
 }
-std::shared_ptr<uml::Association> UMLPackageImpl::get_UML_A_inheritedMember_inheritingClassifier()
+const std::shared_ptr<uml::Association>& UMLPackageImpl::get_UML_A_inheritedMember_inheritingClassifier()
 {
 	return uML_A_inheritedMember_inheritingClassifier;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_A_inheritedMember_inheritingClassifier_inheritingClassifier()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_A_inheritedMember_inheritingClassifier_inheritingClassifier()
 {
 	return uML_A_inheritedMember_inheritingClassifier_inheritingClassifier;
 }
-std::shared_ptr<uml::Association> UMLPackageImpl::get_UML_A_inheritedParameter_redefinableTemplateSignature()
+const std::shared_ptr<uml::Association>& UMLPackageImpl::get_UML_A_inheritedParameter_redefinableTemplateSignature()
 {
 	return uML_A_inheritedParameter_redefinableTemplateSignature;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_A_inheritedParameter_redefinableTemplateSignature_redefinableTemplateSignature()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_A_inheritedParameter_redefinableTemplateSignature_redefinableTemplateSignature()
 {
 	return uML_A_inheritedParameter_redefinableTemplateSignature_redefinableTemplateSignature;
 }
-std::shared_ptr<uml::Association> UMLPackageImpl::get_UML_A_inputElement_regionAsInput()
+const std::shared_ptr<uml::Association>& UMLPackageImpl::get_UML_A_inputElement_regionAsInput()
 {
 	return uML_A_inputElement_regionAsInput;
 }
-std::shared_ptr<uml::Association> UMLPackageImpl::get_UML_A_inputValue_linkAction()
+const std::shared_ptr<uml::Association>& UMLPackageImpl::get_UML_A_inputValue_linkAction()
 {
 	return uML_A_inputValue_linkAction;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_A_inputValue_linkAction_linkAction()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_A_inputValue_linkAction_linkAction()
 {
 	return uML_A_inputValue_linkAction_linkAction;
 }
-std::shared_ptr<uml::Association> UMLPackageImpl::get_UML_A_inputValue_opaqueAction()
+const std::shared_ptr<uml::Association>& UMLPackageImpl::get_UML_A_inputValue_opaqueAction()
 {
 	return uML_A_inputValue_opaqueAction;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_A_inputValue_opaqueAction_opaqueAction()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_A_inputValue_opaqueAction_opaqueAction()
 {
 	return uML_A_inputValue_opaqueAction_opaqueAction;
 }
-std::shared_ptr<uml::Association> UMLPackageImpl::get_UML_A_input_action()
+const std::shared_ptr<uml::Association>& UMLPackageImpl::get_UML_A_input_action()
 {
 	return uML_A_input_action;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_A_input_action_action()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_A_input_action_action()
 {
 	return uML_A_input_action_action;
 }
-std::shared_ptr<uml::Association> UMLPackageImpl::get_UML_A_insertAt_addStructuralFeatureValueAction()
+const std::shared_ptr<uml::Association>& UMLPackageImpl::get_UML_A_insertAt_addStructuralFeatureValueAction()
 {
 	return uML_A_insertAt_addStructuralFeatureValueAction;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_A_insertAt_addStructuralFeatureValueAction_addStructuralFeatureValueAction()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_A_insertAt_addStructuralFeatureValueAction_addStructuralFeatureValueAction()
 {
 	return uML_A_insertAt_addStructuralFeatureValueAction_addStructuralFeatureValueAction;
 }
-std::shared_ptr<uml::Association> UMLPackageImpl::get_UML_A_insertAt_addVariableValueAction()
+const std::shared_ptr<uml::Association>& UMLPackageImpl::get_UML_A_insertAt_addVariableValueAction()
 {
 	return uML_A_insertAt_addVariableValueAction;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_A_insertAt_addVariableValueAction_addVariableValueAction()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_A_insertAt_addVariableValueAction_addVariableValueAction()
 {
 	return uML_A_insertAt_addVariableValueAction_addVariableValueAction;
 }
-std::shared_ptr<uml::Association> UMLPackageImpl::get_UML_A_insertAt_linkEndCreationData()
+const std::shared_ptr<uml::Association>& UMLPackageImpl::get_UML_A_insertAt_linkEndCreationData()
 {
 	return uML_A_insertAt_linkEndCreationData;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_A_insertAt_linkEndCreationData_linkEndCreationData()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_A_insertAt_linkEndCreationData_linkEndCreationData()
 {
 	return uML_A_insertAt_linkEndCreationData_linkEndCreationData;
 }
-std::shared_ptr<uml::Association> UMLPackageImpl::get_UML_A_instance_instanceValue()
+const std::shared_ptr<uml::Association>& UMLPackageImpl::get_UML_A_instance_instanceValue()
 {
 	return uML_A_instance_instanceValue;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_A_instance_instanceValue_instanceValue()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_A_instance_instanceValue_instanceValue()
 {
 	return uML_A_instance_instanceValue_instanceValue;
 }
-std::shared_ptr<uml::Association> UMLPackageImpl::get_UML_A_interfaceRealization_implementingClassifier()
+const std::shared_ptr<uml::Association>& UMLPackageImpl::get_UML_A_interfaceRealization_implementingClassifier()
 {
 	return uML_A_interfaceRealization_implementingClassifier;
 }
-std::shared_ptr<uml::Association> UMLPackageImpl::get_UML_A_interruptingEdge_interrupts()
+const std::shared_ptr<uml::Association>& UMLPackageImpl::get_UML_A_interruptingEdge_interrupts()
 {
 	return uML_A_interruptingEdge_interrupts;
 }
-std::shared_ptr<uml::Association> UMLPackageImpl::get_UML_A_invariant_stateInvariant()
+const std::shared_ptr<uml::Association>& UMLPackageImpl::get_UML_A_invariant_stateInvariant()
 {
 	return uML_A_invariant_stateInvariant;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_A_invariant_stateInvariant_stateInvariant()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_A_invariant_stateInvariant_stateInvariant()
 {
 	return uML_A_invariant_stateInvariant_stateInvariant;
 }
-std::shared_ptr<uml::Association> UMLPackageImpl::get_UML_A_joinSpec_joinNode()
+const std::shared_ptr<uml::Association>& UMLPackageImpl::get_UML_A_joinSpec_joinNode()
 {
 	return uML_A_joinSpec_joinNode;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_A_joinSpec_joinNode_joinNode()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_A_joinSpec_joinNode_joinNode()
 {
 	return uML_A_joinSpec_joinNode_joinNode;
 }
-std::shared_ptr<uml::Association> UMLPackageImpl::get_UML_A_lifeline_interaction()
+const std::shared_ptr<uml::Association>& UMLPackageImpl::get_UML_A_lifeline_interaction()
 {
 	return uML_A_lifeline_interaction;
 }
-std::shared_ptr<uml::Association> UMLPackageImpl::get_UML_A_localPostcondition_action()
+const std::shared_ptr<uml::Association>& UMLPackageImpl::get_UML_A_localPostcondition_action()
 {
 	return uML_A_localPostcondition_action;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_A_localPostcondition_action_action()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_A_localPostcondition_action_action()
 {
 	return uML_A_localPostcondition_action_action;
 }
-std::shared_ptr<uml::Association> UMLPackageImpl::get_UML_A_localPrecondition_action()
+const std::shared_ptr<uml::Association>& UMLPackageImpl::get_UML_A_localPrecondition_action()
 {
 	return uML_A_localPrecondition_action;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_A_localPrecondition_action_action()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_A_localPrecondition_action_action()
 {
 	return uML_A_localPrecondition_action_action;
 }
-std::shared_ptr<uml::Association> UMLPackageImpl::get_UML_A_loopVariableInput_loopNode()
+const std::shared_ptr<uml::Association>& UMLPackageImpl::get_UML_A_loopVariableInput_loopNode()
 {
 	return uML_A_loopVariableInput_loopNode;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_A_loopVariableInput_loopNode_loopNode()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_A_loopVariableInput_loopNode_loopNode()
 {
 	return uML_A_loopVariableInput_loopNode_loopNode;
 }
-std::shared_ptr<uml::Association> UMLPackageImpl::get_UML_A_loopVariable_loopNode()
+const std::shared_ptr<uml::Association>& UMLPackageImpl::get_UML_A_loopVariable_loopNode()
 {
 	return uML_A_loopVariable_loopNode;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_A_loopVariable_loopNode_loopNode()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_A_loopVariable_loopNode_loopNode()
 {
 	return uML_A_loopVariable_loopNode_loopNode;
 }
-std::shared_ptr<uml::Association> UMLPackageImpl::get_UML_A_lowerValue_owningLower()
+const std::shared_ptr<uml::Association>& UMLPackageImpl::get_UML_A_lowerValue_owningLower()
 {
 	return uML_A_lowerValue_owningLower;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_A_lowerValue_owningLower_owningLower()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_A_lowerValue_owningLower_owningLower()
 {
 	return uML_A_lowerValue_owningLower_owningLower;
 }
-std::shared_ptr<uml::Association> UMLPackageImpl::get_UML_A_manifestation_artifact()
+const std::shared_ptr<uml::Association>& UMLPackageImpl::get_UML_A_manifestation_artifact()
 {
 	return uML_A_manifestation_artifact;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_A_manifestation_artifact_artifact()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_A_manifestation_artifact_artifact()
 {
 	return uML_A_manifestation_artifact_artifact;
 }
-std::shared_ptr<uml::Association> UMLPackageImpl::get_UML_A_mapping_abstraction()
+const std::shared_ptr<uml::Association>& UMLPackageImpl::get_UML_A_mapping_abstraction()
 {
 	return uML_A_mapping_abstraction;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_A_mapping_abstraction_abstraction()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_A_mapping_abstraction_abstraction()
 {
 	return uML_A_mapping_abstraction_abstraction;
 }
-std::shared_ptr<uml::Association> UMLPackageImpl::get_UML_A_max_durationInterval()
+const std::shared_ptr<uml::Association>& UMLPackageImpl::get_UML_A_max_durationInterval()
 {
 	return uML_A_max_durationInterval;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_A_max_durationInterval_durationInterval()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_A_max_durationInterval_durationInterval()
 {
 	return uML_A_max_durationInterval_durationInterval;
 }
-std::shared_ptr<uml::Association> UMLPackageImpl::get_UML_A_max_interval()
+const std::shared_ptr<uml::Association>& UMLPackageImpl::get_UML_A_max_interval()
 {
 	return uML_A_max_interval;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_A_max_interval_interval()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_A_max_interval_interval()
 {
 	return uML_A_max_interval_interval;
 }
-std::shared_ptr<uml::Association> UMLPackageImpl::get_UML_A_max_timeInterval()
+const std::shared_ptr<uml::Association>& UMLPackageImpl::get_UML_A_max_timeInterval()
 {
 	return uML_A_max_timeInterval;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_A_max_timeInterval_timeInterval()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_A_max_timeInterval_timeInterval()
 {
 	return uML_A_max_timeInterval_timeInterval;
 }
-std::shared_ptr<uml::Association> UMLPackageImpl::get_UML_A_maxint_interactionConstraint()
+const std::shared_ptr<uml::Association>& UMLPackageImpl::get_UML_A_maxint_interactionConstraint()
 {
 	return uML_A_maxint_interactionConstraint;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_A_maxint_interactionConstraint_interactionConstraint()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_A_maxint_interactionConstraint_interactionConstraint()
 {
 	return uML_A_maxint_interactionConstraint_interactionConstraint;
 }
-std::shared_ptr<uml::Association> UMLPackageImpl::get_UML_A_memberEnd_association()
+const std::shared_ptr<uml::Association>& UMLPackageImpl::get_UML_A_memberEnd_association()
 {
 	return uML_A_memberEnd_association;
 }
-std::shared_ptr<uml::Association> UMLPackageImpl::get_UML_A_member_memberNamespace()
+const std::shared_ptr<uml::Association>& UMLPackageImpl::get_UML_A_member_memberNamespace()
 {
 	return uML_A_member_memberNamespace;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_A_member_memberNamespace_memberNamespace()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_A_member_memberNamespace_memberNamespace()
 {
 	return uML_A_member_memberNamespace_memberNamespace;
 }
-std::shared_ptr<uml::Association> UMLPackageImpl::get_UML_A_mergedPackage_packageMerge()
+const std::shared_ptr<uml::Association>& UMLPackageImpl::get_UML_A_mergedPackage_packageMerge()
 {
 	return uML_A_mergedPackage_packageMerge;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_A_mergedPackage_packageMerge_packageMerge()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_A_mergedPackage_packageMerge_packageMerge()
 {
 	return uML_A_mergedPackage_packageMerge_packageMerge;
 }
-std::shared_ptr<uml::Association> UMLPackageImpl::get_UML_A_message_considerIgnoreFragment()
+const std::shared_ptr<uml::Association>& UMLPackageImpl::get_UML_A_message_considerIgnoreFragment()
 {
 	return uML_A_message_considerIgnoreFragment;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_A_message_considerIgnoreFragment_considerIgnoreFragment()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_A_message_considerIgnoreFragment_considerIgnoreFragment()
 {
 	return uML_A_message_considerIgnoreFragment_considerIgnoreFragment;
 }
-std::shared_ptr<uml::Association> UMLPackageImpl::get_UML_A_message_interaction()
+const std::shared_ptr<uml::Association>& UMLPackageImpl::get_UML_A_message_interaction()
 {
 	return uML_A_message_interaction;
 }
-std::shared_ptr<uml::Association> UMLPackageImpl::get_UML_A_message_messageEnd()
+const std::shared_ptr<uml::Association>& UMLPackageImpl::get_UML_A_message_messageEnd()
 {
 	return uML_A_message_messageEnd;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_A_message_messageEnd_messageEnd()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_A_message_messageEnd_messageEnd()
 {
 	return uML_A_message_messageEnd_messageEnd;
 }
-std::shared_ptr<uml::Association> UMLPackageImpl::get_UML_A_metaclassReference_profile()
+const std::shared_ptr<uml::Association>& UMLPackageImpl::get_UML_A_metaclassReference_profile()
 {
 	return uML_A_metaclassReference_profile;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_A_metaclassReference_profile_profile()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_A_metaclassReference_profile_profile()
 {
 	return uML_A_metaclassReference_profile_profile;
 }
-std::shared_ptr<uml::Association> UMLPackageImpl::get_UML_A_metamodelReference_profile()
+const std::shared_ptr<uml::Association>& UMLPackageImpl::get_UML_A_metamodelReference_profile()
 {
 	return uML_A_metamodelReference_profile;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_A_metamodelReference_profile_profile()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_A_metamodelReference_profile_profile()
 {
 	return uML_A_metamodelReference_profile_profile;
 }
-std::shared_ptr<uml::Association> UMLPackageImpl::get_UML_A_method_specification()
+const std::shared_ptr<uml::Association>& UMLPackageImpl::get_UML_A_method_specification()
 {
 	return uML_A_method_specification;
 }
-std::shared_ptr<uml::Association> UMLPackageImpl::get_UML_A_min_durationInterval()
+const std::shared_ptr<uml::Association>& UMLPackageImpl::get_UML_A_min_durationInterval()
 {
 	return uML_A_min_durationInterval;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_A_min_durationInterval_durationInterval()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_A_min_durationInterval_durationInterval()
 {
 	return uML_A_min_durationInterval_durationInterval;
 }
-std::shared_ptr<uml::Association> UMLPackageImpl::get_UML_A_min_interval()
+const std::shared_ptr<uml::Association>& UMLPackageImpl::get_UML_A_min_interval()
 {
 	return uML_A_min_interval;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_A_min_interval_interval()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_A_min_interval_interval()
 {
 	return uML_A_min_interval_interval;
 }
-std::shared_ptr<uml::Association> UMLPackageImpl::get_UML_A_min_timeInterval()
+const std::shared_ptr<uml::Association>& UMLPackageImpl::get_UML_A_min_timeInterval()
 {
 	return uML_A_min_timeInterval;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_A_min_timeInterval_timeInterval()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_A_min_timeInterval_timeInterval()
 {
 	return uML_A_min_timeInterval_timeInterval;
 }
-std::shared_ptr<uml::Association> UMLPackageImpl::get_UML_A_minint_interactionConstraint()
+const std::shared_ptr<uml::Association>& UMLPackageImpl::get_UML_A_minint_interactionConstraint()
 {
 	return uML_A_minint_interactionConstraint;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_A_minint_interactionConstraint_interactionConstraint()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_A_minint_interactionConstraint_interactionConstraint()
 {
 	return uML_A_minint_interactionConstraint_interactionConstraint;
 }
-std::shared_ptr<uml::Association> UMLPackageImpl::get_UML_A_nameExpression_namedElement()
+const std::shared_ptr<uml::Association>& UMLPackageImpl::get_UML_A_nameExpression_namedElement()
 {
 	return uML_A_nameExpression_namedElement;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_A_nameExpression_namedElement_namedElement()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_A_nameExpression_namedElement_namedElement()
 {
 	return uML_A_nameExpression_namedElement_namedElement;
 }
-std::shared_ptr<uml::Association> UMLPackageImpl::get_UML_A_navigableOwnedEnd_association()
+const std::shared_ptr<uml::Association>& UMLPackageImpl::get_UML_A_navigableOwnedEnd_association()
 {
 	return uML_A_navigableOwnedEnd_association;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_A_navigableOwnedEnd_association_association()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_A_navigableOwnedEnd_association_association()
 {
 	return uML_A_navigableOwnedEnd_association_association;
 }
-std::shared_ptr<uml::Association> UMLPackageImpl::get_UML_A_nestedArtifact_artifact()
+const std::shared_ptr<uml::Association>& UMLPackageImpl::get_UML_A_nestedArtifact_artifact()
 {
 	return uML_A_nestedArtifact_artifact;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_A_nestedArtifact_artifact_artifact()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_A_nestedArtifact_artifact_artifact()
 {
 	return uML_A_nestedArtifact_artifact_artifact;
 }
-std::shared_ptr<uml::Association> UMLPackageImpl::get_UML_A_nestedClassifier_interface()
+const std::shared_ptr<uml::Association>& UMLPackageImpl::get_UML_A_nestedClassifier_interface()
 {
 	return uML_A_nestedClassifier_interface;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_A_nestedClassifier_interface_interface()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_A_nestedClassifier_interface_interface()
 {
 	return uML_A_nestedClassifier_interface_interface;
 }
-std::shared_ptr<uml::Association> UMLPackageImpl::get_UML_A_nestedClassifier_nestingClass()
+const std::shared_ptr<uml::Association>& UMLPackageImpl::get_UML_A_nestedClassifier_nestingClass()
 {
 	return uML_A_nestedClassifier_nestingClass;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_A_nestedClassifier_nestingClass_nestingClass()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_A_nestedClassifier_nestingClass_nestingClass()
 {
 	return uML_A_nestedClassifier_nestingClass_nestingClass;
 }
-std::shared_ptr<uml::Association> UMLPackageImpl::get_UML_A_nestedNode_node()
+const std::shared_ptr<uml::Association>& UMLPackageImpl::get_UML_A_nestedNode_node()
 {
 	return uML_A_nestedNode_node;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_A_nestedNode_node_node()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_A_nestedNode_node_node()
 {
 	return uML_A_nestedNode_node_node;
 }
-std::shared_ptr<uml::Association> UMLPackageImpl::get_UML_A_nestedPackage_nestingPackage()
+const std::shared_ptr<uml::Association>& UMLPackageImpl::get_UML_A_nestedPackage_nestingPackage()
 {
 	return uML_A_nestedPackage_nestingPackage;
 }
-std::shared_ptr<uml::Association> UMLPackageImpl::get_UML_A_newClassifier_reclassifyObjectAction()
+const std::shared_ptr<uml::Association>& UMLPackageImpl::get_UML_A_newClassifier_reclassifyObjectAction()
 {
 	return uML_A_newClassifier_reclassifyObjectAction;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_A_newClassifier_reclassifyObjectAction_reclassifyObjectAction()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_A_newClassifier_reclassifyObjectAction_reclassifyObjectAction()
 {
 	return uML_A_newClassifier_reclassifyObjectAction_reclassifyObjectAction;
 }
-std::shared_ptr<uml::Association> UMLPackageImpl::get_UML_A_node_activity()
+const std::shared_ptr<uml::Association>& UMLPackageImpl::get_UML_A_node_activity()
 {
 	return uML_A_node_activity;
 }
-std::shared_ptr<uml::Association> UMLPackageImpl::get_UML_A_node_inStructuredNode()
+const std::shared_ptr<uml::Association>& UMLPackageImpl::get_UML_A_node_inStructuredNode()
 {
 	return uML_A_node_inStructuredNode;
 }
-std::shared_ptr<uml::Association> UMLPackageImpl::get_UML_A_object_clearAssociationAction()
+const std::shared_ptr<uml::Association>& UMLPackageImpl::get_UML_A_object_clearAssociationAction()
 {
 	return uML_A_object_clearAssociationAction;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_A_object_clearAssociationAction_clearAssociationAction()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_A_object_clearAssociationAction_clearAssociationAction()
 {
 	return uML_A_object_clearAssociationAction_clearAssociationAction;
 }
-std::shared_ptr<uml::Association> UMLPackageImpl::get_UML_A_object_readIsClassifiedObjectAction()
+const std::shared_ptr<uml::Association>& UMLPackageImpl::get_UML_A_object_readIsClassifiedObjectAction()
 {
 	return uML_A_object_readIsClassifiedObjectAction;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_A_object_readIsClassifiedObjectAction_readIsClassifiedObjectAction()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_A_object_readIsClassifiedObjectAction_readIsClassifiedObjectAction()
 {
 	return uML_A_object_readIsClassifiedObjectAction_readIsClassifiedObjectAction;
 }
-std::shared_ptr<uml::Association> UMLPackageImpl::get_UML_A_object_readLinkObjectEndAction()
+const std::shared_ptr<uml::Association>& UMLPackageImpl::get_UML_A_object_readLinkObjectEndAction()
 {
 	return uML_A_object_readLinkObjectEndAction;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_A_object_readLinkObjectEndAction_readLinkObjectEndAction()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_A_object_readLinkObjectEndAction_readLinkObjectEndAction()
 {
 	return uML_A_object_readLinkObjectEndAction_readLinkObjectEndAction;
 }
-std::shared_ptr<uml::Association> UMLPackageImpl::get_UML_A_object_readLinkObjectEndQualifierAction()
+const std::shared_ptr<uml::Association>& UMLPackageImpl::get_UML_A_object_readLinkObjectEndQualifierAction()
 {
 	return uML_A_object_readLinkObjectEndQualifierAction;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_A_object_readLinkObjectEndQualifierAction_readLinkObjectEndQualifierAction()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_A_object_readLinkObjectEndQualifierAction_readLinkObjectEndQualifierAction()
 {
 	return uML_A_object_readLinkObjectEndQualifierAction_readLinkObjectEndQualifierAction;
 }
-std::shared_ptr<uml::Association> UMLPackageImpl::get_UML_A_object_reclassifyObjectAction()
+const std::shared_ptr<uml::Association>& UMLPackageImpl::get_UML_A_object_reclassifyObjectAction()
 {
 	return uML_A_object_reclassifyObjectAction;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_A_object_reclassifyObjectAction_reclassifyObjectAction()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_A_object_reclassifyObjectAction_reclassifyObjectAction()
 {
 	return uML_A_object_reclassifyObjectAction_reclassifyObjectAction;
 }
-std::shared_ptr<uml::Association> UMLPackageImpl::get_UML_A_object_startClassifierBehaviorAction()
+const std::shared_ptr<uml::Association>& UMLPackageImpl::get_UML_A_object_startClassifierBehaviorAction()
 {
 	return uML_A_object_startClassifierBehaviorAction;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_A_object_startClassifierBehaviorAction_startClassifierBehaviorAction()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_A_object_startClassifierBehaviorAction_startClassifierBehaviorAction()
 {
 	return uML_A_object_startClassifierBehaviorAction_startClassifierBehaviorAction;
 }
-std::shared_ptr<uml::Association> UMLPackageImpl::get_UML_A_object_startObjectBehaviorAction()
+const std::shared_ptr<uml::Association>& UMLPackageImpl::get_UML_A_object_startObjectBehaviorAction()
 {
 	return uML_A_object_startObjectBehaviorAction;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_A_object_startObjectBehaviorAction_startObjectBehaviorAction()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_A_object_startObjectBehaviorAction_startObjectBehaviorAction()
 {
 	return uML_A_object_startObjectBehaviorAction_startObjectBehaviorAction;
 }
-std::shared_ptr<uml::Association> UMLPackageImpl::get_UML_A_object_structuralFeatureAction()
+const std::shared_ptr<uml::Association>& UMLPackageImpl::get_UML_A_object_structuralFeatureAction()
 {
 	return uML_A_object_structuralFeatureAction;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_A_object_structuralFeatureAction_structuralFeatureAction()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_A_object_structuralFeatureAction_structuralFeatureAction()
 {
 	return uML_A_object_structuralFeatureAction_structuralFeatureAction;
 }
-std::shared_ptr<uml::Association> UMLPackageImpl::get_UML_A_object_unmarshallAction()
+const std::shared_ptr<uml::Association>& UMLPackageImpl::get_UML_A_object_unmarshallAction()
 {
 	return uML_A_object_unmarshallAction;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_A_object_unmarshallAction_unmarshallAction()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_A_object_unmarshallAction_unmarshallAction()
 {
 	return uML_A_object_unmarshallAction_unmarshallAction;
 }
-std::shared_ptr<uml::Association> UMLPackageImpl::get_UML_A_observation_duration()
+const std::shared_ptr<uml::Association>& UMLPackageImpl::get_UML_A_observation_duration()
 {
 	return uML_A_observation_duration;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_A_observation_duration_duration()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_A_observation_duration_duration()
 {
 	return uML_A_observation_duration_duration;
 }
-std::shared_ptr<uml::Association> UMLPackageImpl::get_UML_A_observation_timeExpression()
+const std::shared_ptr<uml::Association>& UMLPackageImpl::get_UML_A_observation_timeExpression()
 {
 	return uML_A_observation_timeExpression;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_A_observation_timeExpression_timeExpression()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_A_observation_timeExpression_timeExpression()
 {
 	return uML_A_observation_timeExpression_timeExpression;
 }
-std::shared_ptr<uml::Association> UMLPackageImpl::get_UML_A_oldClassifier_reclassifyObjectAction()
+const std::shared_ptr<uml::Association>& UMLPackageImpl::get_UML_A_oldClassifier_reclassifyObjectAction()
 {
 	return uML_A_oldClassifier_reclassifyObjectAction;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_A_oldClassifier_reclassifyObjectAction_reclassifyObjectAction()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_A_oldClassifier_reclassifyObjectAction_reclassifyObjectAction()
 {
 	return uML_A_oldClassifier_reclassifyObjectAction_reclassifyObjectAction;
 }
-std::shared_ptr<uml::Association> UMLPackageImpl::get_UML_A_onPort_invocationAction()
+const std::shared_ptr<uml::Association>& UMLPackageImpl::get_UML_A_onPort_invocationAction()
 {
 	return uML_A_onPort_invocationAction;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_A_onPort_invocationAction_invocationAction()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_A_onPort_invocationAction_invocationAction()
 {
 	return uML_A_onPort_invocationAction_invocationAction;
 }
-std::shared_ptr<uml::Association> UMLPackageImpl::get_UML_A_operand_combinedFragment()
+const std::shared_ptr<uml::Association>& UMLPackageImpl::get_UML_A_operand_combinedFragment()
 {
 	return uML_A_operand_combinedFragment;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_A_operand_combinedFragment_combinedFragment()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_A_operand_combinedFragment_combinedFragment()
 {
 	return uML_A_operand_combinedFragment_combinedFragment;
 }
-std::shared_ptr<uml::Association> UMLPackageImpl::get_UML_A_operand_expression()
+const std::shared_ptr<uml::Association>& UMLPackageImpl::get_UML_A_operand_expression()
 {
 	return uML_A_operand_expression;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_A_operand_expression_expression()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_A_operand_expression_expression()
 {
 	return uML_A_operand_expression_expression;
 }
-std::shared_ptr<uml::Association> UMLPackageImpl::get_UML_A_operation_callEvent()
+const std::shared_ptr<uml::Association>& UMLPackageImpl::get_UML_A_operation_callEvent()
 {
 	return uML_A_operation_callEvent;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_A_operation_callEvent_callEvent()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_A_operation_callEvent_callEvent()
 {
 	return uML_A_operation_callEvent_callEvent;
 }
-std::shared_ptr<uml::Association> UMLPackageImpl::get_UML_A_operation_callOperationAction()
+const std::shared_ptr<uml::Association>& UMLPackageImpl::get_UML_A_operation_callOperationAction()
 {
 	return uML_A_operation_callOperationAction;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_A_operation_callOperationAction_callOperationAction()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_A_operation_callOperationAction_callOperationAction()
 {
 	return uML_A_operation_callOperationAction_callOperationAction;
 }
-std::shared_ptr<uml::Association> UMLPackageImpl::get_UML_A_operation_templateParameter_parameteredElement()
+const std::shared_ptr<uml::Association>& UMLPackageImpl::get_UML_A_operation_templateParameter_parameteredElement()
 {
 	return uML_A_operation_templateParameter_parameteredElement;
 }
-std::shared_ptr<uml::Association> UMLPackageImpl::get_UML_A_opposite_property()
+const std::shared_ptr<uml::Association>& UMLPackageImpl::get_UML_A_opposite_property()
 {
 	return uML_A_opposite_property;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_A_opposite_property_property()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_A_opposite_property_property()
 {
 	return uML_A_opposite_property_property;
 }
-std::shared_ptr<uml::Association> UMLPackageImpl::get_UML_A_outgoing_source_node()
+const std::shared_ptr<uml::Association>& UMLPackageImpl::get_UML_A_outgoing_source_node()
 {
 	return uML_A_outgoing_source_node;
 }
-std::shared_ptr<uml::Association> UMLPackageImpl::get_UML_A_outgoing_source_vertex()
+const std::shared_ptr<uml::Association>& UMLPackageImpl::get_UML_A_outgoing_source_vertex()
 {
 	return uML_A_outgoing_source_vertex;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_A_outgoing_source_vertex_outgoing()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_A_outgoing_source_vertex_outgoing()
 {
 	return uML_A_outgoing_source_vertex_outgoing;
 }
-std::shared_ptr<uml::Association> UMLPackageImpl::get_UML_A_outputElement_regionAsOutput()
+const std::shared_ptr<uml::Association>& UMLPackageImpl::get_UML_A_outputElement_regionAsOutput()
 {
 	return uML_A_outputElement_regionAsOutput;
 }
-std::shared_ptr<uml::Association> UMLPackageImpl::get_UML_A_outputValue_opaqueAction()
+const std::shared_ptr<uml::Association>& UMLPackageImpl::get_UML_A_outputValue_opaqueAction()
 {
 	return uML_A_outputValue_opaqueAction;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_A_outputValue_opaqueAction_opaqueAction()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_A_outputValue_opaqueAction_opaqueAction()
 {
 	return uML_A_outputValue_opaqueAction_opaqueAction;
 }
-std::shared_ptr<uml::Association> UMLPackageImpl::get_UML_A_output_action()
+const std::shared_ptr<uml::Association>& UMLPackageImpl::get_UML_A_output_action()
 {
 	return uML_A_output_action;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_A_output_action_action()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_A_output_action_action()
 {
 	return uML_A_output_action_action;
 }
-std::shared_ptr<uml::Association> UMLPackageImpl::get_UML_A_ownedActual_owningTemplateParameterSubstitution()
+const std::shared_ptr<uml::Association>& UMLPackageImpl::get_UML_A_ownedActual_owningTemplateParameterSubstitution()
 {
 	return uML_A_ownedActual_owningTemplateParameterSubstitution;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_A_ownedActual_owningTemplateParameterSubstitution_owningTemplateParameterSubstitution()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_A_ownedActual_owningTemplateParameterSubstitution_owningTemplateParameterSubstitution()
 {
 	return uML_A_ownedActual_owningTemplateParameterSubstitution_owningTemplateParameterSubstitution;
 }
-std::shared_ptr<uml::Association> UMLPackageImpl::get_UML_A_ownedAttribute_artifact()
+const std::shared_ptr<uml::Association>& UMLPackageImpl::get_UML_A_ownedAttribute_artifact()
 {
 	return uML_A_ownedAttribute_artifact;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_A_ownedAttribute_artifact_artifact()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_A_ownedAttribute_artifact_artifact()
 {
 	return uML_A_ownedAttribute_artifact_artifact;
 }
-std::shared_ptr<uml::Association> UMLPackageImpl::get_UML_A_ownedAttribute_class()
+const std::shared_ptr<uml::Association>& UMLPackageImpl::get_UML_A_ownedAttribute_class()
 {
 	return uML_A_ownedAttribute_class;
 }
-std::shared_ptr<uml::Association> UMLPackageImpl::get_UML_A_ownedAttribute_datatype()
+const std::shared_ptr<uml::Association>& UMLPackageImpl::get_UML_A_ownedAttribute_datatype()
 {
 	return uML_A_ownedAttribute_datatype;
 }
-std::shared_ptr<uml::Association> UMLPackageImpl::get_UML_A_ownedAttribute_interface()
+const std::shared_ptr<uml::Association>& UMLPackageImpl::get_UML_A_ownedAttribute_interface()
 {
 	return uML_A_ownedAttribute_interface;
 }
-std::shared_ptr<uml::Association> UMLPackageImpl::get_UML_A_ownedAttribute_owningSignal()
+const std::shared_ptr<uml::Association>& UMLPackageImpl::get_UML_A_ownedAttribute_owningSignal()
 {
 	return uML_A_ownedAttribute_owningSignal;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_A_ownedAttribute_owningSignal_owningSignal()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_A_ownedAttribute_owningSignal_owningSignal()
 {
 	return uML_A_ownedAttribute_owningSignal_owningSignal;
 }
-std::shared_ptr<uml::Association> UMLPackageImpl::get_UML_A_ownedAttribute_structuredClassifier()
+const std::shared_ptr<uml::Association>& UMLPackageImpl::get_UML_A_ownedAttribute_structuredClassifier()
 {
 	return uML_A_ownedAttribute_structuredClassifier;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_A_ownedAttribute_structuredClassifier_structuredClassifier()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_A_ownedAttribute_structuredClassifier_structuredClassifier()
 {
 	return uML_A_ownedAttribute_structuredClassifier_structuredClassifier;
 }
-std::shared_ptr<uml::Association> UMLPackageImpl::get_UML_A_ownedBehavior_behavioredClassifier()
+const std::shared_ptr<uml::Association>& UMLPackageImpl::get_UML_A_ownedBehavior_behavioredClassifier()
 {
 	return uML_A_ownedBehavior_behavioredClassifier;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_A_ownedBehavior_behavioredClassifier_behavioredClassifier()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_A_ownedBehavior_behavioredClassifier_behavioredClassifier()
 {
 	return uML_A_ownedBehavior_behavioredClassifier_behavioredClassifier;
 }
-std::shared_ptr<uml::Association> UMLPackageImpl::get_UML_A_ownedComment_owningElement()
+const std::shared_ptr<uml::Association>& UMLPackageImpl::get_UML_A_ownedComment_owningElement()
 {
 	return uML_A_ownedComment_owningElement;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_A_ownedComment_owningElement_owningElement()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_A_ownedComment_owningElement_owningElement()
 {
 	return uML_A_ownedComment_owningElement_owningElement;
 }
-std::shared_ptr<uml::Association> UMLPackageImpl::get_UML_A_ownedConnector_structuredClassifier()
+const std::shared_ptr<uml::Association>& UMLPackageImpl::get_UML_A_ownedConnector_structuredClassifier()
 {
 	return uML_A_ownedConnector_structuredClassifier;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_A_ownedConnector_structuredClassifier_structuredClassifier()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_A_ownedConnector_structuredClassifier_structuredClassifier()
 {
 	return uML_A_ownedConnector_structuredClassifier_structuredClassifier;
 }
-std::shared_ptr<uml::Association> UMLPackageImpl::get_UML_A_ownedDefault_templateParameter()
+const std::shared_ptr<uml::Association>& UMLPackageImpl::get_UML_A_ownedDefault_templateParameter()
 {
 	return uML_A_ownedDefault_templateParameter;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_A_ownedDefault_templateParameter_templateParameter()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_A_ownedDefault_templateParameter_templateParameter()
 {
 	return uML_A_ownedDefault_templateParameter_templateParameter;
 }
-std::shared_ptr<uml::Association> UMLPackageImpl::get_UML_A_ownedElement_owner()
+const std::shared_ptr<uml::Association>& UMLPackageImpl::get_UML_A_ownedElement_owner()
 {
 	return uML_A_ownedElement_owner;
 }
-std::shared_ptr<uml::Association> UMLPackageImpl::get_UML_A_ownedEnd_extension()
+const std::shared_ptr<uml::Association>& UMLPackageImpl::get_UML_A_ownedEnd_extension()
 {
 	return uML_A_ownedEnd_extension;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_A_ownedEnd_extension_extension()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_A_ownedEnd_extension_extension()
 {
 	return uML_A_ownedEnd_extension_extension;
 }
-std::shared_ptr<uml::Association> UMLPackageImpl::get_UML_A_ownedEnd_owningAssociation()
+const std::shared_ptr<uml::Association>& UMLPackageImpl::get_UML_A_ownedEnd_owningAssociation()
 {
 	return uML_A_ownedEnd_owningAssociation;
 }
-std::shared_ptr<uml::Association> UMLPackageImpl::get_UML_A_ownedLiteral_enumeration()
+const std::shared_ptr<uml::Association>& UMLPackageImpl::get_UML_A_ownedLiteral_enumeration()
 {
 	return uML_A_ownedLiteral_enumeration;
 }
-std::shared_ptr<uml::Association> UMLPackageImpl::get_UML_A_ownedMember_namespace()
+const std::shared_ptr<uml::Association>& UMLPackageImpl::get_UML_A_ownedMember_namespace()
 {
 	return uML_A_ownedMember_namespace;
 }
-std::shared_ptr<uml::Association> UMLPackageImpl::get_UML_A_ownedOperation_artifact()
+const std::shared_ptr<uml::Association>& UMLPackageImpl::get_UML_A_ownedOperation_artifact()
 {
 	return uML_A_ownedOperation_artifact;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_A_ownedOperation_artifact_artifact()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_A_ownedOperation_artifact_artifact()
 {
 	return uML_A_ownedOperation_artifact_artifact;
 }
-std::shared_ptr<uml::Association> UMLPackageImpl::get_UML_A_ownedOperation_class()
+const std::shared_ptr<uml::Association>& UMLPackageImpl::get_UML_A_ownedOperation_class()
 {
 	return uML_A_ownedOperation_class;
 }
-std::shared_ptr<uml::Association> UMLPackageImpl::get_UML_A_ownedOperation_datatype()
+const std::shared_ptr<uml::Association>& UMLPackageImpl::get_UML_A_ownedOperation_datatype()
 {
 	return uML_A_ownedOperation_datatype;
 }
-std::shared_ptr<uml::Association> UMLPackageImpl::get_UML_A_ownedOperation_interface()
+const std::shared_ptr<uml::Association>& UMLPackageImpl::get_UML_A_ownedOperation_interface()
 {
 	return uML_A_ownedOperation_interface;
 }
-std::shared_ptr<uml::Association> UMLPackageImpl::get_UML_A_ownedParameterSet_behavior()
+const std::shared_ptr<uml::Association>& UMLPackageImpl::get_UML_A_ownedParameterSet_behavior()
 {
 	return uML_A_ownedParameterSet_behavior;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_A_ownedParameterSet_behavior_behavior()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_A_ownedParameterSet_behavior_behavior()
 {
 	return uML_A_ownedParameterSet_behavior_behavior;
 }
-std::shared_ptr<uml::Association> UMLPackageImpl::get_UML_A_ownedParameterSet_behavioralFeature()
+const std::shared_ptr<uml::Association>& UMLPackageImpl::get_UML_A_ownedParameterSet_behavioralFeature()
 {
 	return uML_A_ownedParameterSet_behavioralFeature;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_A_ownedParameterSet_behavioralFeature_behavioralFeature()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_A_ownedParameterSet_behavioralFeature_behavioralFeature()
 {
 	return uML_A_ownedParameterSet_behavioralFeature_behavioralFeature;
 }
-std::shared_ptr<uml::Association> UMLPackageImpl::get_UML_A_ownedParameter_behavior()
+const std::shared_ptr<uml::Association>& UMLPackageImpl::get_UML_A_ownedParameter_behavior()
 {
 	return uML_A_ownedParameter_behavior;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_A_ownedParameter_behavior_behavior()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_A_ownedParameter_behavior_behavior()
 {
 	return uML_A_ownedParameter_behavior_behavior;
 }
-std::shared_ptr<uml::Association> UMLPackageImpl::get_UML_A_ownedParameter_operation()
+const std::shared_ptr<uml::Association>& UMLPackageImpl::get_UML_A_ownedParameter_operation()
 {
 	return uML_A_ownedParameter_operation;
 }
-std::shared_ptr<uml::Association> UMLPackageImpl::get_UML_A_ownedParameter_ownerFormalParam()
+const std::shared_ptr<uml::Association>& UMLPackageImpl::get_UML_A_ownedParameter_ownerFormalParam()
 {
 	return uML_A_ownedParameter_ownerFormalParam;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_A_ownedParameter_ownerFormalParam_ownerFormalParam()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_A_ownedParameter_ownerFormalParam_ownerFormalParam()
 {
 	return uML_A_ownedParameter_ownerFormalParam_ownerFormalParam;
 }
-std::shared_ptr<uml::Association> UMLPackageImpl::get_UML_A_ownedParameter_signature()
+const std::shared_ptr<uml::Association>& UMLPackageImpl::get_UML_A_ownedParameter_signature()
 {
 	return uML_A_ownedParameter_signature;
 }
-std::shared_ptr<uml::Association> UMLPackageImpl::get_UML_A_ownedParameteredElement_owningTemplateParameter()
+const std::shared_ptr<uml::Association>& UMLPackageImpl::get_UML_A_ownedParameteredElement_owningTemplateParameter()
 {
 	return uML_A_ownedParameteredElement_owningTemplateParameter;
 }
-std::shared_ptr<uml::Association> UMLPackageImpl::get_UML_A_ownedPort_encapsulatedClassifier()
+const std::shared_ptr<uml::Association>& UMLPackageImpl::get_UML_A_ownedPort_encapsulatedClassifier()
 {
 	return uML_A_ownedPort_encapsulatedClassifier;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_A_ownedPort_encapsulatedClassifier_encapsulatedClassifier()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_A_ownedPort_encapsulatedClassifier_encapsulatedClassifier()
 {
 	return uML_A_ownedPort_encapsulatedClassifier_encapsulatedClassifier;
 }
-std::shared_ptr<uml::Association> UMLPackageImpl::get_UML_A_ownedReception_class()
+const std::shared_ptr<uml::Association>& UMLPackageImpl::get_UML_A_ownedReception_class()
 {
 	return uML_A_ownedReception_class;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_A_ownedReception_class_class()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_A_ownedReception_class_class()
 {
 	return uML_A_ownedReception_class_class;
 }
-std::shared_ptr<uml::Association> UMLPackageImpl::get_UML_A_ownedReception_interface()
+const std::shared_ptr<uml::Association>& UMLPackageImpl::get_UML_A_ownedReception_interface()
 {
 	return uML_A_ownedReception_interface;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_A_ownedReception_interface_interface()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_A_ownedReception_interface_interface()
 {
 	return uML_A_ownedReception_interface_interface;
 }
-std::shared_ptr<uml::Association> UMLPackageImpl::get_UML_A_ownedRule_context()
+const std::shared_ptr<uml::Association>& UMLPackageImpl::get_UML_A_ownedRule_context()
 {
 	return uML_A_ownedRule_context;
 }
-std::shared_ptr<uml::Association> UMLPackageImpl::get_UML_A_ownedStereotype_owningPackage()
+const std::shared_ptr<uml::Association>& UMLPackageImpl::get_UML_A_ownedStereotype_owningPackage()
 {
 	return uML_A_ownedStereotype_owningPackage;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_A_ownedStereotype_owningPackage_owningPackage()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_A_ownedStereotype_owningPackage_owningPackage()
 {
 	return uML_A_ownedStereotype_owningPackage_owningPackage;
 }
-std::shared_ptr<uml::Association> UMLPackageImpl::get_UML_A_ownedTemplateSignature_classifier()
+const std::shared_ptr<uml::Association>& UMLPackageImpl::get_UML_A_ownedTemplateSignature_classifier()
 {
 	return uML_A_ownedTemplateSignature_classifier;
 }
-std::shared_ptr<uml::Association> UMLPackageImpl::get_UML_A_ownedTemplateSignature_template()
+const std::shared_ptr<uml::Association>& UMLPackageImpl::get_UML_A_ownedTemplateSignature_template()
 {
 	return uML_A_ownedTemplateSignature_template;
 }
-std::shared_ptr<uml::Association> UMLPackageImpl::get_UML_A_ownedType_package()
+const std::shared_ptr<uml::Association>& UMLPackageImpl::get_UML_A_ownedType_package()
 {
 	return uML_A_ownedType_package;
 }
-std::shared_ptr<uml::Association> UMLPackageImpl::get_UML_A_ownedUseCase_classifier()
+const std::shared_ptr<uml::Association>& UMLPackageImpl::get_UML_A_ownedUseCase_classifier()
 {
 	return uML_A_ownedUseCase_classifier;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_A_ownedUseCase_classifier_classifier()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_A_ownedUseCase_classifier_classifier()
 {
 	return uML_A_ownedUseCase_classifier_classifier;
 }
-std::shared_ptr<uml::Association> UMLPackageImpl::get_UML_A_packageImport_importingNamespace()
+const std::shared_ptr<uml::Association>& UMLPackageImpl::get_UML_A_packageImport_importingNamespace()
 {
 	return uML_A_packageImport_importingNamespace;
 }
-std::shared_ptr<uml::Association> UMLPackageImpl::get_UML_A_packageMerge_receivingPackage()
+const std::shared_ptr<uml::Association>& UMLPackageImpl::get_UML_A_packageMerge_receivingPackage()
 {
 	return uML_A_packageMerge_receivingPackage;
 }
-std::shared_ptr<uml::Association> UMLPackageImpl::get_UML_A_packagedElement_component()
+const std::shared_ptr<uml::Association>& UMLPackageImpl::get_UML_A_packagedElement_component()
 {
 	return uML_A_packagedElement_component;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_A_packagedElement_component_component()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_A_packagedElement_component_component()
 {
 	return uML_A_packagedElement_component_component;
 }
-std::shared_ptr<uml::Association> UMLPackageImpl::get_UML_A_packagedElement_owningPackage()
+const std::shared_ptr<uml::Association>& UMLPackageImpl::get_UML_A_packagedElement_owningPackage()
 {
 	return uML_A_packagedElement_owningPackage;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_A_packagedElement_owningPackage_owningPackage()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_A_packagedElement_owningPackage_owningPackage()
 {
 	return uML_A_packagedElement_owningPackage_owningPackage;
 }
-std::shared_ptr<uml::Association> UMLPackageImpl::get_UML_A_parameterSet_parameter()
+const std::shared_ptr<uml::Association>& UMLPackageImpl::get_UML_A_parameterSet_parameter()
 {
 	return uML_A_parameterSet_parameter;
 }
-std::shared_ptr<uml::Association> UMLPackageImpl::get_UML_A_parameterSubstitution_templateBinding()
+const std::shared_ptr<uml::Association>& UMLPackageImpl::get_UML_A_parameterSubstitution_templateBinding()
 {
 	return uML_A_parameterSubstitution_templateBinding;
 }
-std::shared_ptr<uml::Association> UMLPackageImpl::get_UML_A_parameter_activityParameterNode()
+const std::shared_ptr<uml::Association>& UMLPackageImpl::get_UML_A_parameter_activityParameterNode()
 {
 	return uML_A_parameter_activityParameterNode;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_A_parameter_activityParameterNode_activityParameterNode()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_A_parameter_activityParameterNode_activityParameterNode()
 {
 	return uML_A_parameter_activityParameterNode_activityParameterNode;
 }
-std::shared_ptr<uml::Association> UMLPackageImpl::get_UML_A_parameter_templateSignature()
+const std::shared_ptr<uml::Association>& UMLPackageImpl::get_UML_A_parameter_templateSignature()
 {
 	return uML_A_parameter_templateSignature;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_A_parameter_templateSignature_templateSignature()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_A_parameter_templateSignature_templateSignature()
 {
 	return uML_A_parameter_templateSignature_templateSignature;
 }
-std::shared_ptr<uml::Association> UMLPackageImpl::get_UML_A_parameteredElement_templateParameter()
+const std::shared_ptr<uml::Association>& UMLPackageImpl::get_UML_A_parameteredElement_templateParameter()
 {
 	return uML_A_parameteredElement_templateParameter;
 }
-std::shared_ptr<uml::Association> UMLPackageImpl::get_UML_A_partWithPort_connectorEnd()
+const std::shared_ptr<uml::Association>& UMLPackageImpl::get_UML_A_partWithPort_connectorEnd()
 {
 	return uML_A_partWithPort_connectorEnd;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_A_partWithPort_connectorEnd_connectorEnd()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_A_partWithPort_connectorEnd_connectorEnd()
 {
 	return uML_A_partWithPort_connectorEnd_connectorEnd;
 }
-std::shared_ptr<uml::Association> UMLPackageImpl::get_UML_A_part_structuredClassifier()
+const std::shared_ptr<uml::Association>& UMLPackageImpl::get_UML_A_part_structuredClassifier()
 {
 	return uML_A_part_structuredClassifier;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_A_part_structuredClassifier_structuredClassifier()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_A_part_structuredClassifier_structuredClassifier()
 {
 	return uML_A_part_structuredClassifier_structuredClassifier;
 }
-std::shared_ptr<uml::Association> UMLPackageImpl::get_UML_A_partition_activity()
+const std::shared_ptr<uml::Association>& UMLPackageImpl::get_UML_A_partition_activity()
 {
 	return uML_A_partition_activity;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_A_partition_activity_activity()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_A_partition_activity_activity()
 {
 	return uML_A_partition_activity_activity;
 }
-std::shared_ptr<uml::Association> UMLPackageImpl::get_UML_A_port_trigger()
+const std::shared_ptr<uml::Association>& UMLPackageImpl::get_UML_A_port_trigger()
 {
 	return uML_A_port_trigger;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_A_port_trigger_trigger()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_A_port_trigger_trigger()
 {
 	return uML_A_port_trigger_trigger;
 }
-std::shared_ptr<uml::Association> UMLPackageImpl::get_UML_A_postCondition_owningTransition()
+const std::shared_ptr<uml::Association>& UMLPackageImpl::get_UML_A_postCondition_owningTransition()
 {
 	return uML_A_postCondition_owningTransition;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_A_postCondition_owningTransition_owningTransition()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_A_postCondition_owningTransition_owningTransition()
 {
 	return uML_A_postCondition_owningTransition_owningTransition;
 }
-std::shared_ptr<uml::Association> UMLPackageImpl::get_UML_A_postcondition_behavior()
+const std::shared_ptr<uml::Association>& UMLPackageImpl::get_UML_A_postcondition_behavior()
 {
 	return uML_A_postcondition_behavior;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_A_postcondition_behavior_behavior()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_A_postcondition_behavior_behavior()
 {
 	return uML_A_postcondition_behavior_behavior;
 }
-std::shared_ptr<uml::Association> UMLPackageImpl::get_UML_A_postcondition_postContext()
+const std::shared_ptr<uml::Association>& UMLPackageImpl::get_UML_A_postcondition_postContext()
 {
 	return uML_A_postcondition_postContext;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_A_postcondition_postContext_postContext()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_A_postcondition_postContext_postContext()
 {
 	return uML_A_postcondition_postContext_postContext;
 }
-std::shared_ptr<uml::Association> UMLPackageImpl::get_UML_A_powertypeExtent_powertype()
+const std::shared_ptr<uml::Association>& UMLPackageImpl::get_UML_A_powertypeExtent_powertype()
 {
 	return uML_A_powertypeExtent_powertype;
 }
-std::shared_ptr<uml::Association> UMLPackageImpl::get_UML_A_preCondition_protocolTransition()
+const std::shared_ptr<uml::Association>& UMLPackageImpl::get_UML_A_preCondition_protocolTransition()
 {
 	return uML_A_preCondition_protocolTransition;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_A_preCondition_protocolTransition_protocolTransition()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_A_preCondition_protocolTransition_protocolTransition()
 {
 	return uML_A_preCondition_protocolTransition_protocolTransition;
 }
-std::shared_ptr<uml::Association> UMLPackageImpl::get_UML_A_precondition_behavior()
+const std::shared_ptr<uml::Association>& UMLPackageImpl::get_UML_A_precondition_behavior()
 {
 	return uML_A_precondition_behavior;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_A_precondition_behavior_behavior()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_A_precondition_behavior_behavior()
 {
 	return uML_A_precondition_behavior_behavior;
 }
-std::shared_ptr<uml::Association> UMLPackageImpl::get_UML_A_precondition_preContext()
+const std::shared_ptr<uml::Association>& UMLPackageImpl::get_UML_A_precondition_preContext()
 {
 	return uML_A_precondition_preContext;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_A_precondition_preContext_preContext()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_A_precondition_preContext_preContext()
 {
 	return uML_A_precondition_preContext_preContext;
 }
-std::shared_ptr<uml::Association> UMLPackageImpl::get_UML_A_predecessorClause_successorClause()
+const std::shared_ptr<uml::Association>& UMLPackageImpl::get_UML_A_predecessorClause_successorClause()
 {
 	return uML_A_predecessorClause_successorClause;
 }
-std::shared_ptr<uml::Association> UMLPackageImpl::get_UML_A_profileApplication_applyingPackage()
+const std::shared_ptr<uml::Association>& UMLPackageImpl::get_UML_A_profileApplication_applyingPackage()
 {
 	return uML_A_profileApplication_applyingPackage;
 }
-std::shared_ptr<uml::Association> UMLPackageImpl::get_UML_A_profile_stereotype()
+const std::shared_ptr<uml::Association>& UMLPackageImpl::get_UML_A_profile_stereotype()
 {
 	return uML_A_profile_stereotype;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_A_profile_stereotype_stereotype()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_A_profile_stereotype_stereotype()
 {
 	return uML_A_profile_stereotype_stereotype;
 }
-std::shared_ptr<uml::Association> UMLPackageImpl::get_UML_A_protocol_interface()
+const std::shared_ptr<uml::Association>& UMLPackageImpl::get_UML_A_protocol_interface()
 {
 	return uML_A_protocol_interface;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_A_protocol_interface_interface()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_A_protocol_interface_interface()
 {
 	return uML_A_protocol_interface_interface;
 }
-std::shared_ptr<uml::Association> UMLPackageImpl::get_UML_A_protocol_port()
+const std::shared_ptr<uml::Association>& UMLPackageImpl::get_UML_A_protocol_port()
 {
 	return uML_A_protocol_port;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_A_protocol_port_port()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_A_protocol_port_port()
 {
 	return uML_A_protocol_port_port;
 }
-std::shared_ptr<uml::Association> UMLPackageImpl::get_UML_A_provided_component()
+const std::shared_ptr<uml::Association>& UMLPackageImpl::get_UML_A_provided_component()
 {
 	return uML_A_provided_component;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_A_provided_component_component()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_A_provided_component_component()
 {
 	return uML_A_provided_component_component;
 }
-std::shared_ptr<uml::Association> UMLPackageImpl::get_UML_A_provided_port()
+const std::shared_ptr<uml::Association>& UMLPackageImpl::get_UML_A_provided_port()
 {
 	return uML_A_provided_port;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_A_provided_port_port()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_A_provided_port_port()
 {
 	return uML_A_provided_port_port;
 }
-std::shared_ptr<uml::Association> UMLPackageImpl::get_UML_A_qualifier_associationEnd()
+const std::shared_ptr<uml::Association>& UMLPackageImpl::get_UML_A_qualifier_associationEnd()
 {
 	return uML_A_qualifier_associationEnd;
 }
-std::shared_ptr<uml::Association> UMLPackageImpl::get_UML_A_qualifier_linkEndData()
+const std::shared_ptr<uml::Association>& UMLPackageImpl::get_UML_A_qualifier_linkEndData()
 {
 	return uML_A_qualifier_linkEndData;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_A_qualifier_linkEndData_linkEndData()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_A_qualifier_linkEndData_linkEndData()
 {
 	return uML_A_qualifier_linkEndData_linkEndData;
 }
-std::shared_ptr<uml::Association> UMLPackageImpl::get_UML_A_qualifier_qualifierValue()
+const std::shared_ptr<uml::Association>& UMLPackageImpl::get_UML_A_qualifier_qualifierValue()
 {
 	return uML_A_qualifier_qualifierValue;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_A_qualifier_qualifierValue_qualifierValue()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_A_qualifier_qualifierValue_qualifierValue()
 {
 	return uML_A_qualifier_qualifierValue_qualifierValue;
 }
-std::shared_ptr<uml::Association> UMLPackageImpl::get_UML_A_qualifier_readLinkObjectEndQualifierAction()
+const std::shared_ptr<uml::Association>& UMLPackageImpl::get_UML_A_qualifier_readLinkObjectEndQualifierAction()
 {
 	return uML_A_qualifier_readLinkObjectEndQualifierAction;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_A_qualifier_readLinkObjectEndQualifierAction_readLinkObjectEndQualifierAction()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_A_qualifier_readLinkObjectEndQualifierAction_readLinkObjectEndQualifierAction()
 {
 	return uML_A_qualifier_readLinkObjectEndQualifierAction_readLinkObjectEndQualifierAction;
 }
-std::shared_ptr<uml::Association> UMLPackageImpl::get_UML_A_raisedException_behavioralFeature()
+const std::shared_ptr<uml::Association>& UMLPackageImpl::get_UML_A_raisedException_behavioralFeature()
 {
 	return uML_A_raisedException_behavioralFeature;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_A_raisedException_behavioralFeature_behavioralFeature()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_A_raisedException_behavioralFeature_behavioralFeature()
 {
 	return uML_A_raisedException_behavioralFeature_behavioralFeature;
 }
-std::shared_ptr<uml::Association> UMLPackageImpl::get_UML_A_raisedException_operation()
+const std::shared_ptr<uml::Association>& UMLPackageImpl::get_UML_A_raisedException_operation()
 {
 	return uML_A_raisedException_operation;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_A_raisedException_operation_operation()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_A_raisedException_operation_operation()
 {
 	return uML_A_raisedException_operation_operation;
 }
-std::shared_ptr<uml::Association> UMLPackageImpl::get_UML_A_realization_abstraction_component()
+const std::shared_ptr<uml::Association>& UMLPackageImpl::get_UML_A_realization_abstraction_component()
 {
 	return uML_A_realization_abstraction_component;
 }
-std::shared_ptr<uml::Association> UMLPackageImpl::get_UML_A_realization_abstraction_flow()
+const std::shared_ptr<uml::Association>& UMLPackageImpl::get_UML_A_realization_abstraction_flow()
 {
 	return uML_A_realization_abstraction_flow;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_A_realization_abstraction_flow_abstraction()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_A_realization_abstraction_flow_abstraction()
 {
 	return uML_A_realization_abstraction_flow_abstraction;
 }
-std::shared_ptr<uml::Association> UMLPackageImpl::get_UML_A_realizingActivityEdge_informationFlow()
+const std::shared_ptr<uml::Association>& UMLPackageImpl::get_UML_A_realizingActivityEdge_informationFlow()
 {
 	return uML_A_realizingActivityEdge_informationFlow;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_A_realizingActivityEdge_informationFlow_informationFlow()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_A_realizingActivityEdge_informationFlow_informationFlow()
 {
 	return uML_A_realizingActivityEdge_informationFlow_informationFlow;
 }
-std::shared_ptr<uml::Association> UMLPackageImpl::get_UML_A_realizingClassifier_componentRealization()
+const std::shared_ptr<uml::Association>& UMLPackageImpl::get_UML_A_realizingClassifier_componentRealization()
 {
 	return uML_A_realizingClassifier_componentRealization;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_A_realizingClassifier_componentRealization_componentRealization()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_A_realizingClassifier_componentRealization_componentRealization()
 {
 	return uML_A_realizingClassifier_componentRealization_componentRealization;
 }
-std::shared_ptr<uml::Association> UMLPackageImpl::get_UML_A_realizingConnector_informationFlow()
+const std::shared_ptr<uml::Association>& UMLPackageImpl::get_UML_A_realizingConnector_informationFlow()
 {
 	return uML_A_realizingConnector_informationFlow;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_A_realizingConnector_informationFlow_informationFlow()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_A_realizingConnector_informationFlow_informationFlow()
 {
 	return uML_A_realizingConnector_informationFlow_informationFlow;
 }
-std::shared_ptr<uml::Association> UMLPackageImpl::get_UML_A_realizingMessage_informationFlow()
+const std::shared_ptr<uml::Association>& UMLPackageImpl::get_UML_A_realizingMessage_informationFlow()
 {
 	return uML_A_realizingMessage_informationFlow;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_A_realizingMessage_informationFlow_informationFlow()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_A_realizingMessage_informationFlow_informationFlow()
 {
 	return uML_A_realizingMessage_informationFlow_informationFlow;
 }
-std::shared_ptr<uml::Association> UMLPackageImpl::get_UML_A_receiveEvent_endMessage()
+const std::shared_ptr<uml::Association>& UMLPackageImpl::get_UML_A_receiveEvent_endMessage()
 {
 	return uML_A_receiveEvent_endMessage;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_A_receiveEvent_endMessage_endMessage()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_A_receiveEvent_endMessage_endMessage()
 {
 	return uML_A_receiveEvent_endMessage_endMessage;
 }
-std::shared_ptr<uml::Association> UMLPackageImpl::get_UML_A_redefinedBehavior_behavior()
+const std::shared_ptr<uml::Association>& UMLPackageImpl::get_UML_A_redefinedBehavior_behavior()
 {
 	return uML_A_redefinedBehavior_behavior;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_A_redefinedBehavior_behavior_behavior()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_A_redefinedBehavior_behavior_behavior()
 {
 	return uML_A_redefinedBehavior_behavior_behavior;
 }
-std::shared_ptr<uml::Association> UMLPackageImpl::get_UML_A_redefinedClassifier_classifier()
+const std::shared_ptr<uml::Association>& UMLPackageImpl::get_UML_A_redefinedClassifier_classifier()
 {
 	return uML_A_redefinedClassifier_classifier;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_A_redefinedClassifier_classifier_classifier()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_A_redefinedClassifier_classifier_classifier()
 {
 	return uML_A_redefinedClassifier_classifier_classifier;
 }
-std::shared_ptr<uml::Association> UMLPackageImpl::get_UML_A_redefinedConnector_connector()
+const std::shared_ptr<uml::Association>& UMLPackageImpl::get_UML_A_redefinedConnector_connector()
 {
 	return uML_A_redefinedConnector_connector;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_A_redefinedConnector_connector_connector()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_A_redefinedConnector_connector_connector()
 {
 	return uML_A_redefinedConnector_connector_connector;
 }
-std::shared_ptr<uml::Association> UMLPackageImpl::get_UML_A_redefinedEdge_activityEdge()
+const std::shared_ptr<uml::Association>& UMLPackageImpl::get_UML_A_redefinedEdge_activityEdge()
 {
 	return uML_A_redefinedEdge_activityEdge;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_A_redefinedEdge_activityEdge_activityEdge()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_A_redefinedEdge_activityEdge_activityEdge()
 {
 	return uML_A_redefinedEdge_activityEdge_activityEdge;
 }
-std::shared_ptr<uml::Association> UMLPackageImpl::get_UML_A_redefinedElement_redefinableElement()
+const std::shared_ptr<uml::Association>& UMLPackageImpl::get_UML_A_redefinedElement_redefinableElement()
 {
 	return uML_A_redefinedElement_redefinableElement;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_A_redefinedElement_redefinableElement_redefinableElement()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_A_redefinedElement_redefinableElement_redefinableElement()
 {
 	return uML_A_redefinedElement_redefinableElement_redefinableElement;
 }
-std::shared_ptr<uml::Association> UMLPackageImpl::get_UML_A_redefinedInterface_interface()
+const std::shared_ptr<uml::Association>& UMLPackageImpl::get_UML_A_redefinedInterface_interface()
 {
 	return uML_A_redefinedInterface_interface;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_A_redefinedInterface_interface_interface()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_A_redefinedInterface_interface_interface()
 {
 	return uML_A_redefinedInterface_interface_interface;
 }
-std::shared_ptr<uml::Association> UMLPackageImpl::get_UML_A_redefinedNode_activityNode()
+const std::shared_ptr<uml::Association>& UMLPackageImpl::get_UML_A_redefinedNode_activityNode()
 {
 	return uML_A_redefinedNode_activityNode;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_A_redefinedNode_activityNode_activityNode()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_A_redefinedNode_activityNode_activityNode()
 {
 	return uML_A_redefinedNode_activityNode_activityNode;
 }
-std::shared_ptr<uml::Association> UMLPackageImpl::get_UML_A_redefinedOperation_operation()
+const std::shared_ptr<uml::Association>& UMLPackageImpl::get_UML_A_redefinedOperation_operation()
 {
 	return uML_A_redefinedOperation_operation;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_A_redefinedOperation_operation_operation()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_A_redefinedOperation_operation_operation()
 {
 	return uML_A_redefinedOperation_operation_operation;
 }
-std::shared_ptr<uml::Association> UMLPackageImpl::get_UML_A_redefinedPort_port()
+const std::shared_ptr<uml::Association>& UMLPackageImpl::get_UML_A_redefinedPort_port()
 {
 	return uML_A_redefinedPort_port;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_A_redefinedPort_port_port()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_A_redefinedPort_port_port()
 {
 	return uML_A_redefinedPort_port_port;
 }
-std::shared_ptr<uml::Association> UMLPackageImpl::get_UML_A_redefinedProperty_property()
+const std::shared_ptr<uml::Association>& UMLPackageImpl::get_UML_A_redefinedProperty_property()
 {
 	return uML_A_redefinedProperty_property;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_A_redefinedProperty_property_property()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_A_redefinedProperty_property_property()
 {
 	return uML_A_redefinedProperty_property_property;
 }
-std::shared_ptr<uml::Association> UMLPackageImpl::get_UML_A_redefinedState_state()
+const std::shared_ptr<uml::Association>& UMLPackageImpl::get_UML_A_redefinedState_state()
 {
 	return uML_A_redefinedState_state;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_A_redefinedState_state_state()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_A_redefinedState_state_state()
 {
 	return uML_A_redefinedState_state_state;
 }
-std::shared_ptr<uml::Association> UMLPackageImpl::get_UML_A_redefinedTransition_transition()
+const std::shared_ptr<uml::Association>& UMLPackageImpl::get_UML_A_redefinedTransition_transition()
 {
 	return uML_A_redefinedTransition_transition;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_A_redefinedTransition_transition_transition()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_A_redefinedTransition_transition_transition()
 {
 	return uML_A_redefinedTransition_transition_transition;
 }
-std::shared_ptr<uml::Association> UMLPackageImpl::get_UML_A_redefinitionContext_redefinableElement()
+const std::shared_ptr<uml::Association>& UMLPackageImpl::get_UML_A_redefinitionContext_redefinableElement()
 {
 	return uML_A_redefinitionContext_redefinableElement;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_A_redefinitionContext_redefinableElement_redefinableElement()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_A_redefinitionContext_redefinableElement_redefinableElement()
 {
 	return uML_A_redefinitionContext_redefinableElement_redefinableElement;
 }
-std::shared_ptr<uml::Association> UMLPackageImpl::get_UML_A_redefinitionContext_region()
+const std::shared_ptr<uml::Association>& UMLPackageImpl::get_UML_A_redefinitionContext_region()
 {
 	return uML_A_redefinitionContext_region;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_A_redefinitionContext_region_region()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_A_redefinitionContext_region_region()
 {
 	return uML_A_redefinitionContext_region_region;
 }
-std::shared_ptr<uml::Association> UMLPackageImpl::get_UML_A_redefinitionContext_state()
+const std::shared_ptr<uml::Association>& UMLPackageImpl::get_UML_A_redefinitionContext_state()
 {
 	return uML_A_redefinitionContext_state;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_A_redefinitionContext_state_state()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_A_redefinitionContext_state_state()
 {
 	return uML_A_redefinitionContext_state_state;
 }
-std::shared_ptr<uml::Association> UMLPackageImpl::get_UML_A_redefinitionContext_transition()
+const std::shared_ptr<uml::Association>& UMLPackageImpl::get_UML_A_redefinitionContext_transition()
 {
 	return uML_A_redefinitionContext_transition;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_A_redefinitionContext_transition_transition()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_A_redefinitionContext_transition_transition()
 {
 	return uML_A_redefinitionContext_transition_transition;
 }
-std::shared_ptr<uml::Association> UMLPackageImpl::get_UML_A_reducer_reduceAction()
+const std::shared_ptr<uml::Association>& UMLPackageImpl::get_UML_A_reducer_reduceAction()
 {
 	return uML_A_reducer_reduceAction;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_A_reducer_reduceAction_reduceAction()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_A_reducer_reduceAction_reduceAction()
 {
 	return uML_A_reducer_reduceAction_reduceAction;
 }
-std::shared_ptr<uml::Association> UMLPackageImpl::get_UML_A_referred_protocolTransition()
+const std::shared_ptr<uml::Association>& UMLPackageImpl::get_UML_A_referred_protocolTransition()
 {
 	return uML_A_referred_protocolTransition;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_A_referred_protocolTransition_protocolTransition()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_A_referred_protocolTransition_protocolTransition()
 {
 	return uML_A_referred_protocolTransition_protocolTransition;
 }
-std::shared_ptr<uml::Association> UMLPackageImpl::get_UML_A_refersTo_interactionUse()
+const std::shared_ptr<uml::Association>& UMLPackageImpl::get_UML_A_refersTo_interactionUse()
 {
 	return uML_A_refersTo_interactionUse;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_A_refersTo_interactionUse_interactionUse()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_A_refersTo_interactionUse_interactionUse()
 {
 	return uML_A_refersTo_interactionUse_interactionUse;
 }
-std::shared_ptr<uml::Association> UMLPackageImpl::get_UML_A_region_state()
+const std::shared_ptr<uml::Association>& UMLPackageImpl::get_UML_A_region_state()
 {
 	return uML_A_region_state;
 }
-std::shared_ptr<uml::Association> UMLPackageImpl::get_UML_A_region_stateMachine()
+const std::shared_ptr<uml::Association>& UMLPackageImpl::get_UML_A_region_stateMachine()
 {
 	return uML_A_region_stateMachine;
 }
-std::shared_ptr<uml::Association> UMLPackageImpl::get_UML_A_relatedElement_relationship()
+const std::shared_ptr<uml::Association>& UMLPackageImpl::get_UML_A_relatedElement_relationship()
 {
 	return uML_A_relatedElement_relationship;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_A_relatedElement_relationship_relationship()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_A_relatedElement_relationship_relationship()
 {
 	return uML_A_relatedElement_relationship_relationship;
 }
-std::shared_ptr<uml::Association> UMLPackageImpl::get_UML_A_removeAt_removeStructuralFeatureValueAction()
+const std::shared_ptr<uml::Association>& UMLPackageImpl::get_UML_A_removeAt_removeStructuralFeatureValueAction()
 {
 	return uML_A_removeAt_removeStructuralFeatureValueAction;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_A_removeAt_removeStructuralFeatureValueAction_removeStructuralFeatureValueAction()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_A_removeAt_removeStructuralFeatureValueAction_removeStructuralFeatureValueAction()
 {
 	return uML_A_removeAt_removeStructuralFeatureValueAction_removeStructuralFeatureValueAction;
 }
-std::shared_ptr<uml::Association> UMLPackageImpl::get_UML_A_removeAt_removeVariableValueAction()
+const std::shared_ptr<uml::Association>& UMLPackageImpl::get_UML_A_removeAt_removeVariableValueAction()
 {
 	return uML_A_removeAt_removeVariableValueAction;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_A_removeAt_removeVariableValueAction_removeVariableValueAction()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_A_removeAt_removeVariableValueAction_removeVariableValueAction()
 {
 	return uML_A_removeAt_removeVariableValueAction_removeVariableValueAction;
 }
-std::shared_ptr<uml::Association> UMLPackageImpl::get_UML_A_replyToCall_replyAction()
+const std::shared_ptr<uml::Association>& UMLPackageImpl::get_UML_A_replyToCall_replyAction()
 {
 	return uML_A_replyToCall_replyAction;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_A_replyToCall_replyAction_replyAction()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_A_replyToCall_replyAction_replyAction()
 {
 	return uML_A_replyToCall_replyAction_replyAction;
 }
-std::shared_ptr<uml::Association> UMLPackageImpl::get_UML_A_replyValue_replyAction()
+const std::shared_ptr<uml::Association>& UMLPackageImpl::get_UML_A_replyValue_replyAction()
 {
 	return uML_A_replyValue_replyAction;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_A_replyValue_replyAction_replyAction()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_A_replyValue_replyAction_replyAction()
 {
 	return uML_A_replyValue_replyAction_replyAction;
 }
-std::shared_ptr<uml::Association> UMLPackageImpl::get_UML_A_representation_classifier()
+const std::shared_ptr<uml::Association>& UMLPackageImpl::get_UML_A_representation_classifier()
 {
 	return uML_A_representation_classifier;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_A_representation_classifier_classifier()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_A_representation_classifier_classifier()
 {
 	return uML_A_representation_classifier_classifier;
 }
-std::shared_ptr<uml::Association> UMLPackageImpl::get_UML_A_represented_representation()
+const std::shared_ptr<uml::Association>& UMLPackageImpl::get_UML_A_represented_representation()
 {
 	return uML_A_represented_representation;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_A_represented_representation_representation()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_A_represented_representation_representation()
 {
 	return uML_A_represented_representation_representation;
 }
-std::shared_ptr<uml::Association> UMLPackageImpl::get_UML_A_represents_activityPartition()
+const std::shared_ptr<uml::Association>& UMLPackageImpl::get_UML_A_represents_activityPartition()
 {
 	return uML_A_represents_activityPartition;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_A_represents_activityPartition_activityPartition()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_A_represents_activityPartition_activityPartition()
 {
 	return uML_A_represents_activityPartition_activityPartition;
 }
-std::shared_ptr<uml::Association> UMLPackageImpl::get_UML_A_represents_lifeline()
+const std::shared_ptr<uml::Association>& UMLPackageImpl::get_UML_A_represents_lifeline()
 {
 	return uML_A_represents_lifeline;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_A_represents_lifeline_lifeline()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_A_represents_lifeline_lifeline()
 {
 	return uML_A_represents_lifeline_lifeline;
 }
-std::shared_ptr<uml::Association> UMLPackageImpl::get_UML_A_request_sendObjectAction()
+const std::shared_ptr<uml::Association>& UMLPackageImpl::get_UML_A_request_sendObjectAction()
 {
 	return uML_A_request_sendObjectAction;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_A_request_sendObjectAction_sendObjectAction()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_A_request_sendObjectAction_sendObjectAction()
 {
 	return uML_A_request_sendObjectAction_sendObjectAction;
 }
-std::shared_ptr<uml::Association> UMLPackageImpl::get_UML_A_required_component()
+const std::shared_ptr<uml::Association>& UMLPackageImpl::get_UML_A_required_component()
 {
 	return uML_A_required_component;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_A_required_component_component()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_A_required_component_component()
 {
 	return uML_A_required_component_component;
 }
-std::shared_ptr<uml::Association> UMLPackageImpl::get_UML_A_required_port()
+const std::shared_ptr<uml::Association>& UMLPackageImpl::get_UML_A_required_port()
 {
 	return uML_A_required_port;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_A_required_port_port()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_A_required_port_port()
 {
 	return uML_A_required_port_port;
 }
-std::shared_ptr<uml::Association> UMLPackageImpl::get_UML_A_result_acceptEventAction()
+const std::shared_ptr<uml::Association>& UMLPackageImpl::get_UML_A_result_acceptEventAction()
 {
 	return uML_A_result_acceptEventAction;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_A_result_acceptEventAction_acceptEventAction()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_A_result_acceptEventAction_acceptEventAction()
 {
 	return uML_A_result_acceptEventAction_acceptEventAction;
 }
-std::shared_ptr<uml::Association> UMLPackageImpl::get_UML_A_result_callAction()
+const std::shared_ptr<uml::Association>& UMLPackageImpl::get_UML_A_result_callAction()
 {
 	return uML_A_result_callAction;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_A_result_callAction_callAction()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_A_result_callAction_callAction()
 {
 	return uML_A_result_callAction_callAction;
 }
-std::shared_ptr<uml::Association> UMLPackageImpl::get_UML_A_result_clearStructuralFeatureAction()
+const std::shared_ptr<uml::Association>& UMLPackageImpl::get_UML_A_result_clearStructuralFeatureAction()
 {
 	return uML_A_result_clearStructuralFeatureAction;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_A_result_clearStructuralFeatureAction_clearStructuralFeatureAction()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_A_result_clearStructuralFeatureAction_clearStructuralFeatureAction()
 {
 	return uML_A_result_clearStructuralFeatureAction_clearStructuralFeatureAction;
 }
-std::shared_ptr<uml::Association> UMLPackageImpl::get_UML_A_result_conditionalNode()
+const std::shared_ptr<uml::Association>& UMLPackageImpl::get_UML_A_result_conditionalNode()
 {
 	return uML_A_result_conditionalNode;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_A_result_conditionalNode_conditionalNode()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_A_result_conditionalNode_conditionalNode()
 {
 	return uML_A_result_conditionalNode_conditionalNode;
 }
-std::shared_ptr<uml::Association> UMLPackageImpl::get_UML_A_result_createLinkObjectAction()
+const std::shared_ptr<uml::Association>& UMLPackageImpl::get_UML_A_result_createLinkObjectAction()
 {
 	return uML_A_result_createLinkObjectAction;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_A_result_createLinkObjectAction_createLinkObjectAction()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_A_result_createLinkObjectAction_createLinkObjectAction()
 {
 	return uML_A_result_createLinkObjectAction_createLinkObjectAction;
 }
-std::shared_ptr<uml::Association> UMLPackageImpl::get_UML_A_result_createObjectAction()
+const std::shared_ptr<uml::Association>& UMLPackageImpl::get_UML_A_result_createObjectAction()
 {
 	return uML_A_result_createObjectAction;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_A_result_createObjectAction_createObjectAction()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_A_result_createObjectAction_createObjectAction()
 {
 	return uML_A_result_createObjectAction_createObjectAction;
 }
-std::shared_ptr<uml::Association> UMLPackageImpl::get_UML_A_result_loopNode()
+const std::shared_ptr<uml::Association>& UMLPackageImpl::get_UML_A_result_loopNode()
 {
 	return uML_A_result_loopNode;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_A_result_loopNode_loopNode()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_A_result_loopNode_loopNode()
 {
 	return uML_A_result_loopNode_loopNode;
 }
-std::shared_ptr<uml::Association> UMLPackageImpl::get_UML_A_result_opaqueExpression()
+const std::shared_ptr<uml::Association>& UMLPackageImpl::get_UML_A_result_opaqueExpression()
 {
 	return uML_A_result_opaqueExpression;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_A_result_opaqueExpression_opaqueExpression()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_A_result_opaqueExpression_opaqueExpression()
 {
 	return uML_A_result_opaqueExpression_opaqueExpression;
 }
-std::shared_ptr<uml::Association> UMLPackageImpl::get_UML_A_result_readExtentAction()
+const std::shared_ptr<uml::Association>& UMLPackageImpl::get_UML_A_result_readExtentAction()
 {
 	return uML_A_result_readExtentAction;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_A_result_readExtentAction_readExtentAction()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_A_result_readExtentAction_readExtentAction()
 {
 	return uML_A_result_readExtentAction_readExtentAction;
 }
-std::shared_ptr<uml::Association> UMLPackageImpl::get_UML_A_result_readIsClassifiedObjectAction()
+const std::shared_ptr<uml::Association>& UMLPackageImpl::get_UML_A_result_readIsClassifiedObjectAction()
 {
 	return uML_A_result_readIsClassifiedObjectAction;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_A_result_readIsClassifiedObjectAction_readIsClassifiedObjectAction()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_A_result_readIsClassifiedObjectAction_readIsClassifiedObjectAction()
 {
 	return uML_A_result_readIsClassifiedObjectAction_readIsClassifiedObjectAction;
 }
-std::shared_ptr<uml::Association> UMLPackageImpl::get_UML_A_result_readLinkAction()
+const std::shared_ptr<uml::Association>& UMLPackageImpl::get_UML_A_result_readLinkAction()
 {
 	return uML_A_result_readLinkAction;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_A_result_readLinkAction_readLinkAction()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_A_result_readLinkAction_readLinkAction()
 {
 	return uML_A_result_readLinkAction_readLinkAction;
 }
-std::shared_ptr<uml::Association> UMLPackageImpl::get_UML_A_result_readLinkObjectEndAction()
+const std::shared_ptr<uml::Association>& UMLPackageImpl::get_UML_A_result_readLinkObjectEndAction()
 {
 	return uML_A_result_readLinkObjectEndAction;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_A_result_readLinkObjectEndAction_readLinkObjectEndAction()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_A_result_readLinkObjectEndAction_readLinkObjectEndAction()
 {
 	return uML_A_result_readLinkObjectEndAction_readLinkObjectEndAction;
 }
-std::shared_ptr<uml::Association> UMLPackageImpl::get_UML_A_result_readLinkObjectEndQualifierAction()
+const std::shared_ptr<uml::Association>& UMLPackageImpl::get_UML_A_result_readLinkObjectEndQualifierAction()
 {
 	return uML_A_result_readLinkObjectEndQualifierAction;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_A_result_readLinkObjectEndQualifierAction_readLinkObjectEndQualifierAction()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_A_result_readLinkObjectEndQualifierAction_readLinkObjectEndQualifierAction()
 {
 	return uML_A_result_readLinkObjectEndQualifierAction_readLinkObjectEndQualifierAction;
 }
-std::shared_ptr<uml::Association> UMLPackageImpl::get_UML_A_result_readSelfAction()
+const std::shared_ptr<uml::Association>& UMLPackageImpl::get_UML_A_result_readSelfAction()
 {
 	return uML_A_result_readSelfAction;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_A_result_readSelfAction_readSelfAction()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_A_result_readSelfAction_readSelfAction()
 {
 	return uML_A_result_readSelfAction_readSelfAction;
 }
-std::shared_ptr<uml::Association> UMLPackageImpl::get_UML_A_result_readStructuralFeatureAction()
+const std::shared_ptr<uml::Association>& UMLPackageImpl::get_UML_A_result_readStructuralFeatureAction()
 {
 	return uML_A_result_readStructuralFeatureAction;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_A_result_readStructuralFeatureAction_readStructuralFeatureAction()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_A_result_readStructuralFeatureAction_readStructuralFeatureAction()
 {
 	return uML_A_result_readStructuralFeatureAction_readStructuralFeatureAction;
 }
-std::shared_ptr<uml::Association> UMLPackageImpl::get_UML_A_result_readVariableAction()
+const std::shared_ptr<uml::Association>& UMLPackageImpl::get_UML_A_result_readVariableAction()
 {
 	return uML_A_result_readVariableAction;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_A_result_readVariableAction_readVariableAction()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_A_result_readVariableAction_readVariableAction()
 {
 	return uML_A_result_readVariableAction_readVariableAction;
 }
-std::shared_ptr<uml::Association> UMLPackageImpl::get_UML_A_result_reduceAction()
+const std::shared_ptr<uml::Association>& UMLPackageImpl::get_UML_A_result_reduceAction()
 {
 	return uML_A_result_reduceAction;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_A_result_reduceAction_reduceAction()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_A_result_reduceAction_reduceAction()
 {
 	return uML_A_result_reduceAction_reduceAction;
 }
-std::shared_ptr<uml::Association> UMLPackageImpl::get_UML_A_result_testIdentityAction()
+const std::shared_ptr<uml::Association>& UMLPackageImpl::get_UML_A_result_testIdentityAction()
 {
 	return uML_A_result_testIdentityAction;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_A_result_testIdentityAction_testIdentityAction()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_A_result_testIdentityAction_testIdentityAction()
 {
 	return uML_A_result_testIdentityAction_testIdentityAction;
 }
-std::shared_ptr<uml::Association> UMLPackageImpl::get_UML_A_result_unmarshallAction()
+const std::shared_ptr<uml::Association>& UMLPackageImpl::get_UML_A_result_unmarshallAction()
 {
 	return uML_A_result_unmarshallAction;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_A_result_unmarshallAction_unmarshallAction()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_A_result_unmarshallAction_unmarshallAction()
 {
 	return uML_A_result_unmarshallAction_unmarshallAction;
 }
-std::shared_ptr<uml::Association> UMLPackageImpl::get_UML_A_result_valueSpecificationAction()
+const std::shared_ptr<uml::Association>& UMLPackageImpl::get_UML_A_result_valueSpecificationAction()
 {
 	return uML_A_result_valueSpecificationAction;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_A_result_valueSpecificationAction_valueSpecificationAction()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_A_result_valueSpecificationAction_valueSpecificationAction()
 {
 	return uML_A_result_valueSpecificationAction_valueSpecificationAction;
 }
-std::shared_ptr<uml::Association> UMLPackageImpl::get_UML_A_result_writeStructuralFeatureAction()
+const std::shared_ptr<uml::Association>& UMLPackageImpl::get_UML_A_result_writeStructuralFeatureAction()
 {
 	return uML_A_result_writeStructuralFeatureAction;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_A_result_writeStructuralFeatureAction_writeStructuralFeatureAction()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_A_result_writeStructuralFeatureAction_writeStructuralFeatureAction()
 {
 	return uML_A_result_writeStructuralFeatureAction_writeStructuralFeatureAction;
 }
-std::shared_ptr<uml::Association> UMLPackageImpl::get_UML_A_returnInformation_acceptCallAction()
+const std::shared_ptr<uml::Association>& UMLPackageImpl::get_UML_A_returnInformation_acceptCallAction()
 {
 	return uML_A_returnInformation_acceptCallAction;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_A_returnInformation_acceptCallAction_acceptCallAction()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_A_returnInformation_acceptCallAction_acceptCallAction()
 {
 	return uML_A_returnInformation_acceptCallAction_acceptCallAction;
 }
-std::shared_ptr<uml::Association> UMLPackageImpl::get_UML_A_returnInformation_replyAction()
+const std::shared_ptr<uml::Association>& UMLPackageImpl::get_UML_A_returnInformation_replyAction()
 {
 	return uML_A_returnInformation_replyAction;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_A_returnInformation_replyAction_replyAction()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_A_returnInformation_replyAction_replyAction()
 {
 	return uML_A_returnInformation_replyAction_replyAction;
 }
-std::shared_ptr<uml::Association> UMLPackageImpl::get_UML_A_returnValueRecipient_interactionUse()
+const std::shared_ptr<uml::Association>& UMLPackageImpl::get_UML_A_returnValueRecipient_interactionUse()
 {
 	return uML_A_returnValueRecipient_interactionUse;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_A_returnValueRecipient_interactionUse_interactionUse()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_A_returnValueRecipient_interactionUse_interactionUse()
 {
 	return uML_A_returnValueRecipient_interactionUse_interactionUse;
 }
-std::shared_ptr<uml::Association> UMLPackageImpl::get_UML_A_returnValue_interactionUse()
+const std::shared_ptr<uml::Association>& UMLPackageImpl::get_UML_A_returnValue_interactionUse()
 {
 	return uML_A_returnValue_interactionUse;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_A_returnValue_interactionUse_interactionUse()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_A_returnValue_interactionUse_interactionUse()
 {
 	return uML_A_returnValue_interactionUse_interactionUse;
 }
-std::shared_ptr<uml::Association> UMLPackageImpl::get_UML_A_roleBinding_collaborationUse()
+const std::shared_ptr<uml::Association>& UMLPackageImpl::get_UML_A_roleBinding_collaborationUse()
 {
 	return uML_A_roleBinding_collaborationUse;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_A_roleBinding_collaborationUse_collaborationUse()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_A_roleBinding_collaborationUse_collaborationUse()
 {
 	return uML_A_roleBinding_collaborationUse_collaborationUse;
 }
-std::shared_ptr<uml::Association> UMLPackageImpl::get_UML_A_role_structuredClassifier()
+const std::shared_ptr<uml::Association>& UMLPackageImpl::get_UML_A_role_structuredClassifier()
 {
 	return uML_A_role_structuredClassifier;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_A_role_structuredClassifier_structuredClassifier()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_A_role_structuredClassifier_structuredClassifier()
 {
 	return uML_A_role_structuredClassifier_structuredClassifier;
 }
-std::shared_ptr<uml::Association> UMLPackageImpl::get_UML_A_second_testIdentityAction()
+const std::shared_ptr<uml::Association>& UMLPackageImpl::get_UML_A_second_testIdentityAction()
 {
 	return uML_A_second_testIdentityAction;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_A_second_testIdentityAction_testIdentityAction()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_A_second_testIdentityAction_testIdentityAction()
 {
 	return uML_A_second_testIdentityAction_testIdentityAction;
 }
-std::shared_ptr<uml::Association> UMLPackageImpl::get_UML_A_selection_objectFlow()
+const std::shared_ptr<uml::Association>& UMLPackageImpl::get_UML_A_selection_objectFlow()
 {
 	return uML_A_selection_objectFlow;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_A_selection_objectFlow_objectFlow()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_A_selection_objectFlow_objectFlow()
 {
 	return uML_A_selection_objectFlow_objectFlow;
 }
-std::shared_ptr<uml::Association> UMLPackageImpl::get_UML_A_selection_objectNode()
+const std::shared_ptr<uml::Association>& UMLPackageImpl::get_UML_A_selection_objectNode()
 {
 	return uML_A_selection_objectNode;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_A_selection_objectNode_objectNode()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_A_selection_objectNode_objectNode()
 {
 	return uML_A_selection_objectNode_objectNode;
 }
-std::shared_ptr<uml::Association> UMLPackageImpl::get_UML_A_selector_lifeline()
+const std::shared_ptr<uml::Association>& UMLPackageImpl::get_UML_A_selector_lifeline()
 {
 	return uML_A_selector_lifeline;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_A_selector_lifeline_lifeline()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_A_selector_lifeline_lifeline()
 {
 	return uML_A_selector_lifeline_lifeline;
 }
-std::shared_ptr<uml::Association> UMLPackageImpl::get_UML_A_sendEvent_endMessage()
+const std::shared_ptr<uml::Association>& UMLPackageImpl::get_UML_A_sendEvent_endMessage()
 {
 	return uML_A_sendEvent_endMessage;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_A_sendEvent_endMessage_endMessage()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_A_sendEvent_endMessage_endMessage()
 {
 	return uML_A_sendEvent_endMessage_endMessage;
 }
-std::shared_ptr<uml::Association> UMLPackageImpl::get_UML_A_setupPart_loopNode()
+const std::shared_ptr<uml::Association>& UMLPackageImpl::get_UML_A_setupPart_loopNode()
 {
 	return uML_A_setupPart_loopNode;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_A_setupPart_loopNode_loopNode()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_A_setupPart_loopNode_loopNode()
 {
 	return uML_A_setupPart_loopNode_loopNode;
 }
-std::shared_ptr<uml::Association> UMLPackageImpl::get_UML_A_signal_broadcastSignalAction()
+const std::shared_ptr<uml::Association>& UMLPackageImpl::get_UML_A_signal_broadcastSignalAction()
 {
 	return uML_A_signal_broadcastSignalAction;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_A_signal_broadcastSignalAction_broadcastSignalAction()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_A_signal_broadcastSignalAction_broadcastSignalAction()
 {
 	return uML_A_signal_broadcastSignalAction_broadcastSignalAction;
 }
-std::shared_ptr<uml::Association> UMLPackageImpl::get_UML_A_signal_reception()
+const std::shared_ptr<uml::Association>& UMLPackageImpl::get_UML_A_signal_reception()
 {
 	return uML_A_signal_reception;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_A_signal_reception_reception()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_A_signal_reception_reception()
 {
 	return uML_A_signal_reception_reception;
 }
-std::shared_ptr<uml::Association> UMLPackageImpl::get_UML_A_signal_sendSignalAction()
+const std::shared_ptr<uml::Association>& UMLPackageImpl::get_UML_A_signal_sendSignalAction()
 {
 	return uML_A_signal_sendSignalAction;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_A_signal_sendSignalAction_sendSignalAction()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_A_signal_sendSignalAction_sendSignalAction()
 {
 	return uML_A_signal_sendSignalAction_sendSignalAction;
 }
-std::shared_ptr<uml::Association> UMLPackageImpl::get_UML_A_signal_signalEvent()
+const std::shared_ptr<uml::Association>& UMLPackageImpl::get_UML_A_signal_signalEvent()
 {
 	return uML_A_signal_signalEvent;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_A_signal_signalEvent_signalEvent()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_A_signal_signalEvent_signalEvent()
 {
 	return uML_A_signal_signalEvent_signalEvent;
 }
-std::shared_ptr<uml::Association> UMLPackageImpl::get_UML_A_signature_message()
+const std::shared_ptr<uml::Association>& UMLPackageImpl::get_UML_A_signature_message()
 {
 	return uML_A_signature_message;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_A_signature_message_message()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_A_signature_message_message()
 {
 	return uML_A_signature_message_message;
 }
-std::shared_ptr<uml::Association> UMLPackageImpl::get_UML_A_signature_templateBinding()
+const std::shared_ptr<uml::Association>& UMLPackageImpl::get_UML_A_signature_templateBinding()
 {
 	return uML_A_signature_templateBinding;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_A_signature_templateBinding_templateBinding()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_A_signature_templateBinding_templateBinding()
 {
 	return uML_A_signature_templateBinding_templateBinding;
 }
-std::shared_ptr<uml::Association> UMLPackageImpl::get_UML_A_slot_owningInstance()
+const std::shared_ptr<uml::Association>& UMLPackageImpl::get_UML_A_slot_owningInstance()
 {
 	return uML_A_slot_owningInstance;
 }
-std::shared_ptr<uml::Association> UMLPackageImpl::get_UML_A_source_directedRelationship()
+const std::shared_ptr<uml::Association>& UMLPackageImpl::get_UML_A_source_directedRelationship()
 {
 	return uML_A_source_directedRelationship;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_A_source_directedRelationship_directedRelationship()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_A_source_directedRelationship_directedRelationship()
 {
 	return uML_A_source_directedRelationship_directedRelationship;
 }
-std::shared_ptr<uml::Association> UMLPackageImpl::get_UML_A_specification_durationConstraint()
+const std::shared_ptr<uml::Association>& UMLPackageImpl::get_UML_A_specification_durationConstraint()
 {
 	return uML_A_specification_durationConstraint;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_A_specification_durationConstraint_durationConstraint()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_A_specification_durationConstraint_durationConstraint()
 {
 	return uML_A_specification_durationConstraint_durationConstraint;
 }
-std::shared_ptr<uml::Association> UMLPackageImpl::get_UML_A_specification_intervalConstraint()
+const std::shared_ptr<uml::Association>& UMLPackageImpl::get_UML_A_specification_intervalConstraint()
 {
 	return uML_A_specification_intervalConstraint;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_A_specification_intervalConstraint_intervalConstraint()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_A_specification_intervalConstraint_intervalConstraint()
 {
 	return uML_A_specification_intervalConstraint_intervalConstraint;
 }
-std::shared_ptr<uml::Association> UMLPackageImpl::get_UML_A_specification_owningConstraint()
+const std::shared_ptr<uml::Association>& UMLPackageImpl::get_UML_A_specification_owningConstraint()
 {
 	return uML_A_specification_owningConstraint;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_A_specification_owningConstraint_owningConstraint()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_A_specification_owningConstraint_owningConstraint()
 {
 	return uML_A_specification_owningConstraint_owningConstraint;
 }
-std::shared_ptr<uml::Association> UMLPackageImpl::get_UML_A_specification_owningInstanceSpec()
+const std::shared_ptr<uml::Association>& UMLPackageImpl::get_UML_A_specification_owningInstanceSpec()
 {
 	return uML_A_specification_owningInstanceSpec;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_A_specification_owningInstanceSpec_owningInstanceSpec()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_A_specification_owningInstanceSpec_owningInstanceSpec()
 {
 	return uML_A_specification_owningInstanceSpec_owningInstanceSpec;
 }
-std::shared_ptr<uml::Association> UMLPackageImpl::get_UML_A_specification_timeConstraint()
+const std::shared_ptr<uml::Association>& UMLPackageImpl::get_UML_A_specification_timeConstraint()
 {
 	return uML_A_specification_timeConstraint;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_A_specification_timeConstraint_timeConstraint()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_A_specification_timeConstraint_timeConstraint()
 {
 	return uML_A_specification_timeConstraint_timeConstraint;
 }
-std::shared_ptr<uml::Association> UMLPackageImpl::get_UML_A_start_executionSpecification()
+const std::shared_ptr<uml::Association>& UMLPackageImpl::get_UML_A_start_executionSpecification()
 {
 	return uML_A_start_executionSpecification;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_A_start_executionSpecification_executionSpecification()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_A_start_executionSpecification_executionSpecification()
 {
 	return uML_A_start_executionSpecification_executionSpecification;
 }
-std::shared_ptr<uml::Association> UMLPackageImpl::get_UML_A_stateInvariant_owningState()
+const std::shared_ptr<uml::Association>& UMLPackageImpl::get_UML_A_stateInvariant_owningState()
 {
 	return uML_A_stateInvariant_owningState;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_A_stateInvariant_owningState_owningState()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_A_stateInvariant_owningState_owningState()
 {
 	return uML_A_stateInvariant_owningState_owningState;
 }
-std::shared_ptr<uml::Association> UMLPackageImpl::get_UML_A_structuralFeature_structuralFeatureAction()
+const std::shared_ptr<uml::Association>& UMLPackageImpl::get_UML_A_structuralFeature_structuralFeatureAction()
 {
 	return uML_A_structuralFeature_structuralFeatureAction;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_A_structuralFeature_structuralFeatureAction_structuralFeatureAction()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_A_structuralFeature_structuralFeatureAction_structuralFeatureAction()
 {
 	return uML_A_structuralFeature_structuralFeatureAction_structuralFeatureAction;
 }
-std::shared_ptr<uml::Association> UMLPackageImpl::get_UML_A_structuredNodeInput_structuredActivityNode()
+const std::shared_ptr<uml::Association>& UMLPackageImpl::get_UML_A_structuredNodeInput_structuredActivityNode()
 {
 	return uML_A_structuredNodeInput_structuredActivityNode;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_A_structuredNodeInput_structuredActivityNode_structuredActivityNode()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_A_structuredNodeInput_structuredActivityNode_structuredActivityNode()
 {
 	return uML_A_structuredNodeInput_structuredActivityNode_structuredActivityNode;
 }
-std::shared_ptr<uml::Association> UMLPackageImpl::get_UML_A_structuredNodeOutput_structuredActivityNode()
+const std::shared_ptr<uml::Association>& UMLPackageImpl::get_UML_A_structuredNodeOutput_structuredActivityNode()
 {
 	return uML_A_structuredNodeOutput_structuredActivityNode;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_A_structuredNodeOutput_structuredActivityNode_structuredActivityNode()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_A_structuredNodeOutput_structuredActivityNode_structuredActivityNode()
 {
 	return uML_A_structuredNodeOutput_structuredActivityNode_structuredActivityNode;
 }
-std::shared_ptr<uml::Association> UMLPackageImpl::get_UML_A_structuredNode_activity()
+const std::shared_ptr<uml::Association>& UMLPackageImpl::get_UML_A_structuredNode_activity()
 {
 	return uML_A_structuredNode_activity;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_A_structuredNode_activity_activity()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_A_structuredNode_activity_activity()
 {
 	return uML_A_structuredNode_activity_activity;
 }
-std::shared_ptr<uml::Association> UMLPackageImpl::get_UML_A_subExpression_owningExpression()
+const std::shared_ptr<uml::Association>& UMLPackageImpl::get_UML_A_subExpression_owningExpression()
 {
 	return uML_A_subExpression_owningExpression;
 }
-std::shared_ptr<uml::Association> UMLPackageImpl::get_UML_A_subgroup_superGroup()
+const std::shared_ptr<uml::Association>& UMLPackageImpl::get_UML_A_subgroup_superGroup()
 {
 	return uML_A_subgroup_superGroup;
 }
-std::shared_ptr<uml::Association> UMLPackageImpl::get_UML_A_subject_useCase()
+const std::shared_ptr<uml::Association>& UMLPackageImpl::get_UML_A_subject_useCase()
 {
 	return uML_A_subject_useCase;
 }
-std::shared_ptr<uml::Association> UMLPackageImpl::get_UML_A_submachineState_submachine()
+const std::shared_ptr<uml::Association>& UMLPackageImpl::get_UML_A_submachineState_submachine()
 {
 	return uML_A_submachineState_submachine;
 }
-std::shared_ptr<uml::Association> UMLPackageImpl::get_UML_A_subpartition_superPartition()
+const std::shared_ptr<uml::Association>& UMLPackageImpl::get_UML_A_subpartition_superPartition()
 {
 	return uML_A_subpartition_superPartition;
 }
-std::shared_ptr<uml::Association> UMLPackageImpl::get_UML_A_subsettedProperty_property()
+const std::shared_ptr<uml::Association>& UMLPackageImpl::get_UML_A_subsettedProperty_property()
 {
 	return uML_A_subsettedProperty_property;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_A_subsettedProperty_property_property()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_A_subsettedProperty_property_property()
 {
 	return uML_A_subsettedProperty_property_property;
 }
-std::shared_ptr<uml::Association> UMLPackageImpl::get_UML_A_substitution_substitutingClassifier()
+const std::shared_ptr<uml::Association>& UMLPackageImpl::get_UML_A_substitution_substitutingClassifier()
 {
 	return uML_A_substitution_substitutingClassifier;
 }
-std::shared_ptr<uml::Association> UMLPackageImpl::get_UML_A_subvertex_container()
+const std::shared_ptr<uml::Association>& UMLPackageImpl::get_UML_A_subvertex_container()
 {
 	return uML_A_subvertex_container;
 }
-std::shared_ptr<uml::Association> UMLPackageImpl::get_UML_A_superClass_class()
+const std::shared_ptr<uml::Association>& UMLPackageImpl::get_UML_A_superClass_class()
 {
 	return uML_A_superClass_class;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_A_superClass_class_class()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_A_superClass_class_class()
 {
 	return uML_A_superClass_class_class;
 }
-std::shared_ptr<uml::Association> UMLPackageImpl::get_UML_A_supplier_supplierDependency()
+const std::shared_ptr<uml::Association>& UMLPackageImpl::get_UML_A_supplier_supplierDependency()
 {
 	return uML_A_supplier_supplierDependency;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_A_supplier_supplierDependency_supplierDependency()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_A_supplier_supplierDependency_supplierDependency()
 {
 	return uML_A_supplier_supplierDependency_supplierDependency;
 }
-std::shared_ptr<uml::Association> UMLPackageImpl::get_UML_A_target_callOperationAction()
+const std::shared_ptr<uml::Association>& UMLPackageImpl::get_UML_A_target_callOperationAction()
 {
 	return uML_A_target_callOperationAction;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_A_target_callOperationAction_callOperationAction()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_A_target_callOperationAction_callOperationAction()
 {
 	return uML_A_target_callOperationAction_callOperationAction;
 }
-std::shared_ptr<uml::Association> UMLPackageImpl::get_UML_A_target_destroyObjectAction()
+const std::shared_ptr<uml::Association>& UMLPackageImpl::get_UML_A_target_destroyObjectAction()
 {
 	return uML_A_target_destroyObjectAction;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_A_target_destroyObjectAction_destroyObjectAction()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_A_target_destroyObjectAction_destroyObjectAction()
 {
 	return uML_A_target_destroyObjectAction_destroyObjectAction;
 }
-std::shared_ptr<uml::Association> UMLPackageImpl::get_UML_A_target_directedRelationship()
+const std::shared_ptr<uml::Association>& UMLPackageImpl::get_UML_A_target_directedRelationship()
 {
 	return uML_A_target_directedRelationship;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_A_target_directedRelationship_directedRelationship()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_A_target_directedRelationship_directedRelationship()
 {
 	return uML_A_target_directedRelationship_directedRelationship;
 }
-std::shared_ptr<uml::Association> UMLPackageImpl::get_UML_A_target_sendObjectAction()
+const std::shared_ptr<uml::Association>& UMLPackageImpl::get_UML_A_target_sendObjectAction()
 {
 	return uML_A_target_sendObjectAction;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_A_target_sendObjectAction_sendObjectAction()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_A_target_sendObjectAction_sendObjectAction()
 {
 	return uML_A_target_sendObjectAction_sendObjectAction;
 }
-std::shared_ptr<uml::Association> UMLPackageImpl::get_UML_A_target_sendSignalAction()
+const std::shared_ptr<uml::Association>& UMLPackageImpl::get_UML_A_target_sendSignalAction()
 {
 	return uML_A_target_sendSignalAction;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_A_target_sendSignalAction_sendSignalAction()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_A_target_sendSignalAction_sendSignalAction()
 {
 	return uML_A_target_sendSignalAction_sendSignalAction;
 }
-std::shared_ptr<uml::Association> UMLPackageImpl::get_UML_A_templateBinding_boundElement()
+const std::shared_ptr<uml::Association>& UMLPackageImpl::get_UML_A_templateBinding_boundElement()
 {
 	return uML_A_templateBinding_boundElement;
 }
-std::shared_ptr<uml::Association> UMLPackageImpl::get_UML_A_test_clause()
+const std::shared_ptr<uml::Association>& UMLPackageImpl::get_UML_A_test_clause()
 {
 	return uML_A_test_clause;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_A_test_clause_clause()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_A_test_clause_clause()
 {
 	return uML_A_test_clause_clause;
 }
-std::shared_ptr<uml::Association> UMLPackageImpl::get_UML_A_test_loopNode()
+const std::shared_ptr<uml::Association>& UMLPackageImpl::get_UML_A_test_loopNode()
 {
 	return uML_A_test_loopNode;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_A_test_loopNode_loopNode()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_A_test_loopNode_loopNode()
 {
 	return uML_A_test_loopNode_loopNode;
 }
-std::shared_ptr<uml::Association> UMLPackageImpl::get_UML_A_toBefore_after()
+const std::shared_ptr<uml::Association>& UMLPackageImpl::get_UML_A_toBefore_after()
 {
 	return uML_A_toBefore_after;
 }
-std::shared_ptr<uml::Association> UMLPackageImpl::get_UML_A_transformation_objectFlow()
+const std::shared_ptr<uml::Association>& UMLPackageImpl::get_UML_A_transformation_objectFlow()
 {
 	return uML_A_transformation_objectFlow;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_A_transformation_objectFlow_objectFlow()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_A_transformation_objectFlow_objectFlow()
 {
 	return uML_A_transformation_objectFlow_objectFlow;
 }
-std::shared_ptr<uml::Association> UMLPackageImpl::get_UML_A_transition_container()
+const std::shared_ptr<uml::Association>& UMLPackageImpl::get_UML_A_transition_container()
 {
 	return uML_A_transition_container;
 }
-std::shared_ptr<uml::Association> UMLPackageImpl::get_UML_A_trigger_acceptEventAction()
+const std::shared_ptr<uml::Association>& UMLPackageImpl::get_UML_A_trigger_acceptEventAction()
 {
 	return uML_A_trigger_acceptEventAction;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_A_trigger_acceptEventAction_acceptEventAction()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_A_trigger_acceptEventAction_acceptEventAction()
 {
 	return uML_A_trigger_acceptEventAction_acceptEventAction;
 }
-std::shared_ptr<uml::Association> UMLPackageImpl::get_UML_A_trigger_transition()
+const std::shared_ptr<uml::Association>& UMLPackageImpl::get_UML_A_trigger_transition()
 {
 	return uML_A_trigger_transition;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_A_trigger_transition_transition()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_A_trigger_transition_transition()
 {
 	return uML_A_trigger_transition_transition;
 }
-std::shared_ptr<uml::Association> UMLPackageImpl::get_UML_A_type_collaborationUse()
+const std::shared_ptr<uml::Association>& UMLPackageImpl::get_UML_A_type_collaborationUse()
 {
 	return uML_A_type_collaborationUse;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_A_type_collaborationUse_collaborationUse()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_A_type_collaborationUse_collaborationUse()
 {
 	return uML_A_type_collaborationUse_collaborationUse;
 }
-std::shared_ptr<uml::Association> UMLPackageImpl::get_UML_A_type_connector()
+const std::shared_ptr<uml::Association>& UMLPackageImpl::get_UML_A_type_connector()
 {
 	return uML_A_type_connector;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_A_type_connector_connector()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_A_type_connector_connector()
 {
 	return uML_A_type_connector_connector;
 }
-std::shared_ptr<uml::Association> UMLPackageImpl::get_UML_A_type_extensionEnd()
+const std::shared_ptr<uml::Association>& UMLPackageImpl::get_UML_A_type_extensionEnd()
 {
 	return uML_A_type_extensionEnd;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_A_type_extensionEnd_extensionEnd()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_A_type_extensionEnd_extensionEnd()
 {
 	return uML_A_type_extensionEnd_extensionEnd;
 }
-std::shared_ptr<uml::Association> UMLPackageImpl::get_UML_A_type_operation()
+const std::shared_ptr<uml::Association>& UMLPackageImpl::get_UML_A_type_operation()
 {
 	return uML_A_type_operation;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_A_type_operation_operation()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_A_type_operation_operation()
 {
 	return uML_A_type_operation_operation;
 }
-std::shared_ptr<uml::Association> UMLPackageImpl::get_UML_A_type_typedElement()
+const std::shared_ptr<uml::Association>& UMLPackageImpl::get_UML_A_type_typedElement()
 {
 	return uML_A_type_typedElement;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_A_type_typedElement_typedElement()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_A_type_typedElement_typedElement()
 {
 	return uML_A_type_typedElement_typedElement;
 }
-std::shared_ptr<uml::Association> UMLPackageImpl::get_UML_A_unmarshallType_unmarshallAction()
+const std::shared_ptr<uml::Association>& UMLPackageImpl::get_UML_A_unmarshallType_unmarshallAction()
 {
 	return uML_A_unmarshallType_unmarshallAction;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_A_unmarshallType_unmarshallAction_unmarshallAction()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_A_unmarshallType_unmarshallAction_unmarshallAction()
 {
 	return uML_A_unmarshallType_unmarshallAction_unmarshallAction;
 }
-std::shared_ptr<uml::Association> UMLPackageImpl::get_UML_A_upperBound_objectNode()
+const std::shared_ptr<uml::Association>& UMLPackageImpl::get_UML_A_upperBound_objectNode()
 {
 	return uML_A_upperBound_objectNode;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_A_upperBound_objectNode_objectNode()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_A_upperBound_objectNode_objectNode()
 {
 	return uML_A_upperBound_objectNode_objectNode;
 }
-std::shared_ptr<uml::Association> UMLPackageImpl::get_UML_A_upperValue_owningUpper()
+const std::shared_ptr<uml::Association>& UMLPackageImpl::get_UML_A_upperValue_owningUpper()
 {
 	return uML_A_upperValue_owningUpper;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_A_upperValue_owningUpper_owningUpper()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_A_upperValue_owningUpper_owningUpper()
 {
 	return uML_A_upperValue_owningUpper_owningUpper;
 }
-std::shared_ptr<uml::Association> UMLPackageImpl::get_UML_A_utilizedElement_manifestation()
+const std::shared_ptr<uml::Association>& UMLPackageImpl::get_UML_A_utilizedElement_manifestation()
 {
 	return uML_A_utilizedElement_manifestation;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_A_utilizedElement_manifestation_manifestation()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_A_utilizedElement_manifestation_manifestation()
 {
 	return uML_A_utilizedElement_manifestation_manifestation;
 }
-std::shared_ptr<uml::Association> UMLPackageImpl::get_UML_A_value_linkEndData()
+const std::shared_ptr<uml::Association>& UMLPackageImpl::get_UML_A_value_linkEndData()
 {
 	return uML_A_value_linkEndData;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_A_value_linkEndData_linkEndData()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_A_value_linkEndData_linkEndData()
 {
 	return uML_A_value_linkEndData_linkEndData;
 }
-std::shared_ptr<uml::Association> UMLPackageImpl::get_UML_A_value_owningSlot()
+const std::shared_ptr<uml::Association>& UMLPackageImpl::get_UML_A_value_owningSlot()
 {
 	return uML_A_value_owningSlot;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_A_value_owningSlot_owningSlot()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_A_value_owningSlot_owningSlot()
 {
 	return uML_A_value_owningSlot_owningSlot;
 }
-std::shared_ptr<uml::Association> UMLPackageImpl::get_UML_A_value_qualifierValue()
+const std::shared_ptr<uml::Association>& UMLPackageImpl::get_UML_A_value_qualifierValue()
 {
 	return uML_A_value_qualifierValue;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_A_value_qualifierValue_qualifierValue()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_A_value_qualifierValue_qualifierValue()
 {
 	return uML_A_value_qualifierValue_qualifierValue;
 }
-std::shared_ptr<uml::Association> UMLPackageImpl::get_UML_A_value_valuePin()
+const std::shared_ptr<uml::Association>& UMLPackageImpl::get_UML_A_value_valuePin()
 {
 	return uML_A_value_valuePin;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_A_value_valuePin_valuePin()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_A_value_valuePin_valuePin()
 {
 	return uML_A_value_valuePin_valuePin;
 }
-std::shared_ptr<uml::Association> UMLPackageImpl::get_UML_A_value_valueSpecificationAction()
+const std::shared_ptr<uml::Association>& UMLPackageImpl::get_UML_A_value_valueSpecificationAction()
 {
 	return uML_A_value_valueSpecificationAction;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_A_value_valueSpecificationAction_valueSpecificationAction()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_A_value_valueSpecificationAction_valueSpecificationAction()
 {
 	return uML_A_value_valueSpecificationAction_valueSpecificationAction;
 }
-std::shared_ptr<uml::Association> UMLPackageImpl::get_UML_A_value_writeStructuralFeatureAction()
+const std::shared_ptr<uml::Association>& UMLPackageImpl::get_UML_A_value_writeStructuralFeatureAction()
 {
 	return uML_A_value_writeStructuralFeatureAction;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_A_value_writeStructuralFeatureAction_writeStructuralFeatureAction()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_A_value_writeStructuralFeatureAction_writeStructuralFeatureAction()
 {
 	return uML_A_value_writeStructuralFeatureAction_writeStructuralFeatureAction;
 }
-std::shared_ptr<uml::Association> UMLPackageImpl::get_UML_A_value_writeVariableAction()
+const std::shared_ptr<uml::Association>& UMLPackageImpl::get_UML_A_value_writeVariableAction()
 {
 	return uML_A_value_writeVariableAction;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_A_value_writeVariableAction_writeVariableAction()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_A_value_writeVariableAction_writeVariableAction()
 {
 	return uML_A_value_writeVariableAction_writeVariableAction;
 }
-std::shared_ptr<uml::Association> UMLPackageImpl::get_UML_A_variable_activityScope()
+const std::shared_ptr<uml::Association>& UMLPackageImpl::get_UML_A_variable_activityScope()
 {
 	return uML_A_variable_activityScope;
 }
-std::shared_ptr<uml::Association> UMLPackageImpl::get_UML_A_variable_scope()
+const std::shared_ptr<uml::Association>& UMLPackageImpl::get_UML_A_variable_scope()
 {
 	return uML_A_variable_scope;
 }
-std::shared_ptr<uml::Association> UMLPackageImpl::get_UML_A_variable_variableAction()
+const std::shared_ptr<uml::Association>& UMLPackageImpl::get_UML_A_variable_variableAction()
 {
 	return uML_A_variable_variableAction;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_A_variable_variableAction_variableAction()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_A_variable_variableAction_variableAction()
 {
 	return uML_A_variable_variableAction_variableAction;
 }
-std::shared_ptr<uml::Association> UMLPackageImpl::get_UML_A_weight_activityEdge()
+const std::shared_ptr<uml::Association>& UMLPackageImpl::get_UML_A_weight_activityEdge()
 {
 	return uML_A_weight_activityEdge;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_A_weight_activityEdge_activityEdge()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_A_weight_activityEdge_activityEdge()
 {
 	return uML_A_weight_activityEdge_activityEdge;
 }
-std::shared_ptr<uml::Association> UMLPackageImpl::get_UML_A_when_timeEvent()
+const std::shared_ptr<uml::Association>& UMLPackageImpl::get_UML_A_when_timeEvent()
 {
 	return uML_A_when_timeEvent;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_A_when_timeEvent_timeEvent()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_A_when_timeEvent_timeEvent()
 {
 	return uML_A_when_timeEvent_timeEvent;
 }
-std::shared_ptr<uml::Class> UMLPackageImpl::get_UML_Abstraction()
+const std::shared_ptr<uml::Class>& UMLPackageImpl::get_UML_Abstraction()
 {
 	return uML_Abstraction;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_Abstraction_mapping()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_Abstraction_mapping()
 {
 	return uML_Abstraction_mapping;
 }
-std::shared_ptr<uml::Class> UMLPackageImpl::get_UML_AcceptCallAction()
+const std::shared_ptr<uml::Class>& UMLPackageImpl::get_UML_AcceptCallAction()
 {
 	return uML_AcceptCallAction;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_AcceptCallAction_result_pins()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_AcceptCallAction_result_pins()
 {
 	return uML_AcceptCallAction_result_pins;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_AcceptCallAction_returnInformation()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_AcceptCallAction_returnInformation()
 {
 	return uML_AcceptCallAction_returnInformation;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_AcceptCallAction_trigger_call_event()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_AcceptCallAction_trigger_call_event()
 {
 	return uML_AcceptCallAction_trigger_call_event;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_AcceptCallAction_unmarshall()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_AcceptCallAction_unmarshall()
 {
 	return uML_AcceptCallAction_unmarshall;
 }
-std::shared_ptr<uml::Class> UMLPackageImpl::get_UML_AcceptEventAction()
+const std::shared_ptr<uml::Class>& UMLPackageImpl::get_UML_AcceptEventAction()
 {
 	return uML_AcceptEventAction;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_AcceptEventAction_conforming_type()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_AcceptEventAction_conforming_type()
 {
 	return uML_AcceptEventAction_conforming_type;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_AcceptEventAction_isUnmarshall()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_AcceptEventAction_isUnmarshall()
 {
 	return uML_AcceptEventAction_isUnmarshall;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_AcceptEventAction_no_input_pins()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_AcceptEventAction_no_input_pins()
 {
 	return uML_AcceptEventAction_no_input_pins;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_AcceptEventAction_no_output_pins()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_AcceptEventAction_no_output_pins()
 {
 	return uML_AcceptEventAction_no_output_pins;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_AcceptEventAction_one_output_pin()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_AcceptEventAction_one_output_pin()
 {
 	return uML_AcceptEventAction_one_output_pin;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_AcceptEventAction_result()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_AcceptEventAction_result()
 {
 	return uML_AcceptEventAction_result;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_AcceptEventAction_trigger()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_AcceptEventAction_trigger()
 {
 	return uML_AcceptEventAction_trigger;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_AcceptEventAction_unmarshall_signal_events()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_AcceptEventAction_unmarshall_signal_events()
 {
 	return uML_AcceptEventAction_unmarshall_signal_events;
 }
-std::shared_ptr<uml::Class> UMLPackageImpl::get_UML_Action()
+const std::shared_ptr<uml::Class>& UMLPackageImpl::get_UML_Action()
 {
 	return uML_Action;
 }
-std::shared_ptr<uml::Class> UMLPackageImpl::get_UML_ActionExecutionSpecification()
+const std::shared_ptr<uml::Class>& UMLPackageImpl::get_UML_ActionExecutionSpecification()
 {
 	return uML_ActionExecutionSpecification;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_ActionExecutionSpecification_action()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_ActionExecutionSpecification_action()
 {
 	return uML_ActionExecutionSpecification_action;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_ActionExecutionSpecification_action_referenced()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_ActionExecutionSpecification_action_referenced()
 {
 	return uML_ActionExecutionSpecification_action_referenced;
 }
-std::shared_ptr<uml::Class> UMLPackageImpl::get_UML_ActionInputPin()
+const std::shared_ptr<uml::Class>& UMLPackageImpl::get_UML_ActionInputPin()
 {
 	return uML_ActionInputPin;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_ActionInputPin_fromAction()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_ActionInputPin_fromAction()
 {
 	return uML_ActionInputPin_fromAction;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_ActionInputPin_input_pin()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_ActionInputPin_input_pin()
 {
 	return uML_ActionInputPin_input_pin;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_ActionInputPin_no_control_or_object_flow()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_ActionInputPin_no_control_or_object_flow()
 {
 	return uML_ActionInputPin_no_control_or_object_flow;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_ActionInputPin_one_output_pin()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_ActionInputPin_one_output_pin()
 {
 	return uML_ActionInputPin_one_output_pin;
 }
-std::shared_ptr<uml::Operation> UMLPackageImpl::get_UML_Action_allActions__()
+const std::shared_ptr<uml::Operation>& UMLPackageImpl::get_UML_Action_allActions__()
 {
 	return uML_Action_allActions__;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_Action_allActions_result()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_Action_allActions_result()
 {
 	return uML_Action_allActions_result;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_Action_allActions_spec()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_Action_allActions_spec()
 {
 	return uML_Action_allActions_spec;
 }
-std::shared_ptr<uml::Operation> UMLPackageImpl::get_UML_Action_allOwnedNodes__()
+const std::shared_ptr<uml::Operation>& UMLPackageImpl::get_UML_Action_allOwnedNodes__()
 {
 	return uML_Action_allOwnedNodes__;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_Action_allOwnedNodes_result()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_Action_allOwnedNodes_result()
 {
 	return uML_Action_allOwnedNodes_result;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_Action_allOwnedNodes_spec()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_Action_allOwnedNodes_spec()
 {
 	return uML_Action_allOwnedNodes_spec;
 }
-std::shared_ptr<uml::Operation> UMLPackageImpl::get_UML_Action_containingBehavior__()
+const std::shared_ptr<uml::Operation>& UMLPackageImpl::get_UML_Action_containingBehavior__()
 {
 	return uML_Action_containingBehavior__;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_Action_containingBehavior_result()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_Action_containingBehavior_result()
 {
 	return uML_Action_containingBehavior_result;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_Action_containingBehavior_spec()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_Action_containingBehavior_spec()
 {
 	return uML_Action_containingBehavior_spec;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_Action_context()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_Action_context()
 {
 	return uML_Action_context;
 }
-std::shared_ptr<uml::Operation> UMLPackageImpl::get_UML_Action_context__()
+const std::shared_ptr<uml::Operation>& UMLPackageImpl::get_UML_Action_context__()
 {
 	return uML_Action_context__;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_Action_context_result()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_Action_context_result()
 {
 	return uML_Action_context_result;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_Action_context_spec()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_Action_context_spec()
 {
 	return uML_Action_context_spec;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_Action_input()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_Action_input()
 {
 	return uML_Action_input;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_Action_isLocallyReentrant()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_Action_isLocallyReentrant()
 {
 	return uML_Action_isLocallyReentrant;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_Action_localPostcondition()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_Action_localPostcondition()
 {
 	return uML_Action_localPostcondition;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_Action_localPrecondition()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_Action_localPrecondition()
 {
 	return uML_Action_localPrecondition;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_Action_output()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_Action_output()
 {
 	return uML_Action_output;
 }
-std::shared_ptr<uml::Class> UMLPackageImpl::get_UML_Activity()
+const std::shared_ptr<uml::Class>& UMLPackageImpl::get_UML_Activity()
 {
 	return uML_Activity;
 }
-std::shared_ptr<uml::Class> UMLPackageImpl::get_UML_ActivityEdge()
+const std::shared_ptr<uml::Class>& UMLPackageImpl::get_UML_ActivityEdge()
 {
 	return uML_ActivityEdge;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_ActivityEdge_activity()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_ActivityEdge_activity()
 {
 	return uML_ActivityEdge_activity;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_ActivityEdge_guard()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_ActivityEdge_guard()
 {
 	return uML_ActivityEdge_guard;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_ActivityEdge_inGroup()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_ActivityEdge_inGroup()
 {
 	return uML_ActivityEdge_inGroup;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_ActivityEdge_inPartition()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_ActivityEdge_inPartition()
 {
 	return uML_ActivityEdge_inPartition;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_ActivityEdge_inStructuredNode()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_ActivityEdge_inStructuredNode()
 {
 	return uML_ActivityEdge_inStructuredNode;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_ActivityEdge_interrupts()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_ActivityEdge_interrupts()
 {
 	return uML_ActivityEdge_interrupts;
 }
-std::shared_ptr<uml::Operation> UMLPackageImpl::get_UML_ActivityEdge_isConsistentWith_RedefinableElement_RedefinableElement()
+const std::shared_ptr<uml::Operation>& UMLPackageImpl::get_UML_ActivityEdge_isConsistentWith_RedefinableElement_RedefinableElement()
 {
 	return uML_ActivityEdge_isConsistentWith_RedefinableElement_RedefinableElement;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_ActivityEdge_isConsistentWith_RedefinableElement_RedefinableElement_redefiningElement()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_ActivityEdge_isConsistentWith_RedefinableElement_RedefinableElement_redefiningElement()
 {
 	return uML_ActivityEdge_isConsistentWith_RedefinableElement_RedefinableElement_redefiningElement;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_ActivityEdge_isConsistentWith_result()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_ActivityEdge_isConsistentWith_result()
 {
 	return uML_ActivityEdge_isConsistentWith_result;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_ActivityEdge_isConsistentWith_spec()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_ActivityEdge_isConsistentWith_spec()
 {
 	return uML_ActivityEdge_isConsistentWith_spec;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_ActivityEdge_redefinedEdge()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_ActivityEdge_redefinedEdge()
 {
 	return uML_ActivityEdge_redefinedEdge;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_ActivityEdge_source()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_ActivityEdge_source()
 {
 	return uML_ActivityEdge_source;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_ActivityEdge_source_and_target()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_ActivityEdge_source_and_target()
 {
 	return uML_ActivityEdge_source_and_target;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_ActivityEdge_target()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_ActivityEdge_target()
 {
 	return uML_ActivityEdge_target;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_ActivityEdge_weight()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_ActivityEdge_weight()
 {
 	return uML_ActivityEdge_weight;
 }
-std::shared_ptr<uml::Class> UMLPackageImpl::get_UML_ActivityFinalNode()
+const std::shared_ptr<uml::Class>& UMLPackageImpl::get_UML_ActivityFinalNode()
 {
 	return uML_ActivityFinalNode;
 }
-std::shared_ptr<uml::Class> UMLPackageImpl::get_UML_ActivityGroup()
+const std::shared_ptr<uml::Class>& UMLPackageImpl::get_UML_ActivityGroup()
 {
 	return uML_ActivityGroup;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_ActivityGroup_containedEdge()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_ActivityGroup_containedEdge()
 {
 	return uML_ActivityGroup_containedEdge;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_ActivityGroup_containedNode()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_ActivityGroup_containedNode()
 {
 	return uML_ActivityGroup_containedNode;
 }
-std::shared_ptr<uml::Operation> UMLPackageImpl::get_UML_ActivityGroup_containingActivity__()
+const std::shared_ptr<uml::Operation>& UMLPackageImpl::get_UML_ActivityGroup_containingActivity__()
 {
 	return uML_ActivityGroup_containingActivity__;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_ActivityGroup_containingActivity_result()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_ActivityGroup_containingActivity_result()
 {
 	return uML_ActivityGroup_containingActivity_result;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_ActivityGroup_containingActivity_spec()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_ActivityGroup_containingActivity_spec()
 {
 	return uML_ActivityGroup_containingActivity_spec;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_ActivityGroup_inActivity()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_ActivityGroup_inActivity()
 {
 	return uML_ActivityGroup_inActivity;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_ActivityGroup_nodes_and_edges()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_ActivityGroup_nodes_and_edges()
 {
 	return uML_ActivityGroup_nodes_and_edges;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_ActivityGroup_not_contained()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_ActivityGroup_not_contained()
 {
 	return uML_ActivityGroup_not_contained;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_ActivityGroup_subgroup()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_ActivityGroup_subgroup()
 {
 	return uML_ActivityGroup_subgroup;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_ActivityGroup_superGroup()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_ActivityGroup_superGroup()
 {
 	return uML_ActivityGroup_superGroup;
 }
-std::shared_ptr<uml::Class> UMLPackageImpl::get_UML_ActivityNode()
+const std::shared_ptr<uml::Class>& UMLPackageImpl::get_UML_ActivityNode()
 {
 	return uML_ActivityNode;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_ActivityNode_activity()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_ActivityNode_activity()
 {
 	return uML_ActivityNode_activity;
 }
-std::shared_ptr<uml::Operation> UMLPackageImpl::get_UML_ActivityNode_containingActivity__()
+const std::shared_ptr<uml::Operation>& UMLPackageImpl::get_UML_ActivityNode_containingActivity__()
 {
 	return uML_ActivityNode_containingActivity__;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_ActivityNode_containingActivity_result()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_ActivityNode_containingActivity_result()
 {
 	return uML_ActivityNode_containingActivity_result;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_ActivityNode_containingActivity_spec()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_ActivityNode_containingActivity_spec()
 {
 	return uML_ActivityNode_containingActivity_spec;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_ActivityNode_inGroup()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_ActivityNode_inGroup()
 {
 	return uML_ActivityNode_inGroup;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_ActivityNode_inInterruptibleRegion()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_ActivityNode_inInterruptibleRegion()
 {
 	return uML_ActivityNode_inInterruptibleRegion;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_ActivityNode_inPartition()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_ActivityNode_inPartition()
 {
 	return uML_ActivityNode_inPartition;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_ActivityNode_inStructuredNode()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_ActivityNode_inStructuredNode()
 {
 	return uML_ActivityNode_inStructuredNode;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_ActivityNode_incoming()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_ActivityNode_incoming()
 {
 	return uML_ActivityNode_incoming;
 }
-std::shared_ptr<uml::Operation> UMLPackageImpl::get_UML_ActivityNode_isConsistentWith_RedefinableElement_RedefinableElement()
+const std::shared_ptr<uml::Operation>& UMLPackageImpl::get_UML_ActivityNode_isConsistentWith_RedefinableElement_RedefinableElement()
 {
 	return uML_ActivityNode_isConsistentWith_RedefinableElement_RedefinableElement;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_ActivityNode_isConsistentWith_RedefinableElement_RedefinableElement_redefiningElement()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_ActivityNode_isConsistentWith_RedefinableElement_RedefinableElement_redefiningElement()
 {
 	return uML_ActivityNode_isConsistentWith_RedefinableElement_RedefinableElement_redefiningElement;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_ActivityNode_isConsistentWith_result()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_ActivityNode_isConsistentWith_result()
 {
 	return uML_ActivityNode_isConsistentWith_result;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_ActivityNode_isConsistentWith_spec()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_ActivityNode_isConsistentWith_spec()
 {
 	return uML_ActivityNode_isConsistentWith_spec;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_ActivityNode_outgoing()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_ActivityNode_outgoing()
 {
 	return uML_ActivityNode_outgoing;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_ActivityNode_redefinedNode()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_ActivityNode_redefinedNode()
 {
 	return uML_ActivityNode_redefinedNode;
 }
-std::shared_ptr<uml::Class> UMLPackageImpl::get_UML_ActivityParameterNode()
+const std::shared_ptr<uml::Class>& UMLPackageImpl::get_UML_ActivityParameterNode()
 {
 	return uML_ActivityParameterNode;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_ActivityParameterNode_has_parameters()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_ActivityParameterNode_has_parameters()
 {
 	return uML_ActivityParameterNode_has_parameters;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_ActivityParameterNode_no_edges()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_ActivityParameterNode_no_edges()
 {
 	return uML_ActivityParameterNode_no_edges;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_ActivityParameterNode_no_incoming_edges()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_ActivityParameterNode_no_incoming_edges()
 {
 	return uML_ActivityParameterNode_no_incoming_edges;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_ActivityParameterNode_no_outgoing_edges()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_ActivityParameterNode_no_outgoing_edges()
 {
 	return uML_ActivityParameterNode_no_outgoing_edges;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_ActivityParameterNode_parameter()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_ActivityParameterNode_parameter()
 {
 	return uML_ActivityParameterNode_parameter;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_ActivityParameterNode_same_type()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_ActivityParameterNode_same_type()
 {
 	return uML_ActivityParameterNode_same_type;
 }
-std::shared_ptr<uml::Class> UMLPackageImpl::get_UML_ActivityPartition()
+const std::shared_ptr<uml::Class>& UMLPackageImpl::get_UML_ActivityPartition()
 {
 	return uML_ActivityPartition;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_ActivityPartition_dimension_not_contained()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_ActivityPartition_dimension_not_contained()
 {
 	return uML_ActivityPartition_dimension_not_contained;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_ActivityPartition_edge()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_ActivityPartition_edge()
 {
 	return uML_ActivityPartition_edge;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_ActivityPartition_isDimension()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_ActivityPartition_isDimension()
 {
 	return uML_ActivityPartition_isDimension;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_ActivityPartition_isExternal()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_ActivityPartition_isExternal()
 {
 	return uML_ActivityPartition_isExternal;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_ActivityPartition_node()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_ActivityPartition_node()
 {
 	return uML_ActivityPartition_node;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_ActivityPartition_represents()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_ActivityPartition_represents()
 {
 	return uML_ActivityPartition_represents;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_ActivityPartition_represents_classifier()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_ActivityPartition_represents_classifier()
 {
 	return uML_ActivityPartition_represents_classifier;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_ActivityPartition_represents_property()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_ActivityPartition_represents_property()
 {
 	return uML_ActivityPartition_represents_property;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_ActivityPartition_represents_property_and_is_contained()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_ActivityPartition_represents_property_and_is_contained()
 {
 	return uML_ActivityPartition_represents_property_and_is_contained;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_ActivityPartition_subpartition()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_ActivityPartition_subpartition()
 {
 	return uML_ActivityPartition_subpartition;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_ActivityPartition_superPartition()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_ActivityPartition_superPartition()
 {
 	return uML_ActivityPartition_superPartition;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_Activity_edge()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_Activity_edge()
 {
 	return uML_Activity_edge;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_Activity_group()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_Activity_group()
 {
 	return uML_Activity_group;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_Activity_isReadOnly()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_Activity_isReadOnly()
 {
 	return uML_Activity_isReadOnly;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_Activity_isSingleExecution()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_Activity_isSingleExecution()
 {
 	return uML_Activity_isSingleExecution;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_Activity_maximum_one_parameter_node()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_Activity_maximum_one_parameter_node()
 {
 	return uML_Activity_maximum_one_parameter_node;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_Activity_maximum_two_parameter_nodes()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_Activity_maximum_two_parameter_nodes()
 {
 	return uML_Activity_maximum_two_parameter_nodes;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_Activity_node()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_Activity_node()
 {
 	return uML_Activity_node;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_Activity_ownedGroup()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_Activity_ownedGroup()
 {
 	return uML_Activity_ownedGroup;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_Activity_ownedNode()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_Activity_ownedNode()
 {
 	return uML_Activity_ownedNode;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_Activity_partition()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_Activity_partition()
 {
 	return uML_Activity_partition;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_Activity_structuredNode()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_Activity_structuredNode()
 {
 	return uML_Activity_structuredNode;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_Activity_variable()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_Activity_variable()
 {
 	return uML_Activity_variable;
 }
-std::shared_ptr<uml::Class> UMLPackageImpl::get_UML_Actor()
+const std::shared_ptr<uml::Class>& UMLPackageImpl::get_UML_Actor()
 {
 	return uML_Actor;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_Actor_associations()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_Actor_associations()
 {
 	return uML_Actor_associations;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_Actor_must_have_name()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_Actor_must_have_name()
 {
 	return uML_Actor_must_have_name;
 }
-std::shared_ptr<uml::Class> UMLPackageImpl::get_UML_AddStructuralFeatureValueAction()
+const std::shared_ptr<uml::Class>& UMLPackageImpl::get_UML_AddStructuralFeatureValueAction()
 {
 	return uML_AddStructuralFeatureValueAction;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_AddStructuralFeatureValueAction_insertAt()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_AddStructuralFeatureValueAction_insertAt()
 {
 	return uML_AddStructuralFeatureValueAction_insertAt;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_AddStructuralFeatureValueAction_insertAt_pin()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_AddStructuralFeatureValueAction_insertAt_pin()
 {
 	return uML_AddStructuralFeatureValueAction_insertAt_pin;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_AddStructuralFeatureValueAction_isReplaceAll()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_AddStructuralFeatureValueAction_isReplaceAll()
 {
 	return uML_AddStructuralFeatureValueAction_isReplaceAll;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_AddStructuralFeatureValueAction_required_value()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_AddStructuralFeatureValueAction_required_value()
 {
 	return uML_AddStructuralFeatureValueAction_required_value;
 }
-std::shared_ptr<uml::Class> UMLPackageImpl::get_UML_AddVariableValueAction()
+const std::shared_ptr<uml::Class>& UMLPackageImpl::get_UML_AddVariableValueAction()
 {
 	return uML_AddVariableValueAction;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_AddVariableValueAction_insertAt()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_AddVariableValueAction_insertAt()
 {
 	return uML_AddVariableValueAction_insertAt;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_AddVariableValueAction_insertAt_pin()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_AddVariableValueAction_insertAt_pin()
 {
 	return uML_AddVariableValueAction_insertAt_pin;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_AddVariableValueAction_isReplaceAll()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_AddVariableValueAction_isReplaceAll()
 {
 	return uML_AddVariableValueAction_isReplaceAll;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_AddVariableValueAction_required_value()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_AddVariableValueAction_required_value()
 {
 	return uML_AddVariableValueAction_required_value;
 }
-std::shared_ptr<uml::Enumeration> UMLPackageImpl::get_UML_AggregationKind()
+const std::shared_ptr<uml::Enumeration>& UMLPackageImpl::get_UML_AggregationKind()
 {
 	return uML_AggregationKind;
 }
-std::shared_ptr<uml::EnumerationLiteral> UMLPackageImpl::get_UML_AggregationKind_composite()
+const std::shared_ptr<uml::EnumerationLiteral>& UMLPackageImpl::get_UML_AggregationKind_composite()
 {
 	return uML_AggregationKind_composite;
 }
-std::shared_ptr<uml::EnumerationLiteral> UMLPackageImpl::get_UML_AggregationKind_none()
+const std::shared_ptr<uml::EnumerationLiteral>& UMLPackageImpl::get_UML_AggregationKind_none()
 {
 	return uML_AggregationKind_none;
 }
-std::shared_ptr<uml::EnumerationLiteral> UMLPackageImpl::get_UML_AggregationKind_shared()
+const std::shared_ptr<uml::EnumerationLiteral>& UMLPackageImpl::get_UML_AggregationKind_shared()
 {
 	return uML_AggregationKind_shared;
 }
-std::shared_ptr<uml::Class> UMLPackageImpl::get_UML_AnyReceiveEvent()
+const std::shared_ptr<uml::Class>& UMLPackageImpl::get_UML_AnyReceiveEvent()
 {
 	return uML_AnyReceiveEvent;
 }
-std::shared_ptr<uml::Class> UMLPackageImpl::get_UML_Artifact()
+const std::shared_ptr<uml::Class>& UMLPackageImpl::get_UML_Artifact()
 {
 	return uML_Artifact;
 }
-std::shared_ptr<uml::Operation> UMLPackageImpl::get_UML_Artifact_createOwnedAttribute_String_Type_Integer_UnlimitedNatural_String_Type_Integer_UnlimitedNatural()
+const std::shared_ptr<uml::Operation>& UMLPackageImpl::get_UML_Artifact_createOwnedAttribute_String_Type_Integer_UnlimitedNatural_String_Type_Integer_UnlimitedNatural()
 {
 	return uML_Artifact_createOwnedAttribute_String_Type_Integer_UnlimitedNatural_String_Type_Integer_UnlimitedNatural;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_Artifact_createOwnedAttribute_String_Type_Integer_UnlimitedNatural_String_Type_Integer_UnlimitedNatural_lower()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_Artifact_createOwnedAttribute_String_Type_Integer_UnlimitedNatural_String_Type_Integer_UnlimitedNatural_lower()
 {
 	return uML_Artifact_createOwnedAttribute_String_Type_Integer_UnlimitedNatural_String_Type_Integer_UnlimitedNatural_lower;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_Artifact_createOwnedAttribute_String_Type_Integer_UnlimitedNatural_String_Type_Integer_UnlimitedNatural_name()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_Artifact_createOwnedAttribute_String_Type_Integer_UnlimitedNatural_String_Type_Integer_UnlimitedNatural_name()
 {
 	return uML_Artifact_createOwnedAttribute_String_Type_Integer_UnlimitedNatural_String_Type_Integer_UnlimitedNatural_name;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_Artifact_createOwnedAttribute_String_Type_Integer_UnlimitedNatural_String_Type_Integer_UnlimitedNatural_type()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_Artifact_createOwnedAttribute_String_Type_Integer_UnlimitedNatural_String_Type_Integer_UnlimitedNatural_type()
 {
 	return uML_Artifact_createOwnedAttribute_String_Type_Integer_UnlimitedNatural_String_Type_Integer_UnlimitedNatural_type;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_Artifact_createOwnedAttribute_String_Type_Integer_UnlimitedNatural_String_Type_Integer_UnlimitedNatural_upper()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_Artifact_createOwnedAttribute_String_Type_Integer_UnlimitedNatural_String_Type_Integer_UnlimitedNatural_upper()
 {
 	return uML_Artifact_createOwnedAttribute_String_Type_Integer_UnlimitedNatural_String_Type_Integer_UnlimitedNatural_upper;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_Artifact_createOwnedAttribute_String_Type_Integer_UnlimitedNatural_String_Type_Integer_UnlimitedNaturalreturn()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_Artifact_createOwnedAttribute_String_Type_Integer_UnlimitedNatural_String_Type_Integer_UnlimitedNaturalreturn()
 {
 	return uML_Artifact_createOwnedAttribute_String_Type_Integer_UnlimitedNatural_String_Type_Integer_UnlimitedNaturalreturn;
 }
-std::shared_ptr<uml::Operation> UMLPackageImpl::get_UML_Artifact_createOwnedOperation_String_String_Type_Type_String_String_Type_Type()
+const std::shared_ptr<uml::Operation>& UMLPackageImpl::get_UML_Artifact_createOwnedOperation_String_String_Type_Type_String_String_Type_Type()
 {
 	return uML_Artifact_createOwnedOperation_String_String_Type_Type_String_String_Type_Type;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_Artifact_createOwnedOperation_String_String_Type_Type_String_String_Type_Type_name()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_Artifact_createOwnedOperation_String_String_Type_Type_String_String_Type_Type_name()
 {
 	return uML_Artifact_createOwnedOperation_String_String_Type_Type_String_String_Type_Type_name;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_Artifact_createOwnedOperation_String_String_Type_Type_String_String_Type_Type_parameterNames()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_Artifact_createOwnedOperation_String_String_Type_Type_String_String_Type_Type_parameterNames()
 {
 	return uML_Artifact_createOwnedOperation_String_String_Type_Type_String_String_Type_Type_parameterNames;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_Artifact_createOwnedOperation_String_String_Type_Type_String_String_Type_Type_parameterTypes()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_Artifact_createOwnedOperation_String_String_Type_Type_String_String_Type_Type_parameterTypes()
 {
 	return uML_Artifact_createOwnedOperation_String_String_Type_Type_String_String_Type_Type_parameterTypes;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_Artifact_createOwnedOperation_String_String_Type_Type_String_String_Type_Type_returnType()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_Artifact_createOwnedOperation_String_String_Type_Type_String_String_Type_Type_returnType()
 {
 	return uML_Artifact_createOwnedOperation_String_String_Type_Type_String_String_Type_Type_returnType;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_Artifact_createOwnedOperation_String_String_Type_Type_String_String_Type_Typereturn()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_Artifact_createOwnedOperation_String_String_Type_Type_String_String_Type_Typereturn()
 {
 	return uML_Artifact_createOwnedOperation_String_String_Type_Type_String_String_Type_Typereturn;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_Artifact_fileName()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_Artifact_fileName()
 {
 	return uML_Artifact_fileName;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_Artifact_manifestation()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_Artifact_manifestation()
 {
 	return uML_Artifact_manifestation;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_Artifact_nestedArtifact()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_Artifact_nestedArtifact()
 {
 	return uML_Artifact_nestedArtifact;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_Artifact_ownedAttribute()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_Artifact_ownedAttribute()
 {
 	return uML_Artifact_ownedAttribute;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_Artifact_ownedOperation()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_Artifact_ownedOperation()
 {
 	return uML_Artifact_ownedOperation;
 }
-std::shared_ptr<uml::Class> UMLPackageImpl::get_UML_Association()
+const std::shared_ptr<uml::Class>& UMLPackageImpl::get_UML_Association()
 {
 	return uML_Association;
 }
-std::shared_ptr<uml::Class> UMLPackageImpl::get_UML_AssociationClass()
+const std::shared_ptr<uml::Class>& UMLPackageImpl::get_UML_AssociationClass()
 {
 	return uML_AssociationClass;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_AssociationClass_cannot_be_defined()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_AssociationClass_cannot_be_defined()
 {
 	return uML_AssociationClass_cannot_be_defined;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_AssociationClass_disjoint_attributes_ends()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_AssociationClass_disjoint_attributes_ends()
 {
 	return uML_AssociationClass_disjoint_attributes_ends;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_Association_association_ends()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_Association_association_ends()
 {
 	return uML_Association_association_ends;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_Association_binary_associations()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_Association_binary_associations()
 {
 	return uML_Association_binary_associations;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_Association_endType()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_Association_endType()
 {
 	return uML_Association_endType;
 }
-std::shared_ptr<uml::Operation> UMLPackageImpl::get_UML_Association_endType__()
+const std::shared_ptr<uml::Operation>& UMLPackageImpl::get_UML_Association_endType__()
 {
 	return uML_Association_endType__;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_Association_endType_result()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_Association_endType_result()
 {
 	return uML_Association_endType_result;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_Association_endType_spec()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_Association_endType_spec()
 {
 	return uML_Association_endType_spec;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_Association_ends_must_be_typed()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_Association_ends_must_be_typed()
 {
 	return uML_Association_ends_must_be_typed;
 }
-std::shared_ptr<uml::Operation> UMLPackageImpl::get_UML_Association_isBinary__()
+const std::shared_ptr<uml::Operation>& UMLPackageImpl::get_UML_Association_isBinary__()
 {
 	return uML_Association_isBinary__;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_Association_isBinary__return()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_Association_isBinary__return()
 {
 	return uML_Association_isBinary__return;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_Association_isDerived()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_Association_isDerived()
 {
 	return uML_Association_isDerived;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_Association_memberEnd()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_Association_memberEnd()
 {
 	return uML_Association_memberEnd;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_Association_navigableOwnedEnd()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_Association_navigableOwnedEnd()
 {
 	return uML_Association_navigableOwnedEnd;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_Association_ownedEnd()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_Association_ownedEnd()
 {
 	return uML_Association_ownedEnd;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_Association_specialized_end_number()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_Association_specialized_end_number()
 {
 	return uML_Association_specialized_end_number;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_Association_specialized_end_types()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_Association_specialized_end_types()
 {
 	return uML_Association_specialized_end_types;
 }
-std::shared_ptr<uml::Class> UMLPackageImpl::get_UML_Behavior()
+const std::shared_ptr<uml::Class>& UMLPackageImpl::get_UML_Behavior()
 {
 	return uML_Behavior;
 }
-std::shared_ptr<uml::Class> UMLPackageImpl::get_UML_BehaviorExecutionSpecification()
+const std::shared_ptr<uml::Class>& UMLPackageImpl::get_UML_BehaviorExecutionSpecification()
 {
 	return uML_BehaviorExecutionSpecification;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_BehaviorExecutionSpecification_behavior()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_BehaviorExecutionSpecification_behavior()
 {
 	return uML_BehaviorExecutionSpecification_behavior;
 }
-std::shared_ptr<uml::Operation> UMLPackageImpl::get_UML_Behavior_behavioredClassifier_Element_Element()
+const std::shared_ptr<uml::Operation>& UMLPackageImpl::get_UML_Behavior_behavioredClassifier_Element_Element()
 {
 	return uML_Behavior_behavioredClassifier_Element_Element;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_Behavior_behavioredClassifier_Element_Element_from()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_Behavior_behavioredClassifier_Element_Element_from()
 {
 	return uML_Behavior_behavioredClassifier_Element_Element_from;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_Behavior_behavioredClassifier_result()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_Behavior_behavioredClassifier_result()
 {
 	return uML_Behavior_behavioredClassifier_result;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_Behavior_behavioredClassifier_spec()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_Behavior_behavioredClassifier_spec()
 {
 	return uML_Behavior_behavioredClassifier_spec;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_Behavior_context()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_Behavior_context()
 {
 	return uML_Behavior_context;
 }
-std::shared_ptr<uml::Operation> UMLPackageImpl::get_UML_Behavior_context__()
+const std::shared_ptr<uml::Operation>& UMLPackageImpl::get_UML_Behavior_context__()
 {
 	return uML_Behavior_context__;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_Behavior_context_result()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_Behavior_context_result()
 {
 	return uML_Behavior_context_result;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_Behavior_context_spec()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_Behavior_context_spec()
 {
 	return uML_Behavior_context_spec;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_Behavior_feature_of_context_classifier()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_Behavior_feature_of_context_classifier()
 {
 	return uML_Behavior_feature_of_context_classifier;
 }
-std::shared_ptr<uml::Operation> UMLPackageImpl::get_UML_Behavior_inputParameters__()
+const std::shared_ptr<uml::Operation>& UMLPackageImpl::get_UML_Behavior_inputParameters__()
 {
 	return uML_Behavior_inputParameters__;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_Behavior_inputParameters_result()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_Behavior_inputParameters_result()
 {
 	return uML_Behavior_inputParameters_result;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_Behavior_inputParameters_spec()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_Behavior_inputParameters_spec()
 {
 	return uML_Behavior_inputParameters_spec;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_Behavior_isReentrant()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_Behavior_isReentrant()
 {
 	return uML_Behavior_isReentrant;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_Behavior_most_one_behavior()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_Behavior_most_one_behavior()
 {
 	return uML_Behavior_most_one_behavior;
 }
-std::shared_ptr<uml::Operation> UMLPackageImpl::get_UML_Behavior_outputParameters__()
+const std::shared_ptr<uml::Operation>& UMLPackageImpl::get_UML_Behavior_outputParameters__()
 {
 	return uML_Behavior_outputParameters__;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_Behavior_outputParameters_result()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_Behavior_outputParameters_result()
 {
 	return uML_Behavior_outputParameters_result;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_Behavior_outputParameters_spec()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_Behavior_outputParameters_spec()
 {
 	return uML_Behavior_outputParameters_spec;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_Behavior_ownedParameter()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_Behavior_ownedParameter()
 {
 	return uML_Behavior_ownedParameter;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_Behavior_ownedParameterSet()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_Behavior_ownedParameterSet()
 {
 	return uML_Behavior_ownedParameterSet;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_Behavior_parameters_match()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_Behavior_parameters_match()
 {
 	return uML_Behavior_parameters_match;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_Behavior_postcondition()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_Behavior_postcondition()
 {
 	return uML_Behavior_postcondition;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_Behavior_precondition()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_Behavior_precondition()
 {
 	return uML_Behavior_precondition;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_Behavior_redefinedBehavior()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_Behavior_redefinedBehavior()
 {
 	return uML_Behavior_redefinedBehavior;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_Behavior_specification()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_Behavior_specification()
 {
 	return uML_Behavior_specification;
 }
-std::shared_ptr<uml::Class> UMLPackageImpl::get_UML_BehavioralFeature()
+const std::shared_ptr<uml::Class>& UMLPackageImpl::get_UML_BehavioralFeature()
 {
 	return uML_BehavioralFeature;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_BehavioralFeature_abstract_no_method()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_BehavioralFeature_abstract_no_method()
 {
 	return uML_BehavioralFeature_abstract_no_method;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_BehavioralFeature_concurrency()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_BehavioralFeature_concurrency()
 {
 	return uML_BehavioralFeature_concurrency;
 }
-std::shared_ptr<uml::Operation> UMLPackageImpl::get_UML_BehavioralFeature_createReturnResult_String_Type_String_Type()
+const std::shared_ptr<uml::Operation>& UMLPackageImpl::get_UML_BehavioralFeature_createReturnResult_String_Type_String_Type()
 {
 	return uML_BehavioralFeature_createReturnResult_String_Type_String_Type;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_BehavioralFeature_createReturnResult_String_Type_String_Type_name()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_BehavioralFeature_createReturnResult_String_Type_String_Type_name()
 {
 	return uML_BehavioralFeature_createReturnResult_String_Type_String_Type_name;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_BehavioralFeature_createReturnResult_String_Type_String_Type_type()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_BehavioralFeature_createReturnResult_String_Type_String_Type_type()
 {
 	return uML_BehavioralFeature_createReturnResult_String_Type_String_Type_type;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_BehavioralFeature_createReturnResult_String_Type_String_Typereturn()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_BehavioralFeature_createReturnResult_String_Type_String_Typereturn()
 {
 	return uML_BehavioralFeature_createReturnResult_String_Type_String_Typereturn;
 }
-std::shared_ptr<uml::Operation> UMLPackageImpl::get_UML_BehavioralFeature_inputParameters__()
+const std::shared_ptr<uml::Operation>& UMLPackageImpl::get_UML_BehavioralFeature_inputParameters__()
 {
 	return uML_BehavioralFeature_inputParameters__;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_BehavioralFeature_inputParameters_result()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_BehavioralFeature_inputParameters_result()
 {
 	return uML_BehavioralFeature_inputParameters_result;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_BehavioralFeature_inputParameters_spec()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_BehavioralFeature_inputParameters_spec()
 {
 	return uML_BehavioralFeature_inputParameters_spec;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_BehavioralFeature_isAbstract()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_BehavioralFeature_isAbstract()
 {
 	return uML_BehavioralFeature_isAbstract;
 }
-std::shared_ptr<uml::Operation> UMLPackageImpl::get_UML_BehavioralFeature_isDistinguishableFrom_NamedElement_Namespace_NamedElement_Namespace()
+const std::shared_ptr<uml::Operation>& UMLPackageImpl::get_UML_BehavioralFeature_isDistinguishableFrom_NamedElement_Namespace_NamedElement_Namespace()
 {
 	return uML_BehavioralFeature_isDistinguishableFrom_NamedElement_Namespace_NamedElement_Namespace;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_BehavioralFeature_isDistinguishableFrom_NamedElement_Namespace_NamedElement_Namespace_n()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_BehavioralFeature_isDistinguishableFrom_NamedElement_Namespace_NamedElement_Namespace_n()
 {
 	return uML_BehavioralFeature_isDistinguishableFrom_NamedElement_Namespace_NamedElement_Namespace_n;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_BehavioralFeature_isDistinguishableFrom_NamedElement_Namespace_NamedElement_Namespace_ns()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_BehavioralFeature_isDistinguishableFrom_NamedElement_Namespace_NamedElement_Namespace_ns()
 {
 	return uML_BehavioralFeature_isDistinguishableFrom_NamedElement_Namespace_NamedElement_Namespace_ns;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_BehavioralFeature_isDistinguishableFrom_result()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_BehavioralFeature_isDistinguishableFrom_result()
 {
 	return uML_BehavioralFeature_isDistinguishableFrom_result;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_BehavioralFeature_isDistinguishableFrom_spec()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_BehavioralFeature_isDistinguishableFrom_spec()
 {
 	return uML_BehavioralFeature_isDistinguishableFrom_spec;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_BehavioralFeature_method()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_BehavioralFeature_method()
 {
 	return uML_BehavioralFeature_method;
 }
-std::shared_ptr<uml::Operation> UMLPackageImpl::get_UML_BehavioralFeature_outputParameters__()
+const std::shared_ptr<uml::Operation>& UMLPackageImpl::get_UML_BehavioralFeature_outputParameters__()
 {
 	return uML_BehavioralFeature_outputParameters__;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_BehavioralFeature_outputParameters_result()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_BehavioralFeature_outputParameters_result()
 {
 	return uML_BehavioralFeature_outputParameters_result;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_BehavioralFeature_outputParameters_spec()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_BehavioralFeature_outputParameters_spec()
 {
 	return uML_BehavioralFeature_outputParameters_spec;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_BehavioralFeature_ownedParameter()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_BehavioralFeature_ownedParameter()
 {
 	return uML_BehavioralFeature_ownedParameter;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_BehavioralFeature_ownedParameterSet()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_BehavioralFeature_ownedParameterSet()
 {
 	return uML_BehavioralFeature_ownedParameterSet;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_BehavioralFeature_raisedException()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_BehavioralFeature_raisedException()
 {
 	return uML_BehavioralFeature_raisedException;
 }
-std::shared_ptr<uml::Class> UMLPackageImpl::get_UML_BehavioredClassifier()
+const std::shared_ptr<uml::Class>& UMLPackageImpl::get_UML_BehavioredClassifier()
 {
 	return uML_BehavioredClassifier;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_BehavioredClassifier_class_behavior()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_BehavioredClassifier_class_behavior()
 {
 	return uML_BehavioredClassifier_class_behavior;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_BehavioredClassifier_classifierBehavior()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_BehavioredClassifier_classifierBehavior()
 {
 	return uML_BehavioredClassifier_classifierBehavior;
 }
-std::shared_ptr<uml::Operation> UMLPackageImpl::get_UML_BehavioredClassifier_getAllImplementedInterfaces__()
+const std::shared_ptr<uml::Operation>& UMLPackageImpl::get_UML_BehavioredClassifier_getAllImplementedInterfaces__()
 {
 	return uML_BehavioredClassifier_getAllImplementedInterfaces__;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_BehavioredClassifier_getAllImplementedInterfaces__return()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_BehavioredClassifier_getAllImplementedInterfaces__return()
 {
 	return uML_BehavioredClassifier_getAllImplementedInterfaces__return;
 }
-std::shared_ptr<uml::Operation> UMLPackageImpl::get_UML_BehavioredClassifier_getImplementedInterfaces__()
+const std::shared_ptr<uml::Operation>& UMLPackageImpl::get_UML_BehavioredClassifier_getImplementedInterfaces__()
 {
 	return uML_BehavioredClassifier_getImplementedInterfaces__;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_BehavioredClassifier_getImplementedInterfaces__return()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_BehavioredClassifier_getImplementedInterfaces__return()
 {
 	return uML_BehavioredClassifier_getImplementedInterfaces__return;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_BehavioredClassifier_interfaceRealization()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_BehavioredClassifier_interfaceRealization()
 {
 	return uML_BehavioredClassifier_interfaceRealization;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_BehavioredClassifier_ownedBehavior()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_BehavioredClassifier_ownedBehavior()
 {
 	return uML_BehavioredClassifier_ownedBehavior;
 }
-std::shared_ptr<uml::Class> UMLPackageImpl::get_UML_BroadcastSignalAction()
+const std::shared_ptr<uml::Class>& UMLPackageImpl::get_UML_BroadcastSignalAction()
 {
 	return uML_BroadcastSignalAction;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_BroadcastSignalAction_no_onport()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_BroadcastSignalAction_no_onport()
 {
 	return uML_BroadcastSignalAction_no_onport;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_BroadcastSignalAction_number_of_arguments()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_BroadcastSignalAction_number_of_arguments()
 {
 	return uML_BroadcastSignalAction_number_of_arguments;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_BroadcastSignalAction_signal()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_BroadcastSignalAction_signal()
 {
 	return uML_BroadcastSignalAction_signal;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_BroadcastSignalAction_type_ordering_multiplicity()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_BroadcastSignalAction_type_ordering_multiplicity()
 {
 	return uML_BroadcastSignalAction_type_ordering_multiplicity;
 }
-std::shared_ptr<uml::Class> UMLPackageImpl::get_UML_CallAction()
+const std::shared_ptr<uml::Class>& UMLPackageImpl::get_UML_CallAction()
 {
 	return uML_CallAction;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_CallAction_argument_pins()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_CallAction_argument_pins()
 {
 	return uML_CallAction_argument_pins;
 }
-std::shared_ptr<uml::Operation> UMLPackageImpl::get_UML_CallAction_inputParameters__()
+const std::shared_ptr<uml::Operation>& UMLPackageImpl::get_UML_CallAction_inputParameters__()
 {
 	return uML_CallAction_inputParameters__;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_CallAction_inputParameters_result()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_CallAction_inputParameters_result()
 {
 	return uML_CallAction_inputParameters_result;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_CallAction_isSynchronous()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_CallAction_isSynchronous()
 {
 	return uML_CallAction_isSynchronous;
 }
-std::shared_ptr<uml::Operation> UMLPackageImpl::get_UML_CallAction_outputParameters__()
+const std::shared_ptr<uml::Operation>& UMLPackageImpl::get_UML_CallAction_outputParameters__()
 {
 	return uML_CallAction_outputParameters__;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_CallAction_outputParameters_result()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_CallAction_outputParameters_result()
 {
 	return uML_CallAction_outputParameters_result;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_CallAction_result()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_CallAction_result()
 {
 	return uML_CallAction_result;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_CallAction_result_pins()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_CallAction_result_pins()
 {
 	return uML_CallAction_result_pins;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_CallAction_synchronous_call()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_CallAction_synchronous_call()
 {
 	return uML_CallAction_synchronous_call;
 }
-std::shared_ptr<uml::Class> UMLPackageImpl::get_UML_CallBehaviorAction()
+const std::shared_ptr<uml::Class>& UMLPackageImpl::get_UML_CallBehaviorAction()
 {
 	return uML_CallBehaviorAction;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_CallBehaviorAction_behavior()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_CallBehaviorAction_behavior()
 {
 	return uML_CallBehaviorAction_behavior;
 }
-std::shared_ptr<uml::Operation> UMLPackageImpl::get_UML_CallBehaviorAction_inputParameters__()
+const std::shared_ptr<uml::Operation>& UMLPackageImpl::get_UML_CallBehaviorAction_inputParameters__()
 {
 	return uML_CallBehaviorAction_inputParameters__;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_CallBehaviorAction_inputParameters_result()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_CallBehaviorAction_inputParameters_result()
 {
 	return uML_CallBehaviorAction_inputParameters_result;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_CallBehaviorAction_inputParameters_spec()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_CallBehaviorAction_inputParameters_spec()
 {
 	return uML_CallBehaviorAction_inputParameters_spec;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_CallBehaviorAction_no_onport()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_CallBehaviorAction_no_onport()
 {
 	return uML_CallBehaviorAction_no_onport;
 }
-std::shared_ptr<uml::Operation> UMLPackageImpl::get_UML_CallBehaviorAction_outputParameters__()
+const std::shared_ptr<uml::Operation>& UMLPackageImpl::get_UML_CallBehaviorAction_outputParameters__()
 {
 	return uML_CallBehaviorAction_outputParameters__;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_CallBehaviorAction_outputParameters_result()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_CallBehaviorAction_outputParameters_result()
 {
 	return uML_CallBehaviorAction_outputParameters_result;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_CallBehaviorAction_outputParameters_spec()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_CallBehaviorAction_outputParameters_spec()
 {
 	return uML_CallBehaviorAction_outputParameters_spec;
 }
-std::shared_ptr<uml::Enumeration> UMLPackageImpl::get_UML_CallConcurrencyKind()
+const std::shared_ptr<uml::Enumeration>& UMLPackageImpl::get_UML_CallConcurrencyKind()
 {
 	return uML_CallConcurrencyKind;
 }
-std::shared_ptr<uml::EnumerationLiteral> UMLPackageImpl::get_UML_CallConcurrencyKind_concurrent()
+const std::shared_ptr<uml::EnumerationLiteral>& UMLPackageImpl::get_UML_CallConcurrencyKind_concurrent()
 {
 	return uML_CallConcurrencyKind_concurrent;
 }
-std::shared_ptr<uml::EnumerationLiteral> UMLPackageImpl::get_UML_CallConcurrencyKind_guarded()
+const std::shared_ptr<uml::EnumerationLiteral>& UMLPackageImpl::get_UML_CallConcurrencyKind_guarded()
 {
 	return uML_CallConcurrencyKind_guarded;
 }
-std::shared_ptr<uml::EnumerationLiteral> UMLPackageImpl::get_UML_CallConcurrencyKind_sequential()
+const std::shared_ptr<uml::EnumerationLiteral>& UMLPackageImpl::get_UML_CallConcurrencyKind_sequential()
 {
 	return uML_CallConcurrencyKind_sequential;
 }
-std::shared_ptr<uml::Class> UMLPackageImpl::get_UML_CallEvent()
+const std::shared_ptr<uml::Class>& UMLPackageImpl::get_UML_CallEvent()
 {
 	return uML_CallEvent;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_CallEvent_operation()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_CallEvent_operation()
 {
 	return uML_CallEvent_operation;
 }
-std::shared_ptr<uml::Class> UMLPackageImpl::get_UML_CallOperationAction()
+const std::shared_ptr<uml::Class>& UMLPackageImpl::get_UML_CallOperationAction()
 {
 	return uML_CallOperationAction;
 }
-std::shared_ptr<uml::Operation> UMLPackageImpl::get_UML_CallOperationAction_inputParameters__()
+const std::shared_ptr<uml::Operation>& UMLPackageImpl::get_UML_CallOperationAction_inputParameters__()
 {
 	return uML_CallOperationAction_inputParameters__;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_CallOperationAction_inputParameters_result()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_CallOperationAction_inputParameters_result()
 {
 	return uML_CallOperationAction_inputParameters_result;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_CallOperationAction_inputParameters_spec()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_CallOperationAction_inputParameters_spec()
 {
 	return uML_CallOperationAction_inputParameters_spec;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_CallOperationAction_operation()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_CallOperationAction_operation()
 {
 	return uML_CallOperationAction_operation;
 }
-std::shared_ptr<uml::Operation> UMLPackageImpl::get_UML_CallOperationAction_outputParameters__()
+const std::shared_ptr<uml::Operation>& UMLPackageImpl::get_UML_CallOperationAction_outputParameters__()
 {
 	return uML_CallOperationAction_outputParameters__;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_CallOperationAction_outputParameters_result()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_CallOperationAction_outputParameters_result()
 {
 	return uML_CallOperationAction_outputParameters_result;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_CallOperationAction_outputParameters_spec()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_CallOperationAction_outputParameters_spec()
 {
 	return uML_CallOperationAction_outputParameters_spec;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_CallOperationAction_target()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_CallOperationAction_target()
 {
 	return uML_CallOperationAction_target;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_CallOperationAction_type_target_pin()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_CallOperationAction_type_target_pin()
 {
 	return uML_CallOperationAction_type_target_pin;
 }
-std::shared_ptr<uml::Class> UMLPackageImpl::get_UML_CentralBufferNode()
+const std::shared_ptr<uml::Class>& UMLPackageImpl::get_UML_CentralBufferNode()
 {
 	return uML_CentralBufferNode;
 }
-std::shared_ptr<uml::Class> UMLPackageImpl::get_UML_ChangeEvent()
+const std::shared_ptr<uml::Class>& UMLPackageImpl::get_UML_ChangeEvent()
 {
 	return uML_ChangeEvent;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_ChangeEvent_changeExpression()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_ChangeEvent_changeExpression()
 {
 	return uML_ChangeEvent_changeExpression;
 }
-std::shared_ptr<uml::Class> UMLPackageImpl::get_UML_Class()
+const std::shared_ptr<uml::Class>& UMLPackageImpl::get_UML_Class()
 {
 	return uML_Class;
 }
-std::shared_ptr<uml::Operation> UMLPackageImpl::get_UML_Class_createOwnedOperation_String_String_Type_Type_String_String_Type_Type()
+const std::shared_ptr<uml::Operation>& UMLPackageImpl::get_UML_Class_createOwnedOperation_String_String_Type_Type_String_String_Type_Type()
 {
 	return uML_Class_createOwnedOperation_String_String_Type_Type_String_String_Type_Type;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_Class_createOwnedOperation_String_String_Type_Type_String_String_Type_Type_name()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_Class_createOwnedOperation_String_String_Type_Type_String_String_Type_Type_name()
 {
 	return uML_Class_createOwnedOperation_String_String_Type_Type_String_String_Type_Type_name;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_Class_createOwnedOperation_String_String_Type_Type_String_String_Type_Type_parameterNames()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_Class_createOwnedOperation_String_String_Type_Type_String_String_Type_Type_parameterNames()
 {
 	return uML_Class_createOwnedOperation_String_String_Type_Type_String_String_Type_Type_parameterNames;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_Class_createOwnedOperation_String_String_Type_Type_String_String_Type_Type_parameterTypes()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_Class_createOwnedOperation_String_String_Type_Type_String_String_Type_Type_parameterTypes()
 {
 	return uML_Class_createOwnedOperation_String_String_Type_Type_String_String_Type_Type_parameterTypes;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_Class_createOwnedOperation_String_String_Type_Type_String_String_Type_Type_returnType()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_Class_createOwnedOperation_String_String_Type_Type_String_String_Type_Type_returnType()
 {
 	return uML_Class_createOwnedOperation_String_String_Type_Type_String_String_Type_Type_returnType;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_Class_createOwnedOperation_String_String_Type_Type_String_String_Type_Typereturn()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_Class_createOwnedOperation_String_String_Type_Type_String_String_Type_Typereturn()
 {
 	return uML_Class_createOwnedOperation_String_String_Type_Type_String_String_Type_Typereturn;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_Class_extension()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_Class_extension()
 {
 	return uML_Class_extension;
 }
-std::shared_ptr<uml::Operation> UMLPackageImpl::get_UML_Class_extension__()
+const std::shared_ptr<uml::Operation>& UMLPackageImpl::get_UML_Class_extension__()
 {
 	return uML_Class_extension__;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_Class_extension_result()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_Class_extension_result()
 {
 	return uML_Class_extension_result;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_Class_extension_spec()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_Class_extension_spec()
 {
 	return uML_Class_extension_spec;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_Class_isAbstract()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_Class_isAbstract()
 {
 	return uML_Class_isAbstract;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_Class_isActive()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_Class_isActive()
 {
 	return uML_Class_isActive;
 }
-std::shared_ptr<uml::Operation> UMLPackageImpl::get_UML_Class_isMetaclass__()
+const std::shared_ptr<uml::Operation>& UMLPackageImpl::get_UML_Class_isMetaclass__()
 {
 	return uML_Class_isMetaclass__;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_Class_isMetaclass__return()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_Class_isMetaclass__return()
 {
 	return uML_Class_isMetaclass__return;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_Class_nestedClassifier()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_Class_nestedClassifier()
 {
 	return uML_Class_nestedClassifier;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_Class_ownedAttribute()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_Class_ownedAttribute()
 {
 	return uML_Class_ownedAttribute;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_Class_ownedOperation()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_Class_ownedOperation()
 {
 	return uML_Class_ownedOperation;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_Class_ownedReception()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_Class_ownedReception()
 {
 	return uML_Class_ownedReception;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_Class_passive_class()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_Class_passive_class()
 {
 	return uML_Class_passive_class;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_Class_superClass()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_Class_superClass()
 {
 	return uML_Class_superClass;
 }
-std::shared_ptr<uml::Operation> UMLPackageImpl::get_UML_Class_superClass__()
+const std::shared_ptr<uml::Operation>& UMLPackageImpl::get_UML_Class_superClass__()
 {
 	return uML_Class_superClass__;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_Class_superClass_result()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_Class_superClass_result()
 {
 	return uML_Class_superClass_result;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_Class_superClass_spec()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_Class_superClass_spec()
 {
 	return uML_Class_superClass_spec;
 }
-std::shared_ptr<uml::Class> UMLPackageImpl::get_UML_Classifier()
+const std::shared_ptr<uml::Class>& UMLPackageImpl::get_UML_Classifier()
 {
 	return uML_Classifier;
 }
-std::shared_ptr<uml::Class> UMLPackageImpl::get_UML_ClassifierTemplateParameter()
+const std::shared_ptr<uml::Class>& UMLPackageImpl::get_UML_ClassifierTemplateParameter()
 {
 	return uML_ClassifierTemplateParameter;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_ClassifierTemplateParameter_actual_is_classifier()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_ClassifierTemplateParameter_actual_is_classifier()
 {
 	return uML_ClassifierTemplateParameter_actual_is_classifier;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_ClassifierTemplateParameter_allowSubstitutable()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_ClassifierTemplateParameter_allowSubstitutable()
 {
 	return uML_ClassifierTemplateParameter_allowSubstitutable;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_ClassifierTemplateParameter_constrainingClassifier()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_ClassifierTemplateParameter_constrainingClassifier()
 {
 	return uML_ClassifierTemplateParameter_constrainingClassifier;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_ClassifierTemplateParameter_constraining_classifiers_constrain_args()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_ClassifierTemplateParameter_constraining_classifiers_constrain_args()
 {
 	return uML_ClassifierTemplateParameter_constraining_classifiers_constrain_args;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_ClassifierTemplateParameter_constraining_classifiers_constrain_parametered_element()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_ClassifierTemplateParameter_constraining_classifiers_constrain_parametered_element()
 {
 	return uML_ClassifierTemplateParameter_constraining_classifiers_constrain_parametered_element;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_ClassifierTemplateParameter_has_constraining_classifier()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_ClassifierTemplateParameter_has_constraining_classifier()
 {
 	return uML_ClassifierTemplateParameter_has_constraining_classifier;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_ClassifierTemplateParameter_matching_abstract()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_ClassifierTemplateParameter_matching_abstract()
 {
 	return uML_ClassifierTemplateParameter_matching_abstract;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_ClassifierTemplateParameter_parameteredElement()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_ClassifierTemplateParameter_parameteredElement()
 {
 	return uML_ClassifierTemplateParameter_parameteredElement;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_ClassifierTemplateParameter_parametered_element_no_features()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_ClassifierTemplateParameter_parametered_element_no_features()
 {
 	return uML_ClassifierTemplateParameter_parametered_element_no_features;
 }
-std::shared_ptr<uml::Operation> UMLPackageImpl::get_UML_Classifier_allAttributes__()
+const std::shared_ptr<uml::Operation>& UMLPackageImpl::get_UML_Classifier_allAttributes__()
 {
 	return uML_Classifier_allAttributes__;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_Classifier_allAttributes_result()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_Classifier_allAttributes_result()
 {
 	return uML_Classifier_allAttributes_result;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_Classifier_allAttributes_spec()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_Classifier_allAttributes_spec()
 {
 	return uML_Classifier_allAttributes_spec;
 }
-std::shared_ptr<uml::Operation> UMLPackageImpl::get_UML_Classifier_allFeatures__()
+const std::shared_ptr<uml::Operation>& UMLPackageImpl::get_UML_Classifier_allFeatures__()
 {
 	return uML_Classifier_allFeatures__;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_Classifier_allFeatures_result()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_Classifier_allFeatures_result()
 {
 	return uML_Classifier_allFeatures_result;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_Classifier_allFeatures_spec()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_Classifier_allFeatures_spec()
 {
 	return uML_Classifier_allFeatures_spec;
 }
-std::shared_ptr<uml::Operation> UMLPackageImpl::get_UML_Classifier_allParents__()
+const std::shared_ptr<uml::Operation>& UMLPackageImpl::get_UML_Classifier_allParents__()
 {
 	return uML_Classifier_allParents__;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_Classifier_allParents_result()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_Classifier_allParents_result()
 {
 	return uML_Classifier_allParents_result;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_Classifier_allParents_spec()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_Classifier_allParents_spec()
 {
 	return uML_Classifier_allParents_spec;
 }
-std::shared_ptr<uml::Operation> UMLPackageImpl::get_UML_Classifier_allRealizedInterfaces__()
+const std::shared_ptr<uml::Operation>& UMLPackageImpl::get_UML_Classifier_allRealizedInterfaces__()
 {
 	return uML_Classifier_allRealizedInterfaces__;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_Classifier_allRealizedInterfaces_result()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_Classifier_allRealizedInterfaces_result()
 {
 	return uML_Classifier_allRealizedInterfaces_result;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_Classifier_allRealizedInterfaces_spec()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_Classifier_allRealizedInterfaces_spec()
 {
 	return uML_Classifier_allRealizedInterfaces_spec;
 }
-std::shared_ptr<uml::Operation> UMLPackageImpl::get_UML_Classifier_allSlottableFeatures__()
+const std::shared_ptr<uml::Operation>& UMLPackageImpl::get_UML_Classifier_allSlottableFeatures__()
 {
 	return uML_Classifier_allSlottableFeatures__;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_Classifier_allSlottableFeatures_result()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_Classifier_allSlottableFeatures_result()
 {
 	return uML_Classifier_allSlottableFeatures_result;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_Classifier_allSlottableFeatures_spec()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_Classifier_allSlottableFeatures_spec()
 {
 	return uML_Classifier_allSlottableFeatures_spec;
 }
-std::shared_ptr<uml::Operation> UMLPackageImpl::get_UML_Classifier_allUsedInterfaces__()
+const std::shared_ptr<uml::Operation>& UMLPackageImpl::get_UML_Classifier_allUsedInterfaces__()
 {
 	return uML_Classifier_allUsedInterfaces__;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_Classifier_allUsedInterfaces_result()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_Classifier_allUsedInterfaces_result()
 {
 	return uML_Classifier_allUsedInterfaces_result;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_Classifier_allUsedInterfaces_spec()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_Classifier_allUsedInterfaces_spec()
 {
 	return uML_Classifier_allUsedInterfaces_spec;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_Classifier_attribute()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_Classifier_attribute()
 {
 	return uML_Classifier_attribute;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_Classifier_collaborationUse()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_Classifier_collaborationUse()
 {
 	return uML_Classifier_collaborationUse;
 }
-std::shared_ptr<uml::Operation> UMLPackageImpl::get_UML_Classifier_conformsTo_Type_Type()
+const std::shared_ptr<uml::Operation>& UMLPackageImpl::get_UML_Classifier_conformsTo_Type_Type()
 {
 	return uML_Classifier_conformsTo_Type_Type;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_Classifier_conformsTo_Type_Type_other()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_Classifier_conformsTo_Type_Type_other()
 {
 	return uML_Classifier_conformsTo_Type_Type_other;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_Classifier_conformsTo_result()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_Classifier_conformsTo_result()
 {
 	return uML_Classifier_conformsTo_result;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_Classifier_conformsTo_spec()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_Classifier_conformsTo_spec()
 {
 	return uML_Classifier_conformsTo_spec;
 }
-std::shared_ptr<uml::Operation> UMLPackageImpl::get_UML_Classifier_directlyRealizedInterfaces__()
+const std::shared_ptr<uml::Operation>& UMLPackageImpl::get_UML_Classifier_directlyRealizedInterfaces__()
 {
 	return uML_Classifier_directlyRealizedInterfaces__;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_Classifier_directlyRealizedInterfaces_result()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_Classifier_directlyRealizedInterfaces_result()
 {
 	return uML_Classifier_directlyRealizedInterfaces_result;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_Classifier_directlyRealizedInterfaces_spec()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_Classifier_directlyRealizedInterfaces_spec()
 {
 	return uML_Classifier_directlyRealizedInterfaces_spec;
 }
-std::shared_ptr<uml::Operation> UMLPackageImpl::get_UML_Classifier_directlyUsedInterfaces__()
+const std::shared_ptr<uml::Operation>& UMLPackageImpl::get_UML_Classifier_directlyUsedInterfaces__()
 {
 	return uML_Classifier_directlyUsedInterfaces__;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_Classifier_directlyUsedInterfaces_result()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_Classifier_directlyUsedInterfaces_result()
 {
 	return uML_Classifier_directlyUsedInterfaces_result;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_Classifier_directlyUsedInterfaces_spec()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_Classifier_directlyUsedInterfaces_spec()
 {
 	return uML_Classifier_directlyUsedInterfaces_spec;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_Classifier_feature()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_Classifier_feature()
 {
 	return uML_Classifier_feature;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_Classifier_general()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_Classifier_general()
 {
 	return uML_Classifier_general;
 }
-std::shared_ptr<uml::Operation> UMLPackageImpl::get_UML_Classifier_general__()
+const std::shared_ptr<uml::Operation>& UMLPackageImpl::get_UML_Classifier_general__()
 {
 	return uML_Classifier_general__;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_Classifier_general_result()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_Classifier_general_result()
 {
 	return uML_Classifier_general_result;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_Classifier_general_spec()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_Classifier_general_spec()
 {
 	return uML_Classifier_general_spec;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_Classifier_generalization()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_Classifier_generalization()
 {
 	return uML_Classifier_generalization;
 }
-std::shared_ptr<uml::Operation> UMLPackageImpl::get_UML_Classifier_getAllAttributes__()
+const std::shared_ptr<uml::Operation>& UMLPackageImpl::get_UML_Classifier_getAllAttributes__()
 {
 	return uML_Classifier_getAllAttributes__;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_Classifier_getAllAttributes__return()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_Classifier_getAllAttributes__return()
 {
 	return uML_Classifier_getAllAttributes__return;
 }
-std::shared_ptr<uml::Operation> UMLPackageImpl::get_UML_Classifier_getAllOperations__()
+const std::shared_ptr<uml::Operation>& UMLPackageImpl::get_UML_Classifier_getAllOperations__()
 {
 	return uML_Classifier_getAllOperations__;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_Classifier_getAllOperations__return()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_Classifier_getAllOperations__return()
 {
 	return uML_Classifier_getAllOperations__return;
 }
-std::shared_ptr<uml::Operation> UMLPackageImpl::get_UML_Classifier_getAllUsedInterfaces__()
+const std::shared_ptr<uml::Operation>& UMLPackageImpl::get_UML_Classifier_getAllUsedInterfaces__()
 {
 	return uML_Classifier_getAllUsedInterfaces__;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_Classifier_getAllUsedInterfaces__return()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_Classifier_getAllUsedInterfaces__return()
 {
 	return uML_Classifier_getAllUsedInterfaces__return;
 }
-std::shared_ptr<uml::Operation> UMLPackageImpl::get_UML_Classifier_getOperation_String_String_Type_Boolean_String_String_Type_Boolean()
+const std::shared_ptr<uml::Operation>& UMLPackageImpl::get_UML_Classifier_getOperation_String_String_Type_Boolean_String_String_Type_Boolean()
 {
 	return uML_Classifier_getOperation_String_String_Type_Boolean_String_String_Type_Boolean;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_Classifier_getOperation_String_String_Type_Boolean_String_String_Type_Boolean_ignoreCase()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_Classifier_getOperation_String_String_Type_Boolean_String_String_Type_Boolean_ignoreCase()
 {
 	return uML_Classifier_getOperation_String_String_Type_Boolean_String_String_Type_Boolean_ignoreCase;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_Classifier_getOperation_String_String_Type_Boolean_String_String_Type_Boolean_name()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_Classifier_getOperation_String_String_Type_Boolean_String_String_Type_Boolean_name()
 {
 	return uML_Classifier_getOperation_String_String_Type_Boolean_String_String_Type_Boolean_name;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_Classifier_getOperation_String_String_Type_Boolean_String_String_Type_Boolean_parameterNames()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_Classifier_getOperation_String_String_Type_Boolean_String_String_Type_Boolean_parameterNames()
 {
 	return uML_Classifier_getOperation_String_String_Type_Boolean_String_String_Type_Boolean_parameterNames;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_Classifier_getOperation_String_String_Type_Boolean_String_String_Type_Boolean_parameterTypes()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_Classifier_getOperation_String_String_Type_Boolean_String_String_Type_Boolean_parameterTypes()
 {
 	return uML_Classifier_getOperation_String_String_Type_Boolean_String_String_Type_Boolean_parameterTypes;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_Classifier_getOperation_String_String_Type_Boolean_String_String_Type_Booleanreturn()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_Classifier_getOperation_String_String_Type_Boolean_String_String_Type_Booleanreturn()
 {
 	return uML_Classifier_getOperation_String_String_Type_Boolean_String_String_Type_Booleanreturn;
 }
-std::shared_ptr<uml::Operation> UMLPackageImpl::get_UML_Classifier_getOperation_String_String_Type_String_String_Type()
+const std::shared_ptr<uml::Operation>& UMLPackageImpl::get_UML_Classifier_getOperation_String_String_Type_String_String_Type()
 {
 	return uML_Classifier_getOperation_String_String_Type_String_String_Type;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_Classifier_getOperation_String_String_Type_String_String_Type_name()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_Classifier_getOperation_String_String_Type_String_String_Type_name()
 {
 	return uML_Classifier_getOperation_String_String_Type_String_String_Type_name;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_Classifier_getOperation_String_String_Type_String_String_Type_parameterNames()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_Classifier_getOperation_String_String_Type_String_String_Type_parameterNames()
 {
 	return uML_Classifier_getOperation_String_String_Type_String_String_Type_parameterNames;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_Classifier_getOperation_String_String_Type_String_String_Type_parameterTypes()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_Classifier_getOperation_String_String_Type_String_String_Type_parameterTypes()
 {
 	return uML_Classifier_getOperation_String_String_Type_String_String_Type_parameterTypes;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_Classifier_getOperation_String_String_Type_String_String_Typereturn()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_Classifier_getOperation_String_String_Type_String_String_Typereturn()
 {
 	return uML_Classifier_getOperation_String_String_Type_String_String_Typereturn;
 }
-std::shared_ptr<uml::Operation> UMLPackageImpl::get_UML_Classifier_getOperations__()
+const std::shared_ptr<uml::Operation>& UMLPackageImpl::get_UML_Classifier_getOperations__()
 {
 	return uML_Classifier_getOperations__;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_Classifier_getOperations__return()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_Classifier_getOperations__return()
 {
 	return uML_Classifier_getOperations__return;
 }
-std::shared_ptr<uml::Operation> UMLPackageImpl::get_UML_Classifier_getUsedInterfaces__()
+const std::shared_ptr<uml::Operation>& UMLPackageImpl::get_UML_Classifier_getUsedInterfaces__()
 {
 	return uML_Classifier_getUsedInterfaces__;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_Classifier_getUsedInterfaces__return()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_Classifier_getUsedInterfaces__return()
 {
 	return uML_Classifier_getUsedInterfaces__return;
 }
-std::shared_ptr<uml::Operation> UMLPackageImpl::get_UML_Classifier_hasVisibilityOf_NamedElement_NamedElement()
+const std::shared_ptr<uml::Operation>& UMLPackageImpl::get_UML_Classifier_hasVisibilityOf_NamedElement_NamedElement()
 {
 	return uML_Classifier_hasVisibilityOf_NamedElement_NamedElement;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_Classifier_hasVisibilityOf_NamedElement_NamedElement_n()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_Classifier_hasVisibilityOf_NamedElement_NamedElement_n()
 {
 	return uML_Classifier_hasVisibilityOf_NamedElement_NamedElement_n;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_Classifier_hasVisibilityOf_pre()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_Classifier_hasVisibilityOf_pre()
 {
 	return uML_Classifier_hasVisibilityOf_pre;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_Classifier_hasVisibilityOf_result()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_Classifier_hasVisibilityOf_result()
 {
 	return uML_Classifier_hasVisibilityOf_result;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_Classifier_hasVisibilityOf_spec()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_Classifier_hasVisibilityOf_spec()
 {
 	return uML_Classifier_hasVisibilityOf_spec;
 }
-std::shared_ptr<uml::Operation> UMLPackageImpl::get_UML_Classifier_inherit_NamedElement_NamedElement()
+const std::shared_ptr<uml::Operation>& UMLPackageImpl::get_UML_Classifier_inherit_NamedElement_NamedElement()
 {
 	return uML_Classifier_inherit_NamedElement_NamedElement;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_Classifier_inherit_NamedElement_NamedElement_inhs()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_Classifier_inherit_NamedElement_NamedElement_inhs()
 {
 	return uML_Classifier_inherit_NamedElement_NamedElement_inhs;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_Classifier_inherit_result()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_Classifier_inherit_result()
 {
 	return uML_Classifier_inherit_result;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_Classifier_inherit_spec()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_Classifier_inherit_spec()
 {
 	return uML_Classifier_inherit_spec;
 }
-std::shared_ptr<uml::Operation> UMLPackageImpl::get_UML_Classifier_inheritableMembers_Classifier_Classifier()
+const std::shared_ptr<uml::Operation>& UMLPackageImpl::get_UML_Classifier_inheritableMembers_Classifier_Classifier()
 {
 	return uML_Classifier_inheritableMembers_Classifier_Classifier;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_Classifier_inheritableMembers_Classifier_Classifier_c()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_Classifier_inheritableMembers_Classifier_Classifier_c()
 {
 	return uML_Classifier_inheritableMembers_Classifier_Classifier_c;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_Classifier_inheritableMembers_pre()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_Classifier_inheritableMembers_pre()
 {
 	return uML_Classifier_inheritableMembers_pre;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_Classifier_inheritableMembers_result()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_Classifier_inheritableMembers_result()
 {
 	return uML_Classifier_inheritableMembers_result;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_Classifier_inheritableMembers_spec()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_Classifier_inheritableMembers_spec()
 {
 	return uML_Classifier_inheritableMembers_spec;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_Classifier_inheritedMember()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_Classifier_inheritedMember()
 {
 	return uML_Classifier_inheritedMember;
 }
-std::shared_ptr<uml::Operation> UMLPackageImpl::get_UML_Classifier_inheritedMember__()
+const std::shared_ptr<uml::Operation>& UMLPackageImpl::get_UML_Classifier_inheritedMember__()
 {
 	return uML_Classifier_inheritedMember__;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_Classifier_inheritedMember_result()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_Classifier_inheritedMember_result()
 {
 	return uML_Classifier_inheritedMember_result;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_Classifier_inheritedMember_spec()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_Classifier_inheritedMember_spec()
 {
 	return uML_Classifier_inheritedMember_spec;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_Classifier_isAbstract()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_Classifier_isAbstract()
 {
 	return uML_Classifier_isAbstract;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_Classifier_isFinalSpecialization()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_Classifier_isFinalSpecialization()
 {
 	return uML_Classifier_isFinalSpecialization;
 }
-std::shared_ptr<uml::Operation> UMLPackageImpl::get_UML_Classifier_isSubstitutableFor_Classifier_Classifier()
+const std::shared_ptr<uml::Operation>& UMLPackageImpl::get_UML_Classifier_isSubstitutableFor_Classifier_Classifier()
 {
 	return uML_Classifier_isSubstitutableFor_Classifier_Classifier;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_Classifier_isSubstitutableFor_Classifier_Classifier_contract()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_Classifier_isSubstitutableFor_Classifier_Classifier_contract()
 {
 	return uML_Classifier_isSubstitutableFor_Classifier_Classifier_contract;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_Classifier_isSubstitutableFor_result()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_Classifier_isSubstitutableFor_result()
 {
 	return uML_Classifier_isSubstitutableFor_result;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_Classifier_isSubstitutableFor_spec()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_Classifier_isSubstitutableFor_spec()
 {
 	return uML_Classifier_isSubstitutableFor_spec;
 }
-std::shared_ptr<uml::Operation> UMLPackageImpl::get_UML_Classifier_isTemplate__()
+const std::shared_ptr<uml::Operation>& UMLPackageImpl::get_UML_Classifier_isTemplate__()
 {
 	return uML_Classifier_isTemplate__;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_Classifier_isTemplate_result()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_Classifier_isTemplate_result()
 {
 	return uML_Classifier_isTemplate_result;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_Classifier_isTemplate_spec()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_Classifier_isTemplate_spec()
 {
 	return uML_Classifier_isTemplate_spec;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_Classifier_maps_to_generalization_set()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_Classifier_maps_to_generalization_set()
 {
 	return uML_Classifier_maps_to_generalization_set;
 }
-std::shared_ptr<uml::Operation> UMLPackageImpl::get_UML_Classifier_maySpecializeType_Classifier_Classifier()
+const std::shared_ptr<uml::Operation>& UMLPackageImpl::get_UML_Classifier_maySpecializeType_Classifier_Classifier()
 {
 	return uML_Classifier_maySpecializeType_Classifier_Classifier;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_Classifier_maySpecializeType_Classifier_Classifier_c()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_Classifier_maySpecializeType_Classifier_Classifier_c()
 {
 	return uML_Classifier_maySpecializeType_Classifier_Classifier_c;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_Classifier_maySpecializeType_result()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_Classifier_maySpecializeType_result()
 {
 	return uML_Classifier_maySpecializeType_result;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_Classifier_maySpecializeType_spec()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_Classifier_maySpecializeType_spec()
 {
 	return uML_Classifier_maySpecializeType_spec;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_Classifier_no_cycles_in_generalization()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_Classifier_no_cycles_in_generalization()
 {
 	return uML_Classifier_no_cycles_in_generalization;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_Classifier_non_final_parents()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_Classifier_non_final_parents()
 {
 	return uML_Classifier_non_final_parents;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_Classifier_ownedTemplateSignature()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_Classifier_ownedTemplateSignature()
 {
 	return uML_Classifier_ownedTemplateSignature;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_Classifier_ownedUseCase()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_Classifier_ownedUseCase()
 {
 	return uML_Classifier_ownedUseCase;
 }
-std::shared_ptr<uml::Operation> UMLPackageImpl::get_UML_Classifier_parents__()
+const std::shared_ptr<uml::Operation>& UMLPackageImpl::get_UML_Classifier_parents__()
 {
 	return uML_Classifier_parents__;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_Classifier_parents_result()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_Classifier_parents_result()
 {
 	return uML_Classifier_parents_result;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_Classifier_parents_spec()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_Classifier_parents_spec()
 {
 	return uML_Classifier_parents_spec;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_Classifier_powertypeExtent()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_Classifier_powertypeExtent()
 {
 	return uML_Classifier_powertypeExtent;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_Classifier_redefinedClassifier()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_Classifier_redefinedClassifier()
 {
 	return uML_Classifier_redefinedClassifier;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_Classifier_representation()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_Classifier_representation()
 {
 	return uML_Classifier_representation;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_Classifier_specialize_type()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_Classifier_specialize_type()
 {
 	return uML_Classifier_specialize_type;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_Classifier_substitution()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_Classifier_substitution()
 {
 	return uML_Classifier_substitution;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_Classifier_templateParameter()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_Classifier_templateParameter()
 {
 	return uML_Classifier_templateParameter;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_Classifier_useCase()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_Classifier_useCase()
 {
 	return uML_Classifier_useCase;
 }
-std::shared_ptr<uml::Class> UMLPackageImpl::get_UML_Clause()
+const std::shared_ptr<uml::Class>& UMLPackageImpl::get_UML_Clause()
 {
 	return uML_Clause;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_Clause_body()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_Clause_body()
 {
 	return uML_Clause_body;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_Clause_bodyOutput()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_Clause_bodyOutput()
 {
 	return uML_Clause_bodyOutput;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_Clause_body_output_pins()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_Clause_body_output_pins()
 {
 	return uML_Clause_body_output_pins;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_Clause_decider()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_Clause_decider()
 {
 	return uML_Clause_decider;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_Clause_decider_output()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_Clause_decider_output()
 {
 	return uML_Clause_decider_output;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_Clause_predecessorClause()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_Clause_predecessorClause()
 {
 	return uML_Clause_predecessorClause;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_Clause_successorClause()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_Clause_successorClause()
 {
 	return uML_Clause_successorClause;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_Clause_test()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_Clause_test()
 {
 	return uML_Clause_test;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_Clause_test_and_body()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_Clause_test_and_body()
 {
 	return uML_Clause_test_and_body;
 }
-std::shared_ptr<uml::Class> UMLPackageImpl::get_UML_ClearAssociationAction()
+const std::shared_ptr<uml::Class>& UMLPackageImpl::get_UML_ClearAssociationAction()
 {
 	return uML_ClearAssociationAction;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_ClearAssociationAction_association()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_ClearAssociationAction_association()
 {
 	return uML_ClearAssociationAction_association;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_ClearAssociationAction_multiplicity()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_ClearAssociationAction_multiplicity()
 {
 	return uML_ClearAssociationAction_multiplicity;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_ClearAssociationAction_object()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_ClearAssociationAction_object()
 {
 	return uML_ClearAssociationAction_object;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_ClearAssociationAction_same_type()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_ClearAssociationAction_same_type()
 {
 	return uML_ClearAssociationAction_same_type;
 }
-std::shared_ptr<uml::Class> UMLPackageImpl::get_UML_ClearStructuralFeatureAction()
+const std::shared_ptr<uml::Class>& UMLPackageImpl::get_UML_ClearStructuralFeatureAction()
 {
 	return uML_ClearStructuralFeatureAction;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_ClearStructuralFeatureAction_multiplicity_of_result()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_ClearStructuralFeatureAction_multiplicity_of_result()
 {
 	return uML_ClearStructuralFeatureAction_multiplicity_of_result;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_ClearStructuralFeatureAction_result()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_ClearStructuralFeatureAction_result()
 {
 	return uML_ClearStructuralFeatureAction_result;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_ClearStructuralFeatureAction_type_of_result()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_ClearStructuralFeatureAction_type_of_result()
 {
 	return uML_ClearStructuralFeatureAction_type_of_result;
 }
-std::shared_ptr<uml::Class> UMLPackageImpl::get_UML_ClearVariableAction()
+const std::shared_ptr<uml::Class>& UMLPackageImpl::get_UML_ClearVariableAction()
 {
 	return uML_ClearVariableAction;
 }
-std::shared_ptr<uml::Class> UMLPackageImpl::get_UML_Collaboration()
+const std::shared_ptr<uml::Class>& UMLPackageImpl::get_UML_Collaboration()
 {
 	return uML_Collaboration;
 }
-std::shared_ptr<uml::Class> UMLPackageImpl::get_UML_CollaborationUse()
+const std::shared_ptr<uml::Class>& UMLPackageImpl::get_UML_CollaborationUse()
 {
 	return uML_CollaborationUse;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_CollaborationUse_client_elements()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_CollaborationUse_client_elements()
 {
 	return uML_CollaborationUse_client_elements;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_CollaborationUse_connectors()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_CollaborationUse_connectors()
 {
 	return uML_CollaborationUse_connectors;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_CollaborationUse_every_role()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_CollaborationUse_every_role()
 {
 	return uML_CollaborationUse_every_role;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_CollaborationUse_roleBinding()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_CollaborationUse_roleBinding()
 {
 	return uML_CollaborationUse_roleBinding;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_CollaborationUse_type()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_CollaborationUse_type()
 {
 	return uML_CollaborationUse_type;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_Collaboration_collaborationRole()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_Collaboration_collaborationRole()
 {
 	return uML_Collaboration_collaborationRole;
 }
-std::shared_ptr<uml::Class> UMLPackageImpl::get_UML_CombinedFragment()
+const std::shared_ptr<uml::Class>& UMLPackageImpl::get_UML_CombinedFragment()
 {
 	return uML_CombinedFragment;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_CombinedFragment_break()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_CombinedFragment_break()
 {
 	return uML_CombinedFragment_break;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_CombinedFragment_cfragmentGate()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_CombinedFragment_cfragmentGate()
 {
 	return uML_CombinedFragment_cfragmentGate;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_CombinedFragment_consider_and_ignore()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_CombinedFragment_consider_and_ignore()
 {
 	return uML_CombinedFragment_consider_and_ignore;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_CombinedFragment_interactionOperator()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_CombinedFragment_interactionOperator()
 {
 	return uML_CombinedFragment_interactionOperator;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_CombinedFragment_operand()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_CombinedFragment_operand()
 {
 	return uML_CombinedFragment_operand;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_CombinedFragment_opt_loop_break_neg()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_CombinedFragment_opt_loop_break_neg()
 {
 	return uML_CombinedFragment_opt_loop_break_neg;
 }
-std::shared_ptr<uml::Class> UMLPackageImpl::get_UML_Comment()
+const std::shared_ptr<uml::Class>& UMLPackageImpl::get_UML_Comment()
 {
 	return uML_Comment;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_Comment_annotatedElement()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_Comment_annotatedElement()
 {
 	return uML_Comment_annotatedElement;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_Comment_body()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_Comment_body()
 {
 	return uML_Comment_body;
 }
-std::shared_ptr<uml::Class> UMLPackageImpl::get_UML_CommunicationPath()
+const std::shared_ptr<uml::Class>& UMLPackageImpl::get_UML_CommunicationPath()
 {
 	return uML_CommunicationPath;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_CommunicationPath_association_ends()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_CommunicationPath_association_ends()
 {
 	return uML_CommunicationPath_association_ends;
 }
-std::shared_ptr<uml::Class> UMLPackageImpl::get_UML_Component()
+const std::shared_ptr<uml::Class>& UMLPackageImpl::get_UML_Component()
 {
 	return uML_Component;
 }
-std::shared_ptr<uml::Class> UMLPackageImpl::get_UML_ComponentRealization()
+const std::shared_ptr<uml::Class>& UMLPackageImpl::get_UML_ComponentRealization()
 {
 	return uML_ComponentRealization;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_ComponentRealization_abstraction()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_ComponentRealization_abstraction()
 {
 	return uML_ComponentRealization_abstraction;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_ComponentRealization_realizingClassifier()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_ComponentRealization_realizingClassifier()
 {
 	return uML_ComponentRealization_realizingClassifier;
 }
-std::shared_ptr<uml::Operation> UMLPackageImpl::get_UML_Component_createOwnedClass_String_Boolean_String_Boolean()
+const std::shared_ptr<uml::Operation>& UMLPackageImpl::get_UML_Component_createOwnedClass_String_Boolean_String_Boolean()
 {
 	return uML_Component_createOwnedClass_String_Boolean_String_Boolean;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_Component_createOwnedClass_String_Boolean_String_Boolean_isAbstract()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_Component_createOwnedClass_String_Boolean_String_Boolean_isAbstract()
 {
 	return uML_Component_createOwnedClass_String_Boolean_String_Boolean_isAbstract;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_Component_createOwnedClass_String_Boolean_String_Boolean_name()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_Component_createOwnedClass_String_Boolean_String_Boolean_name()
 {
 	return uML_Component_createOwnedClass_String_Boolean_String_Boolean_name;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_Component_createOwnedClass_String_Boolean_String_Booleanreturn()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_Component_createOwnedClass_String_Boolean_String_Booleanreturn()
 {
 	return uML_Component_createOwnedClass_String_Boolean_String_Booleanreturn;
 }
-std::shared_ptr<uml::Operation> UMLPackageImpl::get_UML_Component_createOwnedEnumeration_String_String()
+const std::shared_ptr<uml::Operation>& UMLPackageImpl::get_UML_Component_createOwnedEnumeration_String_String()
 {
 	return uML_Component_createOwnedEnumeration_String_String;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_Component_createOwnedEnumeration_String_String_name()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_Component_createOwnedEnumeration_String_String_name()
 {
 	return uML_Component_createOwnedEnumeration_String_String_name;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_Component_createOwnedEnumeration_String_Stringreturn()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_Component_createOwnedEnumeration_String_Stringreturn()
 {
 	return uML_Component_createOwnedEnumeration_String_Stringreturn;
 }
-std::shared_ptr<uml::Operation> UMLPackageImpl::get_UML_Component_createOwnedInterface_String_String()
+const std::shared_ptr<uml::Operation>& UMLPackageImpl::get_UML_Component_createOwnedInterface_String_String()
 {
 	return uML_Component_createOwnedInterface_String_String;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_Component_createOwnedInterface_String_String_name()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_Component_createOwnedInterface_String_String_name()
 {
 	return uML_Component_createOwnedInterface_String_String_name;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_Component_createOwnedInterface_String_Stringreturn()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_Component_createOwnedInterface_String_Stringreturn()
 {
 	return uML_Component_createOwnedInterface_String_Stringreturn;
 }
-std::shared_ptr<uml::Operation> UMLPackageImpl::get_UML_Component_createOwnedPrimitiveType_String_String()
+const std::shared_ptr<uml::Operation>& UMLPackageImpl::get_UML_Component_createOwnedPrimitiveType_String_String()
 {
 	return uML_Component_createOwnedPrimitiveType_String_String;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_Component_createOwnedPrimitiveType_String_String_name()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_Component_createOwnedPrimitiveType_String_String_name()
 {
 	return uML_Component_createOwnedPrimitiveType_String_String_name;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_Component_createOwnedPrimitiveType_String_Stringreturn()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_Component_createOwnedPrimitiveType_String_Stringreturn()
 {
 	return uML_Component_createOwnedPrimitiveType_String_Stringreturn;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_Component_isIndirectlyInstantiated()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_Component_isIndirectlyInstantiated()
 {
 	return uML_Component_isIndirectlyInstantiated;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_Component_no_nested_classifiers()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_Component_no_nested_classifiers()
 {
 	return uML_Component_no_nested_classifiers;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_Component_no_packaged_elements()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_Component_no_packaged_elements()
 {
 	return uML_Component_no_packaged_elements;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_Component_packagedElement()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_Component_packagedElement()
 {
 	return uML_Component_packagedElement;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_Component_provided()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_Component_provided()
 {
 	return uML_Component_provided;
 }
-std::shared_ptr<uml::Operation> UMLPackageImpl::get_UML_Component_provided__()
+const std::shared_ptr<uml::Operation>& UMLPackageImpl::get_UML_Component_provided__()
 {
 	return uML_Component_provided__;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_Component_provided_result()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_Component_provided_result()
 {
 	return uML_Component_provided_result;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_Component_provided_spec()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_Component_provided_spec()
 {
 	return uML_Component_provided_spec;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_Component_realization()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_Component_realization()
 {
 	return uML_Component_realization;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_Component_required()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_Component_required()
 {
 	return uML_Component_required;
 }
-std::shared_ptr<uml::Operation> UMLPackageImpl::get_UML_Component_required__()
+const std::shared_ptr<uml::Operation>& UMLPackageImpl::get_UML_Component_required__()
 {
 	return uML_Component_required__;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_Component_required_result()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_Component_required_result()
 {
 	return uML_Component_required_result;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_Component_required_spec()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_Component_required_spec()
 {
 	return uML_Component_required_spec;
 }
-std::shared_ptr<uml::Class> UMLPackageImpl::get_UML_ConditionalNode()
+const std::shared_ptr<uml::Class>& UMLPackageImpl::get_UML_ConditionalNode()
 {
 	return uML_ConditionalNode;
 }
-std::shared_ptr<uml::Operation> UMLPackageImpl::get_UML_ConditionalNode_allActions__()
+const std::shared_ptr<uml::Operation>& UMLPackageImpl::get_UML_ConditionalNode_allActions__()
 {
 	return uML_ConditionalNode_allActions__;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_ConditionalNode_allActions_result()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_ConditionalNode_allActions_result()
 {
 	return uML_ConditionalNode_allActions_result;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_ConditionalNode_allActions_spec()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_ConditionalNode_allActions_spec()
 {
 	return uML_ConditionalNode_allActions_spec;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_ConditionalNode_clause()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_ConditionalNode_clause()
 {
 	return uML_ConditionalNode_clause;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_ConditionalNode_clause_no_predecessor()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_ConditionalNode_clause_no_predecessor()
 {
 	return uML_ConditionalNode_clause_no_predecessor;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_ConditionalNode_executable_nodes()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_ConditionalNode_executable_nodes()
 {
 	return uML_ConditionalNode_executable_nodes;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_ConditionalNode_isAssured()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_ConditionalNode_isAssured()
 {
 	return uML_ConditionalNode_isAssured;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_ConditionalNode_isDeterminate()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_ConditionalNode_isDeterminate()
 {
 	return uML_ConditionalNode_isDeterminate;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_ConditionalNode_matching_output_pins()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_ConditionalNode_matching_output_pins()
 {
 	return uML_ConditionalNode_matching_output_pins;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_ConditionalNode_no_input_pins()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_ConditionalNode_no_input_pins()
 {
 	return uML_ConditionalNode_no_input_pins;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_ConditionalNode_one_clause_with_executable_node()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_ConditionalNode_one_clause_with_executable_node()
 {
 	return uML_ConditionalNode_one_clause_with_executable_node;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_ConditionalNode_result()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_ConditionalNode_result()
 {
 	return uML_ConditionalNode_result;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_ConditionalNode_result_no_incoming()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_ConditionalNode_result_no_incoming()
 {
 	return uML_ConditionalNode_result_no_incoming;
 }
-std::shared_ptr<uml::Class> UMLPackageImpl::get_UML_ConnectableElement()
+const std::shared_ptr<uml::Class>& UMLPackageImpl::get_UML_ConnectableElement()
 {
 	return uML_ConnectableElement;
 }
-std::shared_ptr<uml::Class> UMLPackageImpl::get_UML_ConnectableElementTemplateParameter()
+const std::shared_ptr<uml::Class>& UMLPackageImpl::get_UML_ConnectableElementTemplateParameter()
 {
 	return uML_ConnectableElementTemplateParameter;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_ConnectableElementTemplateParameter_parameteredElement()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_ConnectableElementTemplateParameter_parameteredElement()
 {
 	return uML_ConnectableElementTemplateParameter_parameteredElement;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_ConnectableElement_end()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_ConnectableElement_end()
 {
 	return uML_ConnectableElement_end;
 }
-std::shared_ptr<uml::Operation> UMLPackageImpl::get_UML_ConnectableElement_end__()
+const std::shared_ptr<uml::Operation>& UMLPackageImpl::get_UML_ConnectableElement_end__()
 {
 	return uML_ConnectableElement_end__;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_ConnectableElement_end_result()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_ConnectableElement_end_result()
 {
 	return uML_ConnectableElement_end_result;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_ConnectableElement_end_spec()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_ConnectableElement_end_spec()
 {
 	return uML_ConnectableElement_end_spec;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_ConnectableElement_templateParameter()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_ConnectableElement_templateParameter()
 {
 	return uML_ConnectableElement_templateParameter;
 }
-std::shared_ptr<uml::Class> UMLPackageImpl::get_UML_ConnectionPointReference()
+const std::shared_ptr<uml::Class>& UMLPackageImpl::get_UML_ConnectionPointReference()
 {
 	return uML_ConnectionPointReference;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_ConnectionPointReference_entry()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_ConnectionPointReference_entry()
 {
 	return uML_ConnectionPointReference_entry;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_ConnectionPointReference_entry_pseudostates()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_ConnectionPointReference_entry_pseudostates()
 {
 	return uML_ConnectionPointReference_entry_pseudostates;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_ConnectionPointReference_exit()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_ConnectionPointReference_exit()
 {
 	return uML_ConnectionPointReference_exit;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_ConnectionPointReference_exit_pseudostates()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_ConnectionPointReference_exit_pseudostates()
 {
 	return uML_ConnectionPointReference_exit_pseudostates;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_ConnectionPointReference_state()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_ConnectionPointReference_state()
 {
 	return uML_ConnectionPointReference_state;
 }
-std::shared_ptr<uml::Class> UMLPackageImpl::get_UML_Connector()
+const std::shared_ptr<uml::Class>& UMLPackageImpl::get_UML_Connector()
 {
 	return uML_Connector;
 }
-std::shared_ptr<uml::Class> UMLPackageImpl::get_UML_ConnectorEnd()
+const std::shared_ptr<uml::Class>& UMLPackageImpl::get_UML_ConnectorEnd()
 {
 	return uML_ConnectorEnd;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_ConnectorEnd_definingEnd()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_ConnectorEnd_definingEnd()
 {
 	return uML_ConnectorEnd_definingEnd;
 }
-std::shared_ptr<uml::Operation> UMLPackageImpl::get_UML_ConnectorEnd_definingEnd__()
+const std::shared_ptr<uml::Operation>& UMLPackageImpl::get_UML_ConnectorEnd_definingEnd__()
 {
 	return uML_ConnectorEnd_definingEnd__;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_ConnectorEnd_definingEnd_result()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_ConnectorEnd_definingEnd_result()
 {
 	return uML_ConnectorEnd_definingEnd_result;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_ConnectorEnd_definingEnd_spec()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_ConnectorEnd_definingEnd_spec()
 {
 	return uML_ConnectorEnd_definingEnd_spec;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_ConnectorEnd_multiplicity()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_ConnectorEnd_multiplicity()
 {
 	return uML_ConnectorEnd_multiplicity;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_ConnectorEnd_partWithPort()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_ConnectorEnd_partWithPort()
 {
 	return uML_ConnectorEnd_partWithPort;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_ConnectorEnd_part_with_port_empty()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_ConnectorEnd_part_with_port_empty()
 {
 	return uML_ConnectorEnd_part_with_port_empty;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_ConnectorEnd_role()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_ConnectorEnd_role()
 {
 	return uML_ConnectorEnd_role;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_ConnectorEnd_role_and_part_with_port()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_ConnectorEnd_role_and_part_with_port()
 {
 	return uML_ConnectorEnd_role_and_part_with_port;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_ConnectorEnd_self_part_with_port()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_ConnectorEnd_self_part_with_port()
 {
 	return uML_ConnectorEnd_self_part_with_port;
 }
-std::shared_ptr<uml::Enumeration> UMLPackageImpl::get_UML_ConnectorKind()
+const std::shared_ptr<uml::Enumeration>& UMLPackageImpl::get_UML_ConnectorKind()
 {
 	return uML_ConnectorKind;
 }
-std::shared_ptr<uml::EnumerationLiteral> UMLPackageImpl::get_UML_ConnectorKind_assembly()
+const std::shared_ptr<uml::EnumerationLiteral>& UMLPackageImpl::get_UML_ConnectorKind_assembly()
 {
 	return uML_ConnectorKind_assembly;
 }
-std::shared_ptr<uml::EnumerationLiteral> UMLPackageImpl::get_UML_ConnectorKind_delegation()
+const std::shared_ptr<uml::EnumerationLiteral>& UMLPackageImpl::get_UML_ConnectorKind_delegation()
 {
 	return uML_ConnectorKind_delegation;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_Connector_contract()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_Connector_contract()
 {
 	return uML_Connector_contract;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_Connector_end()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_Connector_end()
 {
 	return uML_Connector_end;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_Connector_kind()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_Connector_kind()
 {
 	return uML_Connector_kind;
 }
-std::shared_ptr<uml::Operation> UMLPackageImpl::get_UML_Connector_kind__()
+const std::shared_ptr<uml::Operation>& UMLPackageImpl::get_UML_Connector_kind__()
 {
 	return uML_Connector_kind__;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_Connector_kind_result()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_Connector_kind_result()
 {
 	return uML_Connector_kind_result;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_Connector_kind_spec()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_Connector_kind_spec()
 {
 	return uML_Connector_kind_spec;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_Connector_redefinedConnector()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_Connector_redefinedConnector()
 {
 	return uML_Connector_redefinedConnector;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_Connector_roles()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_Connector_roles()
 {
 	return uML_Connector_roles;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_Connector_type()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_Connector_type()
 {
 	return uML_Connector_type;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_Connector_types()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_Connector_types()
 {
 	return uML_Connector_types;
 }
-std::shared_ptr<uml::Class> UMLPackageImpl::get_UML_ConsiderIgnoreFragment()
+const std::shared_ptr<uml::Class>& UMLPackageImpl::get_UML_ConsiderIgnoreFragment()
 {
 	return uML_ConsiderIgnoreFragment;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_ConsiderIgnoreFragment_consider_or_ignore()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_ConsiderIgnoreFragment_consider_or_ignore()
 {
 	return uML_ConsiderIgnoreFragment_consider_or_ignore;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_ConsiderIgnoreFragment_message()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_ConsiderIgnoreFragment_message()
 {
 	return uML_ConsiderIgnoreFragment_message;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_ConsiderIgnoreFragment_type()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_ConsiderIgnoreFragment_type()
 {
 	return uML_ConsiderIgnoreFragment_type;
 }
-std::shared_ptr<uml::Class> UMLPackageImpl::get_UML_Constraint()
+const std::shared_ptr<uml::Class>& UMLPackageImpl::get_UML_Constraint()
 {
 	return uML_Constraint;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_Constraint_boolean_value()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_Constraint_boolean_value()
 {
 	return uML_Constraint_boolean_value;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_Constraint_constrainedElement()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_Constraint_constrainedElement()
 {
 	return uML_Constraint_constrainedElement;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_Constraint_context()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_Constraint_context()
 {
 	return uML_Constraint_context;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_Constraint_no_side_effects()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_Constraint_no_side_effects()
 {
 	return uML_Constraint_no_side_effects;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_Constraint_not_apply_to_self()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_Constraint_not_apply_to_self()
 {
 	return uML_Constraint_not_apply_to_self;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_Constraint_specification()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_Constraint_specification()
 {
 	return uML_Constraint_specification;
 }
-std::shared_ptr<uml::Class> UMLPackageImpl::get_UML_Continuation()
+const std::shared_ptr<uml::Class>& UMLPackageImpl::get_UML_Continuation()
 {
 	return uML_Continuation;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_Continuation_first_or_last_interaction_fragment()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_Continuation_first_or_last_interaction_fragment()
 {
 	return uML_Continuation_first_or_last_interaction_fragment;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_Continuation_global()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_Continuation_global()
 {
 	return uML_Continuation_global;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_Continuation_same_name()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_Continuation_same_name()
 {
 	return uML_Continuation_same_name;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_Continuation_setting()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_Continuation_setting()
 {
 	return uML_Continuation_setting;
 }
-std::shared_ptr<uml::Class> UMLPackageImpl::get_UML_ControlFlow()
+const std::shared_ptr<uml::Class>& UMLPackageImpl::get_UML_ControlFlow()
 {
 	return uML_ControlFlow;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_ControlFlow_object_nodes()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_ControlFlow_object_nodes()
 {
 	return uML_ControlFlow_object_nodes;
 }
-std::shared_ptr<uml::Class> UMLPackageImpl::get_UML_ControlNode()
+const std::shared_ptr<uml::Class>& UMLPackageImpl::get_UML_ControlNode()
 {
 	return uML_ControlNode;
 }
-std::shared_ptr<uml::Class> UMLPackageImpl::get_UML_CreateLinkAction()
+const std::shared_ptr<uml::Class>& UMLPackageImpl::get_UML_CreateLinkAction()
 {
 	return uML_CreateLinkAction;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_CreateLinkAction_association_not_abstract()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_CreateLinkAction_association_not_abstract()
 {
 	return uML_CreateLinkAction_association_not_abstract;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_CreateLinkAction_endData()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_CreateLinkAction_endData()
 {
 	return uML_CreateLinkAction_endData;
 }
-std::shared_ptr<uml::Class> UMLPackageImpl::get_UML_CreateLinkObjectAction()
+const std::shared_ptr<uml::Class>& UMLPackageImpl::get_UML_CreateLinkObjectAction()
 {
 	return uML_CreateLinkObjectAction;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_CreateLinkObjectAction_association_class()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_CreateLinkObjectAction_association_class()
 {
 	return uML_CreateLinkObjectAction_association_class;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_CreateLinkObjectAction_multiplicity()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_CreateLinkObjectAction_multiplicity()
 {
 	return uML_CreateLinkObjectAction_multiplicity;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_CreateLinkObjectAction_result()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_CreateLinkObjectAction_result()
 {
 	return uML_CreateLinkObjectAction_result;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_CreateLinkObjectAction_type_of_result()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_CreateLinkObjectAction_type_of_result()
 {
 	return uML_CreateLinkObjectAction_type_of_result;
 }
-std::shared_ptr<uml::Class> UMLPackageImpl::get_UML_CreateObjectAction()
+const std::shared_ptr<uml::Class>& UMLPackageImpl::get_UML_CreateObjectAction()
 {
 	return uML_CreateObjectAction;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_CreateObjectAction_classifier()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_CreateObjectAction_classifier()
 {
 	return uML_CreateObjectAction_classifier;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_CreateObjectAction_classifier_not_abstract()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_CreateObjectAction_classifier_not_abstract()
 {
 	return uML_CreateObjectAction_classifier_not_abstract;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_CreateObjectAction_classifier_not_association_class()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_CreateObjectAction_classifier_not_association_class()
 {
 	return uML_CreateObjectAction_classifier_not_association_class;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_CreateObjectAction_multiplicity()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_CreateObjectAction_multiplicity()
 {
 	return uML_CreateObjectAction_multiplicity;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_CreateObjectAction_result()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_CreateObjectAction_result()
 {
 	return uML_CreateObjectAction_result;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_CreateObjectAction_same_type()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_CreateObjectAction_same_type()
 {
 	return uML_CreateObjectAction_same_type;
 }
-std::shared_ptr<uml::Class> UMLPackageImpl::get_UML_DataStoreNode()
+const std::shared_ptr<uml::Class>& UMLPackageImpl::get_UML_DataStoreNode()
 {
 	return uML_DataStoreNode;
 }
-std::shared_ptr<uml::Class> UMLPackageImpl::get_UML_DataType()
+const std::shared_ptr<uml::Class>& UMLPackageImpl::get_UML_DataType()
 {
 	return uML_DataType;
 }
-std::shared_ptr<uml::Operation> UMLPackageImpl::get_UML_DataType_createOwnedAttribute_String_Type_Integer_UnlimitedNatural_String_Type_Integer_UnlimitedNatural()
+const std::shared_ptr<uml::Operation>& UMLPackageImpl::get_UML_DataType_createOwnedAttribute_String_Type_Integer_UnlimitedNatural_String_Type_Integer_UnlimitedNatural()
 {
 	return uML_DataType_createOwnedAttribute_String_Type_Integer_UnlimitedNatural_String_Type_Integer_UnlimitedNatural;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_DataType_createOwnedAttribute_String_Type_Integer_UnlimitedNatural_String_Type_Integer_UnlimitedNatural_lower()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_DataType_createOwnedAttribute_String_Type_Integer_UnlimitedNatural_String_Type_Integer_UnlimitedNatural_lower()
 {
 	return uML_DataType_createOwnedAttribute_String_Type_Integer_UnlimitedNatural_String_Type_Integer_UnlimitedNatural_lower;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_DataType_createOwnedAttribute_String_Type_Integer_UnlimitedNatural_String_Type_Integer_UnlimitedNatural_name()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_DataType_createOwnedAttribute_String_Type_Integer_UnlimitedNatural_String_Type_Integer_UnlimitedNatural_name()
 {
 	return uML_DataType_createOwnedAttribute_String_Type_Integer_UnlimitedNatural_String_Type_Integer_UnlimitedNatural_name;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_DataType_createOwnedAttribute_String_Type_Integer_UnlimitedNatural_String_Type_Integer_UnlimitedNatural_type()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_DataType_createOwnedAttribute_String_Type_Integer_UnlimitedNatural_String_Type_Integer_UnlimitedNatural_type()
 {
 	return uML_DataType_createOwnedAttribute_String_Type_Integer_UnlimitedNatural_String_Type_Integer_UnlimitedNatural_type;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_DataType_createOwnedAttribute_String_Type_Integer_UnlimitedNatural_String_Type_Integer_UnlimitedNatural_upper()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_DataType_createOwnedAttribute_String_Type_Integer_UnlimitedNatural_String_Type_Integer_UnlimitedNatural_upper()
 {
 	return uML_DataType_createOwnedAttribute_String_Type_Integer_UnlimitedNatural_String_Type_Integer_UnlimitedNatural_upper;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_DataType_createOwnedAttribute_String_Type_Integer_UnlimitedNatural_String_Type_Integer_UnlimitedNaturalreturn()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_DataType_createOwnedAttribute_String_Type_Integer_UnlimitedNatural_String_Type_Integer_UnlimitedNaturalreturn()
 {
 	return uML_DataType_createOwnedAttribute_String_Type_Integer_UnlimitedNatural_String_Type_Integer_UnlimitedNaturalreturn;
 }
-std::shared_ptr<uml::Operation> UMLPackageImpl::get_UML_DataType_createOwnedOperation_String_String_Type_Type_String_String_Type_Type()
+const std::shared_ptr<uml::Operation>& UMLPackageImpl::get_UML_DataType_createOwnedOperation_String_String_Type_Type_String_String_Type_Type()
 {
 	return uML_DataType_createOwnedOperation_String_String_Type_Type_String_String_Type_Type;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_DataType_createOwnedOperation_String_String_Type_Type_String_String_Type_Type_name()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_DataType_createOwnedOperation_String_String_Type_Type_String_String_Type_Type_name()
 {
 	return uML_DataType_createOwnedOperation_String_String_Type_Type_String_String_Type_Type_name;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_DataType_createOwnedOperation_String_String_Type_Type_String_String_Type_Type_parameterNames()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_DataType_createOwnedOperation_String_String_Type_Type_String_String_Type_Type_parameterNames()
 {
 	return uML_DataType_createOwnedOperation_String_String_Type_Type_String_String_Type_Type_parameterNames;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_DataType_createOwnedOperation_String_String_Type_Type_String_String_Type_Type_parameterTypes()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_DataType_createOwnedOperation_String_String_Type_Type_String_String_Type_Type_parameterTypes()
 {
 	return uML_DataType_createOwnedOperation_String_String_Type_Type_String_String_Type_Type_parameterTypes;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_DataType_createOwnedOperation_String_String_Type_Type_String_String_Type_Type_returnType()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_DataType_createOwnedOperation_String_String_Type_Type_String_String_Type_Type_returnType()
 {
 	return uML_DataType_createOwnedOperation_String_String_Type_Type_String_String_Type_Type_returnType;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_DataType_createOwnedOperation_String_String_Type_Type_String_String_Type_Typereturn()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_DataType_createOwnedOperation_String_String_Type_Type_String_String_Type_Typereturn()
 {
 	return uML_DataType_createOwnedOperation_String_String_Type_Type_String_String_Type_Typereturn;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_DataType_ownedAttribute()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_DataType_ownedAttribute()
 {
 	return uML_DataType_ownedAttribute;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_DataType_ownedOperation()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_DataType_ownedOperation()
 {
 	return uML_DataType_ownedOperation;
 }
-std::shared_ptr<uml::Class> UMLPackageImpl::get_UML_DecisionNode()
+const std::shared_ptr<uml::Class>& UMLPackageImpl::get_UML_DecisionNode()
 {
 	return uML_DecisionNode;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_DecisionNode_decisionInput()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_DecisionNode_decisionInput()
 {
 	return uML_DecisionNode_decisionInput;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_DecisionNode_decisionInputFlow()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_DecisionNode_decisionInputFlow()
 {
 	return uML_DecisionNode_decisionInputFlow;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_DecisionNode_decision_input_flow_incoming()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_DecisionNode_decision_input_flow_incoming()
 {
 	return uML_DecisionNode_decision_input_flow_incoming;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_DecisionNode_edges()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_DecisionNode_edges()
 {
 	return uML_DecisionNode_edges;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_DecisionNode_incoming_control_one_input_parameter()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_DecisionNode_incoming_control_one_input_parameter()
 {
 	return uML_DecisionNode_incoming_control_one_input_parameter;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_DecisionNode_incoming_object_one_input_parameter()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_DecisionNode_incoming_object_one_input_parameter()
 {
 	return uML_DecisionNode_incoming_object_one_input_parameter;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_DecisionNode_incoming_outgoing_edges()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_DecisionNode_incoming_outgoing_edges()
 {
 	return uML_DecisionNode_incoming_outgoing_edges;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_DecisionNode_parameters()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_DecisionNode_parameters()
 {
 	return uML_DecisionNode_parameters;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_DecisionNode_two_input_parameters()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_DecisionNode_two_input_parameters()
 {
 	return uML_DecisionNode_two_input_parameters;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_DecisionNode_zero_input_parameters()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_DecisionNode_zero_input_parameters()
 {
 	return uML_DecisionNode_zero_input_parameters;
 }
-std::shared_ptr<uml::Class> UMLPackageImpl::get_UML_Dependency()
+const std::shared_ptr<uml::Class>& UMLPackageImpl::get_UML_Dependency()
 {
 	return uML_Dependency;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_Dependency_client()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_Dependency_client()
 {
 	return uML_Dependency_client;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_Dependency_supplier()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_Dependency_supplier()
 {
 	return uML_Dependency_supplier;
 }
-std::shared_ptr<uml::Class> UMLPackageImpl::get_UML_DeployedArtifact()
+const std::shared_ptr<uml::Class>& UMLPackageImpl::get_UML_DeployedArtifact()
 {
 	return uML_DeployedArtifact;
 }
-std::shared_ptr<uml::Class> UMLPackageImpl::get_UML_Deployment()
+const std::shared_ptr<uml::Class>& UMLPackageImpl::get_UML_Deployment()
 {
 	return uML_Deployment;
 }
-std::shared_ptr<uml::Class> UMLPackageImpl::get_UML_DeploymentSpecification()
+const std::shared_ptr<uml::Class>& UMLPackageImpl::get_UML_DeploymentSpecification()
 {
 	return uML_DeploymentSpecification;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_DeploymentSpecification_deployed_elements()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_DeploymentSpecification_deployed_elements()
 {
 	return uML_DeploymentSpecification_deployed_elements;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_DeploymentSpecification_deployment()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_DeploymentSpecification_deployment()
 {
 	return uML_DeploymentSpecification_deployment;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_DeploymentSpecification_deploymentLocation()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_DeploymentSpecification_deploymentLocation()
 {
 	return uML_DeploymentSpecification_deploymentLocation;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_DeploymentSpecification_deployment_target()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_DeploymentSpecification_deployment_target()
 {
 	return uML_DeploymentSpecification_deployment_target;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_DeploymentSpecification_executionLocation()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_DeploymentSpecification_executionLocation()
 {
 	return uML_DeploymentSpecification_executionLocation;
 }
-std::shared_ptr<uml::Class> UMLPackageImpl::get_UML_DeploymentTarget()
+const std::shared_ptr<uml::Class>& UMLPackageImpl::get_UML_DeploymentTarget()
 {
 	return uML_DeploymentTarget;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_DeploymentTarget_deployedElement()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_DeploymentTarget_deployedElement()
 {
 	return uML_DeploymentTarget_deployedElement;
 }
-std::shared_ptr<uml::Operation> UMLPackageImpl::get_UML_DeploymentTarget_deployedElement__()
+const std::shared_ptr<uml::Operation>& UMLPackageImpl::get_UML_DeploymentTarget_deployedElement__()
 {
 	return uML_DeploymentTarget_deployedElement__;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_DeploymentTarget_deployedElement_result()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_DeploymentTarget_deployedElement_result()
 {
 	return uML_DeploymentTarget_deployedElement_result;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_DeploymentTarget_deployedElement_spec()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_DeploymentTarget_deployedElement_spec()
 {
 	return uML_DeploymentTarget_deployedElement_spec;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_DeploymentTarget_deployment()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_DeploymentTarget_deployment()
 {
 	return uML_DeploymentTarget_deployment;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_Deployment_configuration()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_Deployment_configuration()
 {
 	return uML_Deployment_configuration;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_Deployment_deployedArtifact()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_Deployment_deployedArtifact()
 {
 	return uML_Deployment_deployedArtifact;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_Deployment_location()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_Deployment_location()
 {
 	return uML_Deployment_location;
 }
-std::shared_ptr<uml::Class> UMLPackageImpl::get_UML_DestroyLinkAction()
+const std::shared_ptr<uml::Class>& UMLPackageImpl::get_UML_DestroyLinkAction()
 {
 	return uML_DestroyLinkAction;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_DestroyLinkAction_endData()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_DestroyLinkAction_endData()
 {
 	return uML_DestroyLinkAction_endData;
 }
-std::shared_ptr<uml::Class> UMLPackageImpl::get_UML_DestroyObjectAction()
+const std::shared_ptr<uml::Class>& UMLPackageImpl::get_UML_DestroyObjectAction()
 {
 	return uML_DestroyObjectAction;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_DestroyObjectAction_isDestroyLinks()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_DestroyObjectAction_isDestroyLinks()
 {
 	return uML_DestroyObjectAction_isDestroyLinks;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_DestroyObjectAction_isDestroyOwnedObjects()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_DestroyObjectAction_isDestroyOwnedObjects()
 {
 	return uML_DestroyObjectAction_isDestroyOwnedObjects;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_DestroyObjectAction_multiplicity()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_DestroyObjectAction_multiplicity()
 {
 	return uML_DestroyObjectAction_multiplicity;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_DestroyObjectAction_no_type()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_DestroyObjectAction_no_type()
 {
 	return uML_DestroyObjectAction_no_type;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_DestroyObjectAction_target()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_DestroyObjectAction_target()
 {
 	return uML_DestroyObjectAction_target;
 }
-std::shared_ptr<uml::Class> UMLPackageImpl::get_UML_DestructionOccurrenceSpecification()
+const std::shared_ptr<uml::Class>& UMLPackageImpl::get_UML_DestructionOccurrenceSpecification()
 {
 	return uML_DestructionOccurrenceSpecification;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_DestructionOccurrenceSpecification_no_occurrence_specifications_below()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_DestructionOccurrenceSpecification_no_occurrence_specifications_below()
 {
 	return uML_DestructionOccurrenceSpecification_no_occurrence_specifications_below;
 }
-std::shared_ptr<uml::Class> UMLPackageImpl::get_UML_Device()
+const std::shared_ptr<uml::Class>& UMLPackageImpl::get_UML_Device()
 {
 	return uML_Device;
 }
-std::shared_ptr<uml::Class> UMLPackageImpl::get_UML_DirectedRelationship()
+const std::shared_ptr<uml::Class>& UMLPackageImpl::get_UML_DirectedRelationship()
 {
 	return uML_DirectedRelationship;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_DirectedRelationship_source()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_DirectedRelationship_source()
 {
 	return uML_DirectedRelationship_source;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_DirectedRelationship_target()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_DirectedRelationship_target()
 {
 	return uML_DirectedRelationship_target;
 }
-std::shared_ptr<uml::Class> UMLPackageImpl::get_UML_Duration()
+const std::shared_ptr<uml::Class>& UMLPackageImpl::get_UML_Duration()
 {
 	return uML_Duration;
 }
-std::shared_ptr<uml::Class> UMLPackageImpl::get_UML_DurationConstraint()
+const std::shared_ptr<uml::Class>& UMLPackageImpl::get_UML_DurationConstraint()
 {
 	return uML_DurationConstraint;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_DurationConstraint_firstEvent()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_DurationConstraint_firstEvent()
 {
 	return uML_DurationConstraint_firstEvent;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_DurationConstraint_first_event_multiplicity()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_DurationConstraint_first_event_multiplicity()
 {
 	return uML_DurationConstraint_first_event_multiplicity;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_DurationConstraint_has_one_or_two_constrainedElements()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_DurationConstraint_has_one_or_two_constrainedElements()
 {
 	return uML_DurationConstraint_has_one_or_two_constrainedElements;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_DurationConstraint_specification()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_DurationConstraint_specification()
 {
 	return uML_DurationConstraint_specification;
 }
-std::shared_ptr<uml::Class> UMLPackageImpl::get_UML_DurationInterval()
+const std::shared_ptr<uml::Class>& UMLPackageImpl::get_UML_DurationInterval()
 {
 	return uML_DurationInterval;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_DurationInterval_max()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_DurationInterval_max()
 {
 	return uML_DurationInterval_max;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_DurationInterval_min()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_DurationInterval_min()
 {
 	return uML_DurationInterval_min;
 }
-std::shared_ptr<uml::Class> UMLPackageImpl::get_UML_DurationObservation()
+const std::shared_ptr<uml::Class>& UMLPackageImpl::get_UML_DurationObservation()
 {
 	return uML_DurationObservation;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_DurationObservation_event()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_DurationObservation_event()
 {
 	return uML_DurationObservation_event;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_DurationObservation_firstEvent()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_DurationObservation_firstEvent()
 {
 	return uML_DurationObservation_firstEvent;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_DurationObservation_first_event_multiplicity()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_DurationObservation_first_event_multiplicity()
 {
 	return uML_DurationObservation_first_event_multiplicity;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_Duration_expr()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_Duration_expr()
 {
 	return uML_Duration_expr;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_Duration_no_expr_requires_observation()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_Duration_no_expr_requires_observation()
 {
 	return uML_Duration_no_expr_requires_observation;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_Duration_observation()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_Duration_observation()
 {
 	return uML_Duration_observation;
 }
-std::shared_ptr<uml::Operation> UMLPackageImpl::get_UML_Duration_stringValue__()
+const std::shared_ptr<uml::Operation>& UMLPackageImpl::get_UML_Duration_stringValue__()
 {
 	return uML_Duration_stringValue__;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_Duration_stringValue__return()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_Duration_stringValue__return()
 {
 	return uML_Duration_stringValue__return;
 }
-std::shared_ptr<uml::Class> UMLPackageImpl::get_UML_Element()
+const std::shared_ptr<uml::Class>& UMLPackageImpl::get_UML_Element()
 {
 	return uML_Element;
 }
-std::shared_ptr<uml::Class> UMLPackageImpl::get_UML_ElementImport()
+const std::shared_ptr<uml::Class>& UMLPackageImpl::get_UML_ElementImport()
 {
 	return uML_ElementImport;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_ElementImport_alias()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_ElementImport_alias()
 {
 	return uML_ElementImport_alias;
 }
-std::shared_ptr<uml::Operation> UMLPackageImpl::get_UML_ElementImport_getName__()
+const std::shared_ptr<uml::Operation>& UMLPackageImpl::get_UML_ElementImport_getName__()
 {
 	return uML_ElementImport_getName__;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_ElementImport_getName_result()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_ElementImport_getName_result()
 {
 	return uML_ElementImport_getName_result;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_ElementImport_getName_spec()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_ElementImport_getName_spec()
 {
 	return uML_ElementImport_getName_spec;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_ElementImport_importedElement()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_ElementImport_importedElement()
 {
 	return uML_ElementImport_importedElement;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_ElementImport_imported_element_is_public()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_ElementImport_imported_element_is_public()
 {
 	return uML_ElementImport_imported_element_is_public;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_ElementImport_importingNamespace()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_ElementImport_importingNamespace()
 {
 	return uML_ElementImport_importingNamespace;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_ElementImport_visibility()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_ElementImport_visibility()
 {
 	return uML_ElementImport_visibility;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_ElementImport_visibility_public_or_private()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_ElementImport_visibility_public_or_private()
 {
 	return uML_ElementImport_visibility_public_or_private;
 }
-std::shared_ptr<uml::Operation> UMLPackageImpl::get_UML_Element_addKeyword_String_String()
+const std::shared_ptr<uml::Operation>& UMLPackageImpl::get_UML_Element_addKeyword_String_String()
 {
 	return uML_Element_addKeyword_String_String;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_Element_addKeyword_String_String_keyword()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_Element_addKeyword_String_String_keyword()
 {
 	return uML_Element_addKeyword_String_String_keyword;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_Element_addKeyword_String_Stringreturn()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_Element_addKeyword_String_Stringreturn()
 {
 	return uML_Element_addKeyword_String_Stringreturn;
 }
-std::shared_ptr<uml::Operation> UMLPackageImpl::get_UML_Element_allOwnedElements__()
+const std::shared_ptr<uml::Operation>& UMLPackageImpl::get_UML_Element_allOwnedElements__()
 {
 	return uML_Element_allOwnedElements__;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_Element_allOwnedElements_result()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_Element_allOwnedElements_result()
 {
 	return uML_Element_allOwnedElements_result;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_Element_allOwnedElements_spec()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_Element_allOwnedElements_spec()
 {
 	return uML_Element_allOwnedElements_spec;
 }
-std::shared_ptr<uml::Operation> UMLPackageImpl::get_UML_Element_applyStereotype_Stereotype_Stereotype()
+const std::shared_ptr<uml::Operation>& UMLPackageImpl::get_UML_Element_applyStereotype_Stereotype_Stereotype()
 {
 	return uML_Element_applyStereotype_Stereotype_Stereotype;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_Element_applyStereotype_Stereotype_Stereotype_stereotype()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_Element_applyStereotype_Stereotype_Stereotype_stereotype()
 {
 	return uML_Element_applyStereotype_Stereotype_Stereotype_stereotype;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_Element_applyStereotype_Stereotype_Stereotypereturn()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_Element_applyStereotype_Stereotype_Stereotypereturn()
 {
 	return uML_Element_applyStereotype_Stereotype_Stereotypereturn;
 }
-std::shared_ptr<uml::Operation> UMLPackageImpl::get_UML_Element_createEAnnotation_String_String()
+const std::shared_ptr<uml::Operation>& UMLPackageImpl::get_UML_Element_createEAnnotation_String_String()
 {
 	return uML_Element_createEAnnotation_String_String;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_Element_createEAnnotation_String_String_source()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_Element_createEAnnotation_String_String_source()
 {
 	return uML_Element_createEAnnotation_String_String_source;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_Element_createEAnnotation_String_Stringreturn()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_Element_createEAnnotation_String_Stringreturn()
 {
 	return uML_Element_createEAnnotation_String_Stringreturn;
 }
-std::shared_ptr<uml::Operation> UMLPackageImpl::get_UML_Element_destroy__()
+const std::shared_ptr<uml::Operation>& UMLPackageImpl::get_UML_Element_destroy__()
 {
 	return uML_Element_destroy__;
 }
-std::shared_ptr<uml::Operation> UMLPackageImpl::get_UML_Element_getApplicableStereotype_String_String()
+const std::shared_ptr<uml::Operation>& UMLPackageImpl::get_UML_Element_getApplicableStereotype_String_String()
 {
 	return uML_Element_getApplicableStereotype_String_String;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_Element_getApplicableStereotype_String_String_qualifiedName()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_Element_getApplicableStereotype_String_String_qualifiedName()
 {
 	return uML_Element_getApplicableStereotype_String_String_qualifiedName;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_Element_getApplicableStereotype_String_Stringreturn()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_Element_getApplicableStereotype_String_Stringreturn()
 {
 	return uML_Element_getApplicableStereotype_String_Stringreturn;
 }
-std::shared_ptr<uml::Operation> UMLPackageImpl::get_UML_Element_getApplicableStereotypes__()
+const std::shared_ptr<uml::Operation>& UMLPackageImpl::get_UML_Element_getApplicableStereotypes__()
 {
 	return uML_Element_getApplicableStereotypes__;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_Element_getApplicableStereotypes__return()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_Element_getApplicableStereotypes__return()
 {
 	return uML_Element_getApplicableStereotypes__return;
 }
-std::shared_ptr<uml::Operation> UMLPackageImpl::get_UML_Element_getAppliedStereotype_String_String()
+const std::shared_ptr<uml::Operation>& UMLPackageImpl::get_UML_Element_getAppliedStereotype_String_String()
 {
 	return uML_Element_getAppliedStereotype_String_String;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_Element_getAppliedStereotype_String_String_qualifiedName()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_Element_getAppliedStereotype_String_String_qualifiedName()
 {
 	return uML_Element_getAppliedStereotype_String_String_qualifiedName;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_Element_getAppliedStereotype_String_Stringreturn()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_Element_getAppliedStereotype_String_Stringreturn()
 {
 	return uML_Element_getAppliedStereotype_String_Stringreturn;
 }
-std::shared_ptr<uml::Operation> UMLPackageImpl::get_UML_Element_getAppliedStereotypes__()
+const std::shared_ptr<uml::Operation>& UMLPackageImpl::get_UML_Element_getAppliedStereotypes__()
 {
 	return uML_Element_getAppliedStereotypes__;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_Element_getAppliedStereotypes__return()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_Element_getAppliedStereotypes__return()
 {
 	return uML_Element_getAppliedStereotypes__return;
 }
-std::shared_ptr<uml::Operation> UMLPackageImpl::get_UML_Element_getAppliedSubstereotype_Stereotype_String_Stereotype_String()
+const std::shared_ptr<uml::Operation>& UMLPackageImpl::get_UML_Element_getAppliedSubstereotype_Stereotype_String_Stereotype_String()
 {
 	return uML_Element_getAppliedSubstereotype_Stereotype_String_Stereotype_String;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_Element_getAppliedSubstereotype_Stereotype_String_Stereotype_String_qualifiedName()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_Element_getAppliedSubstereotype_Stereotype_String_Stereotype_String_qualifiedName()
 {
 	return uML_Element_getAppliedSubstereotype_Stereotype_String_Stereotype_String_qualifiedName;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_Element_getAppliedSubstereotype_Stereotype_String_Stereotype_String_stereotype()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_Element_getAppliedSubstereotype_Stereotype_String_Stereotype_String_stereotype()
 {
 	return uML_Element_getAppliedSubstereotype_Stereotype_String_Stereotype_String_stereotype;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_Element_getAppliedSubstereotype_Stereotype_String_Stereotype_Stringreturn()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_Element_getAppliedSubstereotype_Stereotype_String_Stereotype_Stringreturn()
 {
 	return uML_Element_getAppliedSubstereotype_Stereotype_String_Stereotype_Stringreturn;
 }
-std::shared_ptr<uml::Operation> UMLPackageImpl::get_UML_Element_getAppliedSubstereotypes_Stereotype_Stereotype()
+const std::shared_ptr<uml::Operation>& UMLPackageImpl::get_UML_Element_getAppliedSubstereotypes_Stereotype_Stereotype()
 {
 	return uML_Element_getAppliedSubstereotypes_Stereotype_Stereotype;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_Element_getAppliedSubstereotypes_Stereotype_Stereotype_stereotype()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_Element_getAppliedSubstereotypes_Stereotype_Stereotype_stereotype()
 {
 	return uML_Element_getAppliedSubstereotypes_Stereotype_Stereotype_stereotype;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_Element_getAppliedSubstereotypes_Stereotype_Stereotypereturn()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_Element_getAppliedSubstereotypes_Stereotype_Stereotypereturn()
 {
 	return uML_Element_getAppliedSubstereotypes_Stereotype_Stereotypereturn;
 }
-std::shared_ptr<uml::Operation> UMLPackageImpl::get_UML_Element_getKeywords__()
+const std::shared_ptr<uml::Operation>& UMLPackageImpl::get_UML_Element_getKeywords__()
 {
 	return uML_Element_getKeywords__;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_Element_getKeywords__return()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_Element_getKeywords__return()
 {
 	return uML_Element_getKeywords__return;
 }
-std::shared_ptr<uml::Operation> UMLPackageImpl::get_UML_Element_getModel__()
+const std::shared_ptr<uml::Operation>& UMLPackageImpl::get_UML_Element_getModel__()
 {
 	return uML_Element_getModel__;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_Element_getModel__return()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_Element_getModel__return()
 {
 	return uML_Element_getModel__return;
 }
-std::shared_ptr<uml::Operation> UMLPackageImpl::get_UML_Element_getNearestPackage__()
+const std::shared_ptr<uml::Operation>& UMLPackageImpl::get_UML_Element_getNearestPackage__()
 {
 	return uML_Element_getNearestPackage__;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_Element_getNearestPackage__return()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_Element_getNearestPackage__return()
 {
 	return uML_Element_getNearestPackage__return;
 }
-std::shared_ptr<uml::Operation> UMLPackageImpl::get_UML_Element_getRelationships_EClass_EClass()
+const std::shared_ptr<uml::Operation>& UMLPackageImpl::get_UML_Element_getRelationships_EClass_EClass()
 {
 	return uML_Element_getRelationships_EClass_EClass;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_Element_getRelationships_EClass_EClass_eClass()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_Element_getRelationships_EClass_EClass_eClass()
 {
 	return uML_Element_getRelationships_EClass_EClass_eClass;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_Element_getRelationships_EClass_EClassreturn()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_Element_getRelationships_EClass_EClassreturn()
 {
 	return uML_Element_getRelationships_EClass_EClassreturn;
 }
-std::shared_ptr<uml::Operation> UMLPackageImpl::get_UML_Element_getRelationships__()
+const std::shared_ptr<uml::Operation>& UMLPackageImpl::get_UML_Element_getRelationships__()
 {
 	return uML_Element_getRelationships__;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_Element_getRelationships__return()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_Element_getRelationships__return()
 {
 	return uML_Element_getRelationships__return;
 }
-std::shared_ptr<uml::Operation> UMLPackageImpl::get_UML_Element_getRequiredStereotype_String_String()
+const std::shared_ptr<uml::Operation>& UMLPackageImpl::get_UML_Element_getRequiredStereotype_String_String()
 {
 	return uML_Element_getRequiredStereotype_String_String;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_Element_getRequiredStereotype_String_String_qualifiedName()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_Element_getRequiredStereotype_String_String_qualifiedName()
 {
 	return uML_Element_getRequiredStereotype_String_String_qualifiedName;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_Element_getRequiredStereotype_String_Stringreturn()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_Element_getRequiredStereotype_String_Stringreturn()
 {
 	return uML_Element_getRequiredStereotype_String_Stringreturn;
 }
-std::shared_ptr<uml::Operation> UMLPackageImpl::get_UML_Element_getRequiredStereotypes__()
+const std::shared_ptr<uml::Operation>& UMLPackageImpl::get_UML_Element_getRequiredStereotypes__()
 {
 	return uML_Element_getRequiredStereotypes__;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_Element_getRequiredStereotypes__return()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_Element_getRequiredStereotypes__return()
 {
 	return uML_Element_getRequiredStereotypes__return;
 }
-std::shared_ptr<uml::Operation> UMLPackageImpl::get_UML_Element_getSourceDirectedRelationships_EClass_EClass()
+const std::shared_ptr<uml::Operation>& UMLPackageImpl::get_UML_Element_getSourceDirectedRelationships_EClass_EClass()
 {
 	return uML_Element_getSourceDirectedRelationships_EClass_EClass;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_Element_getSourceDirectedRelationships_EClass_EClass_eClass()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_Element_getSourceDirectedRelationships_EClass_EClass_eClass()
 {
 	return uML_Element_getSourceDirectedRelationships_EClass_EClass_eClass;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_Element_getSourceDirectedRelationships_EClass_EClassreturn()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_Element_getSourceDirectedRelationships_EClass_EClassreturn()
 {
 	return uML_Element_getSourceDirectedRelationships_EClass_EClassreturn;
 }
-std::shared_ptr<uml::Operation> UMLPackageImpl::get_UML_Element_getSourceDirectedRelationships__()
+const std::shared_ptr<uml::Operation>& UMLPackageImpl::get_UML_Element_getSourceDirectedRelationships__()
 {
 	return uML_Element_getSourceDirectedRelationships__;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_Element_getSourceDirectedRelationships__return()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_Element_getSourceDirectedRelationships__return()
 {
 	return uML_Element_getSourceDirectedRelationships__return;
 }
-std::shared_ptr<uml::Operation> UMLPackageImpl::get_UML_Element_getStereotypeApplication_Stereotype_Stereotype()
+const std::shared_ptr<uml::Operation>& UMLPackageImpl::get_UML_Element_getStereotypeApplication_Stereotype_Stereotype()
 {
 	return uML_Element_getStereotypeApplication_Stereotype_Stereotype;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_Element_getStereotypeApplication_Stereotype_Stereotype_stereotype()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_Element_getStereotypeApplication_Stereotype_Stereotype_stereotype()
 {
 	return uML_Element_getStereotypeApplication_Stereotype_Stereotype_stereotype;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_Element_getStereotypeApplication_Stereotype_Stereotypereturn()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_Element_getStereotypeApplication_Stereotype_Stereotypereturn()
 {
 	return uML_Element_getStereotypeApplication_Stereotype_Stereotypereturn;
 }
-std::shared_ptr<uml::Operation> UMLPackageImpl::get_UML_Element_getStereotypeApplications__()
+const std::shared_ptr<uml::Operation>& UMLPackageImpl::get_UML_Element_getStereotypeApplications__()
 {
 	return uML_Element_getStereotypeApplications__;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_Element_getStereotypeApplications__return()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_Element_getStereotypeApplications__return()
 {
 	return uML_Element_getStereotypeApplications__return;
 }
-std::shared_ptr<uml::Operation> UMLPackageImpl::get_UML_Element_getTargetDirectedRelationships_EClass_EClass()
+const std::shared_ptr<uml::Operation>& UMLPackageImpl::get_UML_Element_getTargetDirectedRelationships_EClass_EClass()
 {
 	return uML_Element_getTargetDirectedRelationships_EClass_EClass;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_Element_getTargetDirectedRelationships_EClass_EClass_eClass()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_Element_getTargetDirectedRelationships_EClass_EClass_eClass()
 {
 	return uML_Element_getTargetDirectedRelationships_EClass_EClass_eClass;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_Element_getTargetDirectedRelationships_EClass_EClassreturn()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_Element_getTargetDirectedRelationships_EClass_EClassreturn()
 {
 	return uML_Element_getTargetDirectedRelationships_EClass_EClassreturn;
 }
-std::shared_ptr<uml::Operation> UMLPackageImpl::get_UML_Element_getTargetDirectedRelationships__()
+const std::shared_ptr<uml::Operation>& UMLPackageImpl::get_UML_Element_getTargetDirectedRelationships__()
 {
 	return uML_Element_getTargetDirectedRelationships__;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_Element_getTargetDirectedRelationships__return()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_Element_getTargetDirectedRelationships__return()
 {
 	return uML_Element_getTargetDirectedRelationships__return;
 }
-std::shared_ptr<uml::Operation> UMLPackageImpl::get_UML_Element_getValue_Stereotype_String_Stereotype_String()
+const std::shared_ptr<uml::Operation>& UMLPackageImpl::get_UML_Element_getValue_Stereotype_String_Stereotype_String()
 {
 	return uML_Element_getValue_Stereotype_String_Stereotype_String;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_Element_getValue_Stereotype_String_Stereotype_String_propertyName()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_Element_getValue_Stereotype_String_Stereotype_String_propertyName()
 {
 	return uML_Element_getValue_Stereotype_String_Stereotype_String_propertyName;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_Element_getValue_Stereotype_String_Stereotype_String_stereotype()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_Element_getValue_Stereotype_String_Stereotype_String_stereotype()
 {
 	return uML_Element_getValue_Stereotype_String_Stereotype_String_stereotype;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_Element_getValue_Stereotype_String_Stereotype_Stringreturn()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_Element_getValue_Stereotype_String_Stereotype_Stringreturn()
 {
 	return uML_Element_getValue_Stereotype_String_Stereotype_Stringreturn;
 }
-std::shared_ptr<uml::Operation> UMLPackageImpl::get_UML_Element_hasKeyword_String_String()
+const std::shared_ptr<uml::Operation>& UMLPackageImpl::get_UML_Element_hasKeyword_String_String()
 {
 	return uML_Element_hasKeyword_String_String;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_Element_hasKeyword_String_String_keyword()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_Element_hasKeyword_String_String_keyword()
 {
 	return uML_Element_hasKeyword_String_String_keyword;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_Element_hasKeyword_String_Stringreturn()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_Element_hasKeyword_String_Stringreturn()
 {
 	return uML_Element_hasKeyword_String_Stringreturn;
 }
-std::shared_ptr<uml::Operation> UMLPackageImpl::get_UML_Element_hasValue_Stereotype_String_Stereotype_String()
+const std::shared_ptr<uml::Operation>& UMLPackageImpl::get_UML_Element_hasValue_Stereotype_String_Stereotype_String()
 {
 	return uML_Element_hasValue_Stereotype_String_Stereotype_String;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_Element_hasValue_Stereotype_String_Stereotype_String_propertyName()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_Element_hasValue_Stereotype_String_Stereotype_String_propertyName()
 {
 	return uML_Element_hasValue_Stereotype_String_Stereotype_String_propertyName;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_Element_hasValue_Stereotype_String_Stereotype_String_stereotype()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_Element_hasValue_Stereotype_String_Stereotype_String_stereotype()
 {
 	return uML_Element_hasValue_Stereotype_String_Stereotype_String_stereotype;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_Element_hasValue_Stereotype_String_Stereotype_Stringreturn()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_Element_hasValue_Stereotype_String_Stereotype_Stringreturn()
 {
 	return uML_Element_hasValue_Stereotype_String_Stereotype_Stringreturn;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_Element_has_owner()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_Element_has_owner()
 {
 	return uML_Element_has_owner;
 }
-std::shared_ptr<uml::Operation> UMLPackageImpl::get_UML_Element_isStereotypeApplicable_Stereotype_Stereotype()
+const std::shared_ptr<uml::Operation>& UMLPackageImpl::get_UML_Element_isStereotypeApplicable_Stereotype_Stereotype()
 {
 	return uML_Element_isStereotypeApplicable_Stereotype_Stereotype;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_Element_isStereotypeApplicable_Stereotype_Stereotype_stereotype()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_Element_isStereotypeApplicable_Stereotype_Stereotype_stereotype()
 {
 	return uML_Element_isStereotypeApplicable_Stereotype_Stereotype_stereotype;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_Element_isStereotypeApplicable_Stereotype_Stereotypereturn()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_Element_isStereotypeApplicable_Stereotype_Stereotypereturn()
 {
 	return uML_Element_isStereotypeApplicable_Stereotype_Stereotypereturn;
 }
-std::shared_ptr<uml::Operation> UMLPackageImpl::get_UML_Element_isStereotypeApplied_Stereotype_Stereotype()
+const std::shared_ptr<uml::Operation>& UMLPackageImpl::get_UML_Element_isStereotypeApplied_Stereotype_Stereotype()
 {
 	return uML_Element_isStereotypeApplied_Stereotype_Stereotype;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_Element_isStereotypeApplied_Stereotype_Stereotype_stereotype()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_Element_isStereotypeApplied_Stereotype_Stereotype_stereotype()
 {
 	return uML_Element_isStereotypeApplied_Stereotype_Stereotype_stereotype;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_Element_isStereotypeApplied_Stereotype_Stereotypereturn()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_Element_isStereotypeApplied_Stereotype_Stereotypereturn()
 {
 	return uML_Element_isStereotypeApplied_Stereotype_Stereotypereturn;
 }
-std::shared_ptr<uml::Operation> UMLPackageImpl::get_UML_Element_isStereotypeRequired_Stereotype_Stereotype()
+const std::shared_ptr<uml::Operation>& UMLPackageImpl::get_UML_Element_isStereotypeRequired_Stereotype_Stereotype()
 {
 	return uML_Element_isStereotypeRequired_Stereotype_Stereotype;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_Element_isStereotypeRequired_Stereotype_Stereotype_stereotype()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_Element_isStereotypeRequired_Stereotype_Stereotype_stereotype()
 {
 	return uML_Element_isStereotypeRequired_Stereotype_Stereotype_stereotype;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_Element_isStereotypeRequired_Stereotype_Stereotypereturn()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_Element_isStereotypeRequired_Stereotype_Stereotypereturn()
 {
 	return uML_Element_isStereotypeRequired_Stereotype_Stereotypereturn;
 }
-std::shared_ptr<uml::Operation> UMLPackageImpl::get_UML_Element_mustBeOwned__()
+const std::shared_ptr<uml::Operation>& UMLPackageImpl::get_UML_Element_mustBeOwned__()
 {
 	return uML_Element_mustBeOwned__;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_Element_mustBeOwned_result()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_Element_mustBeOwned_result()
 {
 	return uML_Element_mustBeOwned_result;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_Element_mustBeOwned_spec()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_Element_mustBeOwned_spec()
 {
 	return uML_Element_mustBeOwned_spec;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_Element_not_own_self()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_Element_not_own_self()
 {
 	return uML_Element_not_own_self;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_Element_ownedComment()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_Element_ownedComment()
 {
 	return uML_Element_ownedComment;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_Element_ownedElement()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_Element_ownedElement()
 {
 	return uML_Element_ownedElement;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_Element_owner()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_Element_owner()
 {
 	return uML_Element_owner;
 }
-std::shared_ptr<uml::Operation> UMLPackageImpl::get_UML_Element_removeKeyword_String_String()
+const std::shared_ptr<uml::Operation>& UMLPackageImpl::get_UML_Element_removeKeyword_String_String()
 {
 	return uML_Element_removeKeyword_String_String;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_Element_removeKeyword_String_String_keyword()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_Element_removeKeyword_String_String_keyword()
 {
 	return uML_Element_removeKeyword_String_String_keyword;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_Element_removeKeyword_String_Stringreturn()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_Element_removeKeyword_String_Stringreturn()
 {
 	return uML_Element_removeKeyword_String_Stringreturn;
 }
-std::shared_ptr<uml::Operation> UMLPackageImpl::get_UML_Element_setValue_Stereotype_String_EJavaObject_Stereotype_String_EJavaObject()
+const std::shared_ptr<uml::Operation>& UMLPackageImpl::get_UML_Element_setValue_Stereotype_String_EJavaObject_Stereotype_String_EJavaObject()
 {
 	return uML_Element_setValue_Stereotype_String_EJavaObject_Stereotype_String_EJavaObject;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_Element_setValue_Stereotype_String_EJavaObject_Stereotype_String_EJavaObject_newValue()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_Element_setValue_Stereotype_String_EJavaObject_Stereotype_String_EJavaObject_newValue()
 {
 	return uML_Element_setValue_Stereotype_String_EJavaObject_Stereotype_String_EJavaObject_newValue;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_Element_setValue_Stereotype_String_EJavaObject_Stereotype_String_EJavaObject_propertyName()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_Element_setValue_Stereotype_String_EJavaObject_Stereotype_String_EJavaObject_propertyName()
 {
 	return uML_Element_setValue_Stereotype_String_EJavaObject_Stereotype_String_EJavaObject_propertyName;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_Element_setValue_Stereotype_String_EJavaObject_Stereotype_String_EJavaObject_stereotype()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_Element_setValue_Stereotype_String_EJavaObject_Stereotype_String_EJavaObject_stereotype()
 {
 	return uML_Element_setValue_Stereotype_String_EJavaObject_Stereotype_String_EJavaObject_stereotype;
 }
-std::shared_ptr<uml::Operation> UMLPackageImpl::get_UML_Element_unapplyStereotype_Stereotype_Stereotype()
+const std::shared_ptr<uml::Operation>& UMLPackageImpl::get_UML_Element_unapplyStereotype_Stereotype_Stereotype()
 {
 	return uML_Element_unapplyStereotype_Stereotype_Stereotype;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_Element_unapplyStereotype_Stereotype_Stereotype_stereotype()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_Element_unapplyStereotype_Stereotype_Stereotype_stereotype()
 {
 	return uML_Element_unapplyStereotype_Stereotype_Stereotype_stereotype;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_Element_unapplyStereotype_Stereotype_Stereotypereturn()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_Element_unapplyStereotype_Stereotype_Stereotypereturn()
 {
 	return uML_Element_unapplyStereotype_Stereotype_Stereotypereturn;
 }
-std::shared_ptr<uml::Class> UMLPackageImpl::get_UML_EncapsulatedClassifier()
+const std::shared_ptr<uml::Class>& UMLPackageImpl::get_UML_EncapsulatedClassifier()
 {
 	return uML_EncapsulatedClassifier;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_EncapsulatedClassifier_ownedPort()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_EncapsulatedClassifier_ownedPort()
 {
 	return uML_EncapsulatedClassifier_ownedPort;
 }
-std::shared_ptr<uml::Operation> UMLPackageImpl::get_UML_EncapsulatedClassifier_ownedPort__()
+const std::shared_ptr<uml::Operation>& UMLPackageImpl::get_UML_EncapsulatedClassifier_ownedPort__()
 {
 	return uML_EncapsulatedClassifier_ownedPort__;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_EncapsulatedClassifier_ownedPort_result()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_EncapsulatedClassifier_ownedPort_result()
 {
 	return uML_EncapsulatedClassifier_ownedPort_result;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_EncapsulatedClassifier_ownedPort_spec()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_EncapsulatedClassifier_ownedPort_spec()
 {
 	return uML_EncapsulatedClassifier_ownedPort_spec;
 }
-std::shared_ptr<uml::Class> UMLPackageImpl::get_UML_Enumeration()
+const std::shared_ptr<uml::Class>& UMLPackageImpl::get_UML_Enumeration()
 {
 	return uML_Enumeration;
 }
-std::shared_ptr<uml::Class> UMLPackageImpl::get_UML_EnumerationLiteral()
+const std::shared_ptr<uml::Class>& UMLPackageImpl::get_UML_EnumerationLiteral()
 {
 	return uML_EnumerationLiteral;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_EnumerationLiteral_classifier()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_EnumerationLiteral_classifier()
 {
 	return uML_EnumerationLiteral_classifier;
 }
-std::shared_ptr<uml::Operation> UMLPackageImpl::get_UML_EnumerationLiteral_classifier__()
+const std::shared_ptr<uml::Operation>& UMLPackageImpl::get_UML_EnumerationLiteral_classifier__()
 {
 	return uML_EnumerationLiteral_classifier__;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_EnumerationLiteral_classifier_result()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_EnumerationLiteral_classifier_result()
 {
 	return uML_EnumerationLiteral_classifier_result;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_EnumerationLiteral_classifier_spec()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_EnumerationLiteral_classifier_spec()
 {
 	return uML_EnumerationLiteral_classifier_spec;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_EnumerationLiteral_enumeration()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_EnumerationLiteral_enumeration()
 {
 	return uML_EnumerationLiteral_enumeration;
 }
-std::shared_ptr<uml::Operation> UMLPackageImpl::get_UML_EnumerationLiteral_getClassifiers__()
+const std::shared_ptr<uml::Operation>& UMLPackageImpl::get_UML_EnumerationLiteral_getClassifiers__()
 {
 	return uML_EnumerationLiteral_getClassifiers__;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_EnumerationLiteral_getClassifiers__return()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_EnumerationLiteral_getClassifiers__return()
 {
 	return uML_EnumerationLiteral_getClassifiers__return;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_Enumeration_immutable()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_Enumeration_immutable()
 {
 	return uML_Enumeration_immutable;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_Enumeration_ownedLiteral()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_Enumeration_ownedLiteral()
 {
 	return uML_Enumeration_ownedLiteral;
 }
-std::shared_ptr<uml::Class> UMLPackageImpl::get_UML_Event()
+const std::shared_ptr<uml::Class>& UMLPackageImpl::get_UML_Event()
 {
 	return uML_Event;
 }
-std::shared_ptr<uml::Class> UMLPackageImpl::get_UML_ExceptionHandler()
+const std::shared_ptr<uml::Class>& UMLPackageImpl::get_UML_ExceptionHandler()
 {
 	return uML_ExceptionHandler;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_ExceptionHandler_edge_source_target()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_ExceptionHandler_edge_source_target()
 {
 	return uML_ExceptionHandler_edge_source_target;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_ExceptionHandler_exceptionInput()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_ExceptionHandler_exceptionInput()
 {
 	return uML_ExceptionHandler_exceptionInput;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_ExceptionHandler_exceptionType()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_ExceptionHandler_exceptionType()
 {
 	return uML_ExceptionHandler_exceptionType;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_ExceptionHandler_exception_input_type()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_ExceptionHandler_exception_input_type()
 {
 	return uML_ExceptionHandler_exception_input_type;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_ExceptionHandler_handlerBody()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_ExceptionHandler_handlerBody()
 {
 	return uML_ExceptionHandler_handlerBody;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_ExceptionHandler_handler_body_edges()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_ExceptionHandler_handler_body_edges()
 {
 	return uML_ExceptionHandler_handler_body_edges;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_ExceptionHandler_handler_body_owner()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_ExceptionHandler_handler_body_owner()
 {
 	return uML_ExceptionHandler_handler_body_owner;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_ExceptionHandler_one_input()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_ExceptionHandler_one_input()
 {
 	return uML_ExceptionHandler_one_input;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_ExceptionHandler_output_pins()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_ExceptionHandler_output_pins()
 {
 	return uML_ExceptionHandler_output_pins;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_ExceptionHandler_protectedNode()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_ExceptionHandler_protectedNode()
 {
 	return uML_ExceptionHandler_protectedNode;
 }
-std::shared_ptr<uml::Class> UMLPackageImpl::get_UML_ExecutableNode()
+const std::shared_ptr<uml::Class>& UMLPackageImpl::get_UML_ExecutableNode()
 {
 	return uML_ExecutableNode;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_ExecutableNode_handler()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_ExecutableNode_handler()
 {
 	return uML_ExecutableNode_handler;
 }
-std::shared_ptr<uml::Class> UMLPackageImpl::get_UML_ExecutionEnvironment()
+const std::shared_ptr<uml::Class>& UMLPackageImpl::get_UML_ExecutionEnvironment()
 {
 	return uML_ExecutionEnvironment;
 }
-std::shared_ptr<uml::Class> UMLPackageImpl::get_UML_ExecutionOccurrenceSpecification()
+const std::shared_ptr<uml::Class>& UMLPackageImpl::get_UML_ExecutionOccurrenceSpecification()
 {
 	return uML_ExecutionOccurrenceSpecification;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_ExecutionOccurrenceSpecification_execution()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_ExecutionOccurrenceSpecification_execution()
 {
 	return uML_ExecutionOccurrenceSpecification_execution;
 }
-std::shared_ptr<uml::Class> UMLPackageImpl::get_UML_ExecutionSpecification()
+const std::shared_ptr<uml::Class>& UMLPackageImpl::get_UML_ExecutionSpecification()
 {
 	return uML_ExecutionSpecification;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_ExecutionSpecification_finish()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_ExecutionSpecification_finish()
 {
 	return uML_ExecutionSpecification_finish;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_ExecutionSpecification_same_lifeline()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_ExecutionSpecification_same_lifeline()
 {
 	return uML_ExecutionSpecification_same_lifeline;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_ExecutionSpecification_start()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_ExecutionSpecification_start()
 {
 	return uML_ExecutionSpecification_start;
 }
-std::shared_ptr<uml::Enumeration> UMLPackageImpl::get_UML_ExpansionKind()
+const std::shared_ptr<uml::Enumeration>& UMLPackageImpl::get_UML_ExpansionKind()
 {
 	return uML_ExpansionKind;
 }
-std::shared_ptr<uml::EnumerationLiteral> UMLPackageImpl::get_UML_ExpansionKind_iterative()
+const std::shared_ptr<uml::EnumerationLiteral>& UMLPackageImpl::get_UML_ExpansionKind_iterative()
 {
 	return uML_ExpansionKind_iterative;
 }
-std::shared_ptr<uml::EnumerationLiteral> UMLPackageImpl::get_UML_ExpansionKind_parallel()
+const std::shared_ptr<uml::EnumerationLiteral>& UMLPackageImpl::get_UML_ExpansionKind_parallel()
 {
 	return uML_ExpansionKind_parallel;
 }
-std::shared_ptr<uml::EnumerationLiteral> UMLPackageImpl::get_UML_ExpansionKind_stream()
+const std::shared_ptr<uml::EnumerationLiteral>& UMLPackageImpl::get_UML_ExpansionKind_stream()
 {
 	return uML_ExpansionKind_stream;
 }
-std::shared_ptr<uml::Class> UMLPackageImpl::get_UML_ExpansionNode()
+const std::shared_ptr<uml::Class>& UMLPackageImpl::get_UML_ExpansionNode()
 {
 	return uML_ExpansionNode;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_ExpansionNode_regionAsInput()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_ExpansionNode_regionAsInput()
 {
 	return uML_ExpansionNode_regionAsInput;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_ExpansionNode_regionAsOutput()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_ExpansionNode_regionAsOutput()
 {
 	return uML_ExpansionNode_regionAsOutput;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_ExpansionNode_region_as_input_or_output()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_ExpansionNode_region_as_input_or_output()
 {
 	return uML_ExpansionNode_region_as_input_or_output;
 }
-std::shared_ptr<uml::Class> UMLPackageImpl::get_UML_ExpansionRegion()
+const std::shared_ptr<uml::Class>& UMLPackageImpl::get_UML_ExpansionRegion()
 {
 	return uML_ExpansionRegion;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_ExpansionRegion_inputElement()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_ExpansionRegion_inputElement()
 {
 	return uML_ExpansionRegion_inputElement;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_ExpansionRegion_mode()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_ExpansionRegion_mode()
 {
 	return uML_ExpansionRegion_mode;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_ExpansionRegion_outputElement()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_ExpansionRegion_outputElement()
 {
 	return uML_ExpansionRegion_outputElement;
 }
-std::shared_ptr<uml::Class> UMLPackageImpl::get_UML_Expression()
+const std::shared_ptr<uml::Class>& UMLPackageImpl::get_UML_Expression()
 {
 	return uML_Expression;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_Expression_operand()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_Expression_operand()
 {
 	return uML_Expression_operand;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_Expression_symbol()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_Expression_symbol()
 {
 	return uML_Expression_symbol;
 }
-std::shared_ptr<uml::Class> UMLPackageImpl::get_UML_Extend()
+const std::shared_ptr<uml::Class>& UMLPackageImpl::get_UML_Extend()
 {
 	return uML_Extend;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_Extend_condition()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_Extend_condition()
 {
 	return uML_Extend_condition;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_Extend_extendedCase()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_Extend_extendedCase()
 {
 	return uML_Extend_extendedCase;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_Extend_extension()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_Extend_extension()
 {
 	return uML_Extend_extension;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_Extend_extensionLocation()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_Extend_extensionLocation()
 {
 	return uML_Extend_extensionLocation;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_Extend_extension_points()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_Extend_extension_points()
 {
 	return uML_Extend_extension_points;
 }
-std::shared_ptr<uml::Class> UMLPackageImpl::get_UML_Extension()
+const std::shared_ptr<uml::Class>& UMLPackageImpl::get_UML_Extension()
 {
 	return uML_Extension;
 }
-std::shared_ptr<uml::Class> UMLPackageImpl::get_UML_ExtensionEnd()
+const std::shared_ptr<uml::Class>& UMLPackageImpl::get_UML_ExtensionEnd()
 {
 	return uML_ExtensionEnd;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_ExtensionEnd_aggregation()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_ExtensionEnd_aggregation()
 {
 	return uML_ExtensionEnd_aggregation;
 }
-std::shared_ptr<uml::Operation> UMLPackageImpl::get_UML_ExtensionEnd_getLower__()
+const std::shared_ptr<uml::Operation>& UMLPackageImpl::get_UML_ExtensionEnd_getLower__()
 {
 	return uML_ExtensionEnd_getLower__;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_ExtensionEnd_getLower__return()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_ExtensionEnd_getLower__return()
 {
 	return uML_ExtensionEnd_getLower__return;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_ExtensionEnd_lower()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_ExtensionEnd_lower()
 {
 	return uML_ExtensionEnd_lower;
 }
-std::shared_ptr<uml::Operation> UMLPackageImpl::get_UML_ExtensionEnd_lowerBound__()
+const std::shared_ptr<uml::Operation>& UMLPackageImpl::get_UML_ExtensionEnd_lowerBound__()
 {
 	return uML_ExtensionEnd_lowerBound__;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_ExtensionEnd_lowerBound_result()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_ExtensionEnd_lowerBound_result()
 {
 	return uML_ExtensionEnd_lowerBound_result;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_ExtensionEnd_lowerBound_spec()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_ExtensionEnd_lowerBound_spec()
 {
 	return uML_ExtensionEnd_lowerBound_spec;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_ExtensionEnd_multiplicity()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_ExtensionEnd_multiplicity()
 {
 	return uML_ExtensionEnd_multiplicity;
 }
-std::shared_ptr<uml::Operation> UMLPackageImpl::get_UML_ExtensionEnd_setLower_Integer_Integer()
+const std::shared_ptr<uml::Operation>& UMLPackageImpl::get_UML_ExtensionEnd_setLower_Integer_Integer()
 {
 	return uML_ExtensionEnd_setLower_Integer_Integer;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_ExtensionEnd_setLower_Integer_Integer_newLower()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_ExtensionEnd_setLower_Integer_Integer_newLower()
 {
 	return uML_ExtensionEnd_setLower_Integer_Integer_newLower;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_ExtensionEnd_type()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_ExtensionEnd_type()
 {
 	return uML_ExtensionEnd_type;
 }
-std::shared_ptr<uml::Class> UMLPackageImpl::get_UML_ExtensionPoint()
+const std::shared_ptr<uml::Class>& UMLPackageImpl::get_UML_ExtensionPoint()
 {
 	return uML_ExtensionPoint;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_ExtensionPoint_must_have_name()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_ExtensionPoint_must_have_name()
 {
 	return uML_ExtensionPoint_must_have_name;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_ExtensionPoint_useCase()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_ExtensionPoint_useCase()
 {
 	return uML_ExtensionPoint_useCase;
 }
-std::shared_ptr<uml::Operation> UMLPackageImpl::get_UML_Extension_getStereotypeEnd__()
+const std::shared_ptr<uml::Operation>& UMLPackageImpl::get_UML_Extension_getStereotypeEnd__()
 {
 	return uML_Extension_getStereotypeEnd__;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_Extension_getStereotypeEnd__return()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_Extension_getStereotypeEnd__return()
 {
 	return uML_Extension_getStereotypeEnd__return;
 }
-std::shared_ptr<uml::Operation> UMLPackageImpl::get_UML_Extension_getStereotype__()
+const std::shared_ptr<uml::Operation>& UMLPackageImpl::get_UML_Extension_getStereotype__()
 {
 	return uML_Extension_getStereotype__;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_Extension_getStereotype__return()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_Extension_getStereotype__return()
 {
 	return uML_Extension_getStereotype__return;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_Extension_isRequired()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_Extension_isRequired()
 {
 	return uML_Extension_isRequired;
 }
-std::shared_ptr<uml::Operation> UMLPackageImpl::get_UML_Extension_isRequired__()
+const std::shared_ptr<uml::Operation>& UMLPackageImpl::get_UML_Extension_isRequired__()
 {
 	return uML_Extension_isRequired__;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_Extension_isRequired_result()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_Extension_isRequired_result()
 {
 	return uML_Extension_isRequired_result;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_Extension_isRequired_spec()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_Extension_isRequired_spec()
 {
 	return uML_Extension_isRequired_spec;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_Extension_is_binary()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_Extension_is_binary()
 {
 	return uML_Extension_is_binary;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_Extension_metaclass()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_Extension_metaclass()
 {
 	return uML_Extension_metaclass;
 }
-std::shared_ptr<uml::Operation> UMLPackageImpl::get_UML_Extension_metaclassEnd__()
+const std::shared_ptr<uml::Operation>& UMLPackageImpl::get_UML_Extension_metaclassEnd__()
 {
 	return uML_Extension_metaclassEnd__;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_Extension_metaclassEnd_result()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_Extension_metaclassEnd_result()
 {
 	return uML_Extension_metaclassEnd_result;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_Extension_metaclassEnd_spec()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_Extension_metaclassEnd_spec()
 {
 	return uML_Extension_metaclassEnd_spec;
 }
-std::shared_ptr<uml::Operation> UMLPackageImpl::get_UML_Extension_metaclass__()
+const std::shared_ptr<uml::Operation>& UMLPackageImpl::get_UML_Extension_metaclass__()
 {
 	return uML_Extension_metaclass__;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_Extension_metaclass_result()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_Extension_metaclass_result()
 {
 	return uML_Extension_metaclass_result;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_Extension_metaclass_spec()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_Extension_metaclass_spec()
 {
 	return uML_Extension_metaclass_spec;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_Extension_non_owned_end()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_Extension_non_owned_end()
 {
 	return uML_Extension_non_owned_end;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_Extension_ownedEnd()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_Extension_ownedEnd()
 {
 	return uML_Extension_ownedEnd;
 }
-std::shared_ptr<uml::Class> UMLPackageImpl::get_UML_Feature()
+const std::shared_ptr<uml::Class>& UMLPackageImpl::get_UML_Feature()
 {
 	return uML_Feature;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_Feature_featuringClassifier()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_Feature_featuringClassifier()
 {
 	return uML_Feature_featuringClassifier;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_Feature_isStatic()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_Feature_isStatic()
 {
 	return uML_Feature_isStatic;
 }
-std::shared_ptr<uml::Class> UMLPackageImpl::get_UML_FinalNode()
+const std::shared_ptr<uml::Class>& UMLPackageImpl::get_UML_FinalNode()
 {
 	return uML_FinalNode;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_FinalNode_no_outgoing_edges()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_FinalNode_no_outgoing_edges()
 {
 	return uML_FinalNode_no_outgoing_edges;
 }
-std::shared_ptr<uml::Class> UMLPackageImpl::get_UML_FinalState()
+const std::shared_ptr<uml::Class>& UMLPackageImpl::get_UML_FinalState()
 {
 	return uML_FinalState;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_FinalState_cannot_reference_submachine()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_FinalState_cannot_reference_submachine()
 {
 	return uML_FinalState_cannot_reference_submachine;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_FinalState_no_entry_behavior()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_FinalState_no_entry_behavior()
 {
 	return uML_FinalState_no_entry_behavior;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_FinalState_no_exit_behavior()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_FinalState_no_exit_behavior()
 {
 	return uML_FinalState_no_exit_behavior;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_FinalState_no_outgoing_transitions()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_FinalState_no_outgoing_transitions()
 {
 	return uML_FinalState_no_outgoing_transitions;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_FinalState_no_regions()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_FinalState_no_regions()
 {
 	return uML_FinalState_no_regions;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_FinalState_no_state_behavior()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_FinalState_no_state_behavior()
 {
 	return uML_FinalState_no_state_behavior;
 }
-std::shared_ptr<uml::Class> UMLPackageImpl::get_UML_FlowFinalNode()
+const std::shared_ptr<uml::Class>& UMLPackageImpl::get_UML_FlowFinalNode()
 {
 	return uML_FlowFinalNode;
 }
-std::shared_ptr<uml::Class> UMLPackageImpl::get_UML_ForkNode()
+const std::shared_ptr<uml::Class>& UMLPackageImpl::get_UML_ForkNode()
 {
 	return uML_ForkNode;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_ForkNode_edges()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_ForkNode_edges()
 {
 	return uML_ForkNode_edges;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_ForkNode_one_incoming_edge()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_ForkNode_one_incoming_edge()
 {
 	return uML_ForkNode_one_incoming_edge;
 }
-std::shared_ptr<uml::Class> UMLPackageImpl::get_UML_FunctionBehavior()
+const std::shared_ptr<uml::Class>& UMLPackageImpl::get_UML_FunctionBehavior()
 {
 	return uML_FunctionBehavior;
 }
-std::shared_ptr<uml::Operation> UMLPackageImpl::get_UML_FunctionBehavior_hasAllDataTypeAttributes_DataType_DataType()
+const std::shared_ptr<uml::Operation>& UMLPackageImpl::get_UML_FunctionBehavior_hasAllDataTypeAttributes_DataType_DataType()
 {
 	return uML_FunctionBehavior_hasAllDataTypeAttributes_DataType_DataType;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_FunctionBehavior_hasAllDataTypeAttributes_DataType_DataType_d()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_FunctionBehavior_hasAllDataTypeAttributes_DataType_DataType_d()
 {
 	return uML_FunctionBehavior_hasAllDataTypeAttributes_DataType_DataType_d;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_FunctionBehavior_hasAllDataTypeAttributes_result()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_FunctionBehavior_hasAllDataTypeAttributes_result()
 {
 	return uML_FunctionBehavior_hasAllDataTypeAttributes_result;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_FunctionBehavior_hasAllDataTypeAttributes_spec()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_FunctionBehavior_hasAllDataTypeAttributes_spec()
 {
 	return uML_FunctionBehavior_hasAllDataTypeAttributes_spec;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_FunctionBehavior_one_output_parameter()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_FunctionBehavior_one_output_parameter()
 {
 	return uML_FunctionBehavior_one_output_parameter;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_FunctionBehavior_types_of_parameters()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_FunctionBehavior_types_of_parameters()
 {
 	return uML_FunctionBehavior_types_of_parameters;
 }
-std::shared_ptr<uml::Class> UMLPackageImpl::get_UML_Gate()
+const std::shared_ptr<uml::Class>& UMLPackageImpl::get_UML_Gate()
 {
 	return uML_Gate;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_Gate_actual_gate_distinguishable()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_Gate_actual_gate_distinguishable()
 {
 	return uML_Gate_actual_gate_distinguishable;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_Gate_actual_gate_matched()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_Gate_actual_gate_matched()
 {
 	return uML_Gate_actual_gate_matched;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_Gate_formal_gate_distinguishable()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_Gate_formal_gate_distinguishable()
 {
 	return uML_Gate_formal_gate_distinguishable;
 }
-std::shared_ptr<uml::Operation> UMLPackageImpl::get_UML_Gate_getName__()
+const std::shared_ptr<uml::Operation>& UMLPackageImpl::get_UML_Gate_getName__()
 {
 	return uML_Gate_getName__;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_Gate_getName_result()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_Gate_getName_result()
 {
 	return uML_Gate_getName_result;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_Gate_getName_spec()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_Gate_getName_spec()
 {
 	return uML_Gate_getName_spec;
 }
-std::shared_ptr<uml::Operation> UMLPackageImpl::get_UML_Gate_getOperand__()
+const std::shared_ptr<uml::Operation>& UMLPackageImpl::get_UML_Gate_getOperand__()
 {
 	return uML_Gate_getOperand__;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_Gate_getOperand_result()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_Gate_getOperand_result()
 {
 	return uML_Gate_getOperand_result;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_Gate_getOperand_spec()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_Gate_getOperand_spec()
 {
 	return uML_Gate_getOperand_spec;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_Gate_inside_cf_gate_distinguishable()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_Gate_inside_cf_gate_distinguishable()
 {
 	return uML_Gate_inside_cf_gate_distinguishable;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_Gate_inside_cf_matched()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_Gate_inside_cf_matched()
 {
 	return uML_Gate_inside_cf_matched;
 }
-std::shared_ptr<uml::Operation> UMLPackageImpl::get_UML_Gate_isActual__()
+const std::shared_ptr<uml::Operation>& UMLPackageImpl::get_UML_Gate_isActual__()
 {
 	return uML_Gate_isActual__;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_Gate_isActual_result()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_Gate_isActual_result()
 {
 	return uML_Gate_isActual_result;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_Gate_isActual_spec()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_Gate_isActual_spec()
 {
 	return uML_Gate_isActual_spec;
 }
-std::shared_ptr<uml::Operation> UMLPackageImpl::get_UML_Gate_isDistinguishableFrom_NamedElement_Namespace_NamedElement_Namespace()
+const std::shared_ptr<uml::Operation>& UMLPackageImpl::get_UML_Gate_isDistinguishableFrom_NamedElement_Namespace_NamedElement_Namespace()
 {
 	return uML_Gate_isDistinguishableFrom_NamedElement_Namespace_NamedElement_Namespace;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_Gate_isDistinguishableFrom_NamedElement_Namespace_NamedElement_Namespace_n()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_Gate_isDistinguishableFrom_NamedElement_Namespace_NamedElement_Namespace_n()
 {
 	return uML_Gate_isDistinguishableFrom_NamedElement_Namespace_NamedElement_Namespace_n;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_Gate_isDistinguishableFrom_NamedElement_Namespace_NamedElement_Namespace_ns()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_Gate_isDistinguishableFrom_NamedElement_Namespace_NamedElement_Namespace_ns()
 {
 	return uML_Gate_isDistinguishableFrom_NamedElement_Namespace_NamedElement_Namespace_ns;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_Gate_isDistinguishableFrom_result()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_Gate_isDistinguishableFrom_result()
 {
 	return uML_Gate_isDistinguishableFrom_result;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_Gate_isDistinguishableFrom_spec()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_Gate_isDistinguishableFrom_spec()
 {
 	return uML_Gate_isDistinguishableFrom_spec;
 }
-std::shared_ptr<uml::Operation> UMLPackageImpl::get_UML_Gate_isFormal__()
+const std::shared_ptr<uml::Operation>& UMLPackageImpl::get_UML_Gate_isFormal__()
 {
 	return uML_Gate_isFormal__;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_Gate_isFormal_result()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_Gate_isFormal_result()
 {
 	return uML_Gate_isFormal_result;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_Gate_isFormal_spec()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_Gate_isFormal_spec()
 {
 	return uML_Gate_isFormal_spec;
 }
-std::shared_ptr<uml::Operation> UMLPackageImpl::get_UML_Gate_isInsideCF__()
+const std::shared_ptr<uml::Operation>& UMLPackageImpl::get_UML_Gate_isInsideCF__()
 {
 	return uML_Gate_isInsideCF__;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_Gate_isInsideCF_result()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_Gate_isInsideCF_result()
 {
 	return uML_Gate_isInsideCF_result;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_Gate_isInsideCF_spec()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_Gate_isInsideCF_spec()
 {
 	return uML_Gate_isInsideCF_spec;
 }
-std::shared_ptr<uml::Operation> UMLPackageImpl::get_UML_Gate_isOutsideCF__()
+const std::shared_ptr<uml::Operation>& UMLPackageImpl::get_UML_Gate_isOutsideCF__()
 {
 	return uML_Gate_isOutsideCF__;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_Gate_isOutsideCF_result()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_Gate_isOutsideCF_result()
 {
 	return uML_Gate_isOutsideCF_result;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_Gate_isOutsideCF_spec()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_Gate_isOutsideCF_spec()
 {
 	return uML_Gate_isOutsideCF_spec;
 }
-std::shared_ptr<uml::Operation> UMLPackageImpl::get_UML_Gate_matches_Gate_Gate()
+const std::shared_ptr<uml::Operation>& UMLPackageImpl::get_UML_Gate_matches_Gate_Gate()
 {
 	return uML_Gate_matches_Gate_Gate;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_Gate_matches_Gate_Gate_gateToMatch()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_Gate_matches_Gate_Gate_gateToMatch()
 {
 	return uML_Gate_matches_Gate_Gate_gateToMatch;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_Gate_matches_result()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_Gate_matches_result()
 {
 	return uML_Gate_matches_result;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_Gate_matches_spec()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_Gate_matches_spec()
 {
 	return uML_Gate_matches_spec;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_Gate_outside_cf_gate_distinguishable()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_Gate_outside_cf_gate_distinguishable()
 {
 	return uML_Gate_outside_cf_gate_distinguishable;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_Gate_outside_cf_matched()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_Gate_outside_cf_matched()
 {
 	return uML_Gate_outside_cf_matched;
 }
-std::shared_ptr<uml::Class> UMLPackageImpl::get_UML_GeneralOrdering()
+const std::shared_ptr<uml::Class>& UMLPackageImpl::get_UML_GeneralOrdering()
 {
 	return uML_GeneralOrdering;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_GeneralOrdering_after()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_GeneralOrdering_after()
 {
 	return uML_GeneralOrdering_after;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_GeneralOrdering_before()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_GeneralOrdering_before()
 {
 	return uML_GeneralOrdering_before;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_GeneralOrdering_irreflexive_transitive_closure()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_GeneralOrdering_irreflexive_transitive_closure()
 {
 	return uML_GeneralOrdering_irreflexive_transitive_closure;
 }
-std::shared_ptr<uml::Class> UMLPackageImpl::get_UML_Generalization()
+const std::shared_ptr<uml::Class>& UMLPackageImpl::get_UML_Generalization()
 {
 	return uML_Generalization;
 }
-std::shared_ptr<uml::Class> UMLPackageImpl::get_UML_GeneralizationSet()
+const std::shared_ptr<uml::Class>& UMLPackageImpl::get_UML_GeneralizationSet()
 {
 	return uML_GeneralizationSet;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_GeneralizationSet_generalization()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_GeneralizationSet_generalization()
 {
 	return uML_GeneralizationSet_generalization;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_GeneralizationSet_generalization_same_classifier()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_GeneralizationSet_generalization_same_classifier()
 {
 	return uML_GeneralizationSet_generalization_same_classifier;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_GeneralizationSet_isCovering()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_GeneralizationSet_isCovering()
 {
 	return uML_GeneralizationSet_isCovering;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_GeneralizationSet_isDisjoint()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_GeneralizationSet_isDisjoint()
 {
 	return uML_GeneralizationSet_isDisjoint;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_GeneralizationSet_maps_to_generalization_set()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_GeneralizationSet_maps_to_generalization_set()
 {
 	return uML_GeneralizationSet_maps_to_generalization_set;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_GeneralizationSet_powertype()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_GeneralizationSet_powertype()
 {
 	return uML_GeneralizationSet_powertype;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_Generalization_general()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_Generalization_general()
 {
 	return uML_Generalization_general;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_Generalization_generalizationSet()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_Generalization_generalizationSet()
 {
 	return uML_Generalization_generalizationSet;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_Generalization_isSubstitutable()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_Generalization_isSubstitutable()
 {
 	return uML_Generalization_isSubstitutable;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_Generalization_specific()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_Generalization_specific()
 {
 	return uML_Generalization_specific;
 }
-std::shared_ptr<uml::Class> UMLPackageImpl::get_UML_Image()
+const std::shared_ptr<uml::Class>& UMLPackageImpl::get_UML_Image()
 {
 	return uML_Image;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_Image_content()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_Image_content()
 {
 	return uML_Image_content;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_Image_format()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_Image_format()
 {
 	return uML_Image_format;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_Image_location()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_Image_location()
 {
 	return uML_Image_location;
 }
-std::shared_ptr<uml::Class> UMLPackageImpl::get_UML_Include()
+const std::shared_ptr<uml::Class>& UMLPackageImpl::get_UML_Include()
 {
 	return uML_Include;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_Include_addition()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_Include_addition()
 {
 	return uML_Include_addition;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_Include_includingCase()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_Include_includingCase()
 {
 	return uML_Include_includingCase;
 }
-std::shared_ptr<uml::Class> UMLPackageImpl::get_UML_InformationFlow()
+const std::shared_ptr<uml::Class>& UMLPackageImpl::get_UML_InformationFlow()
 {
 	return uML_InformationFlow;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_InformationFlow_convey_classifiers()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_InformationFlow_convey_classifiers()
 {
 	return uML_InformationFlow_convey_classifiers;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_InformationFlow_conveyed()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_InformationFlow_conveyed()
 {
 	return uML_InformationFlow_conveyed;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_InformationFlow_informationSource()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_InformationFlow_informationSource()
 {
 	return uML_InformationFlow_informationSource;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_InformationFlow_informationTarget()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_InformationFlow_informationTarget()
 {
 	return uML_InformationFlow_informationTarget;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_InformationFlow_must_conform()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_InformationFlow_must_conform()
 {
 	return uML_InformationFlow_must_conform;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_InformationFlow_realization()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_InformationFlow_realization()
 {
 	return uML_InformationFlow_realization;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_InformationFlow_realizingActivityEdge()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_InformationFlow_realizingActivityEdge()
 {
 	return uML_InformationFlow_realizingActivityEdge;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_InformationFlow_realizingConnector()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_InformationFlow_realizingConnector()
 {
 	return uML_InformationFlow_realizingConnector;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_InformationFlow_realizingMessage()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_InformationFlow_realizingMessage()
 {
 	return uML_InformationFlow_realizingMessage;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_InformationFlow_sources_and_targets_kind()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_InformationFlow_sources_and_targets_kind()
 {
 	return uML_InformationFlow_sources_and_targets_kind;
 }
-std::shared_ptr<uml::Class> UMLPackageImpl::get_UML_InformationItem()
+const std::shared_ptr<uml::Class>& UMLPackageImpl::get_UML_InformationItem()
 {
 	return uML_InformationItem;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_InformationItem_has_no()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_InformationItem_has_no()
 {
 	return uML_InformationItem_has_no;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_InformationItem_not_instantiable()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_InformationItem_not_instantiable()
 {
 	return uML_InformationItem_not_instantiable;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_InformationItem_represented()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_InformationItem_represented()
 {
 	return uML_InformationItem_represented;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_InformationItem_sources_and_targets()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_InformationItem_sources_and_targets()
 {
 	return uML_InformationItem_sources_and_targets;
 }
-std::shared_ptr<uml::Class> UMLPackageImpl::get_UML_InitialNode()
+const std::shared_ptr<uml::Class>& UMLPackageImpl::get_UML_InitialNode()
 {
 	return uML_InitialNode;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_InitialNode_control_edges()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_InitialNode_control_edges()
 {
 	return uML_InitialNode_control_edges;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_InitialNode_no_incoming_edges()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_InitialNode_no_incoming_edges()
 {
 	return uML_InitialNode_no_incoming_edges;
 }
-std::shared_ptr<uml::Class> UMLPackageImpl::get_UML_InputPin()
+const std::shared_ptr<uml::Class>& UMLPackageImpl::get_UML_InputPin()
 {
 	return uML_InputPin;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_InputPin_outgoing_edges_structured_only()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_InputPin_outgoing_edges_structured_only()
 {
 	return uML_InputPin_outgoing_edges_structured_only;
 }
-std::shared_ptr<uml::Class> UMLPackageImpl::get_UML_InstanceSpecification()
+const std::shared_ptr<uml::Class>& UMLPackageImpl::get_UML_InstanceSpecification()
 {
 	return uML_InstanceSpecification;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_InstanceSpecification_classifier()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_InstanceSpecification_classifier()
 {
 	return uML_InstanceSpecification_classifier;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_InstanceSpecification_defining_feature()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_InstanceSpecification_defining_feature()
 {
 	return uML_InstanceSpecification_defining_feature;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_InstanceSpecification_deployment_artifact()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_InstanceSpecification_deployment_artifact()
 {
 	return uML_InstanceSpecification_deployment_artifact;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_InstanceSpecification_deployment_target()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_InstanceSpecification_deployment_target()
 {
 	return uML_InstanceSpecification_deployment_target;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_InstanceSpecification_slot()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_InstanceSpecification_slot()
 {
 	return uML_InstanceSpecification_slot;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_InstanceSpecification_specification()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_InstanceSpecification_specification()
 {
 	return uML_InstanceSpecification_specification;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_InstanceSpecification_structural_feature()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_InstanceSpecification_structural_feature()
 {
 	return uML_InstanceSpecification_structural_feature;
 }
-std::shared_ptr<uml::Class> UMLPackageImpl::get_UML_InstanceValue()
+const std::shared_ptr<uml::Class>& UMLPackageImpl::get_UML_InstanceValue()
 {
 	return uML_InstanceValue;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_InstanceValue_instance()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_InstanceValue_instance()
 {
 	return uML_InstanceValue_instance;
 }
-std::shared_ptr<uml::Operation> UMLPackageImpl::get_UML_InstanceValue_stringValue__()
+const std::shared_ptr<uml::Operation>& UMLPackageImpl::get_UML_InstanceValue_stringValue__()
 {
 	return uML_InstanceValue_stringValue__;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_InstanceValue_stringValue__return()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_InstanceValue_stringValue__return()
 {
 	return uML_InstanceValue_stringValue__return;
 }
-std::shared_ptr<uml::Class> UMLPackageImpl::get_UML_Interaction()
+const std::shared_ptr<uml::Class>& UMLPackageImpl::get_UML_Interaction()
 {
 	return uML_Interaction;
 }
-std::shared_ptr<uml::Class> UMLPackageImpl::get_UML_InteractionConstraint()
+const std::shared_ptr<uml::Class>& UMLPackageImpl::get_UML_InteractionConstraint()
 {
 	return uML_InteractionConstraint;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_InteractionConstraint_dynamic_variables()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_InteractionConstraint_dynamic_variables()
 {
 	return uML_InteractionConstraint_dynamic_variables;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_InteractionConstraint_global_data()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_InteractionConstraint_global_data()
 {
 	return uML_InteractionConstraint_global_data;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_InteractionConstraint_maxint()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_InteractionConstraint_maxint()
 {
 	return uML_InteractionConstraint_maxint;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_InteractionConstraint_maxint_greater_equal_minint()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_InteractionConstraint_maxint_greater_equal_minint()
 {
 	return uML_InteractionConstraint_maxint_greater_equal_minint;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_InteractionConstraint_maxint_positive()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_InteractionConstraint_maxint_positive()
 {
 	return uML_InteractionConstraint_maxint_positive;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_InteractionConstraint_minint()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_InteractionConstraint_minint()
 {
 	return uML_InteractionConstraint_minint;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_InteractionConstraint_minint_maxint()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_InteractionConstraint_minint_maxint()
 {
 	return uML_InteractionConstraint_minint_maxint;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_InteractionConstraint_minint_non_negative()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_InteractionConstraint_minint_non_negative()
 {
 	return uML_InteractionConstraint_minint_non_negative;
 }
-std::shared_ptr<uml::Class> UMLPackageImpl::get_UML_InteractionFragment()
+const std::shared_ptr<uml::Class>& UMLPackageImpl::get_UML_InteractionFragment()
 {
 	return uML_InteractionFragment;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_InteractionFragment_covered()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_InteractionFragment_covered()
 {
 	return uML_InteractionFragment_covered;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_InteractionFragment_enclosingInteraction()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_InteractionFragment_enclosingInteraction()
 {
 	return uML_InteractionFragment_enclosingInteraction;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_InteractionFragment_enclosingOperand()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_InteractionFragment_enclosingOperand()
 {
 	return uML_InteractionFragment_enclosingOperand;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_InteractionFragment_generalOrdering()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_InteractionFragment_generalOrdering()
 {
 	return uML_InteractionFragment_generalOrdering;
 }
-std::shared_ptr<uml::Class> UMLPackageImpl::get_UML_InteractionOperand()
+const std::shared_ptr<uml::Class>& UMLPackageImpl::get_UML_InteractionOperand()
 {
 	return uML_InteractionOperand;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_InteractionOperand_fragment()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_InteractionOperand_fragment()
 {
 	return uML_InteractionOperand_fragment;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_InteractionOperand_guard()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_InteractionOperand_guard()
 {
 	return uML_InteractionOperand_guard;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_InteractionOperand_guard_contain_references()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_InteractionOperand_guard_contain_references()
 {
 	return uML_InteractionOperand_guard_contain_references;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_InteractionOperand_guard_directly_prior()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_InteractionOperand_guard_directly_prior()
 {
 	return uML_InteractionOperand_guard_directly_prior;
 }
-std::shared_ptr<uml::Enumeration> UMLPackageImpl::get_UML_InteractionOperatorKind()
+const std::shared_ptr<uml::Enumeration>& UMLPackageImpl::get_UML_InteractionOperatorKind()
 {
 	return uML_InteractionOperatorKind;
 }
-std::shared_ptr<uml::EnumerationLiteral> UMLPackageImpl::get_UML_InteractionOperatorKind_alt()
+const std::shared_ptr<uml::EnumerationLiteral>& UMLPackageImpl::get_UML_InteractionOperatorKind_alt()
 {
 	return uML_InteractionOperatorKind_alt;
 }
-std::shared_ptr<uml::EnumerationLiteral> UMLPackageImpl::get_UML_InteractionOperatorKind_assert()
+const std::shared_ptr<uml::EnumerationLiteral>& UMLPackageImpl::get_UML_InteractionOperatorKind_assert()
 {
 	return uML_InteractionOperatorKind_assert;
 }
-std::shared_ptr<uml::EnumerationLiteral> UMLPackageImpl::get_UML_InteractionOperatorKind_break()
+const std::shared_ptr<uml::EnumerationLiteral>& UMLPackageImpl::get_UML_InteractionOperatorKind_break()
 {
 	return uML_InteractionOperatorKind_break;
 }
-std::shared_ptr<uml::EnumerationLiteral> UMLPackageImpl::get_UML_InteractionOperatorKind_consider()
+const std::shared_ptr<uml::EnumerationLiteral>& UMLPackageImpl::get_UML_InteractionOperatorKind_consider()
 {
 	return uML_InteractionOperatorKind_consider;
 }
-std::shared_ptr<uml::EnumerationLiteral> UMLPackageImpl::get_UML_InteractionOperatorKind_critical()
+const std::shared_ptr<uml::EnumerationLiteral>& UMLPackageImpl::get_UML_InteractionOperatorKind_critical()
 {
 	return uML_InteractionOperatorKind_critical;
 }
-std::shared_ptr<uml::EnumerationLiteral> UMLPackageImpl::get_UML_InteractionOperatorKind_ignore()
+const std::shared_ptr<uml::EnumerationLiteral>& UMLPackageImpl::get_UML_InteractionOperatorKind_ignore()
 {
 	return uML_InteractionOperatorKind_ignore;
 }
-std::shared_ptr<uml::EnumerationLiteral> UMLPackageImpl::get_UML_InteractionOperatorKind_loop()
+const std::shared_ptr<uml::EnumerationLiteral>& UMLPackageImpl::get_UML_InteractionOperatorKind_loop()
 {
 	return uML_InteractionOperatorKind_loop;
 }
-std::shared_ptr<uml::EnumerationLiteral> UMLPackageImpl::get_UML_InteractionOperatorKind_neg()
+const std::shared_ptr<uml::EnumerationLiteral>& UMLPackageImpl::get_UML_InteractionOperatorKind_neg()
 {
 	return uML_InteractionOperatorKind_neg;
 }
-std::shared_ptr<uml::EnumerationLiteral> UMLPackageImpl::get_UML_InteractionOperatorKind_opt()
+const std::shared_ptr<uml::EnumerationLiteral>& UMLPackageImpl::get_UML_InteractionOperatorKind_opt()
 {
 	return uML_InteractionOperatorKind_opt;
 }
-std::shared_ptr<uml::EnumerationLiteral> UMLPackageImpl::get_UML_InteractionOperatorKind_par()
+const std::shared_ptr<uml::EnumerationLiteral>& UMLPackageImpl::get_UML_InteractionOperatorKind_par()
 {
 	return uML_InteractionOperatorKind_par;
 }
-std::shared_ptr<uml::EnumerationLiteral> UMLPackageImpl::get_UML_InteractionOperatorKind_seq()
+const std::shared_ptr<uml::EnumerationLiteral>& UMLPackageImpl::get_UML_InteractionOperatorKind_seq()
 {
 	return uML_InteractionOperatorKind_seq;
 }
-std::shared_ptr<uml::EnumerationLiteral> UMLPackageImpl::get_UML_InteractionOperatorKind_strict()
+const std::shared_ptr<uml::EnumerationLiteral>& UMLPackageImpl::get_UML_InteractionOperatorKind_strict()
 {
 	return uML_InteractionOperatorKind_strict;
 }
-std::shared_ptr<uml::Class> UMLPackageImpl::get_UML_InteractionUse()
+const std::shared_ptr<uml::Class>& UMLPackageImpl::get_UML_InteractionUse()
 {
 	return uML_InteractionUse;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_InteractionUse_actualGate()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_InteractionUse_actualGate()
 {
 	return uML_InteractionUse_actualGate;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_InteractionUse_all_lifelines()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_InteractionUse_all_lifelines()
 {
 	return uML_InteractionUse_all_lifelines;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_InteractionUse_argument()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_InteractionUse_argument()
 {
 	return uML_InteractionUse_argument;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_InteractionUse_arguments_are_constants()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_InteractionUse_arguments_are_constants()
 {
 	return uML_InteractionUse_arguments_are_constants;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_InteractionUse_arguments_correspond_to_parameters()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_InteractionUse_arguments_correspond_to_parameters()
 {
 	return uML_InteractionUse_arguments_correspond_to_parameters;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_InteractionUse_gates_match()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_InteractionUse_gates_match()
 {
 	return uML_InteractionUse_gates_match;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_InteractionUse_refersTo()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_InteractionUse_refersTo()
 {
 	return uML_InteractionUse_refersTo;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_InteractionUse_returnValue()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_InteractionUse_returnValue()
 {
 	return uML_InteractionUse_returnValue;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_InteractionUse_returnValueRecipient()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_InteractionUse_returnValueRecipient()
 {
 	return uML_InteractionUse_returnValueRecipient;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_InteractionUse_returnValueRecipient_coverage()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_InteractionUse_returnValueRecipient_coverage()
 {
 	return uML_InteractionUse_returnValueRecipient_coverage;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_InteractionUse_returnValue_type_recipient_correspondence()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_InteractionUse_returnValue_type_recipient_correspondence()
 {
 	return uML_InteractionUse_returnValue_type_recipient_correspondence;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_Interaction_action()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_Interaction_action()
 {
 	return uML_Interaction_action;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_Interaction_formalGate()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_Interaction_formalGate()
 {
 	return uML_Interaction_formalGate;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_Interaction_fragment()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_Interaction_fragment()
 {
 	return uML_Interaction_fragment;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_Interaction_lifeline()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_Interaction_lifeline()
 {
 	return uML_Interaction_lifeline;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_Interaction_message()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_Interaction_message()
 {
 	return uML_Interaction_message;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_Interaction_not_contained()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_Interaction_not_contained()
 {
 	return uML_Interaction_not_contained;
 }
-std::shared_ptr<uml::Class> UMLPackageImpl::get_UML_Interface()
+const std::shared_ptr<uml::Class>& UMLPackageImpl::get_UML_Interface()
 {
 	return uML_Interface;
 }
-std::shared_ptr<uml::Class> UMLPackageImpl::get_UML_InterfaceRealization()
+const std::shared_ptr<uml::Class>& UMLPackageImpl::get_UML_InterfaceRealization()
 {
 	return uML_InterfaceRealization;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_InterfaceRealization_contract()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_InterfaceRealization_contract()
 {
 	return uML_InterfaceRealization_contract;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_InterfaceRealization_implementingClassifier()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_InterfaceRealization_implementingClassifier()
 {
 	return uML_InterfaceRealization_implementingClassifier;
 }
-std::shared_ptr<uml::Operation> UMLPackageImpl::get_UML_Interface_createOwnedAttribute_String_Type_Integer_UnlimitedNatural_String_Type_Integer_UnlimitedNatural()
+const std::shared_ptr<uml::Operation>& UMLPackageImpl::get_UML_Interface_createOwnedAttribute_String_Type_Integer_UnlimitedNatural_String_Type_Integer_UnlimitedNatural()
 {
 	return uML_Interface_createOwnedAttribute_String_Type_Integer_UnlimitedNatural_String_Type_Integer_UnlimitedNatural;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_Interface_createOwnedAttribute_String_Type_Integer_UnlimitedNatural_String_Type_Integer_UnlimitedNatural_lower()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_Interface_createOwnedAttribute_String_Type_Integer_UnlimitedNatural_String_Type_Integer_UnlimitedNatural_lower()
 {
 	return uML_Interface_createOwnedAttribute_String_Type_Integer_UnlimitedNatural_String_Type_Integer_UnlimitedNatural_lower;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_Interface_createOwnedAttribute_String_Type_Integer_UnlimitedNatural_String_Type_Integer_UnlimitedNatural_name()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_Interface_createOwnedAttribute_String_Type_Integer_UnlimitedNatural_String_Type_Integer_UnlimitedNatural_name()
 {
 	return uML_Interface_createOwnedAttribute_String_Type_Integer_UnlimitedNatural_String_Type_Integer_UnlimitedNatural_name;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_Interface_createOwnedAttribute_String_Type_Integer_UnlimitedNatural_String_Type_Integer_UnlimitedNatural_type()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_Interface_createOwnedAttribute_String_Type_Integer_UnlimitedNatural_String_Type_Integer_UnlimitedNatural_type()
 {
 	return uML_Interface_createOwnedAttribute_String_Type_Integer_UnlimitedNatural_String_Type_Integer_UnlimitedNatural_type;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_Interface_createOwnedAttribute_String_Type_Integer_UnlimitedNatural_String_Type_Integer_UnlimitedNatural_upper()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_Interface_createOwnedAttribute_String_Type_Integer_UnlimitedNatural_String_Type_Integer_UnlimitedNatural_upper()
 {
 	return uML_Interface_createOwnedAttribute_String_Type_Integer_UnlimitedNatural_String_Type_Integer_UnlimitedNatural_upper;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_Interface_createOwnedAttribute_String_Type_Integer_UnlimitedNatural_String_Type_Integer_UnlimitedNaturalreturn()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_Interface_createOwnedAttribute_String_Type_Integer_UnlimitedNatural_String_Type_Integer_UnlimitedNaturalreturn()
 {
 	return uML_Interface_createOwnedAttribute_String_Type_Integer_UnlimitedNatural_String_Type_Integer_UnlimitedNaturalreturn;
 }
-std::shared_ptr<uml::Operation> UMLPackageImpl::get_UML_Interface_createOwnedOperation_String_String_Type_Type_String_String_Type_Type()
+const std::shared_ptr<uml::Operation>& UMLPackageImpl::get_UML_Interface_createOwnedOperation_String_String_Type_Type_String_String_Type_Type()
 {
 	return uML_Interface_createOwnedOperation_String_String_Type_Type_String_String_Type_Type;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_Interface_createOwnedOperation_String_String_Type_Type_String_String_Type_Type_name()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_Interface_createOwnedOperation_String_String_Type_Type_String_String_Type_Type_name()
 {
 	return uML_Interface_createOwnedOperation_String_String_Type_Type_String_String_Type_Type_name;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_Interface_createOwnedOperation_String_String_Type_Type_String_String_Type_Type_parameterNames()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_Interface_createOwnedOperation_String_String_Type_Type_String_String_Type_Type_parameterNames()
 {
 	return uML_Interface_createOwnedOperation_String_String_Type_Type_String_String_Type_Type_parameterNames;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_Interface_createOwnedOperation_String_String_Type_Type_String_String_Type_Type_parameterTypes()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_Interface_createOwnedOperation_String_String_Type_Type_String_String_Type_Type_parameterTypes()
 {
 	return uML_Interface_createOwnedOperation_String_String_Type_Type_String_String_Type_Type_parameterTypes;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_Interface_createOwnedOperation_String_String_Type_Type_String_String_Type_Type_returnType()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_Interface_createOwnedOperation_String_String_Type_Type_String_String_Type_Type_returnType()
 {
 	return uML_Interface_createOwnedOperation_String_String_Type_Type_String_String_Type_Type_returnType;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_Interface_createOwnedOperation_String_String_Type_Type_String_String_Type_Typereturn()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_Interface_createOwnedOperation_String_String_Type_Type_String_String_Type_Typereturn()
 {
 	return uML_Interface_createOwnedOperation_String_String_Type_Type_String_String_Type_Typereturn;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_Interface_nestedClassifier()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_Interface_nestedClassifier()
 {
 	return uML_Interface_nestedClassifier;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_Interface_ownedAttribute()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_Interface_ownedAttribute()
 {
 	return uML_Interface_ownedAttribute;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_Interface_ownedOperation()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_Interface_ownedOperation()
 {
 	return uML_Interface_ownedOperation;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_Interface_ownedReception()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_Interface_ownedReception()
 {
 	return uML_Interface_ownedReception;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_Interface_protocol()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_Interface_protocol()
 {
 	return uML_Interface_protocol;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_Interface_redefinedInterface()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_Interface_redefinedInterface()
 {
 	return uML_Interface_redefinedInterface;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_Interface_visibility()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_Interface_visibility()
 {
 	return uML_Interface_visibility;
 }
-std::shared_ptr<uml::Class> UMLPackageImpl::get_UML_InterruptibleActivityRegion()
+const std::shared_ptr<uml::Class>& UMLPackageImpl::get_UML_InterruptibleActivityRegion()
 {
 	return uML_InterruptibleActivityRegion;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_InterruptibleActivityRegion_interruptingEdge()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_InterruptibleActivityRegion_interruptingEdge()
 {
 	return uML_InterruptibleActivityRegion_interruptingEdge;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_InterruptibleActivityRegion_interrupting_edges()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_InterruptibleActivityRegion_interrupting_edges()
 {
 	return uML_InterruptibleActivityRegion_interrupting_edges;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_InterruptibleActivityRegion_node()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_InterruptibleActivityRegion_node()
 {
 	return uML_InterruptibleActivityRegion_node;
 }
-std::shared_ptr<uml::Class> UMLPackageImpl::get_UML_Interval()
+const std::shared_ptr<uml::Class>& UMLPackageImpl::get_UML_Interval()
 {
 	return uML_Interval;
 }
-std::shared_ptr<uml::Class> UMLPackageImpl::get_UML_IntervalConstraint()
+const std::shared_ptr<uml::Class>& UMLPackageImpl::get_UML_IntervalConstraint()
 {
 	return uML_IntervalConstraint;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_IntervalConstraint_specification()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_IntervalConstraint_specification()
 {
 	return uML_IntervalConstraint_specification;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_Interval_max()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_Interval_max()
 {
 	return uML_Interval_max;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_Interval_min()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_Interval_min()
 {
 	return uML_Interval_min;
 }
-std::shared_ptr<uml::Class> UMLPackageImpl::get_UML_InvocationAction()
+const std::shared_ptr<uml::Class>& UMLPackageImpl::get_UML_InvocationAction()
 {
 	return uML_InvocationAction;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_InvocationAction_argument()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_InvocationAction_argument()
 {
 	return uML_InvocationAction_argument;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_InvocationAction_onPort()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_InvocationAction_onPort()
 {
 	return uML_InvocationAction_onPort;
 }
-std::shared_ptr<uml::Class> UMLPackageImpl::get_UML_JoinNode()
+const std::shared_ptr<uml::Class>& UMLPackageImpl::get_UML_JoinNode()
 {
 	return uML_JoinNode;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_JoinNode_incoming_object_flow()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_JoinNode_incoming_object_flow()
 {
 	return uML_JoinNode_incoming_object_flow;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_JoinNode_isCombineDuplicate()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_JoinNode_isCombineDuplicate()
 {
 	return uML_JoinNode_isCombineDuplicate;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_JoinNode_joinSpec()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_JoinNode_joinSpec()
 {
 	return uML_JoinNode_joinSpec;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_JoinNode_one_outgoing_edge()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_JoinNode_one_outgoing_edge()
 {
 	return uML_JoinNode_one_outgoing_edge;
 }
-std::shared_ptr<uml::Class> UMLPackageImpl::get_UML_Lifeline()
+const std::shared_ptr<uml::Class>& UMLPackageImpl::get_UML_Lifeline()
 {
 	return uML_Lifeline;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_Lifeline_coveredBy()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_Lifeline_coveredBy()
 {
 	return uML_Lifeline_coveredBy;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_Lifeline_decomposedAs()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_Lifeline_decomposedAs()
 {
 	return uML_Lifeline_decomposedAs;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_Lifeline_interaction()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_Lifeline_interaction()
 {
 	return uML_Lifeline_interaction;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_Lifeline_interaction_uses_share_lifeline()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_Lifeline_interaction_uses_share_lifeline()
 {
 	return uML_Lifeline_interaction_uses_share_lifeline;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_Lifeline_represents()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_Lifeline_represents()
 {
 	return uML_Lifeline_represents;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_Lifeline_same_classifier()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_Lifeline_same_classifier()
 {
 	return uML_Lifeline_same_classifier;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_Lifeline_selector()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_Lifeline_selector()
 {
 	return uML_Lifeline_selector;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_Lifeline_selector_int_or_string()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_Lifeline_selector_int_or_string()
 {
 	return uML_Lifeline_selector_int_or_string;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_Lifeline_selector_specified()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_Lifeline_selector_specified()
 {
 	return uML_Lifeline_selector_specified;
 }
-std::shared_ptr<uml::Class> UMLPackageImpl::get_UML_LinkAction()
+const std::shared_ptr<uml::Class>& UMLPackageImpl::get_UML_LinkAction()
 {
 	return uML_LinkAction;
 }
-std::shared_ptr<uml::Operation> UMLPackageImpl::get_UML_LinkAction_association__()
+const std::shared_ptr<uml::Operation>& UMLPackageImpl::get_UML_LinkAction_association__()
 {
 	return uML_LinkAction_association__;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_LinkAction_association_result()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_LinkAction_association_result()
 {
 	return uML_LinkAction_association_result;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_LinkAction_association_spec()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_LinkAction_association_spec()
 {
 	return uML_LinkAction_association_spec;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_LinkAction_endData()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_LinkAction_endData()
 {
 	return uML_LinkAction_endData;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_LinkAction_inputValue()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_LinkAction_inputValue()
 {
 	return uML_LinkAction_inputValue;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_LinkAction_not_static()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_LinkAction_not_static()
 {
 	return uML_LinkAction_not_static;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_LinkAction_same_association()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_LinkAction_same_association()
 {
 	return uML_LinkAction_same_association;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_LinkAction_same_pins()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_LinkAction_same_pins()
 {
 	return uML_LinkAction_same_pins;
 }
-std::shared_ptr<uml::Class> UMLPackageImpl::get_UML_LinkEndCreationData()
+const std::shared_ptr<uml::Class>& UMLPackageImpl::get_UML_LinkEndCreationData()
 {
 	return uML_LinkEndCreationData;
 }
-std::shared_ptr<uml::Operation> UMLPackageImpl::get_UML_LinkEndCreationData_allPins__()
+const std::shared_ptr<uml::Operation>& UMLPackageImpl::get_UML_LinkEndCreationData_allPins__()
 {
 	return uML_LinkEndCreationData_allPins__;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_LinkEndCreationData_allPins_result()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_LinkEndCreationData_allPins_result()
 {
 	return uML_LinkEndCreationData_allPins_result;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_LinkEndCreationData_allPins_spec()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_LinkEndCreationData_allPins_spec()
 {
 	return uML_LinkEndCreationData_allPins_spec;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_LinkEndCreationData_insertAt()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_LinkEndCreationData_insertAt()
 {
 	return uML_LinkEndCreationData_insertAt;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_LinkEndCreationData_insertAt_pin()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_LinkEndCreationData_insertAt_pin()
 {
 	return uML_LinkEndCreationData_insertAt_pin;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_LinkEndCreationData_isReplaceAll()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_LinkEndCreationData_isReplaceAll()
 {
 	return uML_LinkEndCreationData_isReplaceAll;
 }
-std::shared_ptr<uml::Class> UMLPackageImpl::get_UML_LinkEndData()
+const std::shared_ptr<uml::Class>& UMLPackageImpl::get_UML_LinkEndData()
 {
 	return uML_LinkEndData;
 }
-std::shared_ptr<uml::Operation> UMLPackageImpl::get_UML_LinkEndData_allPins__()
+const std::shared_ptr<uml::Operation>& UMLPackageImpl::get_UML_LinkEndData_allPins__()
 {
 	return uML_LinkEndData_allPins__;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_LinkEndData_allPins_result()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_LinkEndData_allPins_result()
 {
 	return uML_LinkEndData_allPins_result;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_LinkEndData_allPins_spec()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_LinkEndData_allPins_spec()
 {
 	return uML_LinkEndData_allPins_spec;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_LinkEndData_end()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_LinkEndData_end()
 {
 	return uML_LinkEndData_end;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_LinkEndData_end_object_input_pin()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_LinkEndData_end_object_input_pin()
 {
 	return uML_LinkEndData_end_object_input_pin;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_LinkEndData_multiplicity()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_LinkEndData_multiplicity()
 {
 	return uML_LinkEndData_multiplicity;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_LinkEndData_property_is_association_end()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_LinkEndData_property_is_association_end()
 {
 	return uML_LinkEndData_property_is_association_end;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_LinkEndData_qualifier()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_LinkEndData_qualifier()
 {
 	return uML_LinkEndData_qualifier;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_LinkEndData_qualifiers()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_LinkEndData_qualifiers()
 {
 	return uML_LinkEndData_qualifiers;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_LinkEndData_same_type()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_LinkEndData_same_type()
 {
 	return uML_LinkEndData_same_type;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_LinkEndData_value()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_LinkEndData_value()
 {
 	return uML_LinkEndData_value;
 }
-std::shared_ptr<uml::Class> UMLPackageImpl::get_UML_LinkEndDestructionData()
+const std::shared_ptr<uml::Class>& UMLPackageImpl::get_UML_LinkEndDestructionData()
 {
 	return uML_LinkEndDestructionData;
 }
-std::shared_ptr<uml::Operation> UMLPackageImpl::get_UML_LinkEndDestructionData_allPins__()
+const std::shared_ptr<uml::Operation>& UMLPackageImpl::get_UML_LinkEndDestructionData_allPins__()
 {
 	return uML_LinkEndDestructionData_allPins__;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_LinkEndDestructionData_allPins_result()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_LinkEndDestructionData_allPins_result()
 {
 	return uML_LinkEndDestructionData_allPins_result;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_LinkEndDestructionData_allPins_spec()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_LinkEndDestructionData_allPins_spec()
 {
 	return uML_LinkEndDestructionData_allPins_spec;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_LinkEndDestructionData_destroyAt()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_LinkEndDestructionData_destroyAt()
 {
 	return uML_LinkEndDestructionData_destroyAt;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_LinkEndDestructionData_destroyAt_pin()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_LinkEndDestructionData_destroyAt_pin()
 {
 	return uML_LinkEndDestructionData_destroyAt_pin;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_LinkEndDestructionData_isDestroyDuplicates()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_LinkEndDestructionData_isDestroyDuplicates()
 {
 	return uML_LinkEndDestructionData_isDestroyDuplicates;
 }
-std::shared_ptr<uml::Class> UMLPackageImpl::get_UML_LiteralBoolean()
+const std::shared_ptr<uml::Class>& UMLPackageImpl::get_UML_LiteralBoolean()
 {
 	return uML_LiteralBoolean;
 }
-std::shared_ptr<uml::Operation> UMLPackageImpl::get_UML_LiteralBoolean_booleanValue__()
+const std::shared_ptr<uml::Operation>& UMLPackageImpl::get_UML_LiteralBoolean_booleanValue__()
 {
 	return uML_LiteralBoolean_booleanValue__;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_LiteralBoolean_booleanValue_result()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_LiteralBoolean_booleanValue_result()
 {
 	return uML_LiteralBoolean_booleanValue_result;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_LiteralBoolean_booleanValue_spec()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_LiteralBoolean_booleanValue_spec()
 {
 	return uML_LiteralBoolean_booleanValue_spec;
 }
-std::shared_ptr<uml::Operation> UMLPackageImpl::get_UML_LiteralBoolean_isComputable__()
+const std::shared_ptr<uml::Operation>& UMLPackageImpl::get_UML_LiteralBoolean_isComputable__()
 {
 	return uML_LiteralBoolean_isComputable__;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_LiteralBoolean_isComputable_result()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_LiteralBoolean_isComputable_result()
 {
 	return uML_LiteralBoolean_isComputable_result;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_LiteralBoolean_isComputable_spec()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_LiteralBoolean_isComputable_spec()
 {
 	return uML_LiteralBoolean_isComputable_spec;
 }
-std::shared_ptr<uml::Operation> UMLPackageImpl::get_UML_LiteralBoolean_stringValue__()
+const std::shared_ptr<uml::Operation>& UMLPackageImpl::get_UML_LiteralBoolean_stringValue__()
 {
 	return uML_LiteralBoolean_stringValue__;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_LiteralBoolean_stringValue__return()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_LiteralBoolean_stringValue__return()
 {
 	return uML_LiteralBoolean_stringValue__return;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_LiteralBoolean_value()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_LiteralBoolean_value()
 {
 	return uML_LiteralBoolean_value;
 }
-std::shared_ptr<uml::Class> UMLPackageImpl::get_UML_LiteralInteger()
+const std::shared_ptr<uml::Class>& UMLPackageImpl::get_UML_LiteralInteger()
 {
 	return uML_LiteralInteger;
 }
-std::shared_ptr<uml::Operation> UMLPackageImpl::get_UML_LiteralInteger_integerValue__()
+const std::shared_ptr<uml::Operation>& UMLPackageImpl::get_UML_LiteralInteger_integerValue__()
 {
 	return uML_LiteralInteger_integerValue__;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_LiteralInteger_integerValue_result()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_LiteralInteger_integerValue_result()
 {
 	return uML_LiteralInteger_integerValue_result;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_LiteralInteger_integerValue_spec()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_LiteralInteger_integerValue_spec()
 {
 	return uML_LiteralInteger_integerValue_spec;
 }
-std::shared_ptr<uml::Operation> UMLPackageImpl::get_UML_LiteralInteger_isComputable__()
+const std::shared_ptr<uml::Operation>& UMLPackageImpl::get_UML_LiteralInteger_isComputable__()
 {
 	return uML_LiteralInteger_isComputable__;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_LiteralInteger_isComputable_result()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_LiteralInteger_isComputable_result()
 {
 	return uML_LiteralInteger_isComputable_result;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_LiteralInteger_isComputable_spec()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_LiteralInteger_isComputable_spec()
 {
 	return uML_LiteralInteger_isComputable_spec;
 }
-std::shared_ptr<uml::Operation> UMLPackageImpl::get_UML_LiteralInteger_stringValue__()
+const std::shared_ptr<uml::Operation>& UMLPackageImpl::get_UML_LiteralInteger_stringValue__()
 {
 	return uML_LiteralInteger_stringValue__;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_LiteralInteger_stringValue__return()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_LiteralInteger_stringValue__return()
 {
 	return uML_LiteralInteger_stringValue__return;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_LiteralInteger_value()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_LiteralInteger_value()
 {
 	return uML_LiteralInteger_value;
 }
-std::shared_ptr<uml::Class> UMLPackageImpl::get_UML_LiteralNull()
+const std::shared_ptr<uml::Class>& UMLPackageImpl::get_UML_LiteralNull()
 {
 	return uML_LiteralNull;
 }
-std::shared_ptr<uml::Operation> UMLPackageImpl::get_UML_LiteralNull_isComputable__()
+const std::shared_ptr<uml::Operation>& UMLPackageImpl::get_UML_LiteralNull_isComputable__()
 {
 	return uML_LiteralNull_isComputable__;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_LiteralNull_isComputable_result()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_LiteralNull_isComputable_result()
 {
 	return uML_LiteralNull_isComputable_result;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_LiteralNull_isComputable_spec()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_LiteralNull_isComputable_spec()
 {
 	return uML_LiteralNull_isComputable_spec;
 }
-std::shared_ptr<uml::Operation> UMLPackageImpl::get_UML_LiteralNull_isNull__()
+const std::shared_ptr<uml::Operation>& UMLPackageImpl::get_UML_LiteralNull_isNull__()
 {
 	return uML_LiteralNull_isNull__;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_LiteralNull_isNull_result()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_LiteralNull_isNull_result()
 {
 	return uML_LiteralNull_isNull_result;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_LiteralNull_isNull_spec()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_LiteralNull_isNull_spec()
 {
 	return uML_LiteralNull_isNull_spec;
 }
-std::shared_ptr<uml::Class> UMLPackageImpl::get_UML_LiteralReal()
+const std::shared_ptr<uml::Class>& UMLPackageImpl::get_UML_LiteralReal()
 {
 	return uML_LiteralReal;
 }
-std::shared_ptr<uml::Operation> UMLPackageImpl::get_UML_LiteralReal_isComputable__()
+const std::shared_ptr<uml::Operation>& UMLPackageImpl::get_UML_LiteralReal_isComputable__()
 {
 	return uML_LiteralReal_isComputable__;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_LiteralReal_isComputable_result()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_LiteralReal_isComputable_result()
 {
 	return uML_LiteralReal_isComputable_result;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_LiteralReal_isComputable_spec()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_LiteralReal_isComputable_spec()
 {
 	return uML_LiteralReal_isComputable_spec;
 }
-std::shared_ptr<uml::Operation> UMLPackageImpl::get_UML_LiteralReal_realValue__()
+const std::shared_ptr<uml::Operation>& UMLPackageImpl::get_UML_LiteralReal_realValue__()
 {
 	return uML_LiteralReal_realValue__;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_LiteralReal_realValue_result()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_LiteralReal_realValue_result()
 {
 	return uML_LiteralReal_realValue_result;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_LiteralReal_realValue_spec()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_LiteralReal_realValue_spec()
 {
 	return uML_LiteralReal_realValue_spec;
 }
-std::shared_ptr<uml::Operation> UMLPackageImpl::get_UML_LiteralReal_stringValue__()
+const std::shared_ptr<uml::Operation>& UMLPackageImpl::get_UML_LiteralReal_stringValue__()
 {
 	return uML_LiteralReal_stringValue__;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_LiteralReal_stringValue__return()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_LiteralReal_stringValue__return()
 {
 	return uML_LiteralReal_stringValue__return;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_LiteralReal_value()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_LiteralReal_value()
 {
 	return uML_LiteralReal_value;
 }
-std::shared_ptr<uml::Class> UMLPackageImpl::get_UML_LiteralSpecification()
+const std::shared_ptr<uml::Class>& UMLPackageImpl::get_UML_LiteralSpecification()
 {
 	return uML_LiteralSpecification;
 }
-std::shared_ptr<uml::Class> UMLPackageImpl::get_UML_LiteralString()
+const std::shared_ptr<uml::Class>& UMLPackageImpl::get_UML_LiteralString()
 {
 	return uML_LiteralString;
 }
-std::shared_ptr<uml::Operation> UMLPackageImpl::get_UML_LiteralString_integerValue__()
+const std::shared_ptr<uml::Operation>& UMLPackageImpl::get_UML_LiteralString_integerValue__()
 {
 	return uML_LiteralString_integerValue__;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_LiteralString_integerValue__return()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_LiteralString_integerValue__return()
 {
 	return uML_LiteralString_integerValue__return;
 }
-std::shared_ptr<uml::Operation> UMLPackageImpl::get_UML_LiteralString_isComputable__()
+const std::shared_ptr<uml::Operation>& UMLPackageImpl::get_UML_LiteralString_isComputable__()
 {
 	return uML_LiteralString_isComputable__;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_LiteralString_isComputable_result()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_LiteralString_isComputable_result()
 {
 	return uML_LiteralString_isComputable_result;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_LiteralString_isComputable_spec()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_LiteralString_isComputable_spec()
 {
 	return uML_LiteralString_isComputable_spec;
 }
-std::shared_ptr<uml::Operation> UMLPackageImpl::get_UML_LiteralString_stringValue__()
+const std::shared_ptr<uml::Operation>& UMLPackageImpl::get_UML_LiteralString_stringValue__()
 {
 	return uML_LiteralString_stringValue__;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_LiteralString_stringValue_result()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_LiteralString_stringValue_result()
 {
 	return uML_LiteralString_stringValue_result;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_LiteralString_stringValue_spec()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_LiteralString_stringValue_spec()
 {
 	return uML_LiteralString_stringValue_spec;
 }
-std::shared_ptr<uml::Operation> UMLPackageImpl::get_UML_LiteralString_unlimitedValue__()
+const std::shared_ptr<uml::Operation>& UMLPackageImpl::get_UML_LiteralString_unlimitedValue__()
 {
 	return uML_LiteralString_unlimitedValue__;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_LiteralString_unlimitedValue__return()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_LiteralString_unlimitedValue__return()
 {
 	return uML_LiteralString_unlimitedValue__return;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_LiteralString_value()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_LiteralString_value()
 {
 	return uML_LiteralString_value;
 }
-std::shared_ptr<uml::Class> UMLPackageImpl::get_UML_LiteralUnlimitedNatural()
+const std::shared_ptr<uml::Class>& UMLPackageImpl::get_UML_LiteralUnlimitedNatural()
 {
 	return uML_LiteralUnlimitedNatural;
 }
-std::shared_ptr<uml::Operation> UMLPackageImpl::get_UML_LiteralUnlimitedNatural_isComputable__()
+const std::shared_ptr<uml::Operation>& UMLPackageImpl::get_UML_LiteralUnlimitedNatural_isComputable__()
 {
 	return uML_LiteralUnlimitedNatural_isComputable__;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_LiteralUnlimitedNatural_isComputable_result()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_LiteralUnlimitedNatural_isComputable_result()
 {
 	return uML_LiteralUnlimitedNatural_isComputable_result;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_LiteralUnlimitedNatural_isComputable_spec()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_LiteralUnlimitedNatural_isComputable_spec()
 {
 	return uML_LiteralUnlimitedNatural_isComputable_spec;
 }
-std::shared_ptr<uml::Operation> UMLPackageImpl::get_UML_LiteralUnlimitedNatural_stringValue__()
+const std::shared_ptr<uml::Operation>& UMLPackageImpl::get_UML_LiteralUnlimitedNatural_stringValue__()
 {
 	return uML_LiteralUnlimitedNatural_stringValue__;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_LiteralUnlimitedNatural_stringValue__return()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_LiteralUnlimitedNatural_stringValue__return()
 {
 	return uML_LiteralUnlimitedNatural_stringValue__return;
 }
-std::shared_ptr<uml::Operation> UMLPackageImpl::get_UML_LiteralUnlimitedNatural_unlimitedValue__()
+const std::shared_ptr<uml::Operation>& UMLPackageImpl::get_UML_LiteralUnlimitedNatural_unlimitedValue__()
 {
 	return uML_LiteralUnlimitedNatural_unlimitedValue__;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_LiteralUnlimitedNatural_unlimitedValue_result()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_LiteralUnlimitedNatural_unlimitedValue_result()
 {
 	return uML_LiteralUnlimitedNatural_unlimitedValue_result;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_LiteralUnlimitedNatural_unlimitedValue_spec()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_LiteralUnlimitedNatural_unlimitedValue_spec()
 {
 	return uML_LiteralUnlimitedNatural_unlimitedValue_spec;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_LiteralUnlimitedNatural_value()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_LiteralUnlimitedNatural_value()
 {
 	return uML_LiteralUnlimitedNatural_value;
 }
-std::shared_ptr<uml::Class> UMLPackageImpl::get_UML_LoopNode()
+const std::shared_ptr<uml::Class>& UMLPackageImpl::get_UML_LoopNode()
 {
 	return uML_LoopNode;
 }
-std::shared_ptr<uml::Operation> UMLPackageImpl::get_UML_LoopNode_allActions__()
+const std::shared_ptr<uml::Operation>& UMLPackageImpl::get_UML_LoopNode_allActions__()
 {
 	return uML_LoopNode_allActions__;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_LoopNode_allActions_result()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_LoopNode_allActions_result()
 {
 	return uML_LoopNode_allActions_result;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_LoopNode_allActions_spec()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_LoopNode_allActions_spec()
 {
 	return uML_LoopNode_allActions_spec;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_LoopNode_bodyOutput()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_LoopNode_bodyOutput()
 {
 	return uML_LoopNode_bodyOutput;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_LoopNode_bodyPart()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_LoopNode_bodyPart()
 {
 	return uML_LoopNode_bodyPart;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_LoopNode_body_output_pins()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_LoopNode_body_output_pins()
 {
 	return uML_LoopNode_body_output_pins;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_LoopNode_decider()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_LoopNode_decider()
 {
 	return uML_LoopNode_decider;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_LoopNode_executable_nodes()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_LoopNode_executable_nodes()
 {
 	return uML_LoopNode_executable_nodes;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_LoopNode_input_edges()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_LoopNode_input_edges()
 {
 	return uML_LoopNode_input_edges;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_LoopNode_isTestedFirst()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_LoopNode_isTestedFirst()
 {
 	return uML_LoopNode_isTestedFirst;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_LoopNode_loopVariable()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_LoopNode_loopVariable()
 {
 	return uML_LoopNode_loopVariable;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_LoopNode_loopVariableInput()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_LoopNode_loopVariableInput()
 {
 	return uML_LoopNode_loopVariableInput;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_LoopNode_loop_variable_outgoing()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_LoopNode_loop_variable_outgoing()
 {
 	return uML_LoopNode_loop_variable_outgoing;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_LoopNode_matching_loop_variables()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_LoopNode_matching_loop_variables()
 {
 	return uML_LoopNode_matching_loop_variables;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_LoopNode_matching_output_pins()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_LoopNode_matching_output_pins()
 {
 	return uML_LoopNode_matching_output_pins;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_LoopNode_matching_result_pins()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_LoopNode_matching_result_pins()
 {
 	return uML_LoopNode_matching_result_pins;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_LoopNode_result()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_LoopNode_result()
 {
 	return uML_LoopNode_result;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_LoopNode_result_no_incoming()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_LoopNode_result_no_incoming()
 {
 	return uML_LoopNode_result_no_incoming;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_LoopNode_setupPart()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_LoopNode_setupPart()
 {
 	return uML_LoopNode_setupPart;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_LoopNode_setup_test_and_body()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_LoopNode_setup_test_and_body()
 {
 	return uML_LoopNode_setup_test_and_body;
 }
-std::shared_ptr<uml::Operation> UMLPackageImpl::get_UML_LoopNode_sourceNodes__()
+const std::shared_ptr<uml::Operation>& UMLPackageImpl::get_UML_LoopNode_sourceNodes__()
 {
 	return uML_LoopNode_sourceNodes__;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_LoopNode_sourceNodes_result()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_LoopNode_sourceNodes_result()
 {
 	return uML_LoopNode_sourceNodes_result;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_LoopNode_sourceNodes_spec()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_LoopNode_sourceNodes_spec()
 {
 	return uML_LoopNode_sourceNodes_spec;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_LoopNode_test()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_LoopNode_test()
 {
 	return uML_LoopNode_test;
 }
-std::shared_ptr<uml::Class> UMLPackageImpl::get_UML_Manifestation()
+const std::shared_ptr<uml::Class>& UMLPackageImpl::get_UML_Manifestation()
 {
 	return uML_Manifestation;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_Manifestation_utilizedElement()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_Manifestation_utilizedElement()
 {
 	return uML_Manifestation_utilizedElement;
 }
-std::shared_ptr<uml::Class> UMLPackageImpl::get_UML_MergeNode()
+const std::shared_ptr<uml::Class>& UMLPackageImpl::get_UML_MergeNode()
 {
 	return uML_MergeNode;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_MergeNode_edges()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_MergeNode_edges()
 {
 	return uML_MergeNode_edges;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_MergeNode_one_outgoing_edge()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_MergeNode_one_outgoing_edge()
 {
 	return uML_MergeNode_one_outgoing_edge;
 }
-std::shared_ptr<uml::Class> UMLPackageImpl::get_UML_Message()
+const std::shared_ptr<uml::Class>& UMLPackageImpl::get_UML_Message()
 {
 	return uML_Message;
 }
-std::shared_ptr<uml::Class> UMLPackageImpl::get_UML_MessageEnd()
+const std::shared_ptr<uml::Class>& UMLPackageImpl::get_UML_MessageEnd()
 {
 	return uML_MessageEnd;
 }
-std::shared_ptr<uml::Operation> UMLPackageImpl::get_UML_MessageEnd_enclosingFragment__()
+const std::shared_ptr<uml::Operation>& UMLPackageImpl::get_UML_MessageEnd_enclosingFragment__()
 {
 	return uML_MessageEnd_enclosingFragment__;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_MessageEnd_enclosingFragment_result()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_MessageEnd_enclosingFragment_result()
 {
 	return uML_MessageEnd_enclosingFragment_result;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_MessageEnd_enclosingFragment_spec()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_MessageEnd_enclosingFragment_spec()
 {
 	return uML_MessageEnd_enclosingFragment_spec;
 }
-std::shared_ptr<uml::Operation> UMLPackageImpl::get_UML_MessageEnd_isReceive__()
+const std::shared_ptr<uml::Operation>& UMLPackageImpl::get_UML_MessageEnd_isReceive__()
 {
 	return uML_MessageEnd_isReceive__;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_MessageEnd_isReceive_pre()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_MessageEnd_isReceive_pre()
 {
 	return uML_MessageEnd_isReceive_pre;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_MessageEnd_isReceive_result()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_MessageEnd_isReceive_result()
 {
 	return uML_MessageEnd_isReceive_result;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_MessageEnd_isReceive_spec()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_MessageEnd_isReceive_spec()
 {
 	return uML_MessageEnd_isReceive_spec;
 }
-std::shared_ptr<uml::Operation> UMLPackageImpl::get_UML_MessageEnd_isSend__()
+const std::shared_ptr<uml::Operation>& UMLPackageImpl::get_UML_MessageEnd_isSend__()
 {
 	return uML_MessageEnd_isSend__;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_MessageEnd_isSend_pre()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_MessageEnd_isSend_pre()
 {
 	return uML_MessageEnd_isSend_pre;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_MessageEnd_isSend_result()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_MessageEnd_isSend_result()
 {
 	return uML_MessageEnd_isSend_result;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_MessageEnd_isSend_spec()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_MessageEnd_isSend_spec()
 {
 	return uML_MessageEnd_isSend_spec;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_MessageEnd_message()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_MessageEnd_message()
 {
 	return uML_MessageEnd_message;
 }
-std::shared_ptr<uml::Operation> UMLPackageImpl::get_UML_MessageEnd_oppositeEnd__()
+const std::shared_ptr<uml::Operation>& UMLPackageImpl::get_UML_MessageEnd_oppositeEnd__()
 {
 	return uML_MessageEnd_oppositeEnd__;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_MessageEnd_oppositeEnd_pre()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_MessageEnd_oppositeEnd_pre()
 {
 	return uML_MessageEnd_oppositeEnd_pre;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_MessageEnd_oppositeEnd_result()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_MessageEnd_oppositeEnd_result()
 {
 	return uML_MessageEnd_oppositeEnd_result;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_MessageEnd_oppositeEnd_spec()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_MessageEnd_oppositeEnd_spec()
 {
 	return uML_MessageEnd_oppositeEnd_spec;
 }
-std::shared_ptr<uml::Class> UMLPackageImpl::get_UML_MessageEvent()
+const std::shared_ptr<uml::Class>& UMLPackageImpl::get_UML_MessageEvent()
 {
 	return uML_MessageEvent;
 }
-std::shared_ptr<uml::Enumeration> UMLPackageImpl::get_UML_MessageKind()
+const std::shared_ptr<uml::Enumeration>& UMLPackageImpl::get_UML_MessageKind()
 {
 	return uML_MessageKind;
 }
-std::shared_ptr<uml::EnumerationLiteral> UMLPackageImpl::get_UML_MessageKind_complete()
+const std::shared_ptr<uml::EnumerationLiteral>& UMLPackageImpl::get_UML_MessageKind_complete()
 {
 	return uML_MessageKind_complete;
 }
-std::shared_ptr<uml::EnumerationLiteral> UMLPackageImpl::get_UML_MessageKind_found()
+const std::shared_ptr<uml::EnumerationLiteral>& UMLPackageImpl::get_UML_MessageKind_found()
 {
 	return uML_MessageKind_found;
 }
-std::shared_ptr<uml::EnumerationLiteral> UMLPackageImpl::get_UML_MessageKind_lost()
+const std::shared_ptr<uml::EnumerationLiteral>& UMLPackageImpl::get_UML_MessageKind_lost()
 {
 	return uML_MessageKind_lost;
 }
-std::shared_ptr<uml::EnumerationLiteral> UMLPackageImpl::get_UML_MessageKind_unknown()
+const std::shared_ptr<uml::EnumerationLiteral>& UMLPackageImpl::get_UML_MessageKind_unknown()
 {
 	return uML_MessageKind_unknown;
 }
-std::shared_ptr<uml::Class> UMLPackageImpl::get_UML_MessageOccurrenceSpecification()
+const std::shared_ptr<uml::Class>& UMLPackageImpl::get_UML_MessageOccurrenceSpecification()
 {
 	return uML_MessageOccurrenceSpecification;
 }
-std::shared_ptr<uml::Enumeration> UMLPackageImpl::get_UML_MessageSort()
+const std::shared_ptr<uml::Enumeration>& UMLPackageImpl::get_UML_MessageSort()
 {
 	return uML_MessageSort;
 }
-std::shared_ptr<uml::EnumerationLiteral> UMLPackageImpl::get_UML_MessageSort_asynchCall()
+const std::shared_ptr<uml::EnumerationLiteral>& UMLPackageImpl::get_UML_MessageSort_asynchCall()
 {
 	return uML_MessageSort_asynchCall;
 }
-std::shared_ptr<uml::EnumerationLiteral> UMLPackageImpl::get_UML_MessageSort_asynchSignal()
+const std::shared_ptr<uml::EnumerationLiteral>& UMLPackageImpl::get_UML_MessageSort_asynchSignal()
 {
 	return uML_MessageSort_asynchSignal;
 }
-std::shared_ptr<uml::EnumerationLiteral> UMLPackageImpl::get_UML_MessageSort_createMessage()
+const std::shared_ptr<uml::EnumerationLiteral>& UMLPackageImpl::get_UML_MessageSort_createMessage()
 {
 	return uML_MessageSort_createMessage;
 }
-std::shared_ptr<uml::EnumerationLiteral> UMLPackageImpl::get_UML_MessageSort_deleteMessage()
+const std::shared_ptr<uml::EnumerationLiteral>& UMLPackageImpl::get_UML_MessageSort_deleteMessage()
 {
 	return uML_MessageSort_deleteMessage;
 }
-std::shared_ptr<uml::EnumerationLiteral> UMLPackageImpl::get_UML_MessageSort_reply()
+const std::shared_ptr<uml::EnumerationLiteral>& UMLPackageImpl::get_UML_MessageSort_reply()
 {
 	return uML_MessageSort_reply;
 }
-std::shared_ptr<uml::EnumerationLiteral> UMLPackageImpl::get_UML_MessageSort_synchCall()
+const std::shared_ptr<uml::EnumerationLiteral>& UMLPackageImpl::get_UML_MessageSort_synchCall()
 {
 	return uML_MessageSort_synchCall;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_Message_argument()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_Message_argument()
 {
 	return uML_Message_argument;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_Message_arguments()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_Message_arguments()
 {
 	return uML_Message_arguments;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_Message_cannot_cross_boundaries()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_Message_cannot_cross_boundaries()
 {
 	return uML_Message_cannot_cross_boundaries;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_Message_connector()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_Message_connector()
 {
 	return uML_Message_connector;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_Message_interaction()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_Message_interaction()
 {
 	return uML_Message_interaction;
 }
-std::shared_ptr<uml::Operation> UMLPackageImpl::get_UML_Message_isDistinguishableFrom_NamedElement_Namespace_NamedElement_Namespace()
+const std::shared_ptr<uml::Operation>& UMLPackageImpl::get_UML_Message_isDistinguishableFrom_NamedElement_Namespace_NamedElement_Namespace()
 {
 	return uML_Message_isDistinguishableFrom_NamedElement_Namespace_NamedElement_Namespace;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_Message_isDistinguishableFrom_NamedElement_Namespace_NamedElement_Namespace_n()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_Message_isDistinguishableFrom_NamedElement_Namespace_NamedElement_Namespace_n()
 {
 	return uML_Message_isDistinguishableFrom_NamedElement_Namespace_NamedElement_Namespace_n;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_Message_isDistinguishableFrom_NamedElement_Namespace_NamedElement_Namespace_ns()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_Message_isDistinguishableFrom_NamedElement_Namespace_NamedElement_Namespace_ns()
 {
 	return uML_Message_isDistinguishableFrom_NamedElement_Namespace_NamedElement_Namespace_ns;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_Message_isDistinguishableFrom_result()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_Message_isDistinguishableFrom_result()
 {
 	return uML_Message_isDistinguishableFrom_result;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_Message_isDistinguishableFrom_spec()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_Message_isDistinguishableFrom_spec()
 {
 	return uML_Message_isDistinguishableFrom_spec;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_Message_messageKind()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_Message_messageKind()
 {
 	return uML_Message_messageKind;
 }
-std::shared_ptr<uml::Operation> UMLPackageImpl::get_UML_Message_messageKind__()
+const std::shared_ptr<uml::Operation>& UMLPackageImpl::get_UML_Message_messageKind__()
 {
 	return uML_Message_messageKind__;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_Message_messageKind_result()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_Message_messageKind_result()
 {
 	return uML_Message_messageKind_result;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_Message_messageKind_spec()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_Message_messageKind_spec()
 {
 	return uML_Message_messageKind_spec;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_Message_messageSort()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_Message_messageSort()
 {
 	return uML_Message_messageSort;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_Message_occurrence_specifications()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_Message_occurrence_specifications()
 {
 	return uML_Message_occurrence_specifications;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_Message_receiveEvent()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_Message_receiveEvent()
 {
 	return uML_Message_receiveEvent;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_Message_sendEvent()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_Message_sendEvent()
 {
 	return uML_Message_sendEvent;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_Message_sending_receiving_message_event()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_Message_sending_receiving_message_event()
 {
 	return uML_Message_sending_receiving_message_event;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_Message_signature()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_Message_signature()
 {
 	return uML_Message_signature;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_Message_signature_is_operation_reply()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_Message_signature_is_operation_reply()
 {
 	return uML_Message_signature_is_operation_reply;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_Message_signature_is_operation_request()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_Message_signature_is_operation_request()
 {
 	return uML_Message_signature_is_operation_request;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_Message_signature_is_signal()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_Message_signature_is_signal()
 {
 	return uML_Message_signature_is_signal;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_Message_signature_refer_to()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_Message_signature_refer_to()
 {
 	return uML_Message_signature_refer_to;
 }
-std::shared_ptr<uml::Class> UMLPackageImpl::get_UML_Model()
+const std::shared_ptr<uml::Class>& UMLPackageImpl::get_UML_Model()
 {
 	return uML_Model;
 }
-std::shared_ptr<uml::Operation> UMLPackageImpl::get_UML_Model_isMetamodel__()
+const std::shared_ptr<uml::Operation>& UMLPackageImpl::get_UML_Model_isMetamodel__()
 {
 	return uML_Model_isMetamodel__;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_Model_isMetamodel__return()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_Model_isMetamodel__return()
 {
 	return uML_Model_isMetamodel__return;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_Model_viewpoint()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_Model_viewpoint()
 {
 	return uML_Model_viewpoint;
 }
-std::shared_ptr<uml::Class> UMLPackageImpl::get_UML_MultiplicityElement()
+const std::shared_ptr<uml::Class>& UMLPackageImpl::get_UML_MultiplicityElement()
 {
 	return uML_MultiplicityElement;
 }
-std::shared_ptr<uml::Operation> UMLPackageImpl::get_UML_MultiplicityElement_compatibleWith_MultiplicityElement_MultiplicityElement()
+const std::shared_ptr<uml::Operation>& UMLPackageImpl::get_UML_MultiplicityElement_compatibleWith_MultiplicityElement_MultiplicityElement()
 {
 	return uML_MultiplicityElement_compatibleWith_MultiplicityElement_MultiplicityElement;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_MultiplicityElement_compatibleWith_MultiplicityElement_MultiplicityElement_other()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_MultiplicityElement_compatibleWith_MultiplicityElement_MultiplicityElement_other()
 {
 	return uML_MultiplicityElement_compatibleWith_MultiplicityElement_MultiplicityElement_other;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_MultiplicityElement_compatibleWith_result()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_MultiplicityElement_compatibleWith_result()
 {
 	return uML_MultiplicityElement_compatibleWith_result;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_MultiplicityElement_compatibleWith_spec()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_MultiplicityElement_compatibleWith_spec()
 {
 	return uML_MultiplicityElement_compatibleWith_spec;
 }
-std::shared_ptr<uml::Operation> UMLPackageImpl::get_UML_MultiplicityElement_includesMultiplicity_MultiplicityElement_MultiplicityElement()
+const std::shared_ptr<uml::Operation>& UMLPackageImpl::get_UML_MultiplicityElement_includesMultiplicity_MultiplicityElement_MultiplicityElement()
 {
 	return uML_MultiplicityElement_includesMultiplicity_MultiplicityElement_MultiplicityElement;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_MultiplicityElement_includesMultiplicity_MultiplicityElement_MultiplicityElement_M()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_MultiplicityElement_includesMultiplicity_MultiplicityElement_MultiplicityElement_M()
 {
 	return uML_MultiplicityElement_includesMultiplicity_MultiplicityElement_MultiplicityElement_M;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_MultiplicityElement_includesMultiplicity_pre()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_MultiplicityElement_includesMultiplicity_pre()
 {
 	return uML_MultiplicityElement_includesMultiplicity_pre;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_MultiplicityElement_includesMultiplicity_result()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_MultiplicityElement_includesMultiplicity_result()
 {
 	return uML_MultiplicityElement_includesMultiplicity_result;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_MultiplicityElement_includesMultiplicity_spec()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_MultiplicityElement_includesMultiplicity_spec()
 {
 	return uML_MultiplicityElement_includesMultiplicity_spec;
 }
-std::shared_ptr<uml::Operation> UMLPackageImpl::get_UML_MultiplicityElement_isMultivalued__()
+const std::shared_ptr<uml::Operation>& UMLPackageImpl::get_UML_MultiplicityElement_isMultivalued__()
 {
 	return uML_MultiplicityElement_isMultivalued__;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_MultiplicityElement_isMultivalued_pre()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_MultiplicityElement_isMultivalued_pre()
 {
 	return uML_MultiplicityElement_isMultivalued_pre;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_MultiplicityElement_isMultivalued_result()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_MultiplicityElement_isMultivalued_result()
 {
 	return uML_MultiplicityElement_isMultivalued_result;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_MultiplicityElement_isMultivalued_spec()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_MultiplicityElement_isMultivalued_spec()
 {
 	return uML_MultiplicityElement_isMultivalued_spec;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_MultiplicityElement_isOrdered()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_MultiplicityElement_isOrdered()
 {
 	return uML_MultiplicityElement_isOrdered;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_MultiplicityElement_isUnique()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_MultiplicityElement_isUnique()
 {
 	return uML_MultiplicityElement_isUnique;
 }
-std::shared_ptr<uml::Operation> UMLPackageImpl::get_UML_MultiplicityElement_is_Integer_UnlimitedNatural_Integer_UnlimitedNatural()
+const std::shared_ptr<uml::Operation>& UMLPackageImpl::get_UML_MultiplicityElement_is_Integer_UnlimitedNatural_Integer_UnlimitedNatural()
 {
 	return uML_MultiplicityElement_is_Integer_UnlimitedNatural_Integer_UnlimitedNatural;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_MultiplicityElement_is_Integer_UnlimitedNatural_Integer_UnlimitedNatural_lowerbound()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_MultiplicityElement_is_Integer_UnlimitedNatural_Integer_UnlimitedNatural_lowerbound()
 {
 	return uML_MultiplicityElement_is_Integer_UnlimitedNatural_Integer_UnlimitedNatural_lowerbound;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_MultiplicityElement_is_Integer_UnlimitedNatural_Integer_UnlimitedNatural_upperbound()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_MultiplicityElement_is_Integer_UnlimitedNatural_Integer_UnlimitedNatural_upperbound()
 {
 	return uML_MultiplicityElement_is_Integer_UnlimitedNatural_Integer_UnlimitedNatural_upperbound;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_MultiplicityElement_is_result()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_MultiplicityElement_is_result()
 {
 	return uML_MultiplicityElement_is_result;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_MultiplicityElement_is_spec()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_MultiplicityElement_is_spec()
 {
 	return uML_MultiplicityElement_is_spec;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_MultiplicityElement_lower()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_MultiplicityElement_lower()
 {
 	return uML_MultiplicityElement_lower;
 }
-std::shared_ptr<uml::Operation> UMLPackageImpl::get_UML_MultiplicityElement_lowerBound__()
+const std::shared_ptr<uml::Operation>& UMLPackageImpl::get_UML_MultiplicityElement_lowerBound__()
 {
 	return uML_MultiplicityElement_lowerBound__;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_MultiplicityElement_lowerBound_result()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_MultiplicityElement_lowerBound_result()
 {
 	return uML_MultiplicityElement_lowerBound_result;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_MultiplicityElement_lowerBound_spec()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_MultiplicityElement_lowerBound_spec()
 {
 	return uML_MultiplicityElement_lowerBound_spec;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_MultiplicityElement_lowerValue()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_MultiplicityElement_lowerValue()
 {
 	return uML_MultiplicityElement_lowerValue;
 }
-std::shared_ptr<uml::Operation> UMLPackageImpl::get_UML_MultiplicityElement_lower__()
+const std::shared_ptr<uml::Operation>& UMLPackageImpl::get_UML_MultiplicityElement_lower__()
 {
 	return uML_MultiplicityElement_lower__;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_MultiplicityElement_lower_ge_0()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_MultiplicityElement_lower_ge_0()
 {
 	return uML_MultiplicityElement_lower_ge_0;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_MultiplicityElement_lower_is_integer()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_MultiplicityElement_lower_is_integer()
 {
 	return uML_MultiplicityElement_lower_is_integer;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_MultiplicityElement_lower_result()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_MultiplicityElement_lower_result()
 {
 	return uML_MultiplicityElement_lower_result;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_MultiplicityElement_lower_spec()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_MultiplicityElement_lower_spec()
 {
 	return uML_MultiplicityElement_lower_spec;
 }
-std::shared_ptr<uml::Operation> UMLPackageImpl::get_UML_MultiplicityElement_setLower_Integer_Integer()
+const std::shared_ptr<uml::Operation>& UMLPackageImpl::get_UML_MultiplicityElement_setLower_Integer_Integer()
 {
 	return uML_MultiplicityElement_setLower_Integer_Integer;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_MultiplicityElement_setLower_Integer_Integer_newLower()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_MultiplicityElement_setLower_Integer_Integer_newLower()
 {
 	return uML_MultiplicityElement_setLower_Integer_Integer_newLower;
 }
-std::shared_ptr<uml::Operation> UMLPackageImpl::get_UML_MultiplicityElement_setUpper_UnlimitedNatural_UnlimitedNatural()
+const std::shared_ptr<uml::Operation>& UMLPackageImpl::get_UML_MultiplicityElement_setUpper_UnlimitedNatural_UnlimitedNatural()
 {
 	return uML_MultiplicityElement_setUpper_UnlimitedNatural_UnlimitedNatural;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_MultiplicityElement_setUpper_UnlimitedNatural_UnlimitedNatural_newUpper()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_MultiplicityElement_setUpper_UnlimitedNatural_UnlimitedNatural_newUpper()
 {
 	return uML_MultiplicityElement_setUpper_UnlimitedNatural_UnlimitedNatural_newUpper;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_MultiplicityElement_upper()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_MultiplicityElement_upper()
 {
 	return uML_MultiplicityElement_upper;
 }
-std::shared_ptr<uml::Operation> UMLPackageImpl::get_UML_MultiplicityElement_upperBound__()
+const std::shared_ptr<uml::Operation>& UMLPackageImpl::get_UML_MultiplicityElement_upperBound__()
 {
 	return uML_MultiplicityElement_upperBound__;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_MultiplicityElement_upperBound_result()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_MultiplicityElement_upperBound_result()
 {
 	return uML_MultiplicityElement_upperBound_result;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_MultiplicityElement_upperBound_spec()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_MultiplicityElement_upperBound_spec()
 {
 	return uML_MultiplicityElement_upperBound_spec;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_MultiplicityElement_upperValue()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_MultiplicityElement_upperValue()
 {
 	return uML_MultiplicityElement_upperValue;
 }
-std::shared_ptr<uml::Operation> UMLPackageImpl::get_UML_MultiplicityElement_upper__()
+const std::shared_ptr<uml::Operation>& UMLPackageImpl::get_UML_MultiplicityElement_upper__()
 {
 	return uML_MultiplicityElement_upper__;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_MultiplicityElement_upper_ge_lower()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_MultiplicityElement_upper_ge_lower()
 {
 	return uML_MultiplicityElement_upper_ge_lower;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_MultiplicityElement_upper_is_unlimitedNatural()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_MultiplicityElement_upper_is_unlimitedNatural()
 {
 	return uML_MultiplicityElement_upper_is_unlimitedNatural;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_MultiplicityElement_upper_result()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_MultiplicityElement_upper_result()
 {
 	return uML_MultiplicityElement_upper_result;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_MultiplicityElement_upper_spec()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_MultiplicityElement_upper_spec()
 {
 	return uML_MultiplicityElement_upper_spec;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_MultiplicityElement_value_specification_constant()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_MultiplicityElement_value_specification_constant()
 {
 	return uML_MultiplicityElement_value_specification_constant;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_MultiplicityElement_value_specification_no_side_effects()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_MultiplicityElement_value_specification_no_side_effects()
 {
 	return uML_MultiplicityElement_value_specification_no_side_effects;
 }
-std::shared_ptr<uml::Class> UMLPackageImpl::get_UML_NamedElement()
+const std::shared_ptr<uml::Class>& UMLPackageImpl::get_UML_NamedElement()
 {
 	return uML_NamedElement;
 }
-std::shared_ptr<uml::Operation> UMLPackageImpl::get_UML_NamedElement_allNamespaces__()
+const std::shared_ptr<uml::Operation>& UMLPackageImpl::get_UML_NamedElement_allNamespaces__()
 {
 	return uML_NamedElement_allNamespaces__;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_NamedElement_allNamespaces_result()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_NamedElement_allNamespaces_result()
 {
 	return uML_NamedElement_allNamespaces_result;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_NamedElement_allNamespaces_spec()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_NamedElement_allNamespaces_spec()
 {
 	return uML_NamedElement_allNamespaces_spec;
 }
-std::shared_ptr<uml::Operation> UMLPackageImpl::get_UML_NamedElement_allOwningPackages__()
+const std::shared_ptr<uml::Operation>& UMLPackageImpl::get_UML_NamedElement_allOwningPackages__()
 {
 	return uML_NamedElement_allOwningPackages__;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_NamedElement_allOwningPackages_result()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_NamedElement_allOwningPackages_result()
 {
 	return uML_NamedElement_allOwningPackages_result;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_NamedElement_allOwningPackages_spec()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_NamedElement_allOwningPackages_spec()
 {
 	return uML_NamedElement_allOwningPackages_spec;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_NamedElement_clientDependency()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_NamedElement_clientDependency()
 {
 	return uML_NamedElement_clientDependency;
 }
-std::shared_ptr<uml::Operation> UMLPackageImpl::get_UML_NamedElement_clientDependency__()
+const std::shared_ptr<uml::Operation>& UMLPackageImpl::get_UML_NamedElement_clientDependency__()
 {
 	return uML_NamedElement_clientDependency__;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_NamedElement_clientDependency_result()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_NamedElement_clientDependency_result()
 {
 	return uML_NamedElement_clientDependency_result;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_NamedElement_clientDependency_spec()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_NamedElement_clientDependency_spec()
 {
 	return uML_NamedElement_clientDependency_spec;
 }
-std::shared_ptr<uml::Operation> UMLPackageImpl::get_UML_NamedElement_createDependency_NamedElement_NamedElement()
+const std::shared_ptr<uml::Operation>& UMLPackageImpl::get_UML_NamedElement_createDependency_NamedElement_NamedElement()
 {
 	return uML_NamedElement_createDependency_NamedElement_NamedElement;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_NamedElement_createDependency_NamedElement_NamedElement_supplier()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_NamedElement_createDependency_NamedElement_NamedElement_supplier()
 {
 	return uML_NamedElement_createDependency_NamedElement_NamedElement_supplier;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_NamedElement_createDependency_NamedElement_NamedElementreturn()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_NamedElement_createDependency_NamedElement_NamedElementreturn()
 {
 	return uML_NamedElement_createDependency_NamedElement_NamedElementreturn;
 }
-std::shared_ptr<uml::Operation> UMLPackageImpl::get_UML_NamedElement_createUsage_NamedElement_NamedElement()
+const std::shared_ptr<uml::Operation>& UMLPackageImpl::get_UML_NamedElement_createUsage_NamedElement_NamedElement()
 {
 	return uML_NamedElement_createUsage_NamedElement_NamedElement;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_NamedElement_createUsage_NamedElement_NamedElement_supplier()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_NamedElement_createUsage_NamedElement_NamedElement_supplier()
 {
 	return uML_NamedElement_createUsage_NamedElement_NamedElement_supplier;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_NamedElement_createUsage_NamedElement_NamedElementreturn()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_NamedElement_createUsage_NamedElement_NamedElementreturn()
 {
 	return uML_NamedElement_createUsage_NamedElement_NamedElementreturn;
 }
-std::shared_ptr<uml::Operation> UMLPackageImpl::get_UML_NamedElement_getLabel_Boolean_Boolean()
+const std::shared_ptr<uml::Operation>& UMLPackageImpl::get_UML_NamedElement_getLabel_Boolean_Boolean()
 {
 	return uML_NamedElement_getLabel_Boolean_Boolean;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_NamedElement_getLabel_Boolean_Boolean_localize()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_NamedElement_getLabel_Boolean_Boolean_localize()
 {
 	return uML_NamedElement_getLabel_Boolean_Boolean_localize;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_NamedElement_getLabel_Boolean_Booleanreturn()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_NamedElement_getLabel_Boolean_Booleanreturn()
 {
 	return uML_NamedElement_getLabel_Boolean_Booleanreturn;
 }
-std::shared_ptr<uml::Operation> UMLPackageImpl::get_UML_NamedElement_getLabel__()
+const std::shared_ptr<uml::Operation>& UMLPackageImpl::get_UML_NamedElement_getLabel__()
 {
 	return uML_NamedElement_getLabel__;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_NamedElement_getLabel__return()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_NamedElement_getLabel__return()
 {
 	return uML_NamedElement_getLabel__return;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_NamedElement_has_no_qualified_name()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_NamedElement_has_no_qualified_name()
 {
 	return uML_NamedElement_has_no_qualified_name;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_NamedElement_has_qualified_name()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_NamedElement_has_qualified_name()
 {
 	return uML_NamedElement_has_qualified_name;
 }
-std::shared_ptr<uml::Operation> UMLPackageImpl::get_UML_NamedElement_isDistinguishableFrom_NamedElement_Namespace_NamedElement_Namespace()
+const std::shared_ptr<uml::Operation>& UMLPackageImpl::get_UML_NamedElement_isDistinguishableFrom_NamedElement_Namespace_NamedElement_Namespace()
 {
 	return uML_NamedElement_isDistinguishableFrom_NamedElement_Namespace_NamedElement_Namespace;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_NamedElement_isDistinguishableFrom_NamedElement_Namespace_NamedElement_Namespace_n()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_NamedElement_isDistinguishableFrom_NamedElement_Namespace_NamedElement_Namespace_n()
 {
 	return uML_NamedElement_isDistinguishableFrom_NamedElement_Namespace_NamedElement_Namespace_n;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_NamedElement_isDistinguishableFrom_NamedElement_Namespace_NamedElement_Namespace_ns()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_NamedElement_isDistinguishableFrom_NamedElement_Namespace_NamedElement_Namespace_ns()
 {
 	return uML_NamedElement_isDistinguishableFrom_NamedElement_Namespace_NamedElement_Namespace_ns;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_NamedElement_isDistinguishableFrom_result()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_NamedElement_isDistinguishableFrom_result()
 {
 	return uML_NamedElement_isDistinguishableFrom_result;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_NamedElement_isDistinguishableFrom_spec()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_NamedElement_isDistinguishableFrom_spec()
 {
 	return uML_NamedElement_isDistinguishableFrom_spec;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_NamedElement_name()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_NamedElement_name()
 {
 	return uML_NamedElement_name;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_NamedElement_nameExpression()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_NamedElement_nameExpression()
 {
 	return uML_NamedElement_nameExpression;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_NamedElement_namespace()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_NamedElement_namespace()
 {
 	return uML_NamedElement_namespace;
 }
-std::shared_ptr<uml::Operation> UMLPackageImpl::get_UML_NamedElement_namespace__()
+const std::shared_ptr<uml::Operation>& UMLPackageImpl::get_UML_NamedElement_namespace__()
 {
 	return uML_NamedElement_namespace__;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_NamedElement_namespace_result()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_NamedElement_namespace_result()
 {
 	return uML_NamedElement_namespace_result;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_NamedElement_qualifiedName()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_NamedElement_qualifiedName()
 {
 	return uML_NamedElement_qualifiedName;
 }
-std::shared_ptr<uml::Operation> UMLPackageImpl::get_UML_NamedElement_qualifiedName__()
+const std::shared_ptr<uml::Operation>& UMLPackageImpl::get_UML_NamedElement_qualifiedName__()
 {
 	return uML_NamedElement_qualifiedName__;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_NamedElement_qualifiedName_result()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_NamedElement_qualifiedName_result()
 {
 	return uML_NamedElement_qualifiedName_result;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_NamedElement_qualifiedName_spec()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_NamedElement_qualifiedName_spec()
 {
 	return uML_NamedElement_qualifiedName_spec;
 }
-std::shared_ptr<uml::Operation> UMLPackageImpl::get_UML_NamedElement_separator__()
+const std::shared_ptr<uml::Operation>& UMLPackageImpl::get_UML_NamedElement_separator__()
 {
 	return uML_NamedElement_separator__;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_NamedElement_separator_result()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_NamedElement_separator_result()
 {
 	return uML_NamedElement_separator_result;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_NamedElement_separator_spec()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_NamedElement_separator_spec()
 {
 	return uML_NamedElement_separator_spec;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_NamedElement_visibility()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_NamedElement_visibility()
 {
 	return uML_NamedElement_visibility;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_NamedElement_visibility_needs_ownership()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_NamedElement_visibility_needs_ownership()
 {
 	return uML_NamedElement_visibility_needs_ownership;
 }
-std::shared_ptr<uml::Class> UMLPackageImpl::get_UML_Namespace()
+const std::shared_ptr<uml::Class>& UMLPackageImpl::get_UML_Namespace()
 {
 	return uML_Namespace;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_Namespace_cannot_import_ownedMembers()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_Namespace_cannot_import_ownedMembers()
 {
 	return uML_Namespace_cannot_import_ownedMembers;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_Namespace_cannot_import_self()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_Namespace_cannot_import_self()
 {
 	return uML_Namespace_cannot_import_self;
 }
-std::shared_ptr<uml::Operation> UMLPackageImpl::get_UML_Namespace_createElementImport_PackageableElement_VisibilityKind_PackageableElement_VisibilityKind()
+const std::shared_ptr<uml::Operation>& UMLPackageImpl::get_UML_Namespace_createElementImport_PackageableElement_VisibilityKind_PackageableElement_VisibilityKind()
 {
 	return uML_Namespace_createElementImport_PackageableElement_VisibilityKind_PackageableElement_VisibilityKind;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_Namespace_createElementImport_PackageableElement_VisibilityKind_PackageableElement_VisibilityKind_element()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_Namespace_createElementImport_PackageableElement_VisibilityKind_PackageableElement_VisibilityKind_element()
 {
 	return uML_Namespace_createElementImport_PackageableElement_VisibilityKind_PackageableElement_VisibilityKind_element;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_Namespace_createElementImport_PackageableElement_VisibilityKind_PackageableElement_VisibilityKind_visibility()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_Namespace_createElementImport_PackageableElement_VisibilityKind_PackageableElement_VisibilityKind_visibility()
 {
 	return uML_Namespace_createElementImport_PackageableElement_VisibilityKind_PackageableElement_VisibilityKind_visibility;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_Namespace_createElementImport_PackageableElement_VisibilityKind_PackageableElement_VisibilityKindreturn()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_Namespace_createElementImport_PackageableElement_VisibilityKind_PackageableElement_VisibilityKindreturn()
 {
 	return uML_Namespace_createElementImport_PackageableElement_VisibilityKind_PackageableElement_VisibilityKindreturn;
 }
-std::shared_ptr<uml::Operation> UMLPackageImpl::get_UML_Namespace_createPackageImport_Package_VisibilityKind_Package_VisibilityKind()
+const std::shared_ptr<uml::Operation>& UMLPackageImpl::get_UML_Namespace_createPackageImport_Package_VisibilityKind_Package_VisibilityKind()
 {
 	return uML_Namespace_createPackageImport_Package_VisibilityKind_Package_VisibilityKind;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_Namespace_createPackageImport_Package_VisibilityKind_Package_VisibilityKind_package_()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_Namespace_createPackageImport_Package_VisibilityKind_Package_VisibilityKind_package_()
 {
 	return uML_Namespace_createPackageImport_Package_VisibilityKind_Package_VisibilityKind_package_;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_Namespace_createPackageImport_Package_VisibilityKind_Package_VisibilityKind_visibility()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_Namespace_createPackageImport_Package_VisibilityKind_Package_VisibilityKind_visibility()
 {
 	return uML_Namespace_createPackageImport_Package_VisibilityKind_Package_VisibilityKind_visibility;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_Namespace_createPackageImport_Package_VisibilityKind_Package_VisibilityKindreturn()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_Namespace_createPackageImport_Package_VisibilityKind_Package_VisibilityKindreturn()
 {
 	return uML_Namespace_createPackageImport_Package_VisibilityKind_Package_VisibilityKindreturn;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_Namespace_elementImport()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_Namespace_elementImport()
 {
 	return uML_Namespace_elementImport;
 }
-std::shared_ptr<uml::Operation> UMLPackageImpl::get_UML_Namespace_excludeCollisions_PackageableElement_PackageableElement()
+const std::shared_ptr<uml::Operation>& UMLPackageImpl::get_UML_Namespace_excludeCollisions_PackageableElement_PackageableElement()
 {
 	return uML_Namespace_excludeCollisions_PackageableElement_PackageableElement;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_Namespace_excludeCollisions_PackageableElement_PackageableElement_imps()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_Namespace_excludeCollisions_PackageableElement_PackageableElement_imps()
 {
 	return uML_Namespace_excludeCollisions_PackageableElement_PackageableElement_imps;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_Namespace_excludeCollisions_result()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_Namespace_excludeCollisions_result()
 {
 	return uML_Namespace_excludeCollisions_result;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_Namespace_excludeCollisions_spec()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_Namespace_excludeCollisions_spec()
 {
 	return uML_Namespace_excludeCollisions_spec;
 }
-std::shared_ptr<uml::Operation> UMLPackageImpl::get_UML_Namespace_getImportedElements__()
+const std::shared_ptr<uml::Operation>& UMLPackageImpl::get_UML_Namespace_getImportedElements__()
 {
 	return uML_Namespace_getImportedElements__;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_Namespace_getImportedElements__return()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_Namespace_getImportedElements__return()
 {
 	return uML_Namespace_getImportedElements__return;
 }
-std::shared_ptr<uml::Operation> UMLPackageImpl::get_UML_Namespace_getImportedPackages__()
+const std::shared_ptr<uml::Operation>& UMLPackageImpl::get_UML_Namespace_getImportedPackages__()
 {
 	return uML_Namespace_getImportedPackages__;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_Namespace_getImportedPackages__return()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_Namespace_getImportedPackages__return()
 {
 	return uML_Namespace_getImportedPackages__return;
 }
-std::shared_ptr<uml::Operation> UMLPackageImpl::get_UML_Namespace_getNamesOfMember_NamedElement_NamedElement()
+const std::shared_ptr<uml::Operation>& UMLPackageImpl::get_UML_Namespace_getNamesOfMember_NamedElement_NamedElement()
 {
 	return uML_Namespace_getNamesOfMember_NamedElement_NamedElement;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_Namespace_getNamesOfMember_NamedElement_NamedElement_element()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_Namespace_getNamesOfMember_NamedElement_NamedElement_element()
 {
 	return uML_Namespace_getNamesOfMember_NamedElement_NamedElement_element;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_Namespace_getNamesOfMember_result()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_Namespace_getNamesOfMember_result()
 {
 	return uML_Namespace_getNamesOfMember_result;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_Namespace_getNamesOfMember_spec()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_Namespace_getNamesOfMember_spec()
 {
 	return uML_Namespace_getNamesOfMember_spec;
 }
-std::shared_ptr<uml::Operation> UMLPackageImpl::get_UML_Namespace_importMembers_PackageableElement_PackageableElement()
+const std::shared_ptr<uml::Operation>& UMLPackageImpl::get_UML_Namespace_importMembers_PackageableElement_PackageableElement()
 {
 	return uML_Namespace_importMembers_PackageableElement_PackageableElement;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_Namespace_importMembers_PackageableElement_PackageableElement_imps()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_Namespace_importMembers_PackageableElement_PackageableElement_imps()
 {
 	return uML_Namespace_importMembers_PackageableElement_PackageableElement_imps;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_Namespace_importMembers_result()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_Namespace_importMembers_result()
 {
 	return uML_Namespace_importMembers_result;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_Namespace_importMembers_spec()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_Namespace_importMembers_spec()
 {
 	return uML_Namespace_importMembers_spec;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_Namespace_importedMember()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_Namespace_importedMember()
 {
 	return uML_Namespace_importedMember;
 }
-std::shared_ptr<uml::Operation> UMLPackageImpl::get_UML_Namespace_importedMember__()
+const std::shared_ptr<uml::Operation>& UMLPackageImpl::get_UML_Namespace_importedMember__()
 {
 	return uML_Namespace_importedMember__;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_Namespace_importedMember_result()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_Namespace_importedMember_result()
 {
 	return uML_Namespace_importedMember_result;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_Namespace_importedMember_spec()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_Namespace_importedMember_spec()
 {
 	return uML_Namespace_importedMember_spec;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_Namespace_member()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_Namespace_member()
 {
 	return uML_Namespace_member;
 }
-std::shared_ptr<uml::Operation> UMLPackageImpl::get_UML_Namespace_membersAreDistinguishable__()
+const std::shared_ptr<uml::Operation>& UMLPackageImpl::get_UML_Namespace_membersAreDistinguishable__()
 {
 	return uML_Namespace_membersAreDistinguishable__;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_Namespace_membersAreDistinguishable_result()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_Namespace_membersAreDistinguishable_result()
 {
 	return uML_Namespace_membersAreDistinguishable_result;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_Namespace_membersAreDistinguishable_spec()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_Namespace_membersAreDistinguishable_spec()
 {
 	return uML_Namespace_membersAreDistinguishable_spec;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_Namespace_members_distinguishable()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_Namespace_members_distinguishable()
 {
 	return uML_Namespace_members_distinguishable;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_Namespace_ownedMember()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_Namespace_ownedMember()
 {
 	return uML_Namespace_ownedMember;
 }
-std::shared_ptr<uml::Operation> UMLPackageImpl::get_UML_Namespace_ownedMember__()
+const std::shared_ptr<uml::Operation>& UMLPackageImpl::get_UML_Namespace_ownedMember__()
 {
 	return uML_Namespace_ownedMember__;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_Namespace_ownedMember_result()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_Namespace_ownedMember_result()
 {
 	return uML_Namespace_ownedMember_result;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_Namespace_ownedRule()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_Namespace_ownedRule()
 {
 	return uML_Namespace_ownedRule;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_Namespace_packageImport()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_Namespace_packageImport()
 {
 	return uML_Namespace_packageImport;
 }
-std::shared_ptr<uml::Class> UMLPackageImpl::get_UML_Node()
+const std::shared_ptr<uml::Class>& UMLPackageImpl::get_UML_Node()
 {
 	return uML_Node;
 }
-std::shared_ptr<uml::Operation> UMLPackageImpl::get_UML_Node_createCommunicationPath_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Node_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Node_Boolean_AggregationKind_String_Integer_UnlimitedNatural()
+const std::shared_ptr<uml::Operation>& UMLPackageImpl::get_UML_Node_createCommunicationPath_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Node_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Node_Boolean_AggregationKind_String_Integer_UnlimitedNatural()
 {
 	return uML_Node_createCommunicationPath_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Node_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Node_Boolean_AggregationKind_String_Integer_UnlimitedNatural;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_Node_createCommunicationPath_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Node_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Node_Boolean_AggregationKind_String_Integer_UnlimitedNatural_end1Aggregation()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_Node_createCommunicationPath_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Node_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Node_Boolean_AggregationKind_String_Integer_UnlimitedNatural_end1Aggregation()
 {
 	return uML_Node_createCommunicationPath_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Node_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Node_Boolean_AggregationKind_String_Integer_UnlimitedNatural_end1Aggregation;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_Node_createCommunicationPath_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Node_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Node_Boolean_AggregationKind_String_Integer_UnlimitedNatural_end1IsNavigable()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_Node_createCommunicationPath_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Node_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Node_Boolean_AggregationKind_String_Integer_UnlimitedNatural_end1IsNavigable()
 {
 	return uML_Node_createCommunicationPath_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Node_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Node_Boolean_AggregationKind_String_Integer_UnlimitedNatural_end1IsNavigable;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_Node_createCommunicationPath_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Node_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Node_Boolean_AggregationKind_String_Integer_UnlimitedNatural_end1Lower()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_Node_createCommunicationPath_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Node_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Node_Boolean_AggregationKind_String_Integer_UnlimitedNatural_end1Lower()
 {
 	return uML_Node_createCommunicationPath_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Node_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Node_Boolean_AggregationKind_String_Integer_UnlimitedNatural_end1Lower;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_Node_createCommunicationPath_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Node_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Node_Boolean_AggregationKind_String_Integer_UnlimitedNatural_end1Name()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_Node_createCommunicationPath_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Node_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Node_Boolean_AggregationKind_String_Integer_UnlimitedNatural_end1Name()
 {
 	return uML_Node_createCommunicationPath_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Node_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Node_Boolean_AggregationKind_String_Integer_UnlimitedNatural_end1Name;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_Node_createCommunicationPath_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Node_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Node_Boolean_AggregationKind_String_Integer_UnlimitedNatural_end1Node()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_Node_createCommunicationPath_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Node_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Node_Boolean_AggregationKind_String_Integer_UnlimitedNatural_end1Node()
 {
 	return uML_Node_createCommunicationPath_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Node_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Node_Boolean_AggregationKind_String_Integer_UnlimitedNatural_end1Node;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_Node_createCommunicationPath_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Node_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Node_Boolean_AggregationKind_String_Integer_UnlimitedNatural_end1Upper()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_Node_createCommunicationPath_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Node_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Node_Boolean_AggregationKind_String_Integer_UnlimitedNatural_end1Upper()
 {
 	return uML_Node_createCommunicationPath_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Node_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Node_Boolean_AggregationKind_String_Integer_UnlimitedNatural_end1Upper;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_Node_createCommunicationPath_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Node_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Node_Boolean_AggregationKind_String_Integer_UnlimitedNatural_end2Aggregation()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_Node_createCommunicationPath_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Node_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Node_Boolean_AggregationKind_String_Integer_UnlimitedNatural_end2Aggregation()
 {
 	return uML_Node_createCommunicationPath_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Node_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Node_Boolean_AggregationKind_String_Integer_UnlimitedNatural_end2Aggregation;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_Node_createCommunicationPath_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Node_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Node_Boolean_AggregationKind_String_Integer_UnlimitedNatural_end2IsNavigable()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_Node_createCommunicationPath_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Node_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Node_Boolean_AggregationKind_String_Integer_UnlimitedNatural_end2IsNavigable()
 {
 	return uML_Node_createCommunicationPath_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Node_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Node_Boolean_AggregationKind_String_Integer_UnlimitedNatural_end2IsNavigable;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_Node_createCommunicationPath_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Node_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Node_Boolean_AggregationKind_String_Integer_UnlimitedNatural_end2Lower()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_Node_createCommunicationPath_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Node_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Node_Boolean_AggregationKind_String_Integer_UnlimitedNatural_end2Lower()
 {
 	return uML_Node_createCommunicationPath_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Node_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Node_Boolean_AggregationKind_String_Integer_UnlimitedNatural_end2Lower;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_Node_createCommunicationPath_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Node_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Node_Boolean_AggregationKind_String_Integer_UnlimitedNatural_end2Name()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_Node_createCommunicationPath_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Node_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Node_Boolean_AggregationKind_String_Integer_UnlimitedNatural_end2Name()
 {
 	return uML_Node_createCommunicationPath_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Node_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Node_Boolean_AggregationKind_String_Integer_UnlimitedNatural_end2Name;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_Node_createCommunicationPath_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Node_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Node_Boolean_AggregationKind_String_Integer_UnlimitedNatural_end2Upper()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_Node_createCommunicationPath_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Node_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Node_Boolean_AggregationKind_String_Integer_UnlimitedNatural_end2Upper()
 {
 	return uML_Node_createCommunicationPath_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Node_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Node_Boolean_AggregationKind_String_Integer_UnlimitedNatural_end2Upper;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_Node_createCommunicationPath_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Node_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Node_Boolean_AggregationKind_String_Integer_UnlimitedNaturalreturn()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_Node_createCommunicationPath_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Node_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Node_Boolean_AggregationKind_String_Integer_UnlimitedNaturalreturn()
 {
 	return uML_Node_createCommunicationPath_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Node_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Node_Boolean_AggregationKind_String_Integer_UnlimitedNaturalreturn;
 }
-std::shared_ptr<uml::Operation> UMLPackageImpl::get_UML_Node_getCommunicationPaths__()
+const std::shared_ptr<uml::Operation>& UMLPackageImpl::get_UML_Node_getCommunicationPaths__()
 {
 	return uML_Node_getCommunicationPaths__;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_Node_getCommunicationPaths__return()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_Node_getCommunicationPaths__return()
 {
 	return uML_Node_getCommunicationPaths__return;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_Node_internal_structure()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_Node_internal_structure()
 {
 	return uML_Node_internal_structure;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_Node_nestedNode()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_Node_nestedNode()
 {
 	return uML_Node_nestedNode;
 }
-std::shared_ptr<uml::Class> UMLPackageImpl::get_UML_ObjectFlow()
+const std::shared_ptr<uml::Class>& UMLPackageImpl::get_UML_ObjectFlow()
 {
 	return uML_ObjectFlow;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_ObjectFlow_compatible_types()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_ObjectFlow_compatible_types()
 {
 	return uML_ObjectFlow_compatible_types;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_ObjectFlow_input_and_output_parameter()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_ObjectFlow_input_and_output_parameter()
 {
 	return uML_ObjectFlow_input_and_output_parameter;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_ObjectFlow_isMulticast()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_ObjectFlow_isMulticast()
 {
 	return uML_ObjectFlow_isMulticast;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_ObjectFlow_isMultireceive()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_ObjectFlow_isMultireceive()
 {
 	return uML_ObjectFlow_isMultireceive;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_ObjectFlow_is_multicast_or_is_multireceive()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_ObjectFlow_is_multicast_or_is_multireceive()
 {
 	return uML_ObjectFlow_is_multicast_or_is_multireceive;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_ObjectFlow_no_executable_nodes()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_ObjectFlow_no_executable_nodes()
 {
 	return uML_ObjectFlow_no_executable_nodes;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_ObjectFlow_same_upper_bounds()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_ObjectFlow_same_upper_bounds()
 {
 	return uML_ObjectFlow_same_upper_bounds;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_ObjectFlow_selection()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_ObjectFlow_selection()
 {
 	return uML_ObjectFlow_selection;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_ObjectFlow_selection_behavior()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_ObjectFlow_selection_behavior()
 {
 	return uML_ObjectFlow_selection_behavior;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_ObjectFlow_target()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_ObjectFlow_target()
 {
 	return uML_ObjectFlow_target;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_ObjectFlow_transformation()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_ObjectFlow_transformation()
 {
 	return uML_ObjectFlow_transformation;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_ObjectFlow_transformation_behavior()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_ObjectFlow_transformation_behavior()
 {
 	return uML_ObjectFlow_transformation_behavior;
 }
-std::shared_ptr<uml::Class> UMLPackageImpl::get_UML_ObjectNode()
+const std::shared_ptr<uml::Class>& UMLPackageImpl::get_UML_ObjectNode()
 {
 	return uML_ObjectNode;
 }
-std::shared_ptr<uml::Enumeration> UMLPackageImpl::get_UML_ObjectNodeOrderingKind()
+const std::shared_ptr<uml::Enumeration>& UMLPackageImpl::get_UML_ObjectNodeOrderingKind()
 {
 	return uML_ObjectNodeOrderingKind;
 }
-std::shared_ptr<uml::EnumerationLiteral> UMLPackageImpl::get_UML_ObjectNodeOrderingKind_FIFO()
+const std::shared_ptr<uml::EnumerationLiteral>& UMLPackageImpl::get_UML_ObjectNodeOrderingKind_FIFO()
 {
 	return uML_ObjectNodeOrderingKind_FIFO;
 }
-std::shared_ptr<uml::EnumerationLiteral> UMLPackageImpl::get_UML_ObjectNodeOrderingKind_LIFO()
+const std::shared_ptr<uml::EnumerationLiteral>& UMLPackageImpl::get_UML_ObjectNodeOrderingKind_LIFO()
 {
 	return uML_ObjectNodeOrderingKind_LIFO;
 }
-std::shared_ptr<uml::EnumerationLiteral> UMLPackageImpl::get_UML_ObjectNodeOrderingKind_ordered()
+const std::shared_ptr<uml::EnumerationLiteral>& UMLPackageImpl::get_UML_ObjectNodeOrderingKind_ordered()
 {
 	return uML_ObjectNodeOrderingKind_ordered;
 }
-std::shared_ptr<uml::EnumerationLiteral> UMLPackageImpl::get_UML_ObjectNodeOrderingKind_unordered()
+const std::shared_ptr<uml::EnumerationLiteral>& UMLPackageImpl::get_UML_ObjectNodeOrderingKind_unordered()
 {
 	return uML_ObjectNodeOrderingKind_unordered;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_ObjectNode_inState()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_ObjectNode_inState()
 {
 	return uML_ObjectNode_inState;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_ObjectNode_input_output_parameter()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_ObjectNode_input_output_parameter()
 {
 	return uML_ObjectNode_input_output_parameter;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_ObjectNode_isControlType()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_ObjectNode_isControlType()
 {
 	return uML_ObjectNode_isControlType;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_ObjectNode_object_flow_edges()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_ObjectNode_object_flow_edges()
 {
 	return uML_ObjectNode_object_flow_edges;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_ObjectNode_ordering()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_ObjectNode_ordering()
 {
 	return uML_ObjectNode_ordering;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_ObjectNode_selection()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_ObjectNode_selection()
 {
 	return uML_ObjectNode_selection;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_ObjectNode_selection_behavior()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_ObjectNode_selection_behavior()
 {
 	return uML_ObjectNode_selection_behavior;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_ObjectNode_upperBound()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_ObjectNode_upperBound()
 {
 	return uML_ObjectNode_upperBound;
 }
-std::shared_ptr<uml::Class> UMLPackageImpl::get_UML_Observation()
+const std::shared_ptr<uml::Class>& UMLPackageImpl::get_UML_Observation()
 {
 	return uML_Observation;
 }
-std::shared_ptr<uml::Class> UMLPackageImpl::get_UML_OccurrenceSpecification()
+const std::shared_ptr<uml::Class>& UMLPackageImpl::get_UML_OccurrenceSpecification()
 {
 	return uML_OccurrenceSpecification;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_OccurrenceSpecification_covered()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_OccurrenceSpecification_covered()
 {
 	return uML_OccurrenceSpecification_covered;
 }
-std::shared_ptr<uml::Operation> UMLPackageImpl::get_UML_OccurrenceSpecification_getCovered__()
+const std::shared_ptr<uml::Operation>& UMLPackageImpl::get_UML_OccurrenceSpecification_getCovered__()
 {
 	return uML_OccurrenceSpecification_getCovered__;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_OccurrenceSpecification_getCovered__return()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_OccurrenceSpecification_getCovered__return()
 {
 	return uML_OccurrenceSpecification_getCovered__return;
 }
-std::shared_ptr<uml::Operation> UMLPackageImpl::get_UML_OccurrenceSpecification_setCovered_Lifeline_Lifeline()
+const std::shared_ptr<uml::Operation>& UMLPackageImpl::get_UML_OccurrenceSpecification_setCovered_Lifeline_Lifeline()
 {
 	return uML_OccurrenceSpecification_setCovered_Lifeline_Lifeline;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_OccurrenceSpecification_setCovered_Lifeline_Lifeline_value()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_OccurrenceSpecification_setCovered_Lifeline_Lifeline_value()
 {
 	return uML_OccurrenceSpecification_setCovered_Lifeline_Lifeline_value;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_OccurrenceSpecification_toAfter()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_OccurrenceSpecification_toAfter()
 {
 	return uML_OccurrenceSpecification_toAfter;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_OccurrenceSpecification_toBefore()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_OccurrenceSpecification_toBefore()
 {
 	return uML_OccurrenceSpecification_toBefore;
 }
-std::shared_ptr<uml::Class> UMLPackageImpl::get_UML_OpaqueAction()
+const std::shared_ptr<uml::Class>& UMLPackageImpl::get_UML_OpaqueAction()
 {
 	return uML_OpaqueAction;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_OpaqueAction_body()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_OpaqueAction_body()
 {
 	return uML_OpaqueAction_body;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_OpaqueAction_inputValue()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_OpaqueAction_inputValue()
 {
 	return uML_OpaqueAction_inputValue;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_OpaqueAction_language()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_OpaqueAction_language()
 {
 	return uML_OpaqueAction_language;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_OpaqueAction_language_body_size()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_OpaqueAction_language_body_size()
 {
 	return uML_OpaqueAction_language_body_size;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_OpaqueAction_outputValue()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_OpaqueAction_outputValue()
 {
 	return uML_OpaqueAction_outputValue;
 }
-std::shared_ptr<uml::Class> UMLPackageImpl::get_UML_OpaqueBehavior()
+const std::shared_ptr<uml::Class>& UMLPackageImpl::get_UML_OpaqueBehavior()
 {
 	return uML_OpaqueBehavior;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_OpaqueBehavior_body()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_OpaqueBehavior_body()
 {
 	return uML_OpaqueBehavior_body;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_OpaqueBehavior_language()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_OpaqueBehavior_language()
 {
 	return uML_OpaqueBehavior_language;
 }
-std::shared_ptr<uml::Class> UMLPackageImpl::get_UML_OpaqueExpression()
+const std::shared_ptr<uml::Class>& UMLPackageImpl::get_UML_OpaqueExpression()
 {
 	return uML_OpaqueExpression;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_OpaqueExpression_behavior()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_OpaqueExpression_behavior()
 {
 	return uML_OpaqueExpression_behavior;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_OpaqueExpression_body()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_OpaqueExpression_body()
 {
 	return uML_OpaqueExpression_body;
 }
-std::shared_ptr<uml::Operation> UMLPackageImpl::get_UML_OpaqueExpression_isIntegral__()
+const std::shared_ptr<uml::Operation>& UMLPackageImpl::get_UML_OpaqueExpression_isIntegral__()
 {
 	return uML_OpaqueExpression_isIntegral__;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_OpaqueExpression_isIntegral_result()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_OpaqueExpression_isIntegral_result()
 {
 	return uML_OpaqueExpression_isIntegral_result;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_OpaqueExpression_isIntegral_spec()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_OpaqueExpression_isIntegral_spec()
 {
 	return uML_OpaqueExpression_isIntegral_spec;
 }
-std::shared_ptr<uml::Operation> UMLPackageImpl::get_UML_OpaqueExpression_isNonNegative__()
+const std::shared_ptr<uml::Operation>& UMLPackageImpl::get_UML_OpaqueExpression_isNonNegative__()
 {
 	return uML_OpaqueExpression_isNonNegative__;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_OpaqueExpression_isNonNegative_pre()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_OpaqueExpression_isNonNegative_pre()
 {
 	return uML_OpaqueExpression_isNonNegative_pre;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_OpaqueExpression_isNonNegative_result()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_OpaqueExpression_isNonNegative_result()
 {
 	return uML_OpaqueExpression_isNonNegative_result;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_OpaqueExpression_isNonNegative_spec()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_OpaqueExpression_isNonNegative_spec()
 {
 	return uML_OpaqueExpression_isNonNegative_spec;
 }
-std::shared_ptr<uml::Operation> UMLPackageImpl::get_UML_OpaqueExpression_isPositive__()
+const std::shared_ptr<uml::Operation>& UMLPackageImpl::get_UML_OpaqueExpression_isPositive__()
 {
 	return uML_OpaqueExpression_isPositive__;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_OpaqueExpression_isPositive_pre()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_OpaqueExpression_isPositive_pre()
 {
 	return uML_OpaqueExpression_isPositive_pre;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_OpaqueExpression_isPositive_result()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_OpaqueExpression_isPositive_result()
 {
 	return uML_OpaqueExpression_isPositive_result;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_OpaqueExpression_isPositive_spec()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_OpaqueExpression_isPositive_spec()
 {
 	return uML_OpaqueExpression_isPositive_spec;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_OpaqueExpression_language()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_OpaqueExpression_language()
 {
 	return uML_OpaqueExpression_language;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_OpaqueExpression_language_body_size()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_OpaqueExpression_language_body_size()
 {
 	return uML_OpaqueExpression_language_body_size;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_OpaqueExpression_one_return_result_parameter()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_OpaqueExpression_one_return_result_parameter()
 {
 	return uML_OpaqueExpression_one_return_result_parameter;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_OpaqueExpression_only_return_result_parameters()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_OpaqueExpression_only_return_result_parameters()
 {
 	return uML_OpaqueExpression_only_return_result_parameters;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_OpaqueExpression_result()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_OpaqueExpression_result()
 {
 	return uML_OpaqueExpression_result;
 }
-std::shared_ptr<uml::Operation> UMLPackageImpl::get_UML_OpaqueExpression_result__()
+const std::shared_ptr<uml::Operation>& UMLPackageImpl::get_UML_OpaqueExpression_result__()
 {
 	return uML_OpaqueExpression_result__;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_OpaqueExpression_result_result()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_OpaqueExpression_result_result()
 {
 	return uML_OpaqueExpression_result_result;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_OpaqueExpression_result_spec()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_OpaqueExpression_result_spec()
 {
 	return uML_OpaqueExpression_result_spec;
 }
-std::shared_ptr<uml::Operation> UMLPackageImpl::get_UML_OpaqueExpression_stringValue__()
+const std::shared_ptr<uml::Operation>& UMLPackageImpl::get_UML_OpaqueExpression_stringValue__()
 {
 	return uML_OpaqueExpression_stringValue__;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_OpaqueExpression_stringValue__return()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_OpaqueExpression_stringValue__return()
 {
 	return uML_OpaqueExpression_stringValue__return;
 }
-std::shared_ptr<uml::Operation> UMLPackageImpl::get_UML_OpaqueExpression_value__()
+const std::shared_ptr<uml::Operation>& UMLPackageImpl::get_UML_OpaqueExpression_value__()
 {
 	return uML_OpaqueExpression_value__;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_OpaqueExpression_value_pre()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_OpaqueExpression_value_pre()
 {
 	return uML_OpaqueExpression_value_pre;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_OpaqueExpression_value_result()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_OpaqueExpression_value_result()
 {
 	return uML_OpaqueExpression_value_result;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_OpaqueExpression_value_spec()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_OpaqueExpression_value_spec()
 {
 	return uML_OpaqueExpression_value_spec;
 }
-std::shared_ptr<uml::Class> UMLPackageImpl::get_UML_Operation()
+const std::shared_ptr<uml::Class>& UMLPackageImpl::get_UML_Operation()
 {
 	return uML_Operation;
 }
-std::shared_ptr<uml::Class> UMLPackageImpl::get_UML_OperationTemplateParameter()
+const std::shared_ptr<uml::Class>& UMLPackageImpl::get_UML_OperationTemplateParameter()
 {
 	return uML_OperationTemplateParameter;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_OperationTemplateParameter_match_default_signature()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_OperationTemplateParameter_match_default_signature()
 {
 	return uML_OperationTemplateParameter_match_default_signature;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_OperationTemplateParameter_parameteredElement()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_OperationTemplateParameter_parameteredElement()
 {
 	return uML_OperationTemplateParameter_parameteredElement;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_Operation_at_most_one_return()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_Operation_at_most_one_return()
 {
 	return uML_Operation_at_most_one_return;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_Operation_bodyCondition()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_Operation_bodyCondition()
 {
 	return uML_Operation_bodyCondition;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_Operation_class()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_Operation_class()
 {
 	return uML_Operation_class;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_Operation_datatype()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_Operation_datatype()
 {
 	return uML_Operation_datatype;
 }
-std::shared_ptr<uml::Operation> UMLPackageImpl::get_UML_Operation_getReturnResult__()
+const std::shared_ptr<uml::Operation>& UMLPackageImpl::get_UML_Operation_getReturnResult__()
 {
 	return uML_Operation_getReturnResult__;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_Operation_getReturnResult__return()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_Operation_getReturnResult__return()
 {
 	return uML_Operation_getReturnResult__return;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_Operation_interface()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_Operation_interface()
 {
 	return uML_Operation_interface;
 }
-std::shared_ptr<uml::Operation> UMLPackageImpl::get_UML_Operation_isConsistentWith_RedefinableElement_RedefinableElement()
+const std::shared_ptr<uml::Operation>& UMLPackageImpl::get_UML_Operation_isConsistentWith_RedefinableElement_RedefinableElement()
 {
 	return uML_Operation_isConsistentWith_RedefinableElement_RedefinableElement;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_Operation_isConsistentWith_RedefinableElement_RedefinableElement_redefiningElement()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_Operation_isConsistentWith_RedefinableElement_RedefinableElement_redefiningElement()
 {
 	return uML_Operation_isConsistentWith_RedefinableElement_RedefinableElement_redefiningElement;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_Operation_isConsistentWith_pre()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_Operation_isConsistentWith_pre()
 {
 	return uML_Operation_isConsistentWith_pre;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_Operation_isConsistentWith_result()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_Operation_isConsistentWith_result()
 {
 	return uML_Operation_isConsistentWith_result;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_Operation_isConsistentWith_spec()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_Operation_isConsistentWith_spec()
 {
 	return uML_Operation_isConsistentWith_spec;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_Operation_isOrdered()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_Operation_isOrdered()
 {
 	return uML_Operation_isOrdered;
 }
-std::shared_ptr<uml::Operation> UMLPackageImpl::get_UML_Operation_isOrdered__()
+const std::shared_ptr<uml::Operation>& UMLPackageImpl::get_UML_Operation_isOrdered__()
 {
 	return uML_Operation_isOrdered__;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_Operation_isOrdered_result()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_Operation_isOrdered_result()
 {
 	return uML_Operation_isOrdered_result;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_Operation_isOrdered_spec()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_Operation_isOrdered_spec()
 {
 	return uML_Operation_isOrdered_spec;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_Operation_isQuery()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_Operation_isQuery()
 {
 	return uML_Operation_isQuery;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_Operation_isUnique()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_Operation_isUnique()
 {
 	return uML_Operation_isUnique;
 }
-std::shared_ptr<uml::Operation> UMLPackageImpl::get_UML_Operation_isUnique__()
+const std::shared_ptr<uml::Operation>& UMLPackageImpl::get_UML_Operation_isUnique__()
 {
 	return uML_Operation_isUnique__;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_Operation_isUnique_result()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_Operation_isUnique_result()
 {
 	return uML_Operation_isUnique_result;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_Operation_isUnique_spec()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_Operation_isUnique_spec()
 {
 	return uML_Operation_isUnique_spec;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_Operation_lower()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_Operation_lower()
 {
 	return uML_Operation_lower;
 }
-std::shared_ptr<uml::Operation> UMLPackageImpl::get_UML_Operation_lower__()
+const std::shared_ptr<uml::Operation>& UMLPackageImpl::get_UML_Operation_lower__()
 {
 	return uML_Operation_lower__;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_Operation_lower_result()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_Operation_lower_result()
 {
 	return uML_Operation_lower_result;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_Operation_lower_spec()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_Operation_lower_spec()
 {
 	return uML_Operation_lower_spec;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_Operation_only_body_for_query()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_Operation_only_body_for_query()
 {
 	return uML_Operation_only_body_for_query;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_Operation_ownedParameter()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_Operation_ownedParameter()
 {
 	return uML_Operation_ownedParameter;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_Operation_postcondition()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_Operation_postcondition()
 {
 	return uML_Operation_postcondition;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_Operation_precondition()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_Operation_precondition()
 {
 	return uML_Operation_precondition;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_Operation_raisedException()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_Operation_raisedException()
 {
 	return uML_Operation_raisedException;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_Operation_redefinedOperation()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_Operation_redefinedOperation()
 {
 	return uML_Operation_redefinedOperation;
 }
-std::shared_ptr<uml::Operation> UMLPackageImpl::get_UML_Operation_returnResult__()
+const std::shared_ptr<uml::Operation>& UMLPackageImpl::get_UML_Operation_returnResult__()
 {
 	return uML_Operation_returnResult__;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_Operation_returnResult_result()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_Operation_returnResult_result()
 {
 	return uML_Operation_returnResult_result;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_Operation_returnResult_spec()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_Operation_returnResult_spec()
 {
 	return uML_Operation_returnResult_spec;
 }
-std::shared_ptr<uml::Operation> UMLPackageImpl::get_UML_Operation_setIsOrdered_Boolean_Boolean()
+const std::shared_ptr<uml::Operation>& UMLPackageImpl::get_UML_Operation_setIsOrdered_Boolean_Boolean()
 {
 	return uML_Operation_setIsOrdered_Boolean_Boolean;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_Operation_setIsOrdered_Boolean_Boolean_newIsOrdered()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_Operation_setIsOrdered_Boolean_Boolean_newIsOrdered()
 {
 	return uML_Operation_setIsOrdered_Boolean_Boolean_newIsOrdered;
 }
-std::shared_ptr<uml::Operation> UMLPackageImpl::get_UML_Operation_setIsUnique_Boolean_Boolean()
+const std::shared_ptr<uml::Operation>& UMLPackageImpl::get_UML_Operation_setIsUnique_Boolean_Boolean()
 {
 	return uML_Operation_setIsUnique_Boolean_Boolean;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_Operation_setIsUnique_Boolean_Boolean_newIsUnique()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_Operation_setIsUnique_Boolean_Boolean_newIsUnique()
 {
 	return uML_Operation_setIsUnique_Boolean_Boolean_newIsUnique;
 }
-std::shared_ptr<uml::Operation> UMLPackageImpl::get_UML_Operation_setLower_Integer_Integer()
+const std::shared_ptr<uml::Operation>& UMLPackageImpl::get_UML_Operation_setLower_Integer_Integer()
 {
 	return uML_Operation_setLower_Integer_Integer;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_Operation_setLower_Integer_Integer_newLower()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_Operation_setLower_Integer_Integer_newLower()
 {
 	return uML_Operation_setLower_Integer_Integer_newLower;
 }
-std::shared_ptr<uml::Operation> UMLPackageImpl::get_UML_Operation_setType_Type_Type()
+const std::shared_ptr<uml::Operation>& UMLPackageImpl::get_UML_Operation_setType_Type_Type()
 {
 	return uML_Operation_setType_Type_Type;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_Operation_setType_Type_Type_newType()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_Operation_setType_Type_Type_newType()
 {
 	return uML_Operation_setType_Type_Type_newType;
 }
-std::shared_ptr<uml::Operation> UMLPackageImpl::get_UML_Operation_setUpper_UnlimitedNatural_UnlimitedNatural()
+const std::shared_ptr<uml::Operation>& UMLPackageImpl::get_UML_Operation_setUpper_UnlimitedNatural_UnlimitedNatural()
 {
 	return uML_Operation_setUpper_UnlimitedNatural_UnlimitedNatural;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_Operation_setUpper_UnlimitedNatural_UnlimitedNatural_newUpper()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_Operation_setUpper_UnlimitedNatural_UnlimitedNatural_newUpper()
 {
 	return uML_Operation_setUpper_UnlimitedNatural_UnlimitedNatural_newUpper;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_Operation_templateParameter()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_Operation_templateParameter()
 {
 	return uML_Operation_templateParameter;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_Operation_type()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_Operation_type()
 {
 	return uML_Operation_type;
 }
-std::shared_ptr<uml::Operation> UMLPackageImpl::get_UML_Operation_type__()
+const std::shared_ptr<uml::Operation>& UMLPackageImpl::get_UML_Operation_type__()
 {
 	return uML_Operation_type__;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_Operation_type_result()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_Operation_type_result()
 {
 	return uML_Operation_type_result;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_Operation_type_spec()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_Operation_type_spec()
 {
 	return uML_Operation_type_spec;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_Operation_upper()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_Operation_upper()
 {
 	return uML_Operation_upper;
 }
-std::shared_ptr<uml::Operation> UMLPackageImpl::get_UML_Operation_upper__()
+const std::shared_ptr<uml::Operation>& UMLPackageImpl::get_UML_Operation_upper__()
 {
 	return uML_Operation_upper__;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_Operation_upper_result()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_Operation_upper_result()
 {
 	return uML_Operation_upper_result;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_Operation_upper_spec()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_Operation_upper_spec()
 {
 	return uML_Operation_upper_spec;
 }
-std::shared_ptr<uml::Class> UMLPackageImpl::get_UML_OutputPin()
+const std::shared_ptr<uml::Class>& UMLPackageImpl::get_UML_OutputPin()
 {
 	return uML_OutputPin;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_OutputPin_incoming_edges_structured_only()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_OutputPin_incoming_edges_structured_only()
 {
 	return uML_OutputPin_incoming_edges_structured_only;
 }
-std::shared_ptr<uml::Class> UMLPackageImpl::get_UML_Package()
+const std::shared_ptr<uml::Class>& UMLPackageImpl::get_UML_Package()
 {
 	return uML_Package;
 }
-std::shared_ptr<uml::Class> UMLPackageImpl::get_UML_PackageImport()
+const std::shared_ptr<uml::Class>& UMLPackageImpl::get_UML_PackageImport()
 {
 	return uML_PackageImport;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_PackageImport_importedPackage()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_PackageImport_importedPackage()
 {
 	return uML_PackageImport_importedPackage;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_PackageImport_importingNamespace()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_PackageImport_importingNamespace()
 {
 	return uML_PackageImport_importingNamespace;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_PackageImport_public_or_private()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_PackageImport_public_or_private()
 {
 	return uML_PackageImport_public_or_private;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_PackageImport_visibility()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_PackageImport_visibility()
 {
 	return uML_PackageImport_visibility;
 }
-std::shared_ptr<uml::Class> UMLPackageImpl::get_UML_PackageMerge()
+const std::shared_ptr<uml::Class>& UMLPackageImpl::get_UML_PackageMerge()
 {
 	return uML_PackageMerge;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_PackageMerge_mergedPackage()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_PackageMerge_mergedPackage()
 {
 	return uML_PackageMerge_mergedPackage;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_PackageMerge_receivingPackage()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_PackageMerge_receivingPackage()
 {
 	return uML_PackageMerge_receivingPackage;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_Package_URI()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_Package_URI()
 {
 	return uML_Package_URI;
 }
-std::shared_ptr<uml::Operation> UMLPackageImpl::get_UML_Package_allApplicableStereotypes__()
+const std::shared_ptr<uml::Operation>& UMLPackageImpl::get_UML_Package_allApplicableStereotypes__()
 {
 	return uML_Package_allApplicableStereotypes__;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_Package_allApplicableStereotypes_result()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_Package_allApplicableStereotypes_result()
 {
 	return uML_Package_allApplicableStereotypes_result;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_Package_allApplicableStereotypes_spec()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_Package_allApplicableStereotypes_spec()
 {
 	return uML_Package_allApplicableStereotypes_spec;
 }
-std::shared_ptr<uml::Operation> UMLPackageImpl::get_UML_Package_applyProfile_Profile_Profile()
+const std::shared_ptr<uml::Operation>& UMLPackageImpl::get_UML_Package_applyProfile_Profile_Profile()
 {
 	return uML_Package_applyProfile_Profile_Profile;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_Package_applyProfile_Profile_Profile_profile()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_Package_applyProfile_Profile_Profile_profile()
 {
 	return uML_Package_applyProfile_Profile_Profile_profile;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_Package_applyProfile_Profile_Profilereturn()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_Package_applyProfile_Profile_Profilereturn()
 {
 	return uML_Package_applyProfile_Profile_Profilereturn;
 }
-std::shared_ptr<uml::Operation> UMLPackageImpl::get_UML_Package_containingProfile__()
+const std::shared_ptr<uml::Operation>& UMLPackageImpl::get_UML_Package_containingProfile__()
 {
 	return uML_Package_containingProfile__;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_Package_containingProfile_result()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_Package_containingProfile_result()
 {
 	return uML_Package_containingProfile_result;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_Package_containingProfile_spec()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_Package_containingProfile_spec()
 {
 	return uML_Package_containingProfile_spec;
 }
-std::shared_ptr<uml::Operation> UMLPackageImpl::get_UML_Package_createOwnedClass_String_Boolean_String_Boolean()
+const std::shared_ptr<uml::Operation>& UMLPackageImpl::get_UML_Package_createOwnedClass_String_Boolean_String_Boolean()
 {
 	return uML_Package_createOwnedClass_String_Boolean_String_Boolean;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_Package_createOwnedClass_String_Boolean_String_Boolean_isAbstract()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_Package_createOwnedClass_String_Boolean_String_Boolean_isAbstract()
 {
 	return uML_Package_createOwnedClass_String_Boolean_String_Boolean_isAbstract;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_Package_createOwnedClass_String_Boolean_String_Boolean_name()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_Package_createOwnedClass_String_Boolean_String_Boolean_name()
 {
 	return uML_Package_createOwnedClass_String_Boolean_String_Boolean_name;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_Package_createOwnedClass_String_Boolean_String_Booleanreturn()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_Package_createOwnedClass_String_Boolean_String_Booleanreturn()
 {
 	return uML_Package_createOwnedClass_String_Boolean_String_Booleanreturn;
 }
-std::shared_ptr<uml::Operation> UMLPackageImpl::get_UML_Package_createOwnedEnumeration_String_String()
+const std::shared_ptr<uml::Operation>& UMLPackageImpl::get_UML_Package_createOwnedEnumeration_String_String()
 {
 	return uML_Package_createOwnedEnumeration_String_String;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_Package_createOwnedEnumeration_String_String_name()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_Package_createOwnedEnumeration_String_String_name()
 {
 	return uML_Package_createOwnedEnumeration_String_String_name;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_Package_createOwnedEnumeration_String_Stringreturn()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_Package_createOwnedEnumeration_String_Stringreturn()
 {
 	return uML_Package_createOwnedEnumeration_String_Stringreturn;
 }
-std::shared_ptr<uml::Operation> UMLPackageImpl::get_UML_Package_createOwnedInterface_String_String()
+const std::shared_ptr<uml::Operation>& UMLPackageImpl::get_UML_Package_createOwnedInterface_String_String()
 {
 	return uML_Package_createOwnedInterface_String_String;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_Package_createOwnedInterface_String_String_name()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_Package_createOwnedInterface_String_String_name()
 {
 	return uML_Package_createOwnedInterface_String_String_name;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_Package_createOwnedInterface_String_Stringreturn()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_Package_createOwnedInterface_String_Stringreturn()
 {
 	return uML_Package_createOwnedInterface_String_Stringreturn;
 }
-std::shared_ptr<uml::Operation> UMLPackageImpl::get_UML_Package_createOwnedPrimitiveType_String_String()
+const std::shared_ptr<uml::Operation>& UMLPackageImpl::get_UML_Package_createOwnedPrimitiveType_String_String()
 {
 	return uML_Package_createOwnedPrimitiveType_String_String;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_Package_createOwnedPrimitiveType_String_String_name()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_Package_createOwnedPrimitiveType_String_String_name()
 {
 	return uML_Package_createOwnedPrimitiveType_String_String_name;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_Package_createOwnedPrimitiveType_String_Stringreturn()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_Package_createOwnedPrimitiveType_String_Stringreturn()
 {
 	return uML_Package_createOwnedPrimitiveType_String_Stringreturn;
 }
-std::shared_ptr<uml::Operation> UMLPackageImpl::get_UML_Package_createOwnedStereotype_String_Boolean_String_Boolean()
+const std::shared_ptr<uml::Operation>& UMLPackageImpl::get_UML_Package_createOwnedStereotype_String_Boolean_String_Boolean()
 {
 	return uML_Package_createOwnedStereotype_String_Boolean_String_Boolean;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_Package_createOwnedStereotype_String_Boolean_String_Boolean_isAbstract()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_Package_createOwnedStereotype_String_Boolean_String_Boolean_isAbstract()
 {
 	return uML_Package_createOwnedStereotype_String_Boolean_String_Boolean_isAbstract;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_Package_createOwnedStereotype_String_Boolean_String_Boolean_name()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_Package_createOwnedStereotype_String_Boolean_String_Boolean_name()
 {
 	return uML_Package_createOwnedStereotype_String_Boolean_String_Boolean_name;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_Package_createOwnedStereotype_String_Boolean_String_Booleanreturn()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_Package_createOwnedStereotype_String_Boolean_String_Booleanreturn()
 {
 	return uML_Package_createOwnedStereotype_String_Boolean_String_Booleanreturn;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_Package_elements_public_or_private()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_Package_elements_public_or_private()
 {
 	return uML_Package_elements_public_or_private;
 }
-std::shared_ptr<uml::Operation> UMLPackageImpl::get_UML_Package_getAllAppliedProfiles__()
+const std::shared_ptr<uml::Operation>& UMLPackageImpl::get_UML_Package_getAllAppliedProfiles__()
 {
 	return uML_Package_getAllAppliedProfiles__;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_Package_getAllAppliedProfiles__return()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_Package_getAllAppliedProfiles__return()
 {
 	return uML_Package_getAllAppliedProfiles__return;
 }
-std::shared_ptr<uml::Operation> UMLPackageImpl::get_UML_Package_getAllProfileApplications__()
+const std::shared_ptr<uml::Operation>& UMLPackageImpl::get_UML_Package_getAllProfileApplications__()
 {
 	return uML_Package_getAllProfileApplications__;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_Package_getAllProfileApplications__return()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_Package_getAllProfileApplications__return()
 {
 	return uML_Package_getAllProfileApplications__return;
 }
-std::shared_ptr<uml::Operation> UMLPackageImpl::get_UML_Package_getAppliedProfile_String_Boolean_String_Boolean()
+const std::shared_ptr<uml::Operation>& UMLPackageImpl::get_UML_Package_getAppliedProfile_String_Boolean_String_Boolean()
 {
 	return uML_Package_getAppliedProfile_String_Boolean_String_Boolean;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_Package_getAppliedProfile_String_Boolean_String_Boolean_qualifiedName()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_Package_getAppliedProfile_String_Boolean_String_Boolean_qualifiedName()
 {
 	return uML_Package_getAppliedProfile_String_Boolean_String_Boolean_qualifiedName;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_Package_getAppliedProfile_String_Boolean_String_Boolean_recurse()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_Package_getAppliedProfile_String_Boolean_String_Boolean_recurse()
 {
 	return uML_Package_getAppliedProfile_String_Boolean_String_Boolean_recurse;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_Package_getAppliedProfile_String_Boolean_String_Booleanreturn()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_Package_getAppliedProfile_String_Boolean_String_Booleanreturn()
 {
 	return uML_Package_getAppliedProfile_String_Boolean_String_Booleanreturn;
 }
-std::shared_ptr<uml::Operation> UMLPackageImpl::get_UML_Package_getAppliedProfile_String_String()
+const std::shared_ptr<uml::Operation>& UMLPackageImpl::get_UML_Package_getAppliedProfile_String_String()
 {
 	return uML_Package_getAppliedProfile_String_String;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_Package_getAppliedProfile_String_String_qualifiedName()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_Package_getAppliedProfile_String_String_qualifiedName()
 {
 	return uML_Package_getAppliedProfile_String_String_qualifiedName;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_Package_getAppliedProfile_String_Stringreturn()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_Package_getAppliedProfile_String_Stringreturn()
 {
 	return uML_Package_getAppliedProfile_String_Stringreturn;
 }
-std::shared_ptr<uml::Operation> UMLPackageImpl::get_UML_Package_getAppliedProfiles__()
+const std::shared_ptr<uml::Operation>& UMLPackageImpl::get_UML_Package_getAppliedProfiles__()
 {
 	return uML_Package_getAppliedProfiles__;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_Package_getAppliedProfiles__return()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_Package_getAppliedProfiles__return()
 {
 	return uML_Package_getAppliedProfiles__return;
 }
-std::shared_ptr<uml::Operation> UMLPackageImpl::get_UML_Package_getProfileApplication_Profile_Boolean_Profile_Boolean()
+const std::shared_ptr<uml::Operation>& UMLPackageImpl::get_UML_Package_getProfileApplication_Profile_Boolean_Profile_Boolean()
 {
 	return uML_Package_getProfileApplication_Profile_Boolean_Profile_Boolean;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_Package_getProfileApplication_Profile_Boolean_Profile_Boolean_profile()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_Package_getProfileApplication_Profile_Boolean_Profile_Boolean_profile()
 {
 	return uML_Package_getProfileApplication_Profile_Boolean_Profile_Boolean_profile;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_Package_getProfileApplication_Profile_Boolean_Profile_Boolean_recurse()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_Package_getProfileApplication_Profile_Boolean_Profile_Boolean_recurse()
 {
 	return uML_Package_getProfileApplication_Profile_Boolean_Profile_Boolean_recurse;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_Package_getProfileApplication_Profile_Boolean_Profile_Booleanreturn()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_Package_getProfileApplication_Profile_Boolean_Profile_Booleanreturn()
 {
 	return uML_Package_getProfileApplication_Profile_Boolean_Profile_Booleanreturn;
 }
-std::shared_ptr<uml::Operation> UMLPackageImpl::get_UML_Package_getProfileApplication_Profile_Profile()
+const std::shared_ptr<uml::Operation>& UMLPackageImpl::get_UML_Package_getProfileApplication_Profile_Profile()
 {
 	return uML_Package_getProfileApplication_Profile_Profile;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_Package_getProfileApplication_Profile_Profile_profile()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_Package_getProfileApplication_Profile_Profile_profile()
 {
 	return uML_Package_getProfileApplication_Profile_Profile_profile;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_Package_getProfileApplication_Profile_Profilereturn()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_Package_getProfileApplication_Profile_Profilereturn()
 {
 	return uML_Package_getProfileApplication_Profile_Profilereturn;
 }
-std::shared_ptr<uml::Operation> UMLPackageImpl::get_UML_Package_isModelLibrary__()
+const std::shared_ptr<uml::Operation>& UMLPackageImpl::get_UML_Package_isModelLibrary__()
 {
 	return uML_Package_isModelLibrary__;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_Package_isModelLibrary__return()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_Package_isModelLibrary__return()
 {
 	return uML_Package_isModelLibrary__return;
 }
-std::shared_ptr<uml::Operation> UMLPackageImpl::get_UML_Package_isProfileApplied_Profile_Profile()
+const std::shared_ptr<uml::Operation>& UMLPackageImpl::get_UML_Package_isProfileApplied_Profile_Profile()
 {
 	return uML_Package_isProfileApplied_Profile_Profile;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_Package_isProfileApplied_Profile_Profile_profile()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_Package_isProfileApplied_Profile_Profile_profile()
 {
 	return uML_Package_isProfileApplied_Profile_Profile_profile;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_Package_isProfileApplied_Profile_Profilereturn()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_Package_isProfileApplied_Profile_Profilereturn()
 {
 	return uML_Package_isProfileApplied_Profile_Profilereturn;
 }
-std::shared_ptr<uml::Operation> UMLPackageImpl::get_UML_Package_makesVisible_NamedElement_NamedElement()
+const std::shared_ptr<uml::Operation>& UMLPackageImpl::get_UML_Package_makesVisible_NamedElement_NamedElement()
 {
 	return uML_Package_makesVisible_NamedElement_NamedElement;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_Package_makesVisible_NamedElement_NamedElement_el()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_Package_makesVisible_NamedElement_NamedElement_el()
 {
 	return uML_Package_makesVisible_NamedElement_NamedElement_el;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_Package_makesVisible_pre()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_Package_makesVisible_pre()
 {
 	return uML_Package_makesVisible_pre;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_Package_makesVisible_result()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_Package_makesVisible_result()
 {
 	return uML_Package_makesVisible_result;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_Package_makesVisible_spec()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_Package_makesVisible_spec()
 {
 	return uML_Package_makesVisible_spec;
 }
-std::shared_ptr<uml::Operation> UMLPackageImpl::get_UML_Package_mustBeOwned__()
+const std::shared_ptr<uml::Operation>& UMLPackageImpl::get_UML_Package_mustBeOwned__()
 {
 	return uML_Package_mustBeOwned__;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_Package_mustBeOwned_result()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_Package_mustBeOwned_result()
 {
 	return uML_Package_mustBeOwned_result;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_Package_mustBeOwned_spec()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_Package_mustBeOwned_spec()
 {
 	return uML_Package_mustBeOwned_spec;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_Package_nestedPackage()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_Package_nestedPackage()
 {
 	return uML_Package_nestedPackage;
 }
-std::shared_ptr<uml::Operation> UMLPackageImpl::get_UML_Package_nestedPackage__()
+const std::shared_ptr<uml::Operation>& UMLPackageImpl::get_UML_Package_nestedPackage__()
 {
 	return uML_Package_nestedPackage__;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_Package_nestedPackage_result()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_Package_nestedPackage_result()
 {
 	return uML_Package_nestedPackage_result;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_Package_nestedPackage_spec()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_Package_nestedPackage_spec()
 {
 	return uML_Package_nestedPackage_spec;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_Package_nestingPackage()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_Package_nestingPackage()
 {
 	return uML_Package_nestingPackage;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_Package_ownedStereotype()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_Package_ownedStereotype()
 {
 	return uML_Package_ownedStereotype;
 }
-std::shared_ptr<uml::Operation> UMLPackageImpl::get_UML_Package_ownedStereotype__()
+const std::shared_ptr<uml::Operation>& UMLPackageImpl::get_UML_Package_ownedStereotype__()
 {
 	return uML_Package_ownedStereotype__;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_Package_ownedStereotype_result()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_Package_ownedStereotype_result()
 {
 	return uML_Package_ownedStereotype_result;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_Package_ownedStereotype_spec()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_Package_ownedStereotype_spec()
 {
 	return uML_Package_ownedStereotype_spec;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_Package_ownedType()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_Package_ownedType()
 {
 	return uML_Package_ownedType;
 }
-std::shared_ptr<uml::Operation> UMLPackageImpl::get_UML_Package_ownedType__()
+const std::shared_ptr<uml::Operation>& UMLPackageImpl::get_UML_Package_ownedType__()
 {
 	return uML_Package_ownedType__;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_Package_ownedType_result()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_Package_ownedType_result()
 {
 	return uML_Package_ownedType_result;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_Package_ownedType_spec()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_Package_ownedType_spec()
 {
 	return uML_Package_ownedType_spec;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_Package_packageMerge()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_Package_packageMerge()
 {
 	return uML_Package_packageMerge;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_Package_packagedElement()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_Package_packagedElement()
 {
 	return uML_Package_packagedElement;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_Package_profileApplication()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_Package_profileApplication()
 {
 	return uML_Package_profileApplication;
 }
-std::shared_ptr<uml::Operation> UMLPackageImpl::get_UML_Package_unapplyProfile_Profile_Profile()
+const std::shared_ptr<uml::Operation>& UMLPackageImpl::get_UML_Package_unapplyProfile_Profile_Profile()
 {
 	return uML_Package_unapplyProfile_Profile_Profile;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_Package_unapplyProfile_Profile_Profile_profile()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_Package_unapplyProfile_Profile_Profile_profile()
 {
 	return uML_Package_unapplyProfile_Profile_Profile_profile;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_Package_unapplyProfile_Profile_Profilereturn()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_Package_unapplyProfile_Profile_Profilereturn()
 {
 	return uML_Package_unapplyProfile_Profile_Profilereturn;
 }
-std::shared_ptr<uml::Operation> UMLPackageImpl::get_UML_Package_visibleMembers__()
+const std::shared_ptr<uml::Operation>& UMLPackageImpl::get_UML_Package_visibleMembers__()
 {
 	return uML_Package_visibleMembers__;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_Package_visibleMembers_result()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_Package_visibleMembers_result()
 {
 	return uML_Package_visibleMembers_result;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_Package_visibleMembers_spec()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_Package_visibleMembers_spec()
 {
 	return uML_Package_visibleMembers_spec;
 }
-std::shared_ptr<uml::Class> UMLPackageImpl::get_UML_PackageableElement()
+const std::shared_ptr<uml::Class>& UMLPackageImpl::get_UML_PackageableElement()
 {
 	return uML_PackageableElement;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_PackageableElement_namespace_needs_visibility()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_PackageableElement_namespace_needs_visibility()
 {
 	return uML_PackageableElement_namespace_needs_visibility;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_PackageableElement_visibility()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_PackageableElement_visibility()
 {
 	return uML_PackageableElement_visibility;
 }
-std::shared_ptr<uml::Class> UMLPackageImpl::get_UML_Parameter()
+const std::shared_ptr<uml::Class>& UMLPackageImpl::get_UML_Parameter()
 {
 	return uML_Parameter;
 }
-std::shared_ptr<uml::Enumeration> UMLPackageImpl::get_UML_ParameterDirectionKind()
+const std::shared_ptr<uml::Enumeration>& UMLPackageImpl::get_UML_ParameterDirectionKind()
 {
 	return uML_ParameterDirectionKind;
 }
-std::shared_ptr<uml::EnumerationLiteral> UMLPackageImpl::get_UML_ParameterDirectionKind_in()
+const std::shared_ptr<uml::EnumerationLiteral>& UMLPackageImpl::get_UML_ParameterDirectionKind_in()
 {
 	return uML_ParameterDirectionKind_in;
 }
-std::shared_ptr<uml::EnumerationLiteral> UMLPackageImpl::get_UML_ParameterDirectionKind_inout()
+const std::shared_ptr<uml::EnumerationLiteral>& UMLPackageImpl::get_UML_ParameterDirectionKind_inout()
 {
 	return uML_ParameterDirectionKind_inout;
 }
-std::shared_ptr<uml::EnumerationLiteral> UMLPackageImpl::get_UML_ParameterDirectionKind_out()
+const std::shared_ptr<uml::EnumerationLiteral>& UMLPackageImpl::get_UML_ParameterDirectionKind_out()
 {
 	return uML_ParameterDirectionKind_out;
 }
-std::shared_ptr<uml::EnumerationLiteral> UMLPackageImpl::get_UML_ParameterDirectionKind_return()
+const std::shared_ptr<uml::EnumerationLiteral>& UMLPackageImpl::get_UML_ParameterDirectionKind_return()
 {
 	return uML_ParameterDirectionKind_return;
 }
-std::shared_ptr<uml::Enumeration> UMLPackageImpl::get_UML_ParameterEffectKind()
+const std::shared_ptr<uml::Enumeration>& UMLPackageImpl::get_UML_ParameterEffectKind()
 {
 	return uML_ParameterEffectKind;
 }
-std::shared_ptr<uml::EnumerationLiteral> UMLPackageImpl::get_UML_ParameterEffectKind_create()
+const std::shared_ptr<uml::EnumerationLiteral>& UMLPackageImpl::get_UML_ParameterEffectKind_create()
 {
 	return uML_ParameterEffectKind_create;
 }
-std::shared_ptr<uml::EnumerationLiteral> UMLPackageImpl::get_UML_ParameterEffectKind_delete()
+const std::shared_ptr<uml::EnumerationLiteral>& UMLPackageImpl::get_UML_ParameterEffectKind_delete()
 {
 	return uML_ParameterEffectKind_delete;
 }
-std::shared_ptr<uml::EnumerationLiteral> UMLPackageImpl::get_UML_ParameterEffectKind_read()
+const std::shared_ptr<uml::EnumerationLiteral>& UMLPackageImpl::get_UML_ParameterEffectKind_read()
 {
 	return uML_ParameterEffectKind_read;
 }
-std::shared_ptr<uml::EnumerationLiteral> UMLPackageImpl::get_UML_ParameterEffectKind_update()
+const std::shared_ptr<uml::EnumerationLiteral>& UMLPackageImpl::get_UML_ParameterEffectKind_update()
 {
 	return uML_ParameterEffectKind_update;
 }
-std::shared_ptr<uml::Class> UMLPackageImpl::get_UML_ParameterSet()
+const std::shared_ptr<uml::Class>& UMLPackageImpl::get_UML_ParameterSet()
 {
 	return uML_ParameterSet;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_ParameterSet_condition()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_ParameterSet_condition()
 {
 	return uML_ParameterSet_condition;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_ParameterSet_input()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_ParameterSet_input()
 {
 	return uML_ParameterSet_input;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_ParameterSet_parameter()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_ParameterSet_parameter()
 {
 	return uML_ParameterSet_parameter;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_ParameterSet_same_parameterized_entity()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_ParameterSet_same_parameterized_entity()
 {
 	return uML_ParameterSet_same_parameterized_entity;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_ParameterSet_two_parameter_sets()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_ParameterSet_two_parameter_sets()
 {
 	return uML_ParameterSet_two_parameter_sets;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_Parameter_connector_end()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_Parameter_connector_end()
 {
 	return uML_Parameter_connector_end;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_Parameter_default()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_Parameter_default()
 {
 	return uML_Parameter_default;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_Parameter_defaultValue()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_Parameter_defaultValue()
 {
 	return uML_Parameter_defaultValue;
 }
-std::shared_ptr<uml::Operation> UMLPackageImpl::get_UML_Parameter_default__()
+const std::shared_ptr<uml::Operation>& UMLPackageImpl::get_UML_Parameter_default__()
 {
 	return uML_Parameter_default__;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_Parameter_default_result()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_Parameter_default_result()
 {
 	return uML_Parameter_default_result;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_Parameter_default_spec()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_Parameter_default_spec()
 {
 	return uML_Parameter_default_spec;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_Parameter_direction()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_Parameter_direction()
 {
 	return uML_Parameter_direction;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_Parameter_effect()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_Parameter_effect()
 {
 	return uML_Parameter_effect;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_Parameter_in_and_out()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_Parameter_in_and_out()
 {
 	return uML_Parameter_in_and_out;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_Parameter_isException()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_Parameter_isException()
 {
 	return uML_Parameter_isException;
 }
-std::shared_ptr<uml::Operation> UMLPackageImpl::get_UML_Parameter_isSetDefault__()
+const std::shared_ptr<uml::Operation>& UMLPackageImpl::get_UML_Parameter_isSetDefault__()
 {
 	return uML_Parameter_isSetDefault__;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_Parameter_isSetDefault__return()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_Parameter_isSetDefault__return()
 {
 	return uML_Parameter_isSetDefault__return;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_Parameter_isStream()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_Parameter_isStream()
 {
 	return uML_Parameter_isStream;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_Parameter_not_exception()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_Parameter_not_exception()
 {
 	return uML_Parameter_not_exception;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_Parameter_object_effect()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_Parameter_object_effect()
 {
 	return uML_Parameter_object_effect;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_Parameter_operation()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_Parameter_operation()
 {
 	return uML_Parameter_operation;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_Parameter_parameterSet()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_Parameter_parameterSet()
 {
 	return uML_Parameter_parameterSet;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_Parameter_reentrant_behaviors()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_Parameter_reentrant_behaviors()
 {
 	return uML_Parameter_reentrant_behaviors;
 }
-std::shared_ptr<uml::Operation> UMLPackageImpl::get_UML_Parameter_setBooleanDefaultValue_Boolean_Boolean()
+const std::shared_ptr<uml::Operation>& UMLPackageImpl::get_UML_Parameter_setBooleanDefaultValue_Boolean_Boolean()
 {
 	return uML_Parameter_setBooleanDefaultValue_Boolean_Boolean;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_Parameter_setBooleanDefaultValue_Boolean_Boolean_value()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_Parameter_setBooleanDefaultValue_Boolean_Boolean_value()
 {
 	return uML_Parameter_setBooleanDefaultValue_Boolean_Boolean_value;
 }
-std::shared_ptr<uml::Operation> UMLPackageImpl::get_UML_Parameter_setDefault_String_String()
+const std::shared_ptr<uml::Operation>& UMLPackageImpl::get_UML_Parameter_setDefault_String_String()
 {
 	return uML_Parameter_setDefault_String_String;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_Parameter_setDefault_String_String_newDefault()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_Parameter_setDefault_String_String_newDefault()
 {
 	return uML_Parameter_setDefault_String_String_newDefault;
 }
-std::shared_ptr<uml::Operation> UMLPackageImpl::get_UML_Parameter_setIntegerDefaultValue_Integer_Integer()
+const std::shared_ptr<uml::Operation>& UMLPackageImpl::get_UML_Parameter_setIntegerDefaultValue_Integer_Integer()
 {
 	return uML_Parameter_setIntegerDefaultValue_Integer_Integer;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_Parameter_setIntegerDefaultValue_Integer_Integer_value()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_Parameter_setIntegerDefaultValue_Integer_Integer_value()
 {
 	return uML_Parameter_setIntegerDefaultValue_Integer_Integer_value;
 }
-std::shared_ptr<uml::Operation> UMLPackageImpl::get_UML_Parameter_setNullDefaultValue__()
+const std::shared_ptr<uml::Operation>& UMLPackageImpl::get_UML_Parameter_setNullDefaultValue__()
 {
 	return uML_Parameter_setNullDefaultValue__;
 }
-std::shared_ptr<uml::Operation> UMLPackageImpl::get_UML_Parameter_setRealDefaultValue_Real_Real()
+const std::shared_ptr<uml::Operation>& UMLPackageImpl::get_UML_Parameter_setRealDefaultValue_Real_Real()
 {
 	return uML_Parameter_setRealDefaultValue_Real_Real;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_Parameter_setRealDefaultValue_Real_Real_value()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_Parameter_setRealDefaultValue_Real_Real_value()
 {
 	return uML_Parameter_setRealDefaultValue_Real_Real_value;
 }
-std::shared_ptr<uml::Operation> UMLPackageImpl::get_UML_Parameter_setStringDefaultValue_String_String()
+const std::shared_ptr<uml::Operation>& UMLPackageImpl::get_UML_Parameter_setStringDefaultValue_String_String()
 {
 	return uML_Parameter_setStringDefaultValue_String_String;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_Parameter_setStringDefaultValue_String_String_value()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_Parameter_setStringDefaultValue_String_String_value()
 {
 	return uML_Parameter_setStringDefaultValue_String_String_value;
 }
-std::shared_ptr<uml::Operation> UMLPackageImpl::get_UML_Parameter_setUnlimitedNaturalDefaultValue_UnlimitedNatural_UnlimitedNatural()
+const std::shared_ptr<uml::Operation>& UMLPackageImpl::get_UML_Parameter_setUnlimitedNaturalDefaultValue_UnlimitedNatural_UnlimitedNatural()
 {
 	return uML_Parameter_setUnlimitedNaturalDefaultValue_UnlimitedNatural_UnlimitedNatural;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_Parameter_setUnlimitedNaturalDefaultValue_UnlimitedNatural_UnlimitedNatural_value()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_Parameter_setUnlimitedNaturalDefaultValue_UnlimitedNatural_UnlimitedNatural_value()
 {
 	return uML_Parameter_setUnlimitedNaturalDefaultValue_UnlimitedNatural_UnlimitedNatural_value;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_Parameter_stream_and_exception()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_Parameter_stream_and_exception()
 {
 	return uML_Parameter_stream_and_exception;
 }
-std::shared_ptr<uml::Operation> UMLPackageImpl::get_UML_Parameter_unsetDefault__()
+const std::shared_ptr<uml::Operation>& UMLPackageImpl::get_UML_Parameter_unsetDefault__()
 {
 	return uML_Parameter_unsetDefault__;
 }
-std::shared_ptr<uml::Class> UMLPackageImpl::get_UML_ParameterableElement()
+const std::shared_ptr<uml::Class>& UMLPackageImpl::get_UML_ParameterableElement()
 {
 	return uML_ParameterableElement;
 }
-std::shared_ptr<uml::Operation> UMLPackageImpl::get_UML_ParameterableElement_isCompatibleWith_ParameterableElement_ParameterableElement()
+const std::shared_ptr<uml::Operation>& UMLPackageImpl::get_UML_ParameterableElement_isCompatibleWith_ParameterableElement_ParameterableElement()
 {
 	return uML_ParameterableElement_isCompatibleWith_ParameterableElement_ParameterableElement;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_ParameterableElement_isCompatibleWith_ParameterableElement_ParameterableElement_p()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_ParameterableElement_isCompatibleWith_ParameterableElement_ParameterableElement_p()
 {
 	return uML_ParameterableElement_isCompatibleWith_ParameterableElement_ParameterableElement_p;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_ParameterableElement_isCompatibleWith_result()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_ParameterableElement_isCompatibleWith_result()
 {
 	return uML_ParameterableElement_isCompatibleWith_result;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_ParameterableElement_isCompatibleWith_spec()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_ParameterableElement_isCompatibleWith_spec()
 {
 	return uML_ParameterableElement_isCompatibleWith_spec;
 }
-std::shared_ptr<uml::Operation> UMLPackageImpl::get_UML_ParameterableElement_isTemplateParameter__()
+const std::shared_ptr<uml::Operation>& UMLPackageImpl::get_UML_ParameterableElement_isTemplateParameter__()
 {
 	return uML_ParameterableElement_isTemplateParameter__;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_ParameterableElement_isTemplateParameter_result()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_ParameterableElement_isTemplateParameter_result()
 {
 	return uML_ParameterableElement_isTemplateParameter_result;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_ParameterableElement_isTemplateParameter_spec()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_ParameterableElement_isTemplateParameter_spec()
 {
 	return uML_ParameterableElement_isTemplateParameter_spec;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_ParameterableElement_owningTemplateParameter()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_ParameterableElement_owningTemplateParameter()
 {
 	return uML_ParameterableElement_owningTemplateParameter;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_ParameterableElement_templateParameter()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_ParameterableElement_templateParameter()
 {
 	return uML_ParameterableElement_templateParameter;
 }
-std::shared_ptr<uml::Class> UMLPackageImpl::get_UML_PartDecomposition()
+const std::shared_ptr<uml::Class>& UMLPackageImpl::get_UML_PartDecomposition()
 {
 	return uML_PartDecomposition;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_PartDecomposition_assume()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_PartDecomposition_assume()
 {
 	return uML_PartDecomposition_assume;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_PartDecomposition_commutativity_of_decomposition()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_PartDecomposition_commutativity_of_decomposition()
 {
 	return uML_PartDecomposition_commutativity_of_decomposition;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_PartDecomposition_parts_of_internal_structures()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_PartDecomposition_parts_of_internal_structures()
 {
 	return uML_PartDecomposition_parts_of_internal_structures;
 }
-std::shared_ptr<uml::Class> UMLPackageImpl::get_UML_Pin()
+const std::shared_ptr<uml::Class>& UMLPackageImpl::get_UML_Pin()
 {
 	return uML_Pin;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_Pin_control_pins()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_Pin_control_pins()
 {
 	return uML_Pin_control_pins;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_Pin_isControl()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_Pin_isControl()
 {
 	return uML_Pin_isControl;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_Pin_not_unique()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_Pin_not_unique()
 {
 	return uML_Pin_not_unique;
 }
-std::shared_ptr<uml::Class> UMLPackageImpl::get_UML_Port()
+const std::shared_ptr<uml::Class>& UMLPackageImpl::get_UML_Port()
 {
 	return uML_Port;
 }
-std::shared_ptr<uml::Operation> UMLPackageImpl::get_UML_Port_basicProvided__()
+const std::shared_ptr<uml::Operation>& UMLPackageImpl::get_UML_Port_basicProvided__()
 {
 	return uML_Port_basicProvided__;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_Port_basicProvided_result()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_Port_basicProvided_result()
 {
 	return uML_Port_basicProvided_result;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_Port_basicProvided_spec()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_Port_basicProvided_spec()
 {
 	return uML_Port_basicProvided_spec;
 }
-std::shared_ptr<uml::Operation> UMLPackageImpl::get_UML_Port_basicRequired__()
+const std::shared_ptr<uml::Operation>& UMLPackageImpl::get_UML_Port_basicRequired__()
 {
 	return uML_Port_basicRequired__;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_Port_basicRequired_result()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_Port_basicRequired_result()
 {
 	return uML_Port_basicRequired_result;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_Port_basicRequired_spec()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_Port_basicRequired_spec()
 {
 	return uML_Port_basicRequired_spec;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_Port_default_value()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_Port_default_value()
 {
 	return uML_Port_default_value;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_Port_encapsulated_owner()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_Port_encapsulated_owner()
 {
 	return uML_Port_encapsulated_owner;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_Port_isBehavior()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_Port_isBehavior()
 {
 	return uML_Port_isBehavior;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_Port_isConjugated()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_Port_isConjugated()
 {
 	return uML_Port_isConjugated;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_Port_isService()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_Port_isService()
 {
 	return uML_Port_isService;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_Port_port_aggregation()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_Port_port_aggregation()
 {
 	return uML_Port_port_aggregation;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_Port_protocol()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_Port_protocol()
 {
 	return uML_Port_protocol;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_Port_provided()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_Port_provided()
 {
 	return uML_Port_provided;
 }
-std::shared_ptr<uml::Operation> UMLPackageImpl::get_UML_Port_provided__()
+const std::shared_ptr<uml::Operation>& UMLPackageImpl::get_UML_Port_provided__()
 {
 	return uML_Port_provided__;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_Port_provided_result()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_Port_provided_result()
 {
 	return uML_Port_provided_result;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_Port_provided_spec()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_Port_provided_spec()
 {
 	return uML_Port_provided_spec;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_Port_redefinedPort()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_Port_redefinedPort()
 {
 	return uML_Port_redefinedPort;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_Port_required()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_Port_required()
 {
 	return uML_Port_required;
 }
-std::shared_ptr<uml::Operation> UMLPackageImpl::get_UML_Port_required__()
+const std::shared_ptr<uml::Operation>& UMLPackageImpl::get_UML_Port_required__()
 {
 	return uML_Port_required__;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_Port_required_result()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_Port_required_result()
 {
 	return uML_Port_required_result;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_Port_required_spec()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_Port_required_spec()
 {
 	return uML_Port_required_spec;
 }
-std::shared_ptr<uml::Class> UMLPackageImpl::get_UML_PrimitiveType()
+const std::shared_ptr<uml::Class>& UMLPackageImpl::get_UML_PrimitiveType()
 {
 	return uML_PrimitiveType;
 }
-std::shared_ptr<uml::Class> UMLPackageImpl::get_UML_Profile()
+const std::shared_ptr<uml::Class>& UMLPackageImpl::get_UML_Profile()
 {
 	return uML_Profile;
 }
-std::shared_ptr<uml::Class> UMLPackageImpl::get_UML_ProfileApplication()
+const std::shared_ptr<uml::Class>& UMLPackageImpl::get_UML_ProfileApplication()
 {
 	return uML_ProfileApplication;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_ProfileApplication_appliedProfile()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_ProfileApplication_appliedProfile()
 {
 	return uML_ProfileApplication_appliedProfile;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_ProfileApplication_applyingPackage()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_ProfileApplication_applyingPackage()
 {
 	return uML_ProfileApplication_applyingPackage;
 }
-std::shared_ptr<uml::Operation> UMLPackageImpl::get_UML_ProfileApplication_getAppliedDefinition_NamedElement_NamedElement()
+const std::shared_ptr<uml::Operation>& UMLPackageImpl::get_UML_ProfileApplication_getAppliedDefinition_NamedElement_NamedElement()
 {
 	return uML_ProfileApplication_getAppliedDefinition_NamedElement_NamedElement;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_ProfileApplication_getAppliedDefinition_NamedElement_NamedElement_namedElement()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_ProfileApplication_getAppliedDefinition_NamedElement_NamedElement_namedElement()
 {
 	return uML_ProfileApplication_getAppliedDefinition_NamedElement_NamedElement_namedElement;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_ProfileApplication_getAppliedDefinition_NamedElement_NamedElementreturn()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_ProfileApplication_getAppliedDefinition_NamedElement_NamedElementreturn()
 {
 	return uML_ProfileApplication_getAppliedDefinition_NamedElement_NamedElementreturn;
 }
-std::shared_ptr<uml::Operation> UMLPackageImpl::get_UML_ProfileApplication_getAppliedDefinition__()
+const std::shared_ptr<uml::Operation>& UMLPackageImpl::get_UML_ProfileApplication_getAppliedDefinition__()
 {
 	return uML_ProfileApplication_getAppliedDefinition__;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_ProfileApplication_getAppliedDefinition__return()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_ProfileApplication_getAppliedDefinition__return()
 {
 	return uML_ProfileApplication_getAppliedDefinition__return;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_ProfileApplication_isStrict()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_ProfileApplication_isStrict()
 {
 	return uML_ProfileApplication_isStrict;
 }
-std::shared_ptr<uml::PrimitiveType> UMLPackageImpl::get_UML_Profile_EMap_EJavaObject_EJavaObject()
+const std::shared_ptr<uml::PrimitiveType>& UMLPackageImpl::get_UML_Profile_EMap_EJavaObject_EJavaObject()
 {
 	return uML_Profile_EMap_EJavaObject_EJavaObject;
 }
-std::shared_ptr<uml::PrimitiveType> UMLPackageImpl::get_UML_Profile_EMap_EString_EString()
+const std::shared_ptr<uml::PrimitiveType>& UMLPackageImpl::get_UML_Profile_EMap_EString_EString()
 {
 	return uML_Profile_EMap_EString_EString;
 }
-std::shared_ptr<uml::Operation> UMLPackageImpl::get_UML_Profile_create_Classifier_Classifier()
+const std::shared_ptr<uml::Operation>& UMLPackageImpl::get_UML_Profile_create_Classifier_Classifier()
 {
 	return uML_Profile_create_Classifier_Classifier;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_Profile_create_Classifier_Classifier_classifier()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_Profile_create_Classifier_Classifier_classifier()
 {
 	return uML_Profile_create_Classifier_Classifier_classifier;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_Profile_create_Classifier_Classifierreturn()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_Profile_create_Classifier_Classifierreturn()
 {
 	return uML_Profile_create_Classifier_Classifierreturn;
 }
-std::shared_ptr<uml::Operation> UMLPackageImpl::get_UML_Profile_define__()
+const std::shared_ptr<uml::Operation>& UMLPackageImpl::get_UML_Profile_define__()
 {
 	return uML_Profile_define__;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_Profile_define__return()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_Profile_define__return()
 {
 	return uML_Profile_define__return;
 }
-std::shared_ptr<uml::Operation> UMLPackageImpl::get_UML_Profile_getDefinition_NamedElement_NamedElement()
+const std::shared_ptr<uml::Operation>& UMLPackageImpl::get_UML_Profile_getDefinition_NamedElement_NamedElement()
 {
 	return uML_Profile_getDefinition_NamedElement_NamedElement;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_Profile_getDefinition_NamedElement_NamedElement_namedElement()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_Profile_getDefinition_NamedElement_NamedElement_namedElement()
 {
 	return uML_Profile_getDefinition_NamedElement_NamedElement_namedElement;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_Profile_getDefinition_NamedElement_NamedElementreturn()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_Profile_getDefinition_NamedElement_NamedElementreturn()
 {
 	return uML_Profile_getDefinition_NamedElement_NamedElementreturn;
 }
-std::shared_ptr<uml::Operation> UMLPackageImpl::get_UML_Profile_getDefinition__()
+const std::shared_ptr<uml::Operation>& UMLPackageImpl::get_UML_Profile_getDefinition__()
 {
 	return uML_Profile_getDefinition__;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_Profile_getDefinition__return()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_Profile_getDefinition__return()
 {
 	return uML_Profile_getDefinition__return;
 }
-std::shared_ptr<uml::Operation> UMLPackageImpl::get_UML_Profile_getOwnedExtensions_Boolean_Boolean()
+const std::shared_ptr<uml::Operation>& UMLPackageImpl::get_UML_Profile_getOwnedExtensions_Boolean_Boolean()
 {
 	return uML_Profile_getOwnedExtensions_Boolean_Boolean;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_Profile_getOwnedExtensions_Boolean_Boolean_requiredOnly()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_Profile_getOwnedExtensions_Boolean_Boolean_requiredOnly()
 {
 	return uML_Profile_getOwnedExtensions_Boolean_Boolean_requiredOnly;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_Profile_getOwnedExtensions_Boolean_Booleanreturn()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_Profile_getOwnedExtensions_Boolean_Booleanreturn()
 {
 	return uML_Profile_getOwnedExtensions_Boolean_Booleanreturn;
 }
-std::shared_ptr<uml::Operation> UMLPackageImpl::get_UML_Profile_getReferencedMetaclasses__()
+const std::shared_ptr<uml::Operation>& UMLPackageImpl::get_UML_Profile_getReferencedMetaclasses__()
 {
 	return uML_Profile_getReferencedMetaclasses__;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_Profile_getReferencedMetaclasses__return()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_Profile_getReferencedMetaclasses__return()
 {
 	return uML_Profile_getReferencedMetaclasses__return;
 }
-std::shared_ptr<uml::Operation> UMLPackageImpl::get_UML_Profile_getReferencedMetamodels__()
+const std::shared_ptr<uml::Operation>& UMLPackageImpl::get_UML_Profile_getReferencedMetamodels__()
 {
 	return uML_Profile_getReferencedMetamodels__;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_Profile_getReferencedMetamodels__return()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_Profile_getReferencedMetamodels__return()
 {
 	return uML_Profile_getReferencedMetamodels__return;
 }
-std::shared_ptr<uml::Operation> UMLPackageImpl::get_UML_Profile_isDefined__()
+const std::shared_ptr<uml::Operation>& UMLPackageImpl::get_UML_Profile_isDefined__()
 {
 	return uML_Profile_isDefined__;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_Profile_isDefined__return()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_Profile_isDefined__return()
 {
 	return uML_Profile_isDefined__return;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_Profile_metaclassReference()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_Profile_metaclassReference()
 {
 	return uML_Profile_metaclassReference;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_Profile_metaclass_reference_not_specialized()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_Profile_metaclass_reference_not_specialized()
 {
 	return uML_Profile_metaclass_reference_not_specialized;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_Profile_metamodelReference()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_Profile_metamodelReference()
 {
 	return uML_Profile_metamodelReference;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_Profile_references_same_metamodel()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_Profile_references_same_metamodel()
 {
 	return uML_Profile_references_same_metamodel;
 }
-std::shared_ptr<uml::Class> UMLPackageImpl::get_UML_Property()
+const std::shared_ptr<uml::Class>& UMLPackageImpl::get_UML_Property()
 {
 	return uML_Property;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_Property_aggregation()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_Property_aggregation()
 {
 	return uML_Property_aggregation;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_Property_association()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_Property_association()
 {
 	return uML_Property_association;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_Property_associationEnd()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_Property_associationEnd()
 {
 	return uML_Property_associationEnd;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_Property_binding_to_attribute()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_Property_binding_to_attribute()
 {
 	return uML_Property_binding_to_attribute;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_Property_class()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_Property_class()
 {
 	return uML_Property_class;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_Property_datatype()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_Property_datatype()
 {
 	return uML_Property_datatype;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_Property_default()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_Property_default()
 {
 	return uML_Property_default;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_Property_defaultValue()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_Property_defaultValue()
 {
 	return uML_Property_defaultValue;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_Property_deployment_target()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_Property_deployment_target()
 {
 	return uML_Property_deployment_target;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_Property_derived_union_is_derived()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_Property_derived_union_is_derived()
 {
 	return uML_Property_derived_union_is_derived;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_Property_derived_union_is_read_only()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_Property_derived_union_is_read_only()
 {
 	return uML_Property_derived_union_is_read_only;
 }
-std::shared_ptr<uml::Operation> UMLPackageImpl::get_UML_Property_getDefault__()
+const std::shared_ptr<uml::Operation>& UMLPackageImpl::get_UML_Property_getDefault__()
 {
 	return uML_Property_getDefault__;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_Property_getDefault_result()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_Property_getDefault_result()
 {
 	return uML_Property_getDefault_result;
 }
-std::shared_ptr<uml::Operation> UMLPackageImpl::get_UML_Property_getOtherEnd__()
+const std::shared_ptr<uml::Operation>& UMLPackageImpl::get_UML_Property_getOtherEnd__()
 {
 	return uML_Property_getOtherEnd__;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_Property_getOtherEnd__return()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_Property_getOtherEnd__return()
 {
 	return uML_Property_getOtherEnd__return;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_Property_interface()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_Property_interface()
 {
 	return uML_Property_interface;
 }
-std::shared_ptr<uml::Operation> UMLPackageImpl::get_UML_Property_isAttribute__()
+const std::shared_ptr<uml::Operation>& UMLPackageImpl::get_UML_Property_isAttribute__()
 {
 	return uML_Property_isAttribute__;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_Property_isAttribute_result()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_Property_isAttribute_result()
 {
 	return uML_Property_isAttribute_result;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_Property_isAttribute_spec()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_Property_isAttribute_spec()
 {
 	return uML_Property_isAttribute_spec;
 }
-std::shared_ptr<uml::Operation> UMLPackageImpl::get_UML_Property_isCompatibleWith_ParameterableElement_ParameterableElement()
+const std::shared_ptr<uml::Operation>& UMLPackageImpl::get_UML_Property_isCompatibleWith_ParameterableElement_ParameterableElement()
 {
 	return uML_Property_isCompatibleWith_ParameterableElement_ParameterableElement;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_Property_isCompatibleWith_ParameterableElement_ParameterableElement_p()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_Property_isCompatibleWith_ParameterableElement_ParameterableElement_p()
 {
 	return uML_Property_isCompatibleWith_ParameterableElement_ParameterableElement_p;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_Property_isCompatibleWith_result()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_Property_isCompatibleWith_result()
 {
 	return uML_Property_isCompatibleWith_result;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_Property_isCompatibleWith_spec()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_Property_isCompatibleWith_spec()
 {
 	return uML_Property_isCompatibleWith_spec;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_Property_isComposite()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_Property_isComposite()
 {
 	return uML_Property_isComposite;
 }
-std::shared_ptr<uml::Operation> UMLPackageImpl::get_UML_Property_isComposite__()
+const std::shared_ptr<uml::Operation>& UMLPackageImpl::get_UML_Property_isComposite__()
 {
 	return uML_Property_isComposite__;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_Property_isComposite_result()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_Property_isComposite_result()
 {
 	return uML_Property_isComposite_result;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_Property_isComposite_spec()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_Property_isComposite_spec()
 {
 	return uML_Property_isComposite_spec;
 }
-std::shared_ptr<uml::Operation> UMLPackageImpl::get_UML_Property_isConsistentWith_RedefinableElement_RedefinableElement()
+const std::shared_ptr<uml::Operation>& UMLPackageImpl::get_UML_Property_isConsistentWith_RedefinableElement_RedefinableElement()
 {
 	return uML_Property_isConsistentWith_RedefinableElement_RedefinableElement;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_Property_isConsistentWith_RedefinableElement_RedefinableElement_redefiningElement()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_Property_isConsistentWith_RedefinableElement_RedefinableElement_redefiningElement()
 {
 	return uML_Property_isConsistentWith_RedefinableElement_RedefinableElement_redefiningElement;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_Property_isConsistentWith_pre()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_Property_isConsistentWith_pre()
 {
 	return uML_Property_isConsistentWith_pre;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_Property_isConsistentWith_result()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_Property_isConsistentWith_result()
 {
 	return uML_Property_isConsistentWith_result;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_Property_isConsistentWith_spec()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_Property_isConsistentWith_spec()
 {
 	return uML_Property_isConsistentWith_spec;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_Property_isDerived()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_Property_isDerived()
 {
 	return uML_Property_isDerived;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_Property_isDerivedUnion()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_Property_isDerivedUnion()
 {
 	return uML_Property_isDerivedUnion;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_Property_isID()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_Property_isID()
 {
 	return uML_Property_isID;
 }
-std::shared_ptr<uml::Operation> UMLPackageImpl::get_UML_Property_isNavigable__()
+const std::shared_ptr<uml::Operation>& UMLPackageImpl::get_UML_Property_isNavigable__()
 {
 	return uML_Property_isNavigable__;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_Property_isNavigable_result()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_Property_isNavigable_result()
 {
 	return uML_Property_isNavigable_result;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_Property_isNavigable_spec()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_Property_isNavigable_spec()
 {
 	return uML_Property_isNavigable_spec;
 }
-std::shared_ptr<uml::Operation> UMLPackageImpl::get_UML_Property_isSetDefault__()
+const std::shared_ptr<uml::Operation>& UMLPackageImpl::get_UML_Property_isSetDefault__()
 {
 	return uML_Property_isSetDefault__;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_Property_isSetDefault__return()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_Property_isSetDefault__return()
 {
 	return uML_Property_isSetDefault__return;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_Property_multiplicity_of_composite()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_Property_multiplicity_of_composite()
 {
 	return uML_Property_multiplicity_of_composite;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_Property_opposite()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_Property_opposite()
 {
 	return uML_Property_opposite;
 }
-std::shared_ptr<uml::Operation> UMLPackageImpl::get_UML_Property_opposite__()
+const std::shared_ptr<uml::Operation>& UMLPackageImpl::get_UML_Property_opposite__()
 {
 	return uML_Property_opposite__;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_Property_opposite_result()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_Property_opposite_result()
 {
 	return uML_Property_opposite_result;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_Property_opposite_spec()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_Property_opposite_spec()
 {
 	return uML_Property_opposite_spec;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_Property_owningAssociation()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_Property_owningAssociation()
 {
 	return uML_Property_owningAssociation;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_Property_qualified_is_association_end()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_Property_qualified_is_association_end()
 {
 	return uML_Property_qualified_is_association_end;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_Property_qualifier()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_Property_qualifier()
 {
 	return uML_Property_qualifier;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_Property_redefinedProperty()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_Property_redefinedProperty()
 {
 	return uML_Property_redefinedProperty;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_Property_redefined_property_inherited()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_Property_redefined_property_inherited()
 {
 	return uML_Property_redefined_property_inherited;
 }
-std::shared_ptr<uml::Operation> UMLPackageImpl::get_UML_Property_setBooleanDefaultValue_Boolean_Boolean()
+const std::shared_ptr<uml::Operation>& UMLPackageImpl::get_UML_Property_setBooleanDefaultValue_Boolean_Boolean()
 {
 	return uML_Property_setBooleanDefaultValue_Boolean_Boolean;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_Property_setBooleanDefaultValue_Boolean_Boolean_value()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_Property_setBooleanDefaultValue_Boolean_Boolean_value()
 {
 	return uML_Property_setBooleanDefaultValue_Boolean_Boolean_value;
 }
-std::shared_ptr<uml::Operation> UMLPackageImpl::get_UML_Property_setDefault_String_String()
+const std::shared_ptr<uml::Operation>& UMLPackageImpl::get_UML_Property_setDefault_String_String()
 {
 	return uML_Property_setDefault_String_String;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_Property_setDefault_String_String_newDefault()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_Property_setDefault_String_String_newDefault()
 {
 	return uML_Property_setDefault_String_String_newDefault;
 }
-std::shared_ptr<uml::Operation> UMLPackageImpl::get_UML_Property_setIntegerDefaultValue_Integer_Integer()
+const std::shared_ptr<uml::Operation>& UMLPackageImpl::get_UML_Property_setIntegerDefaultValue_Integer_Integer()
 {
 	return uML_Property_setIntegerDefaultValue_Integer_Integer;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_Property_setIntegerDefaultValue_Integer_Integer_value()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_Property_setIntegerDefaultValue_Integer_Integer_value()
 {
 	return uML_Property_setIntegerDefaultValue_Integer_Integer_value;
 }
-std::shared_ptr<uml::Operation> UMLPackageImpl::get_UML_Property_setIsComposite_Boolean_Boolean()
+const std::shared_ptr<uml::Operation>& UMLPackageImpl::get_UML_Property_setIsComposite_Boolean_Boolean()
 {
 	return uML_Property_setIsComposite_Boolean_Boolean;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_Property_setIsComposite_Boolean_Boolean_newIsComposite()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_Property_setIsComposite_Boolean_Boolean_newIsComposite()
 {
 	return uML_Property_setIsComposite_Boolean_Boolean_newIsComposite;
 }
-std::shared_ptr<uml::Operation> UMLPackageImpl::get_UML_Property_setIsNavigable_Boolean_Boolean()
+const std::shared_ptr<uml::Operation>& UMLPackageImpl::get_UML_Property_setIsNavigable_Boolean_Boolean()
 {
 	return uML_Property_setIsNavigable_Boolean_Boolean;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_Property_setIsNavigable_Boolean_Boolean_isNavigable()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_Property_setIsNavigable_Boolean_Boolean_isNavigable()
 {
 	return uML_Property_setIsNavigable_Boolean_Boolean_isNavigable;
 }
-std::shared_ptr<uml::Operation> UMLPackageImpl::get_UML_Property_setNullDefaultValue__()
+const std::shared_ptr<uml::Operation>& UMLPackageImpl::get_UML_Property_setNullDefaultValue__()
 {
 	return uML_Property_setNullDefaultValue__;
 }
-std::shared_ptr<uml::Operation> UMLPackageImpl::get_UML_Property_setOpposite_Property_Property()
+const std::shared_ptr<uml::Operation>& UMLPackageImpl::get_UML_Property_setOpposite_Property_Property()
 {
 	return uML_Property_setOpposite_Property_Property;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_Property_setOpposite_Property_Property_newOpposite()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_Property_setOpposite_Property_Property_newOpposite()
 {
 	return uML_Property_setOpposite_Property_Property_newOpposite;
 }
-std::shared_ptr<uml::Operation> UMLPackageImpl::get_UML_Property_setRealDefaultValue_Real_Real()
+const std::shared_ptr<uml::Operation>& UMLPackageImpl::get_UML_Property_setRealDefaultValue_Real_Real()
 {
 	return uML_Property_setRealDefaultValue_Real_Real;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_Property_setRealDefaultValue_Real_Real_value()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_Property_setRealDefaultValue_Real_Real_value()
 {
 	return uML_Property_setRealDefaultValue_Real_Real_value;
 }
-std::shared_ptr<uml::Operation> UMLPackageImpl::get_UML_Property_setStringDefaultValue_String_String()
+const std::shared_ptr<uml::Operation>& UMLPackageImpl::get_UML_Property_setStringDefaultValue_String_String()
 {
 	return uML_Property_setStringDefaultValue_String_String;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_Property_setStringDefaultValue_String_String_value()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_Property_setStringDefaultValue_String_String_value()
 {
 	return uML_Property_setStringDefaultValue_String_String_value;
 }
-std::shared_ptr<uml::Operation> UMLPackageImpl::get_UML_Property_setUnlimitedNaturalDefaultValue_UnlimitedNatural_UnlimitedNatural()
+const std::shared_ptr<uml::Operation>& UMLPackageImpl::get_UML_Property_setUnlimitedNaturalDefaultValue_UnlimitedNatural_UnlimitedNatural()
 {
 	return uML_Property_setUnlimitedNaturalDefaultValue_UnlimitedNatural_UnlimitedNatural;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_Property_setUnlimitedNaturalDefaultValue_UnlimitedNatural_UnlimitedNatural_value()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_Property_setUnlimitedNaturalDefaultValue_UnlimitedNatural_UnlimitedNatural_value()
 {
 	return uML_Property_setUnlimitedNaturalDefaultValue_UnlimitedNatural_UnlimitedNatural_value;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_Property_subsettedProperty()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_Property_subsettedProperty()
 {
 	return uML_Property_subsettedProperty;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_Property_subsetted_property_names()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_Property_subsetted_property_names()
 {
 	return uML_Property_subsetted_property_names;
 }
-std::shared_ptr<uml::Operation> UMLPackageImpl::get_UML_Property_subsettingContext__()
+const std::shared_ptr<uml::Operation>& UMLPackageImpl::get_UML_Property_subsettingContext__()
 {
 	return uML_Property_subsettingContext__;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_Property_subsettingContext_result()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_Property_subsettingContext_result()
 {
 	return uML_Property_subsettingContext_result;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_Property_subsettingContext_spec()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_Property_subsettingContext_spec()
 {
 	return uML_Property_subsettingContext_spec;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_Property_subsetting_context_conforms()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_Property_subsetting_context_conforms()
 {
 	return uML_Property_subsetting_context_conforms;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_Property_subsetting_rules()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_Property_subsetting_rules()
 {
 	return uML_Property_subsetting_rules;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_Property_type_of_opposite_end()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_Property_type_of_opposite_end()
 {
 	return uML_Property_type_of_opposite_end;
 }
-std::shared_ptr<uml::Operation> UMLPackageImpl::get_UML_Property_unsetDefault__()
+const std::shared_ptr<uml::Operation>& UMLPackageImpl::get_UML_Property_unsetDefault__()
 {
 	return uML_Property_unsetDefault__;
 }
-std::shared_ptr<uml::Class> UMLPackageImpl::get_UML_ProtocolConformance()
+const std::shared_ptr<uml::Class>& UMLPackageImpl::get_UML_ProtocolConformance()
 {
 	return uML_ProtocolConformance;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_ProtocolConformance_generalMachine()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_ProtocolConformance_generalMachine()
 {
 	return uML_ProtocolConformance_generalMachine;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_ProtocolConformance_specificMachine()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_ProtocolConformance_specificMachine()
 {
 	return uML_ProtocolConformance_specificMachine;
 }
-std::shared_ptr<uml::Class> UMLPackageImpl::get_UML_ProtocolStateMachine()
+const std::shared_ptr<uml::Class>& UMLPackageImpl::get_UML_ProtocolStateMachine()
 {
 	return uML_ProtocolStateMachine;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_ProtocolStateMachine_classifier_context()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_ProtocolStateMachine_classifier_context()
 {
 	return uML_ProtocolStateMachine_classifier_context;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_ProtocolStateMachine_conformance()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_ProtocolStateMachine_conformance()
 {
 	return uML_ProtocolStateMachine_conformance;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_ProtocolStateMachine_deep_or_shallow_history()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_ProtocolStateMachine_deep_or_shallow_history()
 {
 	return uML_ProtocolStateMachine_deep_or_shallow_history;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_ProtocolStateMachine_entry_exit_do()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_ProtocolStateMachine_entry_exit_do()
 {
 	return uML_ProtocolStateMachine_entry_exit_do;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_ProtocolStateMachine_protocol_transitions()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_ProtocolStateMachine_protocol_transitions()
 {
 	return uML_ProtocolStateMachine_protocol_transitions;
 }
-std::shared_ptr<uml::Class> UMLPackageImpl::get_UML_ProtocolTransition()
+const std::shared_ptr<uml::Class>& UMLPackageImpl::get_UML_ProtocolTransition()
 {
 	return uML_ProtocolTransition;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_ProtocolTransition_associated_actions()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_ProtocolTransition_associated_actions()
 {
 	return uML_ProtocolTransition_associated_actions;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_ProtocolTransition_belongs_to_psm()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_ProtocolTransition_belongs_to_psm()
 {
 	return uML_ProtocolTransition_belongs_to_psm;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_ProtocolTransition_postCondition()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_ProtocolTransition_postCondition()
 {
 	return uML_ProtocolTransition_postCondition;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_ProtocolTransition_preCondition()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_ProtocolTransition_preCondition()
 {
 	return uML_ProtocolTransition_preCondition;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_ProtocolTransition_referred()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_ProtocolTransition_referred()
 {
 	return uML_ProtocolTransition_referred;
 }
-std::shared_ptr<uml::Operation> UMLPackageImpl::get_UML_ProtocolTransition_referred__()
+const std::shared_ptr<uml::Operation>& UMLPackageImpl::get_UML_ProtocolTransition_referred__()
 {
 	return uML_ProtocolTransition_referred__;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_ProtocolTransition_referred_result()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_ProtocolTransition_referred_result()
 {
 	return uML_ProtocolTransition_referred_result;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_ProtocolTransition_referred_spec()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_ProtocolTransition_referred_spec()
 {
 	return uML_ProtocolTransition_referred_spec;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_ProtocolTransition_refers_to_operation()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_ProtocolTransition_refers_to_operation()
 {
 	return uML_ProtocolTransition_refers_to_operation;
 }
-std::shared_ptr<uml::Class> UMLPackageImpl::get_UML_Pseudostate()
+const std::shared_ptr<uml::Class>& UMLPackageImpl::get_UML_Pseudostate()
 {
 	return uML_Pseudostate;
 }
-std::shared_ptr<uml::Enumeration> UMLPackageImpl::get_UML_PseudostateKind()
+const std::shared_ptr<uml::Enumeration>& UMLPackageImpl::get_UML_PseudostateKind()
 {
 	return uML_PseudostateKind;
 }
-std::shared_ptr<uml::EnumerationLiteral> UMLPackageImpl::get_UML_PseudostateKind_choice()
+const std::shared_ptr<uml::EnumerationLiteral>& UMLPackageImpl::get_UML_PseudostateKind_choice()
 {
 	return uML_PseudostateKind_choice;
 }
-std::shared_ptr<uml::EnumerationLiteral> UMLPackageImpl::get_UML_PseudostateKind_deepHistory()
+const std::shared_ptr<uml::EnumerationLiteral>& UMLPackageImpl::get_UML_PseudostateKind_deepHistory()
 {
 	return uML_PseudostateKind_deepHistory;
 }
-std::shared_ptr<uml::EnumerationLiteral> UMLPackageImpl::get_UML_PseudostateKind_entryPoint()
+const std::shared_ptr<uml::EnumerationLiteral>& UMLPackageImpl::get_UML_PseudostateKind_entryPoint()
 {
 	return uML_PseudostateKind_entryPoint;
 }
-std::shared_ptr<uml::EnumerationLiteral> UMLPackageImpl::get_UML_PseudostateKind_exitPoint()
+const std::shared_ptr<uml::EnumerationLiteral>& UMLPackageImpl::get_UML_PseudostateKind_exitPoint()
 {
 	return uML_PseudostateKind_exitPoint;
 }
-std::shared_ptr<uml::EnumerationLiteral> UMLPackageImpl::get_UML_PseudostateKind_fork()
+const std::shared_ptr<uml::EnumerationLiteral>& UMLPackageImpl::get_UML_PseudostateKind_fork()
 {
 	return uML_PseudostateKind_fork;
 }
-std::shared_ptr<uml::EnumerationLiteral> UMLPackageImpl::get_UML_PseudostateKind_initial()
+const std::shared_ptr<uml::EnumerationLiteral>& UMLPackageImpl::get_UML_PseudostateKind_initial()
 {
 	return uML_PseudostateKind_initial;
 }
-std::shared_ptr<uml::EnumerationLiteral> UMLPackageImpl::get_UML_PseudostateKind_join()
+const std::shared_ptr<uml::EnumerationLiteral>& UMLPackageImpl::get_UML_PseudostateKind_join()
 {
 	return uML_PseudostateKind_join;
 }
-std::shared_ptr<uml::EnumerationLiteral> UMLPackageImpl::get_UML_PseudostateKind_junction()
+const std::shared_ptr<uml::EnumerationLiteral>& UMLPackageImpl::get_UML_PseudostateKind_junction()
 {
 	return uML_PseudostateKind_junction;
 }
-std::shared_ptr<uml::EnumerationLiteral> UMLPackageImpl::get_UML_PseudostateKind_shallowHistory()
+const std::shared_ptr<uml::EnumerationLiteral>& UMLPackageImpl::get_UML_PseudostateKind_shallowHistory()
 {
 	return uML_PseudostateKind_shallowHistory;
 }
-std::shared_ptr<uml::EnumerationLiteral> UMLPackageImpl::get_UML_PseudostateKind_terminate()
+const std::shared_ptr<uml::EnumerationLiteral>& UMLPackageImpl::get_UML_PseudostateKind_terminate()
 {
 	return uML_PseudostateKind_terminate;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_Pseudostate_choice_vertex()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_Pseudostate_choice_vertex()
 {
 	return uML_Pseudostate_choice_vertex;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_Pseudostate_fork_vertex()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_Pseudostate_fork_vertex()
 {
 	return uML_Pseudostate_fork_vertex;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_Pseudostate_history_vertices()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_Pseudostate_history_vertices()
 {
 	return uML_Pseudostate_history_vertices;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_Pseudostate_initial_vertex()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_Pseudostate_initial_vertex()
 {
 	return uML_Pseudostate_initial_vertex;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_Pseudostate_join_vertex()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_Pseudostate_join_vertex()
 {
 	return uML_Pseudostate_join_vertex;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_Pseudostate_junction_vertex()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_Pseudostate_junction_vertex()
 {
 	return uML_Pseudostate_junction_vertex;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_Pseudostate_kind()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_Pseudostate_kind()
 {
 	return uML_Pseudostate_kind;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_Pseudostate_outgoing_from_initial()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_Pseudostate_outgoing_from_initial()
 {
 	return uML_Pseudostate_outgoing_from_initial;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_Pseudostate_state()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_Pseudostate_state()
 {
 	return uML_Pseudostate_state;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_Pseudostate_stateMachine()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_Pseudostate_stateMachine()
 {
 	return uML_Pseudostate_stateMachine;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_Pseudostate_transitions_incoming()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_Pseudostate_transitions_incoming()
 {
 	return uML_Pseudostate_transitions_incoming;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_Pseudostate_transitions_outgoing()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_Pseudostate_transitions_outgoing()
 {
 	return uML_Pseudostate_transitions_outgoing;
 }
-std::shared_ptr<uml::Class> UMLPackageImpl::get_UML_QualifierValue()
+const std::shared_ptr<uml::Class>& UMLPackageImpl::get_UML_QualifierValue()
 {
 	return uML_QualifierValue;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_QualifierValue_multiplicity_of_qualifier()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_QualifierValue_multiplicity_of_qualifier()
 {
 	return uML_QualifierValue_multiplicity_of_qualifier;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_QualifierValue_qualifier()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_QualifierValue_qualifier()
 {
 	return uML_QualifierValue_qualifier;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_QualifierValue_qualifier_attribute()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_QualifierValue_qualifier_attribute()
 {
 	return uML_QualifierValue_qualifier_attribute;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_QualifierValue_type_of_qualifier()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_QualifierValue_type_of_qualifier()
 {
 	return uML_QualifierValue_type_of_qualifier;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_QualifierValue_value()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_QualifierValue_value()
 {
 	return uML_QualifierValue_value;
 }
-std::shared_ptr<uml::Class> UMLPackageImpl::get_UML_RaiseExceptionAction()
+const std::shared_ptr<uml::Class>& UMLPackageImpl::get_UML_RaiseExceptionAction()
 {
 	return uML_RaiseExceptionAction;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_RaiseExceptionAction_exception()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_RaiseExceptionAction_exception()
 {
 	return uML_RaiseExceptionAction_exception;
 }
-std::shared_ptr<uml::Class> UMLPackageImpl::get_UML_ReadExtentAction()
+const std::shared_ptr<uml::Class>& UMLPackageImpl::get_UML_ReadExtentAction()
 {
 	return uML_ReadExtentAction;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_ReadExtentAction_classifier()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_ReadExtentAction_classifier()
 {
 	return uML_ReadExtentAction_classifier;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_ReadExtentAction_multiplicity_of_result()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_ReadExtentAction_multiplicity_of_result()
 {
 	return uML_ReadExtentAction_multiplicity_of_result;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_ReadExtentAction_result()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_ReadExtentAction_result()
 {
 	return uML_ReadExtentAction_result;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_ReadExtentAction_type_is_classifier()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_ReadExtentAction_type_is_classifier()
 {
 	return uML_ReadExtentAction_type_is_classifier;
 }
-std::shared_ptr<uml::Class> UMLPackageImpl::get_UML_ReadIsClassifiedObjectAction()
+const std::shared_ptr<uml::Class>& UMLPackageImpl::get_UML_ReadIsClassifiedObjectAction()
 {
 	return uML_ReadIsClassifiedObjectAction;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_ReadIsClassifiedObjectAction_boolean_result()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_ReadIsClassifiedObjectAction_boolean_result()
 {
 	return uML_ReadIsClassifiedObjectAction_boolean_result;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_ReadIsClassifiedObjectAction_classifier()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_ReadIsClassifiedObjectAction_classifier()
 {
 	return uML_ReadIsClassifiedObjectAction_classifier;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_ReadIsClassifiedObjectAction_isDirect()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_ReadIsClassifiedObjectAction_isDirect()
 {
 	return uML_ReadIsClassifiedObjectAction_isDirect;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_ReadIsClassifiedObjectAction_multiplicity_of_input()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_ReadIsClassifiedObjectAction_multiplicity_of_input()
 {
 	return uML_ReadIsClassifiedObjectAction_multiplicity_of_input;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_ReadIsClassifiedObjectAction_multiplicity_of_output()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_ReadIsClassifiedObjectAction_multiplicity_of_output()
 {
 	return uML_ReadIsClassifiedObjectAction_multiplicity_of_output;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_ReadIsClassifiedObjectAction_no_type()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_ReadIsClassifiedObjectAction_no_type()
 {
 	return uML_ReadIsClassifiedObjectAction_no_type;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_ReadIsClassifiedObjectAction_object()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_ReadIsClassifiedObjectAction_object()
 {
 	return uML_ReadIsClassifiedObjectAction_object;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_ReadIsClassifiedObjectAction_result()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_ReadIsClassifiedObjectAction_result()
 {
 	return uML_ReadIsClassifiedObjectAction_result;
 }
-std::shared_ptr<uml::Class> UMLPackageImpl::get_UML_ReadLinkAction()
+const std::shared_ptr<uml::Class>& UMLPackageImpl::get_UML_ReadLinkAction()
 {
 	return uML_ReadLinkAction;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_ReadLinkAction_compatible_multiplicity()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_ReadLinkAction_compatible_multiplicity()
 {
 	return uML_ReadLinkAction_compatible_multiplicity;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_ReadLinkAction_navigable_open_end()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_ReadLinkAction_navigable_open_end()
 {
 	return uML_ReadLinkAction_navigable_open_end;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_ReadLinkAction_one_open_end()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_ReadLinkAction_one_open_end()
 {
 	return uML_ReadLinkAction_one_open_end;
 }
-std::shared_ptr<uml::Operation> UMLPackageImpl::get_UML_ReadLinkAction_openEnd__()
+const std::shared_ptr<uml::Operation>& UMLPackageImpl::get_UML_ReadLinkAction_openEnd__()
 {
 	return uML_ReadLinkAction_openEnd__;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_ReadLinkAction_openEnd_result()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_ReadLinkAction_openEnd_result()
 {
 	return uML_ReadLinkAction_openEnd_result;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_ReadLinkAction_openEnd_spec()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_ReadLinkAction_openEnd_spec()
 {
 	return uML_ReadLinkAction_openEnd_spec;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_ReadLinkAction_result()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_ReadLinkAction_result()
 {
 	return uML_ReadLinkAction_result;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_ReadLinkAction_type_and_ordering()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_ReadLinkAction_type_and_ordering()
 {
 	return uML_ReadLinkAction_type_and_ordering;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_ReadLinkAction_visibility()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_ReadLinkAction_visibility()
 {
 	return uML_ReadLinkAction_visibility;
 }
-std::shared_ptr<uml::Class> UMLPackageImpl::get_UML_ReadLinkObjectEndAction()
+const std::shared_ptr<uml::Class>& UMLPackageImpl::get_UML_ReadLinkObjectEndAction()
 {
 	return uML_ReadLinkObjectEndAction;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_ReadLinkObjectEndAction_association_of_association()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_ReadLinkObjectEndAction_association_of_association()
 {
 	return uML_ReadLinkObjectEndAction_association_of_association;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_ReadLinkObjectEndAction_end()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_ReadLinkObjectEndAction_end()
 {
 	return uML_ReadLinkObjectEndAction_end;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_ReadLinkObjectEndAction_ends_of_association()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_ReadLinkObjectEndAction_ends_of_association()
 {
 	return uML_ReadLinkObjectEndAction_ends_of_association;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_ReadLinkObjectEndAction_multiplicity_of_object()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_ReadLinkObjectEndAction_multiplicity_of_object()
 {
 	return uML_ReadLinkObjectEndAction_multiplicity_of_object;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_ReadLinkObjectEndAction_multiplicity_of_result()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_ReadLinkObjectEndAction_multiplicity_of_result()
 {
 	return uML_ReadLinkObjectEndAction_multiplicity_of_result;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_ReadLinkObjectEndAction_object()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_ReadLinkObjectEndAction_object()
 {
 	return uML_ReadLinkObjectEndAction_object;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_ReadLinkObjectEndAction_property()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_ReadLinkObjectEndAction_property()
 {
 	return uML_ReadLinkObjectEndAction_property;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_ReadLinkObjectEndAction_result()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_ReadLinkObjectEndAction_result()
 {
 	return uML_ReadLinkObjectEndAction_result;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_ReadLinkObjectEndAction_type_of_object()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_ReadLinkObjectEndAction_type_of_object()
 {
 	return uML_ReadLinkObjectEndAction_type_of_object;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_ReadLinkObjectEndAction_type_of_result()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_ReadLinkObjectEndAction_type_of_result()
 {
 	return uML_ReadLinkObjectEndAction_type_of_result;
 }
-std::shared_ptr<uml::Class> UMLPackageImpl::get_UML_ReadLinkObjectEndQualifierAction()
+const std::shared_ptr<uml::Class>& UMLPackageImpl::get_UML_ReadLinkObjectEndQualifierAction()
 {
 	return uML_ReadLinkObjectEndQualifierAction;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_ReadLinkObjectEndQualifierAction_association_of_association()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_ReadLinkObjectEndQualifierAction_association_of_association()
 {
 	return uML_ReadLinkObjectEndQualifierAction_association_of_association;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_ReadLinkObjectEndQualifierAction_ends_of_association()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_ReadLinkObjectEndQualifierAction_ends_of_association()
 {
 	return uML_ReadLinkObjectEndQualifierAction_ends_of_association;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_ReadLinkObjectEndQualifierAction_multiplicity_of_object()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_ReadLinkObjectEndQualifierAction_multiplicity_of_object()
 {
 	return uML_ReadLinkObjectEndQualifierAction_multiplicity_of_object;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_ReadLinkObjectEndQualifierAction_multiplicity_of_qualifier()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_ReadLinkObjectEndQualifierAction_multiplicity_of_qualifier()
 {
 	return uML_ReadLinkObjectEndQualifierAction_multiplicity_of_qualifier;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_ReadLinkObjectEndQualifierAction_multiplicity_of_result()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_ReadLinkObjectEndQualifierAction_multiplicity_of_result()
 {
 	return uML_ReadLinkObjectEndQualifierAction_multiplicity_of_result;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_ReadLinkObjectEndQualifierAction_object()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_ReadLinkObjectEndQualifierAction_object()
 {
 	return uML_ReadLinkObjectEndQualifierAction_object;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_ReadLinkObjectEndQualifierAction_qualifier()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_ReadLinkObjectEndQualifierAction_qualifier()
 {
 	return uML_ReadLinkObjectEndQualifierAction_qualifier;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_ReadLinkObjectEndQualifierAction_qualifier_attribute()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_ReadLinkObjectEndQualifierAction_qualifier_attribute()
 {
 	return uML_ReadLinkObjectEndQualifierAction_qualifier_attribute;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_ReadLinkObjectEndQualifierAction_result()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_ReadLinkObjectEndQualifierAction_result()
 {
 	return uML_ReadLinkObjectEndQualifierAction_result;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_ReadLinkObjectEndQualifierAction_same_type()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_ReadLinkObjectEndQualifierAction_same_type()
 {
 	return uML_ReadLinkObjectEndQualifierAction_same_type;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_ReadLinkObjectEndQualifierAction_type_of_object()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_ReadLinkObjectEndQualifierAction_type_of_object()
 {
 	return uML_ReadLinkObjectEndQualifierAction_type_of_object;
 }
-std::shared_ptr<uml::Class> UMLPackageImpl::get_UML_ReadSelfAction()
+const std::shared_ptr<uml::Class>& UMLPackageImpl::get_UML_ReadSelfAction()
 {
 	return uML_ReadSelfAction;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_ReadSelfAction_contained()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_ReadSelfAction_contained()
 {
 	return uML_ReadSelfAction_contained;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_ReadSelfAction_multiplicity()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_ReadSelfAction_multiplicity()
 {
 	return uML_ReadSelfAction_multiplicity;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_ReadSelfAction_not_static()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_ReadSelfAction_not_static()
 {
 	return uML_ReadSelfAction_not_static;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_ReadSelfAction_result()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_ReadSelfAction_result()
 {
 	return uML_ReadSelfAction_result;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_ReadSelfAction_type()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_ReadSelfAction_type()
 {
 	return uML_ReadSelfAction_type;
 }
-std::shared_ptr<uml::Class> UMLPackageImpl::get_UML_ReadStructuralFeatureAction()
+const std::shared_ptr<uml::Class>& UMLPackageImpl::get_UML_ReadStructuralFeatureAction()
 {
 	return uML_ReadStructuralFeatureAction;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_ReadStructuralFeatureAction_multiplicity()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_ReadStructuralFeatureAction_multiplicity()
 {
 	return uML_ReadStructuralFeatureAction_multiplicity;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_ReadStructuralFeatureAction_result()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_ReadStructuralFeatureAction_result()
 {
 	return uML_ReadStructuralFeatureAction_result;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_ReadStructuralFeatureAction_type_and_ordering()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_ReadStructuralFeatureAction_type_and_ordering()
 {
 	return uML_ReadStructuralFeatureAction_type_and_ordering;
 }
-std::shared_ptr<uml::Class> UMLPackageImpl::get_UML_ReadVariableAction()
+const std::shared_ptr<uml::Class>& UMLPackageImpl::get_UML_ReadVariableAction()
 {
 	return uML_ReadVariableAction;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_ReadVariableAction_compatible_multiplicity()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_ReadVariableAction_compatible_multiplicity()
 {
 	return uML_ReadVariableAction_compatible_multiplicity;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_ReadVariableAction_result()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_ReadVariableAction_result()
 {
 	return uML_ReadVariableAction_result;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_ReadVariableAction_type_and_ordering()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_ReadVariableAction_type_and_ordering()
 {
 	return uML_ReadVariableAction_type_and_ordering;
 }
-std::shared_ptr<uml::Class> UMLPackageImpl::get_UML_Realization()
+const std::shared_ptr<uml::Class>& UMLPackageImpl::get_UML_Realization()
 {
 	return uML_Realization;
 }
-std::shared_ptr<uml::Class> UMLPackageImpl::get_UML_Reception()
+const std::shared_ptr<uml::Class>& UMLPackageImpl::get_UML_Reception()
 {
 	return uML_Reception;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_Reception_same_name_as_signal()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_Reception_same_name_as_signal()
 {
 	return uML_Reception_same_name_as_signal;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_Reception_same_structure_as_signal()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_Reception_same_structure_as_signal()
 {
 	return uML_Reception_same_structure_as_signal;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_Reception_signal()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_Reception_signal()
 {
 	return uML_Reception_signal;
 }
-std::shared_ptr<uml::Class> UMLPackageImpl::get_UML_ReclassifyObjectAction()
+const std::shared_ptr<uml::Class>& UMLPackageImpl::get_UML_ReclassifyObjectAction()
 {
 	return uML_ReclassifyObjectAction;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_ReclassifyObjectAction_classifier_not_abstract()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_ReclassifyObjectAction_classifier_not_abstract()
 {
 	return uML_ReclassifyObjectAction_classifier_not_abstract;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_ReclassifyObjectAction_input_pin()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_ReclassifyObjectAction_input_pin()
 {
 	return uML_ReclassifyObjectAction_input_pin;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_ReclassifyObjectAction_isReplaceAll()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_ReclassifyObjectAction_isReplaceAll()
 {
 	return uML_ReclassifyObjectAction_isReplaceAll;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_ReclassifyObjectAction_multiplicity()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_ReclassifyObjectAction_multiplicity()
 {
 	return uML_ReclassifyObjectAction_multiplicity;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_ReclassifyObjectAction_newClassifier()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_ReclassifyObjectAction_newClassifier()
 {
 	return uML_ReclassifyObjectAction_newClassifier;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_ReclassifyObjectAction_object()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_ReclassifyObjectAction_object()
 {
 	return uML_ReclassifyObjectAction_object;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_ReclassifyObjectAction_oldClassifier()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_ReclassifyObjectAction_oldClassifier()
 {
 	return uML_ReclassifyObjectAction_oldClassifier;
 }
-std::shared_ptr<uml::Class> UMLPackageImpl::get_UML_RedefinableElement()
+const std::shared_ptr<uml::Class>& UMLPackageImpl::get_UML_RedefinableElement()
 {
 	return uML_RedefinableElement;
 }
-std::shared_ptr<uml::Operation> UMLPackageImpl::get_UML_RedefinableElement_isConsistentWith_RedefinableElement_RedefinableElement()
+const std::shared_ptr<uml::Operation>& UMLPackageImpl::get_UML_RedefinableElement_isConsistentWith_RedefinableElement_RedefinableElement()
 {
 	return uML_RedefinableElement_isConsistentWith_RedefinableElement_RedefinableElement;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_RedefinableElement_isConsistentWith_RedefinableElement_RedefinableElement_redefiningElement()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_RedefinableElement_isConsistentWith_RedefinableElement_RedefinableElement_redefiningElement()
 {
 	return uML_RedefinableElement_isConsistentWith_RedefinableElement_RedefinableElement_redefiningElement;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_RedefinableElement_isConsistentWith_pre()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_RedefinableElement_isConsistentWith_pre()
 {
 	return uML_RedefinableElement_isConsistentWith_pre;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_RedefinableElement_isConsistentWith_result()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_RedefinableElement_isConsistentWith_result()
 {
 	return uML_RedefinableElement_isConsistentWith_result;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_RedefinableElement_isConsistentWith_spec()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_RedefinableElement_isConsistentWith_spec()
 {
 	return uML_RedefinableElement_isConsistentWith_spec;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_RedefinableElement_isLeaf()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_RedefinableElement_isLeaf()
 {
 	return uML_RedefinableElement_isLeaf;
 }
-std::shared_ptr<uml::Operation> UMLPackageImpl::get_UML_RedefinableElement_isRedefinitionContextValid_RedefinableElement_RedefinableElement()
+const std::shared_ptr<uml::Operation>& UMLPackageImpl::get_UML_RedefinableElement_isRedefinitionContextValid_RedefinableElement_RedefinableElement()
 {
 	return uML_RedefinableElement_isRedefinitionContextValid_RedefinableElement_RedefinableElement;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_RedefinableElement_isRedefinitionContextValid_RedefinableElement_RedefinableElement_redefinedElement()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_RedefinableElement_isRedefinitionContextValid_RedefinableElement_RedefinableElement_redefinedElement()
 {
 	return uML_RedefinableElement_isRedefinitionContextValid_RedefinableElement_RedefinableElement_redefinedElement;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_RedefinableElement_isRedefinitionContextValid_result()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_RedefinableElement_isRedefinitionContextValid_result()
 {
 	return uML_RedefinableElement_isRedefinitionContextValid_result;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_RedefinableElement_isRedefinitionContextValid_spec()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_RedefinableElement_isRedefinitionContextValid_spec()
 {
 	return uML_RedefinableElement_isRedefinitionContextValid_spec;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_RedefinableElement_non_leaf_redefinition()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_RedefinableElement_non_leaf_redefinition()
 {
 	return uML_RedefinableElement_non_leaf_redefinition;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_RedefinableElement_redefinedElement()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_RedefinableElement_redefinedElement()
 {
 	return uML_RedefinableElement_redefinedElement;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_RedefinableElement_redefinitionContext()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_RedefinableElement_redefinitionContext()
 {
 	return uML_RedefinableElement_redefinitionContext;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_RedefinableElement_redefinition_consistent()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_RedefinableElement_redefinition_consistent()
 {
 	return uML_RedefinableElement_redefinition_consistent;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_RedefinableElement_redefinition_context_valid()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_RedefinableElement_redefinition_context_valid()
 {
 	return uML_RedefinableElement_redefinition_context_valid;
 }
-std::shared_ptr<uml::Class> UMLPackageImpl::get_UML_RedefinableTemplateSignature()
+const std::shared_ptr<uml::Class>& UMLPackageImpl::get_UML_RedefinableTemplateSignature()
 {
 	return uML_RedefinableTemplateSignature;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_RedefinableTemplateSignature_classifier()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_RedefinableTemplateSignature_classifier()
 {
 	return uML_RedefinableTemplateSignature_classifier;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_RedefinableTemplateSignature_extendedSignature()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_RedefinableTemplateSignature_extendedSignature()
 {
 	return uML_RedefinableTemplateSignature_extendedSignature;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_RedefinableTemplateSignature_inheritedParameter()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_RedefinableTemplateSignature_inheritedParameter()
 {
 	return uML_RedefinableTemplateSignature_inheritedParameter;
 }
-std::shared_ptr<uml::Operation> UMLPackageImpl::get_UML_RedefinableTemplateSignature_inheritedParameter__()
+const std::shared_ptr<uml::Operation>& UMLPackageImpl::get_UML_RedefinableTemplateSignature_inheritedParameter__()
 {
 	return uML_RedefinableTemplateSignature_inheritedParameter__;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_RedefinableTemplateSignature_inheritedParameter_result()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_RedefinableTemplateSignature_inheritedParameter_result()
 {
 	return uML_RedefinableTemplateSignature_inheritedParameter_result;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_RedefinableTemplateSignature_inheritedParameter_spec()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_RedefinableTemplateSignature_inheritedParameter_spec()
 {
 	return uML_RedefinableTemplateSignature_inheritedParameter_spec;
 }
-std::shared_ptr<uml::Operation> UMLPackageImpl::get_UML_RedefinableTemplateSignature_isConsistentWith_RedefinableElement_RedefinableElement()
+const std::shared_ptr<uml::Operation>& UMLPackageImpl::get_UML_RedefinableTemplateSignature_isConsistentWith_RedefinableElement_RedefinableElement()
 {
 	return uML_RedefinableTemplateSignature_isConsistentWith_RedefinableElement_RedefinableElement;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_RedefinableTemplateSignature_isConsistentWith_RedefinableElement_RedefinableElement_redefiningElement()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_RedefinableTemplateSignature_isConsistentWith_RedefinableElement_RedefinableElement_redefiningElement()
 {
 	return uML_RedefinableTemplateSignature_isConsistentWith_RedefinableElement_RedefinableElement_redefiningElement;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_RedefinableTemplateSignature_isConsistentWith_pre()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_RedefinableTemplateSignature_isConsistentWith_pre()
 {
 	return uML_RedefinableTemplateSignature_isConsistentWith_pre;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_RedefinableTemplateSignature_isConsistentWith_result()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_RedefinableTemplateSignature_isConsistentWith_result()
 {
 	return uML_RedefinableTemplateSignature_isConsistentWith_result;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_RedefinableTemplateSignature_isConsistentWith_spec()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_RedefinableTemplateSignature_isConsistentWith_spec()
 {
 	return uML_RedefinableTemplateSignature_isConsistentWith_spec;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_RedefinableTemplateSignature_redefines_parents()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_RedefinableTemplateSignature_redefines_parents()
 {
 	return uML_RedefinableTemplateSignature_redefines_parents;
 }
-std::shared_ptr<uml::Class> UMLPackageImpl::get_UML_ReduceAction()
+const std::shared_ptr<uml::Class>& UMLPackageImpl::get_UML_ReduceAction()
 {
 	return uML_ReduceAction;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_ReduceAction_collection()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_ReduceAction_collection()
 {
 	return uML_ReduceAction_collection;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_ReduceAction_input_type_is_collection()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_ReduceAction_input_type_is_collection()
 {
 	return uML_ReduceAction_input_type_is_collection;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_ReduceAction_isOrdered()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_ReduceAction_isOrdered()
 {
 	return uML_ReduceAction_isOrdered;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_ReduceAction_output_types_are_compatible()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_ReduceAction_output_types_are_compatible()
 {
 	return uML_ReduceAction_output_types_are_compatible;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_ReduceAction_reducer()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_ReduceAction_reducer()
 {
 	return uML_ReduceAction_reducer;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_ReduceAction_reducer_inputs_output()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_ReduceAction_reducer_inputs_output()
 {
 	return uML_ReduceAction_reducer_inputs_output;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_ReduceAction_result()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_ReduceAction_result()
 {
 	return uML_ReduceAction_result;
 }
-std::shared_ptr<uml::Class> UMLPackageImpl::get_UML_Region()
+const std::shared_ptr<uml::Class>& UMLPackageImpl::get_UML_Region()
 {
 	return uML_Region;
 }
-std::shared_ptr<uml::Operation> UMLPackageImpl::get_UML_Region_belongsToPSM__()
+const std::shared_ptr<uml::Operation>& UMLPackageImpl::get_UML_Region_belongsToPSM__()
 {
 	return uML_Region_belongsToPSM__;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_Region_belongsToPSM_result()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_Region_belongsToPSM_result()
 {
 	return uML_Region_belongsToPSM_result;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_Region_belongsToPSM_spec()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_Region_belongsToPSM_spec()
 {
 	return uML_Region_belongsToPSM_spec;
 }
-std::shared_ptr<uml::Operation> UMLPackageImpl::get_UML_Region_containingStateMachine__()
+const std::shared_ptr<uml::Operation>& UMLPackageImpl::get_UML_Region_containingStateMachine__()
 {
 	return uML_Region_containingStateMachine__;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_Region_containingStateMachine_result()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_Region_containingStateMachine_result()
 {
 	return uML_Region_containingStateMachine_result;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_Region_containingStateMachine_spec()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_Region_containingStateMachine_spec()
 {
 	return uML_Region_containingStateMachine_spec;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_Region_deep_history_vertex()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_Region_deep_history_vertex()
 {
 	return uML_Region_deep_history_vertex;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_Region_extendedRegion()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_Region_extendedRegion()
 {
 	return uML_Region_extendedRegion;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_Region_initial_vertex()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_Region_initial_vertex()
 {
 	return uML_Region_initial_vertex;
 }
-std::shared_ptr<uml::Operation> UMLPackageImpl::get_UML_Region_isConsistentWith_RedefinableElement_RedefinableElement()
+const std::shared_ptr<uml::Operation>& UMLPackageImpl::get_UML_Region_isConsistentWith_RedefinableElement_RedefinableElement()
 {
 	return uML_Region_isConsistentWith_RedefinableElement_RedefinableElement;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_Region_isConsistentWith_RedefinableElement_RedefinableElement_redefiningElement()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_Region_isConsistentWith_RedefinableElement_RedefinableElement_redefiningElement()
 {
 	return uML_Region_isConsistentWith_RedefinableElement_RedefinableElement_redefiningElement;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_Region_isConsistentWith_pre()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_Region_isConsistentWith_pre()
 {
 	return uML_Region_isConsistentWith_pre;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_Region_isConsistentWith_result()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_Region_isConsistentWith_result()
 {
 	return uML_Region_isConsistentWith_result;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_Region_isConsistentWith_spec()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_Region_isConsistentWith_spec()
 {
 	return uML_Region_isConsistentWith_spec;
 }
-std::shared_ptr<uml::Operation> UMLPackageImpl::get_UML_Region_isRedefinitionContextValid_RedefinableElement_RedefinableElement()
+const std::shared_ptr<uml::Operation>& UMLPackageImpl::get_UML_Region_isRedefinitionContextValid_RedefinableElement_RedefinableElement()
 {
 	return uML_Region_isRedefinitionContextValid_RedefinableElement_RedefinableElement;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_Region_isRedefinitionContextValid_RedefinableElement_RedefinableElement_redefinedElement()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_Region_isRedefinitionContextValid_RedefinableElement_RedefinableElement_redefinedElement()
 {
 	return uML_Region_isRedefinitionContextValid_RedefinableElement_RedefinableElement_redefinedElement;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_Region_isRedefinitionContextValid_result()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_Region_isRedefinitionContextValid_result()
 {
 	return uML_Region_isRedefinitionContextValid_result;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_Region_isRedefinitionContextValid_spec()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_Region_isRedefinitionContextValid_spec()
 {
 	return uML_Region_isRedefinitionContextValid_spec;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_Region_owned()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_Region_owned()
 {
 	return uML_Region_owned;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_Region_redefinitionContext()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_Region_redefinitionContext()
 {
 	return uML_Region_redefinitionContext;
 }
-std::shared_ptr<uml::Operation> UMLPackageImpl::get_UML_Region_redefinitionContext__()
+const std::shared_ptr<uml::Operation>& UMLPackageImpl::get_UML_Region_redefinitionContext__()
 {
 	return uML_Region_redefinitionContext__;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_Region_redefinitionContext_result()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_Region_redefinitionContext_result()
 {
 	return uML_Region_redefinitionContext_result;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_Region_redefinitionContext_spec()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_Region_redefinitionContext_spec()
 {
 	return uML_Region_redefinitionContext_spec;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_Region_shallow_history_vertex()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_Region_shallow_history_vertex()
 {
 	return uML_Region_shallow_history_vertex;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_Region_state()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_Region_state()
 {
 	return uML_Region_state;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_Region_stateMachine()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_Region_stateMachine()
 {
 	return uML_Region_stateMachine;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_Region_subvertex()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_Region_subvertex()
 {
 	return uML_Region_subvertex;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_Region_transition()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_Region_transition()
 {
 	return uML_Region_transition;
 }
-std::shared_ptr<uml::Class> UMLPackageImpl::get_UML_Relationship()
+const std::shared_ptr<uml::Class>& UMLPackageImpl::get_UML_Relationship()
 {
 	return uML_Relationship;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_Relationship_relatedElement()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_Relationship_relatedElement()
 {
 	return uML_Relationship_relatedElement;
 }
-std::shared_ptr<uml::Class> UMLPackageImpl::get_UML_RemoveStructuralFeatureValueAction()
+const std::shared_ptr<uml::Class>& UMLPackageImpl::get_UML_RemoveStructuralFeatureValueAction()
 {
 	return uML_RemoveStructuralFeatureValueAction;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_RemoveStructuralFeatureValueAction_isRemoveDuplicates()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_RemoveStructuralFeatureValueAction_isRemoveDuplicates()
 {
 	return uML_RemoveStructuralFeatureValueAction_isRemoveDuplicates;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_RemoveStructuralFeatureValueAction_removeAt()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_RemoveStructuralFeatureValueAction_removeAt()
 {
 	return uML_RemoveStructuralFeatureValueAction_removeAt;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_RemoveStructuralFeatureValueAction_removeAt_and_value()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_RemoveStructuralFeatureValueAction_removeAt_and_value()
 {
 	return uML_RemoveStructuralFeatureValueAction_removeAt_and_value;
 }
-std::shared_ptr<uml::Class> UMLPackageImpl::get_UML_RemoveVariableValueAction()
+const std::shared_ptr<uml::Class>& UMLPackageImpl::get_UML_RemoveVariableValueAction()
 {
 	return uML_RemoveVariableValueAction;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_RemoveVariableValueAction_isRemoveDuplicates()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_RemoveVariableValueAction_isRemoveDuplicates()
 {
 	return uML_RemoveVariableValueAction_isRemoveDuplicates;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_RemoveVariableValueAction_removeAt()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_RemoveVariableValueAction_removeAt()
 {
 	return uML_RemoveVariableValueAction_removeAt;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_RemoveVariableValueAction_removeAt_and_value()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_RemoveVariableValueAction_removeAt_and_value()
 {
 	return uML_RemoveVariableValueAction_removeAt_and_value;
 }
-std::shared_ptr<uml::Class> UMLPackageImpl::get_UML_ReplyAction()
+const std::shared_ptr<uml::Class>& UMLPackageImpl::get_UML_ReplyAction()
 {
 	return uML_ReplyAction;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_ReplyAction_event_on_reply_to_call_trigger()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_ReplyAction_event_on_reply_to_call_trigger()
 {
 	return uML_ReplyAction_event_on_reply_to_call_trigger;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_ReplyAction_pins_match_parameter()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_ReplyAction_pins_match_parameter()
 {
 	return uML_ReplyAction_pins_match_parameter;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_ReplyAction_replyToCall()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_ReplyAction_replyToCall()
 {
 	return uML_ReplyAction_replyToCall;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_ReplyAction_replyValue()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_ReplyAction_replyValue()
 {
 	return uML_ReplyAction_replyValue;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_ReplyAction_returnInformation()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_ReplyAction_returnInformation()
 {
 	return uML_ReplyAction_returnInformation;
 }
-std::shared_ptr<uml::Class> UMLPackageImpl::get_UML_SendObjectAction()
+const std::shared_ptr<uml::Class>& UMLPackageImpl::get_UML_SendObjectAction()
 {
 	return uML_SendObjectAction;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_SendObjectAction_request()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_SendObjectAction_request()
 {
 	return uML_SendObjectAction_request;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_SendObjectAction_target()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_SendObjectAction_target()
 {
 	return uML_SendObjectAction_target;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_SendObjectAction_type_target_pin()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_SendObjectAction_type_target_pin()
 {
 	return uML_SendObjectAction_type_target_pin;
 }
-std::shared_ptr<uml::Class> UMLPackageImpl::get_UML_SendSignalAction()
+const std::shared_ptr<uml::Class>& UMLPackageImpl::get_UML_SendSignalAction()
 {
 	return uML_SendSignalAction;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_SendSignalAction_number_order()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_SendSignalAction_number_order()
 {
 	return uML_SendSignalAction_number_order;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_SendSignalAction_signal()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_SendSignalAction_signal()
 {
 	return uML_SendSignalAction_signal;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_SendSignalAction_target()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_SendSignalAction_target()
 {
 	return uML_SendSignalAction_target;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_SendSignalAction_type_ordering_multiplicity()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_SendSignalAction_type_ordering_multiplicity()
 {
 	return uML_SendSignalAction_type_ordering_multiplicity;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_SendSignalAction_type_target_pin()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_SendSignalAction_type_target_pin()
 {
 	return uML_SendSignalAction_type_target_pin;
 }
-std::shared_ptr<uml::Class> UMLPackageImpl::get_UML_SequenceNode()
+const std::shared_ptr<uml::Class>& UMLPackageImpl::get_UML_SequenceNode()
 {
 	return uML_SequenceNode;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_SequenceNode_executableNode()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_SequenceNode_executableNode()
 {
 	return uML_SequenceNode_executableNode;
 }
-std::shared_ptr<uml::Class> UMLPackageImpl::get_UML_Signal()
+const std::shared_ptr<uml::Class>& UMLPackageImpl::get_UML_Signal()
 {
 	return uML_Signal;
 }
-std::shared_ptr<uml::Class> UMLPackageImpl::get_UML_SignalEvent()
+const std::shared_ptr<uml::Class>& UMLPackageImpl::get_UML_SignalEvent()
 {
 	return uML_SignalEvent;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_SignalEvent_signal()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_SignalEvent_signal()
 {
 	return uML_SignalEvent_signal;
 }
-std::shared_ptr<uml::Operation> UMLPackageImpl::get_UML_Signal_createOwnedAttribute_String_Type_Integer_UnlimitedNatural_String_Type_Integer_UnlimitedNatural()
+const std::shared_ptr<uml::Operation>& UMLPackageImpl::get_UML_Signal_createOwnedAttribute_String_Type_Integer_UnlimitedNatural_String_Type_Integer_UnlimitedNatural()
 {
 	return uML_Signal_createOwnedAttribute_String_Type_Integer_UnlimitedNatural_String_Type_Integer_UnlimitedNatural;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_Signal_createOwnedAttribute_String_Type_Integer_UnlimitedNatural_String_Type_Integer_UnlimitedNatural_lower()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_Signal_createOwnedAttribute_String_Type_Integer_UnlimitedNatural_String_Type_Integer_UnlimitedNatural_lower()
 {
 	return uML_Signal_createOwnedAttribute_String_Type_Integer_UnlimitedNatural_String_Type_Integer_UnlimitedNatural_lower;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_Signal_createOwnedAttribute_String_Type_Integer_UnlimitedNatural_String_Type_Integer_UnlimitedNatural_name()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_Signal_createOwnedAttribute_String_Type_Integer_UnlimitedNatural_String_Type_Integer_UnlimitedNatural_name()
 {
 	return uML_Signal_createOwnedAttribute_String_Type_Integer_UnlimitedNatural_String_Type_Integer_UnlimitedNatural_name;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_Signal_createOwnedAttribute_String_Type_Integer_UnlimitedNatural_String_Type_Integer_UnlimitedNatural_type()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_Signal_createOwnedAttribute_String_Type_Integer_UnlimitedNatural_String_Type_Integer_UnlimitedNatural_type()
 {
 	return uML_Signal_createOwnedAttribute_String_Type_Integer_UnlimitedNatural_String_Type_Integer_UnlimitedNatural_type;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_Signal_createOwnedAttribute_String_Type_Integer_UnlimitedNatural_String_Type_Integer_UnlimitedNatural_upper()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_Signal_createOwnedAttribute_String_Type_Integer_UnlimitedNatural_String_Type_Integer_UnlimitedNatural_upper()
 {
 	return uML_Signal_createOwnedAttribute_String_Type_Integer_UnlimitedNatural_String_Type_Integer_UnlimitedNatural_upper;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_Signal_createOwnedAttribute_String_Type_Integer_UnlimitedNatural_String_Type_Integer_UnlimitedNaturalreturn()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_Signal_createOwnedAttribute_String_Type_Integer_UnlimitedNatural_String_Type_Integer_UnlimitedNaturalreturn()
 {
 	return uML_Signal_createOwnedAttribute_String_Type_Integer_UnlimitedNatural_String_Type_Integer_UnlimitedNaturalreturn;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_Signal_ownedAttribute()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_Signal_ownedAttribute()
 {
 	return uML_Signal_ownedAttribute;
 }
-std::shared_ptr<uml::Class> UMLPackageImpl::get_UML_Slot()
+const std::shared_ptr<uml::Class>& UMLPackageImpl::get_UML_Slot()
 {
 	return uML_Slot;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_Slot_definingFeature()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_Slot_definingFeature()
 {
 	return uML_Slot_definingFeature;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_Slot_owningInstance()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_Slot_owningInstance()
 {
 	return uML_Slot_owningInstance;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_Slot_value()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_Slot_value()
 {
 	return uML_Slot_value;
 }
-std::shared_ptr<uml::Class> UMLPackageImpl::get_UML_StartClassifierBehaviorAction()
+const std::shared_ptr<uml::Class>& UMLPackageImpl::get_UML_StartClassifierBehaviorAction()
 {
 	return uML_StartClassifierBehaviorAction;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_StartClassifierBehaviorAction_multiplicity()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_StartClassifierBehaviorAction_multiplicity()
 {
 	return uML_StartClassifierBehaviorAction_multiplicity;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_StartClassifierBehaviorAction_object()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_StartClassifierBehaviorAction_object()
 {
 	return uML_StartClassifierBehaviorAction_object;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_StartClassifierBehaviorAction_type_has_classifier()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_StartClassifierBehaviorAction_type_has_classifier()
 {
 	return uML_StartClassifierBehaviorAction_type_has_classifier;
 }
-std::shared_ptr<uml::Class> UMLPackageImpl::get_UML_StartObjectBehaviorAction()
+const std::shared_ptr<uml::Class>& UMLPackageImpl::get_UML_StartObjectBehaviorAction()
 {
 	return uML_StartObjectBehaviorAction;
 }
-std::shared_ptr<uml::Operation> UMLPackageImpl::get_UML_StartObjectBehaviorAction_behavior__()
+const std::shared_ptr<uml::Operation>& UMLPackageImpl::get_UML_StartObjectBehaviorAction_behavior__()
 {
 	return uML_StartObjectBehaviorAction_behavior__;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_StartObjectBehaviorAction_behavior_result()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_StartObjectBehaviorAction_behavior_result()
 {
 	return uML_StartObjectBehaviorAction_behavior_result;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_StartObjectBehaviorAction_behavior_spec()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_StartObjectBehaviorAction_behavior_spec()
 {
 	return uML_StartObjectBehaviorAction_behavior_spec;
 }
-std::shared_ptr<uml::Operation> UMLPackageImpl::get_UML_StartObjectBehaviorAction_inputParameters__()
+const std::shared_ptr<uml::Operation>& UMLPackageImpl::get_UML_StartObjectBehaviorAction_inputParameters__()
 {
 	return uML_StartObjectBehaviorAction_inputParameters__;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_StartObjectBehaviorAction_inputParameters_result()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_StartObjectBehaviorAction_inputParameters_result()
 {
 	return uML_StartObjectBehaviorAction_inputParameters_result;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_StartObjectBehaviorAction_inputParameters_spec()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_StartObjectBehaviorAction_inputParameters_spec()
 {
 	return uML_StartObjectBehaviorAction_inputParameters_spec;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_StartObjectBehaviorAction_multiplicity_of_object()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_StartObjectBehaviorAction_multiplicity_of_object()
 {
 	return uML_StartObjectBehaviorAction_multiplicity_of_object;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_StartObjectBehaviorAction_no_onport()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_StartObjectBehaviorAction_no_onport()
 {
 	return uML_StartObjectBehaviorAction_no_onport;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_StartObjectBehaviorAction_object()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_StartObjectBehaviorAction_object()
 {
 	return uML_StartObjectBehaviorAction_object;
 }
-std::shared_ptr<uml::Operation> UMLPackageImpl::get_UML_StartObjectBehaviorAction_outputParameters__()
+const std::shared_ptr<uml::Operation>& UMLPackageImpl::get_UML_StartObjectBehaviorAction_outputParameters__()
 {
 	return uML_StartObjectBehaviorAction_outputParameters__;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_StartObjectBehaviorAction_outputParameters_result()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_StartObjectBehaviorAction_outputParameters_result()
 {
 	return uML_StartObjectBehaviorAction_outputParameters_result;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_StartObjectBehaviorAction_outputParameters_spec()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_StartObjectBehaviorAction_outputParameters_spec()
 {
 	return uML_StartObjectBehaviorAction_outputParameters_spec;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_StartObjectBehaviorAction_type_of_object()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_StartObjectBehaviorAction_type_of_object()
 {
 	return uML_StartObjectBehaviorAction_type_of_object;
 }
-std::shared_ptr<uml::Class> UMLPackageImpl::get_UML_State()
+const std::shared_ptr<uml::Class>& UMLPackageImpl::get_UML_State()
 {
 	return uML_State;
 }
-std::shared_ptr<uml::Class> UMLPackageImpl::get_UML_StateInvariant()
+const std::shared_ptr<uml::Class>& UMLPackageImpl::get_UML_StateInvariant()
 {
 	return uML_StateInvariant;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_StateInvariant_covered()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_StateInvariant_covered()
 {
 	return uML_StateInvariant_covered;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_StateInvariant_invariant()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_StateInvariant_invariant()
 {
 	return uML_StateInvariant_invariant;
 }
-std::shared_ptr<uml::Class> UMLPackageImpl::get_UML_StateMachine()
+const std::shared_ptr<uml::Class>& UMLPackageImpl::get_UML_StateMachine()
 {
 	return uML_StateMachine;
 }
-std::shared_ptr<uml::Operation> UMLPackageImpl::get_UML_StateMachine_LCAState_Vertex_Vertex_Vertex_Vertex()
+const std::shared_ptr<uml::Operation>& UMLPackageImpl::get_UML_StateMachine_LCAState_Vertex_Vertex_Vertex_Vertex()
 {
 	return uML_StateMachine_LCAState_Vertex_Vertex_Vertex_Vertex;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_StateMachine_LCAState_Vertex_Vertex_Vertex_Vertex_v1()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_StateMachine_LCAState_Vertex_Vertex_Vertex_Vertex_v1()
 {
 	return uML_StateMachine_LCAState_Vertex_Vertex_Vertex_Vertex_v1;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_StateMachine_LCAState_Vertex_Vertex_Vertex_Vertex_v2()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_StateMachine_LCAState_Vertex_Vertex_Vertex_Vertex_v2()
 {
 	return uML_StateMachine_LCAState_Vertex_Vertex_Vertex_Vertex_v2;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_StateMachine_LCAState_result()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_StateMachine_LCAState_result()
 {
 	return uML_StateMachine_LCAState_result;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_StateMachine_LCAState_spec()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_StateMachine_LCAState_spec()
 {
 	return uML_StateMachine_LCAState_spec;
 }
-std::shared_ptr<uml::Operation> UMLPackageImpl::get_UML_StateMachine_LCA_Vertex_Vertex_Vertex_Vertex()
+const std::shared_ptr<uml::Operation>& UMLPackageImpl::get_UML_StateMachine_LCA_Vertex_Vertex_Vertex_Vertex()
 {
 	return uML_StateMachine_LCA_Vertex_Vertex_Vertex_Vertex;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_StateMachine_LCA_Vertex_Vertex_Vertex_Vertex_s1()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_StateMachine_LCA_Vertex_Vertex_Vertex_Vertex_s1()
 {
 	return uML_StateMachine_LCA_Vertex_Vertex_Vertex_Vertex_s1;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_StateMachine_LCA_Vertex_Vertex_Vertex_Vertex_s2()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_StateMachine_LCA_Vertex_Vertex_Vertex_Vertex_s2()
 {
 	return uML_StateMachine_LCA_Vertex_Vertex_Vertex_Vertex_s2;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_StateMachine_LCA_result()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_StateMachine_LCA_result()
 {
 	return uML_StateMachine_LCA_result;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_StateMachine_LCA_spec()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_StateMachine_LCA_spec()
 {
 	return uML_StateMachine_LCA_spec;
 }
-std::shared_ptr<uml::Operation> UMLPackageImpl::get_UML_StateMachine_ancestor_Vertex_Vertex_Vertex_Vertex()
+const std::shared_ptr<uml::Operation>& UMLPackageImpl::get_UML_StateMachine_ancestor_Vertex_Vertex_Vertex_Vertex()
 {
 	return uML_StateMachine_ancestor_Vertex_Vertex_Vertex_Vertex;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_StateMachine_ancestor_Vertex_Vertex_Vertex_Vertex_s1()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_StateMachine_ancestor_Vertex_Vertex_Vertex_Vertex_s1()
 {
 	return uML_StateMachine_ancestor_Vertex_Vertex_Vertex_Vertex_s1;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_StateMachine_ancestor_Vertex_Vertex_Vertex_Vertex_s2()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_StateMachine_ancestor_Vertex_Vertex_Vertex_Vertex_s2()
 {
 	return uML_StateMachine_ancestor_Vertex_Vertex_Vertex_Vertex_s2;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_StateMachine_ancestor_result()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_StateMachine_ancestor_result()
 {
 	return uML_StateMachine_ancestor_result;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_StateMachine_ancestor_spec()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_StateMachine_ancestor_spec()
 {
 	return uML_StateMachine_ancestor_spec;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_StateMachine_classifier_context()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_StateMachine_classifier_context()
 {
 	return uML_StateMachine_classifier_context;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_StateMachine_connectionPoint()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_StateMachine_connectionPoint()
 {
 	return uML_StateMachine_connectionPoint;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_StateMachine_connection_points()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_StateMachine_connection_points()
 {
 	return uML_StateMachine_connection_points;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_StateMachine_context_classifier()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_StateMachine_context_classifier()
 {
 	return uML_StateMachine_context_classifier;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_StateMachine_extendedStateMachine()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_StateMachine_extendedStateMachine()
 {
 	return uML_StateMachine_extendedStateMachine;
 }
-std::shared_ptr<uml::Operation> UMLPackageImpl::get_UML_StateMachine_isConsistentWith_RedefinableElement_RedefinableElement()
+const std::shared_ptr<uml::Operation>& UMLPackageImpl::get_UML_StateMachine_isConsistentWith_RedefinableElement_RedefinableElement()
 {
 	return uML_StateMachine_isConsistentWith_RedefinableElement_RedefinableElement;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_StateMachine_isConsistentWith_RedefinableElement_RedefinableElement_redefiningElement()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_StateMachine_isConsistentWith_RedefinableElement_RedefinableElement_redefiningElement()
 {
 	return uML_StateMachine_isConsistentWith_RedefinableElement_RedefinableElement_redefiningElement;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_StateMachine_isConsistentWith_result()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_StateMachine_isConsistentWith_result()
 {
 	return uML_StateMachine_isConsistentWith_result;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_StateMachine_isConsistentWith_spec()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_StateMachine_isConsistentWith_spec()
 {
 	return uML_StateMachine_isConsistentWith_spec;
 }
-std::shared_ptr<uml::Operation> UMLPackageImpl::get_UML_StateMachine_isRedefinitionContextValid_RedefinableElement_RedefinableElement()
+const std::shared_ptr<uml::Operation>& UMLPackageImpl::get_UML_StateMachine_isRedefinitionContextValid_RedefinableElement_RedefinableElement()
 {
 	return uML_StateMachine_isRedefinitionContextValid_RedefinableElement_RedefinableElement;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_StateMachine_isRedefinitionContextValid_RedefinableElement_RedefinableElement_redefinedElement()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_StateMachine_isRedefinitionContextValid_RedefinableElement_RedefinableElement_redefinedElement()
 {
 	return uML_StateMachine_isRedefinitionContextValid_RedefinableElement_RedefinableElement_redefinedElement;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_StateMachine_isRedefinitionContextValid_result()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_StateMachine_isRedefinitionContextValid_result()
 {
 	return uML_StateMachine_isRedefinitionContextValid_result;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_StateMachine_isRedefinitionContextValid_spec()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_StateMachine_isRedefinitionContextValid_spec()
 {
 	return uML_StateMachine_isRedefinitionContextValid_spec;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_StateMachine_method()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_StateMachine_method()
 {
 	return uML_StateMachine_method;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_StateMachine_region()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_StateMachine_region()
 {
 	return uML_StateMachine_region;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_StateMachine_submachineState()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_StateMachine_submachineState()
 {
 	return uML_StateMachine_submachineState;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_State_composite_states()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_State_composite_states()
 {
 	return uML_State_composite_states;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_State_connection()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_State_connection()
 {
 	return uML_State_connection;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_State_connectionPoint()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_State_connectionPoint()
 {
 	return uML_State_connectionPoint;
 }
-std::shared_ptr<uml::Operation> UMLPackageImpl::get_UML_State_containingStateMachine__()
+const std::shared_ptr<uml::Operation>& UMLPackageImpl::get_UML_State_containingStateMachine__()
 {
 	return uML_State_containingStateMachine__;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_State_containingStateMachine_result()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_State_containingStateMachine_result()
 {
 	return uML_State_containingStateMachine_result;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_State_containingStateMachine_spec()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_State_containingStateMachine_spec()
 {
 	return uML_State_containingStateMachine_spec;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_State_deferrableTrigger()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_State_deferrableTrigger()
 {
 	return uML_State_deferrableTrigger;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_State_destinations_or_sources_of_transitions()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_State_destinations_or_sources_of_transitions()
 {
 	return uML_State_destinations_or_sources_of_transitions;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_State_doActivity()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_State_doActivity()
 {
 	return uML_State_doActivity;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_State_entry()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_State_entry()
 {
 	return uML_State_entry;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_State_entry_or_exit()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_State_entry_or_exit()
 {
 	return uML_State_entry_or_exit;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_State_exit()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_State_exit()
 {
 	return uML_State_exit;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_State_isComposite()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_State_isComposite()
 {
 	return uML_State_isComposite;
 }
-std::shared_ptr<uml::Operation> UMLPackageImpl::get_UML_State_isComposite__()
+const std::shared_ptr<uml::Operation>& UMLPackageImpl::get_UML_State_isComposite__()
 {
 	return uML_State_isComposite__;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_State_isComposite_result()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_State_isComposite_result()
 {
 	return uML_State_isComposite_result;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_State_isComposite_spec()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_State_isComposite_spec()
 {
 	return uML_State_isComposite_spec;
 }
-std::shared_ptr<uml::Operation> UMLPackageImpl::get_UML_State_isConsistentWith_RedefinableElement_RedefinableElement()
+const std::shared_ptr<uml::Operation>& UMLPackageImpl::get_UML_State_isConsistentWith_RedefinableElement_RedefinableElement()
 {
 	return uML_State_isConsistentWith_RedefinableElement_RedefinableElement;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_State_isConsistentWith_RedefinableElement_RedefinableElement_redefiningElement()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_State_isConsistentWith_RedefinableElement_RedefinableElement_redefiningElement()
 {
 	return uML_State_isConsistentWith_RedefinableElement_RedefinableElement_redefiningElement;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_State_isConsistentWith_pre()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_State_isConsistentWith_pre()
 {
 	return uML_State_isConsistentWith_pre;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_State_isConsistentWith_result()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_State_isConsistentWith_result()
 {
 	return uML_State_isConsistentWith_result;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_State_isConsistentWith_spec()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_State_isConsistentWith_spec()
 {
 	return uML_State_isConsistentWith_spec;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_State_isOrthogonal()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_State_isOrthogonal()
 {
 	return uML_State_isOrthogonal;
 }
-std::shared_ptr<uml::Operation> UMLPackageImpl::get_UML_State_isOrthogonal__()
+const std::shared_ptr<uml::Operation>& UMLPackageImpl::get_UML_State_isOrthogonal__()
 {
 	return uML_State_isOrthogonal__;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_State_isOrthogonal_result()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_State_isOrthogonal_result()
 {
 	return uML_State_isOrthogonal_result;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_State_isOrthogonal_spec()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_State_isOrthogonal_spec()
 {
 	return uML_State_isOrthogonal_spec;
 }
-std::shared_ptr<uml::Operation> UMLPackageImpl::get_UML_State_isRedefinitionContextValid_RedefinableElement_RedefinableElement()
+const std::shared_ptr<uml::Operation>& UMLPackageImpl::get_UML_State_isRedefinitionContextValid_RedefinableElement_RedefinableElement()
 {
 	return uML_State_isRedefinitionContextValid_RedefinableElement_RedefinableElement;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_State_isRedefinitionContextValid_RedefinableElement_RedefinableElement_redefinedElement()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_State_isRedefinitionContextValid_RedefinableElement_RedefinableElement_redefinedElement()
 {
 	return uML_State_isRedefinitionContextValid_RedefinableElement_RedefinableElement_redefinedElement;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_State_isRedefinitionContextValid_result()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_State_isRedefinitionContextValid_result()
 {
 	return uML_State_isRedefinitionContextValid_result;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_State_isRedefinitionContextValid_spec()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_State_isRedefinitionContextValid_spec()
 {
 	return uML_State_isRedefinitionContextValid_spec;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_State_isSimple()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_State_isSimple()
 {
 	return uML_State_isSimple;
 }
-std::shared_ptr<uml::Operation> UMLPackageImpl::get_UML_State_isSimple__()
+const std::shared_ptr<uml::Operation>& UMLPackageImpl::get_UML_State_isSimple__()
 {
 	return uML_State_isSimple__;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_State_isSimple_result()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_State_isSimple_result()
 {
 	return uML_State_isSimple_result;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_State_isSimple_spec()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_State_isSimple_spec()
 {
 	return uML_State_isSimple_spec;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_State_isSubmachineState()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_State_isSubmachineState()
 {
 	return uML_State_isSubmachineState;
 }
-std::shared_ptr<uml::Operation> UMLPackageImpl::get_UML_State_isSubmachineState__()
+const std::shared_ptr<uml::Operation>& UMLPackageImpl::get_UML_State_isSubmachineState__()
 {
 	return uML_State_isSubmachineState__;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_State_isSubmachineState_result()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_State_isSubmachineState_result()
 {
 	return uML_State_isSubmachineState_result;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_State_isSubmachineState_spec()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_State_isSubmachineState_spec()
 {
 	return uML_State_isSubmachineState_spec;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_State_redefinedState()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_State_redefinedState()
 {
 	return uML_State_redefinedState;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_State_redefinitionContext()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_State_redefinitionContext()
 {
 	return uML_State_redefinitionContext;
 }
-std::shared_ptr<uml::Operation> UMLPackageImpl::get_UML_State_redefinitionContext__()
+const std::shared_ptr<uml::Operation>& UMLPackageImpl::get_UML_State_redefinitionContext__()
 {
 	return uML_State_redefinitionContext__;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_State_redefinitionContext_result()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_State_redefinitionContext_result()
 {
 	return uML_State_redefinitionContext_result;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_State_redefinitionContext_spec()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_State_redefinitionContext_spec()
 {
 	return uML_State_redefinitionContext_spec;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_State_region()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_State_region()
 {
 	return uML_State_region;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_State_stateInvariant()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_State_stateInvariant()
 {
 	return uML_State_stateInvariant;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_State_submachine()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_State_submachine()
 {
 	return uML_State_submachine;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_State_submachine_or_regions()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_State_submachine_or_regions()
 {
 	return uML_State_submachine_or_regions;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_State_submachine_states()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_State_submachine_states()
 {
 	return uML_State_submachine_states;
 }
-std::shared_ptr<uml::Class> UMLPackageImpl::get_UML_Stereotype()
+const std::shared_ptr<uml::Class>& UMLPackageImpl::get_UML_Stereotype()
 {
 	return uML_Stereotype;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_Stereotype_associationEndOwnership()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_Stereotype_associationEndOwnership()
 {
 	return uML_Stereotype_associationEndOwnership;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_Stereotype_base_property_multiplicity_multiple_extension()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_Stereotype_base_property_multiplicity_multiple_extension()
 {
 	return uML_Stereotype_base_property_multiplicity_multiple_extension;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_Stereotype_base_property_multiplicity_single_extension()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_Stereotype_base_property_multiplicity_single_extension()
 {
 	return uML_Stereotype_base_property_multiplicity_single_extension;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_Stereotype_base_property_upper_bound()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_Stereotype_base_property_upper_bound()
 {
 	return uML_Stereotype_base_property_upper_bound;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_Stereotype_binaryAssociationsOnly()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_Stereotype_binaryAssociationsOnly()
 {
 	return uML_Stereotype_binaryAssociationsOnly;
 }
-std::shared_ptr<uml::Operation> UMLPackageImpl::get_UML_Stereotype_containingProfile__()
+const std::shared_ptr<uml::Operation>& UMLPackageImpl::get_UML_Stereotype_containingProfile__()
 {
 	return uML_Stereotype_containingProfile__;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_Stereotype_containingProfile_result()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_Stereotype_containingProfile_result()
 {
 	return uML_Stereotype_containingProfile_result;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_Stereotype_containingProfile_spec()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_Stereotype_containingProfile_spec()
 {
 	return uML_Stereotype_containingProfile_spec;
 }
-std::shared_ptr<uml::Operation> UMLPackageImpl::get_UML_Stereotype_createExtension_Class_Boolean_Class_Boolean()
+const std::shared_ptr<uml::Operation>& UMLPackageImpl::get_UML_Stereotype_createExtension_Class_Boolean_Class_Boolean()
 {
 	return uML_Stereotype_createExtension_Class_Boolean_Class_Boolean;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_Stereotype_createExtension_Class_Boolean_Class_Boolean_isRequired()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_Stereotype_createExtension_Class_Boolean_Class_Boolean_isRequired()
 {
 	return uML_Stereotype_createExtension_Class_Boolean_Class_Boolean_isRequired;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_Stereotype_createExtension_Class_Boolean_Class_Boolean_metaclass()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_Stereotype_createExtension_Class_Boolean_Class_Boolean_metaclass()
 {
 	return uML_Stereotype_createExtension_Class_Boolean_Class_Boolean_metaclass;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_Stereotype_createExtension_Class_Boolean_Class_Booleanreturn()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_Stereotype_createExtension_Class_Boolean_Class_Booleanreturn()
 {
 	return uML_Stereotype_createExtension_Class_Boolean_Class_Booleanreturn;
 }
-std::shared_ptr<uml::Operation> UMLPackageImpl::get_UML_Stereotype_createIcon_String_String()
+const std::shared_ptr<uml::Operation>& UMLPackageImpl::get_UML_Stereotype_createIcon_String_String()
 {
 	return uML_Stereotype_createIcon_String_String;
 }
-std::shared_ptr<uml::Operation> UMLPackageImpl::get_UML_Stereotype_createIcon_String_String_String_String()
+const std::shared_ptr<uml::Operation>& UMLPackageImpl::get_UML_Stereotype_createIcon_String_String_String_String()
 {
 	return uML_Stereotype_createIcon_String_String_String_String;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_Stereotype_createIcon_String_String_String_String_content()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_Stereotype_createIcon_String_String_String_String_content()
 {
 	return uML_Stereotype_createIcon_String_String_String_String_content;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_Stereotype_createIcon_String_String_String_String_format()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_Stereotype_createIcon_String_String_String_String_format()
 {
 	return uML_Stereotype_createIcon_String_String_String_String_format;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_Stereotype_createIcon_String_String_String_Stringreturn()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_Stereotype_createIcon_String_String_String_Stringreturn()
 {
 	return uML_Stereotype_createIcon_String_String_String_Stringreturn;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_Stereotype_createIcon_String_String_location()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_Stereotype_createIcon_String_String_location()
 {
 	return uML_Stereotype_createIcon_String_String_location;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_Stereotype_createIcon_String_Stringreturn()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_Stereotype_createIcon_String_Stringreturn()
 {
 	return uML_Stereotype_createIcon_String_Stringreturn;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_Stereotype_generalize()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_Stereotype_generalize()
 {
 	return uML_Stereotype_generalize;
 }
-std::shared_ptr<uml::Operation> UMLPackageImpl::get_UML_Stereotype_getAllExtendedMetaclasses__()
+const std::shared_ptr<uml::Operation>& UMLPackageImpl::get_UML_Stereotype_getAllExtendedMetaclasses__()
 {
 	return uML_Stereotype_getAllExtendedMetaclasses__;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_Stereotype_getAllExtendedMetaclasses__return()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_Stereotype_getAllExtendedMetaclasses__return()
 {
 	return uML_Stereotype_getAllExtendedMetaclasses__return;
 }
-std::shared_ptr<uml::Operation> UMLPackageImpl::get_UML_Stereotype_getDefinition__()
+const std::shared_ptr<uml::Operation>& UMLPackageImpl::get_UML_Stereotype_getDefinition__()
 {
 	return uML_Stereotype_getDefinition__;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_Stereotype_getDefinition__return()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_Stereotype_getDefinition__return()
 {
 	return uML_Stereotype_getDefinition__return;
 }
-std::shared_ptr<uml::Operation> UMLPackageImpl::get_UML_Stereotype_getExtendedMetaclasses__()
+const std::shared_ptr<uml::Operation>& UMLPackageImpl::get_UML_Stereotype_getExtendedMetaclasses__()
 {
 	return uML_Stereotype_getExtendedMetaclasses__;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_Stereotype_getExtendedMetaclasses__return()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_Stereotype_getExtendedMetaclasses__return()
 {
 	return uML_Stereotype_getExtendedMetaclasses__return;
 }
-std::shared_ptr<uml::Operation> UMLPackageImpl::get_UML_Stereotype_getKeyword_Boolean_Boolean()
+const std::shared_ptr<uml::Operation>& UMLPackageImpl::get_UML_Stereotype_getKeyword_Boolean_Boolean()
 {
 	return uML_Stereotype_getKeyword_Boolean_Boolean;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_Stereotype_getKeyword_Boolean_Boolean_localize()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_Stereotype_getKeyword_Boolean_Boolean_localize()
 {
 	return uML_Stereotype_getKeyword_Boolean_Boolean_localize;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_Stereotype_getKeyword_Boolean_Booleanreturn()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_Stereotype_getKeyword_Boolean_Booleanreturn()
 {
 	return uML_Stereotype_getKeyword_Boolean_Booleanreturn;
 }
-std::shared_ptr<uml::Operation> UMLPackageImpl::get_UML_Stereotype_getKeyword__()
+const std::shared_ptr<uml::Operation>& UMLPackageImpl::get_UML_Stereotype_getKeyword__()
 {
 	return uML_Stereotype_getKeyword__;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_Stereotype_getKeyword__return()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_Stereotype_getKeyword__return()
 {
 	return uML_Stereotype_getKeyword__return;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_Stereotype_icon()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_Stereotype_icon()
 {
 	return uML_Stereotype_icon;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_Stereotype_name_not_clash()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_Stereotype_name_not_clash()
 {
 	return uML_Stereotype_name_not_clash;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_Stereotype_profile()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_Stereotype_profile()
 {
 	return uML_Stereotype_profile;
 }
-std::shared_ptr<uml::Operation> UMLPackageImpl::get_UML_Stereotype_profile__()
+const std::shared_ptr<uml::Operation>& UMLPackageImpl::get_UML_Stereotype_profile__()
 {
 	return uML_Stereotype_profile__;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_Stereotype_profile_result()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_Stereotype_profile_result()
 {
 	return uML_Stereotype_profile_result;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_Stereotype_profile_spec()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_Stereotype_profile_spec()
 {
 	return uML_Stereotype_profile_spec;
 }
-std::shared_ptr<uml::Class> UMLPackageImpl::get_UML_StringExpression()
+const std::shared_ptr<uml::Class>& UMLPackageImpl::get_UML_StringExpression()
 {
 	return uML_StringExpression;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_StringExpression_operands()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_StringExpression_operands()
 {
 	return uML_StringExpression_operands;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_StringExpression_owningExpression()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_StringExpression_owningExpression()
 {
 	return uML_StringExpression_owningExpression;
 }
-std::shared_ptr<uml::Operation> UMLPackageImpl::get_UML_StringExpression_stringValue__()
+const std::shared_ptr<uml::Operation>& UMLPackageImpl::get_UML_StringExpression_stringValue__()
 {
 	return uML_StringExpression_stringValue__;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_StringExpression_stringValue_result()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_StringExpression_stringValue_result()
 {
 	return uML_StringExpression_stringValue_result;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_StringExpression_stringValue_spec()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_StringExpression_stringValue_spec()
 {
 	return uML_StringExpression_stringValue_spec;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_StringExpression_subExpression()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_StringExpression_subExpression()
 {
 	return uML_StringExpression_subExpression;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_StringExpression_subexpressions()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_StringExpression_subexpressions()
 {
 	return uML_StringExpression_subexpressions;
 }
-std::shared_ptr<uml::Class> UMLPackageImpl::get_UML_StructuralFeature()
+const std::shared_ptr<uml::Class>& UMLPackageImpl::get_UML_StructuralFeature()
 {
 	return uML_StructuralFeature;
 }
-std::shared_ptr<uml::Class> UMLPackageImpl::get_UML_StructuralFeatureAction()
+const std::shared_ptr<uml::Class>& UMLPackageImpl::get_UML_StructuralFeatureAction()
 {
 	return uML_StructuralFeatureAction;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_StructuralFeatureAction_multiplicity()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_StructuralFeatureAction_multiplicity()
 {
 	return uML_StructuralFeatureAction_multiplicity;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_StructuralFeatureAction_not_static()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_StructuralFeatureAction_not_static()
 {
 	return uML_StructuralFeatureAction_not_static;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_StructuralFeatureAction_object()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_StructuralFeatureAction_object()
 {
 	return uML_StructuralFeatureAction_object;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_StructuralFeatureAction_object_type()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_StructuralFeatureAction_object_type()
 {
 	return uML_StructuralFeatureAction_object_type;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_StructuralFeatureAction_one_featuring_classifier()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_StructuralFeatureAction_one_featuring_classifier()
 {
 	return uML_StructuralFeatureAction_one_featuring_classifier;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_StructuralFeatureAction_structuralFeature()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_StructuralFeatureAction_structuralFeature()
 {
 	return uML_StructuralFeatureAction_structuralFeature;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_StructuralFeatureAction_visibility()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_StructuralFeatureAction_visibility()
 {
 	return uML_StructuralFeatureAction_visibility;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_StructuralFeature_isReadOnly()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_StructuralFeature_isReadOnly()
 {
 	return uML_StructuralFeature_isReadOnly;
 }
-std::shared_ptr<uml::Class> UMLPackageImpl::get_UML_StructuredActivityNode()
+const std::shared_ptr<uml::Class>& UMLPackageImpl::get_UML_StructuredActivityNode()
 {
 	return uML_StructuredActivityNode;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_StructuredActivityNode_activity()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_StructuredActivityNode_activity()
 {
 	return uML_StructuredActivityNode_activity;
 }
-std::shared_ptr<uml::Operation> UMLPackageImpl::get_UML_StructuredActivityNode_allActions__()
+const std::shared_ptr<uml::Operation>& UMLPackageImpl::get_UML_StructuredActivityNode_allActions__()
 {
 	return uML_StructuredActivityNode_allActions__;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_StructuredActivityNode_allActions_result()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_StructuredActivityNode_allActions_result()
 {
 	return uML_StructuredActivityNode_allActions_result;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_StructuredActivityNode_allActions_spec()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_StructuredActivityNode_allActions_spec()
 {
 	return uML_StructuredActivityNode_allActions_spec;
 }
-std::shared_ptr<uml::Operation> UMLPackageImpl::get_UML_StructuredActivityNode_allOwnedNodes__()
+const std::shared_ptr<uml::Operation>& UMLPackageImpl::get_UML_StructuredActivityNode_allOwnedNodes__()
 {
 	return uML_StructuredActivityNode_allOwnedNodes__;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_StructuredActivityNode_allOwnedNodes_result()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_StructuredActivityNode_allOwnedNodes_result()
 {
 	return uML_StructuredActivityNode_allOwnedNodes_result;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_StructuredActivityNode_allOwnedNodes_spec()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_StructuredActivityNode_allOwnedNodes_spec()
 {
 	return uML_StructuredActivityNode_allOwnedNodes_spec;
 }
-std::shared_ptr<uml::Operation> UMLPackageImpl::get_UML_StructuredActivityNode_containingActivity__()
+const std::shared_ptr<uml::Operation>& UMLPackageImpl::get_UML_StructuredActivityNode_containingActivity__()
 {
 	return uML_StructuredActivityNode_containingActivity__;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_StructuredActivityNode_containingActivity_result()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_StructuredActivityNode_containingActivity_result()
 {
 	return uML_StructuredActivityNode_containingActivity_result;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_StructuredActivityNode_containingActivity_spec()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_StructuredActivityNode_containingActivity_spec()
 {
 	return uML_StructuredActivityNode_containingActivity_spec;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_StructuredActivityNode_edge()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_StructuredActivityNode_edge()
 {
 	return uML_StructuredActivityNode_edge;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_StructuredActivityNode_edges()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_StructuredActivityNode_edges()
 {
 	return uML_StructuredActivityNode_edges;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_StructuredActivityNode_input_pin_edges()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_StructuredActivityNode_input_pin_edges()
 {
 	return uML_StructuredActivityNode_input_pin_edges;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_StructuredActivityNode_mustIsolate()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_StructuredActivityNode_mustIsolate()
 {
 	return uML_StructuredActivityNode_mustIsolate;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_StructuredActivityNode_node()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_StructuredActivityNode_node()
 {
 	return uML_StructuredActivityNode_node;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_StructuredActivityNode_output_pin_edges()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_StructuredActivityNode_output_pin_edges()
 {
 	return uML_StructuredActivityNode_output_pin_edges;
 }
-std::shared_ptr<uml::Operation> UMLPackageImpl::get_UML_StructuredActivityNode_sourceNodes__()
+const std::shared_ptr<uml::Operation>& UMLPackageImpl::get_UML_StructuredActivityNode_sourceNodes__()
 {
 	return uML_StructuredActivityNode_sourceNodes__;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_StructuredActivityNode_sourceNodes_result()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_StructuredActivityNode_sourceNodes_result()
 {
 	return uML_StructuredActivityNode_sourceNodes_result;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_StructuredActivityNode_sourceNodes_spec()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_StructuredActivityNode_sourceNodes_spec()
 {
 	return uML_StructuredActivityNode_sourceNodes_spec;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_StructuredActivityNode_structuredNodeInput()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_StructuredActivityNode_structuredNodeInput()
 {
 	return uML_StructuredActivityNode_structuredNodeInput;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_StructuredActivityNode_structuredNodeOutput()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_StructuredActivityNode_structuredNodeOutput()
 {
 	return uML_StructuredActivityNode_structuredNodeOutput;
 }
-std::shared_ptr<uml::Operation> UMLPackageImpl::get_UML_StructuredActivityNode_targetNodes__()
+const std::shared_ptr<uml::Operation>& UMLPackageImpl::get_UML_StructuredActivityNode_targetNodes__()
 {
 	return uML_StructuredActivityNode_targetNodes__;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_StructuredActivityNode_targetNodes_result()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_StructuredActivityNode_targetNodes_result()
 {
 	return uML_StructuredActivityNode_targetNodes_result;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_StructuredActivityNode_targetNodes_spec()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_StructuredActivityNode_targetNodes_spec()
 {
 	return uML_StructuredActivityNode_targetNodes_spec;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_StructuredActivityNode_variable()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_StructuredActivityNode_variable()
 {
 	return uML_StructuredActivityNode_variable;
 }
-std::shared_ptr<uml::Class> UMLPackageImpl::get_UML_StructuredClassifier()
+const std::shared_ptr<uml::Class>& UMLPackageImpl::get_UML_StructuredClassifier()
 {
 	return uML_StructuredClassifier;
 }
-std::shared_ptr<uml::Operation> UMLPackageImpl::get_UML_StructuredClassifier_allRoles__()
+const std::shared_ptr<uml::Operation>& UMLPackageImpl::get_UML_StructuredClassifier_allRoles__()
 {
 	return uML_StructuredClassifier_allRoles__;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_StructuredClassifier_allRoles_result()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_StructuredClassifier_allRoles_result()
 {
 	return uML_StructuredClassifier_allRoles_result;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_StructuredClassifier_allRoles_spec()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_StructuredClassifier_allRoles_spec()
 {
 	return uML_StructuredClassifier_allRoles_spec;
 }
-std::shared_ptr<uml::Operation> UMLPackageImpl::get_UML_StructuredClassifier_createOwnedAttribute_String_Type_Integer_UnlimitedNatural_String_Type_Integer_UnlimitedNatural()
+const std::shared_ptr<uml::Operation>& UMLPackageImpl::get_UML_StructuredClassifier_createOwnedAttribute_String_Type_Integer_UnlimitedNatural_String_Type_Integer_UnlimitedNatural()
 {
 	return uML_StructuredClassifier_createOwnedAttribute_String_Type_Integer_UnlimitedNatural_String_Type_Integer_UnlimitedNatural;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_StructuredClassifier_createOwnedAttribute_String_Type_Integer_UnlimitedNatural_String_Type_Integer_UnlimitedNatural_lower()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_StructuredClassifier_createOwnedAttribute_String_Type_Integer_UnlimitedNatural_String_Type_Integer_UnlimitedNatural_lower()
 {
 	return uML_StructuredClassifier_createOwnedAttribute_String_Type_Integer_UnlimitedNatural_String_Type_Integer_UnlimitedNatural_lower;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_StructuredClassifier_createOwnedAttribute_String_Type_Integer_UnlimitedNatural_String_Type_Integer_UnlimitedNatural_name()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_StructuredClassifier_createOwnedAttribute_String_Type_Integer_UnlimitedNatural_String_Type_Integer_UnlimitedNatural_name()
 {
 	return uML_StructuredClassifier_createOwnedAttribute_String_Type_Integer_UnlimitedNatural_String_Type_Integer_UnlimitedNatural_name;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_StructuredClassifier_createOwnedAttribute_String_Type_Integer_UnlimitedNatural_String_Type_Integer_UnlimitedNatural_type()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_StructuredClassifier_createOwnedAttribute_String_Type_Integer_UnlimitedNatural_String_Type_Integer_UnlimitedNatural_type()
 {
 	return uML_StructuredClassifier_createOwnedAttribute_String_Type_Integer_UnlimitedNatural_String_Type_Integer_UnlimitedNatural_type;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_StructuredClassifier_createOwnedAttribute_String_Type_Integer_UnlimitedNatural_String_Type_Integer_UnlimitedNatural_upper()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_StructuredClassifier_createOwnedAttribute_String_Type_Integer_UnlimitedNatural_String_Type_Integer_UnlimitedNatural_upper()
 {
 	return uML_StructuredClassifier_createOwnedAttribute_String_Type_Integer_UnlimitedNatural_String_Type_Integer_UnlimitedNatural_upper;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_StructuredClassifier_createOwnedAttribute_String_Type_Integer_UnlimitedNatural_String_Type_Integer_UnlimitedNaturalreturn()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_StructuredClassifier_createOwnedAttribute_String_Type_Integer_UnlimitedNatural_String_Type_Integer_UnlimitedNaturalreturn()
 {
 	return uML_StructuredClassifier_createOwnedAttribute_String_Type_Integer_UnlimitedNatural_String_Type_Integer_UnlimitedNaturalreturn;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_StructuredClassifier_ownedAttribute()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_StructuredClassifier_ownedAttribute()
 {
 	return uML_StructuredClassifier_ownedAttribute;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_StructuredClassifier_ownedConnector()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_StructuredClassifier_ownedConnector()
 {
 	return uML_StructuredClassifier_ownedConnector;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_StructuredClassifier_part()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_StructuredClassifier_part()
 {
 	return uML_StructuredClassifier_part;
 }
-std::shared_ptr<uml::Operation> UMLPackageImpl::get_UML_StructuredClassifier_part__()
+const std::shared_ptr<uml::Operation>& UMLPackageImpl::get_UML_StructuredClassifier_part__()
 {
 	return uML_StructuredClassifier_part__;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_StructuredClassifier_part_result()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_StructuredClassifier_part_result()
 {
 	return uML_StructuredClassifier_part_result;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_StructuredClassifier_part_spec()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_StructuredClassifier_part_spec()
 {
 	return uML_StructuredClassifier_part_spec;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_StructuredClassifier_role()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_StructuredClassifier_role()
 {
 	return uML_StructuredClassifier_role;
 }
-std::shared_ptr<uml::Class> UMLPackageImpl::get_UML_Substitution()
+const std::shared_ptr<uml::Class>& UMLPackageImpl::get_UML_Substitution()
 {
 	return uML_Substitution;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_Substitution_contract()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_Substitution_contract()
 {
 	return uML_Substitution_contract;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_Substitution_substitutingClassifier()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_Substitution_substitutingClassifier()
 {
 	return uML_Substitution_substitutingClassifier;
 }
-std::shared_ptr<uml::Class> UMLPackageImpl::get_UML_TemplateBinding()
+const std::shared_ptr<uml::Class>& UMLPackageImpl::get_UML_TemplateBinding()
 {
 	return uML_TemplateBinding;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_TemplateBinding_boundElement()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_TemplateBinding_boundElement()
 {
 	return uML_TemplateBinding_boundElement;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_TemplateBinding_one_parameter_substitution()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_TemplateBinding_one_parameter_substitution()
 {
 	return uML_TemplateBinding_one_parameter_substitution;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_TemplateBinding_parameterSubstitution()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_TemplateBinding_parameterSubstitution()
 {
 	return uML_TemplateBinding_parameterSubstitution;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_TemplateBinding_parameter_substitution_formal()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_TemplateBinding_parameter_substitution_formal()
 {
 	return uML_TemplateBinding_parameter_substitution_formal;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_TemplateBinding_signature()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_TemplateBinding_signature()
 {
 	return uML_TemplateBinding_signature;
 }
-std::shared_ptr<uml::Class> UMLPackageImpl::get_UML_TemplateParameter()
+const std::shared_ptr<uml::Class>& UMLPackageImpl::get_UML_TemplateParameter()
 {
 	return uML_TemplateParameter;
 }
-std::shared_ptr<uml::Class> UMLPackageImpl::get_UML_TemplateParameterSubstitution()
+const std::shared_ptr<uml::Class>& UMLPackageImpl::get_UML_TemplateParameterSubstitution()
 {
 	return uML_TemplateParameterSubstitution;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_TemplateParameterSubstitution_actual()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_TemplateParameterSubstitution_actual()
 {
 	return uML_TemplateParameterSubstitution_actual;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_TemplateParameterSubstitution_formal()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_TemplateParameterSubstitution_formal()
 {
 	return uML_TemplateParameterSubstitution_formal;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_TemplateParameterSubstitution_must_be_compatible()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_TemplateParameterSubstitution_must_be_compatible()
 {
 	return uML_TemplateParameterSubstitution_must_be_compatible;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_TemplateParameterSubstitution_ownedActual()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_TemplateParameterSubstitution_ownedActual()
 {
 	return uML_TemplateParameterSubstitution_ownedActual;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_TemplateParameterSubstitution_templateBinding()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_TemplateParameterSubstitution_templateBinding()
 {
 	return uML_TemplateParameterSubstitution_templateBinding;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_TemplateParameter_default()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_TemplateParameter_default()
 {
 	return uML_TemplateParameter_default;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_TemplateParameter_must_be_compatible()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_TemplateParameter_must_be_compatible()
 {
 	return uML_TemplateParameter_must_be_compatible;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_TemplateParameter_ownedDefault()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_TemplateParameter_ownedDefault()
 {
 	return uML_TemplateParameter_ownedDefault;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_TemplateParameter_ownedParameteredElement()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_TemplateParameter_ownedParameteredElement()
 {
 	return uML_TemplateParameter_ownedParameteredElement;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_TemplateParameter_parameteredElement()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_TemplateParameter_parameteredElement()
 {
 	return uML_TemplateParameter_parameteredElement;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_TemplateParameter_signature()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_TemplateParameter_signature()
 {
 	return uML_TemplateParameter_signature;
 }
-std::shared_ptr<uml::Class> UMLPackageImpl::get_UML_TemplateSignature()
+const std::shared_ptr<uml::Class>& UMLPackageImpl::get_UML_TemplateSignature()
 {
 	return uML_TemplateSignature;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_TemplateSignature_own_elements()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_TemplateSignature_own_elements()
 {
 	return uML_TemplateSignature_own_elements;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_TemplateSignature_ownedParameter()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_TemplateSignature_ownedParameter()
 {
 	return uML_TemplateSignature_ownedParameter;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_TemplateSignature_parameter()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_TemplateSignature_parameter()
 {
 	return uML_TemplateSignature_parameter;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_TemplateSignature_template()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_TemplateSignature_template()
 {
 	return uML_TemplateSignature_template;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_TemplateSignature_unique_parameters()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_TemplateSignature_unique_parameters()
 {
 	return uML_TemplateSignature_unique_parameters;
 }
-std::shared_ptr<uml::Class> UMLPackageImpl::get_UML_TemplateableElement()
+const std::shared_ptr<uml::Class>& UMLPackageImpl::get_UML_TemplateableElement()
 {
 	return uML_TemplateableElement;
 }
-std::shared_ptr<uml::Operation> UMLPackageImpl::get_UML_TemplateableElement_isTemplate__()
+const std::shared_ptr<uml::Operation>& UMLPackageImpl::get_UML_TemplateableElement_isTemplate__()
 {
 	return uML_TemplateableElement_isTemplate__;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_TemplateableElement_isTemplate_result()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_TemplateableElement_isTemplate_result()
 {
 	return uML_TemplateableElement_isTemplate_result;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_TemplateableElement_isTemplate_spec()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_TemplateableElement_isTemplate_spec()
 {
 	return uML_TemplateableElement_isTemplate_spec;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_TemplateableElement_ownedTemplateSignature()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_TemplateableElement_ownedTemplateSignature()
 {
 	return uML_TemplateableElement_ownedTemplateSignature;
 }
-std::shared_ptr<uml::Operation> UMLPackageImpl::get_UML_TemplateableElement_parameterableElements__()
+const std::shared_ptr<uml::Operation>& UMLPackageImpl::get_UML_TemplateableElement_parameterableElements__()
 {
 	return uML_TemplateableElement_parameterableElements__;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_TemplateableElement_parameterableElements_result()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_TemplateableElement_parameterableElements_result()
 {
 	return uML_TemplateableElement_parameterableElements_result;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_TemplateableElement_parameterableElements_spec()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_TemplateableElement_parameterableElements_spec()
 {
 	return uML_TemplateableElement_parameterableElements_spec;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_TemplateableElement_templateBinding()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_TemplateableElement_templateBinding()
 {
 	return uML_TemplateableElement_templateBinding;
 }
-std::shared_ptr<uml::Class> UMLPackageImpl::get_UML_TestIdentityAction()
+const std::shared_ptr<uml::Class>& UMLPackageImpl::get_UML_TestIdentityAction()
 {
 	return uML_TestIdentityAction;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_TestIdentityAction_first()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_TestIdentityAction_first()
 {
 	return uML_TestIdentityAction_first;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_TestIdentityAction_multiplicity()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_TestIdentityAction_multiplicity()
 {
 	return uML_TestIdentityAction_multiplicity;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_TestIdentityAction_no_type()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_TestIdentityAction_no_type()
 {
 	return uML_TestIdentityAction_no_type;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_TestIdentityAction_result()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_TestIdentityAction_result()
 {
 	return uML_TestIdentityAction_result;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_TestIdentityAction_result_is_boolean()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_TestIdentityAction_result_is_boolean()
 {
 	return uML_TestIdentityAction_result_is_boolean;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_TestIdentityAction_second()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_TestIdentityAction_second()
 {
 	return uML_TestIdentityAction_second;
 }
-std::shared_ptr<uml::Class> UMLPackageImpl::get_UML_TimeConstraint()
+const std::shared_ptr<uml::Class>& UMLPackageImpl::get_UML_TimeConstraint()
 {
 	return uML_TimeConstraint;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_TimeConstraint_firstEvent()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_TimeConstraint_firstEvent()
 {
 	return uML_TimeConstraint_firstEvent;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_TimeConstraint_has_one_constrainedElement()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_TimeConstraint_has_one_constrainedElement()
 {
 	return uML_TimeConstraint_has_one_constrainedElement;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_TimeConstraint_specification()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_TimeConstraint_specification()
 {
 	return uML_TimeConstraint_specification;
 }
-std::shared_ptr<uml::Class> UMLPackageImpl::get_UML_TimeEvent()
+const std::shared_ptr<uml::Class>& UMLPackageImpl::get_UML_TimeEvent()
 {
 	return uML_TimeEvent;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_TimeEvent_isRelative()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_TimeEvent_isRelative()
 {
 	return uML_TimeEvent_isRelative;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_TimeEvent_when()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_TimeEvent_when()
 {
 	return uML_TimeEvent_when;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_TimeEvent_when_non_negative()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_TimeEvent_when_non_negative()
 {
 	return uML_TimeEvent_when_non_negative;
 }
-std::shared_ptr<uml::Class> UMLPackageImpl::get_UML_TimeExpression()
+const std::shared_ptr<uml::Class>& UMLPackageImpl::get_UML_TimeExpression()
 {
 	return uML_TimeExpression;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_TimeExpression_expr()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_TimeExpression_expr()
 {
 	return uML_TimeExpression_expr;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_TimeExpression_no_expr_requires_observation()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_TimeExpression_no_expr_requires_observation()
 {
 	return uML_TimeExpression_no_expr_requires_observation;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_TimeExpression_observation()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_TimeExpression_observation()
 {
 	return uML_TimeExpression_observation;
 }
-std::shared_ptr<uml::Operation> UMLPackageImpl::get_UML_TimeExpression_stringValue__()
+const std::shared_ptr<uml::Operation>& UMLPackageImpl::get_UML_TimeExpression_stringValue__()
 {
 	return uML_TimeExpression_stringValue__;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_TimeExpression_stringValue__return()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_TimeExpression_stringValue__return()
 {
 	return uML_TimeExpression_stringValue__return;
 }
-std::shared_ptr<uml::Class> UMLPackageImpl::get_UML_TimeInterval()
+const std::shared_ptr<uml::Class>& UMLPackageImpl::get_UML_TimeInterval()
 {
 	return uML_TimeInterval;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_TimeInterval_max()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_TimeInterval_max()
 {
 	return uML_TimeInterval_max;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_TimeInterval_min()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_TimeInterval_min()
 {
 	return uML_TimeInterval_min;
 }
-std::shared_ptr<uml::Class> UMLPackageImpl::get_UML_TimeObservation()
+const std::shared_ptr<uml::Class>& UMLPackageImpl::get_UML_TimeObservation()
 {
 	return uML_TimeObservation;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_TimeObservation_event()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_TimeObservation_event()
 {
 	return uML_TimeObservation_event;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_TimeObservation_firstEvent()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_TimeObservation_firstEvent()
 {
 	return uML_TimeObservation_firstEvent;
 }
-std::shared_ptr<uml::Class> UMLPackageImpl::get_UML_Transition()
+const std::shared_ptr<uml::Class>& UMLPackageImpl::get_UML_Transition()
 {
 	return uML_Transition;
 }
-std::shared_ptr<uml::Enumeration> UMLPackageImpl::get_UML_TransitionKind()
+const std::shared_ptr<uml::Enumeration>& UMLPackageImpl::get_UML_TransitionKind()
 {
 	return uML_TransitionKind;
 }
-std::shared_ptr<uml::EnumerationLiteral> UMLPackageImpl::get_UML_TransitionKind_external()
+const std::shared_ptr<uml::EnumerationLiteral>& UMLPackageImpl::get_UML_TransitionKind_external()
 {
 	return uML_TransitionKind_external;
 }
-std::shared_ptr<uml::EnumerationLiteral> UMLPackageImpl::get_UML_TransitionKind_internal()
+const std::shared_ptr<uml::EnumerationLiteral>& UMLPackageImpl::get_UML_TransitionKind_internal()
 {
 	return uML_TransitionKind_internal;
 }
-std::shared_ptr<uml::EnumerationLiteral> UMLPackageImpl::get_UML_TransitionKind_local()
+const std::shared_ptr<uml::EnumerationLiteral>& UMLPackageImpl::get_UML_TransitionKind_local()
 {
 	return uML_TransitionKind_local;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_Transition_container()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_Transition_container()
 {
 	return uML_Transition_container;
 }
-std::shared_ptr<uml::Operation> UMLPackageImpl::get_UML_Transition_containingStateMachine__()
+const std::shared_ptr<uml::Operation>& UMLPackageImpl::get_UML_Transition_containingStateMachine__()
 {
 	return uML_Transition_containingStateMachine__;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_Transition_containingStateMachine_result()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_Transition_containingStateMachine_result()
 {
 	return uML_Transition_containingStateMachine_result;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_Transition_containingStateMachine_spec()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_Transition_containingStateMachine_spec()
 {
 	return uML_Transition_containingStateMachine_spec;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_Transition_effect()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_Transition_effect()
 {
 	return uML_Transition_effect;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_Transition_fork_segment_guards()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_Transition_fork_segment_guards()
 {
 	return uML_Transition_fork_segment_guards;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_Transition_fork_segment_state()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_Transition_fork_segment_state()
 {
 	return uML_Transition_fork_segment_state;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_Transition_guard()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_Transition_guard()
 {
 	return uML_Transition_guard;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_Transition_initial_transition()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_Transition_initial_transition()
 {
 	return uML_Transition_initial_transition;
 }
-std::shared_ptr<uml::Operation> UMLPackageImpl::get_UML_Transition_isConsistentWith_RedefinableElement_RedefinableElement()
+const std::shared_ptr<uml::Operation>& UMLPackageImpl::get_UML_Transition_isConsistentWith_RedefinableElement_RedefinableElement()
 {
 	return uML_Transition_isConsistentWith_RedefinableElement_RedefinableElement;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_Transition_isConsistentWith_RedefinableElement_RedefinableElement_redefiningElement()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_Transition_isConsistentWith_RedefinableElement_RedefinableElement_redefiningElement()
 {
 	return uML_Transition_isConsistentWith_RedefinableElement_RedefinableElement_redefiningElement;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_Transition_isConsistentWith_pre()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_Transition_isConsistentWith_pre()
 {
 	return uML_Transition_isConsistentWith_pre;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_Transition_isConsistentWith_result()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_Transition_isConsistentWith_result()
 {
 	return uML_Transition_isConsistentWith_result;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_Transition_isConsistentWith_spec()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_Transition_isConsistentWith_spec()
 {
 	return uML_Transition_isConsistentWith_spec;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_Transition_join_segment_guards()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_Transition_join_segment_guards()
 {
 	return uML_Transition_join_segment_guards;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_Transition_join_segment_state()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_Transition_join_segment_state()
 {
 	return uML_Transition_join_segment_state;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_Transition_kind()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_Transition_kind()
 {
 	return uML_Transition_kind;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_Transition_outgoing_pseudostates()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_Transition_outgoing_pseudostates()
 {
 	return uML_Transition_outgoing_pseudostates;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_Transition_redefinedTransition()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_Transition_redefinedTransition()
 {
 	return uML_Transition_redefinedTransition;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_Transition_redefinitionContext()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_Transition_redefinitionContext()
 {
 	return uML_Transition_redefinitionContext;
 }
-std::shared_ptr<uml::Operation> UMLPackageImpl::get_UML_Transition_redefinitionContext__()
+const std::shared_ptr<uml::Operation>& UMLPackageImpl::get_UML_Transition_redefinitionContext__()
 {
 	return uML_Transition_redefinitionContext__;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_Transition_redefinitionContext_result()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_Transition_redefinitionContext_result()
 {
 	return uML_Transition_redefinitionContext_result;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_Transition_redefinitionContext_spec()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_Transition_redefinitionContext_spec()
 {
 	return uML_Transition_redefinitionContext_spec;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_Transition_source()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_Transition_source()
 {
 	return uML_Transition_source;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_Transition_state_is_external()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_Transition_state_is_external()
 {
 	return uML_Transition_state_is_external;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_Transition_state_is_internal()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_Transition_state_is_internal()
 {
 	return uML_Transition_state_is_internal;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_Transition_state_is_local()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_Transition_state_is_local()
 {
 	return uML_Transition_state_is_local;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_Transition_target()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_Transition_target()
 {
 	return uML_Transition_target;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_Transition_trigger()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_Transition_trigger()
 {
 	return uML_Transition_trigger;
 }
-std::shared_ptr<uml::Class> UMLPackageImpl::get_UML_Trigger()
+const std::shared_ptr<uml::Class>& UMLPackageImpl::get_UML_Trigger()
 {
 	return uML_Trigger;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_Trigger_event()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_Trigger_event()
 {
 	return uML_Trigger_event;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_Trigger_port()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_Trigger_port()
 {
 	return uML_Trigger_port;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_Trigger_trigger_with_ports()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_Trigger_trigger_with_ports()
 {
 	return uML_Trigger_trigger_with_ports;
 }
-std::shared_ptr<uml::Class> UMLPackageImpl::get_UML_Type()
+const std::shared_ptr<uml::Class>& UMLPackageImpl::get_UML_Type()
 {
 	return uML_Type;
 }
-std::shared_ptr<uml::Operation> UMLPackageImpl::get_UML_Type_conformsTo_Type_Type()
+const std::shared_ptr<uml::Operation>& UMLPackageImpl::get_UML_Type_conformsTo_Type_Type()
 {
 	return uML_Type_conformsTo_Type_Type;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_Type_conformsTo_Type_Type_other()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_Type_conformsTo_Type_Type_other()
 {
 	return uML_Type_conformsTo_Type_Type_other;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_Type_conformsTo_result()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_Type_conformsTo_result()
 {
 	return uML_Type_conformsTo_result;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_Type_conformsTo_spec()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_Type_conformsTo_spec()
 {
 	return uML_Type_conformsTo_spec;
 }
-std::shared_ptr<uml::Operation> UMLPackageImpl::get_UML_Type_createAssociation_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Type_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Type_Boolean_AggregationKind_String_Integer_UnlimitedNatural()
+const std::shared_ptr<uml::Operation>& UMLPackageImpl::get_UML_Type_createAssociation_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Type_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Type_Boolean_AggregationKind_String_Integer_UnlimitedNatural()
 {
 	return uML_Type_createAssociation_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Type_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Type_Boolean_AggregationKind_String_Integer_UnlimitedNatural;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_Type_createAssociation_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Type_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Type_Boolean_AggregationKind_String_Integer_UnlimitedNatural_end1Aggregation()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_Type_createAssociation_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Type_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Type_Boolean_AggregationKind_String_Integer_UnlimitedNatural_end1Aggregation()
 {
 	return uML_Type_createAssociation_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Type_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Type_Boolean_AggregationKind_String_Integer_UnlimitedNatural_end1Aggregation;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_Type_createAssociation_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Type_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Type_Boolean_AggregationKind_String_Integer_UnlimitedNatural_end1IsNavigable()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_Type_createAssociation_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Type_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Type_Boolean_AggregationKind_String_Integer_UnlimitedNatural_end1IsNavigable()
 {
 	return uML_Type_createAssociation_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Type_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Type_Boolean_AggregationKind_String_Integer_UnlimitedNatural_end1IsNavigable;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_Type_createAssociation_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Type_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Type_Boolean_AggregationKind_String_Integer_UnlimitedNatural_end1Lower()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_Type_createAssociation_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Type_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Type_Boolean_AggregationKind_String_Integer_UnlimitedNatural_end1Lower()
 {
 	return uML_Type_createAssociation_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Type_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Type_Boolean_AggregationKind_String_Integer_UnlimitedNatural_end1Lower;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_Type_createAssociation_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Type_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Type_Boolean_AggregationKind_String_Integer_UnlimitedNatural_end1Name()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_Type_createAssociation_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Type_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Type_Boolean_AggregationKind_String_Integer_UnlimitedNatural_end1Name()
 {
 	return uML_Type_createAssociation_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Type_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Type_Boolean_AggregationKind_String_Integer_UnlimitedNatural_end1Name;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_Type_createAssociation_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Type_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Type_Boolean_AggregationKind_String_Integer_UnlimitedNatural_end1Type()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_Type_createAssociation_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Type_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Type_Boolean_AggregationKind_String_Integer_UnlimitedNatural_end1Type()
 {
 	return uML_Type_createAssociation_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Type_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Type_Boolean_AggregationKind_String_Integer_UnlimitedNatural_end1Type;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_Type_createAssociation_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Type_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Type_Boolean_AggregationKind_String_Integer_UnlimitedNatural_end1Upper()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_Type_createAssociation_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Type_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Type_Boolean_AggregationKind_String_Integer_UnlimitedNatural_end1Upper()
 {
 	return uML_Type_createAssociation_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Type_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Type_Boolean_AggregationKind_String_Integer_UnlimitedNatural_end1Upper;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_Type_createAssociation_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Type_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Type_Boolean_AggregationKind_String_Integer_UnlimitedNatural_end2Aggregation()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_Type_createAssociation_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Type_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Type_Boolean_AggregationKind_String_Integer_UnlimitedNatural_end2Aggregation()
 {
 	return uML_Type_createAssociation_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Type_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Type_Boolean_AggregationKind_String_Integer_UnlimitedNatural_end2Aggregation;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_Type_createAssociation_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Type_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Type_Boolean_AggregationKind_String_Integer_UnlimitedNatural_end2IsNavigable()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_Type_createAssociation_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Type_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Type_Boolean_AggregationKind_String_Integer_UnlimitedNatural_end2IsNavigable()
 {
 	return uML_Type_createAssociation_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Type_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Type_Boolean_AggregationKind_String_Integer_UnlimitedNatural_end2IsNavigable;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_Type_createAssociation_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Type_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Type_Boolean_AggregationKind_String_Integer_UnlimitedNatural_end2Lower()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_Type_createAssociation_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Type_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Type_Boolean_AggregationKind_String_Integer_UnlimitedNatural_end2Lower()
 {
 	return uML_Type_createAssociation_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Type_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Type_Boolean_AggregationKind_String_Integer_UnlimitedNatural_end2Lower;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_Type_createAssociation_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Type_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Type_Boolean_AggregationKind_String_Integer_UnlimitedNatural_end2Name()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_Type_createAssociation_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Type_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Type_Boolean_AggregationKind_String_Integer_UnlimitedNatural_end2Name()
 {
 	return uML_Type_createAssociation_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Type_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Type_Boolean_AggregationKind_String_Integer_UnlimitedNatural_end2Name;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_Type_createAssociation_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Type_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Type_Boolean_AggregationKind_String_Integer_UnlimitedNatural_end2Upper()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_Type_createAssociation_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Type_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Type_Boolean_AggregationKind_String_Integer_UnlimitedNatural_end2Upper()
 {
 	return uML_Type_createAssociation_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Type_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Type_Boolean_AggregationKind_String_Integer_UnlimitedNatural_end2Upper;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_Type_createAssociation_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Type_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Type_Boolean_AggregationKind_String_Integer_UnlimitedNaturalreturn()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_Type_createAssociation_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Type_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Type_Boolean_AggregationKind_String_Integer_UnlimitedNaturalreturn()
 {
 	return uML_Type_createAssociation_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Type_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Type_Boolean_AggregationKind_String_Integer_UnlimitedNaturalreturn;
 }
-std::shared_ptr<uml::Operation> UMLPackageImpl::get_UML_Type_getAssociations__()
+const std::shared_ptr<uml::Operation>& UMLPackageImpl::get_UML_Type_getAssociations__()
 {
 	return uML_Type_getAssociations__;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_Type_getAssociations__return()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_Type_getAssociations__return()
 {
 	return uML_Type_getAssociations__return;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_Type_package()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_Type_package()
 {
 	return uML_Type_package;
 }
-std::shared_ptr<uml::Class> UMLPackageImpl::get_UML_TypedElement()
+const std::shared_ptr<uml::Class>& UMLPackageImpl::get_UML_TypedElement()
 {
 	return uML_TypedElement;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_TypedElement_type()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_TypedElement_type()
 {
 	return uML_TypedElement_type;
 }
-std::shared_ptr<uml::Class> UMLPackageImpl::get_UML_UnmarshallAction()
+const std::shared_ptr<uml::Class>& UMLPackageImpl::get_UML_UnmarshallAction()
 {
 	return uML_UnmarshallAction;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_UnmarshallAction_multiplicity_of_object()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_UnmarshallAction_multiplicity_of_object()
 {
 	return uML_UnmarshallAction_multiplicity_of_object;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_UnmarshallAction_number_of_result()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_UnmarshallAction_number_of_result()
 {
 	return uML_UnmarshallAction_number_of_result;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_UnmarshallAction_object()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_UnmarshallAction_object()
 {
 	return uML_UnmarshallAction_object;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_UnmarshallAction_object_type()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_UnmarshallAction_object_type()
 {
 	return uML_UnmarshallAction_object_type;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_UnmarshallAction_result()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_UnmarshallAction_result()
 {
 	return uML_UnmarshallAction_result;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_UnmarshallAction_structural_feature()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_UnmarshallAction_structural_feature()
 {
 	return uML_UnmarshallAction_structural_feature;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_UnmarshallAction_type_ordering_and_multiplicity()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_UnmarshallAction_type_ordering_and_multiplicity()
 {
 	return uML_UnmarshallAction_type_ordering_and_multiplicity;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_UnmarshallAction_unmarshallType()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_UnmarshallAction_unmarshallType()
 {
 	return uML_UnmarshallAction_unmarshallType;
 }
-std::shared_ptr<uml::Class> UMLPackageImpl::get_UML_Usage()
+const std::shared_ptr<uml::Class>& UMLPackageImpl::get_UML_Usage()
 {
 	return uML_Usage;
 }
-std::shared_ptr<uml::Class> UMLPackageImpl::get_UML_UseCase()
+const std::shared_ptr<uml::Class>& UMLPackageImpl::get_UML_UseCase()
 {
 	return uML_UseCase;
 }
-std::shared_ptr<uml::Operation> UMLPackageImpl::get_UML_UseCase_allIncludedUseCases__()
+const std::shared_ptr<uml::Operation>& UMLPackageImpl::get_UML_UseCase_allIncludedUseCases__()
 {
 	return uML_UseCase_allIncludedUseCases__;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_UseCase_allIncludedUseCases_result()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_UseCase_allIncludedUseCases_result()
 {
 	return uML_UseCase_allIncludedUseCases_result;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_UseCase_allIncludedUseCases_spec()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_UseCase_allIncludedUseCases_spec()
 {
 	return uML_UseCase_allIncludedUseCases_spec;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_UseCase_binary_associations()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_UseCase_binary_associations()
 {
 	return uML_UseCase_binary_associations;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_UseCase_cannot_include_self()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_UseCase_cannot_include_self()
 {
 	return uML_UseCase_cannot_include_self;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_UseCase_extend()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_UseCase_extend()
 {
 	return uML_UseCase_extend;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_UseCase_extensionPoint()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_UseCase_extensionPoint()
 {
 	return uML_UseCase_extensionPoint;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_UseCase_include()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_UseCase_include()
 {
 	return uML_UseCase_include;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_UseCase_must_have_name()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_UseCase_must_have_name()
 {
 	return uML_UseCase_must_have_name;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_UseCase_no_association_to_use_case()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_UseCase_no_association_to_use_case()
 {
 	return uML_UseCase_no_association_to_use_case;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_UseCase_subject()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_UseCase_subject()
 {
 	return uML_UseCase_subject;
 }
-std::shared_ptr<uml::Class> UMLPackageImpl::get_UML_ValuePin()
+const std::shared_ptr<uml::Class>& UMLPackageImpl::get_UML_ValuePin()
 {
 	return uML_ValuePin;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_ValuePin_compatible_type()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_ValuePin_compatible_type()
 {
 	return uML_ValuePin_compatible_type;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_ValuePin_no_incoming_edges()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_ValuePin_no_incoming_edges()
 {
 	return uML_ValuePin_no_incoming_edges;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_ValuePin_value()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_ValuePin_value()
 {
 	return uML_ValuePin_value;
 }
-std::shared_ptr<uml::Class> UMLPackageImpl::get_UML_ValueSpecification()
+const std::shared_ptr<uml::Class>& UMLPackageImpl::get_UML_ValueSpecification()
 {
 	return uML_ValueSpecification;
 }
-std::shared_ptr<uml::Class> UMLPackageImpl::get_UML_ValueSpecificationAction()
+const std::shared_ptr<uml::Class>& UMLPackageImpl::get_UML_ValueSpecificationAction()
 {
 	return uML_ValueSpecificationAction;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_ValueSpecificationAction_compatible_type()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_ValueSpecificationAction_compatible_type()
 {
 	return uML_ValueSpecificationAction_compatible_type;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_ValueSpecificationAction_multiplicity()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_ValueSpecificationAction_multiplicity()
 {
 	return uML_ValueSpecificationAction_multiplicity;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_ValueSpecificationAction_result()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_ValueSpecificationAction_result()
 {
 	return uML_ValueSpecificationAction_result;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_ValueSpecificationAction_value()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_ValueSpecificationAction_value()
 {
 	return uML_ValueSpecificationAction_value;
 }
-std::shared_ptr<uml::Operation> UMLPackageImpl::get_UML_ValueSpecification_booleanValue__()
+const std::shared_ptr<uml::Operation>& UMLPackageImpl::get_UML_ValueSpecification_booleanValue__()
 {
 	return uML_ValueSpecification_booleanValue__;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_ValueSpecification_booleanValue_result()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_ValueSpecification_booleanValue_result()
 {
 	return uML_ValueSpecification_booleanValue_result;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_ValueSpecification_booleanValue_spec()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_ValueSpecification_booleanValue_spec()
 {
 	return uML_ValueSpecification_booleanValue_spec;
 }
-std::shared_ptr<uml::Operation> UMLPackageImpl::get_UML_ValueSpecification_integerValue__()
+const std::shared_ptr<uml::Operation>& UMLPackageImpl::get_UML_ValueSpecification_integerValue__()
 {
 	return uML_ValueSpecification_integerValue__;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_ValueSpecification_integerValue_result()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_ValueSpecification_integerValue_result()
 {
 	return uML_ValueSpecification_integerValue_result;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_ValueSpecification_integerValue_spec()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_ValueSpecification_integerValue_spec()
 {
 	return uML_ValueSpecification_integerValue_spec;
 }
-std::shared_ptr<uml::Operation> UMLPackageImpl::get_UML_ValueSpecification_isCompatibleWith_ParameterableElement_ParameterableElement()
+const std::shared_ptr<uml::Operation>& UMLPackageImpl::get_UML_ValueSpecification_isCompatibleWith_ParameterableElement_ParameterableElement()
 {
 	return uML_ValueSpecification_isCompatibleWith_ParameterableElement_ParameterableElement;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_ValueSpecification_isCompatibleWith_ParameterableElement_ParameterableElement_p()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_ValueSpecification_isCompatibleWith_ParameterableElement_ParameterableElement_p()
 {
 	return uML_ValueSpecification_isCompatibleWith_ParameterableElement_ParameterableElement_p;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_ValueSpecification_isCompatibleWith_result()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_ValueSpecification_isCompatibleWith_result()
 {
 	return uML_ValueSpecification_isCompatibleWith_result;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_ValueSpecification_isCompatibleWith_spec()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_ValueSpecification_isCompatibleWith_spec()
 {
 	return uML_ValueSpecification_isCompatibleWith_spec;
 }
-std::shared_ptr<uml::Operation> UMLPackageImpl::get_UML_ValueSpecification_isComputable__()
+const std::shared_ptr<uml::Operation>& UMLPackageImpl::get_UML_ValueSpecification_isComputable__()
 {
 	return uML_ValueSpecification_isComputable__;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_ValueSpecification_isComputable_result()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_ValueSpecification_isComputable_result()
 {
 	return uML_ValueSpecification_isComputable_result;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_ValueSpecification_isComputable_spec()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_ValueSpecification_isComputable_spec()
 {
 	return uML_ValueSpecification_isComputable_spec;
 }
-std::shared_ptr<uml::Operation> UMLPackageImpl::get_UML_ValueSpecification_isNull__()
+const std::shared_ptr<uml::Operation>& UMLPackageImpl::get_UML_ValueSpecification_isNull__()
 {
 	return uML_ValueSpecification_isNull__;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_ValueSpecification_isNull_result()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_ValueSpecification_isNull_result()
 {
 	return uML_ValueSpecification_isNull_result;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_ValueSpecification_isNull_spec()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_ValueSpecification_isNull_spec()
 {
 	return uML_ValueSpecification_isNull_spec;
 }
-std::shared_ptr<uml::Operation> UMLPackageImpl::get_UML_ValueSpecification_realValue__()
+const std::shared_ptr<uml::Operation>& UMLPackageImpl::get_UML_ValueSpecification_realValue__()
 {
 	return uML_ValueSpecification_realValue__;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_ValueSpecification_realValue_result()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_ValueSpecification_realValue_result()
 {
 	return uML_ValueSpecification_realValue_result;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_ValueSpecification_realValue_spec()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_ValueSpecification_realValue_spec()
 {
 	return uML_ValueSpecification_realValue_spec;
 }
-std::shared_ptr<uml::Operation> UMLPackageImpl::get_UML_ValueSpecification_stringValue__()
+const std::shared_ptr<uml::Operation>& UMLPackageImpl::get_UML_ValueSpecification_stringValue__()
 {
 	return uML_ValueSpecification_stringValue__;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_ValueSpecification_stringValue_result()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_ValueSpecification_stringValue_result()
 {
 	return uML_ValueSpecification_stringValue_result;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_ValueSpecification_stringValue_spec()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_ValueSpecification_stringValue_spec()
 {
 	return uML_ValueSpecification_stringValue_spec;
 }
-std::shared_ptr<uml::Operation> UMLPackageImpl::get_UML_ValueSpecification_unlimitedValue__()
+const std::shared_ptr<uml::Operation>& UMLPackageImpl::get_UML_ValueSpecification_unlimitedValue__()
 {
 	return uML_ValueSpecification_unlimitedValue__;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_ValueSpecification_unlimitedValue_result()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_ValueSpecification_unlimitedValue_result()
 {
 	return uML_ValueSpecification_unlimitedValue_result;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_ValueSpecification_unlimitedValue_spec()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_ValueSpecification_unlimitedValue_spec()
 {
 	return uML_ValueSpecification_unlimitedValue_spec;
 }
-std::shared_ptr<uml::Class> UMLPackageImpl::get_UML_Variable()
+const std::shared_ptr<uml::Class>& UMLPackageImpl::get_UML_Variable()
 {
 	return uML_Variable;
 }
-std::shared_ptr<uml::Class> UMLPackageImpl::get_UML_VariableAction()
+const std::shared_ptr<uml::Class>& UMLPackageImpl::get_UML_VariableAction()
 {
 	return uML_VariableAction;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_VariableAction_scope_of_variable()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_VariableAction_scope_of_variable()
 {
 	return uML_VariableAction_scope_of_variable;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_VariableAction_variable()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_VariableAction_variable()
 {
 	return uML_VariableAction_variable;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_Variable_activityScope()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_Variable_activityScope()
 {
 	return uML_Variable_activityScope;
 }
-std::shared_ptr<uml::Operation> UMLPackageImpl::get_UML_Variable_isAccessibleBy_Action_Action()
+const std::shared_ptr<uml::Operation>& UMLPackageImpl::get_UML_Variable_isAccessibleBy_Action_Action()
 {
 	return uML_Variable_isAccessibleBy_Action_Action;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_Variable_isAccessibleBy_Action_Action_a()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_Variable_isAccessibleBy_Action_Action_a()
 {
 	return uML_Variable_isAccessibleBy_Action_Action_a;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_Variable_isAccessibleBy_result()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_Variable_isAccessibleBy_result()
 {
 	return uML_Variable_isAccessibleBy_result;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_Variable_isAccessibleBy_spec()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_Variable_isAccessibleBy_spec()
 {
 	return uML_Variable_isAccessibleBy_spec;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_Variable_scope()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_Variable_scope()
 {
 	return uML_Variable_scope;
 }
-std::shared_ptr<uml::Class> UMLPackageImpl::get_UML_Vertex()
+const std::shared_ptr<uml::Class>& UMLPackageImpl::get_UML_Vertex()
 {
 	return uML_Vertex;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_Vertex_container()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_Vertex_container()
 {
 	return uML_Vertex_container;
 }
-std::shared_ptr<uml::Operation> UMLPackageImpl::get_UML_Vertex_containingStateMachine__()
+const std::shared_ptr<uml::Operation>& UMLPackageImpl::get_UML_Vertex_containingStateMachine__()
 {
 	return uML_Vertex_containingStateMachine__;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_Vertex_containingStateMachine_result()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_Vertex_containingStateMachine_result()
 {
 	return uML_Vertex_containingStateMachine_result;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_Vertex_containingStateMachine_spec()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_Vertex_containingStateMachine_spec()
 {
 	return uML_Vertex_containingStateMachine_spec;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_Vertex_incoming()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_Vertex_incoming()
 {
 	return uML_Vertex_incoming;
 }
-std::shared_ptr<uml::Operation> UMLPackageImpl::get_UML_Vertex_incoming__()
+const std::shared_ptr<uml::Operation>& UMLPackageImpl::get_UML_Vertex_incoming__()
 {
 	return uML_Vertex_incoming__;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_Vertex_incoming_result()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_Vertex_incoming_result()
 {
 	return uML_Vertex_incoming_result;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_Vertex_incoming_spec()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_Vertex_incoming_spec()
 {
 	return uML_Vertex_incoming_spec;
 }
-std::shared_ptr<uml::Operation> UMLPackageImpl::get_UML_Vertex_isContainedInRegion_Region_Region()
+const std::shared_ptr<uml::Operation>& UMLPackageImpl::get_UML_Vertex_isContainedInRegion_Region_Region()
 {
 	return uML_Vertex_isContainedInRegion_Region_Region;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_Vertex_isContainedInRegion_Region_Region_r()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_Vertex_isContainedInRegion_Region_Region_r()
 {
 	return uML_Vertex_isContainedInRegion_Region_Region_r;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_Vertex_isContainedInRegion_result()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_Vertex_isContainedInRegion_result()
 {
 	return uML_Vertex_isContainedInRegion_result;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_Vertex_isContainedInRegion_spec()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_Vertex_isContainedInRegion_spec()
 {
 	return uML_Vertex_isContainedInRegion_spec;
 }
-std::shared_ptr<uml::Operation> UMLPackageImpl::get_UML_Vertex_isContainedInState_State_State()
+const std::shared_ptr<uml::Operation>& UMLPackageImpl::get_UML_Vertex_isContainedInState_State_State()
 {
 	return uML_Vertex_isContainedInState_State_State;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_Vertex_isContainedInState_State_State_s()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_Vertex_isContainedInState_State_State_s()
 {
 	return uML_Vertex_isContainedInState_State_State_s;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_Vertex_isContainedInState_result()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_Vertex_isContainedInState_result()
 {
 	return uML_Vertex_isContainedInState_result;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_Vertex_isContainedInState_spec()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_Vertex_isContainedInState_spec()
 {
 	return uML_Vertex_isContainedInState_spec;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_Vertex_outgoing()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_Vertex_outgoing()
 {
 	return uML_Vertex_outgoing;
 }
-std::shared_ptr<uml::Operation> UMLPackageImpl::get_UML_Vertex_outgoing__()
+const std::shared_ptr<uml::Operation>& UMLPackageImpl::get_UML_Vertex_outgoing__()
 {
 	return uML_Vertex_outgoing__;
 }
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_Vertex_outgoing_result()
+const std::shared_ptr<uml::Parameter>& UMLPackageImpl::get_UML_Vertex_outgoing_result()
 {
 	return uML_Vertex_outgoing_result;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_Vertex_outgoing_spec()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_Vertex_outgoing_spec()
 {
 	return uML_Vertex_outgoing_spec;
 }
-std::shared_ptr<uml::Enumeration> UMLPackageImpl::get_UML_VisibilityKind()
+const std::shared_ptr<uml::Enumeration>& UMLPackageImpl::get_UML_VisibilityKind()
 {
 	return uML_VisibilityKind;
 }
-std::shared_ptr<uml::EnumerationLiteral> UMLPackageImpl::get_UML_VisibilityKind_package()
+const std::shared_ptr<uml::EnumerationLiteral>& UMLPackageImpl::get_UML_VisibilityKind_package()
 {
 	return uML_VisibilityKind_package;
 }
-std::shared_ptr<uml::EnumerationLiteral> UMLPackageImpl::get_UML_VisibilityKind_private()
+const std::shared_ptr<uml::EnumerationLiteral>& UMLPackageImpl::get_UML_VisibilityKind_private()
 {
 	return uML_VisibilityKind_private;
 }
-std::shared_ptr<uml::EnumerationLiteral> UMLPackageImpl::get_UML_VisibilityKind_protected()
+const std::shared_ptr<uml::EnumerationLiteral>& UMLPackageImpl::get_UML_VisibilityKind_protected()
 {
 	return uML_VisibilityKind_protected;
 }
-std::shared_ptr<uml::EnumerationLiteral> UMLPackageImpl::get_UML_VisibilityKind_public()
+const std::shared_ptr<uml::EnumerationLiteral>& UMLPackageImpl::get_UML_VisibilityKind_public()
 {
 	return uML_VisibilityKind_public;
 }
-std::shared_ptr<uml::Class> UMLPackageImpl::get_UML_WriteLinkAction()
+const std::shared_ptr<uml::Class>& UMLPackageImpl::get_UML_WriteLinkAction()
 {
 	return uML_WriteLinkAction;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_WriteLinkAction_allow_access()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_WriteLinkAction_allow_access()
 {
 	return uML_WriteLinkAction_allow_access;
 }
-std::shared_ptr<uml::Class> UMLPackageImpl::get_UML_WriteStructuralFeatureAction()
+const std::shared_ptr<uml::Class>& UMLPackageImpl::get_UML_WriteStructuralFeatureAction()
 {
 	return uML_WriteStructuralFeatureAction;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_WriteStructuralFeatureAction_multiplicity_of_result()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_WriteStructuralFeatureAction_multiplicity_of_result()
 {
 	return uML_WriteStructuralFeatureAction_multiplicity_of_result;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_WriteStructuralFeatureAction_multiplicity_of_value()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_WriteStructuralFeatureAction_multiplicity_of_value()
 {
 	return uML_WriteStructuralFeatureAction_multiplicity_of_value;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_WriteStructuralFeatureAction_result()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_WriteStructuralFeatureAction_result()
 {
 	return uML_WriteStructuralFeatureAction_result;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_WriteStructuralFeatureAction_type_of_result()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_WriteStructuralFeatureAction_type_of_result()
 {
 	return uML_WriteStructuralFeatureAction_type_of_result;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_WriteStructuralFeatureAction_type_of_value()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_WriteStructuralFeatureAction_type_of_value()
 {
 	return uML_WriteStructuralFeatureAction_type_of_value;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_WriteStructuralFeatureAction_value()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_WriteStructuralFeatureAction_value()
 {
 	return uML_WriteStructuralFeatureAction_value;
 }
-std::shared_ptr<uml::Class> UMLPackageImpl::get_UML_WriteVariableAction()
+const std::shared_ptr<uml::Class>& UMLPackageImpl::get_UML_WriteVariableAction()
 {
 	return uML_WriteVariableAction;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_WriteVariableAction_multiplicity()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_WriteVariableAction_multiplicity()
 {
 	return uML_WriteVariableAction_multiplicity;
 }
-std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_WriteVariableAction_value()
+const std::shared_ptr<uml::Property>& UMLPackageImpl::get_UML_WriteVariableAction_value()
 {
 	return uML_WriteVariableAction_value;
 }
-std::shared_ptr<uml::Constraint> UMLPackageImpl::get_UML_WriteVariableAction_value_type()
+const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_WriteVariableAction_value_type()
 {
 	return uML_WriteVariableAction_value_type;
 }

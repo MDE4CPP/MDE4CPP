@@ -455,13 +455,13 @@ bool TimeExpressionImpl::eSet(int featureID,  const std::shared_ptr<Any>& newVal
 					{
 						std::shared_ptr<Bag<uml::Observation>> _observation = getObservation();
 	
-						for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
+						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{
 							std::shared_ptr<uml::Observation> valueToAdd = std::dynamic_pointer_cast<uml::Observation>(anEObject);
 	
 							if (valueToAdd)
 							{
-								if(_observation->find(valueToAdd) == -1)
+								if(!(_observation->includes(valueToAdd)))
 								{
 									_observation->add(valueToAdd);
 								}

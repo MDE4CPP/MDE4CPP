@@ -97,9 +97,9 @@ namespace ocl::Expressions
 
 			// Begin Class AssociationClassCallExp
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getAssociationClassCallExp_Class() const ;
+			virtual const std::shared_ptr<ecore::EClass>& getAssociationClassCallExp_Class() const ;
 			
-			virtual std::shared_ptr<ecore::EAttribute> getAssociationClassCallExp_Attribute_referredAssociationClass() const ;
+			virtual const std::shared_ptr<ecore::EAttribute>& getAssociationClassCallExp_Attribute_referredAssociationClass() const ;
 			
 			
 			
@@ -107,9 +107,9 @@ namespace ocl::Expressions
 
 			// Begin Class BooleanLiteralExp
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getBooleanLiteralExp_Class() const ;
+			virtual const std::shared_ptr<ecore::EClass>& getBooleanLiteralExp_Class() const ;
 			
-			virtual std::shared_ptr<ecore::EAttribute> getBooleanLiteralExp_Attribute_booleanSymbol() const ;
+			virtual const std::shared_ptr<ecore::EAttribute>& getBooleanLiteralExp_Attribute_booleanSymbol() const ;
 			
 			
 			
@@ -117,49 +117,49 @@ namespace ocl::Expressions
 
 			// Begin Class CallExp
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getCallExp_Class() const ;
+			virtual const std::shared_ptr<ecore::EClass>& getCallExp_Class() const ;
 			
 			
-			virtual std::shared_ptr<ecore::EReference> getCallExp_Attribute_source() const ;
+			virtual const std::shared_ptr<ecore::EReference>& getCallExp_Attribute_source() const ;
 			
 			
 			// End Class CallExp
 
 			// Begin Class ClassifierContextDeclExp
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getClassifierContextDeclExp_Class() const ;
+			virtual const std::shared_ptr<ecore::EClass>& getClassifierContextDeclExp_Class() const ;
 			
-			virtual std::shared_ptr<ecore::EAttribute> getClassifierContextDeclExp_Attribute_classifierName() const ;
+			virtual const std::shared_ptr<ecore::EAttribute>& getClassifierContextDeclExp_Attribute_classifierName() const ;
 			
-			virtual std::shared_ptr<ecore::EReference> getClassifierContextDeclExp_Attribute_invOrDevExp() const ;
+			virtual const std::shared_ptr<ecore::EReference>& getClassifierContextDeclExp_Attribute_invOrDevExp() const ;
 			
 			
 			// End Class ClassifierContextDeclExp
 
 			// Begin Class CollectionItem
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getCollectionItem_Class() const ;
+			virtual const std::shared_ptr<ecore::EClass>& getCollectionItem_Class() const ;
 			
 			
-			virtual std::shared_ptr<ecore::EReference> getCollectionItem_Attribute_item() const ;
+			virtual const std::shared_ptr<ecore::EReference>& getCollectionItem_Attribute_item() const ;
 			
 			
 			// End Class CollectionItem
 
 			// Begin Class CollectionLiteralExp
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getCollectionLiteralExp_Class() const ;
+			virtual const std::shared_ptr<ecore::EClass>& getCollectionLiteralExp_Class() const ;
 			
-			virtual std::shared_ptr<ecore::EAttribute> getCollectionLiteralExp_Attribute_kind() const ;
+			virtual const std::shared_ptr<ecore::EAttribute>& getCollectionLiteralExp_Attribute_kind() const ;
 			
-			virtual std::shared_ptr<ecore::EReference> getCollectionLiteralExp_Attribute_part() const ;
+			virtual const std::shared_ptr<ecore::EReference>& getCollectionLiteralExp_Attribute_part() const ;
 			
 			
 			// End Class CollectionLiteralExp
 
 			// Begin Class CollectionLiteralPart
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getCollectionLiteralPart_Class() const ;
+			virtual const std::shared_ptr<ecore::EClass>& getCollectionLiteralPart_Class() const ;
 			
 			
 			
@@ -168,38 +168,38 @@ namespace ocl::Expressions
 
 			// Begin Class CollectionLiteralParts
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getCollectionLiteralParts_Class() const ;
+			virtual const std::shared_ptr<ecore::EClass>& getCollectionLiteralParts_Class() const ;
 			
 			
-			virtual std::shared_ptr<ecore::EReference> getCollectionLiteralParts_Attribute_literalParts() const ;
+			virtual const std::shared_ptr<ecore::EReference>& getCollectionLiteralParts_Attribute_literalParts() const ;
 			
 			
 			// End Class CollectionLiteralParts
 
 			// Begin Class CollectionRange
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getCollectionRange_Class() const ;
+			virtual const std::shared_ptr<ecore::EClass>& getCollectionRange_Class() const ;
 			
 			
-			virtual std::shared_ptr<ecore::EReference> getCollectionRange_Attribute_first() const ;
-			virtual std::shared_ptr<ecore::EReference> getCollectionRange_Attribute_last() const ;
+			virtual const std::shared_ptr<ecore::EReference>& getCollectionRange_Attribute_first() const ;
+			virtual const std::shared_ptr<ecore::EReference>& getCollectionRange_Attribute_last() const ;
 			
 			
 			// End Class CollectionRange
 
 			// Begin Class CollectionTypeExp
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getCollectionTypeExp_Class() const ;
+			virtual const std::shared_ptr<ecore::EClass>& getCollectionTypeExp_Class() const ;
 			
 			
-			virtual std::shared_ptr<ecore::EReference> getCollectionTypeExp_Attribute_innerType() const ;
+			virtual const std::shared_ptr<ecore::EReference>& getCollectionTypeExp_Attribute_innerType() const ;
 			
 			
 			// End Class CollectionTypeExp
 
 			// Begin Class ContextDeclarationExp
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getContextDeclarationExp_Class() const ;
+			virtual const std::shared_ptr<ecore::EClass>& getContextDeclarationExp_Class() const ;
 			
 			
 			
@@ -208,44 +208,44 @@ namespace ocl::Expressions
 
 			// Begin Class DefExp
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getDefExp_Class() const ;
+			virtual const std::shared_ptr<ecore::EClass>& getDefExp_Class() const ;
 			
 			
-			virtual std::shared_ptr<ecore::EReference> getDefExp_Attribute_bodyExp() const ;
-			virtual std::shared_ptr<ecore::EReference> getDefExp_Attribute_frontExp() const ;
+			virtual const std::shared_ptr<ecore::EReference>& getDefExp_Attribute_bodyExp() const ;
+			virtual const std::shared_ptr<ecore::EReference>& getDefExp_Attribute_frontExp() const ;
 			
 			
 			// End Class DefExp
 
 			// Begin Class EnumLiteralExp
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getEnumLiteralExp_Class() const ;
+			virtual const std::shared_ptr<ecore::EClass>& getEnumLiteralExp_Class() const ;
 			
-			virtual std::shared_ptr<ecore::EAttribute> getEnumLiteralExp_Attribute_referredEnumLiteralStr() const ;
+			virtual const std::shared_ptr<ecore::EAttribute>& getEnumLiteralExp_Attribute_referredEnumLiteralStr() const ;
 			
-			virtual std::shared_ptr<ecore::EReference> getEnumLiteralExp_Attribute_referredEnumLiteral() const ;
+			virtual const std::shared_ptr<ecore::EReference>& getEnumLiteralExp_Attribute_referredEnumLiteral() const ;
 			
 			
 			// End Class EnumLiteralExp
 
 			// Begin Class ExpressionInOcl
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getExpressionInOcl_Class() const ;
+			virtual const std::shared_ptr<ecore::EClass>& getExpressionInOcl_Class() const ;
 			
 			
-			virtual std::shared_ptr<ecore::EReference> getExpressionInOcl_Attribute_bodyExpression() const ;
-			virtual std::shared_ptr<ecore::EReference> getExpressionInOcl_Attribute_contextVariable() const ;
-			virtual std::shared_ptr<ecore::EReference> getExpressionInOcl_Attribute_parameterVariable() const ;
-			virtual std::shared_ptr<ecore::EReference> getExpressionInOcl_Attribute_resultVariable() const ;
+			virtual const std::shared_ptr<ecore::EReference>& getExpressionInOcl_Attribute_bodyExpression() const ;
+			virtual const std::shared_ptr<ecore::EReference>& getExpressionInOcl_Attribute_contextVariable() const ;
+			virtual const std::shared_ptr<ecore::EReference>& getExpressionInOcl_Attribute_parameterVariable() const ;
+			virtual const std::shared_ptr<ecore::EReference>& getExpressionInOcl_Attribute_resultVariable() const ;
 			
 			
 			// End Class ExpressionInOcl
 
 			// Begin Class FeatureCallExp
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getFeatureCallExp_Class() const ;
+			virtual const std::shared_ptr<ecore::EClass>& getFeatureCallExp_Class() const ;
 			
-			virtual std::shared_ptr<ecore::EAttribute> getFeatureCallExp_Attribute_isPre() const ;
+			virtual const std::shared_ptr<ecore::EAttribute>& getFeatureCallExp_Attribute_isPre() const ;
 			
 			
 			
@@ -253,53 +253,53 @@ namespace ocl::Expressions
 
 			// Begin Class IfExp
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getIfExp_Class() const ;
+			virtual const std::shared_ptr<ecore::EClass>& getIfExp_Class() const ;
 			
 			
-			virtual std::shared_ptr<ecore::EReference> getIfExp_Attribute_condition() const ;
-			virtual std::shared_ptr<ecore::EReference> getIfExp_Attribute_elseExpression() const ;
-			virtual std::shared_ptr<ecore::EReference> getIfExp_Attribute_thenExpression() const ;
+			virtual const std::shared_ptr<ecore::EReference>& getIfExp_Attribute_condition() const ;
+			virtual const std::shared_ptr<ecore::EReference>& getIfExp_Attribute_elseExpression() const ;
+			virtual const std::shared_ptr<ecore::EReference>& getIfExp_Attribute_thenExpression() const ;
 			
 			
 			// End Class IfExp
 
 			// Begin Class InfixedExp
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getInfixedExp_Class() const ;
+			virtual const std::shared_ptr<ecore::EClass>& getInfixedExp_Class() const ;
 			
 			
-			virtual std::shared_ptr<ecore::EReference> getInfixedExp_Attribute_source() const ;
+			virtual const std::shared_ptr<ecore::EReference>& getInfixedExp_Attribute_source() const ;
 			
 			
 			// End Class InfixedExp
 
 			// Begin Class InitOrDerValueExp
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getInitOrDerValueExp_Class() const ;
+			virtual const std::shared_ptr<ecore::EClass>& getInitOrDerValueExp_Class() const ;
 			
-			virtual std::shared_ptr<ecore::EAttribute> getInitOrDerValueExp_Attribute_kind() const ;
+			virtual const std::shared_ptr<ecore::EAttribute>& getInitOrDerValueExp_Attribute_kind() const ;
 			
-			virtual std::shared_ptr<ecore::EReference> getInitOrDerValueExp_Attribute_bodyExpression() const ;
+			virtual const std::shared_ptr<ecore::EReference>& getInitOrDerValueExp_Attribute_bodyExpression() const ;
 			
 			
 			// End Class InitOrDerValueExp
 
 			// Begin Class InitOrDerValueListExp
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getInitOrDerValueListExp_Class() const ;
+			virtual const std::shared_ptr<ecore::EClass>& getInitOrDerValueListExp_Class() const ;
 			
 			
-			virtual std::shared_ptr<ecore::EReference> getInitOrDerValueListExp_Attribute_derExpressionList() const ;
-			virtual std::shared_ptr<ecore::EReference> getInitOrDerValueListExp_Attribute_initExpressionList() const ;
+			virtual const std::shared_ptr<ecore::EReference>& getInitOrDerValueListExp_Attribute_derExpressionList() const ;
+			virtual const std::shared_ptr<ecore::EReference>& getInitOrDerValueListExp_Attribute_initExpressionList() const ;
 			
 			
 			// End Class InitOrDerValueListExp
 
 			// Begin Class IntegerLiteralExp
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getIntegerLiteralExp_Class() const ;
+			virtual const std::shared_ptr<ecore::EClass>& getIntegerLiteralExp_Class() const ;
 			
-			virtual std::shared_ptr<ecore::EAttribute> getIntegerLiteralExp_Attribute_integerSymbol() const ;
+			virtual const std::shared_ptr<ecore::EAttribute>& getIntegerLiteralExp_Attribute_integerSymbol() const ;
 			
 			
 			
@@ -307,19 +307,19 @@ namespace ocl::Expressions
 
 			// Begin Class InvOrDefExp
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getInvOrDefExp_Class() const ;
+			virtual const std::shared_ptr<ecore::EClass>& getInvOrDefExp_Class() const ;
 			
-			virtual std::shared_ptr<ecore::EAttribute> getInvOrDefExp_Attribute_kind() const ;
-			virtual std::shared_ptr<ecore::EAttribute> getInvOrDefExp_Attribute_name() const ;
+			virtual const std::shared_ptr<ecore::EAttribute>& getInvOrDefExp_Attribute_kind() const ;
+			virtual const std::shared_ptr<ecore::EAttribute>& getInvOrDefExp_Attribute_name() const ;
 			
-			virtual std::shared_ptr<ecore::EReference> getInvOrDefExp_Attribute_referredExpression() const ;
+			virtual const std::shared_ptr<ecore::EReference>& getInvOrDefExp_Attribute_referredExpression() const ;
 			
 			
 			// End Class InvOrDefExp
 
 			// Begin Class InvalidLiteralExp
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getInvalidLiteralExp_Class() const ;
+			virtual const std::shared_ptr<ecore::EClass>& getInvalidLiteralExp_Class() const ;
 			
 			
 			
@@ -328,19 +328,19 @@ namespace ocl::Expressions
 
 			// Begin Class IterateExp
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getIterateExp_Class() const ;
+			virtual const std::shared_ptr<ecore::EClass>& getIterateExp_Class() const ;
 			
 			
-			virtual std::shared_ptr<ecore::EReference> getIterateExp_Attribute_result() const ;
+			virtual const std::shared_ptr<ecore::EReference>& getIterateExp_Attribute_result() const ;
 			
 			
 			// End Class IterateExp
 
 			// Begin Class IteratorExp
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getIteratorExp_Class() const ;
+			virtual const std::shared_ptr<ecore::EClass>& getIteratorExp_Class() const ;
 			
-			virtual std::shared_ptr<ecore::EAttribute> getIteratorExp_Attribute_sourrundedBy() const ;
+			virtual const std::shared_ptr<ecore::EAttribute>& getIteratorExp_Attribute_sourrundedBy() const ;
 			
 			
 			
@@ -348,18 +348,18 @@ namespace ocl::Expressions
 
 			// Begin Class LetExp
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getLetExp_Class() const ;
+			virtual const std::shared_ptr<ecore::EClass>& getLetExp_Class() const ;
 			
 			
-			virtual std::shared_ptr<ecore::EReference> getLetExp_Attribute_in() const ;
-			virtual std::shared_ptr<ecore::EReference> getLetExp_Attribute_variables() const ;
+			virtual const std::shared_ptr<ecore::EReference>& getLetExp_Attribute_in() const ;
+			virtual const std::shared_ptr<ecore::EReference>& getLetExp_Attribute_variables() const ;
 			
 			
 			// End Class LetExp
 
 			// Begin Class LiteralExp
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getLiteralExp_Class() const ;
+			virtual const std::shared_ptr<ecore::EClass>& getLiteralExp_Class() const ;
 			
 			
 			
@@ -368,55 +368,55 @@ namespace ocl::Expressions
 
 			// Begin Class LoopExp
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getLoopExp_Class() const ;
+			virtual const std::shared_ptr<ecore::EClass>& getLoopExp_Class() const ;
 			
-			virtual std::shared_ptr<ecore::EAttribute> getLoopExp_Attribute_isCollectionOperation() const ;
-			virtual std::shared_ptr<ecore::EAttribute> getLoopExp_Attribute_isImplCollectIterator() const ;
-			virtual std::shared_ptr<ecore::EAttribute> getLoopExp_Attribute_iterName() const ;
+			virtual const std::shared_ptr<ecore::EAttribute>& getLoopExp_Attribute_isCollectionOperation() const ;
+			virtual const std::shared_ptr<ecore::EAttribute>& getLoopExp_Attribute_isImplCollectIterator() const ;
+			virtual const std::shared_ptr<ecore::EAttribute>& getLoopExp_Attribute_iterName() const ;
 			
-			virtual std::shared_ptr<ecore::EReference> getLoopExp_Attribute_body() const ;
-			virtual std::shared_ptr<ecore::EReference> getLoopExp_Attribute_iterator() const ;
+			virtual const std::shared_ptr<ecore::EReference>& getLoopExp_Attribute_body() const ;
+			virtual const std::shared_ptr<ecore::EReference>& getLoopExp_Attribute_iterator() const ;
 			
 			
 			// End Class LoopExp
 
 			// Begin Class MessageArguments
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getMessageArguments_Class() const ;
+			virtual const std::shared_ptr<ecore::EClass>& getMessageArguments_Class() const ;
 			
 			
-			virtual std::shared_ptr<ecore::EReference> getMessageArguments_Attribute_referredOclExpressions() const ;
+			virtual const std::shared_ptr<ecore::EReference>& getMessageArguments_Attribute_referredOclExpressions() const ;
 			
 			
 			// End Class MessageArguments
 
 			// Begin Class MessageExp
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getMessageExp_Class() const ;
+			virtual const std::shared_ptr<ecore::EClass>& getMessageExp_Class() const ;
 			
-			virtual std::shared_ptr<ecore::EAttribute> getMessageExp_Attribute_calledOperation() const ;
-			virtual std::shared_ptr<ecore::EAttribute> getMessageExp_Attribute_sentSignal() const ;
+			virtual const std::shared_ptr<ecore::EAttribute>& getMessageExp_Attribute_calledOperation() const ;
+			virtual const std::shared_ptr<ecore::EAttribute>& getMessageExp_Attribute_sentSignal() const ;
 			
-			virtual std::shared_ptr<ecore::EReference> getMessageExp_Attribute_argument() const ;
-			virtual std::shared_ptr<ecore::EReference> getMessageExp_Attribute_target() const ;
+			virtual const std::shared_ptr<ecore::EReference>& getMessageExp_Attribute_argument() const ;
+			virtual const std::shared_ptr<ecore::EReference>& getMessageExp_Attribute_target() const ;
 			
 			
 			// End Class MessageExp
 
 			// Begin Class NavigationCallExp
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getNavigationCallExp_Class() const ;
+			virtual const std::shared_ptr<ecore::EClass>& getNavigationCallExp_Class() const ;
 			
-			virtual std::shared_ptr<ecore::EAttribute> getNavigationCallExp_Attribute_navigationSource() const ;
+			virtual const std::shared_ptr<ecore::EAttribute>& getNavigationCallExp_Attribute_navigationSource() const ;
 			
-			virtual std::shared_ptr<ecore::EReference> getNavigationCallExp_Attribute_qualifier() const ;
+			virtual const std::shared_ptr<ecore::EReference>& getNavigationCallExp_Attribute_qualifier() const ;
 			
 			
 			// End Class NavigationCallExp
 
 			// Begin Class NullLiteralExp
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getNullLiteralExp_Class() const ;
+			virtual const std::shared_ptr<ecore::EClass>& getNullLiteralExp_Class() const ;
 			
 			
 			
@@ -425,7 +425,7 @@ namespace ocl::Expressions
 
 			// Begin Class NumericLiteralExp
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getNumericLiteralExp_Class() const ;
+			virtual const std::shared_ptr<ecore::EClass>& getNumericLiteralExp_Class() const ;
 			
 			
 			
@@ -434,134 +434,134 @@ namespace ocl::Expressions
 
 			// Begin Class OclExpression
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getOclExpression_Class() const ;
+			virtual const std::shared_ptr<ecore::EClass>& getOclExpression_Class() const ;
 			
 			
-			virtual std::shared_ptr<ecore::EReference> getOclExpression_Attribute_appliedElement() const ;
-			virtual std::shared_ptr<ecore::EReference> getOclExpression_Attribute_elseOwner() const ;
-			virtual std::shared_ptr<ecore::EReference> getOclExpression_Attribute_firstOwner() const ;
-			virtual std::shared_ptr<ecore::EReference> getOclExpression_Attribute_ifOwner() const ;
-			virtual std::shared_ptr<ecore::EReference> getOclExpression_Attribute_initializedElement() const ;
-			virtual std::shared_ptr<ecore::EReference> getOclExpression_Attribute_instance() const ;
-			virtual std::shared_ptr<ecore::EReference> getOclExpression_Attribute_lastOwner() const ;
-			virtual std::shared_ptr<ecore::EReference> getOclExpression_Attribute_loopBodyOwner() const ;
-			virtual std::shared_ptr<ecore::EReference> getOclExpression_Attribute_loopExp() const ;
-			virtual std::shared_ptr<ecore::EReference> getOclExpression_Attribute_parentCall() const ;
-			virtual std::shared_ptr<ecore::EReference> getOclExpression_Attribute_parentNav() const ;
-			virtual std::shared_ptr<ecore::EReference> getOclExpression_Attribute_thenOwner() const ;
-			virtual std::shared_ptr<ecore::EReference> getOclExpression_Attribute_topExpression() const ;
+			virtual const std::shared_ptr<ecore::EReference>& getOclExpression_Attribute_appliedElement() const ;
+			virtual const std::shared_ptr<ecore::EReference>& getOclExpression_Attribute_elseOwner() const ;
+			virtual const std::shared_ptr<ecore::EReference>& getOclExpression_Attribute_firstOwner() const ;
+			virtual const std::shared_ptr<ecore::EReference>& getOclExpression_Attribute_ifOwner() const ;
+			virtual const std::shared_ptr<ecore::EReference>& getOclExpression_Attribute_initializedElement() const ;
+			virtual const std::shared_ptr<ecore::EReference>& getOclExpression_Attribute_instance() const ;
+			virtual const std::shared_ptr<ecore::EReference>& getOclExpression_Attribute_lastOwner() const ;
+			virtual const std::shared_ptr<ecore::EReference>& getOclExpression_Attribute_loopBodyOwner() const ;
+			virtual const std::shared_ptr<ecore::EReference>& getOclExpression_Attribute_loopExp() const ;
+			virtual const std::shared_ptr<ecore::EReference>& getOclExpression_Attribute_parentCall() const ;
+			virtual const std::shared_ptr<ecore::EReference>& getOclExpression_Attribute_parentNav() const ;
+			virtual const std::shared_ptr<ecore::EReference>& getOclExpression_Attribute_thenOwner() const ;
+			virtual const std::shared_ptr<ecore::EReference>& getOclExpression_Attribute_topExpression() const ;
 			
 			
 			// End Class OclExpression
 
 			// Begin Class OperationCallExp
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getOperationCallExp_Class() const ;
+			virtual const std::shared_ptr<ecore::EClass>& getOperationCallExp_Class() const ;
 			
-			virtual std::shared_ptr<ecore::EAttribute> getOperationCallExp_Attribute_isRArrow() const ;
-			virtual std::shared_ptr<ecore::EAttribute> getOperationCallExp_Attribute_referredOperation() const ;
+			virtual const std::shared_ptr<ecore::EAttribute>& getOperationCallExp_Attribute_isRArrow() const ;
+			virtual const std::shared_ptr<ecore::EAttribute>& getOperationCallExp_Attribute_referredOperation() const ;
 			
-			virtual std::shared_ptr<ecore::EReference> getOperationCallExp_Attribute_argument() const ;
+			virtual const std::shared_ptr<ecore::EReference>& getOperationCallExp_Attribute_argument() const ;
 			
 			
 			// End Class OperationCallExp
 
 			// Begin Class OperationContextDeclExp
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getOperationContextDeclExp_Class() const ;
+			virtual const std::shared_ptr<ecore::EClass>& getOperationContextDeclExp_Class() const ;
 			
 			
-			virtual std::shared_ptr<ecore::EReference> getOperationContextDeclExp_Attribute_operationContext() const ;
-			virtual std::shared_ptr<ecore::EReference> getOperationContextDeclExp_Attribute_prePostBodyExpressions() const ;
+			virtual const std::shared_ptr<ecore::EReference>& getOperationContextDeclExp_Attribute_operationContext() const ;
+			virtual const std::shared_ptr<ecore::EReference>& getOperationContextDeclExp_Attribute_prePostBodyExpressions() const ;
 			
 			
 			// End Class OperationContextDeclExp
 
 			// Begin Class OperationContextExp
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getOperationContextExp_Class() const ;
+			virtual const std::shared_ptr<ecore::EClass>& getOperationContextExp_Class() const ;
 			
-			virtual std::shared_ptr<ecore::EAttribute> getOperationContextExp_Attribute_operationName() const ;
+			virtual const std::shared_ptr<ecore::EAttribute>& getOperationContextExp_Attribute_operationName() const ;
 			
-			virtual std::shared_ptr<ecore::EReference> getOperationContextExp_Attribute_inputParameters() const ;
-			virtual std::shared_ptr<ecore::EReference> getOperationContextExp_Attribute_returnType() const ;
+			virtual const std::shared_ptr<ecore::EReference>& getOperationContextExp_Attribute_inputParameters() const ;
+			virtual const std::shared_ptr<ecore::EReference>& getOperationContextExp_Attribute_returnType() const ;
 			
 			
 			// End Class OperationContextExp
 
 			// Begin Class OperatorExp
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getOperatorExp_Class() const ;
+			virtual const std::shared_ptr<ecore::EClass>& getOperatorExp_Class() const ;
 			
-			virtual std::shared_ptr<ecore::EAttribute> getOperatorExp_Attribute_operator() const ;
+			virtual const std::shared_ptr<ecore::EAttribute>& getOperatorExp_Attribute_operator() const ;
 			
-			virtual std::shared_ptr<ecore::EReference> getOperatorExp_Attribute_leftHandOperand() const ;
-			virtual std::shared_ptr<ecore::EReference> getOperatorExp_Attribute_rightHandOperand() const ;
+			virtual const std::shared_ptr<ecore::EReference>& getOperatorExp_Attribute_leftHandOperand() const ;
+			virtual const std::shared_ptr<ecore::EReference>& getOperatorExp_Attribute_rightHandOperand() const ;
 			
 			
 			// End Class OperatorExp
 
 			// Begin Class PackageDeclarationExp
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getPackageDeclarationExp_Class() const ;
+			virtual const std::shared_ptr<ecore::EClass>& getPackageDeclarationExp_Class() const ;
 			
-			virtual std::shared_ptr<ecore::EAttribute> getPackageDeclarationExp_Attribute_path() const ;
+			virtual const std::shared_ptr<ecore::EAttribute>& getPackageDeclarationExp_Attribute_path() const ;
 			
-			virtual std::shared_ptr<ecore::EReference> getPackageDeclarationExp_Attribute_contextDeclarations() const ;
+			virtual const std::shared_ptr<ecore::EReference>& getPackageDeclarationExp_Attribute_contextDeclarations() const ;
 			
 			
 			// End Class PackageDeclarationExp
 
 			// Begin Class ParentedExp
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getParentedExp_Class() const ;
+			virtual const std::shared_ptr<ecore::EClass>& getParentedExp_Class() const ;
 			
 			
-			virtual std::shared_ptr<ecore::EReference> getParentedExp_Attribute_innerExp() const ;
+			virtual const std::shared_ptr<ecore::EReference>& getParentedExp_Attribute_innerExp() const ;
 			
 			
 			// End Class ParentedExp
 
 			// Begin Class PrePostBodyExp
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getPrePostBodyExp_Class() const ;
+			virtual const std::shared_ptr<ecore::EClass>& getPrePostBodyExp_Class() const ;
 			
-			virtual std::shared_ptr<ecore::EAttribute> getPrePostBodyExp_Attribute_kind() const ;
-			virtual std::shared_ptr<ecore::EAttribute> getPrePostBodyExp_Attribute_name() const ;
+			virtual const std::shared_ptr<ecore::EAttribute>& getPrePostBodyExp_Attribute_kind() const ;
+			virtual const std::shared_ptr<ecore::EAttribute>& getPrePostBodyExp_Attribute_name() const ;
 			
-			virtual std::shared_ptr<ecore::EReference> getPrePostBodyExp_Attribute_bodyExpression() const ;
+			virtual const std::shared_ptr<ecore::EReference>& getPrePostBodyExp_Attribute_bodyExpression() const ;
 			
 			
 			// End Class PrePostBodyExp
 
 			// Begin Class PrePostBodyListExp
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getPrePostBodyListExp_Class() const ;
+			virtual const std::shared_ptr<ecore::EClass>& getPrePostBodyListExp_Class() const ;
 			
 			
-			virtual std::shared_ptr<ecore::EReference> getPrePostBodyListExp_Attribute_bodyExpressionList() const ;
-			virtual std::shared_ptr<ecore::EReference> getPrePostBodyListExp_Attribute_postExpressionList() const ;
-			virtual std::shared_ptr<ecore::EReference> getPrePostBodyListExp_Attribute_preExpressionList() const ;
+			virtual const std::shared_ptr<ecore::EReference>& getPrePostBodyListExp_Attribute_bodyExpressionList() const ;
+			virtual const std::shared_ptr<ecore::EReference>& getPrePostBodyListExp_Attribute_postExpressionList() const ;
+			virtual const std::shared_ptr<ecore::EReference>& getPrePostBodyListExp_Attribute_preExpressionList() const ;
 			
 			
 			// End Class PrePostBodyListExp
 
 			// Begin Class PrefixedExp
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getPrefixedExp_Class() const ;
+			virtual const std::shared_ptr<ecore::EClass>& getPrefixedExp_Class() const ;
 			
-			virtual std::shared_ptr<ecore::EAttribute> getPrefixedExp_Attribute_unarySymbol() const ;
+			virtual const std::shared_ptr<ecore::EAttribute>& getPrefixedExp_Attribute_unarySymbol() const ;
 			
-			virtual std::shared_ptr<ecore::EReference> getPrefixedExp_Attribute_referredExpression() const ;
+			virtual const std::shared_ptr<ecore::EReference>& getPrefixedExp_Attribute_referredExpression() const ;
 			
 			
 			// End Class PrefixedExp
 
 			// Begin Class PrimitiveLiteralExp
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getPrimitiveLiteralExp_Class() const ;
+			virtual const std::shared_ptr<ecore::EClass>& getPrimitiveLiteralExp_Class() const ;
 			
-			virtual std::shared_ptr<ecore::EAttribute> getPrimitiveLiteralExp_Attribute_symbol() const ;
+			virtual const std::shared_ptr<ecore::EAttribute>& getPrimitiveLiteralExp_Attribute_symbol() const ;
 			
 			
 			
@@ -569,9 +569,9 @@ namespace ocl::Expressions
 
 			// Begin Class PropertyCallExp
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getPropertyCallExp_Class() const ;
+			virtual const std::shared_ptr<ecore::EClass>& getPropertyCallExp_Class() const ;
 			
-			virtual std::shared_ptr<ecore::EAttribute> getPropertyCallExp_Attribute_referredProperty() const ;
+			virtual const std::shared_ptr<ecore::EAttribute>& getPropertyCallExp_Attribute_referredProperty() const ;
 			
 			
 			
@@ -579,21 +579,21 @@ namespace ocl::Expressions
 
 			// Begin Class PropertyContextDeclExp
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getPropertyContextDeclExp_Class() const ;
+			virtual const std::shared_ptr<ecore::EClass>& getPropertyContextDeclExp_Class() const ;
 			
-			virtual std::shared_ptr<ecore::EAttribute> getPropertyContextDeclExp_Attribute_propName() const ;
+			virtual const std::shared_ptr<ecore::EAttribute>& getPropertyContextDeclExp_Attribute_propName() const ;
 			
-			virtual std::shared_ptr<ecore::EReference> getPropertyContextDeclExp_Attribute_initOrDerValues() const ;
-			virtual std::shared_ptr<ecore::EReference> getPropertyContextDeclExp_Attribute_propType() const ;
+			virtual const std::shared_ptr<ecore::EReference>& getPropertyContextDeclExp_Attribute_initOrDerValues() const ;
+			virtual const std::shared_ptr<ecore::EReference>& getPropertyContextDeclExp_Attribute_propType() const ;
 			
 			
 			// End Class PropertyContextDeclExp
 
 			// Begin Class RealLiteralExp
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getRealLiteralExp_Class() const ;
+			virtual const std::shared_ptr<ecore::EClass>& getRealLiteralExp_Class() const ;
 			
-			virtual std::shared_ptr<ecore::EAttribute> getRealLiteralExp_Attribute_realSymbol() const ;
+			virtual const std::shared_ptr<ecore::EAttribute>& getRealLiteralExp_Attribute_realSymbol() const ;
 			
 			
 			
@@ -601,19 +601,19 @@ namespace ocl::Expressions
 
 			// Begin Class StateExp
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getStateExp_Class() const ;
+			virtual const std::shared_ptr<ecore::EClass>& getStateExp_Class() const ;
 			
 			
-			virtual std::shared_ptr<ecore::EReference> getStateExp_Attribute_referredState() const ;
+			virtual const std::shared_ptr<ecore::EReference>& getStateExp_Attribute_referredState() const ;
 			
 			
 			// End Class StateExp
 
 			// Begin Class StringLiteralExp
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getStringLiteralExp_Class() const ;
+			virtual const std::shared_ptr<ecore::EClass>& getStringLiteralExp_Class() const ;
 			
-			virtual std::shared_ptr<ecore::EAttribute> getStringLiteralExp_Attribute_stringSymbol() const ;
+			virtual const std::shared_ptr<ecore::EAttribute>& getStringLiteralExp_Attribute_stringSymbol() const ;
 			
 			
 			
@@ -621,41 +621,41 @@ namespace ocl::Expressions
 
 			// Begin Class TupleLiteralExp
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getTupleLiteralExp_Class() const ;
+			virtual const std::shared_ptr<ecore::EClass>& getTupleLiteralExp_Class() const ;
 			
 			
-			virtual std::shared_ptr<ecore::EReference> getTupleLiteralExp_Attribute_part() const ;
+			virtual const std::shared_ptr<ecore::EReference>& getTupleLiteralExp_Attribute_part() const ;
 			
 			
 			// End Class TupleLiteralExp
 
 			// Begin Class TupleLiteralPart
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getTupleLiteralPart_Class() const ;
+			virtual const std::shared_ptr<ecore::EClass>& getTupleLiteralPart_Class() const ;
 			
-			virtual std::shared_ptr<ecore::EAttribute> getTupleLiteralPart_Attribute_tuplePartName() const ;
-			virtual std::shared_ptr<ecore::EAttribute> getTupleLiteralPart_Attribute_tuplePartType() const ;
+			virtual const std::shared_ptr<ecore::EAttribute>& getTupleLiteralPart_Attribute_tuplePartName() const ;
+			virtual const std::shared_ptr<ecore::EAttribute>& getTupleLiteralPart_Attribute_tuplePartType() const ;
 			
-			virtual std::shared_ptr<ecore::EReference> getTupleLiteralPart_Attribute_assignedOclExpression() const ;
+			virtual const std::shared_ptr<ecore::EReference>& getTupleLiteralPart_Attribute_assignedOclExpression() const ;
 			
 			
 			// End Class TupleLiteralPart
 
 			// Begin Class TupleTypeExp
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getTupleTypeExp_Class() const ;
+			virtual const std::shared_ptr<ecore::EClass>& getTupleTypeExp_Class() const ;
 			
 			
-			virtual std::shared_ptr<ecore::EReference> getTupleTypeExp_Attribute_part() const ;
+			virtual const std::shared_ptr<ecore::EReference>& getTupleTypeExp_Attribute_part() const ;
 			
 			
 			// End Class TupleTypeExp
 
 			// Begin Class TypeExp
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getTypeExp_Class() const ;
+			virtual const std::shared_ptr<ecore::EClass>& getTypeExp_Class() const ;
 			
-			virtual std::shared_ptr<ecore::EAttribute> getTypeExp_Attribute_referredType() const ;
+			virtual const std::shared_ptr<ecore::EAttribute>& getTypeExp_Attribute_referredType() const ;
 			
 			
 			
@@ -663,9 +663,9 @@ namespace ocl::Expressions
 
 			// Begin Class UnlimitedNaturalExp
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getUnlimitedNaturalExp_Class() const ;
+			virtual const std::shared_ptr<ecore::EClass>& getUnlimitedNaturalExp_Class() const ;
 			
-			virtual std::shared_ptr<ecore::EAttribute> getUnlimitedNaturalExp_Attribute_unlimitedNaturalSymbol() const ;
+			virtual const std::shared_ptr<ecore::EAttribute>& getUnlimitedNaturalExp_Attribute_unlimitedNaturalSymbol() const ;
 			
 			
 			
@@ -673,7 +673,7 @@ namespace ocl::Expressions
 
 			// Begin Class UnspecifiedValueExp
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getUnspecifiedValueExp_Class() const ;
+			virtual const std::shared_ptr<ecore::EClass>& getUnspecifiedValueExp_Class() const ;
 			
 			
 			
@@ -682,48 +682,48 @@ namespace ocl::Expressions
 
 			// Begin Class VarDeclarationExp
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getVarDeclarationExp_Class() const ;
+			virtual const std::shared_ptr<ecore::EClass>& getVarDeclarationExp_Class() const ;
 			
-			virtual std::shared_ptr<ecore::EAttribute> getVarDeclarationExp_Attribute_varName() const ;
+			virtual const std::shared_ptr<ecore::EAttribute>& getVarDeclarationExp_Attribute_varName() const ;
 			
-			virtual std::shared_ptr<ecore::EReference> getVarDeclarationExp_Attribute_assignedOclExp() const ;
-			virtual std::shared_ptr<ecore::EReference> getVarDeclarationExp_Attribute_initExpression() const ;
-			virtual std::shared_ptr<ecore::EReference> getVarDeclarationExp_Attribute_varType() const ;
+			virtual const std::shared_ptr<ecore::EReference>& getVarDeclarationExp_Attribute_assignedOclExp() const ;
+			virtual const std::shared_ptr<ecore::EReference>& getVarDeclarationExp_Attribute_initExpression() const ;
+			virtual const std::shared_ptr<ecore::EReference>& getVarDeclarationExp_Attribute_varType() const ;
 			
 			
 			// End Class VarDeclarationExp
 
 			// Begin Class Variable
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getVariable_Class() const ;
+			virtual const std::shared_ptr<ecore::EClass>& getVariable_Class() const ;
 			
 			
-			virtual std::shared_ptr<ecore::EReference> getVariable_Attribute_baseExp() const ;
-			virtual std::shared_ptr<ecore::EReference> getVariable_Attribute_initExpression() const ;
-			virtual std::shared_ptr<ecore::EReference> getVariable_Attribute_loopExp() const ;
-			virtual std::shared_ptr<ecore::EReference> getVariable_Attribute_referringExp() const ;
-			virtual std::shared_ptr<ecore::EReference> getVariable_Attribute_representedParameter() const ;
-			virtual std::shared_ptr<ecore::EReference> getVariable_Attribute_resultOwner() const ;
-			virtual std::shared_ptr<ecore::EReference> getVariable_Attribute_selfOwner() const ;
-			virtual std::shared_ptr<ecore::EReference> getVariable_Attribute_value() const ;
-			virtual std::shared_ptr<ecore::EReference> getVariable_Attribute_varOwner() const ;
+			virtual const std::shared_ptr<ecore::EReference>& getVariable_Attribute_baseExp() const ;
+			virtual const std::shared_ptr<ecore::EReference>& getVariable_Attribute_initExpression() const ;
+			virtual const std::shared_ptr<ecore::EReference>& getVariable_Attribute_loopExp() const ;
+			virtual const std::shared_ptr<ecore::EReference>& getVariable_Attribute_referringExp() const ;
+			virtual const std::shared_ptr<ecore::EReference>& getVariable_Attribute_representedParameter() const ;
+			virtual const std::shared_ptr<ecore::EReference>& getVariable_Attribute_resultOwner() const ;
+			virtual const std::shared_ptr<ecore::EReference>& getVariable_Attribute_selfOwner() const ;
+			virtual const std::shared_ptr<ecore::EReference>& getVariable_Attribute_value() const ;
+			virtual const std::shared_ptr<ecore::EReference>& getVariable_Attribute_varOwner() const ;
 			
 			
 			// End Class Variable
 
 			// Begin Class VariableExp
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getVariableExp_Class() const ;
+			virtual const std::shared_ptr<ecore::EClass>& getVariableExp_Class() const ;
 			
-			virtual std::shared_ptr<ecore::EAttribute> getVariableExp_Attribute_referredVariable() const ;
+			virtual const std::shared_ptr<ecore::EAttribute>& getVariableExp_Attribute_referredVariable() const ;
 			
 			
 			
 			// End Class VariableExp
 
-			virtual std::shared_ptr<ecore::EEnum> getCollectionKind_Class() const ;
-			virtual std::shared_ptr<ecore::EEnum> getSurroundingType_Class() const ;
-			virtual std::shared_ptr<ecore::EEnum> getPrePostBody_Class() const ;
+			virtual const std::shared_ptr<ecore::EEnum>& getCollectionKind_Class() const ;
+			virtual const std::shared_ptr<ecore::EEnum>& getSurroundingType_Class() const ;
+			virtual const std::shared_ptr<ecore::EEnum>& getPrePostBody_Class() const ;
 			
 			// SubPackages Getters
 			

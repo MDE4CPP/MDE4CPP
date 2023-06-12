@@ -4,16 +4,16 @@
 
 #include "abstractDataTypes/SubsetUnion.hpp"
 //metametamodel classes
-#include "ecore/EReference.hpp"
-#include "ecore/EAnnotation.hpp"
-#include "ecore/EAttribute.hpp"
-#include "ecore/EDataType.hpp"
-#include "ecore/EGenericType.hpp"
-#include "ecore/EClass.hpp"
-#include "ecore/EStringToStringMapEntry.hpp"
-#include "ecore/EOperation.hpp"
-#include "ecore/EPackage.hpp"
 #include "ecore/EParameter.hpp"
+#include "ecore/EDataType.hpp"
+#include "ecore/EStringToStringMapEntry.hpp"
+#include "ecore/EGenericType.hpp"
+#include "ecore/EReference.hpp"
+#include "ecore/EOperation.hpp"
+#include "ecore/EAttribute.hpp"
+#include "ecore/EAnnotation.hpp"
+#include "ecore/EPackage.hpp"
+#include "ecore/EClass.hpp"
 
 //metamodel factory
 #include "fUML/fUMLFactory.hpp"
@@ -22,6 +22,8 @@
 #include "ecore/ecorePackage.hpp"
 #include "types/typesPackage.hpp"
 #include "uml/umlPackage.hpp"
+#include "fUML/MDE4CPP_Extensions/impl/MDE4CPP_ExtensionsPackageImpl.hpp"
+
 #include "fUML/Semantics/impl/SemanticsPackageImpl.hpp"
 
 using namespace fUML;
@@ -75,6 +77,10 @@ void fUMLPackageImpl::init(std::shared_ptr<ecore::EPackage> package)
     initializePackageContents();   
 }
 
+std::shared_ptr<fUML::MDE4CPP_Extensions::MDE4CPP_ExtensionsPackage> fUML::fUMLPackageImpl::getMDE4CPP_Extensions_Package() const
+{
+	return fUML::MDE4CPP_Extensions::MDE4CPP_ExtensionsPackage::eInstance();
+} 
 std::shared_ptr<fUML::Semantics::SemanticsPackage> fUML::fUMLPackageImpl::getSemantics_Package() const
 {
 	return fUML::Semantics::SemanticsPackage::eInstance();

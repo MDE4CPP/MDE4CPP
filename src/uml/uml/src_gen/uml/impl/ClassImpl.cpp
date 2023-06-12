@@ -186,7 +186,7 @@ ClassImpl& ClassImpl::operator=(const ClassImpl & obj)
 			std::cout << "Initialising value Subset: " << "m_nestedClassifier - Subset<uml::Classifier, uml::NamedElement >(getOwnedMember())" << std::endl;
 		#endif
 		
-		for(const std::shared_ptr<uml::Classifier> nestedClassifierindexElem: *nestedClassifierList) 
+		for(const std::shared_ptr<uml::Classifier>& nestedClassifierindexElem: *nestedClassifierList) 
 		{
 			std::shared_ptr<uml::Classifier> temp = std::dynamic_pointer_cast<uml::Classifier>((nestedClassifierindexElem)->copy());
 			m_nestedClassifier->push_back(temp);
@@ -213,7 +213,7 @@ ClassImpl& ClassImpl::operator=(const ClassImpl & obj)
 			std::cout << "Initialising value Subset: " << "m_ownedOperation - Subset<uml::Operation, uml::Feature, uml::NamedElement >(getFeature(), getOwnedMember())" << std::endl;
 		#endif
 		
-		for(const std::shared_ptr<uml::Operation> ownedOperationindexElem: *ownedOperationList) 
+		for(const std::shared_ptr<uml::Operation>& ownedOperationindexElem: *ownedOperationList) 
 		{
 			std::shared_ptr<uml::Operation> temp = std::dynamic_pointer_cast<uml::Operation>((ownedOperationindexElem)->copy());
 			m_ownedOperation->push_back(temp);
@@ -240,7 +240,7 @@ ClassImpl& ClassImpl::operator=(const ClassImpl & obj)
 			std::cout << "Initialising value Subset: " << "m_ownedReception - Subset<uml::Reception, uml::Feature, uml::NamedElement >(getFeature(), getOwnedMember())" << std::endl;
 		#endif
 		
-		for(const std::shared_ptr<uml::Reception> ownedReceptionindexElem: *ownedReceptionList) 
+		for(const std::shared_ptr<uml::Reception>& ownedReceptionindexElem: *ownedReceptionList) 
 		{
 			std::shared_ptr<uml::Reception> temp = std::dynamic_pointer_cast<uml::Reception>((ownedReceptionindexElem)->copy());
 			m_ownedReception->push_back(temp);
@@ -389,7 +389,7 @@ const std::shared_ptr<Subset<uml::Classifier, uml::NamedElement>>& ClassImpl::ge
 }
 
 /* Getter & Setter for reference ownedAttribute */
-const std::shared_ptr<Subset<uml::Property, uml::ConnectableElement, uml::NamedElement, uml::Property>>& ClassImpl::getClass_OwnedAttribute() const
+std::shared_ptr<Subset<uml::Property, uml::ConnectableElement, uml::NamedElement, uml::Property>> ClassImpl::getClass_OwnedAttribute() const
 {
 	//Getter call of redefined container reference StructuredClassifier::ownedAttribute 
 	return uml::StructuredClassifierImpl::getOwnedAttribute();
@@ -438,7 +438,7 @@ const std::shared_ptr<Subset<uml::Reception, uml::Feature, uml::NamedElement>>& 
 }
 
 /* Getter & Setter for reference superClass */
-const std::shared_ptr<Bag<uml::Class>>& ClassImpl::getSuperClass() const
+std::shared_ptr<Bag<uml::Class>> ClassImpl::getSuperClass() const
 {
 	//Cast conversion from redefined container reference Classifier::general 
 	std::shared_ptr<Bag<uml::Class>> superClass(new Bag<uml::Class>());
@@ -805,13 +805,13 @@ bool ClassImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 					{
 						std::shared_ptr<Bag<uml::Classifier>> _nestedClassifier = getNestedClassifier();
 	
-						for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
+						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{
 							std::shared_ptr<uml::Classifier> valueToAdd = std::dynamic_pointer_cast<uml::Classifier>(anEObject);
 	
 							if (valueToAdd)
 							{
-								if(_nestedClassifier->find(valueToAdd) == -1)
+								if(!(_nestedClassifier->includes(valueToAdd)))
 								{
 									_nestedClassifier->add(valueToAdd);
 								}
@@ -850,13 +850,13 @@ bool ClassImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 					{
 						std::shared_ptr<Bag<uml::Property>> _ownedAttribute = getClass_OwnedAttribute();
 	
-						for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
+						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{
 							std::shared_ptr<uml::Property> valueToAdd = std::dynamic_pointer_cast<uml::Property>(anEObject);
 	
 							if (valueToAdd)
 							{
-								if(_ownedAttribute->find(valueToAdd) == -1)
+								if(!(_ownedAttribute->includes(valueToAdd)))
 								{
 									_ownedAttribute->add(valueToAdd);
 								}
@@ -895,13 +895,13 @@ bool ClassImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 					{
 						std::shared_ptr<Bag<uml::Operation>> _ownedOperation = getOwnedOperation();
 	
-						for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
+						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{
 							std::shared_ptr<uml::Operation> valueToAdd = std::dynamic_pointer_cast<uml::Operation>(anEObject);
 	
 							if (valueToAdd)
 							{
-								if(_ownedOperation->find(valueToAdd) == -1)
+								if(!(_ownedOperation->includes(valueToAdd)))
 								{
 									_ownedOperation->add(valueToAdd);
 								}
@@ -940,13 +940,13 @@ bool ClassImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 					{
 						std::shared_ptr<Bag<uml::Reception>> _ownedReception = getOwnedReception();
 	
-						for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
+						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{
 							std::shared_ptr<uml::Reception> valueToAdd = std::dynamic_pointer_cast<uml::Reception>(anEObject);
 	
 							if (valueToAdd)
 							{
-								if(_ownedReception->find(valueToAdd) == -1)
+								if(!(_ownedReception->includes(valueToAdd)))
 								{
 									_ownedReception->add(valueToAdd);
 								}
@@ -985,13 +985,13 @@ bool ClassImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 					{
 						std::shared_ptr<Bag<uml::Class>> _superClass = getSuperClass();
 	
-						for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
+						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{
 							std::shared_ptr<uml::Class> valueToAdd = std::dynamic_pointer_cast<uml::Class>(anEObject);
 	
 							if (valueToAdd)
 							{
-								if(_superClass->find(valueToAdd) == -1)
+								if(!(_superClass->includes(valueToAdd)))
 								{
 									_superClass->add(valueToAdd);
 								}

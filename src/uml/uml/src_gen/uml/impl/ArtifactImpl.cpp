@@ -179,7 +179,7 @@ ArtifactImpl& ArtifactImpl::operator=(const ArtifactImpl & obj)
 			std::cout << "Initialising value Subset: " << "m_manifestation - Subset<uml::Manifestation, uml::Element >(getOwnedElement())" << std::endl;
 		#endif
 		
-		for(const std::shared_ptr<uml::Manifestation> manifestationindexElem: *manifestationList) 
+		for(const std::shared_ptr<uml::Manifestation>& manifestationindexElem: *manifestationList) 
 		{
 			std::shared_ptr<uml::Manifestation> temp = std::dynamic_pointer_cast<uml::Manifestation>((manifestationindexElem)->copy());
 			m_manifestation->push_back(temp);
@@ -206,7 +206,7 @@ ArtifactImpl& ArtifactImpl::operator=(const ArtifactImpl & obj)
 			std::cout << "Initialising value Subset: " << "m_nestedArtifact - Subset<uml::Artifact, uml::NamedElement >(getOwnedMember())" << std::endl;
 		#endif
 		
-		for(const std::shared_ptr<uml::Artifact> nestedArtifactindexElem: *nestedArtifactList) 
+		for(const std::shared_ptr<uml::Artifact>& nestedArtifactindexElem: *nestedArtifactList) 
 		{
 			std::shared_ptr<uml::Artifact> temp = std::dynamic_pointer_cast<uml::Artifact>((nestedArtifactindexElem)->copy());
 			m_nestedArtifact->push_back(temp);
@@ -233,7 +233,7 @@ ArtifactImpl& ArtifactImpl::operator=(const ArtifactImpl & obj)
 			std::cout << "Initialising value Subset: " << "m_ownedAttribute - Subset<uml::Property, uml::NamedElement, uml::Property >(getOwnedMember(), getAttribute())" << std::endl;
 		#endif
 		
-		for(const std::shared_ptr<uml::Property> ownedAttributeindexElem: *ownedAttributeList) 
+		for(const std::shared_ptr<uml::Property>& ownedAttributeindexElem: *ownedAttributeList) 
 		{
 			std::shared_ptr<uml::Property> temp = std::dynamic_pointer_cast<uml::Property>((ownedAttributeindexElem)->copy());
 			m_ownedAttribute->push_back(temp);
@@ -260,7 +260,7 @@ ArtifactImpl& ArtifactImpl::operator=(const ArtifactImpl & obj)
 			std::cout << "Initialising value Subset: " << "m_ownedOperation - Subset<uml::Operation, uml::Feature, uml::NamedElement >(getFeature(), getOwnedMember())" << std::endl;
 		#endif
 		
-		for(const std::shared_ptr<uml::Operation> ownedOperationindexElem: *ownedOperationList) 
+		for(const std::shared_ptr<uml::Operation>& ownedOperationindexElem: *ownedOperationList) 
 		{
 			std::shared_ptr<uml::Operation> temp = std::dynamic_pointer_cast<uml::Operation>((ownedOperationindexElem)->copy());
 			m_ownedOperation->push_back(temp);
@@ -727,13 +727,13 @@ bool ArtifactImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 					{
 						std::shared_ptr<Bag<uml::Manifestation>> _manifestation = getManifestation();
 	
-						for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
+						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{
 							std::shared_ptr<uml::Manifestation> valueToAdd = std::dynamic_pointer_cast<uml::Manifestation>(anEObject);
 	
 							if (valueToAdd)
 							{
-								if(_manifestation->find(valueToAdd) == -1)
+								if(!(_manifestation->includes(valueToAdd)))
 								{
 									_manifestation->add(valueToAdd);
 								}
@@ -772,13 +772,13 @@ bool ArtifactImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 					{
 						std::shared_ptr<Bag<uml::Artifact>> _nestedArtifact = getNestedArtifact();
 	
-						for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
+						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{
 							std::shared_ptr<uml::Artifact> valueToAdd = std::dynamic_pointer_cast<uml::Artifact>(anEObject);
 	
 							if (valueToAdd)
 							{
-								if(_nestedArtifact->find(valueToAdd) == -1)
+								if(!(_nestedArtifact->includes(valueToAdd)))
 								{
 									_nestedArtifact->add(valueToAdd);
 								}
@@ -817,13 +817,13 @@ bool ArtifactImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 					{
 						std::shared_ptr<Bag<uml::Property>> _ownedAttribute = getOwnedAttribute();
 	
-						for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
+						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{
 							std::shared_ptr<uml::Property> valueToAdd = std::dynamic_pointer_cast<uml::Property>(anEObject);
 	
 							if (valueToAdd)
 							{
-								if(_ownedAttribute->find(valueToAdd) == -1)
+								if(!(_ownedAttribute->includes(valueToAdd)))
 								{
 									_ownedAttribute->add(valueToAdd);
 								}
@@ -862,13 +862,13 @@ bool ArtifactImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 					{
 						std::shared_ptr<Bag<uml::Operation>> _ownedOperation = getOwnedOperation();
 	
-						for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
+						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{
 							std::shared_ptr<uml::Operation> valueToAdd = std::dynamic_pointer_cast<uml::Operation>(anEObject);
 	
 							if (valueToAdd)
 							{
-								if(_ownedOperation->find(valueToAdd) == -1)
+								if(!(_ownedOperation->includes(valueToAdd)))
 								{
 									_ownedOperation->add(valueToAdd);
 								}

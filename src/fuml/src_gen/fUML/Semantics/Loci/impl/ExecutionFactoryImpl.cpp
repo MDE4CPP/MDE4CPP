@@ -153,8 +153,8 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "fUML/Semantics/CommonBehavior/CommonBehaviorFactory.hpp"
 #include "uml/umlFactory.hpp"
+#include "fUML/Semantics/CommonBehavior/CommonBehaviorFactory.hpp"
 #include "fUML/Semantics/Loci/LociFactory.hpp"
 #include "uml/Behavior.hpp"
 #include "uml/Element.hpp"
@@ -871,13 +871,13 @@ bool ExecutionFactoryImpl::eSet(int featureID,  const std::shared_ptr<Any>& newV
 					{
 						std::shared_ptr<Bag<uml::PrimitiveType>> _builtInTypes = getBuiltInTypes();
 	
-						for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
+						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{
 							std::shared_ptr<uml::PrimitiveType> valueToAdd = std::dynamic_pointer_cast<uml::PrimitiveType>(anEObject);
 	
 							if (valueToAdd)
 							{
-								if(_builtInTypes->find(valueToAdd) == -1)
+								if(!(_builtInTypes->includes(valueToAdd)))
 								{
 									_builtInTypes->add(valueToAdd);
 								}
@@ -947,13 +947,13 @@ bool ExecutionFactoryImpl::eSet(int featureID,  const std::shared_ptr<Any>& newV
 					{
 						std::shared_ptr<Bag<fUML::Semantics::Loci::SemanticStrategy>> _strategies = getStrategies();
 	
-						for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
+						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{
 							std::shared_ptr<fUML::Semantics::Loci::SemanticStrategy> valueToAdd = std::dynamic_pointer_cast<fUML::Semantics::Loci::SemanticStrategy>(anEObject);
 	
 							if (valueToAdd)
 							{
-								if(_strategies->find(valueToAdd) == -1)
+								if(!(_strategies->includes(valueToAdd)))
 								{
 									_strategies->add(valueToAdd);
 								}

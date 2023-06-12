@@ -157,7 +157,7 @@ InvocationActionImpl& InvocationActionImpl::operator=(const InvocationActionImpl
 			std::cout << "Initialising value SubsetUnion: " << "m_argument - SubsetUnion<uml::InputPin, uml::InputPin >(getInput())" << std::endl;
 		#endif
 		
-		for(const std::shared_ptr<uml::InputPin> argumentindexElem: *argumentList) 
+		for(const std::shared_ptr<uml::InputPin>& argumentindexElem: *argumentList) 
 		{
 			std::shared_ptr<uml::InputPin> temp = std::dynamic_pointer_cast<uml::InputPin>((argumentindexElem)->copy());
 			m_argument->push_back(temp);
@@ -433,13 +433,13 @@ bool InvocationActionImpl::eSet(int featureID,  const std::shared_ptr<Any>& newV
 					{
 						std::shared_ptr<Bag<uml::InputPin>> _argument = getArgument();
 	
-						for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
+						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{
 							std::shared_ptr<uml::InputPin> valueToAdd = std::dynamic_pointer_cast<uml::InputPin>(anEObject);
 	
 							if (valueToAdd)
 							{
-								if(_argument->find(valueToAdd) == -1)
+								if(!(_argument->includes(valueToAdd)))
 								{
 									_argument->add(valueToAdd);
 								}

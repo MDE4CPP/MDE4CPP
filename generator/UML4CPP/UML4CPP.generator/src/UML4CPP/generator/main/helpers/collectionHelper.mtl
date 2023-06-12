@@ -27,6 +27,7 @@
 [import UML4CPP::generator::main::profiles::uml4CPPProfileHelper /]
 [import UML4CPP::generator::main::helpers::isGeneratableHelper /]
 [import UML4CPP::generator::main::profiles::profileHelper /]
+[import UML4CPP::generator::main::model_execution::model_execution /]
 
  
 [**
@@ -76,7 +77,7 @@
 /]
 
 [**
- * collect query for reflection models
+ * collect query for non-reflection models
  * 
  * include basic models and reflections models as well as packages used by given model
 */]
@@ -87,10 +88,41 @@
 		'ecoreReflection', 
 		'primitivetypesReflection', 
 		'umlReflection'
-	}->addAll(collectModelIncludes()->sortedBy(name).name)
+	}
+	->addAll(collectModelIncludes()->sortedBy(name).name)
 	->reject(packName : String | aPackage.getAllSubPackageNames()->includes(packName))
+	->addAll(collectIncludingMetaModelNamesForExecutableModels())
 	->flatten() 
 /]
+
+[query private collectIncludingMetaModelNamesForExecutableModels(anOclAny: OclAny) : Set(String) =
+	if(isFUMLExecutable())
+	then
+		OrderedSet{
+			'fUML'
+		}
+	else
+		if(isPSCSExecutable())
+		then
+			OrderedSet{
+				'fUML',
+				'PSCS'
+			}
+		else
+			if(isPSSMExecutable())
+			then
+				OrderedSet{
+					'fUML',
+					'PSCS',
+					'PSSM'
+				}
+			else
+				OrderedSet{}
+			endif
+		endif
+	endif
+/]
+
 
 [**
  * collect query for reflection models
@@ -138,12 +170,14 @@
 	->addAll(collectPackageClassesForFactoryInternal(aPackage).getImplicitCompositeOwners())
 	->addAll(collectPackageStereotypesForFactory(aPackage))
 	->addAll(collectPackageDataTypesForFactory(aPackage))
+	->addAll(collectPackageSignalsForFactory(aPackage))
 	->sortedBy(myQualifiedName()) 
 /]
 [query public collectPackageClassifiersForFactoryFunctions(aPackage : Package) : OrderedSet(Classifier) = 
 	collectPackageClassesForFactoryInternal(aPackage)
 	->addAll(collectPackageStereotypesForFactory(aPackage))
 	->addAll(collectPackageDataTypesForFactory(aPackage))
+	->addAll(collectPackageSignalsForFactory(aPackage))
 	->reject(isSingleton() or isAbstract = true)
 	->sortedBy(myQualifiedName()) 
 /]
@@ -158,6 +192,10 @@
 [query private collectPackageDataTypesForFactory(aPackage : Package) : Set(DataType) = 
 	aPackage.ownedMember
 	->selectByType(DataType)
+/]
+[query private collectPackageSignalsForFactory(aPackage : Package) : Set(Signal) = 
+	aPackage.ownedMember
+	->selectByType(Signal)
 /]
 [query public collectPackageInterfacesForFactory(aPackage : Package) : OrderedSet(Interface) = 
 	aPackage.ownedMember

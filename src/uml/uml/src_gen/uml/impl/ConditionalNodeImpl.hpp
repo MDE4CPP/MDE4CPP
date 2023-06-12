@@ -96,7 +96,7 @@ namespace uml
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual const std::shared_ptr<Bag<uml::OutputPin>>& getResult() const ;
+			virtual std::shared_ptr<Bag<uml::OutputPin>> getResult() const ;
 			
 			//*********************************
 			// Union Reference Getters

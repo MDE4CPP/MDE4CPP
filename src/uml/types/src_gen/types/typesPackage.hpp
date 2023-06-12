@@ -14,9 +14,9 @@
 
 namespace ecore 
 {
-	class EAnnotation;
 	class EDataType;
 	class EStringToStringMapEntry;
+	class EAnnotation;
 }
 
 namespace types 
@@ -53,12 +53,12 @@ namespace types
 			static const int STRING_CLASS = 5;
 			static const int UNLIMITEDNATURAL_CLASS = 6;
 			
-			virtual std::shared_ptr<ecore::EDataType> getAny_Class() const = 0;
-			virtual std::shared_ptr<ecore::EDataType> getBoolean_Class() const = 0;
-			virtual std::shared_ptr<ecore::EDataType> getInteger_Class() const = 0;
-			virtual std::shared_ptr<ecore::EDataType> getReal_Class() const = 0;
-			virtual std::shared_ptr<ecore::EDataType> getString_Class() const = 0;
-			virtual std::shared_ptr<ecore::EDataType> getUnlimitedNatural_Class() const = 0;
+			virtual const std::shared_ptr<ecore::EDataType>& getAny_Class() const = 0;
+			virtual const std::shared_ptr<ecore::EDataType>& getBoolean_Class() const = 0;
+			virtual const std::shared_ptr<ecore::EDataType>& getInteger_Class() const = 0;
+			virtual const std::shared_ptr<ecore::EDataType>& getReal_Class() const = 0;
+			virtual const std::shared_ptr<ecore::EDataType>& getString_Class() const = 0;
+			virtual const std::shared_ptr<ecore::EDataType>& getUnlimitedNatural_Class() const = 0;
 			
 
 			

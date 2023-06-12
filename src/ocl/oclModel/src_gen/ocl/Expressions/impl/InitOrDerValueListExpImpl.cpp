@@ -471,13 +471,13 @@ bool InitOrDerValueListExpImpl::eSet(int featureID,  const std::shared_ptr<Any>&
 					{
 						std::shared_ptr<Bag<ocl::Expressions::InitOrDerValueExp>> _derExpressionList = getDerExpressionList();
 	
-						for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
+						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{
 							std::shared_ptr<ocl::Expressions::InitOrDerValueExp> valueToAdd = std::dynamic_pointer_cast<ocl::Expressions::InitOrDerValueExp>(anEObject);
 	
 							if (valueToAdd)
 							{
-								if(_derExpressionList->find(valueToAdd) == -1)
+								if(!(_derExpressionList->includes(valueToAdd)))
 								{
 									_derExpressionList->add(valueToAdd);
 								}
@@ -516,13 +516,13 @@ bool InitOrDerValueListExpImpl::eSet(int featureID,  const std::shared_ptr<Any>&
 					{
 						std::shared_ptr<Bag<ocl::Expressions::InitOrDerValueExp>> _initExpressionList = getInitExpressionList();
 	
-						for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
+						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{
 							std::shared_ptr<ocl::Expressions::InitOrDerValueExp> valueToAdd = std::dynamic_pointer_cast<ocl::Expressions::InitOrDerValueExp>(anEObject);
 	
 							if (valueToAdd)
 							{
-								if(_initExpressionList->find(valueToAdd) == -1)
+								if(!(_initExpressionList->includes(valueToAdd)))
 								{
 									_initExpressionList->add(valueToAdd);
 								}

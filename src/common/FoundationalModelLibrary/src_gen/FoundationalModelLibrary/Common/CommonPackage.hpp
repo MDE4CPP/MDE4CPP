@@ -36,11 +36,11 @@ namespace FoundationalModelLibrary::Common
 			static const std::string eNS_PREFIX;
 
 			//getter for the ownedMember
-			virtual std::shared_ptr<uml::Class> get_FoundationalModelLibrary_Common_Listener() = 0;  
-			virtual std::shared_ptr<uml::DataType> get_FoundationalModelLibrary_Common_Status() = 0;  
-			virtual std::shared_ptr<uml::Property> get_FoundationalModelLibrary_Common_Status_code() = 0;  
-			virtual std::shared_ptr<uml::Property> get_FoundationalModelLibrary_Common_Status_context() = 0;  
-			virtual std::shared_ptr<uml::Property> get_FoundationalModelLibrary_Common_Status_description() = 0;  
+			virtual const std::shared_ptr<uml::Class>& get_FoundationalModelLibrary_Common_Listener() = 0;  
+			virtual const std::shared_ptr<uml::DataType>& get_FoundationalModelLibrary_Common_Status() = 0;  
+			virtual const std::shared_ptr<uml::Property>& get_FoundationalModelLibrary_Common_Status_code() = 0;  
+			virtual const std::shared_ptr<uml::Property>& get_FoundationalModelLibrary_Common_Status_context() = 0;  
+			virtual const std::shared_ptr<uml::Property>& get_FoundationalModelLibrary_Common_Status_description() = 0;  
 			
 			
 

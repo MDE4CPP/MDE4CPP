@@ -47,23 +47,23 @@ std::shared_ptr<ecoreFactory> ecoreFactory::eInstance()
 
 ecoreFactoryImpl::ecoreFactoryImpl()
 {
-	m_idMap.insert(std::make_pair("EAnnotation", ecorePackage::EANNOTATION_CLASS));
-	m_idMap.insert(std::make_pair("EAttribute", ecorePackage::EATTRIBUTE_CLASS));
-	m_idMap.insert(std::make_pair("EClass", ecorePackage::ECLASS_CLASS));
-	m_idMap.insert(std::make_pair("EDataType", ecorePackage::EDATATYPE_CLASS));
-	m_idMap.insert(std::make_pair("EEnum", ecorePackage::EENUM_CLASS));
-	m_idMap.insert(std::make_pair("EEnumLiteral", ecorePackage::EENUMLITERAL_CLASS));
-	m_idMap.insert(std::make_pair("EFactory", ecorePackage::EFACTORY_CLASS));
-	m_idMap.insert(std::make_pair("EGenericType", ecorePackage::EGENERICTYPE_CLASS));
-	m_idMap.insert(std::make_pair("EObject", ecorePackage::EOBJECT_CLASS));
-	m_idMap.insert(std::make_pair("EObjectAny", ecorePackage::EOBJECTANY_CLASS));
-	m_idMap.insert(std::make_pair("EObjectContainer", ecorePackage::EOBJECTCONTAINER_CLASS));
-	m_idMap.insert(std::make_pair("EOperation", ecorePackage::EOPERATION_CLASS));
-	m_idMap.insert(std::make_pair("EPackage", ecorePackage::EPACKAGE_CLASS));
-	m_idMap.insert(std::make_pair("EParameter", ecorePackage::EPARAMETER_CLASS));
-	m_idMap.insert(std::make_pair("EReference", ecorePackage::EREFERENCE_CLASS));
-	m_idMap.insert(std::make_pair("EStringToStringMapEntry", ecorePackage::ESTRINGTOSTRINGMAPENTRY_CLASS));
-	m_idMap.insert(std::make_pair("ETypeParameter", ecorePackage::ETYPEPARAMETER_CLASS));
+	m_idMap.insert(std::make_pair("ecore::EAnnotation", ecorePackage::EANNOTATION_CLASS));
+	m_idMap.insert(std::make_pair("ecore::EAttribute", ecorePackage::EATTRIBUTE_CLASS));
+	m_idMap.insert(std::make_pair("ecore::EClass", ecorePackage::ECLASS_CLASS));
+	m_idMap.insert(std::make_pair("ecore::EDataType", ecorePackage::EDATATYPE_CLASS));
+	m_idMap.insert(std::make_pair("ecore::EEnum", ecorePackage::EENUM_CLASS));
+	m_idMap.insert(std::make_pair("ecore::EEnumLiteral", ecorePackage::EENUMLITERAL_CLASS));
+	m_idMap.insert(std::make_pair("ecore::EFactory", ecorePackage::EFACTORY_CLASS));
+	m_idMap.insert(std::make_pair("ecore::EGenericType", ecorePackage::EGENERICTYPE_CLASS));
+	m_idMap.insert(std::make_pair("ecore::EObject", ecorePackage::EOBJECT_CLASS));
+	m_idMap.insert(std::make_pair("ecore::EObjectAny", ecorePackage::EOBJECTANY_CLASS));
+	m_idMap.insert(std::make_pair("ecore::EObjectContainer", ecorePackage::EOBJECTCONTAINER_CLASS));
+	m_idMap.insert(std::make_pair("ecore::EOperation", ecorePackage::EOPERATION_CLASS));
+	m_idMap.insert(std::make_pair("ecore::EPackage", ecorePackage::EPACKAGE_CLASS));
+	m_idMap.insert(std::make_pair("ecore::EParameter", ecorePackage::EPARAMETER_CLASS));
+	m_idMap.insert(std::make_pair("ecore::EReference", ecorePackage::EREFERENCE_CLASS));
+	m_idMap.insert(std::make_pair("ecore::EStringToStringMapEntry", ecorePackage::ESTRINGTOSTRINGMAPENTRY_CLASS));
+	m_idMap.insert(std::make_pair("ecore::ETypeParameter", ecorePackage::ETYPEPARAMETER_CLASS));
 }
 
 ecoreFactoryImpl::~ecoreFactoryImpl()
@@ -96,7 +96,7 @@ std::shared_ptr<EObject> ecoreFactoryImpl::create(const int metaElementID, std::
 					//EAnnotation has contents as a containment
 					case  ecore::ecorePackage::EANNOTATION_ATTRIBUTE_CONTENTS:	
 					{
-						std::shared_ptr<EAnnotation> castedContainer = std::dynamic_pointer_cast<EAnnotation> (container);;
+						std::shared_ptr<ecore::EAnnotation> castedContainer = std::dynamic_pointer_cast<ecore::EAnnotation> (container);
 						return this->createEAnnotation_as_contents_in_EAnnotation(castedContainer,metaElementID);
 					}
 					//EAnnotation has eAnnotations as a containment
@@ -130,13 +130,13 @@ std::shared_ptr<EObject> ecoreFactoryImpl::create(const int metaElementID, std::
 					//EAttribute has contents as a containment
 					case  ecore::ecorePackage::EANNOTATION_ATTRIBUTE_CONTENTS:	
 					{
-						std::shared_ptr<EAnnotation> castedContainer = std::dynamic_pointer_cast<EAnnotation> (container);;
+						std::shared_ptr<ecore::EAnnotation> castedContainer = std::dynamic_pointer_cast<ecore::EAnnotation> (container);
 						return this->createEAttribute_as_contents_in_EAnnotation(castedContainer,metaElementID);
 					}
 					//EAttribute has eAttributes as a containment
 					case  ecore::ecorePackage::ECLASS_ATTRIBUTE_EATTRIBUTES:	
 					{
-						std::shared_ptr<EClass> castedContainer = std::dynamic_pointer_cast<EClass> (container);;
+						std::shared_ptr<ecore::EClass> castedContainer = std::dynamic_pointer_cast<ecore::EClass> (container);
 						return this->createEAttribute_as_eAttributes_in_EClass(castedContainer,metaElementID);
 					}
 					//EAttribute has eContentUnion as a containment
@@ -170,7 +170,7 @@ std::shared_ptr<EObject> ecoreFactoryImpl::create(const int metaElementID, std::
 					//EClass has contents as a containment
 					case  ecore::ecorePackage::EANNOTATION_ATTRIBUTE_CONTENTS:	
 					{
-						std::shared_ptr<EAnnotation> castedContainer = std::dynamic_pointer_cast<EAnnotation> (container);;
+						std::shared_ptr<ecore::EAnnotation> castedContainer = std::dynamic_pointer_cast<ecore::EAnnotation> (container);
 						return this->createEClass_as_contents_in_EAnnotation(castedContainer,metaElementID);
 					}
 					//EClass has eClassifiers as a containment
@@ -204,7 +204,7 @@ std::shared_ptr<EObject> ecoreFactoryImpl::create(const int metaElementID, std::
 					//EDataType has contents as a containment
 					case  ecore::ecorePackage::EANNOTATION_ATTRIBUTE_CONTENTS:	
 					{
-						std::shared_ptr<EAnnotation> castedContainer = std::dynamic_pointer_cast<EAnnotation> (container);;
+						std::shared_ptr<ecore::EAnnotation> castedContainer = std::dynamic_pointer_cast<ecore::EAnnotation> (container);
 						return this->createEDataType_as_contents_in_EAnnotation(castedContainer,metaElementID);
 					}
 					//EDataType has eClassifiers as a containment
@@ -238,7 +238,7 @@ std::shared_ptr<EObject> ecoreFactoryImpl::create(const int metaElementID, std::
 					//EEnum has contents as a containment
 					case  ecore::ecorePackage::EANNOTATION_ATTRIBUTE_CONTENTS:	
 					{
-						std::shared_ptr<EAnnotation> castedContainer = std::dynamic_pointer_cast<EAnnotation> (container);;
+						std::shared_ptr<ecore::EAnnotation> castedContainer = std::dynamic_pointer_cast<ecore::EAnnotation> (container);
 						return this->createEEnum_as_contents_in_EAnnotation(castedContainer,metaElementID);
 					}
 					//EEnum has eClassifiers as a containment
@@ -272,7 +272,7 @@ std::shared_ptr<EObject> ecoreFactoryImpl::create(const int metaElementID, std::
 					//EEnumLiteral has contents as a containment
 					case  ecore::ecorePackage::EANNOTATION_ATTRIBUTE_CONTENTS:	
 					{
-						std::shared_ptr<EAnnotation> castedContainer = std::dynamic_pointer_cast<EAnnotation> (container);;
+						std::shared_ptr<ecore::EAnnotation> castedContainer = std::dynamic_pointer_cast<ecore::EAnnotation> (container);
 						return this->createEEnumLiteral_as_contents_in_EAnnotation(castedContainer,metaElementID);
 					}
 					//EEnumLiteral has eContentUnion as a containment
@@ -306,7 +306,7 @@ std::shared_ptr<EObject> ecoreFactoryImpl::create(const int metaElementID, std::
 					//EFactory has contents as a containment
 					case  ecore::ecorePackage::EANNOTATION_ATTRIBUTE_CONTENTS:	
 					{
-						std::shared_ptr<EAnnotation> castedContainer = std::dynamic_pointer_cast<EAnnotation> (container);;
+						std::shared_ptr<ecore::EAnnotation> castedContainer = std::dynamic_pointer_cast<ecore::EAnnotation> (container);
 						return this->createEFactory_as_contents_in_EAnnotation(castedContainer,metaElementID);
 					}
 					//EFactory has eContentUnion as a containment
@@ -334,43 +334,43 @@ std::shared_ptr<EObject> ecoreFactoryImpl::create(const int metaElementID, std::
 					//EGenericType has eBounds as a containment
 					case  ecore::ecorePackage::ETYPEPARAMETER_ATTRIBUTE_EBOUNDS:	
 					{
-						std::shared_ptr<ETypeParameter> castedContainer = std::dynamic_pointer_cast<ETypeParameter> (container);;
+						std::shared_ptr<ecore::ETypeParameter> castedContainer = std::dynamic_pointer_cast<ecore::ETypeParameter> (container);
 						return this->createEGenericType_as_eBounds_in_ETypeParameter(castedContainer,metaElementID);
 					}
 					//EGenericType has eGenericExceptions as a containment
 					case  ecore::ecorePackage::EOPERATION_ATTRIBUTE_EGENERICEXCEPTIONS:	
 					{
-						std::shared_ptr<EOperation> castedContainer = std::dynamic_pointer_cast<EOperation> (container);;
+						std::shared_ptr<ecore::EOperation> castedContainer = std::dynamic_pointer_cast<ecore::EOperation> (container);
 						return this->createEGenericType_as_eGenericExceptions_in_EOperation(castedContainer,metaElementID);
 					}
 					//EGenericType has eGenericSuperTypes as a containment
 					case  ecore::ecorePackage::ECLASS_ATTRIBUTE_EGENERICSUPERTYPES:	
 					{
-						std::shared_ptr<EClass> castedContainer = std::dynamic_pointer_cast<EClass> (container);;
+						std::shared_ptr<ecore::EClass> castedContainer = std::dynamic_pointer_cast<ecore::EClass> (container);
 						return this->createEGenericType_as_eGenericSuperTypes_in_EClass(castedContainer,metaElementID);
 					}
 					//EGenericType has eGenericType as a containment
 					case  ecore::ecorePackage::ETYPEDELEMENT_ATTRIBUTE_EGENERICTYPE:	
 					{
-						std::shared_ptr<ETypedElement> castedContainer = std::dynamic_pointer_cast<ETypedElement> (container);;
+						std::shared_ptr<ecore::ETypedElement> castedContainer = std::dynamic_pointer_cast<ecore::ETypedElement> (container);
 						return this->createEGenericType_as_eGenericType_in_ETypedElement(castedContainer,metaElementID);
 					}
 					//EGenericType has eLowerBound as a containment
 					case  ecore::ecorePackage::EGENERICTYPE_ATTRIBUTE_ELOWERBOUND:	
 					{
-						std::shared_ptr<EGenericType> castedContainer = std::dynamic_pointer_cast<EGenericType> (container);;
+						std::shared_ptr<ecore::EGenericType> castedContainer = std::dynamic_pointer_cast<ecore::EGenericType> (container);
 						return this->createEGenericType_as_eLowerBound_in_EGenericType(castedContainer,metaElementID);
 					}
 					//EGenericType has eTypeArguments as a containment
 					case  ecore::ecorePackage::EGENERICTYPE_ATTRIBUTE_ETYPEARGUMENTS:	
 					{
-						std::shared_ptr<EGenericType> castedContainer = std::dynamic_pointer_cast<EGenericType> (container);;
+						std::shared_ptr<ecore::EGenericType> castedContainer = std::dynamic_pointer_cast<ecore::EGenericType> (container);
 						return this->createEGenericType_as_eTypeArguments_in_EGenericType(castedContainer,metaElementID);
 					}
 					//EGenericType has eUpperBound as a containment
 					case  ecore::ecorePackage::EGENERICTYPE_ATTRIBUTE_EUPPERBOUND:	
 					{
-						std::shared_ptr<EGenericType> castedContainer = std::dynamic_pointer_cast<EGenericType> (container);;
+						std::shared_ptr<ecore::EGenericType> castedContainer = std::dynamic_pointer_cast<ecore::EGenericType> (container);
 						return this->createEGenericType_as_eUpperBound_in_EGenericType(castedContainer,metaElementID);
 					}
 					default:
@@ -392,7 +392,7 @@ std::shared_ptr<EObject> ecoreFactoryImpl::create(const int metaElementID, std::
 					//EObject has contents as a containment
 					case  ecore::ecorePackage::EANNOTATION_ATTRIBUTE_CONTENTS:	
 					{
-						std::shared_ptr<EAnnotation> castedContainer = std::dynamic_pointer_cast<EAnnotation> (container);;
+						std::shared_ptr<ecore::EAnnotation> castedContainer = std::dynamic_pointer_cast<ecore::EAnnotation> (container);
 						return this->createEObject_as_contents_in_EAnnotation(castedContainer,metaElementID);
 					}
 					//EObject has eContentUnion as a containment
@@ -420,7 +420,7 @@ std::shared_ptr<EObject> ecoreFactoryImpl::create(const int metaElementID, std::
 					//EObjectAny has contents as a containment
 					case  ecore::ecorePackage::EANNOTATION_ATTRIBUTE_CONTENTS:	
 					{
-						std::shared_ptr<EAnnotation> castedContainer = std::dynamic_pointer_cast<EAnnotation> (container);;
+						std::shared_ptr<ecore::EAnnotation> castedContainer = std::dynamic_pointer_cast<ecore::EAnnotation> (container);
 						return this->createEObjectAny_as_contents_in_EAnnotation(castedContainer,metaElementID);
 					}
 					//EObjectAny has eContentUnion as a containment
@@ -448,7 +448,7 @@ std::shared_ptr<EObject> ecoreFactoryImpl::create(const int metaElementID, std::
 					//EObjectContainer has contents as a containment
 					case  ecore::ecorePackage::EANNOTATION_ATTRIBUTE_CONTENTS:	
 					{
-						std::shared_ptr<EAnnotation> castedContainer = std::dynamic_pointer_cast<EAnnotation> (container);;
+						std::shared_ptr<ecore::EAnnotation> castedContainer = std::dynamic_pointer_cast<ecore::EAnnotation> (container);
 						return this->createEObjectContainer_as_contents_in_EAnnotation(castedContainer,metaElementID);
 					}
 					//EObjectContainer has eContentUnion as a containment
@@ -476,7 +476,7 @@ std::shared_ptr<EObject> ecoreFactoryImpl::create(const int metaElementID, std::
 					//EOperation has contents as a containment
 					case  ecore::ecorePackage::EANNOTATION_ATTRIBUTE_CONTENTS:	
 					{
-						std::shared_ptr<EAnnotation> castedContainer = std::dynamic_pointer_cast<EAnnotation> (container);;
+						std::shared_ptr<ecore::EAnnotation> castedContainer = std::dynamic_pointer_cast<ecore::EAnnotation> (container);
 						return this->createEOperation_as_contents_in_EAnnotation(castedContainer,metaElementID);
 					}
 					//EOperation has eContentUnion as a containment
@@ -510,7 +510,7 @@ std::shared_ptr<EObject> ecoreFactoryImpl::create(const int metaElementID, std::
 					//EPackage has contents as a containment
 					case  ecore::ecorePackage::EANNOTATION_ATTRIBUTE_CONTENTS:	
 					{
-						std::shared_ptr<EAnnotation> castedContainer = std::dynamic_pointer_cast<EAnnotation> (container);;
+						std::shared_ptr<ecore::EAnnotation> castedContainer = std::dynamic_pointer_cast<ecore::EAnnotation> (container);
 						return this->createEPackage_as_contents_in_EAnnotation(castedContainer,metaElementID);
 					}
 					//EPackage has eContentUnion as a containment
@@ -544,7 +544,7 @@ std::shared_ptr<EObject> ecoreFactoryImpl::create(const int metaElementID, std::
 					//EParameter has contents as a containment
 					case  ecore::ecorePackage::EANNOTATION_ATTRIBUTE_CONTENTS:	
 					{
-						std::shared_ptr<EAnnotation> castedContainer = std::dynamic_pointer_cast<EAnnotation> (container);;
+						std::shared_ptr<ecore::EAnnotation> castedContainer = std::dynamic_pointer_cast<ecore::EAnnotation> (container);
 						return this->createEParameter_as_contents_in_EAnnotation(castedContainer,metaElementID);
 					}
 					//EParameter has eContentUnion as a containment
@@ -578,7 +578,7 @@ std::shared_ptr<EObject> ecoreFactoryImpl::create(const int metaElementID, std::
 					//EReference has contents as a containment
 					case  ecore::ecorePackage::EANNOTATION_ATTRIBUTE_CONTENTS:	
 					{
-						std::shared_ptr<EAnnotation> castedContainer = std::dynamic_pointer_cast<EAnnotation> (container);;
+						std::shared_ptr<ecore::EAnnotation> castedContainer = std::dynamic_pointer_cast<ecore::EAnnotation> (container);
 						return this->createEReference_as_contents_in_EAnnotation(castedContainer,metaElementID);
 					}
 					//EReference has eContentUnion as a containment
@@ -590,7 +590,7 @@ std::shared_ptr<EObject> ecoreFactoryImpl::create(const int metaElementID, std::
 					//EReference has eReferences as a containment
 					case  ecore::ecorePackage::ECLASS_ATTRIBUTE_EREFERENCES:	
 					{
-						std::shared_ptr<EClass> castedContainer = std::dynamic_pointer_cast<EClass> (container);;
+						std::shared_ptr<ecore::EClass> castedContainer = std::dynamic_pointer_cast<ecore::EClass> (container);
 						return this->createEReference_as_eReferences_in_EClass(castedContainer,metaElementID);
 					}
 					//EReference has eStructuralFeatures as a containment
@@ -624,7 +624,7 @@ std::shared_ptr<EObject> ecoreFactoryImpl::create(const int metaElementID, std::
 					//ETypeParameter has contents as a containment
 					case  ecore::ecorePackage::EANNOTATION_ATTRIBUTE_CONTENTS:	
 					{
-						std::shared_ptr<EAnnotation> castedContainer = std::dynamic_pointer_cast<EAnnotation> (container);;
+						std::shared_ptr<ecore::EAnnotation> castedContainer = std::dynamic_pointer_cast<ecore::EAnnotation> (container);
 						return this->createETypeParameter_as_contents_in_EAnnotation(castedContainer,metaElementID);
 					}
 					//ETypeParameter has eContentUnion as a containment
@@ -636,13 +636,13 @@ std::shared_ptr<EObject> ecoreFactoryImpl::create(const int metaElementID, std::
 					//ETypeParameter has eTypeParameters as a containment
 					case  ecore::ecorePackage::ECLASSIFIER_ATTRIBUTE_ETYPEPARAMETERS:	
 					{
-						std::shared_ptr<EClassifier> castedContainer = std::dynamic_pointer_cast<EClassifier> (container);;
+						std::shared_ptr<ecore::EClassifier> castedContainer = std::dynamic_pointer_cast<ecore::EClassifier> (container);
 						return this->createETypeParameter_as_eTypeParameters_in_EClassifier(castedContainer,metaElementID);
 					}
 					//ETypeParameter has eTypeParameters as a containment
 					case  ecore::ecorePackage::EOPERATION_ATTRIBUTE_ETYPEPARAMETERS:	
 					{
-						std::shared_ptr<EOperation> castedContainer = std::dynamic_pointer_cast<EOperation> (container);;
+						std::shared_ptr<ecore::EOperation> castedContainer = std::dynamic_pointer_cast<ecore::EOperation> (container);
 						return this->createETypeParameter_as_eTypeParameters_in_EOperation(castedContainer,metaElementID);
 					}
 					default:
@@ -679,16 +679,16 @@ std::shared_ptr<EObject> ecoreFactoryImpl::create(std::string _className, std::s
     return nullptr;
 }
 
-std::shared_ptr<EAnnotation> ecoreFactoryImpl::createEAnnotation(const int metaElementID/*=-1*/) const
+std::shared_ptr<ecore::EAnnotation> ecoreFactoryImpl::createEAnnotation(const int metaElementID/*=-1*/) const
 {
-	std::shared_ptr<EAnnotationImpl> element(new EAnnotationImpl());
+	std::shared_ptr<ecore::EAnnotationImpl> element(new ecore::EAnnotationImpl());
 	element->setMetaElementID(metaElementID);
 	element->setThisEAnnotationPtr(element);
 	return element;
 }
-std::shared_ptr<EAnnotation> ecoreFactoryImpl::createEAnnotation_as_contents_in_EAnnotation(std::shared_ptr<EAnnotation> par_EAnnotation, const int metaElementID) const
+std::shared_ptr<ecore::EAnnotation> ecoreFactoryImpl::createEAnnotation_as_contents_in_EAnnotation(std::shared_ptr<ecore::EAnnotation> par_EAnnotation, const int metaElementID) const
 {
-	std::shared_ptr<EAnnotationImpl> element(new EAnnotationImpl());
+	std::shared_ptr<ecore::EAnnotationImpl> element(new ecore::EAnnotationImpl());
 	element->setMetaElementID(metaElementID);
 	if(nullptr != par_EAnnotation)
 	{
@@ -699,9 +699,9 @@ std::shared_ptr<EAnnotation> ecoreFactoryImpl::createEAnnotation_as_contents_in_
 	return element;
 	
 }
-std::shared_ptr<EAnnotation> ecoreFactoryImpl::createEAnnotation_as_eAnnotations_in_EModelElement(std::weak_ptr<ecore::EModelElement> par_EModelElement, const int metaElementID) const
+std::shared_ptr<ecore::EAnnotation> ecoreFactoryImpl::createEAnnotation_as_eAnnotations_in_EModelElement(std::weak_ptr<ecore::EModelElement> par_EModelElement, const int metaElementID) const
 {
-	std::shared_ptr<EAnnotationImpl> element(new EAnnotationImpl(par_EModelElement));
+	std::shared_ptr<ecore::EAnnotationImpl> element(new ecore::EAnnotationImpl(par_EModelElement));
 	element->setMetaElementID(metaElementID);
 	if(auto wp = par_EModelElement.lock())
 	{
@@ -712,9 +712,9 @@ std::shared_ptr<EAnnotation> ecoreFactoryImpl::createEAnnotation_as_eAnnotations
 	return element;
 	
 }
-std::shared_ptr<EAnnotation> ecoreFactoryImpl::createEAnnotation_as_eContentUnion_in_EObject(std::weak_ptr<ecore::EObject> par_EObject, const int metaElementID) const
+std::shared_ptr<ecore::EAnnotation> ecoreFactoryImpl::createEAnnotation_as_eContentUnion_in_EObject(std::weak_ptr<ecore::EObject> par_EObject, const int metaElementID) const
 {
-	std::shared_ptr<EAnnotationImpl> element(new EAnnotationImpl(par_EObject));
+	std::shared_ptr<ecore::EAnnotationImpl> element(new ecore::EAnnotationImpl(par_EObject));
 	element->setMetaElementID(metaElementID);
 	if(auto wp = par_EObject.lock())
 	{
@@ -725,16 +725,16 @@ std::shared_ptr<EAnnotation> ecoreFactoryImpl::createEAnnotation_as_eContentUnio
 	return element;
 	
 }
-std::shared_ptr<EAttribute> ecoreFactoryImpl::createEAttribute(const int metaElementID/*=-1*/) const
+std::shared_ptr<ecore::EAttribute> ecoreFactoryImpl::createEAttribute(const int metaElementID/*=-1*/) const
 {
-	std::shared_ptr<EAttributeImpl> element(new EAttributeImpl());
+	std::shared_ptr<ecore::EAttributeImpl> element(new ecore::EAttributeImpl());
 	element->setMetaElementID(metaElementID);
 	element->setThisEAttributePtr(element);
 	return element;
 }
-std::shared_ptr<EAttribute> ecoreFactoryImpl::createEAttribute_as_contents_in_EAnnotation(std::shared_ptr<EAnnotation> par_EAnnotation, const int metaElementID) const
+std::shared_ptr<ecore::EAttribute> ecoreFactoryImpl::createEAttribute_as_contents_in_EAnnotation(std::shared_ptr<ecore::EAnnotation> par_EAnnotation, const int metaElementID) const
 {
-	std::shared_ptr<EAttributeImpl> element(new EAttributeImpl());
+	std::shared_ptr<ecore::EAttributeImpl> element(new ecore::EAttributeImpl());
 	element->setMetaElementID(metaElementID);
 	if(nullptr != par_EAnnotation)
 	{
@@ -745,9 +745,9 @@ std::shared_ptr<EAttribute> ecoreFactoryImpl::createEAttribute_as_contents_in_EA
 	return element;
 	
 }
-std::shared_ptr<EAttribute> ecoreFactoryImpl::createEAttribute_as_eAttributes_in_EClass(std::shared_ptr<EClass> par_EClass, const int metaElementID) const
+std::shared_ptr<ecore::EAttribute> ecoreFactoryImpl::createEAttribute_as_eAttributes_in_EClass(std::shared_ptr<ecore::EClass> par_EClass, const int metaElementID) const
 {
-	std::shared_ptr<EAttributeImpl> element(new EAttributeImpl());
+	std::shared_ptr<ecore::EAttributeImpl> element(new ecore::EAttributeImpl());
 	element->setMetaElementID(metaElementID);
 	if(nullptr != par_EClass)
 	{
@@ -758,9 +758,9 @@ std::shared_ptr<EAttribute> ecoreFactoryImpl::createEAttribute_as_eAttributes_in
 	return element;
 	
 }
-std::shared_ptr<EAttribute> ecoreFactoryImpl::createEAttribute_as_eContentUnion_in_EObject(std::weak_ptr<ecore::EObject> par_EObject, const int metaElementID) const
+std::shared_ptr<ecore::EAttribute> ecoreFactoryImpl::createEAttribute_as_eContentUnion_in_EObject(std::weak_ptr<ecore::EObject> par_EObject, const int metaElementID) const
 {
-	std::shared_ptr<EAttributeImpl> element(new EAttributeImpl(par_EObject));
+	std::shared_ptr<ecore::EAttributeImpl> element(new ecore::EAttributeImpl(par_EObject));
 	element->setMetaElementID(metaElementID);
 	if(auto wp = par_EObject.lock())
 	{
@@ -771,9 +771,9 @@ std::shared_ptr<EAttribute> ecoreFactoryImpl::createEAttribute_as_eContentUnion_
 	return element;
 	
 }
-std::shared_ptr<EAttribute> ecoreFactoryImpl::createEAttribute_as_eStructuralFeatures_in_EClass(std::weak_ptr<ecore::EClass> par_EClass, const int metaElementID) const
+std::shared_ptr<ecore::EAttribute> ecoreFactoryImpl::createEAttribute_as_eStructuralFeatures_in_EClass(std::weak_ptr<ecore::EClass> par_EClass, const int metaElementID) const
 {
-	std::shared_ptr<EAttributeImpl> element(new EAttributeImpl(par_EClass));
+	std::shared_ptr<ecore::EAttributeImpl> element(new ecore::EAttributeImpl(par_EClass));
 	element->setMetaElementID(metaElementID);
 	if(auto wp = par_EClass.lock())
 	{
@@ -784,16 +784,16 @@ std::shared_ptr<EAttribute> ecoreFactoryImpl::createEAttribute_as_eStructuralFea
 	return element;
 	
 }
-std::shared_ptr<EClass> ecoreFactoryImpl::createEClass(const int metaElementID/*=-1*/) const
+std::shared_ptr<ecore::EClass> ecoreFactoryImpl::createEClass(const int metaElementID/*=-1*/) const
 {
-	std::shared_ptr<EClassImpl> element(new EClassImpl());
+	std::shared_ptr<ecore::EClassImpl> element(new ecore::EClassImpl());
 	element->setMetaElementID(metaElementID);
 	element->setThisEClassPtr(element);
 	return element;
 }
-std::shared_ptr<EClass> ecoreFactoryImpl::createEClass_as_contents_in_EAnnotation(std::shared_ptr<EAnnotation> par_EAnnotation, const int metaElementID) const
+std::shared_ptr<ecore::EClass> ecoreFactoryImpl::createEClass_as_contents_in_EAnnotation(std::shared_ptr<ecore::EAnnotation> par_EAnnotation, const int metaElementID) const
 {
-	std::shared_ptr<EClassImpl> element(new EClassImpl());
+	std::shared_ptr<ecore::EClassImpl> element(new ecore::EClassImpl());
 	element->setMetaElementID(metaElementID);
 	if(nullptr != par_EAnnotation)
 	{
@@ -804,9 +804,9 @@ std::shared_ptr<EClass> ecoreFactoryImpl::createEClass_as_contents_in_EAnnotatio
 	return element;
 	
 }
-std::shared_ptr<EClass> ecoreFactoryImpl::createEClass_as_eClassifiers_in_EPackage(std::weak_ptr<ecore::EPackage> par_EPackage, const int metaElementID) const
+std::shared_ptr<ecore::EClass> ecoreFactoryImpl::createEClass_as_eClassifiers_in_EPackage(std::weak_ptr<ecore::EPackage> par_EPackage, const int metaElementID) const
 {
-	std::shared_ptr<EClassImpl> element(new EClassImpl(par_EPackage));
+	std::shared_ptr<ecore::EClassImpl> element(new ecore::EClassImpl(par_EPackage));
 	element->setMetaElementID(metaElementID);
 	if(auto wp = par_EPackage.lock())
 	{
@@ -817,9 +817,9 @@ std::shared_ptr<EClass> ecoreFactoryImpl::createEClass_as_eClassifiers_in_EPacka
 	return element;
 	
 }
-std::shared_ptr<EClass> ecoreFactoryImpl::createEClass_as_eContentUnion_in_EObject(std::weak_ptr<ecore::EObject> par_EObject, const int metaElementID) const
+std::shared_ptr<ecore::EClass> ecoreFactoryImpl::createEClass_as_eContentUnion_in_EObject(std::weak_ptr<ecore::EObject> par_EObject, const int metaElementID) const
 {
-	std::shared_ptr<EClassImpl> element(new EClassImpl(par_EObject));
+	std::shared_ptr<ecore::EClassImpl> element(new ecore::EClassImpl(par_EObject));
 	element->setMetaElementID(metaElementID);
 	if(auto wp = par_EObject.lock())
 	{
@@ -830,16 +830,16 @@ std::shared_ptr<EClass> ecoreFactoryImpl::createEClass_as_eContentUnion_in_EObje
 	return element;
 	
 }
-std::shared_ptr<EDataType> ecoreFactoryImpl::createEDataType(const int metaElementID/*=-1*/) const
+std::shared_ptr<ecore::EDataType> ecoreFactoryImpl::createEDataType(const int metaElementID/*=-1*/) const
 {
-	std::shared_ptr<EDataTypeImpl> element(new EDataTypeImpl());
+	std::shared_ptr<ecore::EDataTypeImpl> element(new ecore::EDataTypeImpl());
 	element->setMetaElementID(metaElementID);
 	element->setThisEDataTypePtr(element);
 	return element;
 }
-std::shared_ptr<EDataType> ecoreFactoryImpl::createEDataType_as_contents_in_EAnnotation(std::shared_ptr<EAnnotation> par_EAnnotation, const int metaElementID) const
+std::shared_ptr<ecore::EDataType> ecoreFactoryImpl::createEDataType_as_contents_in_EAnnotation(std::shared_ptr<ecore::EAnnotation> par_EAnnotation, const int metaElementID) const
 {
-	std::shared_ptr<EDataTypeImpl> element(new EDataTypeImpl());
+	std::shared_ptr<ecore::EDataTypeImpl> element(new ecore::EDataTypeImpl());
 	element->setMetaElementID(metaElementID);
 	if(nullptr != par_EAnnotation)
 	{
@@ -850,9 +850,9 @@ std::shared_ptr<EDataType> ecoreFactoryImpl::createEDataType_as_contents_in_EAnn
 	return element;
 	
 }
-std::shared_ptr<EDataType> ecoreFactoryImpl::createEDataType_as_eClassifiers_in_EPackage(std::weak_ptr<ecore::EPackage> par_EPackage, const int metaElementID) const
+std::shared_ptr<ecore::EDataType> ecoreFactoryImpl::createEDataType_as_eClassifiers_in_EPackage(std::weak_ptr<ecore::EPackage> par_EPackage, const int metaElementID) const
 {
-	std::shared_ptr<EDataTypeImpl> element(new EDataTypeImpl(par_EPackage));
+	std::shared_ptr<ecore::EDataTypeImpl> element(new ecore::EDataTypeImpl(par_EPackage));
 	element->setMetaElementID(metaElementID);
 	if(auto wp = par_EPackage.lock())
 	{
@@ -863,9 +863,9 @@ std::shared_ptr<EDataType> ecoreFactoryImpl::createEDataType_as_eClassifiers_in_
 	return element;
 	
 }
-std::shared_ptr<EDataType> ecoreFactoryImpl::createEDataType_as_eContentUnion_in_EObject(std::weak_ptr<ecore::EObject> par_EObject, const int metaElementID) const
+std::shared_ptr<ecore::EDataType> ecoreFactoryImpl::createEDataType_as_eContentUnion_in_EObject(std::weak_ptr<ecore::EObject> par_EObject, const int metaElementID) const
 {
-	std::shared_ptr<EDataTypeImpl> element(new EDataTypeImpl(par_EObject));
+	std::shared_ptr<ecore::EDataTypeImpl> element(new ecore::EDataTypeImpl(par_EObject));
 	element->setMetaElementID(metaElementID);
 	if(auto wp = par_EObject.lock())
 	{
@@ -876,16 +876,16 @@ std::shared_ptr<EDataType> ecoreFactoryImpl::createEDataType_as_eContentUnion_in
 	return element;
 	
 }
-std::shared_ptr<EEnum> ecoreFactoryImpl::createEEnum(const int metaElementID/*=-1*/) const
+std::shared_ptr<ecore::EEnum> ecoreFactoryImpl::createEEnum(const int metaElementID/*=-1*/) const
 {
-	std::shared_ptr<EEnumImpl> element(new EEnumImpl());
+	std::shared_ptr<ecore::EEnumImpl> element(new ecore::EEnumImpl());
 	element->setMetaElementID(metaElementID);
 	element->setThisEEnumPtr(element);
 	return element;
 }
-std::shared_ptr<EEnum> ecoreFactoryImpl::createEEnum_as_contents_in_EAnnotation(std::shared_ptr<EAnnotation> par_EAnnotation, const int metaElementID) const
+std::shared_ptr<ecore::EEnum> ecoreFactoryImpl::createEEnum_as_contents_in_EAnnotation(std::shared_ptr<ecore::EAnnotation> par_EAnnotation, const int metaElementID) const
 {
-	std::shared_ptr<EEnumImpl> element(new EEnumImpl());
+	std::shared_ptr<ecore::EEnumImpl> element(new ecore::EEnumImpl());
 	element->setMetaElementID(metaElementID);
 	if(nullptr != par_EAnnotation)
 	{
@@ -896,9 +896,9 @@ std::shared_ptr<EEnum> ecoreFactoryImpl::createEEnum_as_contents_in_EAnnotation(
 	return element;
 	
 }
-std::shared_ptr<EEnum> ecoreFactoryImpl::createEEnum_as_eClassifiers_in_EPackage(std::weak_ptr<ecore::EPackage> par_EPackage, const int metaElementID) const
+std::shared_ptr<ecore::EEnum> ecoreFactoryImpl::createEEnum_as_eClassifiers_in_EPackage(std::weak_ptr<ecore::EPackage> par_EPackage, const int metaElementID) const
 {
-	std::shared_ptr<EEnumImpl> element(new EEnumImpl(par_EPackage));
+	std::shared_ptr<ecore::EEnumImpl> element(new ecore::EEnumImpl(par_EPackage));
 	element->setMetaElementID(metaElementID);
 	if(auto wp = par_EPackage.lock())
 	{
@@ -909,9 +909,9 @@ std::shared_ptr<EEnum> ecoreFactoryImpl::createEEnum_as_eClassifiers_in_EPackage
 	return element;
 	
 }
-std::shared_ptr<EEnum> ecoreFactoryImpl::createEEnum_as_eContentUnion_in_EObject(std::weak_ptr<ecore::EObject> par_EObject, const int metaElementID) const
+std::shared_ptr<ecore::EEnum> ecoreFactoryImpl::createEEnum_as_eContentUnion_in_EObject(std::weak_ptr<ecore::EObject> par_EObject, const int metaElementID) const
 {
-	std::shared_ptr<EEnumImpl> element(new EEnumImpl(par_EObject));
+	std::shared_ptr<ecore::EEnumImpl> element(new ecore::EEnumImpl(par_EObject));
 	element->setMetaElementID(metaElementID);
 	if(auto wp = par_EObject.lock())
 	{
@@ -922,16 +922,16 @@ std::shared_ptr<EEnum> ecoreFactoryImpl::createEEnum_as_eContentUnion_in_EObject
 	return element;
 	
 }
-std::shared_ptr<EEnumLiteral> ecoreFactoryImpl::createEEnumLiteral(const int metaElementID/*=-1*/) const
+std::shared_ptr<ecore::EEnumLiteral> ecoreFactoryImpl::createEEnumLiteral(const int metaElementID/*=-1*/) const
 {
-	std::shared_ptr<EEnumLiteralImpl> element(new EEnumLiteralImpl());
+	std::shared_ptr<ecore::EEnumLiteralImpl> element(new ecore::EEnumLiteralImpl());
 	element->setMetaElementID(metaElementID);
 	element->setThisEEnumLiteralPtr(element);
 	return element;
 }
-std::shared_ptr<EEnumLiteral> ecoreFactoryImpl::createEEnumLiteral_as_contents_in_EAnnotation(std::shared_ptr<EAnnotation> par_EAnnotation, const int metaElementID) const
+std::shared_ptr<ecore::EEnumLiteral> ecoreFactoryImpl::createEEnumLiteral_as_contents_in_EAnnotation(std::shared_ptr<ecore::EAnnotation> par_EAnnotation, const int metaElementID) const
 {
-	std::shared_ptr<EEnumLiteralImpl> element(new EEnumLiteralImpl());
+	std::shared_ptr<ecore::EEnumLiteralImpl> element(new ecore::EEnumLiteralImpl());
 	element->setMetaElementID(metaElementID);
 	if(nullptr != par_EAnnotation)
 	{
@@ -942,9 +942,9 @@ std::shared_ptr<EEnumLiteral> ecoreFactoryImpl::createEEnumLiteral_as_contents_i
 	return element;
 	
 }
-std::shared_ptr<EEnumLiteral> ecoreFactoryImpl::createEEnumLiteral_as_eContentUnion_in_EObject(std::weak_ptr<ecore::EObject> par_EObject, const int metaElementID) const
+std::shared_ptr<ecore::EEnumLiteral> ecoreFactoryImpl::createEEnumLiteral_as_eContentUnion_in_EObject(std::weak_ptr<ecore::EObject> par_EObject, const int metaElementID) const
 {
-	std::shared_ptr<EEnumLiteralImpl> element(new EEnumLiteralImpl(par_EObject));
+	std::shared_ptr<ecore::EEnumLiteralImpl> element(new ecore::EEnumLiteralImpl(par_EObject));
 	element->setMetaElementID(metaElementID);
 	if(auto wp = par_EObject.lock())
 	{
@@ -955,9 +955,9 @@ std::shared_ptr<EEnumLiteral> ecoreFactoryImpl::createEEnumLiteral_as_eContentUn
 	return element;
 	
 }
-std::shared_ptr<EEnumLiteral> ecoreFactoryImpl::createEEnumLiteral_as_eLiterals_in_EEnum(std::weak_ptr<ecore::EEnum> par_EEnum, const int metaElementID) const
+std::shared_ptr<ecore::EEnumLiteral> ecoreFactoryImpl::createEEnumLiteral_as_eLiterals_in_EEnum(std::weak_ptr<ecore::EEnum> par_EEnum, const int metaElementID) const
 {
-	std::shared_ptr<EEnumLiteralImpl> element(new EEnumLiteralImpl(par_EEnum));
+	std::shared_ptr<ecore::EEnumLiteralImpl> element(new ecore::EEnumLiteralImpl(par_EEnum));
 	element->setMetaElementID(metaElementID);
 	if(auto wp = par_EEnum.lock())
 	{
@@ -968,16 +968,16 @@ std::shared_ptr<EEnumLiteral> ecoreFactoryImpl::createEEnumLiteral_as_eLiterals_
 	return element;
 	
 }
-std::shared_ptr<EFactory> ecoreFactoryImpl::createEFactory(const int metaElementID/*=-1*/) const
+std::shared_ptr<ecore::EFactory> ecoreFactoryImpl::createEFactory(const int metaElementID/*=-1*/) const
 {
-	std::shared_ptr<EFactoryImpl> element(new EFactoryImpl());
+	std::shared_ptr<ecore::EFactoryImpl> element(new ecore::EFactoryImpl());
 	element->setMetaElementID(metaElementID);
 	element->setThisEFactoryPtr(element);
 	return element;
 }
-std::shared_ptr<EFactory> ecoreFactoryImpl::createEFactory_as_contents_in_EAnnotation(std::shared_ptr<EAnnotation> par_EAnnotation, const int metaElementID) const
+std::shared_ptr<ecore::EFactory> ecoreFactoryImpl::createEFactory_as_contents_in_EAnnotation(std::shared_ptr<ecore::EAnnotation> par_EAnnotation, const int metaElementID) const
 {
-	std::shared_ptr<EFactoryImpl> element(new EFactoryImpl());
+	std::shared_ptr<ecore::EFactoryImpl> element(new ecore::EFactoryImpl());
 	element->setMetaElementID(metaElementID);
 	if(nullptr != par_EAnnotation)
 	{
@@ -988,9 +988,9 @@ std::shared_ptr<EFactory> ecoreFactoryImpl::createEFactory_as_contents_in_EAnnot
 	return element;
 	
 }
-std::shared_ptr<EFactory> ecoreFactoryImpl::createEFactory_as_eContentUnion_in_EObject(std::weak_ptr<ecore::EObject> par_EObject, const int metaElementID) const
+std::shared_ptr<ecore::EFactory> ecoreFactoryImpl::createEFactory_as_eContentUnion_in_EObject(std::weak_ptr<ecore::EObject> par_EObject, const int metaElementID) const
 {
-	std::shared_ptr<EFactoryImpl> element(new EFactoryImpl(par_EObject));
+	std::shared_ptr<ecore::EFactoryImpl> element(new ecore::EFactoryImpl(par_EObject));
 	element->setMetaElementID(metaElementID);
 	if(auto wp = par_EObject.lock())
 	{
@@ -1001,16 +1001,16 @@ std::shared_ptr<EFactory> ecoreFactoryImpl::createEFactory_as_eContentUnion_in_E
 	return element;
 	
 }
-std::shared_ptr<EGenericType> ecoreFactoryImpl::createEGenericType(const int metaElementID/*=-1*/) const
+std::shared_ptr<ecore::EGenericType> ecoreFactoryImpl::createEGenericType(const int metaElementID/*=-1*/) const
 {
-	std::shared_ptr<EGenericTypeImpl> element(new EGenericTypeImpl());
+	std::shared_ptr<ecore::EGenericTypeImpl> element(new ecore::EGenericTypeImpl());
 	element->setMetaElementID(metaElementID);
 	element->setThisEGenericTypePtr(element);
 	return element;
 }
-std::shared_ptr<EGenericType> ecoreFactoryImpl::createEGenericType_as_eBounds_in_ETypeParameter(std::shared_ptr<ETypeParameter> par_ETypeParameter, const int metaElementID) const
+std::shared_ptr<ecore::EGenericType> ecoreFactoryImpl::createEGenericType_as_eBounds_in_ETypeParameter(std::shared_ptr<ecore::ETypeParameter> par_ETypeParameter, const int metaElementID) const
 {
-	std::shared_ptr<EGenericTypeImpl> element(new EGenericTypeImpl());
+	std::shared_ptr<ecore::EGenericTypeImpl> element(new ecore::EGenericTypeImpl());
 	element->setMetaElementID(metaElementID);
 	if(nullptr != par_ETypeParameter)
 	{
@@ -1021,9 +1021,9 @@ std::shared_ptr<EGenericType> ecoreFactoryImpl::createEGenericType_as_eBounds_in
 	return element;
 	
 }
-std::shared_ptr<EGenericType> ecoreFactoryImpl::createEGenericType_as_eGenericExceptions_in_EOperation(std::shared_ptr<EOperation> par_EOperation, const int metaElementID) const
+std::shared_ptr<ecore::EGenericType> ecoreFactoryImpl::createEGenericType_as_eGenericExceptions_in_EOperation(std::shared_ptr<ecore::EOperation> par_EOperation, const int metaElementID) const
 {
-	std::shared_ptr<EGenericTypeImpl> element(new EGenericTypeImpl());
+	std::shared_ptr<ecore::EGenericTypeImpl> element(new ecore::EGenericTypeImpl());
 	element->setMetaElementID(metaElementID);
 	if(nullptr != par_EOperation)
 	{
@@ -1034,9 +1034,9 @@ std::shared_ptr<EGenericType> ecoreFactoryImpl::createEGenericType_as_eGenericEx
 	return element;
 	
 }
-std::shared_ptr<EGenericType> ecoreFactoryImpl::createEGenericType_as_eGenericSuperTypes_in_EClass(std::shared_ptr<EClass> par_EClass, const int metaElementID) const
+std::shared_ptr<ecore::EGenericType> ecoreFactoryImpl::createEGenericType_as_eGenericSuperTypes_in_EClass(std::shared_ptr<ecore::EClass> par_EClass, const int metaElementID) const
 {
-	std::shared_ptr<EGenericTypeImpl> element(new EGenericTypeImpl());
+	std::shared_ptr<ecore::EGenericTypeImpl> element(new ecore::EGenericTypeImpl());
 	element->setMetaElementID(metaElementID);
 	if(nullptr != par_EClass)
 	{
@@ -1047,9 +1047,9 @@ std::shared_ptr<EGenericType> ecoreFactoryImpl::createEGenericType_as_eGenericSu
 	return element;
 	
 }
-std::shared_ptr<EGenericType> ecoreFactoryImpl::createEGenericType_as_eGenericType_in_ETypedElement(std::shared_ptr<ETypedElement> par_ETypedElement, const int metaElementID) const
+std::shared_ptr<ecore::EGenericType> ecoreFactoryImpl::createEGenericType_as_eGenericType_in_ETypedElement(std::shared_ptr<ecore::ETypedElement> par_ETypedElement, const int metaElementID) const
 {
-	std::shared_ptr<EGenericTypeImpl> element(new EGenericTypeImpl());
+	std::shared_ptr<ecore::EGenericTypeImpl> element(new ecore::EGenericTypeImpl());
 	element->setMetaElementID(metaElementID);
 	if(nullptr != par_ETypedElement)
 	{
@@ -1060,9 +1060,9 @@ std::shared_ptr<EGenericType> ecoreFactoryImpl::createEGenericType_as_eGenericTy
 	return element;
 	
 }
-std::shared_ptr<EGenericType> ecoreFactoryImpl::createEGenericType_as_eLowerBound_in_EGenericType(std::shared_ptr<EGenericType> par_EGenericType, const int metaElementID) const
+std::shared_ptr<ecore::EGenericType> ecoreFactoryImpl::createEGenericType_as_eLowerBound_in_EGenericType(std::shared_ptr<ecore::EGenericType> par_EGenericType, const int metaElementID) const
 {
-	std::shared_ptr<EGenericTypeImpl> element(new EGenericTypeImpl());
+	std::shared_ptr<ecore::EGenericTypeImpl> element(new ecore::EGenericTypeImpl());
 	element->setMetaElementID(metaElementID);
 	if(nullptr != par_EGenericType)
 	{
@@ -1073,9 +1073,9 @@ std::shared_ptr<EGenericType> ecoreFactoryImpl::createEGenericType_as_eLowerBoun
 	return element;
 	
 }
-std::shared_ptr<EGenericType> ecoreFactoryImpl::createEGenericType_as_eTypeArguments_in_EGenericType(std::shared_ptr<EGenericType> par_EGenericType, const int metaElementID) const
+std::shared_ptr<ecore::EGenericType> ecoreFactoryImpl::createEGenericType_as_eTypeArguments_in_EGenericType(std::shared_ptr<ecore::EGenericType> par_EGenericType, const int metaElementID) const
 {
-	std::shared_ptr<EGenericTypeImpl> element(new EGenericTypeImpl());
+	std::shared_ptr<ecore::EGenericTypeImpl> element(new ecore::EGenericTypeImpl());
 	element->setMetaElementID(metaElementID);
 	if(nullptr != par_EGenericType)
 	{
@@ -1086,9 +1086,9 @@ std::shared_ptr<EGenericType> ecoreFactoryImpl::createEGenericType_as_eTypeArgum
 	return element;
 	
 }
-std::shared_ptr<EGenericType> ecoreFactoryImpl::createEGenericType_as_eUpperBound_in_EGenericType(std::shared_ptr<EGenericType> par_EGenericType, const int metaElementID) const
+std::shared_ptr<ecore::EGenericType> ecoreFactoryImpl::createEGenericType_as_eUpperBound_in_EGenericType(std::shared_ptr<ecore::EGenericType> par_EGenericType, const int metaElementID) const
 {
-	std::shared_ptr<EGenericTypeImpl> element(new EGenericTypeImpl());
+	std::shared_ptr<ecore::EGenericTypeImpl> element(new ecore::EGenericTypeImpl());
 	element->setMetaElementID(metaElementID);
 	if(nullptr != par_EGenericType)
 	{
@@ -1099,49 +1099,49 @@ std::shared_ptr<EGenericType> ecoreFactoryImpl::createEGenericType_as_eUpperBoun
 	return element;
 	
 }
-std::shared_ptr<EObject> ecoreFactoryImpl::createEObject(const int metaElementID/*=-1*/) const
+std::shared_ptr<ecore::EObject> ecoreFactoryImpl::createEObject(const int metaElementID/*=-1*/) const
 {
-	std::shared_ptr<EObjectImpl> element(new EObjectImpl());
+	std::shared_ptr<ecore::EObjectImpl> element(new ecore::EObjectImpl());
 	element->setMetaElementID(metaElementID);
 	element->setThisEObjectPtr(element);
 	return element;
 }
-std::shared_ptr<EObject> ecoreFactoryImpl::createEObject_as_contents_in_EAnnotation(std::shared_ptr<EAnnotation> par_EAnnotation, const int metaElementID) const
+std::shared_ptr<ecore::EObject> ecoreFactoryImpl::createEObject_as_contents_in_EAnnotation(std::shared_ptr<ecore::EAnnotation> par_EAnnotation, const int metaElementID) const
 {
-	std::shared_ptr<EObjectImpl> element(new EObjectImpl());
+	std::shared_ptr<ecore::EObjectImpl> element(new ecore::EObjectImpl());
 	element->setMetaElementID(metaElementID);
 	if(nullptr != par_EAnnotation)
 	{
 		par_EAnnotation->getContents()->push_back(element);
-	}
-	
-	element->setThisEObjectPtr(element);
-	return element;
-	
-}
-std::shared_ptr<EObject> ecoreFactoryImpl::createEObject_as_eContentUnion_in_EObject(std::weak_ptr<ecore::EObject> par_EObject, const int metaElementID) const
-{
-	std::shared_ptr<EObjectImpl> element(new EObjectImpl(par_EObject));
-	element->setMetaElementID(metaElementID);
-	if(auto wp = par_EObject.lock())
-	{
-		wp->getEContentUnion()->push_back(element);
 	}
 	
 	element->setThisEObjectPtr(element);
 	return element;
 	
 }
-std::shared_ptr<EObjectAny> ecoreFactoryImpl::createEObjectAny(const int metaElementID/*=-1*/) const
+std::shared_ptr<ecore::EObject> ecoreFactoryImpl::createEObject_as_eContentUnion_in_EObject(std::weak_ptr<ecore::EObject> par_EObject, const int metaElementID) const
 {
-	std::shared_ptr<EObjectAnyImpl> element(new EObjectAnyImpl());
+	std::shared_ptr<ecore::EObjectImpl> element(new ecore::EObjectImpl(par_EObject));
+	element->setMetaElementID(metaElementID);
+	if(auto wp = par_EObject.lock())
+	{
+		wp->getEContentUnion()->push_back(element);
+	}
+	
+	element->setThisEObjectPtr(element);
+	return element;
+	
+}
+std::shared_ptr<ecore::EObjectAny> ecoreFactoryImpl::createEObjectAny(const int metaElementID/*=-1*/) const
+{
+	std::shared_ptr<ecore::EObjectAnyImpl> element(new ecore::EObjectAnyImpl());
 	element->setMetaElementID(metaElementID);
 	element->setThisEObjectAnyPtr(element);
 	return element;
 }
-std::shared_ptr<EObjectAny> ecoreFactoryImpl::createEObjectAny_as_contents_in_EAnnotation(std::shared_ptr<EAnnotation> par_EAnnotation, const int metaElementID) const
+std::shared_ptr<ecore::EObjectAny> ecoreFactoryImpl::createEObjectAny_as_contents_in_EAnnotation(std::shared_ptr<ecore::EAnnotation> par_EAnnotation, const int metaElementID) const
 {
-	std::shared_ptr<EObjectAnyImpl> element(new EObjectAnyImpl());
+	std::shared_ptr<ecore::EObjectAnyImpl> element(new ecore::EObjectAnyImpl());
 	element->setMetaElementID(metaElementID);
 	if(nullptr != par_EAnnotation)
 	{
@@ -1152,9 +1152,9 @@ std::shared_ptr<EObjectAny> ecoreFactoryImpl::createEObjectAny_as_contents_in_EA
 	return element;
 	
 }
-std::shared_ptr<EObjectAny> ecoreFactoryImpl::createEObjectAny_as_eContentUnion_in_EObject(std::weak_ptr<ecore::EObject> par_EObject, const int metaElementID) const
+std::shared_ptr<ecore::EObjectAny> ecoreFactoryImpl::createEObjectAny_as_eContentUnion_in_EObject(std::weak_ptr<ecore::EObject> par_EObject, const int metaElementID) const
 {
-	std::shared_ptr<EObjectAnyImpl> element(new EObjectAnyImpl(par_EObject));
+	std::shared_ptr<ecore::EObjectAnyImpl> element(new ecore::EObjectAnyImpl(par_EObject));
 	element->setMetaElementID(metaElementID);
 	if(auto wp = par_EObject.lock())
 	{
@@ -1165,16 +1165,16 @@ std::shared_ptr<EObjectAny> ecoreFactoryImpl::createEObjectAny_as_eContentUnion_
 	return element;
 	
 }
-std::shared_ptr<EObjectContainer> ecoreFactoryImpl::createEObjectContainer(const int metaElementID/*=-1*/) const
+std::shared_ptr<ecore::EObjectContainer> ecoreFactoryImpl::createEObjectContainer(const int metaElementID/*=-1*/) const
 {
-	std::shared_ptr<EObjectContainerImpl> element(new EObjectContainerImpl());
+	std::shared_ptr<ecore::EObjectContainerImpl> element(new ecore::EObjectContainerImpl());
 	element->setMetaElementID(metaElementID);
 	element->setThisEObjectContainerPtr(element);
 	return element;
 }
-std::shared_ptr<EObjectContainer> ecoreFactoryImpl::createEObjectContainer_as_contents_in_EAnnotation(std::shared_ptr<EAnnotation> par_EAnnotation, const int metaElementID) const
+std::shared_ptr<ecore::EObjectContainer> ecoreFactoryImpl::createEObjectContainer_as_contents_in_EAnnotation(std::shared_ptr<ecore::EAnnotation> par_EAnnotation, const int metaElementID) const
 {
-	std::shared_ptr<EObjectContainerImpl> element(new EObjectContainerImpl());
+	std::shared_ptr<ecore::EObjectContainerImpl> element(new ecore::EObjectContainerImpl());
 	element->setMetaElementID(metaElementID);
 	if(nullptr != par_EAnnotation)
 	{
@@ -1185,9 +1185,9 @@ std::shared_ptr<EObjectContainer> ecoreFactoryImpl::createEObjectContainer_as_co
 	return element;
 	
 }
-std::shared_ptr<EObjectContainer> ecoreFactoryImpl::createEObjectContainer_as_eContentUnion_in_EObject(std::weak_ptr<ecore::EObject> par_EObject, const int metaElementID) const
+std::shared_ptr<ecore::EObjectContainer> ecoreFactoryImpl::createEObjectContainer_as_eContentUnion_in_EObject(std::weak_ptr<ecore::EObject> par_EObject, const int metaElementID) const
 {
-	std::shared_ptr<EObjectContainerImpl> element(new EObjectContainerImpl(par_EObject));
+	std::shared_ptr<ecore::EObjectContainerImpl> element(new ecore::EObjectContainerImpl(par_EObject));
 	element->setMetaElementID(metaElementID);
 	if(auto wp = par_EObject.lock())
 	{
@@ -1198,16 +1198,16 @@ std::shared_ptr<EObjectContainer> ecoreFactoryImpl::createEObjectContainer_as_eC
 	return element;
 	
 }
-std::shared_ptr<EOperation> ecoreFactoryImpl::createEOperation(const int metaElementID/*=-1*/) const
+std::shared_ptr<ecore::EOperation> ecoreFactoryImpl::createEOperation(const int metaElementID/*=-1*/) const
 {
-	std::shared_ptr<EOperationImpl> element(new EOperationImpl());
+	std::shared_ptr<ecore::EOperationImpl> element(new ecore::EOperationImpl());
 	element->setMetaElementID(metaElementID);
 	element->setThisEOperationPtr(element);
 	return element;
 }
-std::shared_ptr<EOperation> ecoreFactoryImpl::createEOperation_as_contents_in_EAnnotation(std::shared_ptr<EAnnotation> par_EAnnotation, const int metaElementID) const
+std::shared_ptr<ecore::EOperation> ecoreFactoryImpl::createEOperation_as_contents_in_EAnnotation(std::shared_ptr<ecore::EAnnotation> par_EAnnotation, const int metaElementID) const
 {
-	std::shared_ptr<EOperationImpl> element(new EOperationImpl());
+	std::shared_ptr<ecore::EOperationImpl> element(new ecore::EOperationImpl());
 	element->setMetaElementID(metaElementID);
 	if(nullptr != par_EAnnotation)
 	{
@@ -1218,9 +1218,9 @@ std::shared_ptr<EOperation> ecoreFactoryImpl::createEOperation_as_contents_in_EA
 	return element;
 	
 }
-std::shared_ptr<EOperation> ecoreFactoryImpl::createEOperation_as_eContentUnion_in_EObject(std::weak_ptr<ecore::EObject> par_EObject, const int metaElementID) const
+std::shared_ptr<ecore::EOperation> ecoreFactoryImpl::createEOperation_as_eContentUnion_in_EObject(std::weak_ptr<ecore::EObject> par_EObject, const int metaElementID) const
 {
-	std::shared_ptr<EOperationImpl> element(new EOperationImpl(par_EObject));
+	std::shared_ptr<ecore::EOperationImpl> element(new ecore::EOperationImpl(par_EObject));
 	element->setMetaElementID(metaElementID);
 	if(auto wp = par_EObject.lock())
 	{
@@ -1231,9 +1231,9 @@ std::shared_ptr<EOperation> ecoreFactoryImpl::createEOperation_as_eContentUnion_
 	return element;
 	
 }
-std::shared_ptr<EOperation> ecoreFactoryImpl::createEOperation_as_eOperations_in_EClass(std::weak_ptr<ecore::EClass> par_EClass, const int metaElementID) const
+std::shared_ptr<ecore::EOperation> ecoreFactoryImpl::createEOperation_as_eOperations_in_EClass(std::weak_ptr<ecore::EClass> par_EClass, const int metaElementID) const
 {
-	std::shared_ptr<EOperationImpl> element(new EOperationImpl(par_EClass));
+	std::shared_ptr<ecore::EOperationImpl> element(new ecore::EOperationImpl(par_EClass));
 	element->setMetaElementID(metaElementID);
 	if(auto wp = par_EClass.lock())
 	{
@@ -1244,16 +1244,16 @@ std::shared_ptr<EOperation> ecoreFactoryImpl::createEOperation_as_eOperations_in
 	return element;
 	
 }
-std::shared_ptr<EPackage> ecoreFactoryImpl::createEPackage(const int metaElementID/*=-1*/) const
+std::shared_ptr<ecore::EPackage> ecoreFactoryImpl::createEPackage(const int metaElementID/*=-1*/) const
 {
-	std::shared_ptr<EPackageImpl> element(new EPackageImpl());
+	std::shared_ptr<ecore::EPackageImpl> element(new ecore::EPackageImpl());
 	element->setMetaElementID(metaElementID);
 	element->setThisEPackagePtr(element);
 	return element;
 }
-std::shared_ptr<EPackage> ecoreFactoryImpl::createEPackage_as_contents_in_EAnnotation(std::shared_ptr<EAnnotation> par_EAnnotation, const int metaElementID) const
+std::shared_ptr<ecore::EPackage> ecoreFactoryImpl::createEPackage_as_contents_in_EAnnotation(std::shared_ptr<ecore::EAnnotation> par_EAnnotation, const int metaElementID) const
 {
-	std::shared_ptr<EPackageImpl> element(new EPackageImpl());
+	std::shared_ptr<ecore::EPackageImpl> element(new ecore::EPackageImpl());
 	element->setMetaElementID(metaElementID);
 	if(nullptr != par_EAnnotation)
 	{
@@ -1264,9 +1264,9 @@ std::shared_ptr<EPackage> ecoreFactoryImpl::createEPackage_as_contents_in_EAnnot
 	return element;
 	
 }
-std::shared_ptr<EPackage> ecoreFactoryImpl::createEPackage_as_eContentUnion_in_EObject(std::weak_ptr<ecore::EObject> par_EObject, const int metaElementID) const
+std::shared_ptr<ecore::EPackage> ecoreFactoryImpl::createEPackage_as_eContentUnion_in_EObject(std::weak_ptr<ecore::EObject> par_EObject, const int metaElementID) const
 {
-	std::shared_ptr<EPackageImpl> element(new EPackageImpl(par_EObject));
+	std::shared_ptr<ecore::EPackageImpl> element(new ecore::EPackageImpl(par_EObject));
 	element->setMetaElementID(metaElementID);
 	if(auto wp = par_EObject.lock())
 	{
@@ -1277,9 +1277,9 @@ std::shared_ptr<EPackage> ecoreFactoryImpl::createEPackage_as_eContentUnion_in_E
 	return element;
 	
 }
-std::shared_ptr<EPackage> ecoreFactoryImpl::createEPackage_as_eSubpackages_in_EPackage(std::weak_ptr<ecore::EPackage> par_EPackage, const int metaElementID) const
+std::shared_ptr<ecore::EPackage> ecoreFactoryImpl::createEPackage_as_eSubpackages_in_EPackage(std::weak_ptr<ecore::EPackage> par_EPackage, const int metaElementID) const
 {
-	std::shared_ptr<EPackageImpl> element(new EPackageImpl(par_EPackage));
+	std::shared_ptr<ecore::EPackageImpl> element(new ecore::EPackageImpl(par_EPackage));
 	element->setMetaElementID(metaElementID);
 	if(auto wp = par_EPackage.lock())
 	{
@@ -1290,16 +1290,16 @@ std::shared_ptr<EPackage> ecoreFactoryImpl::createEPackage_as_eSubpackages_in_EP
 	return element;
 	
 }
-std::shared_ptr<EParameter> ecoreFactoryImpl::createEParameter(const int metaElementID/*=-1*/) const
+std::shared_ptr<ecore::EParameter> ecoreFactoryImpl::createEParameter(const int metaElementID/*=-1*/) const
 {
-	std::shared_ptr<EParameterImpl> element(new EParameterImpl());
+	std::shared_ptr<ecore::EParameterImpl> element(new ecore::EParameterImpl());
 	element->setMetaElementID(metaElementID);
 	element->setThisEParameterPtr(element);
 	return element;
 }
-std::shared_ptr<EParameter> ecoreFactoryImpl::createEParameter_as_contents_in_EAnnotation(std::shared_ptr<EAnnotation> par_EAnnotation, const int metaElementID) const
+std::shared_ptr<ecore::EParameter> ecoreFactoryImpl::createEParameter_as_contents_in_EAnnotation(std::shared_ptr<ecore::EAnnotation> par_EAnnotation, const int metaElementID) const
 {
-	std::shared_ptr<EParameterImpl> element(new EParameterImpl());
+	std::shared_ptr<ecore::EParameterImpl> element(new ecore::EParameterImpl());
 	element->setMetaElementID(metaElementID);
 	if(nullptr != par_EAnnotation)
 	{
@@ -1310,9 +1310,9 @@ std::shared_ptr<EParameter> ecoreFactoryImpl::createEParameter_as_contents_in_EA
 	return element;
 	
 }
-std::shared_ptr<EParameter> ecoreFactoryImpl::createEParameter_as_eContentUnion_in_EObject(std::weak_ptr<ecore::EObject> par_EObject, const int metaElementID) const
+std::shared_ptr<ecore::EParameter> ecoreFactoryImpl::createEParameter_as_eContentUnion_in_EObject(std::weak_ptr<ecore::EObject> par_EObject, const int metaElementID) const
 {
-	std::shared_ptr<EParameterImpl> element(new EParameterImpl(par_EObject));
+	std::shared_ptr<ecore::EParameterImpl> element(new ecore::EParameterImpl(par_EObject));
 	element->setMetaElementID(metaElementID);
 	if(auto wp = par_EObject.lock())
 	{
@@ -1323,9 +1323,9 @@ std::shared_ptr<EParameter> ecoreFactoryImpl::createEParameter_as_eContentUnion_
 	return element;
 	
 }
-std::shared_ptr<EParameter> ecoreFactoryImpl::createEParameter_as_eParameters_in_EOperation(std::weak_ptr<ecore::EOperation> par_EOperation, const int metaElementID) const
+std::shared_ptr<ecore::EParameter> ecoreFactoryImpl::createEParameter_as_eParameters_in_EOperation(std::weak_ptr<ecore::EOperation> par_EOperation, const int metaElementID) const
 {
-	std::shared_ptr<EParameterImpl> element(new EParameterImpl(par_EOperation));
+	std::shared_ptr<ecore::EParameterImpl> element(new ecore::EParameterImpl(par_EOperation));
 	element->setMetaElementID(metaElementID);
 	if(auto wp = par_EOperation.lock())
 	{
@@ -1336,16 +1336,16 @@ std::shared_ptr<EParameter> ecoreFactoryImpl::createEParameter_as_eParameters_in
 	return element;
 	
 }
-std::shared_ptr<EReference> ecoreFactoryImpl::createEReference(const int metaElementID/*=-1*/) const
+std::shared_ptr<ecore::EReference> ecoreFactoryImpl::createEReference(const int metaElementID/*=-1*/) const
 {
-	std::shared_ptr<EReferenceImpl> element(new EReferenceImpl());
+	std::shared_ptr<ecore::EReferenceImpl> element(new ecore::EReferenceImpl());
 	element->setMetaElementID(metaElementID);
 	element->setThisEReferencePtr(element);
 	return element;
 }
-std::shared_ptr<EReference> ecoreFactoryImpl::createEReference_as_contents_in_EAnnotation(std::shared_ptr<EAnnotation> par_EAnnotation, const int metaElementID) const
+std::shared_ptr<ecore::EReference> ecoreFactoryImpl::createEReference_as_contents_in_EAnnotation(std::shared_ptr<ecore::EAnnotation> par_EAnnotation, const int metaElementID) const
 {
-	std::shared_ptr<EReferenceImpl> element(new EReferenceImpl());
+	std::shared_ptr<ecore::EReferenceImpl> element(new ecore::EReferenceImpl());
 	element->setMetaElementID(metaElementID);
 	if(nullptr != par_EAnnotation)
 	{
@@ -1356,9 +1356,9 @@ std::shared_ptr<EReference> ecoreFactoryImpl::createEReference_as_contents_in_EA
 	return element;
 	
 }
-std::shared_ptr<EReference> ecoreFactoryImpl::createEReference_as_eContentUnion_in_EObject(std::weak_ptr<ecore::EObject> par_EObject, const int metaElementID) const
+std::shared_ptr<ecore::EReference> ecoreFactoryImpl::createEReference_as_eContentUnion_in_EObject(std::weak_ptr<ecore::EObject> par_EObject, const int metaElementID) const
 {
-	std::shared_ptr<EReferenceImpl> element(new EReferenceImpl(par_EObject));
+	std::shared_ptr<ecore::EReferenceImpl> element(new ecore::EReferenceImpl(par_EObject));
 	element->setMetaElementID(metaElementID);
 	if(auto wp = par_EObject.lock())
 	{
@@ -1369,9 +1369,9 @@ std::shared_ptr<EReference> ecoreFactoryImpl::createEReference_as_eContentUnion_
 	return element;
 	
 }
-std::shared_ptr<EReference> ecoreFactoryImpl::createEReference_as_eReferences_in_EClass(std::shared_ptr<EClass> par_EClass, const int metaElementID) const
+std::shared_ptr<ecore::EReference> ecoreFactoryImpl::createEReference_as_eReferences_in_EClass(std::shared_ptr<ecore::EClass> par_EClass, const int metaElementID) const
 {
-	std::shared_ptr<EReferenceImpl> element(new EReferenceImpl());
+	std::shared_ptr<ecore::EReferenceImpl> element(new ecore::EReferenceImpl());
 	element->setMetaElementID(metaElementID);
 	if(nullptr != par_EClass)
 	{
@@ -1382,9 +1382,9 @@ std::shared_ptr<EReference> ecoreFactoryImpl::createEReference_as_eReferences_in
 	return element;
 	
 }
-std::shared_ptr<EReference> ecoreFactoryImpl::createEReference_as_eStructuralFeatures_in_EClass(std::weak_ptr<ecore::EClass> par_EClass, const int metaElementID) const
+std::shared_ptr<ecore::EReference> ecoreFactoryImpl::createEReference_as_eStructuralFeatures_in_EClass(std::weak_ptr<ecore::EClass> par_EClass, const int metaElementID) const
 {
-	std::shared_ptr<EReferenceImpl> element(new EReferenceImpl(par_EClass));
+	std::shared_ptr<ecore::EReferenceImpl> element(new ecore::EReferenceImpl(par_EClass));
 	element->setMetaElementID(metaElementID);
 	if(auto wp = par_EClass.lock())
 	{
@@ -1395,23 +1395,23 @@ std::shared_ptr<EReference> ecoreFactoryImpl::createEReference_as_eStructuralFea
 	return element;
 	
 }
-std::shared_ptr<EStringToStringMapEntry> ecoreFactoryImpl::createEStringToStringMapEntry(const int metaElementID/*=-1*/) const
+std::shared_ptr<ecore::EStringToStringMapEntry> ecoreFactoryImpl::createEStringToStringMapEntry(const int metaElementID/*=-1*/) const
 {
-	std::shared_ptr<EStringToStringMapEntryImpl> element(new EStringToStringMapEntryImpl());
+	std::shared_ptr<ecore::EStringToStringMapEntryImpl> element(new ecore::EStringToStringMapEntryImpl());
 	element->setMetaElementID(metaElementID);
 	element->setThisEStringToStringMapEntryPtr(element);
 	return element;
 }
-std::shared_ptr<ETypeParameter> ecoreFactoryImpl::createETypeParameter(const int metaElementID/*=-1*/) const
+std::shared_ptr<ecore::ETypeParameter> ecoreFactoryImpl::createETypeParameter(const int metaElementID/*=-1*/) const
 {
-	std::shared_ptr<ETypeParameterImpl> element(new ETypeParameterImpl());
+	std::shared_ptr<ecore::ETypeParameterImpl> element(new ecore::ETypeParameterImpl());
 	element->setMetaElementID(metaElementID);
 	element->setThisETypeParameterPtr(element);
 	return element;
 }
-std::shared_ptr<ETypeParameter> ecoreFactoryImpl::createETypeParameter_as_contents_in_EAnnotation(std::shared_ptr<EAnnotation> par_EAnnotation, const int metaElementID) const
+std::shared_ptr<ecore::ETypeParameter> ecoreFactoryImpl::createETypeParameter_as_contents_in_EAnnotation(std::shared_ptr<ecore::EAnnotation> par_EAnnotation, const int metaElementID) const
 {
-	std::shared_ptr<ETypeParameterImpl> element(new ETypeParameterImpl());
+	std::shared_ptr<ecore::ETypeParameterImpl> element(new ecore::ETypeParameterImpl());
 	element->setMetaElementID(metaElementID);
 	if(nullptr != par_EAnnotation)
 	{
@@ -1422,9 +1422,9 @@ std::shared_ptr<ETypeParameter> ecoreFactoryImpl::createETypeParameter_as_conten
 	return element;
 	
 }
-std::shared_ptr<ETypeParameter> ecoreFactoryImpl::createETypeParameter_as_eContentUnion_in_EObject(std::weak_ptr<ecore::EObject> par_EObject, const int metaElementID) const
+std::shared_ptr<ecore::ETypeParameter> ecoreFactoryImpl::createETypeParameter_as_eContentUnion_in_EObject(std::weak_ptr<ecore::EObject> par_EObject, const int metaElementID) const
 {
-	std::shared_ptr<ETypeParameterImpl> element(new ETypeParameterImpl(par_EObject));
+	std::shared_ptr<ecore::ETypeParameterImpl> element(new ecore::ETypeParameterImpl(par_EObject));
 	element->setMetaElementID(metaElementID);
 	if(auto wp = par_EObject.lock())
 	{
@@ -1435,9 +1435,9 @@ std::shared_ptr<ETypeParameter> ecoreFactoryImpl::createETypeParameter_as_eConte
 	return element;
 	
 }
-std::shared_ptr<ETypeParameter> ecoreFactoryImpl::createETypeParameter_as_eTypeParameters_in_EClassifier(std::shared_ptr<EClassifier> par_EClassifier, const int metaElementID) const
+std::shared_ptr<ecore::ETypeParameter> ecoreFactoryImpl::createETypeParameter_as_eTypeParameters_in_EClassifier(std::shared_ptr<ecore::EClassifier> par_EClassifier, const int metaElementID) const
 {
-	std::shared_ptr<ETypeParameterImpl> element(new ETypeParameterImpl());
+	std::shared_ptr<ecore::ETypeParameterImpl> element(new ecore::ETypeParameterImpl());
 	element->setMetaElementID(metaElementID);
 	if(nullptr != par_EClassifier)
 	{
@@ -1448,9 +1448,9 @@ std::shared_ptr<ETypeParameter> ecoreFactoryImpl::createETypeParameter_as_eTypeP
 	return element;
 	
 }
-std::shared_ptr<ETypeParameter> ecoreFactoryImpl::createETypeParameter_as_eTypeParameters_in_EOperation(std::shared_ptr<EOperation> par_EOperation, const int metaElementID) const
+std::shared_ptr<ecore::ETypeParameter> ecoreFactoryImpl::createETypeParameter_as_eTypeParameters_in_EOperation(std::shared_ptr<ecore::EOperation> par_EOperation, const int metaElementID) const
 {
-	std::shared_ptr<ETypeParameterImpl> element(new ETypeParameterImpl());
+	std::shared_ptr<ecore::ETypeParameterImpl> element(new ecore::ETypeParameterImpl());
 	element->setMetaElementID(metaElementID);
 	if(nullptr != par_EOperation)
 	{

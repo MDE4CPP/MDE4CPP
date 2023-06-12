@@ -156,7 +156,7 @@ std::shared_ptr<ecore::EObject>  [dataTypeName/]::copy() const
 {
 [if (aDataType.general->isEmpty())]
 	//call overloaded =Operator for each base class
-	uml::[aDataType.getGeneralSuperClassName()/]Impl::operator=(obj);
+	[aDataType.getGeneralSuperClassName()/]Impl::operator=(obj);
 [else]
 	//call overloaded =Operator for each base class
 	[for (general : Classifier | aDataType.general->reject(oclIsUndefined() and name.oclIsUndefined()))]

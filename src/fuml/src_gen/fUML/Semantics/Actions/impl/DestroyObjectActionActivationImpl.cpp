@@ -45,9 +45,9 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "fUML/Semantics/Activities/ActivitiesFactory.hpp"
 #include "fUML/Semantics/Actions/ActionsFactory.hpp"
 #include "uml/umlFactory.hpp"
+#include "fUML/Semantics/Activities/ActivitiesFactory.hpp"
 #include "uml/Action.hpp"
 #include "fUML/Semantics/Actions/ActionActivation.hpp"
 #include "fUML/Semantics/Activities/ActivityEdgeInstance.hpp"
@@ -215,7 +215,7 @@ void DestroyObjectActionActivationImpl::doAction()
 		if(destroyTarget)
 		{
 			std::shared_ptr<Bag<Any>> tokens = this->takeTokens(destroyTarget);
-			for(std::shared_ptr<Any> value : *tokens)
+			for(const std::shared_ptr<Any>& value : *tokens)
 			{
 				this->destroyObject(value, action->getIsDestroyLinks(), action->getIsDestroyOwnedObjects());
 			}

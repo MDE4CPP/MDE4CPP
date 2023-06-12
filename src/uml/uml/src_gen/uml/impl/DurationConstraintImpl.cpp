@@ -143,7 +143,7 @@ DurationConstraintImpl& DurationConstraintImpl::operator=(const DurationConstrai
 	if(firstEventList)
 	{	
 		m_firstEvent.reset(new Bag<bool>());
-		for(const std::shared_ptr<bool> it: *firstEventList) 
+		for(const std::shared_ptr<bool>& it: *firstEventList) 
 		{
 			m_firstEvent->push_back(it);
 		}
@@ -355,11 +355,11 @@ bool DurationConstraintImpl::eSet(int featureID,  const std::shared_ptr<Any>& ne
 				std::shared_ptr<Bag<bool>> _firstEventList = newValue->get<std::shared_ptr<Bag<bool>>>();
 				std::shared_ptr<Bag<bool>> _firstEvent = isFirstEvent();
 				
-				for(const std::shared_ptr<bool> valueToAdd: *_firstEventList)
+				for(const std::shared_ptr<bool>& valueToAdd: *_firstEventList)
 				{
 					if (valueToAdd)
 					{
-						if(_firstEvent->find(valueToAdd) == -1)
+						if(!(_firstEvent->includes(valueToAdd)))
 						{
 							_firstEvent->add(valueToAdd);
 						}

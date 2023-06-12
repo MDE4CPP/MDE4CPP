@@ -530,13 +530,13 @@ bool ExpansionActivationGroupImpl::eSet(int featureID,  const std::shared_ptr<An
 					{
 						std::shared_ptr<Bag<fUML::Semantics::Actions::ExpansionNodeActivation>> _groupInputs = getGroupInputs();
 	
-						for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
+						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{
 							std::shared_ptr<fUML::Semantics::Actions::ExpansionNodeActivation> valueToAdd = std::dynamic_pointer_cast<fUML::Semantics::Actions::ExpansionNodeActivation>(anEObject);
 	
 							if (valueToAdd)
 							{
-								if(_groupInputs->find(valueToAdd) == -1)
+								if(!(_groupInputs->includes(valueToAdd)))
 								{
 									_groupInputs->add(valueToAdd);
 								}
@@ -575,13 +575,13 @@ bool ExpansionActivationGroupImpl::eSet(int featureID,  const std::shared_ptr<An
 					{
 						std::shared_ptr<Bag<fUML::Semantics::Actions::ExpansionNodeActivation>> _groupOutputs = getGroupOutputs();
 	
-						for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
+						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{
 							std::shared_ptr<fUML::Semantics::Actions::ExpansionNodeActivation> valueToAdd = std::dynamic_pointer_cast<fUML::Semantics::Actions::ExpansionNodeActivation>(anEObject);
 	
 							if (valueToAdd)
 							{
-								if(_groupOutputs->find(valueToAdd) == -1)
+								if(!(_groupOutputs->includes(valueToAdd)))
 								{
 									_groupOutputs->add(valueToAdd);
 								}
@@ -665,13 +665,13 @@ bool ExpansionActivationGroupImpl::eSet(int featureID,  const std::shared_ptr<An
 					{
 						std::shared_ptr<Bag<fUML::Semantics::Actions::OutputPinActivation>> _regionInputs = getRegionInputs();
 	
-						for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
+						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{
 							std::shared_ptr<fUML::Semantics::Actions::OutputPinActivation> valueToAdd = std::dynamic_pointer_cast<fUML::Semantics::Actions::OutputPinActivation>(anEObject);
 	
 							if (valueToAdd)
 							{
-								if(_regionInputs->find(valueToAdd) == -1)
+								if(!(_regionInputs->includes(valueToAdd)))
 								{
 									_regionInputs->add(valueToAdd);
 								}

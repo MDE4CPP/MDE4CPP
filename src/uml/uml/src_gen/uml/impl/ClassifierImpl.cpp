@@ -191,7 +191,7 @@ ClassifierImpl& ClassifierImpl::operator=(const ClassifierImpl & obj)
 			std::cout << "Initialising value SubsetUnion: " << "m_collaborationUse - SubsetUnion<uml::CollaborationUse, uml::Element >(getOwnedElement())" << std::endl;
 		#endif
 		
-		for(const std::shared_ptr<uml::CollaborationUse> collaborationUseindexElem: *collaborationUseList) 
+		for(const std::shared_ptr<uml::CollaborationUse>& collaborationUseindexElem: *collaborationUseList) 
 		{
 			std::shared_ptr<uml::CollaborationUse> temp = std::dynamic_pointer_cast<uml::CollaborationUse>((collaborationUseindexElem)->copy());
 			m_collaborationUse->push_back(temp);
@@ -218,7 +218,7 @@ ClassifierImpl& ClassifierImpl::operator=(const ClassifierImpl & obj)
 			std::cout << "Initialising value Subset: " << "m_generalization - Subset<uml::Generalization, uml::Element >(getOwnedElement())" << std::endl;
 		#endif
 		
-		for(const std::shared_ptr<uml::Generalization> generalizationindexElem: *generalizationList) 
+		for(const std::shared_ptr<uml::Generalization>& generalizationindexElem: *generalizationList) 
 		{
 			std::shared_ptr<uml::Generalization> temp = std::dynamic_pointer_cast<uml::Generalization>((generalizationindexElem)->copy());
 			m_generalization->push_back(temp);
@@ -245,7 +245,7 @@ ClassifierImpl& ClassifierImpl::operator=(const ClassifierImpl & obj)
 			std::cout << "Initialising value Subset: " << "m_inheritedMember - Subset<uml::NamedElement, uml::NamedElement >(getMember())" << std::endl;
 		#endif
 		
-		for(const std::shared_ptr<uml::NamedElement> inheritedMemberindexElem: *inheritedMemberList) 
+		for(const std::shared_ptr<uml::NamedElement>& inheritedMemberindexElem: *inheritedMemberList) 
 		{
 			std::shared_ptr<uml::NamedElement> temp = std::dynamic_pointer_cast<uml::NamedElement>((inheritedMemberindexElem)->copy());
 			m_inheritedMember->push_back(temp);
@@ -272,7 +272,7 @@ ClassifierImpl& ClassifierImpl::operator=(const ClassifierImpl & obj)
 			std::cout << "Initialising value Subset: " << "m_ownedUseCase - Subset<uml::UseCase, uml::NamedElement >(getOwnedMember())" << std::endl;
 		#endif
 		
-		for(const std::shared_ptr<uml::UseCase> ownedUseCaseindexElem: *ownedUseCaseList) 
+		for(const std::shared_ptr<uml::UseCase>& ownedUseCaseindexElem: *ownedUseCaseList) 
 		{
 			std::shared_ptr<uml::UseCase> temp = std::dynamic_pointer_cast<uml::UseCase>((ownedUseCaseindexElem)->copy());
 			m_ownedUseCase->push_back(temp);
@@ -299,7 +299,7 @@ ClassifierImpl& ClassifierImpl::operator=(const ClassifierImpl & obj)
 			std::cout << "Initialising value SubsetUnion: " << "m_redefinedClassifier - SubsetUnion<uml::Classifier, uml::RedefinableElement >(getRedefinedElement())" << std::endl;
 		#endif
 		
-		for(const std::shared_ptr<uml::Classifier> redefinedClassifierindexElem: *redefinedClassifierList) 
+		for(const std::shared_ptr<uml::Classifier>& redefinedClassifierindexElem: *redefinedClassifierList) 
 		{
 			std::shared_ptr<uml::Classifier> temp = std::dynamic_pointer_cast<uml::Classifier>((redefinedClassifierindexElem)->copy());
 			m_redefinedClassifier->push_back(temp);
@@ -332,7 +332,7 @@ ClassifierImpl& ClassifierImpl::operator=(const ClassifierImpl & obj)
 			std::cout << "Initialising value Subset: " << "m_substitution - Subset<uml::Substitution, uml::Element >(getOwnedElement())" << std::endl;
 		#endif
 		
-		for(const std::shared_ptr<uml::Substitution> substitutionindexElem: *substitutionList) 
+		for(const std::shared_ptr<uml::Substitution>& substitutionindexElem: *substitutionList) 
 		{
 			std::shared_ptr<uml::Substitution> temp = std::dynamic_pointer_cast<uml::Substitution>((substitutionindexElem)->copy());
 			m_substitution->push_back(temp);
@@ -391,7 +391,7 @@ std::shared_ptr<Bag<uml::Classifier>> parents = this->parents();
 	
 allParents->insert(allParents->begin(), parents->begin(), parents->end());
 	
-for(std::shared_ptr<Classifier> parent : *parents)
+for(const std::shared_ptr<Classifier>& parent : *parents)
 {
 	std::shared_ptr<Bag<uml::Classifier>> allParentsOfParent = parent->allParents();
 	allParents->insert(allParents->end(), allParentsOfParent->begin(), allParentsOfParent->end());
@@ -411,9 +411,9 @@ std::shared_ptr<Bag<uml::Interface>> directlyRealizedInterfaces = this->directly
 allRealizedInterface->insert(allRealizedInterface->end(), directlyRealizedInterfaces->begin(), directlyRealizedInterfaces->end());
 	
 std::shared_ptr<Bag<uml::Classifier>> superClasses = this->getGenerals();
-for(unsigned int i = 0; i < superClasses->size(); i++)
+for(const std::shared_ptr<uml::Classifier>& superClass : *superClasses)
 {
-	std::shared_ptr<Bag<uml::Interface>> superRealizedInterfaces = superClasses->at(i)->allRealizedInterfaces();
+	std::shared_ptr<Bag<uml::Interface>> superRealizedInterfaces = superClass->allRealizedInterfaces();
 	allRealizedInterface->insert(allRealizedInterface->end(), superRealizedInterfaces->begin(), superRealizedInterfaces->end());
 }
 
@@ -436,9 +436,9 @@ std::shared_ptr<Bag<uml::Interface>> ClassifierImpl::allUsedInterfaces()
 	allUsedInterfaces->insert(allUsedInterfaces->end(), directlyUsedInterfaces->begin(), directlyUsedInterfaces->end());
 	
 	std::shared_ptr<Bag<uml::Classifier>> superClasses = this->getGenerals();
-	for(unsigned int i = 0; i < superClasses->size(); i++)
+	for(const std::shared_ptr<uml::Classifier>& superClass : *superClasses)
 	{
-		std::shared_ptr<Bag<uml::Interface>> superUsedInterfaces = superClasses->at(i)->allUsedInterfaces();
+		std::shared_ptr<Bag<uml::Interface>> superUsedInterfaces = superClass->allUsedInterfaces();
 		allUsedInterfaces->insert(allUsedInterfaces->end(), superUsedInterfaces->begin(), superUsedInterfaces->end());
 	}
 
@@ -456,9 +456,8 @@ std::shared_ptr<uml::BehavioredClassifier> bClassifier = std::dynamic_pointer_ca
 if(bClassifier != nullptr)
 {
 	std::shared_ptr<Bag<uml::InterfaceRealization>> interfaceRealizations = bClassifier->getInterfaceRealization();
-	for(unsigned int i = 0; i < interfaceRealizations->size(); i++)
+	for(const std::shared_ptr<uml::InterfaceRealization>& interfaceRealization : *interfaceRealizations)
 	{
-		std::shared_ptr<uml::InterfaceRealization> interfaceRealization = interfaceRealizations->at(i);
 		std::shared_ptr<uml::Interface> contract = interfaceRealization->getContract();
 
 		if(contract != nullptr)
@@ -480,17 +479,17 @@ std::shared_ptr<Bag<uml::Interface>> ClassifierImpl::directlyUsedInterfaces()
 
 	std::shared_ptr<Bag<uml::Dependency>> clientDependencies = this->getClientDependency();
 	
-	for(unsigned int i = 0; i < clientDependencies->size(); i++)
+	for(const std::shared_ptr<uml::Dependency>& clientDependency : *clientDependencies)
 	{
-		std::shared_ptr<uml::Usage> usage = std::dynamic_pointer_cast<uml::Usage>(clientDependencies->at(i));
+		std::shared_ptr<uml::Usage> usage = std::dynamic_pointer_cast<uml::Usage>(clientDependency);
 		if(usage != nullptr)
 		{
 			std::shared_ptr<Bag<uml::NamedElement>> suppliers = usage->getSupplier();
 			std::shared_ptr<Bag<uml::Interface>> interfacesInSuppliers(new Bag<uml::Interface>());
 			
-			for(unsigned int j = 0; j < suppliers->size(); j++)
+			for(const std::shared_ptr<uml::NamedElement>& supplier : *suppliers)
 			{
-				std::shared_ptr<uml::Interface> supplyingInterface = std::dynamic_pointer_cast<uml::Interface>(suppliers->at(j));
+				std::shared_ptr<uml::Interface> supplyingInterface = std::dynamic_pointer_cast<uml::Interface>(supplier);
 				if(supplyingInterface != nullptr)
 				{
 					interfacesInSuppliers->add(supplyingInterface);
@@ -515,7 +514,7 @@ std::shared_ptr<Bag<uml::Property>> ClassifierImpl::getAllAttributes()
     eAllAttributes->insert(eAllAttributes->end(), attributeList->begin(), attributeList->end());
 
     std::shared_ptr<Bag<Classifier> > classList = this->getGenerals();
-    for (std::shared_ptr<Classifier> c : *classList)
+    for (const std::shared_ptr<Classifier>& c : *classList)
     {
         std::shared_ptr<Bag<Property> > attributeList = c->getAllAttributes();
         eAllAttributes->insert(eAllAttributes->end(), attributeList->begin(), attributeList->end());
@@ -531,17 +530,17 @@ std::shared_ptr<Bag<uml::Operation>> ClassifierImpl::getAllOperations()
 		std::shared_ptr<Bag<uml::Operation>> allOperations(new Bag<uml::Operation>());
 	std::shared_ptr<Bag<uml::Feature>> allDirectFeatures = this->getFeature();
 	
-	for(unsigned int i = 0; i < allDirectFeatures->size(); i++)
+	for(const std::shared_ptr<uml::Feature>& directFeature : *allDirectFeatures)
 	{
-		std::shared_ptr<uml::Operation> operation = std::dynamic_pointer_cast<uml::Operation>(allDirectFeatures->at(i));
+		std::shared_ptr<uml::Operation> operation = std::dynamic_pointer_cast<uml::Operation>(directFeature);
 		if(operation != nullptr){ allOperations->add(operation); }
 	}
 	
 	std::shared_ptr<Bag<uml::Classifier>> superTypes = this->getGenerals();
 	
-	for(unsigned int i = 0; i < superTypes->size(); i++)
+	for(const std::shared_ptr<uml::Classifier>& superType : *superTypes)
 	{
-		std::shared_ptr<Bag<uml::Operation>> superTypeOperations = superTypes->at(i)->getAllOperations();
+		std::shared_ptr<Bag<uml::Operation>> superTypeOperations = superType->getAllOperations();
 		allOperations->insert(allOperations->end(), superTypeOperations->begin(), superTypeOperations->end());
 	}
 	
@@ -587,7 +586,7 @@ std::shared_ptr<Any> ClassifierImpl::getPropertyValue(std::string propertyName)
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
 		std::shared_ptr<Bag<uml::Property> > propertyList = this->getMetaClass()->getAttribute();
-	for(std::shared_ptr<uml::Property> p: *propertyList)
+	for(const std::shared_ptr<uml::Property>& p: *propertyList)
 	{
 		if(p->getName()==propertyName)
 		{
@@ -634,7 +633,7 @@ std::shared_ptr<Bag<uml::Classifier>> ClassifierImpl::parents()
 	//generated from body annotation
 	std::shared_ptr< Bag<uml::Classifier> > returnList(new Bag<uml::Classifier>());
 
-	for(std::shared_ptr<Generalization> gen : *getGeneralization())
+	for(const std::shared_ptr<Generalization>& gen : *getGeneralization())
 	{
 		returnList->push_back(gen->getGeneral());
 	}
@@ -1366,13 +1365,13 @@ bool ClassifierImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 					{
 						std::shared_ptr<Bag<uml::CollaborationUse>> _collaborationUse = getCollaborationUse();
 	
-						for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
+						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{
 							std::shared_ptr<uml::CollaborationUse> valueToAdd = std::dynamic_pointer_cast<uml::CollaborationUse>(anEObject);
 	
 							if (valueToAdd)
 							{
-								if(_collaborationUse->find(valueToAdd) == -1)
+								if(!(_collaborationUse->includes(valueToAdd)))
 								{
 									_collaborationUse->add(valueToAdd);
 								}
@@ -1411,13 +1410,13 @@ bool ClassifierImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 					{
 						std::shared_ptr<Bag<uml::Classifier>> _general = getGeneral();
 	
-						for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
+						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{
 							std::shared_ptr<uml::Classifier> valueToAdd = std::dynamic_pointer_cast<uml::Classifier>(anEObject);
 	
 							if (valueToAdd)
 							{
-								if(_general->find(valueToAdd) == -1)
+								if(!(_general->includes(valueToAdd)))
 								{
 									_general->add(valueToAdd);
 								}
@@ -1456,13 +1455,13 @@ bool ClassifierImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 					{
 						std::shared_ptr<Bag<uml::Generalization>> _generalization = getGeneralization();
 	
-						for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
+						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{
 							std::shared_ptr<uml::Generalization> valueToAdd = std::dynamic_pointer_cast<uml::Generalization>(anEObject);
 	
 							if (valueToAdd)
 							{
-								if(_generalization->find(valueToAdd) == -1)
+								if(!(_generalization->includes(valueToAdd)))
 								{
 									_generalization->add(valueToAdd);
 								}
@@ -1529,13 +1528,13 @@ bool ClassifierImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 					{
 						std::shared_ptr<Bag<uml::UseCase>> _ownedUseCase = getOwnedUseCase();
 	
-						for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
+						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{
 							std::shared_ptr<uml::UseCase> valueToAdd = std::dynamic_pointer_cast<uml::UseCase>(anEObject);
 	
 							if (valueToAdd)
 							{
-								if(_ownedUseCase->find(valueToAdd) == -1)
+								if(!(_ownedUseCase->includes(valueToAdd)))
 								{
 									_ownedUseCase->add(valueToAdd);
 								}
@@ -1574,13 +1573,13 @@ bool ClassifierImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 					{
 						std::shared_ptr<Bag<uml::GeneralizationSet>> _powertypeExtent = getPowertypeExtent();
 	
-						for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
+						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{
 							std::shared_ptr<uml::GeneralizationSet> valueToAdd = std::dynamic_pointer_cast<uml::GeneralizationSet>(anEObject);
 	
 							if (valueToAdd)
 							{
-								if(_powertypeExtent->find(valueToAdd) == -1)
+								if(!(_powertypeExtent->includes(valueToAdd)))
 								{
 									_powertypeExtent->add(valueToAdd);
 								}
@@ -1619,13 +1618,13 @@ bool ClassifierImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 					{
 						std::shared_ptr<Bag<uml::Classifier>> _redefinedClassifier = getRedefinedClassifier();
 	
-						for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
+						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{
 							std::shared_ptr<uml::Classifier> valueToAdd = std::dynamic_pointer_cast<uml::Classifier>(anEObject);
 	
 							if (valueToAdd)
 							{
-								if(_redefinedClassifier->find(valueToAdd) == -1)
+								if(!(_redefinedClassifier->includes(valueToAdd)))
 								{
 									_redefinedClassifier->add(valueToAdd);
 								}
@@ -1695,13 +1694,13 @@ bool ClassifierImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 					{
 						std::shared_ptr<Bag<uml::Substitution>> _substitution = getSubstitution();
 	
-						for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
+						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{
 							std::shared_ptr<uml::Substitution> valueToAdd = std::dynamic_pointer_cast<uml::Substitution>(anEObject);
 	
 							if (valueToAdd)
 							{
-								if(_substitution->find(valueToAdd) == -1)
+								if(!(_substitution->includes(valueToAdd)))
 								{
 									_substitution->add(valueToAdd);
 								}
@@ -1740,13 +1739,13 @@ bool ClassifierImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 					{
 						std::shared_ptr<Bag<uml::UseCase>> _useCase = getUseCase();
 	
-						for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
+						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{
 							std::shared_ptr<uml::UseCase> valueToAdd = std::dynamic_pointer_cast<uml::UseCase>(anEObject);
 	
 							if (valueToAdd)
 							{
-								if(_useCase->find(valueToAdd) == -1)
+								if(!(_useCase->includes(valueToAdd)))
 								{
 									_useCase->add(valueToAdd);
 								}

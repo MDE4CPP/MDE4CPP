@@ -185,11 +185,11 @@ void [aClass.name.toUpperFirst().concat('Impl')/]::set(unsigned long _uID, const
 				std::shared_ptr<Bag<Any>> _[aProperty.name/]List = value->get<std::shared_ptr<Bag<Any>>();
 				std::shared_ptr<Bag<Any>> _[aProperty.name.toLowerFirst()/] = [aProperty.getterName()/]();
 				
-				for(const std::shared_ptr<Any> valueToAdd: *_[aProperty.name/]List)
+				for(const std::shared_ptr<Any>& valueToAdd: *_[aProperty.name/]List)
 				{
 					if (valueToAdd)
 					{
-						if(_[aProperty.name.toLowerFirst()/]->find(valueToAdd) == -1)
+						if(!(_[aProperty.name.toLowerFirst()/]->includes(valueToAdd)))
 						{
 							_[aProperty.name.toLowerFirst()/]->add(valueToAdd);
 						}
@@ -228,11 +228,11 @@ void [aClass.name.toUpperFirst().concat('Impl')/]::set(unsigned long _uID, const
 				std::shared_ptr<Bag<[aProperty.type.generateCppRawType(true)/]>> _[aProperty.name/]List = value->get<std::shared_ptr<Bag<[aProperty.type.generateCppRawType(true)/]>>();
 				std::shared_ptr<Bag<[aProperty.type.generateCppRawType(true)/]>> _[aProperty.name.toLowerFirst()/] = [aProperty.getterName()/]();
 				
-				for(const std::shared_ptr<[aProperty.type.generateCppRawType(true)/]> valueToAdd: *_[aProperty.name/]List)
+				for(const std::shared_ptr<[aProperty.type.generateCppRawType(true)/]>& valueToAdd: *_[aProperty.name/]List)
 				{
 					if (valueToAdd)
 					{
-						if(_[aProperty.name.toLowerFirst()/]->find(valueToAdd) == -1)
+						if(!(_[aProperty.name.toLowerFirst()/]->includes(valueToAdd)))
 						{
 							_[aProperty.name.toLowerFirst()/]->add(valueToAdd);
 						}
@@ -294,13 +294,13 @@ void [aClass.name.toUpperFirst().concat('Impl')/]::set(unsigned long _uID, const
 					{
 						std::shared_ptr<[aProperty.type.generateCppRawType(true)/]> _[aProperty.name.toLowerFirst()/] = [aProperty.getterName()/]();
 	
-						for(const std::shared_ptr<uml::Element> anElement: *elementList)
+						for(const std::shared_ptr<uml::Element>& anElement: *elementList)
 						{
 							std::shared_ptr<[aProperty.type.generateCppRawType(true)/]> valueToAdd = std::dynamic_pointer_cast<[aProperty.type.generateCppRawType(true)/]>(anElement);
 	
 							if (valueToAdd)
 							{
-								if(_[aProperty.name.toLowerFirst()/]->find(valueToAdd) == -1)
+								if(!(_[aProperty.name.toLowerFirst()/]->includes(valueToAdd)))
 								{
 									_[aProperty.name.toLowerFirst()/]->add(valueToAdd);
 								}
@@ -445,7 +445,7 @@ void [aClass.name.toUpperFirst().concat('Impl')/]::add(unsigned long _uID, const
 
 			[if (aProperty.isUnique)]
 			// [aProperty.name/] is unique
-			if(this->[aProperty.getterName()/]()->find(valueToAdd) == -1)
+			if(!(this->[aProperty.getterName()/]()->includes(valueToAdd)))
 			{
 				this->[aProperty.getterName()/]()->add(valueToAdd, insertAt);
 			}
@@ -687,7 +687,7 @@ std::shared_ptr<Any> [aClass.name.toUpperFirst().concat('Impl')/]::invoke(unsign
 						if(elementList)
 						{
 							[anInputParameter.name/] = std::make_shared<Bag<[anInputParameter.type.generateCppRawType(true)/]>>();
-							for(const std::shared_ptr<uml::Element> anElement: *elementList)
+							for(const std::shared_ptr<uml::Element>& anElement: *elementList)
 							{
 								std::shared_ptr<[anInputParameter.type.generateCppRawType(true)/]> _temp = std::dynamic_pointer_cast<[anInputParameter.type.generateCppRawType(true)/]>(anElement);
 								[anInputParameter.name/]->add(_temp);
@@ -857,7 +857,7 @@ std::shared_ptr<Any> [aClass.name.toUpperFirst().concat('Impl')/]::invoke(const 
 						if(elementList)
 						{
 							[anInputParameter.name/] = std::make_shared<Bag<[anInputParameter.type.generateCppRawType(true)/]>>();
-							for(const std::shared_ptr<uml::Element> anElement: *elementList)
+							for(const std::shared_ptr<uml::Element>& anElement: *elementList)
 							{
 								std::shared_ptr<[anInputParameter.type.generateCppRawType(true)/]> _temp = std::dynamic_pointer_cast<[anInputParameter.type.generateCppRawType(true)/]>(anElement);
 								[anInputParameter.name/]->add(_temp);

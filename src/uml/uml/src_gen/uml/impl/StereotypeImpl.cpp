@@ -186,7 +186,7 @@ StereotypeImpl& StereotypeImpl::operator=(const StereotypeImpl & obj)
 			std::cout << "Initialising value Subset: " << "m_icon - Subset<uml::Image, uml::Element >(getOwnedElement())" << std::endl;
 		#endif
 		
-		for(const std::shared_ptr<uml::Image> iconindexElem: *iconList) 
+		for(const std::shared_ptr<uml::Image>& iconindexElem: *iconList) 
 		{
 			std::shared_ptr<uml::Image> temp = std::dynamic_pointer_cast<uml::Image>((iconindexElem)->copy());
 			m_icon->push_back(temp);
@@ -488,13 +488,13 @@ bool StereotypeImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 					{
 						std::shared_ptr<Bag<uml::Image>> _icon = getIcon();
 	
-						for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
+						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{
 							std::shared_ptr<uml::Image> valueToAdd = std::dynamic_pointer_cast<uml::Image>(anEObject);
 	
 							if (valueToAdd)
 							{
-								if(_icon->find(valueToAdd) == -1)
+								if(!(_icon->includes(valueToAdd)))
 								{
 									_icon->add(valueToAdd);
 								}

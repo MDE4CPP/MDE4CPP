@@ -542,13 +542,13 @@ bool EObjectImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 					{
 						std::shared_ptr<Bag<ecore::EObject>> _eContentUnion = getEContentUnion();
 	
-						for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
+						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{
 							std::shared_ptr<ecore::EObject> valueToAdd = std::dynamic_pointer_cast<ecore::EObject>(anEObject);
 	
 							if (valueToAdd)
 							{
-								if(_eContentUnion->find(valueToAdd) == -1)
+								if(!(_eContentUnion->includes(valueToAdd)))
 								{
 									_eContentUnion->add(valueToAdd);
 								}

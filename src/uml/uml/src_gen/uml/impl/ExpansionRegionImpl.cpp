@@ -490,13 +490,13 @@ bool ExpansionRegionImpl::eSet(int featureID,  const std::shared_ptr<Any>& newVa
 					{
 						std::shared_ptr<Bag<uml::ExpansionNode>> _inputElement = getInputElement();
 	
-						for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
+						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{
 							std::shared_ptr<uml::ExpansionNode> valueToAdd = std::dynamic_pointer_cast<uml::ExpansionNode>(anEObject);
 	
 							if (valueToAdd)
 							{
-								if(_inputElement->find(valueToAdd) == -1)
+								if(!(_inputElement->includes(valueToAdd)))
 								{
 									_inputElement->add(valueToAdd);
 								}
@@ -549,13 +549,13 @@ bool ExpansionRegionImpl::eSet(int featureID,  const std::shared_ptr<Any>& newVa
 					{
 						std::shared_ptr<Bag<uml::ExpansionNode>> _outputElement = getOutputElement();
 	
-						for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
+						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{
 							std::shared_ptr<uml::ExpansionNode> valueToAdd = std::dynamic_pointer_cast<uml::ExpansionNode>(anEObject);
 	
 							if (valueToAdd)
 							{
-								if(_outputElement->find(valueToAdd) == -1)
+								if(!(_outputElement->includes(valueToAdd)))
 								{
 									_outputElement->add(valueToAdd);
 								}

@@ -488,13 +488,13 @@ bool ReclassifyObjectActionImpl::eSet(int featureID,  const std::shared_ptr<Any>
 					{
 						std::shared_ptr<Bag<uml::Classifier>> _newClassifier = getNewClassifier();
 	
-						for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
+						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{
 							std::shared_ptr<uml::Classifier> valueToAdd = std::dynamic_pointer_cast<uml::Classifier>(anEObject);
 	
 							if (valueToAdd)
 							{
-								if(_newClassifier->find(valueToAdd) == -1)
+								if(!(_newClassifier->includes(valueToAdd)))
 								{
 									_newClassifier->add(valueToAdd);
 								}
@@ -564,13 +564,13 @@ bool ReclassifyObjectActionImpl::eSet(int featureID,  const std::shared_ptr<Any>
 					{
 						std::shared_ptr<Bag<uml::Classifier>> _oldClassifier = getOldClassifier();
 	
-						for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
+						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{
 							std::shared_ptr<uml::Classifier> valueToAdd = std::dynamic_pointer_cast<uml::Classifier>(anEObject);
 	
 							if (valueToAdd)
 							{
-								if(_oldClassifier->find(valueToAdd) == -1)
+								if(!(_oldClassifier->includes(valueToAdd)))
 								{
 									_oldClassifier->add(valueToAdd);
 								}

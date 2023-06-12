@@ -162,7 +162,7 @@ RegionImpl& RegionImpl::operator=(const RegionImpl & obj)
 			std::cout << "Initialising value Subset: " << "m_subvertex - Subset<uml::Vertex, uml::NamedElement >(getOwnedMember())" << std::endl;
 		#endif
 		
-		for(const std::shared_ptr<uml::Vertex> subvertexindexElem: *subvertexList) 
+		for(const std::shared_ptr<uml::Vertex>& subvertexindexElem: *subvertexList) 
 		{
 			std::shared_ptr<uml::Vertex> temp = std::dynamic_pointer_cast<uml::Vertex>((subvertexindexElem)->copy());
 			m_subvertex->push_back(temp);
@@ -189,7 +189,7 @@ RegionImpl& RegionImpl::operator=(const RegionImpl & obj)
 			std::cout << "Initialising value Subset: " << "m_transition - Subset<uml::Transition, uml::NamedElement >(getOwnedMember())" << std::endl;
 		#endif
 		
-		for(const std::shared_ptr<uml::Transition> transitionindexElem: *transitionList) 
+		for(const std::shared_ptr<uml::Transition>& transitionindexElem: *transitionList) 
 		{
 			std::shared_ptr<uml::Transition> temp = std::dynamic_pointer_cast<uml::Transition>((transitionindexElem)->copy());
 			m_transition->push_back(temp);
@@ -700,13 +700,13 @@ bool RegionImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 					{
 						std::shared_ptr<Bag<uml::Vertex>> _subvertex = getSubvertex();
 	
-						for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
+						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{
 							std::shared_ptr<uml::Vertex> valueToAdd = std::dynamic_pointer_cast<uml::Vertex>(anEObject);
 	
 							if (valueToAdd)
 							{
-								if(_subvertex->find(valueToAdd) == -1)
+								if(!(_subvertex->includes(valueToAdd)))
 								{
 									_subvertex->add(valueToAdd);
 								}
@@ -745,13 +745,13 @@ bool RegionImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 					{
 						std::shared_ptr<Bag<uml::Transition>> _transition = getTransition();
 	
-						for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
+						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{
 							std::shared_ptr<uml::Transition> valueToAdd = std::dynamic_pointer_cast<uml::Transition>(anEObject);
 	
 							if (valueToAdd)
 							{
-								if(_transition->find(valueToAdd) == -1)
+								if(!(_transition->includes(valueToAdd)))
 								{
 									_transition->add(valueToAdd);
 								}

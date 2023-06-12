@@ -14,50 +14,25 @@
 
 namespace ecore 
 {
-	class EParameter;
 	class EEnumLiteral;
-	class EEnum;
-	class EOperation;
+	class EParameter;
 	class EDataType;
-	class EPackage;
-	class EAnnotation;
-	class EClass;
-	class EReference;
 	class EStringToStringMapEntry;
-	class EAttribute;
 	class EGenericType;
+	class EReference;
+	class EOperation;
+	class EAttribute;
+	class EEnum;
+	class EAnnotation;
+	class EPackage;
+	class EClass;
 }
 
 namespace PSCS::Semantics 
 {
-	namespace Actions 
-	{
-		class ActionsPackage;
-	}
-
-	namespace Classification 
-	{
-		class ClassificationPackage;
-	}
-
-	namespace CommonBehavior 
-	{
-		class CommonBehaviorPackage;
-	}
-
 	namespace Loci 
 	{
 		class LociPackage;
-	}
-
-	namespace StructuredClassifiers 
-	{
-		class StructuredClassifiersPackage;
-	}
-
-	namespace Values 
-	{
-		class ValuesPackage;
 	}
 
 }
@@ -87,17 +62,10 @@ namespace PSCS::Semantics
 			
 			
 
-			virtual std::shared_ptr<PSCS::Semantics::Actions::ActionsPackage> getActions_Package() const = 0;
-			virtual std::shared_ptr<PSCS::Semantics::Classification::ClassificationPackage> getClassification_Package() const = 0;
-			virtual std::shared_ptr<PSCS::Semantics::CommonBehavior::CommonBehaviorPackage> getCommonBehavior_Package() const = 0;
 			virtual std::shared_ptr<PSCS::Semantics::Loci::LociPackage> getLoci_Package() const = 0;
-			virtual std::shared_ptr<PSCS::Semantics::StructuredClassifiers::StructuredClassifiersPackage> getStructuredClassifiers_Package() const = 0;
-			virtual std::shared_ptr<PSCS::Semantics::Values::ValuesPackage> getValues_Package() const = 0;
 			
 
-			//Singleton Instance and Getter
-			private:
-				static std::shared_ptr<SemanticsPackage> instance;
+			//Singleton Getter
 			public:
 				static std::shared_ptr<SemanticsPackage> eInstance();
 	};

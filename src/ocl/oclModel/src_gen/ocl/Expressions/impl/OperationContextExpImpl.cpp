@@ -497,13 +497,13 @@ bool OperationContextExpImpl::eSet(int featureID,  const std::shared_ptr<Any>& n
 					{
 						std::shared_ptr<Bag<ocl::Expressions::VarDeclarationExp>> _inputParameters = getInputParameters();
 	
-						for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
+						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{
 							std::shared_ptr<ocl::Expressions::VarDeclarationExp> valueToAdd = std::dynamic_pointer_cast<ocl::Expressions::VarDeclarationExp>(anEObject);
 	
 							if (valueToAdd)
 							{
-								if(_inputParameters->find(valueToAdd) == -1)
+								if(!(_inputParameters->includes(valueToAdd)))
 								{
 									_inputParameters->add(valueToAdd);
 								}

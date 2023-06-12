@@ -49,16 +49,17 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "ecore/ecoreFactory.hpp"
-#include "fUML/Semantics/CommonBehavior/CommonBehaviorFactory.hpp"
 #include "uml/umlFactory.hpp"
+#include "fUML/Semantics/CommonBehavior/CommonBehaviorFactory.hpp"
 #include "fUML/Semantics/Loci/LociFactory.hpp"
+#include "ecore/ecoreFactory.hpp"
 #include "uml/Behavior.hpp"
 #include "uml/Classifier.hpp"
 #include "uml/Comment.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "uml/Element.hpp"
 #include "fUML/Semantics/Loci/Locus.hpp"
+#include "fUML/Semantics/CommonBehavior/ObjectActivation.hpp"
 #include "uml/Parameter.hpp"
 #include "fUML/Semantics/CommonBehavior/ParameterValue.hpp"
 #include "fUML/Semantics/Loci/SemanticVisitor.hpp"
@@ -130,7 +131,7 @@ ExecutionImpl& ExecutionImpl::operator=(const ExecutionImpl & obj)
 		m_parameterValues.reset(new Bag<fUML::Semantics::CommonBehavior::ParameterValue>());
 		
 		
-		for(const std::shared_ptr<fUML::Semantics::CommonBehavior::ParameterValue> parameterValuesindexElem: *parameterValuesList) 
+		for(const std::shared_ptr<fUML::Semantics::CommonBehavior::ParameterValue>& parameterValuesindexElem: *parameterValuesList) 
 		{
 			std::shared_ptr<fUML::Semantics::CommonBehavior::ParameterValue> temp = std::dynamic_pointer_cast<fUML::Semantics::CommonBehavior::ParameterValue>((parameterValuesindexElem)->copy());
 			m_parameterValues->push_back(temp);
@@ -720,13 +721,13 @@ bool ExecutionImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 					{
 						std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> _parameterValues = getParameterValues();
 	
-						for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
+						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{
 							std::shared_ptr<fUML::Semantics::CommonBehavior::ParameterValue> valueToAdd = std::dynamic_pointer_cast<fUML::Semantics::CommonBehavior::ParameterValue>(anEObject);
 	
 							if (valueToAdd)
 							{
-								if(_parameterValues->find(valueToAdd) == -1)
+								if(!(_parameterValues->includes(valueToAdd)))
 								{
 									_parameterValues->add(valueToAdd);
 								}
@@ -765,13 +766,13 @@ bool ExecutionImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 					{
 						std::shared_ptr<Bag<uml::Classifier>> _types = getTypes();
 	
-						for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
+						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{
 							std::shared_ptr<uml::Classifier> valueToAdd = std::dynamic_pointer_cast<uml::Classifier>(anEObject);
 	
 							if (valueToAdd)
 							{
-								if(_types->find(valueToAdd) == -1)
+								if(!(_types->includes(valueToAdd)))
 								{
 									_types->add(valueToAdd);
 								}

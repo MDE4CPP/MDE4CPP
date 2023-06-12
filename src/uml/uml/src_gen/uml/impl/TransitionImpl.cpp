@@ -169,7 +169,7 @@ TransitionImpl& TransitionImpl::operator=(const TransitionImpl & obj)
 			std::cout << "Initialising value Subset: " << "m_trigger - Subset<uml::Trigger, uml::Element >(getOwnedElement())" << std::endl;
 		#endif
 		
-		for(const std::shared_ptr<uml::Trigger> triggerindexElem: *triggerList) 
+		for(const std::shared_ptr<uml::Trigger>& triggerindexElem: *triggerList) 
 		{
 			std::shared_ptr<uml::Trigger> temp = std::dynamic_pointer_cast<uml::Trigger>((triggerindexElem)->copy());
 			m_trigger->push_back(temp);
@@ -891,13 +891,13 @@ bool TransitionImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 					{
 						std::shared_ptr<Bag<uml::Trigger>> _trigger = getTrigger();
 	
-						for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
+						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{
 							std::shared_ptr<uml::Trigger> valueToAdd = std::dynamic_pointer_cast<uml::Trigger>(anEObject);
 	
 							if (valueToAdd)
 							{
-								if(_trigger->find(valueToAdd) == -1)
+								if(!(_trigger->includes(valueToAdd)))
 								{
 									_trigger->add(valueToAdd);
 								}

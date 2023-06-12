@@ -62,7 +62,7 @@ std::shared_ptr<ecore::EObject>  ListenerImpl::copy() const
 ListenerImpl& ListenerImpl::operator=(const ListenerImpl & obj)
 {
 	//call overloaded =Operator for each base class
-	uml::ElementImpl::operator=(obj);
+	fUML::MDE4CPP_Extensions::FUML_ObjectImpl::operator=(obj);
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy Listener "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
@@ -106,6 +106,21 @@ void ListenerImpl::destroy()
 //*********************************
 // Operations
 //*********************************
+// fUML-specific Operations
+const std::shared_ptr<Bag<uml::Classifier>>& ListenerImpl::getTypes() const
+{
+	static std::shared_ptr<Bag<uml::Classifier>> types;
+
+	if(!types)
+	{
+		types.reset();
+		// Add type of self 'Listener' : Class
+		types->add(FoundationalModelLibrary::Common::CommonPackage::eInstance()->get_FoundationalModelLibrary_Common_Listener());
+	}
+
+	return types;
+}
+
 //**************************************
 // StructuralFeature Getter & Setter
 //**************************************

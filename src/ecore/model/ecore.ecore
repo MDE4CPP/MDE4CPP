@@ -39,7 +39,7 @@
     </eAnnotations>
     <eOperations name="isSuperTypeOf" eType="#//EBoolean">
       <eAnnotations source="http://tu-ilmenau.de/see/codegen">
-        <details key="body" value="if(someClass.get() == this)&#xA;&#x9;{&#xA;&#x9;&#x9;return true;&#xA;&#x9;}&#xA;&#x9;std::shared_ptr&lt; Bag&lt;ecore::EClass > > list = someClass->getEAllSuperTypes();&#xA;    for(const std::shared_ptr&lt; ecore::EClass> index: *list)&#xA;    {&#xA;&#x9;    if ((index).get()==this) return true;&#xA;    }&#xA;&#xA;    return false;"/>
+        <details key="body" value="if(someClass.get() == this)&#xA;&#x9;{&#xA;&#x9;&#x9;return true;&#xA;&#x9;}&#xA;&#x9;std::shared_ptr&lt; Bag&lt;ecore::EClass > > list = someClass->getEAllSuperTypes();&#xA;    for(const std::shared_ptr&lt;ecore::EClass>&amp; index: *list)&#xA;    {&#xA;&#x9;    if ((index).get()==this) return true;&#xA;    }&#xA;&#xA;    return false;"/>
         <details key="const"/>
       </eAnnotations>
       <eParameters name="someClass" eType="#//EClass"/>
@@ -59,14 +59,14 @@
     </eOperations>
     <eOperations name="getFeatureID" eType="#//EInt">
       <eAnnotations source="http://tu-ilmenau.de/see/codegen">
-        <details key="body" value="std::shared_ptr&lt;Bag&lt;EStructuralFeature > > eAllFeat = getEAllStructuralFeatures();&#xA;    int index = feature->getFeatureID();&#xA;    &#xA;    if(index != -1)&#xA;    {&#xA;        index = 0;&#xA;        for(const std::shared_ptr&lt;EStructuralFeature> iter: *eAllFeat)&#xA;        {&#xA;           if (feature == iter)&#xA;           {&#xA;               return index;&#xA;           }&#xA;           index++;&#xA;        }&#xA;    }&#xA;    return -1;"/>
+        <details key="body" value="std::shared_ptr&lt;Bag&lt;EStructuralFeature > > eAllFeat = getEAllStructuralFeatures();&#xA;    int index = feature->getFeatureID();&#xA;    &#xA;    if(index != -1)&#xA;    {&#xA;        index = 0;&#xA;        for(const std::shared_ptr&lt;EStructuralFeature>&amp; iter: *eAllFeat)&#xA;        {&#xA;           if (feature == iter)&#xA;           {&#xA;               return index;&#xA;           }&#xA;           index++;&#xA;        }&#xA;    }&#xA;    return -1;"/>
         <details key="const"/>
       </eAnnotations>
       <eParameters name="feature" eType="#//EStructuralFeature"/>
     </eOperations>
     <eOperations name="getEStructuralFeature" eType="#//EStructuralFeature">
       <eAnnotations source="http://tu-ilmenau.de/see/codegen">
-        <details key="body" value="    std::shared_ptr&lt;Bag&lt;EStructuralFeature > > eAllFeat = getEAllStructuralFeatures();&#xD;&#xA;    for(std::shared_ptr&lt;EStructuralFeature> f: *eAllFeat)&#xD;&#xA;    {&#xD;&#xA;        if(f->getName()==featureName)&#xD;&#xA;        {&#xD;&#xA;            return f;&#xD;&#xA;        }&#xD;&#xA;    }&#xD;&#xA;&#xD;&#xA;    return nullptr;"/>
+        <details key="body" value="    std::shared_ptr&lt;Bag&lt;EStructuralFeature > > eAllFeat = getEAllStructuralFeatures();&#xA;    for(const std::shared_ptr&lt;EStructuralFeature>&amp; f: *eAllFeat)&#xA;    {&#xA;        if(f->getName()==featureName)&#xA;        {&#xA;            return f;&#xA;        }&#xA;    }&#xA;&#xA;    return nullptr;"/>
         <details key="const"/>
       </eAnnotations>
       <eParameters name="featureName" eType="#//EString"/>
@@ -86,7 +86,7 @@
     </eOperations>
     <eOperations name="getOperationID" eType="#//EInt">
       <eAnnotations source="http://tu-ilmenau.de/see/codegen">
-        <details key="body" value="std::shared_ptr&lt; Bag&lt;ecore::EOperation> > eAllOps = getEAllOperations();&#xA;    int index = operation->getOperationID();&#xA;    &#xA;    if(index != -1)&#xA;    {&#xA;        index = 0;&#xA;        for(const std::shared_ptr&lt;ecore::EOperation>iter: *eAllOps)&#xA;        {&#xA;           if (operation == iter)&#xA;           {&#xA;               return index;&#xA;           }&#xA;           index++;&#xA;        }&#xA;    }&#xA;    return -1;"/>
+        <details key="body" value="std::shared_ptr&lt; Bag&lt;ecore::EOperation> > eAllOps = getEAllOperations();&#xA;    int index = operation->getOperationID();&#xA;    &#xA;    if(index != -1)&#xA;    {&#xA;        index = 0;&#xA;        for(const std::shared_ptr&lt;ecore::EOperation>&amp; iter: *eAllOps)&#xA;        {&#xA;           if (operation == iter)&#xA;           {&#xA;               return index;&#xA;           }&#xA;           index++;&#xA;        }&#xA;    }&#xA;    return -1;"/>
         <details key="const"/>
       </eAnnotations>
       <eParameters name="operation" eType="#//EOperation"/>
@@ -310,7 +310,7 @@
   <eClassifiers xsi:type="ecore:EClass" name="EModelElement" abstract="true" eSuperTypes="#//EObject">
     <eOperations name="getEAnnotation" eType="#//EAnnotation">
       <eAnnotations source="http://tu-ilmenau.de/see/codegen">
-        <details key="body" value="    for(std::shared_ptr&lt;EAnnotation> a : *m_eAnnotations)&#xD;&#xA;    {&#xD;&#xA;&#x9;    if(a->getSource()==source)&#xD;&#xA;&#x9;    {&#xD;&#xA;&#x9;&#x9;    return a;&#xD;&#xA;&#x9;    }&#xD;&#xA;    }&#xD;&#xA;    return std::shared_ptr&lt;ecore::EAnnotation>();"/>
+        <details key="body" value="    for(const std::shared_ptr&lt;EAnnotation>&amp; a : *m_eAnnotations)&#xA;    {&#xA;&#x9;    if(a->getSource()==source)&#xA;&#x9;    {&#xA;&#x9;&#x9;    return a;&#xA;&#x9;    }&#xA;    }&#xA;    return std::shared_ptr&lt;ecore::EAnnotation>();"/>
       </eAnnotations>
       <eParameters name="source" eType="#//EString"/>
     </eOperations>

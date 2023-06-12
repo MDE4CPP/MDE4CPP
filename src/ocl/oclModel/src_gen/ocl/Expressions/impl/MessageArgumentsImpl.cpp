@@ -289,13 +289,13 @@ bool MessageArgumentsImpl::eSet(int featureID,  const std::shared_ptr<Any>& newV
 					{
 						std::shared_ptr<Bag<ocl::Expressions::OclExpression>> _referredOclExpressions = getReferredOclExpressions();
 	
-						for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
+						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{
 							std::shared_ptr<ocl::Expressions::OclExpression> valueToAdd = std::dynamic_pointer_cast<ocl::Expressions::OclExpression>(anEObject);
 	
 							if (valueToAdd)
 							{
-								if(_referredOclExpressions->find(valueToAdd) == -1)
+								if(!(_referredOclExpressions->includes(valueToAdd)))
 								{
 									_referredOclExpressions->add(valueToAdd);
 								}

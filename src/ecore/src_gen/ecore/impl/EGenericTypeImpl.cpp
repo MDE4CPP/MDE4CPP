@@ -109,7 +109,7 @@ EGenericTypeImpl& EGenericTypeImpl::operator=(const EGenericTypeImpl & obj)
 		m_eTypeArguments.reset(new Bag<ecore::EGenericType>());
 		
 		
-		for(const std::shared_ptr<ecore::EGenericType> eTypeArgumentsindexElem: *eTypeArgumentsList) 
+		for(const std::shared_ptr<ecore::EGenericType>& eTypeArgumentsindexElem: *eTypeArgumentsList) 
 		{
 			std::shared_ptr<ecore::EGenericType> temp = std::dynamic_pointer_cast<ecore::EGenericType>((eTypeArgumentsindexElem)->copy());
 			m_eTypeArguments->push_back(temp);
@@ -582,13 +582,13 @@ bool EGenericTypeImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue
 					{
 						std::shared_ptr<Bag<ecore::EGenericType>> _eTypeArguments = getETypeArguments();
 	
-						for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
+						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{
 							std::shared_ptr<ecore::EGenericType> valueToAdd = std::dynamic_pointer_cast<ecore::EGenericType>(anEObject);
 	
 							if (valueToAdd)
 							{
-								if(_eTypeArguments->find(valueToAdd) == -1)
+								if(!(_eTypeArguments->includes(valueToAdd)))
 								{
 									_eTypeArguments->add(valueToAdd);
 								}

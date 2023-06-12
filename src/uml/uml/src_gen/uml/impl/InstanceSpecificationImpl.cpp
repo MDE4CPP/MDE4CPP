@@ -153,7 +153,7 @@ InstanceSpecificationImpl& InstanceSpecificationImpl::operator=(const InstanceSp
 			std::cout << "Initialising value Subset: " << "m_slot - Subset<uml::Slot, uml::Element >(getOwnedElement())" << std::endl;
 		#endif
 		
-		for(const std::shared_ptr<uml::Slot> slotindexElem: *slotList) 
+		for(const std::shared_ptr<uml::Slot>& slotindexElem: *slotList) 
 		{
 			std::shared_ptr<uml::Slot> temp = std::dynamic_pointer_cast<uml::Slot>((slotindexElem)->copy());
 			m_slot->push_back(temp);
@@ -507,13 +507,13 @@ bool InstanceSpecificationImpl::eSet(int featureID,  const std::shared_ptr<Any>&
 					{
 						std::shared_ptr<Bag<uml::Classifier>> _classifier = getClassifier();
 	
-						for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
+						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{
 							std::shared_ptr<uml::Classifier> valueToAdd = std::dynamic_pointer_cast<uml::Classifier>(anEObject);
 	
 							if (valueToAdd)
 							{
-								if(_classifier->find(valueToAdd) == -1)
+								if(!(_classifier->includes(valueToAdd)))
 								{
 									_classifier->add(valueToAdd);
 								}
@@ -552,13 +552,13 @@ bool InstanceSpecificationImpl::eSet(int featureID,  const std::shared_ptr<Any>&
 					{
 						std::shared_ptr<Bag<uml::Slot>> _slot = getSlot();
 	
-						for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
+						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{
 							std::shared_ptr<uml::Slot> valueToAdd = std::dynamic_pointer_cast<uml::Slot>(anEObject);
 	
 							if (valueToAdd)
 							{
-								if(_slot->find(valueToAdd) == -1)
+								if(!(_slot->includes(valueToAdd)))
 								{
 									_slot->add(valueToAdd);
 								}

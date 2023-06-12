@@ -45,26 +45,20 @@ SET(SOURCE_FILES
 	Common/impl/StatusImpl.cpp
 	
 	
-	# Package of FoundationalModelLibrary::BasicInputOutput
-	BasicInputOutput/impl/BasicInputOutputPackageImpl.cpp
-	# Factory of FoundationalModelLibrary::BasicInputOutput
-	BasicInputOutput/impl/BasicInputOutputFactoryImpl.cpp
-	# Contents of FoundationalModelLibrary::BasicInputOutput
-	BasicInputOutput/impl/ActiveChannelImpl.cpp
-	BasicInputOutput/impl/ChannelImpl.cpp
-	BasicInputOutput/impl/InputChannelImpl.cpp
-	BasicInputOutput/impl/OutputChannelImpl.cpp
-	BasicInputOutput/impl/StandardInputChannelImpl.cpp
-	BasicInputOutput/impl/StandardOutputChannelImpl.cpp
-	BasicInputOutput/impl/TextInputChannelImpl.cpp
-	BasicInputOutput/impl/TextOutputChannelImpl.cpp
-	
-	
 	# Package of FoundationalModelLibrary::PrimitiveBehaviors
 	PrimitiveBehaviors/impl/PrimitiveBehaviorsPackageImpl.cpp
 	# Factory of FoundationalModelLibrary::PrimitiveBehaviors
 	PrimitiveBehaviors/impl/PrimitiveBehaviorsFactoryImpl.cpp
 	# Contents of FoundationalModelLibrary::PrimitiveBehaviors
+	
+	# Package of FoundationalModelLibrary::PrimitiveBehaviors::IntegerFunctions
+	PrimitiveBehaviors/IntegerFunctions/impl/IntegerFunctionsPackageImpl.cpp
+	# Factory of FoundationalModelLibrary::PrimitiveBehaviors::IntegerFunctions
+	PrimitiveBehaviors/IntegerFunctions/impl/IntegerFunctionsFactoryImpl.cpp
+	# Global functions of FoundationalModelLibrary::PrimitiveBehaviors::IntegerFunctions
+	PrimitiveBehaviors/IntegerFunctions/_GlobalFunctions.cpp
+	# Contents of FoundationalModelLibrary::PrimitiveBehaviors::IntegerFunctions
+	
 	
 	# Package of FoundationalModelLibrary::PrimitiveBehaviors::UnlimitedNaturalFunctions
 	PrimitiveBehaviors/UnlimitedNaturalFunctions/impl/UnlimitedNaturalFunctionsPackageImpl.cpp
@@ -84,6 +78,15 @@ SET(SOURCE_FILES
 	# Contents of FoundationalModelLibrary::PrimitiveBehaviors::BooleanFunctions
 	
 	
+	# Package of FoundationalModelLibrary::PrimitiveBehaviors::StringFunctions
+	PrimitiveBehaviors/StringFunctions/impl/StringFunctionsPackageImpl.cpp
+	# Factory of FoundationalModelLibrary::PrimitiveBehaviors::StringFunctions
+	PrimitiveBehaviors/StringFunctions/impl/StringFunctionsFactoryImpl.cpp
+	# Global functions of FoundationalModelLibrary::PrimitiveBehaviors::StringFunctions
+	PrimitiveBehaviors/StringFunctions/_GlobalFunctions.cpp
+	# Contents of FoundationalModelLibrary::PrimitiveBehaviors::StringFunctions
+	
+	
 	# Package of FoundationalModelLibrary::PrimitiveBehaviors::RealFunctions
 	PrimitiveBehaviors/RealFunctions/impl/RealFunctionsPackageImpl.cpp
 	# Factory of FoundationalModelLibrary::PrimitiveBehaviors::RealFunctions
@@ -93,23 +96,20 @@ SET(SOURCE_FILES
 	# Contents of FoundationalModelLibrary::PrimitiveBehaviors::RealFunctions
 	
 	
-	# Package of FoundationalModelLibrary::PrimitiveBehaviors::IntegerFunctions
-	PrimitiveBehaviors/IntegerFunctions/impl/IntegerFunctionsPackageImpl.cpp
-	# Factory of FoundationalModelLibrary::PrimitiveBehaviors::IntegerFunctions
-	PrimitiveBehaviors/IntegerFunctions/impl/IntegerFunctionsFactoryImpl.cpp
-	# Global functions of FoundationalModelLibrary::PrimitiveBehaviors::IntegerFunctions
-	PrimitiveBehaviors/IntegerFunctions/_GlobalFunctions.cpp
-	# Contents of FoundationalModelLibrary::PrimitiveBehaviors::IntegerFunctions
 	
-	
-	# Package of FoundationalModelLibrary::PrimitiveBehaviors::StringFunctions
-	PrimitiveBehaviors/StringFunctions/impl/StringFunctionsPackageImpl.cpp
-	# Factory of FoundationalModelLibrary::PrimitiveBehaviors::StringFunctions
-	PrimitiveBehaviors/StringFunctions/impl/StringFunctionsFactoryImpl.cpp
-	# Global functions of FoundationalModelLibrary::PrimitiveBehaviors::StringFunctions
-	PrimitiveBehaviors/StringFunctions/_GlobalFunctions.cpp
-	# Contents of FoundationalModelLibrary::PrimitiveBehaviors::StringFunctions
-	
+	# Package of FoundationalModelLibrary::BasicInputOutput
+	BasicInputOutput/impl/BasicInputOutputPackageImpl.cpp
+	# Factory of FoundationalModelLibrary::BasicInputOutput
+	BasicInputOutput/impl/BasicInputOutputFactoryImpl.cpp
+	# Contents of FoundationalModelLibrary::BasicInputOutput
+	BasicInputOutput/impl/ActiveChannelImpl.cpp
+	BasicInputOutput/impl/ChannelImpl.cpp
+	BasicInputOutput/impl/InputChannelImpl.cpp
+	BasicInputOutput/impl/OutputChannelImpl.cpp
+	BasicInputOutput/impl/StandardInputChannelImpl.cpp
+	BasicInputOutput/impl/StandardOutputChannelImpl.cpp
+	BasicInputOutput/impl/TextInputChannelImpl.cpp
+	BasicInputOutput/impl/TextOutputChannelImpl.cpp
 	
 	
 	
@@ -135,6 +135,7 @@ IF(UNIX AND NOT APPLE)
 		FIND_LIBRARY(ECOREREFLECTION_DEBUG ecoreReflectiond.so ${MDE4CPP_HOME}/application/bin)
 		FIND_LIBRARY(PRIMITIVETYPESREFLECTION_DEBUG primitivetypesReflectiond.so ${MDE4CPP_HOME}/application/bin)
 		FIND_LIBRARY(UMLREFLECTION_DEBUG umlReflectiond.so ${MDE4CPP_HOME}/application/bin)
+		FIND_LIBRARY(FUML_DEBUG fUMLd.so ${MDE4CPP_HOME}/application/bin)
 		
 	ELSE()
 		FIND_LIBRARY(ECORE_RELEASE ecore.so ${MDE4CPP_HOME}/application/bin)
@@ -142,6 +143,7 @@ IF(UNIX AND NOT APPLE)
 		FIND_LIBRARY(ECOREREFLECTION_RELEASE ecoreReflection.so ${MDE4CPP_HOME}/application/bin)
 		FIND_LIBRARY(PRIMITIVETYPESREFLECTION_RELEASE primitivetypesReflection.so ${MDE4CPP_HOME}/application/bin)
 		FIND_LIBRARY(UMLREFLECTION_RELEASE umlReflection.so ${MDE4CPP_HOME}/application/bin)
+		FIND_LIBRARY(FUML_RELEASE fUML.so ${MDE4CPP_HOME}/application/bin)
 		
 	ENDIF()
 ELSEIF(APPLE)
@@ -151,6 +153,7 @@ ELSEIF(APPLE)
 		FIND_LIBRARY(ECOREREFLECTION_DEBUG ecoreReflectiond.dylib ${MDE4CPP_HOME}/application/bin)
 		FIND_LIBRARY(PRIMITIVETYPESREFLECTION_DEBUG primitivetypesReflectiond.dylib ${MDE4CPP_HOME}/application/bin)
 		FIND_LIBRARY(UMLREFLECTION_DEBUG umlReflectiond.dylib ${MDE4CPP_HOME}/application/bin)
+		FIND_LIBRARY(FUML_DEBUG fUMLd.dylib ${MDE4CPP_HOME}/application/bin)
 		
 	ELSE()
 		FIND_LIBRARY(ECORE_RELEASE ecore.dylib ${MDE4CPP_HOME}/application/bin)
@@ -158,6 +161,7 @@ ELSEIF(APPLE)
 		FIND_LIBRARY(ECOREREFLECTION_RELEASE ecoreReflection.dylib ${MDE4CPP_HOME}/application/bin)
 		FIND_LIBRARY(PRIMITIVETYPESREFLECTION_RELEASE primitivetypesReflection.dylib ${MDE4CPP_HOME}/application/bin)
 		FIND_LIBRARY(UMLREFLECTION_RELEASE umlReflection.dylib ${MDE4CPP_HOME}/application/bin)
+		FIND_LIBRARY(FUML_RELEASE fUML.dylib ${MDE4CPP_HOME}/application/bin)
 		
 	ENDIF()
 ELSE()
@@ -167,6 +171,7 @@ ELSE()
 		FIND_LIBRARY(ECOREREFLECTION_DEBUG ecoreReflectiond ${MDE4CPP_HOME}/application/lib)
 		FIND_LIBRARY(PRIMITIVETYPESREFLECTION_DEBUG primitivetypesReflectiond ${MDE4CPP_HOME}/application/lib)
 		FIND_LIBRARY(UMLREFLECTION_DEBUG umlReflectiond ${MDE4CPP_HOME}/application/lib)
+		FIND_LIBRARY(FUML_DEBUG fUMLd ${MDE4CPP_HOME}/application/lib)
 		
 	ELSE()
 		FIND_LIBRARY(ECORE_RELEASE ecore ${MDE4CPP_HOME}/application/lib)
@@ -174,6 +179,7 @@ ELSE()
 		FIND_LIBRARY(ECOREREFLECTION_RELEASE ecoreReflection ${MDE4CPP_HOME}/application/lib)
 		FIND_LIBRARY(PRIMITIVETYPESREFLECTION_RELEASE primitivetypesReflection ${MDE4CPP_HOME}/application/lib)
 		FIND_LIBRARY(UMLREFLECTION_RELEASE umlReflection ${MDE4CPP_HOME}/application/lib)
+		FIND_LIBRARY(FUML_RELEASE fUML ${MDE4CPP_HOME}/application/lib)
 		
 	ENDIF()
 ENDIF()
@@ -188,6 +194,7 @@ IF (CMAKE_BUILD_TYPE STREQUAL "Debug")
 		debug ${ECOREREFLECTION_DEBUG}
 		debug ${PRIMITIVETYPESREFLECTION_DEBUG}
 		debug ${UMLREFLECTION_DEBUG}
+		debug ${FUML_DEBUG}
 	)
 ELSE()
 	TARGET_LINK_LIBRARIES(${PROJECT_NAME}
@@ -196,6 +203,7 @@ ELSE()
 		optimized ${ECOREREFLECTION_RELEASE}
 		optimized ${PRIMITIVETYPESREFLECTION_RELEASE}
 		optimized ${UMLREFLECTION_RELEASE}
+		optimized ${FUML_RELEASE}
 	)
 ENDIF()
 

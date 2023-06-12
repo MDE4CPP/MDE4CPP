@@ -43,34 +43,34 @@ namespace PSCS::Semantics::Loci
 
 			// Begin Class CS_ExecutionFactory
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getCS_ExecutionFactory_Class() const ;
+			virtual const std::shared_ptr<ecore::EClass>& getCS_ExecutionFactory_Class() const ;
 			
 			
-			virtual std::shared_ptr<ecore::EReference> getCS_ExecutionFactory_Attribute_appliedProfiles() const ;
+			virtual const std::shared_ptr<ecore::EReference>& getCS_ExecutionFactory_Attribute_appliedProfiles() const ;
 			
-			virtual std::shared_ptr<ecore::EOperation> getCS_ExecutionFactory_Operation_getStereotypeApplication_Class_Element() const ;
-			virtual std::shared_ptr<ecore::EOperation> getCS_ExecutionFactory_Operation_getStereotypeClass_EString_EString() const ;
-			virtual std::shared_ptr<ecore::EOperation> getCS_ExecutionFactory_Operation_instantiateVisitor_Element() const ;
+			virtual const std::shared_ptr<ecore::EOperation>& getCS_ExecutionFactory_Operation_getStereotypeApplication_Class_Element() const ;
+			virtual const std::shared_ptr<ecore::EOperation>& getCS_ExecutionFactory_Operation_getStereotypeClass_EString_EString() const ;
+			virtual const std::shared_ptr<ecore::EOperation>& getCS_ExecutionFactory_Operation_instantiateVisitor_Element() const ;
 			
 			// End Class CS_ExecutionFactory
 
 			// Begin Class CS_Executor
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getCS_Executor_Class() const ;
+			virtual const std::shared_ptr<ecore::EClass>& getCS_Executor_Class() const ;
 			
 			
 			
-			virtual std::shared_ptr<ecore::EOperation> getCS_Executor_Operation_start_Class_ParameterValue() const ;
+			virtual const std::shared_ptr<ecore::EOperation>& getCS_Executor_Operation_start_Class_ParameterValue() const ;
 			
 			// End Class CS_Executor
 
 			// Begin Class CS_Locus
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getCS_Locus_Class() const ;
+			virtual const std::shared_ptr<ecore::EClass>& getCS_Locus_Class() const ;
 			
 			
 			
-			virtual std::shared_ptr<ecore::EOperation> getCS_Locus_Operation_instantiate_Class() const ;
+			virtual const std::shared_ptr<ecore::EOperation>& getCS_Locus_Operation_instantiate_Class() const ;
 			
 			// End Class CS_Locus
 

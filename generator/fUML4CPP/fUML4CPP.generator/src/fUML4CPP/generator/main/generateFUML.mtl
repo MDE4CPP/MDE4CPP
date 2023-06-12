@@ -54,11 +54,14 @@
 [import UML4CPP::generator::main::configuration::generateGradleFiles /]
 [comment import for model validation /]
 [import UML4CPP::generator::main::validation::validation /]
+[comment import for executable models /]
+[import UML4CPP::generator::main::model_execution::model_execution /]
 
 
 
 [template public generateFUML(aPackage : uml::Package)]
 [comment @main/]
+[setIsFUMLExecutable()/]
 [if (not aPackage.isDoNotGenerate())]
 	[aPackage.generateUML()/]
 	[if (aPackage.isPackageOnly())]

@@ -205,7 +205,7 @@ LoopExpImpl& LoopExpImpl::operator=(const LoopExpImpl & obj)
 		m_iterator.reset(new Bag<ocl::Expressions::OclExpression>());
 		
 		
-		for(const std::shared_ptr<ocl::Expressions::OclExpression> iteratorindexElem: *iteratorList) 
+		for(const std::shared_ptr<ocl::Expressions::OclExpression>& iteratorindexElem: *iteratorList) 
 		{
 			std::shared_ptr<ocl::Expressions::OclExpression> temp = std::dynamic_pointer_cast<ocl::Expressions::OclExpression>((iteratorindexElem)->copy());
 			m_iterator->push_back(temp);
@@ -648,13 +648,13 @@ bool LoopExpImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 					{
 						std::shared_ptr<Bag<ocl::Expressions::OclExpression>> _iterator = getIterator();
 	
-						for(const std::shared_ptr<ecore::EObject> anEObject: *eObjectList)
+						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{
 							std::shared_ptr<ocl::Expressions::OclExpression> valueToAdd = std::dynamic_pointer_cast<ocl::Expressions::OclExpression>(anEObject);
 	
 							if (valueToAdd)
 							{
-								if(_iterator->find(valueToAdd) == -1)
+								if(!(_iterator->includes(valueToAdd)))
 								{
 									_iterator->add(valueToAdd);
 								}

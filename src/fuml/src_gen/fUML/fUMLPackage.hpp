@@ -14,20 +14,25 @@
 
 namespace ecore 
 {
-	class EReference;
-	class EAnnotation;
-	class EAttribute;
-	class EDataType;
-	class EGenericType;
-	class EClass;
-	class EStringToStringMapEntry;
-	class EOperation;
-	class EPackage;
 	class EParameter;
+	class EDataType;
+	class EStringToStringMapEntry;
+	class EGenericType;
+	class EReference;
+	class EOperation;
+	class EAttribute;
+	class EAnnotation;
+	class EPackage;
+	class EClass;
 }
 
 namespace fUML 
 {
+	namespace MDE4CPP_Extensions 
+	{
+		class MDE4CPP_ExtensionsPackage;
+	}
+
 	namespace Semantics 
 	{
 		class SemanticsPackage;
@@ -60,6 +65,7 @@ namespace fUML
 			
 			
 
+			virtual std::shared_ptr<fUML::MDE4CPP_Extensions::MDE4CPP_ExtensionsPackage> getMDE4CPP_Extensions_Package() const = 0;
 			virtual std::shared_ptr<fUML::Semantics::SemanticsPackage> getSemantics_Package() const = 0;
 			
 
