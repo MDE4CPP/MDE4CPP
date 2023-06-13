@@ -186,16 +186,16 @@ std::shared_ptr<Any> [packageName/]::evaluateSpecification(std::shared_ptr<uml::
 [/let][else]
 #include "fUML/Semantics/Loci/FirstChoiceStrategy.hpp"
 [/if]
+[if (aPackage.hasGetNextEventStrategy())][let getNextEventStrategy : Class = aPackage.getGetNextEventStrategy()]
+#include "[getNextEventStrategy.getNearestPackage().generateNamespacePath(true)/]Exec/[getNextEventStrategy.name.toUpperFirst()/].hpp"
+[/let][else]
+#include "fUML/Semantics/CommonBehavior/FIFOGetNextEventStrategy.hpp"
+[/if]
 [comment] TODO later
 [if (aPackage.hasDispatchStrategy())][let dispatchStrategy : Class = aPackage.getDispatchStrategy()]
 #include "[dispatchStrategy.getNearestPackage().generateNamespacePath(true)/]Exec/[dispatchStrategy.name.toUpperFirst()/].hpp"
 [/let][else]
 #include "PSCS/Semantics/StructuredClassifiers/CS_DispatchOperationOfInterfaceStrategy.hpp"
-[/if]
-[if (aPackage.hasGetNextEventStrategy())][let getNextEventStrategy : Class = aPackage.getGetNextEventStrategy()]
-#include "[getNextEventStrategy.getNearestPackage().generateNamespacePath(true)/]Exec/[getNextEventStrategy.name.toUpperFirst()/].hpp"
-[/let][else]
-#include "fUML/Semantics/CommonBehavior/FIFOGetNextEventStrategy.hpp"
 [/if]
 [if (aPackage.hasCS_RequestPropagationStrategy())][let cS_RequestPropagationStrategy : Class = aPackage.getCS_RequestPropagationStrategy()]
 #include "[cS_RequestPropagationStrategy.getNearestPackage().generateNamespacePath(true)/]Exec/[cS_RequestPropagationStrategy.name.toUpperFirst()/].hpp"
@@ -261,18 +261,18 @@ m_factory->setLocus(m_locus);
 //Assign FirstChoiceStrategy to execution factory
 m_factory->assignStrategy(fUML::Semantics::Loci::LociFactory::eInstance()->createFirstChoiceStrategy());
 [/if]
+[if (aPackage.hasGetNextEventStrategy())]
+[aPackage.getGetNextEventStrategy().generateStrategyAssignment()/]
+[else]
+//assign FIFOGetNextEventStrategy to execution factory
+m_factory->assignStrategy(fUML::Semantics::CommonBehavior::CommonBehaviorFactory::eInstance()->createFIFOGetNextEventStrategy());
+[/if]
 [comment] TODO: later
 [if (aPackage.hasDispatchStrategy())]
 [aPackage.getDispatchStrategy().generateStrategyAssignment()/]
 [else]
 //assign CS_DispatchOperationOfInterfaceStrategy to execution factory
 m_factory->assignStrategy(PSCS::Semantics::StructuredClassifiers::StructuredClassifiersFactory::eInstance()->createCS_DispatchOperationOfInterfaceStrategy());
-[/if]
-[if (aPackage.hasGetNextEventStrategy())]
-[aPackage.getGetNextEventStrategy().generateStrategyAssignment()/]
-[else]
-//assign FIFOGetNextEventStrategy to execution factory
-m_factory->assignStrategy(fUML::Semantics::CommonBehavior::CommonBehaviorFactory::eInstance()->createFIFOGetNextEventStrategy());
 [/if]
 [if (aPackage.hasCS_RequestPropagationStrategy())]
 [aPackage.getCS_RequestPropagationStrategy().generateStrategyAssignment()/]
