@@ -1152,7 +1152,7 @@
       <eClassifiers xsi:type="ecore:EClass" name="FIFOGetNextEventStrategy" eSuperTypes="#//Semantics/CommonBehavior/GetNextEventStrategy">
         <eOperations name="retrieveNextEvent" ordered="false" lowerBound="1" eType="#//Semantics/CommonBehavior/EventOccurrence">
           <eAnnotations source="http://tu-ilmenau.de/see/codegen">
-            <details key="body" value="// Get the first event from the given event pool. The event is removed from the pool.&#xA;&#xA;const std::shared_ptr&lt;fUML::Semantics::CommonBehavior::EventOccurrence>&amp; eventOccurrence = objectActivation->getEventPool()->at(0);&#xA;objectActivation->getEventPool()->erase(eventOccurrence);&#xA;return eventOccurrence;"/>
+            <details key="body" value="// Get the first event from the given event pool. The event is removed from the pool.&#xA;&#xA;std::shared_ptr&lt;fUML::Semantics::CommonBehavior::EventOccurrence> eventOccurrence = objectActivation->getEventPool()->at(0);&#xA;objectActivation->getEventPool()->erase(eventOccurrence);&#xA;return eventOccurrence;"/>
           </eAnnotations>
           <eParameters name="objectActivation" ordered="false" eType="#//Semantics/CommonBehavior/ObjectActivation"/>
         </eOperations>
