@@ -58,11 +58,13 @@
 #include "uml/Element.hpp"
 #include "fUML/Semantics/Loci/ExecutionFactory.hpp"
 #include "fUML/Semantics/Loci/Executor.hpp"
+#include "fUML/MDE4CPP_Extensions/FUML_Object.hpp"
 #include "uml/Signal.hpp"
 //Factories and Package includes
 #include "fUML/Semantics/SemanticsPackage.hpp"
 #include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/Loci/LociPackage.hpp"
+#include "fUML/MDE4CPP_Extensions/MDE4CPP_ExtensionsPackage.hpp"
 #include "uml/umlPackage.hpp"
 
 using namespace fUML::Semantics::Loci;
@@ -209,7 +211,7 @@ bool LocusImpl::conforms(const std::shared_ptr<uml::Classifier>& type, const std
 	//end of body
 }
 
-std::shared_ptr<uml::Element> LocusImpl::instantiate(const std::shared_ptr<uml::Class>& type)
+std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_Object> LocusImpl::instantiate(const std::shared_ptr<uml::Class>& type)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -783,7 +785,7 @@ std::shared_ptr<Any> LocusImpl::eInvoke(int operationID, const std::shared_ptr<B
 			result = eAny(this->conforms(incoming_param_type,incoming_param_classifier), 0, false);
 			break;
 		}
-		// fUML::Semantics::Loci::Locus::instantiate(uml::Class) : uml::Element: 928635219
+		// fUML::Semantics::Loci::Locus::instantiate(uml::Class) : fUML::MDE4CPP_Extensions::FUML_Object: 4171359853
 		case LociPackage::LOCUS_OPERATION_INSTANTIATE_CLASS:
 		{
 			//Retrieve input parameter 'type'
@@ -812,7 +814,7 @@ std::shared_ptr<Any> LocusImpl::eInvoke(int operationID, const std::shared_ptr<B
 				}
 			}
 		
-			result = eEcoreAny(this->instantiate(incoming_param_type), uml::umlPackage::ELEMENT_CLASS);
+			result = eEcoreAny(this->instantiate(incoming_param_type), fUML::MDE4CPP_Extensions::MDE4CPP_ExtensionsPackage::FUML_OBJECT_CLASS);
 			break;
 		}
 		// fUML::Semantics::Loci::Locus::instantiate(uml::Signal) : uml::Element: 1112226127

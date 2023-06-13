@@ -37,6 +37,10 @@ namespace fUML::Semantics::Loci
 	class ExecutionFactory;
 	class Executor;
 }
+namespace fUML::MDE4CPP_Extensions 
+{
+	class FUML_Object;
+}
 namespace uml 
 {
 	class Class;
@@ -73,7 +77,7 @@ namespace PSCS::Semantics::Loci
 			//*********************************
 			// Operations
 			//*********************************
-			virtual std::shared_ptr<uml::Element> instantiate(const std::shared_ptr<uml::Class>& type) = 0;
+			virtual std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_Object> instantiate(const std::shared_ptr<uml::Class>& type) = 0;
 
 			//*********************************
 			// Attribute Getters & Setters

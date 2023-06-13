@@ -19,6 +19,7 @@
 //depending model packages
 
 #include "fUML/Semantics/CommonBehavior/CommonBehaviorPackage.hpp"
+#include "fUML/MDE4CPP_Extensions/MDE4CPP_ExtensionsPackage.hpp"
 #include "fUML/Semantics/Values/ValuesPackage.hpp"
 #include "ecore/ecorePackage.hpp"
 #include "fUML/fUMLPackage.hpp"
@@ -676,7 +677,7 @@ void LociPackageImpl::initializeLocusContent()
 	}
 	
 	m_locus_Operation_instantiate_Class->setName("instantiate");
-	m_locus_Operation_instantiate_Class->setEType(uml::umlPackage::eInstance()->getElement_Class());
+	m_locus_Operation_instantiate_Class->setEType(fUML::MDE4CPP_Extensions::MDE4CPP_ExtensionsPackage::eInstance()->getFUML_Object_Class());
 	m_locus_Operation_instantiate_Class->setLowerBound(1);
 	m_locus_Operation_instantiate_Class->setUpperBound(1);
 	m_locus_Operation_instantiate_Class->setUnique(true);
