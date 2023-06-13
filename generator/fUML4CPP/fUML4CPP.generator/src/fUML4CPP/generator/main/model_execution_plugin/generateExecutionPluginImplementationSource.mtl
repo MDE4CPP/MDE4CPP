@@ -142,7 +142,7 @@ std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> [packageNa
 	return this->m_executor->execute(behavior, context, inputs);
 }
 
-std::shared_ptr<uml::Element> [packageName/]::instantiateClass(std::shared_ptr<uml::Class> type)
+std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_Object> [packageName/]::instantiateClass(std::shared_ptr<uml::Class> type)
 {
 	if(!m_IsInitialized)
 	{
@@ -171,6 +171,7 @@ std::shared_ptr<Any> [packageName/]::evaluateSpecification(std::shared_ptr<uml::
 
 [template private generateMainIncludes(aPackage : Package)]
 //fUML includes
+#include "fUML/MDE4CPP_Extensions/FUML_Object.hpp"
 #include "fUML/Semantics/Loci/LociFactory.hpp"
 #include "fUML/Semantics/Loci/ExecutionFactory.hpp"
 #include "fUML/Semantics/CommonBehavior/CommonBehaviorFactory.hpp"
