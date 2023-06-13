@@ -1717,7 +1717,7 @@
       </eClassifiers>
       <eClassifiers xsi:type="ecore:EClass" name="CreateObjectActionActivation" eSuperTypes="#//Semantics/Actions/ActionActivation">
         <eAnnotations source="http://tu-ilmenau.de/see/codegen">
-          <details key="implIncludes" value="#include &quot;uml/UMLAny.hpp&quot;&#xA;#include &quot;uml/CreateObjectAction.hpp&quot;&#xA;#include &quot;uml/Class.hpp&quot;&#xA;//#include &quot;fUML/Semantics/StructuredClassifiers/Reference.hpp&quot;&#xA;#include &quot;fUML/Semantics/StructuredClassifiers/StructuredClassifiersFactory.hpp&quot;&#xA;#include &quot;fUML/Semantics/Loci/Locus.hpp&quot;"/>
+          <details key="implIncludes" value="#include &quot;uml/UMLAny.hpp&quot;&#xA;#include &quot;uml/CreateObjectAction.hpp&quot;&#xA;#include &quot;uml/Class.hpp&quot;&#xA;//#include &quot;fUML/Semantics/StructuredClassifiers/Reference.hpp&quot;&#xA;#include &quot;fUML/Semantics/StructuredClassifiers/StructuredClassifiersFactory.hpp&quot;&#xA;#include &quot;fUML/Semantics/Loci/Locus.hpp&quot;&#xA;#include &quot;fUML/MDE4CPP_Extensions/FUML_Object.hpp&quot;"/>
         </eAnnotations>
         <eOperations name="doAction">
           <eAnnotations source="http://tu-ilmenau.de/see/codegen">
@@ -3250,7 +3250,7 @@
       </eClassifiers>
       <eClassifiers xsi:type="ecore:EClass" name="Executor">
         <eAnnotations source="http://tu-ilmenau.de/see/codegen">
-          <details key="implIncludes" value="//#include &quot;fUML/Semantics/Values/Evaluation.hpp&quot;&#xA;#include &quot;fUML/Semantics/CommonBehavior/Execution.hpp&quot;&#xA;#include &quot;fUML/Semantics/Loci/ExecutionFactory.hpp&quot;&#xA;#include &quot;fUML/fUMLFactory.hpp&quot;&#xA;//#include &quot;fUML/Semantics/StructuredClassifiers/Object.hpp&quot;&#xA;#include &quot;fUML/Semantics/StructuredClassifiers/StructuredClassifiersFactory.hpp&quot;"/>
+          <details key="implIncludes" value="//#include &quot;fUML/Semantics/Values/Evaluation.hpp&quot;&#xA;#include &quot;fUML/Semantics/CommonBehavior/Execution.hpp&quot;&#xA;#include &quot;fUML/Semantics/Loci/ExecutionFactory.hpp&quot;&#xA;#include &quot;fUML/fUMLFactory.hpp&quot;&#xA;//#include &quot;fUML/Semantics/StructuredClassifiers/Object.hpp&quot;&#xA;#include &quot;fUML/Semantics/StructuredClassifiers/StructuredClassifiersFactory.hpp&quot;&#xA;#include &quot;fUML/MDE4CPP_Extensions/FUML_Object.hpp&quot;"/>
         </eAnnotations>
         <eOperations name="evaluate" ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject">
           <eAnnotations source="http://tu-ilmenau.de/see/codegen">
@@ -3325,7 +3325,7 @@
           </eAnnotations>
           <eParameters name="value" ordered="false" lowerBound="1" eType="ecore:EClass http://www.eclipse.org/uml2/5.0.0/UML#//Element"/>
         </eOperations>
-        <eOperations name="instantiate" ordered="false" lowerBound="1" eType="ecore:EClass http://www.eclipse.org/uml2/5.0.0/UML#//Element">
+        <eOperations name="instantiate" ordered="false" lowerBound="1" eType="#//MDE4CPP_Extensions/FUML_Object">
           <eAnnotations source="http://tu-ilmenau.de/see/codegen">
             <details key="body" value="/* &#xA;&#x9;std::shared_ptr&lt;fUML::Semantics::StructuredClassifiers::Object> object = nullptr;&#xA;&#x9;std::shared_ptr&lt;uml::Behavior> behavior = std::dynamic_pointer_cast&lt;uml::Behavior>(type);&#xA;   &#x9; if(behavior != nullptr)&#xA;   &#x9; {&#xA;    &#x9;&#x9;std::shared_ptr&lt;fUML::Semantics::StructuredClassifiers::Object>  context = nullptr;&#xA;        &#x9;object = std::dynamic_pointer_cast&lt;fUML::Semantics::StructuredClassifiers::Object>(this->getFactory()->createExecution(behavior, nullptr));&#xA;    &#x9;}&#xA;   &#x9; else&#xA;   &#x9; {&#xA;        &#x9;object = fUML::Semantics::StructuredClassifiers::StructuredClassifiersFactory::eInstance()->createObject();&#xA;       &#x9;object->getTypes()->push_back(type);&#xA;       &#x9;object->createFeatureValues();&#xA;        &#x9;this->add(object);&#xA;    &#x9;}&#xA;    &#xA;    return object;&#xA;*/&#xA;&#xA;/*&#xA; * This method is implemented in every model-specific locus&#xA; */&#xA;&#xA;return nullptr;"/>
           </eAnnotations>
