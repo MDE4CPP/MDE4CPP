@@ -239,5 +239,5 @@ std::shared_ptr<Listener> ListenerImpl::getThisListenerPtr()
 void ListenerImpl::setThisListenerPtr(std::weak_ptr<Listener> thisListenerPtr)
 {
 	m_thisListenerPtr = thisListenerPtr;
-	setThisElementPtr(thisListenerPtr);
+	setThisFUML_ObjectPtr(thisListenerPtr);
 }

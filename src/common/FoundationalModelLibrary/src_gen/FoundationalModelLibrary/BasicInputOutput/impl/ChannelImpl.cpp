@@ -239,5 +239,5 @@ std::shared_ptr<Channel> ChannelImpl::getThisChannelPtr()
 void ChannelImpl::setThisChannelPtr(std::weak_ptr<Channel> thisChannelPtr)
 {
 	m_thisChannelPtr = thisChannelPtr;
-	setThisElementPtr(thisChannelPtr);
+	setThisFUML_ObjectPtr(thisChannelPtr);
 }

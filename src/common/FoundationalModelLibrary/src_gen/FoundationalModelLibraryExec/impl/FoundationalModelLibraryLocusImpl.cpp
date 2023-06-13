@@ -17,11 +17,8 @@
 
 #include "FoundationalModelLibrary/BasicInputOutput/BasicInputOutputFactory.hpp"
 #include "FoundationalModelLibrary/BasicInputOutput/BasicInputOutputPackage.hpp"
-#include "FoundationalModelLibrary/Common/CommonFactory.hpp"
-#include "FoundationalModelLibrary/Common/CommonPackage.hpp"
 #include "FoundationalModelLibrary/BasicInputOutput/StandardInputChannel.hpp"
 #include "FoundationalModelLibrary/BasicInputOutput/StandardOutputChannel.hpp"
-#include "FoundationalModelLibrary/Common/Status.hpp"
 
 using namespace FoundationalModelLibrary;
 
@@ -39,7 +36,7 @@ FoundationalModelLibraryLocusImpl::~FoundationalModelLibraryLocusImpl()
 #endif
 }
 
-std::shared_ptr<uml::Element> FoundationalModelLibraryLocusImpl::instantiate(const std::shared_ptr<uml::Class>&  type)
+std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_Object> FoundationalModelLibraryLocusImpl::instantiate(const std::shared_ptr<uml::Class>&  type)
 {
 	std::shared_ptr<uml::Package> typePackage = type->getPackage().lock();
 
@@ -56,17 +53,6 @@ std::shared_ptr<uml::Element> FoundationalModelLibraryLocusImpl::instantiate(con
 			case FoundationalModelLibrary::BasicInputOutput::BasicInputOutputPackage::STANDARDOUTPUTCHANNEL_CLASS:
 			{
 				std::shared_ptr<FoundationalModelLibrary::BasicInputOutput::StandardOutputChannel> instance = FoundationalModelLibrary::BasicInputOutput::BasicInputOutputFactory::eInstance()->createStandardOutputChannel();
-				return instance;
-			}
-		}
-	}
-	else if(typePackage == FoundationalModelLibrary::Common::CommonPackage::eInstance())
-	{	
-		switch(type->_getID())
-		{
-			case FoundationalModelLibrary::Common::CommonPackage::STATUS_DATATYPE:
-			{
-				std::shared_ptr<FoundationalModelLibrary::Common::Status> instance = FoundationalModelLibrary::Common::CommonFactory::eInstance()->createStatus();
 				return instance;
 			}
 		}
