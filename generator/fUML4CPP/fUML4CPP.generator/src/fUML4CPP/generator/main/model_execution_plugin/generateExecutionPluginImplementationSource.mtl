@@ -152,7 +152,7 @@ std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_Object> [packageName/]::instantia
 	return this->m_locus->instantiate(type);
 }
 
-std::shared_ptr<uml::Element> [packageName/]::instantiateSignal(std::shared_ptr<uml::Signal> type)
+std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_SignalInstance> [packageName/]::instantiateSignal(std::shared_ptr<uml::Signal> type)
 {
 	if(!m_IsInitialized)
 	{
