@@ -120,6 +120,7 @@ std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_Object> [packageName/]LocusImpl::
 			case [packageNamespace/]::[classPackage.myNamespaceName()/]Package::[aClass.getMemberName().toUpperCase()/]:
 			{
 				std::shared_ptr<[classPackage.generateNamespace(false)/]::[className/]> instance = [packageNamespace/]::[classPackage.myNamespaceName()/]Factory::eInstance()->create[aClass.name.toUpperFirst()/]();
+				this->add(instance);
 				return instance;
 			}
 			[/let]
