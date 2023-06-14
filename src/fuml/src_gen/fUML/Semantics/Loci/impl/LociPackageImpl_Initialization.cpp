@@ -696,7 +696,7 @@ void LociPackageImpl::initializeLocusContent()
 	}
 	
 	m_locus_Operation_instantiate_Signal->setName("instantiate");
-	m_locus_Operation_instantiate_Signal->setEType(uml::umlPackage::eInstance()->getElement_Class());
+	m_locus_Operation_instantiate_Signal->setEType(fUML::MDE4CPP_Extensions::MDE4CPP_ExtensionsPackage::eInstance()->getFUML_SignalInstance_Class());
 	m_locus_Operation_instantiate_Signal->setLowerBound(1);
 	m_locus_Operation_instantiate_Signal->setUpperBound(1);
 	m_locus_Operation_instantiate_Signal->setUnique(true);

@@ -245,7 +245,7 @@ std::shared_ptr<Any> TokenSetImpl::eGet(int featureID, bool resolve, bool coreTy
 	switch(featureID)
 	{
 		case fUML::Semantics::Activities::ActivitiesPackage::TOKENSET_ATTRIBUTE_TOKENS:
-			return eEcoreContainerAny(getTokens(),fUML::Semantics::Activities::ActivitiesPackage::TOKEN_CLASS); //1160
+			return eEcoreContainerAny(getTokens(),fUML::Semantics::Activities::ActivitiesPackage::TOKEN_CLASS); //1170
 	}
 	return ecore::EObjectImpl::eGet(featureID, resolve, coreType);
 }
@@ -255,7 +255,7 @@ bool TokenSetImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case fUML::Semantics::Activities::ActivitiesPackage::TOKENSET_ATTRIBUTE_TOKENS:
-			return getTokens() != nullptr; //1160
+			return getTokens() != nullptr; //1170
 	}
 	return ecore::EObjectImpl::internalEIsSet(featureID);
 }

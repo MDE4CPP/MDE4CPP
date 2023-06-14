@@ -41,12 +41,12 @@ namespace fUML::Semantics::Loci
 namespace fUML::MDE4CPP_Extensions 
 {
 	class FUML_Object;
+	class FUML_SignalInstance;
 }
 namespace uml 
 {
 	class Class;
 	class Classifier;
-	class Element;
 	class Signal;
 }
 
@@ -84,7 +84,7 @@ namespace fUML::Semantics::Loci
 			virtual void assignFactory(const std::shared_ptr<fUML::Semantics::Loci::ExecutionFactory>& factory) = 0;
 			virtual bool conforms(const std::shared_ptr<uml::Classifier>& type, const std::shared_ptr<uml::Classifier>& classifier) = 0;
 			virtual std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_Object> instantiate(const std::shared_ptr<uml::Class>& type) = 0;
-			virtual std::shared_ptr<uml::Element> instantiate(const std::shared_ptr<uml::Signal>& type) = 0;
+			virtual std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_SignalInstance> instantiate(const std::shared_ptr<uml::Signal>& type) = 0;
 			virtual void remove(const std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_Object>& value) = 0;
 			virtual std::shared_ptr<Bag<fUML::MDE4CPP_Extensions::FUML_Object>> retrieveExtent(const std::shared_ptr<uml::Classifier>& classifier) = 0;
 

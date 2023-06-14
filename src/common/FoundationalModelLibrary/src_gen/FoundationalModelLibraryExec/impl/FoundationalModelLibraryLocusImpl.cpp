@@ -66,7 +66,7 @@ std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_Object> FoundationalModelLibraryL
 	//return PSCS::Semantics::Loci::CS_LocusImpl::instantiate(type);
 }
 
-std::shared_ptr<uml::Element> FoundationalModelLibraryLocusImpl::instantiate(const std::shared_ptr<uml::Signal>&  type)
+std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_SignalInstance> FoundationalModelLibraryLocusImpl::instantiate(const std::shared_ptr<uml::Signal>&  type)
 {
 	return fUML::Semantics::Loci::LocusImpl::instantiate(type);
 }

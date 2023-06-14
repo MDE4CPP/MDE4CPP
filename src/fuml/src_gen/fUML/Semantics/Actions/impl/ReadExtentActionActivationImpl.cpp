@@ -332,7 +332,7 @@ std::shared_ptr<Any> ReadExtentActionActivationImpl::eGet(int featureID, bool re
 	switch(featureID)
 	{
 		case fUML::Semantics::Actions::ActionsPackage::READEXTENTACTIONACTIVATION_ATTRIBUTE_READEXTENTACTION:
-			return eAny(getReadExtentAction(),uml::umlPackage::READEXTENTACTION_CLASS,false); //9011
+			return eAny(getReadExtentAction(),uml::umlPackage::READEXTENTACTION_CLASS,false); //9111
 	}
 	return ActionActivationImpl::eGet(featureID, resolve, coreType);
 }
@@ -342,7 +342,7 @@ bool ReadExtentActionActivationImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case fUML::Semantics::Actions::ActionsPackage::READEXTENTACTIONACTIVATION_ATTRIBUTE_READEXTENTACTION:
-			return getReadExtentAction() != nullptr; //9011
+			return getReadExtentAction() != nullptr; //9111
 	}
 	return ActionActivationImpl::internalEIsSet(featureID);
 }
@@ -362,7 +362,7 @@ bool ReadExtentActionActivationImpl::eSet(int featureID,  const std::shared_ptr<
 					std::shared_ptr<uml::ReadExtentAction> _readExtentAction = std::dynamic_pointer_cast<uml::ReadExtentAction>(eObject);
 					if(_readExtentAction)
 					{
-						setReadExtentAction(_readExtentAction); //9011
+						setReadExtentAction(_readExtentAction); //9111
 					}
 					else
 					{

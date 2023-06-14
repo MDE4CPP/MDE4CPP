@@ -55,10 +55,10 @@
 #include "fUML/Semantics/Loci/LociFactory.hpp"
 #include "uml/Class.hpp"
 #include "uml/Classifier.hpp"
-#include "uml/Element.hpp"
 #include "fUML/Semantics/Loci/ExecutionFactory.hpp"
 #include "fUML/Semantics/Loci/Executor.hpp"
 #include "fUML/MDE4CPP_Extensions/FUML_Object.hpp"
+#include "fUML/MDE4CPP_Extensions/FUML_SignalInstance.hpp"
 #include "uml/Signal.hpp"
 //Factories and Package includes
 #include "fUML/fUMLPackage.hpp"
@@ -241,7 +241,7 @@ return nullptr;
 	//end of body
 }
 
-std::shared_ptr<uml::Element> LocusImpl::instantiate(const std::shared_ptr<uml::Signal>& type)
+std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_SignalInstance> LocusImpl::instantiate(const std::shared_ptr<uml::Signal>& type)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -467,11 +467,11 @@ std::shared_ptr<Any> LocusImpl::eGet(int featureID, bool resolve, bool coreType)
 	switch(featureID)
 	{
 		case fUML::Semantics::Loci::LociPackage::LOCUS_ATTRIBUTE_EXECUTOR:
-			return eAny(getExecutor(),fUML::Semantics::Loci::LociPackage::EXECUTOR_CLASS,false); //770
+			return eAny(getExecutor(),fUML::Semantics::Loci::LociPackage::EXECUTOR_CLASS,false); //780
 		case fUML::Semantics::Loci::LociPackage::LOCUS_ATTRIBUTE_EXTENSIONALVALUES:
-			return eEcoreContainerAny(getExtensionalValues(),fUML::MDE4CPP_Extensions::MDE4CPP_ExtensionsPackage::FUML_OBJECT_CLASS); //772
+			return eEcoreContainerAny(getExtensionalValues(),fUML::MDE4CPP_Extensions::MDE4CPP_ExtensionsPackage::FUML_OBJECT_CLASS); //782
 		case fUML::Semantics::Loci::LociPackage::LOCUS_ATTRIBUTE_FACTORY:
-			return eAny(getFactory(),fUML::Semantics::Loci::LociPackage::EXECUTIONFACTORY_CLASS,false); //771
+			return eAny(getFactory(),fUML::Semantics::Loci::LociPackage::EXECUTIONFACTORY_CLASS,false); //781
 	}
 	return ecore::EObjectImpl::eGet(featureID, resolve, coreType);
 }
@@ -481,11 +481,11 @@ bool LocusImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case fUML::Semantics::Loci::LociPackage::LOCUS_ATTRIBUTE_EXECUTOR:
-			return getExecutor() != nullptr; //770
+			return getExecutor() != nullptr; //780
 		case fUML::Semantics::Loci::LociPackage::LOCUS_ATTRIBUTE_EXTENSIONALVALUES:
-			return getExtensionalValues() != nullptr; //772
+			return getExtensionalValues() != nullptr; //782
 		case fUML::Semantics::Loci::LociPackage::LOCUS_ATTRIBUTE_FACTORY:
-			return getFactory() != nullptr; //771
+			return getFactory() != nullptr; //781
 	}
 	return ecore::EObjectImpl::internalEIsSet(featureID);
 }
@@ -505,7 +505,7 @@ bool LocusImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 					std::shared_ptr<fUML::Semantics::Loci::Executor> _executor = std::dynamic_pointer_cast<fUML::Semantics::Loci::Executor>(eObject);
 					if(_executor)
 					{
-						setExecutor(_executor); //770
+						setExecutor(_executor); //780
 					}
 					else
 					{
@@ -581,7 +581,7 @@ bool LocusImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 					std::shared_ptr<fUML::Semantics::Loci::ExecutionFactory> _factory = std::dynamic_pointer_cast<fUML::Semantics::Loci::ExecutionFactory>(eObject);
 					if(_factory)
 					{
-						setFactory(_factory); //771
+						setFactory(_factory); //781
 					}
 					else
 					{
@@ -801,7 +801,7 @@ std::shared_ptr<Any> LocusImpl::eInvoke(int operationID, const std::shared_ptr<B
 			result = eEcoreAny(this->instantiate(incoming_param_type), fUML::MDE4CPP_Extensions::MDE4CPP_ExtensionsPackage::FUML_OBJECT_CLASS);
 			break;
 		}
-		// fUML::Semantics::Loci::Locus::instantiate(uml::Signal) : uml::Element: 1112226127
+		// fUML::Semantics::Loci::Locus::instantiate(uml::Signal) : fUML::MDE4CPP_Extensions::FUML_SignalInstance: 3144434753
 		case LociPackage::LOCUS_OPERATION_INSTANTIATE_SIGNAL:
 		{
 			//Retrieve input parameter 'type'
@@ -830,7 +830,7 @@ std::shared_ptr<Any> LocusImpl::eInvoke(int operationID, const std::shared_ptr<B
 				}
 			}
 		
-			result = eEcoreAny(this->instantiate(incoming_param_type), uml::umlPackage::ELEMENT_CLASS);
+			result = eEcoreAny(this->instantiate(incoming_param_type), fUML::MDE4CPP_Extensions::MDE4CPP_ExtensionsPackage::FUML_SIGNALINSTANCE_CLASS);
 			break;
 		}
 		// fUML::Semantics::Loci::Locus::remove(fUML::MDE4CPP_Extensions::FUML_Object): 3213175405

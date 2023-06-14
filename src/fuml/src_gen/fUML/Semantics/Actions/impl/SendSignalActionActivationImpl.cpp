@@ -44,6 +44,7 @@
 //#include "fUML/Semantics/SimpleClassifiers/SimpleClassifiersFactory.hpp"
 #include "fUML/Semantics/CommonBehavior/CommonBehaviorFactory.hpp"
 #include "fUML/Semantics/Loci/Locus.hpp"
+#include "fUML/MDE4CPP_Extensions/FUML_SignalInstance.hpp"
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
@@ -180,7 +181,7 @@ void SendSignalActionActivationImpl::doAction()
 
  		const std::shared_ptr<uml::Signal>& signal = action->getSignal();
 
-		std::shared_ptr<uml::Element> signalInstance = this->getExecutionLocus()->instantiate(signal);	
+		std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_SignalInstance> signalInstance = this->getExecutionLocus()->instantiate(signal);	
 
  		const std::shared_ptr<Bag<uml::Property>>& attributes = signal->getOwnedAttribute();
  		const std::shared_ptr<Bag<uml::InputPin>>& argumentPins = action->getArgument();
@@ -210,7 +211,7 @@ void SendSignalActionActivationImpl::doAction()
 
 
 		std::shared_ptr<fUML::Semantics::CommonBehavior::SignalEventOccurrence> signalEventOccurrence (fUML::Semantics::CommonBehavior::CommonBehaviorFactory::eInstance()->createSignalEventOccurrence());		
-		signalEventOccurrence->setSignalInstance( signalInstance);
+		signalEventOccurrence->setSignalInstance(signalInstance);
 		signalEventOccurrence->sendTo(target);
 	}
 	//end of body
@@ -395,7 +396,7 @@ std::shared_ptr<Any> SendSignalActionActivationImpl::eGet(int featureID, bool re
 	switch(featureID)
 	{
 		case fUML::Semantics::Actions::ActionsPackage::SENDSIGNALACTIONACTIVATION_ATTRIBUTE_SENDSIGNALACTION:
-			return eAny(getSendSignalAction(),uml::umlPackage::SENDSIGNALACTION_CLASS,false); //10511
+			return eAny(getSendSignalAction(),uml::umlPackage::SENDSIGNALACTION_CLASS,false); //10611
 	}
 	return InvocationActionActivationImpl::eGet(featureID, resolve, coreType);
 }
@@ -405,7 +406,7 @@ bool SendSignalActionActivationImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case fUML::Semantics::Actions::ActionsPackage::SENDSIGNALACTIONACTIVATION_ATTRIBUTE_SENDSIGNALACTION:
-			return getSendSignalAction() != nullptr; //10511
+			return getSendSignalAction() != nullptr; //10611
 	}
 	return InvocationActionActivationImpl::internalEIsSet(featureID);
 }
@@ -425,7 +426,7 @@ bool SendSignalActionActivationImpl::eSet(int featureID,  const std::shared_ptr<
 					std::shared_ptr<uml::SendSignalAction> _sendSignalAction = std::dynamic_pointer_cast<uml::SendSignalAction>(eObject);
 					if(_sendSignalAction)
 					{
-						setSendSignalAction(_sendSignalAction); //10511
+						setSendSignalAction(_sendSignalAction); //10611
 					}
 					else
 					{

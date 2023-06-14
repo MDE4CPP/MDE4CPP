@@ -4,8 +4,8 @@
 //*
 //********************************************************************
 
-#ifndef FUML_SEMANTICS_COMMONBEHAVIOR_SIGNALEVENTOCCURRENCE_HPP
-#define FUML_SEMANTICS_COMMONBEHAVIOR_SIGNALEVENTOCCURRENCE_HPP
+#ifndef FUML_MDE4CPP_EXTENSIONS_FUML_SIGNALINSTANCE_HPP
+#define FUML_MDE4CPP_EXTENSIONS_FUML_SIGNALINSTANCE_HPP
 
 
 #include <memory>
@@ -32,53 +32,47 @@ namespace fUML
 }
 
 //Forward Declaration for used types 
-namespace fUML::Semantics::CommonBehavior 
+namespace ecore 
 {
-	class ParameterValue;
-}
-namespace fUML::MDE4CPP_Extensions 
-{
-	class FUML_SignalInstance;
+	class EAnnotation;
 }
 namespace uml 
 {
-	class Element;
-	class Event;
-	class Trigger;
+	class Comment;
+	class Signal;
 }
 
 // namespace macro header include
 #include "fUML/fUML.hpp"
 
 // base class includes
-#include "fUML/Semantics/CommonBehavior/EventOccurrence.hpp"
+#include "uml/Element.hpp"
 
 
 
 
 //*********************************
-namespace fUML::Semantics::CommonBehavior 
+namespace fUML::MDE4CPP_Extensions 
 {
 	
-	class FUML_API SignalEventOccurrence : virtual public EventOccurrence
+	class FUML_API FUML_SignalInstance : virtual public uml::Element
 	{
 		public:
- 			SignalEventOccurrence(const SignalEventOccurrence &) {}
+ 			FUML_SignalInstance(const FUML_SignalInstance &) {}
 
 		protected:
-			SignalEventOccurrence(){}
+			FUML_SignalInstance(){}
 
 		public:
 			virtual std::shared_ptr<ecore::EObject> copy() const = 0;
 
 			//destructor
-			virtual ~SignalEventOccurrence() {}
+			virtual ~FUML_SignalInstance() {}
 
 			//*********************************
 			// Operations
 			//*********************************
-			virtual std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> getParameterValues(const std::shared_ptr<uml::Event>& event) = 0;
-			virtual bool match(const std::shared_ptr<uml::Trigger>& trigger) = 0;
+			virtual const std::shared_ptr<uml::Signal>& getType() const = 0;
 
 			//*********************************
 			// Attribute Getters & Setters
@@ -87,8 +81,6 @@ namespace fUML::Semantics::CommonBehavior
 			//*********************************
 			// Reference Getters & Setters
 			//*********************************
-			virtual const std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_SignalInstance>& getSignalInstance() const = 0;
-			virtual void setSignalInstance(const std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_SignalInstance>&) = 0;
 
 			//*********************************
 			// Union Reference Getters
@@ -114,7 +106,6 @@ namespace fUML::Semantics::CommonBehavior
 			//*********************************
 			// Reference Members
 			//*********************************
-			std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_SignalInstance> m_signalInstance;
 	};
 }
-#endif /* end of include guard: FUML_SEMANTICS_COMMONBEHAVIOR_SIGNALEVENTOCCURRENCE_HPP */
+#endif /* end of include guard: FUML_MDE4CPP_EXTENSIONS_FUML_SIGNALINSTANCE_HPP */

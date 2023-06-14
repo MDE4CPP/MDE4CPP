@@ -367,7 +367,7 @@ std::shared_ptr<Any> ReadIsClassifiedObjectActionActivationImpl::eGet(int featur
 	switch(featureID)
 	{
 		case fUML::Semantics::Actions::ActionsPackage::READISCLASSIFIEDOBJECTACTIONACTIVATION_ATTRIBUTE_READISCLASSIFIEDOBJECTACTION:
-			return eAny(getReadIsClassifiedObjectAction(),uml::umlPackage::READISCLASSIFIEDOBJECTACTION_CLASS,false); //9111
+			return eAny(getReadIsClassifiedObjectAction(),uml::umlPackage::READISCLASSIFIEDOBJECTACTION_CLASS,false); //9211
 	}
 	return ActionActivationImpl::eGet(featureID, resolve, coreType);
 }
@@ -377,7 +377,7 @@ bool ReadIsClassifiedObjectActionActivationImpl::internalEIsSet(int featureID) c
 	switch(featureID)
 	{
 		case fUML::Semantics::Actions::ActionsPackage::READISCLASSIFIEDOBJECTACTIONACTIVATION_ATTRIBUTE_READISCLASSIFIEDOBJECTACTION:
-			return getReadIsClassifiedObjectAction() != nullptr; //9111
+			return getReadIsClassifiedObjectAction() != nullptr; //9211
 	}
 	return ActionActivationImpl::internalEIsSet(featureID);
 }
@@ -397,7 +397,7 @@ bool ReadIsClassifiedObjectActionActivationImpl::eSet(int featureID,  const std:
 					std::shared_ptr<uml::ReadIsClassifiedObjectAction> _readIsClassifiedObjectAction = std::dynamic_pointer_cast<uml::ReadIsClassifiedObjectAction>(eObject);
 					if(_readIsClassifiedObjectAction)
 					{
-						setReadIsClassifiedObjectAction(_readIsClassifiedObjectAction); //9111
+						setReadIsClassifiedObjectAction(_readIsClassifiedObjectAction); //9211
 					}
 					else
 					{

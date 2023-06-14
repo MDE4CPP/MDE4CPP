@@ -1054,7 +1054,7 @@ void CommonBehaviorPackageImpl::initializeSignalEventOccurrenceContent()
 	 * EReferences
 	 */
 	m_signalEventOccurrence_Attribute_signalInstance->setName("signalInstance");
-	m_signalEventOccurrence_Attribute_signalInstance->setEType(uml::umlPackage::eInstance()->getElement_Class());
+	m_signalEventOccurrence_Attribute_signalInstance->setEType(fUML::MDE4CPP_Extensions::MDE4CPP_ExtensionsPackage::eInstance()->getFUML_SignalInstance_Class());
 	m_signalEventOccurrence_Attribute_signalInstance->setLowerBound(1);
 	m_signalEventOccurrence_Attribute_signalInstance->setUpperBound(1);
 	m_signalEventOccurrence_Attribute_signalInstance->setTransient(false);

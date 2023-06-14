@@ -201,7 +201,7 @@ std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_Object> FoundationalModelLibraryE
 	return this->m_locus->instantiate(type);
 }
 
-std::shared_ptr<uml::Element> FoundationalModelLibraryExecPluginImpl::instantiateSignal(std::shared_ptr<uml::Signal> type)
+std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_SignalInstance> FoundationalModelLibraryExecPluginImpl::instantiateSignal(std::shared_ptr<uml::Signal> type)
 {
 	if(!m_IsInitialized)
 	{

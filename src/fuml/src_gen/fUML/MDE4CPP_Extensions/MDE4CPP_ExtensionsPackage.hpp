@@ -26,6 +26,7 @@ namespace ecore
 namespace fUML::MDE4CPP_Extensions 
 {
 	class FUML_Object;
+	class FUML_SignalInstance;
 }
  
 namespace fUML::MDE4CPP_Extensions 
@@ -81,6 +82,25 @@ namespace fUML::MDE4CPP_Extensions
 			virtual const std::shared_ptr<ecore::EOperation>& getFUML_Object_Operation_unregister_EventAccepter() const = 0;
 			
 			// End Class FUML_Object
+
+
+			// Begin Class FUML_SignalInstance
+			//Class and Feature IDs 
+			static const unsigned long FUML_SIGNALINSTANCE_CLASS = 1484913340;
+			static const unsigned int FUML_SIGNALINSTANCE_CLASS_FEATURE_COUNT = 4;
+			static const unsigned int FUML_SIGNALINSTANCE_CLASS_OPERATION_COUNT = 38;
+			
+			
+			static const unsigned long FUML_SIGNALINSTANCE_OPERATION_GETTYPE = 486596182;
+			
+			//Class and Feature Getter
+			virtual const std::shared_ptr<ecore::EClass>& getFUML_SignalInstance_Class() const = 0;
+			
+			
+			
+			virtual const std::shared_ptr<ecore::EOperation>& getFUML_SignalInstance_Operation_getType() const = 0;
+			
+			// End Class FUML_SignalInstance
 
 			
 			

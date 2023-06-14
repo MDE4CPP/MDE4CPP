@@ -231,7 +231,7 @@ std::shared_ptr<Any> ValuesImpl::eGet(int featureID, bool resolve, bool coreType
 	switch(featureID)
 	{
 		case fUML::Semantics::Actions::ActionsPackage::VALUES_ATTRIBUTE_VALUES:
-			return eAny(getValues(),ecore::ecorePackage::EJAVAOBJECT_CLASS,true); //1200
+			return eAny(getValues(),ecore::ecorePackage::EJAVAOBJECT_CLASS,true); //1210
 	}
 	return ecore::EObjectImpl::eGet(featureID, resolve, coreType);
 }
@@ -241,7 +241,7 @@ bool ValuesImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case fUML::Semantics::Actions::ActionsPackage::VALUES_ATTRIBUTE_VALUES:
-			return getValues() != nullptr; //1200
+			return getValues() != nullptr; //1210
 	}
 	return ecore::EObjectImpl::internalEIsSet(featureID);
 }

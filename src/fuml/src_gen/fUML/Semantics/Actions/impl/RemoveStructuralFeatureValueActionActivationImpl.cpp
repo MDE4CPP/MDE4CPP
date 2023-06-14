@@ -376,7 +376,7 @@ std::shared_ptr<Any> RemoveStructuralFeatureValueActionActivationImpl::eGet(int 
 	switch(featureID)
 	{
 		case fUML::Semantics::Actions::ActionsPackage::REMOVESTRUCTURALFEATUREVALUEACTIONACTIVATION_ATTRIBUTE_REMOVESTRUCTURALFEATUREVALUEACTION:
-			return eAny(getRemoveStructuralFeatureValueAction(),uml::umlPackage::REMOVESTRUCTURALFEATUREVALUEACTION_CLASS,false); //10011
+			return eAny(getRemoveStructuralFeatureValueAction(),uml::umlPackage::REMOVESTRUCTURALFEATUREVALUEACTION_CLASS,false); //10111
 	}
 	return WriteStructuralFeatureActionActivationImpl::eGet(featureID, resolve, coreType);
 }
@@ -386,7 +386,7 @@ bool RemoveStructuralFeatureValueActionActivationImpl::internalEIsSet(int featur
 	switch(featureID)
 	{
 		case fUML::Semantics::Actions::ActionsPackage::REMOVESTRUCTURALFEATUREVALUEACTIONACTIVATION_ATTRIBUTE_REMOVESTRUCTURALFEATUREVALUEACTION:
-			return getRemoveStructuralFeatureValueAction() != nullptr; //10011
+			return getRemoveStructuralFeatureValueAction() != nullptr; //10111
 	}
 	return WriteStructuralFeatureActionActivationImpl::internalEIsSet(featureID);
 }
@@ -406,7 +406,7 @@ bool RemoveStructuralFeatureValueActionActivationImpl::eSet(int featureID,  cons
 					std::shared_ptr<uml::RemoveStructuralFeatureValueAction> _removeStructuralFeatureValueAction = std::dynamic_pointer_cast<uml::RemoveStructuralFeatureValueAction>(eObject);
 					if(_removeStructuralFeatureValueAction)
 					{
-						setRemoveStructuralFeatureValueAction(_removeStructuralFeatureValueAction); //10011
+						setRemoveStructuralFeatureValueAction(_removeStructuralFeatureValueAction); //10111
 					}
 					else
 					{

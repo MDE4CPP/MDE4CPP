@@ -209,7 +209,7 @@ void ObjectTokenImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XL
 		if ( iter != attr_list.end() )
 		{
 			// TODO this attribute has a non handle type
-			std::cout << "| ERROR    | " << __PRETTY_FUNCTION__ << " handle type of 'value'" << " org.eclipse.emf.ecore.impl.EDataTypeImpl@64524dd (name: EJavaObject) (instanceClassName: java.lang.Object) (serializable: true)" << std::endl; 
+			std::cout << "| ERROR    | " << __PRETTY_FUNCTION__ << " handle type of 'value'" << " org.eclipse.emf.ecore.impl.EDataTypeImpl@70f822e (name: EJavaObject) (instanceClassName: java.lang.Object) (serializable: true)" << std::endl; 
 			std::shared_ptr<Any> value; 			this->setValue(value);
 		}
 	}
@@ -271,7 +271,7 @@ std::shared_ptr<Any> ObjectTokenImpl::eGet(int featureID, bool resolve, bool cor
 	switch(featureID)
 	{
 		case fUML::Semantics::Activities::ActivitiesPackage::OBJECTTOKEN_ATTRIBUTE_VALUE:
-			return eAny(getValue(),ecore::ecorePackage::EJAVAOBJECT_CLASS,false); //832
+			return eAny(getValue(),ecore::ecorePackage::EJAVAOBJECT_CLASS,false); //842
 	}
 	return TokenImpl::eGet(featureID, resolve, coreType);
 }
@@ -281,7 +281,7 @@ bool ObjectTokenImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case fUML::Semantics::Activities::ActivitiesPackage::OBJECTTOKEN_ATTRIBUTE_VALUE:
-			return getValue() != nullptr; //832
+			return getValue() != nullptr; //842
 	}
 	return TokenImpl::internalEIsSet(featureID);
 }
@@ -295,7 +295,7 @@ bool ObjectTokenImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 			try
 			{
 				std::shared_ptr<Any> _value = newValue->get<std::shared_ptr<Any>>();
-				setValue(_value); //832
+				setValue(_value); //842
 			}
 			catch(...)
 			{

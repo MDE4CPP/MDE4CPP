@@ -16,6 +16,7 @@
 
 namespace MDE4CPP_Extensions 
 {	class FUML_Object;
+	class FUML_SignalInstance;
 }
 
 namespace fUML::MDE4CPP_Extensions 
@@ -38,6 +39,10 @@ namespace fUML::MDE4CPP_Extensions
 			virtual std::shared_ptr<ecore::EObject> create(std::shared_ptr<ecore::EClass> _class, std::shared_ptr<EObject> _container=nullptr, const int referenceID = -1) const;
 
 			//Creator functions
+			 virtual std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_SignalInstance> createFUML_SignalInstance(const int metaElementID = MDE4CPP_ExtensionsPackage::FUML_SIGNALINSTANCE_CLASS) const ;
+			 //Add as contained object
+			 virtual std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_SignalInstance> createFUML_SignalInstance_as_source_in_DirectedRelationship(std::shared_ptr<uml::DirectedRelationship> par_DirectedRelationship, const int metaElementID = MDE4CPP_ExtensionsPackage::FUML_SIGNALINSTANCE_CLASS) const ;
+			 virtual std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_SignalInstance> createFUML_SignalInstance_as_target_in_DirectedRelationship(std::shared_ptr<uml::DirectedRelationship> par_DirectedRelationship, const int metaElementID = MDE4CPP_ExtensionsPackage::FUML_SIGNALINSTANCE_CLASS) const ;
 			 
 
 		private:

@@ -4,8 +4,8 @@
 //*
 //********************************************************************
 
-#ifndef FUML_SEMANTICS_LOCI_LOCUSLOCUSIMPL_HPP
-#define FUML_SEMANTICS_LOCI_LOCUSLOCUSIMPL_HPP
+#ifndef FUML_MDE4CPP_EXTENSIONS_FUML_SIGNALINSTANCEFUML_SIGNALINSTANCEIMPL_HPP
+#define FUML_MDE4CPP_EXTENSIONS_FUML_SIGNALINSTANCEFUML_SIGNALINSTANCEIMPL_HPP
 
 //*********************************
 // generated Includes
@@ -14,45 +14,36 @@
 #include "fUML/fUML.hpp" 
 
 // model includes
-#include "../Locus.hpp"
+#include "../FUML_SignalInstance.hpp"
 
-#include "fUML/Semantics/Loci/impl/LociFactoryImpl.hpp"
-
-#include "ecore/impl/EModelElementImpl.hpp"
+#include "fUML/MDE4CPP_Extensions/impl/MDE4CPP_ExtensionsFactoryImpl.hpp"
+#include "uml/impl/ElementImpl.hpp"
 
 //*********************************
-namespace fUML::Semantics::Loci 
+namespace fUML::MDE4CPP_Extensions 
 {
-	class FUML_API LocusImpl : virtual public ecore::EModelElementImpl,
-virtual public Locus 
+	class FUML_API FUML_SignalInstanceImpl : virtual public uml::ElementImpl, virtual public FUML_SignalInstance 
 	{
 		public: 
-			LocusImpl(const LocusImpl & obj);
+			FUML_SignalInstanceImpl(const FUML_SignalInstanceImpl & obj);
 			virtual std::shared_ptr<ecore::EObject> copy() const;
-			LocusImpl& operator=(LocusImpl const&); 
+			FUML_SignalInstanceImpl& operator=(FUML_SignalInstanceImpl const&); 
 
 		protected:
-			friend class fUML::Semantics::Loci::LociFactoryImpl;
-			LocusImpl();
-			virtual std::shared_ptr<fUML::Semantics::Loci::Locus> getThisLocusPtr() const;
-			virtual void setThisLocusPtr(std::weak_ptr<fUML::Semantics::Loci::Locus> thisLocusPtr);
+			friend class fUML::MDE4CPP_Extensions::MDE4CPP_ExtensionsFactoryImpl;
+			FUML_SignalInstanceImpl();
+			virtual std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_SignalInstance> getThisFUML_SignalInstancePtr() const;
+			virtual void setThisFUML_SignalInstancePtr(std::weak_ptr<fUML::MDE4CPP_Extensions::FUML_SignalInstance> thisFUML_SignalInstancePtr);
 
 
 		public:
 			//destructor
-			virtual ~LocusImpl();
+			virtual ~FUML_SignalInstanceImpl();
 			
 			//*********************************
 			// Operations
 			//*********************************
-			virtual void add(const std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_Object>& value) ;
-			virtual void assignExecutor(const std::shared_ptr<fUML::Semantics::Loci::Executor>& executor) ;
-			virtual void assignFactory(const std::shared_ptr<fUML::Semantics::Loci::ExecutionFactory>& factory) ;
-			virtual bool conforms(const std::shared_ptr<uml::Classifier>& type, const std::shared_ptr<uml::Classifier>& classifier) ;
-			virtual std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_Object> instantiate(const std::shared_ptr<uml::Class>& type) ;
-			virtual std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_SignalInstance> instantiate(const std::shared_ptr<uml::Signal>& type) ;
-			virtual void remove(const std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_Object>& value) ;
-			virtual std::shared_ptr<Bag<fUML::MDE4CPP_Extensions::FUML_Object>> retrieveExtent(const std::shared_ptr<uml::Classifier>& classifier) ;
+			virtual const std::shared_ptr<uml::Signal>& getType() const ;
 			
 			//*********************************
 			// Attribute Getters & Setters
@@ -61,11 +52,6 @@ virtual public Locus
 			//*********************************
 			// Reference Getters & Setters
 			//*********************************
-			virtual const std::shared_ptr<fUML::Semantics::Loci::Executor>& getExecutor() const ;
-			virtual void setExecutor(const std::shared_ptr<fUML::Semantics::Loci::Executor>&) ;
-			virtual const std::shared_ptr<Bag<fUML::MDE4CPP_Extensions::FUML_Object>>& getExtensionalValues() const ;
-			virtual const std::shared_ptr<fUML::Semantics::Loci::ExecutionFactory>& getFactory() const ;
-			virtual void setFactory(const std::shared_ptr<fUML::Semantics::Loci::ExecutionFactory>&) ;
 			
 			//*********************************
 			// Union Reference Getters
@@ -102,7 +88,7 @@ virtual public Locus
 			virtual std::shared_ptr<Any> eInvoke(int operationID,const std::shared_ptr<Bag<Any>>& arguments) ;
 
 		private:
-			std::weak_ptr<fUML::Semantics::Loci::Locus> m_thisLocusPtr;
+			std::weak_ptr<fUML::MDE4CPP_Extensions::FUML_SignalInstance> m_thisFUML_SignalInstancePtr;
 	};
 }
-#endif /* end of include guard: FUML_SEMANTICS_LOCI_LOCUSLOCUSIMPL_HPP */
+#endif /* end of include guard: FUML_MDE4CPP_EXTENSIONS_FUML_SIGNALINSTANCEFUML_SIGNALINSTANCEIMPL_HPP */

@@ -362,10 +362,10 @@ std::shared_ptr<Any> PinActivationImpl::eGet(int featureID, bool resolve, bool c
 		case fUML::Semantics::Actions::ActionsPackage::PINACTIVATION_ATTRIBUTE_ACTIONACTIVATION:
 		{
 			std::shared_ptr<ecore::EObject> returnValue=getActionActivation().lock();
-			return eEcoreAny(returnValue,fUML::Semantics::Actions::ActionsPackage::ACTIONACTIVATION_CLASS); //887
+			return eEcoreAny(returnValue,fUML::Semantics::Actions::ActionsPackage::ACTIONACTIVATION_CLASS); //897
 		}
 		case fUML::Semantics::Actions::ActionsPackage::PINACTIVATION_ATTRIBUTE_PIN:
-			return eAny(getPin(),uml::umlPackage::PIN_CLASS,false); //888
+			return eAny(getPin(),uml::umlPackage::PIN_CLASS,false); //898
 	}
 	return fUML::Semantics::Activities::ObjectNodeActivationImpl::eGet(featureID, resolve, coreType);
 }
@@ -375,9 +375,9 @@ bool PinActivationImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case fUML::Semantics::Actions::ActionsPackage::PINACTIVATION_ATTRIBUTE_ACTIONACTIVATION:
-			return getActionActivation().lock() != nullptr; //887
+			return getActionActivation().lock() != nullptr; //897
 		case fUML::Semantics::Actions::ActionsPackage::PINACTIVATION_ATTRIBUTE_PIN:
-			return getPin() != nullptr; //888
+			return getPin() != nullptr; //898
 	}
 	return fUML::Semantics::Activities::ObjectNodeActivationImpl::internalEIsSet(featureID);
 }
@@ -397,7 +397,7 @@ bool PinActivationImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValu
 					std::shared_ptr<fUML::Semantics::Actions::ActionActivation> _actionActivation = std::dynamic_pointer_cast<fUML::Semantics::Actions::ActionActivation>(eObject);
 					if(_actionActivation)
 					{
-						setActionActivation(_actionActivation); //887
+						setActionActivation(_actionActivation); //897
 					}
 					else
 					{
@@ -428,7 +428,7 @@ bool PinActivationImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValu
 					std::shared_ptr<uml::Pin> _pin = std::dynamic_pointer_cast<uml::Pin>(eObject);
 					if(_pin)
 					{
-						setPin(_pin); //888
+						setPin(_pin); //898
 					}
 					else
 					{

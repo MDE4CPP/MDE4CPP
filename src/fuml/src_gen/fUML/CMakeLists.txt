@@ -116,6 +116,7 @@ SET(SOURCE_FILES
 	Semantics/Actions/impl/ExpansionRegionActivationImpl.cpp
 	Semantics/CommonBehavior/impl/FIFOGetNextEventStrategyImpl.cpp
 	MDE4CPP_Extensions/impl/FUML_ObjectImpl.cpp
+	MDE4CPP_Extensions/impl/FUML_SignalInstanceImpl.cpp
 	Semantics/Loci/impl/FirstChoiceStrategyImpl.cpp
 	Semantics/Activities/impl/FlowFinalNodeActivationImpl.cpp
 	Semantics/Activities/impl/ForkNodeActivationImpl.cpp

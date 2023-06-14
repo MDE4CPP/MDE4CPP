@@ -43,6 +43,7 @@
 //#include "fUML/Semantics/StructuredClassifiers/Object.hpp"
 #include "fUML/Semantics/Actions/AcceptEventActionEventAccepter.hpp"
 #include "fUML/MDE4CPP_Extensions/FUML_Object.hpp"
+#include "fUML/MDE4CPP_Extensions/FUML_SignalInstance.hpp"
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence

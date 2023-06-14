@@ -116,3 +116,18 @@ const std::shared_ptr<ecore::EOperation>& fUML::MDE4CPP_Extensions::MDE4CPP_Exte
 
 // End Class FUML_Object
 
+// Begin Class FUML_SignalInstance
+const std::shared_ptr<ecore::EClass>& fUML::MDE4CPP_Extensions::MDE4CPP_ExtensionsPackageImpl::getFUML_SignalInstance_Class() const
+{
+	return m_fUML_SignalInstance_Class;
+}
+
+
+
+const std::shared_ptr<ecore::EOperation>& fUML::MDE4CPP_Extensions::MDE4CPP_ExtensionsPackageImpl::getFUML_SignalInstance_Operation_getType() const
+{
+	return m_fUML_SignalInstance_Operation_getType;
+}
+
+// End Class FUML_SignalInstance
+
