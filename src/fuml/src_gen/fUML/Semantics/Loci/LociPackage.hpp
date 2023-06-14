@@ -14,14 +14,14 @@
 
 namespace ecore 
 {
+	class EStringToStringMapEntry;
+	class EAnnotation;
+	class EReference;
+	class EGenericType;
+	class EOperation;
+	class EClass;
 	class EParameter;
 	class EDataType;
-	class EStringToStringMapEntry;
-	class EGenericType;
-	class EReference;
-	class EOperation;
-	class EAnnotation;
-	class EClass;
 }
 
 namespace fUML::Semantics::Loci 
@@ -169,14 +169,14 @@ namespace fUML::Semantics::Loci
 			static const unsigned long LOCUS_ATTRIBUTE_EXTENSIONALVALUES = 1315349633;
 			static const unsigned long LOCUS_ATTRIBUTE_FACTORY = 897667860;
 			
-			static const unsigned long LOCUS_OPERATION_ADD_ELEMENT = 2336178890;
+			static const unsigned long LOCUS_OPERATION_ADD_FUML_OBJECT = 2307480936;
 			static const unsigned long LOCUS_OPERATION_ASSIGNEXECUTOR_EXECUTOR = 4071294562;
 			static const unsigned long LOCUS_OPERATION_ASSIGNFACTORY_EXECUTIONFACTORY = 2681202388;
 			static const unsigned long LOCUS_OPERATION_CONFORMS_CLASSIFIER_CLASSIFIER = 2253046160;
 			static const unsigned long LOCUS_OPERATION_INSTANTIATE_CLASS = 4171359853;
 			static const unsigned long LOCUS_OPERATION_INSTANTIATE_SIGNAL = 1112226127;
-			static const unsigned long LOCUS_OPERATION_REMOVE_ELEMENT = 2186013543;
-			static const unsigned long LOCUS_OPERATION_RETRIEVEEXTENT_CLASSIFIER = 844948954;
+			static const unsigned long LOCUS_OPERATION_REMOVE_FUML_OBJECT = 3213175405;
+			static const unsigned long LOCUS_OPERATION_RETRIEVEEXTENT_CLASSIFIER = 404857052;
 			
 			//Class and Feature Getter
 			virtual const std::shared_ptr<ecore::EClass>& getLocus_Class() const = 0;
@@ -186,13 +186,13 @@ namespace fUML::Semantics::Loci
 			virtual const std::shared_ptr<ecore::EReference>& getLocus_Attribute_extensionalValues() const = 0;
 			virtual const std::shared_ptr<ecore::EReference>& getLocus_Attribute_factory() const = 0;
 			
-			virtual const std::shared_ptr<ecore::EOperation>& getLocus_Operation_add_Element() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getLocus_Operation_add_FUML_Object() const = 0;
 			virtual const std::shared_ptr<ecore::EOperation>& getLocus_Operation_assignExecutor_Executor() const = 0;
 			virtual const std::shared_ptr<ecore::EOperation>& getLocus_Operation_assignFactory_ExecutionFactory() const = 0;
 			virtual const std::shared_ptr<ecore::EOperation>& getLocus_Operation_conforms_Classifier_Classifier() const = 0;
 			virtual const std::shared_ptr<ecore::EOperation>& getLocus_Operation_instantiate_Class() const = 0;
 			virtual const std::shared_ptr<ecore::EOperation>& getLocus_Operation_instantiate_Signal() const = 0;
-			virtual const std::shared_ptr<ecore::EOperation>& getLocus_Operation_remove_Element() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getLocus_Operation_remove_FUML_Object() const = 0;
 			virtual const std::shared_ptr<ecore::EOperation>& getLocus_Operation_retrieveExtent_Classifier() const = 0;
 			
 			// End Class Locus

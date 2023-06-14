@@ -51,7 +51,7 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "uml/umlFactory.hpp"
+#include "fUML/MDE4CPP_Extensions/MDE4CPP_ExtensionsFactory.hpp"
 #include "fUML/Semantics/Loci/LociFactory.hpp"
 #include "uml/Class.hpp"
 #include "uml/Classifier.hpp"
@@ -61,8 +61,8 @@
 #include "fUML/MDE4CPP_Extensions/FUML_Object.hpp"
 #include "uml/Signal.hpp"
 //Factories and Package includes
-#include "fUML/Semantics/SemanticsPackage.hpp"
 #include "fUML/fUMLPackage.hpp"
+#include "fUML/Semantics/SemanticsPackage.hpp"
 #include "fUML/Semantics/Loci/LociPackage.hpp"
 #include "fUML/MDE4CPP_Extensions/MDE4CPP_ExtensionsPackage.hpp"
 #include "uml/umlPackage.hpp"
@@ -122,15 +122,15 @@ LocusImpl& LocusImpl::operator=(const LocusImpl & obj)
 	}
 
 	//clone reference 'extensionalValues'
-	std::shared_ptr<Bag<uml::Element>> extensionalValuesList = obj.getExtensionalValues();
+	std::shared_ptr<Bag<fUML::MDE4CPP_Extensions::FUML_Object>> extensionalValuesList = obj.getExtensionalValues();
 	if(extensionalValuesList)
 	{
-		m_extensionalValues.reset(new Bag<uml::Element>());
+		m_extensionalValues.reset(new Bag<fUML::MDE4CPP_Extensions::FUML_Object>());
 		
 		
-		for(const std::shared_ptr<uml::Element>& extensionalValuesindexElem: *extensionalValuesList) 
+		for(const std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_Object>& extensionalValuesindexElem: *extensionalValuesList) 
 		{
-			std::shared_ptr<uml::Element> temp = std::dynamic_pointer_cast<uml::Element>((extensionalValuesindexElem)->copy());
+			std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_Object> temp = std::dynamic_pointer_cast<fUML::MDE4CPP_Extensions::FUML_Object>((extensionalValuesindexElem)->copy());
 			m_extensionalValues->push_back(temp);
 		}
 	}
@@ -161,12 +161,11 @@ std::shared_ptr<ecore::EObject> LocusImpl::copy() const
 //*********************************
 // Operations
 //*********************************
-void LocusImpl::add(const std::shared_ptr<uml::Element>& value)
+void LocusImpl::add(const std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_Object>& value)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
-		// TODO decide how the reference between an instance and the locus should be handled
-	//value->setLocus(getThisLocusPtr());
+		value->setLocus(getThisLocusPtr());
 	this->getExtensionalValues()->push_back(value);
 	//end of body
 }
@@ -254,7 +253,7 @@ return nullptr;
 	//end of body
 }
 
-void LocusImpl::remove(const std::shared_ptr<uml::Element>& value)
+void LocusImpl::remove(const std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_Object>& value)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -265,35 +264,20 @@ void LocusImpl::remove(const std::shared_ptr<uml::Element>& value)
 	//end of body
 }
 
-std::shared_ptr<Bag<uml::Element>> LocusImpl::retrieveExtent(const std::shared_ptr<uml::Classifier>& classifier)
+std::shared_ptr<Bag<fUML::MDE4CPP_Extensions::FUML_Object>> LocusImpl::retrieveExtent(const std::shared_ptr<uml::Classifier>& classifier)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
-		std::shared_ptr<Bag<uml::Element>> extent(new Bag<uml::Element>());
-	std::shared_ptr<Bag<uml::Element>> extensionalValues = this->getExtensionalValues();
+		std::shared_ptr<Bag<fUML::MDE4CPP_Extensions::FUML_Object>> extent(new Bag<fUML::MDE4CPP_Extensions::FUML_Object>());
+	const std::shared_ptr<Bag<fUML::MDE4CPP_Extensions::FUML_Object>>& extensionalValues = this->getExtensionalValues();
 
-	unsigned int extensionalValuesSize = extensionalValues->size();
-
-	for (unsigned int i=0; i < extensionalValuesSize; i++)
+	for (const std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_Object>& value : *extensionalValues)
 	{
-		std::shared_ptr<uml::Element> value = extensionalValues->at(i);
-		//Currently, only one type is supported
-		/*std::shared_ptr<Bag<uml::Classifier>> types = value->getTypes();
-		bool conforms = false;
-		unsigned int j = 0;
-		while(!conforms && j < types->size())
-		{
-			conforms = this->conforms(types->at(j), classifier);
-			j = j + 1;
-		}
-		if(conforms)
-		{
-			extent->push_back(value);
-		}*/
+		const std::shared_ptr<Bag<uml::Classifier>>& types = value->getTypes();
 
-		if(classifier->_getID() == value->getMetaElementID())
+		if(types->includes(classifier))
 		{
-			extent->push_back(value);
+			extent->add(value);
 		}
 	}
 	return extent;
@@ -319,11 +303,11 @@ void LocusImpl::setExecutor(const std::shared_ptr<fUML::Semantics::Loci::Executo
 }
 
 /* Getter & Setter for reference extensionalValues */
-const std::shared_ptr<Bag<uml::Element>>& LocusImpl::getExtensionalValues() const
+const std::shared_ptr<Bag<fUML::MDE4CPP_Extensions::FUML_Object>>& LocusImpl::getExtensionalValues() const
 {
 	if(m_extensionalValues == nullptr)
 	{
-		m_extensionalValues.reset(new Bag<uml::Element>());
+		m_extensionalValues.reset(new Bag<fUML::MDE4CPP_Extensions::FUML_Object>());
 		
 		
 	}
@@ -403,7 +387,7 @@ void LocusImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::inte
 				std::cout << "| WARNING    | type if an eClassifiers node it empty" << std::endl;
 				return; // no type name given and reference type is abstract
 			}
-			loadHandler->handleChildContainer<uml::Element>(this->getExtensionalValues());  
+			loadHandler->handleChildContainer<fUML::MDE4CPP_Extensions::FUML_Object>(this->getExtensionalValues());  
 
 			return; 
 		}
@@ -458,7 +442,7 @@ void LocusImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandle
 
 		// Save 'extensionalValues'
 
-		saveHandler->addReferences<uml::Element>("extensionalValues", this->getExtensionalValues());
+		saveHandler->addReferences<fUML::MDE4CPP_Extensions::FUML_Object>("extensionalValues", this->getExtensionalValues());
 
 		// Save 'factory'
 
@@ -485,7 +469,7 @@ std::shared_ptr<Any> LocusImpl::eGet(int featureID, bool resolve, bool coreType)
 		case fUML::Semantics::Loci::LociPackage::LOCUS_ATTRIBUTE_EXECUTOR:
 			return eAny(getExecutor(),fUML::Semantics::Loci::LociPackage::EXECUTOR_CLASS,false); //770
 		case fUML::Semantics::Loci::LociPackage::LOCUS_ATTRIBUTE_EXTENSIONALVALUES:
-			return eEcoreContainerAny(getExtensionalValues(),uml::umlPackage::ELEMENT_CLASS); //772
+			return eEcoreContainerAny(getExtensionalValues(),fUML::MDE4CPP_Extensions::MDE4CPP_ExtensionsPackage::FUML_OBJECT_CLASS); //772
 		case fUML::Semantics::Loci::LociPackage::LOCUS_ATTRIBUTE_FACTORY:
 			return eAny(getFactory(),fUML::Semantics::Loci::LociPackage::EXECUTIONFACTORY_CLASS,false); //771
 	}
@@ -552,11 +536,11 @@ bool LocusImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 	
 					if(eObjectList)
 					{
-						std::shared_ptr<Bag<uml::Element>> _extensionalValues = getExtensionalValues();
+						std::shared_ptr<Bag<fUML::MDE4CPP_Extensions::FUML_Object>> _extensionalValues = getExtensionalValues();
 	
 						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{
-							std::shared_ptr<uml::Element> valueToAdd = std::dynamic_pointer_cast<uml::Element>(anEObject);
+							std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_Object> valueToAdd = std::dynamic_pointer_cast<fUML::MDE4CPP_Extensions::FUML_Object>(anEObject);
 	
 							if (valueToAdd)
 							{
@@ -631,12 +615,12 @@ std::shared_ptr<Any> LocusImpl::eInvoke(int operationID, const std::shared_ptr<B
  
   	switch(operationID)
 	{
-		// fUML::Semantics::Loci::Locus::add(uml::Element): 2336178890
-		case LociPackage::LOCUS_OPERATION_ADD_ELEMENT:
+		// fUML::Semantics::Loci::Locus::add(fUML::MDE4CPP_Extensions::FUML_Object): 2307480936
+		case LociPackage::LOCUS_OPERATION_ADD_FUML_OBJECT:
 		{
 			//Retrieve input parameter 'value'
 			//parameter 0
-			std::shared_ptr<uml::Element> incoming_param_value;
+			std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_Object> incoming_param_value;
 			Bag<Any>::const_iterator incoming_param_value_arguments_citer = std::next(arguments->begin(), 0);
 			{
 				std::shared_ptr<ecore::EcoreAny> ecoreAny = std::dynamic_pointer_cast<ecore::EcoreAny>((*incoming_param_value_arguments_citer));
@@ -645,7 +629,7 @@ std::shared_ptr<Any> LocusImpl::eInvoke(int operationID, const std::shared_ptr<B
 					try
 					{
 						std::shared_ptr<ecore::EObject> _temp = ecoreAny->getAsEObject();
-						incoming_param_value = std::dynamic_pointer_cast<uml::Element>(_temp);
+						incoming_param_value = std::dynamic_pointer_cast<fUML::MDE4CPP_Extensions::FUML_Object>(_temp);
 					}
 					catch(...)
 					{
@@ -849,12 +833,12 @@ std::shared_ptr<Any> LocusImpl::eInvoke(int operationID, const std::shared_ptr<B
 			result = eEcoreAny(this->instantiate(incoming_param_type), uml::umlPackage::ELEMENT_CLASS);
 			break;
 		}
-		// fUML::Semantics::Loci::Locus::remove(uml::Element): 2186013543
-		case LociPackage::LOCUS_OPERATION_REMOVE_ELEMENT:
+		// fUML::Semantics::Loci::Locus::remove(fUML::MDE4CPP_Extensions::FUML_Object): 3213175405
+		case LociPackage::LOCUS_OPERATION_REMOVE_FUML_OBJECT:
 		{
 			//Retrieve input parameter 'value'
 			//parameter 0
-			std::shared_ptr<uml::Element> incoming_param_value;
+			std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_Object> incoming_param_value;
 			Bag<Any>::const_iterator incoming_param_value_arguments_citer = std::next(arguments->begin(), 0);
 			{
 				std::shared_ptr<ecore::EcoreAny> ecoreAny = std::dynamic_pointer_cast<ecore::EcoreAny>((*incoming_param_value_arguments_citer));
@@ -863,7 +847,7 @@ std::shared_ptr<Any> LocusImpl::eInvoke(int operationID, const std::shared_ptr<B
 					try
 					{
 						std::shared_ptr<ecore::EObject> _temp = ecoreAny->getAsEObject();
-						incoming_param_value = std::dynamic_pointer_cast<uml::Element>(_temp);
+						incoming_param_value = std::dynamic_pointer_cast<fUML::MDE4CPP_Extensions::FUML_Object>(_temp);
 					}
 					catch(...)
 					{
@@ -881,7 +865,7 @@ std::shared_ptr<Any> LocusImpl::eInvoke(int operationID, const std::shared_ptr<B
 			this->remove(incoming_param_value);
 			break;
 		}
-		// fUML::Semantics::Loci::Locus::retrieveExtent(uml::Classifier) : uml::Element[*]: 844948954
+		// fUML::Semantics::Loci::Locus::retrieveExtent(uml::Classifier) : fUML::MDE4CPP_Extensions::FUML_Object[*]: 404857052
 		case LociPackage::LOCUS_OPERATION_RETRIEVEEXTENT_CLASSIFIER:
 		{
 			//Retrieve input parameter 'classifier'
@@ -910,8 +894,8 @@ std::shared_ptr<Any> LocusImpl::eInvoke(int operationID, const std::shared_ptr<B
 				}
 			}
 		
-			std::shared_ptr<Bag<uml::Element>> resultList = this->retrieveExtent(incoming_param_classifier);
-			return eEcoreContainerAny(resultList,uml::umlPackage::ELEMENT_CLASS);
+			std::shared_ptr<Bag<fUML::MDE4CPP_Extensions::FUML_Object>> resultList = this->retrieveExtent(incoming_param_classifier);
+			return eEcoreContainerAny(resultList,fUML::MDE4CPP_Extensions::MDE4CPP_ExtensionsPackage::FUML_OBJECT_CLASS);
 			break;
 		}
 

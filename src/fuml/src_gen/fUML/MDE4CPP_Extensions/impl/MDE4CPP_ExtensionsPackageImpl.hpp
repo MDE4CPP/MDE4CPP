@@ -48,6 +48,7 @@ namespace fUML::MDE4CPP_Extensions
 			virtual const std::shared_ptr<ecore::EReference>& getFUML_Object_Attribute_objectActivation() const ;
 			
 			virtual const std::shared_ptr<ecore::EOperation>& getFUML_Object_Operation__register_EventAccepter() const ;
+			virtual const std::shared_ptr<ecore::EOperation>& getFUML_Object_Operation_destroy() const ;
 			virtual const std::shared_ptr<ecore::EOperation>& getFUML_Object_Operation_getTypes() const ;
 			virtual const std::shared_ptr<ecore::EOperation>& getFUML_Object_Operation_send_EventOccurrence() const ;
 			virtual const std::shared_ptr<ecore::EOperation>& getFUML_Object_Operation_startBehavior_Class_ParameterValue() const ;
@@ -64,7 +65,7 @@ namespace fUML::MDE4CPP_Extensions
 			
 			
 			std::shared_ptr<ecore::EReference> m_fUML_Object_Attribute_locus = nullptr;std::shared_ptr<ecore::EReference> m_fUML_Object_Attribute_objectActivation = nullptr;
-			std::shared_ptr<ecore::EOperation> m_fUML_Object_Operation__register_EventAccepter = nullptr;std::shared_ptr<ecore::EOperation> m_fUML_Object_Operation_getTypes = nullptr;std::shared_ptr<ecore::EOperation> m_fUML_Object_Operation_send_EventOccurrence = nullptr;std::shared_ptr<ecore::EOperation> m_fUML_Object_Operation_startBehavior_Class_ParameterValue = nullptr;std::shared_ptr<ecore::EOperation> m_fUML_Object_Operation_unregister_EventAccepter = nullptr;
+			std::shared_ptr<ecore::EOperation> m_fUML_Object_Operation__register_EventAccepter = nullptr;std::shared_ptr<ecore::EOperation> m_fUML_Object_Operation_destroy = nullptr;std::shared_ptr<ecore::EOperation> m_fUML_Object_Operation_getTypes = nullptr;std::shared_ptr<ecore::EOperation> m_fUML_Object_Operation_send_EventOccurrence = nullptr;std::shared_ptr<ecore::EOperation> m_fUML_Object_Operation_startBehavior_Class_ParameterValue = nullptr;std::shared_ptr<ecore::EOperation> m_fUML_Object_Operation_unregister_EventAccepter = nullptr;
 
 			friend class MDE4CPP_ExtensionsPackage;
 

@@ -4,13 +4,13 @@
 
 #include "abstractDataTypes/SubsetUnion.hpp"
 //metametamodel classes
-#include "ecore/EParameter.hpp"
 #include "ecore/EStringToStringMapEntry.hpp"
-#include "ecore/EGenericType.hpp"
-#include "ecore/EReference.hpp"
-#include "ecore/EOperation.hpp"
 #include "ecore/EAnnotation.hpp"
+#include "ecore/EReference.hpp"
+#include "ecore/EGenericType.hpp"
+#include "ecore/EOperation.hpp"
 #include "ecore/EClass.hpp"
+#include "ecore/EParameter.hpp"
 
 // metametamodel factory
 #include "ecore/ecoreFactory.hpp"
@@ -125,6 +125,22 @@ void MDE4CPP_ExtensionsPackageImpl::initializeFUML_ObjectContent()
 		parameter->setUnique(true);
 		parameter->setOrdered(true);
 	}
+	
+	m_fUML_Object_Operation_destroy->setName("destroy");
+	{ 	std::shared_ptr<ecore::ecoreFactory> factory = ecore::ecoreFactory::eInstance();
+		std::shared_ptr<ecore::EClass> unknownClass = factory ->createEClass(-1);
+	   	unknownClass->setName("invalid");
+		unknownClass->setAbstract(true);
+		unknownClass->setInterface(true);
+		m_fUML_Object_Operation_destroy->setEType(unknownClass);
+	}
+	m_fUML_Object_Operation_destroy->setLowerBound(1);
+	m_fUML_Object_Operation_destroy->setUpperBound(1);
+	m_fUML_Object_Operation_destroy->setUnique(true);
+	m_fUML_Object_Operation_destroy->setOrdered(false);
+	
+	m_fUML_Object_Operation_destroy->_setID(FUML_OBJECT_OPERATION_DESTROY);
+	
 	
 	m_fUML_Object_Operation_getTypes->setName("getTypes");
 	m_fUML_Object_Operation_getTypes->setEType(uml::umlPackage::eInstance()->getClassifier_Class());

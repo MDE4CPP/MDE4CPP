@@ -43,10 +43,6 @@ namespace fUML::MDE4CPP_Extensions
 {
 	class FUML_Object;
 }
-namespace uml
-{
-	class DirectedRelationship;
-}
 
 
 

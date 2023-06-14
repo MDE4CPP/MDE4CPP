@@ -48,11 +48,13 @@ std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_Object> FoundationalModelLibraryL
 			case FoundationalModelLibrary::BasicInputOutput::BasicInputOutputPackage::STANDARDINPUTCHANNEL_CLASS:
 			{
 				std::shared_ptr<FoundationalModelLibrary::BasicInputOutput::StandardInputChannel> instance = FoundationalModelLibrary::BasicInputOutput::BasicInputOutputFactory::eInstance()->createStandardInputChannel();
+				this->add(instance);
 				return instance;
 			}
 			case FoundationalModelLibrary::BasicInputOutput::BasicInputOutputPackage::STANDARDOUTPUTCHANNEL_CLASS:
 			{
 				std::shared_ptr<FoundationalModelLibrary::BasicInputOutput::StandardOutputChannel> instance = FoundationalModelLibrary::BasicInputOutput::BasicInputOutputFactory::eInstance()->createStandardOutputChannel();
+				this->add(instance);
 				return instance;
 			}
 		}
