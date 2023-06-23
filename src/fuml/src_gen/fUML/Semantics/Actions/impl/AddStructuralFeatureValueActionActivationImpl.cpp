@@ -47,8 +47,8 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "fUML/Semantics/Activities/ActivitiesFactory.hpp"
 #include "fUML/Semantics/Actions/ActionsFactory.hpp"
+#include "fUML/Semantics/Activities/ActivitiesFactory.hpp"
 #include "uml/umlFactory.hpp"
 #include "uml/Action.hpp"
 #include "fUML/Semantics/Activities/ActivityEdgeInstance.hpp"
@@ -146,8 +146,8 @@ void AddStructuralFeatureValueActionActivationImpl::doAction()
 	// If isReplaceAll is true, first remove all current matching links or feature values.
 	// If isReplaceAll is false and there is an insertAt pin, insert the value at the appropriate position.
 
-	std::shared_ptr<uml::AddStructuralFeatureValueAction> action = this->getAddStructuralFeatureValueAction();
-	std::shared_ptr<uml::StructuralFeature> feature = action->getStructuralFeature();
+	const std::shared_ptr<uml::AddStructuralFeatureValueAction>& action = this->getAddStructuralFeatureValueAction();
+	const std::shared_ptr<uml::StructuralFeature>& feature = action->getStructuralFeature();
 
 	std::shared_ptr<uml::Property> property = std::dynamic_pointer_cast<uml::Property>(feature);
 
@@ -164,7 +164,7 @@ void AddStructuralFeatureValueActionActivationImpl::doAction()
 	std::string objectPinName = action->getObject()->getName();
 	if((objectPinName.empty()) || (objectPinName.find("self") == 0)){
 		//value is set to the context of the current activity execution
-		std::shared_ptr<uml::Element> context = this->getActivityExecution()->getContext();
+		const std::shared_ptr<uml::Element>& context = this->getActivityExecution()->getContext();
 			
 		value = eUMLAny(context, context->getMetaElementID());
 	}
@@ -176,7 +176,7 @@ void AddStructuralFeatureValueActionActivationImpl::doAction()
 	std::shared_ptr<Bag<Any>> inputValues = takeTokens(action->getValue());
 
 	// NOTE: Multiplicity of the value input pin is required to be 1..1.
-	std::shared_ptr<Any> inputValue = inputValues->at(0);
+	const std::shared_ptr<Any>& inputValue = inputValues->at(0);
 
 	int insertAt = -1;
 	if (action->getInsertAt() != nullptr)

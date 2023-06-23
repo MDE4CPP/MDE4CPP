@@ -46,9 +46,9 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "fUML/Semantics/Activities/ActivitiesFactory.hpp"
 #include "uml/umlFactory.hpp"
 #include "fUML/Semantics/Actions/ActionsFactory.hpp"
+#include "fUML/Semantics/Activities/ActivitiesFactory.hpp"
 #include "uml/Action.hpp"
 #include "fUML/Semantics/Actions/ActionActivation.hpp"
 #include "fUML/Semantics/Activities/ActivityEdgeInstance.hpp"
@@ -142,7 +142,7 @@ void CreateObjectActionActivationImpl::doAction()
 	// Create an object with the given classifier (which must be a class) as its type, at the same locus as the action activation.
 // Place a reference to the object on the result pin of the action.
 
-std::shared_ptr<uml::CreateObjectAction> action = this->getCreateObjectAction();
+const std::shared_ptr<uml::CreateObjectAction>& action = this->getCreateObjectAction();
 
 if(action)
 {

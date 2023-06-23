@@ -168,7 +168,7 @@ void ObjectActivationImpl::_register(const std::shared_ptr<fUML::Semantics::Comm
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
-	DEBUG_INFO("object = " << this->getObject())
+	    DEBUG_INFO("object = " << this->getObject())
     DEBUG_INFO("accepter = " << accepter)
 
     this->getWaitingEventAccepters()->push_back(accepter);

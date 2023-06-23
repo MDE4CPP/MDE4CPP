@@ -46,6 +46,7 @@ namespace fUML::Semantics::Activities
 namespace uml 
 {
 	class ActivityNode;
+	class ExpansionNode;
 }
 
 // namespace macro header include
@@ -90,6 +91,10 @@ namespace fUML::Semantics::Actions
 			//*********************************
 			// Reference Getters & Setters
 			//*********************************
+			virtual const std::shared_ptr<uml::ExpansionNode>& getExpansionNode() const = 0;
+			virtual void setExpansionNode(const std::shared_ptr<uml::ExpansionNode>&) = 0;
+			/*Additional Setter for 'ActivityNodeActivation::node' redefined by reference 'expansionNode'*/
+			virtual void setNode(const std::shared_ptr<uml::ActivityNode>&) = 0;
 
 			//*********************************
 			// Union Reference Getters
@@ -115,6 +120,7 @@ namespace fUML::Semantics::Actions
 			//*********************************
 			// Reference Members
 			//*********************************
+			std::shared_ptr<uml::ExpansionNode> m_expansionNode;
 	};
 }
 #endif /* end of include guard: FUML_SEMANTICS_ACTIONS_EXPANSIONNODEACTIVATION_HPP */

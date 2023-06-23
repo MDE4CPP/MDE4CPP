@@ -57,6 +57,10 @@ namespace fUML::Semantics::Actions
 			//*********************************
 			// Reference Getters & Setters
 			//*********************************
+			virtual const std::shared_ptr<uml::ExpansionNode>& getExpansionNode() const ;
+			virtual void setExpansionNode(const std::shared_ptr<uml::ExpansionNode>&) ;
+			/*Additional Setter for 'ActivityNodeActivation::node' redefined by reference 'expansionNode'*/
+			virtual void setNode(const std::shared_ptr<uml::ActivityNode>&) ;
 			
 			//*********************************
 			// Union Reference Getters
