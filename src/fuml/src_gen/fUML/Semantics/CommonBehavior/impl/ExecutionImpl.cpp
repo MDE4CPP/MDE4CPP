@@ -49,10 +49,10 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "uml/umlFactory.hpp"
-#include "fUML/Semantics/CommonBehavior/CommonBehaviorFactory.hpp"
-#include "fUML/Semantics/Loci/LociFactory.hpp"
 #include "ecore/ecoreFactory.hpp"
+#include "fUML/Semantics/CommonBehavior/CommonBehaviorFactory.hpp"
+#include "uml/umlFactory.hpp"
+#include "fUML/Semantics/Loci/LociFactory.hpp"
 #include "uml/Behavior.hpp"
 #include "uml/Classifier.hpp"
 #include "uml/Comment.hpp"
@@ -553,7 +553,7 @@ void ExecutionImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHa
 	}
 }
 
-std::shared_ptr<ecore::EClass> ExecutionImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& ExecutionImpl::eStaticClass() const
 {
 	return fUML::Semantics::CommonBehavior::CommonBehaviorPackage::eInstance()->getExecution_Class();
 }

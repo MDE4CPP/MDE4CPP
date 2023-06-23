@@ -199,7 +199,7 @@ void FIFOGetNextEventStrategyImpl::saveContent(std::shared_ptr<persistence::inte
 	}
 }
 
-std::shared_ptr<ecore::EClass> FIFOGetNextEventStrategyImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& FIFOGetNextEventStrategyImpl::eStaticClass() const
 {
 	return fUML::Semantics::CommonBehavior::CommonBehaviorPackage::eInstance()->getFIFOGetNextEventStrategy_Class();
 }

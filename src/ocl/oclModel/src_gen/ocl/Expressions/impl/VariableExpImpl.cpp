@@ -374,7 +374,7 @@ void VariableExpImpl::saveContent(std::shared_ptr<persistence::interfaces::XSave
 	}
 }
 
-std::shared_ptr<ecore::EClass> VariableExpImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& VariableExpImpl::eStaticClass() const
 {
 	return ocl::Expressions::ExpressionsPackage::eInstance()->getVariableExp_Class();
 }

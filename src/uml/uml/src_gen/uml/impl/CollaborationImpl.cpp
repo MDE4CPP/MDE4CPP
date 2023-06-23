@@ -383,7 +383,7 @@ void CollaborationImpl::saveContent(std::shared_ptr<persistence::interfaces::XSa
 	}
 }
 
-std::shared_ptr<ecore::EClass> CollaborationImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& CollaborationImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getCollaboration_Class();
 }

@@ -554,7 +554,7 @@ void ElementImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHand
 	}
 }
 
-std::shared_ptr<ecore::EClass> ElementImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& ElementImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getElement_Class();
 }

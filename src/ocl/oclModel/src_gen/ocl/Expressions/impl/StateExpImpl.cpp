@@ -38,8 +38,8 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "ecore/ecoreFactory.hpp"
 #include "ocl/Expressions/ExpressionsFactory.hpp"
+#include "ecore/ecoreFactory.hpp"
 #include "ocl/Evaluations/EvaluationsFactory.hpp"
 #include "ocl/Expressions/CallExp.hpp"
 #include "ocl/Expressions/CollectionRange.hpp"
@@ -384,7 +384,7 @@ void StateExpImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHan
 	}
 }
 
-std::shared_ptr<ecore::EClass> StateExpImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& StateExpImpl::eStaticClass() const
 {
 	return ocl::Expressions::ExpressionsPackage::eInstance()->getStateExp_Class();
 }

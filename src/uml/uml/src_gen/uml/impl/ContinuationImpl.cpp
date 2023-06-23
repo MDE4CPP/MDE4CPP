@@ -285,7 +285,7 @@ void ContinuationImpl::saveContent(std::shared_ptr<persistence::interfaces::XSav
 	}
 }
 
-std::shared_ptr<ecore::EClass> ContinuationImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& ContinuationImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getContinuation_Class();
 }

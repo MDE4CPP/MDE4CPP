@@ -417,7 +417,7 @@ void RedefinableTemplateSignatureImpl::saveContent(std::shared_ptr<persistence::
 	}
 }
 
-std::shared_ptr<ecore::EClass> RedefinableTemplateSignatureImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& RedefinableTemplateSignatureImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getRedefinableTemplateSignature_Class();
 }

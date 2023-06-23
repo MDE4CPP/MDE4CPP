@@ -408,7 +408,7 @@ void ProtocolStateMachineImpl::saveContent(std::shared_ptr<persistence::interfac
 	}
 }
 
-std::shared_ptr<ecore::EClass> ProtocolStateMachineImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& ProtocolStateMachineImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getProtocolStateMachine_Class();
 }

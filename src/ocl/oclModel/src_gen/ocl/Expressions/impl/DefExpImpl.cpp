@@ -415,7 +415,7 @@ void DefExpImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandl
 	}
 }
 
-std::shared_ptr<ecore::EClass> DefExpImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& DefExpImpl::eStaticClass() const
 {
 	return ocl::Expressions::ExpressionsPackage::eInstance()->getDefExp_Class();
 }

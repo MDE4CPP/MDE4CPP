@@ -232,7 +232,7 @@ void TokenSetImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHan
 	}
 }
 
-std::shared_ptr<ecore::EClass> TokenSetImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& TokenSetImpl::eStaticClass() const
 {
 	return fUML::Semantics::Activities::ActivitiesPackage::eInstance()->getTokenSet_Class();
 }

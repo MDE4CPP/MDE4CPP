@@ -261,7 +261,7 @@ void RedefinitionBasedDispatchStrategyImpl::saveContent(std::shared_ptr<persiste
 	}
 }
 
-std::shared_ptr<ecore::EClass> RedefinitionBasedDispatchStrategyImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& RedefinitionBasedDispatchStrategyImpl::eStaticClass() const
 {
 	return fUML::Semantics::StructuredClassifiers::StructuredClassifiersPackage::eInstance()->getRedefinitionBasedDispatchStrategy_Class();
 }

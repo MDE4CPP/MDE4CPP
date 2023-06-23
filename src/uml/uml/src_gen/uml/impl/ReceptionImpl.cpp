@@ -281,7 +281,7 @@ void ReceptionImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHa
 	}
 }
 
-std::shared_ptr<ecore::EClass> ReceptionImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& ReceptionImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getReception_Class();
 }

@@ -417,7 +417,7 @@ void ReduceActionImpl::saveContent(std::shared_ptr<persistence::interfaces::XSav
 	}
 }
 
-std::shared_ptr<ecore::EClass> ReduceActionImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& ReduceActionImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getReduceAction_Class();
 }

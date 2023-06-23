@@ -4,12 +4,12 @@
 
 #include "abstractDataTypes/SubsetUnion.hpp"
 //metametamodel classes
+#include "ecore/EReference.hpp"
+#include "ecore/EEnum.hpp"
 #include "ecore/EEnumLiteral.hpp"
+#include "ecore/EAttribute.hpp"
 #include "ecore/EDataType.hpp"
 #include "ecore/EGenericType.hpp"
-#include "ecore/EReference.hpp"
-#include "ecore/EAttribute.hpp"
-#include "ecore/EEnum.hpp"
 #include "ecore/EClass.hpp"
 
 //metamodel factory

@@ -412,7 +412,7 @@ void PackageDeclarationExpImpl::saveContent(std::shared_ptr<persistence::interfa
 	}
 }
 
-std::shared_ptr<ecore::EClass> PackageDeclarationExpImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& PackageDeclarationExpImpl::eStaticClass() const
 {
 	return ocl::Expressions::ExpressionsPackage::eInstance()->getPackageDeclarationExp_Class();
 }

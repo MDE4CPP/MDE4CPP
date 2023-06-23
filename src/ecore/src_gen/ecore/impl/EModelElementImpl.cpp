@@ -280,7 +280,7 @@ void EModelElementImpl::saveContent(std::shared_ptr<persistence::interfaces::XSa
 	}
 }
 
-std::shared_ptr<EClass> EModelElementImpl::eStaticClass() const
+const std::shared_ptr<EClass>& EModelElementImpl::eStaticClass() const
 {
 	return ecore::ecorePackage::eInstance()->getEModelElement_Class();
 }
@@ -323,7 +323,7 @@ bool EModelElementImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValu
 	
 					if(eObjectList)
 					{
-						std::shared_ptr<Bag<ecore::EAnnotation>> _eAnnotations = getEAnnotations();
+						const std::shared_ptr<Bag<ecore::EAnnotation>>& _eAnnotations = getEAnnotations();
 	
 						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{

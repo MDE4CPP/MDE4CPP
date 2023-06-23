@@ -645,7 +645,7 @@ void LoopNodeImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHan
 	}
 }
 
-std::shared_ptr<ecore::EClass> LoopNodeImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& LoopNodeImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getLoopNode_Class();
 }

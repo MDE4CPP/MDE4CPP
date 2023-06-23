@@ -311,7 +311,7 @@ void IfExpEvalImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHa
 	}
 }
 
-std::shared_ptr<ecore::EClass> IfExpEvalImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& IfExpEvalImpl::eStaticClass() const
 {
 	return ocl::Evaluations::EvaluationsPackage::eInstance()->getIfExpEval_Class();
 }

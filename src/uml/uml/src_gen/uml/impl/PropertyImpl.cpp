@@ -977,7 +977,7 @@ void PropertyImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHan
 	}
 }
 
-std::shared_ptr<ecore::EClass> PropertyImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& PropertyImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getProperty_Class();
 }

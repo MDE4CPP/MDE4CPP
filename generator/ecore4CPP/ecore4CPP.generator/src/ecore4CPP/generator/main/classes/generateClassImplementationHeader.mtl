@@ -132,7 +132,7 @@ virtual public [ClassWithNamespace(anEClass, sClass)/]Impl[/for][if (anEClass.eS
 			[anEClass.generatePersistenceFunctionsDeclarations(true)/]
 
 		protected:
-			virtual std::shared_ptr<[needNamespace(anEClass.ePackage, 'EClass')/]> eStaticClass() const;
+			virtual const std::shared_ptr<[needNamespace(anEClass.ePackage, 'EClass')/]>& eStaticClass() const;
 
 			//*********************************
 			// EStructuralFeature Get/Set/IsSet

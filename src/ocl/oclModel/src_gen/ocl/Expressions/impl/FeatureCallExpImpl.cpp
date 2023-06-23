@@ -368,7 +368,7 @@ void FeatureCallExpImpl::saveContent(std::shared_ptr<persistence::interfaces::XS
 	}
 }
 
-std::shared_ptr<ecore::EClass> FeatureCallExpImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& FeatureCallExpImpl::eStaticClass() const
 {
 	return ocl::Expressions::ExpressionsPackage::eInstance()->getFeatureCallExp_Class();
 }

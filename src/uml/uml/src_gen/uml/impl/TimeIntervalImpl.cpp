@@ -282,7 +282,7 @@ void TimeIntervalImpl::saveContent(std::shared_ptr<persistence::interfaces::XSav
 	}
 }
 
-std::shared_ptr<ecore::EClass> TimeIntervalImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& TimeIntervalImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getTimeInterval_Class();
 }

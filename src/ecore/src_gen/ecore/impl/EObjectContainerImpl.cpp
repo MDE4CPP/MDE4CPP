@@ -212,7 +212,7 @@ void EObjectContainerImpl::resolveReferences(const int featureID, std::vector<st
 	{
 		case ecore::ecorePackage::EOBJECTCONTAINER_ATTRIBUTE_CONTAINER:
 		{
-			std::shared_ptr<Bag<ecore::EObject>> _container = getContainer();
+			const std::shared_ptr<Bag<ecore::EObject>>& _container = getContainer();
 			for(std::shared_ptr<ecore::EObject> ref : references)
 			{
 				std::shared_ptr<ecore::EObject>  _r = std::dynamic_pointer_cast<ecore::EObject>(ref);
@@ -250,7 +250,7 @@ void EObjectContainerImpl::saveContent(std::shared_ptr<persistence::interfaces::
 	}
 }
 
-std::shared_ptr<EClass> EObjectContainerImpl::eStaticClass() const
+const std::shared_ptr<EClass>& EObjectContainerImpl::eStaticClass() const
 {
 	return ecore::ecorePackage::eInstance()->getEObjectContainer_Class();
 }
@@ -293,7 +293,7 @@ bool EObjectContainerImpl::eSet(int featureID,  const std::shared_ptr<Any>& newV
 	
 					if(eObjectList)
 					{
-						std::shared_ptr<Bag<ecore::EObject>> _container = getContainer();
+						const std::shared_ptr<Bag<ecore::EObject>>& _container = getContainer();
 	
 						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{

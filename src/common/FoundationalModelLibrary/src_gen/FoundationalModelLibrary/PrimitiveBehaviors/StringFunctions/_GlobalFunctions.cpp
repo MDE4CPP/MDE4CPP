@@ -9,12 +9,12 @@
 #include "FoundationalModelLibrary/PrimitiveBehaviors/StringFunctions/StringFunctionsPackage.hpp"
 #include "types/typesPackage.hpp"
 
-int FoundationalModelLibrary::PrimitiveBehaviors::StringFunctions::Size(std::string x)
+std::string FoundationalModelLibrary::PrimitiveBehaviors::StringFunctions::Concat(std::string x,std::string y)
 {
-	int result = 0;
+	std::string result = "";
 
-	//Implemented as OpaqueBehaviour Size
-	result = x.size();
+	//Implemented as OpaqueBehaviour Concat
+	result = x + y;
 	
 
 	return result;
@@ -34,12 +34,12 @@ std::string FoundationalModelLibrary::PrimitiveBehaviors::StringFunctions::Subst
 
 	return result;
 }
-std::string FoundationalModelLibrary::PrimitiveBehaviors::StringFunctions::Concat(std::string x,std::string y)
+int FoundationalModelLibrary::PrimitiveBehaviors::StringFunctions::Size(std::string x)
 {
-	std::string result = "";
+	int result = 0;
 
-	//Implemented as OpaqueBehaviour Concat
-	result = x + y;
+	//Implemented as OpaqueBehaviour Size
+	result = x.size();
 	
 
 	return result;
@@ -52,7 +52,7 @@ std::shared_ptr<Any> FoundationalModelLibrary::PrimitiveBehaviors::StringFunctio
 
 	switch(uID)
 	{
-		case FoundationalModelLibrary::PrimitiveBehaviors::StringFunctions::StringFunctionsPackage::STRINGFUNCTIONS_FUNCTIONBEHAVIOR_SIZE:
+		case FoundationalModelLibrary::PrimitiveBehaviors::StringFunctions::StringFunctionsPackage::STRINGFUNCTIONS_FUNCTIONBEHAVIOR_CONCAT:
 		{
 		//Retrieve input parameters
 			//Retrieve in parameter 'x'
@@ -67,10 +67,22 @@ std::shared_ptr<Any> FoundationalModelLibrary::PrimitiveBehaviors::StringFunctio
 				DEBUG_ERROR("Invalid type stored in 'Any' for parameter 'x'. Failed to invoke operation 'invalid'!")
 				return nullptr;
 			}
+			//Retrieve in parameter 'y'
+			std::shared_ptr<Any> anyY =  inputArguments->at(1);
+			std::string y;
+			try
+			{
+				y = anyY->get<std::string>();
+			}
+			catch(...)
+			{
+				DEBUG_ERROR("Invalid type stored in 'Any' for parameter 'y'. Failed to invoke operation 'invalid'!")
+				return nullptr;
+			}
 
 			//Invoke method
-			int result = FoundationalModelLibrary::PrimitiveBehaviors::StringFunctions::Size(x);
-			std::shared_ptr<Any> returnArgument = eAny(result, types::typesPackage::INTEGER_CLASS, false);
+			std::string result = FoundationalModelLibrary::PrimitiveBehaviors::StringFunctions::Concat(x, y);
+			std::shared_ptr<Any> returnArgument = eAny(result, types::typesPackage::STRING_CLASS, false);
 	
 			return returnArgument;
 		}
@@ -120,7 +132,7 @@ std::shared_ptr<Any> FoundationalModelLibrary::PrimitiveBehaviors::StringFunctio
 	
 			return returnArgument;
 		}
-		case FoundationalModelLibrary::PrimitiveBehaviors::StringFunctions::StringFunctionsPackage::STRINGFUNCTIONS_FUNCTIONBEHAVIOR_CONCAT:
+		case FoundationalModelLibrary::PrimitiveBehaviors::StringFunctions::StringFunctionsPackage::STRINGFUNCTIONS_FUNCTIONBEHAVIOR_SIZE:
 		{
 		//Retrieve input parameters
 			//Retrieve in parameter 'x'
@@ -135,22 +147,10 @@ std::shared_ptr<Any> FoundationalModelLibrary::PrimitiveBehaviors::StringFunctio
 				DEBUG_ERROR("Invalid type stored in 'Any' for parameter 'x'. Failed to invoke operation 'invalid'!")
 				return nullptr;
 			}
-			//Retrieve in parameter 'y'
-			std::shared_ptr<Any> anyY =  inputArguments->at(1);
-			std::string y;
-			try
-			{
-				y = anyY->get<std::string>();
-			}
-			catch(...)
-			{
-				DEBUG_ERROR("Invalid type stored in 'Any' for parameter 'y'. Failed to invoke operation 'invalid'!")
-				return nullptr;
-			}
 
 			//Invoke method
-			std::string result = FoundationalModelLibrary::PrimitiveBehaviors::StringFunctions::Concat(x, y);
-			std::shared_ptr<Any> returnArgument = eAny(result, types::typesPackage::STRING_CLASS, false);
+			int result = FoundationalModelLibrary::PrimitiveBehaviors::StringFunctions::Size(x);
+			std::shared_ptr<Any> returnArgument = eAny(result, types::typesPackage::INTEGER_CLASS, false);
 	
 			return returnArgument;
 		}

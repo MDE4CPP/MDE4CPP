@@ -357,7 +357,7 @@ void ValueSpecificationImpl::saveContent(std::shared_ptr<persistence::interfaces
 	}
 }
 
-std::shared_ptr<ecore::EClass> ValueSpecificationImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& ValueSpecificationImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getValueSpecification_Class();
 }

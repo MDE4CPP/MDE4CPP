@@ -368,7 +368,7 @@ void PrimitiveLiteralExpImpl::saveContent(std::shared_ptr<persistence::interface
 	}
 }
 
-std::shared_ptr<ecore::EClass> PrimitiveLiteralExpImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& PrimitiveLiteralExpImpl::eStaticClass() const
 {
 	return ocl::Expressions::ExpressionsPackage::eInstance()->getPrimitiveLiteralExp_Class();
 }

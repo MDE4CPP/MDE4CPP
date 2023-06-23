@@ -361,7 +361,7 @@ void TemplateParameterSubstitutionImpl::saveContent(std::shared_ptr<persistence:
 	}
 }
 
-std::shared_ptr<ecore::EClass> TemplateParameterSubstitutionImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& TemplateParameterSubstitutionImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getTemplateParameterSubstitution_Class();
 }

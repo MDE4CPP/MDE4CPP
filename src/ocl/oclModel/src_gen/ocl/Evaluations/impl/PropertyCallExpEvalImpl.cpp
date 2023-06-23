@@ -247,7 +247,7 @@ void PropertyCallExpEvalImpl::saveContent(std::shared_ptr<persistence::interface
 	}
 }
 
-std::shared_ptr<ecore::EClass> PropertyCallExpEvalImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& PropertyCallExpEvalImpl::eStaticClass() const
 {
 	return ocl::Evaluations::EvaluationsPackage::eInstance()->getPropertyCallExpEval_Class();
 }

@@ -526,7 +526,7 @@ void RegionImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandl
 	}
 }
 
-std::shared_ptr<ecore::EClass> RegionImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& RegionImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getRegion_Class();
 }

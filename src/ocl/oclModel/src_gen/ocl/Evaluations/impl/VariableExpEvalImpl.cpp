@@ -39,8 +39,8 @@
 
 #include <exception> // used in Persistence
 #include "ecore/ecoreFactory.hpp"
-#include "ocl/Expressions/ExpressionsFactory.hpp"
 #include "ocl/Evaluations/EvaluationsFactory.hpp"
+#include "ocl/Expressions/ExpressionsFactory.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClassifier.hpp"
 #include "ecore/EGenericType.hpp"
@@ -238,7 +238,7 @@ void VariableExpEvalImpl::saveContent(std::shared_ptr<persistence::interfaces::X
 	}
 }
 
-std::shared_ptr<ecore::EClass> VariableExpEvalImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& VariableExpEvalImpl::eStaticClass() const
 {
 	return ocl::Evaluations::EvaluationsPackage::eInstance()->getVariableExpEval_Class();
 }

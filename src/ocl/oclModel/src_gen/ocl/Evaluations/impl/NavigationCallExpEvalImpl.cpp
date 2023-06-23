@@ -280,7 +280,7 @@ void NavigationCallExpEvalImpl::saveContent(std::shared_ptr<persistence::interfa
 	}
 }
 
-std::shared_ptr<ecore::EClass> NavigationCallExpEvalImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& NavigationCallExpEvalImpl::eStaticClass() const
 {
 	return ocl::Evaluations::EvaluationsPackage::eInstance()->getNavigationCallExpEval_Class();
 }

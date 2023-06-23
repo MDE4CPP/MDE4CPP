@@ -321,7 +321,7 @@ void TimeObservationImpl::saveContent(std::shared_ptr<persistence::interfaces::X
 	}
 }
 
-std::shared_ptr<ecore::EClass> TimeObservationImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& TimeObservationImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getTimeObservation_Class();
 }

@@ -355,7 +355,7 @@ void SequenceNodeImpl::saveContent(std::shared_ptr<persistence::interfaces::XSav
 	}
 }
 
-std::shared_ptr<ecore::EClass> SequenceNodeImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& SequenceNodeImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getSequenceNode_Class();
 }

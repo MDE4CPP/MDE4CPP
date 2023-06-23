@@ -245,7 +245,7 @@ void AssociationEndCallExpEvalImpl::saveContent(std::shared_ptr<persistence::int
 	}
 }
 
-std::shared_ptr<ecore::EClass> AssociationEndCallExpEvalImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& AssociationEndCallExpEvalImpl::eStaticClass() const
 {
 	return ocl::Evaluations::EvaluationsPackage::eInstance()->getAssociationEndCallExpEval_Class();
 }

@@ -606,7 +606,7 @@ void ActivityNodeImpl::saveContent(std::shared_ptr<persistence::interfaces::XSav
 	}
 }
 
-std::shared_ptr<ecore::EClass> ActivityNodeImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& ActivityNodeImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getActivityNode_Class();
 }

@@ -384,7 +384,7 @@ void InvocationActionImpl::saveContent(std::shared_ptr<persistence::interfaces::
 	}
 }
 
-std::shared_ptr<ecore::EClass> InvocationActionImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& InvocationActionImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getInvocationAction_Class();
 }

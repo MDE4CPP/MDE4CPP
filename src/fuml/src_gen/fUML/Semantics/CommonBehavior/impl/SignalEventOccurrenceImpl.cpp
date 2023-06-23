@@ -290,7 +290,7 @@ void SignalEventOccurrenceImpl::saveContent(std::shared_ptr<persistence::interfa
 	}
 }
 
-std::shared_ptr<ecore::EClass> SignalEventOccurrenceImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& SignalEventOccurrenceImpl::eStaticClass() const
 {
 	return fUML::Semantics::CommonBehavior::CommonBehaviorPackage::eInstance()->getSignalEventOccurrence_Class();
 }

@@ -408,7 +408,7 @@ void StringExpressionImpl::saveContent(std::shared_ptr<persistence::interfaces::
 	}
 }
 
-std::shared_ptr<ecore::EClass> StringExpressionImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& StringExpressionImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getStringExpression_Class();
 }

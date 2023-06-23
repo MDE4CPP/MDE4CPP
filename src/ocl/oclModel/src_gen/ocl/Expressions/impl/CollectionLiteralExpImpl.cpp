@@ -477,7 +477,7 @@ void CollectionLiteralExpImpl::saveContent(std::shared_ptr<persistence::interfac
 	}
 }
 
-std::shared_ptr<ecore::EClass> CollectionLiteralExpImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& CollectionLiteralExpImpl::eStaticClass() const
 {
 	return ocl::Expressions::ExpressionsPackage::eInstance()->getCollectionLiteralExp_Class();
 }

@@ -329,7 +329,7 @@ void ProfileApplicationImpl::saveContent(std::shared_ptr<persistence::interfaces
 	}
 }
 
-std::shared_ptr<ecore::EClass> ProfileApplicationImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& ProfileApplicationImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getProfileApplication_Class();
 }

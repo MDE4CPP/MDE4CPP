@@ -586,7 +586,7 @@ void StateMachineImpl::saveContent(std::shared_ptr<persistence::interfaces::XSav
 	}
 }
 
-std::shared_ptr<ecore::EClass> StateMachineImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& StateMachineImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getStateMachine_Class();
 }

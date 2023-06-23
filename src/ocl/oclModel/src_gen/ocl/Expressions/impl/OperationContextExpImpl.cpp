@@ -444,7 +444,7 @@ void OperationContextExpImpl::saveContent(std::shared_ptr<persistence::interface
 	}
 }
 
-std::shared_ptr<ecore::EClass> OperationContextExpImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& OperationContextExpImpl::eStaticClass() const
 {
 	return ocl::Expressions::ExpressionsPackage::eInstance()->getOperationContextExp_Class();
 }

@@ -301,7 +301,7 @@ void ConsiderIgnoreFragmentImpl::saveContent(std::shared_ptr<persistence::interf
 	}
 }
 
-std::shared_ptr<ecore::EClass> ConsiderIgnoreFragmentImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& ConsiderIgnoreFragmentImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getConsiderIgnoreFragment_Class();
 }

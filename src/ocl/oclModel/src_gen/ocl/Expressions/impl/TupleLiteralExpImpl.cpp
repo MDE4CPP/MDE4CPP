@@ -397,7 +397,7 @@ void TupleLiteralExpImpl::saveContent(std::shared_ptr<persistence::interfaces::X
 	}
 }
 
-std::shared_ptr<ecore::EClass> TupleLiteralExpImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& TupleLiteralExpImpl::eStaticClass() const
 {
 	return ocl::Expressions::ExpressionsPackage::eInstance()->getTupleLiteralExp_Class();
 }

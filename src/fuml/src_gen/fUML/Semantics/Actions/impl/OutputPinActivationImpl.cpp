@@ -38,9 +38,9 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "fUML/Semantics/Actions/ActionsFactory.hpp"
-#include "fUML/Semantics/Activities/ActivitiesFactory.hpp"
 #include "uml/umlFactory.hpp"
+#include "fUML/Semantics/Activities/ActivitiesFactory.hpp"
+#include "fUML/Semantics/Actions/ActionsFactory.hpp"
 #include "fUML/Semantics/Actions/ActionActivation.hpp"
 #include "fUML/Semantics/Activities/ActivityEdgeInstance.hpp"
 #include "uml/ActivityNode.hpp"
@@ -212,7 +212,7 @@ void OutputPinActivationImpl::saveContent(std::shared_ptr<persistence::interface
 	}
 }
 
-std::shared_ptr<ecore::EClass> OutputPinActivationImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& OutputPinActivationImpl::eStaticClass() const
 {
 	return fUML::Semantics::Actions::ActionsPackage::eInstance()->getOutputPinActivation_Class();
 }

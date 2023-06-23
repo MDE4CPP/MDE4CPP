@@ -51,8 +51,8 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "uml/umlFactory.hpp"
 #include "fUML/Semantics/Loci/LociFactory.hpp"
+#include "uml/umlFactory.hpp"
 #include "uml/Class.hpp"
 #include "uml/Classifier.hpp"
 #include "uml/Element.hpp"
@@ -468,7 +468,7 @@ void LocusImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandle
 	}
 }
 
-std::shared_ptr<ecore::EClass> LocusImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& LocusImpl::eStaticClass() const
 {
 	return fUML::Semantics::Loci::LociPackage::eInstance()->getLocus_Class();
 }

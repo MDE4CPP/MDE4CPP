@@ -266,7 +266,7 @@ void ClearVariableActionImpl::saveContent(std::shared_ptr<persistence::interface
 	}
 }
 
-std::shared_ptr<ecore::EClass> ClearVariableActionImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& ClearVariableActionImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getClearVariableAction_Class();
 }

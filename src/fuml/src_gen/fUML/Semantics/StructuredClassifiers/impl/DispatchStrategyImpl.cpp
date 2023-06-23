@@ -226,7 +226,7 @@ void DispatchStrategyImpl::saveContent(std::shared_ptr<persistence::interfaces::
 	}
 }
 
-std::shared_ptr<ecore::EClass> DispatchStrategyImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& DispatchStrategyImpl::eStaticClass() const
 {
 	return fUML::Semantics::StructuredClassifiers::StructuredClassifiersPackage::eInstance()->getDispatchStrategy_Class();
 }

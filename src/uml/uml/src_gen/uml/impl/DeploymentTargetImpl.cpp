@@ -306,7 +306,7 @@ void DeploymentTargetImpl::saveContent(std::shared_ptr<persistence::interfaces::
 	}
 }
 
-std::shared_ptr<ecore::EClass> DeploymentTargetImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& DeploymentTargetImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getDeploymentTarget_Class();
 }

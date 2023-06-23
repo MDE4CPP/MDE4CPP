@@ -349,7 +349,7 @@ void AddVariableValueActionImpl::saveContent(std::shared_ptr<persistence::interf
 	}
 }
 
-std::shared_ptr<ecore::EClass> AddVariableValueActionImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& AddVariableValueActionImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getAddVariableValueAction_Class();
 }

@@ -299,7 +299,7 @@ void TriggerImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHand
 	}
 }
 
-std::shared_ptr<ecore::EClass> TriggerImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& TriggerImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getTrigger_Class();
 }

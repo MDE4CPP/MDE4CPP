@@ -38,8 +38,8 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "uml/umlFactory.hpp"
 #include "fUML/Semantics/CommonBehavior/CommonBehaviorFactory.hpp"
+#include "uml/umlFactory.hpp"
 #include "uml/Class.hpp"
 #include "fUML/Semantics/CommonBehavior/Execution.hpp"
 #include "fUML/Semantics/CommonBehavior/ObjectActivation.hpp"
@@ -312,7 +312,7 @@ void ClassifierBehaviorExecutionImpl::saveContent(std::shared_ptr<persistence::i
 	}
 }
 
-std::shared_ptr<ecore::EClass> ClassifierBehaviorExecutionImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& ClassifierBehaviorExecutionImpl::eStaticClass() const
 {
 	return fUML::Semantics::CommonBehavior::CommonBehaviorPackage::eInstance()->getClassifierBehaviorExecution_Class();
 }

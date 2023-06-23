@@ -253,7 +253,7 @@ void TupleLiteralExpEvalImpl::saveContent(std::shared_ptr<persistence::interface
 	}
 }
 
-std::shared_ptr<ecore::EClass> TupleLiteralExpEvalImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& TupleLiteralExpEvalImpl::eStaticClass() const
 {
 	return ocl::Evaluations::EvaluationsPackage::eInstance()->getTupleLiteralExpEval_Class();
 }

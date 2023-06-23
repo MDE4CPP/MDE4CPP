@@ -208,7 +208,7 @@ void DeployedArtifactImpl::saveContent(std::shared_ptr<persistence::interfaces::
 	}
 }
 
-std::shared_ptr<ecore::EClass> DeployedArtifactImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& DeployedArtifactImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getDeployedArtifact_Class();
 }

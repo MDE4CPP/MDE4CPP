@@ -554,7 +554,7 @@ void BehavioralFeatureImpl::saveContent(std::shared_ptr<persistence::interfaces:
 	}
 }
 
-std::shared_ptr<ecore::EClass> BehavioralFeatureImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& BehavioralFeatureImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getBehavioralFeature_Class();
 }

@@ -572,7 +572,7 @@ void UseCaseImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHand
 	}
 }
 
-std::shared_ptr<ecore::EClass> UseCaseImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& UseCaseImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getUseCase_Class();
 }

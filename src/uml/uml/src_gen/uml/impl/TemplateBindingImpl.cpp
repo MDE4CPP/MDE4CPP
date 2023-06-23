@@ -373,7 +373,7 @@ void TemplateBindingImpl::saveContent(std::shared_ptr<persistence::interfaces::X
 	}
 }
 
-std::shared_ptr<ecore::EClass> TemplateBindingImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& TemplateBindingImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getTemplateBinding_Class();
 }

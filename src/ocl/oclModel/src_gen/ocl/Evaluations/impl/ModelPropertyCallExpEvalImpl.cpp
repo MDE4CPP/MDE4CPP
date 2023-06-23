@@ -208,7 +208,7 @@ void ModelPropertyCallExpEvalImpl::saveContent(std::shared_ptr<persistence::inte
 	}
 }
 
-std::shared_ptr<ecore::EClass> ModelPropertyCallExpEvalImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& ModelPropertyCallExpEvalImpl::eStaticClass() const
 {
 	return ocl::Evaluations::EvaluationsPackage::eInstance()->getModelPropertyCallExpEval_Class();
 }

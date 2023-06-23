@@ -336,7 +336,7 @@ void InformationItemImpl::saveContent(std::shared_ptr<persistence::interfaces::X
 	}
 }
 
-std::shared_ptr<ecore::EClass> InformationItemImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& InformationItemImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getInformationItem_Class();
 }

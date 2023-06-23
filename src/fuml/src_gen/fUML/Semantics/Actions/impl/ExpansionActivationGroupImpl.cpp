@@ -40,8 +40,8 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "fUML/Semantics/Actions/ActionsFactory.hpp"
 #include "fUML/Semantics/Activities/ActivitiesFactory.hpp"
+#include "fUML/Semantics/Actions/ActionsFactory.hpp"
 #include "fUML/Semantics/Activities/ActivityEdgeInstance.hpp"
 #include "fUML/Semantics/Activities/ActivityExecution.hpp"
 #include "uml/ActivityNode.hpp"
@@ -469,7 +469,7 @@ void ExpansionActivationGroupImpl::saveContent(std::shared_ptr<persistence::inte
 	}
 }
 
-std::shared_ptr<ecore::EClass> ExpansionActivationGroupImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& ExpansionActivationGroupImpl::eStaticClass() const
 {
 	return fUML::Semantics::Actions::ActionsPackage::eInstance()->getExpansionActivationGroup_Class();
 }

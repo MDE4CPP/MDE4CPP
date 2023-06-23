@@ -912,7 +912,7 @@ void PackageImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHand
 	}
 }
 
-std::shared_ptr<ecore::EClass> PackageImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& PackageImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getPackage_Class();
 }

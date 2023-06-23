@@ -14,12 +14,12 @@
 
 namespace ecore 
 {
+	class EReference;
+	class EEnum;
 	class EEnumLiteral;
+	class EAttribute;
 	class EDataType;
 	class EGenericType;
-	class EReference;
-	class EAttribute;
-	class EEnum;
 	class EClass;
 }
 

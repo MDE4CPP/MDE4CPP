@@ -385,7 +385,7 @@ void ConstraintImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveH
 	}
 }
 
-std::shared_ptr<ecore::EClass> ConstraintImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& ConstraintImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getConstraint_Class();
 }

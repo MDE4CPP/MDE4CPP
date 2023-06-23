@@ -39,8 +39,8 @@
 
 #include <exception> // used in Persistence
 #include "ecore/ecoreFactory.hpp"
-#include "ocl/Expressions/ExpressionsFactory.hpp"
 #include "ocl/Evaluations/EvaluationsFactory.hpp"
+#include "ocl/Expressions/ExpressionsFactory.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClassifier.hpp"
 #include "ecore/EGenericType.hpp"
@@ -201,7 +201,7 @@ void UnspecifiedValueExpEvalImpl::saveContent(std::shared_ptr<persistence::inter
 	}
 }
 
-std::shared_ptr<ecore::EClass> UnspecifiedValueExpEvalImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& UnspecifiedValueExpEvalImpl::eStaticClass() const
 {
 	return ocl::Evaluations::EvaluationsPackage::eInstance()->getUnspecifiedValueExpEval_Class();
 }

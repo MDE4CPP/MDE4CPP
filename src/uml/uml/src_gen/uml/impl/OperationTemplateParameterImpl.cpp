@@ -215,7 +215,7 @@ void OperationTemplateParameterImpl::saveContent(std::shared_ptr<persistence::in
 	}
 }
 
-std::shared_ptr<ecore::EClass> OperationTemplateParameterImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& OperationTemplateParameterImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getOperationTemplateParameter_Class();
 }

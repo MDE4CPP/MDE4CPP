@@ -724,7 +724,7 @@ void StructuredActivityNodeImpl::saveContent(std::shared_ptr<persistence::interf
 	}
 }
 
-std::shared_ptr<ecore::EClass> StructuredActivityNodeImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& StructuredActivityNodeImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getStructuredActivityNode_Class();
 }

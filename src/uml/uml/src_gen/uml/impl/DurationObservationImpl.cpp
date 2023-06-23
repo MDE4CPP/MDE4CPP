@@ -345,7 +345,7 @@ void DurationObservationImpl::saveContent(std::shared_ptr<persistence::interface
 	}
 }
 
-std::shared_ptr<ecore::EClass> DurationObservationImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& DurationObservationImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getDurationObservation_Class();
 }

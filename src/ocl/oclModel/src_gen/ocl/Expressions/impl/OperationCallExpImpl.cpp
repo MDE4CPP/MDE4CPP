@@ -464,7 +464,7 @@ void OperationCallExpImpl::saveContent(std::shared_ptr<persistence::interfaces::
 	}
 }
 
-std::shared_ptr<ecore::EClass> OperationCallExpImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& OperationCallExpImpl::eStaticClass() const
 {
 	return ocl::Expressions::ExpressionsPackage::eInstance()->getOperationCallExp_Class();
 }

@@ -300,7 +300,7 @@ void VertexImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandl
 	}
 }
 
-std::shared_ptr<ecore::EClass> VertexImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& VertexImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getVertex_Class();
 }

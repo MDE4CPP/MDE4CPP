@@ -424,7 +424,7 @@ void ValuePinImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHan
 	}
 }
 
-std::shared_ptr<ecore::EClass> ValuePinImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& ValuePinImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getValuePin_Class();
 }

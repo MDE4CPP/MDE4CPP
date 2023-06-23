@@ -430,7 +430,7 @@ void LetExpImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandl
 	}
 }
 
-std::shared_ptr<ecore::EClass> LetExpImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& LetExpImpl::eStaticClass() const
 {
 	return ocl::Expressions::ExpressionsPackage::eInstance()->getLetExp_Class();
 }

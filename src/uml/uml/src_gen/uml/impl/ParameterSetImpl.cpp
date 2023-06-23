@@ -347,7 +347,7 @@ void ParameterSetImpl::saveContent(std::shared_ptr<persistence::interfaces::XSav
 	}
 }
 
-std::shared_ptr<ecore::EClass> ParameterSetImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& ParameterSetImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getParameterSet_Class();
 }

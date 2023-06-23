@@ -341,7 +341,7 @@ void ExpansionNodeImpl::saveContent(std::shared_ptr<persistence::interfaces::XSa
 	}
 }
 
-std::shared_ptr<ecore::EClass> ExpansionNodeImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& ExpansionNodeImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getExpansionNode_Class();
 }

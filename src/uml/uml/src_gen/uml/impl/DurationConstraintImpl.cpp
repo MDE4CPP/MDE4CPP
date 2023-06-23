@@ -316,7 +316,7 @@ void DurationConstraintImpl::saveContent(std::shared_ptr<persistence::interfaces
 	}
 }
 
-std::shared_ptr<ecore::EClass> DurationConstraintImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& DurationConstraintImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getDurationConstraint_Class();
 }

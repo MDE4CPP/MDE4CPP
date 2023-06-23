@@ -46,8 +46,8 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "fUML/Semantics/Actions/ActionsFactory.hpp"
 #include "uml/umlFactory.hpp"
+#include "fUML/Semantics/Actions/ActionsFactory.hpp"
 #include "fUML/Semantics/Activities/ActivitiesFactory.hpp"
 #include "fUML/Semantics/CommonBehavior/CommonBehaviorFactory.hpp"
 #include "uml/Action.hpp"
@@ -366,7 +366,7 @@ void CallBehaviorActionActivationImpl::saveContent(std::shared_ptr<persistence::
 	}
 }
 
-std::shared_ptr<ecore::EClass> CallBehaviorActionActivationImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& CallBehaviorActionActivationImpl::eStaticClass() const
 {
 	return fUML::Semantics::Actions::ActionsPackage::eInstance()->getCallBehaviorActionActivation_Class();
 }

@@ -497,7 +497,7 @@ void StructuredClassifierImpl::saveContent(std::shared_ptr<persistence::interfac
 	}
 }
 
-std::shared_ptr<ecore::EClass> StructuredClassifierImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& StructuredClassifierImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getStructuredClassifier_Class();
 }

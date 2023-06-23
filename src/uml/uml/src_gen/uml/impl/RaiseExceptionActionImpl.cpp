@@ -307,7 +307,7 @@ void RaiseExceptionActionImpl::saveContent(std::shared_ptr<persistence::interfac
 	}
 }
 
-std::shared_ptr<ecore::EClass> RaiseExceptionActionImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& RaiseExceptionActionImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getRaiseExceptionAction_Class();
 }

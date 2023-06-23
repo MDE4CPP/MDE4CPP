@@ -257,7 +257,7 @@ void ForkNodeImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHan
 	}
 }
 
-std::shared_ptr<ecore::EClass> ForkNodeImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& ForkNodeImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getForkNode_Class();
 }

@@ -50,8 +50,8 @@
 
 #include <exception> // used in Persistence
 #include "fUML/Semantics/Actions/ActionsFactory.hpp"
-#include "uml/umlFactory.hpp"
 #include "fUML/Semantics/Activities/ActivitiesFactory.hpp"
+#include "uml/umlFactory.hpp"
 #include "uml/Action.hpp"
 #include "fUML/Semantics/Activities/ActivityEdgeInstance.hpp"
 #include "uml/ActivityNode.hpp"
@@ -382,7 +382,7 @@ void SendSignalActionActivationImpl::saveContent(std::shared_ptr<persistence::in
 	}
 }
 
-std::shared_ptr<ecore::EClass> SendSignalActionActivationImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& SendSignalActionActivationImpl::eStaticClass() const
 {
 	return fUML::Semantics::Actions::ActionsPackage::eInstance()->getSendSignalActionActivation_Class();
 }

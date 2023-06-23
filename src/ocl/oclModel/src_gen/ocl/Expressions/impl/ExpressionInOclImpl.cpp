@@ -359,7 +359,7 @@ void ExpressionInOclImpl::saveContent(std::shared_ptr<persistence::interfaces::X
 	}
 }
 
-std::shared_ptr<ecore::EClass> ExpressionInOclImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& ExpressionInOclImpl::eStaticClass() const
 {
 	return ocl::Expressions::ExpressionsPackage::eInstance()->getExpressionInOcl_Class();
 }

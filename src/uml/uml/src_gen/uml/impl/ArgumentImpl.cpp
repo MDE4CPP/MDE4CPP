@@ -251,7 +251,7 @@ void ArgumentImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHan
 	}
 }
 
-std::shared_ptr<ecore::EClass> ArgumentImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& ArgumentImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getArgument_Class();
 }

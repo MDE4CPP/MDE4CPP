@@ -49,8 +49,8 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "fUML/Semantics/Actions/ActionsFactory.hpp"
 #include "uml/umlFactory.hpp"
+#include "fUML/Semantics/Actions/ActionsFactory.hpp"
 #include "fUML/Semantics/Activities/ActivitiesFactory.hpp"
 #include "uml/Action.hpp"
 #include "fUML/Semantics/Activities/ActivityEdgeInstance.hpp"
@@ -360,7 +360,7 @@ void ReadStructuralFeatureActionActivationImpl::saveContent(std::shared_ptr<pers
 	}
 }
 
-std::shared_ptr<ecore::EClass> ReadStructuralFeatureActionActivationImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& ReadStructuralFeatureActionActivationImpl::eStaticClass() const
 {
 	return fUML::Semantics::Actions::ActionsPackage::eInstance()->getReadStructuralFeatureActionActivation_Class();
 }

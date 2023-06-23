@@ -484,7 +484,7 @@ void ProfileImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHand
 	}
 }
 
-std::shared_ptr<ecore::EClass> ProfileImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& ProfileImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getProfile_Class();
 }

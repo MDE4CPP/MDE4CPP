@@ -408,7 +408,7 @@ void PrefixedExpImpl::saveContent(std::shared_ptr<persistence::interfaces::XSave
 	}
 }
 
-std::shared_ptr<ecore::EClass> PrefixedExpImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& PrefixedExpImpl::eStaticClass() const
 {
 	return ocl::Expressions::ExpressionsPackage::eInstance()->getPrefixedExp_Class();
 }

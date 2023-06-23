@@ -250,7 +250,7 @@ void CollectionItemEvalImpl::saveContent(std::shared_ptr<persistence::interfaces
 	}
 }
 
-std::shared_ptr<ecore::EClass> CollectionItemEvalImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& CollectionItemEvalImpl::eStaticClass() const
 {
 	return ocl::Evaluations::EvaluationsPackage::eInstance()->getCollectionItemEval_Class();
 }

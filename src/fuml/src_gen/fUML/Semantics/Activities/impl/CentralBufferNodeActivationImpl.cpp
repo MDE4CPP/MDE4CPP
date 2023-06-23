@@ -216,7 +216,7 @@ void CentralBufferNodeActivationImpl::saveContent(std::shared_ptr<persistence::i
 	}
 }
 
-std::shared_ptr<ecore::EClass> CentralBufferNodeActivationImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& CentralBufferNodeActivationImpl::eStaticClass() const
 {
 	return fUML::Semantics::Activities::ActivitiesPackage::eInstance()->getCentralBufferNodeActivation_Class();
 }

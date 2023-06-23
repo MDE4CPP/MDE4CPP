@@ -357,7 +357,7 @@ void IntervalImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHan
 	}
 }
 
-std::shared_ptr<ecore::EClass> IntervalImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& IntervalImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getInterval_Class();
 }

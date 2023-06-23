@@ -601,7 +601,7 @@ void TransitionImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveH
 	}
 }
 
-std::shared_ptr<ecore::EClass> TransitionImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& TransitionImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getTransition_Class();
 }

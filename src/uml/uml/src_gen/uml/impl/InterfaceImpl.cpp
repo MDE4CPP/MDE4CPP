@@ -719,7 +719,7 @@ void InterfaceImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHa
 	}
 }
 
-std::shared_ptr<ecore::EClass> InterfaceImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& InterfaceImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getInterface_Class();
 }

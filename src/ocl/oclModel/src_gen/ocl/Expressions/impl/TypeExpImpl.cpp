@@ -374,7 +374,7 @@ void TypeExpImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHand
 	}
 }
 
-std::shared_ptr<ecore::EClass> TypeExpImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& TypeExpImpl::eStaticClass() const
 {
 	return ocl::Expressions::ExpressionsPackage::eInstance()->getTypeExp_Class();
 }

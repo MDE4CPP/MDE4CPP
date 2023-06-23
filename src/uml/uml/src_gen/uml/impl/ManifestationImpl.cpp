@@ -306,7 +306,7 @@ void ManifestationImpl::saveContent(std::shared_ptr<persistence::interfaces::XSa
 	}
 }
 
-std::shared_ptr<ecore::EClass> ManifestationImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& ManifestationImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getManifestation_Class();
 }

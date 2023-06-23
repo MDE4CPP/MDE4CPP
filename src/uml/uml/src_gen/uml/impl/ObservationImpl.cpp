@@ -239,7 +239,7 @@ void ObservationImpl::saveContent(std::shared_ptr<persistence::interfaces::XSave
 	}
 }
 
-std::shared_ptr<ecore::EClass> ObservationImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& ObservationImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getObservation_Class();
 }

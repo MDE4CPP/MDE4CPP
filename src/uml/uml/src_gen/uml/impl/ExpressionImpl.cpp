@@ -396,7 +396,7 @@ void ExpressionImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveH
 	}
 }
 
-std::shared_ptr<ecore::EClass> ExpressionImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& ExpressionImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getExpression_Class();
 }

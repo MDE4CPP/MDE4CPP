@@ -39,8 +39,8 @@
 
 #include <exception> // used in Persistence
 #include "ecore/ecoreFactory.hpp"
-#include "ocl/Expressions/ExpressionsFactory.hpp"
 #include "ocl/Evaluations/EvaluationsFactory.hpp"
+#include "ocl/Expressions/ExpressionsFactory.hpp"
 #include "ocl/Evaluations/CollectionLiteralPartEval.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClassifier.hpp"
@@ -253,7 +253,7 @@ void CollectionLiteralExpEvalImpl::saveContent(std::shared_ptr<persistence::inte
 	}
 }
 
-std::shared_ptr<ecore::EClass> CollectionLiteralExpEvalImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& CollectionLiteralExpEvalImpl::eStaticClass() const
 {
 	return ocl::Evaluations::EvaluationsPackage::eInstance()->getCollectionLiteralExpEval_Class();
 }

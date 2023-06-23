@@ -428,7 +428,7 @@ void PseudostateImpl::saveContent(std::shared_ptr<persistence::interfaces::XSave
 	}
 }
 
-std::shared_ptr<ecore::EClass> PseudostateImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& PseudostateImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getPseudostate_Class();
 }

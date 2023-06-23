@@ -292,7 +292,7 @@ void TupleLiteralPartImpl::saveContent(std::shared_ptr<persistence::interfaces::
 	}
 }
 
-std::shared_ptr<ecore::EClass> TupleLiteralPartImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& TupleLiteralPartImpl::eStaticClass() const
 {
 	return ocl::Expressions::ExpressionsPackage::eInstance()->getTupleLiteralPart_Class();
 }

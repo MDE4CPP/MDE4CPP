@@ -320,7 +320,7 @@ void OfferImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandle
 	}
 }
 
-std::shared_ptr<ecore::EClass> OfferImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& OfferImpl::eStaticClass() const
 {
 	return fUML::Semantics::Activities::ActivitiesPackage::eInstance()->getOffer_Class();
 }

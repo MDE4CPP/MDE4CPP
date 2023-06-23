@@ -298,7 +298,7 @@ void BehaviorExecutionSpecificationImpl::saveContent(std::shared_ptr<persistence
 	}
 }
 
-std::shared_ptr<ecore::EClass> BehaviorExecutionSpecificationImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& BehaviorExecutionSpecificationImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getBehaviorExecutionSpecification_Class();
 }

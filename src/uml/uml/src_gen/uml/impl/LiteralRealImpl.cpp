@@ -333,7 +333,7 @@ void LiteralRealImpl::saveContent(std::shared_ptr<persistence::interfaces::XSave
 	}
 }
 
-std::shared_ptr<ecore::EClass> LiteralRealImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& LiteralRealImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getLiteralReal_Class();
 }

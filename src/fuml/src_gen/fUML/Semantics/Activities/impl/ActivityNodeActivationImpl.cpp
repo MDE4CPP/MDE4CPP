@@ -785,7 +785,7 @@ void ActivityNodeActivationImpl::saveContent(std::shared_ptr<persistence::interf
 	}
 }
 
-std::shared_ptr<ecore::EClass> ActivityNodeActivationImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& ActivityNodeActivationImpl::eStaticClass() const
 {
 	return fUML::Semantics::Activities::ActivitiesPackage::eInstance()->getActivityNodeActivation_Class();
 }

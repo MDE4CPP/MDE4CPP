@@ -465,7 +465,7 @@ void NamedElementImpl::saveContent(std::shared_ptr<persistence::interfaces::XSav
 	}
 }
 
-std::shared_ptr<ecore::EClass> NamedElementImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& NamedElementImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getNamedElement_Class();
 }

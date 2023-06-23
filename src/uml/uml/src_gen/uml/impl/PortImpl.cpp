@@ -590,7 +590,7 @@ void PortImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler
 	}
 }
 
-std::shared_ptr<ecore::EClass> PortImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& PortImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getPort_Class();
 }

@@ -218,7 +218,7 @@ void ValuesImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandl
 	}
 }
 
-std::shared_ptr<ecore::EClass> ValuesImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& ValuesImpl::eStaticClass() const
 {
 	return fUML::Semantics::Actions::ActionsPackage::eInstance()->getValues_Class();
 }

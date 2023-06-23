@@ -421,7 +421,7 @@ void ClauseImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandl
 	}
 }
 
-std::shared_ptr<ecore::EClass> ClauseImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& ClauseImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getClause_Class();
 }

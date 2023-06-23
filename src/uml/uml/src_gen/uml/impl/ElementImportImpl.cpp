@@ -379,7 +379,7 @@ void ElementImportImpl::saveContent(std::shared_ptr<persistence::interfaces::XSa
 	}
 }
 
-std::shared_ptr<ecore::EClass> ElementImportImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& ElementImportImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getElementImport_Class();
 }

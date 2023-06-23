@@ -255,7 +255,7 @@ void RealizationImpl::saveContent(std::shared_ptr<persistence::interfaces::XSave
 	}
 }
 
-std::shared_ptr<ecore::EClass> RealizationImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& RealizationImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getRealization_Class();
 }

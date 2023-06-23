@@ -274,7 +274,7 @@ void LinkEndDestructionDataImpl::saveContent(std::shared_ptr<persistence::interf
 	}
 }
 
-std::shared_ptr<ecore::EClass> LinkEndDestructionDataImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& LinkEndDestructionDataImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getLinkEndDestructionData_Class();
 }

@@ -362,7 +362,7 @@ void LinkEndDataImpl::saveContent(std::shared_ptr<persistence::interfaces::XSave
 	}
 }
 
-std::shared_ptr<ecore::EClass> LinkEndDataImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& LinkEndDataImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getLinkEndData_Class();
 }

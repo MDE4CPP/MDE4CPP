@@ -365,7 +365,7 @@ void InterruptibleActivityRegionImpl::saveContent(std::shared_ptr<persistence::i
 	}
 }
 
-std::shared_ptr<ecore::EClass> InterruptibleActivityRegionImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& InterruptibleActivityRegionImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getInterruptibleActivityRegion_Class();
 }

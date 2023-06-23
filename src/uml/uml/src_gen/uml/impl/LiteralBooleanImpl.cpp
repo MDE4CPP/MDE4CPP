@@ -333,7 +333,7 @@ void LiteralBooleanImpl::saveContent(std::shared_ptr<persistence::interfaces::XS
 	}
 }
 
-std::shared_ptr<ecore::EClass> LiteralBooleanImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& LiteralBooleanImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getLiteralBoolean_Class();
 }

@@ -182,7 +182,7 @@ void EventAccepterImpl::saveContent(std::shared_ptr<persistence::interfaces::XSa
 	}
 }
 
-std::shared_ptr<ecore::EClass> EventAccepterImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& EventAccepterImpl::eStaticClass() const
 {
 	return fUML::Semantics::CommonBehavior::CommonBehaviorPackage::eInstance()->getEventAccepter_Class();
 }

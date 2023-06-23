@@ -644,7 +644,7 @@ void ActivityEdgeImpl::saveContent(std::shared_ptr<persistence::interfaces::XSav
 	}
 }
 
-std::shared_ptr<ecore::EClass> ActivityEdgeImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& ActivityEdgeImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getActivityEdge_Class();
 }

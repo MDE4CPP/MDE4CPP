@@ -457,7 +457,7 @@ void PrePostBodyListExpImpl::saveContent(std::shared_ptr<persistence::interfaces
 	}
 }
 
-std::shared_ptr<ecore::EClass> PrePostBodyListExpImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& PrePostBodyListExpImpl::eStaticClass() const
 {
 	return ocl::Expressions::ExpressionsPackage::eInstance()->getPrePostBodyListExp_Class();
 }

@@ -408,7 +408,7 @@ void ETypedElementImpl::saveContent(std::shared_ptr<persistence::interfaces::XSa
 	}
 }
 
-std::shared_ptr<EClass> ETypedElementImpl::eStaticClass() const
+const std::shared_ptr<EClass>& ETypedElementImpl::eStaticClass() const
 {
 	return ecore::ecorePackage::eInstance()->getETypedElement_Class();
 }

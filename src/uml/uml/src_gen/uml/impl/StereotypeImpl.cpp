@@ -439,7 +439,7 @@ void StereotypeImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveH
 	}
 }
 
-std::shared_ptr<ecore::EClass> StereotypeImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& StereotypeImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getStereotype_Class();
 }

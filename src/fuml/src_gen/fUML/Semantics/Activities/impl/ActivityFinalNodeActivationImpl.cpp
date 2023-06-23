@@ -251,7 +251,7 @@ void ActivityFinalNodeActivationImpl::saveContent(std::shared_ptr<persistence::i
 	}
 }
 
-std::shared_ptr<ecore::EClass> ActivityFinalNodeActivationImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& ActivityFinalNodeActivationImpl::eStaticClass() const
 {
 	return fUML::Semantics::Activities::ActivitiesPackage::eInstance()->getActivityFinalNodeActivation_Class();
 }

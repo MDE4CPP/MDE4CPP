@@ -14,18 +14,18 @@
 
 namespace ecore 
 {
-	class EEnumLiteral;
-	class EParameter;
-	class EDataType;
-	class EStringToStringMapEntry;
-	class EGenericType;
 	class EReference;
-	class EOperation;
-	class EAttribute;
-	class EEnum;
 	class EAnnotation;
-	class EPackage;
+	class EEnum;
+	class EEnumLiteral;
+	class EAttribute;
+	class EDataType;
+	class EGenericType;
 	class EClass;
+	class EStringToStringMapEntry;
+	class EOperation;
+	class EPackage;
+	class EParameter;
 }
 
 namespace PSCS::Semantics 

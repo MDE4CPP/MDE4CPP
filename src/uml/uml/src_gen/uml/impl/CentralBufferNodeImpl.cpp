@@ -262,7 +262,7 @@ void CentralBufferNodeImpl::saveContent(std::shared_ptr<persistence::interfaces:
 	}
 }
 
-std::shared_ptr<ecore::EClass> CentralBufferNodeImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& CentralBufferNodeImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getCentralBufferNode_Class();
 }

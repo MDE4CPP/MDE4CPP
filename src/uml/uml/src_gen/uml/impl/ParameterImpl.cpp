@@ -619,7 +619,7 @@ void ParameterImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHa
 	}
 }
 
-std::shared_ptr<ecore::EClass> ParameterImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& ParameterImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getParameter_Class();
 }

@@ -426,7 +426,7 @@ void UnmarshallActionImpl::saveContent(std::shared_ptr<persistence::interfaces::
 	}
 }
 
-std::shared_ptr<ecore::EClass> UnmarshallActionImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& UnmarshallActionImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getUnmarshallAction_Class();
 }

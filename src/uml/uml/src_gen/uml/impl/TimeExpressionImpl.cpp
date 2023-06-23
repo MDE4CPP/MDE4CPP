@@ -375,7 +375,7 @@ void TimeExpressionImpl::saveContent(std::shared_ptr<persistence::interfaces::XS
 	}
 }
 
-std::shared_ptr<ecore::EClass> TimeExpressionImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& TimeExpressionImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getTimeExpression_Class();
 }

@@ -38,10 +38,10 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "uml/umlFactory.hpp"
-#include "fUML/Semantics/Loci/LociFactory.hpp"
 #include "ecore/ecoreFactory.hpp"
 #include "fUML/Semantics/CommonBehavior/CommonBehaviorFactory.hpp"
+#include "uml/umlFactory.hpp"
+#include "fUML/Semantics/Loci/LociFactory.hpp"
 #include "uml/Class.hpp"
 #include "uml/Classifier.hpp"
 #include "uml/Comment.hpp"
@@ -362,7 +362,7 @@ void FUML_ObjectImpl::saveContent(std::shared_ptr<persistence::interfaces::XSave
 	}
 }
 
-std::shared_ptr<ecore::EClass> FUML_ObjectImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& FUML_ObjectImpl::eStaticClass() const
 {
 	return fUML::MDE4CPP_Extensions::MDE4CPP_ExtensionsPackage::eInstance()->getFUML_Object_Class();
 }

@@ -317,7 +317,7 @@ void TemplateableElementImpl::saveContent(std::shared_ptr<persistence::interface
 	}
 }
 
-std::shared_ptr<ecore::EClass> TemplateableElementImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& TemplateableElementImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getTemplateableElement_Class();
 }

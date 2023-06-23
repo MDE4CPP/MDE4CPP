@@ -412,7 +412,7 @@ void LinkActionImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveH
 	}
 }
 
-std::shared_ptr<ecore::EClass> LinkActionImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& LinkActionImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getLinkAction_Class();
 }

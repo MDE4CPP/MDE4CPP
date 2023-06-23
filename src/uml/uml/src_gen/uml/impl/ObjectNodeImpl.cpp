@@ -467,7 +467,7 @@ void ObjectNodeImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveH
 	}
 }
 
-std::shared_ptr<ecore::EClass> ObjectNodeImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& ObjectNodeImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getObjectNode_Class();
 }

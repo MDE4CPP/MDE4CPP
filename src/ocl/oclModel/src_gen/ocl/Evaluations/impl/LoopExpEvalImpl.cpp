@@ -299,7 +299,7 @@ void LoopExpEvalImpl::saveContent(std::shared_ptr<persistence::interfaces::XSave
 	}
 }
 
-std::shared_ptr<ecore::EClass> LoopExpEvalImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& LoopExpEvalImpl::eStaticClass() const
 {
 	return ocl::Evaluations::EvaluationsPackage::eInstance()->getLoopExpEval_Class();
 }

@@ -415,7 +415,7 @@ void InteractionFragmentImpl::saveContent(std::shared_ptr<persistence::interface
 	}
 }
 
-std::shared_ptr<ecore::EClass> InteractionFragmentImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& InteractionFragmentImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getInteractionFragment_Class();
 }

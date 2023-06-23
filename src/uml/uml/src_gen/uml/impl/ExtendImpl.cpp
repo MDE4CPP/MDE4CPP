@@ -395,7 +395,7 @@ void ExtendImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandl
 	}
 }
 
-std::shared_ptr<ecore::EClass> ExtendImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& ExtendImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getExtend_Class();
 }

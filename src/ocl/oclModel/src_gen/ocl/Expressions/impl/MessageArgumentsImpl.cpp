@@ -244,7 +244,7 @@ void MessageArgumentsImpl::saveContent(std::shared_ptr<persistence::interfaces::
 	}
 }
 
-std::shared_ptr<ecore::EClass> MessageArgumentsImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& MessageArgumentsImpl::eStaticClass() const
 {
 	return ocl::Expressions::ExpressionsPackage::eInstance()->getMessageArguments_Class();
 }

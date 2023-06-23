@@ -209,7 +209,7 @@ void ObjectTokenImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XL
 		if ( iter != attr_list.end() )
 		{
 			// TODO this attribute has a non handle type
-			std::cout << "| ERROR    | " << __PRETTY_FUNCTION__ << " handle type of 'value'" << " org.eclipse.emf.ecore.impl.EDataTypeImpl@6ecab872 (name: EJavaObject) (instanceClassName: java.lang.Object) (serializable: true)" << std::endl; 
+			std::cout << "| ERROR    | " << __PRETTY_FUNCTION__ << " handle type of 'value'" << " org.eclipse.emf.ecore.impl.EDataTypeImpl@11b455e5 (name: EJavaObject) (instanceClassName: java.lang.Object) (serializable: true)" << std::endl; 
 			std::shared_ptr<Any> value; 			this->setValue(value);
 		}
 	}
@@ -258,7 +258,7 @@ void ObjectTokenImpl::saveContent(std::shared_ptr<persistence::interfaces::XSave
 	}
 }
 
-std::shared_ptr<ecore::EClass> ObjectTokenImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& ObjectTokenImpl::eStaticClass() const
 {
 	return fUML::Semantics::Activities::ActivitiesPackage::eInstance()->getObjectToken_Class();
 }

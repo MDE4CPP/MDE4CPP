@@ -41,8 +41,8 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "fUML/Semantics/Activities/ActivitiesFactory.hpp"
 #include "uml/umlFactory.hpp"
+#include "fUML/Semantics/Activities/ActivitiesFactory.hpp"
 #include "uml/ActivityEdge.hpp"
 #include "fUML/Semantics/Activities/ActivityNodeActivation.hpp"
 #include "fUML/Semantics/Activities/ActivityNodeActivationGroup.hpp"
@@ -478,7 +478,7 @@ void ActivityEdgeInstanceImpl::saveContent(std::shared_ptr<persistence::interfac
 	}
 }
 
-std::shared_ptr<ecore::EClass> ActivityEdgeInstanceImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& ActivityEdgeInstanceImpl::eStaticClass() const
 {
 	return fUML::Semantics::Activities::ActivitiesPackage::eInstance()->getActivityEdgeInstance_Class();
 }

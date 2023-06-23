@@ -381,7 +381,7 @@ void GeneralizationSetImpl::saveContent(std::shared_ptr<persistence::interfaces:
 	}
 }
 
-std::shared_ptr<ecore::EClass> GeneralizationSetImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& GeneralizationSetImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getGeneralizationSet_Class();
 }

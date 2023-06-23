@@ -333,7 +333,7 @@ void LiteralIntegerImpl::saveContent(std::shared_ptr<persistence::interfaces::XS
 	}
 }
 
-std::shared_ptr<ecore::EClass> LiteralIntegerImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& LiteralIntegerImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getLiteralInteger_Class();
 }

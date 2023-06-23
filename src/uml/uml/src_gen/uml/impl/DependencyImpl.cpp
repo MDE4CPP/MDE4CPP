@@ -408,7 +408,7 @@ void DependencyImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveH
 	}
 }
 
-std::shared_ptr<ecore::EClass> DependencyImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& DependencyImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getDependency_Class();
 }

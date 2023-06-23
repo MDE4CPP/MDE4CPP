@@ -295,7 +295,7 @@ void GeneralOrderingImpl::saveContent(std::shared_ptr<persistence::interfaces::X
 	}
 }
 
-std::shared_ptr<ecore::EClass> GeneralOrderingImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& GeneralOrderingImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getGeneralOrdering_Class();
 }

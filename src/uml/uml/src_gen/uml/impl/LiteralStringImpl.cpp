@@ -333,7 +333,7 @@ void LiteralStringImpl::saveContent(std::shared_ptr<persistence::interfaces::XSa
 	}
 }
 
-std::shared_ptr<ecore::EClass> LiteralStringImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& LiteralStringImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getLiteralString_Class();
 }
