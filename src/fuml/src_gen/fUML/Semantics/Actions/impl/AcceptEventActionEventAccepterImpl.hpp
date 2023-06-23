@@ -43,6 +43,8 @@ namespace fUML::Semantics::Actions
 			//*********************************
 			// Operations
 			//*********************************
+			virtual void accept(std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccurrence> eventOccurence) ;
+			virtual bool match(std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccurrence> eventOccurence) ;
 			
 			//*********************************
 			// Attribute Getters & Setters

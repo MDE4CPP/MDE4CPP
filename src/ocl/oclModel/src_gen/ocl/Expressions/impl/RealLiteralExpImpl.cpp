@@ -35,8 +35,8 @@
 
 #include <exception> // used in Persistence
 #include "ocl/Expressions/ExpressionsFactory.hpp"
-#include "ocl/Evaluations/EvaluationsFactory.hpp"
 #include "ecore/ecoreFactory.hpp"
+#include "ocl/Evaluations/EvaluationsFactory.hpp"
 #include "ocl/Expressions/CallExp.hpp"
 #include "ocl/Expressions/CollectionRange.hpp"
 #include "ecore/EAnnotation.hpp"

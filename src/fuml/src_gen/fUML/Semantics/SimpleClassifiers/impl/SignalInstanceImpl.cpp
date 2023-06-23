@@ -34,8 +34,9 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "fUML/Semantics/SimpleClassifiers/SimpleClassifiersFactory.hpp"
 #include "uml/umlFactory.hpp"
+#include "fUML/Semantics/SimpleClassifiers/SimpleClassifiersFactory.hpp"
+#include "uml/Classifier.hpp"
 #include "fUML/Semantics/SimpleClassifiers/CompoundValue.hpp"
 #include "fUML/Semantics/SimpleClassifiers/FeatureValue.hpp"
 #include "uml/Signal.hpp"
@@ -119,6 +120,16 @@ std::shared_ptr<fUML::Semantics::Values::Value> SignalInstanceImpl::_copy()
 std::shared_ptr<fUML::Semantics::SimpleClassifiers::SignalInstance> newValue = std::dynamic_pointer_cast<fUML::Semantics::SimpleClassifiers::SignalInstance>(fUML::Semantics::SimpleClassifiers::CompoundValueImpl::_copy());
 newValue->setType(this->getType());
 return newValue;
+	//end of body
+}
+
+std::shared_ptr<Bag<uml::Classifier> > SignalInstanceImpl::getTypes() const
+{
+	//ADD_COUNT(__PRETTY_FUNCTION__)
+	//generated from body annotation
+	std::shared_ptr<Bag<uml::Classifier> > types(new Bag<uml::Classifier>());
+    types->push_back(std::dynamic_pointer_cast<uml::Classifier>(this->getType()));
+    return types;
 	//end of body
 }
 
@@ -318,6 +329,13 @@ Any SignalInstanceImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>>
 		case SimpleClassifiersPackage::SIGNALINSTANCE_OPERATION__COPY:
 		{
 			result = eAnyObject(this->_copy(), fUML::Semantics::Values::ValuesPackage::VALUE_CLASS);
+			break;
+		}
+		// fUML::Semantics::SimpleClassifiers::SignalInstance::getTypes() : uml::Classifier[*] {const}: 1341600700
+		case SimpleClassifiersPackage::SIGNALINSTANCE_OPERATION_GETTYPES:
+		{
+			std::shared_ptr<Bag<uml::Classifier> > resultList = this->getTypes();
+			return eAnyBag(resultList,uml::umlPackage::CLASSIFIER_CLASS);
 			break;
 		}
 		// fUML::Semantics::SimpleClassifiers::SignalInstance::new_() : fUML::Semantics::Values::Value: 1841885000

@@ -640,21 +640,21 @@ void CommonBehaviorPackageImpl::initializeEventAccepterContent()
 	
 	
 	
-	m_eventAccepter_Operation_accept_SignalInstance->setName("accept");
+	m_eventAccepter_Operation_accept_EventOccurrence->setName("accept");
 	{ 	std::shared_ptr<ecore::ecoreFactory> factory = ecore::ecoreFactory::eInstance();
 		std::shared_ptr<ecore::EClass> unknownClass = factory ->createEClass(-1);
 	   	unknownClass->setName("invalid");
 		unknownClass->setAbstract(true);
 		unknownClass->setInterface(true);
-		m_eventAccepter_Operation_accept_SignalInstance->setEType(unknownClass);
+		m_eventAccepter_Operation_accept_EventOccurrence->setEType(unknownClass);
 	}
-	m_eventAccepter_Operation_accept_SignalInstance->setLowerBound(1);
-	m_eventAccepter_Operation_accept_SignalInstance->setUpperBound(1);
-	m_eventAccepter_Operation_accept_SignalInstance->setUnique(true);
-	m_eventAccepter_Operation_accept_SignalInstance->setOrdered(false);
+	m_eventAccepter_Operation_accept_EventOccurrence->setLowerBound(1);
+	m_eventAccepter_Operation_accept_EventOccurrence->setUpperBound(1);
+	m_eventAccepter_Operation_accept_EventOccurrence->setUnique(true);
+	m_eventAccepter_Operation_accept_EventOccurrence->setOrdered(false);
 	{
-		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_eventAccepter_Operation_accept_SignalInstance);
-		parameter->setName("signalInstance");
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_eventAccepter_Operation_accept_EventOccurrence);
+		parameter->setName("eventOccurence");
 		parameter->setEType(nullptr);
 		parameter->setLowerBound(0);
 		parameter->setUpperBound(1);
@@ -662,16 +662,16 @@ void CommonBehaviorPackageImpl::initializeEventAccepterContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_eventAccepter_Operation_match_SignalInstance->setName("match");
-	m_eventAccepter_Operation_match_SignalInstance->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
-	m_eventAccepter_Operation_match_SignalInstance->setLowerBound(1);
-	m_eventAccepter_Operation_match_SignalInstance->setUpperBound(1);
-	m_eventAccepter_Operation_match_SignalInstance->setUnique(true);
-	m_eventAccepter_Operation_match_SignalInstance->setOrdered(false);
+	m_eventAccepter_Operation_match_EventOccurrence->setName("match");
+	m_eventAccepter_Operation_match_EventOccurrence->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
+	m_eventAccepter_Operation_match_EventOccurrence->setLowerBound(1);
+	m_eventAccepter_Operation_match_EventOccurrence->setUpperBound(1);
+	m_eventAccepter_Operation_match_EventOccurrence->setUnique(true);
+	m_eventAccepter_Operation_match_EventOccurrence->setOrdered(false);
 	{
-		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_eventAccepter_Operation_match_SignalInstance);
-		parameter->setName("signalInstance");
-		parameter->setEType(fUML::Semantics::SimpleClassifiers::SimpleClassifiersPackage::eInstance()->getSignalInstance_Class());
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_eventAccepter_Operation_match_EventOccurrence);
+		parameter->setName("eventOccurence");
+		parameter->setEType(getEventOccurrence_Class());
 		parameter->setLowerBound(0);
 		parameter->setUpperBound(1);
 		parameter->setUnique(true);
@@ -734,6 +734,22 @@ void CommonBehaviorPackageImpl::initializeEventOccurrenceContent()
 	m_eventOccurrence_Operation_doSend->setUpperBound(1);
 	m_eventOccurrence_Operation_doSend->setUnique(true);
 	m_eventOccurrence_Operation_doSend->setOrdered(true);
+	
+	m_eventOccurrence_Operation_getParameterValues_Event->setName("getParameterValues");
+	m_eventOccurrence_Operation_getParameterValues_Event->setEType(getParameterValue_Class());
+	m_eventOccurrence_Operation_getParameterValues_Event->setLowerBound(0);
+	m_eventOccurrence_Operation_getParameterValues_Event->setUpperBound(-1);
+	m_eventOccurrence_Operation_getParameterValues_Event->setUnique(true);
+	m_eventOccurrence_Operation_getParameterValues_Event->setOrdered(true);
+	{
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_eventOccurrence_Operation_getParameterValues_Event);
+		parameter->setName("event");
+		parameter->setEType(uml::umlPackage::eInstance()->getEvent_Class());
+		parameter->setLowerBound(0);
+		parameter->setUpperBound(1);
+		parameter->setUnique(true);
+		parameter->setOrdered(true);
+	}
 	
 	m_eventOccurrence_Operation_getParameterValues->setName("getParameterValues");
 	m_eventOccurrence_Operation_getParameterValues->setEType(getParameterValue_Class());
@@ -969,6 +985,22 @@ void CommonBehaviorPackageImpl::initializeFIFOGetNextEventStrategyContent()
 	
 	
 	
+	m_fIFOGetNextEventStrategy_Operation_retrieveNextEvent_ObjectActivation->setName("retrieveNextEvent");
+	m_fIFOGetNextEventStrategy_Operation_retrieveNextEvent_ObjectActivation->setEType(getEventOccurrence_Class());
+	m_fIFOGetNextEventStrategy_Operation_retrieveNextEvent_ObjectActivation->setLowerBound(0);
+	m_fIFOGetNextEventStrategy_Operation_retrieveNextEvent_ObjectActivation->setUpperBound(1);
+	m_fIFOGetNextEventStrategy_Operation_retrieveNextEvent_ObjectActivation->setUnique(true);
+	m_fIFOGetNextEventStrategy_Operation_retrieveNextEvent_ObjectActivation->setOrdered(true);
+	{
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_fIFOGetNextEventStrategy_Operation_retrieveNextEvent_ObjectActivation);
+		parameter->setName("objectActivation");
+		parameter->setEType(getObjectActivation_Class());
+		parameter->setLowerBound(0);
+		parameter->setUpperBound(1);
+		parameter->setUnique(true);
+		parameter->setOrdered(true);
+	}
+	
 	
 }
 
@@ -988,7 +1020,7 @@ void CommonBehaviorPackageImpl::initializeGetNextEventStrategyContent()
 	m_getNextEventStrategy_Operation_getName->setOrdered(true);
 	
 	m_getNextEventStrategy_Operation_retrieveNextEvent_ObjectActivation->setName("retrieveNextEvent");
-	m_getNextEventStrategy_Operation_retrieveNextEvent_ObjectActivation->setEType(fUML::Semantics::SimpleClassifiers::SimpleClassifiersPackage::eInstance()->getSignalInstance_Class());
+	m_getNextEventStrategy_Operation_retrieveNextEvent_ObjectActivation->setEType(getEventOccurrence_Class());
 	m_getNextEventStrategy_Operation_retrieveNextEvent_ObjectActivation->setLowerBound(1);
 	m_getNextEventStrategy_Operation_retrieveNextEvent_ObjectActivation->setUpperBound(1);
 	m_getNextEventStrategy_Operation_retrieveNextEvent_ObjectActivation->setUnique(true);
@@ -1092,7 +1124,7 @@ void CommonBehaviorPackageImpl::initializeObjectActivationContent()
 			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	m_objectActivation_Attribute_eventPool->setName("eventPool");
-	m_objectActivation_Attribute_eventPool->setEType(fUML::Semantics::SimpleClassifiers::SimpleClassifiersPackage::eInstance()->getSignalInstance_Class());
+	m_objectActivation_Attribute_eventPool->setEType(getEventOccurrence_Class());
 	m_objectActivation_Attribute_eventPool->setLowerBound(0);
 	m_objectActivation_Attribute_eventPool->setUpperBound(-1);
 	m_objectActivation_Attribute_eventPool->setTransient(false);
@@ -1180,20 +1212,20 @@ void CommonBehaviorPackageImpl::initializeObjectActivationContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_objectActivation_Operation__send_EJavaObject->setName("_send");
+	m_objectActivation_Operation__send_EventOccurrence->setName("_send");
 	{ 	std::shared_ptr<ecore::ecoreFactory> factory = ecore::ecoreFactory::eInstance();
 		std::shared_ptr<ecore::EClass> unknownClass = factory ->createEClass(-1);
 	   	unknownClass->setName("invalid");
 		unknownClass->setAbstract(true);
 		unknownClass->setInterface(true);
-		m_objectActivation_Operation__send_EJavaObject->setEType(unknownClass);
+		m_objectActivation_Operation__send_EventOccurrence->setEType(unknownClass);
 	}
-	m_objectActivation_Operation__send_EJavaObject->setLowerBound(1);
-	m_objectActivation_Operation__send_EJavaObject->setUpperBound(1);
-	m_objectActivation_Operation__send_EJavaObject->setUnique(true);
-	m_objectActivation_Operation__send_EJavaObject->setOrdered(false);
+	m_objectActivation_Operation__send_EventOccurrence->setLowerBound(1);
+	m_objectActivation_Operation__send_EventOccurrence->setUpperBound(1);
+	m_objectActivation_Operation__send_EventOccurrence->setUnique(true);
+	m_objectActivation_Operation__send_EventOccurrence->setOrdered(false);
 	{
-		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_objectActivation_Operation__send_EJavaObject);
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_objectActivation_Operation__send_EventOccurrence);
 		parameter->setName("signal");
 		parameter->setEType(nullptr);
 		parameter->setLowerBound(0);
@@ -1229,27 +1261,27 @@ void CommonBehaviorPackageImpl::initializeObjectActivationContent()
 	m_objectActivation_Operation_dispatchNextEvent->setOrdered(false);
 	
 	m_objectActivation_Operation_retrieveNextEvent->setName("retrieveNextEvent");
-	m_objectActivation_Operation_retrieveNextEvent->setEType(fUML::Semantics::SimpleClassifiers::SimpleClassifiersPackage::eInstance()->getSignalInstance_Class());
+	m_objectActivation_Operation_retrieveNextEvent->setEType(getEventOccurrence_Class());
 	m_objectActivation_Operation_retrieveNextEvent->setLowerBound(1);
 	m_objectActivation_Operation_retrieveNextEvent->setUpperBound(1);
 	m_objectActivation_Operation_retrieveNextEvent->setUnique(true);
 	m_objectActivation_Operation_retrieveNextEvent->setOrdered(false);
 	
-	m_objectActivation_Operation_send_SignalInstance->setName("send");
+	m_objectActivation_Operation_send_EventOccurrence->setName("send");
 	{ 	std::shared_ptr<ecore::ecoreFactory> factory = ecore::ecoreFactory::eInstance();
 		std::shared_ptr<ecore::EClass> unknownClass = factory ->createEClass(-1);
 	   	unknownClass->setName("invalid");
 		unknownClass->setAbstract(true);
 		unknownClass->setInterface(true);
-		m_objectActivation_Operation_send_SignalInstance->setEType(unknownClass);
+		m_objectActivation_Operation_send_EventOccurrence->setEType(unknownClass);
 	}
-	m_objectActivation_Operation_send_SignalInstance->setLowerBound(1);
-	m_objectActivation_Operation_send_SignalInstance->setUpperBound(1);
-	m_objectActivation_Operation_send_SignalInstance->setUnique(true);
-	m_objectActivation_Operation_send_SignalInstance->setOrdered(true);
+	m_objectActivation_Operation_send_EventOccurrence->setLowerBound(1);
+	m_objectActivation_Operation_send_EventOccurrence->setUpperBound(1);
+	m_objectActivation_Operation_send_EventOccurrence->setUnique(true);
+	m_objectActivation_Operation_send_EventOccurrence->setOrdered(true);
 	{
-		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_objectActivation_Operation_send_SignalInstance);
-		parameter->setName("signalInstance");
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_objectActivation_Operation_send_EventOccurrence);
+		parameter->setName("eventOccurrence");
 		parameter->setEType(nullptr);
 		parameter->setLowerBound(0);
 		parameter->setUpperBound(1);
@@ -1475,15 +1507,24 @@ void CommonBehaviorPackageImpl::initializeSignalEventOccurrenceContent()
 			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	
-	m_signalEventOccurrence_Operation_getParameterValues->setName("getParameterValues");
-	m_signalEventOccurrence_Operation_getParameterValues->setEType(getParameterValue_Class());
-	m_signalEventOccurrence_Operation_getParameterValues->setLowerBound(0);
-	m_signalEventOccurrence_Operation_getParameterValues->setUpperBound(-1);
-	m_signalEventOccurrence_Operation_getParameterValues->setUnique(true);
-	m_signalEventOccurrence_Operation_getParameterValues->setOrdered(true);
+	m_signalEventOccurrence_Operation_getParameterValues_Event->setName("getParameterValues");
+	m_signalEventOccurrence_Operation_getParameterValues_Event->setEType(getParameterValue_Class());
+	m_signalEventOccurrence_Operation_getParameterValues_Event->setLowerBound(0);
+	m_signalEventOccurrence_Operation_getParameterValues_Event->setUpperBound(-1);
+	m_signalEventOccurrence_Operation_getParameterValues_Event->setUnique(true);
+	m_signalEventOccurrence_Operation_getParameterValues_Event->setOrdered(true);
+	{
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_signalEventOccurrence_Operation_getParameterValues_Event);
+		parameter->setName("event");
+		parameter->setEType(uml::umlPackage::eInstance()->getEvent_Class());
+		parameter->setLowerBound(0);
+		parameter->setUpperBound(1);
+		parameter->setUnique(true);
+		parameter->setOrdered(true);
+	}
 	
 	m_signalEventOccurrence_Operation_match_Trigger->setName("match");
-	m_signalEventOccurrence_Operation_match_Trigger->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
+	m_signalEventOccurrence_Operation_match_Trigger->setEType(types::typesPackage::eInstance()->getBoolean_Class());
 	m_signalEventOccurrence_Operation_match_Trigger->setLowerBound(0);
 	m_signalEventOccurrence_Operation_match_Trigger->setUpperBound(1);
 	m_signalEventOccurrence_Operation_match_Trigger->setUnique(true);

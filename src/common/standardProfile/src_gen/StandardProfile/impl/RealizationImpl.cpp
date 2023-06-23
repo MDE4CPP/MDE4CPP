@@ -268,3 +268,16 @@ void RealizationImpl::setThisRealizationPtr(std::weak_ptr<Realization> thisReali
 	m_thisRealizationPtr = thisRealizationPtr;
 	setThisStereotypePtr(thisRealizationPtr);
 }
+
+
+//*********************************
+// ObjectActivation Forwarder Impl
+//*********************************
+// Getter for Active Class
+bool RealizationImpl::GetIsActive() const
+{
+		return false;
+
+}
+
+

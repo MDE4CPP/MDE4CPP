@@ -43,6 +43,7 @@ namespace fUML::Semantics::StructuredClassifiers
 }
 namespace uml 
 {
+	class Event;
 	class Trigger;
 }
 
@@ -76,6 +77,7 @@ namespace fUML::Semantics::CommonBehavior
 			// Operations
 			//*********************************
 			virtual void doSend() = 0;
+			virtual std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue> > getParameterValues(std::shared_ptr<uml::Event> event) = 0;
 			virtual std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue> > getParameterValues() = 0;
 			virtual bool match(std::shared_ptr<uml::Trigger> trigger) = 0;
 			virtual bool matchAny(std::shared_ptr<Bag<uml::Trigger>> triggers) = 0;

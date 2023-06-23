@@ -252,6 +252,10 @@ std::shared_ptr<ecore::EOperation> fUML::Semantics::Activities::ActivitiesPackag
 {
 	return m_activityNodeActivation_Operation_getTokens;
 }
+std::shared_ptr<ecore::EOperation> fUML::Semantics::Activities::ActivitiesPackageImpl::getActivityNodeActivation_Operation_initialize_ActivityNode_ActivityNodeActivationGroup() const
+{
+	return m_activityNodeActivation_Operation_initialize_ActivityNode_ActivityNodeActivationGroup;
+}
 std::shared_ptr<ecore::EOperation> fUML::Semantics::Activities::ActivitiesPackageImpl::getActivityNodeActivation_Operation_isReady() const
 {
 	return m_activityNodeActivation_Operation_isReady;

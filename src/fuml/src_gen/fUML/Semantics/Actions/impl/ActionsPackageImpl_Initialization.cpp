@@ -401,6 +401,44 @@ void ActionsPackageImpl::initializeAcceptEventActionEventAccepterContent()
 			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	
+	m_acceptEventActionEventAccepter_Operation_accept_EventOccurrence->setName("accept");
+	{ 	std::shared_ptr<ecore::ecoreFactory> factory = ecore::ecoreFactory::eInstance();
+		std::shared_ptr<ecore::EClass> unknownClass = factory ->createEClass(-1);
+	   	unknownClass->setName("invalid");
+		unknownClass->setAbstract(true);
+		unknownClass->setInterface(true);
+		m_acceptEventActionEventAccepter_Operation_accept_EventOccurrence->setEType(unknownClass);
+	}
+	m_acceptEventActionEventAccepter_Operation_accept_EventOccurrence->setLowerBound(0);
+	m_acceptEventActionEventAccepter_Operation_accept_EventOccurrence->setUpperBound(1);
+	m_acceptEventActionEventAccepter_Operation_accept_EventOccurrence->setUnique(true);
+	m_acceptEventActionEventAccepter_Operation_accept_EventOccurrence->setOrdered(true);
+	{
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_acceptEventActionEventAccepter_Operation_accept_EventOccurrence);
+		parameter->setName("eventOccurence");
+		parameter->setEType(nullptr);
+		parameter->setLowerBound(0);
+		parameter->setUpperBound(1);
+		parameter->setUnique(true);
+		parameter->setOrdered(true);
+	}
+	
+	m_acceptEventActionEventAccepter_Operation_match_EventOccurrence->setName("match");
+	m_acceptEventActionEventAccepter_Operation_match_EventOccurrence->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
+	m_acceptEventActionEventAccepter_Operation_match_EventOccurrence->setLowerBound(0);
+	m_acceptEventActionEventAccepter_Operation_match_EventOccurrence->setUpperBound(1);
+	m_acceptEventActionEventAccepter_Operation_match_EventOccurrence->setUnique(true);
+	m_acceptEventActionEventAccepter_Operation_match_EventOccurrence->setOrdered(true);
+	{
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_acceptEventActionEventAccepter_Operation_match_EventOccurrence);
+		parameter->setName("eventOccurence");
+		parameter->setEType(fUML::Semantics::CommonBehavior::CommonBehaviorPackage::eInstance()->getEventOccurrence_Class());
+		parameter->setLowerBound(0);
+		parameter->setUpperBound(1);
+		parameter->setUnique(true);
+		parameter->setOrdered(true);
+	}
+	
 	
 }
 
@@ -632,6 +670,38 @@ void ActionsPackageImpl::initializeActionActivationContent()
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_actionActivation_Operation_getTokens_InputPin);
 		parameter->setName("pin");
 		parameter->setEType(uml::umlPackage::eInstance()->getInputPin_Class());
+		parameter->setLowerBound(0);
+		parameter->setUpperBound(1);
+		parameter->setUnique(true);
+		parameter->setOrdered(true);
+	}
+	
+	m_actionActivation_Operation_initialize_ActivityNode_ActivityNodeActivationGroup->setName("initialize");
+	{ 	std::shared_ptr<ecore::ecoreFactory> factory = ecore::ecoreFactory::eInstance();
+		std::shared_ptr<ecore::EClass> unknownClass = factory ->createEClass(-1);
+	   	unknownClass->setName("invalid");
+		unknownClass->setAbstract(true);
+		unknownClass->setInterface(true);
+		m_actionActivation_Operation_initialize_ActivityNode_ActivityNodeActivationGroup->setEType(unknownClass);
+	}
+	m_actionActivation_Operation_initialize_ActivityNode_ActivityNodeActivationGroup->setLowerBound(0);
+	m_actionActivation_Operation_initialize_ActivityNode_ActivityNodeActivationGroup->setUpperBound(1);
+	m_actionActivation_Operation_initialize_ActivityNode_ActivityNodeActivationGroup->setUnique(true);
+	m_actionActivation_Operation_initialize_ActivityNode_ActivityNodeActivationGroup->setOrdered(true);
+	{
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_actionActivation_Operation_initialize_ActivityNode_ActivityNodeActivationGroup);
+		parameter->setName("node");
+		parameter->setEType(nullptr);
+		parameter->setLowerBound(0);
+		parameter->setUpperBound(1);
+		parameter->setUnique(true);
+		parameter->setOrdered(true);
+	}
+	
+	{
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_actionActivation_Operation_initialize_ActivityNode_ActivityNodeActivationGroup);
+		parameter->setName("group");
+		parameter->setEType(nullptr);
 		parameter->setLowerBound(0);
 		parameter->setUpperBound(1);
 		parameter->setUnique(true);

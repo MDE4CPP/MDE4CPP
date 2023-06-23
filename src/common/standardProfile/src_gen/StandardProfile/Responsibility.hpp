@@ -10,16 +10,22 @@
 
 
 
+
 //Forward Declaration for used types
 namespace uml 
 {
 	class Usage;
 }
 
-// base class includes
+// base class includes 
 #include "uml/Stereotype.hpp"
 
 
+
+
+
+// include object activation
+#include "fUML/Semantics/CommonBehavior/ObjectActivation.hpp"
 
 namespace StandardProfile
 {
@@ -44,6 +50,12 @@ namespace StandardProfile
 			// Operations
 			//*********************************
 			
+
+			//*********************************
+			// ObjectActivation Forwarder SetGet
+			//*********************************
+			// Getter for Active Class
+			virtual bool GetIsActive() const = 0;
 			
 		protected:
 			//*********************************
@@ -51,6 +63,8 @@ namespace StandardProfile
 			//*********************************
 			std::weak_ptr<uml::Usage> m_base_Usage;
 			
+			
+
 			
 
 		public:

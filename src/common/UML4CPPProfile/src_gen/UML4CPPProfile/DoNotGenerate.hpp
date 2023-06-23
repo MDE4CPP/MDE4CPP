@@ -10,16 +10,22 @@
 
 
 
+
 //Forward Declaration for used types
 namespace uml 
 {
 	class Element;
 }
 
-// base class includes
+// base class includes 
 #include "uml/Stereotype.hpp"
 
 
+
+
+
+// include object activation
+#include "fUML/Semantics/CommonBehavior/ObjectActivation.hpp"
 
 namespace UML4CPPProfile
 {
@@ -44,6 +50,12 @@ namespace UML4CPPProfile
 			// Operations
 			//*********************************
 			
+
+			//*********************************
+			// ObjectActivation Forwarder SetGet
+			//*********************************
+			// Getter for Active Class
+			virtual bool GetIsActive() const = 0;
 			
 		protected:
 			//*********************************
@@ -51,6 +63,8 @@ namespace UML4CPPProfile
 			//*********************************
 			std::shared_ptr<uml::Element> m_base_Element;
 			
+			
+
 			
 
 		public:

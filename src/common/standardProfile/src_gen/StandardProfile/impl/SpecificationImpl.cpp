@@ -268,3 +268,16 @@ void SpecificationImpl::setThisSpecificationPtr(std::weak_ptr<Specification> thi
 	m_thisSpecificationPtr = thisSpecificationPtr;
 	setThisStereotypePtr(thisSpecificationPtr);
 }
+
+
+//*********************************
+// ObjectActivation Forwarder Impl
+//*********************************
+// Getter for Active Class
+bool SpecificationImpl::GetIsActive() const
+{
+		return false;
+
+}
+
+

@@ -14,15 +14,15 @@
 
 namespace ecore 
 {
-	class EParameter;
-	class EOperation;
-	class EDataType;
-	class EAnnotation;
-	class EClass;
-	class EReference;
 	class EStringToStringMapEntry;
+	class EAnnotation;
 	class EAttribute;
+	class EReference;
 	class EGenericType;
+	class EOperation;
+	class EClass;
+	class EParameter;
+	class EDataType;
 }
 
 namespace ocl::Values 
@@ -70,7 +70,7 @@ namespace ocl::Values
 			//Class and Feature IDs 
 			static const unsigned long ANYVALUE_CLASS = 1772675012;
 			static const unsigned int ANYVALUE_CLASS_FEATURE_COUNT = 1;
-			static const unsigned int ANYVALUE_CLASS_OPERATION_COUNT = 13;
+			static const unsigned int ANYVALUE_CLASS_OPERATION_COUNT = 14;
 			static const unsigned long ANYVALUE_ATTRIBUTE_VALUE = 79068194;
 			
 			
@@ -93,7 +93,7 @@ namespace ocl::Values
 			//Class and Feature IDs 
 			static const unsigned long BAGTYPEVALUE_CLASS = 1755720122;
 			static const unsigned int BAGTYPEVALUE_CLASS_FEATURE_COUNT = 1;
-			static const unsigned int BAGTYPEVALUE_CLASS_OPERATION_COUNT = 16;
+			static const unsigned int BAGTYPEVALUE_CLASS_OPERATION_COUNT = 17;
 			
 			
 			static const unsigned int BAGTYPEVALUE_OPERATION_ADDVALUE_VALUE = 4256862520;
@@ -112,7 +112,7 @@ namespace ocl::Values
 			//Class and Feature IDs 
 			static const unsigned long COLLECTIONVALUE_CLASS = 539163728;
 			static const unsigned int COLLECTIONVALUE_CLASS_FEATURE_COUNT = 1;
-			static const unsigned int COLLECTIONVALUE_CLASS_OPERATION_COUNT = 15;
+			static const unsigned int COLLECTIONVALUE_CLASS_OPERATION_COUNT = 16;
 			
 			static const unsigned long COLLECTIONVALUE_ATTRIBUTE_ELEMENTS = 1816541873;
 			
@@ -212,7 +212,7 @@ namespace ocl::Values
 			//Class and Feature IDs 
 			static const unsigned long OBJECTVALUE_CLASS = 712225641;
 			static const unsigned int OBJECTVALUE_CLASS_FEATURE_COUNT = 2;
-			static const unsigned int OBJECTVALUE_CLASS_OPERATION_COUNT = 13;
+			static const unsigned int OBJECTVALUE_CLASS_OPERATION_COUNT = 14;
 			
 			static const unsigned long OBJECTVALUE_ATTRIBUTE_HISTORY = 1037531673;
 			static const unsigned long OBJECTVALUE_ATTRIBUTE_VALUE = 1959943819;
@@ -237,7 +237,7 @@ namespace ocl::Values
 			//Class and Feature IDs 
 			static const unsigned long OCLMESSAGEVALUE_CLASS = 1848978034;
 			static const unsigned int OCLMESSAGEVALUE_CLASS_FEATURE_COUNT = 8;
-			static const unsigned int OCLMESSAGEVALUE_CLASS_OPERATION_COUNT = 12;
+			static const unsigned int OCLMESSAGEVALUE_CLASS_OPERATION_COUNT = 13;
 			static const unsigned long OCLMESSAGEVALUE_ATTRIBUTE_ISASYNCOPERATION = 1876672302;
 			static const unsigned long OCLMESSAGEVALUE_ATTRIBUTE_ISSIGNAL = 338313797;
 			static const unsigned long OCLMESSAGEVALUE_ATTRIBUTE_ISSYNCOPERATION = 421025364;
@@ -272,7 +272,7 @@ namespace ocl::Values
 			//Class and Feature IDs 
 			static const unsigned long OCLVOIDVALUE_CLASS = 316834162;
 			static const unsigned int OCLVOIDVALUE_CLASS_FEATURE_COUNT = 0;
-			static const unsigned int OCLVOIDVALUE_CLASS_OPERATION_COUNT = 13;
+			static const unsigned int OCLVOIDVALUE_CLASS_OPERATION_COUNT = 14;
 			
 			
 			static const unsigned int OCLVOIDVALUE_OPERATION_EQUALS_VALUE = 3635156929;
@@ -293,7 +293,7 @@ namespace ocl::Values
 			//Class and Feature IDs 
 			static const unsigned long ORDEREDSETTYPEVALUE_CLASS = 119598672;
 			static const unsigned int ORDEREDSETTYPEVALUE_CLASS_FEATURE_COUNT = 1;
-			static const unsigned int ORDEREDSETTYPEVALUE_CLASS_OPERATION_COUNT = 16;
+			static const unsigned int ORDEREDSETTYPEVALUE_CLASS_OPERATION_COUNT = 17;
 			
 			
 			static const unsigned int ORDEREDSETTYPEVALUE_OPERATION_ADDVALUE_VALUE = 2208028395;
@@ -312,7 +312,7 @@ namespace ocl::Values
 			//Class and Feature IDs 
 			static const unsigned long SEQUENCETYPEVALUE_CLASS = 695063447;
 			static const unsigned int SEQUENCETYPEVALUE_CLASS_FEATURE_COUNT = 1;
-			static const unsigned int SEQUENCETYPEVALUE_CLASS_OPERATION_COUNT = 16;
+			static const unsigned int SEQUENCETYPEVALUE_CLASS_OPERATION_COUNT = 17;
 			
 			
 			static const unsigned int SEQUENCETYPEVALUE_OPERATION_ADDVALUE_VALUE = 2149349627;
@@ -331,7 +331,7 @@ namespace ocl::Values
 			//Class and Feature IDs 
 			static const unsigned long SETTYPEVALUE_CLASS = 139010578;
 			static const unsigned int SETTYPEVALUE_CLASS_FEATURE_COUNT = 1;
-			static const unsigned int SETTYPEVALUE_CLASS_OPERATION_COUNT = 16;
+			static const unsigned int SETTYPEVALUE_CLASS_OPERATION_COUNT = 17;
 			
 			
 			static const unsigned int SETTYPEVALUE_OPERATION_ADDVALUE_VALUE = 836523242;
@@ -350,7 +350,7 @@ namespace ocl::Values
 			//Class and Feature IDs 
 			static const unsigned long STATICVALUE_CLASS = 565102340;
 			static const unsigned int STATICVALUE_CLASS_FEATURE_COUNT = 0;
-			static const unsigned int STATICVALUE_CLASS_OPERATION_COUNT = 11;
+			static const unsigned int STATICVALUE_CLASS_OPERATION_COUNT = 12;
 			
 			
 			
@@ -367,7 +367,7 @@ namespace ocl::Values
 			//Class and Feature IDs 
 			static const unsigned long TUPLEVALUE_CLASS = 2104534521;
 			static const unsigned int TUPLEVALUE_CLASS_FEATURE_COUNT = 2;
-			static const unsigned int TUPLEVALUE_CLASS_OPERATION_COUNT = 13;
+			static const unsigned int TUPLEVALUE_CLASS_OPERATION_COUNT = 14;
 			
 			static const unsigned long TUPLEVALUE_ATTRIBUTE_ELEMENTS = 7877962;
 			static const unsigned long TUPLEVALUE_ATTRIBUTE_MODEL = 1645448795;
@@ -392,7 +392,7 @@ namespace ocl::Values
 			//Class and Feature IDs 
 			static const unsigned long UNDEFINEDVALUE_CLASS = 1732994739;
 			static const unsigned int UNDEFINEDVALUE_CLASS_FEATURE_COUNT = 0;
-			static const unsigned int UNDEFINEDVALUE_CLASS_OPERATION_COUNT = 13;
+			static const unsigned int UNDEFINEDVALUE_CLASS_OPERATION_COUNT = 14;
 			
 			
 			static const unsigned int UNDEFINEDVALUE_OPERATION_EQUALS_VALUE = 1274785983;

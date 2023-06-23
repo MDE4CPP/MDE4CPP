@@ -108,6 +108,8 @@ int OfferImpl::countOfferedVales()
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
+	//ADD_COUNT(__PRETTY_FUNCTION__)
+	//generated from body annotation
 		this->removeWithdrawnTokens();
 
     int count = 0;
@@ -120,6 +122,7 @@ int OfferImpl::countOfferedVales()
     }
 
     return count;
+	//end of body
 	//end of body
 }
 
@@ -134,6 +137,8 @@ bool OfferImpl::hasTokens()
 
 void OfferImpl::removeOfferedValues(int count)
 {
+	//ADD_COUNT(__PRETTY_FUNCTION__)
+	//generated from body annotation
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
 		std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> offeredTokens= this->getOfferedTokens();
@@ -154,10 +159,13 @@ void OfferImpl::removeOfferedValues(int count)
         count = count - 1;
     }
 	//end of body
+	//end of body
 }
 
 void OfferImpl::removeWithdrawnTokens()
 {
+	//ADD_COUNT(__PRETTY_FUNCTION__)
+	//generated from body annotation
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
 		std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> offeredTokens= this->getOfferedTokens();
@@ -179,10 +187,13 @@ void OfferImpl::removeWithdrawnTokens()
 		}
 	}
 	//end of body
+	//end of body
 }
 
 std::shared_ptr<Bag<fUML::Semantics::Activities::Token> > OfferImpl::retrieveOfferedTokens()
 {
+	//ADD_COUNT(__PRETTY_FUNCTION__)
+	//generated from body annotation
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
 	this->removeWithdrawnTokens();
@@ -192,6 +203,7 @@ std::shared_ptr<Bag<fUML::Semantics::Activities::Token> > tokens(this->getOffere
 
     	
 return tokens;
+	//end of body
 	//end of body
 }
 

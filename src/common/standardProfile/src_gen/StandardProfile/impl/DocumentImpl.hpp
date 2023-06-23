@@ -13,6 +13,9 @@
 #include "../Document.hpp"
 #include "StandardProfile/impl/FileImpl.hpp"
 
+// include object activation
+#include "fUML/Semantics/CommonBehavior/ObjectActivation.hpp"
+
 class AnyObject;
 typedef std::shared_ptr<AnyObject> Any;
 
@@ -63,10 +66,22 @@ namespace StandardProfile
 			//*********************************
 			
 
+			
+			//*********************************
+			// ObjectActivation Forwarder SetGet
+			//*********************************
+			// Getter for Active Class
+			virtual bool GetIsActive() const;
+
 		protected:
 			virtual std::shared_ptr<uml::Class> getMetaClass() const;
 			virtual void instantiate();
 			virtual void destroy();
+
+
+			//*********************************
+			// ObjectActivation Forwarder
+			//*********************************
 
 		public:
 			//*********************************

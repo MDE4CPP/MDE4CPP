@@ -42,8 +42,8 @@
 #include "uml/StructuralFeature.hpp"
 #include "fUML/Semantics/Values/Value.hpp"
 //Factories and Package includes
-#include "PSCS/Semantics/SemanticsPackage.hpp"
 #include "PSCS/PSCSPackage.hpp"
+#include "PSCS/Semantics/SemanticsPackage.hpp"
 #include "fUML/Semantics/Loci/LociPackage.hpp"
 #include "fUML/Semantics/SimpleClassifiers/SimpleClassifiersPackage.hpp"
 #include "PSCS/Semantics/StructuredClassifiers/StructuredClassifiersPackage.hpp"

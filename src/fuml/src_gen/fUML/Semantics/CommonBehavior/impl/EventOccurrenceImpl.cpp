@@ -35,6 +35,7 @@
 
 #include <exception> // used in Persistence
 #include "fUML/Semantics/StructuredClassifiers/StructuredClassifiersFactory.hpp"
+#include "uml/Event.hpp"
 #include "fUML/Semantics/CommonBehavior/ParameterValue.hpp"
 #include "fUML/Semantics/StructuredClassifiers/Reference.hpp"
 #include "uml/Trigger.hpp"
@@ -110,6 +111,26 @@ std::shared_ptr<ecore::EObject> EventOccurrenceImpl::copy() const
 //*********************************
 void EventOccurrenceImpl::doSend()
 {
+	//ADD_COUNT(__PRETTY_FUNCTION__)
+	//generated from body annotation
+	// Send this event occurrence to the target reference.
+	DEBUG_MESSAGE(std::cout <<  std::string(__PRETTY_FUNCTION__)<< std::endl;)
+
+	std::shared_ptr<fUML::Semantics::StructuredClassifiers::Reference> target = getTarget();
+	if(target != nullptr)
+	{
+		DEBUG_MESSAGE(std::cout << "found target != nullptr, sending..." << std::endl;)
+		target->send( getThisEventOccurrencePtr() );
+	}
+	else
+	{
+		DEBUG_MESSAGE(std::cout << " no target found.." << std::endl;)
+	}
+	//end of body
+}
+
+std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue> > EventOccurrenceImpl::getParameterValues(std::shared_ptr<uml::Event> event)
+{
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
@@ -125,12 +146,66 @@ bool EventOccurrenceImpl::match(std::shared_ptr<uml::Trigger> trigger)
 
 bool EventOccurrenceImpl::matchAny(std::shared_ptr<Bag<uml::Trigger>> triggers)
 {
-	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
+	//ADD_COUNT(__PRETTY_FUNCTION__)
+	//generated from body annotation
+	// Check that at least one of the given triggers is matched by this event occurrence.
+	DEBUG_MESSAGE(std::cout <<  std::string(__PRETTY_FUNCTION__)<< std::endl;)
+
+	bool matches = false;
+	if(triggers != nullptr)
+	{
+		DEBUG_MESSAGE(std::cout <<  "Found some Triggers. Matching..." << std::endl;)
+
+		int i = 0;
+		// Bag<uml::Trigger>::iterator i;
+		int endIter = triggers->size();
+		// Bag<uml::Trigger>::iterator endIter = triggers->end();
+		int beginIter = 0;
+		// Bag<uml::Trigger>::iterator beginIter = triggers->begin();
+		for(i = beginIter; i < endIter; i++)
+		{
+			if(match(triggers->at(i) ))
+			{
+				DEBUG_MESSAGE(std::cout <<  "Found a matching Trigger." << std::endl;)
+
+				matches = true;
+				break;
+			}
+		}
+	}
+	return matches;
+	/*
+	if(triggers != nullptr)
+	{
+		int i = 0;
+		while(!matches && i < triggers->size())
+		{
+			if( match(triggers->at(i) ) )
+			{
+				matches = true;
+			}
+			i += 1;
+		}
+	}
+	return matches;	
+	*/
+	//end of body
 }
 
 void EventOccurrenceImpl::sendTo(std::shared_ptr<fUML::Semantics::StructuredClassifiers::Reference> target)
 {
-	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
+	//ADD_COUNT(__PRETTY_FUNCTION__)
+	//generated from body annotation
+	// Set the target reference and start the SendingBehavior, which will send this event occurrence to the target.
+	DEBUG_MESSAGE(std::cout <<  std::string(__PRETTY_FUNCTION__)<< std::endl;)
+
+	setTarget(target);
+	// Should also be _startObjectBehavior() to start it async. Just doSend for now	
+	DEBUG_MESSAGE(std::cout <<  std::string( "Starting Sending..")<< std::endl;)
+
+	doSend();
+	//_startObjectBehavior();
+	//end of body
 }
 
 //*********************************
@@ -311,6 +386,18 @@ Any EventOccurrenceImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>
 		case CommonBehaviorPackage::EVENTOCCURRENCE_OPERATION_DOSEND:
 		{
 			this->doSend();
+			break;
+		}
+		// fUML::Semantics::CommonBehavior::EventOccurrence::getParameterValues(uml::Event) : fUML::Semantics::CommonBehavior::ParameterValue[*]: 3047471155
+		case CommonBehaviorPackage::EVENTOCCURRENCE_OPERATION_GETPARAMETERVALUES_EVENT:
+		{
+			//Retrieve input parameter 'event'
+			//parameter 0
+			std::shared_ptr<uml::Event> incoming_param_event;
+			std::list<Any>::const_iterator incoming_param_event_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_event = (*incoming_param_event_arguments_citer)->get<std::shared_ptr<uml::Event> >();
+			std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue> > resultList = this->getParameterValues(incoming_param_event);
+			return eAnyBag(resultList,fUML::Semantics::CommonBehavior::CommonBehaviorPackage::PARAMETERVALUE_CLASS);
 			break;
 		}
 		// fUML::Semantics::CommonBehavior::EventOccurrence::getParameterValues() : fUML::Semantics::CommonBehavior::ParameterValue[*]: 2905522987

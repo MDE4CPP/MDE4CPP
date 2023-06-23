@@ -127,6 +127,7 @@ void ValuesPackageImpl::createValueContent(std::shared_ptr<ecore::EPackage> pack
 	m_value_Class = factory->createEClass_as_eClassifiers_in_EPackage(package, VALUE_CLASS);
 	
 	
+	m_value_Operation_isInstanceOf_Classifier = factory->createEOperation_as_eOperations_in_EClass(m_value_Class, VALUE_OPERATION_ISINSTANCEOF_CLASSIFIER);
 	m_value_Operation__copy = factory->createEOperation_as_eOperations_in_EClass(m_value_Class, VALUE_OPERATION__COPY);
 	m_value_Operation_checkAllParents_Classifier_Classifier = factory->createEOperation_as_eOperations_in_EClass(m_value_Class, VALUE_OPERATION_CHECKALLPARENTS_CLASSIFIER_CLASSIFIER);
 	m_value_Operation_equals_Value = factory->createEOperation_as_eOperations_in_EClass(m_value_Class, VALUE_OPERATION_EQUALS_VALUE);

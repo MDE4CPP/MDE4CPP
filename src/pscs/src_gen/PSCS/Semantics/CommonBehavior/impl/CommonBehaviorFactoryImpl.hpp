@@ -48,6 +48,8 @@ namespace PSCS::Semantics::CommonBehavior
 			 virtual std::shared_ptr<PSCS::Semantics::CommonBehavior::CS_CallEventExecution> createCS_CallEventExecution_as_values_in_FeatureValue(std::shared_ptr<fUML::Semantics::SimpleClassifiers::FeatureValue> par_FeatureValue, const int metaElementID = CommonBehaviorPackage::CS_CALLEVENTEXECUTION_CLASS) const ;
 			 virtual std::shared_ptr<PSCS::Semantics::CommonBehavior::CS_CallEventExecution> createCS_CallEventExecution_as_values_in_ParameterValue(std::shared_ptr<fUML::Semantics::CommonBehavior::ParameterValue> par_ParameterValue, const int metaElementID = CommonBehaviorPackage::CS_CALLEVENTEXECUTION_CLASS) const ;
 			 virtual std::shared_ptr<PSCS::Semantics::CommonBehavior::CS_EventOccurrence> createCS_EventOccurrence(const int metaElementID = CommonBehaviorPackage::CS_EVENTOCCURRENCE_CLASS) const ;
+			 //Add as contained object
+			 virtual std::shared_ptr<PSCS::Semantics::CommonBehavior::CS_EventOccurrence> createCS_EventOccurrence_as_eventPool_in_ObjectActivation(std::shared_ptr<fUML::Semantics::CommonBehavior::ObjectActivation> par_ObjectActivation, const int metaElementID = CommonBehaviorPackage::CS_EVENTOCCURRENCE_CLASS) const ;
 			 
 
 		private:

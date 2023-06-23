@@ -59,6 +59,7 @@ namespace fUML::Semantics::Activities
 			virtual std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivation> getNodeActivation(std::shared_ptr<uml::ActivityNode> node) ;
 			virtual bool getRunning() ;
 			virtual std::shared_ptr<Bag<fUML::Semantics::Activities::Token> > getTokens() ;
+			virtual void initialize(std::shared_ptr<uml::ActivityNode> node,std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup> group) ;
 			virtual bool isReady() ;
 			virtual bool isSourceFor(std::shared_ptr<fUML::Semantics::Activities::ActivityEdgeInstance> edgeInstances) ;
 			virtual void receiveOffer() ;

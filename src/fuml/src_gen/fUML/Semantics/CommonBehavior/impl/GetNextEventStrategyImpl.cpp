@@ -33,15 +33,14 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
+#include "fUML/Semantics/CommonBehavior/EventOccurrence.hpp"
 #include "fUML/Semantics/CommonBehavior/ObjectActivation.hpp"
 #include "fUML/Semantics/Loci/SemanticStrategy.hpp"
-#include "fUML/Semantics/SimpleClassifiers/SignalInstance.hpp"
 //Factories and Package includes
 #include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/SemanticsPackage.hpp"
 #include "fUML/Semantics/CommonBehavior/CommonBehaviorPackage.hpp"
 #include "fUML/Semantics/Loci/LociPackage.hpp"
-#include "fUML/Semantics/SimpleClassifiers/SimpleClassifiersPackage.hpp"
 
 using namespace fUML::Semantics::CommonBehavior;
 
@@ -106,7 +105,7 @@ return "getNextEvent";
 	//end of body
 }
 
-std::shared_ptr<fUML::Semantics::SimpleClassifiers::SignalInstance> GetNextEventStrategyImpl::retrieveNextEvent(std::shared_ptr<fUML::Semantics::CommonBehavior::ObjectActivation> objectActivation)
+std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccurrence> GetNextEventStrategyImpl::retrieveNextEvent(std::shared_ptr<fUML::Semantics::CommonBehavior::ObjectActivation> objectActivation)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -237,7 +236,7 @@ Any GetNextEventStrategyImpl::eInvoke(int operationID, std::shared_ptr<std::list
 			result = eAny(this->getName(),0,false);
 			break;
 		}
-		// fUML::Semantics::CommonBehavior::GetNextEventStrategy::retrieveNextEvent(fUML::Semantics::CommonBehavior::ObjectActivation) : fUML::Semantics::SimpleClassifiers::SignalInstance: 3137357395
+		// fUML::Semantics::CommonBehavior::GetNextEventStrategy::retrieveNextEvent(fUML::Semantics::CommonBehavior::ObjectActivation) : fUML::Semantics::CommonBehavior::EventOccurrence: 3970005938
 		case CommonBehaviorPackage::GETNEXTEVENTSTRATEGY_OPERATION_RETRIEVENEXTEVENT_OBJECTACTIVATION:
 		{
 			//Retrieve input parameter 'objectActivation'
@@ -245,7 +244,7 @@ Any GetNextEventStrategyImpl::eInvoke(int operationID, std::shared_ptr<std::list
 			std::shared_ptr<fUML::Semantics::CommonBehavior::ObjectActivation> incoming_param_objectActivation;
 			std::list<Any>::const_iterator incoming_param_objectActivation_arguments_citer = std::next(arguments->begin(), 0);
 			incoming_param_objectActivation = (*incoming_param_objectActivation_arguments_citer)->get<std::shared_ptr<fUML::Semantics::CommonBehavior::ObjectActivation> >();
-			result = eAnyObject(this->retrieveNextEvent(incoming_param_objectActivation), fUML::Semantics::SimpleClassifiers::SimpleClassifiersPackage::SIGNALINSTANCE_CLASS);
+			result = eAnyObject(this->retrieveNextEvent(incoming_param_objectActivation), fUML::Semantics::CommonBehavior::CommonBehaviorPackage::EVENTOCCURRENCE_CLASS);
 			break;
 		}
 

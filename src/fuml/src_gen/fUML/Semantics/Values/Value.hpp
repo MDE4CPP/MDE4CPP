@@ -68,6 +68,7 @@ namespace fUML::Semantics::Values
 			//*********************************
 			// Operations
 			//*********************************
+			virtual bool IsInstanceOf(std::shared_ptr<uml::Classifier> classifier) = 0;
 			virtual std::shared_ptr<fUML::Semantics::Values::Value> _copy() = 0;
 			virtual bool checkAllParents(std::shared_ptr<uml::Classifier> type,std::shared_ptr<uml::Classifier> classifier) = 0;
 			virtual bool equals(std::shared_ptr<fUML::Semantics::Values::Value> otherValue) = 0;

@@ -17,7 +17,7 @@
 #include <cassert>
 #include <iostream>
 #include <sstream>
-#include <stdexcept>
+
 #include "abstractDataTypes/Bag.hpp"
 
 
@@ -29,13 +29,25 @@
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
+//Includes from codegen annotation
+#include "uml/SignalEvent.hpp"
+#include "uml/Classifier.hpp"
+#include "uml/Parameter.hpp"
+#include "uml/Signal.hpp"
+#include "uml/StructuralFeature.hpp"
+
+
+
+#include "fUML/Semantics/SimpleClassifiers/FeatureValue.hpp"
+
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "fUML/Semantics/SimpleClassifiers/SimpleClassifiersFactory.hpp"
 #include "fUML/Semantics/StructuredClassifiers/StructuredClassifiersFactory.hpp"
+#include "fUML/Semantics/SimpleClassifiers/SimpleClassifiersFactory.hpp"
+#include "uml/Event.hpp"
 #include "fUML/Semantics/CommonBehavior/EventOccurrence.hpp"
 #include "fUML/Semantics/CommonBehavior/ParameterValue.hpp"
 #include "fUML/Semantics/StructuredClassifiers/Reference.hpp"
@@ -112,14 +124,67 @@ std::shared_ptr<ecore::EObject> SignalEventOccurrenceImpl::copy() const
 //*********************************
 // Operations
 //*********************************
-std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue> > SignalEventOccurrenceImpl::getParameterValues()
+std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue> > SignalEventOccurrenceImpl::getParameterValues(std::shared_ptr<uml::Event> event)
 {
-	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
+	//ADD_COUNT(__PRETTY_FUNCTION__)
+	//generated from body annotation
+	// Return parameter values for the features of the signal instance, in order, corresponding to the attributes of the declared signal of the given event
+	DEBUG_MESSAGE(std::cout <<  std::string(__PRETTY_FUNCTION__)<< std::endl;)
+	
+	// These are intended to be treated as if they are the values of effective parameters of the direction "in".
+	// (Note that the given event must be a signal event, and the signal instance of this signal event occurence must be a direct or indirect instance of the event signal.)
+
+	std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue> > parameterValues = std::make_shared<Bag<fUML::Semantics::CommonBehavior::ParameterValue> >();
+	std::shared_ptr<uml::SignalEvent> sEvent = std::dynamic_pointer_cast<uml::SignalEvent>(event);
+	if(sEvent)
+	{
+		DEBUG_MESSAGE(std::cout <<  "Found Signal Event, passing ParameterValues on."<< std::endl;)
+
+		std::shared_ptr<Bag<uml::StructuralFeature> > memberFeatures = getSignalInstance()->getMemberFeatures(   std::dynamic_pointer_cast<uml::Classifier>(  (sEvent)->getSignal()  ) );
+
+		int beginIter = 0;
+		int endIter = memberFeatures->size();
+		/*
+		Bag<uml::StructuralFeature> >::iterator i;
+		Bag<uml::StructuralFeature> >::iterator endIter = memberFeatures->end();
+		Bag<uml::StructuralFeature> >::iterator beginIter = memberFeatures->begin();
+	*/
+		for(int i = beginIter; i < endIter; i++)
+		{
+			std::shared_ptr<uml::StructuralFeature> feature = memberFeatures->at(i);
+			std::shared_ptr<fUML::Semantics::CommonBehavior::ParameterValue> parameterValue(fUML::Semantics::CommonBehavior::CommonBehaviorFactory::eInstance()->createParameterValue());
+			parameterValue->setParameter(   std::dynamic_pointer_cast<uml::Parameter>( getSignalInstance()->retrieveFeatureValue(feature) )  ); // ->getFeature()
+			// Add Values from the FeatureValue to the ParameterValue to be returned
+			for(int v = 0; v <getSignalInstance()->retrieveFeatureValue(feature)->getValues()->size(); v++)
+			{
+				parameterValue->getValues()->add(getSignalInstance()->retrieveFeatureValue(feature)->getValues()->at(v));
+			}
+			parameterValues->add(parameterValue);
+		}
+	}
+	return parameterValues;
+	//end of body
 }
 
 bool SignalEventOccurrenceImpl::match(std::shared_ptr<uml::Trigger> trigger)
 {
-	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
+	//ADD_COUNT(__PRETTY_FUNCTION__)
+	//generated from body annotation
+	// Match a trigger if it references a signal event whose signal is the type of the signal instance or one of its supertypes.
+	DEBUG_MESSAGE(std::cout <<  std::string(__PRETTY_FUNCTION__)<< std::endl;)
+
+	bool matches = false;
+	std::shared_ptr<uml::SignalEvent> sEvent = std::dynamic_pointer_cast<uml::SignalEvent>(trigger->getEvent() );
+	if( sEvent )
+	{
+		DEBUG_MESSAGE(std::cout <<  "Found a SignalEvent, trying to match."<< std::endl;)
+
+		// SignalInstance instanceOf event.signal ?
+		matches = getSignalInstance()->IsInstanceOf(std::dynamic_pointer_cast<uml::Classifier>(sEvent->getSignal() ) );
+		// matches = std::dynamic_pointer_cast<event.signal>( getSignalInstance() );
+	}
+	return matches;	
+	//end of body
 }
 
 //*********************************
@@ -299,10 +364,15 @@ Any SignalEventOccurrenceImpl::eInvoke(int operationID, std::shared_ptr<std::lis
  
   	switch(operationID)
 	{
-		// fUML::Semantics::CommonBehavior::SignalEventOccurrence::getParameterValues() : fUML::Semantics::CommonBehavior::ParameterValue[*]: 1098980429
-		case CommonBehaviorPackage::SIGNALEVENTOCCURRENCE_OPERATION_GETPARAMETERVALUES:
+		// fUML::Semantics::CommonBehavior::SignalEventOccurrence::getParameterValues(uml::Event) : fUML::Semantics::CommonBehavior::ParameterValue[*]: 1942312597
+		case CommonBehaviorPackage::SIGNALEVENTOCCURRENCE_OPERATION_GETPARAMETERVALUES_EVENT:
 		{
-			std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue> > resultList = this->getParameterValues();
+			//Retrieve input parameter 'event'
+			//parameter 0
+			std::shared_ptr<uml::Event> incoming_param_event;
+			std::list<Any>::const_iterator incoming_param_event_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_event = (*incoming_param_event_arguments_citer)->get<std::shared_ptr<uml::Event> >();
+			std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue> > resultList = this->getParameterValues(incoming_param_event);
 			return eAnyBag(resultList,fUML::Semantics::CommonBehavior::CommonBehaviorPackage::PARAMETERVALUE_CLASS);
 			break;
 		}

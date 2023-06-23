@@ -32,6 +32,11 @@ namespace fUML
 }
 
 //Forward Declaration for used types 
+namespace fUML::Semantics::CommonBehavior 
+{
+	class EventOccurrence;
+	class ObjectActivation;
+}
 
 // namespace macro header include
 #include "fUML/fUML.hpp"
@@ -63,6 +68,7 @@ namespace fUML::Semantics::CommonBehavior
 			//*********************************
 			// Operations
 			//*********************************
+			virtual std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccurrence> retrieveNextEvent(std::shared_ptr<fUML::Semantics::CommonBehavior::ObjectActivation> objectActivation) = 0;
 
 			//*********************************
 			// Attribute Getters & Setters

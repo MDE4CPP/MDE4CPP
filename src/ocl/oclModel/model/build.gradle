@@ -10,7 +10,7 @@ task generateOcl(type: tui.sse.mde4cpp.MDE4CPPGenerate) {
 	
 	modelFilePath = file('.' + File.separator + 'ocl.ecore')
 
-	relatedModels = ['fUML', 'uml', 'ecore', 'types']
+	relatedModels = ['ecore', 'fUML', 'types', 'uml']
 	
 	outputs.files(fileTree('../src_gen/ocl') {
         exclude '.cmake/**'

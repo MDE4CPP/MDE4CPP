@@ -283,3 +283,16 @@ void LibraryImpl::setThisLibraryPtr(std::weak_ptr<Library> thisLibraryPtr)
 	m_thisLibraryPtr = thisLibraryPtr;
 	setThisFilePtr(thisLibraryPtr);
 }
+
+
+//*********************************
+// ObjectActivation Forwarder Impl
+//*********************************
+// Getter for Active Class
+bool LibraryImpl::GetIsActive() const
+{
+		return false;
+
+}
+
+

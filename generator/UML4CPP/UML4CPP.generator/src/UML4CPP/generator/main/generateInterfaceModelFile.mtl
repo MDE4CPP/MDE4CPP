@@ -58,6 +58,14 @@
 [if (not element.getNearestPackage().isIgnoreNamespace())]}[/if]
 [/for]
 
+[for (element : Signal| aInterface.ownedAttribute.type->flatten()->filter(Signal)->asOrderedSet()->sortedBy(myQualifiedName())) separator ('\n')]
+[if (not element.getNearestPackage().isIgnoreNamespace())]namespace [element._package.generateNamespace(true)/] 
+{
+[/if]
+	class [element.name/];
+[if (not element.getNearestPackage().isIgnoreNamespace())]}[/if]
+[/for]
+
 [for (element : Type | aInterface.allOwnedElements()->filter(Operation).ownedParameter.type->asOrderedSet()->sortedBy(myQualifiedName())) separator ('\n')]
 [if (not element.getNearestPackage().isIgnoreNamespace())]namespace [element._package.generateNamespace(true)/]
 {

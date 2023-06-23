@@ -193,6 +193,10 @@ std::shared_ptr<ecore::EClass> fUML::Semantics::Values::ValuesPackageImpl::getVa
 
 
 
+std::shared_ptr<ecore::EOperation> fUML::Semantics::Values::ValuesPackageImpl::getValue_Operation_isInstanceOf_Classifier() const
+{
+	return m_value_Operation_isInstanceOf_Classifier;
+}
 std::shared_ptr<ecore::EOperation> fUML::Semantics::Values::ValuesPackageImpl::getValue_Operation__copy() const
 {
 	return m_value_Operation__copy;

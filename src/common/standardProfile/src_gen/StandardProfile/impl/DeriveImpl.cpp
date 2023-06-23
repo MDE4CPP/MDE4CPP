@@ -268,3 +268,16 @@ void DeriveImpl::setThisDerivePtr(std::weak_ptr<Derive> thisDerivePtr)
 	m_thisDerivePtr = thisDerivePtr;
 	setThisStereotypePtr(thisDerivePtr);
 }
+
+
+//*********************************
+// ObjectActivation Forwarder Impl
+//*********************************
+// Getter for Active Class
+bool DeriveImpl::GetIsActive() const
+{
+		return false;
+
+}
+
+

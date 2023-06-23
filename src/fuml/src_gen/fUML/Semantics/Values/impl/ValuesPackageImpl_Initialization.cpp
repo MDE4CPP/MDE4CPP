@@ -271,6 +271,22 @@ void ValuesPackageImpl::initializeValueContent()
 	
 	
 	
+	m_value_Operation_isInstanceOf_Classifier->setName("IsInstanceOf");
+	m_value_Operation_isInstanceOf_Classifier->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
+	m_value_Operation_isInstanceOf_Classifier->setLowerBound(0);
+	m_value_Operation_isInstanceOf_Classifier->setUpperBound(1);
+	m_value_Operation_isInstanceOf_Classifier->setUnique(true);
+	m_value_Operation_isInstanceOf_Classifier->setOrdered(true);
+	{
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_value_Operation_isInstanceOf_Classifier);
+		parameter->setName("classifier");
+		parameter->setEType(uml::umlPackage::eInstance()->getClassifier_Class());
+		parameter->setLowerBound(0);
+		parameter->setUpperBound(1);
+		parameter->setUnique(true);
+		parameter->setOrdered(true);
+	}
+	
 	m_value_Operation__copy->setName("_copy");
 	m_value_Operation__copy->setEType(getValue_Class());
 	m_value_Operation__copy->setLowerBound(1);

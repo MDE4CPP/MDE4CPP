@@ -84,7 +84,7 @@ namespace fUML::Semantics::StructuredClassifiers
 			//Class and Feature IDs 
 			static const unsigned long EXTENSIONALVALUE_CLASS = 1972653315;
 			static const unsigned int EXTENSIONALVALUE_CLASS_FEATURE_COUNT = 2;
-			static const unsigned int EXTENSIONALVALUE_CLASS_OPERATION_COUNT = 28;
+			static const unsigned int EXTENSIONALVALUE_CLASS_OPERATION_COUNT = 32;
 			
 			static const unsigned long EXTENSIONALVALUE_ATTRIBUTE_LOCUS = 783805933;
 			
@@ -107,7 +107,7 @@ namespace fUML::Semantics::StructuredClassifiers
 			//Class and Feature IDs 
 			static const unsigned long EXTENSIONALVALUELIST_CLASS = 823739257;
 			static const unsigned int EXTENSIONALVALUELIST_CLASS_FEATURE_COUNT = 2;
-			static const unsigned int EXTENSIONALVALUELIST_CLASS_OPERATION_COUNT = 33;
+			static const unsigned int EXTENSIONALVALUELIST_CLASS_OPERATION_COUNT = 37;
 			
 			
 			static const unsigned int EXTENSIONALVALUELIST_OPERATION_ADDVALUE_EXTENSIONALVALUE = 3582653359;
@@ -134,7 +134,7 @@ namespace fUML::Semantics::StructuredClassifiers
 			//Class and Feature IDs 
 			static const unsigned long LINK_CLASS = 1823394283;
 			static const unsigned int LINK_CLASS_FEATURE_COUNT = 3;
-			static const unsigned int LINK_CLASS_OPERATION_COUNT = 34;
+			static const unsigned int LINK_CLASS_OPERATION_COUNT = 38;
 			
 			static const unsigned long LINK_ATTRIBUTE_TYPE = 1804520989;
 			
@@ -165,7 +165,7 @@ namespace fUML::Semantics::StructuredClassifiers
 			//Class and Feature IDs 
 			static const unsigned long OBJECT_CLASS = 208025094;
 			static const unsigned int OBJECT_CLASS_FEATURE_COUNT = 4;
-			static const unsigned int OBJECT_CLASS_OPERATION_COUNT = 37;
+			static const unsigned int OBJECT_CLASS_OPERATION_COUNT = 41;
 			
 			static const unsigned long OBJECT_ATTRIBUTE_OBJECTACTIVATION = 1045746932;
 			static const unsigned long OBJECT_ATTRIBUTE_TYPES = 1845487453;
@@ -225,7 +225,7 @@ namespace fUML::Semantics::StructuredClassifiers
 			//Class and Feature IDs 
 			static const unsigned long REFERENCE_CLASS = 408530163;
 			static const unsigned int REFERENCE_CLASS_FEATURE_COUNT = 1;
-			static const unsigned int REFERENCE_CLASS_OPERATION_COUNT = 35;
+			static const unsigned int REFERENCE_CLASS_OPERATION_COUNT = 39;
 			
 			static const unsigned long REFERENCE_ATTRIBUTE_REFERENT = 823252190;
 			

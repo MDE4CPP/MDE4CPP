@@ -83,7 +83,6 @@ namespace fUML::Semantics::Activities
 }
 namespace fUML::Semantics::CommonBehavior
 {
-	class ObjectActivation;
 	class ParameterValue;
 }
 

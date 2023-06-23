@@ -22,7 +22,6 @@ namespace fUML::Semantics::Activities
 }
 namespace fUML::Semantics::CommonBehavior
 {
-	class ObjectActivation;
 	class ParameterValue;
 }
 
@@ -79,7 +78,6 @@ namespace fUML::Semantics::SimpleClassifiers
 			virtual std::shared_ptr<fUML::Semantics::SimpleClassifiers::RealValue> createRealValue_as_values_in_ParameterValue(std::shared_ptr<fUML::Semantics::CommonBehavior::ParameterValue> par_ParameterValue, const int metaElementID = SimpleClassifiersPackage::REALVALUE_CLASS) const = 0;
 			virtual std::shared_ptr<fUML::Semantics::SimpleClassifiers::SignalInstance> createSignalInstance(const int metaElementID = SimpleClassifiersPackage::SIGNALINSTANCE_CLASS) const = 0;
 			//Add as contained object
-			virtual std::shared_ptr<fUML::Semantics::SimpleClassifiers::SignalInstance> createSignalInstance_as_eventPool_in_ObjectActivation(std::shared_ptr<fUML::Semantics::CommonBehavior::ObjectActivation> par_ObjectActivation, const int metaElementID = SimpleClassifiersPackage::SIGNALINSTANCE_CLASS) const = 0;
 			virtual std::shared_ptr<fUML::Semantics::SimpleClassifiers::SignalInstance> createSignalInstance_as_value_in_ObjectToken(std::shared_ptr<fUML::Semantics::Activities::ObjectToken> par_ObjectToken, const int metaElementID = SimpleClassifiersPackage::SIGNALINSTANCE_CLASS) const = 0;
 			virtual std::shared_ptr<fUML::Semantics::SimpleClassifiers::SignalInstance> createSignalInstance_as_values_in_FeatureValue(std::shared_ptr<fUML::Semantics::SimpleClassifiers::FeatureValue> par_FeatureValue, const int metaElementID = SimpleClassifiersPackage::SIGNALINSTANCE_CLASS) const = 0;
 			virtual std::shared_ptr<fUML::Semantics::SimpleClassifiers::SignalInstance> createSignalInstance_as_values_in_ParameterValue(std::shared_ptr<fUML::Semantics::CommonBehavior::ParameterValue> par_ParameterValue, const int metaElementID = SimpleClassifiersPackage::SIGNALINSTANCE_CLASS) const = 0;

@@ -10,16 +10,22 @@
 
 
 
+
 //Forward Declaration for used types
 namespace uml 
 {
 	class Artifact;
 }
 
-// base class includes
+// base class includes 
 #include "StandardProfile/File.hpp"
 
 
+
+
+
+// include object activation
+#include "fUML/Semantics/CommonBehavior/ObjectActivation.hpp"
 
 namespace StandardProfile
 {
@@ -43,6 +49,12 @@ namespace StandardProfile
 			// Operations
 			//*********************************
 			
+
+			//*********************************
+			// ObjectActivation Forwarder SetGet
+			//*********************************
+			// Getter for Active Class
+			virtual bool GetIsActive() const = 0;
 			
 		protected:
 			//*********************************
@@ -50,6 +62,8 @@ namespace StandardProfile
 			//*********************************
 			std::weak_ptr<uml::Artifact> m_base_Artifact;
 			
+			
+
 			
 
 		public:

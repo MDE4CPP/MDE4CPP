@@ -150,8 +150,8 @@
 
 #include <exception> // used in Persistence
 #include "uml/umlFactory.hpp"
-#include "fUML/Semantics/Loci/LociFactory.hpp"
 #include "fUML/Semantics/CommonBehavior/CommonBehaviorFactory.hpp"
+#include "fUML/Semantics/Loci/LociFactory.hpp"
 #include "uml/Behavior.hpp"
 #include "uml/Element.hpp"
 #include "fUML/Semantics/Values/Evaluation.hpp"

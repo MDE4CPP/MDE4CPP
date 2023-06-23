@@ -268,3 +268,16 @@ void BuildComponentImpl::setThisBuildComponentPtr(std::weak_ptr<BuildComponent> 
 	m_thisBuildComponentPtr = thisBuildComponentPtr;
 	setThisStereotypePtr(thisBuildComponentPtr);
 }
+
+
+//*********************************
+// ObjectActivation Forwarder Impl
+//*********************************
+// Getter for Active Class
+bool BuildComponentImpl::GetIsActive() const
+{
+		return false;
+
+}
+
+

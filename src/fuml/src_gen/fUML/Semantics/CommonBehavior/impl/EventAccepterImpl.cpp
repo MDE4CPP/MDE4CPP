@@ -17,7 +17,7 @@
 #include <cassert>
 #include <iostream>
 #include <sstream>
-#include <stdexcept>
+
 
 
 #include "abstractDataTypes/AnyEObject.hpp"
@@ -33,12 +33,11 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "fUML/Semantics/SimpleClassifiers/SignalInstance.hpp"
+#include "fUML/Semantics/CommonBehavior/EventOccurrence.hpp"
 //Factories and Package includes
 #include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/SemanticsPackage.hpp"
 #include "fUML/Semantics/CommonBehavior/CommonBehaviorPackage.hpp"
-#include "fUML/Semantics/SimpleClassifiers/SimpleClassifiersPackage.hpp"
 
 using namespace fUML::Semantics::CommonBehavior;
 
@@ -94,14 +93,20 @@ EventAccepterImpl& EventAccepterImpl::operator=(const EventAccepterImpl & obj)
 //*********************************
 // Operations
 //*********************************
-void EventAccepterImpl::accept(std::shared_ptr<fUML::Semantics::SimpleClassifiers::SignalInstance> signalInstance)
+void EventAccepterImpl::accept(std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccurrence> eventOccurence)
 {
+	//ADD_COUNT(__PRETTY_FUNCTION__)
+	//generated from body annotation
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
+	//end of body
 }
 
-bool EventAccepterImpl::match(std::shared_ptr<fUML::Semantics::SimpleClassifiers::SignalInstance> signalInstance)
+bool EventAccepterImpl::match(std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccurrence> eventOccurence)
 {
+	//ADD_COUNT(__PRETTY_FUNCTION__)
+	//generated from body annotation
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
+	//end of body
 }
 
 //*********************************
@@ -221,26 +226,26 @@ Any EventAccepterImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> 
  
   	switch(operationID)
 	{
-		// fUML::Semantics::CommonBehavior::EventAccepter::accept(fUML::Semantics::SimpleClassifiers::SignalInstance): 1764686554
-		case CommonBehaviorPackage::EVENTACCEPTER_OPERATION_ACCEPT_SIGNALINSTANCE:
+		// fUML::Semantics::CommonBehavior::EventAccepter::accept(fUML::Semantics::CommonBehavior::EventOccurrence): 1902800013
+		case CommonBehaviorPackage::EVENTACCEPTER_OPERATION_ACCEPT_EVENTOCCURRENCE:
 		{
-			//Retrieve input parameter 'signalInstance'
+			//Retrieve input parameter 'eventOccurence'
 			//parameter 0
-			std::shared_ptr<fUML::Semantics::SimpleClassifiers::SignalInstance> incoming_param_signalInstance;
-			std::list<Any>::const_iterator incoming_param_signalInstance_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_signalInstance = (*incoming_param_signalInstance_arguments_citer)->get<std::shared_ptr<fUML::Semantics::SimpleClassifiers::SignalInstance> >();
-			this->accept(incoming_param_signalInstance);
+			std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccurrence> incoming_param_eventOccurence;
+			std::list<Any>::const_iterator incoming_param_eventOccurence_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_eventOccurence = (*incoming_param_eventOccurence_arguments_citer)->get<std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccurrence> >();
+			this->accept(incoming_param_eventOccurence);
 			break;
 		}
-		// fUML::Semantics::CommonBehavior::EventAccepter::match(fUML::Semantics::SimpleClassifiers::SignalInstance) : bool: 2264525893
-		case CommonBehaviorPackage::EVENTACCEPTER_OPERATION_MATCH_SIGNALINSTANCE:
+		// fUML::Semantics::CommonBehavior::EventAccepter::match(fUML::Semantics::CommonBehavior::EventOccurrence) : bool: 1694626268
+		case CommonBehaviorPackage::EVENTACCEPTER_OPERATION_MATCH_EVENTOCCURRENCE:
 		{
-			//Retrieve input parameter 'signalInstance'
+			//Retrieve input parameter 'eventOccurence'
 			//parameter 0
-			std::shared_ptr<fUML::Semantics::SimpleClassifiers::SignalInstance> incoming_param_signalInstance;
-			std::list<Any>::const_iterator incoming_param_signalInstance_arguments_citer = std::next(arguments->begin(), 0);
-			incoming_param_signalInstance = (*incoming_param_signalInstance_arguments_citer)->get<std::shared_ptr<fUML::Semantics::SimpleClassifiers::SignalInstance> >();
-			result = eAny(this->match(incoming_param_signalInstance),0,false);
+			std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccurrence> incoming_param_eventOccurence;
+			std::list<Any>::const_iterator incoming_param_eventOccurence_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_eventOccurence = (*incoming_param_eventOccurence_arguments_citer)->get<std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccurrence> >();
+			result = eAny(this->match(incoming_param_eventOccurence),0,false);
 			break;
 		}
 

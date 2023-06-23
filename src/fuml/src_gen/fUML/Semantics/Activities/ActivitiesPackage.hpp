@@ -121,7 +121,7 @@ namespace fUML::Semantics::Activities
 			//Class and Feature IDs 
 			static const unsigned long ACTIVITYEXECUTION_CLASS = 750496334;
 			static const unsigned int ACTIVITYEXECUTION_CLASS_FEATURE_COUNT = 9;
-			static const unsigned int ACTIVITYEXECUTION_CLASS_OPERATION_COUNT = 48;
+			static const unsigned int ACTIVITYEXECUTION_CLASS_OPERATION_COUNT = 52;
 			
 			static const unsigned long ACTIVITYEXECUTION_ATTRIBUTE_ACTIVATIONGROUP = 11280750;
 			static const unsigned long ACTIVITYEXECUTION_ATTRIBUTE_ACTIVITY = 1195953016;
@@ -150,7 +150,7 @@ namespace fUML::Semantics::Activities
 			//Class and Feature IDs 
 			static const unsigned long ACTIVITYFINALNODEACTIVATION_CLASS = 1133474033;
 			static const unsigned int ACTIVITYFINALNODEACTIVATION_CLASS_FEATURE_COUNT = 6;
-			static const unsigned int ACTIVITYFINALNODEACTIVATION_CLASS_OPERATION_COUNT = 29;
+			static const unsigned int ACTIVITYFINALNODEACTIVATION_CLASS_OPERATION_COUNT = 30;
 			
 			
 			static const unsigned int ACTIVITYFINALNODEACTIVATION_OPERATION_FIRE_TOKEN = 3991177345;
@@ -169,7 +169,7 @@ namespace fUML::Semantics::Activities
 			//Class and Feature IDs 
 			static const unsigned long ACTIVITYNODEACTIVATION_CLASS = 646106009;
 			static const unsigned int ACTIVITYNODEACTIVATION_CLASS_FEATURE_COUNT = 6;
-			static const unsigned int ACTIVITYNODEACTIVATION_CLASS_OPERATION_COUNT = 27;
+			static const unsigned int ACTIVITYNODEACTIVATION_CLASS_OPERATION_COUNT = 28;
 			static const unsigned long ACTIVITYNODEACTIVATION_ATTRIBUTE_RUNNING = 1304818101;
 			
 			static const unsigned long ACTIVITYNODEACTIVATION_ATTRIBUTE_GROUP = 1603155624;
@@ -192,6 +192,7 @@ namespace fUML::Semantics::Activities
 			static const unsigned int ACTIVITYNODEACTIVATION_OPERATION_GETNODEACTIVATION_ACTIVITYNODE = 4201354494;
 			static const unsigned int ACTIVITYNODEACTIVATION_OPERATION_GETRUNNING = 254630437;
 			static const unsigned int ACTIVITYNODEACTIVATION_OPERATION_GETTOKENS = 3137100059;
+			static const unsigned int ACTIVITYNODEACTIVATION_OPERATION_INITIALIZE_ACTIVITYNODE_ACTIVITYNODEACTIVATIONGROUP = 3006347143;
 			static const unsigned int ACTIVITYNODEACTIVATION_OPERATION_ISREADY = 2594491909;
 			static const unsigned int ACTIVITYNODEACTIVATION_OPERATION_ISSOURCEFOR_ACTIVITYEDGEINSTANCE = 2410514251;
 			static const unsigned int ACTIVITYNODEACTIVATION_OPERATION_RECEIVEOFFER = 4022154831;
@@ -229,6 +230,7 @@ namespace fUML::Semantics::Activities
 			virtual std::shared_ptr<ecore::EOperation> getActivityNodeActivation_Operation_getNodeActivation_ActivityNode() const = 0;
 			virtual std::shared_ptr<ecore::EOperation> getActivityNodeActivation_Operation_getRunning() const = 0;
 			virtual std::shared_ptr<ecore::EOperation> getActivityNodeActivation_Operation_getTokens() const = 0;
+			virtual std::shared_ptr<ecore::EOperation> getActivityNodeActivation_Operation_initialize_ActivityNode_ActivityNodeActivationGroup() const = 0;
 			virtual std::shared_ptr<ecore::EOperation> getActivityNodeActivation_Operation_isReady() const = 0;
 			virtual std::shared_ptr<ecore::EOperation> getActivityNodeActivation_Operation_isSourceFor_ActivityEdgeInstance() const = 0;
 			virtual std::shared_ptr<ecore::EOperation> getActivityNodeActivation_Operation_receiveOffer() const = 0;
@@ -309,7 +311,7 @@ namespace fUML::Semantics::Activities
 			//Class and Feature IDs 
 			static const unsigned long ACTIVITYPARAMETERNODEACTIVATION_CLASS = 1310518118;
 			static const unsigned int ACTIVITYPARAMETERNODEACTIVATION_CLASS_FEATURE_COUNT = 7;
-			static const unsigned int ACTIVITYPARAMETERNODEACTIVATION_CLASS_OPERATION_COUNT = 40;
+			static const unsigned int ACTIVITYPARAMETERNODEACTIVATION_CLASS_OPERATION_COUNT = 41;
 			
 			
 			static const unsigned int ACTIVITYPARAMETERNODEACTIVATION_OPERATION_CLEARTOKENS = 779512874;
@@ -330,7 +332,7 @@ namespace fUML::Semantics::Activities
 			//Class and Feature IDs 
 			static const unsigned long CENTRALBUFFERNODEACTIVATION_CLASS = 2083734229;
 			static const unsigned int CENTRALBUFFERNODEACTIVATION_CLASS_FEATURE_COUNT = 7;
-			static const unsigned int CENTRALBUFFERNODEACTIVATION_CLASS_OPERATION_COUNT = 39;
+			static const unsigned int CENTRALBUFFERNODEACTIVATION_CLASS_OPERATION_COUNT = 40;
 			
 			
 			static const unsigned int CENTRALBUFFERNODEACTIVATION_OPERATION_FIRE_TOKEN = 3196789593;
@@ -383,7 +385,7 @@ namespace fUML::Semantics::Activities
 			//Class and Feature IDs 
 			static const unsigned long CONTROLNODEACTIVATION_CLASS = 1062574970;
 			static const unsigned int CONTROLNODEACTIVATION_CLASS_FEATURE_COUNT = 6;
-			static const unsigned int CONTROLNODEACTIVATION_CLASS_OPERATION_COUNT = 28;
+			static const unsigned int CONTROLNODEACTIVATION_CLASS_OPERATION_COUNT = 29;
 			
 			
 			static const unsigned int CONTROLNODEACTIVATION_OPERATION_FIRE_TOKEN = 1708232627;
@@ -425,7 +427,7 @@ namespace fUML::Semantics::Activities
 			//Class and Feature IDs 
 			static const unsigned long DATASTORENODEACTIVATION_CLASS = 602540034;
 			static const unsigned int DATASTORENODEACTIVATION_CLASS_FEATURE_COUNT = 7;
-			static const unsigned int DATASTORENODEACTIVATION_CLASS_OPERATION_COUNT = 41;
+			static const unsigned int DATASTORENODEACTIVATION_CLASS_OPERATION_COUNT = 42;
 			
 			
 			static const unsigned int DATASTORENODEACTIVATION_OPERATION_ADDTOKEN_TOKEN = 2150799315;
@@ -446,7 +448,7 @@ namespace fUML::Semantics::Activities
 			//Class and Feature IDs 
 			static const unsigned long DECISIONNODEACTIVATION_CLASS = 52454155;
 			static const unsigned int DECISIONNODEACTIVATION_CLASS_FEATURE_COUNT = 8;
-			static const unsigned int DECISIONNODEACTIVATION_CLASS_OPERATION_COUNT = 39;
+			static const unsigned int DECISIONNODEACTIVATION_CLASS_OPERATION_COUNT = 40;
 			
 			static const unsigned long DECISIONNODEACTIVATION_ATTRIBUTE_DECISIONINPUTEXECUTION = 1327941012;
 			static const unsigned long DECISIONNODEACTIVATION_ATTRIBUTE_DECISIONNODE = 1894640136;
@@ -524,7 +526,7 @@ namespace fUML::Semantics::Activities
 			//Class and Feature IDs 
 			static const unsigned long EXPANSIONNODEACTIVATION_CLASS = 2051282899;
 			static const unsigned int EXPANSIONNODEACTIVATION_CLASS_FEATURE_COUNT = 7;
-			static const unsigned int EXPANSIONNODEACTIVATION_CLASS_OPERATION_COUNT = 42;
+			static const unsigned int EXPANSIONNODEACTIVATION_CLASS_OPERATION_COUNT = 43;
 			
 			
 			static const unsigned int EXPANSIONNODEACTIVATION_OPERATION_FIRE_TOKEN = 2655396851;
@@ -549,7 +551,7 @@ namespace fUML::Semantics::Activities
 			//Class and Feature IDs 
 			static const unsigned long EXPANSIONREGIONACTIVATION_CLASS = 918124971;
 			static const unsigned int EXPANSIONREGIONACTIVATION_CLASS_FEATURE_COUNT = 15;
-			static const unsigned int EXPANSIONREGIONACTIVATION_CLASS_OPERATION_COUNT = 61;
+			static const unsigned int EXPANSIONREGIONACTIVATION_CLASS_OPERATION_COUNT = 63;
 			static const unsigned long EXPANSIONREGIONACTIVATION_ATTRIBUTE_NEXT = 1468361356;
 			
 			static const unsigned long EXPANSIONREGIONACTIVATION_ATTRIBUTE_ACTIVATIONGROUPS = 1554958381;
@@ -602,7 +604,7 @@ namespace fUML::Semantics::Activities
 			//Class and Feature IDs 
 			static const unsigned long FLOWFINALNODEACTIVATION_CLASS = 1816371590;
 			static const unsigned int FLOWFINALNODEACTIVATION_CLASS_FEATURE_COUNT = 6;
-			static const unsigned int FLOWFINALNODEACTIVATION_CLASS_OPERATION_COUNT = 28;
+			static const unsigned int FLOWFINALNODEACTIVATION_CLASS_OPERATION_COUNT = 29;
 			
 			
 			
@@ -619,7 +621,7 @@ namespace fUML::Semantics::Activities
 			//Class and Feature IDs 
 			static const unsigned long FORKNODEACTIVATION_CLASS = 1142288693;
 			static const unsigned int FORKNODEACTIVATION_CLASS_FEATURE_COUNT = 6;
-			static const unsigned int FORKNODEACTIVATION_CLASS_OPERATION_COUNT = 30;
+			static const unsigned int FORKNODEACTIVATION_CLASS_OPERATION_COUNT = 31;
 			
 			
 			static const unsigned int FORKNODEACTIVATION_OPERATION_FIRE_TOKEN = 974284456;
@@ -673,7 +675,7 @@ namespace fUML::Semantics::Activities
 			//Class and Feature IDs 
 			static const unsigned long INITIALNODEACTIVATION_CLASS = 176514932;
 			static const unsigned int INITIALNODEACTIVATION_CLASS_FEATURE_COUNT = 6;
-			static const unsigned int INITIALNODEACTIVATION_CLASS_OPERATION_COUNT = 29;
+			static const unsigned int INITIALNODEACTIVATION_CLASS_OPERATION_COUNT = 30;
 			
 			
 			static const unsigned int INITIALNODEACTIVATION_OPERATION_FIRE_TOKEN = 3439352700;
@@ -692,7 +694,7 @@ namespace fUML::Semantics::Activities
 			//Class and Feature IDs 
 			static const unsigned long JOINNODEACTIVATION_CLASS = 982186466;
 			static const unsigned int JOINNODEACTIVATION_CLASS_FEATURE_COUNT = 6;
-			static const unsigned int JOINNODEACTIVATION_CLASS_OPERATION_COUNT = 30;
+			static const unsigned int JOINNODEACTIVATION_CLASS_OPERATION_COUNT = 31;
 			
 			
 			static const unsigned int JOINNODEACTIVATION_OPERATION_FIRE_TOKEN = 1770507194;
@@ -713,7 +715,7 @@ namespace fUML::Semantics::Activities
 			//Class and Feature IDs 
 			static const unsigned long MERGENODEACTIVATION_CLASS = 1031931828;
 			static const unsigned int MERGENODEACTIVATION_CLASS_FEATURE_COUNT = 6;
-			static const unsigned int MERGENODEACTIVATION_CLASS_OPERATION_COUNT = 28;
+			static const unsigned int MERGENODEACTIVATION_CLASS_OPERATION_COUNT = 29;
 			
 			
 			
@@ -730,7 +732,7 @@ namespace fUML::Semantics::Activities
 			//Class and Feature IDs 
 			static const unsigned long OBJECTNODEACTIVATION_CLASS = 898578487;
 			static const unsigned int OBJECTNODEACTIVATION_CLASS_FEATURE_COUNT = 7;
-			static const unsigned int OBJECTNODEACTIVATION_CLASS_OPERATION_COUNT = 38;
+			static const unsigned int OBJECTNODEACTIVATION_CLASS_OPERATION_COUNT = 39;
 			static const unsigned long OBJECTNODEACTIVATION_ATTRIBUTE_OFFEREDTOKENCOUNT = 1384449261;
 			
 			

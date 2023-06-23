@@ -164,8 +164,10 @@ void ObjectImpl::_register(std::shared_ptr<fUML::Semantics::CommonBehavior::Even
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
-	    if( this->getObjectActivation() != nullptr)
+	DEBUG_MESSAGE(std::cout << "registering in Object..." << std::endl;)   
+ if( this->getObjectActivation() != nullptr)
     {
+	DEBUG_MESSAGE(std::cout << "ObjectActivation found..." << std::endl;)
         this->getObjectActivation()->_register(accepter);
     }
 	//end of body
@@ -210,7 +212,10 @@ void ObjectImpl::send(std::shared_ptr<fUML::Semantics::SimpleClassifiers::Signal
 	//generated from body annotation
 	    if( this->getObjectActivation() != nullptr)
     {
-        this->getObjectActivation()->send(signalInstance);
+	// Object Activation does not have a send(signalInstance in FUML
+	// Neither does Object. However, this method might be called by something now deprecated
+	// So for now, just disable the ObjectActivation Call. 
+        // this->getObjectActivation()->send(signalInstance);
     }
 	//end of body
 }
@@ -219,7 +224,33 @@ void ObjectImpl::send(std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccu
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
+	//ADD_COUNT(__PRETTY_FUNCTION__)
+
+	DEBUG_MESSAGE( std::cout << "sending through object..."<< std::endl;)
+
+	//generated from body annotation
+	// If the object is active, add the given event occurrence to the event pool and signal that a new event occurrence has arrived.
+	// std::shared_ptr<fUML::Semantics::CommonBehavior::ObjectActivation> objectActivation = getObjectActivation();
+	if( this->getObjectActivation() != nullptr) {
+		DEBUG_MESSAGE( std::cout << "object Activation found..." << std::endl;)
+ 		this->getObjectActivation()->send(eventOccurrence);
+	}
+else
+{
+	DEBUG_MESSAGE(std::cout << " no object Activation found, creating a new one for debugging purposes, so you can send to non-active objects..." << std::endl;)
+
+std::shared_ptr<fUML::Semantics::CommonBehavior::ObjectActivation> TempObjectActivation = fUML::Semantics::CommonBehavior::CommonBehaviorFactory::eInstance()->createObjectActivation();
+      	
+
+	this->setObjectActivation( TempObjectActivation );
+        this->getObjectActivation()->setObject(getThisObjectPtr());
 	
+ 		this->getObjectActivation()->send(eventOccurrence);
+
+}
+
+	//end of body
+
 	//end of body
 }
 

@@ -268,3 +268,16 @@ void RefineImpl::setThisRefinePtr(std::weak_ptr<Refine> thisRefinePtr)
 	m_thisRefinePtr = thisRefinePtr;
 	setThisStereotypePtr(thisRefinePtr);
 }
+
+
+//*********************************
+// ObjectActivation Forwarder Impl
+//*********************************
+// Getter for Active Class
+bool RefineImpl::GetIsActive() const
+{
+		return false;
+
+}
+
+

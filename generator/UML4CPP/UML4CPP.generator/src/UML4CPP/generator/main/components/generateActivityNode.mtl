@@ -241,6 +241,107 @@
 [/template]
 
 [**
+ * generate Target Pin for SendSignal Action
+*/]
+[template private generateActivityNodeSpecial(anActivityNode : ActivityNode) ? (oclIsKindOf(SendSignalAction))]
+// setup Signal 
+
+[let action : SendSignalAction = self.oclAsType(SendSignalAction)]
+
+	// Create Target(s)
+	[if (action.target.oclIsUndefined())]
+	['UML4CPP_Generation Error: SendSignalAction: '.concat(action.name).concat('target pin is undefined.').registerError()/]
+	[else]
+		[action.target.memberName()/] = factory->create[action.target.eClass().name/]_as_target_in_SendSignalAction([action.target.owner.oclAsType(NamedElement).memberName()/]);
+		[action.memberName()/]->getInput()->push_back([action.target.memberName()/]);
+		[comment]
+			[if (action.target.oclIsUndefined())]
+			['UML4CPP_Generation Error: DestroyObjectAction: '.concat(action.name).concat('target pin is undefined.').registerError()/]
+			[else]
+				[action.target.memberName()/] = factory->create[action.target.eClass().name/]_as_target_in_DestroyObjectAction([action.target.owner.oclAsType(NamedElement).memberName()/]);
+				[action.memberName()/]->getInput()->push_back([action.target.memberName()/]); // subset/union in not implemented for upper=1
+			[/if]
+		[/comment]
+
+	[/if]
+		// Create Arguments
+		[for (argumentPin : InputPin | action.argument)]
+		[if (argumentPin.oclIsUndefined())]
+		['UML4CPP_Generation Error: SendSignalAction: '.concat(action.name).concat('argument pin is undefined.').registerError()/]
+		[else]
+			[argumentPin.memberName()/] = factory->create[argumentPin.eClass().name/]_as_argument_in_InvocationAction([argumentPin.owner.oclAsType(NamedElement).memberName()/]);
+		[/if]
+		[/for]
+	
+	[comment]
+		[let action : SendSignalAction = self.oclAsType(SendSignalAction)]
+					[action.generatePackageGetterCall()/]->setSignal( [action.signal.generatePackageGetterCall()/] ); // Get the pointer to this Node, and set its signal to the provided Signal.
+					// take target Input Pin and set it to the target of this Action
+					[action.generatePackageGetterCall()/]->setTarget( [action.target.generatePackageGetterCall()/] );
+		[/let]
+	[/comment]
+[/let]
+[/template]
+
+
+[**
+ * generate Result Pins and Triggers for AcceptEventAction
+*/]
+[template private generateActivityNodeSpecial(anActivityNode : ActivityNode) ? (oclIsKindOf(AcceptEventAction))]
+// create Triggers
+[comment]
+	[let action : AcceptEventAction = self.oclAsType(AcceptEventAction)]
+		// for every Trigger
+		[for (trig : Trigger | action.trigger)]
+			[let sigEvt : SignalEvent = trig.event.oclAsType(SignalEvent)]
+					std::shared_ptr<uml::Trigger> temp = uml::umlFactory::eInstance()->createTrigger(); // create new Trigger
+					std::shared_ptr<uml::SignalEvent> tempSigEvt = uml::umlFactory::eInstance()->createSignalEvent(); // create Trigger Event
+					tempSigEvt->setSignal( [sigEvt.signal.generatePackageGetterCall()/] ); // set Trigger Events Signal
+					temp->setEvent(tempSigEvt); // assign event to trigger
+					[action.generatePackageGetterCall()/]->getTrigger()->push_back(temp); // push newly created trigger into triggerlist
+			[/let]
+		[/for]
+	[/let]
+[/comment]
+[let action : AcceptEventAction = self.oclAsType(AcceptEventAction)]
+
+	[for (trigger : Trigger | action.trigger)]
+	[if (trigger.oclIsUndefined())]
+		['UML4CPP_Generation Error: AcceptEventAction: '.concat(action.name).concat('trigger is undefined.').registerError()/]
+	[else]
+		[let sigEvt : SignalEvent = trigger.event.oclAsType(SignalEvent)]
+			[trigger.memberName()/] = factory->create[trigger.eClass().name/]_as_trigger_in_AcceptEventAction([trigger.owner.oclAsType(NamedElement).memberName()/]);
+			[comment]
+				// Create the signal event for this trigger
+				std::shared_ptr<uml::SignalEvent> tempSigEvt = uml::umlFactory::eInstance()->createSignalEvent(); // create Trigger Event
+				tempSigEvt->setSignal( [sigEvt.signal.generatePackageGetterCall()/] ); // set Trigger Events Signal
+				[trigger.memberName()/]->setEvent( tempSigEvt );
+			[/comment]
+			[comment]
+				std::shared_ptr<uml::SignalEvent> tempSigEvt = createSignalEvent_as_ownedElement_in_Element([trigger.memberName()/]);
+				tempSigEvt->setSignal( [sigEvt.signal.generatePackageGetterCall()/] ); // set Trigger Events Signal
+				[trigger.memberName()/]->setEvent( tempSigEvt );
+			[/comment]
+			
+			
+		[/let]
+	[/if]
+	[/for]
+	// Result Pins
+	[for (resultPin : OutputPin | action.result)]
+		[if (resultPin.oclIsUndefined())]
+		['UML4CPP_Generation Error: AcceptEventAction: '.concat(action.name).concat('result pin is undefined.').registerError()/]
+		[else]
+			[resultPin.memberName()/] = factory->create[resultPin.eClass().name/]_as_result_in_AcceptEventAction([resultPin.owner.oclAsType(NamedElement).memberName()/]);
+		[/if]
+	[/for]
+
+	
+[/let]
+[/template]
+
+
+[**
  * generate creation of meta model instances used by Action
  * 
  * this includes:
@@ -272,6 +373,86 @@
 [anActivityNode.initializeActivityNodeSpecial(anActivityNode)/]
 [anActivityNode.generateStereotypeApplication()/]
 [/template]
+
+[**
+ * Set the Target of the SendSignalAction to the Pin. 
+ * Setup all the Input Pins, either as target if it is, or as regular, if its flow or argument
+*/]
+
+[template private initializeActivityNodeSpecial(anActivityNode : ActivityNode) ? (oclIsKindOf(SendSignalAction))]
+[let action : SendSignalAction = self.oclAsType(SendSignalAction)]
+	[for (inputPin : InputPin | action.input)]
+		[inputPin.initializePin(inputPin = action.target)/]
+	[/for]
+	[action.generatePackageGetterCall()/]->setSignal( [action.signal.generatePackageGetterCall()/] ); // Get the pointer to this Node, and set its signal to the provided Signal.
+[/let]
+[comment]
+	[let action : SendSignalAction = self.oclAsType(SendSignalAction)]
+				[action.generatePackageGetterCall()/]->setSignal( [action.signal.generatePackageGetterCall()/] ); // Get the pointer to this Node, and set its signal to the provided Signal.
+				// take target Input Pin and set it to the target of this Action
+				[action.generatePackageGetterCall()/]->setTarget( [action.target.generatePackageGetterCall()/] );
+	[/let]
+[/comment]
+[/template]
+
+[**
+ * Setup the generated Triggers by linking their signalEvents. Moved into generate, left here for completion
+*/]
+[template private initializeActivityNodeSpecial(anActivityNode : ActivityNode) ? (oclIsKindOf(AcceptEventAction))]
+[let action : AcceptEventAction = self.oclAsType(AcceptEventAction)]
+	[for (trigger : Trigger | action.trigger) ]
+		[let sigEvt : SignalEvent = trigger.event.oclAsType(SignalEvent)]
+			std::shared_ptr<uml::SignalEvent> tempSigEvt = uml::umlFactory::eInstance()->createSignalEvent(); // create Trigger Event
+			tempSigEvt->setSignal( [sigEvt.signal.generatePackageGetterCall()/] ); // set Trigger Events Signal
+			[trigger.memberName()/]->setEvent( tempSigEvt );
+		[/let]
+	[/for]
+	[for (outputPin : OutputPin | action.output)]
+		[outputPin.initializePin()/]
+	[/for]
+
+	[comment]
+		[for (trigger : Trigger | action.trigger)]
+		[if (trigger.oclIsUndefined())]
+			['UML4CPP_Generation Error: AcceptEventAction: '.concat(action.name).concat('trigger is undefined.').registerError()/]
+		[else]
+			[let sigEvt : SignalEvent = trigger.event.oclAsType(SignalEvent)]
+				[trigger.memberName()/] = factory->create[trigger.eClass().name/]_as_trigger_in_AcceptEventAction([trigger.owner.oclAsType(NamedElement).memberName()/]);
+				[comment]
+					// Create the signal event for this trigger
+					std::shared_ptr<uml::SignalEvent> tempSigEvt = uml::umlFactory::eInstance()->createSignalEvent(); // create Trigger Event
+					tempSigEvt->setSignal( [sigEvt.signal.generatePackageGetterCall()/] ); // set Trigger Events Signal
+					[trigger.memberName()/]->setEvent( tempSigEvt );
+				[/comment]
+				std::shared_ptr<uml::SignalEvent> tempSigEvt = createSignalEvent_as_ownedElement_in_Element([trigger.memberName()/];
+				tempSigEvt->setSignal( [sigEvt.signal.generatePackageGetterCall()/] ); // set Trigger Events Signal
+				[trigger.memberName()/]->setEvent( tempSigEvt );
+	[/comment]
+	
+	// Generate Unmarshalling
+	[if (action.isUnmarshall)]
+		[action.memberName()/]->setIsUnmarshall(true);
+	[else]
+		[action.memberName()/]->setIsUnmarshall(false);
+	[/if]
+
+[/let]
+[comment]
+	[let action : AcceptEventAction = self.oclAsType(AcceptEventAction)]
+		// for every Trigger
+		[for (trig : Trigger | action.trigger)]
+			[let sigEvt : SignalEvent = trig.event.oclAsType(SignalEvent)]
+					std::shared_ptr<uml::Trigger> temp = uml::umlFactory::eInstance()->createTrigger(); // create new Trigger
+					std::shared_ptr<uml::SignalEvent> tempSigEvt = uml::umlFactory::eInstance()->createSignalEvent(); // create Trigger Event
+					tempSigEvt->setSignal( [sigEvt.signal.generatePackageGetterCall()/] ); // set Trigger Events Signal
+					temp->setEvent(tempSigEvt); // assign event to trigger
+					[action.generatePackageGetterCall()/]->getTrigger()->push_back(temp); // push newly created trigger into triggerlist
+			[/let]
+		[/for]
+	[/let]
+[/comment]
+[/template]
+
 
 [**
  * generate initialization of meta model instance for an ActivityParameterNode element

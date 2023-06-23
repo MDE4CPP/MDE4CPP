@@ -104,6 +104,7 @@ namespace fUML::Semantics::Actions
 			virtual void doAction() = 0;
 			virtual void fire(std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> incomingTokens) = 0;
 			virtual std::shared_ptr<Bag<fUML::Semantics::Values::Value> > getTokens(std::shared_ptr<uml::InputPin> pin) = 0;
+			virtual void initialize(std::shared_ptr<uml::ActivityNode> node,std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup> group) = 0;
 			virtual bool isFirng() = 0;
 			virtual bool isReady() = 0;
 			virtual bool isSourceFor(std::shared_ptr<fUML::Semantics::Activities::ActivityEdgeInstance> edgeInstance) = 0;

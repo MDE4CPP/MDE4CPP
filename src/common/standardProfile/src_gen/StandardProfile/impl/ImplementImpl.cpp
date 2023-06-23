@@ -268,3 +268,16 @@ void ImplementImpl::setThisImplementPtr(std::weak_ptr<Implement> thisImplementPt
 	m_thisImplementPtr = thisImplementPtr;
 	setThisStereotypePtr(thisImplementPtr);
 }
+
+
+//*********************************
+// ObjectActivation Forwarder Impl
+//*********************************
+// Getter for Active Class
+bool ImplementImpl::GetIsActive() const
+{
+		return false;
+
+}
+
+

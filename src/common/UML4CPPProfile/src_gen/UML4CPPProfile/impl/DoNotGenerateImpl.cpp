@@ -268,3 +268,16 @@ void DoNotGenerateImpl::setThisDoNotGeneratePtr(std::weak_ptr<DoNotGenerate> thi
 	m_thisDoNotGeneratePtr = thisDoNotGeneratePtr;
 	setThisStereotypePtr(thisDoNotGeneratePtr);
 }
+
+
+//*********************************
+// ObjectActivation Forwarder Impl
+//*********************************
+// Getter for Active Class
+bool DoNotGenerateImpl::GetIsActive() const
+{
+		return false;
+
+}
+
+

@@ -324,6 +324,18 @@ std::shared_ptr<Bag<fUML::Semantics::Activities::Token> > ActivityNodeActivation
 	//end of body
 }
 
+void ActivityNodeActivationImpl::initialize(std::shared_ptr<uml::ActivityNode> node,std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup> group)
+{
+	//ADD_COUNT(__PRETTY_FUNCTION__)
+	//generated from body annotation
+	// Initialize this node activation.
+this->setNode(node);
+this->setGroup(group);
+this->setRunning(false);
+
+	//end of body
+}
+
 bool ActivityNodeActivationImpl::isReady()
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
@@ -1167,6 +1179,22 @@ Any ActivityNodeActivationImpl::eInvoke(int operationID, std::shared_ptr<std::li
 		{
 			std::shared_ptr<Bag<fUML::Semantics::Activities::Token> > resultList = this->getTokens();
 			return eAnyBag(resultList,fUML::Semantics::Activities::ActivitiesPackage::TOKEN_CLASS);
+			break;
+		}
+		// fUML::Semantics::Activities::ActivityNodeActivation::initialize(uml::ActivityNode, fUML::Semantics::Activities::ActivityNodeActivationGroup): 3006347143
+		case ActivitiesPackage::ACTIVITYNODEACTIVATION_OPERATION_INITIALIZE_ACTIVITYNODE_ACTIVITYNODEACTIVATIONGROUP:
+		{
+			//Retrieve input parameter 'node'
+			//parameter 0
+			std::shared_ptr<uml::ActivityNode> incoming_param_node;
+			std::list<Any>::const_iterator incoming_param_node_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_node = (*incoming_param_node_arguments_citer)->get<std::shared_ptr<uml::ActivityNode> >();
+			//Retrieve input parameter 'group'
+			//parameter 1
+			std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup> incoming_param_group;
+			std::list<Any>::const_iterator incoming_param_group_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_group = (*incoming_param_group_arguments_citer)->get<std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup> >();
+			this->initialize(incoming_param_node,incoming_param_group);
 			break;
 		}
 		// fUML::Semantics::Activities::ActivityNodeActivation::isReady() : bool: 2594491909

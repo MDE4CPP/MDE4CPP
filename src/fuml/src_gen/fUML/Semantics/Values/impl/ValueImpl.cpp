@@ -101,6 +101,24 @@ ValueImpl& ValueImpl::operator=(const ValueImpl & obj)
 //*********************************
 // Operations
 //*********************************
+bool ValueImpl::IsInstanceOf(std::shared_ptr<uml::Classifier> classifier)
+{
+	//ADD_COUNT(__PRETTY_FUNCTION__)
+	//generated from body annotation
+	// Check if this value has the given classifier as its type
+	// or as an ancestor of one of its types.
+	std::shared_ptr<Bag<uml::Classifier> >types = this->getTypes();
+	bool isInstance = this->hasTypes(classifier);
+	int i = 1;
+	while (!isInstance & i <= types->size()) 
+	{
+		isInstance = this->checkAllParents(types->at(i-1), classifier);
+		i = i + 1;
+	}
+	return isInstance;
+	//end of body
+}
+
 std::shared_ptr<fUML::Semantics::Values::Value> ValueImpl::_copy()
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
@@ -115,7 +133,29 @@ return this->new_();
 
 bool ValueImpl::checkAllParents(std::shared_ptr<uml::Classifier> type,std::shared_ptr<uml::Classifier> classifier)
 {
-	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
+	//ADD_COUNT(__PRETTY_FUNCTION__)
+	//generated from body annotation
+	// Check if the given classifier matches any of the direct or indirect
+	// ancestors of a given type.
+	// Potentially getGeneral, getGenerals or allParents. In Terms of Likeliness
+	std::shared_ptr<Bag<uml::Classifier> > directParents = type->getGeneral();
+	bool matched = false;
+	int i = 1;
+	while (!matched & i <= directParents->size() ) 
+	{
+		std::shared_ptr<uml::Classifier> directParent = directParents->at(i - 1);
+		if (directParent == classifier) 
+		{
+			matched = true;
+		} 
+		else 
+		{
+			matched = this->checkAllParents(directParent, classifier);
+		}
+		i = i + 1;
+	}
+	return matched;
+	//end of body
 }
 
 bool ValueImpl::equals(std::shared_ptr<fUML::Semantics::Values::Value> otherValue)
@@ -321,6 +361,17 @@ Any ValueImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> argument
  
   	switch(operationID)
 	{
+		// fUML::Semantics::Values::Value::IsInstanceOf(uml::Classifier) : bool: 708485784
+		case ValuesPackage::VALUE_OPERATION_ISINSTANCEOF_CLASSIFIER:
+		{
+			//Retrieve input parameter 'classifier'
+			//parameter 0
+			std::shared_ptr<uml::Classifier> incoming_param_classifier;
+			std::list<Any>::const_iterator incoming_param_classifier_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_classifier = (*incoming_param_classifier_arguments_citer)->get<std::shared_ptr<uml::Classifier> >();
+			result = eAny(this->IsInstanceOf(incoming_param_classifier),0,false);
+			break;
+		}
 		// fUML::Semantics::Values::Value::_copy() : fUML::Semantics::Values::Value: 611324517
 		case ValuesPackage::VALUE_OPERATION__COPY:
 		{

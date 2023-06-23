@@ -33,8 +33,8 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "ocl/Evaluations/EvaluationsFactory.hpp"
 #include "fUML/Semantics/SimpleClassifiers/SimpleClassifiersFactory.hpp"
+#include "ocl/Evaluations/EvaluationsFactory.hpp"
 #include "ocl/Evaluations/OclExpEval.hpp"
 #include "fUML/Semantics/SimpleClassifiers/StringValue.hpp"
 //Factories and Package includes

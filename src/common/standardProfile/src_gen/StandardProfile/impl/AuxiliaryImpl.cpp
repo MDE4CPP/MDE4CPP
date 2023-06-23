@@ -268,3 +268,16 @@ void AuxiliaryImpl::setThisAuxiliaryPtr(std::weak_ptr<Auxiliary> thisAuxiliaryPt
 	m_thisAuxiliaryPtr = thisAuxiliaryPtr;
 	setThisStereotypePtr(thisAuxiliaryPtr);
 }
+
+
+//*********************************
+// ObjectActivation Forwarder Impl
+//*********************************
+// Getter for Active Class
+bool AuxiliaryImpl::GetIsActive() const
+{
+		return false;
+
+}
+
+

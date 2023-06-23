@@ -32,9 +32,9 @@ namespace fUML
 }
 
 //Forward Declaration for used types 
-namespace fUML::Semantics::SimpleClassifiers 
+namespace fUML::Semantics::CommonBehavior 
 {
-	class SignalInstance;
+	class EventOccurrence;
 }
 
 // namespace macro header include
@@ -66,8 +66,8 @@ namespace fUML::Semantics::CommonBehavior
 			//*********************************
 			// Operations
 			//*********************************
-			virtual void accept(std::shared_ptr<fUML::Semantics::SimpleClassifiers::SignalInstance> signalInstance) = 0;
-			virtual bool match(std::shared_ptr<fUML::Semantics::SimpleClassifiers::SignalInstance> signalInstance) = 0;
+			virtual void accept(std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccurrence> eventOccurence) = 0;
+			virtual bool match(std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccurrence> eventOccurence) = 0;
 
 			//*********************************
 			// Attribute Getters & Setters

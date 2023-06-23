@@ -19,6 +19,9 @@
 #include "ecore/EDataType.hpp"
 #include "ecore/EPackage.hpp"
 
+// Hard include of Primitive Type to account for Signals setting up their Attributes
+#include "uml/PrimitiveType.hpp"
+
 using namespace PrimitiveTypes;
 
 PrimitiveTypesPackageImpl::PrimitiveTypesPackageImpl()
@@ -78,6 +81,9 @@ void PrimitiveTypesPackageImpl::createPackageContents(std::shared_ptr<uml::Packa
 	createPackagePrimitiveTypes(primitiveTypes, factory);
 	createPackageEnumerationLiterals(primitiveTypes, factory);
 	createPackageInterfaceRealizations(primitiveTypes, factory);
+
+	createPackageSignals(primitiveTypes, factory);
+	createPackageSignalEvents(primitiveTypes, factory);
 }
 
 void PrimitiveTypesPackageImpl::createPackageActivities(std::shared_ptr<uml::Package> primitiveTypes, std::shared_ptr<uml::umlFactory> factory)
@@ -95,6 +101,24 @@ void PrimitiveTypesPackageImpl::createPackageClasses(std::shared_ptr<uml::Packag
 //Opaque Behaviors
 
 } 
+
+void PrimitiveTypesPackageImpl::createPackageSignals(std::shared_ptr<uml::Package> primitiveTypes, std::shared_ptr<uml::umlFactory> factory)
+{
+	std::shared_ptr<uml::Constraint> con = nullptr;
+	std::shared_ptr<uml::OpaqueExpression> oe = nullptr;
+
+
+//-------------------------------------------
+//Opaque Behaviors
+
+}
+
+void PrimitiveTypesPackageImpl::createPackageSignalEvents(std::shared_ptr<uml::Package> primitiveTypes, std::shared_ptr<uml::umlFactory> factory)
+{
+	std::shared_ptr<uml::Constraint> con = nullptr;
+	std::shared_ptr<uml::OpaqueExpression> oe = nullptr;
+
+}
 
 void PrimitiveTypesPackageImpl::createPackageAssociations(std::shared_ptr<uml::Package> primitiveTypes, std::shared_ptr<uml::umlFactory> factory)
 {
@@ -168,6 +192,10 @@ void PrimitiveTypesPackageImpl::initializePackageContents(std::shared_ptr<uml::P
 	initializePackageNestedPackages();
 	initializePackageStereotypes();
 	initializePackageValueSpecifications();
+
+	initializePackageSignals();
+	initializePackageSignalEvents();
+
 	
 }
 
@@ -178,6 +206,27 @@ void PrimitiveTypesPackageImpl::initializePackageActivities()
 
 
 void PrimitiveTypesPackageImpl::initializePackageClasses()
+{
+	std::shared_ptr<uml::Generalization> gen = nullptr;
+
+
+//-------------------------------------------
+//Opaque Behaviors
+
+}
+
+
+void PrimitiveTypesPackageImpl::initializePackageSignals()
+{
+	std::shared_ptr<uml::Generalization> gen = nullptr;
+
+
+//-------------------------------------------
+//Opaque Behaviors
+
+}
+
+void PrimitiveTypesPackageImpl::initializePackageSignalEvents()
 {
 	std::shared_ptr<uml::Generalization> gen = nullptr;
 

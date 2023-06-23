@@ -239,7 +239,12 @@ void ReferenceImpl::send(std::shared_ptr<fUML::Semantics::CommonBehavior::EventO
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
-	
+	//ADD_COUNT(__PRETTY_FUNCTION__)
+	//generated from body annotation
+	// Send the given signal instance to the referent object.
+	DEBUG_MESSAGE( std::cout << "seonding through reference..." << std::endl;)
+	this->getReferent()->send(eventOccurrence);
+	//end of body
 	//end of body
 }
 

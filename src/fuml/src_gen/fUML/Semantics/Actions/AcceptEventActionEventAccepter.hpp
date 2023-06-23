@@ -36,6 +36,10 @@ namespace fUML::Semantics::Actions
 {
 	class AcceptEventActionActivation;
 }
+namespace fUML::Semantics::CommonBehavior 
+{
+	class EventOccurrence;
+}
 
 // namespace macro header include
 #include "fUML/fUML.hpp"
@@ -67,6 +71,8 @@ namespace fUML::Semantics::Actions
 			//*********************************
 			// Operations
 			//*********************************
+			virtual void accept(std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccurrence> eventOccurence) = 0;
+			virtual bool match(std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccurrence> eventOccurence) = 0;
 
 			//*********************************
 			// Attribute Getters & Setters

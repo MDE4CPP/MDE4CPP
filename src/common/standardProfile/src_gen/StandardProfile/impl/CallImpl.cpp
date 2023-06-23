@@ -268,3 +268,16 @@ void CallImpl::setThisCallPtr(std::weak_ptr<Call> thisCallPtr)
 	m_thisCallPtr = thisCallPtr;
 	setThisStereotypePtr(thisCallPtr);
 }
+
+
+//*********************************
+// ObjectActivation Forwarder Impl
+//*********************************
+// Getter for Active Class
+bool CallImpl::GetIsActive() const
+{
+		return false;
+
+}
+
+

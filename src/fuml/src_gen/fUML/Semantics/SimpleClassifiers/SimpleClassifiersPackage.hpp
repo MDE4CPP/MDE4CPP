@@ -67,7 +67,7 @@ namespace fUML::Semantics::SimpleClassifiers
 			//Class and Feature IDs 
 			static const unsigned long BOOLEANVALUE_CLASS = 696652347;
 			static const unsigned int BOOLEANVALUE_CLASS_FEATURE_COUNT = 2;
-			static const unsigned int BOOLEANVALUE_CLASS_OPERATION_COUNT = 18;
+			static const unsigned int BOOLEANVALUE_CLASS_OPERATION_COUNT = 19;
 			static const unsigned long BOOLEANVALUE_ATTRIBUTE_VALUE = 1331291534;
 			
 			
@@ -96,7 +96,7 @@ namespace fUML::Semantics::SimpleClassifiers
 			//Class and Feature IDs 
 			static const unsigned long COMPOUNDVALUE_CLASS = 960723248;
 			static const unsigned int COMPOUNDVALUE_CLASS_FEATURE_COUNT = 1;
-			static const unsigned int COMPOUNDVALUE_CLASS_OPERATION_COUNT = 26;
+			static const unsigned int COMPOUNDVALUE_CLASS_OPERATION_COUNT = 30;
 			
 			static const unsigned long COMPOUNDVALUE_ATTRIBUTE_FEATUREVALUES = 956860599;
 			
@@ -129,7 +129,7 @@ namespace fUML::Semantics::SimpleClassifiers
 			//Class and Feature IDs 
 			static const unsigned long DATAVALUE_CLASS = 622084858;
 			static const unsigned int DATAVALUE_CLASS_FEATURE_COUNT = 2;
-			static const unsigned int DATAVALUE_CLASS_OPERATION_COUNT = 29;
+			static const unsigned int DATAVALUE_CLASS_OPERATION_COUNT = 33;
 			
 			static const unsigned long DATAVALUE_ATTRIBUTE_TYPE = 1769283923;
 			
@@ -154,7 +154,7 @@ namespace fUML::Semantics::SimpleClassifiers
 			//Class and Feature IDs 
 			static const unsigned long ENUMERATIONVALUE_CLASS = 241622527;
 			static const unsigned int ENUMERATIONVALUE_CLASS_FEATURE_COUNT = 2;
-			static const unsigned int ENUMERATIONVALUE_CLASS_OPERATION_COUNT = 17;
+			static const unsigned int ENUMERATIONVALUE_CLASS_OPERATION_COUNT = 18;
 			
 			static const unsigned long ENUMERATIONVALUE_ATTRIBUTE_LITERAL = 1720521261;
 			static const unsigned long ENUMERATIONVALUE_ATTRIBUTE_TYPE = 941000500;
@@ -214,7 +214,7 @@ namespace fUML::Semantics::SimpleClassifiers
 			//Class and Feature IDs 
 			static const unsigned long INTEGERVALUE_CLASS = 2030861441;
 			static const unsigned int INTEGERVALUE_CLASS_FEATURE_COUNT = 2;
-			static const unsigned int INTEGERVALUE_CLASS_OPERATION_COUNT = 18;
+			static const unsigned int INTEGERVALUE_CLASS_OPERATION_COUNT = 19;
 			static const unsigned long INTEGERVALUE_ATTRIBUTE_VALUE = 518016981;
 			
 			
@@ -243,7 +243,7 @@ namespace fUML::Semantics::SimpleClassifiers
 			//Class and Feature IDs 
 			static const unsigned long PRIMITIVEVALUE_CLASS = 884702000;
 			static const unsigned int PRIMITIVEVALUE_CLASS_FEATURE_COUNT = 1;
-			static const unsigned int PRIMITIVEVALUE_CLASS_OPERATION_COUNT = 13;
+			static const unsigned int PRIMITIVEVALUE_CLASS_OPERATION_COUNT = 14;
 			
 			static const unsigned long PRIMITIVEVALUE_ATTRIBUTE_TYPE = 1999593611;
 			
@@ -266,7 +266,7 @@ namespace fUML::Semantics::SimpleClassifiers
 			//Class and Feature IDs 
 			static const unsigned long REALVALUE_CLASS = 1589674022;
 			static const unsigned int REALVALUE_CLASS_FEATURE_COUNT = 2;
-			static const unsigned int REALVALUE_CLASS_OPERATION_COUNT = 18;
+			static const unsigned int REALVALUE_CLASS_OPERATION_COUNT = 19;
 			static const unsigned long REALVALUE_ATTRIBUTE_VALUE = 305114459;
 			
 			
@@ -295,11 +295,12 @@ namespace fUML::Semantics::SimpleClassifiers
 			//Class and Feature IDs 
 			static const unsigned long SIGNALINSTANCE_CLASS = 1044212856;
 			static const unsigned int SIGNALINSTANCE_CLASS_FEATURE_COUNT = 2;
-			static const unsigned int SIGNALINSTANCE_CLASS_OPERATION_COUNT = 28;
+			static const unsigned int SIGNALINSTANCE_CLASS_OPERATION_COUNT = 33;
 			
 			static const unsigned long SIGNALINSTANCE_ATTRIBUTE_TYPE = 11620820;
 			
 			static const unsigned int SIGNALINSTANCE_OPERATION__COPY = 2945212473;
+			static const unsigned int SIGNALINSTANCE_OPERATION_GETTYPES = 1341600700;
 			static const unsigned int SIGNALINSTANCE_OPERATION_NEW_ = 1841885000;
 			
 			//Class and Feature Getter
@@ -309,6 +310,7 @@ namespace fUML::Semantics::SimpleClassifiers
 			virtual std::shared_ptr<ecore::EReference> getSignalInstance_Attribute_type() const = 0;
 			
 			virtual std::shared_ptr<ecore::EOperation> getSignalInstance_Operation__copy() const = 0;
+			virtual std::shared_ptr<ecore::EOperation> getSignalInstance_Operation_getTypes() const = 0;
 			virtual std::shared_ptr<ecore::EOperation> getSignalInstance_Operation_new_() const = 0;
 			
 			// End Class SignalInstance
@@ -318,7 +320,7 @@ namespace fUML::Semantics::SimpleClassifiers
 			//Class and Feature IDs 
 			static const unsigned long STRINGVALUE_CLASS = 1276339704;
 			static const unsigned int STRINGVALUE_CLASS_FEATURE_COUNT = 2;
-			static const unsigned int STRINGVALUE_CLASS_OPERATION_COUNT = 18;
+			static const unsigned int STRINGVALUE_CLASS_OPERATION_COUNT = 19;
 			static const unsigned long STRINGVALUE_ATTRIBUTE_VALUE = 721054197;
 			
 			
@@ -347,15 +349,18 @@ namespace fUML::Semantics::SimpleClassifiers
 			//Class and Feature IDs 
 			static const unsigned long STRUCTUREDVALUE_CLASS = 1984808016;
 			static const unsigned int STRUCTUREDVALUE_CLASS_FEATURE_COUNT = 0;
-			static const unsigned int STRUCTUREDVALUE_CLASS_OPERATION_COUNT = 19;
+			static const unsigned int STRUCTUREDVALUE_CLASS_OPERATION_COUNT = 23;
 			
 			
 			static const unsigned int STRUCTUREDVALUE_OPERATION_ASSIGNFEATUREVALUE_STRUCTURALFEATURE_EINT = 2915015402;
 			static const unsigned int STRUCTUREDVALUE_OPERATION_CREATEFEATUREVALUES = 4258337868;
+			static const unsigned int STRUCTUREDVALUE_OPERATION_GETMEMBERFEATURES_CLASSIFIER = 1309752345;
+			static const unsigned int STRUCTUREDVALUE_OPERATION_GETSTRUCTURALFEATUREFORTYPE_CLASSIFIER = 4241902516;
 			static const unsigned int STRUCTUREDVALUE_OPERATION_GETVALUES_STRUCTURALFEATURE_FEATUREVALUE = 3849835591;
 			static const unsigned int STRUCTUREDVALUE_OPERATION_REMOVEVALUE_STRUCTURALFEATURE_VALUE = 3525281514;
 			static const unsigned int STRUCTUREDVALUE_OPERATION_RETRIEVEFEATUREVALUE_STRUCTURALFEATURE = 2231973006;
 			static const unsigned int STRUCTUREDVALUE_OPERATION_RETRIEVEFEATUREVALUES = 2019934988;
+			static const unsigned int STRUCTUREDVALUE_OPERATION_RETRIEVESTRUCTURALFEATURES = 3859098145;
 			static const unsigned int STRUCTUREDVALUE_OPERATION_SETFEATUREVALUE_STRUCTURALFEATURE_EINT = 3826465969;
 			static const unsigned int STRUCTUREDVALUE_OPERATION_SPECIFY = 2039107205;
 			
@@ -366,10 +371,13 @@ namespace fUML::Semantics::SimpleClassifiers
 			
 			virtual std::shared_ptr<ecore::EOperation> getStructuredValue_Operation_assignFeatureValue_StructuralFeature_EInt() const = 0;
 			virtual std::shared_ptr<ecore::EOperation> getStructuredValue_Operation_createFeatureValues() const = 0;
+			virtual std::shared_ptr<ecore::EOperation> getStructuredValue_Operation_getMemberFeatures_Classifier() const = 0;
+			virtual std::shared_ptr<ecore::EOperation> getStructuredValue_Operation_getStructuralFeatureForType_Classifier() const = 0;
 			virtual std::shared_ptr<ecore::EOperation> getStructuredValue_Operation_getValues_StructuralFeature_FeatureValue() const = 0;
 			virtual std::shared_ptr<ecore::EOperation> getStructuredValue_Operation_removeValue_StructuralFeature_Value() const = 0;
 			virtual std::shared_ptr<ecore::EOperation> getStructuredValue_Operation_retrieveFeatureValue_StructuralFeature() const = 0;
 			virtual std::shared_ptr<ecore::EOperation> getStructuredValue_Operation_retrieveFeatureValues() const = 0;
+			virtual std::shared_ptr<ecore::EOperation> getStructuredValue_Operation_retrieveStructuralFeatures() const = 0;
 			virtual std::shared_ptr<ecore::EOperation> getStructuredValue_Operation_setFeatureValue_StructuralFeature_EInt() const = 0;
 			virtual std::shared_ptr<ecore::EOperation> getStructuredValue_Operation_specify() const = 0;
 			
@@ -380,7 +388,7 @@ namespace fUML::Semantics::SimpleClassifiers
 			//Class and Feature IDs 
 			static const unsigned long UNLIMITEDNATURALVALUE_CLASS = 459381760;
 			static const unsigned int UNLIMITEDNATURALVALUE_CLASS_FEATURE_COUNT = 2;
-			static const unsigned int UNLIMITEDNATURALVALUE_CLASS_OPERATION_COUNT = 18;
+			static const unsigned int UNLIMITEDNATURALVALUE_CLASS_OPERATION_COUNT = 19;
 			static const unsigned long UNLIMITEDNATURALVALUE_ATTRIBUTE_VALUE = 1958359245;
 			
 			
