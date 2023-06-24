@@ -443,7 +443,7 @@ bool ExpressionImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 	
 					if(eObjectList)
 					{
-						std::shared_ptr<Bag<uml::ValueSpecification>> _operand = getOperand();
+						const std::shared_ptr<Bag<uml::ValueSpecification>>& _operand = getOperand();
 	
 						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{

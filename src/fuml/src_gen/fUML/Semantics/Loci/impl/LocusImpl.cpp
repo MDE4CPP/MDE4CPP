@@ -550,7 +550,7 @@ bool LocusImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 	
 					if(eObjectList)
 					{
-						std::shared_ptr<Bag<uml::Element>> _extensionalValues = getExtensionalValues();
+						const std::shared_ptr<Bag<uml::Element>>& _extensionalValues = getExtensionalValues();
 	
 						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{

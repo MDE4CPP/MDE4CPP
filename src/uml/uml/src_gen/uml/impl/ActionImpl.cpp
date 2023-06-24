@@ -621,7 +621,7 @@ bool ActionImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 	
 					if(eObjectList)
 					{
-						std::shared_ptr<Bag<uml::Constraint>> _localPostcondition = getLocalPostcondition();
+						const std::shared_ptr<Bag<uml::Constraint>>& _localPostcondition = getLocalPostcondition();
 	
 						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{
@@ -666,7 +666,7 @@ bool ActionImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 	
 					if(eObjectList)
 					{
-						std::shared_ptr<Bag<uml::Constraint>> _localPrecondition = getLocalPrecondition();
+						const std::shared_ptr<Bag<uml::Constraint>>& _localPrecondition = getLocalPrecondition();
 	
 						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{

@@ -949,7 +949,7 @@ bool OclExpressionImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValu
 	
 					if(eObjectList)
 					{
-						std::shared_ptr<Bag<ocl::Expressions::VarDeclarationExp>> _initializedElement = getInitializedElement();
+						const std::shared_ptr<Bag<ocl::Expressions::VarDeclarationExp>>& _initializedElement = getInitializedElement();
 	
 						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{

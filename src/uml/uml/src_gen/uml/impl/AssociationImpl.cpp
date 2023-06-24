@@ -531,7 +531,7 @@ void AssociationImpl::resolveReferences(const int featureID, std::vector<std::sh
 	{
 		case uml::umlPackage::ASSOCIATION_ATTRIBUTE_MEMBEREND:
 		{
-			std::shared_ptr<SubsetUnion<uml::Property, uml::NamedElement>> _memberEnd = getMemberEnd();
+			const std::shared_ptr<SubsetUnion<uml::Property, uml::NamedElement>>& _memberEnd = getMemberEnd();
 			for(std::shared_ptr<ecore::EObject> ref : references)
 			{
 				std::shared_ptr<uml::Property>  _r = std::dynamic_pointer_cast<uml::Property>(ref);
@@ -545,7 +545,7 @@ void AssociationImpl::resolveReferences(const int featureID, std::vector<std::sh
 
 		case uml::umlPackage::ASSOCIATION_ATTRIBUTE_NAVIGABLEOWNEDEND:
 		{
-			std::shared_ptr<Subset<uml::Property, uml::Property /*Subset does not reference a union*/>> _navigableOwnedEnd = getNavigableOwnedEnd();
+			const std::shared_ptr<Subset<uml::Property, uml::Property /*Subset does not reference a union*/>>& _navigableOwnedEnd = getNavigableOwnedEnd();
 			for(std::shared_ptr<ecore::EObject> ref : references)
 			{
 				std::shared_ptr<uml::Property>  _r = std::dynamic_pointer_cast<uml::Property>(ref);
@@ -699,7 +699,7 @@ bool AssociationImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 	
 					if(eObjectList)
 					{
-						std::shared_ptr<Bag<uml::Property>> _memberEnd = getMemberEnd();
+						const std::shared_ptr<Bag<uml::Property>>& _memberEnd = getMemberEnd();
 	
 						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{
@@ -744,7 +744,7 @@ bool AssociationImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 	
 					if(eObjectList)
 					{
-						std::shared_ptr<Bag<uml::Property>> _navigableOwnedEnd = getNavigableOwnedEnd();
+						const std::shared_ptr<Bag<uml::Property>>& _navigableOwnedEnd = getNavigableOwnedEnd();
 	
 						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{
@@ -789,7 +789,7 @@ bool AssociationImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 	
 					if(eObjectList)
 					{
-						std::shared_ptr<Bag<uml::Property>> _ownedEnd = getOwnedEnd();
+						const std::shared_ptr<Bag<uml::Property>>& _ownedEnd = getOwnedEnd();
 	
 						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{

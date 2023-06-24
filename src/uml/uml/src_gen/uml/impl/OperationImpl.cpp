@@ -753,7 +753,7 @@ void OperationImpl::resolveReferences(const int featureID, std::vector<std::shar
 
 		case uml::umlPackage::OPERATION_ATTRIBUTE_POSTCONDITION:
 		{
-			std::shared_ptr<Subset<uml::Constraint, uml::Constraint /*Subset does not reference a union*/>> _postcondition = getPostcondition();
+			const std::shared_ptr<Subset<uml::Constraint, uml::Constraint /*Subset does not reference a union*/>>& _postcondition = getPostcondition();
 			for(std::shared_ptr<ecore::EObject> ref : references)
 			{
 				std::shared_ptr<uml::Constraint>  _r = std::dynamic_pointer_cast<uml::Constraint>(ref);
@@ -767,7 +767,7 @@ void OperationImpl::resolveReferences(const int featureID, std::vector<std::shar
 
 		case uml::umlPackage::OPERATION_ATTRIBUTE_PRECONDITION:
 		{
-			std::shared_ptr<Subset<uml::Constraint, uml::Constraint /*Subset does not reference a union*/>> _precondition = getPrecondition();
+			const std::shared_ptr<Subset<uml::Constraint, uml::Constraint /*Subset does not reference a union*/>>& _precondition = getPrecondition();
 			for(std::shared_ptr<ecore::EObject> ref : references)
 			{
 				std::shared_ptr<uml::Constraint>  _r = std::dynamic_pointer_cast<uml::Constraint>(ref);
@@ -781,7 +781,7 @@ void OperationImpl::resolveReferences(const int featureID, std::vector<std::shar
 
 		case uml::umlPackage::OPERATION_ATTRIBUTE_REDEFINEDOPERATION:
 		{
-			std::shared_ptr<Subset<uml::Operation, uml::RedefinableElement>> _redefinedOperation = getRedefinedOperation();
+			const std::shared_ptr<Subset<uml::Operation, uml::RedefinableElement>>& _redefinedOperation = getRedefinedOperation();
 			for(std::shared_ptr<ecore::EObject> ref : references)
 			{
 				std::shared_ptr<uml::Operation>  _r = std::dynamic_pointer_cast<uml::Operation>(ref);
@@ -1115,7 +1115,7 @@ bool OperationImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 	
 					if(eObjectList)
 					{
-						std::shared_ptr<Bag<uml::Parameter>> _ownedParameter = getProperty_OwnedParameter();
+						const std::shared_ptr<Bag<uml::Parameter>>& _ownedParameter = getProperty_OwnedParameter();
 	
 						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{
@@ -1160,7 +1160,7 @@ bool OperationImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 	
 					if(eObjectList)
 					{
-						std::shared_ptr<Bag<uml::Constraint>> _postcondition = getPostcondition();
+						const std::shared_ptr<Bag<uml::Constraint>>& _postcondition = getPostcondition();
 	
 						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{
@@ -1205,7 +1205,7 @@ bool OperationImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 	
 					if(eObjectList)
 					{
-						std::shared_ptr<Bag<uml::Constraint>> _precondition = getPrecondition();
+						const std::shared_ptr<Bag<uml::Constraint>>& _precondition = getPrecondition();
 	
 						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{
@@ -1250,7 +1250,7 @@ bool OperationImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 	
 					if(eObjectList)
 					{
-						std::shared_ptr<Bag<uml::Operation>> _redefinedOperation = getRedefinedOperation();
+						const std::shared_ptr<Bag<uml::Operation>>& _redefinedOperation = getRedefinedOperation();
 	
 						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{

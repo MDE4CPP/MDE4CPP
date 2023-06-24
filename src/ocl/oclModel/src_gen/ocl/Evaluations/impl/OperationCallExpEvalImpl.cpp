@@ -227,7 +227,7 @@ void OperationCallExpEvalImpl::resolveReferences(const int featureID, std::vecto
 	{
 		case ocl::Evaluations::EvaluationsPackage::OPERATIONCALLEXPEVAL_ATTRIBUTE_ARGUMENTS:
 		{
-			std::shared_ptr<Bag<ocl::Evaluations::OclExpEval>> _arguments = getArguments();
+			const std::shared_ptr<Bag<ocl::Evaluations::OclExpEval>>& _arguments = getArguments();
 			for(std::shared_ptr<ecore::EObject> ref : references)
 			{
 				std::shared_ptr<ocl::Evaluations::OclExpEval>  _r = std::dynamic_pointer_cast<ocl::Evaluations::OclExpEval>(ref);
@@ -327,7 +327,7 @@ bool OperationCallExpEvalImpl::eSet(int featureID,  const std::shared_ptr<Any>& 
 	
 					if(eObjectList)
 					{
-						std::shared_ptr<Bag<ocl::Evaluations::OclExpEval>> _arguments = getArguments();
+						const std::shared_ptr<Bag<ocl::Evaluations::OclExpEval>>& _arguments = getArguments();
 	
 						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{

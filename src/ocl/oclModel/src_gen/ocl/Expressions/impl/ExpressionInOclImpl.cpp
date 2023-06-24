@@ -476,7 +476,7 @@ bool ExpressionInOclImpl::eSet(int featureID,  const std::shared_ptr<Any>& newVa
 	
 					if(eObjectList)
 					{
-						std::shared_ptr<Bag<ecore::ETypedElement>> _parameterVariable = getParameterVariable();
+						const std::shared_ptr<Bag<ecore::ETypedElement>>& _parameterVariable = getParameterVariable();
 	
 						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{

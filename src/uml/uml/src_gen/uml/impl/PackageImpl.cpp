@@ -1024,7 +1024,7 @@ bool PackageImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 	
 					if(eObjectList)
 					{
-						std::shared_ptr<Bag<uml::Package>> _nestedPackage = getNestedPackage();
+						const std::shared_ptr<Bag<uml::Package>>& _nestedPackage = getNestedPackage();
 	
 						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{
@@ -1100,7 +1100,7 @@ bool PackageImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 	
 					if(eObjectList)
 					{
-						std::shared_ptr<Bag<uml::Type>> _ownedType = getOwnedType();
+						const std::shared_ptr<Bag<uml::Type>>& _ownedType = getOwnedType();
 	
 						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{
@@ -1145,7 +1145,7 @@ bool PackageImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 	
 					if(eObjectList)
 					{
-						std::shared_ptr<Bag<uml::PackageMerge>> _packageMerge = getPackageMerge();
+						const std::shared_ptr<Bag<uml::PackageMerge>>& _packageMerge = getPackageMerge();
 	
 						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{
@@ -1190,7 +1190,7 @@ bool PackageImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 	
 					if(eObjectList)
 					{
-						std::shared_ptr<Bag<uml::PackageableElement>> _packagedElement = getPackagedElement();
+						const std::shared_ptr<Bag<uml::PackageableElement>>& _packagedElement = getPackagedElement();
 	
 						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{
@@ -1235,7 +1235,7 @@ bool PackageImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 	
 					if(eObjectList)
 					{
-						std::shared_ptr<Bag<uml::ProfileApplication>> _profileApplication = getProfileApplication();
+						const std::shared_ptr<Bag<uml::ProfileApplication>>& _profileApplication = getProfileApplication();
 	
 						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{

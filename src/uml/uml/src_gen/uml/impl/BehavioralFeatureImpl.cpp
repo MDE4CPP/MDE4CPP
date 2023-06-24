@@ -456,7 +456,7 @@ void BehavioralFeatureImpl::resolveReferences(const int featureID, std::vector<s
 	{
 		case uml::umlPackage::BEHAVIORALFEATURE_ATTRIBUTE_METHOD:
 		{
-			std::shared_ptr<Bag<uml::Behavior>> _method = getMethod();
+			const std::shared_ptr<Bag<uml::Behavior>>& _method = getMethod();
 			for(std::shared_ptr<ecore::EObject> ref : references)
 			{
 				std::shared_ptr<uml::Behavior>  _r = std::dynamic_pointer_cast<uml::Behavior>(ref);
@@ -470,7 +470,7 @@ void BehavioralFeatureImpl::resolveReferences(const int featureID, std::vector<s
 
 		case uml::umlPackage::BEHAVIORALFEATURE_ATTRIBUTE_RAISEDEXCEPTION:
 		{
-			std::shared_ptr<Bag<uml::Type>> _raisedException = getRaisedException();
+			const std::shared_ptr<Bag<uml::Type>>& _raisedException = getRaisedException();
 			for(std::shared_ptr<ecore::EObject> ref : references)
 			{
 				std::shared_ptr<uml::Type>  _r = std::dynamic_pointer_cast<uml::Type>(ref);
@@ -659,7 +659,7 @@ bool BehavioralFeatureImpl::eSet(int featureID,  const std::shared_ptr<Any>& new
 	
 					if(eObjectList)
 					{
-						std::shared_ptr<Bag<uml::Behavior>> _method = getMethod();
+						const std::shared_ptr<Bag<uml::Behavior>>& _method = getMethod();
 	
 						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{
@@ -704,7 +704,7 @@ bool BehavioralFeatureImpl::eSet(int featureID,  const std::shared_ptr<Any>& new
 	
 					if(eObjectList)
 					{
-						std::shared_ptr<Bag<uml::Parameter>> _ownedParameter = getOwnedParameter();
+						const std::shared_ptr<Bag<uml::Parameter>>& _ownedParameter = getOwnedParameter();
 	
 						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{
@@ -749,7 +749,7 @@ bool BehavioralFeatureImpl::eSet(int featureID,  const std::shared_ptr<Any>& new
 	
 					if(eObjectList)
 					{
-						std::shared_ptr<Bag<uml::ParameterSet>> _ownedParameterSet = getOwnedParameterSet();
+						const std::shared_ptr<Bag<uml::ParameterSet>>& _ownedParameterSet = getOwnedParameterSet();
 	
 						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{
@@ -794,7 +794,7 @@ bool BehavioralFeatureImpl::eSet(int featureID,  const std::shared_ptr<Any>& new
 	
 					if(eObjectList)
 					{
-						std::shared_ptr<Bag<uml::Type>> _raisedException = getRaisedException();
+						const std::shared_ptr<Bag<uml::Type>>& _raisedException = getRaisedException();
 	
 						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{

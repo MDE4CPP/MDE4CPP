@@ -527,7 +527,7 @@ bool ConditionalNodeImpl::eSet(int featureID,  const std::shared_ptr<Any>& newVa
 	
 					if(eObjectList)
 					{
-						std::shared_ptr<Bag<uml::Clause>> _clause = getClause();
+						const std::shared_ptr<Bag<uml::Clause>>& _clause = getClause();
 	
 						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{
@@ -600,7 +600,7 @@ bool ConditionalNodeImpl::eSet(int featureID,  const std::shared_ptr<Any>& newVa
 	
 					if(eObjectList)
 					{
-						std::shared_ptr<Bag<uml::OutputPin>> _result = getResult();
+						const std::shared_ptr<Bag<uml::OutputPin>>& _result = getResult();
 	
 						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{

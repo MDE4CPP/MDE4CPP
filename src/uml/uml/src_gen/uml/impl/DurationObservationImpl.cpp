@@ -290,7 +290,7 @@ void DurationObservationImpl::resolveReferences(const int featureID, std::vector
 	{
 		case uml::umlPackage::DURATIONOBSERVATION_ATTRIBUTE_EVENT:
 		{
-			std::shared_ptr<Bag<uml::NamedElement>> _event = getEvent();
+			const std::shared_ptr<Bag<uml::NamedElement>>& _event = getEvent();
 			for(std::shared_ptr<ecore::EObject> ref : references)
 			{
 				std::shared_ptr<uml::NamedElement>  _r = std::dynamic_pointer_cast<uml::NamedElement>(ref);
@@ -392,7 +392,7 @@ bool DurationObservationImpl::eSet(int featureID,  const std::shared_ptr<Any>& n
 	
 					if(eObjectList)
 					{
-						std::shared_ptr<Bag<uml::NamedElement>> _event = getEvent();
+						const std::shared_ptr<Bag<uml::NamedElement>>& _event = getEvent();
 	
 						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{

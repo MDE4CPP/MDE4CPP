@@ -326,7 +326,7 @@ void ComponentRealizationImpl::resolveReferences(const int featureID, std::vecto
 
 		case uml::umlPackage::COMPONENTREALIZATION_ATTRIBUTE_REALIZINGCLASSIFIER:
 		{
-			std::shared_ptr<Subset<uml::Classifier, uml::NamedElement /*Subset does not reference a union*/>> _realizingClassifier = getRealizingClassifier();
+			const std::shared_ptr<Subset<uml::Classifier, uml::NamedElement /*Subset does not reference a union*/>>& _realizingClassifier = getRealizingClassifier();
 			for(std::shared_ptr<ecore::EObject> ref : references)
 			{
 				std::shared_ptr<uml::Classifier>  _r = std::dynamic_pointer_cast<uml::Classifier>(ref);
@@ -460,7 +460,7 @@ bool ComponentRealizationImpl::eSet(int featureID,  const std::shared_ptr<Any>& 
 	
 					if(eObjectList)
 					{
-						std::shared_ptr<Bag<uml::Classifier>> _realizingClassifier = getRealizingClassifier();
+						const std::shared_ptr<Bag<uml::Classifier>>& _realizingClassifier = getRealizingClassifier();
 	
 						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{

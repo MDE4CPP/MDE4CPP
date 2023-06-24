@@ -797,7 +797,7 @@ void ActivityNodeActivationGroupImpl::resolveReferences(const int featureID, std
 
 		case fUML::Semantics::Activities::ActivitiesPackage::ACTIVITYNODEACTIVATIONGROUP_ATTRIBUTE_SUSPENDEDACTIVATIONS:
 		{
-			std::shared_ptr<Bag<fUML::Semantics::Activities::ActivityNodeActivation>> _suspendedActivations = getSuspendedActivations();
+			const std::shared_ptr<Bag<fUML::Semantics::Activities::ActivityNodeActivation>>& _suspendedActivations = getSuspendedActivations();
 			for(std::shared_ptr<ecore::EObject> ref : references)
 			{
 				std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivation>  _r = std::dynamic_pointer_cast<fUML::Semantics::Activities::ActivityNodeActivation>(ref);
@@ -971,7 +971,7 @@ bool ActivityNodeActivationGroupImpl::eSet(int featureID,  const std::shared_ptr
 	
 					if(eObjectList)
 					{
-						std::shared_ptr<Bag<fUML::Semantics::Activities::ActivityEdgeInstance>> _edgeInstances = getEdgeInstances();
+						const std::shared_ptr<Bag<fUML::Semantics::Activities::ActivityEdgeInstance>>& _edgeInstances = getEdgeInstances();
 	
 						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{
@@ -1016,7 +1016,7 @@ bool ActivityNodeActivationGroupImpl::eSet(int featureID,  const std::shared_ptr
 	
 					if(eObjectList)
 					{
-						std::shared_ptr<Bag<fUML::Semantics::Activities::ActivityNodeActivation>> _nodeActivations = getNodeActivations();
+						const std::shared_ptr<Bag<fUML::Semantics::Activities::ActivityNodeActivation>>& _nodeActivations = getNodeActivations();
 	
 						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{
@@ -1061,7 +1061,7 @@ bool ActivityNodeActivationGroupImpl::eSet(int featureID,  const std::shared_ptr
 	
 					if(eObjectList)
 					{
-						std::shared_ptr<Bag<fUML::Semantics::Activities::ActivityNodeActivation>> _suspendedActivations = getSuspendedActivations();
+						const std::shared_ptr<Bag<fUML::Semantics::Activities::ActivityNodeActivation>>& _suspendedActivations = getSuspendedActivations();
 	
 						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{

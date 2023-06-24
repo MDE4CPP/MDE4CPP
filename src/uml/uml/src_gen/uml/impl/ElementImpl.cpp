@@ -608,7 +608,7 @@ bool ElementImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 	
 					if(eObjectList)
 					{
-						std::shared_ptr<Bag<uml::Comment>> _ownedComment = getOwnedComment();
+						const std::shared_ptr<Bag<uml::Comment>>& _ownedComment = getOwnedComment();
 	
 						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{

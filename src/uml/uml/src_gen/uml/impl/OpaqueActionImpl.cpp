@@ -586,7 +586,7 @@ bool OpaqueActionImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue
 	
 					if(eObjectList)
 					{
-						std::shared_ptr<Bag<uml::InputPin>> _inputValue = getInputValue();
+						const std::shared_ptr<Bag<uml::InputPin>>& _inputValue = getInputValue();
 	
 						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{
@@ -661,7 +661,7 @@ bool OpaqueActionImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue
 	
 					if(eObjectList)
 					{
-						std::shared_ptr<Bag<uml::OutputPin>> _outputValue = getOutputValue();
+						const std::shared_ptr<Bag<uml::OutputPin>>& _outputValue = getOutputValue();
 	
 						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{

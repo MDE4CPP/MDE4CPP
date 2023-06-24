@@ -306,7 +306,7 @@ void InterruptibleActivityRegionImpl::resolveReferences(const int featureID, std
 	{
 		case uml::umlPackage::INTERRUPTIBLEACTIVITYREGION_ATTRIBUTE_INTERRUPTINGEDGE:
 		{
-			std::shared_ptr<Bag<uml::ActivityEdge>> _interruptingEdge = getInterruptingEdge();
+			const std::shared_ptr<Bag<uml::ActivityEdge>>& _interruptingEdge = getInterruptingEdge();
 			for(std::shared_ptr<ecore::EObject> ref : references)
 			{
 				std::shared_ptr<uml::ActivityEdge>  _r = std::dynamic_pointer_cast<uml::ActivityEdge>(ref);
@@ -320,7 +320,7 @@ void InterruptibleActivityRegionImpl::resolveReferences(const int featureID, std
 
 		case uml::umlPackage::INTERRUPTIBLEACTIVITYREGION_ATTRIBUTE_NODE:
 		{
-			std::shared_ptr<Subset<uml::ActivityNode, uml::ActivityNode>> _node = getNode();
+			const std::shared_ptr<Subset<uml::ActivityNode, uml::ActivityNode>>& _node = getNode();
 			for(std::shared_ptr<ecore::EObject> ref : references)
 			{
 				std::shared_ptr<uml::ActivityNode>  _r = std::dynamic_pointer_cast<uml::ActivityNode>(ref);
@@ -412,7 +412,7 @@ bool InterruptibleActivityRegionImpl::eSet(int featureID,  const std::shared_ptr
 	
 					if(eObjectList)
 					{
-						std::shared_ptr<Bag<uml::ActivityEdge>> _interruptingEdge = getInterruptingEdge();
+						const std::shared_ptr<Bag<uml::ActivityEdge>>& _interruptingEdge = getInterruptingEdge();
 	
 						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{
@@ -457,7 +457,7 @@ bool InterruptibleActivityRegionImpl::eSet(int featureID,  const std::shared_ptr
 	
 					if(eObjectList)
 					{
-						std::shared_ptr<Bag<uml::ActivityNode>> _node = getNode();
+						const std::shared_ptr<Bag<uml::ActivityNode>>& _node = getNode();
 	
 						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{

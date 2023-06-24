@@ -496,7 +496,7 @@ bool DataTypeImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 	
 					if(eObjectList)
 					{
-						std::shared_ptr<Bag<uml::Property>> _ownedAttribute = getOwnedAttribute();
+						const std::shared_ptr<Bag<uml::Property>>& _ownedAttribute = getOwnedAttribute();
 	
 						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{
@@ -541,7 +541,7 @@ bool DataTypeImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 	
 					if(eObjectList)
 					{
-						std::shared_ptr<Bag<uml::Operation>> _ownedOperation = getOwnedOperation();
+						const std::shared_ptr<Bag<uml::Operation>>& _ownedOperation = getOwnedOperation();
 	
 						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{

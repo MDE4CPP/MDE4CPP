@@ -503,7 +503,7 @@ bool StringExpressionImpl::eSet(int featureID,  const std::shared_ptr<Any>& newV
 	
 					if(eObjectList)
 					{
-						std::shared_ptr<Bag<uml::StringExpression>> _subExpression = getSubExpression();
+						const std::shared_ptr<Bag<uml::StringExpression>>& _subExpression = getSubExpression();
 	
 						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{

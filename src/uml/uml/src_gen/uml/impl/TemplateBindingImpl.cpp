@@ -458,7 +458,7 @@ bool TemplateBindingImpl::eSet(int featureID,  const std::shared_ptr<Any>& newVa
 	
 					if(eObjectList)
 					{
-						std::shared_ptr<Bag<uml::TemplateParameterSubstitution>> _parameterSubstitution = getParameterSubstitution();
+						const std::shared_ptr<Bag<uml::TemplateParameterSubstitution>>& _parameterSubstitution = getParameterSubstitution();
 	
 						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{

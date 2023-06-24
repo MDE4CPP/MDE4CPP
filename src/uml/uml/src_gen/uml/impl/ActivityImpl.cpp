@@ -835,7 +835,7 @@ void ActivityImpl::resolveReferences(const int featureID, std::vector<std::share
 	{
 		case uml::umlPackage::ACTIVITY_ATTRIBUTE_PARTITION:
 		{
-			std::shared_ptr<Subset<uml::ActivityPartition, uml::ActivityGroup /*Subset does not reference a union*/, uml::ActivityGroup>> _partition = getPartition();
+			const std::shared_ptr<Subset<uml::ActivityPartition, uml::ActivityGroup /*Subset does not reference a union*/, uml::ActivityGroup>>& _partition = getPartition();
 			for(std::shared_ptr<ecore::EObject> ref : references)
 			{
 				std::shared_ptr<uml::ActivityPartition>  _r = std::dynamic_pointer_cast<uml::ActivityPartition>(ref);
@@ -1025,7 +1025,7 @@ bool ActivityImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 	
 					if(eObjectList)
 					{
-						std::shared_ptr<Bag<uml::ActivityEdge>> _edge = getEdge();
+						const std::shared_ptr<Bag<uml::ActivityEdge>>& _edge = getEdge();
 	
 						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{
@@ -1070,7 +1070,7 @@ bool ActivityImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 	
 					if(eObjectList)
 					{
-						std::shared_ptr<Bag<uml::ActivityGroup>> _group = getGroup();
+						const std::shared_ptr<Bag<uml::ActivityGroup>>& _group = getGroup();
 	
 						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{
@@ -1143,7 +1143,7 @@ bool ActivityImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 	
 					if(eObjectList)
 					{
-						std::shared_ptr<Bag<uml::ActivityNode>> _node = getNode();
+						const std::shared_ptr<Bag<uml::ActivityNode>>& _node = getNode();
 	
 						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{
@@ -1188,7 +1188,7 @@ bool ActivityImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 	
 					if(eObjectList)
 					{
-						std::shared_ptr<Bag<uml::ActivityGroup>> _ownedGroup = getOwnedGroup();
+						const std::shared_ptr<Bag<uml::ActivityGroup>>& _ownedGroup = getOwnedGroup();
 	
 						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{
@@ -1233,7 +1233,7 @@ bool ActivityImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 	
 					if(eObjectList)
 					{
-						std::shared_ptr<Bag<uml::ActivityNode>> _ownedNode = getOwnedNode();
+						const std::shared_ptr<Bag<uml::ActivityNode>>& _ownedNode = getOwnedNode();
 	
 						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{
@@ -1278,7 +1278,7 @@ bool ActivityImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 	
 					if(eObjectList)
 					{
-						std::shared_ptr<Bag<uml::ActivityPartition>> _partition = getPartition();
+						const std::shared_ptr<Bag<uml::ActivityPartition>>& _partition = getPartition();
 	
 						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{
@@ -1323,7 +1323,7 @@ bool ActivityImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 	
 					if(eObjectList)
 					{
-						std::shared_ptr<Bag<uml::StructuredActivityNode>> _structuredNode = getStructuredNode();
+						const std::shared_ptr<Bag<uml::StructuredActivityNode>>& _structuredNode = getStructuredNode();
 	
 						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{
@@ -1368,7 +1368,7 @@ bool ActivityImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 	
 					if(eObjectList)
 					{
-						std::shared_ptr<Bag<uml::Variable>> _variable = getVariable();
+						const std::shared_ptr<Bag<uml::Variable>>& _variable = getVariable();
 	
 						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{

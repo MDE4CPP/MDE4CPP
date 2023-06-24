@@ -490,7 +490,7 @@ void ActivityNodeImpl::resolveReferences(const int featureID, std::vector<std::s
 
 		case uml::umlPackage::ACTIVITYNODE_ATTRIBUTE_ININTERRUPTIBLEREGION:
 		{
-			std::shared_ptr<Subset<uml::InterruptibleActivityRegion, uml::ActivityGroup>> _inInterruptibleRegion = getInInterruptibleRegion();
+			const std::shared_ptr<Subset<uml::InterruptibleActivityRegion, uml::ActivityGroup>>& _inInterruptibleRegion = getInInterruptibleRegion();
 			for(std::shared_ptr<ecore::EObject> ref : references)
 			{
 				std::shared_ptr<uml::InterruptibleActivityRegion>  _r = std::dynamic_pointer_cast<uml::InterruptibleActivityRegion>(ref);
@@ -504,7 +504,7 @@ void ActivityNodeImpl::resolveReferences(const int featureID, std::vector<std::s
 
 		case uml::umlPackage::ACTIVITYNODE_ATTRIBUTE_INPARTITION:
 		{
-			std::shared_ptr<Subset<uml::ActivityPartition, uml::ActivityGroup>> _inPartition = getInPartition();
+			const std::shared_ptr<Subset<uml::ActivityPartition, uml::ActivityGroup>>& _inPartition = getInPartition();
 			for(std::shared_ptr<ecore::EObject> ref : references)
 			{
 				std::shared_ptr<uml::ActivityPartition>  _r = std::dynamic_pointer_cast<uml::ActivityPartition>(ref);
@@ -530,7 +530,7 @@ void ActivityNodeImpl::resolveReferences(const int featureID, std::vector<std::s
 
 		case uml::umlPackage::ACTIVITYNODE_ATTRIBUTE_INCOMING:
 		{
-			std::shared_ptr<Bag<uml::ActivityEdge>> _incoming = getIncoming();
+			const std::shared_ptr<Bag<uml::ActivityEdge>>& _incoming = getIncoming();
 			for(std::shared_ptr<ecore::EObject> ref : references)
 			{
 				std::shared_ptr<uml::ActivityEdge>  _r = std::dynamic_pointer_cast<uml::ActivityEdge>(ref);
@@ -544,7 +544,7 @@ void ActivityNodeImpl::resolveReferences(const int featureID, std::vector<std::s
 
 		case uml::umlPackage::ACTIVITYNODE_ATTRIBUTE_OUTGOING:
 		{
-			std::shared_ptr<Bag<uml::ActivityEdge>> _outgoing = getOutgoing();
+			const std::shared_ptr<Bag<uml::ActivityEdge>>& _outgoing = getOutgoing();
 			for(std::shared_ptr<ecore::EObject> ref : references)
 			{
 				std::shared_ptr<uml::ActivityEdge>  _r = std::dynamic_pointer_cast<uml::ActivityEdge>(ref);
@@ -558,7 +558,7 @@ void ActivityNodeImpl::resolveReferences(const int featureID, std::vector<std::s
 
 		case uml::umlPackage::ACTIVITYNODE_ATTRIBUTE_REDEFINEDNODE:
 		{
-			std::shared_ptr<Subset<uml::ActivityNode, uml::RedefinableElement>> _redefinedNode = getRedefinedNode();
+			const std::shared_ptr<Subset<uml::ActivityNode, uml::RedefinableElement>>& _redefinedNode = getRedefinedNode();
 			for(std::shared_ptr<ecore::EObject> ref : references)
 			{
 				std::shared_ptr<uml::ActivityNode>  _r = std::dynamic_pointer_cast<uml::ActivityNode>(ref);
@@ -714,7 +714,7 @@ bool ActivityNodeImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue
 	
 					if(eObjectList)
 					{
-						std::shared_ptr<Bag<uml::InterruptibleActivityRegion>> _inInterruptibleRegion = getInInterruptibleRegion();
+						const std::shared_ptr<Bag<uml::InterruptibleActivityRegion>>& _inInterruptibleRegion = getInInterruptibleRegion();
 	
 						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{
@@ -759,7 +759,7 @@ bool ActivityNodeImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue
 	
 					if(eObjectList)
 					{
-						std::shared_ptr<Bag<uml::ActivityPartition>> _inPartition = getInPartition();
+						const std::shared_ptr<Bag<uml::ActivityPartition>>& _inPartition = getInPartition();
 	
 						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{
@@ -835,7 +835,7 @@ bool ActivityNodeImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue
 	
 					if(eObjectList)
 					{
-						std::shared_ptr<Bag<uml::ActivityEdge>> _incoming = getIncoming();
+						const std::shared_ptr<Bag<uml::ActivityEdge>>& _incoming = getIncoming();
 	
 						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{
@@ -880,7 +880,7 @@ bool ActivityNodeImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue
 	
 					if(eObjectList)
 					{
-						std::shared_ptr<Bag<uml::ActivityEdge>> _outgoing = getOutgoing();
+						const std::shared_ptr<Bag<uml::ActivityEdge>>& _outgoing = getOutgoing();
 	
 						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{
@@ -925,7 +925,7 @@ bool ActivityNodeImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue
 	
 					if(eObjectList)
 					{
-						std::shared_ptr<Bag<uml::ActivityNode>> _redefinedNode = getRedefinedNode();
+						const std::shared_ptr<Bag<uml::ActivityNode>>& _redefinedNode = getRedefinedNode();
 	
 						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{

@@ -398,7 +398,7 @@ bool SequenceNodeImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue
 	
 					if(eObjectList)
 					{
-						std::shared_ptr<Bag<uml::ExecutableNode>> _executableNode = getExecutableNode();
+						const std::shared_ptr<Bag<uml::ExecutableNode>>& _executableNode = getExecutableNode();
 	
 						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{

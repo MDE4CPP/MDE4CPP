@@ -227,7 +227,7 @@ void NavigationCallExpEvalImpl::resolveReferences(const int featureID, std::vect
 	{
 		case ocl::Evaluations::EvaluationsPackage::NAVIGATIONCALLEXPEVAL_ATTRIBUTE_QUALIFIERS:
 		{
-			std::shared_ptr<Bag<ocl::Evaluations::OclExpEval>> _qualifiers = getQualifiers();
+			const std::shared_ptr<Bag<ocl::Evaluations::OclExpEval>>& _qualifiers = getQualifiers();
 			for(std::shared_ptr<ecore::EObject> ref : references)
 			{
 				std::shared_ptr<ocl::Evaluations::OclExpEval>  _r = std::dynamic_pointer_cast<ocl::Evaluations::OclExpEval>(ref);
@@ -341,7 +341,7 @@ bool NavigationCallExpEvalImpl::eSet(int featureID,  const std::shared_ptr<Any>&
 	
 					if(eObjectList)
 					{
-						std::shared_ptr<Bag<ocl::Evaluations::OclExpEval>> _qualifiers = getQualifiers();
+						const std::shared_ptr<Bag<ocl::Evaluations::OclExpEval>>& _qualifiers = getQualifiers();
 	
 						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{

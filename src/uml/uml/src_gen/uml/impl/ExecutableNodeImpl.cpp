@@ -369,7 +369,7 @@ bool ExecutableNodeImpl::eSet(int featureID,  const std::shared_ptr<Any>& newVal
 	
 					if(eObjectList)
 					{
-						std::shared_ptr<Bag<uml::ExceptionHandler>> _handler = getHandler();
+						const std::shared_ptr<Bag<uml::ExceptionHandler>>& _handler = getHandler();
 	
 						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{

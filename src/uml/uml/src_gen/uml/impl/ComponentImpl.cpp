@@ -624,7 +624,7 @@ bool ComponentImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 	
 					if(eObjectList)
 					{
-						std::shared_ptr<Bag<uml::PackageableElement>> _packagedElement = getPackagedElement();
+						const std::shared_ptr<Bag<uml::PackageableElement>>& _packagedElement = getPackagedElement();
 	
 						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{
@@ -669,7 +669,7 @@ bool ComponentImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 	
 					if(eObjectList)
 					{
-						std::shared_ptr<Bag<uml::ComponentRealization>> _realization = getRealization();
+						const std::shared_ptr<Bag<uml::ComponentRealization>>& _realization = getRealization();
 	
 						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{

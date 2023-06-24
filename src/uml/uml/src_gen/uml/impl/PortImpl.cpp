@@ -519,7 +519,7 @@ void PortImpl::resolveReferences(const int featureID, std::vector<std::shared_pt
 
 		case uml::umlPackage::PORT_ATTRIBUTE_REDEFINEDPORT:
 		{
-			std::shared_ptr<Subset<uml::Port, uml::Property /*Subset does not reference a union*/>> _redefinedPort = getRedefinedPort();
+			const std::shared_ptr<Subset<uml::Port, uml::Property /*Subset does not reference a union*/>>& _redefinedPort = getRedefinedPort();
 			for(std::shared_ptr<ecore::EObject> ref : references)
 			{
 				std::shared_ptr<uml::Port>  _r = std::dynamic_pointer_cast<uml::Port>(ref);
@@ -730,7 +730,7 @@ bool PortImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 	
 					if(eObjectList)
 					{
-						std::shared_ptr<Bag<uml::Port>> _redefinedPort = getRedefinedPort();
+						const std::shared_ptr<Bag<uml::Port>>& _redefinedPort = getRedefinedPort();
 	
 						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{

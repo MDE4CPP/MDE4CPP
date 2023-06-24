@@ -622,7 +622,7 @@ void ClassImpl::resolveReferences(const int featureID, std::vector<std::shared_p
 	{
 		case uml::umlPackage::CLASS_ATTRIBUTE_SUPERCLASS:
 		{
-			std::shared_ptr<Bag<uml::Class>> _superClass = getSuperClass();
+			const std::shared_ptr<Bag<uml::Class>>& _superClass = getSuperClass();
 			for(std::shared_ptr<ecore::EObject> ref : references)
 			{
 				std::shared_ptr<uml::Class>  _r = std::dynamic_pointer_cast<uml::Class>(ref);
@@ -803,7 +803,7 @@ bool ClassImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 	
 					if(eObjectList)
 					{
-						std::shared_ptr<Bag<uml::Classifier>> _nestedClassifier = getNestedClassifier();
+						const std::shared_ptr<Bag<uml::Classifier>>& _nestedClassifier = getNestedClassifier();
 	
 						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{
@@ -848,7 +848,7 @@ bool ClassImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 	
 					if(eObjectList)
 					{
-						std::shared_ptr<Bag<uml::Property>> _ownedAttribute = getClass_OwnedAttribute();
+						const std::shared_ptr<Bag<uml::Property>>& _ownedAttribute = getClass_OwnedAttribute();
 	
 						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{
@@ -893,7 +893,7 @@ bool ClassImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 	
 					if(eObjectList)
 					{
-						std::shared_ptr<Bag<uml::Operation>> _ownedOperation = getOwnedOperation();
+						const std::shared_ptr<Bag<uml::Operation>>& _ownedOperation = getOwnedOperation();
 	
 						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{
@@ -938,7 +938,7 @@ bool ClassImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 	
 					if(eObjectList)
 					{
-						std::shared_ptr<Bag<uml::Reception>> _ownedReception = getOwnedReception();
+						const std::shared_ptr<Bag<uml::Reception>>& _ownedReception = getOwnedReception();
 	
 						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{
@@ -983,7 +983,7 @@ bool ClassImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 	
 					if(eObjectList)
 					{
-						std::shared_ptr<Bag<uml::Class>> _superClass = getSuperClass();
+						const std::shared_ptr<Bag<uml::Class>>& _superClass = getSuperClass();
 	
 						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{

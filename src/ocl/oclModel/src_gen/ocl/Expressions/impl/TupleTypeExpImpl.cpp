@@ -342,7 +342,7 @@ void TupleTypeExpImpl::resolveReferences(const int featureID, std::vector<std::s
 	{
 		case ocl::Expressions::ExpressionsPackage::TUPLETYPEEXP_ATTRIBUTE_PART:
 		{
-			std::shared_ptr<Bag<ocl::Expressions::VarDeclarationExp>> _part = getPart();
+			const std::shared_ptr<Bag<ocl::Expressions::VarDeclarationExp>>& _part = getPart();
 			for(std::shared_ptr<ecore::EObject> ref : references)
 			{
 				std::shared_ptr<ocl::Expressions::VarDeclarationExp>  _r = std::dynamic_pointer_cast<ocl::Expressions::VarDeclarationExp>(ref);
@@ -431,7 +431,7 @@ bool TupleTypeExpImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue
 	
 					if(eObjectList)
 					{
-						std::shared_ptr<Bag<ocl::Expressions::VarDeclarationExp>> _part = getPart();
+						const std::shared_ptr<Bag<ocl::Expressions::VarDeclarationExp>>& _part = getPart();
 	
 						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{

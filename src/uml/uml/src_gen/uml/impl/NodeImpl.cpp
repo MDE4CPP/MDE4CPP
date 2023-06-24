@@ -457,7 +457,7 @@ bool NodeImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 	
 					if(eObjectList)
 					{
-						std::shared_ptr<Bag<uml::Node>> _nestedNode = getNestedNode();
+						const std::shared_ptr<Bag<uml::Node>>& _nestedNode = getNestedNode();
 	
 						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{

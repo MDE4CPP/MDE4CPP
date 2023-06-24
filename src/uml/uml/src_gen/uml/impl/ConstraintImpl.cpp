@@ -322,7 +322,7 @@ void ConstraintImpl::resolveReferences(const int featureID, std::vector<std::sha
 	{
 		case uml::umlPackage::CONSTRAINT_ATTRIBUTE_CONSTRAINEDELEMENT:
 		{
-			std::shared_ptr<Bag<uml::Element>> _constrainedElement = getConstrainedElement();
+			const std::shared_ptr<Bag<uml::Element>>& _constrainedElement = getConstrainedElement();
 			for(std::shared_ptr<ecore::EObject> ref : references)
 			{
 				std::shared_ptr<uml::Element>  _r = std::dynamic_pointer_cast<uml::Element>(ref);
@@ -439,7 +439,7 @@ bool ConstraintImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 	
 					if(eObjectList)
 					{
-						std::shared_ptr<Bag<uml::Element>> _constrainedElement = getConstrainedElement();
+						const std::shared_ptr<Bag<uml::Element>>& _constrainedElement = getConstrainedElement();
 	
 						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{
