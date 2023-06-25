@@ -63,8 +63,8 @@
 #include "fUML/Semantics/Activities/Token.hpp"
 #include "fUML/Semantics/Activities/TokenSet.hpp"
 //Factories and Package includes
-#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/SemanticsPackage.hpp"
+#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/Actions/ActionsPackage.hpp"
 #include "fUML/Semantics/Activities/ActivitiesPackage.hpp"
 #include "uml/umlPackage.hpp"
@@ -703,7 +703,7 @@ void ExpansionRegionActivationImpl::resolveReferences(const int featureID, std::
 	{
 		case fUML::Semantics::Actions::ActionsPackage::EXPANSIONREGIONACTIVATION_ATTRIBUTE_ACTIVATIONGROUPS:
 		{
-			std::shared_ptr<Bag<fUML::Semantics::Actions::ExpansionActivationGroup>> _activationGroups = getActivationGroups();
+			const std::shared_ptr<Bag<fUML::Semantics::Actions::ExpansionActivationGroup>>& _activationGroups = getActivationGroups();
 			for(std::shared_ptr<ecore::EObject> ref : references)
 			{
 				std::shared_ptr<fUML::Semantics::Actions::ExpansionActivationGroup>  _r = std::dynamic_pointer_cast<fUML::Semantics::Actions::ExpansionActivationGroup>(ref);
@@ -717,7 +717,7 @@ void ExpansionRegionActivationImpl::resolveReferences(const int featureID, std::
 
 		case fUML::Semantics::Actions::ActionsPackage::EXPANSIONREGIONACTIVATION_ATTRIBUTE_INPUTEXPANSIONTOKENS:
 		{
-			std::shared_ptr<Bag<fUML::Semantics::Activities::TokenSet>> _inputExpansionTokens = getInputExpansionTokens();
+			const std::shared_ptr<Bag<fUML::Semantics::Activities::TokenSet>>& _inputExpansionTokens = getInputExpansionTokens();
 			for(std::shared_ptr<ecore::EObject> ref : references)
 			{
 				std::shared_ptr<fUML::Semantics::Activities::TokenSet>  _r = std::dynamic_pointer_cast<fUML::Semantics::Activities::TokenSet>(ref);
@@ -731,7 +731,7 @@ void ExpansionRegionActivationImpl::resolveReferences(const int featureID, std::
 
 		case fUML::Semantics::Actions::ActionsPackage::EXPANSIONREGIONACTIVATION_ATTRIBUTE_INPUTTOKENS:
 		{
-			std::shared_ptr<Bag<fUML::Semantics::Activities::TokenSet>> _inputTokens = getInputTokens();
+			const std::shared_ptr<Bag<fUML::Semantics::Activities::TokenSet>>& _inputTokens = getInputTokens();
 			for(std::shared_ptr<ecore::EObject> ref : references)
 			{
 				std::shared_ptr<fUML::Semantics::Activities::TokenSet>  _r = std::dynamic_pointer_cast<fUML::Semantics::Activities::TokenSet>(ref);
@@ -780,7 +780,7 @@ void ExpansionRegionActivationImpl::saveContent(std::shared_ptr<persistence::int
 	}
 }
 
-std::shared_ptr<ecore::EClass> ExpansionRegionActivationImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& ExpansionRegionActivationImpl::eStaticClass() const
 {
 	return fUML::Semantics::Actions::ActionsPackage::eInstance()->getExpansionRegionActivation_Class();
 }
@@ -835,7 +835,7 @@ bool ExpansionRegionActivationImpl::eSet(int featureID,  const std::shared_ptr<A
 	
 					if(eObjectList)
 					{
-						std::shared_ptr<Bag<fUML::Semantics::Actions::ExpansionActivationGroup>> _activationGroups = getActivationGroups();
+						const std::shared_ptr<Bag<fUML::Semantics::Actions::ExpansionActivationGroup>>& _activationGroups = getActivationGroups();
 	
 						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{
@@ -880,7 +880,7 @@ bool ExpansionRegionActivationImpl::eSet(int featureID,  const std::shared_ptr<A
 	
 					if(eObjectList)
 					{
-						std::shared_ptr<Bag<fUML::Semantics::Activities::TokenSet>> _inputExpansionTokens = getInputExpansionTokens();
+						const std::shared_ptr<Bag<fUML::Semantics::Activities::TokenSet>>& _inputExpansionTokens = getInputExpansionTokens();
 	
 						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{
@@ -925,7 +925,7 @@ bool ExpansionRegionActivationImpl::eSet(int featureID,  const std::shared_ptr<A
 	
 					if(eObjectList)
 					{
-						std::shared_ptr<Bag<fUML::Semantics::Activities::TokenSet>> _inputTokens = getInputTokens();
+						const std::shared_ptr<Bag<fUML::Semantics::Activities::TokenSet>>& _inputTokens = getInputTokens();
 	
 						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{

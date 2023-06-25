@@ -17,13 +17,13 @@
 #include "../Execution.hpp"
 
 #include "fUML/Semantics/CommonBehavior/impl/CommonBehaviorFactoryImpl.hpp"
-#include "fUML/MDE4CPP_Extensions/impl/FUML_ObjectImpl.hpp"
+#include "uml/impl/ElementImpl.hpp"
 #include "fUML/Semantics/Loci/impl/SemanticVisitorImpl.hpp"
 
 //*********************************
 namespace fUML::Semantics::CommonBehavior 
 {
-	class FUML_API ExecutionImpl : virtual public fUML::MDE4CPP_Extensions::FUML_ObjectImpl, virtual public fUML::Semantics::Loci::SemanticVisitorImpl, virtual public Execution 
+	class FUML_API ExecutionImpl : virtual public uml::ElementImpl, virtual public fUML::Semantics::Loci::SemanticVisitorImpl, virtual public Execution 
 	{
 		public: 
 			ExecutionImpl(const ExecutionImpl & obj);
@@ -91,7 +91,7 @@ namespace fUML::Semantics::CommonBehavior
 			virtual void saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const;
 
 		protected:
-			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
+			virtual const std::shared_ptr<ecore::EClass>& eStaticClass() const;
 
 			//*********************************
 			// EStructuralFeature Get/Set/IsSet

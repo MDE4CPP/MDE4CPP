@@ -60,8 +60,8 @@
 #include "fUML/Semantics/Actions/PinActivation.hpp"
 #include "fUML/Semantics/Activities/Token.hpp"
 //Factories and Package includes
-#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/SemanticsPackage.hpp"
+#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/Actions/ActionsPackage.hpp"
 #include "fUML/Semantics/Activities/ActivitiesPackage.hpp"
 #include "uml/umlPackage.hpp"
@@ -188,6 +188,7 @@ void DestroyObjectActionActivationImpl::destroyObject(const std::shared_ptr<Any>
 			*/
 		}
 		object->destroy();
+		this->getExecutionLocus()->remove(object);	//TODO: This should happen within object's destroy method as soon as all generated C++ classes reference fUML::Semantics::Loci::Locus
 	}
 	catch(...)
 	{
@@ -424,7 +425,7 @@ void DestroyObjectActionActivationImpl::saveContent(std::shared_ptr<persistence:
 	}
 }
 
-std::shared_ptr<ecore::EClass> DestroyObjectActionActivationImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& DestroyObjectActionActivationImpl::eStaticClass() const
 {
 	return fUML::Semantics::Actions::ActionsPackage::eInstance()->getDestroyObjectActionActivation_Class();
 }

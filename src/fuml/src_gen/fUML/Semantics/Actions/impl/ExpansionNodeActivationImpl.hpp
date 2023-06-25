@@ -57,10 +57,6 @@ namespace fUML::Semantics::Actions
 			//*********************************
 			// Reference Getters & Setters
 			//*********************************
-			virtual const std::shared_ptr<uml::ExpansionNode>& getExpansionNode() const ;
-			virtual void setExpansionNode(const std::shared_ptr<uml::ExpansionNode>&) ;
-			/*Additional Setter for 'ActivityNodeActivation::node' redefined by reference 'expansionNode'*/
-			virtual void setNode(const std::shared_ptr<uml::ActivityNode>&) ;
 			
 			//*********************************
 			// Union Reference Getters
@@ -82,7 +78,7 @@ namespace fUML::Semantics::Actions
 			virtual void saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const;
 
 		protected:
-			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
+			virtual const std::shared_ptr<ecore::EClass>& eStaticClass() const;
 
 			//*********************************
 			// EStructuralFeature Get/Set/IsSet

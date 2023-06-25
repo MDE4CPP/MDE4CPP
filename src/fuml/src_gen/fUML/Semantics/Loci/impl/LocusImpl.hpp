@@ -45,14 +45,14 @@ virtual public Locus
 			//*********************************
 			// Operations
 			//*********************************
-			virtual void add(const std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_Object>& value) ;
+			virtual void add(const std::shared_ptr<uml::Element>& value) ;
 			virtual void assignExecutor(const std::shared_ptr<fUML::Semantics::Loci::Executor>& executor) ;
 			virtual void assignFactory(const std::shared_ptr<fUML::Semantics::Loci::ExecutionFactory>& factory) ;
 			virtual bool conforms(const std::shared_ptr<uml::Classifier>& type, const std::shared_ptr<uml::Classifier>& classifier) ;
-			virtual std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_Object> instantiate(const std::shared_ptr<uml::Class>& type) ;
-			virtual std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_SignalInstance> instantiate(const std::shared_ptr<uml::Signal>& type) ;
-			virtual void remove(const std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_Object>& value) ;
-			virtual std::shared_ptr<Bag<fUML::MDE4CPP_Extensions::FUML_Object>> retrieveExtent(const std::shared_ptr<uml::Classifier>& classifier) ;
+			virtual std::shared_ptr<uml::Element> instantiate(const std::shared_ptr<uml::Class>& type) ;
+			virtual std::shared_ptr<uml::Element> instantiate(const std::shared_ptr<uml::Signal>& type) ;
+			virtual void remove(const std::shared_ptr<uml::Element>& value) ;
+			virtual std::shared_ptr<Bag<uml::Element>> retrieveExtent(const std::shared_ptr<uml::Classifier>& classifier) ;
 			
 			//*********************************
 			// Attribute Getters & Setters
@@ -63,7 +63,7 @@ virtual public Locus
 			//*********************************
 			virtual const std::shared_ptr<fUML::Semantics::Loci::Executor>& getExecutor() const ;
 			virtual void setExecutor(const std::shared_ptr<fUML::Semantics::Loci::Executor>&) ;
-			virtual const std::shared_ptr<Bag<fUML::MDE4CPP_Extensions::FUML_Object>>& getExtensionalValues() const ;
+			virtual const std::shared_ptr<Bag<uml::Element>>& getExtensionalValues() const ;
 			virtual const std::shared_ptr<fUML::Semantics::Loci::ExecutionFactory>& getFactory() const ;
 			virtual void setFactory(const std::shared_ptr<fUML::Semantics::Loci::ExecutionFactory>&) ;
 			
@@ -87,7 +87,7 @@ virtual public Locus
 			virtual void saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const;
 
 		protected:
-			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
+			virtual const std::shared_ptr<ecore::EClass>& eStaticClass() const;
 
 			//*********************************
 			// EStructuralFeature Get/Set/IsSet

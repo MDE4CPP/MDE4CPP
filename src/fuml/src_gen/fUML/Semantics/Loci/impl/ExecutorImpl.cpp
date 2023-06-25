@@ -40,7 +40,6 @@
 #include "fUML/fUMLFactory.hpp"
 //#include "fUML/Semantics/StructuredClassifiers/Object.hpp"
 #include "fUML/Semantics/StructuredClassifiers/StructuredClassifiersFactory.hpp"
-#include "fUML/MDE4CPP_Extensions/FUML_Object.hpp"
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
@@ -54,8 +53,8 @@
 #include "fUML/Semantics/CommonBehavior/ParameterValue.hpp"
 #include "uml/ValueSpecification.hpp"
 //Factories and Package includes
-#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/SemanticsPackage.hpp"
+#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/CommonBehavior/CommonBehaviorPackage.hpp"
 #include "fUML/Semantics/Loci/LociPackage.hpp"
 #include "uml/umlPackage.hpp"
@@ -340,7 +339,7 @@ void ExecutorImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHan
 	}
 }
 
-std::shared_ptr<ecore::EClass> ExecutorImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& ExecutorImpl::eStaticClass() const
 {
 	return fUML::Semantics::Loci::LociPackage::eInstance()->getExecutor_Class();
 }

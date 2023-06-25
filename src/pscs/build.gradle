@@ -11,9 +11,9 @@ task buildPSCS() {
 	dependsOn 'src_gen:compilePSCS'
 
 	dependsOn getRootProject().getTasksByName('buildUml', true)
-	dependsOn getRootProject().getTasksByName('buildFUML', true)
-	dependsOn getRootProject().getTasksByName('buildEcore', true)
 	dependsOn getRootProject().getTasksByName('buildTypes', true)
+	dependsOn getRootProject().getTasksByName('buildEcore', true)
+	dependsOn getRootProject().getTasksByName('buildFUML', true)
 }
 
 tasks.getByPath('src_gen:compilePSCS').mustRunAfter tasks.getByPath('model:generatePSCS')

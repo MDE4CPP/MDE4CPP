@@ -4,14 +4,14 @@
 
 #include "abstractDataTypes/SubsetUnion.hpp"
 //metametamodel classes
-#include "ecore/EStringToStringMapEntry.hpp"
-#include "ecore/EAnnotation.hpp"
 #include "ecore/EReference.hpp"
-#include "ecore/EGenericType.hpp"
-#include "ecore/EOperation.hpp"
-#include "ecore/EClass.hpp"
-#include "ecore/EParameter.hpp"
+#include "ecore/EAnnotation.hpp"
 #include "ecore/EDataType.hpp"
+#include "ecore/EGenericType.hpp"
+#include "ecore/EClass.hpp"
+#include "ecore/EStringToStringMapEntry.hpp"
+#include "ecore/EOperation.hpp"
+#include "ecore/EParameter.hpp"
 
 //metamodel factory
 #include "fUML/Semantics/Loci/LociFactory.hpp"
@@ -206,9 +206,9 @@ const std::shared_ptr<ecore::EReference>& fUML::Semantics::Loci::LociPackageImpl
 	return m_locus_Attribute_factory;
 }
 
-const std::shared_ptr<ecore::EOperation>& fUML::Semantics::Loci::LociPackageImpl::getLocus_Operation_add_FUML_Object() const
+const std::shared_ptr<ecore::EOperation>& fUML::Semantics::Loci::LociPackageImpl::getLocus_Operation_add_Element() const
 {
-	return m_locus_Operation_add_FUML_Object;
+	return m_locus_Operation_add_Element;
 }
 const std::shared_ptr<ecore::EOperation>& fUML::Semantics::Loci::LociPackageImpl::getLocus_Operation_assignExecutor_Executor() const
 {
@@ -230,9 +230,9 @@ const std::shared_ptr<ecore::EOperation>& fUML::Semantics::Loci::LociPackageImpl
 {
 	return m_locus_Operation_instantiate_Signal;
 }
-const std::shared_ptr<ecore::EOperation>& fUML::Semantics::Loci::LociPackageImpl::getLocus_Operation_remove_FUML_Object() const
+const std::shared_ptr<ecore::EOperation>& fUML::Semantics::Loci::LociPackageImpl::getLocus_Operation_remove_Element() const
 {
-	return m_locus_Operation_remove_FUML_Object;
+	return m_locus_Operation_remove_Element;
 }
 const std::shared_ptr<ecore::EOperation>& fUML::Semantics::Loci::LociPackageImpl::getLocus_Operation_retrieveExtent_Classifier() const
 {

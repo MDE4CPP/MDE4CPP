@@ -4,14 +4,14 @@
 
 #include "abstractDataTypes/SubsetUnion.hpp"
 //metametamodel classes
-#include "ecore/EStringToStringMapEntry.hpp"
-#include "ecore/EAnnotation.hpp"
 #include "ecore/EReference.hpp"
-#include "ecore/EGenericType.hpp"
-#include "ecore/EOperation.hpp"
-#include "ecore/EClass.hpp"
-#include "ecore/EParameter.hpp"
+#include "ecore/EAnnotation.hpp"
 #include "ecore/EDataType.hpp"
+#include "ecore/EGenericType.hpp"
+#include "ecore/EClass.hpp"
+#include "ecore/EStringToStringMapEntry.hpp"
+#include "ecore/EOperation.hpp"
+#include "ecore/EParameter.hpp"
 
 // metametamodel factory
 #include "ecore/ecoreFactory.hpp"
@@ -19,7 +19,6 @@
 //depending model packages
 
 #include "fUML/Semantics/CommonBehavior/CommonBehaviorPackage.hpp"
-#include "fUML/MDE4CPP_Extensions/MDE4CPP_ExtensionsPackage.hpp"
 #include "fUML/Semantics/Values/ValuesPackage.hpp"
 #include "ecore/ecorePackage.hpp"
 #include "fUML/fUMLPackage.hpp"
@@ -536,7 +535,7 @@ void LociPackageImpl::initializeLocusContent()
 	
 	m_locus_Attribute_executor->_setID(LOCUS_ATTRIBUTE_EXECUTOR);
 	m_locus_Attribute_extensionalValues->setName("extensionalValues");
-	m_locus_Attribute_extensionalValues->setEType(fUML::MDE4CPP_Extensions::MDE4CPP_ExtensionsPackage::eInstance()->getFUML_Object_Class());
+	m_locus_Attribute_extensionalValues->setEType(uml::umlPackage::eInstance()->getElement_Class());
 	m_locus_Attribute_extensionalValues->setLowerBound(0);
 	m_locus_Attribute_extensionalValues->setUpperBound(-1);
 	m_locus_Attribute_extensionalValues->setTransient(false);
@@ -572,23 +571,23 @@ void LociPackageImpl::initializeLocusContent()
 	/*
 	 * EOperations
 	 */
-	m_locus_Operation_add_FUML_Object->setName("add");
+	m_locus_Operation_add_Element->setName("add");
 	{ 	std::shared_ptr<ecore::ecoreFactory> factory = ecore::ecoreFactory::eInstance();
 		std::shared_ptr<ecore::EClass> unknownClass = factory ->createEClass(-1);
 	   	unknownClass->setName("invalid");
 		unknownClass->setAbstract(true);
 		unknownClass->setInterface(true);
-		m_locus_Operation_add_FUML_Object->setEType(unknownClass);
+		m_locus_Operation_add_Element->setEType(unknownClass);
 	}
-	m_locus_Operation_add_FUML_Object->setLowerBound(1);
-	m_locus_Operation_add_FUML_Object->setUpperBound(1);
-	m_locus_Operation_add_FUML_Object->setUnique(true);
-	m_locus_Operation_add_FUML_Object->setOrdered(false);
+	m_locus_Operation_add_Element->setLowerBound(1);
+	m_locus_Operation_add_Element->setUpperBound(1);
+	m_locus_Operation_add_Element->setUnique(true);
+	m_locus_Operation_add_Element->setOrdered(false);
 	
-	m_locus_Operation_add_FUML_Object->_setID(LOCUS_OPERATION_ADD_FUML_OBJECT);
+	m_locus_Operation_add_Element->_setID(LOCUS_OPERATION_ADD_ELEMENT);
 	
 	{
-		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_locus_Operation_add_FUML_Object);
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_locus_Operation_add_Element);
 		parameter->setName("value");
 		parameter->setEType(nullptr);
 		parameter->setLowerBound(0);
@@ -677,7 +676,7 @@ void LociPackageImpl::initializeLocusContent()
 	}
 	
 	m_locus_Operation_instantiate_Class->setName("instantiate");
-	m_locus_Operation_instantiate_Class->setEType(fUML::MDE4CPP_Extensions::MDE4CPP_ExtensionsPackage::eInstance()->getFUML_Object_Class());
+	m_locus_Operation_instantiate_Class->setEType(uml::umlPackage::eInstance()->getElement_Class());
 	m_locus_Operation_instantiate_Class->setLowerBound(1);
 	m_locus_Operation_instantiate_Class->setUpperBound(1);
 	m_locus_Operation_instantiate_Class->setUnique(true);
@@ -696,7 +695,7 @@ void LociPackageImpl::initializeLocusContent()
 	}
 	
 	m_locus_Operation_instantiate_Signal->setName("instantiate");
-	m_locus_Operation_instantiate_Signal->setEType(fUML::MDE4CPP_Extensions::MDE4CPP_ExtensionsPackage::eInstance()->getFUML_SignalInstance_Class());
+	m_locus_Operation_instantiate_Signal->setEType(uml::umlPackage::eInstance()->getElement_Class());
 	m_locus_Operation_instantiate_Signal->setLowerBound(1);
 	m_locus_Operation_instantiate_Signal->setUpperBound(1);
 	m_locus_Operation_instantiate_Signal->setUnique(true);
@@ -714,23 +713,23 @@ void LociPackageImpl::initializeLocusContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_locus_Operation_remove_FUML_Object->setName("remove");
+	m_locus_Operation_remove_Element->setName("remove");
 	{ 	std::shared_ptr<ecore::ecoreFactory> factory = ecore::ecoreFactory::eInstance();
 		std::shared_ptr<ecore::EClass> unknownClass = factory ->createEClass(-1);
 	   	unknownClass->setName("invalid");
 		unknownClass->setAbstract(true);
 		unknownClass->setInterface(true);
-		m_locus_Operation_remove_FUML_Object->setEType(unknownClass);
+		m_locus_Operation_remove_Element->setEType(unknownClass);
 	}
-	m_locus_Operation_remove_FUML_Object->setLowerBound(1);
-	m_locus_Operation_remove_FUML_Object->setUpperBound(1);
-	m_locus_Operation_remove_FUML_Object->setUnique(true);
-	m_locus_Operation_remove_FUML_Object->setOrdered(false);
+	m_locus_Operation_remove_Element->setLowerBound(1);
+	m_locus_Operation_remove_Element->setUpperBound(1);
+	m_locus_Operation_remove_Element->setUnique(true);
+	m_locus_Operation_remove_Element->setOrdered(false);
 	
-	m_locus_Operation_remove_FUML_Object->_setID(LOCUS_OPERATION_REMOVE_FUML_OBJECT);
+	m_locus_Operation_remove_Element->_setID(LOCUS_OPERATION_REMOVE_ELEMENT);
 	
 	{
-		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_locus_Operation_remove_FUML_Object);
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_locus_Operation_remove_Element);
 		parameter->setName("value");
 		parameter->setEType(nullptr);
 		parameter->setLowerBound(0);
@@ -740,7 +739,7 @@ void LociPackageImpl::initializeLocusContent()
 	}
 	
 	m_locus_Operation_retrieveExtent_Classifier->setName("retrieveExtent");
-	m_locus_Operation_retrieveExtent_Classifier->setEType(fUML::MDE4CPP_Extensions::MDE4CPP_ExtensionsPackage::eInstance()->getFUML_Object_Class());
+	m_locus_Operation_retrieveExtent_Classifier->setEType(uml::umlPackage::eInstance()->getElement_Class());
 	m_locus_Operation_retrieveExtent_Classifier->setLowerBound(0);
 	m_locus_Operation_retrieveExtent_Classifier->setUpperBound(-1);
 	m_locus_Operation_retrieveExtent_Classifier->setUnique(true);

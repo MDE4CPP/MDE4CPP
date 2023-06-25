@@ -38,8 +38,8 @@
 
 #include <exception> // used in Persistence
 //Factories and Package includes
-#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/SemanticsPackage.hpp"
+#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/Loci/LociPackage.hpp"
 
 using namespace fUML::Semantics::Loci;
@@ -187,7 +187,7 @@ void SemanticVisitorImpl::saveContent(std::shared_ptr<persistence::interfaces::X
 	}
 }
 
-std::shared_ptr<ecore::EClass> SemanticVisitorImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& SemanticVisitorImpl::eStaticClass() const
 {
 	return fUML::Semantics::Loci::LociPackage::eInstance()->getSemanticVisitor_Class();
 }

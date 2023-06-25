@@ -41,8 +41,8 @@
 #include "fUML/Semantics/CommonBehavior/ObjectActivation.hpp"
 #include "fUML/Semantics/Loci/SemanticStrategy.hpp"
 //Factories and Package includes
-#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/SemanticsPackage.hpp"
+#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/CommonBehavior/CommonBehaviorPackage.hpp"
 #include "fUML/Semantics/Loci/LociPackage.hpp"
 
@@ -192,7 +192,7 @@ void GetNextEventStrategyImpl::saveContent(std::shared_ptr<persistence::interfac
 	}
 }
 
-std::shared_ptr<ecore::EClass> GetNextEventStrategyImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& GetNextEventStrategyImpl::eStaticClass() const
 {
 	return fUML::Semantics::CommonBehavior::CommonBehaviorPackage::eInstance()->getGetNextEventStrategy_Class();
 }

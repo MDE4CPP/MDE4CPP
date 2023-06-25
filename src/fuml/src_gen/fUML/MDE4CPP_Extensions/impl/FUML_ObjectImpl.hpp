@@ -44,7 +44,6 @@ namespace fUML::MDE4CPP_Extensions
 			// Operations
 			//*********************************
 			virtual void _register(const std::shared_ptr<fUML::Semantics::CommonBehavior::EventAccepter>& accepter) ;
-			virtual void destroy() ;
 			virtual const std::shared_ptr<Bag<uml::Classifier>>& getTypes() const ;
 			virtual void send(const std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccurrence>& eventOccurrence) ;
 			virtual void startBehavior(const std::shared_ptr<uml::Class>& classifier, const std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>>& inputs) ;
@@ -82,7 +81,7 @@ namespace fUML::MDE4CPP_Extensions
 			virtual void saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const;
 
 		protected:
-			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
+			virtual const std::shared_ptr<ecore::EClass>& eStaticClass() const;
 
 			//*********************************
 			// EStructuralFeature Get/Set/IsSet

@@ -56,8 +56,8 @@
 #include "fUML/Semantics/Actions/PinActivation.hpp"
 #include "fUML/Semantics/Activities/Token.hpp"
 //Factories and Package includes
-#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/SemanticsPackage.hpp"
+#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/Actions/ActionsPackage.hpp"
 #include "fUML/Semantics/Activities/ActivitiesPackage.hpp"
 #include "uml/umlPackage.hpp"
@@ -234,7 +234,7 @@ void ValueSpecificationActionActivationImpl::saveContent(std::shared_ptr<persist
 	}
 }
 
-std::shared_ptr<ecore::EClass> ValueSpecificationActionActivationImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& ValueSpecificationActionActivationImpl::eStaticClass() const
 {
 	return fUML::Semantics::Actions::ActionsPackage::eInstance()->getValueSpecificationActionActivation_Class();
 }
