@@ -154,8 +154,8 @@
 
 #include <exception> // used in Persistence
 #include "fUML/Semantics/Loci/LociFactory.hpp"
-#include "fUML/Semantics/CommonBehavior/CommonBehaviorFactory.hpp"
 #include "uml/umlFactory.hpp"
+#include "fUML/Semantics/CommonBehavior/CommonBehaviorFactory.hpp"
 #include "uml/Behavior.hpp"
 #include "uml/Element.hpp"
 #include "fUML/Semantics/CommonBehavior/Execution.hpp"
@@ -166,8 +166,8 @@
 #include "fUML/Semantics/Loci/SemanticVisitor.hpp"
 #include "uml/ValueSpecification.hpp"
 //Factories and Package includes
-#include "fUML/Semantics/SemanticsPackage.hpp"
 #include "fUML/fUMLPackage.hpp"
+#include "fUML/Semantics/SemanticsPackage.hpp"
 #include "fUML/Semantics/CommonBehavior/CommonBehaviorPackage.hpp"
 #include "fUML/Semantics/Loci/LociPackage.hpp"
 #include "uml/umlPackage.hpp"
@@ -752,7 +752,7 @@ void ExecutionFactoryImpl::resolveReferences(const int featureID, std::vector<st
 	{
 		case fUML::Semantics::Loci::LociPackage::EXECUTIONFACTORY_ATTRIBUTE_BUILTINTYPES:
 		{
-			const std::shared_ptr<Bag<uml::PrimitiveType>>& _builtInTypes = getBuiltInTypes();
+			std::shared_ptr<Bag<uml::PrimitiveType>> _builtInTypes = getBuiltInTypes();
 			for(std::shared_ptr<ecore::EObject> ref : references)
 			{
 				std::shared_ptr<uml::PrimitiveType>  _r = std::dynamic_pointer_cast<uml::PrimitiveType>(ref);
@@ -778,7 +778,7 @@ void ExecutionFactoryImpl::resolveReferences(const int featureID, std::vector<st
 
 		case fUML::Semantics::Loci::LociPackage::EXECUTIONFACTORY_ATTRIBUTE_STRATEGIES:
 		{
-			const std::shared_ptr<Bag<fUML::Semantics::Loci::SemanticStrategy>>& _strategies = getStrategies();
+			std::shared_ptr<Bag<fUML::Semantics::Loci::SemanticStrategy>> _strategies = getStrategies();
 			for(std::shared_ptr<ecore::EObject> ref : references)
 			{
 				std::shared_ptr<fUML::Semantics::Loci::SemanticStrategy>  _r = std::dynamic_pointer_cast<fUML::Semantics::Loci::SemanticStrategy>(ref);
@@ -815,7 +815,7 @@ void ExecutionFactoryImpl::saveContent(std::shared_ptr<persistence::interfaces::
 	}
 }
 
-const std::shared_ptr<ecore::EClass>& ExecutionFactoryImpl::eStaticClass() const
+std::shared_ptr<ecore::EClass> ExecutionFactoryImpl::eStaticClass() const
 {
 	return fUML::Semantics::Loci::LociPackage::eInstance()->getExecutionFactory_Class();
 }
@@ -869,7 +869,7 @@ bool ExecutionFactoryImpl::eSet(int featureID,  const std::shared_ptr<Any>& newV
 	
 					if(eObjectList)
 					{
-						const std::shared_ptr<Bag<uml::PrimitiveType>>& _builtInTypes = getBuiltInTypes();
+						std::shared_ptr<Bag<uml::PrimitiveType>> _builtInTypes = getBuiltInTypes();
 	
 						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{
@@ -945,7 +945,7 @@ bool ExecutionFactoryImpl::eSet(int featureID,  const std::shared_ptr<Any>& newV
 	
 					if(eObjectList)
 					{
-						const std::shared_ptr<Bag<fUML::Semantics::Loci::SemanticStrategy>>& _strategies = getStrategies();
+						std::shared_ptr<Bag<fUML::Semantics::Loci::SemanticStrategy>> _strategies = getStrategies();
 	
 						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{

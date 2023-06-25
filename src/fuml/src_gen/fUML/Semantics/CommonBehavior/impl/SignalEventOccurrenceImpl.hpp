@@ -53,8 +53,8 @@ namespace fUML::Semantics::CommonBehavior
 			//*********************************
 			// Reference Getters & Setters
 			//*********************************
-			virtual const std::shared_ptr<uml::Element>& getSignalInstance() const ;
-			virtual void setSignalInstance(const std::shared_ptr<uml::Element>&) ;
+			virtual const std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_SignalInstance>& getSignalInstance() const ;
+			virtual void setSignalInstance(const std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_SignalInstance>&) ;
 			
 			//*********************************
 			// Union Reference Getters
@@ -76,7 +76,7 @@ namespace fUML::Semantics::CommonBehavior
 			virtual void saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const;
 
 		protected:
-			virtual const std::shared_ptr<ecore::EClass>& eStaticClass() const;
+			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
 
 			//*********************************
 			// EStructuralFeature Get/Set/IsSet

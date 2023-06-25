@@ -48,8 +48,8 @@
 #include "fUML/Semantics/Activities/CentralBufferNodeActivation.hpp"
 #include "fUML/Semantics/Activities/Token.hpp"
 //Factories and Package includes
-#include "fUML/Semantics/SemanticsPackage.hpp"
 #include "fUML/fUMLPackage.hpp"
+#include "fUML/Semantics/SemanticsPackage.hpp"
 #include "fUML/Semantics/Activities/ActivitiesPackage.hpp"
 #include "uml/umlPackage.hpp"
 
@@ -250,7 +250,7 @@ void DataStoreNodeActivationImpl::saveContent(std::shared_ptr<persistence::inter
 	}
 }
 
-const std::shared_ptr<ecore::EClass>& DataStoreNodeActivationImpl::eStaticClass() const
+std::shared_ptr<ecore::EClass> DataStoreNodeActivationImpl::eStaticClass() const
 {
 	return fUML::Semantics::Activities::ActivitiesPackage::eInstance()->getDataStoreNodeActivation_Class();
 }

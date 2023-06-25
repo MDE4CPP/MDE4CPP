@@ -54,8 +54,8 @@
 #include "fUML/Semantics/Activities/ControlNodeActivation.hpp"
 #include "fUML/Semantics/Activities/Token.hpp"
 //Factories and Package includes
-#include "fUML/Semantics/SemanticsPackage.hpp"
 #include "fUML/fUMLPackage.hpp"
+#include "fUML/Semantics/SemanticsPackage.hpp"
 #include "fUML/Semantics/Activities/ActivitiesPackage.hpp"
 #include "uml/umlPackage.hpp"
 
@@ -251,7 +251,7 @@ void ActivityFinalNodeActivationImpl::saveContent(std::shared_ptr<persistence::i
 	}
 }
 
-const std::shared_ptr<ecore::EClass>& ActivityFinalNodeActivationImpl::eStaticClass() const
+std::shared_ptr<ecore::EClass> ActivityFinalNodeActivationImpl::eStaticClass() const
 {
 	return fUML::Semantics::Activities::ActivitiesPackage::eInstance()->getActivityFinalNodeActivation_Class();
 }

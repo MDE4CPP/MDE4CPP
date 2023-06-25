@@ -39,8 +39,8 @@
 #include <exception> // used in Persistence
 #include "fUML/Semantics/Loci/ChoiceStrategy.hpp"
 //Factories and Package includes
-#include "fUML/Semantics/SemanticsPackage.hpp"
 #include "fUML/fUMLPackage.hpp"
+#include "fUML/Semantics/SemanticsPackage.hpp"
 #include "fUML/Semantics/Loci/LociPackage.hpp"
 
 using namespace fUML::Semantics::Loci;
@@ -193,7 +193,7 @@ void FirstChoiceStrategyImpl::saveContent(std::shared_ptr<persistence::interface
 	}
 }
 
-const std::shared_ptr<ecore::EClass>& FirstChoiceStrategyImpl::eStaticClass() const
+std::shared_ptr<ecore::EClass> FirstChoiceStrategyImpl::eStaticClass() const
 {
 	return fUML::Semantics::Loci::LociPackage::eInstance()->getFirstChoiceStrategy_Class();
 }

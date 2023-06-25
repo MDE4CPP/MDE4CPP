@@ -4,15 +4,15 @@
 
 #include "abstractDataTypes/SubsetUnion.hpp"
 //metametamodel classes
-#include "ecore/EReference.hpp"
+#include "ecore/EStringToStringMapEntry.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EAttribute.hpp"
-#include "ecore/EDataType.hpp"
+#include "ecore/EReference.hpp"
 #include "ecore/EGenericType.hpp"
-#include "ecore/EClass.hpp"
-#include "ecore/EStringToStringMapEntry.hpp"
 #include "ecore/EOperation.hpp"
+#include "ecore/EClass.hpp"
 #include "ecore/EParameter.hpp"
+#include "ecore/EDataType.hpp"
 
 // metametamodel factory
 #include "ecore/ecoreFactory.hpp"
@@ -43,7 +43,7 @@ void CommonBehaviorPackageImpl::initializePackageContents()
 	setNsURI(eNS_URI);
 	
 	// Add supertypes to classes
-	m_execution_Class->getESuperTypes()->push_back(uml::umlPackage::eInstance()->getElement_Class());
+	m_execution_Class->getESuperTypes()->push_back(fUML::MDE4CPP_Extensions::MDE4CPP_ExtensionsPackage::eInstance()->getFUML_Object_Class());
 	m_execution_Class->getESuperTypes()->push_back(fUML::Semantics::Loci::LociPackage::eInstance()->getSemanticVisitor_Class());
 	m_fIFOGetNextEventStrategy_Class->getESuperTypes()->push_back(getGetNextEventStrategy_Class());
 	m_getNextEventStrategy_Class->getESuperTypes()->push_back(fUML::Semantics::Loci::LociPackage::eInstance()->getSemanticStrategy_Class());
@@ -1054,7 +1054,7 @@ void CommonBehaviorPackageImpl::initializeSignalEventOccurrenceContent()
 	 * EReferences
 	 */
 	m_signalEventOccurrence_Attribute_signalInstance->setName("signalInstance");
-	m_signalEventOccurrence_Attribute_signalInstance->setEType(uml::umlPackage::eInstance()->getElement_Class());
+	m_signalEventOccurrence_Attribute_signalInstance->setEType(fUML::MDE4CPP_Extensions::MDE4CPP_ExtensionsPackage::eInstance()->getFUML_SignalInstance_Class());
 	m_signalEventOccurrence_Attribute_signalInstance->setLowerBound(1);
 	m_signalEventOccurrence_Attribute_signalInstance->setUpperBound(1);
 	m_signalEventOccurrence_Attribute_signalInstance->setTransient(false);

@@ -41,8 +41,8 @@
 #include "fUML/Semantics/Activities/ActivitiesFactory.hpp"
 #include "fUML/Semantics/Activities/Token.hpp"
 //Factories and Package includes
-#include "fUML/Semantics/SemanticsPackage.hpp"
 #include "fUML/fUMLPackage.hpp"
+#include "fUML/Semantics/SemanticsPackage.hpp"
 #include "fUML/Semantics/Activities/ActivitiesPackage.hpp"
 
 using namespace fUML::Semantics::Activities;
@@ -196,7 +196,7 @@ void TokenSetImpl::resolveReferences(const int featureID, std::vector<std::share
 	{
 		case fUML::Semantics::Activities::ActivitiesPackage::TOKENSET_ATTRIBUTE_TOKENS:
 		{
-			const std::shared_ptr<Bag<fUML::Semantics::Activities::Token>>& _tokens = getTokens();
+			std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> _tokens = getTokens();
 			for(std::shared_ptr<ecore::EObject> ref : references)
 			{
 				std::shared_ptr<fUML::Semantics::Activities::Token>  _r = std::dynamic_pointer_cast<fUML::Semantics::Activities::Token>(ref);
@@ -232,7 +232,7 @@ void TokenSetImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHan
 	}
 }
 
-const std::shared_ptr<ecore::EClass>& TokenSetImpl::eStaticClass() const
+std::shared_ptr<ecore::EClass> TokenSetImpl::eStaticClass() const
 {
 	return fUML::Semantics::Activities::ActivitiesPackage::eInstance()->getTokenSet_Class();
 }
@@ -245,7 +245,7 @@ std::shared_ptr<Any> TokenSetImpl::eGet(int featureID, bool resolve, bool coreTy
 	switch(featureID)
 	{
 		case fUML::Semantics::Activities::ActivitiesPackage::TOKENSET_ATTRIBUTE_TOKENS:
-			return eEcoreContainerAny(getTokens(),fUML::Semantics::Activities::ActivitiesPackage::TOKEN_CLASS); //1160
+			return eEcoreContainerAny(getTokens(),fUML::Semantics::Activities::ActivitiesPackage::TOKEN_CLASS); //1170
 	}
 	return ecore::EObjectImpl::eGet(featureID, resolve, coreType);
 }
@@ -255,7 +255,7 @@ bool TokenSetImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case fUML::Semantics::Activities::ActivitiesPackage::TOKENSET_ATTRIBUTE_TOKENS:
-			return getTokens() != nullptr; //1160
+			return getTokens() != nullptr; //1170
 	}
 	return ecore::EObjectImpl::internalEIsSet(featureID);
 }
@@ -275,7 +275,7 @@ bool TokenSetImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 	
 					if(eObjectList)
 					{
-						const std::shared_ptr<Bag<fUML::Semantics::Activities::Token>>& _tokens = getTokens();
+						std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> _tokens = getTokens();
 	
 						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{
