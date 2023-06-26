@@ -314,8 +314,8 @@ bool equals = false;
 
 if(this->getName() != comparedOperation->getName()) {return equals;}
 
-std::shared_ptr<Bag<uml::Parameter>> thisParameters = this->getOwnedParameter();
-std::shared_ptr<Bag<uml::Parameter>> otherParameters = comparedOperation->getOwnedParameter();
+const std::shared_ptr<Bag<uml::Parameter>>& thisParameters = this->getOwnedParameter();
+const std::shared_ptr<Bag<uml::Parameter>>& otherParameters = comparedOperation->getOwnedParameter();
 
 if(thisParameters->size() != otherParameters->size()) {return equals;}
 
@@ -334,7 +334,7 @@ std::shared_ptr<uml::Parameter> OperationImpl::returnResult()
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
-	std::shared_ptr<Bag<uml::Parameter>> ownedParameters = this->getOwnedParameter();
+	const std::shared_ptr<Bag<uml::Parameter>>& ownedParameters = this->getOwnedParameter();
 	std::shared_ptr<uml::Parameter> returnResult;
 
 	for(const std::shared_ptr<uml::Parameter>& p : *ownedParameters)

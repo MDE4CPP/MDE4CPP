@@ -302,20 +302,15 @@ const std::shared_ptr<Subset<uml::Connector, uml::Feature, uml::NamedElement>>& 
 std::shared_ptr<Bag<uml::Property>> StructuredClassifierImpl::getPart() const
 {
 	//generated from getterBody annotation
-	std::shared_ptr<SubsetUnion<uml::Property, uml::ConnectableElement, uml::NamedElement, uml::Property>> ownedAttribute = this->getOwnedAttribute();
+	const std::shared_ptr<Bag<uml::Property>>& ownedAttribute = this->getOwnedAttribute();
 	std::shared_ptr<Bag<uml::Property>> ownedParts(new Bag<uml::Property>());
 
-	Bag<uml::Property>::iterator ownedAttributeIter = ownedAttribute->begin();
-	Bag<uml::Property>::iterator ownedAttributeEnd = ownedAttribute->end();
-
-	while (ownedAttributeIter != ownedAttributeEnd)
+	for(const std::shared_ptr<uml::Property>& property : *ownedAttribute)
 	{
-		if((*ownedAttributeIter)->isComposite())
+		if(property->isComposite())
 		{
-			ownedParts->add(*ownedAttributeIter);
+			ownedParts->add(property);
 		}
-
-		ownedAttributeIter++;
 	}
 
 	return ownedParts;
