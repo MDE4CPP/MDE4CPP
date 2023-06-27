@@ -82,10 +82,10 @@ namespace ocl::Types
 			//*********************************
 			// Reference Getters & Setters
 			//*********************************
-			virtual std::shared_ptr<ecore::EOperation> getReferredOperation() const = 0;
-			virtual void setReferredOperation(std::shared_ptr<ecore::EOperation>) = 0;
-			virtual std::shared_ptr<uml::Signal> getReferredSignal() const = 0;
-			virtual void setReferredSignal(std::shared_ptr<uml::Signal>) = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getReferredOperation() const = 0;
+			virtual void setReferredOperation(const std::shared_ptr<ecore::EOperation>&) = 0;
+			virtual const std::shared_ptr<uml::Signal>& getReferredSignal() const = 0;
+			virtual void setReferredSignal(const std::shared_ptr<uml::Signal>&) = 0;
 
 			//*********************************
 			// Union Reference Getters

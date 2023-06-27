@@ -34,8 +34,8 @@
 
 #include <exception> // used in Persistence
 //Factories and Package includes
-#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/SemanticsPackage.hpp"
+#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/Activities/ActivitiesPackage.hpp"
 
 using namespace fUML::Semantics::Activities;
@@ -176,7 +176,7 @@ void ClassifierBehaviorExecutionActivityImpl::saveContent(std::shared_ptr<persis
 	}
 }
 
-std::shared_ptr<ecore::EClass> ClassifierBehaviorExecutionActivityImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& ClassifierBehaviorExecutionActivityImpl::eStaticClass() const
 {
 	return fUML::Semantics::Activities::ActivitiesPackage::eInstance()->getClassifierBehaviorExecutionActivity_Class();
 }
@@ -200,7 +200,7 @@ bool ClassifierBehaviorExecutionActivityImpl::internalEIsSet(int featureID) cons
 	return ecore::EObjectImpl::internalEIsSet(featureID);
 }
 
-bool ClassifierBehaviorExecutionActivityImpl::eSet(int featureID, Any newValue)
+bool ClassifierBehaviorExecutionActivityImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -212,7 +212,7 @@ bool ClassifierBehaviorExecutionActivityImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any ClassifierBehaviorExecutionActivityImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any ClassifierBehaviorExecutionActivityImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

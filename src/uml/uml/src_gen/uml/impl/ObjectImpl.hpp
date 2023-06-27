@@ -50,21 +50,21 @@ virtual public Object
 			Property. If there are no values, the ReflectiveCollection returned is empty. 
 			*/
 			 
-			virtual Any get(std::shared_ptr<uml::Property> property) const ;
+			virtual Any get(const std::shared_ptr<uml::Property>& property) const ;
 			/*!
 			Calls the supplied Operation on the object, passing the supplied Arguments and returning the result.
 			The Operation must be defined on the Class of the Object, and the arguments must refer to Parameters of the Operation.
 			If an Argument is not supplied for a Parameter, its default value, if any, will be used.
 			*/
 			 
-			virtual std::shared_ptr<Bag<uml::Object> > invoke(std::shared_ptr<uml::Operation> op,std::shared_ptr<Bag<uml::Argument>> arguments) ;
+			virtual std::shared_ptr<Bag<uml::Object> > invoke(const std::shared_ptr<uml::Operation>& op, const std::shared_ptr<Bag<uml::Argument>>& arguments) ;
 			/*!
 			If the Property has multiplicity upper bound = 1, set() atomically updates the value of the Property to the object
 			parameter. If Property has multiplicity upper bound >1, the Object must be a kind of ReflectiveCollection.
 			*/
 			 
-			virtual void set(std::shared_ptr<uml::Property> property,Any value) ;
-			virtual void unset(std::shared_ptr<uml::Property> property) ;
+			virtual void set(const std::shared_ptr<uml::Property>& property, const Any& value) ;
+			virtual void unset(const std::shared_ptr<uml::Property>& property) ;
 			
 			//*********************************
 			// Attribute Getters & Setters
@@ -94,19 +94,19 @@ virtual public Object
 			virtual void saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const;
 
 		protected:
-			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
+			virtual const std::shared_ptr<ecore::EClass>& eStaticClass() const;
 
 			//*********************************
 			// EStructuralFeature Get/Set/IsSet
 			//*********************************
 			virtual Any eGet(int featureID, bool resolve, bool coreType) const ;
-			virtual bool eSet(int featureID, Any newValue) ;
+			virtual bool eSet(int featureID, const Any& newValue) ;
 			virtual bool internalEIsSet(int featureID) const ;
 
 			//*********************************
 			// EOperation Invoke
 			//*********************************
-			virtual Any eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments) ;
+			virtual Any eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments) ;
 
 		private:
 			std::weak_ptr<uml::Object> m_thisObjectPtr;

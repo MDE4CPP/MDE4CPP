@@ -67,7 +67,7 @@ namespace uml
 			<p>From package UML::StateMachines.</p>
 			*/
 			 
-			virtual std::shared_ptr<uml::Region> LCA(std::shared_ptr<uml::Vertex> s1,std::shared_ptr<uml::Vertex> s2) ;
+			virtual std::shared_ptr<uml::Region> LCA(const std::shared_ptr<uml::Vertex>& s1, const std::shared_ptr<uml::Vertex>& s2) ;
 			/*!
 			This utility funciton is like the LCA, except that it returns the nearest composite State that contains both input Vertices.
 			result = (if v2.oclIsTypeOf(State) and ancestor(v1, v2) then
@@ -81,7 +81,7 @@ namespace uml
 			<p>From package UML::StateMachines.</p>
 			*/
 			 
-			virtual std::shared_ptr<uml::State> LCAState(std::shared_ptr<uml::Vertex> v1,std::shared_ptr<uml::Vertex> v2) ;
+			virtual std::shared_ptr<uml::State> LCAState(const std::shared_ptr<uml::Vertex>& v1, const std::shared_ptr<uml::Vertex>& v2) ;
 			/*!
 			The query ancestor(s1, s2) checks whether Vertex s2 is an ancestor of Vertex s1.
 			result = (if (s2 = s1) then 
@@ -100,31 +100,31 @@ namespace uml
 			<p>From package UML::StateMachines.</p>
 			*/
 			 
-			virtual bool ancestor(std::shared_ptr<uml::Vertex> s1,std::shared_ptr<uml::Vertex> s2) ;
+			virtual bool ancestor(const std::shared_ptr<uml::Vertex>& s1, const std::shared_ptr<uml::Vertex>& s2) ;
 			/*!
 			The Classifier context of a StateMachine cannot be an Interface.
 			_'context' <> null implies not _'context'.oclIsKindOf(Interface)
 			*/
 			 
-			virtual bool classifier_context(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
+			virtual bool classifier_context(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context) ;
 			/*!
 			The connection points of a StateMachine are Pseudostates of kind entry point or exit point.
 			connectionPoint->forAll (kind = PseudostateKind::entryPoint or kind = PseudostateKind::exitPoint)
 			*/
 			 
-			virtual bool connection_points(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
+			virtual bool connection_points(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context) ;
 			/*!
 			The context Classifier of the method StateMachine of a BehavioralFeature must be the Classifier that owns the BehavioralFeature.
 			specification <> null implies ( _'context' <> null and specification.featuringClassifier->exists(c | c = _'context'))
 			*/
 			 
-			virtual bool context_classifier(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
+			virtual bool context_classifier(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context) ;
 			/*!
 			A StateMachine as the method for a BehavioralFeature cannot have entry/exit connection points.
 			specification <> null implies connectionPoint->isEmpty()
 			*/
 			 
-			virtual bool method(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
+			virtual bool method(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context) ;
 			
 			//*********************************
 			// Attribute Getters & Setters
@@ -138,25 +138,25 @@ namespace uml
 			<p>From package UML::StateMachines.</p>
 			*/
 			
-			virtual std::shared_ptr<Subset<uml::Pseudostate, uml::NamedElement>> getConnectionPoint() const ;
+			virtual const std::shared_ptr<Subset<uml::Pseudostate, uml::NamedElement>>& getConnectionPoint() const ;
 			/*!
 			The StateMachines of which this is an extension.
 			<p>From package UML::StateMachines.</p>
 			*/
 			
-			virtual std::shared_ptr<Bag<uml::StateMachine>> getExtendedStateMachine() const ;
+			virtual const std::shared_ptr<Bag<uml::StateMachine>>& getExtendedStateMachine() const ;
 			/*!
 			The Regions owned directly by the StateMachine.
 			<p>From package UML::StateMachines.</p>
 			*/
 			
-			virtual std::shared_ptr<Subset<uml::Region, uml::NamedElement>> getRegion() const ;
+			virtual const std::shared_ptr<Subset<uml::Region, uml::NamedElement>>& getRegion() const ;
 			/*!
 			References the submachine(s) in case of a submachine State. Multiple machines are referenced in case of a concurrent State.
 			<p>From package UML::StateMachines.</p>
 			*/
 			
-			virtual std::shared_ptr<Bag<uml::State>> getSubmachineState() const ;
+			virtual const std::shared_ptr<Bag<uml::State>>& getSubmachineState() const ;
 			
 			//*********************************
 			// Union Reference Getters
@@ -239,19 +239,19 @@ namespace uml
 			virtual void saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const;
 
 		protected:
-			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
+			virtual const std::shared_ptr<ecore::EClass>& eStaticClass() const;
 
 			//*********************************
 			// EStructuralFeature Get/Set/IsSet
 			//*********************************
 			virtual Any eGet(int featureID, bool resolve, bool coreType) const ;
-			virtual bool eSet(int featureID, Any newValue) ;
+			virtual bool eSet(int featureID, const Any& newValue) ;
 			virtual bool internalEIsSet(int featureID) const ;
 
 			//*********************************
 			// EOperation Invoke
 			//*********************************
-			virtual Any eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments) ;
+			virtual Any eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments) ;
 
 		private:
 			std::weak_ptr<uml::StateMachine> m_thisStateMachinePtr;

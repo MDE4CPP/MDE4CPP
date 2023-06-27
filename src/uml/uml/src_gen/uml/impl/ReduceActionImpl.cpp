@@ -165,17 +165,17 @@ std::shared_ptr<ecore::EObject> ReduceActionImpl::copy() const
 //*********************************
 // Operations
 //*********************************
-bool ReduceActionImpl::input_type_is_collection(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool ReduceActionImpl::input_type_is_collection(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool ReduceActionImpl::output_types_are_compatible(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool ReduceActionImpl::output_types_are_compatible(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool ReduceActionImpl::reducer_inputs_output(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool ReduceActionImpl::reducer_inputs_output(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -184,7 +184,7 @@ bool ReduceActionImpl::reducer_inputs_output(Any diagnostics,std::shared_ptr<std
 // Attribute Getters & Setters
 //*********************************
 /* Getter & Setter for attribute isOrdered */
-bool ReduceActionImpl::getIsOrdered() const 
+bool ReduceActionImpl::getIsOrdered() const
 {
 	return m_isOrdered;
 }
@@ -198,33 +198,33 @@ void ReduceActionImpl::setIsOrdered(bool _isOrdered)
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference collection */
-std::shared_ptr<uml::InputPin> ReduceActionImpl::getCollection() const
+const std::shared_ptr<uml::InputPin>& ReduceActionImpl::getCollection() const
 {
     return m_collection;
 }
-void ReduceActionImpl::setCollection(std::shared_ptr<uml::InputPin> _collection)
+void ReduceActionImpl::setCollection(const std::shared_ptr<uml::InputPin>& _collection)
 {
     m_collection = _collection;
 	
 }
 
 /* Getter & Setter for reference reducer */
-std::shared_ptr<uml::Behavior> ReduceActionImpl::getReducer() const
+const std::shared_ptr<uml::Behavior>& ReduceActionImpl::getReducer() const
 {
     return m_reducer;
 }
-void ReduceActionImpl::setReducer(std::shared_ptr<uml::Behavior> _reducer)
+void ReduceActionImpl::setReducer(const std::shared_ptr<uml::Behavior>& _reducer)
 {
     m_reducer = _reducer;
 	
 }
 
 /* Getter & Setter for reference result */
-std::shared_ptr<uml::OutputPin> ReduceActionImpl::getResult() const
+const std::shared_ptr<uml::OutputPin>& ReduceActionImpl::getResult() const
 {
     return m_result;
 }
-void ReduceActionImpl::setResult(std::shared_ptr<uml::OutputPin> _result)
+void ReduceActionImpl::setResult(const std::shared_ptr<uml::OutputPin>& _result)
 {
     m_result = _result;
 	
@@ -516,7 +516,7 @@ void ReduceActionImpl::saveContent(std::shared_ptr<persistence::interfaces::XSav
 	}
 }
 
-std::shared_ptr<ecore::EClass> ReduceActionImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& ReduceActionImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getReduceAction_Class();
 }
@@ -556,7 +556,7 @@ bool ReduceActionImpl::internalEIsSet(int featureID) const
 	return ActionImpl::internalEIsSet(featureID);
 }
 
-bool ReduceActionImpl::eSet(int featureID, Any newValue)
+bool ReduceActionImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -599,7 +599,7 @@ bool ReduceActionImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any ReduceActionImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any ReduceActionImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

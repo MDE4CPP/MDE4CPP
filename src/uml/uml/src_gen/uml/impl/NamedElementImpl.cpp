@@ -157,12 +157,12 @@ std::shared_ptr<Bag<uml::Package> > NamedElementImpl::allOwningPackages()
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-std::shared_ptr<uml::Dependency> NamedElementImpl::createDependency(std::shared_ptr<uml::NamedElement> supplier)
+std::shared_ptr<uml::Dependency> NamedElementImpl::createDependency(const std::shared_ptr<uml::NamedElement>& supplier)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-std::shared_ptr<uml::Usage> NamedElementImpl::createUsage(std::shared_ptr<uml::NamedElement> supplier)
+std::shared_ptr<uml::Usage> NamedElementImpl::createUsage(const std::shared_ptr<uml::NamedElement>& supplier)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -207,17 +207,17 @@ std::string NamedElementImpl::getQualifiedName() const
 	//end of body
 }
 
-bool NamedElementImpl::has_no_qualified_name(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool NamedElementImpl::has_no_qualified_name(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool NamedElementImpl::has_qualified_name(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool NamedElementImpl::has_qualified_name(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool NamedElementImpl::isDistinguishableFrom(std::shared_ptr<uml::NamedElement> n,std::shared_ptr<uml::Namespace> ns)
+bool NamedElementImpl::isDistinguishableFrom(const std::shared_ptr<uml::NamedElement>& n, const std::shared_ptr<uml::Namespace>& ns)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -230,7 +230,7 @@ std::string NamedElementImpl::separator() const
 	//end of body
 }
 
-bool NamedElementImpl::visibility_needs_ownership(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool NamedElementImpl::visibility_needs_ownership(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -239,7 +239,7 @@ bool NamedElementImpl::visibility_needs_ownership(Any diagnostics,std::shared_pt
 // Attribute Getters & Setters
 //*********************************
 /* Getter & Setter for attribute name */
-std::string NamedElementImpl::getName() const 
+std::string NamedElementImpl::getName() const
 {
 	return m_name;
 }
@@ -252,7 +252,7 @@ void NamedElementImpl::setName(std::string _name)
 /* Getter & Setter for attribute qualifiedName */
 
 /* Getter & Setter for attribute visibility */
-uml::VisibilityKind NamedElementImpl::getVisibility() const 
+uml::VisibilityKind NamedElementImpl::getVisibility() const
 {
 	return m_visibility;
 }
@@ -266,7 +266,7 @@ void NamedElementImpl::setVisibility(uml::VisibilityKind _visibility)
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference clientDependency */
-std::shared_ptr<Bag<uml::Dependency>> NamedElementImpl::getClientDependency() const
+const std::shared_ptr<Bag<uml::Dependency>>& NamedElementImpl::getClientDependency() const
 {
 	if(m_clientDependency == nullptr)
 	{
@@ -278,11 +278,11 @@ std::shared_ptr<Bag<uml::Dependency>> NamedElementImpl::getClientDependency() co
 }
 
 /* Getter & Setter for reference nameExpression */
-std::shared_ptr<uml::StringExpression> NamedElementImpl::getNameExpression() const
+const std::shared_ptr<uml::StringExpression>& NamedElementImpl::getNameExpression() const
 {
     return m_nameExpression;
 }
-void NamedElementImpl::setNameExpression(std::shared_ptr<uml::StringExpression> _nameExpression)
+void NamedElementImpl::setNameExpression(const std::shared_ptr<uml::StringExpression>& _nameExpression)
 {
     m_nameExpression = _nameExpression;
 	
@@ -496,7 +496,7 @@ void NamedElementImpl::saveContent(std::shared_ptr<persistence::interfaces::XSav
 	}
 }
 
-std::shared_ptr<ecore::EClass> NamedElementImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& NamedElementImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getNamedElement_Class();
 }
@@ -547,7 +547,7 @@ bool NamedElementImpl::internalEIsSet(int featureID) const
 	return ElementImpl::internalEIsSet(featureID);
 }
 
-bool NamedElementImpl::eSet(int featureID, Any newValue)
+bool NamedElementImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -581,7 +581,7 @@ bool NamedElementImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any NamedElementImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any NamedElementImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

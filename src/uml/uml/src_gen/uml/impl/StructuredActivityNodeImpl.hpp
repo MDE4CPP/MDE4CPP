@@ -61,19 +61,19 @@ namespace uml
 				union(self.targetNodes().incoming->intersection(self.allOwnedNodes().outgoing))->asSet()
 			*/
 			 
-			virtual bool edges(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
+			virtual bool edges(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context) ;
 			/*!
 			The incoming ActivityEdges of an InputPin of a StructuredActivityNode must have sources that are not within the StructuredActivityNode.
 			input.incoming.source->excludesAll(allOwnedNodes()-output)
 			*/
 			 
-			virtual bool input_pin_edges(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
+			virtual bool input_pin_edges(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context) ;
 			/*!
 			The outgoing ActivityEdges of the OutputPins of a StructuredActivityNode must have targets that are not within the StructuredActivityNode.
 			output.outgoing.target->excludesAll(allOwnedNodes()-input)
 			*/
 			 
-			virtual bool output_pin_edges(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
+			virtual bool output_pin_edges(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context) ;
 			/*!
 			Return those ActivityNodes contained immediately within the StructuredActivityNode that may act as sources of edges owned by the StructuredActivityNode.
 			result = (node->union(input.oclAsType(ActivityNode)->asSet())->
@@ -115,31 +115,31 @@ namespace uml
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual std::shared_ptr<Subset<uml::ActivityEdge, uml::ActivityEdge, uml::Element>> getEdge() const ;
+			virtual const std::shared_ptr<Subset<uml::ActivityEdge, uml::ActivityEdge, uml::Element>>& getEdge() const ;
 			/*!
 			The ActivityNodes immediately contained in the StructuredActivityNode.
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual std::shared_ptr<Subset<uml::ActivityNode, uml::ActivityNode, uml::Element>> getNode() const ;
+			virtual const std::shared_ptr<Subset<uml::ActivityNode, uml::ActivityNode, uml::Element>>& getNode() const ;
 			/*!
 			The InputPins owned by the StructuredActivityNode.
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual std::shared_ptr<Subset<uml::InputPin, uml::InputPin>> getStructuredNodeInput() const ;
+			virtual const std::shared_ptr<Subset<uml::InputPin, uml::InputPin>>& getStructuredNodeInput() const ;
 			/*!
 			The OutputPins owned by the StructuredActivityNode.
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual std::shared_ptr<Subset<uml::OutputPin, uml::OutputPin>> getStructuredNodeOutput() const ;
+			virtual const std::shared_ptr<Subset<uml::OutputPin, uml::OutputPin>>& getStructuredNodeOutput() const ;
 			/*!
 			The Variables defined in the scope of the StructuredActivityNode.
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual std::shared_ptr<Subset<uml::Variable, uml::NamedElement>> getVariable() const ;
+			virtual const std::shared_ptr<Subset<uml::Variable, uml::NamedElement>>& getVariable() const ;
 			
 			//*********************************
 			// Union Reference Getters
@@ -221,19 +221,19 @@ namespace uml
 			virtual void saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const;
 
 		protected:
-			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
+			virtual const std::shared_ptr<ecore::EClass>& eStaticClass() const;
 
 			//*********************************
 			// EStructuralFeature Get/Set/IsSet
 			//*********************************
 			virtual Any eGet(int featureID, bool resolve, bool coreType) const ;
-			virtual bool eSet(int featureID, Any newValue) ;
+			virtual bool eSet(int featureID, const Any& newValue) ;
 			virtual bool internalEIsSet(int featureID) const ;
 
 			//*********************************
 			// EOperation Invoke
 			//*********************************
-			virtual Any eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments) ;
+			virtual Any eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments) ;
 
 		private:
 			std::weak_ptr<uml::StructuredActivityNode> m_thisStructuredActivityNodePtr;

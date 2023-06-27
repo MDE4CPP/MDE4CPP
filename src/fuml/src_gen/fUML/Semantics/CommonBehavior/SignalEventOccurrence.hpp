@@ -80,8 +80,8 @@ namespace fUML::Semantics::CommonBehavior
 			//*********************************
 			// Operations
 			//*********************************
-			virtual std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue> > getParameterValues(std::shared_ptr<uml::Event> event) = 0;
-			virtual bool match(std::shared_ptr<uml::Trigger> trigger) = 0;
+			virtual std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue> > getParameterValues(const std::shared_ptr<uml::Event>& event) = 0;
+			virtual bool match(const std::shared_ptr<uml::Trigger>& trigger) = 0;
 
 			//*********************************
 			// Attribute Getters & Setters
@@ -90,8 +90,8 @@ namespace fUML::Semantics::CommonBehavior
 			//*********************************
 			// Reference Getters & Setters
 			//*********************************
-			virtual std::shared_ptr<fUML::Semantics::SimpleClassifiers::SignalInstance> getSignalInstance() const = 0;
-			virtual void setSignalInstance(std::shared_ptr<fUML::Semantics::SimpleClassifiers::SignalInstance>) = 0;
+			virtual const std::shared_ptr<fUML::Semantics::SimpleClassifiers::SignalInstance>& getSignalInstance() const = 0;
+			virtual void setSignalInstance(const std::shared_ptr<fUML::Semantics::SimpleClassifiers::SignalInstance>&) = 0;
 
 			//*********************************
 			// Union Reference Getters

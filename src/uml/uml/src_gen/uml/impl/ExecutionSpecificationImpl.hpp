@@ -55,7 +55,7 @@ namespace uml
 			start.covered = finish.covered
 			*/
 			 
-			virtual bool same_lifeline(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
+			virtual bool same_lifeline(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context) ;
 			
 			//*********************************
 			// Attribute Getters & Setters
@@ -69,25 +69,25 @@ namespace uml
 			<p>From package UML::Interactions.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::OccurrenceSpecification> getFinish() const ;
+			virtual const std::shared_ptr<uml::OccurrenceSpecification>& getFinish() const ;
 			/*!
 			References the OccurrenceSpecification that designates the finish of the Action or Behavior.
 			<p>From package UML::Interactions.</p>
 			*/
 			
-			virtual void setFinish(std::shared_ptr<uml::OccurrenceSpecification>) ;
+			virtual void setFinish(const std::shared_ptr<uml::OccurrenceSpecification>&) ;
 			/*!
 			References the OccurrenceSpecification that designates the start of the Action or Behavior.
 			<p>From package UML::Interactions.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::OccurrenceSpecification> getStart() const ;
+			virtual const std::shared_ptr<uml::OccurrenceSpecification>& getStart() const ;
 			/*!
 			References the OccurrenceSpecification that designates the start of the Action or Behavior.
 			<p>From package UML::Interactions.</p>
 			*/
 			
-			virtual void setStart(std::shared_ptr<uml::OccurrenceSpecification>) ;
+			virtual void setStart(const std::shared_ptr<uml::OccurrenceSpecification>&) ;
 			
 			//*********************************
 			// Union Reference Getters
@@ -127,19 +127,19 @@ namespace uml
 			virtual void saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const;
 
 		protected:
-			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
+			virtual const std::shared_ptr<ecore::EClass>& eStaticClass() const;
 
 			//*********************************
 			// EStructuralFeature Get/Set/IsSet
 			//*********************************
 			virtual Any eGet(int featureID, bool resolve, bool coreType) const ;
-			virtual bool eSet(int featureID, Any newValue) ;
+			virtual bool eSet(int featureID, const Any& newValue) ;
 			virtual bool internalEIsSet(int featureID) const ;
 
 			//*********************************
 			// EOperation Invoke
 			//*********************************
-			virtual Any eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments) ;
+			virtual Any eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments) ;
 
 		private:
 			std::weak_ptr<uml::ExecutionSpecification> m_thisExecutionSpecificationPtr;

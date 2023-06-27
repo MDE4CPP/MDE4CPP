@@ -207,7 +207,7 @@ std::shared_ptr<ecore::EObject> RealLiteralExpImpl::copy() const
 // Attribute Getters & Setters
 //*********************************
 /* Getter & Setter for attribute realSymbol */
-int RealLiteralExpImpl::getRealSymbol() const 
+int RealLiteralExpImpl::getRealSymbol() const
 {
 	return m_realSymbol;
 }
@@ -383,7 +383,7 @@ void RealLiteralExpImpl::saveContent(std::shared_ptr<persistence::interfaces::XS
 	}
 }
 
-std::shared_ptr<ecore::EClass> RealLiteralExpImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& RealLiteralExpImpl::eStaticClass() const
 {
 	return ocl::Expressions::ExpressionsPackage::eInstance()->getRealLiteralExp_Class();
 }
@@ -411,7 +411,7 @@ bool RealLiteralExpImpl::internalEIsSet(int featureID) const
 	return NumericLiteralExpImpl::internalEIsSet(featureID);
 }
 
-bool RealLiteralExpImpl::eSet(int featureID, Any newValue)
+bool RealLiteralExpImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -430,7 +430,7 @@ bool RealLiteralExpImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any RealLiteralExpImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any RealLiteralExpImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

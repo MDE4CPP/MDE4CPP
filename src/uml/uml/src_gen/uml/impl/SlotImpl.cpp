@@ -162,11 +162,11 @@ std::shared_ptr<ecore::EObject> SlotImpl::copy() const
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference definingFeature */
-std::shared_ptr<uml::StructuralFeature> SlotImpl::getDefiningFeature() const
+const std::shared_ptr<uml::StructuralFeature>& SlotImpl::getDefiningFeature() const
 {
     return m_definingFeature;
 }
-void SlotImpl::setDefiningFeature(std::shared_ptr<uml::StructuralFeature> _definingFeature)
+void SlotImpl::setDefiningFeature(const std::shared_ptr<uml::StructuralFeature>& _definingFeature)
 {
     m_definingFeature = _definingFeature;
 	
@@ -184,7 +184,7 @@ void SlotImpl::setOwningInstance(std::weak_ptr<uml::InstanceSpecification> _owni
 }
 
 /* Getter & Setter for reference value */
-std::shared_ptr<Subset<uml::ValueSpecification, uml::Element>> SlotImpl::getValue() const
+const std::shared_ptr<Subset<uml::ValueSpecification, uml::Element>>& SlotImpl::getValue() const
 {
 	if(m_value == nullptr)
 	{
@@ -379,7 +379,7 @@ void SlotImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler
 	}
 }
 
-std::shared_ptr<ecore::EClass> SlotImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& SlotImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getSlot_Class();
 }
@@ -418,7 +418,7 @@ bool SlotImpl::internalEIsSet(int featureID) const
 	return ElementImpl::internalEIsSet(featureID);
 }
 
-bool SlotImpl::eSet(int featureID, Any newValue)
+bool SlotImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -483,7 +483,7 @@ bool SlotImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any SlotImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any SlotImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

@@ -94,7 +94,7 @@ namespace uml
 			Creates a property with the specified name, type, lower bound, and upper bound as an owned attribute of this signal.
 			*/
 			 
-			virtual std::shared_ptr<uml::Property> createOwnedAttribute(std::string name,std::shared_ptr<uml::Type> type,int lower,int upper) = 0;
+			virtual std::shared_ptr<uml::Property> createOwnedAttribute(std::string name, const std::shared_ptr<uml::Type>& type, int lower, int upper) = 0;
 
 			//*********************************
 			// Attribute Getters & Setters
@@ -108,7 +108,7 @@ namespace uml
 			<p>From package UML::SimpleClassifiers.</p>
 			*/
 			
-			virtual std::shared_ptr<Subset<uml::Property, uml::NamedElement, uml::Property>> getOwnedAttribute() const = 0;
+			virtual const std::shared_ptr<Subset<uml::Property, uml::NamedElement, uml::Property>>& getOwnedAttribute() const = 0;
 
 			//*********************************
 			// Union Reference Getters

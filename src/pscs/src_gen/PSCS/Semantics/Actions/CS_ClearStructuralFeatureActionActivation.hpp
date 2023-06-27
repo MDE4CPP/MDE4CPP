@@ -95,8 +95,8 @@ namespace PSCS::Semantics::Actions
 			// Operations
 			//*********************************
 			virtual void doAction() = 0;
-			virtual std::shared_ptr<Bag<PSCS::Semantics::StructuredClassifiers::CS_Link> > getLinksToDestroy(std::shared_ptr<fUML::Semantics::SimpleClassifiers::StructuredValue> value,std::shared_ptr<uml::StructuralFeature> feature) = 0;
-			virtual std::shared_ptr<Bag<fUML::Semantics::Values::Value> > getPotentialLinkEnds(std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Reference> context,std::shared_ptr<uml::StructuralFeature> feature) = 0;
+			virtual std::shared_ptr<Bag<PSCS::Semantics::StructuredClassifiers::CS_Link> > getLinksToDestroy(const std::shared_ptr<fUML::Semantics::SimpleClassifiers::StructuredValue>& value, const std::shared_ptr<uml::StructuralFeature>& feature) = 0;
+			virtual std::shared_ptr<Bag<fUML::Semantics::Values::Value> > getPotentialLinkEnds(const std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Reference>& context, const std::shared_ptr<uml::StructuralFeature>& feature) = 0;
 
 			//*********************************
 			// Attribute Getters & Setters

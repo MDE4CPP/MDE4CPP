@@ -87,12 +87,12 @@ namespace uml
 			The dynamic variables that take part in the constraint must be owned by the ConnectableElement corresponding to the covered Lifeline.
 			*/
 			 
-			virtual bool dynamic_variables(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
+			virtual bool dynamic_variables(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context) = 0;
 			/*!
 			The constraint may contain references to global data or write-once data.
 			*/
 			 
-			virtual bool global_data(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
+			virtual bool global_data(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context) = 0;
 			/*!
 			If maxint is specified, then minint must be specified and the evaluation of maxint must be >= the evaluation of minint.
 			maxint->notEmpty() implies (minint->notEmpty() and 
@@ -100,14 +100,14 @@ namespace uml
 			minint->asSequence()->first().integerValue() )
 			*/
 			 
-			virtual bool maxint_greater_equal_minint(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
+			virtual bool maxint_greater_equal_minint(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context) = 0;
 			/*!
 			If maxint is specified, then the expression must evaluate to a positive integer.
 			maxint->notEmpty() implies 
 			maxint->asSequence()->first().integerValue() > 0
 			*/
 			 
-			virtual bool maxint_positive(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
+			virtual bool maxint_positive(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context) = 0;
 			/*!
 			Minint/maxint can only be present if the InteractionConstraint is associated with the operand of a loop CombinedFragment.
 			maxint->notEmpty() or minint->notEmpty() implies
@@ -115,14 +115,14 @@ namespace uml
 			InteractionOperatorKind::loop
 			*/
 			 
-			virtual bool minint_maxint(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
+			virtual bool minint_maxint(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context) = 0;
 			/*!
 			If minint is specified, then the expression must evaluate to a non-negative integer.
 			minint->notEmpty() implies 
 			minint->asSequence()->first().integerValue() >= 0
 			*/
 			 
-			virtual bool minint_non_negative(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
+			virtual bool minint_non_negative(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context) = 0;
 
 			//*********************************
 			// Attribute Getters & Setters
@@ -136,25 +136,25 @@ namespace uml
 			<p>From package UML::Interactions.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::ValueSpecification> getMaxint() const = 0;
+			virtual const std::shared_ptr<uml::ValueSpecification>& getMaxint() const = 0;
 			/*!
 			The maximum number of iterations of a loop
 			<p>From package UML::Interactions.</p>
 			*/
 			
-			virtual void setMaxint(std::shared_ptr<uml::ValueSpecification>) = 0;
+			virtual void setMaxint(const std::shared_ptr<uml::ValueSpecification>&) = 0;
 			/*!
 			The minimum number of iterations of a loop
 			<p>From package UML::Interactions.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::ValueSpecification> getMinint() const = 0;
+			virtual const std::shared_ptr<uml::ValueSpecification>& getMinint() const = 0;
 			/*!
 			The minimum number of iterations of a loop
 			<p>From package UML::Interactions.</p>
 			*/
 			
-			virtual void setMinint(std::shared_ptr<uml::ValueSpecification>) = 0;
+			virtual void setMinint(const std::shared_ptr<uml::ValueSpecification>&) = 0;
 
 			//*********************************
 			// Union Reference Getters

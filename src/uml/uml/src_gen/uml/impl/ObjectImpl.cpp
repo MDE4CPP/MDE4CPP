@@ -103,22 +103,22 @@ std::shared_ptr<ecore::EObject> ObjectImpl::copy() const
 //*********************************
 // Operations
 //*********************************
-Any ObjectImpl::get(std::shared_ptr<uml::Property> property) const
+Any ObjectImpl::get(const std::shared_ptr<uml::Property>& property) const
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-std::shared_ptr<Bag<uml::Object> > ObjectImpl::invoke(std::shared_ptr<uml::Operation> op,std::shared_ptr<Bag<uml::Argument>> arguments)
+std::shared_ptr<Bag<uml::Object> > ObjectImpl::invoke(const std::shared_ptr<uml::Operation>& op, const std::shared_ptr<Bag<uml::Argument>>& arguments)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-void ObjectImpl::set(std::shared_ptr<uml::Property> property,Any value)
+void ObjectImpl::set(const std::shared_ptr<uml::Property>& property, const Any& value)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-void ObjectImpl::unset(std::shared_ptr<uml::Property> property)
+void ObjectImpl::unset(const std::shared_ptr<uml::Property>& property)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -198,7 +198,7 @@ void ObjectImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandl
 	}
 }
 
-std::shared_ptr<ecore::EClass> ObjectImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& ObjectImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getObject_Class();
 }
@@ -222,7 +222,7 @@ bool ObjectImpl::internalEIsSet(int featureID) const
 	return ecore::EObjectImpl::internalEIsSet(featureID);
 }
 
-bool ObjectImpl::eSet(int featureID, Any newValue)
+bool ObjectImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -234,7 +234,7 @@ bool ObjectImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any ObjectImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any ObjectImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

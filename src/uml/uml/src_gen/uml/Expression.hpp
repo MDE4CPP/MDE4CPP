@@ -107,7 +107,7 @@ namespace uml
 			<p>From package UML::Values.</p>
 			*/
 			
-			virtual std::shared_ptr<Subset<uml::ValueSpecification, uml::Element>> getOperand() const = 0;
+			virtual const std::shared_ptr<Subset<uml::ValueSpecification, uml::Element>>& getOperand() const = 0;
 
 			//*********************************
 			// Union Reference Getters

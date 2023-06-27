@@ -153,7 +153,7 @@ std::shared_ptr<ecore::EObject> TimeConstraintImpl::copy() const
 //*********************************
 // Operations
 //*********************************
-bool TimeConstraintImpl::has_one_constrainedElement(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool TimeConstraintImpl::has_one_constrainedElement(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -162,7 +162,7 @@ bool TimeConstraintImpl::has_one_constrainedElement(Any diagnostics,std::shared_
 // Attribute Getters & Setters
 //*********************************
 /* Getter & Setter for attribute firstEvent */
-bool TimeConstraintImpl::getFirstEvent() const 
+bool TimeConstraintImpl::getFirstEvent() const
 {
 	return m_firstEvent;
 }
@@ -333,7 +333,7 @@ void TimeConstraintImpl::saveContent(std::shared_ptr<persistence::interfaces::XS
 	}
 }
 
-std::shared_ptr<ecore::EClass> TimeConstraintImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& TimeConstraintImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getTimeConstraint_Class();
 }
@@ -361,7 +361,7 @@ bool TimeConstraintImpl::internalEIsSet(int featureID) const
 	return IntervalConstraintImpl::internalEIsSet(featureID);
 }
 
-bool TimeConstraintImpl::eSet(int featureID, Any newValue)
+bool TimeConstraintImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -380,7 +380,7 @@ bool TimeConstraintImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any TimeConstraintImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any TimeConstraintImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

@@ -126,22 +126,22 @@ std::shared_ptr<ecore::EObject> ConnectorEndImpl::copy() const
 //*********************************
 
 
-bool ConnectorEndImpl::multiplicity(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool ConnectorEndImpl::multiplicity(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool ConnectorEndImpl::part_with_port_empty(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool ConnectorEndImpl::part_with_port_empty(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool ConnectorEndImpl::role_and_part_with_port(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool ConnectorEndImpl::role_and_part_with_port(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool ConnectorEndImpl::self_part_with_port(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool ConnectorEndImpl::self_part_with_port(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -165,28 +165,28 @@ void ConnectorEndImpl::setConnector(std::weak_ptr<uml::Connector> _connector)
 }
 
 /* Getter & Setter for reference definingEnd */
-std::shared_ptr<uml::Property> ConnectorEndImpl::getDefiningEnd() const
+const std::shared_ptr<uml::Property>& ConnectorEndImpl::getDefiningEnd() const
 {
     return m_definingEnd;
 }
 
 /* Getter & Setter for reference partWithPort */
-std::shared_ptr<uml::Property> ConnectorEndImpl::getPartWithPort() const
+const std::shared_ptr<uml::Property>& ConnectorEndImpl::getPartWithPort() const
 {
     return m_partWithPort;
 }
-void ConnectorEndImpl::setPartWithPort(std::shared_ptr<uml::Property> _partWithPort)
+void ConnectorEndImpl::setPartWithPort(const std::shared_ptr<uml::Property>& _partWithPort)
 {
     m_partWithPort = _partWithPort;
 	
 }
 
 /* Getter & Setter for reference role */
-std::shared_ptr<uml::ConnectableElement> ConnectorEndImpl::getRole() const
+const std::shared_ptr<uml::ConnectableElement>& ConnectorEndImpl::getRole() const
 {
     return m_role;
 }
-void ConnectorEndImpl::setRole(std::shared_ptr<uml::ConnectableElement> _role)
+void ConnectorEndImpl::setRole(const std::shared_ptr<uml::ConnectableElement>& _role)
 {
     m_role = _role;
 	
@@ -356,7 +356,7 @@ void ConnectorEndImpl::saveContent(std::shared_ptr<persistence::interfaces::XSav
 	}
 }
 
-std::shared_ptr<ecore::EClass> ConnectorEndImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& ConnectorEndImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getConnectorEnd_Class();
 }
@@ -399,7 +399,7 @@ bool ConnectorEndImpl::internalEIsSet(int featureID) const
 	return MultiplicityElementImpl::internalEIsSet(featureID);
 }
 
-bool ConnectorEndImpl::eSet(int featureID, Any newValue)
+bool ConnectorEndImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -435,7 +435,7 @@ bool ConnectorEndImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any ConnectorEndImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any ConnectorEndImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

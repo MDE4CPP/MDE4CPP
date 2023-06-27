@@ -100,18 +100,18 @@ namespace uml
 			memberEnd->size() > 2 implies ownedEnd->includesAll(memberEnd)
 			*/
 			 
-			virtual bool association_ends(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
+			virtual bool association_ends(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context) = 0;
 			/*!
 			Only binary Associations can be aggregations.
 			memberEnd->exists(aggregation <> AggregationKind::none) implies (memberEnd->size() = 2 and memberEnd->exists(aggregation = AggregationKind::none))
 			*/
 			 
-			virtual bool binary_associations(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
+			virtual bool binary_associations(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context) = 0;
 			/*!
 			memberEnd->forAll(type->notEmpty())
 			*/
 			 
-			virtual bool ends_must_be_typed(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
+			virtual bool ends_must_be_typed(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context) = 0;
 			/*!
 			endType is derived from the types of the member ends.
 			result = (memberEnd->collect(type)->asSet())
@@ -129,7 +129,7 @@ namespace uml
 			parents()->select(oclIsKindOf(Association)).oclAsType(Association)->forAll(p | p.memberEnd->size() = self.memberEnd->size())
 			*/
 			 
-			virtual bool specialized_end_number(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
+			virtual bool specialized_end_number(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context) = 0;
 			/*!
 			When an Association specializes another Association, every end of the specific Association corresponds to an end of the general Association, and the specific end reaches the same type or a subtype of the corresponding general end.
 			Sequence{1..memberEnd->size()}->
@@ -137,7 +137,7 @@ namespace uml
 					forAll(ga | self.memberEnd->at(i).type.conformsTo(ga.memberEnd->at(i).type)))
 			*/
 			 
-			virtual bool specialized_end_types(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
+			virtual bool specialized_end_types(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context) = 0;
 
 			//*********************************
 			// Attribute Getters & Setters
@@ -163,25 +163,25 @@ namespace uml
 			<p>From package UML::StructuredClassifiers.</p>
 			*/
 			
-			virtual std::shared_ptr<Subset<uml::Type, uml::Element>> getEndType() const = 0;
+			virtual const std::shared_ptr<Subset<uml::Type, uml::Element>>& getEndType() const = 0;
 			/*!
 			Each end represents participation of instances of the Classifier connected to the end in links of the Association.
 			<p>From package UML::StructuredClassifiers.</p>
 			*/
 			
-			virtual std::shared_ptr<SubsetUnion<uml::Property, uml::NamedElement>> getMemberEnd() const = 0;
+			virtual const std::shared_ptr<SubsetUnion<uml::Property, uml::NamedElement>>& getMemberEnd() const = 0;
 			/*!
 			The navigable ends that are owned by the Association itself.
 			<p>From package UML::StructuredClassifiers.</p>
 			*/
 			
-			virtual std::shared_ptr<Subset<uml::Property, uml::Property /*Subset does not reference a union*/>> getNavigableOwnedEnd() const = 0;
+			virtual const std::shared_ptr<Subset<uml::Property, uml::Property /*Subset does not reference a union*/>>& getNavigableOwnedEnd() const = 0;
 			/*!
 			The ends that are owned by the Association itself.
 			<p>From package UML::StructuredClassifiers.</p>
 			*/
 			
-			virtual std::shared_ptr<SubsetUnion<uml::Property, uml::Feature, uml::NamedElement, uml::Property /*Subset does not reference a union*/>> getOwnedEnd() const = 0;
+			virtual const std::shared_ptr<SubsetUnion<uml::Property, uml::Feature, uml::NamedElement, uml::Property /*Subset does not reference a union*/>>& getOwnedEnd() const = 0;
 
 			//*********************************
 			// Union Reference Getters

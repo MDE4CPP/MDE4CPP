@@ -216,7 +216,7 @@ void RelationshipImpl::saveContent(std::shared_ptr<persistence::interfaces::XSav
 	}
 }
 
-std::shared_ptr<ecore::EClass> RelationshipImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& RelationshipImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getRelationship_Class();
 }
@@ -244,7 +244,7 @@ bool RelationshipImpl::internalEIsSet(int featureID) const
 	return ElementImpl::internalEIsSet(featureID);
 }
 
-bool RelationshipImpl::eSet(int featureID, Any newValue)
+bool RelationshipImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -256,7 +256,7 @@ bool RelationshipImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any RelationshipImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any RelationshipImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

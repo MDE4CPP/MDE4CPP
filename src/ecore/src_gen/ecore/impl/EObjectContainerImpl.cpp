@@ -108,7 +108,7 @@ std::shared_ptr<ecore::EObject> EObjectContainerImpl::copy() const
 //*********************************
 // Operations
 //*********************************
-void EObjectContainerImpl::setContainer(std::shared_ptr<Bag<ecore::EObject>> container)
+void EObjectContainerImpl::setContainer(const std::shared_ptr<Bag<ecore::EObject>>& container)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -124,7 +124,7 @@ void EObjectContainerImpl::setContainer(std::shared_ptr<Bag<ecore::EObject>> con
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference container */
-std::shared_ptr<Bag<ecore::EObject>> EObjectContainerImpl::getContainer() const
+const std::shared_ptr<Bag<ecore::EObject>>& EObjectContainerImpl::getContainer() const
 {
 	if(m_container == nullptr)
 	{
@@ -208,7 +208,7 @@ void EObjectContainerImpl::resolveReferences(const int featureID, std::vector<st
 	{
 		case ecore::ecorePackage::EOBJECTCONTAINER_ATTRIBUTE_CONTAINER:
 		{
-			std::shared_ptr<Bag<ecore::EObject>> _container = getContainer();
+			const std::shared_ptr<Bag<ecore::EObject>>& _container = getContainer();
 			for(std::shared_ptr<ecore::EObject> ref : references)
 			{
 				std::shared_ptr<ecore::EObject>  _r = std::dynamic_pointer_cast<ecore::EObject>(ref);
@@ -246,7 +246,7 @@ void EObjectContainerImpl::saveContent(std::shared_ptr<persistence::interfaces::
 	}
 }
 
-std::shared_ptr<EClass> EObjectContainerImpl::eStaticClass() const
+const std::shared_ptr<EClass>& EObjectContainerImpl::eStaticClass() const
 {
 	return ecore::ecorePackage::eInstance()->getEObjectContainer_Class();
 }
@@ -274,7 +274,7 @@ bool EObjectContainerImpl::internalEIsSet(int featureID) const
 	return EObjectImpl::internalEIsSet(featureID);
 }
 
-bool EObjectContainerImpl::eSet(int featureID, Any newValue)
+bool EObjectContainerImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -323,7 +323,7 @@ bool EObjectContainerImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any EObjectContainerImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any EObjectContainerImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

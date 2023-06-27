@@ -97,7 +97,7 @@ namespace uml
 			onPort=null
 			*/
 			 
-			virtual bool no_onport(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
+			virtual bool no_onport(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context) = 0;
 
 			//*********************************
 			// Attribute Getters & Setters
@@ -111,13 +111,13 @@ namespace uml
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::Behavior> getBehavior() const = 0;
+			virtual const std::shared_ptr<uml::Behavior>& getBehavior() const = 0;
 			/*!
 			The Behavior being invoked.
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual void setBehavior(std::shared_ptr<uml::Behavior>) = 0;
+			virtual void setBehavior(const std::shared_ptr<uml::Behavior>&) = 0;
 
 			//*********************************
 			// Union Reference Getters

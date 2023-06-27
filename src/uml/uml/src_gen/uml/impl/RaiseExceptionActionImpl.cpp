@@ -164,11 +164,11 @@ std::shared_ptr<ecore::EObject> RaiseExceptionActionImpl::copy() const
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference exception */
-std::shared_ptr<uml::InputPin> RaiseExceptionActionImpl::getException() const
+const std::shared_ptr<uml::InputPin>& RaiseExceptionActionImpl::getException() const
 {
     return m_exception;
 }
-void RaiseExceptionActionImpl::setException(std::shared_ptr<uml::InputPin> _exception)
+void RaiseExceptionActionImpl::setException(const std::shared_ptr<uml::InputPin>& _exception)
 {
     m_exception = _exception;
 	
@@ -372,7 +372,7 @@ void RaiseExceptionActionImpl::saveContent(std::shared_ptr<persistence::interfac
 	}
 }
 
-std::shared_ptr<ecore::EClass> RaiseExceptionActionImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& RaiseExceptionActionImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getRaiseExceptionAction_Class();
 }
@@ -400,7 +400,7 @@ bool RaiseExceptionActionImpl::internalEIsSet(int featureID) const
 	return ActionImpl::internalEIsSet(featureID);
 }
 
-bool RaiseExceptionActionImpl::eSet(int featureID, Any newValue)
+bool RaiseExceptionActionImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -420,7 +420,7 @@ bool RaiseExceptionActionImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any RaiseExceptionActionImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any RaiseExceptionActionImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

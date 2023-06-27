@@ -283,17 +283,17 @@ std::shared_ptr<ecore::EObject> AssociationImpl::copy() const
 //*********************************
 // Operations
 //*********************************
-bool AssociationImpl::association_ends(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool AssociationImpl::association_ends(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool AssociationImpl::binary_associations(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool AssociationImpl::binary_associations(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool AssociationImpl::ends_must_be_typed(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool AssociationImpl::ends_must_be_typed(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -308,12 +308,12 @@ bool AssociationImpl::isBinary()
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool AssociationImpl::specialized_end_number(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool AssociationImpl::specialized_end_number(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool AssociationImpl::specialized_end_types(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool AssociationImpl::specialized_end_types(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -322,7 +322,7 @@ bool AssociationImpl::specialized_end_types(Any diagnostics,std::shared_ptr<std:
 // Attribute Getters & Setters
 //*********************************
 /* Getter & Setter for attribute isDerived */
-bool AssociationImpl::getIsDerived() const 
+bool AssociationImpl::getIsDerived() const
 {
 	return m_isDerived;
 }
@@ -336,7 +336,7 @@ void AssociationImpl::setIsDerived(bool _isDerived)
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference endType */
-std::shared_ptr<Subset<uml::Type, uml::Element>> AssociationImpl::getEndType() const
+const std::shared_ptr<Subset<uml::Type, uml::Element>>& AssociationImpl::getEndType() const
 {
 	if(m_endType == nullptr)
 	{
@@ -357,7 +357,7 @@ std::shared_ptr<Subset<uml::Type, uml::Element>> AssociationImpl::getEndType() c
 }
 
 /* Getter & Setter for reference memberEnd */
-std::shared_ptr<SubsetUnion<uml::Property, uml::NamedElement>> AssociationImpl::getMemberEnd() const
+const std::shared_ptr<SubsetUnion<uml::Property, uml::NamedElement>>& AssociationImpl::getMemberEnd() const
 {
 	if(m_memberEnd == nullptr)
 	{
@@ -378,7 +378,7 @@ std::shared_ptr<SubsetUnion<uml::Property, uml::NamedElement>> AssociationImpl::
 }
 
 /* Getter & Setter for reference navigableOwnedEnd */
-std::shared_ptr<Subset<uml::Property, uml::Property /*Subset does not reference a union*/>> AssociationImpl::getNavigableOwnedEnd() const
+const std::shared_ptr<Subset<uml::Property, uml::Property /*Subset does not reference a union*/>>& AssociationImpl::getNavigableOwnedEnd() const
 {
 	if(m_navigableOwnedEnd == nullptr)
 	{
@@ -399,7 +399,7 @@ std::shared_ptr<Subset<uml::Property, uml::Property /*Subset does not reference 
 }
 
 /* Getter & Setter for reference ownedEnd */
-std::shared_ptr<SubsetUnion<uml::Property, uml::Feature, uml::NamedElement, uml::Property /*Subset does not reference a union*/>> AssociationImpl::getOwnedEnd() const
+const std::shared_ptr<SubsetUnion<uml::Property, uml::Feature, uml::NamedElement, uml::Property /*Subset does not reference a union*/>>& AssociationImpl::getOwnedEnd() const
 {
 	if(m_ownedEnd == nullptr)
 	{
@@ -746,7 +746,7 @@ void AssociationImpl::saveContent(std::shared_ptr<persistence::interfaces::XSave
 	}
 }
 
-std::shared_ptr<ecore::EClass> AssociationImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& AssociationImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getAssociation_Class();
 }
@@ -804,7 +804,7 @@ bool AssociationImpl::internalEIsSet(int featureID) const
 	return result;
 }
 
-bool AssociationImpl::eSet(int featureID, Any newValue)
+bool AssociationImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -941,7 +941,7 @@ bool AssociationImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any AssociationImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any AssociationImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

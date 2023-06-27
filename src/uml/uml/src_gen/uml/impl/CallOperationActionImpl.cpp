@@ -158,7 +158,7 @@ std::shared_ptr<ecore::EObject> CallOperationActionImpl::copy() const
 //*********************************
 // Operations
 //*********************************
-bool CallOperationActionImpl::type_target_pin(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool CallOperationActionImpl::type_target_pin(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -171,22 +171,22 @@ bool CallOperationActionImpl::type_target_pin(Any diagnostics,std::shared_ptr<st
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference operation */
-std::shared_ptr<uml::Operation> CallOperationActionImpl::getOperation() const
+const std::shared_ptr<uml::Operation>& CallOperationActionImpl::getOperation() const
 {
     return m_operation;
 }
-void CallOperationActionImpl::setOperation(std::shared_ptr<uml::Operation> _operation)
+void CallOperationActionImpl::setOperation(const std::shared_ptr<uml::Operation>& _operation)
 {
     m_operation = _operation;
 	
 }
 
 /* Getter & Setter for reference target */
-std::shared_ptr<uml::InputPin> CallOperationActionImpl::getTarget() const
+const std::shared_ptr<uml::InputPin>& CallOperationActionImpl::getTarget() const
 {
     return m_target;
 }
-void CallOperationActionImpl::setTarget(std::shared_ptr<uml::InputPin> _target)
+void CallOperationActionImpl::setTarget(const std::shared_ptr<uml::InputPin>& _target)
 {
     m_target = _target;
 	
@@ -449,7 +449,7 @@ void CallOperationActionImpl::saveContent(std::shared_ptr<persistence::interface
 	}
 }
 
-std::shared_ptr<ecore::EClass> CallOperationActionImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& CallOperationActionImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getCallOperationAction_Class();
 }
@@ -481,7 +481,7 @@ bool CallOperationActionImpl::internalEIsSet(int featureID) const
 	return CallActionImpl::internalEIsSet(featureID);
 }
 
-bool CallOperationActionImpl::eSet(int featureID, Any newValue)
+bool CallOperationActionImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -509,7 +509,7 @@ bool CallOperationActionImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any CallOperationActionImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any CallOperationActionImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

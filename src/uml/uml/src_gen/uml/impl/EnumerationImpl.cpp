@@ -201,7 +201,7 @@ std::shared_ptr<ecore::EObject> EnumerationImpl::copy() const
 //*********************************
 // Operations
 //*********************************
-bool EnumerationImpl::immutable(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool EnumerationImpl::immutable(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -214,7 +214,7 @@ bool EnumerationImpl::immutable(Any diagnostics,std::shared_ptr<std::map < Any, 
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference ownedLiteral */
-std::shared_ptr<Subset<uml::EnumerationLiteral, uml::NamedElement>> EnumerationImpl::getOwnedLiteral() const
+const std::shared_ptr<Subset<uml::EnumerationLiteral, uml::NamedElement>>& EnumerationImpl::getOwnedLiteral() const
 {
 	if(m_ownedLiteral == nullptr)
 	{
@@ -487,7 +487,7 @@ void EnumerationImpl::saveContent(std::shared_ptr<persistence::interfaces::XSave
 	}
 }
 
-std::shared_ptr<ecore::EClass> EnumerationImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& EnumerationImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getEnumeration_Class();
 }
@@ -515,7 +515,7 @@ bool EnumerationImpl::internalEIsSet(int featureID) const
 	return DataTypeImpl::internalEIsSet(featureID);
 }
 
-bool EnumerationImpl::eSet(int featureID, Any newValue)
+bool EnumerationImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -564,7 +564,7 @@ bool EnumerationImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any EnumerationImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any EnumerationImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

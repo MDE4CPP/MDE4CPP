@@ -161,7 +161,7 @@ std::shared_ptr<ecore::EObject> EAnnotationImpl::copy() const
 // Attribute Getters & Setters
 //*********************************
 /* Getter & Setter for attribute details */
-std::shared_ptr<std::map < std::string, std::string>> EAnnotationImpl::getDetails() const 
+std::shared_ptr<std::map < std::string, std::string>> EAnnotationImpl::getDetails() const
 {
 	return m_details;
 }
@@ -172,7 +172,7 @@ void EAnnotationImpl::setDetails(std::shared_ptr<std::map < std::string, std::st
 }
 
 /* Getter & Setter for attribute source */
-std::string EAnnotationImpl::getSource() const 
+std::string EAnnotationImpl::getSource() const
 {
 	return m_source;
 }
@@ -186,7 +186,7 @@ void EAnnotationImpl::setSource(std::string _source)
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference contents */
-std::shared_ptr<Subset<ecore::EObject, ecore::EObject>> EAnnotationImpl::getContents() const
+const std::shared_ptr<Subset<ecore::EObject, ecore::EObject>>& EAnnotationImpl::getContents() const
 {
 	if(m_contents == nullptr)
 	{
@@ -218,7 +218,7 @@ void EAnnotationImpl::setEModelElement(std::weak_ptr<ecore::EModelElement> _eMod
 }
 
 /* Getter & Setter for reference references */
-std::shared_ptr<Bag<ecore::EObject>> EAnnotationImpl::getReferences() const
+const std::shared_ptr<Bag<ecore::EObject>>& EAnnotationImpl::getReferences() const
 {
 	if(m_references == nullptr)
 	{
@@ -364,7 +364,7 @@ void EAnnotationImpl::resolveReferences(const int featureID, std::vector<std::sh
 
 		case ecore::ecorePackage::EANNOTATION_ATTRIBUTE_REFERENCES:
 		{
-			std::shared_ptr<Bag<ecore::EObject>> _references = getReferences();
+			const std::shared_ptr<Bag<ecore::EObject>>& _references = getReferences();
 			for(std::shared_ptr<ecore::EObject> ref : references)
 			{
 				std::shared_ptr<ecore::EObject>  _r = std::dynamic_pointer_cast<ecore::EObject>(ref);
@@ -414,7 +414,7 @@ void EAnnotationImpl::saveContent(std::shared_ptr<persistence::interfaces::XSave
 	}
 }
 
-std::shared_ptr<EClass> EAnnotationImpl::eStaticClass() const
+const std::shared_ptr<EClass>& EAnnotationImpl::eStaticClass() const
 {
 	return ecore::ecorePackage::eInstance()->getEAnnotation_Class();
 }
@@ -461,7 +461,7 @@ bool EAnnotationImpl::internalEIsSet(int featureID) const
 	return EModelElementImpl::internalEIsSet(featureID);
 }
 
-bool EAnnotationImpl::eSet(int featureID, Any newValue)
+bool EAnnotationImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -570,7 +570,7 @@ bool EAnnotationImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any EAnnotationImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any EAnnotationImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

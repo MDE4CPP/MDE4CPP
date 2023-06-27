@@ -109,7 +109,7 @@ std::shared_ptr<ecore::EObject> NameTypeBindingImpl::copy() const
 // Attribute Getters & Setters
 //*********************************
 /* Getter & Setter for attribute name */
-std::string NameTypeBindingImpl::getName() const 
+std::string NameTypeBindingImpl::getName() const
 {
 	return m_name;
 }
@@ -123,11 +123,11 @@ void NameTypeBindingImpl::setName(std::string _name)
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference type */
-std::shared_ptr<ecore::EClassifier> NameTypeBindingImpl::getType() const
+const std::shared_ptr<ecore::EClassifier>& NameTypeBindingImpl::getType() const
 {
     return m_type;
 }
-void NameTypeBindingImpl::setType(std::shared_ptr<ecore::EClassifier> _type)
+void NameTypeBindingImpl::setType(const std::shared_ptr<ecore::EClassifier>& _type)
 {
     m_type = _type;
 	
@@ -249,7 +249,7 @@ void NameTypeBindingImpl::saveContent(std::shared_ptr<persistence::interfaces::X
 	}
 }
 
-std::shared_ptr<ecore::EClass> NameTypeBindingImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& NameTypeBindingImpl::eStaticClass() const
 {
 	return ocl::Types::TypesPackage::eInstance()->getNameTypeBinding_Class();
 }
@@ -281,7 +281,7 @@ bool NameTypeBindingImpl::internalEIsSet(int featureID) const
 	return ecore::EObjectImpl::internalEIsSet(featureID);
 }
 
-bool NameTypeBindingImpl::eSet(int featureID, Any newValue)
+bool NameTypeBindingImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -308,7 +308,7 @@ bool NameTypeBindingImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any NameTypeBindingImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any NameTypeBindingImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

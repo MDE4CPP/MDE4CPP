@@ -141,12 +141,12 @@ std::shared_ptr<uml::Activity> ActivityGroupImpl::containingActivity()
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool ActivityGroupImpl::nodes_and_edges(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool ActivityGroupImpl::nodes_and_edges(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool ActivityGroupImpl::not_contained(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool ActivityGroupImpl::not_contained(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -388,7 +388,7 @@ void ActivityGroupImpl::saveContent(std::shared_ptr<persistence::interfaces::XSa
 	}
 }
 
-std::shared_ptr<ecore::EClass> ActivityGroupImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& ActivityGroupImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getActivityGroup_Class();
 }
@@ -438,7 +438,7 @@ bool ActivityGroupImpl::internalEIsSet(int featureID) const
 	return NamedElementImpl::internalEIsSet(featureID);
 }
 
-bool ActivityGroupImpl::eSet(int featureID, Any newValue)
+bool ActivityGroupImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -458,7 +458,7 @@ bool ActivityGroupImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any ActivityGroupImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any ActivityGroupImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

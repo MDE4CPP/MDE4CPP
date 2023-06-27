@@ -158,17 +158,17 @@ std::shared_ptr<ecore::EObject> SendSignalActionImpl::copy() const
 //*********************************
 // Operations
 //*********************************
-bool SendSignalActionImpl::number_order(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool SendSignalActionImpl::number_order(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool SendSignalActionImpl::type_ordering_multiplicity(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool SendSignalActionImpl::type_ordering_multiplicity(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool SendSignalActionImpl::type_target_pin(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool SendSignalActionImpl::type_target_pin(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -181,22 +181,22 @@ bool SendSignalActionImpl::type_target_pin(Any diagnostics,std::shared_ptr<std::
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference signal */
-std::shared_ptr<uml::Signal> SendSignalActionImpl::getSignal() const
+const std::shared_ptr<uml::Signal>& SendSignalActionImpl::getSignal() const
 {
     return m_signal;
 }
-void SendSignalActionImpl::setSignal(std::shared_ptr<uml::Signal> _signal)
+void SendSignalActionImpl::setSignal(const std::shared_ptr<uml::Signal>& _signal)
 {
     m_signal = _signal;
 	
 }
 
 /* Getter & Setter for reference target */
-std::shared_ptr<uml::InputPin> SendSignalActionImpl::getTarget() const
+const std::shared_ptr<uml::InputPin>& SendSignalActionImpl::getTarget() const
 {
     return m_target;
 }
-void SendSignalActionImpl::setTarget(std::shared_ptr<uml::InputPin> _target)
+void SendSignalActionImpl::setTarget(const std::shared_ptr<uml::InputPin>& _target)
 {
     m_target = _target;
 	
@@ -437,7 +437,7 @@ void SendSignalActionImpl::saveContent(std::shared_ptr<persistence::interfaces::
 	}
 }
 
-std::shared_ptr<ecore::EClass> SendSignalActionImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& SendSignalActionImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getSendSignalAction_Class();
 }
@@ -469,7 +469,7 @@ bool SendSignalActionImpl::internalEIsSet(int featureID) const
 	return InvocationActionImpl::internalEIsSet(featureID);
 }
 
-bool SendSignalActionImpl::eSet(int featureID, Any newValue)
+bool SendSignalActionImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -497,7 +497,7 @@ bool SendSignalActionImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any SendSignalActionImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any SendSignalActionImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

@@ -176,7 +176,7 @@ CallActionImpl& CallActionImpl::operator=(const CallActionImpl & obj)
 //*********************************
 // Operations
 //*********************************
-bool CallActionImpl::argument_pins(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool CallActionImpl::argument_pins(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -191,12 +191,12 @@ std::shared_ptr<Bag<uml::Parameter> > CallActionImpl::outputParameters()
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool CallActionImpl::result_pins(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool CallActionImpl::result_pins(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool CallActionImpl::synchronous_call(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool CallActionImpl::synchronous_call(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -205,7 +205,7 @@ bool CallActionImpl::synchronous_call(Any diagnostics,std::shared_ptr<std::map <
 // Attribute Getters & Setters
 //*********************************
 /* Getter & Setter for attribute isSynchronous */
-bool CallActionImpl::getIsSynchronous() const 
+bool CallActionImpl::getIsSynchronous() const
 {
 	return m_isSynchronous;
 }
@@ -219,7 +219,7 @@ void CallActionImpl::setIsSynchronous(bool _isSynchronous)
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference result */
-std::shared_ptr<Subset<uml::OutputPin, uml::OutputPin>> CallActionImpl::getResult() const
+const std::shared_ptr<Subset<uml::OutputPin, uml::OutputPin>>& CallActionImpl::getResult() const
 {
 	if(m_result == nullptr)
 	{
@@ -484,7 +484,7 @@ void CallActionImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveH
 	}
 }
 
-std::shared_ptr<ecore::EClass> CallActionImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& CallActionImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getCallAction_Class();
 }
@@ -516,7 +516,7 @@ bool CallActionImpl::internalEIsSet(int featureID) const
 	return InvocationActionImpl::internalEIsSet(featureID);
 }
 
-bool CallActionImpl::eSet(int featureID, Any newValue)
+bool CallActionImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -572,7 +572,7 @@ bool CallActionImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any CallActionImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any CallActionImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

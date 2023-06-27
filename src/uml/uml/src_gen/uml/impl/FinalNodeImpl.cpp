@@ -137,7 +137,7 @@ FinalNodeImpl& FinalNodeImpl::operator=(const FinalNodeImpl & obj)
 //*********************************
 // Operations
 //*********************************
-bool FinalNodeImpl::no_outgoing_edges(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool FinalNodeImpl::no_outgoing_edges(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -298,7 +298,7 @@ void FinalNodeImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHa
 	}
 }
 
-std::shared_ptr<ecore::EClass> FinalNodeImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& FinalNodeImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getFinalNode_Class();
 }
@@ -322,7 +322,7 @@ bool FinalNodeImpl::internalEIsSet(int featureID) const
 	return ControlNodeImpl::internalEIsSet(featureID);
 }
 
-bool FinalNodeImpl::eSet(int featureID, Any newValue)
+bool FinalNodeImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -334,7 +334,7 @@ bool FinalNodeImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any FinalNodeImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any FinalNodeImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

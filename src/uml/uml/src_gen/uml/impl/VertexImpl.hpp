@@ -98,7 +98,7 @@ namespace uml
 			<p>From package UML::StateMachines.</p>
 			*/
 			 
-			virtual bool isContainedInRegion(std::shared_ptr<uml::Region> r) ;
+			virtual bool isContainedInRegion(const std::shared_ptr<uml::Region>& r) ;
 			/*!
 			This utility operation returns true if the Vertex is contained in the State s (input argument).
 			result = (if not s.isComposite() or container->isEmpty() then
@@ -113,7 +113,7 @@ namespace uml
 			<p>From package UML::StateMachines.</p>
 			*/
 			 
-			virtual bool isContainedInState(std::shared_ptr<uml::State> s) ;
+			virtual bool isContainedInState(const std::shared_ptr<uml::State>& s) ;
 			
 			//*********************************
 			// Attribute Getters & Setters
@@ -139,13 +139,13 @@ namespace uml
 			<p>From package UML::StateMachines.</p>
 			*/
 			
-			virtual std::shared_ptr<Bag<uml::Transition>> getIncoming() const ;
+			virtual const std::shared_ptr<Bag<uml::Transition>>& getIncoming() const ;
 			/*!
 			Specifies the Transitions departing from this Vertex.
 			<p>From package UML::StateMachines.</p>
 			*/
 			
-			virtual std::shared_ptr<Bag<uml::Transition>> getOutgoing() const ;
+			virtual const std::shared_ptr<Bag<uml::Transition>>& getOutgoing() const ;
 			
 			//*********************************
 			// Union Reference Getters
@@ -185,19 +185,19 @@ namespace uml
 			virtual void saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const;
 
 		protected:
-			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
+			virtual const std::shared_ptr<ecore::EClass>& eStaticClass() const;
 
 			//*********************************
 			// EStructuralFeature Get/Set/IsSet
 			//*********************************
 			virtual Any eGet(int featureID, bool resolve, bool coreType) const ;
-			virtual bool eSet(int featureID, Any newValue) ;
+			virtual bool eSet(int featureID, const Any& newValue) ;
 			virtual bool internalEIsSet(int featureID) const ;
 
 			//*********************************
 			// EOperation Invoke
 			//*********************************
-			virtual Any eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments) ;
+			virtual Any eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments) ;
 
 		private:
 			std::weak_ptr<uml::Vertex> m_thisVertexPtr;

@@ -34,10 +34,10 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "fUML/Semantics/Values/ValuesFactory.hpp"
 #include "fUML/Semantics/Loci/LociFactory.hpp"
-#include "fUML/Semantics/SimpleClassifiers/SimpleClassifiersFactory.hpp"
 #include "uml/umlFactory.hpp"
+#include "fUML/Semantics/Values/ValuesFactory.hpp"
+#include "fUML/Semantics/SimpleClassifiers/SimpleClassifiersFactory.hpp"
 #include "ocl/Evaluations/EvaluationsFactory.hpp"
 #include "ocl/Expressions/ExpressionsFactory.hpp"
 #include "ocl/Evaluations/EvalEnvironment.hpp"
@@ -206,7 +206,7 @@ void IteratorExpEvalImpl::saveContent(std::shared_ptr<persistence::interfaces::X
 	}
 }
 
-std::shared_ptr<ecore::EClass> IteratorExpEvalImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& IteratorExpEvalImpl::eStaticClass() const
 {
 	return ocl::Evaluations::EvaluationsPackage::eInstance()->getIteratorExpEval_Class();
 }
@@ -230,7 +230,7 @@ bool IteratorExpEvalImpl::internalEIsSet(int featureID) const
 	return LoopExpEvalImpl::internalEIsSet(featureID);
 }
 
-bool IteratorExpEvalImpl::eSet(int featureID, Any newValue)
+bool IteratorExpEvalImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -242,7 +242,7 @@ bool IteratorExpEvalImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any IteratorExpEvalImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any IteratorExpEvalImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

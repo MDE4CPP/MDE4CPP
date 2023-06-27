@@ -62,19 +62,19 @@ namespace uml
 			endData->forAll(not end.isStatic)
 			*/
 			 
-			virtual bool not_static(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
+			virtual bool not_static(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context) ;
 			/*!
 			The ends of the endData must all be from the same Association and include all and only the memberEnds of that association.
 			endData.end = self.association().memberEnd->asBag()
 			*/
 			 
-			virtual bool same_association(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
+			virtual bool same_association(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context) ;
 			/*!
 			The inputValue InputPins is the same as the union of all the InputPins referenced by the endData.
 			inputValue->asBag()=endData.allPins()
 			*/
 			 
-			virtual bool same_pins(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
+			virtual bool same_pins(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context) ;
 			
 			//*********************************
 			// Attribute Getters & Setters
@@ -88,13 +88,13 @@ namespace uml
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual std::shared_ptr<Subset<uml::LinkEndData, uml::Element>> getEndData() const ;
+			virtual const std::shared_ptr<Subset<uml::LinkEndData, uml::Element>>& getEndData() const ;
 			/*!
 			InputPins used by the LinkEndData of the LinkAction.
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual std::shared_ptr<Subset<uml::InputPin, uml::InputPin>> getInputValue() const ;
+			virtual const std::shared_ptr<Subset<uml::InputPin, uml::InputPin>>& getInputValue() const ;
 			
 			//*********************************
 			// Union Reference Getters
@@ -146,19 +146,19 @@ namespace uml
 			virtual void saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const;
 
 		protected:
-			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
+			virtual const std::shared_ptr<ecore::EClass>& eStaticClass() const;
 
 			//*********************************
 			// EStructuralFeature Get/Set/IsSet
 			//*********************************
 			virtual Any eGet(int featureID, bool resolve, bool coreType) const ;
-			virtual bool eSet(int featureID, Any newValue) ;
+			virtual bool eSet(int featureID, const Any& newValue) ;
 			virtual bool internalEIsSet(int featureID) const ;
 
 			//*********************************
 			// EOperation Invoke
 			//*********************************
-			virtual Any eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments) ;
+			virtual Any eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments) ;
 
 		private:
 			std::weak_ptr<uml::LinkAction> m_thisLinkActionPtr;

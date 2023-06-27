@@ -48,17 +48,17 @@ namespace fUML::Semantics::Activities
 			virtual void doAction() ;
 			virtual void doOutput() ;
 			virtual void doStructuredActivity() ;
-			virtual std::shared_ptr<fUML::Semantics::Activities::ExpansionNodeActivation> getExpansionNodeActivation(std::shared_ptr<uml::ExpansionNode> node) ;
+			virtual std::shared_ptr<fUML::Semantics::Activities::ExpansionNodeActivation> getExpansionNodeActivation(const std::shared_ptr<uml::ExpansionNode>& node) ;
 			virtual bool isSuspended() ;
 			virtual int numberOfValues() ;
-			virtual void resume(std::shared_ptr<fUML::Semantics::Activities::ExpansionActivationGroup> activationGroup) ;
-			virtual void runGroup(std::shared_ptr<fUML::Semantics::Activities::ExpansionActivationGroup> activationGroup) ;
+			virtual void resume(const std::shared_ptr<fUML::Semantics::Activities::ExpansionActivationGroup>& activationGroup) ;
+			virtual void runGroup(const std::shared_ptr<fUML::Semantics::Activities::ExpansionActivationGroup>& activationGroup) ;
 			virtual void runIterative() ;
 			virtual void runParallel() ;
 			virtual void sendOffers() ;
 			virtual std::shared_ptr<Bag<fUML::Semantics::Activities::Token> > takeOfferedTokens() ;
 			virtual void terminate() ;
-			virtual void terminateGroup(std::shared_ptr<fUML::Semantics::Activities::ExpansionActivationGroup> activationGroup) ;
+			virtual void terminateGroup(const std::shared_ptr<fUML::Semantics::Activities::ExpansionActivationGroup>& activationGroup) ;
 			
 			//*********************************
 			// Attribute Getters & Setters
@@ -69,9 +69,9 @@ namespace fUML::Semantics::Activities
 			//*********************************
 			// Reference Getters & Setters
 			//*********************************
-			virtual std::shared_ptr<Bag<fUML::Semantics::Activities::ExpansionActivationGroup>> getActivationGroups() const ;
-			virtual std::shared_ptr<Bag<fUML::Semantics::Activities::TokenSet>> getInputExpansionTokens() const ;
-			virtual std::shared_ptr<Bag<fUML::Semantics::Activities::TokenSet>> getInputTokens() const ;
+			virtual const std::shared_ptr<Bag<fUML::Semantics::Activities::ExpansionActivationGroup>>& getActivationGroups() const ;
+			virtual const std::shared_ptr<Bag<fUML::Semantics::Activities::TokenSet>>& getInputExpansionTokens() const ;
+			virtual const std::shared_ptr<Bag<fUML::Semantics::Activities::TokenSet>>& getInputTokens() const ;
 			
 			//*********************************
 			// Union Reference Getters
@@ -94,19 +94,19 @@ namespace fUML::Semantics::Activities
 			virtual void saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const;
 
 		protected:
-			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
+			virtual const std::shared_ptr<ecore::EClass>& eStaticClass() const;
 
 			//*********************************
 			// EStructuralFeature Get/Set/IsSet
 			//*********************************
 			virtual Any eGet(int featureID, bool resolve, bool coreType) const ;
-			virtual bool eSet(int featureID, Any newValue) ;
+			virtual bool eSet(int featureID, const Any& newValue) ;
 			virtual bool internalEIsSet(int featureID) const ;
 
 			//*********************************
 			// EOperation Invoke
 			//*********************************
-			virtual Any eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments) ;
+			virtual Any eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments) ;
 
 		private:
 			std::weak_ptr<fUML::Semantics::Activities::ExpansionRegionActivation> m_thisExpansionRegionActivationPtr;

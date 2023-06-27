@@ -34,8 +34,8 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "ocl/Values/ValuesFactory.hpp"
 #include "ecore/ecoreFactory.hpp"
+#include "ocl/Values/ValuesFactory.hpp"
 #include "ocl/Types/CollectionType.hpp"
 #include "ocl/Values/CollectionValue.hpp"
 #include "ecore/EAnnotation.hpp"
@@ -124,7 +124,7 @@ std::shared_ptr<ecore::EObject> CollectionTypeImpl::copy() const
 //*********************************
 // Operations
 //*********************************
-bool CollectionTypeImpl::kindOf(std::shared_ptr<ocl::Types::CollectionType> coll)
+bool CollectionTypeImpl::kindOf(const std::shared_ptr<ocl::Types::CollectionType>& coll)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -147,22 +147,22 @@ bool CollectionTypeImpl::kindOf(std::shared_ptr<ocl::Types::CollectionType> coll
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference elementType */
-std::shared_ptr<ecore::EClassifier> CollectionTypeImpl::getElementType() const
+const std::shared_ptr<ecore::EClassifier>& CollectionTypeImpl::getElementType() const
 {
     return m_elementType;
 }
-void CollectionTypeImpl::setElementType(std::shared_ptr<ecore::EClassifier> _elementType)
+void CollectionTypeImpl::setElementType(const std::shared_ptr<ecore::EClassifier>& _elementType)
 {
     m_elementType = _elementType;
 	
 }
 
 /* Getter & Setter for reference instance */
-std::shared_ptr<ocl::Values::CollectionValue> CollectionTypeImpl::getInstance() const
+const std::shared_ptr<ocl::Values::CollectionValue>& CollectionTypeImpl::getInstance() const
 {
     return m_instance;
 }
-void CollectionTypeImpl::setInstance(std::shared_ptr<ocl::Values::CollectionValue> _instance)
+void CollectionTypeImpl::setInstance(const std::shared_ptr<ocl::Values::CollectionValue>& _instance)
 {
     m_instance = _instance;
 	
@@ -313,7 +313,7 @@ void CollectionTypeImpl::saveContent(std::shared_ptr<persistence::interfaces::XS
 	}
 }
 
-std::shared_ptr<ecore::EClass> CollectionTypeImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& CollectionTypeImpl::eStaticClass() const
 {
 	return ocl::Types::TypesPackage::eInstance()->getCollectionType_Class();
 }
@@ -345,7 +345,7 @@ bool CollectionTypeImpl::internalEIsSet(int featureID) const
 	return ecore::EDataTypeImpl::internalEIsSet(featureID);
 }
 
-bool CollectionTypeImpl::eSet(int featureID, Any newValue)
+bool CollectionTypeImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -373,7 +373,7 @@ bool CollectionTypeImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any CollectionTypeImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any CollectionTypeImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

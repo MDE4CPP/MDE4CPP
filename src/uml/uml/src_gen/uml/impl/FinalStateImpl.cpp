@@ -142,32 +142,32 @@ std::shared_ptr<ecore::EObject> FinalStateImpl::copy() const
 //*********************************
 // Operations
 //*********************************
-bool FinalStateImpl::cannot_reference_submachine(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool FinalStateImpl::cannot_reference_submachine(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool FinalStateImpl::no_entry_behavior(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool FinalStateImpl::no_entry_behavior(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool FinalStateImpl::no_exit_behavior(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool FinalStateImpl::no_exit_behavior(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool FinalStateImpl::no_outgoing_transitions(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool FinalStateImpl::no_outgoing_transitions(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool FinalStateImpl::no_regions(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool FinalStateImpl::no_regions(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool FinalStateImpl::no_state_behavior(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool FinalStateImpl::no_state_behavior(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -348,7 +348,7 @@ void FinalStateImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveH
 	}
 }
 
-std::shared_ptr<ecore::EClass> FinalStateImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& FinalStateImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getFinalState_Class();
 }
@@ -372,7 +372,7 @@ bool FinalStateImpl::internalEIsSet(int featureID) const
 	return StateImpl::internalEIsSet(featureID);
 }
 
-bool FinalStateImpl::eSet(int featureID, Any newValue)
+bool FinalStateImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -384,7 +384,7 @@ bool FinalStateImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any FinalStateImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any FinalStateImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

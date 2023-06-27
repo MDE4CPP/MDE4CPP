@@ -96,26 +96,26 @@ namespace uml
 			_'context' <> null
 			*/
 			 
-			virtual bool contained(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
+			virtual bool contained(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context) = 0;
 			/*!
 			The multiplicity of the result OutputPin is 1..1.
 			result.is(1,1)
 			*/
 			 
-			virtual bool multiplicity(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
+			virtual bool multiplicity(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context) = 0;
 			/*!
 			If the ReadSelfAction is contained in an Behavior that is acting as a method, then the Operation of the method must not be static.
 			let behavior: Behavior = self.containingBehavior() in
 			behavior.specification<>null implies not behavior.specification.isStatic
 			*/
 			 
-			virtual bool not_static(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
+			virtual bool not_static(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context) = 0;
 			/*!
 			The type of the result OutputPin is the context Classifier.
 			result.type = _'context'
 			*/
 			 
-			virtual bool type(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
+			virtual bool type(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context) = 0;
 
 			//*********************************
 			// Attribute Getters & Setters
@@ -129,13 +129,13 @@ namespace uml
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::OutputPin> getResult() const = 0;
+			virtual const std::shared_ptr<uml::OutputPin>& getResult() const = 0;
 			/*!
 			The OutputPin on which the context object is placed.
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual void setResult(std::shared_ptr<uml::OutputPin>) = 0;
+			virtual void setResult(const std::shared_ptr<uml::OutputPin>&) = 0;
 
 			//*********************************
 			// Union Reference Getters

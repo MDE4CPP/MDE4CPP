@@ -89,7 +89,7 @@ namespace uml
 			visibility = VisibilityKind::public or visibility = VisibilityKind::private
 			*/
 			 
-			virtual bool public_or_private(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
+			virtual bool public_or_private(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context) = 0;
 
 			//*********************************
 			// Attribute Getters & Setters
@@ -115,13 +115,13 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::Package> getImportedPackage() const = 0;
+			virtual const std::shared_ptr<uml::Package>& getImportedPackage() const = 0;
 			/*!
 			Specifies the Package whose members are imported into a Namespace.
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual void setImportedPackage(std::shared_ptr<uml::Package>) = 0;
+			virtual void setImportedPackage(const std::shared_ptr<uml::Package>&) = 0;
 			/*!
 			Specifies the Namespace that imports the members from a Package.
 			<p>From package UML::CommonStructure.</p>

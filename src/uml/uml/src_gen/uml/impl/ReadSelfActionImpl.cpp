@@ -155,22 +155,22 @@ std::shared_ptr<ecore::EObject> ReadSelfActionImpl::copy() const
 //*********************************
 // Operations
 //*********************************
-bool ReadSelfActionImpl::contained(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool ReadSelfActionImpl::contained(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool ReadSelfActionImpl::multiplicity(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool ReadSelfActionImpl::multiplicity(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool ReadSelfActionImpl::not_static(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool ReadSelfActionImpl::not_static(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool ReadSelfActionImpl::type(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool ReadSelfActionImpl::type(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -183,11 +183,11 @@ bool ReadSelfActionImpl::type(Any diagnostics,std::shared_ptr<std::map < Any, An
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference result */
-std::shared_ptr<uml::OutputPin> ReadSelfActionImpl::getResult() const
+const std::shared_ptr<uml::OutputPin>& ReadSelfActionImpl::getResult() const
 {
     return m_result;
 }
-void ReadSelfActionImpl::setResult(std::shared_ptr<uml::OutputPin> _result)
+void ReadSelfActionImpl::setResult(const std::shared_ptr<uml::OutputPin>& _result)
 {
     m_result = _result;
 	
@@ -391,7 +391,7 @@ void ReadSelfActionImpl::saveContent(std::shared_ptr<persistence::interfaces::XS
 	}
 }
 
-std::shared_ptr<ecore::EClass> ReadSelfActionImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& ReadSelfActionImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getReadSelfAction_Class();
 }
@@ -419,7 +419,7 @@ bool ReadSelfActionImpl::internalEIsSet(int featureID) const
 	return ActionImpl::internalEIsSet(featureID);
 }
 
-bool ReadSelfActionImpl::eSet(int featureID, Any newValue)
+bool ReadSelfActionImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -439,7 +439,7 @@ bool ReadSelfActionImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any ReadSelfActionImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any ReadSelfActionImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

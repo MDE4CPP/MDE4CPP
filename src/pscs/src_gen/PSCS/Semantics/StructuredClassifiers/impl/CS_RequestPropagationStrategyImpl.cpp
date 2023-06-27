@@ -40,11 +40,11 @@
 #include "fUML/Semantics/Loci/SemanticStrategy.hpp"
 #include "fUML/Semantics/Loci/SemanticVisitor.hpp"
 //Factories and Package includes
-#include "PSCS/PSCSPackage.hpp"
 #include "PSCS/Semantics/SemanticsPackage.hpp"
+#include "PSCS/PSCSPackage.hpp"
 #include "fUML/Semantics/Loci/LociPackage.hpp"
-#include "PSCS/Semantics/StructuredClassifiers/StructuredClassifiersPackage.hpp"
 #include "fUML/Semantics/StructuredClassifiers/StructuredClassifiersPackage.hpp"
+#include "PSCS/Semantics/StructuredClassifiers/StructuredClassifiersPackage.hpp"
 
 using namespace PSCS::Semantics::StructuredClassifiers;
 
@@ -109,7 +109,7 @@ std::string CS_RequestPropagationStrategyImpl::getName()
 	//end of body
 }
 
-std::shared_ptr<Bag<fUML::Semantics::StructuredClassifiers::Reference> > CS_RequestPropagationStrategyImpl::select(std::shared_ptr<Bag<fUML::Semantics::StructuredClassifiers::Reference>> potentialTargets,std::shared_ptr<fUML::Semantics::Loci::SemanticVisitor> context)
+std::shared_ptr<Bag<fUML::Semantics::StructuredClassifiers::Reference> > CS_RequestPropagationStrategyImpl::select(const std::shared_ptr<Bag<fUML::Semantics::StructuredClassifiers::Reference>>& potentialTargets, const std::shared_ptr<fUML::Semantics::Loci::SemanticVisitor>& context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -192,7 +192,7 @@ void CS_RequestPropagationStrategyImpl::saveContent(std::shared_ptr<persistence:
 	}
 }
 
-std::shared_ptr<ecore::EClass> CS_RequestPropagationStrategyImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& CS_RequestPropagationStrategyImpl::eStaticClass() const
 {
 	return PSCS::Semantics::StructuredClassifiers::StructuredClassifiersPackage::eInstance()->getCS_RequestPropagationStrategy_Class();
 }
@@ -216,7 +216,7 @@ bool CS_RequestPropagationStrategyImpl::internalEIsSet(int featureID) const
 	return fUML::Semantics::Loci::SemanticStrategyImpl::internalEIsSet(featureID);
 }
 
-bool CS_RequestPropagationStrategyImpl::eSet(int featureID, Any newValue)
+bool CS_RequestPropagationStrategyImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -228,7 +228,7 @@ bool CS_RequestPropagationStrategyImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any CS_RequestPropagationStrategyImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any CS_RequestPropagationStrategyImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

@@ -107,7 +107,7 @@ std::shared_ptr<ecore::EObject> ArgumentImpl::copy() const
 // Attribute Getters & Setters
 //*********************************
 /* Getter & Setter for attribute name */
-std::string ArgumentImpl::getName() const 
+std::string ArgumentImpl::getName() const
 {
 	return m_name;
 }
@@ -121,11 +121,11 @@ void ArgumentImpl::setName(std::string _name)
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference value */
-std::shared_ptr<uml::Object> ArgumentImpl::getValue() const
+const std::shared_ptr<uml::Object>& ArgumentImpl::getValue() const
 {
     return m_value;
 }
-void ArgumentImpl::setValue(std::shared_ptr<uml::Object> _value)
+void ArgumentImpl::setValue(const std::shared_ptr<uml::Object>& _value)
 {
     m_value = _value;
 	
@@ -247,7 +247,7 @@ void ArgumentImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHan
 	}
 }
 
-std::shared_ptr<ecore::EClass> ArgumentImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& ArgumentImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getArgument_Class();
 }
@@ -279,7 +279,7 @@ bool ArgumentImpl::internalEIsSet(int featureID) const
 	return ecore::EObjectImpl::internalEIsSet(featureID);
 }
 
-bool ArgumentImpl::eSet(int featureID, Any newValue)
+bool ArgumentImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -306,7 +306,7 @@ bool ArgumentImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any ArgumentImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any ArgumentImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

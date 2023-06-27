@@ -128,7 +128,7 @@ std::string OclMessageValueImpl::toString()
 // Attribute Getters & Setters
 //*********************************
 /* Getter & Setter for attribute isAsyncOperation */
-bool OclMessageValueImpl::getIsAsyncOperation() const 
+bool OclMessageValueImpl::getIsAsyncOperation() const
 {
 	return m_isAsyncOperation;
 }
@@ -139,7 +139,7 @@ void OclMessageValueImpl::setIsAsyncOperation(bool _isAsyncOperation)
 }
 
 /* Getter & Setter for attribute isSignal */
-bool OclMessageValueImpl::getIsSignal() const 
+bool OclMessageValueImpl::getIsSignal() const
 {
 	return m_isSignal;
 }
@@ -150,7 +150,7 @@ void OclMessageValueImpl::setIsSignal(bool _isSignal)
 }
 
 /* Getter & Setter for attribute isSyncOperation */
-bool OclMessageValueImpl::getIsSyncOperation() const 
+bool OclMessageValueImpl::getIsSyncOperation() const
 {
 	return m_isSyncOperation;
 }
@@ -161,7 +161,7 @@ void OclMessageValueImpl::setIsSyncOperation(bool _isSyncOperation)
 }
 
 /* Getter & Setter for attribute name */
-std::string OclMessageValueImpl::getName() const 
+std::string OclMessageValueImpl::getName() const
 {
 	return m_name;
 }
@@ -175,7 +175,7 @@ void OclMessageValueImpl::setName(std::string _name)
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference arguments */
-std::shared_ptr<Bag<ocl::Values::NameValueBinding>> OclMessageValueImpl::getArguments() const
+const std::shared_ptr<Bag<ocl::Values::NameValueBinding>>& OclMessageValueImpl::getArguments() const
 {
 	if(m_arguments == nullptr)
 	{
@@ -187,33 +187,33 @@ std::shared_ptr<Bag<ocl::Values::NameValueBinding>> OclMessageValueImpl::getArgu
 }
 
 /* Getter & Setter for reference returnMessage */
-std::shared_ptr<ocl::Values::OclMessageValue> OclMessageValueImpl::getReturnMessage() const
+const std::shared_ptr<ocl::Values::OclMessageValue>& OclMessageValueImpl::getReturnMessage() const
 {
     return m_returnMessage;
 }
-void OclMessageValueImpl::setReturnMessage(std::shared_ptr<ocl::Values::OclMessageValue> _returnMessage)
+void OclMessageValueImpl::setReturnMessage(const std::shared_ptr<ocl::Values::OclMessageValue>& _returnMessage)
 {
     m_returnMessage = _returnMessage;
 	
 }
 
 /* Getter & Setter for reference source */
-std::shared_ptr<ocl::Values::ObjectValue> OclMessageValueImpl::getSource() const
+const std::shared_ptr<ocl::Values::ObjectValue>& OclMessageValueImpl::getSource() const
 {
     return m_source;
 }
-void OclMessageValueImpl::setSource(std::shared_ptr<ocl::Values::ObjectValue> _source)
+void OclMessageValueImpl::setSource(const std::shared_ptr<ocl::Values::ObjectValue>& _source)
 {
     m_source = _source;
 	
 }
 
 /* Getter & Setter for reference target */
-std::shared_ptr<ocl::Values::ObjectValue> OclMessageValueImpl::getTarget() const
+const std::shared_ptr<ocl::Values::ObjectValue>& OclMessageValueImpl::getTarget() const
 {
     return m_target;
 }
-void OclMessageValueImpl::setTarget(std::shared_ptr<ocl::Values::ObjectValue> _target)
+void OclMessageValueImpl::setTarget(const std::shared_ptr<ocl::Values::ObjectValue>& _target)
 {
     m_target = _target;
 	
@@ -444,7 +444,7 @@ void OclMessageValueImpl::saveContent(std::shared_ptr<persistence::interfaces::X
 	}
 }
 
-std::shared_ptr<ecore::EClass> OclMessageValueImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& OclMessageValueImpl::eStaticClass() const
 {
 	return ocl::Values::ValuesPackage::eInstance()->getOclMessageValue_Class();
 }
@@ -500,7 +500,7 @@ bool OclMessageValueImpl::internalEIsSet(int featureID) const
 	return fUML::Semantics::Values::ValueImpl::internalEIsSet(featureID);
 }
 
-bool OclMessageValueImpl::eSet(int featureID, Any newValue)
+bool OclMessageValueImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -601,7 +601,7 @@ bool OclMessageValueImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any OclMessageValueImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any OclMessageValueImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

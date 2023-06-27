@@ -46,8 +46,8 @@
 #include "fUML/Semantics/Activities/ActivityNodeActivationGroup.hpp"
 #include "fUML/Semantics/Activities/Token.hpp"
 //Factories and Package includes
-#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/SemanticsPackage.hpp"
+#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/Activities/ActivitiesPackage.hpp"
 #include "uml/umlPackage.hpp"
 
@@ -112,7 +112,7 @@ ObjectNodeActivationImpl& ObjectNodeActivationImpl::operator=(const ObjectNodeAc
 //*********************************
 // Operations
 //*********************************
-void ObjectNodeActivationImpl::addToken(std::shared_ptr<fUML::Semantics::Activities::Token> token)
+void ObjectNodeActivationImpl::addToken(const std::shared_ptr<fUML::Semantics::Activities::Token>& token)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -183,7 +183,7 @@ std::shared_ptr<Bag<fUML::Semantics::Activities::Token> > ObjectNodeActivationIm
 	//end of body
 }
 
-int ObjectNodeActivationImpl::removeToken(std::shared_ptr<fUML::Semantics::Activities::Token> token)
+int ObjectNodeActivationImpl::removeToken(const std::shared_ptr<fUML::Semantics::Activities::Token>& token)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -205,7 +205,7 @@ void ObjectNodeActivationImpl::run()
 	//end of body
 }
 
-void ObjectNodeActivationImpl::sendOffers(std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> tokens)
+void ObjectNodeActivationImpl::sendOffers(const std::shared_ptr<Bag<fUML::Semantics::Activities::Token>>& tokens)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -266,7 +266,7 @@ this->clearTokens();
 // Attribute Getters & Setters
 //*********************************
 /* Getter & Setter for attribute offeredTokenCount */
-int ObjectNodeActivationImpl::getOfferedTokenCount() const 
+int ObjectNodeActivationImpl::getOfferedTokenCount() const
 {
 	return m_offeredTokenCount;
 }
@@ -382,7 +382,7 @@ void ObjectNodeActivationImpl::saveContent(std::shared_ptr<persistence::interfac
 	}
 }
 
-std::shared_ptr<ecore::EClass> ObjectNodeActivationImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& ObjectNodeActivationImpl::eStaticClass() const
 {
 	return fUML::Semantics::Activities::ActivitiesPackage::eInstance()->getObjectNodeActivation_Class();
 }
@@ -410,7 +410,7 @@ bool ObjectNodeActivationImpl::internalEIsSet(int featureID) const
 	return ActivityNodeActivationImpl::internalEIsSet(featureID);
 }
 
-bool ObjectNodeActivationImpl::eSet(int featureID, Any newValue)
+bool ObjectNodeActivationImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -429,7 +429,7 @@ bool ObjectNodeActivationImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any ObjectNodeActivationImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any ObjectNodeActivationImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

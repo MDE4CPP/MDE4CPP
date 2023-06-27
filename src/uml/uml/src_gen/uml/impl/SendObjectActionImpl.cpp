@@ -163,7 +163,7 @@ std::shared_ptr<ecore::EObject> SendObjectActionImpl::copy() const
 //*********************************
 // Operations
 //*********************************
-bool SendObjectActionImpl::type_target_pin(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool SendObjectActionImpl::type_target_pin(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -176,22 +176,22 @@ bool SendObjectActionImpl::type_target_pin(Any diagnostics,std::shared_ptr<std::
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference request */
-std::shared_ptr<uml::InputPin> SendObjectActionImpl::getRequest() const
+const std::shared_ptr<uml::InputPin>& SendObjectActionImpl::getRequest() const
 {
     return m_request;
 }
-void SendObjectActionImpl::setRequest(std::shared_ptr<uml::InputPin> _request)
+void SendObjectActionImpl::setRequest(const std::shared_ptr<uml::InputPin>& _request)
 {
     m_request = _request;
 	
 }
 
 /* Getter & Setter for reference target */
-std::shared_ptr<uml::InputPin> SendObjectActionImpl::getTarget() const
+const std::shared_ptr<uml::InputPin>& SendObjectActionImpl::getTarget() const
 {
     return m_target;
 }
-void SendObjectActionImpl::setTarget(std::shared_ptr<uml::InputPin> _target)
+void SendObjectActionImpl::setTarget(const std::shared_ptr<uml::InputPin>& _target)
 {
     m_target = _target;
 	
@@ -416,7 +416,7 @@ void SendObjectActionImpl::saveContent(std::shared_ptr<persistence::interfaces::
 	}
 }
 
-std::shared_ptr<ecore::EClass> SendObjectActionImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& SendObjectActionImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getSendObjectAction_Class();
 }
@@ -448,7 +448,7 @@ bool SendObjectActionImpl::internalEIsSet(int featureID) const
 	return InvocationActionImpl::internalEIsSet(featureID);
 }
 
-bool SendObjectActionImpl::eSet(int featureID, Any newValue)
+bool SendObjectActionImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -476,7 +476,7 @@ bool SendObjectActionImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any SendObjectActionImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any SendObjectActionImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

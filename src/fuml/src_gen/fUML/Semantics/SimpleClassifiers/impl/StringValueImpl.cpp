@@ -46,8 +46,8 @@
 #include "fUML/Semantics/Values/Value.hpp"
 #include "uml/ValueSpecification.hpp"
 //Factories and Package includes
-#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/SemanticsPackage.hpp"
+#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/SimpleClassifiers/SimpleClassifiersPackage.hpp"
 #include "fUML/Semantics/Values/ValuesPackage.hpp"
 #include "uml/umlPackage.hpp"
@@ -128,7 +128,7 @@ return newValue;
 	//end of body
 }
 
-bool StringValueImpl::equals(std::shared_ptr<fUML::Semantics::Values::Value> otherValue)
+bool StringValueImpl::equals(const std::shared_ptr<fUML::Semantics::Values::Value>& otherValue)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -176,7 +176,7 @@ std::string StringValueImpl::toString()
 // Attribute Getters & Setters
 //*********************************
 /* Getter & Setter for attribute value */
-std::string StringValueImpl::getValue() const 
+std::string StringValueImpl::getValue() const
 {
 	return m_value;
 }
@@ -290,7 +290,7 @@ void StringValueImpl::saveContent(std::shared_ptr<persistence::interfaces::XSave
 	}
 }
 
-std::shared_ptr<ecore::EClass> StringValueImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& StringValueImpl::eStaticClass() const
 {
 	return fUML::Semantics::SimpleClassifiers::SimpleClassifiersPackage::eInstance()->getStringValue_Class();
 }
@@ -318,7 +318,7 @@ bool StringValueImpl::internalEIsSet(int featureID) const
 	return PrimitiveValueImpl::internalEIsSet(featureID);
 }
 
-bool StringValueImpl::eSet(int featureID, Any newValue)
+bool StringValueImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -337,7 +337,7 @@ bool StringValueImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any StringValueImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any StringValueImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

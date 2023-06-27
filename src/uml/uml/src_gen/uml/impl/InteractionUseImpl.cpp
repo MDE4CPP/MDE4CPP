@@ -217,32 +217,32 @@ std::shared_ptr<ecore::EObject> InteractionUseImpl::copy() const
 //*********************************
 // Operations
 //*********************************
-bool InteractionUseImpl::all_lifelines(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool InteractionUseImpl::all_lifelines(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool InteractionUseImpl::arguments_are_constants(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool InteractionUseImpl::arguments_are_constants(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool InteractionUseImpl::arguments_correspond_to_parameters(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool InteractionUseImpl::arguments_correspond_to_parameters(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool InteractionUseImpl::gates_match(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool InteractionUseImpl::gates_match(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool InteractionUseImpl::returnValueRecipient_coverage(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool InteractionUseImpl::returnValueRecipient_coverage(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool InteractionUseImpl::returnValue_type_recipient_correspondence(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool InteractionUseImpl::returnValue_type_recipient_correspondence(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -255,7 +255,7 @@ bool InteractionUseImpl::returnValue_type_recipient_correspondence(Any diagnosti
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference actualGate */
-std::shared_ptr<Subset<uml::Gate, uml::Element>> InteractionUseImpl::getActualGate() const
+const std::shared_ptr<Subset<uml::Gate, uml::Element>>& InteractionUseImpl::getActualGate() const
 {
 	if(m_actualGate == nullptr)
 	{
@@ -276,7 +276,7 @@ std::shared_ptr<Subset<uml::Gate, uml::Element>> InteractionUseImpl::getActualGa
 }
 
 /* Getter & Setter for reference argument */
-std::shared_ptr<Subset<uml::ValueSpecification, uml::Element>> InteractionUseImpl::getArgument() const
+const std::shared_ptr<Subset<uml::ValueSpecification, uml::Element>>& InteractionUseImpl::getArgument() const
 {
 	if(m_argument == nullptr)
 	{
@@ -297,33 +297,33 @@ std::shared_ptr<Subset<uml::ValueSpecification, uml::Element>> InteractionUseImp
 }
 
 /* Getter & Setter for reference refersTo */
-std::shared_ptr<uml::Interaction> InteractionUseImpl::getRefersTo() const
+const std::shared_ptr<uml::Interaction>& InteractionUseImpl::getRefersTo() const
 {
     return m_refersTo;
 }
-void InteractionUseImpl::setRefersTo(std::shared_ptr<uml::Interaction> _refersTo)
+void InteractionUseImpl::setRefersTo(const std::shared_ptr<uml::Interaction>& _refersTo)
 {
     m_refersTo = _refersTo;
 	
 }
 
 /* Getter & Setter for reference returnValue */
-std::shared_ptr<uml::ValueSpecification> InteractionUseImpl::getReturnValue() const
+const std::shared_ptr<uml::ValueSpecification>& InteractionUseImpl::getReturnValue() const
 {
     return m_returnValue;
 }
-void InteractionUseImpl::setReturnValue(std::shared_ptr<uml::ValueSpecification> _returnValue)
+void InteractionUseImpl::setReturnValue(const std::shared_ptr<uml::ValueSpecification>& _returnValue)
 {
     m_returnValue = _returnValue;
 	
 }
 
 /* Getter & Setter for reference returnValueRecipient */
-std::shared_ptr<uml::Property> InteractionUseImpl::getReturnValueRecipient() const
+const std::shared_ptr<uml::Property>& InteractionUseImpl::getReturnValueRecipient() const
 {
     return m_returnValueRecipient;
 }
-void InteractionUseImpl::setReturnValueRecipient(std::shared_ptr<uml::Property> _returnValueRecipient)
+void InteractionUseImpl::setReturnValueRecipient(const std::shared_ptr<uml::Property>& _returnValueRecipient)
 {
     m_returnValueRecipient = _returnValueRecipient;
 	
@@ -569,7 +569,7 @@ void InteractionUseImpl::saveContent(std::shared_ptr<persistence::interfaces::XS
 	}
 }
 
-std::shared_ptr<ecore::EClass> InteractionUseImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& InteractionUseImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getInteractionUse_Class();
 }
@@ -613,7 +613,7 @@ bool InteractionUseImpl::internalEIsSet(int featureID) const
 	return InteractionFragmentImpl::internalEIsSet(featureID);
 }
 
-bool InteractionUseImpl::eSet(int featureID, Any newValue)
+bool InteractionUseImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -723,7 +723,7 @@ bool InteractionUseImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any InteractionUseImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any InteractionUseImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

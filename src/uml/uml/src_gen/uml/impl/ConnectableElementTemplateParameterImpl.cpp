@@ -234,7 +234,7 @@ void ConnectableElementTemplateParameterImpl::saveContent(std::shared_ptr<persis
 	}
 }
 
-std::shared_ptr<ecore::EClass> ConnectableElementTemplateParameterImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& ConnectableElementTemplateParameterImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getConnectableElementTemplateParameter_Class();
 }
@@ -258,7 +258,7 @@ bool ConnectableElementTemplateParameterImpl::internalEIsSet(int featureID) cons
 	return TemplateParameterImpl::internalEIsSet(featureID);
 }
 
-bool ConnectableElementTemplateParameterImpl::eSet(int featureID, Any newValue)
+bool ConnectableElementTemplateParameterImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -270,7 +270,7 @@ bool ConnectableElementTemplateParameterImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any ConnectableElementTemplateParameterImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any ConnectableElementTemplateParameterImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

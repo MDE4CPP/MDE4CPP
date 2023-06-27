@@ -37,12 +37,12 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "fUML/Semantics/CommonBehavior/CommonBehaviorFactory.hpp"
+#include "fUML/Semantics/SimpleClassifiers/SimpleClassifiersFactory.hpp"
 #include "PSCS/Semantics/StructuredClassifiers/StructuredClassifiersFactory.hpp"
+#include "fUML/Semantics/CommonBehavior/CommonBehaviorFactory.hpp"
 #include "uml/umlFactory.hpp"
 #include "fUML/Semantics/Loci/LociFactory.hpp"
 #include "fUML/Semantics/StructuredClassifiers/StructuredClassifiersFactory.hpp"
-#include "fUML/Semantics/SimpleClassifiers/SimpleClassifiersFactory.hpp"
 #include "uml/Behavior.hpp"
 #include "PSCS/Semantics/StructuredClassifiers/CS_InteractionPoint.hpp"
 #include "fUML/Semantics/CommonBehavior/CallEventExecution.hpp"
@@ -55,14 +55,14 @@
 #include "fUML/Semantics/CommonBehavior/ParameterValue.hpp"
 #include "fUML/Semantics/Values/Value.hpp"
 //Factories and Package includes
-#include "PSCS/PSCSPackage.hpp"
 #include "PSCS/Semantics/SemanticsPackage.hpp"
+#include "PSCS/PSCSPackage.hpp"
 #include "fUML/Semantics/CommonBehavior/CommonBehaviorPackage.hpp"
 #include "PSCS/Semantics/CommonBehavior/CommonBehaviorPackage.hpp"
 #include "fUML/Semantics/Loci/LociPackage.hpp"
 #include "fUML/Semantics/SimpleClassifiers/SimpleClassifiersPackage.hpp"
-#include "PSCS/Semantics/StructuredClassifiers/StructuredClassifiersPackage.hpp"
 #include "fUML/Semantics/StructuredClassifiers/StructuredClassifiersPackage.hpp"
+#include "PSCS/Semantics/StructuredClassifiers/StructuredClassifiersPackage.hpp"
 #include "fUML/Semantics/Values/ValuesPackage.hpp"
 #include "uml/umlPackage.hpp"
 
@@ -173,11 +173,11 @@ return PSCS::Semantics::CommonBehavior::CommonBehaviorFactory::eInstance()->crea
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference interactionPoint */
-std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_InteractionPoint> CS_CallEventExecutionImpl::getInteractionPoint() const
+const std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_InteractionPoint>& CS_CallEventExecutionImpl::getInteractionPoint() const
 {
     return m_interactionPoint;
 }
-void CS_CallEventExecutionImpl::setInteractionPoint(std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_InteractionPoint> _interactionPoint)
+void CS_CallEventExecutionImpl::setInteractionPoint(const std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_InteractionPoint>& _interactionPoint)
 {
     m_interactionPoint = _interactionPoint;
 	
@@ -302,7 +302,7 @@ void CS_CallEventExecutionImpl::saveContent(std::shared_ptr<persistence::interfa
 	}
 }
 
-std::shared_ptr<ecore::EClass> CS_CallEventExecutionImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& CS_CallEventExecutionImpl::eStaticClass() const
 {
 	return PSCS::Semantics::CommonBehavior::CommonBehaviorPackage::eInstance()->getCS_CallEventExecution_Class();
 }
@@ -330,7 +330,7 @@ bool CS_CallEventExecutionImpl::internalEIsSet(int featureID) const
 	return fUML::Semantics::CommonBehavior::CallEventExecutionImpl::internalEIsSet(featureID);
 }
 
-bool CS_CallEventExecutionImpl::eSet(int featureID, Any newValue)
+bool CS_CallEventExecutionImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -350,7 +350,7 @@ bool CS_CallEventExecutionImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any CS_CallEventExecutionImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any CS_CallEventExecutionImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

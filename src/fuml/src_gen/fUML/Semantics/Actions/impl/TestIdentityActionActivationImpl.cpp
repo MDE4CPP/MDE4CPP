@@ -47,8 +47,8 @@
 #include "fUML/Semantics/Actions/PinActivation.hpp"
 #include "fUML/Semantics/Activities/Token.hpp"
 //Factories and Package includes
-#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/SemanticsPackage.hpp"
+#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/Actions/ActionsPackage.hpp"
 #include "fUML/Semantics/Activities/ActivitiesPackage.hpp"
 #include "uml/umlPackage.hpp"
@@ -222,7 +222,7 @@ void TestIdentityActionActivationImpl::saveContent(std::shared_ptr<persistence::
 	}
 }
 
-std::shared_ptr<ecore::EClass> TestIdentityActionActivationImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& TestIdentityActionActivationImpl::eStaticClass() const
 {
 	return fUML::Semantics::Actions::ActionsPackage::eInstance()->getTestIdentityActionActivation_Class();
 }
@@ -246,7 +246,7 @@ bool TestIdentityActionActivationImpl::internalEIsSet(int featureID) const
 	return ActionActivationImpl::internalEIsSet(featureID);
 }
 
-bool TestIdentityActionActivationImpl::eSet(int featureID, Any newValue)
+bool TestIdentityActionActivationImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -258,7 +258,7 @@ bool TestIdentityActionActivationImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any TestIdentityActionActivationImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any TestIdentityActionActivationImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

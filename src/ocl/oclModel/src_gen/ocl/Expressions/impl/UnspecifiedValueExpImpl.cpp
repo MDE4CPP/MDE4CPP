@@ -340,7 +340,7 @@ void UnspecifiedValueExpImpl::saveContent(std::shared_ptr<persistence::interface
 	}
 }
 
-std::shared_ptr<ecore::EClass> UnspecifiedValueExpImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& UnspecifiedValueExpImpl::eStaticClass() const
 {
 	return ocl::Expressions::ExpressionsPackage::eInstance()->getUnspecifiedValueExp_Class();
 }
@@ -364,7 +364,7 @@ bool UnspecifiedValueExpImpl::internalEIsSet(int featureID) const
 	return OclExpressionImpl::internalEIsSet(featureID);
 }
 
-bool UnspecifiedValueExpImpl::eSet(int featureID, Any newValue)
+bool UnspecifiedValueExpImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -376,7 +376,7 @@ bool UnspecifiedValueExpImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any UnspecifiedValueExpImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any UnspecifiedValueExpImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

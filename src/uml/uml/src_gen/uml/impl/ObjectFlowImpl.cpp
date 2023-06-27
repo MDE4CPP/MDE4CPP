@@ -150,42 +150,42 @@ std::shared_ptr<ecore::EObject> ObjectFlowImpl::copy() const
 //*********************************
 // Operations
 //*********************************
-bool ObjectFlowImpl::compatible_types(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool ObjectFlowImpl::compatible_types(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool ObjectFlowImpl::input_and_output_parameter(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool ObjectFlowImpl::input_and_output_parameter(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool ObjectFlowImpl::is_multicast_or_is_multireceive(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool ObjectFlowImpl::is_multicast_or_is_multireceive(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool ObjectFlowImpl::no_executable_nodes(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool ObjectFlowImpl::no_executable_nodes(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool ObjectFlowImpl::same_upper_bounds(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool ObjectFlowImpl::same_upper_bounds(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool ObjectFlowImpl::selection_behavior(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool ObjectFlowImpl::selection_behavior(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool ObjectFlowImpl::target(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool ObjectFlowImpl::target(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool ObjectFlowImpl::transformation_behavior(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool ObjectFlowImpl::transformation_behavior(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -194,7 +194,7 @@ bool ObjectFlowImpl::transformation_behavior(Any diagnostics,std::shared_ptr<std
 // Attribute Getters & Setters
 //*********************************
 /* Getter & Setter for attribute isMulticast */
-bool ObjectFlowImpl::getIsMulticast() const 
+bool ObjectFlowImpl::getIsMulticast() const
 {
 	return m_isMulticast;
 }
@@ -205,7 +205,7 @@ void ObjectFlowImpl::setIsMulticast(bool _isMulticast)
 }
 
 /* Getter & Setter for attribute isMultireceive */
-bool ObjectFlowImpl::getIsMultireceive() const 
+bool ObjectFlowImpl::getIsMultireceive() const
 {
 	return m_isMultireceive;
 }
@@ -219,22 +219,22 @@ void ObjectFlowImpl::setIsMultireceive(bool _isMultireceive)
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference selection */
-std::shared_ptr<uml::Behavior> ObjectFlowImpl::getSelection() const
+const std::shared_ptr<uml::Behavior>& ObjectFlowImpl::getSelection() const
 {
     return m_selection;
 }
-void ObjectFlowImpl::setSelection(std::shared_ptr<uml::Behavior> _selection)
+void ObjectFlowImpl::setSelection(const std::shared_ptr<uml::Behavior>& _selection)
 {
     m_selection = _selection;
 	
 }
 
 /* Getter & Setter for reference transformation */
-std::shared_ptr<uml::Behavior> ObjectFlowImpl::getTransformation() const
+const std::shared_ptr<uml::Behavior>& ObjectFlowImpl::getTransformation() const
 {
     return m_transformation;
 }
-void ObjectFlowImpl::setTransformation(std::shared_ptr<uml::Behavior> _transformation)
+void ObjectFlowImpl::setTransformation(const std::shared_ptr<uml::Behavior>& _transformation)
 {
     m_transformation = _transformation;
 	
@@ -469,7 +469,7 @@ void ObjectFlowImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveH
 	}
 }
 
-std::shared_ptr<ecore::EClass> ObjectFlowImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& ObjectFlowImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getObjectFlow_Class();
 }
@@ -509,7 +509,7 @@ bool ObjectFlowImpl::internalEIsSet(int featureID) const
 	return ActivityEdgeImpl::internalEIsSet(featureID);
 }
 
-bool ObjectFlowImpl::eSet(int featureID, Any newValue)
+bool ObjectFlowImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -551,7 +551,7 @@ bool ObjectFlowImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any ObjectFlowImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any ObjectFlowImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

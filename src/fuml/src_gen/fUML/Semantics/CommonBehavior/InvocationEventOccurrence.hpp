@@ -77,7 +77,7 @@ namespace fUML::Semantics::CommonBehavior
 			// Operations
 			//*********************************
 			virtual std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue> > getParameterValues() = 0;
-			virtual bool match(std::shared_ptr<uml::Trigger> trigger) = 0;
+			virtual bool match(const std::shared_ptr<uml::Trigger>& trigger) = 0;
 
 			//*********************************
 			// Attribute Getters & Setters
@@ -86,8 +86,8 @@ namespace fUML::Semantics::CommonBehavior
 			//*********************************
 			// Reference Getters & Setters
 			//*********************************
-			virtual std::shared_ptr<fUML::Semantics::CommonBehavior::Execution> getExecution() const = 0;
-			virtual void setExecution(std::shared_ptr<fUML::Semantics::CommonBehavior::Execution>) = 0;
+			virtual const std::shared_ptr<fUML::Semantics::CommonBehavior::Execution>& getExecution() const = 0;
+			virtual void setExecution(const std::shared_ptr<fUML::Semantics::CommonBehavior::Execution>&) = 0;
 
 			//*********************************
 			// Union Reference Getters

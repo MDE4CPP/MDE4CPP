@@ -401,7 +401,7 @@ void CommunicationPathImpl::saveContent(std::shared_ptr<persistence::interfaces:
 	}
 }
 
-std::shared_ptr<ecore::EClass> CommunicationPathImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& CommunicationPathImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getCommunicationPath_Class();
 }
@@ -425,7 +425,7 @@ bool CommunicationPathImpl::internalEIsSet(int featureID) const
 	return AssociationImpl::internalEIsSet(featureID);
 }
 
-bool CommunicationPathImpl::eSet(int featureID, Any newValue)
+bool CommunicationPathImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -437,7 +437,7 @@ bool CommunicationPathImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any CommunicationPathImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any CommunicationPathImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

@@ -87,32 +87,32 @@ namespace uml
 			<p>From package UML::Classification.</p>
 			*/
 			 
-			virtual bool isConsistentWith(std::shared_ptr<uml::RedefinableElement> redefiningElement) = 0;
+			virtual bool isConsistentWith(const std::shared_ptr<uml::RedefinableElement>& redefiningElement) = 0;
 			/*!
 			The query isRedefinitionContextValid() specifies whether the redefinition contexts of this RedefinableElement are properly related to the redefinition contexts of the specified RedefinableElement to allow this element to redefine the other. By default at least one of the redefinition contexts of this element must be a specialization of at least one of the redefinition contexts of the specified element.
 			result = (redefinitionContext->exists(c | c.allParents()->includesAll(redefinedElement.redefinitionContext)))
 			<p>From package UML::Classification.</p>
 			*/
 			 
-			virtual bool isRedefinitionContextValid(std::shared_ptr<uml::RedefinableElement> redefinedElement) = 0;
+			virtual bool isRedefinitionContextValid(const std::shared_ptr<uml::RedefinableElement>& redefinedElement) = 0;
 			/*!
 			A RedefinableElement can only redefine non-leaf RedefinableElements.
 			redefinedElement->forAll(re | not re.isLeaf)
 			*/
 			 
-			virtual bool non_leaf_redefinition(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
+			virtual bool non_leaf_redefinition(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context) = 0;
 			/*!
 			A redefining element must be consistent with each redefined element.
 			redefinedElement->forAll(re | re.isConsistentWith(self))
 			*/
 			 
-			virtual bool redefinition_consistent(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
+			virtual bool redefinition_consistent(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context) = 0;
 			/*!
 			At least one of the redefinition contexts of the redefining element must be a specialization of at least one of the redefinition contexts for each redefined element.
 			redefinedElement->forAll(re | self.isRedefinitionContextValid(re))
 			*/
 			 
-			virtual bool redefinition_context_valid(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
+			virtual bool redefinition_context_valid(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context) = 0;
 
 			//*********************************
 			// Attribute Getters & Setters

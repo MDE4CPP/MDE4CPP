@@ -93,7 +93,7 @@ namespace ocl::Evaluations
 			//*********************************
 			// Reference Getters & Setters
 			//*********************************
-			virtual std::shared_ptr<Bag<ocl::Evaluations::CollectionLiteralPartEval>> getParts() const = 0;
+			virtual const std::shared_ptr<Bag<ocl::Evaluations::CollectionLiteralPartEval>>& getParts() const = 0;
 
 			//*********************************
 			// Union Reference Getters

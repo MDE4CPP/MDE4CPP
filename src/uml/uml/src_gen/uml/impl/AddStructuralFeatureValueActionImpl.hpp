@@ -60,13 +60,13 @@ namespace uml
 			endif
 			*/
 			 
-			virtual bool insertAt_pin(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
+			virtual bool insertAt_pin(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context) ;
 			/*!
 			A value InputPin is required.
 			value<>null
 			*/
 			 
-			virtual bool required_value(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
+			virtual bool required_value(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context) ;
 			
 			//*********************************
 			// Attribute Getters & Setters
@@ -92,13 +92,13 @@ namespace uml
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::InputPin> getInsertAt() const ;
+			virtual const std::shared_ptr<uml::InputPin>& getInsertAt() const ;
 			/*!
 			The InputPin that gives the position at which to insert the value in an ordered StructuralFeature. The type of the insertAt InputPin is UnlimitedNatural, but the value cannot be zero. It is omitted for unordered StructuralFeatures.
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual void setInsertAt(std::shared_ptr<uml::InputPin>) ;
+			virtual void setInsertAt(const std::shared_ptr<uml::InputPin>&) ;
 			
 			//*********************************
 			// Union Reference Getters
@@ -156,19 +156,19 @@ namespace uml
 			virtual void saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const;
 
 		protected:
-			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
+			virtual const std::shared_ptr<ecore::EClass>& eStaticClass() const;
 
 			//*********************************
 			// EStructuralFeature Get/Set/IsSet
 			//*********************************
 			virtual Any eGet(int featureID, bool resolve, bool coreType) const ;
-			virtual bool eSet(int featureID, Any newValue) ;
+			virtual bool eSet(int featureID, const Any& newValue) ;
 			virtual bool internalEIsSet(int featureID) const ;
 
 			//*********************************
 			// EOperation Invoke
 			//*********************************
-			virtual Any eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments) ;
+			virtual Any eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments) ;
 
 		private:
 			std::weak_ptr<uml::AddStructuralFeatureValueAction> m_thisAddStructuralFeatureValueActionPtr;

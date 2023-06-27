@@ -39,9 +39,9 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
+#include "uml/umlFactory.hpp"
 #include "fUML/Semantics/Activities/ActivitiesFactory.hpp"
 #include "fUML/Semantics/Actions/ActionsFactory.hpp"
-#include "uml/umlFactory.hpp"
 #include "fUML/Semantics/CommonBehavior/CommonBehaviorFactory.hpp"
 #include "uml/Action.hpp"
 #include "fUML/Semantics/Activities/ActivityEdgeInstance.hpp"
@@ -56,8 +56,8 @@
 #include "fUML/Semantics/Actions/PinActivation.hpp"
 #include "fUML/Semantics/Activities/Token.hpp"
 //Factories and Package includes
-#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/SemanticsPackage.hpp"
+#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/Actions/ActionsPackage.hpp"
 #include "fUML/Semantics/Activities/ActivitiesPackage.hpp"
 #include "fUML/Semantics/CommonBehavior/CommonBehaviorPackage.hpp"
@@ -164,18 +164,18 @@ std::shared_ptr<fUML::Semantics::CommonBehavior::Execution> CallBehaviorActionAc
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference callBehaviorAction */
-std::shared_ptr<uml::CallBehaviorAction> CallBehaviorActionActivationImpl::getCallBehaviorAction() const
+const std::shared_ptr<uml::CallBehaviorAction>& CallBehaviorActionActivationImpl::getCallBehaviorAction() const
 {
     return m_callBehaviorAction;
 }
-void CallBehaviorActionActivationImpl::setCallBehaviorAction(std::shared_ptr<uml::CallBehaviorAction> _callBehaviorAction)
+void CallBehaviorActionActivationImpl::setCallBehaviorAction(const std::shared_ptr<uml::CallBehaviorAction>& _callBehaviorAction)
 {
     m_callBehaviorAction = _callBehaviorAction;
 	//additional setter call for redefined reference CallActionActivation::callAction
 	fUML::Semantics::Actions::CallActionActivationImpl::setCallAction(_callBehaviorAction);
 }
 /*Additional Setter for redefined reference 'CallActionActivation::callAction'*/
-void CallBehaviorActionActivationImpl::setCallAction(std::shared_ptr<uml::CallAction> _callAction)
+void CallBehaviorActionActivationImpl::setCallAction(const std::shared_ptr<uml::CallAction>& _callAction)
 {
 	std::shared_ptr<uml::CallBehaviorAction> _callBehaviorAction = std::dynamic_pointer_cast<uml::CallBehaviorAction>(_callAction);
 	if(_callBehaviorAction)
@@ -191,7 +191,7 @@ void CallBehaviorActionActivationImpl::setCallAction(std::shared_ptr<uml::CallAc
 	}
 }
 /*Additional Setter for redefined reference 'ActionActivation::action'*/
-void CallBehaviorActionActivationImpl::setAction(std::shared_ptr<uml::Action> _action)
+void CallBehaviorActionActivationImpl::setAction(const std::shared_ptr<uml::Action>& _action)
 {
 	std::shared_ptr<uml::CallBehaviorAction> _callBehaviorAction = std::dynamic_pointer_cast<uml::CallBehaviorAction>(_action);
 	if(_callBehaviorAction)
@@ -207,7 +207,7 @@ void CallBehaviorActionActivationImpl::setAction(std::shared_ptr<uml::Action> _a
 	}
 }
 /*Additional Setter for redefined reference 'ActivityNodeActivation::node'*/
-void CallBehaviorActionActivationImpl::setNode(std::shared_ptr<uml::ActivityNode> _node)
+void CallBehaviorActionActivationImpl::setNode(const std::shared_ptr<uml::ActivityNode>& _node)
 {
 	std::shared_ptr<uml::CallBehaviorAction> _callBehaviorAction = std::dynamic_pointer_cast<uml::CallBehaviorAction>(_node);
 	if(_callBehaviorAction)
@@ -354,7 +354,7 @@ void CallBehaviorActionActivationImpl::saveContent(std::shared_ptr<persistence::
 	}
 }
 
-std::shared_ptr<ecore::EClass> CallBehaviorActionActivationImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& CallBehaviorActionActivationImpl::eStaticClass() const
 {
 	return fUML::Semantics::Actions::ActionsPackage::eInstance()->getCallBehaviorActionActivation_Class();
 }
@@ -382,7 +382,7 @@ bool CallBehaviorActionActivationImpl::internalEIsSet(int featureID) const
 	return CallActionActivationImpl::internalEIsSet(featureID);
 }
 
-bool CallBehaviorActionActivationImpl::eSet(int featureID, Any newValue)
+bool CallBehaviorActionActivationImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -402,7 +402,7 @@ bool CallBehaviorActionActivationImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any CallBehaviorActionActivationImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any CallBehaviorActionActivationImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

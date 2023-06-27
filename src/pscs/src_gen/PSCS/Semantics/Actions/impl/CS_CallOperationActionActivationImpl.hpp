@@ -45,12 +45,12 @@ namespace PSCS::Semantics::Actions
 			//*********************************
 			// Operations
 			//*********************************
-			virtual bool _isCreate(std::shared_ptr<uml::Operation> operation) ;
+			virtual bool _isCreate(const std::shared_ptr<uml::Operation>& operation) ;
 			virtual void doAction() ;
 			virtual std::shared_ptr<fUML::Semantics::CommonBehavior::Execution> getCallExecution() ;
-			virtual bool isCreate(std::shared_ptr<uml::Operation> operation) ;
-			virtual bool isOperationProvided(std::shared_ptr<uml::Port> port,std::shared_ptr<uml::Operation> operation) ;
-			virtual bool isOperationRequired(std::shared_ptr<uml::Port> port,std::shared_ptr<uml::Operation> operation) ;
+			virtual bool isCreate(const std::shared_ptr<uml::Operation>& operation) ;
+			virtual bool isOperationProvided(const std::shared_ptr<uml::Port>& port, const std::shared_ptr<uml::Operation>& operation) ;
+			virtual bool isOperationRequired(const std::shared_ptr<uml::Port>& port, const std::shared_ptr<uml::Operation>& operation) ;
 			
 			//*********************************
 			// Attribute Getters & Setters
@@ -81,19 +81,19 @@ namespace PSCS::Semantics::Actions
 			virtual void saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const;
 
 		protected:
-			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
+			virtual const std::shared_ptr<ecore::EClass>& eStaticClass() const;
 
 			//*********************************
 			// EStructuralFeature Get/Set/IsSet
 			//*********************************
 			virtual Any eGet(int featureID, bool resolve, bool coreType) const ;
-			virtual bool eSet(int featureID, Any newValue) ;
+			virtual bool eSet(int featureID, const Any& newValue) ;
 			virtual bool internalEIsSet(int featureID) const ;
 
 			//*********************************
 			// EOperation Invoke
 			//*********************************
-			virtual Any eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments) ;
+			virtual Any eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments) ;
 
 		private:
 			std::weak_ptr<PSCS::Semantics::Actions::CS_CallOperationActionActivation> m_thisCS_CallOperationActionActivationPtr;

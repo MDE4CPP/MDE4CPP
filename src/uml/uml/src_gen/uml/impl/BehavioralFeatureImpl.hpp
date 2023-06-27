@@ -52,12 +52,12 @@ namespace uml
 			isAbstract implies method->isEmpty()
 			*/
 			 
-			virtual bool abstract_no_method(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
+			virtual bool abstract_no_method(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context) ;
 			/*!
 			Creates a return result parameter with the specified name and type.
 			*/
 			 
-			virtual std::shared_ptr<uml::Parameter> createReturnResult(std::string name,std::shared_ptr<uml::Type> type) ;
+			virtual std::shared_ptr<uml::Parameter> createReturnResult(std::string name, const std::shared_ptr<uml::Type>& type) ;
 			/*!
 			The ownedParameters with direction in and inout.
 			result = (ownedParameter->select(direction=ParameterDirectionKind::_'in' or direction=ParameterDirectionKind::inout))
@@ -109,25 +109,25 @@ namespace uml
 			<p>From package UML::Classification.</p>
 			*/
 			
-			virtual std::shared_ptr<Bag<uml::Behavior>> getMethod() const ;
+			virtual const std::shared_ptr<Bag<uml::Behavior>>& getMethod() const ;
 			/*!
 			The ordered set of formal Parameters of this BehavioralFeature.
 			<p>From package UML::Classification.</p>
 			*/
 			
-			virtual std::shared_ptr<Subset<uml::Parameter, uml::NamedElement>> getOwnedParameter() const ;
+			virtual const std::shared_ptr<Subset<uml::Parameter, uml::NamedElement>>& getOwnedParameter() const ;
 			/*!
 			The ParameterSets owned by this BehavioralFeature.
 			<p>From package UML::Classification.</p>
 			*/
 			
-			virtual std::shared_ptr<Subset<uml::ParameterSet, uml::NamedElement>> getOwnedParameterSet() const ;
+			virtual const std::shared_ptr<Subset<uml::ParameterSet, uml::NamedElement>>& getOwnedParameterSet() const ;
 			/*!
 			The Types representing exceptions that may be raised during an invocation of this BehavioralFeature.
 			<p>From package UML::Classification.</p>
 			*/
 			
-			virtual std::shared_ptr<Bag<uml::Type>> getRaisedException() const ;
+			virtual const std::shared_ptr<Bag<uml::Type>>& getRaisedException() const ;
 			
 			//*********************************
 			// Union Reference Getters
@@ -173,19 +173,19 @@ namespace uml
 			virtual void saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const;
 
 		protected:
-			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
+			virtual const std::shared_ptr<ecore::EClass>& eStaticClass() const;
 
 			//*********************************
 			// EStructuralFeature Get/Set/IsSet
 			//*********************************
 			virtual Any eGet(int featureID, bool resolve, bool coreType) const ;
-			virtual bool eSet(int featureID, Any newValue) ;
+			virtual bool eSet(int featureID, const Any& newValue) ;
 			virtual bool internalEIsSet(int featureID) const ;
 
 			//*********************************
 			// EOperation Invoke
 			//*********************************
-			virtual Any eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments) ;
+			virtual Any eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments) ;
 
 		private:
 			std::weak_ptr<uml::BehavioralFeature> m_thisBehavioralFeaturePtr;

@@ -81,12 +81,12 @@ namespace uml
 			Creates a dependency between this named element and the specified supplier, owned by this named element's nearest package.
 			*/
 			 
-			virtual std::shared_ptr<uml::Dependency> createDependency(std::shared_ptr<uml::NamedElement> supplier) ;
+			virtual std::shared_ptr<uml::Dependency> createDependency(const std::shared_ptr<uml::NamedElement>& supplier) ;
 			/*!
 			Creates a usage between this named element and the specified supplier, owned by this named element's nearest package.
 			*/
 			 
-			virtual std::shared_ptr<uml::Usage> createUsage(std::shared_ptr<uml::NamedElement> supplier) ;
+			virtual std::shared_ptr<uml::Usage> createUsage(const std::shared_ptr<uml::NamedElement>& supplier) ;
 			/*!
 			result = (Dependency.allInstances()->select(d | d.client->includes(self)))
 			<p>From package UML::CommonStructure.</p>
@@ -121,14 +121,14 @@ namespace uml
 			name=null or allNamespaces()->select( ns | ns.name=null )->notEmpty() implies qualifiedName = null
 			*/
 			 
-			virtual bool has_no_qualified_name(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
+			virtual bool has_no_qualified_name(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context) ;
 			/*!
 			When there is a name, and all of the containing Namespaces have a name, the qualifiedName is constructed from the name of the NamedElement and the names of the containing Namespaces.
 			(name <> null and allNamespaces()->select(ns | ns.name = null)->isEmpty()) implies
 			  qualifiedName = allNamespaces()->iterate( ns : Namespace; agg: String = name | ns.name.concat(self.separator()).concat(agg))
 			*/
 			 
-			virtual bool has_qualified_name(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
+			virtual bool has_qualified_name(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context) ;
 			/*!
 			The query isDistinguishableFrom() determines whether two NamedElements may logically co-exist within a Namespace. By default, two named elements are distinguishable if (a) they have types neither of which is a kind of the other or (b) they have different names.
 			result = ((self.oclIsKindOf(n.oclType()) or n.oclIsKindOf(self.oclType())) implies
@@ -137,7 +137,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			 
-			virtual bool isDistinguishableFrom(std::shared_ptr<uml::NamedElement> n,std::shared_ptr<uml::Namespace> ns) ;
+			virtual bool isDistinguishableFrom(const std::shared_ptr<uml::NamedElement>& n, const std::shared_ptr<uml::Namespace>& ns) ;
 			/*!
 			The query separator() gives the string that is used to separate names when constructing a qualifiedName.
 			result = ('::')
@@ -150,7 +150,7 @@ namespace uml
 			(namespace = null and owner <> null) implies visibility = null
 			*/
 			 
-			virtual bool visibility_needs_ownership(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
+			virtual bool visibility_needs_ownership(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context) ;
 			
 			//*********************************
 			// Attribute Getters & Setters
@@ -189,19 +189,19 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::shared_ptr<Bag<uml::Dependency>> getClientDependency() const ;
+			virtual const std::shared_ptr<Bag<uml::Dependency>>& getClientDependency() const ;
 			/*!
 			The StringExpression used to define the name of this NamedElement.
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::StringExpression> getNameExpression() const ;
+			virtual const std::shared_ptr<uml::StringExpression>& getNameExpression() const ;
 			/*!
 			The StringExpression used to define the name of this NamedElement.
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual void setNameExpression(std::shared_ptr<uml::StringExpression>) ;
+			virtual void setNameExpression(const std::shared_ptr<uml::StringExpression>&) ;
 			
 			
 			//*********************************
@@ -242,19 +242,19 @@ namespace uml
 			virtual void saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const;
 
 		protected:
-			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
+			virtual const std::shared_ptr<ecore::EClass>& eStaticClass() const;
 
 			//*********************************
 			// EStructuralFeature Get/Set/IsSet
 			//*********************************
 			virtual Any eGet(int featureID, bool resolve, bool coreType) const ;
-			virtual bool eSet(int featureID, Any newValue) ;
+			virtual bool eSet(int featureID, const Any& newValue) ;
 			virtual bool internalEIsSet(int featureID) const ;
 
 			//*********************************
 			// EOperation Invoke
 			//*********************************
-			virtual Any eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments) ;
+			virtual Any eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments) ;
 
 		private:
 			std::weak_ptr<uml::NamedElement> m_thisNamedElementPtr;

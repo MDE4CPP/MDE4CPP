@@ -81,8 +81,8 @@ namespace uml
 			//*********************************
 			// Reference Getters & Setters
 			//*********************************
-			virtual std::shared_ptr<uml::Object> getValue() const = 0;
-			virtual void setValue(std::shared_ptr<uml::Object>) = 0;
+			virtual const std::shared_ptr<uml::Object>& getValue() const = 0;
+			virtual void setValue(const std::shared_ptr<uml::Object>&) = 0;
 
 			//*********************************
 			// Union Reference Getters

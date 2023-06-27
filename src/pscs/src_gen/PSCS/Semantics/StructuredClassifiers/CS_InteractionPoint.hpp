@@ -39,13 +39,13 @@ namespace fUML::Semantics::CommonBehavior
 	class Execution;
 	class ParameterValue;
 }
-namespace PSCS::Semantics::StructuredClassifiers 
-{
-	class CS_Reference;
-}
 namespace fUML::Semantics::StructuredClassifiers 
 {
 	class Object;
+}
+namespace PSCS::Semantics::StructuredClassifiers 
+{
+	class CS_Reference;
 }
 namespace uml 
 {
@@ -85,10 +85,10 @@ namespace PSCS::Semantics::StructuredClassifiers
 			//*********************************
 			// Operations
 			//*********************************
-			virtual bool checkAllParents(std::shared_ptr<uml::Classifier> type,std::shared_ptr<uml::Classifier> classifier) = 0;
-			virtual std::shared_ptr<fUML::Semantics::CommonBehavior::Execution> dispatch(std::shared_ptr<uml::Operation> operation) = 0;
-			virtual void send(std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccurrence> eventOccurrence) = 0;
-			virtual void startBehavior(std::shared_ptr<uml::Class> classifier,std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> inputs) = 0;
+			virtual bool checkAllParents(const std::shared_ptr<uml::Classifier>& type, const std::shared_ptr<uml::Classifier>& classifier) = 0;
+			virtual std::shared_ptr<fUML::Semantics::CommonBehavior::Execution> dispatch(const std::shared_ptr<uml::Operation>& operation) = 0;
+			virtual void send(const std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccurrence>& eventOccurrence) = 0;
+			virtual void startBehavior(const std::shared_ptr<uml::Class>& classifier, const std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>>& inputs) = 0;
 
 			//*********************************
 			// Attribute Getters & Setters
@@ -97,10 +97,10 @@ namespace PSCS::Semantics::StructuredClassifiers
 			//*********************************
 			// Reference Getters & Setters
 			//*********************************
-			virtual std::shared_ptr<uml::Port> getDefiningPort() const = 0;
-			virtual void setDefiningPort(std::shared_ptr<uml::Port>) = 0;
-			virtual std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Reference> getOwner() const = 0;
-			virtual void setOwner(std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Reference>) = 0;
+			virtual const std::shared_ptr<uml::Port>& getDefiningPort() const = 0;
+			virtual void setDefiningPort(const std::shared_ptr<uml::Port>&) = 0;
+			virtual const std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Reference>& getOwner() const = 0;
+			virtual void setOwner(const std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Reference>&) = 0;
 
 			//*********************************
 			// Union Reference Getters

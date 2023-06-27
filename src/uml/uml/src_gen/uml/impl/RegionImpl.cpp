@@ -231,17 +231,17 @@ std::shared_ptr<uml::StateMachine> RegionImpl::containingStateMachine()
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool RegionImpl::deep_history_vertex(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool RegionImpl::deep_history_vertex(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool RegionImpl::initial_vertex(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool RegionImpl::initial_vertex(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool RegionImpl::owned(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool RegionImpl::owned(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -251,7 +251,7 @@ std::shared_ptr<uml::Classifier> RegionImpl::redefinitionContext()
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool RegionImpl::shallow_history_vertex(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool RegionImpl::shallow_history_vertex(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -264,11 +264,11 @@ bool RegionImpl::shallow_history_vertex(Any diagnostics,std::shared_ptr<std::map
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference extendedRegion */
-std::shared_ptr<uml::Region> RegionImpl::getExtendedRegion() const
+const std::shared_ptr<uml::Region>& RegionImpl::getExtendedRegion() const
 {
     return m_extendedRegion;
 }
-void RegionImpl::setExtendedRegion(std::shared_ptr<uml::Region> _extendedRegion)
+void RegionImpl::setExtendedRegion(const std::shared_ptr<uml::Region>& _extendedRegion)
 {
     m_extendedRegion = _extendedRegion;
 	
@@ -297,7 +297,7 @@ void RegionImpl::setStateMachine(std::weak_ptr<uml::StateMachine> _stateMachine)
 }
 
 /* Getter & Setter for reference subvertex */
-std::shared_ptr<Subset<uml::Vertex, uml::NamedElement>> RegionImpl::getSubvertex() const
+const std::shared_ptr<Subset<uml::Vertex, uml::NamedElement>>& RegionImpl::getSubvertex() const
 {
 	if(m_subvertex == nullptr)
 	{
@@ -318,7 +318,7 @@ std::shared_ptr<Subset<uml::Vertex, uml::NamedElement>> RegionImpl::getSubvertex
 }
 
 /* Getter & Setter for reference transition */
-std::shared_ptr<Subset<uml::Transition, uml::NamedElement>> RegionImpl::getTransition() const
+const std::shared_ptr<Subset<uml::Transition, uml::NamedElement>>& RegionImpl::getTransition() const
 {
 	if(m_transition == nullptr)
 	{
@@ -616,7 +616,7 @@ void RegionImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandl
 	}
 }
 
-std::shared_ptr<ecore::EClass> RegionImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& RegionImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getRegion_Class();
 }
@@ -680,7 +680,7 @@ bool RegionImpl::internalEIsSet(int featureID) const
 	return result;
 }
 
-bool RegionImpl::eSet(int featureID, Any newValue)
+bool RegionImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -797,7 +797,7 @@ bool RegionImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any RegionImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any RegionImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

@@ -90,12 +90,12 @@ namespace fUML::Semantics::Actions
 			//*********************************
 			// Reference Getters & Setters
 			//*********************************
-			virtual std::shared_ptr<uml::RemoveStructuralFeatureValueAction> getRemoveStructuralFeatureValueAction() const = 0;
-			virtual void setRemoveStructuralFeatureValueAction(std::shared_ptr<uml::RemoveStructuralFeatureValueAction>) = 0;
+			virtual const std::shared_ptr<uml::RemoveStructuralFeatureValueAction>& getRemoveStructuralFeatureValueAction() const = 0;
+			virtual void setRemoveStructuralFeatureValueAction(const std::shared_ptr<uml::RemoveStructuralFeatureValueAction>&) = 0;
 			/*Additional Setter for 'ActionActivation::action' redefined by reference 'removeStructuralFeatureValueAction'*/
-			virtual void setAction(std::shared_ptr<uml::Action>) = 0;
+			virtual void setAction(const std::shared_ptr<uml::Action>&) = 0;
 			/*Additional Setter for 'ActivityNodeActivation::node' redefined by reference 'removeStructuralFeatureValueAction'*/
-			virtual void setNode(std::shared_ptr<uml::ActivityNode>) = 0;
+			virtual void setNode(const std::shared_ptr<uml::ActivityNode>&) = 0;
 
 			//*********************************
 			// Union Reference Getters

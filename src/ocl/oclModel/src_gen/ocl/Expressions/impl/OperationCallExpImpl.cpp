@@ -231,7 +231,7 @@ std::shared_ptr<ecore::EObject> OperationCallExpImpl::copy() const
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference argument */
-std::shared_ptr<Bag<ocl::Expressions::OclExpression>> OperationCallExpImpl::getArgument() const
+const std::shared_ptr<Bag<ocl::Expressions::OclExpression>>& OperationCallExpImpl::getArgument() const
 {
 	if(m_argument == nullptr)
 	{
@@ -243,11 +243,11 @@ std::shared_ptr<Bag<ocl::Expressions::OclExpression>> OperationCallExpImpl::getA
 }
 
 /* Getter & Setter for reference referredOperation */
-std::shared_ptr<ecore::EOperation> OperationCallExpImpl::getReferredOperation() const
+const std::shared_ptr<ecore::EOperation>& OperationCallExpImpl::getReferredOperation() const
 {
     return m_referredOperation;
 }
-void OperationCallExpImpl::setReferredOperation(std::shared_ptr<ecore::EOperation> _referredOperation)
+void OperationCallExpImpl::setReferredOperation(const std::shared_ptr<ecore::EOperation>& _referredOperation)
 {
     m_referredOperation = _referredOperation;
 	
@@ -452,7 +452,7 @@ void OperationCallExpImpl::saveContent(std::shared_ptr<persistence::interfaces::
 	}
 }
 
-std::shared_ptr<ecore::EClass> OperationCallExpImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& OperationCallExpImpl::eStaticClass() const
 {
 	return ocl::Expressions::ExpressionsPackage::eInstance()->getOperationCallExp_Class();
 }
@@ -484,7 +484,7 @@ bool OperationCallExpImpl::internalEIsSet(int featureID) const
 	return FeatureCallExpImpl::internalEIsSet(featureID);
 }
 
-bool OperationCallExpImpl::eSet(int featureID, Any newValue)
+bool OperationCallExpImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -541,7 +541,7 @@ bool OperationCallExpImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any OperationCallExpImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any OperationCallExpImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

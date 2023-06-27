@@ -61,20 +61,20 @@ namespace ocl::Expressions
 			//*********************************
 			virtual std::weak_ptr<ocl::Expressions::IterateExp> getBaseExp() const ;
 			virtual void setBaseExp(std::weak_ptr<ocl::Expressions::IterateExp>) ;
-			virtual std::shared_ptr<ocl::Expressions::OclExpression> getInitExpression() const ;
-			virtual void setInitExpression(std::shared_ptr<ocl::Expressions::OclExpression>) ;
+			virtual const std::shared_ptr<ocl::Expressions::OclExpression>& getInitExpression() const ;
+			virtual void setInitExpression(const std::shared_ptr<ocl::Expressions::OclExpression>&) ;
 			virtual std::weak_ptr<ocl::Expressions::LoopExp> getLoopExp() const ;
 			virtual void setLoopExp(std::weak_ptr<ocl::Expressions::LoopExp>) ;
-			virtual std::shared_ptr<ocl::Expressions::VariableExp> getReferringExp() const ;
-			virtual void setReferringExp(std::shared_ptr<ocl::Expressions::VariableExp>) ;
-			virtual std::shared_ptr<ecore::EParameter> getRepresentedParameter() const ;
-			virtual void setRepresentedParameter(std::shared_ptr<ecore::EParameter>) ;
+			virtual const std::shared_ptr<ocl::Expressions::VariableExp>& getReferringExp() const ;
+			virtual void setReferringExp(const std::shared_ptr<ocl::Expressions::VariableExp>&) ;
+			virtual const std::shared_ptr<ecore::EParameter>& getRepresentedParameter() const ;
+			virtual void setRepresentedParameter(const std::shared_ptr<ecore::EParameter>&) ;
 			virtual std::weak_ptr<ocl::Expressions::ExpressionInOcl> getResultOwner() const ;
 			virtual void setResultOwner(std::weak_ptr<ocl::Expressions::ExpressionInOcl>) ;
 			virtual std::weak_ptr<ocl::Expressions::ExpressionInOcl> getSelfOwner() const ;
 			virtual void setSelfOwner(std::weak_ptr<ocl::Expressions::ExpressionInOcl>) ;
-			virtual std::shared_ptr<fUML::Semantics::Values::Value> getValue() const ;
-			virtual void setValue(std::shared_ptr<fUML::Semantics::Values::Value>) ;
+			virtual const std::shared_ptr<fUML::Semantics::Values::Value>& getValue() const ;
+			virtual void setValue(const std::shared_ptr<fUML::Semantics::Values::Value>&) ;
 			virtual std::weak_ptr<ocl::Expressions::ExpressionInOcl> getVarOwner() const ;
 			virtual void setVarOwner(std::weak_ptr<ocl::Expressions::ExpressionInOcl>) ;
 			
@@ -98,19 +98,19 @@ namespace ocl::Expressions
 			virtual void saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const;
 
 		protected:
-			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
+			virtual const std::shared_ptr<ecore::EClass>& eStaticClass() const;
 
 			//*********************************
 			// EStructuralFeature Get/Set/IsSet
 			//*********************************
 			virtual Any eGet(int featureID, bool resolve, bool coreType) const ;
-			virtual bool eSet(int featureID, Any newValue) ;
+			virtual bool eSet(int featureID, const Any& newValue) ;
 			virtual bool internalEIsSet(int featureID) const ;
 
 			//*********************************
 			// EOperation Invoke
 			//*********************************
-			virtual Any eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments) ;
+			virtual Any eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments) ;
 
 		private:
 			std::weak_ptr<ocl::Expressions::Variable> m_thisVariablePtr;

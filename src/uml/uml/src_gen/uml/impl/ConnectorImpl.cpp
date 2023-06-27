@@ -203,12 +203,12 @@ uml::ConnectorKind ConnectorImpl::getKind()
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool ConnectorImpl::roles(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool ConnectorImpl::roles(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool ConnectorImpl::types(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool ConnectorImpl::types(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -217,7 +217,7 @@ bool ConnectorImpl::types(Any diagnostics,std::shared_ptr<std::map < Any, Any>> 
 // Attribute Getters & Setters
 //*********************************
 /* Getter & Setter for attribute kind */
-uml::ConnectorKind ConnectorImpl::getKind() const 
+uml::ConnectorKind ConnectorImpl::getKind() const
 {
 	return m_kind;
 }
@@ -226,7 +226,7 @@ uml::ConnectorKind ConnectorImpl::getKind() const
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference contract */
-std::shared_ptr<Bag<uml::Behavior>> ConnectorImpl::getContract() const
+const std::shared_ptr<Bag<uml::Behavior>>& ConnectorImpl::getContract() const
 {
 	if(m_contract == nullptr)
 	{
@@ -238,7 +238,7 @@ std::shared_ptr<Bag<uml::Behavior>> ConnectorImpl::getContract() const
 }
 
 /* Getter & Setter for reference end */
-std::shared_ptr<Subset<uml::ConnectorEnd, uml::Element>> ConnectorImpl::getEnd() const
+const std::shared_ptr<Subset<uml::ConnectorEnd, uml::Element>>& ConnectorImpl::getEnd() const
 {
 	if(m_end == nullptr)
 	{
@@ -259,7 +259,7 @@ std::shared_ptr<Subset<uml::ConnectorEnd, uml::Element>> ConnectorImpl::getEnd()
 }
 
 /* Getter & Setter for reference redefinedConnector */
-std::shared_ptr<Subset<uml::Connector, uml::RedefinableElement>> ConnectorImpl::getRedefinedConnector() const
+const std::shared_ptr<Subset<uml::Connector, uml::RedefinableElement>>& ConnectorImpl::getRedefinedConnector() const
 {
 	if(m_redefinedConnector == nullptr)
 	{
@@ -291,11 +291,11 @@ void ConnectorImpl::setStructuredClassifier(std::weak_ptr<uml::StructuredClassif
 }
 
 /* Getter & Setter for reference type */
-std::shared_ptr<uml::Association> ConnectorImpl::getType() const
+const std::shared_ptr<uml::Association>& ConnectorImpl::getType() const
 {
     return m_type;
 }
-void ConnectorImpl::setType(std::shared_ptr<uml::Association> _type)
+void ConnectorImpl::setType(const std::shared_ptr<uml::Association>& _type)
 {
     m_type = _type;
 	
@@ -580,7 +580,7 @@ void ConnectorImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHa
 	}
 }
 
-std::shared_ptr<ecore::EClass> ConnectorImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& ConnectorImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getConnector_Class();
 }
@@ -631,7 +631,7 @@ bool ConnectorImpl::internalEIsSet(int featureID) const
 	return FeatureImpl::internalEIsSet(featureID);
 }
 
-bool ConnectorImpl::eSet(int featureID, Any newValue)
+bool ConnectorImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -770,7 +770,7 @@ bool ConnectorImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any ConnectorImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any ConnectorImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

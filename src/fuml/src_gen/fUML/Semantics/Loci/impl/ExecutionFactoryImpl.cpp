@@ -165,8 +165,8 @@
 #include "fUML/Semantics/Loci/SemanticVisitor.hpp"
 #include "uml/ValueSpecification.hpp"
 //Factories and Package includes
-#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/SemanticsPackage.hpp"
+#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/CommonBehavior/CommonBehaviorPackage.hpp"
 #include "fUML/Semantics/Loci/LociPackage.hpp"
 #include "fUML/Semantics/StructuredClassifiers/StructuredClassifiersPackage.hpp"
@@ -245,7 +245,7 @@ std::shared_ptr<ecore::EObject> ExecutionFactoryImpl::copy() const
 //*********************************
 // Operations
 //*********************************
-void ExecutionFactoryImpl::addBuiltInType(std::shared_ptr<uml::PrimitiveType> type)
+void ExecutionFactoryImpl::addBuiltInType(const std::shared_ptr<uml::PrimitiveType>& type)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -254,7 +254,7 @@ void ExecutionFactoryImpl::addBuiltInType(std::shared_ptr<uml::PrimitiveType> ty
 	//end of body
 }
 
-void ExecutionFactoryImpl::addPrimitiveBehaviorPrototype(std::shared_ptr<fUML::Semantics::CommonBehavior::OpaqueBehaviorExecution> execution)
+void ExecutionFactoryImpl::addPrimitiveBehaviorPrototype(const std::shared_ptr<fUML::Semantics::CommonBehavior::OpaqueBehaviorExecution>& execution)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -263,7 +263,7 @@ void ExecutionFactoryImpl::addPrimitiveBehaviorPrototype(std::shared_ptr<fUML::S
 	//end of body
 }
 
-void ExecutionFactoryImpl::assignStrategy(std::shared_ptr<fUML::Semantics::Loci::SemanticStrategy> strategy)
+void ExecutionFactoryImpl::assignStrategy(const std::shared_ptr<fUML::Semantics::Loci::SemanticStrategy>& strategy)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -278,7 +278,7 @@ void ExecutionFactoryImpl::assignStrategy(std::shared_ptr<fUML::Semantics::Loci:
 	//end of body
 }
 
-std::shared_ptr<fUML::Semantics::Values::Evaluation> ExecutionFactoryImpl::createEvaluation(std::shared_ptr<uml::ValueSpecification> specification)
+std::shared_ptr<fUML::Semantics::Values::Evaluation> ExecutionFactoryImpl::createEvaluation(const std::shared_ptr<uml::ValueSpecification>& specification)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -291,7 +291,7 @@ std::shared_ptr<fUML::Semantics::Values::Evaluation> ExecutionFactoryImpl::creat
 	//end of body
 }
 
-std::shared_ptr<fUML::Semantics::CommonBehavior::Execution> ExecutionFactoryImpl::createExecution(std::shared_ptr<uml::Behavior> behavior,std::shared_ptr<fUML::Semantics::StructuredClassifiers::Object> context)
+std::shared_ptr<fUML::Semantics::CommonBehavior::Execution> ExecutionFactoryImpl::createExecution(const std::shared_ptr<uml::Behavior>& behavior, const std::shared_ptr<fUML::Semantics::StructuredClassifiers::Object>& context)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -417,7 +417,7 @@ int ExecutionFactoryImpl::getStrategyIndex(std::string name)
 
 
 
-std::shared_ptr<fUML::Semantics::CommonBehavior::OpaqueBehaviorExecution> ExecutionFactoryImpl::instantiateOpaqueBehaviorExecution(std::shared_ptr<uml::Behavior> behavior)
+std::shared_ptr<fUML::Semantics::CommonBehavior::OpaqueBehaviorExecution> ExecutionFactoryImpl::instantiateOpaqueBehaviorExecution(const std::shared_ptr<uml::Behavior>& behavior)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -445,7 +445,7 @@ std::shared_ptr<fUML::Semantics::CommonBehavior::OpaqueBehaviorExecution> Execut
 	//end of body
 }
 
-std::shared_ptr<fUML::Semantics::Loci::SemanticVisitor> ExecutionFactoryImpl::instantiateVisitor(std::shared_ptr<uml::Element> element)
+std::shared_ptr<fUML::Semantics::Loci::SemanticVisitor> ExecutionFactoryImpl::instantiateVisitor(const std::shared_ptr<uml::Element>& element)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -716,7 +716,7 @@ std::shared_ptr<fUML::Semantics::Loci::SemanticVisitor> ExecutionFactoryImpl::in
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference builtInTypes */
-std::shared_ptr<Bag<uml::PrimitiveType>> ExecutionFactoryImpl::getBuiltInTypes() const
+const std::shared_ptr<Bag<uml::PrimitiveType>>& ExecutionFactoryImpl::getBuiltInTypes() const
 {
 	if(m_builtInTypes == nullptr)
 	{
@@ -739,7 +739,7 @@ void ExecutionFactoryImpl::setLocus(std::weak_ptr<fUML::Semantics::Loci::Locus> 
 }
 
 /* Getter & Setter for reference primitiveBehaviorPrototypes */
-std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::OpaqueBehaviorExecution>> ExecutionFactoryImpl::getPrimitiveBehaviorPrototypes() const
+const std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::OpaqueBehaviorExecution>>& ExecutionFactoryImpl::getPrimitiveBehaviorPrototypes() const
 {
 	if(m_primitiveBehaviorPrototypes == nullptr)
 	{
@@ -751,7 +751,7 @@ std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::OpaqueBehaviorExecution>> E
 }
 
 /* Getter & Setter for reference strategies */
-std::shared_ptr<Bag<fUML::Semantics::Loci::SemanticStrategy>> ExecutionFactoryImpl::getStrategies() const
+const std::shared_ptr<Bag<fUML::Semantics::Loci::SemanticStrategy>>& ExecutionFactoryImpl::getStrategies() const
 {
 	if(m_strategies == nullptr)
 	{
@@ -926,7 +926,7 @@ void ExecutionFactoryImpl::saveContent(std::shared_ptr<persistence::interfaces::
 	}
 }
 
-std::shared_ptr<ecore::EClass> ExecutionFactoryImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& ExecutionFactoryImpl::eStaticClass() const
 {
 	return fUML::Semantics::Loci::LociPackage::eInstance()->getExecutionFactory_Class();
 }
@@ -969,7 +969,7 @@ bool ExecutionFactoryImpl::internalEIsSet(int featureID) const
 	return ecore::EObjectImpl::internalEIsSet(featureID);
 }
 
-bool ExecutionFactoryImpl::eSet(int featureID, Any newValue)
+bool ExecutionFactoryImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -1100,7 +1100,7 @@ bool ExecutionFactoryImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any ExecutionFactoryImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any ExecutionFactoryImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

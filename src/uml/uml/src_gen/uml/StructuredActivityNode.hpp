@@ -100,19 +100,19 @@ namespace uml
 				union(self.targetNodes().incoming->intersection(self.allOwnedNodes().outgoing))->asSet()
 			*/
 			 
-			virtual bool edges(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
+			virtual bool edges(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context) = 0;
 			/*!
 			The incoming ActivityEdges of an InputPin of a StructuredActivityNode must have sources that are not within the StructuredActivityNode.
 			input.incoming.source->excludesAll(allOwnedNodes()-output)
 			*/
 			 
-			virtual bool input_pin_edges(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
+			virtual bool input_pin_edges(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context) = 0;
 			/*!
 			The outgoing ActivityEdges of the OutputPins of a StructuredActivityNode must have targets that are not within the StructuredActivityNode.
 			output.outgoing.target->excludesAll(allOwnedNodes()-input)
 			*/
 			 
-			virtual bool output_pin_edges(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
+			virtual bool output_pin_edges(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context) = 0;
 			/*!
 			Return those ActivityNodes contained immediately within the StructuredActivityNode that may act as sources of edges owned by the StructuredActivityNode.
 			result = (node->union(input.oclAsType(ActivityNode)->asSet())->
@@ -154,31 +154,31 @@ namespace uml
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual std::shared_ptr<Subset<uml::ActivityEdge, uml::ActivityEdge, uml::Element>> getEdge() const = 0;
+			virtual const std::shared_ptr<Subset<uml::ActivityEdge, uml::ActivityEdge, uml::Element>>& getEdge() const = 0;
 			/*!
 			The ActivityNodes immediately contained in the StructuredActivityNode.
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual std::shared_ptr<Subset<uml::ActivityNode, uml::ActivityNode, uml::Element>> getNode() const = 0;
+			virtual const std::shared_ptr<Subset<uml::ActivityNode, uml::ActivityNode, uml::Element>>& getNode() const = 0;
 			/*!
 			The InputPins owned by the StructuredActivityNode.
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual std::shared_ptr<Subset<uml::InputPin, uml::InputPin>> getStructuredNodeInput() const = 0;
+			virtual const std::shared_ptr<Subset<uml::InputPin, uml::InputPin>>& getStructuredNodeInput() const = 0;
 			/*!
 			The OutputPins owned by the StructuredActivityNode.
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual std::shared_ptr<Subset<uml::OutputPin, uml::OutputPin>> getStructuredNodeOutput() const = 0;
+			virtual const std::shared_ptr<Subset<uml::OutputPin, uml::OutputPin>>& getStructuredNodeOutput() const = 0;
 			/*!
 			The Variables defined in the scope of the StructuredActivityNode.
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual std::shared_ptr<Subset<uml::Variable, uml::NamedElement>> getVariable() const = 0;
+			virtual const std::shared_ptr<Subset<uml::Variable, uml::NamedElement>>& getVariable() const = 0;
 
 			//*********************************
 			// Union Reference Getters

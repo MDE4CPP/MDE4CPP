@@ -105,7 +105,7 @@ namespace uml
 			Applies the specified stereotype to this element.
 			*/
 			 
-			virtual std::shared_ptr<ecore::EObject> applyStereotype(std::shared_ptr<uml::Stereotype> stereotype) = 0;
+			virtual std::shared_ptr<ecore::EObject> applyStereotype(const std::shared_ptr<uml::Stereotype>& stereotype) = 0;
 			/*!
 			Returns the parent container of this element if any. Return Null if there is no containing element.
 			
@@ -147,12 +147,12 @@ namespace uml
 			Retrieves the substereotype of the specified stereotype with the specified qualified name that is applied to this element, or null if no such stereotype is applied.
 			*/
 			 
-			virtual std::shared_ptr<uml::Stereotype> getAppliedSubstereotype(std::shared_ptr<uml::Stereotype> stereotype,std::string qualifiedName) = 0;
+			virtual std::shared_ptr<uml::Stereotype> getAppliedSubstereotype(const std::shared_ptr<uml::Stereotype>& stereotype, std::string qualifiedName) = 0;
 			/*!
 			Retrieves the substereotypes of the specified stereotype that are applied to this element.
 			*/
 			 
-			virtual std::shared_ptr<Bag<uml::Stereotype> > getAppliedSubstereotypes(std::shared_ptr<uml::Stereotype> stereotype) = 0;
+			virtual std::shared_ptr<Bag<uml::Stereotype> > getAppliedSubstereotypes(const std::shared_ptr<uml::Stereotype>& stereotype) = 0;
 			/*!
 			Retrieves the keywords for this element.
 			*/
@@ -184,7 +184,7 @@ namespace uml
 			Retrieves the relationships of the specified type in which this element is involved.
 			*/
 			 
-			virtual std::shared_ptr<Bag<uml::Relationship> > getRelationships(std::shared_ptr<ecore::EClass> eClass) = 0;
+			virtual std::shared_ptr<Bag<uml::Relationship> > getRelationships(const std::shared_ptr<ecore::EClass>& eClass) = 0;
 			/*!
 			Retrieves the stereotype with the specified qualified name that is required for this element, or null if no such stereotype is required.
 			*/
@@ -204,12 +204,12 @@ namespace uml
 			Retrieves the directed relationships of the specified type for which this element is a source.
 			*/
 			 
-			virtual std::shared_ptr<Bag<uml::DirectedRelationship> > getSourceDirectedRelationships(std::shared_ptr<ecore::EClass> eClass) = 0;
+			virtual std::shared_ptr<Bag<uml::DirectedRelationship> > getSourceDirectedRelationships(const std::shared_ptr<ecore::EClass>& eClass) = 0;
 			/*!
 			Retrieves the application of the specified stereotype for this element, or null if no such stereotype application exists.
 			*/
 			 
-			virtual std::shared_ptr<ecore::EObject> getStereotypeApplication(std::shared_ptr<uml::Stereotype> stereotype) = 0;
+			virtual std::shared_ptr<ecore::EObject> getStereotypeApplication(const std::shared_ptr<uml::Stereotype>& stereotype) = 0;
 			/*!
 			Retrieves the stereotype applications for this element.
 			*/
@@ -224,12 +224,12 @@ namespace uml
 			Retrieves the directed relationships of the specified type for which this element is a target.
 			*/
 			 
-			virtual std::shared_ptr<Bag<uml::DirectedRelationship> > getTargetDirectedRelationships(std::shared_ptr<ecore::EClass> eClass) = 0;
+			virtual std::shared_ptr<Bag<uml::DirectedRelationship> > getTargetDirectedRelationships(const std::shared_ptr<ecore::EClass>& eClass) = 0;
 			/*!
 			Retrieves the value of the property with the specified name in the specified stereotype for this element.
 			*/
 			 
-			virtual Any getValue(std::shared_ptr<uml::Stereotype> stereotype,std::string propertyName) = 0;
+			virtual Any getValue(const std::shared_ptr<uml::Stereotype>& stereotype, std::string propertyName) = 0;
 			/*!
 			Determines whether this element has the specified keyword.
 			*/
@@ -239,28 +239,28 @@ namespace uml
 			Determines whether this element has a (non-default) value for the property with the specified name in the specified stereotype.
 			*/
 			 
-			virtual bool hasValue(std::shared_ptr<uml::Stereotype> stereotype,std::string propertyName) = 0;
+			virtual bool hasValue(const std::shared_ptr<uml::Stereotype>& stereotype, std::string propertyName) = 0;
 			/*!
 			Elements that must be owned must have an owner.
 			mustBeOwned() implies owner->notEmpty()
 			*/
 			 
-			virtual bool has_owner(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
+			virtual bool has_owner(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context) = 0;
 			/*!
 			Determines whether the specified stereotype is applicable to this element.
 			*/
 			 
-			virtual bool isStereotypeApplicable(std::shared_ptr<uml::Stereotype> stereotype) = 0;
+			virtual bool isStereotypeApplicable(const std::shared_ptr<uml::Stereotype>& stereotype) = 0;
 			/*!
 			Determines whether the specified stereotype is applied to this element.
 			*/
 			 
-			virtual bool isStereotypeApplied(std::shared_ptr<uml::Stereotype> stereotype) = 0;
+			virtual bool isStereotypeApplied(const std::shared_ptr<uml::Stereotype>& stereotype) = 0;
 			/*!
 			Determines whether the specified stereotype is required for this element.
 			*/
 			 
-			virtual bool isStereotypeRequired(std::shared_ptr<uml::Stereotype> stereotype) = 0;
+			virtual bool isStereotypeRequired(const std::shared_ptr<uml::Stereotype>& stereotype) = 0;
 			/*!
 			The query mustBeOwned() indicates whether Elements of this type must have an owner. Subclasses of Element that do not require an owner must override this operation.
 			result = (true)
@@ -273,7 +273,7 @@ namespace uml
 			not allOwnedElements()->includes(self)
 			*/
 			 
-			virtual bool not_own_self(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
+			virtual bool not_own_self(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context) = 0;
 			/*!
 			Removes the specified keyword from this element.
 			*/
@@ -283,12 +283,12 @@ namespace uml
 			Sets the value of the property with the specified name in the specified stereotype for this element.
 			*/
 			 
-			virtual void setValue(std::shared_ptr<uml::Stereotype> stereotype,std::string propertyName,Any newValue) = 0;
+			virtual void setValue(const std::shared_ptr<uml::Stereotype>& stereotype, std::string propertyName, const Any& newValue) = 0;
 			/*!
 			Unapplies the specified stereotype from this element.
 			*/
 			 
-			virtual std::shared_ptr<ecore::EObject> unapplyStereotype(std::shared_ptr<uml::Stereotype> stereotype) = 0;
+			virtual std::shared_ptr<ecore::EObject> unapplyStereotype(const std::shared_ptr<uml::Stereotype>& stereotype) = 0;
 
 			//*********************************
 			// Attribute Getters & Setters
@@ -302,7 +302,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::shared_ptr<Subset<uml::Comment, uml::Element>> getOwnedComment() const = 0;
+			virtual const std::shared_ptr<Subset<uml::Comment, uml::Element>>& getOwnedComment() const = 0;
 			
 			
 

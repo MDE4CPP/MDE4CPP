@@ -135,7 +135,7 @@ std::shared_ptr<ecore::EPackage> ProfileApplicationImpl::getAppliedDefinition()
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-std::shared_ptr<ecore::ENamedElement> ProfileApplicationImpl::getAppliedDefinition(std::shared_ptr<uml::NamedElement> namedElement)
+std::shared_ptr<ecore::ENamedElement> ProfileApplicationImpl::getAppliedDefinition(const std::shared_ptr<uml::NamedElement>& namedElement)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -144,7 +144,7 @@ std::shared_ptr<ecore::ENamedElement> ProfileApplicationImpl::getAppliedDefiniti
 // Attribute Getters & Setters
 //*********************************
 /* Getter & Setter for attribute isStrict */
-bool ProfileApplicationImpl::getIsStrict() const 
+bool ProfileApplicationImpl::getIsStrict() const
 {
 	return m_isStrict;
 }
@@ -158,11 +158,11 @@ void ProfileApplicationImpl::setIsStrict(bool _isStrict)
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference appliedProfile */
-std::shared_ptr<uml::Profile> ProfileApplicationImpl::getAppliedProfile() const
+const std::shared_ptr<uml::Profile>& ProfileApplicationImpl::getAppliedProfile() const
 {
     return m_appliedProfile;
 }
-void ProfileApplicationImpl::setAppliedProfile(std::shared_ptr<uml::Profile> _appliedProfile)
+void ProfileApplicationImpl::setAppliedProfile(const std::shared_ptr<uml::Profile>& _appliedProfile)
 {
     m_appliedProfile = _appliedProfile;
 	
@@ -399,7 +399,7 @@ void ProfileApplicationImpl::saveContent(std::shared_ptr<persistence::interfaces
 	}
 }
 
-std::shared_ptr<ecore::EClass> ProfileApplicationImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& ProfileApplicationImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getProfileApplication_Class();
 }
@@ -438,7 +438,7 @@ bool ProfileApplicationImpl::internalEIsSet(int featureID) const
 	return DirectedRelationshipImpl::internalEIsSet(featureID);
 }
 
-bool ProfileApplicationImpl::eSet(int featureID, Any newValue)
+bool ProfileApplicationImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -473,7 +473,7 @@ bool ProfileApplicationImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any ProfileApplicationImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any ProfileApplicationImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

@@ -41,8 +41,8 @@
 #include "fUML/Semantics/Values/Value.hpp"
 #include "uml/ValueSpecification.hpp"
 //Factories and Package includes
-#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/SemanticsPackage.hpp"
+#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/Loci/LociPackage.hpp"
 #include "fUML/Semantics/Values/ValuesPackage.hpp"
 #include "uml/umlPackage.hpp"
@@ -101,7 +101,7 @@ ValueImpl& ValueImpl::operator=(const ValueImpl & obj)
 //*********************************
 // Operations
 //*********************************
-bool ValueImpl::IsInstanceOf(std::shared_ptr<uml::Classifier> classifier)
+bool ValueImpl::IsInstanceOf(const std::shared_ptr<uml::Classifier>& classifier)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -131,7 +131,7 @@ return this->new_();
 	//end of body
 }
 
-bool ValueImpl::checkAllParents(std::shared_ptr<uml::Classifier> type,std::shared_ptr<uml::Classifier> classifier)
+bool ValueImpl::checkAllParents(const std::shared_ptr<uml::Classifier>& type, const std::shared_ptr<uml::Classifier>& classifier)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -158,7 +158,7 @@ bool ValueImpl::checkAllParents(std::shared_ptr<uml::Classifier> type,std::share
 	//end of body
 }
 
-bool ValueImpl::equals(std::shared_ptr<fUML::Semantics::Values::Value> otherValue)
+bool ValueImpl::equals(const std::shared_ptr<fUML::Semantics::Values::Value>& otherValue)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -199,7 +199,7 @@ std::shared_ptr<Bag<uml::Classifier> > ValueImpl::getTypes() const
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool ValueImpl::hasTypes(std::shared_ptr<uml::Classifier> type)
+bool ValueImpl::hasTypes(const std::shared_ptr<uml::Classifier>& type)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -319,7 +319,7 @@ void ValueImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandle
 	}
 }
 
-std::shared_ptr<ecore::EClass> ValueImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& ValueImpl::eStaticClass() const
 {
 	return fUML::Semantics::Values::ValuesPackage::eInstance()->getValue_Class();
 }
@@ -343,7 +343,7 @@ bool ValueImpl::internalEIsSet(int featureID) const
 	return fUML::Semantics::Loci::SemanticVisitorImpl::internalEIsSet(featureID);
 }
 
-bool ValueImpl::eSet(int featureID, Any newValue)
+bool ValueImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -355,7 +355,7 @@ bool ValueImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any ValueImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any ValueImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

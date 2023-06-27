@@ -64,8 +64,8 @@
 #include "fUML/Semantics/Values/Value.hpp"
 #include "uml/ValueSpecification.hpp"
 //Factories and Package includes
-#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/SemanticsPackage.hpp"
+#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/Classification/ClassificationPackage.hpp"
 #include "fUML/Semantics/Loci/LociPackage.hpp"
 #include "fUML/Semantics/Values/ValuesPackage.hpp"
@@ -294,7 +294,7 @@ void InstanceValueEvaluationImpl::saveContent(std::shared_ptr<persistence::inter
 	}
 }
 
-std::shared_ptr<ecore::EClass> InstanceValueEvaluationImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& InstanceValueEvaluationImpl::eStaticClass() const
 {
 	return fUML::Semantics::Classification::ClassificationPackage::eInstance()->getInstanceValueEvaluation_Class();
 }
@@ -318,7 +318,7 @@ bool InstanceValueEvaluationImpl::internalEIsSet(int featureID) const
 	return fUML::Semantics::Values::EvaluationImpl::internalEIsSet(featureID);
 }
 
-bool InstanceValueEvaluationImpl::eSet(int featureID, Any newValue)
+bool InstanceValueEvaluationImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -330,7 +330,7 @@ bool InstanceValueEvaluationImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any InstanceValueEvaluationImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any InstanceValueEvaluationImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

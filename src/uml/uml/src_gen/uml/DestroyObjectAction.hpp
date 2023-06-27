@@ -96,13 +96,13 @@ namespace uml
 			target.is(1,1)
 			*/
 			 
-			virtual bool multiplicity(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
+			virtual bool multiplicity(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context) = 0;
 			/*!
 			The target InputPin has no type.
 			target.type= null
 			*/
 			 
-			virtual bool no_type(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
+			virtual bool no_type(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context) = 0;
 
 			//*********************************
 			// Attribute Getters & Setters
@@ -140,13 +140,13 @@ namespace uml
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::InputPin> getTarget() const = 0;
+			virtual const std::shared_ptr<uml::InputPin>& getTarget() const = 0;
 			/*!
 			The InputPin providing the object to be destroyed.
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual void setTarget(std::shared_ptr<uml::InputPin>) = 0;
+			virtual void setTarget(const std::shared_ptr<uml::InputPin>&) = 0;
 
 			//*********************************
 			// Union Reference Getters

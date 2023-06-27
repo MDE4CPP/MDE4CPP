@@ -44,8 +44,8 @@
 #include "fUML/Semantics/Activities/Token.hpp"
 #include "fUML/Semantics/Values/Value.hpp"
 //Factories and Package includes
-#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/SemanticsPackage.hpp"
+#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/Activities/ActivitiesPackage.hpp"
 #include "fUML/Semantics/Values/ValuesPackage.hpp"
 
@@ -119,7 +119,7 @@ std::shared_ptr<fUML::Semantics::Activities::Token> TokenImpl::_copy()
 	//end of body
 }
 
-bool TokenImpl::equals(std::shared_ptr<fUML::Semantics::Activities::Token> other)
+bool TokenImpl::equals(const std::shared_ptr<fUML::Semantics::Activities::Token>& other)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -140,7 +140,7 @@ bool TokenImpl::isControl()
 	//end of body
 }
 
-std::shared_ptr<fUML::Semantics::Activities::Token> TokenImpl::transfer(std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivation> holder)
+std::shared_ptr<fUML::Semantics::Activities::Token> TokenImpl::transfer(const std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivation>& holder)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -182,7 +182,7 @@ void TokenImpl::withdraw()
 // Attribute Getters & Setters
 //*********************************
 /* Getter & Setter for attribute withdrawn */
-bool TokenImpl::isWithdrawn() const 
+bool TokenImpl::isWithdrawn() const
 {
 	return m_withdrawn;
 }
@@ -317,7 +317,7 @@ void TokenImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandle
 	}
 }
 
-std::shared_ptr<ecore::EClass> TokenImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& TokenImpl::eStaticClass() const
 {
 	return fUML::Semantics::Activities::ActivitiesPackage::eInstance()->getToken_Class();
 }
@@ -352,7 +352,7 @@ bool TokenImpl::internalEIsSet(int featureID) const
 	return ecore::EObjectImpl::internalEIsSet(featureID);
 }
 
-bool TokenImpl::eSet(int featureID, Any newValue)
+bool TokenImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -379,7 +379,7 @@ bool TokenImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any TokenImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any TokenImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

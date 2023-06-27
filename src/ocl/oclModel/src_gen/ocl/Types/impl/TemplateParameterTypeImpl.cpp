@@ -118,7 +118,7 @@ std::shared_ptr<ecore::EObject> TemplateParameterTypeImpl::copy() const
 // Attribute Getters & Setters
 //*********************************
 /* Getter & Setter for attribute specification */
-std::string TemplateParameterTypeImpl::getSpecification() const 
+std::string TemplateParameterTypeImpl::getSpecification() const
 {
 	return m_specification;
 }
@@ -236,7 +236,7 @@ void TemplateParameterTypeImpl::saveContent(std::shared_ptr<persistence::interfa
 	}
 }
 
-std::shared_ptr<ecore::EClass> TemplateParameterTypeImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& TemplateParameterTypeImpl::eStaticClass() const
 {
 	return ocl::Types::TypesPackage::eInstance()->getTemplateParameterType_Class();
 }
@@ -264,7 +264,7 @@ bool TemplateParameterTypeImpl::internalEIsSet(int featureID) const
 	return ecore::EClassifierImpl::internalEIsSet(featureID);
 }
 
-bool TemplateParameterTypeImpl::eSet(int featureID, Any newValue)
+bool TemplateParameterTypeImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -283,7 +283,7 @@ bool TemplateParameterTypeImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any TemplateParameterTypeImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any TemplateParameterTypeImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

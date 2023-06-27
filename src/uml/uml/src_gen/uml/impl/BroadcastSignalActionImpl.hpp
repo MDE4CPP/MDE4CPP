@@ -55,13 +55,13 @@ namespace uml
 			onPort=null
 			*/
 			 
-			virtual bool no_onport(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
+			virtual bool no_onport(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context) ;
 			/*!
 			The number of argument InputPins must be the same as the number of attributes in the signal.
 			argument->size() = signal.allAttributes()->size()
 			*/
 			 
-			virtual bool number_of_arguments(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
+			virtual bool number_of_arguments(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context) ;
 			/*!
 			The type, ordering, and multiplicity of an argument InputPin must be the same as the corresponding attribute of the signal.
 			let attribute: OrderedSet(Property) = signal.allAttributes() in
@@ -71,7 +71,7 @@ namespace uml
 				argument->at(i).compatibleWith(attribute->at(i)))
 			*/
 			 
-			virtual bool type_ordering_multiplicity(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
+			virtual bool type_ordering_multiplicity(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context) ;
 			
 			//*********************************
 			// Attribute Getters & Setters
@@ -85,13 +85,13 @@ namespace uml
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::Signal> getSignal() const ;
+			virtual const std::shared_ptr<uml::Signal>& getSignal() const ;
 			/*!
 			The Signal whose instances are to be sent.
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual void setSignal(std::shared_ptr<uml::Signal>) ;
+			virtual void setSignal(const std::shared_ptr<uml::Signal>&) ;
 			
 			//*********************************
 			// Union Reference Getters
@@ -143,19 +143,19 @@ namespace uml
 			virtual void saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const;
 
 		protected:
-			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
+			virtual const std::shared_ptr<ecore::EClass>& eStaticClass() const;
 
 			//*********************************
 			// EStructuralFeature Get/Set/IsSet
 			//*********************************
 			virtual Any eGet(int featureID, bool resolve, bool coreType) const ;
-			virtual bool eSet(int featureID, Any newValue) ;
+			virtual bool eSet(int featureID, const Any& newValue) ;
 			virtual bool internalEIsSet(int featureID) const ;
 
 			//*********************************
 			// EOperation Invoke
 			//*********************************
-			virtual Any eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments) ;
+			virtual Any eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments) ;
 
 		private:
 			std::weak_ptr<uml::BroadcastSignalAction> m_thisBroadcastSignalActionPtr;

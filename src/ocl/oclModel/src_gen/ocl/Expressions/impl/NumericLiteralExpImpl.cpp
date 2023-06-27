@@ -336,7 +336,7 @@ void NumericLiteralExpImpl::saveContent(std::shared_ptr<persistence::interfaces:
 	}
 }
 
-std::shared_ptr<ecore::EClass> NumericLiteralExpImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& NumericLiteralExpImpl::eStaticClass() const
 {
 	return ocl::Expressions::ExpressionsPackage::eInstance()->getNumericLiteralExp_Class();
 }
@@ -360,7 +360,7 @@ bool NumericLiteralExpImpl::internalEIsSet(int featureID) const
 	return PrimitiveLiteralExpImpl::internalEIsSet(featureID);
 }
 
-bool NumericLiteralExpImpl::eSet(int featureID, Any newValue)
+bool NumericLiteralExpImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -372,7 +372,7 @@ bool NumericLiteralExpImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any NumericLiteralExpImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any NumericLiteralExpImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

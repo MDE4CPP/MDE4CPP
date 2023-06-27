@@ -190,7 +190,7 @@ void EvalNameSpaceImpl::saveContent(std::shared_ptr<persistence::interfaces::XSa
 	}
 }
 
-std::shared_ptr<ecore::EClass> EvalNameSpaceImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& EvalNameSpaceImpl::eStaticClass() const
 {
 	return ocl::Evaluations::EvaluationsPackage::eInstance()->getEvalNameSpace_Class();
 }
@@ -214,7 +214,7 @@ bool EvalNameSpaceImpl::internalEIsSet(int featureID) const
 	return fUML::Semantics::Values::EvaluationImpl::internalEIsSet(featureID);
 }
 
-bool EvalNameSpaceImpl::eSet(int featureID, Any newValue)
+bool EvalNameSpaceImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -226,7 +226,7 @@ bool EvalNameSpaceImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any EvalNameSpaceImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any EvalNameSpaceImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

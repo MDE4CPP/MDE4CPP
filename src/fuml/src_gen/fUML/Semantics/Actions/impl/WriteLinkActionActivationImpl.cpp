@@ -47,8 +47,8 @@
 #include "fUML/Semantics/Actions/PinActivation.hpp"
 #include "fUML/Semantics/Activities/Token.hpp"
 //Factories and Package includes
-#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/SemanticsPackage.hpp"
+#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/Actions/ActionsPackage.hpp"
 #include "fUML/Semantics/Activities/ActivitiesPackage.hpp"
 #include "uml/umlPackage.hpp"
@@ -216,7 +216,7 @@ void WriteLinkActionActivationImpl::saveContent(std::shared_ptr<persistence::int
 	}
 }
 
-std::shared_ptr<ecore::EClass> WriteLinkActionActivationImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& WriteLinkActionActivationImpl::eStaticClass() const
 {
 	return fUML::Semantics::Actions::ActionsPackage::eInstance()->getWriteLinkActionActivation_Class();
 }
@@ -240,7 +240,7 @@ bool WriteLinkActionActivationImpl::internalEIsSet(int featureID) const
 	return LinkActionActivationImpl::internalEIsSet(featureID);
 }
 
-bool WriteLinkActionActivationImpl::eSet(int featureID, Any newValue)
+bool WriteLinkActionActivationImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -252,7 +252,7 @@ bool WriteLinkActionActivationImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any WriteLinkActionActivationImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any WriteLinkActionActivationImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

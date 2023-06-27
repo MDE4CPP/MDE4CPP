@@ -216,11 +216,11 @@ std::shared_ptr<ecore::EObject> IterateExpImpl::copy() const
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference result */
-std::shared_ptr<ocl::Expressions::Variable> IterateExpImpl::getResult() const
+const std::shared_ptr<ocl::Expressions::Variable>& IterateExpImpl::getResult() const
 {
     return m_result;
 }
-void IterateExpImpl::setResult(std::shared_ptr<ocl::Expressions::Variable> _result)
+void IterateExpImpl::setResult(const std::shared_ptr<ocl::Expressions::Variable>& _result)
 {
     m_result = _result;
 	
@@ -389,7 +389,7 @@ void IterateExpImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveH
 	}
 }
 
-std::shared_ptr<ecore::EClass> IterateExpImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& IterateExpImpl::eStaticClass() const
 {
 	return ocl::Expressions::ExpressionsPackage::eInstance()->getIterateExp_Class();
 }
@@ -417,7 +417,7 @@ bool IterateExpImpl::internalEIsSet(int featureID) const
 	return LoopExpImpl::internalEIsSet(featureID);
 }
 
-bool IterateExpImpl::eSet(int featureID, Any newValue)
+bool IterateExpImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -437,7 +437,7 @@ bool IterateExpImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any IterateExpImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any IterateExpImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

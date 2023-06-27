@@ -119,17 +119,17 @@ MultiplicityElementImpl& MultiplicityElementImpl::operator=(const MultiplicityEl
 //*********************************
 // Operations
 //*********************************
-bool MultiplicityElementImpl::compatibleWith(std::shared_ptr<uml::MultiplicityElement> other)
+bool MultiplicityElementImpl::compatibleWith(const std::shared_ptr<uml::MultiplicityElement>& other)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool MultiplicityElementImpl::includesMultiplicity(std::shared_ptr<uml::MultiplicityElement> M)
+bool MultiplicityElementImpl::includesMultiplicity(const std::shared_ptr<uml::MultiplicityElement>& M)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool MultiplicityElementImpl::is(int lowerbound,int upperbound)
+bool MultiplicityElementImpl::is(int lowerbound, int upperbound)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -144,12 +144,12 @@ int MultiplicityElementImpl::lowerBound()
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool MultiplicityElementImpl::lower_ge_0(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool MultiplicityElementImpl::lower_ge_0(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool MultiplicityElementImpl::lower_is_integer(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool MultiplicityElementImpl::lower_is_integer(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -159,22 +159,22 @@ int MultiplicityElementImpl::upperBound()
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool MultiplicityElementImpl::upper_ge_lower(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool MultiplicityElementImpl::upper_ge_lower(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool MultiplicityElementImpl::upper_is_unlimitedNatural(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool MultiplicityElementImpl::upper_is_unlimitedNatural(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool MultiplicityElementImpl::value_specification_constant(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool MultiplicityElementImpl::value_specification_constant(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool MultiplicityElementImpl::value_specification_no_side_effects(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool MultiplicityElementImpl::value_specification_no_side_effects(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -183,7 +183,7 @@ bool MultiplicityElementImpl::value_specification_no_side_effects(Any diagnostic
 // Attribute Getters & Setters
 //*********************************
 /* Getter & Setter for attribute isOrdered */
-bool MultiplicityElementImpl::getIsOrdered() const 
+bool MultiplicityElementImpl::getIsOrdered() const
 {
 	return m_isOrdered;
 }
@@ -194,7 +194,7 @@ void MultiplicityElementImpl::setIsOrdered(bool _isOrdered)
 }
 
 /* Getter & Setter for attribute isUnique */
-bool MultiplicityElementImpl::getIsUnique() const 
+bool MultiplicityElementImpl::getIsUnique() const
 {
 	return m_isUnique;
 }
@@ -205,7 +205,7 @@ void MultiplicityElementImpl::setIsUnique(bool _isUnique)
 }
 
 /* Getter & Setter for attribute lower */
-int MultiplicityElementImpl::getLower() const 
+int MultiplicityElementImpl::getLower() const
 {
 	return m_lower;
 }
@@ -216,7 +216,7 @@ void MultiplicityElementImpl::setLower(int _lower)
 }
 
 /* Getter & Setter for attribute upper */
-int MultiplicityElementImpl::getUpper() const 
+int MultiplicityElementImpl::getUpper() const
 {
 	return m_upper;
 }
@@ -230,22 +230,22 @@ void MultiplicityElementImpl::setUpper(int _upper)
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference lowerValue */
-std::shared_ptr<uml::ValueSpecification> MultiplicityElementImpl::getLowerValue() const
+const std::shared_ptr<uml::ValueSpecification>& MultiplicityElementImpl::getLowerValue() const
 {
     return m_lowerValue;
 }
-void MultiplicityElementImpl::setLowerValue(std::shared_ptr<uml::ValueSpecification> _lowerValue)
+void MultiplicityElementImpl::setLowerValue(const std::shared_ptr<uml::ValueSpecification>& _lowerValue)
 {
     m_lowerValue = _lowerValue;
 	
 }
 
 /* Getter & Setter for reference upperValue */
-std::shared_ptr<uml::ValueSpecification> MultiplicityElementImpl::getUpperValue() const
+const std::shared_ptr<uml::ValueSpecification>& MultiplicityElementImpl::getUpperValue() const
 {
     return m_upperValue;
 }
-void MultiplicityElementImpl::setUpperValue(std::shared_ptr<uml::ValueSpecification> _upperValue)
+void MultiplicityElementImpl::setUpperValue(const std::shared_ptr<uml::ValueSpecification>& _upperValue)
 {
     m_upperValue = _upperValue;
 	
@@ -430,7 +430,7 @@ void MultiplicityElementImpl::saveContent(std::shared_ptr<persistence::interface
 	}
 }
 
-std::shared_ptr<ecore::EClass> MultiplicityElementImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& MultiplicityElementImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getMultiplicityElement_Class();
 }
@@ -478,7 +478,7 @@ bool MultiplicityElementImpl::internalEIsSet(int featureID) const
 	return ElementImpl::internalEIsSet(featureID);
 }
 
-bool MultiplicityElementImpl::eSet(int featureID, Any newValue)
+bool MultiplicityElementImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -534,7 +534,7 @@ bool MultiplicityElementImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any MultiplicityElementImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any MultiplicityElementImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

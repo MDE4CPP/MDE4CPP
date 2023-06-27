@@ -89,7 +89,7 @@ namespace uml
 			start.covered = finish.covered
 			*/
 			 
-			virtual bool same_lifeline(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
+			virtual bool same_lifeline(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context) = 0;
 
 			//*********************************
 			// Attribute Getters & Setters
@@ -103,25 +103,25 @@ namespace uml
 			<p>From package UML::Interactions.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::OccurrenceSpecification> getFinish() const = 0;
+			virtual const std::shared_ptr<uml::OccurrenceSpecification>& getFinish() const = 0;
 			/*!
 			References the OccurrenceSpecification that designates the finish of the Action or Behavior.
 			<p>From package UML::Interactions.</p>
 			*/
 			
-			virtual void setFinish(std::shared_ptr<uml::OccurrenceSpecification>) = 0;
+			virtual void setFinish(const std::shared_ptr<uml::OccurrenceSpecification>&) = 0;
 			/*!
 			References the OccurrenceSpecification that designates the start of the Action or Behavior.
 			<p>From package UML::Interactions.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::OccurrenceSpecification> getStart() const = 0;
+			virtual const std::shared_ptr<uml::OccurrenceSpecification>& getStart() const = 0;
 			/*!
 			References the OccurrenceSpecification that designates the start of the Action or Behavior.
 			<p>From package UML::Interactions.</p>
 			*/
 			
-			virtual void setStart(std::shared_ptr<uml::OccurrenceSpecification>) = 0;
+			virtual void setStart(const std::shared_ptr<uml::OccurrenceSpecification>&) = 0;
 
 			//*********************************
 			// Union Reference Getters

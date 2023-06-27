@@ -131,7 +131,7 @@ std::shared_ptr<ecore::EObject> ExtensionPointImpl::copy() const
 //*********************************
 // Operations
 //*********************************
-bool ExtensionPointImpl::must_have_name(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool ExtensionPointImpl::must_have_name(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -282,7 +282,7 @@ void ExtensionPointImpl::saveContent(std::shared_ptr<persistence::interfaces::XS
 	}
 }
 
-std::shared_ptr<ecore::EClass> ExtensionPointImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& ExtensionPointImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getExtensionPoint_Class();
 }
@@ -313,7 +313,7 @@ bool ExtensionPointImpl::internalEIsSet(int featureID) const
 	return RedefinableElementImpl::internalEIsSet(featureID);
 }
 
-bool ExtensionPointImpl::eSet(int featureID, Any newValue)
+bool ExtensionPointImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -333,7 +333,7 @@ bool ExtensionPointImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any ExtensionPointImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any ExtensionPointImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

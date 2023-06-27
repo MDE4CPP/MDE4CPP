@@ -158,17 +158,17 @@ std::shared_ptr<ecore::EObject> ReclassifyObjectActionImpl::copy() const
 //*********************************
 // Operations
 //*********************************
-bool ReclassifyObjectActionImpl::classifier_not_abstract(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool ReclassifyObjectActionImpl::classifier_not_abstract(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool ReclassifyObjectActionImpl::input_pin(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool ReclassifyObjectActionImpl::input_pin(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool ReclassifyObjectActionImpl::multiplicity(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool ReclassifyObjectActionImpl::multiplicity(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -177,7 +177,7 @@ bool ReclassifyObjectActionImpl::multiplicity(Any diagnostics,std::shared_ptr<st
 // Attribute Getters & Setters
 //*********************************
 /* Getter & Setter for attribute isReplaceAll */
-bool ReclassifyObjectActionImpl::getIsReplaceAll() const 
+bool ReclassifyObjectActionImpl::getIsReplaceAll() const
 {
 	return m_isReplaceAll;
 }
@@ -191,7 +191,7 @@ void ReclassifyObjectActionImpl::setIsReplaceAll(bool _isReplaceAll)
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference newClassifier */
-std::shared_ptr<Bag<uml::Classifier>> ReclassifyObjectActionImpl::getNewClassifier() const
+const std::shared_ptr<Bag<uml::Classifier>>& ReclassifyObjectActionImpl::getNewClassifier() const
 {
 	if(m_newClassifier == nullptr)
 	{
@@ -203,18 +203,18 @@ std::shared_ptr<Bag<uml::Classifier>> ReclassifyObjectActionImpl::getNewClassifi
 }
 
 /* Getter & Setter for reference object */
-std::shared_ptr<uml::InputPin> ReclassifyObjectActionImpl::getObject() const
+const std::shared_ptr<uml::InputPin>& ReclassifyObjectActionImpl::getObject() const
 {
     return m_object;
 }
-void ReclassifyObjectActionImpl::setObject(std::shared_ptr<uml::InputPin> _object)
+void ReclassifyObjectActionImpl::setObject(const std::shared_ptr<uml::InputPin>& _object)
 {
     m_object = _object;
 	
 }
 
 /* Getter & Setter for reference oldClassifier */
-std::shared_ptr<Bag<uml::Classifier>> ReclassifyObjectActionImpl::getOldClassifier() const
+const std::shared_ptr<Bag<uml::Classifier>>& ReclassifyObjectActionImpl::getOldClassifier() const
 {
 	if(m_oldClassifier == nullptr)
 	{
@@ -496,7 +496,7 @@ void ReclassifyObjectActionImpl::saveContent(std::shared_ptr<persistence::interf
 	}
 }
 
-std::shared_ptr<ecore::EClass> ReclassifyObjectActionImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& ReclassifyObjectActionImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getReclassifyObjectAction_Class();
 }
@@ -536,7 +536,7 @@ bool ReclassifyObjectActionImpl::internalEIsSet(int featureID) const
 	return ActionImpl::internalEIsSet(featureID);
 }
 
-bool ReclassifyObjectActionImpl::eSet(int featureID, Any newValue)
+bool ReclassifyObjectActionImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -637,7 +637,7 @@ bool ReclassifyObjectActionImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any ReclassifyObjectActionImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any ReclassifyObjectActionImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

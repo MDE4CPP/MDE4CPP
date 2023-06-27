@@ -51,14 +51,14 @@ namespace uml
 			template.ownedElement->includesAll(parameter.parameteredElement->asSet() - parameter.ownedParameteredElement->asSet())
 			*/
 			 
-			virtual bool own_elements(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
+			virtual bool own_elements(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context) ;
 			/*!
 			The names of the parameters of a TemplateSignature are unique.
 			parameter->forAll( p1, p2 | (p1 <> p2 and p1.parameteredElement.oclIsKindOf(NamedElement) and p2.parameteredElement.oclIsKindOf(NamedElement) ) implies
 			   p1.parameteredElement.oclAsType(NamedElement).name <> p2.parameteredElement.oclAsType(NamedElement).name)
 			*/
 			 
-			virtual bool unique_parameters(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
+			virtual bool unique_parameters(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context) ;
 			
 			//*********************************
 			// Attribute Getters & Setters
@@ -72,7 +72,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::shared_ptr<Subset<uml::TemplateParameter, uml::Element, uml::TemplateParameter>> getOwnedParameter() const ;
+			virtual const std::shared_ptr<Subset<uml::TemplateParameter, uml::Element, uml::TemplateParameter>>& getOwnedParameter() const ;
 			
 			/*!
 			The TemplateableElement that owns this TemplateSignature.
@@ -125,19 +125,19 @@ namespace uml
 			virtual void saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const;
 
 		protected:
-			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
+			virtual const std::shared_ptr<ecore::EClass>& eStaticClass() const;
 
 			//*********************************
 			// EStructuralFeature Get/Set/IsSet
 			//*********************************
 			virtual Any eGet(int featureID, bool resolve, bool coreType) const ;
-			virtual bool eSet(int featureID, Any newValue) ;
+			virtual bool eSet(int featureID, const Any& newValue) ;
 			virtual bool internalEIsSet(int featureID) const ;
 
 			//*********************************
 			// EOperation Invoke
 			//*********************************
-			virtual Any eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments) ;
+			virtual Any eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments) ;
 
 		private:
 			std::weak_ptr<uml::TemplateSignature> m_thisTemplateSignaturePtr;

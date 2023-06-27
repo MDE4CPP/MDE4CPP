@@ -63,7 +63,7 @@ namespace uml
 			enclosingInteraction->isEmpty()
 			*/
 			 
-			virtual bool not_contained(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
+			virtual bool not_contained(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context) ;
 			
 			//*********************************
 			// Attribute Getters & Setters
@@ -77,31 +77,31 @@ namespace uml
 			<p>From package UML::Interactions.</p>
 			*/
 			
-			virtual std::shared_ptr<Subset<uml::Action, uml::Element>> getAction() const ;
+			virtual const std::shared_ptr<Subset<uml::Action, uml::Element>>& getAction() const ;
 			/*!
 			Specifies the gates that form the message interface between this Interaction and any InteractionUses which reference it.
 			<p>From package UML::Interactions.</p>
 			*/
 			
-			virtual std::shared_ptr<Subset<uml::Gate, uml::NamedElement>> getFormalGate() const ;
+			virtual const std::shared_ptr<Subset<uml::Gate, uml::NamedElement>>& getFormalGate() const ;
 			/*!
 			The ordered set of fragments in the Interaction.
 			<p>From package UML::Interactions.</p>
 			*/
 			
-			virtual std::shared_ptr<Subset<uml::InteractionFragment, uml::NamedElement>> getFragment() const ;
+			virtual const std::shared_ptr<Subset<uml::InteractionFragment, uml::NamedElement>>& getFragment() const ;
 			/*!
 			Specifies the participants in this Interaction.
 			<p>From package UML::Interactions.</p>
 			*/
 			
-			virtual std::shared_ptr<Subset<uml::Lifeline, uml::NamedElement>> getLifeline() const ;
+			virtual const std::shared_ptr<Subset<uml::Lifeline, uml::NamedElement>>& getLifeline() const ;
 			/*!
 			The Messages contained in this Interaction.
 			<p>From package UML::Interactions.</p>
 			*/
 			
-			virtual std::shared_ptr<Subset<uml::Message, uml::NamedElement>> getMessage() const ;
+			virtual const std::shared_ptr<Subset<uml::Message, uml::NamedElement>>& getMessage() const ;
 			
 			//*********************************
 			// Union Reference Getters
@@ -184,19 +184,19 @@ namespace uml
 			virtual void saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const;
 
 		protected:
-			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
+			virtual const std::shared_ptr<ecore::EClass>& eStaticClass() const;
 
 			//*********************************
 			// EStructuralFeature Get/Set/IsSet
 			//*********************************
 			virtual Any eGet(int featureID, bool resolve, bool coreType) const ;
-			virtual bool eSet(int featureID, Any newValue) ;
+			virtual bool eSet(int featureID, const Any& newValue) ;
 			virtual bool internalEIsSet(int featureID) const ;
 
 			//*********************************
 			// EOperation Invoke
 			//*********************************
-			virtual Any eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments) ;
+			virtual Any eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments) ;
 
 		private:
 			std::weak_ptr<uml::Interaction> m_thisInteractionPtr;

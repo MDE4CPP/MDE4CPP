@@ -143,22 +143,22 @@ std::shared_ptr<ecore::EObject> LifelineImpl::copy() const
 //*********************************
 // Operations
 //*********************************
-bool LifelineImpl::interaction_uses_share_lifeline(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool LifelineImpl::interaction_uses_share_lifeline(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool LifelineImpl::same_classifier(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool LifelineImpl::same_classifier(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool LifelineImpl::selector_int_or_string(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool LifelineImpl::selector_int_or_string(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool LifelineImpl::selector_specified(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool LifelineImpl::selector_specified(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -171,7 +171,7 @@ bool LifelineImpl::selector_specified(Any diagnostics,std::shared_ptr<std::map <
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference coveredBy */
-std::shared_ptr<Bag<uml::InteractionFragment>> LifelineImpl::getCoveredBy() const
+const std::shared_ptr<Bag<uml::InteractionFragment>>& LifelineImpl::getCoveredBy() const
 {
 	if(m_coveredBy == nullptr)
 	{
@@ -183,11 +183,11 @@ std::shared_ptr<Bag<uml::InteractionFragment>> LifelineImpl::getCoveredBy() cons
 }
 
 /* Getter & Setter for reference decomposedAs */
-std::shared_ptr<uml::PartDecomposition> LifelineImpl::getDecomposedAs() const
+const std::shared_ptr<uml::PartDecomposition>& LifelineImpl::getDecomposedAs() const
 {
     return m_decomposedAs;
 }
-void LifelineImpl::setDecomposedAs(std::shared_ptr<uml::PartDecomposition> _decomposedAs)
+void LifelineImpl::setDecomposedAs(const std::shared_ptr<uml::PartDecomposition>& _decomposedAs)
 {
     m_decomposedAs = _decomposedAs;
 	
@@ -205,22 +205,22 @@ void LifelineImpl::setInteraction(std::weak_ptr<uml::Interaction> _interaction)
 }
 
 /* Getter & Setter for reference represents */
-std::shared_ptr<uml::ConnectableElement> LifelineImpl::getRepresents() const
+const std::shared_ptr<uml::ConnectableElement>& LifelineImpl::getRepresents() const
 {
     return m_represents;
 }
-void LifelineImpl::setRepresents(std::shared_ptr<uml::ConnectableElement> _represents)
+void LifelineImpl::setRepresents(const std::shared_ptr<uml::ConnectableElement>& _represents)
 {
     m_represents = _represents;
 	
 }
 
 /* Getter & Setter for reference selector */
-std::shared_ptr<uml::ValueSpecification> LifelineImpl::getSelector() const
+const std::shared_ptr<uml::ValueSpecification>& LifelineImpl::getSelector() const
 {
     return m_selector;
 }
-void LifelineImpl::setSelector(std::shared_ptr<uml::ValueSpecification> _selector)
+void LifelineImpl::setSelector(const std::shared_ptr<uml::ValueSpecification>& _selector)
 {
     m_selector = _selector;
 	
@@ -456,7 +456,7 @@ void LifelineImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHan
 	}
 }
 
-std::shared_ptr<ecore::EClass> LifelineImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& LifelineImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getLifeline_Class();
 }
@@ -503,7 +503,7 @@ bool LifelineImpl::internalEIsSet(int featureID) const
 	return NamedElementImpl::internalEIsSet(featureID);
 }
 
-bool LifelineImpl::eSet(int featureID, Any newValue)
+bool LifelineImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -584,7 +584,7 @@ bool LifelineImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any LifelineImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any LifelineImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

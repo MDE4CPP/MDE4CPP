@@ -37,8 +37,8 @@
 #include "fUML/Semantics/Activities/ActivitiesFactory.hpp"
 #include "fUML/Semantics/Activities/Token.hpp"
 //Factories and Package includes
-#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/SemanticsPackage.hpp"
+#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/Activities/ActivitiesPackage.hpp"
 
 using namespace fUML::Semantics::Activities;
@@ -215,7 +215,7 @@ return tokens;
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference offeredTokens */
-std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> OfferImpl::getOfferedTokens() const
+const std::shared_ptr<Bag<fUML::Semantics::Activities::Token>>& OfferImpl::getOfferedTokens() const
 {
 	if(m_offeredTokens == nullptr)
 	{
@@ -330,7 +330,7 @@ void OfferImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandle
 	}
 }
 
-std::shared_ptr<ecore::EClass> OfferImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& OfferImpl::eStaticClass() const
 {
 	return fUML::Semantics::Activities::ActivitiesPackage::eInstance()->getOffer_Class();
 }
@@ -358,7 +358,7 @@ bool OfferImpl::internalEIsSet(int featureID) const
 	return ecore::EObjectImpl::internalEIsSet(featureID);
 }
 
-bool OfferImpl::eSet(int featureID, Any newValue)
+bool OfferImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -407,7 +407,7 @@ bool OfferImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any OfferImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any OfferImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

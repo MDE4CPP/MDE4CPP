@@ -59,13 +59,13 @@ namespace uml
 			<p>From package UML::Classification.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::StructuralFeature> getDefiningFeature() const ;
+			virtual const std::shared_ptr<uml::StructuralFeature>& getDefiningFeature() const ;
 			/*!
 			The StructuralFeature that specifies the values that may be held by the Slot.
 			<p>From package UML::Classification.</p>
 			*/
 			
-			virtual void setDefiningFeature(std::shared_ptr<uml::StructuralFeature>) ;
+			virtual void setDefiningFeature(const std::shared_ptr<uml::StructuralFeature>&) ;
 			/*!
 			The InstanceSpecification that owns this Slot.
 			<p>From package UML::Classification.</p>
@@ -83,7 +83,7 @@ namespace uml
 			<p>From package UML::Classification.</p>
 			*/
 			
-			virtual std::shared_ptr<Subset<uml::ValueSpecification, uml::Element>> getValue() const ;
+			virtual const std::shared_ptr<Subset<uml::ValueSpecification, uml::Element>>& getValue() const ;
 			
 			//*********************************
 			// Union Reference Getters
@@ -117,19 +117,19 @@ namespace uml
 			virtual void saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const;
 
 		protected:
-			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
+			virtual const std::shared_ptr<ecore::EClass>& eStaticClass() const;
 
 			//*********************************
 			// EStructuralFeature Get/Set/IsSet
 			//*********************************
 			virtual Any eGet(int featureID, bool resolve, bool coreType) const ;
-			virtual bool eSet(int featureID, Any newValue) ;
+			virtual bool eSet(int featureID, const Any& newValue) ;
 			virtual bool internalEIsSet(int featureID) const ;
 
 			//*********************************
 			// EOperation Invoke
 			//*********************************
-			virtual Any eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments) ;
+			virtual Any eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments) ;
 
 		private:
 			std::weak_ptr<uml::Slot> m_thisSlotPtr;

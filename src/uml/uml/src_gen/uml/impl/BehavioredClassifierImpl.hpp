@@ -56,7 +56,7 @@ namespace uml
 			classifierBehavior->notEmpty() implies classifierBehavior.specification->isEmpty()
 			*/
 			 
-			virtual bool class_behavior(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
+			virtual bool class_behavior(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context) ;
 			/*!
 			Retrieves all the interfaces on which this behaviored classifier or any of its parents has an interface realization dependency.
 			*/
@@ -80,25 +80,25 @@ namespace uml
 			<p>From package UML::SimpleClassifiers.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::Behavior> getClassifierBehavior() const ;
+			virtual const std::shared_ptr<uml::Behavior>& getClassifierBehavior() const ;
 			/*!
 			A Behavior that specifies the behavior of the BehavioredClassifier itself.
 			<p>From package UML::SimpleClassifiers.</p>
 			*/
 			
-			virtual void setClassifierBehavior(std::shared_ptr<uml::Behavior>) ;
+			virtual void setClassifierBehavior(const std::shared_ptr<uml::Behavior>&) ;
 			/*!
 			The set of InterfaceRealizations owned by the BehavioredClassifier. Interface realizations reference the Interfaces of which the BehavioredClassifier is an implementation.
 			<p>From package UML::SimpleClassifiers.</p>
 			*/
 			
-			virtual std::shared_ptr<Subset<uml::InterfaceRealization, uml::Element>> getInterfaceRealization() const ;
+			virtual const std::shared_ptr<Subset<uml::InterfaceRealization, uml::Element>>& getInterfaceRealization() const ;
 			/*!
 			Behaviors owned by a BehavioredClassifier.
 			<p>From package UML::SimpleClassifiers.</p>
 			*/
 			
-			virtual std::shared_ptr<SubsetUnion<uml::Behavior, uml::NamedElement>> getOwnedBehavior() const ;
+			virtual const std::shared_ptr<SubsetUnion<uml::Behavior, uml::NamedElement>>& getOwnedBehavior() const ;
 			
 			//*********************************
 			// Union Reference Getters
@@ -163,19 +163,19 @@ namespace uml
 			virtual void saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const;
 
 		protected:
-			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
+			virtual const std::shared_ptr<ecore::EClass>& eStaticClass() const;
 
 			//*********************************
 			// EStructuralFeature Get/Set/IsSet
 			//*********************************
 			virtual Any eGet(int featureID, bool resolve, bool coreType) const ;
-			virtual bool eSet(int featureID, Any newValue) ;
+			virtual bool eSet(int featureID, const Any& newValue) ;
 			virtual bool internalEIsSet(int featureID) const ;
 
 			//*********************************
 			// EOperation Invoke
 			//*********************************
-			virtual Any eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments) ;
+			virtual Any eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments) ;
 
 		private:
 			std::weak_ptr<uml::BehavioredClassifier> m_thisBehavioredClassifierPtr;

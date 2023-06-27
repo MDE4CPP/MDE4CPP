@@ -117,17 +117,17 @@ std::shared_ptr<ecore::EObject> ClauseImpl::copy() const
 //*********************************
 // Operations
 //*********************************
-bool ClauseImpl::body_output_pins(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool ClauseImpl::body_output_pins(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool ClauseImpl::decider_output(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool ClauseImpl::decider_output(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool ClauseImpl::test_and_body(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool ClauseImpl::test_and_body(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -140,7 +140,7 @@ bool ClauseImpl::test_and_body(Any diagnostics,std::shared_ptr<std::map < Any, A
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference body */
-std::shared_ptr<Bag<uml::ExecutableNode>> ClauseImpl::getBody() const
+const std::shared_ptr<Bag<uml::ExecutableNode>>& ClauseImpl::getBody() const
 {
 	if(m_body == nullptr)
 	{
@@ -152,7 +152,7 @@ std::shared_ptr<Bag<uml::ExecutableNode>> ClauseImpl::getBody() const
 }
 
 /* Getter & Setter for reference bodyOutput */
-std::shared_ptr<Bag<uml::OutputPin>> ClauseImpl::getBodyOutput() const
+const std::shared_ptr<Bag<uml::OutputPin>>& ClauseImpl::getBodyOutput() const
 {
 	if(m_bodyOutput == nullptr)
 	{
@@ -164,18 +164,18 @@ std::shared_ptr<Bag<uml::OutputPin>> ClauseImpl::getBodyOutput() const
 }
 
 /* Getter & Setter for reference decider */
-std::shared_ptr<uml::OutputPin> ClauseImpl::getDecider() const
+const std::shared_ptr<uml::OutputPin>& ClauseImpl::getDecider() const
 {
     return m_decider;
 }
-void ClauseImpl::setDecider(std::shared_ptr<uml::OutputPin> _decider)
+void ClauseImpl::setDecider(const std::shared_ptr<uml::OutputPin>& _decider)
 {
     m_decider = _decider;
 	
 }
 
 /* Getter & Setter for reference predecessorClause */
-std::shared_ptr<Bag<uml::Clause>> ClauseImpl::getPredecessorClause() const
+const std::shared_ptr<Bag<uml::Clause>>& ClauseImpl::getPredecessorClause() const
 {
 	if(m_predecessorClause == nullptr)
 	{
@@ -187,7 +187,7 @@ std::shared_ptr<Bag<uml::Clause>> ClauseImpl::getPredecessorClause() const
 }
 
 /* Getter & Setter for reference successorClause */
-std::shared_ptr<Bag<uml::Clause>> ClauseImpl::getSuccessorClause() const
+const std::shared_ptr<Bag<uml::Clause>>& ClauseImpl::getSuccessorClause() const
 {
 	if(m_successorClause == nullptr)
 	{
@@ -199,7 +199,7 @@ std::shared_ptr<Bag<uml::Clause>> ClauseImpl::getSuccessorClause() const
 }
 
 /* Getter & Setter for reference test */
-std::shared_ptr<Bag<uml::ExecutableNode>> ClauseImpl::getTest() const
+const std::shared_ptr<Bag<uml::ExecutableNode>>& ClauseImpl::getTest() const
 {
 	if(m_test == nullptr)
 	{
@@ -445,7 +445,7 @@ void ClauseImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandl
 	}
 }
 
-std::shared_ptr<ecore::EClass> ClauseImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& ClauseImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getClause_Class();
 }
@@ -493,7 +493,7 @@ bool ClauseImpl::internalEIsSet(int featureID) const
 	return ElementImpl::internalEIsSet(featureID);
 }
 
-bool ClauseImpl::eSet(int featureID, Any newValue)
+bool ClauseImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -698,7 +698,7 @@ bool ClauseImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any ClauseImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any ClauseImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

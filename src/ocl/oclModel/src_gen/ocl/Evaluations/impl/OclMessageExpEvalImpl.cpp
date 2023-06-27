@@ -35,9 +35,9 @@
 
 #include <exception> // used in Persistence
 #include "ocl/Evaluations/EvaluationsFactory.hpp"
-#include "fUML/Semantics/Values/ValuesFactory.hpp"
 #include "fUML/Semantics/Loci/LociFactory.hpp"
 #include "uml/umlFactory.hpp"
+#include "fUML/Semantics/Values/ValuesFactory.hpp"
 #include "ocl/Expressions/ExpressionsFactory.hpp"
 #include "ocl/Evaluations/EvalEnvironment.hpp"
 #include "fUML/Semantics/Loci/Locus.hpp"
@@ -124,7 +124,7 @@ std::shared_ptr<ecore::EObject> OclMessageExpEvalImpl::copy() const
 // Attribute Getters & Setters
 //*********************************
 /* Getter & Setter for attribute name */
-std::string OclMessageExpEvalImpl::getName() const 
+std::string OclMessageExpEvalImpl::getName() const
 {
 	return m_name;
 }
@@ -138,7 +138,7 @@ void OclMessageExpEvalImpl::setName(std::string _name)
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference arguments */
-std::shared_ptr<Bag<ocl::Evaluations::OclMessageArgEval>> OclMessageExpEvalImpl::getArguments() const
+const std::shared_ptr<Bag<ocl::Evaluations::OclMessageArgEval>>& OclMessageExpEvalImpl::getArguments() const
 {
 	if(m_arguments == nullptr)
 	{
@@ -150,11 +150,11 @@ std::shared_ptr<Bag<ocl::Evaluations::OclMessageArgEval>> OclMessageExpEvalImpl:
 }
 
 /* Getter & Setter for reference target */
-std::shared_ptr<ocl::Evaluations::OclExpEval> OclMessageExpEvalImpl::getTarget() const
+const std::shared_ptr<ocl::Evaluations::OclExpEval>& OclMessageExpEvalImpl::getTarget() const
 {
     return m_target;
 }
-void OclMessageExpEvalImpl::setTarget(std::shared_ptr<ocl::Evaluations::OclExpEval> _target)
+void OclMessageExpEvalImpl::setTarget(const std::shared_ptr<ocl::Evaluations::OclExpEval>& _target)
 {
     m_target = _target;
 	
@@ -305,7 +305,7 @@ void OclMessageExpEvalImpl::saveContent(std::shared_ptr<persistence::interfaces:
 	}
 }
 
-std::shared_ptr<ecore::EClass> OclMessageExpEvalImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& OclMessageExpEvalImpl::eStaticClass() const
 {
 	return ocl::Evaluations::EvaluationsPackage::eInstance()->getOclMessageExpEval_Class();
 }
@@ -341,7 +341,7 @@ bool OclMessageExpEvalImpl::internalEIsSet(int featureID) const
 	return OclExpEvalImpl::internalEIsSet(featureID);
 }
 
-bool OclMessageExpEvalImpl::eSet(int featureID, Any newValue)
+bool OclMessageExpEvalImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -405,7 +405,7 @@ bool OclMessageExpEvalImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any OclMessageExpEvalImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any OclMessageExpEvalImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

@@ -112,7 +112,7 @@ ParameterableElementImpl& ParameterableElementImpl::operator=(const Parameterabl
 //*********************************
 // Operations
 //*********************************
-bool ParameterableElementImpl::isCompatibleWith(std::shared_ptr<uml::ParameterableElement> p)
+bool ParameterableElementImpl::isCompatibleWith(const std::shared_ptr<uml::ParameterableElement>& p)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -141,11 +141,11 @@ void ParameterableElementImpl::setOwningTemplateParameter(std::weak_ptr<uml::Tem
 }
 
 /* Getter & Setter for reference templateParameter */
-std::shared_ptr<uml::TemplateParameter> ParameterableElementImpl::getTemplateParameter() const
+const std::shared_ptr<uml::TemplateParameter>& ParameterableElementImpl::getTemplateParameter() const
 {
     return m_templateParameter;
 }
-void ParameterableElementImpl::setTemplateParameter(std::shared_ptr<uml::TemplateParameter> _templateParameter)
+void ParameterableElementImpl::setTemplateParameter(const std::shared_ptr<uml::TemplateParameter>& _templateParameter)
 {
     m_templateParameter = _templateParameter;
 	
@@ -300,7 +300,7 @@ void ParameterableElementImpl::saveContent(std::shared_ptr<persistence::interfac
 	}
 }
 
-std::shared_ptr<ecore::EClass> ParameterableElementImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& ParameterableElementImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getParameterableElement_Class();
 }
@@ -335,7 +335,7 @@ bool ParameterableElementImpl::internalEIsSet(int featureID) const
 	return ElementImpl::internalEIsSet(featureID);
 }
 
-bool ParameterableElementImpl::eSet(int featureID, Any newValue)
+bool ParameterableElementImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -363,7 +363,7 @@ bool ParameterableElementImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any ParameterableElementImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any ParameterableElementImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

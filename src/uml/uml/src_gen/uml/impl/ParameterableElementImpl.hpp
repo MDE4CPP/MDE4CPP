@@ -52,7 +52,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			 
-			virtual bool isCompatibleWith(std::shared_ptr<uml::ParameterableElement> p) ;
+			virtual bool isCompatibleWith(const std::shared_ptr<uml::ParameterableElement>& p) ;
 			/*!
 			The query isTemplateParameter() determines if this ParameterableElement is exposed as a formal TemplateParameter.
 			result = (templateParameter->notEmpty())
@@ -85,13 +85,13 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::TemplateParameter> getTemplateParameter() const ;
+			virtual const std::shared_ptr<uml::TemplateParameter>& getTemplateParameter() const ;
 			/*!
 			The TemplateParameter that exposes this ParameterableElement as a formal parameter.
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual void setTemplateParameter(std::shared_ptr<uml::TemplateParameter>) ;
+			virtual void setTemplateParameter(const std::shared_ptr<uml::TemplateParameter>&) ;
 			
 			//*********************************
 			// Union Reference Getters
@@ -126,19 +126,19 @@ namespace uml
 			virtual void saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const;
 
 		protected:
-			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
+			virtual const std::shared_ptr<ecore::EClass>& eStaticClass() const;
 
 			//*********************************
 			// EStructuralFeature Get/Set/IsSet
 			//*********************************
 			virtual Any eGet(int featureID, bool resolve, bool coreType) const ;
-			virtual bool eSet(int featureID, Any newValue) ;
+			virtual bool eSet(int featureID, const Any& newValue) ;
 			virtual bool internalEIsSet(int featureID) const ;
 
 			//*********************************
 			// EOperation Invoke
 			//*********************************
-			virtual Any eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments) ;
+			virtual Any eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments) ;
 
 		private:
 			std::weak_ptr<uml::ParameterableElement> m_thisParameterableElementPtr;

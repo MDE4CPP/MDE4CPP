@@ -332,7 +332,7 @@ void LiteralExpImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveH
 	}
 }
 
-std::shared_ptr<ecore::EClass> LiteralExpImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& LiteralExpImpl::eStaticClass() const
 {
 	return ocl::Expressions::ExpressionsPackage::eInstance()->getLiteralExp_Class();
 }
@@ -356,7 +356,7 @@ bool LiteralExpImpl::internalEIsSet(int featureID) const
 	return OclExpressionImpl::internalEIsSet(featureID);
 }
 
-bool LiteralExpImpl::eSet(int featureID, Any newValue)
+bool LiteralExpImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -368,7 +368,7 @@ bool LiteralExpImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any LiteralExpImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any LiteralExpImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

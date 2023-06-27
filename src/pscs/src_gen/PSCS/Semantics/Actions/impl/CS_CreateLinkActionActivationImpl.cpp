@@ -49,8 +49,8 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "fUML/Semantics/Activities/ActivitiesFactory.hpp"
 #include "fUML/Semantics/Actions/ActionsFactory.hpp"
+#include "fUML/Semantics/Activities/ActivitiesFactory.hpp"
 #include "uml/umlFactory.hpp"
 #include "uml/Action.hpp"
 #include "fUML/Semantics/Activities/ActivityEdgeInstance.hpp"
@@ -62,8 +62,8 @@
 #include "fUML/Semantics/Actions/PinActivation.hpp"
 #include "fUML/Semantics/Activities/Token.hpp"
 //Factories and Package includes
-#include "PSCS/PSCSPackage.hpp"
 #include "PSCS/Semantics/SemanticsPackage.hpp"
+#include "PSCS/PSCSPackage.hpp"
 #include "PSCS/Semantics/Actions/ActionsPackage.hpp"
 #include "fUML/Semantics/Actions/ActionsPackage.hpp"
 #include "fUML/Semantics/Activities/ActivitiesPackage.hpp"
@@ -308,7 +308,7 @@ void CS_CreateLinkActionActivationImpl::saveContent(std::shared_ptr<persistence:
 	}
 }
 
-std::shared_ptr<ecore::EClass> CS_CreateLinkActionActivationImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& CS_CreateLinkActionActivationImpl::eStaticClass() const
 {
 	return PSCS::Semantics::Actions::ActionsPackage::eInstance()->getCS_CreateLinkActionActivation_Class();
 }
@@ -332,7 +332,7 @@ bool CS_CreateLinkActionActivationImpl::internalEIsSet(int featureID) const
 	return fUML::Semantics::Actions::CreateLinkActionActivationImpl::internalEIsSet(featureID);
 }
 
-bool CS_CreateLinkActionActivationImpl::eSet(int featureID, Any newValue)
+bool CS_CreateLinkActionActivationImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -344,7 +344,7 @@ bool CS_CreateLinkActionActivationImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any CS_CreateLinkActionActivationImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any CS_CreateLinkActionActivationImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

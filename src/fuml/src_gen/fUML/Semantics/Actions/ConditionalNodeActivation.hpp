@@ -83,9 +83,9 @@ namespace fUML::Semantics::Actions
 			//*********************************
 			// Operations
 			//*********************************
-			virtual std::shared_ptr<fUML::Semantics::Actions::ClauseActivation> getClauseActivation(std::shared_ptr<uml::Clause> clause) = 0;
-			virtual void runTest(std::shared_ptr<uml::Clause> clause) = 0;
-			virtual void selectBody(std::shared_ptr<uml::Clause> clause) = 0;
+			virtual std::shared_ptr<fUML::Semantics::Actions::ClauseActivation> getClauseActivation(const std::shared_ptr<uml::Clause>& clause) = 0;
+			virtual void runTest(const std::shared_ptr<uml::Clause>& clause) = 0;
+			virtual void selectBody(const std::shared_ptr<uml::Clause>& clause) = 0;
 
 			//*********************************
 			// Attribute Getters & Setters
@@ -94,8 +94,8 @@ namespace fUML::Semantics::Actions
 			//*********************************
 			// Reference Getters & Setters
 			//*********************************
-			virtual std::shared_ptr<Bag<fUML::Semantics::Actions::ClauseActivation>> getClauseActivations() const = 0;
-			virtual std::shared_ptr<Bag<uml::Clause>> getSelectedClauses() const = 0;
+			virtual const std::shared_ptr<Bag<fUML::Semantics::Actions::ClauseActivation>>& getClauseActivations() const = 0;
+			virtual const std::shared_ptr<Bag<uml::Clause>>& getSelectedClauses() const = 0;
 
 			//*********************************
 			// Union Reference Getters

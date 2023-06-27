@@ -156,22 +156,22 @@ std::shared_ptr<ecore::EObject> CreateObjectActionImpl::copy() const
 //*********************************
 // Operations
 //*********************************
-bool CreateObjectActionImpl::classifier_not_abstract(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool CreateObjectActionImpl::classifier_not_abstract(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool CreateObjectActionImpl::classifier_not_association_class(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool CreateObjectActionImpl::classifier_not_association_class(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool CreateObjectActionImpl::multiplicity(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool CreateObjectActionImpl::multiplicity(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool CreateObjectActionImpl::same_type(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool CreateObjectActionImpl::same_type(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -184,22 +184,22 @@ bool CreateObjectActionImpl::same_type(Any diagnostics,std::shared_ptr<std::map 
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference classifier */
-std::shared_ptr<uml::Classifier> CreateObjectActionImpl::getClassifier() const
+const std::shared_ptr<uml::Classifier>& CreateObjectActionImpl::getClassifier() const
 {
     return m_classifier;
 }
-void CreateObjectActionImpl::setClassifier(std::shared_ptr<uml::Classifier> _classifier)
+void CreateObjectActionImpl::setClassifier(const std::shared_ptr<uml::Classifier>& _classifier)
 {
     m_classifier = _classifier;
 	
 }
 
 /* Getter & Setter for reference result */
-std::shared_ptr<uml::OutputPin> CreateObjectActionImpl::getResult() const
+const std::shared_ptr<uml::OutputPin>& CreateObjectActionImpl::getResult() const
 {
     return m_result;
 }
-void CreateObjectActionImpl::setResult(std::shared_ptr<uml::OutputPin> _result)
+void CreateObjectActionImpl::setResult(const std::shared_ptr<uml::OutputPin>& _result)
 {
     m_result = _result;
 	
@@ -438,7 +438,7 @@ void CreateObjectActionImpl::saveContent(std::shared_ptr<persistence::interfaces
 	}
 }
 
-std::shared_ptr<ecore::EClass> CreateObjectActionImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& CreateObjectActionImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getCreateObjectAction_Class();
 }
@@ -470,7 +470,7 @@ bool CreateObjectActionImpl::internalEIsSet(int featureID) const
 	return ActionImpl::internalEIsSet(featureID);
 }
 
-bool CreateObjectActionImpl::eSet(int featureID, Any newValue)
+bool CreateObjectActionImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -498,7 +498,7 @@ bool CreateObjectActionImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any CreateObjectActionImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any CreateObjectActionImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

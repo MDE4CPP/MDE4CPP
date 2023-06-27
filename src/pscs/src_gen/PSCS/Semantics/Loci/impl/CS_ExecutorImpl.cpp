@@ -48,11 +48,11 @@
 #include "fUML/Semantics/CommonBehavior/ParameterValue.hpp"
 #include "fUML/Semantics/StructuredClassifiers/Reference.hpp"
 //Factories and Package includes
-#include "PSCS/PSCSPackage.hpp"
 #include "PSCS/Semantics/SemanticsPackage.hpp"
+#include "PSCS/PSCSPackage.hpp"
 #include "fUML/Semantics/CommonBehavior/CommonBehaviorPackage.hpp"
-#include "PSCS/Semantics/Loci/LociPackage.hpp"
 #include "fUML/Semantics/Loci/LociPackage.hpp"
+#include "PSCS/Semantics/Loci/LociPackage.hpp"
 #include "fUML/Semantics/StructuredClassifiers/StructuredClassifiersPackage.hpp"
 #include "uml/umlPackage.hpp"
 
@@ -124,7 +124,7 @@ std::shared_ptr<ecore::EObject> CS_ExecutorImpl::copy() const
 //*********************************
 // Operations
 //*********************************
-std::shared_ptr<fUML::Semantics::StructuredClassifiers::Reference> CS_ExecutorImpl::start(std::shared_ptr<uml::Class> type,std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> inputs)
+std::shared_ptr<fUML::Semantics::StructuredClassifiers::Reference> CS_ExecutorImpl::start(const std::shared_ptr<uml::Class>& type, const std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>>& inputs)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -238,7 +238,7 @@ void CS_ExecutorImpl::saveContent(std::shared_ptr<persistence::interfaces::XSave
 	}
 }
 
-std::shared_ptr<ecore::EClass> CS_ExecutorImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& CS_ExecutorImpl::eStaticClass() const
 {
 	return PSCS::Semantics::Loci::LociPackage::eInstance()->getCS_Executor_Class();
 }
@@ -262,7 +262,7 @@ bool CS_ExecutorImpl::internalEIsSet(int featureID) const
 	return fUML::Semantics::Loci::ExecutorImpl::internalEIsSet(featureID);
 }
 
-bool CS_ExecutorImpl::eSet(int featureID, Any newValue)
+bool CS_ExecutorImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -274,7 +274,7 @@ bool CS_ExecutorImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any CS_ExecutorImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any CS_ExecutorImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

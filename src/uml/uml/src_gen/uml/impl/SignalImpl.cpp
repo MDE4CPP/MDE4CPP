@@ -199,7 +199,7 @@ std::shared_ptr<ecore::EObject> SignalImpl::copy() const
 //*********************************
 // Operations
 //*********************************
-std::shared_ptr<uml::Property> SignalImpl::createOwnedAttribute(std::string name,std::shared_ptr<uml::Type> type,int lower,int upper)
+std::shared_ptr<uml::Property> SignalImpl::createOwnedAttribute(std::string name, const std::shared_ptr<uml::Type>& type, int lower, int upper)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -212,7 +212,7 @@ std::shared_ptr<uml::Property> SignalImpl::createOwnedAttribute(std::string name
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference ownedAttribute */
-std::shared_ptr<Subset<uml::Property, uml::NamedElement, uml::Property>> SignalImpl::getOwnedAttribute() const
+const std::shared_ptr<Subset<uml::Property, uml::NamedElement, uml::Property>>& SignalImpl::getOwnedAttribute() const
 {
 	if(m_ownedAttribute == nullptr)
 	{
@@ -483,7 +483,7 @@ void SignalImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandl
 	}
 }
 
-std::shared_ptr<ecore::EClass> SignalImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& SignalImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getSignal_Class();
 }
@@ -511,7 +511,7 @@ bool SignalImpl::internalEIsSet(int featureID) const
 	return ClassifierImpl::internalEIsSet(featureID);
 }
 
-bool SignalImpl::eSet(int featureID, Any newValue)
+bool SignalImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -560,7 +560,7 @@ bool SignalImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any SignalImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any SignalImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

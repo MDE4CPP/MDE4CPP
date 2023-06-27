@@ -186,22 +186,22 @@ std::shared_ptr<ecore::EObject> InstanceSpecificationImpl::copy() const
 //*********************************
 // Operations
 //*********************************
-bool InstanceSpecificationImpl::defining_feature(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool InstanceSpecificationImpl::defining_feature(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool InstanceSpecificationImpl::deployment_artifact(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool InstanceSpecificationImpl::deployment_artifact(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool InstanceSpecificationImpl::deployment_target(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool InstanceSpecificationImpl::deployment_target(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool InstanceSpecificationImpl::structural_feature(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool InstanceSpecificationImpl::structural_feature(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -214,7 +214,7 @@ bool InstanceSpecificationImpl::structural_feature(Any diagnostics,std::shared_p
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference classifier */
-std::shared_ptr<Bag<uml::Classifier>> InstanceSpecificationImpl::getClassifier() const
+const std::shared_ptr<Bag<uml::Classifier>>& InstanceSpecificationImpl::getClassifier() const
 {
 	if(m_classifier == nullptr)
 	{
@@ -226,7 +226,7 @@ std::shared_ptr<Bag<uml::Classifier>> InstanceSpecificationImpl::getClassifier()
 }
 
 /* Getter & Setter for reference slot */
-std::shared_ptr<Subset<uml::Slot, uml::Element>> InstanceSpecificationImpl::getSlot() const
+const std::shared_ptr<Subset<uml::Slot, uml::Element>>& InstanceSpecificationImpl::getSlot() const
 {
 	if(m_slot == nullptr)
 	{
@@ -247,11 +247,11 @@ std::shared_ptr<Subset<uml::Slot, uml::Element>> InstanceSpecificationImpl::getS
 }
 
 /* Getter & Setter for reference specification */
-std::shared_ptr<uml::ValueSpecification> InstanceSpecificationImpl::getSpecification() const
+const std::shared_ptr<uml::ValueSpecification>& InstanceSpecificationImpl::getSpecification() const
 {
     return m_specification;
 }
-void InstanceSpecificationImpl::setSpecification(std::shared_ptr<uml::ValueSpecification> _specification)
+void InstanceSpecificationImpl::setSpecification(const std::shared_ptr<uml::ValueSpecification>& _specification)
 {
     m_specification = _specification;
 	
@@ -471,7 +471,7 @@ void InstanceSpecificationImpl::saveContent(std::shared_ptr<persistence::interfa
 	}
 }
 
-std::shared_ptr<ecore::EClass> InstanceSpecificationImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& InstanceSpecificationImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getInstanceSpecification_Class();
 }
@@ -531,7 +531,7 @@ bool InstanceSpecificationImpl::internalEIsSet(int featureID) const
 	return result;
 }
 
-bool InstanceSpecificationImpl::eSet(int featureID, Any newValue)
+bool InstanceSpecificationImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -637,7 +637,7 @@ bool InstanceSpecificationImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any InstanceSpecificationImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any InstanceSpecificationImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

@@ -165,12 +165,12 @@ std::shared_ptr<ecore::EObject> DurationConstraintImpl::copy() const
 //*********************************
 // Operations
 //*********************************
-bool DurationConstraintImpl::first_event_multiplicity(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool DurationConstraintImpl::first_event_multiplicity(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool DurationConstraintImpl::has_one_or_two_constrainedElements(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool DurationConstraintImpl::has_one_or_two_constrainedElements(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -179,7 +179,7 @@ bool DurationConstraintImpl::has_one_or_two_constrainedElements(Any diagnostics,
 // Attribute Getters & Setters
 //*********************************
 /* Getter & Setter for attribute firstEvent */
-std::shared_ptr<Bag<bool>> DurationConstraintImpl::isFirstEvent() const 
+const std::shared_ptr<Bag<bool>>& DurationConstraintImpl::isFirstEvent() const
 {
 	if(m_firstEvent == nullptr)
 	{
@@ -347,7 +347,7 @@ void DurationConstraintImpl::saveContent(std::shared_ptr<persistence::interfaces
 	}
 }
 
-std::shared_ptr<ecore::EClass> DurationConstraintImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& DurationConstraintImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getDurationConstraint_Class();
 }
@@ -375,7 +375,7 @@ bool DurationConstraintImpl::internalEIsSet(int featureID) const
 	return IntervalConstraintImpl::internalEIsSet(featureID);
 }
 
-bool DurationConstraintImpl::eSet(int featureID, Any newValue)
+bool DurationConstraintImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -393,7 +393,7 @@ bool DurationConstraintImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any DurationConstraintImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any DurationConstraintImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

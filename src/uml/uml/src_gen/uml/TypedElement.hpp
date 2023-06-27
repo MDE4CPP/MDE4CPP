@@ -90,13 +90,13 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::Type> getType() const = 0;
+			virtual const std::shared_ptr<uml::Type>& getType() const = 0;
 			/*!
 			The type of the TypedElement.
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual void setType(std::shared_ptr<uml::Type>) = 0;
+			virtual void setType(const std::shared_ptr<uml::Type>&) = 0;
 
 			//*********************************
 			// Union Reference Getters

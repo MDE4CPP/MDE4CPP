@@ -68,9 +68,9 @@ namespace ocl::Values
 			//*********************************
 			// Operations
 			//*********************************
-			virtual bool addValue(std::shared_ptr<fUML::Semantics::Values::Value> value) = 0;
-			virtual bool equals(std::shared_ptr<fUML::Semantics::Values::Value> otherValue) = 0;
-			virtual bool find(std::shared_ptr<fUML::Semantics::Values::Value> value) = 0;
+			virtual bool addValue(const std::shared_ptr<fUML::Semantics::Values::Value>& value) = 0;
+			virtual bool equals(const std::shared_ptr<fUML::Semantics::Values::Value>& otherValue) = 0;
+			virtual bool find(const std::shared_ptr<fUML::Semantics::Values::Value>& value) = 0;
 			virtual std::string toString() = 0;
 
 			//*********************************
@@ -80,7 +80,7 @@ namespace ocl::Values
 			//*********************************
 			// Reference Getters & Setters
 			//*********************************
-			virtual std::shared_ptr<Bag<ocl::Values::Element>> getElements() const = 0;
+			virtual const std::shared_ptr<Bag<ocl::Values::Element>>& getElements() const = 0;
 
 			//*********************************
 			// Union Reference Getters

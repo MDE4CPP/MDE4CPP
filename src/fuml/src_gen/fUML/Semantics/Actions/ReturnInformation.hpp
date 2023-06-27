@@ -76,11 +76,11 @@ namespace fUML::Semantics::Actions
 			// Operations
 			//*********************************
 			virtual std::shared_ptr<fUML::Semantics::Values::Value> _copy() = 0;
-			virtual bool equals(std::shared_ptr<fUML::Semantics::Values::Value> otherValue) = 0;
+			virtual bool equals(const std::shared_ptr<fUML::Semantics::Values::Value>& otherValue) = 0;
 			virtual std::shared_ptr<uml::Operation> getOperation() = 0;
 			virtual std::shared_ptr<Bag<uml::Classifier> > getTypes() = 0;
 			virtual std::shared_ptr<fUML::Semantics::Values::Value> new_() = 0;
-			virtual void reply(std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> outputParameterValues) = 0;
+			virtual void reply(const std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>>& outputParameterValues) = 0;
 			virtual std::shared_ptr<uml::ValueSpecification> specify() = 0;
 			virtual std::string toString() = 0;
 
@@ -91,8 +91,8 @@ namespace fUML::Semantics::Actions
 			//*********************************
 			// Reference Getters & Setters
 			//*********************************
-			virtual std::shared_ptr<fUML::Semantics::CommonBehavior::CallEventOccurrence> getCallEventOccurrence() const = 0;
-			virtual void setCallEventOccurrence(std::shared_ptr<fUML::Semantics::CommonBehavior::CallEventOccurrence>) = 0;
+			virtual const std::shared_ptr<fUML::Semantics::CommonBehavior::CallEventOccurrence>& getCallEventOccurrence() const = 0;
+			virtual void setCallEventOccurrence(const std::shared_ptr<fUML::Semantics::CommonBehavior::CallEventOccurrence>&) = 0;
 
 			//*********************************
 			// Union Reference Getters

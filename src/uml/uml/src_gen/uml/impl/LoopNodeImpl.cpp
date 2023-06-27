@@ -215,47 +215,47 @@ std::shared_ptr<ecore::EObject> LoopNodeImpl::copy() const
 //*********************************
 // Operations
 //*********************************
-bool LoopNodeImpl::body_output_pins(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool LoopNodeImpl::body_output_pins(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool LoopNodeImpl::executable_nodes(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool LoopNodeImpl::executable_nodes(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool LoopNodeImpl::input_edges(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool LoopNodeImpl::input_edges(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool LoopNodeImpl::loop_variable_outgoing(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool LoopNodeImpl::loop_variable_outgoing(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool LoopNodeImpl::matching_loop_variables(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool LoopNodeImpl::matching_loop_variables(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool LoopNodeImpl::matching_output_pins(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool LoopNodeImpl::matching_output_pins(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool LoopNodeImpl::matching_result_pins(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool LoopNodeImpl::matching_result_pins(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool LoopNodeImpl::result_no_incoming(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool LoopNodeImpl::result_no_incoming(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool LoopNodeImpl::setup_test_and_body(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool LoopNodeImpl::setup_test_and_body(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -264,7 +264,7 @@ bool LoopNodeImpl::setup_test_and_body(Any diagnostics,std::shared_ptr<std::map 
 // Attribute Getters & Setters
 //*********************************
 /* Getter & Setter for attribute isTestedFirst */
-bool LoopNodeImpl::getIsTestedFirst() const 
+bool LoopNodeImpl::getIsTestedFirst() const
 {
 	return m_isTestedFirst;
 }
@@ -278,7 +278,7 @@ void LoopNodeImpl::setIsTestedFirst(bool _isTestedFirst)
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference bodyOutput */
-std::shared_ptr<Bag<uml::OutputPin>> LoopNodeImpl::getBodyOutput() const
+const std::shared_ptr<Bag<uml::OutputPin>>& LoopNodeImpl::getBodyOutput() const
 {
 	if(m_bodyOutput == nullptr)
 	{
@@ -290,7 +290,7 @@ std::shared_ptr<Bag<uml::OutputPin>> LoopNodeImpl::getBodyOutput() const
 }
 
 /* Getter & Setter for reference bodyPart */
-std::shared_ptr<Bag<uml::ExecutableNode>> LoopNodeImpl::getBodyPart() const
+const std::shared_ptr<Bag<uml::ExecutableNode>>& LoopNodeImpl::getBodyPart() const
 {
 	if(m_bodyPart == nullptr)
 	{
@@ -302,18 +302,18 @@ std::shared_ptr<Bag<uml::ExecutableNode>> LoopNodeImpl::getBodyPart() const
 }
 
 /* Getter & Setter for reference decider */
-std::shared_ptr<uml::OutputPin> LoopNodeImpl::getDecider() const
+const std::shared_ptr<uml::OutputPin>& LoopNodeImpl::getDecider() const
 {
     return m_decider;
 }
-void LoopNodeImpl::setDecider(std::shared_ptr<uml::OutputPin> _decider)
+void LoopNodeImpl::setDecider(const std::shared_ptr<uml::OutputPin>& _decider)
 {
     m_decider = _decider;
 	
 }
 
 /* Getter & Setter for reference loopVariable */
-std::shared_ptr<Subset<uml::OutputPin, uml::Element>> LoopNodeImpl::getLoopVariable() const
+const std::shared_ptr<Subset<uml::OutputPin, uml::Element>>& LoopNodeImpl::getLoopVariable() const
 {
 	if(m_loopVariable == nullptr)
 	{
@@ -334,21 +334,21 @@ std::shared_ptr<Subset<uml::OutputPin, uml::Element>> LoopNodeImpl::getLoopVaria
 }
 
 /* Getter & Setter for reference loopVariableInput */
-std::shared_ptr<Bag<uml::InputPin>> LoopNodeImpl::getLoopVariableInput() const
+const std::shared_ptr<Bag<uml::InputPin>>& LoopNodeImpl::getLoopVariableInput() const
 {
 	//Getter call of redefined container reference StructuredActivityNode::structuredNodeInput 
 	return uml::StructuredActivityNodeImpl::getStructuredNodeInput();
 }
 
 /* Getter & Setter for reference result */
-std::shared_ptr<Bag<uml::OutputPin>> LoopNodeImpl::getResult() const
+const std::shared_ptr<Bag<uml::OutputPin>>& LoopNodeImpl::getResult() const
 {
 	//Getter call of redefined container reference StructuredActivityNode::structuredNodeOutput 
 	return uml::StructuredActivityNodeImpl::getStructuredNodeOutput();
 }
 
 /* Getter & Setter for reference setupPart */
-std::shared_ptr<Bag<uml::ExecutableNode>> LoopNodeImpl::getSetupPart() const
+const std::shared_ptr<Bag<uml::ExecutableNode>>& LoopNodeImpl::getSetupPart() const
 {
 	if(m_setupPart == nullptr)
 	{
@@ -360,7 +360,7 @@ std::shared_ptr<Bag<uml::ExecutableNode>> LoopNodeImpl::getSetupPart() const
 }
 
 /* Getter & Setter for reference test */
-std::shared_ptr<Bag<uml::ExecutableNode>> LoopNodeImpl::getTest() const
+const std::shared_ptr<Bag<uml::ExecutableNode>>& LoopNodeImpl::getTest() const
 {
 	if(m_test == nullptr)
 	{
@@ -839,7 +839,7 @@ void LoopNodeImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHan
 	}
 }
 
-std::shared_ptr<ecore::EClass> LoopNodeImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& LoopNodeImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getLoopNode_Class();
 }
@@ -899,7 +899,7 @@ bool LoopNodeImpl::internalEIsSet(int featureID) const
 	return StructuredActivityNodeImpl::internalEIsSet(featureID);
 }
 
-bool LoopNodeImpl::eSet(int featureID, Any newValue)
+bool LoopNodeImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -1185,7 +1185,7 @@ bool LoopNodeImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any LoopNodeImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any LoopNodeImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

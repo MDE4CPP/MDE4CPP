@@ -44,8 +44,8 @@
 #include "fUML/Semantics/Values/Value.hpp"
 #include "uml/ValueSpecification.hpp"
 //Factories and Package includes
-#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/SemanticsPackage.hpp"
+#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/Actions/ActionsPackage.hpp"
 #include "fUML/Semantics/CommonBehavior/CommonBehaviorPackage.hpp"
 #include "fUML/Semantics/Values/ValuesPackage.hpp"
@@ -127,7 +127,7 @@ return newValue;
 	//end of body
 }
 
-bool ReturnInformationImpl::equals(std::shared_ptr<fUML::Semantics::Values::Value> otherValue)
+bool ReturnInformationImpl::equals(const std::shared_ptr<fUML::Semantics::Values::Value>& otherValue)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -178,7 +178,7 @@ return fUML::Semantics::Actions::ActionsFactory::eInstance()->createReturnInform
 	//end of body
 }
 
-void ReturnInformationImpl::reply(std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> outputParameterValues)
+void ReturnInformationImpl::reply(const std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>>& outputParameterValues)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -221,11 +221,11 @@ std::string ReturnInformationImpl::toString()
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference callEventOccurrence */
-std::shared_ptr<fUML::Semantics::CommonBehavior::CallEventOccurrence> ReturnInformationImpl::getCallEventOccurrence() const
+const std::shared_ptr<fUML::Semantics::CommonBehavior::CallEventOccurrence>& ReturnInformationImpl::getCallEventOccurrence() const
 {
     return m_callEventOccurrence;
 }
-void ReturnInformationImpl::setCallEventOccurrence(std::shared_ptr<fUML::Semantics::CommonBehavior::CallEventOccurrence> _callEventOccurrence)
+void ReturnInformationImpl::setCallEventOccurrence(const std::shared_ptr<fUML::Semantics::CommonBehavior::CallEventOccurrence>& _callEventOccurrence)
 {
     m_callEventOccurrence = _callEventOccurrence;
 	
@@ -338,7 +338,7 @@ void ReturnInformationImpl::saveContent(std::shared_ptr<persistence::interfaces:
 	}
 }
 
-std::shared_ptr<ecore::EClass> ReturnInformationImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& ReturnInformationImpl::eStaticClass() const
 {
 	return fUML::Semantics::Actions::ActionsPackage::eInstance()->getReturnInformation_Class();
 }
@@ -366,7 +366,7 @@ bool ReturnInformationImpl::internalEIsSet(int featureID) const
 	return fUML::Semantics::Values::ValueImpl::internalEIsSet(featureID);
 }
 
-bool ReturnInformationImpl::eSet(int featureID, Any newValue)
+bool ReturnInformationImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -386,7 +386,7 @@ bool ReturnInformationImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any ReturnInformationImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any ReturnInformationImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

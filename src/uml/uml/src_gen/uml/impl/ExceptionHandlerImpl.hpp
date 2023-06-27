@@ -53,26 +53,26 @@ namespace uml
 			nodes.incoming->forAll(nodes->includes(source))
 			*/
 			 
-			virtual bool edge_source_target(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
+			virtual bool edge_source_target(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context) ;
 			/*!
 			The exceptionInput must either have no type or every exceptionType must conform to the exceptionInput type.
 			exceptionInput.type=null or 
 			exceptionType->forAll(conformsTo(exceptionInput.type.oclAsType(Classifier)))
 			*/
 			 
-			virtual bool exception_input_type(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
+			virtual bool exception_input_type(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context) ;
 			/*!
 			The handlerBody has no incoming or outgoing ActivityEdges and the exceptionInput has no incoming ActivityEdges.
 			handlerBody.incoming->isEmpty() and handlerBody.outgoing->isEmpty() and exceptionInput.incoming->isEmpty()
 			*/
 			 
-			virtual bool handler_body_edges(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
+			virtual bool handler_body_edges(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context) ;
 			/*!
 			The handlerBody must have the same owner as the protectedNode.
 			handlerBody.owner=protectedNode.owner
 			*/
 			 
-			virtual bool handler_body_owner(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
+			virtual bool handler_body_owner(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context) ;
 			/*!
 			The handlerBody is an Action with one InputPin, and that InputPin is the same as the exceptionInput.
 			handlerBody.oclIsKindOf(Action) and
@@ -80,7 +80,7 @@ namespace uml
 			inputs->size()=1 and inputs->first()=exceptionInput
 			*/
 			 
-			virtual bool one_input(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
+			virtual bool one_input(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context) ;
 			/*!
 			If the protectedNode is an Action with OutputPins, then the handlerBody must also be an Action with the same number of OutputPins, which are compatible in type, ordering, and multiplicity to those of the protectedNode.
 			(protectedNode.oclIsKindOf(Action) and protectedNode.oclAsType(Action).output->notEmpty()) implies
@@ -96,7 +96,7 @@ namespace uml
 			)
 			*/
 			 
-			virtual bool output_pins(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
+			virtual bool output_pins(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context) ;
 			
 			//*********************************
 			// Attribute Getters & Setters
@@ -110,31 +110,31 @@ namespace uml
 			<p>From package UML::Activities.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::ObjectNode> getExceptionInput() const ;
+			virtual const std::shared_ptr<uml::ObjectNode>& getExceptionInput() const ;
 			/*!
 			An ObjectNode within the handlerBody. When the ExceptionHandler catches an exception, the exception token is placed on this ObjectNode, causing the handlerBody to execute.
 			<p>From package UML::Activities.</p>
 			*/
 			
-			virtual void setExceptionInput(std::shared_ptr<uml::ObjectNode>) ;
+			virtual void setExceptionInput(const std::shared_ptr<uml::ObjectNode>&) ;
 			/*!
 			The Classifiers whose instances the ExceptionHandler catches as exceptions. If an exception occurs whose type is any exceptionType, the ExceptionHandler catches the exception and executes the handlerBody.
 			<p>From package UML::Activities.</p>
 			*/
 			
-			virtual std::shared_ptr<Bag<uml::Classifier>> getExceptionType() const ;
+			virtual const std::shared_ptr<Bag<uml::Classifier>>& getExceptionType() const ;
 			/*!
 			An ExecutableNode that is executed if the ExceptionHandler catches an exception.
 			<p>From package UML::Activities.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::ExecutableNode> getHandlerBody() const ;
+			virtual const std::shared_ptr<uml::ExecutableNode>& getHandlerBody() const ;
 			/*!
 			An ExecutableNode that is executed if the ExceptionHandler catches an exception.
 			<p>From package UML::Activities.</p>
 			*/
 			
-			virtual void setHandlerBody(std::shared_ptr<uml::ExecutableNode>) ;
+			virtual void setHandlerBody(const std::shared_ptr<uml::ExecutableNode>&) ;
 			/*!
 			The ExecutableNode protected by the ExceptionHandler. If an exception propagates out of the protectedNode and has a type matching one of the exceptionTypes, then it is caught by this ExceptionHandler.
 			<p>From package UML::Activities.</p>
@@ -180,19 +180,19 @@ namespace uml
 			virtual void saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const;
 
 		protected:
-			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
+			virtual const std::shared_ptr<ecore::EClass>& eStaticClass() const;
 
 			//*********************************
 			// EStructuralFeature Get/Set/IsSet
 			//*********************************
 			virtual Any eGet(int featureID, bool resolve, bool coreType) const ;
-			virtual bool eSet(int featureID, Any newValue) ;
+			virtual bool eSet(int featureID, const Any& newValue) ;
 			virtual bool internalEIsSet(int featureID) const ;
 
 			//*********************************
 			// EOperation Invoke
 			//*********************************
-			virtual Any eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments) ;
+			virtual Any eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments) ;
 
 		private:
 			std::weak_ptr<uml::ExceptionHandler> m_thisExceptionHandlerPtr;

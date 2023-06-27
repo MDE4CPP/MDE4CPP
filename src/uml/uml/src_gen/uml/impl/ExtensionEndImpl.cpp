@@ -180,12 +180,12 @@ std::shared_ptr<ecore::EObject> ExtensionEndImpl::copy() const
 //*********************************
 // Operations
 //*********************************
-bool ExtensionEndImpl::aggregation(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool ExtensionEndImpl::aggregation(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool ExtensionEndImpl::multiplicity(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool ExtensionEndImpl::multiplicity(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -397,7 +397,7 @@ void ExtensionEndImpl::saveContent(std::shared_ptr<persistence::interfaces::XSav
 	}
 }
 
-std::shared_ptr<ecore::EClass> ExtensionEndImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& ExtensionEndImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getExtensionEnd_Class();
 }
@@ -421,7 +421,7 @@ bool ExtensionEndImpl::internalEIsSet(int featureID) const
 	return PropertyImpl::internalEIsSet(featureID);
 }
 
-bool ExtensionEndImpl::eSet(int featureID, Any newValue)
+bool ExtensionEndImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -433,7 +433,7 @@ bool ExtensionEndImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any ExtensionEndImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any ExtensionEndImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

@@ -154,11 +154,11 @@ std::shared_ptr<ecore::EObject> AbstractionImpl::copy() const
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference mapping */
-std::shared_ptr<uml::OpaqueExpression> AbstractionImpl::getMapping() const
+const std::shared_ptr<uml::OpaqueExpression>& AbstractionImpl::getMapping() const
 {
     return m_mapping;
 }
-void AbstractionImpl::setMapping(std::shared_ptr<uml::OpaqueExpression> _mapping)
+void AbstractionImpl::setMapping(const std::shared_ptr<uml::OpaqueExpression>& _mapping)
 {
     m_mapping = _mapping;
 	
@@ -373,7 +373,7 @@ void AbstractionImpl::saveContent(std::shared_ptr<persistence::interfaces::XSave
 	}
 }
 
-std::shared_ptr<ecore::EClass> AbstractionImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& AbstractionImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getAbstraction_Class();
 }
@@ -401,7 +401,7 @@ bool AbstractionImpl::internalEIsSet(int featureID) const
 	return DependencyImpl::internalEIsSet(featureID);
 }
 
-bool AbstractionImpl::eSet(int featureID, Any newValue)
+bool AbstractionImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -421,7 +421,7 @@ bool AbstractionImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any AbstractionImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any AbstractionImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

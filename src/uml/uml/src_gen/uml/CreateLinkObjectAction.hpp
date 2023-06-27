@@ -97,19 +97,19 @@ namespace uml
 			self.association().oclIsKindOf(AssociationClass)
 			*/
 			 
-			virtual bool association_class(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
+			virtual bool association_class(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context) = 0;
 			/*!
 			The multiplicity of the OutputPin is 1..1.
 			result.is(1,1)
 			*/
 			 
-			virtual bool multiplicity(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
+			virtual bool multiplicity(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context) = 0;
 			/*!
 			The type of the result OutputPin must be the same as the Association of the CreateLinkObjectAction.
 			result.type = association()
 			*/
 			 
-			virtual bool type_of_result(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
+			virtual bool type_of_result(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context) = 0;
 
 			//*********************************
 			// Attribute Getters & Setters
@@ -123,13 +123,13 @@ namespace uml
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::OutputPin> getResult() const = 0;
+			virtual const std::shared_ptr<uml::OutputPin>& getResult() const = 0;
 			/*!
 			The output pin on which the newly created link object is placed.
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual void setResult(std::shared_ptr<uml::OutputPin>) = 0;
+			virtual void setResult(const std::shared_ptr<uml::OutputPin>&) = 0;
 
 			//*********************************
 			// Union Reference Getters

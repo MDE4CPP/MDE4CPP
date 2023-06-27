@@ -54,8 +54,8 @@
 #include "fUML/Semantics/Actions/PinActivation.hpp"
 #include "fUML/Semantics/Activities/Token.hpp"
 //Factories and Package includes
-#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/SemanticsPackage.hpp"
+#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/Actions/ActionsPackage.hpp"
 #include "fUML/Semantics/Activities/ActivitiesPackage.hpp"
 #include "uml/umlPackage.hpp"
@@ -265,7 +265,7 @@ void ReplyActionActivationImpl::saveContent(std::shared_ptr<persistence::interfa
 	}
 }
 
-std::shared_ptr<ecore::EClass> ReplyActionActivationImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& ReplyActionActivationImpl::eStaticClass() const
 {
 	return fUML::Semantics::Actions::ActionsPackage::eInstance()->getReplyActionActivation_Class();
 }
@@ -289,7 +289,7 @@ bool ReplyActionActivationImpl::internalEIsSet(int featureID) const
 	return ActionActivationImpl::internalEIsSet(featureID);
 }
 
-bool ReplyActionActivationImpl::eSet(int featureID, Any newValue)
+bool ReplyActionActivationImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -301,7 +301,7 @@ bool ReplyActionActivationImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any ReplyActionActivationImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any ReplyActionActivationImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

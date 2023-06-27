@@ -162,17 +162,17 @@ std::shared_ptr<uml::Behavior> StartObjectBehaviorActionImpl::behavior()
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool StartObjectBehaviorActionImpl::multiplicity_of_object(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool StartObjectBehaviorActionImpl::multiplicity_of_object(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool StartObjectBehaviorActionImpl::no_onport(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool StartObjectBehaviorActionImpl::no_onport(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool StartObjectBehaviorActionImpl::type_of_object(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool StartObjectBehaviorActionImpl::type_of_object(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -185,11 +185,11 @@ bool StartObjectBehaviorActionImpl::type_of_object(Any diagnostics,std::shared_p
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference object */
-std::shared_ptr<uml::InputPin> StartObjectBehaviorActionImpl::getObject() const
+const std::shared_ptr<uml::InputPin>& StartObjectBehaviorActionImpl::getObject() const
 {
     return m_object;
 }
-void StartObjectBehaviorActionImpl::setObject(std::shared_ptr<uml::InputPin> _object)
+void StartObjectBehaviorActionImpl::setObject(const std::shared_ptr<uml::InputPin>& _object)
 {
     m_object = _object;
 	
@@ -417,7 +417,7 @@ void StartObjectBehaviorActionImpl::saveContent(std::shared_ptr<persistence::int
 	}
 }
 
-std::shared_ptr<ecore::EClass> StartObjectBehaviorActionImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& StartObjectBehaviorActionImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getStartObjectBehaviorAction_Class();
 }
@@ -445,7 +445,7 @@ bool StartObjectBehaviorActionImpl::internalEIsSet(int featureID) const
 	return CallActionImpl::internalEIsSet(featureID);
 }
 
-bool StartObjectBehaviorActionImpl::eSet(int featureID, Any newValue)
+bool StartObjectBehaviorActionImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -465,7 +465,7 @@ bool StartObjectBehaviorActionImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any StartObjectBehaviorActionImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any StartObjectBehaviorActionImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

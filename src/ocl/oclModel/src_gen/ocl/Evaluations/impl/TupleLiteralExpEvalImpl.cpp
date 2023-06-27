@@ -34,10 +34,10 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "fUML/Semantics/Values/ValuesFactory.hpp"
 #include "fUML/Semantics/Loci/LociFactory.hpp"
-#include "ocl/Evaluations/EvaluationsFactory.hpp"
 #include "uml/umlFactory.hpp"
+#include "fUML/Semantics/Values/ValuesFactory.hpp"
+#include "ocl/Evaluations/EvaluationsFactory.hpp"
 #include "ocl/Expressions/ExpressionsFactory.hpp"
 #include "ocl/Evaluations/EvalEnvironment.hpp"
 #include "ocl/Evaluations/LiteralExpEval.hpp"
@@ -126,7 +126,7 @@ std::shared_ptr<ecore::EObject> TupleLiteralExpEvalImpl::copy() const
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference tuplePart */
-std::shared_ptr<Bag<ocl::Evaluations::VariableDeclEval>> TupleLiteralExpEvalImpl::getTuplePart() const
+const std::shared_ptr<Bag<ocl::Evaluations::VariableDeclEval>>& TupleLiteralExpEvalImpl::getTuplePart() const
 {
 	if(m_tuplePart == nullptr)
 	{
@@ -250,7 +250,7 @@ void TupleLiteralExpEvalImpl::saveContent(std::shared_ptr<persistence::interface
 	}
 }
 
-std::shared_ptr<ecore::EClass> TupleLiteralExpEvalImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& TupleLiteralExpEvalImpl::eStaticClass() const
 {
 	return ocl::Evaluations::EvaluationsPackage::eInstance()->getTupleLiteralExpEval_Class();
 }
@@ -278,7 +278,7 @@ bool TupleLiteralExpEvalImpl::internalEIsSet(int featureID) const
 	return LiteralExpEvalImpl::internalEIsSet(featureID);
 }
 
-bool TupleLiteralExpEvalImpl::eSet(int featureID, Any newValue)
+bool TupleLiteralExpEvalImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -327,7 +327,7 @@ bool TupleLiteralExpEvalImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any TupleLiteralExpEvalImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any TupleLiteralExpEvalImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

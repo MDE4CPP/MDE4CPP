@@ -117,11 +117,11 @@ std::shared_ptr<ecore::EObject> EObjectAnyImpl::copy() const
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference any */
-Any EObjectAnyImpl::getAny() const
+const Any& EObjectAnyImpl::getAny() const
 {
     return m_any;
 }
-void EObjectAnyImpl::setAny(Any _any)
+void EObjectAnyImpl::setAny(const Any& _any)
 {
     m_any = _any;
 	
@@ -235,7 +235,7 @@ void EObjectAnyImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveH
 	}
 }
 
-std::shared_ptr<EClass> EObjectAnyImpl::eStaticClass() const
+const std::shared_ptr<EClass>& EObjectAnyImpl::eStaticClass() const
 {
 	return ecore::ecorePackage::eInstance()->getEObjectAny_Class();
 }
@@ -263,7 +263,7 @@ bool EObjectAnyImpl::internalEIsSet(int featureID) const
 	return EObjectImpl::internalEIsSet(featureID);
 }
 
-bool EObjectAnyImpl::eSet(int featureID, Any newValue)
+bool EObjectAnyImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -282,7 +282,7 @@ bool EObjectAnyImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any EObjectAnyImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any EObjectAnyImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

@@ -86,9 +86,9 @@ namespace ocl::Types
 			//*********************************
 			// Reference Getters & Setters
 			//*********************************
-			virtual std::shared_ptr<ocl::Values::TupleValue> getInstance() const = 0;
-			virtual void setInstance(std::shared_ptr<ocl::Values::TupleValue>) = 0;
-			virtual std::shared_ptr<Bag<ocl::Types::NameTypeBinding>> getParts() const = 0;
+			virtual const std::shared_ptr<ocl::Values::TupleValue>& getInstance() const = 0;
+			virtual void setInstance(const std::shared_ptr<ocl::Values::TupleValue>&) = 0;
+			virtual const std::shared_ptr<Bag<ocl::Types::NameTypeBinding>>& getParts() const = 0;
 
 			//*********************************
 			// Union Reference Getters

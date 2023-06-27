@@ -199,7 +199,7 @@ FeatureCallExpImpl& FeatureCallExpImpl::operator=(const FeatureCallExpImpl & obj
 // Attribute Getters & Setters
 //*********************************
 /* Getter & Setter for attribute isPre */
-bool FeatureCallExpImpl::getIsPre() const 
+bool FeatureCallExpImpl::getIsPre() const
 {
 	return m_isPre;
 }
@@ -371,7 +371,7 @@ void FeatureCallExpImpl::saveContent(std::shared_ptr<persistence::interfaces::XS
 	}
 }
 
-std::shared_ptr<ecore::EClass> FeatureCallExpImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& FeatureCallExpImpl::eStaticClass() const
 {
 	return ocl::Expressions::ExpressionsPackage::eInstance()->getFeatureCallExp_Class();
 }
@@ -399,7 +399,7 @@ bool FeatureCallExpImpl::internalEIsSet(int featureID) const
 	return CallExpImpl::internalEIsSet(featureID);
 }
 
-bool FeatureCallExpImpl::eSet(int featureID, Any newValue)
+bool FeatureCallExpImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -418,7 +418,7 @@ bool FeatureCallExpImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any FeatureCallExpImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any FeatureCallExpImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

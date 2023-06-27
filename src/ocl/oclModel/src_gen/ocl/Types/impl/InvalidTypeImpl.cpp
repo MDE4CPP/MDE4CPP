@@ -199,7 +199,7 @@ void InvalidTypeImpl::saveContent(std::shared_ptr<persistence::interfaces::XSave
 	}
 }
 
-std::shared_ptr<ecore::EClass> InvalidTypeImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& InvalidTypeImpl::eStaticClass() const
 {
 	return ocl::Types::TypesPackage::eInstance()->getInvalidType_Class();
 }
@@ -223,7 +223,7 @@ bool InvalidTypeImpl::internalEIsSet(int featureID) const
 	return ecore::EClassifierImpl::internalEIsSet(featureID);
 }
 
-bool InvalidTypeImpl::eSet(int featureID, Any newValue)
+bool InvalidTypeImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -235,7 +235,7 @@ bool InvalidTypeImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any InvalidTypeImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any InvalidTypeImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

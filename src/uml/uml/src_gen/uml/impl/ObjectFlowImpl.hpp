@@ -54,7 +54,7 @@ namespace uml
 			ObjectNodes connected by an ObjectFlow, with optionally intervening ControlNodes, must have compatible types. In particular, the downstream ObjectNode type must be the same or a supertype of the upstream ObjectNode type.
 			*/
 			 
-			virtual bool compatible_types(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
+			virtual bool compatible_types(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context) ;
 			/*!
 			A selection Behavior has one input Parameter and one output Parameter. The input Parameter must have the same as or a supertype of the type of the source ObjectNode, be non-unique and have multiplicity 0..*. The output Parameter must be the same or a subtype of the type of source ObjectNode. The Behavior cannot have side effects.
 			selection<>null implies
@@ -63,35 +63,35 @@ namespace uml
 				selection.outputParameters()->size()=1
 			*/
 			 
-			virtual bool input_and_output_parameter(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
+			virtual bool input_and_output_parameter(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context) ;
 			/*!
 			isMulticast and isMultireceive cannot both be true.
 			not (isMulticast and isMultireceive)
 			*/
 			 
-			virtual bool is_multicast_or_is_multireceive(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
+			virtual bool is_multicast_or_is_multireceive(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context) ;
 			/*!
 			ObjectFlows may not have ExecutableNodes at either end.
 			not (source.oclIsKindOf(ExecutableNode) or target.oclIsKindOf(ExecutableNode))
 			*/
 			 
-			virtual bool no_executable_nodes(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
+			virtual bool no_executable_nodes(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context) ;
 			/*!
 			ObjectNodes connected by an ObjectFlow, with optionally intervening ControlNodes, must have the same upperBounds.
 			*/
 			 
-			virtual bool same_upper_bounds(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
+			virtual bool same_upper_bounds(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context) ;
 			/*!
 			An ObjectFlow may have a selection Behavior only if it has an ObjectNode as its source.
 			selection<>null implies source.oclIsKindOf(ObjectNode)
 			*/
 			 
-			virtual bool selection_behavior(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
+			virtual bool selection_behavior(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context) ;
 			/*!
 			An ObjectFlow with a constant weight may not target an ObjectNode, with optionally intervening ControlNodes, that has an upper bound less than the weight.
 			*/
 			 
-			virtual bool target(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
+			virtual bool target(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context) ;
 			/*!
 			A transformation Behavior has one input Parameter and one output Parameter. The input Parameter must be the same as or a supertype of the type of object token coming from the source end. The output Parameter must be the same or a subtype of the type of object token expected downstream. The Behavior cannot have side effects.
 			transformation<>null implies
@@ -99,7 +99,7 @@ namespace uml
 				transformation.outputParameters()->size()=1
 			*/
 			 
-			virtual bool transformation_behavior(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
+			virtual bool transformation_behavior(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context) ;
 			
 			//*********************************
 			// Attribute Getters & Setters
@@ -137,25 +137,25 @@ namespace uml
 			<p>From package UML::Activities.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::Behavior> getSelection() const ;
+			virtual const std::shared_ptr<uml::Behavior>& getSelection() const ;
 			/*!
 			A Behavior used to select tokens from a source ObjectNode.
 			<p>From package UML::Activities.</p>
 			*/
 			
-			virtual void setSelection(std::shared_ptr<uml::Behavior>) ;
+			virtual void setSelection(const std::shared_ptr<uml::Behavior>&) ;
 			/*!
 			A Behavior used to change or replace object tokens flowing along the ObjectFlow.
 			<p>From package UML::Activities.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::Behavior> getTransformation() const ;
+			virtual const std::shared_ptr<uml::Behavior>& getTransformation() const ;
 			/*!
 			A Behavior used to change or replace object tokens flowing along the ObjectFlow.
 			<p>From package UML::Activities.</p>
 			*/
 			
-			virtual void setTransformation(std::shared_ptr<uml::Behavior>) ;
+			virtual void setTransformation(const std::shared_ptr<uml::Behavior>&) ;
 			
 			//*********************************
 			// Union Reference Getters
@@ -201,19 +201,19 @@ namespace uml
 			virtual void saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const;
 
 		protected:
-			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
+			virtual const std::shared_ptr<ecore::EClass>& eStaticClass() const;
 
 			//*********************************
 			// EStructuralFeature Get/Set/IsSet
 			//*********************************
 			virtual Any eGet(int featureID, bool resolve, bool coreType) const ;
-			virtual bool eSet(int featureID, Any newValue) ;
+			virtual bool eSet(int featureID, const Any& newValue) ;
 			virtual bool internalEIsSet(int featureID) const ;
 
 			//*********************************
 			// EOperation Invoke
 			//*********************************
-			virtual Any eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments) ;
+			virtual Any eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments) ;
 
 		private:
 			std::weak_ptr<uml::ObjectFlow> m_thisObjectFlowPtr;

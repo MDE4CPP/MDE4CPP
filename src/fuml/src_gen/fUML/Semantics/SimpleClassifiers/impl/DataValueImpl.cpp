@@ -41,16 +41,16 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "fUML/Semantics/SimpleClassifiers/SimpleClassifiersFactory.hpp"
 #include "uml/umlFactory.hpp"
+#include "fUML/Semantics/SimpleClassifiers/SimpleClassifiersFactory.hpp"
 #include "uml/Classifier.hpp"
 #include "fUML/Semantics/SimpleClassifiers/CompoundValue.hpp"
 #include "uml/DataType.hpp"
 #include "fUML/Semantics/SimpleClassifiers/FeatureValue.hpp"
 #include "fUML/Semantics/Values/Value.hpp"
 //Factories and Package includes
-#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/SemanticsPackage.hpp"
+#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/SimpleClassifiers/SimpleClassifiersPackage.hpp"
 #include "fUML/Semantics/Values/ValuesPackage.hpp"
 #include "uml/umlPackage.hpp"
@@ -157,11 +157,11 @@ return std::shared_ptr<fUML::Semantics::Values::Value>(fUML::Semantics::SimpleCl
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference type */
-std::shared_ptr<uml::DataType> DataValueImpl::getType() const
+const std::shared_ptr<uml::DataType>& DataValueImpl::getType() const
 {
     return m_type;
 }
-void DataValueImpl::setType(std::shared_ptr<uml::DataType> _type)
+void DataValueImpl::setType(const std::shared_ptr<uml::DataType>& _type)
 {
     m_type = _type;
 	
@@ -278,7 +278,7 @@ void DataValueImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHa
 	}
 }
 
-std::shared_ptr<ecore::EClass> DataValueImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& DataValueImpl::eStaticClass() const
 {
 	return fUML::Semantics::SimpleClassifiers::SimpleClassifiersPackage::eInstance()->getDataValue_Class();
 }
@@ -306,7 +306,7 @@ bool DataValueImpl::internalEIsSet(int featureID) const
 	return CompoundValueImpl::internalEIsSet(featureID);
 }
 
-bool DataValueImpl::eSet(int featureID, Any newValue)
+bool DataValueImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -326,7 +326,7 @@ bool DataValueImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any DataValueImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any DataValueImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

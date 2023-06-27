@@ -63,19 +63,19 @@ namespace uml
 			Association.allInstances()->forAll(a | a.memberEnd.type->includes(self) implies a.memberEnd->size() = 2)
 			*/
 			 
-			virtual bool binary_associations(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
+			virtual bool binary_associations(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context) ;
 			/*!
 			A UseCase cannot include UseCases that directly or indirectly include it.
 			not allIncludedUseCases()->includes(self)
 			*/
 			 
-			virtual bool cannot_include_self(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
+			virtual bool cannot_include_self(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context) ;
 			/*!
 			A UseCase must have a name.
 			name -> notEmpty ()
 			*/
 			 
-			virtual bool must_have_name(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
+			virtual bool must_have_name(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context) ;
 			/*!
 			UseCases cannot have Associations to UseCases specifying the same subject.
 			Association.allInstances()->forAll(a | a.memberEnd.type->includes(self) implies 
@@ -86,7 +86,7 @@ namespace uml
 			)
 			*/
 			 
-			virtual bool no_association_to_use_case(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
+			virtual bool no_association_to_use_case(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context) ;
 			
 			//*********************************
 			// Attribute Getters & Setters
@@ -100,25 +100,25 @@ namespace uml
 			<p>From package UML::UseCases.</p>
 			*/
 			
-			virtual std::shared_ptr<Subset<uml::Extend, uml::NamedElement>> getExtend() const ;
+			virtual const std::shared_ptr<Subset<uml::Extend, uml::NamedElement>>& getExtend() const ;
 			/*!
 			The ExtensionPoints owned by this UseCase.
 			<p>From package UML::UseCases.</p>
 			*/
 			
-			virtual std::shared_ptr<Subset<uml::ExtensionPoint, uml::NamedElement>> getExtensionPoint() const ;
+			virtual const std::shared_ptr<Subset<uml::ExtensionPoint, uml::NamedElement>>& getExtensionPoint() const ;
 			/*!
 			The Include relationships owned by this UseCase.
 			<p>From package UML::UseCases.</p>
 			*/
 			
-			virtual std::shared_ptr<Subset<uml::Include, uml::NamedElement>> getInclude() const ;
+			virtual const std::shared_ptr<Subset<uml::Include, uml::NamedElement>>& getInclude() const ;
 			/*!
 			The subjects to which this UseCase applies. Each subject or its parts realize all the UseCases that apply to it.
 			<p>From package UML::UseCases.</p>
 			*/
 			
-			virtual std::shared_ptr<Bag<uml::Classifier>> getSubject() const ;
+			virtual const std::shared_ptr<Bag<uml::Classifier>>& getSubject() const ;
 			
 			//*********************************
 			// Union Reference Getters
@@ -183,19 +183,19 @@ namespace uml
 			virtual void saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const;
 
 		protected:
-			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
+			virtual const std::shared_ptr<ecore::EClass>& eStaticClass() const;
 
 			//*********************************
 			// EStructuralFeature Get/Set/IsSet
 			//*********************************
 			virtual Any eGet(int featureID, bool resolve, bool coreType) const ;
-			virtual bool eSet(int featureID, Any newValue) ;
+			virtual bool eSet(int featureID, const Any& newValue) ;
 			virtual bool internalEIsSet(int featureID) const ;
 
 			//*********************************
 			// EOperation Invoke
 			//*********************************
-			virtual Any eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments) ;
+			virtual Any eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments) ;
 
 		private:
 			std::weak_ptr<uml::UseCase> m_thisUseCasePtr;

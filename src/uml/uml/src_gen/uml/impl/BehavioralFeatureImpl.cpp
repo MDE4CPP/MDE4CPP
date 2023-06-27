@@ -193,12 +193,12 @@ BehavioralFeatureImpl& BehavioralFeatureImpl::operator=(const BehavioralFeatureI
 //*********************************
 // Operations
 //*********************************
-bool BehavioralFeatureImpl::abstract_no_method(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool BehavioralFeatureImpl::abstract_no_method(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-std::shared_ptr<uml::Parameter> BehavioralFeatureImpl::createReturnResult(std::string name,std::shared_ptr<uml::Type> type)
+std::shared_ptr<uml::Parameter> BehavioralFeatureImpl::createReturnResult(std::string name, const std::shared_ptr<uml::Type>& type)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -217,7 +217,7 @@ std::shared_ptr<Bag<uml::Parameter> > BehavioralFeatureImpl::outputParameters()
 // Attribute Getters & Setters
 //*********************************
 /* Getter & Setter for attribute concurrency */
-uml::CallConcurrencyKind BehavioralFeatureImpl::getConcurrency() const 
+uml::CallConcurrencyKind BehavioralFeatureImpl::getConcurrency() const
 {
 	return m_concurrency;
 }
@@ -228,7 +228,7 @@ void BehavioralFeatureImpl::setConcurrency(uml::CallConcurrencyKind _concurrency
 }
 
 /* Getter & Setter for attribute isAbstract */
-bool BehavioralFeatureImpl::getIsAbstract() const 
+bool BehavioralFeatureImpl::getIsAbstract() const
 {
 	return m_isAbstract;
 }
@@ -242,7 +242,7 @@ void BehavioralFeatureImpl::setIsAbstract(bool _isAbstract)
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference method */
-std::shared_ptr<Bag<uml::Behavior>> BehavioralFeatureImpl::getMethod() const
+const std::shared_ptr<Bag<uml::Behavior>>& BehavioralFeatureImpl::getMethod() const
 {
 	if(m_method == nullptr)
 	{
@@ -254,7 +254,7 @@ std::shared_ptr<Bag<uml::Behavior>> BehavioralFeatureImpl::getMethod() const
 }
 
 /* Getter & Setter for reference ownedParameter */
-std::shared_ptr<Subset<uml::Parameter, uml::NamedElement>> BehavioralFeatureImpl::getOwnedParameter() const
+const std::shared_ptr<Subset<uml::Parameter, uml::NamedElement>>& BehavioralFeatureImpl::getOwnedParameter() const
 {
 	if(m_ownedParameter == nullptr)
 	{
@@ -275,7 +275,7 @@ std::shared_ptr<Subset<uml::Parameter, uml::NamedElement>> BehavioralFeatureImpl
 }
 
 /* Getter & Setter for reference ownedParameterSet */
-std::shared_ptr<Subset<uml::ParameterSet, uml::NamedElement>> BehavioralFeatureImpl::getOwnedParameterSet() const
+const std::shared_ptr<Subset<uml::ParameterSet, uml::NamedElement>>& BehavioralFeatureImpl::getOwnedParameterSet() const
 {
 	if(m_ownedParameterSet == nullptr)
 	{
@@ -296,7 +296,7 @@ std::shared_ptr<Subset<uml::ParameterSet, uml::NamedElement>> BehavioralFeatureI
 }
 
 /* Getter & Setter for reference raisedException */
-std::shared_ptr<Bag<uml::Type>> BehavioralFeatureImpl::getRaisedException() const
+const std::shared_ptr<Bag<uml::Type>>& BehavioralFeatureImpl::getRaisedException() const
 {
 	if(m_raisedException == nullptr)
 	{
@@ -609,7 +609,7 @@ void BehavioralFeatureImpl::saveContent(std::shared_ptr<persistence::interfaces:
 	}
 }
 
-std::shared_ptr<ecore::EClass> BehavioralFeatureImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& BehavioralFeatureImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getBehavioralFeature_Class();
 }
@@ -671,7 +671,7 @@ bool BehavioralFeatureImpl::internalEIsSet(int featureID) const
 	return result;
 }
 
-bool BehavioralFeatureImpl::eSet(int featureID, Any newValue)
+bool BehavioralFeatureImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -852,7 +852,7 @@ bool BehavioralFeatureImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any BehavioralFeatureImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any BehavioralFeatureImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

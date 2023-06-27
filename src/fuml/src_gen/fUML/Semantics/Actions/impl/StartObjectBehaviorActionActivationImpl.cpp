@@ -57,8 +57,8 @@
 #include "fUML/Semantics/Actions/PinActivation.hpp"
 #include "fUML/Semantics/Activities/Token.hpp"
 //Factories and Package includes
-#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/SemanticsPackage.hpp"
+#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/Actions/ActionsPackage.hpp"
 #include "fUML/Semantics/Activities/ActivitiesPackage.hpp"
 #include "uml/umlPackage.hpp"
@@ -298,7 +298,7 @@ void StartObjectBehaviorActionActivationImpl::saveContent(std::shared_ptr<persis
 	}
 }
 
-std::shared_ptr<ecore::EClass> StartObjectBehaviorActionActivationImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& StartObjectBehaviorActionActivationImpl::eStaticClass() const
 {
 	return fUML::Semantics::Actions::ActionsPackage::eInstance()->getStartObjectBehaviorActionActivation_Class();
 }
@@ -322,7 +322,7 @@ bool StartObjectBehaviorActionActivationImpl::internalEIsSet(int featureID) cons
 	return InvocationActionActivationImpl::internalEIsSet(featureID);
 }
 
-bool StartObjectBehaviorActionActivationImpl::eSet(int featureID, Any newValue)
+bool StartObjectBehaviorActionActivationImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -334,7 +334,7 @@ bool StartObjectBehaviorActionActivationImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any StartObjectBehaviorActionActivationImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any StartObjectBehaviorActionActivationImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

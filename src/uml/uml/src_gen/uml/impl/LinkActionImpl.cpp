@@ -213,17 +213,17 @@ std::shared_ptr<uml::Association> LinkActionImpl::association()
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool LinkActionImpl::not_static(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool LinkActionImpl::not_static(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool LinkActionImpl::same_association(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool LinkActionImpl::same_association(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool LinkActionImpl::same_pins(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool LinkActionImpl::same_pins(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -236,7 +236,7 @@ bool LinkActionImpl::same_pins(Any diagnostics,std::shared_ptr<std::map < Any, A
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference endData */
-std::shared_ptr<Subset<uml::LinkEndData, uml::Element>> LinkActionImpl::getEndData() const
+const std::shared_ptr<Subset<uml::LinkEndData, uml::Element>>& LinkActionImpl::getEndData() const
 {
 	if(m_endData == nullptr)
 	{
@@ -257,7 +257,7 @@ std::shared_ptr<Subset<uml::LinkEndData, uml::Element>> LinkActionImpl::getEndDa
 }
 
 /* Getter & Setter for reference inputValue */
-std::shared_ptr<Subset<uml::InputPin, uml::InputPin>> LinkActionImpl::getInputValue() const
+const std::shared_ptr<Subset<uml::InputPin, uml::InputPin>>& LinkActionImpl::getInputValue() const
 {
 	if(m_inputValue == nullptr)
 	{
@@ -492,7 +492,7 @@ void LinkActionImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveH
 	}
 }
 
-std::shared_ptr<ecore::EClass> LinkActionImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& LinkActionImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getLinkAction_Class();
 }
@@ -524,7 +524,7 @@ bool LinkActionImpl::internalEIsSet(int featureID) const
 	return ActionImpl::internalEIsSet(featureID);
 }
 
-bool LinkActionImpl::eSet(int featureID, Any newValue)
+bool LinkActionImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -610,7 +610,7 @@ bool LinkActionImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any LinkActionImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any LinkActionImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

@@ -51,7 +51,7 @@ namespace uml
 			port->notEmpty() implies event.oclIsKindOf(MessageEvent)
 			*/
 			 
-			virtual bool trigger_with_ports(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
+			virtual bool trigger_with_ports(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context) ;
 			
 			//*********************************
 			// Attribute Getters & Setters
@@ -65,19 +65,19 @@ namespace uml
 			<p>From package UML::CommonBehavior.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::Event> getEvent() const ;
+			virtual const std::shared_ptr<uml::Event>& getEvent() const ;
 			/*!
 			The Event that detected by the Trigger.
 			<p>From package UML::CommonBehavior.</p>
 			*/
 			
-			virtual void setEvent(std::shared_ptr<uml::Event>) ;
+			virtual void setEvent(const std::shared_ptr<uml::Event>&) ;
 			/*!
 			A optional Port of through which the given effect is detected.
 			<p>From package UML::CommonBehavior.</p>
 			*/
 			
-			virtual std::shared_ptr<Bag<uml::Port>> getPort() const ;
+			virtual const std::shared_ptr<Bag<uml::Port>>& getPort() const ;
 			
 			//*********************************
 			// Union Reference Getters
@@ -111,19 +111,19 @@ namespace uml
 			virtual void saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const;
 
 		protected:
-			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
+			virtual const std::shared_ptr<ecore::EClass>& eStaticClass() const;
 
 			//*********************************
 			// EStructuralFeature Get/Set/IsSet
 			//*********************************
 			virtual Any eGet(int featureID, bool resolve, bool coreType) const ;
-			virtual bool eSet(int featureID, Any newValue) ;
+			virtual bool eSet(int featureID, const Any& newValue) ;
 			virtual bool internalEIsSet(int featureID) const ;
 
 			//*********************************
 			// EOperation Invoke
 			//*********************************
-			virtual Any eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments) ;
+			virtual Any eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments) ;
 
 		private:
 			std::weak_ptr<uml::Trigger> m_thisTriggerPtr;

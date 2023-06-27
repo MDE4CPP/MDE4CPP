@@ -86,9 +86,9 @@ namespace PSCS::Semantics::Loci
 			//*********************************
 			// Operations
 			//*********************************
-			virtual std::shared_ptr<fUML::Semantics::StructuredClassifiers::Object> getStereotypeApplication(std::shared_ptr<uml::Class> stereotype,std::shared_ptr<uml::Element> element) = 0;
-			virtual std::shared_ptr<uml::Classifier> getStereotypeClass(std::string profileName,std::string stereotypeName) = 0;
-			virtual std::shared_ptr<fUML::Semantics::Loci::SemanticVisitor> instantiateVisitor(std::shared_ptr<uml::Element> element) = 0;
+			virtual std::shared_ptr<fUML::Semantics::StructuredClassifiers::Object> getStereotypeApplication(const std::shared_ptr<uml::Class>& stereotype, const std::shared_ptr<uml::Element>& element) = 0;
+			virtual std::shared_ptr<uml::Classifier> getStereotypeClass(std::string profileName, std::string stereotypeName) = 0;
+			virtual std::shared_ptr<fUML::Semantics::Loci::SemanticVisitor> instantiateVisitor(const std::shared_ptr<uml::Element>& element) = 0;
 
 			//*********************************
 			// Attribute Getters & Setters
@@ -97,7 +97,7 @@ namespace PSCS::Semantics::Loci
 			//*********************************
 			// Reference Getters & Setters
 			//*********************************
-			virtual std::shared_ptr<Bag<uml::Package>> getAppliedProfiles() const = 0;
+			virtual const std::shared_ptr<Bag<uml::Package>>& getAppliedProfiles() const = 0;
 
 			//*********************************
 			// Union Reference Getters

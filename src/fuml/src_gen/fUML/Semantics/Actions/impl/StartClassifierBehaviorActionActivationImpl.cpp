@@ -53,8 +53,8 @@
 #include "fUML/Semantics/Actions/PinActivation.hpp"
 #include "fUML/Semantics/Activities/Token.hpp"
 //Factories and Package includes
-#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/SemanticsPackage.hpp"
+#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/Actions/ActionsPackage.hpp"
 #include "fUML/Semantics/Activities/ActivitiesPackage.hpp"
 #include "uml/umlPackage.hpp"
@@ -259,7 +259,7 @@ void StartClassifierBehaviorActionActivationImpl::saveContent(std::shared_ptr<pe
 	}
 }
 
-std::shared_ptr<ecore::EClass> StartClassifierBehaviorActionActivationImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& StartClassifierBehaviorActionActivationImpl::eStaticClass() const
 {
 	return fUML::Semantics::Actions::ActionsPackage::eInstance()->getStartClassifierBehaviorActionActivation_Class();
 }
@@ -283,7 +283,7 @@ bool StartClassifierBehaviorActionActivationImpl::internalEIsSet(int featureID) 
 	return ActionActivationImpl::internalEIsSet(featureID);
 }
 
-bool StartClassifierBehaviorActionActivationImpl::eSet(int featureID, Any newValue)
+bool StartClassifierBehaviorActionActivationImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -295,7 +295,7 @@ bool StartClassifierBehaviorActionActivationImpl::eSet(int featureID, Any newVal
 //*********************************
 // EOperation Invoke
 //*********************************
-Any StartClassifierBehaviorActionActivationImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any StartClassifierBehaviorActionActivationImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

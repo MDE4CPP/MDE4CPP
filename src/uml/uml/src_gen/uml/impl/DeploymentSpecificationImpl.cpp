@@ -181,12 +181,12 @@ std::shared_ptr<ecore::EObject> DeploymentSpecificationImpl::copy() const
 //*********************************
 // Operations
 //*********************************
-bool DeploymentSpecificationImpl::deployed_elements(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool DeploymentSpecificationImpl::deployed_elements(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool DeploymentSpecificationImpl::deployment_target(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool DeploymentSpecificationImpl::deployment_target(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -195,7 +195,7 @@ bool DeploymentSpecificationImpl::deployment_target(Any diagnostics,std::shared_
 // Attribute Getters & Setters
 //*********************************
 /* Getter & Setter for attribute deploymentLocation */
-std::string DeploymentSpecificationImpl::getDeploymentLocation() const 
+std::string DeploymentSpecificationImpl::getDeploymentLocation() const
 {
 	return m_deploymentLocation;
 }
@@ -206,7 +206,7 @@ void DeploymentSpecificationImpl::setDeploymentLocation(std::string _deploymentL
 }
 
 /* Getter & Setter for attribute executionLocation */
-std::string DeploymentSpecificationImpl::getExecutionLocation() const 
+std::string DeploymentSpecificationImpl::getExecutionLocation() const
 {
 	return m_executionLocation;
 }
@@ -516,7 +516,7 @@ void DeploymentSpecificationImpl::saveContent(std::shared_ptr<persistence::inter
 	}
 }
 
-std::shared_ptr<ecore::EClass> DeploymentSpecificationImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& DeploymentSpecificationImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getDeploymentSpecification_Class();
 }
@@ -555,7 +555,7 @@ bool DeploymentSpecificationImpl::internalEIsSet(int featureID) const
 	return ArtifactImpl::internalEIsSet(featureID);
 }
 
-bool DeploymentSpecificationImpl::eSet(int featureID, Any newValue)
+bool DeploymentSpecificationImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -589,7 +589,7 @@ bool DeploymentSpecificationImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any DeploymentSpecificationImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any DeploymentSpecificationImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

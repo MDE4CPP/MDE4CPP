@@ -267,22 +267,22 @@ std::shared_ptr<ecore::EObject> PropertyImpl::copy() const
 //*********************************
 // Operations
 //*********************************
-bool PropertyImpl::binding_to_attribute(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool PropertyImpl::binding_to_attribute(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool PropertyImpl::deployment_target(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool PropertyImpl::deployment_target(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool PropertyImpl::derived_union_is_derived(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool PropertyImpl::derived_union_is_derived(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool PropertyImpl::derived_union_is_read_only(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool PropertyImpl::derived_union_is_read_only(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -317,17 +317,17 @@ bool PropertyImpl::isSetDefault()
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool PropertyImpl::multiplicity_of_composite(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool PropertyImpl::multiplicity_of_composite(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool PropertyImpl::qualified_is_association_end(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool PropertyImpl::qualified_is_association_end(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool PropertyImpl::redefined_property_inherited(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool PropertyImpl::redefined_property_inherited(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -367,7 +367,7 @@ void PropertyImpl::setUnlimitedNaturalDefaultValue(int value)
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool PropertyImpl::subsetted_property_names(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool PropertyImpl::subsetted_property_names(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -377,17 +377,17 @@ std::shared_ptr<Bag<uml::Type> > PropertyImpl::subsettingContext()
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool PropertyImpl::subsetting_context_conforms(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool PropertyImpl::subsetting_context_conforms(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool PropertyImpl::subsetting_rules(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool PropertyImpl::subsetting_rules(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool PropertyImpl::type_of_opposite_end(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool PropertyImpl::type_of_opposite_end(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -401,7 +401,7 @@ void PropertyImpl::unsetDefault()
 // Attribute Getters & Setters
 //*********************************
 /* Getter & Setter for attribute aggregation */
-uml::AggregationKind PropertyImpl::getAggregation() const 
+uml::AggregationKind PropertyImpl::getAggregation() const
 {
 	return m_aggregation;
 }
@@ -412,7 +412,7 @@ void PropertyImpl::setAggregation(uml::AggregationKind _aggregation)
 }
 
 /* Getter & Setter for attribute default */
-std::string PropertyImpl::getDefault() const 
+std::string PropertyImpl::getDefault() const
 {
 	return m_default;
 }
@@ -423,7 +423,7 @@ void PropertyImpl::setDefault(std::string _default)
 }
 
 /* Getter & Setter for attribute isComposite */
-bool PropertyImpl::getIsComposite() const 
+bool PropertyImpl::getIsComposite() const
 {
 	return m_isComposite;
 }
@@ -434,7 +434,7 @@ void PropertyImpl::setIsComposite(bool _isComposite)
 }
 
 /* Getter & Setter for attribute isDerived */
-bool PropertyImpl::getIsDerived() const 
+bool PropertyImpl::getIsDerived() const
 {
 	return m_isDerived;
 }
@@ -445,7 +445,7 @@ void PropertyImpl::setIsDerived(bool _isDerived)
 }
 
 /* Getter & Setter for attribute isDerivedUnion */
-bool PropertyImpl::getIsDerivedUnion() const 
+bool PropertyImpl::getIsDerivedUnion() const
 {
 	return m_isDerivedUnion;
 }
@@ -456,7 +456,7 @@ void PropertyImpl::setIsDerivedUnion(bool _isDerivedUnion)
 }
 
 /* Getter & Setter for attribute isID */
-bool PropertyImpl::getIsID() const 
+bool PropertyImpl::getIsID() const
 {
 	return m_isID;
 }
@@ -470,11 +470,11 @@ void PropertyImpl::setIsID(bool _isID)
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference association */
-std::shared_ptr<uml::Association> PropertyImpl::getAssociation() const
+const std::shared_ptr<uml::Association>& PropertyImpl::getAssociation() const
 {
     return m_association;
 }
-void PropertyImpl::setAssociation(std::shared_ptr<uml::Association> _association)
+void PropertyImpl::setAssociation(const std::shared_ptr<uml::Association>& _association)
 {
     m_association = _association;
 	
@@ -514,11 +514,11 @@ void PropertyImpl::setDatatype(std::weak_ptr<uml::DataType> _datatype)
 }
 
 /* Getter & Setter for reference defaultValue */
-std::shared_ptr<uml::ValueSpecification> PropertyImpl::getDefaultValue() const
+const std::shared_ptr<uml::ValueSpecification>& PropertyImpl::getDefaultValue() const
 {
     return m_defaultValue;
 }
-void PropertyImpl::setDefaultValue(std::shared_ptr<uml::ValueSpecification> _defaultValue)
+void PropertyImpl::setDefaultValue(const std::shared_ptr<uml::ValueSpecification>& _defaultValue)
 {
     m_defaultValue = _defaultValue;
 	
@@ -536,11 +536,11 @@ void PropertyImpl::setInterface(std::weak_ptr<uml::Interface> _interface)
 }
 
 /* Getter & Setter for reference opposite */
-std::shared_ptr<uml::Property> PropertyImpl::getOpposite() const
+const std::shared_ptr<uml::Property>& PropertyImpl::getOpposite() const
 {
     return m_opposite;
 }
-void PropertyImpl::setOpposite(std::shared_ptr<uml::Property> _opposite)
+void PropertyImpl::setOpposite(const std::shared_ptr<uml::Property>& _opposite)
 {
     m_opposite = _opposite;
 	
@@ -558,7 +558,7 @@ void PropertyImpl::setOwningAssociation(std::weak_ptr<uml::Association> _owningA
 }
 
 /* Getter & Setter for reference qualifier */
-std::shared_ptr<Subset<uml::Property, uml::Element>> PropertyImpl::getQualifier() const
+const std::shared_ptr<Subset<uml::Property, uml::Element>>& PropertyImpl::getQualifier() const
 {
 	if(m_qualifier == nullptr)
 	{
@@ -579,7 +579,7 @@ std::shared_ptr<Subset<uml::Property, uml::Element>> PropertyImpl::getQualifier(
 }
 
 /* Getter & Setter for reference redefinedProperty */
-std::shared_ptr<SubsetUnion<uml::Property, uml::RedefinableElement>> PropertyImpl::getRedefinedProperty() const
+const std::shared_ptr<SubsetUnion<uml::Property, uml::RedefinableElement>>& PropertyImpl::getRedefinedProperty() const
 {
 	if(m_redefinedProperty == nullptr)
 	{
@@ -600,7 +600,7 @@ std::shared_ptr<SubsetUnion<uml::Property, uml::RedefinableElement>> PropertyImp
 }
 
 /* Getter & Setter for reference subsettedProperty */
-std::shared_ptr<Bag<uml::Property>> PropertyImpl::getSubsettedProperty() const
+const std::shared_ptr<Bag<uml::Property>>& PropertyImpl::getSubsettedProperty() const
 {
 	if(m_subsettedProperty == nullptr)
 	{
@@ -1101,7 +1101,7 @@ void PropertyImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHan
 	}
 }
 
-std::shared_ptr<ecore::EClass> PropertyImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& PropertyImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getProperty_Class();
 }
@@ -1232,7 +1232,7 @@ bool PropertyImpl::internalEIsSet(int featureID) const
 	return result;
 }
 
-bool PropertyImpl::eSet(int featureID, Any newValue)
+bool PropertyImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -1473,7 +1473,7 @@ bool PropertyImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any PropertyImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any PropertyImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

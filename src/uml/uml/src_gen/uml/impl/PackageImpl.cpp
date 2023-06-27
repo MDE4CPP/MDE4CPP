@@ -375,7 +375,7 @@ std::shared_ptr<Bag<uml::Stereotype> > PackageImpl::allApplicableStereotypes()
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-std::shared_ptr<Bag<ecore::EObject> > PackageImpl::applyProfile(std::shared_ptr<uml::Profile> profile)
+std::shared_ptr<Bag<ecore::EObject> > PackageImpl::applyProfile(const std::shared_ptr<uml::Profile>& profile)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -385,7 +385,7 @@ std::shared_ptr<uml::Profile> PackageImpl::containingProfile()
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-std::shared_ptr<uml::Class> PackageImpl::createOwnedClass(std::string name,bool isAbstract)
+std::shared_ptr<uml::Class> PackageImpl::createOwnedClass(std::string name, bool isAbstract)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -405,12 +405,12 @@ std::shared_ptr<uml::PrimitiveType> PackageImpl::createOwnedPrimitiveType(std::s
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-std::shared_ptr<uml::Stereotype> PackageImpl::createOwnedStereotype(std::string name,bool isAbstract)
+std::shared_ptr<uml::Stereotype> PackageImpl::createOwnedStereotype(std::string name, bool isAbstract)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool PackageImpl::elements_public_or_private(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool PackageImpl::elements_public_or_private(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -430,7 +430,7 @@ std::shared_ptr<uml::Profile> PackageImpl::getAppliedProfile(std::string qualifi
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-std::shared_ptr<uml::Profile> PackageImpl::getAppliedProfile(std::string qualifiedName,bool recurse)
+std::shared_ptr<uml::Profile> PackageImpl::getAppliedProfile(std::string qualifiedName, bool recurse)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -455,12 +455,12 @@ std::shared_ptr<Bag<uml::Type> > PackageImpl::getOwnedTypes()
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-std::shared_ptr<uml::ProfileApplication> PackageImpl::getProfileApplication(std::shared_ptr<uml::Profile> profile)
+std::shared_ptr<uml::ProfileApplication> PackageImpl::getProfileApplication(const std::shared_ptr<uml::Profile>& profile)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-std::shared_ptr<uml::ProfileApplication> PackageImpl::getProfileApplication(std::shared_ptr<uml::Profile> profile,bool recurse)
+std::shared_ptr<uml::ProfileApplication> PackageImpl::getProfileApplication(const std::shared_ptr<uml::Profile>& profile, bool recurse)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -470,17 +470,17 @@ bool PackageImpl::isModelLibrary()
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool PackageImpl::isProfileApplied(std::shared_ptr<uml::Profile> profile)
+bool PackageImpl::isProfileApplied(const std::shared_ptr<uml::Profile>& profile)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool PackageImpl::makesVisible(std::shared_ptr<uml::NamedElement> el)
+bool PackageImpl::makesVisible(const std::shared_ptr<uml::NamedElement>& el)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-std::shared_ptr<Bag<ecore::EObject> > PackageImpl::unapplyProfile(std::shared_ptr<uml::Profile> profile)
+std::shared_ptr<Bag<ecore::EObject> > PackageImpl::unapplyProfile(const std::shared_ptr<uml::Profile>& profile)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -494,7 +494,7 @@ std::shared_ptr<Bag<uml::PackageableElement> > PackageImpl::visibleMembers()
 // Attribute Getters & Setters
 //*********************************
 /* Getter & Setter for attribute URI */
-std::string PackageImpl::getURI() const 
+std::string PackageImpl::getURI() const
 {
 	return m_URI;
 }
@@ -508,7 +508,7 @@ void PackageImpl::setURI(std::string _URI)
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference nestedPackage */
-std::shared_ptr<Subset<uml::Package, uml::PackageableElement /*Subset does not reference a union*/>> PackageImpl::getNestedPackage() const
+const std::shared_ptr<Subset<uml::Package, uml::PackageableElement /*Subset does not reference a union*/>>& PackageImpl::getNestedPackage() const
 {
 	if(m_nestedPackage == nullptr)
 	{
@@ -540,7 +540,7 @@ void PackageImpl::setNestingPackage(std::weak_ptr<uml::Package> _nestingPackage)
 }
 
 /* Getter & Setter for reference ownedStereotype */
-std::shared_ptr<Subset<uml::Stereotype, uml::PackageableElement /*Subset does not reference a union*/>> PackageImpl::getOwnedStereotype() const
+const std::shared_ptr<Subset<uml::Stereotype, uml::PackageableElement /*Subset does not reference a union*/>>& PackageImpl::getOwnedStereotype() const
 {
 	if(m_ownedStereotype == nullptr)
 	{
@@ -561,7 +561,7 @@ std::shared_ptr<Subset<uml::Stereotype, uml::PackageableElement /*Subset does no
 }
 
 /* Getter & Setter for reference ownedType */
-std::shared_ptr<Subset<uml::Type, uml::PackageableElement /*Subset does not reference a union*/>> PackageImpl::getOwnedType() const
+const std::shared_ptr<Subset<uml::Type, uml::PackageableElement /*Subset does not reference a union*/>>& PackageImpl::getOwnedType() const
 {
 	if(m_ownedType == nullptr)
 	{
@@ -582,7 +582,7 @@ std::shared_ptr<Subset<uml::Type, uml::PackageableElement /*Subset does not refe
 }
 
 /* Getter & Setter for reference packageMerge */
-std::shared_ptr<Subset<uml::PackageMerge, uml::Element>> PackageImpl::getPackageMerge() const
+const std::shared_ptr<Subset<uml::PackageMerge, uml::Element>>& PackageImpl::getPackageMerge() const
 {
 	if(m_packageMerge == nullptr)
 	{
@@ -603,7 +603,7 @@ std::shared_ptr<Subset<uml::PackageMerge, uml::Element>> PackageImpl::getPackage
 }
 
 /* Getter & Setter for reference packagedElement */
-std::shared_ptr<SubsetUnion<uml::PackageableElement, uml::NamedElement>> PackageImpl::getPackagedElement() const
+const std::shared_ptr<SubsetUnion<uml::PackageableElement, uml::NamedElement>>& PackageImpl::getPackagedElement() const
 {
 	if(m_packagedElement == nullptr)
 	{
@@ -624,7 +624,7 @@ std::shared_ptr<SubsetUnion<uml::PackageableElement, uml::NamedElement>> Package
 }
 
 /* Getter & Setter for reference profileApplication */
-std::shared_ptr<Subset<uml::ProfileApplication, uml::Element>> PackageImpl::getProfileApplication() const
+const std::shared_ptr<Subset<uml::ProfileApplication, uml::Element>>& PackageImpl::getProfileApplication() const
 {
 	if(m_profileApplication == nullptr)
 	{
@@ -974,7 +974,7 @@ void PackageImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHand
 	}
 }
 
-std::shared_ptr<ecore::EClass> PackageImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& PackageImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getPackage_Class();
 }
@@ -1057,7 +1057,7 @@ bool PackageImpl::internalEIsSet(int featureID) const
 	return result;
 }
 
-bool PackageImpl::eSet(int featureID, Any newValue)
+bool PackageImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -1281,7 +1281,7 @@ bool PackageImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any PackageImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any PackageImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

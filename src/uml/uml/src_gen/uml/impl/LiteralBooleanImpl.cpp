@@ -178,7 +178,7 @@ bool LiteralBooleanImpl::isComputable()
 // Attribute Getters & Setters
 //*********************************
 /* Getter & Setter for attribute value */
-bool LiteralBooleanImpl::getValue() const 
+bool LiteralBooleanImpl::getValue() const
 {
 	return m_value;
 }
@@ -355,7 +355,7 @@ void LiteralBooleanImpl::saveContent(std::shared_ptr<persistence::interfaces::XS
 	}
 }
 
-std::shared_ptr<ecore::EClass> LiteralBooleanImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& LiteralBooleanImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getLiteralBoolean_Class();
 }
@@ -383,7 +383,7 @@ bool LiteralBooleanImpl::internalEIsSet(int featureID) const
 	return LiteralSpecificationImpl::internalEIsSet(featureID);
 }
 
-bool LiteralBooleanImpl::eSet(int featureID, Any newValue)
+bool LiteralBooleanImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -402,7 +402,7 @@ bool LiteralBooleanImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any LiteralBooleanImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any LiteralBooleanImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

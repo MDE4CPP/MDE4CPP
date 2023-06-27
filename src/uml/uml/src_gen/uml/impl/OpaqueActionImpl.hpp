@@ -55,7 +55,7 @@ namespace uml
 			language->notEmpty() implies (_'body'->size() = language->size())
 			*/
 			 
-			virtual bool language_body_size(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
+			virtual bool language_body_size(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context) ;
 			
 			//*********************************
 			// Attribute Getters & Setters
@@ -65,13 +65,13 @@ namespace uml
 			<p>From package UML::Actions.</p>
 			*/
 			 
-			virtual std::shared_ptr<Bag<std::string>> getBody() const ;
+			virtual const std::shared_ptr<Bag<std::string>>& getBody() const ;
 			/*!
 			If provided, a specification of the language used for each of the body Strings.
 			<p>From package UML::Actions.</p>
 			*/
 			 
-			virtual std::shared_ptr<Bag<std::string>> getLanguage() const ;
+			virtual const std::shared_ptr<Bag<std::string>>& getLanguage() const ;
 			
 			//*********************************
 			// Reference Getters & Setters
@@ -81,13 +81,13 @@ namespace uml
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual std::shared_ptr<Subset<uml::InputPin, uml::InputPin>> getInputValue() const ;
+			virtual const std::shared_ptr<Subset<uml::InputPin, uml::InputPin>>& getInputValue() const ;
 			/*!
 			The OutputPins on which the OpaqueAction provides outputs.
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual std::shared_ptr<Subset<uml::OutputPin, uml::OutputPin>> getOutputValue() const ;
+			virtual const std::shared_ptr<Subset<uml::OutputPin, uml::OutputPin>>& getOutputValue() const ;
 			
 			//*********************************
 			// Union Reference Getters
@@ -145,19 +145,19 @@ namespace uml
 			virtual void saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const;
 
 		protected:
-			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
+			virtual const std::shared_ptr<ecore::EClass>& eStaticClass() const;
 
 			//*********************************
 			// EStructuralFeature Get/Set/IsSet
 			//*********************************
 			virtual Any eGet(int featureID, bool resolve, bool coreType) const ;
-			virtual bool eSet(int featureID, Any newValue) ;
+			virtual bool eSet(int featureID, const Any& newValue) ;
 			virtual bool internalEIsSet(int featureID) const ;
 
 			//*********************************
 			// EOperation Invoke
 			//*********************************
-			virtual Any eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments) ;
+			virtual Any eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments) ;
 
 		private:
 			std::weak_ptr<uml::OpaqueAction> m_thisOpaqueActionPtr;

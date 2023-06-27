@@ -57,12 +57,12 @@ namespace uml
 			  or oclIsKindOf(InformationItem) or oclIsKindOf(Signal) or oclIsKindOf(Component))
 			*/
 			 
-			virtual bool convey_classifiers(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
+			virtual bool convey_classifiers(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context) ;
 			/*!
 			The sources and targets of the information flow must conform to the sources and targets or conversely the targets and sources of the realization relationships.
 			*/
 			 
-			virtual bool must_conform(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
+			virtual bool must_conform(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context) ;
 			/*!
 			The sources and targets of the information flow can only be one of the following kind: Actor, Node, UseCase, Artifact, Class, Component, Port, Property, Interface, Package, ActivityNode, ActivityPartition,
 			Behavior and InstanceSpecification except when its classifier is a relationship (i.e. it represents a link).
@@ -81,7 +81,7 @@ namespace uml
 			(oclIsKindOf(InstanceSpecification) and not sit.oclAsType(InstanceSpecification).classifier->exists(oclIsKindOf(Relationship)))))
 			*/
 			 
-			virtual bool sources_and_targets_kind(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
+			virtual bool sources_and_targets_kind(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context) ;
 			
 			//*********************************
 			// Attribute Getters & Setters
@@ -95,43 +95,43 @@ namespace uml
 			<p>From package UML::InformationFlows.</p>
 			*/
 			
-			virtual std::shared_ptr<Bag<uml::Classifier>> getConveyed() const ;
+			virtual const std::shared_ptr<Bag<uml::Classifier>>& getConveyed() const ;
 			/*!
 			Defines from which source the conveyed InformationItems are initiated.
 			<p>From package UML::InformationFlows.</p>
 			*/
 			
-			virtual std::shared_ptr<Subset<uml::NamedElement, uml::Element>> getInformationSource() const ;
+			virtual const std::shared_ptr<Subset<uml::NamedElement, uml::Element>>& getInformationSource() const ;
 			/*!
 			Defines to which target the conveyed InformationItems are directed.
 			<p>From package UML::InformationFlows.</p>
 			*/
 			
-			virtual std::shared_ptr<Subset<uml::NamedElement, uml::Element>> getInformationTarget() const ;
+			virtual const std::shared_ptr<Subset<uml::NamedElement, uml::Element>>& getInformationTarget() const ;
 			/*!
 			Determines which Relationship will realize the specified flow.
 			<p>From package UML::InformationFlows.</p>
 			*/
 			
-			virtual std::shared_ptr<Bag<uml::Relationship>> getRealization() const ;
+			virtual const std::shared_ptr<Bag<uml::Relationship>>& getRealization() const ;
 			/*!
 			Determines which ActivityEdges will realize the specified flow.
 			<p>From package UML::InformationFlows.</p>
 			*/
 			
-			virtual std::shared_ptr<Bag<uml::ActivityEdge>> getRealizingActivityEdge() const ;
+			virtual const std::shared_ptr<Bag<uml::ActivityEdge>>& getRealizingActivityEdge() const ;
 			/*!
 			Determines which Connectors will realize the specified flow.
 			<p>From package UML::InformationFlows.</p>
 			*/
 			
-			virtual std::shared_ptr<Bag<uml::Connector>> getRealizingConnector() const ;
+			virtual const std::shared_ptr<Bag<uml::Connector>>& getRealizingConnector() const ;
 			/*!
 			Determines which Messages will realize the specified flow.
 			<p>From package UML::InformationFlows.</p>
 			*/
 			
-			virtual std::shared_ptr<Bag<uml::Message>> getRealizingMessage() const ;
+			virtual const std::shared_ptr<Bag<uml::Message>>& getRealizingMessage() const ;
 			
 			//*********************************
 			// Union Reference Getters
@@ -190,19 +190,19 @@ namespace uml
 			virtual void saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const;
 
 		protected:
-			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
+			virtual const std::shared_ptr<ecore::EClass>& eStaticClass() const;
 
 			//*********************************
 			// EStructuralFeature Get/Set/IsSet
 			//*********************************
 			virtual Any eGet(int featureID, bool resolve, bool coreType) const ;
-			virtual bool eSet(int featureID, Any newValue) ;
+			virtual bool eSet(int featureID, const Any& newValue) ;
 			virtual bool internalEIsSet(int featureID) const ;
 
 			//*********************************
 			// EOperation Invoke
 			//*********************************
-			virtual Any eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments) ;
+			virtual Any eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments) ;
 
 		private:
 			std::weak_ptr<uml::InformationFlow> m_thisInformationFlowPtr;

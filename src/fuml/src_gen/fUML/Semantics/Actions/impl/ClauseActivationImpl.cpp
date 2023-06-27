@@ -40,8 +40,8 @@
 #include "fUML/Semantics/Actions/ClauseActivation.hpp"
 #include "fUML/Semantics/Actions/ConditionalNodeActivation.hpp"
 //Factories and Package includes
-#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/SemanticsPackage.hpp"
+#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/Actions/ActionsPackage.hpp"
 #include "fUML/Semantics/SimpleClassifiers/SimpleClassifiersPackage.hpp"
 #include "uml/umlPackage.hpp"
@@ -153,22 +153,22 @@ void ClauseActivationImpl::selectBody()
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference clause */
-std::shared_ptr<uml::Clause> ClauseActivationImpl::getClause() const
+const std::shared_ptr<uml::Clause>& ClauseActivationImpl::getClause() const
 {
     return m_clause;
 }
-void ClauseActivationImpl::setClause(std::shared_ptr<uml::Clause> _clause)
+void ClauseActivationImpl::setClause(const std::shared_ptr<uml::Clause>& _clause)
 {
     m_clause = _clause;
 	
 }
 
 /* Getter & Setter for reference conditionalNodeActivation */
-std::shared_ptr<fUML::Semantics::Actions::ConditionalNodeActivation> ClauseActivationImpl::getConditionalNodeActivation() const
+const std::shared_ptr<fUML::Semantics::Actions::ConditionalNodeActivation>& ClauseActivationImpl::getConditionalNodeActivation() const
 {
     return m_conditionalNodeActivation;
 }
-void ClauseActivationImpl::setConditionalNodeActivation(std::shared_ptr<fUML::Semantics::Actions::ConditionalNodeActivation> _conditionalNodeActivation)
+void ClauseActivationImpl::setConditionalNodeActivation(const std::shared_ptr<fUML::Semantics::Actions::ConditionalNodeActivation>& _conditionalNodeActivation)
 {
     m_conditionalNodeActivation = _conditionalNodeActivation;
 	
@@ -296,7 +296,7 @@ void ClauseActivationImpl::saveContent(std::shared_ptr<persistence::interfaces::
 	}
 }
 
-std::shared_ptr<ecore::EClass> ClauseActivationImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& ClauseActivationImpl::eStaticClass() const
 {
 	return fUML::Semantics::Actions::ActionsPackage::eInstance()->getClauseActivation_Class();
 }
@@ -328,7 +328,7 @@ bool ClauseActivationImpl::internalEIsSet(int featureID) const
 	return ecore::EObjectImpl::internalEIsSet(featureID);
 }
 
-bool ClauseActivationImpl::eSet(int featureID, Any newValue)
+bool ClauseActivationImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -356,7 +356,7 @@ bool ClauseActivationImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any ClauseActivationImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any ClauseActivationImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

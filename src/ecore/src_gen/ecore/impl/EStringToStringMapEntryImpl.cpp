@@ -105,7 +105,7 @@ std::shared_ptr<ecore::EObject> EStringToStringMapEntryImpl::copy() const
 // Attribute Getters & Setters
 //*********************************
 /* Getter & Setter for attribute key */
-std::string EStringToStringMapEntryImpl::getKey() const 
+std::string EStringToStringMapEntryImpl::getKey() const
 {
 	return m_key;
 }
@@ -116,7 +116,7 @@ void EStringToStringMapEntryImpl::setKey(std::string _key)
 }
 
 /* Getter & Setter for attribute value */
-std::string EStringToStringMapEntryImpl::getValue() const 
+std::string EStringToStringMapEntryImpl::getValue() const
 {
 	return m_value;
 }
@@ -237,7 +237,7 @@ void EStringToStringMapEntryImpl::saveContent(std::shared_ptr<persistence::inter
 	}
 }
 
-std::shared_ptr<EClass> EStringToStringMapEntryImpl::eStaticClass() const
+const std::shared_ptr<EClass>& EStringToStringMapEntryImpl::eStaticClass() const
 {
 	return ecore::ecorePackage::eInstance()->getEStringToStringMapEntry_Class();
 }
@@ -269,7 +269,7 @@ bool EStringToStringMapEntryImpl::internalEIsSet(int featureID) const
 	return ecore::EObjectImpl::internalEIsSet(featureID);
 }
 
-bool EStringToStringMapEntryImpl::eSet(int featureID, Any newValue)
+bool EStringToStringMapEntryImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -295,7 +295,7 @@ bool EStringToStringMapEntryImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any EStringToStringMapEntryImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any EStringToStringMapEntryImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

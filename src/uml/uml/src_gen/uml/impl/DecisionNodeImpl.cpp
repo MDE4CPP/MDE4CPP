@@ -149,42 +149,42 @@ std::shared_ptr<ecore::EObject> DecisionNodeImpl::copy() const
 //*********************************
 // Operations
 //*********************************
-bool DecisionNodeImpl::decision_input_flow_incoming(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool DecisionNodeImpl::decision_input_flow_incoming(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool DecisionNodeImpl::edges(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool DecisionNodeImpl::edges(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool DecisionNodeImpl::incoming_control_one_input_parameter(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool DecisionNodeImpl::incoming_control_one_input_parameter(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool DecisionNodeImpl::incoming_object_one_input_parameter(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool DecisionNodeImpl::incoming_object_one_input_parameter(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool DecisionNodeImpl::incoming_outgoing_edges(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool DecisionNodeImpl::incoming_outgoing_edges(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool DecisionNodeImpl::parameters(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool DecisionNodeImpl::parameters(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool DecisionNodeImpl::two_input_parameters(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool DecisionNodeImpl::two_input_parameters(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool DecisionNodeImpl::zero_input_parameters(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool DecisionNodeImpl::zero_input_parameters(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -197,22 +197,22 @@ bool DecisionNodeImpl::zero_input_parameters(Any diagnostics,std::shared_ptr<std
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference decisionInput */
-std::shared_ptr<uml::Behavior> DecisionNodeImpl::getDecisionInput() const
+const std::shared_ptr<uml::Behavior>& DecisionNodeImpl::getDecisionInput() const
 {
     return m_decisionInput;
 }
-void DecisionNodeImpl::setDecisionInput(std::shared_ptr<uml::Behavior> _decisionInput)
+void DecisionNodeImpl::setDecisionInput(const std::shared_ptr<uml::Behavior>& _decisionInput)
 {
     m_decisionInput = _decisionInput;
 	
 }
 
 /* Getter & Setter for reference decisionInputFlow */
-std::shared_ptr<uml::ObjectFlow> DecisionNodeImpl::getDecisionInputFlow() const
+const std::shared_ptr<uml::ObjectFlow>& DecisionNodeImpl::getDecisionInputFlow() const
 {
     return m_decisionInputFlow;
 }
-void DecisionNodeImpl::setDecisionInputFlow(std::shared_ptr<uml::ObjectFlow> _decisionInputFlow)
+void DecisionNodeImpl::setDecisionInputFlow(const std::shared_ptr<uml::ObjectFlow>& _decisionInputFlow)
 {
     m_decisionInputFlow = _decisionInputFlow;
 	
@@ -421,7 +421,7 @@ void DecisionNodeImpl::saveContent(std::shared_ptr<persistence::interfaces::XSav
 	}
 }
 
-std::shared_ptr<ecore::EClass> DecisionNodeImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& DecisionNodeImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getDecisionNode_Class();
 }
@@ -453,7 +453,7 @@ bool DecisionNodeImpl::internalEIsSet(int featureID) const
 	return ControlNodeImpl::internalEIsSet(featureID);
 }
 
-bool DecisionNodeImpl::eSet(int featureID, Any newValue)
+bool DecisionNodeImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -481,7 +481,7 @@ bool DecisionNodeImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any DecisionNodeImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any DecisionNodeImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

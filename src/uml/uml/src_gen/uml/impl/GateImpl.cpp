@@ -123,17 +123,17 @@ std::shared_ptr<ecore::EObject> GateImpl::copy() const
 //*********************************
 // Operations
 //*********************************
-bool GateImpl::actual_gate_distinguishable(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool GateImpl::actual_gate_distinguishable(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool GateImpl::actual_gate_matched(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool GateImpl::actual_gate_matched(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool GateImpl::formal_gate_distinguishable(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool GateImpl::formal_gate_distinguishable(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -148,12 +148,12 @@ std::shared_ptr<uml::InteractionOperand> GateImpl::getOperand()
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool GateImpl::inside_cf_gate_distinguishable(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool GateImpl::inside_cf_gate_distinguishable(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool GateImpl::inside_cf_matched(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool GateImpl::inside_cf_matched(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -178,17 +178,17 @@ bool GateImpl::isOutsideCF()
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool GateImpl::matches(std::shared_ptr<uml::Gate> gateToMatch)
+bool GateImpl::matches(const std::shared_ptr<uml::Gate>& gateToMatch)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool GateImpl::outside_cf_gate_distinguishable(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool GateImpl::outside_cf_gate_distinguishable(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool GateImpl::outside_cf_matched(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool GateImpl::outside_cf_matched(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -305,7 +305,7 @@ void GateImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler
 	}
 }
 
-std::shared_ptr<ecore::EClass> GateImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& GateImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getGate_Class();
 }
@@ -329,7 +329,7 @@ bool GateImpl::internalEIsSet(int featureID) const
 	return MessageEndImpl::internalEIsSet(featureID);
 }
 
-bool GateImpl::eSet(int featureID, Any newValue)
+bool GateImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -341,7 +341,7 @@ bool GateImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any GateImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any GateImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

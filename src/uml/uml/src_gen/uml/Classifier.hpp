@@ -197,12 +197,12 @@ namespace uml
 			Retrieves the first operation with the specified name, parameter names, and parameter types from this classifier.
 			*/
 			 
-			virtual std::shared_ptr<uml::Operation> getOperation(std::string name,std::shared_ptr<Bag<std::string>> parameterNames,std::shared_ptr<Bag<uml::Type>> parameterTypes) = 0;
+			virtual std::shared_ptr<uml::Operation> getOperation(std::string name, const std::shared_ptr<Bag<std::string>>& parameterNames, const std::shared_ptr<Bag<uml::Type>>& parameterTypes) = 0;
 			/*!
 			Retrieves the first operation with the specified name, parameter names, and parameter types from this classifier, ignoring case if indicated.
 			*/
 			 
-			virtual std::shared_ptr<uml::Operation> getOperation(std::string name,std::shared_ptr<Bag<std::string>> parameterNames,std::shared_ptr<Bag<uml::Type>> parameterTypes,bool ignoreCase) = 0;
+			virtual std::shared_ptr<uml::Operation> getOperation(std::string name, const std::shared_ptr<Bag<std::string>>& parameterNames, const std::shared_ptr<Bag<uml::Type>>& parameterTypes, bool ignoreCase) = 0;
 			/*!
 			Retrieves the operations of this classifier.
 			*/
@@ -225,7 +225,7 @@ namespace uml
 			<p>From package UML::Classification.</p>
 			*/
 			 
-			virtual bool hasVisibilityOf(std::shared_ptr<uml::NamedElement> n) = 0;
+			virtual bool hasVisibilityOf(const std::shared_ptr<uml::NamedElement>& n) = 0;
 			/*!
 			The query inherit() defines how to inherit a set of elements passed as its argument.  It excludes redefined elements from the result.
 			result = (inhs->reject(inh |
@@ -236,7 +236,7 @@ namespace uml
 			<p>From package UML::Classification.</p>
 			*/
 			 
-			virtual std::shared_ptr<Bag<uml::NamedElement> > inherit(std::shared_ptr<Bag<uml::NamedElement>> inhs) = 0;
+			virtual std::shared_ptr<Bag<uml::NamedElement> > inherit(const std::shared_ptr<Bag<uml::NamedElement>>& inhs) = 0;
 			/*!
 			The query inheritableMembers() gives all of the members of a Classifier that may be inherited in one of its descendants, subject to whatever visibility restrictions apply.
 			c.allParents()->includes(self)
@@ -244,13 +244,13 @@ namespace uml
 			<p>From package UML::Classification.</p>
 			*/
 			 
-			virtual std::shared_ptr<Bag<uml::NamedElement> > inheritableMembers(std::shared_ptr<uml::Classifier> c) = 0;
+			virtual std::shared_ptr<Bag<uml::NamedElement> > inheritableMembers(const std::shared_ptr<uml::Classifier>& c) = 0;
 			/*!
 			result = (substitution.contract->includes(contract))
 			<p>From package UML::Classification.</p>
 			*/
 			 
-			virtual bool isSubstitutableFor(std::shared_ptr<uml::Classifier> contract) = 0;
+			virtual bool isSubstitutableFor(const std::shared_ptr<uml::Classifier>& contract) = 0;
 			/*!
 			The Classifier that maps to a GeneralizationSet may neither be a specific nor a general Classifier in any of the Generalization relationships defined for that GeneralizationSet. In other words, a power type may not be an instance of itself nor may its instances also be its subclasses.
 			powertypeExtent->forAll( gs | 
@@ -259,26 +259,26 @@ namespace uml
 			  ))
 			*/
 			 
-			virtual bool maps_to_generalization_set(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
+			virtual bool maps_to_generalization_set(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context) = 0;
 			/*!
 			The query maySpecializeType() determines whether this classifier may have a generalization relationship to classifiers of the specified type. By default a classifier may specialize classifiers of the same or a more general type. It is intended to be redefined by classifiers that have different specialization constraints.
 			result = (self.oclIsKindOf(c.oclType()))
 			<p>From package UML::Classification.</p>
 			*/
 			 
-			virtual bool maySpecializeType(std::shared_ptr<uml::Classifier> c) = 0;
+			virtual bool maySpecializeType(const std::shared_ptr<uml::Classifier>& c) = 0;
 			/*!
 			Generalization hierarchies must be directed and acyclical. A Classifier can not be both a transitively general and transitively specific Classifier of the same Classifier.
 			not allParents()->includes(self)
 			*/
 			 
-			virtual bool no_cycles_in_generalization(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
+			virtual bool no_cycles_in_generalization(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context) = 0;
 			/*!
 			The parents of a Classifier must be non-final.
 			parents()->forAll(not isFinalSpecialization)
 			*/
 			 
-			virtual bool non_final_parents(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
+			virtual bool non_final_parents(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context) = 0;
 			/*!
 			The query parents() gives all of the immediate ancestors of a generalized Classifier.
 			result = (generalization.general->asSet())
@@ -291,7 +291,7 @@ namespace uml
 			parents()->forAll(c | self.maySpecializeType(c))
 			*/
 			 
-			virtual bool specialize_type(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
+			virtual bool specialize_type(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context) = 0;
 
 			//*********************************
 			// Attribute Getters & Setters
@@ -330,68 +330,68 @@ namespace uml
 			<p>From package UML::Classification.</p>
 			*/
 			
-			virtual std::shared_ptr<SubsetUnion<uml::CollaborationUse, uml::Element>> getCollaborationUse() const = 0;
+			virtual const std::shared_ptr<SubsetUnion<uml::CollaborationUse, uml::Element>>& getCollaborationUse() const = 0;
 			
 			/*!
 			The generalizing Classifiers for this Classifier.
 			<p>From package UML::Classification.</p>
 			*/
 			
-			virtual std::shared_ptr<Bag<uml::Classifier>> getGeneral() const = 0;
+			virtual const std::shared_ptr<Bag<uml::Classifier>>& getGeneral() const = 0;
 			/*!
 			The Generalization relationships for this Classifier. These Generalizations navigate to more general Classifiers in the generalization hierarchy.
 			<p>From package UML::Classification.</p>
 			*/
 			
-			virtual std::shared_ptr<Subset<uml::Generalization, uml::Element>> getGeneralization() const = 0;
+			virtual const std::shared_ptr<Subset<uml::Generalization, uml::Element>>& getGeneralization() const = 0;
 			/*!
 			All elements inherited by this Classifier from its general Classifiers.
 			<p>From package UML::Classification.</p>
 			*/
 			
-			virtual std::shared_ptr<Subset<uml::NamedElement, uml::NamedElement>> getInheritedMember() const = 0;
+			virtual const std::shared_ptr<Subset<uml::NamedElement, uml::NamedElement>>& getInheritedMember() const = 0;
 			/*!
 			The UseCases owned by this classifier.
 			<p>From package UML::Classification.</p>
 			*/
 			
-			virtual std::shared_ptr<Subset<uml::UseCase, uml::NamedElement>> getOwnedUseCase() const = 0;
+			virtual const std::shared_ptr<Subset<uml::UseCase, uml::NamedElement>>& getOwnedUseCase() const = 0;
 			/*!
 			The GeneralizationSet of which this Classifier is a power type.
 			<p>From package UML::Classification.</p>
 			*/
 			
-			virtual std::shared_ptr<Bag<uml::GeneralizationSet>> getPowertypeExtent() const = 0;
+			virtual const std::shared_ptr<Bag<uml::GeneralizationSet>>& getPowertypeExtent() const = 0;
 			/*!
 			The Classifiers redefined by this Classifier.
 			<p>From package UML::Classification.</p>
 			*/
 			
-			virtual std::shared_ptr<SubsetUnion<uml::Classifier, uml::RedefinableElement>> getRedefinedClassifier() const = 0;
+			virtual const std::shared_ptr<SubsetUnion<uml::Classifier, uml::RedefinableElement>>& getRedefinedClassifier() const = 0;
 			/*!
 			A CollaborationUse which indicates the Collaboration that represents this Classifier.
 			<p>From package UML::Classification.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::CollaborationUse> getRepresentation() const = 0;
+			virtual const std::shared_ptr<uml::CollaborationUse>& getRepresentation() const = 0;
 			/*!
 			A CollaborationUse which indicates the Collaboration that represents this Classifier.
 			<p>From package UML::Classification.</p>
 			*/
 			
-			virtual void setRepresentation(std::shared_ptr<uml::CollaborationUse>) = 0;
+			virtual void setRepresentation(const std::shared_ptr<uml::CollaborationUse>&) = 0;
 			/*!
 			The Substitutions owned by this Classifier.
 			<p>From package UML::Classification.</p>
 			*/
 			
-			virtual std::shared_ptr<Subset<uml::Substitution, uml::Element>> getSubstitution() const = 0;
+			virtual const std::shared_ptr<Subset<uml::Substitution, uml::Element>>& getSubstitution() const = 0;
 			/*!
 			The set of UseCases for which this Classifier is the subject.
 			<p>From package UML::Classification.</p>
 			*/
 			
-			virtual std::shared_ptr<Bag<uml::UseCase>> getUseCase() const = 0;
+			virtual const std::shared_ptr<Bag<uml::UseCase>>& getUseCase() const = 0;
 
 			//*********************************
 			// Union Reference Getters

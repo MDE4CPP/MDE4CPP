@@ -34,10 +34,10 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "fUML/Semantics/Values/ValuesFactory.hpp"
 #include "fUML/Semantics/Loci/LociFactory.hpp"
-#include "fUML/Semantics/SimpleClassifiers/SimpleClassifiersFactory.hpp"
 #include "uml/umlFactory.hpp"
+#include "fUML/Semantics/Values/ValuesFactory.hpp"
+#include "fUML/Semantics/SimpleClassifiers/SimpleClassifiersFactory.hpp"
 #include "ocl/Evaluations/EvaluationsFactory.hpp"
 #include "ocl/Expressions/ExpressionsFactory.hpp"
 #include "ocl/Evaluations/EvalEnvironment.hpp"
@@ -130,18 +130,18 @@ std::shared_ptr<ecore::EObject> NavigationCallExpEvalImpl::copy() const
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference navigationSource */
-std::shared_ptr<fUML::Semantics::SimpleClassifiers::StringValue> NavigationCallExpEvalImpl::getNavigationSource() const
+const std::shared_ptr<fUML::Semantics::SimpleClassifiers::StringValue>& NavigationCallExpEvalImpl::getNavigationSource() const
 {
     return m_navigationSource;
 }
-void NavigationCallExpEvalImpl::setNavigationSource(std::shared_ptr<fUML::Semantics::SimpleClassifiers::StringValue> _navigationSource)
+void NavigationCallExpEvalImpl::setNavigationSource(const std::shared_ptr<fUML::Semantics::SimpleClassifiers::StringValue>& _navigationSource)
 {
     m_navigationSource = _navigationSource;
 	
 }
 
 /* Getter & Setter for reference qualifiers */
-std::shared_ptr<Bag<ocl::Evaluations::OclExpEval>> NavigationCallExpEvalImpl::getQualifiers() const
+const std::shared_ptr<Bag<ocl::Evaluations::OclExpEval>>& NavigationCallExpEvalImpl::getQualifiers() const
 {
 	if(m_qualifiers == nullptr)
 	{
@@ -287,7 +287,7 @@ void NavigationCallExpEvalImpl::saveContent(std::shared_ptr<persistence::interfa
 	}
 }
 
-std::shared_ptr<ecore::EClass> NavigationCallExpEvalImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& NavigationCallExpEvalImpl::eStaticClass() const
 {
 	return ocl::Evaluations::EvaluationsPackage::eInstance()->getNavigationCallExpEval_Class();
 }
@@ -319,7 +319,7 @@ bool NavigationCallExpEvalImpl::internalEIsSet(int featureID) const
 	return ModelPropertyCallExpEvalImpl::internalEIsSet(featureID);
 }
 
-bool NavigationCallExpEvalImpl::eSet(int featureID, Any newValue)
+bool NavigationCallExpEvalImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -376,7 +376,7 @@ bool NavigationCallExpEvalImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any NavigationCallExpEvalImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any NavigationCallExpEvalImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

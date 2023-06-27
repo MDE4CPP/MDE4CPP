@@ -99,13 +99,13 @@ namespace uml
 			clause->closure(predecessorClause)->intersection(clause)->isEmpty()
 			*/
 			 
-			virtual bool clause_no_predecessor(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
+			virtual bool clause_no_predecessor(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context) = 0;
 			/*!
 			The union of the ExecutableNodes in the test and body parts of all clauses must be the same as the subset of nodes contained in the ConditionalNode (considered as a StructuredActivityNode) that are ExecutableNodes.
 			clause.test->union(clause._'body') = node->select(oclIsKindOf(ExecutableNode)).oclAsType(ExecutableNode)
 			*/
 			 
-			virtual bool executable_nodes(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
+			virtual bool executable_nodes(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context) = 0;
 			/*!
 			Each clause of a ConditionalNode must have the same number of bodyOutput pins as the ConditionalNode has result OutputPins, and each clause bodyOutput Pin must be compatible with the corresponding result OutputPin (by positional order) in type, multiplicity, ordering, and uniqueness.
 			clause->forAll(
@@ -117,26 +117,26 @@ namespace uml
 					bodyOutput->at(i).compatibleWith(result->at(i))))
 			*/
 			 
-			virtual bool matching_output_pins(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
+			virtual bool matching_output_pins(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context) = 0;
 			/*!
 			A ConditionalNode has no InputPins.
 			input->isEmpty()
 			*/
 			 
-			virtual bool no_input_pins(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
+			virtual bool no_input_pins(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context) = 0;
 			/*!
 			No ExecutableNode in the ConditionNode may appear in the test or body part of more than one clause of a ConditionalNode.
 			node->select(oclIsKindOf(ExecutableNode)).oclAsType(ExecutableNode)->forAll(n | 
 				self.clause->select(test->union(_'body')->includes(n))->size()=1)
 			*/
 			 
-			virtual bool one_clause_with_executable_node(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
+			virtual bool one_clause_with_executable_node(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context) = 0;
 			/*!
 			The result OutputPins have no incoming edges.
 			result.incoming->isEmpty()
 			*/
 			 
-			virtual bool result_no_incoming(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
+			virtual bool result_no_incoming(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context) = 0;
 
 			//*********************************
 			// Attribute Getters & Setters
@@ -174,13 +174,13 @@ namespace uml
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual std::shared_ptr<Subset<uml::Clause, uml::Element>> getClause() const = 0;
+			virtual const std::shared_ptr<Subset<uml::Clause, uml::Element>>& getClause() const = 0;
 			/*!
 			The OutputPins that onto which are moved values from the bodyOutputs of the Clause selected for execution.
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual std::shared_ptr<Bag<uml::OutputPin>> getResult() const = 0;
+			virtual const std::shared_ptr<Bag<uml::OutputPin>>& getResult() const = 0;
 
 			//*********************************
 			// Union Reference Getters

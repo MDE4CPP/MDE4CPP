@@ -96,9 +96,9 @@ namespace ocl::Evaluations
 			//*********************************
 			// Reference Getters & Setters
 			//*********************************
-			virtual std::shared_ptr<fUML::Semantics::SimpleClassifiers::StringValue> getNavigationSource() const = 0;
-			virtual void setNavigationSource(std::shared_ptr<fUML::Semantics::SimpleClassifiers::StringValue>) = 0;
-			virtual std::shared_ptr<Bag<ocl::Evaluations::OclExpEval>> getQualifiers() const = 0;
+			virtual const std::shared_ptr<fUML::Semantics::SimpleClassifiers::StringValue>& getNavigationSource() const = 0;
+			virtual void setNavigationSource(const std::shared_ptr<fUML::Semantics::SimpleClassifiers::StringValue>&) = 0;
+			virtual const std::shared_ptr<Bag<ocl::Evaluations::OclExpEval>>& getQualifiers() const = 0;
 
 			//*********************************
 			// Union Reference Getters

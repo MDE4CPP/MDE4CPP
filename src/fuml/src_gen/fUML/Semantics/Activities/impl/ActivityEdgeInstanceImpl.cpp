@@ -45,8 +45,8 @@
 #include "fUML/Semantics/Activities/Offer.hpp"
 #include "fUML/Semantics/Activities/Token.hpp"
 //Factories and Package includes
-#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/SemanticsPackage.hpp"
+#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/Activities/ActivitiesPackage.hpp"
 #include "uml/umlPackage.hpp"
 
@@ -174,7 +174,7 @@ bool ActivityEdgeInstanceImpl::hasOffer()
 	//end of body
 }
 
-void ActivityEdgeInstanceImpl::sendOffer(std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> tokens)
+void ActivityEdgeInstanceImpl::sendOffer(const std::shared_ptr<Bag<fUML::Semantics::Activities::Token>>& tokens)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -265,11 +265,11 @@ std::shared_ptr<Bag<fUML::Semantics::Activities::Token> > ActivityEdgeInstanceIm
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference edge */
-std::shared_ptr<uml::ActivityEdge> ActivityEdgeInstanceImpl::getEdge() const
+const std::shared_ptr<uml::ActivityEdge>& ActivityEdgeInstanceImpl::getEdge() const
 {
     return m_edge;
 }
-void ActivityEdgeInstanceImpl::setEdge(std::shared_ptr<uml::ActivityEdge> _edge)
+void ActivityEdgeInstanceImpl::setEdge(const std::shared_ptr<uml::ActivityEdge>& _edge)
 {
     m_edge = _edge;
 	
@@ -287,7 +287,7 @@ void ActivityEdgeInstanceImpl::setGroup(std::weak_ptr<fUML::Semantics::Activitie
 }
 
 /* Getter & Setter for reference offers */
-std::shared_ptr<Bag<fUML::Semantics::Activities::Offer>> ActivityEdgeInstanceImpl::getOffers() const
+const std::shared_ptr<Bag<fUML::Semantics::Activities::Offer>>& ActivityEdgeInstanceImpl::getOffers() const
 {
 	if(m_offers == nullptr)
 	{
@@ -484,7 +484,7 @@ void ActivityEdgeInstanceImpl::saveContent(std::shared_ptr<persistence::interfac
 	}
 }
 
-std::shared_ptr<ecore::EClass> ActivityEdgeInstanceImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& ActivityEdgeInstanceImpl::eStaticClass() const
 {
 	return fUML::Semantics::Activities::ActivitiesPackage::eInstance()->getActivityEdgeInstance_Class();
 }
@@ -537,7 +537,7 @@ bool ActivityEdgeInstanceImpl::internalEIsSet(int featureID) const
 	return ecore::EObjectImpl::internalEIsSet(featureID);
 }
 
-bool ActivityEdgeInstanceImpl::eSet(int featureID, Any newValue)
+bool ActivityEdgeInstanceImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -618,7 +618,7 @@ bool ActivityEdgeInstanceImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any ActivityEdgeInstanceImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any ActivityEdgeInstanceImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

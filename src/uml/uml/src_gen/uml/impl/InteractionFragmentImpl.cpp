@@ -176,7 +176,7 @@ InteractionFragmentImpl& InteractionFragmentImpl::operator=(const InteractionFra
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference covered */
-std::shared_ptr<Bag<uml::Lifeline>> InteractionFragmentImpl::getCovered() const
+const std::shared_ptr<Bag<uml::Lifeline>>& InteractionFragmentImpl::getCovered() const
 {
 	if(m_covered == nullptr)
 	{
@@ -210,7 +210,7 @@ void InteractionFragmentImpl::setEnclosingOperand(std::weak_ptr<uml::Interaction
 }
 
 /* Getter & Setter for reference generalOrdering */
-std::shared_ptr<Subset<uml::GeneralOrdering, uml::Element>> InteractionFragmentImpl::getGeneralOrdering() const
+const std::shared_ptr<Subset<uml::GeneralOrdering, uml::Element>>& InteractionFragmentImpl::getGeneralOrdering() const
 {
 	if(m_generalOrdering == nullptr)
 	{
@@ -435,7 +435,7 @@ void InteractionFragmentImpl::saveContent(std::shared_ptr<persistence::interface
 	}
 }
 
-std::shared_ptr<ecore::EClass> InteractionFragmentImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& InteractionFragmentImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getInteractionFragment_Class();
 }
@@ -481,7 +481,7 @@ bool InteractionFragmentImpl::internalEIsSet(int featureID) const
 	return NamedElementImpl::internalEIsSet(featureID);
 }
 
-bool InteractionFragmentImpl::eSet(int featureID, Any newValue)
+bool InteractionFragmentImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -583,7 +583,7 @@ bool InteractionFragmentImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any InteractionFragmentImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any InteractionFragmentImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

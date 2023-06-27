@@ -96,25 +96,25 @@ namespace uml
 			not classifier.isAbstract
 			*/
 			 
-			virtual bool classifier_not_abstract(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
+			virtual bool classifier_not_abstract(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context) = 0;
 			/*!
 			The classifier cannot be an AssociationClass.
 			not classifier.oclIsKindOf(AssociationClass)
 			*/
 			 
-			virtual bool classifier_not_association_class(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
+			virtual bool classifier_not_association_class(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context) = 0;
 			/*!
 			The multiplicity of the result OutputPin is 1..1.
 			result.is(1,1)
 			*/
 			 
-			virtual bool multiplicity(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
+			virtual bool multiplicity(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context) = 0;
 			/*!
 			The type of the result OutputPin must be the same as the classifier of the CreateObjectAction.
 			result.type = classifier
 			*/
 			 
-			virtual bool same_type(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
+			virtual bool same_type(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context) = 0;
 
 			//*********************************
 			// Attribute Getters & Setters
@@ -128,25 +128,25 @@ namespace uml
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::Classifier> getClassifier() const = 0;
+			virtual const std::shared_ptr<uml::Classifier>& getClassifier() const = 0;
 			/*!
 			The Classifier to be instantiated.
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual void setClassifier(std::shared_ptr<uml::Classifier>) = 0;
+			virtual void setClassifier(const std::shared_ptr<uml::Classifier>&) = 0;
 			/*!
 			The OutputPin on which the newly created object is placed.
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::OutputPin> getResult() const = 0;
+			virtual const std::shared_ptr<uml::OutputPin>& getResult() const = 0;
 			/*!
 			The OutputPin on which the newly created object is placed.
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual void setResult(std::shared_ptr<uml::OutputPin>) = 0;
+			virtual void setResult(const std::shared_ptr<uml::OutputPin>&) = 0;
 
 			//*********************************
 			// Union Reference Getters

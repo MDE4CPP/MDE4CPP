@@ -304,12 +304,12 @@ std::shared_ptr<ecore::EObject> ArtifactImpl::copy() const
 //*********************************
 // Operations
 //*********************************
-std::shared_ptr<uml::Property> ArtifactImpl::createOwnedAttribute(std::string name,std::shared_ptr<uml::Type> type,int lower,int upper)
+std::shared_ptr<uml::Property> ArtifactImpl::createOwnedAttribute(std::string name, const std::shared_ptr<uml::Type>& type, int lower, int upper)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-std::shared_ptr<uml::Operation> ArtifactImpl::createOwnedOperation(std::string name,std::shared_ptr<Bag<std::string>> parameterNames,std::shared_ptr<Bag<uml::Type>> parameterTypes,std::shared_ptr<uml::Type> returnType)
+std::shared_ptr<uml::Operation> ArtifactImpl::createOwnedOperation(std::string name, const std::shared_ptr<Bag<std::string>>& parameterNames, const std::shared_ptr<Bag<uml::Type>>& parameterTypes, const std::shared_ptr<uml::Type>& returnType)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -318,7 +318,7 @@ std::shared_ptr<uml::Operation> ArtifactImpl::createOwnedOperation(std::string n
 // Attribute Getters & Setters
 //*********************************
 /* Getter & Setter for attribute fileName */
-std::string ArtifactImpl::getFileName() const 
+std::string ArtifactImpl::getFileName() const
 {
 	return m_fileName;
 }
@@ -332,7 +332,7 @@ void ArtifactImpl::setFileName(std::string _fileName)
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference manifestation */
-std::shared_ptr<Subset<uml::Manifestation, uml::Element>> ArtifactImpl::getManifestation() const
+const std::shared_ptr<Subset<uml::Manifestation, uml::Element>>& ArtifactImpl::getManifestation() const
 {
 	if(m_manifestation == nullptr)
 	{
@@ -353,7 +353,7 @@ std::shared_ptr<Subset<uml::Manifestation, uml::Element>> ArtifactImpl::getManif
 }
 
 /* Getter & Setter for reference nestedArtifact */
-std::shared_ptr<Subset<uml::Artifact, uml::NamedElement>> ArtifactImpl::getNestedArtifact() const
+const std::shared_ptr<Subset<uml::Artifact, uml::NamedElement>>& ArtifactImpl::getNestedArtifact() const
 {
 	if(m_nestedArtifact == nullptr)
 	{
@@ -374,7 +374,7 @@ std::shared_ptr<Subset<uml::Artifact, uml::NamedElement>> ArtifactImpl::getNeste
 }
 
 /* Getter & Setter for reference ownedAttribute */
-std::shared_ptr<Subset<uml::Property, uml::NamedElement, uml::Property>> ArtifactImpl::getOwnedAttribute() const
+const std::shared_ptr<Subset<uml::Property, uml::NamedElement, uml::Property>>& ArtifactImpl::getOwnedAttribute() const
 {
 	if(m_ownedAttribute == nullptr)
 	{
@@ -395,7 +395,7 @@ std::shared_ptr<Subset<uml::Property, uml::NamedElement, uml::Property>> Artifac
 }
 
 /* Getter & Setter for reference ownedOperation */
-std::shared_ptr<Subset<uml::Operation, uml::Feature, uml::NamedElement>> ArtifactImpl::getOwnedOperation() const
+const std::shared_ptr<Subset<uml::Operation, uml::Feature, uml::NamedElement>>& ArtifactImpl::getOwnedOperation() const
 {
 	if(m_ownedOperation == nullptr)
 	{
@@ -750,7 +750,7 @@ void ArtifactImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHan
 	}
 }
 
-std::shared_ptr<ecore::EClass> ArtifactImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& ArtifactImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getArtifact_Class();
 }
@@ -808,7 +808,7 @@ bool ArtifactImpl::internalEIsSet(int featureID) const
 	return result;
 }
 
-bool ArtifactImpl::eSet(int featureID, Any newValue)
+bool ArtifactImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -982,7 +982,7 @@ bool ArtifactImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any ArtifactImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any ArtifactImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

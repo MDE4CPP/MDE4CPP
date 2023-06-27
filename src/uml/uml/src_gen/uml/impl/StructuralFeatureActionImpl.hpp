@@ -55,26 +55,26 @@ namespace uml
 			object.is(1,1)
 			*/
 			 
-			virtual bool multiplicity(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
+			virtual bool multiplicity(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context) ;
 			/*!
 			The structuralFeature must not be static.
 			not structuralFeature.isStatic
 			*/
 			 
-			virtual bool not_static(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
+			virtual bool not_static(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context) ;
 			/*!
 			The structuralFeature must either be an owned or inherited feature of the type of the object InputPin, or it must be an owned end of a binary Association whose opposite end had as a type to which the type of the object InputPin conforms.
 			object.type.oclAsType(Classifier).allFeatures()->includes(structuralFeature) or
 				object.type.conformsTo(structuralFeature.oclAsType(Property).opposite.type)
 			*/
 			 
-			virtual bool object_type(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
+			virtual bool object_type(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context) ;
 			/*!
 			The structuralFeature must have exactly one featuringClassifier.
 			structuralFeature.featuringClassifier->size() = 1
 			*/
 			 
-			virtual bool one_featuring_classifier(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
+			virtual bool one_featuring_classifier(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context) ;
 			/*!
 			The visibility of the structuralFeature must allow access from the object performing the ReadStructuralFeatureAction.
 			structuralFeature.visibility = VisibilityKind::public or
@@ -83,7 +83,7 @@ namespace uml
 			_'context'.conformsTo(structuralFeature.oclAsType(Property).opposite.type.oclAsType(Classifier))
 			*/
 			 
-			virtual bool visibility(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
+			virtual bool visibility(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context) ;
 			
 			//*********************************
 			// Attribute Getters & Setters
@@ -97,25 +97,25 @@ namespace uml
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::InputPin> getObject() const ;
+			virtual const std::shared_ptr<uml::InputPin>& getObject() const ;
 			/*!
 			The InputPin from which the object whose StructuralFeature is to be read or written is obtained.
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual void setObject(std::shared_ptr<uml::InputPin>) ;
+			virtual void setObject(const std::shared_ptr<uml::InputPin>&) ;
 			/*!
 			The StructuralFeature to be read or written.
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::StructuralFeature> getStructuralFeature() const ;
+			virtual const std::shared_ptr<uml::StructuralFeature>& getStructuralFeature() const ;
 			/*!
 			The StructuralFeature to be read or written.
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual void setStructuralFeature(std::shared_ptr<uml::StructuralFeature>) ;
+			virtual void setStructuralFeature(const std::shared_ptr<uml::StructuralFeature>&) ;
 			
 			//*********************************
 			// Union Reference Getters
@@ -167,19 +167,19 @@ namespace uml
 			virtual void saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const;
 
 		protected:
-			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
+			virtual const std::shared_ptr<ecore::EClass>& eStaticClass() const;
 
 			//*********************************
 			// EStructuralFeature Get/Set/IsSet
 			//*********************************
 			virtual Any eGet(int featureID, bool resolve, bool coreType) const ;
-			virtual bool eSet(int featureID, Any newValue) ;
+			virtual bool eSet(int featureID, const Any& newValue) ;
 			virtual bool internalEIsSet(int featureID) const ;
 
 			//*********************************
 			// EOperation Invoke
 			//*********************************
-			virtual Any eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments) ;
+			virtual Any eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments) ;
 
 		private:
 			std::weak_ptr<uml::StructuralFeatureAction> m_thisStructuralFeatureActionPtr;

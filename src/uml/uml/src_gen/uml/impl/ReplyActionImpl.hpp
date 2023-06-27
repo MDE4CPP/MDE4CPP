@@ -55,7 +55,7 @@ namespace uml
 			replyToCall.event.oclIsKindOf(CallEvent)
 			*/
 			 
-			virtual bool event_on_reply_to_call_trigger(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
+			virtual bool event_on_reply_to_call_trigger(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context) ;
 			/*!
 			The replyValue InputPins must match the output (return, out, and inout) parameters of the operation of the event of the replyToCall Trigger in number, type, ordering, and multiplicity.
 			let parameter:OrderedSet(Parameter) = replyToCall.event.oclAsType(CallEvent).operation.outputParameters() in
@@ -66,7 +66,7 @@ namespace uml
 				replyValue->at(i).compatibleWith(parameter->at(i)))
 			*/
 			 
-			virtual bool pins_match_parameter(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
+			virtual bool pins_match_parameter(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context) ;
 			
 			//*********************************
 			// Attribute Getters & Setters
@@ -80,31 +80,31 @@ namespace uml
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::Trigger> getReplyToCall() const ;
+			virtual const std::shared_ptr<uml::Trigger>& getReplyToCall() const ;
 			/*!
 			The Trigger specifying the Operation whose call is being replied to.
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual void setReplyToCall(std::shared_ptr<uml::Trigger>) ;
+			virtual void setReplyToCall(const std::shared_ptr<uml::Trigger>&) ;
 			/*!
 			A list of InputPins providing the values for the output (inout, out, and return) Parameters of the Operation. These values are returned to the caller.
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual std::shared_ptr<Subset<uml::InputPin, uml::InputPin>> getReplyValue() const ;
+			virtual const std::shared_ptr<Subset<uml::InputPin, uml::InputPin>>& getReplyValue() const ;
 			/*!
 			An InputPin that holds the return information value produced by an earlier AcceptCallAction.
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::InputPin> getReturnInformation() const ;
+			virtual const std::shared_ptr<uml::InputPin>& getReturnInformation() const ;
 			/*!
 			An InputPin that holds the return information value produced by an earlier AcceptCallAction.
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual void setReturnInformation(std::shared_ptr<uml::InputPin>) ;
+			virtual void setReturnInformation(const std::shared_ptr<uml::InputPin>&) ;
 			
 			//*********************************
 			// Union Reference Getters
@@ -156,19 +156,19 @@ namespace uml
 			virtual void saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const;
 
 		protected:
-			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
+			virtual const std::shared_ptr<ecore::EClass>& eStaticClass() const;
 
 			//*********************************
 			// EStructuralFeature Get/Set/IsSet
 			//*********************************
 			virtual Any eGet(int featureID, bool resolve, bool coreType) const ;
-			virtual bool eSet(int featureID, Any newValue) ;
+			virtual bool eSet(int featureID, const Any& newValue) ;
 			virtual bool internalEIsSet(int featureID) const ;
 
 			//*********************************
 			// EOperation Invoke
 			//*********************************
-			virtual Any eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments) ;
+			virtual Any eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments) ;
 
 		private:
 			std::weak_ptr<uml::ReplyAction> m_thisReplyActionPtr;

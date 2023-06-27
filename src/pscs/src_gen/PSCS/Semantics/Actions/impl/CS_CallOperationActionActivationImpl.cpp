@@ -56,8 +56,8 @@
 
 #include <exception> // used in Persistence
 #include "uml/umlFactory.hpp"
-#include "fUML/Semantics/Activities/ActivitiesFactory.hpp"
 #include "fUML/Semantics/Actions/ActionsFactory.hpp"
+#include "fUML/Semantics/Activities/ActivitiesFactory.hpp"
 #include "fUML/Semantics/CommonBehavior/CommonBehaviorFactory.hpp"
 #include "uml/Action.hpp"
 #include "fUML/Semantics/Activities/ActivityEdgeInstance.hpp"
@@ -74,8 +74,8 @@
 #include "uml/Port.hpp"
 #include "fUML/Semantics/Activities/Token.hpp"
 //Factories and Package includes
-#include "PSCS/PSCSPackage.hpp"
 #include "PSCS/Semantics/SemanticsPackage.hpp"
+#include "PSCS/PSCSPackage.hpp"
 #include "PSCS/Semantics/Actions/ActionsPackage.hpp"
 #include "fUML/Semantics/Actions/ActionsPackage.hpp"
 #include "fUML/Semantics/Activities/ActivitiesPackage.hpp"
@@ -150,7 +150,7 @@ std::shared_ptr<ecore::EObject> CS_CallOperationActionActivationImpl::copy() con
 //*********************************
 // Operations
 //*********************************
-bool CS_CallOperationActionActivationImpl::_isCreate(std::shared_ptr<uml::Operation> operation)
+bool CS_CallOperationActionActivationImpl::_isCreate(const std::shared_ptr<uml::Operation>& operation)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -290,7 +290,7 @@ std::shared_ptr<fUML::Semantics::CommonBehavior::Execution> CS_CallOperationActi
 	//end of body
 }
 
-bool CS_CallOperationActionActivationImpl::isCreate(std::shared_ptr<uml::Operation> operation)
+bool CS_CallOperationActionActivationImpl::isCreate(const std::shared_ptr<uml::Operation>& operation)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -304,7 +304,7 @@ bool CS_CallOperationActionActivationImpl::isCreate(std::shared_ptr<uml::Operati
 	//end of body
 }
 
-bool CS_CallOperationActionActivationImpl::isOperationProvided(std::shared_ptr<uml::Port> port,std::shared_ptr<uml::Operation> operation)
+bool CS_CallOperationActionActivationImpl::isOperationProvided(const std::shared_ptr<uml::Port>& port, const std::shared_ptr<uml::Operation>& operation)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -334,7 +334,7 @@ bool CS_CallOperationActionActivationImpl::isOperationProvided(std::shared_ptr<u
 	//end of body
 }
 
-bool CS_CallOperationActionActivationImpl::isOperationRequired(std::shared_ptr<uml::Port> port,std::shared_ptr<uml::Operation> operation)
+bool CS_CallOperationActionActivationImpl::isOperationRequired(const std::shared_ptr<uml::Port>& port, const std::shared_ptr<uml::Operation>& operation)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -466,7 +466,7 @@ void CS_CallOperationActionActivationImpl::saveContent(std::shared_ptr<persisten
 	}
 }
 
-std::shared_ptr<ecore::EClass> CS_CallOperationActionActivationImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& CS_CallOperationActionActivationImpl::eStaticClass() const
 {
 	return PSCS::Semantics::Actions::ActionsPackage::eInstance()->getCS_CallOperationActionActivation_Class();
 }
@@ -490,7 +490,7 @@ bool CS_CallOperationActionActivationImpl::internalEIsSet(int featureID) const
 	return fUML::Semantics::Actions::CallOperationActionActivationImpl::internalEIsSet(featureID);
 }
 
-bool CS_CallOperationActionActivationImpl::eSet(int featureID, Any newValue)
+bool CS_CallOperationActionActivationImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -502,7 +502,7 @@ bool CS_CallOperationActionActivationImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any CS_CallOperationActionActivationImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any CS_CallOperationActionActivationImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

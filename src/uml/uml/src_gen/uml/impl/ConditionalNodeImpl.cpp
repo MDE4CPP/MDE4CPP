@@ -210,32 +210,32 @@ std::shared_ptr<ecore::EObject> ConditionalNodeImpl::copy() const
 //*********************************
 // Operations
 //*********************************
-bool ConditionalNodeImpl::clause_no_predecessor(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool ConditionalNodeImpl::clause_no_predecessor(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool ConditionalNodeImpl::executable_nodes(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool ConditionalNodeImpl::executable_nodes(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool ConditionalNodeImpl::matching_output_pins(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool ConditionalNodeImpl::matching_output_pins(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool ConditionalNodeImpl::no_input_pins(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool ConditionalNodeImpl::no_input_pins(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool ConditionalNodeImpl::one_clause_with_executable_node(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool ConditionalNodeImpl::one_clause_with_executable_node(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool ConditionalNodeImpl::result_no_incoming(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool ConditionalNodeImpl::result_no_incoming(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -244,7 +244,7 @@ bool ConditionalNodeImpl::result_no_incoming(Any diagnostics,std::shared_ptr<std
 // Attribute Getters & Setters
 //*********************************
 /* Getter & Setter for attribute isAssured */
-bool ConditionalNodeImpl::getIsAssured() const 
+bool ConditionalNodeImpl::getIsAssured() const
 {
 	return m_isAssured;
 }
@@ -255,7 +255,7 @@ void ConditionalNodeImpl::setIsAssured(bool _isAssured)
 }
 
 /* Getter & Setter for attribute isDeterminate */
-bool ConditionalNodeImpl::getIsDeterminate() const 
+bool ConditionalNodeImpl::getIsDeterminate() const
 {
 	return m_isDeterminate;
 }
@@ -269,7 +269,7 @@ void ConditionalNodeImpl::setIsDeterminate(bool _isDeterminate)
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference clause */
-std::shared_ptr<Subset<uml::Clause, uml::Element>> ConditionalNodeImpl::getClause() const
+const std::shared_ptr<Subset<uml::Clause, uml::Element>>& ConditionalNodeImpl::getClause() const
 {
 	if(m_clause == nullptr)
 	{
@@ -290,7 +290,7 @@ std::shared_ptr<Subset<uml::Clause, uml::Element>> ConditionalNodeImpl::getClaus
 }
 
 /* Getter & Setter for reference result */
-std::shared_ptr<Bag<uml::OutputPin>> ConditionalNodeImpl::getResult() const
+const std::shared_ptr<Bag<uml::OutputPin>>& ConditionalNodeImpl::getResult() const
 {
 	//Getter call of redefined container reference StructuredActivityNode::structuredNodeOutput 
 	return uml::StructuredActivityNodeImpl::getStructuredNodeOutput();
@@ -651,7 +651,7 @@ void ConditionalNodeImpl::saveContent(std::shared_ptr<persistence::interfaces::X
 	}
 }
 
-std::shared_ptr<ecore::EClass> ConditionalNodeImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& ConditionalNodeImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getConditionalNode_Class();
 }
@@ -691,7 +691,7 @@ bool ConditionalNodeImpl::internalEIsSet(int featureID) const
 	return StructuredActivityNodeImpl::internalEIsSet(featureID);
 }
 
-bool ConditionalNodeImpl::eSet(int featureID, Any newValue)
+bool ConditionalNodeImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -791,7 +791,7 @@ bool ConditionalNodeImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any ConditionalNodeImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any ConditionalNodeImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

@@ -157,7 +157,7 @@ std::shared_ptr<ecore::EObject> RemoveStructuralFeatureValueActionImpl::copy() c
 //*********************************
 // Operations
 //*********************************
-bool RemoveStructuralFeatureValueActionImpl::removeAt_and_value(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool RemoveStructuralFeatureValueActionImpl::removeAt_and_value(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -166,7 +166,7 @@ bool RemoveStructuralFeatureValueActionImpl::removeAt_and_value(Any diagnostics,
 // Attribute Getters & Setters
 //*********************************
 /* Getter & Setter for attribute isRemoveDuplicates */
-bool RemoveStructuralFeatureValueActionImpl::getIsRemoveDuplicates() const 
+bool RemoveStructuralFeatureValueActionImpl::getIsRemoveDuplicates() const
 {
 	return m_isRemoveDuplicates;
 }
@@ -180,11 +180,11 @@ void RemoveStructuralFeatureValueActionImpl::setIsRemoveDuplicates(bool _isRemov
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference removeAt */
-std::shared_ptr<uml::InputPin> RemoveStructuralFeatureValueActionImpl::getRemoveAt() const
+const std::shared_ptr<uml::InputPin>& RemoveStructuralFeatureValueActionImpl::getRemoveAt() const
 {
     return m_removeAt;
 }
-void RemoveStructuralFeatureValueActionImpl::setRemoveAt(std::shared_ptr<uml::InputPin> _removeAt)
+void RemoveStructuralFeatureValueActionImpl::setRemoveAt(const std::shared_ptr<uml::InputPin>& _removeAt)
 {
     m_removeAt = _removeAt;
 	
@@ -438,7 +438,7 @@ void RemoveStructuralFeatureValueActionImpl::saveContent(std::shared_ptr<persist
 	}
 }
 
-std::shared_ptr<ecore::EClass> RemoveStructuralFeatureValueActionImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& RemoveStructuralFeatureValueActionImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getRemoveStructuralFeatureValueAction_Class();
 }
@@ -470,7 +470,7 @@ bool RemoveStructuralFeatureValueActionImpl::internalEIsSet(int featureID) const
 	return WriteStructuralFeatureActionImpl::internalEIsSet(featureID);
 }
 
-bool RemoveStructuralFeatureValueActionImpl::eSet(int featureID, Any newValue)
+bool RemoveStructuralFeatureValueActionImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -497,7 +497,7 @@ bool RemoveStructuralFeatureValueActionImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any RemoveStructuralFeatureValueActionImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any RemoveStructuralFeatureValueActionImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

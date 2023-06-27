@@ -248,12 +248,12 @@ std::shared_ptr<Bag<uml::Interface> > PortImpl::basicRequired()
 	//end of body
 }
 
-bool PortImpl::default_value(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool PortImpl::default_value(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool PortImpl::encapsulated_owner(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool PortImpl::encapsulated_owner(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -276,7 +276,7 @@ std::shared_ptr<Bag<uml::Interface> > PortImpl::getRequireds()
 	//end of body
 }
 
-bool PortImpl::port_aggregation(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool PortImpl::port_aggregation(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -285,7 +285,7 @@ bool PortImpl::port_aggregation(Any diagnostics,std::shared_ptr<std::map < Any, 
 // Attribute Getters & Setters
 //*********************************
 /* Getter & Setter for attribute isBehavior */
-bool PortImpl::getIsBehavior() const 
+bool PortImpl::getIsBehavior() const
 {
 	return m_isBehavior;
 }
@@ -296,7 +296,7 @@ void PortImpl::setIsBehavior(bool _isBehavior)
 }
 
 /* Getter & Setter for attribute isConjugated */
-bool PortImpl::getIsConjugated() const 
+bool PortImpl::getIsConjugated() const
 {
 	return m_isConjugated;
 }
@@ -307,7 +307,7 @@ void PortImpl::setIsConjugated(bool _isConjugated)
 }
 
 /* Getter & Setter for attribute isService */
-bool PortImpl::getIsService() const 
+bool PortImpl::getIsService() const
 {
 	return m_isService;
 }
@@ -321,18 +321,18 @@ void PortImpl::setIsService(bool _isService)
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference protocol */
-std::shared_ptr<uml::ProtocolStateMachine> PortImpl::getProtocol() const
+const std::shared_ptr<uml::ProtocolStateMachine>& PortImpl::getProtocol() const
 {
     return m_protocol;
 }
-void PortImpl::setProtocol(std::shared_ptr<uml::ProtocolStateMachine> _protocol)
+void PortImpl::setProtocol(const std::shared_ptr<uml::ProtocolStateMachine>& _protocol)
 {
     m_protocol = _protocol;
 	
 }
 
 /* Getter & Setter for reference provided */
-std::shared_ptr<Bag<uml::Interface>> PortImpl::getProvided() const
+const std::shared_ptr<Bag<uml::Interface>>& PortImpl::getProvided() const
 {
 	if(m_provided == nullptr)
 	{
@@ -344,7 +344,7 @@ std::shared_ptr<Bag<uml::Interface>> PortImpl::getProvided() const
 }
 
 /* Getter & Setter for reference redefinedPort */
-std::shared_ptr<Subset<uml::Port, uml::Property /*Subset does not reference a union*/>> PortImpl::getRedefinedPort() const
+const std::shared_ptr<Subset<uml::Port, uml::Property /*Subset does not reference a union*/>>& PortImpl::getRedefinedPort() const
 {
 	if(m_redefinedPort == nullptr)
 	{
@@ -365,7 +365,7 @@ std::shared_ptr<Subset<uml::Port, uml::Property /*Subset does not reference a un
 }
 
 /* Getter & Setter for reference required */
-std::shared_ptr<Bag<uml::Interface>> PortImpl::getRequired() const
+const std::shared_ptr<Bag<uml::Interface>>& PortImpl::getRequired() const
 {
 	if(m_required == nullptr)
 	{
@@ -674,7 +674,7 @@ void PortImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler
 	}
 }
 
-std::shared_ptr<ecore::EClass> PortImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& PortImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getPort_Class();
 }
@@ -726,7 +726,7 @@ bool PortImpl::internalEIsSet(int featureID) const
 	return PropertyImpl::internalEIsSet(featureID);
 }
 
-bool PortImpl::eSet(int featureID, Any newValue)
+bool PortImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -804,7 +804,7 @@ bool PortImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any PortImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any PortImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

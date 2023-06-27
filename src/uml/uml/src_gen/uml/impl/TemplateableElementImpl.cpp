@@ -160,18 +160,18 @@ std::shared_ptr<Bag<uml::ParameterableElement> > TemplateableElementImpl::parame
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference ownedTemplateSignature */
-std::shared_ptr<uml::TemplateSignature> TemplateableElementImpl::getOwnedTemplateSignature() const
+const std::shared_ptr<uml::TemplateSignature>& TemplateableElementImpl::getOwnedTemplateSignature() const
 {
     return m_ownedTemplateSignature;
 }
-void TemplateableElementImpl::setOwnedTemplateSignature(std::shared_ptr<uml::TemplateSignature> _ownedTemplateSignature)
+void TemplateableElementImpl::setOwnedTemplateSignature(const std::shared_ptr<uml::TemplateSignature>& _ownedTemplateSignature)
 {
     m_ownedTemplateSignature = _ownedTemplateSignature;
 	
 }
 
 /* Getter & Setter for reference templateBinding */
-std::shared_ptr<Subset<uml::TemplateBinding, uml::Element>> TemplateableElementImpl::getTemplateBinding() const
+const std::shared_ptr<Subset<uml::TemplateBinding, uml::Element>>& TemplateableElementImpl::getTemplateBinding() const
 {
 	if(m_templateBinding == nullptr)
 	{
@@ -327,7 +327,7 @@ void TemplateableElementImpl::saveContent(std::shared_ptr<persistence::interface
 	}
 }
 
-std::shared_ptr<ecore::EClass> TemplateableElementImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& TemplateableElementImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getTemplateableElement_Class();
 }
@@ -359,7 +359,7 @@ bool TemplateableElementImpl::internalEIsSet(int featureID) const
 	return ElementImpl::internalEIsSet(featureID);
 }
 
-bool TemplateableElementImpl::eSet(int featureID, Any newValue)
+bool TemplateableElementImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -416,7 +416,7 @@ bool TemplateableElementImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any TemplateableElementImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any TemplateableElementImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

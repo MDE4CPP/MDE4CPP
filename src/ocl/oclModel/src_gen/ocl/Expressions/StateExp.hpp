@@ -96,8 +96,8 @@ namespace ocl::Expressions
 			//*********************************
 			// Reference Getters & Setters
 			//*********************************
-			virtual std::shared_ptr<uml::State> getReferredState() const = 0;
-			virtual void setReferredState(std::shared_ptr<uml::State>) = 0;
+			virtual const std::shared_ptr<uml::State>& getReferredState() const = 0;
+			virtual void setReferredState(const std::shared_ptr<uml::State>&) = 0;
 
 			//*********************************
 			// Union Reference Getters

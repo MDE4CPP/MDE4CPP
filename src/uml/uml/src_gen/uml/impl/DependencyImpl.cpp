@@ -203,7 +203,7 @@ std::shared_ptr<ecore::EObject> DependencyImpl::copy() const
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference client */
-std::shared_ptr<SubsetUnion<uml::NamedElement, uml::Element>> DependencyImpl::getClient() const
+const std::shared_ptr<SubsetUnion<uml::NamedElement, uml::Element>>& DependencyImpl::getClient() const
 {
 	if(m_client == nullptr)
 	{
@@ -224,7 +224,7 @@ std::shared_ptr<SubsetUnion<uml::NamedElement, uml::Element>> DependencyImpl::ge
 }
 
 /* Getter & Setter for reference supplier */
-std::shared_ptr<SubsetUnion<uml::NamedElement, uml::Element>> DependencyImpl::getSupplier() const
+const std::shared_ptr<SubsetUnion<uml::NamedElement, uml::Element>>& DependencyImpl::getSupplier() const
 {
 	if(m_supplier == nullptr)
 	{
@@ -485,7 +485,7 @@ void DependencyImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveH
 	}
 }
 
-std::shared_ptr<ecore::EClass> DependencyImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& DependencyImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getDependency_Class();
 }
@@ -531,7 +531,7 @@ bool DependencyImpl::internalEIsSet(int featureID) const
 	return result;
 }
 
-bool DependencyImpl::eSet(int featureID, Any newValue)
+bool DependencyImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -624,7 +624,7 @@ bool DependencyImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any DependencyImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any DependencyImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

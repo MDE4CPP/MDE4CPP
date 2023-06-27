@@ -84,10 +84,10 @@ namespace fUML::Semantics::Values
 			//*********************************
 			// Reference Getters & Setters
 			//*********************************
-			virtual std::shared_ptr<fUML::Semantics::Loci::Locus> getLocus() const = 0;
-			virtual void setLocus(std::shared_ptr<fUML::Semantics::Loci::Locus>) = 0;
-			virtual std::shared_ptr<uml::ValueSpecification> getSpecification() const = 0;
-			virtual void setSpecification(std::shared_ptr<uml::ValueSpecification>) = 0;
+			virtual const std::shared_ptr<fUML::Semantics::Loci::Locus>& getLocus() const = 0;
+			virtual void setLocus(const std::shared_ptr<fUML::Semantics::Loci::Locus>&) = 0;
+			virtual const std::shared_ptr<uml::ValueSpecification>& getSpecification() const = 0;
+			virtual void setSpecification(const std::shared_ptr<uml::ValueSpecification>&) = 0;
 
 			//*********************************
 			// Union Reference Getters

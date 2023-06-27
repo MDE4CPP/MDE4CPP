@@ -87,9 +87,9 @@ namespace fUML::Semantics::Actions
 			//*********************************
 			// Operations
 			//*********************************
-			virtual bool endMatchesEndData(std::shared_ptr<fUML::Semantics::StructuredClassifiers::Link> link,std::shared_ptr<uml::LinkEndData> endData) = 0;
+			virtual bool endMatchesEndData(const std::shared_ptr<fUML::Semantics::StructuredClassifiers::Link>& link, const std::shared_ptr<uml::LinkEndData>& endData) = 0;
 			virtual std::shared_ptr<uml::Association> getAssociation() = 0;
-			virtual bool linkMatchesEndData(std::shared_ptr<fUML::Semantics::StructuredClassifiers::Link> link,std::shared_ptr<Bag<uml::LinkEndData>> endDataList) = 0;
+			virtual bool linkMatchesEndData(const std::shared_ptr<fUML::Semantics::StructuredClassifiers::Link>& link, const std::shared_ptr<Bag<uml::LinkEndData>>& endDataList) = 0;
 
 			//*********************************
 			// Attribute Getters & Setters

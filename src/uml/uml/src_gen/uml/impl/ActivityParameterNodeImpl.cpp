@@ -151,27 +151,27 @@ std::shared_ptr<ecore::EObject> ActivityParameterNodeImpl::copy() const
 //*********************************
 // Operations
 //*********************************
-bool ActivityParameterNodeImpl::has_parameters(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool ActivityParameterNodeImpl::has_parameters(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool ActivityParameterNodeImpl::no_edges(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool ActivityParameterNodeImpl::no_edges(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool ActivityParameterNodeImpl::no_incoming_edges(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool ActivityParameterNodeImpl::no_incoming_edges(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool ActivityParameterNodeImpl::no_outgoing_edges(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool ActivityParameterNodeImpl::no_outgoing_edges(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool ActivityParameterNodeImpl::same_type(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool ActivityParameterNodeImpl::same_type(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -184,11 +184,11 @@ bool ActivityParameterNodeImpl::same_type(Any diagnostics,std::shared_ptr<std::m
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference parameter */
-std::shared_ptr<uml::Parameter> ActivityParameterNodeImpl::getParameter() const
+const std::shared_ptr<uml::Parameter>& ActivityParameterNodeImpl::getParameter() const
 {
     return m_parameter;
 }
-void ActivityParameterNodeImpl::setParameter(std::shared_ptr<uml::Parameter> _parameter)
+void ActivityParameterNodeImpl::setParameter(const std::shared_ptr<uml::Parameter>& _parameter)
 {
     m_parameter = _parameter;
 	
@@ -378,7 +378,7 @@ void ActivityParameterNodeImpl::saveContent(std::shared_ptr<persistence::interfa
 	}
 }
 
-std::shared_ptr<ecore::EClass> ActivityParameterNodeImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& ActivityParameterNodeImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getActivityParameterNode_Class();
 }
@@ -406,7 +406,7 @@ bool ActivityParameterNodeImpl::internalEIsSet(int featureID) const
 	return ObjectNodeImpl::internalEIsSet(featureID);
 }
 
-bool ActivityParameterNodeImpl::eSet(int featureID, Any newValue)
+bool ActivityParameterNodeImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -426,7 +426,7 @@ bool ActivityParameterNodeImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any ActivityParameterNodeImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any ActivityParameterNodeImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

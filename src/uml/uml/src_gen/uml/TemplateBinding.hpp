@@ -88,13 +88,13 @@ namespace uml
 			signature.parameter->forAll(p | parameterSubstitution->select(b | b.formal = p)->size() <= 1)
 			*/
 			 
-			virtual bool one_parameter_substitution(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
+			virtual bool one_parameter_substitution(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context) = 0;
 			/*!
 			Each parameterSubstitution must refer to a formal TemplateParameter of the target TemplateSignature.
 			parameterSubstitution->forAll(b | signature.parameter->includes(b.formal))
 			*/
 			 
-			virtual bool parameter_substitution_formal(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
+			virtual bool parameter_substitution_formal(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context) = 0;
 
 			//*********************************
 			// Attribute Getters & Setters
@@ -120,19 +120,19 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::shared_ptr<Subset<uml::TemplateParameterSubstitution, uml::Element>> getParameterSubstitution() const = 0;
+			virtual const std::shared_ptr<Subset<uml::TemplateParameterSubstitution, uml::Element>>& getParameterSubstitution() const = 0;
 			/*!
 			The TemplateSignature for the template that is the target of this TemplateBinding.
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::TemplateSignature> getSignature() const = 0;
+			virtual const std::shared_ptr<uml::TemplateSignature>& getSignature() const = 0;
 			/*!
 			The TemplateSignature for the template that is the target of this TemplateBinding.
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual void setSignature(std::shared_ptr<uml::TemplateSignature>) = 0;
+			virtual void setSignature(const std::shared_ptr<uml::TemplateSignature>&) = 0;
 
 			//*********************************
 			// Union Reference Getters

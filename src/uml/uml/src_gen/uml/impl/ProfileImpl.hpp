@@ -55,7 +55,7 @@ namespace uml
 			Creates and returns an instance of (the Ecore representation of) the specified classifier defined in this profile.
 			*/
 			 
-			virtual std::shared_ptr<ecore::EObject> create(std::shared_ptr<uml::Classifier> classifier) ;
+			virtual std::shared_ptr<ecore::EObject> create(const std::shared_ptr<uml::Classifier>& classifier) ;
 			/*!
 			Defines this profile by (re)creating Ecore representations of its current contents.
 			*/
@@ -65,7 +65,7 @@ namespace uml
 			Defines this profile by (re)creating Ecore representations of its current contents, using the specified options, diagnostics, and context.
 			*/
 			 
-			virtual std::shared_ptr<ecore::EPackage> define(std::shared_ptr<std::unordered_map < std::string, std::string>> options,Any diagnostics,std::shared_ptr<std::unordered_map < Any, Any>> context) ;
+			virtual std::shared_ptr<ecore::EPackage> define(std::shared_ptr<std::unordered_map < std::string, std::string>> options, const Any& diagnostics, std::shared_ptr<std::unordered_map < Any, Any>> context) ;
 			/*!
 			Retrieves the current definition (Ecore representation) of this profile.
 			*/
@@ -75,7 +75,7 @@ namespace uml
 			Retrieves the current definition (Ecore representation) of the specified named element in this profile.
 			*/
 			 
-			virtual std::shared_ptr<ecore::ENamedElement> getDefinition(std::shared_ptr<uml::NamedElement> namedElement) ;
+			virtual std::shared_ptr<ecore::ENamedElement> getDefinition(const std::shared_ptr<uml::NamedElement>& namedElement) ;
 			/*!
 			Retrieves the extensions owned by this profile, excluding non-required extensions if indicated.
 			*/
@@ -107,14 +107,14 @@ namespace uml
 			       intersection(metaclassReference.importedElement->select(oclIsKindOf(Classifier))->collect(oclAsType(Classifier)))->isEmpty()
 			*/
 			 
-			virtual bool metaclass_reference_not_specialized(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
+			virtual bool metaclass_reference_not_specialized(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context) ;
 			/*!
 			All elements imported either as metaclassReferences or through metamodelReferences are members of the same base reference metamodel.
 			metamodelReference.importedPackage.elementImport.importedElement.allOwningPackages()->
 			  union(metaclassReference.importedElement.allOwningPackages() )->notEmpty()
 			*/
 			 
-			virtual bool references_same_metamodel(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
+			virtual bool references_same_metamodel(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context) ;
 			
 			//*********************************
 			// Attribute Getters & Setters
@@ -128,13 +128,13 @@ namespace uml
 			<p>From package UML::Packages.</p>
 			*/
 			
-			virtual std::shared_ptr<Subset<uml::ElementImport, uml::ElementImport /*Subset does not reference a union*/>> getMetaclassReference() const ;
+			virtual const std::shared_ptr<Subset<uml::ElementImport, uml::ElementImport /*Subset does not reference a union*/>>& getMetaclassReference() const ;
 			/*!
 			References a package containing (directly or indirectly) metaclasses that may be extended.
 			<p>From package UML::Packages.</p>
 			*/
 			
-			virtual std::shared_ptr<Subset<uml::PackageImport, uml::PackageImport /*Subset does not reference a union*/>> getMetamodelReference() const ;
+			virtual const std::shared_ptr<Subset<uml::PackageImport, uml::PackageImport /*Subset does not reference a union*/>>& getMetamodelReference() const ;
 			
 			//*********************************
 			// Union Reference Getters
@@ -187,19 +187,19 @@ namespace uml
 			virtual void saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const;
 
 		protected:
-			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
+			virtual const std::shared_ptr<ecore::EClass>& eStaticClass() const;
 
 			//*********************************
 			// EStructuralFeature Get/Set/IsSet
 			//*********************************
 			virtual Any eGet(int featureID, bool resolve, bool coreType) const ;
-			virtual bool eSet(int featureID, Any newValue) ;
+			virtual bool eSet(int featureID, const Any& newValue) ;
 			virtual bool internalEIsSet(int featureID) const ;
 
 			//*********************************
 			// EOperation Invoke
 			//*********************************
-			virtual Any eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments) ;
+			virtual Any eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments) ;
 
 		private:
 			std::weak_ptr<uml::Profile> m_thisProfilePtr;

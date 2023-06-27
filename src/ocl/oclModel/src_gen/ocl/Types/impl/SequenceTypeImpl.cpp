@@ -34,8 +34,8 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "ocl/Values/ValuesFactory.hpp"
 #include "ecore/ecoreFactory.hpp"
+#include "ocl/Values/ValuesFactory.hpp"
 #include "ocl/Types/CollectionType.hpp"
 #include "ocl/Values/CollectionValue.hpp"
 #include "ecore/EAnnotation.hpp"
@@ -207,7 +207,7 @@ void SequenceTypeImpl::saveContent(std::shared_ptr<persistence::interfaces::XSav
 	}
 }
 
-std::shared_ptr<ecore::EClass> SequenceTypeImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& SequenceTypeImpl::eStaticClass() const
 {
 	return ocl::Types::TypesPackage::eInstance()->getSequenceType_Class();
 }
@@ -231,7 +231,7 @@ bool SequenceTypeImpl::internalEIsSet(int featureID) const
 	return CollectionTypeImpl::internalEIsSet(featureID);
 }
 
-bool SequenceTypeImpl::eSet(int featureID, Any newValue)
+bool SequenceTypeImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -243,7 +243,7 @@ bool SequenceTypeImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any SequenceTypeImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any SequenceTypeImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

@@ -152,7 +152,7 @@ std::shared_ptr<ecore::EObject> ExpansionNodeImpl::copy() const
 //*********************************
 // Operations
 //*********************************
-bool ExpansionNodeImpl::region_as_input_or_output(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool ExpansionNodeImpl::region_as_input_or_output(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -165,22 +165,22 @@ bool ExpansionNodeImpl::region_as_input_or_output(Any diagnostics,std::shared_pt
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference regionAsInput */
-std::shared_ptr<uml::ExpansionRegion> ExpansionNodeImpl::getRegionAsInput() const
+const std::shared_ptr<uml::ExpansionRegion>& ExpansionNodeImpl::getRegionAsInput() const
 {
     return m_regionAsInput;
 }
-void ExpansionNodeImpl::setRegionAsInput(std::shared_ptr<uml::ExpansionRegion> _regionAsInput)
+void ExpansionNodeImpl::setRegionAsInput(const std::shared_ptr<uml::ExpansionRegion>& _regionAsInput)
 {
     m_regionAsInput = _regionAsInput;
 	
 }
 
 /* Getter & Setter for reference regionAsOutput */
-std::shared_ptr<uml::ExpansionRegion> ExpansionNodeImpl::getRegionAsOutput() const
+const std::shared_ptr<uml::ExpansionRegion>& ExpansionNodeImpl::getRegionAsOutput() const
 {
     return m_regionAsOutput;
 }
-void ExpansionNodeImpl::setRegionAsOutput(std::shared_ptr<uml::ExpansionRegion> _regionAsOutput)
+void ExpansionNodeImpl::setRegionAsOutput(const std::shared_ptr<uml::ExpansionRegion>& _regionAsOutput)
 {
     m_regionAsOutput = _regionAsOutput;
 	
@@ -390,7 +390,7 @@ void ExpansionNodeImpl::saveContent(std::shared_ptr<persistence::interfaces::XSa
 	}
 }
 
-std::shared_ptr<ecore::EClass> ExpansionNodeImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& ExpansionNodeImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getExpansionNode_Class();
 }
@@ -422,7 +422,7 @@ bool ExpansionNodeImpl::internalEIsSet(int featureID) const
 	return ObjectNodeImpl::internalEIsSet(featureID);
 }
 
-bool ExpansionNodeImpl::eSet(int featureID, Any newValue)
+bool ExpansionNodeImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -450,7 +450,7 @@ bool ExpansionNodeImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any ExpansionNodeImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any ExpansionNodeImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

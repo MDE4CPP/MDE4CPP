@@ -227,12 +227,12 @@ std::shared_ptr<ecore::EObject> ValuePinImpl::copy() const
 //*********************************
 // Operations
 //*********************************
-bool ValuePinImpl::compatible_type(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool ValuePinImpl::compatible_type(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool ValuePinImpl::no_incoming_edges(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool ValuePinImpl::no_incoming_edges(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -245,11 +245,11 @@ bool ValuePinImpl::no_incoming_edges(Any diagnostics,std::shared_ptr<std::map < 
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference value */
-std::shared_ptr<uml::ValueSpecification> ValuePinImpl::getValue() const
+const std::shared_ptr<uml::ValueSpecification>& ValuePinImpl::getValue() const
 {
     return m_value;
 }
-void ValuePinImpl::setValue(std::shared_ptr<uml::ValueSpecification> _value)
+void ValuePinImpl::setValue(const std::shared_ptr<uml::ValueSpecification>& _value)
 {
     m_value = _value;
 	
@@ -478,7 +478,7 @@ void ValuePinImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHan
 	}
 }
 
-std::shared_ptr<ecore::EClass> ValuePinImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& ValuePinImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getValuePin_Class();
 }
@@ -506,7 +506,7 @@ bool ValuePinImpl::internalEIsSet(int featureID) const
 	return InputPinImpl::internalEIsSet(featureID);
 }
 
-bool ValuePinImpl::eSet(int featureID, Any newValue)
+bool ValuePinImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -526,7 +526,7 @@ bool ValuePinImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any ValuePinImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any ValuePinImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

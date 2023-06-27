@@ -48,8 +48,8 @@
 #include "fUML/Semantics/Values/Value.hpp"
 #include "uml/ValueSpecification.hpp"
 //Factories and Package includes
-#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/SemanticsPackage.hpp"
+#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/SimpleClassifiers/SimpleClassifiersPackage.hpp"
 #include "fUML/Semantics/Values/ValuesPackage.hpp"
 #include "uml/umlPackage.hpp"
@@ -130,7 +130,7 @@ return newValue;
 	//end of body
 }
 
-bool UnlimitedNaturalValueImpl::equals(std::shared_ptr<fUML::Semantics::Values::Value> otherValue)
+bool UnlimitedNaturalValueImpl::equals(const std::shared_ptr<fUML::Semantics::Values::Value>& otherValue)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -188,7 +188,7 @@ std::string UnlimitedNaturalValueImpl::toString()
 // Attribute Getters & Setters
 //*********************************
 /* Getter & Setter for attribute value */
-int UnlimitedNaturalValueImpl::getValue() const 
+int UnlimitedNaturalValueImpl::getValue() const
 {
 	return m_value;
 }
@@ -302,7 +302,7 @@ void UnlimitedNaturalValueImpl::saveContent(std::shared_ptr<persistence::interfa
 	}
 }
 
-std::shared_ptr<ecore::EClass> UnlimitedNaturalValueImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& UnlimitedNaturalValueImpl::eStaticClass() const
 {
 	return fUML::Semantics::SimpleClassifiers::SimpleClassifiersPackage::eInstance()->getUnlimitedNaturalValue_Class();
 }
@@ -330,7 +330,7 @@ bool UnlimitedNaturalValueImpl::internalEIsSet(int featureID) const
 	return PrimitiveValueImpl::internalEIsSet(featureID);
 }
 
-bool UnlimitedNaturalValueImpl::eSet(int featureID, Any newValue)
+bool UnlimitedNaturalValueImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -349,7 +349,7 @@ bool UnlimitedNaturalValueImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any UnlimitedNaturalValueImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any UnlimitedNaturalValueImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

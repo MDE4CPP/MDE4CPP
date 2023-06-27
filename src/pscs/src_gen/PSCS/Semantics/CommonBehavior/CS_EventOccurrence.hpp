@@ -36,14 +36,14 @@ namespace fUML::Semantics::CommonBehavior
 {
 	class ParameterValue;
 }
+namespace fUML::Semantics::StructuredClassifiers 
+{
+	class Reference;
+}
 namespace PSCS::Semantics::StructuredClassifiers 
 {
 	class CS_InteractionPoint;
 	class CS_Reference;
-}
-namespace fUML::Semantics::StructuredClassifiers 
-{
-	class Reference;
 }
 namespace uml 
 {
@@ -83,9 +83,9 @@ namespace PSCS::Semantics::CommonBehavior
 			//*********************************
 			virtual void doSend() = 0;
 			virtual std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue> > getParameterValues() = 0;
-			virtual bool match(std::shared_ptr<uml::Trigger> trigger) = 0;
-			virtual void sendInTo(std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Reference> target,std::shared_ptr<uml::Port> port) = 0;
-			virtual void sendOutTo(std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Reference> target,std::shared_ptr<uml::Port> port) = 0;
+			virtual bool match(const std::shared_ptr<uml::Trigger>& trigger) = 0;
+			virtual void sendInTo(const std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Reference>& target, const std::shared_ptr<uml::Port>& port) = 0;
+			virtual void sendOutTo(const std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Reference>& target, const std::shared_ptr<uml::Port>& port) = 0;
 
 			//*********************************
 			// Attribute Getters & Setters
@@ -96,12 +96,12 @@ namespace PSCS::Semantics::CommonBehavior
 			//*********************************
 			// Reference Getters & Setters
 			//*********************************
-			virtual std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_InteractionPoint> getInteractionPoint() const = 0;
-			virtual void setInteractionPoint(std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_InteractionPoint>) = 0;
-			virtual std::shared_ptr<uml::Port> getOnPort() const = 0;
-			virtual void setOnPort(std::shared_ptr<uml::Port>) = 0;
-			virtual std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccurrence> getWrappedEventOccurrence() const = 0;
-			virtual void setWrappedEventOccurrence(std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccurrence>) = 0;
+			virtual const std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_InteractionPoint>& getInteractionPoint() const = 0;
+			virtual void setInteractionPoint(const std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_InteractionPoint>&) = 0;
+			virtual const std::shared_ptr<uml::Port>& getOnPort() const = 0;
+			virtual void setOnPort(const std::shared_ptr<uml::Port>&) = 0;
+			virtual const std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccurrence>& getWrappedEventOccurrence() const = 0;
+			virtual void setWrappedEventOccurrence(const std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccurrence>&) = 0;
 
 			//*********************************
 			// Union Reference Getters

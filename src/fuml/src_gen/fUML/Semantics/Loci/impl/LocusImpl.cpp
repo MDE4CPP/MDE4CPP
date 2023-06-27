@@ -56,8 +56,8 @@
 #include "fUML/Semantics/StructuredClassifiers/ExtensionalValue.hpp"
 #include "fUML/Semantics/StructuredClassifiers/Object.hpp"
 //Factories and Package includes
-#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/SemanticsPackage.hpp"
+#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/Loci/LociPackage.hpp"
 #include "fUML/Semantics/StructuredClassifiers/StructuredClassifiersPackage.hpp"
 #include "uml/umlPackage.hpp"
@@ -156,7 +156,7 @@ std::shared_ptr<ecore::EObject> LocusImpl::copy() const
 //*********************************
 // Operations
 //*********************************
-void LocusImpl::add(std::shared_ptr<fUML::Semantics::StructuredClassifiers::ExtensionalValue> value)
+void LocusImpl::add(const std::shared_ptr<fUML::Semantics::StructuredClassifiers::ExtensionalValue>& value)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -165,7 +165,7 @@ void LocusImpl::add(std::shared_ptr<fUML::Semantics::StructuredClassifiers::Exte
 	//end of body
 }
 
-void LocusImpl::assignExecutor(std::shared_ptr<fUML::Semantics::Loci::Executor> executor)
+void LocusImpl::assignExecutor(const std::shared_ptr<fUML::Semantics::Loci::Executor>& executor)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -174,7 +174,7 @@ void LocusImpl::assignExecutor(std::shared_ptr<fUML::Semantics::Loci::Executor> 
 	//end of body
 }
 
-void LocusImpl::assignFactory(std::shared_ptr<fUML::Semantics::Loci::ExecutionFactory> factory)
+void LocusImpl::assignFactory(const std::shared_ptr<fUML::Semantics::Loci::ExecutionFactory>& factory)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -183,7 +183,7 @@ void LocusImpl::assignFactory(std::shared_ptr<fUML::Semantics::Loci::ExecutionFa
 	//end of body
 }
 
-bool LocusImpl::conforms(std::shared_ptr<uml::Classifier> type,std::shared_ptr<uml::Classifier> classifier)
+bool LocusImpl::conforms(const std::shared_ptr<uml::Classifier>& type, const std::shared_ptr<uml::Classifier>& classifier)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -205,7 +205,7 @@ bool LocusImpl::conforms(std::shared_ptr<uml::Classifier> type,std::shared_ptr<u
 	//end of body
 }
 
-std::shared_ptr<fUML::Semantics::StructuredClassifiers::Object> LocusImpl::instantiate(std::shared_ptr<uml::Class> type)
+std::shared_ptr<fUML::Semantics::StructuredClassifiers::Object> LocusImpl::instantiate(const std::shared_ptr<uml::Class>& type)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -228,7 +228,7 @@ std::shared_ptr<fUML::Semantics::StructuredClassifiers::Object> LocusImpl::insta
 	//end of body
 }
 
-void LocusImpl::remove(std::shared_ptr<fUML::Semantics::StructuredClassifiers::ExtensionalValue> value)
+void LocusImpl::remove(const std::shared_ptr<fUML::Semantics::StructuredClassifiers::ExtensionalValue>& value)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -238,7 +238,7 @@ void LocusImpl::remove(std::shared_ptr<fUML::Semantics::StructuredClassifiers::E
 	//end of body
 }
 
-std::shared_ptr<Bag<fUML::Semantics::StructuredClassifiers::ExtensionalValue> > LocusImpl::retrieveExtent(std::shared_ptr<uml::Classifier> classifier)
+std::shared_ptr<Bag<fUML::Semantics::StructuredClassifiers::ExtensionalValue> > LocusImpl::retrieveExtent(const std::shared_ptr<uml::Classifier>& classifier)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -275,18 +275,18 @@ std::shared_ptr<Bag<fUML::Semantics::StructuredClassifiers::ExtensionalValue> > 
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference executor */
-std::shared_ptr<fUML::Semantics::Loci::Executor> LocusImpl::getExecutor() const
+const std::shared_ptr<fUML::Semantics::Loci::Executor>& LocusImpl::getExecutor() const
 {
     return m_executor;
 }
-void LocusImpl::setExecutor(std::shared_ptr<fUML::Semantics::Loci::Executor> _executor)
+void LocusImpl::setExecutor(const std::shared_ptr<fUML::Semantics::Loci::Executor>& _executor)
 {
     m_executor = _executor;
 	
 }
 
 /* Getter & Setter for reference extensionalValues */
-std::shared_ptr<Bag<fUML::Semantics::StructuredClassifiers::ExtensionalValue>> LocusImpl::getExtensionalValues() const
+const std::shared_ptr<Bag<fUML::Semantics::StructuredClassifiers::ExtensionalValue>>& LocusImpl::getExtensionalValues() const
 {
 	if(m_extensionalValues == nullptr)
 	{
@@ -298,11 +298,11 @@ std::shared_ptr<Bag<fUML::Semantics::StructuredClassifiers::ExtensionalValue>> L
 }
 
 /* Getter & Setter for reference factory */
-std::shared_ptr<fUML::Semantics::Loci::ExecutionFactory> LocusImpl::getFactory() const
+const std::shared_ptr<fUML::Semantics::Loci::ExecutionFactory>& LocusImpl::getFactory() const
 {
     return m_factory;
 }
-void LocusImpl::setFactory(std::shared_ptr<fUML::Semantics::Loci::ExecutionFactory> _factory)
+void LocusImpl::setFactory(const std::shared_ptr<fUML::Semantics::Loci::ExecutionFactory>& _factory)
 {
     m_factory = _factory;
 	
@@ -437,7 +437,7 @@ void LocusImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandle
 	}
 }
 
-std::shared_ptr<ecore::EClass> LocusImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& LocusImpl::eStaticClass() const
 {
 	return fUML::Semantics::Loci::LociPackage::eInstance()->getLocus_Class();
 }
@@ -473,7 +473,7 @@ bool LocusImpl::internalEIsSet(int featureID) const
 	return ecore::EObjectImpl::internalEIsSet(featureID);
 }
 
-bool LocusImpl::eSet(int featureID, Any newValue)
+bool LocusImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -538,7 +538,7 @@ bool LocusImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any LocusImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any LocusImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

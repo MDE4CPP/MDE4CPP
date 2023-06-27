@@ -36,8 +36,8 @@
 #include <exception> // used in Persistence
 #include "ocl/Expressions/ExpressionsFactory.hpp"
 #include "ecore/ecoreFactory.hpp"
-#include "ocl/Evaluations/EvaluationsFactory.hpp"
 #include "uml/umlFactory.hpp"
+#include "ocl/Evaluations/EvaluationsFactory.hpp"
 #include "ocl/Expressions/CallExp.hpp"
 #include "uml/CallOperationAction.hpp"
 #include "ocl/Expressions/CollectionRange.hpp"
@@ -218,7 +218,7 @@ std::shared_ptr<ecore::EObject> MessageExpImpl::copy() const
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference argument */
-std::shared_ptr<Bag<ocl::Expressions::OclExpression>> MessageExpImpl::getArgument() const
+const std::shared_ptr<Bag<ocl::Expressions::OclExpression>>& MessageExpImpl::getArgument() const
 {
 	if(m_argument == nullptr)
 	{
@@ -230,33 +230,33 @@ std::shared_ptr<Bag<ocl::Expressions::OclExpression>> MessageExpImpl::getArgumen
 }
 
 /* Getter & Setter for reference calledOperation */
-std::shared_ptr<uml::CallOperationAction> MessageExpImpl::getCalledOperation() const
+const std::shared_ptr<uml::CallOperationAction>& MessageExpImpl::getCalledOperation() const
 {
     return m_calledOperation;
 }
-void MessageExpImpl::setCalledOperation(std::shared_ptr<uml::CallOperationAction> _calledOperation)
+void MessageExpImpl::setCalledOperation(const std::shared_ptr<uml::CallOperationAction>& _calledOperation)
 {
     m_calledOperation = _calledOperation;
 	
 }
 
 /* Getter & Setter for reference sentSignal */
-std::shared_ptr<uml::SendSignalAction> MessageExpImpl::getSentSignal() const
+const std::shared_ptr<uml::SendSignalAction>& MessageExpImpl::getSentSignal() const
 {
     return m_sentSignal;
 }
-void MessageExpImpl::setSentSignal(std::shared_ptr<uml::SendSignalAction> _sentSignal)
+void MessageExpImpl::setSentSignal(const std::shared_ptr<uml::SendSignalAction>& _sentSignal)
 {
     m_sentSignal = _sentSignal;
 	
 }
 
 /* Getter & Setter for reference target */
-std::shared_ptr<ocl::Expressions::OclExpression> MessageExpImpl::getTarget() const
+const std::shared_ptr<ocl::Expressions::OclExpression>& MessageExpImpl::getTarget() const
 {
     return m_target;
 }
-void MessageExpImpl::setTarget(std::shared_ptr<ocl::Expressions::OclExpression> _target)
+void MessageExpImpl::setTarget(const std::shared_ptr<ocl::Expressions::OclExpression>& _target)
 {
     m_target = _target;
 	
@@ -489,7 +489,7 @@ void MessageExpImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveH
 	}
 }
 
-std::shared_ptr<ecore::EClass> MessageExpImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& MessageExpImpl::eStaticClass() const
 {
 	return ocl::Expressions::ExpressionsPackage::eInstance()->getMessageExp_Class();
 }
@@ -529,7 +529,7 @@ bool MessageExpImpl::internalEIsSet(int featureID) const
 	return OclExpressionImpl::internalEIsSet(featureID);
 }
 
-bool MessageExpImpl::eSet(int featureID, Any newValue)
+bool MessageExpImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -602,7 +602,7 @@ bool MessageExpImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any MessageExpImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any MessageExpImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

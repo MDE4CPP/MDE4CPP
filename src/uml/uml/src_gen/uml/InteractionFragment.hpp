@@ -106,7 +106,7 @@ namespace uml
 			<p>From package UML::Interactions.</p>
 			*/
 			
-			virtual std::shared_ptr<Bag<uml::Lifeline>> getCovered() const = 0;
+			virtual const std::shared_ptr<Bag<uml::Lifeline>>& getCovered() const = 0;
 			/*!
 			The Interaction enclosing this InteractionFragment.
 			<p>From package UML::Interactions.</p>
@@ -136,7 +136,7 @@ namespace uml
 			<p>From package UML::Interactions.</p>
 			*/
 			
-			virtual std::shared_ptr<Subset<uml::GeneralOrdering, uml::Element>> getGeneralOrdering() const = 0;
+			virtual const std::shared_ptr<Subset<uml::GeneralOrdering, uml::Element>>& getGeneralOrdering() const = 0;
 
 			//*********************************
 			// Union Reference Getters

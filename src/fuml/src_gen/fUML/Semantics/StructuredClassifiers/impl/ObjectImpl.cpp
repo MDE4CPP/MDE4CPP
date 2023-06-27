@@ -60,8 +60,8 @@
 #include "fUML/Semantics/SimpleClassifiers/SignalInstance.hpp"
 #include "fUML/Semantics/Values/Value.hpp"
 //Factories and Package includes
-#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/SemanticsPackage.hpp"
+#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/CommonBehavior/CommonBehaviorPackage.hpp"
 #include "fUML/Semantics/Loci/LociPackage.hpp"
 #include "fUML/Semantics/SimpleClassifiers/SimpleClassifiersPackage.hpp"
@@ -160,7 +160,7 @@ return newObject;
 	//end of body
 }
 
-void ObjectImpl::_register(std::shared_ptr<fUML::Semantics::CommonBehavior::EventAccepter> accepter)
+void ObjectImpl::_register(const std::shared_ptr<fUML::Semantics::CommonBehavior::EventAccepter>& accepter)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -188,7 +188,7 @@ void ObjectImpl::destroy()
 	//end of body
 }
 
-std::shared_ptr<fUML::Semantics::CommonBehavior::Execution> ObjectImpl::dispatch(std::shared_ptr<uml::Operation> operation)
+std::shared_ptr<fUML::Semantics::CommonBehavior::Execution> ObjectImpl::dispatch(const std::shared_ptr<uml::Operation>& operation)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -206,7 +206,7 @@ return fUML::Semantics::StructuredClassifiers::StructuredClassifiersFactory::eIn
 	//end of body
 }
 
-void ObjectImpl::send(std::shared_ptr<fUML::Semantics::SimpleClassifiers::SignalInstance> signalInstance)
+void ObjectImpl::send(const std::shared_ptr<fUML::Semantics::SimpleClassifiers::SignalInstance>& signalInstance)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -220,7 +220,7 @@ void ObjectImpl::send(std::shared_ptr<fUML::Semantics::SimpleClassifiers::Signal
 	//end of body
 }
 
-void ObjectImpl::send(std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccurrence> eventOccurrence)
+void ObjectImpl::send(const std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccurrence>& eventOccurrence)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -254,7 +254,7 @@ std::shared_ptr<fUML::Semantics::CommonBehavior::ObjectActivation> TempObjectAct
 	//end of body
 }
 
-void ObjectImpl::startBehavior(std::shared_ptr<uml::Class> classifier,std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> inputs)
+void ObjectImpl::startBehavior(const std::shared_ptr<uml::Class>& classifier, const std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>>& inputs)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -268,7 +268,7 @@ void ObjectImpl::startBehavior(std::shared_ptr<uml::Class> classifier,std::share
 	//end of body
 }
 
-void ObjectImpl::unregister(std::shared_ptr<fUML::Semantics::CommonBehavior::EventAccepter> accepter)
+void ObjectImpl::unregister(const std::shared_ptr<fUML::Semantics::CommonBehavior::EventAccepter>& accepter)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -287,18 +287,18 @@ void ObjectImpl::unregister(std::shared_ptr<fUML::Semantics::CommonBehavior::Eve
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference objectActivation */
-std::shared_ptr<fUML::Semantics::CommonBehavior::ObjectActivation> ObjectImpl::getObjectActivation() const
+const std::shared_ptr<fUML::Semantics::CommonBehavior::ObjectActivation>& ObjectImpl::getObjectActivation() const
 {
     return m_objectActivation;
 }
-void ObjectImpl::setObjectActivation(std::shared_ptr<fUML::Semantics::CommonBehavior::ObjectActivation> _objectActivation)
+void ObjectImpl::setObjectActivation(const std::shared_ptr<fUML::Semantics::CommonBehavior::ObjectActivation>& _objectActivation)
 {
     m_objectActivation = _objectActivation;
 	
 }
 
 /* Getter & Setter for reference types */
-std::shared_ptr<Bag<uml::Classifier>> ObjectImpl::getTypes() const
+const std::shared_ptr<Bag<uml::Classifier>>& ObjectImpl::getTypes() const
 {
 	if(m_types == nullptr)
 	{
@@ -453,7 +453,7 @@ void ObjectImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandl
 	}
 }
 
-std::shared_ptr<ecore::EClass> ObjectImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& ObjectImpl::eStaticClass() const
 {
 	return fUML::Semantics::StructuredClassifiers::StructuredClassifiersPackage::eInstance()->getObject_Class();
 }
@@ -485,7 +485,7 @@ bool ObjectImpl::internalEIsSet(int featureID) const
 	return ExtensionalValueImpl::internalEIsSet(featureID);
 }
 
-bool ObjectImpl::eSet(int featureID, Any newValue)
+bool ObjectImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -542,7 +542,7 @@ bool ObjectImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any ObjectImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any ObjectImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

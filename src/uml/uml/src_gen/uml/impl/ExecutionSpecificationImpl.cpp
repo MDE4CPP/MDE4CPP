@@ -135,7 +135,7 @@ ExecutionSpecificationImpl& ExecutionSpecificationImpl::operator=(const Executio
 //*********************************
 // Operations
 //*********************************
-bool ExecutionSpecificationImpl::same_lifeline(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool ExecutionSpecificationImpl::same_lifeline(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -148,22 +148,22 @@ bool ExecutionSpecificationImpl::same_lifeline(Any diagnostics,std::shared_ptr<s
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference finish */
-std::shared_ptr<uml::OccurrenceSpecification> ExecutionSpecificationImpl::getFinish() const
+const std::shared_ptr<uml::OccurrenceSpecification>& ExecutionSpecificationImpl::getFinish() const
 {
     return m_finish;
 }
-void ExecutionSpecificationImpl::setFinish(std::shared_ptr<uml::OccurrenceSpecification> _finish)
+void ExecutionSpecificationImpl::setFinish(const std::shared_ptr<uml::OccurrenceSpecification>& _finish)
 {
     m_finish = _finish;
 	
 }
 
 /* Getter & Setter for reference start */
-std::shared_ptr<uml::OccurrenceSpecification> ExecutionSpecificationImpl::getStart() const
+const std::shared_ptr<uml::OccurrenceSpecification>& ExecutionSpecificationImpl::getStart() const
 {
     return m_start;
 }
-void ExecutionSpecificationImpl::setStart(std::shared_ptr<uml::OccurrenceSpecification> _start)
+void ExecutionSpecificationImpl::setStart(const std::shared_ptr<uml::OccurrenceSpecification>& _start)
 {
     m_start = _start;
 	
@@ -343,7 +343,7 @@ void ExecutionSpecificationImpl::saveContent(std::shared_ptr<persistence::interf
 	}
 }
 
-std::shared_ptr<ecore::EClass> ExecutionSpecificationImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& ExecutionSpecificationImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getExecutionSpecification_Class();
 }
@@ -375,7 +375,7 @@ bool ExecutionSpecificationImpl::internalEIsSet(int featureID) const
 	return InteractionFragmentImpl::internalEIsSet(featureID);
 }
 
-bool ExecutionSpecificationImpl::eSet(int featureID, Any newValue)
+bool ExecutionSpecificationImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -403,7 +403,7 @@ bool ExecutionSpecificationImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any ExecutionSpecificationImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any ExecutionSpecificationImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

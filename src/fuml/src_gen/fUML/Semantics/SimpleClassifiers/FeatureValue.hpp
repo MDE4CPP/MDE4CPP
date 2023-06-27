@@ -72,7 +72,7 @@ namespace fUML::Semantics::SimpleClassifiers
 			// Operations
 			//*********************************
 			virtual std::shared_ptr<fUML::Semantics::SimpleClassifiers::FeatureValue> _copy() = 0;
-			virtual bool hasEqualValues(std::shared_ptr<fUML::Semantics::SimpleClassifiers::FeatureValue> other) = 0;
+			virtual bool hasEqualValues(const std::shared_ptr<fUML::Semantics::SimpleClassifiers::FeatureValue>& other) = 0;
 
 			//*********************************
 			// Attribute Getters & Setters
@@ -83,9 +83,9 @@ namespace fUML::Semantics::SimpleClassifiers
 			//*********************************
 			// Reference Getters & Setters
 			//*********************************
-			virtual std::shared_ptr<uml::StructuralFeature> getFeature() const = 0;
-			virtual void setFeature(std::shared_ptr<uml::StructuralFeature>) = 0;
-			virtual std::shared_ptr<Bag<fUML::Semantics::Values::Value>> getValues() const = 0;
+			virtual const std::shared_ptr<uml::StructuralFeature>& getFeature() const = 0;
+			virtual void setFeature(const std::shared_ptr<uml::StructuralFeature>&) = 0;
+			virtual const std::shared_ptr<Bag<fUML::Semantics::Values::Value>>& getValues() const = 0;
 
 			//*********************************
 			// Union Reference Getters

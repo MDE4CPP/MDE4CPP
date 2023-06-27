@@ -62,7 +62,7 @@ namespace uml
 			Creates a property with the specified name, type, lower bound, and upper bound as an owned attribute of this structured classifier.
 			*/
 			 
-			virtual std::shared_ptr<uml::Property> createOwnedAttribute(std::string name,std::shared_ptr<uml::Type> type,int lower,int upper) ;
+			virtual std::shared_ptr<uml::Property> createOwnedAttribute(std::string name, const std::shared_ptr<uml::Type>& type, int lower, int upper) ;
 			/*!
 			Derivation for StructuredClassifier::/part
 			result = (ownedAttribute->select(isComposite)->asSet())
@@ -83,19 +83,19 @@ namespace uml
 			<p>From package UML::StructuredClassifiers.</p>
 			*/
 			
-			virtual std::shared_ptr<SubsetUnion<uml::Property, uml::ConnectableElement, uml::NamedElement, uml::Property>> getOwnedAttribute() const ;
+			virtual const std::shared_ptr<SubsetUnion<uml::Property, uml::ConnectableElement, uml::NamedElement, uml::Property>>& getOwnedAttribute() const ;
 			/*!
 			The connectors owned by the StructuredClassifier.
 			<p>From package UML::StructuredClassifiers.</p>
 			*/
 			
-			virtual std::shared_ptr<Subset<uml::Connector, uml::Feature, uml::NamedElement>> getOwnedConnector() const ;
+			virtual const std::shared_ptr<Subset<uml::Connector, uml::Feature, uml::NamedElement>>& getOwnedConnector() const ;
 			/*!
 			The Properties specifying instances that the StructuredClassifier owns by composition. This collection is derived, selecting those owned Properties where isComposite is true.
 			<p>From package UML::StructuredClassifiers.</p>
 			*/
 			
-			virtual std::shared_ptr<Bag<uml::Property>> getPart() const ;
+			virtual const std::shared_ptr<Bag<uml::Property>>& getPart() const ;
 			
 			
 			//*********************************
@@ -173,19 +173,19 @@ namespace uml
 			virtual void saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const;
 
 		protected:
-			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
+			virtual const std::shared_ptr<ecore::EClass>& eStaticClass() const;
 
 			//*********************************
 			// EStructuralFeature Get/Set/IsSet
 			//*********************************
 			virtual Any eGet(int featureID, bool resolve, bool coreType) const ;
-			virtual bool eSet(int featureID, Any newValue) ;
+			virtual bool eSet(int featureID, const Any& newValue) ;
 			virtual bool internalEIsSet(int featureID) const ;
 
 			//*********************************
 			// EOperation Invoke
 			//*********************************
-			virtual Any eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments) ;
+			virtual Any eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments) ;
 
 		private:
 			std::weak_ptr<uml::StructuredClassifier> m_thisStructuredClassifierPtr;

@@ -37,14 +37,14 @@ namespace fUML::Semantics::CommonBehavior
 	class EventOccurrence;
 	class Execution;
 }
+namespace fUML::Semantics::StructuredClassifiers 
+{
+	class Object;
+}
 namespace PSCS::Semantics::StructuredClassifiers 
 {
 	class CS_InteractionPoint;
 	class CS_Object;
-}
-namespace fUML::Semantics::StructuredClassifiers 
-{
-	class Object;
 }
 namespace uml 
 {
@@ -84,14 +84,14 @@ namespace PSCS::Semantics::StructuredClassifiers
 			//*********************************
 			virtual std::shared_ptr<fUML::Semantics::Values::Value> _copy() = 0;
 			
-			virtual std::shared_ptr<fUML::Semantics::CommonBehavior::Execution> dispatchIn(std::shared_ptr<uml::Operation> operation,std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_InteractionPoint> interactionPoint) = 0;
-			virtual std::shared_ptr<fUML::Semantics::CommonBehavior::Execution> dispatchIn(std::shared_ptr<uml::Operation> operation,std::shared_ptr<uml::Port> onPort) = 0;
-			virtual std::shared_ptr<fUML::Semantics::CommonBehavior::Execution> dispatchOut(std::shared_ptr<uml::Operation> operation,std::shared_ptr<uml::Port> onPort) = 0;
-			virtual std::shared_ptr<fUML::Semantics::CommonBehavior::Execution> dispatchOut(std::shared_ptr<uml::Operation> operation,std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_InteractionPoint> interactionPoint) = 0;
-			virtual void sendIn(std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccurrence> eventOccurrence,std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_InteractionPoint> interactionPoint) = 0;
-			virtual void sendIn(std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccurrence> eventOccurrence,std::shared_ptr<uml::Port> onPort) = 0;
-			virtual void sendOut(std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccurrence> eventOccurrence,std::shared_ptr<uml::Port> onPort) = 0;
-			virtual void sendOut(std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccurrence> eventOccurrence,std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_InteractionPoint> interactionPoint) = 0;
+			virtual std::shared_ptr<fUML::Semantics::CommonBehavior::Execution> dispatchIn(const std::shared_ptr<uml::Operation>& operation, const std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_InteractionPoint>& interactionPoint) = 0;
+			virtual std::shared_ptr<fUML::Semantics::CommonBehavior::Execution> dispatchIn(const std::shared_ptr<uml::Operation>& operation, const std::shared_ptr<uml::Port>& onPort) = 0;
+			virtual std::shared_ptr<fUML::Semantics::CommonBehavior::Execution> dispatchOut(const std::shared_ptr<uml::Operation>& operation, const std::shared_ptr<uml::Port>& onPort) = 0;
+			virtual std::shared_ptr<fUML::Semantics::CommonBehavior::Execution> dispatchOut(const std::shared_ptr<uml::Operation>& operation, const std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_InteractionPoint>& interactionPoint) = 0;
+			virtual void sendIn(const std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccurrence>& eventOccurrence, const std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_InteractionPoint>& interactionPoint) = 0;
+			virtual void sendIn(const std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccurrence>& eventOccurrence, const std::shared_ptr<uml::Port>& onPort) = 0;
+			virtual void sendOut(const std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccurrence>& eventOccurrence, const std::shared_ptr<uml::Port>& onPort) = 0;
+			virtual void sendOut(const std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccurrence>& eventOccurrence, const std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_InteractionPoint>& interactionPoint) = 0;
 
 			//*********************************
 			// Attribute Getters & Setters
@@ -100,8 +100,8 @@ namespace PSCS::Semantics::StructuredClassifiers
 			//*********************************
 			// Reference Getters & Setters
 			//*********************************
-			virtual std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Object> getCompositeReferent() const = 0;
-			virtual void setCompositeReferent(std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Object>) = 0;
+			virtual const std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Object>& getCompositeReferent() const = 0;
+			virtual void setCompositeReferent(const std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Object>&) = 0;
 
 			//*********************************
 			// Union Reference Getters

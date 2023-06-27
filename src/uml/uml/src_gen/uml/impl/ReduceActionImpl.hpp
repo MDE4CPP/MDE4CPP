@@ -54,13 +54,13 @@ namespace uml
 			The type of the collection InputPin must be a collection.
 			*/
 			 
-			virtual bool input_type_is_collection(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
+			virtual bool input_type_is_collection(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context) ;
 			/*!
 			The type of the output of the reducer Behavior must conform to the type of the result OutputPin.
 			reducer.outputParameters().type->forAll(conformsTo(result.type))
 			*/
 			 
-			virtual bool output_types_are_compatible(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
+			virtual bool output_types_are_compatible(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context) ;
 			/*!
 			The reducer Behavior must have two input ownedParameters and one output ownedParameter, where the type of the output Parameter and the type of elements of the input collection conform to the types of the input Parameters.
 			let inputs: OrderedSet(Parameter) = reducer.inputParameters() in
@@ -72,7 +72,7 @@ namespace uml
 				collection.upperBound()>1 implies collection.type.conformsTo(t))
 			*/
 			 
-			virtual bool reducer_inputs_output(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
+			virtual bool reducer_inputs_output(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context) ;
 			
 			//*********************************
 			// Attribute Getters & Setters
@@ -98,37 +98,37 @@ namespace uml
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::InputPin> getCollection() const ;
+			virtual const std::shared_ptr<uml::InputPin>& getCollection() const ;
 			/*!
 			The InputPin that provides the collection to be reduced.
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual void setCollection(std::shared_ptr<uml::InputPin>) ;
+			virtual void setCollection(const std::shared_ptr<uml::InputPin>&) ;
 			/*!
 			A Behavior that is repreatedly applied to two elements of the input collection to produce a value that is of the same type as elements of the collection.
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::Behavior> getReducer() const ;
+			virtual const std::shared_ptr<uml::Behavior>& getReducer() const ;
 			/*!
 			A Behavior that is repreatedly applied to two elements of the input collection to produce a value that is of the same type as elements of the collection.
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual void setReducer(std::shared_ptr<uml::Behavior>) ;
+			virtual void setReducer(const std::shared_ptr<uml::Behavior>&) ;
 			/*!
 			The output pin on which the result value is placed.
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::OutputPin> getResult() const ;
+			virtual const std::shared_ptr<uml::OutputPin>& getResult() const ;
 			/*!
 			The output pin on which the result value is placed.
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual void setResult(std::shared_ptr<uml::OutputPin>) ;
+			virtual void setResult(const std::shared_ptr<uml::OutputPin>&) ;
 			
 			//*********************************
 			// Union Reference Getters
@@ -186,19 +186,19 @@ namespace uml
 			virtual void saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const;
 
 		protected:
-			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
+			virtual const std::shared_ptr<ecore::EClass>& eStaticClass() const;
 
 			//*********************************
 			// EStructuralFeature Get/Set/IsSet
 			//*********************************
 			virtual Any eGet(int featureID, bool resolve, bool coreType) const ;
-			virtual bool eSet(int featureID, Any newValue) ;
+			virtual bool eSet(int featureID, const Any& newValue) ;
 			virtual bool internalEIsSet(int featureID) const ;
 
 			//*********************************
 			// EOperation Invoke
 			//*********************************
-			virtual Any eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments) ;
+			virtual Any eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments) ;
 
 		private:
 			std::weak_ptr<uml::ReduceAction> m_thisReduceActionPtr;

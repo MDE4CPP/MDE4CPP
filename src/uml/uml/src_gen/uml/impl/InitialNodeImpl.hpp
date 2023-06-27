@@ -55,13 +55,13 @@ namespace uml
 			outgoing->forAll(oclIsKindOf(ControlFlow))
 			*/
 			 
-			virtual bool control_edges(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
+			virtual bool control_edges(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context) ;
 			/*!
 			An InitialNode has no incoming ActivityEdges.
 			incoming->isEmpty()
 			*/
 			 
-			virtual bool no_incoming_edges(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
+			virtual bool no_incoming_edges(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context) ;
 			
 			//*********************************
 			// Attribute Getters & Setters
@@ -115,19 +115,19 @@ namespace uml
 			virtual void saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const;
 
 		protected:
-			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
+			virtual const std::shared_ptr<ecore::EClass>& eStaticClass() const;
 
 			//*********************************
 			// EStructuralFeature Get/Set/IsSet
 			//*********************************
 			virtual Any eGet(int featureID, bool resolve, bool coreType) const ;
-			virtual bool eSet(int featureID, Any newValue) ;
+			virtual bool eSet(int featureID, const Any& newValue) ;
 			virtual bool internalEIsSet(int featureID) const ;
 
 			//*********************************
 			// EOperation Invoke
 			//*********************************
-			virtual Any eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments) ;
+			virtual Any eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments) ;
 
 		private:
 			std::weak_ptr<uml::InitialNode> m_thisInitialNodePtr;

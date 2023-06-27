@@ -63,13 +63,13 @@ namespace uml
 			<p>From package UML::Deployments.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::PackageableElement> getUtilizedElement() const ;
+			virtual const std::shared_ptr<uml::PackageableElement>& getUtilizedElement() const ;
 			/*!
 			The model element that is utilized in the manifestation in an Artifact.
 			<p>From package UML::Deployments.</p>
 			*/
 			
-			virtual void setUtilizedElement(std::shared_ptr<uml::PackageableElement>) ;
+			virtual void setUtilizedElement(const std::shared_ptr<uml::PackageableElement>&) ;
 			
 			//*********************************
 			// Union Reference Getters
@@ -128,19 +128,19 @@ namespace uml
 			virtual void saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const;
 
 		protected:
-			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
+			virtual const std::shared_ptr<ecore::EClass>& eStaticClass() const;
 
 			//*********************************
 			// EStructuralFeature Get/Set/IsSet
 			//*********************************
 			virtual Any eGet(int featureID, bool resolve, bool coreType) const ;
-			virtual bool eSet(int featureID, Any newValue) ;
+			virtual bool eSet(int featureID, const Any& newValue) ;
 			virtual bool internalEIsSet(int featureID) const ;
 
 			//*********************************
 			// EOperation Invoke
 			//*********************************
-			virtual Any eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments) ;
+			virtual Any eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments) ;
 
 		private:
 			std::weak_ptr<uml::Manifestation> m_thisManifestationPtr;

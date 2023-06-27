@@ -109,7 +109,7 @@ std::shared_ptr<ecore::EObject> FactoryImpl::copy() const
 //*********************************
 // Operations
 //*********************************
-std::shared_ptr<uml::Element> FactoryImpl::create(std::shared_ptr<uml::Class> metaClass)
+std::shared_ptr<uml::Element> FactoryImpl::create(const std::shared_ptr<uml::Class>& metaClass)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -212,7 +212,7 @@ void FactoryImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHand
 	}
 }
 
-std::shared_ptr<ecore::EClass> FactoryImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& FactoryImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getFactory_Class();
 }
@@ -236,7 +236,7 @@ bool FactoryImpl::internalEIsSet(int featureID) const
 	return ElementImpl::internalEIsSet(featureID);
 }
 
-bool FactoryImpl::eSet(int featureID, Any newValue)
+bool FactoryImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -248,7 +248,7 @@ bool FactoryImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any FactoryImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any FactoryImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

@@ -146,7 +146,7 @@ std::shared_ptr<ecore::EObject> TimeObservationImpl::copy() const
 // Attribute Getters & Setters
 //*********************************
 /* Getter & Setter for attribute firstEvent */
-bool TimeObservationImpl::getFirstEvent() const 
+bool TimeObservationImpl::getFirstEvent() const
 {
 	return m_firstEvent;
 }
@@ -160,11 +160,11 @@ void TimeObservationImpl::setFirstEvent(bool _firstEvent)
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference event */
-std::shared_ptr<uml::NamedElement> TimeObservationImpl::getEvent() const
+const std::shared_ptr<uml::NamedElement>& TimeObservationImpl::getEvent() const
 {
     return m_event;
 }
-void TimeObservationImpl::setEvent(std::shared_ptr<uml::NamedElement> _event)
+void TimeObservationImpl::setEvent(const std::shared_ptr<uml::NamedElement>& _event)
 {
     m_event = _event;
 	
@@ -343,7 +343,7 @@ void TimeObservationImpl::saveContent(std::shared_ptr<persistence::interfaces::X
 	}
 }
 
-std::shared_ptr<ecore::EClass> TimeObservationImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& TimeObservationImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getTimeObservation_Class();
 }
@@ -375,7 +375,7 @@ bool TimeObservationImpl::internalEIsSet(int featureID) const
 	return ObservationImpl::internalEIsSet(featureID);
 }
 
-bool TimeObservationImpl::eSet(int featureID, Any newValue)
+bool TimeObservationImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -402,7 +402,7 @@ bool TimeObservationImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any TimeObservationImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any TimeObservationImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

@@ -112,19 +112,19 @@ namespace uml
 			object.is(1,1)
 			*/
 			 
-			virtual bool multiplicity_of_object(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
+			virtual bool multiplicity_of_object(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context) = 0;
 			/*!
 			A StartObjectBehaviorAction may not specify onPort.
 			onPort->isEmpty()
 			*/
 			 
-			virtual bool no_onport(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
+			virtual bool no_onport(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context) = 0;
 			/*!
 			The type of the object InputPin must be either a Behavior or a BehavioredClassifier with a classifierBehavior.
 			self.behavior()<>null
 			*/
 			 
-			virtual bool type_of_object(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
+			virtual bool type_of_object(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context) = 0;
 
 			//*********************************
 			// Attribute Getters & Setters
@@ -138,13 +138,13 @@ namespace uml
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::InputPin> getObject() const = 0;
+			virtual const std::shared_ptr<uml::InputPin>& getObject() const = 0;
 			/*!
 			An InputPin that holds the object that is either a Behavior to be started or has a classifierBehavior to be started.
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual void setObject(std::shared_ptr<uml::InputPin>) = 0;
+			virtual void setObject(const std::shared_ptr<uml::InputPin>&) = 0;
 
 			//*********************************
 			// Union Reference Getters

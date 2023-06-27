@@ -57,13 +57,13 @@ namespace uml
 			self.endType()->excludes(self) and self.endType()->collect(et|et.oclAsType(Classifier).allParents())->flatten()->excludes(self)
 			*/
 			 
-			virtual bool cannot_be_defined(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
+			virtual bool cannot_be_defined(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context) ;
 			/*!
 			The owned attributes and owned ends of an AssociationClass are disjoint.
 			ownedAttribute->intersection(ownedEnd)->isEmpty()
 			*/
 			 
-			virtual bool disjoint_attributes_ends(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
+			virtual bool disjoint_attributes_ends(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context) ;
 			
 			//*********************************
 			// Attribute Getters & Setters
@@ -155,19 +155,19 @@ namespace uml
 			virtual void saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const;
 
 		protected:
-			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
+			virtual const std::shared_ptr<ecore::EClass>& eStaticClass() const;
 
 			//*********************************
 			// EStructuralFeature Get/Set/IsSet
 			//*********************************
 			virtual Any eGet(int featureID, bool resolve, bool coreType) const ;
-			virtual bool eSet(int featureID, Any newValue) ;
+			virtual bool eSet(int featureID, const Any& newValue) ;
 			virtual bool internalEIsSet(int featureID) const ;
 
 			//*********************************
 			// EOperation Invoke
 			//*********************************
-			virtual Any eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments) ;
+			virtual Any eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments) ;
 
 		private:
 			std::weak_ptr<uml::AssociationClass> m_thisAssociationClassPtr;

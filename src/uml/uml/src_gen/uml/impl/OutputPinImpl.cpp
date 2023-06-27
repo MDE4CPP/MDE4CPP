@@ -229,7 +229,7 @@ std::shared_ptr<ecore::EObject> OutputPinImpl::copy() const
 //*********************************
 // Operations
 //*********************************
-bool OutputPinImpl::incoming_edges_structured_only(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool OutputPinImpl::incoming_edges_structured_only(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -602,7 +602,7 @@ void OutputPinImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHa
 	}
 }
 
-std::shared_ptr<ecore::EClass> OutputPinImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& OutputPinImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getOutputPin_Class();
 }
@@ -682,7 +682,7 @@ bool OutputPinImpl::internalEIsSet(int featureID) const
 	return PinImpl::internalEIsSet(featureID);
 }
 
-bool OutputPinImpl::eSet(int featureID, Any newValue)
+bool OutputPinImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -750,7 +750,7 @@ bool OutputPinImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any OutputPinImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any OutputPinImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

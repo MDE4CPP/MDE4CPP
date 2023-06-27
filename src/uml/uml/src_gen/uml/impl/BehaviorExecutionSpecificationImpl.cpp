@@ -152,11 +152,11 @@ std::shared_ptr<ecore::EObject> BehaviorExecutionSpecificationImpl::copy() const
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference behavior */
-std::shared_ptr<uml::Behavior> BehaviorExecutionSpecificationImpl::getBehavior() const
+const std::shared_ptr<uml::Behavior>& BehaviorExecutionSpecificationImpl::getBehavior() const
 {
     return m_behavior;
 }
-void BehaviorExecutionSpecificationImpl::setBehavior(std::shared_ptr<uml::Behavior> _behavior)
+void BehaviorExecutionSpecificationImpl::setBehavior(const std::shared_ptr<uml::Behavior>& _behavior)
 {
     m_behavior = _behavior;
 	
@@ -318,7 +318,7 @@ void BehaviorExecutionSpecificationImpl::saveContent(std::shared_ptr<persistence
 	}
 }
 
-std::shared_ptr<ecore::EClass> BehaviorExecutionSpecificationImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& BehaviorExecutionSpecificationImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getBehaviorExecutionSpecification_Class();
 }
@@ -346,7 +346,7 @@ bool BehaviorExecutionSpecificationImpl::internalEIsSet(int featureID) const
 	return ExecutionSpecificationImpl::internalEIsSet(featureID);
 }
 
-bool BehaviorExecutionSpecificationImpl::eSet(int featureID, Any newValue)
+bool BehaviorExecutionSpecificationImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -366,7 +366,7 @@ bool BehaviorExecutionSpecificationImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any BehaviorExecutionSpecificationImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any BehaviorExecutionSpecificationImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

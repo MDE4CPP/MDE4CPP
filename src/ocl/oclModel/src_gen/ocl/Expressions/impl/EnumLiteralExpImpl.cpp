@@ -214,11 +214,11 @@ std::shared_ptr<ecore::EObject> EnumLiteralExpImpl::copy() const
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference referredEnumLiteral */
-std::shared_ptr<uml::EnumerationLiteral> EnumLiteralExpImpl::getReferredEnumLiteral() const
+const std::shared_ptr<uml::EnumerationLiteral>& EnumLiteralExpImpl::getReferredEnumLiteral() const
 {
     return m_referredEnumLiteral;
 }
-void EnumLiteralExpImpl::setReferredEnumLiteral(std::shared_ptr<uml::EnumerationLiteral> _referredEnumLiteral)
+void EnumLiteralExpImpl::setReferredEnumLiteral(const std::shared_ptr<uml::EnumerationLiteral>& _referredEnumLiteral)
 {
     m_referredEnumLiteral = _referredEnumLiteral;
 	
@@ -391,7 +391,7 @@ void EnumLiteralExpImpl::saveContent(std::shared_ptr<persistence::interfaces::XS
 	}
 }
 
-std::shared_ptr<ecore::EClass> EnumLiteralExpImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& EnumLiteralExpImpl::eStaticClass() const
 {
 	return ocl::Expressions::ExpressionsPackage::eInstance()->getEnumLiteralExp_Class();
 }
@@ -419,7 +419,7 @@ bool EnumLiteralExpImpl::internalEIsSet(int featureID) const
 	return LiteralExpImpl::internalEIsSet(featureID);
 }
 
-bool EnumLiteralExpImpl::eSet(int featureID, Any newValue)
+bool EnumLiteralExpImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -439,7 +439,7 @@ bool EnumLiteralExpImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any EnumLiteralExpImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any EnumLiteralExpImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

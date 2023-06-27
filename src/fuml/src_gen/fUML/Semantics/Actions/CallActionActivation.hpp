@@ -88,7 +88,7 @@ namespace fUML::Semantics::Actions
 			//*********************************
 			virtual void doAction() = 0;
 			virtual std::shared_ptr<fUML::Semantics::CommonBehavior::Execution> getCallExecution() = 0;
-			virtual void removeCallExecution(std::shared_ptr<fUML::Semantics::CommonBehavior::Execution> execution) = 0;
+			virtual void removeCallExecution(const std::shared_ptr<fUML::Semantics::CommonBehavior::Execution>& execution) = 0;
 			virtual void terminate() = 0;
 
 			//*********************************
@@ -98,13 +98,13 @@ namespace fUML::Semantics::Actions
 			//*********************************
 			// Reference Getters & Setters
 			//*********************************
-			virtual std::shared_ptr<uml::CallAction> getCallAction() const = 0;
-			virtual void setCallAction(std::shared_ptr<uml::CallAction>) = 0;
+			virtual const std::shared_ptr<uml::CallAction>& getCallAction() const = 0;
+			virtual void setCallAction(const std::shared_ptr<uml::CallAction>&) = 0;
 			/*Additional Setter for 'ActionActivation::action' redefined by reference 'callAction'*/
-			virtual void setAction(std::shared_ptr<uml::Action>) = 0;
+			virtual void setAction(const std::shared_ptr<uml::Action>&) = 0;
 			/*Additional Setter for 'ActivityNodeActivation::node' redefined by reference 'callAction'*/
-			virtual void setNode(std::shared_ptr<uml::ActivityNode>) = 0;
-			virtual std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::Execution>> getCallExecutions() const = 0;
+			virtual void setNode(const std::shared_ptr<uml::ActivityNode>&) = 0;
+			virtual const std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::Execution>>& getCallExecutions() const = 0;
 
 			//*********************************
 			// Union Reference Getters

@@ -290,7 +290,7 @@ void IntervalConstraintImpl::saveContent(std::shared_ptr<persistence::interfaces
 	}
 }
 
-std::shared_ptr<ecore::EClass> IntervalConstraintImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& IntervalConstraintImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getIntervalConstraint_Class();
 }
@@ -314,7 +314,7 @@ bool IntervalConstraintImpl::internalEIsSet(int featureID) const
 	return ConstraintImpl::internalEIsSet(featureID);
 }
 
-bool IntervalConstraintImpl::eSet(int featureID, Any newValue)
+bool IntervalConstraintImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -326,7 +326,7 @@ bool IntervalConstraintImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any IntervalConstraintImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any IntervalConstraintImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

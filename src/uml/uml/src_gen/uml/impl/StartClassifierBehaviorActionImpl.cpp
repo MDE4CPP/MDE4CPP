@@ -155,12 +155,12 @@ std::shared_ptr<ecore::EObject> StartClassifierBehaviorActionImpl::copy() const
 //*********************************
 // Operations
 //*********************************
-bool StartClassifierBehaviorActionImpl::multiplicity(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool StartClassifierBehaviorActionImpl::multiplicity(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool StartClassifierBehaviorActionImpl::type_has_classifier(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool StartClassifierBehaviorActionImpl::type_has_classifier(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -173,11 +173,11 @@ bool StartClassifierBehaviorActionImpl::type_has_classifier(Any diagnostics,std:
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference object */
-std::shared_ptr<uml::InputPin> StartClassifierBehaviorActionImpl::getObject() const
+const std::shared_ptr<uml::InputPin>& StartClassifierBehaviorActionImpl::getObject() const
 {
     return m_object;
 }
-void StartClassifierBehaviorActionImpl::setObject(std::shared_ptr<uml::InputPin> _object)
+void StartClassifierBehaviorActionImpl::setObject(const std::shared_ptr<uml::InputPin>& _object)
 {
     m_object = _object;
 	
@@ -381,7 +381,7 @@ void StartClassifierBehaviorActionImpl::saveContent(std::shared_ptr<persistence:
 	}
 }
 
-std::shared_ptr<ecore::EClass> StartClassifierBehaviorActionImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& StartClassifierBehaviorActionImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getStartClassifierBehaviorAction_Class();
 }
@@ -409,7 +409,7 @@ bool StartClassifierBehaviorActionImpl::internalEIsSet(int featureID) const
 	return ActionImpl::internalEIsSet(featureID);
 }
 
-bool StartClassifierBehaviorActionImpl::eSet(int featureID, Any newValue)
+bool StartClassifierBehaviorActionImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -429,7 +429,7 @@ bool StartClassifierBehaviorActionImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any StartClassifierBehaviorActionImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any StartClassifierBehaviorActionImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

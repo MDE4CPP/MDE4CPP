@@ -40,8 +40,8 @@
 #include "fUML/Semantics/StructuredClassifiers/Reference.hpp"
 #include "uml/Trigger.hpp"
 //Factories and Package includes
-#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/SemanticsPackage.hpp"
+#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/CommonBehavior/CommonBehaviorPackage.hpp"
 #include "fUML/Semantics/StructuredClassifiers/StructuredClassifiersPackage.hpp"
 #include "uml/umlPackage.hpp"
@@ -129,7 +129,7 @@ void EventOccurrenceImpl::doSend()
 	//end of body
 }
 
-std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue> > EventOccurrenceImpl::getParameterValues(std::shared_ptr<uml::Event> event)
+std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue> > EventOccurrenceImpl::getParameterValues(const std::shared_ptr<uml::Event>& event)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -139,12 +139,12 @@ std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue> > EventOccu
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool EventOccurrenceImpl::match(std::shared_ptr<uml::Trigger> trigger)
+bool EventOccurrenceImpl::match(const std::shared_ptr<uml::Trigger>& trigger)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool EventOccurrenceImpl::matchAny(std::shared_ptr<Bag<uml::Trigger>> triggers)
+bool EventOccurrenceImpl::matchAny(const std::shared_ptr<Bag<uml::Trigger>>& triggers)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -192,7 +192,7 @@ bool EventOccurrenceImpl::matchAny(std::shared_ptr<Bag<uml::Trigger>> triggers)
 	//end of body
 }
 
-void EventOccurrenceImpl::sendTo(std::shared_ptr<fUML::Semantics::StructuredClassifiers::Reference> target)
+void EventOccurrenceImpl::sendTo(const std::shared_ptr<fUML::Semantics::StructuredClassifiers::Reference>& target)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -216,11 +216,11 @@ void EventOccurrenceImpl::sendTo(std::shared_ptr<fUML::Semantics::StructuredClas
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference target */
-std::shared_ptr<fUML::Semantics::StructuredClassifiers::Reference> EventOccurrenceImpl::getTarget() const
+const std::shared_ptr<fUML::Semantics::StructuredClassifiers::Reference>& EventOccurrenceImpl::getTarget() const
 {
     return m_target;
 }
-void EventOccurrenceImpl::setTarget(std::shared_ptr<fUML::Semantics::StructuredClassifiers::Reference> _target)
+void EventOccurrenceImpl::setTarget(const std::shared_ptr<fUML::Semantics::StructuredClassifiers::Reference>& _target)
 {
     m_target = _target;
 	
@@ -328,7 +328,7 @@ void EventOccurrenceImpl::saveContent(std::shared_ptr<persistence::interfaces::X
 	}
 }
 
-std::shared_ptr<ecore::EClass> EventOccurrenceImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& EventOccurrenceImpl::eStaticClass() const
 {
 	return fUML::Semantics::CommonBehavior::CommonBehaviorPackage::eInstance()->getEventOccurrence_Class();
 }
@@ -356,7 +356,7 @@ bool EventOccurrenceImpl::internalEIsSet(int featureID) const
 	return ecore::EObjectImpl::internalEIsSet(featureID);
 }
 
-bool EventOccurrenceImpl::eSet(int featureID, Any newValue)
+bool EventOccurrenceImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -376,7 +376,7 @@ bool EventOccurrenceImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any EventOccurrenceImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any EventOccurrenceImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

@@ -119,7 +119,7 @@ std::shared_ptr<ecore::EObject> EFactoryImpl::copy() const
 //*********************************
 // Operations
 //*********************************
-std::string EFactoryImpl::convertToString(std::shared_ptr<ecore::EDataType> eDataType,Any instanceValue) const
+std::string EFactoryImpl::convertToString(const std::shared_ptr<ecore::EDataType>& eDataType, const Any& instanceValue) const
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -533,12 +533,12 @@ std::string EFactoryImpl::convertToString(std::shared_ptr<ecore::EDataType> eDat
 	//end of body
 }
 
-std::shared_ptr<ecore::EObject> EFactoryImpl::create(std::shared_ptr<ecore::EClass> eClass) const
+std::shared_ptr<ecore::EObject> EFactoryImpl::create(const std::shared_ptr<ecore::EClass>& eClass) const
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-Any EFactoryImpl::createFromString(std::shared_ptr<ecore::EDataType> eDataType,std::string literalValue) const
+Any EFactoryImpl::createFromString(const std::shared_ptr<ecore::EDataType>& eDataType, std::string literalValue) const
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -551,11 +551,11 @@ Any EFactoryImpl::createFromString(std::shared_ptr<ecore::EDataType> eDataType,s
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference ePackage */
-std::shared_ptr<ecore::EPackage> EFactoryImpl::getEPackage() const
+const std::shared_ptr<ecore::EPackage>& EFactoryImpl::getEPackage() const
 {
     return m_ePackage;
 }
-void EFactoryImpl::setEPackage(std::shared_ptr<ecore::EPackage> _ePackage)
+void EFactoryImpl::setEPackage(const std::shared_ptr<ecore::EPackage>& _ePackage)
 {
     m_ePackage = _ePackage;
 	
@@ -686,7 +686,7 @@ void EFactoryImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHan
 	}
 }
 
-std::shared_ptr<EClass> EFactoryImpl::eStaticClass() const
+const std::shared_ptr<EClass>& EFactoryImpl::eStaticClass() const
 {
 	return ecore::ecorePackage::eInstance()->getEFactory_Class();
 }
@@ -714,7 +714,7 @@ bool EFactoryImpl::internalEIsSet(int featureID) const
 	return EModelElementImpl::internalEIsSet(featureID);
 }
 
-bool EFactoryImpl::eSet(int featureID, Any newValue)
+bool EFactoryImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -734,7 +734,7 @@ bool EFactoryImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any EFactoryImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any EFactoryImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

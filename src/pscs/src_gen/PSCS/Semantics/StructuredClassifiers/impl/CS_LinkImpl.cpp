@@ -36,9 +36,9 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "uml/umlFactory.hpp"
-#include "fUML/Semantics/Loci/LociFactory.hpp"
 #include "fUML/Semantics/SimpleClassifiers/SimpleClassifiersFactory.hpp"
+#include "fUML/Semantics/Loci/LociFactory.hpp"
+#include "uml/umlFactory.hpp"
 #include "uml/Association.hpp"
 #include "fUML/Semantics/SimpleClassifiers/FeatureValue.hpp"
 #include "fUML/Semantics/StructuredClassifiers/Link.hpp"
@@ -46,12 +46,12 @@
 #include "uml/StructuralFeature.hpp"
 #include "fUML/Semantics/Values/Value.hpp"
 //Factories and Package includes
-#include "PSCS/PSCSPackage.hpp"
 #include "PSCS/Semantics/SemanticsPackage.hpp"
+#include "PSCS/PSCSPackage.hpp"
 #include "fUML/Semantics/Loci/LociPackage.hpp"
 #include "fUML/Semantics/SimpleClassifiers/SimpleClassifiersPackage.hpp"
-#include "PSCS/Semantics/StructuredClassifiers/StructuredClassifiersPackage.hpp"
 #include "fUML/Semantics/StructuredClassifiers/StructuredClassifiersPackage.hpp"
+#include "PSCS/Semantics/StructuredClassifiers/StructuredClassifiersPackage.hpp"
 #include "fUML/Semantics/Values/ValuesPackage.hpp"
 #include "uml/umlPackage.hpp"
 
@@ -117,7 +117,7 @@ std::shared_ptr<ecore::EObject> CS_LinkImpl::copy() const
 //*********************************
 // Operations
 //*********************************
-std::shared_ptr<uml::StructuralFeature> CS_LinkImpl::getFeature(std::shared_ptr<fUML::Semantics::Values::Value> value)
+std::shared_ptr<uml::StructuralFeature> CS_LinkImpl::getFeature(const std::shared_ptr<fUML::Semantics::Values::Value>& value)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -135,7 +135,7 @@ std::shared_ptr<uml::StructuralFeature> CS_LinkImpl::getFeature(std::shared_ptr<
 	//end of body
 }
 
-bool CS_LinkImpl::hasValueForAFeature(std::shared_ptr<fUML::Semantics::Values::Value> value)
+bool CS_LinkImpl::hasValueForAFeature(const std::shared_ptr<fUML::Semantics::Values::Value>& value)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -240,7 +240,7 @@ void CS_LinkImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHand
 	}
 }
 
-std::shared_ptr<ecore::EClass> CS_LinkImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& CS_LinkImpl::eStaticClass() const
 {
 	return PSCS::Semantics::StructuredClassifiers::StructuredClassifiersPackage::eInstance()->getCS_Link_Class();
 }
@@ -264,7 +264,7 @@ bool CS_LinkImpl::internalEIsSet(int featureID) const
 	return fUML::Semantics::StructuredClassifiers::LinkImpl::internalEIsSet(featureID);
 }
 
-bool CS_LinkImpl::eSet(int featureID, Any newValue)
+bool CS_LinkImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -276,7 +276,7 @@ bool CS_LinkImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any CS_LinkImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any CS_LinkImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

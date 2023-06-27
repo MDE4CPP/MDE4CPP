@@ -133,11 +133,11 @@ std::shared_ptr<ecore::EObject> PackageMergeImpl::copy() const
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference mergedPackage */
-std::shared_ptr<uml::Package> PackageMergeImpl::getMergedPackage() const
+const std::shared_ptr<uml::Package>& PackageMergeImpl::getMergedPackage() const
 {
     return m_mergedPackage;
 }
-void PackageMergeImpl::setMergedPackage(std::shared_ptr<uml::Package> _mergedPackage)
+void PackageMergeImpl::setMergedPackage(const std::shared_ptr<uml::Package>& _mergedPackage)
 {
     m_mergedPackage = _mergedPackage;
 	
@@ -360,7 +360,7 @@ void PackageMergeImpl::saveContent(std::shared_ptr<persistence::interfaces::XSav
 	}
 }
 
-std::shared_ptr<ecore::EClass> PackageMergeImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& PackageMergeImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getPackageMerge_Class();
 }
@@ -395,7 +395,7 @@ bool PackageMergeImpl::internalEIsSet(int featureID) const
 	return DirectedRelationshipImpl::internalEIsSet(featureID);
 }
 
-bool PackageMergeImpl::eSet(int featureID, Any newValue)
+bool PackageMergeImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -423,7 +423,7 @@ bool PackageMergeImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any PackageMergeImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any PackageMergeImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

@@ -59,8 +59,8 @@
 #include "fUML/Semantics/Activities/Token.hpp"
 #include "fUML/Semantics/Activities/TokenSet.hpp"
 //Factories and Package includes
-#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/SemanticsPackage.hpp"
+#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/Actions/ActionsPackage.hpp"
 #include "fUML/Semantics/Activities/ActivitiesPackage.hpp"
 #include "uml/umlPackage.hpp"
@@ -268,7 +268,7 @@ void ExpansionRegionActivationImpl::doStructuredActivity()
 	//end of body
 }
 
-std::shared_ptr<fUML::Semantics::Activities::ExpansionNodeActivation> ExpansionRegionActivationImpl::getExpansionNodeActivation(std::shared_ptr<uml::ExpansionNode> node)
+std::shared_ptr<fUML::Semantics::Activities::ExpansionNodeActivation> ExpansionRegionActivationImpl::getExpansionNodeActivation(const std::shared_ptr<uml::ExpansionNode>& node)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -327,7 +327,7 @@ int ExpansionRegionActivationImpl::numberOfValues()
 	//end of body
 }
 
-void ExpansionRegionActivationImpl::resume(std::shared_ptr<fUML::Semantics::Activities::ExpansionActivationGroup> activationGroup)
+void ExpansionRegionActivationImpl::resume(const std::shared_ptr<fUML::Semantics::Activities::ExpansionActivationGroup>& activationGroup)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -344,7 +344,7 @@ void ExpansionRegionActivationImpl::resume(std::shared_ptr<fUML::Semantics::Acti
 	//end of body
 }
 
-void ExpansionRegionActivationImpl::runGroup(std::shared_ptr<fUML::Semantics::Activities::ExpansionActivationGroup> activationGroup)
+void ExpansionRegionActivationImpl::runGroup(const std::shared_ptr<fUML::Semantics::Activities::ExpansionActivationGroup>& activationGroup)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -531,7 +531,7 @@ void ExpansionRegionActivationImpl::terminate()
 	//end of body
 }
 
-void ExpansionRegionActivationImpl::terminateGroup(std::shared_ptr<fUML::Semantics::Activities::ExpansionActivationGroup> activationGroup)
+void ExpansionRegionActivationImpl::terminateGroup(const std::shared_ptr<fUML::Semantics::Activities::ExpansionActivationGroup>& activationGroup)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -556,7 +556,7 @@ void ExpansionRegionActivationImpl::terminateGroup(std::shared_ptr<fUML::Semanti
 // Attribute Getters & Setters
 //*********************************
 /* Getter & Setter for attribute next */
-int ExpansionRegionActivationImpl::getNext() const 
+int ExpansionRegionActivationImpl::getNext() const
 {
 	return m_next;
 }
@@ -570,7 +570,7 @@ void ExpansionRegionActivationImpl::setNext(int _next)
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference activationGroups */
-std::shared_ptr<Bag<fUML::Semantics::Activities::ExpansionActivationGroup>> ExpansionRegionActivationImpl::getActivationGroups() const
+const std::shared_ptr<Bag<fUML::Semantics::Activities::ExpansionActivationGroup>>& ExpansionRegionActivationImpl::getActivationGroups() const
 {
 	if(m_activationGroups == nullptr)
 	{
@@ -582,7 +582,7 @@ std::shared_ptr<Bag<fUML::Semantics::Activities::ExpansionActivationGroup>> Expa
 }
 
 /* Getter & Setter for reference inputExpansionTokens */
-std::shared_ptr<Bag<fUML::Semantics::Activities::TokenSet>> ExpansionRegionActivationImpl::getInputExpansionTokens() const
+const std::shared_ptr<Bag<fUML::Semantics::Activities::TokenSet>>& ExpansionRegionActivationImpl::getInputExpansionTokens() const
 {
 	if(m_inputExpansionTokens == nullptr)
 	{
@@ -594,7 +594,7 @@ std::shared_ptr<Bag<fUML::Semantics::Activities::TokenSet>> ExpansionRegionActiv
 }
 
 /* Getter & Setter for reference inputTokens */
-std::shared_ptr<Bag<fUML::Semantics::Activities::TokenSet>> ExpansionRegionActivationImpl::getInputTokens() const
+const std::shared_ptr<Bag<fUML::Semantics::Activities::TokenSet>>& ExpansionRegionActivationImpl::getInputTokens() const
 {
 	if(m_inputTokens == nullptr)
 	{
@@ -792,7 +792,7 @@ void ExpansionRegionActivationImpl::saveContent(std::shared_ptr<persistence::int
 	}
 }
 
-std::shared_ptr<ecore::EClass> ExpansionRegionActivationImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& ExpansionRegionActivationImpl::eStaticClass() const
 {
 	return fUML::Semantics::Activities::ActivitiesPackage::eInstance()->getExpansionRegionActivation_Class();
 }
@@ -832,7 +832,7 @@ bool ExpansionRegionActivationImpl::internalEIsSet(int featureID) const
 	return fUML::Semantics::Actions::ActionActivationImpl::internalEIsSet(featureID);
 }
 
-bool ExpansionRegionActivationImpl::eSet(int featureID, Any newValue)
+bool ExpansionRegionActivationImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -962,7 +962,7 @@ bool ExpansionRegionActivationImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any ExpansionRegionActivationImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any ExpansionRegionActivationImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

@@ -226,7 +226,7 @@ std::shared_ptr<ecore::EObject> CollectionLiteralExpImpl::copy() const
 // Attribute Getters & Setters
 //*********************************
 /* Getter & Setter for attribute kind */
-ocl::Expressions::CollectionKind CollectionLiteralExpImpl::getKind() const 
+ocl::Expressions::CollectionKind CollectionLiteralExpImpl::getKind() const
 {
 	return m_kind;
 }
@@ -240,7 +240,7 @@ void CollectionLiteralExpImpl::setKind(ocl::Expressions::CollectionKind _kind)
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference part */
-std::shared_ptr<Bag<ocl::Expressions::CollectionLiteralPart>> CollectionLiteralExpImpl::getPart() const
+const std::shared_ptr<Bag<ocl::Expressions::CollectionLiteralPart>>& CollectionLiteralExpImpl::getPart() const
 {
 	if(m_part == nullptr)
 	{
@@ -480,7 +480,7 @@ void CollectionLiteralExpImpl::saveContent(std::shared_ptr<persistence::interfac
 	}
 }
 
-std::shared_ptr<ecore::EClass> CollectionLiteralExpImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& CollectionLiteralExpImpl::eStaticClass() const
 {
 	return ocl::Expressions::ExpressionsPackage::eInstance()->getCollectionLiteralExp_Class();
 }
@@ -512,7 +512,7 @@ bool CollectionLiteralExpImpl::internalEIsSet(int featureID) const
 	return LiteralExpImpl::internalEIsSet(featureID);
 }
 
-bool CollectionLiteralExpImpl::eSet(int featureID, Any newValue)
+bool CollectionLiteralExpImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -568,7 +568,7 @@ bool CollectionLiteralExpImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any CollectionLiteralExpImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any CollectionLiteralExpImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

@@ -99,7 +99,7 @@ namespace uml
 			ownedAttribute->forAll(isReadOnly)
 			*/
 			 
-			virtual bool immutable(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
+			virtual bool immutable(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context) = 0;
 
 			//*********************************
 			// Attribute Getters & Setters
@@ -113,7 +113,7 @@ namespace uml
 			<p>From package UML::SimpleClassifiers.</p>
 			*/
 			
-			virtual std::shared_ptr<Subset<uml::EnumerationLiteral, uml::NamedElement>> getOwnedLiteral() const = 0;
+			virtual const std::shared_ptr<Subset<uml::EnumerationLiteral, uml::NamedElement>>& getOwnedLiteral() const = 0;
 
 			//*********************************
 			// Union Reference Getters

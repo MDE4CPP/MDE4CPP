@@ -71,7 +71,7 @@ namespace fUML::Semantics::SimpleClassifiers
 			// Operations
 			//*********************************
 			virtual std::shared_ptr<fUML::Semantics::Values::Value> _copy() = 0;
-			virtual bool equals(std::shared_ptr<fUML::Semantics::Values::Value> otherValue) = 0;
+			virtual bool equals(const std::shared_ptr<fUML::Semantics::Values::Value>& otherValue) = 0;
 			virtual std::shared_ptr<Bag<uml::Classifier> > getTypes() = 0;
 			virtual std::shared_ptr<fUML::Semantics::Values::Value> new_() = 0;
 			virtual std::shared_ptr<uml::ValueSpecification> specify() = 0;
@@ -84,10 +84,10 @@ namespace fUML::Semantics::SimpleClassifiers
 			//*********************************
 			// Reference Getters & Setters
 			//*********************************
-			virtual std::shared_ptr<uml::EnumerationLiteral> getLiteral() const = 0;
-			virtual void setLiteral(std::shared_ptr<uml::EnumerationLiteral>) = 0;
-			virtual std::shared_ptr<uml::Enumeration> getType() const = 0;
-			virtual void setType(std::shared_ptr<uml::Enumeration>) = 0;
+			virtual const std::shared_ptr<uml::EnumerationLiteral>& getLiteral() const = 0;
+			virtual void setLiteral(const std::shared_ptr<uml::EnumerationLiteral>&) = 0;
+			virtual const std::shared_ptr<uml::Enumeration>& getType() const = 0;
+			virtual void setType(const std::shared_ptr<uml::Enumeration>&) = 0;
 
 			//*********************************
 			// Union Reference Getters

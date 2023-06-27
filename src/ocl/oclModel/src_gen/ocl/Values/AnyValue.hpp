@@ -64,14 +64,14 @@ namespace ocl::Values
 			//*********************************
 			// Operations
 			//*********************************
-			virtual bool equals(std::shared_ptr<fUML::Semantics::Values::Value> otherValue) = 0;
+			virtual bool equals(const std::shared_ptr<fUML::Semantics::Values::Value>& otherValue) = 0;
 			virtual std::string toString() = 0;
 
 			//*********************************
 			// Attribute Getters & Setters
 			//*********************************
-			virtual Any getValue() const = 0;
-			virtual void setValue (Any _value)= 0;
+			virtual const Any& getValue() const = 0;
+			virtual void setValue (const Any& _value)= 0;
 
 			//*********************************
 			// Reference Getters & Setters

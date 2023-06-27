@@ -45,8 +45,8 @@
 #include "fUML/Semantics/Activities/ControlNodeActivation.hpp"
 #include "fUML/Semantics/Activities/Token.hpp"
 //Factories and Package includes
-#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/SemanticsPackage.hpp"
+#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/Activities/ActivitiesPackage.hpp"
 #include "uml/umlPackage.hpp"
 
@@ -118,7 +118,7 @@ std::shared_ptr<ecore::EObject> InitialNodeActivationImpl::copy() const
 //*********************************
 // Operations
 //*********************************
-void InitialNodeActivationImpl::fire(std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> incomingTokens)
+void InitialNodeActivationImpl::fire(const std::shared_ptr<Bag<fUML::Semantics::Activities::Token>>& incomingTokens)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -217,7 +217,7 @@ void InitialNodeActivationImpl::saveContent(std::shared_ptr<persistence::interfa
 	}
 }
 
-std::shared_ptr<ecore::EClass> InitialNodeActivationImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& InitialNodeActivationImpl::eStaticClass() const
 {
 	return fUML::Semantics::Activities::ActivitiesPackage::eInstance()->getInitialNodeActivation_Class();
 }
@@ -241,7 +241,7 @@ bool InitialNodeActivationImpl::internalEIsSet(int featureID) const
 	return ControlNodeActivationImpl::internalEIsSet(featureID);
 }
 
-bool InitialNodeActivationImpl::eSet(int featureID, Any newValue)
+bool InitialNodeActivationImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -253,7 +253,7 @@ bool InitialNodeActivationImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any InitialNodeActivationImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any InitialNodeActivationImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

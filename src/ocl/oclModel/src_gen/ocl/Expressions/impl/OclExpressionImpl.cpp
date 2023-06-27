@@ -269,11 +269,11 @@ void OclExpressionImpl::setInitializedElement(std::weak_ptr<ocl::Expressions::Va
 }
 
 /* Getter & Setter for reference instance */
-std::shared_ptr<ocl::Evaluations::OclExpEval> OclExpressionImpl::getInstance() const
+const std::shared_ptr<ocl::Evaluations::OclExpEval>& OclExpressionImpl::getInstance() const
 {
     return m_instance;
 }
-void OclExpressionImpl::setInstance(std::shared_ptr<ocl::Evaluations::OclExpEval> _instance)
+void OclExpressionImpl::setInstance(const std::shared_ptr<ocl::Evaluations::OclExpEval>& _instance)
 {
     m_instance = _instance;
 	
@@ -640,7 +640,7 @@ void OclExpressionImpl::saveContent(std::shared_ptr<persistence::interfaces::XSa
 	}
 }
 
-std::shared_ptr<ecore::EClass> OclExpressionImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& OclExpressionImpl::eStaticClass() const
 {
 	return ocl::Expressions::ExpressionsPackage::eInstance()->getOclExpression_Class();
 }
@@ -745,7 +745,7 @@ bool OclExpressionImpl::internalEIsSet(int featureID) const
 	return ecore::ETypedElementImpl::internalEIsSet(featureID);
 }
 
-bool OclExpressionImpl::eSet(int featureID, Any newValue)
+bool OclExpressionImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -853,7 +853,7 @@ bool OclExpressionImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any OclExpressionImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any OclExpressionImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

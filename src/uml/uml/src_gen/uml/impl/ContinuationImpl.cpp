@@ -141,17 +141,17 @@ std::shared_ptr<ecore::EObject> ContinuationImpl::copy() const
 //*********************************
 // Operations
 //*********************************
-bool ContinuationImpl::first_or_last_interaction_fragment(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool ContinuationImpl::first_or_last_interaction_fragment(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool ContinuationImpl::global(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool ContinuationImpl::global(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool ContinuationImpl::same_name(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool ContinuationImpl::same_name(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -160,7 +160,7 @@ bool ContinuationImpl::same_name(Any diagnostics,std::shared_ptr<std::map < Any,
 // Attribute Getters & Setters
 //*********************************
 /* Getter & Setter for attribute setting */
-bool ContinuationImpl::getSetting() const 
+bool ContinuationImpl::getSetting() const
 {
 	return m_setting;
 }
@@ -319,7 +319,7 @@ void ContinuationImpl::saveContent(std::shared_ptr<persistence::interfaces::XSav
 	}
 }
 
-std::shared_ptr<ecore::EClass> ContinuationImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& ContinuationImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getContinuation_Class();
 }
@@ -347,7 +347,7 @@ bool ContinuationImpl::internalEIsSet(int featureID) const
 	return InteractionFragmentImpl::internalEIsSet(featureID);
 }
 
-bool ContinuationImpl::eSet(int featureID, Any newValue)
+bool ContinuationImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -366,7 +366,7 @@ bool ContinuationImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any ContinuationImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any ContinuationImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

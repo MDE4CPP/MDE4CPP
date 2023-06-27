@@ -295,7 +295,7 @@ int EClassImpl::getFeatureCount() const
 	//end of body
 }
 
-int EClassImpl::getFeatureID(std::shared_ptr<ecore::EStructuralFeature> feature) const
+int EClassImpl::getFeatureID(const std::shared_ptr<ecore::EStructuralFeature>& feature) const
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -318,7 +318,7 @@ int EClassImpl::getFeatureID(std::shared_ptr<ecore::EStructuralFeature> feature)
 	//end of body
 }
 
-std::shared_ptr<ecore::EGenericType> EClassImpl::getFeatureType(std::shared_ptr<ecore::EStructuralFeature> feature) const
+std::shared_ptr<ecore::EGenericType> EClassImpl::getFeatureType(const std::shared_ptr<ecore::EStructuralFeature>& feature) const
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -331,7 +331,7 @@ int EClassImpl::getOperationCount() const
 	//end of body
 }
 
-int EClassImpl::getOperationID(std::shared_ptr<ecore::EOperation> operation) const
+int EClassImpl::getOperationID(const std::shared_ptr<ecore::EOperation>& operation) const
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -354,12 +354,12 @@ int EClassImpl::getOperationID(std::shared_ptr<ecore::EOperation> operation) con
 	//end of body
 }
 
-std::shared_ptr<ecore::EOperation> EClassImpl::getOverride(std::shared_ptr<ecore::EOperation> operation) const
+std::shared_ptr<ecore::EOperation> EClassImpl::getOverride(const std::shared_ptr<ecore::EOperation>& operation) const
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool EClassImpl::isSuperTypeOf(std::shared_ptr<ecore::EClass> someClass) const
+bool EClassImpl::isSuperTypeOf(const std::shared_ptr<ecore::EClass>& someClass) const
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -381,7 +381,7 @@ bool EClassImpl::isSuperTypeOf(std::shared_ptr<ecore::EClass> someClass) const
 // Attribute Getters & Setters
 //*********************************
 /* Getter & Setter for attribute abstract */
-bool EClassImpl::isAbstract() const 
+bool EClassImpl::isAbstract() const
 {
 	return m_abstract;
 }
@@ -392,7 +392,7 @@ void EClassImpl::setAbstract(bool _abstract)
 }
 
 /* Getter & Setter for attribute interface */
-bool EClassImpl::isInterface() const 
+bool EClassImpl::isInterface() const
 {
 	return m_interface;
 }
@@ -424,7 +424,7 @@ std::shared_ptr<Bag<ecore::EAttribute>> EClassImpl::getEAllAttributes() const
 }
 
 /* Getter & Setter for reference eAllContainments */
-std::shared_ptr<Bag<ecore::EReference>> EClassImpl::getEAllContainments() const
+const std::shared_ptr<Bag<ecore::EReference>>& EClassImpl::getEAllContainments() const
 {
 	if(m_eAllContainments == nullptr)
 	{
@@ -436,7 +436,7 @@ std::shared_ptr<Bag<ecore::EReference>> EClassImpl::getEAllContainments() const
 }
 
 /* Getter & Setter for reference eAllGenericSuperTypes */
-std::shared_ptr<Bag<ecore::EGenericType>> EClassImpl::getEAllGenericSuperTypes() const
+const std::shared_ptr<Bag<ecore::EGenericType>>& EClassImpl::getEAllGenericSuperTypes() const
 {
 	if(m_eAllGenericSuperTypes == nullptr)
 	{
@@ -519,7 +519,7 @@ std::shared_ptr< Bag<ecore::EClass> > eAllSuperTypes(new Bag<ecore::EClass>  ())
 }
 
 /* Getter & Setter for reference eAttributes */
-std::shared_ptr<Subset<ecore::EAttribute, ecore::EStructuralFeature>> EClassImpl::getEAttributes() const
+const std::shared_ptr<Subset<ecore::EAttribute, ecore::EStructuralFeature>>& EClassImpl::getEAttributes() const
 {
 	if(m_eAttributes == nullptr)
 	{
@@ -540,7 +540,7 @@ std::shared_ptr<Subset<ecore::EAttribute, ecore::EStructuralFeature>> EClassImpl
 }
 
 /* Getter & Setter for reference eGenericSuperTypes */
-std::shared_ptr<Bag<ecore::EGenericType>> EClassImpl::getEGenericSuperTypes() const
+const std::shared_ptr<Bag<ecore::EGenericType>>& EClassImpl::getEGenericSuperTypes() const
 {
 	if(m_eGenericSuperTypes == nullptr)
 	{
@@ -552,18 +552,18 @@ std::shared_ptr<Bag<ecore::EGenericType>> EClassImpl::getEGenericSuperTypes() co
 }
 
 /* Getter & Setter for reference eIDAttribute */
-std::shared_ptr<ecore::EAttribute> EClassImpl::getEIDAttribute() const
+const std::shared_ptr<ecore::EAttribute>& EClassImpl::getEIDAttribute() const
 {
     return m_eIDAttribute;
 }
-void EClassImpl::setEIDAttribute(std::shared_ptr<ecore::EAttribute> _eIDAttribute)
+void EClassImpl::setEIDAttribute(const std::shared_ptr<ecore::EAttribute>& _eIDAttribute)
 {
     m_eIDAttribute = _eIDAttribute;
 	
 }
 
 /* Getter & Setter for reference eOperations */
-std::shared_ptr<Subset<ecore::EOperation, ecore::EObject>> EClassImpl::getEOperations() const
+const std::shared_ptr<Subset<ecore::EOperation, ecore::EObject>>& EClassImpl::getEOperations() const
 {
 	if(m_eOperations == nullptr)
 	{
@@ -584,7 +584,7 @@ std::shared_ptr<Subset<ecore::EOperation, ecore::EObject>> EClassImpl::getEOpera
 }
 
 /* Getter & Setter for reference eReferences */
-std::shared_ptr<Subset<ecore::EReference, ecore::EStructuralFeature>> EClassImpl::getEReferences() const
+const std::shared_ptr<Subset<ecore::EReference, ecore::EStructuralFeature>>& EClassImpl::getEReferences() const
 {
 	if(m_eReferences == nullptr)
 	{
@@ -607,7 +607,7 @@ std::shared_ptr<Subset<ecore::EReference, ecore::EStructuralFeature>> EClassImpl
 /* Getter & Setter for reference eStructuralFeatures */
 
 /* Getter & Setter for reference eSuperTypes */
-std::shared_ptr<Bag<ecore::EClass>> EClassImpl::getESuperTypes() const
+const std::shared_ptr<Bag<ecore::EClass>>& EClassImpl::getESuperTypes() const
 {
 	if(m_eSuperTypes == nullptr)
 	{
@@ -816,7 +816,7 @@ void EClassImpl::resolveReferences(const int featureID, std::vector<std::shared_
 	{
 		case ecore::ecorePackage::ECLASS_ATTRIBUTE_EATTRIBUTES:
 		{
-			std::shared_ptr<Subset<ecore::EAttribute, ecore::EStructuralFeature>> _eAttributes = getEAttributes();
+			const std::shared_ptr<Subset<ecore::EAttribute, ecore::EStructuralFeature>>& _eAttributes = getEAttributes();
 			for(std::shared_ptr<ecore::EObject> ref : references)
 			{
 				std::shared_ptr<ecore::EAttribute>  _r = std::dynamic_pointer_cast<ecore::EAttribute>(ref);
@@ -842,7 +842,7 @@ void EClassImpl::resolveReferences(const int featureID, std::vector<std::shared_
 
 		case ecore::ecorePackage::ECLASS_ATTRIBUTE_EREFERENCES:
 		{
-			std::shared_ptr<Subset<ecore::EReference, ecore::EStructuralFeature>> _eReferences = getEReferences();
+			const std::shared_ptr<Subset<ecore::EReference, ecore::EStructuralFeature>>& _eReferences = getEReferences();
 			for(std::shared_ptr<ecore::EObject> ref : references)
 			{
 				std::shared_ptr<ecore::EReference>  _r = std::dynamic_pointer_cast<ecore::EReference>(ref);
@@ -856,7 +856,7 @@ void EClassImpl::resolveReferences(const int featureID, std::vector<std::shared_
 
 		case ecore::ecorePackage::ECLASS_ATTRIBUTE_ESUPERTYPES:
 		{
-			std::shared_ptr<Bag<ecore::EClass>> _eSuperTypes = getESuperTypes();
+			const std::shared_ptr<Bag<ecore::EClass>>& _eSuperTypes = getESuperTypes();
 			for(std::shared_ptr<ecore::EObject> ref : references)
 			{
 				std::shared_ptr<ecore::EClass>  _r = std::dynamic_pointer_cast<ecore::EClass>(ref);
@@ -929,7 +929,7 @@ void EClassImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandl
 	}
 }
 
-std::shared_ptr<EClass> EClassImpl::eStaticClass() const
+const std::shared_ptr<EClass>& EClassImpl::eStaticClass() const
 {
 	return ecore::ecorePackage::eInstance()->getEClass_Class();
 }
@@ -1017,7 +1017,7 @@ bool EClassImpl::internalEIsSet(int featureID) const
 	return EClassifierImpl::internalEIsSet(featureID);
 }
 
-bool EClassImpl::eSet(int featureID, Any newValue)
+bool EClassImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -1273,7 +1273,7 @@ bool EClassImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any EClassImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any EClassImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

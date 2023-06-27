@@ -78,10 +78,10 @@ namespace ocl::Evaluations
 			//*********************************
 			// Reference Getters & Setters
 			//*********************************
-			virtual std::shared_ptr<ocl::Evaluations::OclExpEval> getInitExp() const = 0;
-			virtual void setInitExp(std::shared_ptr<ocl::Evaluations::OclExpEval>) = 0;
-			virtual std::shared_ptr<fUML::Semantics::SimpleClassifiers::StringValue> getName() const = 0;
-			virtual void setName(std::shared_ptr<fUML::Semantics::SimpleClassifiers::StringValue>) = 0;
+			virtual const std::shared_ptr<ocl::Evaluations::OclExpEval>& getInitExp() const = 0;
+			virtual void setInitExp(const std::shared_ptr<ocl::Evaluations::OclExpEval>&) = 0;
+			virtual const std::shared_ptr<fUML::Semantics::SimpleClassifiers::StringValue>& getName() const = 0;
+			virtual void setName(const std::shared_ptr<fUML::Semantics::SimpleClassifiers::StringValue>&) = 0;
 
 			//*********************************
 			// Union Reference Getters

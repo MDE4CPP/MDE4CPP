@@ -105,7 +105,7 @@ std::shared_ptr<ecore::EObject> BagTypeValueImpl::copy() const
 //*********************************
 // Operations
 //*********************************
-bool BagTypeValueImpl::addValue(std::shared_ptr<fUML::Semantics::Values::Value> value)
+bool BagTypeValueImpl::addValue(const std::shared_ptr<fUML::Semantics::Values::Value>& value)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -202,7 +202,7 @@ void BagTypeValueImpl::saveContent(std::shared_ptr<persistence::interfaces::XSav
 	}
 }
 
-std::shared_ptr<ecore::EClass> BagTypeValueImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& BagTypeValueImpl::eStaticClass() const
 {
 	return ocl::Values::ValuesPackage::eInstance()->getBagTypeValue_Class();
 }
@@ -226,7 +226,7 @@ bool BagTypeValueImpl::internalEIsSet(int featureID) const
 	return CollectionValueImpl::internalEIsSet(featureID);
 }
 
-bool BagTypeValueImpl::eSet(int featureID, Any newValue)
+bool BagTypeValueImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -238,7 +238,7 @@ bool BagTypeValueImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any BagTypeValueImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any BagTypeValueImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

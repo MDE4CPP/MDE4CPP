@@ -145,12 +145,12 @@ std::shared_ptr<ecore::EObject> MergeNodeImpl::copy() const
 //*********************************
 // Operations
 //*********************************
-bool MergeNodeImpl::edges(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool MergeNodeImpl::edges(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool MergeNodeImpl::one_outgoing_edge(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool MergeNodeImpl::one_outgoing_edge(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -311,7 +311,7 @@ void MergeNodeImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHa
 	}
 }
 
-std::shared_ptr<ecore::EClass> MergeNodeImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& MergeNodeImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getMergeNode_Class();
 }
@@ -335,7 +335,7 @@ bool MergeNodeImpl::internalEIsSet(int featureID) const
 	return ControlNodeImpl::internalEIsSet(featureID);
 }
 
-bool MergeNodeImpl::eSet(int featureID, Any newValue)
+bool MergeNodeImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -347,7 +347,7 @@ bool MergeNodeImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any MergeNodeImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any MergeNodeImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

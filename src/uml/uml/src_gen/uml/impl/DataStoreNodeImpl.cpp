@@ -309,7 +309,7 @@ void DataStoreNodeImpl::saveContent(std::shared_ptr<persistence::interfaces::XSa
 	}
 }
 
-std::shared_ptr<ecore::EClass> DataStoreNodeImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& DataStoreNodeImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getDataStoreNode_Class();
 }
@@ -333,7 +333,7 @@ bool DataStoreNodeImpl::internalEIsSet(int featureID) const
 	return CentralBufferNodeImpl::internalEIsSet(featureID);
 }
 
-bool DataStoreNodeImpl::eSet(int featureID, Any newValue)
+bool DataStoreNodeImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -345,7 +345,7 @@ bool DataStoreNodeImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any DataStoreNodeImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any DataStoreNodeImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

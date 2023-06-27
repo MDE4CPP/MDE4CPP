@@ -134,7 +134,7 @@ std::shared_ptr<ecore::EObject> TemplateParameterImpl::copy() const
 //*********************************
 // Operations
 //*********************************
-bool TemplateParameterImpl::must_be_compatible(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool TemplateParameterImpl::must_be_compatible(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -147,44 +147,44 @@ bool TemplateParameterImpl::must_be_compatible(Any diagnostics,std::shared_ptr<s
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference default */
-std::shared_ptr<uml::ParameterableElement> TemplateParameterImpl::getDefault() const
+const std::shared_ptr<uml::ParameterableElement>& TemplateParameterImpl::getDefault() const
 {
     return m_default;
 }
-void TemplateParameterImpl::setDefault(std::shared_ptr<uml::ParameterableElement> _default)
+void TemplateParameterImpl::setDefault(const std::shared_ptr<uml::ParameterableElement>& _default)
 {
     m_default = _default;
 	
 }
 
 /* Getter & Setter for reference ownedDefault */
-std::shared_ptr<uml::ParameterableElement> TemplateParameterImpl::getOwnedDefault() const
+const std::shared_ptr<uml::ParameterableElement>& TemplateParameterImpl::getOwnedDefault() const
 {
     return m_ownedDefault;
 }
-void TemplateParameterImpl::setOwnedDefault(std::shared_ptr<uml::ParameterableElement> _ownedDefault)
+void TemplateParameterImpl::setOwnedDefault(const std::shared_ptr<uml::ParameterableElement>& _ownedDefault)
 {
     m_ownedDefault = _ownedDefault;
 	
 }
 
 /* Getter & Setter for reference ownedParameteredElement */
-std::shared_ptr<uml::ParameterableElement> TemplateParameterImpl::getOwnedParameteredElement() const
+const std::shared_ptr<uml::ParameterableElement>& TemplateParameterImpl::getOwnedParameteredElement() const
 {
     return m_ownedParameteredElement;
 }
-void TemplateParameterImpl::setOwnedParameteredElement(std::shared_ptr<uml::ParameterableElement> _ownedParameteredElement)
+void TemplateParameterImpl::setOwnedParameteredElement(const std::shared_ptr<uml::ParameterableElement>& _ownedParameteredElement)
 {
     m_ownedParameteredElement = _ownedParameteredElement;
 	
 }
 
 /* Getter & Setter for reference parameteredElement */
-std::shared_ptr<uml::ParameterableElement> TemplateParameterImpl::getParameteredElement() const
+const std::shared_ptr<uml::ParameterableElement>& TemplateParameterImpl::getParameteredElement() const
 {
     return m_parameteredElement;
 }
-void TemplateParameterImpl::setParameteredElement(std::shared_ptr<uml::ParameterableElement> _parameteredElement)
+void TemplateParameterImpl::setParameteredElement(const std::shared_ptr<uml::ParameterableElement>& _parameteredElement)
 {
     m_parameteredElement = _parameteredElement;
 	
@@ -421,7 +421,7 @@ void TemplateParameterImpl::saveContent(std::shared_ptr<persistence::interfaces:
 	}
 }
 
-std::shared_ptr<ecore::EClass> TemplateParameterImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& TemplateParameterImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getTemplateParameter_Class();
 }
@@ -468,7 +468,7 @@ bool TemplateParameterImpl::internalEIsSet(int featureID) const
 	return ElementImpl::internalEIsSet(featureID);
 }
 
-bool TemplateParameterImpl::eSet(int featureID, Any newValue)
+bool TemplateParameterImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -520,7 +520,7 @@ bool TemplateParameterImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any TemplateParameterImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any TemplateParameterImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

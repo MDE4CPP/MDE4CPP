@@ -35,8 +35,8 @@
 #include <exception> // used in Persistence
 #include "fUML/Semantics/CommonBehavior/EventOccurrence.hpp"
 //Factories and Package includes
-#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/SemanticsPackage.hpp"
+#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/CommonBehavior/CommonBehaviorPackage.hpp"
 
 using namespace fUML::Semantics::CommonBehavior;
@@ -93,7 +93,7 @@ EventAccepterImpl& EventAccepterImpl::operator=(const EventAccepterImpl & obj)
 //*********************************
 // Operations
 //*********************************
-void EventAccepterImpl::accept(std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccurrence> eventOccurence)
+void EventAccepterImpl::accept(const std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccurrence>& eventOccurence)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -101,7 +101,7 @@ void EventAccepterImpl::accept(std::shared_ptr<fUML::Semantics::CommonBehavior::
 	//end of body
 }
 
-bool EventAccepterImpl::match(std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccurrence> eventOccurence)
+bool EventAccepterImpl::match(const std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccurrence>& eventOccurence)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -184,7 +184,7 @@ void EventAccepterImpl::saveContent(std::shared_ptr<persistence::interfaces::XSa
 	}
 }
 
-std::shared_ptr<ecore::EClass> EventAccepterImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& EventAccepterImpl::eStaticClass() const
 {
 	return fUML::Semantics::CommonBehavior::CommonBehaviorPackage::eInstance()->getEventAccepter_Class();
 }
@@ -208,7 +208,7 @@ bool EventAccepterImpl::internalEIsSet(int featureID) const
 	return ecore::EObjectImpl::internalEIsSet(featureID);
 }
 
-bool EventAccepterImpl::eSet(int featureID, Any newValue)
+bool EventAccepterImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -220,7 +220,7 @@ bool EventAccepterImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any EventAccepterImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any EventAccepterImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

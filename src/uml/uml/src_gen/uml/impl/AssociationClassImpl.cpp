@@ -178,12 +178,12 @@ std::shared_ptr<ecore::EObject> AssociationClassImpl::copy() const
 //*********************************
 // Operations
 //*********************************
-bool AssociationClassImpl::cannot_be_defined(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool AssociationClassImpl::cannot_be_defined(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool AssociationClassImpl::disjoint_attributes_ends(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool AssociationClassImpl::disjoint_attributes_ends(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -469,7 +469,7 @@ void AssociationClassImpl::saveContent(std::shared_ptr<persistence::interfaces::
 	}
 }
 
-std::shared_ptr<ecore::EClass> AssociationClassImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& AssociationClassImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getAssociationClass_Class();
 }
@@ -507,7 +507,7 @@ bool AssociationClassImpl::internalEIsSet(int featureID) const
 	return result;
 }
 
-bool AssociationClassImpl::eSet(int featureID, Any newValue)
+bool AssociationClassImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -526,7 +526,7 @@ bool AssociationClassImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any AssociationClassImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any AssociationClassImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

@@ -96,13 +96,13 @@ namespace uml
 			result.is(0,*)
 			*/
 			 
-			virtual bool multiplicity_of_result(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
+			virtual bool multiplicity_of_result(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context) = 0;
 			/*!
 			The type of the result OutputPin is the classifier.
 			result.type = classifier
 			*/
 			 
-			virtual bool type_is_classifier(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
+			virtual bool type_is_classifier(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context) = 0;
 
 			//*********************************
 			// Attribute Getters & Setters
@@ -116,25 +116,25 @@ namespace uml
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::Classifier> getClassifier() const = 0;
+			virtual const std::shared_ptr<uml::Classifier>& getClassifier() const = 0;
 			/*!
 			The Classifier whose instances are to be retrieved.
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual void setClassifier(std::shared_ptr<uml::Classifier>) = 0;
+			virtual void setClassifier(const std::shared_ptr<uml::Classifier>&) = 0;
 			/*!
 			The OutputPin on which the Classifier instances are placed.
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::OutputPin> getResult() const = 0;
+			virtual const std::shared_ptr<uml::OutputPin>& getResult() const = 0;
 			/*!
 			The OutputPin on which the Classifier instances are placed.
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual void setResult(std::shared_ptr<uml::OutputPin>) = 0;
+			virtual void setResult(const std::shared_ptr<uml::OutputPin>&) = 0;
 
 			//*********************************
 			// Union Reference Getters

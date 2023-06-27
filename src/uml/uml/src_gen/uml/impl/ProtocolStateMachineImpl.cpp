@@ -224,17 +224,17 @@ std::shared_ptr<ecore::EObject> ProtocolStateMachineImpl::copy() const
 //*********************************
 // Operations
 //*********************************
-bool ProtocolStateMachineImpl::deep_or_shallow_history(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool ProtocolStateMachineImpl::deep_or_shallow_history(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool ProtocolStateMachineImpl::entry_exit_do(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool ProtocolStateMachineImpl::entry_exit_do(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool ProtocolStateMachineImpl::protocol_transitions(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool ProtocolStateMachineImpl::protocol_transitions(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -247,7 +247,7 @@ bool ProtocolStateMachineImpl::protocol_transitions(Any diagnostics,std::shared_
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference conformance */
-std::shared_ptr<Subset<uml::ProtocolConformance, uml::Element>> ProtocolStateMachineImpl::getConformance() const
+const std::shared_ptr<Subset<uml::ProtocolConformance, uml::Element>>& ProtocolStateMachineImpl::getConformance() const
 {
 	if(m_conformance == nullptr)
 	{
@@ -569,7 +569,7 @@ void ProtocolStateMachineImpl::saveContent(std::shared_ptr<persistence::interfac
 	}
 }
 
-std::shared_ptr<ecore::EClass> ProtocolStateMachineImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& ProtocolStateMachineImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getProtocolStateMachine_Class();
 }
@@ -597,7 +597,7 @@ bool ProtocolStateMachineImpl::internalEIsSet(int featureID) const
 	return StateMachineImpl::internalEIsSet(featureID);
 }
 
-bool ProtocolStateMachineImpl::eSet(int featureID, Any newValue)
+bool ProtocolStateMachineImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -646,7 +646,7 @@ bool ProtocolStateMachineImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any ProtocolStateMachineImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any ProtocolStateMachineImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

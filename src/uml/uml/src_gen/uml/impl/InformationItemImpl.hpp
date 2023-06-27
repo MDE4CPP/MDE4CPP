@@ -56,13 +56,13 @@ namespace uml
 			self.generalization->isEmpty() and self.feature->isEmpty()
 			*/
 			 
-			virtual bool has_no(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
+			virtual bool has_no(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context) ;
 			/*!
 			It is not instantiable.
 			isAbstract
 			*/
 			 
-			virtual bool not_instantiable(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
+			virtual bool not_instantiable(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context) ;
 			/*!
 			The sources and targets of an information item (its related information flows) must designate subsets of the sources and targets of the representation information item, if any. The Classifiers that can realize an information item can only be of the following kind: Class, Interface, InformationItem, Signal, Component.
 			(self.represented->select(oclIsKindOf(InformationItem))->forAll(p |
@@ -72,7 +72,7 @@ namespace uml
 			        oclIsKindOf(InformationItem) or oclIsKindOf(Signal) or oclIsKindOf(Component)))
 			*/
 			 
-			virtual bool sources_and_targets(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
+			virtual bool sources_and_targets(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context) ;
 			
 			//*********************************
 			// Attribute Getters & Setters
@@ -86,7 +86,7 @@ namespace uml
 			<p>From package UML::InformationFlows.</p>
 			*/
 			
-			virtual std::shared_ptr<Bag<uml::Classifier>> getRepresented() const ;
+			virtual const std::shared_ptr<Bag<uml::Classifier>>& getRepresented() const ;
 			
 			//*********************************
 			// Union Reference Getters
@@ -151,19 +151,19 @@ namespace uml
 			virtual void saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const;
 
 		protected:
-			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
+			virtual const std::shared_ptr<ecore::EClass>& eStaticClass() const;
 
 			//*********************************
 			// EStructuralFeature Get/Set/IsSet
 			//*********************************
 			virtual Any eGet(int featureID, bool resolve, bool coreType) const ;
-			virtual bool eSet(int featureID, Any newValue) ;
+			virtual bool eSet(int featureID, const Any& newValue) ;
 			virtual bool internalEIsSet(int featureID) const ;
 
 			//*********************************
 			// EOperation Invoke
 			//*********************************
-			virtual Any eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments) ;
+			virtual Any eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments) ;
 
 		private:
 			std::weak_ptr<uml::InformationItem> m_thisInformationItemPtr;

@@ -232,7 +232,7 @@ BehavioredClassifierImpl& BehavioredClassifierImpl::operator=(const BehavioredCl
 //*********************************
 // Operations
 //*********************************
-bool BehavioredClassifierImpl::class_behavior(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool BehavioredClassifierImpl::class_behavior(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -255,18 +255,18 @@ std::shared_ptr<Bag<uml::Interface> > BehavioredClassifierImpl::getImplementedIn
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference classifierBehavior */
-std::shared_ptr<uml::Behavior> BehavioredClassifierImpl::getClassifierBehavior() const
+const std::shared_ptr<uml::Behavior>& BehavioredClassifierImpl::getClassifierBehavior() const
 {
     return m_classifierBehavior;
 }
-void BehavioredClassifierImpl::setClassifierBehavior(std::shared_ptr<uml::Behavior> _classifierBehavior)
+void BehavioredClassifierImpl::setClassifierBehavior(const std::shared_ptr<uml::Behavior>& _classifierBehavior)
 {
     m_classifierBehavior = _classifierBehavior;
 	
 }
 
 /* Getter & Setter for reference interfaceRealization */
-std::shared_ptr<Subset<uml::InterfaceRealization, uml::Element>> BehavioredClassifierImpl::getInterfaceRealization() const
+const std::shared_ptr<Subset<uml::InterfaceRealization, uml::Element>>& BehavioredClassifierImpl::getInterfaceRealization() const
 {
 	if(m_interfaceRealization == nullptr)
 	{
@@ -287,7 +287,7 @@ std::shared_ptr<Subset<uml::InterfaceRealization, uml::Element>> BehavioredClass
 }
 
 /* Getter & Setter for reference ownedBehavior */
-std::shared_ptr<SubsetUnion<uml::Behavior, uml::NamedElement>> BehavioredClassifierImpl::getOwnedBehavior() const
+const std::shared_ptr<SubsetUnion<uml::Behavior, uml::NamedElement>>& BehavioredClassifierImpl::getOwnedBehavior() const
 {
 	if(m_ownedBehavior == nullptr)
 	{
@@ -593,7 +593,7 @@ void BehavioredClassifierImpl::saveContent(std::shared_ptr<persistence::interfac
 	}
 }
 
-std::shared_ptr<ecore::EClass> BehavioredClassifierImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& BehavioredClassifierImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getBehavioredClassifier_Class();
 }
@@ -629,7 +629,7 @@ bool BehavioredClassifierImpl::internalEIsSet(int featureID) const
 	return ClassifierImpl::internalEIsSet(featureID);
 }
 
-bool BehavioredClassifierImpl::eSet(int featureID, Any newValue)
+bool BehavioredClassifierImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -723,7 +723,7 @@ bool BehavioredClassifierImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any BehavioredClassifierImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any BehavioredClassifierImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

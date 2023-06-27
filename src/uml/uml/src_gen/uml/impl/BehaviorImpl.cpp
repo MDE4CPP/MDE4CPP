@@ -334,12 +334,12 @@ BehaviorImpl& BehaviorImpl::operator=(const BehaviorImpl & obj)
 //*********************************
 // Operations
 //*********************************
-std::shared_ptr<uml::BehavioredClassifier> BehaviorImpl::behavioredClassifier(std::shared_ptr<uml::Element> from)
+std::shared_ptr<uml::BehavioredClassifier> BehaviorImpl::behavioredClassifier(const std::shared_ptr<uml::Element>& from)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool BehaviorImpl::feature_of_context_classifier(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool BehaviorImpl::feature_of_context_classifier(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -351,7 +351,7 @@ std::shared_ptr<Bag<uml::Parameter> > BehaviorImpl::inputParameters()
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool BehaviorImpl::most_one_behavior(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool BehaviorImpl::most_one_behavior(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -361,7 +361,7 @@ std::shared_ptr<Bag<uml::Parameter> > BehaviorImpl::outputParameters()
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool BehaviorImpl::parameters_match(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool BehaviorImpl::parameters_match(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -370,7 +370,7 @@ bool BehaviorImpl::parameters_match(Any diagnostics,std::shared_ptr<std::map < A
 // Attribute Getters & Setters
 //*********************************
 /* Getter & Setter for attribute isReentrant */
-bool BehaviorImpl::getIsReentrant() const 
+bool BehaviorImpl::getIsReentrant() const
 {
 	return m_isReentrant;
 }
@@ -395,18 +395,18 @@ void BehaviorImpl::setBehavioredClassifier(std::weak_ptr<uml::BehavioredClassifi
 }
 
 /* Getter & Setter for reference context */
-std::shared_ptr<uml::BehavioredClassifier> BehaviorImpl::getContext() const
+const std::shared_ptr<uml::BehavioredClassifier>& BehaviorImpl::getContext() const
 {
     return m_context;
 }
-void BehaviorImpl::setContext(std::shared_ptr<uml::BehavioredClassifier> _context)
+void BehaviorImpl::setContext(const std::shared_ptr<uml::BehavioredClassifier>& _context)
 {
     m_context = _context;
 	
 }
 
 /* Getter & Setter for reference ownedParameter */
-std::shared_ptr<Subset<uml::Parameter, uml::NamedElement>> BehaviorImpl::getOwnedParameter() const
+const std::shared_ptr<Subset<uml::Parameter, uml::NamedElement>>& BehaviorImpl::getOwnedParameter() const
 {
 	if(m_ownedParameter == nullptr)
 	{
@@ -427,7 +427,7 @@ std::shared_ptr<Subset<uml::Parameter, uml::NamedElement>> BehaviorImpl::getOwne
 }
 
 /* Getter & Setter for reference ownedParameterSet */
-std::shared_ptr<Subset<uml::ParameterSet, uml::NamedElement>> BehaviorImpl::getOwnedParameterSet() const
+const std::shared_ptr<Subset<uml::ParameterSet, uml::NamedElement>>& BehaviorImpl::getOwnedParameterSet() const
 {
 	if(m_ownedParameterSet == nullptr)
 	{
@@ -448,7 +448,7 @@ std::shared_ptr<Subset<uml::ParameterSet, uml::NamedElement>> BehaviorImpl::getO
 }
 
 /* Getter & Setter for reference postcondition */
-std::shared_ptr<Subset<uml::Constraint, uml::Constraint /*Subset does not reference a union*/>> BehaviorImpl::getPostcondition() const
+const std::shared_ptr<Subset<uml::Constraint, uml::Constraint /*Subset does not reference a union*/>>& BehaviorImpl::getPostcondition() const
 {
 	if(m_postcondition == nullptr)
 	{
@@ -469,7 +469,7 @@ std::shared_ptr<Subset<uml::Constraint, uml::Constraint /*Subset does not refere
 }
 
 /* Getter & Setter for reference precondition */
-std::shared_ptr<Subset<uml::Constraint, uml::Constraint /*Subset does not reference a union*/>> BehaviorImpl::getPrecondition() const
+const std::shared_ptr<Subset<uml::Constraint, uml::Constraint /*Subset does not reference a union*/>>& BehaviorImpl::getPrecondition() const
 {
 	if(m_precondition == nullptr)
 	{
@@ -490,7 +490,7 @@ std::shared_ptr<Subset<uml::Constraint, uml::Constraint /*Subset does not refere
 }
 
 /* Getter & Setter for reference redefinedBehavior */
-std::shared_ptr<Subset<uml::Behavior, uml::Classifier /*Subset does not reference a union*/>> BehaviorImpl::getRedefinedBehavior() const
+const std::shared_ptr<Subset<uml::Behavior, uml::Classifier /*Subset does not reference a union*/>>& BehaviorImpl::getRedefinedBehavior() const
 {
 	if(m_redefinedBehavior == nullptr)
 	{
@@ -511,11 +511,11 @@ std::shared_ptr<Subset<uml::Behavior, uml::Classifier /*Subset does not referenc
 }
 
 /* Getter & Setter for reference specification */
-std::shared_ptr<uml::BehavioralFeature> BehaviorImpl::getSpecification() const
+const std::shared_ptr<uml::BehavioralFeature>& BehaviorImpl::getSpecification() const
 {
     return m_specification;
 }
-void BehaviorImpl::setSpecification(std::shared_ptr<uml::BehavioralFeature> _specification)
+void BehaviorImpl::setSpecification(const std::shared_ptr<uml::BehavioralFeature>& _specification)
 {
     m_specification = _specification;
 	
@@ -984,7 +984,7 @@ void BehaviorImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHan
 	}
 }
 
-std::shared_ptr<ecore::EClass> BehaviorImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& BehaviorImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getBehavior_Class();
 }
@@ -1047,7 +1047,7 @@ bool BehaviorImpl::internalEIsSet(int featureID) const
 	return ClassImpl::internalEIsSet(featureID);
 }
 
-bool BehaviorImpl::eSet(int featureID, Any newValue)
+bool BehaviorImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -1275,7 +1275,7 @@ bool BehaviorImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any BehaviorImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any BehaviorImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

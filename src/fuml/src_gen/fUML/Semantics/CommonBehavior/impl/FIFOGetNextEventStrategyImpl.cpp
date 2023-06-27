@@ -37,8 +37,8 @@
 #include "fUML/Semantics/CommonBehavior/GetNextEventStrategy.hpp"
 #include "fUML/Semantics/CommonBehavior/ObjectActivation.hpp"
 //Factories and Package includes
-#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/SemanticsPackage.hpp"
+#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/CommonBehavior/CommonBehaviorPackage.hpp"
 
 using namespace fUML::Semantics::CommonBehavior;
@@ -103,7 +103,7 @@ std::shared_ptr<ecore::EObject> FIFOGetNextEventStrategyImpl::copy() const
 //*********************************
 // Operations
 //*********************************
-std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccurrence> FIFOGetNextEventStrategyImpl::retrieveNextEvent(std::shared_ptr<fUML::Semantics::CommonBehavior::ObjectActivation> objectActivation)
+std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccurrence> FIFOGetNextEventStrategyImpl::retrieveNextEvent(const std::shared_ptr<fUML::Semantics::CommonBehavior::ObjectActivation>& objectActivation)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -193,7 +193,7 @@ void FIFOGetNextEventStrategyImpl::saveContent(std::shared_ptr<persistence::inte
 	}
 }
 
-std::shared_ptr<ecore::EClass> FIFOGetNextEventStrategyImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& FIFOGetNextEventStrategyImpl::eStaticClass() const
 {
 	return fUML::Semantics::CommonBehavior::CommonBehaviorPackage::eInstance()->getFIFOGetNextEventStrategy_Class();
 }
@@ -217,7 +217,7 @@ bool FIFOGetNextEventStrategyImpl::internalEIsSet(int featureID) const
 	return GetNextEventStrategyImpl::internalEIsSet(featureID);
 }
 
-bool FIFOGetNextEventStrategyImpl::eSet(int featureID, Any newValue)
+bool FIFOGetNextEventStrategyImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -229,7 +229,7 @@ bool FIFOGetNextEventStrategyImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any FIFOGetNextEventStrategyImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any FIFOGetNextEventStrategyImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

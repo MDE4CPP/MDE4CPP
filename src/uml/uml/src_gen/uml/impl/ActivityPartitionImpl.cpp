@@ -238,22 +238,22 @@ std::shared_ptr<ecore::EObject> ActivityPartitionImpl::copy() const
 //*********************************
 // Operations
 //*********************************
-bool ActivityPartitionImpl::dimension_not_contained(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool ActivityPartitionImpl::dimension_not_contained(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool ActivityPartitionImpl::represents_classifier(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool ActivityPartitionImpl::represents_classifier(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool ActivityPartitionImpl::represents_property(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool ActivityPartitionImpl::represents_property(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool ActivityPartitionImpl::represents_property_and_is_contained(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool ActivityPartitionImpl::represents_property_and_is_contained(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -262,7 +262,7 @@ bool ActivityPartitionImpl::represents_property_and_is_contained(Any diagnostics
 // Attribute Getters & Setters
 //*********************************
 /* Getter & Setter for attribute isDimension */
-bool ActivityPartitionImpl::getIsDimension() const 
+bool ActivityPartitionImpl::getIsDimension() const
 {
 	return m_isDimension;
 }
@@ -273,7 +273,7 @@ void ActivityPartitionImpl::setIsDimension(bool _isDimension)
 }
 
 /* Getter & Setter for attribute isExternal */
-bool ActivityPartitionImpl::getIsExternal() const 
+bool ActivityPartitionImpl::getIsExternal() const
 {
 	return m_isExternal;
 }
@@ -287,7 +287,7 @@ void ActivityPartitionImpl::setIsExternal(bool _isExternal)
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference edge */
-std::shared_ptr<Subset<uml::ActivityEdge, uml::ActivityEdge>> ActivityPartitionImpl::getEdge() const
+const std::shared_ptr<Subset<uml::ActivityEdge, uml::ActivityEdge>>& ActivityPartitionImpl::getEdge() const
 {
 	if(m_edge == nullptr)
 	{
@@ -308,7 +308,7 @@ std::shared_ptr<Subset<uml::ActivityEdge, uml::ActivityEdge>> ActivityPartitionI
 }
 
 /* Getter & Setter for reference node */
-std::shared_ptr<Subset<uml::ActivityNode, uml::ActivityNode>> ActivityPartitionImpl::getNode() const
+const std::shared_ptr<Subset<uml::ActivityNode, uml::ActivityNode>>& ActivityPartitionImpl::getNode() const
 {
 	if(m_node == nullptr)
 	{
@@ -329,18 +329,18 @@ std::shared_ptr<Subset<uml::ActivityNode, uml::ActivityNode>> ActivityPartitionI
 }
 
 /* Getter & Setter for reference represents */
-std::shared_ptr<uml::Element> ActivityPartitionImpl::getRepresents() const
+const std::shared_ptr<uml::Element>& ActivityPartitionImpl::getRepresents() const
 {
     return m_represents;
 }
-void ActivityPartitionImpl::setRepresents(std::shared_ptr<uml::Element> _represents)
+void ActivityPartitionImpl::setRepresents(const std::shared_ptr<uml::Element>& _represents)
 {
     m_represents = _represents;
 	
 }
 
 /* Getter & Setter for reference subpartition */
-std::shared_ptr<Subset<uml::ActivityPartition, uml::ActivityGroup>> ActivityPartitionImpl::getSubpartition() const
+const std::shared_ptr<Subset<uml::ActivityPartition, uml::ActivityGroup>>& ActivityPartitionImpl::getSubpartition() const
 {
 	if(m_subpartition == nullptr)
 	{
@@ -691,7 +691,7 @@ void ActivityPartitionImpl::saveContent(std::shared_ptr<persistence::interfaces:
 	}
 }
 
-std::shared_ptr<ecore::EClass> ActivityPartitionImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& ActivityPartitionImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getActivityPartition_Class();
 }
@@ -746,7 +746,7 @@ bool ActivityPartitionImpl::internalEIsSet(int featureID) const
 	return ActivityGroupImpl::internalEIsSet(featureID);
 }
 
-bool ActivityPartitionImpl::eSet(int featureID, Any newValue)
+bool ActivityPartitionImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -899,7 +899,7 @@ bool ActivityPartitionImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any ActivityPartitionImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any ActivityPartitionImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

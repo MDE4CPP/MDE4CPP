@@ -95,14 +95,14 @@ namespace fUML::Semantics::Actions
 			//*********************************
 			// Reference Getters & Setters
 			//*********************************
-			virtual std::shared_ptr<uml::CallBehaviorAction> getCallBehaviorAction() const = 0;
-			virtual void setCallBehaviorAction(std::shared_ptr<uml::CallBehaviorAction>) = 0;
+			virtual const std::shared_ptr<uml::CallBehaviorAction>& getCallBehaviorAction() const = 0;
+			virtual void setCallBehaviorAction(const std::shared_ptr<uml::CallBehaviorAction>&) = 0;
 			/*Additional Setter for 'CallActionActivation::callAction' redefined by reference 'callBehaviorAction'*/
-			virtual void setCallAction(std::shared_ptr<uml::CallAction>) = 0;
+			virtual void setCallAction(const std::shared_ptr<uml::CallAction>&) = 0;
 			/*Additional Setter for 'ActionActivation::action' redefined by reference 'callBehaviorAction'*/
-			virtual void setAction(std::shared_ptr<uml::Action>) = 0;
+			virtual void setAction(const std::shared_ptr<uml::Action>&) = 0;
 			/*Additional Setter for 'ActivityNodeActivation::node' redefined by reference 'callBehaviorAction'*/
-			virtual void setNode(std::shared_ptr<uml::ActivityNode>) = 0;
+			virtual void setNode(const std::shared_ptr<uml::ActivityNode>&) = 0;
 
 			//*********************************
 			// Union Reference Getters

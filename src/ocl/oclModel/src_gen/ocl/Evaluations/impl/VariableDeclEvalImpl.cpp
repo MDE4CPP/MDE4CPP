@@ -115,22 +115,22 @@ std::shared_ptr<ecore::EObject> VariableDeclEvalImpl::copy() const
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference initExp */
-std::shared_ptr<ocl::Evaluations::OclExpEval> VariableDeclEvalImpl::getInitExp() const
+const std::shared_ptr<ocl::Evaluations::OclExpEval>& VariableDeclEvalImpl::getInitExp() const
 {
     return m_initExp;
 }
-void VariableDeclEvalImpl::setInitExp(std::shared_ptr<ocl::Evaluations::OclExpEval> _initExp)
+void VariableDeclEvalImpl::setInitExp(const std::shared_ptr<ocl::Evaluations::OclExpEval>& _initExp)
 {
     m_initExp = _initExp;
 	
 }
 
 /* Getter & Setter for reference name */
-std::shared_ptr<fUML::Semantics::SimpleClassifiers::StringValue> VariableDeclEvalImpl::getName() const
+const std::shared_ptr<fUML::Semantics::SimpleClassifiers::StringValue>& VariableDeclEvalImpl::getName() const
 {
     return m_name;
 }
-void VariableDeclEvalImpl::setName(std::shared_ptr<fUML::Semantics::SimpleClassifiers::StringValue> _name)
+void VariableDeclEvalImpl::setName(const std::shared_ptr<fUML::Semantics::SimpleClassifiers::StringValue>& _name)
 {
     m_name = _name;
 	
@@ -258,7 +258,7 @@ void VariableDeclEvalImpl::saveContent(std::shared_ptr<persistence::interfaces::
 	}
 }
 
-std::shared_ptr<ecore::EClass> VariableDeclEvalImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& VariableDeclEvalImpl::eStaticClass() const
 {
 	return ocl::Evaluations::EvaluationsPackage::eInstance()->getVariableDeclEval_Class();
 }
@@ -290,7 +290,7 @@ bool VariableDeclEvalImpl::internalEIsSet(int featureID) const
 	return ecore::EObjectImpl::internalEIsSet(featureID);
 }
 
-bool VariableDeclEvalImpl::eSet(int featureID, Any newValue)
+bool VariableDeclEvalImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -318,7 +318,7 @@ bool VariableDeclEvalImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any VariableDeclEvalImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any VariableDeclEvalImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

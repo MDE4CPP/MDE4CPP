@@ -107,7 +107,7 @@ ENamedElementImpl& ENamedElementImpl::operator=(const ENamedElementImpl & obj)
 // Attribute Getters & Setters
 //*********************************
 /* Getter & Setter for attribute name */
-std::string ENamedElementImpl::getName() const 
+std::string ENamedElementImpl::getName() const
 {
 	return m_name;
 }
@@ -237,7 +237,7 @@ void ENamedElementImpl::saveContent(std::shared_ptr<persistence::interfaces::XSa
 	}
 }
 
-std::shared_ptr<EClass> ENamedElementImpl::eStaticClass() const
+const std::shared_ptr<EClass>& ENamedElementImpl::eStaticClass() const
 {
 	return ecore::ecorePackage::eInstance()->getENamedElement_Class();
 }
@@ -265,7 +265,7 @@ bool ENamedElementImpl::internalEIsSet(int featureID) const
 	return EModelElementImpl::internalEIsSet(featureID);
 }
 
-bool ENamedElementImpl::eSet(int featureID, Any newValue)
+bool ENamedElementImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -284,7 +284,7 @@ bool ENamedElementImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any ENamedElementImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any ENamedElementImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

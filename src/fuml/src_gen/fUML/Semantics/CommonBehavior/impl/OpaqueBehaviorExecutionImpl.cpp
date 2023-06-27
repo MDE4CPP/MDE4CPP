@@ -55,8 +55,8 @@
 #include "fUML/Semantics/CommonBehavior/ObjectActivation.hpp"
 #include "fUML/Semantics/CommonBehavior/ParameterValue.hpp"
 //Factories and Package includes
-#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/SemanticsPackage.hpp"
+#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/CommonBehavior/CommonBehaviorPackage.hpp"
 #include "fUML/Semantics/Loci/LociPackage.hpp"
 #include "fUML/Semantics/SimpleClassifiers/SimpleClassifiersPackage.hpp"
@@ -117,7 +117,7 @@ OpaqueBehaviorExecutionImpl& OpaqueBehaviorExecutionImpl::operator=(const Opaque
 //*********************************
 // Operations
 //*********************************
-void OpaqueBehaviorExecutionImpl::doBody(std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> inputParameters,std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> outputParameters)
+void OpaqueBehaviorExecutionImpl::doBody(const std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>>& inputParameters, const std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>>& outputParameters)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -263,7 +263,7 @@ void OpaqueBehaviorExecutionImpl::saveContent(std::shared_ptr<persistence::inter
 	}
 }
 
-std::shared_ptr<ecore::EClass> OpaqueBehaviorExecutionImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& OpaqueBehaviorExecutionImpl::eStaticClass() const
 {
 	return fUML::Semantics::CommonBehavior::CommonBehaviorPackage::eInstance()->getOpaqueBehaviorExecution_Class();
 }
@@ -287,7 +287,7 @@ bool OpaqueBehaviorExecutionImpl::internalEIsSet(int featureID) const
 	return ExecutionImpl::internalEIsSet(featureID);
 }
 
-bool OpaqueBehaviorExecutionImpl::eSet(int featureID, Any newValue)
+bool OpaqueBehaviorExecutionImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -299,7 +299,7 @@ bool OpaqueBehaviorExecutionImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any OpaqueBehaviorExecutionImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any OpaqueBehaviorExecutionImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

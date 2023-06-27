@@ -185,7 +185,7 @@ std::shared_ptr<ecore::EObject> SequenceNodeImpl::copy() const
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference executableNode */
-std::shared_ptr<Bag<uml::ExecutableNode>> SequenceNodeImpl::getExecutableNode() const
+const std::shared_ptr<Bag<uml::ExecutableNode>>& SequenceNodeImpl::getExecutableNode() const
 {
 	//Cast conversion from redefined container reference StructuredActivityNode::node 
 	std::shared_ptr<Bag<uml::ExecutableNode>> executableNode(new Bag<uml::ExecutableNode>());
@@ -505,7 +505,7 @@ void SequenceNodeImpl::saveContent(std::shared_ptr<persistence::interfaces::XSav
 	}
 }
 
-std::shared_ptr<ecore::EClass> SequenceNodeImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& SequenceNodeImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getSequenceNode_Class();
 }
@@ -533,7 +533,7 @@ bool SequenceNodeImpl::internalEIsSet(int featureID) const
 	return StructuredActivityNodeImpl::internalEIsSet(featureID);
 }
 
-bool SequenceNodeImpl::eSet(int featureID, Any newValue)
+bool SequenceNodeImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -582,7 +582,7 @@ bool SequenceNodeImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any SequenceNodeImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any SequenceNodeImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

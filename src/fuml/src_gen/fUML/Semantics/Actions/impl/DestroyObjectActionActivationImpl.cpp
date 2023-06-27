@@ -58,8 +58,8 @@
 #include "fUML/Semantics/Activities/Token.hpp"
 #include "fUML/Semantics/Values/Value.hpp"
 //Factories and Package includes
-#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/SemanticsPackage.hpp"
+#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/Actions/ActionsPackage.hpp"
 #include "fUML/Semantics/Activities/ActivitiesPackage.hpp"
 #include "fUML/Semantics/StructuredClassifiers/StructuredClassifiersPackage.hpp"
@@ -135,7 +135,7 @@ std::shared_ptr<ecore::EObject> DestroyObjectActionActivationImpl::copy() const
 //*********************************
 // Operations
 //*********************************
-void DestroyObjectActionActivationImpl::destroyObject(std::shared_ptr<fUML::Semantics::Values::Value> value,bool isDestroyLinks,bool isDestroyOwnedObjects)
+void DestroyObjectActionActivationImpl::destroyObject(const std::shared_ptr<fUML::Semantics::Values::Value>& value, bool isDestroyLinks, bool isDestroyOwnedObjects)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -218,7 +218,7 @@ void DestroyObjectActionActivationImpl::doAction()
 	//end of body
 }
 
-bool DestroyObjectActionActivationImpl::objectIsComposite(std::shared_ptr<fUML::Semantics::StructuredClassifiers::Reference> reference,std::shared_ptr<fUML::Semantics::StructuredClassifiers::Link> link)
+bool DestroyObjectActionActivationImpl::objectIsComposite(const std::shared_ptr<fUML::Semantics::StructuredClassifiers::Reference>& reference, const std::shared_ptr<fUML::Semantics::StructuredClassifiers::Link>& link)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -257,18 +257,18 @@ bool DestroyObjectActionActivationImpl::objectIsComposite(std::shared_ptr<fUML::
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference destroyObjectAction */
-std::shared_ptr<uml::DestroyObjectAction> DestroyObjectActionActivationImpl::getDestroyObjectAction() const
+const std::shared_ptr<uml::DestroyObjectAction>& DestroyObjectActionActivationImpl::getDestroyObjectAction() const
 {
     return m_destroyObjectAction;
 }
-void DestroyObjectActionActivationImpl::setDestroyObjectAction(std::shared_ptr<uml::DestroyObjectAction> _destroyObjectAction)
+void DestroyObjectActionActivationImpl::setDestroyObjectAction(const std::shared_ptr<uml::DestroyObjectAction>& _destroyObjectAction)
 {
     m_destroyObjectAction = _destroyObjectAction;
 	//additional setter call for redefined reference ActionActivation::action
 	fUML::Semantics::Actions::ActionActivationImpl::setAction(_destroyObjectAction);
 }
 /*Additional Setter for redefined reference 'ActionActivation::action'*/
-void DestroyObjectActionActivationImpl::setAction(std::shared_ptr<uml::Action> _action)
+void DestroyObjectActionActivationImpl::setAction(const std::shared_ptr<uml::Action>& _action)
 {
 	std::shared_ptr<uml::DestroyObjectAction> _destroyObjectAction = std::dynamic_pointer_cast<uml::DestroyObjectAction>(_action);
 	if(_destroyObjectAction)
@@ -284,7 +284,7 @@ void DestroyObjectActionActivationImpl::setAction(std::shared_ptr<uml::Action> _
 	}
 }
 /*Additional Setter for redefined reference 'ActivityNodeActivation::node'*/
-void DestroyObjectActionActivationImpl::setNode(std::shared_ptr<uml::ActivityNode> _node)
+void DestroyObjectActionActivationImpl::setNode(const std::shared_ptr<uml::ActivityNode>& _node)
 {
 	std::shared_ptr<uml::DestroyObjectAction> _destroyObjectAction = std::dynamic_pointer_cast<uml::DestroyObjectAction>(_node);
 	if(_destroyObjectAction)
@@ -427,7 +427,7 @@ void DestroyObjectActionActivationImpl::saveContent(std::shared_ptr<persistence:
 	}
 }
 
-std::shared_ptr<ecore::EClass> DestroyObjectActionActivationImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& DestroyObjectActionActivationImpl::eStaticClass() const
 {
 	return fUML::Semantics::Actions::ActionsPackage::eInstance()->getDestroyObjectActionActivation_Class();
 }
@@ -455,7 +455,7 @@ bool DestroyObjectActionActivationImpl::internalEIsSet(int featureID) const
 	return ActionActivationImpl::internalEIsSet(featureID);
 }
 
-bool DestroyObjectActionActivationImpl::eSet(int featureID, Any newValue)
+bool DestroyObjectActionActivationImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -475,7 +475,7 @@ bool DestroyObjectActionActivationImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any DestroyObjectActionActivationImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any DestroyObjectActionActivationImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

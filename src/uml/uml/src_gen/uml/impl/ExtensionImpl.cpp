@@ -189,7 +189,7 @@ bool ExtensionImpl::isRequired()
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool ExtensionImpl::is_binary(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool ExtensionImpl::is_binary(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -199,7 +199,7 @@ std::shared_ptr<uml::Property> ExtensionImpl::metaclassEnd()
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool ExtensionImpl::non_owned_end(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool ExtensionImpl::non_owned_end(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -208,7 +208,7 @@ bool ExtensionImpl::non_owned_end(Any diagnostics,std::shared_ptr<std::map < Any
 // Attribute Getters & Setters
 //*********************************
 /* Getter & Setter for attribute isRequired */
-bool ExtensionImpl::getIsRequired() const 
+bool ExtensionImpl::getIsRequired() const
 {
 	return m_isRequired;
 }
@@ -217,7 +217,7 @@ bool ExtensionImpl::getIsRequired() const
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference metaclass */
-std::shared_ptr<uml::Class> ExtensionImpl::getMetaclass() const
+const std::shared_ptr<uml::Class>& ExtensionImpl::getMetaclass() const
 {
     return m_metaclass;
 }
@@ -446,7 +446,7 @@ void ExtensionImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHa
 	}
 }
 
-std::shared_ptr<ecore::EClass> ExtensionImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& ExtensionImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getExtension_Class();
 }
@@ -478,7 +478,7 @@ bool ExtensionImpl::internalEIsSet(int featureID) const
 	return AssociationImpl::internalEIsSet(featureID);
 }
 
-bool ExtensionImpl::eSet(int featureID, Any newValue)
+bool ExtensionImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -490,7 +490,7 @@ bool ExtensionImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any ExtensionImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any ExtensionImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

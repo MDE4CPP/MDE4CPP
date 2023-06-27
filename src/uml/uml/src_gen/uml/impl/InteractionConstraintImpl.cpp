@@ -165,32 +165,32 @@ std::shared_ptr<ecore::EObject> InteractionConstraintImpl::copy() const
 //*********************************
 // Operations
 //*********************************
-bool InteractionConstraintImpl::dynamic_variables(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool InteractionConstraintImpl::dynamic_variables(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool InteractionConstraintImpl::global_data(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool InteractionConstraintImpl::global_data(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool InteractionConstraintImpl::maxint_greater_equal_minint(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool InteractionConstraintImpl::maxint_greater_equal_minint(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool InteractionConstraintImpl::maxint_positive(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool InteractionConstraintImpl::maxint_positive(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool InteractionConstraintImpl::minint_maxint(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool InteractionConstraintImpl::minint_maxint(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool InteractionConstraintImpl::minint_non_negative(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool InteractionConstraintImpl::minint_non_negative(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -203,22 +203,22 @@ bool InteractionConstraintImpl::minint_non_negative(Any diagnostics,std::shared_
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference maxint */
-std::shared_ptr<uml::ValueSpecification> InteractionConstraintImpl::getMaxint() const
+const std::shared_ptr<uml::ValueSpecification>& InteractionConstraintImpl::getMaxint() const
 {
     return m_maxint;
 }
-void InteractionConstraintImpl::setMaxint(std::shared_ptr<uml::ValueSpecification> _maxint)
+void InteractionConstraintImpl::setMaxint(const std::shared_ptr<uml::ValueSpecification>& _maxint)
 {
     m_maxint = _maxint;
 	
 }
 
 /* Getter & Setter for reference minint */
-std::shared_ptr<uml::ValueSpecification> InteractionConstraintImpl::getMinint() const
+const std::shared_ptr<uml::ValueSpecification>& InteractionConstraintImpl::getMinint() const
 {
     return m_minint;
 }
-void InteractionConstraintImpl::setMinint(std::shared_ptr<uml::ValueSpecification> _minint)
+void InteractionConstraintImpl::setMinint(const std::shared_ptr<uml::ValueSpecification>& _minint)
 {
     m_minint = _minint;
 	
@@ -402,7 +402,7 @@ void InteractionConstraintImpl::saveContent(std::shared_ptr<persistence::interfa
 	}
 }
 
-std::shared_ptr<ecore::EClass> InteractionConstraintImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& InteractionConstraintImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getInteractionConstraint_Class();
 }
@@ -434,7 +434,7 @@ bool InteractionConstraintImpl::internalEIsSet(int featureID) const
 	return ConstraintImpl::internalEIsSet(featureID);
 }
 
-bool InteractionConstraintImpl::eSet(int featureID, Any newValue)
+bool InteractionConstraintImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -462,7 +462,7 @@ bool InteractionConstraintImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any InteractionConstraintImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any InteractionConstraintImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

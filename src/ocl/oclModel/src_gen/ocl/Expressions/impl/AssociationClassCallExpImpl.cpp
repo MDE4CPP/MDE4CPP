@@ -213,11 +213,11 @@ std::shared_ptr<ecore::EObject> AssociationClassCallExpImpl::copy() const
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference referredAssociationClass */
-std::shared_ptr<ecore::EReference> AssociationClassCallExpImpl::getReferredAssociationClass() const
+const std::shared_ptr<ecore::EReference>& AssociationClassCallExpImpl::getReferredAssociationClass() const
 {
     return m_referredAssociationClass;
 }
-void AssociationClassCallExpImpl::setReferredAssociationClass(std::shared_ptr<ecore::EReference> _referredAssociationClass)
+void AssociationClassCallExpImpl::setReferredAssociationClass(const std::shared_ptr<ecore::EReference>& _referredAssociationClass)
 {
     m_referredAssociationClass = _referredAssociationClass;
 	
@@ -394,7 +394,7 @@ void AssociationClassCallExpImpl::saveContent(std::shared_ptr<persistence::inter
 	}
 }
 
-std::shared_ptr<ecore::EClass> AssociationClassCallExpImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& AssociationClassCallExpImpl::eStaticClass() const
 {
 	return ocl::Expressions::ExpressionsPackage::eInstance()->getAssociationClassCallExp_Class();
 }
@@ -422,7 +422,7 @@ bool AssociationClassCallExpImpl::internalEIsSet(int featureID) const
 	return NavigationCallExpImpl::internalEIsSet(featureID);
 }
 
-bool AssociationClassCallExpImpl::eSet(int featureID, Any newValue)
+bool AssociationClassCallExpImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -442,7 +442,7 @@ bool AssociationClassCallExpImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any AssociationClassCallExpImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any AssociationClassCallExpImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

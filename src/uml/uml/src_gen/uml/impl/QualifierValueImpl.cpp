@@ -112,17 +112,17 @@ std::shared_ptr<ecore::EObject> QualifierValueImpl::copy() const
 //*********************************
 // Operations
 //*********************************
-bool QualifierValueImpl::multiplicity_of_qualifier(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool QualifierValueImpl::multiplicity_of_qualifier(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool QualifierValueImpl::qualifier_attribute(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool QualifierValueImpl::qualifier_attribute(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool QualifierValueImpl::type_of_qualifier(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool QualifierValueImpl::type_of_qualifier(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -135,22 +135,22 @@ bool QualifierValueImpl::type_of_qualifier(Any diagnostics,std::shared_ptr<std::
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference qualifier */
-std::shared_ptr<uml::Property> QualifierValueImpl::getQualifier() const
+const std::shared_ptr<uml::Property>& QualifierValueImpl::getQualifier() const
 {
     return m_qualifier;
 }
-void QualifierValueImpl::setQualifier(std::shared_ptr<uml::Property> _qualifier)
+void QualifierValueImpl::setQualifier(const std::shared_ptr<uml::Property>& _qualifier)
 {
     m_qualifier = _qualifier;
 	
 }
 
 /* Getter & Setter for reference value */
-std::shared_ptr<uml::InputPin> QualifierValueImpl::getValue() const
+const std::shared_ptr<uml::InputPin>& QualifierValueImpl::getValue() const
 {
     return m_value;
 }
-void QualifierValueImpl::setValue(std::shared_ptr<uml::InputPin> _value)
+void QualifierValueImpl::setValue(const std::shared_ptr<uml::InputPin>& _value)
 {
     m_value = _value;
 	
@@ -301,7 +301,7 @@ void QualifierValueImpl::saveContent(std::shared_ptr<persistence::interfaces::XS
 	}
 }
 
-std::shared_ptr<ecore::EClass> QualifierValueImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& QualifierValueImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getQualifierValue_Class();
 }
@@ -333,7 +333,7 @@ bool QualifierValueImpl::internalEIsSet(int featureID) const
 	return ElementImpl::internalEIsSet(featureID);
 }
 
-bool QualifierValueImpl::eSet(int featureID, Any newValue)
+bool QualifierValueImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -361,7 +361,7 @@ bool QualifierValueImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any QualifierValueImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any QualifierValueImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

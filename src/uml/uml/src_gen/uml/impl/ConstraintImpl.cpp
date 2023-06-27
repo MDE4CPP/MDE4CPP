@@ -160,17 +160,17 @@ std::shared_ptr<ecore::EObject> ConstraintImpl::copy() const
 //*********************************
 // Operations
 //*********************************
-bool ConstraintImpl::boolean_value(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool ConstraintImpl::boolean_value(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool ConstraintImpl::no_side_effects(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool ConstraintImpl::no_side_effects(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool ConstraintImpl::not_apply_to_self(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool ConstraintImpl::not_apply_to_self(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -183,7 +183,7 @@ bool ConstraintImpl::not_apply_to_self(Any diagnostics,std::shared_ptr<std::map 
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference constrainedElement */
-std::shared_ptr<Bag<uml::Element>> ConstraintImpl::getConstrainedElement() const
+const std::shared_ptr<Bag<uml::Element>>& ConstraintImpl::getConstrainedElement() const
 {
 	if(m_constrainedElement == nullptr)
 	{
@@ -206,11 +206,11 @@ void ConstraintImpl::setContext(std::weak_ptr<uml::Namespace> _context)
 }
 
 /* Getter & Setter for reference specification */
-std::shared_ptr<uml::ValueSpecification> ConstraintImpl::getSpecification() const
+const std::shared_ptr<uml::ValueSpecification>& ConstraintImpl::getSpecification() const
 {
     return m_specification;
 }
-void ConstraintImpl::setSpecification(std::shared_ptr<uml::ValueSpecification> _specification)
+void ConstraintImpl::setSpecification(const std::shared_ptr<uml::ValueSpecification>& _specification)
 {
     m_specification = _specification;
 	
@@ -421,7 +421,7 @@ void ConstraintImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveH
 	}
 }
 
-std::shared_ptr<ecore::EClass> ConstraintImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& ConstraintImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getConstraint_Class();
 }
@@ -460,7 +460,7 @@ bool ConstraintImpl::internalEIsSet(int featureID) const
 	return PackageableElementImpl::internalEIsSet(featureID);
 }
 
-bool ConstraintImpl::eSet(int featureID, Any newValue)
+bool ConstraintImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -525,7 +525,7 @@ bool ConstraintImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any ConstraintImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any ConstraintImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

@@ -53,13 +53,13 @@ namespace uml
 			effect = null
 			*/
 			 
-			virtual bool associated_actions(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
+			virtual bool associated_actions(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context) ;
 			/*!
 			A ProtocolTransition always belongs to a ProtocolStateMachine.
 			container.belongsToPSM()
 			*/
 			 
-			virtual bool belongs_to_psm(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
+			virtual bool belongs_to_psm(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context) ;
 			/*!
 			Derivation for ProtocolTransition::/referred
 			result = (trigger->collect(event)->select(oclIsKindOf(CallEvent))->collect(oclAsType(CallEvent).operation)->asSet())
@@ -74,7 +74,7 @@ namespace uml
 			else true endif
 			*/
 			 
-			virtual bool refers_to_operation(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
+			virtual bool refers_to_operation(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context) ;
 			
 			//*********************************
 			// Attribute Getters & Setters
@@ -88,31 +88,31 @@ namespace uml
 			<p>From package UML::StateMachines.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::Constraint> getPostCondition() const ;
+			virtual const std::shared_ptr<uml::Constraint>& getPostCondition() const ;
 			/*!
 			Specifies the post condition of the Transition which is the Condition that should be obtained once the Transition is triggered. This post condition is part of the post condition of the Operation connected to the Transition.
 			<p>From package UML::StateMachines.</p>
 			*/
 			
-			virtual void setPostCondition(std::shared_ptr<uml::Constraint>) ;
+			virtual void setPostCondition(const std::shared_ptr<uml::Constraint>&) ;
 			/*!
 			Specifies the precondition of the Transition. It specifies the Condition that should be verified before triggering the Transition. This guard condition added to the source State will be evaluated as part of the precondition of the Operation referred by the Transition if any.
 			<p>From package UML::StateMachines.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::Constraint> getPreCondition() const ;
+			virtual const std::shared_ptr<uml::Constraint>& getPreCondition() const ;
 			/*!
 			Specifies the precondition of the Transition. It specifies the Condition that should be verified before triggering the Transition. This guard condition added to the source State will be evaluated as part of the precondition of the Operation referred by the Transition if any.
 			<p>From package UML::StateMachines.</p>
 			*/
 			
-			virtual void setPreCondition(std::shared_ptr<uml::Constraint>) ;
+			virtual void setPreCondition(const std::shared_ptr<uml::Constraint>&) ;
 			/*!
 			This association refers to the associated Operation. It is derived from the Operation of the CallEvent Trigger when applicable.
 			<p>From package UML::StateMachines.</p>
 			*/
 			
-			virtual std::shared_ptr<Bag<uml::Operation>> getReferred() const ;
+			virtual const std::shared_ptr<Bag<uml::Operation>>& getReferred() const ;
 			
 			//*********************************
 			// Union Reference Getters
@@ -170,19 +170,19 @@ namespace uml
 			virtual void saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const;
 
 		protected:
-			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
+			virtual const std::shared_ptr<ecore::EClass>& eStaticClass() const;
 
 			//*********************************
 			// EStructuralFeature Get/Set/IsSet
 			//*********************************
 			virtual Any eGet(int featureID, bool resolve, bool coreType) const ;
-			virtual bool eSet(int featureID, Any newValue) ;
+			virtual bool eSet(int featureID, const Any& newValue) ;
 			virtual bool internalEIsSet(int featureID) const ;
 
 			//*********************************
 			// EOperation Invoke
 			//*********************************
-			virtual Any eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments) ;
+			virtual Any eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments) ;
 
 		private:
 			std::weak_ptr<uml::ProtocolTransition> m_thisProtocolTransitionPtr;

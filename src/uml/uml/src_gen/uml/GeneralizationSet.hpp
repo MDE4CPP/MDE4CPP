@@ -89,7 +89,7 @@ namespace uml
 			generalization->collect(general)->asSet()->size() <= 1
 			*/
 			 
-			virtual bool generalization_same_classifier(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
+			virtual bool generalization_same_classifier(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context) = 0;
 			/*!
 			The Classifier that maps to a GeneralizationSet may neither be a specific nor a general Classifier in any of the Generalization relationships defined for that GeneralizationSet. In other words, a power type may not be an instance of itself nor may its instances be its subclasses.
 			powertype <> null implies generalization->forAll( gen | 
@@ -97,7 +97,7 @@ namespace uml
 			  )
 			*/
 			 
-			virtual bool maps_to_generalization_set(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
+			virtual bool maps_to_generalization_set(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context) = 0;
 
 			//*********************************
 			// Attribute Getters & Setters
@@ -135,19 +135,19 @@ namespace uml
 			<p>From package UML::Classification.</p>
 			*/
 			
-			virtual std::shared_ptr<Bag<uml::Generalization>> getGeneralization() const = 0;
+			virtual const std::shared_ptr<Bag<uml::Generalization>>& getGeneralization() const = 0;
 			/*!
 			Designates the Classifier that is defined as the power type for the associated GeneralizationSet, if there is one.
 			<p>From package UML::Classification.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::Classifier> getPowertype() const = 0;
+			virtual const std::shared_ptr<uml::Classifier>& getPowertype() const = 0;
 			/*!
 			Designates the Classifier that is defined as the power type for the associated GeneralizationSet, if there is one.
 			<p>From package UML::Classification.</p>
 			*/
 			
-			virtual void setPowertype(std::shared_ptr<uml::Classifier>) = 0;
+			virtual void setPowertype(const std::shared_ptr<uml::Classifier>&) = 0;
 
 			//*********************************
 			// Union Reference Getters

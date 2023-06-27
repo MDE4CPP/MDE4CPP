@@ -148,12 +148,12 @@ WriteVariableActionImpl& WriteVariableActionImpl::operator=(const WriteVariableA
 //*********************************
 // Operations
 //*********************************
-bool WriteVariableActionImpl::multiplicity(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool WriteVariableActionImpl::multiplicity(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool WriteVariableActionImpl::value_type(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool WriteVariableActionImpl::value_type(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -166,11 +166,11 @@ bool WriteVariableActionImpl::value_type(Any diagnostics,std::shared_ptr<std::ma
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference value */
-std::shared_ptr<uml::InputPin> WriteVariableActionImpl::getValue() const
+const std::shared_ptr<uml::InputPin>& WriteVariableActionImpl::getValue() const
 {
     return m_value;
 }
-void WriteVariableActionImpl::setValue(std::shared_ptr<uml::InputPin> _value)
+void WriteVariableActionImpl::setValue(const std::shared_ptr<uml::InputPin>& _value)
 {
     m_value = _value;
 	
@@ -376,7 +376,7 @@ void WriteVariableActionImpl::saveContent(std::shared_ptr<persistence::interface
 	}
 }
 
-std::shared_ptr<ecore::EClass> WriteVariableActionImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& WriteVariableActionImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getWriteVariableAction_Class();
 }
@@ -404,7 +404,7 @@ bool WriteVariableActionImpl::internalEIsSet(int featureID) const
 	return VariableActionImpl::internalEIsSet(featureID);
 }
 
-bool WriteVariableActionImpl::eSet(int featureID, Any newValue)
+bool WriteVariableActionImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -424,7 +424,7 @@ bool WriteVariableActionImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any WriteVariableActionImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any WriteVariableActionImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

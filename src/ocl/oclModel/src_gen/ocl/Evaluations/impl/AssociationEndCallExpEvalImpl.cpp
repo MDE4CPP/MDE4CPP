@@ -34,10 +34,10 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "fUML/Semantics/Values/ValuesFactory.hpp"
 #include "fUML/Semantics/Loci/LociFactory.hpp"
-#include "fUML/Semantics/SimpleClassifiers/SimpleClassifiersFactory.hpp"
 #include "uml/umlFactory.hpp"
+#include "fUML/Semantics/Values/ValuesFactory.hpp"
+#include "fUML/Semantics/SimpleClassifiers/SimpleClassifiersFactory.hpp"
 #include "ocl/Evaluations/EvaluationsFactory.hpp"
 #include "ocl/Expressions/ExpressionsFactory.hpp"
 #include "ocl/Evaluations/EvalEnvironment.hpp"
@@ -129,11 +129,11 @@ std::shared_ptr<ecore::EObject> AssociationEndCallExpEvalImpl::copy() const
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference referredAssociationEnd */
-std::shared_ptr<fUML::Semantics::SimpleClassifiers::StringValue> AssociationEndCallExpEvalImpl::getReferredAssociationEnd() const
+const std::shared_ptr<fUML::Semantics::SimpleClassifiers::StringValue>& AssociationEndCallExpEvalImpl::getReferredAssociationEnd() const
 {
     return m_referredAssociationEnd;
 }
-void AssociationEndCallExpEvalImpl::setReferredAssociationEnd(std::shared_ptr<fUML::Semantics::SimpleClassifiers::StringValue> _referredAssociationEnd)
+void AssociationEndCallExpEvalImpl::setReferredAssociationEnd(const std::shared_ptr<fUML::Semantics::SimpleClassifiers::StringValue>& _referredAssociationEnd)
 {
     m_referredAssociationEnd = _referredAssociationEnd;
 	
@@ -254,7 +254,7 @@ void AssociationEndCallExpEvalImpl::saveContent(std::shared_ptr<persistence::int
 	}
 }
 
-std::shared_ptr<ecore::EClass> AssociationEndCallExpEvalImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& AssociationEndCallExpEvalImpl::eStaticClass() const
 {
 	return ocl::Evaluations::EvaluationsPackage::eInstance()->getAssociationEndCallExpEval_Class();
 }
@@ -282,7 +282,7 @@ bool AssociationEndCallExpEvalImpl::internalEIsSet(int featureID) const
 	return NavigationCallExpEvalImpl::internalEIsSet(featureID);
 }
 
-bool AssociationEndCallExpEvalImpl::eSet(int featureID, Any newValue)
+bool AssociationEndCallExpEvalImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -302,7 +302,7 @@ bool AssociationEndCallExpEvalImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any AssociationEndCallExpEvalImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any AssociationEndCallExpEvalImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

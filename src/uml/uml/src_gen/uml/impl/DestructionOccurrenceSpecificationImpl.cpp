@@ -141,7 +141,7 @@ std::shared_ptr<ecore::EObject> DestructionOccurrenceSpecificationImpl::copy() c
 //*********************************
 // Operations
 //*********************************
-bool DestructionOccurrenceSpecificationImpl::no_occurrence_specifications_below(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool DestructionOccurrenceSpecificationImpl::no_occurrence_specifications_below(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -278,7 +278,7 @@ void DestructionOccurrenceSpecificationImpl::saveContent(std::shared_ptr<persist
 	}
 }
 
-std::shared_ptr<ecore::EClass> DestructionOccurrenceSpecificationImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& DestructionOccurrenceSpecificationImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getDestructionOccurrenceSpecification_Class();
 }
@@ -302,7 +302,7 @@ bool DestructionOccurrenceSpecificationImpl::internalEIsSet(int featureID) const
 	return MessageOccurrenceSpecificationImpl::internalEIsSet(featureID);
 }
 
-bool DestructionOccurrenceSpecificationImpl::eSet(int featureID, Any newValue)
+bool DestructionOccurrenceSpecificationImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -314,7 +314,7 @@ bool DestructionOccurrenceSpecificationImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any DestructionOccurrenceSpecificationImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any DestructionOccurrenceSpecificationImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

@@ -153,12 +153,12 @@ std::shared_ptr<ecore::EObject> JoinNodeImpl::copy() const
 //*********************************
 // Operations
 //*********************************
-bool JoinNodeImpl::incoming_object_flow(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool JoinNodeImpl::incoming_object_flow(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool JoinNodeImpl::one_outgoing_edge(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool JoinNodeImpl::one_outgoing_edge(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -167,7 +167,7 @@ bool JoinNodeImpl::one_outgoing_edge(Any diagnostics,std::shared_ptr<std::map < 
 // Attribute Getters & Setters
 //*********************************
 /* Getter & Setter for attribute isCombineDuplicate */
-bool JoinNodeImpl::getIsCombineDuplicate() const 
+bool JoinNodeImpl::getIsCombineDuplicate() const
 {
 	return m_isCombineDuplicate;
 }
@@ -181,11 +181,11 @@ void JoinNodeImpl::setIsCombineDuplicate(bool _isCombineDuplicate)
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference joinSpec */
-std::shared_ptr<uml::ValueSpecification> JoinNodeImpl::getJoinSpec() const
+const std::shared_ptr<uml::ValueSpecification>& JoinNodeImpl::getJoinSpec() const
 {
     return m_joinSpec;
 }
-void JoinNodeImpl::setJoinSpec(std::shared_ptr<uml::ValueSpecification> _joinSpec)
+void JoinNodeImpl::setJoinSpec(const std::shared_ptr<uml::ValueSpecification>& _joinSpec)
 {
     m_joinSpec = _joinSpec;
 	
@@ -394,7 +394,7 @@ void JoinNodeImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHan
 	}
 }
 
-std::shared_ptr<ecore::EClass> JoinNodeImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& JoinNodeImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getJoinNode_Class();
 }
@@ -426,7 +426,7 @@ bool JoinNodeImpl::internalEIsSet(int featureID) const
 	return ControlNodeImpl::internalEIsSet(featureID);
 }
 
-bool JoinNodeImpl::eSet(int featureID, Any newValue)
+bool JoinNodeImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -453,7 +453,7 @@ bool JoinNodeImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any JoinNodeImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any JoinNodeImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

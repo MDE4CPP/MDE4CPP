@@ -97,13 +97,13 @@ namespace uml
 			value<>null implies value.is(1,1)
 			*/
 			 
-			virtual bool multiplicity(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
+			virtual bool multiplicity(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context) = 0;
 			/*!
 			The type of the value InputPin must conform to the type of the variable.
 			value <> null implies value.type.conformsTo(variable.type)
 			*/
 			 
-			virtual bool value_type(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
+			virtual bool value_type(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context) = 0;
 
 			//*********************************
 			// Attribute Getters & Setters
@@ -117,13 +117,13 @@ namespace uml
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::InputPin> getValue() const = 0;
+			virtual const std::shared_ptr<uml::InputPin>& getValue() const = 0;
 			/*!
 			The InputPin that gives the value to be added or removed from the Variable.
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual void setValue(std::shared_ptr<uml::InputPin>) = 0;
+			virtual void setValue(const std::shared_ptr<uml::InputPin>&) = 0;
 
 			//*********************************
 			// Union Reference Getters

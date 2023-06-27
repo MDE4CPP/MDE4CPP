@@ -117,7 +117,7 @@ namespace uml
 			       oclIsKindOf(ActivityParameterNode) and oclAsType(ActivityParameterNode).parameter = p)->size()= 1)
 			*/
 			 
-			virtual bool maximum_one_parameter_node(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
+			virtual bool maximum_one_parameter_node(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context) = 0;
 			/*!
 			A Parameter with direction inout must have exactly two ActivityParameterNodes in an Activity, at most one with incoming ActivityEdges and at most one with outgoing ActivityEdges.
 			ownedParameter->forAll(p | 
@@ -130,7 +130,7 @@ namespace uml
 			)
 			*/
 			 
-			virtual bool maximum_two_parameter_nodes(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
+			virtual bool maximum_two_parameter_nodes(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context) = 0;
 
 			//*********************************
 			// Attribute Getters & Setters
@@ -168,34 +168,34 @@ namespace uml
 			<p>From package UML::Activities.</p>
 			*/
 			
-			virtual std::shared_ptr<Subset<uml::ActivityEdge, uml::Element>> getEdge() const = 0;
+			virtual const std::shared_ptr<Subset<uml::ActivityEdge, uml::Element>>& getEdge() const = 0;
 			
 			/*!
 			ActivityNodes coordinated by the Activity.
 			<p>From package UML::Activities.</p>
 			*/
 			
-			virtual std::shared_ptr<SubsetUnion<uml::ActivityNode, uml::Element>> getNode() const = 0;
-			virtual std::shared_ptr<SubsetUnion<uml::ActivityGroup, uml::ActivityGroup>> getOwnedGroup() const = 0;
-			virtual std::shared_ptr<Subset<uml::ActivityNode, uml::ActivityNode /*Subset does not reference a union*/>> getOwnedNode() const = 0;
+			virtual const std::shared_ptr<SubsetUnion<uml::ActivityNode, uml::Element>>& getNode() const = 0;
+			virtual const std::shared_ptr<SubsetUnion<uml::ActivityGroup, uml::ActivityGroup>>& getOwnedGroup() const = 0;
+			virtual const std::shared_ptr<Subset<uml::ActivityNode, uml::ActivityNode /*Subset does not reference a union*/>>& getOwnedNode() const = 0;
 			/*!
 			Top-level ActivityPartitions in the Activity.
 			<p>From package UML::Activities.</p>
 			*/
 			
-			virtual std::shared_ptr<Subset<uml::ActivityPartition, uml::ActivityGroup /*Subset does not reference a union*/, uml::ActivityGroup>> getPartition() const = 0;
+			virtual const std::shared_ptr<Subset<uml::ActivityPartition, uml::ActivityGroup /*Subset does not reference a union*/, uml::ActivityGroup>>& getPartition() const = 0;
 			/*!
 			Top-level StructuredActivityNodes in the Activity.
 			<p>From package UML::Activities.</p>
 			*/
 			
-			virtual std::shared_ptr<Subset<uml::StructuredActivityNode, uml::ActivityGroup, uml::ActivityNode /*Subset does not reference a union*/>> getStructuredNode() const = 0;
+			virtual const std::shared_ptr<Subset<uml::StructuredActivityNode, uml::ActivityGroup, uml::ActivityNode /*Subset does not reference a union*/>>& getStructuredNode() const = 0;
 			/*!
 			Top-level Variables defined by the Activity.
 			<p>From package UML::Activities.</p>
 			*/
 			
-			virtual std::shared_ptr<Subset<uml::Variable, uml::NamedElement>> getVariable() const = 0;
+			virtual const std::shared_ptr<Subset<uml::Variable, uml::NamedElement>>& getVariable() const = 0;
 
 			//*********************************
 			// Union Reference Getters

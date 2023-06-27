@@ -166,7 +166,7 @@ std::shared_ptr<ecore::EObject> InterruptibleActivityRegionImpl::copy() const
 //*********************************
 // Operations
 //*********************************
-bool InterruptibleActivityRegionImpl::interrupting_edges(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool InterruptibleActivityRegionImpl::interrupting_edges(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -179,7 +179,7 @@ bool InterruptibleActivityRegionImpl::interrupting_edges(Any diagnostics,std::sh
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference interruptingEdge */
-std::shared_ptr<Bag<uml::ActivityEdge>> InterruptibleActivityRegionImpl::getInterruptingEdge() const
+const std::shared_ptr<Bag<uml::ActivityEdge>>& InterruptibleActivityRegionImpl::getInterruptingEdge() const
 {
 	if(m_interruptingEdge == nullptr)
 	{
@@ -191,7 +191,7 @@ std::shared_ptr<Bag<uml::ActivityEdge>> InterruptibleActivityRegionImpl::getInte
 }
 
 /* Getter & Setter for reference node */
-std::shared_ptr<Subset<uml::ActivityNode, uml::ActivityNode>> InterruptibleActivityRegionImpl::getNode() const
+const std::shared_ptr<Subset<uml::ActivityNode, uml::ActivityNode>>& InterruptibleActivityRegionImpl::getNode() const
 {
 	if(m_node == nullptr)
 	{
@@ -399,7 +399,7 @@ void InterruptibleActivityRegionImpl::saveContent(std::shared_ptr<persistence::i
 	}
 }
 
-std::shared_ptr<ecore::EClass> InterruptibleActivityRegionImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& InterruptibleActivityRegionImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getInterruptibleActivityRegion_Class();
 }
@@ -431,7 +431,7 @@ bool InterruptibleActivityRegionImpl::internalEIsSet(int featureID) const
 	return ActivityGroupImpl::internalEIsSet(featureID);
 }
 
-bool InterruptibleActivityRegionImpl::eSet(int featureID, Any newValue)
+bool InterruptibleActivityRegionImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -517,7 +517,7 @@ bool InterruptibleActivityRegionImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any InterruptibleActivityRegionImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any InterruptibleActivityRegionImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

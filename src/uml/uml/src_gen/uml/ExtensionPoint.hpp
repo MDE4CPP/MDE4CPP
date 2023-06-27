@@ -95,7 +95,7 @@ namespace uml
 			name->notEmpty ()
 			*/
 			 
-			virtual bool must_have_name(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
+			virtual bool must_have_name(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context) = 0;
 
 			//*********************************
 			// Attribute Getters & Setters

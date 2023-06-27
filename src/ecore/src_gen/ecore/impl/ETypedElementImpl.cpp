@@ -121,7 +121,7 @@ ETypedElementImpl& ETypedElementImpl::operator=(const ETypedElementImpl & obj)
 // Attribute Getters & Setters
 //*********************************
 /* Getter & Setter for attribute lowerBound */
-int ETypedElementImpl::getLowerBound() const 
+int ETypedElementImpl::getLowerBound() const
 {
 	return m_lowerBound;
 }
@@ -132,13 +132,13 @@ void ETypedElementImpl::setLowerBound(int _lowerBound)
 }
 
 /* Getter & Setter for attribute many */
-bool ETypedElementImpl::isMany() const 
+bool ETypedElementImpl::isMany() const
 {
 	return m_many;
 }
 
 /* Getter & Setter for attribute ordered */
-bool ETypedElementImpl::isOrdered() const 
+bool ETypedElementImpl::isOrdered() const
 {
 	return m_ordered;
 }
@@ -149,7 +149,7 @@ void ETypedElementImpl::setOrdered(bool _ordered)
 }
 
 /* Getter & Setter for attribute required */
-bool ETypedElementImpl::isRequired() const 
+bool ETypedElementImpl::isRequired() const
 {
 	return m_required;
 }
@@ -160,7 +160,7 @@ void ETypedElementImpl::setRequired(bool _required)
 }
 
 /* Getter & Setter for attribute unique */
-bool ETypedElementImpl::isUnique() const 
+bool ETypedElementImpl::isUnique() const
 {
 	return m_unique;
 }
@@ -171,7 +171,7 @@ void ETypedElementImpl::setUnique(bool _unique)
 }
 
 /* Getter & Setter for attribute upperBound */
-int ETypedElementImpl::getUpperBound() const 
+int ETypedElementImpl::getUpperBound() const
 {
 	return m_upperBound;
 }
@@ -185,22 +185,22 @@ void ETypedElementImpl::setUpperBound(int _upperBound)
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference eGenericType */
-std::shared_ptr<ecore::EGenericType> ETypedElementImpl::getEGenericType() const
+const std::shared_ptr<ecore::EGenericType>& ETypedElementImpl::getEGenericType() const
 {
     return m_eGenericType;
 }
-void ETypedElementImpl::setEGenericType(std::shared_ptr<ecore::EGenericType> _eGenericType)
+void ETypedElementImpl::setEGenericType(const std::shared_ptr<ecore::EGenericType>& _eGenericType)
 {
     m_eGenericType = _eGenericType;
 	
 }
 
 /* Getter & Setter for reference eType */
-std::shared_ptr<ecore::EClassifier> ETypedElementImpl::getEType() const
+const std::shared_ptr<ecore::EClassifier>& ETypedElementImpl::getEType() const
 {
     return m_eType;
 }
-void ETypedElementImpl::setEType(std::shared_ptr<ecore::EClassifier> _eType)
+void ETypedElementImpl::setEType(const std::shared_ptr<ecore::EClassifier>& _eType)
 {
     m_eType = _eType;
 	
@@ -418,7 +418,7 @@ void ETypedElementImpl::saveContent(std::shared_ptr<persistence::interfaces::XSa
 	}
 }
 
-std::shared_ptr<EClass> ETypedElementImpl::eStaticClass() const
+const std::shared_ptr<EClass>& ETypedElementImpl::eStaticClass() const
 {
 	return ecore::ecorePackage::eInstance()->getETypedElement_Class();
 }
@@ -474,7 +474,7 @@ bool ETypedElementImpl::internalEIsSet(int featureID) const
 	return ENamedElementImpl::internalEIsSet(featureID);
 }
 
-bool ETypedElementImpl::eSet(int featureID, Any newValue)
+bool ETypedElementImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -537,7 +537,7 @@ bool ETypedElementImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any ETypedElementImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any ETypedElementImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

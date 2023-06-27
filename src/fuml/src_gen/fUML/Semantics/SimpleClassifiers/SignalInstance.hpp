@@ -83,8 +83,8 @@ namespace fUML::Semantics::SimpleClassifiers
 			//*********************************
 			// Reference Getters & Setters
 			//*********************************
-			virtual std::shared_ptr<uml::Signal> getType() const = 0;
-			virtual void setType(std::shared_ptr<uml::Signal>) = 0;
+			virtual const std::shared_ptr<uml::Signal>& getType() const = 0;
+			virtual void setType(const std::shared_ptr<uml::Signal>&) = 0;
 
 			//*********************************
 			// Union Reference Getters

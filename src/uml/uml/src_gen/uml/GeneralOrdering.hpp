@@ -85,7 +85,7 @@ namespace uml
 			after->closure(toAfter.after)->excludes(before)
 			*/
 			 
-			virtual bool irreflexive_transitive_closure(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
+			virtual bool irreflexive_transitive_closure(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context) = 0;
 
 			//*********************************
 			// Attribute Getters & Setters
@@ -99,25 +99,25 @@ namespace uml
 			<p>From package UML::Interactions.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::OccurrenceSpecification> getAfter() const = 0;
+			virtual const std::shared_ptr<uml::OccurrenceSpecification>& getAfter() const = 0;
 			/*!
 			The OccurrenceSpecification referenced comes after the OccurrenceSpecification referenced by before.
 			<p>From package UML::Interactions.</p>
 			*/
 			
-			virtual void setAfter(std::shared_ptr<uml::OccurrenceSpecification>) = 0;
+			virtual void setAfter(const std::shared_ptr<uml::OccurrenceSpecification>&) = 0;
 			/*!
 			The OccurrenceSpecification referenced comes before the OccurrenceSpecification referenced by after.
 			<p>From package UML::Interactions.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::OccurrenceSpecification> getBefore() const = 0;
+			virtual const std::shared_ptr<uml::OccurrenceSpecification>& getBefore() const = 0;
 			/*!
 			The OccurrenceSpecification referenced comes before the OccurrenceSpecification referenced by after.
 			<p>From package UML::Interactions.</p>
 			*/
 			
-			virtual void setBefore(std::shared_ptr<uml::OccurrenceSpecification>) = 0;
+			virtual void setBefore(const std::shared_ptr<uml::OccurrenceSpecification>&) = 0;
 
 			//*********************************
 			// Union Reference Getters

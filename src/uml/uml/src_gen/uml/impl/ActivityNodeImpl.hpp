@@ -85,13 +85,13 @@ namespace uml
 			<p>From package UML::Activities.</p>
 			*/
 			
-			virtual std::shared_ptr<Subset<uml::InterruptibleActivityRegion, uml::ActivityGroup>> getInInterruptibleRegion() const ;
+			virtual const std::shared_ptr<Subset<uml::InterruptibleActivityRegion, uml::ActivityGroup>>& getInInterruptibleRegion() const ;
 			/*!
 			ActivityPartitions containing the ActivityNode.
 			<p>From package UML::Activities.</p>
 			*/
 			
-			virtual std::shared_ptr<Subset<uml::ActivityPartition, uml::ActivityGroup>> getInPartition() const ;
+			virtual const std::shared_ptr<Subset<uml::ActivityPartition, uml::ActivityGroup>>& getInPartition() const ;
 			/*!
 			The StructuredActivityNode containing the ActvityNode, if it is directly owned by a StructuredActivityNode.
 			<p>From package UML::Activities.</p>
@@ -109,19 +109,19 @@ namespace uml
 			<p>From package UML::Activities.</p>
 			*/
 			
-			virtual std::shared_ptr<Bag<uml::ActivityEdge>> getIncoming() const ;
+			virtual const std::shared_ptr<Bag<uml::ActivityEdge>>& getIncoming() const ;
 			/*!
 			ActivityEdges that have the ActivityNode as their source.
 			<p>From package UML::Activities.</p>
 			*/
 			
-			virtual std::shared_ptr<Bag<uml::ActivityEdge>> getOutgoing() const ;
+			virtual const std::shared_ptr<Bag<uml::ActivityEdge>>& getOutgoing() const ;
 			/*!
 			ActivityNodes from a generalization of the Activity containining this ActivityNode that are redefined by this ActivityNode.
 			<p>From package UML::Activities.</p>
 			*/
 			
-			virtual std::shared_ptr<Subset<uml::ActivityNode, uml::RedefinableElement>> getRedefinedNode() const ;
+			virtual const std::shared_ptr<Subset<uml::ActivityNode, uml::RedefinableElement>>& getRedefinedNode() const ;
 			
 			//*********************************
 			// Union Reference Getters
@@ -167,19 +167,19 @@ namespace uml
 			virtual void saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const;
 
 		protected:
-			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
+			virtual const std::shared_ptr<ecore::EClass>& eStaticClass() const;
 
 			//*********************************
 			// EStructuralFeature Get/Set/IsSet
 			//*********************************
 			virtual Any eGet(int featureID, bool resolve, bool coreType) const ;
-			virtual bool eSet(int featureID, Any newValue) ;
+			virtual bool eSet(int featureID, const Any& newValue) ;
 			virtual bool internalEIsSet(int featureID) const ;
 
 			//*********************************
 			// EOperation Invoke
 			//*********************************
-			virtual Any eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments) ;
+			virtual Any eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments) ;
 
 		private:
 			std::weak_ptr<uml::ActivityNode> m_thisActivityNodePtr;

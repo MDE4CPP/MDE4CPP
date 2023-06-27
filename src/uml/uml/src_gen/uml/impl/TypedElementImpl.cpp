@@ -123,11 +123,11 @@ TypedElementImpl& TypedElementImpl::operator=(const TypedElementImpl & obj)
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference type */
-std::shared_ptr<uml::Type> TypedElementImpl::getType() const
+const std::shared_ptr<uml::Type>& TypedElementImpl::getType() const
 {
     return m_type;
 }
-void TypedElementImpl::setType(std::shared_ptr<uml::Type> _type)
+void TypedElementImpl::setType(const std::shared_ptr<uml::Type>& _type)
 {
     m_type = _type;
 	
@@ -278,7 +278,7 @@ void TypedElementImpl::saveContent(std::shared_ptr<persistence::interfaces::XSav
 	}
 }
 
-std::shared_ptr<ecore::EClass> TypedElementImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& TypedElementImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getTypedElement_Class();
 }
@@ -306,7 +306,7 @@ bool TypedElementImpl::internalEIsSet(int featureID) const
 	return NamedElementImpl::internalEIsSet(featureID);
 }
 
-bool TypedElementImpl::eSet(int featureID, Any newValue)
+bool TypedElementImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -326,7 +326,7 @@ bool TypedElementImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any TypedElementImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any TypedElementImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

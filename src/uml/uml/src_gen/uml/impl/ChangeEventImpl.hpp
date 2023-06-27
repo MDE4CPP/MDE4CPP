@@ -63,13 +63,13 @@ namespace uml
 			<p>From package UML::CommonBehavior.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::ValueSpecification> getChangeExpression() const ;
+			virtual const std::shared_ptr<uml::ValueSpecification>& getChangeExpression() const ;
 			/*!
 			A Boolean-valued ValueSpecification that will result in a ChangeEvent whenever its value changes from false to true.
 			<p>From package UML::CommonBehavior.</p>
 			*/
 			
-			virtual void setChangeExpression(std::shared_ptr<uml::ValueSpecification>) ;
+			virtual void setChangeExpression(const std::shared_ptr<uml::ValueSpecification>&) ;
 			
 			//*********************************
 			// Union Reference Getters
@@ -110,19 +110,19 @@ namespace uml
 			virtual void saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const;
 
 		protected:
-			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
+			virtual const std::shared_ptr<ecore::EClass>& eStaticClass() const;
 
 			//*********************************
 			// EStructuralFeature Get/Set/IsSet
 			//*********************************
 			virtual Any eGet(int featureID, bool resolve, bool coreType) const ;
-			virtual bool eSet(int featureID, Any newValue) ;
+			virtual bool eSet(int featureID, const Any& newValue) ;
 			virtual bool internalEIsSet(int featureID) const ;
 
 			//*********************************
 			// EOperation Invoke
 			//*********************************
-			virtual Any eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments) ;
+			virtual Any eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments) ;
 
 		private:
 			std::weak_ptr<uml::ChangeEvent> m_thisChangeEventPtr;

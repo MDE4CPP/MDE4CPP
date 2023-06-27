@@ -344,7 +344,7 @@ void NullLiteralExpImpl::saveContent(std::shared_ptr<persistence::interfaces::XS
 	}
 }
 
-std::shared_ptr<ecore::EClass> NullLiteralExpImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& NullLiteralExpImpl::eStaticClass() const
 {
 	return ocl::Expressions::ExpressionsPackage::eInstance()->getNullLiteralExp_Class();
 }
@@ -368,7 +368,7 @@ bool NullLiteralExpImpl::internalEIsSet(int featureID) const
 	return PrimitiveLiteralExpImpl::internalEIsSet(featureID);
 }
 
-bool NullLiteralExpImpl::eSet(int featureID, Any newValue)
+bool NullLiteralExpImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -380,7 +380,7 @@ bool NullLiteralExpImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any NullLiteralExpImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any NullLiteralExpImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

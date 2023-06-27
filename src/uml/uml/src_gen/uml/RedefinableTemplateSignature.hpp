@@ -96,7 +96,7 @@ namespace uml
 			classifier.allParents()->forAll(c | c.ownedTemplateSignature->notEmpty() implies self->closure(extendedSignature)->includes(c.ownedTemplateSignature))
 			*/
 			 
-			virtual bool redefines_parents(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
+			virtual bool redefines_parents(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context) = 0;
 
 			//*********************************
 			// Attribute Getters & Setters
@@ -129,13 +129,13 @@ namespace uml
 			<p>From package UML::Classification.</p>
 			*/
 			
-			virtual std::shared_ptr<Subset<uml::RedefinableTemplateSignature, uml::RedefinableElement>> getExtendedSignature() const = 0;
+			virtual const std::shared_ptr<Subset<uml::RedefinableTemplateSignature, uml::RedefinableElement>>& getExtendedSignature() const = 0;
 			/*!
 			The formal template parameters of the extended signatures.
 			<p>From package UML::Classification.</p>
 			*/
 			
-			virtual std::shared_ptr<Subset<uml::TemplateParameter, uml::TemplateParameter>> getInheritedParameter() const = 0;
+			virtual const std::shared_ptr<Subset<uml::TemplateParameter, uml::TemplateParameter>>& getInheritedParameter() const = 0;
 
 			//*********************************
 			// Union Reference Getters

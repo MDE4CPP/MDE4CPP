@@ -55,13 +55,13 @@ namespace uml
 			value.type.conformsTo(result.type)
 			*/
 			 
-			virtual bool compatible_type(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
+			virtual bool compatible_type(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context) ;
 			/*!
 			The multiplicity of the result OutputPin is 1..1
 			result.is(1,1)
 			*/
 			 
-			virtual bool multiplicity(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
+			virtual bool multiplicity(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context) ;
 			
 			//*********************************
 			// Attribute Getters & Setters
@@ -75,25 +75,25 @@ namespace uml
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::OutputPin> getResult() const ;
+			virtual const std::shared_ptr<uml::OutputPin>& getResult() const ;
 			/*!
 			The OutputPin on which the result value is placed.
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual void setResult(std::shared_ptr<uml::OutputPin>) ;
+			virtual void setResult(const std::shared_ptr<uml::OutputPin>&) ;
 			/*!
 			The ValueSpecification to be evaluated.
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::ValueSpecification> getValue() const ;
+			virtual const std::shared_ptr<uml::ValueSpecification>& getValue() const ;
 			/*!
 			The ValueSpecification to be evaluated.
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual void setValue(std::shared_ptr<uml::ValueSpecification>) ;
+			virtual void setValue(const std::shared_ptr<uml::ValueSpecification>&) ;
 			
 			//*********************************
 			// Union Reference Getters
@@ -145,19 +145,19 @@ namespace uml
 			virtual void saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const;
 
 		protected:
-			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
+			virtual const std::shared_ptr<ecore::EClass>& eStaticClass() const;
 
 			//*********************************
 			// EStructuralFeature Get/Set/IsSet
 			//*********************************
 			virtual Any eGet(int featureID, bool resolve, bool coreType) const ;
-			virtual bool eSet(int featureID, Any newValue) ;
+			virtual bool eSet(int featureID, const Any& newValue) ;
 			virtual bool internalEIsSet(int featureID) const ;
 
 			//*********************************
 			// EOperation Invoke
 			//*********************************
-			virtual Any eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments) ;
+			virtual Any eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments) ;
 
 		private:
 			std::weak_ptr<uml::ValueSpecificationAction> m_thisValueSpecificationActionPtr;

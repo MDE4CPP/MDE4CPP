@@ -178,7 +178,7 @@ std::string LiteralStringImpl::stringValue()
 // Attribute Getters & Setters
 //*********************************
 /* Getter & Setter for attribute value */
-std::string LiteralStringImpl::getValue() const 
+std::string LiteralStringImpl::getValue() const
 {
 	return m_value;
 }
@@ -355,7 +355,7 @@ void LiteralStringImpl::saveContent(std::shared_ptr<persistence::interfaces::XSa
 	}
 }
 
-std::shared_ptr<ecore::EClass> LiteralStringImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& LiteralStringImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getLiteralString_Class();
 }
@@ -383,7 +383,7 @@ bool LiteralStringImpl::internalEIsSet(int featureID) const
 	return LiteralSpecificationImpl::internalEIsSet(featureID);
 }
 
-bool LiteralStringImpl::eSet(int featureID, Any newValue)
+bool LiteralStringImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -402,7 +402,7 @@ bool LiteralStringImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any LiteralStringImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any LiteralStringImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

@@ -46,8 +46,8 @@
 #include "fUML/Semantics/Activities/ObjectNodeActivation.hpp"
 #include "fUML/Semantics/Activities/Token.hpp"
 //Factories and Package includes
-#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/SemanticsPackage.hpp"
+#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/Activities/ActivitiesPackage.hpp"
 #include "uml/umlPackage.hpp"
 
@@ -119,7 +119,7 @@ std::shared_ptr<ecore::EObject> ExpansionNodeActivationImpl::copy() const
 //*********************************
 // Operations
 //*********************************
-void ExpansionNodeActivationImpl::fire(std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> incomingTokens)
+void ExpansionNodeActivationImpl::fire(const std::shared_ptr<Bag<fUML::Semantics::Activities::Token>>& incomingTokens)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -251,7 +251,7 @@ void ExpansionNodeActivationImpl::saveContent(std::shared_ptr<persistence::inter
 	}
 }
 
-std::shared_ptr<ecore::EClass> ExpansionNodeActivationImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& ExpansionNodeActivationImpl::eStaticClass() const
 {
 	return fUML::Semantics::Activities::ActivitiesPackage::eInstance()->getExpansionNodeActivation_Class();
 }
@@ -275,7 +275,7 @@ bool ExpansionNodeActivationImpl::internalEIsSet(int featureID) const
 	return ObjectNodeActivationImpl::internalEIsSet(featureID);
 }
 
-bool ExpansionNodeActivationImpl::eSet(int featureID, Any newValue)
+bool ExpansionNodeActivationImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -287,7 +287,7 @@ bool ExpansionNodeActivationImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any ExpansionNodeActivationImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any ExpansionNodeActivationImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

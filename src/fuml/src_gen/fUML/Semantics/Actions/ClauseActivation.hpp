@@ -89,10 +89,10 @@ namespace fUML::Semantics::Actions
 			//*********************************
 			// Reference Getters & Setters
 			//*********************************
-			virtual std::shared_ptr<uml::Clause> getClause() const = 0;
-			virtual void setClause(std::shared_ptr<uml::Clause>) = 0;
-			virtual std::shared_ptr<fUML::Semantics::Actions::ConditionalNodeActivation> getConditionalNodeActivation() const = 0;
-			virtual void setConditionalNodeActivation(std::shared_ptr<fUML::Semantics::Actions::ConditionalNodeActivation>) = 0;
+			virtual const std::shared_ptr<uml::Clause>& getClause() const = 0;
+			virtual void setClause(const std::shared_ptr<uml::Clause>&) = 0;
+			virtual const std::shared_ptr<fUML::Semantics::Actions::ConditionalNodeActivation>& getConditionalNodeActivation() const = 0;
+			virtual void setConditionalNodeActivation(const std::shared_ptr<fUML::Semantics::Actions::ConditionalNodeActivation>&) = 0;
 
 			//*********************************
 			// Union Reference Getters

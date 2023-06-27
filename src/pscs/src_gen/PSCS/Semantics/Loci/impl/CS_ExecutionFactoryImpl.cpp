@@ -75,9 +75,9 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
+#include "fUML/Semantics/CommonBehavior/CommonBehaviorFactory.hpp"
 #include "uml/umlFactory.hpp"
 #include "fUML/Semantics/Loci/LociFactory.hpp"
-#include "fUML/Semantics/CommonBehavior/CommonBehaviorFactory.hpp"
 #include "uml/Class.hpp"
 #include "uml/Classifier.hpp"
 #include "uml/Element.hpp"
@@ -90,11 +90,11 @@
 #include "fUML/Semantics/Loci/SemanticStrategy.hpp"
 #include "fUML/Semantics/Loci/SemanticVisitor.hpp"
 //Factories and Package includes
-#include "PSCS/PSCSPackage.hpp"
 #include "PSCS/Semantics/SemanticsPackage.hpp"
+#include "PSCS/PSCSPackage.hpp"
 #include "fUML/Semantics/CommonBehavior/CommonBehaviorPackage.hpp"
-#include "PSCS/Semantics/Loci/LociPackage.hpp"
 #include "fUML/Semantics/Loci/LociPackage.hpp"
+#include "PSCS/Semantics/Loci/LociPackage.hpp"
 #include "fUML/Semantics/StructuredClassifiers/StructuredClassifiersPackage.hpp"
 #include "uml/umlPackage.hpp"
 
@@ -167,7 +167,7 @@ std::shared_ptr<ecore::EObject> CS_ExecutionFactoryImpl::copy() const
 //*********************************
 // Operations
 //*********************************
-std::shared_ptr<fUML::Semantics::StructuredClassifiers::Object> CS_ExecutionFactoryImpl::getStereotypeApplication(std::shared_ptr<uml::Class> stereotype,std::shared_ptr<uml::Element> element)
+std::shared_ptr<fUML::Semantics::StructuredClassifiers::Object> CS_ExecutionFactoryImpl::getStereotypeApplication(const std::shared_ptr<uml::Class>& stereotype, const std::shared_ptr<uml::Element>& element)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -187,7 +187,7 @@ std::shared_ptr<fUML::Semantics::StructuredClassifiers::Object> CS_ExecutionFact
 	//end of body
 }
 
-std::shared_ptr<uml::Classifier> CS_ExecutionFactoryImpl::getStereotypeClass(std::string profileName,std::string stereotypeName)
+std::shared_ptr<uml::Classifier> CS_ExecutionFactoryImpl::getStereotypeClass(std::string profileName, std::string stereotypeName)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -195,7 +195,7 @@ std::shared_ptr<uml::Classifier> CS_ExecutionFactoryImpl::getStereotypeClass(std
 	//end of body
 }
 
-std::shared_ptr<fUML::Semantics::Loci::SemanticVisitor> CS_ExecutionFactoryImpl::instantiateVisitor(std::shared_ptr<uml::Element> element)
+std::shared_ptr<fUML::Semantics::Loci::SemanticVisitor> CS_ExecutionFactoryImpl::instantiateVisitor(const std::shared_ptr<uml::Element>& element)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -293,7 +293,7 @@ std::shared_ptr<fUML::Semantics::Loci::SemanticVisitor> CS_ExecutionFactoryImpl:
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference appliedProfiles */
-std::shared_ptr<Bag<uml::Package>> CS_ExecutionFactoryImpl::getAppliedProfiles() const
+const std::shared_ptr<Bag<uml::Package>>& CS_ExecutionFactoryImpl::getAppliedProfiles() const
 {
 	if(m_appliedProfiles == nullptr)
 	{
@@ -415,7 +415,7 @@ void CS_ExecutionFactoryImpl::saveContent(std::shared_ptr<persistence::interface
 	}
 }
 
-std::shared_ptr<ecore::EClass> CS_ExecutionFactoryImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& CS_ExecutionFactoryImpl::eStaticClass() const
 {
 	return PSCS::Semantics::Loci::LociPackage::eInstance()->getCS_ExecutionFactory_Class();
 }
@@ -443,7 +443,7 @@ bool CS_ExecutionFactoryImpl::internalEIsSet(int featureID) const
 	return fUML::Semantics::Loci::ExecutionFactoryImpl::internalEIsSet(featureID);
 }
 
-bool CS_ExecutionFactoryImpl::eSet(int featureID, Any newValue)
+bool CS_ExecutionFactoryImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -492,7 +492,7 @@ bool CS_ExecutionFactoryImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any CS_ExecutionFactoryImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any CS_ExecutionFactoryImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

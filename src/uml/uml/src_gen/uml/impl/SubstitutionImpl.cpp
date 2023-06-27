@@ -164,11 +164,11 @@ std::shared_ptr<ecore::EObject> SubstitutionImpl::copy() const
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference contract */
-std::shared_ptr<uml::Classifier> SubstitutionImpl::getContract() const
+const std::shared_ptr<uml::Classifier>& SubstitutionImpl::getContract() const
 {
     return m_contract;
 }
-void SubstitutionImpl::setContract(std::shared_ptr<uml::Classifier> _contract)
+void SubstitutionImpl::setContract(const std::shared_ptr<uml::Classifier>& _contract)
 {
     m_contract = _contract;
 	
@@ -424,7 +424,7 @@ void SubstitutionImpl::saveContent(std::shared_ptr<persistence::interfaces::XSav
 	}
 }
 
-std::shared_ptr<ecore::EClass> SubstitutionImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& SubstitutionImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getSubstitution_Class();
 }
@@ -459,7 +459,7 @@ bool SubstitutionImpl::internalEIsSet(int featureID) const
 	return RealizationImpl::internalEIsSet(featureID);
 }
 
-bool SubstitutionImpl::eSet(int featureID, Any newValue)
+bool SubstitutionImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -487,7 +487,7 @@ bool SubstitutionImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any SubstitutionImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any SubstitutionImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

@@ -342,17 +342,17 @@ std::shared_ptr<ecore::EObject> StructuredActivityNodeImpl::copy() const
 //*********************************
 // Operations
 //*********************************
-bool StructuredActivityNodeImpl::edges(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool StructuredActivityNodeImpl::edges(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool StructuredActivityNodeImpl::input_pin_edges(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool StructuredActivityNodeImpl::input_pin_edges(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool StructuredActivityNodeImpl::output_pin_edges(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool StructuredActivityNodeImpl::output_pin_edges(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -371,7 +371,7 @@ std::shared_ptr<Bag<uml::ActivityNode> > StructuredActivityNodeImpl::targetNodes
 // Attribute Getters & Setters
 //*********************************
 /* Getter & Setter for attribute mustIsolate */
-bool StructuredActivityNodeImpl::getMustIsolate() const 
+bool StructuredActivityNodeImpl::getMustIsolate() const
 {
 	return m_mustIsolate;
 }
@@ -385,7 +385,7 @@ void StructuredActivityNodeImpl::setMustIsolate(bool _mustIsolate)
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference edge */
-std::shared_ptr<Subset<uml::ActivityEdge, uml::ActivityEdge, uml::Element>> StructuredActivityNodeImpl::getEdge() const
+const std::shared_ptr<Subset<uml::ActivityEdge, uml::ActivityEdge, uml::Element>>& StructuredActivityNodeImpl::getEdge() const
 {
 	if(m_edge == nullptr)
 	{
@@ -406,7 +406,7 @@ std::shared_ptr<Subset<uml::ActivityEdge, uml::ActivityEdge, uml::Element>> Stru
 }
 
 /* Getter & Setter for reference node */
-std::shared_ptr<Subset<uml::ActivityNode, uml::ActivityNode, uml::Element>> StructuredActivityNodeImpl::getNode() const
+const std::shared_ptr<Subset<uml::ActivityNode, uml::ActivityNode, uml::Element>>& StructuredActivityNodeImpl::getNode() const
 {
 	if(m_node == nullptr)
 	{
@@ -427,7 +427,7 @@ std::shared_ptr<Subset<uml::ActivityNode, uml::ActivityNode, uml::Element>> Stru
 }
 
 /* Getter & Setter for reference structuredNodeInput */
-std::shared_ptr<Subset<uml::InputPin, uml::InputPin>> StructuredActivityNodeImpl::getStructuredNodeInput() const
+const std::shared_ptr<Subset<uml::InputPin, uml::InputPin>>& StructuredActivityNodeImpl::getStructuredNodeInput() const
 {
 	if(m_structuredNodeInput == nullptr)
 	{
@@ -448,7 +448,7 @@ std::shared_ptr<Subset<uml::InputPin, uml::InputPin>> StructuredActivityNodeImpl
 }
 
 /* Getter & Setter for reference structuredNodeOutput */
-std::shared_ptr<Subset<uml::OutputPin, uml::OutputPin>> StructuredActivityNodeImpl::getStructuredNodeOutput() const
+const std::shared_ptr<Subset<uml::OutputPin, uml::OutputPin>>& StructuredActivityNodeImpl::getStructuredNodeOutput() const
 {
 	if(m_structuredNodeOutput == nullptr)
 	{
@@ -469,7 +469,7 @@ std::shared_ptr<Subset<uml::OutputPin, uml::OutputPin>> StructuredActivityNodeIm
 }
 
 /* Getter & Setter for reference variable */
-std::shared_ptr<Subset<uml::Variable, uml::NamedElement>> StructuredActivityNodeImpl::getVariable() const
+const std::shared_ptr<Subset<uml::Variable, uml::NamedElement>>& StructuredActivityNodeImpl::getVariable() const
 {
 	if(m_variable == nullptr)
 	{
@@ -889,7 +889,7 @@ void StructuredActivityNodeImpl::saveContent(std::shared_ptr<persistence::interf
 	}
 }
 
-std::shared_ptr<ecore::EClass> StructuredActivityNodeImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& StructuredActivityNodeImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getStructuredActivityNode_Class();
 }
@@ -961,7 +961,7 @@ bool StructuredActivityNodeImpl::internalEIsSet(int featureID) const
 	return result;
 }
 
-bool StructuredActivityNodeImpl::eSet(int featureID, Any newValue)
+bool StructuredActivityNodeImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -1177,7 +1177,7 @@ bool StructuredActivityNodeImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any StructuredActivityNodeImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any StructuredActivityNodeImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

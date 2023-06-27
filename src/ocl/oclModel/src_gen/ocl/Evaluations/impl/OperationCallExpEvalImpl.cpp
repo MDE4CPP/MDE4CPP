@@ -34,10 +34,10 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "fUML/Semantics/Values/ValuesFactory.hpp"
 #include "fUML/Semantics/Loci/LociFactory.hpp"
-#include "fUML/Semantics/SimpleClassifiers/SimpleClassifiersFactory.hpp"
 #include "uml/umlFactory.hpp"
+#include "fUML/Semantics/Values/ValuesFactory.hpp"
+#include "fUML/Semantics/SimpleClassifiers/SimpleClassifiersFactory.hpp"
 #include "ocl/Evaluations/EvaluationsFactory.hpp"
 #include "ocl/Expressions/ExpressionsFactory.hpp"
 #include "ocl/Evaluations/EvalEnvironment.hpp"
@@ -130,7 +130,7 @@ std::shared_ptr<ecore::EObject> OperationCallExpEvalImpl::copy() const
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference arguments */
-std::shared_ptr<Bag<ocl::Evaluations::OclExpEval>> OperationCallExpEvalImpl::getArguments() const
+const std::shared_ptr<Bag<ocl::Evaluations::OclExpEval>>& OperationCallExpEvalImpl::getArguments() const
 {
 	if(m_arguments == nullptr)
 	{
@@ -142,11 +142,11 @@ std::shared_ptr<Bag<ocl::Evaluations::OclExpEval>> OperationCallExpEvalImpl::get
 }
 
 /* Getter & Setter for reference referredOperation */
-std::shared_ptr<fUML::Semantics::SimpleClassifiers::StringValue> OperationCallExpEvalImpl::getReferredOperation() const
+const std::shared_ptr<fUML::Semantics::SimpleClassifiers::StringValue>& OperationCallExpEvalImpl::getReferredOperation() const
 {
     return m_referredOperation;
 }
-void OperationCallExpEvalImpl::setReferredOperation(std::shared_ptr<fUML::Semantics::SimpleClassifiers::StringValue> _referredOperation)
+void OperationCallExpEvalImpl::setReferredOperation(const std::shared_ptr<fUML::Semantics::SimpleClassifiers::StringValue>& _referredOperation)
 {
     m_referredOperation = _referredOperation;
 	
@@ -287,7 +287,7 @@ void OperationCallExpEvalImpl::saveContent(std::shared_ptr<persistence::interfac
 	}
 }
 
-std::shared_ptr<ecore::EClass> OperationCallExpEvalImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& OperationCallExpEvalImpl::eStaticClass() const
 {
 	return ocl::Evaluations::EvaluationsPackage::eInstance()->getOperationCallExpEval_Class();
 }
@@ -319,7 +319,7 @@ bool OperationCallExpEvalImpl::internalEIsSet(int featureID) const
 	return ModelPropertyCallExpEvalImpl::internalEIsSet(featureID);
 }
 
-bool OperationCallExpEvalImpl::eSet(int featureID, Any newValue)
+bool OperationCallExpEvalImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -376,7 +376,7 @@ bool OperationCallExpEvalImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any OperationCallExpEvalImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any OperationCallExpEvalImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

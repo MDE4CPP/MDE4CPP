@@ -156,17 +156,17 @@ std::shared_ptr<ecore::EObject> CreateLinkObjectActionImpl::copy() const
 //*********************************
 // Operations
 //*********************************
-bool CreateLinkObjectActionImpl::association_class(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool CreateLinkObjectActionImpl::association_class(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool CreateLinkObjectActionImpl::multiplicity(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool CreateLinkObjectActionImpl::multiplicity(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool CreateLinkObjectActionImpl::type_of_result(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool CreateLinkObjectActionImpl::type_of_result(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -179,11 +179,11 @@ bool CreateLinkObjectActionImpl::type_of_result(Any diagnostics,std::shared_ptr<
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference result */
-std::shared_ptr<uml::OutputPin> CreateLinkObjectActionImpl::getResult() const
+const std::shared_ptr<uml::OutputPin>& CreateLinkObjectActionImpl::getResult() const
 {
     return m_result;
 }
-void CreateLinkObjectActionImpl::setResult(std::shared_ptr<uml::OutputPin> _result)
+void CreateLinkObjectActionImpl::setResult(const std::shared_ptr<uml::OutputPin>& _result)
 {
     m_result = _result;
 	
@@ -413,7 +413,7 @@ void CreateLinkObjectActionImpl::saveContent(std::shared_ptr<persistence::interf
 	}
 }
 
-std::shared_ptr<ecore::EClass> CreateLinkObjectActionImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& CreateLinkObjectActionImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getCreateLinkObjectAction_Class();
 }
@@ -441,7 +441,7 @@ bool CreateLinkObjectActionImpl::internalEIsSet(int featureID) const
 	return CreateLinkActionImpl::internalEIsSet(featureID);
 }
 
-bool CreateLinkObjectActionImpl::eSet(int featureID, Any newValue)
+bool CreateLinkObjectActionImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -461,7 +461,7 @@ bool CreateLinkObjectActionImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any CreateLinkObjectActionImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any CreateLinkObjectActionImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

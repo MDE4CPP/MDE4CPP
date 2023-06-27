@@ -44,8 +44,8 @@
 #include "fUML/Semantics/Activities/CentralBufferNodeActivation.hpp"
 #include "fUML/Semantics/Activities/Token.hpp"
 //Factories and Package includes
-#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/SemanticsPackage.hpp"
+#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/Activities/ActivitiesPackage.hpp"
 #include "uml/umlPackage.hpp"
 
@@ -117,7 +117,7 @@ std::shared_ptr<ecore::EObject> DataStoreNodeActivationImpl::copy() const
 //*********************************
 // Operations
 //*********************************
-void DataStoreNodeActivationImpl::addToken(std::shared_ptr<fUML::Semantics::Activities::Token> token)
+void DataStoreNodeActivationImpl::addToken(const std::shared_ptr<fUML::Semantics::Activities::Token>& token)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -139,7 +139,7 @@ void DataStoreNodeActivationImpl::addToken(std::shared_ptr<fUML::Semantics::Acti
 	//end of body
 }
 
-int DataStoreNodeActivationImpl::removeToken(std::shared_ptr<fUML::Semantics::Activities::Token> token)
+int DataStoreNodeActivationImpl::removeToken(const std::shared_ptr<fUML::Semantics::Activities::Token>& token)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -242,7 +242,7 @@ void DataStoreNodeActivationImpl::saveContent(std::shared_ptr<persistence::inter
 	}
 }
 
-std::shared_ptr<ecore::EClass> DataStoreNodeActivationImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& DataStoreNodeActivationImpl::eStaticClass() const
 {
 	return fUML::Semantics::Activities::ActivitiesPackage::eInstance()->getDataStoreNodeActivation_Class();
 }
@@ -266,7 +266,7 @@ bool DataStoreNodeActivationImpl::internalEIsSet(int featureID) const
 	return CentralBufferNodeActivationImpl::internalEIsSet(featureID);
 }
 
-bool DataStoreNodeActivationImpl::eSet(int featureID, Any newValue)
+bool DataStoreNodeActivationImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -278,7 +278,7 @@ bool DataStoreNodeActivationImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any DataStoreNodeActivationImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any DataStoreNodeActivationImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

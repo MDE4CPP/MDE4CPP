@@ -97,8 +97,8 @@ namespace PSCS::Semantics::CommonBehavior
 			//*********************************
 			// Reference Getters & Setters
 			//*********************************
-			virtual std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_InteractionPoint> getInteractionPoint() const = 0;
-			virtual void setInteractionPoint(std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_InteractionPoint>) = 0;
+			virtual const std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_InteractionPoint>& getInteractionPoint() const = 0;
+			virtual void setInteractionPoint(const std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_InteractionPoint>&) = 0;
 
 			//*********************************
 			// Union Reference Getters

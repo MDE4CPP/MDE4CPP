@@ -247,7 +247,7 @@ std::shared_ptr<ecore::EObject> ComponentImpl::copy() const
 //*********************************
 // Operations
 //*********************************
-std::shared_ptr<uml::Class> ComponentImpl::createOwnedClass(std::string name,bool isAbstract)
+std::shared_ptr<uml::Class> ComponentImpl::createOwnedClass(std::string name, bool isAbstract)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -277,12 +277,12 @@ std::shared_ptr<Bag<uml::Interface> > ComponentImpl::getRequireds()
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool ComponentImpl::no_nested_classifiers(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool ComponentImpl::no_nested_classifiers(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool ComponentImpl::no_packaged_elements(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool ComponentImpl::no_packaged_elements(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -291,7 +291,7 @@ bool ComponentImpl::no_packaged_elements(Any diagnostics,std::shared_ptr<std::ma
 // Attribute Getters & Setters
 //*********************************
 /* Getter & Setter for attribute isIndirectlyInstantiated */
-bool ComponentImpl::getIsIndirectlyInstantiated() const 
+bool ComponentImpl::getIsIndirectlyInstantiated() const
 {
 	return m_isIndirectlyInstantiated;
 }
@@ -305,7 +305,7 @@ void ComponentImpl::setIsIndirectlyInstantiated(bool _isIndirectlyInstantiated)
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference packagedElement */
-std::shared_ptr<Subset<uml::PackageableElement, uml::NamedElement>> ComponentImpl::getPackagedElement() const
+const std::shared_ptr<Subset<uml::PackageableElement, uml::NamedElement>>& ComponentImpl::getPackagedElement() const
 {
 	if(m_packagedElement == nullptr)
 	{
@@ -326,7 +326,7 @@ std::shared_ptr<Subset<uml::PackageableElement, uml::NamedElement>> ComponentImp
 }
 
 /* Getter & Setter for reference provided */
-std::shared_ptr<Bag<uml::Interface>> ComponentImpl::getProvided() const
+const std::shared_ptr<Bag<uml::Interface>>& ComponentImpl::getProvided() const
 {
 	if(m_provided == nullptr)
 	{
@@ -338,7 +338,7 @@ std::shared_ptr<Bag<uml::Interface>> ComponentImpl::getProvided() const
 }
 
 /* Getter & Setter for reference realization */
-std::shared_ptr<Subset<uml::ComponentRealization, uml::Element>> ComponentImpl::getRealization() const
+const std::shared_ptr<Subset<uml::ComponentRealization, uml::Element>>& ComponentImpl::getRealization() const
 {
 	if(m_realization == nullptr)
 	{
@@ -359,7 +359,7 @@ std::shared_ptr<Subset<uml::ComponentRealization, uml::Element>> ComponentImpl::
 }
 
 /* Getter & Setter for reference required */
-std::shared_ptr<Bag<uml::Interface>> ComponentImpl::getRequired() const
+const std::shared_ptr<Bag<uml::Interface>>& ComponentImpl::getRequired() const
 {
 	if(m_required == nullptr)
 	{
@@ -693,7 +693,7 @@ void ComponentImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHa
 	}
 }
 
-std::shared_ptr<ecore::EClass> ComponentImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& ComponentImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getComponent_Class();
 }
@@ -737,7 +737,7 @@ bool ComponentImpl::internalEIsSet(int featureID) const
 	return ClassImpl::internalEIsSet(featureID);
 }
 
-bool ComponentImpl::eSet(int featureID, Any newValue)
+bool ComponentImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -830,7 +830,7 @@ bool ComponentImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any ComponentImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any ComponentImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

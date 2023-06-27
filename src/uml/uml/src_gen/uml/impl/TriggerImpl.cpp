@@ -124,7 +124,7 @@ std::shared_ptr<ecore::EObject> TriggerImpl::copy() const
 //*********************************
 // Operations
 //*********************************
-bool TriggerImpl::trigger_with_ports(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool TriggerImpl::trigger_with_ports(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -137,18 +137,18 @@ bool TriggerImpl::trigger_with_ports(Any diagnostics,std::shared_ptr<std::map < 
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference event */
-std::shared_ptr<uml::Event> TriggerImpl::getEvent() const
+const std::shared_ptr<uml::Event>& TriggerImpl::getEvent() const
 {
     return m_event;
 }
-void TriggerImpl::setEvent(std::shared_ptr<uml::Event> _event)
+void TriggerImpl::setEvent(const std::shared_ptr<uml::Event>& _event)
 {
     m_event = _event;
 	
 }
 
 /* Getter & Setter for reference port */
-std::shared_ptr<Bag<uml::Port>> TriggerImpl::getPort() const
+const std::shared_ptr<Bag<uml::Port>>& TriggerImpl::getPort() const
 {
 	if(m_port == nullptr)
 	{
@@ -318,7 +318,7 @@ void TriggerImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHand
 	}
 }
 
-std::shared_ptr<ecore::EClass> TriggerImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& TriggerImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getTrigger_Class();
 }
@@ -350,7 +350,7 @@ bool TriggerImpl::internalEIsSet(int featureID) const
 	return NamedElementImpl::internalEIsSet(featureID);
 }
 
-bool TriggerImpl::eSet(int featureID, Any newValue)
+bool TriggerImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -407,7 +407,7 @@ bool TriggerImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any TriggerImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any TriggerImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

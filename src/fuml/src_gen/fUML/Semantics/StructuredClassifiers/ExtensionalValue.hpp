@@ -81,8 +81,8 @@ namespace fUML::Semantics::StructuredClassifiers
 			//*********************************
 			// Reference Getters & Setters
 			//*********************************
-			virtual std::shared_ptr<fUML::Semantics::Loci::Locus> getLocus() const = 0;
-			virtual void setLocus(std::shared_ptr<fUML::Semantics::Loci::Locus>) = 0;
+			virtual const std::shared_ptr<fUML::Semantics::Loci::Locus>& getLocus() const = 0;
+			virtual void setLocus(const std::shared_ptr<fUML::Semantics::Loci::Locus>&) = 0;
 
 			//*********************************
 			// Union Reference Getters

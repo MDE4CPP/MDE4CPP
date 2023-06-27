@@ -87,7 +87,7 @@ namespace uml
 			port->notEmpty() implies event.oclIsKindOf(MessageEvent)
 			*/
 			 
-			virtual bool trigger_with_ports(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
+			virtual bool trigger_with_ports(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context) = 0;
 
 			//*********************************
 			// Attribute Getters & Setters
@@ -101,19 +101,19 @@ namespace uml
 			<p>From package UML::CommonBehavior.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::Event> getEvent() const = 0;
+			virtual const std::shared_ptr<uml::Event>& getEvent() const = 0;
 			/*!
 			The Event that detected by the Trigger.
 			<p>From package UML::CommonBehavior.</p>
 			*/
 			
-			virtual void setEvent(std::shared_ptr<uml::Event>) = 0;
+			virtual void setEvent(const std::shared_ptr<uml::Event>&) = 0;
 			/*!
 			A optional Port of through which the given effect is detected.
 			<p>From package UML::CommonBehavior.</p>
 			*/
 			
-			virtual std::shared_ptr<Bag<uml::Port>> getPort() const = 0;
+			virtual const std::shared_ptr<Bag<uml::Port>>& getPort() const = 0;
 
 			//*********************************
 			// Union Reference Getters

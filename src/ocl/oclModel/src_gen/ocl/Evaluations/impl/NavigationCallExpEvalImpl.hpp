@@ -51,9 +51,9 @@ namespace ocl::Evaluations
 			//*********************************
 			// Reference Getters & Setters
 			//*********************************
-			virtual std::shared_ptr<fUML::Semantics::SimpleClassifiers::StringValue> getNavigationSource() const ;
-			virtual void setNavigationSource(std::shared_ptr<fUML::Semantics::SimpleClassifiers::StringValue>) ;
-			virtual std::shared_ptr<Bag<ocl::Evaluations::OclExpEval>> getQualifiers() const ;
+			virtual const std::shared_ptr<fUML::Semantics::SimpleClassifiers::StringValue>& getNavigationSource() const ;
+			virtual void setNavigationSource(const std::shared_ptr<fUML::Semantics::SimpleClassifiers::StringValue>&) ;
+			virtual const std::shared_ptr<Bag<ocl::Evaluations::OclExpEval>>& getQualifiers() const ;
 			
 			//*********************************
 			// Union Reference Getters
@@ -75,19 +75,19 @@ namespace ocl::Evaluations
 			virtual void saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const;
 
 		protected:
-			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
+			virtual const std::shared_ptr<ecore::EClass>& eStaticClass() const;
 
 			//*********************************
 			// EStructuralFeature Get/Set/IsSet
 			//*********************************
 			virtual Any eGet(int featureID, bool resolve, bool coreType) const ;
-			virtual bool eSet(int featureID, Any newValue) ;
+			virtual bool eSet(int featureID, const Any& newValue) ;
 			virtual bool internalEIsSet(int featureID) const ;
 
 			//*********************************
 			// EOperation Invoke
 			//*********************************
-			virtual Any eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments) ;
+			virtual Any eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments) ;
 
 		private:
 			std::weak_ptr<ocl::Evaluations::NavigationCallExpEval> m_thisNavigationCallExpEvalPtr;

@@ -143,17 +143,17 @@ std::shared_ptr<ecore::EObject> PartDecompositionImpl::copy() const
 //*********************************
 // Operations
 //*********************************
-bool PartDecompositionImpl::assume(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool PartDecompositionImpl::assume(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool PartDecompositionImpl::commutativity_of_decomposition(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool PartDecompositionImpl::commutativity_of_decomposition(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool PartDecompositionImpl::parts_of_internal_structures(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool PartDecompositionImpl::parts_of_internal_structures(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -287,7 +287,7 @@ void PartDecompositionImpl::saveContent(std::shared_ptr<persistence::interfaces:
 	}
 }
 
-std::shared_ptr<ecore::EClass> PartDecompositionImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& PartDecompositionImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getPartDecomposition_Class();
 }
@@ -311,7 +311,7 @@ bool PartDecompositionImpl::internalEIsSet(int featureID) const
 	return InteractionUseImpl::internalEIsSet(featureID);
 }
 
-bool PartDecompositionImpl::eSet(int featureID, Any newValue)
+bool PartDecompositionImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -323,7 +323,7 @@ bool PartDecompositionImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any PartDecompositionImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any PartDecompositionImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

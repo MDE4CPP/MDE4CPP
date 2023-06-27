@@ -33,9 +33,9 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "fUML/Semantics/Values/ValuesFactory.hpp"
 #include "fUML/Semantics/Loci/LociFactory.hpp"
 #include "uml/umlFactory.hpp"
+#include "fUML/Semantics/Values/ValuesFactory.hpp"
 #include "ocl/Evaluations/EvaluationsFactory.hpp"
 #include "ocl/Expressions/ExpressionsFactory.hpp"
 #include "ocl/Evaluations/EvalEnvironment.hpp"
@@ -124,11 +124,11 @@ std::shared_ptr<ecore::EObject> PropertyCallExpEvalImpl::copy() const
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference source */
-std::shared_ptr<ocl::Evaluations::OclExpEval> PropertyCallExpEvalImpl::getSource() const
+const std::shared_ptr<ocl::Evaluations::OclExpEval>& PropertyCallExpEvalImpl::getSource() const
 {
     return m_source;
 }
-void PropertyCallExpEvalImpl::setSource(std::shared_ptr<ocl::Evaluations::OclExpEval> _source)
+void PropertyCallExpEvalImpl::setSource(const std::shared_ptr<ocl::Evaluations::OclExpEval>& _source)
 {
     m_source = _source;
 	
@@ -243,7 +243,7 @@ void PropertyCallExpEvalImpl::saveContent(std::shared_ptr<persistence::interface
 	}
 }
 
-std::shared_ptr<ecore::EClass> PropertyCallExpEvalImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& PropertyCallExpEvalImpl::eStaticClass() const
 {
 	return ocl::Evaluations::EvaluationsPackage::eInstance()->getPropertyCallExpEval_Class();
 }
@@ -271,7 +271,7 @@ bool PropertyCallExpEvalImpl::internalEIsSet(int featureID) const
 	return OclExpEvalImpl::internalEIsSet(featureID);
 }
 
-bool PropertyCallExpEvalImpl::eSet(int featureID, Any newValue)
+bool PropertyCallExpEvalImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -291,7 +291,7 @@ bool PropertyCallExpEvalImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any PropertyCallExpEvalImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any PropertyCallExpEvalImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

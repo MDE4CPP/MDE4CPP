@@ -95,8 +95,8 @@ namespace ocl::Evaluations
 			//*********************************
 			// Reference Getters & Setters
 			//*********************************
-			virtual std::shared_ptr<fUML::Semantics::SimpleClassifiers::StringValue> getReferredAttribute() const = 0;
-			virtual void setReferredAttribute(std::shared_ptr<fUML::Semantics::SimpleClassifiers::StringValue>) = 0;
+			virtual const std::shared_ptr<fUML::Semantics::SimpleClassifiers::StringValue>& getReferredAttribute() const = 0;
+			virtual void setReferredAttribute(const std::shared_ptr<fUML::Semantics::SimpleClassifiers::StringValue>&) = 0;
 
 			//*********************************
 			// Union Reference Getters

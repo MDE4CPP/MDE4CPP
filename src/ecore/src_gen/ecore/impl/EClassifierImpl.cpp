@@ -141,7 +141,7 @@ int EClassifierImpl::getClassifierID()
 	//end of body
 }
 
-bool EClassifierImpl::isInstance(Any object) const
+bool EClassifierImpl::isInstance(const Any& object) const
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -150,24 +150,24 @@ bool EClassifierImpl::isInstance(Any object) const
 // Attribute Getters & Setters
 //*********************************
 /* Getter & Setter for attribute defaultValue */
-Any EClassifierImpl::getDefaultValue() const 
+const Any& EClassifierImpl::getDefaultValue() const
 {
 	return m_defaultValue;
 }
-void EClassifierImpl::setDefaultValue(Any _defaultValue)
+void EClassifierImpl::setDefaultValue(const Any& _defaultValue)
 {
 	m_defaultValue = _defaultValue;
 	
 }
 
 /* Getter & Setter for attribute instanceClass */
-void * EClassifierImpl::getInstanceClass() const 
+void * EClassifierImpl::getInstanceClass() const
 {
 	return m_instanceClass;
 }
 
 /* Getter & Setter for attribute instanceClassName */
-std::string EClassifierImpl::getInstanceClassName() const 
+std::string EClassifierImpl::getInstanceClassName() const
 {
 	return m_instanceClassName;
 }
@@ -178,7 +178,7 @@ void EClassifierImpl::setInstanceClassName(std::string _instanceClassName)
 }
 
 /* Getter & Setter for attribute instanceTypeName */
-std::string EClassifierImpl::getInstanceTypeName() const 
+std::string EClassifierImpl::getInstanceTypeName() const
 {
 	return m_instanceTypeName;
 }
@@ -198,7 +198,7 @@ std::weak_ptr<ecore::EPackage> EClassifierImpl::getEPackage() const
 }
 
 /* Getter & Setter for reference eTypeParameters */
-std::shared_ptr<Bag<ecore::ETypeParameter>> EClassifierImpl::getETypeParameters() const
+const std::shared_ptr<Bag<ecore::ETypeParameter>>& EClassifierImpl::getETypeParameters() const
 {
 	if(m_eTypeParameters == nullptr)
 	{
@@ -375,7 +375,7 @@ void EClassifierImpl::saveContent(std::shared_ptr<persistence::interfaces::XSave
 	}
 }
 
-std::shared_ptr<EClass> EClassifierImpl::eStaticClass() const
+const std::shared_ptr<EClass>& EClassifierImpl::eStaticClass() const
 {
 	return ecore::ecorePackage::eInstance()->getEClassifier_Class();
 }
@@ -426,7 +426,7 @@ bool EClassifierImpl::internalEIsSet(int featureID) const
 	return ENamedElementImpl::internalEIsSet(featureID);
 }
 
-bool EClassifierImpl::eSet(int featureID, Any newValue)
+bool EClassifierImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -496,7 +496,7 @@ bool EClassifierImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any EClassifierImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any EClassifierImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

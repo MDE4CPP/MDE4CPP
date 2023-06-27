@@ -189,17 +189,17 @@ std::shared_ptr<ecore::EObject> FunctionBehaviorImpl::copy() const
 //*********************************
 // Operations
 //*********************************
-bool FunctionBehaviorImpl::hasAllDataTypeAttributes(std::shared_ptr<uml::DataType> d)
+bool FunctionBehaviorImpl::hasAllDataTypeAttributes(const std::shared_ptr<uml::DataType>& d)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool FunctionBehaviorImpl::one_output_parameter(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool FunctionBehaviorImpl::one_output_parameter(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool FunctionBehaviorImpl::types_of_parameters(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool FunctionBehaviorImpl::types_of_parameters(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -487,7 +487,7 @@ void FunctionBehaviorImpl::saveContent(std::shared_ptr<persistence::interfaces::
 	}
 }
 
-std::shared_ptr<ecore::EClass> FunctionBehaviorImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& FunctionBehaviorImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getFunctionBehavior_Class();
 }
@@ -511,7 +511,7 @@ bool FunctionBehaviorImpl::internalEIsSet(int featureID) const
 	return OpaqueBehaviorImpl::internalEIsSet(featureID);
 }
 
-bool FunctionBehaviorImpl::eSet(int featureID, Any newValue)
+bool FunctionBehaviorImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -523,7 +523,7 @@ bool FunctionBehaviorImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any FunctionBehaviorImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any FunctionBehaviorImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

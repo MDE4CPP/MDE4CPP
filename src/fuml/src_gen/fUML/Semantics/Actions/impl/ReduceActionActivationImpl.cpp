@@ -49,8 +49,8 @@
 #include "fUML/Semantics/Actions/PinActivation.hpp"
 #include "fUML/Semantics/Activities/Token.hpp"
 //Factories and Package includes
-#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/SemanticsPackage.hpp"
+#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/Actions/ActionsPackage.hpp"
 #include "fUML/Semantics/Activities/ActivitiesPackage.hpp"
 #include "fUML/Semantics/CommonBehavior/CommonBehaviorPackage.hpp"
@@ -134,11 +134,11 @@ std::shared_ptr<ecore::EObject> ReduceActionActivationImpl::copy() const
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference currentExecution */
-std::shared_ptr<fUML::Semantics::CommonBehavior::Execution> ReduceActionActivationImpl::getCurrentExecution() const
+const std::shared_ptr<fUML::Semantics::CommonBehavior::Execution>& ReduceActionActivationImpl::getCurrentExecution() const
 {
     return m_currentExecution;
 }
-void ReduceActionActivationImpl::setCurrentExecution(std::shared_ptr<fUML::Semantics::CommonBehavior::Execution> _currentExecution)
+void ReduceActionActivationImpl::setCurrentExecution(const std::shared_ptr<fUML::Semantics::CommonBehavior::Execution>& _currentExecution)
 {
     m_currentExecution = _currentExecution;
 	
@@ -271,7 +271,7 @@ void ReduceActionActivationImpl::saveContent(std::shared_ptr<persistence::interf
 	}
 }
 
-std::shared_ptr<ecore::EClass> ReduceActionActivationImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& ReduceActionActivationImpl::eStaticClass() const
 {
 	return fUML::Semantics::Actions::ActionsPackage::eInstance()->getReduceActionActivation_Class();
 }
@@ -299,7 +299,7 @@ bool ReduceActionActivationImpl::internalEIsSet(int featureID) const
 	return ActionActivationImpl::internalEIsSet(featureID);
 }
 
-bool ReduceActionActivationImpl::eSet(int featureID, Any newValue)
+bool ReduceActionActivationImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -319,7 +319,7 @@ bool ReduceActionActivationImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any ReduceActionActivationImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any ReduceActionActivationImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

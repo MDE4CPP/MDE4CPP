@@ -218,7 +218,7 @@ std::shared_ptr<ecore::EObject> OpaqueBehaviorImpl::copy() const
 // Attribute Getters & Setters
 //*********************************
 /* Getter & Setter for attribute body */
-std::shared_ptr<Bag<std::string>> OpaqueBehaviorImpl::getBody() const 
+const std::shared_ptr<Bag<std::string>>& OpaqueBehaviorImpl::getBody() const
 {
 	if(m_body == nullptr)
 	{
@@ -228,7 +228,7 @@ std::shared_ptr<Bag<std::string>> OpaqueBehaviorImpl::getBody() const
 }
 
 /* Getter & Setter for attribute language */
-std::shared_ptr<Bag<std::string>> OpaqueBehaviorImpl::getLanguage() const 
+const std::shared_ptr<Bag<std::string>>& OpaqueBehaviorImpl::getLanguage() const
 {
 	if(m_language == nullptr)
 	{
@@ -556,7 +556,7 @@ void OpaqueBehaviorImpl::saveContent(std::shared_ptr<persistence::interfaces::XS
 	}
 }
 
-std::shared_ptr<ecore::EClass> OpaqueBehaviorImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& OpaqueBehaviorImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getOpaqueBehavior_Class();
 }
@@ -588,7 +588,7 @@ bool OpaqueBehaviorImpl::internalEIsSet(int featureID) const
 	return BehaviorImpl::internalEIsSet(featureID);
 }
 
-bool OpaqueBehaviorImpl::eSet(int featureID, Any newValue)
+bool OpaqueBehaviorImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -612,7 +612,7 @@ bool OpaqueBehaviorImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any OpaqueBehaviorImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any OpaqueBehaviorImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

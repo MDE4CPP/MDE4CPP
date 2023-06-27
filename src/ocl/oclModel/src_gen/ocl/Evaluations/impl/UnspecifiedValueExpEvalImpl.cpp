@@ -190,7 +190,7 @@ void UnspecifiedValueExpEvalImpl::saveContent(std::shared_ptr<persistence::inter
 	}
 }
 
-std::shared_ptr<ecore::EClass> UnspecifiedValueExpEvalImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& UnspecifiedValueExpEvalImpl::eStaticClass() const
 {
 	return ocl::Evaluations::EvaluationsPackage::eInstance()->getUnspecifiedValueExpEval_Class();
 }
@@ -214,7 +214,7 @@ bool UnspecifiedValueExpEvalImpl::internalEIsSet(int featureID) const
 	return fUML::Semantics::Values::EvaluationImpl::internalEIsSet(featureID);
 }
 
-bool UnspecifiedValueExpEvalImpl::eSet(int featureID, Any newValue)
+bool UnspecifiedValueExpEvalImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -226,7 +226,7 @@ bool UnspecifiedValueExpEvalImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any UnspecifiedValueExpEvalImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any UnspecifiedValueExpEvalImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

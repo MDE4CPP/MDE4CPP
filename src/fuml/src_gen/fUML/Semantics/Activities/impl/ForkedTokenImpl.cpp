@@ -41,8 +41,8 @@
 #include "fUML/Semantics/Activities/Token.hpp"
 #include "fUML/Semantics/Values/Value.hpp"
 //Factories and Package includes
-#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/SemanticsPackage.hpp"
+#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/Activities/ActivitiesPackage.hpp"
 #include "fUML/Semantics/Values/ValuesPackage.hpp"
 
@@ -127,7 +127,7 @@ return this->getBaseToken()->_copy();
 	//end of body
 }
 
-bool ForkedTokenImpl::equals(std::shared_ptr<fUML::Semantics::Activities::Token> otherToken)
+bool ForkedTokenImpl::equals(const std::shared_ptr<fUML::Semantics::Activities::Token>& otherToken)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -181,7 +181,7 @@ if (!this->isBaseTokenIsWithdrawn() & !this->getBaseToken()->isWithdrawn()) {
 // Attribute Getters & Setters
 //*********************************
 /* Getter & Setter for attribute baseTokenIsWithdrawn */
-bool ForkedTokenImpl::isBaseTokenIsWithdrawn() const 
+bool ForkedTokenImpl::isBaseTokenIsWithdrawn() const
 {
 	return m_baseTokenIsWithdrawn;
 }
@@ -192,7 +192,7 @@ void ForkedTokenImpl::setBaseTokenIsWithdrawn(bool _baseTokenIsWithdrawn)
 }
 
 /* Getter & Setter for attribute remainingOffersCount */
-int ForkedTokenImpl::getRemainingOffersCount() const 
+int ForkedTokenImpl::getRemainingOffersCount() const
 {
 	return m_remainingOffersCount;
 }
@@ -206,11 +206,11 @@ void ForkedTokenImpl::setRemainingOffersCount(int _remainingOffersCount)
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference baseToken */
-std::shared_ptr<fUML::Semantics::Activities::Token> ForkedTokenImpl::getBaseToken() const
+const std::shared_ptr<fUML::Semantics::Activities::Token>& ForkedTokenImpl::getBaseToken() const
 {
     return m_baseToken;
 }
-void ForkedTokenImpl::setBaseToken(std::shared_ptr<fUML::Semantics::Activities::Token> _baseToken)
+void ForkedTokenImpl::setBaseToken(const std::shared_ptr<fUML::Semantics::Activities::Token>& _baseToken)
 {
     m_baseToken = _baseToken;
 	
@@ -353,7 +353,7 @@ void ForkedTokenImpl::saveContent(std::shared_ptr<persistence::interfaces::XSave
 	}
 }
 
-std::shared_ptr<ecore::EClass> ForkedTokenImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& ForkedTokenImpl::eStaticClass() const
 {
 	return fUML::Semantics::Activities::ActivitiesPackage::eInstance()->getForkedToken_Class();
 }
@@ -389,7 +389,7 @@ bool ForkedTokenImpl::internalEIsSet(int featureID) const
 	return TokenImpl::internalEIsSet(featureID);
 }
 
-bool ForkedTokenImpl::eSet(int featureID, Any newValue)
+bool ForkedTokenImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -423,7 +423,7 @@ bool ForkedTokenImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any ForkedTokenImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any ForkedTokenImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

@@ -74,7 +74,7 @@ namespace uml
 			memberEnd->size() = 2
 			*/
 			 
-			virtual bool is_binary(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
+			virtual bool is_binary(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context) ;
 			/*!
 			The query metaclassEnd() returns the Property that is typed by a metaclass (as opposed to a stereotype).
 			result = (memberEnd->reject(p | ownedEnd->includes(p.oclAsType(ExtensionEnd)))->any(true))
@@ -87,7 +87,7 @@ namespace uml
 			metaclassEnd()->notEmpty() and metaclassEnd().type.oclIsKindOf(Class)
 			*/
 			 
-			virtual bool non_owned_end(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
+			virtual bool non_owned_end(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context) ;
 			
 			//*********************************
 			// Attribute Getters & Setters
@@ -107,7 +107,7 @@ namespace uml
 			<p>From package UML::Packages.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::Class> getMetaclass() const ;
+			virtual const std::shared_ptr<uml::Class>& getMetaclass() const ;
 			
 			//*********************************
 			// Union Reference Getters
@@ -179,19 +179,19 @@ namespace uml
 			virtual void saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const;
 
 		protected:
-			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
+			virtual const std::shared_ptr<ecore::EClass>& eStaticClass() const;
 
 			//*********************************
 			// EStructuralFeature Get/Set/IsSet
 			//*********************************
 			virtual Any eGet(int featureID, bool resolve, bool coreType) const ;
-			virtual bool eSet(int featureID, Any newValue) ;
+			virtual bool eSet(int featureID, const Any& newValue) ;
 			virtual bool internalEIsSet(int featureID) const ;
 
 			//*********************************
 			// EOperation Invoke
 			//*********************************
-			virtual Any eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments) ;
+			virtual Any eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments) ;
 
 		private:
 			std::weak_ptr<uml::Extension> m_thisExtensionPtr;

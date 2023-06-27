@@ -93,7 +93,7 @@ namespace fUML::Semantics::CommonBehavior
 			virtual void makeCall() = 0;
 			virtual std::shared_ptr<fUML::Semantics::Values::Value> new_() = 0;
 			virtual void releaseCaller() = 0;
-			virtual void setOutputParameterValues(std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> parameterValues) = 0;
+			virtual void setOutputParameterValues(const std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>>& parameterValues) = 0;
 			virtual void suspendCaller() = 0;
 			virtual void wait_() = 0;
 

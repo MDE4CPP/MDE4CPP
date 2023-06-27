@@ -83,13 +83,13 @@ namespace ocl::Expressions
 			//*********************************
 			// Reference Getters & Setters
 			//*********************************
-			virtual std::shared_ptr<ocl::Expressions::OclExpression> getBodyExpression() const = 0;
-			virtual void setBodyExpression(std::shared_ptr<ocl::Expressions::OclExpression>) = 0;
-			virtual std::shared_ptr<ocl::Expressions::Variable> getContextVariable() const = 0;
-			virtual void setContextVariable(std::shared_ptr<ocl::Expressions::Variable>) = 0;
-			virtual std::shared_ptr<Bag<ocl::Expressions::Variable>> getParameterVariable() const = 0;
-			virtual std::shared_ptr<ocl::Expressions::Variable> getResultVariable() const = 0;
-			virtual void setResultVariable(std::shared_ptr<ocl::Expressions::Variable>) = 0;
+			virtual const std::shared_ptr<ocl::Expressions::OclExpression>& getBodyExpression() const = 0;
+			virtual void setBodyExpression(const std::shared_ptr<ocl::Expressions::OclExpression>&) = 0;
+			virtual const std::shared_ptr<ocl::Expressions::Variable>& getContextVariable() const = 0;
+			virtual void setContextVariable(const std::shared_ptr<ocl::Expressions::Variable>&) = 0;
+			virtual const std::shared_ptr<Bag<ocl::Expressions::Variable>>& getParameterVariable() const = 0;
+			virtual const std::shared_ptr<ocl::Expressions::Variable>& getResultVariable() const = 0;
+			virtual void setResultVariable(const std::shared_ptr<ocl::Expressions::Variable>&) = 0;
 
 			//*********************************
 			// Union Reference Getters

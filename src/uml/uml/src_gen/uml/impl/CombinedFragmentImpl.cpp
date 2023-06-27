@@ -207,17 +207,17 @@ std::shared_ptr<ecore::EObject> CombinedFragmentImpl::copy() const
 //*********************************
 // Operations
 //*********************************
-bool CombinedFragmentImpl::break_(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool CombinedFragmentImpl::break_(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool CombinedFragmentImpl::consider_and_ignore(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool CombinedFragmentImpl::consider_and_ignore(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool CombinedFragmentImpl::opt_loop_break_neg(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool CombinedFragmentImpl::opt_loop_break_neg(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -226,7 +226,7 @@ bool CombinedFragmentImpl::opt_loop_break_neg(Any diagnostics,std::shared_ptr<st
 // Attribute Getters & Setters
 //*********************************
 /* Getter & Setter for attribute interactionOperator */
-uml::InteractionOperatorKind CombinedFragmentImpl::getInteractionOperator() const 
+uml::InteractionOperatorKind CombinedFragmentImpl::getInteractionOperator() const
 {
 	return m_interactionOperator;
 }
@@ -240,7 +240,7 @@ void CombinedFragmentImpl::setInteractionOperator(uml::InteractionOperatorKind _
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference cfragmentGate */
-std::shared_ptr<Subset<uml::Gate, uml::Element>> CombinedFragmentImpl::getCfragmentGate() const
+const std::shared_ptr<Subset<uml::Gate, uml::Element>>& CombinedFragmentImpl::getCfragmentGate() const
 {
 	if(m_cfragmentGate == nullptr)
 	{
@@ -261,7 +261,7 @@ std::shared_ptr<Subset<uml::Gate, uml::Element>> CombinedFragmentImpl::getCfragm
 }
 
 /* Getter & Setter for reference operand */
-std::shared_ptr<Subset<uml::InteractionOperand, uml::Element>> CombinedFragmentImpl::getOperand() const
+const std::shared_ptr<Subset<uml::InteractionOperand, uml::Element>>& CombinedFragmentImpl::getOperand() const
 {
 	if(m_operand == nullptr)
 	{
@@ -568,7 +568,7 @@ void CombinedFragmentImpl::saveContent(std::shared_ptr<persistence::interfaces::
 	}
 }
 
-std::shared_ptr<ecore::EClass> CombinedFragmentImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& CombinedFragmentImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getCombinedFragment_Class();
 }
@@ -604,7 +604,7 @@ bool CombinedFragmentImpl::internalEIsSet(int featureID) const
 	return InteractionFragmentImpl::internalEIsSet(featureID);
 }
 
-bool CombinedFragmentImpl::eSet(int featureID, Any newValue)
+bool CombinedFragmentImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -697,7 +697,7 @@ bool CombinedFragmentImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any CombinedFragmentImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any CombinedFragmentImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

@@ -137,7 +137,7 @@ std::shared_ptr<ecore::EObject> ETypeParameterImpl::copy() const
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference eBounds */
-std::shared_ptr<Bag<ecore::EGenericType>> ETypeParameterImpl::getEBounds() const
+const std::shared_ptr<Bag<ecore::EGenericType>>& ETypeParameterImpl::getEBounds() const
 {
 	if(m_eBounds == nullptr)
 	{
@@ -269,7 +269,7 @@ void ETypeParameterImpl::saveContent(std::shared_ptr<persistence::interfaces::XS
 	}
 }
 
-std::shared_ptr<EClass> ETypeParameterImpl::eStaticClass() const
+const std::shared_ptr<EClass>& ETypeParameterImpl::eStaticClass() const
 {
 	return ecore::ecorePackage::eInstance()->getETypeParameter_Class();
 }
@@ -297,7 +297,7 @@ bool ETypeParameterImpl::internalEIsSet(int featureID) const
 	return ENamedElementImpl::internalEIsSet(featureID);
 }
 
-bool ETypeParameterImpl::eSet(int featureID, Any newValue)
+bool ETypeParameterImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -346,7 +346,7 @@ bool ETypeParameterImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any ETypeParameterImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any ETypeParameterImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

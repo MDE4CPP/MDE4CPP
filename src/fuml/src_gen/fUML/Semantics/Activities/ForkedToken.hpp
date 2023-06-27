@@ -72,7 +72,7 @@ namespace fUML::Semantics::Activities
 			// Operations
 			//*********************************
 			virtual std::shared_ptr<fUML::Semantics::Activities::Token> _copy() = 0;
-			virtual bool equals(std::shared_ptr<fUML::Semantics::Activities::Token> otherToken) = 0;
+			virtual bool equals(const std::shared_ptr<fUML::Semantics::Activities::Token>& otherToken) = 0;
 			virtual std::shared_ptr<fUML::Semantics::Values::Value> getValue() const = 0;
 			virtual bool isControl() = 0;
 			virtual void withdraw() = 0;
@@ -88,8 +88,8 @@ namespace fUML::Semantics::Activities
 			//*********************************
 			// Reference Getters & Setters
 			//*********************************
-			virtual std::shared_ptr<fUML::Semantics::Activities::Token> getBaseToken() const = 0;
-			virtual void setBaseToken(std::shared_ptr<fUML::Semantics::Activities::Token>) = 0;
+			virtual const std::shared_ptr<fUML::Semantics::Activities::Token>& getBaseToken() const = 0;
+			virtual void setBaseToken(const std::shared_ptr<fUML::Semantics::Activities::Token>&) = 0;
 
 			//*********************************
 			// Union Reference Getters

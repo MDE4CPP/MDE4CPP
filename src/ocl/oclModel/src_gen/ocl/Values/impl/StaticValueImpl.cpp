@@ -184,7 +184,7 @@ void StaticValueImpl::saveContent(std::shared_ptr<persistence::interfaces::XSave
 	}
 }
 
-std::shared_ptr<ecore::EClass> StaticValueImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& StaticValueImpl::eStaticClass() const
 {
 	return ocl::Values::ValuesPackage::eInstance()->getStaticValue_Class();
 }
@@ -208,7 +208,7 @@ bool StaticValueImpl::internalEIsSet(int featureID) const
 	return fUML::Semantics::Values::ValueImpl::internalEIsSet(featureID);
 }
 
-bool StaticValueImpl::eSet(int featureID, Any newValue)
+bool StaticValueImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -220,7 +220,7 @@ bool StaticValueImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any StaticValueImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any StaticValueImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

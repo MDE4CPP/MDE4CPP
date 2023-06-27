@@ -165,11 +165,11 @@ std::shared_ptr<ecore::EObject> InterfaceRealizationImpl::copy() const
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference contract */
-std::shared_ptr<uml::Interface> InterfaceRealizationImpl::getContract() const
+const std::shared_ptr<uml::Interface>& InterfaceRealizationImpl::getContract() const
 {
     return m_contract;
 }
-void InterfaceRealizationImpl::setContract(std::shared_ptr<uml::Interface> _contract)
+void InterfaceRealizationImpl::setContract(const std::shared_ptr<uml::Interface>& _contract)
 {
     m_contract = _contract;
 	
@@ -425,7 +425,7 @@ void InterfaceRealizationImpl::saveContent(std::shared_ptr<persistence::interfac
 	}
 }
 
-std::shared_ptr<ecore::EClass> InterfaceRealizationImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& InterfaceRealizationImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getInterfaceRealization_Class();
 }
@@ -460,7 +460,7 @@ bool InterfaceRealizationImpl::internalEIsSet(int featureID) const
 	return RealizationImpl::internalEIsSet(featureID);
 }
 
-bool InterfaceRealizationImpl::eSet(int featureID, Any newValue)
+bool InterfaceRealizationImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -488,7 +488,7 @@ bool InterfaceRealizationImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any InterfaceRealizationImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any InterfaceRealizationImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

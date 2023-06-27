@@ -103,7 +103,7 @@ std::shared_ptr<ecore::EObject> OclVoidValueImpl::copy() const
 //*********************************
 // Operations
 //*********************************
-bool OclVoidValueImpl::equals(std::shared_ptr<fUML::Semantics::Values::Value> otherValue)
+bool OclVoidValueImpl::equals(const std::shared_ptr<fUML::Semantics::Values::Value>& otherValue)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -200,7 +200,7 @@ void OclVoidValueImpl::saveContent(std::shared_ptr<persistence::interfaces::XSav
 	}
 }
 
-std::shared_ptr<ecore::EClass> OclVoidValueImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& OclVoidValueImpl::eStaticClass() const
 {
 	return ocl::Values::ValuesPackage::eInstance()->getOclVoidValue_Class();
 }
@@ -224,7 +224,7 @@ bool OclVoidValueImpl::internalEIsSet(int featureID) const
 	return fUML::Semantics::Values::ValueImpl::internalEIsSet(featureID);
 }
 
-bool OclVoidValueImpl::eSet(int featureID, Any newValue)
+bool OclVoidValueImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -236,7 +236,7 @@ bool OclVoidValueImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any OclVoidValueImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any OclVoidValueImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

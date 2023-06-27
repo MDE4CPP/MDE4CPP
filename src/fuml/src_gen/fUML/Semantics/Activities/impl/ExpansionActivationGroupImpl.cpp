@@ -48,8 +48,8 @@
 #include "fUML/Semantics/Actions/OutputPinActivation.hpp"
 #include "fUML/Semantics/Actions/StructuredActivityNodeActivation.hpp"
 //Factories and Package includes
-#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/SemanticsPackage.hpp"
+#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/Actions/ActionsPackage.hpp"
 #include "fUML/Semantics/Activities/ActivitiesPackage.hpp"
 #include "uml/umlPackage.hpp"
@@ -142,7 +142,7 @@ std::weak_ptr<fUML::Semantics::Activities::ActivityExecution> ExpansionActivatio
 	//end of body
 }
 
-std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivation> ExpansionActivationGroupImpl::getNodeActivation(std::shared_ptr<uml::ActivityNode> node)
+std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivation> ExpansionActivationGroupImpl::getNodeActivation(const std::shared_ptr<uml::ActivityNode>& node)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -183,7 +183,7 @@ std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivation> ExpansionAc
 	//end of body
 }
 
-void ExpansionActivationGroupImpl::resume(std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivation> activation)
+void ExpansionActivationGroupImpl::resume(const std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivation>& activation)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -195,7 +195,7 @@ void ExpansionActivationGroupImpl::resume(std::shared_ptr<fUML::Semantics::Activ
 	//end of body
 }
 
-void ExpansionActivationGroupImpl::suspend(std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivation> activation)
+void ExpansionActivationGroupImpl::suspend(const std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivation>& activation)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -211,7 +211,7 @@ void ExpansionActivationGroupImpl::suspend(std::shared_ptr<fUML::Semantics::Acti
 // Attribute Getters & Setters
 //*********************************
 /* Getter & Setter for attribute index */
-int ExpansionActivationGroupImpl::getIndex() const 
+int ExpansionActivationGroupImpl::getIndex() const
 {
 	return m_index;
 }
@@ -225,7 +225,7 @@ void ExpansionActivationGroupImpl::setIndex(int _index)
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference groupInputs */
-std::shared_ptr<Bag<fUML::Semantics::Activities::ExpansionNodeActivation>> ExpansionActivationGroupImpl::getGroupInputs() const
+const std::shared_ptr<Bag<fUML::Semantics::Activities::ExpansionNodeActivation>>& ExpansionActivationGroupImpl::getGroupInputs() const
 {
 	if(m_groupInputs == nullptr)
 	{
@@ -237,7 +237,7 @@ std::shared_ptr<Bag<fUML::Semantics::Activities::ExpansionNodeActivation>> Expan
 }
 
 /* Getter & Setter for reference groupOutputs */
-std::shared_ptr<Bag<fUML::Semantics::Activities::ExpansionNodeActivation>> ExpansionActivationGroupImpl::getGroupOutputs() const
+const std::shared_ptr<Bag<fUML::Semantics::Activities::ExpansionNodeActivation>>& ExpansionActivationGroupImpl::getGroupOutputs() const
 {
 	if(m_groupOutputs == nullptr)
 	{
@@ -249,18 +249,18 @@ std::shared_ptr<Bag<fUML::Semantics::Activities::ExpansionNodeActivation>> Expan
 }
 
 /* Getter & Setter for reference regionActivation */
-std::shared_ptr<fUML::Semantics::Activities::ExpansionRegionActivation> ExpansionActivationGroupImpl::getRegionActivation() const
+const std::shared_ptr<fUML::Semantics::Activities::ExpansionRegionActivation>& ExpansionActivationGroupImpl::getRegionActivation() const
 {
     return m_regionActivation;
 }
-void ExpansionActivationGroupImpl::setRegionActivation(std::shared_ptr<fUML::Semantics::Activities::ExpansionRegionActivation> _regionActivation)
+void ExpansionActivationGroupImpl::setRegionActivation(const std::shared_ptr<fUML::Semantics::Activities::ExpansionRegionActivation>& _regionActivation)
 {
     m_regionActivation = _regionActivation;
 	
 }
 
 /* Getter & Setter for reference regionInputs */
-std::shared_ptr<Bag<fUML::Semantics::Actions::OutputPinActivation>> ExpansionActivationGroupImpl::getRegionInputs() const
+const std::shared_ptr<Bag<fUML::Semantics::Actions::OutputPinActivation>>& ExpansionActivationGroupImpl::getRegionInputs() const
 {
 	if(m_regionInputs == nullptr)
 	{
@@ -465,7 +465,7 @@ void ExpansionActivationGroupImpl::saveContent(std::shared_ptr<persistence::inte
 	}
 }
 
-std::shared_ptr<ecore::EClass> ExpansionActivationGroupImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& ExpansionActivationGroupImpl::eStaticClass() const
 {
 	return fUML::Semantics::Activities::ActivitiesPackage::eInstance()->getExpansionActivationGroup_Class();
 }
@@ -509,7 +509,7 @@ bool ExpansionActivationGroupImpl::internalEIsSet(int featureID) const
 	return ActivityNodeActivationGroupImpl::internalEIsSet(featureID);
 }
 
-bool ExpansionActivationGroupImpl::eSet(int featureID, Any newValue)
+bool ExpansionActivationGroupImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -647,7 +647,7 @@ bool ExpansionActivationGroupImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any ExpansionActivationGroupImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any ExpansionActivationGroupImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

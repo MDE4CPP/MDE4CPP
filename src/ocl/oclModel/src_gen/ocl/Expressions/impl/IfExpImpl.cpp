@@ -230,33 +230,33 @@ std::shared_ptr<ecore::EObject> IfExpImpl::copy() const
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference condition */
-std::shared_ptr<ocl::Expressions::OclExpression> IfExpImpl::getCondition() const
+const std::shared_ptr<ocl::Expressions::OclExpression>& IfExpImpl::getCondition() const
 {
     return m_condition;
 }
-void IfExpImpl::setCondition(std::shared_ptr<ocl::Expressions::OclExpression> _condition)
+void IfExpImpl::setCondition(const std::shared_ptr<ocl::Expressions::OclExpression>& _condition)
 {
     m_condition = _condition;
 	
 }
 
 /* Getter & Setter for reference elseExpression */
-std::shared_ptr<ocl::Expressions::OclExpression> IfExpImpl::getElseExpression() const
+const std::shared_ptr<ocl::Expressions::OclExpression>& IfExpImpl::getElseExpression() const
 {
     return m_elseExpression;
 }
-void IfExpImpl::setElseExpression(std::shared_ptr<ocl::Expressions::OclExpression> _elseExpression)
+void IfExpImpl::setElseExpression(const std::shared_ptr<ocl::Expressions::OclExpression>& _elseExpression)
 {
     m_elseExpression = _elseExpression;
 	
 }
 
 /* Getter & Setter for reference thenExpression */
-std::shared_ptr<ocl::Expressions::OclExpression> IfExpImpl::getThenExpression() const
+const std::shared_ptr<ocl::Expressions::OclExpression>& IfExpImpl::getThenExpression() const
 {
     return m_thenExpression;
 }
-void IfExpImpl::setThenExpression(std::shared_ptr<ocl::Expressions::OclExpression> _thenExpression)
+void IfExpImpl::setThenExpression(const std::shared_ptr<ocl::Expressions::OclExpression>& _thenExpression)
 {
     m_thenExpression = _thenExpression;
 	
@@ -456,7 +456,7 @@ void IfExpImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandle
 	}
 }
 
-std::shared_ptr<ecore::EClass> IfExpImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& IfExpImpl::eStaticClass() const
 {
 	return ocl::Expressions::ExpressionsPackage::eInstance()->getIfExp_Class();
 }
@@ -492,7 +492,7 @@ bool IfExpImpl::internalEIsSet(int featureID) const
 	return OclExpressionImpl::internalEIsSet(featureID);
 }
 
-bool IfExpImpl::eSet(int featureID, Any newValue)
+bool IfExpImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -528,7 +528,7 @@ bool IfExpImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any IfExpImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any IfExpImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

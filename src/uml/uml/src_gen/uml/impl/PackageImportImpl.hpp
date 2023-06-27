@@ -51,7 +51,7 @@ namespace uml
 			visibility = VisibilityKind::public or visibility = VisibilityKind::private
 			*/
 			 
-			virtual bool public_or_private(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
+			virtual bool public_or_private(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context) ;
 			
 			//*********************************
 			// Attribute Getters & Setters
@@ -77,13 +77,13 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::Package> getImportedPackage() const ;
+			virtual const std::shared_ptr<uml::Package>& getImportedPackage() const ;
 			/*!
 			Specifies the Package whose members are imported into a Namespace.
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual void setImportedPackage(std::shared_ptr<uml::Package>) ;
+			virtual void setImportedPackage(const std::shared_ptr<uml::Package>&) ;
 			/*!
 			Specifies the Namespace that imports the members from a Package.
 			<p>From package UML::CommonStructure.</p>
@@ -147,19 +147,19 @@ namespace uml
 			virtual void saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const;
 
 		protected:
-			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
+			virtual const std::shared_ptr<ecore::EClass>& eStaticClass() const;
 
 			//*********************************
 			// EStructuralFeature Get/Set/IsSet
 			//*********************************
 			virtual Any eGet(int featureID, bool resolve, bool coreType) const ;
-			virtual bool eSet(int featureID, Any newValue) ;
+			virtual bool eSet(int featureID, const Any& newValue) ;
 			virtual bool internalEIsSet(int featureID) const ;
 
 			//*********************************
 			// EOperation Invoke
 			//*********************************
-			virtual Any eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments) ;
+			virtual Any eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments) ;
 
 		private:
 			std::weak_ptr<uml::PackageImport> m_thisPackageImportPtr;

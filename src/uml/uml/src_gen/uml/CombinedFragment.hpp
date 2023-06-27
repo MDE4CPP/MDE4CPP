@@ -93,13 +93,13 @@ namespace uml
 			   enclosingOperand.oclAsType(InteractionFragment)->asSet()).covered->asSet() = self.covered->asSet()
 			*/
 			 
-			virtual bool break_(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
+			virtual bool break_(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context) = 0;
 			/*!
 			The interaction operators 'consider' and 'ignore' can only be used for the ConsiderIgnoreFragment subtype of CombinedFragment
 			((interactionOperator = InteractionOperatorKind::consider) or (interactionOperator =  InteractionOperatorKind::ignore)) implies oclIsKindOf(ConsiderIgnoreFragment)
 			*/
 			 
-			virtual bool consider_and_ignore(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
+			virtual bool consider_and_ignore(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context) = 0;
 			/*!
 			If the interactionOperator is opt, loop, break, assert or neg, there must be exactly one operand.
 			(interactionOperator =  InteractionOperatorKind::opt or interactionOperator = InteractionOperatorKind::loop or
@@ -108,7 +108,7 @@ namespace uml
 			implies operand->size()=1
 			*/
 			 
-			virtual bool opt_loop_break_neg(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
+			virtual bool opt_loop_break_neg(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context) = 0;
 
 			//*********************************
 			// Attribute Getters & Setters
@@ -134,13 +134,13 @@ namespace uml
 			<p>From package UML::Interactions.</p>
 			*/
 			
-			virtual std::shared_ptr<Subset<uml::Gate, uml::Element>> getCfragmentGate() const = 0;
+			virtual const std::shared_ptr<Subset<uml::Gate, uml::Element>>& getCfragmentGate() const = 0;
 			/*!
 			The set of operands of the combined fragment.
 			<p>From package UML::Interactions.</p>
 			*/
 			
-			virtual std::shared_ptr<Subset<uml::InteractionOperand, uml::Element>> getOperand() const = 0;
+			virtual const std::shared_ptr<Subset<uml::InteractionOperand, uml::Element>>& getOperand() const = 0;
 
 			//*********************************
 			// Union Reference Getters

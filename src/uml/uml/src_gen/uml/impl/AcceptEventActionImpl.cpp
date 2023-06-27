@@ -216,27 +216,27 @@ std::shared_ptr<ecore::EObject> AcceptEventActionImpl::copy() const
 //*********************************
 // Operations
 //*********************************
-bool AcceptEventActionImpl::conforming_type(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool AcceptEventActionImpl::conforming_type(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool AcceptEventActionImpl::no_input_pins(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool AcceptEventActionImpl::no_input_pins(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool AcceptEventActionImpl::no_output_pins(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool AcceptEventActionImpl::no_output_pins(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool AcceptEventActionImpl::one_output_pin(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool AcceptEventActionImpl::one_output_pin(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool AcceptEventActionImpl::unmarshall_signal_events(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool AcceptEventActionImpl::unmarshall_signal_events(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -245,7 +245,7 @@ bool AcceptEventActionImpl::unmarshall_signal_events(Any diagnostics,std::shared
 // Attribute Getters & Setters
 //*********************************
 /* Getter & Setter for attribute isUnmarshall */
-bool AcceptEventActionImpl::getIsUnmarshall() const 
+bool AcceptEventActionImpl::getIsUnmarshall() const
 {
 	return m_isUnmarshall;
 }
@@ -259,7 +259,7 @@ void AcceptEventActionImpl::setIsUnmarshall(bool _isUnmarshall)
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference result */
-std::shared_ptr<Subset<uml::OutputPin, uml::OutputPin>> AcceptEventActionImpl::getResult() const
+const std::shared_ptr<Subset<uml::OutputPin, uml::OutputPin>>& AcceptEventActionImpl::getResult() const
 {
 	if(m_result == nullptr)
 	{
@@ -280,7 +280,7 @@ std::shared_ptr<Subset<uml::OutputPin, uml::OutputPin>> AcceptEventActionImpl::g
 }
 
 /* Getter & Setter for reference trigger */
-std::shared_ptr<Subset<uml::Trigger, uml::Element>> AcceptEventActionImpl::getTrigger() const
+const std::shared_ptr<Subset<uml::Trigger, uml::Element>>& AcceptEventActionImpl::getTrigger() const
 {
 	if(m_trigger == nullptr)
 	{
@@ -541,7 +541,7 @@ void AcceptEventActionImpl::saveContent(std::shared_ptr<persistence::interfaces:
 	}
 }
 
-std::shared_ptr<ecore::EClass> AcceptEventActionImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& AcceptEventActionImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getAcceptEventAction_Class();
 }
@@ -577,7 +577,7 @@ bool AcceptEventActionImpl::internalEIsSet(int featureID) const
 	return ActionImpl::internalEIsSet(featureID);
 }
 
-bool AcceptEventActionImpl::eSet(int featureID, Any newValue)
+bool AcceptEventActionImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -670,7 +670,7 @@ bool AcceptEventActionImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any AcceptEventActionImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any AcceptEventActionImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

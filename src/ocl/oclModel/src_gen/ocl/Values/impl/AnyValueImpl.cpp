@@ -102,7 +102,7 @@ std::shared_ptr<ecore::EObject> AnyValueImpl::copy() const
 //*********************************
 // Operations
 //*********************************
-bool AnyValueImpl::equals(std::shared_ptr<fUML::Semantics::Values::Value> otherValue)
+bool AnyValueImpl::equals(const std::shared_ptr<fUML::Semantics::Values::Value>& otherValue)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -176,11 +176,11 @@ std::string AnyValueImpl::toString()
 // Attribute Getters & Setters
 //*********************************
 /* Getter & Setter for attribute value */
-Any AnyValueImpl::getValue() const 
+const Any& AnyValueImpl::getValue() const
 {
 	return m_value;
 }
-void AnyValueImpl::setValue(Any _value)
+void AnyValueImpl::setValue(const Any& _value)
 {
 	m_value = _value;
 	
@@ -231,7 +231,7 @@ void AnyValueImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoad
 		if ( iter != attr_list.end() )
 		{
 			// TODO this attribute has a non handle type
-			std::cout << "| ERROR    | " << __PRETTY_FUNCTION__ << " handle type of 'value'" << " org.eclipse.emf.ecore.impl.EDataTypeImpl@50a3d0f6 (name: EJavaObject) (instanceClassName: java.lang.Object) (serializable: true)" << std::endl; 
+			std::cout << "| ERROR    | " << __PRETTY_FUNCTION__ << " handle type of 'value'" << " org.eclipse.emf.ecore.impl.EDataTypeImpl@3a2b2322 (name: EJavaObject) (instanceClassName: java.lang.Object) (serializable: true)" << std::endl; 
 			Any value; 			this->setValue(value);
 		}
 	}
@@ -287,7 +287,7 @@ void AnyValueImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHan
 	}
 }
 
-std::shared_ptr<ecore::EClass> AnyValueImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& AnyValueImpl::eStaticClass() const
 {
 	return ocl::Values::ValuesPackage::eInstance()->getAnyValue_Class();
 }
@@ -315,7 +315,7 @@ bool AnyValueImpl::internalEIsSet(int featureID) const
 	return fUML::Semantics::Values::ValueImpl::internalEIsSet(featureID);
 }
 
-bool AnyValueImpl::eSet(int featureID, Any newValue)
+bool AnyValueImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -334,7 +334,7 @@ bool AnyValueImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any AnyValueImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any AnyValueImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

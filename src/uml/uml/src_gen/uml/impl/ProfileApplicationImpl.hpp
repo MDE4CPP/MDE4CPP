@@ -55,7 +55,7 @@ namespace uml
 			Retrieves the definition (Ecore representation) of the specified named element in the profile associated with this profile application.
 			*/
 			 
-			virtual std::shared_ptr<ecore::ENamedElement> getAppliedDefinition(std::shared_ptr<uml::NamedElement> namedElement) ;
+			virtual std::shared_ptr<ecore::ENamedElement> getAppliedDefinition(const std::shared_ptr<uml::NamedElement>& namedElement) ;
 			
 			//*********************************
 			// Attribute Getters & Setters
@@ -81,13 +81,13 @@ namespace uml
 			<p>From package UML::Packages.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::Profile> getAppliedProfile() const ;
+			virtual const std::shared_ptr<uml::Profile>& getAppliedProfile() const ;
 			/*!
 			References the Profiles that are applied to a Package through this ProfileApplication.
 			<p>From package UML::Packages.</p>
 			*/
 			
-			virtual void setAppliedProfile(std::shared_ptr<uml::Profile>) ;
+			virtual void setAppliedProfile(const std::shared_ptr<uml::Profile>&) ;
 			/*!
 			The package that owns the profile application.
 			<p>From package UML::Packages.</p>
@@ -151,19 +151,19 @@ namespace uml
 			virtual void saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const;
 
 		protected:
-			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
+			virtual const std::shared_ptr<ecore::EClass>& eStaticClass() const;
 
 			//*********************************
 			// EStructuralFeature Get/Set/IsSet
 			//*********************************
 			virtual Any eGet(int featureID, bool resolve, bool coreType) const ;
-			virtual bool eSet(int featureID, Any newValue) ;
+			virtual bool eSet(int featureID, const Any& newValue) ;
 			virtual bool internalEIsSet(int featureID) const ;
 
 			//*********************************
 			// EOperation Invoke
 			//*********************************
-			virtual Any eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments) ;
+			virtual Any eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments) ;
 
 		private:
 			std::weak_ptr<uml::ProfileApplication> m_thisProfileApplicationPtr;

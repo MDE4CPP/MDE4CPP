@@ -124,33 +124,33 @@ std::shared_ptr<ecore::EObject> OclMessageArgEvalImpl::copy() const
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference expression */
-std::shared_ptr<ocl::Evaluations::OclExpEval> OclMessageArgEvalImpl::getExpression() const
+const std::shared_ptr<ocl::Evaluations::OclExpEval>& OclMessageArgEvalImpl::getExpression() const
 {
     return m_expression;
 }
-void OclMessageArgEvalImpl::setExpression(std::shared_ptr<ocl::Evaluations::OclExpEval> _expression)
+void OclMessageArgEvalImpl::setExpression(const std::shared_ptr<ocl::Evaluations::OclExpEval>& _expression)
 {
     m_expression = _expression;
 	
 }
 
 /* Getter & Setter for reference unspecified */
-std::shared_ptr<ocl::Evaluations::UnspecifiedValueExpEval> OclMessageArgEvalImpl::getUnspecified() const
+const std::shared_ptr<ocl::Evaluations::UnspecifiedValueExpEval>& OclMessageArgEvalImpl::getUnspecified() const
 {
     return m_unspecified;
 }
-void OclMessageArgEvalImpl::setUnspecified(std::shared_ptr<ocl::Evaluations::UnspecifiedValueExpEval> _unspecified)
+void OclMessageArgEvalImpl::setUnspecified(const std::shared_ptr<ocl::Evaluations::UnspecifiedValueExpEval>& _unspecified)
 {
     m_unspecified = _unspecified;
 	
 }
 
 /* Getter & Setter for reference variable */
-std::shared_ptr<ocl::Evaluations::OclExpEval> OclMessageArgEvalImpl::getVariable() const
+const std::shared_ptr<ocl::Evaluations::OclExpEval>& OclMessageArgEvalImpl::getVariable() const
 {
     return m_variable;
 }
-void OclMessageArgEvalImpl::setVariable(std::shared_ptr<ocl::Evaluations::OclExpEval> _variable)
+void OclMessageArgEvalImpl::setVariable(const std::shared_ptr<ocl::Evaluations::OclExpEval>& _variable)
 {
     m_variable = _variable;
 	
@@ -303,7 +303,7 @@ void OclMessageArgEvalImpl::saveContent(std::shared_ptr<persistence::interfaces:
 	}
 }
 
-std::shared_ptr<ecore::EClass> OclMessageArgEvalImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& OclMessageArgEvalImpl::eStaticClass() const
 {
 	return ocl::Evaluations::EvaluationsPackage::eInstance()->getOclMessageArgEval_Class();
 }
@@ -339,7 +339,7 @@ bool OclMessageArgEvalImpl::internalEIsSet(int featureID) const
 	return fUML::Semantics::Values::EvaluationImpl::internalEIsSet(featureID);
 }
 
-bool OclMessageArgEvalImpl::eSet(int featureID, Any newValue)
+bool OclMessageArgEvalImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -375,7 +375,7 @@ bool OclMessageArgEvalImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any OclMessageArgEvalImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any OclMessageArgEvalImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

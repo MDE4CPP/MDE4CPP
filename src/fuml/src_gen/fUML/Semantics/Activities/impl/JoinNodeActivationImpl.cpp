@@ -45,8 +45,8 @@
 #include "fUML/Semantics/Activities/ControlNodeActivation.hpp"
 #include "fUML/Semantics/Activities/Token.hpp"
 //Factories and Package includes
-#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/SemanticsPackage.hpp"
+#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/Activities/ActivitiesPackage.hpp"
 #include "uml/umlPackage.hpp"
 
@@ -118,7 +118,7 @@ std::shared_ptr<ecore::EObject> JoinNodeActivationImpl::copy() const
 //*********************************
 // Operations
 //*********************************
-void JoinNodeActivationImpl::fire(std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> incomingTokens)
+void JoinNodeActivationImpl::fire(const std::shared_ptr<Bag<fUML::Semantics::Activities::Token>>& incomingTokens)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -265,7 +265,7 @@ void JoinNodeActivationImpl::saveContent(std::shared_ptr<persistence::interfaces
 	}
 }
 
-std::shared_ptr<ecore::EClass> JoinNodeActivationImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& JoinNodeActivationImpl::eStaticClass() const
 {
 	return fUML::Semantics::Activities::ActivitiesPackage::eInstance()->getJoinNodeActivation_Class();
 }
@@ -289,7 +289,7 @@ bool JoinNodeActivationImpl::internalEIsSet(int featureID) const
 	return ControlNodeActivationImpl::internalEIsSet(featureID);
 }
 
-bool JoinNodeActivationImpl::eSet(int featureID, Any newValue)
+bool JoinNodeActivationImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -301,7 +301,7 @@ bool JoinNodeActivationImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any JoinNodeActivationImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any JoinNodeActivationImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

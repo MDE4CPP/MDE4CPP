@@ -171,7 +171,7 @@ bool ModelImpl::isMetamodel()
 // Attribute Getters & Setters
 //*********************************
 /* Getter & Setter for attribute viewpoint */
-std::string ModelImpl::getViewpoint() const 
+std::string ModelImpl::getViewpoint() const
 {
 	return m_viewpoint;
 }
@@ -377,7 +377,7 @@ void ModelImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandle
 	}
 }
 
-std::shared_ptr<ecore::EClass> ModelImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& ModelImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getModel_Class();
 }
@@ -405,7 +405,7 @@ bool ModelImpl::internalEIsSet(int featureID) const
 	return PackageImpl::internalEIsSet(featureID);
 }
 
-bool ModelImpl::eSet(int featureID, Any newValue)
+bool ModelImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -424,7 +424,7 @@ bool ModelImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any ModelImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any ModelImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

@@ -154,17 +154,17 @@ std::shared_ptr<ecore::EObject> CollaborationUseImpl::copy() const
 //*********************************
 // Operations
 //*********************************
-bool CollaborationUseImpl::client_elements(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool CollaborationUseImpl::client_elements(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool CollaborationUseImpl::connectors(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool CollaborationUseImpl::connectors(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool CollaborationUseImpl::every_role(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool CollaborationUseImpl::every_role(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -177,7 +177,7 @@ bool CollaborationUseImpl::every_role(Any diagnostics,std::shared_ptr<std::map <
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference roleBinding */
-std::shared_ptr<Subset<uml::Dependency, uml::Element>> CollaborationUseImpl::getRoleBinding() const
+const std::shared_ptr<Subset<uml::Dependency, uml::Element>>& CollaborationUseImpl::getRoleBinding() const
 {
 	if(m_roleBinding == nullptr)
 	{
@@ -198,11 +198,11 @@ std::shared_ptr<Subset<uml::Dependency, uml::Element>> CollaborationUseImpl::get
 }
 
 /* Getter & Setter for reference type */
-std::shared_ptr<uml::Collaboration> CollaborationUseImpl::getType() const
+const std::shared_ptr<uml::Collaboration>& CollaborationUseImpl::getType() const
 {
     return m_type;
 }
-void CollaborationUseImpl::setType(std::shared_ptr<uml::Collaboration> _type)
+void CollaborationUseImpl::setType(const std::shared_ptr<uml::Collaboration>& _type)
 {
     m_type = _type;
 	
@@ -372,7 +372,7 @@ void CollaborationUseImpl::saveContent(std::shared_ptr<persistence::interfaces::
 	}
 }
 
-std::shared_ptr<ecore::EClass> CollaborationUseImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& CollaborationUseImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getCollaborationUse_Class();
 }
@@ -404,7 +404,7 @@ bool CollaborationUseImpl::internalEIsSet(int featureID) const
 	return NamedElementImpl::internalEIsSet(featureID);
 }
 
-bool CollaborationUseImpl::eSet(int featureID, Any newValue)
+bool CollaborationUseImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -461,7 +461,7 @@ bool CollaborationUseImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any CollaborationUseImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any CollaborationUseImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

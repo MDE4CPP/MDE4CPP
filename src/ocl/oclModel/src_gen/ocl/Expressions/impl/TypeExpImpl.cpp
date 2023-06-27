@@ -211,11 +211,11 @@ std::shared_ptr<ecore::EObject> TypeExpImpl::copy() const
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference referredType */
-std::shared_ptr<ecore::EClassifier> TypeExpImpl::getReferredType() const
+const std::shared_ptr<ecore::EClassifier>& TypeExpImpl::getReferredType() const
 {
     return m_referredType;
 }
-void TypeExpImpl::setReferredType(std::shared_ptr<ecore::EClassifier> _referredType)
+void TypeExpImpl::setReferredType(const std::shared_ptr<ecore::EClassifier>& _referredType)
 {
     m_referredType = _referredType;
 	
@@ -386,7 +386,7 @@ void TypeExpImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHand
 	}
 }
 
-std::shared_ptr<ecore::EClass> TypeExpImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& TypeExpImpl::eStaticClass() const
 {
 	return ocl::Expressions::ExpressionsPackage::eInstance()->getTypeExp_Class();
 }
@@ -414,7 +414,7 @@ bool TypeExpImpl::internalEIsSet(int featureID) const
 	return OclExpressionImpl::internalEIsSet(featureID);
 }
 
-bool TypeExpImpl::eSet(int featureID, Any newValue)
+bool TypeExpImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -434,7 +434,7 @@ bool TypeExpImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any TypeExpImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any TypeExpImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

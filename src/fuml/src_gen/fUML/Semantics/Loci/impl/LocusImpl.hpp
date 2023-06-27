@@ -45,13 +45,13 @@ virtual public Locus
 			//*********************************
 			// Operations
 			//*********************************
-			virtual void add(std::shared_ptr<fUML::Semantics::StructuredClassifiers::ExtensionalValue> value) ;
-			virtual void assignExecutor(std::shared_ptr<fUML::Semantics::Loci::Executor> executor) ;
-			virtual void assignFactory(std::shared_ptr<fUML::Semantics::Loci::ExecutionFactory> factory) ;
-			virtual bool conforms(std::shared_ptr<uml::Classifier> type,std::shared_ptr<uml::Classifier> classifier) ;
-			virtual std::shared_ptr<fUML::Semantics::StructuredClassifiers::Object> instantiate(std::shared_ptr<uml::Class> type) ;
-			virtual void remove(std::shared_ptr<fUML::Semantics::StructuredClassifiers::ExtensionalValue> value) ;
-			virtual std::shared_ptr<Bag<fUML::Semantics::StructuredClassifiers::ExtensionalValue> > retrieveExtent(std::shared_ptr<uml::Classifier> classifier) ;
+			virtual void add(const std::shared_ptr<fUML::Semantics::StructuredClassifiers::ExtensionalValue>& value) ;
+			virtual void assignExecutor(const std::shared_ptr<fUML::Semantics::Loci::Executor>& executor) ;
+			virtual void assignFactory(const std::shared_ptr<fUML::Semantics::Loci::ExecutionFactory>& factory) ;
+			virtual bool conforms(const std::shared_ptr<uml::Classifier>& type, const std::shared_ptr<uml::Classifier>& classifier) ;
+			virtual std::shared_ptr<fUML::Semantics::StructuredClassifiers::Object> instantiate(const std::shared_ptr<uml::Class>& type) ;
+			virtual void remove(const std::shared_ptr<fUML::Semantics::StructuredClassifiers::ExtensionalValue>& value) ;
+			virtual std::shared_ptr<Bag<fUML::Semantics::StructuredClassifiers::ExtensionalValue> > retrieveExtent(const std::shared_ptr<uml::Classifier>& classifier) ;
 			
 			//*********************************
 			// Attribute Getters & Setters
@@ -60,11 +60,11 @@ virtual public Locus
 			//*********************************
 			// Reference Getters & Setters
 			//*********************************
-			virtual std::shared_ptr<fUML::Semantics::Loci::Executor> getExecutor() const ;
-			virtual void setExecutor(std::shared_ptr<fUML::Semantics::Loci::Executor>) ;
-			virtual std::shared_ptr<Bag<fUML::Semantics::StructuredClassifiers::ExtensionalValue>> getExtensionalValues() const ;
-			virtual std::shared_ptr<fUML::Semantics::Loci::ExecutionFactory> getFactory() const ;
-			virtual void setFactory(std::shared_ptr<fUML::Semantics::Loci::ExecutionFactory>) ;
+			virtual const std::shared_ptr<fUML::Semantics::Loci::Executor>& getExecutor() const ;
+			virtual void setExecutor(const std::shared_ptr<fUML::Semantics::Loci::Executor>&) ;
+			virtual const std::shared_ptr<Bag<fUML::Semantics::StructuredClassifiers::ExtensionalValue>>& getExtensionalValues() const ;
+			virtual const std::shared_ptr<fUML::Semantics::Loci::ExecutionFactory>& getFactory() const ;
+			virtual void setFactory(const std::shared_ptr<fUML::Semantics::Loci::ExecutionFactory>&) ;
 			
 			//*********************************
 			// Union Reference Getters
@@ -86,19 +86,19 @@ virtual public Locus
 			virtual void saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const;
 
 		protected:
-			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
+			virtual const std::shared_ptr<ecore::EClass>& eStaticClass() const;
 
 			//*********************************
 			// EStructuralFeature Get/Set/IsSet
 			//*********************************
 			virtual Any eGet(int featureID, bool resolve, bool coreType) const ;
-			virtual bool eSet(int featureID, Any newValue) ;
+			virtual bool eSet(int featureID, const Any& newValue) ;
 			virtual bool internalEIsSet(int featureID) const ;
 
 			//*********************************
 			// EOperation Invoke
 			//*********************************
-			virtual Any eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments) ;
+			virtual Any eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments) ;
 
 		private:
 			std::weak_ptr<fUML::Semantics::Loci::Locus> m_thisLocusPtr;

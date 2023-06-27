@@ -116,7 +116,7 @@ std::shared_ptr<ecore::EObject> ImageImpl::copy() const
 // Attribute Getters & Setters
 //*********************************
 /* Getter & Setter for attribute content */
-std::string ImageImpl::getContent() const 
+std::string ImageImpl::getContent() const
 {
 	return m_content;
 }
@@ -127,7 +127,7 @@ void ImageImpl::setContent(std::string _content)
 }
 
 /* Getter & Setter for attribute format */
-std::string ImageImpl::getFormat() const 
+std::string ImageImpl::getFormat() const
 {
 	return m_format;
 }
@@ -138,7 +138,7 @@ void ImageImpl::setFormat(std::string _format)
 }
 
 /* Getter & Setter for attribute location */
-std::string ImageImpl::getLocation() const 
+std::string ImageImpl::getLocation() const
 {
 	return m_location;
 }
@@ -296,7 +296,7 @@ void ImageImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandle
 	}
 }
 
-std::shared_ptr<ecore::EClass> ImageImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& ImageImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getImage_Class();
 }
@@ -332,7 +332,7 @@ bool ImageImpl::internalEIsSet(int featureID) const
 	return ElementImpl::internalEIsSet(featureID);
 }
 
-bool ImageImpl::eSet(int featureID, Any newValue)
+bool ImageImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -365,7 +365,7 @@ bool ImageImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any ImageImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any ImageImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

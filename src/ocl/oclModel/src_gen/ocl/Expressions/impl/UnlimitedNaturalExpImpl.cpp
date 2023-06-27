@@ -207,7 +207,7 @@ std::shared_ptr<ecore::EObject> UnlimitedNaturalExpImpl::copy() const
 // Attribute Getters & Setters
 //*********************************
 /* Getter & Setter for attribute unlimitedNaturalSymbol */
-int UnlimitedNaturalExpImpl::getUnlimitedNaturalSymbol() const 
+int UnlimitedNaturalExpImpl::getUnlimitedNaturalSymbol() const
 {
 	return m_unlimitedNaturalSymbol;
 }
@@ -383,7 +383,7 @@ void UnlimitedNaturalExpImpl::saveContent(std::shared_ptr<persistence::interface
 	}
 }
 
-std::shared_ptr<ecore::EClass> UnlimitedNaturalExpImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& UnlimitedNaturalExpImpl::eStaticClass() const
 {
 	return ocl::Expressions::ExpressionsPackage::eInstance()->getUnlimitedNaturalExp_Class();
 }
@@ -411,7 +411,7 @@ bool UnlimitedNaturalExpImpl::internalEIsSet(int featureID) const
 	return NumericLiteralExpImpl::internalEIsSet(featureID);
 }
 
-bool UnlimitedNaturalExpImpl::eSet(int featureID, Any newValue)
+bool UnlimitedNaturalExpImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -430,7 +430,7 @@ bool UnlimitedNaturalExpImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any UnlimitedNaturalExpImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any UnlimitedNaturalExpImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

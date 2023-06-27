@@ -45,11 +45,11 @@ virtual public EvalEnvironment
 			//*********************************
 			// Operations
 			//*********************************
-			virtual void add(std::shared_ptr<ocl::Values::NameValueBinding> n) ;
-			virtual void addAll(std::shared_ptr<Bag<ocl::Values::NameValueBinding>> nvbs) ;
+			virtual void add(const std::shared_ptr<ocl::Values::NameValueBinding>& n) ;
+			virtual void addAll(const std::shared_ptr<Bag<ocl::Values::NameValueBinding>>& nvbs) ;
 			virtual std::shared_ptr<ocl::Values::NameValueBinding> find(std::string name) ;
 			virtual std::shared_ptr<fUML::Semantics::Values::Value> getValueOf(std::string n) ;
-			virtual void replace(std::shared_ptr<ocl::Values::NameValueBinding> n) ;
+			virtual void replace(const std::shared_ptr<ocl::Values::NameValueBinding>& n) ;
 			
 			//*********************************
 			// Attribute Getters & Setters
@@ -58,7 +58,7 @@ virtual public EvalEnvironment
 			//*********************************
 			// Reference Getters & Setters
 			//*********************************
-			virtual std::shared_ptr<Bag<ocl::Values::NameValueBinding>> getBindings() const ;
+			virtual const std::shared_ptr<Bag<ocl::Values::NameValueBinding>>& getBindings() const ;
 			
 			//*********************************
 			// Union Reference Getters
@@ -80,19 +80,19 @@ virtual public EvalEnvironment
 			virtual void saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const;
 
 		protected:
-			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
+			virtual const std::shared_ptr<ecore::EClass>& eStaticClass() const;
 
 			//*********************************
 			// EStructuralFeature Get/Set/IsSet
 			//*********************************
 			virtual Any eGet(int featureID, bool resolve, bool coreType) const ;
-			virtual bool eSet(int featureID, Any newValue) ;
+			virtual bool eSet(int featureID, const Any& newValue) ;
 			virtual bool internalEIsSet(int featureID) const ;
 
 			//*********************************
 			// EOperation Invoke
 			//*********************************
-			virtual Any eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments) ;
+			virtual Any eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments) ;
 
 		private:
 			std::weak_ptr<ocl::Evaluations::EvalEnvironment> m_thisEvalEnvironmentPtr;

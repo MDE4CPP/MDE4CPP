@@ -212,7 +212,7 @@ std::shared_ptr<ecore::EObject> NodeImpl::copy() const
 //*********************************
 // Operations
 //*********************************
-std::shared_ptr<uml::CommunicationPath> NodeImpl::createCommunicationPath(bool end1IsNavigable,uml::AggregationKind end1Aggregation,std::string end1Name,int end1Lower,int end1Upper,std::shared_ptr<uml::Node> end1Node,bool end2IsNavigable,uml::AggregationKind end2Aggregation,std::string end2Name,int end2Lower,int end2Upper)
+std::shared_ptr<uml::CommunicationPath> NodeImpl::createCommunicationPath(bool end1IsNavigable, uml::AggregationKind end1Aggregation, std::string end1Name, int end1Lower, int end1Upper, const std::shared_ptr<uml::Node>& end1Node, bool end2IsNavigable, uml::AggregationKind end2Aggregation, std::string end2Name, int end2Lower, int end2Upper)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -222,7 +222,7 @@ std::shared_ptr<Bag<uml::CommunicationPath> > NodeImpl::getCommunicationPaths()
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool NodeImpl::internal_structure(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool NodeImpl::internal_structure(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -235,7 +235,7 @@ bool NodeImpl::internal_structure(Any diagnostics,std::shared_ptr<std::map < Any
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference nestedNode */
-std::shared_ptr<Subset<uml::Node, uml::NamedElement>> NodeImpl::getNestedNode() const
+const std::shared_ptr<Subset<uml::Node, uml::NamedElement>>& NodeImpl::getNestedNode() const
 {
 	if(m_nestedNode == nullptr)
 	{
@@ -537,7 +537,7 @@ void NodeImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler
 	}
 }
 
-std::shared_ptr<ecore::EClass> NodeImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& NodeImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getNode_Class();
 }
@@ -579,7 +579,7 @@ bool NodeImpl::internalEIsSet(int featureID) const
 	return result;
 }
 
-bool NodeImpl::eSet(int featureID, Any newValue)
+bool NodeImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -635,7 +635,7 @@ bool NodeImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any NodeImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any NodeImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

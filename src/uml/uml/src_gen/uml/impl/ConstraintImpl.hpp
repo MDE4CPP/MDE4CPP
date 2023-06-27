@@ -55,18 +55,18 @@ namespace uml
 			The ValueSpecification for a Constraint must evaluate to a Boolean value.
 			*/
 			 
-			virtual bool boolean_value(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
+			virtual bool boolean_value(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context) ;
 			/*!
 			Evaluating the ValueSpecification for a Constraint must not have side effects.
 			*/
 			 
-			virtual bool no_side_effects(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
+			virtual bool no_side_effects(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context) ;
 			/*!
 			A Constraint cannot be applied to itself.
 			not constrainedElement->includes(self)
 			*/
 			 
-			virtual bool not_apply_to_self(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
+			virtual bool not_apply_to_self(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context) ;
 			
 			//*********************************
 			// Attribute Getters & Setters
@@ -80,7 +80,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::shared_ptr<Bag<uml::Element>> getConstrainedElement() const ;
+			virtual const std::shared_ptr<Bag<uml::Element>>& getConstrainedElement() const ;
 			/*!
 			Specifies the Namespace that owns the Constraint.
 			<p>From package UML::CommonStructure.</p>
@@ -98,13 +98,13 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::ValueSpecification> getSpecification() const ;
+			virtual const std::shared_ptr<uml::ValueSpecification>& getSpecification() const ;
 			/*!
 			A condition that must be true when evaluated in order for the Constraint to be satisfied.
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual void setSpecification(std::shared_ptr<uml::ValueSpecification>) ;
+			virtual void setSpecification(const std::shared_ptr<uml::ValueSpecification>&) ;
 			
 			//*********************************
 			// Union Reference Getters
@@ -145,19 +145,19 @@ namespace uml
 			virtual void saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const;
 
 		protected:
-			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
+			virtual const std::shared_ptr<ecore::EClass>& eStaticClass() const;
 
 			//*********************************
 			// EStructuralFeature Get/Set/IsSet
 			//*********************************
 			virtual Any eGet(int featureID, bool resolve, bool coreType) const ;
-			virtual bool eSet(int featureID, Any newValue) ;
+			virtual bool eSet(int featureID, const Any& newValue) ;
 			virtual bool internalEIsSet(int featureID) const ;
 
 			//*********************************
 			// EOperation Invoke
 			//*********************************
-			virtual Any eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments) ;
+			virtual Any eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments) ;
 
 		private:
 			std::weak_ptr<uml::Constraint> m_thisConstraintPtr;

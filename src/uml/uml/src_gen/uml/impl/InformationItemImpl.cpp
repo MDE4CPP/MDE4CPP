@@ -167,17 +167,17 @@ std::shared_ptr<ecore::EObject> InformationItemImpl::copy() const
 //*********************************
 // Operations
 //*********************************
-bool InformationItemImpl::has_no(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool InformationItemImpl::has_no(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool InformationItemImpl::not_instantiable(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool InformationItemImpl::not_instantiable(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool InformationItemImpl::sources_and_targets(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool InformationItemImpl::sources_and_targets(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -190,7 +190,7 @@ bool InformationItemImpl::sources_and_targets(Any diagnostics,std::shared_ptr<st
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference represented */
-std::shared_ptr<Bag<uml::Classifier>> InformationItemImpl::getRepresented() const
+const std::shared_ptr<Bag<uml::Classifier>>& InformationItemImpl::getRepresented() const
 {
 	if(m_represented == nullptr)
 	{
@@ -442,7 +442,7 @@ void InformationItemImpl::saveContent(std::shared_ptr<persistence::interfaces::X
 	}
 }
 
-std::shared_ptr<ecore::EClass> InformationItemImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& InformationItemImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getInformationItem_Class();
 }
@@ -470,7 +470,7 @@ bool InformationItemImpl::internalEIsSet(int featureID) const
 	return ClassifierImpl::internalEIsSet(featureID);
 }
 
-bool InformationItemImpl::eSet(int featureID, Any newValue)
+bool InformationItemImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -519,7 +519,7 @@ bool InformationItemImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any InformationItemImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any InformationItemImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

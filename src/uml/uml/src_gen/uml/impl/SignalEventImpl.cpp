@@ -149,11 +149,11 @@ std::shared_ptr<ecore::EObject> SignalEventImpl::copy() const
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference signal */
-std::shared_ptr<uml::Signal> SignalEventImpl::getSignal() const
+const std::shared_ptr<uml::Signal>& SignalEventImpl::getSignal() const
 {
     return m_signal;
 }
-void SignalEventImpl::setSignal(std::shared_ptr<uml::Signal> _signal)
+void SignalEventImpl::setSignal(const std::shared_ptr<uml::Signal>& _signal)
 {
     m_signal = _signal;
 	
@@ -320,7 +320,7 @@ void SignalEventImpl::saveContent(std::shared_ptr<persistence::interfaces::XSave
 	}
 }
 
-std::shared_ptr<ecore::EClass> SignalEventImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& SignalEventImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getSignalEvent_Class();
 }
@@ -348,7 +348,7 @@ bool SignalEventImpl::internalEIsSet(int featureID) const
 	return MessageEventImpl::internalEIsSet(featureID);
 }
 
-bool SignalEventImpl::eSet(int featureID, Any newValue)
+bool SignalEventImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -368,7 +368,7 @@ bool SignalEventImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any SignalEventImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any SignalEventImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

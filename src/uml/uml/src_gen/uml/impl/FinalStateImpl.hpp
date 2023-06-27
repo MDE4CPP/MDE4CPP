@@ -53,37 +53,37 @@ namespace uml
 			submachine->isEmpty()
 			*/
 			 
-			virtual bool cannot_reference_submachine(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
+			virtual bool cannot_reference_submachine(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context) ;
 			/*!
 			A FinalState has no entry Behavior.
 			entry->isEmpty()
 			*/
 			 
-			virtual bool no_entry_behavior(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
+			virtual bool no_entry_behavior(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context) ;
 			/*!
 			A FinalState has no exit Behavior.
 			exit->isEmpty()
 			*/
 			 
-			virtual bool no_exit_behavior(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
+			virtual bool no_exit_behavior(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context) ;
 			/*!
 			A FinalState cannot have any outgoing Transitions.
 			outgoing->size() = 0
 			*/
 			 
-			virtual bool no_outgoing_transitions(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
+			virtual bool no_outgoing_transitions(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context) ;
 			/*!
 			A FinalState cannot have Regions.
 			region->size() = 0
 			*/
 			 
-			virtual bool no_regions(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
+			virtual bool no_regions(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context) ;
 			/*!
 			A FinalState has no state (doActivity) Behavior.
 			doActivity->isEmpty()
 			*/
 			 
-			virtual bool no_state_behavior(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
+			virtual bool no_state_behavior(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context) ;
 			
 			//*********************************
 			// Attribute Getters & Setters
@@ -149,19 +149,19 @@ namespace uml
 			virtual void saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const;
 
 		protected:
-			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
+			virtual const std::shared_ptr<ecore::EClass>& eStaticClass() const;
 
 			//*********************************
 			// EStructuralFeature Get/Set/IsSet
 			//*********************************
 			virtual Any eGet(int featureID, bool resolve, bool coreType) const ;
-			virtual bool eSet(int featureID, Any newValue) ;
+			virtual bool eSet(int featureID, const Any& newValue) ;
 			virtual bool internalEIsSet(int featureID) const ;
 
 			//*********************************
 			// EOperation Invoke
 			//*********************************
-			virtual Any eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments) ;
+			virtual Any eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments) ;
 
 		private:
 			std::weak_ptr<uml::FinalState> m_thisFinalStatePtr;

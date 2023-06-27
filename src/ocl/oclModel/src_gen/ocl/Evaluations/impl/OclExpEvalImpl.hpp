@@ -51,14 +51,14 @@ namespace ocl::Evaluations
 			//*********************************
 			// Reference Getters & Setters
 			//*********************************
-			virtual std::shared_ptr<ocl::Evaluations::EvalEnvironment> getBeforeEnvironment() const ;
-			virtual void setBeforeEnvironment(std::shared_ptr<ocl::Evaluations::EvalEnvironment>) ;
-			virtual std::shared_ptr<ocl::Evaluations::EvalEnvironment> getEnvironment() const ;
-			virtual void setEnvironment(std::shared_ptr<ocl::Evaluations::EvalEnvironment>) ;
-			virtual std::shared_ptr<ocl::Expressions::OclExpression> getModel() const ;
-			virtual void setModel(std::shared_ptr<ocl::Expressions::OclExpression>) ;
-			virtual std::shared_ptr<fUML::Semantics::Values::Value> getResultValue() const ;
-			virtual void setResultValue(std::shared_ptr<fUML::Semantics::Values::Value>) ;
+			virtual const std::shared_ptr<ocl::Evaluations::EvalEnvironment>& getBeforeEnvironment() const ;
+			virtual void setBeforeEnvironment(const std::shared_ptr<ocl::Evaluations::EvalEnvironment>&) ;
+			virtual const std::shared_ptr<ocl::Evaluations::EvalEnvironment>& getEnvironment() const ;
+			virtual void setEnvironment(const std::shared_ptr<ocl::Evaluations::EvalEnvironment>&) ;
+			virtual const std::shared_ptr<ocl::Expressions::OclExpression>& getModel() const ;
+			virtual void setModel(const std::shared_ptr<ocl::Expressions::OclExpression>&) ;
+			virtual const std::shared_ptr<fUML::Semantics::Values::Value>& getResultValue() const ;
+			virtual void setResultValue(const std::shared_ptr<fUML::Semantics::Values::Value>&) ;
 			
 			//*********************************
 			// Union Reference Getters
@@ -80,19 +80,19 @@ namespace ocl::Evaluations
 			virtual void saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const;
 
 		protected:
-			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
+			virtual const std::shared_ptr<ecore::EClass>& eStaticClass() const;
 
 			//*********************************
 			// EStructuralFeature Get/Set/IsSet
 			//*********************************
 			virtual Any eGet(int featureID, bool resolve, bool coreType) const ;
-			virtual bool eSet(int featureID, Any newValue) ;
+			virtual bool eSet(int featureID, const Any& newValue) ;
 			virtual bool internalEIsSet(int featureID) const ;
 
 			//*********************************
 			// EOperation Invoke
 			//*********************************
-			virtual Any eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments) ;
+			virtual Any eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments) ;
 
 		private:
 			std::weak_ptr<ocl::Evaluations::OclExpEval> m_thisOclExpEvalPtr;

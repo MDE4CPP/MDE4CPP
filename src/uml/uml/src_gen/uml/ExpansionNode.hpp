@@ -97,7 +97,7 @@ namespace uml
 			regionAsInput->notEmpty() xor regionAsOutput->notEmpty()
 			*/
 			 
-			virtual bool region_as_input_or_output(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
+			virtual bool region_as_input_or_output(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context) = 0;
 
 			//*********************************
 			// Attribute Getters & Setters
@@ -111,25 +111,25 @@ namespace uml
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::ExpansionRegion> getRegionAsInput() const = 0;
+			virtual const std::shared_ptr<uml::ExpansionRegion>& getRegionAsInput() const = 0;
 			/*!
 			The ExpansionRegion for which the ExpansionNode is an input.
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual void setRegionAsInput(std::shared_ptr<uml::ExpansionRegion>) = 0;
+			virtual void setRegionAsInput(const std::shared_ptr<uml::ExpansionRegion>&) = 0;
 			/*!
 			The ExpansionRegion for which the ExpansionNode is an output.
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::ExpansionRegion> getRegionAsOutput() const = 0;
+			virtual const std::shared_ptr<uml::ExpansionRegion>& getRegionAsOutput() const = 0;
 			/*!
 			The ExpansionRegion for which the ExpansionNode is an output.
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual void setRegionAsOutput(std::shared_ptr<uml::ExpansionRegion>) = 0;
+			virtual void setRegionAsOutput(const std::shared_ptr<uml::ExpansionRegion>&) = 0;
 
 			//*********************************
 			// Union Reference Getters

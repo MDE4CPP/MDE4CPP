@@ -149,27 +149,27 @@ StructuralFeatureActionImpl& StructuralFeatureActionImpl::operator=(const Struct
 //*********************************
 // Operations
 //*********************************
-bool StructuralFeatureActionImpl::multiplicity(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool StructuralFeatureActionImpl::multiplicity(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool StructuralFeatureActionImpl::not_static(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool StructuralFeatureActionImpl::not_static(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool StructuralFeatureActionImpl::object_type(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool StructuralFeatureActionImpl::object_type(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool StructuralFeatureActionImpl::one_featuring_classifier(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool StructuralFeatureActionImpl::one_featuring_classifier(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool StructuralFeatureActionImpl::visibility(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool StructuralFeatureActionImpl::visibility(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -182,22 +182,22 @@ bool StructuralFeatureActionImpl::visibility(Any diagnostics,std::shared_ptr<std
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference object */
-std::shared_ptr<uml::InputPin> StructuralFeatureActionImpl::getObject() const
+const std::shared_ptr<uml::InputPin>& StructuralFeatureActionImpl::getObject() const
 {
     return m_object;
 }
-void StructuralFeatureActionImpl::setObject(std::shared_ptr<uml::InputPin> _object)
+void StructuralFeatureActionImpl::setObject(const std::shared_ptr<uml::InputPin>& _object)
 {
     m_object = _object;
 	
 }
 
 /* Getter & Setter for reference structuralFeature */
-std::shared_ptr<uml::StructuralFeature> StructuralFeatureActionImpl::getStructuralFeature() const
+const std::shared_ptr<uml::StructuralFeature>& StructuralFeatureActionImpl::getStructuralFeature() const
 {
     return m_structuralFeature;
 }
-void StructuralFeatureActionImpl::setStructuralFeature(std::shared_ptr<uml::StructuralFeature> _structuralFeature)
+void StructuralFeatureActionImpl::setStructuralFeature(const std::shared_ptr<uml::StructuralFeature>& _structuralFeature)
 {
     m_structuralFeature = _structuralFeature;
 	
@@ -436,7 +436,7 @@ void StructuralFeatureActionImpl::saveContent(std::shared_ptr<persistence::inter
 	}
 }
 
-std::shared_ptr<ecore::EClass> StructuralFeatureActionImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& StructuralFeatureActionImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getStructuralFeatureAction_Class();
 }
@@ -468,7 +468,7 @@ bool StructuralFeatureActionImpl::internalEIsSet(int featureID) const
 	return ActionImpl::internalEIsSet(featureID);
 }
 
-bool StructuralFeatureActionImpl::eSet(int featureID, Any newValue)
+bool StructuralFeatureActionImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -496,7 +496,7 @@ bool StructuralFeatureActionImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any StructuralFeatureActionImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any StructuralFeatureActionImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

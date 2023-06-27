@@ -133,11 +133,11 @@ std::shared_ptr<ecore::EObject> ProtocolConformanceImpl::copy() const
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference generalMachine */
-std::shared_ptr<uml::ProtocolStateMachine> ProtocolConformanceImpl::getGeneralMachine() const
+const std::shared_ptr<uml::ProtocolStateMachine>& ProtocolConformanceImpl::getGeneralMachine() const
 {
     return m_generalMachine;
 }
-void ProtocolConformanceImpl::setGeneralMachine(std::shared_ptr<uml::ProtocolStateMachine> _generalMachine)
+void ProtocolConformanceImpl::setGeneralMachine(const std::shared_ptr<uml::ProtocolStateMachine>& _generalMachine)
 {
     m_generalMachine = _generalMachine;
 	
@@ -360,7 +360,7 @@ void ProtocolConformanceImpl::saveContent(std::shared_ptr<persistence::interface
 	}
 }
 
-std::shared_ptr<ecore::EClass> ProtocolConformanceImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& ProtocolConformanceImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getProtocolConformance_Class();
 }
@@ -395,7 +395,7 @@ bool ProtocolConformanceImpl::internalEIsSet(int featureID) const
 	return DirectedRelationshipImpl::internalEIsSet(featureID);
 }
 
-bool ProtocolConformanceImpl::eSet(int featureID, Any newValue)
+bool ProtocolConformanceImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -423,7 +423,7 @@ bool ProtocolConformanceImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any ProtocolConformanceImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any ProtocolConformanceImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

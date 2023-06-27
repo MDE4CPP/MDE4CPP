@@ -48,8 +48,8 @@
 #include "fUML/Semantics/Activities/Token.hpp"
 #include "fUML/Semantics/Actions/Values.hpp"
 //Factories and Package includes
-#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/SemanticsPackage.hpp"
+#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/Actions/ActionsPackage.hpp"
 #include "fUML/Semantics/Activities/ActivitiesPackage.hpp"
 #include "uml/umlPackage.hpp"
@@ -168,7 +168,7 @@ bool LoopNodeActivationImpl::runTest()
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference bodyOutputLists */
-std::shared_ptr<Bag<fUML::Semantics::Actions::Values>> LoopNodeActivationImpl::getBodyOutputLists() const
+const std::shared_ptr<Bag<fUML::Semantics::Actions::Values>>& LoopNodeActivationImpl::getBodyOutputLists() const
 {
 	if(m_bodyOutputLists == nullptr)
 	{
@@ -302,7 +302,7 @@ void LoopNodeActivationImpl::saveContent(std::shared_ptr<persistence::interfaces
 	}
 }
 
-std::shared_ptr<ecore::EClass> LoopNodeActivationImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& LoopNodeActivationImpl::eStaticClass() const
 {
 	return fUML::Semantics::Actions::ActionsPackage::eInstance()->getLoopNodeActivation_Class();
 }
@@ -330,7 +330,7 @@ bool LoopNodeActivationImpl::internalEIsSet(int featureID) const
 	return StructuredActivityNodeActivationImpl::internalEIsSet(featureID);
 }
 
-bool LoopNodeActivationImpl::eSet(int featureID, Any newValue)
+bool LoopNodeActivationImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -379,7 +379,7 @@ bool LoopNodeActivationImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any LoopNodeActivationImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any LoopNodeActivationImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

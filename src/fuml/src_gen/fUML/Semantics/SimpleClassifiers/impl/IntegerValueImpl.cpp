@@ -47,8 +47,8 @@
 #include "fUML/Semantics/Values/Value.hpp"
 #include "uml/ValueSpecification.hpp"
 //Factories and Package includes
-#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/SemanticsPackage.hpp"
+#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/SimpleClassifiers/SimpleClassifiersPackage.hpp"
 #include "fUML/Semantics/Values/ValuesPackage.hpp"
 #include "uml/umlPackage.hpp"
@@ -129,7 +129,7 @@ return newValue;
 	//end of body
 }
 
-bool IntegerValueImpl::equals(std::shared_ptr<fUML::Semantics::Values::Value> otherValue)
+bool IntegerValueImpl::equals(const std::shared_ptr<fUML::Semantics::Values::Value>& otherValue)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -182,7 +182,7 @@ std::string IntegerValueImpl::toString()
 // Attribute Getters & Setters
 //*********************************
 /* Getter & Setter for attribute value */
-int IntegerValueImpl::getValue() const 
+int IntegerValueImpl::getValue() const
 {
 	return m_value;
 }
@@ -296,7 +296,7 @@ void IntegerValueImpl::saveContent(std::shared_ptr<persistence::interfaces::XSav
 	}
 }
 
-std::shared_ptr<ecore::EClass> IntegerValueImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& IntegerValueImpl::eStaticClass() const
 {
 	return fUML::Semantics::SimpleClassifiers::SimpleClassifiersPackage::eInstance()->getIntegerValue_Class();
 }
@@ -324,7 +324,7 @@ bool IntegerValueImpl::internalEIsSet(int featureID) const
 	return PrimitiveValueImpl::internalEIsSet(featureID);
 }
 
-bool IntegerValueImpl::eSet(int featureID, Any newValue)
+bool IntegerValueImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -343,7 +343,7 @@ bool IntegerValueImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any IntegerValueImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any IntegerValueImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

@@ -55,43 +55,43 @@ namespace uml
 			end.association.oclIsKindOf(AssociationClass)
 			*/
 			 
-			virtual bool association_of_association(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
+			virtual bool association_of_association(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context) ;
 			/*!
 			The ends of the association must not be static.
 			end.association.memberEnd->forAll(e | not e.isStatic)
 			*/
 			 
-			virtual bool ends_of_association(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
+			virtual bool ends_of_association(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context) ;
 			/*!
 			The multiplicity of the object InputPin is 1..1.
 			object.is(1,1)
 			*/
 			 
-			virtual bool multiplicity_of_object(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
+			virtual bool multiplicity_of_object(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context) ;
 			/*!
 			The multiplicity of the result OutputPin is 1..1.
 			result.is(1,1)
 			*/
 			 
-			virtual bool multiplicity_of_result(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
+			virtual bool multiplicity_of_result(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context) ;
 			/*!
 			The end Property must be an Association memberEnd.
 			end.association <> null
 			*/
 			 
-			virtual bool property(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
+			virtual bool property(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context) ;
 			/*!
 			The type of the object InputPin is the AssociationClass that owns the end Property.
 			object.type = end.association
 			*/
 			 
-			virtual bool type_of_object(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
+			virtual bool type_of_object(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context) ;
 			/*!
 			The type of the result OutputPin is the same as the type of the end Property.
 			result.type = end.type
 			*/
 			 
-			virtual bool type_of_result(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
+			virtual bool type_of_result(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context) ;
 			
 			//*********************************
 			// Attribute Getters & Setters
@@ -105,37 +105,37 @@ namespace uml
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::Property> getEnd() const ;
+			virtual const std::shared_ptr<uml::Property>& getEnd() const ;
 			/*!
 			The Association end to be read.
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual void setEnd(std::shared_ptr<uml::Property>) ;
+			virtual void setEnd(const std::shared_ptr<uml::Property>&) ;
 			/*!
 			The input pin from which the link object is obtained.
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::InputPin> getObject() const ;
+			virtual const std::shared_ptr<uml::InputPin>& getObject() const ;
 			/*!
 			The input pin from which the link object is obtained.
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual void setObject(std::shared_ptr<uml::InputPin>) ;
+			virtual void setObject(const std::shared_ptr<uml::InputPin>&) ;
 			/*!
 			The OutputPin where the result value is placed.
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::OutputPin> getResult() const ;
+			virtual const std::shared_ptr<uml::OutputPin>& getResult() const ;
 			/*!
 			The OutputPin where the result value is placed.
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual void setResult(std::shared_ptr<uml::OutputPin>) ;
+			virtual void setResult(const std::shared_ptr<uml::OutputPin>&) ;
 			
 			//*********************************
 			// Union Reference Getters
@@ -193,19 +193,19 @@ namespace uml
 			virtual void saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const;
 
 		protected:
-			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
+			virtual const std::shared_ptr<ecore::EClass>& eStaticClass() const;
 
 			//*********************************
 			// EStructuralFeature Get/Set/IsSet
 			//*********************************
 			virtual Any eGet(int featureID, bool resolve, bool coreType) const ;
-			virtual bool eSet(int featureID, Any newValue) ;
+			virtual bool eSet(int featureID, const Any& newValue) ;
 			virtual bool internalEIsSet(int featureID) const ;
 
 			//*********************************
 			// EOperation Invoke
 			//*********************************
-			virtual Any eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments) ;
+			virtual Any eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments) ;
 
 		private:
 			std::weak_ptr<uml::ReadLinkObjectEndAction> m_thisReadLinkObjectEndActionPtr;

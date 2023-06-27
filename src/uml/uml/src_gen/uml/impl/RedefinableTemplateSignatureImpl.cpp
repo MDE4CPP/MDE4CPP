@@ -193,7 +193,7 @@ std::shared_ptr<Bag<uml::TemplateParameter> > RedefinableTemplateSignatureImpl::
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool RedefinableTemplateSignatureImpl::redefines_parents(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool RedefinableTemplateSignatureImpl::redefines_parents(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -234,7 +234,7 @@ void RedefinableTemplateSignatureImpl::setTemplate(std::weak_ptr<uml::Templateab
 }
 
 /* Getter & Setter for reference extendedSignature */
-std::shared_ptr<Subset<uml::RedefinableTemplateSignature, uml::RedefinableElement>> RedefinableTemplateSignatureImpl::getExtendedSignature() const
+const std::shared_ptr<Subset<uml::RedefinableTemplateSignature, uml::RedefinableElement>>& RedefinableTemplateSignatureImpl::getExtendedSignature() const
 {
 	if(m_extendedSignature == nullptr)
 	{
@@ -255,7 +255,7 @@ std::shared_ptr<Subset<uml::RedefinableTemplateSignature, uml::RedefinableElemen
 }
 
 /* Getter & Setter for reference inheritedParameter */
-std::shared_ptr<Subset<uml::TemplateParameter, uml::TemplateParameter>> RedefinableTemplateSignatureImpl::getInheritedParameter() const
+const std::shared_ptr<Subset<uml::TemplateParameter, uml::TemplateParameter>>& RedefinableTemplateSignatureImpl::getInheritedParameter() const
 {
 	if(m_inheritedParameter == nullptr)
 	{
@@ -482,7 +482,7 @@ void RedefinableTemplateSignatureImpl::saveContent(std::shared_ptr<persistence::
 	}
 }
 
-std::shared_ptr<ecore::EClass> RedefinableTemplateSignatureImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& RedefinableTemplateSignatureImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getRedefinableTemplateSignature_Class();
 }
@@ -535,7 +535,7 @@ bool RedefinableTemplateSignatureImpl::internalEIsSet(int featureID) const
 	return result;
 }
 
-bool RedefinableTemplateSignatureImpl::eSet(int featureID, Any newValue)
+bool RedefinableTemplateSignatureImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -599,7 +599,7 @@ bool RedefinableTemplateSignatureImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any RedefinableTemplateSignatureImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any RedefinableTemplateSignatureImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

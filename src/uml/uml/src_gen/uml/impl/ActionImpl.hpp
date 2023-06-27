@@ -101,20 +101,20 @@ namespace uml
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::Classifier> getContext() const ;
+			virtual const std::shared_ptr<uml::Classifier>& getContext() const ;
 			
 			/*!
 			A Constraint that must be satisfied when execution of the Action is completed.
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual std::shared_ptr<Subset<uml::Constraint, uml::Element>> getLocalPostcondition() const ;
+			virtual const std::shared_ptr<Subset<uml::Constraint, uml::Element>>& getLocalPostcondition() const ;
 			/*!
 			A Constraint that must be satisfied when execution of the Action is started.
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual std::shared_ptr<Subset<uml::Constraint, uml::Element>> getLocalPrecondition() const ;
+			virtual const std::shared_ptr<Subset<uml::Constraint, uml::Element>>& getLocalPrecondition() const ;
 			
 			
 			//*********************************
@@ -173,19 +173,19 @@ namespace uml
 			virtual void saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const;
 
 		protected:
-			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
+			virtual const std::shared_ptr<ecore::EClass>& eStaticClass() const;
 
 			//*********************************
 			// EStructuralFeature Get/Set/IsSet
 			//*********************************
 			virtual Any eGet(int featureID, bool resolve, bool coreType) const ;
-			virtual bool eSet(int featureID, Any newValue) ;
+			virtual bool eSet(int featureID, const Any& newValue) ;
 			virtual bool internalEIsSet(int featureID) const ;
 
 			//*********************************
 			// EOperation Invoke
 			//*********************************
-			virtual Any eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments) ;
+			virtual Any eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments) ;
 
 		private:
 			std::weak_ptr<uml::Action> m_thisActionPtr;

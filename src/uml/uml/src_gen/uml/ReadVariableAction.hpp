@@ -97,14 +97,14 @@ namespace uml
 			variable.compatibleWith(result)
 			*/
 			 
-			virtual bool compatible_multiplicity(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
+			virtual bool compatible_multiplicity(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context) = 0;
 			/*!
 			The type and ordering of the result OutputPin are the same as the type and ordering of the variable.
 			result.type =variable.type and 
 			result.isOrdered = variable.isOrdered
 			*/
 			 
-			virtual bool type_and_ordering(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
+			virtual bool type_and_ordering(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context) = 0;
 
 			//*********************************
 			// Attribute Getters & Setters
@@ -118,13 +118,13 @@ namespace uml
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::OutputPin> getResult() const = 0;
+			virtual const std::shared_ptr<uml::OutputPin>& getResult() const = 0;
 			/*!
 			The OutputPin on which the result values are placed.
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual void setResult(std::shared_ptr<uml::OutputPin>) = 0;
+			virtual void setResult(const std::shared_ptr<uml::OutputPin>&) = 0;
 
 			//*********************************
 			// Union Reference Getters

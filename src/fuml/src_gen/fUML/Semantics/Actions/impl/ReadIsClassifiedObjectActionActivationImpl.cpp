@@ -48,8 +48,8 @@
 #include "fUML/Semantics/Actions/PinActivation.hpp"
 #include "fUML/Semantics/Activities/Token.hpp"
 //Factories and Package includes
-#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/SemanticsPackage.hpp"
+#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/Actions/ActionsPackage.hpp"
 #include "fUML/Semantics/Activities/ActivitiesPackage.hpp"
 #include "uml/umlPackage.hpp"
@@ -122,7 +122,7 @@ std::shared_ptr<ecore::EObject> ReadIsClassifiedObjectActionActivationImpl::copy
 //*********************************
 // Operations
 //*********************************
-bool ReadIsClassifiedObjectActionActivationImpl::checkAllParents(std::shared_ptr<uml::Classifier> type,std::shared_ptr<uml::Classifier> classifier)
+bool ReadIsClassifiedObjectActionActivationImpl::checkAllParents(const std::shared_ptr<uml::Classifier>& type, const std::shared_ptr<uml::Classifier>& classifier)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -227,7 +227,7 @@ void ReadIsClassifiedObjectActionActivationImpl::saveContent(std::shared_ptr<per
 	}
 }
 
-std::shared_ptr<ecore::EClass> ReadIsClassifiedObjectActionActivationImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& ReadIsClassifiedObjectActionActivationImpl::eStaticClass() const
 {
 	return fUML::Semantics::Actions::ActionsPackage::eInstance()->getReadIsClassifiedObjectActionActivation_Class();
 }
@@ -251,7 +251,7 @@ bool ReadIsClassifiedObjectActionActivationImpl::internalEIsSet(int featureID) c
 	return ActionActivationImpl::internalEIsSet(featureID);
 }
 
-bool ReadIsClassifiedObjectActionActivationImpl::eSet(int featureID, Any newValue)
+bool ReadIsClassifiedObjectActionActivationImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -263,7 +263,7 @@ bool ReadIsClassifiedObjectActionActivationImpl::eSet(int featureID, Any newValu
 //*********************************
 // EOperation Invoke
 //*********************************
-Any ReadIsClassifiedObjectActionActivationImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any ReadIsClassifiedObjectActionActivationImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

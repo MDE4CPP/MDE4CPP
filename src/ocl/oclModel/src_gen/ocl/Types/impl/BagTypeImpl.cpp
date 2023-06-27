@@ -34,8 +34,8 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "ocl/Values/ValuesFactory.hpp"
 #include "ecore/ecoreFactory.hpp"
+#include "ocl/Values/ValuesFactory.hpp"
 #include "ocl/Types/CollectionType.hpp"
 #include "ocl/Values/CollectionValue.hpp"
 #include "ecore/EAnnotation.hpp"
@@ -207,7 +207,7 @@ void BagTypeImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHand
 	}
 }
 
-std::shared_ptr<ecore::EClass> BagTypeImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& BagTypeImpl::eStaticClass() const
 {
 	return ocl::Types::TypesPackage::eInstance()->getBagType_Class();
 }
@@ -231,7 +231,7 @@ bool BagTypeImpl::internalEIsSet(int featureID) const
 	return CollectionTypeImpl::internalEIsSet(featureID);
 }
 
-bool BagTypeImpl::eSet(int featureID, Any newValue)
+bool BagTypeImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -243,7 +243,7 @@ bool BagTypeImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any BagTypeImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any BagTypeImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

@@ -47,17 +47,17 @@ virtual public ExecutionFactory
 			//*********************************
 			// Operations
 			//*********************************
-			virtual void addBuiltInType(std::shared_ptr<uml::PrimitiveType> type) ;
-			virtual void addPrimitiveBehaviorPrototype(std::shared_ptr<fUML::Semantics::CommonBehavior::OpaqueBehaviorExecution> execution) ;
-			virtual void assignStrategy(std::shared_ptr<fUML::Semantics::Loci::SemanticStrategy> strategy) ;
-			virtual std::shared_ptr<fUML::Semantics::Values::Evaluation> createEvaluation(std::shared_ptr<uml::ValueSpecification> specification) ;
-			virtual std::shared_ptr<fUML::Semantics::CommonBehavior::Execution> createExecution(std::shared_ptr<uml::Behavior> behavior,std::shared_ptr<fUML::Semantics::StructuredClassifiers::Object> context) ;
+			virtual void addBuiltInType(const std::shared_ptr<uml::PrimitiveType>& type) ;
+			virtual void addPrimitiveBehaviorPrototype(const std::shared_ptr<fUML::Semantics::CommonBehavior::OpaqueBehaviorExecution>& execution) ;
+			virtual void assignStrategy(const std::shared_ptr<fUML::Semantics::Loci::SemanticStrategy>& strategy) ;
+			virtual std::shared_ptr<fUML::Semantics::Values::Evaluation> createEvaluation(const std::shared_ptr<uml::ValueSpecification>& specification) ;
+			virtual std::shared_ptr<fUML::Semantics::CommonBehavior::Execution> createExecution(const std::shared_ptr<uml::Behavior>& behavior, const std::shared_ptr<fUML::Semantics::StructuredClassifiers::Object>& context) ;
 			virtual std::shared_ptr<uml::PrimitiveType> getBuiltInType(std::string name) ;
 			virtual std::shared_ptr<fUML::Semantics::Loci::SemanticStrategy> getStrategy(std::string name) ;
 			virtual int getStrategyIndex(std::string name) ;
 			
-			virtual std::shared_ptr<fUML::Semantics::CommonBehavior::OpaqueBehaviorExecution> instantiateOpaqueBehaviorExecution(std::shared_ptr<uml::Behavior> behavior) ;
-			virtual std::shared_ptr<fUML::Semantics::Loci::SemanticVisitor> instantiateVisitor(std::shared_ptr<uml::Element> element) ;
+			virtual std::shared_ptr<fUML::Semantics::CommonBehavior::OpaqueBehaviorExecution> instantiateOpaqueBehaviorExecution(const std::shared_ptr<uml::Behavior>& behavior) ;
+			virtual std::shared_ptr<fUML::Semantics::Loci::SemanticVisitor> instantiateVisitor(const std::shared_ptr<uml::Element>& element) ;
 			
 			//*********************************
 			// Attribute Getters & Setters
@@ -66,11 +66,11 @@ virtual public ExecutionFactory
 			//*********************************
 			// Reference Getters & Setters
 			//*********************************
-			virtual std::shared_ptr<Bag<uml::PrimitiveType>> getBuiltInTypes() const ;
+			virtual const std::shared_ptr<Bag<uml::PrimitiveType>>& getBuiltInTypes() const ;
 			virtual std::weak_ptr<fUML::Semantics::Loci::Locus> getLocus() const ;
 			virtual void setLocus(std::weak_ptr<fUML::Semantics::Loci::Locus>) ;
-			virtual std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::OpaqueBehaviorExecution>> getPrimitiveBehaviorPrototypes() const ;
-			virtual std::shared_ptr<Bag<fUML::Semantics::Loci::SemanticStrategy>> getStrategies() const ;
+			virtual const std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::OpaqueBehaviorExecution>>& getPrimitiveBehaviorPrototypes() const ;
+			virtual const std::shared_ptr<Bag<fUML::Semantics::Loci::SemanticStrategy>>& getStrategies() const ;
 			
 			//*********************************
 			// Union Reference Getters
@@ -92,19 +92,19 @@ virtual public ExecutionFactory
 			virtual void saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const;
 
 		protected:
-			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
+			virtual const std::shared_ptr<ecore::EClass>& eStaticClass() const;
 
 			//*********************************
 			// EStructuralFeature Get/Set/IsSet
 			//*********************************
 			virtual Any eGet(int featureID, bool resolve, bool coreType) const ;
-			virtual bool eSet(int featureID, Any newValue) ;
+			virtual bool eSet(int featureID, const Any& newValue) ;
 			virtual bool internalEIsSet(int featureID) const ;
 
 			//*********************************
 			// EOperation Invoke
 			//*********************************
-			virtual Any eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments) ;
+			virtual Any eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments) ;
 
 		private:
 			std::weak_ptr<fUML::Semantics::Loci::ExecutionFactory> m_thisExecutionFactoryPtr;

@@ -157,29 +157,29 @@ std::shared_ptr<ecore::EObject> ExpressionInOclImpl::copy() const
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference bodyExpression */
-std::shared_ptr<ocl::Expressions::OclExpression> ExpressionInOclImpl::getBodyExpression() const
+const std::shared_ptr<ocl::Expressions::OclExpression>& ExpressionInOclImpl::getBodyExpression() const
 {
     return m_bodyExpression;
 }
-void ExpressionInOclImpl::setBodyExpression(std::shared_ptr<ocl::Expressions::OclExpression> _bodyExpression)
+void ExpressionInOclImpl::setBodyExpression(const std::shared_ptr<ocl::Expressions::OclExpression>& _bodyExpression)
 {
     m_bodyExpression = _bodyExpression;
 	
 }
 
 /* Getter & Setter for reference contextVariable */
-std::shared_ptr<ocl::Expressions::Variable> ExpressionInOclImpl::getContextVariable() const
+const std::shared_ptr<ocl::Expressions::Variable>& ExpressionInOclImpl::getContextVariable() const
 {
     return m_contextVariable;
 }
-void ExpressionInOclImpl::setContextVariable(std::shared_ptr<ocl::Expressions::Variable> _contextVariable)
+void ExpressionInOclImpl::setContextVariable(const std::shared_ptr<ocl::Expressions::Variable>& _contextVariable)
 {
     m_contextVariable = _contextVariable;
 	
 }
 
 /* Getter & Setter for reference parameterVariable */
-std::shared_ptr<Bag<ocl::Expressions::Variable>> ExpressionInOclImpl::getParameterVariable() const
+const std::shared_ptr<Bag<ocl::Expressions::Variable>>& ExpressionInOclImpl::getParameterVariable() const
 {
 	if(m_parameterVariable == nullptr)
 	{
@@ -191,11 +191,11 @@ std::shared_ptr<Bag<ocl::Expressions::Variable>> ExpressionInOclImpl::getParamet
 }
 
 /* Getter & Setter for reference resultVariable */
-std::shared_ptr<ocl::Expressions::Variable> ExpressionInOclImpl::getResultVariable() const
+const std::shared_ptr<ocl::Expressions::Variable>& ExpressionInOclImpl::getResultVariable() const
 {
     return m_resultVariable;
 }
-void ExpressionInOclImpl::setResultVariable(std::shared_ptr<ocl::Expressions::Variable> _resultVariable)
+void ExpressionInOclImpl::setResultVariable(const std::shared_ptr<ocl::Expressions::Variable>& _resultVariable)
 {
     m_resultVariable = _resultVariable;
 	
@@ -353,7 +353,7 @@ void ExpressionInOclImpl::saveContent(std::shared_ptr<persistence::interfaces::X
 	}
 }
 
-std::shared_ptr<ecore::EClass> ExpressionInOclImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& ExpressionInOclImpl::eStaticClass() const
 {
 	return ocl::Expressions::ExpressionsPackage::eInstance()->getExpressionInOcl_Class();
 }
@@ -393,7 +393,7 @@ bool ExpressionInOclImpl::internalEIsSet(int featureID) const
 	return ecore::ETypedElementImpl::internalEIsSet(featureID);
 }
 
-bool ExpressionInOclImpl::eSet(int featureID, Any newValue)
+bool ExpressionInOclImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -466,7 +466,7 @@ bool ExpressionInOclImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any ExpressionInOclImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any ExpressionInOclImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

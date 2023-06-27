@@ -61,7 +61,7 @@ namespace uml
 			self.ownedParameter->select(direction = ParameterDirectionKind::return)->size() <= 1
 			*/
 			 
-			virtual bool at_most_one_return(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
+			virtual bool at_most_one_return(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context) ;
 			/*!
 			If this operation has a return parameter, lower equals the value of lower for that parameter. Otherwise lower has no value.
 			result = (if returnResult()->notEmpty() then returnResult()->any(true).lower else null endif)
@@ -96,13 +96,13 @@ namespace uml
 			*/
 			 
 			virtual bool isUnique() ;
-			virtual bool matches(std::shared_ptr<uml::Operation> comparedOperation) ;
+			virtual bool matches(const std::shared_ptr<uml::Operation>& comparedOperation) ;
 			/*!
 			A bodyCondition can only be specified for a query Operation.
 			bodyCondition <> null implies isQuery
 			*/
 			 
-			virtual bool only_body_for_query(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
+			virtual bool only_body_for_query(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context) ;
 			/*!
 			The query returnResult() returns the set containing the return parameter of the Operation if one exists, otherwise, it returns an empty set
 			result = (ownedParameter->select (direction = ParameterDirectionKind::return)->asSet())
@@ -113,7 +113,7 @@ namespace uml
 			virtual void setIsOrdered(bool newIsOrdered) ;
 			virtual void setIsUnique(bool newIsUnique) ;
 			virtual void setLower(int newLower) ;
-			virtual void setType(std::shared_ptr<uml::Type> newType) ;
+			virtual void setType(const std::shared_ptr<uml::Type>& newType) ;
 			virtual void setUpper(int newUpper) ;
 			
 			//*********************************
@@ -164,13 +164,13 @@ namespace uml
 			<p>From package UML::Classification.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::Constraint> getBodyCondition() const ;
+			virtual const std::shared_ptr<uml::Constraint>& getBodyCondition() const ;
 			/*!
 			An optional Constraint on the result values of an invocation of this Operation.
 			<p>From package UML::Classification.</p>
 			*/
 			
-			virtual void setBodyCondition(std::shared_ptr<uml::Constraint>) ;
+			virtual void setBodyCondition(const std::shared_ptr<uml::Constraint>&) ;
 			/*!
 			The Class that owns this operation, if any.
 			<p>From package UML::Classification.</p>
@@ -207,31 +207,31 @@ namespace uml
 			*/
 			
 			virtual void setInterface(std::weak_ptr<uml::Interface>) ;
-			virtual std::shared_ptr<Bag<uml::Parameter>> getProperty_OwnedParameter() const ;
+			virtual const std::shared_ptr<Bag<uml::Parameter>>& getProperty_OwnedParameter() const ;
 			/*!
 			An optional set of Constraints specifying the state of the system when the Operation is completed.
 			<p>From package UML::Classification.</p>
 			*/
 			
-			virtual std::shared_ptr<Subset<uml::Constraint, uml::Constraint /*Subset does not reference a union*/>> getPostcondition() const ;
+			virtual const std::shared_ptr<Subset<uml::Constraint, uml::Constraint /*Subset does not reference a union*/>>& getPostcondition() const ;
 			/*!
 			An optional set of Constraints on the state of the system when the Operation is invoked.
 			<p>From package UML::Classification.</p>
 			*/
 			
-			virtual std::shared_ptr<Subset<uml::Constraint, uml::Constraint /*Subset does not reference a union*/>> getPrecondition() const ;
+			virtual const std::shared_ptr<Subset<uml::Constraint, uml::Constraint /*Subset does not reference a union*/>>& getPrecondition() const ;
 			/*!
 			The Operations that are redefined by this Operation.
 			<p>From package UML::Classification.</p>
 			*/
 			
-			virtual std::shared_ptr<Subset<uml::Operation, uml::RedefinableElement>> getRedefinedOperation() const ;
+			virtual const std::shared_ptr<Subset<uml::Operation, uml::RedefinableElement>>& getRedefinedOperation() const ;
 			/*!
 			The return type of the operation, if present. This information is derived from the return result for this Operation.
 			<p>From package UML::Classification.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::Type> getType() const ;
+			virtual const std::shared_ptr<uml::Type>& getType() const ;
 			
 			//*********************************
 			// Union Reference Getters
@@ -302,19 +302,19 @@ namespace uml
 			virtual void saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const;
 
 		protected:
-			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
+			virtual const std::shared_ptr<ecore::EClass>& eStaticClass() const;
 
 			//*********************************
 			// EStructuralFeature Get/Set/IsSet
 			//*********************************
 			virtual Any eGet(int featureID, bool resolve, bool coreType) const ;
-			virtual bool eSet(int featureID, Any newValue) ;
+			virtual bool eSet(int featureID, const Any& newValue) ;
 			virtual bool internalEIsSet(int featureID) const ;
 
 			//*********************************
 			// EOperation Invoke
 			//*********************************
-			virtual Any eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments) ;
+			virtual Any eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments) ;
 
 		private:
 			std::weak_ptr<uml::Operation> m_thisOperationPtr;

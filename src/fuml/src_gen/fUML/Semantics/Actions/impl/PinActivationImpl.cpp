@@ -48,8 +48,8 @@
 #include "uml/Pin.hpp"
 #include "fUML/Semantics/Activities/Token.hpp"
 //Factories and Package includes
-#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/SemanticsPackage.hpp"
+#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/Actions/ActionsPackage.hpp"
 #include "fUML/Semantics/Activities/ActivitiesPackage.hpp"
 #include "uml/umlPackage.hpp"
@@ -116,7 +116,7 @@ PinActivationImpl& PinActivationImpl::operator=(const PinActivationImpl & obj)
 //*********************************
 // Operations
 //*********************************
-void PinActivationImpl::fire(std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> incomingTokens)
+void PinActivationImpl::fire(const std::shared_ptr<Bag<fUML::Semantics::Activities::Token>>& incomingTokens)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -197,18 +197,18 @@ void PinActivationImpl::setActionActivation(std::weak_ptr<fUML::Semantics::Actio
 }
 
 /* Getter & Setter for reference pin */
-std::shared_ptr<uml::Pin> PinActivationImpl::getPin() const
+const std::shared_ptr<uml::Pin>& PinActivationImpl::getPin() const
 {
     return m_pin;
 }
-void PinActivationImpl::setPin(std::shared_ptr<uml::Pin> _pin)
+void PinActivationImpl::setPin(const std::shared_ptr<uml::Pin>& _pin)
 {
     m_pin = _pin;
 	//additional setter call for redefined reference ActivityNodeActivation::node
 	fUML::Semantics::Activities::ActivityNodeActivationImpl::setNode(_pin);
 }
 /*Additional Setter for redefined reference 'ActivityNodeActivation::node'*/
-void PinActivationImpl::setNode(std::shared_ptr<uml::ActivityNode> _node)
+void PinActivationImpl::setNode(const std::shared_ptr<uml::ActivityNode>& _node)
 {
 	std::shared_ptr<uml::Pin> _pin = std::dynamic_pointer_cast<uml::Pin>(_node);
 	if(_pin)
@@ -349,7 +349,7 @@ void PinActivationImpl::saveContent(std::shared_ptr<persistence::interfaces::XSa
 	}
 }
 
-std::shared_ptr<ecore::EClass> PinActivationImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& PinActivationImpl::eStaticClass() const
 {
 	return fUML::Semantics::Actions::ActionsPackage::eInstance()->getPinActivation_Class();
 }
@@ -384,7 +384,7 @@ bool PinActivationImpl::internalEIsSet(int featureID) const
 	return fUML::Semantics::Activities::ObjectNodeActivationImpl::internalEIsSet(featureID);
 }
 
-bool PinActivationImpl::eSet(int featureID, Any newValue)
+bool PinActivationImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -412,7 +412,7 @@ bool PinActivationImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any PinActivationImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any PinActivationImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

@@ -59,20 +59,20 @@ namespace uml
 			((v.oclAsType(Pseudostate).kind <>  PseudostateKind::deepHistory) and (v.oclAsType(Pseudostate).kind <> PseudostateKind::shallowHistory))))
 			*/
 			 
-			virtual bool deep_or_shallow_history(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
+			virtual bool deep_or_shallow_history(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context) ;
 			/*!
 			The states of a ProtocolStateMachine cannot have entry, exit, or do activity Behaviors.
 			region->forAll(r | r.subvertex->forAll(v | v.oclIsKindOf(State) implies
 			(v.oclAsType(State).entry->isEmpty() and v.oclAsType(State).exit->isEmpty() and v.oclAsType(State).doActivity->isEmpty())))
 			*/
 			 
-			virtual bool entry_exit_do(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
+			virtual bool entry_exit_do(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context) ;
 			/*!
 			All Transitions of a ProtocolStateMachine must be ProtocolTransitions.
 			region->forAll(r | r.transition->forAll(t | t.oclIsTypeOf(ProtocolTransition)))
 			*/
 			 
-			virtual bool protocol_transitions(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
+			virtual bool protocol_transitions(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context) ;
 			
 			//*********************************
 			// Attribute Getters & Setters
@@ -86,7 +86,7 @@ namespace uml
 			<p>From package UML::StateMachines.</p>
 			*/
 			
-			virtual std::shared_ptr<Subset<uml::ProtocolConformance, uml::Element>> getConformance() const ;
+			virtual const std::shared_ptr<Subset<uml::ProtocolConformance, uml::Element>>& getConformance() const ;
 			
 			//*********************************
 			// Union Reference Getters
@@ -169,19 +169,19 @@ namespace uml
 			virtual void saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const;
 
 		protected:
-			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
+			virtual const std::shared_ptr<ecore::EClass>& eStaticClass() const;
 
 			//*********************************
 			// EStructuralFeature Get/Set/IsSet
 			//*********************************
 			virtual Any eGet(int featureID, bool resolve, bool coreType) const ;
-			virtual bool eSet(int featureID, Any newValue) ;
+			virtual bool eSet(int featureID, const Any& newValue) ;
 			virtual bool internalEIsSet(int featureID) const ;
 
 			//*********************************
 			// EOperation Invoke
 			//*********************************
-			virtual Any eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments) ;
+			virtual Any eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments) ;
 
 		private:
 			std::weak_ptr<uml::ProtocolStateMachine> m_thisProtocolStateMachinePtr;

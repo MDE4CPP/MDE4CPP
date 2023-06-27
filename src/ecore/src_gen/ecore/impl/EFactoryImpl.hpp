@@ -44,9 +44,9 @@ namespace ecore
 			//*********************************
 			// Operations
 			//*********************************
-			virtual std::string convertToString(std::shared_ptr<ecore::EDataType> eDataType,Any instanceValue) const ;
-			virtual std::shared_ptr<ecore::EObject> create(std::shared_ptr<ecore::EClass> eClass) const ;
-			virtual Any createFromString(std::shared_ptr<ecore::EDataType> eDataType,std::string literalValue) const ;
+			virtual std::string convertToString(const std::shared_ptr<ecore::EDataType>& eDataType, const Any& instanceValue) const ;
+			virtual std::shared_ptr<ecore::EObject> create(const std::shared_ptr<ecore::EClass>& eClass) const ;
+			virtual Any createFromString(const std::shared_ptr<ecore::EDataType>& eDataType, std::string literalValue) const ;
 			
 			//*********************************
 			// Attribute Getters & Setters
@@ -55,8 +55,8 @@ namespace ecore
 			//*********************************
 			// Reference Getters & Setters
 			//*********************************
-			virtual std::shared_ptr<ecore::EPackage> getEPackage() const ;
-			virtual void setEPackage(std::shared_ptr<ecore::EPackage>) ;
+			virtual const std::shared_ptr<ecore::EPackage>& getEPackage() const ;
+			virtual void setEPackage(const std::shared_ptr<ecore::EPackage>&) ;
 			
 			//*********************************
 			// Union Reference Getters
@@ -79,19 +79,19 @@ namespace ecore
 			virtual void saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const;
 
 		protected:
-			virtual std::shared_ptr<EClass> eStaticClass() const;
+			virtual const std::shared_ptr<EClass>& eStaticClass() const;
 
 			//*********************************
 			// EStructuralFeature Get/Set/IsSet
 			//*********************************
 			virtual Any eGet(int featureID, bool resolve, bool coreType) const ;
-			virtual bool eSet(int featureID, Any newValue) ;
+			virtual bool eSet(int featureID, const Any& newValue) ;
 			virtual bool internalEIsSet(int featureID) const ;
 
 			//*********************************
 			// EOperation Invoke
 			//*********************************
-			virtual Any eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments) ;
+			virtual Any eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments) ;
 
 		private:
 			std::weak_ptr<ecore::EFactory> m_thisEFactoryPtr;

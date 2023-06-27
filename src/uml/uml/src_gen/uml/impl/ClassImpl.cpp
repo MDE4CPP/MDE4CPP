@@ -285,7 +285,7 @@ std::shared_ptr<ecore::EObject> ClassImpl::copy() const
 //*********************************
 // Operations
 //*********************************
-std::shared_ptr<uml::Operation> ClassImpl::createOwnedOperation(std::string name,std::shared_ptr<Bag<std::string>> parameterNames,std::shared_ptr<Bag<uml::Type>> parameterTypes,std::shared_ptr<uml::Type> returnType)
+std::shared_ptr<uml::Operation> ClassImpl::createOwnedOperation(std::string name, const std::shared_ptr<Bag<std::string>>& parameterNames, const std::shared_ptr<Bag<uml::Type>>& parameterTypes, const std::shared_ptr<uml::Type>& returnType)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -340,7 +340,7 @@ bool ClassImpl::isMetaclass()
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool ClassImpl::passive_class(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool ClassImpl::passive_class(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -349,7 +349,7 @@ bool ClassImpl::passive_class(Any diagnostics,std::shared_ptr<std::map < Any, An
 // Attribute Getters & Setters
 //*********************************
 /* Getter & Setter for attribute isActive */
-bool ClassImpl::getIsActive() const 
+bool ClassImpl::getIsActive() const
 {
 	return m_isActive;
 }
@@ -363,7 +363,7 @@ void ClassImpl::setIsActive(bool _isActive)
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference extension */
-std::shared_ptr<Bag<uml::Extension>> ClassImpl::getExtension() const
+const std::shared_ptr<Bag<uml::Extension>>& ClassImpl::getExtension() const
 {
 	if(m_extension == nullptr)
 	{
@@ -375,7 +375,7 @@ std::shared_ptr<Bag<uml::Extension>> ClassImpl::getExtension() const
 }
 
 /* Getter & Setter for reference nestedClassifier */
-std::shared_ptr<Subset<uml::Classifier, uml::NamedElement>> ClassImpl::getNestedClassifier() const
+const std::shared_ptr<Subset<uml::Classifier, uml::NamedElement>>& ClassImpl::getNestedClassifier() const
 {
 	if(m_nestedClassifier == nullptr)
 	{
@@ -396,14 +396,14 @@ std::shared_ptr<Subset<uml::Classifier, uml::NamedElement>> ClassImpl::getNested
 }
 
 /* Getter & Setter for reference ownedAttribute */
-std::shared_ptr<Subset<uml::Property, uml::ConnectableElement, uml::NamedElement, uml::Property>> ClassImpl::getClass_OwnedAttribute() const
+const std::shared_ptr<Subset<uml::Property, uml::ConnectableElement, uml::NamedElement, uml::Property>>& ClassImpl::getClass_OwnedAttribute() const
 {
 	//Getter call of redefined container reference StructuredClassifier::ownedAttribute 
 	return uml::StructuredClassifierImpl::getOwnedAttribute();
 }
 
 /* Getter & Setter for reference ownedOperation */
-std::shared_ptr<Subset<uml::Operation, uml::Feature, uml::NamedElement>> ClassImpl::getOwnedOperation() const
+const std::shared_ptr<Subset<uml::Operation, uml::Feature, uml::NamedElement>>& ClassImpl::getOwnedOperation() const
 {
 	if(m_ownedOperation == nullptr)
 	{
@@ -424,7 +424,7 @@ std::shared_ptr<Subset<uml::Operation, uml::Feature, uml::NamedElement>> ClassIm
 }
 
 /* Getter & Setter for reference ownedReception */
-std::shared_ptr<Subset<uml::Reception, uml::Feature, uml::NamedElement>> ClassImpl::getOwnedReception() const
+const std::shared_ptr<Subset<uml::Reception, uml::Feature, uml::NamedElement>>& ClassImpl::getOwnedReception() const
 {
 	if(m_ownedReception == nullptr)
 	{
@@ -445,7 +445,7 @@ std::shared_ptr<Subset<uml::Reception, uml::Feature, uml::NamedElement>> ClassIm
 }
 
 /* Getter & Setter for reference superClass */
-std::shared_ptr<Bag<uml::Class>> ClassImpl::getSuperClass() const
+const std::shared_ptr<Bag<uml::Class>>& ClassImpl::getSuperClass() const
 {
 	//Cast conversion from redefined container reference Classifier::general 
 	std::shared_ptr<Bag<uml::Class>> superClass(new Bag<uml::Class>());
@@ -851,7 +851,7 @@ void ClassImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandle
 	}
 }
 
-std::shared_ptr<ecore::EClass> ClassImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& ClassImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getClass_Class();
 }
@@ -917,7 +917,7 @@ bool ClassImpl::internalEIsSet(int featureID) const
 	return result;
 }
 
-bool ClassImpl::eSet(int featureID, Any newValue)
+bool ClassImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -1128,7 +1128,7 @@ bool ClassImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any ClassImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any ClassImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

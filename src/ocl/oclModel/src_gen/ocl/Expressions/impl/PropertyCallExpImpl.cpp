@@ -212,11 +212,11 @@ std::shared_ptr<ecore::EObject> PropertyCallExpImpl::copy() const
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference referredProperty */
-std::shared_ptr<ecore::EAttribute> PropertyCallExpImpl::getReferredProperty() const
+const std::shared_ptr<ecore::EAttribute>& PropertyCallExpImpl::getReferredProperty() const
 {
     return m_referredProperty;
 }
-void PropertyCallExpImpl::setReferredProperty(std::shared_ptr<ecore::EAttribute> _referredProperty)
+void PropertyCallExpImpl::setReferredProperty(const std::shared_ptr<ecore::EAttribute>& _referredProperty)
 {
     m_referredProperty = _referredProperty;
 	
@@ -393,7 +393,7 @@ void PropertyCallExpImpl::saveContent(std::shared_ptr<persistence::interfaces::X
 	}
 }
 
-std::shared_ptr<ecore::EClass> PropertyCallExpImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& PropertyCallExpImpl::eStaticClass() const
 {
 	return ocl::Expressions::ExpressionsPackage::eInstance()->getPropertyCallExp_Class();
 }
@@ -421,7 +421,7 @@ bool PropertyCallExpImpl::internalEIsSet(int featureID) const
 	return NavigationCallExpImpl::internalEIsSet(featureID);
 }
 
-bool PropertyCallExpImpl::eSet(int featureID, Any newValue)
+bool PropertyCallExpImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -441,7 +441,7 @@ bool PropertyCallExpImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any PropertyCallExpImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any PropertyCallExpImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

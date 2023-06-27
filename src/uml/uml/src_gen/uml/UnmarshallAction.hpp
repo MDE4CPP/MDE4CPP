@@ -96,25 +96,25 @@ namespace uml
 			object.is(1,1)
 			*/
 			 
-			virtual bool multiplicity_of_object(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
+			virtual bool multiplicity_of_object(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context) = 0;
 			/*!
 			The number of result outputPins must be the same as the number of attributes of the unmarshallType.
 			unmarshallType.allAttributes()->size() = result->size()
 			*/
 			 
-			virtual bool number_of_result(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
+			virtual bool number_of_result(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context) = 0;
 			/*!
 			The type of the object InputPin conform to the unmarshallType.
 			object.type.conformsTo(unmarshallType)
 			*/
 			 
-			virtual bool object_type(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
+			virtual bool object_type(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context) = 0;
 			/*!
 			The unmarshallType must have at least one StructuralFeature.
 			unmarshallType.allAttributes()->size() >= 1
 			*/
 			 
-			virtual bool structural_feature(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
+			virtual bool structural_feature(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context) = 0;
 			/*!
 			The type, ordering and multiplicity of each attribute of the unmarshallType must be compatible with the type, ordering and multiplicity of the corresponding result OutputPin.
 			let attribute:OrderedSet(Property) = unmarshallType.allAttributes() in
@@ -124,7 +124,7 @@ namespace uml
 				attribute->at(i).compatibleWith(result->at(i)))
 			*/
 			 
-			virtual bool type_ordering_and_multiplicity(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
+			virtual bool type_ordering_and_multiplicity(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context) = 0;
 
 			//*********************************
 			// Attribute Getters & Setters
@@ -138,31 +138,31 @@ namespace uml
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::InputPin> getObject() const = 0;
+			virtual const std::shared_ptr<uml::InputPin>& getObject() const = 0;
 			/*!
 			The InputPin that gives the object to be unmarshalled.
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual void setObject(std::shared_ptr<uml::InputPin>) = 0;
+			virtual void setObject(const std::shared_ptr<uml::InputPin>&) = 0;
 			/*!
 			The OutputPins on which are placed the values of the StructuralFeatures of the input object.
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual std::shared_ptr<Subset<uml::OutputPin, uml::OutputPin>> getResult() const = 0;
+			virtual const std::shared_ptr<Subset<uml::OutputPin, uml::OutputPin>>& getResult() const = 0;
 			/*!
 			The type of the object to be unmarshalled.
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::Classifier> getUnmarshallType() const = 0;
+			virtual const std::shared_ptr<uml::Classifier>& getUnmarshallType() const = 0;
 			/*!
 			The type of the object to be unmarshalled.
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual void setUnmarshallType(std::shared_ptr<uml::Classifier>) = 0;
+			virtual void setUnmarshallType(const std::shared_ptr<uml::Classifier>&) = 0;
 
 			//*********************************
 			// Union Reference Getters

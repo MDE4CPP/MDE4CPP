@@ -86,13 +86,13 @@ namespace ocl::Values
 			//*********************************
 			// Reference Getters & Setters
 			//*********************************
-			virtual std::shared_ptr<Bag<ocl::Values::NameValueBinding>> getArguments() const = 0;
-			virtual std::shared_ptr<ocl::Values::OclMessageValue> getReturnMessage() const = 0;
-			virtual void setReturnMessage(std::shared_ptr<ocl::Values::OclMessageValue>) = 0;
-			virtual std::shared_ptr<ocl::Values::ObjectValue> getSource() const = 0;
-			virtual void setSource(std::shared_ptr<ocl::Values::ObjectValue>) = 0;
-			virtual std::shared_ptr<ocl::Values::ObjectValue> getTarget() const = 0;
-			virtual void setTarget(std::shared_ptr<ocl::Values::ObjectValue>) = 0;
+			virtual const std::shared_ptr<Bag<ocl::Values::NameValueBinding>>& getArguments() const = 0;
+			virtual const std::shared_ptr<ocl::Values::OclMessageValue>& getReturnMessage() const = 0;
+			virtual void setReturnMessage(const std::shared_ptr<ocl::Values::OclMessageValue>&) = 0;
+			virtual const std::shared_ptr<ocl::Values::ObjectValue>& getSource() const = 0;
+			virtual void setSource(const std::shared_ptr<ocl::Values::ObjectValue>&) = 0;
+			virtual const std::shared_ptr<ocl::Values::ObjectValue>& getTarget() const = 0;
+			virtual void setTarget(const std::shared_ptr<ocl::Values::ObjectValue>&) = 0;
 
 			//*********************************
 			// Union Reference Getters

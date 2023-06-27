@@ -55,7 +55,7 @@ namespace uml
 			argument->size()=signal.allAttributes()->size()
 			*/
 			 
-			virtual bool number_order(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
+			virtual bool number_order(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context) ;
 			/*!
 			The type, ordering, and multiplicity of an argument InputPin must be the same as the corresponding attribute of the signal.
 			let attribute: OrderedSet(Property) = signal.allAttributes() in
@@ -65,13 +65,13 @@ namespace uml
 				argument->at(i).compatibleWith(attribute->at(i)))
 			*/
 			 
-			virtual bool type_ordering_multiplicity(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
+			virtual bool type_ordering_multiplicity(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context) ;
 			/*!
 			If onPort is not empty, the Port given by onPort must be an owned or inherited feature of the type of the target InputPin.
 			not onPort->isEmpty() implies target.type.oclAsType(Classifier).allFeatures()->includes(onPort)
 			*/
 			 
-			virtual bool type_target_pin(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
+			virtual bool type_target_pin(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context) ;
 			
 			//*********************************
 			// Attribute Getters & Setters
@@ -85,25 +85,25 @@ namespace uml
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::Signal> getSignal() const ;
+			virtual const std::shared_ptr<uml::Signal>& getSignal() const ;
 			/*!
 			The Signal whose instance is transmitted to the target.
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual void setSignal(std::shared_ptr<uml::Signal>) ;
+			virtual void setSignal(const std::shared_ptr<uml::Signal>&) ;
 			/*!
 			The InputPin that provides the target object to which the Signal instance is sent.
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::InputPin> getTarget() const ;
+			virtual const std::shared_ptr<uml::InputPin>& getTarget() const ;
 			/*!
 			The InputPin that provides the target object to which the Signal instance is sent.
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual void setTarget(std::shared_ptr<uml::InputPin>) ;
+			virtual void setTarget(const std::shared_ptr<uml::InputPin>&) ;
 			
 			//*********************************
 			// Union Reference Getters
@@ -155,19 +155,19 @@ namespace uml
 			virtual void saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const;
 
 		protected:
-			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
+			virtual const std::shared_ptr<ecore::EClass>& eStaticClass() const;
 
 			//*********************************
 			// EStructuralFeature Get/Set/IsSet
 			//*********************************
 			virtual Any eGet(int featureID, bool resolve, bool coreType) const ;
-			virtual bool eSet(int featureID, Any newValue) ;
+			virtual bool eSet(int featureID, const Any& newValue) ;
 			virtual bool internalEIsSet(int featureID) const ;
 
 			//*********************************
 			// EOperation Invoke
 			//*********************************
-			virtual Any eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments) ;
+			virtual Any eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments) ;
 
 		private:
 			std::weak_ptr<uml::SendSignalAction> m_thisSendSignalActionPtr;

@@ -105,19 +105,19 @@ namespace uml
 			endData->forAll(not end.isStatic)
 			*/
 			 
-			virtual bool not_static(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
+			virtual bool not_static(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context) = 0;
 			/*!
 			The ends of the endData must all be from the same Association and include all and only the memberEnds of that association.
 			endData.end = self.association().memberEnd->asBag()
 			*/
 			 
-			virtual bool same_association(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
+			virtual bool same_association(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context) = 0;
 			/*!
 			The inputValue InputPins is the same as the union of all the InputPins referenced by the endData.
 			inputValue->asBag()=endData.allPins()
 			*/
 			 
-			virtual bool same_pins(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
+			virtual bool same_pins(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context) = 0;
 
 			//*********************************
 			// Attribute Getters & Setters
@@ -131,13 +131,13 @@ namespace uml
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual std::shared_ptr<Subset<uml::LinkEndData, uml::Element>> getEndData() const = 0;
+			virtual const std::shared_ptr<Subset<uml::LinkEndData, uml::Element>>& getEndData() const = 0;
 			/*!
 			InputPins used by the LinkEndData of the LinkAction.
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual std::shared_ptr<Subset<uml::InputPin, uml::InputPin>> getInputValue() const = 0;
+			virtual const std::shared_ptr<Subset<uml::InputPin, uml::InputPin>>& getInputValue() const = 0;
 
 			//*********************************
 			// Union Reference Getters

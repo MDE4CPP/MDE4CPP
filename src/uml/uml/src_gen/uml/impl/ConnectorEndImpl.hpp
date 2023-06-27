@@ -52,26 +52,26 @@ namespace uml
 			self.compatibleWith(definingEnd)
 			*/
 			 
-			virtual bool multiplicity(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
+			virtual bool multiplicity(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context) ;
 			/*!
 			If a ConnectorEnd is attached to a Port of the containing Classifier, partWithPort will be empty.
 			(role.oclIsKindOf(Port) and role.owner = connector.owner) implies partWithPort->isEmpty()
 			*/
 			 
-			virtual bool part_with_port_empty(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
+			virtual bool part_with_port_empty(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context) ;
 			/*!
 			If a ConnectorEnd references a partWithPort, then the role must be a Port that is defined or inherited by the type of the partWithPort.
 			partWithPort->notEmpty() implies 
 			  (role.oclIsKindOf(Port) and partWithPort.type.oclAsType(Namespace).member->includes(role))
 			*/
 			 
-			virtual bool role_and_part_with_port(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
+			virtual bool role_and_part_with_port(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context) ;
 			/*!
 			The Property held in self.partWithPort must not be a Port.
 			partWithPort->notEmpty() implies not partWithPort.oclIsKindOf(Port)
 			*/
 			 
-			virtual bool self_part_with_port(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
+			virtual bool self_part_with_port(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context) ;
 			
 			//*********************************
 			// Attribute Getters & Setters
@@ -87,31 +87,31 @@ namespace uml
 			<p>From package UML::StructuredClassifiers.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::Property> getDefiningEnd() const ;
+			virtual const std::shared_ptr<uml::Property>& getDefiningEnd() const ;
 			/*!
 			Indicates the role of the internal structure of a Classifier with the Port to which the ConnectorEnd is attached.
 			<p>From package UML::StructuredClassifiers.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::Property> getPartWithPort() const ;
+			virtual const std::shared_ptr<uml::Property>& getPartWithPort() const ;
 			/*!
 			Indicates the role of the internal structure of a Classifier with the Port to which the ConnectorEnd is attached.
 			<p>From package UML::StructuredClassifiers.</p>
 			*/
 			
-			virtual void setPartWithPort(std::shared_ptr<uml::Property>) ;
+			virtual void setPartWithPort(const std::shared_ptr<uml::Property>&) ;
 			/*!
 			The ConnectableElement attached at this ConnectorEnd. When an instance of the containing Classifier is created, a link may (depending on the multiplicities) be created to an instance of the Classifier that types this ConnectableElement.
 			<p>From package UML::StructuredClassifiers.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::ConnectableElement> getRole() const ;
+			virtual const std::shared_ptr<uml::ConnectableElement>& getRole() const ;
 			/*!
 			The ConnectableElement attached at this ConnectorEnd. When an instance of the containing Classifier is created, a link may (depending on the multiplicities) be created to an instance of the Classifier that types this ConnectableElement.
 			<p>From package UML::StructuredClassifiers.</p>
 			*/
 			
-			virtual void setRole(std::shared_ptr<uml::ConnectableElement>) ;
+			virtual void setRole(const std::shared_ptr<uml::ConnectableElement>&) ;
 			
 			//*********************************
 			// Union Reference Getters
@@ -139,19 +139,19 @@ namespace uml
 			virtual void saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const;
 
 		protected:
-			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
+			virtual const std::shared_ptr<ecore::EClass>& eStaticClass() const;
 
 			//*********************************
 			// EStructuralFeature Get/Set/IsSet
 			//*********************************
 			virtual Any eGet(int featureID, bool resolve, bool coreType) const ;
-			virtual bool eSet(int featureID, Any newValue) ;
+			virtual bool eSet(int featureID, const Any& newValue) ;
 			virtual bool internalEIsSet(int featureID) const ;
 
 			//*********************************
 			// EOperation Invoke
 			//*********************************
-			virtual Any eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments) ;
+			virtual Any eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments) ;
 
 		private:
 			std::weak_ptr<uml::ConnectorEnd> m_thisConnectorEndPtr;

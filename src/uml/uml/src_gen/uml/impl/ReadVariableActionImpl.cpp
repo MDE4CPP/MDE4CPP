@@ -156,12 +156,12 @@ std::shared_ptr<ecore::EObject> ReadVariableActionImpl::copy() const
 //*********************************
 // Operations
 //*********************************
-bool ReadVariableActionImpl::compatible_multiplicity(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool ReadVariableActionImpl::compatible_multiplicity(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool ReadVariableActionImpl::type_and_ordering(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool ReadVariableActionImpl::type_and_ordering(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -174,11 +174,11 @@ bool ReadVariableActionImpl::type_and_ordering(Any diagnostics,std::shared_ptr<s
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference result */
-std::shared_ptr<uml::OutputPin> ReadVariableActionImpl::getResult() const
+const std::shared_ptr<uml::OutputPin>& ReadVariableActionImpl::getResult() const
 {
     return m_result;
 }
-void ReadVariableActionImpl::setResult(std::shared_ptr<uml::OutputPin> _result)
+void ReadVariableActionImpl::setResult(const std::shared_ptr<uml::OutputPin>& _result)
 {
     m_result = _result;
 	
@@ -384,7 +384,7 @@ void ReadVariableActionImpl::saveContent(std::shared_ptr<persistence::interfaces
 	}
 }
 
-std::shared_ptr<ecore::EClass> ReadVariableActionImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& ReadVariableActionImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getReadVariableAction_Class();
 }
@@ -412,7 +412,7 @@ bool ReadVariableActionImpl::internalEIsSet(int featureID) const
 	return VariableActionImpl::internalEIsSet(featureID);
 }
 
-bool ReadVariableActionImpl::eSet(int featureID, Any newValue)
+bool ReadVariableActionImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -432,7 +432,7 @@ bool ReadVariableActionImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any ReadVariableActionImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any ReadVariableActionImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

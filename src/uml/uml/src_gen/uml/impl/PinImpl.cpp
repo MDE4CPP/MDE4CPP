@@ -144,12 +144,12 @@ PinImpl& PinImpl::operator=(const PinImpl & obj)
 //*********************************
 // Operations
 //*********************************
-bool PinImpl::control_pins(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool PinImpl::control_pins(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool PinImpl::not_unique(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool PinImpl::not_unique(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -158,7 +158,7 @@ bool PinImpl::not_unique(Any diagnostics,std::shared_ptr<std::map < Any, Any>> c
 // Attribute Getters & Setters
 //*********************************
 /* Getter & Setter for attribute isControl */
-bool PinImpl::getIsControl() const 
+bool PinImpl::getIsControl() const
 {
 	return m_isControl;
 }
@@ -351,7 +351,7 @@ void PinImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler>
 	}
 }
 
-std::shared_ptr<ecore::EClass> PinImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& PinImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getPin_Class();
 }
@@ -393,7 +393,7 @@ bool PinImpl::internalEIsSet(int featureID) const
 	return result;
 }
 
-bool PinImpl::eSet(int featureID, Any newValue)
+bool PinImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -419,7 +419,7 @@ bool PinImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any PinImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any PinImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

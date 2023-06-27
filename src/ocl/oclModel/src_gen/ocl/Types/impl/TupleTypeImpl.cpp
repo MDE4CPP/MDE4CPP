@@ -128,18 +128,18 @@ std::shared_ptr<ecore::EObject> TupleTypeImpl::copy() const
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference instance */
-std::shared_ptr<ocl::Values::TupleValue> TupleTypeImpl::getInstance() const
+const std::shared_ptr<ocl::Values::TupleValue>& TupleTypeImpl::getInstance() const
 {
     return m_instance;
 }
-void TupleTypeImpl::setInstance(std::shared_ptr<ocl::Values::TupleValue> _instance)
+void TupleTypeImpl::setInstance(const std::shared_ptr<ocl::Values::TupleValue>& _instance)
 {
     m_instance = _instance;
 	
 }
 
 /* Getter & Setter for reference parts */
-std::shared_ptr<Bag<ocl::Types::NameTypeBinding>> TupleTypeImpl::getParts() const
+const std::shared_ptr<Bag<ocl::Types::NameTypeBinding>>& TupleTypeImpl::getParts() const
 {
 	if(m_parts == nullptr)
 	{
@@ -287,7 +287,7 @@ void TupleTypeImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHa
 	}
 }
 
-std::shared_ptr<ecore::EClass> TupleTypeImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& TupleTypeImpl::eStaticClass() const
 {
 	return ocl::Types::TypesPackage::eInstance()->getTupleType_Class();
 }
@@ -319,7 +319,7 @@ bool TupleTypeImpl::internalEIsSet(int featureID) const
 	return ecore::EDataTypeImpl::internalEIsSet(featureID);
 }
 
-bool TupleTypeImpl::eSet(int featureID, Any newValue)
+bool TupleTypeImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -376,7 +376,7 @@ bool TupleTypeImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any TupleTypeImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any TupleTypeImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

@@ -54,14 +54,14 @@ namespace fUML::Semantics::Actions
 			//*********************************
 			// Reference Getters & Setters
 			//*********************************
-			virtual std::shared_ptr<uml::CallBehaviorAction> getCallBehaviorAction() const ;
-			virtual void setCallBehaviorAction(std::shared_ptr<uml::CallBehaviorAction>) ;
+			virtual const std::shared_ptr<uml::CallBehaviorAction>& getCallBehaviorAction() const ;
+			virtual void setCallBehaviorAction(const std::shared_ptr<uml::CallBehaviorAction>&) ;
 			/*Additional Setter for 'CallActionActivation::callAction' redefined by reference 'callBehaviorAction'*/
-			virtual void setCallAction(std::shared_ptr<uml::CallAction>) ;
+			virtual void setCallAction(const std::shared_ptr<uml::CallAction>&) ;
 			/*Additional Setter for 'ActionActivation::action' redefined by reference 'callBehaviorAction'*/
-			virtual void setAction(std::shared_ptr<uml::Action>) ;
+			virtual void setAction(const std::shared_ptr<uml::Action>&) ;
 			/*Additional Setter for 'ActivityNodeActivation::node' redefined by reference 'callBehaviorAction'*/
-			virtual void setNode(std::shared_ptr<uml::ActivityNode>) ;
+			virtual void setNode(const std::shared_ptr<uml::ActivityNode>&) ;
 			
 			//*********************************
 			// Union Reference Getters
@@ -84,19 +84,19 @@ namespace fUML::Semantics::Actions
 			virtual void saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const;
 
 		protected:
-			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
+			virtual const std::shared_ptr<ecore::EClass>& eStaticClass() const;
 
 			//*********************************
 			// EStructuralFeature Get/Set/IsSet
 			//*********************************
 			virtual Any eGet(int featureID, bool resolve, bool coreType) const ;
-			virtual bool eSet(int featureID, Any newValue) ;
+			virtual bool eSet(int featureID, const Any& newValue) ;
 			virtual bool internalEIsSet(int featureID) const ;
 
 			//*********************************
 			// EOperation Invoke
 			//*********************************
-			virtual Any eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments) ;
+			virtual Any eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments) ;
 
 		private:
 			std::weak_ptr<fUML::Semantics::Actions::CallBehaviorActionActivation> m_thisCallBehaviorActionActivationPtr;

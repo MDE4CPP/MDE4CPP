@@ -336,17 +336,17 @@ std::shared_ptr<ecore::EObject> InterfaceImpl::copy() const
 //*********************************
 // Operations
 //*********************************
-std::shared_ptr<uml::Property> InterfaceImpl::createOwnedAttribute(std::string name,std::shared_ptr<uml::Type> type,int lower,int upper)
+std::shared_ptr<uml::Property> InterfaceImpl::createOwnedAttribute(std::string name, const std::shared_ptr<uml::Type>& type, int lower, int upper)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-std::shared_ptr<uml::Operation> InterfaceImpl::createOwnedOperation(std::string name,std::shared_ptr<Bag<std::string>> parameterNames,std::shared_ptr<Bag<uml::Type>> parameterTypes,std::shared_ptr<uml::Type> returnType)
+std::shared_ptr<uml::Operation> InterfaceImpl::createOwnedOperation(std::string name, const std::shared_ptr<Bag<std::string>>& parameterNames, const std::shared_ptr<Bag<uml::Type>>& parameterTypes, const std::shared_ptr<uml::Type>& returnType)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool InterfaceImpl::visibility(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool InterfaceImpl::visibility(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -359,7 +359,7 @@ bool InterfaceImpl::visibility(Any diagnostics,std::shared_ptr<std::map < Any, A
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference nestedClassifier */
-std::shared_ptr<Subset<uml::Classifier, uml::NamedElement>> InterfaceImpl::getNestedClassifier() const
+const std::shared_ptr<Subset<uml::Classifier, uml::NamedElement>>& InterfaceImpl::getNestedClassifier() const
 {
 	if(m_nestedClassifier == nullptr)
 	{
@@ -380,7 +380,7 @@ std::shared_ptr<Subset<uml::Classifier, uml::NamedElement>> InterfaceImpl::getNe
 }
 
 /* Getter & Setter for reference ownedAttribute */
-std::shared_ptr<Subset<uml::Property, uml::NamedElement, uml::Property>> InterfaceImpl::getOwnedAttribute() const
+const std::shared_ptr<Subset<uml::Property, uml::NamedElement, uml::Property>>& InterfaceImpl::getOwnedAttribute() const
 {
 	if(m_ownedAttribute == nullptr)
 	{
@@ -401,7 +401,7 @@ std::shared_ptr<Subset<uml::Property, uml::NamedElement, uml::Property>> Interfa
 }
 
 /* Getter & Setter for reference ownedOperation */
-std::shared_ptr<Subset<uml::Operation, uml::Feature, uml::NamedElement>> InterfaceImpl::getOwnedOperation() const
+const std::shared_ptr<Subset<uml::Operation, uml::Feature, uml::NamedElement>>& InterfaceImpl::getOwnedOperation() const
 {
 	if(m_ownedOperation == nullptr)
 	{
@@ -422,7 +422,7 @@ std::shared_ptr<Subset<uml::Operation, uml::Feature, uml::NamedElement>> Interfa
 }
 
 /* Getter & Setter for reference ownedReception */
-std::shared_ptr<Subset<uml::Reception, uml::Feature, uml::NamedElement>> InterfaceImpl::getOwnedReception() const
+const std::shared_ptr<Subset<uml::Reception, uml::Feature, uml::NamedElement>>& InterfaceImpl::getOwnedReception() const
 {
 	if(m_ownedReception == nullptr)
 	{
@@ -443,18 +443,18 @@ std::shared_ptr<Subset<uml::Reception, uml::Feature, uml::NamedElement>> Interfa
 }
 
 /* Getter & Setter for reference protocol */
-std::shared_ptr<uml::ProtocolStateMachine> InterfaceImpl::getProtocol() const
+const std::shared_ptr<uml::ProtocolStateMachine>& InterfaceImpl::getProtocol() const
 {
     return m_protocol;
 }
-void InterfaceImpl::setProtocol(std::shared_ptr<uml::ProtocolStateMachine> _protocol)
+void InterfaceImpl::setProtocol(const std::shared_ptr<uml::ProtocolStateMachine>& _protocol)
 {
     m_protocol = _protocol;
 	
 }
 
 /* Getter & Setter for reference redefinedInterface */
-std::shared_ptr<Subset<uml::Interface, uml::Classifier /*Subset does not reference a union*/>> InterfaceImpl::getRedefinedInterface() const
+const std::shared_ptr<Subset<uml::Interface, uml::Classifier /*Subset does not reference a union*/>>& InterfaceImpl::getRedefinedInterface() const
 {
 	if(m_redefinedInterface == nullptr)
 	{
@@ -836,7 +836,7 @@ void InterfaceImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHa
 	}
 }
 
-std::shared_ptr<ecore::EClass> InterfaceImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& InterfaceImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getInterface_Class();
 }
@@ -884,7 +884,7 @@ bool InterfaceImpl::internalEIsSet(int featureID) const
 	return ClassifierImpl::internalEIsSet(featureID);
 }
 
-bool InterfaceImpl::eSet(int featureID, Any newValue)
+bool InterfaceImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -1089,7 +1089,7 @@ bool InterfaceImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any InterfaceImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any InterfaceImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

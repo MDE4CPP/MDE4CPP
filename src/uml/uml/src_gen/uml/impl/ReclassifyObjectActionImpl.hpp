@@ -55,19 +55,19 @@ namespace uml
 			not newClassifier->exists(isAbstract)
 			*/
 			 
-			virtual bool classifier_not_abstract(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
+			virtual bool classifier_not_abstract(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context) ;
 			/*!
 			The object InputPin has no type.
 			object.type = null
 			*/
 			 
-			virtual bool input_pin(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
+			virtual bool input_pin(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context) ;
 			/*!
 			The multiplicity of the object InputPin is 1..1.
 			object.is(1,1)
 			*/
 			 
-			virtual bool multiplicity(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
+			virtual bool multiplicity(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context) ;
 			
 			//*********************************
 			// Attribute Getters & Setters
@@ -93,25 +93,25 @@ namespace uml
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual std::shared_ptr<Bag<uml::Classifier>> getNewClassifier() const ;
+			virtual const std::shared_ptr<Bag<uml::Classifier>>& getNewClassifier() const ;
 			/*!
 			The InputPin that holds the object to be reclassified.
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::InputPin> getObject() const ;
+			virtual const std::shared_ptr<uml::InputPin>& getObject() const ;
 			/*!
 			The InputPin that holds the object to be reclassified.
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual void setObject(std::shared_ptr<uml::InputPin>) ;
+			virtual void setObject(const std::shared_ptr<uml::InputPin>&) ;
 			/*!
 			A set of Classifiers to be removed from the Classifiers of the given object.
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual std::shared_ptr<Bag<uml::Classifier>> getOldClassifier() const ;
+			virtual const std::shared_ptr<Bag<uml::Classifier>>& getOldClassifier() const ;
 			
 			//*********************************
 			// Union Reference Getters
@@ -163,19 +163,19 @@ namespace uml
 			virtual void saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const;
 
 		protected:
-			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
+			virtual const std::shared_ptr<ecore::EClass>& eStaticClass() const;
 
 			//*********************************
 			// EStructuralFeature Get/Set/IsSet
 			//*********************************
 			virtual Any eGet(int featureID, bool resolve, bool coreType) const ;
-			virtual bool eSet(int featureID, Any newValue) ;
+			virtual bool eSet(int featureID, const Any& newValue) ;
 			virtual bool internalEIsSet(int featureID) const ;
 
 			//*********************************
 			// EOperation Invoke
 			//*********************************
-			virtual Any eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments) ;
+			virtual Any eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments) ;
 
 		private:
 			std::weak_ptr<uml::ReclassifyObjectAction> m_thisReclassifyObjectActionPtr;

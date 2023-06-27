@@ -122,32 +122,32 @@ std::shared_ptr<ecore::EObject> ClassifierTemplateParameterImpl::copy() const
 //*********************************
 // Operations
 //*********************************
-bool ClassifierTemplateParameterImpl::actual_is_classifier(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool ClassifierTemplateParameterImpl::actual_is_classifier(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool ClassifierTemplateParameterImpl::constraining_classifiers_constrain_args(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool ClassifierTemplateParameterImpl::constraining_classifiers_constrain_args(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool ClassifierTemplateParameterImpl::constraining_classifiers_constrain_parametered_element(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool ClassifierTemplateParameterImpl::constraining_classifiers_constrain_parametered_element(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool ClassifierTemplateParameterImpl::has_constraining_classifier(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool ClassifierTemplateParameterImpl::has_constraining_classifier(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool ClassifierTemplateParameterImpl::matching_abstract(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool ClassifierTemplateParameterImpl::matching_abstract(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool ClassifierTemplateParameterImpl::parametered_element_no_features(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool ClassifierTemplateParameterImpl::parametered_element_no_features(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -156,7 +156,7 @@ bool ClassifierTemplateParameterImpl::parametered_element_no_features(Any diagno
 // Attribute Getters & Setters
 //*********************************
 /* Getter & Setter for attribute allowSubstitutable */
-bool ClassifierTemplateParameterImpl::getAllowSubstitutable() const 
+bool ClassifierTemplateParameterImpl::getAllowSubstitutable() const
 {
 	return m_allowSubstitutable;
 }
@@ -170,7 +170,7 @@ void ClassifierTemplateParameterImpl::setAllowSubstitutable(bool _allowSubstitut
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference constrainingClassifier */
-std::shared_ptr<Bag<uml::Classifier>> ClassifierTemplateParameterImpl::getConstrainingClassifier() const
+const std::shared_ptr<Bag<uml::Classifier>>& ClassifierTemplateParameterImpl::getConstrainingClassifier() const
 {
 	if(m_constrainingClassifier == nullptr)
 	{
@@ -338,7 +338,7 @@ void ClassifierTemplateParameterImpl::saveContent(std::shared_ptr<persistence::i
 	}
 }
 
-std::shared_ptr<ecore::EClass> ClassifierTemplateParameterImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& ClassifierTemplateParameterImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getClassifierTemplateParameter_Class();
 }
@@ -370,7 +370,7 @@ bool ClassifierTemplateParameterImpl::internalEIsSet(int featureID) const
 	return TemplateParameterImpl::internalEIsSet(featureID);
 }
 
-bool ClassifierTemplateParameterImpl::eSet(int featureID, Any newValue)
+bool ClassifierTemplateParameterImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -426,7 +426,7 @@ bool ClassifierTemplateParameterImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any ClassifierTemplateParameterImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any ClassifierTemplateParameterImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

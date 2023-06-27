@@ -55,7 +55,7 @@ namespace uml
 			generalization->collect(general)->asSet()->size() <= 1
 			*/
 			 
-			virtual bool generalization_same_classifier(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
+			virtual bool generalization_same_classifier(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context) ;
 			/*!
 			The Classifier that maps to a GeneralizationSet may neither be a specific nor a general Classifier in any of the Generalization relationships defined for that GeneralizationSet. In other words, a power type may not be an instance of itself nor may its instances be its subclasses.
 			powertype <> null implies generalization->forAll( gen | 
@@ -63,7 +63,7 @@ namespace uml
 			  )
 			*/
 			 
-			virtual bool maps_to_generalization_set(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
+			virtual bool maps_to_generalization_set(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context) ;
 			
 			//*********************************
 			// Attribute Getters & Setters
@@ -101,19 +101,19 @@ namespace uml
 			<p>From package UML::Classification.</p>
 			*/
 			
-			virtual std::shared_ptr<Bag<uml::Generalization>> getGeneralization() const ;
+			virtual const std::shared_ptr<Bag<uml::Generalization>>& getGeneralization() const ;
 			/*!
 			Designates the Classifier that is defined as the power type for the associated GeneralizationSet, if there is one.
 			<p>From package UML::Classification.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::Classifier> getPowertype() const ;
+			virtual const std::shared_ptr<uml::Classifier>& getPowertype() const ;
 			/*!
 			Designates the Classifier that is defined as the power type for the associated GeneralizationSet, if there is one.
 			<p>From package UML::Classification.</p>
 			*/
 			
-			virtual void setPowertype(std::shared_ptr<uml::Classifier>) ;
+			virtual void setPowertype(const std::shared_ptr<uml::Classifier>&) ;
 			
 			//*********************************
 			// Union Reference Getters
@@ -154,19 +154,19 @@ namespace uml
 			virtual void saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const;
 
 		protected:
-			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
+			virtual const std::shared_ptr<ecore::EClass>& eStaticClass() const;
 
 			//*********************************
 			// EStructuralFeature Get/Set/IsSet
 			//*********************************
 			virtual Any eGet(int featureID, bool resolve, bool coreType) const ;
-			virtual bool eSet(int featureID, Any newValue) ;
+			virtual bool eSet(int featureID, const Any& newValue) ;
 			virtual bool internalEIsSet(int featureID) const ;
 
 			//*********************************
 			// EOperation Invoke
 			//*********************************
-			virtual Any eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments) ;
+			virtual Any eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments) ;
 
 		private:
 			std::weak_ptr<uml::GeneralizationSet> m_thisGeneralizationSetPtr;

@@ -155,22 +155,22 @@ WriteStructuralFeatureActionImpl& WriteStructuralFeatureActionImpl::operator=(co
 //*********************************
 // Operations
 //*********************************
-bool WriteStructuralFeatureActionImpl::multiplicity_of_result(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool WriteStructuralFeatureActionImpl::multiplicity_of_result(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool WriteStructuralFeatureActionImpl::multiplicity_of_value(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool WriteStructuralFeatureActionImpl::multiplicity_of_value(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool WriteStructuralFeatureActionImpl::type_of_result(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool WriteStructuralFeatureActionImpl::type_of_result(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool WriteStructuralFeatureActionImpl::type_of_value(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool WriteStructuralFeatureActionImpl::type_of_value(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -183,22 +183,22 @@ bool WriteStructuralFeatureActionImpl::type_of_value(Any diagnostics,std::shared
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference result */
-std::shared_ptr<uml::OutputPin> WriteStructuralFeatureActionImpl::getResult() const
+const std::shared_ptr<uml::OutputPin>& WriteStructuralFeatureActionImpl::getResult() const
 {
     return m_result;
 }
-void WriteStructuralFeatureActionImpl::setResult(std::shared_ptr<uml::OutputPin> _result)
+void WriteStructuralFeatureActionImpl::setResult(const std::shared_ptr<uml::OutputPin>& _result)
 {
     m_result = _result;
 	
 }
 
 /* Getter & Setter for reference value */
-std::shared_ptr<uml::InputPin> WriteStructuralFeatureActionImpl::getValue() const
+const std::shared_ptr<uml::InputPin>& WriteStructuralFeatureActionImpl::getValue() const
 {
     return m_value;
 }
-void WriteStructuralFeatureActionImpl::setValue(std::shared_ptr<uml::InputPin> _value)
+void WriteStructuralFeatureActionImpl::setValue(const std::shared_ptr<uml::InputPin>& _value)
 {
     m_value = _value;
 	
@@ -443,7 +443,7 @@ void WriteStructuralFeatureActionImpl::saveContent(std::shared_ptr<persistence::
 	}
 }
 
-std::shared_ptr<ecore::EClass> WriteStructuralFeatureActionImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& WriteStructuralFeatureActionImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getWriteStructuralFeatureAction_Class();
 }
@@ -475,7 +475,7 @@ bool WriteStructuralFeatureActionImpl::internalEIsSet(int featureID) const
 	return StructuralFeatureActionImpl::internalEIsSet(featureID);
 }
 
-bool WriteStructuralFeatureActionImpl::eSet(int featureID, Any newValue)
+bool WriteStructuralFeatureActionImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -503,7 +503,7 @@ bool WriteStructuralFeatureActionImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any WriteStructuralFeatureActionImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any WriteStructuralFeatureActionImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

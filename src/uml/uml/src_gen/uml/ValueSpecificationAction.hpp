@@ -97,13 +97,13 @@ namespace uml
 			value.type.conformsTo(result.type)
 			*/
 			 
-			virtual bool compatible_type(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
+			virtual bool compatible_type(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context) = 0;
 			/*!
 			The multiplicity of the result OutputPin is 1..1
 			result.is(1,1)
 			*/
 			 
-			virtual bool multiplicity(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
+			virtual bool multiplicity(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context) = 0;
 
 			//*********************************
 			// Attribute Getters & Setters
@@ -117,25 +117,25 @@ namespace uml
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::OutputPin> getResult() const = 0;
+			virtual const std::shared_ptr<uml::OutputPin>& getResult() const = 0;
 			/*!
 			The OutputPin on which the result value is placed.
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual void setResult(std::shared_ptr<uml::OutputPin>) = 0;
+			virtual void setResult(const std::shared_ptr<uml::OutputPin>&) = 0;
 			/*!
 			The ValueSpecification to be evaluated.
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::ValueSpecification> getValue() const = 0;
+			virtual const std::shared_ptr<uml::ValueSpecification>& getValue() const = 0;
 			/*!
 			The ValueSpecification to be evaluated.
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual void setValue(std::shared_ptr<uml::ValueSpecification>) = 0;
+			virtual void setValue(const std::shared_ptr<uml::ValueSpecification>&) = 0;
 
 			//*********************************
 			// Union Reference Getters

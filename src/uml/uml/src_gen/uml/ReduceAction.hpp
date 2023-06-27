@@ -96,13 +96,13 @@ namespace uml
 			The type of the collection InputPin must be a collection.
 			*/
 			 
-			virtual bool input_type_is_collection(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
+			virtual bool input_type_is_collection(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context) = 0;
 			/*!
 			The type of the output of the reducer Behavior must conform to the type of the result OutputPin.
 			reducer.outputParameters().type->forAll(conformsTo(result.type))
 			*/
 			 
-			virtual bool output_types_are_compatible(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
+			virtual bool output_types_are_compatible(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context) = 0;
 			/*!
 			The reducer Behavior must have two input ownedParameters and one output ownedParameter, where the type of the output Parameter and the type of elements of the input collection conform to the types of the input Parameters.
 			let inputs: OrderedSet(Parameter) = reducer.inputParameters() in
@@ -114,7 +114,7 @@ namespace uml
 				collection.upperBound()>1 implies collection.type.conformsTo(t))
 			*/
 			 
-			virtual bool reducer_inputs_output(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
+			virtual bool reducer_inputs_output(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context) = 0;
 
 			//*********************************
 			// Attribute Getters & Setters
@@ -140,37 +140,37 @@ namespace uml
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::InputPin> getCollection() const = 0;
+			virtual const std::shared_ptr<uml::InputPin>& getCollection() const = 0;
 			/*!
 			The InputPin that provides the collection to be reduced.
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual void setCollection(std::shared_ptr<uml::InputPin>) = 0;
+			virtual void setCollection(const std::shared_ptr<uml::InputPin>&) = 0;
 			/*!
 			A Behavior that is repreatedly applied to two elements of the input collection to produce a value that is of the same type as elements of the collection.
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::Behavior> getReducer() const = 0;
+			virtual const std::shared_ptr<uml::Behavior>& getReducer() const = 0;
 			/*!
 			A Behavior that is repreatedly applied to two elements of the input collection to produce a value that is of the same type as elements of the collection.
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual void setReducer(std::shared_ptr<uml::Behavior>) = 0;
+			virtual void setReducer(const std::shared_ptr<uml::Behavior>&) = 0;
 			/*!
 			The output pin on which the result value is placed.
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::OutputPin> getResult() const = 0;
+			virtual const std::shared_ptr<uml::OutputPin>& getResult() const = 0;
 			/*!
 			The output pin on which the result value is placed.
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual void setResult(std::shared_ptr<uml::OutputPin>) = 0;
+			virtual void setResult(const std::shared_ptr<uml::OutputPin>&) = 0;
 
 			//*********************************
 			// Union Reference Getters

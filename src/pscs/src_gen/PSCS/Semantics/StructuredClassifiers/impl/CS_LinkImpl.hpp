@@ -43,8 +43,8 @@ namespace PSCS::Semantics::StructuredClassifiers
 			//*********************************
 			// Operations
 			//*********************************
-			virtual std::shared_ptr<uml::StructuralFeature> getFeature(std::shared_ptr<fUML::Semantics::Values::Value> value) ;
-			virtual bool hasValueForAFeature(std::shared_ptr<fUML::Semantics::Values::Value> value) ;
+			virtual std::shared_ptr<uml::StructuralFeature> getFeature(const std::shared_ptr<fUML::Semantics::Values::Value>& value) ;
+			virtual bool hasValueForAFeature(const std::shared_ptr<fUML::Semantics::Values::Value>& value) ;
 			
 			//*********************************
 			// Attribute Getters & Setters
@@ -74,19 +74,19 @@ namespace PSCS::Semantics::StructuredClassifiers
 			virtual void saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const;
 
 		protected:
-			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
+			virtual const std::shared_ptr<ecore::EClass>& eStaticClass() const;
 
 			//*********************************
 			// EStructuralFeature Get/Set/IsSet
 			//*********************************
 			virtual Any eGet(int featureID, bool resolve, bool coreType) const ;
-			virtual bool eSet(int featureID, Any newValue) ;
+			virtual bool eSet(int featureID, const Any& newValue) ;
 			virtual bool internalEIsSet(int featureID) const ;
 
 			//*********************************
 			// EOperation Invoke
 			//*********************************
-			virtual Any eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments) ;
+			virtual Any eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments) ;
 
 		private:
 			std::weak_ptr<PSCS::Semantics::StructuredClassifiers::CS_Link> m_thisCS_LinkPtr;

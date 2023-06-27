@@ -123,7 +123,7 @@ std::shared_ptr<ecore::EObject> GeneralOrderingImpl::copy() const
 //*********************************
 // Operations
 //*********************************
-bool GeneralOrderingImpl::irreflexive_transitive_closure(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool GeneralOrderingImpl::irreflexive_transitive_closure(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -136,22 +136,22 @@ bool GeneralOrderingImpl::irreflexive_transitive_closure(Any diagnostics,std::sh
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference after */
-std::shared_ptr<uml::OccurrenceSpecification> GeneralOrderingImpl::getAfter() const
+const std::shared_ptr<uml::OccurrenceSpecification>& GeneralOrderingImpl::getAfter() const
 {
     return m_after;
 }
-void GeneralOrderingImpl::setAfter(std::shared_ptr<uml::OccurrenceSpecification> _after)
+void GeneralOrderingImpl::setAfter(const std::shared_ptr<uml::OccurrenceSpecification>& _after)
 {
     m_after = _after;
 	
 }
 
 /* Getter & Setter for reference before */
-std::shared_ptr<uml::OccurrenceSpecification> GeneralOrderingImpl::getBefore() const
+const std::shared_ptr<uml::OccurrenceSpecification>& GeneralOrderingImpl::getBefore() const
 {
     return m_before;
 }
-void GeneralOrderingImpl::setBefore(std::shared_ptr<uml::OccurrenceSpecification> _before)
+void GeneralOrderingImpl::setBefore(const std::shared_ptr<uml::OccurrenceSpecification>& _before)
 {
     m_before = _before;
 	
@@ -314,7 +314,7 @@ void GeneralOrderingImpl::saveContent(std::shared_ptr<persistence::interfaces::X
 	}
 }
 
-std::shared_ptr<ecore::EClass> GeneralOrderingImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& GeneralOrderingImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getGeneralOrdering_Class();
 }
@@ -346,7 +346,7 @@ bool GeneralOrderingImpl::internalEIsSet(int featureID) const
 	return NamedElementImpl::internalEIsSet(featureID);
 }
 
-bool GeneralOrderingImpl::eSet(int featureID, Any newValue)
+bool GeneralOrderingImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -374,7 +374,7 @@ bool GeneralOrderingImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any GeneralOrderingImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any GeneralOrderingImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

@@ -151,11 +151,11 @@ std::shared_ptr<ecore::EObject> ExecutionOccurrenceSpecificationImpl::copy() con
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference execution */
-std::shared_ptr<uml::ExecutionSpecification> ExecutionOccurrenceSpecificationImpl::getExecution() const
+const std::shared_ptr<uml::ExecutionSpecification>& ExecutionOccurrenceSpecificationImpl::getExecution() const
 {
     return m_execution;
 }
-void ExecutionOccurrenceSpecificationImpl::setExecution(std::shared_ptr<uml::ExecutionSpecification> _execution)
+void ExecutionOccurrenceSpecificationImpl::setExecution(const std::shared_ptr<uml::ExecutionSpecification>& _execution)
 {
     m_execution = _execution;
 	
@@ -317,7 +317,7 @@ void ExecutionOccurrenceSpecificationImpl::saveContent(std::shared_ptr<persisten
 	}
 }
 
-std::shared_ptr<ecore::EClass> ExecutionOccurrenceSpecificationImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& ExecutionOccurrenceSpecificationImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getExecutionOccurrenceSpecification_Class();
 }
@@ -345,7 +345,7 @@ bool ExecutionOccurrenceSpecificationImpl::internalEIsSet(int featureID) const
 	return OccurrenceSpecificationImpl::internalEIsSet(featureID);
 }
 
-bool ExecutionOccurrenceSpecificationImpl::eSet(int featureID, Any newValue)
+bool ExecutionOccurrenceSpecificationImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -365,7 +365,7 @@ bool ExecutionOccurrenceSpecificationImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any ExecutionOccurrenceSpecificationImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any ExecutionOccurrenceSpecificationImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

@@ -156,12 +156,12 @@ std::shared_ptr<ecore::EObject> ClearStructuralFeatureActionImpl::copy() const
 //*********************************
 // Operations
 //*********************************
-bool ClearStructuralFeatureActionImpl::multiplicity_of_result(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool ClearStructuralFeatureActionImpl::multiplicity_of_result(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool ClearStructuralFeatureActionImpl::type_of_result(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool ClearStructuralFeatureActionImpl::type_of_result(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -174,11 +174,11 @@ bool ClearStructuralFeatureActionImpl::type_of_result(Any diagnostics,std::share
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference result */
-std::shared_ptr<uml::OutputPin> ClearStructuralFeatureActionImpl::getResult() const
+const std::shared_ptr<uml::OutputPin>& ClearStructuralFeatureActionImpl::getResult() const
 {
     return m_result;
 }
-void ClearStructuralFeatureActionImpl::setResult(std::shared_ptr<uml::OutputPin> _result)
+void ClearStructuralFeatureActionImpl::setResult(const std::shared_ptr<uml::OutputPin>& _result)
 {
     m_result = _result;
 	
@@ -404,7 +404,7 @@ void ClearStructuralFeatureActionImpl::saveContent(std::shared_ptr<persistence::
 	}
 }
 
-std::shared_ptr<ecore::EClass> ClearStructuralFeatureActionImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& ClearStructuralFeatureActionImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getClearStructuralFeatureAction_Class();
 }
@@ -432,7 +432,7 @@ bool ClearStructuralFeatureActionImpl::internalEIsSet(int featureID) const
 	return StructuralFeatureActionImpl::internalEIsSet(featureID);
 }
 
-bool ClearStructuralFeatureActionImpl::eSet(int featureID, Any newValue)
+bool ClearStructuralFeatureActionImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -452,7 +452,7 @@ bool ClearStructuralFeatureActionImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any ClearStructuralFeatureActionImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any ClearStructuralFeatureActionImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

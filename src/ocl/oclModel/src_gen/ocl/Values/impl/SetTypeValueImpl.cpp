@@ -105,7 +105,7 @@ std::shared_ptr<ecore::EObject> SetTypeValueImpl::copy() const
 //*********************************
 // Operations
 //*********************************
-bool SetTypeValueImpl::addValue(std::shared_ptr<fUML::Semantics::Values::Value> value)
+bool SetTypeValueImpl::addValue(const std::shared_ptr<fUML::Semantics::Values::Value>& value)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -205,7 +205,7 @@ void SetTypeValueImpl::saveContent(std::shared_ptr<persistence::interfaces::XSav
 	}
 }
 
-std::shared_ptr<ecore::EClass> SetTypeValueImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& SetTypeValueImpl::eStaticClass() const
 {
 	return ocl::Values::ValuesPackage::eInstance()->getSetTypeValue_Class();
 }
@@ -229,7 +229,7 @@ bool SetTypeValueImpl::internalEIsSet(int featureID) const
 	return CollectionValueImpl::internalEIsSet(featureID);
 }
 
-bool SetTypeValueImpl::eSet(int featureID, Any newValue)
+bool SetTypeValueImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -241,7 +241,7 @@ bool SetTypeValueImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any SetTypeValueImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any SetTypeValueImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

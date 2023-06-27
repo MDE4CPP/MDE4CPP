@@ -152,7 +152,7 @@ std::shared_ptr<ecore::EObject> CallBehaviorActionImpl::copy() const
 //*********************************
 // Operations
 //*********************************
-bool CallBehaviorActionImpl::no_onport(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool CallBehaviorActionImpl::no_onport(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -165,11 +165,11 @@ bool CallBehaviorActionImpl::no_onport(Any diagnostics,std::shared_ptr<std::map 
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference behavior */
-std::shared_ptr<uml::Behavior> CallBehaviorActionImpl::getBehavior() const
+const std::shared_ptr<uml::Behavior>& CallBehaviorActionImpl::getBehavior() const
 {
     return m_behavior;
 }
-void CallBehaviorActionImpl::setBehavior(std::shared_ptr<uml::Behavior> _behavior)
+void CallBehaviorActionImpl::setBehavior(const std::shared_ptr<uml::Behavior>& _behavior)
 {
     m_behavior = _behavior;
 	
@@ -404,7 +404,7 @@ void CallBehaviorActionImpl::saveContent(std::shared_ptr<persistence::interfaces
 	}
 }
 
-std::shared_ptr<ecore::EClass> CallBehaviorActionImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& CallBehaviorActionImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getCallBehaviorAction_Class();
 }
@@ -432,7 +432,7 @@ bool CallBehaviorActionImpl::internalEIsSet(int featureID) const
 	return CallActionImpl::internalEIsSet(featureID);
 }
 
-bool CallBehaviorActionImpl::eSet(int featureID, Any newValue)
+bool CallBehaviorActionImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -452,7 +452,7 @@ bool CallBehaviorActionImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any CallBehaviorActionImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any CallBehaviorActionImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

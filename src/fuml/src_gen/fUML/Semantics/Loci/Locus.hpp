@@ -78,13 +78,13 @@ namespace fUML::Semantics::Loci
 			//*********************************
 			// Operations
 			//*********************************
-			virtual void add(std::shared_ptr<fUML::Semantics::StructuredClassifiers::ExtensionalValue> value) = 0;
-			virtual void assignExecutor(std::shared_ptr<fUML::Semantics::Loci::Executor> executor) = 0;
-			virtual void assignFactory(std::shared_ptr<fUML::Semantics::Loci::ExecutionFactory> factory) = 0;
-			virtual bool conforms(std::shared_ptr<uml::Classifier> type,std::shared_ptr<uml::Classifier> classifier) = 0;
-			virtual std::shared_ptr<fUML::Semantics::StructuredClassifiers::Object> instantiate(std::shared_ptr<uml::Class> type) = 0;
-			virtual void remove(std::shared_ptr<fUML::Semantics::StructuredClassifiers::ExtensionalValue> value) = 0;
-			virtual std::shared_ptr<Bag<fUML::Semantics::StructuredClassifiers::ExtensionalValue> > retrieveExtent(std::shared_ptr<uml::Classifier> classifier) = 0;
+			virtual void add(const std::shared_ptr<fUML::Semantics::StructuredClassifiers::ExtensionalValue>& value) = 0;
+			virtual void assignExecutor(const std::shared_ptr<fUML::Semantics::Loci::Executor>& executor) = 0;
+			virtual void assignFactory(const std::shared_ptr<fUML::Semantics::Loci::ExecutionFactory>& factory) = 0;
+			virtual bool conforms(const std::shared_ptr<uml::Classifier>& type, const std::shared_ptr<uml::Classifier>& classifier) = 0;
+			virtual std::shared_ptr<fUML::Semantics::StructuredClassifiers::Object> instantiate(const std::shared_ptr<uml::Class>& type) = 0;
+			virtual void remove(const std::shared_ptr<fUML::Semantics::StructuredClassifiers::ExtensionalValue>& value) = 0;
+			virtual std::shared_ptr<Bag<fUML::Semantics::StructuredClassifiers::ExtensionalValue> > retrieveExtent(const std::shared_ptr<uml::Classifier>& classifier) = 0;
 
 			//*********************************
 			// Attribute Getters & Setters
@@ -93,11 +93,11 @@ namespace fUML::Semantics::Loci
 			//*********************************
 			// Reference Getters & Setters
 			//*********************************
-			virtual std::shared_ptr<fUML::Semantics::Loci::Executor> getExecutor() const = 0;
-			virtual void setExecutor(std::shared_ptr<fUML::Semantics::Loci::Executor>) = 0;
-			virtual std::shared_ptr<Bag<fUML::Semantics::StructuredClassifiers::ExtensionalValue>> getExtensionalValues() const = 0;
-			virtual std::shared_ptr<fUML::Semantics::Loci::ExecutionFactory> getFactory() const = 0;
-			virtual void setFactory(std::shared_ptr<fUML::Semantics::Loci::ExecutionFactory>) = 0;
+			virtual const std::shared_ptr<fUML::Semantics::Loci::Executor>& getExecutor() const = 0;
+			virtual void setExecutor(const std::shared_ptr<fUML::Semantics::Loci::Executor>&) = 0;
+			virtual const std::shared_ptr<Bag<fUML::Semantics::StructuredClassifiers::ExtensionalValue>>& getExtensionalValues() const = 0;
+			virtual const std::shared_ptr<fUML::Semantics::Loci::ExecutionFactory>& getFactory() const = 0;
+			virtual void setFactory(const std::shared_ptr<fUML::Semantics::Loci::ExecutionFactory>&) = 0;
 
 			//*********************************
 			// Union Reference Getters

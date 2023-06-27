@@ -154,11 +154,11 @@ std::shared_ptr<ecore::EObject> ChangeEventImpl::copy() const
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference changeExpression */
-std::shared_ptr<uml::ValueSpecification> ChangeEventImpl::getChangeExpression() const
+const std::shared_ptr<uml::ValueSpecification>& ChangeEventImpl::getChangeExpression() const
 {
     return m_changeExpression;
 }
-void ChangeEventImpl::setChangeExpression(std::shared_ptr<uml::ValueSpecification> _changeExpression)
+void ChangeEventImpl::setChangeExpression(const std::shared_ptr<uml::ValueSpecification>& _changeExpression)
 {
     m_changeExpression = _changeExpression;
 	
@@ -317,7 +317,7 @@ void ChangeEventImpl::saveContent(std::shared_ptr<persistence::interfaces::XSave
 	}
 }
 
-std::shared_ptr<ecore::EClass> ChangeEventImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& ChangeEventImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getChangeEvent_Class();
 }
@@ -345,7 +345,7 @@ bool ChangeEventImpl::internalEIsSet(int featureID) const
 	return EventImpl::internalEIsSet(featureID);
 }
 
-bool ChangeEventImpl::eSet(int featureID, Any newValue)
+bool ChangeEventImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -365,7 +365,7 @@ bool ChangeEventImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any ChangeEventImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any ChangeEventImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

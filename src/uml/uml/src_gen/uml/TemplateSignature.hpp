@@ -87,14 +87,14 @@ namespace uml
 			template.ownedElement->includesAll(parameter.parameteredElement->asSet() - parameter.ownedParameteredElement->asSet())
 			*/
 			 
-			virtual bool own_elements(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
+			virtual bool own_elements(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context) = 0;
 			/*!
 			The names of the parameters of a TemplateSignature are unique.
 			parameter->forAll( p1, p2 | (p1 <> p2 and p1.parameteredElement.oclIsKindOf(NamedElement) and p2.parameteredElement.oclIsKindOf(NamedElement) ) implies
 			   p1.parameteredElement.oclAsType(NamedElement).name <> p2.parameteredElement.oclAsType(NamedElement).name)
 			*/
 			 
-			virtual bool unique_parameters(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
+			virtual bool unique_parameters(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context) = 0;
 
 			//*********************************
 			// Attribute Getters & Setters
@@ -108,7 +108,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::shared_ptr<Subset<uml::TemplateParameter, uml::Element, uml::TemplateParameter>> getOwnedParameter() const = 0;
+			virtual const std::shared_ptr<Subset<uml::TemplateParameter, uml::Element, uml::TemplateParameter>>& getOwnedParameter() const = 0;
 			
 			/*!
 			The TemplateableElement that owns this TemplateSignature.

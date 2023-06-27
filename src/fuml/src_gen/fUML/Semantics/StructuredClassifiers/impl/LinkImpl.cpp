@@ -38,9 +38,9 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "uml/umlFactory.hpp"
 #include "fUML/Semantics/Loci/LociFactory.hpp"
 #include "fUML/Semantics/SimpleClassifiers/SimpleClassifiersFactory.hpp"
+#include "uml/umlFactory.hpp"
 #include "uml/Association.hpp"
 #include "uml/Classifier.hpp"
 #include "fUML/Semantics/StructuredClassifiers/ExtensionalValue.hpp"
@@ -49,8 +49,8 @@
 #include "uml/Property.hpp"
 #include "fUML/Semantics/Values/Value.hpp"
 //Factories and Package includes
-#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/SemanticsPackage.hpp"
+#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/Loci/LociPackage.hpp"
 #include "fUML/Semantics/SimpleClassifiers/SimpleClassifiersPackage.hpp"
 #include "fUML/Semantics/StructuredClassifiers/StructuredClassifiersPackage.hpp"
@@ -134,7 +134,7 @@ return newValue;
 	//end of body
 }
 
-void LinkImpl::addTo(std::shared_ptr<fUML::Semantics::Loci::Locus> locus)
+void LinkImpl::addTo(const std::shared_ptr<fUML::Semantics::Loci::Locus>& locus)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -179,7 +179,7 @@ void LinkImpl::addTo(std::shared_ptr<fUML::Semantics::Loci::Locus> locus)
 	//end of body
 }
 
-std::shared_ptr<Bag<fUML::Semantics::SimpleClassifiers::FeatureValue> > LinkImpl::getOtherFeatureValues(std::shared_ptr<Bag<fUML::Semantics::StructuredClassifiers::ExtensionalValue>> extent,std::shared_ptr<uml::Property> end)
+std::shared_ptr<Bag<fUML::Semantics::SimpleClassifiers::FeatureValue> > LinkImpl::getOtherFeatureValues(const std::shared_ptr<Bag<fUML::Semantics::StructuredClassifiers::ExtensionalValue>>& extent, const std::shared_ptr<uml::Property>& end)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -216,7 +216,7 @@ std::shared_ptr<Bag<uml::Classifier> > LinkImpl::getTypes() const
 	//end of body
 }
 
-bool LinkImpl::isMatchingLink(std::shared_ptr<fUML::Semantics::StructuredClassifiers::ExtensionalValue> link,std::shared_ptr<uml::Property> end)
+bool LinkImpl::isMatchingLink(const std::shared_ptr<fUML::Semantics::StructuredClassifiers::ExtensionalValue>& link, const std::shared_ptr<uml::Property>& end)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -257,11 +257,11 @@ return fUML::Semantics::StructuredClassifiers::StructuredClassifiersFactory::eIn
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference type */
-std::shared_ptr<uml::Association> LinkImpl::getType() const
+const std::shared_ptr<uml::Association>& LinkImpl::getType() const
 {
     return m_type;
 }
-void LinkImpl::setType(std::shared_ptr<uml::Association> _type)
+void LinkImpl::setType(const std::shared_ptr<uml::Association>& _type)
 {
     m_type = _type;
 	
@@ -380,7 +380,7 @@ void LinkImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler
 	}
 }
 
-std::shared_ptr<ecore::EClass> LinkImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& LinkImpl::eStaticClass() const
 {
 	return fUML::Semantics::StructuredClassifiers::StructuredClassifiersPackage::eInstance()->getLink_Class();
 }
@@ -408,7 +408,7 @@ bool LinkImpl::internalEIsSet(int featureID) const
 	return ExtensionalValueImpl::internalEIsSet(featureID);
 }
 
-bool LinkImpl::eSet(int featureID, Any newValue)
+bool LinkImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -428,7 +428,7 @@ bool LinkImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any LinkImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any LinkImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

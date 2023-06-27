@@ -55,7 +55,7 @@ namespace uml
 			incoming->includes(decisionInputFlow)
 			*/
 			 
-			virtual bool decision_input_flow_incoming(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
+			virtual bool decision_input_flow_incoming(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context) ;
 			/*!
 			The ActivityEdges incoming to and outgoing from a DecisionNode, other than the decisionInputFlow (if any), must be either all ObjectFlows or all ControlFlows.
 			let allEdges: Set(ActivityEdge) = incoming->union(outgoing) in
@@ -64,27 +64,27 @@ namespace uml
 			
 			*/
 			 
-			virtual bool edges(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
+			virtual bool edges(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context) ;
 			/*!
 			If the DecisionNode has a decisionInputFlow and an incoming ControlFlow, then any decisionInput Behavior has one in Parameter whose type is the same as or a supertype of the type of object tokens offered on the decisionInputFlow.
 			(decisionInput<>null and decisionInputFlow<>null and incoming->exists(oclIsKindOf(ControlFlow))) implies
 				decisionInput.inputParameters()->size()=1
 			*/
 			 
-			virtual bool incoming_control_one_input_parameter(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
+			virtual bool incoming_control_one_input_parameter(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context) ;
 			/*!
 			If the DecisionNode has no decisionInputFlow and an incoming ObjectFlow, then any decisionInput Behavior has one in Parameter whose type is the same as or a supertype of the type of object tokens offered on the incoming ObjectFlow.
 			(decisionInput<>null and decisionInputFlow=null and incoming->forAll(oclIsKindOf(ObjectFlow))) implies
 				decisionInput.inputParameters()->size()=1
 			*/
 			 
-			virtual bool incoming_object_one_input_parameter(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
+			virtual bool incoming_object_one_input_parameter(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context) ;
 			/*!
 			A DecisionNode has one or two incoming ActivityEdges and at least one outgoing ActivityEdge.
 			(incoming->size() = 1 or incoming->size() = 2) and outgoing->size() > 0
 			*/
 			 
-			virtual bool incoming_outgoing_edges(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
+			virtual bool incoming_outgoing_edges(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context) ;
 			/*!
 			A decisionInput Behavior has no out parameters, no inout parameters, and one return parameter.
 			decisionInput<>null implies 
@@ -95,21 +95,21 @@ namespace uml
 			     par.direction <> ParameterDirectionKind::return))
 			*/
 			 
-			virtual bool parameters(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
+			virtual bool parameters(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context) ;
 			/*!
 			If the DecisionNode has a decisionInputFlow and an second incoming ObjectFlow, then any decisionInput has two in Parameters, the first of which has a type that is the same as or a supertype of the type of object tokens offered on the non-decisionInputFlow and the second of which has a type that is the same as or a supertype of the type of object tokens offered on the decisionInputFlow.
 			(decisionInput<>null and decisionInputFlow<>null and incoming->forAll(oclIsKindOf(ObjectFlow))) implies
 				decisionInput.inputParameters()->size()=2
 			*/
 			 
-			virtual bool two_input_parameters(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
+			virtual bool two_input_parameters(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context) ;
 			/*!
 			If the DecisionNode has no decisionInputFlow and an incoming ControlFlow, then any decisionInput Behavior has no in parameters.
 			(decisionInput<>null and decisionInputFlow=null and incoming->exists(oclIsKindOf(ControlFlow))) implies
 			   decisionInput.inputParameters()->isEmpty()
 			*/
 			 
-			virtual bool zero_input_parameters(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
+			virtual bool zero_input_parameters(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context) ;
 			
 			//*********************************
 			// Attribute Getters & Setters
@@ -123,25 +123,25 @@ namespace uml
 			<p>From package UML::Activities.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::Behavior> getDecisionInput() const ;
+			virtual const std::shared_ptr<uml::Behavior>& getDecisionInput() const ;
 			/*!
 			A Behavior that is executed to provide an input to guard ValueSpecifications on ActivityEdges outgoing from the DecisionNode.
 			<p>From package UML::Activities.</p>
 			*/
 			
-			virtual void setDecisionInput(std::shared_ptr<uml::Behavior>) ;
+			virtual void setDecisionInput(const std::shared_ptr<uml::Behavior>&) ;
 			/*!
 			An additional ActivityEdge incoming to the DecisionNode that provides a decision input value for the guards ValueSpecifications on ActivityEdges outgoing from the DecisionNode.
 			<p>From package UML::Activities.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::ObjectFlow> getDecisionInputFlow() const ;
+			virtual const std::shared_ptr<uml::ObjectFlow>& getDecisionInputFlow() const ;
 			/*!
 			An additional ActivityEdge incoming to the DecisionNode that provides a decision input value for the guards ValueSpecifications on ActivityEdges outgoing from the DecisionNode.
 			<p>From package UML::Activities.</p>
 			*/
 			
-			virtual void setDecisionInputFlow(std::shared_ptr<uml::ObjectFlow>) ;
+			virtual void setDecisionInputFlow(const std::shared_ptr<uml::ObjectFlow>&) ;
 			
 			//*********************************
 			// Union Reference Getters
@@ -187,19 +187,19 @@ namespace uml
 			virtual void saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const;
 
 		protected:
-			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
+			virtual const std::shared_ptr<ecore::EClass>& eStaticClass() const;
 
 			//*********************************
 			// EStructuralFeature Get/Set/IsSet
 			//*********************************
 			virtual Any eGet(int featureID, bool resolve, bool coreType) const ;
-			virtual bool eSet(int featureID, Any newValue) ;
+			virtual bool eSet(int featureID, const Any& newValue) ;
 			virtual bool internalEIsSet(int featureID) const ;
 
 			//*********************************
 			// EOperation Invoke
 			//*********************************
-			virtual Any eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments) ;
+			virtual Any eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments) ;
 
 		private:
 			std::weak_ptr<uml::DecisionNode> m_thisDecisionNodePtr;

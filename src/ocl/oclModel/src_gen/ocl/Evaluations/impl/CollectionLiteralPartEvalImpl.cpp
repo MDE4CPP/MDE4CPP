@@ -35,9 +35,9 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "fUML/Semantics/Values/ValuesFactory.hpp"
 #include "fUML/Semantics/Loci/LociFactory.hpp"
 #include "uml/umlFactory.hpp"
+#include "fUML/Semantics/Values/ValuesFactory.hpp"
 #include "fUML/Semantics/Values/Evaluation.hpp"
 #include "fUML/Semantics/Loci/Locus.hpp"
 #include "fUML/Semantics/Values/Value.hpp"
@@ -121,11 +121,11 @@ std::shared_ptr<ecore::EObject> CollectionLiteralPartEvalImpl::copy() const
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference element */
-std::shared_ptr<fUML::Semantics::Values::Value> CollectionLiteralPartEvalImpl::getElement() const
+const std::shared_ptr<fUML::Semantics::Values::Value>& CollectionLiteralPartEvalImpl::getElement() const
 {
     return m_element;
 }
-void CollectionLiteralPartEvalImpl::setElement(std::shared_ptr<fUML::Semantics::Values::Value> _element)
+void CollectionLiteralPartEvalImpl::setElement(const std::shared_ptr<fUML::Semantics::Values::Value>& _element)
 {
     m_element = _element;
 	
@@ -238,7 +238,7 @@ void CollectionLiteralPartEvalImpl::saveContent(std::shared_ptr<persistence::int
 	}
 }
 
-std::shared_ptr<ecore::EClass> CollectionLiteralPartEvalImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& CollectionLiteralPartEvalImpl::eStaticClass() const
 {
 	return ocl::Evaluations::EvaluationsPackage::eInstance()->getCollectionLiteralPartEval_Class();
 }
@@ -266,7 +266,7 @@ bool CollectionLiteralPartEvalImpl::internalEIsSet(int featureID) const
 	return fUML::Semantics::Values::EvaluationImpl::internalEIsSet(featureID);
 }
 
-bool CollectionLiteralPartEvalImpl::eSet(int featureID, Any newValue)
+bool CollectionLiteralPartEvalImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -286,7 +286,7 @@ bool CollectionLiteralPartEvalImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any CollectionLiteralPartEvalImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any CollectionLiteralPartEvalImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

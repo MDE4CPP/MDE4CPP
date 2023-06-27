@@ -43,10 +43,10 @@
 #include "uml/Operation.hpp"
 #include "fUML/Semantics/StructuredClassifiers/RedefinitionBasedDispatchStrategy.hpp"
 //Factories and Package includes
-#include "PSCS/PSCSPackage.hpp"
 #include "PSCS/Semantics/SemanticsPackage.hpp"
-#include "PSCS/Semantics/StructuredClassifiers/StructuredClassifiersPackage.hpp"
+#include "PSCS/PSCSPackage.hpp"
 #include "fUML/Semantics/StructuredClassifiers/StructuredClassifiersPackage.hpp"
+#include "PSCS/Semantics/StructuredClassifiers/StructuredClassifiersPackage.hpp"
 #include "uml/umlPackage.hpp"
 
 using namespace PSCS::Semantics::StructuredClassifiers;
@@ -111,7 +111,7 @@ std::shared_ptr<ecore::EObject> CS_DispatchOperationOfInterfaceStrategyImpl::cop
 //*********************************
 // Operations
 //*********************************
-bool CS_DispatchOperationOfInterfaceStrategyImpl::operationsMatch(std::shared_ptr<uml::Operation> ownedOperation,std::shared_ptr<uml::Operation> baseOperation)
+bool CS_DispatchOperationOfInterfaceStrategyImpl::operationsMatch(const std::shared_ptr<uml::Operation>& ownedOperation, const std::shared_ptr<uml::Operation>& baseOperation)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -224,7 +224,7 @@ void CS_DispatchOperationOfInterfaceStrategyImpl::saveContent(std::shared_ptr<pe
 	}
 }
 
-std::shared_ptr<ecore::EClass> CS_DispatchOperationOfInterfaceStrategyImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& CS_DispatchOperationOfInterfaceStrategyImpl::eStaticClass() const
 {
 	return PSCS::Semantics::StructuredClassifiers::StructuredClassifiersPackage::eInstance()->getCS_DispatchOperationOfInterfaceStrategy_Class();
 }
@@ -248,7 +248,7 @@ bool CS_DispatchOperationOfInterfaceStrategyImpl::internalEIsSet(int featureID) 
 	return fUML::Semantics::StructuredClassifiers::RedefinitionBasedDispatchStrategyImpl::internalEIsSet(featureID);
 }
 
-bool CS_DispatchOperationOfInterfaceStrategyImpl::eSet(int featureID, Any newValue)
+bool CS_DispatchOperationOfInterfaceStrategyImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -260,7 +260,7 @@ bool CS_DispatchOperationOfInterfaceStrategyImpl::eSet(int featureID, Any newVal
 //*********************************
 // EOperation Invoke
 //*********************************
-Any CS_DispatchOperationOfInterfaceStrategyImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any CS_DispatchOperationOfInterfaceStrategyImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

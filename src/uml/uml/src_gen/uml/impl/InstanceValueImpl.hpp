@@ -67,13 +67,13 @@ namespace uml
 			<p>From package UML::Classification.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::InstanceSpecification> getInstance() const ;
+			virtual const std::shared_ptr<uml::InstanceSpecification>& getInstance() const ;
 			/*!
 			The InstanceSpecification that represents the specified value.
 			<p>From package UML::Classification.</p>
 			*/
 			
-			virtual void setInstance(std::shared_ptr<uml::InstanceSpecification>) ;
+			virtual void setInstance(const std::shared_ptr<uml::InstanceSpecification>&) ;
 			
 			//*********************************
 			// Union Reference Getters
@@ -114,19 +114,19 @@ namespace uml
 			virtual void saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const;
 
 		protected:
-			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
+			virtual const std::shared_ptr<ecore::EClass>& eStaticClass() const;
 
 			//*********************************
 			// EStructuralFeature Get/Set/IsSet
 			//*********************************
 			virtual Any eGet(int featureID, bool resolve, bool coreType) const ;
-			virtual bool eSet(int featureID, Any newValue) ;
+			virtual bool eSet(int featureID, const Any& newValue) ;
 			virtual bool internalEIsSet(int featureID) const ;
 
 			//*********************************
 			// EOperation Invoke
 			//*********************************
-			virtual Any eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments) ;
+			virtual Any eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments) ;
 
 		private:
 			std::weak_ptr<uml::InstanceValue> m_thisInstanceValuePtr;

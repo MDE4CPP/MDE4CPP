@@ -203,12 +203,12 @@ std::shared_ptr<ecore::EObject> StringExpressionImpl::copy() const
 //*********************************
 // Operations
 //*********************************
-bool StringExpressionImpl::operands(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool StringExpressionImpl::operands(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool StringExpressionImpl::subexpressions(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool StringExpressionImpl::subexpressions(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -232,7 +232,7 @@ void StringExpressionImpl::setOwningExpression(std::weak_ptr<uml::StringExpressi
 }
 
 /* Getter & Setter for reference subExpression */
-std::shared_ptr<Subset<uml::StringExpression, uml::Element>> StringExpressionImpl::getSubExpression() const
+const std::shared_ptr<Subset<uml::StringExpression, uml::Element>>& StringExpressionImpl::getSubExpression() const
 {
 	if(m_subExpression == nullptr)
 	{
@@ -439,7 +439,7 @@ void StringExpressionImpl::saveContent(std::shared_ptr<persistence::interfaces::
 	}
 }
 
-std::shared_ptr<ecore::EClass> StringExpressionImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& StringExpressionImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getStringExpression_Class();
 }
@@ -488,7 +488,7 @@ bool StringExpressionImpl::internalEIsSet(int featureID) const
 	return result;
 }
 
-bool StringExpressionImpl::eSet(int featureID, Any newValue)
+bool StringExpressionImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -552,7 +552,7 @@ bool StringExpressionImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any StringExpressionImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any StringExpressionImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

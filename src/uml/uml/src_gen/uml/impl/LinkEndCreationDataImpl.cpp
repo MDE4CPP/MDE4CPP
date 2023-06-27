@@ -114,7 +114,7 @@ std::shared_ptr<ecore::EObject> LinkEndCreationDataImpl::copy() const
 //*********************************
 // Operations
 //*********************************
-bool LinkEndCreationDataImpl::insertAt_pin(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool LinkEndCreationDataImpl::insertAt_pin(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -123,7 +123,7 @@ bool LinkEndCreationDataImpl::insertAt_pin(Any diagnostics,std::shared_ptr<std::
 // Attribute Getters & Setters
 //*********************************
 /* Getter & Setter for attribute isReplaceAll */
-bool LinkEndCreationDataImpl::getIsReplaceAll() const 
+bool LinkEndCreationDataImpl::getIsReplaceAll() const
 {
 	return m_isReplaceAll;
 }
@@ -137,11 +137,11 @@ void LinkEndCreationDataImpl::setIsReplaceAll(bool _isReplaceAll)
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference insertAt */
-std::shared_ptr<uml::InputPin> LinkEndCreationDataImpl::getInsertAt() const
+const std::shared_ptr<uml::InputPin>& LinkEndCreationDataImpl::getInsertAt() const
 {
     return m_insertAt;
 }
-void LinkEndCreationDataImpl::setInsertAt(std::shared_ptr<uml::InputPin> _insertAt)
+void LinkEndCreationDataImpl::setInsertAt(const std::shared_ptr<uml::InputPin>& _insertAt)
 {
     m_insertAt = _insertAt;
 	
@@ -288,7 +288,7 @@ void LinkEndCreationDataImpl::saveContent(std::shared_ptr<persistence::interface
 	}
 }
 
-std::shared_ptr<ecore::EClass> LinkEndCreationDataImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& LinkEndCreationDataImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getLinkEndCreationData_Class();
 }
@@ -320,7 +320,7 @@ bool LinkEndCreationDataImpl::internalEIsSet(int featureID) const
 	return LinkEndDataImpl::internalEIsSet(featureID);
 }
 
-bool LinkEndCreationDataImpl::eSet(int featureID, Any newValue)
+bool LinkEndCreationDataImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -347,7 +347,7 @@ bool LinkEndCreationDataImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any LinkEndCreationDataImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any LinkEndCreationDataImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

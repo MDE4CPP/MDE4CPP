@@ -126,18 +126,18 @@ std::shared_ptr<ecore::EObject> EEnumLiteralImpl::copy() const
 // Attribute Getters & Setters
 //*********************************
 /* Getter & Setter for attribute instance */
-Any EEnumLiteralImpl::getInstance() const 
+const Any& EEnumLiteralImpl::getInstance() const
 {
 	return m_instance;
 }
-void EEnumLiteralImpl::setInstance(Any _instance)
+void EEnumLiteralImpl::setInstance(const Any& _instance)
 {
 	m_instance = _instance;
 	
 }
 
 /* Getter & Setter for attribute literal */
-std::string EEnumLiteralImpl::getLiteral() const 
+std::string EEnumLiteralImpl::getLiteral() const
 {
 	return m_literal;
 }
@@ -148,7 +148,7 @@ void EEnumLiteralImpl::setLiteral(std::string _literal)
 }
 
 /* Getter & Setter for attribute value */
-int EEnumLiteralImpl::getValue() const 
+int EEnumLiteralImpl::getValue() const
 {
 	return m_value;
 }
@@ -304,7 +304,7 @@ void EEnumLiteralImpl::saveContent(std::shared_ptr<persistence::interfaces::XSav
 	}
 }
 
-std::shared_ptr<EClass> EEnumLiteralImpl::eStaticClass() const
+const std::shared_ptr<EClass>& EEnumLiteralImpl::eStaticClass() const
 {
 	return ecore::ecorePackage::eInstance()->getEEnumLiteral_Class();
 }
@@ -347,7 +347,7 @@ bool EEnumLiteralImpl::internalEIsSet(int featureID) const
 	return ENamedElementImpl::internalEIsSet(featureID);
 }
 
-bool EEnumLiteralImpl::eSet(int featureID, Any newValue)
+bool EEnumLiteralImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -380,7 +380,7 @@ bool EEnumLiteralImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any EEnumLiteralImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any EEnumLiteralImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

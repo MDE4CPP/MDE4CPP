@@ -107,13 +107,13 @@ namespace uml
 			<p>From package UML::Classification.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::Classifier> getContract() const = 0;
+			virtual const std::shared_ptr<uml::Classifier>& getContract() const = 0;
 			/*!
 			The contract with which the substituting classifier complies.
 			<p>From package UML::Classification.</p>
 			*/
 			
-			virtual void setContract(std::shared_ptr<uml::Classifier>) = 0;
+			virtual void setContract(const std::shared_ptr<uml::Classifier>&) = 0;
 			/*!
 			Instances of the substituting classifier are runtime substitutable where instances of the contract classifier are expected.
 			<p>From package UML::Classification.</p>

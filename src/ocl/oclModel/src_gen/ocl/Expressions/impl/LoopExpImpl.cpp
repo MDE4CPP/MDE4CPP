@@ -227,18 +227,18 @@ LoopExpImpl& LoopExpImpl::operator=(const LoopExpImpl & obj)
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference body */
-std::shared_ptr<ocl::Expressions::OclExpression> LoopExpImpl::getBody() const
+const std::shared_ptr<ocl::Expressions::OclExpression>& LoopExpImpl::getBody() const
 {
     return m_body;
 }
-void LoopExpImpl::setBody(std::shared_ptr<ocl::Expressions::OclExpression> _body)
+void LoopExpImpl::setBody(const std::shared_ptr<ocl::Expressions::OclExpression>& _body)
 {
     m_body = _body;
 	
 }
 
 /* Getter & Setter for reference iterator */
-std::shared_ptr<Bag<ocl::Expressions::Variable>> LoopExpImpl::getIterator() const
+const std::shared_ptr<Bag<ocl::Expressions::Variable>>& LoopExpImpl::getIterator() const
 {
 	if(m_iterator == nullptr)
 	{
@@ -427,7 +427,7 @@ void LoopExpImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHand
 	}
 }
 
-std::shared_ptr<ecore::EClass> LoopExpImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& LoopExpImpl::eStaticClass() const
 {
 	return ocl::Expressions::ExpressionsPackage::eInstance()->getLoopExp_Class();
 }
@@ -459,7 +459,7 @@ bool LoopExpImpl::internalEIsSet(int featureID) const
 	return CallExpImpl::internalEIsSet(featureID);
 }
 
-bool LoopExpImpl::eSet(int featureID, Any newValue)
+bool LoopExpImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -516,7 +516,7 @@ bool LoopExpImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any LoopExpImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any LoopExpImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

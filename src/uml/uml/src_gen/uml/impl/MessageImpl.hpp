@@ -52,7 +52,7 @@ namespace uml
 			Arguments of a Message must only be: i) attributes of the sending lifeline, ii) constants, iii) symbolic values (which are wildcard values representing any legal value), iv) explicit parameters of the enclosing Interaction, v) attributes of the class owning the Interaction.
 			*/
 			 
-			virtual bool arguments(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
+			virtual bool arguments(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context) ;
 			/*!
 			Messages cannot cross boundaries of CombinedFragments or their operands.  This is true if and only if both MessageEnds are enclosed within the same InteractionFragment (i.e., an InteractionOperand or an Interaction).
 			sendEvent->notEmpty() and receiveEvent->notEmpty() implies
@@ -64,7 +64,7 @@ namespace uml
 			in  sendEnclosingFrag = receiveEnclosingFrag
 			*/
 			 
-			virtual bool cannot_cross_boundaries(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
+			virtual bool cannot_cross_boundaries(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context) ;
 			/*!
 			This query returns the MessageKind value for this Message.
 			result = (messageKind)
@@ -76,7 +76,7 @@ namespace uml
 			If the MessageEnds are both OccurrenceSpecifications, then the connector must go between the Parts represented by the Lifelines of the two MessageEnds.
 			*/
 			 
-			virtual bool occurrence_specifications(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
+			virtual bool occurrence_specifications(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context) ;
 			/*!
 			If the sendEvent and the receiveEvent of the same Message are on the same Lifeline, the sendEvent must be ordered before the receiveEvent.
 			receiveEvent.oclIsKindOf(MessageOccurrenceSpecification)
@@ -87,7 +87,7 @@ namespace uml
 			f.events->indexOf(receiveEvent.oclAsType(MessageOccurrenceSpecification)->asOrderedSet()->first() )
 			*/
 			 
-			virtual bool sending_receiving_message_event(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
+			virtual bool sending_receiving_message_event(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context) ;
 			/*!
 			In the case when a Message with messageSort reply has a non empty Operation signature, the arguments of the Message must correspond to the out, inout, and return parameters of the Operation. A Parameter corresponds to an Argument if the Argument is of the same Class or a specialization of that of the Parameter.
 			(messageSort = MessageSort::reply) and signature.oclIsKindOf(Operation) implies 
@@ -101,7 +101,7 @@ namespace uml
 			)
 			*/
 			 
-			virtual bool signature_is_operation_reply(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
+			virtual bool signature_is_operation_reply(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context) ;
 			/*!
 			In the case when a Message with messageSort synchCall or asynchCall has a non empty Operation signature, the arguments of the Message must correspond to the in and inout parameters of the Operation. A Parameter corresponds to an Argument if the Argument is of the same Class or a specialization of that of the Parameter.
 			(messageSort = MessageSort::asynchCall or messageSort = MessageSort::synchCall) and signature.oclIsKindOf(Operation)  implies 
@@ -115,7 +115,7 @@ namespace uml
 			)
 			*/
 			 
-			virtual bool signature_is_operation_request(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
+			virtual bool signature_is_operation_request(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context) ;
 			/*!
 			In the case when the Message signature is a Signal, the arguments of the Message must correspond to the attributes of the Signal. A Message Argument corresponds to a Signal Attribute if the Argument is of the same Class or a specialization of that of the Attribute.
 			(messageSort = MessageSort::asynchSignal ) and signature.oclIsKindOf(Signal) implies
@@ -130,7 +130,7 @@ namespace uml
 			              in o.type.oclAsType(Classifier).conformsTo(p.type.oclAsType(Classifier)))
 			*/
 			 
-			virtual bool signature_is_signal(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
+			virtual bool signature_is_signal(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context) ;
 			/*!
 			The signature must either refer an Operation (in which case messageSort is either synchCall or asynchCall or reply) or a Signal (in which case messageSort is asynchSignal). The name of the NamedElement referenced by signature must be the same as that of the Message.
 			signature->notEmpty() implies 
@@ -140,7 +140,7 @@ namespace uml
 			 ) and name = signature.name
 			*/
 			 
-			virtual bool signature_refer_to(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
+			virtual bool signature_refer_to(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context) ;
 			
 			//*********************************
 			// Attribute Getters & Setters
@@ -172,19 +172,19 @@ namespace uml
 			<p>From package UML::Interactions.</p>
 			*/
 			
-			virtual std::shared_ptr<Subset<uml::ValueSpecification, uml::Element>> getArgument() const ;
+			virtual const std::shared_ptr<Subset<uml::ValueSpecification, uml::Element>>& getArgument() const ;
 			/*!
 			The Connector on which this Message is sent.
 			<p>From package UML::Interactions.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::Connector> getConnector() const ;
+			virtual const std::shared_ptr<uml::Connector>& getConnector() const ;
 			/*!
 			The Connector on which this Message is sent.
 			<p>From package UML::Interactions.</p>
 			*/
 			
-			virtual void setConnector(std::shared_ptr<uml::Connector>) ;
+			virtual void setConnector(const std::shared_ptr<uml::Connector>&) ;
 			/*!
 			The enclosing Interaction owning the Message.
 			<p>From package UML::Interactions.</p>
@@ -202,37 +202,37 @@ namespace uml
 			<p>From package UML::Interactions.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::MessageEnd> getReceiveEvent() const ;
+			virtual const std::shared_ptr<uml::MessageEnd>& getReceiveEvent() const ;
 			/*!
 			References the Receiving of the Message.
 			<p>From package UML::Interactions.</p>
 			*/
 			
-			virtual void setReceiveEvent(std::shared_ptr<uml::MessageEnd>) ;
+			virtual void setReceiveEvent(const std::shared_ptr<uml::MessageEnd>&) ;
 			/*!
 			References the Sending of the Message.
 			<p>From package UML::Interactions.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::MessageEnd> getSendEvent() const ;
+			virtual const std::shared_ptr<uml::MessageEnd>& getSendEvent() const ;
 			/*!
 			References the Sending of the Message.
 			<p>From package UML::Interactions.</p>
 			*/
 			
-			virtual void setSendEvent(std::shared_ptr<uml::MessageEnd>) ;
+			virtual void setSendEvent(const std::shared_ptr<uml::MessageEnd>&) ;
 			/*!
 			The signature of the Message is the specification of its content. It refers either an Operation or a Signal.
 			<p>From package UML::Interactions.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::NamedElement> getSignature() const ;
+			virtual const std::shared_ptr<uml::NamedElement>& getSignature() const ;
 			/*!
 			The signature of the Message is the specification of its content. It refers either an Operation or a Signal.
 			<p>From package UML::Interactions.</p>
 			*/
 			
-			virtual void setSignature(std::shared_ptr<uml::NamedElement>) ;
+			virtual void setSignature(const std::shared_ptr<uml::NamedElement>&) ;
 			
 			//*********************************
 			// Union Reference Getters
@@ -272,19 +272,19 @@ namespace uml
 			virtual void saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const;
 
 		protected:
-			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
+			virtual const std::shared_ptr<ecore::EClass>& eStaticClass() const;
 
 			//*********************************
 			// EStructuralFeature Get/Set/IsSet
 			//*********************************
 			virtual Any eGet(int featureID, bool resolve, bool coreType) const ;
-			virtual bool eSet(int featureID, Any newValue) ;
+			virtual bool eSet(int featureID, const Any& newValue) ;
 			virtual bool internalEIsSet(int featureID) const ;
 
 			//*********************************
 			// EOperation Invoke
 			//*********************************
-			virtual Any eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments) ;
+			virtual Any eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments) ;
 
 		private:
 			std::weak_ptr<uml::Message> m_thisMessagePtr;

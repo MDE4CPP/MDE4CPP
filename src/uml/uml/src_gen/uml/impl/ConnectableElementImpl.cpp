@@ -139,7 +139,7 @@ std::shared_ptr<Bag<uml::ConnectorEnd> > ConnectableElementImpl::getEnds()
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference end */
-std::shared_ptr<Bag<uml::ConnectorEnd>> ConnectableElementImpl::getEnd() const
+const std::shared_ptr<Bag<uml::ConnectorEnd>>& ConnectableElementImpl::getEnd() const
 {
 	if(m_end == nullptr)
 	{
@@ -265,7 +265,7 @@ void ConnectableElementImpl::saveContent(std::shared_ptr<persistence::interfaces
 	}
 }
 
-std::shared_ptr<ecore::EClass> ConnectableElementImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& ConnectableElementImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getConnectableElement_Class();
 }
@@ -307,7 +307,7 @@ bool ConnectableElementImpl::internalEIsSet(int featureID) const
 	return result;
 }
 
-bool ConnectableElementImpl::eSet(int featureID, Any newValue)
+bool ConnectableElementImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -326,7 +326,7 @@ bool ConnectableElementImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any ConnectableElementImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any ConnectableElementImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

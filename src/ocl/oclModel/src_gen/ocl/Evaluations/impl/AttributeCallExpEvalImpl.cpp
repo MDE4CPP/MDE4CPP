@@ -33,10 +33,10 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "fUML/Semantics/Values/ValuesFactory.hpp"
 #include "fUML/Semantics/Loci/LociFactory.hpp"
-#include "fUML/Semantics/SimpleClassifiers/SimpleClassifiersFactory.hpp"
 #include "uml/umlFactory.hpp"
+#include "fUML/Semantics/Values/ValuesFactory.hpp"
+#include "fUML/Semantics/SimpleClassifiers/SimpleClassifiersFactory.hpp"
 #include "ocl/Evaluations/EvaluationsFactory.hpp"
 #include "ocl/Expressions/ExpressionsFactory.hpp"
 #include "ocl/Evaluations/EvalEnvironment.hpp"
@@ -128,11 +128,11 @@ std::shared_ptr<ecore::EObject> AttributeCallExpEvalImpl::copy() const
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference referredAttribute */
-std::shared_ptr<fUML::Semantics::SimpleClassifiers::StringValue> AttributeCallExpEvalImpl::getReferredAttribute() const
+const std::shared_ptr<fUML::Semantics::SimpleClassifiers::StringValue>& AttributeCallExpEvalImpl::getReferredAttribute() const
 {
     return m_referredAttribute;
 }
-void AttributeCallExpEvalImpl::setReferredAttribute(std::shared_ptr<fUML::Semantics::SimpleClassifiers::StringValue> _referredAttribute)
+void AttributeCallExpEvalImpl::setReferredAttribute(const std::shared_ptr<fUML::Semantics::SimpleClassifiers::StringValue>& _referredAttribute)
 {
     m_referredAttribute = _referredAttribute;
 	
@@ -251,7 +251,7 @@ void AttributeCallExpEvalImpl::saveContent(std::shared_ptr<persistence::interfac
 	}
 }
 
-std::shared_ptr<ecore::EClass> AttributeCallExpEvalImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& AttributeCallExpEvalImpl::eStaticClass() const
 {
 	return ocl::Evaluations::EvaluationsPackage::eInstance()->getAttributeCallExpEval_Class();
 }
@@ -279,7 +279,7 @@ bool AttributeCallExpEvalImpl::internalEIsSet(int featureID) const
 	return ModelPropertyCallExpEvalImpl::internalEIsSet(featureID);
 }
 
-bool AttributeCallExpEvalImpl::eSet(int featureID, Any newValue)
+bool AttributeCallExpEvalImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -299,7 +299,7 @@ bool AttributeCallExpEvalImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any AttributeCallExpEvalImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any AttributeCallExpEvalImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

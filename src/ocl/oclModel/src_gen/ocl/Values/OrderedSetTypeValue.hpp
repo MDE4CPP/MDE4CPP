@@ -67,7 +67,7 @@ namespace ocl::Values
 			//*********************************
 			// Operations
 			//*********************************
-			virtual bool addValue(std::shared_ptr<fUML::Semantics::Values::Value> value) = 0;
+			virtual bool addValue(const std::shared_ptr<fUML::Semantics::Values::Value>& value) = 0;
 
 			//*********************************
 			// Attribute Getters & Setters

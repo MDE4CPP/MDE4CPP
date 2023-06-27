@@ -71,11 +71,11 @@ namespace ocl::Evaluations
 			//*********************************
 			// Operations
 			//*********************************
-			virtual void add(std::shared_ptr<ocl::Values::NameValueBinding> n) = 0;
-			virtual void addAll(std::shared_ptr<Bag<ocl::Values::NameValueBinding>> nvbs) = 0;
+			virtual void add(const std::shared_ptr<ocl::Values::NameValueBinding>& n) = 0;
+			virtual void addAll(const std::shared_ptr<Bag<ocl::Values::NameValueBinding>>& nvbs) = 0;
 			virtual std::shared_ptr<ocl::Values::NameValueBinding> find(std::string name) = 0;
 			virtual std::shared_ptr<fUML::Semantics::Values::Value> getValueOf(std::string n) = 0;
-			virtual void replace(std::shared_ptr<ocl::Values::NameValueBinding> n) = 0;
+			virtual void replace(const std::shared_ptr<ocl::Values::NameValueBinding>& n) = 0;
 
 			//*********************************
 			// Attribute Getters & Setters
@@ -84,7 +84,7 @@ namespace ocl::Evaluations
 			//*********************************
 			// Reference Getters & Setters
 			//*********************************
-			virtual std::shared_ptr<Bag<ocl::Values::NameValueBinding>> getBindings() const = 0;
+			virtual const std::shared_ptr<Bag<ocl::Values::NameValueBinding>>& getBindings() const = 0;
 
 			//*********************************
 			// Union Reference Getters

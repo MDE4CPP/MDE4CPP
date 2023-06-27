@@ -45,10 +45,10 @@ namespace fUML::Semantics::Actions
 			//*********************************
 			// Operations
 			//*********************************
-			virtual std::shared_ptr<uml::Association> getAssociation(std::shared_ptr<uml::StructuralFeature> feature) ;
-			virtual std::shared_ptr<Bag<fUML::Semantics::StructuredClassifiers::Link> > getMatchingLinks(std::shared_ptr<uml::Association> association,std::shared_ptr<uml::StructuralFeature> end,std::shared_ptr<fUML::Semantics::Values::Value> oppositeValue) ;
-			virtual std::shared_ptr<Bag<fUML::Semantics::StructuredClassifiers::Link> > getMatchingLinksForEndValue(std::shared_ptr<uml::Association> association,std::shared_ptr<uml::StructuralFeature> end,std::shared_ptr<fUML::Semantics::Values::Value> oppositeValue,std::shared_ptr<fUML::Semantics::Values::Value> endValue) ;
-			virtual std::shared_ptr<uml::Property> getOppositeEnd(std::shared_ptr<uml::Association> association,std::shared_ptr<uml::StructuralFeature> end) ;
+			virtual std::shared_ptr<uml::Association> getAssociation(const std::shared_ptr<uml::StructuralFeature>& feature) ;
+			virtual std::shared_ptr<Bag<fUML::Semantics::StructuredClassifiers::Link> > getMatchingLinks(const std::shared_ptr<uml::Association>& association, const std::shared_ptr<uml::StructuralFeature>& end, const std::shared_ptr<fUML::Semantics::Values::Value>& oppositeValue) ;
+			virtual std::shared_ptr<Bag<fUML::Semantics::StructuredClassifiers::Link> > getMatchingLinksForEndValue(const std::shared_ptr<uml::Association>& association, const std::shared_ptr<uml::StructuralFeature>& end, const std::shared_ptr<fUML::Semantics::Values::Value>& oppositeValue, const std::shared_ptr<fUML::Semantics::Values::Value>& endValue) ;
+			virtual std::shared_ptr<uml::Property> getOppositeEnd(const std::shared_ptr<uml::Association>& association, const std::shared_ptr<uml::StructuralFeature>& end) ;
 			
 			//*********************************
 			// Attribute Getters & Setters
@@ -79,19 +79,19 @@ namespace fUML::Semantics::Actions
 			virtual void saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const;
 
 		protected:
-			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
+			virtual const std::shared_ptr<ecore::EClass>& eStaticClass() const;
 
 			//*********************************
 			// EStructuralFeature Get/Set/IsSet
 			//*********************************
 			virtual Any eGet(int featureID, bool resolve, bool coreType) const ;
-			virtual bool eSet(int featureID, Any newValue) ;
+			virtual bool eSet(int featureID, const Any& newValue) ;
 			virtual bool internalEIsSet(int featureID) const ;
 
 			//*********************************
 			// EOperation Invoke
 			//*********************************
-			virtual Any eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments) ;
+			virtual Any eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments) ;
 
 		private:
 			std::weak_ptr<fUML::Semantics::Actions::StructuralFeatureActionActivation> m_thisStructuralFeatureActionActivationPtr;

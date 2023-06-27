@@ -57,13 +57,13 @@ namespace uml
 			endif
 			*/
 			 
-			virtual bool incoming_object_flow(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
+			virtual bool incoming_object_flow(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context) ;
 			/*!
 			A JoinNode has one outgoing ActivityEdge.
 			outgoing->size() = 1
 			*/
 			 
-			virtual bool one_outgoing_edge(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
+			virtual bool one_outgoing_edge(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context) ;
 			
 			//*********************************
 			// Attribute Getters & Setters
@@ -89,13 +89,13 @@ namespace uml
 			<p>From package UML::Activities.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::ValueSpecification> getJoinSpec() const ;
+			virtual const std::shared_ptr<uml::ValueSpecification>& getJoinSpec() const ;
 			/*!
 			A ValueSpecification giving the condition under which the JoinNode will offer a token on its outgoing ActivityEdge. If no joinSpec is specified, then the JoinNode will offer an outgoing token if tokens are offered on all of its incoming ActivityEdges (an "and" condition).
 			<p>From package UML::Activities.</p>
 			*/
 			
-			virtual void setJoinSpec(std::shared_ptr<uml::ValueSpecification>) ;
+			virtual void setJoinSpec(const std::shared_ptr<uml::ValueSpecification>&) ;
 			
 			//*********************************
 			// Union Reference Getters
@@ -141,19 +141,19 @@ namespace uml
 			virtual void saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const;
 
 		protected:
-			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
+			virtual const std::shared_ptr<ecore::EClass>& eStaticClass() const;
 
 			//*********************************
 			// EStructuralFeature Get/Set/IsSet
 			//*********************************
 			virtual Any eGet(int featureID, bool resolve, bool coreType) const ;
-			virtual bool eSet(int featureID, Any newValue) ;
+			virtual bool eSet(int featureID, const Any& newValue) ;
 			virtual bool internalEIsSet(int featureID) const ;
 
 			//*********************************
 			// EOperation Invoke
 			//*********************************
-			virtual Any eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments) ;
+			virtual Any eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments) ;
 
 		private:
 			std::weak_ptr<uml::JoinNode> m_thisJoinNodePtr;

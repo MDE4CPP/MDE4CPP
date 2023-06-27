@@ -147,7 +147,7 @@ std::shared_ptr<ecore::EObject> ExtendImpl::copy() const
 //*********************************
 // Operations
 //*********************************
-bool ExtendImpl::extension_points(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool ExtendImpl::extension_points(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -160,22 +160,22 @@ bool ExtendImpl::extension_points(Any diagnostics,std::shared_ptr<std::map < Any
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference condition */
-std::shared_ptr<uml::Constraint> ExtendImpl::getCondition() const
+const std::shared_ptr<uml::Constraint>& ExtendImpl::getCondition() const
 {
     return m_condition;
 }
-void ExtendImpl::setCondition(std::shared_ptr<uml::Constraint> _condition)
+void ExtendImpl::setCondition(const std::shared_ptr<uml::Constraint>& _condition)
 {
     m_condition = _condition;
 	
 }
 
 /* Getter & Setter for reference extendedCase */
-std::shared_ptr<uml::UseCase> ExtendImpl::getExtendedCase() const
+const std::shared_ptr<uml::UseCase>& ExtendImpl::getExtendedCase() const
 {
     return m_extendedCase;
 }
-void ExtendImpl::setExtendedCase(std::shared_ptr<uml::UseCase> _extendedCase)
+void ExtendImpl::setExtendedCase(const std::shared_ptr<uml::UseCase>& _extendedCase)
 {
     m_extendedCase = _extendedCase;
 	
@@ -193,7 +193,7 @@ void ExtendImpl::setExtension(std::weak_ptr<uml::UseCase> _extension)
 }
 
 /* Getter & Setter for reference extensionLocation */
-std::shared_ptr<Bag<uml::ExtensionPoint>> ExtendImpl::getExtensionLocation() const
+const std::shared_ptr<Bag<uml::ExtensionPoint>>& ExtendImpl::getExtensionLocation() const
 {
 	if(m_extensionLocation == nullptr)
 	{
@@ -474,7 +474,7 @@ void ExtendImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandl
 	}
 }
 
-std::shared_ptr<ecore::EClass> ExtendImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& ExtendImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getExtend_Class();
 }
@@ -531,7 +531,7 @@ bool ExtendImpl::internalEIsSet(int featureID) const
 	return result;
 }
 
-bool ExtendImpl::eSet(int featureID, Any newValue)
+bool ExtendImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -611,7 +611,7 @@ bool ExtendImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any ExtendImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any ExtendImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

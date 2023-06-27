@@ -227,17 +227,17 @@ std::shared_ptr<ecore::EObject> ActionInputPinImpl::copy() const
 //*********************************
 // Operations
 //*********************************
-bool ActionInputPinImpl::input_pin(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool ActionInputPinImpl::input_pin(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool ActionInputPinImpl::no_control_or_object_flow(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool ActionInputPinImpl::no_control_or_object_flow(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool ActionInputPinImpl::one_output_pin(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool ActionInputPinImpl::one_output_pin(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -250,11 +250,11 @@ bool ActionInputPinImpl::one_output_pin(Any diagnostics,std::shared_ptr<std::map
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference fromAction */
-std::shared_ptr<uml::Action> ActionInputPinImpl::getFromAction() const
+const std::shared_ptr<uml::Action>& ActionInputPinImpl::getFromAction() const
 {
     return m_fromAction;
 }
-void ActionInputPinImpl::setFromAction(std::shared_ptr<uml::Action> _fromAction)
+void ActionInputPinImpl::setFromAction(const std::shared_ptr<uml::Action>& _fromAction)
 {
     m_fromAction = _fromAction;
 	
@@ -483,7 +483,7 @@ void ActionInputPinImpl::saveContent(std::shared_ptr<persistence::interfaces::XS
 	}
 }
 
-std::shared_ptr<ecore::EClass> ActionInputPinImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& ActionInputPinImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getActionInputPin_Class();
 }
@@ -511,7 +511,7 @@ bool ActionInputPinImpl::internalEIsSet(int featureID) const
 	return InputPinImpl::internalEIsSet(featureID);
 }
 
-bool ActionInputPinImpl::eSet(int featureID, Any newValue)
+bool ActionInputPinImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -531,7 +531,7 @@ bool ActionInputPinImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any ActionInputPinImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any ActionInputPinImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

@@ -92,8 +92,8 @@ namespace ocl::Expressions
 			//*********************************
 			// Reference Getters & Setters
 			//*********************************
-			virtual std::shared_ptr<ecore::EReference> getReferredAssociationClass() const = 0;
-			virtual void setReferredAssociationClass(std::shared_ptr<ecore::EReference>) = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getReferredAssociationClass() const = 0;
+			virtual void setReferredAssociationClass(const std::shared_ptr<ecore::EReference>&) = 0;
 
 			//*********************************
 			// Union Reference Getters

@@ -157,12 +157,12 @@ std::shared_ptr<ecore::EObject> AddVariableValueActionImpl::copy() const
 //*********************************
 // Operations
 //*********************************
-bool AddVariableValueActionImpl::insertAt_pin(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool AddVariableValueActionImpl::insertAt_pin(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool AddVariableValueActionImpl::required_value(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool AddVariableValueActionImpl::required_value(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -171,7 +171,7 @@ bool AddVariableValueActionImpl::required_value(Any diagnostics,std::shared_ptr<
 // Attribute Getters & Setters
 //*********************************
 /* Getter & Setter for attribute isReplaceAll */
-bool AddVariableValueActionImpl::getIsReplaceAll() const 
+bool AddVariableValueActionImpl::getIsReplaceAll() const
 {
 	return m_isReplaceAll;
 }
@@ -185,11 +185,11 @@ void AddVariableValueActionImpl::setIsReplaceAll(bool _isReplaceAll)
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference insertAt */
-std::shared_ptr<uml::InputPin> AddVariableValueActionImpl::getInsertAt() const
+const std::shared_ptr<uml::InputPin>& AddVariableValueActionImpl::getInsertAt() const
 {
     return m_insertAt;
 }
-void AddVariableValueActionImpl::setInsertAt(std::shared_ptr<uml::InputPin> _insertAt)
+void AddVariableValueActionImpl::setInsertAt(const std::shared_ptr<uml::InputPin>& _insertAt)
 {
     m_insertAt = _insertAt;
 	
@@ -423,7 +423,7 @@ void AddVariableValueActionImpl::saveContent(std::shared_ptr<persistence::interf
 	}
 }
 
-std::shared_ptr<ecore::EClass> AddVariableValueActionImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& AddVariableValueActionImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getAddVariableValueAction_Class();
 }
@@ -455,7 +455,7 @@ bool AddVariableValueActionImpl::internalEIsSet(int featureID) const
 	return WriteVariableActionImpl::internalEIsSet(featureID);
 }
 
-bool AddVariableValueActionImpl::eSet(int featureID, Any newValue)
+bool AddVariableValueActionImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -482,7 +482,7 @@ bool AddVariableValueActionImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any AddVariableValueActionImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any AddVariableValueActionImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

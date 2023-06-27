@@ -47,7 +47,7 @@ namespace fUML::Semantics::Actions
 			//*********************************
 			virtual void doAction() ;
 			virtual std::shared_ptr<fUML::Semantics::CommonBehavior::Execution> getCallExecution() ;
-			virtual void removeCallExecution(std::shared_ptr<fUML::Semantics::CommonBehavior::Execution> execution) ;
+			virtual void removeCallExecution(const std::shared_ptr<fUML::Semantics::CommonBehavior::Execution>& execution) ;
 			virtual void terminate() ;
 			
 			//*********************************
@@ -57,13 +57,13 @@ namespace fUML::Semantics::Actions
 			//*********************************
 			// Reference Getters & Setters
 			//*********************************
-			virtual std::shared_ptr<uml::CallAction> getCallAction() const ;
-			virtual void setCallAction(std::shared_ptr<uml::CallAction>) ;
+			virtual const std::shared_ptr<uml::CallAction>& getCallAction() const ;
+			virtual void setCallAction(const std::shared_ptr<uml::CallAction>&) ;
 			/*Additional Setter for 'ActionActivation::action' redefined by reference 'callAction'*/
-			virtual void setAction(std::shared_ptr<uml::Action>) ;
+			virtual void setAction(const std::shared_ptr<uml::Action>&) ;
 			/*Additional Setter for 'ActivityNodeActivation::node' redefined by reference 'callAction'*/
-			virtual void setNode(std::shared_ptr<uml::ActivityNode>) ;
-			virtual std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::Execution>> getCallExecutions() const ;
+			virtual void setNode(const std::shared_ptr<uml::ActivityNode>&) ;
+			virtual const std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::Execution>>& getCallExecutions() const ;
 			
 			//*********************************
 			// Union Reference Getters
@@ -86,19 +86,19 @@ namespace fUML::Semantics::Actions
 			virtual void saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const;
 
 		protected:
-			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
+			virtual const std::shared_ptr<ecore::EClass>& eStaticClass() const;
 
 			//*********************************
 			// EStructuralFeature Get/Set/IsSet
 			//*********************************
 			virtual Any eGet(int featureID, bool resolve, bool coreType) const ;
-			virtual bool eSet(int featureID, Any newValue) ;
+			virtual bool eSet(int featureID, const Any& newValue) ;
 			virtual bool internalEIsSet(int featureID) const ;
 
 			//*********************************
 			// EOperation Invoke
 			//*********************************
-			virtual Any eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments) ;
+			virtual Any eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments) ;
 
 		private:
 			std::weak_ptr<fUML::Semantics::Actions::CallActionActivation> m_thisCallActionActivationPtr;

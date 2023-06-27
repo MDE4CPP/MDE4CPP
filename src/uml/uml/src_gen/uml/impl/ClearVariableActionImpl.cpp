@@ -311,7 +311,7 @@ void ClearVariableActionImpl::saveContent(std::shared_ptr<persistence::interface
 	}
 }
 
-std::shared_ptr<ecore::EClass> ClearVariableActionImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& ClearVariableActionImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getClearVariableAction_Class();
 }
@@ -335,7 +335,7 @@ bool ClearVariableActionImpl::internalEIsSet(int featureID) const
 	return VariableActionImpl::internalEIsSet(featureID);
 }
 
-bool ClearVariableActionImpl::eSet(int featureID, Any newValue)
+bool ClearVariableActionImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -347,7 +347,7 @@ bool ClearVariableActionImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any ClearVariableActionImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any ClearVariableActionImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

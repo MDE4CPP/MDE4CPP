@@ -120,7 +120,7 @@ namespace uml
 			self.ownedParameter->select(direction = ParameterDirectionKind::return)->size() <= 1
 			*/
 			 
-			virtual bool at_most_one_return(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
+			virtual bool at_most_one_return(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context) = 0;
 			/*!
 			If this operation has a return parameter, lower equals the value of lower for that parameter. Otherwise lower has no value.
 			result = (if returnResult()->notEmpty() then returnResult()->any(true).lower else null endif)
@@ -155,13 +155,13 @@ namespace uml
 			*/
 			 
 			virtual bool isUnique() = 0;
-			virtual bool matches(std::shared_ptr<uml::Operation> comparedOperation) = 0;
+			virtual bool matches(const std::shared_ptr<uml::Operation>& comparedOperation) = 0;
 			/*!
 			A bodyCondition can only be specified for a query Operation.
 			bodyCondition <> null implies isQuery
 			*/
 			 
-			virtual bool only_body_for_query(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
+			virtual bool only_body_for_query(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context) = 0;
 			/*!
 			The query returnResult() returns the set containing the return parameter of the Operation if one exists, otherwise, it returns an empty set
 			result = (ownedParameter->select (direction = ParameterDirectionKind::return)->asSet())
@@ -172,7 +172,7 @@ namespace uml
 			virtual void setIsOrdered(bool newIsOrdered) = 0;
 			virtual void setIsUnique(bool newIsUnique) = 0;
 			virtual void setLower(int newLower) = 0;
-			virtual void setType(std::shared_ptr<uml::Type> newType) = 0;
+			virtual void setType(const std::shared_ptr<uml::Type>& newType) = 0;
 			virtual void setUpper(int newUpper) = 0;
 
 			//*********************************
@@ -223,13 +223,13 @@ namespace uml
 			<p>From package UML::Classification.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::Constraint> getBodyCondition() const = 0;
+			virtual const std::shared_ptr<uml::Constraint>& getBodyCondition() const = 0;
 			/*!
 			An optional Constraint on the result values of an invocation of this Operation.
 			<p>From package UML::Classification.</p>
 			*/
 			
-			virtual void setBodyCondition(std::shared_ptr<uml::Constraint>) = 0;
+			virtual void setBodyCondition(const std::shared_ptr<uml::Constraint>&) = 0;
 			/*!
 			The Class that owns this operation, if any.
 			<p>From package UML::Classification.</p>
@@ -266,31 +266,31 @@ namespace uml
 			*/
 			
 			virtual void setInterface(std::weak_ptr<uml::Interface>) = 0;
-			virtual std::shared_ptr<Bag<uml::Parameter>> getProperty_OwnedParameter() const = 0;
+			virtual const std::shared_ptr<Bag<uml::Parameter>>& getProperty_OwnedParameter() const = 0;
 			/*!
 			An optional set of Constraints specifying the state of the system when the Operation is completed.
 			<p>From package UML::Classification.</p>
 			*/
 			
-			virtual std::shared_ptr<Subset<uml::Constraint, uml::Constraint /*Subset does not reference a union*/>> getPostcondition() const = 0;
+			virtual const std::shared_ptr<Subset<uml::Constraint, uml::Constraint /*Subset does not reference a union*/>>& getPostcondition() const = 0;
 			/*!
 			An optional set of Constraints on the state of the system when the Operation is invoked.
 			<p>From package UML::Classification.</p>
 			*/
 			
-			virtual std::shared_ptr<Subset<uml::Constraint, uml::Constraint /*Subset does not reference a union*/>> getPrecondition() const = 0;
+			virtual const std::shared_ptr<Subset<uml::Constraint, uml::Constraint /*Subset does not reference a union*/>>& getPrecondition() const = 0;
 			/*!
 			The Operations that are redefined by this Operation.
 			<p>From package UML::Classification.</p>
 			*/
 			
-			virtual std::shared_ptr<Subset<uml::Operation, uml::RedefinableElement>> getRedefinedOperation() const = 0;
+			virtual const std::shared_ptr<Subset<uml::Operation, uml::RedefinableElement>>& getRedefinedOperation() const = 0;
 			/*!
 			The return type of the operation, if present. This information is derived from the return result for this Operation.
 			<p>From package UML::Classification.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::Type> getType() const = 0;
+			virtual const std::shared_ptr<uml::Type>& getType() const = 0;
 
 			//*********************************
 			// Union Reference Getters

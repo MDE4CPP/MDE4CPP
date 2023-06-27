@@ -109,7 +109,7 @@ std::shared_ptr<ecore::EObject> NameValueBindingImpl::copy() const
 // Attribute Getters & Setters
 //*********************************
 /* Getter & Setter for attribute name */
-std::string NameValueBindingImpl::getName() const 
+std::string NameValueBindingImpl::getName() const
 {
 	return m_name;
 }
@@ -123,11 +123,11 @@ void NameValueBindingImpl::setName(std::string _name)
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference value */
-std::shared_ptr<fUML::Semantics::Values::Value> NameValueBindingImpl::getValue() const
+const std::shared_ptr<fUML::Semantics::Values::Value>& NameValueBindingImpl::getValue() const
 {
     return m_value;
 }
-void NameValueBindingImpl::setValue(std::shared_ptr<fUML::Semantics::Values::Value> _value)
+void NameValueBindingImpl::setValue(const std::shared_ptr<fUML::Semantics::Values::Value>& _value)
 {
     m_value = _value;
 	
@@ -249,7 +249,7 @@ void NameValueBindingImpl::saveContent(std::shared_ptr<persistence::interfaces::
 	}
 }
 
-std::shared_ptr<ecore::EClass> NameValueBindingImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& NameValueBindingImpl::eStaticClass() const
 {
 	return ocl::Values::ValuesPackage::eInstance()->getNameValueBinding_Class();
 }
@@ -281,7 +281,7 @@ bool NameValueBindingImpl::internalEIsSet(int featureID) const
 	return ecore::EObjectImpl::internalEIsSet(featureID);
 }
 
-bool NameValueBindingImpl::eSet(int featureID, Any newValue)
+bool NameValueBindingImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -308,7 +308,7 @@ bool NameValueBindingImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any NameValueBindingImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any NameValueBindingImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

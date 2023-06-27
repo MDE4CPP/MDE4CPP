@@ -109,7 +109,7 @@ std::shared_ptr<ecore::EObject> ElementImpl::copy() const
 // Attribute Getters & Setters
 //*********************************
 /* Getter & Setter for attribute indexNr */
-int ElementImpl::getIndexNr() const 
+int ElementImpl::getIndexNr() const
 {
 	return m_indexNr;
 }
@@ -123,11 +123,11 @@ void ElementImpl::setIndexNr(int _indexNr)
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference value */
-std::shared_ptr<fUML::Semantics::Values::Value> ElementImpl::getValue() const
+const std::shared_ptr<fUML::Semantics::Values::Value>& ElementImpl::getValue() const
 {
     return m_value;
 }
-void ElementImpl::setValue(std::shared_ptr<fUML::Semantics::Values::Value> _value)
+void ElementImpl::setValue(const std::shared_ptr<fUML::Semantics::Values::Value>& _value)
 {
     m_value = _value;
 	
@@ -249,7 +249,7 @@ void ElementImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHand
 	}
 }
 
-std::shared_ptr<ecore::EClass> ElementImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& ElementImpl::eStaticClass() const
 {
 	return ocl::Values::ValuesPackage::eInstance()->getElement_Class();
 }
@@ -281,7 +281,7 @@ bool ElementImpl::internalEIsSet(int featureID) const
 	return ecore::EObjectImpl::internalEIsSet(featureID);
 }
 
-bool ElementImpl::eSet(int featureID, Any newValue)
+bool ElementImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -308,7 +308,7 @@ bool ElementImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any ElementImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any ElementImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

@@ -144,7 +144,7 @@ std::shared_ptr<ecore::EObject> OccurrenceSpecificationImpl::copy() const
 //*********************************
 
 
-void OccurrenceSpecificationImpl::setCovered(std::shared_ptr<uml::Lifeline> value)
+void OccurrenceSpecificationImpl::setCovered(const std::shared_ptr<uml::Lifeline>& value)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -157,7 +157,7 @@ void OccurrenceSpecificationImpl::setCovered(std::shared_ptr<uml::Lifeline> valu
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference toAfter */
-std::shared_ptr<Bag<uml::GeneralOrdering>> OccurrenceSpecificationImpl::getToAfter() const
+const std::shared_ptr<Bag<uml::GeneralOrdering>>& OccurrenceSpecificationImpl::getToAfter() const
 {
 	if(m_toAfter == nullptr)
 	{
@@ -169,7 +169,7 @@ std::shared_ptr<Bag<uml::GeneralOrdering>> OccurrenceSpecificationImpl::getToAft
 }
 
 /* Getter & Setter for reference toBefore */
-std::shared_ptr<Bag<uml::GeneralOrdering>> OccurrenceSpecificationImpl::getToBefore() const
+const std::shared_ptr<Bag<uml::GeneralOrdering>>& OccurrenceSpecificationImpl::getToBefore() const
 {
 	if(m_toBefore == nullptr)
 	{
@@ -358,7 +358,7 @@ void OccurrenceSpecificationImpl::saveContent(std::shared_ptr<persistence::inter
 	}
 }
 
-std::shared_ptr<ecore::EClass> OccurrenceSpecificationImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& OccurrenceSpecificationImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getOccurrenceSpecification_Class();
 }
@@ -390,7 +390,7 @@ bool OccurrenceSpecificationImpl::internalEIsSet(int featureID) const
 	return InteractionFragmentImpl::internalEIsSet(featureID);
 }
 
-bool OccurrenceSpecificationImpl::eSet(int featureID, Any newValue)
+bool OccurrenceSpecificationImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -476,7 +476,7 @@ bool OccurrenceSpecificationImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any OccurrenceSpecificationImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any OccurrenceSpecificationImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

@@ -43,10 +43,10 @@ namespace PSCS::Semantics::StructuredClassifiers
 			//*********************************
 			// Operations
 			//*********************************
-			virtual bool checkAllParents(std::shared_ptr<uml::Classifier> type,std::shared_ptr<uml::Classifier> classifier) ;
-			virtual std::shared_ptr<fUML::Semantics::CommonBehavior::Execution> dispatch(std::shared_ptr<uml::Operation> operation) ;
-			virtual void send(std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccurrence> eventOccurrence) ;
-			virtual void startBehavior(std::shared_ptr<uml::Class> classifier,std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> inputs) ;
+			virtual bool checkAllParents(const std::shared_ptr<uml::Classifier>& type, const std::shared_ptr<uml::Classifier>& classifier) ;
+			virtual std::shared_ptr<fUML::Semantics::CommonBehavior::Execution> dispatch(const std::shared_ptr<uml::Operation>& operation) ;
+			virtual void send(const std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccurrence>& eventOccurrence) ;
+			virtual void startBehavior(const std::shared_ptr<uml::Class>& classifier, const std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>>& inputs) ;
 			
 			//*********************************
 			// Attribute Getters & Setters
@@ -55,10 +55,10 @@ namespace PSCS::Semantics::StructuredClassifiers
 			//*********************************
 			// Reference Getters & Setters
 			//*********************************
-			virtual std::shared_ptr<uml::Port> getDefiningPort() const ;
-			virtual void setDefiningPort(std::shared_ptr<uml::Port>) ;
-			virtual std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Reference> getOwner() const ;
-			virtual void setOwner(std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Reference>) ;
+			virtual const std::shared_ptr<uml::Port>& getDefiningPort() const ;
+			virtual void setDefiningPort(const std::shared_ptr<uml::Port>&) ;
+			virtual const std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Reference>& getOwner() const ;
+			virtual void setOwner(const std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Reference>&) ;
 			
 			//*********************************
 			// Union Reference Getters
@@ -80,19 +80,19 @@ namespace PSCS::Semantics::StructuredClassifiers
 			virtual void saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const;
 
 		protected:
-			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
+			virtual const std::shared_ptr<ecore::EClass>& eStaticClass() const;
 
 			//*********************************
 			// EStructuralFeature Get/Set/IsSet
 			//*********************************
 			virtual Any eGet(int featureID, bool resolve, bool coreType) const ;
-			virtual bool eSet(int featureID, Any newValue) ;
+			virtual bool eSet(int featureID, const Any& newValue) ;
 			virtual bool internalEIsSet(int featureID) const ;
 
 			//*********************************
 			// EOperation Invoke
 			//*********************************
-			virtual Any eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments) ;
+			virtual Any eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments) ;
 
 		private:
 			std::weak_ptr<PSCS::Semantics::StructuredClassifiers::CS_InteractionPoint> m_thisCS_InteractionPointPtr;

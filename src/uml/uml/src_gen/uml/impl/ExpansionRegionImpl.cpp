@@ -183,7 +183,7 @@ std::shared_ptr<ecore::EObject> ExpansionRegionImpl::copy() const
 // Attribute Getters & Setters
 //*********************************
 /* Getter & Setter for attribute mode */
-uml::ExpansionKind ExpansionRegionImpl::getMode() const 
+uml::ExpansionKind ExpansionRegionImpl::getMode() const
 {
 	return m_mode;
 }
@@ -197,7 +197,7 @@ void ExpansionRegionImpl::setMode(uml::ExpansionKind _mode)
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference inputElement */
-std::shared_ptr<Bag<uml::ExpansionNode>> ExpansionRegionImpl::getInputElement() const
+const std::shared_ptr<Bag<uml::ExpansionNode>>& ExpansionRegionImpl::getInputElement() const
 {
 	if(m_inputElement == nullptr)
 	{
@@ -209,7 +209,7 @@ std::shared_ptr<Bag<uml::ExpansionNode>> ExpansionRegionImpl::getInputElement() 
 }
 
 /* Getter & Setter for reference outputElement */
-std::shared_ptr<Bag<uml::ExpansionNode>> ExpansionRegionImpl::getOutputElement() const
+const std::shared_ptr<Bag<uml::ExpansionNode>>& ExpansionRegionImpl::getOutputElement() const
 {
 	if(m_outputElement == nullptr)
 	{
@@ -587,7 +587,7 @@ void ExpansionRegionImpl::saveContent(std::shared_ptr<persistence::interfaces::X
 	}
 }
 
-std::shared_ptr<ecore::EClass> ExpansionRegionImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& ExpansionRegionImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getExpansionRegion_Class();
 }
@@ -623,7 +623,7 @@ bool ExpansionRegionImpl::internalEIsSet(int featureID) const
 	return StructuredActivityNodeImpl::internalEIsSet(featureID);
 }
 
-bool ExpansionRegionImpl::eSet(int featureID, Any newValue)
+bool ExpansionRegionImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -716,7 +716,7 @@ bool ExpansionRegionImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any ExpansionRegionImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any ExpansionRegionImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

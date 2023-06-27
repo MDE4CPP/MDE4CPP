@@ -55,25 +55,25 @@ namespace uml
 			not classifier.isAbstract
 			*/
 			 
-			virtual bool classifier_not_abstract(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
+			virtual bool classifier_not_abstract(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context) ;
 			/*!
 			The classifier cannot be an AssociationClass.
 			not classifier.oclIsKindOf(AssociationClass)
 			*/
 			 
-			virtual bool classifier_not_association_class(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
+			virtual bool classifier_not_association_class(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context) ;
 			/*!
 			The multiplicity of the result OutputPin is 1..1.
 			result.is(1,1)
 			*/
 			 
-			virtual bool multiplicity(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
+			virtual bool multiplicity(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context) ;
 			/*!
 			The type of the result OutputPin must be the same as the classifier of the CreateObjectAction.
 			result.type = classifier
 			*/
 			 
-			virtual bool same_type(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
+			virtual bool same_type(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context) ;
 			
 			//*********************************
 			// Attribute Getters & Setters
@@ -87,25 +87,25 @@ namespace uml
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::Classifier> getClassifier() const ;
+			virtual const std::shared_ptr<uml::Classifier>& getClassifier() const ;
 			/*!
 			The Classifier to be instantiated.
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual void setClassifier(std::shared_ptr<uml::Classifier>) ;
+			virtual void setClassifier(const std::shared_ptr<uml::Classifier>&) ;
 			/*!
 			The OutputPin on which the newly created object is placed.
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::OutputPin> getResult() const ;
+			virtual const std::shared_ptr<uml::OutputPin>& getResult() const ;
 			/*!
 			The OutputPin on which the newly created object is placed.
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual void setResult(std::shared_ptr<uml::OutputPin>) ;
+			virtual void setResult(const std::shared_ptr<uml::OutputPin>&) ;
 			
 			//*********************************
 			// Union Reference Getters
@@ -157,19 +157,19 @@ namespace uml
 			virtual void saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const;
 
 		protected:
-			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
+			virtual const std::shared_ptr<ecore::EClass>& eStaticClass() const;
 
 			//*********************************
 			// EStructuralFeature Get/Set/IsSet
 			//*********************************
 			virtual Any eGet(int featureID, bool resolve, bool coreType) const ;
-			virtual bool eSet(int featureID, Any newValue) ;
+			virtual bool eSet(int featureID, const Any& newValue) ;
 			virtual bool internalEIsSet(int featureID) const ;
 
 			//*********************************
 			// EOperation Invoke
 			//*********************************
-			virtual Any eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments) ;
+			virtual Any eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments) ;
 
 		private:
 			std::weak_ptr<uml::CreateObjectAction> m_thisCreateObjectActionPtr;

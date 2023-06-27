@@ -229,7 +229,7 @@ std::shared_ptr<ecore::EObject> InputPinImpl::copy() const
 //*********************************
 // Operations
 //*********************************
-bool InputPinImpl::outgoing_edges_structured_only(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool InputPinImpl::outgoing_edges_structured_only(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -602,7 +602,7 @@ void InputPinImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHan
 	}
 }
 
-std::shared_ptr<ecore::EClass> InputPinImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& InputPinImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getInputPin_Class();
 }
@@ -682,7 +682,7 @@ bool InputPinImpl::internalEIsSet(int featureID) const
 	return PinImpl::internalEIsSet(featureID);
 }
 
-bool InputPinImpl::eSet(int featureID, Any newValue)
+bool InputPinImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -750,7 +750,7 @@ bool InputPinImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any InputPinImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any InputPinImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

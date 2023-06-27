@@ -333,7 +333,7 @@ void DestroyLinkActionImpl::saveContent(std::shared_ptr<persistence::interfaces:
 	}
 }
 
-std::shared_ptr<ecore::EClass> DestroyLinkActionImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& DestroyLinkActionImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getDestroyLinkAction_Class();
 }
@@ -357,7 +357,7 @@ bool DestroyLinkActionImpl::internalEIsSet(int featureID) const
 	return WriteLinkActionImpl::internalEIsSet(featureID);
 }
 
-bool DestroyLinkActionImpl::eSet(int featureID, Any newValue)
+bool DestroyLinkActionImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -369,7 +369,7 @@ bool DestroyLinkActionImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any DestroyLinkActionImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any DestroyLinkActionImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

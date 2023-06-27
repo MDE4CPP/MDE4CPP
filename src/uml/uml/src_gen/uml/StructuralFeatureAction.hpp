@@ -97,26 +97,26 @@ namespace uml
 			object.is(1,1)
 			*/
 			 
-			virtual bool multiplicity(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
+			virtual bool multiplicity(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context) = 0;
 			/*!
 			The structuralFeature must not be static.
 			not structuralFeature.isStatic
 			*/
 			 
-			virtual bool not_static(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
+			virtual bool not_static(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context) = 0;
 			/*!
 			The structuralFeature must either be an owned or inherited feature of the type of the object InputPin, or it must be an owned end of a binary Association whose opposite end had as a type to which the type of the object InputPin conforms.
 			object.type.oclAsType(Classifier).allFeatures()->includes(structuralFeature) or
 				object.type.conformsTo(structuralFeature.oclAsType(Property).opposite.type)
 			*/
 			 
-			virtual bool object_type(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
+			virtual bool object_type(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context) = 0;
 			/*!
 			The structuralFeature must have exactly one featuringClassifier.
 			structuralFeature.featuringClassifier->size() = 1
 			*/
 			 
-			virtual bool one_featuring_classifier(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
+			virtual bool one_featuring_classifier(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context) = 0;
 			/*!
 			The visibility of the structuralFeature must allow access from the object performing the ReadStructuralFeatureAction.
 			structuralFeature.visibility = VisibilityKind::public or
@@ -125,7 +125,7 @@ namespace uml
 			_'context'.conformsTo(structuralFeature.oclAsType(Property).opposite.type.oclAsType(Classifier))
 			*/
 			 
-			virtual bool visibility(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
+			virtual bool visibility(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context) = 0;
 
 			//*********************************
 			// Attribute Getters & Setters
@@ -139,25 +139,25 @@ namespace uml
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::InputPin> getObject() const = 0;
+			virtual const std::shared_ptr<uml::InputPin>& getObject() const = 0;
 			/*!
 			The InputPin from which the object whose StructuralFeature is to be read or written is obtained.
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual void setObject(std::shared_ptr<uml::InputPin>) = 0;
+			virtual void setObject(const std::shared_ptr<uml::InputPin>&) = 0;
 			/*!
 			The StructuralFeature to be read or written.
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::StructuralFeature> getStructuralFeature() const = 0;
+			virtual const std::shared_ptr<uml::StructuralFeature>& getStructuralFeature() const = 0;
 			/*!
 			The StructuralFeature to be read or written.
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual void setStructuralFeature(std::shared_ptr<uml::StructuralFeature>) = 0;
+			virtual void setStructuralFeature(const std::shared_ptr<uml::StructuralFeature>&) = 0;
 
 			//*********************************
 			// Union Reference Getters

@@ -122,11 +122,11 @@ std::shared_ptr<ecore::EObject> TupleLiteralPartImpl::copy() const
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference attribute */
-std::shared_ptr<ecore::EAttribute> TupleLiteralPartImpl::getAttribute() const
+const std::shared_ptr<ecore::EAttribute>& TupleLiteralPartImpl::getAttribute() const
 {
     return m_attribute;
 }
-void TupleLiteralPartImpl::setAttribute(std::shared_ptr<ecore::EAttribute> _attribute)
+void TupleLiteralPartImpl::setAttribute(const std::shared_ptr<ecore::EAttribute>& _attribute)
 {
     m_attribute = _attribute;
 	
@@ -235,7 +235,7 @@ void TupleLiteralPartImpl::saveContent(std::shared_ptr<persistence::interfaces::
 	}
 }
 
-std::shared_ptr<ecore::EClass> TupleLiteralPartImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& TupleLiteralPartImpl::eStaticClass() const
 {
 	return ocl::Expressions::ExpressionsPackage::eInstance()->getTupleLiteralPart_Class();
 }
@@ -263,7 +263,7 @@ bool TupleLiteralPartImpl::internalEIsSet(int featureID) const
 	return ecore::ETypedElementImpl::internalEIsSet(featureID);
 }
 
-bool TupleLiteralPartImpl::eSet(int featureID, Any newValue)
+bool TupleLiteralPartImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -283,7 +283,7 @@ bool TupleLiteralPartImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any TupleLiteralPartImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any TupleLiteralPartImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

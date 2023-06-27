@@ -55,26 +55,26 @@ namespace uml
 			_'context' <> null
 			*/
 			 
-			virtual bool contained(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
+			virtual bool contained(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context) ;
 			/*!
 			The multiplicity of the result OutputPin is 1..1.
 			result.is(1,1)
 			*/
 			 
-			virtual bool multiplicity(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
+			virtual bool multiplicity(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context) ;
 			/*!
 			If the ReadSelfAction is contained in an Behavior that is acting as a method, then the Operation of the method must not be static.
 			let behavior: Behavior = self.containingBehavior() in
 			behavior.specification<>null implies not behavior.specification.isStatic
 			*/
 			 
-			virtual bool not_static(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
+			virtual bool not_static(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context) ;
 			/*!
 			The type of the result OutputPin is the context Classifier.
 			result.type = _'context'
 			*/
 			 
-			virtual bool type(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
+			virtual bool type(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context) ;
 			
 			//*********************************
 			// Attribute Getters & Setters
@@ -88,13 +88,13 @@ namespace uml
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::OutputPin> getResult() const ;
+			virtual const std::shared_ptr<uml::OutputPin>& getResult() const ;
 			/*!
 			The OutputPin on which the context object is placed.
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual void setResult(std::shared_ptr<uml::OutputPin>) ;
+			virtual void setResult(const std::shared_ptr<uml::OutputPin>&) ;
 			
 			//*********************************
 			// Union Reference Getters
@@ -146,19 +146,19 @@ namespace uml
 			virtual void saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const;
 
 		protected:
-			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
+			virtual const std::shared_ptr<ecore::EClass>& eStaticClass() const;
 
 			//*********************************
 			// EStructuralFeature Get/Set/IsSet
 			//*********************************
 			virtual Any eGet(int featureID, bool resolve, bool coreType) const ;
-			virtual bool eSet(int featureID, Any newValue) ;
+			virtual bool eSet(int featureID, const Any& newValue) ;
 			virtual bool internalEIsSet(int featureID) const ;
 
 			//*********************************
 			// EOperation Invoke
 			//*********************************
-			virtual Any eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments) ;
+			virtual Any eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments) ;
 
 		private:
 			std::weak_ptr<uml::ReadSelfAction> m_thisReadSelfActionPtr;

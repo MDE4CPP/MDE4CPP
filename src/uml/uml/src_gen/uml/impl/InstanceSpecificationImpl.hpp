@@ -57,25 +57,25 @@ namespace uml
 			slot->forAll(s | classifier->exists (c | c.allSlottableFeatures()->includes (s.definingFeature)))
 			*/
 			 
-			virtual bool defining_feature(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
+			virtual bool defining_feature(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context) ;
 			/*!
 			An InstanceSpecification can act as a DeployedArtifact if it represents an instance of an Artifact.
 			deploymentForArtifact->notEmpty() implies classifier->exists(oclIsKindOf(Artifact))
 			*/
 			 
-			virtual bool deployment_artifact(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
+			virtual bool deployment_artifact(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context) ;
 			/*!
 			An InstanceSpecification can act as a DeploymentTarget if it represents an instance of a Node and functions as a part in the internal structure of an encompassing Node.
 			deployment->notEmpty() implies classifier->exists(node | node.oclIsKindOf(Node) and Node.allInstances()->exists(n | n.part->exists(p | p.type = node)))
 			*/
 			 
-			virtual bool deployment_target(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
+			virtual bool deployment_target(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context) ;
 			/*!
 			No more than one slot in an InstanceSpecification may have the same definingFeature.
 			classifier->forAll(c | (c.allSlottableFeatures()->forAll(f | slot->select(s | s.definingFeature = f)->size() <= 1)))
 			*/
 			 
-			virtual bool structural_feature(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
+			virtual bool structural_feature(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context) ;
 			
 			//*********************************
 			// Attribute Getters & Setters
@@ -89,25 +89,25 @@ namespace uml
 			<p>From package UML::Classification.</p>
 			*/
 			
-			virtual std::shared_ptr<Bag<uml::Classifier>> getClassifier() const ;
+			virtual const std::shared_ptr<Bag<uml::Classifier>>& getClassifier() const ;
 			/*!
 			A Slot giving the value or values of a StructuralFeature of the instance. An InstanceSpecification can have one Slot per StructuralFeature of its Classifiers, including inherited features. It is not necessary to model a Slot for every StructuralFeature, in which case the InstanceSpecification is a partial description.
 			<p>From package UML::Classification.</p>
 			*/
 			
-			virtual std::shared_ptr<Subset<uml::Slot, uml::Element>> getSlot() const ;
+			virtual const std::shared_ptr<Subset<uml::Slot, uml::Element>>& getSlot() const ;
 			/*!
 			A specification of how to compute, derive, or construct the instance.
 			<p>From package UML::Classification.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::ValueSpecification> getSpecification() const ;
+			virtual const std::shared_ptr<uml::ValueSpecification>& getSpecification() const ;
 			/*!
 			A specification of how to compute, derive, or construct the instance.
 			<p>From package UML::Classification.</p>
 			*/
 			
-			virtual void setSpecification(std::shared_ptr<uml::ValueSpecification>) ;
+			virtual void setSpecification(const std::shared_ptr<uml::ValueSpecification>&) ;
 			
 			//*********************************
 			// Union Reference Getters
@@ -148,19 +148,19 @@ namespace uml
 			virtual void saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const;
 
 		protected:
-			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
+			virtual const std::shared_ptr<ecore::EClass>& eStaticClass() const;
 
 			//*********************************
 			// EStructuralFeature Get/Set/IsSet
 			//*********************************
 			virtual Any eGet(int featureID, bool resolve, bool coreType) const ;
-			virtual bool eSet(int featureID, Any newValue) ;
+			virtual bool eSet(int featureID, const Any& newValue) ;
 			virtual bool internalEIsSet(int featureID) const ;
 
 			//*********************************
 			// EOperation Invoke
 			//*********************************
-			virtual Any eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments) ;
+			virtual Any eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments) ;
 
 		private:
 			std::weak_ptr<uml::InstanceSpecification> m_thisInstanceSpecificationPtr;

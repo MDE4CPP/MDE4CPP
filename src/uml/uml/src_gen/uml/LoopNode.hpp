@@ -98,25 +98,25 @@ namespace uml
 			bodyPart.oclAsType(Action).allActions().output->includesAll(bodyOutput)
 			*/
 			 
-			virtual bool body_output_pins(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
+			virtual bool body_output_pins(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context) = 0;
 			/*!
 			The union of the ExecutableNodes in the setupPart, test and bodyPart of a LoopNode must be the same as the subset of nodes contained in the LoopNode (considered as a StructuredActivityNode) that are ExecutableNodes.
 			setupPart->union(test)->union(bodyPart)=node->select(oclIsKindOf(ExecutableNode)).oclAsType(ExecutableNode)->asSet()
 			*/
 			 
-			virtual bool executable_nodes(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
+			virtual bool executable_nodes(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context) = 0;
 			/*!
 			The loopVariableInputs must not have outgoing edges.
 			loopVariableInput.outgoing->isEmpty()
 			*/
 			 
-			virtual bool input_edges(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
+			virtual bool input_edges(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context) = 0;
 			/*!
 			All ActivityEdges outgoing from loopVariable OutputPins must have targets within the LoopNode.
 			allOwnedNodes()->includesAll(loopVariable.outgoing.target)
 			*/
 			 
-			virtual bool loop_variable_outgoing(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
+			virtual bool loop_variable_outgoing(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context) = 0;
 			/*!
 			A LoopNode must have the same number of loopVariableInputs and loopVariables, and they must match in type, uniqueness and multiplicity.
 			loopVariableInput->size()=loopVariable->size() and
@@ -126,7 +126,7 @@ namespace uml
 			loopVariableInput.upper=loopVariable.upper
 			*/
 			 
-			virtual bool matching_loop_variables(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
+			virtual bool matching_loop_variables(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context) = 0;
 			/*!
 			A LoopNode must have the same number of bodyOutput Pins as loopVariables, and each bodyOutput Pin must be compatible with the corresponding loopVariable (by positional order) in type, multiplicity, ordering and uniqueness.
 			bodyOutput->size()=loopVariable->size() and
@@ -137,7 +137,7 @@ namespace uml
 				loopVariable->at(i).includesMultiplicity(bodyOutput->at(i)))
 			*/
 			 
-			virtual bool matching_output_pins(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
+			virtual bool matching_output_pins(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context) = 0;
 			/*!
 			A LoopNode must have the same number of result OutputPins and loopVariables, and they must match in type, uniqueness and multiplicity.
 			result->size()=loopVariable->size() and
@@ -147,13 +147,13 @@ namespace uml
 			result.upper=loopVariable.upper
 			*/
 			 
-			virtual bool matching_result_pins(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
+			virtual bool matching_result_pins(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context) = 0;
 			/*!
 			The result OutputPins have no incoming edges.
 			result.incoming->isEmpty()
 			*/
 			 
-			virtual bool result_no_incoming(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
+			virtual bool result_no_incoming(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context) = 0;
 			/*!
 			The test and body parts of a ConditionalNode must be disjoint with each other.
 			setupPart->intersection(test)->isEmpty() and
@@ -161,7 +161,7 @@ namespace uml
 			test->intersection(bodyPart)->isEmpty()
 			*/
 			 
-			virtual bool setup_test_and_body(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
+			virtual bool setup_test_and_body(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context) = 0;
 
 			//*********************************
 			// Attribute Getters & Setters
@@ -187,55 +187,55 @@ namespace uml
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual std::shared_ptr<Bag<uml::OutputPin>> getBodyOutput() const = 0;
+			virtual const std::shared_ptr<Bag<uml::OutputPin>>& getBodyOutput() const = 0;
 			/*!
 			The set of ExecutableNodes that perform the repetitive computations of the loop. The bodyPart is executed as long as the test section produces a true value.
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual std::shared_ptr<Bag<uml::ExecutableNode>> getBodyPart() const = 0;
+			virtual const std::shared_ptr<Bag<uml::ExecutableNode>>& getBodyPart() const = 0;
 			/*!
 			An OutputPin on an Action in the test section whose Boolean value determines whether to continue executing the loop bodyPart.
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::OutputPin> getDecider() const = 0;
+			virtual const std::shared_ptr<uml::OutputPin>& getDecider() const = 0;
 			/*!
 			An OutputPin on an Action in the test section whose Boolean value determines whether to continue executing the loop bodyPart.
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual void setDecider(std::shared_ptr<uml::OutputPin>) = 0;
+			virtual void setDecider(const std::shared_ptr<uml::OutputPin>&) = 0;
 			/*!
 			A list of OutputPins that hold the values of the loop variables during an execution of the loop. When the test fails, the values are moved to the result OutputPins of the loop.
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual std::shared_ptr<Subset<uml::OutputPin, uml::Element>> getLoopVariable() const = 0;
+			virtual const std::shared_ptr<Subset<uml::OutputPin, uml::Element>>& getLoopVariable() const = 0;
 			/*!
 			A list of InputPins whose values are moved into the loopVariable Pins before the first iteration of the loop.
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual std::shared_ptr<Bag<uml::InputPin>> getLoopVariableInput() const = 0;
+			virtual const std::shared_ptr<Bag<uml::InputPin>>& getLoopVariableInput() const = 0;
 			/*!
 			A list of OutputPins that receive the loopVariable values after the last iteration of the loop and constitute the output of the LoopNode.
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual std::shared_ptr<Bag<uml::OutputPin>> getResult() const = 0;
+			virtual const std::shared_ptr<Bag<uml::OutputPin>>& getResult() const = 0;
 			/*!
 			The set of ExecutableNodes executed before the first iteration of the loop, in order to initialize values or perform other setup computations.
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual std::shared_ptr<Bag<uml::ExecutableNode>> getSetupPart() const = 0;
+			virtual const std::shared_ptr<Bag<uml::ExecutableNode>>& getSetupPart() const = 0;
 			/*!
 			The set of ExecutableNodes executed in order to provide the test result for the loop.
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual std::shared_ptr<Bag<uml::ExecutableNode>> getTest() const = 0;
+			virtual const std::shared_ptr<Bag<uml::ExecutableNode>>& getTest() const = 0;
 
 			//*********************************
 			// Union Reference Getters

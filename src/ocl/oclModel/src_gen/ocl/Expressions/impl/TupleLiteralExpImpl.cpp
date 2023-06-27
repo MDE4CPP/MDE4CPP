@@ -229,7 +229,7 @@ std::shared_ptr<ecore::EObject> TupleLiteralExpImpl::copy() const
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference part */
-std::shared_ptr<Bag<ocl::Expressions::TupleLiteralPart>> TupleLiteralExpImpl::getPart() const
+const std::shared_ptr<Bag<ocl::Expressions::TupleLiteralPart>>& TupleLiteralExpImpl::getPart() const
 {
 	if(m_part == nullptr)
 	{
@@ -401,7 +401,7 @@ void TupleLiteralExpImpl::saveContent(std::shared_ptr<persistence::interfaces::X
 	}
 }
 
-std::shared_ptr<ecore::EClass> TupleLiteralExpImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& TupleLiteralExpImpl::eStaticClass() const
 {
 	return ocl::Expressions::ExpressionsPackage::eInstance()->getTupleLiteralExp_Class();
 }
@@ -429,7 +429,7 @@ bool TupleLiteralExpImpl::internalEIsSet(int featureID) const
 	return LiteralExpImpl::internalEIsSet(featureID);
 }
 
-bool TupleLiteralExpImpl::eSet(int featureID, Any newValue)
+bool TupleLiteralExpImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -478,7 +478,7 @@ bool TupleLiteralExpImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any TupleLiteralExpImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any TupleLiteralExpImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

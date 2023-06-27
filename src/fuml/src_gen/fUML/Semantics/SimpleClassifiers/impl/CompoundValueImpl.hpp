@@ -44,10 +44,10 @@ namespace fUML::Semantics::SimpleClassifiers
 			// Operations
 			//*********************************
 			virtual std::shared_ptr<fUML::Semantics::Values::Value> _copy() ;
-			virtual void assignFeatureValue(std::shared_ptr<uml::StructuralFeature> feature,std::shared_ptr<Bag<fUML::Semantics::Values::Value>> values,int position) ;
-			virtual bool equals(std::shared_ptr<fUML::Semantics::Values::Value> otherValue) ;
-			virtual void removeFeatureValues(std::shared_ptr<uml::Classifier> classifier) ;
-			virtual std::shared_ptr<fUML::Semantics::SimpleClassifiers::FeatureValue> retrieveFeatureValue(std::shared_ptr<uml::StructuralFeature> feature) ;
+			virtual void assignFeatureValue(const std::shared_ptr<uml::StructuralFeature>& feature, const std::shared_ptr<Bag<fUML::Semantics::Values::Value>>& values, int position) ;
+			virtual bool equals(const std::shared_ptr<fUML::Semantics::Values::Value>& otherValue) ;
+			virtual void removeFeatureValues(const std::shared_ptr<uml::Classifier>& classifier) ;
+			virtual std::shared_ptr<fUML::Semantics::SimpleClassifiers::FeatureValue> retrieveFeatureValue(const std::shared_ptr<uml::StructuralFeature>& feature) ;
 			virtual std::shared_ptr<Bag<fUML::Semantics::SimpleClassifiers::FeatureValue> > retrieveFeatureValues() ;
 			virtual std::string toString() ;
 			
@@ -58,7 +58,7 @@ namespace fUML::Semantics::SimpleClassifiers
 			//*********************************
 			// Reference Getters & Setters
 			//*********************************
-			virtual std::shared_ptr<Bag<fUML::Semantics::SimpleClassifiers::FeatureValue>> getFeatureValues() const ;
+			virtual const std::shared_ptr<Bag<fUML::Semantics::SimpleClassifiers::FeatureValue>>& getFeatureValues() const ;
 			
 			//*********************************
 			// Union Reference Getters
@@ -80,19 +80,19 @@ namespace fUML::Semantics::SimpleClassifiers
 			virtual void saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const;
 
 		protected:
-			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
+			virtual const std::shared_ptr<ecore::EClass>& eStaticClass() const;
 
 			//*********************************
 			// EStructuralFeature Get/Set/IsSet
 			//*********************************
 			virtual Any eGet(int featureID, bool resolve, bool coreType) const ;
-			virtual bool eSet(int featureID, Any newValue) ;
+			virtual bool eSet(int featureID, const Any& newValue) ;
 			virtual bool internalEIsSet(int featureID) const ;
 
 			//*********************************
 			// EOperation Invoke
 			//*********************************
-			virtual Any eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments) ;
+			virtual Any eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments) ;
 
 		private:
 			std::weak_ptr<fUML::Semantics::SimpleClassifiers::CompoundValue> m_thisCompoundValuePtr;

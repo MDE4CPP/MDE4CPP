@@ -56,8 +56,8 @@
 #include "fUML/Semantics/Activities/Token.hpp"
 #include "fUML/Semantics/Values/Value.hpp"
 //Factories and Package includes
-#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/SemanticsPackage.hpp"
+#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/Actions/ActionsPackage.hpp"
 #include "fUML/Semantics/Activities/ActivitiesPackage.hpp"
 #include "fUML/Semantics/StructuredClassifiers/StructuredClassifiersPackage.hpp"
@@ -124,7 +124,7 @@ StructuralFeatureActionActivationImpl& StructuralFeatureActionActivationImpl::op
 //*********************************
 // Operations
 //*********************************
-std::shared_ptr<uml::Association> StructuralFeatureActionActivationImpl::getAssociation(std::shared_ptr<uml::StructuralFeature> feature)
+std::shared_ptr<uml::Association> StructuralFeatureActionActivationImpl::getAssociation(const std::shared_ptr<uml::StructuralFeature>& feature)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -143,7 +143,7 @@ return association;
 	//end of body
 }
 
-std::shared_ptr<Bag<fUML::Semantics::StructuredClassifiers::Link> > StructuralFeatureActionActivationImpl::getMatchingLinks(std::shared_ptr<uml::Association> association,std::shared_ptr<uml::StructuralFeature> end,std::shared_ptr<fUML::Semantics::Values::Value> oppositeValue)
+std::shared_ptr<Bag<fUML::Semantics::StructuredClassifiers::Link> > StructuralFeatureActionActivationImpl::getMatchingLinks(const std::shared_ptr<uml::Association>& association, const std::shared_ptr<uml::StructuralFeature>& end, const std::shared_ptr<fUML::Semantics::Values::Value>& oppositeValue)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -154,7 +154,7 @@ return getMatchingLinksForEndValue(association, end, oppositeValue, nullptr);
 	//end of body
 }
 
-std::shared_ptr<Bag<fUML::Semantics::StructuredClassifiers::Link> > StructuralFeatureActionActivationImpl::getMatchingLinksForEndValue(std::shared_ptr<uml::Association> association,std::shared_ptr<uml::StructuralFeature> end,std::shared_ptr<fUML::Semantics::Values::Value> oppositeValue,std::shared_ptr<fUML::Semantics::Values::Value> endValue)
+std::shared_ptr<Bag<fUML::Semantics::StructuredClassifiers::Link> > StructuralFeatureActionActivationImpl::getMatchingLinksForEndValue(const std::shared_ptr<uml::Association>& association, const std::shared_ptr<uml::StructuralFeature>& end, const std::shared_ptr<fUML::Semantics::Values::Value>& oppositeValue, const std::shared_ptr<fUML::Semantics::Values::Value>& endValue)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -202,7 +202,7 @@ return links;
 	//end of body
 }
 
-std::shared_ptr<uml::Property> StructuralFeatureActionActivationImpl::getOppositeEnd(std::shared_ptr<uml::Association> association,std::shared_ptr<uml::StructuralFeature> end)
+std::shared_ptr<uml::Property> StructuralFeatureActionActivationImpl::getOppositeEnd(const std::shared_ptr<uml::Association>& association, const std::shared_ptr<uml::StructuralFeature>& end)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -318,7 +318,7 @@ void StructuralFeatureActionActivationImpl::saveContent(std::shared_ptr<persiste
 	}
 }
 
-std::shared_ptr<ecore::EClass> StructuralFeatureActionActivationImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& StructuralFeatureActionActivationImpl::eStaticClass() const
 {
 	return fUML::Semantics::Actions::ActionsPackage::eInstance()->getStructuralFeatureActionActivation_Class();
 }
@@ -342,7 +342,7 @@ bool StructuralFeatureActionActivationImpl::internalEIsSet(int featureID) const
 	return ActionActivationImpl::internalEIsSet(featureID);
 }
 
-bool StructuralFeatureActionActivationImpl::eSet(int featureID, Any newValue)
+bool StructuralFeatureActionActivationImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -354,7 +354,7 @@ bool StructuralFeatureActionActivationImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any StructuralFeatureActionActivationImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any StructuralFeatureActionActivationImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

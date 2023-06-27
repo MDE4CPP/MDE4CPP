@@ -142,12 +142,12 @@ std::shared_ptr<Bag<uml::Transition> > VertexImpl::getOutgoings()
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool VertexImpl::isContainedInRegion(std::shared_ptr<uml::Region> r)
+bool VertexImpl::isContainedInRegion(const std::shared_ptr<uml::Region>& r)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool VertexImpl::isContainedInState(std::shared_ptr<uml::State> s)
+bool VertexImpl::isContainedInState(const std::shared_ptr<uml::State>& s)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -171,7 +171,7 @@ void VertexImpl::setContainer(std::weak_ptr<uml::Region> _container)
 }
 
 /* Getter & Setter for reference incoming */
-std::shared_ptr<Bag<uml::Transition>> VertexImpl::getIncoming() const
+const std::shared_ptr<Bag<uml::Transition>>& VertexImpl::getIncoming() const
 {
 	if(m_incoming == nullptr)
 	{
@@ -183,7 +183,7 @@ std::shared_ptr<Bag<uml::Transition>> VertexImpl::getIncoming() const
 }
 
 /* Getter & Setter for reference outgoing */
-std::shared_ptr<Bag<uml::Transition>> VertexImpl::getOutgoing() const
+const std::shared_ptr<Bag<uml::Transition>>& VertexImpl::getOutgoing() const
 {
 	if(m_outgoing == nullptr)
 	{
@@ -320,7 +320,7 @@ void VertexImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandl
 	}
 }
 
-std::shared_ptr<ecore::EClass> VertexImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& VertexImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getVertex_Class();
 }
@@ -359,7 +359,7 @@ bool VertexImpl::internalEIsSet(int featureID) const
 	return NamedElementImpl::internalEIsSet(featureID);
 }
 
-bool VertexImpl::eSet(int featureID, Any newValue)
+bool VertexImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -379,7 +379,7 @@ bool VertexImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any VertexImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any VertexImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

@@ -58,7 +58,7 @@ namespace uml
 			end->notEmpty() implies collaboration->notEmpty()
 			*/
 			 
-			virtual bool connector_end(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
+			virtual bool connector_end(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context) ;
 			/*!
 			Only in and inout Parameters may have a delete effect. Only out, inout, and return Parameters may have a create effect.
 			(effect = ParameterEffectKind::delete implies (direction = ParameterDirectionKind::_'in' or direction = ParameterDirectionKind::inout))
@@ -66,26 +66,26 @@ namespace uml
 			(effect = ParameterEffectKind::create implies (direction = ParameterDirectionKind::out or direction = ParameterDirectionKind::inout or direction = ParameterDirectionKind::return))
 			*/
 			 
-			virtual bool in_and_out(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
+			virtual bool in_and_out(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context) ;
 			virtual bool isSetDefault() ;
 			/*!
 			An input Parameter cannot be an exception.
 			isException implies (direction <> ParameterDirectionKind::_'in' and direction <> ParameterDirectionKind::inout)
 			*/
 			 
-			virtual bool not_exception(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
+			virtual bool not_exception(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context) ;
 			/*!
 			Parameters typed by DataTypes cannot have an effect.
 			(type.oclIsKindOf(DataType)) implies (effect = null)
 			*/
 			 
-			virtual bool object_effect(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
+			virtual bool object_effect(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context) ;
 			/*!
 			Reentrant behaviors cannot have stream Parameters.
 			(isStream and behavior <> null) implies not behavior.isReentrant
 			*/
 			 
-			virtual bool reentrant_behaviors(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
+			virtual bool reentrant_behaviors(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context) ;
 			/*!
 			Sets the default value for this parameter to the specified Boolean value.
 			*/
@@ -121,7 +121,7 @@ namespace uml
 			not (isException and isStream)
 			*/
 			 
-			virtual bool stream_and_exception(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
+			virtual bool stream_and_exception(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context) ;
 			virtual void unsetDefault() ;
 			
 			//*********************************
@@ -198,13 +198,13 @@ namespace uml
 			<p>From package UML::Classification.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::ValueSpecification> getDefaultValue() const ;
+			virtual const std::shared_ptr<uml::ValueSpecification>& getDefaultValue() const ;
 			/*!
 			Specifies a ValueSpecification that represents a value to be used when no argument is supplied for the Parameter.
 			<p>From package UML::Classification.</p>
 			*/
 			
-			virtual void setDefaultValue(std::shared_ptr<uml::ValueSpecification>) ;
+			virtual void setDefaultValue(const std::shared_ptr<uml::ValueSpecification>&) ;
 			/*!
 			The Operation owning this parameter.
 			<p>From package UML::Classification.</p>
@@ -216,7 +216,7 @@ namespace uml
 			<p>From package UML::Classification.</p>
 			*/
 			
-			virtual std::shared_ptr<Bag<uml::ParameterSet>> getParameterSet() const ;
+			virtual const std::shared_ptr<Bag<uml::ParameterSet>>& getParameterSet() const ;
 			
 			//*********************************
 			// Union Reference Getters
@@ -257,19 +257,19 @@ namespace uml
 			virtual void saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const;
 
 		protected:
-			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
+			virtual const std::shared_ptr<ecore::EClass>& eStaticClass() const;
 
 			//*********************************
 			// EStructuralFeature Get/Set/IsSet
 			//*********************************
 			virtual Any eGet(int featureID, bool resolve, bool coreType) const ;
-			virtual bool eSet(int featureID, Any newValue) ;
+			virtual bool eSet(int featureID, const Any& newValue) ;
 			virtual bool internalEIsSet(int featureID) const ;
 
 			//*********************************
 			// EOperation Invoke
 			//*********************************
-			virtual Any eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments) ;
+			virtual Any eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments) ;
 
 		private:
 			std::weak_ptr<uml::Parameter> m_thisParameterPtr;

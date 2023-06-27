@@ -155,17 +155,17 @@ std::shared_ptr<ecore::EObject> ParameterSetImpl::copy() const
 //*********************************
 // Operations
 //*********************************
-bool ParameterSetImpl::input(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool ParameterSetImpl::input(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool ParameterSetImpl::same_parameterized_entity(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool ParameterSetImpl::same_parameterized_entity(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool ParameterSetImpl::two_parameter_sets(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool ParameterSetImpl::two_parameter_sets(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -178,7 +178,7 @@ bool ParameterSetImpl::two_parameter_sets(Any diagnostics,std::shared_ptr<std::m
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference condition */
-std::shared_ptr<Subset<uml::Constraint, uml::Element>> ParameterSetImpl::getCondition() const
+const std::shared_ptr<Subset<uml::Constraint, uml::Element>>& ParameterSetImpl::getCondition() const
 {
 	if(m_condition == nullptr)
 	{
@@ -199,7 +199,7 @@ std::shared_ptr<Subset<uml::Constraint, uml::Element>> ParameterSetImpl::getCond
 }
 
 /* Getter & Setter for reference parameter */
-std::shared_ptr<Bag<uml::Parameter>> ParameterSetImpl::getParameter() const
+const std::shared_ptr<Bag<uml::Parameter>>& ParameterSetImpl::getParameter() const
 {
 	if(m_parameter == nullptr)
 	{
@@ -376,7 +376,7 @@ void ParameterSetImpl::saveContent(std::shared_ptr<persistence::interfaces::XSav
 	}
 }
 
-std::shared_ptr<ecore::EClass> ParameterSetImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& ParameterSetImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getParameterSet_Class();
 }
@@ -408,7 +408,7 @@ bool ParameterSetImpl::internalEIsSet(int featureID) const
 	return NamedElementImpl::internalEIsSet(featureID);
 }
 
-bool ParameterSetImpl::eSet(int featureID, Any newValue)
+bool ParameterSetImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -494,7 +494,7 @@ bool ParameterSetImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any ParameterSetImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any ParameterSetImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

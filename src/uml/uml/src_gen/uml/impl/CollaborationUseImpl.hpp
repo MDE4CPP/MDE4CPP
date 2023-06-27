@@ -59,7 +59,7 @@ namespace uml
 			      ce1.collaboration = ce2.collaboration)
 			*/
 			 
-			virtual bool client_elements(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
+			virtual bool client_elements(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context) ;
 			/*!
 			Connectors in a Collaboration typing a CollaborationUse must have corresponding Connectors between elements bound in the context Classifier, and these corresponding Connectors must have the same or more general type than the Collaboration Connectors.
 			type.ownedConnector->forAll(connector |
@@ -73,13 +73,13 @@ namespace uml
 			)
 			*/
 			 
-			virtual bool connectors(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
+			virtual bool connectors(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context) ;
 			/*!
 			Every collaborationRole in the Collaboration is bound within the CollaborationUse.
 			type.collaborationRole->forAll(role | roleBinding->exists(rb | rb.supplier->includes(role)))
 			*/
 			 
-			virtual bool every_role(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
+			virtual bool every_role(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context) ;
 			
 			//*********************************
 			// Attribute Getters & Setters
@@ -93,19 +93,19 @@ namespace uml
 			<p>From package UML::StructuredClassifiers.</p>
 			*/
 			
-			virtual std::shared_ptr<Subset<uml::Dependency, uml::Element>> getRoleBinding() const ;
+			virtual const std::shared_ptr<Subset<uml::Dependency, uml::Element>>& getRoleBinding() const ;
 			/*!
 			The Collaboration which is used in this CollaborationUse. The Collaboration defines the cooperation between its roles which are mapped to ConnectableElements relating to the Classifier owning the CollaborationUse.
 			<p>From package UML::StructuredClassifiers.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::Collaboration> getType() const ;
+			virtual const std::shared_ptr<uml::Collaboration>& getType() const ;
 			/*!
 			The Collaboration which is used in this CollaborationUse. The Collaboration defines the cooperation between its roles which are mapped to ConnectableElements relating to the Classifier owning the CollaborationUse.
 			<p>From package UML::StructuredClassifiers.</p>
 			*/
 			
-			virtual void setType(std::shared_ptr<uml::Collaboration>) ;
+			virtual void setType(const std::shared_ptr<uml::Collaboration>&) ;
 			
 			//*********************************
 			// Union Reference Getters
@@ -139,19 +139,19 @@ namespace uml
 			virtual void saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const;
 
 		protected:
-			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
+			virtual const std::shared_ptr<ecore::EClass>& eStaticClass() const;
 
 			//*********************************
 			// EStructuralFeature Get/Set/IsSet
 			//*********************************
 			virtual Any eGet(int featureID, bool resolve, bool coreType) const ;
-			virtual bool eSet(int featureID, Any newValue) ;
+			virtual bool eSet(int featureID, const Any& newValue) ;
 			virtual bool internalEIsSet(int featureID) const ;
 
 			//*********************************
 			// EOperation Invoke
 			//*********************************
-			virtual Any eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments) ;
+			virtual Any eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments) ;
 
 		private:
 			std::weak_ptr<uml::CollaborationUse> m_thisCollaborationUsePtr;

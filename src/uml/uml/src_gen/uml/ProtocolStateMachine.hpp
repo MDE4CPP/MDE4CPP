@@ -113,20 +113,20 @@ namespace uml
 			((v.oclAsType(Pseudostate).kind <>  PseudostateKind::deepHistory) and (v.oclAsType(Pseudostate).kind <> PseudostateKind::shallowHistory))))
 			*/
 			 
-			virtual bool deep_or_shallow_history(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
+			virtual bool deep_or_shallow_history(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context) = 0;
 			/*!
 			The states of a ProtocolStateMachine cannot have entry, exit, or do activity Behaviors.
 			region->forAll(r | r.subvertex->forAll(v | v.oclIsKindOf(State) implies
 			(v.oclAsType(State).entry->isEmpty() and v.oclAsType(State).exit->isEmpty() and v.oclAsType(State).doActivity->isEmpty())))
 			*/
 			 
-			virtual bool entry_exit_do(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
+			virtual bool entry_exit_do(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context) = 0;
 			/*!
 			All Transitions of a ProtocolStateMachine must be ProtocolTransitions.
 			region->forAll(r | r.transition->forAll(t | t.oclIsTypeOf(ProtocolTransition)))
 			*/
 			 
-			virtual bool protocol_transitions(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
+			virtual bool protocol_transitions(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context) = 0;
 
 			//*********************************
 			// Attribute Getters & Setters
@@ -140,7 +140,7 @@ namespace uml
 			<p>From package UML::StateMachines.</p>
 			*/
 			
-			virtual std::shared_ptr<Subset<uml::ProtocolConformance, uml::Element>> getConformance() const = 0;
+			virtual const std::shared_ptr<Subset<uml::ProtocolConformance, uml::Element>>& getConformance() const = 0;
 
 			//*********************************
 			// Union Reference Getters

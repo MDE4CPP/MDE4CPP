@@ -167,12 +167,12 @@ std::shared_ptr<ecore::EObject> ParameterImpl::copy() const
 //*********************************
 // Operations
 //*********************************
-bool ParameterImpl::connector_end(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool ParameterImpl::connector_end(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool ParameterImpl::in_and_out(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool ParameterImpl::in_and_out(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -182,17 +182,17 @@ bool ParameterImpl::isSetDefault()
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool ParameterImpl::not_exception(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool ParameterImpl::not_exception(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool ParameterImpl::object_effect(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool ParameterImpl::object_effect(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool ParameterImpl::reentrant_behaviors(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool ParameterImpl::reentrant_behaviors(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -227,7 +227,7 @@ void ParameterImpl::setUnlimitedNaturalDefaultValue(int value)
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool ParameterImpl::stream_and_exception(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool ParameterImpl::stream_and_exception(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -241,7 +241,7 @@ void ParameterImpl::unsetDefault()
 // Attribute Getters & Setters
 //*********************************
 /* Getter & Setter for attribute default */
-std::string ParameterImpl::getDefault() const 
+std::string ParameterImpl::getDefault() const
 {
 	return m_default;
 }
@@ -252,7 +252,7 @@ void ParameterImpl::setDefault(std::string _default)
 }
 
 /* Getter & Setter for attribute direction */
-uml::ParameterDirectionKind ParameterImpl::getDirection() const 
+uml::ParameterDirectionKind ParameterImpl::getDirection() const
 {
 	return m_direction;
 }
@@ -263,7 +263,7 @@ void ParameterImpl::setDirection(uml::ParameterDirectionKind _direction)
 }
 
 /* Getter & Setter for attribute effect */
-uml::ParameterEffectKind ParameterImpl::getEffect() const 
+uml::ParameterEffectKind ParameterImpl::getEffect() const
 {
 	return m_effect;
 }
@@ -274,7 +274,7 @@ void ParameterImpl::setEffect(uml::ParameterEffectKind _effect)
 }
 
 /* Getter & Setter for attribute isException */
-bool ParameterImpl::getIsException() const 
+bool ParameterImpl::getIsException() const
 {
 	return m_isException;
 }
@@ -285,7 +285,7 @@ void ParameterImpl::setIsException(bool _isException)
 }
 
 /* Getter & Setter for attribute isStream */
-bool ParameterImpl::getIsStream() const 
+bool ParameterImpl::getIsStream() const
 {
 	return m_isStream;
 }
@@ -310,11 +310,11 @@ void ParameterImpl::setBehavior(std::weak_ptr<uml::Behavior> _behavior)
 }
 
 /* Getter & Setter for reference defaultValue */
-std::shared_ptr<uml::ValueSpecification> ParameterImpl::getDefaultValue() const
+const std::shared_ptr<uml::ValueSpecification>& ParameterImpl::getDefaultValue() const
 {
     return m_defaultValue;
 }
-void ParameterImpl::setDefaultValue(std::shared_ptr<uml::ValueSpecification> _defaultValue)
+void ParameterImpl::setDefaultValue(const std::shared_ptr<uml::ValueSpecification>& _defaultValue)
 {
     m_defaultValue = _defaultValue;
 	
@@ -327,7 +327,7 @@ std::weak_ptr<uml::Operation> ParameterImpl::getOperation() const
 }
 
 /* Getter & Setter for reference parameterSet */
-std::shared_ptr<Bag<uml::ParameterSet>> ParameterImpl::getParameterSet() const
+const std::shared_ptr<Bag<uml::ParameterSet>>& ParameterImpl::getParameterSet() const
 {
 	if(m_parameterSet == nullptr)
 	{
@@ -671,7 +671,7 @@ void ParameterImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHa
 	}
 }
 
-std::shared_ptr<ecore::EClass> ParameterImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& ParameterImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getParameter_Class();
 }
@@ -751,7 +751,7 @@ bool ParameterImpl::internalEIsSet(int featureID) const
 	return result;
 }
 
-bool ParameterImpl::eSet(int featureID, Any newValue)
+bool ParameterImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -858,7 +858,7 @@ bool ParameterImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any ParameterImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any ParameterImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

@@ -100,7 +100,7 @@ namespace uml
 			endif
 			*/
 			 
-			virtual bool type_target_pin(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
+			virtual bool type_target_pin(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context) = 0;
 
 			//*********************************
 			// Attribute Getters & Setters
@@ -114,25 +114,25 @@ namespace uml
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::Operation> getOperation() const = 0;
+			virtual const std::shared_ptr<uml::Operation>& getOperation() const = 0;
 			/*!
 			The Operation being invoked.
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual void setOperation(std::shared_ptr<uml::Operation>) = 0;
+			virtual void setOperation(const std::shared_ptr<uml::Operation>&) = 0;
 			/*!
 			The InputPin that provides the target object to which the Operation call request is sent.
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::InputPin> getTarget() const = 0;
+			virtual const std::shared_ptr<uml::InputPin>& getTarget() const = 0;
 			/*!
 			The InputPin that provides the target object to which the Operation call request is sent.
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual void setTarget(std::shared_ptr<uml::InputPin>) = 0;
+			virtual void setTarget(const std::shared_ptr<uml::InputPin>&) = 0;
 
 			//*********************************
 			// Union Reference Getters

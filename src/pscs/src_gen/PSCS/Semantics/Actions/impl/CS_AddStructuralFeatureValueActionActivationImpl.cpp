@@ -62,8 +62,8 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "fUML/Semantics/Activities/ActivitiesFactory.hpp"
 #include "fUML/Semantics/Actions/ActionsFactory.hpp"
+#include "fUML/Semantics/Activities/ActivitiesFactory.hpp"
 #include "uml/umlFactory.hpp"
 #include "uml/Action.hpp"
 #include "fUML/Semantics/Activities/ActivityEdgeInstance.hpp"
@@ -76,8 +76,8 @@
 #include "fUML/Semantics/Actions/PinActivation.hpp"
 #include "fUML/Semantics/Activities/Token.hpp"
 //Factories and Package includes
-#include "PSCS/PSCSPackage.hpp"
 #include "PSCS/Semantics/SemanticsPackage.hpp"
+#include "PSCS/PSCSPackage.hpp"
 #include "PSCS/Semantics/Actions/ActionsPackage.hpp"
 #include "fUML/Semantics/Actions/ActionsPackage.hpp"
 #include "fUML/Semantics/Activities/ActivitiesPackage.hpp"
@@ -504,7 +504,7 @@ void CS_AddStructuralFeatureValueActionActivationImpl::saveContent(std::shared_p
 	}
 }
 
-std::shared_ptr<ecore::EClass> CS_AddStructuralFeatureValueActionActivationImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& CS_AddStructuralFeatureValueActionActivationImpl::eStaticClass() const
 {
 	return PSCS::Semantics::Actions::ActionsPackage::eInstance()->getCS_AddStructuralFeatureValueActionActivation_Class();
 }
@@ -528,7 +528,7 @@ bool CS_AddStructuralFeatureValueActionActivationImpl::internalEIsSet(int featur
 	return fUML::Semantics::Actions::AddStructuralFeatureValueActionActivationImpl::internalEIsSet(featureID);
 }
 
-bool CS_AddStructuralFeatureValueActionActivationImpl::eSet(int featureID, Any newValue)
+bool CS_AddStructuralFeatureValueActionActivationImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -540,7 +540,7 @@ bool CS_AddStructuralFeatureValueActionActivationImpl::eSet(int featureID, Any n
 //*********************************
 // EOperation Invoke
 //*********************************
-Any CS_AddStructuralFeatureValueActionActivationImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any CS_AddStructuralFeatureValueActionActivationImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

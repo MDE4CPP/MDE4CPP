@@ -80,13 +80,13 @@ namespace ocl::Values
 			//*********************************
 			// Reference Getters & Setters
 			//*********************************
-			virtual std::shared_ptr<Bag<ocl::Values::NameValueBinding>> getBindings() const = 0;
-			virtual std::shared_ptr<Bag<ocl::Values::OclMessageValue>> getInputQ() const = 0;
-			virtual std::shared_ptr<Bag<ocl::Values::OclMessageValue>> getOutputQ() const = 0;
-			virtual std::shared_ptr<ocl::Values::LocalSnapshot> getPred() const = 0;
-			virtual void setPred(std::shared_ptr<ocl::Values::LocalSnapshot>) = 0;
-			virtual std::shared_ptr<ocl::Values::LocalSnapshot> getSucc() const = 0;
-			virtual void setSucc(std::shared_ptr<ocl::Values::LocalSnapshot>) = 0;
+			virtual const std::shared_ptr<Bag<ocl::Values::NameValueBinding>>& getBindings() const = 0;
+			virtual const std::shared_ptr<Bag<ocl::Values::OclMessageValue>>& getInputQ() const = 0;
+			virtual const std::shared_ptr<Bag<ocl::Values::OclMessageValue>>& getOutputQ() const = 0;
+			virtual const std::shared_ptr<ocl::Values::LocalSnapshot>& getPred() const = 0;
+			virtual void setPred(const std::shared_ptr<ocl::Values::LocalSnapshot>&) = 0;
+			virtual const std::shared_ptr<ocl::Values::LocalSnapshot>& getSucc() const = 0;
+			virtual void setSucc(const std::shared_ptr<ocl::Values::LocalSnapshot>&) = 0;
 
 			//*********************************
 			// Union Reference Getters

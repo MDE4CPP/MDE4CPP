@@ -143,12 +143,12 @@ std::shared_ptr<ecore::EObject> ConnectionPointReferenceImpl::copy() const
 //*********************************
 // Operations
 //*********************************
-bool ConnectionPointReferenceImpl::entry_pseudostates(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool ConnectionPointReferenceImpl::entry_pseudostates(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool ConnectionPointReferenceImpl::exit_pseudostates(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool ConnectionPointReferenceImpl::exit_pseudostates(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -161,7 +161,7 @@ bool ConnectionPointReferenceImpl::exit_pseudostates(Any diagnostics,std::shared
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference entry */
-std::shared_ptr<Bag<uml::Pseudostate>> ConnectionPointReferenceImpl::getEntry() const
+const std::shared_ptr<Bag<uml::Pseudostate>>& ConnectionPointReferenceImpl::getEntry() const
 {
 	if(m_entry == nullptr)
 	{
@@ -173,7 +173,7 @@ std::shared_ptr<Bag<uml::Pseudostate>> ConnectionPointReferenceImpl::getEntry() 
 }
 
 /* Getter & Setter for reference exit */
-std::shared_ptr<Bag<uml::Pseudostate>> ConnectionPointReferenceImpl::getExit() const
+const std::shared_ptr<Bag<uml::Pseudostate>>& ConnectionPointReferenceImpl::getExit() const
 {
 	if(m_exit == nullptr)
 	{
@@ -385,7 +385,7 @@ void ConnectionPointReferenceImpl::saveContent(std::shared_ptr<persistence::inte
 	}
 }
 
-std::shared_ptr<ecore::EClass> ConnectionPointReferenceImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& ConnectionPointReferenceImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getConnectionPointReference_Class();
 }
@@ -424,7 +424,7 @@ bool ConnectionPointReferenceImpl::internalEIsSet(int featureID) const
 	return VertexImpl::internalEIsSet(featureID);
 }
 
-bool ConnectionPointReferenceImpl::eSet(int featureID, Any newValue)
+bool ConnectionPointReferenceImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -518,7 +518,7 @@ bool ConnectionPointReferenceImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any ConnectionPointReferenceImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any ConnectionPointReferenceImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

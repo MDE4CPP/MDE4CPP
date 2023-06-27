@@ -304,7 +304,7 @@ void ActivityFinalNodeImpl::saveContent(std::shared_ptr<persistence::interfaces:
 	}
 }
 
-std::shared_ptr<ecore::EClass> ActivityFinalNodeImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& ActivityFinalNodeImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getActivityFinalNode_Class();
 }
@@ -328,7 +328,7 @@ bool ActivityFinalNodeImpl::internalEIsSet(int featureID) const
 	return FinalNodeImpl::internalEIsSet(featureID);
 }
 
-bool ActivityFinalNodeImpl::eSet(int featureID, Any newValue)
+bool ActivityFinalNodeImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -340,7 +340,7 @@ bool ActivityFinalNodeImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any ActivityFinalNodeImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any ActivityFinalNodeImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

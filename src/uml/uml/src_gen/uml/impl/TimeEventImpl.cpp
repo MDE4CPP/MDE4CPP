@@ -146,7 +146,7 @@ std::shared_ptr<ecore::EObject> TimeEventImpl::copy() const
 //*********************************
 // Operations
 //*********************************
-bool TimeEventImpl::when_non_negative(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool TimeEventImpl::when_non_negative(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -155,7 +155,7 @@ bool TimeEventImpl::when_non_negative(Any diagnostics,std::shared_ptr<std::map <
 // Attribute Getters & Setters
 //*********************************
 /* Getter & Setter for attribute isRelative */
-bool TimeEventImpl::getIsRelative() const 
+bool TimeEventImpl::getIsRelative() const
 {
 	return m_isRelative;
 }
@@ -169,11 +169,11 @@ void TimeEventImpl::setIsRelative(bool _isRelative)
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference when */
-std::shared_ptr<uml::TimeExpression> TimeEventImpl::getWhen() const
+const std::shared_ptr<uml::TimeExpression>& TimeEventImpl::getWhen() const
 {
     return m_when;
 }
-void TimeEventImpl::setWhen(std::shared_ptr<uml::TimeExpression> _when)
+void TimeEventImpl::setWhen(const std::shared_ptr<uml::TimeExpression>& _when)
 {
     m_when = _when;
 	
@@ -357,7 +357,7 @@ void TimeEventImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHa
 	}
 }
 
-std::shared_ptr<ecore::EClass> TimeEventImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& TimeEventImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getTimeEvent_Class();
 }
@@ -389,7 +389,7 @@ bool TimeEventImpl::internalEIsSet(int featureID) const
 	return EventImpl::internalEIsSet(featureID);
 }
 
-bool TimeEventImpl::eSet(int featureID, Any newValue)
+bool TimeEventImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -416,7 +416,7 @@ bool TimeEventImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any TimeEventImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any TimeEventImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

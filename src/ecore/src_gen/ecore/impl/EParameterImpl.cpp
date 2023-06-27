@@ -233,7 +233,7 @@ void EParameterImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveH
 	}
 }
 
-std::shared_ptr<EClass> EParameterImpl::eStaticClass() const
+const std::shared_ptr<EClass>& EParameterImpl::eStaticClass() const
 {
 	return ecore::ecorePackage::eInstance()->getEParameter_Class();
 }
@@ -264,7 +264,7 @@ bool EParameterImpl::internalEIsSet(int featureID) const
 	return ETypedElementImpl::internalEIsSet(featureID);
 }
 
-bool EParameterImpl::eSet(int featureID, Any newValue)
+bool EParameterImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -276,7 +276,7 @@ bool EParameterImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any EParameterImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any EParameterImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

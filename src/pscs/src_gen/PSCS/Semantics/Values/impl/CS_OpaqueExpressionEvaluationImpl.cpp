@@ -48,11 +48,11 @@
 #include "fUML/Semantics/Values/Value.hpp"
 #include "uml/ValueSpecification.hpp"
 //Factories and Package includes
-#include "PSCS/PSCSPackage.hpp"
 #include "PSCS/Semantics/SemanticsPackage.hpp"
+#include "PSCS/PSCSPackage.hpp"
 #include "fUML/Semantics/Loci/LociPackage.hpp"
-#include "PSCS/Semantics/Values/ValuesPackage.hpp"
 #include "fUML/Semantics/Values/ValuesPackage.hpp"
+#include "PSCS/Semantics/Values/ValuesPackage.hpp"
 #include "uml/umlPackage.hpp"
 
 using namespace PSCS::Semantics::Values;
@@ -252,7 +252,7 @@ void CS_OpaqueExpressionEvaluationImpl::saveContent(std::shared_ptr<persistence:
 	}
 }
 
-std::shared_ptr<ecore::EClass> CS_OpaqueExpressionEvaluationImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& CS_OpaqueExpressionEvaluationImpl::eStaticClass() const
 {
 	return PSCS::Semantics::Values::ValuesPackage::eInstance()->getCS_OpaqueExpressionEvaluation_Class();
 }
@@ -276,7 +276,7 @@ bool CS_OpaqueExpressionEvaluationImpl::internalEIsSet(int featureID) const
 	return fUML::Semantics::Values::EvaluationImpl::internalEIsSet(featureID);
 }
 
-bool CS_OpaqueExpressionEvaluationImpl::eSet(int featureID, Any newValue)
+bool CS_OpaqueExpressionEvaluationImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -288,7 +288,7 @@ bool CS_OpaqueExpressionEvaluationImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any CS_OpaqueExpressionEvaluationImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any CS_OpaqueExpressionEvaluationImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

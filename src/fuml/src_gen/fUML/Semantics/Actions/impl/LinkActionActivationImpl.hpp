@@ -45,9 +45,9 @@ namespace fUML::Semantics::Actions
 			//*********************************
 			// Operations
 			//*********************************
-			virtual bool endMatchesEndData(std::shared_ptr<fUML::Semantics::StructuredClassifiers::Link> link,std::shared_ptr<uml::LinkEndData> endData) ;
+			virtual bool endMatchesEndData(const std::shared_ptr<fUML::Semantics::StructuredClassifiers::Link>& link, const std::shared_ptr<uml::LinkEndData>& endData) ;
 			virtual std::shared_ptr<uml::Association> getAssociation() ;
-			virtual bool linkMatchesEndData(std::shared_ptr<fUML::Semantics::StructuredClassifiers::Link> link,std::shared_ptr<Bag<uml::LinkEndData>> endDataList) ;
+			virtual bool linkMatchesEndData(const std::shared_ptr<fUML::Semantics::StructuredClassifiers::Link>& link, const std::shared_ptr<Bag<uml::LinkEndData>>& endDataList) ;
 			
 			//*********************************
 			// Attribute Getters & Setters
@@ -78,19 +78,19 @@ namespace fUML::Semantics::Actions
 			virtual void saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const;
 
 		protected:
-			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
+			virtual const std::shared_ptr<ecore::EClass>& eStaticClass() const;
 
 			//*********************************
 			// EStructuralFeature Get/Set/IsSet
 			//*********************************
 			virtual Any eGet(int featureID, bool resolve, bool coreType) const ;
-			virtual bool eSet(int featureID, Any newValue) ;
+			virtual bool eSet(int featureID, const Any& newValue) ;
 			virtual bool internalEIsSet(int featureID) const ;
 
 			//*********************************
 			// EOperation Invoke
 			//*********************************
-			virtual Any eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments) ;
+			virtual Any eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments) ;
 
 		private:
 			std::weak_ptr<fUML::Semantics::Actions::LinkActionActivation> m_thisLinkActionActivationPtr;

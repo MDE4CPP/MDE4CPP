@@ -60,7 +60,7 @@ namespace uml
 			       oclIsKindOf(ActivityParameterNode) and oclAsType(ActivityParameterNode).parameter = p)->size()= 1)
 			*/
 			 
-			virtual bool maximum_one_parameter_node(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
+			virtual bool maximum_one_parameter_node(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context) ;
 			/*!
 			A Parameter with direction inout must have exactly two ActivityParameterNodes in an Activity, at most one with incoming ActivityEdges and at most one with outgoing ActivityEdges.
 			ownedParameter->forAll(p | 
@@ -73,7 +73,7 @@ namespace uml
 			)
 			*/
 			 
-			virtual bool maximum_two_parameter_nodes(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
+			virtual bool maximum_two_parameter_nodes(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context) ;
 			
 			//*********************************
 			// Attribute Getters & Setters
@@ -111,34 +111,34 @@ namespace uml
 			<p>From package UML::Activities.</p>
 			*/
 			
-			virtual std::shared_ptr<Subset<uml::ActivityEdge, uml::Element>> getEdge() const ;
+			virtual const std::shared_ptr<Subset<uml::ActivityEdge, uml::Element>>& getEdge() const ;
 			
 			/*!
 			ActivityNodes coordinated by the Activity.
 			<p>From package UML::Activities.</p>
 			*/
 			
-			virtual std::shared_ptr<SubsetUnion<uml::ActivityNode, uml::Element>> getNode() const ;
-			virtual std::shared_ptr<SubsetUnion<uml::ActivityGroup, uml::ActivityGroup>> getOwnedGroup() const ;
-			virtual std::shared_ptr<Subset<uml::ActivityNode, uml::ActivityNode /*Subset does not reference a union*/>> getOwnedNode() const ;
+			virtual const std::shared_ptr<SubsetUnion<uml::ActivityNode, uml::Element>>& getNode() const ;
+			virtual const std::shared_ptr<SubsetUnion<uml::ActivityGroup, uml::ActivityGroup>>& getOwnedGroup() const ;
+			virtual const std::shared_ptr<Subset<uml::ActivityNode, uml::ActivityNode /*Subset does not reference a union*/>>& getOwnedNode() const ;
 			/*!
 			Top-level ActivityPartitions in the Activity.
 			<p>From package UML::Activities.</p>
 			*/
 			
-			virtual std::shared_ptr<Subset<uml::ActivityPartition, uml::ActivityGroup /*Subset does not reference a union*/, uml::ActivityGroup>> getPartition() const ;
+			virtual const std::shared_ptr<Subset<uml::ActivityPartition, uml::ActivityGroup /*Subset does not reference a union*/, uml::ActivityGroup>>& getPartition() const ;
 			/*!
 			Top-level StructuredActivityNodes in the Activity.
 			<p>From package UML::Activities.</p>
 			*/
 			
-			virtual std::shared_ptr<Subset<uml::StructuredActivityNode, uml::ActivityGroup, uml::ActivityNode /*Subset does not reference a union*/>> getStructuredNode() const ;
+			virtual const std::shared_ptr<Subset<uml::StructuredActivityNode, uml::ActivityGroup, uml::ActivityNode /*Subset does not reference a union*/>>& getStructuredNode() const ;
 			/*!
 			Top-level Variables defined by the Activity.
 			<p>From package UML::Activities.</p>
 			*/
 			
-			virtual std::shared_ptr<Subset<uml::Variable, uml::NamedElement>> getVariable() const ;
+			virtual const std::shared_ptr<Subset<uml::Variable, uml::NamedElement>>& getVariable() const ;
 			
 			//*********************************
 			// Union Reference Getters
@@ -229,19 +229,19 @@ namespace uml
 			virtual void saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const;
 
 		protected:
-			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
+			virtual const std::shared_ptr<ecore::EClass>& eStaticClass() const;
 
 			//*********************************
 			// EStructuralFeature Get/Set/IsSet
 			//*********************************
 			virtual Any eGet(int featureID, bool resolve, bool coreType) const ;
-			virtual bool eSet(int featureID, Any newValue) ;
+			virtual bool eSet(int featureID, const Any& newValue) ;
 			virtual bool internalEIsSet(int featureID) const ;
 
 			//*********************************
 			// EOperation Invoke
 			//*********************************
-			virtual Any eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments) ;
+			virtual Any eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments) ;
 
 		private:
 			std::weak_ptr<uml::Activity> m_thisActivityPtr;

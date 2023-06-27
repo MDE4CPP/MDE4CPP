@@ -169,12 +169,12 @@ std::shared_ptr<ecore::EObject> ActorImpl::copy() const
 //*********************************
 // Operations
 //*********************************
-bool ActorImpl::associations(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool ActorImpl::associations(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool ActorImpl::must_have_name(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool ActorImpl::must_have_name(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -393,7 +393,7 @@ void ActorImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandle
 	}
 }
 
-std::shared_ptr<ecore::EClass> ActorImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& ActorImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getActor_Class();
 }
@@ -417,7 +417,7 @@ bool ActorImpl::internalEIsSet(int featureID) const
 	return BehavioredClassifierImpl::internalEIsSet(featureID);
 }
 
-bool ActorImpl::eSet(int featureID, Any newValue)
+bool ActorImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -429,7 +429,7 @@ bool ActorImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any ActorImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any ActorImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

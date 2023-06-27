@@ -143,7 +143,7 @@ VariableActionImpl& VariableActionImpl::operator=(const VariableActionImpl & obj
 //*********************************
 // Operations
 //*********************************
-bool VariableActionImpl::scope_of_variable(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool VariableActionImpl::scope_of_variable(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -156,11 +156,11 @@ bool VariableActionImpl::scope_of_variable(Any diagnostics,std::shared_ptr<std::
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference variable */
-std::shared_ptr<uml::Variable> VariableActionImpl::getVariable() const
+const std::shared_ptr<uml::Variable>& VariableActionImpl::getVariable() const
 {
     return m_variable;
 }
-void VariableActionImpl::setVariable(std::shared_ptr<uml::Variable> _variable)
+void VariableActionImpl::setVariable(const std::shared_ptr<uml::Variable>& _variable)
 {
     m_variable = _variable;
 	
@@ -351,7 +351,7 @@ void VariableActionImpl::saveContent(std::shared_ptr<persistence::interfaces::XS
 	}
 }
 
-std::shared_ptr<ecore::EClass> VariableActionImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& VariableActionImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getVariableAction_Class();
 }
@@ -379,7 +379,7 @@ bool VariableActionImpl::internalEIsSet(int featureID) const
 	return ActionImpl::internalEIsSet(featureID);
 }
 
-bool VariableActionImpl::eSet(int featureID, Any newValue)
+bool VariableActionImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -399,7 +399,7 @@ bool VariableActionImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any VariableActionImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any VariableActionImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

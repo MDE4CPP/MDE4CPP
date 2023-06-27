@@ -103,7 +103,7 @@ namespace uml
 				argument->at(i).compatibleWith(parameter->at(i)))
 			*/
 			 
-			virtual bool argument_pins(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
+			virtual bool argument_pins(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context) = 0;
 			/*!
 			Return the in and inout ownedParameters of the Behavior or Operation being called. (This operation is abstract and should be overridden by subclasses of CallAction.)
 			<p>From package UML::Actions.</p>
@@ -126,13 +126,13 @@ namespace uml
 				parameter->at(i).compatibleWith(result->at(i)))
 			*/
 			 
-			virtual bool result_pins(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
+			virtual bool result_pins(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context) = 0;
 			/*!
 			Only synchronous CallActions can have result OutputPins.
 			result->notEmpty() implies isSynchronous
 			*/
 			 
-			virtual bool synchronous_call(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
+			virtual bool synchronous_call(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context) = 0;
 
 			//*********************************
 			// Attribute Getters & Setters
@@ -158,7 +158,7 @@ namespace uml
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual std::shared_ptr<Subset<uml::OutputPin, uml::OutputPin>> getResult() const = 0;
+			virtual const std::shared_ptr<Subset<uml::OutputPin, uml::OutputPin>>& getResult() const = 0;
 
 			//*********************************
 			// Union Reference Getters

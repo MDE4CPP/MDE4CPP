@@ -52,8 +52,8 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "uml/umlFactory.hpp"
 #include "fUML/Semantics/Loci/LociFactory.hpp"
+#include "uml/umlFactory.hpp"
 #include "uml/Association.hpp"
 #include "PSCS/Semantics/Actions/CS_ConstructStrategy.hpp"
 #include "PSCS/Semantics/StructuredClassifiers/CS_Object.hpp"
@@ -68,12 +68,12 @@
 #include "uml/Property.hpp"
 #include "fUML/Semantics/Values/Value.hpp"
 //Factories and Package includes
-#include "PSCS/PSCSPackage.hpp"
 #include "PSCS/Semantics/SemanticsPackage.hpp"
+#include "PSCS/PSCSPackage.hpp"
 #include "PSCS/Semantics/Actions/ActionsPackage.hpp"
 #include "fUML/Semantics/Loci/LociPackage.hpp"
-#include "PSCS/Semantics/StructuredClassifiers/StructuredClassifiersPackage.hpp"
 #include "fUML/Semantics/StructuredClassifiers/StructuredClassifiersPackage.hpp"
+#include "PSCS/Semantics/StructuredClassifiers/StructuredClassifiersPackage.hpp"
 #include "fUML/Semantics/Values/ValuesPackage.hpp"
 #include "uml/umlPackage.hpp"
 
@@ -165,7 +165,7 @@ std::shared_ptr<ecore::EObject> CS_DefaultConstructStrategyImpl::copy() const
 //*********************************
 // Operations
 //*********************************
-void CS_DefaultConstructStrategyImpl::addStructuralFeatureValue(std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Reference> context,std::shared_ptr<uml::Property> feature,std::shared_ptr<fUML::Semantics::Values::Value> value)
+void CS_DefaultConstructStrategyImpl::addStructuralFeatureValue(const std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Reference>& context, const std::shared_ptr<uml::Property>& feature, const std::shared_ptr<fUML::Semantics::Values::Value>& value)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -210,7 +210,7 @@ void CS_DefaultConstructStrategyImpl::addStructuralFeatureValue(std::shared_ptr<
 	//end of body
 }
 
-bool CS_DefaultConstructStrategyImpl::canInstantiate(std::shared_ptr<uml::Property> p)
+bool CS_DefaultConstructStrategyImpl::canInstantiate(const std::shared_ptr<uml::Property>& p)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -236,7 +236,7 @@ bool CS_DefaultConstructStrategyImpl::canInstantiate(std::shared_ptr<uml::Proper
 	//end of body
 }
 
-std::shared_ptr<fUML::Semantics::StructuredClassifiers::Object> CS_DefaultConstructStrategyImpl::construct(std::shared_ptr<uml::Operation> constructor,std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Object> context)
+std::shared_ptr<fUML::Semantics::StructuredClassifiers::Object> CS_DefaultConstructStrategyImpl::construct(const std::shared_ptr<uml::Operation>& constructor, const std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Object>& context)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -245,7 +245,7 @@ std::shared_ptr<fUML::Semantics::StructuredClassifiers::Object> CS_DefaultConstr
 	//end of body
 }
 
-std::shared_ptr<fUML::Semantics::StructuredClassifiers::Object> CS_DefaultConstructStrategyImpl::constructObject(std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Object> context,std::shared_ptr<uml::Class> type)
+std::shared_ptr<fUML::Semantics::StructuredClassifiers::Object> CS_DefaultConstructStrategyImpl::constructObject(const std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Object>& context, const std::shared_ptr<uml::Class>& type)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -341,7 +341,7 @@ std::shared_ptr<fUML::Semantics::StructuredClassifiers::Object> CS_DefaultConstr
 	//end of body
 }
 
-void CS_DefaultConstructStrategyImpl::generateArrayPattern(std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Reference> context,std::shared_ptr<uml::Connector> connector)
+void CS_DefaultConstructStrategyImpl::generateArrayPattern(const std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Reference>& context, const std::shared_ptr<uml::Connector>& connector)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -374,7 +374,7 @@ void CS_DefaultConstructStrategyImpl::generateArrayPattern(std::shared_ptr<PSCS:
 	//end of body
 }
 
-std::shared_ptr<uml::Class> CS_DefaultConstructStrategyImpl::generateRealizingClass(std::shared_ptr<uml::Interface> interface_,std::string className)
+std::shared_ptr<uml::Class> CS_DefaultConstructStrategyImpl::generateRealizingClass(const std::shared_ptr<uml::Interface>& interface_, std::string className)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -390,7 +390,7 @@ std::shared_ptr<uml::Class> CS_DefaultConstructStrategyImpl::generateRealizingCl
 	//end of body
 }
 
-void CS_DefaultConstructStrategyImpl::generateStarPattern(std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Reference> context,std::shared_ptr<uml::Connector> connector)
+void CS_DefaultConstructStrategyImpl::generateStarPattern(const std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Reference>& context, const std::shared_ptr<uml::Connector>& connector)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -425,7 +425,7 @@ void CS_DefaultConstructStrategyImpl::generateStarPattern(std::shared_ptr<PSCS::
 	//end of body
 }
 
-int CS_DefaultConstructStrategyImpl::getCardinality(std::shared_ptr<uml::ConnectorEnd> end)
+int CS_DefaultConstructStrategyImpl::getCardinality(const std::shared_ptr<uml::ConnectorEnd>& end)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -483,7 +483,7 @@ std::shared_ptr<uml::Association> CS_DefaultConstructStrategyImpl::getDefaultAss
 	//end of body
 }
 
-std::shared_ptr<uml::Class> CS_DefaultConstructStrategyImpl::getRealizingClass(std::shared_ptr<uml::Interface> interface_)
+std::shared_ptr<uml::Class> CS_DefaultConstructStrategyImpl::getRealizingClass(const std::shared_ptr<uml::Interface>& interface_)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -506,7 +506,7 @@ std::shared_ptr<uml::Class> CS_DefaultConstructStrategyImpl::getRealizingClass(s
 	//end of body
 }
 
-std::shared_ptr<Bag<fUML::Semantics::Values::Value> > CS_DefaultConstructStrategyImpl::getValuesFromConnectorEnd(std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Reference> context,std::shared_ptr<uml::ConnectorEnd> end)
+std::shared_ptr<Bag<fUML::Semantics::Values::Value> > CS_DefaultConstructStrategyImpl::getValuesFromConnectorEnd(const std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Reference>& context, const std::shared_ptr<uml::ConnectorEnd>& end)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -537,7 +537,7 @@ std::shared_ptr<Bag<fUML::Semantics::Values::Value> > CS_DefaultConstructStrateg
 	//end of body
 }
 
-std::shared_ptr<fUML::Semantics::StructuredClassifiers::Object> CS_DefaultConstructStrategyImpl::instantiateInterface(std::shared_ptr<uml::Interface> interface,std::shared_ptr<fUML::Semantics::Loci::Locus> locus)
+std::shared_ptr<fUML::Semantics::StructuredClassifiers::Object> CS_DefaultConstructStrategyImpl::instantiateInterface(const std::shared_ptr<uml::Interface>& interface, const std::shared_ptr<fUML::Semantics::Loci::Locus>& locus)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -547,7 +547,7 @@ std::shared_ptr<fUML::Semantics::StructuredClassifiers::Object> CS_DefaultConstr
 	//end of body
 }
 
-bool CS_DefaultConstructStrategyImpl::isArrayPattern(std::shared_ptr<uml::Connector> c)
+bool CS_DefaultConstructStrategyImpl::isArrayPattern(const std::shared_ptr<uml::Connector>& c)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -598,7 +598,7 @@ bool CS_DefaultConstructStrategyImpl::isArrayPattern(std::shared_ptr<uml::Connec
 	//end of body
 }
 
-bool CS_DefaultConstructStrategyImpl::isStarPattern(std::shared_ptr<uml::Connector> c)
+bool CS_DefaultConstructStrategyImpl::isStarPattern(const std::shared_ptr<uml::Connector>& c)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -646,18 +646,18 @@ bool CS_DefaultConstructStrategyImpl::isStarPattern(std::shared_ptr<uml::Connect
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference defaultAssociation */
-std::shared_ptr<uml::Association> CS_DefaultConstructStrategyImpl::getDefaultAssociation() const
+const std::shared_ptr<uml::Association>& CS_DefaultConstructStrategyImpl::getDefaultAssociation() const
 {
     return m_defaultAssociation;
 }
-void CS_DefaultConstructStrategyImpl::setDefaultAssociation(std::shared_ptr<uml::Association> _defaultAssociation)
+void CS_DefaultConstructStrategyImpl::setDefaultAssociation(const std::shared_ptr<uml::Association>& _defaultAssociation)
 {
     m_defaultAssociation = _defaultAssociation;
 	
 }
 
 /* Getter & Setter for reference generatedRealizingClasses */
-std::shared_ptr<Bag<uml::Class>> CS_DefaultConstructStrategyImpl::getGeneratedRealizingClasses() const
+const std::shared_ptr<Bag<uml::Class>>& CS_DefaultConstructStrategyImpl::getGeneratedRealizingClasses() const
 {
 	if(m_generatedRealizingClasses == nullptr)
 	{
@@ -669,11 +669,11 @@ std::shared_ptr<Bag<uml::Class>> CS_DefaultConstructStrategyImpl::getGeneratedRe
 }
 
 /* Getter & Setter for reference locus */
-std::shared_ptr<fUML::Semantics::Loci::Locus> CS_DefaultConstructStrategyImpl::getLocus() const
+const std::shared_ptr<fUML::Semantics::Loci::Locus>& CS_DefaultConstructStrategyImpl::getLocus() const
 {
     return m_locus;
 }
-void CS_DefaultConstructStrategyImpl::setLocus(std::shared_ptr<fUML::Semantics::Loci::Locus> _locus)
+void CS_DefaultConstructStrategyImpl::setLocus(const std::shared_ptr<fUML::Semantics::Loci::Locus>& _locus)
 {
     m_locus = _locus;
 	
@@ -831,7 +831,7 @@ void CS_DefaultConstructStrategyImpl::saveContent(std::shared_ptr<persistence::i
 	}
 }
 
-std::shared_ptr<ecore::EClass> CS_DefaultConstructStrategyImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& CS_DefaultConstructStrategyImpl::eStaticClass() const
 {
 	return PSCS::Semantics::Actions::ActionsPackage::eInstance()->getCS_DefaultConstructStrategy_Class();
 }
@@ -867,7 +867,7 @@ bool CS_DefaultConstructStrategyImpl::internalEIsSet(int featureID) const
 	return CS_ConstructStrategyImpl::internalEIsSet(featureID);
 }
 
-bool CS_DefaultConstructStrategyImpl::eSet(int featureID, Any newValue)
+bool CS_DefaultConstructStrategyImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -932,7 +932,7 @@ bool CS_DefaultConstructStrategyImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any CS_DefaultConstructStrategyImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any CS_DefaultConstructStrategyImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

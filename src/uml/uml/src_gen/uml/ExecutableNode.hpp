@@ -98,7 +98,7 @@ namespace uml
 			<p>From package UML::Activities.</p>
 			*/
 			
-			virtual std::shared_ptr<Subset<uml::ExceptionHandler, uml::Element>> getHandler() const = 0;
+			virtual const std::shared_ptr<Subset<uml::ExceptionHandler, uml::Element>>& getHandler() const = 0;
 
 			//*********************************
 			// Union Reference Getters

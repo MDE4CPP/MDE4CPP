@@ -51,7 +51,7 @@ namespace uml
 			default <> null implies default.isCompatibleWith(parameteredElement)
 			*/
 			 
-			virtual bool must_be_compatible(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
+			virtual bool must_be_compatible(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context) ;
 			
 			//*********************************
 			// Attribute Getters & Setters
@@ -65,49 +65,49 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::ParameterableElement> getDefault() const ;
+			virtual const std::shared_ptr<uml::ParameterableElement>& getDefault() const ;
 			/*!
 			The ParameterableElement that is the default for this formal TemplateParameter.
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual void setDefault(std::shared_ptr<uml::ParameterableElement>) ;
+			virtual void setDefault(const std::shared_ptr<uml::ParameterableElement>&) ;
 			/*!
 			The ParameterableElement that is owned by this TemplateParameter for the purpose of providing a default.
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::ParameterableElement> getOwnedDefault() const ;
+			virtual const std::shared_ptr<uml::ParameterableElement>& getOwnedDefault() const ;
 			/*!
 			The ParameterableElement that is owned by this TemplateParameter for the purpose of providing a default.
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual void setOwnedDefault(std::shared_ptr<uml::ParameterableElement>) ;
+			virtual void setOwnedDefault(const std::shared_ptr<uml::ParameterableElement>&) ;
 			/*!
 			The ParameterableElement that is owned by this TemplateParameter for the purpose of exposing it as the parameteredElement.
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::ParameterableElement> getOwnedParameteredElement() const ;
+			virtual const std::shared_ptr<uml::ParameterableElement>& getOwnedParameteredElement() const ;
 			/*!
 			The ParameterableElement that is owned by this TemplateParameter for the purpose of exposing it as the parameteredElement.
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual void setOwnedParameteredElement(std::shared_ptr<uml::ParameterableElement>) ;
+			virtual void setOwnedParameteredElement(const std::shared_ptr<uml::ParameterableElement>&) ;
 			/*!
 			The ParameterableElement exposed by this TemplateParameter.
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::ParameterableElement> getParameteredElement() const ;
+			virtual const std::shared_ptr<uml::ParameterableElement>& getParameteredElement() const ;
 			/*!
 			The ParameterableElement exposed by this TemplateParameter.
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual void setParameteredElement(std::shared_ptr<uml::ParameterableElement>) ;
+			virtual void setParameteredElement(const std::shared_ptr<uml::ParameterableElement>&) ;
 			/*!
 			The TemplateSignature that owns this TemplateParameter.
 			<p>From package UML::CommonStructure.</p>
@@ -155,19 +155,19 @@ namespace uml
 			virtual void saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const;
 
 		protected:
-			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
+			virtual const std::shared_ptr<ecore::EClass>& eStaticClass() const;
 
 			//*********************************
 			// EStructuralFeature Get/Set/IsSet
 			//*********************************
 			virtual Any eGet(int featureID, bool resolve, bool coreType) const ;
-			virtual bool eSet(int featureID, Any newValue) ;
+			virtual bool eSet(int featureID, const Any& newValue) ;
 			virtual bool internalEIsSet(int featureID) const ;
 
 			//*********************************
 			// EOperation Invoke
 			//*********************************
-			virtual Any eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments) ;
+			virtual Any eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments) ;
 
 		private:
 			std::weak_ptr<uml::TemplateParameter> m_thisTemplateParameterPtr;

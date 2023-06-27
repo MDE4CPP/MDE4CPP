@@ -44,8 +44,8 @@
 #include "fUML/Semantics/StructuredClassifiers/Object.hpp"
 #include "uml/Operation.hpp"
 //Factories and Package includes
-#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/SemanticsPackage.hpp"
+#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/StructuredClassifiers/StructuredClassifiersPackage.hpp"
 #include "uml/umlPackage.hpp"
 
@@ -111,7 +111,7 @@ std::shared_ptr<ecore::EObject> RedefinitionBasedDispatchStrategyImpl::copy() co
 //*********************************
 // Operations
 //*********************************
-bool RedefinitionBasedDispatchStrategyImpl::operationsMatch(std::shared_ptr<uml::Operation> ownedOperation,std::shared_ptr<uml::Operation> baseOperation)
+bool RedefinitionBasedDispatchStrategyImpl::operationsMatch(const std::shared_ptr<uml::Operation>& ownedOperation, const std::shared_ptr<uml::Operation>& baseOperation)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -133,7 +133,7 @@ bool RedefinitionBasedDispatchStrategyImpl::operationsMatch(std::shared_ptr<uml:
 	//end of body
 }
 
-std::shared_ptr<uml::Behavior> RedefinitionBasedDispatchStrategyImpl::retrieveMethod(std::shared_ptr<fUML::Semantics::StructuredClassifiers::Object> object,std::shared_ptr<uml::Operation> operation)
+std::shared_ptr<uml::Behavior> RedefinitionBasedDispatchStrategyImpl::retrieveMethod(const std::shared_ptr<fUML::Semantics::StructuredClassifiers::Object>& object, const std::shared_ptr<uml::Operation>& operation)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -253,7 +253,7 @@ void RedefinitionBasedDispatchStrategyImpl::saveContent(std::shared_ptr<persiste
 	}
 }
 
-std::shared_ptr<ecore::EClass> RedefinitionBasedDispatchStrategyImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& RedefinitionBasedDispatchStrategyImpl::eStaticClass() const
 {
 	return fUML::Semantics::StructuredClassifiers::StructuredClassifiersPackage::eInstance()->getRedefinitionBasedDispatchStrategy_Class();
 }
@@ -277,7 +277,7 @@ bool RedefinitionBasedDispatchStrategyImpl::internalEIsSet(int featureID) const
 	return DispatchStrategyImpl::internalEIsSet(featureID);
 }
 
-bool RedefinitionBasedDispatchStrategyImpl::eSet(int featureID, Any newValue)
+bool RedefinitionBasedDispatchStrategyImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -289,7 +289,7 @@ bool RedefinitionBasedDispatchStrategyImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any RedefinitionBasedDispatchStrategyImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any RedefinitionBasedDispatchStrategyImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

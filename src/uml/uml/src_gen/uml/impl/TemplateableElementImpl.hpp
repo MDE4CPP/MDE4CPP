@@ -71,19 +71,19 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::TemplateSignature> getOwnedTemplateSignature() const ;
+			virtual const std::shared_ptr<uml::TemplateSignature>& getOwnedTemplateSignature() const ;
 			/*!
 			The optional TemplateSignature specifying the formal TemplateParameters for this TemplateableElement. If a TemplateableElement has a TemplateSignature, then it is a template.
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual void setOwnedTemplateSignature(std::shared_ptr<uml::TemplateSignature>) ;
+			virtual void setOwnedTemplateSignature(const std::shared_ptr<uml::TemplateSignature>&) ;
 			/*!
 			The optional TemplateBindings from this TemplateableElement to one or more templates.
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::shared_ptr<Subset<uml::TemplateBinding, uml::Element>> getTemplateBinding() const ;
+			virtual const std::shared_ptr<Subset<uml::TemplateBinding, uml::Element>>& getTemplateBinding() const ;
 			
 			//*********************************
 			// Union Reference Getters
@@ -111,19 +111,19 @@ namespace uml
 			virtual void saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const;
 
 		protected:
-			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
+			virtual const std::shared_ptr<ecore::EClass>& eStaticClass() const;
 
 			//*********************************
 			// EStructuralFeature Get/Set/IsSet
 			//*********************************
 			virtual Any eGet(int featureID, bool resolve, bool coreType) const ;
-			virtual bool eSet(int featureID, Any newValue) ;
+			virtual bool eSet(int featureID, const Any& newValue) ;
 			virtual bool internalEIsSet(int featureID) const ;
 
 			//*********************************
 			// EOperation Invoke
 			//*********************************
-			virtual Any eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments) ;
+			virtual Any eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments) ;
 
 		private:
 			std::weak_ptr<uml::TemplateableElement> m_thisTemplateableElementPtr;

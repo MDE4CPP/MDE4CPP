@@ -318,7 +318,7 @@ void LiteralNullImpl::saveContent(std::shared_ptr<persistence::interfaces::XSave
 	}
 }
 
-std::shared_ptr<ecore::EClass> LiteralNullImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& LiteralNullImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getLiteralNull_Class();
 }
@@ -342,7 +342,7 @@ bool LiteralNullImpl::internalEIsSet(int featureID) const
 	return LiteralSpecificationImpl::internalEIsSet(featureID);
 }
 
-bool LiteralNullImpl::eSet(int featureID, Any newValue)
+bool LiteralNullImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -354,7 +354,7 @@ bool LiteralNullImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any LiteralNullImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any LiteralNullImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

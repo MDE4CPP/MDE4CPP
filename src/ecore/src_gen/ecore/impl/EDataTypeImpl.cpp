@@ -124,7 +124,7 @@ std::shared_ptr<ecore::EObject> EDataTypeImpl::copy() const
 // Attribute Getters & Setters
 //*********************************
 /* Getter & Setter for attribute serializable */
-bool EDataTypeImpl::isSerializable() const 
+bool EDataTypeImpl::isSerializable() const
 {
 	return m_serializable;
 }
@@ -263,7 +263,7 @@ void EDataTypeImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHa
 	}
 }
 
-std::shared_ptr<EClass> EDataTypeImpl::eStaticClass() const
+const std::shared_ptr<EClass>& EDataTypeImpl::eStaticClass() const
 {
 	return ecore::ecorePackage::eInstance()->getEDataType_Class();
 }
@@ -291,7 +291,7 @@ bool EDataTypeImpl::internalEIsSet(int featureID) const
 	return EClassifierImpl::internalEIsSet(featureID);
 }
 
-bool EDataTypeImpl::eSet(int featureID, Any newValue)
+bool EDataTypeImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -310,7 +310,7 @@ bool EDataTypeImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any EDataTypeImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any EDataTypeImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

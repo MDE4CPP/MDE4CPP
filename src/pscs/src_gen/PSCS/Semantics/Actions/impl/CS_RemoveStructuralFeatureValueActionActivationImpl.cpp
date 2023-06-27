@@ -53,9 +53,9 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "fUML/Semantics/Activities/ActivitiesFactory.hpp"
 #include "fUML/Semantics/Actions/ActionsFactory.hpp"
 #include "uml/umlFactory.hpp"
+#include "fUML/Semantics/Activities/ActivitiesFactory.hpp"
 #include "uml/Action.hpp"
 #include "fUML/Semantics/Activities/ActivityEdgeInstance.hpp"
 #include "uml/ActivityNode.hpp"
@@ -72,8 +72,8 @@
 #include "fUML/Semantics/Activities/Token.hpp"
 #include "fUML/Semantics/Values/Value.hpp"
 //Factories and Package includes
-#include "PSCS/PSCSPackage.hpp"
 #include "PSCS/Semantics/SemanticsPackage.hpp"
+#include "PSCS/PSCSPackage.hpp"
 #include "PSCS/Semantics/Actions/ActionsPackage.hpp"
 #include "fUML/Semantics/Actions/ActionsPackage.hpp"
 #include "fUML/Semantics/Activities/ActivitiesPackage.hpp"
@@ -303,7 +303,7 @@ void CS_RemoveStructuralFeatureValueActionActivationImpl::doAction()
 	//end of body
 }
 
-std::shared_ptr<Bag<PSCS::Semantics::StructuredClassifiers::CS_Link> > CS_RemoveStructuralFeatureValueActionActivationImpl::getLinksToDestroy(std::shared_ptr<fUML::Semantics::SimpleClassifiers::StructuredValue> value,std::shared_ptr<uml::StructuralFeature> feature,std::shared_ptr<fUML::Semantics::Values::Value> removedValue)
+std::shared_ptr<Bag<PSCS::Semantics::StructuredClassifiers::CS_Link> > CS_RemoveStructuralFeatureValueActionActivationImpl::getLinksToDestroy(const std::shared_ptr<fUML::Semantics::SimpleClassifiers::StructuredValue>& value, const std::shared_ptr<uml::StructuralFeature>& feature, const std::shared_ptr<fUML::Semantics::Values::Value>& removedValue)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -377,7 +377,7 @@ std::shared_ptr<Bag<PSCS::Semantics::StructuredClassifiers::CS_Link> > CS_Remove
 	//end of body
 }
 
-std::shared_ptr<Bag<fUML::Semantics::Values::Value> > CS_RemoveStructuralFeatureValueActionActivationImpl::getPotentialLinkEnds(std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Reference> context,std::shared_ptr<uml::StructuralFeature> feature)
+std::shared_ptr<Bag<fUML::Semantics::Values::Value> > CS_RemoveStructuralFeatureValueActionActivationImpl::getPotentialLinkEnds(const std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Reference>& context, const std::shared_ptr<uml::StructuralFeature>& feature)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -511,7 +511,7 @@ void CS_RemoveStructuralFeatureValueActionActivationImpl::saveContent(std::share
 	}
 }
 
-std::shared_ptr<ecore::EClass> CS_RemoveStructuralFeatureValueActionActivationImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& CS_RemoveStructuralFeatureValueActionActivationImpl::eStaticClass() const
 {
 	return PSCS::Semantics::Actions::ActionsPackage::eInstance()->getCS_RemoveStructuralFeatureValueActionActivation_Class();
 }
@@ -535,7 +535,7 @@ bool CS_RemoveStructuralFeatureValueActionActivationImpl::internalEIsSet(int fea
 	return fUML::Semantics::Actions::RemoveStructuralFeatureValueActivationImpl::internalEIsSet(featureID);
 }
 
-bool CS_RemoveStructuralFeatureValueActionActivationImpl::eSet(int featureID, Any newValue)
+bool CS_RemoveStructuralFeatureValueActionActivationImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -547,7 +547,7 @@ bool CS_RemoveStructuralFeatureValueActionActivationImpl::eSet(int featureID, An
 //*********************************
 // EOperation Invoke
 //*********************************
-Any CS_RemoveStructuralFeatureValueActionActivationImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any CS_RemoveStructuralFeatureValueActionActivationImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

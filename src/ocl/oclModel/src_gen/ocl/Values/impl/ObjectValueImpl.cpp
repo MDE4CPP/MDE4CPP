@@ -124,7 +124,7 @@ std::shared_ptr<ecore::EObject> ObjectValueImpl::copy() const
 //*********************************
 // Operations
 //*********************************
-bool ObjectValueImpl::equals(std::shared_ptr<fUML::Semantics::Values::Value> otherValue)
+bool ObjectValueImpl::equals(const std::shared_ptr<fUML::Semantics::Values::Value>& otherValue)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -239,7 +239,7 @@ std::string ObjectValueImpl::toString()
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference history */
-std::shared_ptr<Bag<ocl::Values::LocalSnapshot>> ObjectValueImpl::getHistory() const
+const std::shared_ptr<Bag<ocl::Values::LocalSnapshot>>& ObjectValueImpl::getHistory() const
 {
 	if(m_history == nullptr)
 	{
@@ -251,11 +251,11 @@ std::shared_ptr<Bag<ocl::Values::LocalSnapshot>> ObjectValueImpl::getHistory() c
 }
 
 /* Getter & Setter for reference value */
-std::shared_ptr<ecore::EObject> ObjectValueImpl::getValue() const
+const std::shared_ptr<ecore::EObject>& ObjectValueImpl::getValue() const
 {
     return m_value;
 }
-void ObjectValueImpl::setValue(std::shared_ptr<ecore::EObject> _value)
+void ObjectValueImpl::setValue(const std::shared_ptr<ecore::EObject>& _value)
 {
     m_value = _value;
 	
@@ -390,7 +390,7 @@ void ObjectValueImpl::saveContent(std::shared_ptr<persistence::interfaces::XSave
 	}
 }
 
-std::shared_ptr<ecore::EClass> ObjectValueImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& ObjectValueImpl::eStaticClass() const
 {
 	return ocl::Values::ValuesPackage::eInstance()->getObjectValue_Class();
 }
@@ -422,7 +422,7 @@ bool ObjectValueImpl::internalEIsSet(int featureID) const
 	return fUML::Semantics::Values::ValueImpl::internalEIsSet(featureID);
 }
 
-bool ObjectValueImpl::eSet(int featureID, Any newValue)
+bool ObjectValueImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -479,7 +479,7 @@ bool ObjectValueImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any ObjectValueImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any ObjectValueImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

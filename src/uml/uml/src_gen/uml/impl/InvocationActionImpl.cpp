@@ -184,7 +184,7 @@ InvocationActionImpl& InvocationActionImpl::operator=(const InvocationActionImpl
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference argument */
-std::shared_ptr<SubsetUnion<uml::InputPin, uml::InputPin>> InvocationActionImpl::getArgument() const
+const std::shared_ptr<SubsetUnion<uml::InputPin, uml::InputPin>>& InvocationActionImpl::getArgument() const
 {
 	if(m_argument == nullptr)
 	{
@@ -205,11 +205,11 @@ std::shared_ptr<SubsetUnion<uml::InputPin, uml::InputPin>> InvocationActionImpl:
 }
 
 /* Getter & Setter for reference onPort */
-std::shared_ptr<uml::Port> InvocationActionImpl::getOnPort() const
+const std::shared_ptr<uml::Port>& InvocationActionImpl::getOnPort() const
 {
     return m_onPort;
 }
-void InvocationActionImpl::setOnPort(std::shared_ptr<uml::Port> _onPort)
+void InvocationActionImpl::setOnPort(const std::shared_ptr<uml::Port>& _onPort)
 {
     m_onPort = _onPort;
 	
@@ -449,7 +449,7 @@ void InvocationActionImpl::saveContent(std::shared_ptr<persistence::interfaces::
 	}
 }
 
-std::shared_ptr<ecore::EClass> InvocationActionImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& InvocationActionImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getInvocationAction_Class();
 }
@@ -481,7 +481,7 @@ bool InvocationActionImpl::internalEIsSet(int featureID) const
 	return ActionImpl::internalEIsSet(featureID);
 }
 
-bool InvocationActionImpl::eSet(int featureID, Any newValue)
+bool InvocationActionImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -538,7 +538,7 @@ bool InvocationActionImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any InvocationActionImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any InvocationActionImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

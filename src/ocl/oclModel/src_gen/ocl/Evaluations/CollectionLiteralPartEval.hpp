@@ -83,8 +83,8 @@ namespace ocl::Evaluations
 			//*********************************
 			// Reference Getters & Setters
 			//*********************************
-			virtual std::shared_ptr<fUML::Semantics::Values::Value> getElement() const = 0;
-			virtual void setElement(std::shared_ptr<fUML::Semantics::Values::Value>) = 0;
+			virtual const std::shared_ptr<fUML::Semantics::Values::Value>& getElement() const = 0;
+			virtual void setElement(const std::shared_ptr<fUML::Semantics::Values::Value>&) = 0;
 
 			//*********************************
 			// Union Reference Getters

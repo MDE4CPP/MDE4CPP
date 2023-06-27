@@ -50,12 +50,12 @@ namespace fUML::Semantics::Actions
 			virtual void createNodeActivations() ;
 			virtual void doAction() ;
 			virtual void doStructuredActivity() ;
-			virtual std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivation> getNodeActivation(std::shared_ptr<uml::ActivityNode> node) ;
-			virtual std::shared_ptr<Bag<fUML::Semantics::Values::Value> > getPinValues(std::shared_ptr<uml::OutputPin> pin) ;
-			virtual bool isSourceFor(std::shared_ptr<fUML::Semantics::Activities::ActivityEdgeInstance> edgeInstance) ;
+			virtual std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivation> getNodeActivation(const std::shared_ptr<uml::ActivityNode>& node) ;
+			virtual std::shared_ptr<Bag<fUML::Semantics::Values::Value> > getPinValues(const std::shared_ptr<uml::OutputPin>& pin) ;
+			virtual bool isSourceFor(const std::shared_ptr<fUML::Semantics::Activities::ActivityEdgeInstance>& edgeInstance) ;
 			virtual bool isSuspended() ;
-			virtual std::shared_ptr<Bag<uml::ActivityNode> > makeActivityNodeList(std::shared_ptr<Bag<uml::ExecutableNode>> nodes) ;
-			virtual void putPinValues(std::shared_ptr<uml::OutputPin> pin,std::shared_ptr<Bag<fUML::Semantics::Values::Value>> values) ;
+			virtual std::shared_ptr<Bag<uml::ActivityNode> > makeActivityNodeList(const std::shared_ptr<Bag<uml::ExecutableNode>>& nodes) ;
+			virtual void putPinValues(const std::shared_ptr<uml::OutputPin>& pin, const std::shared_ptr<Bag<fUML::Semantics::Values::Value>>& values) ;
 			virtual void resume() ;
 			virtual void terminate() ;
 			virtual void terminateAll() ;
@@ -67,8 +67,8 @@ namespace fUML::Semantics::Actions
 			//*********************************
 			// Reference Getters & Setters
 			//*********************************
-			virtual std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup> getActivationGroup() const ;
-			virtual void setActivationGroup(std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup>) ;
+			virtual const std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup>& getActivationGroup() const ;
+			virtual void setActivationGroup(const std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup>&) ;
 			
 			//*********************************
 			// Union Reference Getters
@@ -91,19 +91,19 @@ namespace fUML::Semantics::Actions
 			virtual void saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const;
 
 		protected:
-			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
+			virtual const std::shared_ptr<ecore::EClass>& eStaticClass() const;
 
 			//*********************************
 			// EStructuralFeature Get/Set/IsSet
 			//*********************************
 			virtual Any eGet(int featureID, bool resolve, bool coreType) const ;
-			virtual bool eSet(int featureID, Any newValue) ;
+			virtual bool eSet(int featureID, const Any& newValue) ;
 			virtual bool internalEIsSet(int featureID) const ;
 
 			//*********************************
 			// EOperation Invoke
 			//*********************************
-			virtual Any eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments) ;
+			virtual Any eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments) ;
 
 		private:
 			std::weak_ptr<fUML::Semantics::Actions::StructuredActivityNodeActivation> m_thisStructuredActivityNodeActivationPtr;

@@ -223,22 +223,22 @@ std::shared_ptr<ecore::EObject> LetExpImpl::copy() const
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference in */
-std::shared_ptr<ocl::Expressions::OclExpression> LetExpImpl::getIn() const
+const std::shared_ptr<ocl::Expressions::OclExpression>& LetExpImpl::getIn() const
 {
     return m_in;
 }
-void LetExpImpl::setIn(std::shared_ptr<ocl::Expressions::OclExpression> _in)
+void LetExpImpl::setIn(const std::shared_ptr<ocl::Expressions::OclExpression>& _in)
 {
     m_in = _in;
 	
 }
 
 /* Getter & Setter for reference variable */
-std::shared_ptr<ocl::Expressions::Variable> LetExpImpl::getVariable() const
+const std::shared_ptr<ocl::Expressions::Variable>& LetExpImpl::getVariable() const
 {
     return m_variable;
 }
-void LetExpImpl::setVariable(std::shared_ptr<ocl::Expressions::Variable> _variable)
+void LetExpImpl::setVariable(const std::shared_ptr<ocl::Expressions::Variable>& _variable)
 {
     m_variable = _variable;
 	
@@ -420,7 +420,7 @@ void LetExpImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandl
 	}
 }
 
-std::shared_ptr<ecore::EClass> LetExpImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& LetExpImpl::eStaticClass() const
 {
 	return ocl::Expressions::ExpressionsPackage::eInstance()->getLetExp_Class();
 }
@@ -452,7 +452,7 @@ bool LetExpImpl::internalEIsSet(int featureID) const
 	return OclExpressionImpl::internalEIsSet(featureID);
 }
 
-bool LetExpImpl::eSet(int featureID, Any newValue)
+bool LetExpImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -480,7 +480,7 @@ bool LetExpImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any LetExpImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any LetExpImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

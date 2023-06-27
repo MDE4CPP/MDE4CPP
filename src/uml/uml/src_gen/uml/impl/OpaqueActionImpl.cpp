@@ -240,7 +240,7 @@ std::shared_ptr<ecore::EObject> OpaqueActionImpl::copy() const
 //*********************************
 // Operations
 //*********************************
-bool OpaqueActionImpl::language_body_size(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool OpaqueActionImpl::language_body_size(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -249,7 +249,7 @@ bool OpaqueActionImpl::language_body_size(Any diagnostics,std::shared_ptr<std::m
 // Attribute Getters & Setters
 //*********************************
 /* Getter & Setter for attribute body */
-std::shared_ptr<Bag<std::string>> OpaqueActionImpl::getBody() const 
+const std::shared_ptr<Bag<std::string>>& OpaqueActionImpl::getBody() const
 {
 	if(m_body == nullptr)
 	{
@@ -259,7 +259,7 @@ std::shared_ptr<Bag<std::string>> OpaqueActionImpl::getBody() const
 }
 
 /* Getter & Setter for attribute language */
-std::shared_ptr<Bag<std::string>> OpaqueActionImpl::getLanguage() const 
+const std::shared_ptr<Bag<std::string>>& OpaqueActionImpl::getLanguage() const
 {
 	if(m_language == nullptr)
 	{
@@ -272,7 +272,7 @@ std::shared_ptr<Bag<std::string>> OpaqueActionImpl::getLanguage() const
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference inputValue */
-std::shared_ptr<Subset<uml::InputPin, uml::InputPin>> OpaqueActionImpl::getInputValue() const
+const std::shared_ptr<Subset<uml::InputPin, uml::InputPin>>& OpaqueActionImpl::getInputValue() const
 {
 	if(m_inputValue == nullptr)
 	{
@@ -293,7 +293,7 @@ std::shared_ptr<Subset<uml::InputPin, uml::InputPin>> OpaqueActionImpl::getInput
 }
 
 /* Getter & Setter for reference outputValue */
-std::shared_ptr<Subset<uml::OutputPin, uml::OutputPin>> OpaqueActionImpl::getOutputValue() const
+const std::shared_ptr<Subset<uml::OutputPin, uml::OutputPin>>& OpaqueActionImpl::getOutputValue() const
 {
 	if(m_outputValue == nullptr)
 	{
@@ -590,7 +590,7 @@ void OpaqueActionImpl::saveContent(std::shared_ptr<persistence::interfaces::XSav
 	}
 }
 
-std::shared_ptr<ecore::EClass> OpaqueActionImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& OpaqueActionImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getOpaqueAction_Class();
 }
@@ -630,7 +630,7 @@ bool OpaqueActionImpl::internalEIsSet(int featureID) const
 	return ActionImpl::internalEIsSet(featureID);
 }
 
-bool OpaqueActionImpl::eSet(int featureID, Any newValue)
+bool OpaqueActionImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -728,7 +728,7 @@ bool OpaqueActionImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any OpaqueActionImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any OpaqueActionImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

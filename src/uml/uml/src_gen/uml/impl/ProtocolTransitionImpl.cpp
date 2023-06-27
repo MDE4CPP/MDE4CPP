@@ -152,12 +152,12 @@ std::shared_ptr<ecore::EObject> ProtocolTransitionImpl::copy() const
 //*********************************
 // Operations
 //*********************************
-bool ProtocolTransitionImpl::associated_actions(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool ProtocolTransitionImpl::associated_actions(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool ProtocolTransitionImpl::belongs_to_psm(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool ProtocolTransitionImpl::belongs_to_psm(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -167,7 +167,7 @@ std::shared_ptr<Bag<uml::Operation> > ProtocolTransitionImpl::getReferreds()
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool ProtocolTransitionImpl::refers_to_operation(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool ProtocolTransitionImpl::refers_to_operation(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -180,29 +180,29 @@ bool ProtocolTransitionImpl::refers_to_operation(Any diagnostics,std::shared_ptr
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference postCondition */
-std::shared_ptr<uml::Constraint> ProtocolTransitionImpl::getPostCondition() const
+const std::shared_ptr<uml::Constraint>& ProtocolTransitionImpl::getPostCondition() const
 {
     return m_postCondition;
 }
-void ProtocolTransitionImpl::setPostCondition(std::shared_ptr<uml::Constraint> _postCondition)
+void ProtocolTransitionImpl::setPostCondition(const std::shared_ptr<uml::Constraint>& _postCondition)
 {
     m_postCondition = _postCondition;
 	
 }
 
 /* Getter & Setter for reference preCondition */
-std::shared_ptr<uml::Constraint> ProtocolTransitionImpl::getPreCondition() const
+const std::shared_ptr<uml::Constraint>& ProtocolTransitionImpl::getPreCondition() const
 {
     return m_preCondition;
 }
-void ProtocolTransitionImpl::setPreCondition(std::shared_ptr<uml::Constraint> _preCondition)
+void ProtocolTransitionImpl::setPreCondition(const std::shared_ptr<uml::Constraint>& _preCondition)
 {
     m_preCondition = _preCondition;
 	
 }
 
 /* Getter & Setter for reference referred */
-std::shared_ptr<Bag<uml::Operation>> ProtocolTransitionImpl::getReferred() const
+const std::shared_ptr<Bag<uml::Operation>>& ProtocolTransitionImpl::getReferred() const
 {
 	if(m_referred == nullptr)
 	{
@@ -435,7 +435,7 @@ void ProtocolTransitionImpl::saveContent(std::shared_ptr<persistence::interfaces
 	}
 }
 
-std::shared_ptr<ecore::EClass> ProtocolTransitionImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& ProtocolTransitionImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getProtocolTransition_Class();
 }
@@ -471,7 +471,7 @@ bool ProtocolTransitionImpl::internalEIsSet(int featureID) const
 	return TransitionImpl::internalEIsSet(featureID);
 }
 
-bool ProtocolTransitionImpl::eSet(int featureID, Any newValue)
+bool ProtocolTransitionImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -499,7 +499,7 @@ bool ProtocolTransitionImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any ProtocolTransitionImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any ProtocolTransitionImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

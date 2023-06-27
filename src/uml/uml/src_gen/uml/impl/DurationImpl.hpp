@@ -59,7 +59,7 @@ namespace uml
 			expr = null implies (observation->size() = 1 and observation->forAll(oclIsKindOf(DurationObservation)))
 			*/
 			 
-			virtual bool no_expr_requires_observation(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
+			virtual bool no_expr_requires_observation(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context) ;
 			
 			//*********************************
 			// Attribute Getters & Setters
@@ -73,19 +73,19 @@ namespace uml
 			<p>From package UML::Values.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::ValueSpecification> getExpr() const ;
+			virtual const std::shared_ptr<uml::ValueSpecification>& getExpr() const ;
 			/*!
 			A ValueSpecification that evaluates to the value of the Duration.
 			<p>From package UML::Values.</p>
 			*/
 			
-			virtual void setExpr(std::shared_ptr<uml::ValueSpecification>) ;
+			virtual void setExpr(const std::shared_ptr<uml::ValueSpecification>&) ;
 			/*!
 			Refers to the Observations that are involved in the computation of the Duration value
 			<p>From package UML::Values.</p>
 			*/
 			
-			virtual std::shared_ptr<Bag<uml::Observation>> getObservation() const ;
+			virtual const std::shared_ptr<Bag<uml::Observation>>& getObservation() const ;
 			
 			//*********************************
 			// Union Reference Getters
@@ -126,19 +126,19 @@ namespace uml
 			virtual void saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const;
 
 		protected:
-			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
+			virtual const std::shared_ptr<ecore::EClass>& eStaticClass() const;
 
 			//*********************************
 			// EStructuralFeature Get/Set/IsSet
 			//*********************************
 			virtual Any eGet(int featureID, bool resolve, bool coreType) const ;
-			virtual bool eSet(int featureID, Any newValue) ;
+			virtual bool eSet(int featureID, const Any& newValue) ;
 			virtual bool internalEIsSet(int featureID) const ;
 
 			//*********************************
 			// EOperation Invoke
 			//*********************************
-			virtual Any eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments) ;
+			virtual Any eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments) ;
 
 		private:
 			std::weak_ptr<uml::Duration> m_thisDurationPtr;

@@ -90,31 +90,31 @@ namespace uml
 			value->excludesAll(qualifier.value)
 			*/
 			 
-			virtual bool end_object_input_pin(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
+			virtual bool end_object_input_pin(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context) = 0;
 			/*!
 			The multiplicity of the value InputPin must be 1..1.
 			value<>null implies value.is(1,1)
 			*/
 			 
-			virtual bool multiplicity(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
+			virtual bool multiplicity(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context) = 0;
 			/*!
 			The Property must be an Association memberEnd.
 			end.association <> null
 			*/
 			 
-			virtual bool property_is_association_end(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
+			virtual bool property_is_association_end(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context) = 0;
 			/*!
 			The qualifiers must be qualifiers of the Association end.
 			end.qualifier->includesAll(qualifier.qualifier)
 			*/
 			 
-			virtual bool qualifiers(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
+			virtual bool qualifiers(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context) = 0;
 			/*!
 			The type of the value InputPin conforms to the type of the Association end.
 			value<>null implies value.type.conformsTo(end.type)
 			*/
 			 
-			virtual bool same_type(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
+			virtual bool same_type(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context) = 0;
 
 			//*********************************
 			// Attribute Getters & Setters
@@ -128,31 +128,31 @@ namespace uml
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::Property> getEnd() const = 0;
+			virtual const std::shared_ptr<uml::Property>& getEnd() const = 0;
 			/*!
 			The Association end for which this LinkEndData specifies values.
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual void setEnd(std::shared_ptr<uml::Property>) = 0;
+			virtual void setEnd(const std::shared_ptr<uml::Property>&) = 0;
 			/*!
 			A set of QualifierValues used to provide values for the qualifiers of the end.
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual std::shared_ptr<Subset<uml::QualifierValue, uml::Element>> getQualifier() const = 0;
+			virtual const std::shared_ptr<Subset<uml::QualifierValue, uml::Element>>& getQualifier() const = 0;
 			/*!
 			The InputPin that provides the specified value for the given end. This InputPin is omitted if the LinkEndData specifies the "open" end for a ReadLinkAction.
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::InputPin> getValue() const = 0;
+			virtual const std::shared_ptr<uml::InputPin>& getValue() const = 0;
 			/*!
 			The InputPin that provides the specified value for the given end. This InputPin is omitted if the LinkEndData specifies the "open" end for a ReadLinkAction.
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual void setValue(std::shared_ptr<uml::InputPin>) = 0;
+			virtual void setValue(const std::shared_ptr<uml::InputPin>&) = 0;
 
 			//*********************************
 			// Union Reference Getters

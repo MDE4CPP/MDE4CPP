@@ -39,8 +39,8 @@
 #include "uml/umlFactory.hpp"
 #include "uml/Operation.hpp"
 //Factories and Package includes
-#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/SemanticsPackage.hpp"
+#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/CommonBehavior/CommonBehaviorPackage.hpp"
 #include "uml/umlPackage.hpp"
 
@@ -117,11 +117,11 @@ std::shared_ptr<ecore::EObject> CallEventBehaviorImpl::copy() const
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference operation */
-std::shared_ptr<uml::Operation> CallEventBehaviorImpl::getOperation() const
+const std::shared_ptr<uml::Operation>& CallEventBehaviorImpl::getOperation() const
 {
     return m_operation;
 }
-void CallEventBehaviorImpl::setOperation(std::shared_ptr<uml::Operation> _operation)
+void CallEventBehaviorImpl::setOperation(const std::shared_ptr<uml::Operation>& _operation)
 {
     m_operation = _operation;
 	
@@ -229,7 +229,7 @@ void CallEventBehaviorImpl::saveContent(std::shared_ptr<persistence::interfaces:
 	}
 }
 
-std::shared_ptr<ecore::EClass> CallEventBehaviorImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& CallEventBehaviorImpl::eStaticClass() const
 {
 	return fUML::Semantics::CommonBehavior::CommonBehaviorPackage::eInstance()->getCallEventBehavior_Class();
 }
@@ -257,7 +257,7 @@ bool CallEventBehaviorImpl::internalEIsSet(int featureID) const
 	return ecore::EObjectImpl::internalEIsSet(featureID);
 }
 
-bool CallEventBehaviorImpl::eSet(int featureID, Any newValue)
+bool CallEventBehaviorImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -277,7 +277,7 @@ bool CallEventBehaviorImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any CallEventBehaviorImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any CallEventBehaviorImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

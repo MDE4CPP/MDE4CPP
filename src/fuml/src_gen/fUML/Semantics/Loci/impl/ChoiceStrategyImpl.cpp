@@ -35,8 +35,8 @@
 #include <exception> // used in Persistence
 #include "fUML/Semantics/Loci/SemanticStrategy.hpp"
 //Factories and Package includes
-#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/SemanticsPackage.hpp"
+#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/Loci/LociPackage.hpp"
 
 using namespace fUML::Semantics::Loci;
@@ -184,7 +184,7 @@ void ChoiceStrategyImpl::saveContent(std::shared_ptr<persistence::interfaces::XS
 	}
 }
 
-std::shared_ptr<ecore::EClass> ChoiceStrategyImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& ChoiceStrategyImpl::eStaticClass() const
 {
 	return fUML::Semantics::Loci::LociPackage::eInstance()->getChoiceStrategy_Class();
 }
@@ -208,7 +208,7 @@ bool ChoiceStrategyImpl::internalEIsSet(int featureID) const
 	return SemanticStrategyImpl::internalEIsSet(featureID);
 }
 
-bool ChoiceStrategyImpl::eSet(int featureID, Any newValue)
+bool ChoiceStrategyImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -220,7 +220,7 @@ bool ChoiceStrategyImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any ChoiceStrategyImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any ChoiceStrategyImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

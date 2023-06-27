@@ -70,7 +70,7 @@ namespace uml
 			  e.role.oclIsKindOf(Port) and structuredClassifier.allRoles()->includes(e.partWithPort))
 			*/
 			 
-			virtual bool roles(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
+			virtual bool roles(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context) ;
 			/*!
 			The types of the ConnectableElements that the ends of a Connector are attached to must conform to the types of the ends of the Association that types the Connector, if any.
 			type<>null implies 
@@ -78,7 +78,7 @@ namespace uml
 			  (type.memberEnd->size() = noOfEnds) and Sequence{1..noOfEnds}->forAll(i | end->at(i).role.type.conformsTo(type.memberEnd->at(i).type))
 			*/
 			 
-			virtual bool types(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
+			virtual bool types(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context) ;
 			
 			//*********************************
 			// Attribute Getters & Setters
@@ -98,19 +98,19 @@ namespace uml
 			<p>From package UML::StructuredClassifiers.</p>
 			*/
 			
-			virtual std::shared_ptr<Bag<uml::Behavior>> getContract() const ;
+			virtual const std::shared_ptr<Bag<uml::Behavior>>& getContract() const ;
 			/*!
 			A Connector has at least two ConnectorEnds, each representing the participation of instances of the Classifiers typing the ConnectableElements attached to the end. The set of ConnectorEnds is ordered.
 			<p>From package UML::StructuredClassifiers.</p>
 			*/
 			
-			virtual std::shared_ptr<Subset<uml::ConnectorEnd, uml::Element>> getEnd() const ;
+			virtual const std::shared_ptr<Subset<uml::ConnectorEnd, uml::Element>>& getEnd() const ;
 			/*!
 			A Connector may be redefined when its containing Classifier is specialized. The redefining Connector may have a type that specializes the type of the redefined Connector. The types of the ConnectorEnds of the redefining Connector may specialize the types of the ConnectorEnds of the redefined Connector. The properties of the ConnectorEnds of the redefining Connector may be replaced.
 			<p>From package UML::StructuredClassifiers.</p>
 			*/
 			
-			virtual std::shared_ptr<Subset<uml::Connector, uml::RedefinableElement>> getRedefinedConnector() const ;
+			virtual const std::shared_ptr<Subset<uml::Connector, uml::RedefinableElement>>& getRedefinedConnector() const ;
 			virtual std::weak_ptr<uml::StructuredClassifier> getStructuredClassifier() const ;
 			virtual void setStructuredClassifier(std::weak_ptr<uml::StructuredClassifier>) ;
 			/*!
@@ -118,13 +118,13 @@ namespace uml
 			<p>From package UML::StructuredClassifiers.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::Association> getType() const ;
+			virtual const std::shared_ptr<uml::Association>& getType() const ;
 			/*!
 			An optional Association that classifies links corresponding to this Connector.
 			<p>From package UML::StructuredClassifiers.</p>
 			*/
 			
-			virtual void setType(std::shared_ptr<uml::Association>) ;
+			virtual void setType(const std::shared_ptr<uml::Association>&) ;
 			
 			//*********************************
 			// Union Reference Getters
@@ -182,19 +182,19 @@ namespace uml
 			virtual void saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const;
 
 		protected:
-			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
+			virtual const std::shared_ptr<ecore::EClass>& eStaticClass() const;
 
 			//*********************************
 			// EStructuralFeature Get/Set/IsSet
 			//*********************************
 			virtual Any eGet(int featureID, bool resolve, bool coreType) const ;
-			virtual bool eSet(int featureID, Any newValue) ;
+			virtual bool eSet(int featureID, const Any& newValue) ;
 			virtual bool internalEIsSet(int featureID) const ;
 
 			//*********************************
 			// EOperation Invoke
 			//*********************************
-			virtual Any eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments) ;
+			virtual Any eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments) ;
 
 		private:
 			std::weak_ptr<uml::Connector> m_thisConnectorPtr;

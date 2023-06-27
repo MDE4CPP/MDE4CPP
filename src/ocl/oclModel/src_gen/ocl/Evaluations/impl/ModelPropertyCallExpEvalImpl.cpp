@@ -33,9 +33,9 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "fUML/Semantics/Values/ValuesFactory.hpp"
 #include "fUML/Semantics/Loci/LociFactory.hpp"
 #include "uml/umlFactory.hpp"
+#include "fUML/Semantics/Values/ValuesFactory.hpp"
 #include "ocl/Evaluations/EvaluationsFactory.hpp"
 #include "ocl/Expressions/ExpressionsFactory.hpp"
 #include "ocl/Evaluations/EvalEnvironment.hpp"
@@ -204,7 +204,7 @@ void ModelPropertyCallExpEvalImpl::saveContent(std::shared_ptr<persistence::inte
 	}
 }
 
-std::shared_ptr<ecore::EClass> ModelPropertyCallExpEvalImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& ModelPropertyCallExpEvalImpl::eStaticClass() const
 {
 	return ocl::Evaluations::EvaluationsPackage::eInstance()->getModelPropertyCallExpEval_Class();
 }
@@ -228,7 +228,7 @@ bool ModelPropertyCallExpEvalImpl::internalEIsSet(int featureID) const
 	return PropertyCallExpEvalImpl::internalEIsSet(featureID);
 }
 
-bool ModelPropertyCallExpEvalImpl::eSet(int featureID, Any newValue)
+bool ModelPropertyCallExpEvalImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -240,7 +240,7 @@ bool ModelPropertyCallExpEvalImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any ModelPropertyCallExpEvalImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any ModelPropertyCallExpEvalImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

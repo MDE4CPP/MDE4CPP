@@ -55,19 +55,19 @@ namespace uml
 			    behavioralFeature.ownedParameter->select(p | p.direction = ParameterDirectionKind::out and p.parameterSet->isEmpty())->forAll(isStream))
 			*/
 			 
-			virtual bool input(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
+			virtual bool input(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context) ;
 			/*!
 			The Parameters in a ParameterSet must all be inputs or all be outputs of the same parameterized entity, and the ParameterSet is owned by that entity.
 			parameter->forAll(p1, p2 | self.owner = p1.owner and self.owner = p2.owner and p1.direction = p2.direction)
 			*/
 			 
-			virtual bool same_parameterized_entity(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
+			virtual bool same_parameterized_entity(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context) ;
 			/*!
 			Two ParameterSets cannot have exactly the same set of Parameters.
 			parameter->forAll(parameterSet->forAll(s1, s2 | s1->size() = s2->size() implies s1.parameter->exists(p | not s2.parameter->includes(p))))
 			*/
 			 
-			virtual bool two_parameter_sets(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
+			virtual bool two_parameter_sets(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context) ;
 			
 			//*********************************
 			// Attribute Getters & Setters
@@ -81,13 +81,13 @@ namespace uml
 			<p>From package UML::Classification.</p>
 			*/
 			
-			virtual std::shared_ptr<Subset<uml::Constraint, uml::Element>> getCondition() const ;
+			virtual const std::shared_ptr<Subset<uml::Constraint, uml::Element>>& getCondition() const ;
 			/*!
 			Parameters in the ParameterSet.
 			<p>From package UML::Classification.</p>
 			*/
 			
-			virtual std::shared_ptr<Bag<uml::Parameter>> getParameter() const ;
+			virtual const std::shared_ptr<Bag<uml::Parameter>>& getParameter() const ;
 			
 			//*********************************
 			// Union Reference Getters
@@ -121,19 +121,19 @@ namespace uml
 			virtual void saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const;
 
 		protected:
-			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
+			virtual const std::shared_ptr<ecore::EClass>& eStaticClass() const;
 
 			//*********************************
 			// EStructuralFeature Get/Set/IsSet
 			//*********************************
 			virtual Any eGet(int featureID, bool resolve, bool coreType) const ;
-			virtual bool eSet(int featureID, Any newValue) ;
+			virtual bool eSet(int featureID, const Any& newValue) ;
 			virtual bool internalEIsSet(int featureID) const ;
 
 			//*********************************
 			// EOperation Invoke
 			//*********************************
-			virtual Any eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments) ;
+			virtual Any eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments) ;
 
 		private:
 			std::weak_ptr<uml::ParameterSet> m_thisParameterSetPtr;

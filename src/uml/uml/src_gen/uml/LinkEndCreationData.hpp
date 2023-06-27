@@ -87,7 +87,7 @@ namespace uml
 			endif
 			*/
 			 
-			virtual bool insertAt_pin(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
+			virtual bool insertAt_pin(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context) = 0;
 
 			//*********************************
 			// Attribute Getters & Setters
@@ -113,13 +113,13 @@ namespace uml
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::InputPin> getInsertAt() const = 0;
+			virtual const std::shared_ptr<uml::InputPin>& getInsertAt() const = 0;
 			/*!
 			For ordered Association ends, the InputPin that provides the position where the new link should be inserted or where an existing link should be moved to. The type of the insertAt InputPin is UnlimitedNatural, but the input cannot be zero. It is omitted for Association ends that are not ordered.
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual void setInsertAt(std::shared_ptr<uml::InputPin>) = 0;
+			virtual void setInsertAt(const std::shared_ptr<uml::InputPin>&) = 0;
 
 			//*********************************
 			// Union Reference Getters

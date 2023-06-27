@@ -116,7 +116,7 @@ std::shared_ptr<ecore::EObject> LocalSnapshotImpl::copy() const
 // Attribute Getters & Setters
 //*********************************
 /* Getter & Setter for attribute isPost */
-bool LocalSnapshotImpl::getIsPost() const 
+bool LocalSnapshotImpl::getIsPost() const
 {
 	return m_isPost;
 }
@@ -127,7 +127,7 @@ void LocalSnapshotImpl::setIsPost(bool _isPost)
 }
 
 /* Getter & Setter for attribute isPre */
-bool LocalSnapshotImpl::getIsPre() const 
+bool LocalSnapshotImpl::getIsPre() const
 {
 	return m_isPre;
 }
@@ -141,7 +141,7 @@ void LocalSnapshotImpl::setIsPre(bool _isPre)
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference bindings */
-std::shared_ptr<Bag<ocl::Values::NameValueBinding>> LocalSnapshotImpl::getBindings() const
+const std::shared_ptr<Bag<ocl::Values::NameValueBinding>>& LocalSnapshotImpl::getBindings() const
 {
 	if(m_bindings == nullptr)
 	{
@@ -153,7 +153,7 @@ std::shared_ptr<Bag<ocl::Values::NameValueBinding>> LocalSnapshotImpl::getBindin
 }
 
 /* Getter & Setter for reference inputQ */
-std::shared_ptr<Bag<ocl::Values::OclMessageValue>> LocalSnapshotImpl::getInputQ() const
+const std::shared_ptr<Bag<ocl::Values::OclMessageValue>>& LocalSnapshotImpl::getInputQ() const
 {
 	if(m_inputQ == nullptr)
 	{
@@ -165,7 +165,7 @@ std::shared_ptr<Bag<ocl::Values::OclMessageValue>> LocalSnapshotImpl::getInputQ(
 }
 
 /* Getter & Setter for reference outputQ */
-std::shared_ptr<Bag<ocl::Values::OclMessageValue>> LocalSnapshotImpl::getOutputQ() const
+const std::shared_ptr<Bag<ocl::Values::OclMessageValue>>& LocalSnapshotImpl::getOutputQ() const
 {
 	if(m_outputQ == nullptr)
 	{
@@ -177,22 +177,22 @@ std::shared_ptr<Bag<ocl::Values::OclMessageValue>> LocalSnapshotImpl::getOutputQ
 }
 
 /* Getter & Setter for reference pred */
-std::shared_ptr<ocl::Values::LocalSnapshot> LocalSnapshotImpl::getPred() const
+const std::shared_ptr<ocl::Values::LocalSnapshot>& LocalSnapshotImpl::getPred() const
 {
     return m_pred;
 }
-void LocalSnapshotImpl::setPred(std::shared_ptr<ocl::Values::LocalSnapshot> _pred)
+void LocalSnapshotImpl::setPred(const std::shared_ptr<ocl::Values::LocalSnapshot>& _pred)
 {
     m_pred = _pred;
 	
 }
 
 /* Getter & Setter for reference succ */
-std::shared_ptr<ocl::Values::LocalSnapshot> LocalSnapshotImpl::getSucc() const
+const std::shared_ptr<ocl::Values::LocalSnapshot>& LocalSnapshotImpl::getSucc() const
 {
     return m_succ;
 }
-void LocalSnapshotImpl::setSucc(std::shared_ptr<ocl::Values::LocalSnapshot> _succ)
+void LocalSnapshotImpl::setSucc(const std::shared_ptr<ocl::Values::LocalSnapshot>& _succ)
 {
     m_succ = _succ;
 	
@@ -414,7 +414,7 @@ void LocalSnapshotImpl::saveContent(std::shared_ptr<persistence::interfaces::XSa
 	}
 }
 
-std::shared_ptr<ecore::EClass> LocalSnapshotImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& LocalSnapshotImpl::eStaticClass() const
 {
 	return ocl::Values::ValuesPackage::eInstance()->getLocalSnapshot_Class();
 }
@@ -466,7 +466,7 @@ bool LocalSnapshotImpl::internalEIsSet(int featureID) const
 	return ecore::EObjectImpl::internalEIsSet(featureID);
 }
 
-bool LocalSnapshotImpl::eSet(int featureID, Any newValue)
+bool LocalSnapshotImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -619,7 +619,7 @@ bool LocalSnapshotImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any LocalSnapshotImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any LocalSnapshotImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

@@ -276,22 +276,22 @@ std::shared_ptr<Bag<uml::UseCase> > UseCaseImpl::allIncludedUseCases()
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool UseCaseImpl::binary_associations(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool UseCaseImpl::binary_associations(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool UseCaseImpl::cannot_include_self(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool UseCaseImpl::cannot_include_self(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool UseCaseImpl::must_have_name(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool UseCaseImpl::must_have_name(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool UseCaseImpl::no_association_to_use_case(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool UseCaseImpl::no_association_to_use_case(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -304,7 +304,7 @@ bool UseCaseImpl::no_association_to_use_case(Any diagnostics,std::shared_ptr<std
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference extend */
-std::shared_ptr<Subset<uml::Extend, uml::NamedElement>> UseCaseImpl::getExtend() const
+const std::shared_ptr<Subset<uml::Extend, uml::NamedElement>>& UseCaseImpl::getExtend() const
 {
 	if(m_extend == nullptr)
 	{
@@ -325,7 +325,7 @@ std::shared_ptr<Subset<uml::Extend, uml::NamedElement>> UseCaseImpl::getExtend()
 }
 
 /* Getter & Setter for reference extensionPoint */
-std::shared_ptr<Subset<uml::ExtensionPoint, uml::NamedElement>> UseCaseImpl::getExtensionPoint() const
+const std::shared_ptr<Subset<uml::ExtensionPoint, uml::NamedElement>>& UseCaseImpl::getExtensionPoint() const
 {
 	if(m_extensionPoint == nullptr)
 	{
@@ -346,7 +346,7 @@ std::shared_ptr<Subset<uml::ExtensionPoint, uml::NamedElement>> UseCaseImpl::get
 }
 
 /* Getter & Setter for reference include */
-std::shared_ptr<Subset<uml::Include, uml::NamedElement>> UseCaseImpl::getInclude() const
+const std::shared_ptr<Subset<uml::Include, uml::NamedElement>>& UseCaseImpl::getInclude() const
 {
 	if(m_include == nullptr)
 	{
@@ -367,7 +367,7 @@ std::shared_ptr<Subset<uml::Include, uml::NamedElement>> UseCaseImpl::getInclude
 }
 
 /* Getter & Setter for reference subject */
-std::shared_ptr<Bag<uml::Classifier>> UseCaseImpl::getSubject() const
+const std::shared_ptr<Bag<uml::Classifier>>& UseCaseImpl::getSubject() const
 {
 	if(m_subject == nullptr)
 	{
@@ -684,7 +684,7 @@ void UseCaseImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHand
 	}
 }
 
-std::shared_ptr<ecore::EClass> UseCaseImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& UseCaseImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getUseCase_Class();
 }
@@ -724,7 +724,7 @@ bool UseCaseImpl::internalEIsSet(int featureID) const
 	return BehavioredClassifierImpl::internalEIsSet(featureID);
 }
 
-bool UseCaseImpl::eSet(int featureID, Any newValue)
+bool UseCaseImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -884,7 +884,7 @@ bool UseCaseImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any UseCaseImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any UseCaseImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

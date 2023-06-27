@@ -217,7 +217,7 @@ std::shared_ptr<std::list < ecore::EObject>> EObjectImpl::eCrossReferences() con
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-Any EObjectImpl::eGet(std::shared_ptr<ecore::EStructuralFeature> feature) const
+Any EObjectImpl::eGet(const std::shared_ptr<ecore::EStructuralFeature>& feature) const
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -225,7 +225,7 @@ Any EObjectImpl::eGet(std::shared_ptr<ecore::EStructuralFeature> feature) const
 	//end of body
 }
 
-Any EObjectImpl::eGet(std::shared_ptr<ecore::EStructuralFeature> feature,bool resolve) const
+Any EObjectImpl::eGet(const std::shared_ptr<ecore::EStructuralFeature>& feature, bool resolve) const
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -233,7 +233,7 @@ Any EObjectImpl::eGet(std::shared_ptr<ecore::EStructuralFeature> feature,bool re
 	//end of body
 }
 
-Any EObjectImpl::eInvoke(std::shared_ptr<ecore::EOperation> operation,std::shared_ptr<std::list < Any>> arguments)
+Any EObjectImpl::eInvoke(const std::shared_ptr<ecore::EOperation>& operation, std::shared_ptr<std::list < Any>> arguments)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -249,7 +249,7 @@ bool EObjectImpl::eIsProxy() const
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool EObjectImpl::eIsSet(std::shared_ptr<ecore::EStructuralFeature> feature) const
+bool EObjectImpl::eIsSet(const std::shared_ptr<ecore::EStructuralFeature>& feature) const
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -262,7 +262,7 @@ int EObjectImpl::eResource() const
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-void EObjectImpl::eSet(std::shared_ptr<ecore::EStructuralFeature> feature,Any newValue)
+void EObjectImpl::eSet(const std::shared_ptr<ecore::EStructuralFeature>& feature, const Any& newValue)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -270,7 +270,7 @@ void EObjectImpl::eSet(std::shared_ptr<ecore::EStructuralFeature> feature,Any ne
 	//end of body
 }
 
-void EObjectImpl::eUnset(std::shared_ptr<ecore::EStructuralFeature> feature) const
+void EObjectImpl::eUnset(const std::shared_ptr<ecore::EStructuralFeature>& feature) const
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -279,7 +279,7 @@ void EObjectImpl::eUnset(std::shared_ptr<ecore::EStructuralFeature> feature) con
 // Attribute Getters & Setters
 //*********************************
 /* Getter & Setter for attribute metaElementID */
-long long EObjectImpl::getMetaElementID() const 
+long long EObjectImpl::getMetaElementID() const
 {
 	return m_metaElementID;
 }
@@ -454,7 +454,7 @@ void EObjectImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHand
 	}
 }
 
-std::shared_ptr<EClass> EObjectImpl::eStaticClass() const
+const std::shared_ptr<EClass>& EObjectImpl::eStaticClass() const
 {
 	return ecore::ecorePackage::eInstance()->getEObject_Class();
 }
@@ -492,7 +492,7 @@ bool EObjectImpl::internalEIsSet(int featureID) const
 	return result;
 }
 
-bool EObjectImpl::eSet(int featureID, Any newValue)
+bool EObjectImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -557,7 +557,7 @@ bool EObjectImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any EObjectImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any EObjectImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

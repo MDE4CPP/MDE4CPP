@@ -42,8 +42,8 @@
 #include "uml/StructuralFeature.hpp"
 #include "fUML/Semantics/Values/Value.hpp"
 //Factories and Package includes
-#include "PSCS/PSCSPackage.hpp"
 #include "PSCS/Semantics/SemanticsPackage.hpp"
+#include "PSCS/PSCSPackage.hpp"
 #include "fUML/Semantics/Loci/LociPackage.hpp"
 #include "fUML/Semantics/SimpleClassifiers/SimpleClassifiersPackage.hpp"
 #include "PSCS/Semantics/StructuredClassifiers/StructuredClassifiersPackage.hpp"
@@ -113,12 +113,12 @@ std::string CS_StructuralFeatureOfInterfaceAccessStrategyImpl::getName()
 	//end of body
 }
 
-std::shared_ptr<fUML::Semantics::SimpleClassifiers::FeatureValue> CS_StructuralFeatureOfInterfaceAccessStrategyImpl::read(std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Object> cs_Object,std::shared_ptr<uml::StructuralFeature> feature)
+std::shared_ptr<fUML::Semantics::SimpleClassifiers::FeatureValue> CS_StructuralFeatureOfInterfaceAccessStrategyImpl::read(const std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Object>& cs_Object, const std::shared_ptr<uml::StructuralFeature>& feature)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-void CS_StructuralFeatureOfInterfaceAccessStrategyImpl::write(std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Object> cs_Object,std::shared_ptr<uml::StructuralFeature> feature,std::shared_ptr<Bag<fUML::Semantics::Values::Value>> values,int position)
+void CS_StructuralFeatureOfInterfaceAccessStrategyImpl::write(const std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Object>& cs_Object, const std::shared_ptr<uml::StructuralFeature>& feature, const std::shared_ptr<Bag<fUML::Semantics::Values::Value>>& values, int position)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -201,7 +201,7 @@ void CS_StructuralFeatureOfInterfaceAccessStrategyImpl::saveContent(std::shared_
 	}
 }
 
-std::shared_ptr<ecore::EClass> CS_StructuralFeatureOfInterfaceAccessStrategyImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& CS_StructuralFeatureOfInterfaceAccessStrategyImpl::eStaticClass() const
 {
 	return PSCS::Semantics::StructuredClassifiers::StructuredClassifiersPackage::eInstance()->getCS_StructuralFeatureOfInterfaceAccessStrategy_Class();
 }
@@ -225,7 +225,7 @@ bool CS_StructuralFeatureOfInterfaceAccessStrategyImpl::internalEIsSet(int featu
 	return fUML::Semantics::Loci::SemanticStrategyImpl::internalEIsSet(featureID);
 }
 
-bool CS_StructuralFeatureOfInterfaceAccessStrategyImpl::eSet(int featureID, Any newValue)
+bool CS_StructuralFeatureOfInterfaceAccessStrategyImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -237,7 +237,7 @@ bool CS_StructuralFeatureOfInterfaceAccessStrategyImpl::eSet(int featureID, Any 
 //*********************************
 // EOperation Invoke
 //*********************************
-Any CS_StructuralFeatureOfInterfaceAccessStrategyImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any CS_StructuralFeatureOfInterfaceAccessStrategyImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

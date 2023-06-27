@@ -155,11 +155,11 @@ std::shared_ptr<ecore::EObject> ManifestationImpl::copy() const
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference utilizedElement */
-std::shared_ptr<uml::PackageableElement> ManifestationImpl::getUtilizedElement() const
+const std::shared_ptr<uml::PackageableElement>& ManifestationImpl::getUtilizedElement() const
 {
     return m_utilizedElement;
 }
-void ManifestationImpl::setUtilizedElement(std::shared_ptr<uml::PackageableElement> _utilizedElement)
+void ManifestationImpl::setUtilizedElement(const std::shared_ptr<uml::PackageableElement>& _utilizedElement)
 {
     m_utilizedElement = _utilizedElement;
 	
@@ -383,7 +383,7 @@ void ManifestationImpl::saveContent(std::shared_ptr<persistence::interfaces::XSa
 	}
 }
 
-std::shared_ptr<ecore::EClass> ManifestationImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& ManifestationImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getManifestation_Class();
 }
@@ -411,7 +411,7 @@ bool ManifestationImpl::internalEIsSet(int featureID) const
 	return AbstractionImpl::internalEIsSet(featureID);
 }
 
-bool ManifestationImpl::eSet(int featureID, Any newValue)
+bool ManifestationImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -431,7 +431,7 @@ bool ManifestationImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any ManifestationImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any ManifestationImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

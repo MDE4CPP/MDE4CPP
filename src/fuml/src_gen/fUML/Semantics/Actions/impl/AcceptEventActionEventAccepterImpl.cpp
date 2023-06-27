@@ -38,8 +38,8 @@
 #include "fUML/Semantics/CommonBehavior/EventAccepter.hpp"
 #include "fUML/Semantics/CommonBehavior/EventOccurrence.hpp"
 //Factories and Package includes
-#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/SemanticsPackage.hpp"
+#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/Actions/ActionsPackage.hpp"
 #include "fUML/Semantics/CommonBehavior/CommonBehaviorPackage.hpp"
 
@@ -106,7 +106,7 @@ std::shared_ptr<ecore::EObject> AcceptEventActionEventAccepterImpl::copy() const
 //*********************************
 // Operations
 //*********************************
-void AcceptEventActionEventAccepterImpl::accept(std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccurrence> eventOccurence)
+void AcceptEventActionEventAccepterImpl::accept(const std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccurrence>& eventOccurence)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -121,7 +121,7 @@ void AcceptEventActionEventAccepterImpl::accept(std::shared_ptr<fUML::Semantics:
 	//end of body
 }
 
-bool AcceptEventActionEventAccepterImpl::match(std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccurrence> eventOccurence)
+bool AcceptEventActionEventAccepterImpl::match(const std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccurrence>& eventOccurence)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -146,11 +146,11 @@ bool AcceptEventActionEventAccepterImpl::match(std::shared_ptr<fUML::Semantics::
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference actionActivation */
-std::shared_ptr<fUML::Semantics::Actions::AcceptEventActionActivation> AcceptEventActionEventAccepterImpl::getActionActivation() const
+const std::shared_ptr<fUML::Semantics::Actions::AcceptEventActionActivation>& AcceptEventActionEventAccepterImpl::getActionActivation() const
 {
     return m_actionActivation;
 }
-void AcceptEventActionEventAccepterImpl::setActionActivation(std::shared_ptr<fUML::Semantics::Actions::AcceptEventActionActivation> _actionActivation)
+void AcceptEventActionEventAccepterImpl::setActionActivation(const std::shared_ptr<fUML::Semantics::Actions::AcceptEventActionActivation>& _actionActivation)
 {
     m_actionActivation = _actionActivation;
 	
@@ -261,7 +261,7 @@ void AcceptEventActionEventAccepterImpl::saveContent(std::shared_ptr<persistence
 	}
 }
 
-std::shared_ptr<ecore::EClass> AcceptEventActionEventAccepterImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& AcceptEventActionEventAccepterImpl::eStaticClass() const
 {
 	return fUML::Semantics::Actions::ActionsPackage::eInstance()->getAcceptEventActionEventAccepter_Class();
 }
@@ -289,7 +289,7 @@ bool AcceptEventActionEventAccepterImpl::internalEIsSet(int featureID) const
 	return fUML::Semantics::CommonBehavior::EventAccepterImpl::internalEIsSet(featureID);
 }
 
-bool AcceptEventActionEventAccepterImpl::eSet(int featureID, Any newValue)
+bool AcceptEventActionEventAccepterImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -309,7 +309,7 @@ bool AcceptEventActionEventAccepterImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any AcceptEventActionEventAccepterImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any AcceptEventActionEventAccepterImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

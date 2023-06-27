@@ -54,8 +54,8 @@
 #include "fUML/Semantics/Actions/PinActivation.hpp"
 #include "fUML/Semantics/Activities/Token.hpp"
 //Factories and Package includes
-#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/SemanticsPackage.hpp"
+#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/Actions/ActionsPackage.hpp"
 #include "fUML/Semantics/Activities/ActivitiesPackage.hpp"
 #include "uml/umlPackage.hpp"
@@ -174,18 +174,18 @@ else
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference createObjectAction */
-std::shared_ptr<uml::CreateObjectAction> CreateObjectActionActivationImpl::getCreateObjectAction() const
+const std::shared_ptr<uml::CreateObjectAction>& CreateObjectActionActivationImpl::getCreateObjectAction() const
 {
     return m_createObjectAction;
 }
-void CreateObjectActionActivationImpl::setCreateObjectAction(std::shared_ptr<uml::CreateObjectAction> _createObjectAction)
+void CreateObjectActionActivationImpl::setCreateObjectAction(const std::shared_ptr<uml::CreateObjectAction>& _createObjectAction)
 {
     m_createObjectAction = _createObjectAction;
 	//additional setter call for redefined reference ActionActivation::action
 	fUML::Semantics::Actions::ActionActivationImpl::setAction(_createObjectAction);
 }
 /*Additional Setter for redefined reference 'ActionActivation::action'*/
-void CreateObjectActionActivationImpl::setAction(std::shared_ptr<uml::Action> _action)
+void CreateObjectActionActivationImpl::setAction(const std::shared_ptr<uml::Action>& _action)
 {
 	std::shared_ptr<uml::CreateObjectAction> _createObjectAction = std::dynamic_pointer_cast<uml::CreateObjectAction>(_action);
 	if(_createObjectAction)
@@ -201,7 +201,7 @@ void CreateObjectActionActivationImpl::setAction(std::shared_ptr<uml::Action> _a
 	}
 }
 /*Additional Setter for redefined reference 'ActivityNodeActivation::node'*/
-void CreateObjectActionActivationImpl::setNode(std::shared_ptr<uml::ActivityNode> _node)
+void CreateObjectActionActivationImpl::setNode(const std::shared_ptr<uml::ActivityNode>& _node)
 {
 	std::shared_ptr<uml::CreateObjectAction> _createObjectAction = std::dynamic_pointer_cast<uml::CreateObjectAction>(_node);
 	if(_createObjectAction)
@@ -344,7 +344,7 @@ void CreateObjectActionActivationImpl::saveContent(std::shared_ptr<persistence::
 	}
 }
 
-std::shared_ptr<ecore::EClass> CreateObjectActionActivationImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& CreateObjectActionActivationImpl::eStaticClass() const
 {
 	return fUML::Semantics::Actions::ActionsPackage::eInstance()->getCreateObjectActionActivation_Class();
 }
@@ -372,7 +372,7 @@ bool CreateObjectActionActivationImpl::internalEIsSet(int featureID) const
 	return ActionActivationImpl::internalEIsSet(featureID);
 }
 
-bool CreateObjectActionActivationImpl::eSet(int featureID, Any newValue)
+bool CreateObjectActionActivationImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -392,7 +392,7 @@ bool CreateObjectActionActivationImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any CreateObjectActionActivationImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any CreateObjectActionActivationImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

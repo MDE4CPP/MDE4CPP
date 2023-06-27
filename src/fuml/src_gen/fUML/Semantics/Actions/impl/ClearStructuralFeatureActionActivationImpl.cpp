@@ -57,8 +57,8 @@
 #include "fUML/Semantics/Actions/StructuralFeatureActionActivation.hpp"
 #include "fUML/Semantics/Activities/Token.hpp"
 //Factories and Package includes
-#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/SemanticsPackage.hpp"
+#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/Actions/ActionsPackage.hpp"
 #include "fUML/Semantics/Activities/ActivitiesPackage.hpp"
 #include "uml/umlPackage.hpp"
@@ -270,7 +270,7 @@ void ClearStructuralFeatureActionActivationImpl::saveContent(std::shared_ptr<per
 	}
 }
 
-std::shared_ptr<ecore::EClass> ClearStructuralFeatureActionActivationImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& ClearStructuralFeatureActionActivationImpl::eStaticClass() const
 {
 	return fUML::Semantics::Actions::ActionsPackage::eInstance()->getClearStructuralFeatureActionActivation_Class();
 }
@@ -294,7 +294,7 @@ bool ClearStructuralFeatureActionActivationImpl::internalEIsSet(int featureID) c
 	return StructuralFeatureActionActivationImpl::internalEIsSet(featureID);
 }
 
-bool ClearStructuralFeatureActionActivationImpl::eSet(int featureID, Any newValue)
+bool ClearStructuralFeatureActionActivationImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -306,7 +306,7 @@ bool ClearStructuralFeatureActionActivationImpl::eSet(int featureID, Any newValu
 //*********************************
 // EOperation Invoke
 //*********************************
-Any ClearStructuralFeatureActionActivationImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any ClearStructuralFeatureActionActivationImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

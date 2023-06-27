@@ -43,8 +43,8 @@ namespace fUML::Semantics::Actions
 			//*********************************
 			// Operations
 			//*********************************
-			virtual void accept(std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccurrence> eventOccurence) ;
-			virtual bool match(std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccurrence> eventOccurence) ;
+			virtual void accept(const std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccurrence>& eventOccurence) ;
+			virtual bool match(const std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccurrence>& eventOccurence) ;
 			
 			//*********************************
 			// Attribute Getters & Setters
@@ -53,8 +53,8 @@ namespace fUML::Semantics::Actions
 			//*********************************
 			// Reference Getters & Setters
 			//*********************************
-			virtual std::shared_ptr<fUML::Semantics::Actions::AcceptEventActionActivation> getActionActivation() const ;
-			virtual void setActionActivation(std::shared_ptr<fUML::Semantics::Actions::AcceptEventActionActivation>) ;
+			virtual const std::shared_ptr<fUML::Semantics::Actions::AcceptEventActionActivation>& getActionActivation() const ;
+			virtual void setActionActivation(const std::shared_ptr<fUML::Semantics::Actions::AcceptEventActionActivation>&) ;
 			
 			//*********************************
 			// Union Reference Getters
@@ -76,19 +76,19 @@ namespace fUML::Semantics::Actions
 			virtual void saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const;
 
 		protected:
-			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
+			virtual const std::shared_ptr<ecore::EClass>& eStaticClass() const;
 
 			//*********************************
 			// EStructuralFeature Get/Set/IsSet
 			//*********************************
 			virtual Any eGet(int featureID, bool resolve, bool coreType) const ;
-			virtual bool eSet(int featureID, Any newValue) ;
+			virtual bool eSet(int featureID, const Any& newValue) ;
 			virtual bool internalEIsSet(int featureID) const ;
 
 			//*********************************
 			// EOperation Invoke
 			//*********************************
-			virtual Any eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments) ;
+			virtual Any eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments) ;
 
 		private:
 			std::weak_ptr<fUML::Semantics::Actions::AcceptEventActionEventAccepter> m_thisAcceptEventActionEventAccepterPtr;

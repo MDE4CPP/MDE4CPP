@@ -33,9 +33,9 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "fUML/Semantics/Values/ValuesFactory.hpp"
 #include "fUML/Semantics/Loci/LociFactory.hpp"
 #include "uml/umlFactory.hpp"
+#include "fUML/Semantics/Values/ValuesFactory.hpp"
 #include "ocl/Evaluations/EvaluationsFactory.hpp"
 #include "ocl/Expressions/ExpressionsFactory.hpp"
 #include "ocl/Evaluations/EvalEnvironment.hpp"
@@ -201,7 +201,7 @@ void NumericLiteralExpEvalImpl::saveContent(std::shared_ptr<persistence::interfa
 	}
 }
 
-std::shared_ptr<ecore::EClass> NumericLiteralExpEvalImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& NumericLiteralExpEvalImpl::eStaticClass() const
 {
 	return ocl::Evaluations::EvaluationsPackage::eInstance()->getNumericLiteralExpEval_Class();
 }
@@ -225,7 +225,7 @@ bool NumericLiteralExpEvalImpl::internalEIsSet(int featureID) const
 	return PrimitiveLiteralExpEvalImpl::internalEIsSet(featureID);
 }
 
-bool NumericLiteralExpEvalImpl::eSet(int featureID, Any newValue)
+bool NumericLiteralExpEvalImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -237,7 +237,7 @@ bool NumericLiteralExpEvalImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any NumericLiteralExpEvalImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any NumericLiteralExpEvalImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

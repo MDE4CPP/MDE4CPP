@@ -323,7 +323,7 @@ void EnumerationLiteralImpl::saveContent(std::shared_ptr<persistence::interfaces
 	}
 }
 
-std::shared_ptr<ecore::EClass> EnumerationLiteralImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& EnumerationLiteralImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getEnumerationLiteral_Class();
 }
@@ -354,7 +354,7 @@ bool EnumerationLiteralImpl::internalEIsSet(int featureID) const
 	return InstanceSpecificationImpl::internalEIsSet(featureID);
 }
 
-bool EnumerationLiteralImpl::eSet(int featureID, Any newValue)
+bool EnumerationLiteralImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -374,7 +374,7 @@ bool EnumerationLiteralImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any EnumerationLiteralImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any EnumerationLiteralImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

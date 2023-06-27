@@ -140,7 +140,7 @@ namespace uml
 			<p>From package UML::StateMachines.</p>
 			*/
 			 
-			virtual bool isContainedInRegion(std::shared_ptr<uml::Region> r) = 0;
+			virtual bool isContainedInRegion(const std::shared_ptr<uml::Region>& r) = 0;
 			/*!
 			This utility operation returns true if the Vertex is contained in the State s (input argument).
 			result = (if not s.isComposite() or container->isEmpty() then
@@ -155,7 +155,7 @@ namespace uml
 			<p>From package UML::StateMachines.</p>
 			*/
 			 
-			virtual bool isContainedInState(std::shared_ptr<uml::State> s) = 0;
+			virtual bool isContainedInState(const std::shared_ptr<uml::State>& s) = 0;
 
 			//*********************************
 			// Attribute Getters & Setters
@@ -181,13 +181,13 @@ namespace uml
 			<p>From package UML::StateMachines.</p>
 			*/
 			
-			virtual std::shared_ptr<Bag<uml::Transition>> getIncoming() const = 0;
+			virtual const std::shared_ptr<Bag<uml::Transition>>& getIncoming() const = 0;
 			/*!
 			Specifies the Transitions departing from this Vertex.
 			<p>From package UML::StateMachines.</p>
 			*/
 			
-			virtual std::shared_ptr<Bag<uml::Transition>> getOutgoing() const = 0;
+			virtual const std::shared_ptr<Bag<uml::Transition>>& getOutgoing() const = 0;
 
 			//*********************************
 			// Union Reference Getters

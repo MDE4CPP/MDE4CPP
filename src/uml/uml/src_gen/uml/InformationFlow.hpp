@@ -94,12 +94,12 @@ namespace uml
 			  or oclIsKindOf(InformationItem) or oclIsKindOf(Signal) or oclIsKindOf(Component))
 			*/
 			 
-			virtual bool convey_classifiers(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
+			virtual bool convey_classifiers(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context) = 0;
 			/*!
 			The sources and targets of the information flow must conform to the sources and targets or conversely the targets and sources of the realization relationships.
 			*/
 			 
-			virtual bool must_conform(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
+			virtual bool must_conform(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context) = 0;
 			/*!
 			The sources and targets of the information flow can only be one of the following kind: Actor, Node, UseCase, Artifact, Class, Component, Port, Property, Interface, Package, ActivityNode, ActivityPartition,
 			Behavior and InstanceSpecification except when its classifier is a relationship (i.e. it represents a link).
@@ -118,7 +118,7 @@ namespace uml
 			(oclIsKindOf(InstanceSpecification) and not sit.oclAsType(InstanceSpecification).classifier->exists(oclIsKindOf(Relationship)))))
 			*/
 			 
-			virtual bool sources_and_targets_kind(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
+			virtual bool sources_and_targets_kind(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context) = 0;
 
 			//*********************************
 			// Attribute Getters & Setters
@@ -132,43 +132,43 @@ namespace uml
 			<p>From package UML::InformationFlows.</p>
 			*/
 			
-			virtual std::shared_ptr<Bag<uml::Classifier>> getConveyed() const = 0;
+			virtual const std::shared_ptr<Bag<uml::Classifier>>& getConveyed() const = 0;
 			/*!
 			Defines from which source the conveyed InformationItems are initiated.
 			<p>From package UML::InformationFlows.</p>
 			*/
 			
-			virtual std::shared_ptr<Subset<uml::NamedElement, uml::Element>> getInformationSource() const = 0;
+			virtual const std::shared_ptr<Subset<uml::NamedElement, uml::Element>>& getInformationSource() const = 0;
 			/*!
 			Defines to which target the conveyed InformationItems are directed.
 			<p>From package UML::InformationFlows.</p>
 			*/
 			
-			virtual std::shared_ptr<Subset<uml::NamedElement, uml::Element>> getInformationTarget() const = 0;
+			virtual const std::shared_ptr<Subset<uml::NamedElement, uml::Element>>& getInformationTarget() const = 0;
 			/*!
 			Determines which Relationship will realize the specified flow.
 			<p>From package UML::InformationFlows.</p>
 			*/
 			
-			virtual std::shared_ptr<Bag<uml::Relationship>> getRealization() const = 0;
+			virtual const std::shared_ptr<Bag<uml::Relationship>>& getRealization() const = 0;
 			/*!
 			Determines which ActivityEdges will realize the specified flow.
 			<p>From package UML::InformationFlows.</p>
 			*/
 			
-			virtual std::shared_ptr<Bag<uml::ActivityEdge>> getRealizingActivityEdge() const = 0;
+			virtual const std::shared_ptr<Bag<uml::ActivityEdge>>& getRealizingActivityEdge() const = 0;
 			/*!
 			Determines which Connectors will realize the specified flow.
 			<p>From package UML::InformationFlows.</p>
 			*/
 			
-			virtual std::shared_ptr<Bag<uml::Connector>> getRealizingConnector() const = 0;
+			virtual const std::shared_ptr<Bag<uml::Connector>>& getRealizingConnector() const = 0;
 			/*!
 			Determines which Messages will realize the specified flow.
 			<p>From package UML::InformationFlows.</p>
 			*/
 			
-			virtual std::shared_ptr<Bag<uml::Message>> getRealizingMessage() const = 0;
+			virtual const std::shared_ptr<Bag<uml::Message>>& getRealizingMessage() const = 0;
 
 			//*********************************
 			// Union Reference Getters

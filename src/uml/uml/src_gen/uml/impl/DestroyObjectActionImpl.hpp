@@ -55,13 +55,13 @@ namespace uml
 			target.is(1,1)
 			*/
 			 
-			virtual bool multiplicity(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
+			virtual bool multiplicity(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context) ;
 			/*!
 			The target InputPin has no type.
 			target.type= null
 			*/
 			 
-			virtual bool no_type(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
+			virtual bool no_type(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context) ;
 			
 			//*********************************
 			// Attribute Getters & Setters
@@ -99,13 +99,13 @@ namespace uml
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::InputPin> getTarget() const ;
+			virtual const std::shared_ptr<uml::InputPin>& getTarget() const ;
 			/*!
 			The InputPin providing the object to be destroyed.
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual void setTarget(std::shared_ptr<uml::InputPin>) ;
+			virtual void setTarget(const std::shared_ptr<uml::InputPin>&) ;
 			
 			//*********************************
 			// Union Reference Getters
@@ -157,19 +157,19 @@ namespace uml
 			virtual void saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const;
 
 		protected:
-			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
+			virtual const std::shared_ptr<ecore::EClass>& eStaticClass() const;
 
 			//*********************************
 			// EStructuralFeature Get/Set/IsSet
 			//*********************************
 			virtual Any eGet(int featureID, bool resolve, bool coreType) const ;
-			virtual bool eSet(int featureID, Any newValue) ;
+			virtual bool eSet(int featureID, const Any& newValue) ;
 			virtual bool internalEIsSet(int featureID) const ;
 
 			//*********************************
 			// EOperation Invoke
 			//*********************************
-			virtual Any eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments) ;
+			virtual Any eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments) ;
 
 		private:
 			std::weak_ptr<uml::DestroyObjectAction> m_thisDestroyObjectActionPtr;

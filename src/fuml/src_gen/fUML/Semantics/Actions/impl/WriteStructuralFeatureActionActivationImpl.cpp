@@ -48,8 +48,8 @@
 #include "fUML/Semantics/Activities/Token.hpp"
 #include "fUML/Semantics/Values/Value.hpp"
 //Factories and Package includes
-#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/SemanticsPackage.hpp"
+#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/Actions/ActionsPackage.hpp"
 #include "fUML/Semantics/Activities/ActivitiesPackage.hpp"
 #include "fUML/Semantics/Values/ValuesPackage.hpp"
@@ -115,7 +115,7 @@ WriteStructuralFeatureActionActivationImpl& WriteStructuralFeatureActionActivati
 //*********************************
 // Operations
 //*********************************
-int WriteStructuralFeatureActionActivationImpl::position(std::shared_ptr<fUML::Semantics::Values::Value> value,std::shared_ptr<Bag<fUML::Semantics::Values::Value>> list,int startAt)
+int WriteStructuralFeatureActionActivationImpl::position(const std::shared_ptr<fUML::Semantics::Values::Value>& value, const std::shared_ptr<Bag<fUML::Semantics::Values::Value>>& list, int startAt)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -240,7 +240,7 @@ void WriteStructuralFeatureActionActivationImpl::saveContent(std::shared_ptr<per
 	}
 }
 
-std::shared_ptr<ecore::EClass> WriteStructuralFeatureActionActivationImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& WriteStructuralFeatureActionActivationImpl::eStaticClass() const
 {
 	return fUML::Semantics::Actions::ActionsPackage::eInstance()->getWriteStructuralFeatureActionActivation_Class();
 }
@@ -264,7 +264,7 @@ bool WriteStructuralFeatureActionActivationImpl::internalEIsSet(int featureID) c
 	return StructuralFeatureActionActivationImpl::internalEIsSet(featureID);
 }
 
-bool WriteStructuralFeatureActionActivationImpl::eSet(int featureID, Any newValue)
+bool WriteStructuralFeatureActionActivationImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -276,7 +276,7 @@ bool WriteStructuralFeatureActionActivationImpl::eSet(int featureID, Any newValu
 //*********************************
 // EOperation Invoke
 //*********************************
-Any WriteStructuralFeatureActionActivationImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any WriteStructuralFeatureActionActivationImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

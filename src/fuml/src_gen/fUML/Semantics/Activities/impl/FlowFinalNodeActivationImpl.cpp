@@ -42,8 +42,8 @@
 #include "fUML/Semantics/Activities/ControlNodeActivation.hpp"
 #include "fUML/Semantics/Activities/Token.hpp"
 //Factories and Package includes
-#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/SemanticsPackage.hpp"
+#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/Activities/ActivitiesPackage.hpp"
 #include "uml/umlPackage.hpp"
 
@@ -202,7 +202,7 @@ void FlowFinalNodeActivationImpl::saveContent(std::shared_ptr<persistence::inter
 	}
 }
 
-std::shared_ptr<ecore::EClass> FlowFinalNodeActivationImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& FlowFinalNodeActivationImpl::eStaticClass() const
 {
 	return fUML::Semantics::Activities::ActivitiesPackage::eInstance()->getFlowFinalNodeActivation_Class();
 }
@@ -226,7 +226,7 @@ bool FlowFinalNodeActivationImpl::internalEIsSet(int featureID) const
 	return ControlNodeActivationImpl::internalEIsSet(featureID);
 }
 
-bool FlowFinalNodeActivationImpl::eSet(int featureID, Any newValue)
+bool FlowFinalNodeActivationImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -238,7 +238,7 @@ bool FlowFinalNodeActivationImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any FlowFinalNodeActivationImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any FlowFinalNodeActivationImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

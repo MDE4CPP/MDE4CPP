@@ -93,13 +93,13 @@ namespace uml
 			<p>From package UML::Classification.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::StructuralFeature> getDefiningFeature() const = 0;
+			virtual const std::shared_ptr<uml::StructuralFeature>& getDefiningFeature() const = 0;
 			/*!
 			The StructuralFeature that specifies the values that may be held by the Slot.
 			<p>From package UML::Classification.</p>
 			*/
 			
-			virtual void setDefiningFeature(std::shared_ptr<uml::StructuralFeature>) = 0;
+			virtual void setDefiningFeature(const std::shared_ptr<uml::StructuralFeature>&) = 0;
 			/*!
 			The InstanceSpecification that owns this Slot.
 			<p>From package UML::Classification.</p>
@@ -117,7 +117,7 @@ namespace uml
 			<p>From package UML::Classification.</p>
 			*/
 			
-			virtual std::shared_ptr<Subset<uml::ValueSpecification, uml::Element>> getValue() const = 0;
+			virtual const std::shared_ptr<Subset<uml::ValueSpecification, uml::Element>>& getValue() const = 0;
 
 			//*********************************
 			// Union Reference Getters

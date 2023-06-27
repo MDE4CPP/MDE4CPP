@@ -153,7 +153,7 @@ std::shared_ptr<ecore::EObject> DurationObservationImpl::copy() const
 //*********************************
 // Operations
 //*********************************
-bool DurationObservationImpl::first_event_multiplicity(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool DurationObservationImpl::first_event_multiplicity(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -162,7 +162,7 @@ bool DurationObservationImpl::first_event_multiplicity(Any diagnostics,std::shar
 // Attribute Getters & Setters
 //*********************************
 /* Getter & Setter for attribute firstEvent */
-std::shared_ptr<Bag<bool>> DurationObservationImpl::isFirstEvent() const 
+const std::shared_ptr<Bag<bool>>& DurationObservationImpl::isFirstEvent() const
 {
 	if(m_firstEvent == nullptr)
 	{
@@ -175,7 +175,7 @@ std::shared_ptr<Bag<bool>> DurationObservationImpl::isFirstEvent() const
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference event */
-std::shared_ptr<Bag<uml::NamedElement>> DurationObservationImpl::getEvent() const
+const std::shared_ptr<Bag<uml::NamedElement>>& DurationObservationImpl::getEvent() const
 {
 	if(m_event == nullptr)
 	{
@@ -371,7 +371,7 @@ void DurationObservationImpl::saveContent(std::shared_ptr<persistence::interface
 	}
 }
 
-std::shared_ptr<ecore::EClass> DurationObservationImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& DurationObservationImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getDurationObservation_Class();
 }
@@ -403,7 +403,7 @@ bool DurationObservationImpl::internalEIsSet(int featureID) const
 	return ObservationImpl::internalEIsSet(featureID);
 }
 
-bool DurationObservationImpl::eSet(int featureID, Any newValue)
+bool DurationObservationImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -458,7 +458,7 @@ bool DurationObservationImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any DurationObservationImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any DurationObservationImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

@@ -204,17 +204,17 @@ std::shared_ptr<ecore::EObject> InformationFlowImpl::copy() const
 //*********************************
 // Operations
 //*********************************
-bool InformationFlowImpl::convey_classifiers(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool InformationFlowImpl::convey_classifiers(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool InformationFlowImpl::must_conform(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool InformationFlowImpl::must_conform(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool InformationFlowImpl::sources_and_targets_kind(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool InformationFlowImpl::sources_and_targets_kind(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -227,7 +227,7 @@ bool InformationFlowImpl::sources_and_targets_kind(Any diagnostics,std::shared_p
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference conveyed */
-std::shared_ptr<Bag<uml::Classifier>> InformationFlowImpl::getConveyed() const
+const std::shared_ptr<Bag<uml::Classifier>>& InformationFlowImpl::getConveyed() const
 {
 	if(m_conveyed == nullptr)
 	{
@@ -239,7 +239,7 @@ std::shared_ptr<Bag<uml::Classifier>> InformationFlowImpl::getConveyed() const
 }
 
 /* Getter & Setter for reference informationSource */
-std::shared_ptr<Subset<uml::NamedElement, uml::Element>> InformationFlowImpl::getInformationSource() const
+const std::shared_ptr<Subset<uml::NamedElement, uml::Element>>& InformationFlowImpl::getInformationSource() const
 {
 	if(m_informationSource == nullptr)
 	{
@@ -260,7 +260,7 @@ std::shared_ptr<Subset<uml::NamedElement, uml::Element>> InformationFlowImpl::ge
 }
 
 /* Getter & Setter for reference informationTarget */
-std::shared_ptr<Subset<uml::NamedElement, uml::Element>> InformationFlowImpl::getInformationTarget() const
+const std::shared_ptr<Subset<uml::NamedElement, uml::Element>>& InformationFlowImpl::getInformationTarget() const
 {
 	if(m_informationTarget == nullptr)
 	{
@@ -281,7 +281,7 @@ std::shared_ptr<Subset<uml::NamedElement, uml::Element>> InformationFlowImpl::ge
 }
 
 /* Getter & Setter for reference realization */
-std::shared_ptr<Bag<uml::Relationship>> InformationFlowImpl::getRealization() const
+const std::shared_ptr<Bag<uml::Relationship>>& InformationFlowImpl::getRealization() const
 {
 	if(m_realization == nullptr)
 	{
@@ -293,7 +293,7 @@ std::shared_ptr<Bag<uml::Relationship>> InformationFlowImpl::getRealization() co
 }
 
 /* Getter & Setter for reference realizingActivityEdge */
-std::shared_ptr<Bag<uml::ActivityEdge>> InformationFlowImpl::getRealizingActivityEdge() const
+const std::shared_ptr<Bag<uml::ActivityEdge>>& InformationFlowImpl::getRealizingActivityEdge() const
 {
 	if(m_realizingActivityEdge == nullptr)
 	{
@@ -305,7 +305,7 @@ std::shared_ptr<Bag<uml::ActivityEdge>> InformationFlowImpl::getRealizingActivit
 }
 
 /* Getter & Setter for reference realizingConnector */
-std::shared_ptr<Bag<uml::Connector>> InformationFlowImpl::getRealizingConnector() const
+const std::shared_ptr<Bag<uml::Connector>>& InformationFlowImpl::getRealizingConnector() const
 {
 	if(m_realizingConnector == nullptr)
 	{
@@ -317,7 +317,7 @@ std::shared_ptr<Bag<uml::Connector>> InformationFlowImpl::getRealizingConnector(
 }
 
 /* Getter & Setter for reference realizingMessage */
-std::shared_ptr<Bag<uml::Message>> InformationFlowImpl::getRealizingMessage() const
+const std::shared_ptr<Bag<uml::Message>>& InformationFlowImpl::getRealizingMessage() const
 {
 	if(m_realizingMessage == nullptr)
 	{
@@ -679,7 +679,7 @@ void InformationFlowImpl::saveContent(std::shared_ptr<persistence::interfaces::X
 	}
 }
 
-std::shared_ptr<ecore::EClass> InformationFlowImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& InformationFlowImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getInformationFlow_Class();
 }
@@ -745,7 +745,7 @@ bool InformationFlowImpl::internalEIsSet(int featureID) const
 	return result;
 }
 
-bool InformationFlowImpl::eSet(int featureID, Any newValue)
+bool InformationFlowImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -1023,7 +1023,7 @@ bool InformationFlowImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any InformationFlowImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any InformationFlowImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

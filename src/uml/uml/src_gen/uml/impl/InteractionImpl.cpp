@@ -376,7 +376,7 @@ std::shared_ptr<ecore::EObject> InteractionImpl::copy() const
 //*********************************
 // Operations
 //*********************************
-bool InteractionImpl::not_contained(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool InteractionImpl::not_contained(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -389,7 +389,7 @@ bool InteractionImpl::not_contained(Any diagnostics,std::shared_ptr<std::map < A
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference action */
-std::shared_ptr<Subset<uml::Action, uml::Element>> InteractionImpl::getAction() const
+const std::shared_ptr<Subset<uml::Action, uml::Element>>& InteractionImpl::getAction() const
 {
 	if(m_action == nullptr)
 	{
@@ -410,7 +410,7 @@ std::shared_ptr<Subset<uml::Action, uml::Element>> InteractionImpl::getAction() 
 }
 
 /* Getter & Setter for reference formalGate */
-std::shared_ptr<Subset<uml::Gate, uml::NamedElement>> InteractionImpl::getFormalGate() const
+const std::shared_ptr<Subset<uml::Gate, uml::NamedElement>>& InteractionImpl::getFormalGate() const
 {
 	if(m_formalGate == nullptr)
 	{
@@ -431,7 +431,7 @@ std::shared_ptr<Subset<uml::Gate, uml::NamedElement>> InteractionImpl::getFormal
 }
 
 /* Getter & Setter for reference fragment */
-std::shared_ptr<Subset<uml::InteractionFragment, uml::NamedElement>> InteractionImpl::getFragment() const
+const std::shared_ptr<Subset<uml::InteractionFragment, uml::NamedElement>>& InteractionImpl::getFragment() const
 {
 	if(m_fragment == nullptr)
 	{
@@ -452,7 +452,7 @@ std::shared_ptr<Subset<uml::InteractionFragment, uml::NamedElement>> Interaction
 }
 
 /* Getter & Setter for reference lifeline */
-std::shared_ptr<Subset<uml::Lifeline, uml::NamedElement>> InteractionImpl::getLifeline() const
+const std::shared_ptr<Subset<uml::Lifeline, uml::NamedElement>>& InteractionImpl::getLifeline() const
 {
 	if(m_lifeline == nullptr)
 	{
@@ -473,7 +473,7 @@ std::shared_ptr<Subset<uml::Lifeline, uml::NamedElement>> InteractionImpl::getLi
 }
 
 /* Getter & Setter for reference message */
-std::shared_ptr<Subset<uml::Message, uml::NamedElement>> InteractionImpl::getMessage() const
+const std::shared_ptr<Subset<uml::Message, uml::NamedElement>>& InteractionImpl::getMessage() const
 {
 	if(m_message == nullptr)
 	{
@@ -881,7 +881,7 @@ void InteractionImpl::saveContent(std::shared_ptr<persistence::interfaces::XSave
 	}
 }
 
-std::shared_ptr<ecore::EClass> InteractionImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& InteractionImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getInteraction_Class();
 }
@@ -939,7 +939,7 @@ bool InteractionImpl::internalEIsSet(int featureID) const
 	return result;
 }
 
-bool InteractionImpl::eSet(int featureID, Any newValue)
+bool InteractionImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -1143,7 +1143,7 @@ bool InteractionImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any InteractionImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any InteractionImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

@@ -56,12 +56,12 @@ namespace uml
 			Creates a property with the specified name, type, lower bound, and upper bound as an owned attribute of this artifact.
 			*/
 			 
-			virtual std::shared_ptr<uml::Property> createOwnedAttribute(std::string name,std::shared_ptr<uml::Type> type,int lower,int upper) ;
+			virtual std::shared_ptr<uml::Property> createOwnedAttribute(std::string name, const std::shared_ptr<uml::Type>& type, int lower, int upper) ;
 			/*!
 			Creates an operation with the specified name, parameter names, parameter types, and return type (or null) as an owned operation of this artifact.
 			*/
 			 
-			virtual std::shared_ptr<uml::Operation> createOwnedOperation(std::string name,std::shared_ptr<Bag<std::string>> parameterNames,std::shared_ptr<Bag<uml::Type>> parameterTypes,std::shared_ptr<uml::Type> returnType) ;
+			virtual std::shared_ptr<uml::Operation> createOwnedOperation(std::string name, const std::shared_ptr<Bag<std::string>>& parameterNames, const std::shared_ptr<Bag<uml::Type>>& parameterTypes, const std::shared_ptr<uml::Type>& returnType) ;
 			
 			//*********************************
 			// Attribute Getters & Setters
@@ -87,25 +87,25 @@ namespace uml
 			<p>From package UML::Deployments.</p>
 			*/
 			
-			virtual std::shared_ptr<Subset<uml::Manifestation, uml::Element>> getManifestation() const ;
+			virtual const std::shared_ptr<Subset<uml::Manifestation, uml::Element>>& getManifestation() const ;
 			/*!
 			The Artifacts that are defined (nested) within the Artifact. The association is a specialization of the ownedMember association from Namespace to NamedElement.
 			<p>From package UML::Deployments.</p>
 			*/
 			
-			virtual std::shared_ptr<Subset<uml::Artifact, uml::NamedElement>> getNestedArtifact() const ;
+			virtual const std::shared_ptr<Subset<uml::Artifact, uml::NamedElement>>& getNestedArtifact() const ;
 			/*!
 			The attributes or association ends defined for the Artifact. The association is a specialization of the ownedMember association.
 			<p>From package UML::Deployments.</p>
 			*/
 			
-			virtual std::shared_ptr<Subset<uml::Property, uml::NamedElement, uml::Property>> getOwnedAttribute() const ;
+			virtual const std::shared_ptr<Subset<uml::Property, uml::NamedElement, uml::Property>>& getOwnedAttribute() const ;
 			/*!
 			The Operations defined for the Artifact. The association is a specialization of the ownedMember association.
 			<p>From package UML::Deployments.</p>
 			*/
 			
-			virtual std::shared_ptr<Subset<uml::Operation, uml::Feature, uml::NamedElement>> getOwnedOperation() const ;
+			virtual const std::shared_ptr<Subset<uml::Operation, uml::Feature, uml::NamedElement>>& getOwnedOperation() const ;
 			
 			//*********************************
 			// Union Reference Getters
@@ -176,19 +176,19 @@ namespace uml
 			virtual void saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const;
 
 		protected:
-			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
+			virtual const std::shared_ptr<ecore::EClass>& eStaticClass() const;
 
 			//*********************************
 			// EStructuralFeature Get/Set/IsSet
 			//*********************************
 			virtual Any eGet(int featureID, bool resolve, bool coreType) const ;
-			virtual bool eSet(int featureID, Any newValue) ;
+			virtual bool eSet(int featureID, const Any& newValue) ;
 			virtual bool internalEIsSet(int featureID) const ;
 
 			//*********************************
 			// EOperation Invoke
 			//*********************************
-			virtual Any eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments) ;
+			virtual Any eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments) ;
 
 		private:
 			std::weak_ptr<uml::Artifact> m_thisArtifactPtr;

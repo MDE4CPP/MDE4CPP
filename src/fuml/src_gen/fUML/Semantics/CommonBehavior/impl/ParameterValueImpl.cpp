@@ -42,8 +42,8 @@
 #include "fUML/Semantics/CommonBehavior/ParameterValue.hpp"
 #include "fUML/Semantics/Values/Value.hpp"
 //Factories and Package includes
-#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/SemanticsPackage.hpp"
+#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/CommonBehavior/CommonBehaviorPackage.hpp"
 #include "fUML/Semantics/Values/ValuesPackage.hpp"
 #include "uml/umlPackage.hpp"
@@ -160,18 +160,18 @@ return newValue;
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference parameter */
-std::shared_ptr<uml::Parameter> ParameterValueImpl::getParameter() const
+const std::shared_ptr<uml::Parameter>& ParameterValueImpl::getParameter() const
 {
     return m_parameter;
 }
-void ParameterValueImpl::setParameter(std::shared_ptr<uml::Parameter> _parameter)
+void ParameterValueImpl::setParameter(const std::shared_ptr<uml::Parameter>& _parameter)
 {
     m_parameter = _parameter;
 	
 }
 
 /* Getter & Setter for reference values */
-std::shared_ptr<Bag<fUML::Semantics::Values::Value>> ParameterValueImpl::getValues() const
+const std::shared_ptr<Bag<fUML::Semantics::Values::Value>>& ParameterValueImpl::getValues() const
 {
 	if(m_values == nullptr)
 	{
@@ -314,7 +314,7 @@ void ParameterValueImpl::saveContent(std::shared_ptr<persistence::interfaces::XS
 	}
 }
 
-std::shared_ptr<ecore::EClass> ParameterValueImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& ParameterValueImpl::eStaticClass() const
 {
 	return fUML::Semantics::CommonBehavior::CommonBehaviorPackage::eInstance()->getParameterValue_Class();
 }
@@ -346,7 +346,7 @@ bool ParameterValueImpl::internalEIsSet(int featureID) const
 	return ecore::EObjectImpl::internalEIsSet(featureID);
 }
 
-bool ParameterValueImpl::eSet(int featureID, Any newValue)
+bool ParameterValueImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -403,7 +403,7 @@ bool ParameterValueImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any ParameterValueImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any ParameterValueImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

@@ -97,7 +97,7 @@ namespace uml
 			onPort<>null implies target.type.oclAsType(Classifier).allFeatures()->includes(onPort)
 			*/
 			 
-			virtual bool type_target_pin(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
+			virtual bool type_target_pin(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context) = 0;
 
 			//*********************************
 			// Attribute Getters & Setters
@@ -111,25 +111,25 @@ namespace uml
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::InputPin> getRequest() const = 0;
+			virtual const std::shared_ptr<uml::InputPin>& getRequest() const = 0;
 			/*!
 			The request object, which is transmitted to the target object. The object may be copied in transmission, so identity might not be preserved.
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual void setRequest(std::shared_ptr<uml::InputPin>) = 0;
+			virtual void setRequest(const std::shared_ptr<uml::InputPin>&) = 0;
 			/*!
 			The target object to which the object is sent.
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::InputPin> getTarget() const = 0;
+			virtual const std::shared_ptr<uml::InputPin>& getTarget() const = 0;
 			/*!
 			The target object to which the object is sent.
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual void setTarget(std::shared_ptr<uml::InputPin>) = 0;
+			virtual void setTarget(const std::shared_ptr<uml::InputPin>&) = 0;
 
 			//*********************************
 			// Union Reference Getters

@@ -100,13 +100,13 @@ namespace uml
 			importedElement.visibility <> null implies importedElement.visibility = VisibilityKind::public
 			*/
 			 
-			virtual bool imported_element_is_public(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
+			virtual bool imported_element_is_public(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context) = 0;
 			/*!
 			The visibility of an ElementImport is either public or private.
 			visibility = VisibilityKind::public or visibility = VisibilityKind::private
 			*/
 			 
-			virtual bool visibility_public_or_private(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
+			virtual bool visibility_public_or_private(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context) = 0;
 
 			//*********************************
 			// Attribute Getters & Setters
@@ -144,13 +144,13 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::PackageableElement> getImportedElement() const = 0;
+			virtual const std::shared_ptr<uml::PackageableElement>& getImportedElement() const = 0;
 			/*!
 			Specifies the PackageableElement whose name is to be added to a Namespace.
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual void setImportedElement(std::shared_ptr<uml::PackageableElement>) = 0;
+			virtual void setImportedElement(const std::shared_ptr<uml::PackageableElement>&) = 0;
 			/*!
 			Specifies the Namespace that imports a PackageableElement from another Namespace.
 			<p>From package UML::CommonStructure.</p>

@@ -50,8 +50,8 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "fUML/Semantics/Activities/ActivitiesFactory.hpp"
 #include "fUML/Semantics/Actions/ActionsFactory.hpp"
+#include "fUML/Semantics/Activities/ActivitiesFactory.hpp"
 #include "uml/umlFactory.hpp"
 #include "uml/Action.hpp"
 #include "fUML/Semantics/Activities/ActivityEdgeInstance.hpp"
@@ -68,8 +68,8 @@
 #include "fUML/Semantics/Activities/Token.hpp"
 #include "fUML/Semantics/Values/Value.hpp"
 //Factories and Package includes
-#include "PSCS/PSCSPackage.hpp"
 #include "PSCS/Semantics/SemanticsPackage.hpp"
+#include "PSCS/PSCSPackage.hpp"
 #include "PSCS/Semantics/Actions/ActionsPackage.hpp"
 #include "fUML/Semantics/Actions/ActionsPackage.hpp"
 #include "fUML/Semantics/Activities/ActivitiesPackage.hpp"
@@ -207,7 +207,7 @@ void CS_ClearStructuralFeatureActionActivationImpl::doAction()
 	//end of body
 }
 
-std::shared_ptr<Bag<PSCS::Semantics::StructuredClassifiers::CS_Link> > CS_ClearStructuralFeatureActionActivationImpl::getLinksToDestroy(std::shared_ptr<fUML::Semantics::SimpleClassifiers::StructuredValue> value,std::shared_ptr<uml::StructuralFeature> feature)
+std::shared_ptr<Bag<PSCS::Semantics::StructuredClassifiers::CS_Link> > CS_ClearStructuralFeatureActionActivationImpl::getLinksToDestroy(const std::shared_ptr<fUML::Semantics::SimpleClassifiers::StructuredValue>& value, const std::shared_ptr<uml::StructuralFeature>& feature)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -296,7 +296,7 @@ std::shared_ptr<Bag<PSCS::Semantics::StructuredClassifiers::CS_Link> > CS_ClearS
 	//end of body
 }
 
-std::shared_ptr<Bag<fUML::Semantics::Values::Value> > CS_ClearStructuralFeatureActionActivationImpl::getPotentialLinkEnds(std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Reference> context,std::shared_ptr<uml::StructuralFeature> feature)
+std::shared_ptr<Bag<fUML::Semantics::Values::Value> > CS_ClearStructuralFeatureActionActivationImpl::getPotentialLinkEnds(const std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Reference>& context, const std::shared_ptr<uml::StructuralFeature>& feature)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -428,7 +428,7 @@ void CS_ClearStructuralFeatureActionActivationImpl::saveContent(std::shared_ptr<
 	}
 }
 
-std::shared_ptr<ecore::EClass> CS_ClearStructuralFeatureActionActivationImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& CS_ClearStructuralFeatureActionActivationImpl::eStaticClass() const
 {
 	return PSCS::Semantics::Actions::ActionsPackage::eInstance()->getCS_ClearStructuralFeatureActionActivation_Class();
 }
@@ -452,7 +452,7 @@ bool CS_ClearStructuralFeatureActionActivationImpl::internalEIsSet(int featureID
 	return fUML::Semantics::Actions::ClearStructuralFeatureActionActivationImpl::internalEIsSet(featureID);
 }
 
-bool CS_ClearStructuralFeatureActionActivationImpl::eSet(int featureID, Any newValue)
+bool CS_ClearStructuralFeatureActionActivationImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -464,7 +464,7 @@ bool CS_ClearStructuralFeatureActionActivationImpl::eSet(int featureID, Any newV
 //*********************************
 // EOperation Invoke
 //*********************************
-Any CS_ClearStructuralFeatureActionActivationImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any CS_ClearStructuralFeatureActionActivationImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

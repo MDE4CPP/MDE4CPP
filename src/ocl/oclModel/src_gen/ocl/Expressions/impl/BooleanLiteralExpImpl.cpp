@@ -207,7 +207,7 @@ std::shared_ptr<ecore::EObject> BooleanLiteralExpImpl::copy() const
 // Attribute Getters & Setters
 //*********************************
 /* Getter & Setter for attribute booleanSymbol */
-bool BooleanLiteralExpImpl::getBooleanSymbol() const 
+bool BooleanLiteralExpImpl::getBooleanSymbol() const
 {
 	return m_booleanSymbol;
 }
@@ -381,7 +381,7 @@ void BooleanLiteralExpImpl::saveContent(std::shared_ptr<persistence::interfaces:
 	}
 }
 
-std::shared_ptr<ecore::EClass> BooleanLiteralExpImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& BooleanLiteralExpImpl::eStaticClass() const
 {
 	return ocl::Expressions::ExpressionsPackage::eInstance()->getBooleanLiteralExp_Class();
 }
@@ -409,7 +409,7 @@ bool BooleanLiteralExpImpl::internalEIsSet(int featureID) const
 	return PrimitiveLiteralExpImpl::internalEIsSet(featureID);
 }
 
-bool BooleanLiteralExpImpl::eSet(int featureID, Any newValue)
+bool BooleanLiteralExpImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -428,7 +428,7 @@ bool BooleanLiteralExpImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any BooleanLiteralExpImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any BooleanLiteralExpImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

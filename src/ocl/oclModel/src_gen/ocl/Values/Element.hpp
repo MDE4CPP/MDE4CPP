@@ -76,8 +76,8 @@ namespace ocl::Values
 			//*********************************
 			// Reference Getters & Setters
 			//*********************************
-			virtual std::shared_ptr<fUML::Semantics::Values::Value> getValue() const = 0;
-			virtual void setValue(std::shared_ptr<fUML::Semantics::Values::Value>) = 0;
+			virtual const std::shared_ptr<fUML::Semantics::Values::Value>& getValue() const = 0;
+			virtual void setValue(const std::shared_ptr<fUML::Semantics::Values::Value>&) = 0;
 
 			//*********************************
 			// Union Reference Getters

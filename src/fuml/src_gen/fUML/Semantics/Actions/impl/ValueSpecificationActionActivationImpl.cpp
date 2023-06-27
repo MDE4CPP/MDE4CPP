@@ -52,8 +52,8 @@
 #include "fUML/Semantics/Actions/PinActivation.hpp"
 #include "fUML/Semantics/Activities/Token.hpp"
 //Factories and Package includes
-#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/SemanticsPackage.hpp"
+#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/Actions/ActionsPackage.hpp"
 #include "fUML/Semantics/Activities/ActivitiesPackage.hpp"
 #include "uml/umlPackage.hpp"
@@ -244,7 +244,7 @@ void ValueSpecificationActionActivationImpl::saveContent(std::shared_ptr<persist
 	}
 }
 
-std::shared_ptr<ecore::EClass> ValueSpecificationActionActivationImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& ValueSpecificationActionActivationImpl::eStaticClass() const
 {
 	return fUML::Semantics::Actions::ActionsPackage::eInstance()->getValueSpecificationActionActivation_Class();
 }
@@ -268,7 +268,7 @@ bool ValueSpecificationActionActivationImpl::internalEIsSet(int featureID) const
 	return ActionActivationImpl::internalEIsSet(featureID);
 }
 
-bool ValueSpecificationActionActivationImpl::eSet(int featureID, Any newValue)
+bool ValueSpecificationActionActivationImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -280,7 +280,7 @@ bool ValueSpecificationActionActivationImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any ValueSpecificationActionActivationImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any ValueSpecificationActionActivationImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

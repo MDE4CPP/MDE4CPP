@@ -332,7 +332,7 @@ void RealizationImpl::saveContent(std::shared_ptr<persistence::interfaces::XSave
 	}
 }
 
-std::shared_ptr<ecore::EClass> RealizationImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& RealizationImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getRealization_Class();
 }
@@ -356,7 +356,7 @@ bool RealizationImpl::internalEIsSet(int featureID) const
 	return AbstractionImpl::internalEIsSet(featureID);
 }
 
-bool RealizationImpl::eSet(int featureID, Any newValue)
+bool RealizationImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -368,7 +368,7 @@ bool RealizationImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any RealizationImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any RealizationImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

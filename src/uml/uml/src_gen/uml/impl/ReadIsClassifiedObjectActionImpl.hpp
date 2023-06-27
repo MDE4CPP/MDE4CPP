@@ -55,25 +55,25 @@ namespace uml
 			result.type = Boolean
 			*/
 			 
-			virtual bool boolean_result(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
+			virtual bool boolean_result(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context) ;
 			/*!
 			The multiplicity of the object InputPin is 1..1.
 			object.is(1,1)
 			*/
 			 
-			virtual bool multiplicity_of_input(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
+			virtual bool multiplicity_of_input(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context) ;
 			/*!
 			The multiplicity of the result OutputPin is 1..1.
 			result.is(1,1)
 			*/
 			 
-			virtual bool multiplicity_of_output(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
+			virtual bool multiplicity_of_output(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context) ;
 			/*!
 			The object InputPin has no type.
 			object.type = null
 			*/
 			 
-			virtual bool no_type(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
+			virtual bool no_type(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context) ;
 			
 			//*********************************
 			// Attribute Getters & Setters
@@ -99,37 +99,37 @@ namespace uml
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::Classifier> getClassifier() const ;
+			virtual const std::shared_ptr<uml::Classifier>& getClassifier() const ;
 			/*!
 			The Classifier against which the classification of the input object is tested.
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual void setClassifier(std::shared_ptr<uml::Classifier>) ;
+			virtual void setClassifier(const std::shared_ptr<uml::Classifier>&) ;
 			/*!
 			The InputPin that holds the object whose classification is to be tested.
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::InputPin> getObject() const ;
+			virtual const std::shared_ptr<uml::InputPin>& getObject() const ;
 			/*!
 			The InputPin that holds the object whose classification is to be tested.
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual void setObject(std::shared_ptr<uml::InputPin>) ;
+			virtual void setObject(const std::shared_ptr<uml::InputPin>&) ;
 			/*!
 			The OutputPin that holds the Boolean result of the test.
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::OutputPin> getResult() const ;
+			virtual const std::shared_ptr<uml::OutputPin>& getResult() const ;
 			/*!
 			The OutputPin that holds the Boolean result of the test.
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual void setResult(std::shared_ptr<uml::OutputPin>) ;
+			virtual void setResult(const std::shared_ptr<uml::OutputPin>&) ;
 			
 			//*********************************
 			// Union Reference Getters
@@ -187,19 +187,19 @@ namespace uml
 			virtual void saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const;
 
 		protected:
-			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
+			virtual const std::shared_ptr<ecore::EClass>& eStaticClass() const;
 
 			//*********************************
 			// EStructuralFeature Get/Set/IsSet
 			//*********************************
 			virtual Any eGet(int featureID, bool resolve, bool coreType) const ;
-			virtual bool eSet(int featureID, Any newValue) ;
+			virtual bool eSet(int featureID, const Any& newValue) ;
 			virtual bool internalEIsSet(int featureID) const ;
 
 			//*********************************
 			// EOperation Invoke
 			//*********************************
-			virtual Any eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments) ;
+			virtual Any eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments) ;
 
 		private:
 			std::weak_ptr<uml::ReadIsClassifiedObjectAction> m_thisReadIsClassifiedObjectActionPtr;

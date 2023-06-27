@@ -101,13 +101,13 @@ namespace uml
 			entry->forAll(kind = PseudostateKind::entryPoint)
 			*/
 			 
-			virtual bool entry_pseudostates(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
+			virtual bool entry_pseudostates(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context) = 0;
 			/*!
 			The exit Pseudostates must be Pseudostates with kind exitPoint.
 			exit->forAll(kind = PseudostateKind::exitPoint)
 			*/
 			 
-			virtual bool exit_pseudostates(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
+			virtual bool exit_pseudostates(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context) = 0;
 
 			//*********************************
 			// Attribute Getters & Setters
@@ -121,13 +121,13 @@ namespace uml
 			<p>From package UML::StateMachines.</p>
 			*/
 			
-			virtual std::shared_ptr<Bag<uml::Pseudostate>> getEntry() const = 0;
+			virtual const std::shared_ptr<Bag<uml::Pseudostate>>& getEntry() const = 0;
 			/*!
 			The exitPoints kind Pseudostates corresponding to this connection point.
 			<p>From package UML::StateMachines.</p>
 			*/
 			
-			virtual std::shared_ptr<Bag<uml::Pseudostate>> getExit() const = 0;
+			virtual const std::shared_ptr<Bag<uml::Pseudostate>>& getExit() const = 0;
 			/*!
 			The State in which the ConnectionPointReference is defined.
 			<p>From package UML::StateMachines.</p>

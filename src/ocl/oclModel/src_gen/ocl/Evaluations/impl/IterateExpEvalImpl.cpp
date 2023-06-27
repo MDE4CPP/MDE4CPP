@@ -34,11 +34,11 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "fUML/Semantics/Values/ValuesFactory.hpp"
 #include "fUML/Semantics/Loci/LociFactory.hpp"
-#include "fUML/Semantics/SimpleClassifiers/SimpleClassifiersFactory.hpp"
-#include "ocl/Evaluations/EvaluationsFactory.hpp"
 #include "uml/umlFactory.hpp"
+#include "fUML/Semantics/Values/ValuesFactory.hpp"
+#include "ocl/Evaluations/EvaluationsFactory.hpp"
+#include "fUML/Semantics/SimpleClassifiers/SimpleClassifiersFactory.hpp"
 #include "ocl/Expressions/ExpressionsFactory.hpp"
 #include "ocl/Evaluations/EvalEnvironment.hpp"
 #include "fUML/Semantics/Loci/Locus.hpp"
@@ -130,11 +130,11 @@ std::shared_ptr<ecore::EObject> IterateExpEvalImpl::copy() const
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference result */
-std::shared_ptr<ocl::Evaluations::VariableDeclEval> IterateExpEvalImpl::getResult() const
+const std::shared_ptr<ocl::Evaluations::VariableDeclEval>& IterateExpEvalImpl::getResult() const
 {
     return m_result;
 }
-void IterateExpEvalImpl::setResult(std::shared_ptr<ocl::Evaluations::VariableDeclEval> _result)
+void IterateExpEvalImpl::setResult(const std::shared_ptr<ocl::Evaluations::VariableDeclEval>& _result)
 {
     m_result = _result;
 	
@@ -253,7 +253,7 @@ void IterateExpEvalImpl::saveContent(std::shared_ptr<persistence::interfaces::XS
 	}
 }
 
-std::shared_ptr<ecore::EClass> IterateExpEvalImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& IterateExpEvalImpl::eStaticClass() const
 {
 	return ocl::Evaluations::EvaluationsPackage::eInstance()->getIterateExpEval_Class();
 }
@@ -281,7 +281,7 @@ bool IterateExpEvalImpl::internalEIsSet(int featureID) const
 	return LoopExpEvalImpl::internalEIsSet(featureID);
 }
 
-bool IterateExpEvalImpl::eSet(int featureID, Any newValue)
+bool IterateExpEvalImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -301,7 +301,7 @@ bool IterateExpEvalImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any IterateExpEvalImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any IterateExpEvalImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

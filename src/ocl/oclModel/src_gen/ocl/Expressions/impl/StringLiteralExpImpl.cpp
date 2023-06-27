@@ -207,7 +207,7 @@ std::shared_ptr<ecore::EObject> StringLiteralExpImpl::copy() const
 // Attribute Getters & Setters
 //*********************************
 /* Getter & Setter for attribute stringSymbol */
-std::string StringLiteralExpImpl::getStringSymbol() const 
+std::string StringLiteralExpImpl::getStringSymbol() const
 {
 	return m_stringSymbol;
 }
@@ -381,7 +381,7 @@ void StringLiteralExpImpl::saveContent(std::shared_ptr<persistence::interfaces::
 	}
 }
 
-std::shared_ptr<ecore::EClass> StringLiteralExpImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& StringLiteralExpImpl::eStaticClass() const
 {
 	return ocl::Expressions::ExpressionsPackage::eInstance()->getStringLiteralExp_Class();
 }
@@ -409,7 +409,7 @@ bool StringLiteralExpImpl::internalEIsSet(int featureID) const
 	return PrimitiveLiteralExpImpl::internalEIsSet(featureID);
 }
 
-bool StringLiteralExpImpl::eSet(int featureID, Any newValue)
+bool StringLiteralExpImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -428,7 +428,7 @@ bool StringLiteralExpImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any StringLiteralExpImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any StringLiteralExpImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

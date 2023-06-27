@@ -102,7 +102,7 @@ namespace uml
 			classifierBehavior->notEmpty() implies classifierBehavior.specification->isEmpty()
 			*/
 			 
-			virtual bool class_behavior(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
+			virtual bool class_behavior(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context) = 0;
 			/*!
 			Retrieves all the interfaces on which this behaviored classifier or any of its parents has an interface realization dependency.
 			*/
@@ -126,25 +126,25 @@ namespace uml
 			<p>From package UML::SimpleClassifiers.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::Behavior> getClassifierBehavior() const = 0;
+			virtual const std::shared_ptr<uml::Behavior>& getClassifierBehavior() const = 0;
 			/*!
 			A Behavior that specifies the behavior of the BehavioredClassifier itself.
 			<p>From package UML::SimpleClassifiers.</p>
 			*/
 			
-			virtual void setClassifierBehavior(std::shared_ptr<uml::Behavior>) = 0;
+			virtual void setClassifierBehavior(const std::shared_ptr<uml::Behavior>&) = 0;
 			/*!
 			The set of InterfaceRealizations owned by the BehavioredClassifier. Interface realizations reference the Interfaces of which the BehavioredClassifier is an implementation.
 			<p>From package UML::SimpleClassifiers.</p>
 			*/
 			
-			virtual std::shared_ptr<Subset<uml::InterfaceRealization, uml::Element>> getInterfaceRealization() const = 0;
+			virtual const std::shared_ptr<Subset<uml::InterfaceRealization, uml::Element>>& getInterfaceRealization() const = 0;
 			/*!
 			Behaviors owned by a BehavioredClassifier.
 			<p>From package UML::SimpleClassifiers.</p>
 			*/
 			
-			virtual std::shared_ptr<SubsetUnion<uml::Behavior, uml::NamedElement>> getOwnedBehavior() const = 0;
+			virtual const std::shared_ptr<SubsetUnion<uml::Behavior, uml::NamedElement>>& getOwnedBehavior() const = 0;
 
 			//*********************************
 			// Union Reference Getters

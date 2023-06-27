@@ -52,10 +52,10 @@ namespace fUML::Semantics::Values
 			//*********************************
 			// Reference Getters & Setters
 			//*********************************
-			virtual std::shared_ptr<fUML::Semantics::Loci::Locus> getLocus() const ;
-			virtual void setLocus(std::shared_ptr<fUML::Semantics::Loci::Locus>) ;
-			virtual std::shared_ptr<uml::ValueSpecification> getSpecification() const ;
-			virtual void setSpecification(std::shared_ptr<uml::ValueSpecification>) ;
+			virtual const std::shared_ptr<fUML::Semantics::Loci::Locus>& getLocus() const ;
+			virtual void setLocus(const std::shared_ptr<fUML::Semantics::Loci::Locus>&) ;
+			virtual const std::shared_ptr<uml::ValueSpecification>& getSpecification() const ;
+			virtual void setSpecification(const std::shared_ptr<uml::ValueSpecification>&) ;
 			
 			//*********************************
 			// Union Reference Getters
@@ -77,19 +77,19 @@ namespace fUML::Semantics::Values
 			virtual void saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const;
 
 		protected:
-			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
+			virtual const std::shared_ptr<ecore::EClass>& eStaticClass() const;
 
 			//*********************************
 			// EStructuralFeature Get/Set/IsSet
 			//*********************************
 			virtual Any eGet(int featureID, bool resolve, bool coreType) const ;
-			virtual bool eSet(int featureID, Any newValue) ;
+			virtual bool eSet(int featureID, const Any& newValue) ;
 			virtual bool internalEIsSet(int featureID) const ;
 
 			//*********************************
 			// EOperation Invoke
 			//*********************************
-			virtual Any eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments) ;
+			virtual Any eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments) ;
 
 		private:
 			std::weak_ptr<fUML::Semantics::Values::Evaluation> m_thisEvaluationPtr;

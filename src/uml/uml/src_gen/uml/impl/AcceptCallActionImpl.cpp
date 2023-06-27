@@ -156,17 +156,17 @@ std::shared_ptr<ecore::EObject> AcceptCallActionImpl::copy() const
 //*********************************
 // Operations
 //*********************************
-bool AcceptCallActionImpl::result_pins(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool AcceptCallActionImpl::result_pins(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool AcceptCallActionImpl::trigger_call_event(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool AcceptCallActionImpl::trigger_call_event(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool AcceptCallActionImpl::unmarshall(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool AcceptCallActionImpl::unmarshall(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -179,11 +179,11 @@ bool AcceptCallActionImpl::unmarshall(Any diagnostics,std::shared_ptr<std::map <
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference returnInformation */
-std::shared_ptr<uml::OutputPin> AcceptCallActionImpl::getReturnInformation() const
+const std::shared_ptr<uml::OutputPin>& AcceptCallActionImpl::getReturnInformation() const
 {
     return m_returnInformation;
 }
-void AcceptCallActionImpl::setReturnInformation(std::shared_ptr<uml::OutputPin> _returnInformation)
+void AcceptCallActionImpl::setReturnInformation(const std::shared_ptr<uml::OutputPin>& _returnInformation)
 {
     m_returnInformation = _returnInformation;
 	
@@ -389,7 +389,7 @@ void AcceptCallActionImpl::saveContent(std::shared_ptr<persistence::interfaces::
 	}
 }
 
-std::shared_ptr<ecore::EClass> AcceptCallActionImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& AcceptCallActionImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getAcceptCallAction_Class();
 }
@@ -417,7 +417,7 @@ bool AcceptCallActionImpl::internalEIsSet(int featureID) const
 	return AcceptEventActionImpl::internalEIsSet(featureID);
 }
 
-bool AcceptCallActionImpl::eSet(int featureID, Any newValue)
+bool AcceptCallActionImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -437,7 +437,7 @@ bool AcceptCallActionImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any AcceptCallActionImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any AcceptCallActionImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

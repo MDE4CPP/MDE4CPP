@@ -222,7 +222,7 @@ std::shared_ptr<ecore::EObject> ProfileImpl::copy() const
 //*********************************
 // Operations
 //*********************************
-std::shared_ptr<ecore::EObject> ProfileImpl::create(std::shared_ptr<uml::Classifier> classifier)
+std::shared_ptr<ecore::EObject> ProfileImpl::create(const std::shared_ptr<uml::Classifier>& classifier)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -232,7 +232,7 @@ std::shared_ptr<ecore::EPackage> ProfileImpl::define()
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-std::shared_ptr<ecore::EPackage> ProfileImpl::define(std::shared_ptr<std::unordered_map < std::string, std::string>> options,Any diagnostics,std::shared_ptr<std::unordered_map < Any, Any>> context)
+std::shared_ptr<ecore::EPackage> ProfileImpl::define(std::shared_ptr<std::unordered_map < std::string, std::string>> options, const Any& diagnostics, std::shared_ptr<std::unordered_map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -242,7 +242,7 @@ std::shared_ptr<ecore::EPackage> ProfileImpl::getDefinition()
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-std::shared_ptr<ecore::ENamedElement> ProfileImpl::getDefinition(std::shared_ptr<uml::NamedElement> namedElement)
+std::shared_ptr<ecore::ENamedElement> ProfileImpl::getDefinition(const std::shared_ptr<uml::NamedElement>& namedElement)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -267,12 +267,12 @@ bool ProfileImpl::isDefined()
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool ProfileImpl::metaclass_reference_not_specialized(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool ProfileImpl::metaclass_reference_not_specialized(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool ProfileImpl::references_same_metamodel(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool ProfileImpl::references_same_metamodel(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -285,7 +285,7 @@ bool ProfileImpl::references_same_metamodel(Any diagnostics,std::shared_ptr<std:
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference metaclassReference */
-std::shared_ptr<Subset<uml::ElementImport, uml::ElementImport /*Subset does not reference a union*/>> ProfileImpl::getMetaclassReference() const
+const std::shared_ptr<Subset<uml::ElementImport, uml::ElementImport /*Subset does not reference a union*/>>& ProfileImpl::getMetaclassReference() const
 {
 	if(m_metaclassReference == nullptr)
 	{
@@ -306,7 +306,7 @@ std::shared_ptr<Subset<uml::ElementImport, uml::ElementImport /*Subset does not 
 }
 
 /* Getter & Setter for reference metamodelReference */
-std::shared_ptr<Subset<uml::PackageImport, uml::PackageImport /*Subset does not reference a union*/>> ProfileImpl::getMetamodelReference() const
+const std::shared_ptr<Subset<uml::PackageImport, uml::PackageImport /*Subset does not reference a union*/>>& ProfileImpl::getMetamodelReference() const
 {
 	if(m_metamodelReference == nullptr)
 	{
@@ -551,7 +551,7 @@ void ProfileImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHand
 	}
 }
 
-std::shared_ptr<ecore::EClass> ProfileImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& ProfileImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getProfile_Class();
 }
@@ -583,7 +583,7 @@ bool ProfileImpl::internalEIsSet(int featureID) const
 	return PackageImpl::internalEIsSet(featureID);
 }
 
-bool ProfileImpl::eSet(int featureID, Any newValue)
+bool ProfileImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -669,7 +669,7 @@ bool ProfileImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any ProfileImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any ProfileImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

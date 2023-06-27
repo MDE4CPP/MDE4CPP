@@ -53,10 +53,10 @@ virtual public ExpressionInOclEval
 			//*********************************
 			// Reference Getters & Setters
 			//*********************************
-			virtual std::shared_ptr<ocl::Evaluations::OclExpEval> getContext() const ;
-			virtual void setContext(std::shared_ptr<ocl::Evaluations::OclExpEval>) ;
-			virtual std::shared_ptr<ocl::Evaluations::EvalEnvironment> getEnvironment() const ;
-			virtual void setEnvironment(std::shared_ptr<ocl::Evaluations::EvalEnvironment>) ;
+			virtual const std::shared_ptr<ocl::Evaluations::OclExpEval>& getContext() const ;
+			virtual void setContext(const std::shared_ptr<ocl::Evaluations::OclExpEval>&) ;
+			virtual const std::shared_ptr<ocl::Evaluations::EvalEnvironment>& getEnvironment() const ;
+			virtual void setEnvironment(const std::shared_ptr<ocl::Evaluations::EvalEnvironment>&) ;
 			
 			//*********************************
 			// Union Reference Getters
@@ -78,19 +78,19 @@ virtual public ExpressionInOclEval
 			virtual void saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const;
 
 		protected:
-			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
+			virtual const std::shared_ptr<ecore::EClass>& eStaticClass() const;
 
 			//*********************************
 			// EStructuralFeature Get/Set/IsSet
 			//*********************************
 			virtual Any eGet(int featureID, bool resolve, bool coreType) const ;
-			virtual bool eSet(int featureID, Any newValue) ;
+			virtual bool eSet(int featureID, const Any& newValue) ;
 			virtual bool internalEIsSet(int featureID) const ;
 
 			//*********************************
 			// EOperation Invoke
 			//*********************************
-			virtual Any eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments) ;
+			virtual Any eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments) ;
 
 		private:
 			std::weak_ptr<ocl::Evaluations::ExpressionInOclEval> m_thisExpressionInOclEvalPtr;

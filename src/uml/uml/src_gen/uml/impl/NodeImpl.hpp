@@ -56,7 +56,7 @@ namespace uml
 			Creates a (binary) communication path between this node and the specified other node, with the specified navigabilities, aggregations, names, lower bounds, and upper bounds, and owned by this node's nearest package.
 			*/
 			 
-			virtual std::shared_ptr<uml::CommunicationPath> createCommunicationPath(bool end1IsNavigable,uml::AggregationKind end1Aggregation,std::string end1Name,int end1Lower,int end1Upper,std::shared_ptr<uml::Node> end1Node,bool end2IsNavigable,uml::AggregationKind end2Aggregation,std::string end2Name,int end2Lower,int end2Upper) ;
+			virtual std::shared_ptr<uml::CommunicationPath> createCommunicationPath(bool end1IsNavigable, uml::AggregationKind end1Aggregation, std::string end1Name, int end1Lower, int end1Upper, const std::shared_ptr<uml::Node>& end1Node, bool end2IsNavigable, uml::AggregationKind end2Aggregation, std::string end2Name, int end2Lower, int end2Upper) ;
 			/*!
 			Retrieves the communication paths in which this node is involved.
 			*/
@@ -67,7 +67,7 @@ namespace uml
 			part->forAll(oclIsKindOf(Node))
 			*/
 			 
-			virtual bool internal_structure(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
+			virtual bool internal_structure(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context) ;
 			
 			//*********************************
 			// Attribute Getters & Setters
@@ -81,7 +81,7 @@ namespace uml
 			<p>From package UML::Deployments.</p>
 			*/
 			
-			virtual std::shared_ptr<Subset<uml::Node, uml::NamedElement>> getNestedNode() const ;
+			virtual const std::shared_ptr<Subset<uml::Node, uml::NamedElement>>& getNestedNode() const ;
 			
 			//*********************************
 			// Union Reference Getters
@@ -158,19 +158,19 @@ namespace uml
 			virtual void saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const;
 
 		protected:
-			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
+			virtual const std::shared_ptr<ecore::EClass>& eStaticClass() const;
 
 			//*********************************
 			// EStructuralFeature Get/Set/IsSet
 			//*********************************
 			virtual Any eGet(int featureID, bool resolve, bool coreType) const ;
-			virtual bool eSet(int featureID, Any newValue) ;
+			virtual bool eSet(int featureID, const Any& newValue) ;
 			virtual bool internalEIsSet(int featureID) const ;
 
 			//*********************************
 			// EOperation Invoke
 			//*********************************
-			virtual Any eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments) ;
+			virtual Any eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments) ;
 
 		private:
 			std::weak_ptr<uml::Node> m_thisNodePtr;

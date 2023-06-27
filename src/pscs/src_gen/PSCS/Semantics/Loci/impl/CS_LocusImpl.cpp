@@ -47,10 +47,10 @@
 #include "fUML/Semantics/Loci/Locus.hpp"
 #include "fUML/Semantics/StructuredClassifiers/Object.hpp"
 //Factories and Package includes
-#include "PSCS/PSCSPackage.hpp"
 #include "PSCS/Semantics/SemanticsPackage.hpp"
-#include "PSCS/Semantics/Loci/LociPackage.hpp"
+#include "PSCS/PSCSPackage.hpp"
 #include "fUML/Semantics/Loci/LociPackage.hpp"
+#include "PSCS/Semantics/Loci/LociPackage.hpp"
 #include "fUML/Semantics/StructuredClassifiers/StructuredClassifiersPackage.hpp"
 #include "uml/umlPackage.hpp"
 
@@ -116,7 +116,7 @@ std::shared_ptr<ecore::EObject> CS_LocusImpl::copy() const
 //*********************************
 // Operations
 //*********************************
-std::shared_ptr<fUML::Semantics::StructuredClassifiers::Object> CS_LocusImpl::instantiate(std::shared_ptr<uml::Class> type)
+std::shared_ptr<fUML::Semantics::StructuredClassifiers::Object> CS_LocusImpl::instantiate(const std::shared_ptr<uml::Class>& type)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -215,7 +215,7 @@ void CS_LocusImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHan
 	}
 }
 
-std::shared_ptr<ecore::EClass> CS_LocusImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& CS_LocusImpl::eStaticClass() const
 {
 	return PSCS::Semantics::Loci::LociPackage::eInstance()->getCS_Locus_Class();
 }
@@ -239,7 +239,7 @@ bool CS_LocusImpl::internalEIsSet(int featureID) const
 	return fUML::Semantics::Loci::LocusImpl::internalEIsSet(featureID);
 }
 
-bool CS_LocusImpl::eSet(int featureID, Any newValue)
+bool CS_LocusImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -251,7 +251,7 @@ bool CS_LocusImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any CS_LocusImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any CS_LocusImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

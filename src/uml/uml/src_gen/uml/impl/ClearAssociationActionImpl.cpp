@@ -157,12 +157,12 @@ std::shared_ptr<ecore::EObject> ClearAssociationActionImpl::copy() const
 //*********************************
 // Operations
 //*********************************
-bool ClearAssociationActionImpl::multiplicity(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool ClearAssociationActionImpl::multiplicity(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool ClearAssociationActionImpl::same_type(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool ClearAssociationActionImpl::same_type(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -175,22 +175,22 @@ bool ClearAssociationActionImpl::same_type(Any diagnostics,std::shared_ptr<std::
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference association */
-std::shared_ptr<uml::Association> ClearAssociationActionImpl::getAssociation() const
+const std::shared_ptr<uml::Association>& ClearAssociationActionImpl::getAssociation() const
 {
     return m_association;
 }
-void ClearAssociationActionImpl::setAssociation(std::shared_ptr<uml::Association> _association)
+void ClearAssociationActionImpl::setAssociation(const std::shared_ptr<uml::Association>& _association)
 {
     m_association = _association;
 	
 }
 
 /* Getter & Setter for reference object */
-std::shared_ptr<uml::InputPin> ClearAssociationActionImpl::getObject() const
+const std::shared_ptr<uml::InputPin>& ClearAssociationActionImpl::getObject() const
 {
     return m_object;
 }
-void ClearAssociationActionImpl::setObject(std::shared_ptr<uml::InputPin> _object)
+void ClearAssociationActionImpl::setObject(const std::shared_ptr<uml::InputPin>& _object)
 {
     m_object = _object;
 	
@@ -429,7 +429,7 @@ void ClearAssociationActionImpl::saveContent(std::shared_ptr<persistence::interf
 	}
 }
 
-std::shared_ptr<ecore::EClass> ClearAssociationActionImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& ClearAssociationActionImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getClearAssociationAction_Class();
 }
@@ -461,7 +461,7 @@ bool ClearAssociationActionImpl::internalEIsSet(int featureID) const
 	return ActionImpl::internalEIsSet(featureID);
 }
 
-bool ClearAssociationActionImpl::eSet(int featureID, Any newValue)
+bool ClearAssociationActionImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -489,7 +489,7 @@ bool ClearAssociationActionImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any ClearAssociationActionImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any ClearAssociationActionImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

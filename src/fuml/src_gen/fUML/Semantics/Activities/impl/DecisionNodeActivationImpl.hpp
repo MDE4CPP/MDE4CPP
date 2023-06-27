@@ -45,17 +45,17 @@ namespace fUML::Semantics::Activities
 			//*********************************
 			// Operations
 			//*********************************
-			virtual std::shared_ptr<fUML::Semantics::Values::Value> executeDecisionInputBehavior(std::shared_ptr<fUML::Semantics::Values::Value> inputValue,std::shared_ptr<fUML::Semantics::Values::Value> decisionInputValue) ;
-			virtual void fire(std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> incomingTokens) ;
+			virtual std::shared_ptr<fUML::Semantics::Values::Value> executeDecisionInputBehavior(const std::shared_ptr<fUML::Semantics::Values::Value>& inputValue, const std::shared_ptr<fUML::Semantics::Values::Value>& decisionInputValue) ;
+			virtual void fire(const std::shared_ptr<Bag<fUML::Semantics::Activities::Token>>& incomingTokens) ;
 			virtual std::shared_ptr<fUML::Semantics::Activities::ActivityEdgeInstance> getDecisionInputFlowInstance() ;
 			virtual std::shared_ptr<fUML::Semantics::Values::Value> getDecisionInputFlowValue() ;
-			virtual std::shared_ptr<Bag<fUML::Semantics::Values::Value> > getDecisionValues(std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> incomingTokens) ;
+			virtual std::shared_ptr<Bag<fUML::Semantics::Values::Value> > getDecisionValues(const std::shared_ptr<Bag<fUML::Semantics::Activities::Token>>& incomingTokens) ;
 			virtual bool hasObjectFlowInput() ;
 			virtual bool isReady() ;
-			virtual std::shared_ptr<Bag<fUML::Semantics::Activities::Token> > removeJoinedControlTokens(std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> incomingTokens) ;
+			virtual std::shared_ptr<Bag<fUML::Semantics::Activities::Token> > removeJoinedControlTokens(const std::shared_ptr<Bag<fUML::Semantics::Activities::Token>>& incomingTokens) ;
 			virtual std::shared_ptr<Bag<fUML::Semantics::Activities::Token> > takeOfferedTokens() ;
 			virtual void terminate() ;
-			virtual bool test(std::shared_ptr<uml::ValueSpecification> gaurd,std::shared_ptr<fUML::Semantics::Values::Value> value) ;
+			virtual bool test(const std::shared_ptr<uml::ValueSpecification>& gaurd, const std::shared_ptr<fUML::Semantics::Values::Value>& value) ;
 			
 			//*********************************
 			// Attribute Getters & Setters
@@ -64,12 +64,12 @@ namespace fUML::Semantics::Activities
 			//*********************************
 			// Reference Getters & Setters
 			//*********************************
-			virtual std::shared_ptr<fUML::Semantics::CommonBehavior::Execution> getDecisionInputExecution() const ;
-			virtual void setDecisionInputExecution(std::shared_ptr<fUML::Semantics::CommonBehavior::Execution>) ;
-			virtual std::shared_ptr<uml::DecisionNode> getDecisionNode() const ;
-			virtual void setDecisionNode(std::shared_ptr<uml::DecisionNode>) ;
+			virtual const std::shared_ptr<fUML::Semantics::CommonBehavior::Execution>& getDecisionInputExecution() const ;
+			virtual void setDecisionInputExecution(const std::shared_ptr<fUML::Semantics::CommonBehavior::Execution>&) ;
+			virtual const std::shared_ptr<uml::DecisionNode>& getDecisionNode() const ;
+			virtual void setDecisionNode(const std::shared_ptr<uml::DecisionNode>&) ;
 			/*Additional Setter for 'ActivityNodeActivation::node' redefined by reference 'decisionNode'*/
-			virtual void setNode(std::shared_ptr<uml::ActivityNode>) ;
+			virtual void setNode(const std::shared_ptr<uml::ActivityNode>&) ;
 			
 			//*********************************
 			// Union Reference Getters
@@ -91,19 +91,19 @@ namespace fUML::Semantics::Activities
 			virtual void saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const;
 
 		protected:
-			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
+			virtual const std::shared_ptr<ecore::EClass>& eStaticClass() const;
 
 			//*********************************
 			// EStructuralFeature Get/Set/IsSet
 			//*********************************
 			virtual Any eGet(int featureID, bool resolve, bool coreType) const ;
-			virtual bool eSet(int featureID, Any newValue) ;
+			virtual bool eSet(int featureID, const Any& newValue) ;
 			virtual bool internalEIsSet(int featureID) const ;
 
 			//*********************************
 			// EOperation Invoke
 			//*********************************
-			virtual Any eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments) ;
+			virtual Any eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments) ;
 
 		private:
 			std::weak_ptr<fUML::Semantics::Activities::DecisionNodeActivation> m_thisDecisionNodeActivationPtr;

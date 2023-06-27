@@ -168,22 +168,22 @@ std::shared_ptr<ecore::EObject> IntervalImpl::copy() const
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference max */
-std::shared_ptr<uml::ValueSpecification> IntervalImpl::getMax() const
+const std::shared_ptr<uml::ValueSpecification>& IntervalImpl::getMax() const
 {
     return m_max;
 }
-void IntervalImpl::setMax(std::shared_ptr<uml::ValueSpecification> _max)
+void IntervalImpl::setMax(const std::shared_ptr<uml::ValueSpecification>& _max)
 {
     m_max = _max;
 	
 }
 
 /* Getter & Setter for reference min */
-std::shared_ptr<uml::ValueSpecification> IntervalImpl::getMin() const
+const std::shared_ptr<uml::ValueSpecification>& IntervalImpl::getMin() const
 {
     return m_min;
 }
-void IntervalImpl::setMin(std::shared_ptr<uml::ValueSpecification> _min)
+void IntervalImpl::setMin(const std::shared_ptr<uml::ValueSpecification>& _min)
 {
     m_min = _min;
 	
@@ -379,7 +379,7 @@ void IntervalImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHan
 	}
 }
 
-std::shared_ptr<ecore::EClass> IntervalImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& IntervalImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getInterval_Class();
 }
@@ -411,7 +411,7 @@ bool IntervalImpl::internalEIsSet(int featureID) const
 	return ValueSpecificationImpl::internalEIsSet(featureID);
 }
 
-bool IntervalImpl::eSet(int featureID, Any newValue)
+bool IntervalImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -439,7 +439,7 @@ bool IntervalImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any IntervalImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any IntervalImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

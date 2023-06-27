@@ -208,11 +208,11 @@ CallExpImpl& CallExpImpl::operator=(const CallExpImpl & obj)
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference source */
-std::shared_ptr<ocl::Expressions::OclExpression> CallExpImpl::getSource() const
+const std::shared_ptr<ocl::Expressions::OclExpression>& CallExpImpl::getSource() const
 {
     return m_source;
 }
-void CallExpImpl::setSource(std::shared_ptr<ocl::Expressions::OclExpression> _source)
+void CallExpImpl::setSource(const std::shared_ptr<ocl::Expressions::OclExpression>& _source)
 {
     m_source = _source;
 	
@@ -378,7 +378,7 @@ void CallExpImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHand
 	}
 }
 
-std::shared_ptr<ecore::EClass> CallExpImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& CallExpImpl::eStaticClass() const
 {
 	return ocl::Expressions::ExpressionsPackage::eInstance()->getCallExp_Class();
 }
@@ -406,7 +406,7 @@ bool CallExpImpl::internalEIsSet(int featureID) const
 	return OclExpressionImpl::internalEIsSet(featureID);
 }
 
-bool CallExpImpl::eSet(int featureID, Any newValue)
+bool CallExpImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -426,7 +426,7 @@ bool CallExpImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any CallExpImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any CallExpImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

@@ -146,11 +146,11 @@ std::shared_ptr<ecore::EObject> IncludeImpl::copy() const
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference addition */
-std::shared_ptr<uml::UseCase> IncludeImpl::getAddition() const
+const std::shared_ptr<uml::UseCase>& IncludeImpl::getAddition() const
 {
     return m_addition;
 }
-void IncludeImpl::setAddition(std::shared_ptr<uml::UseCase> _addition)
+void IncludeImpl::setAddition(const std::shared_ptr<uml::UseCase>& _addition)
 {
     m_addition = _addition;
 	
@@ -387,7 +387,7 @@ void IncludeImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHand
 	}
 }
 
-std::shared_ptr<ecore::EClass> IncludeImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& IncludeImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getInclude_Class();
 }
@@ -436,7 +436,7 @@ bool IncludeImpl::internalEIsSet(int featureID) const
 	return result;
 }
 
-bool IncludeImpl::eSet(int featureID, Any newValue)
+bool IncludeImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -471,7 +471,7 @@ bool IncludeImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any IncludeImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any IncludeImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

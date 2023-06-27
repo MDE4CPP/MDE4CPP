@@ -45,14 +45,14 @@ namespace fUML::Semantics::Activities
 			//*********************************
 			// Operations
 			//*********************************
-			virtual void addToken(std::shared_ptr<fUML::Semantics::Activities::Token> token) ;
+			virtual void addToken(const std::shared_ptr<fUML::Semantics::Activities::Token>& token) ;
 			virtual void clearTokens() ;
 			virtual int countOfferedValues() ;
 			virtual int countUnofferedTokens() ;
 			virtual std::shared_ptr<Bag<fUML::Semantics::Activities::Token> > getUnofferedTokens() ;
-			virtual int removeToken(std::shared_ptr<fUML::Semantics::Activities::Token> token) ;
+			virtual int removeToken(const std::shared_ptr<fUML::Semantics::Activities::Token>& token) ;
 			virtual void run() ;
-			virtual void sendOffers(std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> tokens) ;
+			virtual void sendOffers(const std::shared_ptr<Bag<fUML::Semantics::Activities::Token>>& tokens) ;
 			virtual void sendUnofferedTokens() ;
 			virtual std::shared_ptr<Bag<fUML::Semantics::Activities::Token> > takeUnofferedTokens() ;
 			virtual void terminate() ;
@@ -87,19 +87,19 @@ namespace fUML::Semantics::Activities
 			virtual void saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const;
 
 		protected:
-			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
+			virtual const std::shared_ptr<ecore::EClass>& eStaticClass() const;
 
 			//*********************************
 			// EStructuralFeature Get/Set/IsSet
 			//*********************************
 			virtual Any eGet(int featureID, bool resolve, bool coreType) const ;
-			virtual bool eSet(int featureID, Any newValue) ;
+			virtual bool eSet(int featureID, const Any& newValue) ;
 			virtual bool internalEIsSet(int featureID) const ;
 
 			//*********************************
 			// EOperation Invoke
 			//*********************************
-			virtual Any eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments) ;
+			virtual Any eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments) ;
 
 		private:
 			std::weak_ptr<fUML::Semantics::Activities::ObjectNodeActivation> m_thisObjectNodeActivationPtr;

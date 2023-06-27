@@ -86,12 +86,12 @@ namespace fUML::Semantics::Actions
 			//*********************************
 			// Operations
 			//*********************************
-			virtual void accept(std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccurrence> eventOccurrence) = 0;
+			virtual void accept(const std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccurrence>& eventOccurrence) = 0;
 			virtual void doAction() = 0;
-			virtual void fire(std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> incomingTokens) = 0;
-			virtual void initialize(std::shared_ptr<uml::ActivityNode> node,std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup> group) = 0;
+			virtual void fire(const std::shared_ptr<Bag<fUML::Semantics::Activities::Token>>& incomingTokens) = 0;
+			virtual void initialize(const std::shared_ptr<uml::ActivityNode>& node, const std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup>& group) = 0;
 			virtual bool isReady() = 0;
-			virtual bool match(std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccurrence> eventOccurrence) = 0;
+			virtual bool match(const std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccurrence>& eventOccurrence) = 0;
 			virtual void run() = 0;
 			virtual void terminate() = 0;
 
@@ -104,8 +104,8 @@ namespace fUML::Semantics::Actions
 			//*********************************
 			// Reference Getters & Setters
 			//*********************************
-			virtual std::shared_ptr<fUML::Semantics::Actions::AcceptEventActionEventAccepter> getEventAccepter() const = 0;
-			virtual void setEventAccepter(std::shared_ptr<fUML::Semantics::Actions::AcceptEventActionEventAccepter>) = 0;
+			virtual const std::shared_ptr<fUML::Semantics::Actions::AcceptEventActionEventAccepter>& getEventAccepter() const = 0;
+			virtual void setEventAccepter(const std::shared_ptr<fUML::Semantics::Actions::AcceptEventActionEventAccepter>&) = 0;
 
 			//*********************************
 			// Union Reference Getters

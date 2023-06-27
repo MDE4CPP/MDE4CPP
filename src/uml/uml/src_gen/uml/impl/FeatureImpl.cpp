@@ -120,7 +120,7 @@ FeatureImpl& FeatureImpl::operator=(const FeatureImpl & obj)
 // Attribute Getters & Setters
 //*********************************
 /* Getter & Setter for attribute isStatic */
-bool FeatureImpl::getIsStatic() const 
+bool FeatureImpl::getIsStatic() const
 {
 	return m_isStatic;
 }
@@ -280,7 +280,7 @@ void FeatureImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHand
 	}
 }
 
-std::shared_ptr<ecore::EClass> FeatureImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& FeatureImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getFeature_Class();
 }
@@ -312,7 +312,7 @@ bool FeatureImpl::internalEIsSet(int featureID) const
 	return RedefinableElementImpl::internalEIsSet(featureID);
 }
 
-bool FeatureImpl::eSet(int featureID, Any newValue)
+bool FeatureImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -331,7 +331,7 @@ bool FeatureImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any FeatureImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any FeatureImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

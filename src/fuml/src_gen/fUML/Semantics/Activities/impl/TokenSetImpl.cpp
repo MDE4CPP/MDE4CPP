@@ -37,8 +37,8 @@
 #include "fUML/Semantics/Activities/ActivitiesFactory.hpp"
 #include "fUML/Semantics/Activities/Token.hpp"
 //Factories and Package includes
-#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/SemanticsPackage.hpp"
+#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/Activities/ActivitiesPackage.hpp"
 
 using namespace fUML::Semantics::Activities;
@@ -113,7 +113,7 @@ std::shared_ptr<ecore::EObject> TokenSetImpl::copy() const
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference tokens */
-std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> TokenSetImpl::getTokens() const
+const std::shared_ptr<Bag<fUML::Semantics::Activities::Token>>& TokenSetImpl::getTokens() const
 {
 	if(m_tokens == nullptr)
 	{
@@ -228,7 +228,7 @@ void TokenSetImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHan
 	}
 }
 
-std::shared_ptr<ecore::EClass> TokenSetImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& TokenSetImpl::eStaticClass() const
 {
 	return fUML::Semantics::Activities::ActivitiesPackage::eInstance()->getTokenSet_Class();
 }
@@ -256,7 +256,7 @@ bool TokenSetImpl::internalEIsSet(int featureID) const
 	return ecore::EObjectImpl::internalEIsSet(featureID);
 }
 
-bool TokenSetImpl::eSet(int featureID, Any newValue)
+bool TokenSetImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -305,7 +305,7 @@ bool TokenSetImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any TokenSetImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any TokenSetImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

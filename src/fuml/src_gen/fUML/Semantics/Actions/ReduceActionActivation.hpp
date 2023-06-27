@@ -92,8 +92,8 @@ namespace fUML::Semantics::Actions
 			//*********************************
 			// Reference Getters & Setters
 			//*********************************
-			virtual std::shared_ptr<fUML::Semantics::CommonBehavior::Execution> getCurrentExecution() const = 0;
-			virtual void setCurrentExecution(std::shared_ptr<fUML::Semantics::CommonBehavior::Execution>) = 0;
+			virtual const std::shared_ptr<fUML::Semantics::CommonBehavior::Execution>& getCurrentExecution() const = 0;
+			virtual void setCurrentExecution(const std::shared_ptr<fUML::Semantics::CommonBehavior::Execution>&) = 0;
 
 			//*********************************
 			// Union Reference Getters

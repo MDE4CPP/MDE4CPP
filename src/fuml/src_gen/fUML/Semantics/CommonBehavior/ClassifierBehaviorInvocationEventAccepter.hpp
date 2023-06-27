@@ -75,9 +75,9 @@ namespace fUML::Semantics::CommonBehavior
 			//*********************************
 			// Operations
 			//*********************************
-			virtual void accept(std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccurrence> eventOccurrence) = 0;
+			virtual void accept(const std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccurrence>& eventOccurrence) = 0;
 			
-			virtual bool match(std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccurrence> eventOccurrence) = 0;
+			virtual bool match(const std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccurrence>& eventOccurrence) = 0;
 			virtual void terminate() = 0;
 
 			//*********************************
@@ -87,12 +87,12 @@ namespace fUML::Semantics::CommonBehavior
 			//*********************************
 			// Reference Getters & Setters
 			//*********************************
-			virtual std::shared_ptr<uml::Class> getClassifier() const = 0;
-			virtual void setClassifier(std::shared_ptr<uml::Class>) = 0;
-			virtual std::shared_ptr<fUML::Semantics::CommonBehavior::Execution> getExecution() const = 0;
-			virtual void setExecution(std::shared_ptr<fUML::Semantics::CommonBehavior::Execution>) = 0;
-			virtual std::shared_ptr<fUML::Semantics::CommonBehavior::ObjectActivation> getObjectActivation() const = 0;
-			virtual void setObjectActivation(std::shared_ptr<fUML::Semantics::CommonBehavior::ObjectActivation>) = 0;
+			virtual const std::shared_ptr<uml::Class>& getClassifier() const = 0;
+			virtual void setClassifier(const std::shared_ptr<uml::Class>&) = 0;
+			virtual const std::shared_ptr<fUML::Semantics::CommonBehavior::Execution>& getExecution() const = 0;
+			virtual void setExecution(const std::shared_ptr<fUML::Semantics::CommonBehavior::Execution>&) = 0;
+			virtual const std::shared_ptr<fUML::Semantics::CommonBehavior::ObjectActivation>& getObjectActivation() const = 0;
+			virtual void setObjectActivation(const std::shared_ptr<fUML::Semantics::CommonBehavior::ObjectActivation>&) = 0;
 
 			//*********************************
 			// Union Reference Getters

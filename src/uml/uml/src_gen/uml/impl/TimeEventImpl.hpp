@@ -55,7 +55,7 @@ namespace uml
 			when.integerValue() >= 0
 			*/
 			 
-			virtual bool when_non_negative(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
+			virtual bool when_non_negative(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context) ;
 			
 			//*********************************
 			// Attribute Getters & Setters
@@ -81,13 +81,13 @@ namespace uml
 			<p>From package UML::CommonBehavior.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::TimeExpression> getWhen() const ;
+			virtual const std::shared_ptr<uml::TimeExpression>& getWhen() const ;
 			/*!
 			Specifies the time of the TimeEvent.
 			<p>From package UML::CommonBehavior.</p>
 			*/
 			
-			virtual void setWhen(std::shared_ptr<uml::TimeExpression>) ;
+			virtual void setWhen(const std::shared_ptr<uml::TimeExpression>&) ;
 			
 			//*********************************
 			// Union Reference Getters
@@ -128,19 +128,19 @@ namespace uml
 			virtual void saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const;
 
 		protected:
-			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
+			virtual const std::shared_ptr<ecore::EClass>& eStaticClass() const;
 
 			//*********************************
 			// EStructuralFeature Get/Set/IsSet
 			//*********************************
 			virtual Any eGet(int featureID, bool resolve, bool coreType) const ;
-			virtual bool eSet(int featureID, Any newValue) ;
+			virtual bool eSet(int featureID, const Any& newValue) ;
 			virtual bool internalEIsSet(int featureID) const ;
 
 			//*********************************
 			// EOperation Invoke
 			//*********************************
-			virtual Any eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments) ;
+			virtual Any eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments) ;
 
 		private:
 			std::weak_ptr<uml::TimeEvent> m_thisTimeEventPtr;

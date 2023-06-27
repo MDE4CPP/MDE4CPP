@@ -43,8 +43,8 @@ namespace fUML::Semantics::StructuredClassifiers
 			//*********************************
 			// Operations
 			//*********************************
-			virtual bool operationsMatch(std::shared_ptr<uml::Operation> ownedOperation,std::shared_ptr<uml::Operation> baseOperation) ;
-			virtual std::shared_ptr<uml::Behavior> retrieveMethod(std::shared_ptr<fUML::Semantics::StructuredClassifiers::Object> object,std::shared_ptr<uml::Operation> operation) ;
+			virtual bool operationsMatch(const std::shared_ptr<uml::Operation>& ownedOperation, const std::shared_ptr<uml::Operation>& baseOperation) ;
+			virtual std::shared_ptr<uml::Behavior> retrieveMethod(const std::shared_ptr<fUML::Semantics::StructuredClassifiers::Object>& object, const std::shared_ptr<uml::Operation>& operation) ;
 			
 			//*********************************
 			// Attribute Getters & Setters
@@ -74,19 +74,19 @@ namespace fUML::Semantics::StructuredClassifiers
 			virtual void saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const;
 
 		protected:
-			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
+			virtual const std::shared_ptr<ecore::EClass>& eStaticClass() const;
 
 			//*********************************
 			// EStructuralFeature Get/Set/IsSet
 			//*********************************
 			virtual Any eGet(int featureID, bool resolve, bool coreType) const ;
-			virtual bool eSet(int featureID, Any newValue) ;
+			virtual bool eSet(int featureID, const Any& newValue) ;
 			virtual bool internalEIsSet(int featureID) const ;
 
 			//*********************************
 			// EOperation Invoke
 			//*********************************
-			virtual Any eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments) ;
+			virtual Any eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments) ;
 
 		private:
 			std::weak_ptr<fUML::Semantics::StructuredClassifiers::RedefinitionBasedDispatchStrategy> m_thisRedefinitionBasedDispatchStrategyPtr;

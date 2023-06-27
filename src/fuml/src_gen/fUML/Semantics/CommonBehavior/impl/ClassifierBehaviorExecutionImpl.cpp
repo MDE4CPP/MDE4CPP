@@ -41,8 +41,8 @@
 #include "fUML/Semantics/CommonBehavior/ObjectActivation.hpp"
 #include "fUML/Semantics/CommonBehavior/ParameterValue.hpp"
 //Factories and Package includes
-#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/SemanticsPackage.hpp"
+#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/CommonBehavior/CommonBehaviorPackage.hpp"
 #include "uml/umlPackage.hpp"
 
@@ -116,7 +116,7 @@ void ClassifierBehaviorExecutionImpl::_startObjectBehavior()
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-void ClassifierBehaviorExecutionImpl::execute(std::shared_ptr<Bag<uml::Class>> classifier,std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> inputs)
+void ClassifierBehaviorExecutionImpl::execute(const std::shared_ptr<Bag<uml::Class>>& classifier, const std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>>& inputs)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -134,33 +134,33 @@ void ClassifierBehaviorExecutionImpl::terminate()
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference classifier */
-std::shared_ptr<uml::Class> ClassifierBehaviorExecutionImpl::getClassifier() const
+const std::shared_ptr<uml::Class>& ClassifierBehaviorExecutionImpl::getClassifier() const
 {
     return m_classifier;
 }
-void ClassifierBehaviorExecutionImpl::setClassifier(std::shared_ptr<uml::Class> _classifier)
+void ClassifierBehaviorExecutionImpl::setClassifier(const std::shared_ptr<uml::Class>& _classifier)
 {
     m_classifier = _classifier;
 	
 }
 
 /* Getter & Setter for reference execution */
-std::shared_ptr<fUML::Semantics::CommonBehavior::Execution> ClassifierBehaviorExecutionImpl::getExecution() const
+const std::shared_ptr<fUML::Semantics::CommonBehavior::Execution>& ClassifierBehaviorExecutionImpl::getExecution() const
 {
     return m_execution;
 }
-void ClassifierBehaviorExecutionImpl::setExecution(std::shared_ptr<fUML::Semantics::CommonBehavior::Execution> _execution)
+void ClassifierBehaviorExecutionImpl::setExecution(const std::shared_ptr<fUML::Semantics::CommonBehavior::Execution>& _execution)
 {
     m_execution = _execution;
 	
 }
 
 /* Getter & Setter for reference objectActivation */
-std::shared_ptr<fUML::Semantics::CommonBehavior::ObjectActivation> ClassifierBehaviorExecutionImpl::getObjectActivation() const
+const std::shared_ptr<fUML::Semantics::CommonBehavior::ObjectActivation>& ClassifierBehaviorExecutionImpl::getObjectActivation() const
 {
     return m_objectActivation;
 }
-void ClassifierBehaviorExecutionImpl::setObjectActivation(std::shared_ptr<fUML::Semantics::CommonBehavior::ObjectActivation> _objectActivation)
+void ClassifierBehaviorExecutionImpl::setObjectActivation(const std::shared_ptr<fUML::Semantics::CommonBehavior::ObjectActivation>& _objectActivation)
 {
     m_objectActivation = _objectActivation;
 	
@@ -308,7 +308,7 @@ void ClassifierBehaviorExecutionImpl::saveContent(std::shared_ptr<persistence::i
 	}
 }
 
-std::shared_ptr<ecore::EClass> ClassifierBehaviorExecutionImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& ClassifierBehaviorExecutionImpl::eStaticClass() const
 {
 	return fUML::Semantics::CommonBehavior::CommonBehaviorPackage::eInstance()->getClassifierBehaviorExecution_Class();
 }
@@ -344,7 +344,7 @@ bool ClassifierBehaviorExecutionImpl::internalEIsSet(int featureID) const
 	return ecore::EObjectImpl::internalEIsSet(featureID);
 }
 
-bool ClassifierBehaviorExecutionImpl::eSet(int featureID, Any newValue)
+bool ClassifierBehaviorExecutionImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -380,7 +380,7 @@ bool ClassifierBehaviorExecutionImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any ClassifierBehaviorExecutionImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any ClassifierBehaviorExecutionImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

@@ -101,7 +101,7 @@ namespace uml
 			    other<>end and _'context'.conformsTo(other.type.oclAsType(Classifier))))
 			*/
 			 
-			virtual bool allow_access(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
+			virtual bool allow_access(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context) = 0;
 
 			//*********************************
 			// Attribute Getters & Setters

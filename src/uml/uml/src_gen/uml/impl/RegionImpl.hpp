@@ -81,20 +81,20 @@ namespace uml
 			   select(kind = PseudostateKind::deepHistory)->size() <= 1
 			*/
 			 
-			virtual bool deep_history_vertex(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
+			virtual bool deep_history_vertex(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context) ;
 			/*!
 			A Region can have at most one initial Vertex.
 			self.subvertex->select (oclIsKindOf(Pseudostate))->collect(oclAsType(Pseudostate))->
 			  select(kind = PseudostateKind::initial)->size() <= 1
 			*/
 			 
-			virtual bool initial_vertex(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
+			virtual bool initial_vertex(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context) ;
 			/*!
 			If a Region is owned by a StateMachine, then it cannot also be owned by a State and vice versa.
 			(stateMachine <> null implies state = null) and (state <> null implies stateMachine = null)
 			*/
 			 
-			virtual bool owned(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
+			virtual bool owned(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context) ;
 			/*!
 			The redefinition context of a Region is the nearest containing StateMachine.
 			result = (let sm : StateMachine = containingStateMachine() in
@@ -113,7 +113,7 @@ namespace uml
 			  select(kind = PseudostateKind::shallowHistory)->size() <= 1
 			*/
 			 
-			virtual bool shallow_history_vertex(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
+			virtual bool shallow_history_vertex(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context) ;
 			
 			//*********************************
 			// Attribute Getters & Setters
@@ -127,13 +127,13 @@ namespace uml
 			<p>From package UML::StateMachines.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::Region> getExtendedRegion() const ;
+			virtual const std::shared_ptr<uml::Region>& getExtendedRegion() const ;
 			/*!
 			The region of which this region is an extension.
 			<p>From package UML::StateMachines.</p>
 			*/
 			
-			virtual void setExtendedRegion(std::shared_ptr<uml::Region>) ;
+			virtual void setExtendedRegion(const std::shared_ptr<uml::Region>&) ;
 			/*!
 			The State that owns the Region. If a Region is owned by a State, then it cannot also be owned by a StateMachine.
 			<p>From package UML::StateMachines.</p>
@@ -163,13 +163,13 @@ namespace uml
 			<p>From package UML::StateMachines.</p>
 			*/
 			
-			virtual std::shared_ptr<Subset<uml::Vertex, uml::NamedElement>> getSubvertex() const ;
+			virtual const std::shared_ptr<Subset<uml::Vertex, uml::NamedElement>>& getSubvertex() const ;
 			/*!
 			The set of Transitions owned by the Region.
 			<p>From package UML::StateMachines.</p>
 			*/
 			
-			virtual std::shared_ptr<Subset<uml::Transition, uml::NamedElement>> getTransition() const ;
+			virtual const std::shared_ptr<Subset<uml::Transition, uml::NamedElement>>& getTransition() const ;
 			
 			//*********************************
 			// Union Reference Getters
@@ -227,19 +227,19 @@ namespace uml
 			virtual void saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const;
 
 		protected:
-			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
+			virtual const std::shared_ptr<ecore::EClass>& eStaticClass() const;
 
 			//*********************************
 			// EStructuralFeature Get/Set/IsSet
 			//*********************************
 			virtual Any eGet(int featureID, bool resolve, bool coreType) const ;
-			virtual bool eSet(int featureID, Any newValue) ;
+			virtual bool eSet(int featureID, const Any& newValue) ;
 			virtual bool internalEIsSet(int featureID) const ;
 
 			//*********************************
 			// EOperation Invoke
 			//*********************************
-			virtual Any eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments) ;
+			virtual Any eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments) ;
 
 		private:
 			std::weak_ptr<uml::Region> m_thisRegionPtr;

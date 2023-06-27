@@ -40,11 +40,11 @@
 #include "fUML/Semantics/StructuredClassifiers/Reference.hpp"
 #include "fUML/Semantics/Loci/SemanticVisitor.hpp"
 //Factories and Package includes
-#include "PSCS/PSCSPackage.hpp"
 #include "PSCS/Semantics/SemanticsPackage.hpp"
+#include "PSCS/PSCSPackage.hpp"
 #include "fUML/Semantics/Loci/LociPackage.hpp"
-#include "PSCS/Semantics/StructuredClassifiers/StructuredClassifiersPackage.hpp"
 #include "fUML/Semantics/StructuredClassifiers/StructuredClassifiersPackage.hpp"
+#include "PSCS/Semantics/StructuredClassifiers/StructuredClassifiersPackage.hpp"
 
 using namespace PSCS::Semantics::StructuredClassifiers;
 
@@ -108,7 +108,7 @@ std::shared_ptr<ecore::EObject> CS_DefaultRequestPropagationStrategyImpl::copy()
 //*********************************
 // Operations
 //*********************************
-std::shared_ptr<Bag<fUML::Semantics::StructuredClassifiers::Reference> > CS_DefaultRequestPropagationStrategyImpl::select(std::shared_ptr<Bag<fUML::Semantics::StructuredClassifiers::Reference>> potentialTargets,std::shared_ptr<fUML::Semantics::Loci::SemanticVisitor> context)
+std::shared_ptr<Bag<fUML::Semantics::StructuredClassifiers::Reference> > CS_DefaultRequestPropagationStrategyImpl::select(const std::shared_ptr<Bag<fUML::Semantics::StructuredClassifiers::Reference>>& potentialTargets, const std::shared_ptr<fUML::Semantics::Loci::SemanticVisitor>& context)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -209,7 +209,7 @@ void CS_DefaultRequestPropagationStrategyImpl::saveContent(std::shared_ptr<persi
 	}
 }
 
-std::shared_ptr<ecore::EClass> CS_DefaultRequestPropagationStrategyImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& CS_DefaultRequestPropagationStrategyImpl::eStaticClass() const
 {
 	return PSCS::Semantics::StructuredClassifiers::StructuredClassifiersPackage::eInstance()->getCS_DefaultRequestPropagationStrategy_Class();
 }
@@ -233,7 +233,7 @@ bool CS_DefaultRequestPropagationStrategyImpl::internalEIsSet(int featureID) con
 	return CS_RequestPropagationStrategyImpl::internalEIsSet(featureID);
 }
 
-bool CS_DefaultRequestPropagationStrategyImpl::eSet(int featureID, Any newValue)
+bool CS_DefaultRequestPropagationStrategyImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -245,7 +245,7 @@ bool CS_DefaultRequestPropagationStrategyImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any CS_DefaultRequestPropagationStrategyImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any CS_DefaultRequestPropagationStrategyImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

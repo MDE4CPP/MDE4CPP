@@ -231,7 +231,7 @@ std::shared_ptr<uml::Behavior> ActionImpl::containingBehavior()
 // Attribute Getters & Setters
 //*********************************
 /* Getter & Setter for attribute isLocallyReentrant */
-bool ActionImpl::getIsLocallyReentrant() const 
+bool ActionImpl::getIsLocallyReentrant() const
 {
 	return m_isLocallyReentrant;
 }
@@ -245,7 +245,7 @@ void ActionImpl::setIsLocallyReentrant(bool _isLocallyReentrant)
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference context */
-std::shared_ptr<uml::Classifier> ActionImpl::getContext() const
+const std::shared_ptr<uml::Classifier>& ActionImpl::getContext() const
 {
     return m_context;
 }
@@ -253,7 +253,7 @@ std::shared_ptr<uml::Classifier> ActionImpl::getContext() const
 /* Getter & Setter for reference input */
 
 /* Getter & Setter for reference localPostcondition */
-std::shared_ptr<Subset<uml::Constraint, uml::Element>> ActionImpl::getLocalPostcondition() const
+const std::shared_ptr<Subset<uml::Constraint, uml::Element>>& ActionImpl::getLocalPostcondition() const
 {
 	if(m_localPostcondition == nullptr)
 	{
@@ -274,7 +274,7 @@ std::shared_ptr<Subset<uml::Constraint, uml::Element>> ActionImpl::getLocalPostc
 }
 
 /* Getter & Setter for reference localPrecondition */
-std::shared_ptr<Subset<uml::Constraint, uml::Element>> ActionImpl::getLocalPrecondition() const
+const std::shared_ptr<Subset<uml::Constraint, uml::Element>>& ActionImpl::getLocalPrecondition() const
 {
 	if(m_localPrecondition == nullptr)
 	{
@@ -590,7 +590,7 @@ void ActionImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandl
 	}
 }
 
-std::shared_ptr<ecore::EClass> ActionImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& ActionImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getAction_Class();
 }
@@ -638,7 +638,7 @@ bool ActionImpl::internalEIsSet(int featureID) const
 	return ExecutableNodeImpl::internalEIsSet(featureID);
 }
 
-bool ActionImpl::eSet(int featureID, Any newValue)
+bool ActionImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -731,7 +731,7 @@ bool ActionImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any ActionImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any ActionImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

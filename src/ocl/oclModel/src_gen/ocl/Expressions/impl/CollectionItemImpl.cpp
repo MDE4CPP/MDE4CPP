@@ -123,11 +123,11 @@ std::shared_ptr<ecore::EObject> CollectionItemImpl::copy() const
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference item */
-std::shared_ptr<ocl::Expressions::OclExpression> CollectionItemImpl::getItem() const
+const std::shared_ptr<ocl::Expressions::OclExpression>& CollectionItemImpl::getItem() const
 {
     return m_item;
 }
-void CollectionItemImpl::setItem(std::shared_ptr<ocl::Expressions::OclExpression> _item)
+void CollectionItemImpl::setItem(const std::shared_ptr<ocl::Expressions::OclExpression>& _item)
 {
     m_item = _item;
 	
@@ -239,7 +239,7 @@ void CollectionItemImpl::saveContent(std::shared_ptr<persistence::interfaces::XS
 	}
 }
 
-std::shared_ptr<ecore::EClass> CollectionItemImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& CollectionItemImpl::eStaticClass() const
 {
 	return ocl::Expressions::ExpressionsPackage::eInstance()->getCollectionItem_Class();
 }
@@ -267,7 +267,7 @@ bool CollectionItemImpl::internalEIsSet(int featureID) const
 	return CollectionLiteralPartImpl::internalEIsSet(featureID);
 }
 
-bool CollectionItemImpl::eSet(int featureID, Any newValue)
+bool CollectionItemImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -287,7 +287,7 @@ bool CollectionItemImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any CollectionItemImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any CollectionItemImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

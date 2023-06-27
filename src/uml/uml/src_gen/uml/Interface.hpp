@@ -101,18 +101,18 @@ namespace uml
 			Creates a property with the specified name, type, lower bound, and upper bound as an owned attribute of this interface.
 			*/
 			 
-			virtual std::shared_ptr<uml::Property> createOwnedAttribute(std::string name,std::shared_ptr<uml::Type> type,int lower,int upper) = 0;
+			virtual std::shared_ptr<uml::Property> createOwnedAttribute(std::string name, const std::shared_ptr<uml::Type>& type, int lower, int upper) = 0;
 			/*!
 			Creates an operation with the specified name, parameter names, parameter types, and return type (or null) as an owned operation of this interface.
 			*/
 			 
-			virtual std::shared_ptr<uml::Operation> createOwnedOperation(std::string name,std::shared_ptr<Bag<std::string>> parameterNames,std::shared_ptr<Bag<uml::Type>> parameterTypes,std::shared_ptr<uml::Type> returnType) = 0;
+			virtual std::shared_ptr<uml::Operation> createOwnedOperation(std::string name, const std::shared_ptr<Bag<std::string>>& parameterNames, const std::shared_ptr<Bag<uml::Type>>& parameterTypes, const std::shared_ptr<uml::Type>& returnType) = 0;
 			/*!
 			The visibility of all Features owned by an Interface must be public.
 			feature->forAll(visibility = VisibilityKind::public)
 			*/
 			 
-			virtual bool visibility(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
+			virtual bool visibility(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context) = 0;
 
 			//*********************************
 			// Attribute Getters & Setters
@@ -126,43 +126,43 @@ namespace uml
 			<p>From package UML::SimpleClassifiers.</p>
 			*/
 			
-			virtual std::shared_ptr<Subset<uml::Classifier, uml::NamedElement>> getNestedClassifier() const = 0;
+			virtual const std::shared_ptr<Subset<uml::Classifier, uml::NamedElement>>& getNestedClassifier() const = 0;
 			/*!
 			The attributes (i.e., the Properties) owned by the Interface.
 			<p>From package UML::SimpleClassifiers.</p>
 			*/
 			
-			virtual std::shared_ptr<Subset<uml::Property, uml::NamedElement, uml::Property>> getOwnedAttribute() const = 0;
+			virtual const std::shared_ptr<Subset<uml::Property, uml::NamedElement, uml::Property>>& getOwnedAttribute() const = 0;
 			/*!
 			The Operations owned by the Interface.
 			<p>From package UML::SimpleClassifiers.</p>
 			*/
 			
-			virtual std::shared_ptr<Subset<uml::Operation, uml::Feature, uml::NamedElement>> getOwnedOperation() const = 0;
+			virtual const std::shared_ptr<Subset<uml::Operation, uml::Feature, uml::NamedElement>>& getOwnedOperation() const = 0;
 			/*!
 			Receptions that objects providing this Interface are willing to accept.
 			<p>From package UML::SimpleClassifiers.</p>
 			*/
 			
-			virtual std::shared_ptr<Subset<uml::Reception, uml::Feature, uml::NamedElement>> getOwnedReception() const = 0;
+			virtual const std::shared_ptr<Subset<uml::Reception, uml::Feature, uml::NamedElement>>& getOwnedReception() const = 0;
 			/*!
 			References a ProtocolStateMachine specifying the legal sequences of the invocation of the BehavioralFeatures described in the Interface.
 			<p>From package UML::SimpleClassifiers.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::ProtocolStateMachine> getProtocol() const = 0;
+			virtual const std::shared_ptr<uml::ProtocolStateMachine>& getProtocol() const = 0;
 			/*!
 			References a ProtocolStateMachine specifying the legal sequences of the invocation of the BehavioralFeatures described in the Interface.
 			<p>From package UML::SimpleClassifiers.</p>
 			*/
 			
-			virtual void setProtocol(std::shared_ptr<uml::ProtocolStateMachine>) = 0;
+			virtual void setProtocol(const std::shared_ptr<uml::ProtocolStateMachine>&) = 0;
 			/*!
 			References all the Interfaces redefined by this Interface.
 			<p>From package UML::SimpleClassifiers.</p>
 			*/
 			
-			virtual std::shared_ptr<Subset<uml::Interface, uml::Classifier /*Subset does not reference a union*/>> getRedefinedInterface() const = 0;
+			virtual const std::shared_ptr<Subset<uml::Interface, uml::Classifier /*Subset does not reference a union*/>>& getRedefinedInterface() const = 0;
 
 			//*********************************
 			// Union Reference Getters

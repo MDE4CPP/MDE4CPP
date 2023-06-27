@@ -69,25 +69,25 @@ namespace uml
 			    and ts.formal.oclAsType(Property).isAttribute())))
 			*/
 			 
-			virtual bool binding_to_attribute(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
+			virtual bool binding_to_attribute(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context) ;
 			/*!
 			A Property can be a DeploymentTarget if it is a kind of Node and functions as a part in the internal structure of an encompassing Node.
 			deployment->notEmpty() implies owner.oclIsKindOf(Node) and Node.allInstances()->exists(n | n.part->exists(p | p = self))
 			*/
 			 
-			virtual bool deployment_target(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
+			virtual bool deployment_target(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context) ;
 			/*!
 			A derived union is derived.
 			isDerivedUnion implies isDerived
 			*/
 			 
-			virtual bool derived_union_is_derived(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
+			virtual bool derived_union_is_derived(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context) ;
 			/*!
 			A derived union is read only.
 			isDerivedUnion implies isReadOnly
 			*/
 			 
-			virtual bool derived_union_is_read_only(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
+			virtual bool derived_union_is_read_only(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context) ;
 			
 			/*!
 			Retrieves the other end of the (binary) association in which this property is a member end.
@@ -121,13 +121,13 @@ namespace uml
 			isComposite and association <> null implies opposite.upperBound() <= 1
 			*/
 			 
-			virtual bool multiplicity_of_composite(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
+			virtual bool multiplicity_of_composite(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context) ;
 			/*!
 			All qualified Properties must be Association ends
 			qualifier->notEmpty() implies association->notEmpty()
 			*/
 			 
-			virtual bool qualified_is_association_end(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
+			virtual bool qualified_is_association_end(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context) ;
 			/*!
 			A redefined Property must be inherited from a more general Classifier.
 			(redefinedProperty->notEmpty()) implies
@@ -137,7 +137,7 @@ namespace uml
 			          fc.allParents()))->asSet())->collect(c| c.allFeatures())->asSet()->includes(rp)))
 			*/
 			 
-			virtual bool redefined_property_inherited(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
+			virtual bool redefined_property_inherited(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context) ;
 			/*!
 			Sets the default value for this property to the specified Boolean value.
 			*/
@@ -178,7 +178,7 @@ namespace uml
 			subsettedProperty->forAll(sp | sp.name <> name)
 			*/
 			 
-			virtual bool subsetted_property_names(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
+			virtual bool subsetted_property_names(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context) ;
 			/*!
 			The query subsettingContext() gives the context for subsetting a Property. It consists, in the case of an attribute, of the corresponding Classifier, and in the case of an association end, all of the Classifiers at the other ends.
 			result = (if association <> null
@@ -201,7 +201,7 @@ namespace uml
 			      sp.subsettingContext()->exists(c | sc.conformsTo(c)))))
 			*/
 			 
-			virtual bool subsetting_context_conforms(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
+			virtual bool subsetting_context_conforms(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context) ;
 			/*!
 			A subsetting Property may strengthen the type of the subsetted Property, and its upper bound may be less.
 			subsettedProperty->forAll(sp |
@@ -210,13 +210,13 @@ namespace uml
 			      self.upperBound() <= sp.upperBound() ))
 			*/
 			 
-			virtual bool subsetting_rules(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
+			virtual bool subsetting_rules(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context) ;
 			/*!
 			If a Property is a classifier-owned end of a binary Association, its owner must be the type of the opposite end.
 			(opposite->notEmpty() and owningAssociation->isEmpty()) implies classifier = opposite.type
 			*/
 			 
-			virtual bool type_of_opposite_end(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
+			virtual bool type_of_opposite_end(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context) ;
 			virtual void unsetDefault() ;
 			
 			//*********************************
@@ -293,13 +293,13 @@ namespace uml
 			<p>From package UML::Classification.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::Association> getAssociation() const ;
+			virtual const std::shared_ptr<uml::Association>& getAssociation() const ;
 			/*!
 			The Association of which this Property is a member, if any.
 			<p>From package UML::Classification.</p>
 			*/
 			
-			virtual void setAssociation(std::shared_ptr<uml::Association>) ;
+			virtual void setAssociation(const std::shared_ptr<uml::Association>&) ;
 			/*!
 			Designates the optional association end that owns a qualifier attribute.
 			<p>From package UML::Classification.</p>
@@ -341,13 +341,13 @@ namespace uml
 			<p>From package UML::Classification.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::ValueSpecification> getDefaultValue() const ;
+			virtual const std::shared_ptr<uml::ValueSpecification>& getDefaultValue() const ;
 			/*!
 			A ValueSpecification that is evaluated to give a default value for the Property when an instance of the owning Classifier is instantiated.
 			<p>From package UML::Classification.</p>
 			*/
 			
-			virtual void setDefaultValue(std::shared_ptr<uml::ValueSpecification>) ;
+			virtual void setDefaultValue(const std::shared_ptr<uml::ValueSpecification>&) ;
 			/*!
 			The Interface that owns this Property, if any.
 			<p>From package UML::Classification.</p>
@@ -365,13 +365,13 @@ namespace uml
 			<p>From package UML::Classification.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::Property> getOpposite() const ;
+			virtual const std::shared_ptr<uml::Property>& getOpposite() const ;
 			/*!
 			In the case where the Property is one end of a binary association this gives the other end.
 			<p>From package UML::Classification.</p>
 			*/
 			
-			virtual void setOpposite(std::shared_ptr<uml::Property>) ;
+			virtual void setOpposite(const std::shared_ptr<uml::Property>&) ;
 			/*!
 			The owning association of this property, if any.
 			<p>From package UML::Classification.</p>
@@ -389,19 +389,19 @@ namespace uml
 			<p>From package UML::Classification.</p>
 			*/
 			
-			virtual std::shared_ptr<Subset<uml::Property, uml::Element>> getQualifier() const ;
+			virtual const std::shared_ptr<Subset<uml::Property, uml::Element>>& getQualifier() const ;
 			/*!
 			The properties that are redefined by this property, if any.
 			<p>From package UML::Classification.</p>
 			*/
 			
-			virtual std::shared_ptr<SubsetUnion<uml::Property, uml::RedefinableElement>> getRedefinedProperty() const ;
+			virtual const std::shared_ptr<SubsetUnion<uml::Property, uml::RedefinableElement>>& getRedefinedProperty() const ;
 			/*!
 			The properties of which this Property is constrained to be a subset, if any.
 			<p>From package UML::Classification.</p>
 			*/
 			
-			virtual std::shared_ptr<Bag<uml::Property>> getSubsettedProperty() const ;
+			virtual const std::shared_ptr<Bag<uml::Property>>& getSubsettedProperty() const ;
 			
 			//*********************************
 			// Union Reference Getters
@@ -461,19 +461,19 @@ namespace uml
 			virtual void saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const;
 
 		protected:
-			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
+			virtual const std::shared_ptr<ecore::EClass>& eStaticClass() const;
 
 			//*********************************
 			// EStructuralFeature Get/Set/IsSet
 			//*********************************
 			virtual Any eGet(int featureID, bool resolve, bool coreType) const ;
-			virtual bool eSet(int featureID, Any newValue) ;
+			virtual bool eSet(int featureID, const Any& newValue) ;
 			virtual bool internalEIsSet(int featureID) const ;
 
 			//*********************************
 			// EOperation Invoke
 			//*********************************
-			virtual Any eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments) ;
+			virtual Any eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments) ;
 
 		private:
 			std::weak_ptr<uml::Property> m_thisPropertyPtr;

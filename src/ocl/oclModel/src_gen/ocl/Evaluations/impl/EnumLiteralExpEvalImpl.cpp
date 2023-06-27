@@ -33,9 +33,9 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "fUML/Semantics/Values/ValuesFactory.hpp"
 #include "fUML/Semantics/Loci/LociFactory.hpp"
 #include "uml/umlFactory.hpp"
+#include "fUML/Semantics/Values/ValuesFactory.hpp"
 #include "ocl/Evaluations/EvaluationsFactory.hpp"
 #include "ocl/Expressions/ExpressionsFactory.hpp"
 #include "ocl/Evaluations/EvalEnvironment.hpp"
@@ -199,7 +199,7 @@ void EnumLiteralExpEvalImpl::saveContent(std::shared_ptr<persistence::interfaces
 	}
 }
 
-std::shared_ptr<ecore::EClass> EnumLiteralExpEvalImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& EnumLiteralExpEvalImpl::eStaticClass() const
 {
 	return ocl::Evaluations::EvaluationsPackage::eInstance()->getEnumLiteralExpEval_Class();
 }
@@ -223,7 +223,7 @@ bool EnumLiteralExpEvalImpl::internalEIsSet(int featureID) const
 	return LiteralExpEvalImpl::internalEIsSet(featureID);
 }
 
-bool EnumLiteralExpEvalImpl::eSet(int featureID, Any newValue)
+bool EnumLiteralExpEvalImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -235,7 +235,7 @@ bool EnumLiteralExpEvalImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any EnumLiteralExpEvalImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any EnumLiteralExpEvalImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

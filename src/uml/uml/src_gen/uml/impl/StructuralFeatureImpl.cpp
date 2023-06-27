@@ -126,7 +126,7 @@ StructuralFeatureImpl& StructuralFeatureImpl::operator=(const StructuralFeatureI
 // Attribute Getters & Setters
 //*********************************
 /* Getter & Setter for attribute isReadOnly */
-bool StructuralFeatureImpl::getIsReadOnly() const 
+bool StructuralFeatureImpl::getIsReadOnly() const
 {
 	return m_isReadOnly;
 }
@@ -280,7 +280,7 @@ void StructuralFeatureImpl::saveContent(std::shared_ptr<persistence::interfaces:
 	}
 }
 
-std::shared_ptr<ecore::EClass> StructuralFeatureImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& StructuralFeatureImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getStructuralFeature_Class();
 }
@@ -332,7 +332,7 @@ bool StructuralFeatureImpl::internalEIsSet(int featureID) const
 	return result;
 }
 
-bool StructuralFeatureImpl::eSet(int featureID, Any newValue)
+bool StructuralFeatureImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -363,7 +363,7 @@ bool StructuralFeatureImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any StructuralFeatureImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any StructuralFeatureImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

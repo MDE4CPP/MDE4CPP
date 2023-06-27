@@ -103,13 +103,13 @@ namespace uml
 			<p>From package UML::Values.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::NamedElement> getEvent() const = 0;
+			virtual const std::shared_ptr<uml::NamedElement>& getEvent() const = 0;
 			/*!
 			The TimeObservation is determined by the entering or exiting of the event Element during execution.
 			<p>From package UML::Values.</p>
 			*/
 			
-			virtual void setEvent(std::shared_ptr<uml::NamedElement>) = 0;
+			virtual void setEvent(const std::shared_ptr<uml::NamedElement>&) = 0;
 
 			//*********************************
 			// Union Reference Getters

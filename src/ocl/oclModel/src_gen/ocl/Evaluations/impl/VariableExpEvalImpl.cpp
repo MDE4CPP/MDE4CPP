@@ -33,10 +33,10 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "fUML/Semantics/Values/ValuesFactory.hpp"
 #include "fUML/Semantics/Loci/LociFactory.hpp"
-#include "fUML/Semantics/SimpleClassifiers/SimpleClassifiersFactory.hpp"
 #include "uml/umlFactory.hpp"
+#include "fUML/Semantics/Values/ValuesFactory.hpp"
+#include "fUML/Semantics/SimpleClassifiers/SimpleClassifiersFactory.hpp"
 #include "ocl/Evaluations/EvaluationsFactory.hpp"
 #include "ocl/Expressions/ExpressionsFactory.hpp"
 #include "ocl/Evaluations/EvalEnvironment.hpp"
@@ -127,11 +127,11 @@ std::shared_ptr<ecore::EObject> VariableExpEvalImpl::copy() const
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference referredVariable */
-std::shared_ptr<fUML::Semantics::SimpleClassifiers::StringValue> VariableExpEvalImpl::getReferredVariable() const
+const std::shared_ptr<fUML::Semantics::SimpleClassifiers::StringValue>& VariableExpEvalImpl::getReferredVariable() const
 {
     return m_referredVariable;
 }
-void VariableExpEvalImpl::setReferredVariable(std::shared_ptr<fUML::Semantics::SimpleClassifiers::StringValue> _referredVariable)
+void VariableExpEvalImpl::setReferredVariable(const std::shared_ptr<fUML::Semantics::SimpleClassifiers::StringValue>& _referredVariable)
 {
     m_referredVariable = _referredVariable;
 	
@@ -246,7 +246,7 @@ void VariableExpEvalImpl::saveContent(std::shared_ptr<persistence::interfaces::X
 	}
 }
 
-std::shared_ptr<ecore::EClass> VariableExpEvalImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& VariableExpEvalImpl::eStaticClass() const
 {
 	return ocl::Evaluations::EvaluationsPackage::eInstance()->getVariableExpEval_Class();
 }
@@ -274,7 +274,7 @@ bool VariableExpEvalImpl::internalEIsSet(int featureID) const
 	return OclExpEvalImpl::internalEIsSet(featureID);
 }
 
-bool VariableExpEvalImpl::eSet(int featureID, Any newValue)
+bool VariableExpEvalImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -294,7 +294,7 @@ bool VariableExpEvalImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any VariableExpEvalImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any VariableExpEvalImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

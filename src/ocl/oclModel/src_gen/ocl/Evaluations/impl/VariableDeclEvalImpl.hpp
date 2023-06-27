@@ -53,10 +53,10 @@ virtual public VariableDeclEval
 			//*********************************
 			// Reference Getters & Setters
 			//*********************************
-			virtual std::shared_ptr<ocl::Evaluations::OclExpEval> getInitExp() const ;
-			virtual void setInitExp(std::shared_ptr<ocl::Evaluations::OclExpEval>) ;
-			virtual std::shared_ptr<fUML::Semantics::SimpleClassifiers::StringValue> getName() const ;
-			virtual void setName(std::shared_ptr<fUML::Semantics::SimpleClassifiers::StringValue>) ;
+			virtual const std::shared_ptr<ocl::Evaluations::OclExpEval>& getInitExp() const ;
+			virtual void setInitExp(const std::shared_ptr<ocl::Evaluations::OclExpEval>&) ;
+			virtual const std::shared_ptr<fUML::Semantics::SimpleClassifiers::StringValue>& getName() const ;
+			virtual void setName(const std::shared_ptr<fUML::Semantics::SimpleClassifiers::StringValue>&) ;
 			
 			//*********************************
 			// Union Reference Getters
@@ -78,19 +78,19 @@ virtual public VariableDeclEval
 			virtual void saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const;
 
 		protected:
-			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
+			virtual const std::shared_ptr<ecore::EClass>& eStaticClass() const;
 
 			//*********************************
 			// EStructuralFeature Get/Set/IsSet
 			//*********************************
 			virtual Any eGet(int featureID, bool resolve, bool coreType) const ;
-			virtual bool eSet(int featureID, Any newValue) ;
+			virtual bool eSet(int featureID, const Any& newValue) ;
 			virtual bool internalEIsSet(int featureID) const ;
 
 			//*********************************
 			// EOperation Invoke
 			//*********************************
-			virtual Any eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments) ;
+			virtual Any eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments) ;
 
 		private:
 			std::weak_ptr<ocl::Evaluations::VariableDeclEval> m_thisVariableDeclEvalPtr;

@@ -178,7 +178,7 @@ int LiteralUnlimitedNaturalImpl::unlimitedValue()
 // Attribute Getters & Setters
 //*********************************
 /* Getter & Setter for attribute value */
-int LiteralUnlimitedNaturalImpl::getValue() const 
+int LiteralUnlimitedNaturalImpl::getValue() const
 {
 	return m_value;
 }
@@ -355,7 +355,7 @@ void LiteralUnlimitedNaturalImpl::saveContent(std::shared_ptr<persistence::inter
 	}
 }
 
-std::shared_ptr<ecore::EClass> LiteralUnlimitedNaturalImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& LiteralUnlimitedNaturalImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getLiteralUnlimitedNatural_Class();
 }
@@ -383,7 +383,7 @@ bool LiteralUnlimitedNaturalImpl::internalEIsSet(int featureID) const
 	return LiteralSpecificationImpl::internalEIsSet(featureID);
 }
 
-bool LiteralUnlimitedNaturalImpl::eSet(int featureID, Any newValue)
+bool LiteralUnlimitedNaturalImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -402,7 +402,7 @@ bool LiteralUnlimitedNaturalImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any LiteralUnlimitedNaturalImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any LiteralUnlimitedNaturalImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

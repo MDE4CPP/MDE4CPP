@@ -62,13 +62,13 @@ namespace uml
 			<p>From package UML::UseCases.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::UseCase> getAddition() const ;
+			virtual const std::shared_ptr<uml::UseCase>& getAddition() const ;
 			/*!
 			The UseCase that is to be included.
 			<p>From package UML::UseCases.</p>
 			*/
 			
-			virtual void setAddition(std::shared_ptr<uml::UseCase>) ;
+			virtual void setAddition(const std::shared_ptr<uml::UseCase>&) ;
 			/*!
 			The UseCase which includes the addition and owns the Include relationship.
 			<p>From package UML::UseCases.</p>
@@ -138,19 +138,19 @@ namespace uml
 			virtual void saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const;
 
 		protected:
-			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
+			virtual const std::shared_ptr<ecore::EClass>& eStaticClass() const;
 
 			//*********************************
 			// EStructuralFeature Get/Set/IsSet
 			//*********************************
 			virtual Any eGet(int featureID, bool resolve, bool coreType) const ;
-			virtual bool eSet(int featureID, Any newValue) ;
+			virtual bool eSet(int featureID, const Any& newValue) ;
 			virtual bool internalEIsSet(int featureID) const ;
 
 			//*********************************
 			// EOperation Invoke
 			//*********************************
-			virtual Any eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments) ;
+			virtual Any eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments) ;
 
 		private:
 			std::weak_ptr<uml::Include> m_thisIncludePtr;

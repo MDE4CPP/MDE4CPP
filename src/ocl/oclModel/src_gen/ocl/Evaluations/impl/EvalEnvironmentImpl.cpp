@@ -108,7 +108,7 @@ std::shared_ptr<ecore::EObject> EvalEnvironmentImpl::copy() const
 //*********************************
 // Operations
 //*********************************
-void EvalEnvironmentImpl::add(std::shared_ptr<ocl::Values::NameValueBinding> n)
+void EvalEnvironmentImpl::add(const std::shared_ptr<ocl::Values::NameValueBinding>& n)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -120,7 +120,7 @@ void EvalEnvironmentImpl::add(std::shared_ptr<ocl::Values::NameValueBinding> n)
 	//end of body
 }
 
-void EvalEnvironmentImpl::addAll(std::shared_ptr<Bag<ocl::Values::NameValueBinding>> nvbs)
+void EvalEnvironmentImpl::addAll(const std::shared_ptr<Bag<ocl::Values::NameValueBinding>>& nvbs)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -160,7 +160,7 @@ else
 	//end of body
 }
 
-void EvalEnvironmentImpl::replace(std::shared_ptr<ocl::Values::NameValueBinding> n)
+void EvalEnvironmentImpl::replace(const std::shared_ptr<ocl::Values::NameValueBinding>& n)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -180,7 +180,7 @@ if(nvb != nullptr)
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference bindings */
-std::shared_ptr<Bag<ocl::Values::NameValueBinding>> EvalEnvironmentImpl::getBindings() const
+const std::shared_ptr<Bag<ocl::Values::NameValueBinding>>& EvalEnvironmentImpl::getBindings() const
 {
 	if(m_bindings == nullptr)
 	{
@@ -295,7 +295,7 @@ void EvalEnvironmentImpl::saveContent(std::shared_ptr<persistence::interfaces::X
 	}
 }
 
-std::shared_ptr<ecore::EClass> EvalEnvironmentImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& EvalEnvironmentImpl::eStaticClass() const
 {
 	return ocl::Evaluations::EvaluationsPackage::eInstance()->getEvalEnvironment_Class();
 }
@@ -323,7 +323,7 @@ bool EvalEnvironmentImpl::internalEIsSet(int featureID) const
 	return ecore::EObjectImpl::internalEIsSet(featureID);
 }
 
-bool EvalEnvironmentImpl::eSet(int featureID, Any newValue)
+bool EvalEnvironmentImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -372,7 +372,7 @@ bool EvalEnvironmentImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any EvalEnvironmentImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any EvalEnvironmentImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

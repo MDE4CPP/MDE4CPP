@@ -145,7 +145,7 @@ std::shared_ptr<ecore::EObject> ControlFlowImpl::copy() const
 //*********************************
 // Operations
 //*********************************
-bool ControlFlowImpl::object_nodes(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool ControlFlowImpl::object_nodes(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -304,7 +304,7 @@ void ControlFlowImpl::saveContent(std::shared_ptr<persistence::interfaces::XSave
 	}
 }
 
-std::shared_ptr<ecore::EClass> ControlFlowImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& ControlFlowImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getControlFlow_Class();
 }
@@ -328,7 +328,7 @@ bool ControlFlowImpl::internalEIsSet(int featureID) const
 	return ActivityEdgeImpl::internalEIsSet(featureID);
 }
 
-bool ControlFlowImpl::eSet(int featureID, Any newValue)
+bool ControlFlowImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -340,7 +340,7 @@ bool ControlFlowImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any ControlFlowImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any ControlFlowImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

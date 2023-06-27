@@ -164,42 +164,42 @@ std::shared_ptr<ecore::EObject> ReadLinkObjectEndQualifierActionImpl::copy() con
 //*********************************
 // Operations
 //*********************************
-bool ReadLinkObjectEndQualifierActionImpl::association_of_association(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool ReadLinkObjectEndQualifierActionImpl::association_of_association(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool ReadLinkObjectEndQualifierActionImpl::ends_of_association(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool ReadLinkObjectEndQualifierActionImpl::ends_of_association(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool ReadLinkObjectEndQualifierActionImpl::multiplicity_of_object(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool ReadLinkObjectEndQualifierActionImpl::multiplicity_of_object(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool ReadLinkObjectEndQualifierActionImpl::multiplicity_of_qualifier(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool ReadLinkObjectEndQualifierActionImpl::multiplicity_of_qualifier(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool ReadLinkObjectEndQualifierActionImpl::multiplicity_of_result(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool ReadLinkObjectEndQualifierActionImpl::multiplicity_of_result(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool ReadLinkObjectEndQualifierActionImpl::qualifier_attribute(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool ReadLinkObjectEndQualifierActionImpl::qualifier_attribute(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool ReadLinkObjectEndQualifierActionImpl::same_type(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool ReadLinkObjectEndQualifierActionImpl::same_type(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool ReadLinkObjectEndQualifierActionImpl::type_of_object(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool ReadLinkObjectEndQualifierActionImpl::type_of_object(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -212,33 +212,33 @@ bool ReadLinkObjectEndQualifierActionImpl::type_of_object(Any diagnostics,std::s
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference object */
-std::shared_ptr<uml::InputPin> ReadLinkObjectEndQualifierActionImpl::getObject() const
+const std::shared_ptr<uml::InputPin>& ReadLinkObjectEndQualifierActionImpl::getObject() const
 {
     return m_object;
 }
-void ReadLinkObjectEndQualifierActionImpl::setObject(std::shared_ptr<uml::InputPin> _object)
+void ReadLinkObjectEndQualifierActionImpl::setObject(const std::shared_ptr<uml::InputPin>& _object)
 {
     m_object = _object;
 	
 }
 
 /* Getter & Setter for reference qualifier */
-std::shared_ptr<uml::Property> ReadLinkObjectEndQualifierActionImpl::getQualifier() const
+const std::shared_ptr<uml::Property>& ReadLinkObjectEndQualifierActionImpl::getQualifier() const
 {
     return m_qualifier;
 }
-void ReadLinkObjectEndQualifierActionImpl::setQualifier(std::shared_ptr<uml::Property> _qualifier)
+void ReadLinkObjectEndQualifierActionImpl::setQualifier(const std::shared_ptr<uml::Property>& _qualifier)
 {
     m_qualifier = _qualifier;
 	
 }
 
 /* Getter & Setter for reference result */
-std::shared_ptr<uml::OutputPin> ReadLinkObjectEndQualifierActionImpl::getResult() const
+const std::shared_ptr<uml::OutputPin>& ReadLinkObjectEndQualifierActionImpl::getResult() const
 {
     return m_result;
 }
-void ReadLinkObjectEndQualifierActionImpl::setResult(std::shared_ptr<uml::OutputPin> _result)
+void ReadLinkObjectEndQualifierActionImpl::setResult(const std::shared_ptr<uml::OutputPin>& _result)
 {
     m_result = _result;
 	
@@ -516,7 +516,7 @@ void ReadLinkObjectEndQualifierActionImpl::saveContent(std::shared_ptr<persisten
 	}
 }
 
-std::shared_ptr<ecore::EClass> ReadLinkObjectEndQualifierActionImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& ReadLinkObjectEndQualifierActionImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getReadLinkObjectEndQualifierAction_Class();
 }
@@ -552,7 +552,7 @@ bool ReadLinkObjectEndQualifierActionImpl::internalEIsSet(int featureID) const
 	return ActionImpl::internalEIsSet(featureID);
 }
 
-bool ReadLinkObjectEndQualifierActionImpl::eSet(int featureID, Any newValue)
+bool ReadLinkObjectEndQualifierActionImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -588,7 +588,7 @@ bool ReadLinkObjectEndQualifierActionImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any ReadLinkObjectEndQualifierActionImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any ReadLinkObjectEndQualifierActionImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

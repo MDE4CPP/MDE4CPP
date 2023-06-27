@@ -98,12 +98,12 @@ namespace fUML::Semantics::Activities
 			//*********************************
 			// Reference Getters & Setters
 			//*********************************
-			virtual std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup> getActivationGroup() const = 0;
-			virtual void setActivationGroup(std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup>) = 0;
-			virtual std::shared_ptr<uml::Activity> getActivity() const = 0;
-			virtual void setActivity(std::shared_ptr<uml::Activity>) = 0;
+			virtual const std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup>& getActivationGroup() const = 0;
+			virtual void setActivationGroup(const std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup>&) = 0;
+			virtual const std::shared_ptr<uml::Activity>& getActivity() const = 0;
+			virtual void setActivity(const std::shared_ptr<uml::Activity>&) = 0;
 			/*Additional Setter for 'Execution::behavior' redefined by reference 'activity'*/
-			virtual void setBehavior(std::shared_ptr<uml::Behavior>) = 0;
+			virtual void setBehavior(const std::shared_ptr<uml::Behavior>&) = 0;
 
 			//*********************************
 			// Union Reference Getters

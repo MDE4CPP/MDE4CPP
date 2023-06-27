@@ -63,13 +63,13 @@ namespace uml
 			<p>From package UML::Interactions.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::ExecutionSpecification> getExecution() const ;
+			virtual const std::shared_ptr<uml::ExecutionSpecification>& getExecution() const ;
 			/*!
 			References the execution specification describing the execution that is started or finished at this execution event.
 			<p>From package UML::Interactions.</p>
 			*/
 			
-			virtual void setExecution(std::shared_ptr<uml::ExecutionSpecification>) ;
+			virtual void setExecution(const std::shared_ptr<uml::ExecutionSpecification>&) ;
 			
 			//*********************************
 			// Union Reference Getters
@@ -109,19 +109,19 @@ namespace uml
 			virtual void saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const;
 
 		protected:
-			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
+			virtual const std::shared_ptr<ecore::EClass>& eStaticClass() const;
 
 			//*********************************
 			// EStructuralFeature Get/Set/IsSet
 			//*********************************
 			virtual Any eGet(int featureID, bool resolve, bool coreType) const ;
-			virtual bool eSet(int featureID, Any newValue) ;
+			virtual bool eSet(int featureID, const Any& newValue) ;
 			virtual bool internalEIsSet(int featureID) const ;
 
 			//*********************************
 			// EOperation Invoke
 			//*********************************
-			virtual Any eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments) ;
+			virtual Any eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments) ;
 
 		private:
 			std::weak_ptr<uml::ExecutionOccurrenceSpecification> m_thisExecutionOccurrenceSpecificationPtr;

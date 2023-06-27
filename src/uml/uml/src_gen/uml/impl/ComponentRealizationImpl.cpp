@@ -197,7 +197,7 @@ void ComponentRealizationImpl::setAbstraction(std::weak_ptr<uml::Component> _abs
 }
 
 /* Getter & Setter for reference realizingClassifier */
-std::shared_ptr<Subset<uml::Classifier, uml::NamedElement /*Subset does not reference a union*/>> ComponentRealizationImpl::getRealizingClassifier() const
+const std::shared_ptr<Subset<uml::Classifier, uml::NamedElement /*Subset does not reference a union*/>>& ComponentRealizationImpl::getRealizingClassifier() const
 {
 	if(m_realizingClassifier == nullptr)
 	{
@@ -458,7 +458,7 @@ void ComponentRealizationImpl::saveContent(std::shared_ptr<persistence::interfac
 	}
 }
 
-std::shared_ptr<ecore::EClass> ComponentRealizationImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& ComponentRealizationImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getComponentRealization_Class();
 }
@@ -493,7 +493,7 @@ bool ComponentRealizationImpl::internalEIsSet(int featureID) const
 	return RealizationImpl::internalEIsSet(featureID);
 }
 
-bool ComponentRealizationImpl::eSet(int featureID, Any newValue)
+bool ComponentRealizationImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -550,7 +550,7 @@ bool ComponentRealizationImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any ComponentRealizationImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any ComponentRealizationImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

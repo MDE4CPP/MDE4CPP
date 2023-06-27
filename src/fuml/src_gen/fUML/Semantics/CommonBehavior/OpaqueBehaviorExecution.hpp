@@ -82,7 +82,7 @@ namespace fUML::Semantics::CommonBehavior
 			//*********************************
 			// Operations
 			//*********************************
-			virtual void doBody(std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> inputParameters,std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> outputParameters) = 0;
+			virtual void doBody(const std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>>& inputParameters, const std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>>& outputParameters) = 0;
 			virtual void execute() = 0;
 
 			//*********************************

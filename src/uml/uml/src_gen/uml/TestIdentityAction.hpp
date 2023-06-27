@@ -96,19 +96,19 @@ namespace uml
 			first.is(1,1) and second.is(1,1)
 			*/
 			 
-			virtual bool multiplicity(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
+			virtual bool multiplicity(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context) = 0;
 			/*!
 			The InputPins have no type.
 			first.type= null and second.type = null
 			*/
 			 
-			virtual bool no_type(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
+			virtual bool no_type(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context) = 0;
 			/*!
 			The type of the result OutputPin is Boolean.
 			result.type=Boolean
 			*/
 			 
-			virtual bool result_is_boolean(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
+			virtual bool result_is_boolean(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context) = 0;
 
 			//*********************************
 			// Attribute Getters & Setters
@@ -122,37 +122,37 @@ namespace uml
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::InputPin> getFirst() const = 0;
+			virtual const std::shared_ptr<uml::InputPin>& getFirst() const = 0;
 			/*!
 			The InputPin on which the first input object is placed.
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual void setFirst(std::shared_ptr<uml::InputPin>) = 0;
+			virtual void setFirst(const std::shared_ptr<uml::InputPin>&) = 0;
 			/*!
 			The OutputPin whose Boolean value indicates whether the two input objects are identical.
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::OutputPin> getResult() const = 0;
+			virtual const std::shared_ptr<uml::OutputPin>& getResult() const = 0;
 			/*!
 			The OutputPin whose Boolean value indicates whether the two input objects are identical.
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual void setResult(std::shared_ptr<uml::OutputPin>) = 0;
+			virtual void setResult(const std::shared_ptr<uml::OutputPin>&) = 0;
 			/*!
 			The OutputPin on which the second input object is placed.
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::InputPin> getSecond() const = 0;
+			virtual const std::shared_ptr<uml::InputPin>& getSecond() const = 0;
 			/*!
 			The OutputPin on which the second input object is placed.
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual void setSecond(std::shared_ptr<uml::InputPin>) = 0;
+			virtual void setSecond(const std::shared_ptr<uml::InputPin>&) = 0;
 
 			//*********************************
 			// Union Reference Getters

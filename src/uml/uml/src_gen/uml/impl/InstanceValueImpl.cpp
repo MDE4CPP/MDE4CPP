@@ -168,11 +168,11 @@ std::shared_ptr<ecore::EObject> InstanceValueImpl::copy() const
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference instance */
-std::shared_ptr<uml::InstanceSpecification> InstanceValueImpl::getInstance() const
+const std::shared_ptr<uml::InstanceSpecification>& InstanceValueImpl::getInstance() const
 {
     return m_instance;
 }
-void InstanceValueImpl::setInstance(std::shared_ptr<uml::InstanceSpecification> _instance)
+void InstanceValueImpl::setInstance(const std::shared_ptr<uml::InstanceSpecification>& _instance)
 {
     m_instance = _instance;
 	
@@ -348,7 +348,7 @@ void InstanceValueImpl::saveContent(std::shared_ptr<persistence::interfaces::XSa
 	}
 }
 
-std::shared_ptr<ecore::EClass> InstanceValueImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& InstanceValueImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getInstanceValue_Class();
 }
@@ -376,7 +376,7 @@ bool InstanceValueImpl::internalEIsSet(int featureID) const
 	return ValueSpecificationImpl::internalEIsSet(featureID);
 }
 
-bool InstanceValueImpl::eSet(int featureID, Any newValue)
+bool InstanceValueImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -396,7 +396,7 @@ bool InstanceValueImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any InstanceValueImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any InstanceValueImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

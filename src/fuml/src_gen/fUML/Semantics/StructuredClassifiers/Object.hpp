@@ -88,14 +88,14 @@ namespace fUML::Semantics::StructuredClassifiers
 			// Operations
 			//*********************************
 			virtual std::shared_ptr<fUML::Semantics::Values::Value> _copy() = 0;
-			virtual void _register(std::shared_ptr<fUML::Semantics::CommonBehavior::EventAccepter> accepter) = 0;
+			virtual void _register(const std::shared_ptr<fUML::Semantics::CommonBehavior::EventAccepter>& accepter) = 0;
 			virtual void destroy() = 0;
-			virtual std::shared_ptr<fUML::Semantics::CommonBehavior::Execution> dispatch(std::shared_ptr<uml::Operation> operation) = 0;
+			virtual std::shared_ptr<fUML::Semantics::CommonBehavior::Execution> dispatch(const std::shared_ptr<uml::Operation>& operation) = 0;
 			virtual std::shared_ptr<fUML::Semantics::Values::Value> new_() = 0;
-			virtual void send(std::shared_ptr<fUML::Semantics::SimpleClassifiers::SignalInstance> signalInstance) = 0;
-			virtual void send(std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccurrence> eventOccurrence) = 0;
-			virtual void startBehavior(std::shared_ptr<uml::Class> classifier,std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> inputs) = 0;
-			virtual void unregister(std::shared_ptr<fUML::Semantics::CommonBehavior::EventAccepter> accepter) = 0;
+			virtual void send(const std::shared_ptr<fUML::Semantics::SimpleClassifiers::SignalInstance>& signalInstance) = 0;
+			virtual void send(const std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccurrence>& eventOccurrence) = 0;
+			virtual void startBehavior(const std::shared_ptr<uml::Class>& classifier, const std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>>& inputs) = 0;
+			virtual void unregister(const std::shared_ptr<fUML::Semantics::CommonBehavior::EventAccepter>& accepter) = 0;
 
 			//*********************************
 			// Attribute Getters & Setters
@@ -104,9 +104,9 @@ namespace fUML::Semantics::StructuredClassifiers
 			//*********************************
 			// Reference Getters & Setters
 			//*********************************
-			virtual std::shared_ptr<fUML::Semantics::CommonBehavior::ObjectActivation> getObjectActivation() const = 0;
-			virtual void setObjectActivation(std::shared_ptr<fUML::Semantics::CommonBehavior::ObjectActivation>) = 0;
-			virtual std::shared_ptr<Bag<uml::Classifier>> getTypes() const = 0;
+			virtual const std::shared_ptr<fUML::Semantics::CommonBehavior::ObjectActivation>& getObjectActivation() const = 0;
+			virtual void setObjectActivation(const std::shared_ptr<fUML::Semantics::CommonBehavior::ObjectActivation>&) = 0;
+			virtual const std::shared_ptr<Bag<uml::Classifier>>& getTypes() const = 0;
 
 			//*********************************
 			// Union Reference Getters

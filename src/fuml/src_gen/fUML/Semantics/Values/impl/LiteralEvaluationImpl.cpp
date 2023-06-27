@@ -45,8 +45,8 @@
 #include "uml/PrimitiveType.hpp"
 #include "uml/ValueSpecification.hpp"
 //Factories and Package includes
-#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/SemanticsPackage.hpp"
+#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/Loci/LociPackage.hpp"
 #include "fUML/Semantics/Values/ValuesPackage.hpp"
 #include "uml/umlPackage.hpp"
@@ -200,7 +200,7 @@ void LiteralEvaluationImpl::saveContent(std::shared_ptr<persistence::interfaces:
 	}
 }
 
-std::shared_ptr<ecore::EClass> LiteralEvaluationImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& LiteralEvaluationImpl::eStaticClass() const
 {
 	return fUML::Semantics::Values::ValuesPackage::eInstance()->getLiteralEvaluation_Class();
 }
@@ -224,7 +224,7 @@ bool LiteralEvaluationImpl::internalEIsSet(int featureID) const
 	return EvaluationImpl::internalEIsSet(featureID);
 }
 
-bool LiteralEvaluationImpl::eSet(int featureID, Any newValue)
+bool LiteralEvaluationImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -236,7 +236,7 @@ bool LiteralEvaluationImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any LiteralEvaluationImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any LiteralEvaluationImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

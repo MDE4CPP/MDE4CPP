@@ -41,8 +41,8 @@
 #include "fUML/Semantics/Loci/Locus.hpp"
 #include "fUML/Semantics/Values/Value.hpp"
 //Factories and Package includes
-#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/SemanticsPackage.hpp"
+#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/Loci/LociPackage.hpp"
 #include "fUML/Semantics/SimpleClassifiers/SimpleClassifiersPackage.hpp"
 #include "fUML/Semantics/StructuredClassifiers/StructuredClassifiersPackage.hpp"
@@ -110,12 +110,12 @@ std::shared_ptr<ecore::EObject> ExtensionalValueListImpl::copy() const
 //*********************************
 // Operations
 //*********************************
-bool ExtensionalValueListImpl::addValue(std::shared_ptr<fUML::Semantics::StructuredClassifiers::ExtensionalValue> value)
+bool ExtensionalValueListImpl::addValue(const std::shared_ptr<fUML::Semantics::StructuredClassifiers::ExtensionalValue>& value)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-void ExtensionalValueListImpl::addValue(std::shared_ptr<fUML::Semantics::StructuredClassifiers::ExtensionalValue> value,int i)
+void ExtensionalValueListImpl::addValue(const std::shared_ptr<fUML::Semantics::StructuredClassifiers::ExtensionalValue>& value, int i)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -130,7 +130,7 @@ std::string ExtensionalValueListImpl::removeValue(int i)
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-std::shared_ptr<fUML::Semantics::Values::Value> ExtensionalValueListImpl::setValue(std::shared_ptr<fUML::Semantics::StructuredClassifiers::ExtensionalValue> value,int i)
+std::shared_ptr<fUML::Semantics::Values::Value> ExtensionalValueListImpl::setValue(const std::shared_ptr<fUML::Semantics::StructuredClassifiers::ExtensionalValue>& value, int i)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -221,7 +221,7 @@ void ExtensionalValueListImpl::saveContent(std::shared_ptr<persistence::interfac
 	}
 }
 
-std::shared_ptr<ecore::EClass> ExtensionalValueListImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& ExtensionalValueListImpl::eStaticClass() const
 {
 	return fUML::Semantics::StructuredClassifiers::StructuredClassifiersPackage::eInstance()->getExtensionalValueList_Class();
 }
@@ -245,7 +245,7 @@ bool ExtensionalValueListImpl::internalEIsSet(int featureID) const
 	return ExtensionalValueImpl::internalEIsSet(featureID);
 }
 
-bool ExtensionalValueListImpl::eSet(int featureID, Any newValue)
+bool ExtensionalValueListImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -257,7 +257,7 @@ bool ExtensionalValueListImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any ExtensionalValueListImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any ExtensionalValueListImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

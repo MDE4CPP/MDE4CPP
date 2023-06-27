@@ -156,7 +156,7 @@ std::shared_ptr<ecore::EObject> ReadStructuralFeatureActionImpl::copy() const
 //*********************************
 // Operations
 //*********************************
-bool ReadStructuralFeatureActionImpl::type_and_ordering(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool ReadStructuralFeatureActionImpl::type_and_ordering(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -169,11 +169,11 @@ bool ReadStructuralFeatureActionImpl::type_and_ordering(Any diagnostics,std::sha
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference result */
-std::shared_ptr<uml::OutputPin> ReadStructuralFeatureActionImpl::getResult() const
+const std::shared_ptr<uml::OutputPin>& ReadStructuralFeatureActionImpl::getResult() const
 {
     return m_result;
 }
-void ReadStructuralFeatureActionImpl::setResult(std::shared_ptr<uml::OutputPin> _result)
+void ReadStructuralFeatureActionImpl::setResult(const std::shared_ptr<uml::OutputPin>& _result)
 {
     m_result = _result;
 	
@@ -399,7 +399,7 @@ void ReadStructuralFeatureActionImpl::saveContent(std::shared_ptr<persistence::i
 	}
 }
 
-std::shared_ptr<ecore::EClass> ReadStructuralFeatureActionImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& ReadStructuralFeatureActionImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getReadStructuralFeatureAction_Class();
 }
@@ -427,7 +427,7 @@ bool ReadStructuralFeatureActionImpl::internalEIsSet(int featureID) const
 	return StructuralFeatureActionImpl::internalEIsSet(featureID);
 }
 
-bool ReadStructuralFeatureActionImpl::eSet(int featureID, Any newValue)
+bool ReadStructuralFeatureActionImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -447,7 +447,7 @@ bool ReadStructuralFeatureActionImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any ReadStructuralFeatureActionImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any ReadStructuralFeatureActionImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

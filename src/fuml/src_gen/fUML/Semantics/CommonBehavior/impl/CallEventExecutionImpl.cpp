@@ -59,8 +59,8 @@
 #include "fUML/Semantics/CommonBehavior/ParameterValue.hpp"
 #include "fUML/Semantics/Values/Value.hpp"
 //Factories and Package includes
-#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/SemanticsPackage.hpp"
+#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/CommonBehavior/CommonBehaviorPackage.hpp"
 #include "fUML/Semantics/Loci/LociPackage.hpp"
 #include "fUML/Semantics/SimpleClassifiers/SimpleClassifiersPackage.hpp"
@@ -243,7 +243,7 @@ void CallEventExecutionImpl::releaseCaller()
 	//end of body
 }
 
-void CallEventExecutionImpl::setOutputParameterValues(std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> parameterValues)
+void CallEventExecutionImpl::setOutputParameterValues(const std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>>& parameterValues)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -294,7 +294,7 @@ void CallEventExecutionImpl::wait_()
 // Attribute Getters & Setters
 //*********************************
 /* Getter & Setter for attribute callerSuspended */
-bool CallEventExecutionImpl::getCallerSuspended() const 
+bool CallEventExecutionImpl::getCallerSuspended() const
 {
 	return m_callerSuspended;
 }
@@ -416,7 +416,7 @@ void CallEventExecutionImpl::saveContent(std::shared_ptr<persistence::interfaces
 	}
 }
 
-std::shared_ptr<ecore::EClass> CallEventExecutionImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& CallEventExecutionImpl::eStaticClass() const
 {
 	return fUML::Semantics::CommonBehavior::CommonBehaviorPackage::eInstance()->getCallEventExecution_Class();
 }
@@ -444,7 +444,7 @@ bool CallEventExecutionImpl::internalEIsSet(int featureID) const
 	return ExecutionImpl::internalEIsSet(featureID);
 }
 
-bool CallEventExecutionImpl::eSet(int featureID, Any newValue)
+bool CallEventExecutionImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -463,7 +463,7 @@ bool CallEventExecutionImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any CallEventExecutionImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any CallEventExecutionImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

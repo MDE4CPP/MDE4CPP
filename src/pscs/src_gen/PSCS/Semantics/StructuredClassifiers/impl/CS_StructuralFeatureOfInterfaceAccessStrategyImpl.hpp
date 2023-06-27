@@ -44,8 +44,8 @@ namespace PSCS::Semantics::StructuredClassifiers
 			// Operations
 			//*********************************
 			virtual std::string getName() ;
-			virtual std::shared_ptr<fUML::Semantics::SimpleClassifiers::FeatureValue> read(std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Object> cs_Object,std::shared_ptr<uml::StructuralFeature> feature) ;
-			virtual void write(std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Object> cs_Object,std::shared_ptr<uml::StructuralFeature> feature,std::shared_ptr<Bag<fUML::Semantics::Values::Value>> values,int position) ;
+			virtual std::shared_ptr<fUML::Semantics::SimpleClassifiers::FeatureValue> read(const std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Object>& cs_Object, const std::shared_ptr<uml::StructuralFeature>& feature) ;
+			virtual void write(const std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Object>& cs_Object, const std::shared_ptr<uml::StructuralFeature>& feature, const std::shared_ptr<Bag<fUML::Semantics::Values::Value>>& values, int position) ;
 			
 			//*********************************
 			// Attribute Getters & Setters
@@ -75,19 +75,19 @@ namespace PSCS::Semantics::StructuredClassifiers
 			virtual void saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const;
 
 		protected:
-			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
+			virtual const std::shared_ptr<ecore::EClass>& eStaticClass() const;
 
 			//*********************************
 			// EStructuralFeature Get/Set/IsSet
 			//*********************************
 			virtual Any eGet(int featureID, bool resolve, bool coreType) const ;
-			virtual bool eSet(int featureID, Any newValue) ;
+			virtual bool eSet(int featureID, const Any& newValue) ;
 			virtual bool internalEIsSet(int featureID) const ;
 
 			//*********************************
 			// EOperation Invoke
 			//*********************************
-			virtual Any eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments) ;
+			virtual Any eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments) ;
 
 		private:
 			std::weak_ptr<PSCS::Semantics::StructuredClassifiers::CS_StructuralFeatureOfInterfaceAccessStrategy> m_thisCS_StructuralFeatureOfInterfaceAccessStrategyPtr;

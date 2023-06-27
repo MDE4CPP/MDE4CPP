@@ -92,13 +92,13 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::shared_ptr<SubsetUnion<uml::NamedElement, uml::Element>> getClient() const = 0;
+			virtual const std::shared_ptr<SubsetUnion<uml::NamedElement, uml::Element>>& getClient() const = 0;
 			/*!
 			The Element(s) on which the client Element(s) depend in some respect. The modeler may stipulate a sense of Dependency direction suitable for their domain.
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::shared_ptr<SubsetUnion<uml::NamedElement, uml::Element>> getSupplier() const = 0;
+			virtual const std::shared_ptr<SubsetUnion<uml::NamedElement, uml::Element>>& getSupplier() const = 0;
 
 			//*********************************
 			// Union Reference Getters

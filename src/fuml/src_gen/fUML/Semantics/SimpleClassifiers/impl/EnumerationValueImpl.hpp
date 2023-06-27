@@ -44,7 +44,7 @@ namespace fUML::Semantics::SimpleClassifiers
 			// Operations
 			//*********************************
 			virtual std::shared_ptr<fUML::Semantics::Values::Value> _copy() ;
-			virtual bool equals(std::shared_ptr<fUML::Semantics::Values::Value> otherValue) ;
+			virtual bool equals(const std::shared_ptr<fUML::Semantics::Values::Value>& otherValue) ;
 			virtual std::shared_ptr<Bag<uml::Classifier> > getTypes() ;
 			virtual std::shared_ptr<fUML::Semantics::Values::Value> new_() ;
 			virtual std::shared_ptr<uml::ValueSpecification> specify() ;
@@ -57,10 +57,10 @@ namespace fUML::Semantics::SimpleClassifiers
 			//*********************************
 			// Reference Getters & Setters
 			//*********************************
-			virtual std::shared_ptr<uml::EnumerationLiteral> getLiteral() const ;
-			virtual void setLiteral(std::shared_ptr<uml::EnumerationLiteral>) ;
-			virtual std::shared_ptr<uml::Enumeration> getType() const ;
-			virtual void setType(std::shared_ptr<uml::Enumeration>) ;
+			virtual const std::shared_ptr<uml::EnumerationLiteral>& getLiteral() const ;
+			virtual void setLiteral(const std::shared_ptr<uml::EnumerationLiteral>&) ;
+			virtual const std::shared_ptr<uml::Enumeration>& getType() const ;
+			virtual void setType(const std::shared_ptr<uml::Enumeration>&) ;
 			
 			//*********************************
 			// Union Reference Getters
@@ -82,19 +82,19 @@ namespace fUML::Semantics::SimpleClassifiers
 			virtual void saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const;
 
 		protected:
-			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
+			virtual const std::shared_ptr<ecore::EClass>& eStaticClass() const;
 
 			//*********************************
 			// EStructuralFeature Get/Set/IsSet
 			//*********************************
 			virtual Any eGet(int featureID, bool resolve, bool coreType) const ;
-			virtual bool eSet(int featureID, Any newValue) ;
+			virtual bool eSet(int featureID, const Any& newValue) ;
 			virtual bool internalEIsSet(int featureID) const ;
 
 			//*********************************
 			// EOperation Invoke
 			//*********************************
-			virtual Any eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments) ;
+			virtual Any eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments) ;
 
 		private:
 			std::weak_ptr<fUML::Semantics::SimpleClassifiers::EnumerationValue> m_thisEnumerationValuePtr;

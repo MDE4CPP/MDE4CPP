@@ -97,13 +97,13 @@ namespace uml
 			object.is(1,1)
 			*/
 			 
-			virtual bool multiplicity(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
+			virtual bool multiplicity(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context) = 0;
 			/*!
 			The type of the InputPin must conform to the type of at least one of the memberEnds of the association.
 			association.memberEnd->exists(self.object.type.conformsTo(type))
 			*/
 			 
-			virtual bool same_type(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
+			virtual bool same_type(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context) = 0;
 
 			//*********************************
 			// Attribute Getters & Setters
@@ -117,25 +117,25 @@ namespace uml
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::Association> getAssociation() const = 0;
+			virtual const std::shared_ptr<uml::Association>& getAssociation() const = 0;
 			/*!
 			The Association to be cleared.
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual void setAssociation(std::shared_ptr<uml::Association>) = 0;
+			virtual void setAssociation(const std::shared_ptr<uml::Association>&) = 0;
 			/*!
 			The InputPin that gives the object whose participation in the Association is to be cleared.
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::InputPin> getObject() const = 0;
+			virtual const std::shared_ptr<uml::InputPin>& getObject() const = 0;
 			/*!
 			The InputPin that gives the object whose participation in the Association is to be cleared.
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual void setObject(std::shared_ptr<uml::InputPin>) = 0;
+			virtual void setObject(const std::shared_ptr<uml::InputPin>&) = 0;
 
 			//*********************************
 			// Union Reference Getters

@@ -190,12 +190,12 @@ std::shared_ptr<ecore::EObject> ReplyActionImpl::copy() const
 //*********************************
 // Operations
 //*********************************
-bool ReplyActionImpl::event_on_reply_to_call_trigger(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool ReplyActionImpl::event_on_reply_to_call_trigger(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool ReplyActionImpl::pins_match_parameter(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool ReplyActionImpl::pins_match_parameter(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -208,18 +208,18 @@ bool ReplyActionImpl::pins_match_parameter(Any diagnostics,std::shared_ptr<std::
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference replyToCall */
-std::shared_ptr<uml::Trigger> ReplyActionImpl::getReplyToCall() const
+const std::shared_ptr<uml::Trigger>& ReplyActionImpl::getReplyToCall() const
 {
     return m_replyToCall;
 }
-void ReplyActionImpl::setReplyToCall(std::shared_ptr<uml::Trigger> _replyToCall)
+void ReplyActionImpl::setReplyToCall(const std::shared_ptr<uml::Trigger>& _replyToCall)
 {
     m_replyToCall = _replyToCall;
 	
 }
 
 /* Getter & Setter for reference replyValue */
-std::shared_ptr<Subset<uml::InputPin, uml::InputPin>> ReplyActionImpl::getReplyValue() const
+const std::shared_ptr<Subset<uml::InputPin, uml::InputPin>>& ReplyActionImpl::getReplyValue() const
 {
 	if(m_replyValue == nullptr)
 	{
@@ -240,11 +240,11 @@ std::shared_ptr<Subset<uml::InputPin, uml::InputPin>> ReplyActionImpl::getReplyV
 }
 
 /* Getter & Setter for reference returnInformation */
-std::shared_ptr<uml::InputPin> ReplyActionImpl::getReturnInformation() const
+const std::shared_ptr<uml::InputPin>& ReplyActionImpl::getReturnInformation() const
 {
     return m_returnInformation;
 }
-void ReplyActionImpl::setReturnInformation(std::shared_ptr<uml::InputPin> _returnInformation)
+void ReplyActionImpl::setReturnInformation(const std::shared_ptr<uml::InputPin>& _returnInformation)
 {
     m_returnInformation = _returnInformation;
 	
@@ -501,7 +501,7 @@ void ReplyActionImpl::saveContent(std::shared_ptr<persistence::interfaces::XSave
 	}
 }
 
-std::shared_ptr<ecore::EClass> ReplyActionImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& ReplyActionImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getReplyAction_Class();
 }
@@ -537,7 +537,7 @@ bool ReplyActionImpl::internalEIsSet(int featureID) const
 	return ActionImpl::internalEIsSet(featureID);
 }
 
-bool ReplyActionImpl::eSet(int featureID, Any newValue)
+bool ReplyActionImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -602,7 +602,7 @@ bool ReplyActionImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any ReplyActionImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any ReplyActionImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

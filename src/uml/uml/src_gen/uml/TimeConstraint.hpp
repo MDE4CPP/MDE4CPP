@@ -87,7 +87,7 @@ namespace uml
 			constrainedElement->size() = 1
 			*/
 			 
-			virtual bool has_one_constrainedElement(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
+			virtual bool has_one_constrainedElement(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context) = 0;
 
 			//*********************************
 			// Attribute Getters & Setters

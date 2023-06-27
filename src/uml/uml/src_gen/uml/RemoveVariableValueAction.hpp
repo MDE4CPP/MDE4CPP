@@ -104,7 +104,7 @@ namespace uml
 			endif
 			*/
 			 
-			virtual bool removeAt_and_value(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
+			virtual bool removeAt_and_value(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context) = 0;
 
 			//*********************************
 			// Attribute Getters & Setters
@@ -130,13 +130,13 @@ namespace uml
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::InputPin> getRemoveAt() const = 0;
+			virtual const std::shared_ptr<uml::InputPin>& getRemoveAt() const = 0;
 			/*!
 			An InputPin that provides the position of an existing value to remove in ordered, nonunique Variables. The type of the removeAt InputPin is UnlimitedNatural, but the value cannot be zero or unlimited.
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual void setRemoveAt(std::shared_ptr<uml::InputPin>) = 0;
+			virtual void setRemoveAt(const std::shared_ptr<uml::InputPin>&) = 0;
 
 			//*********************************
 			// Union Reference Getters

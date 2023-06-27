@@ -97,13 +97,13 @@ namespace uml
 			isControl implies isControlType
 			*/
 			 
-			virtual bool control_pins(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
+			virtual bool control_pins(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context) = 0;
 			/*!
 			Pin multiplicity is not unique.
 			not isUnique
 			*/
 			 
-			virtual bool not_unique(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
+			virtual bool not_unique(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context) = 0;
 
 			//*********************************
 			// Attribute Getters & Setters

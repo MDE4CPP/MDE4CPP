@@ -178,7 +178,7 @@ ExecutableNodeImpl& ExecutableNodeImpl::operator=(const ExecutableNodeImpl & obj
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference handler */
-std::shared_ptr<Subset<uml::ExceptionHandler, uml::Element>> ExecutableNodeImpl::getHandler() const
+const std::shared_ptr<Subset<uml::ExceptionHandler, uml::Element>>& ExecutableNodeImpl::getHandler() const
 {
 	if(m_handler == nullptr)
 	{
@@ -371,7 +371,7 @@ void ExecutableNodeImpl::saveContent(std::shared_ptr<persistence::interfaces::XS
 	}
 }
 
-std::shared_ptr<ecore::EClass> ExecutableNodeImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& ExecutableNodeImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getExecutableNode_Class();
 }
@@ -399,7 +399,7 @@ bool ExecutableNodeImpl::internalEIsSet(int featureID) const
 	return ActivityNodeImpl::internalEIsSet(featureID);
 }
 
-bool ExecutableNodeImpl::eSet(int featureID, Any newValue)
+bool ExecutableNodeImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -448,7 +448,7 @@ bool ExecutableNodeImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any ExecutableNodeImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any ExecutableNodeImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

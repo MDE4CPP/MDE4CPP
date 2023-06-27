@@ -46,7 +46,7 @@ virtual public ClassifierBehaviorExecution
 			// Operations
 			//*********************************
 			virtual void _startObjectBehavior() ;
-			virtual void execute(std::shared_ptr<Bag<uml::Class>> classifier,std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> inputs) ;
+			virtual void execute(const std::shared_ptr<Bag<uml::Class>>& classifier, const std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>>& inputs) ;
 			virtual void terminate() ;
 			
 			//*********************************
@@ -56,12 +56,12 @@ virtual public ClassifierBehaviorExecution
 			//*********************************
 			// Reference Getters & Setters
 			//*********************************
-			virtual std::shared_ptr<uml::Class> getClassifier() const ;
-			virtual void setClassifier(std::shared_ptr<uml::Class>) ;
-			virtual std::shared_ptr<fUML::Semantics::CommonBehavior::Execution> getExecution() const ;
-			virtual void setExecution(std::shared_ptr<fUML::Semantics::CommonBehavior::Execution>) ;
-			virtual std::shared_ptr<fUML::Semantics::CommonBehavior::ObjectActivation> getObjectActivation() const ;
-			virtual void setObjectActivation(std::shared_ptr<fUML::Semantics::CommonBehavior::ObjectActivation>) ;
+			virtual const std::shared_ptr<uml::Class>& getClassifier() const ;
+			virtual void setClassifier(const std::shared_ptr<uml::Class>&) ;
+			virtual const std::shared_ptr<fUML::Semantics::CommonBehavior::Execution>& getExecution() const ;
+			virtual void setExecution(const std::shared_ptr<fUML::Semantics::CommonBehavior::Execution>&) ;
+			virtual const std::shared_ptr<fUML::Semantics::CommonBehavior::ObjectActivation>& getObjectActivation() const ;
+			virtual void setObjectActivation(const std::shared_ptr<fUML::Semantics::CommonBehavior::ObjectActivation>&) ;
 			
 			//*********************************
 			// Union Reference Getters
@@ -83,19 +83,19 @@ virtual public ClassifierBehaviorExecution
 			virtual void saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const;
 
 		protected:
-			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
+			virtual const std::shared_ptr<ecore::EClass>& eStaticClass() const;
 
 			//*********************************
 			// EStructuralFeature Get/Set/IsSet
 			//*********************************
 			virtual Any eGet(int featureID, bool resolve, bool coreType) const ;
-			virtual bool eSet(int featureID, Any newValue) ;
+			virtual bool eSet(int featureID, const Any& newValue) ;
 			virtual bool internalEIsSet(int featureID) const ;
 
 			//*********************************
 			// EOperation Invoke
 			//*********************************
-			virtual Any eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments) ;
+			virtual Any eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments) ;
 
 		private:
 			std::weak_ptr<fUML::Semantics::CommonBehavior::ClassifierBehaviorExecution> m_thisClassifierBehaviorExecutionPtr;

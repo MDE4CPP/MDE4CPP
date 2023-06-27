@@ -150,7 +150,7 @@ std::shared_ptr<ecore::EObject> CreateLinkActionImpl::copy() const
 //*********************************
 // Operations
 //*********************************
-bool CreateLinkActionImpl::association_not_abstract(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool CreateLinkActionImpl::association_not_abstract(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -337,7 +337,7 @@ void CreateLinkActionImpl::saveContent(std::shared_ptr<persistence::interfaces::
 	}
 }
 
-std::shared_ptr<ecore::EClass> CreateLinkActionImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& CreateLinkActionImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getCreateLinkAction_Class();
 }
@@ -361,7 +361,7 @@ bool CreateLinkActionImpl::internalEIsSet(int featureID) const
 	return WriteLinkActionImpl::internalEIsSet(featureID);
 }
 
-bool CreateLinkActionImpl::eSet(int featureID, Any newValue)
+bool CreateLinkActionImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -373,7 +373,7 @@ bool CreateLinkActionImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any CreateLinkActionImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any CreateLinkActionImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

@@ -223,18 +223,18 @@ NavigationCallExpImpl& NavigationCallExpImpl::operator=(const NavigationCallExpI
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference navigationSource */
-std::shared_ptr<ecore::EAttribute> NavigationCallExpImpl::getNavigationSource() const
+const std::shared_ptr<ecore::EAttribute>& NavigationCallExpImpl::getNavigationSource() const
 {
     return m_navigationSource;
 }
-void NavigationCallExpImpl::setNavigationSource(std::shared_ptr<ecore::EAttribute> _navigationSource)
+void NavigationCallExpImpl::setNavigationSource(const std::shared_ptr<ecore::EAttribute>& _navigationSource)
 {
     m_navigationSource = _navigationSource;
 	
 }
 
 /* Getter & Setter for reference qualifier */
-std::shared_ptr<Bag<ocl::Expressions::OclExpression>> NavigationCallExpImpl::getQualifier() const
+const std::shared_ptr<Bag<ocl::Expressions::OclExpression>>& NavigationCallExpImpl::getQualifier() const
 {
 	if(m_qualifier == nullptr)
 	{
@@ -444,7 +444,7 @@ void NavigationCallExpImpl::saveContent(std::shared_ptr<persistence::interfaces:
 	}
 }
 
-std::shared_ptr<ecore::EClass> NavigationCallExpImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& NavigationCallExpImpl::eStaticClass() const
 {
 	return ocl::Expressions::ExpressionsPackage::eInstance()->getNavigationCallExp_Class();
 }
@@ -476,7 +476,7 @@ bool NavigationCallExpImpl::internalEIsSet(int featureID) const
 	return FeatureCallExpImpl::internalEIsSet(featureID);
 }
 
-bool NavigationCallExpImpl::eSet(int featureID, Any newValue)
+bool NavigationCallExpImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -533,7 +533,7 @@ bool NavigationCallExpImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any NavigationCallExpImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any NavigationCallExpImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

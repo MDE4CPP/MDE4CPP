@@ -87,9 +87,9 @@ namespace fUML::Semantics::CommonBehavior
 			virtual void execute() = 0;
 			
 			virtual std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue> > getOutputParameterValues() = 0;
-			virtual std::shared_ptr<fUML::Semantics::CommonBehavior::ParameterValue> getParameterValue(std::shared_ptr<uml::Parameter> parameter) = 0;
+			virtual std::shared_ptr<fUML::Semantics::CommonBehavior::ParameterValue> getParameterValue(const std::shared_ptr<uml::Parameter>& parameter) = 0;
 			virtual std::shared_ptr<fUML::Semantics::Values::Value> new_() = 0;
-			virtual void setParameterValue(std::shared_ptr<fUML::Semantics::CommonBehavior::ParameterValue> parameterValue) = 0;
+			virtual void setParameterValue(const std::shared_ptr<fUML::Semantics::CommonBehavior::ParameterValue>& parameterValue) = 0;
 			virtual void terminate() = 0;
 
 			//*********************************
@@ -99,11 +99,11 @@ namespace fUML::Semantics::CommonBehavior
 			//*********************************
 			// Reference Getters & Setters
 			//*********************************
-			virtual std::shared_ptr<uml::Behavior> getBehavior() const = 0;
-			virtual void setBehavior(std::shared_ptr<uml::Behavior>) = 0;
-			virtual std::shared_ptr<fUML::Semantics::StructuredClassifiers::Object> getContext() const = 0;
-			virtual void setContext(std::shared_ptr<fUML::Semantics::StructuredClassifiers::Object>) = 0;
-			virtual std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> getParameterValues() const = 0;
+			virtual const std::shared_ptr<uml::Behavior>& getBehavior() const = 0;
+			virtual void setBehavior(const std::shared_ptr<uml::Behavior>&) = 0;
+			virtual const std::shared_ptr<fUML::Semantics::StructuredClassifiers::Object>& getContext() const = 0;
+			virtual void setContext(const std::shared_ptr<fUML::Semantics::StructuredClassifiers::Object>&) = 0;
+			virtual const std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>>& getParameterValues() const = 0;
 
 			//*********************************
 			// Union Reference Getters

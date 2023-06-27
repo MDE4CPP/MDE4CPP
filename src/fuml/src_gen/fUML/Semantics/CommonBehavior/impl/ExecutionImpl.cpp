@@ -60,8 +60,8 @@
 #include "fUML/Semantics/CommonBehavior/ParameterValue.hpp"
 #include "fUML/Semantics/Values/Value.hpp"
 //Factories and Package includes
-#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/SemanticsPackage.hpp"
+#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/CommonBehavior/CommonBehaviorPackage.hpp"
 #include "fUML/Semantics/Loci/LociPackage.hpp"
 #include "fUML/Semantics/SimpleClassifiers/SimpleClassifiersPackage.hpp"
@@ -198,7 +198,7 @@ std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue> > Execution
 	//end of body
 }
 
-std::shared_ptr<fUML::Semantics::CommonBehavior::ParameterValue> ExecutionImpl::getParameterValue(std::shared_ptr<uml::Parameter> parameter)
+std::shared_ptr<fUML::Semantics::CommonBehavior::ParameterValue> ExecutionImpl::getParameterValue(const std::shared_ptr<uml::Parameter>& parameter)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -219,7 +219,7 @@ std::shared_ptr<fUML::Semantics::Values::Value> ExecutionImpl::new_()
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-void ExecutionImpl::setParameterValue(std::shared_ptr<fUML::Semantics::CommonBehavior::ParameterValue> parameterValue)
+void ExecutionImpl::setParameterValue(const std::shared_ptr<fUML::Semantics::CommonBehavior::ParameterValue>& parameterValue)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -254,7 +254,7 @@ void ExecutionImpl::terminate()
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference behavior */
-std::shared_ptr<uml::Behavior> ExecutionImpl::getBehavior() const
+const std::shared_ptr<uml::Behavior>& ExecutionImpl::getBehavior() const
 {
 	//generated from getterBody annotation
 if(!m_behavior)
@@ -265,25 +265,25 @@ if(!m_behavior)
 return m_behavior;
 	//end of body
 }
-void ExecutionImpl::setBehavior(std::shared_ptr<uml::Behavior> _behavior)
+void ExecutionImpl::setBehavior(const std::shared_ptr<uml::Behavior>& _behavior)
 {
     m_behavior = _behavior;
 	
 }
 
 /* Getter & Setter for reference context */
-std::shared_ptr<fUML::Semantics::StructuredClassifiers::Object> ExecutionImpl::getContext() const
+const std::shared_ptr<fUML::Semantics::StructuredClassifiers::Object>& ExecutionImpl::getContext() const
 {
     return m_context;
 }
-void ExecutionImpl::setContext(std::shared_ptr<fUML::Semantics::StructuredClassifiers::Object> _context)
+void ExecutionImpl::setContext(const std::shared_ptr<fUML::Semantics::StructuredClassifiers::Object>& _context)
 {
     m_context = _context;
 	
 }
 
 /* Getter & Setter for reference parameterValues */
-std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> ExecutionImpl::getParameterValues() const
+const std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>>& ExecutionImpl::getParameterValues() const
 {
 	if(m_parameterValues == nullptr)
 	{
@@ -458,7 +458,7 @@ void ExecutionImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHa
 	}
 }
 
-std::shared_ptr<ecore::EClass> ExecutionImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& ExecutionImpl::eStaticClass() const
 {
 	return fUML::Semantics::CommonBehavior::CommonBehaviorPackage::eInstance()->getExecution_Class();
 }
@@ -494,7 +494,7 @@ bool ExecutionImpl::internalEIsSet(int featureID) const
 	return fUML::Semantics::StructuredClassifiers::ObjectImpl::internalEIsSet(featureID);
 }
 
-bool ExecutionImpl::eSet(int featureID, Any newValue)
+bool ExecutionImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -559,7 +559,7 @@ bool ExecutionImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any ExecutionImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any ExecutionImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

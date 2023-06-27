@@ -84,12 +84,12 @@ namespace ocl::Evaluations
 			//*********************************
 			// Reference Getters & Setters
 			//*********************************
-			virtual std::shared_ptr<ocl::Evaluations::OclExpEval> getExpression() const = 0;
-			virtual void setExpression(std::shared_ptr<ocl::Evaluations::OclExpEval>) = 0;
-			virtual std::shared_ptr<ocl::Evaluations::UnspecifiedValueExpEval> getUnspecified() const = 0;
-			virtual void setUnspecified(std::shared_ptr<ocl::Evaluations::UnspecifiedValueExpEval>) = 0;
-			virtual std::shared_ptr<ocl::Evaluations::OclExpEval> getVariable() const = 0;
-			virtual void setVariable(std::shared_ptr<ocl::Evaluations::OclExpEval>) = 0;
+			virtual const std::shared_ptr<ocl::Evaluations::OclExpEval>& getExpression() const = 0;
+			virtual void setExpression(const std::shared_ptr<ocl::Evaluations::OclExpEval>&) = 0;
+			virtual const std::shared_ptr<ocl::Evaluations::UnspecifiedValueExpEval>& getUnspecified() const = 0;
+			virtual void setUnspecified(const std::shared_ptr<ocl::Evaluations::UnspecifiedValueExpEval>&) = 0;
+			virtual const std::shared_ptr<ocl::Evaluations::OclExpEval>& getVariable() const = 0;
+			virtual void setVariable(const std::shared_ptr<ocl::Evaluations::OclExpEval>&) = 0;
 
 			//*********************************
 			// Union Reference Getters

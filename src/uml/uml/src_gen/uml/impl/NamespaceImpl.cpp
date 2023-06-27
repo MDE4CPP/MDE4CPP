@@ -243,27 +243,27 @@ NamespaceImpl& NamespaceImpl::operator=(const NamespaceImpl & obj)
 //*********************************
 // Operations
 //*********************************
-bool NamespaceImpl::cannot_import_ownedMembers(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool NamespaceImpl::cannot_import_ownedMembers(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool NamespaceImpl::cannot_import_self(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool NamespaceImpl::cannot_import_self(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-std::shared_ptr<uml::ElementImport> NamespaceImpl::createElementImport(std::shared_ptr<uml::PackageableElement> element,uml::VisibilityKind visibility)
+std::shared_ptr<uml::ElementImport> NamespaceImpl::createElementImport(const std::shared_ptr<uml::PackageableElement>& element, uml::VisibilityKind visibility)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-std::shared_ptr<uml::PackageImport> NamespaceImpl::createPackageImport(std::shared_ptr<uml::Package> package_,uml::VisibilityKind visibility)
+std::shared_ptr<uml::PackageImport> NamespaceImpl::createPackageImport(const std::shared_ptr<uml::Package>& package_, uml::VisibilityKind visibility)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-std::shared_ptr<Bag<uml::PackageableElement> > NamespaceImpl::excludeCollisions(std::shared_ptr<Bag<uml::PackageableElement>> imps)
+std::shared_ptr<Bag<uml::PackageableElement> > NamespaceImpl::excludeCollisions(const std::shared_ptr<Bag<uml::PackageableElement>>& imps)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -283,7 +283,7 @@ std::shared_ptr<Bag<uml::Package> > NamespaceImpl::getImportedPackages()
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-std::shared_ptr<Bag<std::string> > NamespaceImpl::getNamesOfMember(std::shared_ptr<uml::NamedElement> element)
+std::shared_ptr<Bag<std::string> > NamespaceImpl::getNamesOfMember(const std::shared_ptr<uml::NamedElement>& element)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -293,7 +293,7 @@ std::shared_ptr<Bag<uml::NamedElement> > NamespaceImpl::getOwnedMembers()
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-std::shared_ptr<Bag<uml::PackageableElement> > NamespaceImpl::importMembers(std::shared_ptr<Bag<uml::PackageableElement>> imps)
+std::shared_ptr<Bag<uml::PackageableElement> > NamespaceImpl::importMembers(const std::shared_ptr<Bag<uml::PackageableElement>>& imps)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -303,7 +303,7 @@ bool NamespaceImpl::membersAreDistinguishable()
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool NamespaceImpl::members_distinguishable(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool NamespaceImpl::members_distinguishable(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -316,7 +316,7 @@ bool NamespaceImpl::members_distinguishable(Any diagnostics,std::shared_ptr<std:
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference elementImport */
-std::shared_ptr<SubsetUnion<uml::ElementImport, uml::Element>> NamespaceImpl::getElementImport() const
+const std::shared_ptr<SubsetUnion<uml::ElementImport, uml::Element>>& NamespaceImpl::getElementImport() const
 {
 	if(m_elementImport == nullptr)
 	{
@@ -337,7 +337,7 @@ std::shared_ptr<SubsetUnion<uml::ElementImport, uml::Element>> NamespaceImpl::ge
 }
 
 /* Getter & Setter for reference importedMember */
-std::shared_ptr<Subset<uml::PackageableElement, uml::NamedElement>> NamespaceImpl::getImportedMember() const
+const std::shared_ptr<Subset<uml::PackageableElement, uml::NamedElement>>& NamespaceImpl::getImportedMember() const
 {
 	if(m_importedMember == nullptr)
 	{
@@ -362,7 +362,7 @@ std::shared_ptr<Subset<uml::PackageableElement, uml::NamedElement>> NamespaceImp
 /* Getter & Setter for reference ownedMember */
 
 /* Getter & Setter for reference ownedRule */
-std::shared_ptr<SubsetUnion<uml::Constraint, uml::NamedElement>> NamespaceImpl::getOwnedRule() const
+const std::shared_ptr<SubsetUnion<uml::Constraint, uml::NamedElement>>& NamespaceImpl::getOwnedRule() const
 {
 	if(m_ownedRule == nullptr)
 	{
@@ -383,7 +383,7 @@ std::shared_ptr<SubsetUnion<uml::Constraint, uml::NamedElement>> NamespaceImpl::
 }
 
 /* Getter & Setter for reference packageImport */
-std::shared_ptr<SubsetUnion<uml::PackageImport, uml::Element>> NamespaceImpl::getPackageImport() const
+const std::shared_ptr<SubsetUnion<uml::PackageImport, uml::Element>>& NamespaceImpl::getPackageImport() const
 {
 	if(m_packageImport == nullptr)
 	{
@@ -618,7 +618,7 @@ void NamespaceImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHa
 	}
 }
 
-std::shared_ptr<ecore::EClass> NamespaceImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& NamespaceImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getNamespace_Class();
 }
@@ -666,7 +666,7 @@ bool NamespaceImpl::internalEIsSet(int featureID) const
 	return NamedElementImpl::internalEIsSet(featureID);
 }
 
-bool NamespaceImpl::eSet(int featureID, Any newValue)
+bool NamespaceImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -789,7 +789,7 @@ bool NamespaceImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any NamespaceImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any NamespaceImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

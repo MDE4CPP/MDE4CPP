@@ -33,10 +33,10 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "fUML/Semantics/Values/ValuesFactory.hpp"
 #include "fUML/Semantics/Loci/LociFactory.hpp"
-#include "fUML/Semantics/SimpleClassifiers/SimpleClassifiersFactory.hpp"
 #include "uml/umlFactory.hpp"
+#include "fUML/Semantics/Values/ValuesFactory.hpp"
+#include "fUML/Semantics/SimpleClassifiers/SimpleClassifiersFactory.hpp"
 #include "ocl/Evaluations/EvaluationsFactory.hpp"
 #include "ocl/Expressions/ExpressionsFactory.hpp"
 #include "ocl/Evaluations/EvalEnvironment.hpp"
@@ -129,33 +129,33 @@ std::shared_ptr<ecore::EObject> LetExpEvalImpl::copy() const
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference in */
-std::shared_ptr<ocl::Evaluations::OclExpEval> LetExpEvalImpl::getIn() const
+const std::shared_ptr<ocl::Evaluations::OclExpEval>& LetExpEvalImpl::getIn() const
 {
     return m_in;
 }
-void LetExpEvalImpl::setIn(std::shared_ptr<ocl::Evaluations::OclExpEval> _in)
+void LetExpEvalImpl::setIn(const std::shared_ptr<ocl::Evaluations::OclExpEval>& _in)
 {
     m_in = _in;
 	
 }
 
 /* Getter & Setter for reference initExpression */
-std::shared_ptr<ocl::Evaluations::OclExpEval> LetExpEvalImpl::getInitExpression() const
+const std::shared_ptr<ocl::Evaluations::OclExpEval>& LetExpEvalImpl::getInitExpression() const
 {
     return m_initExpression;
 }
-void LetExpEvalImpl::setInitExpression(std::shared_ptr<ocl::Evaluations::OclExpEval> _initExpression)
+void LetExpEvalImpl::setInitExpression(const std::shared_ptr<ocl::Evaluations::OclExpEval>& _initExpression)
 {
     m_initExpression = _initExpression;
 	
 }
 
 /* Getter & Setter for reference variable */
-std::shared_ptr<fUML::Semantics::SimpleClassifiers::StringValue> LetExpEvalImpl::getVariable() const
+const std::shared_ptr<fUML::Semantics::SimpleClassifiers::StringValue>& LetExpEvalImpl::getVariable() const
 {
     return m_variable;
 }
-void LetExpEvalImpl::setVariable(std::shared_ptr<fUML::Semantics::SimpleClassifiers::StringValue> _variable)
+void LetExpEvalImpl::setVariable(const std::shared_ptr<fUML::Semantics::SimpleClassifiers::StringValue>& _variable)
 {
     m_variable = _variable;
 	
@@ -310,7 +310,7 @@ void LetExpEvalImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveH
 	}
 }
 
-std::shared_ptr<ecore::EClass> LetExpEvalImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& LetExpEvalImpl::eStaticClass() const
 {
 	return ocl::Evaluations::EvaluationsPackage::eInstance()->getLetExpEval_Class();
 }
@@ -346,7 +346,7 @@ bool LetExpEvalImpl::internalEIsSet(int featureID) const
 	return OclExpEvalImpl::internalEIsSet(featureID);
 }
 
-bool LetExpEvalImpl::eSet(int featureID, Any newValue)
+bool LetExpEvalImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -382,7 +382,7 @@ bool LetExpEvalImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any LetExpEvalImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any LetExpEvalImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

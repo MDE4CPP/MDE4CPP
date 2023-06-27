@@ -88,9 +88,9 @@ namespace fUML::Semantics::Loci
 			//*********************************
 			// Operations
 			//*********************************
-			virtual std::shared_ptr<fUML::Semantics::Values::Value> evaluate(std::shared_ptr<uml::ValueSpecification> specification) = 0;
-			virtual std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue> > execute(std::shared_ptr<uml::Behavior> behavior,std::shared_ptr<fUML::Semantics::StructuredClassifiers::Object> context,std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> inputs) = 0;
-			virtual std::shared_ptr<fUML::Semantics::StructuredClassifiers::Reference> start(std::shared_ptr<uml::Class> type,std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> inputs) = 0;
+			virtual std::shared_ptr<fUML::Semantics::Values::Value> evaluate(const std::shared_ptr<uml::ValueSpecification>& specification) = 0;
+			virtual std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue> > execute(const std::shared_ptr<uml::Behavior>& behavior, const std::shared_ptr<fUML::Semantics::StructuredClassifiers::Object>& context, const std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>>& inputs) = 0;
+			virtual std::shared_ptr<fUML::Semantics::StructuredClassifiers::Reference> start(const std::shared_ptr<uml::Class>& type, const std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>>& inputs) = 0;
 
 			//*********************************
 			// Attribute Getters & Setters

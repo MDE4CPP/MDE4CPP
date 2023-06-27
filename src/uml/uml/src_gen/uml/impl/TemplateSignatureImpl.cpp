@@ -152,12 +152,12 @@ std::shared_ptr<ecore::EObject> TemplateSignatureImpl::copy() const
 //*********************************
 // Operations
 //*********************************
-bool TemplateSignatureImpl::own_elements(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool TemplateSignatureImpl::own_elements(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool TemplateSignatureImpl::unique_parameters(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool TemplateSignatureImpl::unique_parameters(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -170,7 +170,7 @@ bool TemplateSignatureImpl::unique_parameters(Any diagnostics,std::shared_ptr<st
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference ownedParameter */
-std::shared_ptr<Subset<uml::TemplateParameter, uml::Element, uml::TemplateParameter>> TemplateSignatureImpl::getOwnedParameter() const
+const std::shared_ptr<Subset<uml::TemplateParameter, uml::Element, uml::TemplateParameter>>& TemplateSignatureImpl::getOwnedParameter() const
 {
 	if(m_ownedParameter == nullptr)
 	{
@@ -394,7 +394,7 @@ void TemplateSignatureImpl::saveContent(std::shared_ptr<persistence::interfaces:
 	}
 }
 
-std::shared_ptr<ecore::EClass> TemplateSignatureImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& TemplateSignatureImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getTemplateSignature_Class();
 }
@@ -433,7 +433,7 @@ bool TemplateSignatureImpl::internalEIsSet(int featureID) const
 	return ElementImpl::internalEIsSet(featureID);
 }
 
-bool TemplateSignatureImpl::eSet(int featureID, Any newValue)
+bool TemplateSignatureImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -527,7 +527,7 @@ bool TemplateSignatureImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any TemplateSignatureImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any TemplateSignatureImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

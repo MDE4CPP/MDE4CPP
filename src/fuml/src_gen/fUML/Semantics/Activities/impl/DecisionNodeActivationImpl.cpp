@@ -66,8 +66,8 @@
 #include "fUML/Semantics/Values/Value.hpp"
 #include "uml/ValueSpecification.hpp"
 //Factories and Package includes
-#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/SemanticsPackage.hpp"
+#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/Activities/ActivitiesPackage.hpp"
 #include "fUML/Semantics/CommonBehavior/CommonBehaviorPackage.hpp"
 #include "fUML/Semantics/Values/ValuesPackage.hpp"
@@ -148,7 +148,7 @@ std::shared_ptr<ecore::EObject> DecisionNodeActivationImpl::copy() const
 //*********************************
 // Operations
 //*********************************
-std::shared_ptr<fUML::Semantics::Values::Value> DecisionNodeActivationImpl::executeDecisionInputBehavior(std::shared_ptr<fUML::Semantics::Values::Value> inputValue,std::shared_ptr<fUML::Semantics::Values::Value> decisionInputValue)
+std::shared_ptr<fUML::Semantics::Values::Value> DecisionNodeActivationImpl::executeDecisionInputBehavior(const std::shared_ptr<fUML::Semantics::Values::Value>& inputValue, const std::shared_ptr<fUML::Semantics::Values::Value>& decisionInputValue)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -215,7 +215,7 @@ std::shared_ptr<fUML::Semantics::Values::Value> DecisionNodeActivationImpl::exec
 	//end of body
 }
 
-void DecisionNodeActivationImpl::fire(std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> incomingTokens)
+void DecisionNodeActivationImpl::fire(const std::shared_ptr<Bag<fUML::Semantics::Activities::Token>>& incomingTokens)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -299,7 +299,7 @@ std::shared_ptr<fUML::Semantics::Values::Value> DecisionNodeActivationImpl::getD
 	//end of body
 }
 
-std::shared_ptr<Bag<fUML::Semantics::Values::Value> > DecisionNodeActivationImpl::getDecisionValues(std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> incomingTokens)
+std::shared_ptr<Bag<fUML::Semantics::Values::Value> > DecisionNodeActivationImpl::getDecisionValues(const std::shared_ptr<Bag<fUML::Semantics::Activities::Token>>& incomingTokens)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -368,7 +368,7 @@ bool DecisionNodeActivationImpl::isReady()
 	//end of body
 }
 
-std::shared_ptr<Bag<fUML::Semantics::Activities::Token> > DecisionNodeActivationImpl::removeJoinedControlTokens(std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> incomingTokens)
+std::shared_ptr<Bag<fUML::Semantics::Activities::Token> > DecisionNodeActivationImpl::removeJoinedControlTokens(const std::shared_ptr<Bag<fUML::Semantics::Activities::Token>>& incomingTokens)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -431,7 +431,7 @@ void DecisionNodeActivationImpl::terminate()
 	//end of body
 }
 
-bool DecisionNodeActivationImpl::test(std::shared_ptr<uml::ValueSpecification> gaurd,std::shared_ptr<fUML::Semantics::Values::Value> value)
+bool DecisionNodeActivationImpl::test(const std::shared_ptr<uml::ValueSpecification>& gaurd, const std::shared_ptr<fUML::Semantics::Values::Value>& value)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -453,29 +453,29 @@ bool DecisionNodeActivationImpl::test(std::shared_ptr<uml::ValueSpecification> g
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference decisionInputExecution */
-std::shared_ptr<fUML::Semantics::CommonBehavior::Execution> DecisionNodeActivationImpl::getDecisionInputExecution() const
+const std::shared_ptr<fUML::Semantics::CommonBehavior::Execution>& DecisionNodeActivationImpl::getDecisionInputExecution() const
 {
     return m_decisionInputExecution;
 }
-void DecisionNodeActivationImpl::setDecisionInputExecution(std::shared_ptr<fUML::Semantics::CommonBehavior::Execution> _decisionInputExecution)
+void DecisionNodeActivationImpl::setDecisionInputExecution(const std::shared_ptr<fUML::Semantics::CommonBehavior::Execution>& _decisionInputExecution)
 {
     m_decisionInputExecution = _decisionInputExecution;
 	
 }
 
 /* Getter & Setter for reference decisionNode */
-std::shared_ptr<uml::DecisionNode> DecisionNodeActivationImpl::getDecisionNode() const
+const std::shared_ptr<uml::DecisionNode>& DecisionNodeActivationImpl::getDecisionNode() const
 {
     return m_decisionNode;
 }
-void DecisionNodeActivationImpl::setDecisionNode(std::shared_ptr<uml::DecisionNode> _decisionNode)
+void DecisionNodeActivationImpl::setDecisionNode(const std::shared_ptr<uml::DecisionNode>& _decisionNode)
 {
     m_decisionNode = _decisionNode;
 	//additional setter call for redefined reference ActivityNodeActivation::node
 	fUML::Semantics::Activities::ActivityNodeActivationImpl::setNode(_decisionNode);
 }
 /*Additional Setter for redefined reference 'ActivityNodeActivation::node'*/
-void DecisionNodeActivationImpl::setNode(std::shared_ptr<uml::ActivityNode> _node)
+void DecisionNodeActivationImpl::setNode(const std::shared_ptr<uml::ActivityNode>& _node)
 {
 	std::shared_ptr<uml::DecisionNode> _decisionNode = std::dynamic_pointer_cast<uml::DecisionNode>(_node);
 	if(_decisionNode)
@@ -634,7 +634,7 @@ void DecisionNodeActivationImpl::saveContent(std::shared_ptr<persistence::interf
 	}
 }
 
-std::shared_ptr<ecore::EClass> DecisionNodeActivationImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& DecisionNodeActivationImpl::eStaticClass() const
 {
 	return fUML::Semantics::Activities::ActivitiesPackage::eInstance()->getDecisionNodeActivation_Class();
 }
@@ -666,7 +666,7 @@ bool DecisionNodeActivationImpl::internalEIsSet(int featureID) const
 	return ControlNodeActivationImpl::internalEIsSet(featureID);
 }
 
-bool DecisionNodeActivationImpl::eSet(int featureID, Any newValue)
+bool DecisionNodeActivationImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -694,7 +694,7 @@ bool DecisionNodeActivationImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any DecisionNodeActivationImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any DecisionNodeActivationImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

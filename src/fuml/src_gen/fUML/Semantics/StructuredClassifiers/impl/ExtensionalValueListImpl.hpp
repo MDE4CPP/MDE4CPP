@@ -43,11 +43,11 @@ namespace fUML::Semantics::StructuredClassifiers
 			//*********************************
 			// Operations
 			//*********************************
-			virtual bool addValue(std::shared_ptr<fUML::Semantics::StructuredClassifiers::ExtensionalValue> value) ;
-			virtual void addValue(std::shared_ptr<fUML::Semantics::StructuredClassifiers::ExtensionalValue> value,int i) ;
+			virtual bool addValue(const std::shared_ptr<fUML::Semantics::StructuredClassifiers::ExtensionalValue>& value) ;
+			virtual void addValue(const std::shared_ptr<fUML::Semantics::StructuredClassifiers::ExtensionalValue>& value, int i) ;
 			virtual std::shared_ptr<fUML::Semantics::StructuredClassifiers::ExtensionalValue> getValue() ;
 			virtual std::string removeValue(int i) ;
-			virtual std::shared_ptr<fUML::Semantics::Values::Value> setValue(std::shared_ptr<fUML::Semantics::StructuredClassifiers::ExtensionalValue> value,int i) ;
+			virtual std::shared_ptr<fUML::Semantics::Values::Value> setValue(const std::shared_ptr<fUML::Semantics::StructuredClassifiers::ExtensionalValue>& value, int i) ;
 			
 			//*********************************
 			// Attribute Getters & Setters
@@ -77,19 +77,19 @@ namespace fUML::Semantics::StructuredClassifiers
 			virtual void saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const;
 
 		protected:
-			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
+			virtual const std::shared_ptr<ecore::EClass>& eStaticClass() const;
 
 			//*********************************
 			// EStructuralFeature Get/Set/IsSet
 			//*********************************
 			virtual Any eGet(int featureID, bool resolve, bool coreType) const ;
-			virtual bool eSet(int featureID, Any newValue) ;
+			virtual bool eSet(int featureID, const Any& newValue) ;
 			virtual bool internalEIsSet(int featureID) const ;
 
 			//*********************************
 			// EOperation Invoke
 			//*********************************
-			virtual Any eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments) ;
+			virtual Any eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments) ;
 
 		private:
 			std::weak_ptr<fUML::Semantics::StructuredClassifiers::ExtensionalValueList> m_thisExtensionalValueListPtr;

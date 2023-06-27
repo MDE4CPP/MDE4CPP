@@ -304,7 +304,7 @@ void FlowFinalNodeImpl::saveContent(std::shared_ptr<persistence::interfaces::XSa
 	}
 }
 
-std::shared_ptr<ecore::EClass> FlowFinalNodeImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& FlowFinalNodeImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getFlowFinalNode_Class();
 }
@@ -328,7 +328,7 @@ bool FlowFinalNodeImpl::internalEIsSet(int featureID) const
 	return FinalNodeImpl::internalEIsSet(featureID);
 }
 
-bool FlowFinalNodeImpl::eSet(int featureID, Any newValue)
+bool FlowFinalNodeImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -340,7 +340,7 @@ bool FlowFinalNodeImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any FlowFinalNodeImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any FlowFinalNodeImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

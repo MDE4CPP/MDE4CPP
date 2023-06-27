@@ -47,9 +47,9 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
+#include "fUML/Semantics/Actions/ActionsFactory.hpp"
 #include "fUML/Semantics/Activities/ActivitiesFactory.hpp"
 #include "uml/umlFactory.hpp"
-#include "fUML/Semantics/Actions/ActionsFactory.hpp"
 #include "uml/Action.hpp"
 #include "fUML/Semantics/Activities/ActivityEdgeInstance.hpp"
 #include "uml/ActivityNode.hpp"
@@ -61,8 +61,8 @@
 #include "fUML/Semantics/Actions/PinActivation.hpp"
 #include "fUML/Semantics/Activities/Token.hpp"
 //Factories and Package includes
-#include "PSCS/PSCSPackage.hpp"
 #include "PSCS/Semantics/SemanticsPackage.hpp"
+#include "PSCS/PSCSPackage.hpp"
 #include "PSCS/Semantics/Actions/ActionsPackage.hpp"
 #include "fUML/Semantics/Actions/ActionsPackage.hpp"
 #include "fUML/Semantics/Activities/ActivitiesPackage.hpp"
@@ -270,7 +270,7 @@ void CS_CreateObjectActionActivationImpl::saveContent(std::shared_ptr<persistenc
 	}
 }
 
-std::shared_ptr<ecore::EClass> CS_CreateObjectActionActivationImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& CS_CreateObjectActionActivationImpl::eStaticClass() const
 {
 	return PSCS::Semantics::Actions::ActionsPackage::eInstance()->getCS_CreateObjectActionActivation_Class();
 }
@@ -294,7 +294,7 @@ bool CS_CreateObjectActionActivationImpl::internalEIsSet(int featureID) const
 	return fUML::Semantics::Actions::CreateObjectActionActivationImpl::internalEIsSet(featureID);
 }
 
-bool CS_CreateObjectActionActivationImpl::eSet(int featureID, Any newValue)
+bool CS_CreateObjectActionActivationImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -306,7 +306,7 @@ bool CS_CreateObjectActionActivationImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any CS_CreateObjectActionActivationImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any CS_CreateObjectActionActivationImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

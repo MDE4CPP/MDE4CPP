@@ -152,17 +152,17 @@ ObjectNodeImpl& ObjectNodeImpl::operator=(const ObjectNodeImpl & obj)
 //*********************************
 // Operations
 //*********************************
-bool ObjectNodeImpl::input_output_parameter(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool ObjectNodeImpl::input_output_parameter(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool ObjectNodeImpl::object_flow_edges(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool ObjectNodeImpl::object_flow_edges(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool ObjectNodeImpl::selection_behavior(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool ObjectNodeImpl::selection_behavior(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -171,7 +171,7 @@ bool ObjectNodeImpl::selection_behavior(Any diagnostics,std::shared_ptr<std::map
 // Attribute Getters & Setters
 //*********************************
 /* Getter & Setter for attribute isControlType */
-bool ObjectNodeImpl::getIsControlType() const 
+bool ObjectNodeImpl::getIsControlType() const
 {
 	return m_isControlType;
 }
@@ -182,7 +182,7 @@ void ObjectNodeImpl::setIsControlType(bool _isControlType)
 }
 
 /* Getter & Setter for attribute ordering */
-uml::ObjectNodeOrderingKind ObjectNodeImpl::getOrdering() const 
+uml::ObjectNodeOrderingKind ObjectNodeImpl::getOrdering() const
 {
 	return m_ordering;
 }
@@ -196,7 +196,7 @@ void ObjectNodeImpl::setOrdering(uml::ObjectNodeOrderingKind _ordering)
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference inState */
-std::shared_ptr<Bag<uml::State>> ObjectNodeImpl::getInState() const
+const std::shared_ptr<Bag<uml::State>>& ObjectNodeImpl::getInState() const
 {
 	if(m_inState == nullptr)
 	{
@@ -208,22 +208,22 @@ std::shared_ptr<Bag<uml::State>> ObjectNodeImpl::getInState() const
 }
 
 /* Getter & Setter for reference selection */
-std::shared_ptr<uml::Behavior> ObjectNodeImpl::getSelection() const
+const std::shared_ptr<uml::Behavior>& ObjectNodeImpl::getSelection() const
 {
     return m_selection;
 }
-void ObjectNodeImpl::setSelection(std::shared_ptr<uml::Behavior> _selection)
+void ObjectNodeImpl::setSelection(const std::shared_ptr<uml::Behavior>& _selection)
 {
     m_selection = _selection;
 	
 }
 
 /* Getter & Setter for reference upperBound */
-std::shared_ptr<uml::ValueSpecification> ObjectNodeImpl::getUpperBound() const
+const std::shared_ptr<uml::ValueSpecification>& ObjectNodeImpl::getUpperBound() const
 {
     return m_upperBound;
 }
-void ObjectNodeImpl::setUpperBound(std::shared_ptr<uml::ValueSpecification> _upperBound)
+void ObjectNodeImpl::setUpperBound(const std::shared_ptr<uml::ValueSpecification>& _upperBound)
 {
     m_upperBound = _upperBound;
 	
@@ -526,7 +526,7 @@ void ObjectNodeImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveH
 	}
 }
 
-std::shared_ptr<ecore::EClass> ObjectNodeImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& ObjectNodeImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getObjectNode_Class();
 }
@@ -584,7 +584,7 @@ bool ObjectNodeImpl::internalEIsSet(int featureID) const
 	return result;
 }
 
-bool ObjectNodeImpl::eSet(int featureID, Any newValue)
+bool ObjectNodeImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -670,7 +670,7 @@ bool ObjectNodeImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any ObjectNodeImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any ObjectNodeImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

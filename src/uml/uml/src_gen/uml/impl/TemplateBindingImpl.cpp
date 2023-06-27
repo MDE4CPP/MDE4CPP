@@ -159,12 +159,12 @@ std::shared_ptr<ecore::EObject> TemplateBindingImpl::copy() const
 //*********************************
 // Operations
 //*********************************
-bool TemplateBindingImpl::one_parameter_substitution(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool TemplateBindingImpl::one_parameter_substitution(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool TemplateBindingImpl::parameter_substitution_formal(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool TemplateBindingImpl::parameter_substitution_formal(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -188,7 +188,7 @@ void TemplateBindingImpl::setBoundElement(std::weak_ptr<uml::TemplateableElement
 }
 
 /* Getter & Setter for reference parameterSubstitution */
-std::shared_ptr<Subset<uml::TemplateParameterSubstitution, uml::Element>> TemplateBindingImpl::getParameterSubstitution() const
+const std::shared_ptr<Subset<uml::TemplateParameterSubstitution, uml::Element>>& TemplateBindingImpl::getParameterSubstitution() const
 {
 	if(m_parameterSubstitution == nullptr)
 	{
@@ -209,11 +209,11 @@ std::shared_ptr<Subset<uml::TemplateParameterSubstitution, uml::Element>> Templa
 }
 
 /* Getter & Setter for reference signature */
-std::shared_ptr<uml::TemplateSignature> TemplateBindingImpl::getSignature() const
+const std::shared_ptr<uml::TemplateSignature>& TemplateBindingImpl::getSignature() const
 {
     return m_signature;
 }
-void TemplateBindingImpl::setSignature(std::shared_ptr<uml::TemplateSignature> _signature)
+void TemplateBindingImpl::setSignature(const std::shared_ptr<uml::TemplateSignature>& _signature)
 {
     m_signature = _signature;
 	
@@ -452,7 +452,7 @@ void TemplateBindingImpl::saveContent(std::shared_ptr<persistence::interfaces::X
 	}
 }
 
-std::shared_ptr<ecore::EClass> TemplateBindingImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& TemplateBindingImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getTemplateBinding_Class();
 }
@@ -491,7 +491,7 @@ bool TemplateBindingImpl::internalEIsSet(int featureID) const
 	return DirectedRelationshipImpl::internalEIsSet(featureID);
 }
 
-bool TemplateBindingImpl::eSet(int featureID, Any newValue)
+bool TemplateBindingImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -556,7 +556,7 @@ bool TemplateBindingImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any TemplateBindingImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any TemplateBindingImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

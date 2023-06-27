@@ -94,7 +94,7 @@ namespace uml
 			name = signal.name
 			*/
 			 
-			virtual bool same_name_as_signal(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
+			virtual bool same_name_as_signal(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context) = 0;
 			/*!
 			A Reception's parameters match the ownedAttributes of its signal by name, type, and multiplicity
 			signal.ownedAttribute->size() = ownedParameter->size() and
@@ -107,7 +107,7 @@ namespace uml
 			)
 			*/
 			 
-			virtual bool same_structure_as_signal(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
+			virtual bool same_structure_as_signal(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context) = 0;
 
 			//*********************************
 			// Attribute Getters & Setters
@@ -121,13 +121,13 @@ namespace uml
 			<p>From package UML::SimpleClassifiers.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::Signal> getSignal() const = 0;
+			virtual const std::shared_ptr<uml::Signal>& getSignal() const = 0;
 			/*!
 			The Signal that this Reception handles.
 			<p>From package UML::SimpleClassifiers.</p>
 			*/
 			
-			virtual void setSignal(std::shared_ptr<uml::Signal>) = 0;
+			virtual void setSignal(const std::shared_ptr<uml::Signal>&) = 0;
 
 			//*********************************
 			// Union Reference Getters

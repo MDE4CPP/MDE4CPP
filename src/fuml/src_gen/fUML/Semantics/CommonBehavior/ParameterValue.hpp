@@ -80,9 +80,9 @@ namespace fUML::Semantics::CommonBehavior
 			//*********************************
 			// Reference Getters & Setters
 			//*********************************
-			virtual std::shared_ptr<uml::Parameter> getParameter() const = 0;
-			virtual void setParameter(std::shared_ptr<uml::Parameter>) = 0;
-			virtual std::shared_ptr<Bag<fUML::Semantics::Values::Value>> getValues() const = 0;
+			virtual const std::shared_ptr<uml::Parameter>& getParameter() const = 0;
+			virtual void setParameter(const std::shared_ptr<uml::Parameter>&) = 0;
+			virtual const std::shared_ptr<Bag<fUML::Semantics::Values::Value>>& getValues() const = 0;
 
 			//*********************************
 			// Union Reference Getters

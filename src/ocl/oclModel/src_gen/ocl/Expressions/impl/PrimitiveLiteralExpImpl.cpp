@@ -199,7 +199,7 @@ PrimitiveLiteralExpImpl& PrimitiveLiteralExpImpl::operator=(const PrimitiveLiter
 // Attribute Getters & Setters
 //*********************************
 /* Getter & Setter for attribute symbol */
-std::string PrimitiveLiteralExpImpl::getSymbol() const 
+std::string PrimitiveLiteralExpImpl::getSymbol() const
 {
 	return m_symbol;
 }
@@ -371,7 +371,7 @@ void PrimitiveLiteralExpImpl::saveContent(std::shared_ptr<persistence::interface
 	}
 }
 
-std::shared_ptr<ecore::EClass> PrimitiveLiteralExpImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& PrimitiveLiteralExpImpl::eStaticClass() const
 {
 	return ocl::Expressions::ExpressionsPackage::eInstance()->getPrimitiveLiteralExp_Class();
 }
@@ -399,7 +399,7 @@ bool PrimitiveLiteralExpImpl::internalEIsSet(int featureID) const
 	return LiteralExpImpl::internalEIsSet(featureID);
 }
 
-bool PrimitiveLiteralExpImpl::eSet(int featureID, Any newValue)
+bool PrimitiveLiteralExpImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -418,7 +418,7 @@ bool PrimitiveLiteralExpImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any PrimitiveLiteralExpImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any PrimitiveLiteralExpImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

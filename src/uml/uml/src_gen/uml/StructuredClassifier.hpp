@@ -105,7 +105,7 @@ namespace uml
 			Creates a property with the specified name, type, lower bound, and upper bound as an owned attribute of this structured classifier.
 			*/
 			 
-			virtual std::shared_ptr<uml::Property> createOwnedAttribute(std::string name,std::shared_ptr<uml::Type> type,int lower,int upper) = 0;
+			virtual std::shared_ptr<uml::Property> createOwnedAttribute(std::string name, const std::shared_ptr<uml::Type>& type, int lower, int upper) = 0;
 			/*!
 			Derivation for StructuredClassifier::/part
 			result = (ownedAttribute->select(isComposite)->asSet())
@@ -126,19 +126,19 @@ namespace uml
 			<p>From package UML::StructuredClassifiers.</p>
 			*/
 			
-			virtual std::shared_ptr<SubsetUnion<uml::Property, uml::ConnectableElement, uml::NamedElement, uml::Property>> getOwnedAttribute() const = 0;
+			virtual const std::shared_ptr<SubsetUnion<uml::Property, uml::ConnectableElement, uml::NamedElement, uml::Property>>& getOwnedAttribute() const = 0;
 			/*!
 			The connectors owned by the StructuredClassifier.
 			<p>From package UML::StructuredClassifiers.</p>
 			*/
 			
-			virtual std::shared_ptr<Subset<uml::Connector, uml::Feature, uml::NamedElement>> getOwnedConnector() const = 0;
+			virtual const std::shared_ptr<Subset<uml::Connector, uml::Feature, uml::NamedElement>>& getOwnedConnector() const = 0;
 			/*!
 			The Properties specifying instances that the StructuredClassifier owns by composition. This collection is derived, selecting those owned Properties where isComposite is true.
 			<p>From package UML::StructuredClassifiers.</p>
 			*/
 			
-			virtual std::shared_ptr<Bag<uml::Property>> getPart() const = 0;
+			virtual const std::shared_ptr<Bag<uml::Property>>& getPart() const = 0;
 			
 
 			//*********************************

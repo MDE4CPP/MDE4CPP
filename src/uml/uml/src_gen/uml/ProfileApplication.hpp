@@ -94,7 +94,7 @@ namespace uml
 			Retrieves the definition (Ecore representation) of the specified named element in the profile associated with this profile application.
 			*/
 			 
-			virtual std::shared_ptr<ecore::ENamedElement> getAppliedDefinition(std::shared_ptr<uml::NamedElement> namedElement) = 0;
+			virtual std::shared_ptr<ecore::ENamedElement> getAppliedDefinition(const std::shared_ptr<uml::NamedElement>& namedElement) = 0;
 
 			//*********************************
 			// Attribute Getters & Setters
@@ -120,13 +120,13 @@ namespace uml
 			<p>From package UML::Packages.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::Profile> getAppliedProfile() const = 0;
+			virtual const std::shared_ptr<uml::Profile>& getAppliedProfile() const = 0;
 			/*!
 			References the Profiles that are applied to a Package through this ProfileApplication.
 			<p>From package UML::Packages.</p>
 			*/
 			
-			virtual void setAppliedProfile(std::shared_ptr<uml::Profile>) = 0;
+			virtual void setAppliedProfile(const std::shared_ptr<uml::Profile>&) = 0;
 			/*!
 			The package that owns the profile application.
 			<p>From package UML::Packages.</p>

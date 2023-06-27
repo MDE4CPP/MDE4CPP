@@ -105,19 +105,19 @@ namespace uml
 			<p>From package UML::Classification.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::Classifier> getGeneral() const = 0;
+			virtual const std::shared_ptr<uml::Classifier>& getGeneral() const = 0;
 			/*!
 			The general classifier in the Generalization relationship.
 			<p>From package UML::Classification.</p>
 			*/
 			
-			virtual void setGeneral(std::shared_ptr<uml::Classifier>) = 0;
+			virtual void setGeneral(const std::shared_ptr<uml::Classifier>&) = 0;
 			/*!
 			Represents a set of instances of Generalization.  A Generalization may appear in many GeneralizationSets.
 			<p>From package UML::Classification.</p>
 			*/
 			
-			virtual std::shared_ptr<Bag<uml::GeneralizationSet>> getGeneralizationSet() const = 0;
+			virtual const std::shared_ptr<Bag<uml::GeneralizationSet>>& getGeneralizationSet() const = 0;
 			/*!
 			The specializing Classifier in the Generalization relationship.
 			<p>From package UML::Classification.</p>

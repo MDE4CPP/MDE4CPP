@@ -50,7 +50,7 @@ virtual public ActivityEdgeInstance
 			virtual int countOfferedValue() ;
 			virtual std::shared_ptr<Bag<fUML::Semantics::Activities::Token> > getOfferedTokens() ;
 			virtual bool hasOffer() ;
-			virtual void sendOffer(std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> tokens) ;
+			virtual void sendOffer(const std::shared_ptr<Bag<fUML::Semantics::Activities::Token>>& tokens) ;
 			virtual std::shared_ptr<Bag<fUML::Semantics::Activities::Token> > takeOfferedTokens() ;
 			virtual std::shared_ptr<Bag<fUML::Semantics::Activities::Token> > takeOfferedTokens(int maxCount) ;
 			
@@ -61,11 +61,11 @@ virtual public ActivityEdgeInstance
 			//*********************************
 			// Reference Getters & Setters
 			//*********************************
-			virtual std::shared_ptr<uml::ActivityEdge> getEdge() const ;
-			virtual void setEdge(std::shared_ptr<uml::ActivityEdge>) ;
+			virtual const std::shared_ptr<uml::ActivityEdge>& getEdge() const ;
+			virtual void setEdge(const std::shared_ptr<uml::ActivityEdge>&) ;
 			virtual std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup> getGroup() const ;
 			virtual void setGroup(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup>) ;
-			virtual std::shared_ptr<Bag<fUML::Semantics::Activities::Offer>> getOffers() const ;
+			virtual const std::shared_ptr<Bag<fUML::Semantics::Activities::Offer>>& getOffers() const ;
 			virtual std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivation> getSource() const ;
 			virtual void setSource(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivation>) ;
 			virtual std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivation> getTarget() const ;
@@ -91,19 +91,19 @@ virtual public ActivityEdgeInstance
 			virtual void saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const;
 
 		protected:
-			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
+			virtual const std::shared_ptr<ecore::EClass>& eStaticClass() const;
 
 			//*********************************
 			// EStructuralFeature Get/Set/IsSet
 			//*********************************
 			virtual Any eGet(int featureID, bool resolve, bool coreType) const ;
-			virtual bool eSet(int featureID, Any newValue) ;
+			virtual bool eSet(int featureID, const Any& newValue) ;
 			virtual bool internalEIsSet(int featureID) const ;
 
 			//*********************************
 			// EOperation Invoke
 			//*********************************
-			virtual Any eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments) ;
+			virtual Any eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments) ;
 
 		private:
 			std::weak_ptr<fUML::Semantics::Activities::ActivityEdgeInstance> m_thisActivityEdgeInstancePtr;

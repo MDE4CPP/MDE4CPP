@@ -55,12 +55,12 @@ namespace uml
 			The guard must contain only references to values local to the Lifeline on which it resides, or values global to the whole Interaction.
 			*/
 			 
-			virtual bool guard_contain_references(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
+			virtual bool guard_contain_references(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context) ;
 			/*!
 			The guard must be placed directly prior to (above) the OccurrenceSpecification that will become the first OccurrenceSpecification within this InteractionOperand.
 			*/
 			 
-			virtual bool guard_directly_prior(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
+			virtual bool guard_directly_prior(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context) ;
 			
 			//*********************************
 			// Attribute Getters & Setters
@@ -74,19 +74,19 @@ namespace uml
 			<p>From package UML::Interactions.</p>
 			*/
 			
-			virtual std::shared_ptr<Subset<uml::InteractionFragment, uml::NamedElement>> getFragment() const ;
+			virtual const std::shared_ptr<Subset<uml::InteractionFragment, uml::NamedElement>>& getFragment() const ;
 			/*!
 			Constraint of the operand.
 			<p>From package UML::Interactions.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::InteractionConstraint> getGuard() const ;
+			virtual const std::shared_ptr<uml::InteractionConstraint>& getGuard() const ;
 			/*!
 			Constraint of the operand.
 			<p>From package UML::Interactions.</p>
 			*/
 			
-			virtual void setGuard(std::shared_ptr<uml::InteractionConstraint>) ;
+			virtual void setGuard(const std::shared_ptr<uml::InteractionConstraint>&) ;
 			
 			//*********************************
 			// Union Reference Getters
@@ -138,19 +138,19 @@ namespace uml
 			virtual void saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const;
 
 		protected:
-			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
+			virtual const std::shared_ptr<ecore::EClass>& eStaticClass() const;
 
 			//*********************************
 			// EStructuralFeature Get/Set/IsSet
 			//*********************************
 			virtual Any eGet(int featureID, bool resolve, bool coreType) const ;
-			virtual bool eSet(int featureID, Any newValue) ;
+			virtual bool eSet(int featureID, const Any& newValue) ;
 			virtual bool internalEIsSet(int featureID) const ;
 
 			//*********************************
 			// EOperation Invoke
 			//*********************************
-			virtual Any eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments) ;
+			virtual Any eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments) ;
 
 		private:
 			std::weak_ptr<uml::InteractionOperand> m_thisInteractionOperandPtr;

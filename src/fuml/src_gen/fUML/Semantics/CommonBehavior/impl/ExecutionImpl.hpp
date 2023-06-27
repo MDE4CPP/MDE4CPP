@@ -47,9 +47,9 @@ namespace fUML::Semantics::CommonBehavior
 			virtual void execute() ;
 			
 			virtual std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue> > getOutputParameterValues() ;
-			virtual std::shared_ptr<fUML::Semantics::CommonBehavior::ParameterValue> getParameterValue(std::shared_ptr<uml::Parameter> parameter) ;
+			virtual std::shared_ptr<fUML::Semantics::CommonBehavior::ParameterValue> getParameterValue(const std::shared_ptr<uml::Parameter>& parameter) ;
 			virtual std::shared_ptr<fUML::Semantics::Values::Value> new_() ;
-			virtual void setParameterValue(std::shared_ptr<fUML::Semantics::CommonBehavior::ParameterValue> parameterValue) ;
+			virtual void setParameterValue(const std::shared_ptr<fUML::Semantics::CommonBehavior::ParameterValue>& parameterValue) ;
 			virtual void terminate() ;
 			
 			//*********************************
@@ -59,11 +59,11 @@ namespace fUML::Semantics::CommonBehavior
 			//*********************************
 			// Reference Getters & Setters
 			//*********************************
-			virtual std::shared_ptr<uml::Behavior> getBehavior() const ;
-			virtual void setBehavior(std::shared_ptr<uml::Behavior>) ;
-			virtual std::shared_ptr<fUML::Semantics::StructuredClassifiers::Object> getContext() const ;
-			virtual void setContext(std::shared_ptr<fUML::Semantics::StructuredClassifiers::Object>) ;
-			virtual std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> getParameterValues() const ;
+			virtual const std::shared_ptr<uml::Behavior>& getBehavior() const ;
+			virtual void setBehavior(const std::shared_ptr<uml::Behavior>&) ;
+			virtual const std::shared_ptr<fUML::Semantics::StructuredClassifiers::Object>& getContext() const ;
+			virtual void setContext(const std::shared_ptr<fUML::Semantics::StructuredClassifiers::Object>&) ;
+			virtual const std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>>& getParameterValues() const ;
 			
 			//*********************************
 			// Union Reference Getters
@@ -85,19 +85,19 @@ namespace fUML::Semantics::CommonBehavior
 			virtual void saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const;
 
 		protected:
-			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
+			virtual const std::shared_ptr<ecore::EClass>& eStaticClass() const;
 
 			//*********************************
 			// EStructuralFeature Get/Set/IsSet
 			//*********************************
 			virtual Any eGet(int featureID, bool resolve, bool coreType) const ;
-			virtual bool eSet(int featureID, Any newValue) ;
+			virtual bool eSet(int featureID, const Any& newValue) ;
 			virtual bool internalEIsSet(int featureID) const ;
 
 			//*********************************
 			// EOperation Invoke
 			//*********************************
-			virtual Any eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments) ;
+			virtual Any eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments) ;
 
 		private:
 			std::weak_ptr<fUML::Semantics::CommonBehavior::Execution> m_thisExecutionPtr;

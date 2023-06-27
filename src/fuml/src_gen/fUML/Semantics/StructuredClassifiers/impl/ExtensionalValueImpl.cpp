@@ -43,8 +43,8 @@
 #include "fUML/Semantics/Loci/Locus.hpp"
 #include "fUML/Semantics/Values/Value.hpp"
 //Factories and Package includes
-#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/SemanticsPackage.hpp"
+#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/Loci/LociPackage.hpp"
 #include "fUML/Semantics/SimpleClassifiers/SimpleClassifiersPackage.hpp"
 #include "fUML/Semantics/StructuredClassifiers/StructuredClassifiersPackage.hpp"
@@ -141,11 +141,11 @@ void ExtensionalValueImpl::destroy()
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference locus */
-std::shared_ptr<fUML::Semantics::Loci::Locus> ExtensionalValueImpl::getLocus() const
+const std::shared_ptr<fUML::Semantics::Loci::Locus>& ExtensionalValueImpl::getLocus() const
 {
     return m_locus;
 }
-void ExtensionalValueImpl::setLocus(std::shared_ptr<fUML::Semantics::Loci::Locus> _locus)
+void ExtensionalValueImpl::setLocus(const std::shared_ptr<fUML::Semantics::Loci::Locus>& _locus)
 {
     m_locus = _locus;
 	
@@ -262,7 +262,7 @@ void ExtensionalValueImpl::saveContent(std::shared_ptr<persistence::interfaces::
 	}
 }
 
-std::shared_ptr<ecore::EClass> ExtensionalValueImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& ExtensionalValueImpl::eStaticClass() const
 {
 	return fUML::Semantics::StructuredClassifiers::StructuredClassifiersPackage::eInstance()->getExtensionalValue_Class();
 }
@@ -290,7 +290,7 @@ bool ExtensionalValueImpl::internalEIsSet(int featureID) const
 	return fUML::Semantics::SimpleClassifiers::CompoundValueImpl::internalEIsSet(featureID);
 }
 
-bool ExtensionalValueImpl::eSet(int featureID, Any newValue)
+bool ExtensionalValueImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -310,7 +310,7 @@ bool ExtensionalValueImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any ExtensionalValueImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any ExtensionalValueImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

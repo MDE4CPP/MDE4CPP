@@ -34,8 +34,8 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "fUML/Semantics/Values/ValuesFactory.hpp"
 #include "ecore/ecoreFactory.hpp"
+#include "fUML/Semantics/Values/ValuesFactory.hpp"
 #include "ocl/Expressions/ExpressionsFactory.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClassifier.hpp"
@@ -186,11 +186,11 @@ void VariableImpl::setBaseExp(std::weak_ptr<ocl::Expressions::IterateExp> _baseE
 }
 
 /* Getter & Setter for reference initExpression */
-std::shared_ptr<ocl::Expressions::OclExpression> VariableImpl::getInitExpression() const
+const std::shared_ptr<ocl::Expressions::OclExpression>& VariableImpl::getInitExpression() const
 {
     return m_initExpression;
 }
-void VariableImpl::setInitExpression(std::shared_ptr<ocl::Expressions::OclExpression> _initExpression)
+void VariableImpl::setInitExpression(const std::shared_ptr<ocl::Expressions::OclExpression>& _initExpression)
 {
     m_initExpression = _initExpression;
 	
@@ -208,22 +208,22 @@ void VariableImpl::setLoopExp(std::weak_ptr<ocl::Expressions::LoopExp> _loopExp)
 }
 
 /* Getter & Setter for reference referringExp */
-std::shared_ptr<ocl::Expressions::VariableExp> VariableImpl::getReferringExp() const
+const std::shared_ptr<ocl::Expressions::VariableExp>& VariableImpl::getReferringExp() const
 {
     return m_referringExp;
 }
-void VariableImpl::setReferringExp(std::shared_ptr<ocl::Expressions::VariableExp> _referringExp)
+void VariableImpl::setReferringExp(const std::shared_ptr<ocl::Expressions::VariableExp>& _referringExp)
 {
     m_referringExp = _referringExp;
 	
 }
 
 /* Getter & Setter for reference representedParameter */
-std::shared_ptr<ecore::EParameter> VariableImpl::getRepresentedParameter() const
+const std::shared_ptr<ecore::EParameter>& VariableImpl::getRepresentedParameter() const
 {
     return m_representedParameter;
 }
-void VariableImpl::setRepresentedParameter(std::shared_ptr<ecore::EParameter> _representedParameter)
+void VariableImpl::setRepresentedParameter(const std::shared_ptr<ecore::EParameter>& _representedParameter)
 {
     m_representedParameter = _representedParameter;
 	
@@ -252,11 +252,11 @@ void VariableImpl::setSelfOwner(std::weak_ptr<ocl::Expressions::ExpressionInOcl>
 }
 
 /* Getter & Setter for reference value */
-std::shared_ptr<fUML::Semantics::Values::Value> VariableImpl::getValue() const
+const std::shared_ptr<fUML::Semantics::Values::Value>& VariableImpl::getValue() const
 {
     return m_value;
 }
-void VariableImpl::setValue(std::shared_ptr<fUML::Semantics::Values::Value> _value)
+void VariableImpl::setValue(const std::shared_ptr<fUML::Semantics::Values::Value>& _value)
 {
     m_value = _value;
 	
@@ -536,7 +536,7 @@ void VariableImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHan
 	}
 }
 
-std::shared_ptr<ecore::EClass> VariableImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& VariableImpl::eStaticClass() const
 {
 	return ocl::Expressions::ExpressionsPackage::eInstance()->getVariable_Class();
 }
@@ -611,7 +611,7 @@ bool VariableImpl::internalEIsSet(int featureID) const
 	return ecore::ETypedElementImpl::internalEIsSet(featureID);
 }
 
-bool VariableImpl::eSet(int featureID, Any newValue)
+bool VariableImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -695,7 +695,7 @@ bool VariableImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any VariableImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any VariableImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

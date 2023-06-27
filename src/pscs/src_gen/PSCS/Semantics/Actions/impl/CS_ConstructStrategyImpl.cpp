@@ -40,12 +40,12 @@
 #include "uml/Operation.hpp"
 #include "fUML/Semantics/Loci/SemanticStrategy.hpp"
 //Factories and Package includes
-#include "PSCS/PSCSPackage.hpp"
 #include "PSCS/Semantics/SemanticsPackage.hpp"
+#include "PSCS/PSCSPackage.hpp"
 #include "PSCS/Semantics/Actions/ActionsPackage.hpp"
 #include "fUML/Semantics/Loci/LociPackage.hpp"
-#include "PSCS/Semantics/StructuredClassifiers/StructuredClassifiersPackage.hpp"
 #include "fUML/Semantics/StructuredClassifiers/StructuredClassifiersPackage.hpp"
+#include "PSCS/Semantics/StructuredClassifiers/StructuredClassifiersPackage.hpp"
 #include "uml/umlPackage.hpp"
 
 using namespace PSCS::Semantics::Actions;
@@ -102,7 +102,7 @@ CS_ConstructStrategyImpl& CS_ConstructStrategyImpl::operator=(const CS_Construct
 //*********************************
 // Operations
 //*********************************
-std::shared_ptr<fUML::Semantics::StructuredClassifiers::Object> CS_ConstructStrategyImpl::construct(std::shared_ptr<uml::Operation> constructor,std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Object> context)
+std::shared_ptr<fUML::Semantics::StructuredClassifiers::Object> CS_ConstructStrategyImpl::construct(const std::shared_ptr<uml::Operation>& constructor, const std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Object>& context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -194,7 +194,7 @@ void CS_ConstructStrategyImpl::saveContent(std::shared_ptr<persistence::interfac
 	}
 }
 
-std::shared_ptr<ecore::EClass> CS_ConstructStrategyImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& CS_ConstructStrategyImpl::eStaticClass() const
 {
 	return PSCS::Semantics::Actions::ActionsPackage::eInstance()->getCS_ConstructStrategy_Class();
 }
@@ -218,7 +218,7 @@ bool CS_ConstructStrategyImpl::internalEIsSet(int featureID) const
 	return fUML::Semantics::Loci::SemanticStrategyImpl::internalEIsSet(featureID);
 }
 
-bool CS_ConstructStrategyImpl::eSet(int featureID, Any newValue)
+bool CS_ConstructStrategyImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -230,7 +230,7 @@ bool CS_ConstructStrategyImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any CS_ConstructStrategyImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any CS_ConstructStrategyImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

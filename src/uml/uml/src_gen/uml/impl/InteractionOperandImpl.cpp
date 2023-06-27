@@ -186,12 +186,12 @@ std::shared_ptr<ecore::EObject> InteractionOperandImpl::copy() const
 //*********************************
 // Operations
 //*********************************
-bool InteractionOperandImpl::guard_contain_references(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool InteractionOperandImpl::guard_contain_references(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool InteractionOperandImpl::guard_directly_prior(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool InteractionOperandImpl::guard_directly_prior(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -204,7 +204,7 @@ bool InteractionOperandImpl::guard_directly_prior(Any diagnostics,std::shared_pt
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference fragment */
-std::shared_ptr<Subset<uml::InteractionFragment, uml::NamedElement>> InteractionOperandImpl::getFragment() const
+const std::shared_ptr<Subset<uml::InteractionFragment, uml::NamedElement>>& InteractionOperandImpl::getFragment() const
 {
 	if(m_fragment == nullptr)
 	{
@@ -225,11 +225,11 @@ std::shared_ptr<Subset<uml::InteractionFragment, uml::NamedElement>> Interaction
 }
 
 /* Getter & Setter for reference guard */
-std::shared_ptr<uml::InteractionConstraint> InteractionOperandImpl::getGuard() const
+const std::shared_ptr<uml::InteractionConstraint>& InteractionOperandImpl::getGuard() const
 {
     return m_guard;
 }
-void InteractionOperandImpl::setGuard(std::shared_ptr<uml::InteractionConstraint> _guard)
+void InteractionOperandImpl::setGuard(const std::shared_ptr<uml::InteractionConstraint>& _guard)
 {
     m_guard = _guard;
 	
@@ -440,7 +440,7 @@ void InteractionOperandImpl::saveContent(std::shared_ptr<persistence::interfaces
 	}
 }
 
-std::shared_ptr<ecore::EClass> InteractionOperandImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& InteractionOperandImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getInteractionOperand_Class();
 }
@@ -486,7 +486,7 @@ bool InteractionOperandImpl::internalEIsSet(int featureID) const
 	return result;
 }
 
-bool InteractionOperandImpl::eSet(int featureID, Any newValue)
+bool InteractionOperandImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -550,7 +550,7 @@ bool InteractionOperandImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any InteractionOperandImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any InteractionOperandImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

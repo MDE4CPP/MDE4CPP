@@ -263,7 +263,7 @@ void MessageEventImpl::saveContent(std::shared_ptr<persistence::interfaces::XSav
 	}
 }
 
-std::shared_ptr<ecore::EClass> MessageEventImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& MessageEventImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getMessageEvent_Class();
 }
@@ -287,7 +287,7 @@ bool MessageEventImpl::internalEIsSet(int featureID) const
 	return EventImpl::internalEIsSet(featureID);
 }
 
-bool MessageEventImpl::eSet(int featureID, Any newValue)
+bool MessageEventImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -299,7 +299,7 @@ bool MessageEventImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any MessageEventImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any MessageEventImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

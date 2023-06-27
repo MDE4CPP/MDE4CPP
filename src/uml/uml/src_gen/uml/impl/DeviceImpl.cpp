@@ -440,7 +440,7 @@ void DeviceImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandl
 	}
 }
 
-std::shared_ptr<ecore::EClass> DeviceImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& DeviceImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getDevice_Class();
 }
@@ -464,7 +464,7 @@ bool DeviceImpl::internalEIsSet(int featureID) const
 	return NodeImpl::internalEIsSet(featureID);
 }
 
-bool DeviceImpl::eSet(int featureID, Any newValue)
+bool DeviceImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -476,7 +476,7 @@ bool DeviceImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any DeviceImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any DeviceImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

@@ -258,37 +258,37 @@ std::shared_ptr<ecore::EObject> StateMachineImpl::copy() const
 //*********************************
 // Operations
 //*********************************
-std::shared_ptr<uml::Region> StateMachineImpl::LCA(std::shared_ptr<uml::Vertex> s1,std::shared_ptr<uml::Vertex> s2)
+std::shared_ptr<uml::Region> StateMachineImpl::LCA(const std::shared_ptr<uml::Vertex>& s1, const std::shared_ptr<uml::Vertex>& s2)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-std::shared_ptr<uml::State> StateMachineImpl::LCAState(std::shared_ptr<uml::Vertex> v1,std::shared_ptr<uml::Vertex> v2)
+std::shared_ptr<uml::State> StateMachineImpl::LCAState(const std::shared_ptr<uml::Vertex>& v1, const std::shared_ptr<uml::Vertex>& v2)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool StateMachineImpl::ancestor(std::shared_ptr<uml::Vertex> s1,std::shared_ptr<uml::Vertex> s2)
+bool StateMachineImpl::ancestor(const std::shared_ptr<uml::Vertex>& s1, const std::shared_ptr<uml::Vertex>& s2)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool StateMachineImpl::classifier_context(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool StateMachineImpl::classifier_context(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool StateMachineImpl::connection_points(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool StateMachineImpl::connection_points(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool StateMachineImpl::context_classifier(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool StateMachineImpl::context_classifier(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool StateMachineImpl::method(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool StateMachineImpl::method(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -301,7 +301,7 @@ bool StateMachineImpl::method(Any diagnostics,std::shared_ptr<std::map < Any, An
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference connectionPoint */
-std::shared_ptr<Subset<uml::Pseudostate, uml::NamedElement>> StateMachineImpl::getConnectionPoint() const
+const std::shared_ptr<Subset<uml::Pseudostate, uml::NamedElement>>& StateMachineImpl::getConnectionPoint() const
 {
 	if(m_connectionPoint == nullptr)
 	{
@@ -322,7 +322,7 @@ std::shared_ptr<Subset<uml::Pseudostate, uml::NamedElement>> StateMachineImpl::g
 }
 
 /* Getter & Setter for reference extendedStateMachine */
-std::shared_ptr<Bag<uml::StateMachine>> StateMachineImpl::getExtendedStateMachine() const
+const std::shared_ptr<Bag<uml::StateMachine>>& StateMachineImpl::getExtendedStateMachine() const
 {
 	//Cast conversion from redefined container reference Behavior::redefinedBehavior 
 	std::shared_ptr<Bag<uml::StateMachine>> extendedStateMachine(new Bag<uml::StateMachine>());
@@ -344,7 +344,7 @@ std::shared_ptr<Bag<uml::StateMachine>> StateMachineImpl::getExtendedStateMachin
 }
 
 /* Getter & Setter for reference region */
-std::shared_ptr<Subset<uml::Region, uml::NamedElement>> StateMachineImpl::getRegion() const
+const std::shared_ptr<Subset<uml::Region, uml::NamedElement>>& StateMachineImpl::getRegion() const
 {
 	if(m_region == nullptr)
 	{
@@ -365,7 +365,7 @@ std::shared_ptr<Subset<uml::Region, uml::NamedElement>> StateMachineImpl::getReg
 }
 
 /* Getter & Setter for reference submachineState */
-std::shared_ptr<Bag<uml::State>> StateMachineImpl::getSubmachineState() const
+const std::shared_ptr<Bag<uml::State>>& StateMachineImpl::getSubmachineState() const
 {
 	if(m_submachineState == nullptr)
 	{
@@ -753,7 +753,7 @@ void StateMachineImpl::saveContent(std::shared_ptr<persistence::interfaces::XSav
 	}
 }
 
-std::shared_ptr<ecore::EClass> StateMachineImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& StateMachineImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getStateMachine_Class();
 }
@@ -793,7 +793,7 @@ bool StateMachineImpl::internalEIsSet(int featureID) const
 	return BehaviorImpl::internalEIsSet(featureID);
 }
 
-bool StateMachineImpl::eSet(int featureID, Any newValue)
+bool StateMachineImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -953,7 +953,7 @@ bool StateMachineImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any StateMachineImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any StateMachineImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

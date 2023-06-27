@@ -165,7 +165,7 @@ std::shared_ptr<ecore::EObject> TimeExpressionImpl::copy() const
 //*********************************
 // Operations
 //*********************************
-bool TimeExpressionImpl::no_expr_requires_observation(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool TimeExpressionImpl::no_expr_requires_observation(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -178,18 +178,18 @@ bool TimeExpressionImpl::no_expr_requires_observation(Any diagnostics,std::share
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference expr */
-std::shared_ptr<uml::ValueSpecification> TimeExpressionImpl::getExpr() const
+const std::shared_ptr<uml::ValueSpecification>& TimeExpressionImpl::getExpr() const
 {
     return m_expr;
 }
-void TimeExpressionImpl::setExpr(std::shared_ptr<uml::ValueSpecification> _expr)
+void TimeExpressionImpl::setExpr(const std::shared_ptr<uml::ValueSpecification>& _expr)
 {
     m_expr = _expr;
 	
 }
 
 /* Getter & Setter for reference observation */
-std::shared_ptr<Bag<uml::Observation>> TimeExpressionImpl::getObservation() const
+const std::shared_ptr<Bag<uml::Observation>>& TimeExpressionImpl::getObservation() const
 {
 	if(m_observation == nullptr)
 	{
@@ -401,7 +401,7 @@ void TimeExpressionImpl::saveContent(std::shared_ptr<persistence::interfaces::XS
 	}
 }
 
-std::shared_ptr<ecore::EClass> TimeExpressionImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& TimeExpressionImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getTimeExpression_Class();
 }
@@ -433,7 +433,7 @@ bool TimeExpressionImpl::internalEIsSet(int featureID) const
 	return ValueSpecificationImpl::internalEIsSet(featureID);
 }
 
-bool TimeExpressionImpl::eSet(int featureID, Any newValue)
+bool TimeExpressionImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -490,7 +490,7 @@ bool TimeExpressionImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any TimeExpressionImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any TimeExpressionImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

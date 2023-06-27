@@ -342,7 +342,7 @@ void InvalidLiteralExpImpl::saveContent(std::shared_ptr<persistence::interfaces:
 	}
 }
 
-std::shared_ptr<ecore::EClass> InvalidLiteralExpImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& InvalidLiteralExpImpl::eStaticClass() const
 {
 	return ocl::Expressions::ExpressionsPackage::eInstance()->getInvalidLiteralExp_Class();
 }
@@ -366,7 +366,7 @@ bool InvalidLiteralExpImpl::internalEIsSet(int featureID) const
 	return LiteralExpImpl::internalEIsSet(featureID);
 }
 
-bool InvalidLiteralExpImpl::eSet(int featureID, Any newValue)
+bool InvalidLiteralExpImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -378,7 +378,7 @@ bool InvalidLiteralExpImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any InvalidLiteralExpImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any InvalidLiteralExpImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

@@ -132,7 +132,7 @@ std::shared_ptr<ecore::EObject> GeneralizationImpl::copy() const
 // Attribute Getters & Setters
 //*********************************
 /* Getter & Setter for attribute isSubstitutable */
-bool GeneralizationImpl::getIsSubstitutable() const 
+bool GeneralizationImpl::getIsSubstitutable() const
 {
 	return m_isSubstitutable;
 }
@@ -146,18 +146,18 @@ void GeneralizationImpl::setIsSubstitutable(bool _isSubstitutable)
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference general */
-std::shared_ptr<uml::Classifier> GeneralizationImpl::getGeneral() const
+const std::shared_ptr<uml::Classifier>& GeneralizationImpl::getGeneral() const
 {
     return m_general;
 }
-void GeneralizationImpl::setGeneral(std::shared_ptr<uml::Classifier> _general)
+void GeneralizationImpl::setGeneral(const std::shared_ptr<uml::Classifier>& _general)
 {
     m_general = _general;
 	
 }
 
 /* Getter & Setter for reference generalizationSet */
-std::shared_ptr<Bag<uml::GeneralizationSet>> GeneralizationImpl::getGeneralizationSet() const
+const std::shared_ptr<Bag<uml::GeneralizationSet>>& GeneralizationImpl::getGeneralizationSet() const
 {
 	if(m_generalizationSet == nullptr)
 	{
@@ -421,7 +421,7 @@ void GeneralizationImpl::saveContent(std::shared_ptr<persistence::interfaces::XS
 	}
 }
 
-std::shared_ptr<ecore::EClass> GeneralizationImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& GeneralizationImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getGeneralization_Class();
 }
@@ -464,7 +464,7 @@ bool GeneralizationImpl::internalEIsSet(int featureID) const
 	return DirectedRelationshipImpl::internalEIsSet(featureID);
 }
 
-bool GeneralizationImpl::eSet(int featureID, Any newValue)
+bool GeneralizationImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -536,7 +536,7 @@ bool GeneralizationImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any GeneralizationImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any GeneralizationImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

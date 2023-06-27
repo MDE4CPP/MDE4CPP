@@ -43,12 +43,12 @@ namespace fUML::Semantics::Values
 			//*********************************
 			// Operations
 			//*********************************
-			virtual bool IsInstanceOf(std::shared_ptr<uml::Classifier> classifier) ;
+			virtual bool IsInstanceOf(const std::shared_ptr<uml::Classifier>& classifier) ;
 			virtual std::shared_ptr<fUML::Semantics::Values::Value> _copy() ;
-			virtual bool checkAllParents(std::shared_ptr<uml::Classifier> type,std::shared_ptr<uml::Classifier> classifier) ;
-			virtual bool equals(std::shared_ptr<fUML::Semantics::Values::Value> otherValue) ;
+			virtual bool checkAllParents(const std::shared_ptr<uml::Classifier>& type, const std::shared_ptr<uml::Classifier>& classifier) ;
+			virtual bool equals(const std::shared_ptr<fUML::Semantics::Values::Value>& otherValue) ;
 			virtual std::shared_ptr<Bag<uml::Classifier> > getTypes() const ;
-			virtual bool hasTypes(std::shared_ptr<uml::Classifier> type) ;
+			virtual bool hasTypes(const std::shared_ptr<uml::Classifier>& type) ;
 			virtual std::shared_ptr<fUML::Semantics::Values::Value> new_() ;
 			virtual std::string objectId() ;
 			virtual std::shared_ptr<uml::ValueSpecification> specify() ;
@@ -82,19 +82,19 @@ namespace fUML::Semantics::Values
 			virtual void saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const;
 
 		protected:
-			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
+			virtual const std::shared_ptr<ecore::EClass>& eStaticClass() const;
 
 			//*********************************
 			// EStructuralFeature Get/Set/IsSet
 			//*********************************
 			virtual Any eGet(int featureID, bool resolve, bool coreType) const ;
-			virtual bool eSet(int featureID, Any newValue) ;
+			virtual bool eSet(int featureID, const Any& newValue) ;
 			virtual bool internalEIsSet(int featureID) const ;
 
 			//*********************************
 			// EOperation Invoke
 			//*********************************
-			virtual Any eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments) ;
+			virtual Any eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments) ;
 
 		private:
 			std::weak_ptr<fUML::Semantics::Values::Value> m_thisValuePtr;

@@ -95,13 +95,13 @@ namespace uml
 			endif
 			*/
 			 
-			virtual bool incoming_object_flow(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
+			virtual bool incoming_object_flow(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context) = 0;
 			/*!
 			A JoinNode has one outgoing ActivityEdge.
 			outgoing->size() = 1
 			*/
 			 
-			virtual bool one_outgoing_edge(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
+			virtual bool one_outgoing_edge(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context) = 0;
 
 			//*********************************
 			// Attribute Getters & Setters
@@ -127,13 +127,13 @@ namespace uml
 			<p>From package UML::Activities.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::ValueSpecification> getJoinSpec() const = 0;
+			virtual const std::shared_ptr<uml::ValueSpecification>& getJoinSpec() const = 0;
 			/*!
 			A ValueSpecification giving the condition under which the JoinNode will offer a token on its outgoing ActivityEdge. If no joinSpec is specified, then the JoinNode will offer an outgoing token if tokens are offered on all of its incoming ActivityEdges (an "and" condition).
 			<p>From package UML::Activities.</p>
 			*/
 			
-			virtual void setJoinSpec(std::shared_ptr<uml::ValueSpecification>) = 0;
+			virtual void setJoinSpec(const std::shared_ptr<uml::ValueSpecification>&) = 0;
 
 			//*********************************
 			// Union Reference Getters

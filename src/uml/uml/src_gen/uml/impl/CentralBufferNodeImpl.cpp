@@ -307,7 +307,7 @@ void CentralBufferNodeImpl::saveContent(std::shared_ptr<persistence::interfaces:
 	}
 }
 
-std::shared_ptr<ecore::EClass> CentralBufferNodeImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& CentralBufferNodeImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getCentralBufferNode_Class();
 }
@@ -331,7 +331,7 @@ bool CentralBufferNodeImpl::internalEIsSet(int featureID) const
 	return ObjectNodeImpl::internalEIsSet(featureID);
 }
 
-bool CentralBufferNodeImpl::eSet(int featureID, Any newValue)
+bool CentralBufferNodeImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -343,7 +343,7 @@ bool CentralBufferNodeImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any CentralBufferNodeImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any CentralBufferNodeImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

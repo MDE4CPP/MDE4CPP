@@ -71,13 +71,13 @@ namespace uml
 			value.type.conformsTo(type)
 			*/
 			 
-			virtual bool compatible_type(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
+			virtual bool compatible_type(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context) ;
 			/*!
 			A ValuePin may have no incoming ActivityEdges.
 			incoming->isEmpty()
 			*/
 			 
-			virtual bool no_incoming_edges(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
+			virtual bool no_incoming_edges(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context) ;
 			
 			//*********************************
 			// Attribute Getters & Setters
@@ -91,13 +91,13 @@ namespace uml
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::ValueSpecification> getValue() const ;
+			virtual const std::shared_ptr<uml::ValueSpecification>& getValue() const ;
 			/*!
 			The ValueSpecification that is evaluated to obtain the value that the ValuePin will provide.
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual void setValue(std::shared_ptr<uml::ValueSpecification>) ;
+			virtual void setValue(const std::shared_ptr<uml::ValueSpecification>&) ;
 			
 			//*********************************
 			// Union Reference Getters
@@ -143,19 +143,19 @@ namespace uml
 			virtual void saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const;
 
 		protected:
-			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
+			virtual const std::shared_ptr<ecore::EClass>& eStaticClass() const;
 
 			//*********************************
 			// EStructuralFeature Get/Set/IsSet
 			//*********************************
 			virtual Any eGet(int featureID, bool resolve, bool coreType) const ;
-			virtual bool eSet(int featureID, Any newValue) ;
+			virtual bool eSet(int featureID, const Any& newValue) ;
 			virtual bool internalEIsSet(int featureID) const ;
 
 			//*********************************
 			// EOperation Invoke
 			//*********************************
-			virtual Any eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments) ;
+			virtual Any eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments) ;
 
 		private:
 			std::weak_ptr<uml::ValuePin> m_thisValuePinPtr;

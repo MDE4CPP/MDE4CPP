@@ -273,7 +273,7 @@ void AnyReceiveEventImpl::saveContent(std::shared_ptr<persistence::interfaces::X
 	}
 }
 
-std::shared_ptr<ecore::EClass> AnyReceiveEventImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& AnyReceiveEventImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getAnyReceiveEvent_Class();
 }
@@ -297,7 +297,7 @@ bool AnyReceiveEventImpl::internalEIsSet(int featureID) const
 	return MessageEventImpl::internalEIsSet(featureID);
 }
 
-bool AnyReceiveEventImpl::eSet(int featureID, Any newValue)
+bool AnyReceiveEventImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -309,7 +309,7 @@ bool AnyReceiveEventImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any AnyReceiveEventImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any AnyReceiveEventImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

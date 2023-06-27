@@ -151,47 +151,47 @@ std::shared_ptr<ecore::EObject> PseudostateImpl::copy() const
 //*********************************
 // Operations
 //*********************************
-bool PseudostateImpl::choice_vertex(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool PseudostateImpl::choice_vertex(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool PseudostateImpl::fork_vertex(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool PseudostateImpl::fork_vertex(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool PseudostateImpl::history_vertices(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool PseudostateImpl::history_vertices(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool PseudostateImpl::initial_vertex(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool PseudostateImpl::initial_vertex(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool PseudostateImpl::join_vertex(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool PseudostateImpl::join_vertex(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool PseudostateImpl::junction_vertex(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool PseudostateImpl::junction_vertex(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool PseudostateImpl::outgoing_from_initial(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool PseudostateImpl::outgoing_from_initial(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool PseudostateImpl::transitions_incoming(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool PseudostateImpl::transitions_incoming(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool PseudostateImpl::transitions_outgoing(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool PseudostateImpl::transitions_outgoing(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -200,7 +200,7 @@ bool PseudostateImpl::transitions_outgoing(Any diagnostics,std::shared_ptr<std::
 // Attribute Getters & Setters
 //*********************************
 /* Getter & Setter for attribute kind */
-uml::PseudostateKind PseudostateImpl::getKind() const 
+uml::PseudostateKind PseudostateImpl::getKind() const
 {
 	return m_kind;
 }
@@ -492,7 +492,7 @@ void PseudostateImpl::saveContent(std::shared_ptr<persistence::interfaces::XSave
 	}
 }
 
-std::shared_ptr<ecore::EClass> PseudostateImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& PseudostateImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getPseudostate_Class();
 }
@@ -534,7 +534,7 @@ bool PseudostateImpl::internalEIsSet(int featureID) const
 	return VertexImpl::internalEIsSet(featureID);
 }
 
-bool PseudostateImpl::eSet(int featureID, Any newValue)
+bool PseudostateImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -569,7 +569,7 @@ bool PseudostateImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any PseudostateImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any PseudostateImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

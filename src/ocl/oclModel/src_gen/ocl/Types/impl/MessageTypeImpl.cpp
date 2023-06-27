@@ -127,22 +127,22 @@ std::shared_ptr<ecore::EObject> MessageTypeImpl::copy() const
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference referredOperation */
-std::shared_ptr<ecore::EOperation> MessageTypeImpl::getReferredOperation() const
+const std::shared_ptr<ecore::EOperation>& MessageTypeImpl::getReferredOperation() const
 {
     return m_referredOperation;
 }
-void MessageTypeImpl::setReferredOperation(std::shared_ptr<ecore::EOperation> _referredOperation)
+void MessageTypeImpl::setReferredOperation(const std::shared_ptr<ecore::EOperation>& _referredOperation)
 {
     m_referredOperation = _referredOperation;
 	
 }
 
 /* Getter & Setter for reference referredSignal */
-std::shared_ptr<uml::Signal> MessageTypeImpl::getReferredSignal() const
+const std::shared_ptr<uml::Signal>& MessageTypeImpl::getReferredSignal() const
 {
     return m_referredSignal;
 }
-void MessageTypeImpl::setReferredSignal(std::shared_ptr<uml::Signal> _referredSignal)
+void MessageTypeImpl::setReferredSignal(const std::shared_ptr<uml::Signal>& _referredSignal)
 {
     m_referredSignal = _referredSignal;
 	
@@ -281,7 +281,7 @@ void MessageTypeImpl::saveContent(std::shared_ptr<persistence::interfaces::XSave
 	}
 }
 
-std::shared_ptr<ecore::EClass> MessageTypeImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& MessageTypeImpl::eStaticClass() const
 {
 	return ocl::Types::TypesPackage::eInstance()->getMessageType_Class();
 }
@@ -313,7 +313,7 @@ bool MessageTypeImpl::internalEIsSet(int featureID) const
 	return ecore::EClassifierImpl::internalEIsSet(featureID);
 }
 
-bool MessageTypeImpl::eSet(int featureID, Any newValue)
+bool MessageTypeImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -341,7 +341,7 @@ bool MessageTypeImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any MessageTypeImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any MessageTypeImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

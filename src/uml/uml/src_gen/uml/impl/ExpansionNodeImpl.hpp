@@ -55,7 +55,7 @@ namespace uml
 			regionAsInput->notEmpty() xor regionAsOutput->notEmpty()
 			*/
 			 
-			virtual bool region_as_input_or_output(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
+			virtual bool region_as_input_or_output(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context) ;
 			
 			//*********************************
 			// Attribute Getters & Setters
@@ -69,25 +69,25 @@ namespace uml
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::ExpansionRegion> getRegionAsInput() const ;
+			virtual const std::shared_ptr<uml::ExpansionRegion>& getRegionAsInput() const ;
 			/*!
 			The ExpansionRegion for which the ExpansionNode is an input.
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual void setRegionAsInput(std::shared_ptr<uml::ExpansionRegion>) ;
+			virtual void setRegionAsInput(const std::shared_ptr<uml::ExpansionRegion>&) ;
 			/*!
 			The ExpansionRegion for which the ExpansionNode is an output.
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::ExpansionRegion> getRegionAsOutput() const ;
+			virtual const std::shared_ptr<uml::ExpansionRegion>& getRegionAsOutput() const ;
 			/*!
 			The ExpansionRegion for which the ExpansionNode is an output.
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual void setRegionAsOutput(std::shared_ptr<uml::ExpansionRegion>) ;
+			virtual void setRegionAsOutput(const std::shared_ptr<uml::ExpansionRegion>&) ;
 			
 			//*********************************
 			// Union Reference Getters
@@ -133,19 +133,19 @@ namespace uml
 			virtual void saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const;
 
 		protected:
-			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
+			virtual const std::shared_ptr<ecore::EClass>& eStaticClass() const;
 
 			//*********************************
 			// EStructuralFeature Get/Set/IsSet
 			//*********************************
 			virtual Any eGet(int featureID, bool resolve, bool coreType) const ;
-			virtual bool eSet(int featureID, Any newValue) ;
+			virtual bool eSet(int featureID, const Any& newValue) ;
 			virtual bool internalEIsSet(int featureID) const ;
 
 			//*********************************
 			// EOperation Invoke
 			//*********************************
-			virtual Any eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments) ;
+			virtual Any eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments) ;
 
 		private:
 			std::weak_ptr<uml::ExpansionNode> m_thisExpansionNodePtr;

@@ -130,22 +130,22 @@ std::shared_ptr<ecore::EObject> CollectionRangeImpl::copy() const
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference first */
-std::shared_ptr<ocl::Expressions::OclExpression> CollectionRangeImpl::getFirst() const
+const std::shared_ptr<ocl::Expressions::OclExpression>& CollectionRangeImpl::getFirst() const
 {
     return m_first;
 }
-void CollectionRangeImpl::setFirst(std::shared_ptr<ocl::Expressions::OclExpression> _first)
+void CollectionRangeImpl::setFirst(const std::shared_ptr<ocl::Expressions::OclExpression>& _first)
 {
     m_first = _first;
 	
 }
 
 /* Getter & Setter for reference last */
-std::shared_ptr<ocl::Expressions::OclExpression> CollectionRangeImpl::getLast() const
+const std::shared_ptr<ocl::Expressions::OclExpression>& CollectionRangeImpl::getLast() const
 {
     return m_last;
 }
-void CollectionRangeImpl::setLast(std::shared_ptr<ocl::Expressions::OclExpression> _last)
+void CollectionRangeImpl::setLast(const std::shared_ptr<ocl::Expressions::OclExpression>& _last)
 {
     m_last = _last;
 	
@@ -274,7 +274,7 @@ void CollectionRangeImpl::saveContent(std::shared_ptr<persistence::interfaces::X
 	}
 }
 
-std::shared_ptr<ecore::EClass> CollectionRangeImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& CollectionRangeImpl::eStaticClass() const
 {
 	return ocl::Expressions::ExpressionsPackage::eInstance()->getCollectionRange_Class();
 }
@@ -306,7 +306,7 @@ bool CollectionRangeImpl::internalEIsSet(int featureID) const
 	return CollectionLiteralPartImpl::internalEIsSet(featureID);
 }
 
-bool CollectionRangeImpl::eSet(int featureID, Any newValue)
+bool CollectionRangeImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -334,7 +334,7 @@ bool CollectionRangeImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any CollectionRangeImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any CollectionRangeImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

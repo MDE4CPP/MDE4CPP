@@ -72,9 +72,9 @@ namespace ecore
 			//*********************************
 			// Operations
 			//*********************************
-			virtual std::string convertToString(std::shared_ptr<ecore::EDataType> eDataType,Any instanceValue) const = 0;
-			virtual std::shared_ptr<ecore::EObject> create(std::shared_ptr<ecore::EClass> eClass) const = 0;
-			virtual Any createFromString(std::shared_ptr<ecore::EDataType> eDataType,std::string literalValue) const = 0;
+			virtual std::string convertToString(const std::shared_ptr<ecore::EDataType>& eDataType, const Any& instanceValue) const = 0;
+			virtual std::shared_ptr<ecore::EObject> create(const std::shared_ptr<ecore::EClass>& eClass) const = 0;
+			virtual Any createFromString(const std::shared_ptr<ecore::EDataType>& eDataType, std::string literalValue) const = 0;
 
 			//*********************************
 			// Attribute Getters & Setters
@@ -83,8 +83,8 @@ namespace ecore
 			//*********************************
 			// Reference Getters & Setters
 			//*********************************
-			virtual std::shared_ptr<ecore::EPackage> getEPackage() const = 0;
-			virtual void setEPackage(std::shared_ptr<ecore::EPackage>) = 0;
+			virtual const std::shared_ptr<ecore::EPackage>& getEPackage() const = 0;
+			virtual void setEPackage(const std::shared_ptr<ecore::EPackage>&) = 0;
 
 			//*********************************
 			// Union Reference Getters

@@ -59,10 +59,10 @@ namespace ecore
 			//*********************************
 			// Reference Getters & Setters
 			//*********************************
-			virtual std::shared_ptr<Subset<ecore::EClassifier, ecore::EObject>> getEClassifiers() const ;
-			virtual std::shared_ptr<ecore::EFactory> getEFactoryInstance() const ;
-			virtual void setEFactoryInstance(std::shared_ptr<ecore::EFactory>) ;
-			virtual std::shared_ptr<Bag<ecore::EPackage>> getESubpackages() const ;
+			virtual const std::shared_ptr<Subset<ecore::EClassifier, ecore::EObject>>& getEClassifiers() const ;
+			virtual const std::shared_ptr<ecore::EFactory>& getEFactoryInstance() const ;
+			virtual void setEFactoryInstance(const std::shared_ptr<ecore::EFactory>&) ;
+			virtual const std::shared_ptr<Bag<ecore::EPackage>>& getESubpackages() const ;
 			virtual std::weak_ptr<ecore::EPackage> getESuperPackage() const ;
 			
 			//*********************************
@@ -86,19 +86,19 @@ namespace ecore
 			virtual void saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const;
 
 		protected:
-			virtual std::shared_ptr<EClass> eStaticClass() const;
+			virtual const std::shared_ptr<EClass>& eStaticClass() const;
 
 			//*********************************
 			// EStructuralFeature Get/Set/IsSet
 			//*********************************
 			virtual Any eGet(int featureID, bool resolve, bool coreType) const ;
-			virtual bool eSet(int featureID, Any newValue) ;
+			virtual bool eSet(int featureID, const Any& newValue) ;
 			virtual bool internalEIsSet(int featureID) const ;
 
 			//*********************************
 			// EOperation Invoke
 			//*********************************
-			virtual Any eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments) ;
+			virtual Any eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments) ;
 
 		private:
 			std::weak_ptr<ecore::EPackage> m_thisEPackagePtr;

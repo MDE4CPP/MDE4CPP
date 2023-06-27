@@ -344,7 +344,7 @@ void IteratorExpImpl::saveContent(std::shared_ptr<persistence::interfaces::XSave
 	}
 }
 
-std::shared_ptr<ecore::EClass> IteratorExpImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& IteratorExpImpl::eStaticClass() const
 {
 	return ocl::Expressions::ExpressionsPackage::eInstance()->getIteratorExp_Class();
 }
@@ -368,7 +368,7 @@ bool IteratorExpImpl::internalEIsSet(int featureID) const
 	return LoopExpImpl::internalEIsSet(featureID);
 }
 
-bool IteratorExpImpl::eSet(int featureID, Any newValue)
+bool IteratorExpImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -380,7 +380,7 @@ bool IteratorExpImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any IteratorExpImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any IteratorExpImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

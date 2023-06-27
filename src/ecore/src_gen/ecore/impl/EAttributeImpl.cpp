@@ -127,7 +127,7 @@ std::shared_ptr<ecore::EObject> EAttributeImpl::copy() const
 // Attribute Getters & Setters
 //*********************************
 /* Getter & Setter for attribute iD */
-bool EAttributeImpl::isID() const 
+bool EAttributeImpl::isID() const
 {
 	return m_iD;
 }
@@ -141,7 +141,7 @@ void EAttributeImpl::setID(bool _iD)
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference eAttributeType */
-std::shared_ptr<ecore::EDataType> EAttributeImpl::getEAttributeType() const
+const std::shared_ptr<ecore::EDataType>& EAttributeImpl::getEAttributeType() const
 {
     return m_eAttributeType;
 }
@@ -273,7 +273,7 @@ void EAttributeImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveH
 	}
 }
 
-std::shared_ptr<EClass> EAttributeImpl::eStaticClass() const
+const std::shared_ptr<EClass>& EAttributeImpl::eStaticClass() const
 {
 	return ecore::ecorePackage::eInstance()->getEAttribute_Class();
 }
@@ -305,7 +305,7 @@ bool EAttributeImpl::internalEIsSet(int featureID) const
 	return EStructuralFeatureImpl::internalEIsSet(featureID);
 }
 
-bool EAttributeImpl::eSet(int featureID, Any newValue)
+bool EAttributeImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -324,7 +324,7 @@ bool EAttributeImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any EAttributeImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any EAttributeImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

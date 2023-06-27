@@ -157,12 +157,12 @@ std::shared_ptr<ecore::EObject> DestroyObjectActionImpl::copy() const
 //*********************************
 // Operations
 //*********************************
-bool DestroyObjectActionImpl::multiplicity(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool DestroyObjectActionImpl::multiplicity(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool DestroyObjectActionImpl::no_type(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool DestroyObjectActionImpl::no_type(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -171,7 +171,7 @@ bool DestroyObjectActionImpl::no_type(Any diagnostics,std::shared_ptr<std::map <
 // Attribute Getters & Setters
 //*********************************
 /* Getter & Setter for attribute isDestroyLinks */
-bool DestroyObjectActionImpl::getIsDestroyLinks() const 
+bool DestroyObjectActionImpl::getIsDestroyLinks() const
 {
 	return m_isDestroyLinks;
 }
@@ -182,7 +182,7 @@ void DestroyObjectActionImpl::setIsDestroyLinks(bool _isDestroyLinks)
 }
 
 /* Getter & Setter for attribute isDestroyOwnedObjects */
-bool DestroyObjectActionImpl::getIsDestroyOwnedObjects() const 
+bool DestroyObjectActionImpl::getIsDestroyOwnedObjects() const
 {
 	return m_isDestroyOwnedObjects;
 }
@@ -196,11 +196,11 @@ void DestroyObjectActionImpl::setIsDestroyOwnedObjects(bool _isDestroyOwnedObjec
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference target */
-std::shared_ptr<uml::InputPin> DestroyObjectActionImpl::getTarget() const
+const std::shared_ptr<uml::InputPin>& DestroyObjectActionImpl::getTarget() const
 {
     return m_target;
 }
-void DestroyObjectActionImpl::setTarget(std::shared_ptr<uml::InputPin> _target)
+void DestroyObjectActionImpl::setTarget(const std::shared_ptr<uml::InputPin>& _target)
 {
     m_target = _target;
 	
@@ -444,7 +444,7 @@ void DestroyObjectActionImpl::saveContent(std::shared_ptr<persistence::interface
 	}
 }
 
-std::shared_ptr<ecore::EClass> DestroyObjectActionImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& DestroyObjectActionImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getDestroyObjectAction_Class();
 }
@@ -480,7 +480,7 @@ bool DestroyObjectActionImpl::internalEIsSet(int featureID) const
 	return ActionImpl::internalEIsSet(featureID);
 }
 
-bool DestroyObjectActionImpl::eSet(int featureID, Any newValue)
+bool DestroyObjectActionImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -514,7 +514,7 @@ bool DestroyObjectActionImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any DestroyObjectActionImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any DestroyObjectActionImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

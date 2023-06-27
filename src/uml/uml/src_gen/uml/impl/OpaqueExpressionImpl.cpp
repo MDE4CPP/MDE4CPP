@@ -204,17 +204,17 @@ bool OpaqueExpressionImpl::isPositive()
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool OpaqueExpressionImpl::language_body_size(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool OpaqueExpressionImpl::language_body_size(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool OpaqueExpressionImpl::one_return_result_parameter(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool OpaqueExpressionImpl::one_return_result_parameter(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool OpaqueExpressionImpl::only_return_result_parameters(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool OpaqueExpressionImpl::only_return_result_parameters(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -228,7 +228,7 @@ int OpaqueExpressionImpl::value()
 // Attribute Getters & Setters
 //*********************************
 /* Getter & Setter for attribute body */
-std::shared_ptr<Bag<std::string>> OpaqueExpressionImpl::getBody() const 
+const std::shared_ptr<Bag<std::string>>& OpaqueExpressionImpl::getBody() const
 {
 	if(m_body == nullptr)
 	{
@@ -238,7 +238,7 @@ std::shared_ptr<Bag<std::string>> OpaqueExpressionImpl::getBody() const
 }
 
 /* Getter & Setter for attribute language */
-std::shared_ptr<Bag<std::string>> OpaqueExpressionImpl::getLanguage() const 
+const std::shared_ptr<Bag<std::string>>& OpaqueExpressionImpl::getLanguage() const
 {
 	if(m_language == nullptr)
 	{
@@ -251,18 +251,18 @@ std::shared_ptr<Bag<std::string>> OpaqueExpressionImpl::getLanguage() const
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference behavior */
-std::shared_ptr<uml::Behavior> OpaqueExpressionImpl::getBehavior() const
+const std::shared_ptr<uml::Behavior>& OpaqueExpressionImpl::getBehavior() const
 {
     return m_behavior;
 }
-void OpaqueExpressionImpl::setBehavior(std::shared_ptr<uml::Behavior> _behavior)
+void OpaqueExpressionImpl::setBehavior(const std::shared_ptr<uml::Behavior>& _behavior)
 {
     m_behavior = _behavior;
 	
 }
 
 /* Getter & Setter for reference result */
-std::shared_ptr<uml::Parameter> OpaqueExpressionImpl::getResult() const
+const std::shared_ptr<uml::Parameter>& OpaqueExpressionImpl::getResult() const
 {
     return m_result;
 }
@@ -479,7 +479,7 @@ void OpaqueExpressionImpl::saveContent(std::shared_ptr<persistence::interfaces::
 	}
 }
 
-std::shared_ptr<ecore::EClass> OpaqueExpressionImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& OpaqueExpressionImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getOpaqueExpression_Class();
 }
@@ -519,7 +519,7 @@ bool OpaqueExpressionImpl::internalEIsSet(int featureID) const
 	return ValueSpecificationImpl::internalEIsSet(featureID);
 }
 
-bool OpaqueExpressionImpl::eSet(int featureID, Any newValue)
+bool OpaqueExpressionImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -551,7 +551,7 @@ bool OpaqueExpressionImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any OpaqueExpressionImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any OpaqueExpressionImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

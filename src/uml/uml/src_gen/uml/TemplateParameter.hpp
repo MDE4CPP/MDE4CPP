@@ -87,7 +87,7 @@ namespace uml
 			default <> null implies default.isCompatibleWith(parameteredElement)
 			*/
 			 
-			virtual bool must_be_compatible(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
+			virtual bool must_be_compatible(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context) = 0;
 
 			//*********************************
 			// Attribute Getters & Setters
@@ -101,49 +101,49 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::ParameterableElement> getDefault() const = 0;
+			virtual const std::shared_ptr<uml::ParameterableElement>& getDefault() const = 0;
 			/*!
 			The ParameterableElement that is the default for this formal TemplateParameter.
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual void setDefault(std::shared_ptr<uml::ParameterableElement>) = 0;
+			virtual void setDefault(const std::shared_ptr<uml::ParameterableElement>&) = 0;
 			/*!
 			The ParameterableElement that is owned by this TemplateParameter for the purpose of providing a default.
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::ParameterableElement> getOwnedDefault() const = 0;
+			virtual const std::shared_ptr<uml::ParameterableElement>& getOwnedDefault() const = 0;
 			/*!
 			The ParameterableElement that is owned by this TemplateParameter for the purpose of providing a default.
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual void setOwnedDefault(std::shared_ptr<uml::ParameterableElement>) = 0;
+			virtual void setOwnedDefault(const std::shared_ptr<uml::ParameterableElement>&) = 0;
 			/*!
 			The ParameterableElement that is owned by this TemplateParameter for the purpose of exposing it as the parameteredElement.
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::ParameterableElement> getOwnedParameteredElement() const = 0;
+			virtual const std::shared_ptr<uml::ParameterableElement>& getOwnedParameteredElement() const = 0;
 			/*!
 			The ParameterableElement that is owned by this TemplateParameter for the purpose of exposing it as the parameteredElement.
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual void setOwnedParameteredElement(std::shared_ptr<uml::ParameterableElement>) = 0;
+			virtual void setOwnedParameteredElement(const std::shared_ptr<uml::ParameterableElement>&) = 0;
 			/*!
 			The ParameterableElement exposed by this TemplateParameter.
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::ParameterableElement> getParameteredElement() const = 0;
+			virtual const std::shared_ptr<uml::ParameterableElement>& getParameteredElement() const = 0;
 			/*!
 			The ParameterableElement exposed by this TemplateParameter.
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual void setParameteredElement(std::shared_ptr<uml::ParameterableElement>) = 0;
+			virtual void setParameteredElement(const std::shared_ptr<uml::ParameterableElement>&) = 0;
 			/*!
 			The TemplateSignature that owns this TemplateParameter.
 			<p>From package UML::CommonStructure.</p>

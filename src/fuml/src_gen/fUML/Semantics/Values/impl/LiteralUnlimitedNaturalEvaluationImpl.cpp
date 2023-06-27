@@ -45,8 +45,8 @@
 #include "fUML/Semantics/Values/Value.hpp"
 #include "uml/ValueSpecification.hpp"
 //Factories and Package includes
-#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/SemanticsPackage.hpp"
+#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/Loci/LociPackage.hpp"
 #include "fUML/Semantics/Values/ValuesPackage.hpp"
 #include "uml/umlPackage.hpp"
@@ -206,7 +206,7 @@ void LiteralUnlimitedNaturalEvaluationImpl::saveContent(std::shared_ptr<persiste
 	}
 }
 
-std::shared_ptr<ecore::EClass> LiteralUnlimitedNaturalEvaluationImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& LiteralUnlimitedNaturalEvaluationImpl::eStaticClass() const
 {
 	return fUML::Semantics::Values::ValuesPackage::eInstance()->getLiteralUnlimitedNaturalEvaluation_Class();
 }
@@ -230,7 +230,7 @@ bool LiteralUnlimitedNaturalEvaluationImpl::internalEIsSet(int featureID) const
 	return LiteralEvaluationImpl::internalEIsSet(featureID);
 }
 
-bool LiteralUnlimitedNaturalEvaluationImpl::eSet(int featureID, Any newValue)
+bool LiteralUnlimitedNaturalEvaluationImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -242,7 +242,7 @@ bool LiteralUnlimitedNaturalEvaluationImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any LiteralUnlimitedNaturalEvaluationImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any LiteralUnlimitedNaturalEvaluationImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

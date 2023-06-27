@@ -47,8 +47,8 @@
 #include "fUML/Semantics/Activities/Token.hpp"
 #include "fUML/Semantics/Actions/WriteLinkActionActivation.hpp"
 //Factories and Package includes
-#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/SemanticsPackage.hpp"
+#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/Actions/ActionsPackage.hpp"
 #include "fUML/Semantics/Activities/ActivitiesPackage.hpp"
 #include "uml/umlPackage.hpp"
@@ -226,7 +226,7 @@ void DestroyLinkActionActivationImpl::saveContent(std::shared_ptr<persistence::i
 	}
 }
 
-std::shared_ptr<ecore::EClass> DestroyLinkActionActivationImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& DestroyLinkActionActivationImpl::eStaticClass() const
 {
 	return fUML::Semantics::Actions::ActionsPackage::eInstance()->getDestroyLinkActionActivation_Class();
 }
@@ -250,7 +250,7 @@ bool DestroyLinkActionActivationImpl::internalEIsSet(int featureID) const
 	return WriteLinkActionActivationImpl::internalEIsSet(featureID);
 }
 
-bool DestroyLinkActionActivationImpl::eSet(int featureID, Any newValue)
+bool DestroyLinkActionActivationImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -262,7 +262,7 @@ bool DestroyLinkActionActivationImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any DestroyLinkActionActivationImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any DestroyLinkActionActivationImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

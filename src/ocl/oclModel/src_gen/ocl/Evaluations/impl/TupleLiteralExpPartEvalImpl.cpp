@@ -190,7 +190,7 @@ void TupleLiteralExpPartEvalImpl::saveContent(std::shared_ptr<persistence::inter
 	}
 }
 
-std::shared_ptr<ecore::EClass> TupleLiteralExpPartEvalImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& TupleLiteralExpPartEvalImpl::eStaticClass() const
 {
 	return ocl::Evaluations::EvaluationsPackage::eInstance()->getTupleLiteralExpPartEval_Class();
 }
@@ -214,7 +214,7 @@ bool TupleLiteralExpPartEvalImpl::internalEIsSet(int featureID) const
 	return fUML::Semantics::Values::EvaluationImpl::internalEIsSet(featureID);
 }
 
-bool TupleLiteralExpPartEvalImpl::eSet(int featureID, Any newValue)
+bool TupleLiteralExpPartEvalImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -226,7 +226,7 @@ bool TupleLiteralExpPartEvalImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any TupleLiteralExpPartEvalImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any TupleLiteralExpPartEvalImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

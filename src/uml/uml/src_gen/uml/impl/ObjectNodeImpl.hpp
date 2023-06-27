@@ -60,19 +60,19 @@ namespace uml
 					selection.inputParameters()->forAll(p | self.type.conformsTo(p.type))
 			*/
 			 
-			virtual bool input_output_parameter(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
+			virtual bool input_output_parameter(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context) ;
 			/*!
 			If isControlType=false, the ActivityEdges incoming to or outgoing from an ObjectNode must all be ObjectFlows.
 			(not isControlType) implies incoming->union(outgoing)->forAll(oclIsKindOf(ObjectFlow))
 			*/
 			 
-			virtual bool object_flow_edges(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
+			virtual bool object_flow_edges(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context) ;
 			/*!
 			If an ObjectNode has a selection Behavior, then the ordering of the object node is ordered, and vice versa.
 			(selection<>null) = (ordering=ObjectNodeOrderingKind::ordered)
 			*/
 			 
-			virtual bool selection_behavior(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
+			virtual bool selection_behavior(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context) ;
 			
 			//*********************************
 			// Attribute Getters & Setters
@@ -110,31 +110,31 @@ namespace uml
 			<p>From package UML::Activities.</p>
 			*/
 			
-			virtual std::shared_ptr<Bag<uml::State>> getInState() const ;
+			virtual const std::shared_ptr<Bag<uml::State>>& getInState() const ;
 			/*!
 			A Behavior used to select tokens to be offered on outgoing ActivityEdges.
 			<p>From package UML::Activities.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::Behavior> getSelection() const ;
+			virtual const std::shared_ptr<uml::Behavior>& getSelection() const ;
 			/*!
 			A Behavior used to select tokens to be offered on outgoing ActivityEdges.
 			<p>From package UML::Activities.</p>
 			*/
 			
-			virtual void setSelection(std::shared_ptr<uml::Behavior>) ;
+			virtual void setSelection(const std::shared_ptr<uml::Behavior>&) ;
 			/*!
 			The maximum number of tokens that may be held by this ObjectNode. Tokens cannot flow into the ObjectNode if the upperBound is reached. If no upperBound is specified, then there is no limit on how many tokens the ObjectNode can hold.
 			<p>From package UML::Activities.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::ValueSpecification> getUpperBound() const ;
+			virtual const std::shared_ptr<uml::ValueSpecification>& getUpperBound() const ;
 			/*!
 			The maximum number of tokens that may be held by this ObjectNode. Tokens cannot flow into the ObjectNode if the upperBound is reached. If no upperBound is specified, then there is no limit on how many tokens the ObjectNode can hold.
 			<p>From package UML::Activities.</p>
 			*/
 			
-			virtual void setUpperBound(std::shared_ptr<uml::ValueSpecification>) ;
+			virtual void setUpperBound(const std::shared_ptr<uml::ValueSpecification>&) ;
 			
 			//*********************************
 			// Union Reference Getters
@@ -180,19 +180,19 @@ namespace uml
 			virtual void saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const;
 
 		protected:
-			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
+			virtual const std::shared_ptr<ecore::EClass>& eStaticClass() const;
 
 			//*********************************
 			// EStructuralFeature Get/Set/IsSet
 			//*********************************
 			virtual Any eGet(int featureID, bool resolve, bool coreType) const ;
-			virtual bool eSet(int featureID, Any newValue) ;
+			virtual bool eSet(int featureID, const Any& newValue) ;
 			virtual bool internalEIsSet(int featureID) const ;
 
 			//*********************************
 			// EOperation Invoke
 			//*********************************
-			virtual Any eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments) ;
+			virtual Any eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments) ;
 
 		private:
 			std::weak_ptr<uml::ObjectNode> m_thisObjectNodePtr;

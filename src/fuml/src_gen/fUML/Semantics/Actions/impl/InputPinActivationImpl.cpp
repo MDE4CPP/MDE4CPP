@@ -48,8 +48,8 @@
 #include "fUML/Semantics/Actions/PinActivation.hpp"
 #include "fUML/Semantics/Activities/Token.hpp"
 //Factories and Package includes
-#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/SemanticsPackage.hpp"
+#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/Actions/ActionsPackage.hpp"
 #include "fUML/Semantics/Activities/ActivitiesPackage.hpp"
 #include "uml/umlPackage.hpp"
@@ -237,7 +237,7 @@ void InputPinActivationImpl::saveContent(std::shared_ptr<persistence::interfaces
 	}
 }
 
-std::shared_ptr<ecore::EClass> InputPinActivationImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& InputPinActivationImpl::eStaticClass() const
 {
 	return fUML::Semantics::Actions::ActionsPackage::eInstance()->getInputPinActivation_Class();
 }
@@ -261,7 +261,7 @@ bool InputPinActivationImpl::internalEIsSet(int featureID) const
 	return PinActivationImpl::internalEIsSet(featureID);
 }
 
-bool InputPinActivationImpl::eSet(int featureID, Any newValue)
+bool InputPinActivationImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -273,7 +273,7 @@ bool InputPinActivationImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any InputPinActivationImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any InputPinActivationImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

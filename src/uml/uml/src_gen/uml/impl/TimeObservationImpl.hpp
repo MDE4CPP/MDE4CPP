@@ -75,13 +75,13 @@ namespace uml
 			<p>From package UML::Values.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::NamedElement> getEvent() const ;
+			virtual const std::shared_ptr<uml::NamedElement>& getEvent() const ;
 			/*!
 			The TimeObservation is determined by the entering or exiting of the event Element during execution.
 			<p>From package UML::Values.</p>
 			*/
 			
-			virtual void setEvent(std::shared_ptr<uml::NamedElement>) ;
+			virtual void setEvent(const std::shared_ptr<uml::NamedElement>&) ;
 			
 			//*********************************
 			// Union Reference Getters
@@ -122,19 +122,19 @@ namespace uml
 			virtual void saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const;
 
 		protected:
-			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
+			virtual const std::shared_ptr<ecore::EClass>& eStaticClass() const;
 
 			//*********************************
 			// EStructuralFeature Get/Set/IsSet
 			//*********************************
 			virtual Any eGet(int featureID, bool resolve, bool coreType) const ;
-			virtual bool eSet(int featureID, Any newValue) ;
+			virtual bool eSet(int featureID, const Any& newValue) ;
 			virtual bool internalEIsSet(int featureID) const ;
 
 			//*********************************
 			// EOperation Invoke
 			//*********************************
-			virtual Any eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments) ;
+			virtual Any eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments) ;
 
 		private:
 			std::weak_ptr<uml::TimeObservation> m_thisTimeObservationPtr;

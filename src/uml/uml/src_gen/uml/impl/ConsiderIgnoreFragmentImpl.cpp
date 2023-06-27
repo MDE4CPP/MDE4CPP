@@ -143,12 +143,12 @@ std::shared_ptr<ecore::EObject> ConsiderIgnoreFragmentImpl::copy() const
 //*********************************
 // Operations
 //*********************************
-bool ConsiderIgnoreFragmentImpl::consider_or_ignore(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool ConsiderIgnoreFragmentImpl::consider_or_ignore(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool ConsiderIgnoreFragmentImpl::type(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool ConsiderIgnoreFragmentImpl::type(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -161,7 +161,7 @@ bool ConsiderIgnoreFragmentImpl::type(Any diagnostics,std::shared_ptr<std::map <
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference message */
-std::shared_ptr<Bag<uml::NamedElement>> ConsiderIgnoreFragmentImpl::getMessage() const
+const std::shared_ptr<Bag<uml::NamedElement>>& ConsiderIgnoreFragmentImpl::getMessage() const
 {
 	if(m_message == nullptr)
 	{
@@ -330,7 +330,7 @@ void ConsiderIgnoreFragmentImpl::saveContent(std::shared_ptr<persistence::interf
 	}
 }
 
-std::shared_ptr<ecore::EClass> ConsiderIgnoreFragmentImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& ConsiderIgnoreFragmentImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getConsiderIgnoreFragment_Class();
 }
@@ -358,7 +358,7 @@ bool ConsiderIgnoreFragmentImpl::internalEIsSet(int featureID) const
 	return CombinedFragmentImpl::internalEIsSet(featureID);
 }
 
-bool ConsiderIgnoreFragmentImpl::eSet(int featureID, Any newValue)
+bool ConsiderIgnoreFragmentImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -407,7 +407,7 @@ bool ConsiderIgnoreFragmentImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any ConsiderIgnoreFragmentImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any ConsiderIgnoreFragmentImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

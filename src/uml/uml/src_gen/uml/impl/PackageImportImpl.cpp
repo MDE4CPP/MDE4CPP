@@ -126,7 +126,7 @@ std::shared_ptr<ecore::EObject> PackageImportImpl::copy() const
 //*********************************
 // Operations
 //*********************************
-bool PackageImportImpl::public_or_private(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool PackageImportImpl::public_or_private(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -135,7 +135,7 @@ bool PackageImportImpl::public_or_private(Any diagnostics,std::shared_ptr<std::m
 // Attribute Getters & Setters
 //*********************************
 /* Getter & Setter for attribute visibility */
-uml::VisibilityKind PackageImportImpl::getVisibility() const 
+uml::VisibilityKind PackageImportImpl::getVisibility() const
 {
 	return m_visibility;
 }
@@ -149,11 +149,11 @@ void PackageImportImpl::setVisibility(uml::VisibilityKind _visibility)
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference importedPackage */
-std::shared_ptr<uml::Package> PackageImportImpl::getImportedPackage() const
+const std::shared_ptr<uml::Package>& PackageImportImpl::getImportedPackage() const
 {
     return m_importedPackage;
 }
-void PackageImportImpl::setImportedPackage(std::shared_ptr<uml::Package> _importedPackage)
+void PackageImportImpl::setImportedPackage(const std::shared_ptr<uml::Package>& _importedPackage)
 {
     m_importedPackage = _importedPackage;
 	
@@ -423,7 +423,7 @@ void PackageImportImpl::saveContent(std::shared_ptr<persistence::interfaces::XSa
 	}
 }
 
-std::shared_ptr<ecore::EClass> PackageImportImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& PackageImportImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getPackageImport_Class();
 }
@@ -462,7 +462,7 @@ bool PackageImportImpl::internalEIsSet(int featureID) const
 	return DirectedRelationshipImpl::internalEIsSet(featureID);
 }
 
-bool PackageImportImpl::eSet(int featureID, Any newValue)
+bool PackageImportImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -497,7 +497,7 @@ bool PackageImportImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any PackageImportImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any PackageImportImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

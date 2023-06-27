@@ -178,7 +178,7 @@ double LiteralRealImpl::realValue()
 // Attribute Getters & Setters
 //*********************************
 /* Getter & Setter for attribute value */
-double LiteralRealImpl::getValue() const 
+double LiteralRealImpl::getValue() const
 {
 	return m_value;
 }
@@ -355,7 +355,7 @@ void LiteralRealImpl::saveContent(std::shared_ptr<persistence::interfaces::XSave
 	}
 }
 
-std::shared_ptr<ecore::EClass> LiteralRealImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& LiteralRealImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getLiteralReal_Class();
 }
@@ -383,7 +383,7 @@ bool LiteralRealImpl::internalEIsSet(int featureID) const
 	return LiteralSpecificationImpl::internalEIsSet(featureID);
 }
 
-bool LiteralRealImpl::eSet(int featureID, Any newValue)
+bool LiteralRealImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -402,7 +402,7 @@ bool LiteralRealImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any LiteralRealImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any LiteralRealImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

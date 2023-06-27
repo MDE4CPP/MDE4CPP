@@ -43,8 +43,8 @@ namespace fUML::Semantics::CommonBehavior
 			//*********************************
 			// Operations
 			//*********************************
-			virtual std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue> > getParameterValues(std::shared_ptr<uml::Event> event) ;
-			virtual bool match(std::shared_ptr<uml::Trigger> trigger) ;
+			virtual std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue> > getParameterValues(const std::shared_ptr<uml::Event>& event) ;
+			virtual bool match(const std::shared_ptr<uml::Trigger>& trigger) ;
 			
 			//*********************************
 			// Attribute Getters & Setters
@@ -53,8 +53,8 @@ namespace fUML::Semantics::CommonBehavior
 			//*********************************
 			// Reference Getters & Setters
 			//*********************************
-			virtual std::shared_ptr<fUML::Semantics::SimpleClassifiers::SignalInstance> getSignalInstance() const ;
-			virtual void setSignalInstance(std::shared_ptr<fUML::Semantics::SimpleClassifiers::SignalInstance>) ;
+			virtual const std::shared_ptr<fUML::Semantics::SimpleClassifiers::SignalInstance>& getSignalInstance() const ;
+			virtual void setSignalInstance(const std::shared_ptr<fUML::Semantics::SimpleClassifiers::SignalInstance>&) ;
 			
 			//*********************************
 			// Union Reference Getters
@@ -76,19 +76,19 @@ namespace fUML::Semantics::CommonBehavior
 			virtual void saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const;
 
 		protected:
-			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
+			virtual const std::shared_ptr<ecore::EClass>& eStaticClass() const;
 
 			//*********************************
 			// EStructuralFeature Get/Set/IsSet
 			//*********************************
 			virtual Any eGet(int featureID, bool resolve, bool coreType) const ;
-			virtual bool eSet(int featureID, Any newValue) ;
+			virtual bool eSet(int featureID, const Any& newValue) ;
 			virtual bool internalEIsSet(int featureID) const ;
 
 			//*********************************
 			// EOperation Invoke
 			//*********************************
-			virtual Any eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments) ;
+			virtual Any eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments) ;
 
 		private:
 			std::weak_ptr<fUML::Semantics::CommonBehavior::SignalEventOccurrence> m_thisSignalEventOccurrencePtr;

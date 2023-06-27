@@ -40,8 +40,8 @@
 #include "fUML/Semantics/Values/Value.hpp"
 #include "uml/ValueSpecification.hpp"
 //Factories and Package includes
-#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/SemanticsPackage.hpp"
+#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/Loci/LociPackage.hpp"
 #include "fUML/Semantics/Values/ValuesPackage.hpp"
 #include "uml/umlPackage.hpp"
@@ -115,22 +115,22 @@ std::shared_ptr<fUML::Semantics::Values::Value> EvaluationImpl::evaluate()
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference locus */
-std::shared_ptr<fUML::Semantics::Loci::Locus> EvaluationImpl::getLocus() const
+const std::shared_ptr<fUML::Semantics::Loci::Locus>& EvaluationImpl::getLocus() const
 {
     return m_locus;
 }
-void EvaluationImpl::setLocus(std::shared_ptr<fUML::Semantics::Loci::Locus> _locus)
+void EvaluationImpl::setLocus(const std::shared_ptr<fUML::Semantics::Loci::Locus>& _locus)
 {
     m_locus = _locus;
 	
 }
 
 /* Getter & Setter for reference specification */
-std::shared_ptr<uml::ValueSpecification> EvaluationImpl::getSpecification() const
+const std::shared_ptr<uml::ValueSpecification>& EvaluationImpl::getSpecification() const
 {
     return m_specification;
 }
-void EvaluationImpl::setSpecification(std::shared_ptr<uml::ValueSpecification> _specification)
+void EvaluationImpl::setSpecification(const std::shared_ptr<uml::ValueSpecification>& _specification)
 {
     m_specification = _specification;
 	
@@ -261,7 +261,7 @@ void EvaluationImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveH
 	}
 }
 
-std::shared_ptr<ecore::EClass> EvaluationImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& EvaluationImpl::eStaticClass() const
 {
 	return fUML::Semantics::Values::ValuesPackage::eInstance()->getEvaluation_Class();
 }
@@ -293,7 +293,7 @@ bool EvaluationImpl::internalEIsSet(int featureID) const
 	return fUML::Semantics::Loci::SemanticVisitorImpl::internalEIsSet(featureID);
 }
 
-bool EvaluationImpl::eSet(int featureID, Any newValue)
+bool EvaluationImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -321,7 +321,7 @@ bool EvaluationImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any EvaluationImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any EvaluationImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

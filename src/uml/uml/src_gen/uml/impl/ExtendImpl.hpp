@@ -54,7 +54,7 @@ namespace uml
 			extensionLocation->forAll (xp | extendedCase.extensionPoint->includes(xp))
 			*/
 			 
-			virtual bool extension_points(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
+			virtual bool extension_points(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context) ;
 			
 			//*********************************
 			// Attribute Getters & Setters
@@ -68,25 +68,25 @@ namespace uml
 			<p>From package UML::UseCases.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::Constraint> getCondition() const ;
+			virtual const std::shared_ptr<uml::Constraint>& getCondition() const ;
 			/*!
 			References the condition that must hold when the first ExtensionPoint is reached for the extension to take place. If no constraint is associated with the Extend relationship, the extension is unconditional.
 			<p>From package UML::UseCases.</p>
 			*/
 			
-			virtual void setCondition(std::shared_ptr<uml::Constraint>) ;
+			virtual void setCondition(const std::shared_ptr<uml::Constraint>&) ;
 			/*!
 			The UseCase that is being extended.
 			<p>From package UML::UseCases.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::UseCase> getExtendedCase() const ;
+			virtual const std::shared_ptr<uml::UseCase>& getExtendedCase() const ;
 			/*!
 			The UseCase that is being extended.
 			<p>From package UML::UseCases.</p>
 			*/
 			
-			virtual void setExtendedCase(std::shared_ptr<uml::UseCase>) ;
+			virtual void setExtendedCase(const std::shared_ptr<uml::UseCase>&) ;
 			/*!
 			The UseCase that represents the extension and owns the Extend relationship.
 			<p>From package UML::UseCases.</p>
@@ -104,7 +104,7 @@ namespace uml
 			<p>From package UML::UseCases.</p>
 			*/
 			
-			virtual std::shared_ptr<Bag<uml::ExtensionPoint>> getExtensionLocation() const ;
+			virtual const std::shared_ptr<Bag<uml::ExtensionPoint>>& getExtensionLocation() const ;
 			
 			//*********************************
 			// Union Reference Getters
@@ -162,19 +162,19 @@ namespace uml
 			virtual void saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const;
 
 		protected:
-			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
+			virtual const std::shared_ptr<ecore::EClass>& eStaticClass() const;
 
 			//*********************************
 			// EStructuralFeature Get/Set/IsSet
 			//*********************************
 			virtual Any eGet(int featureID, bool resolve, bool coreType) const ;
-			virtual bool eSet(int featureID, Any newValue) ;
+			virtual bool eSet(int featureID, const Any& newValue) ;
 			virtual bool internalEIsSet(int featureID) const ;
 
 			//*********************************
 			// EOperation Invoke
 			//*********************************
-			virtual Any eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments) ;
+			virtual Any eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments) ;
 
 		private:
 			std::weak_ptr<uml::Extend> m_thisExtendPtr;

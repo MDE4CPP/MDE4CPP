@@ -102,20 +102,20 @@ namespace uml
 				parameter->at(i).compatibleWith(result->at(i)))
 			*/
 			 
-			virtual bool result_pins(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
+			virtual bool result_pins(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context) = 0;
 			/*!
 			The action must have exactly one trigger, which must be for a CallEvent.
 			trigger->size()=1 and
 			trigger->asSequence()->first().event.oclIsKindOf(CallEvent)
 			*/
 			 
-			virtual bool trigger_call_event(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
+			virtual bool trigger_call_event(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context) = 0;
 			/*!
 			isUnmrashall must be true for an AcceptCallAction.
 			isUnmarshall = true
 			*/
 			 
-			virtual bool unmarshall(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
+			virtual bool unmarshall(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context) = 0;
 
 			//*********************************
 			// Attribute Getters & Setters
@@ -129,13 +129,13 @@ namespace uml
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::OutputPin> getReturnInformation() const = 0;
+			virtual const std::shared_ptr<uml::OutputPin>& getReturnInformation() const = 0;
 			/*!
 			An OutputPin where a value is placed containing sufficient information to perform a subsequent ReplyAction and return control to the caller. The contents of this value are opaque. It can be passed and copied but it cannot be manipulated by the model.
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual void setReturnInformation(std::shared_ptr<uml::OutputPin>) = 0;
+			virtual void setReturnInformation(const std::shared_ptr<uml::OutputPin>&) = 0;
 
 			//*********************************
 			// Union Reference Getters

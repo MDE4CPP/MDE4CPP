@@ -123,32 +123,32 @@ std::shared_ptr<ecore::EObject> ExceptionHandlerImpl::copy() const
 //*********************************
 // Operations
 //*********************************
-bool ExceptionHandlerImpl::edge_source_target(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool ExceptionHandlerImpl::edge_source_target(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool ExceptionHandlerImpl::exception_input_type(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool ExceptionHandlerImpl::exception_input_type(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool ExceptionHandlerImpl::handler_body_edges(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool ExceptionHandlerImpl::handler_body_edges(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool ExceptionHandlerImpl::handler_body_owner(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool ExceptionHandlerImpl::handler_body_owner(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool ExceptionHandlerImpl::one_input(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool ExceptionHandlerImpl::one_input(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool ExceptionHandlerImpl::output_pins(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool ExceptionHandlerImpl::output_pins(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -161,18 +161,18 @@ bool ExceptionHandlerImpl::output_pins(Any diagnostics,std::shared_ptr<std::map 
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference exceptionInput */
-std::shared_ptr<uml::ObjectNode> ExceptionHandlerImpl::getExceptionInput() const
+const std::shared_ptr<uml::ObjectNode>& ExceptionHandlerImpl::getExceptionInput() const
 {
     return m_exceptionInput;
 }
-void ExceptionHandlerImpl::setExceptionInput(std::shared_ptr<uml::ObjectNode> _exceptionInput)
+void ExceptionHandlerImpl::setExceptionInput(const std::shared_ptr<uml::ObjectNode>& _exceptionInput)
 {
     m_exceptionInput = _exceptionInput;
 	
 }
 
 /* Getter & Setter for reference exceptionType */
-std::shared_ptr<Bag<uml::Classifier>> ExceptionHandlerImpl::getExceptionType() const
+const std::shared_ptr<Bag<uml::Classifier>>& ExceptionHandlerImpl::getExceptionType() const
 {
 	if(m_exceptionType == nullptr)
 	{
@@ -184,11 +184,11 @@ std::shared_ptr<Bag<uml::Classifier>> ExceptionHandlerImpl::getExceptionType() c
 }
 
 /* Getter & Setter for reference handlerBody */
-std::shared_ptr<uml::ExecutableNode> ExceptionHandlerImpl::getHandlerBody() const
+const std::shared_ptr<uml::ExecutableNode>& ExceptionHandlerImpl::getHandlerBody() const
 {
     return m_handlerBody;
 }
-void ExceptionHandlerImpl::setHandlerBody(std::shared_ptr<uml::ExecutableNode> _handlerBody)
+void ExceptionHandlerImpl::setHandlerBody(const std::shared_ptr<uml::ExecutableNode>& _handlerBody)
 {
     m_handlerBody = _handlerBody;
 	
@@ -394,7 +394,7 @@ void ExceptionHandlerImpl::saveContent(std::shared_ptr<persistence::interfaces::
 	}
 }
 
-std::shared_ptr<ecore::EClass> ExceptionHandlerImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& ExceptionHandlerImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getExceptionHandler_Class();
 }
@@ -437,7 +437,7 @@ bool ExceptionHandlerImpl::internalEIsSet(int featureID) const
 	return ElementImpl::internalEIsSet(featureID);
 }
 
-bool ExceptionHandlerImpl::eSet(int featureID, Any newValue)
+bool ExceptionHandlerImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -510,7 +510,7 @@ bool ExceptionHandlerImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any ExceptionHandlerImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any ExceptionHandlerImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

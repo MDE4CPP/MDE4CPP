@@ -208,7 +208,7 @@ std::shared_ptr<ecore::EObject> CollaborationImpl::copy() const
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference collaborationRole */
-std::shared_ptr<Subset<uml::ConnectableElement, uml::ConnectableElement>> CollaborationImpl::getCollaborationRole() const
+const std::shared_ptr<Subset<uml::ConnectableElement, uml::ConnectableElement>>& CollaborationImpl::getCollaborationRole() const
 {
 	if(m_collaborationRole == nullptr)
 	{
@@ -515,7 +515,7 @@ void CollaborationImpl::saveContent(std::shared_ptr<persistence::interfaces::XSa
 	}
 }
 
-std::shared_ptr<ecore::EClass> CollaborationImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& CollaborationImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getCollaboration_Class();
 }
@@ -557,7 +557,7 @@ bool CollaborationImpl::internalEIsSet(int featureID) const
 	return result;
 }
 
-bool CollaborationImpl::eSet(int featureID, Any newValue)
+bool CollaborationImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -613,7 +613,7 @@ bool CollaborationImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any CollaborationImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any CollaborationImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

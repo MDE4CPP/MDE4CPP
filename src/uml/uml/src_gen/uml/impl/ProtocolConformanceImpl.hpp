@@ -59,13 +59,13 @@ namespace uml
 			<p>From package UML::StateMachines.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::ProtocolStateMachine> getGeneralMachine() const ;
+			virtual const std::shared_ptr<uml::ProtocolStateMachine>& getGeneralMachine() const ;
 			/*!
 			Specifies the ProtocolStateMachine to which the specific ProtocolStateMachine conforms.
 			<p>From package UML::StateMachines.</p>
 			*/
 			
-			virtual void setGeneralMachine(std::shared_ptr<uml::ProtocolStateMachine>) ;
+			virtual void setGeneralMachine(const std::shared_ptr<uml::ProtocolStateMachine>&) ;
 			/*!
 			Specifies the ProtocolStateMachine which conforms to the general ProtocolStateMachine.
 			<p>From package UML::StateMachines.</p>
@@ -129,19 +129,19 @@ namespace uml
 			virtual void saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const;
 
 		protected:
-			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
+			virtual const std::shared_ptr<ecore::EClass>& eStaticClass() const;
 
 			//*********************************
 			// EStructuralFeature Get/Set/IsSet
 			//*********************************
 			virtual Any eGet(int featureID, bool resolve, bool coreType) const ;
-			virtual bool eSet(int featureID, Any newValue) ;
+			virtual bool eSet(int featureID, const Any& newValue) ;
 			virtual bool internalEIsSet(int featureID) const ;
 
 			//*********************************
 			// EOperation Invoke
 			//*********************************
-			virtual Any eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments) ;
+			virtual Any eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments) ;
 
 		private:
 			std::weak_ptr<uml::ProtocolConformance> m_thisProtocolConformancePtr;

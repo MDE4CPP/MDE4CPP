@@ -67,7 +67,7 @@ namespace PSCS::Semantics::StructuredClassifiers
 			//*********************************
 			// Operations
 			//*********************************
-			virtual bool operationsMatch(std::shared_ptr<uml::Operation> ownedOperation,std::shared_ptr<uml::Operation> baseOperation) = 0;
+			virtual bool operationsMatch(const std::shared_ptr<uml::Operation>& ownedOperation, const std::shared_ptr<uml::Operation>& baseOperation) = 0;
 
 			//*********************************
 			// Attribute Getters & Setters

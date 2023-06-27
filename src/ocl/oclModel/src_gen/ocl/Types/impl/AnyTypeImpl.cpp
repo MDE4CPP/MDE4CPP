@@ -199,7 +199,7 @@ void AnyTypeImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHand
 	}
 }
 
-std::shared_ptr<ecore::EClass> AnyTypeImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& AnyTypeImpl::eStaticClass() const
 {
 	return ocl::Types::TypesPackage::eInstance()->getAnyType_Class();
 }
@@ -223,7 +223,7 @@ bool AnyTypeImpl::internalEIsSet(int featureID) const
 	return ecore::EClassifierImpl::internalEIsSet(featureID);
 }
 
-bool AnyTypeImpl::eSet(int featureID, Any newValue)
+bool AnyTypeImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -235,7 +235,7 @@ bool AnyTypeImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any AnyTypeImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any AnyTypeImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

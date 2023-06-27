@@ -304,7 +304,7 @@ void DurationIntervalImpl::saveContent(std::shared_ptr<persistence::interfaces::
 	}
 }
 
-std::shared_ptr<ecore::EClass> DurationIntervalImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& DurationIntervalImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getDurationInterval_Class();
 }
@@ -328,7 +328,7 @@ bool DurationIntervalImpl::internalEIsSet(int featureID) const
 	return IntervalImpl::internalEIsSet(featureID);
 }
 
-bool DurationIntervalImpl::eSet(int featureID, Any newValue)
+bool DurationIntervalImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -340,7 +340,7 @@ bool DurationIntervalImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any DurationIntervalImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any DurationIntervalImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

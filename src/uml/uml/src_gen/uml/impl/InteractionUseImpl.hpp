@@ -69,17 +69,17 @@ namespace uml
 			 implies self.covered->asSet()->includes(intLifeline)))
 			*/
 			 
-			virtual bool all_lifelines(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
+			virtual bool all_lifelines(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context) ;
 			/*!
 			The arguments must only be constants, parameters of the enclosing Interaction or attributes of the classifier owning the enclosing Interaction.
 			*/
 			 
-			virtual bool arguments_are_constants(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
+			virtual bool arguments_are_constants(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context) ;
 			/*!
 			The arguments of the InteractionUse must correspond to parameters of the referred Interaction.
 			*/
 			 
-			virtual bool arguments_correspond_to_parameters(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
+			virtual bool arguments_correspond_to_parameters(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context) ;
 			/*!
 			Actual Gates of the InteractionUse must match Formal Gates of the referred Interaction. Gates match when their names are equal and their messages correspond.
 			actualGate->notEmpty() implies 
@@ -87,7 +87,7 @@ namespace uml
 			self.actualGate->forAll(ag : Gate | refersTo.formalGate->select(matches(ag))->size()=1)
 			*/
 			 
-			virtual bool gates_match(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
+			virtual bool gates_match(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context) ;
 			/*!
 			The returnValueRecipient must be a Property of a ConnectableElement that is represented by a Lifeline covered by this InteractionUse.
 			returnValueRecipient->asSet()->notEmpty() implies
@@ -97,13 +97,13 @@ namespace uml
 			allProps->includes(returnValueRecipient)
 			*/
 			 
-			virtual bool returnValueRecipient_coverage(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
+			virtual bool returnValueRecipient_coverage(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context) ;
 			/*!
 			The type of the returnValue must correspond to the type of the returnValueRecipient.
 			returnValue.type->asSequence()->notEmpty() implies returnValue.type->asSequence()->first() = returnValueRecipient.type->asSequence()->first()
 			*/
 			 
-			virtual bool returnValue_type_recipient_correspondence(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
+			virtual bool returnValue_type_recipient_correspondence(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context) ;
 			
 			//*********************************
 			// Attribute Getters & Setters
@@ -117,49 +117,49 @@ namespace uml
 			<p>From package UML::Interactions.</p>
 			*/
 			
-			virtual std::shared_ptr<Subset<uml::Gate, uml::Element>> getActualGate() const ;
+			virtual const std::shared_ptr<Subset<uml::Gate, uml::Element>>& getActualGate() const ;
 			/*!
 			The actual arguments of the Interaction.
 			<p>From package UML::Interactions.</p>
 			*/
 			
-			virtual std::shared_ptr<Subset<uml::ValueSpecification, uml::Element>> getArgument() const ;
+			virtual const std::shared_ptr<Subset<uml::ValueSpecification, uml::Element>>& getArgument() const ;
 			/*!
 			Refers to the Interaction that defines its meaning.
 			<p>From package UML::Interactions.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::Interaction> getRefersTo() const ;
+			virtual const std::shared_ptr<uml::Interaction>& getRefersTo() const ;
 			/*!
 			Refers to the Interaction that defines its meaning.
 			<p>From package UML::Interactions.</p>
 			*/
 			
-			virtual void setRefersTo(std::shared_ptr<uml::Interaction>) ;
+			virtual void setRefersTo(const std::shared_ptr<uml::Interaction>&) ;
 			/*!
 			The value of the executed Interaction.
 			<p>From package UML::Interactions.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::ValueSpecification> getReturnValue() const ;
+			virtual const std::shared_ptr<uml::ValueSpecification>& getReturnValue() const ;
 			/*!
 			The value of the executed Interaction.
 			<p>From package UML::Interactions.</p>
 			*/
 			
-			virtual void setReturnValue(std::shared_ptr<uml::ValueSpecification>) ;
+			virtual void setReturnValue(const std::shared_ptr<uml::ValueSpecification>&) ;
 			/*!
 			The recipient of the return value.
 			<p>From package UML::Interactions.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::Property> getReturnValueRecipient() const ;
+			virtual const std::shared_ptr<uml::Property>& getReturnValueRecipient() const ;
 			/*!
 			The recipient of the return value.
 			<p>From package UML::Interactions.</p>
 			*/
 			
-			virtual void setReturnValueRecipient(std::shared_ptr<uml::Property>) ;
+			virtual void setReturnValueRecipient(const std::shared_ptr<uml::Property>&) ;
 			
 			//*********************************
 			// Union Reference Getters
@@ -199,19 +199,19 @@ namespace uml
 			virtual void saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const;
 
 		protected:
-			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
+			virtual const std::shared_ptr<ecore::EClass>& eStaticClass() const;
 
 			//*********************************
 			// EStructuralFeature Get/Set/IsSet
 			//*********************************
 			virtual Any eGet(int featureID, bool resolve, bool coreType) const ;
-			virtual bool eSet(int featureID, Any newValue) ;
+			virtual bool eSet(int featureID, const Any& newValue) ;
 			virtual bool internalEIsSet(int featureID) const ;
 
 			//*********************************
 			// EOperation Invoke
 			//*********************************
-			virtual Any eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments) ;
+			virtual Any eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments) ;
 
 		private:
 			std::weak_ptr<uml::InteractionUse> m_thisInteractionUsePtr;

@@ -89,13 +89,13 @@ namespace uml
 			endif
 			*/
 			 
-			virtual bool first_event_multiplicity(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
+			virtual bool first_event_multiplicity(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context) = 0;
 			/*!
 			A DurationConstraint has either one or two constrainedElements.
 			constrainedElement->size() = 1 or constrainedElement->size()=2
 			*/
 			 
-			virtual bool has_one_or_two_constrainedElements(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
+			virtual bool has_one_or_two_constrainedElements(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context) = 0;
 
 			//*********************************
 			// Attribute Getters & Setters
@@ -105,7 +105,7 @@ namespace uml
 			<p>From package UML::Values.</p>
 			*/
 			 
-			virtual std::shared_ptr<Bag<bool>> isFirstEvent() const = 0;
+			virtual const std::shared_ptr<Bag<bool>>& isFirstEvent() const = 0;
 
 			//*********************************
 			// Reference Getters & Setters

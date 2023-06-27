@@ -55,13 +55,13 @@ namespace uml
 			object.is(1,1)
 			*/
 			 
-			virtual bool multiplicity(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
+			virtual bool multiplicity(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context) ;
 			/*!
 			The type of the InputPin must conform to the type of at least one of the memberEnds of the association.
 			association.memberEnd->exists(self.object.type.conformsTo(type))
 			*/
 			 
-			virtual bool same_type(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
+			virtual bool same_type(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context) ;
 			
 			//*********************************
 			// Attribute Getters & Setters
@@ -75,25 +75,25 @@ namespace uml
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::Association> getAssociation() const ;
+			virtual const std::shared_ptr<uml::Association>& getAssociation() const ;
 			/*!
 			The Association to be cleared.
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual void setAssociation(std::shared_ptr<uml::Association>) ;
+			virtual void setAssociation(const std::shared_ptr<uml::Association>&) ;
 			/*!
 			The InputPin that gives the object whose participation in the Association is to be cleared.
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::InputPin> getObject() const ;
+			virtual const std::shared_ptr<uml::InputPin>& getObject() const ;
 			/*!
 			The InputPin that gives the object whose participation in the Association is to be cleared.
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual void setObject(std::shared_ptr<uml::InputPin>) ;
+			virtual void setObject(const std::shared_ptr<uml::InputPin>&) ;
 			
 			//*********************************
 			// Union Reference Getters
@@ -145,19 +145,19 @@ namespace uml
 			virtual void saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const;
 
 		protected:
-			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
+			virtual const std::shared_ptr<ecore::EClass>& eStaticClass() const;
 
 			//*********************************
 			// EStructuralFeature Get/Set/IsSet
 			//*********************************
 			virtual Any eGet(int featureID, bool resolve, bool coreType) const ;
-			virtual bool eSet(int featureID, Any newValue) ;
+			virtual bool eSet(int featureID, const Any& newValue) ;
 			virtual bool internalEIsSet(int featureID) const ;
 
 			//*********************************
 			// EOperation Invoke
 			//*********************************
-			virtual Any eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments) ;
+			virtual Any eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments) ;
 
 		private:
 			std::weak_ptr<uml::ClearAssociationAction> m_thisClearAssociationActionPtr;

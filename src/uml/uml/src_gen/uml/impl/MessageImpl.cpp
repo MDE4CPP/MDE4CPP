@@ -171,12 +171,12 @@ std::shared_ptr<ecore::EObject> MessageImpl::copy() const
 //*********************************
 // Operations
 //*********************************
-bool MessageImpl::arguments(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool MessageImpl::arguments(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool MessageImpl::cannot_cross_boundaries(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool MessageImpl::cannot_cross_boundaries(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -186,32 +186,32 @@ uml::MessageKind MessageImpl::getMessageKind()
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool MessageImpl::occurrence_specifications(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool MessageImpl::occurrence_specifications(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool MessageImpl::sending_receiving_message_event(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool MessageImpl::sending_receiving_message_event(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool MessageImpl::signature_is_operation_reply(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool MessageImpl::signature_is_operation_reply(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool MessageImpl::signature_is_operation_request(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool MessageImpl::signature_is_operation_request(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool MessageImpl::signature_is_signal(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool MessageImpl::signature_is_signal(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool MessageImpl::signature_refer_to(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool MessageImpl::signature_refer_to(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -220,13 +220,13 @@ bool MessageImpl::signature_refer_to(Any diagnostics,std::shared_ptr<std::map < 
 // Attribute Getters & Setters
 //*********************************
 /* Getter & Setter for attribute messageKind */
-uml::MessageKind MessageImpl::getMessageKind() const 
+uml::MessageKind MessageImpl::getMessageKind() const
 {
 	return m_messageKind;
 }
 
 /* Getter & Setter for attribute messageSort */
-uml::MessageSort MessageImpl::getMessageSort() const 
+uml::MessageSort MessageImpl::getMessageSort() const
 {
 	return m_messageSort;
 }
@@ -240,7 +240,7 @@ void MessageImpl::setMessageSort(uml::MessageSort _messageSort)
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference argument */
-std::shared_ptr<Subset<uml::ValueSpecification, uml::Element>> MessageImpl::getArgument() const
+const std::shared_ptr<Subset<uml::ValueSpecification, uml::Element>>& MessageImpl::getArgument() const
 {
 	if(m_argument == nullptr)
 	{
@@ -261,11 +261,11 @@ std::shared_ptr<Subset<uml::ValueSpecification, uml::Element>> MessageImpl::getA
 }
 
 /* Getter & Setter for reference connector */
-std::shared_ptr<uml::Connector> MessageImpl::getConnector() const
+const std::shared_ptr<uml::Connector>& MessageImpl::getConnector() const
 {
     return m_connector;
 }
-void MessageImpl::setConnector(std::shared_ptr<uml::Connector> _connector)
+void MessageImpl::setConnector(const std::shared_ptr<uml::Connector>& _connector)
 {
     m_connector = _connector;
 	
@@ -283,33 +283,33 @@ void MessageImpl::setInteraction(std::weak_ptr<uml::Interaction> _interaction)
 }
 
 /* Getter & Setter for reference receiveEvent */
-std::shared_ptr<uml::MessageEnd> MessageImpl::getReceiveEvent() const
+const std::shared_ptr<uml::MessageEnd>& MessageImpl::getReceiveEvent() const
 {
     return m_receiveEvent;
 }
-void MessageImpl::setReceiveEvent(std::shared_ptr<uml::MessageEnd> _receiveEvent)
+void MessageImpl::setReceiveEvent(const std::shared_ptr<uml::MessageEnd>& _receiveEvent)
 {
     m_receiveEvent = _receiveEvent;
 	
 }
 
 /* Getter & Setter for reference sendEvent */
-std::shared_ptr<uml::MessageEnd> MessageImpl::getSendEvent() const
+const std::shared_ptr<uml::MessageEnd>& MessageImpl::getSendEvent() const
 {
     return m_sendEvent;
 }
-void MessageImpl::setSendEvent(std::shared_ptr<uml::MessageEnd> _sendEvent)
+void MessageImpl::setSendEvent(const std::shared_ptr<uml::MessageEnd>& _sendEvent)
 {
     m_sendEvent = _sendEvent;
 	
 }
 
 /* Getter & Setter for reference signature */
-std::shared_ptr<uml::NamedElement> MessageImpl::getSignature() const
+const std::shared_ptr<uml::NamedElement>& MessageImpl::getSignature() const
 {
     return m_signature;
 }
-void MessageImpl::setSignature(std::shared_ptr<uml::NamedElement> _signature)
+void MessageImpl::setSignature(const std::shared_ptr<uml::NamedElement>& _signature)
 {
     m_signature = _signature;
 	
@@ -625,7 +625,7 @@ void MessageImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHand
 	}
 }
 
-std::shared_ptr<ecore::EClass> MessageImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& MessageImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getMessage_Class();
 }
@@ -684,7 +684,7 @@ bool MessageImpl::internalEIsSet(int featureID) const
 	return NamedElementImpl::internalEIsSet(featureID);
 }
 
-bool MessageImpl::eSet(int featureID, Any newValue)
+bool MessageImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -780,7 +780,7 @@ bool MessageImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any MessageImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any MessageImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

@@ -55,19 +55,19 @@ namespace uml
 			first.is(1,1) and second.is(1,1)
 			*/
 			 
-			virtual bool multiplicity(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
+			virtual bool multiplicity(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context) ;
 			/*!
 			The InputPins have no type.
 			first.type= null and second.type = null
 			*/
 			 
-			virtual bool no_type(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
+			virtual bool no_type(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context) ;
 			/*!
 			The type of the result OutputPin is Boolean.
 			result.type=Boolean
 			*/
 			 
-			virtual bool result_is_boolean(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
+			virtual bool result_is_boolean(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context) ;
 			
 			//*********************************
 			// Attribute Getters & Setters
@@ -81,37 +81,37 @@ namespace uml
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::InputPin> getFirst() const ;
+			virtual const std::shared_ptr<uml::InputPin>& getFirst() const ;
 			/*!
 			The InputPin on which the first input object is placed.
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual void setFirst(std::shared_ptr<uml::InputPin>) ;
+			virtual void setFirst(const std::shared_ptr<uml::InputPin>&) ;
 			/*!
 			The OutputPin whose Boolean value indicates whether the two input objects are identical.
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::OutputPin> getResult() const ;
+			virtual const std::shared_ptr<uml::OutputPin>& getResult() const ;
 			/*!
 			The OutputPin whose Boolean value indicates whether the two input objects are identical.
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual void setResult(std::shared_ptr<uml::OutputPin>) ;
+			virtual void setResult(const std::shared_ptr<uml::OutputPin>&) ;
 			/*!
 			The OutputPin on which the second input object is placed.
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::InputPin> getSecond() const ;
+			virtual const std::shared_ptr<uml::InputPin>& getSecond() const ;
 			/*!
 			The OutputPin on which the second input object is placed.
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual void setSecond(std::shared_ptr<uml::InputPin>) ;
+			virtual void setSecond(const std::shared_ptr<uml::InputPin>&) ;
 			
 			//*********************************
 			// Union Reference Getters
@@ -169,19 +169,19 @@ namespace uml
 			virtual void saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const;
 
 		protected:
-			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
+			virtual const std::shared_ptr<ecore::EClass>& eStaticClass() const;
 
 			//*********************************
 			// EStructuralFeature Get/Set/IsSet
 			//*********************************
 			virtual Any eGet(int featureID, bool resolve, bool coreType) const ;
-			virtual bool eSet(int featureID, Any newValue) ;
+			virtual bool eSet(int featureID, const Any& newValue) ;
 			virtual bool internalEIsSet(int featureID) const ;
 
 			//*********************************
 			// EOperation Invoke
 			//*********************************
-			virtual Any eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments) ;
+			virtual Any eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments) ;
 
 		private:
 			std::weak_ptr<uml::TestIdentityAction> m_thisTestIdentityActionPtr;

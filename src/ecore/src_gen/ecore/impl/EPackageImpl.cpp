@@ -194,7 +194,7 @@ std::shared_ptr<ecore::EClassifier> EPackageImpl::getEClassifier(std::string nam
 // Attribute Getters & Setters
 //*********************************
 /* Getter & Setter for attribute nsPrefix */
-std::string EPackageImpl::getNsPrefix() const 
+std::string EPackageImpl::getNsPrefix() const
 {
 	return m_nsPrefix;
 }
@@ -205,7 +205,7 @@ void EPackageImpl::setNsPrefix(std::string _nsPrefix)
 }
 
 /* Getter & Setter for attribute nsURI */
-std::string EPackageImpl::getNsURI() const 
+std::string EPackageImpl::getNsURI() const
 {
 	return m_nsURI;
 }
@@ -219,7 +219,7 @@ void EPackageImpl::setNsURI(std::string _nsURI)
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference eClassifiers */
-std::shared_ptr<Subset<ecore::EClassifier, ecore::EObject>> EPackageImpl::getEClassifiers() const
+const std::shared_ptr<Subset<ecore::EClassifier, ecore::EObject>>& EPackageImpl::getEClassifiers() const
 {
 	if(m_eClassifiers == nullptr)
 	{
@@ -240,18 +240,18 @@ std::shared_ptr<Subset<ecore::EClassifier, ecore::EObject>> EPackageImpl::getECl
 }
 
 /* Getter & Setter for reference eFactoryInstance */
-std::shared_ptr<ecore::EFactory> EPackageImpl::getEFactoryInstance() const
+const std::shared_ptr<ecore::EFactory>& EPackageImpl::getEFactoryInstance() const
 {
     return m_eFactoryInstance;
 }
-void EPackageImpl::setEFactoryInstance(std::shared_ptr<ecore::EFactory> _eFactoryInstance)
+void EPackageImpl::setEFactoryInstance(const std::shared_ptr<ecore::EFactory>& _eFactoryInstance)
 {
     m_eFactoryInstance = _eFactoryInstance;
 	
 }
 
 /* Getter & Setter for reference eSubpackages */
-std::shared_ptr<Bag<ecore::EPackage>> EPackageImpl::getESubpackages() const
+const std::shared_ptr<Bag<ecore::EPackage>>& EPackageImpl::getESubpackages() const
 {
 	if(m_eSubpackages == nullptr)
 	{
@@ -475,7 +475,7 @@ void EPackageImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHan
 	}
 }
 
-std::shared_ptr<EClass> EPackageImpl::eStaticClass() const
+const std::shared_ptr<EClass>& EPackageImpl::eStaticClass() const
 {
 	return ecore::ecorePackage::eInstance()->getEPackage_Class();
 }
@@ -526,7 +526,7 @@ bool EPackageImpl::internalEIsSet(int featureID) const
 	return ENamedElementImpl::internalEIsSet(featureID);
 }
 
-bool EPackageImpl::eSet(int featureID, Any newValue)
+bool EPackageImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -634,7 +634,7 @@ bool EPackageImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any EPackageImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any EPackageImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

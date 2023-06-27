@@ -117,27 +117,27 @@ RedefinableElementImpl& RedefinableElementImpl::operator=(const RedefinableEleme
 //*********************************
 // Operations
 //*********************************
-bool RedefinableElementImpl::isConsistentWith(std::shared_ptr<uml::RedefinableElement> redefiningElement)
+bool RedefinableElementImpl::isConsistentWith(const std::shared_ptr<uml::RedefinableElement>& redefiningElement)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool RedefinableElementImpl::isRedefinitionContextValid(std::shared_ptr<uml::RedefinableElement> redefinedElement)
+bool RedefinableElementImpl::isRedefinitionContextValid(const std::shared_ptr<uml::RedefinableElement>& redefinedElement)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool RedefinableElementImpl::non_leaf_redefinition(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool RedefinableElementImpl::non_leaf_redefinition(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool RedefinableElementImpl::redefinition_consistent(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool RedefinableElementImpl::redefinition_consistent(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool RedefinableElementImpl::redefinition_context_valid(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool RedefinableElementImpl::redefinition_context_valid(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -146,7 +146,7 @@ bool RedefinableElementImpl::redefinition_context_valid(Any diagnostics,std::sha
 // Attribute Getters & Setters
 //*********************************
 /* Getter & Setter for attribute isLeaf */
-bool RedefinableElementImpl::getIsLeaf() const 
+bool RedefinableElementImpl::getIsLeaf() const
 {
 	return m_isLeaf;
 }
@@ -321,7 +321,7 @@ void RedefinableElementImpl::saveContent(std::shared_ptr<persistence::interfaces
 	}
 }
 
-std::shared_ptr<ecore::EClass> RedefinableElementImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& RedefinableElementImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getRedefinableElement_Class();
 }
@@ -357,7 +357,7 @@ bool RedefinableElementImpl::internalEIsSet(int featureID) const
 	return NamedElementImpl::internalEIsSet(featureID);
 }
 
-bool RedefinableElementImpl::eSet(int featureID, Any newValue)
+bool RedefinableElementImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -376,7 +376,7 @@ bool RedefinableElementImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any RedefinableElementImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any RedefinableElementImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

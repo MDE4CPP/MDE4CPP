@@ -144,11 +144,11 @@ std::shared_ptr<Bag<uml::MessageEnd> > MessageEndImpl::oppositeEnd()
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference message */
-std::shared_ptr<uml::Message> MessageEndImpl::getMessage() const
+const std::shared_ptr<uml::Message>& MessageEndImpl::getMessage() const
 {
     return m_message;
 }
-void MessageEndImpl::setMessage(std::shared_ptr<uml::Message> _message)
+void MessageEndImpl::setMessage(const std::shared_ptr<uml::Message>& _message)
 {
     m_message = _message;
 	
@@ -291,7 +291,7 @@ void MessageEndImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveH
 	}
 }
 
-std::shared_ptr<ecore::EClass> MessageEndImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& MessageEndImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getMessageEnd_Class();
 }
@@ -319,7 +319,7 @@ bool MessageEndImpl::internalEIsSet(int featureID) const
 	return NamedElementImpl::internalEIsSet(featureID);
 }
 
-bool MessageEndImpl::eSet(int featureID, Any newValue)
+bool MessageEndImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -339,7 +339,7 @@ bool MessageEndImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any MessageEndImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any MessageEndImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

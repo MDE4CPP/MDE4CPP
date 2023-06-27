@@ -105,7 +105,7 @@ std::shared_ptr<ecore::EObject> OrderedSetTypeValueImpl::copy() const
 //*********************************
 // Operations
 //*********************************
-bool OrderedSetTypeValueImpl::addValue(std::shared_ptr<fUML::Semantics::Values::Value> value)
+bool OrderedSetTypeValueImpl::addValue(const std::shared_ptr<fUML::Semantics::Values::Value>& value)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -205,7 +205,7 @@ void OrderedSetTypeValueImpl::saveContent(std::shared_ptr<persistence::interface
 	}
 }
 
-std::shared_ptr<ecore::EClass> OrderedSetTypeValueImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& OrderedSetTypeValueImpl::eStaticClass() const
 {
 	return ocl::Values::ValuesPackage::eInstance()->getOrderedSetTypeValue_Class();
 }
@@ -229,7 +229,7 @@ bool OrderedSetTypeValueImpl::internalEIsSet(int featureID) const
 	return CollectionValueImpl::internalEIsSet(featureID);
 }
 
-bool OrderedSetTypeValueImpl::eSet(int featureID, Any newValue)
+bool OrderedSetTypeValueImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -241,7 +241,7 @@ bool OrderedSetTypeValueImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any OrderedSetTypeValueImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any OrderedSetTypeValueImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

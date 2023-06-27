@@ -160,7 +160,7 @@ std::shared_ptr<Bag<uml::PackageableElement> > DeploymentTargetImpl::getDeployed
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference deployedElement */
-std::shared_ptr<Bag<uml::PackageableElement>> DeploymentTargetImpl::getDeployedElement() const
+const std::shared_ptr<Bag<uml::PackageableElement>>& DeploymentTargetImpl::getDeployedElement() const
 {
 	if(m_deployedElement == nullptr)
 	{
@@ -172,7 +172,7 @@ std::shared_ptr<Bag<uml::PackageableElement>> DeploymentTargetImpl::getDeployedE
 }
 
 /* Getter & Setter for reference deployment */
-std::shared_ptr<Subset<uml::Deployment, uml::Element>> DeploymentTargetImpl::getDeployment() const
+const std::shared_ptr<Subset<uml::Deployment, uml::Element>>& DeploymentTargetImpl::getDeployment() const
 {
 	if(m_deployment == nullptr)
 	{
@@ -321,7 +321,7 @@ void DeploymentTargetImpl::saveContent(std::shared_ptr<persistence::interfaces::
 	}
 }
 
-std::shared_ptr<ecore::EClass> DeploymentTargetImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& DeploymentTargetImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getDeploymentTarget_Class();
 }
@@ -353,7 +353,7 @@ bool DeploymentTargetImpl::internalEIsSet(int featureID) const
 	return NamedElementImpl::internalEIsSet(featureID);
 }
 
-bool DeploymentTargetImpl::eSet(int featureID, Any newValue)
+bool DeploymentTargetImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -402,7 +402,7 @@ bool DeploymentTargetImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any DeploymentTargetImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any DeploymentTargetImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

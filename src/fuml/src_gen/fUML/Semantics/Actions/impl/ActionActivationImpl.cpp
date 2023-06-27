@@ -78,8 +78,8 @@
 #include "fUML/Semantics/Activities/Token.hpp"
 #include "fUML/Semantics/Values/Value.hpp"
 //Factories and Package includes
-#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/SemanticsPackage.hpp"
+#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/Actions/ActionsPackage.hpp"
 #include "fUML/Semantics/Activities/ActivitiesPackage.hpp"
 #include "fUML/Semantics/SimpleClassifiers/SimpleClassifiersPackage.hpp"
@@ -203,7 +203,7 @@ ActionActivationImpl& ActionActivationImpl::operator=(const ActionActivationImpl
 //*********************************
 // Operations
 //*********************************
-void ActionActivationImpl::addOutgoingEdge(std::shared_ptr<fUML::Semantics::Activities::ActivityEdgeInstance> edge)
+void ActionActivationImpl::addOutgoingEdge(const std::shared_ptr<fUML::Semantics::Activities::ActivityEdgeInstance>& edge)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -246,7 +246,7 @@ void ActionActivationImpl::addOutgoingEdge(std::shared_ptr<fUML::Semantics::Acti
 	//end of body
 }
 
-void ActionActivationImpl::addPinActivation(std::shared_ptr<fUML::Semantics::Actions::PinActivation> pinActivation)
+void ActionActivationImpl::addPinActivation(const std::shared_ptr<fUML::Semantics::Actions::PinActivation>& pinActivation)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -365,7 +365,7 @@ void ActionActivationImpl::doAction()
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-void ActionActivationImpl::fire(std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> incomingTokens)
+void ActionActivationImpl::fire(const std::shared_ptr<Bag<fUML::Semantics::Activities::Token>>& incomingTokens)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -382,7 +382,7 @@ void ActionActivationImpl::fire(std::shared_ptr<Bag<fUML::Semantics::Activities:
 	//end of body
 }
 
-std::shared_ptr<Bag<fUML::Semantics::Values::Value> > ActionActivationImpl::getTokens(std::shared_ptr<uml::InputPin> pin)
+std::shared_ptr<Bag<fUML::Semantics::Values::Value> > ActionActivationImpl::getTokens(const std::shared_ptr<uml::InputPin>& pin)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -409,7 +409,7 @@ std::shared_ptr<Bag<fUML::Semantics::Values::Value> > ActionActivationImpl::getT
 	//end of body
 }
 
-void ActionActivationImpl::initialize(std::shared_ptr<uml::ActivityNode> node,std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup> group)
+void ActionActivationImpl::initialize(const std::shared_ptr<uml::ActivityNode>& node, const std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup>& group)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -477,7 +477,7 @@ bool ActionActivationImpl::isReady()
 	//end of body
 }
 
-bool ActionActivationImpl::isSourceFor(std::shared_ptr<fUML::Semantics::Activities::ActivityEdgeInstance> edgeInstance)
+bool ActionActivationImpl::isSourceFor(const std::shared_ptr<fUML::Semantics::Activities::ActivityEdgeInstance>& edgeInstance)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -505,7 +505,7 @@ std::shared_ptr<fUML::Semantics::SimpleClassifiers::BooleanValue> ActionActivati
 	//end of body
 }
 
-void ActionActivationImpl::putToken(std::shared_ptr<uml::OutputPin> pin,std::shared_ptr<fUML::Semantics::Values::Value> value)
+void ActionActivationImpl::putToken(const std::shared_ptr<uml::OutputPin>& pin, const std::shared_ptr<fUML::Semantics::Values::Value>& value)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -521,7 +521,7 @@ void ActionActivationImpl::putToken(std::shared_ptr<uml::OutputPin> pin,std::sha
 	//end of body
 }
 
-void ActionActivationImpl::putTokens(std::shared_ptr<uml::OutputPin> pin,std::shared_ptr<Bag<fUML::Semantics::Values::Value>> values)
+void ActionActivationImpl::putTokens(const std::shared_ptr<uml::OutputPin>& pin, const std::shared_ptr<Bag<fUML::Semantics::Values::Value>>& values)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -532,7 +532,7 @@ void ActionActivationImpl::putTokens(std::shared_ptr<uml::OutputPin> pin,std::sh
 	//end of body
 }
 
-std::shared_ptr<fUML::Semantics::Actions::PinActivation> ActionActivationImpl::retrievePinActivation(std::shared_ptr<uml::Pin> pin)
+std::shared_ptr<fUML::Semantics::Actions::PinActivation> ActionActivationImpl::retrievePinActivation(const std::shared_ptr<uml::Pin>& pin)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -652,7 +652,7 @@ std::shared_ptr<Bag<fUML::Semantics::Activities::Token> > ActionActivationImpl::
 	//end of body
 }
 
-std::shared_ptr<Bag<fUML::Semantics::Values::Value> > ActionActivationImpl::takeTokens(std::shared_ptr<uml::InputPin> pin)
+std::shared_ptr<Bag<fUML::Semantics::Values::Value> > ActionActivationImpl::takeTokens(const std::shared_ptr<uml::InputPin>& pin)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -693,7 +693,7 @@ void ActionActivationImpl::terminate()
 	//end of body
 }
 
-bool ActionActivationImpl::valueParticipatesInLink(std::shared_ptr<fUML::Semantics::Values::Value> value,std::shared_ptr<fUML::Semantics::StructuredClassifiers::Link> link)
+bool ActionActivationImpl::valueParticipatesInLink(const std::shared_ptr<fUML::Semantics::Values::Value>& value, const std::shared_ptr<fUML::Semantics::StructuredClassifiers::Link>& link)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -717,7 +717,7 @@ bool ActionActivationImpl::valueParticipatesInLink(std::shared_ptr<fUML::Semanti
 // Attribute Getters & Setters
 //*********************************
 /* Getter & Setter for attribute firing */
-bool ActionActivationImpl::isFiring() const 
+bool ActionActivationImpl::isFiring() const
 {
 	return m_firing;
 }
@@ -731,18 +731,18 @@ void ActionActivationImpl::setFiring(bool _firing)
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference action */
-std::shared_ptr<uml::Action> ActionActivationImpl::getAction() const
+const std::shared_ptr<uml::Action>& ActionActivationImpl::getAction() const
 {
     return m_action;
 }
-void ActionActivationImpl::setAction(std::shared_ptr<uml::Action> _action)
+void ActionActivationImpl::setAction(const std::shared_ptr<uml::Action>& _action)
 {
     m_action = _action;
 	//additional setter call for redefined reference ActivityNodeActivation::node
 	fUML::Semantics::Activities::ActivityNodeActivationImpl::setNode(_action);
 }
 /*Additional Setter for redefined reference 'ActivityNodeActivation::node'*/
-void ActionActivationImpl::setNode(std::shared_ptr<uml::ActivityNode> _node)
+void ActionActivationImpl::setNode(const std::shared_ptr<uml::ActivityNode>& _node)
 {
 	std::shared_ptr<uml::Action> _action = std::dynamic_pointer_cast<uml::Action>(_node);
 	if(_action)
@@ -759,7 +759,7 @@ void ActionActivationImpl::setNode(std::shared_ptr<uml::ActivityNode> _node)
 }
 
 /* Getter & Setter for reference inputPinActivation */
-std::shared_ptr<Subset<fUML::Semantics::Actions::InputPinActivation, fUML::Semantics::Actions::PinActivation>> ActionActivationImpl::getInputPinActivation() const
+const std::shared_ptr<Subset<fUML::Semantics::Actions::InputPinActivation, fUML::Semantics::Actions::PinActivation>>& ActionActivationImpl::getInputPinActivation() const
 {
 	if(m_inputPinActivation == nullptr)
 	{
@@ -780,7 +780,7 @@ std::shared_ptr<Subset<fUML::Semantics::Actions::InputPinActivation, fUML::Seman
 }
 
 /* Getter & Setter for reference outputPinActivation */
-std::shared_ptr<Subset<fUML::Semantics::Actions::OutputPinActivation, fUML::Semantics::Actions::PinActivation>> ActionActivationImpl::getOutputPinActivation() const
+const std::shared_ptr<Subset<fUML::Semantics::Actions::OutputPinActivation, fUML::Semantics::Actions::PinActivation>>& ActionActivationImpl::getOutputPinActivation() const
 {
 	if(m_outputPinActivation == nullptr)
 	{
@@ -1007,7 +1007,7 @@ void ActionActivationImpl::saveContent(std::shared_ptr<persistence::interfaces::
 	}
 }
 
-std::shared_ptr<ecore::EClass> ActionActivationImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& ActionActivationImpl::eStaticClass() const
 {
 	return fUML::Semantics::Actions::ActionsPackage::eInstance()->getActionActivation_Class();
 }
@@ -1051,7 +1051,7 @@ bool ActionActivationImpl::internalEIsSet(int featureID) const
 	return fUML::Semantics::Activities::ActivityNodeActivationImpl::internalEIsSet(featureID);
 }
 
-bool ActionActivationImpl::eSet(int featureID, Any newValue)
+bool ActionActivationImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -1189,7 +1189,7 @@ bool ActionActivationImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any ActionActivationImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any ActionActivationImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

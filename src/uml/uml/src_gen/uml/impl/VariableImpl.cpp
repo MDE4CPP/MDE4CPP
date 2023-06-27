@@ -155,7 +155,7 @@ std::shared_ptr<ecore::EObject> VariableImpl::copy() const
 //*********************************
 // Operations
 //*********************************
-bool VariableImpl::isAccessibleBy(std::shared_ptr<uml::Action> a)
+bool VariableImpl::isAccessibleBy(const std::shared_ptr<uml::Action>& a)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -348,7 +348,7 @@ void VariableImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHan
 	}
 }
 
-std::shared_ptr<ecore::EClass> VariableImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& VariableImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getVariable_Class();
 }
@@ -400,7 +400,7 @@ bool VariableImpl::internalEIsSet(int featureID) const
 	return result;
 }
 
-bool VariableImpl::eSet(int featureID, Any newValue)
+bool VariableImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -435,7 +435,7 @@ bool VariableImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any VariableImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any VariableImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

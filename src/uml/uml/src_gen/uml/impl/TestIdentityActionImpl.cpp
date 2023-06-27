@@ -169,17 +169,17 @@ std::shared_ptr<ecore::EObject> TestIdentityActionImpl::copy() const
 //*********************************
 // Operations
 //*********************************
-bool TestIdentityActionImpl::multiplicity(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool TestIdentityActionImpl::multiplicity(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool TestIdentityActionImpl::no_type(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool TestIdentityActionImpl::no_type(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool TestIdentityActionImpl::result_is_boolean(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool TestIdentityActionImpl::result_is_boolean(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -192,33 +192,33 @@ bool TestIdentityActionImpl::result_is_boolean(Any diagnostics,std::shared_ptr<s
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference first */
-std::shared_ptr<uml::InputPin> TestIdentityActionImpl::getFirst() const
+const std::shared_ptr<uml::InputPin>& TestIdentityActionImpl::getFirst() const
 {
     return m_first;
 }
-void TestIdentityActionImpl::setFirst(std::shared_ptr<uml::InputPin> _first)
+void TestIdentityActionImpl::setFirst(const std::shared_ptr<uml::InputPin>& _first)
 {
     m_first = _first;
 	
 }
 
 /* Getter & Setter for reference result */
-std::shared_ptr<uml::OutputPin> TestIdentityActionImpl::getResult() const
+const std::shared_ptr<uml::OutputPin>& TestIdentityActionImpl::getResult() const
 {
     return m_result;
 }
-void TestIdentityActionImpl::setResult(std::shared_ptr<uml::OutputPin> _result)
+void TestIdentityActionImpl::setResult(const std::shared_ptr<uml::OutputPin>& _result)
 {
     m_result = _result;
 	
 }
 
 /* Getter & Setter for reference second */
-std::shared_ptr<uml::InputPin> TestIdentityActionImpl::getSecond() const
+const std::shared_ptr<uml::InputPin>& TestIdentityActionImpl::getSecond() const
 {
     return m_second;
 }
-void TestIdentityActionImpl::setSecond(std::shared_ptr<uml::InputPin> _second)
+void TestIdentityActionImpl::setSecond(const std::shared_ptr<uml::InputPin>& _second)
 {
     m_second = _second;
 	
@@ -480,7 +480,7 @@ void TestIdentityActionImpl::saveContent(std::shared_ptr<persistence::interfaces
 	}
 }
 
-std::shared_ptr<ecore::EClass> TestIdentityActionImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& TestIdentityActionImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getTestIdentityAction_Class();
 }
@@ -516,7 +516,7 @@ bool TestIdentityActionImpl::internalEIsSet(int featureID) const
 	return ActionImpl::internalEIsSet(featureID);
 }
 
-bool TestIdentityActionImpl::eSet(int featureID, Any newValue)
+bool TestIdentityActionImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -552,7 +552,7 @@ bool TestIdentityActionImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any TestIdentityActionImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any TestIdentityActionImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

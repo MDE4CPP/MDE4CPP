@@ -178,7 +178,7 @@ bool LiteralIntegerImpl::isComputable()
 // Attribute Getters & Setters
 //*********************************
 /* Getter & Setter for attribute value */
-int LiteralIntegerImpl::getValue() const 
+int LiteralIntegerImpl::getValue() const
 {
 	return m_value;
 }
@@ -355,7 +355,7 @@ void LiteralIntegerImpl::saveContent(std::shared_ptr<persistence::interfaces::XS
 	}
 }
 
-std::shared_ptr<ecore::EClass> LiteralIntegerImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& LiteralIntegerImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getLiteralInteger_Class();
 }
@@ -383,7 +383,7 @@ bool LiteralIntegerImpl::internalEIsSet(int featureID) const
 	return LiteralSpecificationImpl::internalEIsSet(featureID);
 }
 
-bool LiteralIntegerImpl::eSet(int featureID, Any newValue)
+bool LiteralIntegerImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -402,7 +402,7 @@ bool LiteralIntegerImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any LiteralIntegerImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any LiteralIntegerImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

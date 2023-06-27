@@ -60,7 +60,7 @@ namespace uml
 				argument->at(i).compatibleWith(parameter->at(i)))
 			*/
 			 
-			virtual bool argument_pins(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
+			virtual bool argument_pins(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context) ;
 			/*!
 			Return the in and inout ownedParameters of the Behavior or Operation being called. (This operation is abstract and should be overridden by subclasses of CallAction.)
 			<p>From package UML::Actions.</p>
@@ -83,13 +83,13 @@ namespace uml
 				parameter->at(i).compatibleWith(result->at(i)))
 			*/
 			 
-			virtual bool result_pins(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
+			virtual bool result_pins(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context) ;
 			/*!
 			Only synchronous CallActions can have result OutputPins.
 			result->notEmpty() implies isSynchronous
 			*/
 			 
-			virtual bool synchronous_call(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
+			virtual bool synchronous_call(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context) ;
 			
 			//*********************************
 			// Attribute Getters & Setters
@@ -115,7 +115,7 @@ namespace uml
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual std::shared_ptr<Subset<uml::OutputPin, uml::OutputPin>> getResult() const ;
+			virtual const std::shared_ptr<Subset<uml::OutputPin, uml::OutputPin>>& getResult() const ;
 			
 			//*********************************
 			// Union Reference Getters
@@ -173,19 +173,19 @@ namespace uml
 			virtual void saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const;
 
 		protected:
-			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
+			virtual const std::shared_ptr<ecore::EClass>& eStaticClass() const;
 
 			//*********************************
 			// EStructuralFeature Get/Set/IsSet
 			//*********************************
 			virtual Any eGet(int featureID, bool resolve, bool coreType) const ;
-			virtual bool eSet(int featureID, Any newValue) ;
+			virtual bool eSet(int featureID, const Any& newValue) ;
 			virtual bool internalEIsSet(int featureID) const ;
 
 			//*********************************
 			// EOperation Invoke
 			//*********************************
-			virtual Any eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments) ;
+			virtual Any eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments) ;
 
 		private:
 			std::weak_ptr<uml::CallAction> m_thisCallActionPtr;

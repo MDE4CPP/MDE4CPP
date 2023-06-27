@@ -115,7 +115,7 @@ std::shared_ptr<ecore::EObject> CommentImpl::copy() const
 // Attribute Getters & Setters
 //*********************************
 /* Getter & Setter for attribute body */
-std::string CommentImpl::getBody() const 
+std::string CommentImpl::getBody() const
 {
 	return m_body;
 }
@@ -129,7 +129,7 @@ void CommentImpl::setBody(std::string _body)
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference annotatedElement */
-std::shared_ptr<Bag<uml::Element>> CommentImpl::getAnnotatedElement() const
+const std::shared_ptr<Bag<uml::Element>>& CommentImpl::getAnnotatedElement() const
 {
 	if(m_annotatedElement == nullptr)
 	{
@@ -281,7 +281,7 @@ void CommentImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHand
 	}
 }
 
-std::shared_ptr<ecore::EClass> CommentImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& CommentImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getComment_Class();
 }
@@ -313,7 +313,7 @@ bool CommentImpl::internalEIsSet(int featureID) const
 	return ElementImpl::internalEIsSet(featureID);
 }
 
-bool CommentImpl::eSet(int featureID, Any newValue)
+bool CommentImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -369,7 +369,7 @@ bool CommentImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any CommentImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any CommentImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

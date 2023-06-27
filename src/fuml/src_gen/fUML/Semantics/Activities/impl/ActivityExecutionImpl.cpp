@@ -67,8 +67,8 @@
 #include "fUML/Semantics/CommonBehavior/ParameterValue.hpp"
 #include "fUML/Semantics/Values/Value.hpp"
 //Factories and Package includes
-#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/SemanticsPackage.hpp"
+#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/Activities/ActivitiesPackage.hpp"
 #include "fUML/Semantics/CommonBehavior/CommonBehaviorPackage.hpp"
 #include "fUML/Semantics/Loci/LociPackage.hpp"
@@ -254,18 +254,18 @@ void ActivityExecutionImpl::terminate()
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference activationGroup */
-std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup> ActivityExecutionImpl::getActivationGroup() const
+const std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup>& ActivityExecutionImpl::getActivationGroup() const
 {
     return m_activationGroup;
 }
-void ActivityExecutionImpl::setActivationGroup(std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup> _activationGroup)
+void ActivityExecutionImpl::setActivationGroup(const std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup>& _activationGroup)
 {
     m_activationGroup = _activationGroup;
 	
 }
 
 /* Getter & Setter for reference activity */
-std::shared_ptr<uml::Activity> ActivityExecutionImpl::getActivity() const
+const std::shared_ptr<uml::Activity>& ActivityExecutionImpl::getActivity() const
 {
 	//generated from getterBody annotation
 if(!m_activity)
@@ -276,14 +276,14 @@ if(!m_activity)
 return m_activity;
 	//end of body
 }
-void ActivityExecutionImpl::setActivity(std::shared_ptr<uml::Activity> _activity)
+void ActivityExecutionImpl::setActivity(const std::shared_ptr<uml::Activity>& _activity)
 {
     m_activity = _activity;
 	//additional setter call for redefined reference Execution::behavior
 	fUML::Semantics::CommonBehavior::ExecutionImpl::setBehavior(_activity);
 }
 /*Additional Setter for redefined reference 'Execution::behavior'*/
-void ActivityExecutionImpl::setBehavior(std::shared_ptr<uml::Behavior> _behavior)
+void ActivityExecutionImpl::setBehavior(const std::shared_ptr<uml::Behavior>& _behavior)
 {
 	std::shared_ptr<uml::Activity> _activity = std::dynamic_pointer_cast<uml::Activity>(_behavior);
 	if(_activity)
@@ -445,7 +445,7 @@ void ActivityExecutionImpl::saveContent(std::shared_ptr<persistence::interfaces:
 	}
 }
 
-std::shared_ptr<ecore::EClass> ActivityExecutionImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& ActivityExecutionImpl::eStaticClass() const
 {
 	return fUML::Semantics::Activities::ActivitiesPackage::eInstance()->getActivityExecution_Class();
 }
@@ -477,7 +477,7 @@ bool ActivityExecutionImpl::internalEIsSet(int featureID) const
 	return fUML::Semantics::CommonBehavior::ExecutionImpl::internalEIsSet(featureID);
 }
 
-bool ActivityExecutionImpl::eSet(int featureID, Any newValue)
+bool ActivityExecutionImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -505,7 +505,7 @@ bool ActivityExecutionImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any ActivityExecutionImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any ActivityExecutionImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

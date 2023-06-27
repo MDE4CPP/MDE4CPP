@@ -65,13 +65,13 @@ namespace uml
 			<p>From package UML::Deployments.</p>
 			*/
 			
-			virtual std::shared_ptr<Subset<uml::DeploymentSpecification, uml::Element>> getConfiguration() const ;
+			virtual const std::shared_ptr<Subset<uml::DeploymentSpecification, uml::Element>>& getConfiguration() const ;
 			/*!
 			The Artifacts that are deployed onto a Node. This association specializes the supplier association.
 			<p>From package UML::Deployments.</p>
 			*/
 			
-			virtual std::shared_ptr<Subset<uml::DeployedArtifact, uml::NamedElement /*Subset does not reference a union*/>> getDeployedArtifact() const ;
+			virtual const std::shared_ptr<Subset<uml::DeployedArtifact, uml::NamedElement /*Subset does not reference a union*/>>& getDeployedArtifact() const ;
 			/*!
 			The DeployedTarget which is the target of a Deployment.
 			<p>From package UML::Deployments.</p>
@@ -143,19 +143,19 @@ namespace uml
 			virtual void saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const;
 
 		protected:
-			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
+			virtual const std::shared_ptr<ecore::EClass>& eStaticClass() const;
 
 			//*********************************
 			// EStructuralFeature Get/Set/IsSet
 			//*********************************
 			virtual Any eGet(int featureID, bool resolve, bool coreType) const ;
-			virtual bool eSet(int featureID, Any newValue) ;
+			virtual bool eSet(int featureID, const Any& newValue) ;
 			virtual bool internalEIsSet(int featureID) const ;
 
 			//*********************************
 			// EOperation Invoke
 			//*********************************
-			virtual Any eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments) ;
+			virtual Any eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments) ;
 
 		private:
 			std::weak_ptr<uml::Deployment> m_thisDeploymentPtr;

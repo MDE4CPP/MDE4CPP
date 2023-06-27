@@ -33,9 +33,9 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "fUML/Semantics/Values/ValuesFactory.hpp"
 #include "fUML/Semantics/Loci/LociFactory.hpp"
 #include "uml/umlFactory.hpp"
+#include "fUML/Semantics/Values/ValuesFactory.hpp"
 #include "ocl/Evaluations/EvaluationsFactory.hpp"
 #include "ocl/Expressions/ExpressionsFactory.hpp"
 #include "ocl/Evaluations/EvalEnvironment.hpp"
@@ -126,33 +126,33 @@ std::shared_ptr<ecore::EObject> IfExpEvalImpl::copy() const
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference condition */
-std::shared_ptr<ocl::Evaluations::OclExpEval> IfExpEvalImpl::getCondition() const
+const std::shared_ptr<ocl::Evaluations::OclExpEval>& IfExpEvalImpl::getCondition() const
 {
     return m_condition;
 }
-void IfExpEvalImpl::setCondition(std::shared_ptr<ocl::Evaluations::OclExpEval> _condition)
+void IfExpEvalImpl::setCondition(const std::shared_ptr<ocl::Evaluations::OclExpEval>& _condition)
 {
     m_condition = _condition;
 	
 }
 
 /* Getter & Setter for reference elseExpression */
-std::shared_ptr<ocl::Evaluations::OclExpEval> IfExpEvalImpl::getElseExpression() const
+const std::shared_ptr<ocl::Evaluations::OclExpEval>& IfExpEvalImpl::getElseExpression() const
 {
     return m_elseExpression;
 }
-void IfExpEvalImpl::setElseExpression(std::shared_ptr<ocl::Evaluations::OclExpEval> _elseExpression)
+void IfExpEvalImpl::setElseExpression(const std::shared_ptr<ocl::Evaluations::OclExpEval>& _elseExpression)
 {
     m_elseExpression = _elseExpression;
 	
 }
 
 /* Getter & Setter for reference thenExpression */
-std::shared_ptr<ocl::Evaluations::OclExpEval> IfExpEvalImpl::getThenExpression() const
+const std::shared_ptr<ocl::Evaluations::OclExpEval>& IfExpEvalImpl::getThenExpression() const
 {
     return m_thenExpression;
 }
-void IfExpEvalImpl::setThenExpression(std::shared_ptr<ocl::Evaluations::OclExpEval> _thenExpression)
+void IfExpEvalImpl::setThenExpression(const std::shared_ptr<ocl::Evaluations::OclExpEval>& _thenExpression)
 {
     m_thenExpression = _thenExpression;
 	
@@ -307,7 +307,7 @@ void IfExpEvalImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHa
 	}
 }
 
-std::shared_ptr<ecore::EClass> IfExpEvalImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& IfExpEvalImpl::eStaticClass() const
 {
 	return ocl::Evaluations::EvaluationsPackage::eInstance()->getIfExpEval_Class();
 }
@@ -343,7 +343,7 @@ bool IfExpEvalImpl::internalEIsSet(int featureID) const
 	return OclExpEvalImpl::internalEIsSet(featureID);
 }
 
-bool IfExpEvalImpl::eSet(int featureID, Any newValue)
+bool IfExpEvalImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -379,7 +379,7 @@ bool IfExpEvalImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any IfExpEvalImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any IfExpEvalImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

@@ -128,7 +128,7 @@ std::shared_ptr<ecore::EObject> TemplateParameterSubstitutionImpl::copy() const
 //*********************************
 // Operations
 //*********************************
-bool TemplateParameterSubstitutionImpl::must_be_compatible(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool TemplateParameterSubstitutionImpl::must_be_compatible(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -141,33 +141,33 @@ bool TemplateParameterSubstitutionImpl::must_be_compatible(Any diagnostics,std::
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference actual */
-std::shared_ptr<uml::ParameterableElement> TemplateParameterSubstitutionImpl::getActual() const
+const std::shared_ptr<uml::ParameterableElement>& TemplateParameterSubstitutionImpl::getActual() const
 {
     return m_actual;
 }
-void TemplateParameterSubstitutionImpl::setActual(std::shared_ptr<uml::ParameterableElement> _actual)
+void TemplateParameterSubstitutionImpl::setActual(const std::shared_ptr<uml::ParameterableElement>& _actual)
 {
     m_actual = _actual;
 	
 }
 
 /* Getter & Setter for reference formal */
-std::shared_ptr<uml::TemplateParameter> TemplateParameterSubstitutionImpl::getFormal() const
+const std::shared_ptr<uml::TemplateParameter>& TemplateParameterSubstitutionImpl::getFormal() const
 {
     return m_formal;
 }
-void TemplateParameterSubstitutionImpl::setFormal(std::shared_ptr<uml::TemplateParameter> _formal)
+void TemplateParameterSubstitutionImpl::setFormal(const std::shared_ptr<uml::TemplateParameter>& _formal)
 {
     m_formal = _formal;
 	
 }
 
 /* Getter & Setter for reference ownedActual */
-std::shared_ptr<uml::ParameterableElement> TemplateParameterSubstitutionImpl::getOwnedActual() const
+const std::shared_ptr<uml::ParameterableElement>& TemplateParameterSubstitutionImpl::getOwnedActual() const
 {
     return m_ownedActual;
 }
-void TemplateParameterSubstitutionImpl::setOwnedActual(std::shared_ptr<uml::ParameterableElement> _ownedActual)
+void TemplateParameterSubstitutionImpl::setOwnedActual(const std::shared_ptr<uml::ParameterableElement>& _ownedActual)
 {
     m_ownedActual = _ownedActual;
 	
@@ -382,7 +382,7 @@ void TemplateParameterSubstitutionImpl::saveContent(std::shared_ptr<persistence:
 	}
 }
 
-std::shared_ptr<ecore::EClass> TemplateParameterSubstitutionImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& TemplateParameterSubstitutionImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getTemplateParameterSubstitution_Class();
 }
@@ -425,7 +425,7 @@ bool TemplateParameterSubstitutionImpl::internalEIsSet(int featureID) const
 	return ElementImpl::internalEIsSet(featureID);
 }
 
-bool TemplateParameterSubstitutionImpl::eSet(int featureID, Any newValue)
+bool TemplateParameterSubstitutionImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -469,7 +469,7 @@ bool TemplateParameterSubstitutionImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any TemplateParameterSubstitutionImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any TemplateParameterSubstitutionImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

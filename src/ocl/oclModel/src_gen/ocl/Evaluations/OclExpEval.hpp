@@ -91,14 +91,14 @@ namespace ocl::Evaluations
 			//*********************************
 			// Reference Getters & Setters
 			//*********************************
-			virtual std::shared_ptr<ocl::Evaluations::EvalEnvironment> getBeforeEnvironment() const = 0;
-			virtual void setBeforeEnvironment(std::shared_ptr<ocl::Evaluations::EvalEnvironment>) = 0;
-			virtual std::shared_ptr<ocl::Evaluations::EvalEnvironment> getEnvironment() const = 0;
-			virtual void setEnvironment(std::shared_ptr<ocl::Evaluations::EvalEnvironment>) = 0;
-			virtual std::shared_ptr<ocl::Expressions::OclExpression> getModel() const = 0;
-			virtual void setModel(std::shared_ptr<ocl::Expressions::OclExpression>) = 0;
-			virtual std::shared_ptr<fUML::Semantics::Values::Value> getResultValue() const = 0;
-			virtual void setResultValue(std::shared_ptr<fUML::Semantics::Values::Value>) = 0;
+			virtual const std::shared_ptr<ocl::Evaluations::EvalEnvironment>& getBeforeEnvironment() const = 0;
+			virtual void setBeforeEnvironment(const std::shared_ptr<ocl::Evaluations::EvalEnvironment>&) = 0;
+			virtual const std::shared_ptr<ocl::Evaluations::EvalEnvironment>& getEnvironment() const = 0;
+			virtual void setEnvironment(const std::shared_ptr<ocl::Evaluations::EvalEnvironment>&) = 0;
+			virtual const std::shared_ptr<ocl::Expressions::OclExpression>& getModel() const = 0;
+			virtual void setModel(const std::shared_ptr<ocl::Expressions::OclExpression>&) = 0;
+			virtual const std::shared_ptr<fUML::Semantics::Values::Value>& getResultValue() const = 0;
+			virtual void setResultValue(const std::shared_ptr<fUML::Semantics::Values::Value>&) = 0;
 
 			//*********************************
 			// Union Reference Getters

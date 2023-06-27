@@ -39,8 +39,8 @@
 #include "fUML/Semantics/Activities/ActivityNodeActivation.hpp"
 #include "fUML/Semantics/Activities/Token.hpp"
 //Factories and Package includes
-#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/SemanticsPackage.hpp"
+#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/Activities/ActivitiesPackage.hpp"
 
 using namespace fUML::Semantics::Activities;
@@ -121,7 +121,7 @@ return fUML::Semantics::Activities::ActivitiesFactory::eInstance()->createContro
 	//end of body
 }
 
-bool ControlTokenImpl::equals(std::shared_ptr<fUML::Semantics::Activities::Token> other)
+bool ControlTokenImpl::equals(const std::shared_ptr<fUML::Semantics::Activities::Token>& other)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -219,7 +219,7 @@ void ControlTokenImpl::saveContent(std::shared_ptr<persistence::interfaces::XSav
 	}
 }
 
-std::shared_ptr<ecore::EClass> ControlTokenImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& ControlTokenImpl::eStaticClass() const
 {
 	return fUML::Semantics::Activities::ActivitiesPackage::eInstance()->getControlToken_Class();
 }
@@ -243,7 +243,7 @@ bool ControlTokenImpl::internalEIsSet(int featureID) const
 	return TokenImpl::internalEIsSet(featureID);
 }
 
-bool ControlTokenImpl::eSet(int featureID, Any newValue)
+bool ControlTokenImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -255,7 +255,7 @@ bool ControlTokenImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any ControlTokenImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any ControlTokenImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

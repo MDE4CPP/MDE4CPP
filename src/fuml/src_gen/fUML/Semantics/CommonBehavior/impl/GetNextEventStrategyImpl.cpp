@@ -37,8 +37,8 @@
 #include "fUML/Semantics/CommonBehavior/ObjectActivation.hpp"
 #include "fUML/Semantics/Loci/SemanticStrategy.hpp"
 //Factories and Package includes
-#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/SemanticsPackage.hpp"
+#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/CommonBehavior/CommonBehaviorPackage.hpp"
 #include "fUML/Semantics/Loci/LociPackage.hpp"
 
@@ -105,7 +105,7 @@ return "getNextEvent";
 	//end of body
 }
 
-std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccurrence> GetNextEventStrategyImpl::retrieveNextEvent(std::shared_ptr<fUML::Semantics::CommonBehavior::ObjectActivation> objectActivation)
+std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccurrence> GetNextEventStrategyImpl::retrieveNextEvent(const std::shared_ptr<fUML::Semantics::CommonBehavior::ObjectActivation>& objectActivation)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -188,7 +188,7 @@ void GetNextEventStrategyImpl::saveContent(std::shared_ptr<persistence::interfac
 	}
 }
 
-std::shared_ptr<ecore::EClass> GetNextEventStrategyImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& GetNextEventStrategyImpl::eStaticClass() const
 {
 	return fUML::Semantics::CommonBehavior::CommonBehaviorPackage::eInstance()->getGetNextEventStrategy_Class();
 }
@@ -212,7 +212,7 @@ bool GetNextEventStrategyImpl::internalEIsSet(int featureID) const
 	return fUML::Semantics::Loci::SemanticStrategyImpl::internalEIsSet(featureID);
 }
 
-bool GetNextEventStrategyImpl::eSet(int featureID, Any newValue)
+bool GetNextEventStrategyImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -224,7 +224,7 @@ bool GetNextEventStrategyImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any GetNextEventStrategyImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any GetNextEventStrategyImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

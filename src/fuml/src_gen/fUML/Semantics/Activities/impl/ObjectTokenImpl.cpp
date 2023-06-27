@@ -41,8 +41,8 @@
 #include "fUML/Semantics/Activities/Token.hpp"
 #include "fUML/Semantics/Values/Value.hpp"
 //Factories and Package includes
-#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/SemanticsPackage.hpp"
+#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/Activities/ActivitiesPackage.hpp"
 #include "fUML/Semantics/Values/ValuesPackage.hpp"
 
@@ -134,7 +134,7 @@ return copy;
 	//end of body
 }
 
-bool ObjectTokenImpl::equals(std::shared_ptr<fUML::Semantics::Activities::Token> other)
+bool ObjectTokenImpl::equals(const std::shared_ptr<fUML::Semantics::Activities::Token>& other)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -158,11 +158,11 @@ bool ObjectTokenImpl::isControl()
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference value */
-std::shared_ptr<fUML::Semantics::Values::Value> ObjectTokenImpl::getValue() const
+const std::shared_ptr<fUML::Semantics::Values::Value>& ObjectTokenImpl::getValue() const
 {
     return m_value;
 }
-void ObjectTokenImpl::setValue(std::shared_ptr<fUML::Semantics::Values::Value> _value)
+void ObjectTokenImpl::setValue(const std::shared_ptr<fUML::Semantics::Values::Value>& _value)
 {
     m_value = _value;
 	
@@ -272,7 +272,7 @@ void ObjectTokenImpl::saveContent(std::shared_ptr<persistence::interfaces::XSave
 	}
 }
 
-std::shared_ptr<ecore::EClass> ObjectTokenImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& ObjectTokenImpl::eStaticClass() const
 {
 	return fUML::Semantics::Activities::ActivitiesPackage::eInstance()->getObjectToken_Class();
 }
@@ -300,7 +300,7 @@ bool ObjectTokenImpl::internalEIsSet(int featureID) const
 	return TokenImpl::internalEIsSet(featureID);
 }
 
-bool ObjectTokenImpl::eSet(int featureID, Any newValue)
+bool ObjectTokenImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -320,7 +320,7 @@ bool ObjectTokenImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any ObjectTokenImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any ObjectTokenImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

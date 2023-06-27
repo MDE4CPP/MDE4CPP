@@ -211,11 +211,11 @@ std::shared_ptr<ecore::EObject> VariableExpImpl::copy() const
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference referredVariable */
-std::shared_ptr<ocl::Expressions::Variable> VariableExpImpl::getReferredVariable() const
+const std::shared_ptr<ocl::Expressions::Variable>& VariableExpImpl::getReferredVariable() const
 {
     return m_referredVariable;
 }
-void VariableExpImpl::setReferredVariable(std::shared_ptr<ocl::Expressions::Variable> _referredVariable)
+void VariableExpImpl::setReferredVariable(const std::shared_ptr<ocl::Expressions::Variable>& _referredVariable)
 {
     m_referredVariable = _referredVariable;
 	
@@ -386,7 +386,7 @@ void VariableExpImpl::saveContent(std::shared_ptr<persistence::interfaces::XSave
 	}
 }
 
-std::shared_ptr<ecore::EClass> VariableExpImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& VariableExpImpl::eStaticClass() const
 {
 	return ocl::Expressions::ExpressionsPackage::eInstance()->getVariableExp_Class();
 }
@@ -414,7 +414,7 @@ bool VariableExpImpl::internalEIsSet(int featureID) const
 	return OclExpressionImpl::internalEIsSet(featureID);
 }
 
-bool VariableExpImpl::eSet(int featureID, Any newValue)
+bool VariableExpImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -434,7 +434,7 @@ bool VariableExpImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any VariableExpImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any VariableExpImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

@@ -106,12 +106,12 @@ std::shared_ptr<ecore::EObject> CollectionValueImpl::copy() const
 //*********************************
 // Operations
 //*********************************
-bool CollectionValueImpl::addValue(std::shared_ptr<fUML::Semantics::Values::Value> value)
+bool CollectionValueImpl::addValue(const std::shared_ptr<fUML::Semantics::Values::Value>& value)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool CollectionValueImpl::equals(std::shared_ptr<fUML::Semantics::Values::Value> otherValue)
+bool CollectionValueImpl::equals(const std::shared_ptr<fUML::Semantics::Values::Value>& otherValue)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -136,7 +136,7 @@ bool CollectionValueImpl::equals(std::shared_ptr<fUML::Semantics::Values::Value>
 	//end of body
 }
 
-bool CollectionValueImpl::find(std::shared_ptr<fUML::Semantics::Values::Value> value)
+bool CollectionValueImpl::find(const std::shared_ptr<fUML::Semantics::Values::Value>& value)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -177,7 +177,7 @@ return result;
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference elements */
-std::shared_ptr<Bag<ocl::Values::Element>> CollectionValueImpl::getElements() const
+const std::shared_ptr<Bag<ocl::Values::Element>>& CollectionValueImpl::getElements() const
 {
 	if(m_elements == nullptr)
 	{
@@ -299,7 +299,7 @@ void CollectionValueImpl::saveContent(std::shared_ptr<persistence::interfaces::X
 	}
 }
 
-std::shared_ptr<ecore::EClass> CollectionValueImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& CollectionValueImpl::eStaticClass() const
 {
 	return ocl::Values::ValuesPackage::eInstance()->getCollectionValue_Class();
 }
@@ -327,7 +327,7 @@ bool CollectionValueImpl::internalEIsSet(int featureID) const
 	return StaticValueImpl::internalEIsSet(featureID);
 }
 
-bool CollectionValueImpl::eSet(int featureID, Any newValue)
+bool CollectionValueImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -376,7 +376,7 @@ bool CollectionValueImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any CollectionValueImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any CollectionValueImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

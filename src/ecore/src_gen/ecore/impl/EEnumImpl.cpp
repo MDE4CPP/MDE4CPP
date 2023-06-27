@@ -205,7 +205,7 @@ std::shared_ptr<ecore::EEnumLiteral> EEnumImpl::getEEnumLiteralByLiteral(std::st
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference eLiterals */
-std::shared_ptr<Subset<ecore::EEnumLiteral, ecore::EObject>> EEnumImpl::getELiterals() const
+const std::shared_ptr<Subset<ecore::EEnumLiteral, ecore::EObject>>& EEnumImpl::getELiterals() const
 {
 	if(m_eLiterals == nullptr)
 	{
@@ -353,7 +353,7 @@ void EEnumImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandle
 	}
 }
 
-std::shared_ptr<EClass> EEnumImpl::eStaticClass() const
+const std::shared_ptr<EClass>& EEnumImpl::eStaticClass() const
 {
 	return ecore::ecorePackage::eInstance()->getEEnum_Class();
 }
@@ -381,7 +381,7 @@ bool EEnumImpl::internalEIsSet(int featureID) const
 	return EDataTypeImpl::internalEIsSet(featureID);
 }
 
-bool EEnumImpl::eSet(int featureID, Any newValue)
+bool EEnumImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -430,7 +430,7 @@ bool EEnumImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any EEnumImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any EEnumImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

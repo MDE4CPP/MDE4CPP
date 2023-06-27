@@ -136,13 +136,13 @@ namespace uml
 			)
 			*/
 			 
-			virtual bool interaction_uses_share_lifeline(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
+			virtual bool interaction_uses_share_lifeline(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context) = 0;
 			/*!
 			The classifier containing the referenced ConnectableElement must be the same classifier, or an ancestor, of the classifier that contains the interaction enclosing this lifeline.
 			represents.namespace->closure(namespace)->includes(interaction._'context')
 			*/
 			 
-			virtual bool same_classifier(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
+			virtual bool same_classifier(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context) = 0;
 			/*!
 			The selector value, if present, must be a LiteralString or a LiteralInteger
 			self.selector->notEmpty() implies 
@@ -150,13 +150,13 @@ namespace uml
 			self.selector.oclIsKindOf(LiteralString)
 			*/
 			 
-			virtual bool selector_int_or_string(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
+			virtual bool selector_int_or_string(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context) = 0;
 			/*!
 			The selector for a Lifeline must only be specified if the referenced Part is multivalued.
 			 self.selector->notEmpty() = (self.represents.oclIsKindOf(MultiplicityElement) and self.represents.oclAsType(MultiplicityElement).isMultivalued())
 			*/
 			 
-			virtual bool selector_specified(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
+			virtual bool selector_specified(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context) = 0;
 
 			//*********************************
 			// Attribute Getters & Setters
@@ -170,19 +170,19 @@ namespace uml
 			<p>From package UML::Interactions.</p>
 			*/
 			
-			virtual std::shared_ptr<Bag<uml::InteractionFragment>> getCoveredBy() const = 0;
+			virtual const std::shared_ptr<Bag<uml::InteractionFragment>>& getCoveredBy() const = 0;
 			/*!
 			References the Interaction that represents the decomposition.
 			<p>From package UML::Interactions.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::PartDecomposition> getDecomposedAs() const = 0;
+			virtual const std::shared_ptr<uml::PartDecomposition>& getDecomposedAs() const = 0;
 			/*!
 			References the Interaction that represents the decomposition.
 			<p>From package UML::Interactions.</p>
 			*/
 			
-			virtual void setDecomposedAs(std::shared_ptr<uml::PartDecomposition>) = 0;
+			virtual void setDecomposedAs(const std::shared_ptr<uml::PartDecomposition>&) = 0;
 			/*!
 			References the Interaction enclosing this Lifeline.
 			<p>From package UML::Interactions.</p>
@@ -200,25 +200,25 @@ namespace uml
 			<p>From package UML::Interactions.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::ConnectableElement> getRepresents() const = 0;
+			virtual const std::shared_ptr<uml::ConnectableElement>& getRepresents() const = 0;
 			/*!
 			References the ConnectableElement within the classifier that contains the enclosing interaction.
 			<p>From package UML::Interactions.</p>
 			*/
 			
-			virtual void setRepresents(std::shared_ptr<uml::ConnectableElement>) = 0;
+			virtual void setRepresents(const std::shared_ptr<uml::ConnectableElement>&) = 0;
 			/*!
 			If the referenced ConnectableElement is multivalued, then this specifies the specific individual part within that set.
 			<p>From package UML::Interactions.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::ValueSpecification> getSelector() const = 0;
+			virtual const std::shared_ptr<uml::ValueSpecification>& getSelector() const = 0;
 			/*!
 			If the referenced ConnectableElement is multivalued, then this specifies the specific individual part within that set.
 			<p>From package UML::Interactions.</p>
 			*/
 			
-			virtual void setSelector(std::shared_ptr<uml::ValueSpecification>) = 0;
+			virtual void setSelector(const std::shared_ptr<uml::ValueSpecification>&) = 0;
 
 			//*********************************
 			// Union Reference Getters

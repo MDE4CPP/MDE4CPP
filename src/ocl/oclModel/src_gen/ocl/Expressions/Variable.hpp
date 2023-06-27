@@ -104,20 +104,20 @@ namespace ocl::Expressions
 			//*********************************
 			virtual std::weak_ptr<ocl::Expressions::IterateExp> getBaseExp() const = 0;
 			virtual void setBaseExp(std::weak_ptr<ocl::Expressions::IterateExp>) = 0;
-			virtual std::shared_ptr<ocl::Expressions::OclExpression> getInitExpression() const = 0;
-			virtual void setInitExpression(std::shared_ptr<ocl::Expressions::OclExpression>) = 0;
+			virtual const std::shared_ptr<ocl::Expressions::OclExpression>& getInitExpression() const = 0;
+			virtual void setInitExpression(const std::shared_ptr<ocl::Expressions::OclExpression>&) = 0;
 			virtual std::weak_ptr<ocl::Expressions::LoopExp> getLoopExp() const = 0;
 			virtual void setLoopExp(std::weak_ptr<ocl::Expressions::LoopExp>) = 0;
-			virtual std::shared_ptr<ocl::Expressions::VariableExp> getReferringExp() const = 0;
-			virtual void setReferringExp(std::shared_ptr<ocl::Expressions::VariableExp>) = 0;
-			virtual std::shared_ptr<ecore::EParameter> getRepresentedParameter() const = 0;
-			virtual void setRepresentedParameter(std::shared_ptr<ecore::EParameter>) = 0;
+			virtual const std::shared_ptr<ocl::Expressions::VariableExp>& getReferringExp() const = 0;
+			virtual void setReferringExp(const std::shared_ptr<ocl::Expressions::VariableExp>&) = 0;
+			virtual const std::shared_ptr<ecore::EParameter>& getRepresentedParameter() const = 0;
+			virtual void setRepresentedParameter(const std::shared_ptr<ecore::EParameter>&) = 0;
 			virtual std::weak_ptr<ocl::Expressions::ExpressionInOcl> getResultOwner() const = 0;
 			virtual void setResultOwner(std::weak_ptr<ocl::Expressions::ExpressionInOcl>) = 0;
 			virtual std::weak_ptr<ocl::Expressions::ExpressionInOcl> getSelfOwner() const = 0;
 			virtual void setSelfOwner(std::weak_ptr<ocl::Expressions::ExpressionInOcl>) = 0;
-			virtual std::shared_ptr<fUML::Semantics::Values::Value> getValue() const = 0;
-			virtual void setValue(std::shared_ptr<fUML::Semantics::Values::Value>) = 0;
+			virtual const std::shared_ptr<fUML::Semantics::Values::Value>& getValue() const = 0;
+			virtual void setValue(const std::shared_ptr<fUML::Semantics::Values::Value>&) = 0;
 			virtual std::weak_ptr<ocl::Expressions::ExpressionInOcl> getVarOwner() const = 0;
 			virtual void setVarOwner(std::weak_ptr<ocl::Expressions::ExpressionInOcl>) = 0;
 

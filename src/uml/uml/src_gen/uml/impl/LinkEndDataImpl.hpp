@@ -56,31 +56,31 @@ namespace uml
 			value->excludesAll(qualifier.value)
 			*/
 			 
-			virtual bool end_object_input_pin(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
+			virtual bool end_object_input_pin(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context) ;
 			/*!
 			The multiplicity of the value InputPin must be 1..1.
 			value<>null implies value.is(1,1)
 			*/
 			 
-			virtual bool multiplicity(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
+			virtual bool multiplicity(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context) ;
 			/*!
 			The Property must be an Association memberEnd.
 			end.association <> null
 			*/
 			 
-			virtual bool property_is_association_end(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
+			virtual bool property_is_association_end(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context) ;
 			/*!
 			The qualifiers must be qualifiers of the Association end.
 			end.qualifier->includesAll(qualifier.qualifier)
 			*/
 			 
-			virtual bool qualifiers(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
+			virtual bool qualifiers(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context) ;
 			/*!
 			The type of the value InputPin conforms to the type of the Association end.
 			value<>null implies value.type.conformsTo(end.type)
 			*/
 			 
-			virtual bool same_type(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
+			virtual bool same_type(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context) ;
 			
 			//*********************************
 			// Attribute Getters & Setters
@@ -94,31 +94,31 @@ namespace uml
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::Property> getEnd() const ;
+			virtual const std::shared_ptr<uml::Property>& getEnd() const ;
 			/*!
 			The Association end for which this LinkEndData specifies values.
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual void setEnd(std::shared_ptr<uml::Property>) ;
+			virtual void setEnd(const std::shared_ptr<uml::Property>&) ;
 			/*!
 			A set of QualifierValues used to provide values for the qualifiers of the end.
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual std::shared_ptr<Subset<uml::QualifierValue, uml::Element>> getQualifier() const ;
+			virtual const std::shared_ptr<Subset<uml::QualifierValue, uml::Element>>& getQualifier() const ;
 			/*!
 			The InputPin that provides the specified value for the given end. This InputPin is omitted if the LinkEndData specifies the "open" end for a ReadLinkAction.
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::InputPin> getValue() const ;
+			virtual const std::shared_ptr<uml::InputPin>& getValue() const ;
 			/*!
 			The InputPin that provides the specified value for the given end. This InputPin is omitted if the LinkEndData specifies the "open" end for a ReadLinkAction.
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual void setValue(std::shared_ptr<uml::InputPin>) ;
+			virtual void setValue(const std::shared_ptr<uml::InputPin>&) ;
 			
 			//*********************************
 			// Union Reference Getters
@@ -146,19 +146,19 @@ namespace uml
 			virtual void saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const;
 
 		protected:
-			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
+			virtual const std::shared_ptr<ecore::EClass>& eStaticClass() const;
 
 			//*********************************
 			// EStructuralFeature Get/Set/IsSet
 			//*********************************
 			virtual Any eGet(int featureID, bool resolve, bool coreType) const ;
-			virtual bool eSet(int featureID, Any newValue) ;
+			virtual bool eSet(int featureID, const Any& newValue) ;
 			virtual bool internalEIsSet(int featureID) const ;
 
 			//*********************************
 			// EOperation Invoke
 			//*********************************
-			virtual Any eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments) ;
+			virtual Any eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments) ;
 
 		private:
 			std::weak_ptr<uml::LinkEndData> m_thisLinkEndDataPtr;

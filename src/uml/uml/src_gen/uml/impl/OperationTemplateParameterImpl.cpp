@@ -119,7 +119,7 @@ std::shared_ptr<ecore::EObject> OperationTemplateParameterImpl::copy() const
 //*********************************
 // Operations
 //*********************************
-bool OperationTemplateParameterImpl::match_default_signature(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool OperationTemplateParameterImpl::match_default_signature(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -238,7 +238,7 @@ void OperationTemplateParameterImpl::saveContent(std::shared_ptr<persistence::in
 	}
 }
 
-std::shared_ptr<ecore::EClass> OperationTemplateParameterImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& OperationTemplateParameterImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getOperationTemplateParameter_Class();
 }
@@ -262,7 +262,7 @@ bool OperationTemplateParameterImpl::internalEIsSet(int featureID) const
 	return TemplateParameterImpl::internalEIsSet(featureID);
 }
 
-bool OperationTemplateParameterImpl::eSet(int featureID, Any newValue)
+bool OperationTemplateParameterImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -274,7 +274,7 @@ bool OperationTemplateParameterImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any OperationTemplateParameterImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any OperationTemplateParameterImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

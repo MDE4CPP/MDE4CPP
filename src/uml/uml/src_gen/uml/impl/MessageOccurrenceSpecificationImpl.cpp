@@ -277,7 +277,7 @@ void MessageOccurrenceSpecificationImpl::saveContent(std::shared_ptr<persistence
 	}
 }
 
-std::shared_ptr<ecore::EClass> MessageOccurrenceSpecificationImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& MessageOccurrenceSpecificationImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getMessageOccurrenceSpecification_Class();
 }
@@ -315,7 +315,7 @@ bool MessageOccurrenceSpecificationImpl::internalEIsSet(int featureID) const
 	return result;
 }
 
-bool MessageOccurrenceSpecificationImpl::eSet(int featureID, Any newValue)
+bool MessageOccurrenceSpecificationImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -334,7 +334,7 @@ bool MessageOccurrenceSpecificationImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any MessageOccurrenceSpecificationImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any MessageOccurrenceSpecificationImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

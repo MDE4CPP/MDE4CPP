@@ -132,12 +132,12 @@ std::string ElementImportImpl::getName()
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool ElementImportImpl::imported_element_is_public(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool ElementImportImpl::imported_element_is_public(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool ElementImportImpl::visibility_public_or_private(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool ElementImportImpl::visibility_public_or_private(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -146,7 +146,7 @@ bool ElementImportImpl::visibility_public_or_private(Any diagnostics,std::shared
 // Attribute Getters & Setters
 //*********************************
 /* Getter & Setter for attribute alias */
-std::string ElementImportImpl::getAlias() const 
+std::string ElementImportImpl::getAlias() const
 {
 	return m_alias;
 }
@@ -157,7 +157,7 @@ void ElementImportImpl::setAlias(std::string _alias)
 }
 
 /* Getter & Setter for attribute visibility */
-uml::VisibilityKind ElementImportImpl::getVisibility() const 
+uml::VisibilityKind ElementImportImpl::getVisibility() const
 {
 	return m_visibility;
 }
@@ -171,11 +171,11 @@ void ElementImportImpl::setVisibility(uml::VisibilityKind _visibility)
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference importedElement */
-std::shared_ptr<uml::PackageableElement> ElementImportImpl::getImportedElement() const
+const std::shared_ptr<uml::PackageableElement>& ElementImportImpl::getImportedElement() const
 {
     return m_importedElement;
 }
-void ElementImportImpl::setImportedElement(std::shared_ptr<uml::PackageableElement> _importedElement)
+void ElementImportImpl::setImportedElement(const std::shared_ptr<uml::PackageableElement>& _importedElement)
 {
     m_importedElement = _importedElement;
 	
@@ -459,7 +459,7 @@ void ElementImportImpl::saveContent(std::shared_ptr<persistence::interfaces::XSa
 	}
 }
 
-std::shared_ptr<ecore::EClass> ElementImportImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& ElementImportImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getElementImport_Class();
 }
@@ -502,7 +502,7 @@ bool ElementImportImpl::internalEIsSet(int featureID) const
 	return DirectedRelationshipImpl::internalEIsSet(featureID);
 }
 
-bool ElementImportImpl::eSet(int featureID, Any newValue)
+bool ElementImportImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -544,7 +544,7 @@ bool ElementImportImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any ElementImportImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any ElementImportImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

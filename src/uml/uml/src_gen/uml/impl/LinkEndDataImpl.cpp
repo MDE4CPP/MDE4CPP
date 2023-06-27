@@ -150,27 +150,27 @@ std::shared_ptr<Bag<uml::InputPin> > LinkEndDataImpl::allPins()
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool LinkEndDataImpl::end_object_input_pin(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool LinkEndDataImpl::end_object_input_pin(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool LinkEndDataImpl::multiplicity(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool LinkEndDataImpl::multiplicity(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool LinkEndDataImpl::property_is_association_end(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool LinkEndDataImpl::property_is_association_end(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool LinkEndDataImpl::qualifiers(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool LinkEndDataImpl::qualifiers(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool LinkEndDataImpl::same_type(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool LinkEndDataImpl::same_type(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -183,18 +183,18 @@ bool LinkEndDataImpl::same_type(Any diagnostics,std::shared_ptr<std::map < Any, 
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference end */
-std::shared_ptr<uml::Property> LinkEndDataImpl::getEnd() const
+const std::shared_ptr<uml::Property>& LinkEndDataImpl::getEnd() const
 {
     return m_end;
 }
-void LinkEndDataImpl::setEnd(std::shared_ptr<uml::Property> _end)
+void LinkEndDataImpl::setEnd(const std::shared_ptr<uml::Property>& _end)
 {
     m_end = _end;
 	
 }
 
 /* Getter & Setter for reference qualifier */
-std::shared_ptr<Subset<uml::QualifierValue, uml::Element>> LinkEndDataImpl::getQualifier() const
+const std::shared_ptr<Subset<uml::QualifierValue, uml::Element>>& LinkEndDataImpl::getQualifier() const
 {
 	if(m_qualifier == nullptr)
 	{
@@ -215,11 +215,11 @@ std::shared_ptr<Subset<uml::QualifierValue, uml::Element>> LinkEndDataImpl::getQ
 }
 
 /* Getter & Setter for reference value */
-std::shared_ptr<uml::InputPin> LinkEndDataImpl::getValue() const
+const std::shared_ptr<uml::InputPin>& LinkEndDataImpl::getValue() const
 {
     return m_value;
 }
-void LinkEndDataImpl::setValue(std::shared_ptr<uml::InputPin> _value)
+void LinkEndDataImpl::setValue(const std::shared_ptr<uml::InputPin>& _value)
 {
     m_value = _value;
 	
@@ -397,7 +397,7 @@ void LinkEndDataImpl::saveContent(std::shared_ptr<persistence::interfaces::XSave
 	}
 }
 
-std::shared_ptr<ecore::EClass> LinkEndDataImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& LinkEndDataImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getLinkEndData_Class();
 }
@@ -433,7 +433,7 @@ bool LinkEndDataImpl::internalEIsSet(int featureID) const
 	return ElementImpl::internalEIsSet(featureID);
 }
 
-bool LinkEndDataImpl::eSet(int featureID, Any newValue)
+bool LinkEndDataImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -498,7 +498,7 @@ bool LinkEndDataImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any LinkEndDataImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any LinkEndDataImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

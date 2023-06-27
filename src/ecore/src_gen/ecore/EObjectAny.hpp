@@ -71,8 +71,8 @@ namespace ecore
 			//*********************************
 			// Reference Getters & Setters
 			//*********************************
-			virtual Any getAny() const = 0;
-			virtual void setAny(Any _any) = 0;
+			virtual const Any& getAny() const = 0;
+			virtual void setAny(const Any& _any) = 0;
 
 			//*********************************
 			// Union Reference Getters

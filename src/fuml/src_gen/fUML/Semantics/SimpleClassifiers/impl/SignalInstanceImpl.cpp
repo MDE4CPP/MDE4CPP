@@ -34,16 +34,16 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "uml/umlFactory.hpp"
 #include "fUML/Semantics/SimpleClassifiers/SimpleClassifiersFactory.hpp"
+#include "uml/umlFactory.hpp"
 #include "uml/Classifier.hpp"
 #include "fUML/Semantics/SimpleClassifiers/CompoundValue.hpp"
 #include "fUML/Semantics/SimpleClassifiers/FeatureValue.hpp"
 #include "uml/Signal.hpp"
 #include "fUML/Semantics/Values/Value.hpp"
 //Factories and Package includes
-#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/SemanticsPackage.hpp"
+#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/SimpleClassifiers/SimpleClassifiersPackage.hpp"
 #include "fUML/Semantics/Values/ValuesPackage.hpp"
 #include "uml/umlPackage.hpp"
@@ -150,11 +150,11 @@ return fUML::Semantics::SimpleClassifiers::SimpleClassifiersFactory::eInstance()
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference type */
-std::shared_ptr<uml::Signal> SignalInstanceImpl::getType() const
+const std::shared_ptr<uml::Signal>& SignalInstanceImpl::getType() const
 {
     return m_type;
 }
-void SignalInstanceImpl::setType(std::shared_ptr<uml::Signal> _type)
+void SignalInstanceImpl::setType(const std::shared_ptr<uml::Signal>& _type)
 {
     m_type = _type;
 	
@@ -271,7 +271,7 @@ void SignalInstanceImpl::saveContent(std::shared_ptr<persistence::interfaces::XS
 	}
 }
 
-std::shared_ptr<ecore::EClass> SignalInstanceImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& SignalInstanceImpl::eStaticClass() const
 {
 	return fUML::Semantics::SimpleClassifiers::SimpleClassifiersPackage::eInstance()->getSignalInstance_Class();
 }
@@ -299,7 +299,7 @@ bool SignalInstanceImpl::internalEIsSet(int featureID) const
 	return CompoundValueImpl::internalEIsSet(featureID);
 }
 
-bool SignalInstanceImpl::eSet(int featureID, Any newValue)
+bool SignalInstanceImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -319,7 +319,7 @@ bool SignalInstanceImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any SignalInstanceImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any SignalInstanceImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

@@ -73,7 +73,7 @@ namespace ocl::Types
 			//*********************************
 			// Operations
 			//*********************************
-			virtual bool kindOf(std::shared_ptr<ocl::Types::CollectionType> coll) = 0;
+			virtual bool kindOf(const std::shared_ptr<ocl::Types::CollectionType>& coll) = 0;
 
 			//*********************************
 			// Attribute Getters & Setters
@@ -82,10 +82,10 @@ namespace ocl::Types
 			//*********************************
 			// Reference Getters & Setters
 			//*********************************
-			virtual std::shared_ptr<ecore::EClassifier> getElementType() const = 0;
-			virtual void setElementType(std::shared_ptr<ecore::EClassifier>) = 0;
-			virtual std::shared_ptr<ocl::Values::CollectionValue> getInstance() const = 0;
-			virtual void setInstance(std::shared_ptr<ocl::Values::CollectionValue>) = 0;
+			virtual const std::shared_ptr<ecore::EClassifier>& getElementType() const = 0;
+			virtual void setElementType(const std::shared_ptr<ecore::EClassifier>&) = 0;
+			virtual const std::shared_ptr<ocl::Values::CollectionValue>& getInstance() const = 0;
+			virtual void setInstance(const std::shared_ptr<ocl::Values::CollectionValue>&) = 0;
 
 			//*********************************
 			// Union Reference Getters

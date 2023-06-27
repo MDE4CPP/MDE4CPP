@@ -112,13 +112,13 @@ namespace uml
 			operand->forAll (oclIsKindOf (LiteralString))
 			*/
 			 
-			virtual bool operands(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
+			virtual bool operands(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context) = 0;
 			/*!
 			If a StringExpression has sub-expressions, it cannot have operands and vice versa (this avoids the problem of having to define a collating sequence between operands and subexpressions).
 			if subExpression->notEmpty() then operand->isEmpty() else operand->notEmpty() endif
 			*/
 			 
-			virtual bool subexpressions(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
+			virtual bool subexpressions(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context) = 0;
 
 			//*********************************
 			// Attribute Getters & Setters
@@ -144,7 +144,7 @@ namespace uml
 			<p>From package UML::Values.</p>
 			*/
 			
-			virtual std::shared_ptr<Subset<uml::StringExpression, uml::Element>> getSubExpression() const = 0;
+			virtual const std::shared_ptr<Subset<uml::StringExpression, uml::Element>>& getSubExpression() const = 0;
 
 			//*********************************
 			// Union Reference Getters

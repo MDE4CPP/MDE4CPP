@@ -51,8 +51,8 @@
 #include "fUML/Semantics/Values/Value.hpp"
 #include "uml/ValueSpecification.hpp"
 //Factories and Package includes
-#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/SemanticsPackage.hpp"
+#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/CommonBehavior/CommonBehaviorPackage.hpp"
 #include "fUML/Semantics/Loci/LociPackage.hpp"
 #include "fUML/Semantics/StructuredClassifiers/StructuredClassifiersPackage.hpp"
@@ -128,7 +128,7 @@ std::shared_ptr<ecore::EObject> ExecutorImpl::copy() const
 //*********************************
 // Operations
 //*********************************
-std::shared_ptr<fUML::Semantics::Values::Value> ExecutorImpl::evaluate(std::shared_ptr<uml::ValueSpecification> specification)
+std::shared_ptr<fUML::Semantics::Values::Value> ExecutorImpl::evaluate(const std::shared_ptr<uml::ValueSpecification>& specification)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -143,7 +143,7 @@ std::shared_ptr<fUML::Semantics::Values::Value> ExecutorImpl::evaluate(std::shar
 	//end of body
 }
 
-std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue> > ExecutorImpl::execute(std::shared_ptr<uml::Behavior> behavior,std::shared_ptr<fUML::Semantics::StructuredClassifiers::Object> context,std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> inputs)
+std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue> > ExecutorImpl::execute(const std::shared_ptr<uml::Behavior>& behavior, const std::shared_ptr<fUML::Semantics::StructuredClassifiers::Object>& context, const std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>>& inputs)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -172,7 +172,7 @@ std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue> > ExecutorI
 	//end of body
 }
 
-std::shared_ptr<fUML::Semantics::StructuredClassifiers::Reference> ExecutorImpl::start(std::shared_ptr<uml::Class> type,std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> inputs)
+std::shared_ptr<fUML::Semantics::StructuredClassifiers::Reference> ExecutorImpl::start(const std::shared_ptr<uml::Class>& type, const std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>>& inputs)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -299,7 +299,7 @@ void ExecutorImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHan
 	}
 }
 
-std::shared_ptr<ecore::EClass> ExecutorImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& ExecutorImpl::eStaticClass() const
 {
 	return fUML::Semantics::Loci::LociPackage::eInstance()->getExecutor_Class();
 }
@@ -330,7 +330,7 @@ bool ExecutorImpl::internalEIsSet(int featureID) const
 	return ecore::EObjectImpl::internalEIsSet(featureID);
 }
 
-bool ExecutorImpl::eSet(int featureID, Any newValue)
+bool ExecutorImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -350,7 +350,7 @@ bool ExecutorImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any ExecutorImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any ExecutorImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

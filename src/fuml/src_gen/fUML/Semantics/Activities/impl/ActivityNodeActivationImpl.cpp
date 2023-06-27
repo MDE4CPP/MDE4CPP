@@ -52,8 +52,8 @@
 #include "fUML/Semantics/Loci/SemanticVisitor.hpp"
 #include "fUML/Semantics/Activities/Token.hpp"
 //Factories and Package includes
-#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/SemanticsPackage.hpp"
+#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/Activities/ActivitiesPackage.hpp"
 #include "fUML/Semantics/Loci/LociPackage.hpp"
 #include "fUML/Semantics/StructuredClassifiers/StructuredClassifiersPackage.hpp"
@@ -142,7 +142,7 @@ ActivityNodeActivationImpl& ActivityNodeActivationImpl::operator=(const Activity
 //*********************************
 // Operations
 //*********************************
-void ActivityNodeActivationImpl::addIncomingEdge(std::shared_ptr<fUML::Semantics::Activities::ActivityEdgeInstance> edge)
+void ActivityNodeActivationImpl::addIncomingEdge(const std::shared_ptr<fUML::Semantics::Activities::ActivityEdgeInstance>& edge)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -154,7 +154,7 @@ void ActivityNodeActivationImpl::addIncomingEdge(std::shared_ptr<fUML::Semantics
 	//end of body
 }
 
-void ActivityNodeActivationImpl::addOutgoingEdge(std::shared_ptr<fUML::Semantics::Activities::ActivityEdgeInstance> edge)
+void ActivityNodeActivationImpl::addOutgoingEdge(const std::shared_ptr<fUML::Semantics::Activities::ActivityEdgeInstance>& edge)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -166,7 +166,7 @@ void ActivityNodeActivationImpl::addOutgoingEdge(std::shared_ptr<fUML::Semantics
 	//end of body
 }
 
-void ActivityNodeActivationImpl::addToken(std::shared_ptr<fUML::Semantics::Activities::Token> token)
+void ActivityNodeActivationImpl::addToken(const std::shared_ptr<fUML::Semantics::Activities::Token>& token)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -207,7 +207,7 @@ this->getHeldTokens()->push_back(token);
 	//end of body
 }
 
-void ActivityNodeActivationImpl::addTokens(std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> tokens)
+void ActivityNodeActivationImpl::addTokens(const std::shared_ptr<Bag<fUML::Semantics::Activities::Token>>& tokens)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -244,7 +244,7 @@ void ActivityNodeActivationImpl::createNodeActivations()
 	//end of body
 }
 
-void ActivityNodeActivationImpl::fire(std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> incomingTokens)
+void ActivityNodeActivationImpl::fire(const std::shared_ptr<Bag<fUML::Semantics::Activities::Token>>& incomingTokens)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -285,7 +285,7 @@ std::shared_ptr<fUML::Semantics::Loci::Locus> ActivityNodeActivationImpl::getExe
 	//end of body
 }
 
-std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivation> ActivityNodeActivationImpl::getNodeActivation(std::shared_ptr<uml::ActivityNode> node)
+std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivation> ActivityNodeActivationImpl::getNodeActivation(const std::shared_ptr<uml::ActivityNode>& node)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -324,7 +324,7 @@ std::shared_ptr<Bag<fUML::Semantics::Activities::Token> > ActivityNodeActivation
 	//end of body
 }
 
-void ActivityNodeActivationImpl::initialize(std::shared_ptr<uml::ActivityNode> node,std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup> group)
+void ActivityNodeActivationImpl::initialize(const std::shared_ptr<uml::ActivityNode>& node, const std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup>& group)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -344,7 +344,7 @@ bool ActivityNodeActivationImpl::isReady()
 	//end of body
 }
 
-bool ActivityNodeActivationImpl::isSourceFor(std::shared_ptr<fUML::Semantics::Activities::ActivityEdgeInstance> edgeInstances)
+bool ActivityNodeActivationImpl::isSourceFor(const std::shared_ptr<fUML::Semantics::Activities::ActivityEdgeInstance>& edgeInstances)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -388,7 +388,7 @@ void ActivityNodeActivationImpl::receiveOffer()
 	//end of body
 }
 
-int ActivityNodeActivationImpl::removeToken(std::shared_ptr<fUML::Semantics::Activities::Token> token)
+int ActivityNodeActivationImpl::removeToken(const std::shared_ptr<fUML::Semantics::Activities::Token>& token)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -464,7 +464,7 @@ void ActivityNodeActivationImpl::run()
 	//end of body
 }
 
-void ActivityNodeActivationImpl::sendOffers(std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> tokens)
+void ActivityNodeActivationImpl::sendOffers(const std::shared_ptr<Bag<fUML::Semantics::Activities::Token>>& tokens)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -583,7 +583,7 @@ this->setRunning(false);
 // Attribute Getters & Setters
 //*********************************
 /* Getter & Setter for attribute running */
-bool ActivityNodeActivationImpl::isRunning() const 
+bool ActivityNodeActivationImpl::isRunning() const
 {
 	return m_running;
 }
@@ -608,7 +608,7 @@ void ActivityNodeActivationImpl::setGroup(std::weak_ptr<fUML::Semantics::Activit
 }
 
 /* Getter & Setter for reference heldTokens */
-std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> ActivityNodeActivationImpl::getHeldTokens() const
+const std::shared_ptr<Bag<fUML::Semantics::Activities::Token>>& ActivityNodeActivationImpl::getHeldTokens() const
 {
 	if(m_heldTokens == nullptr)
 	{
@@ -620,7 +620,7 @@ std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> ActivityNodeActivationI
 }
 
 /* Getter & Setter for reference incomingEdges */
-std::shared_ptr<Bag<fUML::Semantics::Activities::ActivityEdgeInstance>> ActivityNodeActivationImpl::getIncomingEdges() const
+const std::shared_ptr<Bag<fUML::Semantics::Activities::ActivityEdgeInstance>>& ActivityNodeActivationImpl::getIncomingEdges() const
 {
 	if(m_incomingEdges == nullptr)
 	{
@@ -632,18 +632,18 @@ std::shared_ptr<Bag<fUML::Semantics::Activities::ActivityEdgeInstance>> Activity
 }
 
 /* Getter & Setter for reference node */
-std::shared_ptr<uml::ActivityNode> ActivityNodeActivationImpl::getNode() const
+const std::shared_ptr<uml::ActivityNode>& ActivityNodeActivationImpl::getNode() const
 {
     return m_node;
 }
-void ActivityNodeActivationImpl::setNode(std::shared_ptr<uml::ActivityNode> _node)
+void ActivityNodeActivationImpl::setNode(const std::shared_ptr<uml::ActivityNode>& _node)
 {
     m_node = _node;
 	
 }
 
 /* Getter & Setter for reference outgoingEdges */
-std::shared_ptr<Bag<fUML::Semantics::Activities::ActivityEdgeInstance>> ActivityNodeActivationImpl::getOutgoingEdges() const
+const std::shared_ptr<Bag<fUML::Semantics::Activities::ActivityEdgeInstance>>& ActivityNodeActivationImpl::getOutgoingEdges() const
 {
 	if(m_outgoingEdges == nullptr)
 	{
@@ -863,7 +863,7 @@ void ActivityNodeActivationImpl::saveContent(std::shared_ptr<persistence::interf
 	}
 }
 
-std::shared_ptr<ecore::EClass> ActivityNodeActivationImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& ActivityNodeActivationImpl::eStaticClass() const
 {
 	return fUML::Semantics::Activities::ActivitiesPackage::eInstance()->getActivityNodeActivation_Class();
 }
@@ -914,7 +914,7 @@ bool ActivityNodeActivationImpl::internalEIsSet(int featureID) const
 	return fUML::Semantics::Loci::SemanticVisitorImpl::internalEIsSet(featureID);
 }
 
-bool ActivityNodeActivationImpl::eSet(int featureID, Any newValue)
+bool ActivityNodeActivationImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -1060,7 +1060,7 @@ bool ActivityNodeActivationImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any ActivityNodeActivationImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any ActivityNodeActivationImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

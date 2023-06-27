@@ -48,8 +48,8 @@
 #include "fUML/Semantics/SimpleClassifiers/StructuredValue.hpp"
 #include "fUML/Semantics/Values/Value.hpp"
 //Factories and Package includes
-#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/SemanticsPackage.hpp"
+#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/SimpleClassifiers/SimpleClassifiersPackage.hpp"
 #include "fUML/Semantics/Values/ValuesPackage.hpp"
 #include "uml/umlPackage.hpp"
@@ -149,7 +149,7 @@ return newValue;
 	//end of body
 }
 
-void CompoundValueImpl::assignFeatureValue(std::shared_ptr<uml::StructuralFeature> feature,std::shared_ptr<Bag<fUML::Semantics::Values::Value>> values,int position)
+void CompoundValueImpl::assignFeatureValue(const std::shared_ptr<uml::StructuralFeature>& feature, const std::shared_ptr<Bag<fUML::Semantics::Values::Value>>& values, int position)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -169,7 +169,7 @@ void CompoundValueImpl::assignFeatureValue(std::shared_ptr<uml::StructuralFeatur
 	//end of body
 }
 
-bool CompoundValueImpl::equals(std::shared_ptr<fUML::Semantics::Values::Value> otherValue)
+bool CompoundValueImpl::equals(const std::shared_ptr<fUML::Semantics::Values::Value>& otherValue)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -208,7 +208,7 @@ bool CompoundValueImpl::equals(std::shared_ptr<fUML::Semantics::Values::Value> o
 	//end of body
 }
 
-void CompoundValueImpl::removeFeatureValues(std::shared_ptr<uml::Classifier> classifier)
+void CompoundValueImpl::removeFeatureValues(const std::shared_ptr<uml::Classifier>& classifier)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -216,7 +216,7 @@ void CompoundValueImpl::removeFeatureValues(std::shared_ptr<uml::Classifier> cla
 	//end of body
 }
 
-std::shared_ptr<fUML::Semantics::SimpleClassifiers::FeatureValue> CompoundValueImpl::retrieveFeatureValue(std::shared_ptr<uml::StructuralFeature> feature)
+std::shared_ptr<fUML::Semantics::SimpleClassifiers::FeatureValue> CompoundValueImpl::retrieveFeatureValue(const std::shared_ptr<uml::StructuralFeature>& feature)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -287,7 +287,7 @@ std::string CompoundValueImpl::toString()
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference featureValues */
-std::shared_ptr<Bag<fUML::Semantics::SimpleClassifiers::FeatureValue>> CompoundValueImpl::getFeatureValues() const
+const std::shared_ptr<Bag<fUML::Semantics::SimpleClassifiers::FeatureValue>>& CompoundValueImpl::getFeatureValues() const
 {
 	if(m_featureValues == nullptr)
 	{
@@ -401,7 +401,7 @@ void CompoundValueImpl::saveContent(std::shared_ptr<persistence::interfaces::XSa
 	}
 }
 
-std::shared_ptr<ecore::EClass> CompoundValueImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& CompoundValueImpl::eStaticClass() const
 {
 	return fUML::Semantics::SimpleClassifiers::SimpleClassifiersPackage::eInstance()->getCompoundValue_Class();
 }
@@ -429,7 +429,7 @@ bool CompoundValueImpl::internalEIsSet(int featureID) const
 	return StructuredValueImpl::internalEIsSet(featureID);
 }
 
-bool CompoundValueImpl::eSet(int featureID, Any newValue)
+bool CompoundValueImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -478,7 +478,7 @@ bool CompoundValueImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any CompoundValueImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any CompoundValueImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

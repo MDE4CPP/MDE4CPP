@@ -91,13 +91,13 @@ namespace uml
 			outgoing->forAll(oclIsKindOf(ControlFlow))
 			*/
 			 
-			virtual bool control_edges(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
+			virtual bool control_edges(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context) = 0;
 			/*!
 			An InitialNode has no incoming ActivityEdges.
 			incoming->isEmpty()
 			*/
 			 
-			virtual bool no_incoming_edges(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
+			virtual bool no_incoming_edges(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context) = 0;
 
 			//*********************************
 			// Attribute Getters & Setters

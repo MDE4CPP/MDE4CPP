@@ -218,7 +218,7 @@ std::shared_ptr<ecore::EObject> DeploymentImpl::copy() const
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference configuration */
-std::shared_ptr<Subset<uml::DeploymentSpecification, uml::Element>> DeploymentImpl::getConfiguration() const
+const std::shared_ptr<Subset<uml::DeploymentSpecification, uml::Element>>& DeploymentImpl::getConfiguration() const
 {
 	if(m_configuration == nullptr)
 	{
@@ -239,7 +239,7 @@ std::shared_ptr<Subset<uml::DeploymentSpecification, uml::Element>> DeploymentIm
 }
 
 /* Getter & Setter for reference deployedArtifact */
-std::shared_ptr<Subset<uml::DeployedArtifact, uml::NamedElement /*Subset does not reference a union*/>> DeploymentImpl::getDeployedArtifact() const
+const std::shared_ptr<Subset<uml::DeployedArtifact, uml::NamedElement /*Subset does not reference a union*/>>& DeploymentImpl::getDeployedArtifact() const
 {
 	if(m_deployedArtifact == nullptr)
 	{
@@ -534,7 +534,7 @@ void DeploymentImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveH
 	}
 }
 
-std::shared_ptr<ecore::EClass> DeploymentImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& DeploymentImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getDeployment_Class();
 }
@@ -573,7 +573,7 @@ bool DeploymentImpl::internalEIsSet(int featureID) const
 	return DependencyImpl::internalEIsSet(featureID);
 }
 
-bool DeploymentImpl::eSet(int featureID, Any newValue)
+bool DeploymentImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -667,7 +667,7 @@ bool DeploymentImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any DeploymentImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any DeploymentImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

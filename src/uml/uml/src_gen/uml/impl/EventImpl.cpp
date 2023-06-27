@@ -261,7 +261,7 @@ void EventImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandle
 	}
 }
 
-std::shared_ptr<ecore::EClass> EventImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& EventImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getEvent_Class();
 }
@@ -285,7 +285,7 @@ bool EventImpl::internalEIsSet(int featureID) const
 	return PackageableElementImpl::internalEIsSet(featureID);
 }
 
-bool EventImpl::eSet(int featureID, Any newValue)
+bool EventImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -297,7 +297,7 @@ bool EventImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any EventImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any EventImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

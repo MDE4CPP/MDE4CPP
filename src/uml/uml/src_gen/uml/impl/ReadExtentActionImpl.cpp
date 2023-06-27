@@ -156,12 +156,12 @@ std::shared_ptr<ecore::EObject> ReadExtentActionImpl::copy() const
 //*********************************
 // Operations
 //*********************************
-bool ReadExtentActionImpl::multiplicity_of_result(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool ReadExtentActionImpl::multiplicity_of_result(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool ReadExtentActionImpl::type_is_classifier(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool ReadExtentActionImpl::type_is_classifier(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -174,22 +174,22 @@ bool ReadExtentActionImpl::type_is_classifier(Any diagnostics,std::shared_ptr<st
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference classifier */
-std::shared_ptr<uml::Classifier> ReadExtentActionImpl::getClassifier() const
+const std::shared_ptr<uml::Classifier>& ReadExtentActionImpl::getClassifier() const
 {
     return m_classifier;
 }
-void ReadExtentActionImpl::setClassifier(std::shared_ptr<uml::Classifier> _classifier)
+void ReadExtentActionImpl::setClassifier(const std::shared_ptr<uml::Classifier>& _classifier)
 {
     m_classifier = _classifier;
 	
 }
 
 /* Getter & Setter for reference result */
-std::shared_ptr<uml::OutputPin> ReadExtentActionImpl::getResult() const
+const std::shared_ptr<uml::OutputPin>& ReadExtentActionImpl::getResult() const
 {
     return m_result;
 }
-void ReadExtentActionImpl::setResult(std::shared_ptr<uml::OutputPin> _result)
+void ReadExtentActionImpl::setResult(const std::shared_ptr<uml::OutputPin>& _result)
 {
     m_result = _result;
 	
@@ -428,7 +428,7 @@ void ReadExtentActionImpl::saveContent(std::shared_ptr<persistence::interfaces::
 	}
 }
 
-std::shared_ptr<ecore::EClass> ReadExtentActionImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& ReadExtentActionImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getReadExtentAction_Class();
 }
@@ -460,7 +460,7 @@ bool ReadExtentActionImpl::internalEIsSet(int featureID) const
 	return ActionImpl::internalEIsSet(featureID);
 }
 
-bool ReadExtentActionImpl::eSet(int featureID, Any newValue)
+bool ReadExtentActionImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -488,7 +488,7 @@ bool ReadExtentActionImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any ReadExtentActionImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any ReadExtentActionImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

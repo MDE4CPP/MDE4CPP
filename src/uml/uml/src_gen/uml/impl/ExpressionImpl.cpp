@@ -195,7 +195,7 @@ std::shared_ptr<ecore::EObject> ExpressionImpl::copy() const
 // Attribute Getters & Setters
 //*********************************
 /* Getter & Setter for attribute symbol */
-std::string ExpressionImpl::getSymbol() const 
+std::string ExpressionImpl::getSymbol() const
 {
 	return m_symbol;
 }
@@ -209,7 +209,7 @@ void ExpressionImpl::setSymbol(std::string _symbol)
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference operand */
-std::shared_ptr<Subset<uml::ValueSpecification, uml::Element>> ExpressionImpl::getOperand() const
+const std::shared_ptr<Subset<uml::ValueSpecification, uml::Element>>& ExpressionImpl::getOperand() const
 {
 	if(m_operand == nullptr)
 	{
@@ -418,7 +418,7 @@ void ExpressionImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveH
 	}
 }
 
-std::shared_ptr<ecore::EClass> ExpressionImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& ExpressionImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getExpression_Class();
 }
@@ -450,7 +450,7 @@ bool ExpressionImpl::internalEIsSet(int featureID) const
 	return ValueSpecificationImpl::internalEIsSet(featureID);
 }
 
-bool ExpressionImpl::eSet(int featureID, Any newValue)
+bool ExpressionImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -506,7 +506,7 @@ bool ExpressionImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any ExpressionImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any ExpressionImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

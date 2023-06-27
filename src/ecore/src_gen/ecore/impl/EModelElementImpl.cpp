@@ -155,7 +155,7 @@ std::shared_ptr<ecore::EAnnotation> EModelElementImpl::getEAnnotation(std::strin
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference eAnnotations */
-std::shared_ptr<Subset<ecore::EAnnotation, ecore::EObject>> EModelElementImpl::getEAnnotations() const
+const std::shared_ptr<Subset<ecore::EAnnotation, ecore::EObject>>& EModelElementImpl::getEAnnotations() const
 {
 	if(m_eAnnotations == nullptr)
 	{
@@ -290,7 +290,7 @@ void EModelElementImpl::saveContent(std::shared_ptr<persistence::interfaces::XSa
 	}
 }
 
-std::shared_ptr<EClass> EModelElementImpl::eStaticClass() const
+const std::shared_ptr<EClass>& EModelElementImpl::eStaticClass() const
 {
 	return ecore::ecorePackage::eInstance()->getEModelElement_Class();
 }
@@ -318,7 +318,7 @@ bool EModelElementImpl::internalEIsSet(int featureID) const
 	return EObjectImpl::internalEIsSet(featureID);
 }
 
-bool EModelElementImpl::eSet(int featureID, Any newValue)
+bool EModelElementImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -367,7 +367,7 @@ bool EModelElementImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any EModelElementImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any EModelElementImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

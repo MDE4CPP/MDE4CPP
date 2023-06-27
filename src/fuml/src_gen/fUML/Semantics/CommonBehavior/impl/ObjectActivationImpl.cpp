@@ -57,8 +57,8 @@
 #include "fUML/Semantics/StructuredClassifiers/Object.hpp"
 #include "fUML/Semantics/CommonBehavior/ParameterValue.hpp"
 //Factories and Package includes
-#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/SemanticsPackage.hpp"
+#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/CommonBehavior/CommonBehaviorPackage.hpp"
 #include "fUML/Semantics/StructuredClassifiers/StructuredClassifiersPackage.hpp"
 #include "uml/umlPackage.hpp"
@@ -164,7 +164,7 @@ std::shared_ptr<ecore::EObject> ObjectActivationImpl::copy() const
 //*********************************
 // Operations
 //*********************************
-void ObjectActivationImpl::_register(std::shared_ptr<fUML::Semantics::CommonBehavior::EventAccepter> accepter)
+void ObjectActivationImpl::_register(const std::shared_ptr<fUML::Semantics::CommonBehavior::EventAccepter>& accepter)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -179,7 +179,7 @@ void ObjectActivationImpl::_register(std::shared_ptr<fUML::Semantics::CommonBeha
 	//end of body
 }
 
-void ObjectActivationImpl::_send(std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccurrence> signal)
+void ObjectActivationImpl::_send(const std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccurrence>& signal)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -288,7 +288,7 @@ std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccurrence> ObjectActivati
 	//end of body
 }
 
-void ObjectActivationImpl::send(std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccurrence> eventOccurrence)
+void ObjectActivationImpl::send(const std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccurrence>& eventOccurrence)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -305,7 +305,7 @@ void ObjectActivationImpl::send(std::shared_ptr<fUML::Semantics::CommonBehavior:
 	//end of body
 }
 
-void ObjectActivationImpl::startBehavior(std::shared_ptr<uml::Class> classifier,std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> inputs)
+void ObjectActivationImpl::startBehavior(const std::shared_ptr<uml::Class>& classifier, const std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>>& inputs)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -384,7 +384,7 @@ void ObjectActivationImpl::stop()
 	//end of body
 }
 
-void ObjectActivationImpl::unregister(std::shared_ptr<fUML::Semantics::CommonBehavior::EventAccepter> accepter)
+void ObjectActivationImpl::unregister(const std::shared_ptr<fUML::Semantics::CommonBehavior::EventAccepter>& accepter)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -411,7 +411,7 @@ void ObjectActivationImpl::unregister(std::shared_ptr<fUML::Semantics::CommonBeh
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference classifierBehaviorExecutions */
-std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ClassifierBehaviorExecution>> ObjectActivationImpl::getClassifierBehaviorExecutions() const
+const std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ClassifierBehaviorExecution>>& ObjectActivationImpl::getClassifierBehaviorExecutions() const
 {
 	if(m_classifierBehaviorExecutions == nullptr)
 	{
@@ -423,7 +423,7 @@ std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ClassifierBehaviorExecution
 }
 
 /* Getter & Setter for reference eventPool */
-std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::EventOccurrence>> ObjectActivationImpl::getEventPool() const
+const std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::EventOccurrence>>& ObjectActivationImpl::getEventPool() const
 {
 	if(m_eventPool == nullptr)
 	{
@@ -435,18 +435,18 @@ std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::EventOccurrence>> ObjectAct
 }
 
 /* Getter & Setter for reference object */
-std::shared_ptr<fUML::Semantics::StructuredClassifiers::Object> ObjectActivationImpl::getObject() const
+const std::shared_ptr<fUML::Semantics::StructuredClassifiers::Object>& ObjectActivationImpl::getObject() const
 {
     return m_object;
 }
-void ObjectActivationImpl::setObject(std::shared_ptr<fUML::Semantics::StructuredClassifiers::Object> _object)
+void ObjectActivationImpl::setObject(const std::shared_ptr<fUML::Semantics::StructuredClassifiers::Object>& _object)
 {
     m_object = _object;
 	
 }
 
 /* Getter & Setter for reference waitingEventAccepters */
-std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::EventAccepter>> ObjectActivationImpl::getWaitingEventAccepters() const
+const std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::EventAccepter>>& ObjectActivationImpl::getWaitingEventAccepters() const
 {
 	if(m_waitingEventAccepters == nullptr)
 	{
@@ -626,7 +626,7 @@ void ObjectActivationImpl::saveContent(std::shared_ptr<persistence::interfaces::
 	}
 }
 
-std::shared_ptr<ecore::EClass> ObjectActivationImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& ObjectActivationImpl::eStaticClass() const
 {
 	return fUML::Semantics::CommonBehavior::CommonBehaviorPackage::eInstance()->getObjectActivation_Class();
 }
@@ -666,7 +666,7 @@ bool ObjectActivationImpl::internalEIsSet(int featureID) const
 	return ecore::EObjectImpl::internalEIsSet(featureID);
 }
 
-bool ObjectActivationImpl::eSet(int featureID, Any newValue)
+bool ObjectActivationImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -797,7 +797,7 @@ bool ObjectActivationImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any ObjectActivationImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any ObjectActivationImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

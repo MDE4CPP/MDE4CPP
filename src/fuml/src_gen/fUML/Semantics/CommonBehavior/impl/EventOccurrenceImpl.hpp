@@ -46,11 +46,11 @@ virtual public EventOccurrence
 			// Operations
 			//*********************************
 			virtual void doSend() ;
-			virtual std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue> > getParameterValues(std::shared_ptr<uml::Event> event) ;
+			virtual std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue> > getParameterValues(const std::shared_ptr<uml::Event>& event) ;
 			virtual std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue> > getParameterValues() ;
-			virtual bool match(std::shared_ptr<uml::Trigger> trigger) ;
-			virtual bool matchAny(std::shared_ptr<Bag<uml::Trigger>> triggers) ;
-			virtual void sendTo(std::shared_ptr<fUML::Semantics::StructuredClassifiers::Reference> target) ;
+			virtual bool match(const std::shared_ptr<uml::Trigger>& trigger) ;
+			virtual bool matchAny(const std::shared_ptr<Bag<uml::Trigger>>& triggers) ;
+			virtual void sendTo(const std::shared_ptr<fUML::Semantics::StructuredClassifiers::Reference>& target) ;
 			
 			//*********************************
 			// Attribute Getters & Setters
@@ -59,8 +59,8 @@ virtual public EventOccurrence
 			//*********************************
 			// Reference Getters & Setters
 			//*********************************
-			virtual std::shared_ptr<fUML::Semantics::StructuredClassifiers::Reference> getTarget() const ;
-			virtual void setTarget(std::shared_ptr<fUML::Semantics::StructuredClassifiers::Reference>) ;
+			virtual const std::shared_ptr<fUML::Semantics::StructuredClassifiers::Reference>& getTarget() const ;
+			virtual void setTarget(const std::shared_ptr<fUML::Semantics::StructuredClassifiers::Reference>&) ;
 			
 			//*********************************
 			// Union Reference Getters
@@ -82,19 +82,19 @@ virtual public EventOccurrence
 			virtual void saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const;
 
 		protected:
-			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
+			virtual const std::shared_ptr<ecore::EClass>& eStaticClass() const;
 
 			//*********************************
 			// EStructuralFeature Get/Set/IsSet
 			//*********************************
 			virtual Any eGet(int featureID, bool resolve, bool coreType) const ;
-			virtual bool eSet(int featureID, Any newValue) ;
+			virtual bool eSet(int featureID, const Any& newValue) ;
 			virtual bool internalEIsSet(int featureID) const ;
 
 			//*********************************
 			// EOperation Invoke
 			//*********************************
-			virtual Any eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments) ;
+			virtual Any eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments) ;
 
 		private:
 			std::weak_ptr<fUML::Semantics::CommonBehavior::EventOccurrence> m_thisEventOccurrencePtr;

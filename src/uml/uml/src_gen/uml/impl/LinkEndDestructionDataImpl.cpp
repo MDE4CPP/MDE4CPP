@@ -114,7 +114,7 @@ std::shared_ptr<ecore::EObject> LinkEndDestructionDataImpl::copy() const
 //*********************************
 // Operations
 //*********************************
-bool LinkEndDestructionDataImpl::destroyAt_pin(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool LinkEndDestructionDataImpl::destroyAt_pin(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -123,7 +123,7 @@ bool LinkEndDestructionDataImpl::destroyAt_pin(Any diagnostics,std::shared_ptr<s
 // Attribute Getters & Setters
 //*********************************
 /* Getter & Setter for attribute isDestroyDuplicates */
-bool LinkEndDestructionDataImpl::getIsDestroyDuplicates() const 
+bool LinkEndDestructionDataImpl::getIsDestroyDuplicates() const
 {
 	return m_isDestroyDuplicates;
 }
@@ -137,11 +137,11 @@ void LinkEndDestructionDataImpl::setIsDestroyDuplicates(bool _isDestroyDuplicate
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference destroyAt */
-std::shared_ptr<uml::InputPin> LinkEndDestructionDataImpl::getDestroyAt() const
+const std::shared_ptr<uml::InputPin>& LinkEndDestructionDataImpl::getDestroyAt() const
 {
     return m_destroyAt;
 }
-void LinkEndDestructionDataImpl::setDestroyAt(std::shared_ptr<uml::InputPin> _destroyAt)
+void LinkEndDestructionDataImpl::setDestroyAt(const std::shared_ptr<uml::InputPin>& _destroyAt)
 {
     m_destroyAt = _destroyAt;
 	
@@ -288,7 +288,7 @@ void LinkEndDestructionDataImpl::saveContent(std::shared_ptr<persistence::interf
 	}
 }
 
-std::shared_ptr<ecore::EClass> LinkEndDestructionDataImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& LinkEndDestructionDataImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getLinkEndDestructionData_Class();
 }
@@ -320,7 +320,7 @@ bool LinkEndDestructionDataImpl::internalEIsSet(int featureID) const
 	return LinkEndDataImpl::internalEIsSet(featureID);
 }
 
-bool LinkEndDestructionDataImpl::eSet(int featureID, Any newValue)
+bool LinkEndDestructionDataImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -347,7 +347,7 @@ bool LinkEndDestructionDataImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any LinkEndDestructionDataImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any LinkEndDestructionDataImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

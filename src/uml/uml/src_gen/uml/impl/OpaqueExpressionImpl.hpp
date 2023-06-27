@@ -83,20 +83,20 @@ namespace uml
 			language->notEmpty() implies (_'body'->size() = language->size())
 			*/
 			 
-			virtual bool language_body_size(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
+			virtual bool language_body_size(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context) ;
 			/*!
 			The behavior must have exactly one return result parameter.
 			behavior <> null implies
 			   behavior.ownedParameter->select(direction=ParameterDirectionKind::return)->size() = 1
 			*/
 			 
-			virtual bool one_return_result_parameter(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
+			virtual bool one_return_result_parameter(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context) ;
 			/*!
 			The behavior may only have return result parameters.
 			behavior <> null implies behavior.ownedParameter->select(direction<>ParameterDirectionKind::return)->isEmpty()
 			*/
 			 
-			virtual bool only_return_result_parameters(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
+			virtual bool only_return_result_parameters(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context) ;
 			/*!
 			The query value() gives an integer value for an expression intended to produce one.
 			self.isIntegral()
@@ -114,13 +114,13 @@ namespace uml
 			<p>From package UML::Values.</p>
 			*/
 			 
-			virtual std::shared_ptr<Bag<std::string>> getBody() const ;
+			virtual const std::shared_ptr<Bag<std::string>>& getBody() const ;
 			/*!
 			Specifies the languages used to express the textual bodies of the OpaqueExpression.  Languages are matched to body Strings by order. The interpretation of the body depends on the languages. If the languages are unspecified, they may be implicit from the expression body or the context.
 			<p>From package UML::Values.</p>
 			*/
 			 
-			virtual std::shared_ptr<Bag<std::string>> getLanguage() const ;
+			virtual const std::shared_ptr<Bag<std::string>>& getLanguage() const ;
 			
 			//*********************************
 			// Reference Getters & Setters
@@ -130,19 +130,19 @@ namespace uml
 			<p>From package UML::Values.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::Behavior> getBehavior() const ;
+			virtual const std::shared_ptr<uml::Behavior>& getBehavior() const ;
 			/*!
 			Specifies the behavior of the OpaqueExpression as a UML Behavior.
 			<p>From package UML::Values.</p>
 			*/
 			
-			virtual void setBehavior(std::shared_ptr<uml::Behavior>) ;
+			virtual void setBehavior(const std::shared_ptr<uml::Behavior>&) ;
 			/*!
 			If an OpaqueExpression is specified using a UML Behavior, then this refers to the single required return Parameter of that Behavior. When the Behavior completes execution, the values on this Parameter give the result of evaluating the OpaqueExpression.
 			<p>From package UML::Values.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::Parameter> getResult() const ;
+			virtual const std::shared_ptr<uml::Parameter>& getResult() const ;
 			
 			//*********************************
 			// Union Reference Getters
@@ -183,19 +183,19 @@ namespace uml
 			virtual void saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const;
 
 		protected:
-			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
+			virtual const std::shared_ptr<ecore::EClass>& eStaticClass() const;
 
 			//*********************************
 			// EStructuralFeature Get/Set/IsSet
 			//*********************************
 			virtual Any eGet(int featureID, bool resolve, bool coreType) const ;
-			virtual bool eSet(int featureID, Any newValue) ;
+			virtual bool eSet(int featureID, const Any& newValue) ;
 			virtual bool internalEIsSet(int featureID) const ;
 
 			//*********************************
 			// EOperation Invoke
 			//*********************************
-			virtual Any eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments) ;
+			virtual Any eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments) ;
 
 		private:
 			std::weak_ptr<uml::OpaqueExpression> m_thisOpaqueExpressionPtr;

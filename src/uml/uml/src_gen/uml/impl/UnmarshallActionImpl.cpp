@@ -189,27 +189,27 @@ std::shared_ptr<ecore::EObject> UnmarshallActionImpl::copy() const
 //*********************************
 // Operations
 //*********************************
-bool UnmarshallActionImpl::multiplicity_of_object(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool UnmarshallActionImpl::multiplicity_of_object(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool UnmarshallActionImpl::number_of_result(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool UnmarshallActionImpl::number_of_result(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool UnmarshallActionImpl::object_type(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool UnmarshallActionImpl::object_type(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool UnmarshallActionImpl::structural_feature(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool UnmarshallActionImpl::structural_feature(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool UnmarshallActionImpl::type_ordering_and_multiplicity(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool UnmarshallActionImpl::type_ordering_and_multiplicity(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -222,18 +222,18 @@ bool UnmarshallActionImpl::type_ordering_and_multiplicity(Any diagnostics,std::s
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference object */
-std::shared_ptr<uml::InputPin> UnmarshallActionImpl::getObject() const
+const std::shared_ptr<uml::InputPin>& UnmarshallActionImpl::getObject() const
 {
     return m_object;
 }
-void UnmarshallActionImpl::setObject(std::shared_ptr<uml::InputPin> _object)
+void UnmarshallActionImpl::setObject(const std::shared_ptr<uml::InputPin>& _object)
 {
     m_object = _object;
 	
 }
 
 /* Getter & Setter for reference result */
-std::shared_ptr<Subset<uml::OutputPin, uml::OutputPin>> UnmarshallActionImpl::getResult() const
+const std::shared_ptr<Subset<uml::OutputPin, uml::OutputPin>>& UnmarshallActionImpl::getResult() const
 {
 	if(m_result == nullptr)
 	{
@@ -254,11 +254,11 @@ std::shared_ptr<Subset<uml::OutputPin, uml::OutputPin>> UnmarshallActionImpl::ge
 }
 
 /* Getter & Setter for reference unmarshallType */
-std::shared_ptr<uml::Classifier> UnmarshallActionImpl::getUnmarshallType() const
+const std::shared_ptr<uml::Classifier>& UnmarshallActionImpl::getUnmarshallType() const
 {
     return m_unmarshallType;
 }
-void UnmarshallActionImpl::setUnmarshallType(std::shared_ptr<uml::Classifier> _unmarshallType)
+void UnmarshallActionImpl::setUnmarshallType(const std::shared_ptr<uml::Classifier>& _unmarshallType)
 {
     m_unmarshallType = _unmarshallType;
 	
@@ -535,7 +535,7 @@ void UnmarshallActionImpl::saveContent(std::shared_ptr<persistence::interfaces::
 	}
 }
 
-std::shared_ptr<ecore::EClass> UnmarshallActionImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& UnmarshallActionImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getUnmarshallAction_Class();
 }
@@ -571,7 +571,7 @@ bool UnmarshallActionImpl::internalEIsSet(int featureID) const
 	return ActionImpl::internalEIsSet(featureID);
 }
 
-bool UnmarshallActionImpl::eSet(int featureID, Any newValue)
+bool UnmarshallActionImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -636,7 +636,7 @@ bool UnmarshallActionImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any UnmarshallActionImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any UnmarshallActionImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

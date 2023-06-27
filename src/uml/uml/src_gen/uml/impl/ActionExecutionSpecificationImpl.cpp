@@ -143,7 +143,7 @@ std::shared_ptr<ecore::EObject> ActionExecutionSpecificationImpl::copy() const
 //*********************************
 // Operations
 //*********************************
-bool ActionExecutionSpecificationImpl::action_referenced(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool ActionExecutionSpecificationImpl::action_referenced(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -156,11 +156,11 @@ bool ActionExecutionSpecificationImpl::action_referenced(Any diagnostics,std::sh
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference action */
-std::shared_ptr<uml::Action> ActionExecutionSpecificationImpl::getAction() const
+const std::shared_ptr<uml::Action>& ActionExecutionSpecificationImpl::getAction() const
 {
     return m_action;
 }
-void ActionExecutionSpecificationImpl::setAction(std::shared_ptr<uml::Action> _action)
+void ActionExecutionSpecificationImpl::setAction(const std::shared_ptr<uml::Action>& _action)
 {
     m_action = _action;
 	
@@ -322,7 +322,7 @@ void ActionExecutionSpecificationImpl::saveContent(std::shared_ptr<persistence::
 	}
 }
 
-std::shared_ptr<ecore::EClass> ActionExecutionSpecificationImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& ActionExecutionSpecificationImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getActionExecutionSpecification_Class();
 }
@@ -350,7 +350,7 @@ bool ActionExecutionSpecificationImpl::internalEIsSet(int featureID) const
 	return ExecutionSpecificationImpl::internalEIsSet(featureID);
 }
 
-bool ActionExecutionSpecificationImpl::eSet(int featureID, Any newValue)
+bool ActionExecutionSpecificationImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -370,7 +370,7 @@ bool ActionExecutionSpecificationImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any ActionExecutionSpecificationImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any ActionExecutionSpecificationImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

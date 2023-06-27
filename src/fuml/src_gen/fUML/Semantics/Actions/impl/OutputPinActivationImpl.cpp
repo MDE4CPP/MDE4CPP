@@ -45,8 +45,8 @@
 #include "fUML/Semantics/Actions/PinActivation.hpp"
 #include "fUML/Semantics/Activities/Token.hpp"
 //Factories and Package includes
-#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/SemanticsPackage.hpp"
+#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/Actions/ActionsPackage.hpp"
 #include "fUML/Semantics/Activities/ActivitiesPackage.hpp"
 #include "uml/umlPackage.hpp"
@@ -208,7 +208,7 @@ void OutputPinActivationImpl::saveContent(std::shared_ptr<persistence::interface
 	}
 }
 
-std::shared_ptr<ecore::EClass> OutputPinActivationImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& OutputPinActivationImpl::eStaticClass() const
 {
 	return fUML::Semantics::Actions::ActionsPackage::eInstance()->getOutputPinActivation_Class();
 }
@@ -232,7 +232,7 @@ bool OutputPinActivationImpl::internalEIsSet(int featureID) const
 	return PinActivationImpl::internalEIsSet(featureID);
 }
 
-bool OutputPinActivationImpl::eSet(int featureID, Any newValue)
+bool OutputPinActivationImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -244,7 +244,7 @@ bool OutputPinActivationImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any OutputPinActivationImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any OutputPinActivationImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

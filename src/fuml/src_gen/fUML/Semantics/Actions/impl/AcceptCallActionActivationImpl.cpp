@@ -49,8 +49,8 @@
 #include "fUML/Semantics/Actions/PinActivation.hpp"
 #include "fUML/Semantics/Activities/Token.hpp"
 //Factories and Package includes
-#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/SemanticsPackage.hpp"
+#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/Actions/ActionsPackage.hpp"
 #include "fUML/Semantics/Activities/ActivitiesPackage.hpp"
 #include "fUML/Semantics/CommonBehavior/CommonBehaviorPackage.hpp"
@@ -124,7 +124,7 @@ std::shared_ptr<ecore::EObject> AcceptCallActionActivationImpl::copy() const
 //*********************************
 // Operations
 //*********************************
-void AcceptCallActionActivationImpl::accept(std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccurrence> eventOccurrence)
+void AcceptCallActionActivationImpl::accept(const std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccurrence>& eventOccurrence)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -231,7 +231,7 @@ void AcceptCallActionActivationImpl::saveContent(std::shared_ptr<persistence::in
 	}
 }
 
-std::shared_ptr<ecore::EClass> AcceptCallActionActivationImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& AcceptCallActionActivationImpl::eStaticClass() const
 {
 	return fUML::Semantics::Actions::ActionsPackage::eInstance()->getAcceptCallActionActivation_Class();
 }
@@ -255,7 +255,7 @@ bool AcceptCallActionActivationImpl::internalEIsSet(int featureID) const
 	return AcceptEventActionActivationImpl::internalEIsSet(featureID);
 }
 
-bool AcceptCallActionActivationImpl::eSet(int featureID, Any newValue)
+bool AcceptCallActionActivationImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -267,7 +267,7 @@ bool AcceptCallActionActivationImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any AcceptCallActionActivationImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any AcceptCallActionActivationImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

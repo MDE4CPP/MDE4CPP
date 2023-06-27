@@ -145,12 +145,12 @@ std::shared_ptr<ecore::EObject> InitialNodeImpl::copy() const
 //*********************************
 // Operations
 //*********************************
-bool InitialNodeImpl::control_edges(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool InitialNodeImpl::control_edges(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool InitialNodeImpl::no_incoming_edges(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool InitialNodeImpl::no_incoming_edges(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -311,7 +311,7 @@ void InitialNodeImpl::saveContent(std::shared_ptr<persistence::interfaces::XSave
 	}
 }
 
-std::shared_ptr<ecore::EClass> InitialNodeImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& InitialNodeImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getInitialNode_Class();
 }
@@ -335,7 +335,7 @@ bool InitialNodeImpl::internalEIsSet(int featureID) const
 	return ControlNodeImpl::internalEIsSet(featureID);
 }
 
-bool InitialNodeImpl::eSet(int featureID, Any newValue)
+bool InitialNodeImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -347,7 +347,7 @@ bool InitialNodeImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any InitialNodeImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any InitialNodeImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

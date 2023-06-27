@@ -210,7 +210,7 @@ ActivityEdgeImpl& ActivityEdgeImpl::operator=(const ActivityEdgeImpl & obj)
 //*********************************
 // Operations
 //*********************************
-bool ActivityEdgeImpl::source_and_target(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool ActivityEdgeImpl::source_and_target(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -234,11 +234,11 @@ void ActivityEdgeImpl::setActivity(std::weak_ptr<uml::Activity> _activity)
 }
 
 /* Getter & Setter for reference guard */
-std::shared_ptr<uml::ValueSpecification> ActivityEdgeImpl::getGuard() const
+const std::shared_ptr<uml::ValueSpecification>& ActivityEdgeImpl::getGuard() const
 {
     return m_guard;
 }
-void ActivityEdgeImpl::setGuard(std::shared_ptr<uml::ValueSpecification> _guard)
+void ActivityEdgeImpl::setGuard(const std::shared_ptr<uml::ValueSpecification>& _guard)
 {
     m_guard = _guard;
 	
@@ -247,7 +247,7 @@ void ActivityEdgeImpl::setGuard(std::shared_ptr<uml::ValueSpecification> _guard)
 /* Getter & Setter for reference inGroup */
 
 /* Getter & Setter for reference inPartition */
-std::shared_ptr<Subset<uml::ActivityPartition, uml::ActivityGroup>> ActivityEdgeImpl::getInPartition() const
+const std::shared_ptr<Subset<uml::ActivityPartition, uml::ActivityGroup>>& ActivityEdgeImpl::getInPartition() const
 {
 	if(m_inPartition == nullptr)
 	{
@@ -279,18 +279,18 @@ void ActivityEdgeImpl::setInStructuredNode(std::weak_ptr<uml::StructuredActivity
 }
 
 /* Getter & Setter for reference interrupts */
-std::shared_ptr<uml::InterruptibleActivityRegion> ActivityEdgeImpl::getInterrupts() const
+const std::shared_ptr<uml::InterruptibleActivityRegion>& ActivityEdgeImpl::getInterrupts() const
 {
     return m_interrupts;
 }
-void ActivityEdgeImpl::setInterrupts(std::shared_ptr<uml::InterruptibleActivityRegion> _interrupts)
+void ActivityEdgeImpl::setInterrupts(const std::shared_ptr<uml::InterruptibleActivityRegion>& _interrupts)
 {
     m_interrupts = _interrupts;
 	
 }
 
 /* Getter & Setter for reference redefinedEdge */
-std::shared_ptr<Subset<uml::ActivityEdge, uml::RedefinableElement>> ActivityEdgeImpl::getRedefinedEdge() const
+const std::shared_ptr<Subset<uml::ActivityEdge, uml::RedefinableElement>>& ActivityEdgeImpl::getRedefinedEdge() const
 {
 	if(m_redefinedEdge == nullptr)
 	{
@@ -311,33 +311,33 @@ std::shared_ptr<Subset<uml::ActivityEdge, uml::RedefinableElement>> ActivityEdge
 }
 
 /* Getter & Setter for reference source */
-std::shared_ptr<uml::ActivityNode> ActivityEdgeImpl::getSource() const
+const std::shared_ptr<uml::ActivityNode>& ActivityEdgeImpl::getSource() const
 {
     return m_source;
 }
-void ActivityEdgeImpl::setSource(std::shared_ptr<uml::ActivityNode> _source)
+void ActivityEdgeImpl::setSource(const std::shared_ptr<uml::ActivityNode>& _source)
 {
     m_source = _source;
 	
 }
 
 /* Getter & Setter for reference target */
-std::shared_ptr<uml::ActivityNode> ActivityEdgeImpl::getTarget() const
+const std::shared_ptr<uml::ActivityNode>& ActivityEdgeImpl::getTarget() const
 {
     return m_target;
 }
-void ActivityEdgeImpl::setTarget(std::shared_ptr<uml::ActivityNode> _target)
+void ActivityEdgeImpl::setTarget(const std::shared_ptr<uml::ActivityNode>& _target)
 {
     m_target = _target;
 	
 }
 
 /* Getter & Setter for reference weight */
-std::shared_ptr<uml::ValueSpecification> ActivityEdgeImpl::getWeight() const
+const std::shared_ptr<uml::ValueSpecification>& ActivityEdgeImpl::getWeight() const
 {
     return m_weight;
 }
-void ActivityEdgeImpl::setWeight(std::shared_ptr<uml::ValueSpecification> _weight)
+void ActivityEdgeImpl::setWeight(const std::shared_ptr<uml::ValueSpecification>& _weight)
 {
     m_weight = _weight;
 	
@@ -679,7 +679,7 @@ void ActivityEdgeImpl::saveContent(std::shared_ptr<persistence::interfaces::XSav
 	}
 }
 
-std::shared_ptr<ecore::EClass> ActivityEdgeImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& ActivityEdgeImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getActivityEdge_Class();
 }
@@ -749,7 +749,7 @@ bool ActivityEdgeImpl::internalEIsSet(int featureID) const
 	return RedefinableElementImpl::internalEIsSet(featureID);
 }
 
-bool ActivityEdgeImpl::eSet(int featureID, Any newValue)
+bool ActivityEdgeImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -891,7 +891,7 @@ bool ActivityEdgeImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any ActivityEdgeImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any ActivityEdgeImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

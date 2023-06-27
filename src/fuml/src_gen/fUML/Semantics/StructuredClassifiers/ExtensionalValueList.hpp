@@ -71,11 +71,11 @@ namespace fUML::Semantics::StructuredClassifiers
 			//*********************************
 			// Operations
 			//*********************************
-			virtual bool addValue(std::shared_ptr<fUML::Semantics::StructuredClassifiers::ExtensionalValue> value) = 0;
-			virtual void addValue(std::shared_ptr<fUML::Semantics::StructuredClassifiers::ExtensionalValue> value,int i) = 0;
+			virtual bool addValue(const std::shared_ptr<fUML::Semantics::StructuredClassifiers::ExtensionalValue>& value) = 0;
+			virtual void addValue(const std::shared_ptr<fUML::Semantics::StructuredClassifiers::ExtensionalValue>& value, int i) = 0;
 			virtual std::shared_ptr<fUML::Semantics::StructuredClassifiers::ExtensionalValue> getValue() = 0;
 			virtual std::string removeValue(int i) = 0;
-			virtual std::shared_ptr<fUML::Semantics::Values::Value> setValue(std::shared_ptr<fUML::Semantics::StructuredClassifiers::ExtensionalValue> value,int i) = 0;
+			virtual std::shared_ptr<fUML::Semantics::Values::Value> setValue(const std::shared_ptr<fUML::Semantics::StructuredClassifiers::ExtensionalValue>& value, int i) = 0;
 
 			//*********************************
 			// Attribute Getters & Setters

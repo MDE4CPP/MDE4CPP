@@ -49,8 +49,8 @@
 #include "fUML/Semantics/Actions/StructuredActivityNodeActivation.hpp"
 #include "fUML/Semantics/Activities/Token.hpp"
 //Factories and Package includes
-#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/SemanticsPackage.hpp"
+#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/Actions/ActionsPackage.hpp"
 #include "fUML/Semantics/Activities/ActivitiesPackage.hpp"
 #include "uml/umlPackage.hpp"
@@ -142,17 +142,17 @@ std::shared_ptr<ecore::EObject> ConditionalNodeActivationImpl::copy() const
 //*********************************
 // Operations
 //*********************************
-std::shared_ptr<fUML::Semantics::Actions::ClauseActivation> ConditionalNodeActivationImpl::getClauseActivation(std::shared_ptr<uml::Clause> clause)
+std::shared_ptr<fUML::Semantics::Actions::ClauseActivation> ConditionalNodeActivationImpl::getClauseActivation(const std::shared_ptr<uml::Clause>& clause)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-void ConditionalNodeActivationImpl::runTest(std::shared_ptr<uml::Clause> clause)
+void ConditionalNodeActivationImpl::runTest(const std::shared_ptr<uml::Clause>& clause)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-void ConditionalNodeActivationImpl::selectBody(std::shared_ptr<uml::Clause> clause)
+void ConditionalNodeActivationImpl::selectBody(const std::shared_ptr<uml::Clause>& clause)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -165,7 +165,7 @@ void ConditionalNodeActivationImpl::selectBody(std::shared_ptr<uml::Clause> clau
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference clauseActivations */
-std::shared_ptr<Bag<fUML::Semantics::Actions::ClauseActivation>> ConditionalNodeActivationImpl::getClauseActivations() const
+const std::shared_ptr<Bag<fUML::Semantics::Actions::ClauseActivation>>& ConditionalNodeActivationImpl::getClauseActivations() const
 {
 	if(m_clauseActivations == nullptr)
 	{
@@ -177,7 +177,7 @@ std::shared_ptr<Bag<fUML::Semantics::Actions::ClauseActivation>> ConditionalNode
 }
 
 /* Getter & Setter for reference selectedClauses */
-std::shared_ptr<Bag<uml::Clause>> ConditionalNodeActivationImpl::getSelectedClauses() const
+const std::shared_ptr<Bag<uml::Clause>>& ConditionalNodeActivationImpl::getSelectedClauses() const
 {
 	if(m_selectedClauses == nullptr)
 	{
@@ -348,7 +348,7 @@ void ConditionalNodeActivationImpl::saveContent(std::shared_ptr<persistence::int
 	}
 }
 
-std::shared_ptr<ecore::EClass> ConditionalNodeActivationImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& ConditionalNodeActivationImpl::eStaticClass() const
 {
 	return fUML::Semantics::Actions::ActionsPackage::eInstance()->getConditionalNodeActivation_Class();
 }
@@ -380,7 +380,7 @@ bool ConditionalNodeActivationImpl::internalEIsSet(int featureID) const
 	return StructuredActivityNodeActivationImpl::internalEIsSet(featureID);
 }
 
-bool ConditionalNodeActivationImpl::eSet(int featureID, Any newValue)
+bool ConditionalNodeActivationImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -466,7 +466,7 @@ bool ConditionalNodeActivationImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any ConditionalNodeActivationImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any ConditionalNodeActivationImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

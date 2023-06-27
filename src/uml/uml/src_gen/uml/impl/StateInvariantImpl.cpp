@@ -156,11 +156,11 @@ std::shared_ptr<ecore::EObject> StateInvariantImpl::copy() const
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference invariant */
-std::shared_ptr<uml::Constraint> StateInvariantImpl::getInvariant() const
+const std::shared_ptr<uml::Constraint>& StateInvariantImpl::getInvariant() const
 {
     return m_invariant;
 }
-void StateInvariantImpl::setInvariant(std::shared_ptr<uml::Constraint> _invariant)
+void StateInvariantImpl::setInvariant(const std::shared_ptr<uml::Constraint>& _invariant)
 {
     m_invariant = _invariant;
 	
@@ -313,7 +313,7 @@ void StateInvariantImpl::saveContent(std::shared_ptr<persistence::interfaces::XS
 	}
 }
 
-std::shared_ptr<ecore::EClass> StateInvariantImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& StateInvariantImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getStateInvariant_Class();
 }
@@ -341,7 +341,7 @@ bool StateInvariantImpl::internalEIsSet(int featureID) const
 	return InteractionFragmentImpl::internalEIsSet(featureID);
 }
 
-bool StateInvariantImpl::eSet(int featureID, Any newValue)
+bool StateInvariantImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -361,7 +361,7 @@ bool StateInvariantImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any StateInvariantImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any StateInvariantImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

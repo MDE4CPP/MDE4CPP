@@ -92,7 +92,7 @@ namespace uml
 			expr = null implies (observation->size() = 1 and observation->forAll(oclIsKindOf(DurationObservation)))
 			*/
 			 
-			virtual bool no_expr_requires_observation(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
+			virtual bool no_expr_requires_observation(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context) = 0;
 
 			//*********************************
 			// Attribute Getters & Setters
@@ -106,19 +106,19 @@ namespace uml
 			<p>From package UML::Values.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::ValueSpecification> getExpr() const = 0;
+			virtual const std::shared_ptr<uml::ValueSpecification>& getExpr() const = 0;
 			/*!
 			A ValueSpecification that evaluates to the value of the Duration.
 			<p>From package UML::Values.</p>
 			*/
 			
-			virtual void setExpr(std::shared_ptr<uml::ValueSpecification>) = 0;
+			virtual void setExpr(const std::shared_ptr<uml::ValueSpecification>&) = 0;
 			/*!
 			Refers to the Observations that are involved in the computation of the Duration value
 			<p>From package UML::Values.</p>
 			*/
 			
-			virtual std::shared_ptr<Bag<uml::Observation>> getObservation() const = 0;
+			virtual const std::shared_ptr<Bag<uml::Observation>>& getObservation() const = 0;
 
 			//*********************************
 			// Union Reference Getters

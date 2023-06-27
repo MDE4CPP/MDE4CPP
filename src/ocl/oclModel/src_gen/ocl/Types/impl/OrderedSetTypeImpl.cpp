@@ -34,8 +34,8 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "ocl/Values/ValuesFactory.hpp"
 #include "ecore/ecoreFactory.hpp"
+#include "ocl/Values/ValuesFactory.hpp"
 #include "ocl/Types/CollectionType.hpp"
 #include "ocl/Values/CollectionValue.hpp"
 #include "ecore/EAnnotation.hpp"
@@ -207,7 +207,7 @@ void OrderedSetTypeImpl::saveContent(std::shared_ptr<persistence::interfaces::XS
 	}
 }
 
-std::shared_ptr<ecore::EClass> OrderedSetTypeImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& OrderedSetTypeImpl::eStaticClass() const
 {
 	return ocl::Types::TypesPackage::eInstance()->getOrderedSetType_Class();
 }
@@ -231,7 +231,7 @@ bool OrderedSetTypeImpl::internalEIsSet(int featureID) const
 	return CollectionTypeImpl::internalEIsSet(featureID);
 }
 
-bool OrderedSetTypeImpl::eSet(int featureID, Any newValue)
+bool OrderedSetTypeImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -243,7 +243,7 @@ bool OrderedSetTypeImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any OrderedSetTypeImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any OrderedSetTypeImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

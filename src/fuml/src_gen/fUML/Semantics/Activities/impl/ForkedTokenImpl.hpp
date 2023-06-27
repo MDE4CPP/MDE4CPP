@@ -46,7 +46,7 @@ namespace fUML::Semantics::Activities
 			// Operations
 			//*********************************
 			virtual std::shared_ptr<fUML::Semantics::Activities::Token> _copy() ;
-			virtual bool equals(std::shared_ptr<fUML::Semantics::Activities::Token> otherToken) ;
+			virtual bool equals(const std::shared_ptr<fUML::Semantics::Activities::Token>& otherToken) ;
 			virtual std::shared_ptr<fUML::Semantics::Values::Value> getValue() const ;
 			virtual bool isControl() ;
 			virtual void withdraw() ;
@@ -62,8 +62,8 @@ namespace fUML::Semantics::Activities
 			//*********************************
 			// Reference Getters & Setters
 			//*********************************
-			virtual std::shared_ptr<fUML::Semantics::Activities::Token> getBaseToken() const ;
-			virtual void setBaseToken(std::shared_ptr<fUML::Semantics::Activities::Token>) ;
+			virtual const std::shared_ptr<fUML::Semantics::Activities::Token>& getBaseToken() const ;
+			virtual void setBaseToken(const std::shared_ptr<fUML::Semantics::Activities::Token>&) ;
 			
 			//*********************************
 			// Union Reference Getters
@@ -85,19 +85,19 @@ namespace fUML::Semantics::Activities
 			virtual void saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const;
 
 		protected:
-			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
+			virtual const std::shared_ptr<ecore::EClass>& eStaticClass() const;
 
 			//*********************************
 			// EStructuralFeature Get/Set/IsSet
 			//*********************************
 			virtual Any eGet(int featureID, bool resolve, bool coreType) const ;
-			virtual bool eSet(int featureID, Any newValue) ;
+			virtual bool eSet(int featureID, const Any& newValue) ;
 			virtual bool internalEIsSet(int featureID) const ;
 
 			//*********************************
 			// EOperation Invoke
 			//*********************************
-			virtual Any eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments) ;
+			virtual Any eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments) ;
 
 		private:
 			std::weak_ptr<fUML::Semantics::Activities::ForkedToken> m_thisForkedTokenPtr;

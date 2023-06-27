@@ -34,10 +34,10 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "fUML/Semantics/Values/ValuesFactory.hpp"
 #include "fUML/Semantics/Loci/LociFactory.hpp"
-#include "fUML/Semantics/SimpleClassifiers/SimpleClassifiersFactory.hpp"
 #include "uml/umlFactory.hpp"
+#include "fUML/Semantics/Values/ValuesFactory.hpp"
+#include "fUML/Semantics/SimpleClassifiers/SimpleClassifiersFactory.hpp"
 #include "ocl/Evaluations/EvaluationsFactory.hpp"
 #include "ocl/Expressions/ExpressionsFactory.hpp"
 #include "ocl/Evaluations/EvalEnvironment.hpp"
@@ -130,7 +130,7 @@ std::shared_ptr<ecore::EObject> LoopExpEvalImpl::copy() const
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference bodyEvals */
-std::shared_ptr<Bag<ocl::Evaluations::OclExpEval>> LoopExpEvalImpl::getBodyEvals() const
+const std::shared_ptr<Bag<ocl::Evaluations::OclExpEval>>& LoopExpEvalImpl::getBodyEvals() const
 {
 	if(m_bodyEvals == nullptr)
 	{
@@ -142,7 +142,7 @@ std::shared_ptr<Bag<ocl::Evaluations::OclExpEval>> LoopExpEvalImpl::getBodyEvals
 }
 
 /* Getter & Setter for reference iterators */
-std::shared_ptr<Bag<fUML::Semantics::SimpleClassifiers::StringValue>> LoopExpEvalImpl::getIterators() const
+const std::shared_ptr<Bag<fUML::Semantics::SimpleClassifiers::StringValue>>& LoopExpEvalImpl::getIterators() const
 {
 	if(m_iterators == nullptr)
 	{
@@ -288,7 +288,7 @@ void LoopExpEvalImpl::saveContent(std::shared_ptr<persistence::interfaces::XSave
 	}
 }
 
-std::shared_ptr<ecore::EClass> LoopExpEvalImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& LoopExpEvalImpl::eStaticClass() const
 {
 	return ocl::Evaluations::EvaluationsPackage::eInstance()->getLoopExpEval_Class();
 }
@@ -320,7 +320,7 @@ bool LoopExpEvalImpl::internalEIsSet(int featureID) const
 	return PropertyCallExpEvalImpl::internalEIsSet(featureID);
 }
 
-bool LoopExpEvalImpl::eSet(int featureID, Any newValue)
+bool LoopExpEvalImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -406,7 +406,7 @@ bool LoopExpEvalImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any LoopExpEvalImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any LoopExpEvalImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

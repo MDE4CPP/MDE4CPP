@@ -260,7 +260,7 @@ void DirectedRelationshipImpl::saveContent(std::shared_ptr<persistence::interfac
 	}
 }
 
-std::shared_ptr<ecore::EClass> DirectedRelationshipImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& DirectedRelationshipImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getDirectedRelationship_Class();
 }
@@ -292,7 +292,7 @@ bool DirectedRelationshipImpl::internalEIsSet(int featureID) const
 	return RelationshipImpl::internalEIsSet(featureID);
 }
 
-bool DirectedRelationshipImpl::eSet(int featureID, Any newValue)
+bool DirectedRelationshipImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -304,7 +304,7 @@ bool DirectedRelationshipImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any DirectedRelationshipImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any DirectedRelationshipImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

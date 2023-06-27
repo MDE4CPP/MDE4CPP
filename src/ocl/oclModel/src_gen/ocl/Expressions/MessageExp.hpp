@@ -98,13 +98,13 @@ namespace ocl::Expressions
 			//*********************************
 			// Reference Getters & Setters
 			//*********************************
-			virtual std::shared_ptr<Bag<ocl::Expressions::OclExpression>> getArgument() const = 0;
-			virtual std::shared_ptr<uml::CallOperationAction> getCalledOperation() const = 0;
-			virtual void setCalledOperation(std::shared_ptr<uml::CallOperationAction>) = 0;
-			virtual std::shared_ptr<uml::SendSignalAction> getSentSignal() const = 0;
-			virtual void setSentSignal(std::shared_ptr<uml::SendSignalAction>) = 0;
-			virtual std::shared_ptr<ocl::Expressions::OclExpression> getTarget() const = 0;
-			virtual void setTarget(std::shared_ptr<ocl::Expressions::OclExpression>) = 0;
+			virtual const std::shared_ptr<Bag<ocl::Expressions::OclExpression>>& getArgument() const = 0;
+			virtual const std::shared_ptr<uml::CallOperationAction>& getCalledOperation() const = 0;
+			virtual void setCalledOperation(const std::shared_ptr<uml::CallOperationAction>&) = 0;
+			virtual const std::shared_ptr<uml::SendSignalAction>& getSentSignal() const = 0;
+			virtual void setSentSignal(const std::shared_ptr<uml::SendSignalAction>&) = 0;
+			virtual const std::shared_ptr<ocl::Expressions::OclExpression>& getTarget() const = 0;
+			virtual void setTarget(const std::shared_ptr<ocl::Expressions::OclExpression>&) = 0;
 
 			//*********************************
 			// Union Reference Getters

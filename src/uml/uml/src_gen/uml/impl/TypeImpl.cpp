@@ -146,12 +146,12 @@ TypeImpl& TypeImpl::operator=(const TypeImpl & obj)
 //*********************************
 // Operations
 //*********************************
-bool TypeImpl::conformsTo(std::shared_ptr<uml::Type> other)
+bool TypeImpl::conformsTo(const std::shared_ptr<uml::Type>& other)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-std::shared_ptr<uml::Association> TypeImpl::createAssociation(bool end1IsNavigable,uml::AggregationKind end1Aggregation,std::string end1Name,int end1Lower,int end1Upper,std::shared_ptr<uml::Type> end1Type,bool end2IsNavigable,uml::AggregationKind end2Aggregation,std::string end2Name,int end2Lower,int end2Upper)
+std::shared_ptr<uml::Association> TypeImpl::createAssociation(bool end1IsNavigable, uml::AggregationKind end1Aggregation, std::string end1Name, int end1Lower, int end1Upper, const std::shared_ptr<uml::Type>& end1Type, bool end2IsNavigable, uml::AggregationKind end2Aggregation, std::string end2Name, int end2Lower, int end2Upper)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -320,7 +320,7 @@ void TypeImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler
 	}
 }
 
-std::shared_ptr<ecore::EClass> TypeImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& TypeImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getType_Class();
 }
@@ -351,7 +351,7 @@ bool TypeImpl::internalEIsSet(int featureID) const
 	return PackageableElementImpl::internalEIsSet(featureID);
 }
 
-bool TypeImpl::eSet(int featureID, Any newValue)
+bool TypeImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -371,7 +371,7 @@ bool TypeImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any TypeImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any TypeImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

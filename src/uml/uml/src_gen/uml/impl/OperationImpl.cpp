@@ -270,7 +270,7 @@ std::shared_ptr<ecore::EObject> OperationImpl::copy() const
 //*********************************
 // Operations
 //*********************************
-bool OperationImpl::at_most_one_return(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool OperationImpl::at_most_one_return(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -305,7 +305,7 @@ bool OperationImpl::isUnique()
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool OperationImpl::matches(std::shared_ptr<uml::Operation> comparedOperation)
+bool OperationImpl::matches(const std::shared_ptr<uml::Operation>& comparedOperation)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -331,7 +331,7 @@ return equals;
 	//end of body
 }
 
-bool OperationImpl::only_body_for_query(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool OperationImpl::only_body_for_query(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -380,7 +380,7 @@ void OperationImpl::setLower(int newLower)
 	//end of body
 }
 
-void OperationImpl::setType(std::shared_ptr<uml::Type> newType)
+void OperationImpl::setType(const std::shared_ptr<uml::Type>& newType)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -400,13 +400,13 @@ void OperationImpl::setUpper(int newUpper)
 // Attribute Getters & Setters
 //*********************************
 /* Getter & Setter for attribute isOrdered */
-bool OperationImpl::getIsOrdered() const 
+bool OperationImpl::getIsOrdered() const
 {
 	return m_isOrdered;
 }
 
 /* Getter & Setter for attribute isQuery */
-bool OperationImpl::getIsQuery() const 
+bool OperationImpl::getIsQuery() const
 {
 	return m_isQuery;
 }
@@ -417,19 +417,19 @@ void OperationImpl::setIsQuery(bool _isQuery)
 }
 
 /* Getter & Setter for attribute isUnique */
-bool OperationImpl::getIsUnique() const 
+bool OperationImpl::getIsUnique() const
 {
 	return m_isUnique;
 }
 
 /* Getter & Setter for attribute lower */
-int OperationImpl::getLower() const 
+int OperationImpl::getLower() const
 {
 	return m_lower;
 }
 
 /* Getter & Setter for attribute upper */
-int OperationImpl::getUpper() const 
+int OperationImpl::getUpper() const
 {
 	return m_upper;
 }
@@ -438,11 +438,11 @@ int OperationImpl::getUpper() const
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference bodyCondition */
-std::shared_ptr<uml::Constraint> OperationImpl::getBodyCondition() const
+const std::shared_ptr<uml::Constraint>& OperationImpl::getBodyCondition() const
 {
     return m_bodyCondition;
 }
-void OperationImpl::setBodyCondition(std::shared_ptr<uml::Constraint> _bodyCondition)
+void OperationImpl::setBodyCondition(const std::shared_ptr<uml::Constraint>& _bodyCondition)
 {
     m_bodyCondition = _bodyCondition;
 	
@@ -482,14 +482,14 @@ void OperationImpl::setInterface(std::weak_ptr<uml::Interface> _interface)
 }
 
 /* Getter & Setter for reference ownedParameter */
-std::shared_ptr<Bag<uml::Parameter>> OperationImpl::getProperty_OwnedParameter() const
+const std::shared_ptr<Bag<uml::Parameter>>& OperationImpl::getProperty_OwnedParameter() const
 {
 	//Getter call of redefined container reference BehavioralFeature::ownedParameter 
 	return uml::BehavioralFeatureImpl::getOwnedParameter();
 }
 
 /* Getter & Setter for reference postcondition */
-std::shared_ptr<Subset<uml::Constraint, uml::Constraint /*Subset does not reference a union*/>> OperationImpl::getPostcondition() const
+const std::shared_ptr<Subset<uml::Constraint, uml::Constraint /*Subset does not reference a union*/>>& OperationImpl::getPostcondition() const
 {
 	if(m_postcondition == nullptr)
 	{
@@ -510,7 +510,7 @@ std::shared_ptr<Subset<uml::Constraint, uml::Constraint /*Subset does not refere
 }
 
 /* Getter & Setter for reference precondition */
-std::shared_ptr<Subset<uml::Constraint, uml::Constraint /*Subset does not reference a union*/>> OperationImpl::getPrecondition() const
+const std::shared_ptr<Subset<uml::Constraint, uml::Constraint /*Subset does not reference a union*/>>& OperationImpl::getPrecondition() const
 {
 	if(m_precondition == nullptr)
 	{
@@ -531,7 +531,7 @@ std::shared_ptr<Subset<uml::Constraint, uml::Constraint /*Subset does not refere
 }
 
 /* Getter & Setter for reference redefinedOperation */
-std::shared_ptr<Subset<uml::Operation, uml::RedefinableElement>> OperationImpl::getRedefinedOperation() const
+const std::shared_ptr<Subset<uml::Operation, uml::RedefinableElement>>& OperationImpl::getRedefinedOperation() const
 {
 	if(m_redefinedOperation == nullptr)
 	{
@@ -552,7 +552,7 @@ std::shared_ptr<Subset<uml::Operation, uml::RedefinableElement>> OperationImpl::
 }
 
 /* Getter & Setter for reference type */
-std::shared_ptr<uml::Type> OperationImpl::getType() const
+const std::shared_ptr<uml::Type>& OperationImpl::getType() const
 {
     return m_type;
 }
@@ -961,7 +961,7 @@ void OperationImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHa
 	}
 }
 
-std::shared_ptr<ecore::EClass> OperationImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& OperationImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getOperation_Class();
 }
@@ -1074,7 +1074,7 @@ bool OperationImpl::internalEIsSet(int featureID) const
 	return result;
 }
 
-bool OperationImpl::eSet(int featureID, Any newValue)
+bool OperationImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -1285,7 +1285,7 @@ bool OperationImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any OperationImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any OperationImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

@@ -152,17 +152,17 @@ std::shared_ptr<ecore::EObject> BroadcastSignalActionImpl::copy() const
 //*********************************
 // Operations
 //*********************************
-bool BroadcastSignalActionImpl::no_onport(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool BroadcastSignalActionImpl::no_onport(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool BroadcastSignalActionImpl::number_of_arguments(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool BroadcastSignalActionImpl::number_of_arguments(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool BroadcastSignalActionImpl::type_ordering_multiplicity(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool BroadcastSignalActionImpl::type_ordering_multiplicity(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -175,11 +175,11 @@ bool BroadcastSignalActionImpl::type_ordering_multiplicity(Any diagnostics,std::
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference signal */
-std::shared_ptr<uml::Signal> BroadcastSignalActionImpl::getSignal() const
+const std::shared_ptr<uml::Signal>& BroadcastSignalActionImpl::getSignal() const
 {
     return m_signal;
 }
-void BroadcastSignalActionImpl::setSignal(std::shared_ptr<uml::Signal> _signal)
+void BroadcastSignalActionImpl::setSignal(const std::shared_ptr<uml::Signal>& _signal)
 {
     m_signal = _signal;
 	
@@ -392,7 +392,7 @@ void BroadcastSignalActionImpl::saveContent(std::shared_ptr<persistence::interfa
 	}
 }
 
-std::shared_ptr<ecore::EClass> BroadcastSignalActionImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& BroadcastSignalActionImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getBroadcastSignalAction_Class();
 }
@@ -420,7 +420,7 @@ bool BroadcastSignalActionImpl::internalEIsSet(int featureID) const
 	return InvocationActionImpl::internalEIsSet(featureID);
 }
 
-bool BroadcastSignalActionImpl::eSet(int featureID, Any newValue)
+bool BroadcastSignalActionImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -440,7 +440,7 @@ bool BroadcastSignalActionImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any BroadcastSignalActionImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any BroadcastSignalActionImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

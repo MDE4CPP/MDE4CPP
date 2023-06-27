@@ -379,7 +379,7 @@ void ValueSpecificationImpl::saveContent(std::shared_ptr<persistence::interfaces
 	}
 }
 
-std::shared_ptr<ecore::EClass> ValueSpecificationImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& ValueSpecificationImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getValueSpecification_Class();
 }
@@ -431,7 +431,7 @@ bool ValueSpecificationImpl::internalEIsSet(int featureID) const
 	return result;
 }
 
-bool ValueSpecificationImpl::eSet(int featureID, Any newValue)
+bool ValueSpecificationImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -466,7 +466,7 @@ bool ValueSpecificationImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any ValueSpecificationImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any ValueSpecificationImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

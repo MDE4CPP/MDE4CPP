@@ -181,7 +181,7 @@ void CollectionLiteralPartImpl::saveContent(std::shared_ptr<persistence::interfa
 	}
 }
 
-std::shared_ptr<ecore::EClass> CollectionLiteralPartImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& CollectionLiteralPartImpl::eStaticClass() const
 {
 	return ocl::Expressions::ExpressionsPackage::eInstance()->getCollectionLiteralPart_Class();
 }
@@ -205,7 +205,7 @@ bool CollectionLiteralPartImpl::internalEIsSet(int featureID) const
 	return ecore::ETypedElementImpl::internalEIsSet(featureID);
 }
 
-bool CollectionLiteralPartImpl::eSet(int featureID, Any newValue)
+bool CollectionLiteralPartImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -217,7 +217,7 @@ bool CollectionLiteralPartImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any CollectionLiteralPartImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any CollectionLiteralPartImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

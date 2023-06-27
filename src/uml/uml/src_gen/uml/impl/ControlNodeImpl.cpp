@@ -291,7 +291,7 @@ void ControlNodeImpl::saveContent(std::shared_ptr<persistence::interfaces::XSave
 	}
 }
 
-std::shared_ptr<ecore::EClass> ControlNodeImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& ControlNodeImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getControlNode_Class();
 }
@@ -315,7 +315,7 @@ bool ControlNodeImpl::internalEIsSet(int featureID) const
 	return ActivityNodeImpl::internalEIsSet(featureID);
 }
 
-bool ControlNodeImpl::eSet(int featureID, Any newValue)
+bool ControlNodeImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -327,7 +327,7 @@ bool ControlNodeImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any ControlNodeImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any ControlNodeImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

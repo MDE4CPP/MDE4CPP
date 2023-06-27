@@ -163,12 +163,12 @@ std::shared_ptr<ecore::EObject> ValueSpecificationActionImpl::copy() const
 //*********************************
 // Operations
 //*********************************
-bool ValueSpecificationActionImpl::compatible_type(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool ValueSpecificationActionImpl::compatible_type(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool ValueSpecificationActionImpl::multiplicity(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool ValueSpecificationActionImpl::multiplicity(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -181,22 +181,22 @@ bool ValueSpecificationActionImpl::multiplicity(Any diagnostics,std::shared_ptr<
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference result */
-std::shared_ptr<uml::OutputPin> ValueSpecificationActionImpl::getResult() const
+const std::shared_ptr<uml::OutputPin>& ValueSpecificationActionImpl::getResult() const
 {
     return m_result;
 }
-void ValueSpecificationActionImpl::setResult(std::shared_ptr<uml::OutputPin> _result)
+void ValueSpecificationActionImpl::setResult(const std::shared_ptr<uml::OutputPin>& _result)
 {
     m_result = _result;
 	
 }
 
 /* Getter & Setter for reference value */
-std::shared_ptr<uml::ValueSpecification> ValueSpecificationActionImpl::getValue() const
+const std::shared_ptr<uml::ValueSpecification>& ValueSpecificationActionImpl::getValue() const
 {
     return m_value;
 }
-void ValueSpecificationActionImpl::setValue(std::shared_ptr<uml::ValueSpecification> _value)
+void ValueSpecificationActionImpl::setValue(const std::shared_ptr<uml::ValueSpecification>& _value)
 {
     m_value = _value;
 	
@@ -420,7 +420,7 @@ void ValueSpecificationActionImpl::saveContent(std::shared_ptr<persistence::inte
 	}
 }
 
-std::shared_ptr<ecore::EClass> ValueSpecificationActionImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& ValueSpecificationActionImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getValueSpecificationAction_Class();
 }
@@ -452,7 +452,7 @@ bool ValueSpecificationActionImpl::internalEIsSet(int featureID) const
 	return ActionImpl::internalEIsSet(featureID);
 }
 
-bool ValueSpecificationActionImpl::eSet(int featureID, Any newValue)
+bool ValueSpecificationActionImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -480,7 +480,7 @@ bool ValueSpecificationActionImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any ValueSpecificationActionImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any ValueSpecificationActionImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

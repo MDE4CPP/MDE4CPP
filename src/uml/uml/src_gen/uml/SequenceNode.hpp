@@ -102,7 +102,7 @@ namespace uml
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual std::shared_ptr<Bag<uml::ExecutableNode>> getExecutableNode() const = 0;
+			virtual const std::shared_ptr<Bag<uml::ExecutableNode>>& getExecutableNode() const = 0;
 
 			//*********************************
 			// Union Reference Getters

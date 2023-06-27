@@ -197,7 +197,7 @@ std::shared_ptr<ecore::EObject> EOperationImpl::copy() const
 //*********************************
 
 
-bool EOperationImpl::isOverrideOf(std::shared_ptr<ecore::EOperation> someOperation) const
+bool EOperationImpl::isOverrideOf(const std::shared_ptr<ecore::EOperation>& someOperation) const
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -241,7 +241,7 @@ bool EOperationImpl::isOverrideOf(std::shared_ptr<ecore::EOperation> someOperati
 // Attribute Getters & Setters
 //*********************************
 /* Getter & Setter for attribute operationID */
-int EOperationImpl::getOperationID() const 
+int EOperationImpl::getOperationID() const
 {
 	return m_operationID;
 }
@@ -261,7 +261,7 @@ std::weak_ptr<ecore::EClass> EOperationImpl::getEContainingClass() const
 }
 
 /* Getter & Setter for reference eExceptions */
-std::shared_ptr<Bag<ecore::EClassifier>> EOperationImpl::getEExceptions() const
+const std::shared_ptr<Bag<ecore::EClassifier>>& EOperationImpl::getEExceptions() const
 {
 	if(m_eExceptions == nullptr)
 	{
@@ -273,7 +273,7 @@ std::shared_ptr<Bag<ecore::EClassifier>> EOperationImpl::getEExceptions() const
 }
 
 /* Getter & Setter for reference eGenericExceptions */
-std::shared_ptr<Bag<ecore::EGenericType>> EOperationImpl::getEGenericExceptions() const
+const std::shared_ptr<Bag<ecore::EGenericType>>& EOperationImpl::getEGenericExceptions() const
 {
 	if(m_eGenericExceptions == nullptr)
 	{
@@ -285,7 +285,7 @@ std::shared_ptr<Bag<ecore::EGenericType>> EOperationImpl::getEGenericExceptions(
 }
 
 /* Getter & Setter for reference eParameters */
-std::shared_ptr<Subset<ecore::EParameter, ecore::EObject>> EOperationImpl::getEParameters() const
+const std::shared_ptr<Subset<ecore::EParameter, ecore::EObject>>& EOperationImpl::getEParameters() const
 {
 	if(m_eParameters == nullptr)
 	{
@@ -306,7 +306,7 @@ std::shared_ptr<Subset<ecore::EParameter, ecore::EObject>> EOperationImpl::getEP
 }
 
 /* Getter & Setter for reference eTypeParameters */
-std::shared_ptr<Bag<ecore::ETypeParameter>> EOperationImpl::getETypeParameters() const
+const std::shared_ptr<Bag<ecore::ETypeParameter>>& EOperationImpl::getETypeParameters() const
 {
 	if(m_eTypeParameters == nullptr)
 	{
@@ -464,7 +464,7 @@ void EOperationImpl::resolveReferences(const int featureID, std::vector<std::sha
 	{
 		case ecore::ecorePackage::EOPERATION_ATTRIBUTE_EEXCEPTIONS:
 		{
-			std::shared_ptr<Bag<ecore::EClassifier>> _eExceptions = getEExceptions();
+			const std::shared_ptr<Bag<ecore::EClassifier>>& _eExceptions = getEExceptions();
 			for(std::shared_ptr<ecore::EObject> ref : references)
 			{
 				std::shared_ptr<ecore::EClassifier>  _r = std::dynamic_pointer_cast<ecore::EClassifier>(ref);
@@ -529,7 +529,7 @@ void EOperationImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveH
 	}
 }
 
-std::shared_ptr<EClass> EOperationImpl::eStaticClass() const
+const std::shared_ptr<EClass>& EOperationImpl::eStaticClass() const
 {
 	return ecore::ecorePackage::eInstance()->getEOperation_Class();
 }
@@ -580,7 +580,7 @@ bool EOperationImpl::internalEIsSet(int featureID) const
 	return ETypedElementImpl::internalEIsSet(featureID);
 }
 
-bool EOperationImpl::eSet(int featureID, Any newValue)
+bool EOperationImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -740,7 +740,7 @@ bool EOperationImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any EOperationImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any EOperationImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

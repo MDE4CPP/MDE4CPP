@@ -96,7 +96,7 @@ namespace uml
 			variable.isAccessibleBy(self)
 			*/
 			 
-			virtual bool scope_of_variable(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
+			virtual bool scope_of_variable(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context) = 0;
 
 			//*********************************
 			// Attribute Getters & Setters
@@ -110,13 +110,13 @@ namespace uml
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::Variable> getVariable() const = 0;
+			virtual const std::shared_ptr<uml::Variable>& getVariable() const = 0;
 			/*!
 			The Variable to be read or written.
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual void setVariable(std::shared_ptr<uml::Variable>) = 0;
+			virtual void setVariable(const std::shared_ptr<uml::Variable>&) = 0;
 
 			//*********************************
 			// Union Reference Getters

@@ -60,8 +60,8 @@
 #include "fUML/Semantics/Activities/Token.hpp"
 #include "fUML/Semantics/Values/Value.hpp"
 //Factories and Package includes
-#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/SemanticsPackage.hpp"
+#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/Actions/ActionsPackage.hpp"
 #include "fUML/Semantics/Activities/ActivitiesPackage.hpp"
 #include "fUML/Semantics/Values/ValuesPackage.hpp"
@@ -219,7 +219,7 @@ void StructuredActivityNodeActivationImpl::doStructuredActivity()
 	//end of body
 }
 
-std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivation> StructuredActivityNodeActivationImpl::getNodeActivation(std::shared_ptr<uml::ActivityNode> node)
+std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivation> StructuredActivityNodeActivationImpl::getNodeActivation(const std::shared_ptr<uml::ActivityNode>& node)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -239,7 +239,7 @@ std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivation> StructuredA
 	//end of body
 }
 
-std::shared_ptr<Bag<fUML::Semantics::Values::Value> > StructuredActivityNodeActivationImpl::getPinValues(std::shared_ptr<uml::OutputPin> pin)
+std::shared_ptr<Bag<fUML::Semantics::Values::Value> > StructuredActivityNodeActivationImpl::getPinValues(const std::shared_ptr<uml::OutputPin>& pin)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -261,7 +261,7 @@ std::shared_ptr<Bag<fUML::Semantics::Values::Value> > StructuredActivityNodeActi
 	//end of body
 }
 
-bool StructuredActivityNodeActivationImpl::isSourceFor(std::shared_ptr<fUML::Semantics::Activities::ActivityEdgeInstance> edgeInstance)
+bool StructuredActivityNodeActivationImpl::isSourceFor(const std::shared_ptr<fUML::Semantics::Activities::ActivityEdgeInstance>& edgeInstance)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -281,7 +281,7 @@ bool StructuredActivityNodeActivationImpl::isSuspended()
 	//end of body
 }
 
-std::shared_ptr<Bag<uml::ActivityNode> > StructuredActivityNodeActivationImpl::makeActivityNodeList(std::shared_ptr<Bag<uml::ExecutableNode>> nodes)
+std::shared_ptr<Bag<uml::ActivityNode> > StructuredActivityNodeActivationImpl::makeActivityNodeList(const std::shared_ptr<Bag<uml::ExecutableNode>>& nodes)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -314,7 +314,7 @@ std::shared_ptr<Bag<uml::ActivityNode> > StructuredActivityNodeActivationImpl::m
 	//end of body
 }
 
-void StructuredActivityNodeActivationImpl::putPinValues(std::shared_ptr<uml::OutputPin> pin,std::shared_ptr<Bag<fUML::Semantics::Values::Value>> values)
+void StructuredActivityNodeActivationImpl::putPinValues(const std::shared_ptr<uml::OutputPin>& pin, const std::shared_ptr<Bag<fUML::Semantics::Values::Value>>& values)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -371,11 +371,11 @@ void StructuredActivityNodeActivationImpl::terminateAll()
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference activationGroup */
-std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup> StructuredActivityNodeActivationImpl::getActivationGroup() const
+const std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup>& StructuredActivityNodeActivationImpl::getActivationGroup() const
 {
     return m_activationGroup;
 }
-void StructuredActivityNodeActivationImpl::setActivationGroup(std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup> _activationGroup)
+void StructuredActivityNodeActivationImpl::setActivationGroup(const std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup>& _activationGroup)
 {
     m_activationGroup = _activationGroup;
 	
@@ -502,7 +502,7 @@ void StructuredActivityNodeActivationImpl::saveContent(std::shared_ptr<persisten
 	}
 }
 
-std::shared_ptr<ecore::EClass> StructuredActivityNodeActivationImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& StructuredActivityNodeActivationImpl::eStaticClass() const
 {
 	return fUML::Semantics::Actions::ActionsPackage::eInstance()->getStructuredActivityNodeActivation_Class();
 }
@@ -530,7 +530,7 @@ bool StructuredActivityNodeActivationImpl::internalEIsSet(int featureID) const
 	return ActionActivationImpl::internalEIsSet(featureID);
 }
 
-bool StructuredActivityNodeActivationImpl::eSet(int featureID, Any newValue)
+bool StructuredActivityNodeActivationImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -550,7 +550,7 @@ bool StructuredActivityNodeActivationImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any StructuredActivityNodeActivationImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any StructuredActivityNodeActivationImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

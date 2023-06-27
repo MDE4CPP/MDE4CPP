@@ -80,8 +80,8 @@ namespace ocl::Expressions
 			virtual void setIfOwner(std::weak_ptr<ocl::Expressions::IfExp>) ;
 			virtual std::weak_ptr<ocl::Expressions::Variable> getInitializedElement() const ;
 			virtual void setInitializedElement(std::weak_ptr<ocl::Expressions::Variable>) ;
-			virtual std::shared_ptr<ocl::Evaluations::OclExpEval> getInstance() const ;
-			virtual void setInstance(std::shared_ptr<ocl::Evaluations::OclExpEval>) ;
+			virtual const std::shared_ptr<ocl::Evaluations::OclExpEval>& getInstance() const ;
+			virtual void setInstance(const std::shared_ptr<ocl::Evaluations::OclExpEval>&) ;
 			virtual std::weak_ptr<ocl::Expressions::CollectionRange> getLastOwner() const ;
 			virtual void setLastOwner(std::weak_ptr<ocl::Expressions::CollectionRange>) ;
 			virtual std::weak_ptr<ocl::Expressions::LoopExp> getLoopBodyOwner() const ;
@@ -115,19 +115,19 @@ namespace ocl::Expressions
 			virtual void saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const;
 
 		protected:
-			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
+			virtual const std::shared_ptr<ecore::EClass>& eStaticClass() const;
 
 			//*********************************
 			// EStructuralFeature Get/Set/IsSet
 			//*********************************
 			virtual Any eGet(int featureID, bool resolve, bool coreType) const ;
-			virtual bool eSet(int featureID, Any newValue) ;
+			virtual bool eSet(int featureID, const Any& newValue) ;
 			virtual bool internalEIsSet(int featureID) const ;
 
 			//*********************************
 			// EOperation Invoke
 			//*********************************
-			virtual Any eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments) ;
+			virtual Any eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments) ;
 
 		private:
 			std::weak_ptr<ocl::Expressions::OclExpression> m_thisOclExpressionPtr;

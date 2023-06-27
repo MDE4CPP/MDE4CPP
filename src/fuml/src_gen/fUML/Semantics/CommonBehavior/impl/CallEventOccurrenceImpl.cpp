@@ -47,8 +47,8 @@
 #include "fUML/Semantics/StructuredClassifiers/Reference.hpp"
 #include "uml/Trigger.hpp"
 //Factories and Package includes
-#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/SemanticsPackage.hpp"
+#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/CommonBehavior/CommonBehaviorPackage.hpp"
 #include "fUML/Semantics/StructuredClassifiers/StructuredClassifiersPackage.hpp"
 #include "uml/umlPackage.hpp"
@@ -132,7 +132,7 @@ std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue> > CallEvent
 	//end of body
 }
 
-bool CallEventOccurrenceImpl::match(std::shared_ptr<uml::Trigger> trigger)
+bool CallEventOccurrenceImpl::match(const std::shared_ptr<uml::Trigger>& trigger)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -154,7 +154,7 @@ void CallEventOccurrenceImpl::releaseCaller()
 	//end of body
 }
 
-void CallEventOccurrenceImpl::setOutputParameterValues(std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> parameterValues)
+void CallEventOccurrenceImpl::setOutputParameterValues(const std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>>& parameterValues)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -170,11 +170,11 @@ void CallEventOccurrenceImpl::setOutputParameterValues(std::shared_ptr<Bag<fUML:
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference execution */
-std::shared_ptr<fUML::Semantics::CommonBehavior::CallEventExecution> CallEventOccurrenceImpl::getExecution() const
+const std::shared_ptr<fUML::Semantics::CommonBehavior::CallEventExecution>& CallEventOccurrenceImpl::getExecution() const
 {
     return m_execution;
 }
-void CallEventOccurrenceImpl::setExecution(std::shared_ptr<fUML::Semantics::CommonBehavior::CallEventExecution> _execution)
+void CallEventOccurrenceImpl::setExecution(const std::shared_ptr<fUML::Semantics::CommonBehavior::CallEventExecution>& _execution)
 {
     m_execution = _execution;
 	
@@ -285,7 +285,7 @@ void CallEventOccurrenceImpl::saveContent(std::shared_ptr<persistence::interface
 	}
 }
 
-std::shared_ptr<ecore::EClass> CallEventOccurrenceImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& CallEventOccurrenceImpl::eStaticClass() const
 {
 	return fUML::Semantics::CommonBehavior::CommonBehaviorPackage::eInstance()->getCallEventOccurrence_Class();
 }
@@ -313,7 +313,7 @@ bool CallEventOccurrenceImpl::internalEIsSet(int featureID) const
 	return EventOccurrenceImpl::internalEIsSet(featureID);
 }
 
-bool CallEventOccurrenceImpl::eSet(int featureID, Any newValue)
+bool CallEventOccurrenceImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -333,7 +333,7 @@ bool CallEventOccurrenceImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any CallEventOccurrenceImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any CallEventOccurrenceImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

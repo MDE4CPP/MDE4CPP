@@ -92,10 +92,10 @@ namespace ocl::Expressions
 			//*********************************
 			// Reference Getters & Setters
 			//*********************************
-			virtual std::shared_ptr<ocl::Expressions::OclExpression> getIn() const = 0;
-			virtual void setIn(std::shared_ptr<ocl::Expressions::OclExpression>) = 0;
-			virtual std::shared_ptr<ocl::Expressions::Variable> getVariable() const = 0;
-			virtual void setVariable(std::shared_ptr<ocl::Expressions::Variable>) = 0;
+			virtual const std::shared_ptr<ocl::Expressions::OclExpression>& getIn() const = 0;
+			virtual void setIn(const std::shared_ptr<ocl::Expressions::OclExpression>&) = 0;
+			virtual const std::shared_ptr<ocl::Expressions::Variable>& getVariable() const = 0;
+			virtual void setVariable(const std::shared_ptr<ocl::Expressions::Variable>&) = 0;
 
 			//*********************************
 			// Union Reference Getters

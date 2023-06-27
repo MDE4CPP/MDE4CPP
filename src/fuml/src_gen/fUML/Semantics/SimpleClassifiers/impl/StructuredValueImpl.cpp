@@ -52,8 +52,8 @@
 #include "fUML/Semantics/Values/Value.hpp"
 #include "uml/ValueSpecification.hpp"
 //Factories and Package includes
-#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/SemanticsPackage.hpp"
+#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/SimpleClassifiers/SimpleClassifiersPackage.hpp"
 #include "fUML/Semantics/Values/ValuesPackage.hpp"
 #include "uml/umlPackage.hpp"
@@ -112,7 +112,7 @@ StructuredValueImpl& StructuredValueImpl::operator=(const StructuredValueImpl & 
 //*********************************
 // Operations
 //*********************************
-void StructuredValueImpl::assignFeatureValue(std::shared_ptr<uml::StructuralFeature> feature,std::shared_ptr<Bag<fUML::Semantics::Values::Value>> values,int position)
+void StructuredValueImpl::assignFeatureValue(const std::shared_ptr<uml::StructuralFeature>& feature, const std::shared_ptr<Bag<fUML::Semantics::Values::Value>>& values, int position)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -148,7 +148,7 @@ void StructuredValueImpl::createFeatureValues()
 	//end of body
 }
 
-std::shared_ptr<Bag<uml::StructuralFeature> > StructuredValueImpl::getMemberFeatures(std::shared_ptr<uml::Classifier> type)
+std::shared_ptr<Bag<uml::StructuralFeature> > StructuredValueImpl::getMemberFeatures(const std::shared_ptr<uml::Classifier>& type)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -179,7 +179,7 @@ return memberFeatures;
 	//end of body
 }
 
-std::shared_ptr<Bag<uml::StructuralFeature> > StructuredValueImpl::getStructuralFeatureForType(std::shared_ptr<uml::Classifier> type)
+std::shared_ptr<Bag<uml::StructuralFeature> > StructuredValueImpl::getStructuralFeatureForType(const std::shared_ptr<uml::Classifier>& type)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -211,17 +211,17 @@ return features;
 	//end of body
 }
 
-std::shared_ptr<Bag<fUML::Semantics::Values::Value> > StructuredValueImpl::getValues(std::shared_ptr<uml::StructuralFeature> feature,std::shared_ptr<Bag<fUML::Semantics::SimpleClassifiers::FeatureValue>> featureValues)
+std::shared_ptr<Bag<fUML::Semantics::Values::Value> > StructuredValueImpl::getValues(const std::shared_ptr<uml::StructuralFeature>& feature, const std::shared_ptr<Bag<fUML::Semantics::SimpleClassifiers::FeatureValue>>& featureValues)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-void StructuredValueImpl::removeValue(std::shared_ptr<uml::StructuralFeature> feature,std::shared_ptr<fUML::Semantics::Values::Value> value)
+void StructuredValueImpl::removeValue(const std::shared_ptr<uml::StructuralFeature>& feature, const std::shared_ptr<fUML::Semantics::Values::Value>& value)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-std::shared_ptr<fUML::Semantics::SimpleClassifiers::FeatureValue> StructuredValueImpl::retrieveFeatureValue(std::shared_ptr<uml::StructuralFeature> feature)
+std::shared_ptr<fUML::Semantics::SimpleClassifiers::FeatureValue> StructuredValueImpl::retrieveFeatureValue(const std::shared_ptr<uml::StructuralFeature>& feature)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -254,7 +254,7 @@ return features;
 	//end of body
 }
 
-void StructuredValueImpl::setFeatureValue(std::shared_ptr<uml::StructuralFeature> feature,std::shared_ptr<Bag<fUML::Semantics::Values::Value>> values,int position)
+void StructuredValueImpl::setFeatureValue(const std::shared_ptr<uml::StructuralFeature>& feature, const std::shared_ptr<Bag<fUML::Semantics::Values::Value>>& values, int position)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -382,7 +382,7 @@ void StructuredValueImpl::saveContent(std::shared_ptr<persistence::interfaces::X
 	}
 }
 
-std::shared_ptr<ecore::EClass> StructuredValueImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& StructuredValueImpl::eStaticClass() const
 {
 	return fUML::Semantics::SimpleClassifiers::SimpleClassifiersPackage::eInstance()->getStructuredValue_Class();
 }
@@ -406,7 +406,7 @@ bool StructuredValueImpl::internalEIsSet(int featureID) const
 	return fUML::Semantics::Values::ValueImpl::internalEIsSet(featureID);
 }
 
-bool StructuredValueImpl::eSet(int featureID, Any newValue)
+bool StructuredValueImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -418,7 +418,7 @@ bool StructuredValueImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any StructuredValueImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any StructuredValueImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

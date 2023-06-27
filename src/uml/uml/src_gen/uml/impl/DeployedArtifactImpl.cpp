@@ -223,7 +223,7 @@ void DeployedArtifactImpl::saveContent(std::shared_ptr<persistence::interfaces::
 	}
 }
 
-std::shared_ptr<ecore::EClass> DeployedArtifactImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& DeployedArtifactImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getDeployedArtifact_Class();
 }
@@ -247,7 +247,7 @@ bool DeployedArtifactImpl::internalEIsSet(int featureID) const
 	return NamedElementImpl::internalEIsSet(featureID);
 }
 
-bool DeployedArtifactImpl::eSet(int featureID, Any newValue)
+bool DeployedArtifactImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -259,7 +259,7 @@ bool DeployedArtifactImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any DeployedArtifactImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any DeployedArtifactImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

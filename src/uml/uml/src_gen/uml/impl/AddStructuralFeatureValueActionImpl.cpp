@@ -157,12 +157,12 @@ std::shared_ptr<ecore::EObject> AddStructuralFeatureValueActionImpl::copy() cons
 //*********************************
 // Operations
 //*********************************
-bool AddStructuralFeatureValueActionImpl::insertAt_pin(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool AddStructuralFeatureValueActionImpl::insertAt_pin(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool AddStructuralFeatureValueActionImpl::required_value(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool AddStructuralFeatureValueActionImpl::required_value(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -171,7 +171,7 @@ bool AddStructuralFeatureValueActionImpl::required_value(Any diagnostics,std::sh
 // Attribute Getters & Setters
 //*********************************
 /* Getter & Setter for attribute isReplaceAll */
-bool AddStructuralFeatureValueActionImpl::getIsReplaceAll() const 
+bool AddStructuralFeatureValueActionImpl::getIsReplaceAll() const
 {
 	return m_isReplaceAll;
 }
@@ -185,11 +185,11 @@ void AddStructuralFeatureValueActionImpl::setIsReplaceAll(bool _isReplaceAll)
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference insertAt */
-std::shared_ptr<uml::InputPin> AddStructuralFeatureValueActionImpl::getInsertAt() const
+const std::shared_ptr<uml::InputPin>& AddStructuralFeatureValueActionImpl::getInsertAt() const
 {
     return m_insertAt;
 }
-void AddStructuralFeatureValueActionImpl::setInsertAt(std::shared_ptr<uml::InputPin> _insertAt)
+void AddStructuralFeatureValueActionImpl::setInsertAt(const std::shared_ptr<uml::InputPin>& _insertAt)
 {
     m_insertAt = _insertAt;
 	
@@ -443,7 +443,7 @@ void AddStructuralFeatureValueActionImpl::saveContent(std::shared_ptr<persistenc
 	}
 }
 
-std::shared_ptr<ecore::EClass> AddStructuralFeatureValueActionImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& AddStructuralFeatureValueActionImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getAddStructuralFeatureValueAction_Class();
 }
@@ -475,7 +475,7 @@ bool AddStructuralFeatureValueActionImpl::internalEIsSet(int featureID) const
 	return WriteStructuralFeatureActionImpl::internalEIsSet(featureID);
 }
 
-bool AddStructuralFeatureValueActionImpl::eSet(int featureID, Any newValue)
+bool AddStructuralFeatureValueActionImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -502,7 +502,7 @@ bool AddStructuralFeatureValueActionImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any AddStructuralFeatureValueActionImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any AddStructuralFeatureValueActionImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

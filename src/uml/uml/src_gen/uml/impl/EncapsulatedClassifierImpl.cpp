@@ -210,7 +210,7 @@ std::shared_ptr<Bag<uml::Port> > EncapsulatedClassifierImpl::getOwnedPorts()
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference ownedPort */
-std::shared_ptr<Subset<uml::Port, uml::Property /*Subset does not reference a union*/>> EncapsulatedClassifierImpl::getOwnedPort() const
+const std::shared_ptr<Subset<uml::Port, uml::Property /*Subset does not reference a union*/>>& EncapsulatedClassifierImpl::getOwnedPort() const
 {
 	//generated from getterBody annotation
 	std::shared_ptr<SubsetUnion<uml::Property, uml::ConnectableElement, uml::NamedElement, uml::Property>> ownedAttribute = this->getOwnedAttribute();
@@ -509,7 +509,7 @@ void EncapsulatedClassifierImpl::saveContent(std::shared_ptr<persistence::interf
 	}
 }
 
-std::shared_ptr<ecore::EClass> EncapsulatedClassifierImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& EncapsulatedClassifierImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getEncapsulatedClassifier_Class();
 }
@@ -537,7 +537,7 @@ bool EncapsulatedClassifierImpl::internalEIsSet(int featureID) const
 	return StructuredClassifierImpl::internalEIsSet(featureID);
 }
 
-bool EncapsulatedClassifierImpl::eSet(int featureID, Any newValue)
+bool EncapsulatedClassifierImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -549,7 +549,7 @@ bool EncapsulatedClassifierImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any EncapsulatedClassifierImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any EncapsulatedClassifierImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

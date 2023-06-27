@@ -113,22 +113,22 @@ std::shared_ptr<ecore::EObject> ExpressionInOclEvalImpl::copy() const
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference context */
-std::shared_ptr<ocl::Evaluations::OclExpEval> ExpressionInOclEvalImpl::getContext() const
+const std::shared_ptr<ocl::Evaluations::OclExpEval>& ExpressionInOclEvalImpl::getContext() const
 {
     return m_context;
 }
-void ExpressionInOclEvalImpl::setContext(std::shared_ptr<ocl::Evaluations::OclExpEval> _context)
+void ExpressionInOclEvalImpl::setContext(const std::shared_ptr<ocl::Evaluations::OclExpEval>& _context)
 {
     m_context = _context;
 	
 }
 
 /* Getter & Setter for reference environment */
-std::shared_ptr<ocl::Evaluations::EvalEnvironment> ExpressionInOclEvalImpl::getEnvironment() const
+const std::shared_ptr<ocl::Evaluations::EvalEnvironment>& ExpressionInOclEvalImpl::getEnvironment() const
 {
     return m_environment;
 }
-void ExpressionInOclEvalImpl::setEnvironment(std::shared_ptr<ocl::Evaluations::EvalEnvironment> _environment)
+void ExpressionInOclEvalImpl::setEnvironment(const std::shared_ptr<ocl::Evaluations::EvalEnvironment>& _environment)
 {
     m_environment = _environment;
 	
@@ -256,7 +256,7 @@ void ExpressionInOclEvalImpl::saveContent(std::shared_ptr<persistence::interface
 	}
 }
 
-std::shared_ptr<ecore::EClass> ExpressionInOclEvalImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& ExpressionInOclEvalImpl::eStaticClass() const
 {
 	return ocl::Evaluations::EvaluationsPackage::eInstance()->getExpressionInOclEval_Class();
 }
@@ -288,7 +288,7 @@ bool ExpressionInOclEvalImpl::internalEIsSet(int featureID) const
 	return ecore::EObjectImpl::internalEIsSet(featureID);
 }
 
-bool ExpressionInOclEvalImpl::eSet(int featureID, Any newValue)
+bool ExpressionInOclEvalImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -316,7 +316,7 @@ bool ExpressionInOclEvalImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any ExpressionInOclEvalImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any ExpressionInOclEvalImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

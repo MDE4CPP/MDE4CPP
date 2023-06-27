@@ -48,8 +48,8 @@
 #include "fUML/Semantics/Values/Value.hpp"
 #include "uml/ValueSpecification.hpp"
 //Factories and Package includes
-#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/SemanticsPackage.hpp"
+#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/SimpleClassifiers/SimpleClassifiersPackage.hpp"
 #include "fUML/Semantics/Values/ValuesPackage.hpp"
 #include "uml/umlPackage.hpp"
@@ -131,7 +131,7 @@ return newValue;
 	//end of body
 }
 
-bool EnumerationValueImpl::equals(std::shared_ptr<fUML::Semantics::Values::Value> otherValue)
+bool EnumerationValueImpl::equals(const std::shared_ptr<fUML::Semantics::Values::Value>& otherValue)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -195,22 +195,22 @@ std::string EnumerationValueImpl::toString()
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference literal */
-std::shared_ptr<uml::EnumerationLiteral> EnumerationValueImpl::getLiteral() const
+const std::shared_ptr<uml::EnumerationLiteral>& EnumerationValueImpl::getLiteral() const
 {
     return m_literal;
 }
-void EnumerationValueImpl::setLiteral(std::shared_ptr<uml::EnumerationLiteral> _literal)
+void EnumerationValueImpl::setLiteral(const std::shared_ptr<uml::EnumerationLiteral>& _literal)
 {
     m_literal = _literal;
 	
 }
 
 /* Getter & Setter for reference type */
-std::shared_ptr<uml::Enumeration> EnumerationValueImpl::getType() const
+const std::shared_ptr<uml::Enumeration>& EnumerationValueImpl::getType() const
 {
     return m_type;
 }
-void EnumerationValueImpl::setType(std::shared_ptr<uml::Enumeration> _type)
+void EnumerationValueImpl::setType(const std::shared_ptr<uml::Enumeration>& _type)
 {
     m_type = _type;
 	
@@ -343,7 +343,7 @@ void EnumerationValueImpl::saveContent(std::shared_ptr<persistence::interfaces::
 	}
 }
 
-std::shared_ptr<ecore::EClass> EnumerationValueImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& EnumerationValueImpl::eStaticClass() const
 {
 	return fUML::Semantics::SimpleClassifiers::SimpleClassifiersPackage::eInstance()->getEnumerationValue_Class();
 }
@@ -375,7 +375,7 @@ bool EnumerationValueImpl::internalEIsSet(int featureID) const
 	return fUML::Semantics::Values::ValueImpl::internalEIsSet(featureID);
 }
 
-bool EnumerationValueImpl::eSet(int featureID, Any newValue)
+bool EnumerationValueImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -403,7 +403,7 @@ bool EnumerationValueImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any EnumerationValueImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any EnumerationValueImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

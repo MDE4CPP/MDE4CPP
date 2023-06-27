@@ -50,7 +50,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			 
-			virtual bool compatibleWith(std::shared_ptr<uml::MultiplicityElement> other) ;
+			virtual bool compatibleWith(const std::shared_ptr<uml::MultiplicityElement>& other) ;
 			/*!
 			The query includesMultiplicity() checks whether this multiplicity includes all the cardinalities allowed by the specified multiplicity.
 			self.upperBound()->notEmpty() and self.lowerBound()->notEmpty() and M.upperBound()->notEmpty() and M.lowerBound()->notEmpty()
@@ -58,14 +58,14 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			 
-			virtual bool includesMultiplicity(std::shared_ptr<uml::MultiplicityElement> M) ;
+			virtual bool includesMultiplicity(const std::shared_ptr<uml::MultiplicityElement>& M) ;
 			/*!
 			The operation is determines if the upper and lower bound of the ranges are the ones given.
 			result = (lowerbound = self.lowerBound() and upperbound = self.upperBound())
 			<p>From package UML::CommonStructure.</p>
 			*/
 			 
-			virtual bool is(int lowerbound,int upperbound) ;
+			virtual bool is(int lowerbound, int upperbound) ;
 			/*!
 			The query isMultivalued() checks whether this multiplicity has an upper bound greater than one.
 			upperBound()->notEmpty()
@@ -86,13 +86,13 @@ namespace uml
 			lowerBound() >= 0
 			*/
 			 
-			virtual bool lower_ge_0(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
+			virtual bool lower_ge_0(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context) ;
 			/*!
 			If it is not empty, then lowerValue must have an Integer value.
 			lowerValue <> null implies lowerValue.integerValue() <> null
 			*/
 			 
-			virtual bool lower_is_integer(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
+			virtual bool lower_is_integer(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context) ;
 			/*!
 			The query upperBound() returns the upper bound of the multiplicity for a bounded multiplicity as an unlimited natural, which is the unlimitedNaturalValue of upperValue, if given, and 1, otherwise.
 			result = (if (upperValue=null or upperValue.unlimitedValue()=null) then 1 else upperValue.unlimitedValue() endif)
@@ -105,23 +105,23 @@ namespace uml
 			upperBound() >= lowerBound()
 			*/
 			 
-			virtual bool upper_ge_lower(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
+			virtual bool upper_ge_lower(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context) ;
 			/*!
 			If it is not empty, then upperValue must have an UnlimitedNatural value.
 			upperValue <> null implies upperValue.unlimitedValue() <> null
 			*/
 			 
-			virtual bool upper_is_unlimitedNatural(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
+			virtual bool upper_is_unlimitedNatural(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context) ;
 			/*!
 			If a non-literal ValueSpecification is used for lowerValue or upperValue, then that specification must be a constant expression.
 			*/
 			 
-			virtual bool value_specification_constant(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
+			virtual bool value_specification_constant(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context) ;
 			/*!
 			If a non-literal ValueSpecification is used for lowerValue or upperValue, then evaluating that specification must not have side effects.
 			*/
 			 
-			virtual bool value_specification_no_side_effects(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
+			virtual bool value_specification_no_side_effects(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context) ;
 			
 			//*********************************
 			// Attribute Getters & Setters
@@ -183,25 +183,25 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::ValueSpecification> getLowerValue() const ;
+			virtual const std::shared_ptr<uml::ValueSpecification>& getLowerValue() const ;
 			/*!
 			The specification of the lower bound for this multiplicity.
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual void setLowerValue(std::shared_ptr<uml::ValueSpecification>) ;
+			virtual void setLowerValue(const std::shared_ptr<uml::ValueSpecification>&) ;
 			/*!
 			The specification of the upper bound for this multiplicity.
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::ValueSpecification> getUpperValue() const ;
+			virtual const std::shared_ptr<uml::ValueSpecification>& getUpperValue() const ;
 			/*!
 			The specification of the upper bound for this multiplicity.
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual void setUpperValue(std::shared_ptr<uml::ValueSpecification>) ;
+			virtual void setUpperValue(const std::shared_ptr<uml::ValueSpecification>&) ;
 			
 			//*********************************
 			// Union Reference Getters
@@ -229,19 +229,19 @@ namespace uml
 			virtual void saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const;
 
 		protected:
-			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
+			virtual const std::shared_ptr<ecore::EClass>& eStaticClass() const;
 
 			//*********************************
 			// EStructuralFeature Get/Set/IsSet
 			//*********************************
 			virtual Any eGet(int featureID, bool resolve, bool coreType) const ;
-			virtual bool eSet(int featureID, Any newValue) ;
+			virtual bool eSet(int featureID, const Any& newValue) ;
 			virtual bool internalEIsSet(int featureID) const ;
 
 			//*********************************
 			// EOperation Invoke
 			//*********************************
-			virtual Any eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments) ;
+			virtual Any eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments) ;
 
 		private:
 			std::weak_ptr<uml::MultiplicityElement> m_thisMultiplicityElementPtr;

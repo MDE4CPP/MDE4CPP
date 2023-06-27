@@ -36,8 +36,8 @@
 #include <exception> // used in Persistence
 #include "ocl/Expressions/ExpressionsFactory.hpp"
 #include "ecore/ecoreFactory.hpp"
-#include "uml/umlFactory.hpp"
 #include "ocl/Evaluations/EvaluationsFactory.hpp"
+#include "uml/umlFactory.hpp"
 #include "ocl/Expressions/CallExp.hpp"
 #include "ocl/Expressions/CollectionRange.hpp"
 #include "ecore/EAnnotation.hpp"
@@ -214,11 +214,11 @@ std::shared_ptr<ecore::EObject> StateExpImpl::copy() const
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference referredState */
-std::shared_ptr<uml::State> StateExpImpl::getReferredState() const
+const std::shared_ptr<uml::State>& StateExpImpl::getReferredState() const
 {
     return m_referredState;
 }
-void StateExpImpl::setReferredState(std::shared_ptr<uml::State> _referredState)
+void StateExpImpl::setReferredState(const std::shared_ptr<uml::State>& _referredState)
 {
     m_referredState = _referredState;
 	
@@ -389,7 +389,7 @@ void StateExpImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHan
 	}
 }
 
-std::shared_ptr<ecore::EClass> StateExpImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& StateExpImpl::eStaticClass() const
 {
 	return ocl::Expressions::ExpressionsPackage::eInstance()->getStateExp_Class();
 }
@@ -417,7 +417,7 @@ bool StateExpImpl::internalEIsSet(int featureID) const
 	return OclExpressionImpl::internalEIsSet(featureID);
 }
 
-bool StateExpImpl::eSet(int featureID, Any newValue)
+bool StateExpImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -437,7 +437,7 @@ bool StateExpImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any StateExpImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any StateExpImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

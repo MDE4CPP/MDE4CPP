@@ -149,11 +149,11 @@ std::shared_ptr<ecore::EObject> CallEventImpl::copy() const
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference operation */
-std::shared_ptr<uml::Operation> CallEventImpl::getOperation() const
+const std::shared_ptr<uml::Operation>& CallEventImpl::getOperation() const
 {
     return m_operation;
 }
-void CallEventImpl::setOperation(std::shared_ptr<uml::Operation> _operation)
+void CallEventImpl::setOperation(const std::shared_ptr<uml::Operation>& _operation)
 {
     m_operation = _operation;
 	
@@ -320,7 +320,7 @@ void CallEventImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHa
 	}
 }
 
-std::shared_ptr<ecore::EClass> CallEventImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& CallEventImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getCallEvent_Class();
 }
@@ -348,7 +348,7 @@ bool CallEventImpl::internalEIsSet(int featureID) const
 	return MessageEventImpl::internalEIsSet(featureID);
 }
 
-bool CallEventImpl::eSet(int featureID, Any newValue)
+bool CallEventImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -368,7 +368,7 @@ bool CallEventImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any CallEventImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any CallEventImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

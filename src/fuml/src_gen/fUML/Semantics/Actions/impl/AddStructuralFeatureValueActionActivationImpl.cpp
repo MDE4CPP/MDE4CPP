@@ -62,8 +62,8 @@
 #include "fUML/Semantics/Activities/Token.hpp"
 #include "fUML/Semantics/Actions/WriteStructuralFeatureActionActivation.hpp"
 //Factories and Package includes
-#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/SemanticsPackage.hpp"
+#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/Actions/ActionsPackage.hpp"
 #include "fUML/Semantics/Activities/ActivitiesPackage.hpp"
 #include "uml/umlPackage.hpp"
@@ -289,18 +289,18 @@ void AddStructuralFeatureValueActionActivationImpl::doAction()
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference addStructuralFeatureValueAction */
-std::shared_ptr<uml::AddStructuralFeatureValueAction> AddStructuralFeatureValueActionActivationImpl::getAddStructuralFeatureValueAction() const
+const std::shared_ptr<uml::AddStructuralFeatureValueAction>& AddStructuralFeatureValueActionActivationImpl::getAddStructuralFeatureValueAction() const
 {
     return m_addStructuralFeatureValueAction;
 }
-void AddStructuralFeatureValueActionActivationImpl::setAddStructuralFeatureValueAction(std::shared_ptr<uml::AddStructuralFeatureValueAction> _addStructuralFeatureValueAction)
+void AddStructuralFeatureValueActionActivationImpl::setAddStructuralFeatureValueAction(const std::shared_ptr<uml::AddStructuralFeatureValueAction>& _addStructuralFeatureValueAction)
 {
     m_addStructuralFeatureValueAction = _addStructuralFeatureValueAction;
 	//additional setter call for redefined reference ActionActivation::action
 	fUML::Semantics::Actions::ActionActivationImpl::setAction(_addStructuralFeatureValueAction);
 }
 /*Additional Setter for redefined reference 'ActionActivation::action'*/
-void AddStructuralFeatureValueActionActivationImpl::setAction(std::shared_ptr<uml::Action> _action)
+void AddStructuralFeatureValueActionActivationImpl::setAction(const std::shared_ptr<uml::Action>& _action)
 {
 	std::shared_ptr<uml::AddStructuralFeatureValueAction> _addStructuralFeatureValueAction = std::dynamic_pointer_cast<uml::AddStructuralFeatureValueAction>(_action);
 	if(_addStructuralFeatureValueAction)
@@ -316,7 +316,7 @@ void AddStructuralFeatureValueActionActivationImpl::setAction(std::shared_ptr<um
 	}
 }
 /*Additional Setter for redefined reference 'ActivityNodeActivation::node'*/
-void AddStructuralFeatureValueActionActivationImpl::setNode(std::shared_ptr<uml::ActivityNode> _node)
+void AddStructuralFeatureValueActionActivationImpl::setNode(const std::shared_ptr<uml::ActivityNode>& _node)
 {
 	std::shared_ptr<uml::AddStructuralFeatureValueAction> _addStructuralFeatureValueAction = std::dynamic_pointer_cast<uml::AddStructuralFeatureValueAction>(_node);
 	if(_addStructuralFeatureValueAction)
@@ -463,7 +463,7 @@ void AddStructuralFeatureValueActionActivationImpl::saveContent(std::shared_ptr<
 	}
 }
 
-std::shared_ptr<ecore::EClass> AddStructuralFeatureValueActionActivationImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& AddStructuralFeatureValueActionActivationImpl::eStaticClass() const
 {
 	return fUML::Semantics::Actions::ActionsPackage::eInstance()->getAddStructuralFeatureValueActionActivation_Class();
 }
@@ -491,7 +491,7 @@ bool AddStructuralFeatureValueActionActivationImpl::internalEIsSet(int featureID
 	return WriteStructuralFeatureActionActivationImpl::internalEIsSet(featureID);
 }
 
-bool AddStructuralFeatureValueActionActivationImpl::eSet(int featureID, Any newValue)
+bool AddStructuralFeatureValueActionActivationImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -511,7 +511,7 @@ bool AddStructuralFeatureValueActionActivationImpl::eSet(int featureID, Any newV
 //*********************************
 // EOperation Invoke
 //*********************************
-Any AddStructuralFeatureValueActionActivationImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any AddStructuralFeatureValueActionActivationImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

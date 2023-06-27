@@ -37,8 +37,8 @@
 #include "fUML/Semantics/Values/ValuesFactory.hpp"
 #include "fUML/Semantics/Values/Value.hpp"
 //Factories and Package includes
-#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/SemanticsPackage.hpp"
+#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/Actions/ActionsPackage.hpp"
 #include "fUML/Semantics/Values/ValuesPackage.hpp"
 
@@ -114,7 +114,7 @@ std::shared_ptr<ecore::EObject> ValuesImpl::copy() const
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference values */
-std::shared_ptr<Bag<fUML::Semantics::Values::Value>> ValuesImpl::getValues() const
+const std::shared_ptr<Bag<fUML::Semantics::Values::Value>>& ValuesImpl::getValues() const
 {
 	if(m_values == nullptr)
 	{
@@ -229,7 +229,7 @@ void ValuesImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandl
 	}
 }
 
-std::shared_ptr<ecore::EClass> ValuesImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& ValuesImpl::eStaticClass() const
 {
 	return fUML::Semantics::Actions::ActionsPackage::eInstance()->getValues_Class();
 }
@@ -257,7 +257,7 @@ bool ValuesImpl::internalEIsSet(int featureID) const
 	return ecore::EObjectImpl::internalEIsSet(featureID);
 }
 
-bool ValuesImpl::eSet(int featureID, Any newValue)
+bool ValuesImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -306,7 +306,7 @@ bool ValuesImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any ValuesImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any ValuesImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

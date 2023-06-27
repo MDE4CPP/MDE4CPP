@@ -50,8 +50,8 @@
 #include "fUML/Semantics/Actions/PinActivation.hpp"
 #include "fUML/Semantics/Activities/Token.hpp"
 //Factories and Package includes
-#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/SemanticsPackage.hpp"
+#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/Actions/ActionsPackage.hpp"
 #include "fUML/Semantics/Activities/ActivitiesPackage.hpp"
 #include "fUML/Semantics/StructuredClassifiers/StructuredClassifiersPackage.hpp"
@@ -117,7 +117,7 @@ LinkActionActivationImpl& LinkActionActivationImpl::operator=(const LinkActionAc
 //*********************************
 // Operations
 //*********************************
-bool LinkActionActivationImpl::endMatchesEndData(std::shared_ptr<fUML::Semantics::StructuredClassifiers::Link> link,std::shared_ptr<uml::LinkEndData> endData)
+bool LinkActionActivationImpl::endMatchesEndData(const std::shared_ptr<fUML::Semantics::StructuredClassifiers::Link>& link, const std::shared_ptr<uml::LinkEndData>& endData)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -127,7 +127,7 @@ std::shared_ptr<uml::Association> LinkActionActivationImpl::getAssociation()
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool LinkActionActivationImpl::linkMatchesEndData(std::shared_ptr<fUML::Semantics::StructuredClassifiers::Link> link,std::shared_ptr<Bag<uml::LinkEndData>> endDataList)
+bool LinkActionActivationImpl::linkMatchesEndData(const std::shared_ptr<fUML::Semantics::StructuredClassifiers::Link>& link, const std::shared_ptr<Bag<uml::LinkEndData>>& endDataList)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -232,7 +232,7 @@ void LinkActionActivationImpl::saveContent(std::shared_ptr<persistence::interfac
 	}
 }
 
-std::shared_ptr<ecore::EClass> LinkActionActivationImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& LinkActionActivationImpl::eStaticClass() const
 {
 	return fUML::Semantics::Actions::ActionsPackage::eInstance()->getLinkActionActivation_Class();
 }
@@ -256,7 +256,7 @@ bool LinkActionActivationImpl::internalEIsSet(int featureID) const
 	return ActionActivationImpl::internalEIsSet(featureID);
 }
 
-bool LinkActionActivationImpl::eSet(int featureID, Any newValue)
+bool LinkActionActivationImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -268,7 +268,7 @@ bool LinkActionActivationImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any LinkActionActivationImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any LinkActionActivationImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

@@ -83,10 +83,10 @@ namespace ecore
 			//*********************************
 			// Reference Getters & Setters
 			//*********************************
-			virtual std::shared_ptr<Subset<ecore::EObject, ecore::EObject>> getContents() const = 0;
+			virtual const std::shared_ptr<Subset<ecore::EObject, ecore::EObject>>& getContents() const = 0;
 			virtual std::weak_ptr<ecore::EModelElement> getEModelElement() const = 0;
 			virtual void setEModelElement(std::weak_ptr<ecore::EModelElement>) = 0;
-			virtual std::shared_ptr<Bag<ecore::EObject>> getReferences() const = 0;
+			virtual const std::shared_ptr<Bag<ecore::EObject>>& getReferences() const = 0;
 
 			//*********************************
 			// Union Reference Getters

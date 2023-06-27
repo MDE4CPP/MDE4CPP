@@ -201,32 +201,32 @@ std::shared_ptr<uml::StateMachine> TransitionImpl::containingStateMachine()
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool TransitionImpl::fork_segment_guards(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool TransitionImpl::fork_segment_guards(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool TransitionImpl::fork_segment_state(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool TransitionImpl::fork_segment_state(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool TransitionImpl::initial_transition(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool TransitionImpl::initial_transition(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool TransitionImpl::join_segment_guards(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool TransitionImpl::join_segment_guards(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool TransitionImpl::join_segment_state(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool TransitionImpl::join_segment_state(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool TransitionImpl::outgoing_pseudostates(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool TransitionImpl::outgoing_pseudostates(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -236,17 +236,17 @@ std::shared_ptr<uml::Classifier> TransitionImpl::redefinitionContext()
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool TransitionImpl::state_is_external(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool TransitionImpl::state_is_external(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool TransitionImpl::state_is_internal(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool TransitionImpl::state_is_internal(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool TransitionImpl::state_is_local(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool TransitionImpl::state_is_local(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -255,7 +255,7 @@ bool TransitionImpl::state_is_local(Any diagnostics,std::shared_ptr<std::map < A
 // Attribute Getters & Setters
 //*********************************
 /* Getter & Setter for attribute kind */
-uml::TransitionKind TransitionImpl::getKind() const 
+uml::TransitionKind TransitionImpl::getKind() const
 {
 	return m_kind;
 }
@@ -280,62 +280,62 @@ void TransitionImpl::setContainer(std::weak_ptr<uml::Region> _container)
 }
 
 /* Getter & Setter for reference effect */
-std::shared_ptr<uml::Behavior> TransitionImpl::getEffect() const
+const std::shared_ptr<uml::Behavior>& TransitionImpl::getEffect() const
 {
     return m_effect;
 }
-void TransitionImpl::setEffect(std::shared_ptr<uml::Behavior> _effect)
+void TransitionImpl::setEffect(const std::shared_ptr<uml::Behavior>& _effect)
 {
     m_effect = _effect;
 	
 }
 
 /* Getter & Setter for reference guard */
-std::shared_ptr<uml::Constraint> TransitionImpl::getGuard() const
+const std::shared_ptr<uml::Constraint>& TransitionImpl::getGuard() const
 {
     return m_guard;
 }
-void TransitionImpl::setGuard(std::shared_ptr<uml::Constraint> _guard)
+void TransitionImpl::setGuard(const std::shared_ptr<uml::Constraint>& _guard)
 {
     m_guard = _guard;
 	
 }
 
 /* Getter & Setter for reference redefinedTransition */
-std::shared_ptr<uml::Transition> TransitionImpl::getRedefinedTransition() const
+const std::shared_ptr<uml::Transition>& TransitionImpl::getRedefinedTransition() const
 {
     return m_redefinedTransition;
 }
-void TransitionImpl::setRedefinedTransition(std::shared_ptr<uml::Transition> _redefinedTransition)
+void TransitionImpl::setRedefinedTransition(const std::shared_ptr<uml::Transition>& _redefinedTransition)
 {
     m_redefinedTransition = _redefinedTransition;
 	
 }
 
 /* Getter & Setter for reference source */
-std::shared_ptr<uml::Vertex> TransitionImpl::getSource() const
+const std::shared_ptr<uml::Vertex>& TransitionImpl::getSource() const
 {
     return m_source;
 }
-void TransitionImpl::setSource(std::shared_ptr<uml::Vertex> _source)
+void TransitionImpl::setSource(const std::shared_ptr<uml::Vertex>& _source)
 {
     m_source = _source;
 	
 }
 
 /* Getter & Setter for reference target */
-std::shared_ptr<uml::Vertex> TransitionImpl::getTarget() const
+const std::shared_ptr<uml::Vertex>& TransitionImpl::getTarget() const
 {
     return m_target;
 }
-void TransitionImpl::setTarget(std::shared_ptr<uml::Vertex> _target)
+void TransitionImpl::setTarget(const std::shared_ptr<uml::Vertex>& _target)
 {
     m_target = _target;
 	
 }
 
 /* Getter & Setter for reference trigger */
-std::shared_ptr<Subset<uml::Trigger, uml::Element>> TransitionImpl::getTrigger() const
+const std::shared_ptr<Subset<uml::Trigger, uml::Element>>& TransitionImpl::getTrigger() const
 {
 	if(m_trigger == nullptr)
 	{
@@ -716,7 +716,7 @@ void TransitionImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveH
 	}
 }
 
-std::shared_ptr<ecore::EClass> TransitionImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& TransitionImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getTransition_Class();
 }
@@ -789,7 +789,7 @@ bool TransitionImpl::internalEIsSet(int featureID) const
 	return result;
 }
 
-bool TransitionImpl::eSet(int featureID, Any newValue)
+bool TransitionImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -900,7 +900,7 @@ bool TransitionImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any TransitionImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any TransitionImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

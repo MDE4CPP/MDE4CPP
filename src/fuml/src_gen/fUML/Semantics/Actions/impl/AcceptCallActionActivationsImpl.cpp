@@ -34,8 +34,8 @@
 
 #include <exception> // used in Persistence
 //Factories and Package includes
-#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/SemanticsPackage.hpp"
+#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/Actions/ActionsPackage.hpp"
 
 using namespace fUML::Semantics::Actions;
@@ -176,7 +176,7 @@ void AcceptCallActionActivationsImpl::saveContent(std::shared_ptr<persistence::i
 	}
 }
 
-std::shared_ptr<ecore::EClass> AcceptCallActionActivationsImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& AcceptCallActionActivationsImpl::eStaticClass() const
 {
 	return fUML::Semantics::Actions::ActionsPackage::eInstance()->getAcceptCallActionActivations_Class();
 }
@@ -200,7 +200,7 @@ bool AcceptCallActionActivationsImpl::internalEIsSet(int featureID) const
 	return ecore::EObjectImpl::internalEIsSet(featureID);
 }
 
-bool AcceptCallActionActivationsImpl::eSet(int featureID, Any newValue)
+bool AcceptCallActionActivationsImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -212,7 +212,7 @@ bool AcceptCallActionActivationsImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any AcceptCallActionActivationsImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any AcceptCallActionActivationsImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

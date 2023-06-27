@@ -36,9 +36,9 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
+#include "uml/umlFactory.hpp"
 #include "PSCS/Semantics/StructuredClassifiers/StructuredClassifiersFactory.hpp"
 #include "fUML/Semantics/CommonBehavior/CommonBehaviorFactory.hpp"
-#include "uml/umlFactory.hpp"
 #include "fUML/Semantics/StructuredClassifiers/StructuredClassifiersFactory.hpp"
 #include "PSCS/Semantics/StructuredClassifiers/CS_InteractionPoint.hpp"
 #include "PSCS/Semantics/StructuredClassifiers/CS_Reference.hpp"
@@ -48,12 +48,12 @@
 #include "fUML/Semantics/StructuredClassifiers/Reference.hpp"
 #include "uml/Trigger.hpp"
 //Factories and Package includes
-#include "PSCS/PSCSPackage.hpp"
 #include "PSCS/Semantics/SemanticsPackage.hpp"
+#include "PSCS/PSCSPackage.hpp"
 #include "fUML/Semantics/CommonBehavior/CommonBehaviorPackage.hpp"
 #include "PSCS/Semantics/CommonBehavior/CommonBehaviorPackage.hpp"
-#include "PSCS/Semantics/StructuredClassifiers/StructuredClassifiersPackage.hpp"
 #include "fUML/Semantics/StructuredClassifiers/StructuredClassifiersPackage.hpp"
+#include "PSCS/Semantics/StructuredClassifiers/StructuredClassifiersPackage.hpp"
 #include "uml/umlPackage.hpp"
 
 using namespace PSCS::Semantics::CommonBehavior;
@@ -156,7 +156,7 @@ return this->getWrappedEventOccurrence()->getParameterValues();
 	//end of body
 }
 
-bool CS_EventOccurrenceImpl::match(std::shared_ptr<uml::Trigger> trigger)
+bool CS_EventOccurrenceImpl::match(const std::shared_ptr<uml::Trigger>& trigger)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -185,7 +185,7 @@ bool CS_EventOccurrenceImpl::match(std::shared_ptr<uml::Trigger> trigger)
 	//end of body
 }
 
-void CS_EventOccurrenceImpl::sendInTo(std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Reference> target,std::shared_ptr<uml::Port> port)
+void CS_EventOccurrenceImpl::sendInTo(const std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Reference>& target, const std::shared_ptr<uml::Port>& port)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -196,7 +196,7 @@ void CS_EventOccurrenceImpl::sendInTo(std::shared_ptr<PSCS::Semantics::Structure
 	//end of body
 }
 
-void CS_EventOccurrenceImpl::sendOutTo(std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Reference> target,std::shared_ptr<uml::Port> port)
+void CS_EventOccurrenceImpl::sendOutTo(const std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Reference>& target, const std::shared_ptr<uml::Port>& port)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -211,7 +211,7 @@ void CS_EventOccurrenceImpl::sendOutTo(std::shared_ptr<PSCS::Semantics::Structur
 // Attribute Getters & Setters
 //*********************************
 /* Getter & Setter for attribute propagationInward */
-bool CS_EventOccurrenceImpl::isPropagationInward() const 
+bool CS_EventOccurrenceImpl::isPropagationInward() const
 {
 	return m_propagationInward;
 }
@@ -225,33 +225,33 @@ void CS_EventOccurrenceImpl::setPropagationInward(bool _propagationInward)
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference interactionPoint */
-std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_InteractionPoint> CS_EventOccurrenceImpl::getInteractionPoint() const
+const std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_InteractionPoint>& CS_EventOccurrenceImpl::getInteractionPoint() const
 {
     return m_interactionPoint;
 }
-void CS_EventOccurrenceImpl::setInteractionPoint(std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_InteractionPoint> _interactionPoint)
+void CS_EventOccurrenceImpl::setInteractionPoint(const std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_InteractionPoint>& _interactionPoint)
 {
     m_interactionPoint = _interactionPoint;
 	
 }
 
 /* Getter & Setter for reference onPort */
-std::shared_ptr<uml::Port> CS_EventOccurrenceImpl::getOnPort() const
+const std::shared_ptr<uml::Port>& CS_EventOccurrenceImpl::getOnPort() const
 {
     return m_onPort;
 }
-void CS_EventOccurrenceImpl::setOnPort(std::shared_ptr<uml::Port> _onPort)
+void CS_EventOccurrenceImpl::setOnPort(const std::shared_ptr<uml::Port>& _onPort)
 {
     m_onPort = _onPort;
 	
 }
 
 /* Getter & Setter for reference wrappedEventOccurrence */
-std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccurrence> CS_EventOccurrenceImpl::getWrappedEventOccurrence() const
+const std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccurrence>& CS_EventOccurrenceImpl::getWrappedEventOccurrence() const
 {
     return m_wrappedEventOccurrence;
 }
-void CS_EventOccurrenceImpl::setWrappedEventOccurrence(std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccurrence> _wrappedEventOccurrence)
+void CS_EventOccurrenceImpl::setWrappedEventOccurrence(const std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccurrence>& _wrappedEventOccurrence)
 {
     m_wrappedEventOccurrence = _wrappedEventOccurrence;
 	
@@ -416,7 +416,7 @@ void CS_EventOccurrenceImpl::saveContent(std::shared_ptr<persistence::interfaces
 	}
 }
 
-std::shared_ptr<ecore::EClass> CS_EventOccurrenceImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& CS_EventOccurrenceImpl::eStaticClass() const
 {
 	return PSCS::Semantics::CommonBehavior::CommonBehaviorPackage::eInstance()->getCS_EventOccurrence_Class();
 }
@@ -456,7 +456,7 @@ bool CS_EventOccurrenceImpl::internalEIsSet(int featureID) const
 	return fUML::Semantics::CommonBehavior::EventOccurrenceImpl::internalEIsSet(featureID);
 }
 
-bool CS_EventOccurrenceImpl::eSet(int featureID, Any newValue)
+bool CS_EventOccurrenceImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -499,7 +499,7 @@ bool CS_EventOccurrenceImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any CS_EventOccurrenceImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any CS_EventOccurrenceImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

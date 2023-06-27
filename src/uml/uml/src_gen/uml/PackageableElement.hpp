@@ -99,7 +99,7 @@ namespace uml
 			visibility = null implies namespace = null
 			*/
 			 
-			virtual bool namespace_needs_visibility(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
+			virtual bool namespace_needs_visibility(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context) = 0;
 
 			//*********************************
 			// Attribute Getters & Setters

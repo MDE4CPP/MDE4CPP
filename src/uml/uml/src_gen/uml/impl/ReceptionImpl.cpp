@@ -133,12 +133,12 @@ std::shared_ptr<ecore::EObject> ReceptionImpl::copy() const
 //*********************************
 // Operations
 //*********************************
-bool ReceptionImpl::same_name_as_signal(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool ReceptionImpl::same_name_as_signal(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool ReceptionImpl::same_structure_as_signal(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool ReceptionImpl::same_structure_as_signal(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -151,11 +151,11 @@ bool ReceptionImpl::same_structure_as_signal(Any diagnostics,std::shared_ptr<std
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference signal */
-std::shared_ptr<uml::Signal> ReceptionImpl::getSignal() const
+const std::shared_ptr<uml::Signal>& ReceptionImpl::getSignal() const
 {
     return m_signal;
 }
-void ReceptionImpl::setSignal(std::shared_ptr<uml::Signal> _signal)
+void ReceptionImpl::setSignal(const std::shared_ptr<uml::Signal>& _signal)
 {
     m_signal = _signal;
 	
@@ -340,7 +340,7 @@ void ReceptionImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHa
 	}
 }
 
-std::shared_ptr<ecore::EClass> ReceptionImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& ReceptionImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getReception_Class();
 }
@@ -368,7 +368,7 @@ bool ReceptionImpl::internalEIsSet(int featureID) const
 	return BehavioralFeatureImpl::internalEIsSet(featureID);
 }
 
-bool ReceptionImpl::eSet(int featureID, Any newValue)
+bool ReceptionImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -388,7 +388,7 @@ bool ReceptionImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any ReceptionImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any ReceptionImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

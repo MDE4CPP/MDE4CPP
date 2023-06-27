@@ -45,15 +45,15 @@ virtual public ObjectActivation
 			//*********************************
 			// Operations
 			//*********************************
-			virtual void _register(std::shared_ptr<fUML::Semantics::CommonBehavior::EventAccepter> accepter) ;
-			virtual void _send(std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccurrence> signal) ;
+			virtual void _register(const std::shared_ptr<fUML::Semantics::CommonBehavior::EventAccepter>& accepter) ;
+			virtual void _send(const std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccurrence>& signal) ;
 			virtual void _startObjectBehavior() ;
 			virtual void dispatchNextEvent() ;
 			virtual std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccurrence> retrieveNextEvent() ;
-			virtual void send(std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccurrence> eventOccurrence) ;
-			virtual void startBehavior(std::shared_ptr<uml::Class> classifier,std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> inputs) ;
+			virtual void send(const std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccurrence>& eventOccurrence) ;
+			virtual void startBehavior(const std::shared_ptr<uml::Class>& classifier, const std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>>& inputs) ;
 			virtual void stop() ;
-			virtual void unregister(std::shared_ptr<fUML::Semantics::CommonBehavior::EventAccepter> accepter) ;
+			virtual void unregister(const std::shared_ptr<fUML::Semantics::CommonBehavior::EventAccepter>& accepter) ;
 			
 			//*********************************
 			// Attribute Getters & Setters
@@ -62,11 +62,11 @@ virtual public ObjectActivation
 			//*********************************
 			// Reference Getters & Setters
 			//*********************************
-			virtual std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ClassifierBehaviorExecution>> getClassifierBehaviorExecutions() const ;
-			virtual std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::EventOccurrence>> getEventPool() const ;
-			virtual std::shared_ptr<fUML::Semantics::StructuredClassifiers::Object> getObject() const ;
-			virtual void setObject(std::shared_ptr<fUML::Semantics::StructuredClassifiers::Object>) ;
-			virtual std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::EventAccepter>> getWaitingEventAccepters() const ;
+			virtual const std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ClassifierBehaviorExecution>>& getClassifierBehaviorExecutions() const ;
+			virtual const std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::EventOccurrence>>& getEventPool() const ;
+			virtual const std::shared_ptr<fUML::Semantics::StructuredClassifiers::Object>& getObject() const ;
+			virtual void setObject(const std::shared_ptr<fUML::Semantics::StructuredClassifiers::Object>&) ;
+			virtual const std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::EventAccepter>>& getWaitingEventAccepters() const ;
 			
 			//*********************************
 			// Union Reference Getters
@@ -88,19 +88,19 @@ virtual public ObjectActivation
 			virtual void saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const;
 
 		protected:
-			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
+			virtual const std::shared_ptr<ecore::EClass>& eStaticClass() const;
 
 			//*********************************
 			// EStructuralFeature Get/Set/IsSet
 			//*********************************
 			virtual Any eGet(int featureID, bool resolve, bool coreType) const ;
-			virtual bool eSet(int featureID, Any newValue) ;
+			virtual bool eSet(int featureID, const Any& newValue) ;
 			virtual bool internalEIsSet(int featureID) const ;
 
 			//*********************************
 			// EOperation Invoke
 			//*********************************
-			virtual Any eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments) ;
+			virtual Any eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments) ;
 
 		private:
 			std::weak_ptr<fUML::Semantics::CommonBehavior::ObjectActivation> m_thisObjectActivationPtr;

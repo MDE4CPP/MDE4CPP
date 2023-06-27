@@ -45,9 +45,9 @@ namespace fUML::Semantics::Actions
 			//*********************************
 			// Operations
 			//*********************************
-			virtual std::shared_ptr<fUML::Semantics::Actions::ClauseActivation> getClauseActivation(std::shared_ptr<uml::Clause> clause) ;
-			virtual void runTest(std::shared_ptr<uml::Clause> clause) ;
-			virtual void selectBody(std::shared_ptr<uml::Clause> clause) ;
+			virtual std::shared_ptr<fUML::Semantics::Actions::ClauseActivation> getClauseActivation(const std::shared_ptr<uml::Clause>& clause) ;
+			virtual void runTest(const std::shared_ptr<uml::Clause>& clause) ;
+			virtual void selectBody(const std::shared_ptr<uml::Clause>& clause) ;
 			
 			//*********************************
 			// Attribute Getters & Setters
@@ -56,8 +56,8 @@ namespace fUML::Semantics::Actions
 			//*********************************
 			// Reference Getters & Setters
 			//*********************************
-			virtual std::shared_ptr<Bag<fUML::Semantics::Actions::ClauseActivation>> getClauseActivations() const ;
-			virtual std::shared_ptr<Bag<uml::Clause>> getSelectedClauses() const ;
+			virtual const std::shared_ptr<Bag<fUML::Semantics::Actions::ClauseActivation>>& getClauseActivations() const ;
+			virtual const std::shared_ptr<Bag<uml::Clause>>& getSelectedClauses() const ;
 			
 			//*********************************
 			// Union Reference Getters
@@ -80,19 +80,19 @@ namespace fUML::Semantics::Actions
 			virtual void saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const;
 
 		protected:
-			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
+			virtual const std::shared_ptr<ecore::EClass>& eStaticClass() const;
 
 			//*********************************
 			// EStructuralFeature Get/Set/IsSet
 			//*********************************
 			virtual Any eGet(int featureID, bool resolve, bool coreType) const ;
-			virtual bool eSet(int featureID, Any newValue) ;
+			virtual bool eSet(int featureID, const Any& newValue) ;
 			virtual bool internalEIsSet(int featureID) const ;
 
 			//*********************************
 			// EOperation Invoke
 			//*********************************
-			virtual Any eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments) ;
+			virtual Any eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments) ;
 
 		private:
 			std::weak_ptr<fUML::Semantics::Actions::ConditionalNodeActivation> m_thisConditionalNodeActivationPtr;

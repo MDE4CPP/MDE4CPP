@@ -110,7 +110,7 @@ std::shared_ptr<ecore::EObject> TupleValueImpl::copy() const
 //*********************************
 // Operations
 //*********************************
-bool TupleValueImpl::equals(std::shared_ptr<fUML::Semantics::Values::Value> otherValue)
+bool TupleValueImpl::equals(const std::shared_ptr<fUML::Semantics::Values::Value>& otherValue)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -163,7 +163,7 @@ return result;
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference elements */
-std::shared_ptr<Bag<ocl::Values::NameValueBinding>> TupleValueImpl::getElements() const
+const std::shared_ptr<Bag<ocl::Values::NameValueBinding>>& TupleValueImpl::getElements() const
 {
 	if(m_elements == nullptr)
 	{
@@ -175,11 +175,11 @@ std::shared_ptr<Bag<ocl::Values::NameValueBinding>> TupleValueImpl::getElements(
 }
 
 /* Getter & Setter for reference model */
-std::shared_ptr<ocl::Types::TupleType> TupleValueImpl::getModel() const
+const std::shared_ptr<ocl::Types::TupleType>& TupleValueImpl::getModel() const
 {
     return m_model;
 }
-void TupleValueImpl::setModel(std::shared_ptr<ocl::Types::TupleType> _model)
+void TupleValueImpl::setModel(const std::shared_ptr<ocl::Types::TupleType>& _model)
 {
     m_model = _model;
 	
@@ -316,7 +316,7 @@ void TupleValueImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveH
 	}
 }
 
-std::shared_ptr<ecore::EClass> TupleValueImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& TupleValueImpl::eStaticClass() const
 {
 	return ocl::Values::ValuesPackage::eInstance()->getTupleValue_Class();
 }
@@ -348,7 +348,7 @@ bool TupleValueImpl::internalEIsSet(int featureID) const
 	return StaticValueImpl::internalEIsSet(featureID);
 }
 
-bool TupleValueImpl::eSet(int featureID, Any newValue)
+bool TupleValueImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -405,7 +405,7 @@ bool TupleValueImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any TupleValueImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any TupleValueImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

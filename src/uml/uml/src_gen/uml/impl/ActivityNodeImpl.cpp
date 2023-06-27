@@ -247,7 +247,7 @@ void ActivityNodeImpl::setActivity(std::weak_ptr<uml::Activity> _activity)
 /* Getter & Setter for reference inGroup */
 
 /* Getter & Setter for reference inInterruptibleRegion */
-std::shared_ptr<Subset<uml::InterruptibleActivityRegion, uml::ActivityGroup>> ActivityNodeImpl::getInInterruptibleRegion() const
+const std::shared_ptr<Subset<uml::InterruptibleActivityRegion, uml::ActivityGroup>>& ActivityNodeImpl::getInInterruptibleRegion() const
 {
 	if(m_inInterruptibleRegion == nullptr)
 	{
@@ -268,7 +268,7 @@ std::shared_ptr<Subset<uml::InterruptibleActivityRegion, uml::ActivityGroup>> Ac
 }
 
 /* Getter & Setter for reference inPartition */
-std::shared_ptr<Subset<uml::ActivityPartition, uml::ActivityGroup>> ActivityNodeImpl::getInPartition() const
+const std::shared_ptr<Subset<uml::ActivityPartition, uml::ActivityGroup>>& ActivityNodeImpl::getInPartition() const
 {
 	if(m_inPartition == nullptr)
 	{
@@ -300,7 +300,7 @@ void ActivityNodeImpl::setInStructuredNode(std::weak_ptr<uml::StructuredActivity
 }
 
 /* Getter & Setter for reference incoming */
-std::shared_ptr<Bag<uml::ActivityEdge>> ActivityNodeImpl::getIncoming() const
+const std::shared_ptr<Bag<uml::ActivityEdge>>& ActivityNodeImpl::getIncoming() const
 {
 	if(m_incoming == nullptr)
 	{
@@ -312,7 +312,7 @@ std::shared_ptr<Bag<uml::ActivityEdge>> ActivityNodeImpl::getIncoming() const
 }
 
 /* Getter & Setter for reference outgoing */
-std::shared_ptr<Bag<uml::ActivityEdge>> ActivityNodeImpl::getOutgoing() const
+const std::shared_ptr<Bag<uml::ActivityEdge>>& ActivityNodeImpl::getOutgoing() const
 {
 	if(m_outgoing == nullptr)
 	{
@@ -324,7 +324,7 @@ std::shared_ptr<Bag<uml::ActivityEdge>> ActivityNodeImpl::getOutgoing() const
 }
 
 /* Getter & Setter for reference redefinedNode */
-std::shared_ptr<Subset<uml::ActivityNode, uml::RedefinableElement>> ActivityNodeImpl::getRedefinedNode() const
+const std::shared_ptr<Subset<uml::ActivityNode, uml::RedefinableElement>>& ActivityNodeImpl::getRedefinedNode() const
 {
 	if(m_redefinedNode == nullptr)
 	{
@@ -637,7 +637,7 @@ void ActivityNodeImpl::saveContent(std::shared_ptr<persistence::interfaces::XSav
 	}
 }
 
-std::shared_ptr<ecore::EClass> ActivityNodeImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& ActivityNodeImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getActivityNode_Class();
 }
@@ -699,7 +699,7 @@ bool ActivityNodeImpl::internalEIsSet(int featureID) const
 	return RedefinableElementImpl::internalEIsSet(featureID);
 }
 
-bool ActivityNodeImpl::eSet(int featureID, Any newValue)
+bool ActivityNodeImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -912,7 +912,7 @@ bool ActivityNodeImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any ActivityNodeImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any ActivityNodeImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

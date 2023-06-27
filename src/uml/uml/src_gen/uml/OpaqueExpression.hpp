@@ -115,20 +115,20 @@ namespace uml
 			language->notEmpty() implies (_'body'->size() = language->size())
 			*/
 			 
-			virtual bool language_body_size(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
+			virtual bool language_body_size(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context) = 0;
 			/*!
 			The behavior must have exactly one return result parameter.
 			behavior <> null implies
 			   behavior.ownedParameter->select(direction=ParameterDirectionKind::return)->size() = 1
 			*/
 			 
-			virtual bool one_return_result_parameter(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
+			virtual bool one_return_result_parameter(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context) = 0;
 			/*!
 			The behavior may only have return result parameters.
 			behavior <> null implies behavior.ownedParameter->select(direction<>ParameterDirectionKind::return)->isEmpty()
 			*/
 			 
-			virtual bool only_return_result_parameters(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
+			virtual bool only_return_result_parameters(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context) = 0;
 			/*!
 			The query value() gives an integer value for an expression intended to produce one.
 			self.isIntegral()
@@ -146,13 +146,13 @@ namespace uml
 			<p>From package UML::Values.</p>
 			*/
 			 
-			virtual std::shared_ptr<Bag<std::string>> getBody() const = 0;
+			virtual const std::shared_ptr<Bag<std::string>>& getBody() const = 0;
 			/*!
 			Specifies the languages used to express the textual bodies of the OpaqueExpression.  Languages are matched to body Strings by order. The interpretation of the body depends on the languages. If the languages are unspecified, they may be implicit from the expression body or the context.
 			<p>From package UML::Values.</p>
 			*/
 			 
-			virtual std::shared_ptr<Bag<std::string>> getLanguage() const = 0;
+			virtual const std::shared_ptr<Bag<std::string>>& getLanguage() const = 0;
 
 			//*********************************
 			// Reference Getters & Setters
@@ -162,19 +162,19 @@ namespace uml
 			<p>From package UML::Values.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::Behavior> getBehavior() const = 0;
+			virtual const std::shared_ptr<uml::Behavior>& getBehavior() const = 0;
 			/*!
 			Specifies the behavior of the OpaqueExpression as a UML Behavior.
 			<p>From package UML::Values.</p>
 			*/
 			
-			virtual void setBehavior(std::shared_ptr<uml::Behavior>) = 0;
+			virtual void setBehavior(const std::shared_ptr<uml::Behavior>&) = 0;
 			/*!
 			If an OpaqueExpression is specified using a UML Behavior, then this refers to the single required return Parameter of that Behavior. When the Behavior completes execution, the values on this Parameter give the result of evaluating the OpaqueExpression.
 			<p>From package UML::Values.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::Parameter> getResult() const = 0;
+			virtual const std::shared_ptr<uml::Parameter>& getResult() const = 0;
 
 			//*********************************
 			// Union Reference Getters

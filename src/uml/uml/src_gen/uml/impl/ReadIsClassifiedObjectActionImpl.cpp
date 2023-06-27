@@ -164,22 +164,22 @@ std::shared_ptr<ecore::EObject> ReadIsClassifiedObjectActionImpl::copy() const
 //*********************************
 // Operations
 //*********************************
-bool ReadIsClassifiedObjectActionImpl::boolean_result(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool ReadIsClassifiedObjectActionImpl::boolean_result(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool ReadIsClassifiedObjectActionImpl::multiplicity_of_input(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool ReadIsClassifiedObjectActionImpl::multiplicity_of_input(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool ReadIsClassifiedObjectActionImpl::multiplicity_of_output(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool ReadIsClassifiedObjectActionImpl::multiplicity_of_output(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool ReadIsClassifiedObjectActionImpl::no_type(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool ReadIsClassifiedObjectActionImpl::no_type(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -188,7 +188,7 @@ bool ReadIsClassifiedObjectActionImpl::no_type(Any diagnostics,std::shared_ptr<s
 // Attribute Getters & Setters
 //*********************************
 /* Getter & Setter for attribute isDirect */
-bool ReadIsClassifiedObjectActionImpl::getIsDirect() const 
+bool ReadIsClassifiedObjectActionImpl::getIsDirect() const
 {
 	return m_isDirect;
 }
@@ -202,33 +202,33 @@ void ReadIsClassifiedObjectActionImpl::setIsDirect(bool _isDirect)
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference classifier */
-std::shared_ptr<uml::Classifier> ReadIsClassifiedObjectActionImpl::getClassifier() const
+const std::shared_ptr<uml::Classifier>& ReadIsClassifiedObjectActionImpl::getClassifier() const
 {
     return m_classifier;
 }
-void ReadIsClassifiedObjectActionImpl::setClassifier(std::shared_ptr<uml::Classifier> _classifier)
+void ReadIsClassifiedObjectActionImpl::setClassifier(const std::shared_ptr<uml::Classifier>& _classifier)
 {
     m_classifier = _classifier;
 	
 }
 
 /* Getter & Setter for reference object */
-std::shared_ptr<uml::InputPin> ReadIsClassifiedObjectActionImpl::getObject() const
+const std::shared_ptr<uml::InputPin>& ReadIsClassifiedObjectActionImpl::getObject() const
 {
     return m_object;
 }
-void ReadIsClassifiedObjectActionImpl::setObject(std::shared_ptr<uml::InputPin> _object)
+void ReadIsClassifiedObjectActionImpl::setObject(const std::shared_ptr<uml::InputPin>& _object)
 {
     m_object = _object;
 	
 }
 
 /* Getter & Setter for reference result */
-std::shared_ptr<uml::OutputPin> ReadIsClassifiedObjectActionImpl::getResult() const
+const std::shared_ptr<uml::OutputPin>& ReadIsClassifiedObjectActionImpl::getResult() const
 {
     return m_result;
 }
-void ReadIsClassifiedObjectActionImpl::setResult(std::shared_ptr<uml::OutputPin> _result)
+void ReadIsClassifiedObjectActionImpl::setResult(const std::shared_ptr<uml::OutputPin>& _result)
 {
     m_result = _result;
 	
@@ -520,7 +520,7 @@ void ReadIsClassifiedObjectActionImpl::saveContent(std::shared_ptr<persistence::
 	}
 }
 
-std::shared_ptr<ecore::EClass> ReadIsClassifiedObjectActionImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& ReadIsClassifiedObjectActionImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getReadIsClassifiedObjectAction_Class();
 }
@@ -560,7 +560,7 @@ bool ReadIsClassifiedObjectActionImpl::internalEIsSet(int featureID) const
 	return ActionImpl::internalEIsSet(featureID);
 }
 
-bool ReadIsClassifiedObjectActionImpl::eSet(int featureID, Any newValue)
+bool ReadIsClassifiedObjectActionImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -603,7 +603,7 @@ bool ReadIsClassifiedObjectActionImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any ReadIsClassifiedObjectActionImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any ReadIsClassifiedObjectActionImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

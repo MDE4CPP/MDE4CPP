@@ -43,8 +43,8 @@
 #include "uml/Operation.hpp"
 #include "fUML/Semantics/Loci/SemanticStrategy.hpp"
 //Factories and Package includes
-#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/SemanticsPackage.hpp"
+#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/CommonBehavior/CommonBehaviorPackage.hpp"
 #include "fUML/Semantics/Loci/LociPackage.hpp"
 #include "fUML/Semantics/StructuredClassifiers/StructuredClassifiersPackage.hpp"
@@ -112,7 +112,7 @@ std::shared_ptr<ecore::EObject> DispatchStrategyImpl::copy() const
 //*********************************
 // Operations
 //*********************************
-std::shared_ptr<fUML::Semantics::CommonBehavior::Execution> DispatchStrategyImpl::dispatch(std::shared_ptr<fUML::Semantics::StructuredClassifiers::Object> object,std::shared_ptr<uml::Operation> operation)
+std::shared_ptr<fUML::Semantics::CommonBehavior::Execution> DispatchStrategyImpl::dispatch(const std::shared_ptr<fUML::Semantics::StructuredClassifiers::Object>& object, const std::shared_ptr<uml::Operation>& operation)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -128,7 +128,7 @@ std::string DispatchStrategyImpl::getName()
 	//end of body
 }
 
-std::shared_ptr<uml::Behavior> DispatchStrategyImpl::retrieveMethod(std::shared_ptr<fUML::Semantics::StructuredClassifiers::Object> object,std::shared_ptr<uml::Operation> operation)
+std::shared_ptr<uml::Behavior> DispatchStrategyImpl::retrieveMethod(const std::shared_ptr<fUML::Semantics::StructuredClassifiers::Object>& object, const std::shared_ptr<uml::Operation>& operation)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -221,7 +221,7 @@ void DispatchStrategyImpl::saveContent(std::shared_ptr<persistence::interfaces::
 	}
 }
 
-std::shared_ptr<ecore::EClass> DispatchStrategyImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& DispatchStrategyImpl::eStaticClass() const
 {
 	return fUML::Semantics::StructuredClassifiers::StructuredClassifiersPackage::eInstance()->getDispatchStrategy_Class();
 }
@@ -245,7 +245,7 @@ bool DispatchStrategyImpl::internalEIsSet(int featureID) const
 	return fUML::Semantics::Loci::SemanticStrategyImpl::internalEIsSet(featureID);
 }
 
-bool DispatchStrategyImpl::eSet(int featureID, Any newValue)
+bool DispatchStrategyImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -257,7 +257,7 @@ bool DispatchStrategyImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any DispatchStrategyImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any DispatchStrategyImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

@@ -98,7 +98,7 @@ namespace uml
 			extensionLocation->forAll (xp | extendedCase.extensionPoint->includes(xp))
 			*/
 			 
-			virtual bool extension_points(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
+			virtual bool extension_points(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context) = 0;
 
 			//*********************************
 			// Attribute Getters & Setters
@@ -112,25 +112,25 @@ namespace uml
 			<p>From package UML::UseCases.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::Constraint> getCondition() const = 0;
+			virtual const std::shared_ptr<uml::Constraint>& getCondition() const = 0;
 			/*!
 			References the condition that must hold when the first ExtensionPoint is reached for the extension to take place. If no constraint is associated with the Extend relationship, the extension is unconditional.
 			<p>From package UML::UseCases.</p>
 			*/
 			
-			virtual void setCondition(std::shared_ptr<uml::Constraint>) = 0;
+			virtual void setCondition(const std::shared_ptr<uml::Constraint>&) = 0;
 			/*!
 			The UseCase that is being extended.
 			<p>From package UML::UseCases.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::UseCase> getExtendedCase() const = 0;
+			virtual const std::shared_ptr<uml::UseCase>& getExtendedCase() const = 0;
 			/*!
 			The UseCase that is being extended.
 			<p>From package UML::UseCases.</p>
 			*/
 			
-			virtual void setExtendedCase(std::shared_ptr<uml::UseCase>) = 0;
+			virtual void setExtendedCase(const std::shared_ptr<uml::UseCase>&) = 0;
 			/*!
 			The UseCase that represents the extension and owns the Extend relationship.
 			<p>From package UML::UseCases.</p>
@@ -148,7 +148,7 @@ namespace uml
 			<p>From package UML::UseCases.</p>
 			*/
 			
-			virtual std::shared_ptr<Bag<uml::ExtensionPoint>> getExtensionLocation() const = 0;
+			virtual const std::shared_ptr<Bag<uml::ExtensionPoint>>& getExtensionLocation() const = 0;
 
 			//*********************************
 			// Union Reference Getters

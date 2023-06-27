@@ -33,9 +33,9 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "fUML/Semantics/Values/ValuesFactory.hpp"
 #include "fUML/Semantics/Loci/LociFactory.hpp"
 #include "uml/umlFactory.hpp"
+#include "fUML/Semantics/Values/ValuesFactory.hpp"
 #include "ocl/Evaluations/EvaluationsFactory.hpp"
 #include "ocl/Evaluations/CollectionLiteralPartEval.hpp"
 #include "fUML/Semantics/Loci/Locus.hpp"
@@ -122,22 +122,22 @@ std::shared_ptr<ecore::EObject> CollectionRangeEvalImpl::copy() const
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference first */
-std::shared_ptr<ocl::Evaluations::OclExpEval> CollectionRangeEvalImpl::getFirst() const
+const std::shared_ptr<ocl::Evaluations::OclExpEval>& CollectionRangeEvalImpl::getFirst() const
 {
     return m_first;
 }
-void CollectionRangeEvalImpl::setFirst(std::shared_ptr<ocl::Evaluations::OclExpEval> _first)
+void CollectionRangeEvalImpl::setFirst(const std::shared_ptr<ocl::Evaluations::OclExpEval>& _first)
 {
     m_first = _first;
 	
 }
 
 /* Getter & Setter for reference last */
-std::shared_ptr<ocl::Evaluations::OclExpEval> CollectionRangeEvalImpl::getLast() const
+const std::shared_ptr<ocl::Evaluations::OclExpEval>& CollectionRangeEvalImpl::getLast() const
 {
     return m_last;
 }
-void CollectionRangeEvalImpl::setLast(std::shared_ptr<ocl::Evaluations::OclExpEval> _last)
+void CollectionRangeEvalImpl::setLast(const std::shared_ptr<ocl::Evaluations::OclExpEval>& _last)
 {
     m_last = _last;
 	
@@ -272,7 +272,7 @@ void CollectionRangeEvalImpl::saveContent(std::shared_ptr<persistence::interface
 	}
 }
 
-std::shared_ptr<ecore::EClass> CollectionRangeEvalImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& CollectionRangeEvalImpl::eStaticClass() const
 {
 	return ocl::Evaluations::EvaluationsPackage::eInstance()->getCollectionRangeEval_Class();
 }
@@ -304,7 +304,7 @@ bool CollectionRangeEvalImpl::internalEIsSet(int featureID) const
 	return CollectionLiteralPartEvalImpl::internalEIsSet(featureID);
 }
 
-bool CollectionRangeEvalImpl::eSet(int featureID, Any newValue)
+bool CollectionRangeEvalImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -332,7 +332,7 @@ bool CollectionRangeEvalImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any CollectionRangeEvalImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any CollectionRangeEvalImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

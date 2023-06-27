@@ -88,7 +88,7 @@ namespace uml
 			when.integerValue() >= 0
 			*/
 			 
-			virtual bool when_non_negative(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
+			virtual bool when_non_negative(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context) = 0;
 
 			//*********************************
 			// Attribute Getters & Setters
@@ -114,13 +114,13 @@ namespace uml
 			<p>From package UML::CommonBehavior.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::TimeExpression> getWhen() const = 0;
+			virtual const std::shared_ptr<uml::TimeExpression>& getWhen() const = 0;
 			/*!
 			Specifies the time of the TimeEvent.
 			<p>From package UML::CommonBehavior.</p>
 			*/
 			
-			virtual void setWhen(std::shared_ptr<uml::TimeExpression>) = 0;
+			virtual void setWhen(const std::shared_ptr<uml::TimeExpression>&) = 0;
 
 			//*********************************
 			// Union Reference Getters

@@ -232,7 +232,7 @@ std::shared_ptr<Bag<uml::ConnectableElement> > StructuredClassifierImpl::allRole
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-std::shared_ptr<uml::Property> StructuredClassifierImpl::createOwnedAttribute(std::string name,std::shared_ptr<uml::Type> type,int lower,int upper)
+std::shared_ptr<uml::Property> StructuredClassifierImpl::createOwnedAttribute(std::string name, const std::shared_ptr<uml::Type>& type, int lower, int upper)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -253,7 +253,7 @@ std::shared_ptr<Bag<uml::Property> > StructuredClassifierImpl::getParts()
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference ownedAttribute */
-std::shared_ptr<SubsetUnion<uml::Property, uml::ConnectableElement, uml::NamedElement, uml::Property>> StructuredClassifierImpl::getOwnedAttribute() const
+const std::shared_ptr<SubsetUnion<uml::Property, uml::ConnectableElement, uml::NamedElement, uml::Property>>& StructuredClassifierImpl::getOwnedAttribute() const
 {
 	if(m_ownedAttribute == nullptr)
 	{
@@ -274,7 +274,7 @@ std::shared_ptr<SubsetUnion<uml::Property, uml::ConnectableElement, uml::NamedEl
 }
 
 /* Getter & Setter for reference ownedConnector */
-std::shared_ptr<Subset<uml::Connector, uml::Feature, uml::NamedElement>> StructuredClassifierImpl::getOwnedConnector() const
+const std::shared_ptr<Subset<uml::Connector, uml::Feature, uml::NamedElement>>& StructuredClassifierImpl::getOwnedConnector() const
 {
 	if(m_ownedConnector == nullptr)
 	{
@@ -295,7 +295,7 @@ std::shared_ptr<Subset<uml::Connector, uml::Feature, uml::NamedElement>> Structu
 }
 
 /* Getter & Setter for reference part */
-std::shared_ptr<Bag<uml::Property>> StructuredClassifierImpl::getPart() const
+const std::shared_ptr<Bag<uml::Property>>& StructuredClassifierImpl::getPart() const
 {
 	//generated from getterBody annotation
 	std::shared_ptr<SubsetUnion<uml::Property, uml::ConnectableElement, uml::NamedElement, uml::Property>> ownedAttribute = this->getOwnedAttribute();
@@ -610,7 +610,7 @@ void StructuredClassifierImpl::saveContent(std::shared_ptr<persistence::interfac
 	}
 }
 
-std::shared_ptr<ecore::EClass> StructuredClassifierImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& StructuredClassifierImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getStructuredClassifier_Class();
 }
@@ -650,7 +650,7 @@ bool StructuredClassifierImpl::internalEIsSet(int featureID) const
 	return ClassifierImpl::internalEIsSet(featureID);
 }
 
-bool StructuredClassifierImpl::eSet(int featureID, Any newValue)
+bool StructuredClassifierImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -736,7 +736,7 @@ bool StructuredClassifierImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any StructuredClassifierImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any StructuredClassifierImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

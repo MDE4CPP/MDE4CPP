@@ -42,8 +42,8 @@
 #include "fUML/Semantics/StructuredClassifiers/Reference.hpp"
 #include "uml/Trigger.hpp"
 //Factories and Package includes
-#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/SemanticsPackage.hpp"
+#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/CommonBehavior/CommonBehaviorPackage.hpp"
 #include "fUML/Semantics/StructuredClassifiers/StructuredClassifiersPackage.hpp"
 #include "uml/umlPackage.hpp"
@@ -123,7 +123,7 @@ return parameterValueList;
 	//end of body
 }
 
-bool InvocationEventOccurrenceImpl::match(std::shared_ptr<uml::Trigger> trigger)
+bool InvocationEventOccurrenceImpl::match(const std::shared_ptr<uml::Trigger>& trigger)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -141,11 +141,11 @@ return false;
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference execution */
-std::shared_ptr<fUML::Semantics::CommonBehavior::Execution> InvocationEventOccurrenceImpl::getExecution() const
+const std::shared_ptr<fUML::Semantics::CommonBehavior::Execution>& InvocationEventOccurrenceImpl::getExecution() const
 {
     return m_execution;
 }
-void InvocationEventOccurrenceImpl::setExecution(std::shared_ptr<fUML::Semantics::CommonBehavior::Execution> _execution)
+void InvocationEventOccurrenceImpl::setExecution(const std::shared_ptr<fUML::Semantics::CommonBehavior::Execution>& _execution)
 {
     m_execution = _execution;
 	
@@ -256,7 +256,7 @@ void InvocationEventOccurrenceImpl::saveContent(std::shared_ptr<persistence::int
 	}
 }
 
-std::shared_ptr<ecore::EClass> InvocationEventOccurrenceImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& InvocationEventOccurrenceImpl::eStaticClass() const
 {
 	return fUML::Semantics::CommonBehavior::CommonBehaviorPackage::eInstance()->getInvocationEventOccurrence_Class();
 }
@@ -284,7 +284,7 @@ bool InvocationEventOccurrenceImpl::internalEIsSet(int featureID) const
 	return EventOccurrenceImpl::internalEIsSet(featureID);
 }
 
-bool InvocationEventOccurrenceImpl::eSet(int featureID, Any newValue)
+bool InvocationEventOccurrenceImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -304,7 +304,7 @@ bool InvocationEventOccurrenceImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any InvocationEventOccurrenceImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any InvocationEventOccurrenceImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

@@ -55,12 +55,12 @@ namespace uml
 			The dynamic variables that take part in the constraint must be owned by the ConnectableElement corresponding to the covered Lifeline.
 			*/
 			 
-			virtual bool dynamic_variables(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
+			virtual bool dynamic_variables(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context) ;
 			/*!
 			The constraint may contain references to global data or write-once data.
 			*/
 			 
-			virtual bool global_data(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
+			virtual bool global_data(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context) ;
 			/*!
 			If maxint is specified, then minint must be specified and the evaluation of maxint must be >= the evaluation of minint.
 			maxint->notEmpty() implies (minint->notEmpty() and 
@@ -68,14 +68,14 @@ namespace uml
 			minint->asSequence()->first().integerValue() )
 			*/
 			 
-			virtual bool maxint_greater_equal_minint(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
+			virtual bool maxint_greater_equal_minint(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context) ;
 			/*!
 			If maxint is specified, then the expression must evaluate to a positive integer.
 			maxint->notEmpty() implies 
 			maxint->asSequence()->first().integerValue() > 0
 			*/
 			 
-			virtual bool maxint_positive(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
+			virtual bool maxint_positive(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context) ;
 			/*!
 			Minint/maxint can only be present if the InteractionConstraint is associated with the operand of a loop CombinedFragment.
 			maxint->notEmpty() or minint->notEmpty() implies
@@ -83,14 +83,14 @@ namespace uml
 			InteractionOperatorKind::loop
 			*/
 			 
-			virtual bool minint_maxint(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
+			virtual bool minint_maxint(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context) ;
 			/*!
 			If minint is specified, then the expression must evaluate to a non-negative integer.
 			minint->notEmpty() implies 
 			minint->asSequence()->first().integerValue() >= 0
 			*/
 			 
-			virtual bool minint_non_negative(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
+			virtual bool minint_non_negative(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context) ;
 			
 			//*********************************
 			// Attribute Getters & Setters
@@ -104,25 +104,25 @@ namespace uml
 			<p>From package UML::Interactions.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::ValueSpecification> getMaxint() const ;
+			virtual const std::shared_ptr<uml::ValueSpecification>& getMaxint() const ;
 			/*!
 			The maximum number of iterations of a loop
 			<p>From package UML::Interactions.</p>
 			*/
 			
-			virtual void setMaxint(std::shared_ptr<uml::ValueSpecification>) ;
+			virtual void setMaxint(const std::shared_ptr<uml::ValueSpecification>&) ;
 			/*!
 			The minimum number of iterations of a loop
 			<p>From package UML::Interactions.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::ValueSpecification> getMinint() const ;
+			virtual const std::shared_ptr<uml::ValueSpecification>& getMinint() const ;
 			/*!
 			The minimum number of iterations of a loop
 			<p>From package UML::Interactions.</p>
 			*/
 			
-			virtual void setMinint(std::shared_ptr<uml::ValueSpecification>) ;
+			virtual void setMinint(const std::shared_ptr<uml::ValueSpecification>&) ;
 			
 			//*********************************
 			// Union Reference Getters
@@ -163,19 +163,19 @@ namespace uml
 			virtual void saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const;
 
 		protected:
-			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
+			virtual const std::shared_ptr<ecore::EClass>& eStaticClass() const;
 
 			//*********************************
 			// EStructuralFeature Get/Set/IsSet
 			//*********************************
 			virtual Any eGet(int featureID, bool resolve, bool coreType) const ;
-			virtual bool eSet(int featureID, Any newValue) ;
+			virtual bool eSet(int featureID, const Any& newValue) ;
 			virtual bool internalEIsSet(int featureID) const ;
 
 			//*********************************
 			// EOperation Invoke
 			//*********************************
-			virtual Any eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments) ;
+			virtual Any eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments) ;
 
 		private:
 			std::weak_ptr<uml::InteractionConstraint> m_thisInteractionConstraintPtr;

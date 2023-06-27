@@ -45,8 +45,8 @@
 #include "fUML/Semantics/Values/Value.hpp"
 #include "uml/ValueSpecification.hpp"
 //Factories and Package includes
-#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/SemanticsPackage.hpp"
+#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/Loci/LociPackage.hpp"
 #include "fUML/Semantics/Values/ValuesPackage.hpp"
 #include "uml/umlPackage.hpp"
@@ -207,7 +207,7 @@ void LiteralIntegerEvaluationImpl::saveContent(std::shared_ptr<persistence::inte
 	}
 }
 
-std::shared_ptr<ecore::EClass> LiteralIntegerEvaluationImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& LiteralIntegerEvaluationImpl::eStaticClass() const
 {
 	return fUML::Semantics::Values::ValuesPackage::eInstance()->getLiteralIntegerEvaluation_Class();
 }
@@ -231,7 +231,7 @@ bool LiteralIntegerEvaluationImpl::internalEIsSet(int featureID) const
 	return LiteralEvaluationImpl::internalEIsSet(featureID);
 }
 
-bool LiteralIntegerEvaluationImpl::eSet(int featureID, Any newValue)
+bool LiteralIntegerEvaluationImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -243,7 +243,7 @@ bool LiteralIntegerEvaluationImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any LiteralIntegerEvaluationImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any LiteralIntegerEvaluationImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

@@ -157,7 +157,7 @@ std::shared_ptr<ecore::EObject> RemoveVariableValueActionImpl::copy() const
 //*********************************
 // Operations
 //*********************************
-bool RemoveVariableValueActionImpl::removeAt_and_value(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool RemoveVariableValueActionImpl::removeAt_and_value(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -166,7 +166,7 @@ bool RemoveVariableValueActionImpl::removeAt_and_value(Any diagnostics,std::shar
 // Attribute Getters & Setters
 //*********************************
 /* Getter & Setter for attribute isRemoveDuplicates */
-bool RemoveVariableValueActionImpl::getIsRemoveDuplicates() const 
+bool RemoveVariableValueActionImpl::getIsRemoveDuplicates() const
 {
 	return m_isRemoveDuplicates;
 }
@@ -180,11 +180,11 @@ void RemoveVariableValueActionImpl::setIsRemoveDuplicates(bool _isRemoveDuplicat
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference removeAt */
-std::shared_ptr<uml::InputPin> RemoveVariableValueActionImpl::getRemoveAt() const
+const std::shared_ptr<uml::InputPin>& RemoveVariableValueActionImpl::getRemoveAt() const
 {
     return m_removeAt;
 }
-void RemoveVariableValueActionImpl::setRemoveAt(std::shared_ptr<uml::InputPin> _removeAt)
+void RemoveVariableValueActionImpl::setRemoveAt(const std::shared_ptr<uml::InputPin>& _removeAt)
 {
     m_removeAt = _removeAt;
 	
@@ -418,7 +418,7 @@ void RemoveVariableValueActionImpl::saveContent(std::shared_ptr<persistence::int
 	}
 }
 
-std::shared_ptr<ecore::EClass> RemoveVariableValueActionImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& RemoveVariableValueActionImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getRemoveVariableValueAction_Class();
 }
@@ -450,7 +450,7 @@ bool RemoveVariableValueActionImpl::internalEIsSet(int featureID) const
 	return WriteVariableActionImpl::internalEIsSet(featureID);
 }
 
-bool RemoveVariableValueActionImpl::eSet(int featureID, Any newValue)
+bool RemoveVariableValueActionImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -477,7 +477,7 @@ bool RemoveVariableValueActionImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any RemoveVariableValueActionImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any RemoveVariableValueActionImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

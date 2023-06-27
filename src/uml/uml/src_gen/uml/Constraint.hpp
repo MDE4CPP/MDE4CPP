@@ -101,18 +101,18 @@ namespace uml
 			The ValueSpecification for a Constraint must evaluate to a Boolean value.
 			*/
 			 
-			virtual bool boolean_value(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
+			virtual bool boolean_value(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context) = 0;
 			/*!
 			Evaluating the ValueSpecification for a Constraint must not have side effects.
 			*/
 			 
-			virtual bool no_side_effects(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
+			virtual bool no_side_effects(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context) = 0;
 			/*!
 			A Constraint cannot be applied to itself.
 			not constrainedElement->includes(self)
 			*/
 			 
-			virtual bool not_apply_to_self(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
+			virtual bool not_apply_to_self(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context) = 0;
 
 			//*********************************
 			// Attribute Getters & Setters
@@ -126,7 +126,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::shared_ptr<Bag<uml::Element>> getConstrainedElement() const = 0;
+			virtual const std::shared_ptr<Bag<uml::Element>>& getConstrainedElement() const = 0;
 			/*!
 			Specifies the Namespace that owns the Constraint.
 			<p>From package UML::CommonStructure.</p>
@@ -144,13 +144,13 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::ValueSpecification> getSpecification() const = 0;
+			virtual const std::shared_ptr<uml::ValueSpecification>& getSpecification() const = 0;
 			/*!
 			A condition that must be true when evaluated in order for the Constraint to be satisfied.
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual void setSpecification(std::shared_ptr<uml::ValueSpecification>) = 0;
+			virtual void setSpecification(const std::shared_ptr<uml::ValueSpecification>&) = 0;
 
 			//*********************************
 			// Union Reference Getters

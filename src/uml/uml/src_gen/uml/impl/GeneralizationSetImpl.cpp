@@ -144,12 +144,12 @@ std::shared_ptr<ecore::EObject> GeneralizationSetImpl::copy() const
 //*********************************
 // Operations
 //*********************************
-bool GeneralizationSetImpl::generalization_same_classifier(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool GeneralizationSetImpl::generalization_same_classifier(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-bool GeneralizationSetImpl::maps_to_generalization_set(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
+bool GeneralizationSetImpl::maps_to_generalization_set(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -158,7 +158,7 @@ bool GeneralizationSetImpl::maps_to_generalization_set(Any diagnostics,std::shar
 // Attribute Getters & Setters
 //*********************************
 /* Getter & Setter for attribute isCovering */
-bool GeneralizationSetImpl::getIsCovering() const 
+bool GeneralizationSetImpl::getIsCovering() const
 {
 	return m_isCovering;
 }
@@ -169,7 +169,7 @@ void GeneralizationSetImpl::setIsCovering(bool _isCovering)
 }
 
 /* Getter & Setter for attribute isDisjoint */
-bool GeneralizationSetImpl::getIsDisjoint() const 
+bool GeneralizationSetImpl::getIsDisjoint() const
 {
 	return m_isDisjoint;
 }
@@ -183,7 +183,7 @@ void GeneralizationSetImpl::setIsDisjoint(bool _isDisjoint)
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference generalization */
-std::shared_ptr<Bag<uml::Generalization>> GeneralizationSetImpl::getGeneralization() const
+const std::shared_ptr<Bag<uml::Generalization>>& GeneralizationSetImpl::getGeneralization() const
 {
 	if(m_generalization == nullptr)
 	{
@@ -195,11 +195,11 @@ std::shared_ptr<Bag<uml::Generalization>> GeneralizationSetImpl::getGeneralizati
 }
 
 /* Getter & Setter for reference powertype */
-std::shared_ptr<uml::Classifier> GeneralizationSetImpl::getPowertype() const
+const std::shared_ptr<uml::Classifier>& GeneralizationSetImpl::getPowertype() const
 {
     return m_powertype;
 }
-void GeneralizationSetImpl::setPowertype(std::shared_ptr<uml::Classifier> _powertype)
+void GeneralizationSetImpl::setPowertype(const std::shared_ptr<uml::Classifier>& _powertype)
 {
     m_powertype = _powertype;
 	
@@ -412,7 +412,7 @@ void GeneralizationSetImpl::saveContent(std::shared_ptr<persistence::interfaces:
 	}
 }
 
-std::shared_ptr<ecore::EClass> GeneralizationSetImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& GeneralizationSetImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getGeneralizationSet_Class();
 }
@@ -452,7 +452,7 @@ bool GeneralizationSetImpl::internalEIsSet(int featureID) const
 	return PackageableElementImpl::internalEIsSet(featureID);
 }
 
-bool GeneralizationSetImpl::eSet(int featureID, Any newValue)
+bool GeneralizationSetImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -523,7 +523,7 @@ bool GeneralizationSetImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any GeneralizationSetImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any GeneralizationSetImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

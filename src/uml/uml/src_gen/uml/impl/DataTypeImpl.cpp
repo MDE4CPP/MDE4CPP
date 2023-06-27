@@ -233,12 +233,12 @@ std::shared_ptr<ecore::EObject> DataTypeImpl::copy() const
 //*********************************
 // Operations
 //*********************************
-std::shared_ptr<uml::Property> DataTypeImpl::createOwnedAttribute(std::string name,std::shared_ptr<uml::Type> type,int lower,int upper)
+std::shared_ptr<uml::Property> DataTypeImpl::createOwnedAttribute(std::string name, const std::shared_ptr<uml::Type>& type, int lower, int upper)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-std::shared_ptr<uml::Operation> DataTypeImpl::createOwnedOperation(std::string name,std::shared_ptr<Bag<std::string>> parameterNames,std::shared_ptr<Bag<uml::Type>> parameterTypes,std::shared_ptr<uml::Type> returnType)
+std::shared_ptr<uml::Operation> DataTypeImpl::createOwnedOperation(std::string name, const std::shared_ptr<Bag<std::string>>& parameterNames, const std::shared_ptr<Bag<uml::Type>>& parameterTypes, const std::shared_ptr<uml::Type>& returnType)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -251,7 +251,7 @@ std::shared_ptr<uml::Operation> DataTypeImpl::createOwnedOperation(std::string n
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference ownedAttribute */
-std::shared_ptr<Subset<uml::Property, uml::NamedElement, uml::Property>> DataTypeImpl::getOwnedAttribute() const
+const std::shared_ptr<Subset<uml::Property, uml::NamedElement, uml::Property>>& DataTypeImpl::getOwnedAttribute() const
 {
 	if(m_ownedAttribute == nullptr)
 	{
@@ -272,7 +272,7 @@ std::shared_ptr<Subset<uml::Property, uml::NamedElement, uml::Property>> DataTyp
 }
 
 /* Getter & Setter for reference ownedOperation */
-std::shared_ptr<Subset<uml::Operation, uml::Feature, uml::NamedElement>> DataTypeImpl::getOwnedOperation() const
+const std::shared_ptr<Subset<uml::Operation, uml::Feature, uml::NamedElement>>& DataTypeImpl::getOwnedOperation() const
 {
 	if(m_ownedOperation == nullptr)
 	{
@@ -561,7 +561,7 @@ void DataTypeImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHan
 	}
 }
 
-std::shared_ptr<ecore::EClass> DataTypeImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& DataTypeImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getDataType_Class();
 }
@@ -593,7 +593,7 @@ bool DataTypeImpl::internalEIsSet(int featureID) const
 	return ClassifierImpl::internalEIsSet(featureID);
 }
 
-bool DataTypeImpl::eSet(int featureID, Any newValue)
+bool DataTypeImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -679,7 +679,7 @@ bool DataTypeImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any DataTypeImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any DataTypeImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

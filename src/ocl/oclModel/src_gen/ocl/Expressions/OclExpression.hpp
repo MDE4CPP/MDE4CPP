@@ -131,8 +131,8 @@ namespace ocl::Expressions
 			virtual void setIfOwner(std::weak_ptr<ocl::Expressions::IfExp>) = 0;
 			virtual std::weak_ptr<ocl::Expressions::Variable> getInitializedElement() const = 0;
 			virtual void setInitializedElement(std::weak_ptr<ocl::Expressions::Variable>) = 0;
-			virtual std::shared_ptr<ocl::Evaluations::OclExpEval> getInstance() const = 0;
-			virtual void setInstance(std::shared_ptr<ocl::Evaluations::OclExpEval>) = 0;
+			virtual const std::shared_ptr<ocl::Evaluations::OclExpEval>& getInstance() const = 0;
+			virtual void setInstance(const std::shared_ptr<ocl::Evaluations::OclExpEval>&) = 0;
 			virtual std::weak_ptr<ocl::Expressions::CollectionRange> getLastOwner() const = 0;
 			virtual void setLastOwner(std::weak_ptr<ocl::Expressions::CollectionRange>) = 0;
 			virtual std::weak_ptr<ocl::Expressions::LoopExp> getLoopBodyOwner() const = 0;

@@ -55,13 +55,13 @@ namespace uml
 			entry->forAll(kind = PseudostateKind::entryPoint)
 			*/
 			 
-			virtual bool entry_pseudostates(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
+			virtual bool entry_pseudostates(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context) ;
 			/*!
 			The exit Pseudostates must be Pseudostates with kind exitPoint.
 			exit->forAll(kind = PseudostateKind::exitPoint)
 			*/
 			 
-			virtual bool exit_pseudostates(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
+			virtual bool exit_pseudostates(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context) ;
 			
 			//*********************************
 			// Attribute Getters & Setters
@@ -75,13 +75,13 @@ namespace uml
 			<p>From package UML::StateMachines.</p>
 			*/
 			
-			virtual std::shared_ptr<Bag<uml::Pseudostate>> getEntry() const ;
+			virtual const std::shared_ptr<Bag<uml::Pseudostate>>& getEntry() const ;
 			/*!
 			The exitPoints kind Pseudostates corresponding to this connection point.
 			<p>From package UML::StateMachines.</p>
 			*/
 			
-			virtual std::shared_ptr<Bag<uml::Pseudostate>> getExit() const ;
+			virtual const std::shared_ptr<Bag<uml::Pseudostate>>& getExit() const ;
 			/*!
 			The State in which the ConnectionPointReference is defined.
 			<p>From package UML::StateMachines.</p>
@@ -133,19 +133,19 @@ namespace uml
 			virtual void saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const;
 
 		protected:
-			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
+			virtual const std::shared_ptr<ecore::EClass>& eStaticClass() const;
 
 			//*********************************
 			// EStructuralFeature Get/Set/IsSet
 			//*********************************
 			virtual Any eGet(int featureID, bool resolve, bool coreType) const ;
-			virtual bool eSet(int featureID, Any newValue) ;
+			virtual bool eSet(int featureID, const Any& newValue) ;
 			virtual bool internalEIsSet(int featureID) const ;
 
 			//*********************************
 			// EOperation Invoke
 			//*********************************
-			virtual Any eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments) ;
+			virtual Any eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments) ;
 
 		private:
 			std::weak_ptr<uml::ConnectionPointReference> m_thisConnectionPointReferencePtr;

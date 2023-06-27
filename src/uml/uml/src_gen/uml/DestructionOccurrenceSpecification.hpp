@@ -91,7 +91,7 @@ namespace uml
 			in peerEvents->last() = self
 			*/
 			 
-			virtual bool no_occurrence_specifications_below(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
+			virtual bool no_occurrence_specifications_below(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context) = 0;
 
 			//*********************************
 			// Attribute Getters & Setters

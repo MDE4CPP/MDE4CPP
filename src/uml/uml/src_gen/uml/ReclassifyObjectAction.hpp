@@ -97,19 +97,19 @@ namespace uml
 			not newClassifier->exists(isAbstract)
 			*/
 			 
-			virtual bool classifier_not_abstract(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
+			virtual bool classifier_not_abstract(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context) = 0;
 			/*!
 			The object InputPin has no type.
 			object.type = null
 			*/
 			 
-			virtual bool input_pin(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
+			virtual bool input_pin(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context) = 0;
 			/*!
 			The multiplicity of the object InputPin is 1..1.
 			object.is(1,1)
 			*/
 			 
-			virtual bool multiplicity(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
+			virtual bool multiplicity(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context) = 0;
 
 			//*********************************
 			// Attribute Getters & Setters
@@ -135,25 +135,25 @@ namespace uml
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual std::shared_ptr<Bag<uml::Classifier>> getNewClassifier() const = 0;
+			virtual const std::shared_ptr<Bag<uml::Classifier>>& getNewClassifier() const = 0;
 			/*!
 			The InputPin that holds the object to be reclassified.
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::InputPin> getObject() const = 0;
+			virtual const std::shared_ptr<uml::InputPin>& getObject() const = 0;
 			/*!
 			The InputPin that holds the object to be reclassified.
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual void setObject(std::shared_ptr<uml::InputPin>) = 0;
+			virtual void setObject(const std::shared_ptr<uml::InputPin>&) = 0;
 			/*!
 			A set of Classifiers to be removed from the Classifiers of the given object.
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual std::shared_ptr<Bag<uml::Classifier>> getOldClassifier() const = 0;
+			virtual const std::shared_ptr<Bag<uml::Classifier>>& getOldClassifier() const = 0;
 
 			//*********************************
 			// Union Reference Getters

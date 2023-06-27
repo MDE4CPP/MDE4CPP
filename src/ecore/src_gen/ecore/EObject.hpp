@@ -81,14 +81,14 @@ namespace ecore
 			virtual std::shared_ptr<ecore::EReference> eContainmentFeature() const = 0;
 			virtual std::shared_ptr<Bag<ecore::EObject> > eContents() const = 0;
 			virtual std::shared_ptr<std::list < ecore::EObject>> eCrossReferences() const = 0;
-			virtual Any eGet(std::shared_ptr<ecore::EStructuralFeature> feature) const = 0;
-			virtual Any eGet(std::shared_ptr<ecore::EStructuralFeature> feature,bool resolve) const = 0;
-			virtual Any eInvoke(std::shared_ptr<ecore::EOperation> operation,std::shared_ptr<std::list < Any>> arguments) = 0;
+			virtual Any eGet(const std::shared_ptr<ecore::EStructuralFeature>& feature) const = 0;
+			virtual Any eGet(const std::shared_ptr<ecore::EStructuralFeature>& feature, bool resolve) const = 0;
+			virtual Any eInvoke(const std::shared_ptr<ecore::EOperation>& operation, std::shared_ptr<std::list < Any>> arguments) = 0;
 			virtual bool eIsProxy() const = 0;
-			virtual bool eIsSet(std::shared_ptr<ecore::EStructuralFeature> feature) const = 0;
+			virtual bool eIsSet(const std::shared_ptr<ecore::EStructuralFeature>& feature) const = 0;
 			virtual int eResource() const = 0;
-			virtual void eSet(std::shared_ptr<ecore::EStructuralFeature> feature,Any newValue) = 0;
-			virtual void eUnset(std::shared_ptr<ecore::EStructuralFeature> feature) const = 0;
+			virtual void eSet(const std::shared_ptr<ecore::EStructuralFeature>& feature, const Any& newValue) = 0;
+			virtual void eUnset(const std::shared_ptr<ecore::EStructuralFeature>& feature) const = 0;
 
 			//*********************************
 			// Attribute Getters & Setters

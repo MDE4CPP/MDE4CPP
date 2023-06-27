@@ -37,14 +37,14 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "fUML/Semantics/Values/ValuesFactory.hpp"
 #include "uml/umlFactory.hpp"
+#include "fUML/Semantics/Values/ValuesFactory.hpp"
 #include "fUML/Semantics/SimpleClassifiers/FeatureValue.hpp"
 #include "uml/StructuralFeature.hpp"
 #include "fUML/Semantics/Values/Value.hpp"
 //Factories and Package includes
-#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/SemanticsPackage.hpp"
+#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/SimpleClassifiers/SimpleClassifiersPackage.hpp"
 #include "fUML/Semantics/Values/ValuesPackage.hpp"
 #include "uml/umlPackage.hpp"
@@ -154,7 +154,7 @@ return newValue;
 	//end of body
 }
 
-bool FeatureValueImpl::hasEqualValues(std::shared_ptr<fUML::Semantics::SimpleClassifiers::FeatureValue> other)
+bool FeatureValueImpl::hasEqualValues(const std::shared_ptr<fUML::Semantics::SimpleClassifiers::FeatureValue>& other)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -217,7 +217,7 @@ bool FeatureValueImpl::hasEqualValues(std::shared_ptr<fUML::Semantics::SimpleCla
 // Attribute Getters & Setters
 //*********************************
 /* Getter & Setter for attribute position */
-int FeatureValueImpl::getPosition() const 
+int FeatureValueImpl::getPosition() const
 {
 	return m_position;
 }
@@ -231,18 +231,18 @@ void FeatureValueImpl::setPosition(int _position)
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference feature */
-std::shared_ptr<uml::StructuralFeature> FeatureValueImpl::getFeature() const
+const std::shared_ptr<uml::StructuralFeature>& FeatureValueImpl::getFeature() const
 {
     return m_feature;
 }
-void FeatureValueImpl::setFeature(std::shared_ptr<uml::StructuralFeature> _feature)
+void FeatureValueImpl::setFeature(const std::shared_ptr<uml::StructuralFeature>& _feature)
 {
     m_feature = _feature;
 	
 }
 
 /* Getter & Setter for reference values */
-std::shared_ptr<Bag<fUML::Semantics::Values::Value>> FeatureValueImpl::getValues() const
+const std::shared_ptr<Bag<fUML::Semantics::Values::Value>>& FeatureValueImpl::getValues() const
 {
 	if(m_values == nullptr)
 	{
@@ -399,7 +399,7 @@ void FeatureValueImpl::saveContent(std::shared_ptr<persistence::interfaces::XSav
 	}
 }
 
-std::shared_ptr<ecore::EClass> FeatureValueImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& FeatureValueImpl::eStaticClass() const
 {
 	return fUML::Semantics::SimpleClassifiers::SimpleClassifiersPackage::eInstance()->getFeatureValue_Class();
 }
@@ -435,7 +435,7 @@ bool FeatureValueImpl::internalEIsSet(int featureID) const
 	return ecore::EObjectImpl::internalEIsSet(featureID);
 }
 
-bool FeatureValueImpl::eSet(int featureID, Any newValue)
+bool FeatureValueImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
@@ -499,7 +499,7 @@ bool FeatureValueImpl::eSet(int featureID, Any newValue)
 //*********************************
 // EOperation Invoke
 //*********************************
-Any FeatureValueImpl::eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments)
+Any FeatureValueImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments)
 {
 	Any result;
  

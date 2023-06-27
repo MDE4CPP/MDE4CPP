@@ -55,25 +55,25 @@ namespace uml
 			object.is(1,1)
 			*/
 			 
-			virtual bool multiplicity_of_object(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
+			virtual bool multiplicity_of_object(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context) ;
 			/*!
 			The number of result outputPins must be the same as the number of attributes of the unmarshallType.
 			unmarshallType.allAttributes()->size() = result->size()
 			*/
 			 
-			virtual bool number_of_result(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
+			virtual bool number_of_result(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context) ;
 			/*!
 			The type of the object InputPin conform to the unmarshallType.
 			object.type.conformsTo(unmarshallType)
 			*/
 			 
-			virtual bool object_type(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
+			virtual bool object_type(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context) ;
 			/*!
 			The unmarshallType must have at least one StructuralFeature.
 			unmarshallType.allAttributes()->size() >= 1
 			*/
 			 
-			virtual bool structural_feature(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
+			virtual bool structural_feature(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context) ;
 			/*!
 			The type, ordering and multiplicity of each attribute of the unmarshallType must be compatible with the type, ordering and multiplicity of the corresponding result OutputPin.
 			let attribute:OrderedSet(Property) = unmarshallType.allAttributes() in
@@ -83,7 +83,7 @@ namespace uml
 				attribute->at(i).compatibleWith(result->at(i)))
 			*/
 			 
-			virtual bool type_ordering_and_multiplicity(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
+			virtual bool type_ordering_and_multiplicity(const Any& diagnostics, std::shared_ptr<std::map < Any, Any>> context) ;
 			
 			//*********************************
 			// Attribute Getters & Setters
@@ -97,31 +97,31 @@ namespace uml
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::InputPin> getObject() const ;
+			virtual const std::shared_ptr<uml::InputPin>& getObject() const ;
 			/*!
 			The InputPin that gives the object to be unmarshalled.
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual void setObject(std::shared_ptr<uml::InputPin>) ;
+			virtual void setObject(const std::shared_ptr<uml::InputPin>&) ;
 			/*!
 			The OutputPins on which are placed the values of the StructuralFeatures of the input object.
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual std::shared_ptr<Subset<uml::OutputPin, uml::OutputPin>> getResult() const ;
+			virtual const std::shared_ptr<Subset<uml::OutputPin, uml::OutputPin>>& getResult() const ;
 			/*!
 			The type of the object to be unmarshalled.
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::Classifier> getUnmarshallType() const ;
+			virtual const std::shared_ptr<uml::Classifier>& getUnmarshallType() const ;
 			/*!
 			The type of the object to be unmarshalled.
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual void setUnmarshallType(std::shared_ptr<uml::Classifier>) ;
+			virtual void setUnmarshallType(const std::shared_ptr<uml::Classifier>&) ;
 			
 			//*********************************
 			// Union Reference Getters
@@ -179,19 +179,19 @@ namespace uml
 			virtual void saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const;
 
 		protected:
-			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
+			virtual const std::shared_ptr<ecore::EClass>& eStaticClass() const;
 
 			//*********************************
 			// EStructuralFeature Get/Set/IsSet
 			//*********************************
 			virtual Any eGet(int featureID, bool resolve, bool coreType) const ;
-			virtual bool eSet(int featureID, Any newValue) ;
+			virtual bool eSet(int featureID, const Any& newValue) ;
 			virtual bool internalEIsSet(int featureID) const ;
 
 			//*********************************
 			// EOperation Invoke
 			//*********************************
-			virtual Any eInvoke(int operationID, std::shared_ptr<std::list<Any>> arguments) ;
+			virtual Any eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& arguments) ;
 
 		private:
 			std::weak_ptr<uml::UnmarshallAction> m_thisUnmarshallActionPtr;
