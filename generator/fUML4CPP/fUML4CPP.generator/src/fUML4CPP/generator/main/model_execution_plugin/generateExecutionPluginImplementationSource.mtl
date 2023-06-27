@@ -304,7 +304,7 @@ m_factory->assignStrategy([aStrategyClass.name.toLowerFirst()/]);
 [/template]
 
 [template private generateActivityExecution(anActivity : Activity) post(trim())]
-std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue> > pList(new Bag<fUML::Semantics::CommonBehavior::ParameterValue>());
+std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> pList(new Bag<fUML::Semantics::CommonBehavior::ParameterValue>());
 [for (aParameter : Parameter | anActivity.ownedParameter->select((direction = ParameterDirectionKind::inout) or (direction = ParameterDirectionKind::_in))) before('\n')]
 //Creating ParameterValue for input parameter [anActivity.name/]::[aParameter.name/]
 {

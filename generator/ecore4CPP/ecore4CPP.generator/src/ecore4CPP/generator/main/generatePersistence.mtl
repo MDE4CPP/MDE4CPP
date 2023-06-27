@@ -71,7 +71,7 @@ virtual void loadNode(std::string nodeName, std::shared_ptr<[generatePersistence
 [/template]
 
 [template public generatePersistenceResolveReferenceDeclaration(aClass: EClass, impl : EBoolean) post(trim())]
-virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<[needNamespace(aClass.ePackage, 'EObject')/]> > references) [abstractSufix(impl)/];
+virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<[needNamespace(aClass.ePackage, 'EObject')/]>> references) [abstractSufix(impl)/];
 [/template]
 
 [template public generatePersistenceSaveDeclaration(aClass: EClass, impl : EBoolean) post(trim())]
@@ -351,7 +351,7 @@ void [aClass.name.concat('Impl')/]::loadNode(std::string nodeName, std::shared_p
 [/template]
 
 [template private _generatePersistenceResolveReferenceImplementation(aClass: EClass) post(trim())]
-void [aClass.name.concat('Impl')/]::resolveReferences(const int featureID, std::vector<std::shared_ptr<[needNamespace(aClass.ePackage, 'EObject')/]> > references)
+void [aClass.name.concat('Impl')/]::resolveReferences(const int featureID, std::vector<std::shared_ptr<[needNamespace(aClass.ePackage, 'EObject')/]>> references)
 {
 [let refList : OrderedSet(EReference) = aClass.eReferences->select(eRef: EReference|(eRef.containment = false) and (eRef.changeable = true))->reject(doNotGenerateEStructuralFeature())->asOrderedSet()->sortedBy(name)]
 [if (refList->size() > 0)]
