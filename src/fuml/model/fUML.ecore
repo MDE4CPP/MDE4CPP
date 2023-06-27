@@ -1423,7 +1423,7 @@
         </eOperations>
         <eOperations name="putTokens" ordered="false" lowerBound="1">
           <eAnnotations source="http://tu-ilmenau.de/see/codegen">
-            <details key="body" value="DEBUG_INFO(&quot;Action '&quot; &lt;&lt; this->getNode()->getName() &lt;&lt; &quot;' putting &quot; &lt;&lt; values->size() &lt;&lt; &quot;tokens to output pin '&quot; &lt;&lt; pin->getName() &lt;&lt; &quot;'.&quot;)&#xA;&#xA;&#x9;for (std::shared_ptr&lt;Any> value : *values)&#xA;&#x9;{&#xA;       &#x9;&#x9;this->putToken(pin,value);&#xA;   &#x9;}"/>
+            <details key="body" value="DEBUG_INFO(&quot;Action '&quot; &lt;&lt; this->getNode()->getName() &lt;&lt; &quot;' putting &quot; &lt;&lt; values->size() &lt;&lt; &quot;tokens to output pin '&quot; &lt;&lt; pin->getName() &lt;&lt; &quot;'.&quot;)&#xA;&#xA;&#x9;for(const std::shared_ptr&lt;Any>&amp; value : *values)&#xA;&#x9;{&#xA;       &#x9;&#x9;this->putToken(pin,value);&#xA;   &#x9;}"/>
           </eAnnotations>
           <eParameters name="pin" ordered="false" lowerBound="1" eType="ecore:EClass http://www.eclipse.org/uml2/5.0.0/UML#//OutputPin"/>
           <eParameters name="values" ordered="false" upperBound="-1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
@@ -2655,7 +2655,7 @@
         </eOperations>
         <eOperations name="createNodeActivations" ordered="false" lowerBound="1">
           <eAnnotations source="http://tu-ilmenau.de/see/codegen">
-            <details key="body" value="for (std::shared_ptr&lt;uml::ActivityNode> node: *nodes) &#xA;&#x9;{&#xA;        if(node != nullptr)&#xA;        {&#xA;        &#x9;DEBUG_INFO(&quot;Creating &quot; &lt;&lt; node->eClass()->getName() &lt;&lt; &quot; '&quot; &lt;&lt; node->getName() &lt;&lt; &quot;'.&quot;)&#xA;        &#x9;this->createNodeActivation(node);&#xA;        }&#xA;        else&#xA;        {&#xA;            DEBUG_WARNING(&quot;A node was null!&quot;)&#xA;        }&#xA;    }"/>
+            <details key="body" value="for(const std::shared_ptr&lt;uml::ActivityNode>&amp; node: *nodes) &#xA;&#x9;{&#xA;        if(node != nullptr)&#xA;        {&#xA;        &#x9;DEBUG_INFO(&quot;Creating &quot; &lt;&lt; node->eClass()->getName() &lt;&lt; &quot; '&quot; &lt;&lt; node->getName() &lt;&lt; &quot;'.&quot;)&#xA;        &#x9;this->createNodeActivation(node);&#xA;        }&#xA;        else&#xA;        {&#xA;            DEBUG_WARNING(&quot;A node was null!&quot;)&#xA;        }&#xA;    }"/>
           </eAnnotations>
           <eParameters name="nodes" ordered="false" upperBound="-1" eType="ecore:EClass http://www.eclipse.org/uml2/5.0.0/UML#//ActivityNode"/>
         </eOperations>
