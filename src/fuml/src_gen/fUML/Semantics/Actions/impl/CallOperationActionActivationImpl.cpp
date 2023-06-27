@@ -55,8 +55,8 @@
 #include <exception> // used in Persistence
 #include "uml/umlFactory.hpp"
 #include "fUML/Semantics/Actions/ActionsFactory.hpp"
-#include "fUML/Semantics/CommonBehavior/CommonBehaviorFactory.hpp"
 #include "fUML/Semantics/Activities/ActivitiesFactory.hpp"
+#include "fUML/Semantics/CommonBehavior/CommonBehaviorFactory.hpp"
 #include "uml/Action.hpp"
 #include "fUML/Semantics/Activities/ActivityEdgeInstance.hpp"
 #include "uml/ActivityNode.hpp"
@@ -73,8 +73,8 @@
 #include "fUML/Semantics/Actions/PinActivation.hpp"
 #include "fUML/Semantics/Activities/Token.hpp"
 //Factories and Package includes
-#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/SemanticsPackage.hpp"
+#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/Actions/ActionsPackage.hpp"
 #include "fUML/Semantics/Activities/ActivitiesPackage.hpp"
 #include "fUML/Semantics/CommonBehavior/CommonBehaviorPackage.hpp"
@@ -153,17 +153,17 @@ std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> CallOperat
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
-	const std::shared_ptr<uml::CallOperationAction>& action = this->getCallOperationAction();
+	std::shared_ptr<uml::CallOperationAction> action = this->getCallOperationAction();
 	if(action != nullptr)
 	{
-		const std::shared_ptr<uml::Operation>& operation = action->getOperation();
+		std::shared_ptr<uml::Operation> operation = action->getOperation();
 		if(!operation)
 		{
 			DEBUG_ERROR("Operation is nullptr! Failed to call operation!")
 			return nullptr;
 		}
 		
-		const std::shared_ptr<uml::InputPin>& targetPin = action->getTarget();
+		std::shared_ptr<uml::InputPin> targetPin = action->getTarget();
 		if(!targetPin)
 		{
 			DEBUG_ERROR("Target is nullptr! Failed to call operation!")
@@ -279,21 +279,21 @@ std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> CallOperat
 				return nullptr;
 			}
 			
-			std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> unofferedTokens = targetPinActivation->getUnofferedTokens();
+			std::shared_ptr<Bag<fUML::Semantics::Activities::Token> > unofferedTokens = targetPinActivation->getUnofferedTokens();
 			if(unofferedTokens == nullptr)
 			{
 				DEBUG_ERROR("Unoffered tokens is nullptr! Failed to call operation!")
 				return nullptr;
 			}
 
-			const std::shared_ptr<fUML::Semantics::Activities::Token>& firstToken = unofferedTokens->at(unofferedTokens->size()-1);
+			std::shared_ptr<fUML::Semantics::Activities::Token> firstToken = unofferedTokens->at(unofferedTokens->size()-1);
 			if(firstToken == nullptr)
 			{
 				DEBUG_ERROR("First token is nullptr! Failed to call operation!")
 				return nullptr;
 			}
 
-			const std::shared_ptr<Any>& target = firstToken->getValue();
+			std::shared_ptr<Any> target = firstToken->getValue();
 
 			if(target)
 			{
@@ -316,10 +316,10 @@ std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> CallOperat
 		else
 		{
 			std::shared_ptr<Bag<Any>> inputArguments(new Bag<Any>());
-			for(const std::shared_ptr<fUML::Semantics::CommonBehavior::ParameterValue>& inputParameterValue : *inputParameterValues)
+			for(std::shared_ptr<fUML::Semantics::CommonBehavior::ParameterValue> inputParameterValue : *inputParameterValues)
 			{
 				//Only first value as lists are handled by a single instance of Any
-				const std::shared_ptr<Any>& argument = inputParameterValue->getValues()->at(0);
+				std::shared_ptr<Any> argument = inputParameterValue->getValues()->at(0);
 				inputArguments->add(argument);
 			}
 			
@@ -329,10 +329,10 @@ std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> CallOperat
 			
 			std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> outputParameterValues(new Bag<fUML::Semantics::CommonBehavior::ParameterValue>());		
 			
-			const std::shared_ptr<Bag<uml::Parameter>>& parametersOfBehavior = this->retrieveBehavior()->getOwnedParameter();
+			std::shared_ptr<Bag<uml::Parameter>> parametersOfBehavior = this->retrieveBehavior()->getOwnedParameter();
 			bool foundFirstReturnParameter = false;
 			
-			for(const std::shared_ptr<uml::Parameter>& aParameter : *parametersOfBehavior)
+			for(std::shared_ptr<uml::Parameter> aParameter : *parametersOfBehavior)
 			{
 				unsigned int parameterCounter = 0;
 		
@@ -376,7 +376,7 @@ std::shared_ptr<uml::Behavior> CallOperationActionActivationImpl::retrieveBehavi
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
 	std::shared_ptr<uml::Behavior> method = nullptr;
-	const std::shared_ptr<Bag<uml::Behavior>>& methods = this->getCallOperationAction()->getOperation()->getMethod();
+	std::shared_ptr<Bag<uml::Behavior>> methods = this->getCallOperationAction()->getOperation()->getMethod();
 	if(!(methods->empty()))
 	{
 		method = methods->front();

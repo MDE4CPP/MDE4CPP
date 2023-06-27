@@ -323,16 +323,16 @@ void [className/]::destroy()
 	[/for]
 	[/if]
 	[/for]
+
 	[comment Recursively destroy properties/]
-	[for (aProperty : Property | aClass.ownedAttribute->sortedBy(myQualifiedName())) before('\n\t//Erase properties')]
+	//Erase properties
+	[for (aProperty : Property | aClass.ownedAttribute->sortedBy(myQualifiedName()))]
 	[aProperty.generatePropertyDestruction()/]
 	[/for]
-	[for (compositeOwnerClass : Class | aClass.getImplicitCompositeOwners()) before('\n\t//Erase back reference to owner')]
+	//Erase back reference to owner
+	[for (compositeOwnerClass : Class | aClass.getImplicitCompositeOwners())]
 	m_[compositeOwnerClass.name/].reset();
 	[/for]
-	[if (isFUMLExecutable())]
-	fUML::MDE4CPP_Extensions::FUML_ObjectImpl::destroy();
-	[/if]
 }
 
 //*********************************

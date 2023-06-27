@@ -89,7 +89,9 @@ void OutputChannelImpl::instantiate()
 
 void OutputChannelImpl::destroy()
 {	
-	fUML::MDE4CPP_Extensions::FUML_ObjectImpl::destroy();
+
+	//Erase properties
+	//Erase back reference to owner
 }
 
 //*********************************

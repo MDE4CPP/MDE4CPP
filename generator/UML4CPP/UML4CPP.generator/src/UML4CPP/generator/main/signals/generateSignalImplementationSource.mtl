@@ -1,7 +1,6 @@
 [comment encoding = UTF-8 /]
 [module generateSignalImplementationSource('http://www.eclipse.org/uml2/5.0.0/UML')]
 
-[import UML4CPP::generator::main::model_execution::model_execution /]
 [import UML4CPP::generator::main::helpers::nameHelper /]
 [import UML4CPP::generator::main::helpers::generalHelper /]
 [import UML4CPP::generator::main::profiles::uml4CPPProfileHelper /]
@@ -27,6 +26,10 @@
 #include "uml/UMLAny.hpp"
 #include "uml/UMLContainerAny.hpp"
 #include "uml/Property.hpp"
+#include "uml/Operation.hpp"
+#include "uml/OpaqueBehavior.hpp"
+#include "uml/FunctionBehavior.hpp"
+#include "uml/Parameter.hpp"
 #include "[containingPackage.generateNamespacePath(false)/]/[containingPackage.name.concat('Factory')/].hpp"
 #include "[containingPackage.generateNamespacePath(false)/]/impl/[containingPackage.name.concat('PackageImpl')/].hpp"
 #include "[aSignal.eClass().ePackage.name/]/[aSignal.eClass().name/].hpp"
@@ -187,24 +190,7 @@ std::shared_ptr<ecore::EObject>  [signalName/]::copy() const
 // StructuralFeature Getter & Setter
 //**************************************
 [aSignal.generateeGetSetImpl()/]
-[if (isFUMLExecutable())]
 
-// fUML-specific Operations
-const std::shared_ptr<uml::Signal>& [signalName/]::getType() const
-{
-	static std::shared_ptr<uml::Signal> type;
-
-	if(!type)
-	{
-		type.reset();
-		// Set type of self '[aSignal.name/]' : Signal
-		type = [aSignal.generatePackageGetterCall()/];
-	}
-
-	return type;
-}
-
-[/if]
 [/file]
 [/template]
 

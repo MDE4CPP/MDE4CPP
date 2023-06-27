@@ -41,8 +41,8 @@
 #include "fUML/Semantics/CommonBehavior/GetNextEventStrategy.hpp"
 #include "fUML/Semantics/CommonBehavior/ObjectActivation.hpp"
 //Factories and Package includes
-#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/SemanticsPackage.hpp"
+#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/CommonBehavior/CommonBehaviorPackage.hpp"
 
 using namespace fUML::Semantics::CommonBehavior;
@@ -113,7 +113,7 @@ std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccurrence> FIFOGetNextEve
 	//generated from body annotation
 	// Get the first event from the given event pool. The event is removed from the pool.
 
-std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccurrence> eventOccurrence = objectActivation->getEventPool()->at(0);
+const std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccurrence>& eventOccurrence = objectActivation->getEventPool()->at(0);
 objectActivation->getEventPool()->erase(eventOccurrence);
 return eventOccurrence;
 	//end of body

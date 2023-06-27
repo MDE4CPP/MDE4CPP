@@ -88,7 +88,9 @@ void ChannelImpl::instantiate()
 
 void ChannelImpl::destroy()
 {	
-	fUML::MDE4CPP_Extensions::FUML_ObjectImpl::destroy();
+
+	//Erase properties
+	//Erase back reference to owner
 }
 
 //*********************************
@@ -237,5 +239,5 @@ std::shared_ptr<Channel> ChannelImpl::getThisChannelPtr()
 void ChannelImpl::setThisChannelPtr(std::weak_ptr<Channel> thisChannelPtr)
 {
 	m_thisChannelPtr = thisChannelPtr;
-	setThisFUML_ObjectPtr(thisChannelPtr);
+	setThisElementPtr(thisChannelPtr);
 }

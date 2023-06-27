@@ -89,7 +89,9 @@ void ActiveChannelImpl::instantiate()
 
 void ActiveChannelImpl::destroy()
 {	
-	fUML::MDE4CPP_Extensions::FUML_ObjectImpl::destroy();
+
+	//Erase properties
+	//Erase back reference to owner
 }
 
 //*********************************

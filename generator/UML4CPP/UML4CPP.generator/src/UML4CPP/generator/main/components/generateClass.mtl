@@ -34,7 +34,6 @@
 [import UML4CPP::generator::main::profiles::strategyHelper /]
 [import UML4CPP::generator::main::helpers::isGeneratableHelper /]
 [import UML4CPP::generator::main::components::generateDataType /]
-[import UML4CPP::generator::main::model_execution::model_execution /]
 
 [** 
  * Get all classes that has parts or ports of type aClass (= composite properties; attributes connected to a composition association are rejected)
@@ -249,20 +248,13 @@ std::shared_ptr<[aClass.name.toUpperFirst()/]> [aClass.name.toUpperFirst()/]Impl
 void [aClass.name.toUpperFirst()/]Impl::[generateGetThisPtrPropertySetterName()/](std::weak_ptr<[aClass.name.toUpperFirst()/]> [generateGetThisPtrPropertyName()/])
 {
 	m_[generateGetThisPtrPropertyName()/] = [generateGetThisPtrPropertyName()/];
-[if (aClass.superClass->isEmpty())]
-	[if (isFUMLExecutable())]
-	setThisFUML_ObjectPtr([aClass.generateGetThisPtrPropertyName()/]);
-	[else]
-		[if (aClass.oclIsKindOf(Stereotype))]
-	setThisStereotypePtr([aClass.generateGetThisPtrPropertyName()/]);
-		[else]
-	setThisElementPtr([aClass.generateGetThisPtrPropertyName()/]);
-		[/if]
-	[/if]
-[else]
 [for (superClass : Class | aClass.superClass->asOrderedSet()->sortedBy(name))]
 	[superClass.generateGetThisPtrPropertySetterName()/]([aClass.generateGetThisPtrPropertyName()/]);
 [/for]
+[if (aClass.superClass->isEmpty() and not aClass.oclIsKindOf(Stereotype))]
+	setThisElementPtr([aClass.generateGetThisPtrPropertyName()/]);
+[elseif (aClass.superClass->isEmpty() and aClass.oclIsKindOf(Stereotype))]
+	setThisStereotypePtr([aClass.generateGetThisPtrPropertyName()/]);
 [/if]
 }
 [/template]

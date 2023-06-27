@@ -89,7 +89,9 @@ void StandardInputChannelImpl::instantiate()
 
 void StandardInputChannelImpl::destroy()
 {	
-	fUML::MDE4CPP_Extensions::FUML_ObjectImpl::destroy();
+
+	//Erase properties
+	//Erase back reference to owner
 }
 
 //*********************************
@@ -117,10 +119,10 @@ const std::shared_ptr<Bag<uml::Classifier>>& StandardInputChannelImpl::getTypes(
 		types->add(FoundationalModelLibrary::BasicInputOutput::BasicInputOutputPackage::eInstance()->get_FoundationalModelLibrary_BasicInputOutput_StandardInputChannel());
 		// Add base type 'InputChannel' : Class
 		types->add(FoundationalModelLibrary::BasicInputOutput::BasicInputOutputPackage::eInstance()->get_FoundationalModelLibrary_BasicInputOutput_InputChannel());
-		// Add base type 'Channel' : Class
-		types->add(FoundationalModelLibrary::BasicInputOutput::BasicInputOutputPackage::eInstance()->get_FoundationalModelLibrary_BasicInputOutput_Channel());
 		// Add base type 'TextInputChannel' : Class
 		types->add(FoundationalModelLibrary::BasicInputOutput::BasicInputOutputPackage::eInstance()->get_FoundationalModelLibrary_BasicInputOutput_TextInputChannel());
+		// Add base type 'Channel' : Class
+		types->add(FoundationalModelLibrary::BasicInputOutput::BasicInputOutputPackage::eInstance()->get_FoundationalModelLibrary_BasicInputOutput_Channel());
 	}
 
 	return types;

@@ -20,7 +20,6 @@
 #include "FoundationalModelLibraryExec/impl/FoundationalModelLibraryExecutionFactoryImpl.hpp"
 
 //fUML includes
-#include "fUML/MDE4CPP_Extensions/FUML_Object.hpp"
 #include "fUML/Semantics/Loci/LociFactory.hpp"
 #include "fUML/Semantics/Loci/ExecutionFactory.hpp"
 #include "fUML/Semantics/CommonBehavior/CommonBehaviorFactory.hpp"
@@ -32,7 +31,6 @@
 
 //Semantic Strategy Includes
 #include "fUML/Semantics/Loci/FirstChoiceStrategy.hpp"
-#include "fUML/Semantics/CommonBehavior/FIFOGetNextEventStrategy.hpp"
 
 //UML includes
 #include "uml/Element.hpp"
@@ -132,8 +130,6 @@ void FoundationalModelLibraryExecPluginImpl::initialize()
 	
 	//Assign FirstChoiceStrategy to execution factory
 	m_factory->assignStrategy(fUML::Semantics::Loci::LociFactory::eInstance()->createFirstChoiceStrategy());
-	//assign FIFOGetNextEventStrategy to execution factory
-	m_factory->assignStrategy(fUML::Semantics::CommonBehavior::CommonBehaviorFactory::eInstance()->createFIFOGetNextEventStrategy());
 	
 
 	m_IsInitialized = true;
@@ -191,7 +187,7 @@ std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> Foundation
 	return this->m_executor->execute(behavior, context, inputs);
 }
 
-std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_Object> FoundationalModelLibraryExecPluginImpl::instantiateClass(std::shared_ptr<uml::Class> type)
+std::shared_ptr<uml::Element> FoundationalModelLibraryExecPluginImpl::instantiateClass(std::shared_ptr<uml::Class> type)
 {
 	if(!m_IsInitialized)
 	{
@@ -201,7 +197,7 @@ std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_Object> FoundationalModelLibraryE
 	return this->m_locus->instantiate(type);
 }
 
-std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_SignalInstance> FoundationalModelLibraryExecPluginImpl::instantiateSignal(std::shared_ptr<uml::Signal> type)
+std::shared_ptr<uml::Element> FoundationalModelLibraryExecPluginImpl::instantiateSignal(std::shared_ptr<uml::Signal> type)
 {
 	if(!m_IsInitialized)
 	{

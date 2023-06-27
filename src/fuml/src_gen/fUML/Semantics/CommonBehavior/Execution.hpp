@@ -58,7 +58,7 @@ namespace uml
 #include "fUML/fUML.hpp"
 
 // base class includes
-#include "fUML/MDE4CPP_Extensions/FUML_Object.hpp"
+#include "uml/Element.hpp"
 #include "fUML/Semantics/Loci/SemanticVisitor.hpp"
 
 
@@ -68,7 +68,7 @@ namespace uml
 namespace fUML::Semantics::CommonBehavior 
 {
 	
-	class FUML_API Execution : virtual public fUML::MDE4CPP_Extensions::FUML_Object, virtual public fUML::Semantics::Loci::SemanticVisitor
+	class FUML_API Execution : virtual public uml::Element, virtual public fUML::Semantics::Loci::SemanticVisitor
 	{
 		public:
  			Execution(const Execution &) {}

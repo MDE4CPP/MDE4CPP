@@ -48,8 +48,8 @@ namespace [aPackage.generateNamespace(false)/]
 			virtual std::shared_ptr<ecore::EObject> create(const std::string&, std::shared_ptr<ecore::EObject>, const unsigned int referenceID = -1) const;
 			virtual std::shared_ptr<Any> executeActivity(std::shared_ptr<uml::Activity>, std::shared_ptr<Bag<Any>>, std::shared_ptr<uml::Element>);
 			virtual std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> executeBehavior(std::shared_ptr<uml::Behavior>, std::shared_ptr<uml::Element>, std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>>);
-			virtual std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_Object> instantiateClass(std::shared_ptr<uml::Class>);
-			virtual std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_SignalInstance> instantiateSignal(std::shared_ptr<uml::Signal>);
+			virtual std::shared_ptr<uml::Element> instantiateClass(std::shared_ptr<uml::Class>);
+			virtual std::shared_ptr<uml::Element> instantiateSignal(std::shared_ptr<uml::Signal>);
 			virtual std::shared_ptr<Any> evaluateSpecification(std::shared_ptr<uml::ValueSpecification>);
 
 		private:

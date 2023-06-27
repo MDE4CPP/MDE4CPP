@@ -38,15 +38,11 @@ namespace fUML::Semantics::Loci
 	class ExecutionFactory;
 	class Executor;
 }
-namespace fUML::MDE4CPP_Extensions 
-{
-	class FUML_Object;
-	class FUML_SignalInstance;
-}
 namespace uml 
 {
 	class Class;
 	class Classifier;
+	class Element;
 	class Signal;
 }
 
@@ -79,14 +75,14 @@ namespace fUML::Semantics::Loci
 			//*********************************
 			// Operations
 			//*********************************
-			virtual void add(const std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_Object>& value) = 0;
+			virtual void add(const std::shared_ptr<uml::Element>& value) = 0;
 			virtual void assignExecutor(const std::shared_ptr<fUML::Semantics::Loci::Executor>& executor) = 0;
 			virtual void assignFactory(const std::shared_ptr<fUML::Semantics::Loci::ExecutionFactory>& factory) = 0;
 			virtual bool conforms(const std::shared_ptr<uml::Classifier>& type, const std::shared_ptr<uml::Classifier>& classifier) = 0;
-			virtual std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_Object> instantiate(const std::shared_ptr<uml::Class>& type) = 0;
-			virtual std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_SignalInstance> instantiate(const std::shared_ptr<uml::Signal>& type) = 0;
-			virtual void remove(const std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_Object>& value) = 0;
-			virtual std::shared_ptr<Bag<fUML::MDE4CPP_Extensions::FUML_Object>> retrieveExtent(const std::shared_ptr<uml::Classifier>& classifier) = 0;
+			virtual std::shared_ptr<uml::Element> instantiate(const std::shared_ptr<uml::Class>& type) = 0;
+			virtual std::shared_ptr<uml::Element> instantiate(const std::shared_ptr<uml::Signal>& type) = 0;
+			virtual void remove(const std::shared_ptr<uml::Element>& value) = 0;
+			virtual std::shared_ptr<Bag<uml::Element>> retrieveExtent(const std::shared_ptr<uml::Classifier>& classifier) = 0;
 
 			//*********************************
 			// Attribute Getters & Setters
@@ -97,7 +93,7 @@ namespace fUML::Semantics::Loci
 			//*********************************
 			virtual const std::shared_ptr<fUML::Semantics::Loci::Executor>& getExecutor() const = 0;
 			virtual void setExecutor(const std::shared_ptr<fUML::Semantics::Loci::Executor>&) = 0;
-			virtual const std::shared_ptr<Bag<fUML::MDE4CPP_Extensions::FUML_Object>>& getExtensionalValues() const = 0;
+			virtual const std::shared_ptr<Bag<uml::Element>>& getExtensionalValues() const = 0;
 			virtual const std::shared_ptr<fUML::Semantics::Loci::ExecutionFactory>& getFactory() const = 0;
 			virtual void setFactory(const std::shared_ptr<fUML::Semantics::Loci::ExecutionFactory>&) = 0;
 
@@ -126,7 +122,7 @@ namespace fUML::Semantics::Loci
 			// Reference Members
 			//*********************************
 			std::shared_ptr<fUML::Semantics::Loci::Executor> m_executor;
-			mutable std::shared_ptr<Bag<fUML::MDE4CPP_Extensions::FUML_Object>> m_extensionalValues;
+			mutable std::shared_ptr<Bag<uml::Element>> m_extensionalValues;
 			std::shared_ptr<fUML::Semantics::Loci::ExecutionFactory> m_factory;
 	};
 }

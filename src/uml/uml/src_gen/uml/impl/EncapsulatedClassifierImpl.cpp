@@ -217,23 +217,17 @@ std::shared_ptr<Bag<uml::Port>> EncapsulatedClassifierImpl::getOwnedPorts()
 std::shared_ptr<Subset<uml::Port, uml::Property /*Subset does not reference a union*/>> EncapsulatedClassifierImpl::getOwnedPort() const
 {
 	//generated from getterBody annotation
-	std::shared_ptr<SubsetUnion<uml::Property, uml::ConnectableElement, uml::NamedElement, uml::Property>> ownedAttribute = this->getOwnedAttribute();
+const std::shared_ptr<SubsetUnion<uml::Property, uml::ConnectableElement, uml::NamedElement, uml::Property>>& ownedAttributes = this->getOwnedAttribute();
 	std::shared_ptr<Subset<uml::Port, uml::Property>> ownedPort(new Subset<uml::Port, uml::Property>());
-	ownedPort->initSubset(ownedAttribute);
+	ownedPort->initSubset(ownedAttributes);
 
-	Bag<uml::Property>::iterator ownedAttributeIter = ownedAttribute->begin();
-	Bag<uml::Property>::iterator ownedAttributeEnd = ownedAttribute->end();
-
-	while (ownedAttributeIter != ownedAttributeEnd)
+	for(const std::shared_ptr<uml::Property>& ownedAttribute : *ownedAttributes)
 	{
-		std::shared_ptr<uml::Port> port = std::dynamic_pointer_cast<uml::Port>(*ownedAttributeIter);
-
-		if(port)
+		if(ownedAttribute->eClass()->_getID() == uml::umlPackage::PORT_CLASS)
 		{
+			std::shared_ptr<uml::Port> port = std::dynamic_pointer_cast<uml::Port>(ownedAttribute);
 			ownedPort->add(port);
 		}
-
-		ownedAttributeIter++;
 	}
 
 	return ownedPort;

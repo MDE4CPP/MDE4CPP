@@ -86,7 +86,6 @@ namespace fUML::MDE4CPP_Extensions
 			// Operations
 			//*********************************
 			virtual void _register(const std::shared_ptr<fUML::Semantics::CommonBehavior::EventAccepter>& accepter) = 0;
-			virtual void destroy() = 0;
 			virtual const std::shared_ptr<Bag<uml::Classifier>>& getTypes() const = 0;
 			virtual void send(const std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccurrence>& eventOccurrence) = 0;
 			virtual void startBehavior(const std::shared_ptr<uml::Class>& classifier, const std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>>& inputs) = 0;

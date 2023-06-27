@@ -111,7 +111,9 @@ void TextInputChannelImpl::instantiate()
 
 void TextInputChannelImpl::destroy()
 {	
-	fUML::MDE4CPP_Extensions::FUML_ObjectImpl::destroy();
+
+	//Erase properties
+	//Erase back reference to owner
 }
 
 //*********************************

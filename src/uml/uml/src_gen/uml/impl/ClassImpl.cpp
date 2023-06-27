@@ -293,13 +293,13 @@ std::shared_ptr<Bag<uml::Operation>> ClassImpl::getAllOperations()
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
 	std::shared_ptr<Bag<uml::Operation>> allOperations(new Bag<uml::Operation>());
-std::shared_ptr<Bag<uml::Operation>> ownedOperations = this->getOwnedOperation();
+const std::shared_ptr<Bag<uml::Operation>>& ownedOperations = this->getOwnedOperation();
 
 allOperations->insert(allOperations->end(), ownedOperations->begin(), ownedOperations->end());
 
-std::shared_ptr<Bag<uml::Classifier> > superTypes = this->getGeneral();
+std::shared_ptr<Bag<uml::Classifier>> superTypes = this->getGeneral();
 
-for (std::shared_ptr<Classifier> superType : *superTypes)	
+for (const std::shared_ptr<Classifier>& superType : *superTypes)	
 {	
 	std::shared_ptr<Bag<uml::Operation>> superTypeOperations = superType->getAllOperations();
 	allOperations->insert(allOperations->end(), superTypeOperations->begin(), superTypeOperations->end());

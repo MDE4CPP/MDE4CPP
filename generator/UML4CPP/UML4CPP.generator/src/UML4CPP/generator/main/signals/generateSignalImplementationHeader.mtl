@@ -1,7 +1,6 @@
 [comment encoding = UTF-8 /]
 [module generateSignalImplementationHeader('http://www.eclipse.org/uml2/5.0.0/UML')]
 
-[import UML4CPP::generator::main::model_execution::model_execution /]
 [import UML4CPP::generator::main::helpers::nameHelper /]
 [import UML4CPP::generator::main::helpers::generalHelper /]
 [import UML4CPP::generator::main::profiles::uml4CPPProfileHelper /]
@@ -72,12 +71,6 @@ virtual public [general.getClassifierName(aSignal, false, general.getNearestPack
 			// StructuralFeature Getter & Setter
 			//**************************************
 			[aSignal.generateeGetSetDel(true)/]
-
-			[if (isFUMLExecutable())]
-			// fUML-specific Operations
-			const std::shared_ptr<uml::Signal>& getType() const;
-
-			[/if]
 
 	};
 [if (not containingPackage.isIgnoreNamespace())]}[/if]

@@ -53,8 +53,8 @@ namespace fUML::Semantics::CommonBehavior
 			//*********************************
 			// Reference Getters & Setters
 			//*********************************
-			virtual const std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_SignalInstance>& getSignalInstance() const ;
-			virtual void setSignalInstance(const std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_SignalInstance>&) ;
+			virtual const std::shared_ptr<uml::Element>& getSignalInstance() const ;
+			virtual void setSignalInstance(const std::shared_ptr<uml::Element>&) ;
 			
 			//*********************************
 			// Union Reference Getters

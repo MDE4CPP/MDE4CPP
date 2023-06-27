@@ -55,7 +55,6 @@
 [query public metaModelIncludes(aPackage : Package) : Set(Package) = OrderedSet{
 								aPackage.getElementsBelongingToPackage()->filter(TypedElement)->reject(tE : TypedElement | tE.type.oclIsUndefined()).type.getNearestPackage(),
 								aPackage.getElementsBelongingToPackage()->filter(CallBehaviorAction).behavior.getNearestPackage(),
-								aPackage.getElementsBelongingToPackage()->filter(AcceptEventAction).trigger->reject(event.oclIsUndefined()).event.getNearestPackage(),
 								aPackage.getElementsBelongingToPackage()->filter(Element).getGeneratableAppliedStereotypes().getProfile(), 
 								aPackage.getElementsBelongingToPackage()->filter(InstanceValue).instance.getNearestPackage(), 
 								aPackage.getElementsBelongingToPackage()->filter(Property).association->reject(oclIsUndefined()).getNearestPackage(),
@@ -85,8 +84,7 @@
 								aPackage.getElementsBelongingToPackage()->filter(InstanceValue).instance.eClass(),
 								aPackage.getElementsBelongingToPackage()->filter(CallOperationAction)->reject(operation.oclIsUndefined()).operation.eClass(),
 								aPackage.getElementsBelongingToPackage()->filter(CallBehaviorAction)->reject(behavior.oclIsUndefined()).behavior.eClass(),
-								aPackage.getElementsBelongingToPackage()->filter(DecisionNode)->reject(decisionInput.oclIsUndefined()).decisionInput.eClass(),
-								aPackage.getElementsBelongingToPackage()->filter(AcceptEventAction).trigger->reject(event.oclIsUndefined()).event.eClass()
+								aPackage.getElementsBelongingToPackage()->filter(DecisionNode)->reject(decisionInput.oclIsUndefined()).decisionInput.eClass()
 							}->flatten()->sortedBy(name)/]
 
 [template public generatePackageImplSource(aPackage : Package) {packageName : String = aPackage.name.concat('PackageImpl');}]

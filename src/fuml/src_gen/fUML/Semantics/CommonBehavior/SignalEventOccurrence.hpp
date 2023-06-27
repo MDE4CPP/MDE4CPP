@@ -36,10 +36,6 @@ namespace fUML::Semantics::CommonBehavior
 {
 	class ParameterValue;
 }
-namespace fUML::MDE4CPP_Extensions 
-{
-	class FUML_SignalInstance;
-}
 namespace uml 
 {
 	class Element;
@@ -87,8 +83,8 @@ namespace fUML::Semantics::CommonBehavior
 			//*********************************
 			// Reference Getters & Setters
 			//*********************************
-			virtual const std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_SignalInstance>& getSignalInstance() const = 0;
-			virtual void setSignalInstance(const std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_SignalInstance>&) = 0;
+			virtual const std::shared_ptr<uml::Element>& getSignalInstance() const = 0;
+			virtual void setSignalInstance(const std::shared_ptr<uml::Element>&) = 0;
 
 			//*********************************
 			// Union Reference Getters
@@ -114,7 +110,7 @@ namespace fUML::Semantics::CommonBehavior
 			//*********************************
 			// Reference Members
 			//*********************************
-			std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_SignalInstance> m_signalInstance;
+			std::shared_ptr<uml::Element> m_signalInstance;
 	};
 }
 #endif /* end of include guard: FUML_SEMANTICS_COMMONBEHAVIOR_SIGNALEVENTOCCURRENCE_HPP */
