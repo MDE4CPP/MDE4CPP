@@ -36,6 +36,12 @@ namespace fUML
 			class ParameterValue;
 		}
 	}
+
+	namespace MDE4CPP_Extensions
+	{
+		class FUML_Object;
+		class FUML_SignalInstance;
+	}
 }
 
 class UMLExecutionModelPlugin: public MDE4CPPPlugin
@@ -45,8 +51,8 @@ class UMLExecutionModelPlugin: public MDE4CPPPlugin
 
 		virtual std::shared_ptr<Any> executeActivity(std::shared_ptr<uml::Activity>, std::shared_ptr<Bag<Any>>, std::shared_ptr<uml::Element> element = nullptr) = 0;
 		virtual std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> executeBehavior(std::shared_ptr<uml::Behavior>, std::shared_ptr<uml::Element>, std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>>) = 0;
-		virtual std::shared_ptr<uml::Element> instantiateClass(std::shared_ptr<uml::Class>) = 0;
-		virtual std::shared_ptr<uml::Element> instantiateSignal(std::shared_ptr<uml::Signal>) = 0;
+		virtual std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_Object> instantiateClass(std::shared_ptr<uml::Class>) = 0;
+		virtual std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_SignalInstance> instantiateSignal(std::shared_ptr<uml::Signal>) = 0;
 		virtual std::shared_ptr<Any> evaluateSpecification(std::shared_ptr<uml::ValueSpecification>) = 0;
 };
 

@@ -101,11 +101,9 @@ void DeriveImpl::instantiate()
 void DeriveImpl::destroy()
 {	
 
-	//Erase properties
-	//deleting property base_Abstraction
+	//Erase properties	//deleting property base_Abstraction
 	m_base_Abstraction.reset();
 	
-	//Erase back reference to owner
 }
 
 //*********************************

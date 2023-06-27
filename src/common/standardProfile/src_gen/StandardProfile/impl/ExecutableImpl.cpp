@@ -102,11 +102,9 @@ void ExecutableImpl::instantiate()
 void ExecutableImpl::destroy()
 {	
 
-	//Erase properties
-	//deleting property base_Artifact
+	//Erase properties	//deleting property base_Artifact
 	m_base_Artifact.reset();
 	
-	//Erase back reference to owner
 }
 
 //*********************************

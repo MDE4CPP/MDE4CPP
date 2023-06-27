@@ -44,8 +44,8 @@
 #include "fUML/Semantics/Activities/ActivityNodeActivation.hpp"
 #include "fUML/Semantics/Activities/Token.hpp"
 //Factories and Package includes
-#include "fUML/Semantics/SemanticsPackage.hpp"
 #include "fUML/fUMLPackage.hpp"
+#include "fUML/Semantics/SemanticsPackage.hpp"
 #include "fUML/Semantics/Activities/ActivitiesPackage.hpp"
 
 using namespace fUML::Semantics::Activities;
@@ -367,11 +367,11 @@ std::shared_ptr<Any> ForkedTokenImpl::eGet(int featureID, bool resolve, bool cor
 	switch(featureID)
 	{
 		case fUML::Semantics::Activities::ActivitiesPackage::FORKEDTOKEN_ATTRIBUTE_BASETOKEN:
-			return eAny(getBaseToken(),fUML::Semantics::Activities::ActivitiesPackage::TOKEN_CLASS,false); //592
+			return eAny(getBaseToken(),fUML::Semantics::Activities::ActivitiesPackage::TOKEN_CLASS,false); //602
 		case fUML::Semantics::Activities::ActivitiesPackage::FORKEDTOKEN_ATTRIBUTE_BASETOKENISWITHDRAWN:
-			return eAny(isBaseTokenIsWithdrawn(),ecore::ecorePackage::EBOOLEAN_CLASS,false); //594
+			return eAny(isBaseTokenIsWithdrawn(),ecore::ecorePackage::EBOOLEAN_CLASS,false); //604
 		case fUML::Semantics::Activities::ActivitiesPackage::FORKEDTOKEN_ATTRIBUTE_REMAININGOFFERSCOUNT:
-			return eAny(getRemainingOffersCount(),ecore::ecorePackage::EINT_CLASS,false); //593
+			return eAny(getRemainingOffersCount(),ecore::ecorePackage::EINT_CLASS,false); //603
 	}
 	return TokenImpl::eGet(featureID, resolve, coreType);
 }
@@ -381,11 +381,11 @@ bool ForkedTokenImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case fUML::Semantics::Activities::ActivitiesPackage::FORKEDTOKEN_ATTRIBUTE_BASETOKEN:
-			return getBaseToken() != nullptr; //592
+			return getBaseToken() != nullptr; //602
 		case fUML::Semantics::Activities::ActivitiesPackage::FORKEDTOKEN_ATTRIBUTE_BASETOKENISWITHDRAWN:
-			return isBaseTokenIsWithdrawn() != false; //594
+			return isBaseTokenIsWithdrawn() != false; //604
 		case fUML::Semantics::Activities::ActivitiesPackage::FORKEDTOKEN_ATTRIBUTE_REMAININGOFFERSCOUNT:
-			return getRemainingOffersCount() != 0; //593
+			return getRemainingOffersCount() != 0; //603
 	}
 	return TokenImpl::internalEIsSet(featureID);
 }
@@ -405,7 +405,7 @@ bool ForkedTokenImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 					std::shared_ptr<fUML::Semantics::Activities::Token> _baseToken = std::dynamic_pointer_cast<fUML::Semantics::Activities::Token>(eObject);
 					if(_baseToken)
 					{
-						setBaseToken(_baseToken); //592
+						setBaseToken(_baseToken); //602
 					}
 					else
 					{
@@ -430,7 +430,7 @@ bool ForkedTokenImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 			try
 			{
 				bool _baseTokenIsWithdrawn = newValue->get<bool>();
-				setBaseTokenIsWithdrawn(_baseTokenIsWithdrawn); //594
+				setBaseTokenIsWithdrawn(_baseTokenIsWithdrawn); //604
 			}
 			catch(...)
 			{
@@ -444,7 +444,7 @@ bool ForkedTokenImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 			try
 			{
 				int _remainingOffersCount = newValue->get<int>();
-				setRemainingOffersCount(_remainingOffersCount); //593
+				setRemainingOffersCount(_remainingOffersCount); //603
 			}
 			catch(...)
 			{

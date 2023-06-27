@@ -134,11 +134,7 @@ virtual public [sClass.getClassifierName(aClass, false, sClass.getNearestPackage
 			[for (anOpaqueBehavior : OpaqueBehavior | aClass.collectOpaqueBehaviorsContexedByClass()->sortedBy(name)) before('\t\t\t//Methods defined by OpaqueBehaviors\n') after('\n')]
 			[anOpaqueBehavior.generateMethodDeclaration(false)/]
 			[/for]
-			[if (isFUMLExecutable())]
-			// fUML-specific Operations
-			const std::shared_ptr<Bag<uml::Classifier>>& getTypes() const = 0;
 
-			[/if]
 		protected:
 			//*********************************
 			// Members

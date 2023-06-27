@@ -101,11 +101,9 @@ void MainBehaviorImpl::instantiate()
 void MainBehaviorImpl::destroy()
 {	
 
-	//Erase properties
-	//deleting property base_Behavior
+	//Erase properties	//deleting property base_Behavior
 	m_base_Behavior.reset();
 	
-	//Erase back reference to owner
 }
 
 //*********************************

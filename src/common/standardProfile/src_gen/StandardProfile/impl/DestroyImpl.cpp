@@ -101,11 +101,9 @@ void DestroyImpl::instantiate()
 void DestroyImpl::destroy()
 {	
 
-	//Erase properties
-	//deleting property base_BehavioralFeature
+	//Erase properties	//deleting property base_BehavioralFeature
 	m_base_BehavioralFeature.reset();
 	
-	//Erase back reference to owner
 }
 
 //*********************************

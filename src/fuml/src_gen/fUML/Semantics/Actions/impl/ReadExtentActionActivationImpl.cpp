@@ -37,14 +37,15 @@
 #include "uml/Classifier.hpp"
 #include "uml/UMLAny.hpp"
 #include "fUML/Semantics/Loci/Locus.hpp"
+#include "fUML/MDE4CPP_Extensions/FUML_Object.hpp"
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "uml/umlFactory.hpp"
 #include "fUML/Semantics/Actions/ActionsFactory.hpp"
 #include "fUML/Semantics/Activities/ActivitiesFactory.hpp"
+#include "uml/umlFactory.hpp"
 #include "uml/Action.hpp"
 #include "fUML/Semantics/Actions/ActionActivation.hpp"
 #include "fUML/Semantics/Activities/ActivityEdgeInstance.hpp"
@@ -56,8 +57,8 @@
 #include "uml/ReadExtentAction.hpp"
 #include "fUML/Semantics/Activities/Token.hpp"
 //Factories and Package includes
-#include "fUML/Semantics/SemanticsPackage.hpp"
 #include "fUML/fUMLPackage.hpp"
+#include "fUML/Semantics/SemanticsPackage.hpp"
 #include "fUML/Semantics/Actions/ActionsPackage.hpp"
 #include "fUML/Semantics/Activities/ActivitiesPackage.hpp"
 #include "uml/umlPackage.hpp"
@@ -140,12 +141,12 @@ void ReadExtentActionActivationImpl::doAction()
 
 std::shared_ptr<uml::ReadExtentAction> action = this->getReadExtentAction();
 
-std::shared_ptr<Bag<uml::Element>> objects = this->getExecutionLocus()->retrieveExtent(action->getClassifier());
+std::shared_ptr<Bag<fUML::MDE4CPP_Extensions::FUML_Object>> objects = this->getExecutionLocus()->retrieveExtent(action->getClassifier());
 std::shared_ptr<Bag<Any>> values(new Bag<Any>());
 
 const unsigned long classifierID = action->getClassifier()->_getID();
 
-for(std::shared_ptr<uml::Element> object : *objects)
+for(const std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_Object>& object : *objects)
 {
 	values->add(eUMLAny(object, classifierID));
 }
@@ -331,7 +332,7 @@ std::shared_ptr<Any> ReadExtentActionActivationImpl::eGet(int featureID, bool re
 	switch(featureID)
 	{
 		case fUML::Semantics::Actions::ActionsPackage::READEXTENTACTIONACTIVATION_ATTRIBUTE_READEXTENTACTION:
-			return eAny(getReadExtentAction(),uml::umlPackage::READEXTENTACTION_CLASS,false); //9011
+			return eAny(getReadExtentAction(),uml::umlPackage::READEXTENTACTION_CLASS,false); //9111
 	}
 	return ActionActivationImpl::eGet(featureID, resolve, coreType);
 }
@@ -341,7 +342,7 @@ bool ReadExtentActionActivationImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case fUML::Semantics::Actions::ActionsPackage::READEXTENTACTIONACTIVATION_ATTRIBUTE_READEXTENTACTION:
-			return getReadExtentAction() != nullptr; //9011
+			return getReadExtentAction() != nullptr; //9111
 	}
 	return ActionActivationImpl::internalEIsSet(featureID);
 }
@@ -361,7 +362,7 @@ bool ReadExtentActionActivationImpl::eSet(int featureID,  const std::shared_ptr<
 					std::shared_ptr<uml::ReadExtentAction> _readExtentAction = std::dynamic_pointer_cast<uml::ReadExtentAction>(eObject);
 					if(_readExtentAction)
 					{
-						setReadExtentAction(_readExtentAction); //9011
+						setReadExtentAction(_readExtentAction); //9111
 					}
 					else
 					{

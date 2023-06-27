@@ -101,11 +101,9 @@ void DoNotGenerateImpl::instantiate()
 void DoNotGenerateImpl::destroy()
 {	
 
-	//Erase properties
-	//deleting property base_Element
+	//Erase properties	//deleting property base_Element
 	m_base_Element.reset();
 	
-	//Erase back reference to owner
 }
 
 //*********************************

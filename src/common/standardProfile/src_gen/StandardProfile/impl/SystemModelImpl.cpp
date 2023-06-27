@@ -101,11 +101,9 @@ void SystemModelImpl::instantiate()
 void SystemModelImpl::destroy()
 {	
 
-	//Erase properties
-	//deleting property base_Model
+	//Erase properties	//deleting property base_Model
 	m_base_Model.reset();
 	
-	//Erase back reference to owner
 }
 
 //*********************************

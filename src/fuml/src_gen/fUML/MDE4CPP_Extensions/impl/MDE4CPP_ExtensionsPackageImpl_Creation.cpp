@@ -7,13 +7,13 @@
 
 #include "abstractDataTypes/SubsetUnion.hpp"
 //metametamodel classes
-#include "ecore/EParameter.hpp"
 #include "ecore/EStringToStringMapEntry.hpp"
-#include "ecore/EGenericType.hpp"
-#include "ecore/EReference.hpp"
-#include "ecore/EOperation.hpp"
 #include "ecore/EAnnotation.hpp"
+#include "ecore/EReference.hpp"
+#include "ecore/EGenericType.hpp"
+#include "ecore/EOperation.hpp"
 #include "ecore/EClass.hpp"
+#include "ecore/EParameter.hpp"
 
 //depending model packages
 #include "ecore/ecorePackage.hpp"
@@ -34,6 +34,7 @@ void MDE4CPP_ExtensionsPackageImpl::createPackageContents(std::shared_ptr<ecore:
 	std::shared_ptr<ecore::ecoreFactory> factory = ecore::ecoreFactory::eInstance();
 
 	createFUML_ObjectContent(package, factory);
+	createFUML_SignalInstanceContent(package, factory);
 
 	createPackageEDataTypes(package, factory);
 
@@ -47,10 +48,20 @@ void MDE4CPP_ExtensionsPackageImpl::createFUML_ObjectContent(std::shared_ptr<eco
 	m_fUML_Object_Attribute_objectActivation = factory->createEReference_as_eReferences_in_EClass(m_fUML_Object_Class, FUML_OBJECT_ATTRIBUTE_OBJECTACTIVATION);
 	
 	m_fUML_Object_Operation__register_EventAccepter = factory->createEOperation_as_eOperations_in_EClass(m_fUML_Object_Class, FUML_OBJECT_OPERATION__REGISTER_EVENTACCEPTER);
+	m_fUML_Object_Operation_destroy = factory->createEOperation_as_eOperations_in_EClass(m_fUML_Object_Class, FUML_OBJECT_OPERATION_DESTROY);
 	m_fUML_Object_Operation_getTypes = factory->createEOperation_as_eOperations_in_EClass(m_fUML_Object_Class, FUML_OBJECT_OPERATION_GETTYPES);
 	m_fUML_Object_Operation_send_EventOccurrence = factory->createEOperation_as_eOperations_in_EClass(m_fUML_Object_Class, FUML_OBJECT_OPERATION_SEND_EVENTOCCURRENCE);
 	m_fUML_Object_Operation_startBehavior_Class_ParameterValue = factory->createEOperation_as_eOperations_in_EClass(m_fUML_Object_Class, FUML_OBJECT_OPERATION_STARTBEHAVIOR_CLASS_PARAMETERVALUE);
 	m_fUML_Object_Operation_unregister_EventAccepter = factory->createEOperation_as_eOperations_in_EClass(m_fUML_Object_Class, FUML_OBJECT_OPERATION_UNREGISTER_EVENTACCEPTER);
+	
+}
+
+void MDE4CPP_ExtensionsPackageImpl::createFUML_SignalInstanceContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory)
+{
+	m_fUML_SignalInstance_Class = factory->createEClass_as_eClassifiers_in_EPackage(package, FUML_SIGNALINSTANCE_CLASS);
+	
+	
+	m_fUML_SignalInstance_Operation_getType = factory->createEOperation_as_eOperations_in_EClass(m_fUML_SignalInstance_Class, FUML_SIGNALINSTANCE_OPERATION_GETTYPE);
 	
 }
 

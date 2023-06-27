@@ -4,13 +4,13 @@
 
 #include "abstractDataTypes/SubsetUnion.hpp"
 //metametamodel classes
-#include "ecore/EParameter.hpp"
 #include "ecore/EStringToStringMapEntry.hpp"
-#include "ecore/EGenericType.hpp"
-#include "ecore/EReference.hpp"
-#include "ecore/EOperation.hpp"
 #include "ecore/EAnnotation.hpp"
+#include "ecore/EReference.hpp"
+#include "ecore/EGenericType.hpp"
+#include "ecore/EOperation.hpp"
 #include "ecore/EClass.hpp"
+#include "ecore/EParameter.hpp"
 
 // metametamodel factory
 #include "ecore/ecoreFactory.hpp"
@@ -41,10 +41,12 @@ void MDE4CPP_ExtensionsPackageImpl::initializePackageContents()
 	
 	// Add supertypes to classes
 	m_fUML_Object_Class->getESuperTypes()->push_back(uml::umlPackage::eInstance()->getElement_Class());
+	m_fUML_SignalInstance_Class->getESuperTypes()->push_back(uml::umlPackage::eInstance()->getElement_Class());
 	
 
  	// Initialize classes and features; add operations and parameters
 	initializeFUML_ObjectContent();
+	initializeFUML_SignalInstanceContent();
 
 	initializePackageEDataTypes();
 
@@ -125,6 +127,22 @@ void MDE4CPP_ExtensionsPackageImpl::initializeFUML_ObjectContent()
 		parameter->setUnique(true);
 		parameter->setOrdered(true);
 	}
+	
+	m_fUML_Object_Operation_destroy->setName("destroy");
+	{ 	std::shared_ptr<ecore::ecoreFactory> factory = ecore::ecoreFactory::eInstance();
+		std::shared_ptr<ecore::EClass> unknownClass = factory ->createEClass(-1);
+	   	unknownClass->setName("invalid");
+		unknownClass->setAbstract(true);
+		unknownClass->setInterface(true);
+		m_fUML_Object_Operation_destroy->setEType(unknownClass);
+	}
+	m_fUML_Object_Operation_destroy->setLowerBound(1);
+	m_fUML_Object_Operation_destroy->setUpperBound(1);
+	m_fUML_Object_Operation_destroy->setUnique(true);
+	m_fUML_Object_Operation_destroy->setOrdered(false);
+	
+	m_fUML_Object_Operation_destroy->_setID(FUML_OBJECT_OPERATION_DESTROY);
+	
 	
 	m_fUML_Object_Operation_getTypes->setName("getTypes");
 	m_fUML_Object_Operation_getTypes->setEType(uml::umlPackage::eInstance()->getClassifier_Class());
@@ -220,6 +238,38 @@ void MDE4CPP_ExtensionsPackageImpl::initializeFUML_ObjectContent()
 		parameter->setUnique(true);
 		parameter->setOrdered(true);
 	}
+	
+	
+}
+
+void MDE4CPP_ExtensionsPackageImpl::initializeFUML_SignalInstanceContent()
+{
+	m_fUML_SignalInstance_Class->setName("FUML_SignalInstance");
+	m_fUML_SignalInstance_Class->setAbstract(false);
+	m_fUML_SignalInstance_Class->setInterface(false);
+	
+	m_fUML_SignalInstance_Class->_setID(FUML_SIGNALINSTANCE_CLASS);
+	
+	/*
+	 * EAttributes
+	 */
+	
+	/*
+	 * EReferences
+	 */
+	
+	/*
+	 * EOperations
+	 */
+	m_fUML_SignalInstance_Operation_getType->setName("getType");
+	m_fUML_SignalInstance_Operation_getType->setEType(uml::umlPackage::eInstance()->getSignal_Class());
+	m_fUML_SignalInstance_Operation_getType->setLowerBound(1);
+	m_fUML_SignalInstance_Operation_getType->setUpperBound(1);
+	m_fUML_SignalInstance_Operation_getType->setUnique(true);
+	m_fUML_SignalInstance_Operation_getType->setOrdered(true);
+	
+	m_fUML_SignalInstance_Operation_getType->_setID(FUML_SIGNALINSTANCE_OPERATION_GETTYPE);
+	
 	
 	
 }

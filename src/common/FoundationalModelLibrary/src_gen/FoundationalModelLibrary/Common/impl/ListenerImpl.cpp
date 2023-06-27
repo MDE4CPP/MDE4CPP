@@ -88,9 +88,7 @@ void ListenerImpl::instantiate()
 
 void ListenerImpl::destroy()
 {	
-
-	//Erase properties
-	//Erase back reference to owner
+	fUML::MDE4CPP_Extensions::FUML_ObjectImpl::destroy();
 }
 
 //*********************************
@@ -239,5 +237,5 @@ std::shared_ptr<Listener> ListenerImpl::getThisListenerPtr()
 void ListenerImpl::setThisListenerPtr(std::weak_ptr<Listener> thisListenerPtr)
 {
 	m_thisListenerPtr = thisListenerPtr;
-	setThisElementPtr(thisListenerPtr);
+	setThisFUML_ObjectPtr(thisListenerPtr);
 }

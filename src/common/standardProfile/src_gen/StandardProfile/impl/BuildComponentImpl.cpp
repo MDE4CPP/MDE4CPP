@@ -101,11 +101,9 @@ void BuildComponentImpl::instantiate()
 void BuildComponentImpl::destroy()
 {	
 
-	//Erase properties
-	//deleting property base_Component
+	//Erase properties	//deleting property base_Component
 	m_base_Component.reset();
 	
-	//Erase back reference to owner
 }
 
 //*********************************

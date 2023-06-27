@@ -4,13 +4,13 @@
 
 #include "abstractDataTypes/SubsetUnion.hpp"
 //metametamodel classes
-#include "ecore/EParameter.hpp"
 #include "ecore/EStringToStringMapEntry.hpp"
-#include "ecore/EGenericType.hpp"
-#include "ecore/EReference.hpp"
-#include "ecore/EOperation.hpp"
 #include "ecore/EAnnotation.hpp"
+#include "ecore/EReference.hpp"
+#include "ecore/EGenericType.hpp"
+#include "ecore/EOperation.hpp"
 #include "ecore/EClass.hpp"
+#include "ecore/EParameter.hpp"
 
 //metamodel factory
 #include "fUML/MDE4CPP_Extensions/MDE4CPP_ExtensionsFactory.hpp"
@@ -93,6 +93,10 @@ const std::shared_ptr<ecore::EOperation>& fUML::MDE4CPP_Extensions::MDE4CPP_Exte
 {
 	return m_fUML_Object_Operation__register_EventAccepter;
 }
+const std::shared_ptr<ecore::EOperation>& fUML::MDE4CPP_Extensions::MDE4CPP_ExtensionsPackageImpl::getFUML_Object_Operation_destroy() const
+{
+	return m_fUML_Object_Operation_destroy;
+}
 const std::shared_ptr<ecore::EOperation>& fUML::MDE4CPP_Extensions::MDE4CPP_ExtensionsPackageImpl::getFUML_Object_Operation_getTypes() const
 {
 	return m_fUML_Object_Operation_getTypes;
@@ -111,4 +115,19 @@ const std::shared_ptr<ecore::EOperation>& fUML::MDE4CPP_Extensions::MDE4CPP_Exte
 }
 
 // End Class FUML_Object
+
+// Begin Class FUML_SignalInstance
+const std::shared_ptr<ecore::EClass>& fUML::MDE4CPP_Extensions::MDE4CPP_ExtensionsPackageImpl::getFUML_SignalInstance_Class() const
+{
+	return m_fUML_SignalInstance_Class;
+}
+
+
+
+const std::shared_ptr<ecore::EOperation>& fUML::MDE4CPP_Extensions::MDE4CPP_ExtensionsPackageImpl::getFUML_SignalInstance_Operation_getType() const
+{
+	return m_fUML_SignalInstance_Operation_getType;
+}
+
+// End Class FUML_SignalInstance
 

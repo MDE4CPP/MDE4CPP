@@ -101,11 +101,9 @@ void InstantiateImpl::instantiate()
 void InstantiateImpl::destroy()
 {	
 
-	//Erase properties
-	//deleting property base_Usage
+	//Erase properties	//deleting property base_Usage
 	m_base_Usage.reset();
 	
-	//Erase back reference to owner
 }
 
 //*********************************

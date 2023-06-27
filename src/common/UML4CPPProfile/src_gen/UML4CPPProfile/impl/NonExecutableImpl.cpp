@@ -101,11 +101,9 @@ void NonExecutableImpl::instantiate()
 void NonExecutableImpl::destroy()
 {	
 
-	//Erase properties
-	//deleting property base_NamedElement
+	//Erase properties	//deleting property base_NamedElement
 	m_base_NamedElement.reset();
 	
-	//Erase back reference to owner
 }
 
 //*********************************

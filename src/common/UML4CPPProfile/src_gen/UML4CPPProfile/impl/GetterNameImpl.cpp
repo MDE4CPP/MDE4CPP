@@ -106,12 +106,10 @@ void GetterNameImpl::instantiate()
 void GetterNameImpl::destroy()
 {	
 
-	//Erase properties
-	//deleting property base_Property
+	//Erase properties	//deleting property base_Property
 	m_base_Property.reset();
 	
 	
-	//Erase back reference to owner
 }
 
 //*********************************

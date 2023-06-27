@@ -40,13 +40,14 @@
 //#include "fUML/Semantics/StructuredClassifiers/Reference.hpp"
 #include "fUML/Semantics/StructuredClassifiers/StructuredClassifiersFactory.hpp"
 #include "fUML/Semantics/Loci/Locus.hpp"
+#include "fUML/MDE4CPP_Extensions/FUML_Object.hpp"
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "fUML/Semantics/Actions/ActionsFactory.hpp"
 #include "uml/umlFactory.hpp"
+#include "fUML/Semantics/Actions/ActionsFactory.hpp"
 #include "fUML/Semantics/Activities/ActivitiesFactory.hpp"
 #include "uml/Action.hpp"
 #include "fUML/Semantics/Actions/ActionActivation.hpp"
@@ -59,8 +60,8 @@
 #include "fUML/Semantics/Actions/PinActivation.hpp"
 #include "fUML/Semantics/Activities/Token.hpp"
 //Factories and Package includes
-#include "fUML/Semantics/SemanticsPackage.hpp"
 #include "fUML/fUMLPackage.hpp"
+#include "fUML/Semantics/SemanticsPackage.hpp"
 #include "fUML/Semantics/Actions/ActionsPackage.hpp"
 #include "fUML/Semantics/Activities/ActivitiesPackage.hpp"
 #include "uml/umlPackage.hpp"
@@ -141,7 +142,7 @@ void CreateObjectActionActivationImpl::doAction()
 	// Create an object with the given classifier (which must be a class) as its type, at the same locus as the action activation.
 // Place a reference to the object on the result pin of the action.
 
-std::shared_ptr<uml::CreateObjectAction> action = this->getCreateObjectAction();
+const std::shared_ptr<uml::CreateObjectAction>& action = this->getCreateObjectAction();
 
 if(action)
 {
@@ -153,7 +154,6 @@ if(action)
 
 		if(newObject)
 		{
-			this->getExecutionLocus()->add(newObject);	//TODO: This should happen within object's destroy method as soon as all generated C++ classes reference fUML::Semantics::Loci::Locus
 			std::shared_ptr<Any> value = eUMLAny(newObject, newObject->getMetaElementID());
 			this->putToken(action->getResult(), value);
 		}

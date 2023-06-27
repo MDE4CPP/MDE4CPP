@@ -101,11 +101,9 @@ void UtilityImpl::instantiate()
 void UtilityImpl::destroy()
 {	
 
-	//Erase properties
-	//deleting property base_Class
+	//Erase properties	//deleting property base_Class
 	m_base_Class.reset();
 	
-	//Erase back reference to owner
 }
 
 //*********************************

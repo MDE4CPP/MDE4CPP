@@ -89,9 +89,7 @@ void InputChannelImpl::instantiate()
 
 void InputChannelImpl::destroy()
 {	
-
-	//Erase properties
-	//Erase back reference to owner
+	fUML::MDE4CPP_Extensions::FUML_ObjectImpl::destroy();
 }
 
 //*********************************

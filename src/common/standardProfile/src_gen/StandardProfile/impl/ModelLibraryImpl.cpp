@@ -101,11 +101,9 @@ void ModelLibraryImpl::instantiate()
 void ModelLibraryImpl::destroy()
 {	
 
-	//Erase properties
-	//deleting property base_Package
+	//Erase properties	//deleting property base_Package
 	m_base_Package.reset();
 	
-	//Erase back reference to owner
 }
 
 //*********************************

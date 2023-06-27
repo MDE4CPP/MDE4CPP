@@ -105,14 +105,12 @@ void CreateImpl::instantiate()
 void CreateImpl::destroy()
 {	
 
-	//Erase properties
-	//deleting property base_BehavioralFeature
+	//Erase properties	//deleting property base_BehavioralFeature
 	m_base_BehavioralFeature.reset();
 	
 	//deleting property base_Usage
 	m_base_Usage.reset();
 	
-	//Erase back reference to owner
 }
 
 //*********************************

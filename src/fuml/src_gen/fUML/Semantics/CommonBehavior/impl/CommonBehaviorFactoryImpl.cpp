@@ -18,8 +18,6 @@
 #include "fUML/Semantics/Loci/Locus.hpp"
 #include "fUML/MDE4CPP_Extensions/MDE4CPP_ExtensionsPackage.hpp"
 #include "fUML/MDE4CPP_Extensions/FUML_Object.hpp"
-#include "uml/umlPackage.hpp"
-#include "uml/DirectedRelationship.hpp"
 
 
 using namespace fUML::Semantics::CommonBehavior;

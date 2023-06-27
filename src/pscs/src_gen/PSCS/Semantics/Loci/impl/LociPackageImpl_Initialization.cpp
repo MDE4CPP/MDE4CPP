@@ -4,14 +4,14 @@
 
 #include "abstractDataTypes/SubsetUnion.hpp"
 //metametamodel classes
+#include "ecore/EStringToStringMapEntry.hpp"
+#include "ecore/EAnnotation.hpp"
+#include "ecore/EReference.hpp"
+#include "ecore/EGenericType.hpp"
+#include "ecore/EOperation.hpp"
+#include "ecore/EClass.hpp"
 #include "ecore/EParameter.hpp"
 #include "ecore/EDataType.hpp"
-#include "ecore/EStringToStringMapEntry.hpp"
-#include "ecore/EGenericType.hpp"
-#include "ecore/EReference.hpp"
-#include "ecore/EOperation.hpp"
-#include "ecore/EAnnotation.hpp"
-#include "ecore/EClass.hpp"
 
 // metametamodel factory
 #include "ecore/ecoreFactory.hpp"
@@ -20,6 +20,7 @@
 
 #include "fUML/Semantics/CommonBehavior/CommonBehaviorPackage.hpp"
 #include "fUML/Semantics/Loci/LociPackage.hpp"
+#include "fUML/MDE4CPP_Extensions/MDE4CPP_ExtensionsPackage.hpp"
 #include "ecore/ecorePackage.hpp"
 #include "fUML/fUMLPackage.hpp"
 #include "uml/umlPackage.hpp"
@@ -241,7 +242,7 @@ void LociPackageImpl::initializeCS_LocusContent()
 	 * EOperations
 	 */
 	m_cS_Locus_Operation_instantiate_Class->setName("instantiate");
-	m_cS_Locus_Operation_instantiate_Class->setEType(uml::umlPackage::eInstance()->getElement_Class());
+	m_cS_Locus_Operation_instantiate_Class->setEType(fUML::MDE4CPP_Extensions::MDE4CPP_ExtensionsPackage::eInstance()->getFUML_Object_Class());
 	m_cS_Locus_Operation_instantiate_Class->setLowerBound(1);
 	m_cS_Locus_Operation_instantiate_Class->setUpperBound(1);
 	m_cS_Locus_Operation_instantiate_Class->setUnique(true);

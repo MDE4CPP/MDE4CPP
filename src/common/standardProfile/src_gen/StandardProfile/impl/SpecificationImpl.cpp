@@ -101,11 +101,9 @@ void SpecificationImpl::instantiate()
 void SpecificationImpl::destroy()
 {	
 
-	//Erase properties
-	//deleting property base_Classifier
+	//Erase properties	//deleting property base_Classifier
 	m_base_Classifier.reset();
 	
-	//Erase back reference to owner
 }
 
 //*********************************
