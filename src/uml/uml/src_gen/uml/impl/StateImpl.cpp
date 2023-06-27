@@ -956,7 +956,7 @@ bool StateImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 	
 					if(eObjectList)
 					{
-						const std::shared_ptr<Bag<uml::ConnectionPointReference>>& _connection = getConnection();
+						std::shared_ptr<Bag<uml::ConnectionPointReference>> _connection = getConnection();
 	
 						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{
@@ -1001,7 +1001,7 @@ bool StateImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 	
 					if(eObjectList)
 					{
-						const std::shared_ptr<Bag<uml::Pseudostate>>& _connectionPoint = getConnectionPoint();
+						std::shared_ptr<Bag<uml::Pseudostate>> _connectionPoint = getConnectionPoint();
 	
 						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{
@@ -1046,7 +1046,7 @@ bool StateImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 	
 					if(eObjectList)
 					{
-						const std::shared_ptr<Bag<uml::Trigger>>& _deferrableTrigger = getDeferrableTrigger();
+						std::shared_ptr<Bag<uml::Trigger>> _deferrableTrigger = getDeferrableTrigger();
 	
 						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{
@@ -1215,7 +1215,7 @@ bool StateImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 	
 					if(eObjectList)
 					{
-						const std::shared_ptr<Bag<uml::Region>>& _region = getRegion();
+						std::shared_ptr<Bag<uml::Region>> _region = getRegion();
 	
 						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{

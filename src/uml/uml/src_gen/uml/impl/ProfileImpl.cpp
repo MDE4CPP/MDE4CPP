@@ -420,7 +420,7 @@ void ProfileImpl::resolveReferences(const int featureID, std::vector<std::shared
 	{
 		case uml::umlPackage::PROFILE_ATTRIBUTE_METACLASSREFERENCE:
 		{
-			const std::shared_ptr<Subset<uml::ElementImport, uml::ElementImport /*Subset does not reference a union*/>>& _metaclassReference = getMetaclassReference();
+			std::shared_ptr<Subset<uml::ElementImport, uml::ElementImport /*Subset does not reference a union*/>> _metaclassReference = getMetaclassReference();
 			for(std::shared_ptr<ecore::EObject> ref : references)
 			{
 				std::shared_ptr<uml::ElementImport>  _r = std::dynamic_pointer_cast<uml::ElementImport>(ref);
@@ -434,7 +434,7 @@ void ProfileImpl::resolveReferences(const int featureID, std::vector<std::shared
 
 		case uml::umlPackage::PROFILE_ATTRIBUTE_METAMODELREFERENCE:
 		{
-			const std::shared_ptr<Subset<uml::PackageImport, uml::PackageImport /*Subset does not reference a union*/>>& _metamodelReference = getMetamodelReference();
+			std::shared_ptr<Subset<uml::PackageImport, uml::PackageImport /*Subset does not reference a union*/>> _metamodelReference = getMetamodelReference();
 			for(std::shared_ptr<ecore::EObject> ref : references)
 			{
 				std::shared_ptr<uml::PackageImport>  _r = std::dynamic_pointer_cast<uml::PackageImport>(ref);
@@ -531,7 +531,7 @@ bool ProfileImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 	
 					if(eObjectList)
 					{
-						const std::shared_ptr<Bag<uml::ElementImport>>& _metaclassReference = getMetaclassReference();
+						std::shared_ptr<Bag<uml::ElementImport>> _metaclassReference = getMetaclassReference();
 	
 						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{
@@ -576,7 +576,7 @@ bool ProfileImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 	
 					if(eObjectList)
 					{
-						const std::shared_ptr<Bag<uml::PackageImport>>& _metamodelReference = getMetamodelReference();
+						std::shared_ptr<Bag<uml::PackageImport>> _metamodelReference = getMetamodelReference();
 	
 						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{

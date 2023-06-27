@@ -547,7 +547,7 @@ bool StructuredClassifierImpl::eSet(int featureID,  const std::shared_ptr<Any>& 
 	
 					if(eObjectList)
 					{
-						const std::shared_ptr<Bag<uml::Property>>& _ownedAttribute = getOwnedAttribute();
+						std::shared_ptr<Bag<uml::Property>> _ownedAttribute = getOwnedAttribute();
 	
 						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{
@@ -592,7 +592,7 @@ bool StructuredClassifierImpl::eSet(int featureID,  const std::shared_ptr<Any>& 
 	
 					if(eObjectList)
 					{
-						const std::shared_ptr<Bag<uml::Connector>>& _ownedConnector = getOwnedConnector();
+						std::shared_ptr<Bag<uml::Connector>> _ownedConnector = getOwnedConnector();
 	
 						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{

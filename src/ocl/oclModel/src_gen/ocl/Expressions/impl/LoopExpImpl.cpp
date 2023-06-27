@@ -646,7 +646,7 @@ bool LoopExpImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 	
 					if(eObjectList)
 					{
-						const std::shared_ptr<Bag<ocl::Expressions::OclExpression>>& _iterator = getIterator();
+						std::shared_ptr<Bag<ocl::Expressions::OclExpression>> _iterator = getIterator();
 	
 						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{

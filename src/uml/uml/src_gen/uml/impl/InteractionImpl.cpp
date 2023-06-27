@@ -803,7 +803,7 @@ bool InteractionImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 	
 					if(eObjectList)
 					{
-						const std::shared_ptr<Bag<uml::Action>>& _action = getAction();
+						std::shared_ptr<Bag<uml::Action>> _action = getAction();
 	
 						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{
@@ -848,7 +848,7 @@ bool InteractionImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 	
 					if(eObjectList)
 					{
-						const std::shared_ptr<Bag<uml::Gate>>& _formalGate = getFormalGate();
+						std::shared_ptr<Bag<uml::Gate>> _formalGate = getFormalGate();
 	
 						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{
@@ -893,7 +893,7 @@ bool InteractionImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 	
 					if(eObjectList)
 					{
-						const std::shared_ptr<Bag<uml::InteractionFragment>>& _fragment = getFragment();
+						std::shared_ptr<Bag<uml::InteractionFragment>> _fragment = getFragment();
 	
 						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{
@@ -938,7 +938,7 @@ bool InteractionImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 	
 					if(eObjectList)
 					{
-						const std::shared_ptr<Bag<uml::Lifeline>>& _lifeline = getLifeline();
+						std::shared_ptr<Bag<uml::Lifeline>> _lifeline = getLifeline();
 	
 						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{
@@ -983,7 +983,7 @@ bool InteractionImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 	
 					if(eObjectList)
 					{
-						const std::shared_ptr<Bag<uml::Message>>& _message = getMessage();
+						std::shared_ptr<Bag<uml::Message>> _message = getMessage();
 	
 						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{

@@ -444,7 +444,7 @@ bool LinkEndDataImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 	
 					if(eObjectList)
 					{
-						const std::shared_ptr<Bag<uml::QualifierValue>>& _qualifier = getQualifier();
+						std::shared_ptr<Bag<uml::QualifierValue>> _qualifier = getQualifier();
 	
 						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{

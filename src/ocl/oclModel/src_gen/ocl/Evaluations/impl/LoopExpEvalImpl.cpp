@@ -245,7 +245,7 @@ void LoopExpEvalImpl::resolveReferences(const int featureID, std::vector<std::sh
 	{
 		case ocl::Evaluations::EvaluationsPackage::LOOPEXPEVAL_ATTRIBUTE_BODYEVALS:
 		{
-			const std::shared_ptr<Bag<ocl::Evaluations::OclExpEval>>& _bodyEvals = getBodyEvals();
+			std::shared_ptr<Bag<ocl::Evaluations::OclExpEval>> _bodyEvals = getBodyEvals();
 			for(std::shared_ptr<ecore::EObject> ref : references)
 			{
 				std::shared_ptr<ocl::Evaluations::OclExpEval>  _r = std::dynamic_pointer_cast<ocl::Evaluations::OclExpEval>(ref);
@@ -346,7 +346,7 @@ bool LoopExpEvalImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 	
 					if(eObjectList)
 					{
-						const std::shared_ptr<Bag<ocl::Evaluations::OclExpEval>>& _bodyEvals = getBodyEvals();
+						std::shared_ptr<Bag<ocl::Evaluations::OclExpEval>> _bodyEvals = getBodyEvals();
 	
 						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{

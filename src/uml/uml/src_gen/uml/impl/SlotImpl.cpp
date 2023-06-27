@@ -480,7 +480,7 @@ bool SlotImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 	
 					if(eObjectList)
 					{
-						const std::shared_ptr<Bag<uml::ValueSpecification>>& _value = getValue();
+						std::shared_ptr<Bag<uml::ValueSpecification>> _value = getValue();
 	
 						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{

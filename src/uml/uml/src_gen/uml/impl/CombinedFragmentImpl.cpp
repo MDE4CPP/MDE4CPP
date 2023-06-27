@@ -585,7 +585,7 @@ bool CombinedFragmentImpl::eSet(int featureID,  const std::shared_ptr<Any>& newV
 	
 					if(eObjectList)
 					{
-						const std::shared_ptr<Bag<uml::Gate>>& _cfragmentGate = getCfragmentGate();
+						std::shared_ptr<Bag<uml::Gate>> _cfragmentGate = getCfragmentGate();
 	
 						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{
@@ -644,7 +644,7 @@ bool CombinedFragmentImpl::eSet(int featureID,  const std::shared_ptr<Any>& newV
 	
 					if(eObjectList)
 					{
-						const std::shared_ptr<Bag<uml::InteractionOperand>>& _operand = getOperand();
+						std::shared_ptr<Bag<uml::InteractionOperand>> _operand = getOperand();
 	
 						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{

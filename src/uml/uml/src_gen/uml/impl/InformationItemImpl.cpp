@@ -284,7 +284,7 @@ void InformationItemImpl::resolveReferences(const int featureID, std::vector<std
 	{
 		case uml::umlPackage::INFORMATIONITEM_ATTRIBUTE_REPRESENTED:
 		{
-			const std::shared_ptr<Bag<uml::Classifier>>& _represented = getRepresented();
+			std::shared_ptr<Bag<uml::Classifier>> _represented = getRepresented();
 			for(std::shared_ptr<ecore::EObject> ref : references)
 			{
 				std::shared_ptr<uml::Classifier>  _r = std::dynamic_pointer_cast<uml::Classifier>(ref);
@@ -379,7 +379,7 @@ bool InformationItemImpl::eSet(int featureID,  const std::shared_ptr<Any>& newVa
 	
 					if(eObjectList)
 					{
-						const std::shared_ptr<Bag<uml::Classifier>>& _represented = getRepresented();
+						std::shared_ptr<Bag<uml::Classifier>> _represented = getRepresented();
 	
 						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{

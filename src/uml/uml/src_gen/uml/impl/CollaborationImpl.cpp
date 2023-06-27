@@ -327,7 +327,7 @@ void CollaborationImpl::resolveReferences(const int featureID, std::vector<std::
 	{
 		case uml::umlPackage::COLLABORATION_ATTRIBUTE_COLLABORATIONROLE:
 		{
-			const std::shared_ptr<Subset<uml::ConnectableElement, uml::ConnectableElement>>& _collaborationRole = getCollaborationRole();
+			std::shared_ptr<Subset<uml::ConnectableElement, uml::ConnectableElement>> _collaborationRole = getCollaborationRole();
 			for(std::shared_ptr<ecore::EObject> ref : references)
 			{
 				std::shared_ptr<uml::ConnectableElement>  _r = std::dynamic_pointer_cast<uml::ConnectableElement>(ref);
@@ -440,7 +440,7 @@ bool CollaborationImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValu
 	
 					if(eObjectList)
 					{
-						const std::shared_ptr<Bag<uml::ConnectableElement>>& _collaborationRole = getCollaborationRole();
+						std::shared_ptr<Bag<uml::ConnectableElement>> _collaborationRole = getCollaborationRole();
 	
 						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{

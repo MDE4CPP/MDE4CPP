@@ -383,7 +383,7 @@ void ExpansionActivationGroupImpl::resolveReferences(const int featureID, std::v
 	{
 		case fUML::Semantics::Actions::ActionsPackage::EXPANSIONACTIVATIONGROUP_ATTRIBUTE_GROUPINPUTS:
 		{
-			const std::shared_ptr<Bag<fUML::Semantics::Actions::ExpansionNodeActivation>>& _groupInputs = getGroupInputs();
+			std::shared_ptr<Bag<fUML::Semantics::Actions::ExpansionNodeActivation>> _groupInputs = getGroupInputs();
 			for(std::shared_ptr<ecore::EObject> ref : references)
 			{
 				std::shared_ptr<fUML::Semantics::Actions::ExpansionNodeActivation>  _r = std::dynamic_pointer_cast<fUML::Semantics::Actions::ExpansionNodeActivation>(ref);
@@ -397,7 +397,7 @@ void ExpansionActivationGroupImpl::resolveReferences(const int featureID, std::v
 
 		case fUML::Semantics::Actions::ActionsPackage::EXPANSIONACTIVATIONGROUP_ATTRIBUTE_GROUPOUTPUTS:
 		{
-			const std::shared_ptr<Bag<fUML::Semantics::Actions::ExpansionNodeActivation>>& _groupOutputs = getGroupOutputs();
+			std::shared_ptr<Bag<fUML::Semantics::Actions::ExpansionNodeActivation>> _groupOutputs = getGroupOutputs();
 			for(std::shared_ptr<ecore::EObject> ref : references)
 			{
 				std::shared_ptr<fUML::Semantics::Actions::ExpansionNodeActivation>  _r = std::dynamic_pointer_cast<fUML::Semantics::Actions::ExpansionNodeActivation>(ref);
@@ -423,7 +423,7 @@ void ExpansionActivationGroupImpl::resolveReferences(const int featureID, std::v
 
 		case fUML::Semantics::Actions::ActionsPackage::EXPANSIONACTIVATIONGROUP_ATTRIBUTE_REGIONINPUTS:
 		{
-			const std::shared_ptr<Bag<fUML::Semantics::Actions::OutputPinActivation>>& _regionInputs = getRegionInputs();
+			std::shared_ptr<Bag<fUML::Semantics::Actions::OutputPinActivation>> _regionInputs = getRegionInputs();
 			for(std::shared_ptr<ecore::EObject> ref : references)
 			{
 				std::shared_ptr<fUML::Semantics::Actions::OutputPinActivation>  _r = std::dynamic_pointer_cast<fUML::Semantics::Actions::OutputPinActivation>(ref);
@@ -528,7 +528,7 @@ bool ExpansionActivationGroupImpl::eSet(int featureID,  const std::shared_ptr<An
 	
 					if(eObjectList)
 					{
-						const std::shared_ptr<Bag<fUML::Semantics::Actions::ExpansionNodeActivation>>& _groupInputs = getGroupInputs();
+						std::shared_ptr<Bag<fUML::Semantics::Actions::ExpansionNodeActivation>> _groupInputs = getGroupInputs();
 	
 						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{
@@ -573,7 +573,7 @@ bool ExpansionActivationGroupImpl::eSet(int featureID,  const std::shared_ptr<An
 	
 					if(eObjectList)
 					{
-						const std::shared_ptr<Bag<fUML::Semantics::Actions::ExpansionNodeActivation>>& _groupOutputs = getGroupOutputs();
+						std::shared_ptr<Bag<fUML::Semantics::Actions::ExpansionNodeActivation>> _groupOutputs = getGroupOutputs();
 	
 						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{
@@ -663,7 +663,7 @@ bool ExpansionActivationGroupImpl::eSet(int featureID,  const std::shared_ptr<An
 	
 					if(eObjectList)
 					{
-						const std::shared_ptr<Bag<fUML::Semantics::Actions::OutputPinActivation>>& _regionInputs = getRegionInputs();
+						std::shared_ptr<Bag<fUML::Semantics::Actions::OutputPinActivation>> _regionInputs = getRegionInputs();
 	
 						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{

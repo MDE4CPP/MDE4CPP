@@ -503,7 +503,7 @@ void ActivityPartitionImpl::resolveReferences(const int featureID, std::vector<s
 	{
 		case uml::umlPackage::ACTIVITYPARTITION_ATTRIBUTE_EDGE:
 		{
-			const std::shared_ptr<Subset<uml::ActivityEdge, uml::ActivityEdge>>& _edge = getEdge();
+			std::shared_ptr<Subset<uml::ActivityEdge, uml::ActivityEdge>> _edge = getEdge();
 			for(std::shared_ptr<ecore::EObject> ref : references)
 			{
 				std::shared_ptr<uml::ActivityEdge>  _r = std::dynamic_pointer_cast<uml::ActivityEdge>(ref);
@@ -517,7 +517,7 @@ void ActivityPartitionImpl::resolveReferences(const int featureID, std::vector<s
 
 		case uml::umlPackage::ACTIVITYPARTITION_ATTRIBUTE_NODE:
 		{
-			const std::shared_ptr<Subset<uml::ActivityNode, uml::ActivityNode>>& _node = getNode();
+			std::shared_ptr<Subset<uml::ActivityNode, uml::ActivityNode>> _node = getNode();
 			for(std::shared_ptr<ecore::EObject> ref : references)
 			{
 				std::shared_ptr<uml::ActivityNode>  _r = std::dynamic_pointer_cast<uml::ActivityNode>(ref);
@@ -672,7 +672,7 @@ bool ActivityPartitionImpl::eSet(int featureID,  const std::shared_ptr<Any>& new
 	
 					if(eObjectList)
 					{
-						const std::shared_ptr<Bag<uml::ActivityEdge>>& _edge = getEdge();
+						std::shared_ptr<Bag<uml::ActivityEdge>> _edge = getEdge();
 	
 						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{
@@ -745,7 +745,7 @@ bool ActivityPartitionImpl::eSet(int featureID,  const std::shared_ptr<Any>& new
 	
 					if(eObjectList)
 					{
-						const std::shared_ptr<Bag<uml::ActivityNode>>& _node = getNode();
+						std::shared_ptr<Bag<uml::ActivityNode>> _node = getNode();
 	
 						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{
@@ -821,7 +821,7 @@ bool ActivityPartitionImpl::eSet(int featureID,  const std::shared_ptr<Any>& new
 	
 					if(eObjectList)
 					{
-						const std::shared_ptr<Bag<uml::ActivityPartition>>& _subpartition = getSubpartition();
+						std::shared_ptr<Bag<uml::ActivityPartition>> _subpartition = getSubpartition();
 	
 						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{

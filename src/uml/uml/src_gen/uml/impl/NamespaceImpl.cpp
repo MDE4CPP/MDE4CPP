@@ -650,7 +650,7 @@ bool NamespaceImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 	
 					if(eObjectList)
 					{
-						const std::shared_ptr<Bag<uml::ElementImport>>& _elementImport = getElementImport();
+						std::shared_ptr<Bag<uml::ElementImport>> _elementImport = getElementImport();
 	
 						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{
@@ -695,7 +695,7 @@ bool NamespaceImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 	
 					if(eObjectList)
 					{
-						const std::shared_ptr<Bag<uml::Constraint>>& _ownedRule = getOwnedRule();
+						std::shared_ptr<Bag<uml::Constraint>> _ownedRule = getOwnedRule();
 	
 						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{
@@ -740,7 +740,7 @@ bool NamespaceImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 	
 					if(eObjectList)
 					{
-						const std::shared_ptr<Bag<uml::PackageImport>>& _packageImport = getPackageImport();
+						std::shared_ptr<Bag<uml::PackageImport>> _packageImport = getPackageImport();
 	
 						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{

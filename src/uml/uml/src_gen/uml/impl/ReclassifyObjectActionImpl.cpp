@@ -341,7 +341,7 @@ void ReclassifyObjectActionImpl::resolveReferences(const int featureID, std::vec
 	{
 		case uml::umlPackage::RECLASSIFYOBJECTACTION_ATTRIBUTE_NEWCLASSIFIER:
 		{
-			const std::shared_ptr<Bag<uml::Classifier>>& _newClassifier = getNewClassifier();
+			std::shared_ptr<Bag<uml::Classifier>> _newClassifier = getNewClassifier();
 			for(std::shared_ptr<ecore::EObject> ref : references)
 			{
 				std::shared_ptr<uml::Classifier>  _r = std::dynamic_pointer_cast<uml::Classifier>(ref);
@@ -355,7 +355,7 @@ void ReclassifyObjectActionImpl::resolveReferences(const int featureID, std::vec
 
 		case uml::umlPackage::RECLASSIFYOBJECTACTION_ATTRIBUTE_OLDCLASSIFIER:
 		{
-			const std::shared_ptr<Bag<uml::Classifier>>& _oldClassifier = getOldClassifier();
+			std::shared_ptr<Bag<uml::Classifier>> _oldClassifier = getOldClassifier();
 			for(std::shared_ptr<ecore::EObject> ref : references)
 			{
 				std::shared_ptr<uml::Classifier>  _r = std::dynamic_pointer_cast<uml::Classifier>(ref);
@@ -486,7 +486,7 @@ bool ReclassifyObjectActionImpl::eSet(int featureID,  const std::shared_ptr<Any>
 	
 					if(eObjectList)
 					{
-						const std::shared_ptr<Bag<uml::Classifier>>& _newClassifier = getNewClassifier();
+						std::shared_ptr<Bag<uml::Classifier>> _newClassifier = getNewClassifier();
 	
 						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{
@@ -562,7 +562,7 @@ bool ReclassifyObjectActionImpl::eSet(int featureID,  const std::shared_ptr<Any>
 	
 					if(eObjectList)
 					{
-						const std::shared_ptr<Bag<uml::Classifier>>& _oldClassifier = getOldClassifier();
+						std::shared_ptr<Bag<uml::Classifier>> _oldClassifier = getOldClassifier();
 	
 						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{

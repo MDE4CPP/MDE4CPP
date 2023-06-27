@@ -440,7 +440,7 @@ bool TupleLiteralExpImpl::eSet(int featureID,  const std::shared_ptr<Any>& newVa
 	
 					if(eObjectList)
 					{
-						const std::shared_ptr<Bag<ocl::Expressions::VarDeclarationExp>>& _part = getPart();
+						std::shared_ptr<Bag<ocl::Expressions::VarDeclarationExp>> _part = getPart();
 	
 						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{

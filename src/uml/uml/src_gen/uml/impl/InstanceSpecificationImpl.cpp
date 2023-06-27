@@ -369,7 +369,7 @@ void InstanceSpecificationImpl::resolveReferences(const int featureID, std::vect
 	{
 		case uml::umlPackage::INSTANCESPECIFICATION_ATTRIBUTE_CLASSIFIER:
 		{
-			const std::shared_ptr<Bag<uml::Classifier>>& _classifier = getClassifier();
+			std::shared_ptr<Bag<uml::Classifier>> _classifier = getClassifier();
 			for(std::shared_ptr<ecore::EObject> ref : references)
 			{
 				std::shared_ptr<uml::Classifier>  _r = std::dynamic_pointer_cast<uml::Classifier>(ref);
@@ -505,7 +505,7 @@ bool InstanceSpecificationImpl::eSet(int featureID,  const std::shared_ptr<Any>&
 	
 					if(eObjectList)
 					{
-						const std::shared_ptr<Bag<uml::Classifier>>& _classifier = getClassifier();
+						std::shared_ptr<Bag<uml::Classifier>> _classifier = getClassifier();
 	
 						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{
@@ -550,7 +550,7 @@ bool InstanceSpecificationImpl::eSet(int featureID,  const std::shared_ptr<Any>&
 	
 					if(eObjectList)
 					{
-						const std::shared_ptr<Bag<uml::Slot>>& _slot = getSlot();
+						std::shared_ptr<Bag<uml::Slot>> _slot = getSlot();
 	
 						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{

@@ -308,7 +308,7 @@ void ClauseImpl::resolveReferences(const int featureID, std::vector<std::shared_
 	{
 		case uml::umlPackage::CLAUSE_ATTRIBUTE_BODY:
 		{
-			const std::shared_ptr<Bag<uml::ExecutableNode>>& _body = getBody();
+			std::shared_ptr<Bag<uml::ExecutableNode>> _body = getBody();
 			for(std::shared_ptr<ecore::EObject> ref : references)
 			{
 				std::shared_ptr<uml::ExecutableNode>  _r = std::dynamic_pointer_cast<uml::ExecutableNode>(ref);
@@ -322,7 +322,7 @@ void ClauseImpl::resolveReferences(const int featureID, std::vector<std::shared_
 
 		case uml::umlPackage::CLAUSE_ATTRIBUTE_BODYOUTPUT:
 		{
-			const std::shared_ptr<Bag<uml::OutputPin>>& _bodyOutput = getBodyOutput();
+			std::shared_ptr<Bag<uml::OutputPin>> _bodyOutput = getBodyOutput();
 			for(std::shared_ptr<ecore::EObject> ref : references)
 			{
 				std::shared_ptr<uml::OutputPin>  _r = std::dynamic_pointer_cast<uml::OutputPin>(ref);
@@ -348,7 +348,7 @@ void ClauseImpl::resolveReferences(const int featureID, std::vector<std::shared_
 
 		case uml::umlPackage::CLAUSE_ATTRIBUTE_PREDECESSORCLAUSE:
 		{
-			const std::shared_ptr<Bag<uml::Clause>>& _predecessorClause = getPredecessorClause();
+			std::shared_ptr<Bag<uml::Clause>> _predecessorClause = getPredecessorClause();
 			for(std::shared_ptr<ecore::EObject> ref : references)
 			{
 				std::shared_ptr<uml::Clause>  _r = std::dynamic_pointer_cast<uml::Clause>(ref);
@@ -362,7 +362,7 @@ void ClauseImpl::resolveReferences(const int featureID, std::vector<std::shared_
 
 		case uml::umlPackage::CLAUSE_ATTRIBUTE_SUCCESSORCLAUSE:
 		{
-			const std::shared_ptr<Bag<uml::Clause>>& _successorClause = getSuccessorClause();
+			std::shared_ptr<Bag<uml::Clause>> _successorClause = getSuccessorClause();
 			for(std::shared_ptr<ecore::EObject> ref : references)
 			{
 				std::shared_ptr<uml::Clause>  _r = std::dynamic_pointer_cast<uml::Clause>(ref);
@@ -376,7 +376,7 @@ void ClauseImpl::resolveReferences(const int featureID, std::vector<std::shared_
 
 		case uml::umlPackage::CLAUSE_ATTRIBUTE_TEST:
 		{
-			const std::shared_ptr<Bag<uml::ExecutableNode>>& _test = getTest();
+			std::shared_ptr<Bag<uml::ExecutableNode>> _test = getTest();
 			for(std::shared_ptr<ecore::EObject> ref : references)
 			{
 				std::shared_ptr<uml::ExecutableNode>  _r = std::dynamic_pointer_cast<uml::ExecutableNode>(ref);
@@ -484,7 +484,7 @@ bool ClauseImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 	
 					if(eObjectList)
 					{
-						const std::shared_ptr<Bag<uml::ExecutableNode>>& _body = getBody();
+						std::shared_ptr<Bag<uml::ExecutableNode>> _body = getBody();
 	
 						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{
@@ -529,7 +529,7 @@ bool ClauseImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 	
 					if(eObjectList)
 					{
-						const std::shared_ptr<Bag<uml::OutputPin>>& _bodyOutput = getBodyOutput();
+						std::shared_ptr<Bag<uml::OutputPin>> _bodyOutput = getBodyOutput();
 	
 						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{
@@ -605,7 +605,7 @@ bool ClauseImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 	
 					if(eObjectList)
 					{
-						const std::shared_ptr<Bag<uml::Clause>>& _predecessorClause = getPredecessorClause();
+						std::shared_ptr<Bag<uml::Clause>> _predecessorClause = getPredecessorClause();
 	
 						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{
@@ -650,7 +650,7 @@ bool ClauseImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 	
 					if(eObjectList)
 					{
-						const std::shared_ptr<Bag<uml::Clause>>& _successorClause = getSuccessorClause();
+						std::shared_ptr<Bag<uml::Clause>> _successorClause = getSuccessorClause();
 	
 						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{
@@ -695,7 +695,7 @@ bool ClauseImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 	
 					if(eObjectList)
 					{
-						const std::shared_ptr<Bag<uml::ExecutableNode>>& _test = getTest();
+						std::shared_ptr<Bag<uml::ExecutableNode>> _test = getTest();
 	
 						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{

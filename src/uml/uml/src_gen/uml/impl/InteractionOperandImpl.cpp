@@ -437,7 +437,7 @@ bool InteractionOperandImpl::eSet(int featureID,  const std::shared_ptr<Any>& ne
 	
 					if(eObjectList)
 					{
-						const std::shared_ptr<Bag<uml::InteractionFragment>>& _fragment = getFragment();
+						std::shared_ptr<Bag<uml::InteractionFragment>> _fragment = getFragment();
 	
 						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{

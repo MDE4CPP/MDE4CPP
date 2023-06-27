@@ -1092,7 +1092,7 @@ void ClassifierImpl::resolveReferences(const int featureID, std::vector<std::sha
 	{
 		case uml::umlPackage::CLASSIFIER_ATTRIBUTE_GENERAL:
 		{
-			const std::shared_ptr<Bag<uml::Classifier>>& _general = getGeneral();
+			std::shared_ptr<Bag<uml::Classifier>> _general = getGeneral();
 			for(std::shared_ptr<ecore::EObject> ref : references)
 			{
 				std::shared_ptr<uml::Classifier>  _r = std::dynamic_pointer_cast<uml::Classifier>(ref);
@@ -1106,7 +1106,7 @@ void ClassifierImpl::resolveReferences(const int featureID, std::vector<std::sha
 
 		case uml::umlPackage::CLASSIFIER_ATTRIBUTE_POWERTYPEEXTENT:
 		{
-			const std::shared_ptr<Bag<uml::GeneralizationSet>>& _powertypeExtent = getPowertypeExtent();
+			std::shared_ptr<Bag<uml::GeneralizationSet>> _powertypeExtent = getPowertypeExtent();
 			for(std::shared_ptr<ecore::EObject> ref : references)
 			{
 				std::shared_ptr<uml::GeneralizationSet>  _r = std::dynamic_pointer_cast<uml::GeneralizationSet>(ref);
@@ -1120,7 +1120,7 @@ void ClassifierImpl::resolveReferences(const int featureID, std::vector<std::sha
 
 		case uml::umlPackage::CLASSIFIER_ATTRIBUTE_REDEFINEDCLASSIFIER:
 		{
-			const std::shared_ptr<SubsetUnion<uml::Classifier, uml::RedefinableElement>>& _redefinedClassifier = getRedefinedClassifier();
+			std::shared_ptr<SubsetUnion<uml::Classifier, uml::RedefinableElement>> _redefinedClassifier = getRedefinedClassifier();
 			for(std::shared_ptr<ecore::EObject> ref : references)
 			{
 				std::shared_ptr<uml::Classifier>  _r = std::dynamic_pointer_cast<uml::Classifier>(ref);
@@ -1146,7 +1146,7 @@ void ClassifierImpl::resolveReferences(const int featureID, std::vector<std::sha
 
 		case uml::umlPackage::CLASSIFIER_ATTRIBUTE_USECASE:
 		{
-			const std::shared_ptr<Bag<uml::UseCase>>& _useCase = getUseCase();
+			std::shared_ptr<Bag<uml::UseCase>> _useCase = getUseCase();
 			for(std::shared_ptr<ecore::EObject> ref : references)
 			{
 				std::shared_ptr<uml::UseCase>  _r = std::dynamic_pointer_cast<uml::UseCase>(ref);
@@ -1366,7 +1366,7 @@ bool ClassifierImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 	
 					if(eObjectList)
 					{
-						const std::shared_ptr<Bag<uml::CollaborationUse>>& _collaborationUse = getCollaborationUse();
+						std::shared_ptr<Bag<uml::CollaborationUse>> _collaborationUse = getCollaborationUse();
 	
 						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{
@@ -1411,7 +1411,7 @@ bool ClassifierImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 	
 					if(eObjectList)
 					{
-						const std::shared_ptr<Bag<uml::Classifier>>& _general = getGeneral();
+						std::shared_ptr<Bag<uml::Classifier>> _general = getGeneral();
 	
 						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{
@@ -1456,7 +1456,7 @@ bool ClassifierImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 	
 					if(eObjectList)
 					{
-						const std::shared_ptr<Bag<uml::Generalization>>& _generalization = getGeneralization();
+						std::shared_ptr<Bag<uml::Generalization>> _generalization = getGeneralization();
 	
 						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{
@@ -1529,7 +1529,7 @@ bool ClassifierImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 	
 					if(eObjectList)
 					{
-						const std::shared_ptr<Bag<uml::UseCase>>& _ownedUseCase = getOwnedUseCase();
+						std::shared_ptr<Bag<uml::UseCase>> _ownedUseCase = getOwnedUseCase();
 	
 						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{
@@ -1574,7 +1574,7 @@ bool ClassifierImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 	
 					if(eObjectList)
 					{
-						const std::shared_ptr<Bag<uml::GeneralizationSet>>& _powertypeExtent = getPowertypeExtent();
+						std::shared_ptr<Bag<uml::GeneralizationSet>> _powertypeExtent = getPowertypeExtent();
 	
 						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{
@@ -1619,7 +1619,7 @@ bool ClassifierImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 	
 					if(eObjectList)
 					{
-						const std::shared_ptr<Bag<uml::Classifier>>& _redefinedClassifier = getRedefinedClassifier();
+						std::shared_ptr<Bag<uml::Classifier>> _redefinedClassifier = getRedefinedClassifier();
 	
 						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{
@@ -1695,7 +1695,7 @@ bool ClassifierImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 	
 					if(eObjectList)
 					{
-						const std::shared_ptr<Bag<uml::Substitution>>& _substitution = getSubstitution();
+						std::shared_ptr<Bag<uml::Substitution>> _substitution = getSubstitution();
 	
 						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{
@@ -1740,7 +1740,7 @@ bool ClassifierImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 	
 					if(eObjectList)
 					{
-						const std::shared_ptr<Bag<uml::UseCase>>& _useCase = getUseCase();
+						std::shared_ptr<Bag<uml::UseCase>> _useCase = getUseCase();
 	
 						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{

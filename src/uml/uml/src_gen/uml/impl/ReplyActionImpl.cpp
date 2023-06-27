@@ -509,7 +509,7 @@ bool ReplyActionImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 	
 					if(eObjectList)
 					{
-						const std::shared_ptr<Bag<uml::InputPin>>& _replyValue = getReplyValue();
+						std::shared_ptr<Bag<uml::InputPin>> _replyValue = getReplyValue();
 	
 						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{

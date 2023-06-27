@@ -390,7 +390,7 @@ bool CollaborationUseImpl::eSet(int featureID,  const std::shared_ptr<Any>& newV
 	
 					if(eObjectList)
 					{
-						const std::shared_ptr<Bag<uml::Dependency>>& _roleBinding = getRoleBinding();
+						std::shared_ptr<Bag<uml::Dependency>> _roleBinding = getRoleBinding();
 	
 						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{

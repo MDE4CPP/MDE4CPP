@@ -445,7 +445,7 @@ bool CallActionImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 	
 					if(eObjectList)
 					{
-						const std::shared_ptr<Bag<uml::OutputPin>>& _result = getResult();
+						std::shared_ptr<Bag<uml::OutputPin>> _result = getResult();
 	
 						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{

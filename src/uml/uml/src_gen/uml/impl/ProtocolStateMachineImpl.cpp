@@ -451,7 +451,7 @@ bool ProtocolStateMachineImpl::eSet(int featureID,  const std::shared_ptr<Any>& 
 	
 					if(eObjectList)
 					{
-						const std::shared_ptr<Bag<uml::ProtocolConformance>>& _conformance = getConformance();
+						std::shared_ptr<Bag<uml::ProtocolConformance>> _conformance = getConformance();
 	
 						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{

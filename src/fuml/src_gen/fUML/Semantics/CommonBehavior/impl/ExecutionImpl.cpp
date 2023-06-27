@@ -501,7 +501,7 @@ void ExecutionImpl::resolveReferences(const int featureID, std::vector<std::shar
 
 		case fUML::Semantics::CommonBehavior::CommonBehaviorPackage::EXECUTION_ATTRIBUTE_TYPES:
 		{
-			const std::shared_ptr<Bag<uml::Classifier>>& _types = getTypes();
+			std::shared_ptr<Bag<uml::Classifier>> _types = getTypes();
 			for(std::shared_ptr<ecore::EObject> ref : references)
 			{
 				std::shared_ptr<uml::Classifier>  _r = std::dynamic_pointer_cast<uml::Classifier>(ref);
@@ -719,7 +719,7 @@ bool ExecutionImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 	
 					if(eObjectList)
 					{
-						const std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>>& _parameterValues = getParameterValues();
+						std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> _parameterValues = getParameterValues();
 	
 						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{
@@ -764,7 +764,7 @@ bool ExecutionImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 	
 					if(eObjectList)
 					{
-						const std::shared_ptr<Bag<uml::Classifier>>& _types = getTypes();
+						std::shared_ptr<Bag<uml::Classifier>> _types = getTypes();
 	
 						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{

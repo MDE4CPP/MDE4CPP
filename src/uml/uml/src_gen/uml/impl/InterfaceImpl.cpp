@@ -637,7 +637,7 @@ void InterfaceImpl::resolveReferences(const int featureID, std::vector<std::shar
 	{
 		case uml::umlPackage::INTERFACE_ATTRIBUTE_REDEFINEDINTERFACE:
 		{
-			const std::shared_ptr<Subset<uml::Interface, uml::Classifier /*Subset does not reference a union*/>>& _redefinedInterface = getRedefinedInterface();
+			std::shared_ptr<Subset<uml::Interface, uml::Classifier /*Subset does not reference a union*/>> _redefinedInterface = getRedefinedInterface();
 			for(std::shared_ptr<ecore::EObject> ref : references)
 			{
 				std::shared_ptr<uml::Interface>  _r = std::dynamic_pointer_cast<uml::Interface>(ref);
@@ -782,7 +782,7 @@ bool InterfaceImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 	
 					if(eObjectList)
 					{
-						const std::shared_ptr<Bag<uml::Classifier>>& _nestedClassifier = getNestedClassifier();
+						std::shared_ptr<Bag<uml::Classifier>> _nestedClassifier = getNestedClassifier();
 	
 						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{
@@ -827,7 +827,7 @@ bool InterfaceImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 	
 					if(eObjectList)
 					{
-						const std::shared_ptr<Bag<uml::Property>>& _ownedAttribute = getOwnedAttribute();
+						std::shared_ptr<Bag<uml::Property>> _ownedAttribute = getOwnedAttribute();
 	
 						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{
@@ -872,7 +872,7 @@ bool InterfaceImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 	
 					if(eObjectList)
 					{
-						const std::shared_ptr<Bag<uml::Operation>>& _ownedOperation = getOwnedOperation();
+						std::shared_ptr<Bag<uml::Operation>> _ownedOperation = getOwnedOperation();
 	
 						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{
@@ -917,7 +917,7 @@ bool InterfaceImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 	
 					if(eObjectList)
 					{
-						const std::shared_ptr<Bag<uml::Reception>>& _ownedReception = getOwnedReception();
+						std::shared_ptr<Bag<uml::Reception>> _ownedReception = getOwnedReception();
 	
 						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{
@@ -993,7 +993,7 @@ bool InterfaceImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 	
 					if(eObjectList)
 					{
-						const std::shared_ptr<Bag<uml::Interface>>& _redefinedInterface = getRedefinedInterface();
+						std::shared_ptr<Bag<uml::Interface>> _redefinedInterface = getRedefinedInterface();
 	
 						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{

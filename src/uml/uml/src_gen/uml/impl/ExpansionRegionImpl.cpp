@@ -349,7 +349,7 @@ void ExpansionRegionImpl::resolveReferences(const int featureID, std::vector<std
 	{
 		case uml::umlPackage::EXPANSIONREGION_ATTRIBUTE_INPUTELEMENT:
 		{
-			const std::shared_ptr<Bag<uml::ExpansionNode>>& _inputElement = getInputElement();
+			std::shared_ptr<Bag<uml::ExpansionNode>> _inputElement = getInputElement();
 			for(std::shared_ptr<ecore::EObject> ref : references)
 			{
 				std::shared_ptr<uml::ExpansionNode>  _r = std::dynamic_pointer_cast<uml::ExpansionNode>(ref);
@@ -363,7 +363,7 @@ void ExpansionRegionImpl::resolveReferences(const int featureID, std::vector<std
 
 		case uml::umlPackage::EXPANSIONREGION_ATTRIBUTE_OUTPUTELEMENT:
 		{
-			const std::shared_ptr<Bag<uml::ExpansionNode>>& _outputElement = getOutputElement();
+			std::shared_ptr<Bag<uml::ExpansionNode>> _outputElement = getOutputElement();
 			for(std::shared_ptr<ecore::EObject> ref : references)
 			{
 				std::shared_ptr<uml::ExpansionNode>  _r = std::dynamic_pointer_cast<uml::ExpansionNode>(ref);
@@ -488,7 +488,7 @@ bool ExpansionRegionImpl::eSet(int featureID,  const std::shared_ptr<Any>& newVa
 	
 					if(eObjectList)
 					{
-						const std::shared_ptr<Bag<uml::ExpansionNode>>& _inputElement = getInputElement();
+						std::shared_ptr<Bag<uml::ExpansionNode>> _inputElement = getInputElement();
 	
 						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{
@@ -547,7 +547,7 @@ bool ExpansionRegionImpl::eSet(int featureID,  const std::shared_ptr<Any>& newVa
 	
 					if(eObjectList)
 					{
-						const std::shared_ptr<Bag<uml::ExpansionNode>>& _outputElement = getOutputElement();
+						std::shared_ptr<Bag<uml::ExpansionNode>> _outputElement = getOutputElement();
 	
 						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{

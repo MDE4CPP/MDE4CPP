@@ -279,7 +279,7 @@ void OccurrenceSpecificationImpl::resolveReferences(const int featureID, std::ve
 	{
 		case uml::umlPackage::OCCURRENCESPECIFICATION_ATTRIBUTE_TOAFTER:
 		{
-			const std::shared_ptr<Bag<uml::GeneralOrdering>>& _toAfter = getToAfter();
+			std::shared_ptr<Bag<uml::GeneralOrdering>> _toAfter = getToAfter();
 			for(std::shared_ptr<ecore::EObject> ref : references)
 			{
 				std::shared_ptr<uml::GeneralOrdering>  _r = std::dynamic_pointer_cast<uml::GeneralOrdering>(ref);
@@ -293,7 +293,7 @@ void OccurrenceSpecificationImpl::resolveReferences(const int featureID, std::ve
 
 		case uml::umlPackage::OCCURRENCESPECIFICATION_ATTRIBUTE_TOBEFORE:
 		{
-			const std::shared_ptr<Bag<uml::GeneralOrdering>>& _toBefore = getToBefore();
+			std::shared_ptr<Bag<uml::GeneralOrdering>> _toBefore = getToBefore();
 			for(std::shared_ptr<ecore::EObject> ref : references)
 			{
 				std::shared_ptr<uml::GeneralOrdering>  _r = std::dynamic_pointer_cast<uml::GeneralOrdering>(ref);
@@ -385,7 +385,7 @@ bool OccurrenceSpecificationImpl::eSet(int featureID,  const std::shared_ptr<Any
 	
 					if(eObjectList)
 					{
-						const std::shared_ptr<Bag<uml::GeneralOrdering>>& _toAfter = getToAfter();
+						std::shared_ptr<Bag<uml::GeneralOrdering>> _toAfter = getToAfter();
 	
 						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{
@@ -430,7 +430,7 @@ bool OccurrenceSpecificationImpl::eSet(int featureID,  const std::shared_ptr<Any
 	
 					if(eObjectList)
 					{
-						const std::shared_ptr<Bag<uml::GeneralOrdering>>& _toBefore = getToBefore();
+						std::shared_ptr<Bag<uml::GeneralOrdering>> _toBefore = getToBefore();
 	
 						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{

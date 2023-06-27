@@ -811,7 +811,7 @@ bool StructuredActivityNodeImpl::eSet(int featureID,  const std::shared_ptr<Any>
 	
 					if(eObjectList)
 					{
-						const std::shared_ptr<Bag<uml::ActivityEdge>>& _edge = getEdge();
+						std::shared_ptr<Bag<uml::ActivityEdge>> _edge = getEdge();
 	
 						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{
@@ -870,7 +870,7 @@ bool StructuredActivityNodeImpl::eSet(int featureID,  const std::shared_ptr<Any>
 	
 					if(eObjectList)
 					{
-						const std::shared_ptr<Bag<uml::ActivityNode>>& _node = getNode();
+						std::shared_ptr<Bag<uml::ActivityNode>> _node = getNode();
 	
 						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{
@@ -915,7 +915,7 @@ bool StructuredActivityNodeImpl::eSet(int featureID,  const std::shared_ptr<Any>
 	
 					if(eObjectList)
 					{
-						const std::shared_ptr<Bag<uml::InputPin>>& _structuredNodeInput = getStructuredNodeInput();
+						std::shared_ptr<Bag<uml::InputPin>> _structuredNodeInput = getStructuredNodeInput();
 	
 						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{
@@ -960,7 +960,7 @@ bool StructuredActivityNodeImpl::eSet(int featureID,  const std::shared_ptr<Any>
 	
 					if(eObjectList)
 					{
-						const std::shared_ptr<Bag<uml::OutputPin>>& _structuredNodeOutput = getStructuredNodeOutput();
+						std::shared_ptr<Bag<uml::OutputPin>> _structuredNodeOutput = getStructuredNodeOutput();
 	
 						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{
@@ -1005,7 +1005,7 @@ bool StructuredActivityNodeImpl::eSet(int featureID,  const std::shared_ptr<Any>
 	
 					if(eObjectList)
 					{
-						const std::shared_ptr<Bag<uml::Variable>>& _variable = getVariable();
+						std::shared_ptr<Bag<uml::Variable>> _variable = getVariable();
 	
 						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{

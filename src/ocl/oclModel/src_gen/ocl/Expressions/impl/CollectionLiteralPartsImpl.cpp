@@ -202,7 +202,7 @@ void CollectionLiteralPartsImpl::resolveReferences(const int featureID, std::vec
 	{
 		case ocl::Expressions::ExpressionsPackage::COLLECTIONLITERALPARTS_ATTRIBUTE_LITERALPARTS:
 		{
-			const std::shared_ptr<Bag<ocl::Expressions::CollectionLiteralPart>>& _literalParts = getLiteralParts();
+			std::shared_ptr<Bag<ocl::Expressions::CollectionLiteralPart>> _literalParts = getLiteralParts();
 			for(std::shared_ptr<ecore::EObject> ref : references)
 			{
 				std::shared_ptr<ocl::Expressions::CollectionLiteralPart>  _r = std::dynamic_pointer_cast<ocl::Expressions::CollectionLiteralPart>(ref);
@@ -287,7 +287,7 @@ bool CollectionLiteralPartsImpl::eSet(int featureID,  const std::shared_ptr<Any>
 	
 					if(eObjectList)
 					{
-						const std::shared_ptr<Bag<ocl::Expressions::CollectionLiteralPart>>& _literalParts = getLiteralParts();
+						std::shared_ptr<Bag<ocl::Expressions::CollectionLiteralPart>> _literalParts = getLiteralParts();
 	
 						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{

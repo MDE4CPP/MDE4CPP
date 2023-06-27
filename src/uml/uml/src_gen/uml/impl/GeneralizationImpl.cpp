@@ -289,7 +289,7 @@ void GeneralizationImpl::resolveReferences(const int featureID, std::vector<std:
 
 		case uml::umlPackage::GENERALIZATION_ATTRIBUTE_GENERALIZATIONSET:
 		{
-			const std::shared_ptr<Bag<uml::GeneralizationSet>>& _generalizationSet = getGeneralizationSet();
+			std::shared_ptr<Bag<uml::GeneralizationSet>> _generalizationSet = getGeneralizationSet();
 			for(std::shared_ptr<ecore::EObject> ref : references)
 			{
 				std::shared_ptr<uml::GeneralizationSet>  _r = std::dynamic_pointer_cast<uml::GeneralizationSet>(ref);
@@ -440,7 +440,7 @@ bool GeneralizationImpl::eSet(int featureID,  const std::shared_ptr<Any>& newVal
 	
 					if(eObjectList)
 					{
-						const std::shared_ptr<Bag<uml::GeneralizationSet>>& _generalizationSet = getGeneralizationSet();
+						std::shared_ptr<Bag<uml::GeneralizationSet>> _generalizationSet = getGeneralizationSet();
 	
 						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{

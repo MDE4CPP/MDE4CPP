@@ -207,7 +207,7 @@ void CollectionLiteralExpEvalImpl::resolveReferences(const int featureID, std::v
 	{
 		case ocl::Evaluations::EvaluationsPackage::COLLECTIONLITERALEXPEVAL_ATTRIBUTE_PARTS:
 		{
-			const std::shared_ptr<Bag<ocl::Evaluations::CollectionLiteralPartEval>>& _parts = getParts();
+			std::shared_ptr<Bag<ocl::Evaluations::CollectionLiteralPartEval>> _parts = getParts();
 			for(std::shared_ptr<ecore::EObject> ref : references)
 			{
 				std::shared_ptr<ocl::Evaluations::CollectionLiteralPartEval>  _r = std::dynamic_pointer_cast<ocl::Evaluations::CollectionLiteralPartEval>(ref);
@@ -296,7 +296,7 @@ bool CollectionLiteralExpEvalImpl::eSet(int featureID,  const std::shared_ptr<An
 	
 					if(eObjectList)
 					{
-						const std::shared_ptr<Bag<ocl::Evaluations::CollectionLiteralPartEval>>& _parts = getParts();
+						std::shared_ptr<Bag<ocl::Evaluations::CollectionLiteralPartEval>> _parts = getParts();
 	
 						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{

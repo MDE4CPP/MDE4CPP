@@ -207,7 +207,7 @@ void TupleLiteralExpEvalImpl::resolveReferences(const int featureID, std::vector
 	{
 		case ocl::Evaluations::EvaluationsPackage::TUPLELITERALEXPEVAL_ATTRIBUTE_TUPLEPART:
 		{
-			const std::shared_ptr<Bag<ocl::Evaluations::VariableDeclEval>>& _tuplePart = getTuplePart();
+			std::shared_ptr<Bag<ocl::Evaluations::VariableDeclEval>> _tuplePart = getTuplePart();
 			for(std::shared_ptr<ecore::EObject> ref : references)
 			{
 				std::shared_ptr<ocl::Evaluations::VariableDeclEval>  _r = std::dynamic_pointer_cast<ocl::Evaluations::VariableDeclEval>(ref);
@@ -296,7 +296,7 @@ bool TupleLiteralExpEvalImpl::eSet(int featureID,  const std::shared_ptr<Any>& n
 	
 					if(eObjectList)
 					{
-						const std::shared_ptr<Bag<ocl::Evaluations::VariableDeclEval>>& _tuplePart = getTuplePart();
+						std::shared_ptr<Bag<ocl::Evaluations::VariableDeclEval>> _tuplePart = getTuplePart();
 	
 						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{

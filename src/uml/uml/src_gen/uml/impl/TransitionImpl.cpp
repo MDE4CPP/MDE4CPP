@@ -889,7 +889,7 @@ bool TransitionImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 	
 					if(eObjectList)
 					{
-						const std::shared_ptr<Bag<uml::Trigger>>& _trigger = getTrigger();
+						std::shared_ptr<Bag<uml::Trigger>> _trigger = getTrigger();
 	
 						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{

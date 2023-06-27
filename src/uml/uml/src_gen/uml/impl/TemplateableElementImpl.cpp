@@ -395,7 +395,7 @@ bool TemplateableElementImpl::eSet(int featureID,  const std::shared_ptr<Any>& n
 	
 					if(eObjectList)
 					{
-						const std::shared_ptr<Bag<uml::TemplateBinding>>& _templateBinding = getTemplateBinding();
+						std::shared_ptr<Bag<uml::TemplateBinding>> _templateBinding = getTemplateBinding();
 	
 						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{

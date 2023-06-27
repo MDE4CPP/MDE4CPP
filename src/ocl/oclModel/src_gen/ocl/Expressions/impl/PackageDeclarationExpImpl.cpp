@@ -363,7 +363,7 @@ void PackageDeclarationExpImpl::resolveReferences(const int featureID, std::vect
 	{
 		case ocl::Expressions::ExpressionsPackage::PACKAGEDECLARATIONEXP_ATTRIBUTE_CONTEXTDECLARATIONS:
 		{
-			const std::shared_ptr<Bag<ocl::Expressions::ContextDeclarationExp>>& _contextDeclarations = getContextDeclarations();
+			std::shared_ptr<Bag<ocl::Expressions::ContextDeclarationExp>> _contextDeclarations = getContextDeclarations();
 			for(std::shared_ptr<ecore::EObject> ref : references)
 			{
 				std::shared_ptr<ocl::Expressions::ContextDeclarationExp>  _r = std::dynamic_pointer_cast<ocl::Expressions::ContextDeclarationExp>(ref);
@@ -459,7 +459,7 @@ bool PackageDeclarationExpImpl::eSet(int featureID,  const std::shared_ptr<Any>&
 	
 					if(eObjectList)
 					{
-						const std::shared_ptr<Bag<ocl::Expressions::ContextDeclarationExp>>& _contextDeclarations = getContextDeclarations();
+						std::shared_ptr<Bag<ocl::Expressions::ContextDeclarationExp>> _contextDeclarations = getContextDeclarations();
 	
 						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{

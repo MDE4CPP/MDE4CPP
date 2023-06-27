@@ -538,7 +538,7 @@ bool CollectionLiteralExpImpl::eSet(int featureID,  const std::shared_ptr<Any>& 
 	
 					if(eObjectList)
 					{
-						const std::shared_ptr<Bag<ocl::Expressions::CollectionLiteralPart>>& _part = getPart();
+						std::shared_ptr<Bag<ocl::Expressions::CollectionLiteralPart>> _part = getPart();
 	
 						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{

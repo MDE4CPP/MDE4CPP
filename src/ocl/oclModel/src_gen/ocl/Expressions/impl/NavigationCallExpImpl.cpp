@@ -491,7 +491,7 @@ bool NavigationCallExpImpl::eSet(int featureID,  const std::shared_ptr<Any>& new
 	
 					if(eObjectList)
 					{
-						const std::shared_ptr<Bag<ocl::Expressions::OclExpression>>& _qualifier = getQualifier();
+						std::shared_ptr<Bag<ocl::Expressions::OclExpression>> _qualifier = getQualifier();
 	
 						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{

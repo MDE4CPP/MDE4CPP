@@ -703,7 +703,7 @@ void BehaviorImpl::resolveReferences(const int featureID, std::vector<std::share
 
 		case uml::umlPackage::BEHAVIOR_ATTRIBUTE_POSTCONDITION:
 		{
-			const std::shared_ptr<Subset<uml::Constraint, uml::Constraint /*Subset does not reference a union*/>>& _postcondition = getPostcondition();
+			std::shared_ptr<Subset<uml::Constraint, uml::Constraint /*Subset does not reference a union*/>> _postcondition = getPostcondition();
 			for(std::shared_ptr<ecore::EObject> ref : references)
 			{
 				std::shared_ptr<uml::Constraint>  _r = std::dynamic_pointer_cast<uml::Constraint>(ref);
@@ -717,7 +717,7 @@ void BehaviorImpl::resolveReferences(const int featureID, std::vector<std::share
 
 		case uml::umlPackage::BEHAVIOR_ATTRIBUTE_PRECONDITION:
 		{
-			const std::shared_ptr<Subset<uml::Constraint, uml::Constraint /*Subset does not reference a union*/>>& _precondition = getPrecondition();
+			std::shared_ptr<Subset<uml::Constraint, uml::Constraint /*Subset does not reference a union*/>> _precondition = getPrecondition();
 			for(std::shared_ptr<ecore::EObject> ref : references)
 			{
 				std::shared_ptr<uml::Constraint>  _r = std::dynamic_pointer_cast<uml::Constraint>(ref);
@@ -731,7 +731,7 @@ void BehaviorImpl::resolveReferences(const int featureID, std::vector<std::share
 
 		case uml::umlPackage::BEHAVIOR_ATTRIBUTE_REDEFINEDBEHAVIOR:
 		{
-			const std::shared_ptr<Subset<uml::Behavior, uml::Classifier /*Subset does not reference a union*/>>& _redefinedBehavior = getRedefinedBehavior();
+			std::shared_ptr<Subset<uml::Behavior, uml::Classifier /*Subset does not reference a union*/>> _redefinedBehavior = getRedefinedBehavior();
 			for(std::shared_ptr<ecore::EObject> ref : references)
 			{
 				std::shared_ptr<uml::Behavior>  _r = std::dynamic_pointer_cast<uml::Behavior>(ref);
@@ -976,7 +976,7 @@ bool BehaviorImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 	
 					if(eObjectList)
 					{
-						const std::shared_ptr<Bag<uml::Parameter>>& _ownedParameter = getOwnedParameter();
+						std::shared_ptr<Bag<uml::Parameter>> _ownedParameter = getOwnedParameter();
 	
 						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{
@@ -1021,7 +1021,7 @@ bool BehaviorImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 	
 					if(eObjectList)
 					{
-						const std::shared_ptr<Bag<uml::ParameterSet>>& _ownedParameterSet = getOwnedParameterSet();
+						std::shared_ptr<Bag<uml::ParameterSet>> _ownedParameterSet = getOwnedParameterSet();
 	
 						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{
@@ -1066,7 +1066,7 @@ bool BehaviorImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 	
 					if(eObjectList)
 					{
-						const std::shared_ptr<Bag<uml::Constraint>>& _postcondition = getPostcondition();
+						std::shared_ptr<Bag<uml::Constraint>> _postcondition = getPostcondition();
 	
 						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{
@@ -1111,7 +1111,7 @@ bool BehaviorImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 	
 					if(eObjectList)
 					{
-						const std::shared_ptr<Bag<uml::Constraint>>& _precondition = getPrecondition();
+						std::shared_ptr<Bag<uml::Constraint>> _precondition = getPrecondition();
 	
 						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{
@@ -1156,7 +1156,7 @@ bool BehaviorImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 	
 					if(eObjectList)
 					{
-						const std::shared_ptr<Bag<uml::Behavior>>& _redefinedBehavior = getRedefinedBehavior();
+						std::shared_ptr<Bag<uml::Behavior>> _redefinedBehavior = getRedefinedBehavior();
 	
 						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{
