@@ -523,6 +523,10 @@ const std::shared_ptr<ecore::EReference>& fUML::Semantics::Actions::ActionsPacka
 {
 	return m_expansionRegionActivation_Attribute_activationGroups;
 }
+const std::shared_ptr<ecore::EReference>& fUML::Semantics::Actions::ActionsPackageImpl::getExpansionRegionActivation_Attribute_expansionRegion() const
+{
+	return m_expansionRegionActivation_Attribute_expansionRegion;
+}
 const std::shared_ptr<ecore::EReference>& fUML::Semantics::Actions::ActionsPackageImpl::getExpansionRegionActivation_Attribute_inputExpansionTokens() const
 {
 	return m_expansionRegionActivation_Attribute_inputExpansionTokens;
@@ -811,6 +815,10 @@ const std::shared_ptr<ecore::EReference>& fUML::Semantics::Actions::ActionsPacka
 {
 	return m_structuredActivityNodeActivation_Attribute_activationGroup;
 }
+const std::shared_ptr<ecore::EReference>& fUML::Semantics::Actions::ActionsPackageImpl::getStructuredActivityNodeActivation_Attribute_structuredActivityNode() const
+{
+	return m_structuredActivityNodeActivation_Attribute_structuredActivityNode;
+}
 
 const std::shared_ptr<ecore::EOperation>& fUML::Semantics::Actions::ActionsPackageImpl::getStructuredActivityNodeActivation_Operation_completeAction() const
 {
@@ -878,6 +886,10 @@ const std::shared_ptr<ecore::EClass>& fUML::Semantics::Actions::ActionsPackageIm
 }
 
 
+const std::shared_ptr<ecore::EReference>& fUML::Semantics::Actions::ActionsPackageImpl::getValueSpecificationActionActivation_Attribute_valueSpecificationAction() const
+{
+	return m_valueSpecificationActionActivation_Attribute_valueSpecificationAction;
+}
 
 const std::shared_ptr<ecore::EOperation>& fUML::Semantics::Actions::ActionsPackageImpl::getValueSpecificationActionActivation_Operation_doAction() const
 {

@@ -43,8 +43,8 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "fUML/Semantics/Actions/ActionsFactory.hpp"
 #include "fUML/Semantics/Activities/ActivitiesFactory.hpp"
+#include "fUML/Semantics/Actions/ActionsFactory.hpp"
 #include "uml/umlFactory.hpp"
 #include "uml/Action.hpp"
 #include "fUML/Semantics/Actions/ActionActivation.hpp"
@@ -137,12 +137,12 @@ void ReadIsClassifiedObjectActionActivationImpl::doAction()
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
 		// Get the value on the object input pin and determine if it is classified by the classifier specified in the action.
-// If the isDirect attribute of the action is false, then place true on the result output pin if the input object has the specified classifier or of one its (direct or indirect) descendants as a type.
+	// If the isDirect attribute of the action is false, then place true on the result output pin if the input object has the specified classifier or of one its (direct or indirect) descendants as a type.
 	// If the isDirect attribute of the action is true, then place true on the result output pin if the input object has the specified classifier as a type.
 	// Otherwise place false on the result output pin.
 
-	std::shared_ptr<uml::ReadIsClassifiedObjectAction> readIsClassifiedObjectAction = this->getReadIsClassifiedObjectAction();
-	std::shared_ptr<uml::Classifier> classifier = readIsClassifiedObjectAction->getClassifier();
+	const std::shared_ptr<uml::ReadIsClassifiedObjectAction>& readIsClassifiedObjectAction = this->getReadIsClassifiedObjectAction();
+	const std::shared_ptr<uml::Classifier>& classifier = readIsClassifiedObjectAction->getClassifier();
 	bool isDirect = readIsClassifiedObjectAction->getIsDirect();
 	bool result = false;
 
@@ -164,7 +164,7 @@ void ReadIsClassifiedObjectActionActivationImpl::doAction()
 
 				std::shared_ptr<Bag<uml::Classifier>> superTypesOfInput = typeOfInput->allParents();
 
-				for(std::shared_ptr<uml::Classifier> superType : *superTypesOfInput)
+				for(const std::shared_ptr<uml::Classifier>& superType : *superTypesOfInput)
 				{
 					result = (classifier == superType);
 			

@@ -50,9 +50,9 @@
 
 #include <exception> // used in Persistence
 #include "ecore/ecoreFactory.hpp"
+#include "fUML/Semantics/Loci/LociFactory.hpp"
 #include "uml/umlFactory.hpp"
 #include "fUML/Semantics/CommonBehavior/CommonBehaviorFactory.hpp"
-#include "fUML/Semantics/Loci/LociFactory.hpp"
 #include "uml/Behavior.hpp"
 #include "uml/Classifier.hpp"
 #include "uml/Comment.hpp"
@@ -216,10 +216,10 @@ std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> ExecutionI
 	//generated from body annotation
 	std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue> > outputs(new Bag<fUML::Semantics::CommonBehavior::ParameterValue>());
 
-	std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue> > outputParameterValueList = this->getParameterValues();
-    for (std::shared_ptr<fUML::Semantics::CommonBehavior::ParameterValue> parameterValue : *outputParameterValueList)
+	const std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>>& outputParameterValueList = this->getParameterValues();
+    for (const std::shared_ptr<fUML::Semantics::CommonBehavior::ParameterValue>& parameterValue : *outputParameterValueList)
     {
-    	std::shared_ptr<uml::Parameter> parameter = parameterValue->getParameter();
+    	const std::shared_ptr<uml::Parameter>& parameter = parameterValue->getParameter();
         if((parameter->getDirection() == uml::ParameterDirectionKind::INOUT)
                 || (parameter->getDirection() == uml::ParameterDirectionKind::OUT)
                 || (parameter->getDirection() == uml::ParameterDirectionKind::RETURN))
@@ -238,7 +238,7 @@ std::shared_ptr<fUML::Semantics::CommonBehavior::ParameterValue> ExecutionImpl::
 	//generated from body annotation
 	std::shared_ptr<fUML::Semantics::CommonBehavior::ParameterValue> parameterValue = nullptr;
 
-	std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue> > list = this->getParameterValues();
+	const std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>>& list = this->getParameterValues();
 	std::vector<std::shared_ptr<fUML::Semantics::CommonBehavior::ParameterValue>>::iterator it = std::find_if(list->begin(), list->end(), [parameter] (std::shared_ptr<fUML::Semantics::CommonBehavior::ParameterValue> p) { return p->getParameter() == parameter; } );
     if(it!= this->getParameterValues()->end() )
     {

@@ -52,6 +52,7 @@ namespace uml
 	class ActivityNode;
 	class ExecutableNode;
 	class OutputPin;
+	class StructuredActivityNode;
 }
 
 // namespace macro header include
@@ -108,6 +109,12 @@ namespace fUML::Semantics::Actions
 			//*********************************
 			virtual const std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup>& getActivationGroup() const = 0;
 			virtual void setActivationGroup(const std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup>&) = 0;
+			virtual const std::shared_ptr<uml::StructuredActivityNode>& getStructuredActivityNode() const = 0;
+			virtual void setStructuredActivityNode(const std::shared_ptr<uml::StructuredActivityNode>&) = 0;
+			/*Additional Setter for 'ActionActivation::action' redefined by reference 'structuredActivityNode'*/
+			virtual void setAction(const std::shared_ptr<uml::Action>&) = 0;
+			/*Additional Setter for 'ActivityNodeActivation::node' redefined by reference 'structuredActivityNode'*/
+			virtual void setNode(const std::shared_ptr<uml::ActivityNode>&) = 0;
 
 			//*********************************
 			// Union Reference Getters
@@ -134,6 +141,7 @@ namespace fUML::Semantics::Actions
 			// Reference Members
 			//*********************************
 			std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup> m_activationGroup;
+			std::shared_ptr<uml::StructuredActivityNode> m_structuredActivityNode;
 	};
 }
 #endif /* end of include guard: FUML_SEMANTICS_ACTIONS_STRUCTUREDACTIVITYNODEACTIVATION_HPP */

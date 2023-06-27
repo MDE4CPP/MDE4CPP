@@ -303,9 +303,10 @@ namespace fUML::Semantics::Activities
 			// Begin Class ActivityParameterNodeActivation
 			//Class and Feature IDs 
 			static const unsigned long ACTIVITYPARAMETERNODEACTIVATION_CLASS = 1310518118;
-			static const unsigned int ACTIVITYPARAMETERNODEACTIVATION_CLASS_FEATURE_COUNT = 7;
+			static const unsigned int ACTIVITYPARAMETERNODEACTIVATION_CLASS_FEATURE_COUNT = 8;
 			static const unsigned int ACTIVITYPARAMETERNODEACTIVATION_CLASS_OPERATION_COUNT = 40;
 			
+			static const unsigned long ACTIVITYPARAMETERNODEACTIVATION_ATTRIBUTE_ACTIVITYPARAMETERNODE = 1062719273;
 			
 			static const unsigned long ACTIVITYPARAMETERNODEACTIVATION_OPERATION_CLEARTOKENS = 779512874;
 			static const unsigned long ACTIVITYPARAMETERNODEACTIVATION_OPERATION_FIRE_TOKEN = 1225512580;
@@ -314,6 +315,7 @@ namespace fUML::Semantics::Activities
 			virtual const std::shared_ptr<ecore::EClass>& getActivityParameterNodeActivation_Class() const = 0;
 			
 			
+			virtual const std::shared_ptr<ecore::EReference>& getActivityParameterNodeActivation_Attribute_activityParameterNode() const = 0;
 			
 			virtual const std::shared_ptr<ecore::EOperation>& getActivityParameterNodeActivation_Operation_clearTokens() const = 0;
 			virtual const std::shared_ptr<ecore::EOperation>& getActivityParameterNodeActivation_Operation_fire_Token() const = 0;

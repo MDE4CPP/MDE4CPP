@@ -53,6 +53,7 @@ namespace uml
 	class Action;
 	class ActivityNode;
 	class ExpansionNode;
+	class ExpansionRegion;
 }
 
 // namespace macro header include
@@ -110,6 +111,12 @@ namespace fUML::Semantics::Actions
 			// Reference Getters & Setters
 			//*********************************
 			virtual const std::shared_ptr<Bag<fUML::Semantics::Actions::ExpansionActivationGroup>>& getActivationGroups() const = 0;
+			virtual const std::shared_ptr<uml::ExpansionRegion>& getExpansionRegion() const = 0;
+			virtual void setExpansionRegion(const std::shared_ptr<uml::ExpansionRegion>&) = 0;
+			/*Additional Setter for 'ActionActivation::action' redefined by reference 'expansionRegion'*/
+			virtual void setAction(const std::shared_ptr<uml::Action>&) = 0;
+			/*Additional Setter for 'ActivityNodeActivation::node' redefined by reference 'expansionRegion'*/
+			virtual void setNode(const std::shared_ptr<uml::ActivityNode>&) = 0;
 			virtual const std::shared_ptr<Bag<fUML::Semantics::Activities::TokenSet>>& getInputExpansionTokens() const = 0;
 			virtual const std::shared_ptr<Bag<fUML::Semantics::Activities::TokenSet>>& getInputTokens() const = 0;
 
@@ -139,6 +146,7 @@ namespace fUML::Semantics::Actions
 			// Reference Members
 			//*********************************
 			mutable std::shared_ptr<Bag<fUML::Semantics::Actions::ExpansionActivationGroup>> m_activationGroups;
+			std::shared_ptr<uml::ExpansionRegion> m_expansionRegion;
 			mutable std::shared_ptr<Bag<fUML::Semantics::Activities::TokenSet>> m_inputExpansionTokens;
 			mutable std::shared_ptr<Bag<fUML::Semantics::Activities::TokenSet>> m_inputTokens;
 	};

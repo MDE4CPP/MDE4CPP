@@ -41,8 +41,8 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "fUML/Semantics/Actions/ActionsFactory.hpp"
 #include "fUML/Semantics/Activities/ActivitiesFactory.hpp"
+#include "fUML/Semantics/Actions/ActionsFactory.hpp"
 #include "uml/umlFactory.hpp"
 #include "uml/Action.hpp"
 #include "fUML/Semantics/Actions/ActionActivation.hpp"
@@ -135,13 +135,13 @@ void ReadSelfActionActivationImpl::doAction()
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
 	// Get the context object of the activity execution containing this action activation and place a reference to it on the result output pin.
-	std::shared_ptr<uml::ReadSelfAction> action = this->getReadSelfAction();
+	const std::shared_ptr<uml::ReadSelfAction>& action = this->getReadSelfAction();
 
 	std::shared_ptr<uml::Element> context=this->getExecutionContext();	
 	if(context)
 	{
 		std::shared_ptr<Any> value = eUMLAny(context, context->getMetaElementID());
-		std::shared_ptr<uml::OutputPin> resultPin = action->getResult();
+		const std::shared_ptr<uml::OutputPin>& resultPin = action->getResult();
 		if(resultPin)
 		{
 			this->putToken(resultPin, value);

@@ -70,6 +70,12 @@ namespace fUML::Semantics::Actions
 			// Reference Getters & Setters
 			//*********************************
 			virtual const std::shared_ptr<Bag<fUML::Semantics::Actions::ExpansionActivationGroup>>& getActivationGroups() const ;
+			virtual const std::shared_ptr<uml::ExpansionRegion>& getExpansionRegion() const ;
+			virtual void setExpansionRegion(const std::shared_ptr<uml::ExpansionRegion>&) ;
+			/*Additional Setter for 'ActionActivation::action' redefined by reference 'expansionRegion'*/
+			virtual void setAction(const std::shared_ptr<uml::Action>&) ;
+			/*Additional Setter for 'ActivityNodeActivation::node' redefined by reference 'expansionRegion'*/
+			virtual void setNode(const std::shared_ptr<uml::ActivityNode>&) ;
 			virtual const std::shared_ptr<Bag<fUML::Semantics::Activities::TokenSet>>& getInputExpansionTokens() const ;
 			virtual const std::shared_ptr<Bag<fUML::Semantics::Activities::TokenSet>>& getInputTokens() const ;
 			

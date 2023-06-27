@@ -47,8 +47,8 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "fUML/Semantics/Actions/ActionsFactory.hpp"
 #include "fUML/Semantics/Activities/ActivitiesFactory.hpp"
+#include "fUML/Semantics/Actions/ActionsFactory.hpp"
 #include "uml/umlFactory.hpp"
 #include "uml/Action.hpp"
 #include "fUML/Semantics/Actions/ActionActivation.hpp"
@@ -61,6 +61,7 @@
 #include "uml/OutputPin.hpp"
 #include "fUML/Semantics/Actions/OutputPinActivation.hpp"
 #include "fUML/Semantics/Actions/PinActivation.hpp"
+#include "uml/StructuredActivityNode.hpp"
 #include "fUML/Semantics/Activities/Token.hpp"
 //Factories and Package includes
 #include "fUML/fUMLPackage.hpp"
@@ -122,6 +123,7 @@ StructuredActivityNodeActivationImpl& StructuredActivityNodeActivationImpl::oper
 	//Clone Attributes with (deep copy)
 
 	//copy references with no containment (soft copy)
+	m_structuredActivityNode  = obj.getStructuredActivityNode();
 	//Clone references with containment (deep copy)
 	//clone reference 'activationGroup'
 	if(obj.getActivationGroup()!=nullptr)
@@ -160,7 +162,7 @@ void StructuredActivityNodeActivationImpl::createEdgeInstances()
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
-	std::shared_ptr<Bag<uml::ActivityEdge> > edges = (std::dynamic_pointer_cast<uml::StructuredActivityNode> (this->getNode()))->getEdge();
+	const std::shared_ptr<Bag<uml::ActivityEdge>>& edges = this->getStructuredActivityNode()->getEdge();
 	this->getActivationGroup()->createEdgeInstance(edges);
 	//end of body
 }
@@ -174,8 +176,8 @@ void StructuredActivityNodeActivationImpl::createNodeActivations()
 	this->setActivationGroup(std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup>(fUML::Semantics::Activities::ActivitiesFactory::eInstance()->createActivityNodeActivationGroup()));
 	this->getActivationGroup()->setContainingNodeActivation(getThisStructuredActivityNodeActivationPtr());
 
-	std::shared_ptr<uml::StructuredActivityNode> structuredActivityNode = std::dynamic_pointer_cast<uml::StructuredActivityNode> (this->getNode());
-	std::shared_ptr<Bag<uml::ActivityNode> > nodes = structuredActivityNode->getNode();
+	const std::shared_ptr<uml::StructuredActivityNode>& structuredActivityNode = this->getStructuredActivityNode();
+	const std::shared_ptr<Bag<uml::ActivityNode>>& nodes = structuredActivityNode->getNode();
 	this->getActivationGroup()->createNodeActivations(nodes);
 	//end of body
 }
@@ -184,7 +186,7 @@ void StructuredActivityNodeActivationImpl::doAction()
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
-	if ((std::dynamic_pointer_cast<uml::StructuredActivityNode>(this->getNode()))->getMustIsolate()) 
+	if (this->getStructuredActivityNode()->getMustIsolate()) 
 	{
         _beginIsolation();
         this->doStructuredActivity();
@@ -202,7 +204,7 @@ void StructuredActivityNodeActivationImpl::doStructuredActivity()
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
 	//Remark: action is not used in the specification.
-	std::shared_ptr<uml::Action> action = std::dynamic_pointer_cast<uml::Action>(this->getNode());
+	const std::shared_ptr<uml::Action>& action = this->getStructuredActivityNode();
     assert(action != nullptr);
 
     // *** Concurrently send offers from all input pins. ***
@@ -216,7 +218,7 @@ void StructuredActivityNodeActivationImpl::doStructuredActivity()
         pinActivation->sendUnofferedTokens();
     }
 
-    std::shared_ptr<Bag<fUML::Semantics::Activities::ActivityNodeActivation> > nodes = this->getActivationGroup()->getNodeActivations();
+    const std::shared_ptr<Bag<fUML::Semantics::Activities::ActivityNodeActivation>>& nodes = this->getActivationGroup()->getNodeActivations();
     this->getActivationGroup()->run(nodes);
 	//end of body
 }
@@ -251,8 +253,8 @@ std::shared_ptr<Bag<Any>> StructuredActivityNodeActivationImpl::getPinValues(con
 	std::shared_ptr<Bag<Any>> values(new Bag<Any>());
     for (unsigned int i = 0; i < tokens->size(); i++) 
     {
-    	std::shared_ptr<fUML::Semantics::Activities::Token> token = tokens->at(i);
-    	std::shared_ptr<Any> value = token->getValue();
+    	const std::shared_ptr<fUML::Semantics::Activities::Token>& token = tokens->at(i);
+    	const std::shared_ptr<Any>& value = token->getValue();
         if (value != nullptr) 
         {
             values->push_back(value);
@@ -291,22 +293,22 @@ std::shared_ptr<Bag<uml::ActivityNode>> StructuredActivityNodeActivationImpl::ma
 
     for (unsigned int i = 0; i < nodes->size(); i++) 
     {
-    	std::shared_ptr<uml::ActivityNode> node = nodes->at(i);
+        const std::shared_ptr<uml::ActivityNode>& node = nodes->at(i);
         activityNodes->push_back(node);
         std::shared_ptr<uml::Action> action = std::dynamic_pointer_cast<uml::Action>(node);
         if (action != nullptr) 
         {
-        	std::shared_ptr<Bag<uml::InputPin> > inputPins = action->getInput();//was: nullptr;
+        	  const std::shared_ptr<Bag<uml::InputPin>>& inputPins = action->getInput();//was: nullptr;
             for (unsigned int j = 0; j < inputPins->size(); j++) 
             {
-            	std::shared_ptr<uml::InputPin> inputPin = inputPins->at(j);
+                const std::shared_ptr<uml::InputPin>& inputPin = inputPins->at(j);
                 activityNodes->push_back(inputPin);
             }
 
-            std::shared_ptr<Bag<uml::OutputPin> > outputPins = action->getOutput();//was: nullptr;
+            const std::shared_ptr<Bag<uml::OutputPin>>& outputPins = action->getOutput();//was: nullptr;
             for (unsigned int j = 0; j < outputPins->size(); j++) 
             {
-            	std::shared_ptr<uml::OutputPin> outputPin = outputPins->at(j);
+                const std::shared_ptr<uml::OutputPin>& outputPin = outputPins->at(j);
                 activityNodes->push_back(std::dynamic_pointer_cast<uml::ActivityNode>(outputPin));
             }
         }
@@ -324,7 +326,7 @@ void StructuredActivityNodeActivationImpl::putPinValues(const std::shared_ptr<um
 
     for (unsigned int i = 0; i < values->size(); i++) 
     {
-    	std::shared_ptr<Any> value = values->at(i);
+    	const std::shared_ptr<Any>& value = values->at(i);
     	std::shared_ptr<fUML::Semantics::Activities::ObjectToken> token = fUML::Semantics::Activities::ActivitiesFactory::eInstance()->createObjectToken();
         token->setValue(value);
         pinActivation->addToken(token);
@@ -383,6 +385,50 @@ void StructuredActivityNodeActivationImpl::setActivationGroup(const std::shared_
 	
 }
 
+/* Getter & Setter for reference structuredActivityNode */
+const std::shared_ptr<uml::StructuredActivityNode>& StructuredActivityNodeActivationImpl::getStructuredActivityNode() const
+{
+    return m_structuredActivityNode;
+}
+void StructuredActivityNodeActivationImpl::setStructuredActivityNode(const std::shared_ptr<uml::StructuredActivityNode>& _structuredActivityNode)
+{
+    m_structuredActivityNode = _structuredActivityNode;
+	//additional setter call for redefined reference ActionActivation::action
+	fUML::Semantics::Actions::ActionActivationImpl::setAction(_structuredActivityNode);
+}
+/*Additional Setter for redefined reference 'ActionActivation::action'*/
+void StructuredActivityNodeActivationImpl::setAction(const std::shared_ptr<uml::Action>& _action)
+{
+	std::shared_ptr<uml::StructuredActivityNode> _structuredActivityNode = std::dynamic_pointer_cast<uml::StructuredActivityNode>(_action);
+	if(_structuredActivityNode)
+	{
+		m_structuredActivityNode = _structuredActivityNode;
+
+		//additional setter call for redefined reference ActionActivation::action
+		fUML::Semantics::Actions::ActionActivationImpl::setAction(_structuredActivityNode);
+	}
+	else
+	{
+		std::cerr<<"[StructuredActivityNodeActivation::setAction] : Could not set action because provided action was not of type 'std::shared_ptr<uml::StructuredActivityNode>'"<<std::endl;
+	}
+}
+/*Additional Setter for redefined reference 'ActivityNodeActivation::node'*/
+void StructuredActivityNodeActivationImpl::setNode(const std::shared_ptr<uml::ActivityNode>& _node)
+{
+	std::shared_ptr<uml::StructuredActivityNode> _structuredActivityNode = std::dynamic_pointer_cast<uml::StructuredActivityNode>(_node);
+	if(_structuredActivityNode)
+	{
+		m_structuredActivityNode = _structuredActivityNode;
+
+		//additional setter call for redefined reference ActionActivation::action
+		fUML::Semantics::Actions::ActionActivationImpl::setNode(_node);
+	}
+	else
+	{
+		std::cerr<<"[StructuredActivityNodeActivation::setNode] : Could not set node because provided node was not of type 'std::shared_ptr<uml::StructuredActivityNode>'"<<std::endl;
+	}
+}
+
 //*********************************
 // Union Getter
 //*********************************
@@ -420,6 +466,25 @@ void StructuredActivityNodeActivationImpl::load(std::shared_ptr<persistence::int
 
 void StructuredActivityNodeActivationImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list)
 {
+	try
+	{
+		std::map<std::string, std::string>::const_iterator iter;
+		std::shared_ptr<ecore::EClass> metaClass = this->eClass(); // get MetaClass
+		iter = attr_list.find("structuredActivityNode");
+		if ( iter != attr_list.end() )
+		{
+			// add unresolvedReference to loadHandler's list
+			loadHandler->addUnresolvedReference(iter->second, loadHandler->getCurrentObject(), metaClass->getEStructuralFeature("structuredActivityNode")); // TODO use getEStructuralFeature() with id, for faster access to EStructuralFeature
+		}
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "| ERROR    | " << e.what() << std::endl;
+	}
+	catch (...) 
+	{
+		std::cout << "| ERROR    | " <<  "Exception occurred" << std::endl;
+	}
 
 	ActionActivationImpl::loadAttributes(loadHandler, attr_list);
 }
@@ -455,6 +520,20 @@ void StructuredActivityNodeActivationImpl::loadNode(std::string nodeName, std::s
 
 void StructuredActivityNodeActivationImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
 {
+	switch(featureID)
+	{
+		case fUML::Semantics::Actions::ActionsPackage::STRUCTUREDACTIVITYNODEACTIVATION_ATTRIBUTE_STRUCTUREDACTIVITYNODE:
+		{
+			if (references.size() == 1)
+			{
+				// Cast object to correct type
+				std::shared_ptr<uml::StructuredActivityNode> _structuredActivityNode = std::dynamic_pointer_cast<uml::StructuredActivityNode>( references.front() );
+				setStructuredActivityNode(_structuredActivityNode);
+			}
+			
+			return;
+		}
+	}
 	ActionActivationImpl::resolveReferences(featureID, references);
 }
 
@@ -476,6 +555,8 @@ void StructuredActivityNodeActivationImpl::saveContent(std::shared_ptr<persisten
 	try
 	{
 		std::shared_ptr<fUML::Semantics::Actions::ActionsPackage> package = fUML::Semantics::Actions::ActionsPackage::eInstance();
+	// Add references
+		saveHandler->addReference(this->getStructuredActivityNode(), "structuredActivityNode", getStructuredActivityNode()->eClass() != uml::umlPackage::eInstance()->getStructuredActivityNode_Class()); 
 		//
 		// Add new tags (from references)
 		//
@@ -504,6 +585,8 @@ std::shared_ptr<Any> StructuredActivityNodeActivationImpl::eGet(int featureID, b
 	{
 		case fUML::Semantics::Actions::ActionsPackage::STRUCTUREDACTIVITYNODEACTIVATION_ATTRIBUTE_ACTIVATIONGROUP:
 			return eAny(getActivationGroup(),fUML::Semantics::Activities::ActivitiesPackage::ACTIVITYNODEACTIVATIONGROUP_CLASS,false); //11311
+		case fUML::Semantics::Actions::ActionsPackage::STRUCTUREDACTIVITYNODEACTIVATION_ATTRIBUTE_STRUCTUREDACTIVITYNODE:
+			return eAny(getStructuredActivityNode(),uml::umlPackage::STRUCTUREDACTIVITYNODE_CLASS,false); //11312
 	}
 	return ActionActivationImpl::eGet(featureID, resolve, coreType);
 }
@@ -514,6 +597,8 @@ bool StructuredActivityNodeActivationImpl::internalEIsSet(int featureID) const
 	{
 		case fUML::Semantics::Actions::ActionsPackage::STRUCTUREDACTIVITYNODEACTIVATION_ATTRIBUTE_ACTIVATIONGROUP:
 			return getActivationGroup() != nullptr; //11311
+		case fUML::Semantics::Actions::ActionsPackage::STRUCTUREDACTIVITYNODEACTIVATION_ATTRIBUTE_STRUCTUREDACTIVITYNODE:
+			return getStructuredActivityNode() != nullptr; //11312
 	}
 	return ActionActivationImpl::internalEIsSet(featureID);
 }
@@ -549,6 +634,37 @@ bool StructuredActivityNodeActivationImpl::eSet(int featureID,  const std::share
 			else
 			{
 				DEBUG_ERROR("Invalid instance of 'ecore::ecoreAny' for feature 'activationGroup'. Failed to set feature!")
+				return false;
+			}
+		return true;
+		}
+		case fUML::Semantics::Actions::ActionsPackage::STRUCTUREDACTIVITYNODEACTIVATION_ATTRIBUTE_STRUCTUREDACTIVITYNODE:
+		{
+			std::shared_ptr<ecore::EcoreAny> ecoreAny = std::dynamic_pointer_cast<ecore::EcoreAny>(newValue);
+			if(ecoreAny)
+			{
+				try
+				{
+					std::shared_ptr<ecore::EObject> eObject = ecoreAny->getAsEObject();
+					std::shared_ptr<uml::StructuredActivityNode> _structuredActivityNode = std::dynamic_pointer_cast<uml::StructuredActivityNode>(eObject);
+					if(_structuredActivityNode)
+					{
+						setStructuredActivityNode(_structuredActivityNode); //11312
+					}
+					else
+					{
+						throw "Invalid argument";
+					}
+				}
+				catch(...)
+				{
+					DEBUG_ERROR("Invalid type stored in 'ecore::ecoreAny' for feature 'structuredActivityNode'. Failed to set feature!")
+					return false;
+				}
+			}
+			else
+			{
+				DEBUG_ERROR("Invalid instance of 'ecore::ecoreAny' for feature 'structuredActivityNode'. Failed to set feature!")
 				return false;
 			}
 		return true;

@@ -43,9 +43,9 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "fUML/Semantics/Actions/ActionsFactory.hpp"
 #include "fUML/Semantics/Activities/ActivitiesFactory.hpp"
 #include "uml/umlFactory.hpp"
+#include "fUML/Semantics/Actions/ActionsFactory.hpp"
 #include "uml/Action.hpp"
 #include "fUML/Semantics/Actions/ActionActivation.hpp"
 #include "fUML/Semantics/Activities/ActivityEdgeInstance.hpp"
@@ -55,6 +55,7 @@
 #include "fUML/Semantics/Actions/OutputPinActivation.hpp"
 #include "fUML/Semantics/Actions/PinActivation.hpp"
 #include "fUML/Semantics/Activities/Token.hpp"
+#include "uml/ValueSpecificationAction.hpp"
 //Factories and Package includes
 #include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/SemanticsPackage.hpp"
@@ -115,6 +116,7 @@ ValueSpecificationActionActivationImpl& ValueSpecificationActionActivationImpl::
 	//Clone Attributes with (deep copy)
 
 	//copy references with no containment (soft copy)
+	m_valueSpecificationAction  = obj.getValueSpecificationAction();
 	//Clone references with containment (deep copy)
 	return *this;
 }
@@ -134,10 +136,10 @@ void ValueSpecificationActionActivationImpl::doAction()
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
-	std::shared_ptr<uml::ValueSpecificationAction> action = std::dynamic_pointer_cast<uml::ValueSpecificationAction>(m_node);
+	const std::shared_ptr<uml::ValueSpecificationAction>& action = this->getValueSpecificationAction();
 	if (action != nullptr)
 	{
-		std::shared_ptr<uml::ValueSpecification> valueSpecificaton = action->getValue();
+		const std::shared_ptr<uml::ValueSpecification>& valueSpecificaton = action->getValue();
 		if (valueSpecificaton == nullptr)
 		{
 			throw "value of ValueSpecificationAction is null";
@@ -155,6 +157,49 @@ void ValueSpecificationActionActivationImpl::doAction()
 //*********************************
 // Reference Getters & Setters
 //*********************************
+/* Getter & Setter for reference valueSpecificationAction */
+const std::shared_ptr<uml::ValueSpecificationAction>& ValueSpecificationActionActivationImpl::getValueSpecificationAction() const
+{
+    return m_valueSpecificationAction;
+}
+void ValueSpecificationActionActivationImpl::setValueSpecificationAction(const std::shared_ptr<uml::ValueSpecificationAction>& _valueSpecificationAction)
+{
+    m_valueSpecificationAction = _valueSpecificationAction;
+	//additional setter call for redefined reference ActionActivation::action
+	fUML::Semantics::Actions::ActionActivationImpl::setAction(_valueSpecificationAction);
+}
+/*Additional Setter for redefined reference 'ActionActivation::action'*/
+void ValueSpecificationActionActivationImpl::setAction(const std::shared_ptr<uml::Action>& _action)
+{
+	std::shared_ptr<uml::ValueSpecificationAction> _valueSpecificationAction = std::dynamic_pointer_cast<uml::ValueSpecificationAction>(_action);
+	if(_valueSpecificationAction)
+	{
+		m_valueSpecificationAction = _valueSpecificationAction;
+
+		//additional setter call for redefined reference ActionActivation::action
+		fUML::Semantics::Actions::ActionActivationImpl::setAction(_valueSpecificationAction);
+	}
+	else
+	{
+		std::cerr<<"[ValueSpecificationActionActivation::setAction] : Could not set action because provided action was not of type 'std::shared_ptr<uml::ValueSpecificationAction>'"<<std::endl;
+	}
+}
+/*Additional Setter for redefined reference 'ActivityNodeActivation::node'*/
+void ValueSpecificationActionActivationImpl::setNode(const std::shared_ptr<uml::ActivityNode>& _node)
+{
+	std::shared_ptr<uml::ValueSpecificationAction> _valueSpecificationAction = std::dynamic_pointer_cast<uml::ValueSpecificationAction>(_node);
+	if(_valueSpecificationAction)
+	{
+		m_valueSpecificationAction = _valueSpecificationAction;
+
+		//additional setter call for redefined reference ActionActivation::action
+		fUML::Semantics::Actions::ActionActivationImpl::setNode(_node);
+	}
+	else
+	{
+		std::cerr<<"[ValueSpecificationActionActivation::setNode] : Could not set node because provided node was not of type 'std::shared_ptr<uml::ValueSpecificationAction>'"<<std::endl;
+	}
+}
 
 //*********************************
 // Union Getter
@@ -193,6 +238,25 @@ void ValueSpecificationActionActivationImpl::load(std::shared_ptr<persistence::i
 
 void ValueSpecificationActionActivationImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list)
 {
+	try
+	{
+		std::map<std::string, std::string>::const_iterator iter;
+		std::shared_ptr<ecore::EClass> metaClass = this->eClass(); // get MetaClass
+		iter = attr_list.find("valueSpecificationAction");
+		if ( iter != attr_list.end() )
+		{
+			// add unresolvedReference to loadHandler's list
+			loadHandler->addUnresolvedReference(iter->second, loadHandler->getCurrentObject(), metaClass->getEStructuralFeature("valueSpecificationAction")); // TODO use getEStructuralFeature() with id, for faster access to EStructuralFeature
+		}
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "| ERROR    | " << e.what() << std::endl;
+	}
+	catch (...) 
+	{
+		std::cout << "| ERROR    | " <<  "Exception occurred" << std::endl;
+	}
 
 	ActionActivationImpl::loadAttributes(loadHandler, attr_list);
 }
@@ -206,6 +270,20 @@ void ValueSpecificationActionActivationImpl::loadNode(std::string nodeName, std:
 
 void ValueSpecificationActionActivationImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
 {
+	switch(featureID)
+	{
+		case fUML::Semantics::Actions::ActionsPackage::VALUESPECIFICATIONACTIONACTIVATION_ATTRIBUTE_VALUESPECIFICATIONACTION:
+		{
+			if (references.size() == 1)
+			{
+				// Cast object to correct type
+				std::shared_ptr<uml::ValueSpecificationAction> _valueSpecificationAction = std::dynamic_pointer_cast<uml::ValueSpecificationAction>( references.front() );
+				setValueSpecificationAction(_valueSpecificationAction);
+			}
+			
+			return;
+		}
+	}
 	ActionActivationImpl::resolveReferences(featureID, references);
 }
 
@@ -227,6 +305,8 @@ void ValueSpecificationActionActivationImpl::saveContent(std::shared_ptr<persist
 	try
 	{
 		std::shared_ptr<fUML::Semantics::Actions::ActionsPackage> package = fUML::Semantics::Actions::ActionsPackage::eInstance();
+	// Add references
+		saveHandler->addReference(this->getValueSpecificationAction(), "valueSpecificationAction", getValueSpecificationAction()->eClass() != uml::umlPackage::eInstance()->getValueSpecificationAction_Class()); 
 	}
 	catch (std::exception& e)
 	{
@@ -246,6 +326,8 @@ std::shared_ptr<Any> ValueSpecificationActionActivationImpl::eGet(int featureID,
 {
 	switch(featureID)
 	{
+		case fUML::Semantics::Actions::ActionsPackage::VALUESPECIFICATIONACTIONACTIVATION_ATTRIBUTE_VALUESPECIFICATIONACTION:
+			return eAny(getValueSpecificationAction(),uml::umlPackage::VALUESPECIFICATIONACTION_CLASS,false); //12011
 	}
 	return ActionActivationImpl::eGet(featureID, resolve, coreType);
 }
@@ -254,6 +336,8 @@ bool ValueSpecificationActionActivationImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
+		case fUML::Semantics::Actions::ActionsPackage::VALUESPECIFICATIONACTIONACTIVATION_ATTRIBUTE_VALUESPECIFICATIONACTION:
+			return getValueSpecificationAction() != nullptr; //12011
 	}
 	return ActionActivationImpl::internalEIsSet(featureID);
 }
@@ -262,6 +346,37 @@ bool ValueSpecificationActionActivationImpl::eSet(int featureID,  const std::sha
 {
 	switch(featureID)
 	{
+		case fUML::Semantics::Actions::ActionsPackage::VALUESPECIFICATIONACTIONACTIVATION_ATTRIBUTE_VALUESPECIFICATIONACTION:
+		{
+			std::shared_ptr<ecore::EcoreAny> ecoreAny = std::dynamic_pointer_cast<ecore::EcoreAny>(newValue);
+			if(ecoreAny)
+			{
+				try
+				{
+					std::shared_ptr<ecore::EObject> eObject = ecoreAny->getAsEObject();
+					std::shared_ptr<uml::ValueSpecificationAction> _valueSpecificationAction = std::dynamic_pointer_cast<uml::ValueSpecificationAction>(eObject);
+					if(_valueSpecificationAction)
+					{
+						setValueSpecificationAction(_valueSpecificationAction); //12011
+					}
+					else
+					{
+						throw "Invalid argument";
+					}
+				}
+				catch(...)
+				{
+					DEBUG_ERROR("Invalid type stored in 'ecore::ecoreAny' for feature 'valueSpecificationAction'. Failed to set feature!")
+					return false;
+				}
+			}
+			else
+			{
+				DEBUG_ERROR("Invalid instance of 'ecore::ecoreAny' for feature 'valueSpecificationAction'. Failed to set feature!")
+				return false;
+			}
+		return true;
+		}
 	}
 
 	return ActionActivationImpl::eSet(featureID, newValue);

@@ -54,6 +54,12 @@ namespace fUML::Semantics::Actions
 			//*********************************
 			// Reference Getters & Setters
 			//*********************************
+			virtual const std::shared_ptr<uml::ValueSpecificationAction>& getValueSpecificationAction() const ;
+			virtual void setValueSpecificationAction(const std::shared_ptr<uml::ValueSpecificationAction>&) ;
+			/*Additional Setter for 'ActionActivation::action' redefined by reference 'valueSpecificationAction'*/
+			virtual void setAction(const std::shared_ptr<uml::Action>&) ;
+			/*Additional Setter for 'ActivityNodeActivation::node' redefined by reference 'valueSpecificationAction'*/
+			virtual void setNode(const std::shared_ptr<uml::ActivityNode>&) ;
 			
 			//*********************************
 			// Union Reference Getters

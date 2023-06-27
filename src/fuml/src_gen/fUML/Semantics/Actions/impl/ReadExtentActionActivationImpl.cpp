@@ -43,8 +43,8 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "fUML/Semantics/Actions/ActionsFactory.hpp"
 #include "fUML/Semantics/Activities/ActivitiesFactory.hpp"
+#include "fUML/Semantics/Actions/ActionsFactory.hpp"
 #include "uml/umlFactory.hpp"
 #include "uml/Action.hpp"
 #include "fUML/Semantics/Actions/ActionActivation.hpp"
@@ -139,7 +139,7 @@ void ReadExtentActionActivationImpl::doAction()
 	// Get the extent, at the current execution locus, of the classifier (which must be a class) identified in the action.
 // Place references to the resulting set of objects on the result pin.
 
-std::shared_ptr<uml::ReadExtentAction> action = this->getReadExtentAction();
+const std::shared_ptr<uml::ReadExtentAction>& action = this->getReadExtentAction();
 
 std::shared_ptr<Bag<fUML::MDE4CPP_Extensions::FUML_Object>> objects = this->getExecutionLocus()->retrieveExtent(action->getClassifier());
 std::shared_ptr<Bag<Any>> values(new Bag<Any>());

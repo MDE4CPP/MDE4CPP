@@ -421,6 +421,10 @@ const std::shared_ptr<ecore::EClass>& fUML::Semantics::Activities::ActivitiesPac
 }
 
 
+const std::shared_ptr<ecore::EReference>& fUML::Semantics::Activities::ActivitiesPackageImpl::getActivityParameterNodeActivation_Attribute_activityParameterNode() const
+{
+	return m_activityParameterNodeActivation_Attribute_activityParameterNode;
+}
 
 const std::shared_ptr<ecore::EOperation>& fUML::Semantics::Activities::ActivitiesPackageImpl::getActivityParameterNodeActivation_Operation_clearTokens() const
 {

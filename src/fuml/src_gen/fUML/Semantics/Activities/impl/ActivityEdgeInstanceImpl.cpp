@@ -132,8 +132,8 @@ int ActivityEdgeInstanceImpl::countOfferedValue()
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
 	int count = 0;
-	std::shared_ptr<Bag<fUML::Semantics::Activities::Offer> > offerList = this->getOffers();
-    for(std::shared_ptr<fUML::Semantics::Activities::Offer> offer : *offerList)
+	const std::shared_ptr<Bag<fUML::Semantics::Activities::Offer>>& offerList = this->getOffers();
+    for(const std::shared_ptr<fUML::Semantics::Activities::Offer>& offer : *offerList)
     {
         count+=offer->countOfferedValues();
     }
@@ -146,11 +146,11 @@ std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> ActivityEdgeInstanceImp
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
 	std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> tokens(new Bag<fUML::Semantics::Activities::Token>());
-	std::shared_ptr<Bag<fUML::Semantics::Activities::Offer>> offers = this->getOffers();
+	const std::shared_ptr<Bag<fUML::Semantics::Activities::Offer>>& offers = this->getOffers();
 
     for(const std::shared_ptr<fUML::Semantics::Activities::Offer>& offer : *offers)
     {
-		std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> tokensOfOffer = offer->retrieveOfferedTokens();
+	std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> tokensOfOffer = offer->retrieveOfferedTokens();
 
         tokens->insert(tokens->end(), tokensOfOffer->begin(), tokensOfOffer->end());
     }
@@ -163,7 +163,7 @@ bool ActivityEdgeInstanceImpl::hasOffer()
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
-	return std::any_of(this->getOffers()->begin(),this->getOffers()->end(),[](std::shared_ptr<fUML::Semantics::Activities::Offer> offer){return offer->hasTokens();});
+	return std::any_of(this->getOffers()->begin(),this->getOffers()->end(),[](const std::shared_ptr<fUML::Semantics::Activities::Offer>& offer){return offer->hasTokens();});
 
 	//end of body
 }
@@ -198,7 +198,7 @@ std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> ActivityEdgeInstanceImp
 	//generated from body annotation
 	std::shared_ptr<Bag<fUML::Semantics::Activities::Token> > tokens(new Bag<fUML::Semantics::Activities::Token>());
 
-	std::shared_ptr<Bag<fUML::Semantics::Activities::Offer> > offerList = this->getOffers();
+	const std::shared_ptr<Bag<fUML::Semantics::Activities::Offer>>& offerList = this->getOffers();
 	//NEWDEBUG
 	DEBUG_INFO((((this->getEdge() == nullptr) || (this->getEdge()->getName() == "")) ? "Anonymous edge" : (this->getEdge()->eClass()->getName() + " '" + this->getEdge()->getName() + "'")) << " has " << this->getOffers()->size() << " offer(s).")
 
@@ -226,7 +226,7 @@ std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> ActivityEdgeInstanceImp
     int remainingCount = maxCount;
 
     while (this->getOffers()->size() > 0 && remainingCount > 0) {
-    	std::shared_ptr<fUML::Semantics::Activities::Offer> offer = this->getOffers()->at(0);
+    	const std::shared_ptr<fUML::Semantics::Activities::Offer>& offer = this->getOffers()->at(0);
     	std::shared_ptr<Bag<fUML::Semantics::Activities::Token> > offeredTokens = offer->retrieveOfferedTokens();
         int count = offer->countOfferedValues();
         if (count <= remainingCount) {
@@ -237,7 +237,7 @@ std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> ActivityEdgeInstanceImp
             this->getOffers()->erase(this->getOffers()->begin());
         } else {
             for (int i = 0; i < remainingCount; i++) {
-            	std::shared_ptr<fUML::Semantics::Activities::Token> token = offeredTokens->at(i);
+            	const std::shared_ptr<fUML::Semantics::Activities::Token>& token = offeredTokens->at(i);
                 if (token->getValue() != nullptr) {
                     tokens->push_back(token);
                 }

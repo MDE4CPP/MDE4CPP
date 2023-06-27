@@ -69,6 +69,12 @@ namespace fUML::Semantics::Actions
 			//*********************************
 			virtual const std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup>& getActivationGroup() const ;
 			virtual void setActivationGroup(const std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup>&) ;
+			virtual const std::shared_ptr<uml::StructuredActivityNode>& getStructuredActivityNode() const ;
+			virtual void setStructuredActivityNode(const std::shared_ptr<uml::StructuredActivityNode>&) ;
+			/*Additional Setter for 'ActionActivation::action' redefined by reference 'structuredActivityNode'*/
+			virtual void setAction(const std::shared_ptr<uml::Action>&) ;
+			/*Additional Setter for 'ActivityNodeActivation::node' redefined by reference 'structuredActivityNode'*/
+			virtual void setNode(const std::shared_ptr<uml::ActivityNode>&) ;
 			
 			//*********************************
 			// Union Reference Getters

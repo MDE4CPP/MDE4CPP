@@ -49,9 +49,9 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
+#include "fUML/Semantics/Activities/ActivitiesFactory.hpp"
 #include "fUML/Semantics/Actions/ActionsFactory.hpp"
 #include "uml/umlFactory.hpp"
-#include "fUML/Semantics/Activities/ActivitiesFactory.hpp"
 #include "uml/Action.hpp"
 #include "fUML/Semantics/Activities/ActivityEdgeInstance.hpp"
 #include "uml/ActivityNode.hpp"
@@ -142,8 +142,8 @@ void RemoveStructuralFeatureValueActionActivationImpl::doAction()
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
-	std::shared_ptr<uml::RemoveStructuralFeatureValueAction> action = this->getRemoveStructuralFeatureValueAction();
-	std::shared_ptr<uml::StructuralFeature> feature = action->getStructuralFeature();
+	const std::shared_ptr<uml::RemoveStructuralFeatureValueAction>& action = this->getRemoveStructuralFeatureValueAction();
+	const std::shared_ptr<uml::StructuralFeature>& feature = action->getStructuralFeature();
 	std::shared_ptr<uml::Property> property = std::dynamic_pointer_cast<uml::Property>(feature);
 
 	if(!property)
@@ -157,7 +157,7 @@ void RemoveStructuralFeatureValueActionActivationImpl::doAction()
 	std::string objectPinName = action->getObject()->getName();
 	if((objectPinName.empty()) || (objectPinName.find("self") == 0)){
 		//objectValue is set to the context of the current activity execution
-		std::shared_ptr<uml::Element> context = this->getActivityExecution()->getContext();
+		const std::shared_ptr<uml::Element>& context = this->getActivityExecution()->getContext();
 			
 		objectValue = eUMLAny(context, context->getMetaElementID());
 	}

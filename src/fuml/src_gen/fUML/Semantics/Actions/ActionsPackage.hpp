@@ -436,11 +436,12 @@ namespace fUML::Semantics::Actions
 			// Begin Class ExpansionRegionActivation
 			//Class and Feature IDs 
 			static const unsigned long EXPANSIONREGIONACTIVATION_CLASS = 468567239;
-			static const unsigned int EXPANSIONREGIONACTIVATION_CLASS_FEATURE_COUNT = 15;
+			static const unsigned int EXPANSIONREGIONACTIVATION_CLASS_FEATURE_COUNT = 16;
 			static const unsigned int EXPANSIONREGIONACTIVATION_CLASS_OPERATION_COUNT = 60;
 			static const unsigned long EXPANSIONREGIONACTIVATION_ATTRIBUTE_NEXT = 1185153702;
 			
 			static const unsigned long EXPANSIONREGIONACTIVATION_ATTRIBUTE_ACTIVATIONGROUPS = 1045207305;
+			static const unsigned long EXPANSIONREGIONACTIVATION_ATTRIBUTE_EXPANSIONREGION = 1419056195;
 			static const unsigned long EXPANSIONREGIONACTIVATION_ATTRIBUTE_INPUTEXPANSIONTOKENS = 1671556985;
 			static const unsigned long EXPANSIONREGIONACTIVATION_ATTRIBUTE_INPUTTOKENS = 438709559;
 			
@@ -465,6 +466,7 @@ namespace fUML::Semantics::Actions
 			virtual const std::shared_ptr<ecore::EAttribute>& getExpansionRegionActivation_Attribute_next() const = 0;
 			
 			virtual const std::shared_ptr<ecore::EReference>& getExpansionRegionActivation_Attribute_activationGroups() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getExpansionRegionActivation_Attribute_expansionRegion() const = 0;
 			virtual const std::shared_ptr<ecore::EReference>& getExpansionRegionActivation_Attribute_inputExpansionTokens() const = 0;
 			virtual const std::shared_ptr<ecore::EReference>& getExpansionRegionActivation_Attribute_inputTokens() const = 0;
 			
@@ -720,10 +722,11 @@ namespace fUML::Semantics::Actions
 			// Begin Class StructuredActivityNodeActivation
 			//Class and Feature IDs 
 			static const unsigned long STRUCTUREDACTIVITYNODEACTIVATION_CLASS = 1589145908;
-			static const unsigned int STRUCTUREDACTIVITYNODEACTIVATION_CLASS_FEATURE_COUNT = 12;
+			static const unsigned int STRUCTUREDACTIVITYNODEACTIVATION_CLASS_FEATURE_COUNT = 13;
 			static const unsigned int STRUCTUREDACTIVITYNODEACTIVATION_CLASS_OPERATION_COUNT = 60;
 			
 			static const unsigned long STRUCTUREDACTIVITYNODEACTIVATION_ATTRIBUTE_ACTIVATIONGROUP = 1502048964;
+			static const unsigned long STRUCTUREDACTIVITYNODEACTIVATION_ATTRIBUTE_STRUCTUREDACTIVITYNODE = 1781814089;
 			
 			static const unsigned long STRUCTUREDACTIVITYNODEACTIVATION_OPERATION_COMPLETEACTION = 3878860807;
 			static const unsigned long STRUCTUREDACTIVITYNODEACTIVATION_OPERATION_CREATEEDGEINSTANCES = 4189320520;
@@ -745,6 +748,7 @@ namespace fUML::Semantics::Actions
 			
 			
 			virtual const std::shared_ptr<ecore::EReference>& getStructuredActivityNodeActivation_Attribute_activationGroup() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getStructuredActivityNodeActivation_Attribute_structuredActivityNode() const = 0;
 			
 			virtual const std::shared_ptr<ecore::EOperation>& getStructuredActivityNodeActivation_Operation_completeAction() const = 0;
 			virtual const std::shared_ptr<ecore::EOperation>& getStructuredActivityNodeActivation_Operation_createEdgeInstances() const = 0;
@@ -767,9 +771,10 @@ namespace fUML::Semantics::Actions
 			// Begin Class ValueSpecificationActionActivation
 			//Class and Feature IDs 
 			static const unsigned long VALUESPECIFICATIONACTIONACTIVATION_CLASS = 1084170516;
-			static const unsigned int VALUESPECIFICATIONACTIONACTIVATION_CLASS_FEATURE_COUNT = 11;
+			static const unsigned int VALUESPECIFICATIONACTIONACTIVATION_CLASS_FEATURE_COUNT = 12;
 			static const unsigned int VALUESPECIFICATIONACTIONACTIVATION_CLASS_OPERATION_COUNT = 47;
 			
+			static const unsigned long VALUESPECIFICATIONACTIONACTIVATION_ATTRIBUTE_VALUESPECIFICATIONACTION = 204258223;
 			
 			static const unsigned long VALUESPECIFICATIONACTIONACTIVATION_OPERATION_DOACTION = 871196704;
 			
@@ -777,6 +782,7 @@ namespace fUML::Semantics::Actions
 			virtual const std::shared_ptr<ecore::EClass>& getValueSpecificationActionActivation_Class() const = 0;
 			
 			
+			virtual const std::shared_ptr<ecore::EReference>& getValueSpecificationActionActivation_Attribute_valueSpecificationAction() const = 0;
 			
 			virtual const std::shared_ptr<ecore::EOperation>& getValueSpecificationActionActivation_Operation_doAction() const = 0;
 			

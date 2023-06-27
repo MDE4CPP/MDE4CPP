@@ -143,7 +143,7 @@ int ObjectNodeActivationImpl::countOfferedValues()
 	//generated from body annotation
 	int totalValueCount = 0;
 
-	std::shared_ptr<Bag<fUML::Semantics::Activities::ActivityEdgeInstance>> incomingEdges = this->getIncomingEdges();
+	const std::shared_ptr<Bag<fUML::Semantics::Activities::ActivityEdgeInstance>>& incomingEdges = this->getIncomingEdges();
 
 	for(const std::shared_ptr<fUML::Semantics::Activities::ActivityEdgeInstance>& incomingEdge : *incomingEdges)
 	{
@@ -179,10 +179,9 @@ std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> ObjectNodeActivationImp
   DEBUG_INFO(this->getNode()->eClass()->getName() << " '" << this->getNode()->getName() << "' has " << numberUnofferedTokens << " unoffered tokens.")
   DEBUG_INFO(this->getNode()->eClass()->getName() << " '" << this->getNode()->getName() << "' has " << offeredTokenCount << " offered tokens on incoming edges.")
  
-  Bag<fUML::Semantics::Activities::Token>* heldTokenPtr = this->getHeldTokens().get(); 
-  Bag<fUML::Semantics::Activities::Token>* tokensPtr = tokens.get();
+  std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> heldTokens = this->getHeldTokens(); 
   
-  tokensPtr->insert(tokensPtr->begin(), heldTokenPtr->begin() + offeredTokenCount, heldTokenPtr->begin() + offeredTokenCount + numberUnofferedTokens);
+  tokens->insert(tokens->begin(), heldTokens->begin() + offeredTokenCount, heldTokens->begin() + offeredTokenCount + numberUnofferedTokens);
 
   return tokens; 
 	//end of body

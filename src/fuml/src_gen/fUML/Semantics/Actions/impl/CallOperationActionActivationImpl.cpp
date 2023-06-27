@@ -53,10 +53,10 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
+#include "fUML/Semantics/Activities/ActivitiesFactory.hpp"
 #include "uml/umlFactory.hpp"
 #include "fUML/Semantics/Actions/ActionsFactory.hpp"
 #include "fUML/Semantics/CommonBehavior/CommonBehaviorFactory.hpp"
-#include "fUML/Semantics/Activities/ActivitiesFactory.hpp"
 #include "uml/Action.hpp"
 #include "fUML/Semantics/Activities/ActivityEdgeInstance.hpp"
 #include "uml/ActivityNode.hpp"
@@ -279,21 +279,21 @@ std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> CallOperat
 				return nullptr;
 			}
 			
-			std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> unofferedTokens = targetPinActivation->getUnofferedTokens();
+			std::shared_ptr<Bag<fUML::Semantics::Activities::Token> > unofferedTokens = targetPinActivation->getUnofferedTokens();
 			if(unofferedTokens == nullptr)
 			{
 				DEBUG_ERROR("Unoffered tokens is nullptr! Failed to call operation!")
 				return nullptr;
 			}
 
-			const std::shared_ptr<fUML::Semantics::Activities::Token>& firstToken = unofferedTokens->at(unofferedTokens->size()-1);
+			std::shared_ptr<fUML::Semantics::Activities::Token> firstToken = unofferedTokens->at(unofferedTokens->size()-1);
 			if(firstToken == nullptr)
 			{
 				DEBUG_ERROR("First token is nullptr! Failed to call operation!")
 				return nullptr;
 			}
 
-			const std::shared_ptr<Any>& target = firstToken->getValue();
+			std::shared_ptr<Any> target = firstToken->getValue();
 
 			if(target)
 			{

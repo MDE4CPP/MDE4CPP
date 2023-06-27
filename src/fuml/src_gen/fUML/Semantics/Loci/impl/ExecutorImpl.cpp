@@ -199,13 +199,13 @@ std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> ExecutorIm
         return nullptr;
     }
 
-    for(std::shared_ptr<fUML::Semantics::CommonBehavior::ParameterValue> parameterValue : *inputs )
+    for(const std::shared_ptr<fUML::Semantics::CommonBehavior::ParameterValue>& parameterValue : *inputs )
     {
         execution->setParameterValue(parameterValue);
     }
 
     execution->execute();
-    std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue> > outputValues = execution->getOutputParameterValues();
+    const std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>>& outputValues = execution->getOutputParameterValues();
     execution->destroy();
 
     return outputValues;

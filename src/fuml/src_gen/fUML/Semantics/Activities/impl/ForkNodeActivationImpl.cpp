@@ -127,7 +127,7 @@ void ForkNodeActivationImpl::fire(const std::shared_ptr<Bag<fUML::Semantics::Act
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
-	std::shared_ptr<Bag<fUML::Semantics::Activities::ActivityEdgeInstance> > outgoingEdges = this->getOutgoingEdges();
+	const std::shared_ptr<Bag<fUML::Semantics::Activities::ActivityEdgeInstance>>& outgoingEdges = this->getOutgoingEdges();
     int outgoingEdgeCount = outgoingEdges->size();
 
 #ifndef NDEBUG
@@ -144,7 +144,7 @@ void ForkNodeActivationImpl::fire(const std::shared_ptr<Bag<fUML::Semantics::Act
     std::shared_ptr<Bag<fUML::Semantics::Activities::Token> > forkedTokens(new Bag<fUML::Semantics::Activities::Token>());
     for (unsigned int i = 0; i < incomingTokens->size(); i++) 
     {
-    	std::shared_ptr<fUML::Semantics::Activities::Token> token = incomingTokens->at(i);
+    	const std::shared_ptr<fUML::Semantics::Activities::Token>& token = incomingTokens->at(i);
     	std::shared_ptr<fUML::Semantics::Activities::ForkedToken> forkedToken(fUML::Semantics::Activities::ActivitiesFactory::eInstance()->createForkedToken());
         forkedToken->setBaseToken(token);
         forkedToken->setRemainingOffersCount(outgoingEdgeCount);

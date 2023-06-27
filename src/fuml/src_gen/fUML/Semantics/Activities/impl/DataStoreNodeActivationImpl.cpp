@@ -125,7 +125,7 @@ void DataStoreNodeActivationImpl::addToken(const std::shared_ptr<fUML::Semantics
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
-	std::shared_ptr<Any>value = token->getValue();
+	const std::shared_ptr<Any>& value = token->getValue();
 		
 		bool isUnique = true;
 		if (value != nullptr) 

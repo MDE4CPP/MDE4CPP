@@ -51,6 +51,7 @@
 #include "fUML/Semantics/Activities/ActivityEdgeInstance.hpp"
 #include "uml/ActivityNode.hpp"
 #include "fUML/Semantics/Activities/ActivityNodeActivationGroup.hpp"
+#include "uml/ActivityParameterNode.hpp"
 #include "fUML/Semantics/Activities/ObjectNodeActivation.hpp"
 #include "fUML/Semantics/Activities/Token.hpp"
 //Factories and Package includes
@@ -112,6 +113,7 @@ ActivityParameterNodeActivationImpl& ActivityParameterNodeActivationImpl::operat
 	//Clone Attributes with (deep copy)
 
 	//copy references with no containment (soft copy)
+	m_activityParameterNode  = obj.getActivityParameterNode();
 	//Clone references with containment (deep copy)
 	return *this;
 }
@@ -144,7 +146,7 @@ void ActivityParameterNodeActivationImpl::fire(const std::shared_ptr<Bag<fUML::S
 	if (this->getNode()->getIncoming()->size() == 0) 
 	{
 		DEBUG_INFO("Fireing input ActivityParameterNode '" << this->getNode()->getName() << "'.")
-		std::shared_ptr<uml::Parameter> parameter = (std::dynamic_pointer_cast<uml::ActivityParameterNode>(this->getNode()))->getParameter();
+		const std::shared_ptr<uml::Parameter>& parameter = this->getActivityParameterNode()->getParameter();
 		std::shared_ptr<fUML::Semantics::CommonBehavior::ParameterValue> parameterValue = this->getActivityExecution()->getParameterValue(parameter);
 
 		if (parameterValue != nullptr) 
@@ -185,6 +187,33 @@ void ActivityParameterNodeActivationImpl::fire(const std::shared_ptr<Bag<fUML::S
 //*********************************
 // Reference Getters & Setters
 //*********************************
+/* Getter & Setter for reference activityParameterNode */
+const std::shared_ptr<uml::ActivityParameterNode>& ActivityParameterNodeActivationImpl::getActivityParameterNode() const
+{
+    return m_activityParameterNode;
+}
+void ActivityParameterNodeActivationImpl::setActivityParameterNode(const std::shared_ptr<uml::ActivityParameterNode>& _activityParameterNode)
+{
+    m_activityParameterNode = _activityParameterNode;
+	//additional setter call for redefined reference ActivityNodeActivation::node
+	fUML::Semantics::Activities::ActivityNodeActivationImpl::setNode(_activityParameterNode);
+}
+/*Additional Setter for redefined reference 'ActivityNodeActivation::node'*/
+void ActivityParameterNodeActivationImpl::setNode(const std::shared_ptr<uml::ActivityNode>& _node)
+{
+	std::shared_ptr<uml::ActivityParameterNode> _activityParameterNode = std::dynamic_pointer_cast<uml::ActivityParameterNode>(_node);
+	if(_activityParameterNode)
+	{
+		m_activityParameterNode = _activityParameterNode;
+
+		//additional setter call for redefined reference ActivityNodeActivation::node
+		fUML::Semantics::Activities::ActivityNodeActivationImpl::setNode(_activityParameterNode);
+	}
+	else
+	{
+		std::cerr<<"[ActivityParameterNodeActivation::setNode] : Could not set node because provided node was not of type 'std::shared_ptr<uml::ActivityParameterNode>'"<<std::endl;
+	}
+}
 
 //*********************************
 // Union Getter
@@ -223,6 +252,25 @@ void ActivityParameterNodeActivationImpl::load(std::shared_ptr<persistence::inte
 
 void ActivityParameterNodeActivationImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list)
 {
+	try
+	{
+		std::map<std::string, std::string>::const_iterator iter;
+		std::shared_ptr<ecore::EClass> metaClass = this->eClass(); // get MetaClass
+		iter = attr_list.find("activityParameterNode");
+		if ( iter != attr_list.end() )
+		{
+			// add unresolvedReference to loadHandler's list
+			loadHandler->addUnresolvedReference(iter->second, loadHandler->getCurrentObject(), metaClass->getEStructuralFeature("activityParameterNode")); // TODO use getEStructuralFeature() with id, for faster access to EStructuralFeature
+		}
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "| ERROR    | " << e.what() << std::endl;
+	}
+	catch (...) 
+	{
+		std::cout << "| ERROR    | " <<  "Exception occurred" << std::endl;
+	}
 
 	ObjectNodeActivationImpl::loadAttributes(loadHandler, attr_list);
 }
@@ -236,6 +284,20 @@ void ActivityParameterNodeActivationImpl::loadNode(std::string nodeName, std::sh
 
 void ActivityParameterNodeActivationImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
 {
+	switch(featureID)
+	{
+		case fUML::Semantics::Activities::ActivitiesPackage::ACTIVITYPARAMETERNODEACTIVATION_ATTRIBUTE_ACTIVITYPARAMETERNODE:
+		{
+			if (references.size() == 1)
+			{
+				// Cast object to correct type
+				std::shared_ptr<uml::ActivityParameterNode> _activityParameterNode = std::dynamic_pointer_cast<uml::ActivityParameterNode>( references.front() );
+				setActivityParameterNode(_activityParameterNode);
+			}
+			
+			return;
+		}
+	}
 	ObjectNodeActivationImpl::resolveReferences(featureID, references);
 }
 
@@ -257,6 +319,8 @@ void ActivityParameterNodeActivationImpl::saveContent(std::shared_ptr<persistenc
 	try
 	{
 		std::shared_ptr<fUML::Semantics::Activities::ActivitiesPackage> package = fUML::Semantics::Activities::ActivitiesPackage::eInstance();
+	// Add references
+		saveHandler->addReference(this->getActivityParameterNode(), "activityParameterNode", getActivityParameterNode()->eClass() != uml::umlPackage::eInstance()->getActivityParameterNode_Class()); 
 	}
 	catch (std::exception& e)
 	{
@@ -276,6 +340,8 @@ std::shared_ptr<Any> ActivityParameterNodeActivationImpl::eGet(int featureID, bo
 {
 	switch(featureID)
 	{
+		case fUML::Semantics::Activities::ActivitiesPackage::ACTIVITYPARAMETERNODEACTIVATION_ATTRIBUTE_ACTIVITYPARAMETERNODE:
+			return eAny(getActivityParameterNode(),uml::umlPackage::ACTIVITYPARAMETERNODE_CLASS,false); //117
 	}
 	return ObjectNodeActivationImpl::eGet(featureID, resolve, coreType);
 }
@@ -284,6 +350,8 @@ bool ActivityParameterNodeActivationImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
+		case fUML::Semantics::Activities::ActivitiesPackage::ACTIVITYPARAMETERNODEACTIVATION_ATTRIBUTE_ACTIVITYPARAMETERNODE:
+			return getActivityParameterNode() != nullptr; //117
 	}
 	return ObjectNodeActivationImpl::internalEIsSet(featureID);
 }
@@ -292,6 +360,37 @@ bool ActivityParameterNodeActivationImpl::eSet(int featureID,  const std::shared
 {
 	switch(featureID)
 	{
+		case fUML::Semantics::Activities::ActivitiesPackage::ACTIVITYPARAMETERNODEACTIVATION_ATTRIBUTE_ACTIVITYPARAMETERNODE:
+		{
+			std::shared_ptr<ecore::EcoreAny> ecoreAny = std::dynamic_pointer_cast<ecore::EcoreAny>(newValue);
+			if(ecoreAny)
+			{
+				try
+				{
+					std::shared_ptr<ecore::EObject> eObject = ecoreAny->getAsEObject();
+					std::shared_ptr<uml::ActivityParameterNode> _activityParameterNode = std::dynamic_pointer_cast<uml::ActivityParameterNode>(eObject);
+					if(_activityParameterNode)
+					{
+						setActivityParameterNode(_activityParameterNode); //117
+					}
+					else
+					{
+						throw "Invalid argument";
+					}
+				}
+				catch(...)
+				{
+					DEBUG_ERROR("Invalid type stored in 'ecore::ecoreAny' for feature 'activityParameterNode'. Failed to set feature!")
+					return false;
+				}
+			}
+			else
+			{
+				DEBUG_ERROR("Invalid instance of 'ecore::ecoreAny' for feature 'activityParameterNode'. Failed to set feature!")
+				return false;
+			}
+		return true;
+		}
 	}
 
 	return ObjectNodeActivationImpl::eSet(featureID, newValue);

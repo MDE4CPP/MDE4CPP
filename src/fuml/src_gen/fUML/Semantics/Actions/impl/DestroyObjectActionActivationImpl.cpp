@@ -45,9 +45,9 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
+#include "fUML/Semantics/Activities/ActivitiesFactory.hpp"
 #include "fUML/Semantics/Actions/ActionsFactory.hpp"
 #include "uml/umlFactory.hpp"
-#include "fUML/Semantics/Activities/ActivitiesFactory.hpp"
 #include "uml/Action.hpp"
 #include "fUML/Semantics/Actions/ActionActivation.hpp"
 #include "fUML/Semantics/Activities/ActivityEdgeInstance.hpp"
@@ -200,17 +200,16 @@ void DestroyObjectActionActivationImpl::doAction()
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
-		//generated from body annotation
 		// Get the value on the target input pin.
 	// If the value is not a reference, then the action has no effect. Otherwise, do the following.
 	// If isDestroyLinks is true, destroy all links in which the referent participates.
 	// If isDestroyOwnedObjects is true, destroy all objects owned by the referent via composition links.
 	// Destroy the referent object.
 
-	std::shared_ptr<uml::DestroyObjectAction> action = this->getDestroyObjectAction();
+	const std::shared_ptr<uml::DestroyObjectAction>& action = this->getDestroyObjectAction();
 	if(action)
 	{
-		std::shared_ptr<uml::InputPin> destroyTarget=action->getTarget();
+		const std::shared_ptr<uml::InputPin>& destroyTarget=action->getTarget();
 		if(destroyTarget)
 		{
 			std::shared_ptr<Bag<Any>> tokens = this->takeTokens(destroyTarget);

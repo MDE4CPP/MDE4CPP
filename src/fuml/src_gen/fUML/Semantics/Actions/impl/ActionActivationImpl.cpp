@@ -63,8 +63,8 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "fUML/Semantics/Actions/ActionsFactory.hpp"
 #include "fUML/Semantics/Activities/ActivitiesFactory.hpp"
+#include "fUML/Semantics/Actions/ActionsFactory.hpp"
 #include "uml/umlFactory.hpp"
 #include "uml/Action.hpp"
 #include "fUML/Semantics/Activities/ActivityEdgeInstance.hpp"
@@ -295,7 +295,7 @@ void ActionActivationImpl::createNodeActivations()
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
-		const std::shared_ptr<uml::Action>& action = this->getAction();
+	const std::shared_ptr<uml::Action>& action = this->getAction();
 
     //createinputpin activation
 	std::shared_ptr<Bag<uml::ActivityNode> > inputPinNodes(new Bag<uml::ActivityNode>());
@@ -336,7 +336,7 @@ void ActionActivationImpl::createNodeActivations()
     }
 
     auto group = this->getGroup().lock();
-    if(group)
+    if(group )
     {
     	group->createNodeActivations(inputPinNodes);
 
@@ -427,14 +427,14 @@ bool ActionActivationImpl::isReady()
          if(ready)
          {
         	 const std::shared_ptr<Bag<fUML::Semantics::Activities::ActivityEdgeInstance>>& edgeList = this->getIncomingEdges();
-             ready = std::all_of(edgeList->begin(),edgeList->end(),[](std::shared_ptr<fUML::Semantics::Activities::ActivityEdgeInstance> edge ){return edge->hasOffer();});
+             ready = std::all_of(edgeList->begin(),edgeList->end(),[](const std::shared_ptr<fUML::Semantics::Activities::ActivityEdgeInstance>& edge ){return edge->hasOffer();});
          }
 
          //Have all Inputpin an Activation?
          if(ready)
          {
 		const std::shared_ptr<Bag<fUML::Semantics::Actions::InputPinActivation>>& activations = this->getInputPinActivation();
-		ready = std::all_of(activations->begin(),activations->end(),[]( std::shared_ptr<fUML::Semantics::Actions::InputPinActivation> pin){return pin->isReady();});
+		ready = std::all_of(activations->begin(),activations->end(),[](const std::shared_ptr<fUML::Semantics::Actions::InputPinActivation>& pin){return pin->isReady();});
          }
 
     }
@@ -448,7 +448,7 @@ bool ActionActivationImpl::isReady()
             if(ready)
             {
             	const std::shared_ptr<Bag<fUML::Semantics::Activities::ActivityEdgeInstance>>& edgeList = this->getIncomingEdges();
-            	ready = std::all_of(edgeList->begin(),edgeList->end(),[](std::shared_ptr<fUML::Semantics::Activities::ActivityEdgeInstance> edge ){return edge->hasOffer();});
+                ready = std::all_of(edgeList->begin(),edgeList->end(),[](const std::shared_ptr<fUML::Semantics::Activities::ActivityEdgeInstance>& edge ){return edge->hasOffer();});
             }
 
             if(!ready)
@@ -513,18 +513,18 @@ std::shared_ptr<fUML::Semantics::Actions::PinActivation> ActionActivationImpl::r
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
 	std::shared_ptr<fUML::Semantics::Actions::PinActivation> pinActivation = nullptr;
-	const std::shared_ptr<Bag<fUML::Semantics::Actions::PinActivation>>& pinActivationList = this->getPinActivation();
+    const std::shared_ptr<Bag<fUML::Semantics::Actions::PinActivation>>& pinActivationList = this->getPinActivation();
 
-	for(const std::shared_ptr<fUML::Semantics::Actions::PinActivation>& thisPinActivation : *pinActivationList)
-    	{
-        		if (thisPinActivation->getNode() == pin) 
-		{
-            		pinActivation = thisPinActivation;
-           		break;
-        		}
-    	}
+    for(const std::shared_ptr<fUML::Semantics::Actions::PinActivation>& thisPinActivation : *pinActivationList)
+    {
+        if (thisPinActivation->getNode() == pin) 
+	{
+            pinActivation = thisPinActivation;
+            break;
+        }
+    }
 
-	return pinActivation;
+    return pinActivation;
 	//end of body
 }
 
@@ -579,14 +579,14 @@ std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> ActionActivationImpl::t
         this->setFiring(!action->getIsLocallyReentrant());
     }
 
-    std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> offeredTokens(new Bag<fUML::Semantics::Activities::Token>());
+    std::shared_ptr<Bag<fUML::Semantics::Activities::Token> > offeredTokens(new Bag<fUML::Semantics::Activities::Token>());
     const std::shared_ptr<Bag<fUML::Semantics::Activities::ActivityEdgeInstance>>& incomingEdgeList = this->getIncomingEdges();
 	
     for(const std::shared_ptr<fUML::Semantics::Activities::ActivityEdgeInstance>& incomingEdge : *incomingEdgeList)
     {
-    	std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> tokens = incomingEdge->takeOfferedTokens();
+    	std::shared_ptr<Bag<fUML::Semantics::Activities::Token> > tokenList = incomingEdge->takeOfferedTokens();
 		
-        for(const std::shared_ptr<fUML::Semantics::Activities::Token>& token: *tokens)
+        for(const std::shared_ptr<fUML::Semantics::Activities::Token>& token: *tokenList)
         {
             token->withdraw();
             offeredTokens->push_back(token);
@@ -596,7 +596,7 @@ std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> ActionActivationImpl::t
     // *** Fire all input pins concurrently. ***
     if(action != nullptr)
     {
-        const std::shared_ptr<Subset<fUML::Semantics::Actions::InputPinActivation, fUML::Semantics::Actions::PinActivation>>& inputPinActivations = this->getInputPinActivation();
+    	const std::shared_ptr<Subset<fUML::Semantics::Actions::InputPinActivation, fUML::Semantics::Actions::PinActivation>>& inputPinActivations = this->getInputPinActivation();
         for (const std::shared_ptr<fUML::Semantics::Actions::InputPinActivation>& pinActivation : *inputPinActivations)
         {
             if(pinActivation!=nullptr)
@@ -636,7 +636,7 @@ std::shared_ptr<Bag<Any>> ActionActivationImpl::takeTokens(const std::shared_ptr
         	if(value != nullptr)
         	{
         		DEBUG_INFO("Value in token[" << tokenNumber <<"] : " << value->toString() << ".")
-            	values->push_back(value);
+            		values->push_back(value);
         	}
     	}
     return values;

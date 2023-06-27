@@ -1458,6 +1458,22 @@ void ActivitiesPackageImpl::initializeActivityParameterNodeActivationContent()
 	/*
 	 * EReferences
 	 */
+	m_activityParameterNodeActivation_Attribute_activityParameterNode->setName("activityParameterNode");
+	m_activityParameterNodeActivation_Attribute_activityParameterNode->setEType(uml::umlPackage::eInstance()->getActivityParameterNode_Class());
+	m_activityParameterNodeActivation_Attribute_activityParameterNode->setLowerBound(1);
+	m_activityParameterNodeActivation_Attribute_activityParameterNode->setUpperBound(1);
+	m_activityParameterNodeActivation_Attribute_activityParameterNode->setTransient(false);
+	m_activityParameterNodeActivation_Attribute_activityParameterNode->setVolatile(false);
+	m_activityParameterNodeActivation_Attribute_activityParameterNode->setChangeable(true);
+	m_activityParameterNodeActivation_Attribute_activityParameterNode->setUnsettable(false);
+	m_activityParameterNodeActivation_Attribute_activityParameterNode->setUnique(true);
+	m_activityParameterNodeActivation_Attribute_activityParameterNode->setDerived(false);
+	m_activityParameterNodeActivation_Attribute_activityParameterNode->setOrdered(true);
+	m_activityParameterNodeActivation_Attribute_activityParameterNode->setContainment(false);
+	m_activityParameterNodeActivation_Attribute_activityParameterNode->setResolveProxies(true);
+	m_activityParameterNodeActivation_Attribute_activityParameterNode->setDefaultValueLiteral("");	
+	
+	m_activityParameterNodeActivation_Attribute_activityParameterNode->_setID(ACTIVITYPARAMETERNODEACTIVATION_ATTRIBUTE_ACTIVITYPARAMETERNODE);
 	
 	/*
 	 * EOperations

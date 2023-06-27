@@ -299,8 +299,7 @@ std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> ActivityNodeActivationI
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
-	std::shared_ptr<Bag<fUML::Semantics::Activities::Token> > tokens(this->getHeldTokens());
-    return tokens;
+	    return this->getHeldTokens();
 	//end of body
 }
 
@@ -353,7 +352,7 @@ int ActivityNodeActivationImpl::removeToken(const std::shared_ptr<fUML::Semantic
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
-		std::shared_ptr<Bag<fUML::Semantics::Activities::Token> > heldTokenList = this->getHeldTokens();
+		const std::shared_ptr<Bag<fUML::Semantics::Activities::Token>>& heldTokenList = this->getHeldTokens();
 	std::vector<std::shared_ptr<fUML::Semantics::Activities::Token>>::iterator iter = heldTokenList->begin();
 	std::vector<std::shared_ptr<fUML::Semantics::Activities::Token>>::iterator end = heldTokenList->end();
 
@@ -410,7 +409,7 @@ void ActivityNodeActivationImpl::sendOffers(const std::shared_ptr<Bag<fUML::Sema
 	if (tokens->size() > 0) 
 	{
         // *** Send all outgoing offers concurrently. ***
-	std::shared_ptr<Bag<fUML::Semantics::Activities::ActivityEdgeInstance> > outgoingEdgeList = this->getOutgoingEdges();
+	const std::shared_ptr<Bag<fUML::Semantics::Activities::ActivityEdgeInstance>>& outgoingEdgeList = this->getOutgoingEdges();
         for(const std::shared_ptr<fUML::Semantics::Activities::ActivityEdgeInstance>& outgoingEdge : *outgoingEdgeList)
         {
 		auto target=outgoingEdge->getTarget().lock();
@@ -455,7 +454,7 @@ std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> ActivityNodeActivationI
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
 	std::shared_ptr<Bag<fUML::Semantics::Activities::Token> > allTokens(new Bag<fUML::Semantics::Activities::Token>());
-	std::shared_ptr<Bag<fUML::Semantics::Activities::ActivityEdgeInstance> > incomingEdgeList = this->getIncomingEdges();
+	const std::shared_ptr<Bag<fUML::Semantics::Activities::ActivityEdgeInstance>>& incomingEdgeList = this->getIncomingEdges();
 
 	DEBUG_INFO(((this->getNode() == nullptr) ? "Anonymous node" : (this->getNode()->eClass()->getName() + " '" + this->getNode()->getName() + "'")) << " has " << incomingEdgeList->size() << " incoming edges.")
 

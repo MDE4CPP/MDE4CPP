@@ -48,6 +48,7 @@ namespace uml
 {
 	class Action;
 	class ActivityNode;
+	class ValueSpecificationAction;
 }
 
 // namespace macro header include
@@ -89,6 +90,12 @@ namespace fUML::Semantics::Actions
 			//*********************************
 			// Reference Getters & Setters
 			//*********************************
+			virtual const std::shared_ptr<uml::ValueSpecificationAction>& getValueSpecificationAction() const = 0;
+			virtual void setValueSpecificationAction(const std::shared_ptr<uml::ValueSpecificationAction>&) = 0;
+			/*Additional Setter for 'ActionActivation::action' redefined by reference 'valueSpecificationAction'*/
+			virtual void setAction(const std::shared_ptr<uml::Action>&) = 0;
+			/*Additional Setter for 'ActivityNodeActivation::node' redefined by reference 'valueSpecificationAction'*/
+			virtual void setNode(const std::shared_ptr<uml::ActivityNode>&) = 0;
 
 			//*********************************
 			// Union Reference Getters
@@ -114,6 +121,7 @@ namespace fUML::Semantics::Actions
 			//*********************************
 			// Reference Members
 			//*********************************
+			std::shared_ptr<uml::ValueSpecificationAction> m_valueSpecificationAction;
 	};
 }
 #endif /* end of include guard: FUML_SEMANTICS_ACTIONS_VALUESPECIFICATIONACTIONACTIVATION_HPP */

@@ -247,7 +247,7 @@ void ExecutionFactoryImpl::addBuiltInType(const std::shared_ptr<uml::PrimitiveTy
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
-	std::shared_ptr<Bag<uml::PrimitiveType> > builtInTypes = this->getBuiltInTypes();
+	const std::shared_ptr<Bag<uml::PrimitiveType>>& builtInTypes = this->getBuiltInTypes();
     builtInTypes->push_back(type);
 	//end of body
 }
@@ -345,7 +345,7 @@ std::shared_ptr<uml::PrimitiveType> ExecutionFactoryImpl::getBuiltInType(std::st
     unsigned int i = 0;
     while (nullptr == type && i < this->getBuiltInTypes()->size())
     {
-    	std::shared_ptr<uml::PrimitiveType> primitiveType = this->getBuiltInTypes()->at(i);
+    	const std::shared_ptr<uml::PrimitiveType>& primitiveType = this->getBuiltInTypes()->at(i);
         if (typeid(primitiveType).name() == name) 
         {
             type = primitiveType;
@@ -377,7 +377,7 @@ int ExecutionFactoryImpl::getStrategyIndex(std::string name)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
-		Bag<fUML::Semantics::Loci::SemanticStrategy>* strategies = this->getStrategies().get();
+	const std::shared_ptr<Bag<fUML::Semantics::Loci::SemanticStrategy>>& strategies = this->getStrategies();
 
     unsigned int i = 0;
     bool unmatched = true;

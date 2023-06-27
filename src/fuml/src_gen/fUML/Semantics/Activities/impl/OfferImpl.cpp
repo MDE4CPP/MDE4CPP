@@ -115,7 +115,7 @@ int OfferImpl::countOfferedValues()
 	this->removeWithdrawnTokens();
 
     int count = 0;
-	std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> offeredTokens= this->getOfferedTokens();
+	const std::shared_ptr<Bag<fUML::Semantics::Activities::Token>>& offeredTokens= this->getOfferedTokens();
 
     for (const std::shared_ptr<fUML::Semantics::Activities::Token>& offeredToken: *offeredTokens) {
         if (offeredToken->getValue() != nullptr) {
@@ -140,7 +140,7 @@ void OfferImpl::removeOfferedValues(int count)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
-	std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> offeredTokens= this->getOfferedTokens();
+	const std::shared_ptr<Bag<fUML::Semantics::Activities::Token>>& offeredTokens= this->getOfferedTokens();
 	Bag<fUML::Semantics::Activities::Token>::iterator it = offeredTokens->begin();
 	
     while (count > 0) 
@@ -164,7 +164,7 @@ void OfferImpl::removeWithdrawnTokens()
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
-	std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> offeredTokens= this->getOfferedTokens();
+	const std::shared_ptr<Bag<fUML::Semantics::Activities::Token>>& offeredTokens= this->getOfferedTokens();
 	Bag<fUML::Semantics::Activities::Token>::iterator it = offeredTokens->begin();
 	Bag<fUML::Semantics::Activities::Token>::iterator endIt = offeredTokens->end();
 	
@@ -191,9 +191,7 @@ std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> OfferImpl::retrieveOffe
 	//generated from body annotation
 	this->removeWithdrawnTokens();
 
-	std::shared_ptr<Bag<fUML::Semantics::Activities::Token> > tokens(this->getOfferedTokens());
-
-    	return tokens;
+    	return this->getOfferedTokens();
 	//end of body
 }
 

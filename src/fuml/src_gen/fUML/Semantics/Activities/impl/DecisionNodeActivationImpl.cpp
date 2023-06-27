@@ -57,8 +57,8 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "fUML/Semantics/CommonBehavior/CommonBehaviorFactory.hpp"
 #include "fUML/Semantics/Activities/ActivitiesFactory.hpp"
+#include "fUML/Semantics/CommonBehavior/CommonBehaviorFactory.hpp"
 #include "uml/umlFactory.hpp"
 #include "fUML/Semantics/Activities/ActivityEdgeInstance.hpp"
 #include "uml/ActivityNode.hpp"
@@ -148,7 +148,7 @@ std::shared_ptr<Any> DecisionNodeActivationImpl::executeDecisionInputBehavior(co
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
-	std::shared_ptr<uml::DecisionNode> decisionNode = this->getDecisionNode();
+	const std::shared_ptr<uml::DecisionNode>& decisionNode = this->getDecisionNode();
 	std::shared_ptr<uml::Behavior> decisionInputBehavior = nullptr;
 
     if(decisionNode != nullptr)
@@ -178,7 +178,7 @@ std::shared_ptr<Any> DecisionNodeActivationImpl::executeDecisionInputBehavior(co
         while (((j == 0) || ((j == 1) && (decisionInputValue != nullptr)))
                && (i < decisionInputBehavior->getOwnedParameter()->size()))
         {
-        	std::shared_ptr<uml::Parameter> parameter = decisionInputBehavior->getOwnedParameter()->at(i);
+        	const std::shared_ptr<uml::Parameter>& parameter = decisionInputBehavior->getOwnedParameter()->at(i);
             if (parameter->getDirection() == uml::ParameterDirectionKind::IN
                     || parameter->getDirection() == uml::ParameterDirectionKind::INOUT)
             {
@@ -217,18 +217,18 @@ void DecisionNodeActivationImpl::fire(const std::shared_ptr<Bag<fUML::Semantics:
 
 	std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> removedControlTokens = this->removeJoinedControlTokens(incomingTokens);
 	std::shared_ptr<Bag<Any>> decisionValues = this->getDecisionValues(incomingTokens);
-	std::shared_ptr<Bag<fUML::Semantics::Activities::ActivityEdgeInstance>> outgoingEdges = this->getOutgoingEdges();
+	const std::shared_ptr<Bag<fUML::Semantics::Activities::ActivityEdgeInstance>>& outgoingEdges = this->getOutgoingEdges();
 
     for (unsigned int i = 0; i < outgoingEdges->size(); i++) 
     {
-    	std::shared_ptr<fUML::Semantics::Activities::ActivityEdgeInstance> edgeInstance = outgoingEdges->at(i);
-    	std::shared_ptr<uml::ValueSpecification> guard = edgeInstance->getEdge()->getGuard();
+    	const std::shared_ptr<fUML::Semantics::Activities::ActivityEdgeInstance>& edgeInstance = outgoingEdges->at(i);
+    	const std::shared_ptr<uml::ValueSpecification>& guard = edgeInstance->getEdge()->getGuard();
 
     	std::shared_ptr<Bag<fUML::Semantics::Activities::Token> > offeredTokens(new Bag<fUML::Semantics::Activities::Token>());
         for (unsigned int j = 0; j < incomingTokens->size(); j++) 
         {
-        	std::shared_ptr<fUML::Semantics::Activities::Token> incomingToken = incomingTokens->at(j);
-        	std::shared_ptr<Any> decisionValue = decisionValues->at(j);
+        	const std::shared_ptr<fUML::Semantics::Activities::Token>& incomingToken = incomingTokens->at(j);
+        	const std::shared_ptr<Any>& decisionValue = decisionValues->at(j);
             if (this->test(guard, decisionValue)) 
             {
                 offeredTokens->push_back(incomingToken);
@@ -239,7 +239,7 @@ void DecisionNodeActivationImpl::fire(const std::shared_ptr<Bag<fUML::Semantics:
         {
             for (unsigned int j = 0; j < removedControlTokens->size(); j++) 
             {
-            	std::shared_ptr<fUML::Semantics::Activities::Token> removedControlToken = removedControlTokens->at(j);
+            	const std::shared_ptr<fUML::Semantics::Activities::Token>& removedControlToken = removedControlTokens->at(j);
                 offeredTokens->push_back(removedControlToken);
             }
             edgeInstance->sendOffer(offeredTokens);
@@ -252,7 +252,7 @@ std::shared_ptr<fUML::Semantics::Activities::ActivityEdgeInstance> DecisionNodeA
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
-		std::shared_ptr<uml::ActivityEdge>  decisionInputFlow = this->getDecisionNode()->getDecisionInputFlow();
+	const std::shared_ptr<uml::ActivityEdge>&  decisionInputFlow = this->getDecisionNode()->getDecisionInputFlow();
 
 	std::shared_ptr<fUML::Semantics::Activities::ActivityEdgeInstance> edgeInstance = nullptr;
     if (decisionInputFlow != nullptr) 
@@ -260,7 +260,7 @@ std::shared_ptr<fUML::Semantics::Activities::ActivityEdgeInstance> DecisionNodeA
         unsigned int i = 0;
         while ((edgeInstance == nullptr) && (i < this->getIncomingEdges()->size())) 
         {
-        	std::shared_ptr<fUML::Semantics::Activities::ActivityEdgeInstance> incomingEdge = this->getIncomingEdges()->at(i);
+        	const std::shared_ptr<fUML::Semantics::Activities::ActivityEdgeInstance>& incomingEdge = this->getIncomingEdges()->at(i);
             if (incomingEdge->getEdge() == decisionInputFlow) 
             {
                 edgeInstance = incomingEdge;
@@ -301,18 +301,17 @@ std::shared_ptr<Bag<Any>> DecisionNodeActivationImpl::getDecisionValues(const st
 
 	std::shared_ptr<Bag<Any>> decisionValues(new Bag<Any>());
 
-    for (unsigned int i = 0; i < incomingTokens->size(); i++) 
+    for (const std::shared_ptr<fUML::Semantics::Activities::Token>& incomingToken : *incomingTokens) 
     {
-    	std::shared_ptr<fUML::Semantics::Activities::Token> incomingToken = incomingTokens->at(i);
     	std::shared_ptr<Any> value = this->executeDecisionInputBehavior(incomingToken->getValue(), decisionInputValue);
         decisionValues->push_back(value);
     }
 
 #ifndef NDEBUG
 	std::string decisionValuesDebugInfoMessage;
-	for (unsigned int i = 0; i < decisionValues->size(); i++)
+	unsigned int i = 0;
+	for (const std::shared_ptr<Any>& decisionValue: *decisionValues)
 	{
-		std::shared_ptr<Any> decisionValue = decisionValues->at(i);
 		if (decisionValue)
 		{
 			decisionValuesDebugInfoMessage += "decisionValues[" + std::to_string(i) + "] = " + decisionValue->toString() + " ; ";
@@ -321,6 +320,7 @@ std::shared_ptr<Bag<Any>> DecisionNodeActivationImpl::getDecisionValues(const st
 		{
 			decisionValuesDebugInfoMessage += "decisionValues[" + std::to_string(i) + "] = nullptr ; ";
 		}
+		i++;
 	}
 #endif
 
@@ -332,13 +332,13 @@ bool DecisionNodeActivationImpl::hasObjectFlowInput()
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
-		std::shared_ptr<uml::ActivityEdge> decisionInputFlow = this->getDecisionNode()->getDecisionInputFlow();
+	const std::shared_ptr<uml::ActivityEdge>& decisionInputFlow = this->getDecisionNode()->getDecisionInputFlow();
 
     bool isObjectFlow = false;
     unsigned int i = 0;
     while (!isObjectFlow && i < this->getIncomingEdges()->size()) 
     {
-    	std::shared_ptr<uml::ActivityEdge> edge = this->getIncomingEdges()->at(i)->getEdge();
+    	const std::shared_ptr<uml::ActivityEdge>& edge = this->getIncomingEdges()->at(i)->getEdge();
         isObjectFlow = (edge != decisionInputFlow) && (std::dynamic_pointer_cast<uml::ObjectFlow>(edge) != nullptr);
         i = i + 1;
     }
@@ -392,13 +392,13 @@ std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> DecisionNodeActivationI
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
-	std::shared_ptr<uml::ObjectFlow> decisionInputFlow = this->getDecisionNode()->getDecisionInputFlow();
+	const std::shared_ptr<uml::ObjectFlow>& decisionInputFlow = this->getDecisionNode()->getDecisionInputFlow();
 
 	std::shared_ptr<Bag<fUML::Semantics::Activities::Token> > allTokens(new Bag<fUML::Semantics::Activities::Token>());
-	std::shared_ptr<Bag<fUML::Semantics::Activities::ActivityEdgeInstance> > incomingEdges = this->getIncomingEdges();
+	const std::shared_ptr<Bag<fUML::Semantics::Activities::ActivityEdgeInstance>>& incomingEdges = this->getIncomingEdges();
     for (unsigned int i = 0; i < incomingEdges->size(); i++) 
     {
-    	std::shared_ptr<fUML::Semantics::Activities::ActivityEdgeInstance> edgeInstance = incomingEdges->at(i);
+    	const std::shared_ptr<fUML::Semantics::Activities::ActivityEdgeInstance>& edgeInstance = incomingEdges->at(i);
         if (edgeInstance->getEdge() != decisionInputFlow) 
         {
         	std::shared_ptr<Bag<fUML::Semantics::Activities::Token> > tokens = edgeInstance->takeOfferedTokens();

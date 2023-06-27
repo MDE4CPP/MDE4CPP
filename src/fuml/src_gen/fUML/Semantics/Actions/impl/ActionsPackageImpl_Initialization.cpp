@@ -1764,6 +1764,22 @@ void ActionsPackageImpl::initializeExpansionRegionActivationContent()
 	m_expansionRegionActivation_Attribute_activationGroups->setDefaultValueLiteral("");	
 	
 	m_expansionRegionActivation_Attribute_activationGroups->_setID(EXPANSIONREGIONACTIVATION_ATTRIBUTE_ACTIVATIONGROUPS);
+	m_expansionRegionActivation_Attribute_expansionRegion->setName("expansionRegion");
+	m_expansionRegionActivation_Attribute_expansionRegion->setEType(uml::umlPackage::eInstance()->getExpansionRegion_Class());
+	m_expansionRegionActivation_Attribute_expansionRegion->setLowerBound(1);
+	m_expansionRegionActivation_Attribute_expansionRegion->setUpperBound(1);
+	m_expansionRegionActivation_Attribute_expansionRegion->setTransient(false);
+	m_expansionRegionActivation_Attribute_expansionRegion->setVolatile(false);
+	m_expansionRegionActivation_Attribute_expansionRegion->setChangeable(true);
+	m_expansionRegionActivation_Attribute_expansionRegion->setUnsettable(false);
+	m_expansionRegionActivation_Attribute_expansionRegion->setUnique(true);
+	m_expansionRegionActivation_Attribute_expansionRegion->setDerived(false);
+	m_expansionRegionActivation_Attribute_expansionRegion->setOrdered(true);
+	m_expansionRegionActivation_Attribute_expansionRegion->setContainment(false);
+	m_expansionRegionActivation_Attribute_expansionRegion->setResolveProxies(true);
+	m_expansionRegionActivation_Attribute_expansionRegion->setDefaultValueLiteral("");	
+	
+	m_expansionRegionActivation_Attribute_expansionRegion->_setID(EXPANSIONREGIONACTIVATION_ATTRIBUTE_EXPANSIONREGION);
 	m_expansionRegionActivation_Attribute_inputExpansionTokens->setName("inputExpansionTokens");
 	m_expansionRegionActivation_Attribute_inputExpansionTokens->setEType(fUML::Semantics::Activities::ActivitiesPackage::eInstance()->getTokenSet_Class());
 	m_expansionRegionActivation_Attribute_inputExpansionTokens->setLowerBound(1);
@@ -2735,6 +2751,22 @@ void ActionsPackageImpl::initializeStructuredActivityNodeActivationContent()
 	m_structuredActivityNodeActivation_Attribute_activationGroup->setEOpposite(fUML::Semantics::Activities::ActivitiesPackage::eInstance()->getActivityNodeActivationGroup_Attribute_containingNodeActivation());
 	
 	m_structuredActivityNodeActivation_Attribute_activationGroup->_setID(STRUCTUREDACTIVITYNODEACTIVATION_ATTRIBUTE_ACTIVATIONGROUP);
+	m_structuredActivityNodeActivation_Attribute_structuredActivityNode->setName("structuredActivityNode");
+	m_structuredActivityNodeActivation_Attribute_structuredActivityNode->setEType(uml::umlPackage::eInstance()->getStructuredActivityNode_Class());
+	m_structuredActivityNodeActivation_Attribute_structuredActivityNode->setLowerBound(1);
+	m_structuredActivityNodeActivation_Attribute_structuredActivityNode->setUpperBound(1);
+	m_structuredActivityNodeActivation_Attribute_structuredActivityNode->setTransient(false);
+	m_structuredActivityNodeActivation_Attribute_structuredActivityNode->setVolatile(false);
+	m_structuredActivityNodeActivation_Attribute_structuredActivityNode->setChangeable(true);
+	m_structuredActivityNodeActivation_Attribute_structuredActivityNode->setUnsettable(false);
+	m_structuredActivityNodeActivation_Attribute_structuredActivityNode->setUnique(true);
+	m_structuredActivityNodeActivation_Attribute_structuredActivityNode->setDerived(false);
+	m_structuredActivityNodeActivation_Attribute_structuredActivityNode->setOrdered(true);
+	m_structuredActivityNodeActivation_Attribute_structuredActivityNode->setContainment(false);
+	m_structuredActivityNodeActivation_Attribute_structuredActivityNode->setResolveProxies(true);
+	m_structuredActivityNodeActivation_Attribute_structuredActivityNode->setDefaultValueLiteral("");	
+	
+	m_structuredActivityNodeActivation_Attribute_structuredActivityNode->_setID(STRUCTUREDACTIVITYNODEACTIVATION_ATTRIBUTE_STRUCTUREDACTIVITYNODE);
 	
 	/*
 	 * EOperations
@@ -3000,6 +3032,22 @@ void ActionsPackageImpl::initializeValueSpecificationActionActivationContent()
 	/*
 	 * EReferences
 	 */
+	m_valueSpecificationActionActivation_Attribute_valueSpecificationAction->setName("valueSpecificationAction");
+	m_valueSpecificationActionActivation_Attribute_valueSpecificationAction->setEType(uml::umlPackage::eInstance()->getValueSpecificationAction_Class());
+	m_valueSpecificationActionActivation_Attribute_valueSpecificationAction->setLowerBound(1);
+	m_valueSpecificationActionActivation_Attribute_valueSpecificationAction->setUpperBound(1);
+	m_valueSpecificationActionActivation_Attribute_valueSpecificationAction->setTransient(false);
+	m_valueSpecificationActionActivation_Attribute_valueSpecificationAction->setVolatile(false);
+	m_valueSpecificationActionActivation_Attribute_valueSpecificationAction->setChangeable(true);
+	m_valueSpecificationActionActivation_Attribute_valueSpecificationAction->setUnsettable(false);
+	m_valueSpecificationActionActivation_Attribute_valueSpecificationAction->setUnique(true);
+	m_valueSpecificationActionActivation_Attribute_valueSpecificationAction->setDerived(false);
+	m_valueSpecificationActionActivation_Attribute_valueSpecificationAction->setOrdered(true);
+	m_valueSpecificationActionActivation_Attribute_valueSpecificationAction->setContainment(false);
+	m_valueSpecificationActionActivation_Attribute_valueSpecificationAction->setResolveProxies(true);
+	m_valueSpecificationActionActivation_Attribute_valueSpecificationAction->setDefaultValueLiteral("");	
+	
+	m_valueSpecificationActionActivation_Attribute_valueSpecificationAction->_setID(VALUESPECIFICATIONACTIONACTIVATION_ATTRIBUTE_VALUESPECIFICATIONACTION);
 	
 	/*
 	 * EOperations

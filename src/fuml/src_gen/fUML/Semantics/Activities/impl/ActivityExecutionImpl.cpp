@@ -54,10 +54,10 @@
 
 #include <exception> // used in Persistence
 #include "ecore/ecoreFactory.hpp"
-#include "uml/umlFactory.hpp"
-#include "fUML/Semantics/Activities/ActivitiesFactory.hpp"
-#include "fUML/Semantics/CommonBehavior/CommonBehaviorFactory.hpp"
 #include "fUML/Semantics/Loci/LociFactory.hpp"
+#include "uml/umlFactory.hpp"
+#include "fUML/Semantics/CommonBehavior/CommonBehaviorFactory.hpp"
+#include "fUML/Semantics/Activities/ActivitiesFactory.hpp"
 #include "uml/Activity.hpp"
 #include "fUML/Semantics/Activities/ActivityNodeActivationGroup.hpp"
 #include "uml/Behavior.hpp"
@@ -162,13 +162,13 @@ void ActivityExecutionImpl::execute()
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
-		std::shared_ptr<uml::Activity> activity = this->getActivity();
+		const std::shared_ptr<uml::Activity>& activity = this->getActivity();
 
 	if(activity != nullptr)
    	{
 		DEBUG_INFO("Executing Activity '" << activity->getName() << "'.")
 	
-		std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup> activityNodeActivationGroup = this->getActivationGroup();
+		const std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup>& activityNodeActivationGroup = this->getActivationGroup();
 
 		activityNodeActivationGroup->run(activityNodeActivationGroup->getNodeActivations());
 
@@ -176,16 +176,16 @@ void ActivityExecutionImpl::execute()
 
 		DEBUG_INFO("Activity '" << activity->getName() << "' has " << outputActivationList->size() << " output ParameterNodes.")
 
-		for(std::shared_ptr<fUML::Semantics::Activities::ActivityParameterNodeActivation> outputActivation : *outputActivationList)
+		for(const std::shared_ptr<fUML::Semantics::Activities::ActivityParameterNodeActivation>& outputActivation : *outputActivationList)
 		{
             		if(outputActivation->getNode()->getMetaElementID() == uml::umlPackage::ACTIVITYPARAMETERNODE_CLASS)
 			{
 				std::shared_ptr<fUML::Semantics::CommonBehavior::ParameterValue> parameterValue(fUML::Semantics::CommonBehavior::CommonBehaviorFactory::eInstance()->createParameterValue());
-				std::shared_ptr<uml::ActivityParameterNode> activityParameterNode = std::dynamic_pointer_cast<uml::ActivityParameterNode> (outputActivation->getNode());
+				const std::shared_ptr<uml::ActivityParameterNode>& activityParameterNode = outputActivation->getActivityParameterNode();
 				parameterValue->setParameter(activityParameterNode->getParameter());
 				std::shared_ptr<Bag<fUML::Semantics::Activities::Token> > tokenList = outputActivation->getTokens();
 
-				for(std::shared_ptr<fUML::Semantics::Activities::Token> token : *tokenList)
+				for(const std::shared_ptr<fUML::Semantics::Activities::Token>& token : *tokenList)
 				{
 					std::shared_ptr<Any> value;
 					value = token->getValue();
