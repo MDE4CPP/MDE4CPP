@@ -45,7 +45,7 @@
 	[/for]
 [/if]
 [anEOperation.generateDocumentation()/] 
-virtual [anEOperation.generateOperationType()/] [anEOperation.name/]([anEOperation.generateParameterList()/])[if (hasKey(keyConst()))] const[/if] [abstractSufix(impl)/];[/if]
+virtual [if(hasKey(forceConstRefReturn()))]const [/if][anEOperation.generateOperationType()/][if(hasKey(forceConstRefReturn()))]&[/if] [anEOperation.name/]([anEOperation.generateParameterList()/])[if (hasKey(keyConst()))] const[/if] [abstractSufix(impl)/];[/if]
 [/template]
 
 
@@ -63,7 +63,7 @@ virtual [anEOperation.generateOperationType()/] [anEOperation.name/]([anEOperati
 
 [template private _generateOperationImplementation(anEOperation : EOperation) ? (not (ignore())) post(trim())]
 [comment[aOperation.generateDokumentation()/] 
-[anEOperation.generateOperationType()/] [anEOperation.eContainingClass.name.toUpperFirst()/]Impl::[anEOperation.name/]([anEOperation.generateParameterList()/])[if (hasKey(keyConst()))] const[/if]
+[if(hasKey(forceConstRefReturn()))]const [/if][anEOperation.generateOperationType()/][if(hasKey(forceConstRefReturn()))]&[/if] [anEOperation.eContainingClass.name.toUpperFirst()/]Impl::[anEOperation.name/]([anEOperation.generateParameterList()/])[if (hasKey(keyConst()))] const[/if]
 {
 [if (hasKey(keyBody()))]
 	//ADD_COUNT(__PRETTY_FUNCTION__)

@@ -27,13 +27,13 @@
 						}->flatten()->selectByKind(EClass)->sortedBy(name)/]
 
 [template public generateModelElementGetter(anENamedElement : ENamedElement, anEPackage : EPackage, impl : Boolean) ? ( not hasImplOnly())]
-virtual std::shared_ptr<[metaModelTypeString(anENamedElement, anEPackage)/]> get[anENamedElement.getMemberNameUpperFirst()/]() const [abstractSufix(impl)/];
+virtual const std::shared_ptr<[metaModelTypeString(anENamedElement, anEPackage)/]>& get[anENamedElement.getMemberNameUpperFirst()/]() const [abstractSufix(impl)/];
 
 [/template]
 
 
 [template public generateModelElementGetterImpl(anENamedElement : ENamedElement, anEPackage : EPackage)]
-std::shared_ptr<[metaModelTypeString(anENamedElement, anEPackage)/]> [anEPackage.generateNamespaceDefinition()/]::[anEPackage.name/]PackageImpl::get[anENamedElement.getMemberNameUpperFirst()/]() const
+const std::shared_ptr<[metaModelTypeString(anENamedElement, anEPackage)/]>& [anEPackage.generateNamespaceDefinition()/]::[anEPackage.name/]PackageImpl::get[anENamedElement.getMemberNameUpperFirst()/]() const
 {
 	return [anENamedElement.getClassMemberName()/];
 }

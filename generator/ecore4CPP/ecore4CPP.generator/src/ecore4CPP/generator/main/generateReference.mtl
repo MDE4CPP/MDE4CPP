@@ -50,15 +50,15 @@
 [template private _generateReferenceGetterDeclaretaion(anEReference : EReference, impl : EBoolean)? (hasGetter() and (not isUnion())) post(trim())]
 [printInfo(anEReference.eStructuralFeatureGetterGenerationMessage(), 4)/]
 [anEReference.generateDocumentation()/]
-virtual [anEReference.generateReferenceType()/] [anEReference.GetterName()/]() const [abstractSufix(impl)/];
+virtual [anEReference.generateGetterReturnType()/] [anEReference.GetterName()/]() const [abstractSufix(impl)/];
 [/template]
 
 [template private _generateReferenceSetterDeclaretaion(anEReference : EReference, impl : EBoolean) ? ( hasSetter()) post(trim())]
 [printInfo(anEReference.eStructuralFeatureSetterGenerationMessage(), 4)/]
 [anEReference.generateDocumentation()/]
-virtual void [anEReference.SetterName()/]([if (not anEReference.eGenericType.eClassifier.oclIsKindOf(EDataType))]
-[anEReference.generateReferenceType()/][else]
-[anEReference.eGenericType.generateCppType(true)/] _[anEReference.name/][/if]
+virtual void [anEReference.SetterName()/]([if(anEReference.isSharedPtr())]const [/if][if (not anEReference.eGenericType.eClassifier.oclIsKindOf(EDataType))]
+[anEReference.generateReferenceType()/][if(anEReference.isSharedPtr())]&[/if][else]
+[anEReference.eGenericType.generateCppType(true)/][if(anEReference.isSharedPtr())]&[/if] _[anEReference.name/][/if]
 ) [abstractSufix(impl)/];
 [/template]
 
@@ -153,7 +153,7 @@ m_[eReference.name/].reset(new [eReference.generateReferenceType(false)/]());
 
 [template private _generateReferenceGetterImplementation(anEReference : EReference) ? (hasGetter() and (not isUnion())) post(trim())]
 [printInfo(anEReference.eStructuralFeatureGetterGenerationMessage(), 4)/]
-[anEReference.generateReferenceType()/] [anEReference.eContainingClass.name.toUpperFirst()/]Impl::[anEReference.GetterName()/]() const
+[anEReference.generateGetterReturnType()/] [anEReference.eContainingClass.name.toUpperFirst()/]Impl::[anEReference.GetterName()/]() const
 {
 [if (hasKey(keyGetterBody()))]
 	//generated from [keyGetterBody()/] annotation
@@ -201,7 +201,7 @@ m_[eReference.name/].reset(new [eReference.generateReferenceType(false)/]());
 
 [template private _generateReferenceSetterImplementation(anEReference : EReference) ? (hasSetter()) post(trim())]
 [printInfo(anEReference.eStructuralFeatureSetterGenerationMessage(), 4)/]
-void [anEReference.eContainingClass.name.toUpperFirst()/]Impl::[anEReference.SetterName()/]([anEReference.generateReferenceType()/] _[anEReference.name/])
+void [anEReference.eContainingClass.name.toUpperFirst()/]Impl::[anEReference.SetterName()/]([if(anEReference.isSharedPtr())]const [/if][anEReference.generateReferenceType()/][if(anEReference.isSharedPtr())]&[/if] _[anEReference.name/])
 {
 	[if (hasKey(keySetterBody()))]
 	//generated from [keySetterBody()/] annotation
@@ -231,7 +231,7 @@ m_[redefinedEReference.name/] = this->[if(anEReference.hasGetter())][anEReferenc
 [/template]
 
 [template private _generateRedefinedReferenceSetterImplementation(redefinedEReference : EReference, anEReference : EReference) ? (anEReference.hasSetter() and redefinedEReference.hasSetter()) post(trim())]
-void [anEReference.eContainingClass.name.toUpperFirst()/]Impl::[redefinedEReference.SetterName()/]([redefinedEReference.generateReferenceType()/] _[redefinedEReference.name/])
+void [anEReference.eContainingClass.name.toUpperFirst()/]Impl::[redefinedEReference.SetterName()/]([if(anEReference.isSharedPtr())]const [/if][redefinedEReference.generateReferenceType()/][if(anEReference.isSharedPtr())]&[/if] _[redefinedEReference.name/])
 {
 	[if(redefinedEReference.isBackReference())]
 	std::shared_ptr<[anEReference.eGenericType.generateCppType(false)/]> _[anEReference.name/] = std::dynamic_pointer_cast<[anEReference.eGenericType.generateCppType(false)/]>(_[redefinedEReference.name/].lock());
@@ -318,6 +318,8 @@ void [anEReference.eContainingClass.name.toUpperFirst()/]Impl::[redefinedERefere
 }
 
 [/template]
+
+[template private generateGetterReturnType(anEReference : EReference) post(trim())][if(anEReference.isReturnSharedPtr())]const [/if][anEReference.generateReferenceType()/][if(anEReference.isReturnSharedPtr())]&[/if][/template]
 
 [template public generateStaticReferenceID(anEReference : EReference)]
 static const unsigned long [anEReference.getStaticAttributeIDName()/] = [anEReference.generateNamespaceDefinition().generatePolynomialRollingHash(false)/];

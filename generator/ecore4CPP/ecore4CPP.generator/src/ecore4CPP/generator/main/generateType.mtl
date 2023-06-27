@@ -16,13 +16,13 @@
 
 [import ecore4CPP::generator::main::helper /]
 [import ecore4CPP::generator::main::helpers::keywords /]
+[import ecore4CPP::generator::main::helpers::transformTypeName /]
 [import ecore4CPP::generator::main::validation::validation /]
 
 [query public isAnyNoPtr(aTypedElement : ETypedElement) : EBoolean = if( ((aTypedElement.lowerBound = 0) or (aTypedElement.lowerBound = 1)) and (aTypedElement.upperBound = 1) and (aTypedElement.eType.name.replace('java.lang.', '').replace('java.util.','').transformTypeName() = 'Any') ) then true else false endif/]
 
 [template public generateParameterList(aOperation:EOperation) post(trim())]
-[for (sParameter : EParameter | aOperation.eParameters->select(p:EParameter | not p.doNotGenerateEModelElement())) separator (',')][sParameter.generateParameterType()/] [sParameter.name/][/for]
-[/template]
+[for (sParameter : EParameter | aOperation.eParameters->select(p:EParameter | not p.doNotGenerateEModelElement())) separator (', ')][if(sParameter.isSharedPtr())]const [/if][sParameter.generateParameterType()/][if(sParameter.isSharedPtr())]&[/if] [sParameter.name/][/for][/template]
 
 [comment
  * generate the C++ representation of a generic Type
@@ -205,78 +205,6 @@ std::shared_ptr
 [templateTypeType.name/]
 [/for]
 [/template] 
-
-[template public transformTypeName(name: String) ? ((name = 'EBoolean') or (name = 'EBooleanObject') or (name = 'Boolean'))]
-bool
-[/template]
- 
-[template public transformTypeName(name: String) ? ((name = 'UnlimitedNatural' ))]
-int
-[/template]
-
-[template public transformTypeName(name: String) ? (name = 'EResource')]
-int
-[/template]
-
-[template public transformTypeName(name: String) ? ((name = 'EInt') or (name = 'EIntegerObject') or (name = 'EBigInteger') or (name = 'Integer'))]
-int
-[/template]
-
-[template public transformTypeName(name: String) ? ((name = 'EDouble') or (name = 'EDoubleObject')or (name = 'EBigDecimal') or (name = 'Real'))]
-double
-[/template]
-
-[template public transformTypeName(name: String) ? ((name = 'ELong') or (name = 'ELongObject') )]
-long
-[/template]
-
-[template public transformTypeName(name: String) ? ((name = 'EByte') or (name = 'EByteObject') )]
-char
-[/template]
-
-[template public transformTypeName(name: String) ? ((name = 'EByteArray'))]
-char
-[/template]
-
-[template public transformTypeName(name: String) ? ((name = 'EChar') or (name = 'ECharacterObject') )]
-char
-[/template]
-
-[template public transformTypeName(name: String) ? ((name = 'EFloat') or (name = 'EFloatObject') )]
-float
-[/template]
-
-[template public transformTypeName(name: String) ? (name = 'EEList')]
-std::list
-[/template]
-
-[template public transformTypeName(name: String) ? (name = 'EDate')]
-int
-[/template]
-
-[template public transformTypeName(name: String) ? (name = 'EMap')]
-std::map
-[/template]
-
-[template public transformTypeName(name: String) ? (name = 'EJavaObject')]
-Any
-[/template]
-
-[template public transformTypeName(name: String) ? (name = 'ETreeIterator')]
-Bag
-[/template]
-
-[template public transformTypeName(name: String) ? (name = 'EJavaClass')]
-void * 
-[/template]
-
-[template public transformTypeName(name: String) ? ((name = 'EEnumerator') or (name = 'EDiagnosticChain'))]
-Any
-[/template]
-
-[template public transformTypeName(name: String) ? ((name = 'EString') or (name = 'String') )]
-std::string
-[/template]
 
 [query public getDefaultValue(anEClassifier : EClassifier) : String = 
 let shortName:String = name.replace('java.lang.', '').replace('java.util.','') in

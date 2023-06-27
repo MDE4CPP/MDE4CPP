@@ -15,6 +15,7 @@
 [module helper('http://www.eclipse.org/emf/2002/Ecore')]
 
 [import ecore4CPP::generator::main::helpers::keywords /]
+[import ecore4CPP::generator::main::helpers::transformTypeName /]
 
 [**
  * Helper for c++ abstract function sufix
@@ -56,6 +57,35 @@
 */]
 [query public hasSourceGen(aModelElement : EModelElement) : Boolean = if (aModelElement.oclIsUndefined() or aModelElement.eAnnotations->oclIsUndefined()) then false else eAnnotations->select(source = sourceNameCodeGen())->notEmpty() endif/]
 [query public SourceGen(aModelElement : EModelElement) : EAnnotation = eAnnotations->select(source = sourceNameCodeGen())->first() /]
+
+[**
+ * Helper for determining if the type of a typed element or classifier is Any 
+*/]
+[query public isOfAnyType(anETypedElement : ETypedElement) : EBoolean = (anETypedElement.eType.name.replace('java.lang.', '').replace('java.util.','').transformTypeName() = 'Any')/]
+[query public isAnyType(anEClassifier : EClassifier) : EBoolean = (anEClassifier.name.replace('java.lang.', '').replace('java.util.','').transformTypeName() = 'Any') /]
+
+[**
+* Helper for determining if a anETypedElement (Parameter/ERefferenc/EAttribute) should be a shared pointer; allows the normal isSharedPointer query to be suppressed if the anETypedElement has a "suppressConstRefReturn"-Annotation
+*/]
+[query public isReturnSharedPtr(anETypedElement : ETypedElement) : EBoolean = (not hasKey(suppressConstRefReturn())) and isSharedPtr() /]
+
+[**
+ * Helper for determining if a anETypedElement (Parameter/ERefferenc/EAttribute) should be a shared pointer
+*/]
+[query public isSharedPtr(anETypedElement : ETypedElement) : EBoolean =
+	if (anETypedElement.oclIsKindOf(EReference)) then	
+		not anETypedElement.oclAsType(EReference).isBackReference()
+	else
+		anETypedElement.eType.oclIsKindOf(EClass) or anETypedElement.eType.isAnyType() or (anETypedElement.upperBound <> 1)
+	endif
+/]
+
+[**
+ * Helper for type generation
+*/]
+[query private isShared(aReference : EReference) : Boolean = aReference.hasKey(keySharedAggregation())/]
+[query public isBackReference(aReference:EReference) : Boolean = aReference.container or isShared()/]
+[query public hasAbstractType(aReference : EReference) : Boolean = if (aReference.eType.oclIsKindOf(EClass)) then eType.oclAsType(EClass).abstract else false endif /]
 
 [**
  * check and get key value from sourcegen eannotation

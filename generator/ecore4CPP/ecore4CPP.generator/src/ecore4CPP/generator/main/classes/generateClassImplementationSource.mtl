@@ -437,7 +437,7 @@ std::shared_ptr<ecore::EObject> [className/]::copy() const
 //*********************************
 [anEClass.generatePersistenceFunctionsImplementations()/]
 
-std::shared_ptr<[needNamespace(anEClass.ePackage, 'EClass')/]> [className/]::eStaticClass() const
+const std::shared_ptr<[needNamespace(anEClass.ePackage, 'EClass')/]>& [className/]::eStaticClass() const
 {
 	return [anEClass.getRootPackage().name/][getPackageAccess(anEClass, true)/]::[anEClass.ePackage.name/]Package::eInstance()->get[anEClass.getMemberNameUpperFirst()/]();
 }

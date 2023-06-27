@@ -33,7 +33,7 @@ virtual bool internalEIsSet(int featureID) const [abstractSufix(impl)/];
 [/template]
 
 [template public generateeSetDeclaration(aClass : EClass,impl : Boolean) post(trim())]
-virtual bool eSet(int featureID, Any newValue) [abstractSufix(impl)/];
+virtual bool eSet(int featureID, const Any& newValue) [abstractSufix(impl)/];
 [/template]
 
 [template public generateeGetImplementation(aClass : EClass) post(trim())]
@@ -120,7 +120,7 @@ bool [aClass.name.toUpperFirst().concat('Impl')/]::internalEIsSet(int featureID)
 [/template]
 
 [template public generateeSetImplementation(aClass : EClass) post(trim())]
-bool [aClass.name.toUpperFirst().concat('Impl')/]::eSet(int featureID, Any newValue)
+bool [aClass.name.toUpperFirst().concat('Impl')/]::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
