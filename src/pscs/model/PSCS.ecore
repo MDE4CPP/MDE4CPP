@@ -709,7 +709,7 @@
         <eAnnotations source="http://tu-ilmenau.de/see/codegen">
           <details key="implIncludes" value="#include &quot;uml/Behavior.hpp&quot;&#xA;//#include &quot;PSCS/Semantics/StructuredClassifiers/CS_Object.hpp&quot;&#xA;//#include &quot;PSCS/Semantics/StructuredClassifiers/StructuredClassifiersFactory.hpp&quot;"/>
         </eAnnotations>
-        <eOperations name="instantiate" ordered="false" lowerBound="1" eType="ecore:EClass ../../fuml/model/fUML.ecore#//MDE4CPP_Extensions/FUML_Object">
+        <eOperations name="instantiate" ordered="false" lowerBound="1" eType="ecore:EClass http://www.eclipse.org/uml2/5.0.0/UML#//Element">
           <eAnnotations source="http://tu-ilmenau.de/see/codegen">
             <details key="body" value="&#x9;// Extends fUML semantics by instantiating a CS_Object&#xA;&#x9;// in the case where type is not a Behavior.&#xA;&#x9;// Otherwise behaves like in fUML&#xA;&#x9;/*std::shared_ptr&lt;fUML::Semantics::StructuredClassifiers::Object> object = nullptr;&#xA;&#x9;if(std::dynamic_pointer_cast&lt;uml::Behavior>(type) != nullptr) {&#xA;&#x9;&#x9;object = fUML::Semantics::Loci::LocusImpl::instantiate(type);&#xA;&#x9;}&#xA;&#x9;else  {&#xA;&#x9;&#x9;object = PSCS::Semantics::StructuredClassifiers::StructuredClassifiersFactory::eInstance()->createCS_Object();&#xA;&#x9;&#x9;object->getTypes()->add(type);&#xA;&#x9;&#x9;object->createFeatureValues();&#xA;&#x9;&#x9;this->add(object);&#xA;&#x9;}&#xA;&#x9;return object;*/&#xA;&#xA;/*&#xA; * This method is implemented in every model-specific locus&#xA; */&#xA;&#xA;return nullptr;"/>
           </eAnnotations>
@@ -746,7 +746,7 @@
       </eClassifiers>
       <eClassifiers xsi:type="ecore:EClass" name="CS_Executor" eSuperTypes="../../fuml/model/fUML.ecore#//Semantics/Loci/Executor">
         <eAnnotations source="http://tu-ilmenau.de/see/codegen">
-          <details key="implIncludes" value="//#include &quot;PSCS/Semantics/StructuredClassifiers/CS_Object.hpp&quot;&#xA;//#include &quot;PSCS/Semantics/StructuredClassifiers/CS_Reference.hpp&quot;&#xA;//#include &quot;PSCS/Semantics/StructuredClassifiers/StructuredClassifiersFactory.hpp&quot;&#xA;//#include &quot;fUML/Semantics/StructuredClassifiers/Object.hpp&quot;&#xA;#include &quot;fUML/Semantics/StructuredClassifiers/StructuredClassifiersFactory.hpp&quot;&#xA;#include &quot;fUML/fUMLFactory.hpp&quot;&#xA;#include &quot;fUML/MDE4CPP_Extensions/FUML_Object.hpp&quot;"/>
+          <details key="implIncludes" value="//#include &quot;PSCS/Semantics/StructuredClassifiers/CS_Object.hpp&quot;&#xA;//#include &quot;PSCS/Semantics/StructuredClassifiers/CS_Reference.hpp&quot;&#xA;//#include &quot;PSCS/Semantics/StructuredClassifiers/StructuredClassifiersFactory.hpp&quot;&#xA;//#include &quot;fUML/Semantics/StructuredClassifiers/Object.hpp&quot;&#xA;#include &quot;fUML/Semantics/StructuredClassifiers/StructuredClassifiersFactory.hpp&quot;&#xA;#include &quot;fUML/fUMLFactory.hpp&quot;"/>
         </eAnnotations>
         <eOperations name="start" lowerBound="1" eType="ecore:EClass http://www.eclipse.org/uml2/5.0.0/UML#//Element">
           <eAnnotations source="http://tu-ilmenau.de/see/codegen">
