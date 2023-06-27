@@ -532,7 +532,7 @@ void AssociationImpl::resolveReferences(const int featureID, std::vector<std::sh
 		case uml::umlPackage::ASSOCIATION_ATTRIBUTE_MEMBEREND:
 		{
 			std::shared_ptr<SubsetUnion<uml::Property, uml::NamedElement>> _memberEnd = getMemberEnd();
-			for(std::shared_ptr<ecore::EObject> ref : references)
+			for(const std::shared_ptr<ecore::EObject>& ref : references)
 			{
 				std::shared_ptr<uml::Property>  _r = std::dynamic_pointer_cast<uml::Property>(ref);
 				if (_r != nullptr)
@@ -546,7 +546,7 @@ void AssociationImpl::resolveReferences(const int featureID, std::vector<std::sh
 		case uml::umlPackage::ASSOCIATION_ATTRIBUTE_NAVIGABLEOWNEDEND:
 		{
 			std::shared_ptr<Subset<uml::Property, uml::Property /*Subset does not reference a union*/>> _navigableOwnedEnd = getNavigableOwnedEnd();
-			for(std::shared_ptr<ecore::EObject> ref : references)
+			for(const std::shared_ptr<ecore::EObject>& ref : references)
 			{
 				std::shared_ptr<uml::Property>  _r = std::dynamic_pointer_cast<uml::Property>(ref);
 				if (_r != nullptr)

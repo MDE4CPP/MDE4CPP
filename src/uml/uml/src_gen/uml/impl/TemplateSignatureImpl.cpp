@@ -313,7 +313,7 @@ void TemplateSignatureImpl::resolveReferences(const int featureID, std::vector<s
 		case uml::umlPackage::TEMPLATESIGNATURE_ATTRIBUTE_PARAMETER:
 		{
 			std::shared_ptr<Union<uml::TemplateParameter>> _parameter = getParameter();
-			for(std::shared_ptr<ecore::EObject> ref : references)
+			for(const std::shared_ptr<ecore::EObject>& ref : references)
 			{
 				std::shared_ptr<uml::TemplateParameter>  _r = std::dynamic_pointer_cast<uml::TemplateParameter>(ref);
 				if (_r != nullptr)
@@ -356,7 +356,7 @@ void TemplateSignatureImpl::saveContent(std::shared_ptr<persistence::interfaces:
 	{
 		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
 		// Save 'ownedParameter'
-		for (std::shared_ptr<uml::TemplateParameter> ownedParameter : *this->getOwnedParameter()) 
+		for (const std::shared_ptr<uml::TemplateParameter>& ownedParameter : *this->getOwnedParameter()) 
 		{
 			saveHandler->addReference(ownedParameter, "ownedParameter", ownedParameter->eClass() != package->getTemplateParameter_Class());
 		}

@@ -415,7 +415,7 @@ void ConnectorImpl::resolveReferences(const int featureID, std::vector<std::shar
 		case uml::umlPackage::CONNECTOR_ATTRIBUTE_CONTRACT:
 		{
 			std::shared_ptr<Bag<uml::Behavior>> _contract = getContract();
-			for(std::shared_ptr<ecore::EObject> ref : references)
+			for(const std::shared_ptr<ecore::EObject>& ref : references)
 			{
 				std::shared_ptr<uml::Behavior>  _r = std::dynamic_pointer_cast<uml::Behavior>(ref);
 				if (_r != nullptr)
@@ -429,7 +429,7 @@ void ConnectorImpl::resolveReferences(const int featureID, std::vector<std::shar
 		case uml::umlPackage::CONNECTOR_ATTRIBUTE_REDEFINEDCONNECTOR:
 		{
 			std::shared_ptr<Subset<uml::Connector, uml::RedefinableElement>> _redefinedConnector = getRedefinedConnector();
-			for(std::shared_ptr<ecore::EObject> ref : references)
+			for(const std::shared_ptr<ecore::EObject>& ref : references)
 			{
 				std::shared_ptr<uml::Connector>  _r = std::dynamic_pointer_cast<uml::Connector>(ref);
 				if (_r != nullptr)
@@ -490,7 +490,7 @@ void ConnectorImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHa
 	{
 		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
 		// Save 'end'
-		for (std::shared_ptr<uml::ConnectorEnd> end : *this->getEnd()) 
+		for (const std::shared_ptr<uml::ConnectorEnd>& end : *this->getEnd()) 
 		{
 			saveHandler->addReference(end, "end", end->eClass() != package->getConnectorEnd_Class());
 		}

@@ -783,19 +783,19 @@ void StateImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandle
 	{
 		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
 		// Save 'connection'
-		for (std::shared_ptr<uml::ConnectionPointReference> connection : *this->getConnection()) 
+		for (const std::shared_ptr<uml::ConnectionPointReference>& connection : *this->getConnection()) 
 		{
 			saveHandler->addReference(connection, "connection", connection->eClass() != package->getConnectionPointReference_Class());
 		}
 
 		// Save 'connectionPoint'
-		for (std::shared_ptr<uml::Pseudostate> connectionPoint : *this->getConnectionPoint()) 
+		for (const std::shared_ptr<uml::Pseudostate>& connectionPoint : *this->getConnectionPoint()) 
 		{
 			saveHandler->addReference(connectionPoint, "connectionPoint", connectionPoint->eClass() != package->getPseudostate_Class());
 		}
 
 		// Save 'deferrableTrigger'
-		for (std::shared_ptr<uml::Trigger> deferrableTrigger : *this->getDeferrableTrigger()) 
+		for (const std::shared_ptr<uml::Trigger>& deferrableTrigger : *this->getDeferrableTrigger()) 
 		{
 			saveHandler->addReference(deferrableTrigger, "deferrableTrigger", deferrableTrigger->eClass() != package->getTrigger_Class());
 		}
@@ -822,7 +822,7 @@ void StateImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandle
 		}
 
 		// Save 'region'
-		for (std::shared_ptr<uml::Region> region : *this->getRegion()) 
+		for (const std::shared_ptr<uml::Region>& region : *this->getRegion()) 
 		{
 			saveHandler->addReference(region, "region", region->eClass() != package->getRegion_Class());
 		}

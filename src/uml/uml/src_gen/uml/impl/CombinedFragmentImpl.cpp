@@ -462,13 +462,13 @@ void CombinedFragmentImpl::saveContent(std::shared_ptr<persistence::interfaces::
 	{
 		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
 		// Save 'cfragmentGate'
-		for (std::shared_ptr<uml::Gate> cfragmentGate : *this->getCfragmentGate()) 
+		for (const std::shared_ptr<uml::Gate>& cfragmentGate : *this->getCfragmentGate()) 
 		{
 			saveHandler->addReference(cfragmentGate, "cfragmentGate", cfragmentGate->eClass() != package->getGate_Class());
 		}
 
 		// Save 'operand'
-		for (std::shared_ptr<uml::InteractionOperand> operand : *this->getOperand()) 
+		for (const std::shared_ptr<uml::InteractionOperand>& operand : *this->getOperand()) 
 		{
 			saveHandler->addReference(operand, "operand", operand->eClass() != package->getInteractionOperand_Class());
 		}

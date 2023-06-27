@@ -227,7 +227,7 @@ void CommentImpl::resolveReferences(const int featureID, std::vector<std::shared
 		case uml::umlPackage::COMMENT_ATTRIBUTE_ANNOTATEDELEMENT:
 		{
 			std::shared_ptr<Bag<uml::Element>> _annotatedElement = getAnnotatedElement();
-			for(std::shared_ptr<ecore::EObject> ref : references)
+			for(const std::shared_ptr<ecore::EObject>& ref : references)
 			{
 				std::shared_ptr<uml::Element>  _r = std::dynamic_pointer_cast<uml::Element>(ref);
 				if (_r != nullptr)

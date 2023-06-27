@@ -865,31 +865,31 @@ void PackageImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHand
 	{
 		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
 		// Save 'nestedPackage'
-		for (std::shared_ptr<uml::Package> nestedPackage : *this->getNestedPackage()) 
+		for (const std::shared_ptr<uml::Package>& nestedPackage : *this->getNestedPackage()) 
 		{
 			saveHandler->addReference(nestedPackage, "nestedPackage", nestedPackage->eClass() != package->getPackage_Class());
 		}
 
 		// Save 'ownedStereotype'
-		for (std::shared_ptr<uml::Stereotype> ownedStereotype : *this->getOwnedStereotype()) 
+		for (const std::shared_ptr<uml::Stereotype>& ownedStereotype : *this->getOwnedStereotype()) 
 		{
 			saveHandler->addReference(ownedStereotype, "ownedStereotype", ownedStereotype->eClass() != package->getStereotype_Class());
 		}
 
 		// Save 'ownedType'
-		for (std::shared_ptr<uml::Type> ownedType : *this->getOwnedType()) 
+		for (const std::shared_ptr<uml::Type>& ownedType : *this->getOwnedType()) 
 		{
 			saveHandler->addReference(ownedType, "ownedType", ownedType->eClass() != package->getType_Class());
 		}
 
 		// Save 'packageMerge'
-		for (std::shared_ptr<uml::PackageMerge> packageMerge : *this->getPackageMerge()) 
+		for (const std::shared_ptr<uml::PackageMerge>& packageMerge : *this->getPackageMerge()) 
 		{
 			saveHandler->addReference(packageMerge, "packageMerge", packageMerge->eClass() != package->getPackageMerge_Class());
 		}
 
 		// Save 'profileApplication'
-		for (std::shared_ptr<uml::ProfileApplication> profileApplication : *this->getProfileApplication()) 
+		for (const std::shared_ptr<uml::ProfileApplication>& profileApplication : *this->getProfileApplication()) 
 		{
 			saveHandler->addReference(profileApplication, "profileApplication", profileApplication->eClass() != package->getProfileApplication_Class());
 		}

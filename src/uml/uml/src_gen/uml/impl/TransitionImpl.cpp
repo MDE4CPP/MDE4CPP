@@ -566,7 +566,7 @@ void TransitionImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveH
 		}
 
 		// Save 'trigger'
-		for (std::shared_ptr<uml::Trigger> trigger : *this->getTrigger()) 
+		for (const std::shared_ptr<uml::Trigger>& trigger : *this->getTrigger()) 
 		{
 			saveHandler->addReference(trigger, "trigger", trigger->eClass() != package->getTrigger_Class());
 		}

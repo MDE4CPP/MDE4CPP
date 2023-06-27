@@ -280,7 +280,7 @@ void OccurrenceSpecificationImpl::resolveReferences(const int featureID, std::ve
 		case uml::umlPackage::OCCURRENCESPECIFICATION_ATTRIBUTE_TOAFTER:
 		{
 			std::shared_ptr<Bag<uml::GeneralOrdering>> _toAfter = getToAfter();
-			for(std::shared_ptr<ecore::EObject> ref : references)
+			for(const std::shared_ptr<ecore::EObject>& ref : references)
 			{
 				std::shared_ptr<uml::GeneralOrdering>  _r = std::dynamic_pointer_cast<uml::GeneralOrdering>(ref);
 				if (_r != nullptr)
@@ -294,7 +294,7 @@ void OccurrenceSpecificationImpl::resolveReferences(const int featureID, std::ve
 		case uml::umlPackage::OCCURRENCESPECIFICATION_ATTRIBUTE_TOBEFORE:
 		{
 			std::shared_ptr<Bag<uml::GeneralOrdering>> _toBefore = getToBefore();
-			for(std::shared_ptr<ecore::EObject> ref : references)
+			for(const std::shared_ptr<ecore::EObject>& ref : references)
 			{
 				std::shared_ptr<uml::GeneralOrdering>  _r = std::dynamic_pointer_cast<uml::GeneralOrdering>(ref);
 				if (_r != nullptr)

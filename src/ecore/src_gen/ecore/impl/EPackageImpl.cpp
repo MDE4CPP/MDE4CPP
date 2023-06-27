@@ -183,7 +183,7 @@ std::shared_ptr<ecore::EClassifier> EPackageImpl::getEClassifier(std::string nam
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
 	std::shared_ptr<Bag<EClassifier> > classifierList = getEClassifiers();
-    for (std::shared_ptr<EClassifier> c : *classifierList)
+    for (const std::shared_ptr<EClassifier>& c : *classifierList)
     {
         if(c->getName()==name)
         {
@@ -435,7 +435,7 @@ void EPackageImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHan
 	{
 		std::shared_ptr<ecore::ecorePackage> package = ecore::ecorePackage::eInstance();
 		// Save 'eClassifiers'
-		for (std::shared_ptr<ecore::EClassifier> eClassifiers : *this->getEClassifiers()) 
+		for (const std::shared_ptr<ecore::EClassifier>& eClassifiers : *this->getEClassifiers()) 
 		{
 			saveHandler->addReference(eClassifiers, "eClassifiers", eClassifiers->eClass() != package->getEClassifier_Class());
 		}

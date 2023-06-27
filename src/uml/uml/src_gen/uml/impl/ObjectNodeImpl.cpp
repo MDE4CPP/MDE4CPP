@@ -373,7 +373,7 @@ void ObjectNodeImpl::resolveReferences(const int featureID, std::vector<std::sha
 		case uml::umlPackage::OBJECTNODE_ATTRIBUTE_INSTATE:
 		{
 			std::shared_ptr<Bag<uml::State>> _inState = getInState();
-			for(std::shared_ptr<ecore::EObject> ref : references)
+			for(const std::shared_ptr<ecore::EObject>& ref : references)
 			{
 				std::shared_ptr<uml::State>  _r = std::dynamic_pointer_cast<uml::State>(ref);
 				if (_r != nullptr)

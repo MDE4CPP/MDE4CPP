@@ -390,7 +390,7 @@ void DeploymentImpl::resolveReferences(const int featureID, std::vector<std::sha
 		case uml::umlPackage::DEPLOYMENT_ATTRIBUTE_DEPLOYEDARTIFACT:
 		{
 			std::shared_ptr<Subset<uml::DeployedArtifact, uml::NamedElement /*Subset does not reference a union*/>> _deployedArtifact = getDeployedArtifact();
-			for(std::shared_ptr<ecore::EObject> ref : references)
+			for(const std::shared_ptr<ecore::EObject>& ref : references)
 			{
 				std::shared_ptr<uml::DeployedArtifact>  _r = std::dynamic_pointer_cast<uml::DeployedArtifact>(ref);
 				if (_r != nullptr)
@@ -442,7 +442,7 @@ void DeploymentImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveH
 	{
 		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
 		// Save 'configuration'
-		for (std::shared_ptr<uml::DeploymentSpecification> configuration : *this->getConfiguration()) 
+		for (const std::shared_ptr<uml::DeploymentSpecification>& configuration : *this->getConfiguration()) 
 		{
 			saveHandler->addReference(configuration, "configuration", configuration->eClass() != package->getDeploymentSpecification_Class());
 		}

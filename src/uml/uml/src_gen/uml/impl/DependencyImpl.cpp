@@ -346,7 +346,7 @@ void DependencyImpl::resolveReferences(const int featureID, std::vector<std::sha
 		case uml::umlPackage::DEPENDENCY_ATTRIBUTE_CLIENT:
 		{
 			std::shared_ptr<SubsetUnion<uml::NamedElement, uml::Element>> _client = getClient();
-			for(std::shared_ptr<ecore::EObject> ref : references)
+			for(const std::shared_ptr<ecore::EObject>& ref : references)
 			{
 				std::shared_ptr<uml::NamedElement>  _r = std::dynamic_pointer_cast<uml::NamedElement>(ref);
 				if (_r != nullptr)
@@ -360,7 +360,7 @@ void DependencyImpl::resolveReferences(const int featureID, std::vector<std::sha
 		case uml::umlPackage::DEPENDENCY_ATTRIBUTE_SUPPLIER:
 		{
 			std::shared_ptr<SubsetUnion<uml::NamedElement, uml::Element>> _supplier = getSupplier();
-			for(std::shared_ptr<ecore::EObject> ref : references)
+			for(const std::shared_ptr<ecore::EObject>& ref : references)
 			{
 				std::shared_ptr<uml::NamedElement>  _r = std::dynamic_pointer_cast<uml::NamedElement>(ref);
 				if (_r != nullptr)

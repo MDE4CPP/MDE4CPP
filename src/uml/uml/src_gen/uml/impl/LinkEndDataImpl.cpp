@@ -348,7 +348,7 @@ void LinkEndDataImpl::saveContent(std::shared_ptr<persistence::interfaces::XSave
 	{
 		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
 		// Save 'qualifier'
-		for (std::shared_ptr<uml::QualifierValue> qualifier : *this->getQualifier()) 
+		for (const std::shared_ptr<uml::QualifierValue>& qualifier : *this->getQualifier()) 
 		{
 			saveHandler->addReference(qualifier, "qualifier", qualifier->eClass() != package->getQualifierValue_Class());
 		}

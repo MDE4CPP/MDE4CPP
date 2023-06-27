@@ -38,8 +38,8 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "ocl/Expressions/ExpressionsFactory.hpp"
 #include "ecore/ecoreFactory.hpp"
+#include "ocl/Expressions/ExpressionsFactory.hpp"
 #include "ocl/Evaluations/EvaluationsFactory.hpp"
 #include "ocl/Expressions/CallExp.hpp"
 #include "ocl/Expressions/CollectionRange.hpp"
@@ -364,7 +364,7 @@ void PackageDeclarationExpImpl::resolveReferences(const int featureID, std::vect
 		case ocl::Expressions::ExpressionsPackage::PACKAGEDECLARATIONEXP_ATTRIBUTE_CONTEXTDECLARATIONS:
 		{
 			std::shared_ptr<Bag<ocl::Expressions::ContextDeclarationExp>> _contextDeclarations = getContextDeclarations();
-			for(std::shared_ptr<ecore::EObject> ref : references)
+			for(const std::shared_ptr<ecore::EObject>& ref : references)
 			{
 				std::shared_ptr<ocl::Expressions::ContextDeclarationExp>  _r = std::dynamic_pointer_cast<ocl::Expressions::ContextDeclarationExp>(ref);
 				if (_r != nullptr)

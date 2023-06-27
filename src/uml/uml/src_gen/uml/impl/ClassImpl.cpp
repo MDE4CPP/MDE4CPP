@@ -321,7 +321,7 @@ std::shared_ptr<Bag<uml::Class>> ClassImpl::getSuperClasses()
 	std::shared_ptr<Bag<uml::Class> > superClass(new Bag<uml::Class> () );	
 	
     std::shared_ptr<Bag<uml::Classifier> > classifierList = getGenerals();	
-    for (std::shared_ptr<Classifier> c : *classifierList)	
+    for (const std::shared_ptr<Classifier>& c : *classifierList)	
     {	
     	std::shared_ptr<uml::Class> cl = std::dynamic_pointer_cast<uml::Class>(c);
         if(cl)
@@ -623,7 +623,7 @@ void ClassImpl::resolveReferences(const int featureID, std::vector<std::shared_p
 		case uml::umlPackage::CLASS_ATTRIBUTE_SUPERCLASS:
 		{
 			std::shared_ptr<Bag<uml::Class>> _superClass = getSuperClass();
-			for(std::shared_ptr<ecore::EObject> ref : references)
+			for(const std::shared_ptr<ecore::EObject>& ref : references)
 			{
 				std::shared_ptr<uml::Class>  _r = std::dynamic_pointer_cast<uml::Class>(ref);
 				if (_r != nullptr)
@@ -672,25 +672,25 @@ void ClassImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandle
 	{
 		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
 		// Save 'nestedClassifier'
-		for (std::shared_ptr<uml::Classifier> nestedClassifier : *this->getNestedClassifier()) 
+		for (const std::shared_ptr<uml::Classifier>& nestedClassifier : *this->getNestedClassifier()) 
 		{
 			saveHandler->addReference(nestedClassifier, "nestedClassifier", nestedClassifier->eClass() != package->getClassifier_Class());
 		}
 
 		// Save 'ownedAttribute'
-		for (std::shared_ptr<uml::Property> ownedAttribute : *this->getClass_OwnedAttribute()) 
+		for (const std::shared_ptr<uml::Property>& ownedAttribute : *this->getClass_OwnedAttribute()) 
 		{
 			saveHandler->addReference(ownedAttribute, "ownedAttribute", ownedAttribute->eClass() != package->getProperty_Class());
 		}
 
 		// Save 'ownedOperation'
-		for (std::shared_ptr<uml::Operation> ownedOperation : *this->getOwnedOperation()) 
+		for (const std::shared_ptr<uml::Operation>& ownedOperation : *this->getOwnedOperation()) 
 		{
 			saveHandler->addReference(ownedOperation, "ownedOperation", ownedOperation->eClass() != package->getOperation_Class());
 		}
 
 		// Save 'ownedReception'
-		for (std::shared_ptr<uml::Reception> ownedReception : *this->getOwnedReception()) 
+		for (const std::shared_ptr<uml::Reception>& ownedReception : *this->getOwnedReception()) 
 		{
 			saveHandler->addReference(ownedReception, "ownedReception", ownedReception->eClass() != package->getReception_Class());
 		}

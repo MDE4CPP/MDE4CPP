@@ -500,7 +500,7 @@ void StateMachineImpl::resolveReferences(const int featureID, std::vector<std::s
 		case uml::umlPackage::STATEMACHINE_ATTRIBUTE_EXTENDEDSTATEMACHINE:
 		{
 			std::shared_ptr<Bag<uml::StateMachine>> _extendedStateMachine = getExtendedStateMachine();
-			for(std::shared_ptr<ecore::EObject> ref : references)
+			for(const std::shared_ptr<ecore::EObject>& ref : references)
 			{
 				std::shared_ptr<uml::StateMachine>  _r = std::dynamic_pointer_cast<uml::StateMachine>(ref);
 				if (_r != nullptr)
@@ -514,7 +514,7 @@ void StateMachineImpl::resolveReferences(const int featureID, std::vector<std::s
 		case uml::umlPackage::STATEMACHINE_ATTRIBUTE_SUBMACHINESTATE:
 		{
 			std::shared_ptr<Bag<uml::State>> _submachineState = getSubmachineState();
-			for(std::shared_ptr<ecore::EObject> ref : references)
+			for(const std::shared_ptr<ecore::EObject>& ref : references)
 			{
 				std::shared_ptr<uml::State>  _r = std::dynamic_pointer_cast<uml::State>(ref);
 				if (_r != nullptr)
@@ -566,13 +566,13 @@ void StateMachineImpl::saveContent(std::shared_ptr<persistence::interfaces::XSav
 	{
 		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
 		// Save 'connectionPoint'
-		for (std::shared_ptr<uml::Pseudostate> connectionPoint : *this->getConnectionPoint()) 
+		for (const std::shared_ptr<uml::Pseudostate>& connectionPoint : *this->getConnectionPoint()) 
 		{
 			saveHandler->addReference(connectionPoint, "connectionPoint", connectionPoint->eClass() != package->getPseudostate_Class());
 		}
 
 		// Save 'region'
-		for (std::shared_ptr<uml::Region> region : *this->getRegion()) 
+		for (const std::shared_ptr<uml::Region>& region : *this->getRegion()) 
 		{
 			saveHandler->addReference(region, "region", region->eClass() != package->getRegion_Class());
 		}

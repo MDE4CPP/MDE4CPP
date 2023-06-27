@@ -342,7 +342,7 @@ void ReclassifyObjectActionImpl::resolveReferences(const int featureID, std::vec
 		case uml::umlPackage::RECLASSIFYOBJECTACTION_ATTRIBUTE_NEWCLASSIFIER:
 		{
 			std::shared_ptr<Bag<uml::Classifier>> _newClassifier = getNewClassifier();
-			for(std::shared_ptr<ecore::EObject> ref : references)
+			for(const std::shared_ptr<ecore::EObject>& ref : references)
 			{
 				std::shared_ptr<uml::Classifier>  _r = std::dynamic_pointer_cast<uml::Classifier>(ref);
 				if (_r != nullptr)
@@ -356,7 +356,7 @@ void ReclassifyObjectActionImpl::resolveReferences(const int featureID, std::vec
 		case uml::umlPackage::RECLASSIFYOBJECTACTION_ATTRIBUTE_OLDCLASSIFIER:
 		{
 			std::shared_ptr<Bag<uml::Classifier>> _oldClassifier = getOldClassifier();
-			for(std::shared_ptr<ecore::EObject> ref : references)
+			for(const std::shared_ptr<ecore::EObject>& ref : references)
 			{
 				std::shared_ptr<uml::Classifier>  _r = std::dynamic_pointer_cast<uml::Classifier>(ref);
 				if (_r != nullptr)

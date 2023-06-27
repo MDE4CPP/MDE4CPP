@@ -330,7 +330,7 @@ void CollaborationUseImpl::saveContent(std::shared_ptr<persistence::interfaces::
 	{
 		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
 		// Save 'roleBinding'
-		for (std::shared_ptr<uml::Dependency> roleBinding : *this->getRoleBinding()) 
+		for (const std::shared_ptr<uml::Dependency>& roleBinding : *this->getRoleBinding()) 
 		{
 			saveHandler->addReference(roleBinding, "roleBinding", roleBinding->eClass() != package->getDependency_Class());
 		}

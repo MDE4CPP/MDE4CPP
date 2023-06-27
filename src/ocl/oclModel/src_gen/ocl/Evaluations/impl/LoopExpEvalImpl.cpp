@@ -39,8 +39,8 @@
 
 #include <exception> // used in Persistence
 #include "ecore/ecoreFactory.hpp"
-#include "ocl/Evaluations/EvaluationsFactory.hpp"
 #include "ocl/Expressions/ExpressionsFactory.hpp"
+#include "ocl/Evaluations/EvaluationsFactory.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClassifier.hpp"
 #include "ecore/EGenericType.hpp"
@@ -246,7 +246,7 @@ void LoopExpEvalImpl::resolveReferences(const int featureID, std::vector<std::sh
 		case ocl::Evaluations::EvaluationsPackage::LOOPEXPEVAL_ATTRIBUTE_BODYEVALS:
 		{
 			std::shared_ptr<Bag<ocl::Evaluations::OclExpEval>> _bodyEvals = getBodyEvals();
-			for(std::shared_ptr<ecore::EObject> ref : references)
+			for(const std::shared_ptr<ecore::EObject>& ref : references)
 			{
 				std::shared_ptr<ocl::Evaluations::OclExpEval>  _r = std::dynamic_pointer_cast<ocl::Evaluations::OclExpEval>(ref);
 				if (_r != nullptr)
@@ -285,7 +285,7 @@ void LoopExpEvalImpl::saveContent(std::shared_ptr<persistence::interfaces::XSave
 		// Add attributes
 		if ( this->eIsSet(package->getLoopExpEval_Attribute_iterators()) )
 		{
-			for (std::shared_ptr<std::string> value : *m_iterators)
+			for (const std::shared_ptr<std::string>& value : *m_iterators)
 			{
 				saveHandler->addAttributeAsNode("iterators", *value);
 			}

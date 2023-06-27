@@ -474,7 +474,7 @@ void StructuredClassifierImpl::saveContent(std::shared_ptr<persistence::interfac
 	{
 		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
 		// Save 'ownedConnector'
-		for (std::shared_ptr<uml::Connector> ownedConnector : *this->getOwnedConnector()) 
+		for (const std::shared_ptr<uml::Connector>& ownedConnector : *this->getOwnedConnector()) 
 		{
 			saveHandler->addReference(ownedConnector, "ownedConnector", ownedConnector->eClass() != package->getConnector_Class());
 		}

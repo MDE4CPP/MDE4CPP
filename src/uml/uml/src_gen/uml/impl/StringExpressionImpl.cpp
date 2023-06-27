@@ -397,7 +397,7 @@ void StringExpressionImpl::saveContent(std::shared_ptr<persistence::interfaces::
 	{
 		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
 		// Save 'subExpression'
-		for (std::shared_ptr<uml::StringExpression> subExpression : *this->getSubExpression()) 
+		for (const std::shared_ptr<uml::StringExpression>& subExpression : *this->getSubExpression()) 
 		{
 			saveHandler->addReference(subExpression, "subExpression", subExpression->eClass() != package->getStringExpression_Class());
 		}

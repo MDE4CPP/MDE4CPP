@@ -370,7 +370,7 @@ void InstanceSpecificationImpl::resolveReferences(const int featureID, std::vect
 		case uml::umlPackage::INSTANCESPECIFICATION_ATTRIBUTE_CLASSIFIER:
 		{
 			std::shared_ptr<Bag<uml::Classifier>> _classifier = getClassifier();
-			for(std::shared_ptr<ecore::EObject> ref : references)
+			for(const std::shared_ptr<ecore::EObject>& ref : references)
 			{
 				std::shared_ptr<uml::Classifier>  _r = std::dynamic_pointer_cast<uml::Classifier>(ref);
 				if (_r != nullptr)
@@ -410,7 +410,7 @@ void InstanceSpecificationImpl::saveContent(std::shared_ptr<persistence::interfa
 	{
 		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
 		// Save 'slot'
-		for (std::shared_ptr<uml::Slot> slot : *this->getSlot()) 
+		for (const std::shared_ptr<uml::Slot>& slot : *this->getSlot()) 
 		{
 			saveHandler->addReference(slot, "slot", slot->eClass() != package->getSlot_Class());
 		}

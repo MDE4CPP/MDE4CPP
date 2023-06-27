@@ -39,8 +39,8 @@
 
 #include <exception> // used in Persistence
 #include "ecore/ecoreFactory.hpp"
-#include "ocl/Evaluations/EvaluationsFactory.hpp"
 #include "ocl/Expressions/ExpressionsFactory.hpp"
+#include "ocl/Evaluations/EvaluationsFactory.hpp"
 #include "ocl/Evaluations/CollectionLiteralPartEval.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClassifier.hpp"
@@ -208,7 +208,7 @@ void CollectionLiteralExpEvalImpl::resolveReferences(const int featureID, std::v
 		case ocl::Evaluations::EvaluationsPackage::COLLECTIONLITERALEXPEVAL_ATTRIBUTE_PARTS:
 		{
 			std::shared_ptr<Bag<ocl::Evaluations::CollectionLiteralPartEval>> _parts = getParts();
-			for(std::shared_ptr<ecore::EObject> ref : references)
+			for(const std::shared_ptr<ecore::EObject>& ref : references)
 			{
 				std::shared_ptr<ocl::Evaluations::CollectionLiteralPartEval>  _r = std::dynamic_pointer_cast<ocl::Evaluations::CollectionLiteralPartEval>(ref);
 				if (_r != nullptr)

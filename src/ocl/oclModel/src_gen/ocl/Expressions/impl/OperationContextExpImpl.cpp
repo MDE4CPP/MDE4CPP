@@ -38,8 +38,8 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "ocl/Expressions/ExpressionsFactory.hpp"
 #include "ecore/ecoreFactory.hpp"
+#include "ocl/Expressions/ExpressionsFactory.hpp"
 #include "ocl/Evaluations/EvaluationsFactory.hpp"
 #include "ocl/Expressions/CallExp.hpp"
 #include "ocl/Expressions/CollectionRange.hpp"
@@ -383,7 +383,7 @@ void OperationContextExpImpl::resolveReferences(const int featureID, std::vector
 		case ocl::Expressions::ExpressionsPackage::OPERATIONCONTEXTEXP_ATTRIBUTE_INPUTPARAMETERS:
 		{
 			std::shared_ptr<Bag<ocl::Expressions::VarDeclarationExp>> _inputParameters = getInputParameters();
-			for(std::shared_ptr<ecore::EObject> ref : references)
+			for(const std::shared_ptr<ecore::EObject>& ref : references)
 			{
 				std::shared_ptr<ocl::Expressions::VarDeclarationExp>  _r = std::dynamic_pointer_cast<ocl::Expressions::VarDeclarationExp>(ref);
 				if (_r != nullptr)

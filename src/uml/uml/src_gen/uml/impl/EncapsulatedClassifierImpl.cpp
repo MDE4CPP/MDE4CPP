@@ -360,7 +360,7 @@ void EncapsulatedClassifierImpl::saveContent(std::shared_ptr<persistence::interf
 	{
 		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
 		// Save 'ownedPort'
-		for (std::shared_ptr<uml::Port> ownedPort : *this->getOwnedPort()) 
+		for (const std::shared_ptr<uml::Port>& ownedPort : *this->getOwnedPort()) 
 		{
 			saveHandler->addReference(ownedPort, "ownedPort", ownedPort->eClass() != package->getPort_Class());
 		}

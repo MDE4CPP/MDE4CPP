@@ -389,7 +389,7 @@ void OpaqueBehaviorImpl::saveContent(std::shared_ptr<persistence::interfaces::XS
 		// Add attributes
 		if ( this->eIsSet(package->getOpaqueBehavior_Attribute_body()) )
 		{
-			for (std::shared_ptr<std::string> value : *m_body)
+			for (const std::shared_ptr<std::string>& value : *m_body)
 			{
 				saveHandler->addAttributeAsNode("body", *value);
 			}
@@ -397,7 +397,7 @@ void OpaqueBehaviorImpl::saveContent(std::shared_ptr<persistence::interfaces::XS
 
 		if ( this->eIsSet(package->getOpaqueBehavior_Attribute_language()) )
 		{
-			for (std::shared_ptr<std::string> value : *m_language)
+			for (const std::shared_ptr<std::string>& value : *m_language)
 			{
 				saveHandler->addAttributeAsNode("language", *value);
 			}

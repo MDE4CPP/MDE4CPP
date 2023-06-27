@@ -38,8 +38,8 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "ocl/Expressions/ExpressionsFactory.hpp"
 #include "ecore/ecoreFactory.hpp"
+#include "ocl/Expressions/ExpressionsFactory.hpp"
 #include "ocl/Expressions/CollectionLiteralPart.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClassifier.hpp"
@@ -203,7 +203,7 @@ void CollectionLiteralPartsImpl::resolveReferences(const int featureID, std::vec
 		case ocl::Expressions::ExpressionsPackage::COLLECTIONLITERALPARTS_ATTRIBUTE_LITERALPARTS:
 		{
 			std::shared_ptr<Bag<ocl::Expressions::CollectionLiteralPart>> _literalParts = getLiteralParts();
-			for(std::shared_ptr<ecore::EObject> ref : references)
+			for(const std::shared_ptr<ecore::EObject>& ref : references)
 			{
 				std::shared_ptr<ocl::Expressions::CollectionLiteralPart>  _r = std::dynamic_pointer_cast<ocl::Expressions::CollectionLiteralPart>(ref);
 				if (_r != nullptr)

@@ -860,7 +860,7 @@ void PropertyImpl::resolveReferences(const int featureID, std::vector<std::share
 		case uml::umlPackage::PROPERTY_ATTRIBUTE_REDEFINEDPROPERTY:
 		{
 			std::shared_ptr<SubsetUnion<uml::Property, uml::RedefinableElement>> _redefinedProperty = getRedefinedProperty();
-			for(std::shared_ptr<ecore::EObject> ref : references)
+			for(const std::shared_ptr<ecore::EObject>& ref : references)
 			{
 				std::shared_ptr<uml::Property>  _r = std::dynamic_pointer_cast<uml::Property>(ref);
 				if (_r != nullptr)
@@ -874,7 +874,7 @@ void PropertyImpl::resolveReferences(const int featureID, std::vector<std::share
 		case uml::umlPackage::PROPERTY_ATTRIBUTE_SUBSETTEDPROPERTY:
 		{
 			std::shared_ptr<Bag<uml::Property>> _subsettedProperty = getSubsettedProperty();
-			for(std::shared_ptr<ecore::EObject> ref : references)
+			for(const std::shared_ptr<ecore::EObject>& ref : references)
 			{
 				std::shared_ptr<uml::Property>  _r = std::dynamic_pointer_cast<uml::Property>(ref);
 				if (_r != nullptr)
@@ -927,7 +927,7 @@ void PropertyImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHan
 		}
 
 		// Save 'qualifier'
-		for (std::shared_ptr<uml::Property> qualifier : *this->getQualifier()) 
+		for (const std::shared_ptr<uml::Property>& qualifier : *this->getQualifier()) 
 		{
 			saveHandler->addReference(qualifier, "qualifier", qualifier->eClass() != package->getProperty_Class());
 		}

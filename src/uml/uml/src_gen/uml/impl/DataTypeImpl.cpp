@@ -432,13 +432,13 @@ void DataTypeImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHan
 	{
 		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
 		// Save 'ownedAttribute'
-		for (std::shared_ptr<uml::Property> ownedAttribute : *this->getOwnedAttribute()) 
+		for (const std::shared_ptr<uml::Property>& ownedAttribute : *this->getOwnedAttribute()) 
 		{
 			saveHandler->addReference(ownedAttribute, "ownedAttribute", ownedAttribute->eClass() != package->getProperty_Class());
 		}
 
 		// Save 'ownedOperation'
-		for (std::shared_ptr<uml::Operation> ownedOperation : *this->getOwnedOperation()) 
+		for (const std::shared_ptr<uml::Operation>& ownedOperation : *this->getOwnedOperation()) 
 		{
 			saveHandler->addReference(ownedOperation, "ownedOperation", ownedOperation->eClass() != package->getOperation_Class());
 		}

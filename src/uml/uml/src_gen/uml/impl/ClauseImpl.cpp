@@ -309,7 +309,7 @@ void ClauseImpl::resolveReferences(const int featureID, std::vector<std::shared_
 		case uml::umlPackage::CLAUSE_ATTRIBUTE_BODY:
 		{
 			std::shared_ptr<Bag<uml::ExecutableNode>> _body = getBody();
-			for(std::shared_ptr<ecore::EObject> ref : references)
+			for(const std::shared_ptr<ecore::EObject>& ref : references)
 			{
 				std::shared_ptr<uml::ExecutableNode>  _r = std::dynamic_pointer_cast<uml::ExecutableNode>(ref);
 				if (_r != nullptr)
@@ -323,7 +323,7 @@ void ClauseImpl::resolveReferences(const int featureID, std::vector<std::shared_
 		case uml::umlPackage::CLAUSE_ATTRIBUTE_BODYOUTPUT:
 		{
 			std::shared_ptr<Bag<uml::OutputPin>> _bodyOutput = getBodyOutput();
-			for(std::shared_ptr<ecore::EObject> ref : references)
+			for(const std::shared_ptr<ecore::EObject>& ref : references)
 			{
 				std::shared_ptr<uml::OutputPin>  _r = std::dynamic_pointer_cast<uml::OutputPin>(ref);
 				if (_r != nullptr)
@@ -349,7 +349,7 @@ void ClauseImpl::resolveReferences(const int featureID, std::vector<std::shared_
 		case uml::umlPackage::CLAUSE_ATTRIBUTE_PREDECESSORCLAUSE:
 		{
 			std::shared_ptr<Bag<uml::Clause>> _predecessorClause = getPredecessorClause();
-			for(std::shared_ptr<ecore::EObject> ref : references)
+			for(const std::shared_ptr<ecore::EObject>& ref : references)
 			{
 				std::shared_ptr<uml::Clause>  _r = std::dynamic_pointer_cast<uml::Clause>(ref);
 				if (_r != nullptr)
@@ -363,7 +363,7 @@ void ClauseImpl::resolveReferences(const int featureID, std::vector<std::shared_
 		case uml::umlPackage::CLAUSE_ATTRIBUTE_SUCCESSORCLAUSE:
 		{
 			std::shared_ptr<Bag<uml::Clause>> _successorClause = getSuccessorClause();
-			for(std::shared_ptr<ecore::EObject> ref : references)
+			for(const std::shared_ptr<ecore::EObject>& ref : references)
 			{
 				std::shared_ptr<uml::Clause>  _r = std::dynamic_pointer_cast<uml::Clause>(ref);
 				if (_r != nullptr)
@@ -377,7 +377,7 @@ void ClauseImpl::resolveReferences(const int featureID, std::vector<std::shared_
 		case uml::umlPackage::CLAUSE_ATTRIBUTE_TEST:
 		{
 			std::shared_ptr<Bag<uml::ExecutableNode>> _test = getTest();
-			for(std::shared_ptr<ecore::EObject> ref : references)
+			for(const std::shared_ptr<ecore::EObject>& ref : references)
 			{
 				std::shared_ptr<uml::ExecutableNode>  _r = std::dynamic_pointer_cast<uml::ExecutableNode>(ref);
 				if (_r != nullptr)

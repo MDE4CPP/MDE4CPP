@@ -695,31 +695,31 @@ void InteractionImpl::saveContent(std::shared_ptr<persistence::interfaces::XSave
 	{
 		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
 		// Save 'action'
-		for (std::shared_ptr<uml::Action> action : *this->getAction()) 
+		for (const std::shared_ptr<uml::Action>& action : *this->getAction()) 
 		{
 			saveHandler->addReference(action, "action", action->eClass() != package->getAction_Class());
 		}
 
 		// Save 'formalGate'
-		for (std::shared_ptr<uml::Gate> formalGate : *this->getFormalGate()) 
+		for (const std::shared_ptr<uml::Gate>& formalGate : *this->getFormalGate()) 
 		{
 			saveHandler->addReference(formalGate, "formalGate", formalGate->eClass() != package->getGate_Class());
 		}
 
 		// Save 'fragment'
-		for (std::shared_ptr<uml::InteractionFragment> fragment : *this->getFragment()) 
+		for (const std::shared_ptr<uml::InteractionFragment>& fragment : *this->getFragment()) 
 		{
 			saveHandler->addReference(fragment, "fragment", fragment->eClass() != package->getInteractionFragment_Class());
 		}
 
 		// Save 'lifeline'
-		for (std::shared_ptr<uml::Lifeline> lifeline : *this->getLifeline()) 
+		for (const std::shared_ptr<uml::Lifeline>& lifeline : *this->getLifeline()) 
 		{
 			saveHandler->addReference(lifeline, "lifeline", lifeline->eClass() != package->getLifeline_Class());
 		}
 
 		// Save 'message'
-		for (std::shared_ptr<uml::Message> message : *this->getMessage()) 
+		for (const std::shared_ptr<uml::Message>& message : *this->getMessage()) 
 		{
 			saveHandler->addReference(message, "message", message->eClass() != package->getMessage_Class());
 		}

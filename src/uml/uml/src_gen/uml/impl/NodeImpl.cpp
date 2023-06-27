@@ -389,7 +389,7 @@ void NodeImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler
 	{
 		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
 		// Save 'nestedNode'
-		for (std::shared_ptr<uml::Node> nestedNode : *this->getNestedNode()) 
+		for (const std::shared_ptr<uml::Node>& nestedNode : *this->getNestedNode()) 
 		{
 			saveHandler->addReference(nestedNode, "nestedNode", nestedNode->eClass() != package->getNode_Class());
 		}

@@ -604,25 +604,25 @@ void ArtifactImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHan
 	{
 		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
 		// Save 'manifestation'
-		for (std::shared_ptr<uml::Manifestation> manifestation : *this->getManifestation()) 
+		for (const std::shared_ptr<uml::Manifestation>& manifestation : *this->getManifestation()) 
 		{
 			saveHandler->addReference(manifestation, "manifestation", manifestation->eClass() != package->getManifestation_Class());
 		}
 
 		// Save 'nestedArtifact'
-		for (std::shared_ptr<uml::Artifact> nestedArtifact : *this->getNestedArtifact()) 
+		for (const std::shared_ptr<uml::Artifact>& nestedArtifact : *this->getNestedArtifact()) 
 		{
 			saveHandler->addReference(nestedArtifact, "nestedArtifact", nestedArtifact->eClass() != package->getArtifact_Class());
 		}
 
 		// Save 'ownedAttribute'
-		for (std::shared_ptr<uml::Property> ownedAttribute : *this->getOwnedAttribute()) 
+		for (const std::shared_ptr<uml::Property>& ownedAttribute : *this->getOwnedAttribute()) 
 		{
 			saveHandler->addReference(ownedAttribute, "ownedAttribute", ownedAttribute->eClass() != package->getProperty_Class());
 		}
 
 		// Save 'ownedOperation'
-		for (std::shared_ptr<uml::Operation> ownedOperation : *this->getOwnedOperation()) 
+		for (const std::shared_ptr<uml::Operation>& ownedOperation : *this->getOwnedOperation()) 
 		{
 			saveHandler->addReference(ownedOperation, "ownedOperation", ownedOperation->eClass() != package->getOperation_Class());
 		}

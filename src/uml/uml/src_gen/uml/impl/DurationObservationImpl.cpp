@@ -291,7 +291,7 @@ void DurationObservationImpl::resolveReferences(const int featureID, std::vector
 		case uml::umlPackage::DURATIONOBSERVATION_ATTRIBUTE_EVENT:
 		{
 			std::shared_ptr<Bag<uml::NamedElement>> _event = getEvent();
-			for(std::shared_ptr<ecore::EObject> ref : references)
+			for(const std::shared_ptr<ecore::EObject>& ref : references)
 			{
 				std::shared_ptr<uml::NamedElement>  _r = std::dynamic_pointer_cast<uml::NamedElement>(ref);
 				if (_r != nullptr)
@@ -331,7 +331,7 @@ void DurationObservationImpl::saveContent(std::shared_ptr<persistence::interface
 		// Add attributes
 		if ( this->eIsSet(package->getDurationObservation_Attribute_firstEvent()) )
 		{
-			for (std::shared_ptr<bool> value : *m_firstEvent)
+			for (const std::shared_ptr<bool>& value : *m_firstEvent)
 			{
 				saveHandler->addAttributeAsNode("firstEvent", std::to_string(*value));
 			}

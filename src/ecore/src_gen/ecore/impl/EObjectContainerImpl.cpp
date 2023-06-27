@@ -213,7 +213,7 @@ void EObjectContainerImpl::resolveReferences(const int featureID, std::vector<st
 		case ecore::ecorePackage::EOBJECTCONTAINER_ATTRIBUTE_CONTAINER:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> _container = getContainer();
-			for(std::shared_ptr<ecore::EObject> ref : references)
+			for(const std::shared_ptr<ecore::EObject>& ref : references)
 			{
 				std::shared_ptr<ecore::EObject>  _r = std::dynamic_pointer_cast<ecore::EObject>(ref);
 				if (_r != nullptr)

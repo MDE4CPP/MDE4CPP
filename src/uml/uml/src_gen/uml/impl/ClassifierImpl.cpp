@@ -1093,7 +1093,7 @@ void ClassifierImpl::resolveReferences(const int featureID, std::vector<std::sha
 		case uml::umlPackage::CLASSIFIER_ATTRIBUTE_GENERAL:
 		{
 			std::shared_ptr<Bag<uml::Classifier>> _general = getGeneral();
-			for(std::shared_ptr<ecore::EObject> ref : references)
+			for(const std::shared_ptr<ecore::EObject>& ref : references)
 			{
 				std::shared_ptr<uml::Classifier>  _r = std::dynamic_pointer_cast<uml::Classifier>(ref);
 				if (_r != nullptr)
@@ -1107,7 +1107,7 @@ void ClassifierImpl::resolveReferences(const int featureID, std::vector<std::sha
 		case uml::umlPackage::CLASSIFIER_ATTRIBUTE_POWERTYPEEXTENT:
 		{
 			std::shared_ptr<Bag<uml::GeneralizationSet>> _powertypeExtent = getPowertypeExtent();
-			for(std::shared_ptr<ecore::EObject> ref : references)
+			for(const std::shared_ptr<ecore::EObject>& ref : references)
 			{
 				std::shared_ptr<uml::GeneralizationSet>  _r = std::dynamic_pointer_cast<uml::GeneralizationSet>(ref);
 				if (_r != nullptr)
@@ -1121,7 +1121,7 @@ void ClassifierImpl::resolveReferences(const int featureID, std::vector<std::sha
 		case uml::umlPackage::CLASSIFIER_ATTRIBUTE_REDEFINEDCLASSIFIER:
 		{
 			std::shared_ptr<SubsetUnion<uml::Classifier, uml::RedefinableElement>> _redefinedClassifier = getRedefinedClassifier();
-			for(std::shared_ptr<ecore::EObject> ref : references)
+			for(const std::shared_ptr<ecore::EObject>& ref : references)
 			{
 				std::shared_ptr<uml::Classifier>  _r = std::dynamic_pointer_cast<uml::Classifier>(ref);
 				if (_r != nullptr)
@@ -1147,7 +1147,7 @@ void ClassifierImpl::resolveReferences(const int featureID, std::vector<std::sha
 		case uml::umlPackage::CLASSIFIER_ATTRIBUTE_USECASE:
 		{
 			std::shared_ptr<Bag<uml::UseCase>> _useCase = getUseCase();
-			for(std::shared_ptr<ecore::EObject> ref : references)
+			for(const std::shared_ptr<ecore::EObject>& ref : references)
 			{
 				std::shared_ptr<uml::UseCase>  _r = std::dynamic_pointer_cast<uml::UseCase>(ref);
 				if (_r != nullptr)
@@ -1191,19 +1191,19 @@ void ClassifierImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveH
 	{
 		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
 		// Save 'generalization'
-		for (std::shared_ptr<uml::Generalization> generalization : *this->getGeneralization()) 
+		for (const std::shared_ptr<uml::Generalization>& generalization : *this->getGeneralization()) 
 		{
 			saveHandler->addReference(generalization, "generalization", generalization->eClass() != package->getGeneralization_Class());
 		}
 
 		// Save 'ownedUseCase'
-		for (std::shared_ptr<uml::UseCase> ownedUseCase : *this->getOwnedUseCase()) 
+		for (const std::shared_ptr<uml::UseCase>& ownedUseCase : *this->getOwnedUseCase()) 
 		{
 			saveHandler->addReference(ownedUseCase, "ownedUseCase", ownedUseCase->eClass() != package->getUseCase_Class());
 		}
 
 		// Save 'substitution'
-		for (std::shared_ptr<uml::Substitution> substitution : *this->getSubstitution()) 
+		for (const std::shared_ptr<uml::Substitution>& substitution : *this->getSubstitution()) 
 		{
 			saveHandler->addReference(substitution, "substitution", substitution->eClass() != package->getSubstitution_Class());
 		}

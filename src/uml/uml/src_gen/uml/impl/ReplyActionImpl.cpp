@@ -407,7 +407,7 @@ void ReplyActionImpl::saveContent(std::shared_ptr<persistence::interfaces::XSave
 	{
 		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
 		// Save 'replyValue'
-		for (std::shared_ptr<uml::InputPin> replyValue : *this->getReplyValue()) 
+		for (const std::shared_ptr<uml::InputPin>& replyValue : *this->getReplyValue()) 
 		{
 			saveHandler->addReference(replyValue, "replyValue", replyValue->eClass() != package->getInputPin_Class());
 		}

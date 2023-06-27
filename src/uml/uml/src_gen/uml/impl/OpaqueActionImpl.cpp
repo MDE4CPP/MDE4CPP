@@ -468,20 +468,20 @@ void OpaqueActionImpl::saveContent(std::shared_ptr<persistence::interfaces::XSav
 	{
 		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
 		// Save 'inputValue'
-		for (std::shared_ptr<uml::InputPin> inputValue : *this->getInputValue()) 
+		for (const std::shared_ptr<uml::InputPin>& inputValue : *this->getInputValue()) 
 		{
 			saveHandler->addReference(inputValue, "inputValue", inputValue->eClass() != package->getInputPin_Class());
 		}
 
 		// Save 'outputValue'
-		for (std::shared_ptr<uml::OutputPin> outputValue : *this->getOutputValue()) 
+		for (const std::shared_ptr<uml::OutputPin>& outputValue : *this->getOutputValue()) 
 		{
 			saveHandler->addReference(outputValue, "outputValue", outputValue->eClass() != package->getOutputPin_Class());
 		}
 		// Add attributes
 		if ( this->eIsSet(package->getOpaqueAction_Attribute_body()) )
 		{
-			for (std::shared_ptr<std::string> value : *m_body)
+			for (const std::shared_ptr<std::string>& value : *m_body)
 			{
 				saveHandler->addAttributeAsNode("body", *value);
 			}
@@ -489,7 +489,7 @@ void OpaqueActionImpl::saveContent(std::shared_ptr<persistence::interfaces::XSav
 
 		if ( this->eIsSet(package->getOpaqueAction_Attribute_language()) )
 		{
-			for (std::shared_ptr<std::string> value : *m_language)
+			for (const std::shared_ptr<std::string>& value : *m_language)
 			{
 				saveHandler->addAttributeAsNode("language", *value);
 			}

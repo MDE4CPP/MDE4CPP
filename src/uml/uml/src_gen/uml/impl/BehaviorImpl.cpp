@@ -704,7 +704,7 @@ void BehaviorImpl::resolveReferences(const int featureID, std::vector<std::share
 		case uml::umlPackage::BEHAVIOR_ATTRIBUTE_POSTCONDITION:
 		{
 			std::shared_ptr<Subset<uml::Constraint, uml::Constraint /*Subset does not reference a union*/>> _postcondition = getPostcondition();
-			for(std::shared_ptr<ecore::EObject> ref : references)
+			for(const std::shared_ptr<ecore::EObject>& ref : references)
 			{
 				std::shared_ptr<uml::Constraint>  _r = std::dynamic_pointer_cast<uml::Constraint>(ref);
 				if (_r != nullptr)
@@ -718,7 +718,7 @@ void BehaviorImpl::resolveReferences(const int featureID, std::vector<std::share
 		case uml::umlPackage::BEHAVIOR_ATTRIBUTE_PRECONDITION:
 		{
 			std::shared_ptr<Subset<uml::Constraint, uml::Constraint /*Subset does not reference a union*/>> _precondition = getPrecondition();
-			for(std::shared_ptr<ecore::EObject> ref : references)
+			for(const std::shared_ptr<ecore::EObject>& ref : references)
 			{
 				std::shared_ptr<uml::Constraint>  _r = std::dynamic_pointer_cast<uml::Constraint>(ref);
 				if (_r != nullptr)
@@ -732,7 +732,7 @@ void BehaviorImpl::resolveReferences(const int featureID, std::vector<std::share
 		case uml::umlPackage::BEHAVIOR_ATTRIBUTE_REDEFINEDBEHAVIOR:
 		{
 			std::shared_ptr<Subset<uml::Behavior, uml::Classifier /*Subset does not reference a union*/>> _redefinedBehavior = getRedefinedBehavior();
-			for(std::shared_ptr<ecore::EObject> ref : references)
+			for(const std::shared_ptr<ecore::EObject>& ref : references)
 			{
 				std::shared_ptr<uml::Behavior>  _r = std::dynamic_pointer_cast<uml::Behavior>(ref);
 				if (_r != nullptr)
@@ -794,13 +794,13 @@ void BehaviorImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHan
 	{
 		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
 		// Save 'ownedParameter'
-		for (std::shared_ptr<uml::Parameter> ownedParameter : *this->getOwnedParameter()) 
+		for (const std::shared_ptr<uml::Parameter>& ownedParameter : *this->getOwnedParameter()) 
 		{
 			saveHandler->addReference(ownedParameter, "ownedParameter", ownedParameter->eClass() != package->getParameter_Class());
 		}
 
 		// Save 'ownedParameterSet'
-		for (std::shared_ptr<uml::ParameterSet> ownedParameterSet : *this->getOwnedParameterSet()) 
+		for (const std::shared_ptr<uml::ParameterSet>& ownedParameterSet : *this->getOwnedParameterSet()) 
 		{
 			saveHandler->addReference(ownedParameterSet, "ownedParameterSet", ownedParameterSet->eClass() != package->getParameterSet_Class());
 		}

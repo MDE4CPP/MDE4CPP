@@ -306,7 +306,7 @@ void TemplateableElementImpl::saveContent(std::shared_ptr<persistence::interface
 		}
 
 		// Save 'templateBinding'
-		for (std::shared_ptr<uml::TemplateBinding> templateBinding : *this->getTemplateBinding()) 
+		for (const std::shared_ptr<uml::TemplateBinding>& templateBinding : *this->getTemplateBinding()) 
 		{
 			saveHandler->addReference(templateBinding, "templateBinding", templateBinding->eClass() != package->getTemplateBinding_Class());
 		}

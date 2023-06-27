@@ -511,13 +511,13 @@ void ActionImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandl
 	{
 		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
 		// Save 'localPostcondition'
-		for (std::shared_ptr<uml::Constraint> localPostcondition : *this->getLocalPostcondition()) 
+		for (const std::shared_ptr<uml::Constraint>& localPostcondition : *this->getLocalPostcondition()) 
 		{
 			saveHandler->addReference(localPostcondition, "localPostcondition", localPostcondition->eClass() != package->getConstraint_Class());
 		}
 
 		// Save 'localPrecondition'
-		for (std::shared_ptr<uml::Constraint> localPrecondition : *this->getLocalPrecondition()) 
+		for (const std::shared_ptr<uml::Constraint>& localPrecondition : *this->getLocalPrecondition()) 
 		{
 			saveHandler->addReference(localPrecondition, "localPrecondition", localPrecondition->eClass() != package->getConstraint_Class());
 		}

@@ -420,7 +420,7 @@ void OpaqueExpressionImpl::saveContent(std::shared_ptr<persistence::interfaces::
 		// Add attributes
 		if ( this->eIsSet(package->getOpaqueExpression_Attribute_body()) )
 		{
-			for (std::shared_ptr<std::string> value : *m_body)
+			for (const std::shared_ptr<std::string>& value : *m_body)
 			{
 				saveHandler->addAttributeAsNode("body", *value);
 			}
@@ -428,7 +428,7 @@ void OpaqueExpressionImpl::saveContent(std::shared_ptr<persistence::interfaces::
 
 		if ( this->eIsSet(package->getOpaqueExpression_Attribute_language()) )
 		{
-			for (std::shared_ptr<std::string> value : *m_language)
+			for (const std::shared_ptr<std::string>& value : *m_language)
 			{
 				saveHandler->addAttributeAsNode("language", *value);
 			}

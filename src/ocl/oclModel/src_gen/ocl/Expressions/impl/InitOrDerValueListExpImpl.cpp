@@ -38,8 +38,8 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "ocl/Expressions/ExpressionsFactory.hpp"
 #include "ecore/ecoreFactory.hpp"
+#include "ocl/Expressions/ExpressionsFactory.hpp"
 #include "ocl/Evaluations/EvaluationsFactory.hpp"
 #include "ocl/Expressions/CallExp.hpp"
 #include "ocl/Expressions/CollectionRange.hpp"
@@ -364,7 +364,7 @@ void InitOrDerValueListExpImpl::resolveReferences(const int featureID, std::vect
 		case ocl::Expressions::ExpressionsPackage::INITORDERVALUELISTEXP_ATTRIBUTE_DEREXPRESSIONLIST:
 		{
 			std::shared_ptr<Bag<ocl::Expressions::InitOrDerValueExp>> _derExpressionList = getDerExpressionList();
-			for(std::shared_ptr<ecore::EObject> ref : references)
+			for(const std::shared_ptr<ecore::EObject>& ref : references)
 			{
 				std::shared_ptr<ocl::Expressions::InitOrDerValueExp>  _r = std::dynamic_pointer_cast<ocl::Expressions::InitOrDerValueExp>(ref);
 				if (_r != nullptr)
@@ -378,7 +378,7 @@ void InitOrDerValueListExpImpl::resolveReferences(const int featureID, std::vect
 		case ocl::Expressions::ExpressionsPackage::INITORDERVALUELISTEXP_ATTRIBUTE_INITEXPRESSIONLIST:
 		{
 			std::shared_ptr<Bag<ocl::Expressions::InitOrDerValueExp>> _initExpressionList = getInitExpressionList();
-			for(std::shared_ptr<ecore::EObject> ref : references)
+			for(const std::shared_ptr<ecore::EObject>& ref : references)
 			{
 				std::shared_ptr<ocl::Expressions::InitOrDerValueExp>  _r = std::dynamic_pointer_cast<ocl::Expressions::InitOrDerValueExp>(ref);
 				if (_r != nullptr)

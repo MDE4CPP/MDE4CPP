@@ -360,7 +360,7 @@ void SignalImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandl
 	{
 		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
 		// Save 'ownedAttribute'
-		for (std::shared_ptr<uml::Property> ownedAttribute : *this->getOwnedAttribute()) 
+		for (const std::shared_ptr<uml::Property>& ownedAttribute : *this->getOwnedAttribute()) 
 		{
 			saveHandler->addReference(ownedAttribute, "ownedAttribute", ownedAttribute->eClass() != package->getProperty_Class());
 		}

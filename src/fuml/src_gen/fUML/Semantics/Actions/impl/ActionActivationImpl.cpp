@@ -80,8 +80,8 @@
 #include "fUML/Semantics/Actions/PinActivation.hpp"
 #include "fUML/Semantics/Activities/Token.hpp"
 //Factories and Package includes
-#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/SemanticsPackage.hpp"
+#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/Actions/ActionsPackage.hpp"
 #include "fUML/Semantics/Activities/ActivitiesPackage.hpp"
 #include "uml/umlPackage.hpp"
@@ -501,7 +501,7 @@ void ActionActivationImpl::putTokens(const std::shared_ptr<uml::OutputPin>& pin,
 	//generated from body annotation
 	DEBUG_INFO("Action '" << this->getNode()->getName() << "' putting " << values->size() << "tokens to output pin '" << pin->getName() << "'.")
 
-	for (std::shared_ptr<Any> value : *values)
+	for(const std::shared_ptr<Any>& value : *values)
 	{
        		this->putToken(pin,value);
    	}
@@ -902,7 +902,7 @@ void ActionActivationImpl::resolveReferences(const int featureID, std::vector<st
 		case fUML::Semantics::Actions::ActionsPackage::ACTIONACTIVATION_ATTRIBUTE_INPUTPINACTIVATION:
 		{
 			std::shared_ptr<Subset<fUML::Semantics::Actions::InputPinActivation, fUML::Semantics::Actions::PinActivation>> _inputPinActivation = getInputPinActivation();
-			for(std::shared_ptr<ecore::EObject> ref : references)
+			for(const std::shared_ptr<ecore::EObject>& ref : references)
 			{
 				std::shared_ptr<fUML::Semantics::Actions::InputPinActivation>  _r = std::dynamic_pointer_cast<fUML::Semantics::Actions::InputPinActivation>(ref);
 				if (_r != nullptr)
@@ -916,7 +916,7 @@ void ActionActivationImpl::resolveReferences(const int featureID, std::vector<st
 		case fUML::Semantics::Actions::ActionsPackage::ACTIONACTIVATION_ATTRIBUTE_OUTPUTPINACTIVATION:
 		{
 			std::shared_ptr<Subset<fUML::Semantics::Actions::OutputPinActivation, fUML::Semantics::Actions::PinActivation>> _outputPinActivation = getOutputPinActivation();
-			for(std::shared_ptr<ecore::EObject> ref : references)
+			for(const std::shared_ptr<ecore::EObject>& ref : references)
 			{
 				std::shared_ptr<fUML::Semantics::Actions::OutputPinActivation>  _r = std::dynamic_pointer_cast<fUML::Semantics::Actions::OutputPinActivation>(ref);
 				if (_r != nullptr)
@@ -930,7 +930,7 @@ void ActionActivationImpl::resolveReferences(const int featureID, std::vector<st
 		case fUML::Semantics::Actions::ActionsPackage::ACTIONACTIVATION_ATTRIBUTE_PINACTIVATION:
 		{
 			std::shared_ptr<Union<fUML::Semantics::Actions::PinActivation>> _pinActivation = getPinActivation();
-			for(std::shared_ptr<ecore::EObject> ref : references)
+			for(const std::shared_ptr<ecore::EObject>& ref : references)
 			{
 				std::shared_ptr<fUML::Semantics::Actions::PinActivation>  _r = std::dynamic_pointer_cast<fUML::Semantics::Actions::PinActivation>(ref);
 				if (_r != nullptr)

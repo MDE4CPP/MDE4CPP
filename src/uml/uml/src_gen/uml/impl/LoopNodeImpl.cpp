@@ -513,7 +513,7 @@ void LoopNodeImpl::resolveReferences(const int featureID, std::vector<std::share
 		case uml::umlPackage::LOOPNODE_ATTRIBUTE_BODYOUTPUT:
 		{
 			std::shared_ptr<Bag<uml::OutputPin>> _bodyOutput = getBodyOutput();
-			for(std::shared_ptr<ecore::EObject> ref : references)
+			for(const std::shared_ptr<ecore::EObject>& ref : references)
 			{
 				std::shared_ptr<uml::OutputPin>  _r = std::dynamic_pointer_cast<uml::OutputPin>(ref);
 				if (_r != nullptr)
@@ -527,7 +527,7 @@ void LoopNodeImpl::resolveReferences(const int featureID, std::vector<std::share
 		case uml::umlPackage::LOOPNODE_ATTRIBUTE_BODYPART:
 		{
 			std::shared_ptr<Bag<uml::ExecutableNode>> _bodyPart = getBodyPart();
-			for(std::shared_ptr<ecore::EObject> ref : references)
+			for(const std::shared_ptr<ecore::EObject>& ref : references)
 			{
 				std::shared_ptr<uml::ExecutableNode>  _r = std::dynamic_pointer_cast<uml::ExecutableNode>(ref);
 				if (_r != nullptr)
@@ -553,7 +553,7 @@ void LoopNodeImpl::resolveReferences(const int featureID, std::vector<std::share
 		case uml::umlPackage::LOOPNODE_ATTRIBUTE_SETUPPART:
 		{
 			std::shared_ptr<Bag<uml::ExecutableNode>> _setupPart = getSetupPart();
-			for(std::shared_ptr<ecore::EObject> ref : references)
+			for(const std::shared_ptr<ecore::EObject>& ref : references)
 			{
 				std::shared_ptr<uml::ExecutableNode>  _r = std::dynamic_pointer_cast<uml::ExecutableNode>(ref);
 				if (_r != nullptr)
@@ -567,7 +567,7 @@ void LoopNodeImpl::resolveReferences(const int featureID, std::vector<std::share
 		case uml::umlPackage::LOOPNODE_ATTRIBUTE_TEST:
 		{
 			std::shared_ptr<Bag<uml::ExecutableNode>> _test = getTest();
-			for(std::shared_ptr<ecore::EObject> ref : references)
+			for(const std::shared_ptr<ecore::EObject>& ref : references)
 			{
 				std::shared_ptr<uml::ExecutableNode>  _r = std::dynamic_pointer_cast<uml::ExecutableNode>(ref);
 				if (_r != nullptr)
@@ -612,7 +612,7 @@ void LoopNodeImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHan
 	{
 		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
 		// Save 'loopVariable'
-		for (std::shared_ptr<uml::OutputPin> loopVariable : *this->getLoopVariable()) 
+		for (const std::shared_ptr<uml::OutputPin>& loopVariable : *this->getLoopVariable()) 
 		{
 			saveHandler->addReference(loopVariable, "loopVariable", loopVariable->eClass() != package->getOutputPin_Class());
 		}

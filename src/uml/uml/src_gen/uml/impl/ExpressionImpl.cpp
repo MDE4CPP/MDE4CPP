@@ -380,7 +380,7 @@ void ExpressionImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveH
 	{
 		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
 		// Save 'operand'
-		for (std::shared_ptr<uml::ValueSpecification> operand : *this->getOperand()) 
+		for (const std::shared_ptr<uml::ValueSpecification>& operand : *this->getOperand()) 
 		{
 			saveHandler->addReference(operand, "operand", operand->eClass() != package->getValueSpecification_Class());
 		}

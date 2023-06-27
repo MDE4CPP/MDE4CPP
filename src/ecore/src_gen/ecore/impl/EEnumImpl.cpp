@@ -159,7 +159,7 @@ std::shared_ptr<ecore::EEnumLiteral> EEnumImpl::getEEnumLiteral(std::string name
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
-	    for (std::shared_ptr<EEnumLiteral> e : *getELiterals())
+	    for (const std::shared_ptr<EEnumLiteral>& e : *getELiterals())
     {
         if(e->getName()==name)
         {
@@ -174,7 +174,7 @@ std::shared_ptr<ecore::EEnumLiteral> EEnumImpl::getEEnumLiteral(int value) const
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
-	    for (std::shared_ptr<EEnumLiteral> e : *getELiterals())
+	    for (const std::shared_ptr<EEnumLiteral>& e : *getELiterals())
     {
         if(e->getValue()==value)
         {
@@ -190,7 +190,7 @@ std::shared_ptr<ecore::EEnumLiteral> EEnumImpl::getEEnumLiteralByLiteral(std::st
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
-	    for (std::shared_ptr<EEnumLiteral> e : *getELiterals())
+	    for (const std::shared_ptr<EEnumLiteral>& e : *getELiterals())
     {
         if(e->getLiteral()==literal)
         {
@@ -332,7 +332,7 @@ void EEnumImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandle
 	{
 		std::shared_ptr<ecore::ecorePackage> package = ecore::ecorePackage::eInstance();
 		// Save 'eLiterals'
-		for (std::shared_ptr<ecore::EEnumLiteral> eLiterals : *this->getELiterals()) 
+		for (const std::shared_ptr<ecore::EEnumLiteral>& eLiterals : *this->getELiterals()) 
 		{
 			saveHandler->addReference(eLiterals, "eLiterals", eLiterals->eClass() != package->getEEnumLiteral_Class());
 		}

@@ -360,7 +360,7 @@ void TemplateBindingImpl::saveContent(std::shared_ptr<persistence::interfaces::X
 	{
 		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
 		// Save 'parameterSubstitution'
-		for (std::shared_ptr<uml::TemplateParameterSubstitution> parameterSubstitution : *this->getParameterSubstitution()) 
+		for (const std::shared_ptr<uml::TemplateParameterSubstitution>& parameterSubstitution : *this->getParameterSubstitution()) 
 		{
 			saveHandler->addReference(parameterSubstitution, "parameterSubstitution", parameterSubstitution->eClass() != package->getTemplateParameterSubstitution_Class());
 		}

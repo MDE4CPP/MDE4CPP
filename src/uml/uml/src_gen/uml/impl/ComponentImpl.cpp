@@ -529,13 +529,13 @@ void ComponentImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHa
 	{
 		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
 		// Save 'packagedElement'
-		for (std::shared_ptr<uml::PackageableElement> packagedElement : *this->getPackagedElement()) 
+		for (const std::shared_ptr<uml::PackageableElement>& packagedElement : *this->getPackagedElement()) 
 		{
 			saveHandler->addReference(packagedElement, "packagedElement", packagedElement->eClass() != package->getPackageableElement_Class());
 		}
 
 		// Save 'realization'
-		for (std::shared_ptr<uml::ComponentRealization> realization : *this->getRealization()) 
+		for (const std::shared_ptr<uml::ComponentRealization>& realization : *this->getRealization()) 
 		{
 			saveHandler->addReference(realization, "realization", realization->eClass() != package->getComponentRealization_Class());
 		}

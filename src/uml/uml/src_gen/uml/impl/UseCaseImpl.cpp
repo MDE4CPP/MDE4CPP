@@ -502,7 +502,7 @@ void UseCaseImpl::resolveReferences(const int featureID, std::vector<std::shared
 		case uml::umlPackage::USECASE_ATTRIBUTE_SUBJECT:
 		{
 			std::shared_ptr<Bag<uml::Classifier>> _subject = getSubject();
-			for(std::shared_ptr<ecore::EObject> ref : references)
+			for(const std::shared_ptr<ecore::EObject>& ref : references)
 			{
 				std::shared_ptr<uml::Classifier>  _r = std::dynamic_pointer_cast<uml::Classifier>(ref);
 				if (_r != nullptr)
@@ -547,19 +547,19 @@ void UseCaseImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHand
 	{
 		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
 		// Save 'extend'
-		for (std::shared_ptr<uml::Extend> extend : *this->getExtend()) 
+		for (const std::shared_ptr<uml::Extend>& extend : *this->getExtend()) 
 		{
 			saveHandler->addReference(extend, "extend", extend->eClass() != package->getExtend_Class());
 		}
 
 		// Save 'extensionPoint'
-		for (std::shared_ptr<uml::ExtensionPoint> extensionPoint : *this->getExtensionPoint()) 
+		for (const std::shared_ptr<uml::ExtensionPoint>& extensionPoint : *this->getExtensionPoint()) 
 		{
 			saveHandler->addReference(extensionPoint, "extensionPoint", extensionPoint->eClass() != package->getExtensionPoint_Class());
 		}
 
 		// Save 'include'
-		for (std::shared_ptr<uml::Include> include : *this->getInclude()) 
+		for (const std::shared_ptr<uml::Include>& include : *this->getInclude()) 
 		{
 			saveHandler->addReference(include, "include", include->eClass() != package->getInclude_Class());
 		}

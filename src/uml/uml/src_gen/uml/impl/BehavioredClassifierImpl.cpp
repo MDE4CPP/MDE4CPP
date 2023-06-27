@@ -476,7 +476,7 @@ void BehavioredClassifierImpl::saveContent(std::shared_ptr<persistence::interfac
 	{
 		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
 		// Save 'interfaceRealization'
-		for (std::shared_ptr<uml::InterfaceRealization> interfaceRealization : *this->getInterfaceRealization()) 
+		for (const std::shared_ptr<uml::InterfaceRealization>& interfaceRealization : *this->getInterfaceRealization()) 
 		{
 			saveHandler->addReference(interfaceRealization, "interfaceRealization", interfaceRealization->eClass() != package->getInterfaceRealization_Class());
 		}

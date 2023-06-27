@@ -444,7 +444,7 @@ void ConditionalNodeImpl::saveContent(std::shared_ptr<persistence::interfaces::X
 	{
 		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
 		// Save 'clause'
-		for (std::shared_ptr<uml::Clause> clause : *this->getClause()) 
+		for (const std::shared_ptr<uml::Clause>& clause : *this->getClause()) 
 		{
 			saveHandler->addReference(clause, "clause", clause->eClass() != package->getClause_Class());
 		}

@@ -522,7 +522,7 @@ void ActivityEdgeImpl::resolveReferences(const int featureID, std::vector<std::s
 		case uml::umlPackage::ACTIVITYEDGE_ATTRIBUTE_INPARTITION:
 		{
 			std::shared_ptr<Subset<uml::ActivityPartition, uml::ActivityGroup>> _inPartition = getInPartition();
-			for(std::shared_ptr<ecore::EObject> ref : references)
+			for(const std::shared_ptr<ecore::EObject>& ref : references)
 			{
 				std::shared_ptr<uml::ActivityPartition>  _r = std::dynamic_pointer_cast<uml::ActivityPartition>(ref);
 				if (_r != nullptr)
@@ -560,7 +560,7 @@ void ActivityEdgeImpl::resolveReferences(const int featureID, std::vector<std::s
 		case uml::umlPackage::ACTIVITYEDGE_ATTRIBUTE_REDEFINEDEDGE:
 		{
 			std::shared_ptr<Subset<uml::ActivityEdge, uml::RedefinableElement>> _redefinedEdge = getRedefinedEdge();
-			for(std::shared_ptr<ecore::EObject> ref : references)
+			for(const std::shared_ptr<ecore::EObject>& ref : references)
 			{
 				std::shared_ptr<uml::ActivityEdge>  _r = std::dynamic_pointer_cast<uml::ActivityEdge>(ref);
 				if (_r != nullptr)
