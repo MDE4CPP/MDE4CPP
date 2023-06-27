@@ -430,7 +430,7 @@ void InstanceSpecificationImpl::saveContent(std::shared_ptr<persistence::interfa
 	}
 }
 
-const std::shared_ptr<ecore::EClass>& InstanceSpecificationImpl::eStaticClass() const
+std::shared_ptr<ecore::EClass> InstanceSpecificationImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getInstanceSpecification_Class();
 }

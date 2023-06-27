@@ -343,7 +343,7 @@ void CollaborationUseImpl::saveContent(std::shared_ptr<persistence::interfaces::
 	}
 }
 
-const std::shared_ptr<ecore::EClass>& CollaborationUseImpl::eStaticClass() const
+std::shared_ptr<ecore::EClass> CollaborationUseImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getCollaborationUse_Class();
 }

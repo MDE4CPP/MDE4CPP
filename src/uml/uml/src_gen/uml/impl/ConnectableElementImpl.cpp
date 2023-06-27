@@ -248,7 +248,7 @@ void ConnectableElementImpl::saveContent(std::shared_ptr<persistence::interfaces
 	}
 }
 
-const std::shared_ptr<ecore::EClass>& ConnectableElementImpl::eStaticClass() const
+std::shared_ptr<ecore::EClass> ConnectableElementImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getConnectableElement_Class();
 }

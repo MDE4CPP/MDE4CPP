@@ -383,7 +383,7 @@ void ParentedExpImpl::saveContent(std::shared_ptr<persistence::interfaces::XSave
 	}
 }
 
-const std::shared_ptr<ecore::EClass>& ParentedExpImpl::eStaticClass() const
+std::shared_ptr<ecore::EClass> ParentedExpImpl::eStaticClass() const
 {
 	return ocl::Expressions::ExpressionsPackage::eInstance()->getParentedExp_Class();
 }

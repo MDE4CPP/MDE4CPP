@@ -544,7 +544,7 @@ void ActionImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandl
 	}
 }
 
-const std::shared_ptr<ecore::EClass>& ActionImpl::eStaticClass() const
+std::shared_ptr<ecore::EClass> ActionImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getAction_Class();
 }

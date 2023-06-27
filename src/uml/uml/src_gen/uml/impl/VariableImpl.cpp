@@ -326,7 +326,7 @@ void VariableImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHan
 	}
 }
 
-const std::shared_ptr<ecore::EClass>& VariableImpl::eStaticClass() const
+std::shared_ptr<ecore::EClass> VariableImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getVariable_Class();
 }

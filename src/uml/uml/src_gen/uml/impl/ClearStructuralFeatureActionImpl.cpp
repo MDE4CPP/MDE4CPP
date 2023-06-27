@@ -310,7 +310,7 @@ void ClearStructuralFeatureActionImpl::saveContent(std::shared_ptr<persistence::
 	}
 }
 
-const std::shared_ptr<ecore::EClass>& ClearStructuralFeatureActionImpl::eStaticClass() const
+std::shared_ptr<ecore::EClass> ClearStructuralFeatureActionImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getClearStructuralFeatureAction_Class();
 }

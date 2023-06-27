@@ -304,7 +304,7 @@ void LetExpEvalImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveH
 	}
 }
 
-const std::shared_ptr<ecore::EClass>& LetExpEvalImpl::eStaticClass() const
+std::shared_ptr<ecore::EClass> LetExpEvalImpl::eStaticClass() const
 {
 	return ocl::Evaluations::EvaluationsPackage::eInstance()->getLetExpEval_Class();
 }

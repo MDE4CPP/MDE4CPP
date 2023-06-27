@@ -223,7 +223,7 @@ void EParameterImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveH
 	}
 }
 
-const std::shared_ptr<EClass>& EParameterImpl::eStaticClass() const
+std::shared_ptr<EClass> EParameterImpl::eStaticClass() const
 {
 	return ecore::ecorePackage::eInstance()->getEParameter_Class();
 }

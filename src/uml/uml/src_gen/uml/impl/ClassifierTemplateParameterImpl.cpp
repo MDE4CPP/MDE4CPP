@@ -290,7 +290,7 @@ void ClassifierTemplateParameterImpl::saveContent(std::shared_ptr<persistence::i
 	}
 }
 
-const std::shared_ptr<ecore::EClass>& ClassifierTemplateParameterImpl::eStaticClass() const
+std::shared_ptr<ecore::EClass> ClassifierTemplateParameterImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getClassifierTemplateParameter_Class();
 }

@@ -338,7 +338,7 @@ void OccurrenceSpecificationImpl::saveContent(std::shared_ptr<persistence::inter
 	}
 }
 
-const std::shared_ptr<ecore::EClass>& OccurrenceSpecificationImpl::eStaticClass() const
+std::shared_ptr<ecore::EClass> OccurrenceSpecificationImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getOccurrenceSpecification_Class();
 }

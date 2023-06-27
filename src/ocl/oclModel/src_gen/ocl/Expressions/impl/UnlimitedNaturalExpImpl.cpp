@@ -380,7 +380,7 @@ void UnlimitedNaturalExpImpl::saveContent(std::shared_ptr<persistence::interface
 	}
 }
 
-const std::shared_ptr<ecore::EClass>& UnlimitedNaturalExpImpl::eStaticClass() const
+std::shared_ptr<ecore::EClass> UnlimitedNaturalExpImpl::eStaticClass() const
 {
 	return ocl::Expressions::ExpressionsPackage::eInstance()->getUnlimitedNaturalExp_Class();
 }

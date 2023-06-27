@@ -339,7 +339,7 @@ void InvalidLiteralExpImpl::saveContent(std::shared_ptr<persistence::interfaces:
 	}
 }
 
-const std::shared_ptr<ecore::EClass>& InvalidLiteralExpImpl::eStaticClass() const
+std::shared_ptr<ecore::EClass> InvalidLiteralExpImpl::eStaticClass() const
 {
 	return ocl::Expressions::ExpressionsPackage::eInstance()->getInvalidLiteralExp_Class();
 }

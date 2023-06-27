@@ -422,7 +422,7 @@ void InitOrDerValueListExpImpl::saveContent(std::shared_ptr<persistence::interfa
 	}
 }
 
-const std::shared_ptr<ecore::EClass>& InitOrDerValueListExpImpl::eStaticClass() const
+std::shared_ptr<ecore::EClass> InitOrDerValueListExpImpl::eStaticClass() const
 {
 	return ocl::Expressions::ExpressionsPackage::eInstance()->getInitOrDerValueListExp_Class();
 }

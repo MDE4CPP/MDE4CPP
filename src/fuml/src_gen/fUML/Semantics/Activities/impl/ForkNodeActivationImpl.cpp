@@ -263,7 +263,7 @@ void ForkNodeActivationImpl::saveContent(std::shared_ptr<persistence::interfaces
 	}
 }
 
-const std::shared_ptr<ecore::EClass>& ForkNodeActivationImpl::eStaticClass() const
+std::shared_ptr<ecore::EClass> ForkNodeActivationImpl::eStaticClass() const
 {
 	return fUML::Semantics::Activities::ActivitiesPackage::eInstance()->getForkNodeActivation_Class();
 }

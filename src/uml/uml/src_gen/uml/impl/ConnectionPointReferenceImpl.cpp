@@ -356,7 +356,7 @@ void ConnectionPointReferenceImpl::saveContent(std::shared_ptr<persistence::inte
 	}
 }
 
-const std::shared_ptr<ecore::EClass>& ConnectionPointReferenceImpl::eStaticClass() const
+std::shared_ptr<ecore::EClass> ConnectionPointReferenceImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getConnectionPointReference_Class();
 }

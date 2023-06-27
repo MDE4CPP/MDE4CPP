@@ -291,7 +291,7 @@ void PrimitiveTypeImpl::saveContent(std::shared_ptr<persistence::interfaces::XSa
 	}
 }
 
-const std::shared_ptr<ecore::EClass>& PrimitiveTypeImpl::eStaticClass() const
+std::shared_ptr<ecore::EClass> PrimitiveTypeImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getPrimitiveType_Class();
 }

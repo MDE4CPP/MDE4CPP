@@ -229,7 +229,7 @@ void ObjectImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandl
 	}
 }
 
-const std::shared_ptr<ecore::EClass>& ObjectImpl::eStaticClass() const
+std::shared_ptr<ecore::EClass> ObjectImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getObject_Class();
 }

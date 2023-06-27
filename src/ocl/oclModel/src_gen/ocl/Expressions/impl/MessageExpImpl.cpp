@@ -469,7 +469,7 @@ void MessageExpImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveH
 	}
 }
 
-const std::shared_ptr<ecore::EClass>& MessageExpImpl::eStaticClass() const
+std::shared_ptr<ecore::EClass> MessageExpImpl::eStaticClass() const
 {
 	return ocl::Expressions::ExpressionsPackage::eInstance()->getMessageExp_Class();
 }

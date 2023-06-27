@@ -612,7 +612,7 @@ void AssociationImpl::saveContent(std::shared_ptr<persistence::interfaces::XSave
 	}
 }
 
-const std::shared_ptr<ecore::EClass>& AssociationImpl::eStaticClass() const
+std::shared_ptr<ecore::EClass> AssociationImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getAssociation_Class();
 }

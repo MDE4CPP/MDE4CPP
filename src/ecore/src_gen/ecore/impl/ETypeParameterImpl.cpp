@@ -259,7 +259,7 @@ void ETypeParameterImpl::saveContent(std::shared_ptr<persistence::interfaces::XS
 	}
 }
 
-const std::shared_ptr<EClass>& ETypeParameterImpl::eStaticClass() const
+std::shared_ptr<EClass> ETypeParameterImpl::eStaticClass() const
 {
 	return ecore::ecorePackage::eInstance()->getETypeParameter_Class();
 }
@@ -302,7 +302,7 @@ bool ETypeParameterImpl::eSet(int featureID,  const std::shared_ptr<Any>& newVal
 	
 					if(eObjectList)
 					{
-						const std::shared_ptr<Bag<ecore::EGenericType>>& _eBounds = getEBounds();
+						std::shared_ptr<Bag<ecore::EGenericType>> _eBounds = getEBounds();
 	
 						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{

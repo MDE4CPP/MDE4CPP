@@ -383,7 +383,7 @@ void InfixedExpImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveH
 	}
 }
 
-const std::shared_ptr<ecore::EClass>& InfixedExpImpl::eStaticClass() const
+std::shared_ptr<ecore::EClass> InfixedExpImpl::eStaticClass() const
 {
 	return ocl::Expressions::ExpressionsPackage::eInstance()->getInfixedExp_Class();
 }

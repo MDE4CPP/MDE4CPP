@@ -351,7 +351,7 @@ void InteractionConstraintImpl::saveContent(std::shared_ptr<persistence::interfa
 	}
 }
 
-const std::shared_ptr<ecore::EClass>& InteractionConstraintImpl::eStaticClass() const
+std::shared_ptr<ecore::EClass> InteractionConstraintImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getInteractionConstraint_Class();
 }

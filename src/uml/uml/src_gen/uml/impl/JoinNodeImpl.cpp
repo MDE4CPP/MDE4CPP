@@ -340,7 +340,7 @@ void JoinNodeImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHan
 	}
 }
 
-const std::shared_ptr<ecore::EClass>& JoinNodeImpl::eStaticClass() const
+std::shared_ptr<ecore::EClass> JoinNodeImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getJoinNode_Class();
 }

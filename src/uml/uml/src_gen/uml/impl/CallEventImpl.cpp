@@ -298,7 +298,7 @@ void CallEventImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHa
 	}
 }
 
-const std::shared_ptr<ecore::EClass>& CallEventImpl::eStaticClass() const
+std::shared_ptr<ecore::EClass> CallEventImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getCallEvent_Class();
 }

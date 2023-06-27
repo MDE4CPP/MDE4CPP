@@ -268,7 +268,7 @@ void JoinNodeActivationImpl::saveContent(std::shared_ptr<persistence::interfaces
 	}
 }
 
-const std::shared_ptr<ecore::EClass>& JoinNodeActivationImpl::eStaticClass() const
+std::shared_ptr<ecore::EClass> JoinNodeActivationImpl::eStaticClass() const
 {
 	return fUML::Semantics::Activities::ActivitiesPackage::eInstance()->getJoinNodeActivation_Class();
 }

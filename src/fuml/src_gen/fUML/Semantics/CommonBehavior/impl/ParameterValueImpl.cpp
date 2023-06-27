@@ -294,7 +294,7 @@ void ParameterValueImpl::saveContent(std::shared_ptr<persistence::interfaces::XS
 	}
 }
 
-const std::shared_ptr<ecore::EClass>& ParameterValueImpl::eStaticClass() const
+std::shared_ptr<ecore::EClass> ParameterValueImpl::eStaticClass() const
 {
 	return fUML::Semantics::CommonBehavior::CommonBehaviorPackage::eInstance()->getParameterValue_Class();
 }

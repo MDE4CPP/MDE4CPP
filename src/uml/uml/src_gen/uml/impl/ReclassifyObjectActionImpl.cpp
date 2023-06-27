@@ -417,7 +417,7 @@ void ReclassifyObjectActionImpl::saveContent(std::shared_ptr<persistence::interf
 	}
 }
 
-const std::shared_ptr<ecore::EClass>& ReclassifyObjectActionImpl::eStaticClass() const
+std::shared_ptr<ecore::EClass> ReclassifyObjectActionImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getReclassifyObjectAction_Class();
 }

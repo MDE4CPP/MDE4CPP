@@ -330,7 +330,7 @@ void FunctionBehaviorImpl::saveContent(std::shared_ptr<persistence::interfaces::
 	}
 }
 
-const std::shared_ptr<ecore::EClass>& FunctionBehaviorImpl::eStaticClass() const
+std::shared_ptr<ecore::EClass> FunctionBehaviorImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getFunctionBehavior_Class();
 }

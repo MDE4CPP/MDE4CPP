@@ -384,7 +384,7 @@ void CallActionImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveH
 	}
 }
 
-const std::shared_ptr<ecore::EClass>& CallActionImpl::eStaticClass() const
+std::shared_ptr<ecore::EClass> CallActionImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getCallAction_Class();
 }

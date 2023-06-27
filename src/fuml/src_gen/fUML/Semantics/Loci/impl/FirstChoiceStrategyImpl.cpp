@@ -193,7 +193,7 @@ void FirstChoiceStrategyImpl::saveContent(std::shared_ptr<persistence::interface
 	}
 }
 
-const std::shared_ptr<ecore::EClass>& FirstChoiceStrategyImpl::eStaticClass() const
+std::shared_ptr<ecore::EClass> FirstChoiceStrategyImpl::eStaticClass() const
 {
 	return fUML::Semantics::Loci::LociPackage::eInstance()->getFirstChoiceStrategy_Class();
 }

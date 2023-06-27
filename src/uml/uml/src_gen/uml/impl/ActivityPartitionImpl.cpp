@@ -602,7 +602,7 @@ void ActivityPartitionImpl::saveContent(std::shared_ptr<persistence::interfaces:
 	}
 }
 
-const std::shared_ptr<ecore::EClass>& ActivityPartitionImpl::eStaticClass() const
+std::shared_ptr<ecore::EClass> ActivityPartitionImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getActivityPartition_Class();
 }

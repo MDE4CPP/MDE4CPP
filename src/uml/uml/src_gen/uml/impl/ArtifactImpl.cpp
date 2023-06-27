@@ -638,7 +638,7 @@ void ArtifactImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHan
 	}
 }
 
-const std::shared_ptr<ecore::EClass>& ArtifactImpl::eStaticClass() const
+std::shared_ptr<ecore::EClass> ArtifactImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getArtifact_Class();
 }

@@ -444,7 +444,7 @@ void PropertyContextDeclExpImpl::saveContent(std::shared_ptr<persistence::interf
 	}
 }
 
-const std::shared_ptr<ecore::EClass>& PropertyContextDeclExpImpl::eStaticClass() const
+std::shared_ptr<ecore::EClass> PropertyContextDeclExpImpl::eStaticClass() const
 {
 	return ocl::Expressions::ExpressionsPackage::eInstance()->getPropertyContextDeclExp_Class();
 }

@@ -274,7 +274,7 @@ void LinkEndCreationDataImpl::saveContent(std::shared_ptr<persistence::interface
 	}
 }
 
-const std::shared_ptr<ecore::EClass>& LinkEndCreationDataImpl::eStaticClass() const
+std::shared_ptr<ecore::EClass> LinkEndCreationDataImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getLinkEndCreationData_Class();
 }

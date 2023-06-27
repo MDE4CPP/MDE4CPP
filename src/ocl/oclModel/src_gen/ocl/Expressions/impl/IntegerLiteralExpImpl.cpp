@@ -380,7 +380,7 @@ void IntegerLiteralExpImpl::saveContent(std::shared_ptr<persistence::interfaces:
 	}
 }
 
-const std::shared_ptr<ecore::EClass>& IntegerLiteralExpImpl::eStaticClass() const
+std::shared_ptr<ecore::EClass> IntegerLiteralExpImpl::eStaticClass() const
 {
 	return ocl::Expressions::ExpressionsPackage::eInstance()->getIntegerLiteralExp_Class();
 }

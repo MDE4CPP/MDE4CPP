@@ -339,7 +339,7 @@ void ExecutorImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHan
 	}
 }
 
-const std::shared_ptr<ecore::EClass>& ExecutorImpl::eStaticClass() const
+std::shared_ptr<ecore::EClass> ExecutorImpl::eStaticClass() const
 {
 	return fUML::Semantics::Loci::LociPackage::eInstance()->getExecutor_Class();
 }

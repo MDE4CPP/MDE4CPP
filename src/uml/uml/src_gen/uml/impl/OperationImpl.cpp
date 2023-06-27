@@ -849,7 +849,7 @@ void OperationImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHa
 	}
 }
 
-const std::shared_ptr<ecore::EClass>& OperationImpl::eStaticClass() const
+std::shared_ptr<ecore::EClass> OperationImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getOperation_Class();
 }

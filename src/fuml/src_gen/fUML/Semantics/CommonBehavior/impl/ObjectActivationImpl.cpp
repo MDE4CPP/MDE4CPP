@@ -548,7 +548,7 @@ void ObjectActivationImpl::saveContent(std::shared_ptr<persistence::interfaces::
 	}
 }
 
-const std::shared_ptr<ecore::EClass>& ObjectActivationImpl::eStaticClass() const
+std::shared_ptr<ecore::EClass> ObjectActivationImpl::eStaticClass() const
 {
 	return fUML::Semantics::CommonBehavior::CommonBehaviorPackage::eInstance()->getObjectActivation_Class();
 }

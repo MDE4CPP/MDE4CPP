@@ -241,7 +241,7 @@ void EStringToStringMapEntryImpl::saveContent(std::shared_ptr<persistence::inter
 	}
 }
 
-const std::shared_ptr<EClass>& EStringToStringMapEntryImpl::eStaticClass() const
+std::shared_ptr<EClass> EStringToStringMapEntryImpl::eStaticClass() const
 {
 	return ecore::ecorePackage::eInstance()->getEStringToStringMapEntry_Class();
 }

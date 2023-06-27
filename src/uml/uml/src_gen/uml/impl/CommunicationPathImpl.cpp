@@ -292,7 +292,7 @@ void CommunicationPathImpl::saveContent(std::shared_ptr<persistence::interfaces:
 	}
 }
 
-const std::shared_ptr<ecore::EClass>& CommunicationPathImpl::eStaticClass() const
+std::shared_ptr<ecore::EClass> CommunicationPathImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getCommunicationPath_Class();
 }

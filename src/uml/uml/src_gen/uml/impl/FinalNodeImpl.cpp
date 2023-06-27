@@ -249,7 +249,7 @@ void FinalNodeImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHa
 	}
 }
 
-const std::shared_ptr<ecore::EClass>& FinalNodeImpl::eStaticClass() const
+std::shared_ptr<ecore::EClass> FinalNodeImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getFinalNode_Class();
 }

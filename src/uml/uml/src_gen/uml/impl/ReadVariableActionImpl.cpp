@@ -310,7 +310,7 @@ void ReadVariableActionImpl::saveContent(std::shared_ptr<persistence::interfaces
 	}
 }
 
-const std::shared_ptr<ecore::EClass>& ReadVariableActionImpl::eStaticClass() const
+std::shared_ptr<ecore::EClass> ReadVariableActionImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getReadVariableAction_Class();
 }

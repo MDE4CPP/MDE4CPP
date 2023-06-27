@@ -264,7 +264,7 @@ void ActivityParameterNodeActivationImpl::saveContent(std::shared_ptr<persistenc
 	}
 }
 
-const std::shared_ptr<ecore::EClass>& ActivityParameterNodeActivationImpl::eStaticClass() const
+std::shared_ptr<ecore::EClass> ActivityParameterNodeActivationImpl::eStaticClass() const
 {
 	return fUML::Semantics::Activities::ActivitiesPackage::eInstance()->getActivityParameterNodeActivation_Class();
 }

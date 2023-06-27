@@ -280,7 +280,7 @@ void OperationCallExpEvalImpl::saveContent(std::shared_ptr<persistence::interfac
 	}
 }
 
-const std::shared_ptr<ecore::EClass>& OperationCallExpEvalImpl::eStaticClass() const
+std::shared_ptr<ecore::EClass> OperationCallExpEvalImpl::eStaticClass() const
 {
 	return ocl::Evaluations::EvaluationsPackage::eInstance()->getOperationCallExpEval_Class();
 }

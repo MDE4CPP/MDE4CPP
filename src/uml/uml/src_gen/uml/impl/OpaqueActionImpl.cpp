@@ -501,7 +501,7 @@ void OpaqueActionImpl::saveContent(std::shared_ptr<persistence::interfaces::XSav
 	}
 }
 
-const std::shared_ptr<ecore::EClass>& OpaqueActionImpl::eStaticClass() const
+std::shared_ptr<ecore::EClass> OpaqueActionImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getOpaqueAction_Class();
 }

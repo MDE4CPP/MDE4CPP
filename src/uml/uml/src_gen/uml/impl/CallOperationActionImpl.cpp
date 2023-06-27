@@ -360,7 +360,7 @@ void CallOperationActionImpl::saveContent(std::shared_ptr<persistence::interface
 	}
 }
 
-const std::shared_ptr<ecore::EClass>& CallOperationActionImpl::eStaticClass() const
+std::shared_ptr<ecore::EClass> CallOperationActionImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getCallOperationAction_Class();
 }

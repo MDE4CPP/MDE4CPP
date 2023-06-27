@@ -349,7 +349,7 @@ void PackageImportImpl::saveContent(std::shared_ptr<persistence::interfaces::XSa
 	}
 }
 
-const std::shared_ptr<ecore::EClass>& PackageImportImpl::eStaticClass() const
+std::shared_ptr<ecore::EClass> PackageImportImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getPackageImport_Class();
 }

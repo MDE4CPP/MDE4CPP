@@ -346,7 +346,7 @@ void InterfaceRealizationImpl::saveContent(std::shared_ptr<persistence::interfac
 	}
 }
 
-const std::shared_ptr<ecore::EClass>& InterfaceRealizationImpl::eStaticClass() const
+std::shared_ptr<ecore::EClass> InterfaceRealizationImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getInterfaceRealization_Class();
 }

@@ -293,7 +293,7 @@ void StateInvariantImpl::saveContent(std::shared_ptr<persistence::interfaces::XS
 	}
 }
 
-const std::shared_ptr<ecore::EClass>& StateInvariantImpl::eStaticClass() const
+std::shared_ptr<ecore::EClass> StateInvariantImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getStateInvariant_Class();
 }

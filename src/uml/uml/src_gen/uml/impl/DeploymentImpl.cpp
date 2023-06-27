@@ -455,7 +455,7 @@ void DeploymentImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveH
 	}
 }
 
-const std::shared_ptr<ecore::EClass>& DeploymentImpl::eStaticClass() const
+std::shared_ptr<ecore::EClass> DeploymentImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getDeployment_Class();
 }

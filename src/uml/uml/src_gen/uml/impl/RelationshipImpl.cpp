@@ -205,7 +205,7 @@ void RelationshipImpl::saveContent(std::shared_ptr<persistence::interfaces::XSav
 	}
 }
 
-const std::shared_ptr<ecore::EClass>& RelationshipImpl::eStaticClass() const
+std::shared_ptr<ecore::EClass> RelationshipImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getRelationship_Class();
 }

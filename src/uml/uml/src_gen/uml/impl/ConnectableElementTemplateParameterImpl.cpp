@@ -215,7 +215,7 @@ void ConnectableElementTemplateParameterImpl::saveContent(std::shared_ptr<persis
 	}
 }
 
-const std::shared_ptr<ecore::EClass>& ConnectableElementTemplateParameterImpl::eStaticClass() const
+std::shared_ptr<ecore::EClass> ConnectableElementTemplateParameterImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getConnectableElementTemplateParameter_Class();
 }

@@ -339,7 +339,7 @@ void WriteStructuralFeatureActionImpl::saveContent(std::shared_ptr<persistence::
 	}
 }
 
-const std::shared_ptr<ecore::EClass>& WriteStructuralFeatureActionImpl::eStaticClass() const
+std::shared_ptr<ecore::EClass> WriteStructuralFeatureActionImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getWriteStructuralFeatureAction_Class();
 }

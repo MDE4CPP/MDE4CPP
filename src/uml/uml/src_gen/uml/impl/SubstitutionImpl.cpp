@@ -345,7 +345,7 @@ void SubstitutionImpl::saveContent(std::shared_ptr<persistence::interfaces::XSav
 	}
 }
 
-const std::shared_ptr<ecore::EClass>& SubstitutionImpl::eStaticClass() const
+std::shared_ptr<ecore::EClass> SubstitutionImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getSubstitution_Class();
 }

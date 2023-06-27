@@ -308,7 +308,7 @@ void OclMessageExpEvalImpl::saveContent(std::shared_ptr<persistence::interfaces:
 	}
 }
 
-const std::shared_ptr<ecore::EClass>& OclMessageExpEvalImpl::eStaticClass() const
+std::shared_ptr<ecore::EClass> OclMessageExpEvalImpl::eStaticClass() const
 {
 	return ocl::Evaluations::EvaluationsPackage::eInstance()->getOclMessageExpEval_Class();
 }

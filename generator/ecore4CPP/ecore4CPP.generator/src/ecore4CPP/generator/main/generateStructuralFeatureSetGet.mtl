@@ -212,7 +212,7 @@ bool [aClass.name.toUpperFirst().concat('Impl')/]::eSet(int featureID,  const st
 	
 					if(eObjectList)
 					{
-						const std::shared_ptr<[anEStructuralFeature.generateStructuralFeatureType(false)/]>& _[anEStructuralFeature.name.toLowerFirst()/] = [anEStructuralFeature.GetterName()/]();
+						std::shared_ptr<[anEStructuralFeature.generateStructuralFeatureType(false)/]> _[anEStructuralFeature.name.toLowerFirst()/] = [anEStructuralFeature.GetterName()/]();
 	
 						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{

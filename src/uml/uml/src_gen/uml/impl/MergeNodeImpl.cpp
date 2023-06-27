@@ -257,7 +257,7 @@ void MergeNodeImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHa
 	}
 }
 
-const std::shared_ptr<ecore::EClass>& MergeNodeImpl::eStaticClass() const
+std::shared_ptr<ecore::EClass> MergeNodeImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getMergeNode_Class();
 }

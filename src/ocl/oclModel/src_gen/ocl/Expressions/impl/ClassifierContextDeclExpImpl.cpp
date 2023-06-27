@@ -411,7 +411,7 @@ void ClassifierContextDeclExpImpl::saveContent(std::shared_ptr<persistence::inte
 	}
 }
 
-const std::shared_ptr<ecore::EClass>& ClassifierContextDeclExpImpl::eStaticClass() const
+std::shared_ptr<ecore::EClass> ClassifierContextDeclExpImpl::eStaticClass() const
 {
 	return ocl::Expressions::ExpressionsPackage::eInstance()->getClassifierContextDeclExp_Class();
 }

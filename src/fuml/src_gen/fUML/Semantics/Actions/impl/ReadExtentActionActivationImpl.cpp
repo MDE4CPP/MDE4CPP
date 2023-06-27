@@ -42,9 +42,9 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
+#include "uml/umlFactory.hpp"
 #include "fUML/Semantics/Actions/ActionsFactory.hpp"
 #include "fUML/Semantics/Activities/ActivitiesFactory.hpp"
-#include "uml/umlFactory.hpp"
 #include "uml/Action.hpp"
 #include "fUML/Semantics/Actions/ActionActivation.hpp"
 #include "fUML/Semantics/Activities/ActivityEdgeInstance.hpp"
@@ -318,7 +318,7 @@ void ReadExtentActionActivationImpl::saveContent(std::shared_ptr<persistence::in
 	}
 }
 
-const std::shared_ptr<ecore::EClass>& ReadExtentActionActivationImpl::eStaticClass() const
+std::shared_ptr<ecore::EClass> ReadExtentActionActivationImpl::eStaticClass() const
 {
 	return fUML::Semantics::Actions::ActionsPackage::eInstance()->getReadExtentActionActivation_Class();
 }

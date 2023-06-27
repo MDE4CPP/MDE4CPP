@@ -259,7 +259,7 @@ void ActivityFinalNodeImpl::saveContent(std::shared_ptr<persistence::interfaces:
 	}
 }
 
-const std::shared_ptr<ecore::EClass>& ActivityFinalNodeImpl::eStaticClass() const
+std::shared_ptr<ecore::EClass> ActivityFinalNodeImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getActivityFinalNode_Class();
 }

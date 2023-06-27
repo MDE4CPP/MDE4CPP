@@ -371,7 +371,7 @@ void EnumerationImpl::saveContent(std::shared_ptr<persistence::interfaces::XSave
 	}
 }
 
-const std::shared_ptr<ecore::EClass>& EnumerationImpl::eStaticClass() const
+std::shared_ptr<ecore::EClass> EnumerationImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getEnumeration_Class();
 }

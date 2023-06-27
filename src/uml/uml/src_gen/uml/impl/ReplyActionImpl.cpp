@@ -427,7 +427,7 @@ void ReplyActionImpl::saveContent(std::shared_ptr<persistence::interfaces::XSave
 	}
 }
 
-const std::shared_ptr<ecore::EClass>& ReplyActionImpl::eStaticClass() const
+std::shared_ptr<ecore::EClass> ReplyActionImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getReplyAction_Class();
 }

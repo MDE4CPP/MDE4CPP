@@ -1237,7 +1237,7 @@ void ClassifierImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveH
 	}
 }
 
-const std::shared_ptr<ecore::EClass>& ClassifierImpl::eStaticClass() const
+std::shared_ptr<ecore::EClass> ClassifierImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getClassifier_Class();
 }

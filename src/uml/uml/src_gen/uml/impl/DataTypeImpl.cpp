@@ -449,7 +449,7 @@ void DataTypeImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHan
 	}
 }
 
-const std::shared_ptr<ecore::EClass>& DataTypeImpl::eStaticClass() const
+std::shared_ptr<ecore::EClass> DataTypeImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getDataType_Class();
 }

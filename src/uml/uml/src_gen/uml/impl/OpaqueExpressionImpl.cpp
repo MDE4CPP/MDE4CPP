@@ -442,7 +442,7 @@ void OpaqueExpressionImpl::saveContent(std::shared_ptr<persistence::interfaces::
 	}
 }
 
-const std::shared_ptr<ecore::EClass>& OpaqueExpressionImpl::eStaticClass() const
+std::shared_ptr<ecore::EClass> OpaqueExpressionImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getOpaqueExpression_Class();
 }

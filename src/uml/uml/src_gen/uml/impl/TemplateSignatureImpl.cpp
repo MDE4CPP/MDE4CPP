@@ -369,7 +369,7 @@ void TemplateSignatureImpl::saveContent(std::shared_ptr<persistence::interfaces:
 	}
 }
 
-const std::shared_ptr<ecore::EClass>& TemplateSignatureImpl::eStaticClass() const
+std::shared_ptr<ecore::EClass> TemplateSignatureImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getTemplateSignature_Class();
 }

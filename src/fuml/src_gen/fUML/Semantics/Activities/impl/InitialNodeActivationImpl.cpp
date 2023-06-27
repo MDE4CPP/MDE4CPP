@@ -221,7 +221,7 @@ void InitialNodeActivationImpl::saveContent(std::shared_ptr<persistence::interfa
 	}
 }
 
-const std::shared_ptr<ecore::EClass>& InitialNodeActivationImpl::eStaticClass() const
+std::shared_ptr<ecore::EClass> InitialNodeActivationImpl::eStaticClass() const
 {
 	return fUML::Semantics::Activities::ActivitiesPackage::eInstance()->getInitialNodeActivation_Class();
 }

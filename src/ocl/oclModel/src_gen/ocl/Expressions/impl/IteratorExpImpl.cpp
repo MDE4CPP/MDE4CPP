@@ -411,7 +411,7 @@ void IteratorExpImpl::saveContent(std::shared_ptr<persistence::interfaces::XSave
 	}
 }
 
-const std::shared_ptr<ecore::EClass>& IteratorExpImpl::eStaticClass() const
+std::shared_ptr<ecore::EClass> IteratorExpImpl::eStaticClass() const
 {
 	return ocl::Expressions::ExpressionsPackage::eInstance()->getIteratorExp_Class();
 }

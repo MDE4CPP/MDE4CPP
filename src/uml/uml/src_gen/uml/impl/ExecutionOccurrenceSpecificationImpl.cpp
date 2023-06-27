@@ -297,7 +297,7 @@ void ExecutionOccurrenceSpecificationImpl::saveContent(std::shared_ptr<persisten
 	}
 }
 
-const std::shared_ptr<ecore::EClass>& ExecutionOccurrenceSpecificationImpl::eStaticClass() const
+std::shared_ptr<ecore::EClass> ExecutionOccurrenceSpecificationImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getExecutionOccurrenceSpecification_Class();
 }

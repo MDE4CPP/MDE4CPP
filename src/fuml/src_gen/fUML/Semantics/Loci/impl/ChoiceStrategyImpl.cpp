@@ -188,7 +188,7 @@ void ChoiceStrategyImpl::saveContent(std::shared_ptr<persistence::interfaces::XS
 	}
 }
 
-const std::shared_ptr<ecore::EClass>& ChoiceStrategyImpl::eStaticClass() const
+std::shared_ptr<ecore::EClass> ChoiceStrategyImpl::eStaticClass() const
 {
 	return fUML::Semantics::Loci::LociPackage::eInstance()->getChoiceStrategy_Class();
 }

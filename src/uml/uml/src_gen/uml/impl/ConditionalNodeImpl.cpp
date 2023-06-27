@@ -472,7 +472,7 @@ void ConditionalNodeImpl::saveContent(std::shared_ptr<persistence::interfaces::X
 	}
 }
 
-const std::shared_ptr<ecore::EClass>& ConditionalNodeImpl::eStaticClass() const
+std::shared_ptr<ecore::EClass> ConditionalNodeImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getConditionalNode_Class();
 }

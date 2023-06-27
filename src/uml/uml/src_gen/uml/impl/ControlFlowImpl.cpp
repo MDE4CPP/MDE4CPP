@@ -255,7 +255,7 @@ void ControlFlowImpl::saveContent(std::shared_ptr<persistence::interfaces::XSave
 	}
 }
 
-const std::shared_ptr<ecore::EClass>& ControlFlowImpl::eStaticClass() const
+std::shared_ptr<ecore::EClass> ControlFlowImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getControlFlow_Class();
 }

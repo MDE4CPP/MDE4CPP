@@ -388,7 +388,7 @@ void TupleTypeExpImpl::saveContent(std::shared_ptr<persistence::interfaces::XSav
 	}
 }
 
-const std::shared_ptr<ecore::EClass>& TupleTypeExpImpl::eStaticClass() const
+std::shared_ptr<ecore::EClass> TupleTypeExpImpl::eStaticClass() const
 {
 	return ocl::Expressions::ExpressionsPackage::eInstance()->getTupleTypeExp_Class();
 }

@@ -268,7 +268,7 @@ void IntervalConstraintImpl::saveContent(std::shared_ptr<persistence::interfaces
 	}
 }
 
-const std::shared_ptr<ecore::EClass>& IntervalConstraintImpl::eStaticClass() const
+std::shared_ptr<ecore::EClass> IntervalConstraintImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getIntervalConstraint_Class();
 }

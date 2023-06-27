@@ -272,7 +272,7 @@ void VariableDeclEvalImpl::saveContent(std::shared_ptr<persistence::interfaces::
 	}
 }
 
-const std::shared_ptr<ecore::EClass>& VariableDeclEvalImpl::eStaticClass() const
+std::shared_ptr<ecore::EClass> VariableDeclEvalImpl::eStaticClass() const
 {
 	return ocl::Evaluations::EvaluationsPackage::eInstance()->getVariableDeclEval_Class();
 }

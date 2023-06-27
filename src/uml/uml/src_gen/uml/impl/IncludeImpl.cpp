@@ -312,7 +312,7 @@ void IncludeImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHand
 	}
 }
 
-const std::shared_ptr<ecore::EClass>& IncludeImpl::eStaticClass() const
+std::shared_ptr<ecore::EClass> IncludeImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getInclude_Class();
 }

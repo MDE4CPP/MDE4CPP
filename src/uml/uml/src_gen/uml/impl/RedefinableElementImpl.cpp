@@ -290,7 +290,7 @@ void RedefinableElementImpl::saveContent(std::shared_ptr<persistence::interfaces
 	}
 }
 
-const std::shared_ptr<ecore::EClass>& RedefinableElementImpl::eStaticClass() const
+std::shared_ptr<ecore::EClass> RedefinableElementImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getRedefinableElement_Class();
 }

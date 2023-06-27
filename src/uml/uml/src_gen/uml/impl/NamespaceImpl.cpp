@@ -587,7 +587,7 @@ void NamespaceImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHa
 	}
 }
 
-const std::shared_ptr<ecore::EClass>& NamespaceImpl::eStaticClass() const
+std::shared_ptr<ecore::EClass> NamespaceImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getNamespace_Class();
 }

@@ -496,7 +496,7 @@ void BehavioredClassifierImpl::saveContent(std::shared_ptr<persistence::interfac
 	}
 }
 
-const std::shared_ptr<ecore::EClass>& BehavioredClassifierImpl::eStaticClass() const
+std::shared_ptr<ecore::EClass> BehavioredClassifierImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getBehavioredClassifier_Class();
 }

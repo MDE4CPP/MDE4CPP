@@ -243,7 +243,7 @@ void CollectionItemImpl::saveContent(std::shared_ptr<persistence::interfaces::XS
 	}
 }
 
-const std::shared_ptr<ecore::EClass>& CollectionItemImpl::eStaticClass() const
+std::shared_ptr<ecore::EClass> CollectionItemImpl::eStaticClass() const
 {
 	return ocl::Expressions::ExpressionsPackage::eInstance()->getCollectionItem_Class();
 }

@@ -354,7 +354,7 @@ void EAnnotationImpl::resolveReferences(const int featureID, std::vector<std::sh
 
 		case ecore::ecorePackage::EANNOTATION_ATTRIBUTE_REFERENCES:
 		{
-			const std::shared_ptr<Bag<ecore::EObject>>& _references = getReferences();
+			std::shared_ptr<Bag<ecore::EObject>> _references = getReferences();
 			for(std::shared_ptr<ecore::EObject> ref : references)
 			{
 				std::shared_ptr<ecore::EObject>  _r = std::dynamic_pointer_cast<ecore::EObject>(ref);
@@ -404,7 +404,7 @@ void EAnnotationImpl::saveContent(std::shared_ptr<persistence::interfaces::XSave
 	}
 }
 
-const std::shared_ptr<EClass>& EAnnotationImpl::eStaticClass() const
+std::shared_ptr<EClass> EAnnotationImpl::eStaticClass() const
 {
 	return ecore::ecorePackage::eInstance()->getEAnnotation_Class();
 }
@@ -466,7 +466,7 @@ bool EAnnotationImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 	
 					if(eObjectList)
 					{
-						const std::shared_ptr<Bag<ecore::EObject>>& _contents = getContents();
+						std::shared_ptr<Bag<ecore::EObject>> _contents = getContents();
 	
 						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{
@@ -556,7 +556,7 @@ bool EAnnotationImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 	
 					if(eObjectList)
 					{
-						const std::shared_ptr<Bag<ecore::EObject>>& _references = getReferences();
+						std::shared_ptr<Bag<ecore::EObject>> _references = getReferences();
 	
 						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{

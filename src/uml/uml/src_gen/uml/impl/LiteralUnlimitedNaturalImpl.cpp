@@ -333,7 +333,7 @@ void LiteralUnlimitedNaturalImpl::saveContent(std::shared_ptr<persistence::inter
 	}
 }
 
-const std::shared_ptr<ecore::EClass>& LiteralUnlimitedNaturalImpl::eStaticClass() const
+std::shared_ptr<ecore::EClass> LiteralUnlimitedNaturalImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getLiteralUnlimitedNatural_Class();
 }

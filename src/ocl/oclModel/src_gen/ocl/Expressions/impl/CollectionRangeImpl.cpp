@@ -278,7 +278,7 @@ void CollectionRangeImpl::saveContent(std::shared_ptr<persistence::interfaces::X
 	}
 }
 
-const std::shared_ptr<ecore::EClass>& CollectionRangeImpl::eStaticClass() const
+std::shared_ptr<ecore::EClass> CollectionRangeImpl::eStaticClass() const
 {
 	return ocl::Expressions::ExpressionsPackage::eInstance()->getCollectionRange_Class();
 }

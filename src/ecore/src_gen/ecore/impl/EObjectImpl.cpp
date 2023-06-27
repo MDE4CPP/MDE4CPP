@@ -139,7 +139,7 @@ std::shared_ptr<Any> EObjectImpl::eAllContents() const
 	//end of body
 }
 
-const std::shared_ptr<ecore::EClass>& EObjectImpl::eClass() const
+std::shared_ptr<ecore::EClass> EObjectImpl::eClass() const
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -456,7 +456,7 @@ void EObjectImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHand
 	}
 }
 
-const std::shared_ptr<EClass>& EObjectImpl::eStaticClass() const
+std::shared_ptr<EClass> EObjectImpl::eStaticClass() const
 {
 	return ecore::ecorePackage::eInstance()->getEObject_Class();
 }
@@ -540,7 +540,7 @@ bool EObjectImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 	
 					if(eObjectList)
 					{
-						const std::shared_ptr<Bag<ecore::EObject>>& _eContentUnion = getEContentUnion();
+						std::shared_ptr<Bag<ecore::EObject>> _eContentUnion = getEContentUnion();
 	
 						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{

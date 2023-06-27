@@ -343,7 +343,7 @@ void EEnumImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandle
 	}
 }
 
-const std::shared_ptr<EClass>& EEnumImpl::eStaticClass() const
+std::shared_ptr<EClass> EEnumImpl::eStaticClass() const
 {
 	return ecore::ecorePackage::eInstance()->getEEnum_Class();
 }
@@ -386,7 +386,7 @@ bool EEnumImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 	
 					if(eObjectList)
 					{
-						const std::shared_ptr<Bag<ecore::EEnumLiteral>>& _eLiterals = getELiterals();
+						std::shared_ptr<Bag<ecore::EEnumLiteral>> _eLiterals = getELiterals();
 	
 						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{

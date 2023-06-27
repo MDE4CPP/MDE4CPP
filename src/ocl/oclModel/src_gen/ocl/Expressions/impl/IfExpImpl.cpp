@@ -453,7 +453,7 @@ void IfExpImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandle
 	}
 }
 
-const std::shared_ptr<ecore::EClass>& IfExpImpl::eStaticClass() const
+std::shared_ptr<ecore::EClass> IfExpImpl::eStaticClass() const
 {
 	return ocl::Expressions::ExpressionsPackage::eInstance()->getIfExp_Class();
 }

@@ -553,7 +553,7 @@ void InputPinImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHan
 	}
 }
 
-const std::shared_ptr<ecore::EClass>& InputPinImpl::eStaticClass() const
+std::shared_ptr<ecore::EClass> InputPinImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getInputPin_Class();
 }

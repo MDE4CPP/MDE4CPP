@@ -406,7 +406,7 @@ void EStructuralFeatureImpl::saveContent(std::shared_ptr<persistence::interfaces
 	}
 }
 
-const std::shared_ptr<EClass>& EStructuralFeatureImpl::eStaticClass() const
+std::shared_ptr<EClass> EStructuralFeatureImpl::eStaticClass() const
 {
 	return ecore::ecorePackage::eInstance()->getEStructuralFeature_Class();
 }

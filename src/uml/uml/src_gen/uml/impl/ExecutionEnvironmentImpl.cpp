@@ -308,7 +308,7 @@ void ExecutionEnvironmentImpl::saveContent(std::shared_ptr<persistence::interfac
 	}
 }
 
-const std::shared_ptr<ecore::EClass>& ExecutionEnvironmentImpl::eStaticClass() const
+std::shared_ptr<ecore::EClass> ExecutionEnvironmentImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getExecutionEnvironment_Class();
 }

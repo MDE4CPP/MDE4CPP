@@ -257,7 +257,7 @@ void InitialNodeImpl::saveContent(std::shared_ptr<persistence::interfaces::XSave
 	}
 }
 
-const std::shared_ptr<ecore::EClass>& InitialNodeImpl::eStaticClass() const
+std::shared_ptr<ecore::EClass> InitialNodeImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getInitialNode_Class();
 }

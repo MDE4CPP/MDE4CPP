@@ -263,7 +263,7 @@ void TypedElementImpl::saveContent(std::shared_ptr<persistence::interfaces::XSav
 	}
 }
 
-const std::shared_ptr<ecore::EClass>& TypedElementImpl::eStaticClass() const
+std::shared_ptr<ecore::EClass> TypedElementImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getTypedElement_Class();
 }

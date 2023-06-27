@@ -375,7 +375,7 @@ void DurationImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHan
 	}
 }
 
-const std::shared_ptr<ecore::EClass>& DurationImpl::eStaticClass() const
+std::shared_ptr<ecore::EClass> DurationImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getDuration_Class();
 }

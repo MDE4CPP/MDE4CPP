@@ -263,7 +263,7 @@ void AcceptEventActionEventAccepterImpl::saveContent(std::shared_ptr<persistence
 	}
 }
 
-const std::shared_ptr<ecore::EClass>& AcceptEventActionEventAccepterImpl::eStaticClass() const
+std::shared_ptr<ecore::EClass> AcceptEventActionEventAccepterImpl::eStaticClass() const
 {
 	return fUML::Semantics::Actions::ActionsPackage::eInstance()->getAcceptEventActionEventAccepter_Class();
 }

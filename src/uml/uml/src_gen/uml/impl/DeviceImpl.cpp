@@ -308,7 +308,7 @@ void DeviceImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandl
 	}
 }
 
-const std::shared_ptr<ecore::EClass>& DeviceImpl::eStaticClass() const
+std::shared_ptr<ecore::EClass> DeviceImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getDevice_Class();
 }

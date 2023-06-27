@@ -267,7 +267,7 @@ void PackageableElementImpl::saveContent(std::shared_ptr<persistence::interfaces
 	}
 }
 
-const std::shared_ptr<ecore::EClass>& PackageableElementImpl::eStaticClass() const
+std::shared_ptr<ecore::EClass> PackageableElementImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getPackageableElement_Class();
 }

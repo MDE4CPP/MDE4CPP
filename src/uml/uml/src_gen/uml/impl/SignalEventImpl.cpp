@@ -298,7 +298,7 @@ void SignalEventImpl::saveContent(std::shared_ptr<persistence::interfaces::XSave
 	}
 }
 
-const std::shared_ptr<ecore::EClass>& SignalEventImpl::eStaticClass() const
+std::shared_ptr<ecore::EClass> SignalEventImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getSignalEvent_Class();
 }

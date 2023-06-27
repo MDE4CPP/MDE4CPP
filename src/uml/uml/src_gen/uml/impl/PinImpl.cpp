@@ -297,7 +297,7 @@ void PinImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler>
 	}
 }
 
-const std::shared_ptr<ecore::EClass>& PinImpl::eStaticClass() const
+std::shared_ptr<ecore::EClass> PinImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getPin_Class();
 }

@@ -730,7 +730,7 @@ void InteractionImpl::saveContent(std::shared_ptr<persistence::interfaces::XSave
 	}
 }
 
-const std::shared_ptr<ecore::EClass>& InteractionImpl::eStaticClass() const
+std::shared_ptr<ecore::EClass> InteractionImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getInteraction_Class();
 }

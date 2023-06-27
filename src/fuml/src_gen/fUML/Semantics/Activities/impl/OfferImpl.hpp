@@ -80,7 +80,7 @@ virtual public Offer
 			virtual void saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const;
 
 		protected:
-			virtual const std::shared_ptr<ecore::EClass>& eStaticClass() const;
+			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
 
 			//*********************************
 			// EStructuralFeature Get/Set/IsSet

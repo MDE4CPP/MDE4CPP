@@ -246,7 +246,7 @@ void ControlNodeImpl::saveContent(std::shared_ptr<persistence::interfaces::XSave
 	}
 }
 
-const std::shared_ptr<ecore::EClass>& ControlNodeImpl::eStaticClass() const
+std::shared_ptr<ecore::EClass> ControlNodeImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getControlNode_Class();
 }

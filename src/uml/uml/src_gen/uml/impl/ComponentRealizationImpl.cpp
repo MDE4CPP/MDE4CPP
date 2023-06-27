@@ -379,7 +379,7 @@ void ComponentRealizationImpl::saveContent(std::shared_ptr<persistence::interfac
 	}
 }
 
-const std::shared_ptr<ecore::EClass>& ComponentRealizationImpl::eStaticClass() const
+std::shared_ptr<ecore::EClass> ComponentRealizationImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getComponentRealization_Class();
 }

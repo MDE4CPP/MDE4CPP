@@ -258,7 +258,7 @@ void ExtensionPointImpl::saveContent(std::shared_ptr<persistence::interfaces::XS
 	}
 }
 
-const std::shared_ptr<ecore::EClass>& ExtensionPointImpl::eStaticClass() const
+std::shared_ptr<ecore::EClass> ExtensionPointImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getExtensionPoint_Class();
 }

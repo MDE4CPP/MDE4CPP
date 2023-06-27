@@ -250,7 +250,7 @@ void DataStoreNodeActivationImpl::saveContent(std::shared_ptr<persistence::inter
 	}
 }
 
-const std::shared_ptr<ecore::EClass>& DataStoreNodeActivationImpl::eStaticClass() const
+std::shared_ptr<ecore::EClass> DataStoreNodeActivationImpl::eStaticClass() const
 {
 	return fUML::Semantics::Activities::ActivitiesPackage::eInstance()->getDataStoreNodeActivation_Class();
 }

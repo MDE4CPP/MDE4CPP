@@ -255,7 +255,7 @@ void GateImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler
 	}
 }
 
-const std::shared_ptr<ecore::EClass>& GateImpl::eStaticClass() const
+std::shared_ptr<ecore::EClass> GateImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getGate_Class();
 }

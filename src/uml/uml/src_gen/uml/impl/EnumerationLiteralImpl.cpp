@@ -301,7 +301,7 @@ void EnumerationLiteralImpl::saveContent(std::shared_ptr<persistence::interfaces
 	}
 }
 
-const std::shared_ptr<ecore::EClass>& EnumerationLiteralImpl::eStaticClass() const
+std::shared_ptr<ecore::EClass> EnumerationLiteralImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getEnumerationLiteral_Class();
 }

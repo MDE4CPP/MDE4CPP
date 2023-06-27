@@ -298,7 +298,7 @@ void ActionExecutionSpecificationImpl::saveContent(std::shared_ptr<persistence::
 	}
 }
 
-const std::shared_ptr<ecore::EClass>& ActionExecutionSpecificationImpl::eStaticClass() const
+std::shared_ptr<ecore::EClass> ActionExecutionSpecificationImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getActionExecutionSpecification_Class();
 }

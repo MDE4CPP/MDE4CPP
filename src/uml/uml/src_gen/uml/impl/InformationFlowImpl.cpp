@@ -588,7 +588,7 @@ void InformationFlowImpl::saveContent(std::shared_ptr<persistence::interfaces::X
 	}
 }
 
-const std::shared_ptr<ecore::EClass>& InformationFlowImpl::eStaticClass() const
+std::shared_ptr<ecore::EClass> InformationFlowImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getInformationFlow_Class();
 }

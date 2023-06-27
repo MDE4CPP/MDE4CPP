@@ -337,7 +337,7 @@ void DecisionNodeImpl::saveContent(std::shared_ptr<persistence::interfaces::XSav
 	}
 }
 
-const std::shared_ptr<ecore::EClass>& DecisionNodeImpl::eStaticClass() const
+std::shared_ptr<ecore::EClass> DecisionNodeImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getDecisionNode_Class();
 }

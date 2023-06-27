@@ -268,7 +268,7 @@ void CreateLinkActionImpl::saveContent(std::shared_ptr<persistence::interfaces::
 	}
 }
 
-const std::shared_ptr<ecore::EClass>& CreateLinkActionImpl::eStaticClass() const
+std::shared_ptr<ecore::EClass> CreateLinkActionImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getCreateLinkAction_Class();
 }

@@ -39,8 +39,8 @@
 
 #include <exception> // used in Persistence
 #include "fUML/Semantics/Actions/ActionsFactory.hpp"
-#include "fUML/Semantics/Activities/ActivitiesFactory.hpp"
 #include "uml/umlFactory.hpp"
+#include "fUML/Semantics/Activities/ActivitiesFactory.hpp"
 #include "uml/Action.hpp"
 #include "fUML/Semantics/Activities/ActivityEdgeInstance.hpp"
 #include "uml/ActivityNode.hpp"
@@ -228,7 +228,7 @@ void WriteStructuralFeatureActionActivationImpl::saveContent(std::shared_ptr<per
 	}
 }
 
-const std::shared_ptr<ecore::EClass>& WriteStructuralFeatureActionActivationImpl::eStaticClass() const
+std::shared_ptr<ecore::EClass> WriteStructuralFeatureActionActivationImpl::eStaticClass() const
 {
 	return fUML::Semantics::Actions::ActionsPackage::eInstance()->getWriteStructuralFeatureActionActivation_Class();
 }

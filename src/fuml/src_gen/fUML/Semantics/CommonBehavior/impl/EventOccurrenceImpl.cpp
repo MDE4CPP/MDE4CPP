@@ -304,7 +304,7 @@ void EventOccurrenceImpl::saveContent(std::shared_ptr<persistence::interfaces::X
 	}
 }
 
-const std::shared_ptr<ecore::EClass>& EventOccurrenceImpl::eStaticClass() const
+std::shared_ptr<ecore::EClass> EventOccurrenceImpl::eStaticClass() const
 {
 	return fUML::Semantics::CommonBehavior::CommonBehaviorPackage::eInstance()->getEventOccurrence_Class();
 }

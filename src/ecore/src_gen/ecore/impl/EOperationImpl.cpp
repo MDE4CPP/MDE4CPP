@@ -226,8 +226,8 @@ bool EOperationImpl::isOverrideOf(const std::shared_ptr<ecore::EOperation>& some
 
 	if (containingClass->isSuperTypeOf(thisContainingClass) && (someOperation->getName()==getName()))
     {
-        const std::shared_ptr< Bag<ecore::EParameter>>& parameters = getEParameters();
-        const std::shared_ptr< Bag<ecore::EParameter>>& otherParameters = someOperation->getEParameters();
+        std::shared_ptr< Bag<ecore::EParameter> > parameters = getEParameters();
+        std::shared_ptr< Bag<ecore::EParameter> > otherParameters = someOperation->getEParameters();
         if (parameters->size() == otherParameters->size())
         {
             for (Bag<EParameter> ::iterator i = parameters->begin(), j = otherParameters->begin(); i != parameters->end(); ++i,++j )
@@ -440,7 +440,7 @@ void EOperationImpl::resolveReferences(const int featureID, std::vector<std::sha
 	{
 		case ecore::ecorePackage::EOPERATION_ATTRIBUTE_EEXCEPTIONS:
 		{
-			const std::shared_ptr<Bag<ecore::EClassifier>>& _eExceptions = getEExceptions();
+			std::shared_ptr<Bag<ecore::EClassifier>> _eExceptions = getEExceptions();
 			for(std::shared_ptr<ecore::EObject> ref : references)
 			{
 				std::shared_ptr<ecore::EClassifier>  _r = std::dynamic_pointer_cast<ecore::EClassifier>(ref);
@@ -500,7 +500,7 @@ void EOperationImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveH
 	}
 }
 
-const std::shared_ptr<EClass>& EOperationImpl::eStaticClass() const
+std::shared_ptr<EClass> EOperationImpl::eStaticClass() const
 {
 	return ecore::ecorePackage::eInstance()->getEOperation_Class();
 }
@@ -562,7 +562,7 @@ bool EOperationImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 	
 					if(eObjectList)
 					{
-						const std::shared_ptr<Bag<ecore::EClassifier>>& _eExceptions = getEExceptions();
+						std::shared_ptr<Bag<ecore::EClassifier>> _eExceptions = getEExceptions();
 	
 						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{
@@ -607,7 +607,7 @@ bool EOperationImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 	
 					if(eObjectList)
 					{
-						const std::shared_ptr<Bag<ecore::EGenericType>>& _eGenericExceptions = getEGenericExceptions();
+						std::shared_ptr<Bag<ecore::EGenericType>> _eGenericExceptions = getEGenericExceptions();
 	
 						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{
@@ -652,7 +652,7 @@ bool EOperationImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 	
 					if(eObjectList)
 					{
-						const std::shared_ptr<Bag<ecore::EParameter>>& _eParameters = getEParameters();
+						std::shared_ptr<Bag<ecore::EParameter>> _eParameters = getEParameters();
 	
 						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{
@@ -697,7 +697,7 @@ bool EOperationImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 	
 					if(eObjectList)
 					{
-						const std::shared_ptr<Bag<ecore::ETypeParameter>>& _eTypeParameters = getETypeParameters();
+						std::shared_ptr<Bag<ecore::ETypeParameter>> _eTypeParameters = getETypeParameters();
 	
 						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{

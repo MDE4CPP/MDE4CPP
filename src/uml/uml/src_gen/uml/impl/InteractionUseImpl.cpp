@@ -520,7 +520,7 @@ void InteractionUseImpl::saveContent(std::shared_ptr<persistence::interfaces::XS
 	}
 }
 
-const std::shared_ptr<ecore::EClass>& InteractionUseImpl::eStaticClass() const
+std::shared_ptr<ecore::EClass> InteractionUseImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getInteractionUse_Class();
 }

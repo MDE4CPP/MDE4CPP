@@ -254,7 +254,7 @@ void DestructionOccurrenceSpecificationImpl::saveContent(std::shared_ptr<persist
 	}
 }
 
-const std::shared_ptr<ecore::EClass>& DestructionOccurrenceSpecificationImpl::eStaticClass() const
+std::shared_ptr<ecore::EClass> DestructionOccurrenceSpecificationImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getDestructionOccurrenceSpecification_Class();
 }

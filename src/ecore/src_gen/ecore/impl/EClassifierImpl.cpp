@@ -365,7 +365,7 @@ void EClassifierImpl::saveContent(std::shared_ptr<persistence::interfaces::XSave
 	}
 }
 
-const std::shared_ptr<EClass>& EClassifierImpl::eStaticClass() const
+std::shared_ptr<EClass> EClassifierImpl::eStaticClass() const
 {
 	return ecore::ecorePackage::eInstance()->getEClassifier_Class();
 }
@@ -445,7 +445,7 @@ bool EClassifierImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 	
 					if(eObjectList)
 					{
-						const std::shared_ptr<Bag<ecore::ETypeParameter>>& _eTypeParameters = getETypeParameters();
+						std::shared_ptr<Bag<ecore::ETypeParameter>> _eTypeParameters = getETypeParameters();
 	
 						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{

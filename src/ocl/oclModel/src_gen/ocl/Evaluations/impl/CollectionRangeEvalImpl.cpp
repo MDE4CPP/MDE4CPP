@@ -282,7 +282,7 @@ void CollectionRangeEvalImpl::saveContent(std::shared_ptr<persistence::interface
 	}
 }
 
-const std::shared_ptr<ecore::EClass>& CollectionRangeEvalImpl::eStaticClass() const
+std::shared_ptr<ecore::EClass> CollectionRangeEvalImpl::eStaticClass() const
 {
 	return ocl::Evaluations::EvaluationsPackage::eInstance()->getCollectionRangeEval_Class();
 }

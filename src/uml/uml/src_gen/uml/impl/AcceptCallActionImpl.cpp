@@ -310,7 +310,7 @@ void AcceptCallActionImpl::saveContent(std::shared_ptr<persistence::interfaces::
 	}
 }
 
-const std::shared_ptr<ecore::EClass>& AcceptCallActionImpl::eStaticClass() const
+std::shared_ptr<ecore::EClass> AcceptCallActionImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getAcceptCallAction_Class();
 }

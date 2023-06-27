@@ -370,7 +370,7 @@ void DestroyObjectActionImpl::saveContent(std::shared_ptr<persistence::interface
 	}
 }
 
-const std::shared_ptr<ecore::EClass>& DestroyObjectActionImpl::eStaticClass() const
+std::shared_ptr<ecore::EClass> DestroyObjectActionImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getDestroyObjectAction_Class();
 }

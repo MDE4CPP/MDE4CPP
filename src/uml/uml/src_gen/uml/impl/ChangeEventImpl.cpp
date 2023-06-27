@@ -295,7 +295,7 @@ void ChangeEventImpl::saveContent(std::shared_ptr<persistence::interfaces::XSave
 	}
 }
 
-const std::shared_ptr<ecore::EClass>& ChangeEventImpl::eStaticClass() const
+std::shared_ptr<ecore::EClass> ChangeEventImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getChangeEvent_Class();
 }

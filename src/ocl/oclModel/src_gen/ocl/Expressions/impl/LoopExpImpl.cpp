@@ -514,7 +514,7 @@ void LoopExpImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHand
 	}
 }
 
-const std::shared_ptr<ecore::EClass>& LoopExpImpl::eStaticClass() const
+std::shared_ptr<ecore::EClass> LoopExpImpl::eStaticClass() const
 {
 	return ocl::Expressions::ExpressionsPackage::eInstance()->getLoopExp_Class();
 }

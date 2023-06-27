@@ -310,7 +310,7 @@ void EReferenceImpl::resolveReferences(const int featureID, std::vector<std::sha
 	{
 		case ecore::ecorePackage::EREFERENCE_ATTRIBUTE_EKEYS:
 		{
-			const std::shared_ptr<Bag<ecore::EAttribute>>& _eKeys = getEKeys();
+			std::shared_ptr<Bag<ecore::EAttribute>> _eKeys = getEKeys();
 			for(std::shared_ptr<ecore::EObject> ref : references)
 			{
 				std::shared_ptr<ecore::EAttribute>  _r = std::dynamic_pointer_cast<ecore::EAttribute>(ref);
@@ -392,7 +392,7 @@ void EReferenceImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveH
 	}
 }
 
-const std::shared_ptr<EClass>& EReferenceImpl::eStaticClass() const
+std::shared_ptr<EClass> EReferenceImpl::eStaticClass() const
 {
 	return ecore::ecorePackage::eInstance()->getEReference_Class();
 }
@@ -469,7 +469,7 @@ bool EReferenceImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 	
 					if(eObjectList)
 					{
-						const std::shared_ptr<Bag<ecore::EAttribute>>& _eKeys = getEKeys();
+						std::shared_ptr<Bag<ecore::EAttribute>> _eKeys = getEKeys();
 	
 						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{

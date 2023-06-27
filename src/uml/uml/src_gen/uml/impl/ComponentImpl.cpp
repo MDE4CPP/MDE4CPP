@@ -551,7 +551,7 @@ void ComponentImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHa
 	}
 }
 
-const std::shared_ptr<ecore::EClass>& ComponentImpl::eStaticClass() const
+std::shared_ptr<ecore::EClass> ComponentImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getComponent_Class();
 }

@@ -320,7 +320,7 @@ void ModelImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandle
 	}
 }
 
-const std::shared_ptr<ecore::EClass>& ModelImpl::eStaticClass() const
+std::shared_ptr<ecore::EClass> ModelImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getModel_Class();
 }

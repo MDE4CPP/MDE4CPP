@@ -350,7 +350,7 @@ void ProtocolTransitionImpl::saveContent(std::shared_ptr<persistence::interfaces
 	}
 }
 
-const std::shared_ptr<ecore::EClass>& ProtocolTransitionImpl::eStaticClass() const
+std::shared_ptr<ecore::EClass> ProtocolTransitionImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getProtocolTransition_Class();
 }

@@ -392,7 +392,7 @@ void ReadLinkObjectEndQualifierActionImpl::saveContent(std::shared_ptr<persisten
 	}
 }
 
-const std::shared_ptr<ecore::EClass>& ReadLinkObjectEndQualifierActionImpl::eStaticClass() const
+std::shared_ptr<ecore::EClass> ReadLinkObjectEndQualifierActionImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getReadLinkObjectEndQualifierAction_Class();
 }

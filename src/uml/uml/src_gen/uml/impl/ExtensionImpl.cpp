@@ -327,7 +327,7 @@ void ExtensionImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHa
 	}
 }
 
-const std::shared_ptr<ecore::EClass>& ExtensionImpl::eStaticClass() const
+std::shared_ptr<ecore::EClass> ExtensionImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getExtension_Class();
 }

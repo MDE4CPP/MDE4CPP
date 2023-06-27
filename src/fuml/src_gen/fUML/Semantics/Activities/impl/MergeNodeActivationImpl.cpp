@@ -206,7 +206,7 @@ void MergeNodeActivationImpl::saveContent(std::shared_ptr<persistence::interface
 	}
 }
 
-const std::shared_ptr<ecore::EClass>& MergeNodeActivationImpl::eStaticClass() const
+std::shared_ptr<ecore::EClass> MergeNodeActivationImpl::eStaticClass() const
 {
 	return fUML::Semantics::Activities::ActivitiesPackage::eInstance()->getMergeNodeActivation_Class();
 }

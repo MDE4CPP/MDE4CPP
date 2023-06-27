@@ -227,7 +227,7 @@ void ENamedElementImpl::saveContent(std::shared_ptr<persistence::interfaces::XSa
 	}
 }
 
-const std::shared_ptr<EClass>& ENamedElementImpl::eStaticClass() const
+std::shared_ptr<EClass> ENamedElementImpl::eStaticClass() const
 {
 	return ecore::ecorePackage::eInstance()->getENamedElement_Class();
 }

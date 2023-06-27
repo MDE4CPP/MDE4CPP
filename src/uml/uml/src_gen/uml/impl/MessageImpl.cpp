@@ -565,7 +565,7 @@ void MessageImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHand
 	}
 }
 
-const std::shared_ptr<ecore::EClass>& MessageImpl::eStaticClass() const
+std::shared_ptr<ecore::EClass> MessageImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getMessage_Class();
 }

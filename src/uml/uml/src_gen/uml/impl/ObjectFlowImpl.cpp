@@ -385,7 +385,7 @@ void ObjectFlowImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveH
 	}
 }
 
-const std::shared_ptr<ecore::EClass>& ObjectFlowImpl::eStaticClass() const
+std::shared_ptr<ecore::EClass> ObjectFlowImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getObjectFlow_Class();
 }

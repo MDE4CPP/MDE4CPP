@@ -307,7 +307,7 @@ void StartClassifierBehaviorActionImpl::saveContent(std::shared_ptr<persistence:
 	}
 }
 
-const std::shared_ptr<ecore::EClass>& StartClassifierBehaviorActionImpl::eStaticClass() const
+std::shared_ptr<ecore::EClass> StartClassifierBehaviorActionImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getStartClassifierBehaviorAction_Class();
 }

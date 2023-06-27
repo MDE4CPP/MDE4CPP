@@ -534,7 +534,7 @@ void CombinedFragmentImpl::saveContent(std::shared_ptr<persistence::interfaces::
 	}
 }
 
-const std::shared_ptr<ecore::EClass>& CombinedFragmentImpl::eStaticClass() const
+std::shared_ptr<ecore::EClass> CombinedFragmentImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getCombinedFragment_Class();
 }

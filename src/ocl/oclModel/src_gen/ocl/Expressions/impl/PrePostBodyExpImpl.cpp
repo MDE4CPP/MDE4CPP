@@ -317,7 +317,7 @@ void PrePostBodyExpImpl::saveContent(std::shared_ptr<persistence::interfaces::XS
 	}
 }
 
-const std::shared_ptr<ecore::EClass>& PrePostBodyExpImpl::eStaticClass() const
+std::shared_ptr<ecore::EClass> PrePostBodyExpImpl::eStaticClass() const
 {
 	return ocl::Expressions::ExpressionsPackage::eInstance()->getPrePostBodyExp_Class();
 }

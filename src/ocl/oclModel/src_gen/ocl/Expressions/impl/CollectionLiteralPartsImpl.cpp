@@ -244,7 +244,7 @@ void CollectionLiteralPartsImpl::saveContent(std::shared_ptr<persistence::interf
 	}
 }
 
-const std::shared_ptr<ecore::EClass>& CollectionLiteralPartsImpl::eStaticClass() const
+std::shared_ptr<ecore::EClass> CollectionLiteralPartsImpl::eStaticClass() const
 {
 	return ocl::Expressions::ExpressionsPackage::eInstance()->getCollectionLiteralParts_Class();
 }

@@ -822,7 +822,7 @@ void BehaviorImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHan
 	}
 }
 
-const std::shared_ptr<ecore::EClass>& BehaviorImpl::eStaticClass() const
+std::shared_ptr<ecore::EClass> BehaviorImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getBehavior_Class();
 }

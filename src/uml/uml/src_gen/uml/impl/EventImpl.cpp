@@ -239,7 +239,7 @@ void EventImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandle
 	}
 }
 
-const std::shared_ptr<ecore::EClass>& EventImpl::eStaticClass() const
+std::shared_ptr<ecore::EClass> EventImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getEvent_Class();
 }

@@ -253,7 +253,7 @@ void IterateExpEvalImpl::saveContent(std::shared_ptr<persistence::interfaces::XS
 	}
 }
 
-const std::shared_ptr<ecore::EClass>& IterateExpEvalImpl::eStaticClass() const
+std::shared_ptr<ecore::EClass> IterateExpEvalImpl::eStaticClass() const
 {
 	return ocl::Evaluations::EvaluationsPackage::eInstance()->getIterateExpEval_Class();
 }

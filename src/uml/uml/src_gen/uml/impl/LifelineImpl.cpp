@@ -417,7 +417,7 @@ void LifelineImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHan
 	}
 }
 
-const std::shared_ptr<ecore::EClass>& LifelineImpl::eStaticClass() const
+std::shared_ptr<ecore::EClass> LifelineImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getLifeline_Class();
 }

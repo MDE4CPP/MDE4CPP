@@ -253,7 +253,7 @@ void EDataTypeImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHa
 	}
 }
 
-const std::shared_ptr<EClass>& EDataTypeImpl::eStaticClass() const
+std::shared_ptr<EClass> EDataTypeImpl::eStaticClass() const
 {
 	return ecore::ecorePackage::eInstance()->getEDataType_Class();
 }

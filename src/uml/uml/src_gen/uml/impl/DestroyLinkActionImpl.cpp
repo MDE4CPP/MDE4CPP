@@ -268,7 +268,7 @@ void DestroyLinkActionImpl::saveContent(std::shared_ptr<persistence::interfaces:
 	}
 }
 
-const std::shared_ptr<ecore::EClass>& DestroyLinkActionImpl::eStaticClass() const
+std::shared_ptr<ecore::EClass> DestroyLinkActionImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getDestroyLinkAction_Class();
 }

@@ -264,7 +264,7 @@ void DataStoreNodeImpl::saveContent(std::shared_ptr<persistence::interfaces::XSa
 	}
 }
 
-const std::shared_ptr<ecore::EClass>& DataStoreNodeImpl::eStaticClass() const
+std::shared_ptr<ecore::EClass> DataStoreNodeImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getDataStoreNode_Class();
 }

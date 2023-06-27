@@ -302,7 +302,7 @@ void VariableActionImpl::saveContent(std::shared_ptr<persistence::interfaces::XS
 	}
 }
 
-const std::shared_ptr<ecore::EClass>& VariableActionImpl::eStaticClass() const
+std::shared_ptr<ecore::EClass> VariableActionImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getVariableAction_Class();
 }

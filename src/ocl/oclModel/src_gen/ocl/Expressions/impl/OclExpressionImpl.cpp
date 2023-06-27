@@ -704,7 +704,7 @@ void OclExpressionImpl::saveContent(std::shared_ptr<persistence::interfaces::XSa
 	}
 }
 
-const std::shared_ptr<ecore::EClass>& OclExpressionImpl::eStaticClass() const
+std::shared_ptr<ecore::EClass> OclExpressionImpl::eStaticClass() const
 {
 	return ocl::Expressions::ExpressionsPackage::eInstance()->getOclExpression_Class();
 }

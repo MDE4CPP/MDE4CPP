@@ -74,7 +74,7 @@ namespace ecore
 			// Operations
 			//*********************************
 			virtual std::shared_ptr<Any> eAllContents() const = 0;
-			virtual const std::shared_ptr<ecore::EClass>& eClass() const = 0;
+			virtual std::shared_ptr<ecore::EClass> eClass() const = 0;
 			virtual std::shared_ptr<ecore::EObject> eContainer() = 0;
 			virtual std::shared_ptr<ecore::EStructuralFeature> eContainingFeature() const = 0;
 			virtual std::shared_ptr<ecore::EReference> eContainmentFeature() const = 0;

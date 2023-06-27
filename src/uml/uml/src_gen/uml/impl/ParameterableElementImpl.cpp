@@ -283,7 +283,7 @@ void ParameterableElementImpl::saveContent(std::shared_ptr<persistence::interfac
 	}
 }
 
-const std::shared_ptr<ecore::EClass>& ParameterableElementImpl::eStaticClass() const
+std::shared_ptr<ecore::EClass> ParameterableElementImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getParameterableElement_Class();
 }

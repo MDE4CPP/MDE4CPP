@@ -271,7 +271,7 @@ void CommentImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHand
 	}
 }
 
-const std::shared_ptr<ecore::EClass>& CommentImpl::eStaticClass() const
+std::shared_ptr<ecore::EClass> CommentImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getComment_Class();
 }

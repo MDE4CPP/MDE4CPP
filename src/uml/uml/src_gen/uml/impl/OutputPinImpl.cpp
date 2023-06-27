@@ -553,7 +553,7 @@ void OutputPinImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHa
 	}
 }
 
-const std::shared_ptr<ecore::EClass>& OutputPinImpl::eStaticClass() const
+std::shared_ptr<ecore::EClass> OutputPinImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getOutputPin_Class();
 }

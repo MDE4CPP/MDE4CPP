@@ -319,7 +319,7 @@ void ExecutionSpecificationImpl::saveContent(std::shared_ptr<persistence::interf
 	}
 }
 
-const std::shared_ptr<ecore::EClass>& ExecutionSpecificationImpl::eStaticClass() const
+std::shared_ptr<ecore::EClass> ExecutionSpecificationImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getExecutionSpecification_Class();
 }

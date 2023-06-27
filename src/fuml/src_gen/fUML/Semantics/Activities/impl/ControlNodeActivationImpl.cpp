@@ -209,7 +209,7 @@ void ControlNodeActivationImpl::saveContent(std::shared_ptr<persistence::interfa
 	}
 }
 
-const std::shared_ptr<ecore::EClass>& ControlNodeActivationImpl::eStaticClass() const
+std::shared_ptr<ecore::EClass> ControlNodeActivationImpl::eStaticClass() const
 {
 	return fUML::Semantics::Activities::ActivitiesPackage::eInstance()->getControlNodeActivation_Class();
 }

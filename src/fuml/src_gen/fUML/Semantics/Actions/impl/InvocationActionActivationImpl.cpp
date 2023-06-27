@@ -39,8 +39,8 @@
 
 #include <exception> // used in Persistence
 #include "fUML/Semantics/Actions/ActionsFactory.hpp"
-#include "fUML/Semantics/Activities/ActivitiesFactory.hpp"
 #include "uml/umlFactory.hpp"
+#include "fUML/Semantics/Activities/ActivitiesFactory.hpp"
 #include "uml/Action.hpp"
 #include "fUML/Semantics/Actions/ActionActivation.hpp"
 #include "fUML/Semantics/Activities/ActivityEdgeInstance.hpp"
@@ -204,7 +204,7 @@ void InvocationActionActivationImpl::saveContent(std::shared_ptr<persistence::in
 	}
 }
 
-const std::shared_ptr<ecore::EClass>& InvocationActionActivationImpl::eStaticClass() const
+std::shared_ptr<ecore::EClass> InvocationActionActivationImpl::eStaticClass() const
 {
 	return fUML::Semantics::Actions::ActionsPackage::eInstance()->getInvocationActionActivation_Class();
 }

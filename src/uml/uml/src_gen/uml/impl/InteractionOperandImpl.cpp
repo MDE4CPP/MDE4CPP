@@ -376,7 +376,7 @@ void InteractionOperandImpl::saveContent(std::shared_ptr<persistence::interfaces
 	}
 }
 
-const std::shared_ptr<ecore::EClass>& InteractionOperandImpl::eStaticClass() const
+std::shared_ptr<ecore::EClass> InteractionOperandImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getInteractionOperand_Class();
 }

@@ -380,7 +380,7 @@ void AssociationClassCallExpImpl::saveContent(std::shared_ptr<persistence::inter
 	}
 }
 
-const std::shared_ptr<ecore::EClass>& AssociationClassCallExpImpl::eStaticClass() const
+std::shared_ptr<ecore::EClass> AssociationClassCallExpImpl::eStaticClass() const
 {
 	return ocl::Expressions::ExpressionsPackage::eInstance()->getAssociationClassCallExp_Class();
 }

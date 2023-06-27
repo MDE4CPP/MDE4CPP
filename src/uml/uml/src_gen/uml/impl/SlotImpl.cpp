@@ -364,7 +364,7 @@ void SlotImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler
 	}
 }
 
-const std::shared_ptr<ecore::EClass>& SlotImpl::eStaticClass() const
+std::shared_ptr<ecore::EClass> SlotImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getSlot_Class();
 }

@@ -290,7 +290,7 @@ void PackageMergeImpl::saveContent(std::shared_ptr<persistence::interfaces::XSav
 	}
 }
 
-const std::shared_ptr<ecore::EClass>& PackageMergeImpl::eStaticClass() const
+std::shared_ptr<ecore::EClass> PackageMergeImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getPackageMerge_Class();
 }

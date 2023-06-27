@@ -309,7 +309,7 @@ void ActivityParameterNodeImpl::saveContent(std::shared_ptr<persistence::interfa
 	}
 }
 
-const std::shared_ptr<ecore::EClass>& ActivityParameterNodeImpl::eStaticClass() const
+std::shared_ptr<ecore::EClass> ActivityParameterNodeImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getActivityParameterNode_Class();
 }

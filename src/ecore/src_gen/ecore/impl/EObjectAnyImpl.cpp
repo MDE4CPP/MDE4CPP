@@ -176,7 +176,7 @@ void EObjectAnyImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLo
 		if ( iter != attr_list.end() )
 		{
 			// TODO this attribute has a non handle type
-			std::cout << "| ERROR    | " << __PRETTY_FUNCTION__ << " handle type of 'any'" << " org.eclipse.emf.ecore.impl.EDataTypeImpl@49aa766b (name: EJavaObject) (instanceClassName: java.lang.Object) (serializable: true)" << std::endl; 
+			std::cout << "| ERROR    | " << __PRETTY_FUNCTION__ << " handle type of 'any'" << " org.eclipse.emf.ecore.impl.EDataTypeImpl@562c877a (name: EJavaObject) (instanceClassName: java.lang.Object) (serializable: true)" << std::endl; 
 			std::shared_ptr<Any> value; 			this->setAny(value);
 		}
 	}
@@ -225,7 +225,7 @@ void EObjectAnyImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveH
 	}
 }
 
-const std::shared_ptr<EClass>& EObjectAnyImpl::eStaticClass() const
+std::shared_ptr<EClass> EObjectAnyImpl::eStaticClass() const
 {
 	return ecore::ecorePackage::eInstance()->getEObjectAny_Class();
 }

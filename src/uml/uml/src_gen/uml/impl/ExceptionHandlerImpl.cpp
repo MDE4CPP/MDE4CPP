@@ -350,7 +350,7 @@ void ExceptionHandlerImpl::saveContent(std::shared_ptr<persistence::interfaces::
 	}
 }
 
-const std::shared_ptr<ecore::EClass>& ExceptionHandlerImpl::eStaticClass() const
+std::shared_ptr<ecore::EClass> ExceptionHandlerImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getExceptionHandler_Class();
 }

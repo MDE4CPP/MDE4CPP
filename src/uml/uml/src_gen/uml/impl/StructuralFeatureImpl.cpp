@@ -265,7 +265,7 @@ void StructuralFeatureImpl::saveContent(std::shared_ptr<persistence::interfaces:
 	}
 }
 
-const std::shared_ptr<ecore::EClass>& StructuralFeatureImpl::eStaticClass() const
+std::shared_ptr<ecore::EClass> StructuralFeatureImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getStructuralFeature_Class();
 }

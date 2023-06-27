@@ -424,7 +424,7 @@ void EGenericTypeImpl::saveContent(std::shared_ptr<persistence::interfaces::XSav
 	}
 }
 
-const std::shared_ptr<EClass>& EGenericTypeImpl::eStaticClass() const
+std::shared_ptr<EClass> EGenericTypeImpl::eStaticClass() const
 {
 	return ecore::ecorePackage::eInstance()->getEGenericType_Class();
 }
@@ -580,7 +580,7 @@ bool EGenericTypeImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue
 	
 					if(eObjectList)
 					{
-						const std::shared_ptr<Bag<ecore::EGenericType>>& _eTypeArguments = getETypeArguments();
+						std::shared_ptr<Bag<ecore::EGenericType>> _eTypeArguments = getETypeArguments();
 	
 						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{

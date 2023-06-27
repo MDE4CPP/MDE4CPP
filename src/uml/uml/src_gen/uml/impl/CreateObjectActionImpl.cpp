@@ -354,7 +354,7 @@ void CreateObjectActionImpl::saveContent(std::shared_ptr<persistence::interfaces
 	}
 }
 
-const std::shared_ptr<ecore::EClass>& CreateObjectActionImpl::eStaticClass() const
+std::shared_ptr<ecore::EClass> CreateObjectActionImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getCreateObjectAction_Class();
 }

@@ -307,7 +307,7 @@ void ReadSelfActionImpl::saveContent(std::shared_ptr<persistence::interfaces::XS
 	}
 }
 
-const std::shared_ptr<ecore::EClass>& ReadSelfActionImpl::eStaticClass() const
+std::shared_ptr<ecore::EClass> ReadSelfActionImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getReadSelfAction_Class();
 }

@@ -355,7 +355,7 @@ void ClearAssociationActionImpl::saveContent(std::shared_ptr<persistence::interf
 	}
 }
 
-const std::shared_ptr<ecore::EClass>& ClearAssociationActionImpl::eStaticClass() const
+std::shared_ptr<ecore::EClass> ClearAssociationActionImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getClearAssociationAction_Class();
 }

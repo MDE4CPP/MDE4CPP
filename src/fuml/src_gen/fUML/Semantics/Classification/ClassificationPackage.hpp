@@ -14,11 +14,11 @@
 
 namespace ecore 
 {
-	class EAnnotation;
-	class EGenericType;
-	class EClass;
 	class EStringToStringMapEntry;
+	class EGenericType;
 	class EOperation;
+	class EAnnotation;
+	class EClass;
 }
 
 namespace fUML::Semantics::Classification 

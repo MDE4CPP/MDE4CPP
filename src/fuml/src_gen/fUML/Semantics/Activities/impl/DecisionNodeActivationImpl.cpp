@@ -668,7 +668,7 @@ void DecisionNodeActivationImpl::saveContent(std::shared_ptr<persistence::interf
 	}
 }
 
-const std::shared_ptr<ecore::EClass>& DecisionNodeActivationImpl::eStaticClass() const
+std::shared_ptr<ecore::EClass> DecisionNodeActivationImpl::eStaticClass() const
 {
 	return fUML::Semantics::Activities::ActivitiesPackage::eInstance()->getDecisionNodeActivation_Class();
 }

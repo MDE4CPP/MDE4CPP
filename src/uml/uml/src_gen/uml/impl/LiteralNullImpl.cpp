@@ -296,7 +296,7 @@ void LiteralNullImpl::saveContent(std::shared_ptr<persistence::interfaces::XSave
 	}
 }
 
-const std::shared_ptr<ecore::EClass>& LiteralNullImpl::eStaticClass() const
+std::shared_ptr<ecore::EClass> LiteralNullImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getLiteralNull_Class();
 }

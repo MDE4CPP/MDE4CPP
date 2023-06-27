@@ -317,7 +317,7 @@ void StartObjectBehaviorActionImpl::saveContent(std::shared_ptr<persistence::int
 	}
 }
 
-const std::shared_ptr<ecore::EClass>& StartObjectBehaviorActionImpl::eStaticClass() const
+std::shared_ptr<ecore::EClass> StartObjectBehaviorActionImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getStartObjectBehaviorAction_Class();
 }
