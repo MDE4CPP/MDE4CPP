@@ -7,15 +7,15 @@
 
 #include "abstractDataTypes/SubsetUnion.hpp"
 //metametamodel classes
-#include "ecore/EReference.hpp"
+#include "ecore/EStringToStringMapEntry.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EAttribute.hpp"
-#include "ecore/EDataType.hpp"
+#include "ecore/EReference.hpp"
 #include "ecore/EGenericType.hpp"
-#include "ecore/EClass.hpp"
-#include "ecore/EStringToStringMapEntry.hpp"
 #include "ecore/EOperation.hpp"
+#include "ecore/EClass.hpp"
 #include "ecore/EParameter.hpp"
+#include "ecore/EDataType.hpp"
 
 //depending model packages
 #include "ecore/ecorePackage.hpp"
@@ -231,6 +231,7 @@ void ActionsPackageImpl::createExpansionNodeActivationContent(std::shared_ptr<ec
 {
 	m_expansionNodeActivation_Class = factory->createEClass_as_eClassifiers_in_EPackage(package, EXPANSIONNODEACTIVATION_CLASS);
 	
+	m_expansionNodeActivation_Attribute_expansionNode = factory->createEReference_as_eReferences_in_EClass(m_expansionNodeActivation_Class, EXPANSIONNODEACTIVATION_ATTRIBUTE_EXPANSIONNODE);
 	
 	m_expansionNodeActivation_Operation_fire_Token = factory->createEOperation_as_eOperations_in_EClass(m_expansionNodeActivation_Class, EXPANSIONNODEACTIVATION_OPERATION_FIRE_TOKEN);
 	m_expansionNodeActivation_Operation_getExpansionRegionActivation = factory->createEOperation_as_eOperations_in_EClass(m_expansionNodeActivation_Class, EXPANSIONNODEACTIVATION_OPERATION_GETEXPANSIONREGIONACTIVATION);

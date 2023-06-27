@@ -42,8 +42,8 @@
 #include "fUML/Semantics/CommonBehavior/EventAccepter.hpp"
 #include "fUML/Semantics/CommonBehavior/EventOccurrence.hpp"
 //Factories and Package includes
-#include "fUML/Semantics/SemanticsPackage.hpp"
 #include "fUML/fUMLPackage.hpp"
+#include "fUML/Semantics/SemanticsPackage.hpp"
 #include "fUML/Semantics/Actions/ActionsPackage.hpp"
 #include "fUML/Semantics/CommonBehavior/CommonBehaviorPackage.hpp"
 
@@ -263,7 +263,7 @@ void AcceptEventActionEventAccepterImpl::saveContent(std::shared_ptr<persistence
 	}
 }
 
-const std::shared_ptr<ecore::EClass>& AcceptEventActionEventAccepterImpl::eStaticClass() const
+std::shared_ptr<ecore::EClass> AcceptEventActionEventAccepterImpl::eStaticClass() const
 {
 	return fUML::Semantics::Actions::ActionsPackage::eInstance()->getAcceptEventActionEventAccepter_Class();
 }

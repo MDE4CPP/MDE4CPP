@@ -40,8 +40,8 @@
 #include <exception> // used in Persistence
 #include "ecore/ecoreFactory.hpp"
 #include "fUML/Semantics/CommonBehavior/CommonBehaviorFactory.hpp"
-#include "uml/umlFactory.hpp"
 #include "fUML/Semantics/Loci/LociFactory.hpp"
+#include "uml/umlFactory.hpp"
 #include "uml/Class.hpp"
 #include "uml/Classifier.hpp"
 #include "uml/Comment.hpp"
@@ -129,6 +129,20 @@ void FUML_ObjectImpl::_register(const std::shared_ptr<fUML::Semantics::CommonBeh
     {
         this->getObjectActivation()->_register(accepter);
     }
+	//end of body
+}
+
+void FUML_ObjectImpl::destroy()
+{
+	//ADD_COUNT(__PRETTY_FUNCTION__)
+	//generated from body annotation
+	    if(this->getObjectActivation() != nullptr)
+    {
+        this->getObjectActivation()->stop();
+        this->setObjectActivation(nullptr);
+    }
+
+    this->getLocus()->remove(getThisFUML_ObjectPtr());
 	//end of body
 }
 
@@ -362,7 +376,7 @@ void FUML_ObjectImpl::saveContent(std::shared_ptr<persistence::interfaces::XSave
 	}
 }
 
-const std::shared_ptr<ecore::EClass>& FUML_ObjectImpl::eStaticClass() const
+std::shared_ptr<ecore::EClass> FUML_ObjectImpl::eStaticClass() const
 {
 	return fUML::MDE4CPP_Extensions::MDE4CPP_ExtensionsPackage::eInstance()->getFUML_Object_Class();
 }
@@ -504,6 +518,12 @@ std::shared_ptr<Any> FUML_ObjectImpl::eInvoke(int operationID, const std::shared
 			}
 		
 			this->_register(incoming_param_accepter);
+			break;
+		}
+		// fUML::MDE4CPP_Extensions::FUML_Object::destroy(): 4089641697
+		case MDE4CPP_ExtensionsPackage::FUML_OBJECT_OPERATION_DESTROY:
+		{
+			this->destroy();
 			break;
 		}
 		// fUML::MDE4CPP_Extensions::FUML_Object::getTypes() : uml::Classifier[*] {const}: 1742598842

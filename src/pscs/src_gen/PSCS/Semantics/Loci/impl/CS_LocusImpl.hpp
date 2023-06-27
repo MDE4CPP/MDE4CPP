@@ -43,7 +43,7 @@ namespace PSCS::Semantics::Loci
 			//*********************************
 			// Operations
 			//*********************************
-			virtual std::shared_ptr<uml::Element> instantiate(const std::shared_ptr<uml::Class>& type) ;
+			virtual std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_Object> instantiate(const std::shared_ptr<uml::Class>& type) ;
 			
 			//*********************************
 			// Attribute Getters & Setters
@@ -73,7 +73,7 @@ namespace PSCS::Semantics::Loci
 			virtual void saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const;
 
 		protected:
-			virtual const std::shared_ptr<ecore::EClass>& eStaticClass() const;
+			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
 
 			//*********************************
 			// EStructuralFeature Get/Set/IsSet

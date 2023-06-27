@@ -14,15 +14,15 @@
 
 namespace ecore 
 {
-	class EReference;
+	class EStringToStringMapEntry;
 	class EAnnotation;
 	class EAttribute;
-	class EDataType;
+	class EReference;
 	class EGenericType;
-	class EClass;
-	class EStringToStringMapEntry;
 	class EOperation;
+	class EClass;
 	class EParameter;
+	class EDataType;
 }
 
 namespace fUML::Semantics::Actions 
@@ -409,9 +409,10 @@ namespace fUML::Semantics::Actions
 			// Begin Class ExpansionNodeActivation
 			//Class and Feature IDs 
 			static const unsigned long EXPANSIONNODEACTIVATION_CLASS = 950888510;
-			static const unsigned int EXPANSIONNODEACTIVATION_CLASS_FEATURE_COUNT = 7;
+			static const unsigned int EXPANSIONNODEACTIVATION_CLASS_FEATURE_COUNT = 8;
 			static const unsigned int EXPANSIONNODEACTIVATION_CLASS_OPERATION_COUNT = 42;
 			
+			static const unsigned long EXPANSIONNODEACTIVATION_ATTRIBUTE_EXPANSIONNODE = 397274907;
 			
 			static const unsigned long EXPANSIONNODEACTIVATION_OPERATION_FIRE_TOKEN = 1479997855;
 			static const unsigned long EXPANSIONNODEACTIVATION_OPERATION_GETEXPANSIONREGIONACTIVATION = 932977362;
@@ -422,6 +423,7 @@ namespace fUML::Semantics::Actions
 			virtual const std::shared_ptr<ecore::EClass>& getExpansionNodeActivation_Class() const = 0;
 			
 			
+			virtual const std::shared_ptr<ecore::EReference>& getExpansionNodeActivation_Attribute_expansionNode() const = 0;
 			
 			virtual const std::shared_ptr<ecore::EOperation>& getExpansionNodeActivation_Operation_fire_Token() const = 0;
 			virtual const std::shared_ptr<ecore::EOperation>& getExpansionNodeActivation_Operation_getExpansionRegionActivation() const = 0;

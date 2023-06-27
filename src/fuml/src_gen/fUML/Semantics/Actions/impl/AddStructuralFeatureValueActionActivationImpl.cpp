@@ -61,8 +61,8 @@
 #include "fUML/Semantics/Activities/Token.hpp"
 #include "fUML/Semantics/Actions/WriteStructuralFeatureActionActivation.hpp"
 //Factories and Package includes
-#include "fUML/Semantics/SemanticsPackage.hpp"
 #include "fUML/fUMLPackage.hpp"
+#include "fUML/Semantics/SemanticsPackage.hpp"
 #include "fUML/Semantics/Actions/ActionsPackage.hpp"
 #include "fUML/Semantics/Activities/ActivitiesPackage.hpp"
 #include "uml/umlPackage.hpp"
@@ -146,8 +146,8 @@ void AddStructuralFeatureValueActionActivationImpl::doAction()
 	// If isReplaceAll is true, first remove all current matching links or feature values.
 	// If isReplaceAll is false and there is an insertAt pin, insert the value at the appropriate position.
 
-	std::shared_ptr<uml::AddStructuralFeatureValueAction> action = this->getAddStructuralFeatureValueAction();
-	std::shared_ptr<uml::StructuralFeature> feature = action->getStructuralFeature();
+	const std::shared_ptr<uml::AddStructuralFeatureValueAction>& action = this->getAddStructuralFeatureValueAction();
+	const std::shared_ptr<uml::StructuralFeature>& feature = action->getStructuralFeature();
 
 	std::shared_ptr<uml::Property> property = std::dynamic_pointer_cast<uml::Property>(feature);
 
@@ -164,7 +164,7 @@ void AddStructuralFeatureValueActionActivationImpl::doAction()
 	std::string objectPinName = action->getObject()->getName();
 	if((objectPinName.empty()) || (objectPinName.find("self") == 0)){
 		//value is set to the context of the current activity execution
-		std::shared_ptr<uml::Element> context = this->getActivityExecution()->getContext();
+		const std::shared_ptr<uml::Element>& context = this->getActivityExecution()->getContext();
 			
 		value = eUMLAny(context, context->getMetaElementID());
 	}
@@ -176,7 +176,7 @@ void AddStructuralFeatureValueActionActivationImpl::doAction()
 	std::shared_ptr<Bag<Any>> inputValues = takeTokens(action->getValue());
 
 	// NOTE: Multiplicity of the value input pin is required to be 1..1.
-	std::shared_ptr<Any> inputValue = inputValues->at(0);
+	const std::shared_ptr<Any>& inputValue = inputValues->at(0);
 
 	int insertAt = -1;
 	if (action->getInsertAt() != nullptr)
@@ -476,7 +476,7 @@ void AddStructuralFeatureValueActionActivationImpl::saveContent(std::shared_ptr<
 	}
 }
 
-const std::shared_ptr<ecore::EClass>& AddStructuralFeatureValueActionActivationImpl::eStaticClass() const
+std::shared_ptr<ecore::EClass> AddStructuralFeatureValueActionActivationImpl::eStaticClass() const
 {
 	return fUML::Semantics::Actions::ActionsPackage::eInstance()->getAddStructuralFeatureValueActionActivation_Class();
 }
