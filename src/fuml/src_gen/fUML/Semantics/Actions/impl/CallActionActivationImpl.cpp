@@ -54,10 +54,10 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "fUML/Semantics/Actions/ActionsFactory.hpp"
-#include "fUML/Semantics/CommonBehavior/CommonBehaviorFactory.hpp"
-#include "fUML/Semantics/Activities/ActivitiesFactory.hpp"
 #include "uml/umlFactory.hpp"
+#include "fUML/Semantics/Actions/ActionsFactory.hpp"
+#include "fUML/Semantics/Activities/ActivitiesFactory.hpp"
+#include "fUML/Semantics/CommonBehavior/CommonBehaviorFactory.hpp"
 #include "uml/Action.hpp"
 #include "fUML/Semantics/Activities/ActivityEdgeInstance.hpp"
 #include "uml/ActivityNode.hpp"
@@ -72,8 +72,8 @@
 #include "fUML/Semantics/Actions/PinActivation.hpp"
 #include "fUML/Semantics/Activities/Token.hpp"
 //Factories and Package includes
-#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/SemanticsPackage.hpp"
+#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/Actions/ActionsPackage.hpp"
 #include "fUML/Semantics/Activities/ActivitiesPackage.hpp"
 #include "fUML/Semantics/CommonBehavior/CommonBehaviorPackage.hpp"
@@ -144,9 +144,9 @@ void CallActionActivationImpl::doAction()
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
-	const std::shared_ptr<uml::CallAction>& callAction = this->getCallAction();
-	const std::shared_ptr<Bag<uml::InputPin>>& argumentPins = callAction->getArgument();
-	const std::shared_ptr<Subset<fUML::Semantics::Actions::InputPinActivation, fUML::Semantics::Actions::PinActivation>>& inputActivationList = this->getInputPinActivation();
+	std::shared_ptr<uml::CallAction> callAction = this->getCallAction();
+	std::shared_ptr<Bag<uml::InputPin>> argumentPins = callAction->getArgument();
+	std::shared_ptr<Subset<fUML::Semantics::Actions::InputPinActivation, fUML::Semantics::Actions::PinActivation>> inputActivationList = this->getInputPinActivation();
 
 	unsigned int inputPinNumber = 0;
 	
@@ -156,7 +156,7 @@ void CallActionActivationImpl::doAction()
 	
 	for (unsigned int i=0; i<size; i++)
 	{
-		const std::shared_ptr<uml::Parameter>& parameter = parameterList->at(i);
+		std::shared_ptr<uml::Parameter> parameter = parameterList->at(i);
 		uml::ParameterDirectionKind direction = parameter->getDirection();
 		
 		if (direction == uml::ParameterDirectionKind::IN || direction == uml::ParameterDirectionKind::INOUT)
@@ -165,7 +165,7 @@ void CallActionActivationImpl::doAction()
 			parameterValue->setParameter(parameter);
 
 			// get corresponding pin (pin and parameter list should be synchronized)
-			const std::shared_ptr<uml::InputPin>& correspondingInputpin = argumentPins->at(i);
+			std::shared_ptr<uml::InputPin> correspondingInputpin = argumentPins->at(i);
 			std::string pinName = correspondingInputpin->getName();
 
 			// if pin name starts with 'self', get values from context attribute
@@ -231,7 +231,7 @@ void CallActionActivationImpl::doAction()
 				std::shared_ptr<Bag<fUML::Semantics::Activities::Token> > tokenList = activation->takeUnofferedTokens();
 				for(const std::shared_ptr<fUML::Semantics::Activities::Token>& token : *tokenList)
 				{
-					const std::shared_ptr<Any>& value = token->getValue();
+					std::shared_ptr<Any> value = token->getValue();
 					if(value != nullptr)
 					{
 						DEBUG_INFO("Target: "<<value->toString() << ".")
@@ -249,21 +249,21 @@ void CallActionActivationImpl::doAction()
 	
 	if(outputParameterValues)
 	{
-		const std::shared_ptr<Bag<uml::OutputPin>>& resultPins = callAction->getResult();
-		const std::shared_ptr<Subset<fUML::Semantics::Actions::OutputPinActivation, fUML::Semantics::Actions::PinActivation>>& outputActivationList=this->getOutputPinActivation();
+		std::shared_ptr<Bag<uml::OutputPin>> resultPins = callAction->getResult();
+		std::shared_ptr<Subset<fUML::Semantics::Actions::OutputPinActivation, fUML::Semantics::Actions::PinActivation>> outputActivationList=this->getOutputPinActivation();
 		unsigned int outputPinNumber = 0;
-		for (const std::shared_ptr<uml::Parameter>& parameter : *parameterList)
+		for (std::shared_ptr<uml::Parameter> parameter : *parameterList)
 		{
 			if (!(parameter->getDirection() == uml::ParameterDirectionKind::IN))
 			{
-				for (const std::shared_ptr<fUML::Semantics::CommonBehavior::ParameterValue>& outputParameterValue : *outputParameterValues)
+				for (std::shared_ptr<fUML::Semantics::CommonBehavior::ParameterValue> outputParameterValue : *outputParameterValues)
 				{
 					if (outputParameterValue->getParameter() == parameter)
 					{
-						const std::shared_ptr<fUML::Semantics::Actions::OutputPinActivation>& resultPinActivation = outputActivationList->at(outputPinNumber);
-						const std::shared_ptr<Bag<Any>>& values = outputParameterValue->getValues();
+						std::shared_ptr<fUML::Semantics::Actions::OutputPinActivation> resultPinActivation = outputActivationList->at(outputPinNumber);
+						std::shared_ptr<Bag<Any>> values = outputParameterValue->getValues();
 
-						for (const std::shared_ptr<Any>& value : *values)
+						for (std::shared_ptr<Any> value : *values)
 						{
 							DEBUG_INFO("Creating outgoing ObjectToken for CallAction '" << callAction ->getName() << "'.")
 
@@ -485,7 +485,7 @@ void CallActionActivationImpl::saveContent(std::shared_ptr<persistence::interfac
 	}
 }
 
-std::shared_ptr<ecore::EClass> CallActionActivationImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& CallActionActivationImpl::eStaticClass() const
 {
 	return fUML::Semantics::Actions::ActionsPackage::eInstance()->getCallActionActivation_Class();
 }

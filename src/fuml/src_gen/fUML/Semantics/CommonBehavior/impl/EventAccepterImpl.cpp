@@ -39,8 +39,8 @@
 #include <exception> // used in Persistence
 #include "fUML/Semantics/CommonBehavior/EventOccurrence.hpp"
 //Factories and Package includes
-#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/SemanticsPackage.hpp"
+#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/CommonBehavior/CommonBehaviorPackage.hpp"
 
 using namespace fUML::Semantics::CommonBehavior;
@@ -182,7 +182,7 @@ void EventAccepterImpl::saveContent(std::shared_ptr<persistence::interfaces::XSa
 	}
 }
 
-std::shared_ptr<ecore::EClass> EventAccepterImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& EventAccepterImpl::eStaticClass() const
 {
 	return fUML::Semantics::CommonBehavior::CommonBehaviorPackage::eInstance()->getEventAccepter_Class();
 }

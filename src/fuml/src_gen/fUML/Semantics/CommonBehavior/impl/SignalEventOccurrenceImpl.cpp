@@ -42,19 +42,16 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "fUML/MDE4CPP_Extensions/MDE4CPP_ExtensionsFactory.hpp"
 #include "uml/umlFactory.hpp"
 #include "uml/Element.hpp"
 #include "uml/Event.hpp"
 #include "fUML/Semantics/CommonBehavior/EventOccurrence.hpp"
-#include "fUML/MDE4CPP_Extensions/FUML_SignalInstance.hpp"
 #include "fUML/Semantics/CommonBehavior/ParameterValue.hpp"
 #include "uml/Trigger.hpp"
 //Factories and Package includes
-#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/SemanticsPackage.hpp"
+#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/CommonBehavior/CommonBehaviorPackage.hpp"
-#include "fUML/MDE4CPP_Extensions/MDE4CPP_ExtensionsPackage.hpp"
 #include "uml/umlPackage.hpp"
 
 using namespace fUML::Semantics::CommonBehavior;
@@ -134,8 +131,8 @@ std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> SignalEven
 	{
 		DEBUG_INFO("Found Signal Event, passing ParameterValues on.")
 
-		const std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_SignalInstance>& signalInstance = this->getSignalInstance();
-		std::shared_ptr<Bag<uml::Property>> memberFeatures = signalInstance->getType()->getAllAttributes();
+		const std::shared_ptr<uml::Element>& signalInstance = this->getSignalInstance();
+		std::shared_ptr<Bag<uml::Property>> memberFeatures = signalInstance->getMetaClass()->getAllAttributes();
 
 		for(const std::shared_ptr<uml::Property>& feature : *memberFeatures)
 		{
@@ -162,11 +159,11 @@ bool SignalEventOccurrenceImpl::match(const std::shared_ptr<uml::Trigger>& trigg
 	{
 		DEBUG_INFO("Found a SignalEvent, trying to match.")
 
-		const std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_SignalInstance>& signalInstance = this->getSignalInstance();
+		const std::shared_ptr<uml::Element>& signalInstance = this->getSignalInstance();
 
-		matches = (signalInstance->getType()->_getID() == signalEvent->getSignal()->_getID());
+		matches = (signalInstance->getMetaClass()->_getID() == signalEvent->getSignal()->_getID());
 	}
-	return matches;
+	return matches;	
 	//end of body
 }
 
@@ -178,11 +175,11 @@ bool SignalEventOccurrenceImpl::match(const std::shared_ptr<uml::Trigger>& trigg
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference signalInstance */
-const std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_SignalInstance>& SignalEventOccurrenceImpl::getSignalInstance() const
+const std::shared_ptr<uml::Element>& SignalEventOccurrenceImpl::getSignalInstance() const
 {
     return m_signalInstance;
 }
-void SignalEventOccurrenceImpl::setSignalInstance(const std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_SignalInstance>& _signalInstance)
+void SignalEventOccurrenceImpl::setSignalInstance(const std::shared_ptr<uml::Element>& _signalInstance)
 {
     m_signalInstance = _signalInstance;
 	
@@ -260,7 +257,7 @@ void SignalEventOccurrenceImpl::resolveReferences(const int featureID, std::vect
 			if (references.size() == 1)
 			{
 				// Cast object to correct type
-				std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_SignalInstance> _signalInstance = std::dynamic_pointer_cast<fUML::MDE4CPP_Extensions::FUML_SignalInstance>( references.front() );
+				std::shared_ptr<uml::Element> _signalInstance = std::dynamic_pointer_cast<uml::Element>( references.front() );
 				setSignalInstance(_signalInstance);
 			}
 			
@@ -285,7 +282,7 @@ void SignalEventOccurrenceImpl::saveContent(std::shared_ptr<persistence::interfa
 	{
 		std::shared_ptr<fUML::Semantics::CommonBehavior::CommonBehaviorPackage> package = fUML::Semantics::CommonBehavior::CommonBehaviorPackage::eInstance();
 	// Add references
-		saveHandler->addReference(this->getSignalInstance(), "signalInstance", getSignalInstance()->eClass() != fUML::MDE4CPP_Extensions::MDE4CPP_ExtensionsPackage::eInstance()->getFUML_SignalInstance_Class()); 
+		saveHandler->addReference(this->getSignalInstance(), "signalInstance", getSignalInstance()->eClass() != uml::umlPackage::eInstance()->getElement_Class()); 
 	}
 	catch (std::exception& e)
 	{
@@ -293,7 +290,7 @@ void SignalEventOccurrenceImpl::saveContent(std::shared_ptr<persistence::interfa
 	}
 }
 
-std::shared_ptr<ecore::EClass> SignalEventOccurrenceImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& SignalEventOccurrenceImpl::eStaticClass() const
 {
 	return fUML::Semantics::CommonBehavior::CommonBehaviorPackage::eInstance()->getSignalEventOccurrence_Class();
 }
@@ -306,7 +303,7 @@ std::shared_ptr<Any> SignalEventOccurrenceImpl::eGet(int featureID, bool resolve
 	switch(featureID)
 	{
 		case fUML::Semantics::CommonBehavior::CommonBehaviorPackage::SIGNALEVENTOCCURRENCE_ATTRIBUTE_SIGNALINSTANCE:
-			return eAny(getSignalInstance(),fUML::MDE4CPP_Extensions::MDE4CPP_ExtensionsPackage::FUML_SIGNALINSTANCE_CLASS,false); //1071
+			return eAny(getSignalInstance(),uml::umlPackage::ELEMENT_CLASS,false); //1061
 	}
 	return EventOccurrenceImpl::eGet(featureID, resolve, coreType);
 }
@@ -316,7 +313,7 @@ bool SignalEventOccurrenceImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case fUML::Semantics::CommonBehavior::CommonBehaviorPackage::SIGNALEVENTOCCURRENCE_ATTRIBUTE_SIGNALINSTANCE:
-			return getSignalInstance() != nullptr; //1071
+			return getSignalInstance() != nullptr; //1061
 	}
 	return EventOccurrenceImpl::internalEIsSet(featureID);
 }
@@ -333,10 +330,10 @@ bool SignalEventOccurrenceImpl::eSet(int featureID,  const std::shared_ptr<Any>&
 				try
 				{
 					std::shared_ptr<ecore::EObject> eObject = ecoreAny->getAsEObject();
-					std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_SignalInstance> _signalInstance = std::dynamic_pointer_cast<fUML::MDE4CPP_Extensions::FUML_SignalInstance>(eObject);
+					std::shared_ptr<uml::Element> _signalInstance = std::dynamic_pointer_cast<uml::Element>(eObject);
 					if(_signalInstance)
 					{
-						setSignalInstance(_signalInstance); //1071
+						setSignalInstance(_signalInstance); //1061
 					}
 					else
 					{

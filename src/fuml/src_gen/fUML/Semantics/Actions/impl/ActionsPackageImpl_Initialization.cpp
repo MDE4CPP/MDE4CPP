@@ -4,15 +4,15 @@
 
 #include "abstractDataTypes/SubsetUnion.hpp"
 //metametamodel classes
-#include "ecore/EStringToStringMapEntry.hpp"
+#include "ecore/EReference.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EAttribute.hpp"
-#include "ecore/EReference.hpp"
-#include "ecore/EGenericType.hpp"
-#include "ecore/EOperation.hpp"
-#include "ecore/EClass.hpp"
-#include "ecore/EParameter.hpp"
 #include "ecore/EDataType.hpp"
+#include "ecore/EGenericType.hpp"
+#include "ecore/EClass.hpp"
+#include "ecore/EStringToStringMapEntry.hpp"
+#include "ecore/EOperation.hpp"
+#include "ecore/EParameter.hpp"
 
 // metametamodel factory
 #include "ecore/ecoreFactory.hpp"
@@ -1633,22 +1633,6 @@ void ActionsPackageImpl::initializeExpansionNodeActivationContent()
 	/*
 	 * EReferences
 	 */
-	m_expansionNodeActivation_Attribute_expansionNode->setName("expansionNode");
-	m_expansionNodeActivation_Attribute_expansionNode->setEType(uml::umlPackage::eInstance()->getExpansionNode_Class());
-	m_expansionNodeActivation_Attribute_expansionNode->setLowerBound(1);
-	m_expansionNodeActivation_Attribute_expansionNode->setUpperBound(1);
-	m_expansionNodeActivation_Attribute_expansionNode->setTransient(false);
-	m_expansionNodeActivation_Attribute_expansionNode->setVolatile(false);
-	m_expansionNodeActivation_Attribute_expansionNode->setChangeable(true);
-	m_expansionNodeActivation_Attribute_expansionNode->setUnsettable(false);
-	m_expansionNodeActivation_Attribute_expansionNode->setUnique(true);
-	m_expansionNodeActivation_Attribute_expansionNode->setDerived(false);
-	m_expansionNodeActivation_Attribute_expansionNode->setOrdered(true);
-	m_expansionNodeActivation_Attribute_expansionNode->setContainment(false);
-	m_expansionNodeActivation_Attribute_expansionNode->setResolveProxies(true);
-	m_expansionNodeActivation_Attribute_expansionNode->setDefaultValueLiteral("");	
-	
-	m_expansionNodeActivation_Attribute_expansionNode->_setID(EXPANSIONNODEACTIVATION_ATTRIBUTE_EXPANSIONNODE);
 	
 	/*
 	 * EOperations
