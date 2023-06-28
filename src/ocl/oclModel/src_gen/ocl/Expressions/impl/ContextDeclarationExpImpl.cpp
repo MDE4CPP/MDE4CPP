@@ -297,7 +297,7 @@ void ContextDeclarationExpImpl::loadNode(std::string nodeName, std::shared_ptr<p
 	OclExpressionImpl::loadNode(nodeName, loadHandler);
 }
 
-void ContextDeclarationExpImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
+void ContextDeclarationExpImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject>> references)
 {
 	OclExpressionImpl::resolveReferences(featureID, references);
 }

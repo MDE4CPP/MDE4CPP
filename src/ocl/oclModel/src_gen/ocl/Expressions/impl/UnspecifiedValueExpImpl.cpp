@@ -305,7 +305,7 @@ void UnspecifiedValueExpImpl::loadNode(std::string nodeName, std::shared_ptr<per
 	OclExpressionImpl::loadNode(nodeName, loadHandler);
 }
 
-void UnspecifiedValueExpImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
+void UnspecifiedValueExpImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject>> references)
 {
 	OclExpressionImpl::resolveReferences(featureID, references);
 }

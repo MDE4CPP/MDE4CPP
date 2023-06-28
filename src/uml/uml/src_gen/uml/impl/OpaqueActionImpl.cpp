@@ -436,7 +436,7 @@ void OpaqueActionImpl::loadNode(std::string nodeName, std::shared_ptr<persistenc
 	ActionImpl::loadNode(nodeName, loadHandler);
 }
 
-void OpaqueActionImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
+void OpaqueActionImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject>> references)
 {
 	ActionImpl::resolveReferences(featureID, references);
 }

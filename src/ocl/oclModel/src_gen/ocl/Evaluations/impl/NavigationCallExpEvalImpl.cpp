@@ -39,8 +39,8 @@
 
 #include <exception> // used in Persistence
 #include "ecore/ecoreFactory.hpp"
-#include "ocl/Expressions/ExpressionsFactory.hpp"
 #include "ocl/Evaluations/EvaluationsFactory.hpp"
+#include "ocl/Expressions/ExpressionsFactory.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClassifier.hpp"
 #include "ecore/EGenericType.hpp"
@@ -221,7 +221,7 @@ void NavigationCallExpEvalImpl::loadNode(std::string nodeName, std::shared_ptr<p
 	ModelPropertyCallExpEvalImpl::loadNode(nodeName, loadHandler);
 }
 
-void NavigationCallExpEvalImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
+void NavigationCallExpEvalImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject>> references)
 {
 	switch(featureID)
 	{

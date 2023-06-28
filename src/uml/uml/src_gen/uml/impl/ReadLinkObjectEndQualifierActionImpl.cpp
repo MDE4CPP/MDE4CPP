@@ -325,7 +325,7 @@ void ReadLinkObjectEndQualifierActionImpl::loadNode(std::string nodeName, std::s
 	ActionImpl::loadNode(nodeName, loadHandler);
 }
 
-void ReadLinkObjectEndQualifierActionImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
+void ReadLinkObjectEndQualifierActionImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject>> references)
 {
 	switch(featureID)
 	{

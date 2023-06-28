@@ -277,7 +277,7 @@ void InterfaceRealizationImpl::loadNode(std::string nodeName, std::shared_ptr<pe
 	RealizationImpl::loadNode(nodeName, loadHandler);
 }
 
-void InterfaceRealizationImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
+void InterfaceRealizationImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject>> references)
 {
 	switch(featureID)
 	{

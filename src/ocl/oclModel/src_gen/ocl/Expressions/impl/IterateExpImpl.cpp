@@ -38,8 +38,8 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "ecore/ecoreFactory.hpp"
 #include "ocl/Expressions/ExpressionsFactory.hpp"
+#include "ecore/ecoreFactory.hpp"
 #include "ocl/Evaluations/EvaluationsFactory.hpp"
 #include "ocl/Expressions/CallExp.hpp"
 #include "ocl/Expressions/CollectionRange.hpp"
@@ -345,7 +345,7 @@ void IterateExpImpl::loadNode(std::string nodeName, std::shared_ptr<persistence:
 	LoopExpImpl::loadNode(nodeName, loadHandler);
 }
 
-void IterateExpImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
+void IterateExpImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject>> references)
 {
 	LoopExpImpl::resolveReferences(featureID, references);
 }

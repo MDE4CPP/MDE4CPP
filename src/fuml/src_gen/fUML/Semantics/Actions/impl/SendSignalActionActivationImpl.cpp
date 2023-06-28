@@ -64,8 +64,8 @@
 #include "uml/SendSignalAction.hpp"
 #include "fUML/Semantics/Activities/Token.hpp"
 //Factories and Package includes
-#include "fUML/Semantics/SemanticsPackage.hpp"
 #include "fUML/fUMLPackage.hpp"
+#include "fUML/Semantics/SemanticsPackage.hpp"
 #include "fUML/Semantics/Actions/ActionsPackage.hpp"
 #include "fUML/Semantics/Activities/ActivitiesPackage.hpp"
 #include "uml/umlPackage.hpp"
@@ -335,7 +335,7 @@ void SendSignalActionActivationImpl::loadNode(std::string nodeName, std::shared_
 	InvocationActionActivationImpl::loadNode(nodeName, loadHandler);
 }
 
-void SendSignalActionActivationImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
+void SendSignalActionActivationImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject>> references)
 {
 	switch(featureID)
 	{

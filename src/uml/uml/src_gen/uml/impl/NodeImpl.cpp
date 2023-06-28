@@ -346,7 +346,7 @@ void NodeImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::inter
 	DeploymentTargetImpl::loadNode(nodeName, loadHandler);
 }
 
-void NodeImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
+void NodeImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject>> references)
 {
 	ClassImpl::resolveReferences(featureID, references);
 	DeploymentTargetImpl::resolveReferences(featureID, references);

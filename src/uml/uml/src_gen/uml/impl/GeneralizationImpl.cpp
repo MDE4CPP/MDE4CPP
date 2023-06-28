@@ -271,7 +271,7 @@ void GeneralizationImpl::loadNode(std::string nodeName, std::shared_ptr<persiste
 	DirectedRelationshipImpl::loadNode(nodeName, loadHandler);
 }
 
-void GeneralizationImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
+void GeneralizationImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject>> references)
 {
 	switch(featureID)
 	{

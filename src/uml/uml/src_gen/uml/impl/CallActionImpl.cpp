@@ -334,7 +334,7 @@ void CallActionImpl::loadNode(std::string nodeName, std::shared_ptr<persistence:
 	InvocationActionImpl::loadNode(nodeName, loadHandler);
 }
 
-void CallActionImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
+void CallActionImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject>> references)
 {
 	InvocationActionImpl::resolveReferences(featureID, references);
 }

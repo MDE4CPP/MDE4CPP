@@ -191,7 +191,7 @@ void EParameterImpl::loadNode(std::string nodeName, std::shared_ptr<persistence:
 	ETypedElementImpl::loadNode(nodeName, loadHandler);
 }
 
-void EParameterImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<EObject> > references)
+void EParameterImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<EObject>> references)
 {
 	ETypedElementImpl::resolveReferences(featureID, references);
 }

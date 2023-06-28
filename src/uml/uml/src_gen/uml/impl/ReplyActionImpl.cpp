@@ -361,7 +361,7 @@ void ReplyActionImpl::loadNode(std::string nodeName, std::shared_ptr<persistence
 	ActionImpl::loadNode(nodeName, loadHandler);
 }
 
-void ReplyActionImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
+void ReplyActionImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject>> references)
 {
 	switch(featureID)
 	{

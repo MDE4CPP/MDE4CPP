@@ -223,7 +223,7 @@ void GateImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::inter
 	MessageEndImpl::loadNode(nodeName, loadHandler);
 }
 
-void GateImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
+void GateImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject>> references)
 {
 	MessageEndImpl::resolveReferences(featureID, references);
 }

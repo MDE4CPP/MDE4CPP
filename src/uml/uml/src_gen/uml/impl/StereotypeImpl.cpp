@@ -387,7 +387,7 @@ void StereotypeImpl::loadNode(std::string nodeName, std::shared_ptr<persistence:
 	ClassImpl::loadNode(nodeName, loadHandler);
 }
 
-void StereotypeImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
+void StereotypeImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject>> references)
 {
 	ClassImpl::resolveReferences(featureID, references);
 }

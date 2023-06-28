@@ -343,7 +343,7 @@ void ExpansionRegionImpl::loadNode(std::string nodeName, std::shared_ptr<persist
 	StructuredActivityNodeImpl::loadNode(nodeName, loadHandler);
 }
 
-void ExpansionRegionImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
+void ExpansionRegionImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject>> references)
 {
 	switch(featureID)
 	{

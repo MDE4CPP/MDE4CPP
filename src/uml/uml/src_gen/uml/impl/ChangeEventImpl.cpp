@@ -254,7 +254,7 @@ void ChangeEventImpl::loadNode(std::string nodeName, std::shared_ptr<persistence
 	EventImpl::loadNode(nodeName, loadHandler);
 }
 
-void ChangeEventImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
+void ChangeEventImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject>> references)
 {
 	EventImpl::resolveReferences(featureID, references);
 }

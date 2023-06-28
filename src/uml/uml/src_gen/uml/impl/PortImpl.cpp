@@ -501,7 +501,7 @@ void PortImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::inter
 	PropertyImpl::loadNode(nodeName, loadHandler);
 }
 
-void PortImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
+void PortImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject>> references)
 {
 	switch(featureID)
 	{

@@ -306,7 +306,7 @@ void SequenceNodeImpl::loadNode(std::string nodeName, std::shared_ptr<persistenc
 	StructuredActivityNodeImpl::loadNode(nodeName, loadHandler);
 }
 
-void SequenceNodeImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
+void SequenceNodeImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject>> references)
 {
 	StructuredActivityNodeImpl::resolveReferences(featureID, references);
 }

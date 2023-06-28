@@ -337,7 +337,7 @@ void StringLiteralExpImpl::loadNode(std::string nodeName, std::shared_ptr<persis
 	PrimitiveLiteralExpImpl::loadNode(nodeName, loadHandler);
 }
 
-void StringLiteralExpImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
+void StringLiteralExpImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject>> references)
 {
 	PrimitiveLiteralExpImpl::resolveReferences(featureID, references);
 }

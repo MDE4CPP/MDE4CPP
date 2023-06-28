@@ -255,7 +255,7 @@ void StateInvariantImpl::loadNode(std::string nodeName, std::shared_ptr<persiste
 	InteractionFragmentImpl::loadNode(nodeName, loadHandler);
 }
 
-void StateInvariantImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
+void StateInvariantImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject>> references)
 {
 	InteractionFragmentImpl::resolveReferences(featureID, references);
 }

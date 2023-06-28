@@ -363,7 +363,7 @@ void LinkActionImpl::loadNode(std::string nodeName, std::shared_ptr<persistence:
 	ActionImpl::loadNode(nodeName, loadHandler);
 }
 
-void LinkActionImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
+void LinkActionImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject>> references)
 {
 	ActionImpl::resolveReferences(featureID, references);
 }

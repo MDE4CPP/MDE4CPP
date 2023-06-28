@@ -201,7 +201,7 @@ void IterateExpEvalImpl::loadNode(std::string nodeName, std::shared_ptr<persiste
 	LoopExpEvalImpl::loadNode(nodeName, loadHandler);
 }
 
-void IterateExpEvalImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
+void IterateExpEvalImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject>> references)
 {
 	switch(featureID)
 	{

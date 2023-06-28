@@ -312,7 +312,7 @@ void ObjectFlowImpl::loadNode(std::string nodeName, std::shared_ptr<persistence:
 	ActivityEdgeImpl::loadNode(nodeName, loadHandler);
 }
 
-void ObjectFlowImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
+void ObjectFlowImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject>> references)
 {
 	switch(featureID)
 	{

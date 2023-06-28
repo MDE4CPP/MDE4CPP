@@ -244,7 +244,7 @@ void DurationIntervalImpl::loadNode(std::string nodeName, std::shared_ptr<persis
 	IntervalImpl::loadNode(nodeName, loadHandler);
 }
 
-void DurationIntervalImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
+void DurationIntervalImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject>> references)
 {
 	IntervalImpl::resolveReferences(featureID, references);
 }

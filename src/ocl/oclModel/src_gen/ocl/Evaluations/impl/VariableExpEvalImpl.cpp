@@ -39,8 +39,8 @@
 
 #include <exception> // used in Persistence
 #include "ecore/ecoreFactory.hpp"
-#include "ocl/Expressions/ExpressionsFactory.hpp"
 #include "ocl/Evaluations/EvaluationsFactory.hpp"
+#include "ocl/Expressions/ExpressionsFactory.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClassifier.hpp"
 #include "ecore/EGenericType.hpp"
@@ -201,7 +201,7 @@ void VariableExpEvalImpl::loadNode(std::string nodeName, std::shared_ptr<persist
 	OclExpEvalImpl::loadNode(nodeName, loadHandler);
 }
 
-void VariableExpEvalImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
+void VariableExpEvalImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject>> references)
 {
 	OclExpEvalImpl::resolveReferences(featureID, references);
 }

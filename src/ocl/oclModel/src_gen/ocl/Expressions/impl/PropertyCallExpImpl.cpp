@@ -38,8 +38,8 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "ecore/ecoreFactory.hpp"
 #include "ocl/Expressions/ExpressionsFactory.hpp"
+#include "ecore/ecoreFactory.hpp"
 #include "ocl/Evaluations/EvaluationsFactory.hpp"
 #include "ocl/Expressions/CallExp.hpp"
 #include "ocl/Expressions/CollectionRange.hpp"
@@ -337,7 +337,7 @@ void PropertyCallExpImpl::loadNode(std::string nodeName, std::shared_ptr<persist
 	NavigationCallExpImpl::loadNode(nodeName, loadHandler);
 }
 
-void PropertyCallExpImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
+void PropertyCallExpImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject>> references)
 {
 	NavigationCallExpImpl::resolveReferences(featureID, references);
 }

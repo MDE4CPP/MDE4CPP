@@ -135,14 +135,14 @@ std::shared_ptr<Bag<uml::Namespace>> NamedElementImpl::allNamespaces() const
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
-	std::shared_ptr<Bag<uml::Namespace> > allNS(new Bag<uml::Namespace>());
+	std::shared_ptr<Bag<uml::Namespace>> allNS(new Bag<uml::Namespace>());
     if (getNamespace().lock() == nullptr)
     {
         return allNS;
     }
     else
     {
-    	std::shared_ptr<Bag<uml::Namespace> > currentNSList = getNamespace().lock()->allNamespaces();
+    	std::shared_ptr<Bag<uml::Namespace>> currentNSList = getNamespace().lock()->allNamespaces();
         allNS->insert(allNS->end(), currentNSList->begin(), currentNSList->end());
         currentNSList = nullptr;
 
@@ -192,7 +192,7 @@ std::string NamedElementImpl::getQualifiedName() const
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
-	std::shared_ptr< Bag<uml::Namespace> >  allNS = allNamespaces();
+	std::shared_ptr<Bag<uml::Namespace>>  allNS = allNamespaces();
 
     if(!this->getName().empty() && std::none_of(allNS->cbegin(), allNS->cend(), [](std::shared_ptr<uml::Namespace> ns){ return ns->getName().empty(); }))
     {
@@ -403,7 +403,7 @@ void NamedElementImpl::loadNode(std::string nodeName, std::shared_ptr<persistenc
 	ElementImpl::loadNode(nodeName, loadHandler);
 }
 
-void NamedElementImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
+void NamedElementImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject>> references)
 {
 	ElementImpl::resolveReferences(featureID, references);
 }

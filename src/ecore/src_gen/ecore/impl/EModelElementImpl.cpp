@@ -249,7 +249,7 @@ void EModelElementImpl::loadNode(std::string nodeName, std::shared_ptr<persisten
 	EObjectImpl::loadNode(nodeName, loadHandler);
 }
 
-void EModelElementImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<EObject> > references)
+void EModelElementImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<EObject>> references)
 {
 	EObjectImpl::resolveReferences(featureID, references);
 }

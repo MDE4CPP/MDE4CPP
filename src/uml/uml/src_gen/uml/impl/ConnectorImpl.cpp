@@ -408,7 +408,7 @@ void ConnectorImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::
 	FeatureImpl::loadNode(nodeName, loadHandler);
 }
 
-void ConnectorImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
+void ConnectorImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject>> references)
 {
 	switch(featureID)
 	{

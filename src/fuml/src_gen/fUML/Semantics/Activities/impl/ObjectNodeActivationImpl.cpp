@@ -50,8 +50,8 @@
 #include "fUML/Semantics/Activities/ActivityNodeActivationGroup.hpp"
 #include "fUML/Semantics/Activities/Token.hpp"
 //Factories and Package includes
-#include "fUML/Semantics/SemanticsPackage.hpp"
 #include "fUML/fUMLPackage.hpp"
+#include "fUML/Semantics/SemanticsPackage.hpp"
 #include "fUML/Semantics/Activities/ActivitiesPackage.hpp"
 #include "uml/umlPackage.hpp"
 
@@ -170,7 +170,7 @@ std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> ObjectNodeActivationImp
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
-	std::shared_ptr<Bag<fUML::Semantics::Activities::Token> > tokens(new Bag<fUML::Semantics::Activities::Token>());
+	std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> tokens(new Bag<fUML::Semantics::Activities::Token>());
 
   const int numberUnofferedTokens=this->countUnofferedTokens(); 
   int offeredTokenCount=this->getOfferedTokenCount(); 
@@ -229,7 +229,7 @@ void ObjectNodeActivationImpl::sendUnofferedTokens()
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
-	std::shared_ptr<Bag<fUML::Semantics::Activities::Token> > tokens = this->getUnofferedTokens();
+	std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> tokens = this->getUnofferedTokens();
     this->setOfferedTokenCount(this->getOfferedTokenCount() + tokens->size());
     this->sendOffers(tokens);
 	//end of body
@@ -239,7 +239,7 @@ std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> ObjectNodeActivationImp
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
-	std::shared_ptr<Bag<fUML::Semantics::Activities::Token> > tokens = this->getUnofferedTokens();
+	std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> tokens = this->getUnofferedTokens();
 
     for (unsigned int i = 0; i < tokens->size(); i++) 
     {
@@ -347,7 +347,7 @@ void ObjectNodeActivationImpl::loadNode(std::string nodeName, std::shared_ptr<pe
 	ActivityNodeActivationImpl::loadNode(nodeName, loadHandler);
 }
 
-void ObjectNodeActivationImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
+void ObjectNodeActivationImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject>> references)
 {
 	ActivityNodeActivationImpl::resolveReferences(featureID, references);
 }

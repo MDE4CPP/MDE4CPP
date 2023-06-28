@@ -441,7 +441,7 @@ void InteractionUseImpl::loadNode(std::string nodeName, std::shared_ptr<persiste
 	InteractionFragmentImpl::loadNode(nodeName, loadHandler);
 }
 
-void InteractionUseImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
+void InteractionUseImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject>> references)
 {
 	switch(featureID)
 	{

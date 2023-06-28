@@ -258,7 +258,7 @@ void ExecutionEnvironmentImpl::loadNode(std::string nodeName, std::shared_ptr<pe
 	NodeImpl::loadNode(nodeName, loadHandler);
 }
 
-void ExecutionEnvironmentImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
+void ExecutionEnvironmentImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject>> references)
 {
 	NodeImpl::resolveReferences(featureID, references);
 }

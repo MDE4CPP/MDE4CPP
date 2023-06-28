@@ -224,7 +224,7 @@ void EAttributeImpl::loadNode(std::string nodeName, std::shared_ptr<persistence:
 	EStructuralFeatureImpl::loadNode(nodeName, loadHandler);
 }
 
-void EAttributeImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<EObject> > references)
+void EAttributeImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<EObject>> references)
 {
 	EStructuralFeatureImpl::resolveReferences(featureID, references);
 }

@@ -497,7 +497,7 @@ void ActivityPartitionImpl::loadNode(std::string nodeName, std::shared_ptr<persi
 	ActivityGroupImpl::loadNode(nodeName, loadHandler);
 }
 
-void ActivityPartitionImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
+void ActivityPartitionImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject>> references)
 {
 	switch(featureID)
 	{

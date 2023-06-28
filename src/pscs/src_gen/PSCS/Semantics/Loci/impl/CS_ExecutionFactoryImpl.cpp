@@ -82,8 +82,8 @@
 
 #include <exception> // used in Persistence
 #include "fUML/Semantics/Loci/LociFactory.hpp"
-#include "uml/umlFactory.hpp"
 #include "fUML/Semantics/CommonBehavior/CommonBehaviorFactory.hpp"
+#include "uml/umlFactory.hpp"
 #include "uml/Class.hpp"
 #include "uml/Classifier.hpp"
 #include "uml/Element.hpp"
@@ -375,14 +375,14 @@ void CS_ExecutionFactoryImpl::loadNode(std::string nodeName, std::shared_ptr<per
 	fUML::Semantics::Loci::ExecutionFactoryImpl::loadNode(nodeName, loadHandler);
 }
 
-void CS_ExecutionFactoryImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
+void CS_ExecutionFactoryImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject>> references)
 {
 	switch(featureID)
 	{
 		case PSCS::Semantics::Loci::LociPackage::CS_EXECUTIONFACTORY_ATTRIBUTE_APPLIEDPROFILES:
 		{
 			std::shared_ptr<Bag<uml::Package>> _appliedProfiles = getAppliedProfiles();
-			for(std::shared_ptr<ecore::EObject> ref : references)
+			for(const std::shared_ptr<ecore::EObject>& ref : references)
 			{
 				std::shared_ptr<uml::Package>  _r = std::dynamic_pointer_cast<uml::Package>(ref);
 				if (_r != nullptr)

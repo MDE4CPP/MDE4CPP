@@ -648,7 +648,7 @@ void StructuredActivityNodeImpl::loadNode(std::string nodeName, std::shared_ptr<
 	NamespaceImpl::loadNode(nodeName, loadHandler);
 }
 
-void StructuredActivityNodeImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
+void StructuredActivityNodeImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject>> references)
 {
 	ActionImpl::resolveReferences(featureID, references);
 	ActivityGroupImpl::resolveReferences(featureID, references);

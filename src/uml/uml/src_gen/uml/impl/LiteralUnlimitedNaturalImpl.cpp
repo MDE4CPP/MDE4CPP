@@ -290,7 +290,7 @@ void LiteralUnlimitedNaturalImpl::loadNode(std::string nodeName, std::shared_ptr
 	LiteralSpecificationImpl::loadNode(nodeName, loadHandler);
 }
 
-void LiteralUnlimitedNaturalImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
+void LiteralUnlimitedNaturalImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject>> references)
 {
 	LiteralSpecificationImpl::resolveReferences(featureID, references);
 }

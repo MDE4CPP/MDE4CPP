@@ -436,7 +436,7 @@ void CombinedFragmentImpl::loadNode(std::string nodeName, std::shared_ptr<persis
 	InteractionFragmentImpl::loadNode(nodeName, loadHandler);
 }
 
-void CombinedFragmentImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
+void CombinedFragmentImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject>> references)
 {
 	InteractionFragmentImpl::resolveReferences(featureID, references);
 }

@@ -227,7 +227,7 @@ void FeatureImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::in
 	RedefinableElementImpl::loadNode(nodeName, loadHandler);
 }
 
-void FeatureImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
+void FeatureImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject>> references)
 {
 	RedefinableElementImpl::resolveReferences(featureID, references);
 }

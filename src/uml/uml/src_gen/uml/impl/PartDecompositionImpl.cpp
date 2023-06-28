@@ -219,7 +219,7 @@ void PartDecompositionImpl::loadNode(std::string nodeName, std::shared_ptr<persi
 	InteractionUseImpl::loadNode(nodeName, loadHandler);
 }
 
-void PartDecompositionImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
+void PartDecompositionImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject>> references)
 {
 	InteractionUseImpl::resolveReferences(featureID, references);
 }

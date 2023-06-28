@@ -296,7 +296,7 @@ void AddStructuralFeatureValueActionImpl::loadNode(std::string nodeName, std::sh
 	WriteStructuralFeatureActionImpl::loadNode(nodeName, loadHandler);
 }
 
-void AddStructuralFeatureValueActionImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
+void AddStructuralFeatureValueActionImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject>> references)
 {
 	WriteStructuralFeatureActionImpl::resolveReferences(featureID, references);
 }

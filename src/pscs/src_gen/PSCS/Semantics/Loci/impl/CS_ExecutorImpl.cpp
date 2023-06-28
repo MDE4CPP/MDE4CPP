@@ -219,7 +219,7 @@ void CS_ExecutorImpl::loadNode(std::string nodeName, std::shared_ptr<persistence
 	fUML::Semantics::Loci::ExecutorImpl::loadNode(nodeName, loadHandler);
 }
 
-void CS_ExecutorImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
+void CS_ExecutorImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject>> references)
 {
 	fUML::Semantics::Loci::ExecutorImpl::resolveReferences(featureID, references);
 }

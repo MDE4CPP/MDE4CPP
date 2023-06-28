@@ -153,8 +153,8 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "uml/umlFactory.hpp"
 #include "fUML/Semantics/Loci/LociFactory.hpp"
+#include "uml/umlFactory.hpp"
 #include "fUML/Semantics/CommonBehavior/CommonBehaviorFactory.hpp"
 #include "uml/Behavior.hpp"
 #include "uml/Element.hpp"
@@ -166,8 +166,8 @@
 #include "fUML/Semantics/Loci/SemanticVisitor.hpp"
 #include "uml/ValueSpecification.hpp"
 //Factories and Package includes
-#include "fUML/Semantics/SemanticsPackage.hpp"
 #include "fUML/fUMLPackage.hpp"
+#include "fUML/Semantics/SemanticsPackage.hpp"
 #include "fUML/Semantics/CommonBehavior/CommonBehaviorPackage.hpp"
 #include "fUML/Semantics/Loci/LociPackage.hpp"
 #include "uml/umlPackage.hpp"
@@ -746,7 +746,7 @@ void ExecutionFactoryImpl::loadNode(std::string nodeName, std::shared_ptr<persis
 	//load BasePackage Nodes
 }
 
-void ExecutionFactoryImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
+void ExecutionFactoryImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject>> references)
 {
 	switch(featureID)
 	{

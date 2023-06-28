@@ -245,7 +245,7 @@ void SignalEventImpl::loadNode(std::string nodeName, std::shared_ptr<persistence
 	MessageEventImpl::loadNode(nodeName, loadHandler);
 }
 
-void SignalEventImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
+void SignalEventImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject>> references)
 {
 	switch(featureID)
 	{

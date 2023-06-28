@@ -428,7 +428,7 @@ void BehavioredClassifierImpl::loadNode(std::string nodeName, std::shared_ptr<pe
 	ClassifierImpl::loadNode(nodeName, loadHandler);
 }
 
-void BehavioredClassifierImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
+void BehavioredClassifierImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject>> references)
 {
 	switch(featureID)
 	{

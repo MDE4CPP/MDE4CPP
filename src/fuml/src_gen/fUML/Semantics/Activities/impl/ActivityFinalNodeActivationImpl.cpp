@@ -54,8 +54,8 @@
 #include "fUML/Semantics/Activities/ControlNodeActivation.hpp"
 #include "fUML/Semantics/Activities/Token.hpp"
 //Factories and Package includes
-#include "fUML/Semantics/SemanticsPackage.hpp"
 #include "fUML/fUMLPackage.hpp"
+#include "fUML/Semantics/SemanticsPackage.hpp"
 #include "fUML/Semantics/Activities/ActivitiesPackage.hpp"
 #include "uml/umlPackage.hpp"
 
@@ -221,7 +221,7 @@ void ActivityFinalNodeActivationImpl::loadNode(std::string nodeName, std::shared
 	ControlNodeActivationImpl::loadNode(nodeName, loadHandler);
 }
 
-void ActivityFinalNodeActivationImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
+void ActivityFinalNodeActivationImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject>> references)
 {
 	ControlNodeActivationImpl::resolveReferences(featureID, references);
 }

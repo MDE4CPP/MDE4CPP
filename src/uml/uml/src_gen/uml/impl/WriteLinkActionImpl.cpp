@@ -218,7 +218,7 @@ void WriteLinkActionImpl::loadNode(std::string nodeName, std::shared_ptr<persist
 	LinkActionImpl::loadNode(nodeName, loadHandler);
 }
 
-void WriteLinkActionImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
+void WriteLinkActionImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject>> references)
 {
 	LinkActionImpl::resolveReferences(featureID, references);
 }

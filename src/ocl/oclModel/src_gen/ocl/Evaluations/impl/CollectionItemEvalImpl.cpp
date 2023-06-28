@@ -39,8 +39,8 @@
 
 #include <exception> // used in Persistence
 #include "ecore/ecoreFactory.hpp"
-#include "ocl/Expressions/ExpressionsFactory.hpp"
 #include "ocl/Evaluations/EvaluationsFactory.hpp"
+#include "ocl/Expressions/ExpressionsFactory.hpp"
 #include "ocl/Evaluations/CollectionLiteralPartEval.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClassifier.hpp"
@@ -200,7 +200,7 @@ void CollectionItemEvalImpl::loadNode(std::string nodeName, std::shared_ptr<pers
 	CollectionLiteralPartEvalImpl::loadNode(nodeName, loadHandler);
 }
 
-void CollectionItemEvalImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
+void CollectionItemEvalImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject>> references)
 {
 	switch(featureID)
 	{

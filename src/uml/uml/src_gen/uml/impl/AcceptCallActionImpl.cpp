@@ -264,7 +264,7 @@ void AcceptCallActionImpl::loadNode(std::string nodeName, std::shared_ptr<persis
 	AcceptEventActionImpl::loadNode(nodeName, loadHandler);
 }
 
-void AcceptCallActionImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
+void AcceptCallActionImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject>> references)
 {
 	AcceptEventActionImpl::resolveReferences(featureID, references);
 }

@@ -64,8 +64,8 @@
 #include "uml/StructuredActivityNode.hpp"
 #include "fUML/Semantics/Activities/Token.hpp"
 //Factories and Package includes
-#include "fUML/Semantics/SemanticsPackage.hpp"
 #include "fUML/fUMLPackage.hpp"
+#include "fUML/Semantics/SemanticsPackage.hpp"
 #include "fUML/Semantics/Actions/ActionsPackage.hpp"
 #include "fUML/Semantics/Activities/ActivitiesPackage.hpp"
 #include "uml/umlPackage.hpp"
@@ -149,7 +149,7 @@ std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> StructuredActivityNodeA
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
-	std::shared_ptr<Bag<fUML::Semantics::Activities::Token> > incomingTokens(new Bag<fUML::Semantics::Activities::Token>());
+	std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> incomingTokens(new Bag<fUML::Semantics::Activities::Token>());
     if (!this->isSuspended()) 
     {
         incomingTokens = fUML::Semantics::Actions::ActionActivationImpl::completeAction();
@@ -208,7 +208,7 @@ void StructuredActivityNodeActivationImpl::doStructuredActivity()
     assert(action != nullptr);
 
     // *** Concurrently send offers from all input pins. ***
-    std::shared_ptr<Bag<uml::InputPin> > inputPins = nullptr;//action->input;
+    std::shared_ptr<Bag<uml::InputPin>> inputPins = nullptr;//action->input;
     std::vector<std::shared_ptr<uml::InputPin>>::iterator i;
 
     for (i = inputPins->begin(); i!= inputPins->end();++i)
@@ -289,7 +289,7 @@ std::shared_ptr<Bag<uml::ActivityNode>> StructuredActivityNodeActivationImpl::ma
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
-	std::shared_ptr<Bag<uml::ActivityNode> > activityNodes(new Bag<uml::ActivityNode>());
+	std::shared_ptr<Bag<uml::ActivityNode>> activityNodes(new Bag<uml::ActivityNode>());
 
     for (unsigned int i = 0; i < nodes->size(); i++) 
     {
@@ -338,7 +338,7 @@ void StructuredActivityNodeActivationImpl::resume()
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
-	std::shared_ptr<Bag<fUML::Semantics::Activities::Token> > incomingTokens = fUML::Semantics::Actions::ActionActivationImpl::completeAction();
+	std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> incomingTokens = fUML::Semantics::Actions::ActionActivationImpl::completeAction();
     if (incomingTokens->size() > 0) 
     {
         this->fire(incomingTokens);
@@ -518,7 +518,7 @@ void StructuredActivityNodeActivationImpl::loadNode(std::string nodeName, std::s
 	ActionActivationImpl::loadNode(nodeName, loadHandler);
 }
 
-void StructuredActivityNodeActivationImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
+void StructuredActivityNodeActivationImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject>> references)
 {
 	switch(featureID)
 	{

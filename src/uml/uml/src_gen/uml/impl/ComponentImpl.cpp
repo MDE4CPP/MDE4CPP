@@ -488,7 +488,7 @@ void ComponentImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::
 	ClassImpl::loadNode(nodeName, loadHandler);
 }
 
-void ComponentImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
+void ComponentImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject>> references)
 {
 	ClassImpl::resolveReferences(featureID, references);
 }

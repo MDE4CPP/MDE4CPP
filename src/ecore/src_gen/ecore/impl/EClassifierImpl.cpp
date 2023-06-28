@@ -318,7 +318,7 @@ void EClassifierImpl::loadNode(std::string nodeName, std::shared_ptr<persistence
 	ENamedElementImpl::loadNode(nodeName, loadHandler);
 }
 
-void EClassifierImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<EObject> > references)
+void EClassifierImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<EObject>> references)
 {
 	ENamedElementImpl::resolveReferences(featureID, references);
 }

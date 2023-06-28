@@ -255,7 +255,7 @@ void RedefinableElementImpl::loadNode(std::string nodeName, std::shared_ptr<pers
 	NamedElementImpl::loadNode(nodeName, loadHandler);
 }
 
-void RedefinableElementImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
+void RedefinableElementImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject>> references)
 {
 	NamedElementImpl::resolveReferences(featureID, references);
 }

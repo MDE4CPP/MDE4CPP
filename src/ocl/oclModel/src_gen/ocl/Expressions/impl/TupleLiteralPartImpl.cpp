@@ -236,7 +236,7 @@ void TupleLiteralPartImpl::loadNode(std::string nodeName, std::shared_ptr<persis
 	ecore::ETypedElementImpl::loadNode(nodeName, loadHandler);
 }
 
-void TupleLiteralPartImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
+void TupleLiteralPartImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject>> references)
 {
 	switch(featureID)
 	{

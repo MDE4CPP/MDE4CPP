@@ -237,7 +237,7 @@ void ClassifierTemplateParameterImpl::loadNode(std::string nodeName, std::shared
 	TemplateParameterImpl::loadNode(nodeName, loadHandler);
 }
 
-void ClassifierTemplateParameterImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
+void ClassifierTemplateParameterImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject>> references)
 {
 	switch(featureID)
 	{

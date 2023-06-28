@@ -216,7 +216,7 @@ void EDataTypeImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::
 	EClassifierImpl::loadNode(nodeName, loadHandler);
 }
 
-void EDataTypeImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<EObject> > references)
+void EDataTypeImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<EObject>> references)
 {
 	EClassifierImpl::resolveReferences(featureID, references);
 }

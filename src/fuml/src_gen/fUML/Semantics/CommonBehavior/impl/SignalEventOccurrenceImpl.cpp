@@ -42,8 +42,8 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "uml/umlFactory.hpp"
 #include "fUML/MDE4CPP_Extensions/MDE4CPP_ExtensionsFactory.hpp"
+#include "uml/umlFactory.hpp"
 #include "uml/Element.hpp"
 #include "uml/Event.hpp"
 #include "fUML/Semantics/CommonBehavior/EventOccurrence.hpp"
@@ -51,8 +51,8 @@
 #include "fUML/Semantics/CommonBehavior/ParameterValue.hpp"
 #include "uml/Trigger.hpp"
 //Factories and Package includes
-#include "fUML/Semantics/SemanticsPackage.hpp"
 #include "fUML/fUMLPackage.hpp"
+#include "fUML/Semantics/SemanticsPackage.hpp"
 #include "fUML/Semantics/CommonBehavior/CommonBehaviorPackage.hpp"
 #include "fUML/MDE4CPP_Extensions/MDE4CPP_ExtensionsPackage.hpp"
 #include "uml/umlPackage.hpp"
@@ -128,7 +128,7 @@ std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> SignalEven
 	// These are intended to be treated as if they are the values of effective parameters of the direction "in".
 	// (Note that the given event must be a signal event, and the signal instance of this signal event occurence must be a direct or indirect instance of the event signal.)
 
-	std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue> > parameterValues(new Bag<fUML::Semantics::CommonBehavior::ParameterValue>());
+	std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> parameterValues(new Bag<fUML::Semantics::CommonBehavior::ParameterValue>());
 	const std::shared_ptr<uml::SignalEvent>& signalEvent = std::dynamic_pointer_cast<uml::SignalEvent>(event);
 	if(signalEvent)
 	{
@@ -251,7 +251,7 @@ void SignalEventOccurrenceImpl::loadNode(std::string nodeName, std::shared_ptr<p
 	EventOccurrenceImpl::loadNode(nodeName, loadHandler);
 }
 
-void SignalEventOccurrenceImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
+void SignalEventOccurrenceImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject>> references)
 {
 	switch(featureID)
 	{

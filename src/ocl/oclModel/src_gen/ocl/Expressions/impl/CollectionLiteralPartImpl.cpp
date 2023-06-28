@@ -155,7 +155,7 @@ void CollectionLiteralPartImpl::loadNode(std::string nodeName, std::shared_ptr<p
 	ecore::ETypedElementImpl::loadNode(nodeName, loadHandler);
 }
 
-void CollectionLiteralPartImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
+void CollectionLiteralPartImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject>> references)
 {
 	ecore::ETypedElementImpl::resolveReferences(featureID, references);
 }

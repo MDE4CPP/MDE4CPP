@@ -336,7 +336,7 @@ void EAnnotationImpl::loadNode(std::string nodeName, std::shared_ptr<persistence
 	EModelElementImpl::loadNode(nodeName, loadHandler);
 }
 
-void EAnnotationImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<EObject> > references)
+void EAnnotationImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<EObject>> references)
 {
 	switch(featureID)
 	{

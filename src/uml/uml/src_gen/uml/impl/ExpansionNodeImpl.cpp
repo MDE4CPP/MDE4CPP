@@ -275,7 +275,7 @@ void ExpansionNodeImpl::loadNode(std::string nodeName, std::shared_ptr<persisten
 	ObjectNodeImpl::loadNode(nodeName, loadHandler);
 }
 
-void ExpansionNodeImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
+void ExpansionNodeImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject>> references)
 {
 	switch(featureID)
 	{

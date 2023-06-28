@@ -69,8 +69,8 @@
 #include "fUML/Semantics/Activities/Token.hpp"
 #include "uml/ValueSpecification.hpp"
 //Factories and Package includes
-#include "fUML/Semantics/SemanticsPackage.hpp"
 #include "fUML/fUMLPackage.hpp"
+#include "fUML/Semantics/SemanticsPackage.hpp"
 #include "fUML/Semantics/Activities/ActivitiesPackage.hpp"
 #include "fUML/Semantics/CommonBehavior/CommonBehaviorPackage.hpp"
 #include "uml/umlPackage.hpp"
@@ -200,7 +200,7 @@ std::shared_ptr<Any> DecisionNodeActivationImpl::executeDecisionInputBehavior(co
             i = i + 1;
         }
 
-        std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue> > outputParameterValues = this->getExecutionLocus()->getExecutor()->execute(decisionInputBehavior, this->getExecutionContext(), inputParameterValues);
+        std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> outputParameterValues = this->getExecutionLocus()->getExecutor()->execute(decisionInputBehavior, this->getExecutionContext(), inputParameterValues);
 
         decisionInputResult = outputParameterValues->at(0)->getValues()->at(0);
     }
@@ -224,7 +224,7 @@ void DecisionNodeActivationImpl::fire(const std::shared_ptr<Bag<fUML::Semantics:
     	const std::shared_ptr<fUML::Semantics::Activities::ActivityEdgeInstance>& edgeInstance = outgoingEdges->at(i);
     	const std::shared_ptr<uml::ValueSpecification>& guard = edgeInstance->getEdge()->getGuard();
 
-    	std::shared_ptr<Bag<fUML::Semantics::Activities::Token> > offeredTokens(new Bag<fUML::Semantics::Activities::Token>());
+    	std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> offeredTokens(new Bag<fUML::Semantics::Activities::Token>());
         for (unsigned int j = 0; j < incomingTokens->size(); j++) 
         {
         	const std::shared_ptr<fUML::Semantics::Activities::Token>& incomingToken = incomingTokens->at(j);
@@ -282,7 +282,7 @@ std::shared_ptr<Any> DecisionNodeActivationImpl::getDecisionInputFlowValue()
 	std::shared_ptr<Any> value = nullptr;
     if (decisionInputFlowInstance != nullptr) 
     {
-    	std::shared_ptr<Bag<fUML::Semantics::Activities::Token> > tokens = decisionInputFlowInstance->takeOfferedTokens();
+    	std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> tokens = decisionInputFlowInstance->takeOfferedTokens();
         if (tokens->size() > 0) 
         {
             value = tokens->at(0)->getValue();
@@ -366,7 +366,7 @@ std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> DecisionNodeActivationI
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
-		std::shared_ptr<Bag<fUML::Semantics::Activities::Token> > removedControlTokens(new Bag<fUML::Semantics::Activities::Token>());
+		std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> removedControlTokens(new Bag<fUML::Semantics::Activities::Token>());
 
     if (this->hasObjectFlowInput()) 
     {
@@ -394,14 +394,14 @@ std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> DecisionNodeActivationI
 	//generated from body annotation
 	const std::shared_ptr<uml::ObjectFlow>& decisionInputFlow = this->getDecisionNode()->getDecisionInputFlow();
 
-	std::shared_ptr<Bag<fUML::Semantics::Activities::Token> > allTokens(new Bag<fUML::Semantics::Activities::Token>());
+	std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> allTokens(new Bag<fUML::Semantics::Activities::Token>());
 	const std::shared_ptr<Bag<fUML::Semantics::Activities::ActivityEdgeInstance>>& incomingEdges = this->getIncomingEdges();
     for (unsigned int i = 0; i < incomingEdges->size(); i++) 
     {
     	const std::shared_ptr<fUML::Semantics::Activities::ActivityEdgeInstance>& edgeInstance = incomingEdges->at(i);
         if (edgeInstance->getEdge() != decisionInputFlow) 
         {
-        	std::shared_ptr<Bag<fUML::Semantics::Activities::Token> > tokens = edgeInstance->takeOfferedTokens();
+        	std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> tokens = edgeInstance->takeOfferedTokens();
             for (unsigned int j = 0; j < tokens->size(); j++)
             {
                 allTokens->push_back(tokens->at(j));
@@ -622,7 +622,7 @@ void DecisionNodeActivationImpl::loadNode(std::string nodeName, std::shared_ptr<
 	ControlNodeActivationImpl::loadNode(nodeName, loadHandler);
 }
 
-void DecisionNodeActivationImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
+void DecisionNodeActivationImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject>> references)
 {
 	switch(featureID)
 	{

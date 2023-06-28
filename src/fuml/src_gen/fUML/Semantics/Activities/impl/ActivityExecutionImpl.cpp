@@ -53,11 +53,11 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "fUML/Semantics/Activities/ActivitiesFactory.hpp"
-#include "uml/umlFactory.hpp"
-#include "fUML/Semantics/CommonBehavior/CommonBehaviorFactory.hpp"
 #include "ecore/ecoreFactory.hpp"
 #include "fUML/Semantics/Loci/LociFactory.hpp"
+#include "uml/umlFactory.hpp"
+#include "fUML/Semantics/CommonBehavior/CommonBehaviorFactory.hpp"
+#include "fUML/Semantics/Activities/ActivitiesFactory.hpp"
 #include "uml/Activity.hpp"
 #include "fUML/Semantics/Activities/ActivityNodeActivationGroup.hpp"
 #include "uml/Behavior.hpp"
@@ -70,8 +70,8 @@
 #include "fUML/Semantics/CommonBehavior/ObjectActivation.hpp"
 #include "fUML/Semantics/CommonBehavior/ParameterValue.hpp"
 //Factories and Package includes
-#include "fUML/Semantics/SemanticsPackage.hpp"
 #include "fUML/fUMLPackage.hpp"
+#include "fUML/Semantics/SemanticsPackage.hpp"
 #include "fUML/Semantics/Activities/ActivitiesPackage.hpp"
 #include "fUML/Semantics/CommonBehavior/CommonBehaviorPackage.hpp"
 #include "fUML/Semantics/Loci/LociPackage.hpp"
@@ -172,7 +172,7 @@ void ActivityExecutionImpl::execute()
 
 		activityNodeActivationGroup->run(activityNodeActivationGroup->getNodeActivations());
 
-		std::shared_ptr<Bag<fUML::Semantics::Activities::ActivityParameterNodeActivation> > outputActivationList = activityNodeActivationGroup->getOutputParameterNodeActivations();
+		std::shared_ptr<Bag<fUML::Semantics::Activities::ActivityParameterNodeActivation>> outputActivationList = activityNodeActivationGroup->getOutputParameterNodeActivations();
 
 		DEBUG_INFO("Activity '" << activity->getName() << "' has " << outputActivationList->size() << " output ParameterNodes.")
 
@@ -183,7 +183,7 @@ void ActivityExecutionImpl::execute()
 				std::shared_ptr<fUML::Semantics::CommonBehavior::ParameterValue> parameterValue(fUML::Semantics::CommonBehavior::CommonBehaviorFactory::eInstance()->createParameterValue());
 				const std::shared_ptr<uml::ActivityParameterNode>& activityParameterNode = outputActivation->getActivityParameterNode();
 				parameterValue->setParameter(activityParameterNode->getParameter());
-				std::shared_ptr<Bag<fUML::Semantics::Activities::Token> > tokenList = outputActivation->getTokens();
+				std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> tokenList = outputActivation->getTokens();
 
 				for(const std::shared_ptr<fUML::Semantics::Activities::Token>& token : *tokenList)
 				{
@@ -381,7 +381,7 @@ void ActivityExecutionImpl::loadNode(std::string nodeName, std::shared_ptr<persi
 	fUML::Semantics::CommonBehavior::ExecutionImpl::loadNode(nodeName, loadHandler);
 }
 
-void ActivityExecutionImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
+void ActivityExecutionImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject>> references)
 {
 	switch(featureID)
 	{

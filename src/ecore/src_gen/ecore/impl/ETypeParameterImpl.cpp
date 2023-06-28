@@ -222,7 +222,7 @@ void ETypeParameterImpl::loadNode(std::string nodeName, std::shared_ptr<persiste
 	ENamedElementImpl::loadNode(nodeName, loadHandler);
 }
 
-void ETypeParameterImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<EObject> > references)
+void ETypeParameterImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<EObject>> references)
 {
 	ENamedElementImpl::resolveReferences(featureID, references);
 }

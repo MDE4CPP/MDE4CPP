@@ -129,7 +129,7 @@ namespace ecore
 			// Persistence Functions
 			//*********************************
 			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) = 0;
-			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<EObject> > references) = 0;
+			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<EObject>> references) = 0;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const = 0;
 
 		protected:

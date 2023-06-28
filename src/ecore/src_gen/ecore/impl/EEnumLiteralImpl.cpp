@@ -254,7 +254,7 @@ void EEnumLiteralImpl::loadNode(std::string nodeName, std::shared_ptr<persistenc
 	ENamedElementImpl::loadNode(nodeName, loadHandler);
 }
 
-void EEnumLiteralImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<EObject> > references)
+void EEnumLiteralImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<EObject>> references)
 {
 	ENamedElementImpl::resolveReferences(featureID, references);
 }

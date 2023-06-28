@@ -174,7 +174,7 @@ void FactoryImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::in
 	ElementImpl::loadNode(nodeName, loadHandler);
 }
 
-void FactoryImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
+void FactoryImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject>> references)
 {
 	ElementImpl::resolveReferences(featureID, references);
 }

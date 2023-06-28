@@ -337,7 +337,7 @@ void TypeExpImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::in
 	OclExpressionImpl::loadNode(nodeName, loadHandler);
 }
 
-void TypeExpImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
+void TypeExpImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject>> references)
 {
 	OclExpressionImpl::resolveReferences(featureID, references);
 }

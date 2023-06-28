@@ -266,7 +266,7 @@ void PackageImportImpl::loadNode(std::string nodeName, std::shared_ptr<persisten
 	DirectedRelationshipImpl::loadNode(nodeName, loadHandler);
 }
 
-void PackageImportImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
+void PackageImportImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject>> references)
 {
 	switch(featureID)
 	{

@@ -506,7 +506,7 @@ void LoopNodeImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::i
 	StructuredActivityNodeImpl::loadNode(nodeName, loadHandler);
 }
 
-void LoopNodeImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
+void LoopNodeImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject>> references)
 {
 	switch(featureID)
 	{

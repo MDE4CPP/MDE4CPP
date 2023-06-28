@@ -256,7 +256,7 @@ void VertexImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::int
 	NamedElementImpl::loadNode(nodeName, loadHandler);
 }
 
-void VertexImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
+void VertexImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject>> references)
 {
 	switch(featureID)
 	{

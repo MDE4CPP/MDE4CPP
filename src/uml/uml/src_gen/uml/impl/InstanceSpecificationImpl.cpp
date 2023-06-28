@@ -363,7 +363,7 @@ void InstanceSpecificationImpl::loadNode(std::string nodeName, std::shared_ptr<p
 	PackageableElementImpl::loadNode(nodeName, loadHandler);
 }
 
-void InstanceSpecificationImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
+void InstanceSpecificationImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject>> references)
 {
 	switch(featureID)
 	{

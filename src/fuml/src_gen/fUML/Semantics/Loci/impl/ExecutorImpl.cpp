@@ -54,8 +54,8 @@
 #include "fUML/Semantics/CommonBehavior/ParameterValue.hpp"
 #include "uml/ValueSpecification.hpp"
 //Factories and Package includes
-#include "fUML/Semantics/SemanticsPackage.hpp"
 #include "fUML/fUMLPackage.hpp"
+#include "fUML/Semantics/SemanticsPackage.hpp"
 #include "fUML/Semantics/CommonBehavior/CommonBehaviorPackage.hpp"
 #include "fUML/Semantics/Loci/LociPackage.hpp"
 #include "uml/umlPackage.hpp"
@@ -302,7 +302,7 @@ void ExecutorImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::i
 	//load BasePackage Nodes
 }
 
-void ExecutorImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
+void ExecutorImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject>> references)
 {
 	switch(featureID)
 	{

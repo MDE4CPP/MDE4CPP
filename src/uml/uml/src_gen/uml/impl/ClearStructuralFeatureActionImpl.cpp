@@ -264,7 +264,7 @@ void ClearStructuralFeatureActionImpl::loadNode(std::string nodeName, std::share
 	StructuralFeatureActionImpl::loadNode(nodeName, loadHandler);
 }
 
-void ClearStructuralFeatureActionImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
+void ClearStructuralFeatureActionImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject>> references)
 {
 	StructuralFeatureActionImpl::resolveReferences(featureID, references);
 }

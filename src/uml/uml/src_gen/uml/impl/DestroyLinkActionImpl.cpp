@@ -226,7 +226,7 @@ void DestroyLinkActionImpl::loadNode(std::string nodeName, std::shared_ptr<persi
 	WriteLinkActionImpl::loadNode(nodeName, loadHandler);
 }
 
-void DestroyLinkActionImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
+void DestroyLinkActionImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject>> references)
 {
 	WriteLinkActionImpl::resolveReferences(featureID, references);
 }

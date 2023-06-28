@@ -60,8 +60,8 @@
 #include "fUML/Semantics/Actions/PinActivation.hpp"
 #include "fUML/Semantics/Activities/Token.hpp"
 //Factories and Package includes
-#include "fUML/Semantics/SemanticsPackage.hpp"
 #include "fUML/fUMLPackage.hpp"
+#include "fUML/Semantics/SemanticsPackage.hpp"
 #include "fUML/Semantics/Actions/ActionsPackage.hpp"
 #include "fUML/Semantics/Activities/ActivitiesPackage.hpp"
 #include "uml/umlPackage.hpp"
@@ -148,7 +148,7 @@ void DestroyObjectActionActivationImpl::destroyObject(const std::shared_ptr<Any>
 		if (isDestroyLinks || isDestroyOwnedObjects)
 		{	
 			/*Currently not supported
-			std::shared_ptr<Bag<fUML::Semantics::StructuredClassifiers::ExtensionalValue> > extensionalValues = this->getExecutionLocus()->getExtensionalValues();
+			std::shared_ptr<Bag<fUML::Semantics::StructuredClassifiers::ExtensionalValue>> extensionalValues = this->getExecutionLocus()->getExtensionalValues();
 			for(std::shared_ptr<fUML::Semantics::StructuredClassifiers::ExtensionalValue> extensionalValue : *extensionalValues)
 			{
 				std::shared_ptr<fUML::Semantics::StructuredClassifiers::Link> link = std::dynamic_pointer_cast<fUML::Semantics::StructuredClassifiers::Link> (extensionalValue);
@@ -168,7 +168,7 @@ void DestroyObjectActionActivationImpl::destroyObject(const std::shared_ptr<Any>
 		if (isDestroyOwnedObjects)
 		{	
 			/*Currently not supported
-			std::shared_ptr<Bag<fUML::Semantics::SimpleClassifiers::FeatureValue> > objectFeatureValues = reference->retrieveFeatureValues();
+			std::shared_ptr<Bag<fUML::Semantics::SimpleClassifiers::FeatureValue>> objectFeatureValues = reference->retrieveFeatureValues();
 			for(std::shared_ptr<fUML::Semantics::SimpleClassifiers::FeatureValue> featureValue : *objectFeatureValues)
 			{
 				std::shared_ptr<uml::Property> property = std::dynamic_pointer_cast<uml::Property> (featureValue->getFeature());
@@ -377,7 +377,7 @@ void DestroyObjectActionActivationImpl::loadNode(std::string nodeName, std::shar
 	ActionActivationImpl::loadNode(nodeName, loadHandler);
 }
 
-void DestroyObjectActionActivationImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
+void DestroyObjectActionActivationImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject>> references)
 {
 	switch(featureID)
 	{

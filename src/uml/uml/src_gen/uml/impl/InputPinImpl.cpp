@@ -427,7 +427,7 @@ void InputPinImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::i
 	PinImpl::loadNode(nodeName, loadHandler);
 }
 
-void InputPinImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
+void InputPinImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject>> references)
 {
 	switch(featureID)
 	{

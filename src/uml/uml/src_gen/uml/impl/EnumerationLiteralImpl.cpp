@@ -250,7 +250,7 @@ void EnumerationLiteralImpl::loadNode(std::string nodeName, std::shared_ptr<pers
 	InstanceSpecificationImpl::loadNode(nodeName, loadHandler);
 }
 
-void EnumerationLiteralImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
+void EnumerationLiteralImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject>> references)
 {
 	switch(featureID)
 	{

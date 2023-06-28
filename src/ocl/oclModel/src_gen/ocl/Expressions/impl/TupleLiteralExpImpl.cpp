@@ -356,7 +356,7 @@ void TupleLiteralExpImpl::loadNode(std::string nodeName, std::shared_ptr<persist
 	LiteralExpImpl::loadNode(nodeName, loadHandler);
 }
 
-void TupleLiteralExpImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
+void TupleLiteralExpImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject>> references)
 {
 	LiteralExpImpl::resolveReferences(featureID, references);
 }

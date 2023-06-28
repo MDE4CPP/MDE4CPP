@@ -248,7 +248,7 @@ void ActionExecutionSpecificationImpl::loadNode(std::string nodeName, std::share
 	ExecutionSpecificationImpl::loadNode(nodeName, loadHandler);
 }
 
-void ActionExecutionSpecificationImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
+void ActionExecutionSpecificationImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject>> references)
 {
 	switch(featureID)
 	{

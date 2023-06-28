@@ -278,7 +278,7 @@ void ModelImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::inte
 	PackageImpl::loadNode(nodeName, loadHandler);
 }
 
-void ModelImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
+void ModelImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject>> references)
 {
 	PackageImpl::resolveReferences(featureID, references);
 }

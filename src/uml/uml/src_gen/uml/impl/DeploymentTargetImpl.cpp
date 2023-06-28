@@ -271,7 +271,7 @@ void DeploymentTargetImpl::loadNode(std::string nodeName, std::shared_ptr<persis
 	NamedElementImpl::loadNode(nodeName, loadHandler);
 }
 
-void DeploymentTargetImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
+void DeploymentTargetImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject>> references)
 {
 	NamedElementImpl::resolveReferences(featureID, references);
 }

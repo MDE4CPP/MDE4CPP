@@ -316,7 +316,7 @@ void DestroyObjectActionImpl::loadNode(std::string nodeName, std::shared_ptr<per
 	ActionImpl::loadNode(nodeName, loadHandler);
 }
 
-void DestroyObjectActionImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
+void DestroyObjectActionImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject>> references)
 {
 	ActionImpl::resolveReferences(featureID, references);
 }

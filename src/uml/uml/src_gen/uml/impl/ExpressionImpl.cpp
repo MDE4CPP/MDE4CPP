@@ -350,7 +350,7 @@ void ExpressionImpl::loadNode(std::string nodeName, std::shared_ptr<persistence:
 	ValueSpecificationImpl::loadNode(nodeName, loadHandler);
 }
 
-void ExpressionImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
+void ExpressionImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject>> references)
 {
 	ValueSpecificationImpl::resolveReferences(featureID, references);
 }

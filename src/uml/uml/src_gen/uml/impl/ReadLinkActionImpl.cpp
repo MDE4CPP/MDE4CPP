@@ -269,7 +269,7 @@ void ReadLinkActionImpl::loadNode(std::string nodeName, std::shared_ptr<persiste
 	LinkActionImpl::loadNode(nodeName, loadHandler);
 }
 
-void ReadLinkActionImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
+void ReadLinkActionImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject>> references)
 {
 	LinkActionImpl::resolveReferences(featureID, references);
 }

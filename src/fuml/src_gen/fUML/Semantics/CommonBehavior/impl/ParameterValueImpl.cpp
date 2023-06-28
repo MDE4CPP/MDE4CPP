@@ -43,8 +43,8 @@
 #include "uml/Parameter.hpp"
 #include "fUML/Semantics/CommonBehavior/ParameterValue.hpp"
 //Factories and Package includes
-#include "fUML/Semantics/SemanticsPackage.hpp"
 #include "fUML/fUMLPackage.hpp"
+#include "fUML/Semantics/SemanticsPackage.hpp"
 #include "fUML/Semantics/CommonBehavior/CommonBehaviorPackage.hpp"
 #include "uml/umlPackage.hpp"
 
@@ -254,7 +254,7 @@ void ParameterValueImpl::loadNode(std::string nodeName, std::shared_ptr<persiste
 	//load BasePackage Nodes
 }
 
-void ParameterValueImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
+void ParameterValueImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject>> references)
 {
 	switch(featureID)
 	{

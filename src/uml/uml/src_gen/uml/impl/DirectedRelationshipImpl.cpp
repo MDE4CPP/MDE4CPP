@@ -204,7 +204,7 @@ void DirectedRelationshipImpl::loadNode(std::string nodeName, std::shared_ptr<pe
 	RelationshipImpl::loadNode(nodeName, loadHandler);
 }
 
-void DirectedRelationshipImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
+void DirectedRelationshipImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject>> references)
 {
 	RelationshipImpl::resolveReferences(featureID, references);
 }

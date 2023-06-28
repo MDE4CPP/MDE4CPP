@@ -286,7 +286,7 @@ void TemplateParameterSubstitutionImpl::loadNode(std::string nodeName, std::shar
 	ElementImpl::loadNode(nodeName, loadHandler);
 }
 
-void TemplateParameterSubstitutionImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
+void TemplateParameterSubstitutionImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject>> references)
 {
 	switch(featureID)
 	{

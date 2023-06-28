@@ -316,7 +316,7 @@ void ConstraintImpl::loadNode(std::string nodeName, std::shared_ptr<persistence:
 	PackageableElementImpl::loadNode(nodeName, loadHandler);
 }
 
-void ConstraintImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
+void ConstraintImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject>> references)
 {
 	switch(featureID)
 	{

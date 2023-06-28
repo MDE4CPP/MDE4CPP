@@ -264,7 +264,7 @@ void ReadVariableActionImpl::loadNode(std::string nodeName, std::shared_ptr<pers
 	VariableActionImpl::loadNode(nodeName, loadHandler);
 }
 
-void ReadVariableActionImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
+void ReadVariableActionImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject>> references)
 {
 	VariableActionImpl::resolveReferences(featureID, references);
 }

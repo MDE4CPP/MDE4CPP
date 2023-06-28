@@ -49,10 +49,10 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "uml/umlFactory.hpp"
-#include "fUML/Semantics/CommonBehavior/CommonBehaviorFactory.hpp"
 #include "ecore/ecoreFactory.hpp"
 #include "fUML/Semantics/Loci/LociFactory.hpp"
+#include "uml/umlFactory.hpp"
+#include "fUML/Semantics/CommonBehavior/CommonBehaviorFactory.hpp"
 #include "uml/Behavior.hpp"
 #include "uml/Classifier.hpp"
 #include "uml/Comment.hpp"
@@ -65,8 +65,8 @@
 #include "fUML/Semantics/CommonBehavior/ParameterValue.hpp"
 #include "fUML/Semantics/Loci/SemanticVisitor.hpp"
 //Factories and Package includes
-#include "fUML/Semantics/SemanticsPackage.hpp"
 #include "fUML/fUMLPackage.hpp"
+#include "fUML/Semantics/SemanticsPackage.hpp"
 #include "fUML/Semantics/CommonBehavior/CommonBehaviorPackage.hpp"
 #include "fUML/Semantics/Loci/LociPackage.hpp"
 #include "fUML/MDE4CPP_Extensions/MDE4CPP_ExtensionsPackage.hpp"
@@ -214,7 +214,7 @@ std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> ExecutionI
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
-	std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue> > outputs(new Bag<fUML::Semantics::CommonBehavior::ParameterValue>());
+	std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> outputs(new Bag<fUML::Semantics::CommonBehavior::ParameterValue>());
 
 	const std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>>& outputParameterValueList = this->getParameterValues();
     for (const std::shared_ptr<fUML::Semantics::CommonBehavior::ParameterValue>& parameterValue : *outputParameterValueList)
@@ -461,7 +461,7 @@ void ExecutionImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::
 	fUML::Semantics::Loci::SemanticVisitorImpl::loadNode(nodeName, loadHandler);
 }
 
-void ExecutionImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
+void ExecutionImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject>> references)
 {
 	switch(featureID)
 	{

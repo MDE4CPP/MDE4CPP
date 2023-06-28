@@ -345,7 +345,7 @@ void ReduceActionImpl::loadNode(std::string nodeName, std::shared_ptr<persistenc
 	ActionImpl::loadNode(nodeName, loadHandler);
 }
 
-void ReduceActionImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
+void ReduceActionImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject>> references)
 {
 	switch(featureID)
 	{

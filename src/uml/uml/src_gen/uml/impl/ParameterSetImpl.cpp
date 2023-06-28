@@ -294,7 +294,7 @@ void ParameterSetImpl::loadNode(std::string nodeName, std::shared_ptr<persistenc
 	NamedElementImpl::loadNode(nodeName, loadHandler);
 }
 
-void ParameterSetImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
+void ParameterSetImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject>> references)
 {
 	switch(featureID)
 	{

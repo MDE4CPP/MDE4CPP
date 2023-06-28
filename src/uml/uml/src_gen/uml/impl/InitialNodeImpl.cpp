@@ -221,7 +221,7 @@ void InitialNodeImpl::loadNode(std::string nodeName, std::shared_ptr<persistence
 	ControlNodeImpl::loadNode(nodeName, loadHandler);
 }
 
-void InitialNodeImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
+void InitialNodeImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject>> references)
 {
 	ControlNodeImpl::resolveReferences(featureID, references);
 }

@@ -243,7 +243,7 @@ void ImageImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::inte
 	ElementImpl::loadNode(nodeName, loadHandler);
 }
 
-void ImageImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
+void ImageImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject>> references)
 {
 	ElementImpl::resolveReferences(featureID, references);
 }

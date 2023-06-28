@@ -185,7 +185,7 @@ void OperationTemplateParameterImpl::loadNode(std::string nodeName, std::shared_
 	TemplateParameterImpl::loadNode(nodeName, loadHandler);
 }
 
-void OperationTemplateParameterImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
+void OperationTemplateParameterImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject>> references)
 {
 	TemplateParameterImpl::resolveReferences(featureID, references);
 }

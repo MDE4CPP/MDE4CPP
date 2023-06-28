@@ -278,7 +278,7 @@ void InformationItemImpl::loadNode(std::string nodeName, std::shared_ptr<persist
 	ClassifierImpl::loadNode(nodeName, loadHandler);
 }
 
-void InformationItemImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
+void InformationItemImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject>> references)
 {
 	switch(featureID)
 	{

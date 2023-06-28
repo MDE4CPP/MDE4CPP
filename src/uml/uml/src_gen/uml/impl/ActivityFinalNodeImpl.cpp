@@ -221,7 +221,7 @@ void ActivityFinalNodeImpl::loadNode(std::string nodeName, std::shared_ptr<persi
 	FinalNodeImpl::loadNode(nodeName, loadHandler);
 }
 
-void ActivityFinalNodeImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
+void ActivityFinalNodeImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject>> references)
 {
 	FinalNodeImpl::resolveReferences(featureID, references);
 }

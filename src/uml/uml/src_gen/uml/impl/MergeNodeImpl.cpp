@@ -221,7 +221,7 @@ void MergeNodeImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::
 	ControlNodeImpl::loadNode(nodeName, loadHandler);
 }
 
-void MergeNodeImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
+void MergeNodeImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject>> references)
 {
 	ControlNodeImpl::resolveReferences(featureID, references);
 }

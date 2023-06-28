@@ -307,7 +307,7 @@ void GeneralizationSetImpl::loadNode(std::string nodeName, std::shared_ptr<persi
 	PackageableElementImpl::loadNode(nodeName, loadHandler);
 }
 
-void GeneralizationSetImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
+void GeneralizationSetImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject>> references)
 {
 	switch(featureID)
 	{

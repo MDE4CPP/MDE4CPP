@@ -204,7 +204,7 @@ void CollectionItemImpl::loadNode(std::string nodeName, std::shared_ptr<persiste
 	CollectionLiteralPartImpl::loadNode(nodeName, loadHandler);
 }
 
-void CollectionItemImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
+void CollectionItemImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject>> references)
 {
 	CollectionLiteralPartImpl::resolveReferences(featureID, references);
 }

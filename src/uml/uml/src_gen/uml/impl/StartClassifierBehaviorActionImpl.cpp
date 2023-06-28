@@ -263,7 +263,7 @@ void StartClassifierBehaviorActionImpl::loadNode(std::string nodeName, std::shar
 	ActionImpl::loadNode(nodeName, loadHandler);
 }
 
-void StartClassifierBehaviorActionImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
+void StartClassifierBehaviorActionImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject>> references)
 {
 	ActionImpl::resolveReferences(featureID, references);
 }

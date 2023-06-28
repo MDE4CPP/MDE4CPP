@@ -383,7 +383,7 @@ void DeploymentImpl::loadNode(std::string nodeName, std::shared_ptr<persistence:
 	DependencyImpl::loadNode(nodeName, loadHandler);
 }
 
-void DeploymentImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
+void DeploymentImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject>> references)
 {
 	switch(featureID)
 	{

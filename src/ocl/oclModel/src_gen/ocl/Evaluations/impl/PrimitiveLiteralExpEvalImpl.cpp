@@ -39,8 +39,8 @@
 
 #include <exception> // used in Persistence
 #include "ecore/ecoreFactory.hpp"
-#include "ocl/Expressions/ExpressionsFactory.hpp"
 #include "ocl/Evaluations/EvaluationsFactory.hpp"
+#include "ocl/Expressions/ExpressionsFactory.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClassifier.hpp"
 #include "ecore/EGenericType.hpp"
@@ -169,7 +169,7 @@ void PrimitiveLiteralExpEvalImpl::loadNode(std::string nodeName, std::shared_ptr
 	LiteralExpEvalImpl::loadNode(nodeName, loadHandler);
 }
 
-void PrimitiveLiteralExpEvalImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
+void PrimitiveLiteralExpEvalImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject>> references)
 {
 	LiteralExpEvalImpl::resolveReferences(featureID, references);
 }

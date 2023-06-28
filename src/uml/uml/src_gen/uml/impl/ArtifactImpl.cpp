@@ -568,7 +568,7 @@ void ArtifactImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::i
 	DeployedArtifactImpl::loadNode(nodeName, loadHandler);
 }
 
-void ArtifactImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
+void ArtifactImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject>> references)
 {
 	ClassifierImpl::resolveReferences(featureID, references);
 	DeployedArtifactImpl::resolveReferences(featureID, references);

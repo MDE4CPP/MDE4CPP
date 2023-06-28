@@ -210,14 +210,14 @@ bool EOperationImpl::isOverrideOf(const std::shared_ptr<ecore::EOperation>& some
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
-		std::shared_ptr<ecore::EClass > containingClass = someOperation->getEContainingClass().lock();
+		std::shared_ptr<ecore::EClass> containingClass = someOperation->getEContainingClass().lock();
 	if(nullptr == containingClass)
 	{
 		std::cerr << __PRETTY_FUNCTION__ << " containing class not set." << std::endl;
 		return false;
 	}
 
-	std::shared_ptr<ecore::EClass > thisContainingClass = getEContainingClass().lock();
+	std::shared_ptr<ecore::EClass> thisContainingClass = getEContainingClass().lock();
 	if(nullptr == thisContainingClass)
 	{
 		std::cerr << __PRETTY_FUNCTION__ << " thisContainingClass not set." << std::endl;
@@ -226,8 +226,8 @@ bool EOperationImpl::isOverrideOf(const std::shared_ptr<ecore::EOperation>& some
 
 	if (containingClass->isSuperTypeOf(thisContainingClass) && (someOperation->getName()==getName()))
     {
-        std::shared_ptr< Bag<ecore::EParameter> > parameters = getEParameters();
-        std::shared_ptr< Bag<ecore::EParameter> > otherParameters = someOperation->getEParameters();
+        std::shared_ptr<Bag<ecore::EParameter>> parameters = getEParameters();
+        std::shared_ptr<Bag<ecore::EParameter>> otherParameters = someOperation->getEParameters();
         if (parameters->size() == otherParameters->size())
         {
             for (Bag<EParameter> ::iterator i = parameters->begin(), j = otherParameters->begin(); i != parameters->end(); ++i,++j )
@@ -434,7 +434,7 @@ void EOperationImpl::loadNode(std::string nodeName, std::shared_ptr<persistence:
 	ETypedElementImpl::loadNode(nodeName, loadHandler);
 }
 
-void EOperationImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<EObject> > references)
+void EOperationImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<EObject>> references)
 {
 	switch(featureID)
 	{

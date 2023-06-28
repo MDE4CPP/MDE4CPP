@@ -248,7 +248,7 @@ void BehaviorExecutionSpecificationImpl::loadNode(std::string nodeName, std::sha
 	ExecutionSpecificationImpl::loadNode(nodeName, loadHandler);
 }
 
-void BehaviorExecutionSpecificationImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
+void BehaviorExecutionSpecificationImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject>> references)
 {
 	switch(featureID)
 	{

@@ -217,7 +217,7 @@ void DestructionOccurrenceSpecificationImpl::loadNode(std::string nodeName, std:
 	MessageOccurrenceSpecificationImpl::loadNode(nodeName, loadHandler);
 }
 
-void DestructionOccurrenceSpecificationImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
+void DestructionOccurrenceSpecificationImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject>> references)
 {
 	MessageOccurrenceSpecificationImpl::resolveReferences(featureID, references);
 }

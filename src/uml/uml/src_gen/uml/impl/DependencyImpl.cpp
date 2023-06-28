@@ -339,7 +339,7 @@ void DependencyImpl::loadNode(std::string nodeName, std::shared_ptr<persistence:
 	PackageableElementImpl::loadNode(nodeName, loadHandler);
 }
 
-void DependencyImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
+void DependencyImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject>> references)
 {
 	switch(featureID)
 	{

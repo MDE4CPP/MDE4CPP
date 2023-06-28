@@ -344,7 +344,7 @@ void OpaqueBehaviorImpl::loadNode(std::string nodeName, std::shared_ptr<persiste
 	BehaviorImpl::loadNode(nodeName, loadHandler);
 }
 
-void OpaqueBehaviorImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
+void OpaqueBehaviorImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject>> references)
 {
 	BehaviorImpl::resolveReferences(featureID, references);
 }

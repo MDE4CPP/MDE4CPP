@@ -201,7 +201,7 @@ void TupleLiteralExpEvalImpl::loadNode(std::string nodeName, std::shared_ptr<per
 	LiteralExpEvalImpl::loadNode(nodeName, loadHandler);
 }
 
-void TupleLiteralExpEvalImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
+void TupleLiteralExpEvalImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject>> references)
 {
 	switch(featureID)
 	{

@@ -43,9 +43,9 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "uml/umlFactory.hpp"
 #include "fUML/Semantics/Activities/ActivitiesFactory.hpp"
 #include "fUML/Semantics/Actions/ActionsFactory.hpp"
+#include "uml/umlFactory.hpp"
 #include "uml/Action.hpp"
 #include "fUML/Semantics/Actions/ActionActivation.hpp"
 #include "fUML/Semantics/Activities/ActivityEdgeInstance.hpp"
@@ -57,8 +57,8 @@
 #include "uml/ReadExtentAction.hpp"
 #include "fUML/Semantics/Activities/Token.hpp"
 //Factories and Package includes
-#include "fUML/Semantics/SemanticsPackage.hpp"
 #include "fUML/fUMLPackage.hpp"
+#include "fUML/Semantics/SemanticsPackage.hpp"
 #include "fUML/Semantics/Actions/ActionsPackage.hpp"
 #include "fUML/Semantics/Activities/ActivitiesPackage.hpp"
 #include "uml/umlPackage.hpp"
@@ -273,7 +273,7 @@ void ReadExtentActionActivationImpl::loadNode(std::string nodeName, std::shared_
 	ActionActivationImpl::loadNode(nodeName, loadHandler);
 }
 
-void ReadExtentActionActivationImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
+void ReadExtentActionActivationImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject>> references)
 {
 	switch(featureID)
 	{

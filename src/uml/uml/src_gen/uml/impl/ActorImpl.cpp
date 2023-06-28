@@ -250,7 +250,7 @@ void ActorImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::inte
 	BehavioredClassifierImpl::loadNode(nodeName, loadHandler);
 }
 
-void ActorImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
+void ActorImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject>> references)
 {
 	BehavioredClassifierImpl::resolveReferences(featureID, references);
 }

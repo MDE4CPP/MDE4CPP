@@ -249,7 +249,7 @@ void ConsiderIgnoreFragmentImpl::loadNode(std::string nodeName, std::shared_ptr<
 	CombinedFragmentImpl::loadNode(nodeName, loadHandler);
 }
 
-void ConsiderIgnoreFragmentImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
+void ConsiderIgnoreFragmentImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject>> references)
 {
 	switch(featureID)
 	{

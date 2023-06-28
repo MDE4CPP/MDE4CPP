@@ -325,7 +325,7 @@ void LifelineImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::i
 	NamedElementImpl::loadNode(nodeName, loadHandler);
 }
 
-void LifelineImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
+void LifelineImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject>> references)
 {
 	switch(featureID)
 	{

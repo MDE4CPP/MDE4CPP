@@ -220,7 +220,7 @@ void CommentImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::in
 	ElementImpl::loadNode(nodeName, loadHandler);
 }
 
-void CommentImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
+void CommentImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject>> references)
 {
 	switch(featureID)
 	{

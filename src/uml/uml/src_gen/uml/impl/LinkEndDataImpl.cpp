@@ -300,7 +300,7 @@ void LinkEndDataImpl::loadNode(std::string nodeName, std::shared_ptr<persistence
 	ElementImpl::loadNode(nodeName, loadHandler);
 }
 
-void LinkEndDataImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
+void LinkEndDataImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject>> references)
 {
 	switch(featureID)
 	{

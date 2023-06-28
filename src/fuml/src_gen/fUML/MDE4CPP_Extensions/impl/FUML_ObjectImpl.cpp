@@ -38,10 +38,10 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "uml/umlFactory.hpp"
-#include "fUML/Semantics/CommonBehavior/CommonBehaviorFactory.hpp"
 #include "ecore/ecoreFactory.hpp"
 #include "fUML/Semantics/Loci/LociFactory.hpp"
+#include "fUML/Semantics/CommonBehavior/CommonBehaviorFactory.hpp"
+#include "uml/umlFactory.hpp"
 #include "uml/Class.hpp"
 #include "uml/Classifier.hpp"
 #include "uml/Comment.hpp"
@@ -325,7 +325,7 @@ void FUML_ObjectImpl::loadNode(std::string nodeName, std::shared_ptr<persistence
 	uml::ElementImpl::loadNode(nodeName, loadHandler);
 }
 
-void FUML_ObjectImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
+void FUML_ObjectImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject>> references)
 {
 	switch(featureID)
 	{

@@ -352,7 +352,7 @@ void ProtocolStateMachineImpl::loadNode(std::string nodeName, std::shared_ptr<pe
 	StateMachineImpl::loadNode(nodeName, loadHandler);
 }
 
-void ProtocolStateMachineImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
+void ProtocolStateMachineImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject>> references)
 {
 	StateMachineImpl::resolveReferences(featureID, references);
 }

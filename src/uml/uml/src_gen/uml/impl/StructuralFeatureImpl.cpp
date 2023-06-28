@@ -222,7 +222,7 @@ void StructuralFeatureImpl::loadNode(std::string nodeName, std::shared_ptr<persi
 	TypedElementImpl::loadNode(nodeName, loadHandler);
 }
 
-void StructuralFeatureImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
+void StructuralFeatureImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject>> references)
 {
 	FeatureImpl::resolveReferences(featureID, references);
 	MultiplicityElementImpl::resolveReferences(featureID, references);

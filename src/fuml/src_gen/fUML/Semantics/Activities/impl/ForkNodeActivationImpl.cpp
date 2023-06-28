@@ -50,8 +50,8 @@
 #include "fUML/Semantics/Activities/ControlNodeActivation.hpp"
 #include "fUML/Semantics/Activities/Token.hpp"
 //Factories and Package includes
-#include "fUML/Semantics/SemanticsPackage.hpp"
 #include "fUML/fUMLPackage.hpp"
+#include "fUML/Semantics/SemanticsPackage.hpp"
 #include "fUML/Semantics/Activities/ActivitiesPackage.hpp"
 #include "uml/umlPackage.hpp"
 
@@ -141,7 +141,7 @@ void ForkNodeActivationImpl::fire(const std::shared_ptr<Bag<fUML::Semantics::Act
 	}
 #endif
 
-    std::shared_ptr<Bag<fUML::Semantics::Activities::Token> > forkedTokens(new Bag<fUML::Semantics::Activities::Token>());
+    std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> forkedTokens(new Bag<fUML::Semantics::Activities::Token>());
     for (unsigned int i = 0; i < incomingTokens->size(); i++) 
     {
     	const std::shared_ptr<fUML::Semantics::Activities::Token>& token = incomingTokens->at(i);
@@ -233,7 +233,7 @@ void ForkNodeActivationImpl::loadNode(std::string nodeName, std::shared_ptr<pers
 	ControlNodeActivationImpl::loadNode(nodeName, loadHandler);
 }
 
-void ForkNodeActivationImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
+void ForkNodeActivationImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject>> references)
 {
 	ControlNodeActivationImpl::resolveReferences(featureID, references);
 }

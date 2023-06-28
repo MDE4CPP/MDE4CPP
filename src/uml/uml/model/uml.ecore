@@ -382,7 +382,7 @@
         <details key="originalName" value="superClass"/>
       </eAnnotations>
       <eAnnotations source="http://tu-ilmenau.de/see/codegen">
-        <details key="body" value="std::shared_ptr&lt;Bag&lt;uml::Class> > superClass(new Bag&lt;uml::Class> () );&#x9;&#xA;&#x9;&#xA;    std::shared_ptr&lt;Bag&lt;uml::Classifier> > classifierList = getGenerals();&#x9;&#xA;    for (const std::shared_ptr&lt;Classifier>&amp; c : *classifierList)&#x9;&#xA;    {&#x9;&#xA;    &#x9;std::shared_ptr&lt;uml::Class> cl = std::dynamic_pointer_cast&lt;uml::Class>(c);&#xA;        if(cl)&#xA;        {&#xA;            superClass->push_back(cl);&#xA;        }&#x9;&#xA;    }&#x9;&#xA;    return superClass;"/>
+        <details key="body" value="std::shared_ptr&lt;Bag&lt;uml::Class>> superClass(new Bag&lt;uml::Class> () );&#x9;&#xA;&#x9;&#xA;    std::shared_ptr&lt;Bag&lt;uml::Classifier>> classifierList = getGenerals();&#x9;&#xA;    for (const std::shared_ptr&lt;Classifier>&amp; c : *classifierList)&#x9;&#xA;    {&#x9;&#xA;    &#x9;std::shared_ptr&lt;uml::Class> cl = std::dynamic_pointer_cast&lt;uml::Class>(c);&#xA;        if(cl)&#xA;        {&#xA;            superClass->push_back(cl);&#xA;        }&#x9;&#xA;    }&#x9;&#xA;    return superClass;"/>
       </eAnnotations>
     </eOperations>
     <eOperations name="getAllOperations" ordered="false" upperBound="-1" eType="#//Operation">
@@ -631,7 +631,7 @@
         <details key="documentation" value="Retrieves all the attributes of this classifier, including those inherited from its parents."/>
       </eAnnotations>
       <eAnnotations source="http://tu-ilmenau.de/see/codegen">
-        <details key="body" value="    std::shared_ptr&lt;Bag&lt;uml::Property>> allAttributes(new Bag&lt;uml::Property>());&#xA;&#xA;    const std::shared_ptr&lt;Bag&lt;uml::Property>>&amp; attributes = this->getAttribute();&#xA;    allAttributes->insert(allAttributes->end(), attributes->begin(), attributes->end());&#xA;&#xA;    std::shared_ptr&lt;Bag&lt;Classifier> > classList = this->getGenerals();&#xA;    for (const std::shared_ptr&lt;Classifier>&amp; c : *classList)&#xA;    {&#xA;        std::shared_ptr&lt;Bag&lt;Property>> attributesOfClass = c->getAllAttributes();&#xA;        allAttributes->insert(allAttributes->end(), attributesOfClass->begin(), attributesOfClass->end());&#xA;    }&#xA;    return allAttributes;"/>
+        <details key="body" value="    std::shared_ptr&lt;Bag&lt;uml::Property>> allAttributes(new Bag&lt;uml::Property>());&#xA;&#xA;    const std::shared_ptr&lt;Bag&lt;uml::Property>>&amp; attributes = this->getAttribute();&#xA;    allAttributes->insert(allAttributes->end(), attributes->begin(), attributes->end());&#xA;&#xA;    std::shared_ptr&lt;Bag&lt;Classifier>> classList = this->getGenerals();&#xA;    for (const std::shared_ptr&lt;Classifier>&amp; c : *classList)&#xA;    {&#xA;        std::shared_ptr&lt;Bag&lt;Property>> attributesOfClass = c->getAllAttributes();&#xA;        allAttributes->insert(allAttributes->end(), attributesOfClass->begin(), attributesOfClass->end());&#xA;    }&#xA;    return allAttributes;"/>
       </eAnnotations>
     </eOperations>
     <eOperations name="getAllOperations" ordered="false" upperBound="-1" eType="#//Operation">
@@ -765,7 +765,7 @@
         <details key="documentation" value="The query parents() gives all of the immediate ancestors of a generalized Classifier.&#xA;result = (generalization.general->asSet())&#xA;&lt;p>From package UML::Classification.&lt;/p>"/>
       </eAnnotations>
       <eAnnotations source="http://tu-ilmenau.de/see/codegen">
-        <details key="body" value="std::shared_ptr&lt; Bag&lt;uml::Classifier> > returnList(new Bag&lt;uml::Classifier>());&#xA;&#xA;&#x9;for(const std::shared_ptr&lt;Generalization>&amp; gen : *getGeneralization())&#xA;&#x9;{&#xA;&#x9;&#x9;returnList->push_back(gen->getGeneral());&#xA;&#x9;}&#xA;&#xA;&#x9;return returnList;"/>
+        <details key="body" value="std::shared_ptr&lt;Bag&lt;uml::Classifier>> returnList(new Bag&lt;uml::Classifier>());&#xA;&#xA;&#x9;for(const std::shared_ptr&lt;Generalization>&amp; gen : *getGeneralization())&#xA;&#x9;{&#xA;&#x9;&#x9;returnList->push_back(gen->getGeneral());&#xA;&#x9;}&#xA;&#xA;&#x9;return returnList;"/>
       </eAnnotations>
     </eOperations>
     <eOperations name="directlyRealizedInterfaces" ordered="false" upperBound="-1"
@@ -1235,7 +1235,7 @@
         <details key="documentation" value="The query allNamespaces() gives the sequence of Namespaces in which the NamedElement is nested, working outwards.&#xA;result = (&#xA;if owner = null&#xA;  then OrderedSet{}&#xA;else&#xA;  let enclosingNamespace : Namespace =&#xA;    if owner.oclIsKindOf(TemplateParameter) and owner.oclAsType(TemplateParameter).signature.template.oclIsKindOf(Namespace)&#xA;      then owner.oclAsType(TemplateParameter).signature.template.oclAsType(Namespace)&#xA;    else&#xA;      namespace&#xA;    endif&#xA;  in enclosingNamespace.allNamespaces()->prepend(enclosingNamespace)&#xA;endif)&#xA;&lt;p>From package UML::CommonStructure.&lt;/p>"/>
       </eAnnotations>
       <eAnnotations source="http://tu-ilmenau.de/see/codegen">
-        <details key="body" value="std::shared_ptr&lt;Bag&lt;uml::Namespace> > allNS(new Bag&lt;uml::Namespace>());&#xD;&#xA;    if (getNamespace().lock() == nullptr)&#xD;&#xA;    {&#xD;&#xA;        return allNS;&#xD;&#xA;    }&#xD;&#xA;    else&#xD;&#xA;    {&#xD;&#xA;    &#x9;std::shared_ptr&lt;Bag&lt;uml::Namespace> > currentNSList = getNamespace().lock()->allNamespaces();&#xD;&#xA;        allNS->insert(allNS->end(), currentNSList->begin(), currentNSList->end());&#xD;&#xA;        currentNSList = nullptr;&#xD;&#xA;&#xD;&#xA;        std::shared_ptr&lt;uml::Namespace> currentNS = getNamespace().lock();&#xD;&#xA;        if (currentNS != nullptr)&#xD;&#xA;        {&#xD;&#xA;            allNS->push_back(currentNS);&#xD;&#xA;        }&#xD;&#xA;        return allNS;&#xD;&#xA;    }"/>
+        <details key="body" value="std::shared_ptr&lt;Bag&lt;uml::Namespace>> allNS(new Bag&lt;uml::Namespace>());&#xA;    if (getNamespace().lock() == nullptr)&#xA;    {&#xA;        return allNS;&#xA;    }&#xA;    else&#xA;    {&#xA;    &#x9;std::shared_ptr&lt;Bag&lt;uml::Namespace>> currentNSList = getNamespace().lock()->allNamespaces();&#xA;        allNS->insert(allNS->end(), currentNSList->begin(), currentNSList->end());&#xA;        currentNSList = nullptr;&#xA;&#xA;        std::shared_ptr&lt;uml::Namespace> currentNS = getNamespace().lock();&#xA;        if (currentNS != nullptr)&#xA;        {&#xA;            allNS->push_back(currentNS);&#xA;        }&#xA;        return allNS;&#xA;    }"/>
         <details key="const"/>
       </eAnnotations>
     </eOperations>
@@ -1260,7 +1260,7 @@
         <details key="originalName" value="qualifiedName"/>
       </eAnnotations>
       <eAnnotations source="http://tu-ilmenau.de/see/codegen">
-        <details key="body" value="std::shared_ptr&lt; Bag&lt;uml::Namespace> >  allNS = allNamespaces();&#xA;&#xA;    if(!this->getName().empty() &amp;&amp; std::none_of(allNS->cbegin(), allNS->cend(), [](std::shared_ptr&lt;uml::Namespace> ns){ return ns->getName().empty(); }))&#xA;    {&#xA;        std::string ret;&#xA;        for(const std::shared_ptr&lt;uml::Namespace>&amp; ns : *allNS )&#xA;        {&#xA;            ret += ns->getName() + separator();&#xA;        }&#xA;        ret += getName();&#xA;        return ret;&#xA;    }&#xA;    else&#xA;    {&#xA;        return std::string();&#xA;    }"/>
+        <details key="body" value="std::shared_ptr&lt;Bag&lt;uml::Namespace>>  allNS = allNamespaces();&#xA;&#xA;    if(!this->getName().empty() &amp;&amp; std::none_of(allNS->cbegin(), allNS->cend(), [](std::shared_ptr&lt;uml::Namespace> ns){ return ns->getName().empty(); }))&#xA;    {&#xA;        std::string ret;&#xA;        for(const std::shared_ptr&lt;uml::Namespace>&amp; ns : *allNS )&#xA;        {&#xA;            ret += ns->getName() + separator();&#xA;        }&#xA;        ret += getName();&#xA;        return ret;&#xA;    }&#xA;    else&#xA;    {&#xA;        return std::string();&#xA;    }"/>
         <details key="const"/>
       </eAnnotations>
     </eOperations>

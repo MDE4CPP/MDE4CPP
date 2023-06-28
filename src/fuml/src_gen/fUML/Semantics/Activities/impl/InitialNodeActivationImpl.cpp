@@ -49,8 +49,8 @@
 #include "fUML/Semantics/Activities/ControlNodeActivation.hpp"
 #include "fUML/Semantics/Activities/Token.hpp"
 //Factories and Package includes
-#include "fUML/Semantics/SemanticsPackage.hpp"
 #include "fUML/fUMLPackage.hpp"
+#include "fUML/Semantics/SemanticsPackage.hpp"
 #include "fUML/Semantics/Activities/ActivitiesPackage.hpp"
 #include "uml/umlPackage.hpp"
 
@@ -126,7 +126,7 @@ void InitialNodeActivationImpl::fire(const std::shared_ptr<Bag<fUML::Semantics::
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
-		std::shared_ptr<Bag<fUML::Semantics::Activities::Token> > tokens(new Bag<fUML::Semantics::Activities::Token>());
+		std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> tokens(new Bag<fUML::Semantics::Activities::Token>());
 	//struct null_deleter{void operator()(void const *) const { } };
 	std::shared_ptr<fUML::Semantics::Activities::ControlToken> controlToken(fUML::Semantics::Activities::ActivitiesFactory::eInstance()->createControlToken());
     tokens->push_back(controlToken);
@@ -191,7 +191,7 @@ void InitialNodeActivationImpl::loadNode(std::string nodeName, std::shared_ptr<p
 	ControlNodeActivationImpl::loadNode(nodeName, loadHandler);
 }
 
-void InitialNodeActivationImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
+void InitialNodeActivationImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject>> references)
 {
 	ControlNodeActivationImpl::resolveReferences(featureID, references);
 }

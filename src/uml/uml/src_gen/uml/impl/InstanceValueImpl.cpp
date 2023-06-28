@@ -274,7 +274,7 @@ void InstanceValueImpl::loadNode(std::string nodeName, std::shared_ptr<persisten
 	ValueSpecificationImpl::loadNode(nodeName, loadHandler);
 }
 
-void InstanceValueImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
+void InstanceValueImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject>> references)
 {
 	switch(featureID)
 	{

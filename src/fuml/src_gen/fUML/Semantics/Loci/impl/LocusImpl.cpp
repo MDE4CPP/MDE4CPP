@@ -61,8 +61,8 @@
 #include "fUML/MDE4CPP_Extensions/FUML_SignalInstance.hpp"
 #include "uml/Signal.hpp"
 //Factories and Package includes
-#include "fUML/Semantics/SemanticsPackage.hpp"
 #include "fUML/fUMLPackage.hpp"
+#include "fUML/Semantics/SemanticsPackage.hpp"
 #include "fUML/Semantics/Loci/LociPackage.hpp"
 #include "fUML/MDE4CPP_Extensions/MDE4CPP_ExtensionsPackage.hpp"
 #include "uml/umlPackage.hpp"
@@ -427,7 +427,7 @@ void LocusImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::inte
 	//load BasePackage Nodes
 }
 
-void LocusImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
+void LocusImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject>> references)
 {
 	ecore::EObjectImpl::resolveReferences(featureID, references);
 }

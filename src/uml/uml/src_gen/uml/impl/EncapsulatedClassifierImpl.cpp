@@ -324,7 +324,7 @@ void EncapsulatedClassifierImpl::loadNode(std::string nodeName, std::shared_ptr<
 	StructuredClassifierImpl::loadNode(nodeName, loadHandler);
 }
 
-void EncapsulatedClassifierImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
+void EncapsulatedClassifierImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject>> references)
 {
 	StructuredClassifierImpl::resolveReferences(featureID, references);
 }

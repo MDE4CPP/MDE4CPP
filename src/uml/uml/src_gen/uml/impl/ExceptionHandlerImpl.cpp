@@ -266,7 +266,7 @@ void ExceptionHandlerImpl::loadNode(std::string nodeName, std::shared_ptr<persis
 	ElementImpl::loadNode(nodeName, loadHandler);
 }
 
-void ExceptionHandlerImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
+void ExceptionHandlerImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject>> references)
 {
 	switch(featureID)
 	{

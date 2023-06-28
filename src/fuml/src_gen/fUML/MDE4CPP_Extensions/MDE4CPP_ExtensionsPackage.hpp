@@ -14,13 +14,13 @@
 
 namespace ecore 
 {
-	class EParameter;
 	class EStringToStringMapEntry;
-	class EGenericType;
-	class EReference;
-	class EOperation;
 	class EAnnotation;
+	class EReference;
+	class EGenericType;
+	class EOperation;
 	class EClass;
+	class EParameter;
 }
 
 namespace fUML::MDE4CPP_Extensions 

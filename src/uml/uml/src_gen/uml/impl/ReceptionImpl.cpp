@@ -228,7 +228,7 @@ void ReceptionImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::
 	BehavioralFeatureImpl::loadNode(nodeName, loadHandler);
 }
 
-void ReceptionImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
+void ReceptionImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject>> references)
 {
 	switch(featureID)
 	{

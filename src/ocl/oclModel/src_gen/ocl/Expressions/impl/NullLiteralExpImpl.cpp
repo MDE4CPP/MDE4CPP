@@ -305,7 +305,7 @@ void NullLiteralExpImpl::loadNode(std::string nodeName, std::shared_ptr<persiste
 	LiteralExpImpl::loadNode(nodeName, loadHandler);
 }
 
-void NullLiteralExpImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
+void NullLiteralExpImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject>> references)
 {
 	LiteralExpImpl::resolveReferences(featureID, references);
 }

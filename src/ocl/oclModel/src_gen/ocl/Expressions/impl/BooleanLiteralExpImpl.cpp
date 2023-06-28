@@ -337,7 +337,7 @@ void BooleanLiteralExpImpl::loadNode(std::string nodeName, std::shared_ptr<persi
 	PrimitiveLiteralExpImpl::loadNode(nodeName, loadHandler);
 }
 
-void BooleanLiteralExpImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
+void BooleanLiteralExpImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject>> references)
 {
 	PrimitiveLiteralExpImpl::resolveReferences(featureID, references);
 }

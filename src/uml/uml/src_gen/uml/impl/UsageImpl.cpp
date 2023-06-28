@@ -214,7 +214,7 @@ void UsageImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::inte
 	DependencyImpl::loadNode(nodeName, loadHandler);
 }
 
-void UsageImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
+void UsageImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject>> references)
 {
 	DependencyImpl::resolveReferences(featureID, references);
 }

@@ -310,7 +310,7 @@ void ExpressionInOclImpl::loadNode(std::string nodeName, std::shared_ptr<persist
 	ecore::ETypedElementImpl::loadNode(nodeName, loadHandler);
 }
 
-void ExpressionInOclImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
+void ExpressionInOclImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject>> references)
 {
 	ecore::ETypedElementImpl::resolveReferences(featureID, references);
 }

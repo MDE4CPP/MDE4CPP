@@ -39,8 +39,8 @@
 #include <exception> // used in Persistence
 #include "fUML/Semantics/CommonBehavior/EventOccurrence.hpp"
 //Factories and Package includes
-#include "fUML/Semantics/SemanticsPackage.hpp"
 #include "fUML/fUMLPackage.hpp"
+#include "fUML/Semantics/SemanticsPackage.hpp"
 #include "fUML/Semantics/CommonBehavior/CommonBehaviorPackage.hpp"
 
 using namespace fUML::Semantics::CommonBehavior;
@@ -158,7 +158,7 @@ void EventAccepterImpl::loadNode(std::string nodeName, std::shared_ptr<persisten
 	//load BasePackage Nodes
 }
 
-void EventAccepterImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
+void EventAccepterImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject>> references)
 {
 	ecore::EObjectImpl::resolveReferences(featureID, references);
 }

@@ -248,7 +248,7 @@ void ContinuationImpl::loadNode(std::string nodeName, std::shared_ptr<persistenc
 	InteractionFragmentImpl::loadNode(nodeName, loadHandler);
 }
 
-void ContinuationImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
+void ContinuationImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject>> references)
 {
 	InteractionFragmentImpl::resolveReferences(featureID, references);
 }

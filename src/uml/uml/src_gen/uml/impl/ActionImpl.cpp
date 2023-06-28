@@ -481,7 +481,7 @@ void ActionImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::int
 	ExecutableNodeImpl::loadNode(nodeName, loadHandler);
 }
 
-void ActionImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
+void ActionImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject>> references)
 {
 	ExecutableNodeImpl::resolveReferences(featureID, references);
 }

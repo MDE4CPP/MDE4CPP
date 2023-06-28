@@ -302,7 +302,7 @@ void ClauseImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::int
 	ElementImpl::loadNode(nodeName, loadHandler);
 }
 
-void ClauseImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
+void ClauseImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject>> references)
 {
 	switch(featureID)
 	{

@@ -221,7 +221,7 @@ void MessageOccurrenceSpecificationImpl::loadNode(std::string nodeName, std::sha
 	OccurrenceSpecificationImpl::loadNode(nodeName, loadHandler);
 }
 
-void MessageOccurrenceSpecificationImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
+void MessageOccurrenceSpecificationImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject>> references)
 {
 	MessageEndImpl::resolveReferences(featureID, references);
 	OccurrenceSpecificationImpl::resolveReferences(featureID, references);

@@ -216,7 +216,7 @@ void RealizationImpl::loadNode(std::string nodeName, std::shared_ptr<persistence
 	AbstractionImpl::loadNode(nodeName, loadHandler);
 }
 
-void RealizationImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
+void RealizationImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject>> references)
 {
 	AbstractionImpl::resolveReferences(featureID, references);
 }

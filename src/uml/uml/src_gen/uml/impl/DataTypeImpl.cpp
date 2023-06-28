@@ -398,7 +398,7 @@ void DataTypeImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::i
 	ClassifierImpl::loadNode(nodeName, loadHandler);
 }
 
-void DataTypeImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
+void DataTypeImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject>> references)
 {
 	ClassifierImpl::resolveReferences(featureID, references);
 }

@@ -251,7 +251,7 @@ void TypeImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::inter
 	PackageableElementImpl::loadNode(nodeName, loadHandler);
 }
 
-void TypeImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
+void TypeImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject>> references)
 {
 	switch(featureID)
 	{

@@ -323,7 +323,7 @@ void InvocationActionImpl::loadNode(std::string nodeName, std::shared_ptr<persis
 	ActionImpl::loadNode(nodeName, loadHandler);
 }
 
-void InvocationActionImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
+void InvocationActionImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject>> references)
 {
 	switch(featureID)
 	{

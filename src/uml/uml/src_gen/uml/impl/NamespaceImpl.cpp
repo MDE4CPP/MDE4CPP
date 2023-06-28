@@ -538,7 +538,7 @@ void NamespaceImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::
 	NamedElementImpl::loadNode(nodeName, loadHandler);
 }
 
-void NamespaceImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
+void NamespaceImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject>> references)
 {
 	NamedElementImpl::resolveReferences(featureID, references);
 }

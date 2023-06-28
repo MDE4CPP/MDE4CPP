@@ -196,7 +196,7 @@ void MessageArgumentsImpl::loadNode(std::string nodeName, std::shared_ptr<persis
 	ecore::ETypedElementImpl::loadNode(nodeName, loadHandler);
 }
 
-void MessageArgumentsImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
+void MessageArgumentsImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject>> references)
 {
 	switch(featureID)
 	{

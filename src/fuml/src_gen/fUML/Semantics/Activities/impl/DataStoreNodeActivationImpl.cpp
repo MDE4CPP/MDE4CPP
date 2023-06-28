@@ -48,8 +48,8 @@
 #include "fUML/Semantics/Activities/CentralBufferNodeActivation.hpp"
 #include "fUML/Semantics/Activities/Token.hpp"
 //Factories and Package includes
-#include "fUML/Semantics/SemanticsPackage.hpp"
 #include "fUML/fUMLPackage.hpp"
+#include "fUML/Semantics/SemanticsPackage.hpp"
 #include "fUML/Semantics/Activities/ActivitiesPackage.hpp"
 #include "uml/umlPackage.hpp"
 
@@ -131,7 +131,7 @@ void DataStoreNodeActivationImpl::addToken(const std::shared_ptr<fUML::Semantics
 		if (value != nullptr) 
 		{
 			/* Curretly not supported
-			std::shared_ptr<Bag<fUML::Semantics::Activities::Token> > heldTokens = this->getTokens();
+			std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> heldTokens = this->getTokens();
 			unsigned int i = 0;
 			while (isUnique && i < heldTokens->size()) 
 			{
@@ -218,7 +218,7 @@ void DataStoreNodeActivationImpl::loadNode(std::string nodeName, std::shared_ptr
 	CentralBufferNodeActivationImpl::loadNode(nodeName, loadHandler);
 }
 
-void DataStoreNodeActivationImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
+void DataStoreNodeActivationImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject>> references)
 {
 	CentralBufferNodeActivationImpl::resolveReferences(featureID, references);
 }

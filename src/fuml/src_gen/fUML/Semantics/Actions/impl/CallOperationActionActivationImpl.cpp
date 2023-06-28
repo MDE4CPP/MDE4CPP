@@ -73,8 +73,8 @@
 #include "fUML/Semantics/Actions/PinActivation.hpp"
 #include "fUML/Semantics/Activities/Token.hpp"
 //Factories and Package includes
-#include "fUML/Semantics/SemanticsPackage.hpp"
 #include "fUML/fUMLPackage.hpp"
+#include "fUML/Semantics/SemanticsPackage.hpp"
 #include "fUML/Semantics/Actions/ActionsPackage.hpp"
 #include "fUML/Semantics/Activities/ActivitiesPackage.hpp"
 #include "fUML/Semantics/CommonBehavior/CommonBehaviorPackage.hpp"
@@ -279,7 +279,7 @@ std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> CallOperat
 				return nullptr;
 			}
 			
-			std::shared_ptr<Bag<fUML::Semantics::Activities::Token> > unofferedTokens = targetPinActivation->getUnofferedTokens();
+			std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> unofferedTokens = targetPinActivation->getUnofferedTokens();
 			if(unofferedTokens == nullptr)
 			{
 				DEBUG_ERROR("Unoffered tokens is nullptr! Failed to call operation!")
@@ -535,7 +535,7 @@ void CallOperationActionActivationImpl::loadNode(std::string nodeName, std::shar
 	CallActionActivationImpl::loadNode(nodeName, loadHandler);
 }
 
-void CallOperationActionActivationImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
+void CallOperationActionActivationImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject>> references)
 {
 	switch(featureID)
 	{

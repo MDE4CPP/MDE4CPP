@@ -329,7 +329,7 @@ void PrimitiveLiteralExpImpl::loadNode(std::string nodeName, std::shared_ptr<per
 	LiteralExpImpl::loadNode(nodeName, loadHandler);
 }
 
-void PrimitiveLiteralExpImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
+void PrimitiveLiteralExpImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject>> references)
 {
 	LiteralExpImpl::resolveReferences(featureID, references);
 }

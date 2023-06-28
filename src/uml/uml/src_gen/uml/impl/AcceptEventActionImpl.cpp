@@ -398,7 +398,7 @@ void AcceptEventActionImpl::loadNode(std::string nodeName, std::shared_ptr<persi
 	ActionImpl::loadNode(nodeName, loadHandler);
 }
 
-void AcceptEventActionImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
+void AcceptEventActionImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject>> references)
 {
 	ActionImpl::resolveReferences(featureID, references);
 }

@@ -316,7 +316,7 @@ void TemplateParameterImpl::loadNode(std::string nodeName, std::shared_ptr<persi
 	ElementImpl::loadNode(nodeName, loadHandler);
 }
 
-void TemplateParameterImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
+void TemplateParameterImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject>> references)
 {
 	switch(featureID)
 	{

@@ -276,7 +276,7 @@ void ExtensionEndImpl::loadNode(std::string nodeName, std::shared_ptr<persistenc
 	PropertyImpl::loadNode(nodeName, loadHandler);
 }
 
-void ExtensionEndImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
+void ExtensionEndImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject>> references)
 {
 	PropertyImpl::resolveReferences(featureID, references);
 }

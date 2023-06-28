@@ -294,7 +294,7 @@ void ReadExtentActionImpl::loadNode(std::string nodeName, std::shared_ptr<persis
 	ActionImpl::loadNode(nodeName, loadHandler);
 }
 
-void ReadExtentActionImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
+void ReadExtentActionImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject>> references)
 {
 	switch(featureID)
 	{

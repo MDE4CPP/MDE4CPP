@@ -328,7 +328,7 @@ void DeploymentSpecificationImpl::loadNode(std::string nodeName, std::shared_ptr
 	ArtifactImpl::loadNode(nodeName, loadHandler);
 }
 
-void DeploymentSpecificationImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
+void DeploymentSpecificationImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject>> references)
 {
 	switch(featureID)
 	{

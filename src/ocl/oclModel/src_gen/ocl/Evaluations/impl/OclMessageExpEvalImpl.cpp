@@ -240,7 +240,7 @@ void OclMessageExpEvalImpl::loadNode(std::string nodeName, std::shared_ptr<persi
 	OclExpEvalImpl::loadNode(nodeName, loadHandler);
 }
 
-void OclMessageExpEvalImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
+void OclMessageExpEvalImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject>> references)
 {
 	switch(featureID)
 	{

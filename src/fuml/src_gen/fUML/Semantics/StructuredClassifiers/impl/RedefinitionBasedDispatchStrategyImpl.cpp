@@ -48,8 +48,8 @@
 #include "uml/Element.hpp"
 #include "uml/Operation.hpp"
 //Factories and Package includes
-#include "fUML/Semantics/SemanticsPackage.hpp"
 #include "fUML/fUMLPackage.hpp"
+#include "fUML/Semantics/SemanticsPackage.hpp"
 #include "fUML/Semantics/StructuredClassifiers/StructuredClassifiersPackage.hpp"
 #include "uml/umlPackage.hpp"
 
@@ -158,7 +158,7 @@ std::shared_ptr<uml::Behavior> RedefinitionBasedDispatchStrategyImpl::retrieveMe
 		unsigned long metaElementID = type->eClass()->getMetaElementID();
 		if(metaElementID == uml::umlPackage::CLASS_CLASS || metaElementID == uml::umlPackage::INTERFACE_CLASS)
 		{
-		std::shared_ptr<Bag<uml::Operation> > memberOperations = type->getAllOperations();
+		std::shared_ptr<Bag<uml::Operation>> memberOperations = type->getAllOperations();
 		unsigned int j = 0;
 		while(method == nullptr && (j < memberOperations->size()))
 		{
@@ -233,7 +233,7 @@ void RedefinitionBasedDispatchStrategyImpl::loadNode(std::string nodeName, std::
 	DispatchStrategyImpl::loadNode(nodeName, loadHandler);
 }
 
-void RedefinitionBasedDispatchStrategyImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
+void RedefinitionBasedDispatchStrategyImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject>> references)
 {
 	DispatchStrategyImpl::resolveReferences(featureID, references);
 }

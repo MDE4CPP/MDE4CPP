@@ -335,7 +335,7 @@ void ETypedElementImpl::loadNode(std::string nodeName, std::shared_ptr<persisten
 	ENamedElementImpl::loadNode(nodeName, loadHandler);
 }
 
-void ETypedElementImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<EObject> > references)
+void ETypedElementImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<EObject>> references)
 {
 	switch(featureID)
 	{

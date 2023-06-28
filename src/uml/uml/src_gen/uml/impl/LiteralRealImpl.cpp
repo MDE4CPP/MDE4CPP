@@ -290,7 +290,7 @@ void LiteralRealImpl::loadNode(std::string nodeName, std::shared_ptr<persistence
 	LiteralSpecificationImpl::loadNode(nodeName, loadHandler);
 }
 
-void LiteralRealImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
+void LiteralRealImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject>> references)
 {
 	LiteralSpecificationImpl::resolveReferences(featureID, references);
 }

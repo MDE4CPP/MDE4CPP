@@ -215,7 +215,7 @@ void InitOrDerValueExpImpl::loadNode(std::string nodeName, std::shared_ptr<persi
 	ecore::ETypedElementImpl::loadNode(nodeName, loadHandler);
 }
 
-void InitOrDerValueExpImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
+void InitOrDerValueExpImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject>> references)
 {
 	switch(featureID)
 	{

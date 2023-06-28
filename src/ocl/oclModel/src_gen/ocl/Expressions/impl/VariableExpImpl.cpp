@@ -337,7 +337,7 @@ void VariableExpImpl::loadNode(std::string nodeName, std::shared_ptr<persistence
 	OclExpressionImpl::loadNode(nodeName, loadHandler);
 }
 
-void VariableExpImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
+void VariableExpImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject>> references)
 {
 	OclExpressionImpl::resolveReferences(featureID, references);
 }

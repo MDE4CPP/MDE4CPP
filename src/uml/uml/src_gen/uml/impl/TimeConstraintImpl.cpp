@@ -265,7 +265,7 @@ void TimeConstraintImpl::loadNode(std::string nodeName, std::shared_ptr<persiste
 	IntervalConstraintImpl::loadNode(nodeName, loadHandler);
 }
 
-void TimeConstraintImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
+void TimeConstraintImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject>> references)
 {
 	IntervalConstraintImpl::resolveReferences(featureID, references);
 }

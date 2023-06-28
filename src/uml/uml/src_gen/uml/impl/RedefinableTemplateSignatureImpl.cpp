@@ -353,7 +353,7 @@ void RedefinableTemplateSignatureImpl::loadNode(std::string nodeName, std::share
 	TemplateSignatureImpl::loadNode(nodeName, loadHandler);
 }
 
-void RedefinableTemplateSignatureImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
+void RedefinableTemplateSignatureImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject>> references)
 {
 	switch(featureID)
 	{

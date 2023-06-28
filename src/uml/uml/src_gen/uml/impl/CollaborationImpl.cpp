@@ -321,7 +321,7 @@ void CollaborationImpl::loadNode(std::string nodeName, std::shared_ptr<persisten
 	StructuredClassifierImpl::loadNode(nodeName, loadHandler);
 }
 
-void CollaborationImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
+void CollaborationImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject>> references)
 {
 	switch(featureID)
 	{

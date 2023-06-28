@@ -304,7 +304,7 @@ void EEnumImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::inte
 	EDataTypeImpl::loadNode(nodeName, loadHandler);
 }
 
-void EEnumImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<EObject> > references)
+void EEnumImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<EObject>> references)
 {
 	EDataTypeImpl::resolveReferences(featureID, references);
 }

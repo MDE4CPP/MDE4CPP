@@ -56,8 +56,8 @@
 #include "fUML/Semantics/Loci/SemanticVisitor.hpp"
 #include "fUML/Semantics/Activities/Token.hpp"
 //Factories and Package includes
-#include "fUML/Semantics/SemanticsPackage.hpp"
 #include "fUML/fUMLPackage.hpp"
+#include "fUML/Semantics/SemanticsPackage.hpp"
 #include "fUML/Semantics/Activities/ActivitiesPackage.hpp"
 #include "fUML/Semantics/Loci/LociPackage.hpp"
 #include "uml/umlPackage.hpp"
@@ -329,7 +329,7 @@ void ActivityNodeActivationImpl::receiveOffer()
 
     bool ready = this->isReady();
 
-    std::shared_ptr<Bag<Token> > tokens;
+    std::shared_ptr<Bag<Token>> tokens;
    	 if (ready) 
     	{
        		DEBUG_INFO(((this->getNode() == nullptr) ? "Anonymous node" : (this->getNode()->eClass()->getName() + " '" + this->getNode()->getName() + "'.")) << " is ready for execution. Taking offered tokens.")
@@ -453,7 +453,7 @@ std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> ActivityNodeActivationI
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
-	std::shared_ptr<Bag<fUML::Semantics::Activities::Token> > allTokens(new Bag<fUML::Semantics::Activities::Token>());
+	std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> allTokens(new Bag<fUML::Semantics::Activities::Token>());
 	const std::shared_ptr<Bag<fUML::Semantics::Activities::ActivityEdgeInstance>>& incomingEdgeList = this->getIncomingEdges();
 
 	DEBUG_INFO(((this->getNode() == nullptr) ? "Anonymous node" : (this->getNode()->eClass()->getName() + " '" + this->getNode()->getName() + "'")) << " has " << incomingEdgeList->size() << " incoming edges.")
@@ -474,7 +474,7 @@ std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> ActivityNodeActivationI
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
-	std::shared_ptr<Bag<fUML::Semantics::Activities::Token> > tokens = this->getTokens();
+	std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> tokens = this->getTokens();
     this->clearTokens();
 
     return tokens;
@@ -688,7 +688,7 @@ void ActivityNodeActivationImpl::loadNode(std::string nodeName, std::shared_ptr<
 	fUML::Semantics::Loci::SemanticVisitorImpl::loadNode(nodeName, loadHandler);
 }
 
-void ActivityNodeActivationImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
+void ActivityNodeActivationImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject>> references)
 {
 	switch(featureID)
 	{

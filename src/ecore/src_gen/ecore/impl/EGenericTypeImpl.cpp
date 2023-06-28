@@ -343,7 +343,7 @@ void EGenericTypeImpl::loadNode(std::string nodeName, std::shared_ptr<persistenc
 	//load BasePackage Nodes
 }
 
-void EGenericTypeImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<EObject> > references)
+void EGenericTypeImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<EObject>> references)
 {
 	switch(featureID)
 	{

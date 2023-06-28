@@ -221,7 +221,7 @@ void ForkNodeImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::i
 	ControlNodeImpl::loadNode(nodeName, loadHandler);
 }
 
-void ForkNodeImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
+void ForkNodeImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject>> references)
 {
 	ControlNodeImpl::resolveReferences(featureID, references);
 }

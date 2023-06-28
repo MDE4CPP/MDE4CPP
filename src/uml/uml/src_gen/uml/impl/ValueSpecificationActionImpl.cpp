@@ -295,7 +295,7 @@ void ValueSpecificationActionImpl::loadNode(std::string nodeName, std::shared_pt
 	ActionImpl::loadNode(nodeName, loadHandler);
 }
 
-void ValueSpecificationActionImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
+void ValueSpecificationActionImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject>> references)
 {
 	ActionImpl::resolveReferences(featureID, references);
 }

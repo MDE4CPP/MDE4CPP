@@ -323,7 +323,7 @@ void TestIdentityActionImpl::loadNode(std::string nodeName, std::shared_ptr<pers
 	ActionImpl::loadNode(nodeName, loadHandler);
 }
 
-void TestIdentityActionImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
+void TestIdentityActionImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject>> references)
 {
 	ActionImpl::resolveReferences(featureID, references);
 }

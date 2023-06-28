@@ -296,7 +296,7 @@ void CallOperationActionImpl::loadNode(std::string nodeName, std::shared_ptr<per
 	CallActionImpl::loadNode(nodeName, loadHandler);
 }
 
-void CallOperationActionImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
+void CallOperationActionImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject>> references)
 {
 	switch(featureID)
 	{

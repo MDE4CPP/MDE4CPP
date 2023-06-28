@@ -820,7 +820,7 @@ void PackageImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::in
 	TemplateableElementImpl::loadNode(nodeName, loadHandler);
 }
 
-void PackageImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
+void PackageImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject>> references)
 {
 	switch(featureID)
 	{

@@ -294,7 +294,7 @@ void CreateObjectActionImpl::loadNode(std::string nodeName, std::shared_ptr<pers
 	ActionImpl::loadNode(nodeName, loadHandler);
 }
 
-void CreateObjectActionImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
+void CreateObjectActionImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject>> references)
 {
 	switch(featureID)
 	{

@@ -206,7 +206,7 @@ void ObservationImpl::loadNode(std::string nodeName, std::shared_ptr<persistence
 	PackageableElementImpl::loadNode(nodeName, loadHandler);
 }
 
-void ObservationImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
+void ObservationImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject>> references)
 {
 	PackageableElementImpl::resolveReferences(featureID, references);
 }

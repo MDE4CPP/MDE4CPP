@@ -61,8 +61,8 @@
 #include "fUML/Semantics/Activities/Token.hpp"
 #include "fUML/Semantics/Actions/WriteStructuralFeatureActionActivation.hpp"
 //Factories and Package includes
-#include "fUML/Semantics/SemanticsPackage.hpp"
 #include "fUML/fUMLPackage.hpp"
+#include "fUML/Semantics/SemanticsPackage.hpp"
 #include "fUML/Semantics/Actions/ActionsPackage.hpp"
 #include "fUML/Semantics/Activities/ActivitiesPackage.hpp"
 #include "uml/umlPackage.hpp"
@@ -426,7 +426,7 @@ void AddStructuralFeatureValueActionActivationImpl::loadNode(std::string nodeNam
 	WriteStructuralFeatureActionActivationImpl::loadNode(nodeName, loadHandler);
 }
 
-void AddStructuralFeatureValueActionActivationImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
+void AddStructuralFeatureValueActionActivationImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject>> references)
 {
 	switch(featureID)
 	{

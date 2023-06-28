@@ -339,7 +339,7 @@ void MultiplicityElementImpl::loadNode(std::string nodeName, std::shared_ptr<per
 	ElementImpl::loadNode(nodeName, loadHandler);
 }
 
-void MultiplicityElementImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
+void MultiplicityElementImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject>> references)
 {
 	ElementImpl::resolveReferences(featureID, references);
 }

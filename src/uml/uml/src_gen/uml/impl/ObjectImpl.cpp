@@ -205,7 +205,7 @@ void ObjectImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::int
 	//load BasePackage Nodes
 }
 
-void ObjectImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
+void ObjectImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject>> references)
 {
 	ecore::EObjectImpl::resolveReferences(featureID, references);
 }

@@ -41,8 +41,8 @@
 #include "fUML/Semantics/CommonBehavior/GetNextEventStrategy.hpp"
 #include "fUML/Semantics/CommonBehavior/ObjectActivation.hpp"
 //Factories and Package includes
-#include "fUML/Semantics/SemanticsPackage.hpp"
 #include "fUML/fUMLPackage.hpp"
+#include "fUML/Semantics/SemanticsPackage.hpp"
 #include "fUML/Semantics/CommonBehavior/CommonBehaviorPackage.hpp"
 
 using namespace fUML::Semantics::CommonBehavior;
@@ -171,7 +171,7 @@ void FIFOGetNextEventStrategyImpl::loadNode(std::string nodeName, std::shared_pt
 	GetNextEventStrategyImpl::loadNode(nodeName, loadHandler);
 }
 
-void FIFOGetNextEventStrategyImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
+void FIFOGetNextEventStrategyImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject>> references)
 {
 	GetNextEventStrategyImpl::resolveReferences(featureID, references);
 }

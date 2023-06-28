@@ -206,7 +206,7 @@ void EventImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::inte
 	PackageableElementImpl::loadNode(nodeName, loadHandler);
 }
 
-void EventImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
+void EventImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject>> references)
 {
 	PackageableElementImpl::resolveReferences(featureID, references);
 }

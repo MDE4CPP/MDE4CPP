@@ -57,8 +57,8 @@
 #include "fUML/MDE4CPP_Extensions/FUML_Object.hpp"
 #include "fUML/Semantics/CommonBehavior/ParameterValue.hpp"
 //Factories and Package includes
-#include "fUML/Semantics/SemanticsPackage.hpp"
 #include "fUML/fUMLPackage.hpp"
+#include "fUML/Semantics/SemanticsPackage.hpp"
 #include "fUML/Semantics/CommonBehavior/CommonBehaviorPackage.hpp"
 #include "fUML/MDE4CPP_Extensions/MDE4CPP_ExtensionsPackage.hpp"
 #include "uml/umlPackage.hpp"
@@ -268,7 +268,7 @@ void ObjectActivationImpl::startBehavior(const std::shared_ptr<uml::Class>& clas
         		std::shared_ptr<uml::Class> type = std::dynamic_pointer_cast<uml::Class>(classifier);
         		if ((std::dynamic_pointer_cast<uml::Behavior>(type) != nullptr) || (type->getClassifierBehavior() != nullptr))
             		{
-            			std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue> > parameterValue(new Bag<fUML::Semantics::CommonBehavior::ParameterValue>());
+            			std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> parameterValue(new Bag<fUML::Semantics::CommonBehavior::ParameterValue>());
             			this->startBehavior(type, parameterValue);
             		}
         	}
@@ -482,7 +482,7 @@ void ObjectActivationImpl::loadNode(std::string nodeName, std::shared_ptr<persis
 	//load BasePackage Nodes
 }
 
-void ObjectActivationImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
+void ObjectActivationImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject>> references)
 {
 	switch(featureID)
 	{

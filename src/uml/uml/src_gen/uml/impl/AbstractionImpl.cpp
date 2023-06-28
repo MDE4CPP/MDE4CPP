@@ -253,7 +253,7 @@ void AbstractionImpl::loadNode(std::string nodeName, std::shared_ptr<persistence
 	DependencyImpl::loadNode(nodeName, loadHandler);
 }
 
-void AbstractionImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
+void AbstractionImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject>> references)
 {
 	DependencyImpl::resolveReferences(featureID, references);
 }

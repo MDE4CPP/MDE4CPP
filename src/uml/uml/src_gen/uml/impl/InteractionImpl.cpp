@@ -650,7 +650,7 @@ void InteractionImpl::loadNode(std::string nodeName, std::shared_ptr<persistence
 	InteractionFragmentImpl::loadNode(nodeName, loadHandler);
 }
 
-void InteractionImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
+void InteractionImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject>> references)
 {
 	BehaviorImpl::resolveReferences(featureID, references);
 	InteractionFragmentImpl::resolveReferences(featureID, references);

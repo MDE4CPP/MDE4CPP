@@ -324,7 +324,7 @@ void EnumerationImpl::loadNode(std::string nodeName, std::shared_ptr<persistence
 	DataTypeImpl::loadNode(nodeName, loadHandler);
 }
 
-void EnumerationImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
+void EnumerationImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject>> references)
 {
 	DataTypeImpl::resolveReferences(featureID, references);
 }

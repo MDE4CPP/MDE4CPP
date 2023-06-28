@@ -286,7 +286,7 @@ void ProtocolTransitionImpl::loadNode(std::string nodeName, std::shared_ptr<pers
 	TransitionImpl::loadNode(nodeName, loadHandler);
 }
 
-void ProtocolTransitionImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
+void ProtocolTransitionImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject>> references)
 {
 	switch(featureID)
 	{

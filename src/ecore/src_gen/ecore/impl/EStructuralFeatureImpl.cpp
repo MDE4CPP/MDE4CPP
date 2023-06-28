@@ -344,7 +344,7 @@ void EStructuralFeatureImpl::loadNode(std::string nodeName, std::shared_ptr<pers
 	ETypedElementImpl::loadNode(nodeName, loadHandler);
 }
 
-void EStructuralFeatureImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<EObject> > references)
+void EStructuralFeatureImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<EObject>> references)
 {
 	ETypedElementImpl::resolveReferences(featureID, references);
 }

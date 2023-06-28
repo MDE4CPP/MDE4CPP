@@ -408,7 +408,7 @@ void ConditionalNodeImpl::loadNode(std::string nodeName, std::shared_ptr<persist
 	StructuredActivityNodeImpl::loadNode(nodeName, loadHandler);
 }
 
-void ConditionalNodeImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
+void ConditionalNodeImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject>> references)
 {
 	StructuredActivityNodeImpl::resolveReferences(featureID, references);
 }

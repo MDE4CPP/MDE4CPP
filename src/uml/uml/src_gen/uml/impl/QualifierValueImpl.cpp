@@ -220,7 +220,7 @@ void QualifierValueImpl::loadNode(std::string nodeName, std::shared_ptr<persiste
 	ElementImpl::loadNode(nodeName, loadHandler);
 }
 
-void QualifierValueImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
+void QualifierValueImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject>> references)
 {
 	switch(featureID)
 	{

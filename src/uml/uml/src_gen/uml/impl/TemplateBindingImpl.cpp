@@ -308,7 +308,7 @@ void TemplateBindingImpl::loadNode(std::string nodeName, std::shared_ptr<persist
 	DirectedRelationshipImpl::loadNode(nodeName, loadHandler);
 }
 
-void TemplateBindingImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
+void TemplateBindingImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject>> references)
 {
 	switch(featureID)
 	{

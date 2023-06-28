@@ -300,7 +300,7 @@ void InterruptibleActivityRegionImpl::loadNode(std::string nodeName, std::shared
 	ActivityGroupImpl::loadNode(nodeName, loadHandler);
 }
 
-void InterruptibleActivityRegionImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
+void InterruptibleActivityRegionImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject>> references)
 {
 	switch(featureID)
 	{

@@ -513,7 +513,7 @@ std::shared_ptr<Bag<uml::Property>> ClassifierImpl::getAllAttributes()
     const std::shared_ptr<Bag<uml::Property>>& attributes = this->getAttribute();
     allAttributes->insert(allAttributes->end(), attributes->begin(), attributes->end());
 
-    std::shared_ptr<Bag<Classifier> > classList = this->getGenerals();
+    std::shared_ptr<Bag<Classifier>> classList = this->getGenerals();
     for (const std::shared_ptr<Classifier>& c : *classList)
     {
         std::shared_ptr<Bag<Property>> attributesOfClass = c->getAllAttributes();
@@ -634,7 +634,7 @@ std::shared_ptr<Bag<uml::Classifier>> ClassifierImpl::parents()
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
-	std::shared_ptr< Bag<uml::Classifier> > returnList(new Bag<uml::Classifier>());
+	std::shared_ptr<Bag<uml::Classifier>> returnList(new Bag<uml::Classifier>());
 
 	for(const std::shared_ptr<Generalization>& gen : *getGeneralization())
 	{
@@ -1086,7 +1086,7 @@ void ClassifierImpl::loadNode(std::string nodeName, std::shared_ptr<persistence:
 	TypeImpl::loadNode(nodeName, loadHandler);
 }
 
-void ClassifierImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
+void ClassifierImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject>> references)
 {
 	switch(featureID)
 	{

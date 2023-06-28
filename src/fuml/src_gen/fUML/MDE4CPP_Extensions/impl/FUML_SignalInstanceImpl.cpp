@@ -38,8 +38,8 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "uml/umlFactory.hpp"
 #include "ecore/ecoreFactory.hpp"
+#include "uml/umlFactory.hpp"
 #include "uml/Comment.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "uml/Element.hpp"
@@ -174,7 +174,7 @@ void FUML_SignalInstanceImpl::loadNode(std::string nodeName, std::shared_ptr<per
 	uml::ElementImpl::loadNode(nodeName, loadHandler);
 }
 
-void FUML_SignalInstanceImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
+void FUML_SignalInstanceImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject>> references)
 {
 	uml::ElementImpl::resolveReferences(featureID, references);
 }

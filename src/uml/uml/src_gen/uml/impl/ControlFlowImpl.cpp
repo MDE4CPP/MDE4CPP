@@ -221,7 +221,7 @@ void ControlFlowImpl::loadNode(std::string nodeName, std::shared_ptr<persistence
 	ActivityEdgeImpl::loadNode(nodeName, loadHandler);
 }
 
-void ControlFlowImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
+void ControlFlowImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject>> references)
 {
 	ActivityEdgeImpl::resolveReferences(featureID, references);
 }

@@ -182,7 +182,7 @@ std::shared_ptr<ecore::EClassifier> EPackageImpl::getEClassifier(std::string nam
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
-	std::shared_ptr<Bag<EClassifier> > classifierList = getEClassifiers();
+	std::shared_ptr<Bag<EClassifier>> classifierList = getEClassifiers();
     for (const std::shared_ptr<EClassifier>& c : *classifierList)
     {
         if(c->getName()==name)
@@ -397,7 +397,7 @@ void EPackageImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::i
 	ENamedElementImpl::loadNode(nodeName, loadHandler);
 }
 
-void EPackageImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<EObject> > references)
+void EPackageImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<EObject>> references)
 {
 	switch(featureID)
 	{

@@ -47,8 +47,8 @@
 #include "uml/Operation.hpp"
 #include "fUML/Semantics/Loci/SemanticStrategy.hpp"
 //Factories and Package includes
-#include "fUML/Semantics/SemanticsPackage.hpp"
 #include "fUML/fUMLPackage.hpp"
+#include "fUML/Semantics/SemanticsPackage.hpp"
 #include "fUML/Semantics/CommonBehavior/CommonBehaviorPackage.hpp"
 #include "fUML/Semantics/Loci/LociPackage.hpp"
 #include "fUML/Semantics/StructuredClassifiers/StructuredClassifiersPackage.hpp"
@@ -200,7 +200,7 @@ void DispatchStrategyImpl::loadNode(std::string nodeName, std::shared_ptr<persis
 	fUML::Semantics::Loci::SemanticStrategyImpl::loadNode(nodeName, loadHandler);
 }
 
-void DispatchStrategyImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
+void DispatchStrategyImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject>> references)
 {
 	fUML::Semantics::Loci::SemanticStrategyImpl::resolveReferences(featureID, references);
 }

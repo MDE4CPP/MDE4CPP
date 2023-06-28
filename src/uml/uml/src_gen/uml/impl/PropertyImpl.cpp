@@ -769,7 +769,7 @@ void PropertyImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::i
 	StructuralFeatureImpl::loadNode(nodeName, loadHandler);
 }
 
-void PropertyImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
+void PropertyImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject>> references)
 {
 	switch(featureID)
 	{

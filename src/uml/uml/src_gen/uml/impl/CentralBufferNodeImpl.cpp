@@ -225,7 +225,7 @@ void CentralBufferNodeImpl::loadNode(std::string nodeName, std::shared_ptr<persi
 	ObjectNodeImpl::loadNode(nodeName, loadHandler);
 }
 
-void CentralBufferNodeImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
+void CentralBufferNodeImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject>> references)
 {
 	ObjectNodeImpl::resolveReferences(featureID, references);
 }

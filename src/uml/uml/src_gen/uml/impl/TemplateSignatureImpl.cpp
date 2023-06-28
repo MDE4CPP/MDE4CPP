@@ -306,7 +306,7 @@ void TemplateSignatureImpl::loadNode(std::string nodeName, std::shared_ptr<persi
 	ElementImpl::loadNode(nodeName, loadHandler);
 }
 
-void TemplateSignatureImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
+void TemplateSignatureImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject>> references)
 {
 	switch(featureID)
 	{

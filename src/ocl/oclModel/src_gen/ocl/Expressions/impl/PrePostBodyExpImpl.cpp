@@ -247,7 +247,7 @@ void PrePostBodyExpImpl::loadNode(std::string nodeName, std::shared_ptr<persiste
 	ecore::ETypedElementImpl::loadNode(nodeName, loadHandler);
 }
 
-void PrePostBodyExpImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
+void PrePostBodyExpImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject>> references)
 {
 	switch(featureID)
 	{

@@ -279,7 +279,7 @@ void ConnectionPointReferenceImpl::loadNode(std::string nodeName, std::shared_pt
 	VertexImpl::loadNode(nodeName, loadHandler);
 }
 
-void ConnectionPointReferenceImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
+void ConnectionPointReferenceImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject>> references)
 {
 	switch(featureID)
 	{

@@ -253,7 +253,7 @@ void PinImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interf
 	ObjectNodeImpl::loadNode(nodeName, loadHandler);
 }
 
-void PinImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
+void PinImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject>> references)
 {
 	MultiplicityElementImpl::resolveReferences(featureID, references);
 	ObjectNodeImpl::resolveReferences(featureID, references);

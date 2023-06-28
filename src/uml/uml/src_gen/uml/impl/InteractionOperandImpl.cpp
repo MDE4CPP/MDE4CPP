@@ -330,7 +330,7 @@ void InteractionOperandImpl::loadNode(std::string nodeName, std::shared_ptr<pers
 	NamespaceImpl::loadNode(nodeName, loadHandler);
 }
 
-void InteractionOperandImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
+void InteractionOperandImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject>> references)
 {
 	InteractionFragmentImpl::resolveReferences(featureID, references);
 	NamespaceImpl::resolveReferences(featureID, references);

@@ -495,7 +495,7 @@ void UseCaseImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::in
 	BehavioredClassifierImpl::loadNode(nodeName, loadHandler);
 }
 
-void UseCaseImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
+void UseCaseImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject>> references)
 {
 	switch(featureID)
 	{

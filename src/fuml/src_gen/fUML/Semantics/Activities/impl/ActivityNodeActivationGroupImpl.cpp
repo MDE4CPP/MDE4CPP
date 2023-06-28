@@ -66,8 +66,8 @@
 #include "fUML/Semantics/Activities/ActivityParameterNodeActivation.hpp"
 #include "fUML/Semantics/Actions/StructuredActivityNodeActivation.hpp"
 //Factories and Package includes
-#include "fUML/Semantics/SemanticsPackage.hpp"
 #include "fUML/fUMLPackage.hpp"
+#include "fUML/Semantics/SemanticsPackage.hpp"
 #include "fUML/Semantics/Actions/ActionsPackage.hpp"
 #include "fUML/Semantics/Activities/ActivitiesPackage.hpp"
 #include "uml/umlPackage.hpp"
@@ -352,7 +352,7 @@ std::shared_ptr<Bag<fUML::Semantics::Activities::ActivityParameterNodeActivation
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
-		std::shared_ptr<Bag<fUML::Semantics::Activities::ActivityParameterNodeActivation> > parameterNodeActivations(new Bag<fUML::Semantics::Activities::ActivityParameterNodeActivation>());
+		std::shared_ptr<Bag<fUML::Semantics::Activities::ActivityParameterNodeActivation>> parameterNodeActivations(new Bag<fUML::Semantics::Activities::ActivityParameterNodeActivation>());
 	const std::shared_ptr<Bag<fUML::Semantics::Activities::ActivityNodeActivation>>& nodeActivations = this->getNodeActivations();
 	for (const std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivation>& activation : *nodeActivations)
 	{
@@ -466,7 +466,7 @@ void ActivityNodeActivationGroupImpl::run(const std::shared_ptr<Bag<fUML::Semant
 
     DEBUG_INFO("Checking for enabled nodes.")
 
-    std::shared_ptr<Bag<fUML::Semantics::Activities::ActivityNodeActivation> > enabledActivations(new Bag<fUML::Semantics::Activities::ActivityNodeActivation>());
+    std::shared_ptr<Bag<fUML::Semantics::Activities::ActivityNodeActivation>> enabledActivations(new Bag<fUML::Semantics::Activities::ActivityNodeActivation>());
     {
         auto endIter=activations->end();
 		for (auto it = activations->begin(); it != endIter; ++it)
@@ -542,7 +542,7 @@ void ActivityNodeActivationGroupImpl::runNodes(const std::shared_ptr<Bag<uml::Ac
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
-	std::shared_ptr<Bag<fUML::Semantics::Activities::ActivityNodeActivation> > nodeActivations(new Bag<fUML::Semantics::Activities::ActivityNodeActivation>());
+	std::shared_ptr<Bag<fUML::Semantics::Activities::ActivityNodeActivation>> nodeActivations(new Bag<fUML::Semantics::Activities::ActivityNodeActivation>());
 
     for (const std::shared_ptr<uml::ActivityNode>& node : *nodes) 
     {
@@ -766,7 +766,7 @@ void ActivityNodeActivationGroupImpl::loadNode(std::string nodeName, std::shared
 	//load BasePackage Nodes
 }
 
-void ActivityNodeActivationGroupImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
+void ActivityNodeActivationGroupImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject>> references)
 {
 	switch(featureID)
 	{

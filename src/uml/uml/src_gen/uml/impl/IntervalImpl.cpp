@@ -292,7 +292,7 @@ void IntervalImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::i
 	ValueSpecificationImpl::loadNode(nodeName, loadHandler);
 }
 
-void IntervalImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
+void IntervalImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject>> references)
 {
 	switch(featureID)
 	{

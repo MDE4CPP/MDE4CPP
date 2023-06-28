@@ -256,7 +256,7 @@ void ActivityParameterNodeImpl::loadNode(std::string nodeName, std::shared_ptr<p
 	ObjectNodeImpl::loadNode(nodeName, loadHandler);
 }
 
-void ActivityParameterNodeImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
+void ActivityParameterNodeImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject>> references)
 {
 	switch(featureID)
 	{

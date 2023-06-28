@@ -263,7 +263,7 @@ void ReadSelfActionImpl::loadNode(std::string nodeName, std::shared_ptr<persiste
 	ActionImpl::loadNode(nodeName, loadHandler);
 }
 
-void ReadSelfActionImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
+void ReadSelfActionImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject>> references)
 {
 	ActionImpl::resolveReferences(featureID, references);
 }

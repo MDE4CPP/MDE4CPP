@@ -284,7 +284,7 @@ void ExtensionImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::
 	AssociationImpl::loadNode(nodeName, loadHandler);
 }
 
-void ExtensionImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
+void ExtensionImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject>> references)
 {
 	AssociationImpl::resolveReferences(featureID, references);
 }

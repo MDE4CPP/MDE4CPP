@@ -303,7 +303,7 @@ void SlotImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::inter
 	ElementImpl::loadNode(nodeName, loadHandler);
 }
 
-void SlotImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
+void SlotImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject>> references)
 {
 	switch(featureID)
 	{

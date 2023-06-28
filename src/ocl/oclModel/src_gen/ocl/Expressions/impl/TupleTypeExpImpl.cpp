@@ -336,7 +336,7 @@ void TupleTypeExpImpl::loadNode(std::string nodeName, std::shared_ptr<persistenc
 	TypeExpImpl::loadNode(nodeName, loadHandler);
 }
 
-void TupleTypeExpImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
+void TupleTypeExpImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject>> references)
 {
 	switch(featureID)
 	{

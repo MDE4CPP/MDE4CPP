@@ -304,7 +304,7 @@ void EReferenceImpl::loadNode(std::string nodeName, std::shared_ptr<persistence:
 	EStructuralFeatureImpl::loadNode(nodeName, loadHandler);
 }
 
-void EReferenceImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<EObject> > references)
+void EReferenceImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<EObject>> references)
 {
 	switch(featureID)
 	{

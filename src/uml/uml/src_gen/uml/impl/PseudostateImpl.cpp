@@ -323,7 +323,7 @@ void PseudostateImpl::loadNode(std::string nodeName, std::shared_ptr<persistence
 	VertexImpl::loadNode(nodeName, loadHandler);
 }
 
-void PseudostateImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
+void PseudostateImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject>> references)
 {
 	switch(featureID)
 	{

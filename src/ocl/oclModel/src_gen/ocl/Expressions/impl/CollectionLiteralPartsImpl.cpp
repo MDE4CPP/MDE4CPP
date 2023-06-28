@@ -38,8 +38,8 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "ecore/ecoreFactory.hpp"
 #include "ocl/Expressions/ExpressionsFactory.hpp"
+#include "ecore/ecoreFactory.hpp"
 #include "ocl/Expressions/CollectionLiteralPart.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClassifier.hpp"
@@ -196,7 +196,7 @@ void CollectionLiteralPartsImpl::loadNode(std::string nodeName, std::shared_ptr<
 	ecore::ETypedElementImpl::loadNode(nodeName, loadHandler);
 }
 
-void CollectionLiteralPartsImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
+void CollectionLiteralPartsImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject>> references)
 {
 	switch(featureID)
 	{

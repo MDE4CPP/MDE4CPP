@@ -212,7 +212,7 @@ void ExtensionPointImpl::loadNode(std::string nodeName, std::shared_ptr<persiste
 	RedefinableElementImpl::loadNode(nodeName, loadHandler);
 }
 
-void ExtensionPointImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
+void ExtensionPointImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject>> references)
 {
 	switch(featureID)
 	{

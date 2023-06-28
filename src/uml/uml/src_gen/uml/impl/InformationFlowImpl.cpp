@@ -444,7 +444,7 @@ void InformationFlowImpl::loadNode(std::string nodeName, std::shared_ptr<persist
 	PackageableElementImpl::loadNode(nodeName, loadHandler);
 }
 
-void InformationFlowImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
+void InformationFlowImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject>> references)
 {
 	switch(featureID)
 	{

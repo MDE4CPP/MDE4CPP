@@ -264,7 +264,7 @@ void CreateLinkObjectActionImpl::loadNode(std::string nodeName, std::shared_ptr<
 	CreateLinkActionImpl::loadNode(nodeName, loadHandler);
 }
 
-void CreateLinkObjectActionImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
+void CreateLinkObjectActionImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject>> references)
 {
 	CreateLinkActionImpl::resolveReferences(featureID, references);
 }

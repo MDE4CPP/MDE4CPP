@@ -244,7 +244,7 @@ void TimeIntervalImpl::loadNode(std::string nodeName, std::shared_ptr<persistenc
 	IntervalImpl::loadNode(nodeName, loadHandler);
 }
 
-void TimeIntervalImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
+void TimeIntervalImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject>> references)
 {
 	IntervalImpl::resolveReferences(featureID, references);
 }

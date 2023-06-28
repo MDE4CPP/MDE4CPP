@@ -295,7 +295,7 @@ void ClearAssociationActionImpl::loadNode(std::string nodeName, std::shared_ptr<
 	ActionImpl::loadNode(nodeName, loadHandler);
 }
 
-void ClearAssociationActionImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
+void ClearAssociationActionImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject>> references)
 {
 	switch(featureID)
 	{

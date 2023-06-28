@@ -273,7 +273,7 @@ void OccurrenceSpecificationImpl::loadNode(std::string nodeName, std::shared_ptr
 	InteractionFragmentImpl::loadNode(nodeName, loadHandler);
 }
 
-void OccurrenceSpecificationImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
+void OccurrenceSpecificationImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject>> references)
 {
 	switch(featureID)
 	{

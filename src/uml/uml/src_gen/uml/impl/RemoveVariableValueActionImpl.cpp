@@ -296,7 +296,7 @@ void RemoveVariableValueActionImpl::loadNode(std::string nodeName, std::shared_p
 	WriteVariableActionImpl::loadNode(nodeName, loadHandler);
 }
 
-void RemoveVariableValueActionImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
+void RemoveVariableValueActionImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject>> references)
 {
 	WriteVariableActionImpl::resolveReferences(featureID, references);
 }

@@ -318,9 +318,9 @@ std::shared_ptr<Bag<uml::Class>> ClassImpl::getSuperClasses()
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
-	std::shared_ptr<Bag<uml::Class> > superClass(new Bag<uml::Class> () );	
+	std::shared_ptr<Bag<uml::Class>> superClass(new Bag<uml::Class> () );	
 	
-    std::shared_ptr<Bag<uml::Classifier> > classifierList = getGenerals();	
+    std::shared_ptr<Bag<uml::Classifier>> classifierList = getGenerals();	
     for (const std::shared_ptr<Classifier>& c : *classifierList)	
     {	
     	std::shared_ptr<uml::Class> cl = std::dynamic_pointer_cast<uml::Class>(c);
@@ -616,7 +616,7 @@ void ClassImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::inte
 	EncapsulatedClassifierImpl::loadNode(nodeName, loadHandler);
 }
 
-void ClassImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
+void ClassImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject>> references)
 {
 	switch(featureID)
 	{

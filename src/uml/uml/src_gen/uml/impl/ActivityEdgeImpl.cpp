@@ -503,7 +503,7 @@ void ActivityEdgeImpl::loadNode(std::string nodeName, std::shared_ptr<persistenc
 	RedefinableElementImpl::loadNode(nodeName, loadHandler);
 }
 
-void ActivityEdgeImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
+void ActivityEdgeImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject>> references)
 {
 	switch(featureID)
 	{

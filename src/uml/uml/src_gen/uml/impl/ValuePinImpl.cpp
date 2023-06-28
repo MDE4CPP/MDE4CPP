@@ -376,7 +376,7 @@ void ValuePinImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::i
 	InputPinImpl::loadNode(nodeName, loadHandler);
 }
 
-void ValuePinImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
+void ValuePinImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject>> references)
 {
 	InputPinImpl::resolveReferences(featureID, references);
 }

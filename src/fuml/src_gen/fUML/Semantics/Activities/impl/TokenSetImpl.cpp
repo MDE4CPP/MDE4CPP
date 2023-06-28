@@ -41,8 +41,8 @@
 #include "fUML/Semantics/Activities/ActivitiesFactory.hpp"
 #include "fUML/Semantics/Activities/Token.hpp"
 //Factories and Package includes
-#include "fUML/Semantics/SemanticsPackage.hpp"
 #include "fUML/fUMLPackage.hpp"
+#include "fUML/Semantics/SemanticsPackage.hpp"
 #include "fUML/Semantics/Activities/ActivitiesPackage.hpp"
 
 using namespace fUML::Semantics::Activities;
@@ -190,7 +190,7 @@ void TokenSetImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::i
 	//load BasePackage Nodes
 }
 
-void TokenSetImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
+void TokenSetImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject>> references)
 {
 	switch(featureID)
 	{

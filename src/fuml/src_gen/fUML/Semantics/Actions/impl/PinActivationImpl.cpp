@@ -52,8 +52,8 @@
 #include "uml/Pin.hpp"
 #include "fUML/Semantics/Activities/Token.hpp"
 //Factories and Package includes
-#include "fUML/Semantics/SemanticsPackage.hpp"
 #include "fUML/fUMLPackage.hpp"
+#include "fUML/Semantics/SemanticsPackage.hpp"
 #include "fUML/Semantics/Actions/ActionsPackage.hpp"
 #include "fUML/Semantics/Activities/ActivitiesPackage.hpp"
 #include "uml/umlPackage.hpp"
@@ -154,7 +154,7 @@ std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> PinActivationImpl::take
 		for (const std::shared_ptr<fUML::Semantics::Activities::ActivityEdgeInstance>& edgeInstance : *incomingEdges) 
 		{
 			int incomingCount = edgeInstance->countOfferedValue();
-			std::shared_ptr<Bag<fUML::Semantics::Activities::Token> > incomingTokens(new Bag<fUML::Semantics::Activities::Token>());
+			std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> incomingTokens(new Bag<fUML::Semantics::Activities::Token>());
 			if (upper < 0 || incomingCount < upper - count) 
 			{
 				incomingTokens = edgeInstance->takeOfferedTokens();
@@ -289,7 +289,7 @@ void PinActivationImpl::loadNode(std::string nodeName, std::shared_ptr<persisten
 	fUML::Semantics::Activities::ObjectNodeActivationImpl::loadNode(nodeName, loadHandler);
 }
 
-void PinActivationImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
+void PinActivationImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject>> references)
 {
 	switch(featureID)
 	{

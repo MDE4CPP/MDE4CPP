@@ -249,7 +249,7 @@ void PrimitiveTypeImpl::loadNode(std::string nodeName, std::shared_ptr<persisten
 	DataTypeImpl::loadNode(nodeName, loadHandler);
 }
 
-void PrimitiveTypeImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
+void PrimitiveTypeImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject>> references)
 {
 	DataTypeImpl::resolveReferences(featureID, references);
 }

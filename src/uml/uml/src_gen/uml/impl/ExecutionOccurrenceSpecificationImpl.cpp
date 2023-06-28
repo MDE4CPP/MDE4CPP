@@ -247,7 +247,7 @@ void ExecutionOccurrenceSpecificationImpl::loadNode(std::string nodeName, std::s
 	OccurrenceSpecificationImpl::loadNode(nodeName, loadHandler);
 }
 
-void ExecutionOccurrenceSpecificationImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
+void ExecutionOccurrenceSpecificationImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject>> references)
 {
 	switch(featureID)
 	{

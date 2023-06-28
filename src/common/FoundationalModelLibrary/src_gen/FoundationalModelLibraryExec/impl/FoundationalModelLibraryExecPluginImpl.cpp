@@ -150,7 +150,7 @@ std::shared_ptr<Any> FoundationalModelLibraryExecPluginImpl::executeActivity(std
 	{
 		case FoundationalModelLibrary::BasicInputOutput::BasicInputOutputPackage::BASICINPUTOUTPUT_ACTIVITY_WRITELINE:
 		{
-			std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue> > pList(new Bag<fUML::Semantics::CommonBehavior::ParameterValue>());
+			std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> pList(new Bag<fUML::Semantics::CommonBehavior::ParameterValue>());
 			
 			//Creating ParameterValue for input parameter WriteLine::value
 			{
@@ -169,7 +169,7 @@ std::shared_ptr<Any> FoundationalModelLibraryExecPluginImpl::executeActivity(std
 		}
 		case FoundationalModelLibrary::BasicInputOutput::BasicInputOutputPackage::BASICINPUTOUTPUT_ACTIVITY_READLINE:
 		{
-			std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue> > pList(new Bag<fUML::Semantics::CommonBehavior::ParameterValue>());
+			std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> pList(new Bag<fUML::Semantics::CommonBehavior::ParameterValue>());
 			
 			//Executing Activity ReadLine
 			std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> outputParameterValues = m_locus->getExecutor()->execute(FoundationalModelLibrary::BasicInputOutput::BasicInputOutputPackage::eInstance()->get_FoundationalModelLibrary_BasicInputOutput_ReadLine(), nullptr, pList);

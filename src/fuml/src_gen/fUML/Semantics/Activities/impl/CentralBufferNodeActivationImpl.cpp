@@ -46,8 +46,8 @@
 #include "fUML/Semantics/Activities/ObjectNodeActivation.hpp"
 #include "fUML/Semantics/Activities/Token.hpp"
 //Factories and Package includes
-#include "fUML/Semantics/SemanticsPackage.hpp"
 #include "fUML/fUMLPackage.hpp"
+#include "fUML/Semantics/SemanticsPackage.hpp"
 #include "fUML/Semantics/Activities/ActivitiesPackage.hpp"
 #include "uml/umlPackage.hpp"
 
@@ -186,7 +186,7 @@ void CentralBufferNodeActivationImpl::loadNode(std::string nodeName, std::shared
 	ObjectNodeActivationImpl::loadNode(nodeName, loadHandler);
 }
 
-void CentralBufferNodeActivationImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
+void CentralBufferNodeActivationImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject>> references)
 {
 	ObjectNodeActivationImpl::resolveReferences(featureID, references);
 }

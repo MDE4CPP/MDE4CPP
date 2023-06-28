@@ -198,7 +198,7 @@ void CS_LocusImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::i
 	fUML::Semantics::Loci::LocusImpl::loadNode(nodeName, loadHandler);
 }
 
-void CS_LocusImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
+void CS_LocusImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject>> references)
 {
 	fUML::Semantics::Loci::LocusImpl::resolveReferences(featureID, references);
 }

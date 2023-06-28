@@ -214,7 +214,7 @@ void ConnectableElementImpl::loadNode(std::string nodeName, std::shared_ptr<pers
 	TypedElementImpl::loadNode(nodeName, loadHandler);
 }
 
-void ConnectableElementImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
+void ConnectableElementImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject>> references)
 {
 	ParameterableElementImpl::resolveReferences(featureID, references);
 	TypedElementImpl::resolveReferences(featureID, references);

@@ -285,7 +285,7 @@ void TimeEventImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::
 	EventImpl::loadNode(nodeName, loadHandler);
 }
 
-void TimeEventImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
+void TimeEventImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject>> references)
 {
 	EventImpl::resolveReferences(featureID, references);
 }

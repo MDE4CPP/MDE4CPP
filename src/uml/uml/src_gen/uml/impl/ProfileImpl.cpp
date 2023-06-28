@@ -414,7 +414,7 @@ void ProfileImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::in
 	PackageImpl::loadNode(nodeName, loadHandler);
 }
 
-void ProfileImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
+void ProfileImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject>> references)
 {
 	switch(featureID)
 	{

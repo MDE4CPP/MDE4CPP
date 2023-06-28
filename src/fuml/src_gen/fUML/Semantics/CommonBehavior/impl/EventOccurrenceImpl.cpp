@@ -46,8 +46,8 @@
 #include "fUML/Semantics/CommonBehavior/ParameterValue.hpp"
 #include "uml/Trigger.hpp"
 //Factories and Package includes
-#include "fUML/Semantics/SemanticsPackage.hpp"
 #include "fUML/fUMLPackage.hpp"
+#include "fUML/Semantics/SemanticsPackage.hpp"
 #include "fUML/Semantics/CommonBehavior/CommonBehaviorPackage.hpp"
 #include "uml/umlPackage.hpp"
 
@@ -264,7 +264,7 @@ void EventOccurrenceImpl::loadNode(std::string nodeName, std::shared_ptr<persist
 	//load BasePackage Nodes
 }
 
-void EventOccurrenceImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
+void EventOccurrenceImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject>> references)
 {
 	switch(featureID)
 	{

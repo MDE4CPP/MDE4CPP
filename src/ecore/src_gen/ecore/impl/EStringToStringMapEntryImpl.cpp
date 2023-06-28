@@ -207,7 +207,7 @@ void EStringToStringMapEntryImpl::loadNode(std::string nodeName, std::shared_ptr
 	//load BasePackage Nodes
 }
 
-void EStringToStringMapEntryImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<EObject> > references)
+void EStringToStringMapEntryImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<EObject>> references)
 {
 	ecore::EObjectImpl::resolveReferences(featureID, references);
 }

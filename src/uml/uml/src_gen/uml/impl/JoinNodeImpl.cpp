@@ -293,7 +293,7 @@ void JoinNodeImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::i
 	ControlNodeImpl::loadNode(nodeName, loadHandler);
 }
 
-void JoinNodeImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
+void JoinNodeImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject>> references)
 {
 	ControlNodeImpl::resolveReferences(featureID, references);
 }

@@ -215,7 +215,7 @@ void ExpressionInOclEvalImpl::loadNode(std::string nodeName, std::shared_ptr<per
 	ecore::ETypedElementImpl::loadNode(nodeName, loadHandler);
 }
 
-void ExpressionInOclEvalImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
+void ExpressionInOclEvalImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject>> references)
 {
 	switch(featureID)
 	{

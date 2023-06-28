@@ -303,7 +303,7 @@ void InteractionConstraintImpl::loadNode(std::string nodeName, std::shared_ptr<p
 	ConstraintImpl::loadNode(nodeName, loadHandler);
 }
 
-void InteractionConstraintImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
+void InteractionConstraintImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject>> references)
 {
 	ConstraintImpl::resolveReferences(featureID, references);
 }

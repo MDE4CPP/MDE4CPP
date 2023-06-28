@@ -258,7 +258,7 @@ void LiteralNullImpl::loadNode(std::string nodeName, std::shared_ptr<persistence
 	LiteralSpecificationImpl::loadNode(nodeName, loadHandler);
 }
 
-void LiteralNullImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
+void LiteralNullImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject>> references)
 {
 	LiteralSpecificationImpl::resolveReferences(featureID, references);
 }

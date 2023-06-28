@@ -511,7 +511,7 @@ void ElementImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::in
 	ObjectImpl::loadNode(nodeName, loadHandler);
 }
 
-void ElementImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
+void ElementImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject>> references)
 {
 	ObjectImpl::resolveReferences(featureID, references);
 }

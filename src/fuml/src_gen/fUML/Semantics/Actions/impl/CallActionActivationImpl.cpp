@@ -56,8 +56,8 @@
 #include <exception> // used in Persistence
 #include "fUML/Semantics/Activities/ActivitiesFactory.hpp"
 #include "fUML/Semantics/Actions/ActionsFactory.hpp"
-#include "uml/umlFactory.hpp"
 #include "fUML/Semantics/CommonBehavior/CommonBehaviorFactory.hpp"
+#include "uml/umlFactory.hpp"
 #include "uml/Action.hpp"
 #include "fUML/Semantics/Activities/ActivityEdgeInstance.hpp"
 #include "uml/ActivityNode.hpp"
@@ -72,8 +72,8 @@
 #include "fUML/Semantics/Actions/PinActivation.hpp"
 #include "fUML/Semantics/Activities/Token.hpp"
 //Factories and Package includes
-#include "fUML/Semantics/SemanticsPackage.hpp"
 #include "fUML/fUMLPackage.hpp"
+#include "fUML/Semantics/SemanticsPackage.hpp"
 #include "fUML/Semantics/Actions/ActionsPackage.hpp"
 #include "fUML/Semantics/Activities/ActivitiesPackage.hpp"
 #include "fUML/Semantics/CommonBehavior/CommonBehaviorPackage.hpp"
@@ -228,7 +228,7 @@ void CallActionActivationImpl::doAction()
 			else
 			{
 				std::shared_ptr<fUML::Semantics::Actions::InputPinActivation> activation =inputActivationList->at(inputPinNumber);
-				std::shared_ptr<Bag<fUML::Semantics::Activities::Token> > tokenList = activation->takeUnofferedTokens();
+				std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> tokenList = activation->takeUnofferedTokens();
 				for(const std::shared_ptr<fUML::Semantics::Activities::Token>& token : *tokenList)
 				{
 					const std::shared_ptr<Any>& value = token->getValue();
@@ -306,7 +306,7 @@ void CallActionActivationImpl::terminate()
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
 	/* Property CallActionActivation::callExecutions do not exist anymore
-	std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::Execution> > executionList = this->getCallExecutions();
+	std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::Execution>> executionList = this->getCallExecutions();
 	for (std::shared_ptr<fUML::Semantics::CommonBehavior::Execution>  execution: *executionList)
 	{
 		execution->terminate();
@@ -437,7 +437,7 @@ void CallActionActivationImpl::loadNode(std::string nodeName, std::shared_ptr<pe
 	InvocationActionActivationImpl::loadNode(nodeName, loadHandler);
 }
 
-void CallActionActivationImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
+void CallActionActivationImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject>> references)
 {
 	switch(featureID)
 	{

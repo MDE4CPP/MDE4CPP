@@ -263,7 +263,7 @@ void RaiseExceptionActionImpl::loadNode(std::string nodeName, std::shared_ptr<pe
 	ActionImpl::loadNode(nodeName, loadHandler);
 }
 
-void RaiseExceptionActionImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
+void RaiseExceptionActionImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject>> references)
 {
 	ActionImpl::resolveReferences(featureID, references);
 }

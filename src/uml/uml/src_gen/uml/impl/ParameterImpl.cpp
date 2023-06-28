@@ -490,7 +490,7 @@ void ParameterImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::
 	MultiplicityElementImpl::loadNode(nodeName, loadHandler);
 }
 
-void ParameterImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
+void ParameterImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject>> references)
 {
 	switch(featureID)
 	{

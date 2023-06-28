@@ -213,7 +213,7 @@ void FinalStateImpl::loadNode(std::string nodeName, std::shared_ptr<persistence:
 	StateImpl::loadNode(nodeName, loadHandler);
 }
 
-void FinalStateImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
+void FinalStateImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject>> references)
 {
 	StateImpl::resolveReferences(featureID, references);
 }

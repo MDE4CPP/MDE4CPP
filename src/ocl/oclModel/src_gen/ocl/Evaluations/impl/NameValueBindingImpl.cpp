@@ -214,7 +214,7 @@ void NameValueBindingImpl::loadNode(std::string nodeName, std::shared_ptr<persis
 	ecore::ETypedElementImpl::loadNode(nodeName, loadHandler);
 }
 
-void NameValueBindingImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
+void NameValueBindingImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject>> references)
 {
 	switch(featureID)
 	{

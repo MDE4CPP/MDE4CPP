@@ -261,7 +261,7 @@ void AssociationClassImpl::loadNode(std::string nodeName, std::shared_ptr<persis
 	ClassImpl::loadNode(nodeName, loadHandler);
 }
 
-void AssociationClassImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
+void AssociationClassImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject>> references)
 {
 	AssociationImpl::resolveReferences(featureID, references);
 	ClassImpl::resolveReferences(featureID, references);

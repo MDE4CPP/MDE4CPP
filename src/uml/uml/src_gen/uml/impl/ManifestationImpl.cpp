@@ -251,7 +251,7 @@ void ManifestationImpl::loadNode(std::string nodeName, std::shared_ptr<persisten
 	AbstractionImpl::loadNode(nodeName, loadHandler);
 }
 
-void ManifestationImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
+void ManifestationImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject>> references)
 {
 	switch(featureID)
 	{

@@ -440,7 +440,7 @@ void StructuredClassifierImpl::loadNode(std::string nodeName, std::shared_ptr<pe
 	ClassifierImpl::loadNode(nodeName, loadHandler);
 }
 
-void StructuredClassifierImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
+void StructuredClassifierImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject>> references)
 {
 	ClassifierImpl::resolveReferences(featureID, references);
 }

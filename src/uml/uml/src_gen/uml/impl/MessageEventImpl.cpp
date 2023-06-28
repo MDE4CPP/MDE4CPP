@@ -206,7 +206,7 @@ void MessageEventImpl::loadNode(std::string nodeName, std::shared_ptr<persistenc
 	EventImpl::loadNode(nodeName, loadHandler);
 }
 
-void MessageEventImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
+void MessageEventImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject>> references)
 {
 	EventImpl::resolveReferences(featureID, references);
 }

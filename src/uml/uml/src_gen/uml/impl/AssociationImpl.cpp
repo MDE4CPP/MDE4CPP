@@ -525,7 +525,7 @@ void AssociationImpl::loadNode(std::string nodeName, std::shared_ptr<persistence
 	RelationshipImpl::loadNode(nodeName, loadHandler);
 }
 
-void AssociationImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
+void AssociationImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject>> references)
 {
 	switch(featureID)
 	{

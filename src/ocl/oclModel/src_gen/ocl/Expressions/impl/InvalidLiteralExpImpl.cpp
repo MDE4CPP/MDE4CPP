@@ -305,7 +305,7 @@ void InvalidLiteralExpImpl::loadNode(std::string nodeName, std::shared_ptr<persi
 	LiteralExpImpl::loadNode(nodeName, loadHandler);
 }
 
-void InvalidLiteralExpImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
+void InvalidLiteralExpImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject>> references)
 {
 	LiteralExpImpl::resolveReferences(featureID, references);
 }

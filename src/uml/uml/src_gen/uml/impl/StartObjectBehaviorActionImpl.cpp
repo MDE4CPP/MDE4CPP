@@ -269,7 +269,7 @@ void StartObjectBehaviorActionImpl::loadNode(std::string nodeName, std::shared_p
 	CallActionImpl::loadNode(nodeName, loadHandler);
 }
 
-void StartObjectBehaviorActionImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
+void StartObjectBehaviorActionImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject>> references)
 {
 	CallActionImpl::resolveReferences(featureID, references);
 }

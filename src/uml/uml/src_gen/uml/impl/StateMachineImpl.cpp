@@ -493,7 +493,7 @@ void StateMachineImpl::loadNode(std::string nodeName, std::shared_ptr<persistenc
 	BehaviorImpl::loadNode(nodeName, loadHandler);
 }
 
-void StateMachineImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
+void StateMachineImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject>> references)
 {
 	switch(featureID)
 	{

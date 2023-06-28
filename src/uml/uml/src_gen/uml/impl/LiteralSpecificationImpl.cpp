@@ -235,7 +235,7 @@ void LiteralSpecificationImpl::loadNode(std::string nodeName, std::shared_ptr<pe
 	ValueSpecificationImpl::loadNode(nodeName, loadHandler);
 }
 
-void LiteralSpecificationImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
+void LiteralSpecificationImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject>> references)
 {
 	ValueSpecificationImpl::resolveReferences(featureID, references);
 }

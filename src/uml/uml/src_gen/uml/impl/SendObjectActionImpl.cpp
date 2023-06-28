@@ -294,7 +294,7 @@ void SendObjectActionImpl::loadNode(std::string nodeName, std::shared_ptr<persis
 	InvocationActionImpl::loadNode(nodeName, loadHandler);
 }
 
-void SendObjectActionImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
+void SendObjectActionImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject>> references)
 {
 	InvocationActionImpl::resolveReferences(featureID, references);
 }

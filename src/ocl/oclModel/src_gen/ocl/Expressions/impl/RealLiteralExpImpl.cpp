@@ -337,7 +337,7 @@ void RealLiteralExpImpl::loadNode(std::string nodeName, std::shared_ptr<persiste
 	NumericLiteralExpImpl::loadNode(nodeName, loadHandler);
 }
 
-void RealLiteralExpImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
+void RealLiteralExpImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject>> references)
 {
 	NumericLiteralExpImpl::resolveReferences(featureID, references);
 }

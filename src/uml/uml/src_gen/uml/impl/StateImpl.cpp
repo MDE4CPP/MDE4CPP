@@ -715,7 +715,7 @@ void StateImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::inte
 	VertexImpl::loadNode(nodeName, loadHandler);
 }
 
-void StateImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
+void StateImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject>> references)
 {
 	switch(featureID)
 	{

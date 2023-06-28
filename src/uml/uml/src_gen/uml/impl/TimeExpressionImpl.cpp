@@ -315,7 +315,7 @@ void TimeExpressionImpl::loadNode(std::string nodeName, std::shared_ptr<persiste
 	ValueSpecificationImpl::loadNode(nodeName, loadHandler);
 }
 
-void TimeExpressionImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
+void TimeExpressionImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject>> references)
 {
 	switch(featureID)
 	{

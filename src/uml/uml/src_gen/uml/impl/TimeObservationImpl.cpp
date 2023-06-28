@@ -265,7 +265,7 @@ void TimeObservationImpl::loadNode(std::string nodeName, std::shared_ptr<persist
 	ObservationImpl::loadNode(nodeName, loadHandler);
 }
 
-void TimeObservationImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
+void TimeObservationImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject>> references)
 {
 	switch(featureID)
 	{

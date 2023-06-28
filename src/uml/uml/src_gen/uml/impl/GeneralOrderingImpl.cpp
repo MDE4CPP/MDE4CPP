@@ -236,7 +236,7 @@ void GeneralOrderingImpl::loadNode(std::string nodeName, std::shared_ptr<persist
 	NamedElementImpl::loadNode(nodeName, loadHandler);
 }
 
-void GeneralOrderingImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
+void GeneralOrderingImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject>> references)
 {
 	switch(featureID)
 	{

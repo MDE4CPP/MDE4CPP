@@ -159,7 +159,7 @@ namespace uml
 			<p>From package UML::Activities.</p>
 			*/
 			
-			virtual const std::shared_ptr<Subset<uml::ActivityPartition, uml::ActivityGroup, uml::ActivityGroup /*Subset does not reference a union*/>>& getPartition() const = 0;
+			virtual const std::shared_ptr<Subset<uml::ActivityPartition, uml::ActivityGroup /*Subset does not reference a union*/, uml::ActivityGroup>>& getPartition() const = 0;
 			/*!
 			Top-level StructuredActivityNodes in the Activity.
 			<p>From package UML::Activities.</p>
@@ -192,7 +192,7 @@ namespace uml
 			// Persistence Functions
 			//*********************************
 			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) = 0;
-			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) = 0;
+			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject>> references) = 0;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const = 0;
 
 		protected:
@@ -240,7 +240,7 @@ namespace uml
 			<p>From package UML::Activities.</p>
 			*/
 			
-			mutable std::shared_ptr<Subset<uml::ActivityPartition, uml::ActivityGroup, uml::ActivityGroup /*Subset does not reference a union*/>> m_partition;
+			mutable std::shared_ptr<Subset<uml::ActivityPartition, uml::ActivityGroup /*Subset does not reference a union*/, uml::ActivityGroup>> m_partition;
 			/*!
 			Top-level StructuredActivityNodes in the Activity.
 			<p>From package UML::Activities.</p>

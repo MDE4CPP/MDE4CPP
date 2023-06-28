@@ -225,7 +225,7 @@ void DataStoreNodeImpl::loadNode(std::string nodeName, std::shared_ptr<persisten
 	CentralBufferNodeImpl::loadNode(nodeName, loadHandler);
 }
 
-void DataStoreNodeImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
+void DataStoreNodeImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject>> references)
 {
 	CentralBufferNodeImpl::resolveReferences(featureID, references);
 }

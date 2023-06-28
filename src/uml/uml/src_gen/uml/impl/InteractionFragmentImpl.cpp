@@ -338,7 +338,7 @@ void InteractionFragmentImpl::loadNode(std::string nodeName, std::shared_ptr<per
 	NamedElementImpl::loadNode(nodeName, loadHandler);
 }
 
-void InteractionFragmentImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
+void InteractionFragmentImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject>> references)
 {
 	switch(featureID)
 	{

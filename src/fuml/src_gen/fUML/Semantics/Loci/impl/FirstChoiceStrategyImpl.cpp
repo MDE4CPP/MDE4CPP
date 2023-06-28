@@ -39,8 +39,8 @@
 #include <exception> // used in Persistence
 #include "fUML/Semantics/Loci/ChoiceStrategy.hpp"
 //Factories and Package includes
-#include "fUML/Semantics/SemanticsPackage.hpp"
 #include "fUML/fUMLPackage.hpp"
+#include "fUML/Semantics/SemanticsPackage.hpp"
 #include "fUML/Semantics/Loci/LociPackage.hpp"
 
 using namespace fUML::Semantics::Loci;
@@ -165,7 +165,7 @@ void FirstChoiceStrategyImpl::loadNode(std::string nodeName, std::shared_ptr<per
 	ChoiceStrategyImpl::loadNode(nodeName, loadHandler);
 }
 
-void FirstChoiceStrategyImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
+void FirstChoiceStrategyImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject>> references)
 {
 	ChoiceStrategyImpl::resolveReferences(featureID, references);
 }

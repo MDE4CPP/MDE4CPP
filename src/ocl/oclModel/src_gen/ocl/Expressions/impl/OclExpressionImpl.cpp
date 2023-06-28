@@ -518,7 +518,7 @@ void OclExpressionImpl::loadNode(std::string nodeName, std::shared_ptr<persisten
 	ecore::ETypedElementImpl::loadNode(nodeName, loadHandler);
 }
 
-void OclExpressionImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
+void OclExpressionImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject>> references)
 {
 	switch(featureID)
 	{

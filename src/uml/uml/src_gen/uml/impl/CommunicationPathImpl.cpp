@@ -249,7 +249,7 @@ void CommunicationPathImpl::loadNode(std::string nodeName, std::shared_ptr<persi
 	AssociationImpl::loadNode(nodeName, loadHandler);
 }
 
-void CommunicationPathImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
+void CommunicationPathImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject>> references)
 {
 	AssociationImpl::resolveReferences(featureID, references);
 }

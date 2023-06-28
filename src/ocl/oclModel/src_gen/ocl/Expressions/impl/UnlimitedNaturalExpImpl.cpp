@@ -337,7 +337,7 @@ void UnlimitedNaturalExpImpl::loadNode(std::string nodeName, std::shared_ptr<per
 	NumericLiteralExpImpl::loadNode(nodeName, loadHandler);
 }
 
-void UnlimitedNaturalExpImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
+void UnlimitedNaturalExpImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject>> references)
 {
 	NumericLiteralExpImpl::resolveReferences(featureID, references);
 }

@@ -271,7 +271,7 @@ void DurationConstraintImpl::loadNode(std::string nodeName, std::shared_ptr<pers
 	IntervalConstraintImpl::loadNode(nodeName, loadHandler);
 }
 
-void DurationConstraintImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
+void DurationConstraintImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject>> references)
 {
 	IntervalConstraintImpl::resolveReferences(featureID, references);
 }

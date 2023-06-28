@@ -296,7 +296,7 @@ void RemoveStructuralFeatureValueActionImpl::loadNode(std::string nodeName, std:
 	WriteStructuralFeatureActionImpl::loadNode(nodeName, loadHandler);
 }
 
-void RemoveStructuralFeatureValueActionImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
+void RemoveStructuralFeatureValueActionImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject>> references)
 {
 	WriteStructuralFeatureActionImpl::resolveReferences(featureID, references);
 }

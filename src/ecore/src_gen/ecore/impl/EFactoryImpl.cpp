@@ -626,7 +626,7 @@ void EFactoryImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::i
 	EModelElementImpl::loadNode(nodeName, loadHandler);
 }
 
-void EFactoryImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<EObject> > references)
+void EFactoryImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<EObject>> references)
 {
 	switch(featureID)
 	{

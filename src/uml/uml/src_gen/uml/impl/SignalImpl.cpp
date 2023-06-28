@@ -326,7 +326,7 @@ void SignalImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::int
 	ClassifierImpl::loadNode(nodeName, loadHandler);
 }
 
-void SignalImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
+void SignalImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject>> references)
 {
 	ClassifierImpl::resolveReferences(featureID, references);
 }

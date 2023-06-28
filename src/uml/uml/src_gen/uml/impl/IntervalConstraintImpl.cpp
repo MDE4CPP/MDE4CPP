@@ -233,7 +233,7 @@ void IntervalConstraintImpl::loadNode(std::string nodeName, std::shared_ptr<pers
 	ConstraintImpl::loadNode(nodeName, loadHandler);
 }
 
-void IntervalConstraintImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
+void IntervalConstraintImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject>> references)
 {
 	ConstraintImpl::resolveReferences(featureID, references);
 }

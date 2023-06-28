@@ -206,7 +206,7 @@ void ArgumentImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::i
 	//load BasePackage Nodes
 }
 
-void ArgumentImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
+void ArgumentImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject>> references)
 {
 	switch(featureID)
 	{

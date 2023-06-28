@@ -441,7 +441,7 @@ void RegionImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::int
 	RedefinableElementImpl::loadNode(nodeName, loadHandler);
 }
 
-void RegionImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
+void RegionImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject>> references)
 {
 	switch(featureID)
 	{

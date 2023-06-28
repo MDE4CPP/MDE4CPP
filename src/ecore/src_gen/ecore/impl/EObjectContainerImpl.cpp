@@ -206,7 +206,7 @@ void EObjectContainerImpl::loadNode(std::string nodeName, std::shared_ptr<persis
 	EObjectImpl::loadNode(nodeName, loadHandler);
 }
 
-void EObjectContainerImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<EObject> > references)
+void EObjectContainerImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<EObject>> references)
 {
 	switch(featureID)
 	{
