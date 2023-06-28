@@ -141,7 +141,7 @@ DeploymentImpl& DeploymentImpl::operator=(const DeploymentImpl & obj)
 	m_location  = obj.getLocation();
 	//Clone references with containment (deep copy)
 	//clone reference 'configuration'
-	std::shared_ptr<Subset<uml::DeploymentSpecification, uml::Element>> configurationList = obj.getConfiguration();
+	const std::shared_ptr<Subset<uml::DeploymentSpecification, uml::Element>>& configurationList = obj.getConfiguration();
 	if(configurationList)
 	{
 		/*Subset*/
@@ -158,7 +158,7 @@ DeploymentImpl& DeploymentImpl::operator=(const DeploymentImpl & obj)
 		
 		for(const std::shared_ptr<uml::DeploymentSpecification>& configurationindexElem: *configurationList) 
 		{
-			std::shared_ptr<uml::DeploymentSpecification> temp = std::dynamic_pointer_cast<uml::DeploymentSpecification>((configurationindexElem)->copy());
+			const std::shared_ptr<uml::DeploymentSpecification>& temp = std::dynamic_pointer_cast<uml::DeploymentSpecification>((configurationindexElem)->copy());
 			m_configuration->push_back(temp);
 		}
 	}
@@ -168,7 +168,7 @@ DeploymentImpl& DeploymentImpl::operator=(const DeploymentImpl & obj)
 	}
 
 	//clone reference 'deployedArtifact'
-	std::shared_ptr<Subset<uml::DeployedArtifact, uml::NamedElement /*Subset does not reference a union*/>> deployedArtifactList = obj.getDeployedArtifact();
+	const std::shared_ptr<Subset<uml::DeployedArtifact, uml::NamedElement /*Subset does not reference a union*/>>& deployedArtifactList = obj.getDeployedArtifact();
 	if(deployedArtifactList)
 	{
 		/*Subset*/
@@ -185,7 +185,7 @@ DeploymentImpl& DeploymentImpl::operator=(const DeploymentImpl & obj)
 		
 		for(const std::shared_ptr<uml::DeployedArtifact>& deployedArtifactindexElem: *deployedArtifactList) 
 		{
-			std::shared_ptr<uml::DeployedArtifact> temp = std::dynamic_pointer_cast<uml::DeployedArtifact>((deployedArtifactindexElem)->copy());
+			const std::shared_ptr<uml::DeployedArtifact>& temp = std::dynamic_pointer_cast<uml::DeployedArtifact>((deployedArtifactindexElem)->copy());
 			m_deployedArtifact->push_back(temp);
 		}
 	}

@@ -176,7 +176,7 @@ using namespace [anEClass.generateNamespaceDefinition()/];
 	[for (att : EAttribute | anEClass.eAttributes->reject(isRedefiningContainer())->reject(doNotGenerateEStructuralFeature())->asOrderedSet()->sortedBy(name))]
 		[if (not(att.upperBound = 1))] [comment it is a Bag of Elements /]
 			[if (not att.eGenericType.eClassifier.oclIsKindOf(EDataType))] [comment it is an Bag/Subset of non standard Elements /]
-	[att.generateStructuralFeatureType(true)/] [att.name/]Container = obj.[att.GetterName()/]();
+	const [att.generateStructuralFeatureType(true)/]& [att.name/]Container = obj.[att.GetterName()/]();
 	if([att.name/]Container)
 	{
 		m_[att.name/].reset(new [att.generateStructuralFeatureType(false)/]());
@@ -184,7 +184,7 @@ using namespace [anEClass.generateNamespaceDefinition()/];
 		{
 			if(nullptr != it)
 			{
-				auto [att.name/]_copy=std::dynamic_pointer_cast<[att.generateStructuralFeatureType(true)/]>(it->copy()) 	
+				const [att.generateStructuralFeatureType(true)/]& [att.name/]_copy=std::dynamic_pointer_cast<[att.generateStructuralFeatureType(true)/]>(it->copy()) 	
 				if(nullptr != [att.name/]_copy)
 				{
 					m_[att.name/]->push_back([att.name/]_copy);
@@ -201,7 +201,7 @@ using namespace [anEClass.generateNamespaceDefinition()/];
 		DEBUG_WARNING("container is nullptr for [att.name/].")
 	}
 			[else]	[comment it is an Bag/Subset of standard Datatype Elements /]
-	[att.generateStructuralFeatureType(true)/] [att.name/]List = obj.[att.GetterName()/]();
+	const [att.generateStructuralFeatureType(true)/]& [att.name/]List = obj.[att.GetterName()/]();
 	if([att.name/]List)
 	{	
 		m_[att.name/].reset(new Bag<[att.eType.generateType(false)/]>());
@@ -221,8 +221,8 @@ using namespace [anEClass.generateNamespaceDefinition()/];
 	[/comment]
 		[elseif (att.eType.eTypeParameters->size()>0) ] [comment it's an Generic Data-Type (List / Map,...)/]
 			[if (att.eType.name.equalsIgnoreCase('EMap'))]
-	[att.generateStructuralFeatureType(true)/] [att.name/]Container = [att.GetterName()/]();
-	for(const auto pair_[att.name/] : *obj.[att.GetterName()/]())
+	const [att.generateStructuralFeatureType(true)/]& [att.name/]Container = [att.GetterName()/]();
+	for(const auto& pair_[att.name/] : *obj.[att.GetterName()/]())
 	{
 				[if (att.eGenericType.eTypeArguments->last().eClassifier.oclIsKindOf(EDataType))] [comment if second Type is an Ecore type /]
 		[att.name/]Container->insert(std::make_pair(pair_[att.name/].first, pair_[att.name/].second));
@@ -231,7 +231,7 @@ using namespace [anEClass.generateNamespaceDefinition()/];
 				[/if]
 	}
 			[elseif (att.eType.name.equalsIgnoreCase('EEList'))] 
-	[att.generateStructuralFeatureType(true)/] [att.name/]Container = [att.GetterName()/]();
+	const [att.generateStructuralFeatureType(true)/]& [att.name/]Container = [att.GetterName()/]();
 	if(nullptr != [att.name/]Container )
 	{
 		for(const std::shared_ptr<[att.eGenericType.eTypeArguments->first().eClassifier.transformType()/]>& it:*[att.name/]Container )
@@ -278,14 +278,14 @@ using namespace [anEClass.generateNamespaceDefinition()/];
 		[if (ref.hasSetter())]
 	m_[ref.name/] = std::dynamic_pointer_cast<[ref.generateReferenceType()/]>>(obj.[ref.GetterName()/]()->copy());
 		[else]
-	[ref.generateReferenceType()/] [ref.name/]List = obj.[ref.GetterName()/]();
+	const [ref.generateReferenceType()/]& [ref.name/]List = obj.[ref.GetterName()/]();
 	if([ref.name/]List)
 	{
 		[ref.generateReferenceInit()/]
 		[ref.InitReferences()/]
 		for(const std::shared_ptr<[ref.eType.generateType(false)/]>& [ref.name/]indexElem: *[ref.name/]List) 
 		{
-			std::shared_ptr<[ref.eType.generateType(false)/]> temp = std::dynamic_pointer_cast<[ref.eType.generateType(false)/]>(([ref.name/]indexElem)->copy());
+			const std::shared_ptr<[ref.eType.generateType(false)/]>& temp = std::dynamic_pointer_cast<[ref.eType.generateType(false)/]>(([ref.name/]indexElem)->copy());
 			m_[ref.name/]->push_back(temp);
 		}
 	}
@@ -304,13 +304,13 @@ using namespace [anEClass.generateNamespaceDefinition()/];
 	[elseif (not ref.eType.oclIsKindOf(EDataType)) ]
 		[if (ref.eType.oclAsType(ecore::EClass).eGenericSuperTypes.eTypeArguments->notEmpty())]
 			[if ((ref.eType.oclAsType(ecore::EClass).eGenericSuperTypes->first().eClassifier.name.equalsIgnoreCase('map')) or (ref.eType.oclAsType(ecore::EClass).eGenericSuperTypes->first().eClassifier.name.equalsIgnoreCase('EMap')))]
-	[ref.generateReferenceType()/] [ref.name/]Container = [ref.GetterName()/]();
-	for(const auto pair_[ref.name/] : *obj.[ref.GetterName()/]())
+	const [ref.generateReferenceType()/]& [ref.name/]Container = [ref.GetterName()/]();
+	for(const auto& pair_[ref.name/] : *obj.[ref.GetterName()/]())
 	{
 		[ref.name/]Container->insert(std::make_pair(pair_[ref.name/].first, std::dynamic_pointer_cast<[ref.eType.oclAsType(ecore::EClass).eGenericSuperTypes->first().eTypeArguments->last().generateCppType(false)/]>(pair_[ref.name/].second->copy())));
 	}
 			[else]
-	[ref.generateReferenceType()/] [ref.name/]Container = [ref.GetterName()/]();
+	const [ref.generateReferenceType()/]& [ref.name/]Container = [ref.GetterName()/]();
 	if(nullptr != [ref.name/]Container )
 	{
 		for(const std::shared_ptr<[ref.eType.oclAsType(ecore::EClass).eGenericSuperTypes->first().eTypeArguments->first().generateCppType(false)/]>& it : *[ref.name/]Container)
@@ -338,10 +338,10 @@ using namespace [anEClass.generateNamespaceDefinition()/];
 		[/if]
 	[elseif (ref.eType.eTypeParameters->size()>0) ]
 		[if (ref.eType.name.equalsIgnoreCase('EMap'))]
-	[ref.generateReferenceType()/] [ref.name/]Container = [ref.GetterName()/]();
+	const [ref.generateReferenceType()/]& [ref.name/]Container = [ref.GetterName()/]();
 	if(nullptr != [ref.name/]Container )
 	{
-		for(const auto pair_[ref.name/] : *obj.[ref.GetterName()/]())
+		for(const auto& pair_[ref.name/] : *obj.[ref.GetterName()/]())
 		{
 			[if (ref.eGenericType.eTypeArguments->last().eClassifier.oclIsKindOf(EDataType))] [comment if second Type is an Ecore type /]
 			[ref.name/]Container->insert(std::make_pair(pair_[ref.name/].first, pair_[ref.name/].second));
@@ -355,7 +355,7 @@ using namespace [anEClass.generateNamespaceDefinition()/];
 		DEBUG_WARNING("container is nullptr for [ref.name/].")
 	}
 		[else] [comment EEList/]
-	[ref.generateReferenceType()/] [ref.name/]Container = [ref.GetterName()/]();
+	const [ref.generateReferenceType()/]& [ref.name/]Container = [ref.GetterName()/]();
 	if(nullptr != [ref.name/]Container )
 	{
 		for(const std::shared_ptr<[ref.eGenericType.eTypeArguments->first().eClassifier.transformType()/]>& it: *[ref.name/]Container)

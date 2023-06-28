@@ -101,7 +101,7 @@ ETypeParameterImpl& ETypeParameterImpl::operator=(const ETypeParameterImpl & obj
 	//copy references with no containment (soft copy)
 	//Clone references with containment (deep copy)
 	//clone reference 'eBounds'
-	std::shared_ptr<Bag<ecore::EGenericType>> eBoundsList = obj.getEBounds();
+	const std::shared_ptr<Bag<ecore::EGenericType>>& eBoundsList = obj.getEBounds();
 	if(eBoundsList)
 	{
 		m_eBounds.reset(new Bag<ecore::EGenericType>());
@@ -109,7 +109,7 @@ ETypeParameterImpl& ETypeParameterImpl::operator=(const ETypeParameterImpl & obj
 		
 		for(const std::shared_ptr<ecore::EGenericType>& eBoundsindexElem: *eBoundsList) 
 		{
-			std::shared_ptr<ecore::EGenericType> temp = std::dynamic_pointer_cast<ecore::EGenericType>((eBoundsindexElem)->copy());
+			const std::shared_ptr<ecore::EGenericType>& temp = std::dynamic_pointer_cast<ecore::EGenericType>((eBoundsindexElem)->copy());
 			m_eBounds->push_back(temp);
 		}
 	}

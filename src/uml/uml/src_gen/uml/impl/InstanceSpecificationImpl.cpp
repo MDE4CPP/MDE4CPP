@@ -138,7 +138,7 @@ InstanceSpecificationImpl& InstanceSpecificationImpl::operator=(const InstanceSp
 	m_classifier  = obj.getClassifier();
 	//Clone references with containment (deep copy)
 	//clone reference 'slot'
-	std::shared_ptr<Subset<uml::Slot, uml::Element>> slotList = obj.getSlot();
+	const std::shared_ptr<Subset<uml::Slot, uml::Element>>& slotList = obj.getSlot();
 	if(slotList)
 	{
 		/*Subset*/
@@ -155,7 +155,7 @@ InstanceSpecificationImpl& InstanceSpecificationImpl::operator=(const InstanceSp
 		
 		for(const std::shared_ptr<uml::Slot>& slotindexElem: *slotList) 
 		{
-			std::shared_ptr<uml::Slot> temp = std::dynamic_pointer_cast<uml::Slot>((slotindexElem)->copy());
+			const std::shared_ptr<uml::Slot>& temp = std::dynamic_pointer_cast<uml::Slot>((slotindexElem)->copy());
 			m_slot->push_back(temp);
 		}
 	}

@@ -148,7 +148,7 @@ ActivityEdgeImpl& ActivityEdgeImpl::operator=(const ActivityEdgeImpl & obj)
 	}
 
 	//clone reference 'inPartition'
-	std::shared_ptr<Subset<uml::ActivityPartition, uml::ActivityGroup>> inPartitionList = obj.getInPartition();
+	const std::shared_ptr<Subset<uml::ActivityPartition, uml::ActivityGroup>>& inPartitionList = obj.getInPartition();
 	if(inPartitionList)
 	{
 		/*Subset*/
@@ -165,7 +165,7 @@ ActivityEdgeImpl& ActivityEdgeImpl::operator=(const ActivityEdgeImpl & obj)
 		
 		for(const std::shared_ptr<uml::ActivityPartition>& inPartitionindexElem: *inPartitionList) 
 		{
-			std::shared_ptr<uml::ActivityPartition> temp = std::dynamic_pointer_cast<uml::ActivityPartition>((inPartitionindexElem)->copy());
+			const std::shared_ptr<uml::ActivityPartition>& temp = std::dynamic_pointer_cast<uml::ActivityPartition>((inPartitionindexElem)->copy());
 			m_inPartition->push_back(temp);
 		}
 	}
@@ -175,7 +175,7 @@ ActivityEdgeImpl& ActivityEdgeImpl::operator=(const ActivityEdgeImpl & obj)
 	}
 
 	//clone reference 'redefinedEdge'
-	std::shared_ptr<Subset<uml::ActivityEdge, uml::RedefinableElement>> redefinedEdgeList = obj.getRedefinedEdge();
+	const std::shared_ptr<Subset<uml::ActivityEdge, uml::RedefinableElement>>& redefinedEdgeList = obj.getRedefinedEdge();
 	if(redefinedEdgeList)
 	{
 		/*Subset*/
@@ -192,7 +192,7 @@ ActivityEdgeImpl& ActivityEdgeImpl::operator=(const ActivityEdgeImpl & obj)
 		
 		for(const std::shared_ptr<uml::ActivityEdge>& redefinedEdgeindexElem: *redefinedEdgeList) 
 		{
-			std::shared_ptr<uml::ActivityEdge> temp = std::dynamic_pointer_cast<uml::ActivityEdge>((redefinedEdgeindexElem)->copy());
+			const std::shared_ptr<uml::ActivityEdge>& temp = std::dynamic_pointer_cast<uml::ActivityEdge>((redefinedEdgeindexElem)->copy());
 			m_redefinedEdge->push_back(temp);
 		}
 	}

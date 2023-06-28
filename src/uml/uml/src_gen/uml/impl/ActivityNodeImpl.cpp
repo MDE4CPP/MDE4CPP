@@ -140,7 +140,7 @@ ActivityNodeImpl& ActivityNodeImpl::operator=(const ActivityNodeImpl & obj)
 	m_outgoing  = obj.getOutgoing();
 	//Clone references with containment (deep copy)
 	//clone reference 'inInterruptibleRegion'
-	std::shared_ptr<Subset<uml::InterruptibleActivityRegion, uml::ActivityGroup>> inInterruptibleRegionList = obj.getInInterruptibleRegion();
+	const std::shared_ptr<Subset<uml::InterruptibleActivityRegion, uml::ActivityGroup>>& inInterruptibleRegionList = obj.getInInterruptibleRegion();
 	if(inInterruptibleRegionList)
 	{
 		/*Subset*/
@@ -157,7 +157,7 @@ ActivityNodeImpl& ActivityNodeImpl::operator=(const ActivityNodeImpl & obj)
 		
 		for(const std::shared_ptr<uml::InterruptibleActivityRegion>& inInterruptibleRegionindexElem: *inInterruptibleRegionList) 
 		{
-			std::shared_ptr<uml::InterruptibleActivityRegion> temp = std::dynamic_pointer_cast<uml::InterruptibleActivityRegion>((inInterruptibleRegionindexElem)->copy());
+			const std::shared_ptr<uml::InterruptibleActivityRegion>& temp = std::dynamic_pointer_cast<uml::InterruptibleActivityRegion>((inInterruptibleRegionindexElem)->copy());
 			m_inInterruptibleRegion->push_back(temp);
 		}
 	}
@@ -167,7 +167,7 @@ ActivityNodeImpl& ActivityNodeImpl::operator=(const ActivityNodeImpl & obj)
 	}
 
 	//clone reference 'inPartition'
-	std::shared_ptr<Subset<uml::ActivityPartition, uml::ActivityGroup>> inPartitionList = obj.getInPartition();
+	const std::shared_ptr<Subset<uml::ActivityPartition, uml::ActivityGroup>>& inPartitionList = obj.getInPartition();
 	if(inPartitionList)
 	{
 		/*Subset*/
@@ -184,7 +184,7 @@ ActivityNodeImpl& ActivityNodeImpl::operator=(const ActivityNodeImpl & obj)
 		
 		for(const std::shared_ptr<uml::ActivityPartition>& inPartitionindexElem: *inPartitionList) 
 		{
-			std::shared_ptr<uml::ActivityPartition> temp = std::dynamic_pointer_cast<uml::ActivityPartition>((inPartitionindexElem)->copy());
+			const std::shared_ptr<uml::ActivityPartition>& temp = std::dynamic_pointer_cast<uml::ActivityPartition>((inPartitionindexElem)->copy());
 			m_inPartition->push_back(temp);
 		}
 	}
@@ -194,7 +194,7 @@ ActivityNodeImpl& ActivityNodeImpl::operator=(const ActivityNodeImpl & obj)
 	}
 
 	//clone reference 'redefinedNode'
-	std::shared_ptr<Subset<uml::ActivityNode, uml::RedefinableElement>> redefinedNodeList = obj.getRedefinedNode();
+	const std::shared_ptr<Subset<uml::ActivityNode, uml::RedefinableElement>>& redefinedNodeList = obj.getRedefinedNode();
 	if(redefinedNodeList)
 	{
 		/*Subset*/
@@ -211,7 +211,7 @@ ActivityNodeImpl& ActivityNodeImpl::operator=(const ActivityNodeImpl & obj)
 		
 		for(const std::shared_ptr<uml::ActivityNode>& redefinedNodeindexElem: *redefinedNodeList) 
 		{
-			std::shared_ptr<uml::ActivityNode> temp = std::dynamic_pointer_cast<uml::ActivityNode>((redefinedNodeindexElem)->copy());
+			const std::shared_ptr<uml::ActivityNode>& temp = std::dynamic_pointer_cast<uml::ActivityNode>((redefinedNodeindexElem)->copy());
 			m_redefinedNode->push_back(temp);
 		}
 	}

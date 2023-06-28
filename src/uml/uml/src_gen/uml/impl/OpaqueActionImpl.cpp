@@ -136,7 +136,7 @@ OpaqueActionImpl& OpaqueActionImpl::operator=(const OpaqueActionImpl & obj)
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy OpaqueAction "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
 	#endif
 	//Clone Attributes with (deep copy)
-	std::shared_ptr<Bag<std::string>> bodyList = obj.getBody();
+	const std::shared_ptr<Bag<std::string>>& bodyList = obj.getBody();
 	if(bodyList)
 	{	
 		m_body.reset(new Bag<std::string>());
@@ -149,7 +149,7 @@ OpaqueActionImpl& OpaqueActionImpl::operator=(const OpaqueActionImpl & obj)
 	{
 		DEBUG_WARNING("container is nullptr for body.")
 	}
-	std::shared_ptr<Bag<std::string>> languageList = obj.getLanguage();
+	const std::shared_ptr<Bag<std::string>>& languageList = obj.getLanguage();
 	if(languageList)
 	{	
 		m_language.reset(new Bag<std::string>());
@@ -166,7 +166,7 @@ OpaqueActionImpl& OpaqueActionImpl::operator=(const OpaqueActionImpl & obj)
 	//copy references with no containment (soft copy)
 	//Clone references with containment (deep copy)
 	//clone reference 'inputValue'
-	std::shared_ptr<Subset<uml::InputPin, uml::InputPin>> inputValueList = obj.getInputValue();
+	const std::shared_ptr<Subset<uml::InputPin, uml::InputPin>>& inputValueList = obj.getInputValue();
 	if(inputValueList)
 	{
 		/*Subset*/
@@ -183,7 +183,7 @@ OpaqueActionImpl& OpaqueActionImpl::operator=(const OpaqueActionImpl & obj)
 		
 		for(const std::shared_ptr<uml::InputPin>& inputValueindexElem: *inputValueList) 
 		{
-			std::shared_ptr<uml::InputPin> temp = std::dynamic_pointer_cast<uml::InputPin>((inputValueindexElem)->copy());
+			const std::shared_ptr<uml::InputPin>& temp = std::dynamic_pointer_cast<uml::InputPin>((inputValueindexElem)->copy());
 			m_inputValue->push_back(temp);
 		}
 	}
@@ -193,7 +193,7 @@ OpaqueActionImpl& OpaqueActionImpl::operator=(const OpaqueActionImpl & obj)
 	}
 
 	//clone reference 'outputValue'
-	std::shared_ptr<Subset<uml::OutputPin, uml::OutputPin>> outputValueList = obj.getOutputValue();
+	const std::shared_ptr<Subset<uml::OutputPin, uml::OutputPin>>& outputValueList = obj.getOutputValue();
 	if(outputValueList)
 	{
 		/*Subset*/
@@ -210,7 +210,7 @@ OpaqueActionImpl& OpaqueActionImpl::operator=(const OpaqueActionImpl & obj)
 		
 		for(const std::shared_ptr<uml::OutputPin>& outputValueindexElem: *outputValueList) 
 		{
-			std::shared_ptr<uml::OutputPin> temp = std::dynamic_pointer_cast<uml::OutputPin>((outputValueindexElem)->copy());
+			const std::shared_ptr<uml::OutputPin>& temp = std::dynamic_pointer_cast<uml::OutputPin>((outputValueindexElem)->copy());
 			m_outputValue->push_back(temp);
 		}
 	}

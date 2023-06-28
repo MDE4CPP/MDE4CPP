@@ -131,7 +131,7 @@ InterruptibleActivityRegionImpl& InterruptibleActivityRegionImpl::operator=(cons
 	m_interruptingEdge  = obj.getInterruptingEdge();
 	//Clone references with containment (deep copy)
 	//clone reference 'node'
-	std::shared_ptr<Subset<uml::ActivityNode, uml::ActivityNode>> nodeList = obj.getNode();
+	const std::shared_ptr<Subset<uml::ActivityNode, uml::ActivityNode>>& nodeList = obj.getNode();
 	if(nodeList)
 	{
 		/*Subset*/
@@ -148,7 +148,7 @@ InterruptibleActivityRegionImpl& InterruptibleActivityRegionImpl::operator=(cons
 		
 		for(const std::shared_ptr<uml::ActivityNode>& nodeindexElem: *nodeList) 
 		{
-			std::shared_ptr<uml::ActivityNode> temp = std::dynamic_pointer_cast<uml::ActivityNode>((nodeindexElem)->copy());
+			const std::shared_ptr<uml::ActivityNode>& temp = std::dynamic_pointer_cast<uml::ActivityNode>((nodeindexElem)->copy());
 			m_node->push_back(temp);
 		}
 	}

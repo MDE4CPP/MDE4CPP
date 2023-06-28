@@ -160,7 +160,7 @@ EnumerationImpl& EnumerationImpl::operator=(const EnumerationImpl & obj)
 	//copy references with no containment (soft copy)
 	//Clone references with containment (deep copy)
 	//clone reference 'ownedLiteral'
-	std::shared_ptr<Subset<uml::EnumerationLiteral, uml::NamedElement>> ownedLiteralList = obj.getOwnedLiteral();
+	const std::shared_ptr<Subset<uml::EnumerationLiteral, uml::NamedElement>>& ownedLiteralList = obj.getOwnedLiteral();
 	if(ownedLiteralList)
 	{
 		/*Subset*/
@@ -177,7 +177,7 @@ EnumerationImpl& EnumerationImpl::operator=(const EnumerationImpl & obj)
 		
 		for(const std::shared_ptr<uml::EnumerationLiteral>& ownedLiteralindexElem: *ownedLiteralList) 
 		{
-			std::shared_ptr<uml::EnumerationLiteral> temp = std::dynamic_pointer_cast<uml::EnumerationLiteral>((ownedLiteralindexElem)->copy());
+			const std::shared_ptr<uml::EnumerationLiteral>& temp = std::dynamic_pointer_cast<uml::EnumerationLiteral>((ownedLiteralindexElem)->copy());
 			m_ownedLiteral->push_back(temp);
 		}
 	}

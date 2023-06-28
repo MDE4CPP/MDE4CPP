@@ -130,7 +130,7 @@ ConnectorImpl& ConnectorImpl::operator=(const ConnectorImpl & obj)
 	m_type  = obj.getType();
 	//Clone references with containment (deep copy)
 	//clone reference 'end'
-	std::shared_ptr<Subset<uml::ConnectorEnd, uml::Element>> endList = obj.getEnd();
+	const std::shared_ptr<Subset<uml::ConnectorEnd, uml::Element>>& endList = obj.getEnd();
 	if(endList)
 	{
 		/*Subset*/
@@ -147,7 +147,7 @@ ConnectorImpl& ConnectorImpl::operator=(const ConnectorImpl & obj)
 		
 		for(const std::shared_ptr<uml::ConnectorEnd>& endindexElem: *endList) 
 		{
-			std::shared_ptr<uml::ConnectorEnd> temp = std::dynamic_pointer_cast<uml::ConnectorEnd>((endindexElem)->copy());
+			const std::shared_ptr<uml::ConnectorEnd>& temp = std::dynamic_pointer_cast<uml::ConnectorEnd>((endindexElem)->copy());
 			m_end->push_back(temp);
 		}
 	}
@@ -157,7 +157,7 @@ ConnectorImpl& ConnectorImpl::operator=(const ConnectorImpl & obj)
 	}
 
 	//clone reference 'redefinedConnector'
-	std::shared_ptr<Subset<uml::Connector, uml::RedefinableElement>> redefinedConnectorList = obj.getRedefinedConnector();
+	const std::shared_ptr<Subset<uml::Connector, uml::RedefinableElement>>& redefinedConnectorList = obj.getRedefinedConnector();
 	if(redefinedConnectorList)
 	{
 		/*Subset*/
@@ -174,7 +174,7 @@ ConnectorImpl& ConnectorImpl::operator=(const ConnectorImpl & obj)
 		
 		for(const std::shared_ptr<uml::Connector>& redefinedConnectorindexElem: *redefinedConnectorList) 
 		{
-			std::shared_ptr<uml::Connector> temp = std::dynamic_pointer_cast<uml::Connector>((redefinedConnectorindexElem)->copy());
+			const std::shared_ptr<uml::Connector>& temp = std::dynamic_pointer_cast<uml::Connector>((redefinedConnectorindexElem)->copy());
 			m_redefinedConnector->push_back(temp);
 		}
 	}

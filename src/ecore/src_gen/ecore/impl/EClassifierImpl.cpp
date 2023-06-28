@@ -114,7 +114,7 @@ EClassifierImpl& EClassifierImpl::operator=(const EClassifierImpl & obj)
 	m_ePackage  = obj.getEPackage();
 	//Clone references with containment (deep copy)
 	//clone reference 'eTypeParameters'
-	std::shared_ptr<Bag<ecore::ETypeParameter>> eTypeParametersList = obj.getETypeParameters();
+	const std::shared_ptr<Bag<ecore::ETypeParameter>>& eTypeParametersList = obj.getETypeParameters();
 	if(eTypeParametersList)
 	{
 		m_eTypeParameters.reset(new Bag<ecore::ETypeParameter>());
@@ -122,7 +122,7 @@ EClassifierImpl& EClassifierImpl::operator=(const EClassifierImpl & obj)
 		
 		for(const std::shared_ptr<ecore::ETypeParameter>& eTypeParametersindexElem: *eTypeParametersList) 
 		{
-			std::shared_ptr<ecore::ETypeParameter> temp = std::dynamic_pointer_cast<ecore::ETypeParameter>((eTypeParametersindexElem)->copy());
+			const std::shared_ptr<ecore::ETypeParameter>& temp = std::dynamic_pointer_cast<ecore::ETypeParameter>((eTypeParametersindexElem)->copy());
 			m_eTypeParameters->push_back(temp);
 		}
 	}

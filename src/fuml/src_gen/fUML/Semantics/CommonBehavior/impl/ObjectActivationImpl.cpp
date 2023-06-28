@@ -114,7 +114,7 @@ ObjectActivationImpl& ObjectActivationImpl::operator=(const ObjectActivationImpl
 	m_waitingEventAccepters  = obj.getWaitingEventAccepters();
 	//Clone references with containment (deep copy)
 	//clone reference 'classifierBehaviorExecutions'
-	std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ClassifierBehaviorExecution>> classifierBehaviorExecutionsList = obj.getClassifierBehaviorExecutions();
+	const std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ClassifierBehaviorExecution>>& classifierBehaviorExecutionsList = obj.getClassifierBehaviorExecutions();
 	if(classifierBehaviorExecutionsList)
 	{
 		m_classifierBehaviorExecutions.reset(new Bag<fUML::Semantics::CommonBehavior::ClassifierBehaviorExecution>());
@@ -122,7 +122,7 @@ ObjectActivationImpl& ObjectActivationImpl::operator=(const ObjectActivationImpl
 		
 		for(const std::shared_ptr<fUML::Semantics::CommonBehavior::ClassifierBehaviorExecution>& classifierBehaviorExecutionsindexElem: *classifierBehaviorExecutionsList) 
 		{
-			std::shared_ptr<fUML::Semantics::CommonBehavior::ClassifierBehaviorExecution> temp = std::dynamic_pointer_cast<fUML::Semantics::CommonBehavior::ClassifierBehaviorExecution>((classifierBehaviorExecutionsindexElem)->copy());
+			const std::shared_ptr<fUML::Semantics::CommonBehavior::ClassifierBehaviorExecution>& temp = std::dynamic_pointer_cast<fUML::Semantics::CommonBehavior::ClassifierBehaviorExecution>((classifierBehaviorExecutionsindexElem)->copy());
 			m_classifierBehaviorExecutions->push_back(temp);
 		}
 	}
@@ -132,7 +132,7 @@ ObjectActivationImpl& ObjectActivationImpl::operator=(const ObjectActivationImpl
 	}
 
 	//clone reference 'eventPool'
-	std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::EventOccurrence>> eventPoolList = obj.getEventPool();
+	const std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::EventOccurrence>>& eventPoolList = obj.getEventPool();
 	if(eventPoolList)
 	{
 		m_eventPool.reset(new Bag<fUML::Semantics::CommonBehavior::EventOccurrence>());
@@ -140,7 +140,7 @@ ObjectActivationImpl& ObjectActivationImpl::operator=(const ObjectActivationImpl
 		
 		for(const std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccurrence>& eventPoolindexElem: *eventPoolList) 
 		{
-			std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccurrence> temp = std::dynamic_pointer_cast<fUML::Semantics::CommonBehavior::EventOccurrence>((eventPoolindexElem)->copy());
+			const std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccurrence>& temp = std::dynamic_pointer_cast<fUML::Semantics::CommonBehavior::EventOccurrence>((eventPoolindexElem)->copy());
 			m_eventPool->push_back(temp);
 		}
 	}

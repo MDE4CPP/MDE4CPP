@@ -159,7 +159,7 @@ DataTypeImpl& DataTypeImpl::operator=(const DataTypeImpl & obj)
 	//copy references with no containment (soft copy)
 	//Clone references with containment (deep copy)
 	//clone reference 'ownedAttribute'
-	std::shared_ptr<Subset<uml::Property, uml::NamedElement, uml::Property>> ownedAttributeList = obj.getOwnedAttribute();
+	const std::shared_ptr<Subset<uml::Property, uml::NamedElement, uml::Property>>& ownedAttributeList = obj.getOwnedAttribute();
 	if(ownedAttributeList)
 	{
 		/*Subset*/
@@ -176,7 +176,7 @@ DataTypeImpl& DataTypeImpl::operator=(const DataTypeImpl & obj)
 		
 		for(const std::shared_ptr<uml::Property>& ownedAttributeindexElem: *ownedAttributeList) 
 		{
-			std::shared_ptr<uml::Property> temp = std::dynamic_pointer_cast<uml::Property>((ownedAttributeindexElem)->copy());
+			const std::shared_ptr<uml::Property>& temp = std::dynamic_pointer_cast<uml::Property>((ownedAttributeindexElem)->copy());
 			m_ownedAttribute->push_back(temp);
 		}
 	}
@@ -186,7 +186,7 @@ DataTypeImpl& DataTypeImpl::operator=(const DataTypeImpl & obj)
 	}
 
 	//clone reference 'ownedOperation'
-	std::shared_ptr<Subset<uml::Operation, uml::Feature, uml::NamedElement>> ownedOperationList = obj.getOwnedOperation();
+	const std::shared_ptr<Subset<uml::Operation, uml::Feature, uml::NamedElement>>& ownedOperationList = obj.getOwnedOperation();
 	if(ownedOperationList)
 	{
 		/*Subset*/
@@ -203,7 +203,7 @@ DataTypeImpl& DataTypeImpl::operator=(const DataTypeImpl & obj)
 		
 		for(const std::shared_ptr<uml::Operation>& ownedOperationindexElem: *ownedOperationList) 
 		{
-			std::shared_ptr<uml::Operation> temp = std::dynamic_pointer_cast<uml::Operation>((ownedOperationindexElem)->copy());
+			const std::shared_ptr<uml::Operation>& temp = std::dynamic_pointer_cast<uml::Operation>((ownedOperationindexElem)->copy());
 			m_ownedOperation->push_back(temp);
 		}
 	}

@@ -111,7 +111,7 @@ TemplateSignatureImpl& TemplateSignatureImpl::operator=(const TemplateSignatureI
 	m_template  = obj.getTemplate();
 	//Clone references with containment (deep copy)
 	//clone reference 'ownedParameter'
-	std::shared_ptr<Subset<uml::TemplateParameter, uml::Element, uml::TemplateParameter>> ownedParameterList = obj.getOwnedParameter();
+	const std::shared_ptr<Subset<uml::TemplateParameter, uml::Element, uml::TemplateParameter>>& ownedParameterList = obj.getOwnedParameter();
 	if(ownedParameterList)
 	{
 		/*Subset*/
@@ -128,7 +128,7 @@ TemplateSignatureImpl& TemplateSignatureImpl::operator=(const TemplateSignatureI
 		
 		for(const std::shared_ptr<uml::TemplateParameter>& ownedParameterindexElem: *ownedParameterList) 
 		{
-			std::shared_ptr<uml::TemplateParameter> temp = std::dynamic_pointer_cast<uml::TemplateParameter>((ownedParameterindexElem)->copy());
+			const std::shared_ptr<uml::TemplateParameter>& temp = std::dynamic_pointer_cast<uml::TemplateParameter>((ownedParameterindexElem)->copy());
 			m_ownedParameter->push_back(temp);
 		}
 	}

@@ -99,7 +99,7 @@ EModelElementImpl& EModelElementImpl::operator=(const EModelElementImpl & obj)
 	//copy references with no containment (soft copy)
 	//Clone references with containment (deep copy)
 	//clone reference 'eAnnotations'
-	std::shared_ptr<Subset<ecore::EAnnotation, ecore::EObject>> eAnnotationsList = obj.getEAnnotations();
+	const std::shared_ptr<Subset<ecore::EAnnotation, ecore::EObject>>& eAnnotationsList = obj.getEAnnotations();
 	if(eAnnotationsList)
 	{
 		/*Subset*/
@@ -116,7 +116,7 @@ EModelElementImpl& EModelElementImpl::operator=(const EModelElementImpl & obj)
 		
 		for(const std::shared_ptr<ecore::EAnnotation>& eAnnotationsindexElem: *eAnnotationsList) 
 		{
-			std::shared_ptr<ecore::EAnnotation> temp = std::dynamic_pointer_cast<ecore::EAnnotation>((eAnnotationsindexElem)->copy());
+			const std::shared_ptr<ecore::EAnnotation>& temp = std::dynamic_pointer_cast<ecore::EAnnotation>((eAnnotationsindexElem)->copy());
 			m_eAnnotations->push_back(temp);
 		}
 	}

@@ -141,7 +141,7 @@ StateImpl& StateImpl::operator=(const StateImpl & obj)
 	m_submachine  = obj.getSubmachine();
 	//Clone references with containment (deep copy)
 	//clone reference 'connection'
-	std::shared_ptr<Subset<uml::ConnectionPointReference, uml::NamedElement>> connectionList = obj.getConnection();
+	const std::shared_ptr<Subset<uml::ConnectionPointReference, uml::NamedElement>>& connectionList = obj.getConnection();
 	if(connectionList)
 	{
 		/*Subset*/
@@ -158,7 +158,7 @@ StateImpl& StateImpl::operator=(const StateImpl & obj)
 		
 		for(const std::shared_ptr<uml::ConnectionPointReference>& connectionindexElem: *connectionList) 
 		{
-			std::shared_ptr<uml::ConnectionPointReference> temp = std::dynamic_pointer_cast<uml::ConnectionPointReference>((connectionindexElem)->copy());
+			const std::shared_ptr<uml::ConnectionPointReference>& temp = std::dynamic_pointer_cast<uml::ConnectionPointReference>((connectionindexElem)->copy());
 			m_connection->push_back(temp);
 		}
 	}
@@ -168,7 +168,7 @@ StateImpl& StateImpl::operator=(const StateImpl & obj)
 	}
 
 	//clone reference 'connectionPoint'
-	std::shared_ptr<Subset<uml::Pseudostate, uml::NamedElement>> connectionPointList = obj.getConnectionPoint();
+	const std::shared_ptr<Subset<uml::Pseudostate, uml::NamedElement>>& connectionPointList = obj.getConnectionPoint();
 	if(connectionPointList)
 	{
 		/*Subset*/
@@ -185,7 +185,7 @@ StateImpl& StateImpl::operator=(const StateImpl & obj)
 		
 		for(const std::shared_ptr<uml::Pseudostate>& connectionPointindexElem: *connectionPointList) 
 		{
-			std::shared_ptr<uml::Pseudostate> temp = std::dynamic_pointer_cast<uml::Pseudostate>((connectionPointindexElem)->copy());
+			const std::shared_ptr<uml::Pseudostate>& temp = std::dynamic_pointer_cast<uml::Pseudostate>((connectionPointindexElem)->copy());
 			m_connectionPoint->push_back(temp);
 		}
 	}
@@ -195,7 +195,7 @@ StateImpl& StateImpl::operator=(const StateImpl & obj)
 	}
 
 	//clone reference 'deferrableTrigger'
-	std::shared_ptr<Subset<uml::Trigger, uml::Element>> deferrableTriggerList = obj.getDeferrableTrigger();
+	const std::shared_ptr<Subset<uml::Trigger, uml::Element>>& deferrableTriggerList = obj.getDeferrableTrigger();
 	if(deferrableTriggerList)
 	{
 		/*Subset*/
@@ -212,7 +212,7 @@ StateImpl& StateImpl::operator=(const StateImpl & obj)
 		
 		for(const std::shared_ptr<uml::Trigger>& deferrableTriggerindexElem: *deferrableTriggerList) 
 		{
-			std::shared_ptr<uml::Trigger> temp = std::dynamic_pointer_cast<uml::Trigger>((deferrableTriggerindexElem)->copy());
+			const std::shared_ptr<uml::Trigger>& temp = std::dynamic_pointer_cast<uml::Trigger>((deferrableTriggerindexElem)->copy());
 			m_deferrableTrigger->push_back(temp);
 		}
 	}
@@ -246,7 +246,7 @@ StateImpl& StateImpl::operator=(const StateImpl & obj)
 	}
 
 	//clone reference 'region'
-	std::shared_ptr<Subset<uml::Region, uml::NamedElement>> regionList = obj.getRegion();
+	const std::shared_ptr<Subset<uml::Region, uml::NamedElement>>& regionList = obj.getRegion();
 	if(regionList)
 	{
 		/*Subset*/
@@ -263,7 +263,7 @@ StateImpl& StateImpl::operator=(const StateImpl & obj)
 		
 		for(const std::shared_ptr<uml::Region>& regionindexElem: *regionList) 
 		{
-			std::shared_ptr<uml::Region> temp = std::dynamic_pointer_cast<uml::Region>((regionindexElem)->copy());
+			const std::shared_ptr<uml::Region>& temp = std::dynamic_pointer_cast<uml::Region>((regionindexElem)->copy());
 			m_region->push_back(temp);
 		}
 	}

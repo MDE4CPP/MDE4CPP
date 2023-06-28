@@ -162,7 +162,7 @@ StringExpressionImpl& StringExpressionImpl::operator=(const StringExpressionImpl
 	m_owningExpression  = obj.getOwningExpression();
 	//Clone references with containment (deep copy)
 	//clone reference 'subExpression'
-	std::shared_ptr<Subset<uml::StringExpression, uml::Element>> subExpressionList = obj.getSubExpression();
+	const std::shared_ptr<Subset<uml::StringExpression, uml::Element>>& subExpressionList = obj.getSubExpression();
 	if(subExpressionList)
 	{
 		/*Subset*/
@@ -179,7 +179,7 @@ StringExpressionImpl& StringExpressionImpl::operator=(const StringExpressionImpl
 		
 		for(const std::shared_ptr<uml::StringExpression>& subExpressionindexElem: *subExpressionList) 
 		{
-			std::shared_ptr<uml::StringExpression> temp = std::dynamic_pointer_cast<uml::StringExpression>((subExpressionindexElem)->copy());
+			const std::shared_ptr<uml::StringExpression>& temp = std::dynamic_pointer_cast<uml::StringExpression>((subExpressionindexElem)->copy());
 			m_subExpression->push_back(temp);
 		}
 	}

@@ -308,7 +308,7 @@ std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> pList(new 
 [for (aParameter : Parameter | anActivity.ownedParameter->select((direction = ParameterDirectionKind::inout) or (direction = ParameterDirectionKind::_in))) before('\n')]
 //Creating ParameterValue for input parameter [anActivity.name/]::[aParameter.name/]
 {
-	std::shared_ptr<Any> [aParameter.name/] = parameterList->at([aParameter.listNumber(anActivity)/]);
+	const std::shared_ptr<Any>& [aParameter.name/] = parameterList->at([aParameter.listNumber(anActivity)/]);
 	std::shared_ptr<fUML::Semantics::CommonBehavior::ParameterValue> [aParameter.name/]_parameterValue = fUML::Semantics::CommonBehavior::CommonBehaviorFactory::eInstance()->createParameterValue();
 	[aParameter.name/]_parameterValue->setParameter([aParameter.generatePackageGetterCall()/]);
 [comment Anys that contain a list of elements has to be expanded /]
@@ -320,8 +320,8 @@ std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> pList(new 
 		[aParameter.name/]_parameterValue->getValues()->add(eAny(anElement, [aParameter.name/]->getTypeId(), false));
 	}
 	[else]
-	std::shared_ptr<uml::UMLContainerAny> umlContainerAny = std::dynamic_pointer_cast<uml::UMLContainerAny>([aParameter.name/]);
-	std::shared_ptr<Bag<uml::Element>> elementList = umlContainerAny->getAsElementContainer();
+	const std::shared_ptr<uml::UMLContainerAny>& umlContainerAny = std::dynamic_pointer_cast<uml::UMLContainerAny>([aParameter.name/]);
+	const std::shared_ptr<Bag<uml::Element>>& elementList = umlContainerAny->getAsElementContainer();
 	for(const std::shared_ptr<uml::Element>& anElement : *elementList)
 	{
 		[aParameter.name/]_parameterValue->getValues()->add(eUMLAny(anElement, [aParameter.name/]->getTypeId()));
@@ -335,13 +335,13 @@ std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> pList(new 
 [/for]
 
 //Executing Activity [anActivity.name/]
-std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> outputParameterValues = m_locus->getExecutor()->execute([anActivity.generatePackageGetterCall()/], [if (anActivity.owner.oclIsKindOf(Class))]element[else]nullptr[/if], pList);
+const std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>>& outputParameterValues = m_locus->getExecutor()->execute([anActivity.generatePackageGetterCall()/], [if (anActivity.owner.oclIsKindOf(Class))]element[else]nullptr[/if], pList);
 
 [if (anActivity.ownedParameter->select(p :Parameter | p.direction = ParameterDirectionKind::return)->notEmpty())]
 //The activity has a return parameter
 [let par : Parameter = anActivity.ownedParameter->select(p :Parameter | p.direction = ParameterDirectionKind::return)->first()]
 std::shared_ptr<Any> returnValue;
-std::shared_ptr<uml::Parameter> returnParameter = [par.generatePackageGetterCall()/];
+const std::shared_ptr<uml::Parameter>& returnParameter = [par.generatePackageGetterCall()/];
 
 for(const std::shared_ptr<fUML::Semantics::CommonBehavior::ParameterValue>& parameterValue : *outputParameterValues)
 {

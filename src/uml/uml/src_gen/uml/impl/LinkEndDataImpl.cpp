@@ -104,7 +104,7 @@ LinkEndDataImpl& LinkEndDataImpl::operator=(const LinkEndDataImpl & obj)
 	m_value  = obj.getValue();
 	//Clone references with containment (deep copy)
 	//clone reference 'qualifier'
-	std::shared_ptr<Subset<uml::QualifierValue, uml::Element>> qualifierList = obj.getQualifier();
+	const std::shared_ptr<Subset<uml::QualifierValue, uml::Element>>& qualifierList = obj.getQualifier();
 	if(qualifierList)
 	{
 		/*Subset*/
@@ -121,7 +121,7 @@ LinkEndDataImpl& LinkEndDataImpl::operator=(const LinkEndDataImpl & obj)
 		
 		for(const std::shared_ptr<uml::QualifierValue>& qualifierindexElem: *qualifierList) 
 		{
-			std::shared_ptr<uml::QualifierValue> temp = std::dynamic_pointer_cast<uml::QualifierValue>((qualifierindexElem)->copy());
+			const std::shared_ptr<uml::QualifierValue>& temp = std::dynamic_pointer_cast<uml::QualifierValue>((qualifierindexElem)->copy());
 			m_qualifier->push_back(temp);
 		}
 	}

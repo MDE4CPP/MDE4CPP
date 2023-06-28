@@ -168,7 +168,7 @@ ConditionalNodeImpl& ConditionalNodeImpl::operator=(const ConditionalNodeImpl & 
 	//copy references with no containment (soft copy)
 	//Clone references with containment (deep copy)
 	//clone reference 'clause'
-	std::shared_ptr<Subset<uml::Clause, uml::Element>> clauseList = obj.getClause();
+	const std::shared_ptr<Subset<uml::Clause, uml::Element>>& clauseList = obj.getClause();
 	if(clauseList)
 	{
 		/*Subset*/
@@ -185,7 +185,7 @@ ConditionalNodeImpl& ConditionalNodeImpl::operator=(const ConditionalNodeImpl & 
 		
 		for(const std::shared_ptr<uml::Clause>& clauseindexElem: *clauseList) 
 		{
-			std::shared_ptr<uml::Clause> temp = std::dynamic_pointer_cast<uml::Clause>((clauseindexElem)->copy());
+			const std::shared_ptr<uml::Clause>& temp = std::dynamic_pointer_cast<uml::Clause>((clauseindexElem)->copy());
 			m_clause->push_back(temp);
 		}
 	}

@@ -134,7 +134,7 @@ InteractionFragmentImpl& InteractionFragmentImpl::operator=(const InteractionFra
 	m_enclosingOperand  = obj.getEnclosingOperand();
 	//Clone references with containment (deep copy)
 	//clone reference 'generalOrdering'
-	std::shared_ptr<Subset<uml::GeneralOrdering, uml::Element>> generalOrderingList = obj.getGeneralOrdering();
+	const std::shared_ptr<Subset<uml::GeneralOrdering, uml::Element>>& generalOrderingList = obj.getGeneralOrdering();
 	if(generalOrderingList)
 	{
 		/*Subset*/
@@ -151,7 +151,7 @@ InteractionFragmentImpl& InteractionFragmentImpl::operator=(const InteractionFra
 		
 		for(const std::shared_ptr<uml::GeneralOrdering>& generalOrderingindexElem: *generalOrderingList) 
 		{
-			std::shared_ptr<uml::GeneralOrdering> temp = std::dynamic_pointer_cast<uml::GeneralOrdering>((generalOrderingindexElem)->copy());
+			const std::shared_ptr<uml::GeneralOrdering>& temp = std::dynamic_pointer_cast<uml::GeneralOrdering>((generalOrderingindexElem)->copy());
 			m_generalOrdering->push_back(temp);
 		}
 	}

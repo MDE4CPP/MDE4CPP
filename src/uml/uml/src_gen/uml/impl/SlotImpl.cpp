@@ -112,7 +112,7 @@ SlotImpl& SlotImpl::operator=(const SlotImpl & obj)
 	m_owningInstance  = obj.getOwningInstance();
 	//Clone references with containment (deep copy)
 	//clone reference 'value'
-	std::shared_ptr<Subset<uml::ValueSpecification, uml::Element>> valueList = obj.getValue();
+	const std::shared_ptr<Subset<uml::ValueSpecification, uml::Element>>& valueList = obj.getValue();
 	if(valueList)
 	{
 		/*Subset*/
@@ -129,7 +129,7 @@ SlotImpl& SlotImpl::operator=(const SlotImpl & obj)
 		
 		for(const std::shared_ptr<uml::ValueSpecification>& valueindexElem: *valueList) 
 		{
-			std::shared_ptr<uml::ValueSpecification> temp = std::dynamic_pointer_cast<uml::ValueSpecification>((valueindexElem)->copy());
+			const std::shared_ptr<uml::ValueSpecification>& temp = std::dynamic_pointer_cast<uml::ValueSpecification>((valueindexElem)->copy());
 			m_value->push_back(temp);
 		}
 	}

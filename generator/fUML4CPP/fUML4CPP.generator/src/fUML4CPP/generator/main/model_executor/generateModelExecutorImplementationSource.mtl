@@ -114,13 +114,13 @@ std::shared_ptr<Any> [packageName/]ExecutorImpl::evaluate(const std::shared_ptr<
 	{
 		case uml::umlPackage::INSTANCEVALUE_CLASS:
 		{
-			std::shared_ptr<uml::EnumerationLiteral> literal = 
+			const std::shared_ptr<uml::EnumerationLiteral>& literal = 
 				std::dynamic_pointer_cast<uml::EnumerationLiteral>((std::dynamic_pointer_cast<uml::InstanceValue>(specification))->getInstance());
 
 			if(literal)
 			{
-				std::shared_ptr<uml::Enumeration> enumeration = literal->getEnumeration().lock();
-				std::shared_ptr<uml::Package> enumerationPackage = enumeration->getPackage().lock();
+				const std::shared_ptr<uml::Enumeration>& enumeration = literal->getEnumeration().lock();
+				const std::shared_ptr<uml::Package>& enumerationPackage = enumeration->getPackage().lock();
 	
 				//Model-internal Enumerations
 [let internalPackages : OrderedSet(Package) = aPackage.getEnumerationsOwnedByPackage()._package->sortedBy(myQualifiedName())->asOrderedSet()]
@@ -155,7 +155,7 @@ std::shared_ptr<Any> [packageName/]ExecutorImpl::evaluate(const std::shared_ptr<
 				[if (externalPackageList->size() = 0)]
 				//No external enumerations used in Activities of this model
 				[else]
-					std::shared_ptr<PluginFramework> pluginFramework = PluginFramework::eInstance();
+					const std::shared_ptr<PluginFramework>& pluginFramework = PluginFramework::eInstance();
 					std::string pluginName;
 				[for (externalPackage : Package | externalPackageList) before('\n') after('\n')]
 					if(enumerationPackage == [externalPackage.generateNamespace(false)/]::[externalPackage.name/]Package::eInstance()) 
@@ -163,12 +163,12 @@ std::shared_ptr<Any> [packageName/]ExecutorImpl::evaluate(const std::shared_ptr<
 						pluginName = "[externalPackage.getRootPackage().name/]Exec";
 					}
 				[/for]
-					std::shared_ptr<MDE4CPPPlugin> plugin = pluginFramework->findPluginByName(pluginName);
+					const std::shared_ptr<MDE4CPPPlugin>& plugin = pluginFramework->findPluginByName(pluginName);
 					if (plugin)
 					{
 						DEBUG_INFO("Plugin '" << plugin->eNAME() << "' found.")
 				
-						std::shared_ptr<UMLExecutionModelPlugin> executionPlugin = std::dynamic_pointer_cast<UMLExecutionModelPlugin>(plugin);
+						const std::shared_ptr<UMLExecutionModelPlugin>& executionPlugin = std::dynamic_pointer_cast<UMLExecutionModelPlugin>(plugin);
 						if (executionPlugin)
 						{
 							DEBUG_INFO("Execution plugin '" << executionPlugin->eNAME() << "' is accessable.")
@@ -200,12 +200,12 @@ std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> [packageNa
 	int behaviorMetaElementID = behavior->getMetaElementID();
     if((behaviorMetaElementID == uml::umlPackage::OPAQUEBEHAVIOR_CLASS) || (behaviorMetaElementID == uml::umlPackage::FUNCTIONBEHAVIOR_CLASS))
     {
-		std::shared_ptr<uml::OpaqueBehavior> opaqueBehavior = std::dynamic_pointer_cast<uml::OpaqueBehavior>(behavior);
+		const std::shared_ptr<uml::OpaqueBehavior>& opaqueBehavior = std::dynamic_pointer_cast<uml::OpaqueBehavior>(behavior);
 		return this->invokeOpaqueBehavior(opaqueBehavior, context, inputs);
     }
 	else if(behaviorMetaElementID == uml::umlPackage::ACTIVITY_CLASS)
 	{
-		std::shared_ptr<fUML::Semantics::Activities::ActivityExecution> activityExecution = 
+		const std::shared_ptr<fUML::Semantics::Activities::ActivityExecution>& activityExecution = 
 			std::dynamic_pointer_cast<fUML::Semantics::Activities::ActivityExecution>(this->getLocus().lock()->getFactory()->createExecution(behavior, context));
 
 		//Model-internal activities
@@ -234,7 +234,7 @@ std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> [packageNa
 			[if (externalPackageList->size() = 0)]
 			//No external activities called in Activities of this model
 			[else]
-			std::shared_ptr<PluginFramework> pluginFramework = PluginFramework::eInstance();
+			const std::shared_ptr<PluginFramework>& pluginFramework = PluginFramework::eInstance();
 			std::string pluginName;
 				[for (externalActivity : Activity | externalPackageList.allOwnedElements()->filter(Activity)->intersection(aPackage.getCalledActivities())) 
 				before('\t\t\tswitch(behavior->_getID())\n\t\t\t{\n') after('\n\t\t\t}')]
@@ -244,12 +244,12 @@ std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> [packageNa
 					break;
 				}
 				[/for]
-			std::shared_ptr<MDE4CPPPlugin> plugin = pluginFramework->findPluginByName(pluginName);
+			const std::shared_ptr<MDE4CPPPlugin>& plugin = pluginFramework->findPluginByName(pluginName);
 			if (plugin)
 			{
 				DEBUG_INFO("Plugin '" << plugin->eNAME() << "' found.")
 		
-				std::shared_ptr<UMLExecutionModelPlugin> executionPlugin = std::dynamic_pointer_cast<UMLExecutionModelPlugin>(plugin);
+				const std::shared_ptr<UMLExecutionModelPlugin>& executionPlugin = std::dynamic_pointer_cast<UMLExecutionModelPlugin>(plugin);
 				if (executionPlugin)
 				{
 					DEBUG_INFO("Execution plugin '" << executionPlugin->eNAME() << "' is accessable.")
@@ -411,13 +411,13 @@ std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> [packageNa
 	[if (externalPackageList->size() = 0)]
 		//No external opaque behaviors called in Activities of this model
 	[else]
-		std::shared_ptr<PluginFramework> pluginFramework = PluginFramework::eInstance();
-		std::shared_ptr<MDE4CPPPlugin> plugin = pluginFramework->findPluginByName(pluginName);
+		const std::shared_ptr<PluginFramework>& pluginFramework = PluginFramework::eInstance();
+		const std::shared_ptr<MDE4CPPPlugin>& plugin = pluginFramework->findPluginByName(pluginName);
 		if (plugin)
 		{
 			DEBUG_INFO("Plugin '" << plugin->eNAME() << "' found.")
 		
-			std::shared_ptr<UMLExecutionModelPlugin> executionPlugin = std::dynamic_pointer_cast<UMLExecutionModelPlugin>(plugin);
+			const std::shared_ptr<UMLExecutionModelPlugin>& executionPlugin = std::dynamic_pointer_cast<UMLExecutionModelPlugin>(plugin);
 			if (executionPlugin)
 			{
 				DEBUG_INFO("Execution plugin '" << executionPlugin->eNAME() << "' is accessable.")

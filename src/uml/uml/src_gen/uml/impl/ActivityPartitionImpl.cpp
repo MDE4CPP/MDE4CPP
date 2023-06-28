@@ -143,7 +143,7 @@ ActivityPartitionImpl& ActivityPartitionImpl::operator=(const ActivityPartitionI
 	m_superPartition  = obj.getSuperPartition();
 	//Clone references with containment (deep copy)
 	//clone reference 'edge'
-	std::shared_ptr<Subset<uml::ActivityEdge, uml::ActivityEdge>> edgeList = obj.getEdge();
+	const std::shared_ptr<Subset<uml::ActivityEdge, uml::ActivityEdge>>& edgeList = obj.getEdge();
 	if(edgeList)
 	{
 		/*Subset*/
@@ -160,7 +160,7 @@ ActivityPartitionImpl& ActivityPartitionImpl::operator=(const ActivityPartitionI
 		
 		for(const std::shared_ptr<uml::ActivityEdge>& edgeindexElem: *edgeList) 
 		{
-			std::shared_ptr<uml::ActivityEdge> temp = std::dynamic_pointer_cast<uml::ActivityEdge>((edgeindexElem)->copy());
+			const std::shared_ptr<uml::ActivityEdge>& temp = std::dynamic_pointer_cast<uml::ActivityEdge>((edgeindexElem)->copy());
 			m_edge->push_back(temp);
 		}
 	}
@@ -170,7 +170,7 @@ ActivityPartitionImpl& ActivityPartitionImpl::operator=(const ActivityPartitionI
 	}
 
 	//clone reference 'node'
-	std::shared_ptr<Subset<uml::ActivityNode, uml::ActivityNode>> nodeList = obj.getNode();
+	const std::shared_ptr<Subset<uml::ActivityNode, uml::ActivityNode>>& nodeList = obj.getNode();
 	if(nodeList)
 	{
 		/*Subset*/
@@ -187,7 +187,7 @@ ActivityPartitionImpl& ActivityPartitionImpl::operator=(const ActivityPartitionI
 		
 		for(const std::shared_ptr<uml::ActivityNode>& nodeindexElem: *nodeList) 
 		{
-			std::shared_ptr<uml::ActivityNode> temp = std::dynamic_pointer_cast<uml::ActivityNode>((nodeindexElem)->copy());
+			const std::shared_ptr<uml::ActivityNode>& temp = std::dynamic_pointer_cast<uml::ActivityNode>((nodeindexElem)->copy());
 			m_node->push_back(temp);
 		}
 	}
@@ -197,7 +197,7 @@ ActivityPartitionImpl& ActivityPartitionImpl::operator=(const ActivityPartitionI
 	}
 
 	//clone reference 'subpartition'
-	std::shared_ptr<Subset<uml::ActivityPartition, uml::ActivityGroup>> subpartitionList = obj.getSubpartition();
+	const std::shared_ptr<Subset<uml::ActivityPartition, uml::ActivityGroup>>& subpartitionList = obj.getSubpartition();
 	if(subpartitionList)
 	{
 		/*Subset*/
@@ -214,7 +214,7 @@ ActivityPartitionImpl& ActivityPartitionImpl::operator=(const ActivityPartitionI
 		
 		for(const std::shared_ptr<uml::ActivityPartition>& subpartitionindexElem: *subpartitionList) 
 		{
-			std::shared_ptr<uml::ActivityPartition> temp = std::dynamic_pointer_cast<uml::ActivityPartition>((subpartitionindexElem)->copy());
+			const std::shared_ptr<uml::ActivityPartition>& temp = std::dynamic_pointer_cast<uml::ActivityPartition>((subpartitionindexElem)->copy());
 			m_subpartition->push_back(temp);
 		}
 	}

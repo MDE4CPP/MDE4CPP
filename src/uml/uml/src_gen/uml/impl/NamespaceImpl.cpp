@@ -117,7 +117,7 @@ NamespaceImpl& NamespaceImpl::operator=(const NamespaceImpl & obj)
 	m_member  = obj.getMember();
 	//Clone references with containment (deep copy)
 	//clone reference 'elementImport'
-	std::shared_ptr<SubsetUnion<uml::ElementImport, uml::Element>> elementImportList = obj.getElementImport();
+	const std::shared_ptr<SubsetUnion<uml::ElementImport, uml::Element>>& elementImportList = obj.getElementImport();
 	if(elementImportList)
 	{
 		/*SubsetUnion*/
@@ -134,7 +134,7 @@ NamespaceImpl& NamespaceImpl::operator=(const NamespaceImpl & obj)
 		
 		for(const std::shared_ptr<uml::ElementImport>& elementImportindexElem: *elementImportList) 
 		{
-			std::shared_ptr<uml::ElementImport> temp = std::dynamic_pointer_cast<uml::ElementImport>((elementImportindexElem)->copy());
+			const std::shared_ptr<uml::ElementImport>& temp = std::dynamic_pointer_cast<uml::ElementImport>((elementImportindexElem)->copy());
 			m_elementImport->push_back(temp);
 		}
 	}
@@ -144,7 +144,7 @@ NamespaceImpl& NamespaceImpl::operator=(const NamespaceImpl & obj)
 	}
 
 	//clone reference 'importedMember'
-	std::shared_ptr<Subset<uml::PackageableElement, uml::NamedElement>> importedMemberList = obj.getImportedMember();
+	const std::shared_ptr<Subset<uml::PackageableElement, uml::NamedElement>>& importedMemberList = obj.getImportedMember();
 	if(importedMemberList)
 	{
 		/*Subset*/
@@ -161,7 +161,7 @@ NamespaceImpl& NamespaceImpl::operator=(const NamespaceImpl & obj)
 		
 		for(const std::shared_ptr<uml::PackageableElement>& importedMemberindexElem: *importedMemberList) 
 		{
-			std::shared_ptr<uml::PackageableElement> temp = std::dynamic_pointer_cast<uml::PackageableElement>((importedMemberindexElem)->copy());
+			const std::shared_ptr<uml::PackageableElement>& temp = std::dynamic_pointer_cast<uml::PackageableElement>((importedMemberindexElem)->copy());
 			m_importedMember->push_back(temp);
 		}
 	}
@@ -171,7 +171,7 @@ NamespaceImpl& NamespaceImpl::operator=(const NamespaceImpl & obj)
 	}
 
 	//clone reference 'ownedRule'
-	std::shared_ptr<SubsetUnion<uml::Constraint, uml::NamedElement>> ownedRuleList = obj.getOwnedRule();
+	const std::shared_ptr<SubsetUnion<uml::Constraint, uml::NamedElement>>& ownedRuleList = obj.getOwnedRule();
 	if(ownedRuleList)
 	{
 		/*SubsetUnion*/
@@ -188,7 +188,7 @@ NamespaceImpl& NamespaceImpl::operator=(const NamespaceImpl & obj)
 		
 		for(const std::shared_ptr<uml::Constraint>& ownedRuleindexElem: *ownedRuleList) 
 		{
-			std::shared_ptr<uml::Constraint> temp = std::dynamic_pointer_cast<uml::Constraint>((ownedRuleindexElem)->copy());
+			const std::shared_ptr<uml::Constraint>& temp = std::dynamic_pointer_cast<uml::Constraint>((ownedRuleindexElem)->copy());
 			m_ownedRule->push_back(temp);
 		}
 	}
@@ -198,7 +198,7 @@ NamespaceImpl& NamespaceImpl::operator=(const NamespaceImpl & obj)
 	}
 
 	//clone reference 'packageImport'
-	std::shared_ptr<SubsetUnion<uml::PackageImport, uml::Element>> packageImportList = obj.getPackageImport();
+	const std::shared_ptr<SubsetUnion<uml::PackageImport, uml::Element>>& packageImportList = obj.getPackageImport();
 	if(packageImportList)
 	{
 		/*SubsetUnion*/
@@ -215,7 +215,7 @@ NamespaceImpl& NamespaceImpl::operator=(const NamespaceImpl & obj)
 		
 		for(const std::shared_ptr<uml::PackageImport>& packageImportindexElem: *packageImportList) 
 		{
-			std::shared_ptr<uml::PackageImport> temp = std::dynamic_pointer_cast<uml::PackageImport>((packageImportindexElem)->copy());
+			const std::shared_ptr<uml::PackageImport>& temp = std::dynamic_pointer_cast<uml::PackageImport>((packageImportindexElem)->copy());
 			m_packageImport->push_back(temp);
 		}
 	}

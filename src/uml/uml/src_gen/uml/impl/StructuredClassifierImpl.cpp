@@ -161,7 +161,7 @@ StructuredClassifierImpl& StructuredClassifierImpl::operator=(const StructuredCl
 	m_part  = obj.getPart();
 	//Clone references with containment (deep copy)
 	//clone reference 'ownedAttribute'
-	std::shared_ptr<SubsetUnion<uml::Property, uml::ConnectableElement, uml::NamedElement, uml::Property>> ownedAttributeList = obj.getOwnedAttribute();
+	const std::shared_ptr<SubsetUnion<uml::Property, uml::ConnectableElement, uml::NamedElement, uml::Property>>& ownedAttributeList = obj.getOwnedAttribute();
 	if(ownedAttributeList)
 	{
 		/*SubsetUnion*/
@@ -178,7 +178,7 @@ StructuredClassifierImpl& StructuredClassifierImpl::operator=(const StructuredCl
 		
 		for(const std::shared_ptr<uml::Property>& ownedAttributeindexElem: *ownedAttributeList) 
 		{
-			std::shared_ptr<uml::Property> temp = std::dynamic_pointer_cast<uml::Property>((ownedAttributeindexElem)->copy());
+			const std::shared_ptr<uml::Property>& temp = std::dynamic_pointer_cast<uml::Property>((ownedAttributeindexElem)->copy());
 			m_ownedAttribute->push_back(temp);
 		}
 	}
@@ -188,7 +188,7 @@ StructuredClassifierImpl& StructuredClassifierImpl::operator=(const StructuredCl
 	}
 
 	//clone reference 'ownedConnector'
-	std::shared_ptr<Subset<uml::Connector, uml::Feature, uml::NamedElement>> ownedConnectorList = obj.getOwnedConnector();
+	const std::shared_ptr<Subset<uml::Connector, uml::Feature, uml::NamedElement>>& ownedConnectorList = obj.getOwnedConnector();
 	if(ownedConnectorList)
 	{
 		/*Subset*/
@@ -205,7 +205,7 @@ StructuredClassifierImpl& StructuredClassifierImpl::operator=(const StructuredCl
 		
 		for(const std::shared_ptr<uml::Connector>& ownedConnectorindexElem: *ownedConnectorList) 
 		{
-			std::shared_ptr<uml::Connector> temp = std::dynamic_pointer_cast<uml::Connector>((ownedConnectorindexElem)->copy());
+			const std::shared_ptr<uml::Connector>& temp = std::dynamic_pointer_cast<uml::Connector>((ownedConnectorindexElem)->copy());
 			m_ownedConnector->push_back(temp);
 		}
 	}

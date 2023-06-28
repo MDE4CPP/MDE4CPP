@@ -114,7 +114,7 @@ DeploymentTargetImpl& DeploymentTargetImpl::operator=(const DeploymentTargetImpl
 	m_deployedElement  = obj.getDeployedElement();
 	//Clone references with containment (deep copy)
 	//clone reference 'deployment'
-	std::shared_ptr<Subset<uml::Deployment, uml::Element>> deploymentList = obj.getDeployment();
+	const std::shared_ptr<Subset<uml::Deployment, uml::Element>>& deploymentList = obj.getDeployment();
 	if(deploymentList)
 	{
 		/*Subset*/
@@ -131,7 +131,7 @@ DeploymentTargetImpl& DeploymentTargetImpl::operator=(const DeploymentTargetImpl
 		
 		for(const std::shared_ptr<uml::Deployment>& deploymentindexElem: *deploymentList) 
 		{
-			std::shared_ptr<uml::Deployment> temp = std::dynamic_pointer_cast<uml::Deployment>((deploymentindexElem)->copy());
+			const std::shared_ptr<uml::Deployment>& temp = std::dynamic_pointer_cast<uml::Deployment>((deploymentindexElem)->copy());
 			m_deployment->push_back(temp);
 		}
 	}

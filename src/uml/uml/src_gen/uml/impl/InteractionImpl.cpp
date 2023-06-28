@@ -203,7 +203,7 @@ InteractionImpl& InteractionImpl::operator=(const InteractionImpl & obj)
 	//copy references with no containment (soft copy)
 	//Clone references with containment (deep copy)
 	//clone reference 'action'
-	std::shared_ptr<Subset<uml::Action, uml::Element>> actionList = obj.getAction();
+	const std::shared_ptr<Subset<uml::Action, uml::Element>>& actionList = obj.getAction();
 	if(actionList)
 	{
 		/*Subset*/
@@ -220,7 +220,7 @@ InteractionImpl& InteractionImpl::operator=(const InteractionImpl & obj)
 		
 		for(const std::shared_ptr<uml::Action>& actionindexElem: *actionList) 
 		{
-			std::shared_ptr<uml::Action> temp = std::dynamic_pointer_cast<uml::Action>((actionindexElem)->copy());
+			const std::shared_ptr<uml::Action>& temp = std::dynamic_pointer_cast<uml::Action>((actionindexElem)->copy());
 			m_action->push_back(temp);
 		}
 	}
@@ -230,7 +230,7 @@ InteractionImpl& InteractionImpl::operator=(const InteractionImpl & obj)
 	}
 
 	//clone reference 'formalGate'
-	std::shared_ptr<Subset<uml::Gate, uml::NamedElement>> formalGateList = obj.getFormalGate();
+	const std::shared_ptr<Subset<uml::Gate, uml::NamedElement>>& formalGateList = obj.getFormalGate();
 	if(formalGateList)
 	{
 		/*Subset*/
@@ -247,7 +247,7 @@ InteractionImpl& InteractionImpl::operator=(const InteractionImpl & obj)
 		
 		for(const std::shared_ptr<uml::Gate>& formalGateindexElem: *formalGateList) 
 		{
-			std::shared_ptr<uml::Gate> temp = std::dynamic_pointer_cast<uml::Gate>((formalGateindexElem)->copy());
+			const std::shared_ptr<uml::Gate>& temp = std::dynamic_pointer_cast<uml::Gate>((formalGateindexElem)->copy());
 			m_formalGate->push_back(temp);
 		}
 	}
@@ -257,7 +257,7 @@ InteractionImpl& InteractionImpl::operator=(const InteractionImpl & obj)
 	}
 
 	//clone reference 'fragment'
-	std::shared_ptr<Subset<uml::InteractionFragment, uml::NamedElement>> fragmentList = obj.getFragment();
+	const std::shared_ptr<Subset<uml::InteractionFragment, uml::NamedElement>>& fragmentList = obj.getFragment();
 	if(fragmentList)
 	{
 		/*Subset*/
@@ -274,7 +274,7 @@ InteractionImpl& InteractionImpl::operator=(const InteractionImpl & obj)
 		
 		for(const std::shared_ptr<uml::InteractionFragment>& fragmentindexElem: *fragmentList) 
 		{
-			std::shared_ptr<uml::InteractionFragment> temp = std::dynamic_pointer_cast<uml::InteractionFragment>((fragmentindexElem)->copy());
+			const std::shared_ptr<uml::InteractionFragment>& temp = std::dynamic_pointer_cast<uml::InteractionFragment>((fragmentindexElem)->copy());
 			m_fragment->push_back(temp);
 		}
 	}
@@ -284,7 +284,7 @@ InteractionImpl& InteractionImpl::operator=(const InteractionImpl & obj)
 	}
 
 	//clone reference 'lifeline'
-	std::shared_ptr<Subset<uml::Lifeline, uml::NamedElement>> lifelineList = obj.getLifeline();
+	const std::shared_ptr<Subset<uml::Lifeline, uml::NamedElement>>& lifelineList = obj.getLifeline();
 	if(lifelineList)
 	{
 		/*Subset*/
@@ -301,7 +301,7 @@ InteractionImpl& InteractionImpl::operator=(const InteractionImpl & obj)
 		
 		for(const std::shared_ptr<uml::Lifeline>& lifelineindexElem: *lifelineList) 
 		{
-			std::shared_ptr<uml::Lifeline> temp = std::dynamic_pointer_cast<uml::Lifeline>((lifelineindexElem)->copy());
+			const std::shared_ptr<uml::Lifeline>& temp = std::dynamic_pointer_cast<uml::Lifeline>((lifelineindexElem)->copy());
 			m_lifeline->push_back(temp);
 		}
 	}
@@ -311,7 +311,7 @@ InteractionImpl& InteractionImpl::operator=(const InteractionImpl & obj)
 	}
 
 	//clone reference 'message'
-	std::shared_ptr<Subset<uml::Message, uml::NamedElement>> messageList = obj.getMessage();
+	const std::shared_ptr<Subset<uml::Message, uml::NamedElement>>& messageList = obj.getMessage();
 	if(messageList)
 	{
 		/*Subset*/
@@ -328,7 +328,7 @@ InteractionImpl& InteractionImpl::operator=(const InteractionImpl & obj)
 		
 		for(const std::shared_ptr<uml::Message>& messageindexElem: *messageList) 
 		{
-			std::shared_ptr<uml::Message> temp = std::dynamic_pointer_cast<uml::Message>((messageindexElem)->copy());
+			const std::shared_ptr<uml::Message>& temp = std::dynamic_pointer_cast<uml::Message>((messageindexElem)->copy());
 			m_message->push_back(temp);
 		}
 	}

@@ -171,7 +171,7 @@ NodeImpl& NodeImpl::operator=(const NodeImpl & obj)
 	//copy references with no containment (soft copy)
 	//Clone references with containment (deep copy)
 	//clone reference 'nestedNode'
-	std::shared_ptr<Subset<uml::Node, uml::NamedElement>> nestedNodeList = obj.getNestedNode();
+	const std::shared_ptr<Subset<uml::Node, uml::NamedElement>>& nestedNodeList = obj.getNestedNode();
 	if(nestedNodeList)
 	{
 		/*Subset*/
@@ -188,7 +188,7 @@ NodeImpl& NodeImpl::operator=(const NodeImpl & obj)
 		
 		for(const std::shared_ptr<uml::Node>& nestedNodeindexElem: *nestedNodeList) 
 		{
-			std::shared_ptr<uml::Node> temp = std::dynamic_pointer_cast<uml::Node>((nestedNodeindexElem)->copy());
+			const std::shared_ptr<uml::Node>& temp = std::dynamic_pointer_cast<uml::Node>((nestedNodeindexElem)->copy());
 			m_nestedNode->push_back(temp);
 		}
 	}

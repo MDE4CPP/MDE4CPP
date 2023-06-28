@@ -110,7 +110,7 @@ EEnumImpl& EEnumImpl::operator=(const EEnumImpl & obj)
 	//copy references with no containment (soft copy)
 	//Clone references with containment (deep copy)
 	//clone reference 'eLiterals'
-	std::shared_ptr<Subset<ecore::EEnumLiteral, ecore::EObject>> eLiteralsList = obj.getELiterals();
+	const std::shared_ptr<Subset<ecore::EEnumLiteral, ecore::EObject>>& eLiteralsList = obj.getELiterals();
 	if(eLiteralsList)
 	{
 		/*Subset*/
@@ -127,7 +127,7 @@ EEnumImpl& EEnumImpl::operator=(const EEnumImpl & obj)
 		
 		for(const std::shared_ptr<ecore::EEnumLiteral>& eLiteralsindexElem: *eLiteralsList) 
 		{
-			std::shared_ptr<ecore::EEnumLiteral> temp = std::dynamic_pointer_cast<ecore::EEnumLiteral>((eLiteralsindexElem)->copy());
+			const std::shared_ptr<ecore::EEnumLiteral>& temp = std::dynamic_pointer_cast<ecore::EEnumLiteral>((eLiteralsindexElem)->copy());
 			m_eLiterals->push_back(temp);
 		}
 	}

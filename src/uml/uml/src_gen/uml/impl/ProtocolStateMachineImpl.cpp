@@ -183,7 +183,7 @@ ProtocolStateMachineImpl& ProtocolStateMachineImpl::operator=(const ProtocolStat
 	//copy references with no containment (soft copy)
 	//Clone references with containment (deep copy)
 	//clone reference 'conformance'
-	std::shared_ptr<Subset<uml::ProtocolConformance, uml::Element>> conformanceList = obj.getConformance();
+	const std::shared_ptr<Subset<uml::ProtocolConformance, uml::Element>>& conformanceList = obj.getConformance();
 	if(conformanceList)
 	{
 		/*Subset*/
@@ -200,7 +200,7 @@ ProtocolStateMachineImpl& ProtocolStateMachineImpl::operator=(const ProtocolStat
 		
 		for(const std::shared_ptr<uml::ProtocolConformance>& conformanceindexElem: *conformanceList) 
 		{
-			std::shared_ptr<uml::ProtocolConformance> temp = std::dynamic_pointer_cast<uml::ProtocolConformance>((conformanceindexElem)->copy());
+			const std::shared_ptr<uml::ProtocolConformance>& temp = std::dynamic_pointer_cast<uml::ProtocolConformance>((conformanceindexElem)->copy());
 			m_conformance->push_back(temp);
 		}
 	}

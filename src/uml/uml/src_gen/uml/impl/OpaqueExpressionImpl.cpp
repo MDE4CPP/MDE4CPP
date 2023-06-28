@@ -146,7 +146,7 @@ OpaqueExpressionImpl& OpaqueExpressionImpl::operator=(const OpaqueExpressionImpl
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy OpaqueExpression "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
 	#endif
 	//Clone Attributes with (deep copy)
-	std::shared_ptr<Bag<std::string>> bodyList = obj.getBody();
+	const std::shared_ptr<Bag<std::string>>& bodyList = obj.getBody();
 	if(bodyList)
 	{	
 		m_body.reset(new Bag<std::string>());
@@ -159,7 +159,7 @@ OpaqueExpressionImpl& OpaqueExpressionImpl::operator=(const OpaqueExpressionImpl
 	{
 		DEBUG_WARNING("container is nullptr for body.")
 	}
-	std::shared_ptr<Bag<std::string>> languageList = obj.getLanguage();
+	const std::shared_ptr<Bag<std::string>>& languageList = obj.getLanguage();
 	if(languageList)
 	{	
 		m_language.reset(new Bag<std::string>());

@@ -180,7 +180,7 @@ OperationImpl& OperationImpl::operator=(const OperationImpl & obj)
 	}
 
 	//clone reference 'postcondition'
-	std::shared_ptr<Subset<uml::Constraint, uml::Constraint /*Subset does not reference a union*/>> postconditionList = obj.getPostcondition();
+	const std::shared_ptr<Subset<uml::Constraint, uml::Constraint /*Subset does not reference a union*/>>& postconditionList = obj.getPostcondition();
 	if(postconditionList)
 	{
 		/*Subset*/
@@ -197,7 +197,7 @@ OperationImpl& OperationImpl::operator=(const OperationImpl & obj)
 		
 		for(const std::shared_ptr<uml::Constraint>& postconditionindexElem: *postconditionList) 
 		{
-			std::shared_ptr<uml::Constraint> temp = std::dynamic_pointer_cast<uml::Constraint>((postconditionindexElem)->copy());
+			const std::shared_ptr<uml::Constraint>& temp = std::dynamic_pointer_cast<uml::Constraint>((postconditionindexElem)->copy());
 			m_postcondition->push_back(temp);
 		}
 	}
@@ -207,7 +207,7 @@ OperationImpl& OperationImpl::operator=(const OperationImpl & obj)
 	}
 
 	//clone reference 'precondition'
-	std::shared_ptr<Subset<uml::Constraint, uml::Constraint /*Subset does not reference a union*/>> preconditionList = obj.getPrecondition();
+	const std::shared_ptr<Subset<uml::Constraint, uml::Constraint /*Subset does not reference a union*/>>& preconditionList = obj.getPrecondition();
 	if(preconditionList)
 	{
 		/*Subset*/
@@ -224,7 +224,7 @@ OperationImpl& OperationImpl::operator=(const OperationImpl & obj)
 		
 		for(const std::shared_ptr<uml::Constraint>& preconditionindexElem: *preconditionList) 
 		{
-			std::shared_ptr<uml::Constraint> temp = std::dynamic_pointer_cast<uml::Constraint>((preconditionindexElem)->copy());
+			const std::shared_ptr<uml::Constraint>& temp = std::dynamic_pointer_cast<uml::Constraint>((preconditionindexElem)->copy());
 			m_precondition->push_back(temp);
 		}
 	}
@@ -234,7 +234,7 @@ OperationImpl& OperationImpl::operator=(const OperationImpl & obj)
 	}
 
 	//clone reference 'redefinedOperation'
-	std::shared_ptr<Subset<uml::Operation, uml::RedefinableElement>> redefinedOperationList = obj.getRedefinedOperation();
+	const std::shared_ptr<Subset<uml::Operation, uml::RedefinableElement>>& redefinedOperationList = obj.getRedefinedOperation();
 	if(redefinedOperationList)
 	{
 		/*Subset*/
@@ -251,7 +251,7 @@ OperationImpl& OperationImpl::operator=(const OperationImpl & obj)
 		
 		for(const std::shared_ptr<uml::Operation>& redefinedOperationindexElem: *redefinedOperationList) 
 		{
-			std::shared_ptr<uml::Operation> temp = std::dynamic_pointer_cast<uml::Operation>((redefinedOperationindexElem)->copy());
+			const std::shared_ptr<uml::Operation>& temp = std::dynamic_pointer_cast<uml::Operation>((redefinedOperationindexElem)->copy());
 			m_redefinedOperation->push_back(temp);
 		}
 	}

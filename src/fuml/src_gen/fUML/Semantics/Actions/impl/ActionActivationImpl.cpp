@@ -144,7 +144,7 @@ ActionActivationImpl& ActionActivationImpl::operator=(const ActionActivationImpl
 	m_pinActivation  = obj.getPinActivation();
 	//Clone references with containment (deep copy)
 	//clone reference 'inputPinActivation'
-	std::shared_ptr<Subset<fUML::Semantics::Actions::InputPinActivation, fUML::Semantics::Actions::PinActivation>> inputPinActivationList = obj.getInputPinActivation();
+	const std::shared_ptr<Subset<fUML::Semantics::Actions::InputPinActivation, fUML::Semantics::Actions::PinActivation>>& inputPinActivationList = obj.getInputPinActivation();
 	if(inputPinActivationList)
 	{
 		/*Subset*/
@@ -161,7 +161,7 @@ ActionActivationImpl& ActionActivationImpl::operator=(const ActionActivationImpl
 		
 		for(const std::shared_ptr<fUML::Semantics::Actions::InputPinActivation>& inputPinActivationindexElem: *inputPinActivationList) 
 		{
-			std::shared_ptr<fUML::Semantics::Actions::InputPinActivation> temp = std::dynamic_pointer_cast<fUML::Semantics::Actions::InputPinActivation>((inputPinActivationindexElem)->copy());
+			const std::shared_ptr<fUML::Semantics::Actions::InputPinActivation>& temp = std::dynamic_pointer_cast<fUML::Semantics::Actions::InputPinActivation>((inputPinActivationindexElem)->copy());
 			m_inputPinActivation->push_back(temp);
 		}
 	}
@@ -171,7 +171,7 @@ ActionActivationImpl& ActionActivationImpl::operator=(const ActionActivationImpl
 	}
 
 	//clone reference 'outputPinActivation'
-	std::shared_ptr<Subset<fUML::Semantics::Actions::OutputPinActivation, fUML::Semantics::Actions::PinActivation>> outputPinActivationList = obj.getOutputPinActivation();
+	const std::shared_ptr<Subset<fUML::Semantics::Actions::OutputPinActivation, fUML::Semantics::Actions::PinActivation>>& outputPinActivationList = obj.getOutputPinActivation();
 	if(outputPinActivationList)
 	{
 		/*Subset*/
@@ -188,7 +188,7 @@ ActionActivationImpl& ActionActivationImpl::operator=(const ActionActivationImpl
 		
 		for(const std::shared_ptr<fUML::Semantics::Actions::OutputPinActivation>& outputPinActivationindexElem: *outputPinActivationList) 
 		{
-			std::shared_ptr<fUML::Semantics::Actions::OutputPinActivation> temp = std::dynamic_pointer_cast<fUML::Semantics::Actions::OutputPinActivation>((outputPinActivationindexElem)->copy());
+			const std::shared_ptr<fUML::Semantics::Actions::OutputPinActivation>& temp = std::dynamic_pointer_cast<fUML::Semantics::Actions::OutputPinActivation>((outputPinActivationindexElem)->copy());
 			m_outputPinActivation->push_back(temp);
 		}
 	}

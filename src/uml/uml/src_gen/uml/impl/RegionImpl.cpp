@@ -147,7 +147,7 @@ RegionImpl& RegionImpl::operator=(const RegionImpl & obj)
 	}
 
 	//clone reference 'subvertex'
-	std::shared_ptr<Subset<uml::Vertex, uml::NamedElement>> subvertexList = obj.getSubvertex();
+	const std::shared_ptr<Subset<uml::Vertex, uml::NamedElement>>& subvertexList = obj.getSubvertex();
 	if(subvertexList)
 	{
 		/*Subset*/
@@ -164,7 +164,7 @@ RegionImpl& RegionImpl::operator=(const RegionImpl & obj)
 		
 		for(const std::shared_ptr<uml::Vertex>& subvertexindexElem: *subvertexList) 
 		{
-			std::shared_ptr<uml::Vertex> temp = std::dynamic_pointer_cast<uml::Vertex>((subvertexindexElem)->copy());
+			const std::shared_ptr<uml::Vertex>& temp = std::dynamic_pointer_cast<uml::Vertex>((subvertexindexElem)->copy());
 			m_subvertex->push_back(temp);
 		}
 	}
@@ -174,7 +174,7 @@ RegionImpl& RegionImpl::operator=(const RegionImpl & obj)
 	}
 
 	//clone reference 'transition'
-	std::shared_ptr<Subset<uml::Transition, uml::NamedElement>> transitionList = obj.getTransition();
+	const std::shared_ptr<Subset<uml::Transition, uml::NamedElement>>& transitionList = obj.getTransition();
 	if(transitionList)
 	{
 		/*Subset*/
@@ -191,7 +191,7 @@ RegionImpl& RegionImpl::operator=(const RegionImpl & obj)
 		
 		for(const std::shared_ptr<uml::Transition>& transitionindexElem: *transitionList) 
 		{
-			std::shared_ptr<uml::Transition> temp = std::dynamic_pointer_cast<uml::Transition>((transitionindexElem)->copy());
+			const std::shared_ptr<uml::Transition>& temp = std::dynamic_pointer_cast<uml::Transition>((transitionindexElem)->copy());
 			m_transition->push_back(temp);
 		}
 	}

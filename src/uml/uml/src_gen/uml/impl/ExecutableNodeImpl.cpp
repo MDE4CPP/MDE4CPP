@@ -136,7 +136,7 @@ ExecutableNodeImpl& ExecutableNodeImpl::operator=(const ExecutableNodeImpl & obj
 	//copy references with no containment (soft copy)
 	//Clone references with containment (deep copy)
 	//clone reference 'handler'
-	std::shared_ptr<Subset<uml::ExceptionHandler, uml::Element>> handlerList = obj.getHandler();
+	const std::shared_ptr<Subset<uml::ExceptionHandler, uml::Element>>& handlerList = obj.getHandler();
 	if(handlerList)
 	{
 		/*Subset*/
@@ -153,7 +153,7 @@ ExecutableNodeImpl& ExecutableNodeImpl::operator=(const ExecutableNodeImpl & obj
 		
 		for(const std::shared_ptr<uml::ExceptionHandler>& handlerindexElem: *handlerList) 
 		{
-			std::shared_ptr<uml::ExceptionHandler> temp = std::dynamic_pointer_cast<uml::ExceptionHandler>((handlerindexElem)->copy());
+			const std::shared_ptr<uml::ExceptionHandler>& temp = std::dynamic_pointer_cast<uml::ExceptionHandler>((handlerindexElem)->copy());
 			m_handler->push_back(temp);
 		}
 	}

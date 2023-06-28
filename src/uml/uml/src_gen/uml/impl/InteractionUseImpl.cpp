@@ -136,7 +136,7 @@ InteractionUseImpl& InteractionUseImpl::operator=(const InteractionUseImpl & obj
 	m_returnValueRecipient  = obj.getReturnValueRecipient();
 	//Clone references with containment (deep copy)
 	//clone reference 'actualGate'
-	std::shared_ptr<Subset<uml::Gate, uml::Element>> actualGateList = obj.getActualGate();
+	const std::shared_ptr<Subset<uml::Gate, uml::Element>>& actualGateList = obj.getActualGate();
 	if(actualGateList)
 	{
 		/*Subset*/
@@ -153,7 +153,7 @@ InteractionUseImpl& InteractionUseImpl::operator=(const InteractionUseImpl & obj
 		
 		for(const std::shared_ptr<uml::Gate>& actualGateindexElem: *actualGateList) 
 		{
-			std::shared_ptr<uml::Gate> temp = std::dynamic_pointer_cast<uml::Gate>((actualGateindexElem)->copy());
+			const std::shared_ptr<uml::Gate>& temp = std::dynamic_pointer_cast<uml::Gate>((actualGateindexElem)->copy());
 			m_actualGate->push_back(temp);
 		}
 	}
@@ -163,7 +163,7 @@ InteractionUseImpl& InteractionUseImpl::operator=(const InteractionUseImpl & obj
 	}
 
 	//clone reference 'argument'
-	std::shared_ptr<Subset<uml::ValueSpecification, uml::Element>> argumentList = obj.getArgument();
+	const std::shared_ptr<Subset<uml::ValueSpecification, uml::Element>>& argumentList = obj.getArgument();
 	if(argumentList)
 	{
 		/*Subset*/
@@ -180,7 +180,7 @@ InteractionUseImpl& InteractionUseImpl::operator=(const InteractionUseImpl & obj
 		
 		for(const std::shared_ptr<uml::ValueSpecification>& argumentindexElem: *argumentList) 
 		{
-			std::shared_ptr<uml::ValueSpecification> temp = std::dynamic_pointer_cast<uml::ValueSpecification>((argumentindexElem)->copy());
+			const std::shared_ptr<uml::ValueSpecification>& temp = std::dynamic_pointer_cast<uml::ValueSpecification>((argumentindexElem)->copy());
 			m_argument->push_back(temp);
 		}
 	}

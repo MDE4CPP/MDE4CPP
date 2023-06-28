@@ -169,7 +169,7 @@ StructuredActivityNodeImpl& StructuredActivityNodeImpl::operator=(const Structur
 	//copy references with no containment (soft copy)
 	//Clone references with containment (deep copy)
 	//clone reference 'edge'
-	std::shared_ptr<Subset<uml::ActivityEdge, uml::ActivityEdge, uml::Element>> edgeList = obj.getEdge();
+	const std::shared_ptr<Subset<uml::ActivityEdge, uml::ActivityEdge, uml::Element>>& edgeList = obj.getEdge();
 	if(edgeList)
 	{
 		/*Subset*/
@@ -186,7 +186,7 @@ StructuredActivityNodeImpl& StructuredActivityNodeImpl::operator=(const Structur
 		
 		for(const std::shared_ptr<uml::ActivityEdge>& edgeindexElem: *edgeList) 
 		{
-			std::shared_ptr<uml::ActivityEdge> temp = std::dynamic_pointer_cast<uml::ActivityEdge>((edgeindexElem)->copy());
+			const std::shared_ptr<uml::ActivityEdge>& temp = std::dynamic_pointer_cast<uml::ActivityEdge>((edgeindexElem)->copy());
 			m_edge->push_back(temp);
 		}
 	}
@@ -196,7 +196,7 @@ StructuredActivityNodeImpl& StructuredActivityNodeImpl::operator=(const Structur
 	}
 
 	//clone reference 'node'
-	std::shared_ptr<Subset<uml::ActivityNode, uml::ActivityNode, uml::Element>> nodeList = obj.getNode();
+	const std::shared_ptr<Subset<uml::ActivityNode, uml::ActivityNode, uml::Element>>& nodeList = obj.getNode();
 	if(nodeList)
 	{
 		/*Subset*/
@@ -213,7 +213,7 @@ StructuredActivityNodeImpl& StructuredActivityNodeImpl::operator=(const Structur
 		
 		for(const std::shared_ptr<uml::ActivityNode>& nodeindexElem: *nodeList) 
 		{
-			std::shared_ptr<uml::ActivityNode> temp = std::dynamic_pointer_cast<uml::ActivityNode>((nodeindexElem)->copy());
+			const std::shared_ptr<uml::ActivityNode>& temp = std::dynamic_pointer_cast<uml::ActivityNode>((nodeindexElem)->copy());
 			m_node->push_back(temp);
 		}
 	}
@@ -223,7 +223,7 @@ StructuredActivityNodeImpl& StructuredActivityNodeImpl::operator=(const Structur
 	}
 
 	//clone reference 'structuredNodeInput'
-	std::shared_ptr<Subset<uml::InputPin, uml::InputPin>> structuredNodeInputList = obj.getStructuredNodeInput();
+	const std::shared_ptr<Subset<uml::InputPin, uml::InputPin>>& structuredNodeInputList = obj.getStructuredNodeInput();
 	if(structuredNodeInputList)
 	{
 		/*Subset*/
@@ -240,7 +240,7 @@ StructuredActivityNodeImpl& StructuredActivityNodeImpl::operator=(const Structur
 		
 		for(const std::shared_ptr<uml::InputPin>& structuredNodeInputindexElem: *structuredNodeInputList) 
 		{
-			std::shared_ptr<uml::InputPin> temp = std::dynamic_pointer_cast<uml::InputPin>((structuredNodeInputindexElem)->copy());
+			const std::shared_ptr<uml::InputPin>& temp = std::dynamic_pointer_cast<uml::InputPin>((structuredNodeInputindexElem)->copy());
 			m_structuredNodeInput->push_back(temp);
 		}
 	}
@@ -250,7 +250,7 @@ StructuredActivityNodeImpl& StructuredActivityNodeImpl::operator=(const Structur
 	}
 
 	//clone reference 'structuredNodeOutput'
-	std::shared_ptr<Subset<uml::OutputPin, uml::OutputPin>> structuredNodeOutputList = obj.getStructuredNodeOutput();
+	const std::shared_ptr<Subset<uml::OutputPin, uml::OutputPin>>& structuredNodeOutputList = obj.getStructuredNodeOutput();
 	if(structuredNodeOutputList)
 	{
 		/*Subset*/
@@ -267,7 +267,7 @@ StructuredActivityNodeImpl& StructuredActivityNodeImpl::operator=(const Structur
 		
 		for(const std::shared_ptr<uml::OutputPin>& structuredNodeOutputindexElem: *structuredNodeOutputList) 
 		{
-			std::shared_ptr<uml::OutputPin> temp = std::dynamic_pointer_cast<uml::OutputPin>((structuredNodeOutputindexElem)->copy());
+			const std::shared_ptr<uml::OutputPin>& temp = std::dynamic_pointer_cast<uml::OutputPin>((structuredNodeOutputindexElem)->copy());
 			m_structuredNodeOutput->push_back(temp);
 		}
 	}
@@ -277,7 +277,7 @@ StructuredActivityNodeImpl& StructuredActivityNodeImpl::operator=(const Structur
 	}
 
 	//clone reference 'variable'
-	std::shared_ptr<Subset<uml::Variable, uml::NamedElement>> variableList = obj.getVariable();
+	const std::shared_ptr<Subset<uml::Variable, uml::NamedElement>>& variableList = obj.getVariable();
 	if(variableList)
 	{
 		/*Subset*/
@@ -294,7 +294,7 @@ StructuredActivityNodeImpl& StructuredActivityNodeImpl::operator=(const Structur
 		
 		for(const std::shared_ptr<uml::Variable>& variableindexElem: *variableList) 
 		{
-			std::shared_ptr<uml::Variable> temp = std::dynamic_pointer_cast<uml::Variable>((variableindexElem)->copy());
+			const std::shared_ptr<uml::Variable>& temp = std::dynamic_pointer_cast<uml::Variable>((variableindexElem)->copy());
 			m_variable->push_back(temp);
 		}
 	}

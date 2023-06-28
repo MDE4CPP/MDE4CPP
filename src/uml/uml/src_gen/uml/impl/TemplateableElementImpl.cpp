@@ -108,7 +108,7 @@ TemplateableElementImpl& TemplateableElementImpl::operator=(const TemplateableEl
 	}
 
 	//clone reference 'templateBinding'
-	std::shared_ptr<Subset<uml::TemplateBinding, uml::Element>> templateBindingList = obj.getTemplateBinding();
+	const std::shared_ptr<Subset<uml::TemplateBinding, uml::Element>>& templateBindingList = obj.getTemplateBinding();
 	if(templateBindingList)
 	{
 		/*Subset*/
@@ -125,7 +125,7 @@ TemplateableElementImpl& TemplateableElementImpl::operator=(const TemplateableEl
 		
 		for(const std::shared_ptr<uml::TemplateBinding>& templateBindingindexElem: *templateBindingList) 
 		{
-			std::shared_ptr<uml::TemplateBinding> temp = std::dynamic_pointer_cast<uml::TemplateBinding>((templateBindingindexElem)->copy());
+			const std::shared_ptr<uml::TemplateBinding>& temp = std::dynamic_pointer_cast<uml::TemplateBinding>((templateBindingindexElem)->copy());
 			m_templateBinding->push_back(temp);
 		}
 	}

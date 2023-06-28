@@ -137,7 +137,7 @@ ActivityNodeActivationGroupImpl& ActivityNodeActivationGroupImpl::operator=(cons
 	m_suspendedActivations  = obj.getSuspendedActivations();
 	//Clone references with containment (deep copy)
 	//clone reference 'edgeInstances'
-	std::shared_ptr<Bag<fUML::Semantics::Activities::ActivityEdgeInstance>> edgeInstancesList = obj.getEdgeInstances();
+	const std::shared_ptr<Bag<fUML::Semantics::Activities::ActivityEdgeInstance>>& edgeInstancesList = obj.getEdgeInstances();
 	if(edgeInstancesList)
 	{
 		m_edgeInstances.reset(new Bag<fUML::Semantics::Activities::ActivityEdgeInstance>());
@@ -145,7 +145,7 @@ ActivityNodeActivationGroupImpl& ActivityNodeActivationGroupImpl::operator=(cons
 		
 		for(const std::shared_ptr<fUML::Semantics::Activities::ActivityEdgeInstance>& edgeInstancesindexElem: *edgeInstancesList) 
 		{
-			std::shared_ptr<fUML::Semantics::Activities::ActivityEdgeInstance> temp = std::dynamic_pointer_cast<fUML::Semantics::Activities::ActivityEdgeInstance>((edgeInstancesindexElem)->copy());
+			const std::shared_ptr<fUML::Semantics::Activities::ActivityEdgeInstance>& temp = std::dynamic_pointer_cast<fUML::Semantics::Activities::ActivityEdgeInstance>((edgeInstancesindexElem)->copy());
 			m_edgeInstances->push_back(temp);
 		}
 	}
@@ -155,7 +155,7 @@ ActivityNodeActivationGroupImpl& ActivityNodeActivationGroupImpl::operator=(cons
 	}
 
 	//clone reference 'nodeActivations'
-	std::shared_ptr<Bag<fUML::Semantics::Activities::ActivityNodeActivation>> nodeActivationsList = obj.getNodeActivations();
+	const std::shared_ptr<Bag<fUML::Semantics::Activities::ActivityNodeActivation>>& nodeActivationsList = obj.getNodeActivations();
 	if(nodeActivationsList)
 	{
 		m_nodeActivations.reset(new Bag<fUML::Semantics::Activities::ActivityNodeActivation>());
@@ -163,7 +163,7 @@ ActivityNodeActivationGroupImpl& ActivityNodeActivationGroupImpl::operator=(cons
 		
 		for(const std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivation>& nodeActivationsindexElem: *nodeActivationsList) 
 		{
-			std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivation> temp = std::dynamic_pointer_cast<fUML::Semantics::Activities::ActivityNodeActivation>((nodeActivationsindexElem)->copy());
+			const std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivation>& temp = std::dynamic_pointer_cast<fUML::Semantics::Activities::ActivityNodeActivation>((nodeActivationsindexElem)->copy());
 			m_nodeActivations->push_back(temp);
 		}
 	}

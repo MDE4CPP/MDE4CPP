@@ -87,7 +87,7 @@ ValuesImpl& ValuesImpl::operator=(const ValuesImpl & obj)
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy Values "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
 	#endif
 	//Clone Attributes with (deep copy)
-	std::shared_ptr<Bag<Any>> valuesList = obj.getValues();
+	const std::shared_ptr<Bag<Any>>& valuesList = obj.getValues();
 	if(valuesList)
 	{	
 		m_values.reset(new Bag<Any>());

@@ -171,7 +171,7 @@ StereotypeImpl& StereotypeImpl::operator=(const StereotypeImpl & obj)
 	m_profile  = obj.getProfile();
 	//Clone references with containment (deep copy)
 	//clone reference 'icon'
-	std::shared_ptr<Subset<uml::Image, uml::Element>> iconList = obj.getIcon();
+	const std::shared_ptr<Subset<uml::Image, uml::Element>>& iconList = obj.getIcon();
 	if(iconList)
 	{
 		/*Subset*/
@@ -188,7 +188,7 @@ StereotypeImpl& StereotypeImpl::operator=(const StereotypeImpl & obj)
 		
 		for(const std::shared_ptr<uml::Image>& iconindexElem: *iconList) 
 		{
-			std::shared_ptr<uml::Image> temp = std::dynamic_pointer_cast<uml::Image>((iconindexElem)->copy());
+			const std::shared_ptr<uml::Image>& temp = std::dynamic_pointer_cast<uml::Image>((iconindexElem)->copy());
 			m_icon->push_back(temp);
 		}
 	}

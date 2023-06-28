@@ -100,7 +100,7 @@ using namespace [aPackage.generateNamespace(false)/];
 std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_Object> [packageName/]LocusImpl::instantiate(const std::shared_ptr<uml::Class>&  type)
 {
 [if (aPackage.getClassesOfCreateObjectAction()->addAll(aPackage.getInstantiatableClassesOwnedByPackage())->size() > 0)]
-	std::shared_ptr<uml::Package> typePackage = type->getPackage().lock();
+	const std::shared_ptr<uml::Package>& typePackage = type->getPackage().lock();
 
 	//Model-internal types
 [let internalPackages : OrderedSet(Package) = aPackage.getInstantiatableClassesOwnedByPackage()._package->sortedBy(myQualifiedName())->asOrderedSet()]
@@ -137,7 +137,7 @@ std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_Object> [packageName/]LocusImpl::
 [if (externalPackageList->size() = 0)]
 	//No external types used in Activities of this model
 [else]
-	std::shared_ptr<PluginFramework> pluginFramework = PluginFramework::eInstance();
+	const std::shared_ptr<PluginFramework>& pluginFramework = PluginFramework::eInstance();
 	std::string pluginName;
 	[for (externalPackage : Package | externalPackageList) before('\n') after('\n')]
 	if(typePackage == [externalPackage.generateNamespace(false)/]::[externalPackage.name/]Package::eInstance()) 
@@ -145,12 +145,12 @@ std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_Object> [packageName/]LocusImpl::
 		pluginName = "[externalPackage.getRootPackage().name/]Exec";
 	}
 	[/for]
-	std::shared_ptr<MDE4CPPPlugin> plugin = pluginFramework->findPluginByName(pluginName);
+	const std::shared_ptr<MDE4CPPPlugin>& plugin = pluginFramework->findPluginByName(pluginName);
 	if (plugin)
 	{
 		DEBUG_INFO("Plugin '" << plugin->eNAME() << "' found.")
 
-		std::shared_ptr<UMLExecutionModelPlugin> executionPlugin = std::dynamic_pointer_cast<UMLExecutionModelPlugin>(plugin);
+		const std::shared_ptr<UMLExecutionModelPlugin>& executionPlugin = std::dynamic_pointer_cast<UMLExecutionModelPlugin>(plugin);
 		if (executionPlugin)
 		{
 			DEBUG_INFO("Execution plugin '" << executionPlugin->eNAME() << "' is accessable.")
@@ -171,7 +171,7 @@ std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_Object> [packageName/]LocusImpl::
 std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_SignalInstance> [packageName/]LocusImpl::instantiate(const std::shared_ptr<uml::Signal>&  type)
 {
 [if (aPackage.getInstantiatableSignalsOwnedByPackage()->size() > 0)]
-	std::shared_ptr<uml::Package> typePackage = type->getPackage().lock();
+	const std::shared_ptr<uml::Package>& typePackage = type->getPackage().lock();
 
 	//Model-internal signals
 [let internalPackages : OrderedSet(Package) = aPackage.getInstantiatableSignalsOwnedByPackage()._package->sortedBy(myQualifiedName())->asOrderedSet()]
@@ -207,7 +207,7 @@ std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_SignalInstance> [packageName/]Loc
 [if (externalPackageList->size() = 0)]
 	//No external types used in Activities of this model
 [else]
-	std::shared_ptr<PluginFramework> pluginFramework = PluginFramework::eInstance();
+	const std::shared_ptr<PluginFramework>& pluginFramework = PluginFramework::eInstance();
 	std::string pluginName;
 	[for (externalPackage : Package | externalPackageList) before('\n') after('\n')]
 	if(typePackage == [externalPackage.generateNamespace(false)/]::[externalPackage.name/]Package::eInstance()) 
@@ -215,12 +215,12 @@ std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_SignalInstance> [packageName/]Loc
 		pluginName = "[externalPackage.getRootPackage().name/]Exec";
 	}
 	[/for]
-	std::shared_ptr<MDE4CPPPlugin> plugin = pluginFramework->findPluginByName(pluginName);
+	const std::shared_ptr<MDE4CPPPlugin>& plugin = pluginFramework->findPluginByName(pluginName);
 	if (plugin)
 	{
 		DEBUG_INFO("Plugin '" << plugin->eNAME() << "' found.")
 
-		std::shared_ptr<UMLExecutionModelPlugin> executionPlugin = std::dynamic_pointer_cast<UMLExecutionModelPlugin>(plugin);
+		const std::shared_ptr<UMLExecutionModelPlugin>& executionPlugin = std::dynamic_pointer_cast<UMLExecutionModelPlugin>(plugin);
 		if (executionPlugin)
 		{
 			DEBUG_INFO("Execution plugin '" << executionPlugin->eNAME() << "' is accessable.")

@@ -122,7 +122,7 @@ ActivityNodeActivationImpl& ActivityNodeActivationImpl::operator=(const Activity
 	m_outgoingEdges  = obj.getOutgoingEdges();
 	//Clone references with containment (deep copy)
 	//clone reference 'heldTokens'
-	std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> heldTokensList = obj.getHeldTokens();
+	const std::shared_ptr<Bag<fUML::Semantics::Activities::Token>>& heldTokensList = obj.getHeldTokens();
 	if(heldTokensList)
 	{
 		m_heldTokens.reset(new Bag<fUML::Semantics::Activities::Token>());
@@ -130,7 +130,7 @@ ActivityNodeActivationImpl& ActivityNodeActivationImpl::operator=(const Activity
 		
 		for(const std::shared_ptr<fUML::Semantics::Activities::Token>& heldTokensindexElem: *heldTokensList) 
 		{
-			std::shared_ptr<fUML::Semantics::Activities::Token> temp = std::dynamic_pointer_cast<fUML::Semantics::Activities::Token>((heldTokensindexElem)->copy());
+			const std::shared_ptr<fUML::Semantics::Activities::Token>& temp = std::dynamic_pointer_cast<fUML::Semantics::Activities::Token>((heldTokensindexElem)->copy());
 			m_heldTokens->push_back(temp);
 		}
 	}

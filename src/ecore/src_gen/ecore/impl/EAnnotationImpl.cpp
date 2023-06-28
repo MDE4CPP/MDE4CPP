@@ -103,8 +103,8 @@ EAnnotationImpl& EAnnotationImpl::operator=(const EAnnotationImpl & obj)
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy EAnnotation "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
 	#endif
 	//Clone Attributes with (deep copy)
-	std::shared_ptr<std::map < std::string, std::string>> detailsContainer = getDetails();
-	for(const auto pair_details : *obj.getDetails())
+	const std::shared_ptr<std::map < std::string, std::string>>& detailsContainer = getDetails();
+	for(const auto& pair_details : *obj.getDetails())
 	{
 		detailsContainer->insert(std::make_pair(pair_details.first, pair_details.second));
 	}
@@ -115,7 +115,7 @@ EAnnotationImpl& EAnnotationImpl::operator=(const EAnnotationImpl & obj)
 	m_references  = obj.getReferences();
 	//Clone references with containment (deep copy)
 	//clone reference 'contents'
-	std::shared_ptr<Subset<ecore::EObject, ecore::EObject>> contentsList = obj.getContents();
+	const std::shared_ptr<Subset<ecore::EObject, ecore::EObject>>& contentsList = obj.getContents();
 	if(contentsList)
 	{
 		/*Subset*/
@@ -132,7 +132,7 @@ EAnnotationImpl& EAnnotationImpl::operator=(const EAnnotationImpl & obj)
 		
 		for(const std::shared_ptr<ecore::EObject>& contentsindexElem: *contentsList) 
 		{
-			std::shared_ptr<ecore::EObject> temp = std::dynamic_pointer_cast<ecore::EObject>((contentsindexElem)->copy());
+			const std::shared_ptr<ecore::EObject>& temp = std::dynamic_pointer_cast<ecore::EObject>((contentsindexElem)->copy());
 			m_contents->push_back(temp);
 		}
 	}

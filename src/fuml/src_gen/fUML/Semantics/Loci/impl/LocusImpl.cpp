@@ -122,7 +122,7 @@ LocusImpl& LocusImpl::operator=(const LocusImpl & obj)
 	}
 
 	//clone reference 'extensionalValues'
-	std::shared_ptr<Bag<fUML::MDE4CPP_Extensions::FUML_Object>> extensionalValuesList = obj.getExtensionalValues();
+	const std::shared_ptr<Bag<fUML::MDE4CPP_Extensions::FUML_Object>>& extensionalValuesList = obj.getExtensionalValues();
 	if(extensionalValuesList)
 	{
 		m_extensionalValues.reset(new Bag<fUML::MDE4CPP_Extensions::FUML_Object>());
@@ -130,7 +130,7 @@ LocusImpl& LocusImpl::operator=(const LocusImpl & obj)
 		
 		for(const std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_Object>& extensionalValuesindexElem: *extensionalValuesList) 
 		{
-			std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_Object> temp = std::dynamic_pointer_cast<fUML::MDE4CPP_Extensions::FUML_Object>((extensionalValuesindexElem)->copy());
+			const std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_Object>& temp = std::dynamic_pointer_cast<fUML::MDE4CPP_Extensions::FUML_Object>((extensionalValuesindexElem)->copy());
 			m_extensionalValues->push_back(temp);
 		}
 	}

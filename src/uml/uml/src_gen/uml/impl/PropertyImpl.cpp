@@ -198,7 +198,7 @@ PropertyImpl& PropertyImpl::operator=(const PropertyImpl & obj)
 	}
 
 	//clone reference 'qualifier'
-	std::shared_ptr<Subset<uml::Property, uml::Element>> qualifierList = obj.getQualifier();
+	const std::shared_ptr<Subset<uml::Property, uml::Element>>& qualifierList = obj.getQualifier();
 	if(qualifierList)
 	{
 		/*Subset*/
@@ -215,7 +215,7 @@ PropertyImpl& PropertyImpl::operator=(const PropertyImpl & obj)
 		
 		for(const std::shared_ptr<uml::Property>& qualifierindexElem: *qualifierList) 
 		{
-			std::shared_ptr<uml::Property> temp = std::dynamic_pointer_cast<uml::Property>((qualifierindexElem)->copy());
+			const std::shared_ptr<uml::Property>& temp = std::dynamic_pointer_cast<uml::Property>((qualifierindexElem)->copy());
 			m_qualifier->push_back(temp);
 		}
 	}
@@ -225,7 +225,7 @@ PropertyImpl& PropertyImpl::operator=(const PropertyImpl & obj)
 	}
 
 	//clone reference 'redefinedProperty'
-	std::shared_ptr<SubsetUnion<uml::Property, uml::RedefinableElement>> redefinedPropertyList = obj.getRedefinedProperty();
+	const std::shared_ptr<SubsetUnion<uml::Property, uml::RedefinableElement>>& redefinedPropertyList = obj.getRedefinedProperty();
 	if(redefinedPropertyList)
 	{
 		/*SubsetUnion*/
@@ -242,7 +242,7 @@ PropertyImpl& PropertyImpl::operator=(const PropertyImpl & obj)
 		
 		for(const std::shared_ptr<uml::Property>& redefinedPropertyindexElem: *redefinedPropertyList) 
 		{
-			std::shared_ptr<uml::Property> temp = std::dynamic_pointer_cast<uml::Property>((redefinedPropertyindexElem)->copy());
+			const std::shared_ptr<uml::Property>& temp = std::dynamic_pointer_cast<uml::Property>((redefinedPropertyindexElem)->copy());
 			m_redefinedProperty->push_back(temp);
 		}
 	}

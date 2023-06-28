@@ -171,7 +171,7 @@ ClassImpl& ClassImpl::operator=(const ClassImpl & obj)
 	m_extension  = obj.getExtension();
 	//Clone references with containment (deep copy)
 	//clone reference 'nestedClassifier'
-	std::shared_ptr<Subset<uml::Classifier, uml::NamedElement>> nestedClassifierList = obj.getNestedClassifier();
+	const std::shared_ptr<Subset<uml::Classifier, uml::NamedElement>>& nestedClassifierList = obj.getNestedClassifier();
 	if(nestedClassifierList)
 	{
 		/*Subset*/
@@ -188,7 +188,7 @@ ClassImpl& ClassImpl::operator=(const ClassImpl & obj)
 		
 		for(const std::shared_ptr<uml::Classifier>& nestedClassifierindexElem: *nestedClassifierList) 
 		{
-			std::shared_ptr<uml::Classifier> temp = std::dynamic_pointer_cast<uml::Classifier>((nestedClassifierindexElem)->copy());
+			const std::shared_ptr<uml::Classifier>& temp = std::dynamic_pointer_cast<uml::Classifier>((nestedClassifierindexElem)->copy());
 			m_nestedClassifier->push_back(temp);
 		}
 	}
@@ -198,7 +198,7 @@ ClassImpl& ClassImpl::operator=(const ClassImpl & obj)
 	}
 
 	//clone reference 'ownedOperation'
-	std::shared_ptr<Subset<uml::Operation, uml::Feature, uml::NamedElement>> ownedOperationList = obj.getOwnedOperation();
+	const std::shared_ptr<Subset<uml::Operation, uml::Feature, uml::NamedElement>>& ownedOperationList = obj.getOwnedOperation();
 	if(ownedOperationList)
 	{
 		/*Subset*/
@@ -215,7 +215,7 @@ ClassImpl& ClassImpl::operator=(const ClassImpl & obj)
 		
 		for(const std::shared_ptr<uml::Operation>& ownedOperationindexElem: *ownedOperationList) 
 		{
-			std::shared_ptr<uml::Operation> temp = std::dynamic_pointer_cast<uml::Operation>((ownedOperationindexElem)->copy());
+			const std::shared_ptr<uml::Operation>& temp = std::dynamic_pointer_cast<uml::Operation>((ownedOperationindexElem)->copy());
 			m_ownedOperation->push_back(temp);
 		}
 	}
@@ -225,7 +225,7 @@ ClassImpl& ClassImpl::operator=(const ClassImpl & obj)
 	}
 
 	//clone reference 'ownedReception'
-	std::shared_ptr<Subset<uml::Reception, uml::Feature, uml::NamedElement>> ownedReceptionList = obj.getOwnedReception();
+	const std::shared_ptr<Subset<uml::Reception, uml::Feature, uml::NamedElement>>& ownedReceptionList = obj.getOwnedReception();
 	if(ownedReceptionList)
 	{
 		/*Subset*/
@@ -242,7 +242,7 @@ ClassImpl& ClassImpl::operator=(const ClassImpl & obj)
 		
 		for(const std::shared_ptr<uml::Reception>& ownedReceptionindexElem: *ownedReceptionList) 
 		{
-			std::shared_ptr<uml::Reception> temp = std::dynamic_pointer_cast<uml::Reception>((ownedReceptionindexElem)->copy());
+			const std::shared_ptr<uml::Reception>& temp = std::dynamic_pointer_cast<uml::Reception>((ownedReceptionindexElem)->copy());
 			m_ownedReception->push_back(temp);
 		}
 	}
