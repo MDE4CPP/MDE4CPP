@@ -191,7 +191,7 @@ void SendSignalActionActivationImpl::doAction()
  		for (unsigned int i = 0; i < numberOfAttributes; i++)
 		{
  			const std::shared_ptr<uml::Property>& attribute = attributes->at(i);
- 			const std::shared_ptr< uml::InputPin>& argumentPin = argumentPins->at(i);
+ 			const std::shared_ptr<uml::InputPin>& argumentPin = argumentPins->at(i);
 			std::shared_ptr<Bag<Any>> values = takeTokens(argumentPin);
 
 			unsigned int upperOfFeature = attribute->getUpper();

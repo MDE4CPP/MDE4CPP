@@ -149,7 +149,7 @@ void DestroyObjectActionActivationImpl::destroyObject(const std::shared_ptr<Any>
 		{	
 			/*Currently not supported
 			std::shared_ptr<Bag<fUML::Semantics::StructuredClassifiers::ExtensionalValue>> extensionalValues = this->getExecutionLocus()->getExtensionalValues();
-			for(std::shared_ptr<fUML::Semantics::StructuredClassifiers::ExtensionalValue> extensionalValue : *extensionalValues)
+			for(const std::shared_ptr<fUML::Semantics::StructuredClassifiers::ExtensionalValue>& extensionalValue : *extensionalValues)
 			{
 				std::shared_ptr<fUML::Semantics::StructuredClassifiers::Link> link = std::dynamic_pointer_cast<fUML::Semantics::StructuredClassifiers::Link> (extensionalValue);
 				if (link)
@@ -169,7 +169,7 @@ void DestroyObjectActionActivationImpl::destroyObject(const std::shared_ptr<Any>
 		{	
 			/*Currently not supported
 			std::shared_ptr<Bag<fUML::Semantics::SimpleClassifiers::FeatureValue>> objectFeatureValues = reference->retrieveFeatureValues();
-			for(std::shared_ptr<fUML::Semantics::SimpleClassifiers::FeatureValue> featureValue : *objectFeatureValues)
+			for(const std::shared_ptr<fUML::Semantics::SimpleClassifiers::FeatureValue>& featureValue : *objectFeatureValues)
 			{
 				std::shared_ptr<uml::Property> property = std::dynamic_pointer_cast<uml::Property> (featureValue->getFeature());
 				if(property)
@@ -177,7 +177,7 @@ void DestroyObjectActionActivationImpl::destroyObject(const std::shared_ptr<Any>
 					if (property->getAggregation() == uml::AggregationKind::COMPOSITE)
 					{
 						std::shared_ptr<Bag<fUML::Semantics::Values::Value>> values = featureValue->getValues();
-						for(std::shared_ptr<fUML::Semantics::Values::Value> ownedValue : *values)
+						for(const std::shared_ptr<fUML::Semantics::Values::Value>& ownedValue : *values)
 						{
 							this->destroyObject(ownedValue, isDestroyLinks, isDestroyOwnedObjects);
 
@@ -233,10 +233,10 @@ bool DestroyObjectActionActivationImpl::objectIsComposite(const std::shared_ptr<
 		// Test whether the given reference participates in the given link as a composite.
 	/*Currently not supported
 	std::shared_ptr<Bag<fUML::Semantics::SimpleClassifiers::FeatureValue>> linkFeatureValues = link->getFeatureValues();
-	for(std::shared_ptr<fUML::Semantics::SimpleClassifiers::FeatureValue> featureValue : *linkFeatureValues)
+	for(const std::shared_ptr<fUML::Semantics::SimpleClassifiers::FeatureValue>& featureValue : *linkFeatureValues)
 	{
 		std::shared_ptr<Bag<fUML::Semantics::Values::Value>> values= featureValue->getValues();
-		for(std::shared_ptr<fUML::Semantics::Values::Value> value : *values)
+		for(&std::shared_ptr<fUML::Semantics::Values::Value>& value : *values)
 		{
 			value->equals(reference);
 
