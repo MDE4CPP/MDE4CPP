@@ -202,7 +202,7 @@ OclExpressionImpl& OclExpressionImpl::operator=(const OclExpressionImpl & obj)
 	m_topExpression  = obj.getTopExpression();
 	//Clone references with containment (deep copy)
 	//clone reference 'initializedElement'
-	std::shared_ptr<Bag<ocl::Expressions::VarDeclarationExp>> initializedElementList = obj.getInitializedElement();
+	const std::shared_ptr<Bag<ocl::Expressions::VarDeclarationExp>>& initializedElementList = obj.getInitializedElement();
 	if(initializedElementList)
 	{
 		m_initializedElement.reset(new Bag<ocl::Expressions::VarDeclarationExp>());
@@ -210,7 +210,7 @@ OclExpressionImpl& OclExpressionImpl::operator=(const OclExpressionImpl & obj)
 		
 		for(const std::shared_ptr<ocl::Expressions::VarDeclarationExp>& initializedElementindexElem: *initializedElementList) 
 		{
-			std::shared_ptr<ocl::Expressions::VarDeclarationExp> temp = std::dynamic_pointer_cast<ocl::Expressions::VarDeclarationExp>((initializedElementindexElem)->copy());
+			const std::shared_ptr<ocl::Expressions::VarDeclarationExp>& temp = std::dynamic_pointer_cast<ocl::Expressions::VarDeclarationExp>((initializedElementindexElem)->copy());
 			m_initializedElement->push_back(temp);
 		}
 	}

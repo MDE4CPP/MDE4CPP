@@ -196,7 +196,7 @@ LetExpImpl& LetExpImpl::operator=(const LetExpImpl & obj)
 	}
 
 	//clone reference 'variables'
-	std::shared_ptr<Bag<ocl::Expressions::VarDeclarationExp>> variablesList = obj.getVariables();
+	const std::shared_ptr<Bag<ocl::Expressions::VarDeclarationExp>>& variablesList = obj.getVariables();
 	if(variablesList)
 	{
 		m_variables.reset(new Bag<ocl::Expressions::VarDeclarationExp>());
@@ -204,7 +204,7 @@ LetExpImpl& LetExpImpl::operator=(const LetExpImpl & obj)
 		
 		for(const std::shared_ptr<ocl::Expressions::VarDeclarationExp>& variablesindexElem: *variablesList) 
 		{
-			std::shared_ptr<ocl::Expressions::VarDeclarationExp> temp = std::dynamic_pointer_cast<ocl::Expressions::VarDeclarationExp>((variablesindexElem)->copy());
+			const std::shared_ptr<ocl::Expressions::VarDeclarationExp>& temp = std::dynamic_pointer_cast<ocl::Expressions::VarDeclarationExp>((variablesindexElem)->copy());
 			m_variables->push_back(temp);
 		}
 	}

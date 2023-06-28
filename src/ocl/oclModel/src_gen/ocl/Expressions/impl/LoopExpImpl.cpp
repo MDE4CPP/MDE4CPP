@@ -199,7 +199,7 @@ LoopExpImpl& LoopExpImpl::operator=(const LoopExpImpl & obj)
 	}
 
 	//clone reference 'iterator'
-	std::shared_ptr<Bag<ocl::Expressions::OclExpression>> iteratorList = obj.getIterator();
+	const std::shared_ptr<Bag<ocl::Expressions::OclExpression>>& iteratorList = obj.getIterator();
 	if(iteratorList)
 	{
 		m_iterator.reset(new Bag<ocl::Expressions::OclExpression>());
@@ -207,7 +207,7 @@ LoopExpImpl& LoopExpImpl::operator=(const LoopExpImpl & obj)
 		
 		for(const std::shared_ptr<ocl::Expressions::OclExpression>& iteratorindexElem: *iteratorList) 
 		{
-			std::shared_ptr<ocl::Expressions::OclExpression> temp = std::dynamic_pointer_cast<ocl::Expressions::OclExpression>((iteratorindexElem)->copy());
+			const std::shared_ptr<ocl::Expressions::OclExpression>& temp = std::dynamic_pointer_cast<ocl::Expressions::OclExpression>((iteratorindexElem)->copy());
 			m_iterator->push_back(temp);
 		}
 	}

@@ -100,7 +100,7 @@ LoopExpEvalImpl& LoopExpEvalImpl::operator=(const LoopExpEvalImpl & obj)
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy LoopExpEval "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
 	#endif
 	//Clone Attributes with (deep copy)
-	std::shared_ptr<Bag<std::string>> iteratorsList = obj.getIterators();
+	const std::shared_ptr<Bag<std::string>>& iteratorsList = obj.getIterators();
 	if(iteratorsList)
 	{	
 		m_iterators.reset(new Bag<std::string>());

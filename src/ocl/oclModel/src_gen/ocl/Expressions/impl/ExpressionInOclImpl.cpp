@@ -111,7 +111,7 @@ ExpressionInOclImpl& ExpressionInOclImpl::operator=(const ExpressionInOclImpl & 
 	}
 
 	//clone reference 'parameterVariable'
-	std::shared_ptr<Bag<ecore::ETypedElement>> parameterVariableList = obj.getParameterVariable();
+	const std::shared_ptr<Bag<ecore::ETypedElement>>& parameterVariableList = obj.getParameterVariable();
 	if(parameterVariableList)
 	{
 		m_parameterVariable.reset(new Bag<ecore::ETypedElement>());
@@ -119,7 +119,7 @@ ExpressionInOclImpl& ExpressionInOclImpl::operator=(const ExpressionInOclImpl & 
 		
 		for(const std::shared_ptr<ecore::ETypedElement>& parameterVariableindexElem: *parameterVariableList) 
 		{
-			std::shared_ptr<ecore::ETypedElement> temp = std::dynamic_pointer_cast<ecore::ETypedElement>((parameterVariableindexElem)->copy());
+			const std::shared_ptr<ecore::ETypedElement>& temp = std::dynamic_pointer_cast<ecore::ETypedElement>((parameterVariableindexElem)->copy());
 			m_parameterVariable->push_back(temp);
 		}
 	}

@@ -230,18 +230,26 @@ bool EOperationImpl::isOverrideOf(const std::shared_ptr<ecore::EOperation>& some
         const std::shared_ptr<Bag<ecore::EParameter>>& otherParameters = someOperation->getEParameters();
         if (parameters->size() == otherParameters->size())
         {
-            for (Bag<EParameter> ::iterator i = parameters->begin(), j = otherParameters->begin(); i != parameters->end(); ++i,++j )
+	Bag<EParameter>::iterator parametersIt =  parameters->begin();
+	Bag<EParameter>::iterator parametersEnd =  parameters->end();
+	Bag<EParameter>::iterator otherParametersIt = otherParameters->begin();
+	while(parametersIt != parametersEnd)
         	{
-            	const std::shared_ptr<EParameter>& parameter = *i;
-            	const std::shared_ptr<EParameter>& otherParameter = *j;
-                if (parameter->getEType().get() != otherParameter->getEType().get())
+		const std::shared_ptr<EParameter>& parameter = *parametersIt;
+            	const std::shared_ptr<EParameter>& otherParameter = *otherParametersIt;
+
+                	if (parameter->getEType().get() != otherParameter->getEType().get())
           		{
-                    return false;
+                    		return false;
         		}
+		
+		parametersIt++;
+		otherParametersIt++;
         	}
             return true;
-		}
 	}
+}
+
     return false;
 	//end of body
 }
