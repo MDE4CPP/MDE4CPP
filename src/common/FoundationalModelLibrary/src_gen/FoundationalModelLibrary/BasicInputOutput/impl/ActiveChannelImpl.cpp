@@ -77,7 +77,7 @@ ActiveChannelImpl& ActiveChannelImpl::operator=(const ActiveChannelImpl & obj)
 }
 
 
-std::shared_ptr<uml::Class> ActiveChannelImpl::getMetaClass() const
+const std::shared_ptr<uml::Class>& ActiveChannelImpl::getMetaClass() const
 {
 	return BasicInputOutputPackageImpl::eInstance()->get_FoundationalModelLibrary_BasicInputOutput_ActiveChannel();
 }

@@ -38,7 +38,7 @@ FoundationalModelLibraryLocusImpl::~FoundationalModelLibraryLocusImpl()
 
 std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_Object> FoundationalModelLibraryLocusImpl::instantiate(const std::shared_ptr<uml::Class>&  type)
 {
-	std::shared_ptr<uml::Package> typePackage = type->getPackage().lock();
+	const std::shared_ptr<uml::Package>& typePackage = type->getPackage().lock();
 
 	//Model-internal types
 	if(typePackage == FoundationalModelLibrary::BasicInputOutput::BasicInputOutputPackage::eInstance())

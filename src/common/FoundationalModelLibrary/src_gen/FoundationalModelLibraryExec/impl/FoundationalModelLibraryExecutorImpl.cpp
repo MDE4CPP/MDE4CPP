@@ -65,12 +65,12 @@ std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> Foundation
 	int behaviorMetaElementID = behavior->getMetaElementID();
     if((behaviorMetaElementID == uml::umlPackage::OPAQUEBEHAVIOR_CLASS) || (behaviorMetaElementID == uml::umlPackage::FUNCTIONBEHAVIOR_CLASS))
     {
-		std::shared_ptr<uml::OpaqueBehavior> opaqueBehavior = std::dynamic_pointer_cast<uml::OpaqueBehavior>(behavior);
+		const std::shared_ptr<uml::OpaqueBehavior>& opaqueBehavior = std::dynamic_pointer_cast<uml::OpaqueBehavior>(behavior);
 		return this->invokeOpaqueBehavior(opaqueBehavior, context, inputs);
     }
 	else if(behaviorMetaElementID == uml::umlPackage::ACTIVITY_CLASS)
 	{
-		std::shared_ptr<fUML::Semantics::Activities::ActivityExecution> activityExecution = 
+		const std::shared_ptr<fUML::Semantics::Activities::ActivityExecution>& activityExecution = 
 			std::dynamic_pointer_cast<fUML::Semantics::Activities::ActivityExecution>(this->getLocus().lock()->getFactory()->createExecution(behavior, context));
 
 		//Model-internal activities

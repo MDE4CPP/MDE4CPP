@@ -77,7 +77,7 @@ ListenerImpl& ListenerImpl::operator=(const ListenerImpl & obj)
 }
 
 
-std::shared_ptr<uml::Class> ListenerImpl::getMetaClass() const
+const std::shared_ptr<uml::Class>& ListenerImpl::getMetaClass() const
 {
 	return CommonPackageImpl::eInstance()->get_FoundationalModelLibrary_Common_Listener();
 }

@@ -77,7 +77,7 @@ InputChannelImpl& InputChannelImpl::operator=(const InputChannelImpl & obj)
 }
 
 
-std::shared_ptr<uml::Class> InputChannelImpl::getMetaClass() const
+const std::shared_ptr<uml::Class>& InputChannelImpl::getMetaClass() const
 {
 	return BasicInputOutputPackageImpl::eInstance()->get_FoundationalModelLibrary_BasicInputOutput_InputChannel();
 }

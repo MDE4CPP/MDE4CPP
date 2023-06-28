@@ -77,7 +77,7 @@ StandardOutputChannelImpl& StandardOutputChannelImpl::operator=(const StandardOu
 }
 
 
-std::shared_ptr<uml::Class> StandardOutputChannelImpl::getMetaClass() const
+const std::shared_ptr<uml::Class>& StandardOutputChannelImpl::getMetaClass() const
 {
 	return BasicInputOutputPackageImpl::eInstance()->get_FoundationalModelLibrary_BasicInputOutput_StandardOutputChannel();
 }

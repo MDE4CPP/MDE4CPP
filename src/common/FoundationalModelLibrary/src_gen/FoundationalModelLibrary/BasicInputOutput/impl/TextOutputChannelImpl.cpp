@@ -99,7 +99,7 @@ TextOutputChannelImpl& TextOutputChannelImpl::operator=(const TextOutputChannelI
 }
 
 
-std::shared_ptr<uml::Class> TextOutputChannelImpl::getMetaClass() const
+const std::shared_ptr<uml::Class>& TextOutputChannelImpl::getMetaClass() const
 {
 	return BasicInputOutputPackageImpl::eInstance()->get_FoundationalModelLibrary_BasicInputOutput_TextOutputChannel();
 }
