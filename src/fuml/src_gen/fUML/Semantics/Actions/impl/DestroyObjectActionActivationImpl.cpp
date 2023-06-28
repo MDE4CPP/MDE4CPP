@@ -423,7 +423,7 @@ void DestroyObjectActionActivationImpl::saveContent(std::shared_ptr<persistence:
 	}
 }
 
-std::shared_ptr<ecore::EClass> DestroyObjectActionActivationImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& DestroyObjectActionActivationImpl::eStaticClass() const
 {
 	return fUML::Semantics::Actions::ActionsPackage::eInstance()->getDestroyObjectActionActivation_Class();
 }

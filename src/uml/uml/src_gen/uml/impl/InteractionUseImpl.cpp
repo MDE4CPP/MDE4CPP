@@ -520,7 +520,7 @@ void InteractionUseImpl::saveContent(std::shared_ptr<persistence::interfaces::XS
 	}
 }
 
-std::shared_ptr<ecore::EClass> InteractionUseImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& InteractionUseImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getInteractionUse_Class();
 }
@@ -579,7 +579,7 @@ bool InteractionUseImpl::eSet(int featureID,  const std::shared_ptr<Any>& newVal
 	
 					if(eObjectList)
 					{
-						std::shared_ptr<Bag<uml::Gate>> _actualGate = getActualGate();
+						const std::shared_ptr<Bag<uml::Gate>>& _actualGate = getActualGate();
 	
 						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{
@@ -624,7 +624,7 @@ bool InteractionUseImpl::eSet(int featureID,  const std::shared_ptr<Any>& newVal
 	
 					if(eObjectList)
 					{
-						std::shared_ptr<Bag<uml::ValueSpecification>> _argument = getArgument();
+						const std::shared_ptr<Bag<uml::ValueSpecification>>& _argument = getArgument();
 	
 						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{

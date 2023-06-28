@@ -292,7 +292,7 @@ void ActorImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandle
 	}
 }
 
-std::shared_ptr<ecore::EClass> ActorImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& ActorImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getActor_Class();
 }

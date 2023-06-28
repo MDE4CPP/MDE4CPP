@@ -724,7 +724,7 @@ void StructuredActivityNodeImpl::saveContent(std::shared_ptr<persistence::interf
 	}
 }
 
-std::shared_ptr<ecore::EClass> StructuredActivityNodeImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& StructuredActivityNodeImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getStructuredActivityNode_Class();
 }
@@ -811,7 +811,7 @@ bool StructuredActivityNodeImpl::eSet(int featureID,  const std::shared_ptr<Any>
 	
 					if(eObjectList)
 					{
-						std::shared_ptr<Bag<uml::ActivityEdge>> _edge = getEdge();
+						const std::shared_ptr<Bag<uml::ActivityEdge>>& _edge = getEdge();
 	
 						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{
@@ -870,7 +870,7 @@ bool StructuredActivityNodeImpl::eSet(int featureID,  const std::shared_ptr<Any>
 	
 					if(eObjectList)
 					{
-						std::shared_ptr<Bag<uml::ActivityNode>> _node = getNode();
+						const std::shared_ptr<Bag<uml::ActivityNode>>& _node = getNode();
 	
 						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{
@@ -915,7 +915,7 @@ bool StructuredActivityNodeImpl::eSet(int featureID,  const std::shared_ptr<Any>
 	
 					if(eObjectList)
 					{
-						std::shared_ptr<Bag<uml::InputPin>> _structuredNodeInput = getStructuredNodeInput();
+						const std::shared_ptr<Bag<uml::InputPin>>& _structuredNodeInput = getStructuredNodeInput();
 	
 						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{
@@ -960,7 +960,7 @@ bool StructuredActivityNodeImpl::eSet(int featureID,  const std::shared_ptr<Any>
 	
 					if(eObjectList)
 					{
-						std::shared_ptr<Bag<uml::OutputPin>> _structuredNodeOutput = getStructuredNodeOutput();
+						const std::shared_ptr<Bag<uml::OutputPin>>& _structuredNodeOutput = getStructuredNodeOutput();
 	
 						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{
@@ -1005,7 +1005,7 @@ bool StructuredActivityNodeImpl::eSet(int featureID,  const std::shared_ptr<Any>
 	
 					if(eObjectList)
 					{
-						std::shared_ptr<Bag<uml::Variable>> _variable = getVariable();
+						const std::shared_ptr<Bag<uml::Variable>>& _variable = getVariable();
 	
 						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{

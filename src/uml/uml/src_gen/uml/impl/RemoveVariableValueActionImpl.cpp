@@ -349,7 +349,7 @@ void RemoveVariableValueActionImpl::saveContent(std::shared_ptr<persistence::int
 	}
 }
 
-std::shared_ptr<ecore::EClass> RemoveVariableValueActionImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& RemoveVariableValueActionImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getRemoveVariableValueAction_Class();
 }

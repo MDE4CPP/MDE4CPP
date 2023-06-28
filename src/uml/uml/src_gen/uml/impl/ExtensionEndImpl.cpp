@@ -319,7 +319,7 @@ void ExtensionEndImpl::saveContent(std::shared_ptr<persistence::interfaces::XSav
 	}
 }
 
-std::shared_ptr<ecore::EClass> ExtensionEndImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& ExtensionEndImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getExtensionEnd_Class();
 }

@@ -253,7 +253,7 @@ void PartDecompositionImpl::saveContent(std::shared_ptr<persistence::interfaces:
 	}
 }
 
-std::shared_ptr<ecore::EClass> PartDecompositionImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& PartDecompositionImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getPartDecomposition_Class();
 }

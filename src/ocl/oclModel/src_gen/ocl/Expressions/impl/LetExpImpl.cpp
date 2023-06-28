@@ -430,7 +430,7 @@ void LetExpImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandl
 	}
 }
 
-std::shared_ptr<ecore::EClass> LetExpImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& LetExpImpl::eStaticClass() const
 {
 	return ocl::Expressions::ExpressionsPackage::eInstance()->getLetExp_Class();
 }
@@ -508,7 +508,7 @@ bool LetExpImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 	
 					if(eObjectList)
 					{
-						std::shared_ptr<Bag<ocl::Expressions::VarDeclarationExp>> _variables = getVariables();
+						const std::shared_ptr<Bag<ocl::Expressions::VarDeclarationExp>>& _variables = getVariables();
 	
 						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{

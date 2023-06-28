@@ -339,7 +339,7 @@ void NullLiteralExpImpl::saveContent(std::shared_ptr<persistence::interfaces::XS
 	}
 }
 
-std::shared_ptr<ecore::EClass> NullLiteralExpImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& NullLiteralExpImpl::eStaticClass() const
 {
 	return ocl::Expressions::ExpressionsPackage::eInstance()->getNullLiteralExp_Class();
 }

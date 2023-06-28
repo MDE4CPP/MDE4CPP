@@ -290,7 +290,7 @@ void ProtocolConformanceImpl::saveContent(std::shared_ptr<persistence::interface
 	}
 }
 
-std::shared_ptr<ecore::EClass> ProtocolConformanceImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& ProtocolConformanceImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getProtocolConformance_Class();
 }

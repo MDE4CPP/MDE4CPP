@@ -308,7 +308,7 @@ void ClauseImpl::resolveReferences(const int featureID, std::vector<std::shared_
 	{
 		case uml::umlPackage::CLAUSE_ATTRIBUTE_BODY:
 		{
-			std::shared_ptr<Bag<uml::ExecutableNode>> _body = getBody();
+			const std::shared_ptr<Bag<uml::ExecutableNode>>& _body = getBody();
 			for(const std::shared_ptr<ecore::EObject>& ref : references)
 			{
 				std::shared_ptr<uml::ExecutableNode>  _r = std::dynamic_pointer_cast<uml::ExecutableNode>(ref);
@@ -322,7 +322,7 @@ void ClauseImpl::resolveReferences(const int featureID, std::vector<std::shared_
 
 		case uml::umlPackage::CLAUSE_ATTRIBUTE_BODYOUTPUT:
 		{
-			std::shared_ptr<Bag<uml::OutputPin>> _bodyOutput = getBodyOutput();
+			const std::shared_ptr<Bag<uml::OutputPin>>& _bodyOutput = getBodyOutput();
 			for(const std::shared_ptr<ecore::EObject>& ref : references)
 			{
 				std::shared_ptr<uml::OutputPin>  _r = std::dynamic_pointer_cast<uml::OutputPin>(ref);
@@ -348,7 +348,7 @@ void ClauseImpl::resolveReferences(const int featureID, std::vector<std::shared_
 
 		case uml::umlPackage::CLAUSE_ATTRIBUTE_PREDECESSORCLAUSE:
 		{
-			std::shared_ptr<Bag<uml::Clause>> _predecessorClause = getPredecessorClause();
+			const std::shared_ptr<Bag<uml::Clause>>& _predecessorClause = getPredecessorClause();
 			for(const std::shared_ptr<ecore::EObject>& ref : references)
 			{
 				std::shared_ptr<uml::Clause>  _r = std::dynamic_pointer_cast<uml::Clause>(ref);
@@ -362,7 +362,7 @@ void ClauseImpl::resolveReferences(const int featureID, std::vector<std::shared_
 
 		case uml::umlPackage::CLAUSE_ATTRIBUTE_SUCCESSORCLAUSE:
 		{
-			std::shared_ptr<Bag<uml::Clause>> _successorClause = getSuccessorClause();
+			const std::shared_ptr<Bag<uml::Clause>>& _successorClause = getSuccessorClause();
 			for(const std::shared_ptr<ecore::EObject>& ref : references)
 			{
 				std::shared_ptr<uml::Clause>  _r = std::dynamic_pointer_cast<uml::Clause>(ref);
@@ -376,7 +376,7 @@ void ClauseImpl::resolveReferences(const int featureID, std::vector<std::shared_
 
 		case uml::umlPackage::CLAUSE_ATTRIBUTE_TEST:
 		{
-			std::shared_ptr<Bag<uml::ExecutableNode>> _test = getTest();
+			const std::shared_ptr<Bag<uml::ExecutableNode>>& _test = getTest();
 			for(const std::shared_ptr<ecore::EObject>& ref : references)
 			{
 				std::shared_ptr<uml::ExecutableNode>  _r = std::dynamic_pointer_cast<uml::ExecutableNode>(ref);
@@ -421,7 +421,7 @@ void ClauseImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandl
 	}
 }
 
-std::shared_ptr<ecore::EClass> ClauseImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& ClauseImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getClause_Class();
 }
@@ -484,7 +484,7 @@ bool ClauseImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 	
 					if(eObjectList)
 					{
-						std::shared_ptr<Bag<uml::ExecutableNode>> _body = getBody();
+						const std::shared_ptr<Bag<uml::ExecutableNode>>& _body = getBody();
 	
 						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{
@@ -529,7 +529,7 @@ bool ClauseImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 	
 					if(eObjectList)
 					{
-						std::shared_ptr<Bag<uml::OutputPin>> _bodyOutput = getBodyOutput();
+						const std::shared_ptr<Bag<uml::OutputPin>>& _bodyOutput = getBodyOutput();
 	
 						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{
@@ -605,7 +605,7 @@ bool ClauseImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 	
 					if(eObjectList)
 					{
-						std::shared_ptr<Bag<uml::Clause>> _predecessorClause = getPredecessorClause();
+						const std::shared_ptr<Bag<uml::Clause>>& _predecessorClause = getPredecessorClause();
 	
 						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{
@@ -650,7 +650,7 @@ bool ClauseImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 	
 					if(eObjectList)
 					{
-						std::shared_ptr<Bag<uml::Clause>> _successorClause = getSuccessorClause();
+						const std::shared_ptr<Bag<uml::Clause>>& _successorClause = getSuccessorClause();
 	
 						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{
@@ -695,7 +695,7 @@ bool ClauseImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 	
 					if(eObjectList)
 					{
-						std::shared_ptr<Bag<uml::ExecutableNode>> _test = getTest();
+						const std::shared_ptr<Bag<uml::ExecutableNode>>& _test = getTest();
 	
 						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{

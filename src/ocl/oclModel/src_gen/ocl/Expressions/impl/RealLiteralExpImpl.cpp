@@ -380,7 +380,7 @@ void RealLiteralExpImpl::saveContent(std::shared_ptr<persistence::interfaces::XS
 	}
 }
 
-std::shared_ptr<ecore::EClass> RealLiteralExpImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& RealLiteralExpImpl::eStaticClass() const
 {
 	return ocl::Expressions::ExpressionsPackage::eInstance()->getRealLiteralExp_Class();
 }

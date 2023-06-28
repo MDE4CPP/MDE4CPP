@@ -314,7 +314,7 @@ void ValueSpecificationActionActivationImpl::saveContent(std::shared_ptr<persist
 	}
 }
 
-std::shared_ptr<ecore::EClass> ValueSpecificationActionActivationImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& ValueSpecificationActionActivationImpl::eStaticClass() const
 {
 	return fUML::Semantics::Actions::ActionsPackage::eInstance()->getValueSpecificationActionActivation_Class();
 }

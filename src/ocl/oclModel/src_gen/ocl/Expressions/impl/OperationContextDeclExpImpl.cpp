@@ -419,7 +419,7 @@ void OperationContextDeclExpImpl::saveContent(std::shared_ptr<persistence::inter
 	}
 }
 
-std::shared_ptr<ecore::EClass> OperationContextDeclExpImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& OperationContextDeclExpImpl::eStaticClass() const
 {
 	return ocl::Expressions::ExpressionsPackage::eInstance()->getOperationContextDeclExp_Class();
 }

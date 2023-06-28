@@ -259,7 +259,7 @@ void FlowFinalNodeImpl::saveContent(std::shared_ptr<persistence::interfaces::XSa
 	}
 }
 
-std::shared_ptr<ecore::EClass> FlowFinalNodeImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& FlowFinalNodeImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getFlowFinalNode_Class();
 }

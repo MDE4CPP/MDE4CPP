@@ -204,7 +204,7 @@ void InvocationActionActivationImpl::saveContent(std::shared_ptr<persistence::in
 	}
 }
 
-std::shared_ptr<ecore::EClass> InvocationActionActivationImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& InvocationActionActivationImpl::eStaticClass() const
 {
 	return fUML::Semantics::Actions::ActionsPackage::eInstance()->getInvocationActionActivation_Class();
 }

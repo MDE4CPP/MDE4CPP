@@ -315,7 +315,7 @@ void CallBehaviorActionImpl::saveContent(std::shared_ptr<persistence::interfaces
 	}
 }
 
-std::shared_ptr<ecore::EClass> CallBehaviorActionImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& CallBehaviorActionImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getCallBehaviorAction_Class();
 }

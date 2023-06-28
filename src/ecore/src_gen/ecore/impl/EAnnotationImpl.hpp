@@ -83,7 +83,7 @@ namespace ecore
 			virtual void saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const;
 
 		protected:
-			virtual std::shared_ptr<EClass> eStaticClass() const;
+			virtual const std::shared_ptr<EClass>& eStaticClass() const;
 
 			//*********************************
 			// EStructuralFeature Get/Set/IsSet

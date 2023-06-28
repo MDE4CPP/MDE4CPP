@@ -315,7 +315,7 @@ void ReadLinkActionImpl::saveContent(std::shared_ptr<persistence::interfaces::XS
 	}
 }
 
-std::shared_ptr<ecore::EClass> ReadLinkActionImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& ReadLinkActionImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getReadLinkAction_Class();
 }

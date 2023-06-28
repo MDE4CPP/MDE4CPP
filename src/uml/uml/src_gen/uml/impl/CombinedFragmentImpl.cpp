@@ -534,7 +534,7 @@ void CombinedFragmentImpl::saveContent(std::shared_ptr<persistence::interfaces::
 	}
 }
 
-std::shared_ptr<ecore::EClass> CombinedFragmentImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& CombinedFragmentImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getCombinedFragment_Class();
 }
@@ -585,7 +585,7 @@ bool CombinedFragmentImpl::eSet(int featureID,  const std::shared_ptr<Any>& newV
 	
 					if(eObjectList)
 					{
-						std::shared_ptr<Bag<uml::Gate>> _cfragmentGate = getCfragmentGate();
+						const std::shared_ptr<Bag<uml::Gate>>& _cfragmentGate = getCfragmentGate();
 	
 						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{
@@ -644,7 +644,7 @@ bool CombinedFragmentImpl::eSet(int featureID,  const std::shared_ptr<Any>& newV
 	
 					if(eObjectList)
 					{
-						std::shared_ptr<Bag<uml::InteractionOperand>> _operand = getOperand();
+						const std::shared_ptr<Bag<uml::InteractionOperand>>& _operand = getOperand();
 	
 						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{

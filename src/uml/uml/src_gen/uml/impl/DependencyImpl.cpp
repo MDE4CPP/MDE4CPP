@@ -345,7 +345,7 @@ void DependencyImpl::resolveReferences(const int featureID, std::vector<std::sha
 	{
 		case uml::umlPackage::DEPENDENCY_ATTRIBUTE_CLIENT:
 		{
-			std::shared_ptr<SubsetUnion<uml::NamedElement, uml::Element>> _client = getClient();
+			const std::shared_ptr<SubsetUnion<uml::NamedElement, uml::Element>>& _client = getClient();
 			for(const std::shared_ptr<ecore::EObject>& ref : references)
 			{
 				std::shared_ptr<uml::NamedElement>  _r = std::dynamic_pointer_cast<uml::NamedElement>(ref);
@@ -359,7 +359,7 @@ void DependencyImpl::resolveReferences(const int featureID, std::vector<std::sha
 
 		case uml::umlPackage::DEPENDENCY_ATTRIBUTE_SUPPLIER:
 		{
-			std::shared_ptr<SubsetUnion<uml::NamedElement, uml::Element>> _supplier = getSupplier();
+			const std::shared_ptr<SubsetUnion<uml::NamedElement, uml::Element>>& _supplier = getSupplier();
 			for(const std::shared_ptr<ecore::EObject>& ref : references)
 			{
 				std::shared_ptr<uml::NamedElement>  _r = std::dynamic_pointer_cast<uml::NamedElement>(ref);
@@ -408,7 +408,7 @@ void DependencyImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveH
 	}
 }
 
-std::shared_ptr<ecore::EClass> DependencyImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& DependencyImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getDependency_Class();
 }
@@ -469,7 +469,7 @@ bool DependencyImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 	
 					if(eObjectList)
 					{
-						std::shared_ptr<Bag<uml::NamedElement>> _client = getClient();
+						const std::shared_ptr<Bag<uml::NamedElement>>& _client = getClient();
 	
 						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{
@@ -514,7 +514,7 @@ bool DependencyImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 	
 					if(eObjectList)
 					{
-						std::shared_ptr<Bag<uml::NamedElement>> _supplier = getSupplier();
+						const std::shared_ptr<Bag<uml::NamedElement>>& _supplier = getSupplier();
 	
 						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{

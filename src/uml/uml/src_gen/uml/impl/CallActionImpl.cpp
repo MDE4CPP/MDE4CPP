@@ -384,7 +384,7 @@ void CallActionImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveH
 	}
 }
 
-std::shared_ptr<ecore::EClass> CallActionImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& CallActionImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getCallAction_Class();
 }
@@ -445,7 +445,7 @@ bool CallActionImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 	
 					if(eObjectList)
 					{
-						std::shared_ptr<Bag<uml::OutputPin>> _result = getResult();
+						const std::shared_ptr<Bag<uml::OutputPin>>& _result = getResult();
 	
 						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{

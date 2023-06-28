@@ -201,7 +201,7 @@ void UnspecifiedValueExpEvalImpl::saveContent(std::shared_ptr<persistence::inter
 	}
 }
 
-std::shared_ptr<ecore::EClass> UnspecifiedValueExpEvalImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& UnspecifiedValueExpEvalImpl::eStaticClass() const
 {
 	return ocl::Evaluations::EvaluationsPackage::eInstance()->getUnspecifiedValueExpEval_Class();
 }

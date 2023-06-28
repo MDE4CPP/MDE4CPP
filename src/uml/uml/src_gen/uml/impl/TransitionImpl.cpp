@@ -601,7 +601,7 @@ void TransitionImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveH
 	}
 }
 
-std::shared_ptr<ecore::EClass> TransitionImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& TransitionImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getTransition_Class();
 }
@@ -889,7 +889,7 @@ bool TransitionImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 	
 					if(eObjectList)
 					{
-						std::shared_ptr<Bag<uml::Trigger>> _trigger = getTrigger();
+						const std::shared_ptr<Bag<uml::Trigger>>& _trigger = getTrigger();
 	
 						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{

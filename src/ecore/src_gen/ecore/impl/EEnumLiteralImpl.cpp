@@ -294,7 +294,7 @@ void EEnumLiteralImpl::saveContent(std::shared_ptr<persistence::interfaces::XSav
 	}
 }
 
-std::shared_ptr<EClass> EEnumLiteralImpl::eStaticClass() const
+const std::shared_ptr<EClass>& EEnumLiteralImpl::eStaticClass() const
 {
 	return ecore::ecorePackage::eInstance()->getEEnumLiteral_Class();
 }

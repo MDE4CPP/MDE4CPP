@@ -223,7 +223,7 @@ void ControlTokenImpl::saveContent(std::shared_ptr<persistence::interfaces::XSav
 	}
 }
 
-std::shared_ptr<ecore::EClass> ControlTokenImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& ControlTokenImpl::eStaticClass() const
 {
 	return fUML::Semantics::Activities::ActivitiesPackage::eInstance()->getControlToken_Class();
 }

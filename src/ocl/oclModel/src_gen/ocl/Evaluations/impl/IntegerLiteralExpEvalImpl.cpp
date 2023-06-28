@@ -207,7 +207,7 @@ void IntegerLiteralExpEvalImpl::saveContent(std::shared_ptr<persistence::interfa
 	}
 }
 
-std::shared_ptr<ecore::EClass> IntegerLiteralExpEvalImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& IntegerLiteralExpEvalImpl::eStaticClass() const
 {
 	return ocl::Evaluations::EvaluationsPackage::eInstance()->getIntegerLiteralExpEval_Class();
 }

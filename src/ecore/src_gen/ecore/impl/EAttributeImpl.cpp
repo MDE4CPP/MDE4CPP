@@ -263,7 +263,7 @@ void EAttributeImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveH
 	}
 }
 
-std::shared_ptr<EClass> EAttributeImpl::eStaticClass() const
+const std::shared_ptr<EClass>& EAttributeImpl::eStaticClass() const
 {
 	return ecore::ecorePackage::eInstance()->getEAttribute_Class();
 }

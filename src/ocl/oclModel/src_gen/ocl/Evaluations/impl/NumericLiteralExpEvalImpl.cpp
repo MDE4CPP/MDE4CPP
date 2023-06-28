@@ -205,7 +205,7 @@ void NumericLiteralExpEvalImpl::saveContent(std::shared_ptr<persistence::interfa
 	}
 }
 
-std::shared_ptr<ecore::EClass> NumericLiteralExpEvalImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& NumericLiteralExpEvalImpl::eStaticClass() const
 {
 	return ocl::Evaluations::EvaluationsPackage::eInstance()->getNumericLiteralExpEval_Class();
 }

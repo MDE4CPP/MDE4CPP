@@ -279,7 +279,7 @@ void OccurrenceSpecificationImpl::resolveReferences(const int featureID, std::ve
 	{
 		case uml::umlPackage::OCCURRENCESPECIFICATION_ATTRIBUTE_TOAFTER:
 		{
-			std::shared_ptr<Bag<uml::GeneralOrdering>> _toAfter = getToAfter();
+			const std::shared_ptr<Bag<uml::GeneralOrdering>>& _toAfter = getToAfter();
 			for(const std::shared_ptr<ecore::EObject>& ref : references)
 			{
 				std::shared_ptr<uml::GeneralOrdering>  _r = std::dynamic_pointer_cast<uml::GeneralOrdering>(ref);
@@ -293,7 +293,7 @@ void OccurrenceSpecificationImpl::resolveReferences(const int featureID, std::ve
 
 		case uml::umlPackage::OCCURRENCESPECIFICATION_ATTRIBUTE_TOBEFORE:
 		{
-			std::shared_ptr<Bag<uml::GeneralOrdering>> _toBefore = getToBefore();
+			const std::shared_ptr<Bag<uml::GeneralOrdering>>& _toBefore = getToBefore();
 			for(const std::shared_ptr<ecore::EObject>& ref : references)
 			{
 				std::shared_ptr<uml::GeneralOrdering>  _r = std::dynamic_pointer_cast<uml::GeneralOrdering>(ref);
@@ -338,7 +338,7 @@ void OccurrenceSpecificationImpl::saveContent(std::shared_ptr<persistence::inter
 	}
 }
 
-std::shared_ptr<ecore::EClass> OccurrenceSpecificationImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& OccurrenceSpecificationImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getOccurrenceSpecification_Class();
 }
@@ -385,7 +385,7 @@ bool OccurrenceSpecificationImpl::eSet(int featureID,  const std::shared_ptr<Any
 	
 					if(eObjectList)
 					{
-						std::shared_ptr<Bag<uml::GeneralOrdering>> _toAfter = getToAfter();
+						const std::shared_ptr<Bag<uml::GeneralOrdering>>& _toAfter = getToAfter();
 	
 						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{
@@ -430,7 +430,7 @@ bool OccurrenceSpecificationImpl::eSet(int featureID,  const std::shared_ptr<Any
 	
 					if(eObjectList)
 					{
-						std::shared_ptr<Bag<uml::GeneralOrdering>> _toBefore = getToBefore();
+						const std::shared_ptr<Bag<uml::GeneralOrdering>>& _toBefore = getToBefore();
 	
 						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{

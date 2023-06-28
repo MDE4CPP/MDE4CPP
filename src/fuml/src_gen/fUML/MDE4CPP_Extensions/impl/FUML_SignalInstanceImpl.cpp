@@ -202,7 +202,7 @@ void FUML_SignalInstanceImpl::saveContent(std::shared_ptr<persistence::interface
 	}
 }
 
-std::shared_ptr<ecore::EClass> FUML_SignalInstanceImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& FUML_SignalInstanceImpl::eStaticClass() const
 {
 	return fUML::MDE4CPP_Extensions::MDE4CPP_ExtensionsPackage::eInstance()->getFUML_SignalInstance_Class();
 }

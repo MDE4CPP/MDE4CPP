@@ -360,7 +360,7 @@ void ReadStructuralFeatureActionActivationImpl::saveContent(std::shared_ptr<pers
 	}
 }
 
-std::shared_ptr<ecore::EClass> ReadStructuralFeatureActionActivationImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& ReadStructuralFeatureActionActivationImpl::eStaticClass() const
 {
 	return fUML::Semantics::Actions::ActionsPackage::eInstance()->getReadStructuralFeatureActionActivation_Class();
 }

@@ -424,7 +424,7 @@ void ActionInputPinImpl::saveContent(std::shared_ptr<persistence::interfaces::XS
 	}
 }
 
-std::shared_ptr<ecore::EClass> ActionInputPinImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& ActionInputPinImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getActionInputPin_Class();
 }

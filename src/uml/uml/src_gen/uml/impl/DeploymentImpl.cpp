@@ -389,7 +389,7 @@ void DeploymentImpl::resolveReferences(const int featureID, std::vector<std::sha
 	{
 		case uml::umlPackage::DEPLOYMENT_ATTRIBUTE_DEPLOYEDARTIFACT:
 		{
-			std::shared_ptr<Subset<uml::DeployedArtifact, uml::NamedElement /*Subset does not reference a union*/>> _deployedArtifact = getDeployedArtifact();
+			const std::shared_ptr<Subset<uml::DeployedArtifact, uml::NamedElement /*Subset does not reference a union*/>>& _deployedArtifact = getDeployedArtifact();
 			for(const std::shared_ptr<ecore::EObject>& ref : references)
 			{
 				std::shared_ptr<uml::DeployedArtifact>  _r = std::dynamic_pointer_cast<uml::DeployedArtifact>(ref);
@@ -455,7 +455,7 @@ void DeploymentImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveH
 	}
 }
 
-std::shared_ptr<ecore::EClass> DeploymentImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& DeploymentImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getDeployment_Class();
 }
@@ -509,7 +509,7 @@ bool DeploymentImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 	
 					if(eObjectList)
 					{
-						std::shared_ptr<Bag<uml::DeploymentSpecification>> _configuration = getConfiguration();
+						const std::shared_ptr<Bag<uml::DeploymentSpecification>>& _configuration = getConfiguration();
 	
 						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{
@@ -554,7 +554,7 @@ bool DeploymentImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 	
 					if(eObjectList)
 					{
-						std::shared_ptr<Bag<uml::DeployedArtifact>> _deployedArtifact = getDeployedArtifact();
+						const std::shared_ptr<Bag<uml::DeployedArtifact>>& _deployedArtifact = getDeployedArtifact();
 	
 						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{

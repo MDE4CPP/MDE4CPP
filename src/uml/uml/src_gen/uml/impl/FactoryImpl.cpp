@@ -202,7 +202,7 @@ void FactoryImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHand
 	}
 }
 
-std::shared_ptr<ecore::EClass> FactoryImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& FactoryImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getFactory_Class();
 }

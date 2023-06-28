@@ -234,7 +234,7 @@ void DirectedRelationshipImpl::saveContent(std::shared_ptr<persistence::interfac
 	}
 }
 
-std::shared_ptr<ecore::EClass> DirectedRelationshipImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& DirectedRelationshipImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getDirectedRelationship_Class();
 }

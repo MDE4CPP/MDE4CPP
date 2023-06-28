@@ -247,7 +247,7 @@ void CollectionLiteralPartEvalImpl::saveContent(std::shared_ptr<persistence::int
 	}
 }
 
-std::shared_ptr<ecore::EClass> CollectionLiteralPartEvalImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& CollectionLiteralPartEvalImpl::eStaticClass() const
 {
 	return ocl::Evaluations::EvaluationsPackage::eInstance()->getCollectionLiteralPartEval_Class();
 }

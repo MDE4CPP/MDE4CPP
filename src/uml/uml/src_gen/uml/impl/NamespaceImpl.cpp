@@ -587,7 +587,7 @@ void NamespaceImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHa
 	}
 }
 
-std::shared_ptr<ecore::EClass> NamespaceImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& NamespaceImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getNamespace_Class();
 }
@@ -650,7 +650,7 @@ bool NamespaceImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 	
 					if(eObjectList)
 					{
-						std::shared_ptr<Bag<uml::ElementImport>> _elementImport = getElementImport();
+						const std::shared_ptr<Bag<uml::ElementImport>>& _elementImport = getElementImport();
 	
 						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{
@@ -695,7 +695,7 @@ bool NamespaceImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 	
 					if(eObjectList)
 					{
-						std::shared_ptr<Bag<uml::Constraint>> _ownedRule = getOwnedRule();
+						const std::shared_ptr<Bag<uml::Constraint>>& _ownedRule = getOwnedRule();
 	
 						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{
@@ -740,7 +740,7 @@ bool NamespaceImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 	
 					if(eObjectList)
 					{
-						std::shared_ptr<Bag<uml::PackageImport>> _packageImport = getPackageImport();
+						const std::shared_ptr<Bag<uml::PackageImport>>& _packageImport = getPackageImport();
 	
 						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{

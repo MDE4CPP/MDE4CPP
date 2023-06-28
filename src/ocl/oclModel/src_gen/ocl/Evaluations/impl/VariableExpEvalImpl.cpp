@@ -238,7 +238,7 @@ void VariableExpEvalImpl::saveContent(std::shared_ptr<persistence::interfaces::X
 	}
 }
 
-std::shared_ptr<ecore::EClass> VariableExpEvalImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& VariableExpEvalImpl::eStaticClass() const
 {
 	return ocl::Evaluations::EvaluationsPackage::eInstance()->getVariableExpEval_Class();
 }

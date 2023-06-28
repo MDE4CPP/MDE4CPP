@@ -503,7 +503,7 @@ void ExecutionImpl::resolveReferences(const int featureID, std::vector<std::shar
 
 		case fUML::Semantics::CommonBehavior::CommonBehaviorPackage::EXECUTION_ATTRIBUTE_TYPES:
 		{
-			std::shared_ptr<Bag<uml::Classifier>> _types = getTypes();
+			const std::shared_ptr<Bag<uml::Classifier>>& _types = getTypes();
 			for(const std::shared_ptr<ecore::EObject>& ref : references)
 			{
 				std::shared_ptr<uml::Classifier>  _r = std::dynamic_pointer_cast<uml::Classifier>(ref);
@@ -557,7 +557,7 @@ void ExecutionImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHa
 	}
 }
 
-std::shared_ptr<ecore::EClass> ExecutionImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& ExecutionImpl::eStaticClass() const
 {
 	return fUML::Semantics::CommonBehavior::CommonBehaviorPackage::eInstance()->getExecution_Class();
 }
@@ -723,7 +723,7 @@ bool ExecutionImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 	
 					if(eObjectList)
 					{
-						std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> _parameterValues = getParameterValues();
+						const std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>>& _parameterValues = getParameterValues();
 	
 						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{
@@ -768,7 +768,7 @@ bool ExecutionImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 	
 					if(eObjectList)
 					{
-						std::shared_ptr<Bag<uml::Classifier>> _types = getTypes();
+						const std::shared_ptr<Bag<uml::Classifier>>& _types = getTypes();
 	
 						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{

@@ -347,7 +347,7 @@ void PinActivationImpl::saveContent(std::shared_ptr<persistence::interfaces::XSa
 	}
 }
 
-std::shared_ptr<ecore::EClass> PinActivationImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& PinActivationImpl::eStaticClass() const
 {
 	return fUML::Semantics::Actions::ActionsPackage::eInstance()->getPinActivation_Class();
 }

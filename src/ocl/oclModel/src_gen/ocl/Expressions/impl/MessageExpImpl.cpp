@@ -402,7 +402,7 @@ void MessageExpImpl::resolveReferences(const int featureID, std::vector<std::sha
 	{
 		case ocl::Expressions::ExpressionsPackage::MESSAGEEXP_ATTRIBUTE_ARGUMENT:
 		{
-			std::shared_ptr<Bag<ocl::Expressions::OclExpression>> _argument = getArgument();
+			const std::shared_ptr<Bag<ocl::Expressions::OclExpression>>& _argument = getArgument();
 			for(const std::shared_ptr<ecore::EObject>& ref : references)
 			{
 				std::shared_ptr<ocl::Expressions::OclExpression>  _r = std::dynamic_pointer_cast<ocl::Expressions::OclExpression>(ref);
@@ -469,7 +469,7 @@ void MessageExpImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveH
 	}
 }
 
-std::shared_ptr<ecore::EClass> MessageExpImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& MessageExpImpl::eStaticClass() const
 {
 	return ocl::Expressions::ExpressionsPackage::eInstance()->getMessageExp_Class();
 }
@@ -524,7 +524,7 @@ bool MessageExpImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 	
 					if(eObjectList)
 					{
-						std::shared_ptr<Bag<ocl::Expressions::OclExpression>> _argument = getArgument();
+						const std::shared_ptr<Bag<ocl::Expressions::OclExpression>>& _argument = getArgument();
 	
 						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{

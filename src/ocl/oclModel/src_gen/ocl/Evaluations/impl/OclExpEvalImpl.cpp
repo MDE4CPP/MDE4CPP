@@ -341,7 +341,7 @@ void OclExpEvalImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveH
 	}
 }
 
-std::shared_ptr<ecore::EClass> OclExpEvalImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& OclExpEvalImpl::eStaticClass() const
 {
 	return ocl::Evaluations::EvaluationsPackage::eInstance()->getOclExpEval_Class();
 }

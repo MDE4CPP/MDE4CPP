@@ -371,7 +371,7 @@ void EncapsulatedClassifierImpl::saveContent(std::shared_ptr<persistence::interf
 	}
 }
 
-std::shared_ptr<ecore::EClass> EncapsulatedClassifierImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& EncapsulatedClassifierImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getEncapsulatedClassifier_Class();
 }

@@ -551,7 +551,7 @@ void ComponentImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHa
 	}
 }
 
-std::shared_ptr<ecore::EClass> ComponentImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& ComponentImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getComponent_Class();
 }
@@ -624,7 +624,7 @@ bool ComponentImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 	
 					if(eObjectList)
 					{
-						std::shared_ptr<Bag<uml::PackageableElement>> _packagedElement = getPackagedElement();
+						const std::shared_ptr<Bag<uml::PackageableElement>>& _packagedElement = getPackagedElement();
 	
 						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{
@@ -669,7 +669,7 @@ bool ComponentImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 	
 					if(eObjectList)
 					{
-						std::shared_ptr<Bag<uml::ComponentRealization>> _realization = getRealization();
+						const std::shared_ptr<Bag<uml::ComponentRealization>>& _realization = getRealization();
 	
 						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{

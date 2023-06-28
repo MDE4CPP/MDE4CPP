@@ -426,7 +426,7 @@ void UnmarshallActionImpl::saveContent(std::shared_ptr<persistence::interfaces::
 	}
 }
 
-std::shared_ptr<ecore::EClass> UnmarshallActionImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& UnmarshallActionImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getUnmarshallAction_Class();
 }
@@ -508,7 +508,7 @@ bool UnmarshallActionImpl::eSet(int featureID,  const std::shared_ptr<Any>& newV
 	
 					if(eObjectList)
 					{
-						std::shared_ptr<Bag<uml::OutputPin>> _result = getResult();
+						const std::shared_ptr<Bag<uml::OutputPin>>& _result = getResult();
 	
 						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{

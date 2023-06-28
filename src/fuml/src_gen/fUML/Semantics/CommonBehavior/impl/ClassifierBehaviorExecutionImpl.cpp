@@ -312,7 +312,7 @@ void ClassifierBehaviorExecutionImpl::saveContent(std::shared_ptr<persistence::i
 	}
 }
 
-std::shared_ptr<ecore::EClass> ClassifierBehaviorExecutionImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& ClassifierBehaviorExecutionImpl::eStaticClass() const
 {
 	return fUML::Semantics::CommonBehavior::CommonBehaviorPackage::eInstance()->getClassifierBehaviorExecution_Class();
 }

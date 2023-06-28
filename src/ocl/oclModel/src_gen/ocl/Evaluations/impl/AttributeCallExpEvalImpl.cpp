@@ -243,7 +243,7 @@ void AttributeCallExpEvalImpl::saveContent(std::shared_ptr<persistence::interfac
 	}
 }
 
-std::shared_ptr<ecore::EClass> AttributeCallExpEvalImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& AttributeCallExpEvalImpl::eStaticClass() const
 {
 	return ocl::Evaluations::EvaluationsPackage::eInstance()->getAttributeCallExpEval_Class();
 }

@@ -257,7 +257,7 @@ void MessageOccurrenceSpecificationImpl::saveContent(std::shared_ptr<persistence
 	}
 }
 
-std::shared_ptr<ecore::EClass> MessageOccurrenceSpecificationImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& MessageOccurrenceSpecificationImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getMessageOccurrenceSpecification_Class();
 }

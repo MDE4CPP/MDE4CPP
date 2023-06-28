@@ -201,7 +201,7 @@ void LiteralExpEvalImpl::saveContent(std::shared_ptr<persistence::interfaces::XS
 	}
 }
 
-std::shared_ptr<ecore::EClass> LiteralExpEvalImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& LiteralExpEvalImpl::eStaticClass() const
 {
 	return ocl::Evaluations::EvaluationsPackage::eInstance()->getLiteralExpEval_Class();
 }

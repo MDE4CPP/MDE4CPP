@@ -354,7 +354,7 @@ void ForkedTokenImpl::saveContent(std::shared_ptr<persistence::interfaces::XSave
 	}
 }
 
-std::shared_ptr<ecore::EClass> ForkedTokenImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& ForkedTokenImpl::eStaticClass() const
 {
 	return fUML::Semantics::Activities::ActivitiesPackage::eInstance()->getForkedToken_Class();
 }

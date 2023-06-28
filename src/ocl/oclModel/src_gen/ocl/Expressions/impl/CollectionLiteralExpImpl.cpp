@@ -477,7 +477,7 @@ void CollectionLiteralExpImpl::saveContent(std::shared_ptr<persistence::interfac
 	}
 }
 
-std::shared_ptr<ecore::EClass> CollectionLiteralExpImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& CollectionLiteralExpImpl::eStaticClass() const
 {
 	return ocl::Expressions::ExpressionsPackage::eInstance()->getCollectionLiteralExp_Class();
 }
@@ -538,7 +538,7 @@ bool CollectionLiteralExpImpl::eSet(int featureID,  const std::shared_ptr<Any>& 
 	
 					if(eObjectList)
 					{
-						std::shared_ptr<Bag<ocl::Expressions::CollectionLiteralPart>> _part = getPart();
+						const std::shared_ptr<Bag<ocl::Expressions::CollectionLiteralPart>>& _part = getPart();
 	
 						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{

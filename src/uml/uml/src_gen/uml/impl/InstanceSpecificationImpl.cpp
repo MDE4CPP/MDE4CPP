@@ -369,7 +369,7 @@ void InstanceSpecificationImpl::resolveReferences(const int featureID, std::vect
 	{
 		case uml::umlPackage::INSTANCESPECIFICATION_ATTRIBUTE_CLASSIFIER:
 		{
-			std::shared_ptr<Bag<uml::Classifier>> _classifier = getClassifier();
+			const std::shared_ptr<Bag<uml::Classifier>>& _classifier = getClassifier();
 			for(const std::shared_ptr<ecore::EObject>& ref : references)
 			{
 				std::shared_ptr<uml::Classifier>  _r = std::dynamic_pointer_cast<uml::Classifier>(ref);
@@ -430,7 +430,7 @@ void InstanceSpecificationImpl::saveContent(std::shared_ptr<persistence::interfa
 	}
 }
 
-std::shared_ptr<ecore::EClass> InstanceSpecificationImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& InstanceSpecificationImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getInstanceSpecification_Class();
 }
@@ -505,7 +505,7 @@ bool InstanceSpecificationImpl::eSet(int featureID,  const std::shared_ptr<Any>&
 	
 					if(eObjectList)
 					{
-						std::shared_ptr<Bag<uml::Classifier>> _classifier = getClassifier();
+						const std::shared_ptr<Bag<uml::Classifier>>& _classifier = getClassifier();
 	
 						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{
@@ -550,7 +550,7 @@ bool InstanceSpecificationImpl::eSet(int featureID,  const std::shared_ptr<Any>&
 	
 					if(eObjectList)
 					{
-						std::shared_ptr<Bag<uml::Slot>> _slot = getSlot();
+						const std::shared_ptr<Bag<uml::Slot>>& _slot = getSlot();
 	
 						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{

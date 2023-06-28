@@ -496,7 +496,7 @@ void BehavioredClassifierImpl::saveContent(std::shared_ptr<persistence::interfac
 	}
 }
 
-std::shared_ptr<ecore::EClass> BehavioredClassifierImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& BehavioredClassifierImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getBehavioredClassifier_Class();
 }
@@ -578,7 +578,7 @@ bool BehavioredClassifierImpl::eSet(int featureID,  const std::shared_ptr<Any>& 
 	
 					if(eObjectList)
 					{
-						std::shared_ptr<Bag<uml::InterfaceRealization>> _interfaceRealization = getInterfaceRealization();
+						const std::shared_ptr<Bag<uml::InterfaceRealization>>& _interfaceRealization = getInterfaceRealization();
 	
 						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{
@@ -623,7 +623,7 @@ bool BehavioredClassifierImpl::eSet(int featureID,  const std::shared_ptr<Any>& 
 	
 					if(eObjectList)
 					{
-						std::shared_ptr<Bag<uml::Behavior>> _ownedBehavior = getOwnedBehavior();
+						const std::shared_ptr<Bag<uml::Behavior>>& _ownedBehavior = getOwnedBehavior();
 	
 						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{

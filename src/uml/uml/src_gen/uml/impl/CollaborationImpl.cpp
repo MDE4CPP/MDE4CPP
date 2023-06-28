@@ -327,7 +327,7 @@ void CollaborationImpl::resolveReferences(const int featureID, std::vector<std::
 	{
 		case uml::umlPackage::COLLABORATION_ATTRIBUTE_COLLABORATIONROLE:
 		{
-			std::shared_ptr<Subset<uml::ConnectableElement, uml::ConnectableElement>> _collaborationRole = getCollaborationRole();
+			const std::shared_ptr<Subset<uml::ConnectableElement, uml::ConnectableElement>>& _collaborationRole = getCollaborationRole();
 			for(const std::shared_ptr<ecore::EObject>& ref : references)
 			{
 				std::shared_ptr<uml::ConnectableElement>  _r = std::dynamic_pointer_cast<uml::ConnectableElement>(ref);
@@ -383,7 +383,7 @@ void CollaborationImpl::saveContent(std::shared_ptr<persistence::interfaces::XSa
 	}
 }
 
-std::shared_ptr<ecore::EClass> CollaborationImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& CollaborationImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getCollaboration_Class();
 }
@@ -440,7 +440,7 @@ bool CollaborationImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValu
 	
 					if(eObjectList)
 					{
-						std::shared_ptr<Bag<uml::ConnectableElement>> _collaborationRole = getCollaborationRole();
+						const std::shared_ptr<Bag<uml::ConnectableElement>>& _collaborationRole = getCollaborationRole();
 	
 						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{

@@ -312,7 +312,7 @@ void TemplateSignatureImpl::resolveReferences(const int featureID, std::vector<s
 	{
 		case uml::umlPackage::TEMPLATESIGNATURE_ATTRIBUTE_PARAMETER:
 		{
-			std::shared_ptr<Union<uml::TemplateParameter>> _parameter = getParameter();
+			const std::shared_ptr<Union<uml::TemplateParameter>>& _parameter = getParameter();
 			for(const std::shared_ptr<ecore::EObject>& ref : references)
 			{
 				std::shared_ptr<uml::TemplateParameter>  _r = std::dynamic_pointer_cast<uml::TemplateParameter>(ref);
@@ -369,7 +369,7 @@ void TemplateSignatureImpl::saveContent(std::shared_ptr<persistence::interfaces:
 	}
 }
 
-std::shared_ptr<ecore::EClass> TemplateSignatureImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& TemplateSignatureImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getTemplateSignature_Class();
 }
@@ -423,7 +423,7 @@ bool TemplateSignatureImpl::eSet(int featureID,  const std::shared_ptr<Any>& new
 	
 					if(eObjectList)
 					{
-						std::shared_ptr<Bag<uml::TemplateParameter>> _ownedParameter = getOwnedParameter();
+						const std::shared_ptr<Bag<uml::TemplateParameter>>& _ownedParameter = getOwnedParameter();
 	
 						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{
@@ -468,7 +468,7 @@ bool TemplateSignatureImpl::eSet(int featureID,  const std::shared_ptr<Any>& new
 	
 					if(eObjectList)
 					{
-						std::shared_ptr<Bag<uml::TemplateParameter>> _parameter = getParameter();
+						const std::shared_ptr<Bag<uml::TemplateParameter>>& _parameter = getParameter();
 	
 						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{

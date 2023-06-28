@@ -319,7 +319,7 @@ void ReadExtentActionActivationImpl::saveContent(std::shared_ptr<persistence::in
 	}
 }
 
-std::shared_ptr<ecore::EClass> ReadExtentActionActivationImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& ReadExtentActionActivationImpl::eStaticClass() const
 {
 	return fUML::Semantics::Actions::ActionsPackage::eInstance()->getReadExtentActionActivation_Class();
 }

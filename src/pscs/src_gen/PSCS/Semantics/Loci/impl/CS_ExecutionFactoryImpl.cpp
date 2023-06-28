@@ -82,8 +82,8 @@
 
 #include <exception> // used in Persistence
 #include "fUML/Semantics/Loci/LociFactory.hpp"
-#include "fUML/Semantics/CommonBehavior/CommonBehaviorFactory.hpp"
 #include "uml/umlFactory.hpp"
+#include "fUML/Semantics/CommonBehavior/CommonBehaviorFactory.hpp"
 #include "uml/Class.hpp"
 #include "uml/Classifier.hpp"
 #include "uml/Element.hpp"
@@ -381,7 +381,7 @@ void CS_ExecutionFactoryImpl::resolveReferences(const int featureID, std::vector
 	{
 		case PSCS::Semantics::Loci::LociPackage::CS_EXECUTIONFACTORY_ATTRIBUTE_APPLIEDPROFILES:
 		{
-			std::shared_ptr<Bag<uml::Package>> _appliedProfiles = getAppliedProfiles();
+			const std::shared_ptr<Bag<uml::Package>>& _appliedProfiles = getAppliedProfiles();
 			for(const std::shared_ptr<ecore::EObject>& ref : references)
 			{
 				std::shared_ptr<uml::Package>  _r = std::dynamic_pointer_cast<uml::Package>(ref);
@@ -419,7 +419,7 @@ void CS_ExecutionFactoryImpl::saveContent(std::shared_ptr<persistence::interface
 	}
 }
 
-std::shared_ptr<ecore::EClass> CS_ExecutionFactoryImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& CS_ExecutionFactoryImpl::eStaticClass() const
 {
 	return PSCS::Semantics::Loci::LociPackage::eInstance()->getCS_ExecutionFactory_Class();
 }
@@ -462,7 +462,7 @@ bool CS_ExecutionFactoryImpl::eSet(int featureID,  const std::shared_ptr<Any>& n
 	
 					if(eObjectList)
 					{
-						std::shared_ptr<Bag<uml::Package>> _appliedProfiles = getAppliedProfiles();
+						const std::shared_ptr<Bag<uml::Package>>& _appliedProfiles = getAppliedProfiles();
 	
 						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{

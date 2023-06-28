@@ -376,7 +376,7 @@ void InteractionOperandImpl::saveContent(std::shared_ptr<persistence::interfaces
 	}
 }
 
-std::shared_ptr<ecore::EClass> InteractionOperandImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& InteractionOperandImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getInteractionOperand_Class();
 }
@@ -437,7 +437,7 @@ bool InteractionOperandImpl::eSet(int featureID,  const std::shared_ptr<Any>& ne
 	
 					if(eObjectList)
 					{
-						std::shared_ptr<Bag<uml::InteractionFragment>> _fragment = getFragment();
+						const std::shared_ptr<Bag<uml::InteractionFragment>>& _fragment = getFragment();
 	
 						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{

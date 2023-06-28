@@ -376,7 +376,7 @@ void FUML_ObjectImpl::saveContent(std::shared_ptr<persistence::interfaces::XSave
 	}
 }
 
-std::shared_ptr<ecore::EClass> FUML_ObjectImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& FUML_ObjectImpl::eStaticClass() const
 {
 	return fUML::MDE4CPP_Extensions::MDE4CPP_ExtensionsPackage::eInstance()->getFUML_Object_Class();
 }

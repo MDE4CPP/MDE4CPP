@@ -309,7 +309,7 @@ void StructuralFeatureActionActivationImpl::saveContent(std::shared_ptr<persiste
 	}
 }
 
-std::shared_ptr<ecore::EClass> StructuralFeatureActionActivationImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& StructuralFeatureActionActivationImpl::eStaticClass() const
 {
 	return fUML::Semantics::Actions::ActionsPackage::eInstance()->getStructuralFeatureActionActivation_Class();
 }

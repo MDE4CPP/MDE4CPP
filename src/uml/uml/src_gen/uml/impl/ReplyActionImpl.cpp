@@ -427,7 +427,7 @@ void ReplyActionImpl::saveContent(std::shared_ptr<persistence::interfaces::XSave
 	}
 }
 
-std::shared_ptr<ecore::EClass> ReplyActionImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& ReplyActionImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getReplyAction_Class();
 }
@@ -509,7 +509,7 @@ bool ReplyActionImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 	
 					if(eObjectList)
 					{
-						std::shared_ptr<Bag<uml::InputPin>> _replyValue = getReplyValue();
+						const std::shared_ptr<Bag<uml::InputPin>>& _replyValue = getReplyValue();
 	
 						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{

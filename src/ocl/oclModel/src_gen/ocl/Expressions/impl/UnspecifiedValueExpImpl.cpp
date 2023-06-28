@@ -337,7 +337,7 @@ void UnspecifiedValueExpImpl::saveContent(std::shared_ptr<persistence::interface
 	}
 }
 
-std::shared_ptr<ecore::EClass> UnspecifiedValueExpImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& UnspecifiedValueExpImpl::eStaticClass() const
 {
 	return ocl::Expressions::ExpressionsPackage::eInstance()->getUnspecifiedValueExp_Class();
 }

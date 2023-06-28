@@ -390,7 +390,7 @@ void MultiplicityElementImpl::saveContent(std::shared_ptr<persistence::interface
 	}
 }
 
-std::shared_ptr<ecore::EClass> MultiplicityElementImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& MultiplicityElementImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getMultiplicityElement_Class();
 }

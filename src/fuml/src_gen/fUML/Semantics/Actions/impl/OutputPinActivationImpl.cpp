@@ -212,7 +212,7 @@ void OutputPinActivationImpl::saveContent(std::shared_ptr<persistence::interface
 	}
 }
 
-std::shared_ptr<ecore::EClass> OutputPinActivationImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& OutputPinActivationImpl::eStaticClass() const
 {
 	return fUML::Semantics::Actions::ActionsPackage::eInstance()->getOutputPinActivation_Class();
 }

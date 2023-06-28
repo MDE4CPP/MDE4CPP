@@ -282,7 +282,7 @@ void OfferImpl::resolveReferences(const int featureID, std::vector<std::shared_p
 	{
 		case fUML::Semantics::Activities::ActivitiesPackage::OFFER_ATTRIBUTE_OFFEREDTOKENS:
 		{
-			std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> _offeredTokens = getOfferedTokens();
+			const std::shared_ptr<Bag<fUML::Semantics::Activities::Token>>& _offeredTokens = getOfferedTokens();
 			for(const std::shared_ptr<ecore::EObject>& ref : references)
 			{
 				std::shared_ptr<fUML::Semantics::Activities::Token>  _r = std::dynamic_pointer_cast<fUML::Semantics::Activities::Token>(ref);
@@ -318,7 +318,7 @@ void OfferImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandle
 	}
 }
 
-std::shared_ptr<ecore::EClass> OfferImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& OfferImpl::eStaticClass() const
 {
 	return fUML::Semantics::Activities::ActivitiesPackage::eInstance()->getOffer_Class();
 }
@@ -361,7 +361,7 @@ bool OfferImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 	
 					if(eObjectList)
 					{
-						std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> _offeredTokens = getOfferedTokens();
+						const std::shared_ptr<Bag<fUML::Semantics::Activities::Token>>& _offeredTokens = getOfferedTokens();
 	
 						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{

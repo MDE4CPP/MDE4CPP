@@ -203,7 +203,7 @@ void EnumLiteralExpEvalImpl::saveContent(std::shared_ptr<persistence::interfaces
 	}
 }
 
-std::shared_ptr<ecore::EClass> EnumLiteralExpEvalImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& EnumLiteralExpEvalImpl::eStaticClass() const
 {
 	return ocl::Evaluations::EvaluationsPackage::eInstance()->getEnumLiteralExpEval_Class();
 }

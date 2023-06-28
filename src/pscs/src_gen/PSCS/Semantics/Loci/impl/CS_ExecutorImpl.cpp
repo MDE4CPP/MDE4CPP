@@ -245,7 +245,7 @@ void CS_ExecutorImpl::saveContent(std::shared_ptr<persistence::interfaces::XSave
 	}
 }
 
-std::shared_ptr<ecore::EClass> CS_ExecutorImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& CS_ExecutorImpl::eStaticClass() const
 {
 	return PSCS::Semantics::Loci::LociPackage::eInstance()->getCS_Executor_Class();
 }

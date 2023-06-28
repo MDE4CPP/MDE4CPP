@@ -397,7 +397,7 @@ void TupleLiteralExpImpl::saveContent(std::shared_ptr<persistence::interfaces::X
 	}
 }
 
-std::shared_ptr<ecore::EClass> TupleLiteralExpImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& TupleLiteralExpImpl::eStaticClass() const
 {
 	return ocl::Expressions::ExpressionsPackage::eInstance()->getTupleLiteralExp_Class();
 }
@@ -440,7 +440,7 @@ bool TupleLiteralExpImpl::eSet(int featureID,  const std::shared_ptr<Any>& newVa
 	
 					if(eObjectList)
 					{
-						std::shared_ptr<Bag<ocl::Expressions::VarDeclarationExp>> _part = getPart();
+						const std::shared_ptr<Bag<ocl::Expressions::VarDeclarationExp>>& _part = getPart();
 	
 						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{

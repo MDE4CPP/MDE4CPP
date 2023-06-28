@@ -256,7 +256,7 @@ void TriggerImpl::resolveReferences(const int featureID, std::vector<std::shared
 
 		case uml::umlPackage::TRIGGER_ATTRIBUTE_PORT:
 		{
-			std::shared_ptr<Bag<uml::Port>> _port = getPort();
+			const std::shared_ptr<Bag<uml::Port>>& _port = getPort();
 			for(const std::shared_ptr<ecore::EObject>& ref : references)
 			{
 				std::shared_ptr<uml::Port>  _r = std::dynamic_pointer_cast<uml::Port>(ref);
@@ -299,7 +299,7 @@ void TriggerImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHand
 	}
 }
 
-std::shared_ptr<ecore::EClass> TriggerImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& TriggerImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getTrigger_Class();
 }
@@ -377,7 +377,7 @@ bool TriggerImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 	
 					if(eObjectList)
 					{
-						std::shared_ptr<Bag<uml::Port>> _port = getPort();
+						const std::shared_ptr<Bag<uml::Port>>& _port = getPort();
 	
 						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{

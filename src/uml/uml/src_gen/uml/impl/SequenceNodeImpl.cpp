@@ -355,7 +355,7 @@ void SequenceNodeImpl::saveContent(std::shared_ptr<persistence::interfaces::XSav
 	}
 }
 
-std::shared_ptr<ecore::EClass> SequenceNodeImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& SequenceNodeImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getSequenceNode_Class();
 }
@@ -398,7 +398,7 @@ bool SequenceNodeImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue
 	
 					if(eObjectList)
 					{
-						std::shared_ptr<Bag<uml::ExecutableNode>> _executableNode = getExecutableNode();
+						const std::shared_ptr<Bag<uml::ExecutableNode>>& _executableNode = getExecutableNode();
 	
 						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{

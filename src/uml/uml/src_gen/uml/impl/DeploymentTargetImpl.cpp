@@ -306,7 +306,7 @@ void DeploymentTargetImpl::saveContent(std::shared_ptr<persistence::interfaces::
 	}
 }
 
-std::shared_ptr<ecore::EClass> DeploymentTargetImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& DeploymentTargetImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getDeploymentTarget_Class();
 }
@@ -353,7 +353,7 @@ bool DeploymentTargetImpl::eSet(int featureID,  const std::shared_ptr<Any>& newV
 	
 					if(eObjectList)
 					{
-						std::shared_ptr<Bag<uml::Deployment>> _deployment = getDeployment();
+						const std::shared_ptr<Bag<uml::Deployment>>& _deployment = getDeployment();
 	
 						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{

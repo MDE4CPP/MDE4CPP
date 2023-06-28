@@ -286,7 +286,7 @@ void ImageImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandle
 	}
 }
 
-std::shared_ptr<ecore::EClass> ImageImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& ImageImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getImage_Class();
 }

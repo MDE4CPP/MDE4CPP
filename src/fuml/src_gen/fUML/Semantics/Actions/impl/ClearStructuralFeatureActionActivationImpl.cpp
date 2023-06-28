@@ -353,7 +353,7 @@ void ClearStructuralFeatureActionActivationImpl::saveContent(std::shared_ptr<per
 	}
 }
 
-std::shared_ptr<ecore::EClass> ClearStructuralFeatureActionActivationImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& ClearStructuralFeatureActionActivationImpl::eStaticClass() const
 {
 	return fUML::Semantics::Actions::ActionsPackage::eInstance()->getClearStructuralFeatureActionActivation_Class();
 }

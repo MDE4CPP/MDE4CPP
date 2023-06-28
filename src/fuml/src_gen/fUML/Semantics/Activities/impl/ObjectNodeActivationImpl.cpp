@@ -380,7 +380,7 @@ void ObjectNodeActivationImpl::saveContent(std::shared_ptr<persistence::interfac
 	}
 }
 
-std::shared_ptr<ecore::EClass> ObjectNodeActivationImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& ObjectNodeActivationImpl::eStaticClass() const
 {
 	return fUML::Semantics::Activities::ActivitiesPackage::eInstance()->getObjectNodeActivation_Class();
 }

@@ -69,7 +69,7 @@
 [for (anEPackage: EPackage| anEClass.ePackage->closure(p|p.eSuperPackage)->asSet()->reject(doNotGenerateEPackage()) )]
 #include "[anEPackage.getRootPackage().name/]/[anEPackage.getNamespacePathWithoutRoot()/][anEPackage.name/]Package.hpp"
 [/for]
-[comment] nur für saveContent bei saveHandler->addReference() mit Meta-Datentyp-Vergleich nötig siehe generatePersistence.mtl
+[comment] nur fï¿½r saveContent bei saveHandler->addReference() mit Meta-Datentyp-Vergleich nï¿½tig siehe generatePersistence.mtl
 [/comment]
 [for (aPackage : EPackage| anEClass.includes()->selectByKind(EClass)->reject(doNotGenerateEClassifier())->including(anEClass).ePackage->asOrderedSet()->sortedBy(name))]
 #include "[aPackage.getRootPackage().name/]/[aPackage.getNamespacePathWithoutRoot()/][aPackage.name/]Package.hpp"
@@ -437,7 +437,7 @@ std::shared_ptr<ecore::EObject> [className/]::copy() const
 //*********************************
 [anEClass.generatePersistenceFunctionsImplementations()/]
 
-std::shared_ptr<[needNamespace(anEClass.ePackage, 'EClass')/]> [className/]::eStaticClass() const
+const std::shared_ptr<[needNamespace(anEClass.ePackage, 'EClass')/]>& [className/]::eStaticClass() const
 {
 	return [anEClass.getRootPackage().name/][getPackageAccess(anEClass, true)/]::[anEClass.ePackage.name/]Package::eInstance()->get[anEClass.getMemberNameUpperFirst()/]();
 }

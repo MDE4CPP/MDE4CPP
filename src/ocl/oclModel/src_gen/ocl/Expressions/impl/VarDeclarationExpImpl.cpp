@@ -477,7 +477,7 @@ void VarDeclarationExpImpl::saveContent(std::shared_ptr<persistence::interfaces:
 	}
 }
 
-std::shared_ptr<ecore::EClass> VarDeclarationExpImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& VarDeclarationExpImpl::eStaticClass() const
 {
 	return ocl::Expressions::ExpressionsPackage::eInstance()->getVarDeclarationExp_Class();
 }

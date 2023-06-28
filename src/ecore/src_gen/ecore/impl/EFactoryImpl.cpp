@@ -670,7 +670,7 @@ void EFactoryImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHan
 	}
 }
 
-std::shared_ptr<EClass> EFactoryImpl::eStaticClass() const
+const std::shared_ptr<EClass>& EFactoryImpl::eStaticClass() const
 {
 	return ecore::ecorePackage::eInstance()->getEFactory_Class();
 }

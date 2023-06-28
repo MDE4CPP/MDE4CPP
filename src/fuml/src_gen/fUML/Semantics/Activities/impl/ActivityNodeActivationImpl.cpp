@@ -706,7 +706,7 @@ void ActivityNodeActivationImpl::resolveReferences(const int featureID, std::vec
 
 		case fUML::Semantics::Activities::ActivitiesPackage::ACTIVITYNODEACTIVATION_ATTRIBUTE_INCOMINGEDGES:
 		{
-			std::shared_ptr<Bag<fUML::Semantics::Activities::ActivityEdgeInstance>> _incomingEdges = getIncomingEdges();
+			const std::shared_ptr<Bag<fUML::Semantics::Activities::ActivityEdgeInstance>>& _incomingEdges = getIncomingEdges();
 			for(const std::shared_ptr<ecore::EObject>& ref : references)
 			{
 				std::shared_ptr<fUML::Semantics::Activities::ActivityEdgeInstance>  _r = std::dynamic_pointer_cast<fUML::Semantics::Activities::ActivityEdgeInstance>(ref);
@@ -732,7 +732,7 @@ void ActivityNodeActivationImpl::resolveReferences(const int featureID, std::vec
 
 		case fUML::Semantics::Activities::ActivitiesPackage::ACTIVITYNODEACTIVATION_ATTRIBUTE_OUTGOINGEDGES:
 		{
-			std::shared_ptr<Bag<fUML::Semantics::Activities::ActivityEdgeInstance>> _outgoingEdges = getOutgoingEdges();
+			const std::shared_ptr<Bag<fUML::Semantics::Activities::ActivityEdgeInstance>>& _outgoingEdges = getOutgoingEdges();
 			for(const std::shared_ptr<ecore::EObject>& ref : references)
 			{
 				std::shared_ptr<fUML::Semantics::Activities::ActivityEdgeInstance>  _r = std::dynamic_pointer_cast<fUML::Semantics::Activities::ActivityEdgeInstance>(ref);
@@ -784,7 +784,7 @@ void ActivityNodeActivationImpl::saveContent(std::shared_ptr<persistence::interf
 	}
 }
 
-std::shared_ptr<ecore::EClass> ActivityNodeActivationImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& ActivityNodeActivationImpl::eStaticClass() const
 {
 	return fUML::Semantics::Activities::ActivitiesPackage::eInstance()->getActivityNodeActivation_Class();
 }
@@ -881,7 +881,7 @@ bool ActivityNodeActivationImpl::eSet(int featureID,  const std::shared_ptr<Any>
 	
 					if(eObjectList)
 					{
-						std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> _heldTokens = getHeldTokens();
+						const std::shared_ptr<Bag<fUML::Semantics::Activities::Token>>& _heldTokens = getHeldTokens();
 	
 						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{
@@ -926,7 +926,7 @@ bool ActivityNodeActivationImpl::eSet(int featureID,  const std::shared_ptr<Any>
 	
 					if(eObjectList)
 					{
-						std::shared_ptr<Bag<fUML::Semantics::Activities::ActivityEdgeInstance>> _incomingEdges = getIncomingEdges();
+						const std::shared_ptr<Bag<fUML::Semantics::Activities::ActivityEdgeInstance>>& _incomingEdges = getIncomingEdges();
 	
 						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{
@@ -1002,7 +1002,7 @@ bool ActivityNodeActivationImpl::eSet(int featureID,  const std::shared_ptr<Any>
 	
 					if(eObjectList)
 					{
-						std::shared_ptr<Bag<fUML::Semantics::Activities::ActivityEdgeInstance>> _outgoingEdges = getOutgoingEdges();
+						const std::shared_ptr<Bag<fUML::Semantics::Activities::ActivityEdgeInstance>>& _outgoingEdges = getOutgoingEdges();
 	
 						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{

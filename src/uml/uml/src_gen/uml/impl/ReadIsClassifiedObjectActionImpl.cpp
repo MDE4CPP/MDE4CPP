@@ -416,7 +416,7 @@ void ReadIsClassifiedObjectActionImpl::saveContent(std::shared_ptr<persistence::
 	}
 }
 
-std::shared_ptr<ecore::EClass> ReadIsClassifiedObjectActionImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& ReadIsClassifiedObjectActionImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getReadIsClassifiedObjectAction_Class();
 }

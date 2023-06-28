@@ -310,7 +310,7 @@ void ReadStructuralFeatureActionImpl::saveContent(std::shared_ptr<persistence::i
 	}
 }
 
-std::shared_ptr<ecore::EClass> ReadStructuralFeatureActionImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& ReadStructuralFeatureActionImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getReadStructuralFeatureAction_Class();
 }

@@ -187,7 +187,7 @@ void SemanticVisitorImpl::saveContent(std::shared_ptr<persistence::interfaces::X
 	}
 }
 
-std::shared_ptr<ecore::EClass> SemanticVisitorImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& SemanticVisitorImpl::eStaticClass() const
 {
 	return fUML::Semantics::Loci::LociPackage::eInstance()->getSemanticVisitor_Class();
 }

@@ -358,7 +358,7 @@ void SendSignalActionImpl::saveContent(std::shared_ptr<persistence::interfaces::
 	}
 }
 
-std::shared_ptr<ecore::EClass> SendSignalActionImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& SendSignalActionImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getSendSignalAction_Class();
 }

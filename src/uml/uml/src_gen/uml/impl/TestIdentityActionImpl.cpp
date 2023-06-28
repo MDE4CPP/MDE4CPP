@@ -381,7 +381,7 @@ void TestIdentityActionImpl::saveContent(std::shared_ptr<persistence::interfaces
 	}
 }
 
-std::shared_ptr<ecore::EClass> TestIdentityActionImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& TestIdentityActionImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getTestIdentityAction_Class();
 }

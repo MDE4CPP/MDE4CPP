@@ -327,7 +327,7 @@ void ExpansionNodeActivationImpl::saveContent(std::shared_ptr<persistence::inter
 	}
 }
 
-std::shared_ptr<ecore::EClass> ExpansionNodeActivationImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& ExpansionNodeActivationImpl::eStaticClass() const
 {
 	return fUML::Semantics::Actions::ActionsPackage::eInstance()->getExpansionNodeActivation_Class();
 }

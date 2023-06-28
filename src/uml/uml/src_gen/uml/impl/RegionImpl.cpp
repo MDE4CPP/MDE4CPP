@@ -526,7 +526,7 @@ void RegionImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandl
 	}
 }
 
-std::shared_ptr<ecore::EClass> RegionImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& RegionImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getRegion_Class();
 }
@@ -698,7 +698,7 @@ bool RegionImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 	
 					if(eObjectList)
 					{
-						std::shared_ptr<Bag<uml::Vertex>> _subvertex = getSubvertex();
+						const std::shared_ptr<Bag<uml::Vertex>>& _subvertex = getSubvertex();
 	
 						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{
@@ -743,7 +743,7 @@ bool RegionImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 	
 					if(eObjectList)
 					{
-						std::shared_ptr<Bag<uml::Transition>> _transition = getTransition();
+						const std::shared_ptr<Bag<uml::Transition>>& _transition = getTransition();
 	
 						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{

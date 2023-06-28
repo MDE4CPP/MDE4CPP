@@ -362,7 +362,7 @@ void ActivityGroupImpl::saveContent(std::shared_ptr<persistence::interfaces::XSa
 	}
 }
 
-std::shared_ptr<ecore::EClass> ActivityGroupImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& ActivityGroupImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getActivityGroup_Class();
 }

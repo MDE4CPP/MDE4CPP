@@ -326,7 +326,7 @@ void ConnectorEndImpl::saveContent(std::shared_ptr<persistence::interfaces::XSav
 	}
 }
 
-std::shared_ptr<ecore::EClass> ConnectorEndImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& ConnectorEndImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getConnectorEnd_Class();
 }

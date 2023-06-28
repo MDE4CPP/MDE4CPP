@@ -439,7 +439,7 @@ void StereotypeImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveH
 	}
 }
 
-std::shared_ptr<ecore::EClass> StereotypeImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& StereotypeImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getStereotype_Class();
 }
@@ -486,7 +486,7 @@ bool StereotypeImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 	
 					if(eObjectList)
 					{
-						std::shared_ptr<Bag<uml::Image>> _icon = getIcon();
+						const std::shared_ptr<Bag<uml::Image>>& _icon = getIcon();
 	
 						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{

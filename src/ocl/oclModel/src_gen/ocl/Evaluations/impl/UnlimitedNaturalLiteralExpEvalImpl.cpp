@@ -207,7 +207,7 @@ void UnlimitedNaturalLiteralExpEvalImpl::saveContent(std::shared_ptr<persistence
 	}
 }
 
-std::shared_ptr<ecore::EClass> UnlimitedNaturalLiteralExpEvalImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& UnlimitedNaturalLiteralExpEvalImpl::eStaticClass() const
 {
 	return ocl::Evaluations::EvaluationsPackage::eInstance()->getUnlimitedNaturalLiteralExpEval_Class();
 }

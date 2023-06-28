@@ -366,7 +366,7 @@ void CallBehaviorActionActivationImpl::saveContent(std::shared_ptr<persistence::
 	}
 }
 
-std::shared_ptr<ecore::EClass> CallBehaviorActionActivationImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& CallBehaviorActionActivationImpl::eStaticClass() const
 {
 	return fUML::Semantics::Actions::ActionsPackage::eInstance()->getCallBehaviorActionActivation_Class();
 }

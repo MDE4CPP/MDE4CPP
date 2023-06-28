@@ -638,7 +638,7 @@ void ArtifactImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHan
 	}
 }
 
-std::shared_ptr<ecore::EClass> ArtifactImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& ArtifactImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getArtifact_Class();
 }
@@ -725,7 +725,7 @@ bool ArtifactImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 	
 					if(eObjectList)
 					{
-						std::shared_ptr<Bag<uml::Manifestation>> _manifestation = getManifestation();
+						const std::shared_ptr<Bag<uml::Manifestation>>& _manifestation = getManifestation();
 	
 						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{
@@ -770,7 +770,7 @@ bool ArtifactImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 	
 					if(eObjectList)
 					{
-						std::shared_ptr<Bag<uml::Artifact>> _nestedArtifact = getNestedArtifact();
+						const std::shared_ptr<Bag<uml::Artifact>>& _nestedArtifact = getNestedArtifact();
 	
 						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{
@@ -815,7 +815,7 @@ bool ArtifactImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 	
 					if(eObjectList)
 					{
-						std::shared_ptr<Bag<uml::Property>> _ownedAttribute = getOwnedAttribute();
+						const std::shared_ptr<Bag<uml::Property>>& _ownedAttribute = getOwnedAttribute();
 	
 						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{
@@ -860,7 +860,7 @@ bool ArtifactImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 	
 					if(eObjectList)
 					{
-						std::shared_ptr<Bag<uml::Operation>> _ownedOperation = getOwnedOperation();
+						const std::shared_ptr<Bag<uml::Operation>>& _ownedOperation = getOwnedOperation();
 	
 						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{

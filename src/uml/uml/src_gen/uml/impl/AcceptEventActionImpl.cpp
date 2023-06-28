@@ -452,7 +452,7 @@ void AcceptEventActionImpl::saveContent(std::shared_ptr<persistence::interfaces:
 	}
 }
 
-std::shared_ptr<ecore::EClass> AcceptEventActionImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& AcceptEventActionImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getAcceptEventAction_Class();
 }
@@ -517,7 +517,7 @@ bool AcceptEventActionImpl::eSet(int featureID,  const std::shared_ptr<Any>& new
 	
 					if(eObjectList)
 					{
-						std::shared_ptr<Bag<uml::OutputPin>> _result = getResult();
+						const std::shared_ptr<Bag<uml::OutputPin>>& _result = getResult();
 	
 						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{
@@ -562,7 +562,7 @@ bool AcceptEventActionImpl::eSet(int featureID,  const std::shared_ptr<Any>& new
 	
 					if(eObjectList)
 					{
-						std::shared_ptr<Bag<uml::Trigger>> _trigger = getTrigger();
+						const std::shared_ptr<Bag<uml::Trigger>>& _trigger = getTrigger();
 	
 						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{

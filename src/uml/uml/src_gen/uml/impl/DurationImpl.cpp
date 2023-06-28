@@ -321,7 +321,7 @@ void DurationImpl::resolveReferences(const int featureID, std::vector<std::share
 	{
 		case uml::umlPackage::DURATION_ATTRIBUTE_OBSERVATION:
 		{
-			std::shared_ptr<Bag<uml::Observation>> _observation = getObservation();
+			const std::shared_ptr<Bag<uml::Observation>>& _observation = getObservation();
 			for(const std::shared_ptr<ecore::EObject>& ref : references)
 			{
 				std::shared_ptr<uml::Observation>  _r = std::dynamic_pointer_cast<uml::Observation>(ref);
@@ -375,7 +375,7 @@ void DurationImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHan
 	}
 }
 
-std::shared_ptr<ecore::EClass> DurationImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& DurationImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getDuration_Class();
 }
@@ -453,7 +453,7 @@ bool DurationImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 	
 					if(eObjectList)
 					{
-						std::shared_ptr<Bag<uml::Observation>> _observation = getObservation();
+						const std::shared_ptr<Bag<uml::Observation>>& _observation = getObservation();
 	
 						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{

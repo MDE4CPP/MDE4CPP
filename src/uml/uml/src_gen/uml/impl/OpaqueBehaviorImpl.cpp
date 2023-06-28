@@ -409,7 +409,7 @@ void OpaqueBehaviorImpl::saveContent(std::shared_ptr<persistence::interfaces::XS
 	}
 }
 
-std::shared_ptr<ecore::EClass> OpaqueBehaviorImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& OpaqueBehaviorImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getOpaqueBehavior_Class();
 }

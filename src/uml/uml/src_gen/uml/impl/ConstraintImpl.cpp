@@ -322,7 +322,7 @@ void ConstraintImpl::resolveReferences(const int featureID, std::vector<std::sha
 	{
 		case uml::umlPackage::CONSTRAINT_ATTRIBUTE_CONSTRAINEDELEMENT:
 		{
-			std::shared_ptr<Bag<uml::Element>> _constrainedElement = getConstrainedElement();
+			const std::shared_ptr<Bag<uml::Element>>& _constrainedElement = getConstrainedElement();
 			for(const std::shared_ptr<ecore::EObject>& ref : references)
 			{
 				std::shared_ptr<uml::Element>  _r = std::dynamic_pointer_cast<uml::Element>(ref);
@@ -385,7 +385,7 @@ void ConstraintImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveH
 	}
 }
 
-std::shared_ptr<ecore::EClass> ConstraintImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& ConstraintImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getConstraint_Class();
 }
@@ -439,7 +439,7 @@ bool ConstraintImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 	
 					if(eObjectList)
 					{
-						std::shared_ptr<Bag<uml::Element>> _constrainedElement = getConstrainedElement();
+						const std::shared_ptr<Bag<uml::Element>>& _constrainedElement = getConstrainedElement();
 	
 						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{

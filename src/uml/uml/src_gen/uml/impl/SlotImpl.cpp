@@ -364,7 +364,7 @@ void SlotImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler
 	}
 }
 
-std::shared_ptr<ecore::EClass> SlotImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& SlotImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getSlot_Class();
 }
@@ -480,7 +480,7 @@ bool SlotImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 	
 					if(eObjectList)
 					{
-						std::shared_ptr<Bag<uml::ValueSpecification>> _value = getValue();
+						const std::shared_ptr<Bag<uml::ValueSpecification>>& _value = getValue();
 	
 						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{

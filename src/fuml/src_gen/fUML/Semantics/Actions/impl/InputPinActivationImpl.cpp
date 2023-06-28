@@ -241,7 +241,7 @@ void InputPinActivationImpl::saveContent(std::shared_ptr<persistence::interfaces
 	}
 }
 
-std::shared_ptr<ecore::EClass> InputPinActivationImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& InputPinActivationImpl::eStaticClass() const
 {
 	return fUML::Semantics::Actions::ActionsPackage::eInstance()->getInputPinActivation_Class();
 }

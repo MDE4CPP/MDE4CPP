@@ -354,7 +354,7 @@ void ReadIsClassifiedObjectActionActivationImpl::saveContent(std::shared_ptr<per
 	}
 }
 
-std::shared_ptr<ecore::EClass> ReadIsClassifiedObjectActionActivationImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& ReadIsClassifiedObjectActionActivationImpl::eStaticClass() const
 {
 	return fUML::Semantics::Actions::ActionsPackage::eInstance()->getReadIsClassifiedObjectActionActivation_Class();
 }

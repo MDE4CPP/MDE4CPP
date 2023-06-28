@@ -292,7 +292,7 @@ void InvOrDefExpImpl::saveContent(std::shared_ptr<persistence::interfaces::XSave
 	}
 }
 
-std::shared_ptr<ecore::EClass> InvOrDefExpImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& InvOrDefExpImpl::eStaticClass() const
 {
 	return ocl::Expressions::ExpressionsPackage::eInstance()->getInvOrDefExp_Class();
 }

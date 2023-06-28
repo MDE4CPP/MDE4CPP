@@ -411,7 +411,7 @@ void EnumLiteralExpImpl::saveContent(std::shared_ptr<persistence::interfaces::XS
 	}
 }
 
-std::shared_ptr<ecore::EClass> EnumLiteralExpImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& EnumLiteralExpImpl::eStaticClass() const
 {
 	return ocl::Expressions::ExpressionsPackage::eInstance()->getEnumLiteralExp_Class();
 }

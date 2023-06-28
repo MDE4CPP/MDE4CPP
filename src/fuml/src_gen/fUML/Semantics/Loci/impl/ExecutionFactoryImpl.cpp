@@ -752,7 +752,7 @@ void ExecutionFactoryImpl::resolveReferences(const int featureID, std::vector<st
 	{
 		case fUML::Semantics::Loci::LociPackage::EXECUTIONFACTORY_ATTRIBUTE_BUILTINTYPES:
 		{
-			std::shared_ptr<Bag<uml::PrimitiveType>> _builtInTypes = getBuiltInTypes();
+			const std::shared_ptr<Bag<uml::PrimitiveType>>& _builtInTypes = getBuiltInTypes();
 			for(const std::shared_ptr<ecore::EObject>& ref : references)
 			{
 				std::shared_ptr<uml::PrimitiveType>  _r = std::dynamic_pointer_cast<uml::PrimitiveType>(ref);
@@ -778,7 +778,7 @@ void ExecutionFactoryImpl::resolveReferences(const int featureID, std::vector<st
 
 		case fUML::Semantics::Loci::LociPackage::EXECUTIONFACTORY_ATTRIBUTE_STRATEGIES:
 		{
-			std::shared_ptr<Bag<fUML::Semantics::Loci::SemanticStrategy>> _strategies = getStrategies();
+			const std::shared_ptr<Bag<fUML::Semantics::Loci::SemanticStrategy>>& _strategies = getStrategies();
 			for(const std::shared_ptr<ecore::EObject>& ref : references)
 			{
 				std::shared_ptr<fUML::Semantics::Loci::SemanticStrategy>  _r = std::dynamic_pointer_cast<fUML::Semantics::Loci::SemanticStrategy>(ref);
@@ -815,7 +815,7 @@ void ExecutionFactoryImpl::saveContent(std::shared_ptr<persistence::interfaces::
 	}
 }
 
-std::shared_ptr<ecore::EClass> ExecutionFactoryImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& ExecutionFactoryImpl::eStaticClass() const
 {
 	return fUML::Semantics::Loci::LociPackage::eInstance()->getExecutionFactory_Class();
 }
@@ -869,7 +869,7 @@ bool ExecutionFactoryImpl::eSet(int featureID,  const std::shared_ptr<Any>& newV
 	
 					if(eObjectList)
 					{
-						std::shared_ptr<Bag<uml::PrimitiveType>> _builtInTypes = getBuiltInTypes();
+						const std::shared_ptr<Bag<uml::PrimitiveType>>& _builtInTypes = getBuiltInTypes();
 	
 						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{
@@ -945,7 +945,7 @@ bool ExecutionFactoryImpl::eSet(int featureID,  const std::shared_ptr<Any>& newV
 	
 					if(eObjectList)
 					{
-						std::shared_ptr<Bag<fUML::Semantics::Loci::SemanticStrategy>> _strategies = getStrategies();
+						const std::shared_ptr<Bag<fUML::Semantics::Loci::SemanticStrategy>>& _strategies = getStrategies();
 	
 						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{

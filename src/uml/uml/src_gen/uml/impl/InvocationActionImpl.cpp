@@ -384,7 +384,7 @@ void InvocationActionImpl::saveContent(std::shared_ptr<persistence::interfaces::
 	}
 }
 
-std::shared_ptr<ecore::EClass> InvocationActionImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& InvocationActionImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getInvocationAction_Class();
 }
@@ -431,7 +431,7 @@ bool InvocationActionImpl::eSet(int featureID,  const std::shared_ptr<Any>& newV
 	
 					if(eObjectList)
 					{
-						std::shared_ptr<Bag<uml::InputPin>> _argument = getArgument();
+						const std::shared_ptr<Bag<uml::InputPin>>& _argument = getArgument();
 	
 						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{

@@ -508,7 +508,7 @@ void ParameterImpl::resolveReferences(const int featureID, std::vector<std::shar
 
 		case uml::umlPackage::PARAMETER_ATTRIBUTE_PARAMETERSET:
 		{
-			std::shared_ptr<Bag<uml::ParameterSet>> _parameterSet = getParameterSet();
+			const std::shared_ptr<Bag<uml::ParameterSet>>& _parameterSet = getParameterSet();
 			for(const std::shared_ptr<ecore::EObject>& ref : references)
 			{
 				std::shared_ptr<uml::ParameterSet>  _r = std::dynamic_pointer_cast<uml::ParameterSet>(ref);
@@ -619,7 +619,7 @@ void ParameterImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHa
 	}
 }
 
-std::shared_ptr<ecore::EClass> ParameterImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& ParameterImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getParameter_Class();
 }
@@ -846,7 +846,7 @@ bool ParameterImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 	
 					if(eObjectList)
 					{
-						std::shared_ptr<Bag<uml::ParameterSet>> _parameterSet = getParameterSet();
+						const std::shared_ptr<Bag<uml::ParameterSet>>& _parameterSet = getParameterSet();
 	
 						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{

@@ -704,7 +704,7 @@ void OclExpressionImpl::saveContent(std::shared_ptr<persistence::interfaces::XSa
 	}
 }
 
-std::shared_ptr<ecore::EClass> OclExpressionImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& OclExpressionImpl::eStaticClass() const
 {
 	return ocl::Expressions::ExpressionsPackage::eInstance()->getOclExpression_Class();
 }
@@ -949,7 +949,7 @@ bool OclExpressionImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValu
 	
 					if(eObjectList)
 					{
-						std::shared_ptr<Bag<ocl::Expressions::VarDeclarationExp>> _initializedElement = getInitializedElement();
+						const std::shared_ptr<Bag<ocl::Expressions::VarDeclarationExp>>& _initializedElement = getInitializedElement();
 	
 						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{

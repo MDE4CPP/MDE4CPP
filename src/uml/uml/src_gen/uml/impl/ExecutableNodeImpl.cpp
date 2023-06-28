@@ -326,7 +326,7 @@ void ExecutableNodeImpl::saveContent(std::shared_ptr<persistence::interfaces::XS
 	}
 }
 
-std::shared_ptr<ecore::EClass> ExecutableNodeImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& ExecutableNodeImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getExecutableNode_Class();
 }
@@ -369,7 +369,7 @@ bool ExecutableNodeImpl::eSet(int featureID,  const std::shared_ptr<Any>& newVal
 	
 					if(eObjectList)
 					{
-						std::shared_ptr<Bag<uml::ExceptionHandler>> _handler = getHandler();
+						const std::shared_ptr<Bag<uml::ExceptionHandler>>& _handler = getHandler();
 	
 						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{

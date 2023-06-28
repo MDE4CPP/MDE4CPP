@@ -363,7 +363,7 @@ void RemoveStructuralFeatureValueActionActivationImpl::saveContent(std::shared_p
 	}
 }
 
-std::shared_ptr<ecore::EClass> RemoveStructuralFeatureValueActionActivationImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& RemoveStructuralFeatureValueActionActivationImpl::eStaticClass() const
 {
 	return fUML::Semantics::Actions::ActionsPackage::eInstance()->getRemoveStructuralFeatureValueActionActivation_Class();
 }

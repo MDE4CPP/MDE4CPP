@@ -296,7 +296,7 @@ void AbstractionImpl::saveContent(std::shared_ptr<persistence::interfaces::XSave
 	}
 }
 
-std::shared_ptr<ecore::EClass> AbstractionImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& AbstractionImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getAbstraction_Class();
 }

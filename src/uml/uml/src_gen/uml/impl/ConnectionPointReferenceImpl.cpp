@@ -285,7 +285,7 @@ void ConnectionPointReferenceImpl::resolveReferences(const int featureID, std::v
 	{
 		case uml::umlPackage::CONNECTIONPOINTREFERENCE_ATTRIBUTE_ENTRY:
 		{
-			std::shared_ptr<Bag<uml::Pseudostate>> _entry = getEntry();
+			const std::shared_ptr<Bag<uml::Pseudostate>>& _entry = getEntry();
 			for(const std::shared_ptr<ecore::EObject>& ref : references)
 			{
 				std::shared_ptr<uml::Pseudostate>  _r = std::dynamic_pointer_cast<uml::Pseudostate>(ref);
@@ -299,7 +299,7 @@ void ConnectionPointReferenceImpl::resolveReferences(const int featureID, std::v
 
 		case uml::umlPackage::CONNECTIONPOINTREFERENCE_ATTRIBUTE_EXIT:
 		{
-			std::shared_ptr<Bag<uml::Pseudostate>> _exit = getExit();
+			const std::shared_ptr<Bag<uml::Pseudostate>>& _exit = getExit();
 			for(const std::shared_ptr<ecore::EObject>& ref : references)
 			{
 				std::shared_ptr<uml::Pseudostate>  _r = std::dynamic_pointer_cast<uml::Pseudostate>(ref);
@@ -356,7 +356,7 @@ void ConnectionPointReferenceImpl::saveContent(std::shared_ptr<persistence::inte
 	}
 }
 
-std::shared_ptr<ecore::EClass> ConnectionPointReferenceImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& ConnectionPointReferenceImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getConnectionPointReference_Class();
 }
@@ -410,7 +410,7 @@ bool ConnectionPointReferenceImpl::eSet(int featureID,  const std::shared_ptr<An
 	
 					if(eObjectList)
 					{
-						std::shared_ptr<Bag<uml::Pseudostate>> _entry = getEntry();
+						const std::shared_ptr<Bag<uml::Pseudostate>>& _entry = getEntry();
 	
 						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{
@@ -455,7 +455,7 @@ bool ConnectionPointReferenceImpl::eSet(int featureID,  const std::shared_ptr<An
 	
 					if(eObjectList)
 					{
-						std::shared_ptr<Bag<uml::Pseudostate>> _exit = getExit();
+						const std::shared_ptr<Bag<uml::Pseudostate>>& _exit = getExit();
 	
 						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{

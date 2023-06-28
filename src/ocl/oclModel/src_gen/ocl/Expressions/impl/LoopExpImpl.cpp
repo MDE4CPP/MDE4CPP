@@ -514,7 +514,7 @@ void LoopExpImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHand
 	}
 }
 
-std::shared_ptr<ecore::EClass> LoopExpImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& LoopExpImpl::eStaticClass() const
 {
 	return ocl::Expressions::ExpressionsPackage::eInstance()->getLoopExp_Class();
 }
@@ -646,7 +646,7 @@ bool LoopExpImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 	
 					if(eObjectList)
 					{
-						std::shared_ptr<Bag<ocl::Expressions::OclExpression>> _iterator = getIterator();
+						const std::shared_ptr<Bag<ocl::Expressions::OclExpression>>& _iterator = getIterator();
 	
 						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{

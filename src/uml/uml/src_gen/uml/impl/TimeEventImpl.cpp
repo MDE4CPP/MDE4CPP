@@ -331,7 +331,7 @@ void TimeEventImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHa
 	}
 }
 
-std::shared_ptr<ecore::EClass> TimeEventImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& TimeEventImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getTimeEvent_Class();
 }

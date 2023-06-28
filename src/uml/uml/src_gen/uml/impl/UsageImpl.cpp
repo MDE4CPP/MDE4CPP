@@ -251,7 +251,7 @@ void UsageImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandle
 	}
 }
 
-std::shared_ptr<ecore::EClass> UsageImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& UsageImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getUsage_Class();
 }

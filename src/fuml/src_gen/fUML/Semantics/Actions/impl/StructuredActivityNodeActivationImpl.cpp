@@ -571,7 +571,7 @@ void StructuredActivityNodeActivationImpl::saveContent(std::shared_ptr<persisten
 	}
 }
 
-std::shared_ptr<ecore::EClass> StructuredActivityNodeActivationImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& StructuredActivityNodeActivationImpl::eStaticClass() const
 {
 	return fUML::Semantics::Actions::ActionsPackage::eInstance()->getStructuredActivityNodeActivation_Class();
 }

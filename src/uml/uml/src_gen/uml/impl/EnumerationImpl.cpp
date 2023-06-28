@@ -371,7 +371,7 @@ void EnumerationImpl::saveContent(std::shared_ptr<persistence::interfaces::XSave
 	}
 }
 
-std::shared_ptr<ecore::EClass> EnumerationImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& EnumerationImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getEnumeration_Class();
 }
@@ -414,7 +414,7 @@ bool EnumerationImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 	
 					if(eObjectList)
 					{
-						std::shared_ptr<Bag<uml::EnumerationLiteral>> _ownedLiteral = getOwnedLiteral();
+						const std::shared_ptr<Bag<uml::EnumerationLiteral>>& _ownedLiteral = getOwnedLiteral();
 	
 						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{

@@ -298,7 +298,7 @@ void TypeImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler
 	}
 }
 
-std::shared_ptr<ecore::EClass> TypeImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& TypeImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getType_Class();
 }

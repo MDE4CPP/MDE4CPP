@@ -383,7 +383,7 @@ void SendSignalActionActivationImpl::saveContent(std::shared_ptr<persistence::in
 	}
 }
 
-std::shared_ptr<ecore::EClass> SendSignalActionActivationImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& SendSignalActionActivationImpl::eStaticClass() const
 {
 	return fUML::Semantics::Actions::ActionsPackage::eInstance()->getSendSignalActionActivation_Class();
 }

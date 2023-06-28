@@ -440,7 +440,7 @@ void OperatorExpImpl::saveContent(std::shared_ptr<persistence::interfaces::XSave
 	}
 }
 
-std::shared_ptr<ecore::EClass> OperatorExpImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& OperatorExpImpl::eStaticClass() const
 {
 	return ocl::Expressions::ExpressionsPackage::eInstance()->getOperatorExp_Class();
 }

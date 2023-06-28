@@ -375,7 +375,7 @@ void CallExpImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHand
 	}
 }
 
-std::shared_ptr<ecore::EClass> CallExpImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& CallExpImpl::eStaticClass() const
 {
 	return ocl::Expressions::ExpressionsPackage::eInstance()->getCallExp_Class();
 }

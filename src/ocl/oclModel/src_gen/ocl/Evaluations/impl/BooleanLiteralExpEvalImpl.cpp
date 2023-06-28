@@ -205,7 +205,7 @@ void BooleanLiteralExpEvalImpl::saveContent(std::shared_ptr<persistence::interfa
 	}
 }
 
-std::shared_ptr<ecore::EClass> BooleanLiteralExpEvalImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& BooleanLiteralExpEvalImpl::eStaticClass() const
 {
 	return ocl::Evaluations::EvaluationsPackage::eInstance()->getBooleanLiteralExpEval_Class();
 }

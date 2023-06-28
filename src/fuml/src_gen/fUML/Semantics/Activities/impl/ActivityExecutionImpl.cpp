@@ -437,7 +437,7 @@ void ActivityExecutionImpl::saveContent(std::shared_ptr<persistence::interfaces:
 	}
 }
 
-std::shared_ptr<ecore::EClass> ActivityExecutionImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& ActivityExecutionImpl::eStaticClass() const
 {
 	return fUML::Semantics::Activities::ActivitiesPackage::eInstance()->getActivityExecution_Class();
 }

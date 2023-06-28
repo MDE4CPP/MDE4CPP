@@ -251,7 +251,7 @@ void AnyReceiveEventImpl::saveContent(std::shared_ptr<persistence::interfaces::X
 	}
 }
 
-std::shared_ptr<ecore::EClass> AnyReceiveEventImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& AnyReceiveEventImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getAnyReceiveEvent_Class();
 }

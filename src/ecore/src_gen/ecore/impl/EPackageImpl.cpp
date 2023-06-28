@@ -182,7 +182,7 @@ std::shared_ptr<ecore::EClassifier> EPackageImpl::getEClassifier(std::string nam
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
-	std::shared_ptr<Bag<EClassifier>> classifierList = getEClassifiers();
+	const std::shared_ptr<Bag<EClassifier>>& classifierList = getEClassifiers();
     for (const std::shared_ptr<EClassifier>& c : *classifierList)
     {
         if(c->getName()==name)
@@ -465,7 +465,7 @@ void EPackageImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHan
 	}
 }
 
-std::shared_ptr<EClass> EPackageImpl::eStaticClass() const
+const std::shared_ptr<EClass>& EPackageImpl::eStaticClass() const
 {
 	return ecore::ecorePackage::eInstance()->getEPackage_Class();
 }
@@ -531,7 +531,7 @@ bool EPackageImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 	
 					if(eObjectList)
 					{
-						std::shared_ptr<Bag<ecore::EClassifier>> _eClassifiers = getEClassifiers();
+						const std::shared_ptr<Bag<ecore::EClassifier>>& _eClassifiers = getEClassifiers();
 	
 						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{
@@ -607,7 +607,7 @@ bool EPackageImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 	
 					if(eObjectList)
 					{
-						std::shared_ptr<Bag<ecore::EPackage>> _eSubpackages = getESubpackages();
+						const std::shared_ptr<Bag<ecore::EPackage>>& _eSubpackages = getESubpackages();
 	
 						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{

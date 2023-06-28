@@ -344,7 +344,7 @@ void InteractionFragmentImpl::resolveReferences(const int featureID, std::vector
 	{
 		case uml::umlPackage::INTERACTIONFRAGMENT_ATTRIBUTE_COVERED:
 		{
-			std::shared_ptr<Bag<uml::Lifeline>> _covered = getCovered();
+			const std::shared_ptr<Bag<uml::Lifeline>>& _covered = getCovered();
 			for(const std::shared_ptr<ecore::EObject>& ref : references)
 			{
 				std::shared_ptr<uml::Lifeline>  _r = std::dynamic_pointer_cast<uml::Lifeline>(ref);
@@ -415,7 +415,7 @@ void InteractionFragmentImpl::saveContent(std::shared_ptr<persistence::interface
 	}
 }
 
-std::shared_ptr<ecore::EClass> InteractionFragmentImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& InteractionFragmentImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getInteractionFragment_Class();
 }
@@ -476,7 +476,7 @@ bool InteractionFragmentImpl::eSet(int featureID,  const std::shared_ptr<Any>& n
 	
 					if(eObjectList)
 					{
-						std::shared_ptr<Bag<uml::Lifeline>> _covered = getCovered();
+						const std::shared_ptr<Bag<uml::Lifeline>>& _covered = getCovered();
 	
 						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{
@@ -583,7 +583,7 @@ bool InteractionFragmentImpl::eSet(int featureID,  const std::shared_ptr<Any>& n
 	
 					if(eObjectList)
 					{
-						std::shared_ptr<Bag<uml::GeneralOrdering>> _generalOrdering = getGeneralOrdering();
+						const std::shared_ptr<Bag<uml::GeneralOrdering>>& _generalOrdering = getGeneralOrdering();
 	
 						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{

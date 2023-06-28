@@ -203,7 +203,7 @@ void PrimitiveLiteralExpEvalImpl::saveContent(std::shared_ptr<persistence::inter
 	}
 }
 
-std::shared_ptr<ecore::EClass> PrimitiveLiteralExpEvalImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& PrimitiveLiteralExpEvalImpl::eStaticClass() const
 {
 	return ocl::Evaluations::EvaluationsPackage::eInstance()->getPrimitiveLiteralExpEval_Class();
 }

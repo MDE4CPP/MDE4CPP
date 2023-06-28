@@ -255,7 +255,7 @@ void ConsiderIgnoreFragmentImpl::resolveReferences(const int featureID, std::vec
 	{
 		case uml::umlPackage::CONSIDERIGNOREFRAGMENT_ATTRIBUTE_MESSAGE:
 		{
-			std::shared_ptr<Bag<uml::NamedElement>> _message = getMessage();
+			const std::shared_ptr<Bag<uml::NamedElement>>& _message = getMessage();
 			for(const std::shared_ptr<ecore::EObject>& ref : references)
 			{
 				std::shared_ptr<uml::NamedElement>  _r = std::dynamic_pointer_cast<uml::NamedElement>(ref);
@@ -301,7 +301,7 @@ void ConsiderIgnoreFragmentImpl::saveContent(std::shared_ptr<persistence::interf
 	}
 }
 
-std::shared_ptr<ecore::EClass> ConsiderIgnoreFragmentImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& ConsiderIgnoreFragmentImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getConsiderIgnoreFragment_Class();
 }
@@ -344,7 +344,7 @@ bool ConsiderIgnoreFragmentImpl::eSet(int featureID,  const std::shared_ptr<Any>
 	
 					if(eObjectList)
 					{
-						std::shared_ptr<Bag<uml::NamedElement>> _message = getMessage();
+						const std::shared_ptr<Bag<uml::NamedElement>>& _message = getMessage();
 	
 						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{

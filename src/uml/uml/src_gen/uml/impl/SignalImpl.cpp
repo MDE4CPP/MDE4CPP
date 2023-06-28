@@ -371,7 +371,7 @@ void SignalImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandl
 	}
 }
 
-std::shared_ptr<ecore::EClass> SignalImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& SignalImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getSignal_Class();
 }
@@ -414,7 +414,7 @@ bool SignalImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 	
 					if(eObjectList)
 					{
-						std::shared_ptr<Bag<uml::Property>> _ownedAttribute = getOwnedAttribute();
+						const std::shared_ptr<Bag<uml::Property>>& _ownedAttribute = getOwnedAttribute();
 	
 						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{

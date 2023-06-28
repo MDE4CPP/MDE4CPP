@@ -341,7 +341,7 @@ void ReclassifyObjectActionImpl::resolveReferences(const int featureID, std::vec
 	{
 		case uml::umlPackage::RECLASSIFYOBJECTACTION_ATTRIBUTE_NEWCLASSIFIER:
 		{
-			std::shared_ptr<Bag<uml::Classifier>> _newClassifier = getNewClassifier();
+			const std::shared_ptr<Bag<uml::Classifier>>& _newClassifier = getNewClassifier();
 			for(const std::shared_ptr<ecore::EObject>& ref : references)
 			{
 				std::shared_ptr<uml::Classifier>  _r = std::dynamic_pointer_cast<uml::Classifier>(ref);
@@ -355,7 +355,7 @@ void ReclassifyObjectActionImpl::resolveReferences(const int featureID, std::vec
 
 		case uml::umlPackage::RECLASSIFYOBJECTACTION_ATTRIBUTE_OLDCLASSIFIER:
 		{
-			std::shared_ptr<Bag<uml::Classifier>> _oldClassifier = getOldClassifier();
+			const std::shared_ptr<Bag<uml::Classifier>>& _oldClassifier = getOldClassifier();
 			for(const std::shared_ptr<ecore::EObject>& ref : references)
 			{
 				std::shared_ptr<uml::Classifier>  _r = std::dynamic_pointer_cast<uml::Classifier>(ref);
@@ -417,7 +417,7 @@ void ReclassifyObjectActionImpl::saveContent(std::shared_ptr<persistence::interf
 	}
 }
 
-std::shared_ptr<ecore::EClass> ReclassifyObjectActionImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& ReclassifyObjectActionImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getReclassifyObjectAction_Class();
 }
@@ -486,7 +486,7 @@ bool ReclassifyObjectActionImpl::eSet(int featureID,  const std::shared_ptr<Any>
 	
 					if(eObjectList)
 					{
-						std::shared_ptr<Bag<uml::Classifier>> _newClassifier = getNewClassifier();
+						const std::shared_ptr<Bag<uml::Classifier>>& _newClassifier = getNewClassifier();
 	
 						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{
@@ -562,7 +562,7 @@ bool ReclassifyObjectActionImpl::eSet(int featureID,  const std::shared_ptr<Any>
 	
 					if(eObjectList)
 					{
-						std::shared_ptr<Bag<uml::Classifier>> _oldClassifier = getOldClassifier();
+						const std::shared_ptr<Bag<uml::Classifier>>& _oldClassifier = getOldClassifier();
 	
 						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{

@@ -383,7 +383,7 @@ void PrePostBodyListExpImpl::resolveReferences(const int featureID, std::vector<
 	{
 		case ocl::Expressions::ExpressionsPackage::PREPOSTBODYLISTEXP_ATTRIBUTE_BODYEXPRESSIONLIST:
 		{
-			std::shared_ptr<Bag<ocl::Expressions::PrePostBodyExp>> _bodyExpressionList = getBodyExpressionList();
+			const std::shared_ptr<Bag<ocl::Expressions::PrePostBodyExp>>& _bodyExpressionList = getBodyExpressionList();
 			for(const std::shared_ptr<ecore::EObject>& ref : references)
 			{
 				std::shared_ptr<ocl::Expressions::PrePostBodyExp>  _r = std::dynamic_pointer_cast<ocl::Expressions::PrePostBodyExp>(ref);
@@ -397,7 +397,7 @@ void PrePostBodyListExpImpl::resolveReferences(const int featureID, std::vector<
 
 		case ocl::Expressions::ExpressionsPackage::PREPOSTBODYLISTEXP_ATTRIBUTE_POSTEXPRESSIONLIST:
 		{
-			std::shared_ptr<Bag<ocl::Expressions::PrePostBodyExp>> _postExpressionList = getPostExpressionList();
+			const std::shared_ptr<Bag<ocl::Expressions::PrePostBodyExp>>& _postExpressionList = getPostExpressionList();
 			for(const std::shared_ptr<ecore::EObject>& ref : references)
 			{
 				std::shared_ptr<ocl::Expressions::PrePostBodyExp>  _r = std::dynamic_pointer_cast<ocl::Expressions::PrePostBodyExp>(ref);
@@ -411,7 +411,7 @@ void PrePostBodyListExpImpl::resolveReferences(const int featureID, std::vector<
 
 		case ocl::Expressions::ExpressionsPackage::PREPOSTBODYLISTEXP_ATTRIBUTE_PREEXPRESSIONLIST:
 		{
-			std::shared_ptr<Bag<ocl::Expressions::PrePostBodyExp>> _preExpressionList = getPreExpressionList();
+			const std::shared_ptr<Bag<ocl::Expressions::PrePostBodyExp>>& _preExpressionList = getPreExpressionList();
 			for(const std::shared_ptr<ecore::EObject>& ref : references)
 			{
 				std::shared_ptr<ocl::Expressions::PrePostBodyExp>  _r = std::dynamic_pointer_cast<ocl::Expressions::PrePostBodyExp>(ref);
@@ -457,7 +457,7 @@ void PrePostBodyListExpImpl::saveContent(std::shared_ptr<persistence::interfaces
 	}
 }
 
-std::shared_ptr<ecore::EClass> PrePostBodyListExpImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& PrePostBodyListExpImpl::eStaticClass() const
 {
 	return ocl::Expressions::ExpressionsPackage::eInstance()->getPrePostBodyListExp_Class();
 }
@@ -508,7 +508,7 @@ bool PrePostBodyListExpImpl::eSet(int featureID,  const std::shared_ptr<Any>& ne
 	
 					if(eObjectList)
 					{
-						std::shared_ptr<Bag<ocl::Expressions::PrePostBodyExp>> _bodyExpressionList = getBodyExpressionList();
+						const std::shared_ptr<Bag<ocl::Expressions::PrePostBodyExp>>& _bodyExpressionList = getBodyExpressionList();
 	
 						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{
@@ -553,7 +553,7 @@ bool PrePostBodyListExpImpl::eSet(int featureID,  const std::shared_ptr<Any>& ne
 	
 					if(eObjectList)
 					{
-						std::shared_ptr<Bag<ocl::Expressions::PrePostBodyExp>> _postExpressionList = getPostExpressionList();
+						const std::shared_ptr<Bag<ocl::Expressions::PrePostBodyExp>>& _postExpressionList = getPostExpressionList();
 	
 						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{
@@ -598,7 +598,7 @@ bool PrePostBodyListExpImpl::eSet(int featureID,  const std::shared_ptr<Any>& ne
 	
 					if(eObjectList)
 					{
-						std::shared_ptr<Bag<ocl::Expressions::PrePostBodyExp>> _preExpressionList = getPreExpressionList();
+						const std::shared_ptr<Bag<ocl::Expressions::PrePostBodyExp>>& _preExpressionList = getPreExpressionList();
 	
 						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{

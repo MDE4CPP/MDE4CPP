@@ -363,7 +363,7 @@ void InitOrDerValueListExpImpl::resolveReferences(const int featureID, std::vect
 	{
 		case ocl::Expressions::ExpressionsPackage::INITORDERVALUELISTEXP_ATTRIBUTE_DEREXPRESSIONLIST:
 		{
-			std::shared_ptr<Bag<ocl::Expressions::InitOrDerValueExp>> _derExpressionList = getDerExpressionList();
+			const std::shared_ptr<Bag<ocl::Expressions::InitOrDerValueExp>>& _derExpressionList = getDerExpressionList();
 			for(const std::shared_ptr<ecore::EObject>& ref : references)
 			{
 				std::shared_ptr<ocl::Expressions::InitOrDerValueExp>  _r = std::dynamic_pointer_cast<ocl::Expressions::InitOrDerValueExp>(ref);
@@ -377,7 +377,7 @@ void InitOrDerValueListExpImpl::resolveReferences(const int featureID, std::vect
 
 		case ocl::Expressions::ExpressionsPackage::INITORDERVALUELISTEXP_ATTRIBUTE_INITEXPRESSIONLIST:
 		{
-			std::shared_ptr<Bag<ocl::Expressions::InitOrDerValueExp>> _initExpressionList = getInitExpressionList();
+			const std::shared_ptr<Bag<ocl::Expressions::InitOrDerValueExp>>& _initExpressionList = getInitExpressionList();
 			for(const std::shared_ptr<ecore::EObject>& ref : references)
 			{
 				std::shared_ptr<ocl::Expressions::InitOrDerValueExp>  _r = std::dynamic_pointer_cast<ocl::Expressions::InitOrDerValueExp>(ref);
@@ -422,7 +422,7 @@ void InitOrDerValueListExpImpl::saveContent(std::shared_ptr<persistence::interfa
 	}
 }
 
-std::shared_ptr<ecore::EClass> InitOrDerValueListExpImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& InitOrDerValueListExpImpl::eStaticClass() const
 {
 	return ocl::Expressions::ExpressionsPackage::eInstance()->getInitOrDerValueListExp_Class();
 }
@@ -469,7 +469,7 @@ bool InitOrDerValueListExpImpl::eSet(int featureID,  const std::shared_ptr<Any>&
 	
 					if(eObjectList)
 					{
-						std::shared_ptr<Bag<ocl::Expressions::InitOrDerValueExp>> _derExpressionList = getDerExpressionList();
+						const std::shared_ptr<Bag<ocl::Expressions::InitOrDerValueExp>>& _derExpressionList = getDerExpressionList();
 	
 						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{
@@ -514,7 +514,7 @@ bool InitOrDerValueListExpImpl::eSet(int featureID,  const std::shared_ptr<Any>&
 	
 					if(eObjectList)
 					{
-						std::shared_ptr<Bag<ocl::Expressions::InitOrDerValueExp>> _initExpressionList = getInitExpressionList();
+						const std::shared_ptr<Bag<ocl::Expressions::InitOrDerValueExp>>& _initExpressionList = getInitExpressionList();
 	
 						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{

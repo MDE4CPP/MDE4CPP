@@ -207,7 +207,7 @@ void RealLiteralExpEvalImpl::saveContent(std::shared_ptr<persistence::interfaces
 	}
 }
 
-std::shared_ptr<ecore::EClass> RealLiteralExpEvalImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& RealLiteralExpEvalImpl::eStaticClass() const
 {
 	return ocl::Evaluations::EvaluationsPackage::eInstance()->getRealLiteralExpEval_Class();
 }

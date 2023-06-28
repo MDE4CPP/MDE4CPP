@@ -512,7 +512,7 @@ void LoopNodeImpl::resolveReferences(const int featureID, std::vector<std::share
 	{
 		case uml::umlPackage::LOOPNODE_ATTRIBUTE_BODYOUTPUT:
 		{
-			std::shared_ptr<Bag<uml::OutputPin>> _bodyOutput = getBodyOutput();
+			const std::shared_ptr<Bag<uml::OutputPin>>& _bodyOutput = getBodyOutput();
 			for(const std::shared_ptr<ecore::EObject>& ref : references)
 			{
 				std::shared_ptr<uml::OutputPin>  _r = std::dynamic_pointer_cast<uml::OutputPin>(ref);
@@ -526,7 +526,7 @@ void LoopNodeImpl::resolveReferences(const int featureID, std::vector<std::share
 
 		case uml::umlPackage::LOOPNODE_ATTRIBUTE_BODYPART:
 		{
-			std::shared_ptr<Bag<uml::ExecutableNode>> _bodyPart = getBodyPart();
+			const std::shared_ptr<Bag<uml::ExecutableNode>>& _bodyPart = getBodyPart();
 			for(const std::shared_ptr<ecore::EObject>& ref : references)
 			{
 				std::shared_ptr<uml::ExecutableNode>  _r = std::dynamic_pointer_cast<uml::ExecutableNode>(ref);
@@ -552,7 +552,7 @@ void LoopNodeImpl::resolveReferences(const int featureID, std::vector<std::share
 
 		case uml::umlPackage::LOOPNODE_ATTRIBUTE_SETUPPART:
 		{
-			std::shared_ptr<Bag<uml::ExecutableNode>> _setupPart = getSetupPart();
+			const std::shared_ptr<Bag<uml::ExecutableNode>>& _setupPart = getSetupPart();
 			for(const std::shared_ptr<ecore::EObject>& ref : references)
 			{
 				std::shared_ptr<uml::ExecutableNode>  _r = std::dynamic_pointer_cast<uml::ExecutableNode>(ref);
@@ -566,7 +566,7 @@ void LoopNodeImpl::resolveReferences(const int featureID, std::vector<std::share
 
 		case uml::umlPackage::LOOPNODE_ATTRIBUTE_TEST:
 		{
-			std::shared_ptr<Bag<uml::ExecutableNode>> _test = getTest();
+			const std::shared_ptr<Bag<uml::ExecutableNode>>& _test = getTest();
 			for(const std::shared_ptr<ecore::EObject>& ref : references)
 			{
 				std::shared_ptr<uml::ExecutableNode>  _r = std::dynamic_pointer_cast<uml::ExecutableNode>(ref);
@@ -645,7 +645,7 @@ void LoopNodeImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHan
 	}
 }
 
-std::shared_ptr<ecore::EClass> LoopNodeImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& LoopNodeImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getLoopNode_Class();
 }
@@ -720,7 +720,7 @@ bool LoopNodeImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 	
 					if(eObjectList)
 					{
-						std::shared_ptr<Bag<uml::OutputPin>> _bodyOutput = getBodyOutput();
+						const std::shared_ptr<Bag<uml::OutputPin>>& _bodyOutput = getBodyOutput();
 	
 						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{
@@ -765,7 +765,7 @@ bool LoopNodeImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 	
 					if(eObjectList)
 					{
-						std::shared_ptr<Bag<uml::ExecutableNode>> _bodyPart = getBodyPart();
+						const std::shared_ptr<Bag<uml::ExecutableNode>>& _bodyPart = getBodyPart();
 	
 						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{
@@ -855,7 +855,7 @@ bool LoopNodeImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 	
 					if(eObjectList)
 					{
-						std::shared_ptr<Bag<uml::OutputPin>> _loopVariable = getLoopVariable();
+						const std::shared_ptr<Bag<uml::OutputPin>>& _loopVariable = getLoopVariable();
 	
 						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{
@@ -900,7 +900,7 @@ bool LoopNodeImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 	
 					if(eObjectList)
 					{
-						std::shared_ptr<Bag<uml::InputPin>> _loopVariableInput = getLoopVariableInput();
+						const std::shared_ptr<Bag<uml::InputPin>>& _loopVariableInput = getLoopVariableInput();
 	
 						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{
@@ -945,7 +945,7 @@ bool LoopNodeImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 	
 					if(eObjectList)
 					{
-						std::shared_ptr<Bag<uml::OutputPin>> _result = getResult();
+						const std::shared_ptr<Bag<uml::OutputPin>>& _result = getResult();
 	
 						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{
@@ -990,7 +990,7 @@ bool LoopNodeImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 	
 					if(eObjectList)
 					{
-						std::shared_ptr<Bag<uml::ExecutableNode>> _setupPart = getSetupPart();
+						const std::shared_ptr<Bag<uml::ExecutableNode>>& _setupPart = getSetupPart();
 	
 						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{
@@ -1035,7 +1035,7 @@ bool LoopNodeImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 	
 					if(eObjectList)
 					{
-						std::shared_ptr<Bag<uml::ExecutableNode>> _test = getTest();
+						const std::shared_ptr<Bag<uml::ExecutableNode>>& _test = getTest();
 	
 						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{

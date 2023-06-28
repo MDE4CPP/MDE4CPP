@@ -322,7 +322,7 @@ void ReadSelfActionActivationImpl::saveContent(std::shared_ptr<persistence::inte
 	}
 }
 
-std::shared_ptr<ecore::EClass> ReadSelfActionActivationImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& ReadSelfActionActivationImpl::eStaticClass() const
 {
 	return fUML::Semantics::Actions::ActionsPackage::eInstance()->getReadSelfActionActivation_Class();
 }

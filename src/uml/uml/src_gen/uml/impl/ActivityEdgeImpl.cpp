@@ -521,7 +521,7 @@ void ActivityEdgeImpl::resolveReferences(const int featureID, std::vector<std::s
 
 		case uml::umlPackage::ACTIVITYEDGE_ATTRIBUTE_INPARTITION:
 		{
-			std::shared_ptr<Subset<uml::ActivityPartition, uml::ActivityGroup>> _inPartition = getInPartition();
+			const std::shared_ptr<Subset<uml::ActivityPartition, uml::ActivityGroup>>& _inPartition = getInPartition();
 			for(const std::shared_ptr<ecore::EObject>& ref : references)
 			{
 				std::shared_ptr<uml::ActivityPartition>  _r = std::dynamic_pointer_cast<uml::ActivityPartition>(ref);
@@ -559,7 +559,7 @@ void ActivityEdgeImpl::resolveReferences(const int featureID, std::vector<std::s
 
 		case uml::umlPackage::ACTIVITYEDGE_ATTRIBUTE_REDEFINEDEDGE:
 		{
-			std::shared_ptr<Subset<uml::ActivityEdge, uml::RedefinableElement>> _redefinedEdge = getRedefinedEdge();
+			const std::shared_ptr<Subset<uml::ActivityEdge, uml::RedefinableElement>>& _redefinedEdge = getRedefinedEdge();
 			for(const std::shared_ptr<ecore::EObject>& ref : references)
 			{
 				std::shared_ptr<uml::ActivityEdge>  _r = std::dynamic_pointer_cast<uml::ActivityEdge>(ref);
@@ -644,7 +644,7 @@ void ActivityEdgeImpl::saveContent(std::shared_ptr<persistence::interfaces::XSav
 	}
 }
 
-std::shared_ptr<ecore::EClass> ActivityEdgeImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& ActivityEdgeImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getActivityEdge_Class();
 }
@@ -791,7 +791,7 @@ bool ActivityEdgeImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue
 	
 					if(eObjectList)
 					{
-						std::shared_ptr<Bag<uml::ActivityPartition>> _inPartition = getInPartition();
+						const std::shared_ptr<Bag<uml::ActivityPartition>>& _inPartition = getInPartition();
 	
 						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{
@@ -898,7 +898,7 @@ bool ActivityEdgeImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue
 	
 					if(eObjectList)
 					{
-						std::shared_ptr<Bag<uml::ActivityEdge>> _redefinedEdge = getRedefinedEdge();
+						const std::shared_ptr<Bag<uml::ActivityEdge>>& _redefinedEdge = getRedefinedEdge();
 	
 						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{

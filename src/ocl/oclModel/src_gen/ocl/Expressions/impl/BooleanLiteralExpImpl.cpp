@@ -378,7 +378,7 @@ void BooleanLiteralExpImpl::saveContent(std::shared_ptr<persistence::interfaces:
 	}
 }
 
-std::shared_ptr<ecore::EClass> BooleanLiteralExpImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& BooleanLiteralExpImpl::eStaticClass() const
 {
 	return ocl::Expressions::ExpressionsPackage::eInstance()->getBooleanLiteralExp_Class();
 }

@@ -206,7 +206,7 @@ void FlowFinalNodeActivationImpl::saveContent(std::shared_ptr<persistence::inter
 	}
 }
 
-std::shared_ptr<ecore::EClass> FlowFinalNodeActivationImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& FlowFinalNodeActivationImpl::eStaticClass() const
 {
 	return fUML::Semantics::Activities::ActivitiesPackage::eInstance()->getFlowFinalNodeActivation_Class();
 }

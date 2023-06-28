@@ -284,7 +284,7 @@ void ExceptionHandlerImpl::resolveReferences(const int featureID, std::vector<st
 
 		case uml::umlPackage::EXCEPTIONHANDLER_ATTRIBUTE_EXCEPTIONTYPE:
 		{
-			std::shared_ptr<Bag<uml::Classifier>> _exceptionType = getExceptionType();
+			const std::shared_ptr<Bag<uml::Classifier>>& _exceptionType = getExceptionType();
 			for(const std::shared_ptr<ecore::EObject>& ref : references)
 			{
 				std::shared_ptr<uml::Classifier>  _r = std::dynamic_pointer_cast<uml::Classifier>(ref);
@@ -350,7 +350,7 @@ void ExceptionHandlerImpl::saveContent(std::shared_ptr<persistence::interfaces::
 	}
 }
 
-std::shared_ptr<ecore::EClass> ExceptionHandlerImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& ExceptionHandlerImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getExceptionHandler_Class();
 }
@@ -439,7 +439,7 @@ bool ExceptionHandlerImpl::eSet(int featureID,  const std::shared_ptr<Any>& newV
 	
 					if(eObjectList)
 					{
-						std::shared_ptr<Bag<uml::Classifier>> _exceptionType = getExceptionType();
+						const std::shared_ptr<Bag<uml::Classifier>>& _exceptionType = getExceptionType();
 	
 						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{

@@ -313,7 +313,7 @@ void BroadcastSignalActionImpl::saveContent(std::shared_ptr<persistence::interfa
 	}
 }
 
-std::shared_ptr<ecore::EClass> BroadcastSignalActionImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& BroadcastSignalActionImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getBroadcastSignalAction_Class();
 }

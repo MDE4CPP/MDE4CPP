@@ -192,7 +192,7 @@ void GetNextEventStrategyImpl::saveContent(std::shared_ptr<persistence::interfac
 	}
 }
 
-std::shared_ptr<ecore::EClass> GetNextEventStrategyImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& GetNextEventStrategyImpl::eStaticClass() const
 {
 	return fUML::Semantics::CommonBehavior::CommonBehaviorPackage::eInstance()->getGetNextEventStrategy_Class();
 }

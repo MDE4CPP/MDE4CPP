@@ -224,7 +224,7 @@ void CS_LocusImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHan
 	}
 }
 
-std::shared_ptr<ecore::EClass> CS_LocusImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& CS_LocusImpl::eStaticClass() const
 {
 	return PSCS::Semantics::Loci::LociPackage::eInstance()->getCS_Locus_Class();
 }

@@ -466,7 +466,7 @@ void LocusImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandle
 	}
 }
 
-std::shared_ptr<ecore::EClass> LocusImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& LocusImpl::eStaticClass() const
 {
 	return fUML::Semantics::Loci::LociPackage::eInstance()->getLocus_Class();
 }
@@ -548,7 +548,7 @@ bool LocusImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 	
 					if(eObjectList)
 					{
-						std::shared_ptr<Bag<fUML::MDE4CPP_Extensions::FUML_Object>> _extensionalValues = getExtensionalValues();
+						const std::shared_ptr<Bag<fUML::MDE4CPP_Extensions::FUML_Object>>& _extensionalValues = getExtensionalValues();
 	
 						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{

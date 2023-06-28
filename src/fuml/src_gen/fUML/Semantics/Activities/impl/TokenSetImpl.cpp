@@ -196,7 +196,7 @@ void TokenSetImpl::resolveReferences(const int featureID, std::vector<std::share
 	{
 		case fUML::Semantics::Activities::ActivitiesPackage::TOKENSET_ATTRIBUTE_TOKENS:
 		{
-			std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> _tokens = getTokens();
+			const std::shared_ptr<Bag<fUML::Semantics::Activities::Token>>& _tokens = getTokens();
 			for(const std::shared_ptr<ecore::EObject>& ref : references)
 			{
 				std::shared_ptr<fUML::Semantics::Activities::Token>  _r = std::dynamic_pointer_cast<fUML::Semantics::Activities::Token>(ref);
@@ -232,7 +232,7 @@ void TokenSetImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHan
 	}
 }
 
-std::shared_ptr<ecore::EClass> TokenSetImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& TokenSetImpl::eStaticClass() const
 {
 	return fUML::Semantics::Activities::ActivitiesPackage::eInstance()->getTokenSet_Class();
 }
@@ -275,7 +275,7 @@ bool TokenSetImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 	
 					if(eObjectList)
 					{
-						std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> _tokens = getTokens();
+						const std::shared_ptr<Bag<fUML::Semantics::Activities::Token>>& _tokens = getTokens();
 	
 						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{

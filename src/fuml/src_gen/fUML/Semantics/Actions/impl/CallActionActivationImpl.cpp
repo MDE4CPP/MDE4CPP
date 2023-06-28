@@ -485,7 +485,7 @@ void CallActionActivationImpl::saveContent(std::shared_ptr<persistence::interfac
 	}
 }
 
-std::shared_ptr<ecore::EClass> CallActionActivationImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& CallActionActivationImpl::eStaticClass() const
 {
 	return fUML::Semantics::Actions::ActionsPackage::eInstance()->getCallActionActivation_Class();
 }

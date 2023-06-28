@@ -326,7 +326,7 @@ void InstanceValueImpl::saveContent(std::shared_ptr<persistence::interfaces::XSa
 	}
 }
 
-std::shared_ptr<ecore::EClass> InstanceValueImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& InstanceValueImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getInstanceValue_Class();
 }

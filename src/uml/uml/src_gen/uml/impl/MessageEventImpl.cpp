@@ -241,7 +241,7 @@ void MessageEventImpl::saveContent(std::shared_ptr<persistence::interfaces::XSav
 	}
 }
 
-std::shared_ptr<ecore::EClass> MessageEventImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& MessageEventImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getMessageEvent_Class();
 }

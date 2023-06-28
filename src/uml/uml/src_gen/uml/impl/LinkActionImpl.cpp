@@ -412,7 +412,7 @@ void LinkActionImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveH
 	}
 }
 
-std::shared_ptr<ecore::EClass> LinkActionImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& LinkActionImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getLinkAction_Class();
 }
@@ -459,7 +459,7 @@ bool LinkActionImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 	
 					if(eObjectList)
 					{
-						std::shared_ptr<Bag<uml::LinkEndData>> _endData = getEndData();
+						const std::shared_ptr<Bag<uml::LinkEndData>>& _endData = getEndData();
 	
 						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{
@@ -504,7 +504,7 @@ bool LinkActionImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 	
 					if(eObjectList)
 					{
-						std::shared_ptr<Bag<uml::InputPin>> _inputValue = getInputValue();
+						const std::shared_ptr<Bag<uml::InputPin>>& _inputValue = getInputValue();
 	
 						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{

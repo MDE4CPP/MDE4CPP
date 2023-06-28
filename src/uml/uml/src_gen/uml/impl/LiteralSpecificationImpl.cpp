@@ -271,7 +271,7 @@ void LiteralSpecificationImpl::saveContent(std::shared_ptr<persistence::interfac
 	}
 }
 
-std::shared_ptr<ecore::EClass> LiteralSpecificationImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& LiteralSpecificationImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getLiteralSpecification_Class();
 }

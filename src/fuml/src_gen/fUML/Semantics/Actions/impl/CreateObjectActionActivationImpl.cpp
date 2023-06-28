@@ -338,7 +338,7 @@ void CreateObjectActionActivationImpl::saveContent(std::shared_ptr<persistence::
 	}
 }
 
-std::shared_ptr<ecore::EClass> CreateObjectActionActivationImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& CreateObjectActionActivationImpl::eStaticClass() const
 {
 	return fUML::Semantics::Actions::ActionsPackage::eInstance()->getCreateObjectActionActivation_Class();
 }

@@ -205,7 +205,7 @@ void StringLiteralExpEvalImpl::saveContent(std::shared_ptr<persistence::interfac
 	}
 }
 
-std::shared_ptr<ecore::EClass> StringLiteralExpEvalImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& StringLiteralExpEvalImpl::eStaticClass() const
 {
 	return ocl::Evaluations::EvaluationsPackage::eInstance()->getStringLiteralExpEval_Class();
 }

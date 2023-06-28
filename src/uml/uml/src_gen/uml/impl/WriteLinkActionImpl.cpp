@@ -258,7 +258,7 @@ void WriteLinkActionImpl::saveContent(std::shared_ptr<persistence::interfaces::X
 	}
 }
 
-std::shared_ptr<ecore::EClass> WriteLinkActionImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& WriteLinkActionImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getWriteLinkAction_Class();
 }

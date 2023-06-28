@@ -307,7 +307,7 @@ void TimeConstraintImpl::saveContent(std::shared_ptr<persistence::interfaces::XS
 	}
 }
 
-std::shared_ptr<ecore::EClass> TimeConstraintImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& TimeConstraintImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getTimeConstraint_Class();
 }

@@ -265,7 +265,7 @@ void NameValueBindingImpl::saveContent(std::shared_ptr<persistence::interfaces::
 	}
 }
 
-std::shared_ptr<ecore::EClass> NameValueBindingImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& NameValueBindingImpl::eStaticClass() const
 {
 	return ocl::Evaluations::EvaluationsPackage::eInstance()->getNameValueBinding_Class();
 }

@@ -333,7 +333,7 @@ void NumericLiteralExpImpl::saveContent(std::shared_ptr<persistence::interfaces:
 	}
 }
 
-std::shared_ptr<ecore::EClass> NumericLiteralExpImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& NumericLiteralExpImpl::eStaticClass() const
 {
 	return ocl::Expressions::ExpressionsPackage::eInstance()->getNumericLiteralExp_Class();
 }

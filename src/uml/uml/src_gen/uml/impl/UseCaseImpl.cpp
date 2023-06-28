@@ -501,7 +501,7 @@ void UseCaseImpl::resolveReferences(const int featureID, std::vector<std::shared
 	{
 		case uml::umlPackage::USECASE_ATTRIBUTE_SUBJECT:
 		{
-			std::shared_ptr<Bag<uml::Classifier>> _subject = getSubject();
+			const std::shared_ptr<Bag<uml::Classifier>>& _subject = getSubject();
 			for(const std::shared_ptr<ecore::EObject>& ref : references)
 			{
 				std::shared_ptr<uml::Classifier>  _r = std::dynamic_pointer_cast<uml::Classifier>(ref);
@@ -572,7 +572,7 @@ void UseCaseImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHand
 	}
 }
 
-std::shared_ptr<ecore::EClass> UseCaseImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& UseCaseImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getUseCase_Class();
 }
@@ -627,7 +627,7 @@ bool UseCaseImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 	
 					if(eObjectList)
 					{
-						std::shared_ptr<Bag<uml::Extend>> _extend = getExtend();
+						const std::shared_ptr<Bag<uml::Extend>>& _extend = getExtend();
 	
 						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{
@@ -672,7 +672,7 @@ bool UseCaseImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 	
 					if(eObjectList)
 					{
-						std::shared_ptr<Bag<uml::ExtensionPoint>> _extensionPoint = getExtensionPoint();
+						const std::shared_ptr<Bag<uml::ExtensionPoint>>& _extensionPoint = getExtensionPoint();
 	
 						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{
@@ -717,7 +717,7 @@ bool UseCaseImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 	
 					if(eObjectList)
 					{
-						std::shared_ptr<Bag<uml::Include>> _include = getInclude();
+						const std::shared_ptr<Bag<uml::Include>>& _include = getInclude();
 	
 						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{
@@ -762,7 +762,7 @@ bool UseCaseImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 	
 					if(eObjectList)
 					{
-						std::shared_ptr<Bag<uml::Classifier>> _subject = getSubject();
+						const std::shared_ptr<Bag<uml::Classifier>>& _subject = getSubject();
 	
 						for(const std::shared_ptr<ecore::EObject>& anEObject: *eObjectList)
 						{

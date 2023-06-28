@@ -384,7 +384,7 @@ void StateExpImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHan
 	}
 }
 
-std::shared_ptr<ecore::EClass> StateExpImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& StateExpImpl::eStaticClass() const
 {
 	return ocl::Expressions::ExpressionsPackage::eInstance()->getStateExp_Class();
 }

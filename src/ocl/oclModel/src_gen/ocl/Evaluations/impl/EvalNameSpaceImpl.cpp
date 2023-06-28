@@ -201,7 +201,7 @@ void EvalNameSpaceImpl::saveContent(std::shared_ptr<persistence::interfaces::XSa
 	}
 }
 
-std::shared_ptr<ecore::EClass> EvalNameSpaceImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& EvalNameSpaceImpl::eStaticClass() const
 {
 	return ocl::Evaluations::EvaluationsPackage::eInstance()->getEvalNameSpace_Class();
 }

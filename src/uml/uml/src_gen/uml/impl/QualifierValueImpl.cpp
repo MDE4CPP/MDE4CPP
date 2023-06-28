@@ -277,7 +277,7 @@ void QualifierValueImpl::saveContent(std::shared_ptr<persistence::interfaces::XS
 	}
 }
 
-std::shared_ptr<ecore::EClass> QualifierValueImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& QualifierValueImpl::eStaticClass() const
 {
 	return uml::umlPackage::eInstance()->getQualifierValue_Class();
 }

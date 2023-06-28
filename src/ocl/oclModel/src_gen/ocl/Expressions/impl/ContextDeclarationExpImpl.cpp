@@ -329,7 +329,7 @@ void ContextDeclarationExpImpl::saveContent(std::shared_ptr<persistence::interfa
 	}
 }
 
-std::shared_ptr<ecore::EClass> ContextDeclarationExpImpl::eStaticClass() const
+const std::shared_ptr<ecore::EClass>& ContextDeclarationExpImpl::eStaticClass() const
 {
 	return ocl::Expressions::ExpressionsPackage::eInstance()->getContextDeclarationExp_Class();
 }
