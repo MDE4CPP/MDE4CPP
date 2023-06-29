@@ -23,6 +23,7 @@
 [import UML4CPP::generator::main::components::generateType /]
 [import UML4CPP::generator::main::helpers::nameHelper /]
 [import UML4CPP::generator::main::components::generateProperty /]
+[import UML4CPP::generator::main::helpers::generalHelper /]
 
 [template public generatePropertyDestruction(aProperty : Property)]
 [if (aProperty.isContainer())]

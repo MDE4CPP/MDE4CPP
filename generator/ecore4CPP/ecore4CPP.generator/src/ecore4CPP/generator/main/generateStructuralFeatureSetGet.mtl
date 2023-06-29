@@ -150,7 +150,7 @@ bool [aClass.name.toUpperFirst().concat('Impl')/]::eSet(int featureID, const Any
 					std::shared_ptr<[struct.generateStructuralFeatureType(false)/]> _[struct.name.toLowerFirst()/]=[struct.GetterName()/]();
 					for(const std::shared_ptr<[struct.eGenericType.generateCppType(false)/]> index[struct.name.toUpperFirst()/]: *_[struct.name.toLowerFirst()/])
 					{
-						if ([struct.name/]List->find(index[struct.name.toUpperFirst()/]) == -1)
+						if (!([struct.name/]List->includes(index[struct.name.toUpperFirst()/])))
 						{
 							_[struct.name.toLowerFirst()/]->erase(index[struct.name.toUpperFirst()/]);
 						}
@@ -158,7 +158,7 @@ bool [aClass.name.toUpperFirst().concat('Impl')/]::eSet(int featureID, const Any
 
 					for(const std::shared_ptr<[struct.eGenericType.generateCppType(false)/]> index[struct.name.toUpperFirst()/]: *[struct.name/]List)
 					{
-						if (_[struct.name.toLowerFirst()/]->find(index[struct.name.toUpperFirst()/]) == -1)
+						if (!(_[struct.name.toLowerFirst()/]->includes(index[struct.name.toUpperFirst()/])))
 						{
 							_[struct.name.toLowerFirst()/]->add(index[struct.name.toUpperFirst()/]);
 						}
