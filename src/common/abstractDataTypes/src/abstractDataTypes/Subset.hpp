@@ -19,65 +19,68 @@ template<class T, class ... U>
 class Subset : virtual public Bag<T>
 {
 	protected:
-		std::tuple<std::shared_ptr<Union<U> > ...> tuple_;
+		std::tuple<std::shared_ptr<Union<U>> ...> tuple_;
 
 	public:
 
-		typedef typename std::vector<std::shared_ptr<T> >::iterator iterator;
+		typedef typename std::vector<std::shared_ptr<T>>::iterator iterator;
 
 		Subset() : Bag<T>()
 		{
 		}
 
-		Subset(std::shared_ptr<Union<U> > ... v) :
+		Subset(const std::shared_ptr<Union<U>>& ... v) :
 			Bag<T>()
 		{
-			initSubset(v ...);
+			this->initSubset(v ...);
 		}
 
-		void initSubset(std::shared_ptr<Union<U> > ... v)
+		void initSubset(const std::shared_ptr<Union<U>>& ... v)
 		{
 			tuple_ = std::tuple<std::shared_ptr<Union<U> > ...>(v ...);
 		}
 
-		virtual void push_back(std::shared_ptr<T> el)
+		virtual void push_back(const std::shared_ptr<T>& el)
 		{
-			add(el);
+			this->add(el);
 		}
 
-		virtual void add(std::shared_ptr<T> el)
+		virtual void add(const std::shared_ptr<T>& el)
 		{
 			Bag<T>::add(el);
-			call_addEl_with_tuple(el, tuple_, std::index_sequence_for<std::shared_ptr<Union<U> > ...>());
+			this->call_addEl_with_tuple(el, tuple_, std::index_sequence_for<std::shared_ptr<Union<U>> ...>());
 		}
 
-		void insert(const Bag<T> &b)
+		iterator insert(const Bag<T>& b)
 		{
-			insert(this->m_bag.cend(), b.cbegin(), b.cend());
+			return insert(this->m_bag.cend(), b.cbegin(), b.cend());
 		}
 
-		void insert(iterator a, iterator b, iterator c)
+		iterator insert(iterator a, iterator b, iterator c)
 		{
-			Bag<T>::insert(a, b, c);
-			call_insert3El_with_tuple(a,b,c,tuple_, std::index_sequence_for<std::shared_ptr<Union<U> > ...>());
+			iterator it = Bag<T>::insert(a, b, c);
+			this->call_insert3El_with_tuple(a, b, c, tuple_, std::index_sequence_for<std::shared_ptr<Union<U>> ...>());
+			return it;
 		}
 
-		void insert(iterator a, std::shared_ptr<T> b)
+		iterator insert(iterator a, std::shared_ptr<T> b)
 		{
-			Bag<T>::insert(a, b);
-			call_insertElPointer_with_tuple(a,b,tuple_, std::index_sequence_for<std::shared_ptr<Union<U> > ...>());
+			iterator it = Bag<T>::insert(a, b);
+			this->call_insertElPointer_with_tuple(a, b, tuple_, std::index_sequence_for<std::shared_ptr<Union<U>> ...>());
+			return it;
 		}
 
-		virtual void erase(iterator el)
+		virtual iterator erase(iterator el)
 		{
-			erase(*el);
+			return erase(*el);
 		}
 
 
-		virtual void erase(std::shared_ptr<T> el)
+		virtual iterator erase(const std::shared_ptr<T>& el)
 		{
-			Bag<T>::erase(el);
-			call_deleteEl_with_tuple(el, tuple_, std::index_sequence_for<std::shared_ptr<Union<U> > ...>());
+			iterator it = Bag<T>::erase(el);
+			this->call_deleteEl_with_tuple(el, tuple_, std::index_sequence_for<std::shared_ptr<Union<U>> ...>());
+			return it;
 		}
 
 		virtual ~Subset()
@@ -86,7 +89,7 @@ class Subset : virtual public Bag<T>
 			unsigned int size = this->m_bag.size();
 			for (i = 0; i < size; i++)
 			{
-                erase(this->m_bag[i]);
+                this->erase(this->m_bag[i]);
 			}
 		}
 
@@ -95,40 +98,40 @@ class Subset : virtual public Bag<T>
 		/// ADD ///
 		//The helper call add method.
 		template<std::size_t ... Is>
-		void call_addEl_with_tuple(std::shared_ptr<T> el, const std::tuple<std::shared_ptr<Union<U> > ...> &tuple, std::index_sequence<Is ...>)
+		void call_addEl_with_tuple(const std::shared_ptr<T>& el, const std::tuple<std::shared_ptr<Union<U>> ...>& tuple, std::index_sequence<Is ...>)
 		{
-			addElRecursive(el, std::get<Is>(tuple) ...);
+			this->addElRecursive(el, std::get<Is>(tuple) ...);
 		}
 
 		template<class FirstU, class ... RestU>
-		void addElRecursive(std::shared_ptr<T> el, std::shared_ptr<Union<FirstU> > obj, std::shared_ptr<Union<RestU> > ... rest)
+		void addElRecursive(const std::shared_ptr<T>& el, const std::shared_ptr<Union<FirstU>>& obj, const std::shared_ptr<Union<RestU>>& ... rest)
 		{
-			addElRecursive(el, rest ...);
+			this->addElRecursive(el, rest ...);
 			obj->add(el);
 		}
 
 		template<class FirstU, class ... RestU>
-		void addElRecursive(std::shared_ptr<T> el, std::shared_ptr<Union<FirstU> > obj)
+		void addElRecursive(const std::shared_ptr<T>& el, const std::shared_ptr<Union<FirstU>>& obj)
 		{
 			obj->add(el);
 		}
 
 		/// delete ///
 		template<std::size_t ... Is>
-		void call_deleteEl_with_tuple(std::shared_ptr<T> el, const std::tuple<std::shared_ptr<Union<U> > ...> &tuple, std::index_sequence<Is ...>)
+		void call_deleteEl_with_tuple(const std::shared_ptr<T>& el, const std::tuple<std::shared_ptr<Union<U>> ...>& tuple, std::index_sequence<Is ...>)
 		{
-			deleteElRecursive(el, std::get<Is>(tuple) ...);
+			this->deleteElRecursive(el, std::get<Is>(tuple) ...);
 		}
 
 		template<class FirstU, class ... RestU>
-		void deleteElRecursive(std::shared_ptr<T> el, std::shared_ptr<Union<FirstU> > obj, std::shared_ptr<Union<RestU> > ... rest)
+		void deleteElRecursive(const std::shared_ptr<T>& el, const std::shared_ptr<Union<FirstU>>& obj, const std::shared_ptr<Union<RestU>>& ... rest)
 		{
-			deleteElRecursive(el, rest ...);
+			this->deleteElRecursive(el, rest ...);
 			obj->erase(el);
 		}
 
 		template<class FirstU, class ... RestU>
-		void deleteElRecursive(std::shared_ptr<T> el, std::shared_ptr<Union<FirstU> > obj)
+		void deleteElRecursive(const std::shared_ptr<T>& el, const std::shared_ptr<Union<FirstU>>& obj)
 		{
 			if(nullptr == obj)
             {
@@ -137,54 +140,40 @@ class Subset : virtual public Bag<T>
 			obj->erase(el);
 		}
 
-		/// insert iterator and pointer  ///
-
-//		void insert(iterator a, std::shared_ptr<T> b)
-//		{
-//		        m_bag.insert(a, b);
-//		}
-
 		template<std::size_t ... Is>
-		void call_insertElPointer_with_tuple(iterator it, std::shared_ptr<T> el, const std::tuple<std::shared_ptr<Union<U> > ...> &tuple, std::index_sequence<Is ...>)
+		void call_insertElPointer_with_tuple(iterator it, const std::shared_ptr<T>& el, const std::tuple<std::shared_ptr<Union<U>> ...>& tuple, std::index_sequence<Is ...>)
 		{
-			insertElPointerRecursive(it, el, std::get<Is>(tuple) ...);
+			this->insertElPointerRecursive(it, el, std::get<Is>(tuple) ...);
 		}
 
 		template<class FirstU, class ... RestU>
-		void insertElPointerRecursive(iterator it, std::shared_ptr<T> el, std::shared_ptr<Union<FirstU> > obj, std::shared_ptr<Union<RestU> > ... rest)
+		void insertElPointerRecursive(iterator it, const std::shared_ptr<T>& el, const std::shared_ptr<Union<FirstU>>& obj, const std::shared_ptr<Union<RestU>>& ... rest)
 		{
-			insertElPointerRecursive(it, el, rest ...);
+			this->insertElPointerRecursive(it, el, rest ...);
 			obj->insert(it, el);
 		}
 
 		template<class FirstU, class ... RestU>
-		void insertElPointerRecursive(iterator it, std::shared_ptr<T> el, std::shared_ptr<Union<FirstU> > obj)
+		void insertElPointerRecursive(iterator it, const std::shared_ptr<T>& el, const std::shared_ptr<Union<FirstU>>& obj)
 		{
 			obj->insert(it, el);
 		}
 
-		/// insert 3 iterators  ///
-
-//		void insert(iterator a, iterator b, iterator c)
-//		{
-//      	m_bag.insert(a, b, c);
-//		}
-
 		template<std::size_t ... Is>
-		void call_insert3El_with_tuple(iterator position, iterator first, iterator last, const std::tuple<std::shared_ptr<Union<U> > ...> &tuple, std::index_sequence<Is ...>)
+		void call_insert3El_with_tuple(iterator position, iterator first, iterator last, const std::tuple<std::shared_ptr<Union<U>> ...>& tuple, std::index_sequence<Is ...>)
 		{
-			insert3ElRecursive(position, first, last, std::get<Is>(tuple) ...);
+			this->insert3ElRecursive(position, first, last, std::get<Is>(tuple) ...);
 		}
 
 		template<class FirstU, class ... RestU>
-		void insert3ElRecursive(iterator position, iterator first, iterator last, std::shared_ptr<Union<FirstU> > obj, std::shared_ptr<Union<RestU> > ... rest)
+		void insert3ElRecursive(iterator position, iterator first, iterator last, const std::shared_ptr<Union<FirstU>>& obj, const std::shared_ptr<Union<RestU>>& ... rest)
 		{
 			insert3ElRecursive(position, first, last, rest ...);
 			obj->insert(position, first, last);
 		}
 
 		template<class FirstU, class ... RestU>
-		void insert3ElRecursive(iterator position, iterator first, iterator last, std::shared_ptr<Union<FirstU> > obj)
+		void insert3ElRecursive(iterator position, iterator first, iterator last, const std::shared_ptr<Union<FirstU>>& obj)
 		{
 			obj->insert(position, first, last);
 		}

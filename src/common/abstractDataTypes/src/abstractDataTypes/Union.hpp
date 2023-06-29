@@ -21,9 +21,9 @@ class Union : virtual public Bag<T>
 		}
 
 		template<class U>
-		Union(Union<U> const &u)
+		Union(const Union<U>& u)
 		{
-			this->m_bag = std::dynamic_pointer_cast<std::vector<std::shared_ptr<T> > >(u.m_bag);
+			this->m_bag = std::dynamic_pointer_cast<std::vector<std::shared_ptr<T>>>(u.m_bag);
 		}
 
 		virtual ~Union()
