@@ -88,9 +88,10 @@ ScriptImpl& ScriptImpl::operator=(const ScriptImpl & obj)
 }
 
 
-std::shared_ptr<uml::Class> ScriptImpl::getMetaClass() const
+const std::shared_ptr<uml::Class>& ScriptImpl::getMetaClass() const
 {
-	return StandardProfilePackageImpl::eInstance()->get_StandardProfile_Script();
+	static const std::shared_ptr<uml::Class> metaClass = StandardProfilePackageImpl::eInstance()->get_StandardProfile_Script();
+	return metaClass;
 }
 
 void ScriptImpl::instantiate()

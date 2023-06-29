@@ -88,9 +88,10 @@ AuxiliaryImpl& AuxiliaryImpl::operator=(const AuxiliaryImpl & obj)
 }
 
 
-std::shared_ptr<uml::Class> AuxiliaryImpl::getMetaClass() const
+const std::shared_ptr<uml::Class>& AuxiliaryImpl::getMetaClass() const
 {
-	return StandardProfilePackageImpl::eInstance()->get_StandardProfile_Auxiliary();
+	static const std::shared_ptr<uml::Class> metaClass = StandardProfilePackageImpl::eInstance()->get_StandardProfile_Auxiliary();
+	return metaClass;
 }
 
 void AuxiliaryImpl::instantiate()

@@ -88,9 +88,10 @@ ServiceImpl& ServiceImpl::operator=(const ServiceImpl & obj)
 }
 
 
-std::shared_ptr<uml::Class> ServiceImpl::getMetaClass() const
+const std::shared_ptr<uml::Class>& ServiceImpl::getMetaClass() const
 {
-	return StandardProfilePackageImpl::eInstance()->get_StandardProfile_Service();
+	static const std::shared_ptr<uml::Class> metaClass = StandardProfilePackageImpl::eInstance()->get_StandardProfile_Service();
+	return metaClass;
 }
 
 void ServiceImpl::instantiate()

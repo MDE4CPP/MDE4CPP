@@ -88,9 +88,10 @@ TraceImpl& TraceImpl::operator=(const TraceImpl & obj)
 }
 
 
-std::shared_ptr<uml::Class> TraceImpl::getMetaClass() const
+const std::shared_ptr<uml::Class>& TraceImpl::getMetaClass() const
 {
-	return StandardProfilePackageImpl::eInstance()->get_StandardProfile_Trace();
+	static const std::shared_ptr<uml::Class> metaClass = StandardProfilePackageImpl::eInstance()->get_StandardProfile_Trace();
+	return metaClass;
 }
 
 void TraceImpl::instantiate()

@@ -88,9 +88,10 @@ SubsystemImpl& SubsystemImpl::operator=(const SubsystemImpl & obj)
 }
 
 
-std::shared_ptr<uml::Class> SubsystemImpl::getMetaClass() const
+const std::shared_ptr<uml::Class>& SubsystemImpl::getMetaClass() const
 {
-	return StandardProfilePackageImpl::eInstance()->get_StandardProfile_Subsystem();
+	static const std::shared_ptr<uml::Class> metaClass = StandardProfilePackageImpl::eInstance()->get_StandardProfile_Subsystem();
+	return metaClass;
 }
 
 void SubsystemImpl::instantiate()

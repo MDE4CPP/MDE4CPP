@@ -88,9 +88,10 @@ BuildComponentImpl& BuildComponentImpl::operator=(const BuildComponentImpl & obj
 }
 
 
-std::shared_ptr<uml::Class> BuildComponentImpl::getMetaClass() const
+const std::shared_ptr<uml::Class>& BuildComponentImpl::getMetaClass() const
 {
-	return StandardProfilePackageImpl::eInstance()->get_StandardProfile_BuildComponent();
+	static const std::shared_ptr<uml::Class> metaClass = StandardProfilePackageImpl::eInstance()->get_StandardProfile_BuildComponent();
+	return metaClass;
 }
 
 void BuildComponentImpl::instantiate()

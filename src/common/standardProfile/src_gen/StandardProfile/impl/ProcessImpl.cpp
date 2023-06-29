@@ -88,9 +88,10 @@ ProcessImpl& ProcessImpl::operator=(const ProcessImpl & obj)
 }
 
 
-std::shared_ptr<uml::Class> ProcessImpl::getMetaClass() const
+const std::shared_ptr<uml::Class>& ProcessImpl::getMetaClass() const
 {
-	return StandardProfilePackageImpl::eInstance()->get_StandardProfile_Process();
+	static const std::shared_ptr<uml::Class> metaClass = StandardProfilePackageImpl::eInstance()->get_StandardProfile_Process();
+	return metaClass;
 }
 
 void ProcessImpl::instantiate()

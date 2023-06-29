@@ -88,9 +88,10 @@ RefineImpl& RefineImpl::operator=(const RefineImpl & obj)
 }
 
 
-std::shared_ptr<uml::Class> RefineImpl::getMetaClass() const
+const std::shared_ptr<uml::Class>& RefineImpl::getMetaClass() const
 {
-	return StandardProfilePackageImpl::eInstance()->get_StandardProfile_Refine();
+	static const std::shared_ptr<uml::Class> metaClass = StandardProfilePackageImpl::eInstance()->get_StandardProfile_Refine();
+	return metaClass;
 }
 
 void RefineImpl::instantiate()

@@ -88,9 +88,10 @@ MetamodelImpl& MetamodelImpl::operator=(const MetamodelImpl & obj)
 }
 
 
-std::shared_ptr<uml::Class> MetamodelImpl::getMetaClass() const
+const std::shared_ptr<uml::Class>& MetamodelImpl::getMetaClass() const
 {
-	return StandardProfilePackageImpl::eInstance()->get_StandardProfile_Metamodel();
+	static const std::shared_ptr<uml::Class> metaClass = StandardProfilePackageImpl::eInstance()->get_StandardProfile_Metamodel();
+	return metaClass;
 }
 
 void MetamodelImpl::instantiate()

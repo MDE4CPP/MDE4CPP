@@ -94,9 +94,10 @@ ExternalLibraryImpl& ExternalLibraryImpl::operator=(const ExternalLibraryImpl & 
 }
 
 
-std::shared_ptr<uml::Class> ExternalLibraryImpl::getMetaClass() const
+const std::shared_ptr<uml::Class>& ExternalLibraryImpl::getMetaClass() const
 {
-	return UML4CPPProfilePackageImpl::eInstance()->get_UML4CPPProfile_ExternalLibrary();
+	static const std::shared_ptr<uml::Class> metaClass = UML4CPPProfilePackageImpl::eInstance()->get_UML4CPPProfile_ExternalLibrary();
+	return metaClass;
 }
 
 void ExternalLibraryImpl::instantiate()

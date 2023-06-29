@@ -88,9 +88,10 @@ DocumentImpl& DocumentImpl::operator=(const DocumentImpl & obj)
 }
 
 
-std::shared_ptr<uml::Class> DocumentImpl::getMetaClass() const
+const std::shared_ptr<uml::Class>& DocumentImpl::getMetaClass() const
 {
-	return StandardProfilePackageImpl::eInstance()->get_StandardProfile_Document();
+	static const std::shared_ptr<uml::Class> metaClass = StandardProfilePackageImpl::eInstance()->get_StandardProfile_Document();
+	return metaClass;
 }
 
 void DocumentImpl::instantiate()

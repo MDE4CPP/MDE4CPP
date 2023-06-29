@@ -88,9 +88,10 @@ TypeImpl& TypeImpl::operator=(const TypeImpl & obj)
 }
 
 
-std::shared_ptr<uml::Class> TypeImpl::getMetaClass() const
+const std::shared_ptr<uml::Class>& TypeImpl::getMetaClass() const
 {
-	return StandardProfilePackageImpl::eInstance()->get_StandardProfile_Type();
+	static const std::shared_ptr<uml::Class> metaClass = StandardProfilePackageImpl::eInstance()->get_StandardProfile_Type();
+	return metaClass;
 }
 
 void TypeImpl::instantiate()

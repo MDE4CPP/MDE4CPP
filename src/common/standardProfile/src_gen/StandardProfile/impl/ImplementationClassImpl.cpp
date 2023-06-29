@@ -88,9 +88,10 @@ ImplementationClassImpl& ImplementationClassImpl::operator=(const Implementation
 }
 
 
-std::shared_ptr<uml::Class> ImplementationClassImpl::getMetaClass() const
+const std::shared_ptr<uml::Class>& ImplementationClassImpl::getMetaClass() const
 {
-	return StandardProfilePackageImpl::eInstance()->get_StandardProfile_ImplementationClass();
+	static const std::shared_ptr<uml::Class> metaClass = StandardProfilePackageImpl::eInstance()->get_StandardProfile_ImplementationClass();
+	return metaClass;
 }
 
 void ImplementationClassImpl::instantiate()

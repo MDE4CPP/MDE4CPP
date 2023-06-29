@@ -62,7 +62,7 @@ namespace UML4CPPProfile
 			
 
 		protected:
-			virtual std::shared_ptr<uml::Class> getMetaClass() const;
+			virtual const std::shared_ptr<uml::Class>& getMetaClass() const;
 			virtual void instantiate();
 			virtual void destroy();
 

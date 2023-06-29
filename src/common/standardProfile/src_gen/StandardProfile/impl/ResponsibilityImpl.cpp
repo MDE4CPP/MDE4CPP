@@ -88,9 +88,10 @@ ResponsibilityImpl& ResponsibilityImpl::operator=(const ResponsibilityImpl & obj
 }
 
 
-std::shared_ptr<uml::Class> ResponsibilityImpl::getMetaClass() const
+const std::shared_ptr<uml::Class>& ResponsibilityImpl::getMetaClass() const
 {
-	return StandardProfilePackageImpl::eInstance()->get_StandardProfile_Responsibility();
+	static const std::shared_ptr<uml::Class> metaClass = StandardProfilePackageImpl::eInstance()->get_StandardProfile_Responsibility();
+	return metaClass;
 }
 
 void ResponsibilityImpl::instantiate()

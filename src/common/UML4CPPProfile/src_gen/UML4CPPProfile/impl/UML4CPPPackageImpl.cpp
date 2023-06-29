@@ -94,9 +94,10 @@ UML4CPPPackageImpl& UML4CPPPackageImpl::operator=(const UML4CPPPackageImpl & obj
 }
 
 
-std::shared_ptr<uml::Class> UML4CPPPackageImpl::getMetaClass() const
+const std::shared_ptr<uml::Class>& UML4CPPPackageImpl::getMetaClass() const
 {
-	return UML4CPPProfilePackageImpl::eInstance()->get_UML4CPPProfile_UML4CPPPackage();
+	static const std::shared_ptr<uml::Class> metaClass = UML4CPPProfilePackageImpl::eInstance()->get_UML4CPPProfile_UML4CPPPackage();
+	return metaClass;
 }
 
 void UML4CPPPackageImpl::instantiate()

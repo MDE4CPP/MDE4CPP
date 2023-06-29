@@ -88,9 +88,10 @@ RealizationImpl& RealizationImpl::operator=(const RealizationImpl & obj)
 }
 
 
-std::shared_ptr<uml::Class> RealizationImpl::getMetaClass() const
+const std::shared_ptr<uml::Class>& RealizationImpl::getMetaClass() const
 {
-	return StandardProfilePackageImpl::eInstance()->get_StandardProfile_Realization();
+	static const std::shared_ptr<uml::Class> metaClass = StandardProfilePackageImpl::eInstance()->get_StandardProfile_Realization();
+	return metaClass;
 }
 
 void RealizationImpl::instantiate()

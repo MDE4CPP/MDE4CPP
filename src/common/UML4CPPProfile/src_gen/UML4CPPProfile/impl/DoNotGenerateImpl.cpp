@@ -88,9 +88,10 @@ DoNotGenerateImpl& DoNotGenerateImpl::operator=(const DoNotGenerateImpl & obj)
 }
 
 
-std::shared_ptr<uml::Class> DoNotGenerateImpl::getMetaClass() const
+const std::shared_ptr<uml::Class>& DoNotGenerateImpl::getMetaClass() const
 {
-	return UML4CPPProfilePackageImpl::eInstance()->get_UML4CPPProfile_DoNotGenerate();
+	static const std::shared_ptr<uml::Class> metaClass = UML4CPPProfilePackageImpl::eInstance()->get_UML4CPPProfile_DoNotGenerate();
+	return metaClass;
 }
 
 void DoNotGenerateImpl::instantiate()

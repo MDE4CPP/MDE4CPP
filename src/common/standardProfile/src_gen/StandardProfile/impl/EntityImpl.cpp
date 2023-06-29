@@ -88,9 +88,10 @@ EntityImpl& EntityImpl::operator=(const EntityImpl & obj)
 }
 
 
-std::shared_ptr<uml::Class> EntityImpl::getMetaClass() const
+const std::shared_ptr<uml::Class>& EntityImpl::getMetaClass() const
 {
-	return StandardProfilePackageImpl::eInstance()->get_StandardProfile_Entity();
+	static const std::shared_ptr<uml::Class> metaClass = StandardProfilePackageImpl::eInstance()->get_StandardProfile_Entity();
+	return metaClass;
 }
 
 void EntityImpl::instantiate()

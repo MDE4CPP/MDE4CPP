@@ -88,9 +88,10 @@ SingletonImpl& SingletonImpl::operator=(const SingletonImpl & obj)
 }
 
 
-std::shared_ptr<uml::Class> SingletonImpl::getMetaClass() const
+const std::shared_ptr<uml::Class>& SingletonImpl::getMetaClass() const
 {
-	return UML4CPPProfilePackageImpl::eInstance()->get_UML4CPPProfile_Singleton();
+	static const std::shared_ptr<uml::Class> metaClass = UML4CPPProfilePackageImpl::eInstance()->get_UML4CPPProfile_Singleton();
+	return metaClass;
 }
 
 void SingletonImpl::instantiate()

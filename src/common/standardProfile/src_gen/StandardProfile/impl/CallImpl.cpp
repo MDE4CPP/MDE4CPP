@@ -88,9 +88,10 @@ CallImpl& CallImpl::operator=(const CallImpl & obj)
 }
 
 
-std::shared_ptr<uml::Class> CallImpl::getMetaClass() const
+const std::shared_ptr<uml::Class>& CallImpl::getMetaClass() const
 {
-	return StandardProfilePackageImpl::eInstance()->get_StandardProfile_Call();
+	static const std::shared_ptr<uml::Class> metaClass = StandardProfilePackageImpl::eInstance()->get_StandardProfile_Call();
+	return metaClass;
 }
 
 void CallImpl::instantiate()
