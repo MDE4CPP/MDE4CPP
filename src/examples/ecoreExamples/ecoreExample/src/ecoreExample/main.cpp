@@ -39,7 +39,7 @@ int main()
 
   // Create Class instance using Name of Metaclass (usable for serialization)
 
-  std::shared_ptr<EObject> o1 = factory->create("EClass");
+  std::shared_ptr<EObject> o1 = factory->create("ecore::EClass");
 
   if (o1 != nullptr) {
     std::shared_ptr<EClass> c2 = std::dynamic_pointer_cast<EClass>(o1);
