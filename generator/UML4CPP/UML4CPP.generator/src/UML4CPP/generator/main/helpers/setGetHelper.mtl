@@ -41,15 +41,15 @@
 */]
 [template public generateeGetSetDel(aClass : Class,impl : Boolean)]
 //Get
-virtual Any get(std::shared_ptr<uml::Property> _property) const [abstractSuffix(impl)/];
+virtual Any get(const std::shared_ptr<uml::Property>% _property) const [abstractSuffix(impl)/];
 virtual Any get(std::string _qualifiedName) const [abstractSuffix(impl)/];
 virtual Any get(unsigned long _uID) const [abstractSuffix(impl)/];
 //Set
-virtual void set(std::shared_ptr<uml::Property> _property, Any value) [abstractSuffix(impl)/];
-virtual void set(std::string _qualifiedName, Any value) [abstractSuffix(impl)/];
-virtual void set(unsigned long _uID, Any value) [abstractSuffix(impl)/];
+virtual void set(const std::shared_ptr<uml::Property>& _property, const Any& value) [abstractSuffix(impl)/];
+virtual void set(std::string _qualifiedName, const Any& value) [abstractSuffix(impl)/];
+virtual void set(unsigned long _uID, const Any& value) [abstractSuffix(impl)/];
 //Unset
-virtual void unset(std::shared_ptr<uml::Property> _property) [abstractSuffix(impl)/];
+virtual void unset(const std::shared_ptr<uml::Property>& _property) [abstractSuffix(impl)/];
 virtual void unset(std::string _qualifiedName) [abstractSuffix(impl)/];
 virtual void unset(unsigned long _uID) [abstractSuffix(impl)/];
 [/template]
@@ -59,9 +59,9 @@ virtual void unset(unsigned long _uID) [abstractSuffix(impl)/];
 */]
 [template public generateInvoke(aClass : Class,impl : Boolean)]
 //Invoke
-virtual Any invoke(std::shared_ptr<uml::Operation> _operation, std::shared_ptr<Bag<Any>> _arguments) [abstractSuffix(impl)/];
-virtual Any invoke(std::string _qualifiedName, std::shared_ptr<Bag<Any>> _arguments) [abstractSuffix(impl)/];
-virtual Any invoke(unsigned long _uID, std::shared_ptr<Bag<Any>> _arguments) [abstractSuffix(impl)/];
+virtual Any invoke(const std::shared_ptr<uml::Operation>& _operation, const std::shared_ptr<Bag<Any>>& _arguments) [abstractSuffix(impl)/];
+virtual Any invoke(std::string _qualifiedName, const std::shared_ptr<Bag<Any>>& _arguments) [abstractSuffix(impl)/];
+virtual Any invoke(unsigned long _uID, const std::shared_ptr<Bag<Any>>& _arguments) [abstractSuffix(impl)/];
 [/template]
 
 [**
@@ -151,14 +151,14 @@ std::map<unsigned long,std::function<Any(std::shared_ptr<Bag<Any>>)>> m_invocati
  * generate special set function declaration for properties with enumeration type
 */]
 [template public generateESetFunctionForEnumerationDecl(aProperty : Property)]
-virtual void [aProperty.setterName()/](std::shared_ptr<uml::EnumerationLiteral> literal); 
+virtual void [aProperty.setterName()/](const std::shared_ptr<uml::EnumerationLiteral>& literal); 
 [/template]
 
 [**
  * generate special set function implementation for properties with enumeration type
 */]
 [template public generateESetFunctionForEnumerationImpl(aProperty : Property, aClass : Class)]
-void [aClass.name.toUpperFirst()/]Impl::[aProperty.setterName()/](std::shared_ptr<uml::EnumerationLiteral> literal)
+void [aClass.name.toUpperFirst()/]Impl::[aProperty.setterName()/](const std::shared_ptr<uml::EnumerationLiteral>& literal)
 {
 [for (literal : EnumerationLiteral | aProperty.type.oclAsType(Enumeration).ownedLiteral)]		
 	if (literal == [literal.generatePackageGetterCall()/])
@@ -185,7 +185,7 @@ void [aClass.name.toUpperFirst()/]Impl::[aProperty.setterName()/](std::shared_pt
 [/template]
 
 [template private generateGetImplementation(aClass : Class)]
-Any [aClass.name.toUpperFirst().concat('Impl')/]::get(std::shared_ptr<uml::Property> _property) const
+Any [aClass.name.toUpperFirst().concat('Impl')/]::get(const std::shared_ptr<uml::Property>& _property) const
 {
 	std::string qualifiedName = _property->getQualifiedName();
     return this->get(qualifiedName);
@@ -225,19 +225,19 @@ Any [aClass.name.toUpperFirst().concat('Impl')/]::get(unsigned long _uID) const
 [/template]
 
 [template private generateSetImplementation(aClass : Class)]
-void [aClass.name.toUpperFirst().concat('Impl')/]::set(std::shared_ptr<uml::Property> _property, Any value)
+void [aClass.name.toUpperFirst().concat('Impl')/]::set(const std::shared_ptr<uml::Property>& _property, const Any& value)
 {
 	std::string qualifiedName = _property->getQualifiedName();
     this->set(qualifiedName, value);
 }
 
-void [aClass.name.toUpperFirst().concat('Impl')/]::set(std::string _qualifiedName, Any value)
+void [aClass.name.toUpperFirst().concat('Impl')/]::set(std::string _qualifiedName, const Any& value)
 {
 	unsigned long uID = util::Util::polynomialRollingHash(_qualifiedName);
     this->set(uID, value);
 }
 
-void [aClass.name.toUpperFirst().concat('Impl')/]::set(unsigned long _uID, Any value)
+void [aClass.name.toUpperFirst().concat('Impl')/]::set(unsigned long _uID, const Any& value)
 {
 	std::map<unsigned long, std::function<void(Any)>>::const_iterator iter = m_setterMap.find(_uID);
     if(iter != m_setterMap.cend())
@@ -252,7 +252,7 @@ void [aClass.name.toUpperFirst().concat('Impl')/]::set(unsigned long _uID, Any v
 [/template]
 
 [template private generateUnSetImplementation(aClass : Class)]
-void [aClass.name.toUpperFirst().concat('Impl')/]::unset(std::shared_ptr<uml::Property> _property)
+void [aClass.name.toUpperFirst().concat('Impl')/]::unset(const std::shared_ptr<uml::Property>& _property)
 {
 	std::string qualifiedName = _property->getQualifiedName();
     this->unset(qualifiedName);
@@ -267,7 +267,7 @@ void [aClass.name.toUpperFirst().concat('Impl')/]::unset(std::string _qualifiedN
 void [aClass.name.toUpperFirst().concat('Impl')/]::unset(unsigned long _uID)
 {
 	std::map<unsigned long, std::function<void()>>::const_iterator iter = m_unsetterMap.find(_uID);
-    if(iter != m_unsetterMap.cend())
+    if(iter != m_unsetterMap.cend()) //TODO optimize loop
     {
         //invoke the unsetter function
         iter->second();
@@ -287,11 +287,12 @@ void [aClass.name.toUpperFirst().concat('Impl')/]::unset(unsigned long _uID)
 [/template]
 
 [template private generateInvokeImplementation(aClass : Class)]
-Any [aClass.name.toUpperFirst().concat('Impl')/]::invoke(std::shared_ptr<uml::Operation> _operation, std::shared_ptr<Bag<Any>> _arguments)
+Any [aClass.name.toUpperFirst().concat('Impl')/]::invoke(const std::shared_ptr<uml::Operation>& _operation, const std::shared_ptr<Bag<Any>>& _arguments)
 {
 	std::string qualifiedName = _operation->getQualifiedName();
 
-	for(unsigned int i = 0; i < _operation->getOwnedParameter()->size(); i++)
+	int ownedParameterSize = _operation->getOwnedParameter()->size();
+	for(unsigned int i = 0; i < ownedParameterSize; i++)
 	{
 		qualifiedName += "_" + _operation->getOwnedParameter()->at(i)->getType()->getName();
 	}
@@ -299,16 +300,16 @@ Any [aClass.name.toUpperFirst().concat('Impl')/]::invoke(std::shared_ptr<uml::Op
     return this->invoke(qualifiedName, _arguments);
 }
 
-Any [aClass.name.toUpperFirst().concat('Impl')/]::invoke(std::string _qualifiedName, std::shared_ptr<Bag<Any>> _arguments)
+Any [aClass.name.toUpperFirst().concat('Impl')/]::invoke(std::string _qualifiedName, const std::shared_ptr<Bag<Any>>& _arguments)
 {
 	unsigned long uID = util::Util::polynomialRollingHash(_qualifiedName);
     return this->invoke(uID, _arguments);
 }
 
-Any [aClass.name.toUpperFirst().concat('Impl')/]::invoke(unsigned long _uID, std::shared_ptr<Bag<Any>> _arguments)
+Any [aClass.name.toUpperFirst().concat('Impl')/]::invoke(unsigned long _uID, const std::shared_ptr<Bag<Any>>& _arguments)
 {
 	std::map<unsigned long, std::function<Any(std::shared_ptr<Bag<Any>>)>>::const_iterator iter = m_invocationMap.find(_uID);
-    if(iter != m_invocationMap.cend())
+    if(iter != m_invocationMap.cend()) //TODO optimize loop
     {
         //invoke the operation
         return iter->second(_arguments);
