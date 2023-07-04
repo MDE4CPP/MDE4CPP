@@ -106,7 +106,7 @@ namespace fUML::Semantics::StructuredClassifiers
 			//*********************************
 			virtual const std::shared_ptr<fUML::Semantics::CommonBehavior::ObjectActivation>& getObjectActivation() const = 0;
 			virtual void setObjectActivation(const std::shared_ptr<fUML::Semantics::CommonBehavior::ObjectActivation>&) = 0;
-			virtual const std::shared_ptr<Bag<uml::Classifier>>& getTypes() const = 0;
+			virtual std::shared_ptr<Bag<uml::Classifier>> getTypes() const = 0;
 
 			//*********************************
 			// Union Reference Getters

@@ -123,7 +123,7 @@ return newValue;
 	//end of body
 }
 
-const std::shared_ptr<Bag<uml::Classifier> >& SignalInstanceImpl::getTypes() const
+std::shared_ptr<Bag<uml::Classifier> > SignalInstanceImpl::getTypes() const
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation

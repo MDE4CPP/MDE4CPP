@@ -194,7 +194,7 @@ bool ValueImpl::equals(const std::shared_ptr<fUML::Semantics::Values::Value>& ot
 	//end of body
 }
 
-const std::shared_ptr<Bag<uml::Classifier> >& ValueImpl::getTypes() const
+std::shared_ptr<Bag<uml::Classifier> > ValueImpl::getTypes() const
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }

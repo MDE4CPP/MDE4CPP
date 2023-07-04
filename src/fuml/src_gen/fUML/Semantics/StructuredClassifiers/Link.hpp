@@ -81,7 +81,7 @@ namespace fUML::Semantics::StructuredClassifiers
 			virtual std::shared_ptr<fUML::Semantics::Values::Value> _copy() = 0;
 			virtual void addTo(const std::shared_ptr<fUML::Semantics::Loci::Locus>& locus) = 0;
 			virtual std::shared_ptr<Bag<fUML::Semantics::SimpleClassifiers::FeatureValue> > getOtherFeatureValues(const std::shared_ptr<Bag<fUML::Semantics::StructuredClassifiers::ExtensionalValue>>& extent, const std::shared_ptr<uml::Property>& end) = 0;
-			virtual const std::shared_ptr<Bag<uml::Classifier> >& getTypes() const = 0;
+			virtual std::shared_ptr<Bag<uml::Classifier> > getTypes() const = 0;
 			virtual bool isMatchingLink(const std::shared_ptr<fUML::Semantics::StructuredClassifiers::ExtensionalValue>& link, const std::shared_ptr<uml::Property>& end) = 0;
 			virtual std::shared_ptr<fUML::Semantics::Values::Value> new_() = 0;
 

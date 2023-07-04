@@ -47,7 +47,7 @@ namespace fUML::Semantics::Values
 			virtual std::shared_ptr<fUML::Semantics::Values::Value> _copy() ;
 			virtual bool checkAllParents(const std::shared_ptr<uml::Classifier>& type, const std::shared_ptr<uml::Classifier>& classifier) ;
 			virtual bool equals(const std::shared_ptr<fUML::Semantics::Values::Value>& otherValue) ;
-			virtual const std::shared_ptr<Bag<uml::Classifier> >& getTypes() const ;
+			virtual std::shared_ptr<Bag<uml::Classifier> > getTypes() const ;
 			virtual bool hasTypes(const std::shared_ptr<uml::Classifier>& type) ;
 			virtual std::shared_ptr<fUML::Semantics::Values::Value> new_() ;
 			virtual std::string objectId() ;

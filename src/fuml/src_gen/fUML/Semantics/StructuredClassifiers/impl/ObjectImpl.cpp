@@ -298,7 +298,7 @@ void ObjectImpl::setObjectActivation(const std::shared_ptr<fUML::Semantics::Comm
 }
 
 /* Getter & Setter for reference types */
-const std::shared_ptr<Bag<uml::Classifier>>& ObjectImpl::getTypes() const
+std::shared_ptr<Bag<uml::Classifier>> ObjectImpl::getTypes() const
 {
 	if(m_types == nullptr)
 	{
