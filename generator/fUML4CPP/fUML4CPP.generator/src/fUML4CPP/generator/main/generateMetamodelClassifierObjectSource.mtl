@@ -270,7 +270,7 @@ void [className/]::removeValue(std::shared_ptr<uml::StructuralFeature> feature, 
 				// no default value defined, clear not realized
 [/if]
 [else]
-				[aClassifier.UMLValueName()/]->[aProperty.getterName()/]().reset();
+				//[aClassifier.UMLValueName()/]->[aProperty.getterName()/]().reset();
 [/if]
 
 [else]

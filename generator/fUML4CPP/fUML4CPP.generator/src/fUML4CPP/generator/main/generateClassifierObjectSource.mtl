@@ -524,7 +524,8 @@ void [className/]::removeValue(std::shared_ptr<uml::StructuralFeature> feature, 
 				[if (aProperty.isComposite and not aProperty.type.getNearestPackage().isReflectionModel())]
 				[aClassifier.UMLValueName()/]->[aProperty.getterName()/]()[if (aProperty.isBackReference())].lock()[/if]->destroy();
 				[/if]
-				[aClassifier.UMLValueName()/]->[aProperty.getterName()/]().reset();
+				std::shared_ptr<[aProperty.type.generateCppType(true)/]> nullValue = nullptr;
+				[aClassifier.UMLValueName()/]->[aProperty.setterName()/](nullValue);
 [/if]
 
 [else]
