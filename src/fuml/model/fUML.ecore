@@ -117,7 +117,6 @@
         <eOperations name="getTypes" ordered="false" upperBound="-1" eType="ecore:EClass http://www.eclipse.org/uml2/5.0.0/UML#//Classifier">
           <eAnnotations source="http://tu-ilmenau.de/see/codegen">
             <details key="const"/>
-            <details key="forceConstRefReturn"/>
           </eAnnotations>
         </eOperations>
         <eOperations name="hasTypes" ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
@@ -426,7 +425,6 @@
           <eAnnotations source="http://tu-ilmenau.de/see/codegen">
             <details key="body" value="std::shared_ptr&lt;Bag&lt;uml::Classifier> > types(new Bag&lt;uml::Classifier>());&#xA;    types->push_back(std::dynamic_pointer_cast&lt;uml::Classifier>(this->getType()));&#xA;    return types;"/>
             <details key="const"/>
-            <details key="forceConstRefReturn"/>
           </eAnnotations>
         </eOperations>
         <eStructuralFeatures xsi:type="ecore:EReference" name="type" ordered="false"
@@ -618,9 +616,8 @@
         </eAnnotations>
         <eOperations name="getTypes" ordered="false" upperBound="-1" eType="ecore:EClass http://www.eclipse.org/uml2/5.0.0/UML#//Classifier">
           <eAnnotations source="http://tu-ilmenau.de/see/codegen">
-            <details key="body" value="return this->getType();"/>
+            <details key="body" value="std::shared_ptr&lt;Bag&lt;uml::Classifier> > types(new Bag&lt;uml::Classifier>());&#xA;if( this->getType() != nullptr)&#xA;&#x9;{&#xA;&#x9;&#x9;types->push_back(std::dynamic_pointer_cast&lt;uml::Classifier>(this->getType()));&#xA;&#x9;}&#xA;    return types;"/>
             <details key="const"/>
-            <details key="forceConstRefReturn"/>
           </eAnnotations>
         </eOperations>
         <eOperations name="isMatchingLink" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
@@ -716,6 +713,9 @@
             upperBound="-1" eType="ecore:EClass http://www.eclipse.org/uml2/5.0.0/UML#//Classifier">
           <eAnnotations>
             <details key="note" value="This Property is a Class in the OMG standard"/>
+          </eAnnotations>
+          <eAnnotations source="http://tu-ilmenau.de/see/codegen">
+            <details key="suppressConstRefReturn"/>
           </eAnnotations>
         </eStructuralFeatures>
         <eStructuralFeatures xsi:type="ecore:EReference" name="objectActivation" ordered="false"
