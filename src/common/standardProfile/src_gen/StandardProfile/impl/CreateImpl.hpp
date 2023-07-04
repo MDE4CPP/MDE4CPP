@@ -90,7 +90,7 @@ namespace StandardProfile
 			// Structural Feature Getter/Setter
 			//*********************************
 			//Get
-			virtual Any get(const std::shared_ptr<uml::Property>% _property) const ;
+			virtual Any get(const std::shared_ptr<uml::Property>& _property) const ;
 			virtual Any get(std::string _qualifiedName) const ;
 			virtual Any get(unsigned long _uID) const ;
 			//Set
