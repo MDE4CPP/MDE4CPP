@@ -41,7 +41,7 @@
 */]
 [template public generateeGetSetDel(aClass : Class,impl : Boolean)]
 //Get
-virtual Any get(const std::shared_ptr<uml::Property>% _property) const [abstractSuffix(impl)/];
+virtual Any get(const std::shared_ptr<uml::Property>& _property) const [abstractSuffix(impl)/];
 virtual Any get(std::string _qualifiedName) const [abstractSuffix(impl)/];
 virtual Any get(unsigned long _uID) const [abstractSuffix(impl)/];
 //Set
