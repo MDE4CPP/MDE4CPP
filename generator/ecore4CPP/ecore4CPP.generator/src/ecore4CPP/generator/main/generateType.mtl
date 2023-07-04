@@ -21,8 +21,8 @@
 
 [query public isAnyNoPtr(aTypedElement : ETypedElement) : EBoolean = if( ((aTypedElement.lowerBound = 0) or (aTypedElement.lowerBound = 1)) and (aTypedElement.upperBound = 1) and (aTypedElement.eType.name.replace('java.lang.', '').replace('java.util.','').transformTypeName() = 'Any') ) then true else false endif/]
 
-[template public generateParameterList(aOperation:EOperation) post(trim())]
-[for (sParameter : EParameter | aOperation.eParameters->select(p:EParameter | not p.doNotGenerateEModelElement())) separator (', ')][if(sParameter.isSharedPtr())]const [/if][sParameter.generateParameterType()/][if(sParameter.isSharedPtr())]&[/if] [sParameter.name/][/for][/template]
+[template public generateParameterList(anOperation:EOperation) post(trim())]
+[for (sParameter : EParameter | anOperation.eParameters->select(p:EParameter | not p.doNotGenerateEModelElement())) separator (', ')][if((sParameter.isSharedPtr()) and (not (anOperation.hasKey(suppressConstRefArgs()))))]const [/if][sParameter.generateParameterType()/][if((sParameter.isSharedPtr()) and (not (anOperation.hasKey(suppressConstRefArgs()))))]&[/if] [sParameter.name/][/for][/template]
 
 [comment
  * generate the C++ representation of a generic Type

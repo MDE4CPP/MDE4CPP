@@ -69,7 +69,7 @@ class Bag
 			// The debug version check if an inserted element is already present in the collection.
 			for (auto i = b; i != c; i++)
 			{
-				(this->includes(*i))
+				if(this->includes(*i))
 				{
 			//			DEBUG_MESSAGE(std::cerr << "Element " << *i << " already present" << std::endl;)
 				}

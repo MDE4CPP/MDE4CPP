@@ -117,6 +117,7 @@
         <eOperations name="getTypes" ordered="false" upperBound="-1" eType="ecore:EClass http://www.eclipse.org/uml2/5.0.0/UML#//Classifier">
           <eAnnotations source="http://tu-ilmenau.de/see/codegen">
             <details key="const"/>
+            <details key="forceConstRefReturn"/>
           </eAnnotations>
         </eOperations>
         <eOperations name="hasTypes" ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
@@ -425,6 +426,7 @@
           <eAnnotations source="http://tu-ilmenau.de/see/codegen">
             <details key="body" value="std::shared_ptr&lt;Bag&lt;uml::Classifier> > types(new Bag&lt;uml::Classifier>());&#xA;    types->push_back(std::dynamic_pointer_cast&lt;uml::Classifier>(this->getType()));&#xA;    return types;"/>
             <details key="const"/>
+            <details key="forceConstRefReturn"/>
           </eAnnotations>
         </eOperations>
         <eStructuralFeatures xsi:type="ecore:EReference" name="type" ordered="false"
@@ -616,8 +618,9 @@
         </eAnnotations>
         <eOperations name="getTypes" ordered="false" upperBound="-1" eType="ecore:EClass http://www.eclipse.org/uml2/5.0.0/UML#//Classifier">
           <eAnnotations source="http://tu-ilmenau.de/see/codegen">
-            <details key="body" value="std::shared_ptr&lt;Bag&lt;uml::Classifier> > types(new Bag&lt;uml::Classifier>());&#xD;&#xA;&#xD;&#xA;&#x9;if( this->getType() != nullptr)&#xD;&#xA;&#x9;{&#xD;&#xA;&#x9;&#x9;types->push_back(std::dynamic_pointer_cast&lt;uml::Classifier>(this->getType()));&#xD;&#xA;&#x9;}&#xD;&#xA;    return types;"/>
+            <details key="body" value="return this->getType();"/>
             <details key="const"/>
+            <details key="forceConstRefReturn"/>
           </eAnnotations>
         </eOperations>
         <eOperations name="isMatchingLink" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
@@ -1465,6 +1468,7 @@
         <eOperations name="fire" ordered="false" lowerBound="1">
           <eAnnotations source="http://tu-ilmenau.de/see/codegen">
             <details key="body" value="    do {&#xD;&#xA;&#xD;&#xA;        DEBUG_MESSAGE(std::cout&lt;&lt;&quot;[fire] Action &quot;  &lt;&lt; this->getNode()->getName()  &lt;&lt; &quot;...&quot;&lt;&lt;std::endl;)&#xD;&#xA;        DEBUG_MESSAGE(std::cout&lt;&lt;&quot;[event] Fire activity=&quot; &lt;&lt; this->getActivityExecution()->getBehavior()->getName() &lt;&lt; &quot; action=&quot;  &lt;&lt; this->getNode()->getName()&lt;&lt;std::endl;)&#xD;&#xA;&#xD;&#xA;        this->doAction();&#xD;&#xA;        this->sendOffers();&#xD;&#xA;        incomingTokens = this->completeAction();&#xD;&#xA;&#xD;&#xA;    } while (incomingTokens->size() > 0);"/>
+            <details key="suppressConstRefArgs"/>
           </eAnnotations>
           <eParameters name="incomingTokens" ordered="false" upperBound="-1" eType="#//Semantics/Activities/Token"/>
         </eOperations>
@@ -2186,7 +2190,6 @@
           </eAnnotations>
         </eOperations>
         <eOperations name="fire" ordered="false" lowerBound="1">
-          <eAnnotations source="http://tu-ilmenau.de/see/codegen"/>
           <eParameters name="incomingTokens" ordered="false" upperBound="-1" eType="#//Semantics/Activities/Token"/>
         </eOperations>
         <eOperations name="sendOffers" ordered="false">
@@ -2262,6 +2265,7 @@
         <eOperations name="addToken" ordered="false" lowerBound="1">
           <eAnnotations source="http://tu-ilmenau.de/see/codegen">
             <details key="body" value="DEBUG_MESSAGE(&#xA;if (this->getNode()== nullptr)&#xA;{&#xA;&#x9;std::cout&lt;&lt;&quot;[addToken] ...&quot;&lt;&lt;std::endl;&#xA;}&#xA;else&#xA;{&#xA;&#x9;std::cout&lt;&lt;&quot;[addToken] node = &quot; &lt;&lt; this->getNode()->getName()&lt;&lt;std::endl;&#xA;            &#xA;            std::shared_ptr&lt;uml::NamedElement> owner = std::dynamic_pointer_cast&lt;uml::NamedElement>(this->getNode()->getOwner().lock());&#xA;&#x9;&#x9;&#x9;&#x9;ACT_DEBUG(std::cout &lt;&lt; &quot;SET_TOKEN;NODE:&quot; &lt;&lt; (owner != nullptr ? owner->getName() : &quot;[NO_OWNER]&quot;) &lt;&lt; &quot;::&quot;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;&lt; this->getNode()->getName() &lt;&lt; &quot;;TOKEN:&quot; &lt;&lt; token->getValue()&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;&lt; &quot;;CURRENT_TOKENS:&quot; &lt;&lt; (this->getHeldTokens()->size() + 1) &lt;&lt; &quot;;DIRECTION:add&quot;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;&lt; std::endl;)&#xA;&#x9;&#x9;}&#xA;&#x9;)&#xA;&#xA;if (!token->isWithdrawn())&#xA;{&#xA;&#x9;token->withdraw();&#xA;&#x9;//token = token->_copy();&#xA;&#x9;if(token->getMetaElementID() == fUML::Semantics::Activities::ActivitiesPackage::FORKEDTOKEN_CLASS)&#xA;&#x9;{&#xA;&#x9;&#x9;token = token->_copy();&#xA;&#x9;}&#xA;&#x9;&#x9;&#xA;}&#xA;&#xA;token->setHolder(getThisActivityNodeActivationPtr());&#xA;token->setWithdrawn(false);&#xA;&#xA;DEBUG_MESSAGE(std::cout&lt;&lt;&quot;[addToken] Adding token with value = &quot;&lt;&lt;token->getValue()&lt;&lt;std::endl;)&#xA;&#xA;this->getHeldTokens()->push_back(token);"/>
+            <details key="suppressConstRefArgs"/>
           </eAnnotations>
           <eParameters name="token" ordered="false" lowerBound="1" eType="#//Semantics/Activities/Token"/>
         </eOperations>
@@ -2621,6 +2625,7 @@
           <eAnnotations source="http://tu-ilmenau.de/see/codegen">
             <details key="body" value="return this->getBaseToken()->getValue();"/>
             <details key="const"/>
+            <details key="forceConstRefReturn"/>
           </eAnnotations>
         </eOperations>
         <eOperations name="_copy" lowerBound="1" eType="#//Semantics/Activities/Token">
@@ -2669,6 +2674,7 @@
         <eOperations name="fire" ordered="false" lowerBound="1">
           <eAnnotations source="http://tu-ilmenau.de/see/codegen">
             <details key="body" value="&#x9;DEBUG_MESSAGE(&#xA;&#x9;&#x9;if (this->getNode() != nullptr)&#xA;&#x9;&#x9;{&#xA;&#x9;&#x9;&#x9;std::cout&lt;&lt;&quot;[fire] Control node &quot; &lt;&lt; this->getNode()->getName() &lt;&lt; &quot;...&quot;&lt;&lt;std::endl;&#xA;&#x9;&#x9;}&#xA;&#x9;)&#xA;&#xA;&#x9;int controlTokenID = fUML::Semantics::Activities::ActivitiesPackage::CONTROLTOKEN_CLASS;&#xA;&#x9;std::shared_ptr&lt;Bag&lt;fUML::Semantics::Activities::ControlToken>> controlTokenList(new Bag&lt;fUML::Semantics::Activities::ControlToken>());&#xA;&#xA;&#x9;Bag&lt;fUML::Semantics::Activities::Token>::iterator tokenIter = incomingTokens->begin();&#xA;&#x9;Bag&lt;fUML::Semantics::Activities::Token>::iterator tokenEnd = incomingTokens->end();&#xA;&#x9;while (tokenIter != tokenEnd)&#xA;&#x9;{&#xA;&#x9;&#x9;if ((*tokenIter)->getMetaElementID() == controlTokenID)&#xA;&#x9;&#x9;{&#xA;&#x9;&#x9;&#x9;controlTokenList->push_back(std::dynamic_pointer_cast&lt;fUML::Semantics::Activities::ControlToken>(*tokenIter));&#xA;&#x9;&#x9;}&#xA;&#x9;&#x9;tokenIter++;&#xA;&#x9;}&#xA;&#xA;&#x9;DEBUG_MESSAGE(std::cout &lt;&lt; &quot;found &quot; &lt;&lt; std::to_string(controlTokenList->size()) &lt;&lt; &quot; control tokens inside list with &quot; &lt;&lt; std::to_string(incomingTokens->size()) &lt;&lt; std::endl;)&#xA;&#x9;if (controlTokenList->size() == incomingTokens->size()) // all incoming tokens are ControlToken -> only one token should be offered&#xA;&#x9;{&#xA;&#x9;&#x9;incomingTokens.reset(new Bag&lt;fUML::Semantics::Activities::Token>());&#xA;&#x9;&#x9;incomingTokens->push_back(controlTokenList->front());&#xA;&#x9;}&#xA;&#x9;else // remove all ControlToken and offer only ObjectToken&#xA;&#x9;{&#xA;&#x9;&#x9;Bag&lt;fUML::Semantics::Activities::Token>::iterator controlIter = incomingTokens->begin();&#xA;&#x9;&#x9;Bag&lt;fUML::Semantics::Activities::Token>::iterator controlEnd = incomingTokens->end();&#xA;&#x9;&#x9;while (controlIter != controlEnd)&#xA;&#x9;&#x9;{&#xA;&#x9;&#x9;&#x9;incomingTokens->erase(*controlIter);&#xA;&#x9;&#x9;&#x9;controlIter++;&#xA;&#x9;&#x9;}&#xA;&#x9;}&#xA;&#xA;&#x9;this->sendOffers(incomingTokens);"/>
+            <details key="suppressConstRefArgs"/>
           </eAnnotations>
           <eParameters name="incomingTokens" ordered="false" upperBound="-1" eType="#//Semantics/Activities/Token"/>
         </eOperations>
@@ -2831,8 +2837,9 @@
         </eOperations>
         <eOperations name="getValue" lowerBound="1" eType="#//Semantics/Values/Value">
           <eAnnotations source="http://tu-ilmenau.de/see/codegen">
-            <details key="body" value="return nullptr;"/>
+            <details key="body" value="static const std::shared_ptr&lt;fUML::Semantics::Values::Value> nullPointer = nullptr;&#xA;return nullPointer;"/>
             <details key="const"/>
+            <details key="forceConstRefReturn"/>
           </eAnnotations>
         </eOperations>
         <eStructuralFeatures xsi:type="ecore:EReference" name="holder" ordered="false"
@@ -3181,6 +3188,7 @@
         <eOperations name="remove" ordered="false" lowerBound="1">
           <eAnnotations source="http://tu-ilmenau.de/see/codegen">
             <details key="body" value="value->setLocus(nullptr);&#xA;&#x9;this->getExtensionalValues()->erase(value);&#xA;&#x9;value.reset();"/>
+            <details key="suppressConstRefArgs"/>
           </eAnnotations>
           <eParameters name="value" ordered="false" lowerBound="1" eType="#//Semantics/StructuredClassifiers/ExtensionalValue"/>
         </eOperations>
