@@ -273,7 +273,7 @@ void TestIdentityActionObject::removeValue(std::shared_ptr<uml::StructuralFeatur
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_ActivityNode_activity())
 	{
-				m_TestIdentityActionValue->getActivity().reset();
+				//m_TestIdentityActionValue->getActivity().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_ActivityNode_inInterruptibleRegion())
@@ -314,7 +314,7 @@ void TestIdentityActionObject::removeValue(std::shared_ptr<uml::StructuralFeatur
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_ActivityNode_inStructuredNode())
 	{
-				m_TestIdentityActionValue->getInStructuredNode().reset();
+				//m_TestIdentityActionValue->getInStructuredNode().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_ActivityNode_incoming())
@@ -414,7 +414,7 @@ void TestIdentityActionObject::removeValue(std::shared_ptr<uml::StructuralFeatur
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_NamedElement_nameExpression())
 	{
-				m_TestIdentityActionValue->getNameExpression().reset();
+				//m_TestIdentityActionValue->getNameExpression().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_NamedElement_visibility())
@@ -429,17 +429,17 @@ void TestIdentityActionObject::removeValue(std::shared_ptr<uml::StructuralFeatur
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_TestIdentityAction_first())
 	{
-				m_TestIdentityActionValue->getFirst().reset();
+				//m_TestIdentityActionValue->getFirst().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_TestIdentityAction_result())
 	{
-				m_TestIdentityActionValue->getResult().reset();
+				//m_TestIdentityActionValue->getResult().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_TestIdentityAction_second())
 	{
-				m_TestIdentityActionValue->getSecond().reset();
+				//m_TestIdentityActionValue->getSecond().reset();
 
 	}
 }

@@ -219,7 +219,7 @@ void TriggerObject::removeValue(std::shared_ptr<uml::StructuralFeature> feature,
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_NamedElement_nameExpression())
 	{
-				m_TriggerValue->getNameExpression().reset();
+				//m_TriggerValue->getNameExpression().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_NamedElement_visibility())
@@ -229,7 +229,7 @@ void TriggerObject::removeValue(std::shared_ptr<uml::StructuralFeature> feature,
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Trigger_event())
 	{
-				m_TriggerValue->getEvent().reset();
+				//m_TriggerValue->getEvent().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Trigger_port())

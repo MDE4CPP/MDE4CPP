@@ -271,7 +271,7 @@ void DestroyObjectActionObject::removeValue(std::shared_ptr<uml::StructuralFeatu
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_ActivityNode_activity())
 	{
-				m_DestroyObjectActionValue->getActivity().reset();
+				//m_DestroyObjectActionValue->getActivity().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_ActivityNode_inInterruptibleRegion())
@@ -312,7 +312,7 @@ void DestroyObjectActionObject::removeValue(std::shared_ptr<uml::StructuralFeatu
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_ActivityNode_inStructuredNode())
 	{
-				m_DestroyObjectActionValue->getInStructuredNode().reset();
+				//m_DestroyObjectActionValue->getInStructuredNode().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_ActivityNode_incoming())
@@ -381,7 +381,7 @@ void DestroyObjectActionObject::removeValue(std::shared_ptr<uml::StructuralFeatu
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_DestroyObjectAction_target())
 	{
-				m_DestroyObjectActionValue->getTarget().reset();
+				//m_DestroyObjectActionValue->getTarget().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Element_ownedComment())
@@ -427,7 +427,7 @@ void DestroyObjectActionObject::removeValue(std::shared_ptr<uml::StructuralFeatu
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_NamedElement_nameExpression())
 	{
-				m_DestroyObjectActionValue->getNameExpression().reset();
+				//m_DestroyObjectActionValue->getNameExpression().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_NamedElement_visibility())

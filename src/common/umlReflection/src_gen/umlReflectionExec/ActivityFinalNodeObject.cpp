@@ -213,7 +213,7 @@ void ActivityFinalNodeObject::removeValue(std::shared_ptr<uml::StructuralFeature
 
 	if (feature == UML::UMLPackage::eInstance()->get_UML_ActivityNode_activity())
 	{
-				m_ActivityFinalNodeValue->getActivity().reset();
+				//m_ActivityFinalNodeValue->getActivity().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_ActivityNode_inInterruptibleRegion())
@@ -254,7 +254,7 @@ void ActivityFinalNodeObject::removeValue(std::shared_ptr<uml::StructuralFeature
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_ActivityNode_inStructuredNode())
 	{
-				m_ActivityFinalNodeValue->getInStructuredNode().reset();
+				//m_ActivityFinalNodeValue->getInStructuredNode().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_ActivityNode_incoming())
@@ -336,7 +336,7 @@ void ActivityFinalNodeObject::removeValue(std::shared_ptr<uml::StructuralFeature
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_NamedElement_nameExpression())
 	{
-				m_ActivityFinalNodeValue->getNameExpression().reset();
+				//m_ActivityFinalNodeValue->getNameExpression().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_NamedElement_visibility())

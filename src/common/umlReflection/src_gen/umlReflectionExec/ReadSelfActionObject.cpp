@@ -269,7 +269,7 @@ void ReadSelfActionObject::removeValue(std::shared_ptr<uml::StructuralFeature> f
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_ActivityNode_activity())
 	{
-				m_ReadSelfActionValue->getActivity().reset();
+				//m_ReadSelfActionValue->getActivity().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_ActivityNode_inInterruptibleRegion())
@@ -310,7 +310,7 @@ void ReadSelfActionObject::removeValue(std::shared_ptr<uml::StructuralFeature> f
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_ActivityNode_inStructuredNode())
 	{
-				m_ReadSelfActionValue->getInStructuredNode().reset();
+				//m_ReadSelfActionValue->getInStructuredNode().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_ActivityNode_incoming())
@@ -410,7 +410,7 @@ void ReadSelfActionObject::removeValue(std::shared_ptr<uml::StructuralFeature> f
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_NamedElement_nameExpression())
 	{
-				m_ReadSelfActionValue->getNameExpression().reset();
+				//m_ReadSelfActionValue->getNameExpression().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_NamedElement_visibility())
@@ -420,7 +420,7 @@ void ReadSelfActionObject::removeValue(std::shared_ptr<uml::StructuralFeature> f
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_ReadSelfAction_result())
 	{
-				m_ReadSelfActionValue->getResult().reset();
+				//m_ReadSelfActionValue->getResult().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_RedefinableElement_isLeaf())

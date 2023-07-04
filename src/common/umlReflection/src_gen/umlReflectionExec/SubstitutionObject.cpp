@@ -214,7 +214,7 @@ void SubstitutionObject::removeValue(std::shared_ptr<uml::StructuralFeature> fea
 
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Abstraction_mapping())
 	{
-				m_SubstitutionValue->getMapping().reset();
+				//m_SubstitutionValue->getMapping().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Dependency_client())
@@ -278,7 +278,7 @@ void SubstitutionObject::removeValue(std::shared_ptr<uml::StructuralFeature> fea
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_NamedElement_nameExpression())
 	{
-				m_SubstitutionValue->getNameExpression().reset();
+				//m_SubstitutionValue->getNameExpression().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_NamedElement_visibility())
@@ -293,22 +293,22 @@ void SubstitutionObject::removeValue(std::shared_ptr<uml::StructuralFeature> fea
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_ParameterableElement_owningTemplateParameter())
 	{
-				m_SubstitutionValue->getOwningTemplateParameter().reset();
+				//m_SubstitutionValue->getOwningTemplateParameter().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_ParameterableElement_templateParameter())
 	{
-				m_SubstitutionValue->getTemplateParameter().reset();
+				//m_SubstitutionValue->getTemplateParameter().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Substitution_contract())
 	{
-				m_SubstitutionValue->getContract().reset();
+				//m_SubstitutionValue->getContract().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Substitution_substitutingClassifier())
 	{
-				m_SubstitutionValue->getSubstitutingClassifier().reset();
+				//m_SubstitutionValue->getSubstitutingClassifier().reset();
 
 	}
 }

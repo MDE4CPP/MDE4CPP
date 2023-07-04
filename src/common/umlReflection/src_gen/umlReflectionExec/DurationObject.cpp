@@ -204,7 +204,7 @@ void DurationObject::removeValue(std::shared_ptr<uml::StructuralFeature> feature
 
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Duration_expr())
 	{
-				m_DurationValue->getExpr().reset();
+				//m_DurationValue->getExpr().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Duration_observation())
@@ -250,7 +250,7 @@ void DurationObject::removeValue(std::shared_ptr<uml::StructuralFeature> feature
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_NamedElement_nameExpression())
 	{
-				m_DurationValue->getNameExpression().reset();
+				//m_DurationValue->getNameExpression().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_NamedElement_visibility())
@@ -265,17 +265,17 @@ void DurationObject::removeValue(std::shared_ptr<uml::StructuralFeature> feature
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_ParameterableElement_owningTemplateParameter())
 	{
-				m_DurationValue->getOwningTemplateParameter().reset();
+				//m_DurationValue->getOwningTemplateParameter().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_ParameterableElement_templateParameter())
 	{
-				m_DurationValue->getTemplateParameter().reset();
+				//m_DurationValue->getTemplateParameter().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_TypedElement_type())
 	{
-				m_DurationValue->getType().reset();
+				//m_DurationValue->getType().reset();
 
 	}
 }

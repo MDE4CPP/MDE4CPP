@@ -268,7 +268,7 @@ void StateObject::removeValue(std::shared_ptr<uml::StructuralFeature> feature, s
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_NamedElement_nameExpression())
 	{
-				m_StateValue->getNameExpression().reset();
+				//m_StateValue->getNameExpression().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_NamedElement_visibility())
@@ -391,22 +391,22 @@ void StateObject::removeValue(std::shared_ptr<uml::StructuralFeature> feature, s
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_State_doActivity())
 	{
-				m_StateValue->getDoActivity().reset();
+				//m_StateValue->getDoActivity().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_State_entry())
 	{
-				m_StateValue->getEntry().reset();
+				//m_StateValue->getEntry().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_State_exit())
 	{
-				m_StateValue->getExit().reset();
+				//m_StateValue->getExit().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_State_redefinedState())
 	{
-				m_StateValue->getRedefinedState().reset();
+				//m_StateValue->getRedefinedState().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_State_region())
@@ -429,17 +429,17 @@ void StateObject::removeValue(std::shared_ptr<uml::StructuralFeature> feature, s
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_State_stateInvariant())
 	{
-				m_StateValue->getStateInvariant().reset();
+				//m_StateValue->getStateInvariant().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_State_submachine())
 	{
-				m_StateValue->getSubmachine().reset();
+				//m_StateValue->getSubmachine().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Vertex_container())
 	{
-				m_StateValue->getContainer().reset();
+				//m_StateValue->getContainer().reset();
 
 	}
 }

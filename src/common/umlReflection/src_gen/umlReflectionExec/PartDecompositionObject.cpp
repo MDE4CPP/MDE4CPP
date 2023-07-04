@@ -246,12 +246,12 @@ void PartDecompositionObject::removeValue(std::shared_ptr<uml::StructuralFeature
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_InteractionFragment_enclosingInteraction())
 	{
-				m_PartDecompositionValue->getEnclosingInteraction().reset();
+				//m_PartDecompositionValue->getEnclosingInteraction().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_InteractionFragment_enclosingOperand())
 	{
-				m_PartDecompositionValue->getEnclosingOperand().reset();
+				//m_PartDecompositionValue->getEnclosingOperand().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_InteractionFragment_generalOrdering())
@@ -310,17 +310,17 @@ void PartDecompositionObject::removeValue(std::shared_ptr<uml::StructuralFeature
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_InteractionUse_refersTo())
 	{
-				m_PartDecompositionValue->getRefersTo().reset();
+				//m_PartDecompositionValue->getRefersTo().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_InteractionUse_returnValue())
 	{
-				m_PartDecompositionValue->getReturnValue().reset();
+				//m_PartDecompositionValue->getReturnValue().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_InteractionUse_returnValueRecipient())
 	{
-				m_PartDecompositionValue->getReturnValueRecipient().reset();
+				//m_PartDecompositionValue->getReturnValueRecipient().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_NamedElement_name())
@@ -330,7 +330,7 @@ void PartDecompositionObject::removeValue(std::shared_ptr<uml::StructuralFeature
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_NamedElement_nameExpression())
 	{
-				m_PartDecompositionValue->getNameExpression().reset();
+				//m_PartDecompositionValue->getNameExpression().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_NamedElement_visibility())

@@ -229,7 +229,7 @@ void LiteralUnlimitedNaturalObject::removeValue(std::shared_ptr<uml::StructuralF
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_NamedElement_nameExpression())
 	{
-				m_LiteralUnlimitedNaturalValue->getNameExpression().reset();
+				//m_LiteralUnlimitedNaturalValue->getNameExpression().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_NamedElement_visibility())
@@ -244,17 +244,17 @@ void LiteralUnlimitedNaturalObject::removeValue(std::shared_ptr<uml::StructuralF
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_ParameterableElement_owningTemplateParameter())
 	{
-				m_LiteralUnlimitedNaturalValue->getOwningTemplateParameter().reset();
+				//m_LiteralUnlimitedNaturalValue->getOwningTemplateParameter().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_ParameterableElement_templateParameter())
 	{
-				m_LiteralUnlimitedNaturalValue->getTemplateParameter().reset();
+				//m_LiteralUnlimitedNaturalValue->getTemplateParameter().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_TypedElement_type())
 	{
-				m_LiteralUnlimitedNaturalValue->getType().reset();
+				//m_LiteralUnlimitedNaturalValue->getType().reset();
 
 	}
 }

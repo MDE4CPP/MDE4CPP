@@ -217,7 +217,7 @@ void TypedElementObject::removeValue(std::shared_ptr<uml::StructuralFeature> fea
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_NamedElement_nameExpression())
 	{
-				m_TypedElementValue->getNameExpression().reset();
+				//m_TypedElementValue->getNameExpression().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_NamedElement_visibility())
@@ -227,7 +227,7 @@ void TypedElementObject::removeValue(std::shared_ptr<uml::StructuralFeature> fea
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_TypedElement_type())
 	{
-				m_TypedElementValue->getType().reset();
+				//m_TypedElementValue->getType().reset();
 
 	}
 }

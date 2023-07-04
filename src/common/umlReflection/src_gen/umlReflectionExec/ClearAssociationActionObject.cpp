@@ -271,7 +271,7 @@ void ClearAssociationActionObject::removeValue(std::shared_ptr<uml::StructuralFe
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_ActivityNode_activity())
 	{
-				m_ClearAssociationActionValue->getActivity().reset();
+				//m_ClearAssociationActionValue->getActivity().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_ActivityNode_inInterruptibleRegion())
@@ -312,7 +312,7 @@ void ClearAssociationActionObject::removeValue(std::shared_ptr<uml::StructuralFe
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_ActivityNode_inStructuredNode())
 	{
-				m_ClearAssociationActionValue->getInStructuredNode().reset();
+				//m_ClearAssociationActionValue->getInStructuredNode().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_ActivityNode_incoming())
@@ -371,12 +371,12 @@ void ClearAssociationActionObject::removeValue(std::shared_ptr<uml::StructuralFe
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_ClearAssociationAction_association())
 	{
-				m_ClearAssociationActionValue->getAssociation().reset();
+				//m_ClearAssociationActionValue->getAssociation().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_ClearAssociationAction_object())
 	{
-				m_ClearAssociationActionValue->getObject().reset();
+				//m_ClearAssociationActionValue->getObject().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Element_ownedComment())
@@ -422,7 +422,7 @@ void ClearAssociationActionObject::removeValue(std::shared_ptr<uml::StructuralFe
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_NamedElement_nameExpression())
 	{
-				m_ClearAssociationActionValue->getNameExpression().reset();
+				//m_ClearAssociationActionValue->getNameExpression().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_NamedElement_visibility())

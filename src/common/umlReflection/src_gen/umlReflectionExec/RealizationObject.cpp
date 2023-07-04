@@ -210,7 +210,7 @@ void RealizationObject::removeValue(std::shared_ptr<uml::StructuralFeature> feat
 
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Abstraction_mapping())
 	{
-				m_RealizationValue->getMapping().reset();
+				//m_RealizationValue->getMapping().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Dependency_client())
@@ -274,7 +274,7 @@ void RealizationObject::removeValue(std::shared_ptr<uml::StructuralFeature> feat
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_NamedElement_nameExpression())
 	{
-				m_RealizationValue->getNameExpression().reset();
+				//m_RealizationValue->getNameExpression().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_NamedElement_visibility())
@@ -289,12 +289,12 @@ void RealizationObject::removeValue(std::shared_ptr<uml::StructuralFeature> feat
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_ParameterableElement_owningTemplateParameter())
 	{
-				m_RealizationValue->getOwningTemplateParameter().reset();
+				//m_RealizationValue->getOwningTemplateParameter().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_ParameterableElement_templateParameter())
 	{
-				m_RealizationValue->getTemplateParameter().reset();
+				//m_RealizationValue->getTemplateParameter().reset();
 
 	}
 }

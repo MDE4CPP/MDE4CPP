@@ -249,7 +249,7 @@ void ExpressionObject::removeValue(std::shared_ptr<uml::StructuralFeature> featu
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_NamedElement_nameExpression())
 	{
-				m_ExpressionValue->getNameExpression().reset();
+				//m_ExpressionValue->getNameExpression().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_NamedElement_visibility())
@@ -264,17 +264,17 @@ void ExpressionObject::removeValue(std::shared_ptr<uml::StructuralFeature> featu
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_ParameterableElement_owningTemplateParameter())
 	{
-				m_ExpressionValue->getOwningTemplateParameter().reset();
+				//m_ExpressionValue->getOwningTemplateParameter().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_ParameterableElement_templateParameter())
 	{
-				m_ExpressionValue->getTemplateParameter().reset();
+				//m_ExpressionValue->getTemplateParameter().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_TypedElement_type())
 	{
-				m_ExpressionValue->getType().reset();
+				//m_ExpressionValue->getType().reset();
 
 	}
 }

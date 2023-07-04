@@ -256,7 +256,7 @@ void ProtocolTransitionObject::removeValue(std::shared_ptr<uml::StructuralFeatur
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_NamedElement_nameExpression())
 	{
-				m_ProtocolTransitionValue->getNameExpression().reset();
+				//m_ProtocolTransitionValue->getNameExpression().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_NamedElement_visibility())
@@ -320,12 +320,12 @@ void ProtocolTransitionObject::removeValue(std::shared_ptr<uml::StructuralFeatur
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_ProtocolTransition_postCondition())
 	{
-				m_ProtocolTransitionValue->getPostCondition().reset();
+				//m_ProtocolTransitionValue->getPostCondition().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_ProtocolTransition_preCondition())
 	{
-				m_ProtocolTransitionValue->getPreCondition().reset();
+				//m_ProtocolTransitionValue->getPreCondition().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_RedefinableElement_isLeaf())
@@ -335,17 +335,17 @@ void ProtocolTransitionObject::removeValue(std::shared_ptr<uml::StructuralFeatur
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Transition_container())
 	{
-				m_ProtocolTransitionValue->getContainer().reset();
+				//m_ProtocolTransitionValue->getContainer().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Transition_effect())
 	{
-				m_ProtocolTransitionValue->getEffect().reset();
+				//m_ProtocolTransitionValue->getEffect().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Transition_guard())
 	{
-				m_ProtocolTransitionValue->getGuard().reset();
+				//m_ProtocolTransitionValue->getGuard().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Transition_kind())
@@ -355,17 +355,17 @@ void ProtocolTransitionObject::removeValue(std::shared_ptr<uml::StructuralFeatur
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Transition_redefinedTransition())
 	{
-				m_ProtocolTransitionValue->getRedefinedTransition().reset();
+				//m_ProtocolTransitionValue->getRedefinedTransition().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Transition_source())
 	{
-				m_ProtocolTransitionValue->getSource().reset();
+				//m_ProtocolTransitionValue->getSource().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Transition_target())
 	{
-				m_ProtocolTransitionValue->getTarget().reset();
+				//m_ProtocolTransitionValue->getTarget().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Transition_trigger())

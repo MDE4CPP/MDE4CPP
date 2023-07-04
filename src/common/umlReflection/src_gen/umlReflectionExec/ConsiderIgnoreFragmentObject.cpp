@@ -303,12 +303,12 @@ void ConsiderIgnoreFragmentObject::removeValue(std::shared_ptr<uml::StructuralFe
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_InteractionFragment_enclosingInteraction())
 	{
-				m_ConsiderIgnoreFragmentValue->getEnclosingInteraction().reset();
+				//m_ConsiderIgnoreFragmentValue->getEnclosingInteraction().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_InteractionFragment_enclosingOperand())
 	{
-				m_ConsiderIgnoreFragmentValue->getEnclosingOperand().reset();
+				//m_ConsiderIgnoreFragmentValue->getEnclosingOperand().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_InteractionFragment_generalOrdering())
@@ -336,7 +336,7 @@ void ConsiderIgnoreFragmentObject::removeValue(std::shared_ptr<uml::StructuralFe
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_NamedElement_nameExpression())
 	{
-				m_ConsiderIgnoreFragmentValue->getNameExpression().reset();
+				//m_ConsiderIgnoreFragmentValue->getNameExpression().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_NamedElement_visibility())

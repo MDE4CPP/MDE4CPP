@@ -234,7 +234,7 @@ void RedefinableTemplateSignatureObject::removeValue(std::shared_ptr<uml::Struct
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_NamedElement_nameExpression())
 	{
-				m_RedefinableTemplateSignatureValue->getNameExpression().reset();
+				//m_RedefinableTemplateSignatureValue->getNameExpression().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_NamedElement_visibility())
@@ -249,7 +249,7 @@ void RedefinableTemplateSignatureObject::removeValue(std::shared_ptr<uml::Struct
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_RedefinableTemplateSignature_classifier())
 	{
-				m_RedefinableTemplateSignatureValue->getClassifier().reset();
+				//m_RedefinableTemplateSignatureValue->getClassifier().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_RedefinableTemplateSignature_extendedSignature())
@@ -308,7 +308,7 @@ void RedefinableTemplateSignatureObject::removeValue(std::shared_ptr<uml::Struct
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_TemplateSignature_template())
 	{
-				m_RedefinableTemplateSignatureValue->getTemplate().reset();
+				//m_RedefinableTemplateSignatureValue->getTemplate().reset();
 
 	}
 }

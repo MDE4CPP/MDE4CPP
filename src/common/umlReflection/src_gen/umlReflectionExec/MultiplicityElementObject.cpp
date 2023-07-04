@@ -223,7 +223,7 @@ void MultiplicityElementObject::removeValue(std::shared_ptr<uml::StructuralFeatu
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_MultiplicityElement_lowerValue())
 	{
-				m_MultiplicityElementValue->getLowerValue().reset();
+				//m_MultiplicityElementValue->getLowerValue().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_MultiplicityElement_upper())
@@ -233,7 +233,7 @@ void MultiplicityElementObject::removeValue(std::shared_ptr<uml::StructuralFeatu
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_MultiplicityElement_upperValue())
 	{
-				m_MultiplicityElementValue->getUpperValue().reset();
+				//m_MultiplicityElementValue->getUpperValue().reset();
 
 	}
 }

@@ -214,7 +214,7 @@ void ActivityPartitionObject::removeValue(std::shared_ptr<uml::StructuralFeature
 
 	if (feature == UML::UMLPackage::eInstance()->get_UML_ActivityGroup_inActivity())
 	{
-				m_ActivityPartitionValue->getInActivity().reset();
+				//m_ActivityPartitionValue->getInActivity().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_ActivityPartition_edge())
@@ -265,7 +265,7 @@ void ActivityPartitionObject::removeValue(std::shared_ptr<uml::StructuralFeature
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_ActivityPartition_represents())
 	{
-				m_ActivityPartitionValue->getRepresents().reset();
+				//m_ActivityPartitionValue->getRepresents().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_ActivityPartition_subpartition())
@@ -288,7 +288,7 @@ void ActivityPartitionObject::removeValue(std::shared_ptr<uml::StructuralFeature
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_ActivityPartition_superPartition())
 	{
-				m_ActivityPartitionValue->getSuperPartition().reset();
+				//m_ActivityPartitionValue->getSuperPartition().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Element_ownedComment())
@@ -316,7 +316,7 @@ void ActivityPartitionObject::removeValue(std::shared_ptr<uml::StructuralFeature
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_NamedElement_nameExpression())
 	{
-				m_ActivityPartitionValue->getNameExpression().reset();
+				//m_ActivityPartitionValue->getNameExpression().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_NamedElement_visibility())

@@ -217,12 +217,12 @@ void ControlFlowObject::removeValue(std::shared_ptr<uml::StructuralFeature> feat
 
 	if (feature == UML::UMLPackage::eInstance()->get_UML_ActivityEdge_activity())
 	{
-				m_ControlFlowValue->getActivity().reset();
+				//m_ControlFlowValue->getActivity().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_ActivityEdge_guard())
 	{
-				m_ControlFlowValue->getGuard().reset();
+				//m_ControlFlowValue->getGuard().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_ActivityEdge_inPartition())
@@ -245,12 +245,12 @@ void ControlFlowObject::removeValue(std::shared_ptr<uml::StructuralFeature> feat
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_ActivityEdge_inStructuredNode())
 	{
-				m_ControlFlowValue->getInStructuredNode().reset();
+				//m_ControlFlowValue->getInStructuredNode().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_ActivityEdge_interrupts())
 	{
-				m_ControlFlowValue->getInterrupts().reset();
+				//m_ControlFlowValue->getInterrupts().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_ActivityEdge_redefinedEdge())
@@ -273,17 +273,17 @@ void ControlFlowObject::removeValue(std::shared_ptr<uml::StructuralFeature> feat
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_ActivityEdge_source())
 	{
-				m_ControlFlowValue->getSource().reset();
+				//m_ControlFlowValue->getSource().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_ActivityEdge_target())
 	{
-				m_ControlFlowValue->getTarget().reset();
+				//m_ControlFlowValue->getTarget().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_ActivityEdge_weight())
 	{
-				m_ControlFlowValue->getWeight().reset();
+				//m_ControlFlowValue->getWeight().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Element_ownedComment())
@@ -311,7 +311,7 @@ void ControlFlowObject::removeValue(std::shared_ptr<uml::StructuralFeature> feat
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_NamedElement_nameExpression())
 	{
-				m_ControlFlowValue->getNameExpression().reset();
+				//m_ControlFlowValue->getNameExpression().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_NamedElement_visibility())

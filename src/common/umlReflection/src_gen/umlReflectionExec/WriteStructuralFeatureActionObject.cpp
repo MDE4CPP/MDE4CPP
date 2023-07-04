@@ -275,7 +275,7 @@ void WriteStructuralFeatureActionObject::removeValue(std::shared_ptr<uml::Struct
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_ActivityNode_activity())
 	{
-				m_WriteStructuralFeatureActionValue->getActivity().reset();
+				//m_WriteStructuralFeatureActionValue->getActivity().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_ActivityNode_inInterruptibleRegion())
@@ -316,7 +316,7 @@ void WriteStructuralFeatureActionObject::removeValue(std::shared_ptr<uml::Struct
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_ActivityNode_inStructuredNode())
 	{
-				m_WriteStructuralFeatureActionValue->getInStructuredNode().reset();
+				//m_WriteStructuralFeatureActionValue->getInStructuredNode().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_ActivityNode_incoming())
@@ -416,7 +416,7 @@ void WriteStructuralFeatureActionObject::removeValue(std::shared_ptr<uml::Struct
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_NamedElement_nameExpression())
 	{
-				m_WriteStructuralFeatureActionValue->getNameExpression().reset();
+				//m_WriteStructuralFeatureActionValue->getNameExpression().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_NamedElement_visibility())
@@ -431,22 +431,22 @@ void WriteStructuralFeatureActionObject::removeValue(std::shared_ptr<uml::Struct
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_StructuralFeatureAction_object())
 	{
-				m_WriteStructuralFeatureActionValue->getObject().reset();
+				//m_WriteStructuralFeatureActionValue->getObject().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_StructuralFeatureAction_structuralFeature())
 	{
-				m_WriteStructuralFeatureActionValue->getStructuralFeature().reset();
+				//m_WriteStructuralFeatureActionValue->getStructuralFeature().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_WriteStructuralFeatureAction_result())
 	{
-				m_WriteStructuralFeatureActionValue->getResult().reset();
+				//m_WriteStructuralFeatureActionValue->getResult().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_WriteStructuralFeatureAction_value())
 	{
-				m_WriteStructuralFeatureActionValue->getValue().reset();
+				//m_WriteStructuralFeatureActionValue->getValue().reset();
 
 	}
 }

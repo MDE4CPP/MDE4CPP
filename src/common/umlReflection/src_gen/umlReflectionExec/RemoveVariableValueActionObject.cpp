@@ -274,7 +274,7 @@ void RemoveVariableValueActionObject::removeValue(std::shared_ptr<uml::Structura
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_ActivityNode_activity())
 	{
-				m_RemoveVariableValueActionValue->getActivity().reset();
+				//m_RemoveVariableValueActionValue->getActivity().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_ActivityNode_inInterruptibleRegion())
@@ -315,7 +315,7 @@ void RemoveVariableValueActionObject::removeValue(std::shared_ptr<uml::Structura
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_ActivityNode_inStructuredNode())
 	{
-				m_RemoveVariableValueActionValue->getInStructuredNode().reset();
+				//m_RemoveVariableValueActionValue->getInStructuredNode().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_ActivityNode_incoming())
@@ -415,7 +415,7 @@ void RemoveVariableValueActionObject::removeValue(std::shared_ptr<uml::Structura
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_NamedElement_nameExpression())
 	{
-				m_RemoveVariableValueActionValue->getNameExpression().reset();
+				//m_RemoveVariableValueActionValue->getNameExpression().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_NamedElement_visibility())
@@ -435,17 +435,17 @@ void RemoveVariableValueActionObject::removeValue(std::shared_ptr<uml::Structura
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_RemoveVariableValueAction_removeAt())
 	{
-				m_RemoveVariableValueActionValue->getRemoveAt().reset();
+				//m_RemoveVariableValueActionValue->getRemoveAt().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_VariableAction_variable())
 	{
-				m_RemoveVariableValueActionValue->getVariable().reset();
+				//m_RemoveVariableValueActionValue->getVariable().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_WriteVariableAction_value())
 	{
-				m_RemoveVariableValueActionValue->getValue().reset();
+				//m_RemoveVariableValueActionValue->getValue().reset();
 
 	}
 }

@@ -274,7 +274,7 @@ void ReduceActionObject::removeValue(std::shared_ptr<uml::StructuralFeature> fea
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_ActivityNode_activity())
 	{
-				m_ReduceActionValue->getActivity().reset();
+				//m_ReduceActionValue->getActivity().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_ActivityNode_inInterruptibleRegion())
@@ -315,7 +315,7 @@ void ReduceActionObject::removeValue(std::shared_ptr<uml::StructuralFeature> fea
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_ActivityNode_inStructuredNode())
 	{
-				m_ReduceActionValue->getInStructuredNode().reset();
+				//m_ReduceActionValue->getInStructuredNode().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_ActivityNode_incoming())
@@ -415,7 +415,7 @@ void ReduceActionObject::removeValue(std::shared_ptr<uml::StructuralFeature> fea
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_NamedElement_nameExpression())
 	{
-				m_ReduceActionValue->getNameExpression().reset();
+				//m_ReduceActionValue->getNameExpression().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_NamedElement_visibility())
@@ -430,7 +430,7 @@ void ReduceActionObject::removeValue(std::shared_ptr<uml::StructuralFeature> fea
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_ReduceAction_collection())
 	{
-				m_ReduceActionValue->getCollection().reset();
+				//m_ReduceActionValue->getCollection().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_ReduceAction_isOrdered())
@@ -440,12 +440,12 @@ void ReduceActionObject::removeValue(std::shared_ptr<uml::StructuralFeature> fea
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_ReduceAction_reducer())
 	{
-				m_ReduceActionValue->getReducer().reset();
+				//m_ReduceActionValue->getReducer().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_ReduceAction_result())
 	{
-				m_ReduceActionValue->getResult().reset();
+				//m_ReduceActionValue->getResult().reset();
 
 	}
 }

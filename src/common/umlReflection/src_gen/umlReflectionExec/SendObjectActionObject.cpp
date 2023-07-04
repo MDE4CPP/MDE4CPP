@@ -275,7 +275,7 @@ void SendObjectActionObject::removeValue(std::shared_ptr<uml::StructuralFeature>
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_ActivityNode_activity())
 	{
-				m_SendObjectActionValue->getActivity().reset();
+				//m_SendObjectActionValue->getActivity().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_ActivityNode_inInterruptibleRegion())
@@ -316,7 +316,7 @@ void SendObjectActionObject::removeValue(std::shared_ptr<uml::StructuralFeature>
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_ActivityNode_inStructuredNode())
 	{
-				m_SendObjectActionValue->getInStructuredNode().reset();
+				//m_SendObjectActionValue->getInStructuredNode().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_ActivityNode_incoming())
@@ -429,7 +429,7 @@ void SendObjectActionObject::removeValue(std::shared_ptr<uml::StructuralFeature>
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_InvocationAction_onPort())
 	{
-				m_SendObjectActionValue->getOnPort().reset();
+				//m_SendObjectActionValue->getOnPort().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_NamedElement_name())
@@ -439,7 +439,7 @@ void SendObjectActionObject::removeValue(std::shared_ptr<uml::StructuralFeature>
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_NamedElement_nameExpression())
 	{
-				m_SendObjectActionValue->getNameExpression().reset();
+				//m_SendObjectActionValue->getNameExpression().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_NamedElement_visibility())
@@ -454,12 +454,12 @@ void SendObjectActionObject::removeValue(std::shared_ptr<uml::StructuralFeature>
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_SendObjectAction_request())
 	{
-				m_SendObjectActionValue->getRequest().reset();
+				//m_SendObjectActionValue->getRequest().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_SendObjectAction_target())
 	{
-				m_SendObjectActionValue->getTarget().reset();
+				//m_SendObjectActionValue->getTarget().reset();
 
 	}
 }

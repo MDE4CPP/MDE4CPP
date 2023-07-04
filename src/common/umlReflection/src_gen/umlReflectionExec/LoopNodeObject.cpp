@@ -319,12 +319,12 @@ void LoopNodeObject::removeValue(std::shared_ptr<uml::StructuralFeature> feature
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_ActivityGroup_inActivity())
 	{
-				m_LoopNodeValue->getInActivity().reset();
+				//m_LoopNodeValue->getInActivity().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_ActivityNode_activity())
 	{
-				m_LoopNodeValue->getActivity().reset();
+				//m_LoopNodeValue->getActivity().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_ActivityNode_inInterruptibleRegion())
@@ -365,7 +365,7 @@ void LoopNodeObject::removeValue(std::shared_ptr<uml::StructuralFeature> feature
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_ActivityNode_inStructuredNode())
 	{
-				m_LoopNodeValue->getInStructuredNode().reset();
+				//m_LoopNodeValue->getInStructuredNode().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_ActivityNode_incoming())
@@ -496,7 +496,7 @@ void LoopNodeObject::removeValue(std::shared_ptr<uml::StructuralFeature> feature
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_LoopNode_decider())
 	{
-				m_LoopNodeValue->getDecider().reset();
+				//m_LoopNodeValue->getDecider().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_LoopNode_isTestedFirst())
@@ -601,7 +601,7 @@ void LoopNodeObject::removeValue(std::shared_ptr<uml::StructuralFeature> feature
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_NamedElement_nameExpression())
 	{
-				m_LoopNodeValue->getNameExpression().reset();
+				//m_LoopNodeValue->getNameExpression().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_NamedElement_visibility())
@@ -670,7 +670,7 @@ void LoopNodeObject::removeValue(std::shared_ptr<uml::StructuralFeature> feature
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_StructuredActivityNode_activity())
 	{
-				m_LoopNodeValue->getActivity().reset();
+				//m_LoopNodeValue->getActivity().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_StructuredActivityNode_edge())

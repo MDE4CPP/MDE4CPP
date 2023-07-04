@@ -213,7 +213,7 @@ void GeneralizationObject::removeValue(std::shared_ptr<uml::StructuralFeature> f
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Generalization_general())
 	{
-				m_GeneralizationValue->getGeneral().reset();
+				//m_GeneralizationValue->getGeneral().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Generalization_generalizationSet())
@@ -241,7 +241,7 @@ void GeneralizationObject::removeValue(std::shared_ptr<uml::StructuralFeature> f
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Generalization_specific())
 	{
-				m_GeneralizationValue->getSpecific().reset();
+				//m_GeneralizationValue->getSpecific().reset();
 
 	}
 }

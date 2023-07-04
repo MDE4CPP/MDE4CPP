@@ -193,7 +193,7 @@ void ConnectableElementTemplateParameterObject::removeValue(std::shared_ptr<uml:
 
 	if (feature == UML::UMLPackage::eInstance()->get_UML_ConnectableElementTemplateParameter_parameteredElement())
 	{
-				m_ConnectableElementTemplateParameterValue->getParameteredElement().reset();
+				//m_ConnectableElementTemplateParameterValue->getParameteredElement().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Element_ownedComment())
@@ -216,27 +216,27 @@ void ConnectableElementTemplateParameterObject::removeValue(std::shared_ptr<uml:
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_TemplateParameter_default())
 	{
-				m_ConnectableElementTemplateParameterValue->getDefault().reset();
+				//m_ConnectableElementTemplateParameterValue->getDefault().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_TemplateParameter_ownedDefault())
 	{
-				m_ConnectableElementTemplateParameterValue->getOwnedDefault().reset();
+				//m_ConnectableElementTemplateParameterValue->getOwnedDefault().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_TemplateParameter_ownedParameteredElement())
 	{
-				m_ConnectableElementTemplateParameterValue->getOwnedParameteredElement().reset();
+				//m_ConnectableElementTemplateParameterValue->getOwnedParameteredElement().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_TemplateParameter_parameteredElement())
 	{
-				m_ConnectableElementTemplateParameterValue->getParameteredElement().reset();
+				//m_ConnectableElementTemplateParameterValue->getParameteredElement().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_TemplateParameter_signature())
 	{
-				m_ConnectableElementTemplateParameterValue->getSignature().reset();
+				//m_ConnectableElementTemplateParameterValue->getSignature().reset();
 
 	}
 }

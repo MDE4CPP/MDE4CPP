@@ -227,7 +227,7 @@ void NamespaceObject::removeValue(std::shared_ptr<uml::StructuralFeature> featur
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_NamedElement_nameExpression())
 	{
-				m_NamespaceValue->getNameExpression().reset();
+				//m_NamespaceValue->getNameExpression().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_NamedElement_visibility())

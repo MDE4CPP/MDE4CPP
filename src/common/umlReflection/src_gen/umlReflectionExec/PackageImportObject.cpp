@@ -211,12 +211,12 @@ void PackageImportObject::removeValue(std::shared_ptr<uml::StructuralFeature> fe
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_PackageImport_importedPackage())
 	{
-				m_PackageImportValue->getImportedPackage().reset();
+				//m_PackageImportValue->getImportedPackage().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_PackageImport_importingNamespace())
 	{
-				m_PackageImportValue->getImportingNamespace().reset();
+				//m_PackageImportValue->getImportingNamespace().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_PackageImport_visibility())

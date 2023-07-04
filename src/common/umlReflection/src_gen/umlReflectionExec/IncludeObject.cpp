@@ -222,12 +222,12 @@ void IncludeObject::removeValue(std::shared_ptr<uml::StructuralFeature> feature,
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Include_addition())
 	{
-				m_IncludeValue->getAddition().reset();
+				//m_IncludeValue->getAddition().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Include_includingCase())
 	{
-				m_IncludeValue->getIncludingCase().reset();
+				//m_IncludeValue->getIncludingCase().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_NamedElement_name())
@@ -237,7 +237,7 @@ void IncludeObject::removeValue(std::shared_ptr<uml::StructuralFeature> feature,
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_NamedElement_nameExpression())
 	{
-				m_IncludeValue->getNameExpression().reset();
+				//m_IncludeValue->getNameExpression().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_NamedElement_visibility())

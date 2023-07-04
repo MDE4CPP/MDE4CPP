@@ -202,7 +202,7 @@ void ActivityGroupObject::removeValue(std::shared_ptr<uml::StructuralFeature> fe
 
 	if (feature == UML::UMLPackage::eInstance()->get_UML_ActivityGroup_inActivity())
 	{
-				m_ActivityGroupValue->getInActivity().reset();
+				//m_ActivityGroupValue->getInActivity().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Element_ownedComment())
@@ -230,7 +230,7 @@ void ActivityGroupObject::removeValue(std::shared_ptr<uml::StructuralFeature> fe
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_NamedElement_nameExpression())
 	{
-				m_ActivityGroupValue->getNameExpression().reset();
+				//m_ActivityGroupValue->getNameExpression().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_NamedElement_visibility())

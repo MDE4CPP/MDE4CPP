@@ -244,12 +244,12 @@ void MessageObject::removeValue(std::shared_ptr<uml::StructuralFeature> feature,
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Message_connector())
 	{
-				m_MessageValue->getConnector().reset();
+				//m_MessageValue->getConnector().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Message_interaction())
 	{
-				m_MessageValue->getInteraction().reset();
+				//m_MessageValue->getInteraction().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Message_messageSort())
@@ -259,17 +259,17 @@ void MessageObject::removeValue(std::shared_ptr<uml::StructuralFeature> feature,
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Message_receiveEvent())
 	{
-				m_MessageValue->getReceiveEvent().reset();
+				//m_MessageValue->getReceiveEvent().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Message_sendEvent())
 	{
-				m_MessageValue->getSendEvent().reset();
+				//m_MessageValue->getSendEvent().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Message_signature())
 	{
-				m_MessageValue->getSignature().reset();
+				//m_MessageValue->getSignature().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_NamedElement_name())
@@ -279,7 +279,7 @@ void MessageObject::removeValue(std::shared_ptr<uml::StructuralFeature> feature,
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_NamedElement_nameExpression())
 	{
-				m_MessageValue->getNameExpression().reset();
+				//m_MessageValue->getNameExpression().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_NamedElement_visibility())

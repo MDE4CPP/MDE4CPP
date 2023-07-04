@@ -304,12 +304,12 @@ void SequenceNodeObject::removeValue(std::shared_ptr<uml::StructuralFeature> fea
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_ActivityGroup_inActivity())
 	{
-				m_SequenceNodeValue->getInActivity().reset();
+				//m_SequenceNodeValue->getInActivity().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_ActivityNode_activity())
 	{
-				m_SequenceNodeValue->getActivity().reset();
+				//m_SequenceNodeValue->getActivity().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_ActivityNode_inInterruptibleRegion())
@@ -350,7 +350,7 @@ void SequenceNodeObject::removeValue(std::shared_ptr<uml::StructuralFeature> fea
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_ActivityNode_inStructuredNode())
 	{
-				m_SequenceNodeValue->getInStructuredNode().reset();
+				//m_SequenceNodeValue->getInStructuredNode().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_ActivityNode_incoming())
@@ -450,7 +450,7 @@ void SequenceNodeObject::removeValue(std::shared_ptr<uml::StructuralFeature> fea
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_NamedElement_nameExpression())
 	{
-				m_SequenceNodeValue->getNameExpression().reset();
+				//m_SequenceNodeValue->getNameExpression().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_NamedElement_visibility())
@@ -537,7 +537,7 @@ void SequenceNodeObject::removeValue(std::shared_ptr<uml::StructuralFeature> fea
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_StructuredActivityNode_activity())
 	{
-				m_SequenceNodeValue->getActivity().reset();
+				//m_SequenceNodeValue->getActivity().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_StructuredActivityNode_edge())

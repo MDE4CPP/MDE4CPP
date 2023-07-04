@@ -308,12 +308,12 @@ void ConditionalNodeObject::removeValue(std::shared_ptr<uml::StructuralFeature> 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_ActivityGroup_inActivity())
 	{
-				m_ConditionalNodeValue->getInActivity().reset();
+				//m_ConditionalNodeValue->getInActivity().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_ActivityNode_activity())
 	{
-				m_ConditionalNodeValue->getActivity().reset();
+				//m_ConditionalNodeValue->getActivity().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_ActivityNode_inInterruptibleRegion())
@@ -354,7 +354,7 @@ void ConditionalNodeObject::removeValue(std::shared_ptr<uml::StructuralFeature> 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_ActivityNode_inStructuredNode())
 	{
-				m_ConditionalNodeValue->getInStructuredNode().reset();
+				//m_ConditionalNodeValue->getInStructuredNode().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_ActivityNode_incoming())
@@ -500,7 +500,7 @@ void ConditionalNodeObject::removeValue(std::shared_ptr<uml::StructuralFeature> 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_NamedElement_nameExpression())
 	{
-				m_ConditionalNodeValue->getNameExpression().reset();
+				//m_ConditionalNodeValue->getNameExpression().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_NamedElement_visibility())
@@ -569,7 +569,7 @@ void ConditionalNodeObject::removeValue(std::shared_ptr<uml::StructuralFeature> 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_StructuredActivityNode_activity())
 	{
-				m_ConditionalNodeValue->getActivity().reset();
+				//m_ConditionalNodeValue->getActivity().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_StructuredActivityNode_edge())

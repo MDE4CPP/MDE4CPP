@@ -278,7 +278,7 @@ void CallOperationActionObject::removeValue(std::shared_ptr<uml::StructuralFeatu
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_ActivityNode_activity())
 	{
-				m_CallOperationActionValue->getActivity().reset();
+				//m_CallOperationActionValue->getActivity().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_ActivityNode_inInterruptibleRegion())
@@ -319,7 +319,7 @@ void CallOperationActionObject::removeValue(std::shared_ptr<uml::StructuralFeatu
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_ActivityNode_inStructuredNode())
 	{
-				m_CallOperationActionValue->getInStructuredNode().reset();
+				//m_CallOperationActionValue->getInStructuredNode().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_ActivityNode_incoming())
@@ -401,12 +401,12 @@ void CallOperationActionObject::removeValue(std::shared_ptr<uml::StructuralFeatu
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_CallOperationAction_operation())
 	{
-				m_CallOperationActionValue->getOperation().reset();
+				//m_CallOperationActionValue->getOperation().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_CallOperationAction_target())
 	{
-				m_CallOperationActionValue->getTarget().reset();
+				//m_CallOperationActionValue->getTarget().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Element_ownedComment())
@@ -465,7 +465,7 @@ void CallOperationActionObject::removeValue(std::shared_ptr<uml::StructuralFeatu
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_InvocationAction_onPort())
 	{
-				m_CallOperationActionValue->getOnPort().reset();
+				//m_CallOperationActionValue->getOnPort().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_NamedElement_name())
@@ -475,7 +475,7 @@ void CallOperationActionObject::removeValue(std::shared_ptr<uml::StructuralFeatu
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_NamedElement_nameExpression())
 	{
-				m_CallOperationActionValue->getNameExpression().reset();
+				//m_CallOperationActionValue->getNameExpression().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_NamedElement_visibility())

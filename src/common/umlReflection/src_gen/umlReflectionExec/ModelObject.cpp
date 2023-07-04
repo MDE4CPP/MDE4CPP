@@ -258,7 +258,7 @@ void ModelObject::removeValue(std::shared_ptr<uml::StructuralFeature> feature, s
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_NamedElement_nameExpression())
 	{
-				m_ModelValue->getNameExpression().reset();
+				//m_ModelValue->getNameExpression().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_NamedElement_visibility())
@@ -345,7 +345,7 @@ void ModelObject::removeValue(std::shared_ptr<uml::StructuralFeature> feature, s
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Package_nestingPackage())
 	{
-				m_ModelValue->getNestingPackage().reset();
+				//m_ModelValue->getNestingPackage().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Package_ownedType())
@@ -427,17 +427,17 @@ void ModelObject::removeValue(std::shared_ptr<uml::StructuralFeature> feature, s
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_ParameterableElement_owningTemplateParameter())
 	{
-				m_ModelValue->getOwningTemplateParameter().reset();
+				//m_ModelValue->getOwningTemplateParameter().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_ParameterableElement_templateParameter())
 	{
-				m_ModelValue->getTemplateParameter().reset();
+				//m_ModelValue->getTemplateParameter().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_TemplateableElement_ownedTemplateSignature())
 	{
-				m_ModelValue->getOwnedTemplateSignature().reset();
+				//m_ModelValue->getOwnedTemplateSignature().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_TemplateableElement_templateBinding())

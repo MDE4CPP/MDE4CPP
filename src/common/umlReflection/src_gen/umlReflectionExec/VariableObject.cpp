@@ -216,7 +216,7 @@ void VariableObject::removeValue(std::shared_ptr<uml::StructuralFeature> feature
 
 	if (feature == UML::UMLPackage::eInstance()->get_UML_ConnectableElement_templateParameter())
 	{
-				m_VariableValue->getTemplateParameter().reset();
+				//m_VariableValue->getTemplateParameter().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Element_ownedComment())
@@ -254,7 +254,7 @@ void VariableObject::removeValue(std::shared_ptr<uml::StructuralFeature> feature
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_MultiplicityElement_lowerValue())
 	{
-				m_VariableValue->getLowerValue().reset();
+				//m_VariableValue->getLowerValue().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_MultiplicityElement_upper())
@@ -264,7 +264,7 @@ void VariableObject::removeValue(std::shared_ptr<uml::StructuralFeature> feature
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_MultiplicityElement_upperValue())
 	{
-				m_VariableValue->getUpperValue().reset();
+				//m_VariableValue->getUpperValue().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_NamedElement_name())
@@ -274,7 +274,7 @@ void VariableObject::removeValue(std::shared_ptr<uml::StructuralFeature> feature
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_NamedElement_nameExpression())
 	{
-				m_VariableValue->getNameExpression().reset();
+				//m_VariableValue->getNameExpression().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_NamedElement_visibility())
@@ -284,27 +284,27 @@ void VariableObject::removeValue(std::shared_ptr<uml::StructuralFeature> feature
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_ParameterableElement_owningTemplateParameter())
 	{
-				m_VariableValue->getOwningTemplateParameter().reset();
+				//m_VariableValue->getOwningTemplateParameter().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_ParameterableElement_templateParameter())
 	{
-				m_VariableValue->getTemplateParameter().reset();
+				//m_VariableValue->getTemplateParameter().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_TypedElement_type())
 	{
-				m_VariableValue->getType().reset();
+				//m_VariableValue->getType().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Variable_activityScope())
 	{
-				m_VariableValue->getActivityScope().reset();
+				//m_VariableValue->getActivityScope().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Variable_scope())
 	{
-				m_VariableValue->getScope().reset();
+				//m_VariableValue->getScope().reset();
 
 	}
 }

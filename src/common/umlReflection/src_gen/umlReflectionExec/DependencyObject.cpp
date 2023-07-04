@@ -269,7 +269,7 @@ void DependencyObject::removeValue(std::shared_ptr<uml::StructuralFeature> featu
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_NamedElement_nameExpression())
 	{
-				m_DependencyValue->getNameExpression().reset();
+				//m_DependencyValue->getNameExpression().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_NamedElement_visibility())
@@ -284,12 +284,12 @@ void DependencyObject::removeValue(std::shared_ptr<uml::StructuralFeature> featu
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_ParameterableElement_owningTemplateParameter())
 	{
-				m_DependencyValue->getOwningTemplateParameter().reset();
+				//m_DependencyValue->getOwningTemplateParameter().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_ParameterableElement_templateParameter())
 	{
-				m_DependencyValue->getTemplateParameter().reset();
+				//m_DependencyValue->getTemplateParameter().reset();
 
 	}
 }

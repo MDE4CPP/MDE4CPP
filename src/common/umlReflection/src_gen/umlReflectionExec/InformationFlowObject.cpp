@@ -369,7 +369,7 @@ void InformationFlowObject::removeValue(std::shared_ptr<uml::StructuralFeature> 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_NamedElement_nameExpression())
 	{
-				m_InformationFlowValue->getNameExpression().reset();
+				//m_InformationFlowValue->getNameExpression().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_NamedElement_visibility())
@@ -384,12 +384,12 @@ void InformationFlowObject::removeValue(std::shared_ptr<uml::StructuralFeature> 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_ParameterableElement_owningTemplateParameter())
 	{
-				m_InformationFlowValue->getOwningTemplateParameter().reset();
+				//m_InformationFlowValue->getOwningTemplateParameter().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_ParameterableElement_templateParameter())
 	{
-				m_InformationFlowValue->getTemplateParameter().reset();
+				//m_InformationFlowValue->getTemplateParameter().reset();
 
 	}
 }

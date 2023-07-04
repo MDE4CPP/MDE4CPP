@@ -227,12 +227,12 @@ void TimeConstraintObject::removeValue(std::shared_ptr<uml::StructuralFeature> f
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Constraint_context())
 	{
-				m_TimeConstraintValue->getContext().reset();
+				//m_TimeConstraintValue->getContext().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Constraint_specification())
 	{
-				m_TimeConstraintValue->getSpecification().reset();
+				//m_TimeConstraintValue->getSpecification().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Element_ownedComment())
@@ -255,7 +255,7 @@ void TimeConstraintObject::removeValue(std::shared_ptr<uml::StructuralFeature> f
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_IntervalConstraint_specification())
 	{
-				m_TimeConstraintValue->getSpecification().reset();
+				//m_TimeConstraintValue->getSpecification().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_NamedElement_name())
@@ -265,7 +265,7 @@ void TimeConstraintObject::removeValue(std::shared_ptr<uml::StructuralFeature> f
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_NamedElement_nameExpression())
 	{
-				m_TimeConstraintValue->getNameExpression().reset();
+				//m_TimeConstraintValue->getNameExpression().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_NamedElement_visibility())
@@ -280,12 +280,12 @@ void TimeConstraintObject::removeValue(std::shared_ptr<uml::StructuralFeature> f
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_ParameterableElement_owningTemplateParameter())
 	{
-				m_TimeConstraintValue->getOwningTemplateParameter().reset();
+				//m_TimeConstraintValue->getOwningTemplateParameter().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_ParameterableElement_templateParameter())
 	{
-				m_TimeConstraintValue->getTemplateParameter().reset();
+				//m_TimeConstraintValue->getTemplateParameter().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_TimeConstraint_firstEvent())
@@ -295,7 +295,7 @@ void TimeConstraintObject::removeValue(std::shared_ptr<uml::StructuralFeature> f
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_TimeConstraint_specification())
 	{
-				m_TimeConstraintValue->getSpecification().reset();
+				//m_TimeConstraintValue->getSpecification().reset();
 
 	}
 }

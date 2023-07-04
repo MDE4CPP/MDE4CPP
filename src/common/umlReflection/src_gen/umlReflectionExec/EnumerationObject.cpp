@@ -321,7 +321,7 @@ void EnumerationObject::removeValue(std::shared_ptr<uml::StructuralFeature> feat
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Classifier_ownedTemplateSignature())
 	{
-				m_EnumerationValue->getOwnedTemplateSignature().reset();
+				//m_EnumerationValue->getOwnedTemplateSignature().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Classifier_ownedUseCase())
@@ -380,7 +380,7 @@ void EnumerationObject::removeValue(std::shared_ptr<uml::StructuralFeature> feat
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Classifier_representation())
 	{
-				m_EnumerationValue->getRepresentation().reset();
+				//m_EnumerationValue->getRepresentation().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Classifier_substitution())
@@ -403,7 +403,7 @@ void EnumerationObject::removeValue(std::shared_ptr<uml::StructuralFeature> feat
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Classifier_templateParameter())
 	{
-				m_EnumerationValue->getTemplateParameter().reset();
+				//m_EnumerationValue->getTemplateParameter().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Classifier_useCase())
@@ -503,7 +503,7 @@ void EnumerationObject::removeValue(std::shared_ptr<uml::StructuralFeature> feat
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_NamedElement_nameExpression())
 	{
-				m_EnumerationValue->getNameExpression().reset();
+				//m_EnumerationValue->getNameExpression().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_NamedElement_visibility())
@@ -572,12 +572,12 @@ void EnumerationObject::removeValue(std::shared_ptr<uml::StructuralFeature> feat
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_ParameterableElement_owningTemplateParameter())
 	{
-				m_EnumerationValue->getOwningTemplateParameter().reset();
+				//m_EnumerationValue->getOwningTemplateParameter().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_ParameterableElement_templateParameter())
 	{
-				m_EnumerationValue->getTemplateParameter().reset();
+				//m_EnumerationValue->getTemplateParameter().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_RedefinableElement_isLeaf())
@@ -587,7 +587,7 @@ void EnumerationObject::removeValue(std::shared_ptr<uml::StructuralFeature> feat
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_TemplateableElement_ownedTemplateSignature())
 	{
-				m_EnumerationValue->getOwnedTemplateSignature().reset();
+				//m_EnumerationValue->getOwnedTemplateSignature().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_TemplateableElement_templateBinding())
@@ -610,7 +610,7 @@ void EnumerationObject::removeValue(std::shared_ptr<uml::StructuralFeature> feat
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Type_package())
 	{
-				m_EnumerationValue->getPackage().reset();
+				//m_EnumerationValue->getPackage().reset();
 
 	}
 }

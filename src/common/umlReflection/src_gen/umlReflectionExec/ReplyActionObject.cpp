@@ -273,7 +273,7 @@ void ReplyActionObject::removeValue(std::shared_ptr<uml::StructuralFeature> feat
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_ActivityNode_activity())
 	{
-				m_ReplyActionValue->getActivity().reset();
+				//m_ReplyActionValue->getActivity().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_ActivityNode_inInterruptibleRegion())
@@ -314,7 +314,7 @@ void ReplyActionObject::removeValue(std::shared_ptr<uml::StructuralFeature> feat
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_ActivityNode_inStructuredNode())
 	{
-				m_ReplyActionValue->getInStructuredNode().reset();
+				//m_ReplyActionValue->getInStructuredNode().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_ActivityNode_incoming())
@@ -414,7 +414,7 @@ void ReplyActionObject::removeValue(std::shared_ptr<uml::StructuralFeature> feat
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_NamedElement_nameExpression())
 	{
-				m_ReplyActionValue->getNameExpression().reset();
+				//m_ReplyActionValue->getNameExpression().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_NamedElement_visibility())
@@ -429,7 +429,7 @@ void ReplyActionObject::removeValue(std::shared_ptr<uml::StructuralFeature> feat
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_ReplyAction_replyToCall())
 	{
-				m_ReplyActionValue->getReplyToCall().reset();
+				//m_ReplyActionValue->getReplyToCall().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_ReplyAction_replyValue())
@@ -452,7 +452,7 @@ void ReplyActionObject::removeValue(std::shared_ptr<uml::StructuralFeature> feat
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_ReplyAction_returnInformation())
 	{
-				m_ReplyActionValue->getReturnInformation().reset();
+				//m_ReplyActionValue->getReturnInformation().reset();
 
 	}
 }

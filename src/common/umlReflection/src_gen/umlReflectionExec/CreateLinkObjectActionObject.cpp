@@ -275,7 +275,7 @@ void CreateLinkObjectActionObject::removeValue(std::shared_ptr<uml::StructuralFe
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_ActivityNode_activity())
 	{
-				m_CreateLinkObjectActionValue->getActivity().reset();
+				//m_CreateLinkObjectActionValue->getActivity().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_ActivityNode_inInterruptibleRegion())
@@ -316,7 +316,7 @@ void CreateLinkObjectActionObject::removeValue(std::shared_ptr<uml::StructuralFe
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_ActivityNode_inStructuredNode())
 	{
-				m_CreateLinkObjectActionValue->getInStructuredNode().reset();
+				//m_CreateLinkObjectActionValue->getInStructuredNode().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_ActivityNode_incoming())
@@ -393,7 +393,7 @@ void CreateLinkObjectActionObject::removeValue(std::shared_ptr<uml::StructuralFe
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_CreateLinkObjectAction_result())
 	{
-				m_CreateLinkObjectActionValue->getResult().reset();
+				//m_CreateLinkObjectActionValue->getResult().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Element_ownedComment())
@@ -475,7 +475,7 @@ void CreateLinkObjectActionObject::removeValue(std::shared_ptr<uml::StructuralFe
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_NamedElement_nameExpression())
 	{
-				m_CreateLinkObjectActionValue->getNameExpression().reset();
+				//m_CreateLinkObjectActionValue->getNameExpression().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_NamedElement_visibility())

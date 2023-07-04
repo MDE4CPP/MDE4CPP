@@ -276,7 +276,7 @@ void CallBehaviorActionObject::removeValue(std::shared_ptr<uml::StructuralFeatur
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_ActivityNode_activity())
 	{
-				m_CallBehaviorActionValue->getActivity().reset();
+				//m_CallBehaviorActionValue->getActivity().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_ActivityNode_inInterruptibleRegion())
@@ -317,7 +317,7 @@ void CallBehaviorActionObject::removeValue(std::shared_ptr<uml::StructuralFeatur
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_ActivityNode_inStructuredNode())
 	{
-				m_CallBehaviorActionValue->getInStructuredNode().reset();
+				//m_CallBehaviorActionValue->getInStructuredNode().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_ActivityNode_incoming())
@@ -399,7 +399,7 @@ void CallBehaviorActionObject::removeValue(std::shared_ptr<uml::StructuralFeatur
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_CallBehaviorAction_behavior())
 	{
-				m_CallBehaviorActionValue->getBehavior().reset();
+				//m_CallBehaviorActionValue->getBehavior().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Element_ownedComment())
@@ -458,7 +458,7 @@ void CallBehaviorActionObject::removeValue(std::shared_ptr<uml::StructuralFeatur
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_InvocationAction_onPort())
 	{
-				m_CallBehaviorActionValue->getOnPort().reset();
+				//m_CallBehaviorActionValue->getOnPort().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_NamedElement_name())
@@ -468,7 +468,7 @@ void CallBehaviorActionObject::removeValue(std::shared_ptr<uml::StructuralFeatur
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_NamedElement_nameExpression())
 	{
-				m_CallBehaviorActionValue->getNameExpression().reset();
+				//m_CallBehaviorActionValue->getNameExpression().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_NamedElement_visibility())

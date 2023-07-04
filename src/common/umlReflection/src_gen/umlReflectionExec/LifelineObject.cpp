@@ -238,22 +238,22 @@ void LifelineObject::removeValue(std::shared_ptr<uml::StructuralFeature> feature
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Lifeline_decomposedAs())
 	{
-				m_LifelineValue->getDecomposedAs().reset();
+				//m_LifelineValue->getDecomposedAs().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Lifeline_interaction())
 	{
-				m_LifelineValue->getInteraction().reset();
+				//m_LifelineValue->getInteraction().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Lifeline_represents())
 	{
-				m_LifelineValue->getRepresents().reset();
+				//m_LifelineValue->getRepresents().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Lifeline_selector())
 	{
-				m_LifelineValue->getSelector().reset();
+				//m_LifelineValue->getSelector().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_NamedElement_name())
@@ -263,7 +263,7 @@ void LifelineObject::removeValue(std::shared_ptr<uml::StructuralFeature> feature
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_NamedElement_nameExpression())
 	{
-				m_LifelineValue->getNameExpression().reset();
+				//m_LifelineValue->getNameExpression().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_NamedElement_visibility())

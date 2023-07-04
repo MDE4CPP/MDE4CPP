@@ -214,7 +214,7 @@ void CollaborationUseObject::removeValue(std::shared_ptr<uml::StructuralFeature>
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_CollaborationUse_type())
 	{
-				m_CollaborationUseValue->getType().reset();
+				//m_CollaborationUseValue->getType().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Element_ownedComment())
@@ -242,7 +242,7 @@ void CollaborationUseObject::removeValue(std::shared_ptr<uml::StructuralFeature>
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_NamedElement_nameExpression())
 	{
-				m_CollaborationUseValue->getNameExpression().reset();
+				//m_CollaborationUseValue->getNameExpression().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_NamedElement_visibility())

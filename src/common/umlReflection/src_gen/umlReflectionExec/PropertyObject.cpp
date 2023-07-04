@@ -256,7 +256,7 @@ void PropertyObject::removeValue(std::shared_ptr<uml::StructuralFeature> feature
 
 	if (feature == UML::UMLPackage::eInstance()->get_UML_ConnectableElement_templateParameter())
 	{
-				m_PropertyValue->getTemplateParameter().reset();
+				//m_PropertyValue->getTemplateParameter().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_DeploymentTarget_deployment())
@@ -317,7 +317,7 @@ void PropertyObject::removeValue(std::shared_ptr<uml::StructuralFeature> feature
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_MultiplicityElement_lowerValue())
 	{
-				m_PropertyValue->getLowerValue().reset();
+				//m_PropertyValue->getLowerValue().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_MultiplicityElement_upper())
@@ -327,7 +327,7 @@ void PropertyObject::removeValue(std::shared_ptr<uml::StructuralFeature> feature
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_MultiplicityElement_upperValue())
 	{
-				m_PropertyValue->getUpperValue().reset();
+				//m_PropertyValue->getUpperValue().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_NamedElement_name())
@@ -337,7 +337,7 @@ void PropertyObject::removeValue(std::shared_ptr<uml::StructuralFeature> feature
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_NamedElement_nameExpression())
 	{
-				m_PropertyValue->getNameExpression().reset();
+				//m_PropertyValue->getNameExpression().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_NamedElement_visibility())
@@ -347,12 +347,12 @@ void PropertyObject::removeValue(std::shared_ptr<uml::StructuralFeature> feature
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_ParameterableElement_owningTemplateParameter())
 	{
-				m_PropertyValue->getOwningTemplateParameter().reset();
+				//m_PropertyValue->getOwningTemplateParameter().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_ParameterableElement_templateParameter())
 	{
-				m_PropertyValue->getTemplateParameter().reset();
+				//m_PropertyValue->getTemplateParameter().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Property_aggregation())
@@ -362,22 +362,22 @@ void PropertyObject::removeValue(std::shared_ptr<uml::StructuralFeature> feature
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Property_association())
 	{
-				m_PropertyValue->getAssociation().reset();
+				//m_PropertyValue->getAssociation().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Property_associationEnd())
 	{
-				m_PropertyValue->getAssociationEnd().reset();
+				//m_PropertyValue->getAssociationEnd().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Property_class())
 	{
-				m_PropertyValue->getClass().reset();
+				//m_PropertyValue->getClass().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Property_datatype())
 	{
-				m_PropertyValue->getDatatype().reset();
+				//m_PropertyValue->getDatatype().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Property_default())
@@ -387,12 +387,12 @@ void PropertyObject::removeValue(std::shared_ptr<uml::StructuralFeature> feature
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Property_defaultValue())
 	{
-				m_PropertyValue->getDefaultValue().reset();
+				//m_PropertyValue->getDefaultValue().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Property_interface())
 	{
-				m_PropertyValue->getInterface().reset();
+				//m_PropertyValue->getInterface().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Property_isComposite())
@@ -417,12 +417,12 @@ void PropertyObject::removeValue(std::shared_ptr<uml::StructuralFeature> feature
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Property_opposite())
 	{
-				m_PropertyValue->getOpposite().reset();
+				//m_PropertyValue->getOpposite().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Property_owningAssociation())
 	{
-				m_PropertyValue->getOwningAssociation().reset();
+				//m_PropertyValue->getOwningAssociation().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Property_qualifier())
@@ -491,7 +491,7 @@ void PropertyObject::removeValue(std::shared_ptr<uml::StructuralFeature> feature
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_TypedElement_type())
 	{
-				m_PropertyValue->getType().reset();
+				//m_PropertyValue->getType().reset();
 
 	}
 }

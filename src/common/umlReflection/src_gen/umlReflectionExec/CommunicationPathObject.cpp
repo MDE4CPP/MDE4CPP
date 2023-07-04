@@ -385,7 +385,7 @@ void CommunicationPathObject::removeValue(std::shared_ptr<uml::StructuralFeature
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Classifier_ownedTemplateSignature())
 	{
-				m_CommunicationPathValue->getOwnedTemplateSignature().reset();
+				//m_CommunicationPathValue->getOwnedTemplateSignature().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Classifier_ownedUseCase())
@@ -444,7 +444,7 @@ void CommunicationPathObject::removeValue(std::shared_ptr<uml::StructuralFeature
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Classifier_representation())
 	{
-				m_CommunicationPathValue->getRepresentation().reset();
+				//m_CommunicationPathValue->getRepresentation().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Classifier_substitution())
@@ -467,7 +467,7 @@ void CommunicationPathObject::removeValue(std::shared_ptr<uml::StructuralFeature
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Classifier_templateParameter())
 	{
-				m_CommunicationPathValue->getTemplateParameter().reset();
+				//m_CommunicationPathValue->getTemplateParameter().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Classifier_useCase())
@@ -513,7 +513,7 @@ void CommunicationPathObject::removeValue(std::shared_ptr<uml::StructuralFeature
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_NamedElement_nameExpression())
 	{
-				m_CommunicationPathValue->getNameExpression().reset();
+				//m_CommunicationPathValue->getNameExpression().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_NamedElement_visibility())
@@ -582,12 +582,12 @@ void CommunicationPathObject::removeValue(std::shared_ptr<uml::StructuralFeature
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_ParameterableElement_owningTemplateParameter())
 	{
-				m_CommunicationPathValue->getOwningTemplateParameter().reset();
+				//m_CommunicationPathValue->getOwningTemplateParameter().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_ParameterableElement_templateParameter())
 	{
-				m_CommunicationPathValue->getTemplateParameter().reset();
+				//m_CommunicationPathValue->getTemplateParameter().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_RedefinableElement_isLeaf())
@@ -597,7 +597,7 @@ void CommunicationPathObject::removeValue(std::shared_ptr<uml::StructuralFeature
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_TemplateableElement_ownedTemplateSignature())
 	{
-				m_CommunicationPathValue->getOwnedTemplateSignature().reset();
+				//m_CommunicationPathValue->getOwnedTemplateSignature().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_TemplateableElement_templateBinding())
@@ -620,7 +620,7 @@ void CommunicationPathObject::removeValue(std::shared_ptr<uml::StructuralFeature
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Type_package())
 	{
-				m_CommunicationPathValue->getPackage().reset();
+				//m_CommunicationPathValue->getPackage().reset();
 
 	}
 }

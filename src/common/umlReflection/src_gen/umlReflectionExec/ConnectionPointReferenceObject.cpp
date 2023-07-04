@@ -240,7 +240,7 @@ void ConnectionPointReferenceObject::removeValue(std::shared_ptr<uml::Structural
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_ConnectionPointReference_state())
 	{
-				m_ConnectionPointReferenceValue->getState().reset();
+				//m_ConnectionPointReferenceValue->getState().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Element_ownedComment())
@@ -268,7 +268,7 @@ void ConnectionPointReferenceObject::removeValue(std::shared_ptr<uml::Structural
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_NamedElement_nameExpression())
 	{
-				m_ConnectionPointReferenceValue->getNameExpression().reset();
+				//m_ConnectionPointReferenceValue->getNameExpression().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_NamedElement_visibility())
@@ -278,7 +278,7 @@ void ConnectionPointReferenceObject::removeValue(std::shared_ptr<uml::Structural
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Vertex_container())
 	{
-				m_ConnectionPointReferenceValue->getContainer().reset();
+				//m_ConnectionPointReferenceValue->getContainer().reset();
 
 	}
 }

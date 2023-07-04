@@ -278,7 +278,7 @@ void RemoveStructuralFeatureValueActionObject::removeValue(std::shared_ptr<uml::
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_ActivityNode_activity())
 	{
-				m_RemoveStructuralFeatureValueActionValue->getActivity().reset();
+				//m_RemoveStructuralFeatureValueActionValue->getActivity().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_ActivityNode_inInterruptibleRegion())
@@ -319,7 +319,7 @@ void RemoveStructuralFeatureValueActionObject::removeValue(std::shared_ptr<uml::
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_ActivityNode_inStructuredNode())
 	{
-				m_RemoveStructuralFeatureValueActionValue->getInStructuredNode().reset();
+				//m_RemoveStructuralFeatureValueActionValue->getInStructuredNode().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_ActivityNode_incoming())
@@ -419,7 +419,7 @@ void RemoveStructuralFeatureValueActionObject::removeValue(std::shared_ptr<uml::
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_NamedElement_nameExpression())
 	{
-				m_RemoveStructuralFeatureValueActionValue->getNameExpression().reset();
+				//m_RemoveStructuralFeatureValueActionValue->getNameExpression().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_NamedElement_visibility())
@@ -439,27 +439,27 @@ void RemoveStructuralFeatureValueActionObject::removeValue(std::shared_ptr<uml::
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_RemoveStructuralFeatureValueAction_removeAt())
 	{
-				m_RemoveStructuralFeatureValueActionValue->getRemoveAt().reset();
+				//m_RemoveStructuralFeatureValueActionValue->getRemoveAt().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_StructuralFeatureAction_object())
 	{
-				m_RemoveStructuralFeatureValueActionValue->getObject().reset();
+				//m_RemoveStructuralFeatureValueActionValue->getObject().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_StructuralFeatureAction_structuralFeature())
 	{
-				m_RemoveStructuralFeatureValueActionValue->getStructuralFeature().reset();
+				//m_RemoveStructuralFeatureValueActionValue->getStructuralFeature().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_WriteStructuralFeatureAction_result())
 	{
-				m_RemoveStructuralFeatureValueActionValue->getResult().reset();
+				//m_RemoveStructuralFeatureValueActionValue->getResult().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_WriteStructuralFeatureAction_value())
 	{
-				m_RemoveStructuralFeatureValueActionValue->getValue().reset();
+				//m_RemoveStructuralFeatureValueActionValue->getValue().reset();
 
 	}
 }

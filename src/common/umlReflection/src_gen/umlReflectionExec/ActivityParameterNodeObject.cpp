@@ -226,7 +226,7 @@ void ActivityParameterNodeObject::removeValue(std::shared_ptr<uml::StructuralFea
 
 	if (feature == UML::UMLPackage::eInstance()->get_UML_ActivityNode_activity())
 	{
-				m_ActivityParameterNodeValue->getActivity().reset();
+				//m_ActivityParameterNodeValue->getActivity().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_ActivityNode_inInterruptibleRegion())
@@ -267,7 +267,7 @@ void ActivityParameterNodeObject::removeValue(std::shared_ptr<uml::StructuralFea
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_ActivityNode_inStructuredNode())
 	{
-				m_ActivityParameterNodeValue->getInStructuredNode().reset();
+				//m_ActivityParameterNodeValue->getInStructuredNode().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_ActivityNode_incoming())
@@ -326,7 +326,7 @@ void ActivityParameterNodeObject::removeValue(std::shared_ptr<uml::StructuralFea
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_ActivityParameterNode_parameter())
 	{
-				m_ActivityParameterNodeValue->getParameter().reset();
+				//m_ActivityParameterNodeValue->getParameter().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Element_ownedComment())
@@ -354,7 +354,7 @@ void ActivityParameterNodeObject::removeValue(std::shared_ptr<uml::StructuralFea
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_NamedElement_nameExpression())
 	{
-				m_ActivityParameterNodeValue->getNameExpression().reset();
+				//m_ActivityParameterNodeValue->getNameExpression().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_NamedElement_visibility())
@@ -392,12 +392,12 @@ void ActivityParameterNodeObject::removeValue(std::shared_ptr<uml::StructuralFea
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_ObjectNode_selection())
 	{
-				m_ActivityParameterNodeValue->getSelection().reset();
+				//m_ActivityParameterNodeValue->getSelection().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_ObjectNode_upperBound())
 	{
-				m_ActivityParameterNodeValue->getUpperBound().reset();
+				//m_ActivityParameterNodeValue->getUpperBound().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_RedefinableElement_isLeaf())
@@ -407,7 +407,7 @@ void ActivityParameterNodeObject::removeValue(std::shared_ptr<uml::StructuralFea
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_TypedElement_type())
 	{
-				m_ActivityParameterNodeValue->getType().reset();
+				//m_ActivityParameterNodeValue->getType().reset();
 
 	}
 }

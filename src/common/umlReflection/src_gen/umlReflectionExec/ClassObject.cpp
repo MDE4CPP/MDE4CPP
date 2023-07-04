@@ -283,7 +283,7 @@ void ClassObject::removeValue(std::shared_ptr<uml::StructuralFeature> feature, s
 
 	if (feature == UML::UMLPackage::eInstance()->get_UML_BehavioredClassifier_classifierBehavior())
 	{
-				m_ClassValue->getClassifierBehavior().reset();
+				//m_ClassValue->getClassifierBehavior().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_BehavioredClassifier_interfaceRealization())
@@ -488,7 +488,7 @@ void ClassObject::removeValue(std::shared_ptr<uml::StructuralFeature> feature, s
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Classifier_ownedTemplateSignature())
 	{
-				m_ClassValue->getOwnedTemplateSignature().reset();
+				//m_ClassValue->getOwnedTemplateSignature().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Classifier_ownedUseCase())
@@ -547,7 +547,7 @@ void ClassObject::removeValue(std::shared_ptr<uml::StructuralFeature> feature, s
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Classifier_representation())
 	{
-				m_ClassValue->getRepresentation().reset();
+				//m_ClassValue->getRepresentation().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Classifier_substitution())
@@ -570,7 +570,7 @@ void ClassObject::removeValue(std::shared_ptr<uml::StructuralFeature> feature, s
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Classifier_templateParameter())
 	{
-				m_ClassValue->getTemplateParameter().reset();
+				//m_ClassValue->getTemplateParameter().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Classifier_useCase())
@@ -616,7 +616,7 @@ void ClassObject::removeValue(std::shared_ptr<uml::StructuralFeature> feature, s
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_NamedElement_nameExpression())
 	{
-				m_ClassValue->getNameExpression().reset();
+				//m_ClassValue->getNameExpression().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_NamedElement_visibility())
@@ -685,12 +685,12 @@ void ClassObject::removeValue(std::shared_ptr<uml::StructuralFeature> feature, s
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_ParameterableElement_owningTemplateParameter())
 	{
-				m_ClassValue->getOwningTemplateParameter().reset();
+				//m_ClassValue->getOwningTemplateParameter().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_ParameterableElement_templateParameter())
 	{
-				m_ClassValue->getTemplateParameter().reset();
+				//m_ClassValue->getTemplateParameter().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_RedefinableElement_isLeaf())
@@ -736,7 +736,7 @@ void ClassObject::removeValue(std::shared_ptr<uml::StructuralFeature> feature, s
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_TemplateableElement_ownedTemplateSignature())
 	{
-				m_ClassValue->getOwnedTemplateSignature().reset();
+				//m_ClassValue->getOwnedTemplateSignature().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_TemplateableElement_templateBinding())
@@ -759,7 +759,7 @@ void ClassObject::removeValue(std::shared_ptr<uml::StructuralFeature> feature, s
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Type_package())
 	{
-				m_ClassValue->getPackage().reset();
+				//m_ClassValue->getPackage().reset();
 
 	}
 }

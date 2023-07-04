@@ -221,7 +221,7 @@ void MessageEventObject::removeValue(std::shared_ptr<uml::StructuralFeature> fea
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_NamedElement_nameExpression())
 	{
-				m_MessageEventValue->getNameExpression().reset();
+				//m_MessageEventValue->getNameExpression().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_NamedElement_visibility())
@@ -236,12 +236,12 @@ void MessageEventObject::removeValue(std::shared_ptr<uml::StructuralFeature> fea
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_ParameterableElement_owningTemplateParameter())
 	{
-				m_MessageEventValue->getOwningTemplateParameter().reset();
+				//m_MessageEventValue->getOwningTemplateParameter().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_ParameterableElement_templateParameter())
 	{
-				m_MessageEventValue->getTemplateParameter().reset();
+				//m_MessageEventValue->getTemplateParameter().reset();
 
 	}
 }

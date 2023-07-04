@@ -335,7 +335,7 @@ void BehavioralFeatureObject::removeValue(std::shared_ptr<uml::StructuralFeature
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_NamedElement_nameExpression())
 	{
-				m_BehavioralFeatureValue->getNameExpression().reset();
+				//m_BehavioralFeatureValue->getNameExpression().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_NamedElement_visibility())

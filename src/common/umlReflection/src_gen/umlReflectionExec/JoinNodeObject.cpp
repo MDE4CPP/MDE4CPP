@@ -216,7 +216,7 @@ void JoinNodeObject::removeValue(std::shared_ptr<uml::StructuralFeature> feature
 
 	if (feature == UML::UMLPackage::eInstance()->get_UML_ActivityNode_activity())
 	{
-				m_JoinNodeValue->getActivity().reset();
+				//m_JoinNodeValue->getActivity().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_ActivityNode_inInterruptibleRegion())
@@ -257,7 +257,7 @@ void JoinNodeObject::removeValue(std::shared_ptr<uml::StructuralFeature> feature
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_ActivityNode_inStructuredNode())
 	{
-				m_JoinNodeValue->getInStructuredNode().reset();
+				//m_JoinNodeValue->getInStructuredNode().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_ActivityNode_incoming())
@@ -339,7 +339,7 @@ void JoinNodeObject::removeValue(std::shared_ptr<uml::StructuralFeature> feature
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_JoinNode_joinSpec())
 	{
-				m_JoinNodeValue->getJoinSpec().reset();
+				//m_JoinNodeValue->getJoinSpec().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_NamedElement_name())
@@ -349,7 +349,7 @@ void JoinNodeObject::removeValue(std::shared_ptr<uml::StructuralFeature> feature
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_NamedElement_nameExpression())
 	{
-				m_JoinNodeValue->getNameExpression().reset();
+				//m_JoinNodeValue->getNameExpression().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_NamedElement_visibility())

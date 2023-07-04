@@ -205,12 +205,12 @@ void SlotObject::removeValue(std::shared_ptr<uml::StructuralFeature> feature, st
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Slot_definingFeature())
 	{
-				m_SlotValue->getDefiningFeature().reset();
+				//m_SlotValue->getDefiningFeature().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Slot_owningInstance())
 	{
-				m_SlotValue->getOwningInstance().reset();
+				//m_SlotValue->getOwningInstance().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Slot_value())

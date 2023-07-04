@@ -221,7 +221,7 @@ void VertexObject::removeValue(std::shared_ptr<uml::StructuralFeature> feature, 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_NamedElement_nameExpression())
 	{
-				m_VertexValue->getNameExpression().reset();
+				//m_VertexValue->getNameExpression().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_NamedElement_visibility())
@@ -231,7 +231,7 @@ void VertexObject::removeValue(std::shared_ptr<uml::StructuralFeature> feature, 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Vertex_container())
 	{
-				m_VertexValue->getContainer().reset();
+				//m_VertexValue->getContainer().reset();
 
 	}
 }

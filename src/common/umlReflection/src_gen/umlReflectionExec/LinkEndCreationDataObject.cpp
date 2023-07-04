@@ -209,7 +209,7 @@ void LinkEndCreationDataObject::removeValue(std::shared_ptr<uml::StructuralFeatu
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_LinkEndCreationData_insertAt())
 	{
-				m_LinkEndCreationDataValue->getInsertAt().reset();
+				//m_LinkEndCreationDataValue->getInsertAt().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_LinkEndCreationData_isReplaceAll())
@@ -219,7 +219,7 @@ void LinkEndCreationDataObject::removeValue(std::shared_ptr<uml::StructuralFeatu
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_LinkEndData_end())
 	{
-				m_LinkEndCreationDataValue->getEnd().reset();
+				//m_LinkEndCreationDataValue->getEnd().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_LinkEndData_qualifier())
@@ -242,7 +242,7 @@ void LinkEndCreationDataObject::removeValue(std::shared_ptr<uml::StructuralFeatu
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_LinkEndData_value())
 	{
-				m_LinkEndCreationDataValue->getValue().reset();
+				//m_LinkEndCreationDataValue->getValue().reset();
 
 	}
 }

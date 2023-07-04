@@ -372,7 +372,7 @@ void OperationObject::removeValue(std::shared_ptr<uml::StructuralFeature> featur
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_NamedElement_nameExpression())
 	{
-				m_OperationValue->getNameExpression().reset();
+				//m_OperationValue->getNameExpression().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_NamedElement_visibility())
@@ -436,22 +436,22 @@ void OperationObject::removeValue(std::shared_ptr<uml::StructuralFeature> featur
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Operation_bodyCondition())
 	{
-				m_OperationValue->getBodyCondition().reset();
+				//m_OperationValue->getBodyCondition().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Operation_class())
 	{
-				m_OperationValue->getClass().reset();
+				//m_OperationValue->getClass().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Operation_datatype())
 	{
-				m_OperationValue->getDatatype().reset();
+				//m_OperationValue->getDatatype().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Operation_interface())
 	{
-				m_OperationValue->getInterface().reset();
+				//m_OperationValue->getInterface().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Operation_isQuery())
@@ -551,17 +551,17 @@ void OperationObject::removeValue(std::shared_ptr<uml::StructuralFeature> featur
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Operation_templateParameter())
 	{
-				m_OperationValue->getTemplateParameter().reset();
+				//m_OperationValue->getTemplateParameter().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_ParameterableElement_owningTemplateParameter())
 	{
-				m_OperationValue->getOwningTemplateParameter().reset();
+				//m_OperationValue->getOwningTemplateParameter().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_ParameterableElement_templateParameter())
 	{
-				m_OperationValue->getTemplateParameter().reset();
+				//m_OperationValue->getTemplateParameter().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_RedefinableElement_isLeaf())
@@ -571,7 +571,7 @@ void OperationObject::removeValue(std::shared_ptr<uml::StructuralFeature> featur
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_TemplateableElement_ownedTemplateSignature())
 	{
-				m_OperationValue->getOwnedTemplateSignature().reset();
+				//m_OperationValue->getOwnedTemplateSignature().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_TemplateableElement_templateBinding())

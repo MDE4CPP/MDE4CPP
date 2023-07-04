@@ -214,12 +214,12 @@ void GeneralOrderingObject::removeValue(std::shared_ptr<uml::StructuralFeature> 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_GeneralOrdering_after())
 	{
-				m_GeneralOrderingValue->getAfter().reset();
+				//m_GeneralOrderingValue->getAfter().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_GeneralOrdering_before())
 	{
-				m_GeneralOrderingValue->getBefore().reset();
+				//m_GeneralOrderingValue->getBefore().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_NamedElement_name())
@@ -229,7 +229,7 @@ void GeneralOrderingObject::removeValue(std::shared_ptr<uml::StructuralFeature> 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_NamedElement_nameExpression())
 	{
-				m_GeneralOrderingValue->getNameExpression().reset();
+				//m_GeneralOrderingValue->getNameExpression().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_NamedElement_visibility())

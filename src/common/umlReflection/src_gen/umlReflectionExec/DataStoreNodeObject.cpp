@@ -224,7 +224,7 @@ void DataStoreNodeObject::removeValue(std::shared_ptr<uml::StructuralFeature> fe
 
 	if (feature == UML::UMLPackage::eInstance()->get_UML_ActivityNode_activity())
 	{
-				m_DataStoreNodeValue->getActivity().reset();
+				//m_DataStoreNodeValue->getActivity().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_ActivityNode_inInterruptibleRegion())
@@ -265,7 +265,7 @@ void DataStoreNodeObject::removeValue(std::shared_ptr<uml::StructuralFeature> fe
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_ActivityNode_inStructuredNode())
 	{
-				m_DataStoreNodeValue->getInStructuredNode().reset();
+				//m_DataStoreNodeValue->getInStructuredNode().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_ActivityNode_incoming())
@@ -347,7 +347,7 @@ void DataStoreNodeObject::removeValue(std::shared_ptr<uml::StructuralFeature> fe
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_NamedElement_nameExpression())
 	{
-				m_DataStoreNodeValue->getNameExpression().reset();
+				//m_DataStoreNodeValue->getNameExpression().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_NamedElement_visibility())
@@ -385,12 +385,12 @@ void DataStoreNodeObject::removeValue(std::shared_ptr<uml::StructuralFeature> fe
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_ObjectNode_selection())
 	{
-				m_DataStoreNodeValue->getSelection().reset();
+				//m_DataStoreNodeValue->getSelection().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_ObjectNode_upperBound())
 	{
-				m_DataStoreNodeValue->getUpperBound().reset();
+				//m_DataStoreNodeValue->getUpperBound().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_RedefinableElement_isLeaf())
@@ -400,7 +400,7 @@ void DataStoreNodeObject::removeValue(std::shared_ptr<uml::StructuralFeature> fe
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_TypedElement_type())
 	{
-				m_DataStoreNodeValue->getType().reset();
+				//m_DataStoreNodeValue->getType().reset();
 
 	}
 }

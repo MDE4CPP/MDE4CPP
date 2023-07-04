@@ -203,12 +203,12 @@ void QualifierValueObject::removeValue(std::shared_ptr<uml::StructuralFeature> f
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_QualifierValue_qualifier())
 	{
-				m_QualifierValueValue->getQualifier().reset();
+				//m_QualifierValueValue->getQualifier().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_QualifierValue_value())
 	{
-				m_QualifierValueValue->getValue().reset();
+				//m_QualifierValueValue->getValue().reset();
 
 	}
 }

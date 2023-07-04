@@ -253,7 +253,7 @@ void StructuralFeatureObject::removeValue(std::shared_ptr<uml::StructuralFeature
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_MultiplicityElement_lowerValue())
 	{
-				m_StructuralFeatureValue->getLowerValue().reset();
+				//m_StructuralFeatureValue->getLowerValue().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_MultiplicityElement_upper())
@@ -263,7 +263,7 @@ void StructuralFeatureObject::removeValue(std::shared_ptr<uml::StructuralFeature
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_MultiplicityElement_upperValue())
 	{
-				m_StructuralFeatureValue->getUpperValue().reset();
+				//m_StructuralFeatureValue->getUpperValue().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_NamedElement_name())
@@ -273,7 +273,7 @@ void StructuralFeatureObject::removeValue(std::shared_ptr<uml::StructuralFeature
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_NamedElement_nameExpression())
 	{
-				m_StructuralFeatureValue->getNameExpression().reset();
+				//m_StructuralFeatureValue->getNameExpression().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_NamedElement_visibility())
@@ -293,7 +293,7 @@ void StructuralFeatureObject::removeValue(std::shared_ptr<uml::StructuralFeature
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_TypedElement_type())
 	{
-				m_StructuralFeatureValue->getType().reset();
+				//m_StructuralFeatureValue->getType().reset();
 
 	}
 }

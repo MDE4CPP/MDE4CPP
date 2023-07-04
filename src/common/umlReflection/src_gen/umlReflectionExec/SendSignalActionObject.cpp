@@ -275,7 +275,7 @@ void SendSignalActionObject::removeValue(std::shared_ptr<uml::StructuralFeature>
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_ActivityNode_activity())
 	{
-				m_SendSignalActionValue->getActivity().reset();
+				//m_SendSignalActionValue->getActivity().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_ActivityNode_inInterruptibleRegion())
@@ -316,7 +316,7 @@ void SendSignalActionObject::removeValue(std::shared_ptr<uml::StructuralFeature>
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_ActivityNode_inStructuredNode())
 	{
-				m_SendSignalActionValue->getInStructuredNode().reset();
+				//m_SendSignalActionValue->getInStructuredNode().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_ActivityNode_incoming())
@@ -429,7 +429,7 @@ void SendSignalActionObject::removeValue(std::shared_ptr<uml::StructuralFeature>
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_InvocationAction_onPort())
 	{
-				m_SendSignalActionValue->getOnPort().reset();
+				//m_SendSignalActionValue->getOnPort().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_NamedElement_name())
@@ -439,7 +439,7 @@ void SendSignalActionObject::removeValue(std::shared_ptr<uml::StructuralFeature>
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_NamedElement_nameExpression())
 	{
-				m_SendSignalActionValue->getNameExpression().reset();
+				//m_SendSignalActionValue->getNameExpression().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_NamedElement_visibility())
@@ -454,12 +454,12 @@ void SendSignalActionObject::removeValue(std::shared_ptr<uml::StructuralFeature>
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_SendSignalAction_signal())
 	{
-				m_SendSignalActionValue->getSignal().reset();
+				//m_SendSignalActionValue->getSignal().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_SendSignalAction_target())
 	{
-				m_SendSignalActionValue->getTarget().reset();
+				//m_SendSignalActionValue->getTarget().reset();
 
 	}
 }

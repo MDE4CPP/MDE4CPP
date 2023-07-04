@@ -335,7 +335,7 @@ void ReceptionObject::removeValue(std::shared_ptr<uml::StructuralFeature> featur
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_NamedElement_nameExpression())
 	{
-				m_ReceptionValue->getNameExpression().reset();
+				//m_ReceptionValue->getNameExpression().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_NamedElement_visibility())
@@ -399,7 +399,7 @@ void ReceptionObject::removeValue(std::shared_ptr<uml::StructuralFeature> featur
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Reception_signal())
 	{
-				m_ReceptionValue->getSignal().reset();
+				//m_ReceptionValue->getSignal().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_RedefinableElement_isLeaf())

@@ -223,12 +223,12 @@ void ObjectFlowObject::removeValue(std::shared_ptr<uml::StructuralFeature> featu
 
 	if (feature == UML::UMLPackage::eInstance()->get_UML_ActivityEdge_activity())
 	{
-				m_ObjectFlowValue->getActivity().reset();
+				//m_ObjectFlowValue->getActivity().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_ActivityEdge_guard())
 	{
-				m_ObjectFlowValue->getGuard().reset();
+				//m_ObjectFlowValue->getGuard().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_ActivityEdge_inPartition())
@@ -251,12 +251,12 @@ void ObjectFlowObject::removeValue(std::shared_ptr<uml::StructuralFeature> featu
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_ActivityEdge_inStructuredNode())
 	{
-				m_ObjectFlowValue->getInStructuredNode().reset();
+				//m_ObjectFlowValue->getInStructuredNode().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_ActivityEdge_interrupts())
 	{
-				m_ObjectFlowValue->getInterrupts().reset();
+				//m_ObjectFlowValue->getInterrupts().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_ActivityEdge_redefinedEdge())
@@ -279,17 +279,17 @@ void ObjectFlowObject::removeValue(std::shared_ptr<uml::StructuralFeature> featu
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_ActivityEdge_source())
 	{
-				m_ObjectFlowValue->getSource().reset();
+				//m_ObjectFlowValue->getSource().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_ActivityEdge_target())
 	{
-				m_ObjectFlowValue->getTarget().reset();
+				//m_ObjectFlowValue->getTarget().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_ActivityEdge_weight())
 	{
-				m_ObjectFlowValue->getWeight().reset();
+				//m_ObjectFlowValue->getWeight().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Element_ownedComment())
@@ -317,7 +317,7 @@ void ObjectFlowObject::removeValue(std::shared_ptr<uml::StructuralFeature> featu
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_NamedElement_nameExpression())
 	{
-				m_ObjectFlowValue->getNameExpression().reset();
+				//m_ObjectFlowValue->getNameExpression().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_NamedElement_visibility())
@@ -337,12 +337,12 @@ void ObjectFlowObject::removeValue(std::shared_ptr<uml::StructuralFeature> featu
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_ObjectFlow_selection())
 	{
-				m_ObjectFlowValue->getSelection().reset();
+				//m_ObjectFlowValue->getSelection().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_ObjectFlow_transformation())
 	{
-				m_ObjectFlowValue->getTransformation().reset();
+				//m_ObjectFlowValue->getTransformation().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_RedefinableElement_isLeaf())

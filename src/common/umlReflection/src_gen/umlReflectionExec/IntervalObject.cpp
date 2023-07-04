@@ -222,12 +222,12 @@ void IntervalObject::removeValue(std::shared_ptr<uml::StructuralFeature> feature
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Interval_max())
 	{
-				m_IntervalValue->getMax().reset();
+				//m_IntervalValue->getMax().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Interval_min())
 	{
-				m_IntervalValue->getMin().reset();
+				//m_IntervalValue->getMin().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_NamedElement_name())
@@ -237,7 +237,7 @@ void IntervalObject::removeValue(std::shared_ptr<uml::StructuralFeature> feature
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_NamedElement_nameExpression())
 	{
-				m_IntervalValue->getNameExpression().reset();
+				//m_IntervalValue->getNameExpression().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_NamedElement_visibility())
@@ -252,17 +252,17 @@ void IntervalObject::removeValue(std::shared_ptr<uml::StructuralFeature> feature
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_ParameterableElement_owningTemplateParameter())
 	{
-				m_IntervalValue->getOwningTemplateParameter().reset();
+				//m_IntervalValue->getOwningTemplateParameter().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_ParameterableElement_templateParameter())
 	{
-				m_IntervalValue->getTemplateParameter().reset();
+				//m_IntervalValue->getTemplateParameter().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_TypedElement_type())
 	{
-				m_IntervalValue->getType().reset();
+				//m_IntervalValue->getType().reset();
 
 	}
 }

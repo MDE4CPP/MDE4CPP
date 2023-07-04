@@ -213,7 +213,7 @@ void FlowFinalNodeObject::removeValue(std::shared_ptr<uml::StructuralFeature> fe
 
 	if (feature == UML::UMLPackage::eInstance()->get_UML_ActivityNode_activity())
 	{
-				m_FlowFinalNodeValue->getActivity().reset();
+				//m_FlowFinalNodeValue->getActivity().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_ActivityNode_inInterruptibleRegion())
@@ -254,7 +254,7 @@ void FlowFinalNodeObject::removeValue(std::shared_ptr<uml::StructuralFeature> fe
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_ActivityNode_inStructuredNode())
 	{
-				m_FlowFinalNodeValue->getInStructuredNode().reset();
+				//m_FlowFinalNodeValue->getInStructuredNode().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_ActivityNode_incoming())
@@ -336,7 +336,7 @@ void FlowFinalNodeObject::removeValue(std::shared_ptr<uml::StructuralFeature> fe
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_NamedElement_nameExpression())
 	{
-				m_FlowFinalNodeValue->getNameExpression().reset();
+				//m_FlowFinalNodeValue->getNameExpression().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_NamedElement_visibility())

@@ -265,7 +265,7 @@ void UseCaseObject::removeValue(std::shared_ptr<uml::StructuralFeature> feature,
 
 	if (feature == UML::UMLPackage::eInstance()->get_UML_BehavioredClassifier_classifierBehavior())
 	{
-				m_UseCaseValue->getClassifierBehavior().reset();
+				//m_UseCaseValue->getClassifierBehavior().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_BehavioredClassifier_interfaceRealization())
@@ -370,7 +370,7 @@ void UseCaseObject::removeValue(std::shared_ptr<uml::StructuralFeature> feature,
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Classifier_ownedTemplateSignature())
 	{
-				m_UseCaseValue->getOwnedTemplateSignature().reset();
+				//m_UseCaseValue->getOwnedTemplateSignature().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Classifier_ownedUseCase())
@@ -429,7 +429,7 @@ void UseCaseObject::removeValue(std::shared_ptr<uml::StructuralFeature> feature,
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Classifier_representation())
 	{
-				m_UseCaseValue->getRepresentation().reset();
+				//m_UseCaseValue->getRepresentation().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Classifier_substitution())
@@ -452,7 +452,7 @@ void UseCaseObject::removeValue(std::shared_ptr<uml::StructuralFeature> feature,
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Classifier_templateParameter())
 	{
-				m_UseCaseValue->getTemplateParameter().reset();
+				//m_UseCaseValue->getTemplateParameter().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Classifier_useCase())
@@ -498,7 +498,7 @@ void UseCaseObject::removeValue(std::shared_ptr<uml::StructuralFeature> feature,
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_NamedElement_nameExpression())
 	{
-				m_UseCaseValue->getNameExpression().reset();
+				//m_UseCaseValue->getNameExpression().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_NamedElement_visibility())
@@ -567,12 +567,12 @@ void UseCaseObject::removeValue(std::shared_ptr<uml::StructuralFeature> feature,
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_ParameterableElement_owningTemplateParameter())
 	{
-				m_UseCaseValue->getOwningTemplateParameter().reset();
+				//m_UseCaseValue->getOwningTemplateParameter().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_ParameterableElement_templateParameter())
 	{
-				m_UseCaseValue->getTemplateParameter().reset();
+				//m_UseCaseValue->getTemplateParameter().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_RedefinableElement_isLeaf())
@@ -582,7 +582,7 @@ void UseCaseObject::removeValue(std::shared_ptr<uml::StructuralFeature> feature,
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_TemplateableElement_ownedTemplateSignature())
 	{
-				m_UseCaseValue->getOwnedTemplateSignature().reset();
+				//m_UseCaseValue->getOwnedTemplateSignature().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_TemplateableElement_templateBinding())
@@ -605,7 +605,7 @@ void UseCaseObject::removeValue(std::shared_ptr<uml::StructuralFeature> feature,
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Type_package())
 	{
-				m_UseCaseValue->getPackage().reset();
+				//m_UseCaseValue->getPackage().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_UseCase_extend())

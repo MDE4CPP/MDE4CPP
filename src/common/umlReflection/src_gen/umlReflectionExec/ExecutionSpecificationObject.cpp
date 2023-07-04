@@ -222,12 +222,12 @@ void ExecutionSpecificationObject::removeValue(std::shared_ptr<uml::StructuralFe
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_ExecutionSpecification_finish())
 	{
-				m_ExecutionSpecificationValue->getFinish().reset();
+				//m_ExecutionSpecificationValue->getFinish().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_ExecutionSpecification_start())
 	{
-				m_ExecutionSpecificationValue->getStart().reset();
+				//m_ExecutionSpecificationValue->getStart().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_InteractionFragment_covered())
@@ -250,12 +250,12 @@ void ExecutionSpecificationObject::removeValue(std::shared_ptr<uml::StructuralFe
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_InteractionFragment_enclosingInteraction())
 	{
-				m_ExecutionSpecificationValue->getEnclosingInteraction().reset();
+				//m_ExecutionSpecificationValue->getEnclosingInteraction().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_InteractionFragment_enclosingOperand())
 	{
-				m_ExecutionSpecificationValue->getEnclosingOperand().reset();
+				//m_ExecutionSpecificationValue->getEnclosingOperand().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_InteractionFragment_generalOrdering())
@@ -283,7 +283,7 @@ void ExecutionSpecificationObject::removeValue(std::shared_ptr<uml::StructuralFe
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_NamedElement_nameExpression())
 	{
-				m_ExecutionSpecificationValue->getNameExpression().reset();
+				//m_ExecutionSpecificationValue->getNameExpression().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_NamedElement_visibility())

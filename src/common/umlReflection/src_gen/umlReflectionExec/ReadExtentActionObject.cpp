@@ -271,7 +271,7 @@ void ReadExtentActionObject::removeValue(std::shared_ptr<uml::StructuralFeature>
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_ActivityNode_activity())
 	{
-				m_ReadExtentActionValue->getActivity().reset();
+				//m_ReadExtentActionValue->getActivity().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_ActivityNode_inInterruptibleRegion())
@@ -312,7 +312,7 @@ void ReadExtentActionObject::removeValue(std::shared_ptr<uml::StructuralFeature>
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_ActivityNode_inStructuredNode())
 	{
-				m_ReadExtentActionValue->getInStructuredNode().reset();
+				//m_ReadExtentActionValue->getInStructuredNode().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_ActivityNode_incoming())
@@ -412,7 +412,7 @@ void ReadExtentActionObject::removeValue(std::shared_ptr<uml::StructuralFeature>
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_NamedElement_nameExpression())
 	{
-				m_ReadExtentActionValue->getNameExpression().reset();
+				//m_ReadExtentActionValue->getNameExpression().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_NamedElement_visibility())
@@ -422,12 +422,12 @@ void ReadExtentActionObject::removeValue(std::shared_ptr<uml::StructuralFeature>
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_ReadExtentAction_classifier())
 	{
-				m_ReadExtentActionValue->getClassifier().reset();
+				//m_ReadExtentActionValue->getClassifier().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_ReadExtentAction_result())
 	{
-				m_ReadExtentActionValue->getResult().reset();
+				//m_ReadExtentActionValue->getResult().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_RedefinableElement_isLeaf())

@@ -212,7 +212,7 @@ void ManifestationObject::removeValue(std::shared_ptr<uml::StructuralFeature> fe
 
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Abstraction_mapping())
 	{
-				m_ManifestationValue->getMapping().reset();
+				//m_ManifestationValue->getMapping().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Dependency_client())
@@ -271,7 +271,7 @@ void ManifestationObject::removeValue(std::shared_ptr<uml::StructuralFeature> fe
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Manifestation_utilizedElement())
 	{
-				m_ManifestationValue->getUtilizedElement().reset();
+				//m_ManifestationValue->getUtilizedElement().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_NamedElement_name())
@@ -281,7 +281,7 @@ void ManifestationObject::removeValue(std::shared_ptr<uml::StructuralFeature> fe
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_NamedElement_nameExpression())
 	{
-				m_ManifestationValue->getNameExpression().reset();
+				//m_ManifestationValue->getNameExpression().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_NamedElement_visibility())
@@ -296,12 +296,12 @@ void ManifestationObject::removeValue(std::shared_ptr<uml::StructuralFeature> fe
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_ParameterableElement_owningTemplateParameter())
 	{
-				m_ManifestationValue->getOwningTemplateParameter().reset();
+				//m_ManifestationValue->getOwningTemplateParameter().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_ParameterableElement_templateParameter())
 	{
-				m_ManifestationValue->getTemplateParameter().reset();
+				//m_ManifestationValue->getTemplateParameter().reset();
 
 	}
 }

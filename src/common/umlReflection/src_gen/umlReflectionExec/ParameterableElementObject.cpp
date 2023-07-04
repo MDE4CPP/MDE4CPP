@@ -203,12 +203,12 @@ void ParameterableElementObject::removeValue(std::shared_ptr<uml::StructuralFeat
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_ParameterableElement_owningTemplateParameter())
 	{
-				m_ParameterableElementValue->getOwningTemplateParameter().reset();
+				//m_ParameterableElementValue->getOwningTemplateParameter().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_ParameterableElement_templateParameter())
 	{
-				m_ParameterableElementValue->getTemplateParameter().reset();
+				//m_ParameterableElementValue->getTemplateParameter().reset();
 
 	}
 }

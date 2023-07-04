@@ -274,7 +274,7 @@ void ReclassifyObjectActionObject::removeValue(std::shared_ptr<uml::StructuralFe
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_ActivityNode_activity())
 	{
-				m_ReclassifyObjectActionValue->getActivity().reset();
+				//m_ReclassifyObjectActionValue->getActivity().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_ActivityNode_inInterruptibleRegion())
@@ -315,7 +315,7 @@ void ReclassifyObjectActionObject::removeValue(std::shared_ptr<uml::StructuralFe
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_ActivityNode_inStructuredNode())
 	{
-				m_ReclassifyObjectActionValue->getInStructuredNode().reset();
+				//m_ReclassifyObjectActionValue->getInStructuredNode().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_ActivityNode_incoming())
@@ -415,7 +415,7 @@ void ReclassifyObjectActionObject::removeValue(std::shared_ptr<uml::StructuralFe
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_NamedElement_nameExpression())
 	{
-				m_ReclassifyObjectActionValue->getNameExpression().reset();
+				//m_ReclassifyObjectActionValue->getNameExpression().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_NamedElement_visibility())
@@ -448,7 +448,7 @@ void ReclassifyObjectActionObject::removeValue(std::shared_ptr<uml::StructuralFe
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_ReclassifyObjectAction_object())
 	{
-				m_ReclassifyObjectActionValue->getObject().reset();
+				//m_ReclassifyObjectActionValue->getObject().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_ReclassifyObjectAction_oldClassifier())

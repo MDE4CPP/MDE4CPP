@@ -246,7 +246,7 @@ void RegionObject::removeValue(std::shared_ptr<uml::StructuralFeature> feature, 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_NamedElement_nameExpression())
 	{
-				m_RegionValue->getNameExpression().reset();
+				//m_RegionValue->getNameExpression().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_NamedElement_visibility())
@@ -315,17 +315,17 @@ void RegionObject::removeValue(std::shared_ptr<uml::StructuralFeature> feature, 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Region_extendedRegion())
 	{
-				m_RegionValue->getExtendedRegion().reset();
+				//m_RegionValue->getExtendedRegion().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Region_state())
 	{
-				m_RegionValue->getState().reset();
+				//m_RegionValue->getState().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Region_stateMachine())
 	{
-				m_RegionValue->getStateMachine().reset();
+				//m_RegionValue->getStateMachine().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Region_subvertex())

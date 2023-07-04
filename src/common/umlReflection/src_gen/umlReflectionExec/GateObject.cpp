@@ -212,7 +212,7 @@ void GateObject::removeValue(std::shared_ptr<uml::StructuralFeature> feature, st
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_MessageEnd_message())
 	{
-				m_GateValue->getMessage().reset();
+				//m_GateValue->getMessage().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_NamedElement_name())
@@ -222,7 +222,7 @@ void GateObject::removeValue(std::shared_ptr<uml::StructuralFeature> feature, st
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_NamedElement_nameExpression())
 	{
-				m_GateValue->getNameExpression().reset();
+				//m_GateValue->getNameExpression().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_NamedElement_visibility())

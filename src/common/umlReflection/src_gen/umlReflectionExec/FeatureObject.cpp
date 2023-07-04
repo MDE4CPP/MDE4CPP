@@ -228,7 +228,7 @@ void FeatureObject::removeValue(std::shared_ptr<uml::StructuralFeature> feature,
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_NamedElement_nameExpression())
 	{
-				m_FeatureValue->getNameExpression().reset();
+				//m_FeatureValue->getNameExpression().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_NamedElement_visibility())

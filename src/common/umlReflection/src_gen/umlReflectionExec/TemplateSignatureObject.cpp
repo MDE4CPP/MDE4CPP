@@ -241,7 +241,7 @@ void TemplateSignatureObject::removeValue(std::shared_ptr<uml::StructuralFeature
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_TemplateSignature_template())
 	{
-				m_TemplateSignatureValue->getTemplate().reset();
+				//m_TemplateSignatureValue->getTemplate().reset();
 
 	}
 }

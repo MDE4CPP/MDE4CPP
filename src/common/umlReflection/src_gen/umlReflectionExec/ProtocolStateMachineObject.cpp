@@ -401,12 +401,12 @@ void ProtocolStateMachineObject::removeValue(std::shared_ptr<uml::StructuralFeat
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Behavior_specification())
 	{
-				m_ProtocolStateMachineValue->getSpecification().reset();
+				//m_ProtocolStateMachineValue->getSpecification().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_BehavioredClassifier_classifierBehavior())
 	{
-				m_ProtocolStateMachineValue->getClassifierBehavior().reset();
+				//m_ProtocolStateMachineValue->getClassifierBehavior().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_BehavioredClassifier_interfaceRealization())
@@ -611,7 +611,7 @@ void ProtocolStateMachineObject::removeValue(std::shared_ptr<uml::StructuralFeat
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Classifier_ownedTemplateSignature())
 	{
-				m_ProtocolStateMachineValue->getOwnedTemplateSignature().reset();
+				//m_ProtocolStateMachineValue->getOwnedTemplateSignature().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Classifier_ownedUseCase())
@@ -670,7 +670,7 @@ void ProtocolStateMachineObject::removeValue(std::shared_ptr<uml::StructuralFeat
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Classifier_representation())
 	{
-				m_ProtocolStateMachineValue->getRepresentation().reset();
+				//m_ProtocolStateMachineValue->getRepresentation().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Classifier_substitution())
@@ -693,7 +693,7 @@ void ProtocolStateMachineObject::removeValue(std::shared_ptr<uml::StructuralFeat
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Classifier_templateParameter())
 	{
-				m_ProtocolStateMachineValue->getTemplateParameter().reset();
+				//m_ProtocolStateMachineValue->getTemplateParameter().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Classifier_useCase())
@@ -739,7 +739,7 @@ void ProtocolStateMachineObject::removeValue(std::shared_ptr<uml::StructuralFeat
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_NamedElement_nameExpression())
 	{
-				m_ProtocolStateMachineValue->getNameExpression().reset();
+				//m_ProtocolStateMachineValue->getNameExpression().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_NamedElement_visibility())
@@ -808,12 +808,12 @@ void ProtocolStateMachineObject::removeValue(std::shared_ptr<uml::StructuralFeat
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_ParameterableElement_owningTemplateParameter())
 	{
-				m_ProtocolStateMachineValue->getOwningTemplateParameter().reset();
+				//m_ProtocolStateMachineValue->getOwningTemplateParameter().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_ParameterableElement_templateParameter())
 	{
-				m_ProtocolStateMachineValue->getTemplateParameter().reset();
+				//m_ProtocolStateMachineValue->getTemplateParameter().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_ProtocolStateMachine_conformance())
@@ -949,7 +949,7 @@ void ProtocolStateMachineObject::removeValue(std::shared_ptr<uml::StructuralFeat
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_TemplateableElement_ownedTemplateSignature())
 	{
-				m_ProtocolStateMachineValue->getOwnedTemplateSignature().reset();
+				//m_ProtocolStateMachineValue->getOwnedTemplateSignature().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_TemplateableElement_templateBinding())
@@ -972,7 +972,7 @@ void ProtocolStateMachineObject::removeValue(std::shared_ptr<uml::StructuralFeat
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Type_package())
 	{
-				m_ProtocolStateMachineValue->getPackage().reset();
+				//m_ProtocolStateMachineValue->getPackage().reset();
 
 	}
 }

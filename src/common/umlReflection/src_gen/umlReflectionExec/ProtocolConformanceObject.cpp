@@ -209,12 +209,12 @@ void ProtocolConformanceObject::removeValue(std::shared_ptr<uml::StructuralFeatu
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_ProtocolConformance_generalMachine())
 	{
-				m_ProtocolConformanceValue->getGeneralMachine().reset();
+				//m_ProtocolConformanceValue->getGeneralMachine().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_ProtocolConformance_specificMachine())
 	{
-				m_ProtocolConformanceValue->getSpecificMachine().reset();
+				//m_ProtocolConformanceValue->getSpecificMachine().reset();
 
 	}
 }

@@ -226,17 +226,17 @@ void ExtendObject::removeValue(std::shared_ptr<uml::StructuralFeature> feature, 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Extend_condition())
 	{
-				m_ExtendValue->getCondition().reset();
+				//m_ExtendValue->getCondition().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Extend_extendedCase())
 	{
-				m_ExtendValue->getExtendedCase().reset();
+				//m_ExtendValue->getExtendedCase().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Extend_extension())
 	{
-				m_ExtendValue->getExtension().reset();
+				//m_ExtendValue->getExtension().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Extend_extensionLocation())
@@ -264,7 +264,7 @@ void ExtendObject::removeValue(std::shared_ptr<uml::StructuralFeature> feature, 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_NamedElement_nameExpression())
 	{
-				m_ExtendValue->getNameExpression().reset();
+				//m_ExtendValue->getNameExpression().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_NamedElement_visibility())

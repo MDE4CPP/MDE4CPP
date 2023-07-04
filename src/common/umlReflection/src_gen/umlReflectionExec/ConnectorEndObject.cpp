@@ -196,12 +196,12 @@ void ConnectorEndObject::removeValue(std::shared_ptr<uml::StructuralFeature> fea
 
 	if (feature == UML::UMLPackage::eInstance()->get_UML_ConnectorEnd_partWithPort())
 	{
-				m_ConnectorEndValue->getPartWithPort().reset();
+				//m_ConnectorEndValue->getPartWithPort().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_ConnectorEnd_role())
 	{
-				m_ConnectorEndValue->getRole().reset();
+				//m_ConnectorEndValue->getRole().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Element_ownedComment())
@@ -239,7 +239,7 @@ void ConnectorEndObject::removeValue(std::shared_ptr<uml::StructuralFeature> fea
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_MultiplicityElement_lowerValue())
 	{
-				m_ConnectorEndValue->getLowerValue().reset();
+				//m_ConnectorEndValue->getLowerValue().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_MultiplicityElement_upper())
@@ -249,7 +249,7 @@ void ConnectorEndObject::removeValue(std::shared_ptr<uml::StructuralFeature> fea
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_MultiplicityElement_upperValue())
 	{
-				m_ConnectorEndValue->getUpperValue().reset();
+				//m_ConnectorEndValue->getUpperValue().reset();
 
 	}
 }

@@ -278,7 +278,7 @@ void AddStructuralFeatureValueActionObject::removeValue(std::shared_ptr<uml::Str
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_ActivityNode_activity())
 	{
-				m_AddStructuralFeatureValueActionValue->getActivity().reset();
+				//m_AddStructuralFeatureValueActionValue->getActivity().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_ActivityNode_inInterruptibleRegion())
@@ -319,7 +319,7 @@ void AddStructuralFeatureValueActionObject::removeValue(std::shared_ptr<uml::Str
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_ActivityNode_inStructuredNode())
 	{
-				m_AddStructuralFeatureValueActionValue->getInStructuredNode().reset();
+				//m_AddStructuralFeatureValueActionValue->getInStructuredNode().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_ActivityNode_incoming())
@@ -378,7 +378,7 @@ void AddStructuralFeatureValueActionObject::removeValue(std::shared_ptr<uml::Str
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_AddStructuralFeatureValueAction_insertAt())
 	{
-				m_AddStructuralFeatureValueActionValue->getInsertAt().reset();
+				//m_AddStructuralFeatureValueActionValue->getInsertAt().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_AddStructuralFeatureValueAction_isReplaceAll())
@@ -429,7 +429,7 @@ void AddStructuralFeatureValueActionObject::removeValue(std::shared_ptr<uml::Str
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_NamedElement_nameExpression())
 	{
-				m_AddStructuralFeatureValueActionValue->getNameExpression().reset();
+				//m_AddStructuralFeatureValueActionValue->getNameExpression().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_NamedElement_visibility())
@@ -444,22 +444,22 @@ void AddStructuralFeatureValueActionObject::removeValue(std::shared_ptr<uml::Str
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_StructuralFeatureAction_object())
 	{
-				m_AddStructuralFeatureValueActionValue->getObject().reset();
+				//m_AddStructuralFeatureValueActionValue->getObject().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_StructuralFeatureAction_structuralFeature())
 	{
-				m_AddStructuralFeatureValueActionValue->getStructuralFeature().reset();
+				//m_AddStructuralFeatureValueActionValue->getStructuralFeature().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_WriteStructuralFeatureAction_result())
 	{
-				m_AddStructuralFeatureValueActionValue->getResult().reset();
+				//m_AddStructuralFeatureValueActionValue->getResult().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_WriteStructuralFeatureAction_value())
 	{
-				m_AddStructuralFeatureValueActionValue->getValue().reset();
+				//m_AddStructuralFeatureValueActionValue->getValue().reset();
 
 	}
 }

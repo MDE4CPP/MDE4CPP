@@ -405,7 +405,7 @@ void DeploymentSpecificationObject::removeValue(std::shared_ptr<uml::StructuralF
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Classifier_ownedTemplateSignature())
 	{
-				m_DeploymentSpecificationValue->getOwnedTemplateSignature().reset();
+				//m_DeploymentSpecificationValue->getOwnedTemplateSignature().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Classifier_ownedUseCase())
@@ -464,7 +464,7 @@ void DeploymentSpecificationObject::removeValue(std::shared_ptr<uml::StructuralF
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Classifier_representation())
 	{
-				m_DeploymentSpecificationValue->getRepresentation().reset();
+				//m_DeploymentSpecificationValue->getRepresentation().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Classifier_substitution())
@@ -487,7 +487,7 @@ void DeploymentSpecificationObject::removeValue(std::shared_ptr<uml::StructuralF
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Classifier_templateParameter())
 	{
-				m_DeploymentSpecificationValue->getTemplateParameter().reset();
+				//m_DeploymentSpecificationValue->getTemplateParameter().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Classifier_useCase())
@@ -510,7 +510,7 @@ void DeploymentSpecificationObject::removeValue(std::shared_ptr<uml::StructuralF
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_DeploymentSpecification_deployment())
 	{
-				m_DeploymentSpecificationValue->getDeployment().reset();
+				//m_DeploymentSpecificationValue->getDeployment().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_DeploymentSpecification_deploymentLocation())
@@ -548,7 +548,7 @@ void DeploymentSpecificationObject::removeValue(std::shared_ptr<uml::StructuralF
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_NamedElement_nameExpression())
 	{
-				m_DeploymentSpecificationValue->getNameExpression().reset();
+				//m_DeploymentSpecificationValue->getNameExpression().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_NamedElement_visibility())
@@ -617,12 +617,12 @@ void DeploymentSpecificationObject::removeValue(std::shared_ptr<uml::StructuralF
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_ParameterableElement_owningTemplateParameter())
 	{
-				m_DeploymentSpecificationValue->getOwningTemplateParameter().reset();
+				//m_DeploymentSpecificationValue->getOwningTemplateParameter().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_ParameterableElement_templateParameter())
 	{
-				m_DeploymentSpecificationValue->getTemplateParameter().reset();
+				//m_DeploymentSpecificationValue->getTemplateParameter().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_RedefinableElement_isLeaf())
@@ -632,7 +632,7 @@ void DeploymentSpecificationObject::removeValue(std::shared_ptr<uml::StructuralF
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_TemplateableElement_ownedTemplateSignature())
 	{
-				m_DeploymentSpecificationValue->getOwnedTemplateSignature().reset();
+				//m_DeploymentSpecificationValue->getOwnedTemplateSignature().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_TemplateableElement_templateBinding())
@@ -655,7 +655,7 @@ void DeploymentSpecificationObject::removeValue(std::shared_ptr<uml::StructuralF
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Type_package())
 	{
-				m_DeploymentSpecificationValue->getPackage().reset();
+				//m_DeploymentSpecificationValue->getPackage().reset();
 
 	}
 }

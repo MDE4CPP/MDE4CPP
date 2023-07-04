@@ -227,7 +227,7 @@ void PseudostateObject::removeValue(std::shared_ptr<uml::StructuralFeature> feat
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_NamedElement_nameExpression())
 	{
-				m_PseudostateValue->getNameExpression().reset();
+				//m_PseudostateValue->getNameExpression().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_NamedElement_visibility())
@@ -242,17 +242,17 @@ void PseudostateObject::removeValue(std::shared_ptr<uml::StructuralFeature> feat
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Pseudostate_state())
 	{
-				m_PseudostateValue->getState().reset();
+				//m_PseudostateValue->getState().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Pseudostate_stateMachine())
 	{
-				m_PseudostateValue->getStateMachine().reset();
+				//m_PseudostateValue->getStateMachine().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Vertex_container())
 	{
-				m_PseudostateValue->getContainer().reset();
+				//m_PseudostateValue->getContainer().reset();
 
 	}
 }

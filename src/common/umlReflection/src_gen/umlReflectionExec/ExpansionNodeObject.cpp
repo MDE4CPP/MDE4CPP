@@ -228,7 +228,7 @@ void ExpansionNodeObject::removeValue(std::shared_ptr<uml::StructuralFeature> fe
 
 	if (feature == UML::UMLPackage::eInstance()->get_UML_ActivityNode_activity())
 	{
-				m_ExpansionNodeValue->getActivity().reset();
+				//m_ExpansionNodeValue->getActivity().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_ActivityNode_inInterruptibleRegion())
@@ -269,7 +269,7 @@ void ExpansionNodeObject::removeValue(std::shared_ptr<uml::StructuralFeature> fe
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_ActivityNode_inStructuredNode())
 	{
-				m_ExpansionNodeValue->getInStructuredNode().reset();
+				//m_ExpansionNodeValue->getInStructuredNode().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_ActivityNode_incoming())
@@ -346,12 +346,12 @@ void ExpansionNodeObject::removeValue(std::shared_ptr<uml::StructuralFeature> fe
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_ExpansionNode_regionAsInput())
 	{
-				m_ExpansionNodeValue->getRegionAsInput().reset();
+				//m_ExpansionNodeValue->getRegionAsInput().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_ExpansionNode_regionAsOutput())
 	{
-				m_ExpansionNodeValue->getRegionAsOutput().reset();
+				//m_ExpansionNodeValue->getRegionAsOutput().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_NamedElement_name())
@@ -361,7 +361,7 @@ void ExpansionNodeObject::removeValue(std::shared_ptr<uml::StructuralFeature> fe
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_NamedElement_nameExpression())
 	{
-				m_ExpansionNodeValue->getNameExpression().reset();
+				//m_ExpansionNodeValue->getNameExpression().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_NamedElement_visibility())
@@ -399,12 +399,12 @@ void ExpansionNodeObject::removeValue(std::shared_ptr<uml::StructuralFeature> fe
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_ObjectNode_selection())
 	{
-				m_ExpansionNodeValue->getSelection().reset();
+				//m_ExpansionNodeValue->getSelection().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_ObjectNode_upperBound())
 	{
-				m_ExpansionNodeValue->getUpperBound().reset();
+				//m_ExpansionNodeValue->getUpperBound().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_RedefinableElement_isLeaf())
@@ -414,7 +414,7 @@ void ExpansionNodeObject::removeValue(std::shared_ptr<uml::StructuralFeature> fe
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_TypedElement_type())
 	{
-				m_ExpansionNodeValue->getType().reset();
+				//m_ExpansionNodeValue->getType().reset();
 
 	}
 }

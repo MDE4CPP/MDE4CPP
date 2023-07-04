@@ -240,12 +240,12 @@ void StateInvariantObject::removeValue(std::shared_ptr<uml::StructuralFeature> f
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_InteractionFragment_enclosingInteraction())
 	{
-				m_StateInvariantValue->getEnclosingInteraction().reset();
+				//m_StateInvariantValue->getEnclosingInteraction().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_InteractionFragment_enclosingOperand())
 	{
-				m_StateInvariantValue->getEnclosingOperand().reset();
+				//m_StateInvariantValue->getEnclosingOperand().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_InteractionFragment_generalOrdering())
@@ -273,7 +273,7 @@ void StateInvariantObject::removeValue(std::shared_ptr<uml::StructuralFeature> f
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_NamedElement_nameExpression())
 	{
-				m_StateInvariantValue->getNameExpression().reset();
+				//m_StateInvariantValue->getNameExpression().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_NamedElement_visibility())
@@ -283,12 +283,12 @@ void StateInvariantObject::removeValue(std::shared_ptr<uml::StructuralFeature> f
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_StateInvariant_covered())
 	{
-				m_StateInvariantValue->getCovered().reset();
+				//m_StateInvariantValue->getCovered().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_StateInvariant_invariant())
 	{
-				m_StateInvariantValue->getInvariant().reset();
+				//m_StateInvariantValue->getInvariant().reset();
 
 	}
 }

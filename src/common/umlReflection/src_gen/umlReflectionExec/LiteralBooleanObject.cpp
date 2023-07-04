@@ -229,7 +229,7 @@ void LiteralBooleanObject::removeValue(std::shared_ptr<uml::StructuralFeature> f
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_NamedElement_nameExpression())
 	{
-				m_LiteralBooleanValue->getNameExpression().reset();
+				//m_LiteralBooleanValue->getNameExpression().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_NamedElement_visibility())
@@ -244,17 +244,17 @@ void LiteralBooleanObject::removeValue(std::shared_ptr<uml::StructuralFeature> f
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_ParameterableElement_owningTemplateParameter())
 	{
-				m_LiteralBooleanValue->getOwningTemplateParameter().reset();
+				//m_LiteralBooleanValue->getOwningTemplateParameter().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_ParameterableElement_templateParameter())
 	{
-				m_LiteralBooleanValue->getTemplateParameter().reset();
+				//m_LiteralBooleanValue->getTemplateParameter().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_TypedElement_type())
 	{
-				m_LiteralBooleanValue->getType().reset();
+				//m_LiteralBooleanValue->getType().reset();
 
 	}
 }

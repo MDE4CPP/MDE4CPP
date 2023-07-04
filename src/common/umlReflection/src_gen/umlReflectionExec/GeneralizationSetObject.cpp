@@ -250,7 +250,7 @@ void GeneralizationSetObject::removeValue(std::shared_ptr<uml::StructuralFeature
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_GeneralizationSet_powertype())
 	{
-				m_GeneralizationSetValue->getPowertype().reset();
+				//m_GeneralizationSetValue->getPowertype().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_NamedElement_name())
@@ -260,7 +260,7 @@ void GeneralizationSetObject::removeValue(std::shared_ptr<uml::StructuralFeature
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_NamedElement_nameExpression())
 	{
-				m_GeneralizationSetValue->getNameExpression().reset();
+				//m_GeneralizationSetValue->getNameExpression().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_NamedElement_visibility())
@@ -275,12 +275,12 @@ void GeneralizationSetObject::removeValue(std::shared_ptr<uml::StructuralFeature
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_ParameterableElement_owningTemplateParameter())
 	{
-				m_GeneralizationSetValue->getOwningTemplateParameter().reset();
+				//m_GeneralizationSetValue->getOwningTemplateParameter().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_ParameterableElement_templateParameter())
 	{
-				m_GeneralizationSetValue->getTemplateParameter().reset();
+				//m_GeneralizationSetValue->getTemplateParameter().reset();
 
 	}
 }

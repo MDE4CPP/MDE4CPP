@@ -226,7 +226,7 @@ void ExecutionOccurrenceSpecificationObject::removeValue(std::shared_ptr<uml::St
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_ExecutionOccurrenceSpecification_execution())
 	{
-				m_ExecutionOccurrenceSpecificationValue->getExecution().reset();
+				//m_ExecutionOccurrenceSpecificationValue->getExecution().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_InteractionFragment_covered())
@@ -249,12 +249,12 @@ void ExecutionOccurrenceSpecificationObject::removeValue(std::shared_ptr<uml::St
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_InteractionFragment_enclosingInteraction())
 	{
-				m_ExecutionOccurrenceSpecificationValue->getEnclosingInteraction().reset();
+				//m_ExecutionOccurrenceSpecificationValue->getEnclosingInteraction().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_InteractionFragment_enclosingOperand())
 	{
-				m_ExecutionOccurrenceSpecificationValue->getEnclosingOperand().reset();
+				//m_ExecutionOccurrenceSpecificationValue->getEnclosingOperand().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_InteractionFragment_generalOrdering())
@@ -282,7 +282,7 @@ void ExecutionOccurrenceSpecificationObject::removeValue(std::shared_ptr<uml::St
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_NamedElement_nameExpression())
 	{
-				m_ExecutionOccurrenceSpecificationValue->getNameExpression().reset();
+				//m_ExecutionOccurrenceSpecificationValue->getNameExpression().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_NamedElement_visibility())
@@ -292,7 +292,7 @@ void ExecutionOccurrenceSpecificationObject::removeValue(std::shared_ptr<uml::St
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_OccurrenceSpecification_covered())
 	{
-				m_ExecutionOccurrenceSpecificationValue->getCovered().reset();
+				//m_ExecutionOccurrenceSpecificationValue->getCovered().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_OccurrenceSpecification_toAfter())

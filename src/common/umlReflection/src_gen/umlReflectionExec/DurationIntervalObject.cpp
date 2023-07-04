@@ -208,12 +208,12 @@ void DurationIntervalObject::removeValue(std::shared_ptr<uml::StructuralFeature>
 
 	if (feature == UML::UMLPackage::eInstance()->get_UML_DurationInterval_max())
 	{
-				m_DurationIntervalValue->getMax().reset();
+				//m_DurationIntervalValue->getMax().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_DurationInterval_min())
 	{
-				m_DurationIntervalValue->getMin().reset();
+				//m_DurationIntervalValue->getMin().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Element_ownedComment())
@@ -236,12 +236,12 @@ void DurationIntervalObject::removeValue(std::shared_ptr<uml::StructuralFeature>
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Interval_max())
 	{
-				m_DurationIntervalValue->getMax().reset();
+				//m_DurationIntervalValue->getMax().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Interval_min())
 	{
-				m_DurationIntervalValue->getMin().reset();
+				//m_DurationIntervalValue->getMin().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_NamedElement_name())
@@ -251,7 +251,7 @@ void DurationIntervalObject::removeValue(std::shared_ptr<uml::StructuralFeature>
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_NamedElement_nameExpression())
 	{
-				m_DurationIntervalValue->getNameExpression().reset();
+				//m_DurationIntervalValue->getNameExpression().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_NamedElement_visibility())
@@ -266,17 +266,17 @@ void DurationIntervalObject::removeValue(std::shared_ptr<uml::StructuralFeature>
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_ParameterableElement_owningTemplateParameter())
 	{
-				m_DurationIntervalValue->getOwningTemplateParameter().reset();
+				//m_DurationIntervalValue->getOwningTemplateParameter().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_ParameterableElement_templateParameter())
 	{
-				m_DurationIntervalValue->getTemplateParameter().reset();
+				//m_DurationIntervalValue->getTemplateParameter().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_TypedElement_type())
 	{
-				m_DurationIntervalValue->getType().reset();
+				//m_DurationIntervalValue->getType().reset();
 
 	}
 }

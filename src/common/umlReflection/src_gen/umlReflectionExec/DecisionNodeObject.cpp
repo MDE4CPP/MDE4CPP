@@ -217,7 +217,7 @@ void DecisionNodeObject::removeValue(std::shared_ptr<uml::StructuralFeature> fea
 
 	if (feature == UML::UMLPackage::eInstance()->get_UML_ActivityNode_activity())
 	{
-				m_DecisionNodeValue->getActivity().reset();
+				//m_DecisionNodeValue->getActivity().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_ActivityNode_inInterruptibleRegion())
@@ -258,7 +258,7 @@ void DecisionNodeObject::removeValue(std::shared_ptr<uml::StructuralFeature> fea
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_ActivityNode_inStructuredNode())
 	{
-				m_DecisionNodeValue->getInStructuredNode().reset();
+				//m_DecisionNodeValue->getInStructuredNode().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_ActivityNode_incoming())
@@ -317,12 +317,12 @@ void DecisionNodeObject::removeValue(std::shared_ptr<uml::StructuralFeature> fea
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_DecisionNode_decisionInput())
 	{
-				m_DecisionNodeValue->getDecisionInput().reset();
+				//m_DecisionNodeValue->getDecisionInput().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_DecisionNode_decisionInputFlow())
 	{
-				m_DecisionNodeValue->getDecisionInputFlow().reset();
+				//m_DecisionNodeValue->getDecisionInputFlow().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Element_ownedComment())
@@ -350,7 +350,7 @@ void DecisionNodeObject::removeValue(std::shared_ptr<uml::StructuralFeature> fea
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_NamedElement_nameExpression())
 	{
-				m_DecisionNodeValue->getNameExpression().reset();
+				//m_DecisionNodeValue->getNameExpression().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_NamedElement_visibility())

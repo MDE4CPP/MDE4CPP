@@ -319,7 +319,7 @@ void PrimitiveTypeObject::removeValue(std::shared_ptr<uml::StructuralFeature> fe
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Classifier_ownedTemplateSignature())
 	{
-				m_PrimitiveTypeValue->getOwnedTemplateSignature().reset();
+				//m_PrimitiveTypeValue->getOwnedTemplateSignature().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Classifier_ownedUseCase())
@@ -378,7 +378,7 @@ void PrimitiveTypeObject::removeValue(std::shared_ptr<uml::StructuralFeature> fe
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Classifier_representation())
 	{
-				m_PrimitiveTypeValue->getRepresentation().reset();
+				//m_PrimitiveTypeValue->getRepresentation().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Classifier_substitution())
@@ -401,7 +401,7 @@ void PrimitiveTypeObject::removeValue(std::shared_ptr<uml::StructuralFeature> fe
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Classifier_templateParameter())
 	{
-				m_PrimitiveTypeValue->getTemplateParameter().reset();
+				//m_PrimitiveTypeValue->getTemplateParameter().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Classifier_useCase())
@@ -483,7 +483,7 @@ void PrimitiveTypeObject::removeValue(std::shared_ptr<uml::StructuralFeature> fe
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_NamedElement_nameExpression())
 	{
-				m_PrimitiveTypeValue->getNameExpression().reset();
+				//m_PrimitiveTypeValue->getNameExpression().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_NamedElement_visibility())
@@ -552,12 +552,12 @@ void PrimitiveTypeObject::removeValue(std::shared_ptr<uml::StructuralFeature> fe
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_ParameterableElement_owningTemplateParameter())
 	{
-				m_PrimitiveTypeValue->getOwningTemplateParameter().reset();
+				//m_PrimitiveTypeValue->getOwningTemplateParameter().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_ParameterableElement_templateParameter())
 	{
-				m_PrimitiveTypeValue->getTemplateParameter().reset();
+				//m_PrimitiveTypeValue->getTemplateParameter().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_RedefinableElement_isLeaf())
@@ -567,7 +567,7 @@ void PrimitiveTypeObject::removeValue(std::shared_ptr<uml::StructuralFeature> fe
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_TemplateableElement_ownedTemplateSignature())
 	{
-				m_PrimitiveTypeValue->getOwnedTemplateSignature().reset();
+				//m_PrimitiveTypeValue->getOwnedTemplateSignature().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_TemplateableElement_templateBinding())
@@ -590,7 +590,7 @@ void PrimitiveTypeObject::removeValue(std::shared_ptr<uml::StructuralFeature> fe
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Type_package())
 	{
-				m_PrimitiveTypeValue->getPackage().reset();
+				//m_PrimitiveTypeValue->getPackage().reset();
 
 	}
 }

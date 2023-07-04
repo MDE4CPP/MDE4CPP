@@ -254,12 +254,12 @@ void InteractionOperandObject::removeValue(std::shared_ptr<uml::StructuralFeatur
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_InteractionFragment_enclosingInteraction())
 	{
-				m_InteractionOperandValue->getEnclosingInteraction().reset();
+				//m_InteractionOperandValue->getEnclosingInteraction().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_InteractionFragment_enclosingOperand())
 	{
-				m_InteractionOperandValue->getEnclosingOperand().reset();
+				//m_InteractionOperandValue->getEnclosingOperand().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_InteractionFragment_generalOrdering())
@@ -300,7 +300,7 @@ void InteractionOperandObject::removeValue(std::shared_ptr<uml::StructuralFeatur
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_InteractionOperand_guard())
 	{
-				m_InteractionOperandValue->getGuard().reset();
+				//m_InteractionOperandValue->getGuard().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_NamedElement_name())
@@ -310,7 +310,7 @@ void InteractionOperandObject::removeValue(std::shared_ptr<uml::StructuralFeatur
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_NamedElement_nameExpression())
 	{
-				m_InteractionOperandValue->getNameExpression().reset();
+				//m_InteractionOperandValue->getNameExpression().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_NamedElement_visibility())

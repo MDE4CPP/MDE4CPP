@@ -204,7 +204,7 @@ void ConnectableElementObject::removeValue(std::shared_ptr<uml::StructuralFeatur
 
 	if (feature == UML::UMLPackage::eInstance()->get_UML_ConnectableElement_templateParameter())
 	{
-				m_ConnectableElementValue->getTemplateParameter().reset();
+				//m_ConnectableElementValue->getTemplateParameter().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Element_ownedComment())
@@ -232,7 +232,7 @@ void ConnectableElementObject::removeValue(std::shared_ptr<uml::StructuralFeatur
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_NamedElement_nameExpression())
 	{
-				m_ConnectableElementValue->getNameExpression().reset();
+				//m_ConnectableElementValue->getNameExpression().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_NamedElement_visibility())
@@ -242,17 +242,17 @@ void ConnectableElementObject::removeValue(std::shared_ptr<uml::StructuralFeatur
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_ParameterableElement_owningTemplateParameter())
 	{
-				m_ConnectableElementValue->getOwningTemplateParameter().reset();
+				//m_ConnectableElementValue->getOwningTemplateParameter().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_ParameterableElement_templateParameter())
 	{
-				m_ConnectableElementValue->getTemplateParameter().reset();
+				//m_ConnectableElementValue->getTemplateParameter().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_TypedElement_type())
 	{
-				m_ConnectableElementValue->getType().reset();
+				//m_ConnectableElementValue->getType().reset();
 
 	}
 }

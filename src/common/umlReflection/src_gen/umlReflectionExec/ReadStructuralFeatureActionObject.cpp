@@ -273,7 +273,7 @@ void ReadStructuralFeatureActionObject::removeValue(std::shared_ptr<uml::Structu
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_ActivityNode_activity())
 	{
-				m_ReadStructuralFeatureActionValue->getActivity().reset();
+				//m_ReadStructuralFeatureActionValue->getActivity().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_ActivityNode_inInterruptibleRegion())
@@ -314,7 +314,7 @@ void ReadStructuralFeatureActionObject::removeValue(std::shared_ptr<uml::Structu
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_ActivityNode_inStructuredNode())
 	{
-				m_ReadStructuralFeatureActionValue->getInStructuredNode().reset();
+				//m_ReadStructuralFeatureActionValue->getInStructuredNode().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_ActivityNode_incoming())
@@ -414,7 +414,7 @@ void ReadStructuralFeatureActionObject::removeValue(std::shared_ptr<uml::Structu
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_NamedElement_nameExpression())
 	{
-				m_ReadStructuralFeatureActionValue->getNameExpression().reset();
+				//m_ReadStructuralFeatureActionValue->getNameExpression().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_NamedElement_visibility())
@@ -424,7 +424,7 @@ void ReadStructuralFeatureActionObject::removeValue(std::shared_ptr<uml::Structu
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_ReadStructuralFeatureAction_result())
 	{
-				m_ReadStructuralFeatureActionValue->getResult().reset();
+				//m_ReadStructuralFeatureActionValue->getResult().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_RedefinableElement_isLeaf())
@@ -434,12 +434,12 @@ void ReadStructuralFeatureActionObject::removeValue(std::shared_ptr<uml::Structu
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_StructuralFeatureAction_object())
 	{
-				m_ReadStructuralFeatureActionValue->getObject().reset();
+				//m_ReadStructuralFeatureActionValue->getObject().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_StructuralFeatureAction_structuralFeature())
 	{
-				m_ReadStructuralFeatureActionValue->getStructuralFeature().reset();
+				//m_ReadStructuralFeatureActionValue->getStructuralFeature().reset();
 
 	}
 }

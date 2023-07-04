@@ -206,7 +206,7 @@ void InterruptibleActivityRegionObject::removeValue(std::shared_ptr<uml::Structu
 
 	if (feature == UML::UMLPackage::eInstance()->get_UML_ActivityGroup_inActivity())
 	{
-				m_InterruptibleActivityRegionValue->getInActivity().reset();
+				//m_InterruptibleActivityRegionValue->getInActivity().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Element_ownedComment())
@@ -270,7 +270,7 @@ void InterruptibleActivityRegionObject::removeValue(std::shared_ptr<uml::Structu
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_NamedElement_nameExpression())
 	{
-				m_InterruptibleActivityRegionValue->getNameExpression().reset();
+				//m_InterruptibleActivityRegionValue->getNameExpression().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_NamedElement_visibility())

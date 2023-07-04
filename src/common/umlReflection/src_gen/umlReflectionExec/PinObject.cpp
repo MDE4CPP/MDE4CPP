@@ -235,7 +235,7 @@ void PinObject::removeValue(std::shared_ptr<uml::StructuralFeature> feature, std
 
 	if (feature == UML::UMLPackage::eInstance()->get_UML_ActivityNode_activity())
 	{
-				m_PinValue->getActivity().reset();
+				//m_PinValue->getActivity().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_ActivityNode_inInterruptibleRegion())
@@ -276,7 +276,7 @@ void PinObject::removeValue(std::shared_ptr<uml::StructuralFeature> feature, std
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_ActivityNode_inStructuredNode())
 	{
-				m_PinValue->getInStructuredNode().reset();
+				//m_PinValue->getInStructuredNode().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_ActivityNode_incoming())
@@ -368,7 +368,7 @@ void PinObject::removeValue(std::shared_ptr<uml::StructuralFeature> feature, std
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_MultiplicityElement_lowerValue())
 	{
-				m_PinValue->getLowerValue().reset();
+				//m_PinValue->getLowerValue().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_MultiplicityElement_upper())
@@ -378,7 +378,7 @@ void PinObject::removeValue(std::shared_ptr<uml::StructuralFeature> feature, std
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_MultiplicityElement_upperValue())
 	{
-				m_PinValue->getUpperValue().reset();
+				//m_PinValue->getUpperValue().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_NamedElement_name())
@@ -388,7 +388,7 @@ void PinObject::removeValue(std::shared_ptr<uml::StructuralFeature> feature, std
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_NamedElement_nameExpression())
 	{
-				m_PinValue->getNameExpression().reset();
+				//m_PinValue->getNameExpression().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_NamedElement_visibility())
@@ -426,12 +426,12 @@ void PinObject::removeValue(std::shared_ptr<uml::StructuralFeature> feature, std
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_ObjectNode_selection())
 	{
-				m_PinValue->getSelection().reset();
+				//m_PinValue->getSelection().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_ObjectNode_upperBound())
 	{
-				m_PinValue->getUpperBound().reset();
+				//m_PinValue->getUpperBound().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Pin_isControl())
@@ -446,7 +446,7 @@ void PinObject::removeValue(std::shared_ptr<uml::StructuralFeature> feature, std
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_TypedElement_type())
 	{
-				m_PinValue->getType().reset();
+				//m_PinValue->getType().reset();
 
 	}
 }

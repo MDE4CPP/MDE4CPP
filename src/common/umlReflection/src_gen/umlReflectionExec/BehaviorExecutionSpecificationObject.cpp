@@ -206,7 +206,7 @@ void BehaviorExecutionSpecificationObject::removeValue(std::shared_ptr<uml::Stru
 
 	if (feature == UML::UMLPackage::eInstance()->get_UML_BehaviorExecutionSpecification_behavior())
 	{
-				m_BehaviorExecutionSpecificationValue->getBehavior().reset();
+				//m_BehaviorExecutionSpecificationValue->getBehavior().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Element_ownedComment())
@@ -229,12 +229,12 @@ void BehaviorExecutionSpecificationObject::removeValue(std::shared_ptr<uml::Stru
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_ExecutionSpecification_finish())
 	{
-				m_BehaviorExecutionSpecificationValue->getFinish().reset();
+				//m_BehaviorExecutionSpecificationValue->getFinish().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_ExecutionSpecification_start())
 	{
-				m_BehaviorExecutionSpecificationValue->getStart().reset();
+				//m_BehaviorExecutionSpecificationValue->getStart().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_InteractionFragment_covered())
@@ -257,12 +257,12 @@ void BehaviorExecutionSpecificationObject::removeValue(std::shared_ptr<uml::Stru
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_InteractionFragment_enclosingInteraction())
 	{
-				m_BehaviorExecutionSpecificationValue->getEnclosingInteraction().reset();
+				//m_BehaviorExecutionSpecificationValue->getEnclosingInteraction().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_InteractionFragment_enclosingOperand())
 	{
-				m_BehaviorExecutionSpecificationValue->getEnclosingOperand().reset();
+				//m_BehaviorExecutionSpecificationValue->getEnclosingOperand().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_InteractionFragment_generalOrdering())
@@ -290,7 +290,7 @@ void BehaviorExecutionSpecificationObject::removeValue(std::shared_ptr<uml::Stru
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_NamedElement_nameExpression())
 	{
-				m_BehaviorExecutionSpecificationValue->getNameExpression().reset();
+				//m_BehaviorExecutionSpecificationValue->getNameExpression().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_NamedElement_visibility())

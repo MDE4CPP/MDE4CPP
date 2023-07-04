@@ -214,12 +214,12 @@ void ComponentRealizationObject::removeValue(std::shared_ptr<uml::StructuralFeat
 
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Abstraction_mapping())
 	{
-				m_ComponentRealizationValue->getMapping().reset();
+				//m_ComponentRealizationValue->getMapping().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_ComponentRealization_abstraction())
 	{
-				m_ComponentRealizationValue->getAbstraction().reset();
+				//m_ComponentRealizationValue->getAbstraction().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_ComponentRealization_realizingClassifier())
@@ -301,7 +301,7 @@ void ComponentRealizationObject::removeValue(std::shared_ptr<uml::StructuralFeat
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_NamedElement_nameExpression())
 	{
-				m_ComponentRealizationValue->getNameExpression().reset();
+				//m_ComponentRealizationValue->getNameExpression().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_NamedElement_visibility())
@@ -316,12 +316,12 @@ void ComponentRealizationObject::removeValue(std::shared_ptr<uml::StructuralFeat
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_ParameterableElement_owningTemplateParameter())
 	{
-				m_ComponentRealizationValue->getOwningTemplateParameter().reset();
+				//m_ComponentRealizationValue->getOwningTemplateParameter().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_ParameterableElement_templateParameter())
 	{
-				m_ComponentRealizationValue->getTemplateParameter().reset();
+				//m_ComponentRealizationValue->getTemplateParameter().reset();
 
 	}
 }

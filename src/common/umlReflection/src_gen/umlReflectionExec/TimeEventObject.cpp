@@ -224,7 +224,7 @@ void TimeEventObject::removeValue(std::shared_ptr<uml::StructuralFeature> featur
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_NamedElement_nameExpression())
 	{
-				m_TimeEventValue->getNameExpression().reset();
+				//m_TimeEventValue->getNameExpression().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_NamedElement_visibility())
@@ -239,12 +239,12 @@ void TimeEventObject::removeValue(std::shared_ptr<uml::StructuralFeature> featur
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_ParameterableElement_owningTemplateParameter())
 	{
-				m_TimeEventValue->getOwningTemplateParameter().reset();
+				//m_TimeEventValue->getOwningTemplateParameter().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_ParameterableElement_templateParameter())
 	{
-				m_TimeEventValue->getTemplateParameter().reset();
+				//m_TimeEventValue->getTemplateParameter().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_TimeEvent_isRelative())
@@ -254,7 +254,7 @@ void TimeEventObject::removeValue(std::shared_ptr<uml::StructuralFeature> featur
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_TimeEvent_when())
 	{
-				m_TimeEventValue->getWhen().reset();
+				//m_TimeEventValue->getWhen().reset();
 
 	}
 }

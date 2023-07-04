@@ -229,7 +229,7 @@ void ClauseObject::removeValue(std::shared_ptr<uml::StructuralFeature> feature, 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Clause_decider())
 	{
-				m_ClauseValue->getDecider().reset();
+				//m_ClauseValue->getDecider().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Clause_predecessorClause())

@@ -235,12 +235,12 @@ void ActionInputPinObject::removeValue(std::shared_ptr<uml::StructuralFeature> f
 
 	if (feature == UML::UMLPackage::eInstance()->get_UML_ActionInputPin_fromAction())
 	{
-				m_ActionInputPinValue->getFromAction().reset();
+				//m_ActionInputPinValue->getFromAction().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_ActivityNode_activity())
 	{
-				m_ActionInputPinValue->getActivity().reset();
+				//m_ActionInputPinValue->getActivity().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_ActivityNode_inInterruptibleRegion())
@@ -281,7 +281,7 @@ void ActionInputPinObject::removeValue(std::shared_ptr<uml::StructuralFeature> f
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_ActivityNode_inStructuredNode())
 	{
-				m_ActionInputPinValue->getInStructuredNode().reset();
+				//m_ActionInputPinValue->getInStructuredNode().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_ActivityNode_incoming())
@@ -373,7 +373,7 @@ void ActionInputPinObject::removeValue(std::shared_ptr<uml::StructuralFeature> f
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_MultiplicityElement_lowerValue())
 	{
-				m_ActionInputPinValue->getLowerValue().reset();
+				//m_ActionInputPinValue->getLowerValue().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_MultiplicityElement_upper())
@@ -383,7 +383,7 @@ void ActionInputPinObject::removeValue(std::shared_ptr<uml::StructuralFeature> f
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_MultiplicityElement_upperValue())
 	{
-				m_ActionInputPinValue->getUpperValue().reset();
+				//m_ActionInputPinValue->getUpperValue().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_NamedElement_name())
@@ -393,7 +393,7 @@ void ActionInputPinObject::removeValue(std::shared_ptr<uml::StructuralFeature> f
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_NamedElement_nameExpression())
 	{
-				m_ActionInputPinValue->getNameExpression().reset();
+				//m_ActionInputPinValue->getNameExpression().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_NamedElement_visibility())
@@ -431,12 +431,12 @@ void ActionInputPinObject::removeValue(std::shared_ptr<uml::StructuralFeature> f
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_ObjectNode_selection())
 	{
-				m_ActionInputPinValue->getSelection().reset();
+				//m_ActionInputPinValue->getSelection().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_ObjectNode_upperBound())
 	{
-				m_ActionInputPinValue->getUpperBound().reset();
+				//m_ActionInputPinValue->getUpperBound().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Pin_isControl())
@@ -451,7 +451,7 @@ void ActionInputPinObject::removeValue(std::shared_ptr<uml::StructuralFeature> f
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_TypedElement_type())
 	{
-				m_ActionInputPinValue->getType().reset();
+				//m_ActionInputPinValue->getType().reset();
 
 	}
 }

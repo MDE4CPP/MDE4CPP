@@ -224,12 +224,12 @@ void IntervalConstraintObject::removeValue(std::shared_ptr<uml::StructuralFeatur
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Constraint_context())
 	{
-				m_IntervalConstraintValue->getContext().reset();
+				//m_IntervalConstraintValue->getContext().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Constraint_specification())
 	{
-				m_IntervalConstraintValue->getSpecification().reset();
+				//m_IntervalConstraintValue->getSpecification().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Element_ownedComment())
@@ -252,7 +252,7 @@ void IntervalConstraintObject::removeValue(std::shared_ptr<uml::StructuralFeatur
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_IntervalConstraint_specification())
 	{
-				m_IntervalConstraintValue->getSpecification().reset();
+				//m_IntervalConstraintValue->getSpecification().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_NamedElement_name())
@@ -262,7 +262,7 @@ void IntervalConstraintObject::removeValue(std::shared_ptr<uml::StructuralFeatur
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_NamedElement_nameExpression())
 	{
-				m_IntervalConstraintValue->getNameExpression().reset();
+				//m_IntervalConstraintValue->getNameExpression().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_NamedElement_visibility())
@@ -277,12 +277,12 @@ void IntervalConstraintObject::removeValue(std::shared_ptr<uml::StructuralFeatur
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_ParameterableElement_owningTemplateParameter())
 	{
-				m_IntervalConstraintValue->getOwningTemplateParameter().reset();
+				//m_IntervalConstraintValue->getOwningTemplateParameter().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_ParameterableElement_templateParameter())
 	{
-				m_IntervalConstraintValue->getTemplateParameter().reset();
+				//m_IntervalConstraintValue->getTemplateParameter().reset();
 
 	}
 }

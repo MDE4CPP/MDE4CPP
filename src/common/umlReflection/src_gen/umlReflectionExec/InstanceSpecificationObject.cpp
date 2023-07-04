@@ -284,7 +284,7 @@ void InstanceSpecificationObject::removeValue(std::shared_ptr<uml::StructuralFea
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_InstanceSpecification_specification())
 	{
-				m_InstanceSpecificationValue->getSpecification().reset();
+				//m_InstanceSpecificationValue->getSpecification().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_NamedElement_name())
@@ -294,7 +294,7 @@ void InstanceSpecificationObject::removeValue(std::shared_ptr<uml::StructuralFea
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_NamedElement_nameExpression())
 	{
-				m_InstanceSpecificationValue->getNameExpression().reset();
+				//m_InstanceSpecificationValue->getNameExpression().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_NamedElement_visibility())
@@ -309,12 +309,12 @@ void InstanceSpecificationObject::removeValue(std::shared_ptr<uml::StructuralFea
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_ParameterableElement_owningTemplateParameter())
 	{
-				m_InstanceSpecificationValue->getOwningTemplateParameter().reset();
+				//m_InstanceSpecificationValue->getOwningTemplateParameter().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_ParameterableElement_templateParameter())
 	{
-				m_InstanceSpecificationValue->getTemplateParameter().reset();
+				//m_InstanceSpecificationValue->getTemplateParameter().reset();
 
 	}
 }

@@ -211,7 +211,7 @@ void TemplateBindingObject::removeValue(std::shared_ptr<uml::StructuralFeature> 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_TemplateBinding_boundElement())
 	{
-				m_TemplateBindingValue->getBoundElement().reset();
+				//m_TemplateBindingValue->getBoundElement().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_TemplateBinding_parameterSubstitution())
@@ -234,7 +234,7 @@ void TemplateBindingObject::removeValue(std::shared_ptr<uml::StructuralFeature> 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_TemplateBinding_signature())
 	{
-				m_TemplateBindingValue->getSignature().reset();
+				//m_TemplateBindingValue->getSignature().reset();
 
 	}
 }

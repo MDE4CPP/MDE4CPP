@@ -205,7 +205,7 @@ void LinkEndDataObject::removeValue(std::shared_ptr<uml::StructuralFeature> feat
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_LinkEndData_end())
 	{
-				m_LinkEndDataValue->getEnd().reset();
+				//m_LinkEndDataValue->getEnd().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_LinkEndData_qualifier())
@@ -228,7 +228,7 @@ void LinkEndDataObject::removeValue(std::shared_ptr<uml::StructuralFeature> feat
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_LinkEndData_value())
 	{
-				m_LinkEndDataValue->getValue().reset();
+				//m_LinkEndDataValue->getValue().reset();
 
 	}
 }

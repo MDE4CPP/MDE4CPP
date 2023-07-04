@@ -273,7 +273,7 @@ void ReadLinkObjectEndQualifierActionObject::removeValue(std::shared_ptr<uml::St
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_ActivityNode_activity())
 	{
-				m_ReadLinkObjectEndQualifierActionValue->getActivity().reset();
+				//m_ReadLinkObjectEndQualifierActionValue->getActivity().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_ActivityNode_inInterruptibleRegion())
@@ -314,7 +314,7 @@ void ReadLinkObjectEndQualifierActionObject::removeValue(std::shared_ptr<uml::St
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_ActivityNode_inStructuredNode())
 	{
-				m_ReadLinkObjectEndQualifierActionValue->getInStructuredNode().reset();
+				//m_ReadLinkObjectEndQualifierActionValue->getInStructuredNode().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_ActivityNode_incoming())
@@ -414,7 +414,7 @@ void ReadLinkObjectEndQualifierActionObject::removeValue(std::shared_ptr<uml::St
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_NamedElement_nameExpression())
 	{
-				m_ReadLinkObjectEndQualifierActionValue->getNameExpression().reset();
+				//m_ReadLinkObjectEndQualifierActionValue->getNameExpression().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_NamedElement_visibility())
@@ -424,17 +424,17 @@ void ReadLinkObjectEndQualifierActionObject::removeValue(std::shared_ptr<uml::St
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_ReadLinkObjectEndQualifierAction_object())
 	{
-				m_ReadLinkObjectEndQualifierActionValue->getObject().reset();
+				//m_ReadLinkObjectEndQualifierActionValue->getObject().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_ReadLinkObjectEndQualifierAction_qualifier())
 	{
-				m_ReadLinkObjectEndQualifierActionValue->getQualifier().reset();
+				//m_ReadLinkObjectEndQualifierActionValue->getQualifier().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_ReadLinkObjectEndQualifierAction_result())
 	{
-				m_ReadLinkObjectEndQualifierActionValue->getResult().reset();
+				//m_ReadLinkObjectEndQualifierActionValue->getResult().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_RedefinableElement_isLeaf())

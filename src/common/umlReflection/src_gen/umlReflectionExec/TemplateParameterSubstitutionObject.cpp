@@ -207,22 +207,22 @@ void TemplateParameterSubstitutionObject::removeValue(std::shared_ptr<uml::Struc
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_TemplateParameterSubstitution_actual())
 	{
-				m_TemplateParameterSubstitutionValue->getActual().reset();
+				//m_TemplateParameterSubstitutionValue->getActual().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_TemplateParameterSubstitution_formal())
 	{
-				m_TemplateParameterSubstitutionValue->getFormal().reset();
+				//m_TemplateParameterSubstitutionValue->getFormal().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_TemplateParameterSubstitution_ownedActual())
 	{
-				m_TemplateParameterSubstitutionValue->getOwnedActual().reset();
+				//m_TemplateParameterSubstitutionValue->getOwnedActual().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_TemplateParameterSubstitution_templateBinding())
 	{
-				m_TemplateParameterSubstitutionValue->getTemplateBinding().reset();
+				//m_TemplateParameterSubstitutionValue->getTemplateBinding().reset();
 
 	}
 }

@@ -217,7 +217,7 @@ void ExtensionPointObject::removeValue(std::shared_ptr<uml::StructuralFeature> f
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_ExtensionPoint_useCase())
 	{
-				m_ExtensionPointValue->getUseCase().reset();
+				//m_ExtensionPointValue->getUseCase().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_NamedElement_name())
@@ -227,7 +227,7 @@ void ExtensionPointObject::removeValue(std::shared_ptr<uml::StructuralFeature> f
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_NamedElement_nameExpression())
 	{
-				m_ExtensionPointValue->getNameExpression().reset();
+				//m_ExtensionPointValue->getNameExpression().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_NamedElement_visibility())

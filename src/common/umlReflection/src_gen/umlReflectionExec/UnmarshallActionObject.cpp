@@ -273,7 +273,7 @@ void UnmarshallActionObject::removeValue(std::shared_ptr<uml::StructuralFeature>
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_ActivityNode_activity())
 	{
-				m_UnmarshallActionValue->getActivity().reset();
+				//m_UnmarshallActionValue->getActivity().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_ActivityNode_inInterruptibleRegion())
@@ -314,7 +314,7 @@ void UnmarshallActionObject::removeValue(std::shared_ptr<uml::StructuralFeature>
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_ActivityNode_inStructuredNode())
 	{
-				m_UnmarshallActionValue->getInStructuredNode().reset();
+				//m_UnmarshallActionValue->getInStructuredNode().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_ActivityNode_incoming())
@@ -414,7 +414,7 @@ void UnmarshallActionObject::removeValue(std::shared_ptr<uml::StructuralFeature>
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_NamedElement_nameExpression())
 	{
-				m_UnmarshallActionValue->getNameExpression().reset();
+				//m_UnmarshallActionValue->getNameExpression().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_NamedElement_visibility())
@@ -429,7 +429,7 @@ void UnmarshallActionObject::removeValue(std::shared_ptr<uml::StructuralFeature>
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_UnmarshallAction_object())
 	{
-				m_UnmarshallActionValue->getObject().reset();
+				//m_UnmarshallActionValue->getObject().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_UnmarshallAction_result())
@@ -452,7 +452,7 @@ void UnmarshallActionObject::removeValue(std::shared_ptr<uml::StructuralFeature>
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_UnmarshallAction_unmarshallType())
 	{
-				m_UnmarshallActionValue->getUnmarshallType().reset();
+				//m_UnmarshallActionValue->getUnmarshallType().reset();
 
 	}
 }

@@ -211,32 +211,32 @@ void OperationTemplateParameterObject::removeValue(std::shared_ptr<uml::Structur
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_OperationTemplateParameter_parameteredElement())
 	{
-				m_OperationTemplateParameterValue->getParameteredElement().reset();
+				//m_OperationTemplateParameterValue->getParameteredElement().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_TemplateParameter_default())
 	{
-				m_OperationTemplateParameterValue->getDefault().reset();
+				//m_OperationTemplateParameterValue->getDefault().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_TemplateParameter_ownedDefault())
 	{
-				m_OperationTemplateParameterValue->getOwnedDefault().reset();
+				//m_OperationTemplateParameterValue->getOwnedDefault().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_TemplateParameter_ownedParameteredElement())
 	{
-				m_OperationTemplateParameterValue->getOwnedParameteredElement().reset();
+				//m_OperationTemplateParameterValue->getOwnedParameteredElement().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_TemplateParameter_parameteredElement())
 	{
-				m_OperationTemplateParameterValue->getParameteredElement().reset();
+				//m_OperationTemplateParameterValue->getParameteredElement().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_TemplateParameter_signature())
 	{
-				m_OperationTemplateParameterValue->getSignature().reset();
+				//m_OperationTemplateParameterValue->getSignature().reset();
 
 	}
 }

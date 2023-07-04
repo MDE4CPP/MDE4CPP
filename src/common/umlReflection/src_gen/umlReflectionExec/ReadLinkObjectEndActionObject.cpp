@@ -273,7 +273,7 @@ void ReadLinkObjectEndActionObject::removeValue(std::shared_ptr<uml::StructuralF
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_ActivityNode_activity())
 	{
-				m_ReadLinkObjectEndActionValue->getActivity().reset();
+				//m_ReadLinkObjectEndActionValue->getActivity().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_ActivityNode_inInterruptibleRegion())
@@ -314,7 +314,7 @@ void ReadLinkObjectEndActionObject::removeValue(std::shared_ptr<uml::StructuralF
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_ActivityNode_inStructuredNode())
 	{
-				m_ReadLinkObjectEndActionValue->getInStructuredNode().reset();
+				//m_ReadLinkObjectEndActionValue->getInStructuredNode().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_ActivityNode_incoming())
@@ -414,7 +414,7 @@ void ReadLinkObjectEndActionObject::removeValue(std::shared_ptr<uml::StructuralF
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_NamedElement_nameExpression())
 	{
-				m_ReadLinkObjectEndActionValue->getNameExpression().reset();
+				//m_ReadLinkObjectEndActionValue->getNameExpression().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_NamedElement_visibility())
@@ -424,17 +424,17 @@ void ReadLinkObjectEndActionObject::removeValue(std::shared_ptr<uml::StructuralF
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_ReadLinkObjectEndAction_end())
 	{
-				m_ReadLinkObjectEndActionValue->getEnd().reset();
+				//m_ReadLinkObjectEndActionValue->getEnd().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_ReadLinkObjectEndAction_object())
 	{
-				m_ReadLinkObjectEndActionValue->getObject().reset();
+				//m_ReadLinkObjectEndActionValue->getObject().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_ReadLinkObjectEndAction_result())
 	{
-				m_ReadLinkObjectEndActionValue->getResult().reset();
+				//m_ReadLinkObjectEndActionValue->getResult().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_RedefinableElement_isLeaf())

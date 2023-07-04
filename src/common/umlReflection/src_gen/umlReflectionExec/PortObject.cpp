@@ -263,7 +263,7 @@ void PortObject::removeValue(std::shared_ptr<uml::StructuralFeature> feature, st
 
 	if (feature == UML::UMLPackage::eInstance()->get_UML_ConnectableElement_templateParameter())
 	{
-				m_PortValue->getTemplateParameter().reset();
+				//m_PortValue->getTemplateParameter().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_DeploymentTarget_deployment())
@@ -324,7 +324,7 @@ void PortObject::removeValue(std::shared_ptr<uml::StructuralFeature> feature, st
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_MultiplicityElement_lowerValue())
 	{
-				m_PortValue->getLowerValue().reset();
+				//m_PortValue->getLowerValue().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_MultiplicityElement_upper())
@@ -334,7 +334,7 @@ void PortObject::removeValue(std::shared_ptr<uml::StructuralFeature> feature, st
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_MultiplicityElement_upperValue())
 	{
-				m_PortValue->getUpperValue().reset();
+				//m_PortValue->getUpperValue().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_NamedElement_name())
@@ -344,7 +344,7 @@ void PortObject::removeValue(std::shared_ptr<uml::StructuralFeature> feature, st
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_NamedElement_nameExpression())
 	{
-				m_PortValue->getNameExpression().reset();
+				//m_PortValue->getNameExpression().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_NamedElement_visibility())
@@ -354,12 +354,12 @@ void PortObject::removeValue(std::shared_ptr<uml::StructuralFeature> feature, st
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_ParameterableElement_owningTemplateParameter())
 	{
-				m_PortValue->getOwningTemplateParameter().reset();
+				//m_PortValue->getOwningTemplateParameter().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_ParameterableElement_templateParameter())
 	{
-				m_PortValue->getTemplateParameter().reset();
+				//m_PortValue->getTemplateParameter().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Port_isBehavior())
@@ -379,7 +379,7 @@ void PortObject::removeValue(std::shared_ptr<uml::StructuralFeature> feature, st
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Port_protocol())
 	{
-				m_PortValue->getProtocol().reset();
+				//m_PortValue->getProtocol().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Port_redefinedPort())
@@ -407,22 +407,22 @@ void PortObject::removeValue(std::shared_ptr<uml::StructuralFeature> feature, st
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Property_association())
 	{
-				m_PortValue->getAssociation().reset();
+				//m_PortValue->getAssociation().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Property_associationEnd())
 	{
-				m_PortValue->getAssociationEnd().reset();
+				//m_PortValue->getAssociationEnd().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Property_class())
 	{
-				m_PortValue->getClass().reset();
+				//m_PortValue->getClass().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Property_datatype())
 	{
-				m_PortValue->getDatatype().reset();
+				//m_PortValue->getDatatype().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Property_default())
@@ -432,12 +432,12 @@ void PortObject::removeValue(std::shared_ptr<uml::StructuralFeature> feature, st
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Property_defaultValue())
 	{
-				m_PortValue->getDefaultValue().reset();
+				//m_PortValue->getDefaultValue().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Property_interface())
 	{
-				m_PortValue->getInterface().reset();
+				//m_PortValue->getInterface().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Property_isComposite())
@@ -462,12 +462,12 @@ void PortObject::removeValue(std::shared_ptr<uml::StructuralFeature> feature, st
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Property_opposite())
 	{
-				m_PortValue->getOpposite().reset();
+				//m_PortValue->getOpposite().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Property_owningAssociation())
 	{
-				m_PortValue->getOwningAssociation().reset();
+				//m_PortValue->getOwningAssociation().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Property_qualifier())
@@ -536,7 +536,7 @@ void PortObject::removeValue(std::shared_ptr<uml::StructuralFeature> feature, st
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_TypedElement_type())
 	{
-				m_PortValue->getType().reset();
+				//m_PortValue->getType().reset();
 
 	}
 }

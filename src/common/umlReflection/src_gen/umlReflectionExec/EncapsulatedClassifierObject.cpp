@@ -325,7 +325,7 @@ void EncapsulatedClassifierObject::removeValue(std::shared_ptr<uml::StructuralFe
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Classifier_ownedTemplateSignature())
 	{
-				m_EncapsulatedClassifierValue->getOwnedTemplateSignature().reset();
+				//m_EncapsulatedClassifierValue->getOwnedTemplateSignature().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Classifier_ownedUseCase())
@@ -384,7 +384,7 @@ void EncapsulatedClassifierObject::removeValue(std::shared_ptr<uml::StructuralFe
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Classifier_representation())
 	{
-				m_EncapsulatedClassifierValue->getRepresentation().reset();
+				//m_EncapsulatedClassifierValue->getRepresentation().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Classifier_substitution())
@@ -407,7 +407,7 @@ void EncapsulatedClassifierObject::removeValue(std::shared_ptr<uml::StructuralFe
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Classifier_templateParameter())
 	{
-				m_EncapsulatedClassifierValue->getTemplateParameter().reset();
+				//m_EncapsulatedClassifierValue->getTemplateParameter().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Classifier_useCase())
@@ -453,7 +453,7 @@ void EncapsulatedClassifierObject::removeValue(std::shared_ptr<uml::StructuralFe
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_NamedElement_nameExpression())
 	{
-				m_EncapsulatedClassifierValue->getNameExpression().reset();
+				//m_EncapsulatedClassifierValue->getNameExpression().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_NamedElement_visibility())
@@ -522,12 +522,12 @@ void EncapsulatedClassifierObject::removeValue(std::shared_ptr<uml::StructuralFe
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_ParameterableElement_owningTemplateParameter())
 	{
-				m_EncapsulatedClassifierValue->getOwningTemplateParameter().reset();
+				//m_EncapsulatedClassifierValue->getOwningTemplateParameter().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_ParameterableElement_templateParameter())
 	{
-				m_EncapsulatedClassifierValue->getTemplateParameter().reset();
+				//m_EncapsulatedClassifierValue->getTemplateParameter().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_RedefinableElement_isLeaf())
@@ -573,7 +573,7 @@ void EncapsulatedClassifierObject::removeValue(std::shared_ptr<uml::StructuralFe
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_TemplateableElement_ownedTemplateSignature())
 	{
-				m_EncapsulatedClassifierValue->getOwnedTemplateSignature().reset();
+				//m_EncapsulatedClassifierValue->getOwnedTemplateSignature().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_TemplateableElement_templateBinding())
@@ -596,7 +596,7 @@ void EncapsulatedClassifierObject::removeValue(std::shared_ptr<uml::StructuralFe
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Type_package())
 	{
-				m_EncapsulatedClassifierValue->getPackage().reset();
+				//m_EncapsulatedClassifierValue->getPackage().reset();
 
 	}
 }

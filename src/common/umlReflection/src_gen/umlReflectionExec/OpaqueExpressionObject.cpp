@@ -229,7 +229,7 @@ void OpaqueExpressionObject::removeValue(std::shared_ptr<uml::StructuralFeature>
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_NamedElement_nameExpression())
 	{
-				m_OpaqueExpressionValue->getNameExpression().reset();
+				//m_OpaqueExpressionValue->getNameExpression().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_NamedElement_visibility())
@@ -239,7 +239,7 @@ void OpaqueExpressionObject::removeValue(std::shared_ptr<uml::StructuralFeature>
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_OpaqueExpression_behavior())
 	{
-				m_OpaqueExpressionValue->getBehavior().reset();
+				//m_OpaqueExpressionValue->getBehavior().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_OpaqueExpression_body())
@@ -303,17 +303,17 @@ void OpaqueExpressionObject::removeValue(std::shared_ptr<uml::StructuralFeature>
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_ParameterableElement_owningTemplateParameter())
 	{
-				m_OpaqueExpressionValue->getOwningTemplateParameter().reset();
+				//m_OpaqueExpressionValue->getOwningTemplateParameter().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_ParameterableElement_templateParameter())
 	{
-				m_OpaqueExpressionValue->getTemplateParameter().reset();
+				//m_OpaqueExpressionValue->getTemplateParameter().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_TypedElement_type())
 	{
-				m_OpaqueExpressionValue->getType().reset();
+				//m_OpaqueExpressionValue->getType().reset();
 
 	}
 }

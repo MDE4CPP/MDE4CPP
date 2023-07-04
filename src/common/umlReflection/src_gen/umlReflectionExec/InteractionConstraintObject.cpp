@@ -226,12 +226,12 @@ void InteractionConstraintObject::removeValue(std::shared_ptr<uml::StructuralFea
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Constraint_context())
 	{
-				m_InteractionConstraintValue->getContext().reset();
+				//m_InteractionConstraintValue->getContext().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Constraint_specification())
 	{
-				m_InteractionConstraintValue->getSpecification().reset();
+				//m_InteractionConstraintValue->getSpecification().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Element_ownedComment())
@@ -254,12 +254,12 @@ void InteractionConstraintObject::removeValue(std::shared_ptr<uml::StructuralFea
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_InteractionConstraint_maxint())
 	{
-				m_InteractionConstraintValue->getMaxint().reset();
+				//m_InteractionConstraintValue->getMaxint().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_InteractionConstraint_minint())
 	{
-				m_InteractionConstraintValue->getMinint().reset();
+				//m_InteractionConstraintValue->getMinint().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_NamedElement_name())
@@ -269,7 +269,7 @@ void InteractionConstraintObject::removeValue(std::shared_ptr<uml::StructuralFea
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_NamedElement_nameExpression())
 	{
-				m_InteractionConstraintValue->getNameExpression().reset();
+				//m_InteractionConstraintValue->getNameExpression().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_NamedElement_visibility())
@@ -284,12 +284,12 @@ void InteractionConstraintObject::removeValue(std::shared_ptr<uml::StructuralFea
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_ParameterableElement_owningTemplateParameter())
 	{
-				m_InteractionConstraintValue->getOwningTemplateParameter().reset();
+				//m_InteractionConstraintValue->getOwningTemplateParameter().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_ParameterableElement_templateParameter())
 	{
-				m_InteractionConstraintValue->getTemplateParameter().reset();
+				//m_InteractionConstraintValue->getTemplateParameter().reset();
 
 	}
 }

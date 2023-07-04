@@ -286,7 +286,7 @@ void DeploymentObject::removeValue(std::shared_ptr<uml::StructuralFeature> featu
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Deployment_location())
 	{
-				m_DeploymentValue->getLocation().reset();
+				//m_DeploymentValue->getLocation().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Element_ownedComment())
@@ -314,7 +314,7 @@ void DeploymentObject::removeValue(std::shared_ptr<uml::StructuralFeature> featu
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_NamedElement_nameExpression())
 	{
-				m_DeploymentValue->getNameExpression().reset();
+				//m_DeploymentValue->getNameExpression().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_NamedElement_visibility())
@@ -329,12 +329,12 @@ void DeploymentObject::removeValue(std::shared_ptr<uml::StructuralFeature> featu
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_ParameterableElement_owningTemplateParameter())
 	{
-				m_DeploymentValue->getOwningTemplateParameter().reset();
+				//m_DeploymentValue->getOwningTemplateParameter().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_ParameterableElement_templateParameter())
 	{
-				m_DeploymentValue->getTemplateParameter().reset();
+				//m_DeploymentValue->getTemplateParameter().reset();
 
 	}
 }

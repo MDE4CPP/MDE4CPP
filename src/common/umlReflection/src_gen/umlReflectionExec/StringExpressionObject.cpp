@@ -259,7 +259,7 @@ void StringExpressionObject::removeValue(std::shared_ptr<uml::StructuralFeature>
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_NamedElement_nameExpression())
 	{
-				m_StringExpressionValue->getNameExpression().reset();
+				//m_StringExpressionValue->getNameExpression().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_NamedElement_visibility())
@@ -274,17 +274,17 @@ void StringExpressionObject::removeValue(std::shared_ptr<uml::StructuralFeature>
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_ParameterableElement_owningTemplateParameter())
 	{
-				m_StringExpressionValue->getOwningTemplateParameter().reset();
+				//m_StringExpressionValue->getOwningTemplateParameter().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_ParameterableElement_templateParameter())
 	{
-				m_StringExpressionValue->getTemplateParameter().reset();
+				//m_StringExpressionValue->getTemplateParameter().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_StringExpression_owningExpression())
 	{
-				m_StringExpressionValue->getOwningExpression().reset();
+				//m_StringExpressionValue->getOwningExpression().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_StringExpression_subExpression())
@@ -307,7 +307,7 @@ void StringExpressionObject::removeValue(std::shared_ptr<uml::StructuralFeature>
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_TemplateableElement_ownedTemplateSignature())
 	{
-				m_StringExpressionValue->getOwnedTemplateSignature().reset();
+				//m_StringExpressionValue->getOwnedTemplateSignature().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_TemplateableElement_templateBinding())
@@ -330,7 +330,7 @@ void StringExpressionObject::removeValue(std::shared_ptr<uml::StructuralFeature>
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_TypedElement_type())
 	{
-				m_StringExpressionValue->getType().reset();
+				//m_StringExpressionValue->getType().reset();
 
 	}
 }

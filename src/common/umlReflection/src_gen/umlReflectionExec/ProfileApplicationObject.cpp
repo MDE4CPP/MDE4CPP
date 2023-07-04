@@ -211,12 +211,12 @@ void ProfileApplicationObject::removeValue(std::shared_ptr<uml::StructuralFeatur
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_ProfileApplication_appliedProfile())
 	{
-				m_ProfileApplicationValue->getAppliedProfile().reset();
+				//m_ProfileApplicationValue->getAppliedProfile().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_ProfileApplication_applyingPackage())
 	{
-				m_ProfileApplicationValue->getApplyingPackage().reset();
+				//m_ProfileApplicationValue->getApplyingPackage().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_ProfileApplication_isStrict())

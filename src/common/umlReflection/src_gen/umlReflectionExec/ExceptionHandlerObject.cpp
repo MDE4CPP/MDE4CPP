@@ -207,7 +207,7 @@ void ExceptionHandlerObject::removeValue(std::shared_ptr<uml::StructuralFeature>
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_ExceptionHandler_exceptionInput())
 	{
-				m_ExceptionHandlerValue->getExceptionInput().reset();
+				//m_ExceptionHandlerValue->getExceptionInput().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_ExceptionHandler_exceptionType())
@@ -230,12 +230,12 @@ void ExceptionHandlerObject::removeValue(std::shared_ptr<uml::StructuralFeature>
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_ExceptionHandler_handlerBody())
 	{
-				m_ExceptionHandlerValue->getHandlerBody().reset();
+				//m_ExceptionHandlerValue->getHandlerBody().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_ExceptionHandler_protectedNode())
 	{
-				m_ExceptionHandlerValue->getProtectedNode().reset();
+				//m_ExceptionHandlerValue->getProtectedNode().reset();
 
 	}
 }

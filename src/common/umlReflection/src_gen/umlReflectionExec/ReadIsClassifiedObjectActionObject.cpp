@@ -274,7 +274,7 @@ void ReadIsClassifiedObjectActionObject::removeValue(std::shared_ptr<uml::Struct
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_ActivityNode_activity())
 	{
-				m_ReadIsClassifiedObjectActionValue->getActivity().reset();
+				//m_ReadIsClassifiedObjectActionValue->getActivity().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_ActivityNode_inInterruptibleRegion())
@@ -315,7 +315,7 @@ void ReadIsClassifiedObjectActionObject::removeValue(std::shared_ptr<uml::Struct
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_ActivityNode_inStructuredNode())
 	{
-				m_ReadIsClassifiedObjectActionValue->getInStructuredNode().reset();
+				//m_ReadIsClassifiedObjectActionValue->getInStructuredNode().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_ActivityNode_incoming())
@@ -415,7 +415,7 @@ void ReadIsClassifiedObjectActionObject::removeValue(std::shared_ptr<uml::Struct
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_NamedElement_nameExpression())
 	{
-				m_ReadIsClassifiedObjectActionValue->getNameExpression().reset();
+				//m_ReadIsClassifiedObjectActionValue->getNameExpression().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_NamedElement_visibility())
@@ -425,7 +425,7 @@ void ReadIsClassifiedObjectActionObject::removeValue(std::shared_ptr<uml::Struct
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_ReadIsClassifiedObjectAction_classifier())
 	{
-				m_ReadIsClassifiedObjectActionValue->getClassifier().reset();
+				//m_ReadIsClassifiedObjectActionValue->getClassifier().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_ReadIsClassifiedObjectAction_isDirect())
@@ -435,12 +435,12 @@ void ReadIsClassifiedObjectActionObject::removeValue(std::shared_ptr<uml::Struct
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_ReadIsClassifiedObjectAction_object())
 	{
-				m_ReadIsClassifiedObjectActionValue->getObject().reset();
+				//m_ReadIsClassifiedObjectActionValue->getObject().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_ReadIsClassifiedObjectAction_result())
 	{
-				m_ReadIsClassifiedObjectActionValue->getResult().reset();
+				//m_ReadIsClassifiedObjectActionValue->getResult().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_RedefinableElement_isLeaf())

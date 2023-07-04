@@ -209,12 +209,12 @@ void PackageMergeObject::removeValue(std::shared_ptr<uml::StructuralFeature> fea
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_PackageMerge_mergedPackage())
 	{
-				m_PackageMergeValue->getMergedPackage().reset();
+				//m_PackageMergeValue->getMergedPackage().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_PackageMerge_receivingPackage())
 	{
-				m_PackageMergeValue->getReceivingPackage().reset();
+				//m_PackageMergeValue->getReceivingPackage().reset();
 
 	}
 }

@@ -248,7 +248,7 @@ void EnumerationLiteralObject::removeValue(std::shared_ptr<uml::StructuralFeatur
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_EnumerationLiteral_enumeration())
 	{
-				m_EnumerationLiteralValue->getEnumeration().reset();
+				//m_EnumerationLiteralValue->getEnumeration().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_InstanceSpecification_classifier())
@@ -289,7 +289,7 @@ void EnumerationLiteralObject::removeValue(std::shared_ptr<uml::StructuralFeatur
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_InstanceSpecification_specification())
 	{
-				m_EnumerationLiteralValue->getSpecification().reset();
+				//m_EnumerationLiteralValue->getSpecification().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_NamedElement_name())
@@ -299,7 +299,7 @@ void EnumerationLiteralObject::removeValue(std::shared_ptr<uml::StructuralFeatur
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_NamedElement_nameExpression())
 	{
-				m_EnumerationLiteralValue->getNameExpression().reset();
+				//m_EnumerationLiteralValue->getNameExpression().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_NamedElement_visibility())
@@ -314,12 +314,12 @@ void EnumerationLiteralObject::removeValue(std::shared_ptr<uml::StructuralFeatur
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_ParameterableElement_owningTemplateParameter())
 	{
-				m_EnumerationLiteralValue->getOwningTemplateParameter().reset();
+				//m_EnumerationLiteralValue->getOwningTemplateParameter().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_ParameterableElement_templateParameter())
 	{
-				m_EnumerationLiteralValue->getTemplateParameter().reset();
+				//m_EnumerationLiteralValue->getTemplateParameter().reset();
 
 	}
 }

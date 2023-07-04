@@ -220,7 +220,7 @@ void ClassifierTemplateParameterObject::removeValue(std::shared_ptr<uml::Structu
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_ClassifierTemplateParameter_parameteredElement())
 	{
-				m_ClassifierTemplateParameterValue->getParameteredElement().reset();
+				//m_ClassifierTemplateParameterValue->getParameteredElement().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Element_ownedComment())
@@ -243,27 +243,27 @@ void ClassifierTemplateParameterObject::removeValue(std::shared_ptr<uml::Structu
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_TemplateParameter_default())
 	{
-				m_ClassifierTemplateParameterValue->getDefault().reset();
+				//m_ClassifierTemplateParameterValue->getDefault().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_TemplateParameter_ownedDefault())
 	{
-				m_ClassifierTemplateParameterValue->getOwnedDefault().reset();
+				//m_ClassifierTemplateParameterValue->getOwnedDefault().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_TemplateParameter_ownedParameteredElement())
 	{
-				m_ClassifierTemplateParameterValue->getOwnedParameteredElement().reset();
+				//m_ClassifierTemplateParameterValue->getOwnedParameteredElement().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_TemplateParameter_parameteredElement())
 	{
-				m_ClassifierTemplateParameterValue->getParameteredElement().reset();
+				//m_ClassifierTemplateParameterValue->getParameteredElement().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_TemplateParameter_signature())
 	{
-				m_ClassifierTemplateParameterValue->getSignature().reset();
+				//m_ClassifierTemplateParameterValue->getSignature().reset();
 
 	}
 }

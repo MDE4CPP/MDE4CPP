@@ -233,7 +233,7 @@ void AcceptCallActionObject::removeValue(std::shared_ptr<uml::StructuralFeature>
 
 	if (feature == UML::UMLPackage::eInstance()->get_UML_AcceptCallAction_returnInformation())
 	{
-				m_AcceptCallActionValue->getReturnInformation().reset();
+				//m_AcceptCallActionValue->getReturnInformation().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_AcceptEventAction_isUnmarshall())
@@ -320,7 +320,7 @@ void AcceptCallActionObject::removeValue(std::shared_ptr<uml::StructuralFeature>
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_ActivityNode_activity())
 	{
-				m_AcceptCallActionValue->getActivity().reset();
+				//m_AcceptCallActionValue->getActivity().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_ActivityNode_inInterruptibleRegion())
@@ -361,7 +361,7 @@ void AcceptCallActionObject::removeValue(std::shared_ptr<uml::StructuralFeature>
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_ActivityNode_inStructuredNode())
 	{
-				m_AcceptCallActionValue->getInStructuredNode().reset();
+				//m_AcceptCallActionValue->getInStructuredNode().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_ActivityNode_incoming())
@@ -461,7 +461,7 @@ void AcceptCallActionObject::removeValue(std::shared_ptr<uml::StructuralFeature>
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_NamedElement_nameExpression())
 	{
-				m_AcceptCallActionValue->getNameExpression().reset();
+				//m_AcceptCallActionValue->getNameExpression().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_NamedElement_visibility())

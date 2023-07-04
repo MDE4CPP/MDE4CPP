@@ -274,7 +274,7 @@ void AddVariableValueActionObject::removeValue(std::shared_ptr<uml::StructuralFe
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_ActivityNode_activity())
 	{
-				m_AddVariableValueActionValue->getActivity().reset();
+				//m_AddVariableValueActionValue->getActivity().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_ActivityNode_inInterruptibleRegion())
@@ -315,7 +315,7 @@ void AddVariableValueActionObject::removeValue(std::shared_ptr<uml::StructuralFe
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_ActivityNode_inStructuredNode())
 	{
-				m_AddVariableValueActionValue->getInStructuredNode().reset();
+				//m_AddVariableValueActionValue->getInStructuredNode().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_ActivityNode_incoming())
@@ -374,7 +374,7 @@ void AddVariableValueActionObject::removeValue(std::shared_ptr<uml::StructuralFe
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_AddVariableValueAction_insertAt())
 	{
-				m_AddVariableValueActionValue->getInsertAt().reset();
+				//m_AddVariableValueActionValue->getInsertAt().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_AddVariableValueAction_isReplaceAll())
@@ -425,7 +425,7 @@ void AddVariableValueActionObject::removeValue(std::shared_ptr<uml::StructuralFe
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_NamedElement_nameExpression())
 	{
-				m_AddVariableValueActionValue->getNameExpression().reset();
+				//m_AddVariableValueActionValue->getNameExpression().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_NamedElement_visibility())
@@ -440,12 +440,12 @@ void AddVariableValueActionObject::removeValue(std::shared_ptr<uml::StructuralFe
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_VariableAction_variable())
 	{
-				m_AddVariableValueActionValue->getVariable().reset();
+				//m_AddVariableValueActionValue->getVariable().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_WriteVariableAction_value())
 	{
-				m_AddVariableValueActionValue->getValue().reset();
+				//m_AddVariableValueActionValue->getValue().reset();
 
 	}
 }

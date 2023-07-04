@@ -212,7 +212,7 @@ void MessageEndObject::removeValue(std::shared_ptr<uml::StructuralFeature> featu
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_MessageEnd_message())
 	{
-				m_MessageEndValue->getMessage().reset();
+				//m_MessageEndValue->getMessage().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_NamedElement_name())
@@ -222,7 +222,7 @@ void MessageEndObject::removeValue(std::shared_ptr<uml::StructuralFeature> featu
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_NamedElement_nameExpression())
 	{
-				m_MessageEndValue->getNameExpression().reset();
+				//m_MessageEndValue->getNameExpression().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_NamedElement_visibility())

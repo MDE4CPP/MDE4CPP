@@ -255,7 +255,7 @@ void ExtensionEndObject::removeValue(std::shared_ptr<uml::StructuralFeature> fea
 
 	if (feature == UML::UMLPackage::eInstance()->get_UML_ConnectableElement_templateParameter())
 	{
-				m_ExtensionEndValue->getTemplateParameter().reset();
+				//m_ExtensionEndValue->getTemplateParameter().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_DeploymentTarget_deployment())
@@ -301,7 +301,7 @@ void ExtensionEndObject::removeValue(std::shared_ptr<uml::StructuralFeature> fea
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_ExtensionEnd_type())
 	{
-				m_ExtensionEndValue->getType().reset();
+				//m_ExtensionEndValue->getType().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Feature_isStatic())
@@ -326,7 +326,7 @@ void ExtensionEndObject::removeValue(std::shared_ptr<uml::StructuralFeature> fea
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_MultiplicityElement_lowerValue())
 	{
-				m_ExtensionEndValue->getLowerValue().reset();
+				//m_ExtensionEndValue->getLowerValue().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_MultiplicityElement_upper())
@@ -336,7 +336,7 @@ void ExtensionEndObject::removeValue(std::shared_ptr<uml::StructuralFeature> fea
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_MultiplicityElement_upperValue())
 	{
-				m_ExtensionEndValue->getUpperValue().reset();
+				//m_ExtensionEndValue->getUpperValue().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_NamedElement_name())
@@ -346,7 +346,7 @@ void ExtensionEndObject::removeValue(std::shared_ptr<uml::StructuralFeature> fea
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_NamedElement_nameExpression())
 	{
-				m_ExtensionEndValue->getNameExpression().reset();
+				//m_ExtensionEndValue->getNameExpression().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_NamedElement_visibility())
@@ -356,12 +356,12 @@ void ExtensionEndObject::removeValue(std::shared_ptr<uml::StructuralFeature> fea
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_ParameterableElement_owningTemplateParameter())
 	{
-				m_ExtensionEndValue->getOwningTemplateParameter().reset();
+				//m_ExtensionEndValue->getOwningTemplateParameter().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_ParameterableElement_templateParameter())
 	{
-				m_ExtensionEndValue->getTemplateParameter().reset();
+				//m_ExtensionEndValue->getTemplateParameter().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Property_aggregation())
@@ -371,22 +371,22 @@ void ExtensionEndObject::removeValue(std::shared_ptr<uml::StructuralFeature> fea
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Property_association())
 	{
-				m_ExtensionEndValue->getAssociation().reset();
+				//m_ExtensionEndValue->getAssociation().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Property_associationEnd())
 	{
-				m_ExtensionEndValue->getAssociationEnd().reset();
+				//m_ExtensionEndValue->getAssociationEnd().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Property_class())
 	{
-				m_ExtensionEndValue->getClass().reset();
+				//m_ExtensionEndValue->getClass().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Property_datatype())
 	{
-				m_ExtensionEndValue->getDatatype().reset();
+				//m_ExtensionEndValue->getDatatype().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Property_default())
@@ -396,12 +396,12 @@ void ExtensionEndObject::removeValue(std::shared_ptr<uml::StructuralFeature> fea
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Property_defaultValue())
 	{
-				m_ExtensionEndValue->getDefaultValue().reset();
+				//m_ExtensionEndValue->getDefaultValue().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Property_interface())
 	{
-				m_ExtensionEndValue->getInterface().reset();
+				//m_ExtensionEndValue->getInterface().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Property_isComposite())
@@ -426,12 +426,12 @@ void ExtensionEndObject::removeValue(std::shared_ptr<uml::StructuralFeature> fea
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Property_opposite())
 	{
-				m_ExtensionEndValue->getOpposite().reset();
+				//m_ExtensionEndValue->getOpposite().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Property_owningAssociation())
 	{
-				m_ExtensionEndValue->getOwningAssociation().reset();
+				//m_ExtensionEndValue->getOwningAssociation().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Property_qualifier())
@@ -500,7 +500,7 @@ void ExtensionEndObject::removeValue(std::shared_ptr<uml::StructuralFeature> fea
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_TypedElement_type())
 	{
-				m_ExtensionEndValue->getType().reset();
+				//m_ExtensionEndValue->getType().reset();
 
 	}
 }

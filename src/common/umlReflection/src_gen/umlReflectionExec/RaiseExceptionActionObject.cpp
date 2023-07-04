@@ -269,7 +269,7 @@ void RaiseExceptionActionObject::removeValue(std::shared_ptr<uml::StructuralFeat
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_ActivityNode_activity())
 	{
-				m_RaiseExceptionActionValue->getActivity().reset();
+				//m_RaiseExceptionActionValue->getActivity().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_ActivityNode_inInterruptibleRegion())
@@ -310,7 +310,7 @@ void RaiseExceptionActionObject::removeValue(std::shared_ptr<uml::StructuralFeat
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_ActivityNode_inStructuredNode())
 	{
-				m_RaiseExceptionActionValue->getInStructuredNode().reset();
+				//m_RaiseExceptionActionValue->getInStructuredNode().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_ActivityNode_incoming())
@@ -410,7 +410,7 @@ void RaiseExceptionActionObject::removeValue(std::shared_ptr<uml::StructuralFeat
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_NamedElement_nameExpression())
 	{
-				m_RaiseExceptionActionValue->getNameExpression().reset();
+				//m_RaiseExceptionActionValue->getNameExpression().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_NamedElement_visibility())
@@ -420,7 +420,7 @@ void RaiseExceptionActionObject::removeValue(std::shared_ptr<uml::StructuralFeat
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_RaiseExceptionAction_exception())
 	{
-				m_RaiseExceptionActionValue->getException().reset();
+				//m_RaiseExceptionActionValue->getException().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_RedefinableElement_isLeaf())

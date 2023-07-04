@@ -256,7 +256,7 @@ void ProfileObject::removeValue(std::shared_ptr<uml::StructuralFeature> feature,
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_NamedElement_nameExpression())
 	{
-				m_ProfileValue->getNameExpression().reset();
+				//m_ProfileValue->getNameExpression().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_NamedElement_visibility())
@@ -343,7 +343,7 @@ void ProfileObject::removeValue(std::shared_ptr<uml::StructuralFeature> feature,
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Package_nestingPackage())
 	{
-				m_ProfileValue->getNestingPackage().reset();
+				//m_ProfileValue->getNestingPackage().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Package_ownedType())
@@ -425,12 +425,12 @@ void ProfileObject::removeValue(std::shared_ptr<uml::StructuralFeature> feature,
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_ParameterableElement_owningTemplateParameter())
 	{
-				m_ProfileValue->getOwningTemplateParameter().reset();
+				//m_ProfileValue->getOwningTemplateParameter().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_ParameterableElement_templateParameter())
 	{
-				m_ProfileValue->getTemplateParameter().reset();
+				//m_ProfileValue->getTemplateParameter().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Profile_metaclassReference())
@@ -471,7 +471,7 @@ void ProfileObject::removeValue(std::shared_ptr<uml::StructuralFeature> feature,
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_TemplateableElement_ownedTemplateSignature())
 	{
-				m_ProfileValue->getOwnedTemplateSignature().reset();
+				//m_ProfileValue->getOwnedTemplateSignature().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_TemplateableElement_templateBinding())

@@ -227,12 +227,12 @@ void DurationConstraintObject::removeValue(std::shared_ptr<uml::StructuralFeatur
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Constraint_context())
 	{
-				m_DurationConstraintValue->getContext().reset();
+				//m_DurationConstraintValue->getContext().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Constraint_specification())
 	{
-				m_DurationConstraintValue->getSpecification().reset();
+				//m_DurationConstraintValue->getSpecification().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_DurationConstraint_firstEvent())
@@ -264,7 +264,7 @@ void DurationConstraintObject::removeValue(std::shared_ptr<uml::StructuralFeatur
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_DurationConstraint_specification())
 	{
-				m_DurationConstraintValue->getSpecification().reset();
+				//m_DurationConstraintValue->getSpecification().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Element_ownedComment())
@@ -287,7 +287,7 @@ void DurationConstraintObject::removeValue(std::shared_ptr<uml::StructuralFeatur
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_IntervalConstraint_specification())
 	{
-				m_DurationConstraintValue->getSpecification().reset();
+				//m_DurationConstraintValue->getSpecification().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_NamedElement_name())
@@ -297,7 +297,7 @@ void DurationConstraintObject::removeValue(std::shared_ptr<uml::StructuralFeatur
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_NamedElement_nameExpression())
 	{
-				m_DurationConstraintValue->getNameExpression().reset();
+				//m_DurationConstraintValue->getNameExpression().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_NamedElement_visibility())
@@ -312,12 +312,12 @@ void DurationConstraintObject::removeValue(std::shared_ptr<uml::StructuralFeatur
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_ParameterableElement_owningTemplateParameter())
 	{
-				m_DurationConstraintValue->getOwningTemplateParameter().reset();
+				//m_DurationConstraintValue->getOwningTemplateParameter().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_ParameterableElement_templateParameter())
 	{
-				m_DurationConstraintValue->getTemplateParameter().reset();
+				//m_DurationConstraintValue->getTemplateParameter().reset();
 
 	}
 }

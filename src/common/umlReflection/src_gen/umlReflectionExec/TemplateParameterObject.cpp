@@ -209,27 +209,27 @@ void TemplateParameterObject::removeValue(std::shared_ptr<uml::StructuralFeature
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_TemplateParameter_default())
 	{
-				m_TemplateParameterValue->getDefault().reset();
+				//m_TemplateParameterValue->getDefault().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_TemplateParameter_ownedDefault())
 	{
-				m_TemplateParameterValue->getOwnedDefault().reset();
+				//m_TemplateParameterValue->getOwnedDefault().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_TemplateParameter_ownedParameteredElement())
 	{
-				m_TemplateParameterValue->getOwnedParameteredElement().reset();
+				//m_TemplateParameterValue->getOwnedParameteredElement().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_TemplateParameter_parameteredElement())
 	{
-				m_TemplateParameterValue->getParameteredElement().reset();
+				//m_TemplateParameterValue->getParameteredElement().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_TemplateParameter_signature())
 	{
-				m_TemplateParameterValue->getSignature().reset();
+				//m_TemplateParameterValue->getSignature().reset();
 
 	}
 }

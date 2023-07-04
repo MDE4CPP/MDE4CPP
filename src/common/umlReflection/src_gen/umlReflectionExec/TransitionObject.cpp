@@ -252,7 +252,7 @@ void TransitionObject::removeValue(std::shared_ptr<uml::StructuralFeature> featu
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_NamedElement_nameExpression())
 	{
-				m_TransitionValue->getNameExpression().reset();
+				//m_TransitionValue->getNameExpression().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_NamedElement_visibility())
@@ -321,17 +321,17 @@ void TransitionObject::removeValue(std::shared_ptr<uml::StructuralFeature> featu
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Transition_container())
 	{
-				m_TransitionValue->getContainer().reset();
+				//m_TransitionValue->getContainer().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Transition_effect())
 	{
-				m_TransitionValue->getEffect().reset();
+				//m_TransitionValue->getEffect().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Transition_guard())
 	{
-				m_TransitionValue->getGuard().reset();
+				//m_TransitionValue->getGuard().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Transition_kind())
@@ -341,17 +341,17 @@ void TransitionObject::removeValue(std::shared_ptr<uml::StructuralFeature> featu
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Transition_redefinedTransition())
 	{
-				m_TransitionValue->getRedefinedTransition().reset();
+				//m_TransitionValue->getRedefinedTransition().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Transition_source())
 	{
-				m_TransitionValue->getSource().reset();
+				//m_TransitionValue->getSource().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Transition_target())
 	{
-				m_TransitionValue->getTarget().reset();
+				//m_TransitionValue->getTarget().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Transition_trigger())

@@ -209,7 +209,7 @@ void LinkEndDestructionDataObject::removeValue(std::shared_ptr<uml::StructuralFe
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_LinkEndData_end())
 	{
-				m_LinkEndDestructionDataValue->getEnd().reset();
+				//m_LinkEndDestructionDataValue->getEnd().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_LinkEndData_qualifier())
@@ -232,12 +232,12 @@ void LinkEndDestructionDataObject::removeValue(std::shared_ptr<uml::StructuralFe
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_LinkEndData_value())
 	{
-				m_LinkEndDestructionDataValue->getValue().reset();
+				//m_LinkEndDestructionDataValue->getValue().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_LinkEndDestructionData_destroyAt())
 	{
-				m_LinkEndDestructionDataValue->getDestroyAt().reset();
+				//m_LinkEndDestructionDataValue->getDestroyAt().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_LinkEndDestructionData_isDestroyDuplicates())

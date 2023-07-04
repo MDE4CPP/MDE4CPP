@@ -224,7 +224,7 @@ void CentralBufferNodeObject::removeValue(std::shared_ptr<uml::StructuralFeature
 
 	if (feature == UML::UMLPackage::eInstance()->get_UML_ActivityNode_activity())
 	{
-				m_CentralBufferNodeValue->getActivity().reset();
+				//m_CentralBufferNodeValue->getActivity().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_ActivityNode_inInterruptibleRegion())
@@ -265,7 +265,7 @@ void CentralBufferNodeObject::removeValue(std::shared_ptr<uml::StructuralFeature
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_ActivityNode_inStructuredNode())
 	{
-				m_CentralBufferNodeValue->getInStructuredNode().reset();
+				//m_CentralBufferNodeValue->getInStructuredNode().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_ActivityNode_incoming())
@@ -347,7 +347,7 @@ void CentralBufferNodeObject::removeValue(std::shared_ptr<uml::StructuralFeature
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_NamedElement_nameExpression())
 	{
-				m_CentralBufferNodeValue->getNameExpression().reset();
+				//m_CentralBufferNodeValue->getNameExpression().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_NamedElement_visibility())
@@ -385,12 +385,12 @@ void CentralBufferNodeObject::removeValue(std::shared_ptr<uml::StructuralFeature
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_ObjectNode_selection())
 	{
-				m_CentralBufferNodeValue->getSelection().reset();
+				//m_CentralBufferNodeValue->getSelection().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_ObjectNode_upperBound())
 	{
-				m_CentralBufferNodeValue->getUpperBound().reset();
+				//m_CentralBufferNodeValue->getUpperBound().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_RedefinableElement_isLeaf())
@@ -400,7 +400,7 @@ void CentralBufferNodeObject::removeValue(std::shared_ptr<uml::StructuralFeature
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_TypedElement_type())
 	{
-				m_CentralBufferNodeValue->getType().reset();
+				//m_CentralBufferNodeValue->getType().reset();
 
 	}
 }

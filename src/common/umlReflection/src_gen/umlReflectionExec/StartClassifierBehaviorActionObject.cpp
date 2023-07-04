@@ -269,7 +269,7 @@ void StartClassifierBehaviorActionObject::removeValue(std::shared_ptr<uml::Struc
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_ActivityNode_activity())
 	{
-				m_StartClassifierBehaviorActionValue->getActivity().reset();
+				//m_StartClassifierBehaviorActionValue->getActivity().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_ActivityNode_inInterruptibleRegion())
@@ -310,7 +310,7 @@ void StartClassifierBehaviorActionObject::removeValue(std::shared_ptr<uml::Struc
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_ActivityNode_inStructuredNode())
 	{
-				m_StartClassifierBehaviorActionValue->getInStructuredNode().reset();
+				//m_StartClassifierBehaviorActionValue->getInStructuredNode().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_ActivityNode_incoming())
@@ -410,7 +410,7 @@ void StartClassifierBehaviorActionObject::removeValue(std::shared_ptr<uml::Struc
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_NamedElement_nameExpression())
 	{
-				m_StartClassifierBehaviorActionValue->getNameExpression().reset();
+				//m_StartClassifierBehaviorActionValue->getNameExpression().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_NamedElement_visibility())
@@ -425,7 +425,7 @@ void StartClassifierBehaviorActionObject::removeValue(std::shared_ptr<uml::Struc
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_StartClassifierBehaviorAction_object())
 	{
-				m_StartClassifierBehaviorActionValue->getObject().reset();
+				//m_StartClassifierBehaviorActionValue->getObject().reset();
 
 	}
 }

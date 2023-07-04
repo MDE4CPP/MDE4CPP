@@ -217,12 +217,12 @@ void ActivityEdgeObject::removeValue(std::shared_ptr<uml::StructuralFeature> fea
 
 	if (feature == UML::UMLPackage::eInstance()->get_UML_ActivityEdge_activity())
 	{
-				m_ActivityEdgeValue->getActivity().reset();
+				//m_ActivityEdgeValue->getActivity().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_ActivityEdge_guard())
 	{
-				m_ActivityEdgeValue->getGuard().reset();
+				//m_ActivityEdgeValue->getGuard().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_ActivityEdge_inPartition())
@@ -245,12 +245,12 @@ void ActivityEdgeObject::removeValue(std::shared_ptr<uml::StructuralFeature> fea
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_ActivityEdge_inStructuredNode())
 	{
-				m_ActivityEdgeValue->getInStructuredNode().reset();
+				//m_ActivityEdgeValue->getInStructuredNode().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_ActivityEdge_interrupts())
 	{
-				m_ActivityEdgeValue->getInterrupts().reset();
+				//m_ActivityEdgeValue->getInterrupts().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_ActivityEdge_redefinedEdge())
@@ -273,17 +273,17 @@ void ActivityEdgeObject::removeValue(std::shared_ptr<uml::StructuralFeature> fea
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_ActivityEdge_source())
 	{
-				m_ActivityEdgeValue->getSource().reset();
+				//m_ActivityEdgeValue->getSource().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_ActivityEdge_target())
 	{
-				m_ActivityEdgeValue->getTarget().reset();
+				//m_ActivityEdgeValue->getTarget().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_ActivityEdge_weight())
 	{
-				m_ActivityEdgeValue->getWeight().reset();
+				//m_ActivityEdgeValue->getWeight().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Element_ownedComment())
@@ -311,7 +311,7 @@ void ActivityEdgeObject::removeValue(std::shared_ptr<uml::StructuralFeature> fea
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_NamedElement_nameExpression())
 	{
-				m_ActivityEdgeValue->getNameExpression().reset();
+				//m_ActivityEdgeValue->getNameExpression().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_NamedElement_visibility())

@@ -214,7 +214,7 @@ void InterfaceRealizationObject::removeValue(std::shared_ptr<uml::StructuralFeat
 
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Abstraction_mapping())
 	{
-				m_InterfaceRealizationValue->getMapping().reset();
+				//m_InterfaceRealizationValue->getMapping().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Dependency_client())
@@ -273,12 +273,12 @@ void InterfaceRealizationObject::removeValue(std::shared_ptr<uml::StructuralFeat
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_InterfaceRealization_contract())
 	{
-				m_InterfaceRealizationValue->getContract().reset();
+				//m_InterfaceRealizationValue->getContract().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_InterfaceRealization_implementingClassifier())
 	{
-				m_InterfaceRealizationValue->getImplementingClassifier().reset();
+				//m_InterfaceRealizationValue->getImplementingClassifier().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_NamedElement_name())
@@ -288,7 +288,7 @@ void InterfaceRealizationObject::removeValue(std::shared_ptr<uml::StructuralFeat
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_NamedElement_nameExpression())
 	{
-				m_InterfaceRealizationValue->getNameExpression().reset();
+				//m_InterfaceRealizationValue->getNameExpression().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_NamedElement_visibility())
@@ -303,12 +303,12 @@ void InterfaceRealizationObject::removeValue(std::shared_ptr<uml::StructuralFeat
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_ParameterableElement_owningTemplateParameter())
 	{
-				m_InterfaceRealizationValue->getOwningTemplateParameter().reset();
+				//m_InterfaceRealizationValue->getOwningTemplateParameter().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_ParameterableElement_templateParameter())
 	{
-				m_InterfaceRealizationValue->getTemplateParameter().reset();
+				//m_InterfaceRealizationValue->getTemplateParameter().reset();
 
 	}
 }

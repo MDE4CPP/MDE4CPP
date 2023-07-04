@@ -267,7 +267,7 @@ void UsageObject::removeValue(std::shared_ptr<uml::StructuralFeature> feature, s
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_NamedElement_nameExpression())
 	{
-				m_UsageValue->getNameExpression().reset();
+				//m_UsageValue->getNameExpression().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_NamedElement_visibility())
@@ -282,12 +282,12 @@ void UsageObject::removeValue(std::shared_ptr<uml::StructuralFeature> feature, s
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_ParameterableElement_owningTemplateParameter())
 	{
-				m_UsageValue->getOwningTemplateParameter().reset();
+				//m_UsageValue->getOwningTemplateParameter().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_ParameterableElement_templateParameter())
 	{
-				m_UsageValue->getTemplateParameter().reset();
+				//m_UsageValue->getTemplateParameter().reset();
 
 	}
 }
