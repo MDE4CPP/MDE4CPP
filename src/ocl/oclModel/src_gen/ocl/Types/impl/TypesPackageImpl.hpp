@@ -52,7 +52,7 @@ namespace ocl::Types
 
 			// Begin Class AnyType
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getAnyType_Class() const ;
+			virtual const std::shared_ptr<ecore::EClass>& getAnyType_Class() const ;
 			
 			
 			
@@ -61,7 +61,7 @@ namespace ocl::Types
 
 			// Begin Class BagType
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getBagType_Class() const ;
+			virtual const std::shared_ptr<ecore::EClass>& getBagType_Class() const ;
 			
 			
 			
@@ -70,19 +70,19 @@ namespace ocl::Types
 
 			// Begin Class CollectionType
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getCollectionType_Class() const ;
+			virtual const std::shared_ptr<ecore::EClass>& getCollectionType_Class() const ;
 			
 			
-			virtual std::shared_ptr<ecore::EReference> getCollectionType_Attribute_elementType() const ;
-			virtual std::shared_ptr<ecore::EReference> getCollectionType_Attribute_instance() const ;
+			virtual const std::shared_ptr<ecore::EReference>& getCollectionType_Attribute_elementType() const ;
+			virtual const std::shared_ptr<ecore::EReference>& getCollectionType_Attribute_instance() const ;
 			
-			virtual std::shared_ptr<ecore::EOperation> getCollectionType_Operation_kindOf_CollectionType() const ;
+			virtual const std::shared_ptr<ecore::EOperation>& getCollectionType_Operation_kindOf_CollectionType() const ;
 			
 			// End Class CollectionType
 
 			// Begin Class InvalidType
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getInvalidType_Class() const ;
+			virtual const std::shared_ptr<ecore::EClass>& getInvalidType_Class() const ;
 			
 			
 			
@@ -91,29 +91,29 @@ namespace ocl::Types
 
 			// Begin Class MessageType
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getMessageType_Class() const ;
+			virtual const std::shared_ptr<ecore::EClass>& getMessageType_Class() const ;
 			
 			
-			virtual std::shared_ptr<ecore::EReference> getMessageType_Attribute_referredOperation() const ;
-			virtual std::shared_ptr<ecore::EReference> getMessageType_Attribute_referredSignal() const ;
+			virtual const std::shared_ptr<ecore::EReference>& getMessageType_Attribute_referredOperation() const ;
+			virtual const std::shared_ptr<ecore::EReference>& getMessageType_Attribute_referredSignal() const ;
 			
 			
 			// End Class MessageType
 
 			// Begin Class NameTypeBinding
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getNameTypeBinding_Class() const ;
+			virtual const std::shared_ptr<ecore::EClass>& getNameTypeBinding_Class() const ;
 			
-			virtual std::shared_ptr<ecore::EAttribute> getNameTypeBinding_Attribute_name() const ;
+			virtual const std::shared_ptr<ecore::EAttribute>& getNameTypeBinding_Attribute_name() const ;
 			
-			virtual std::shared_ptr<ecore::EReference> getNameTypeBinding_Attribute_type() const ;
+			virtual const std::shared_ptr<ecore::EReference>& getNameTypeBinding_Attribute_type() const ;
 			
 			
 			// End Class NameTypeBinding
 
 			// Begin Class OrderedSetType
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getOrderedSetType_Class() const ;
+			virtual const std::shared_ptr<ecore::EClass>& getOrderedSetType_Class() const ;
 			
 			
 			
@@ -122,7 +122,7 @@ namespace ocl::Types
 
 			// Begin Class SequenceType
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getSequenceType_Class() const ;
+			virtual const std::shared_ptr<ecore::EClass>& getSequenceType_Class() const ;
 			
 			
 			
@@ -131,7 +131,7 @@ namespace ocl::Types
 
 			// Begin Class SetType
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getSetType_Class() const ;
+			virtual const std::shared_ptr<ecore::EClass>& getSetType_Class() const ;
 			
 			
 			
@@ -140,9 +140,9 @@ namespace ocl::Types
 
 			// Begin Class TemplateParameterType
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getTemplateParameterType_Class() const ;
+			virtual const std::shared_ptr<ecore::EClass>& getTemplateParameterType_Class() const ;
 			
-			virtual std::shared_ptr<ecore::EAttribute> getTemplateParameterType_Attribute_specification() const ;
+			virtual const std::shared_ptr<ecore::EAttribute>& getTemplateParameterType_Attribute_specification() const ;
 			
 			
 			
@@ -150,18 +150,18 @@ namespace ocl::Types
 
 			// Begin Class TupleType
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getTupleType_Class() const ;
+			virtual const std::shared_ptr<ecore::EClass>& getTupleType_Class() const ;
 			
 			
-			virtual std::shared_ptr<ecore::EReference> getTupleType_Attribute_instance() const ;
-			virtual std::shared_ptr<ecore::EReference> getTupleType_Attribute_parts() const ;
+			virtual const std::shared_ptr<ecore::EReference>& getTupleType_Attribute_instance() const ;
+			virtual const std::shared_ptr<ecore::EReference>& getTupleType_Attribute_parts() const ;
 			
 			
 			// End Class TupleType
 
 			// Begin Class VoidType
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getVoidType_Class() const ;
+			virtual const std::shared_ptr<ecore::EClass>& getVoidType_Class() const ;
 			
 			
 			

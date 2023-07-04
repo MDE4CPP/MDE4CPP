@@ -314,7 +314,7 @@ void ConnectionPointReferenceImpl::resolveReferences(const int featureID, std::v
 	{
 		case uml::umlPackage::CONNECTIONPOINTREFERENCE_ATTRIBUTE_ENTRY:
 		{
-			std::shared_ptr<Bag<uml::Pseudostate>> _entry = getEntry();
+			const std::shared_ptr<Bag<uml::Pseudostate>>& _entry = getEntry();
 			for(std::shared_ptr<ecore::EObject> ref : references)
 			{
 				std::shared_ptr<uml::Pseudostate>  _r = std::dynamic_pointer_cast<uml::Pseudostate>(ref);
@@ -328,7 +328,7 @@ void ConnectionPointReferenceImpl::resolveReferences(const int featureID, std::v
 
 		case uml::umlPackage::CONNECTIONPOINTREFERENCE_ATTRIBUTE_EXIT:
 		{
-			std::shared_ptr<Bag<uml::Pseudostate>> _exit = getExit();
+			const std::shared_ptr<Bag<uml::Pseudostate>>& _exit = getExit();
 			for(std::shared_ptr<ecore::EObject> ref : references)
 			{
 				std::shared_ptr<uml::Pseudostate>  _r = std::dynamic_pointer_cast<uml::Pseudostate>(ref);
@@ -439,7 +439,7 @@ bool ConnectionPointReferenceImpl::eSet(int featureID, const Any& newValue)
 					std::shared_ptr<Bag<uml::Pseudostate>> _entry=getEntry();
 					for(const std::shared_ptr<uml::Pseudostate> indexEntry: *_entry)
 					{
-						if (entryList->find(indexEntry) == -1)
+						if (!(entryList->includes(indexEntry)))
 						{
 							_entry->erase(indexEntry);
 						}
@@ -447,7 +447,7 @@ bool ConnectionPointReferenceImpl::eSet(int featureID, const Any& newValue)
 
 					for(const std::shared_ptr<uml::Pseudostate> indexEntry: *entryList)
 					{
-						if (_entry->find(indexEntry) == -1)
+						if (!(_entry->includes(indexEntry)))
 						{
 							_entry->add(indexEntry);
 						}
@@ -476,7 +476,7 @@ bool ConnectionPointReferenceImpl::eSet(int featureID, const Any& newValue)
 					std::shared_ptr<Bag<uml::Pseudostate>> _exit=getExit();
 					for(const std::shared_ptr<uml::Pseudostate> indexExit: *_exit)
 					{
-						if (exitList->find(indexExit) == -1)
+						if (!(exitList->includes(indexExit)))
 						{
 							_exit->erase(indexExit);
 						}
@@ -484,7 +484,7 @@ bool ConnectionPointReferenceImpl::eSet(int featureID, const Any& newValue)
 
 					for(const std::shared_ptr<uml::Pseudostate> indexExit: *exitList)
 					{
-						if (_exit->find(indexExit) == -1)
+						if (!(_exit->includes(indexExit)))
 						{
 							_exit->add(indexExit);
 						}

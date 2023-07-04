@@ -431,7 +431,7 @@ void ObjectNodeImpl::resolveReferences(const int featureID, std::vector<std::sha
 	{
 		case uml::umlPackage::OBJECTNODE_ATTRIBUTE_INSTATE:
 		{
-			std::shared_ptr<Bag<uml::State>> _inState = getInState();
+			const std::shared_ptr<Bag<uml::State>>& _inState = getInState();
 			for(std::shared_ptr<ecore::EObject> ref : references)
 			{
 				std::shared_ptr<uml::State>  _r = std::dynamic_pointer_cast<uml::State>(ref);
@@ -599,7 +599,7 @@ bool ObjectNodeImpl::eSet(int featureID, const Any& newValue)
 					std::shared_ptr<Bag<uml::State>> _inState=getInState();
 					for(const std::shared_ptr<uml::State> indexInState: *_inState)
 					{
-						if (inStateList->find(indexInState) == -1)
+						if (!(inStateList->includes(indexInState)))
 						{
 							_inState->erase(indexInState);
 						}
@@ -607,7 +607,7 @@ bool ObjectNodeImpl::eSet(int featureID, const Any& newValue)
 
 					for(const std::shared_ptr<uml::State> indexInState: *inStateList)
 					{
-						if (_inState->find(indexInState) == -1)
+						if (!(_inState->includes(indexInState)))
 						{
 							_inState->add(indexInState);
 						}

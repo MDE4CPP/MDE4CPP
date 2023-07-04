@@ -421,7 +421,7 @@ void ExtendImpl::resolveReferences(const int featureID, std::vector<std::shared_
 
 		case uml::umlPackage::EXTEND_ATTRIBUTE_EXTENSIONLOCATION:
 		{
-			std::shared_ptr<Bag<uml::ExtensionPoint>> _extensionLocation = getExtensionLocation();
+			const std::shared_ptr<Bag<uml::ExtensionPoint>>& _extensionLocation = getExtensionLocation();
 			for(std::shared_ptr<ecore::EObject> ref : references)
 			{
 				std::shared_ptr<uml::ExtensionPoint>  _r = std::dynamic_pointer_cast<uml::ExtensionPoint>(ref);
@@ -570,7 +570,7 @@ bool ExtendImpl::eSet(int featureID, const Any& newValue)
 					std::shared_ptr<Bag<uml::ExtensionPoint>> _extensionLocation=getExtensionLocation();
 					for(const std::shared_ptr<uml::ExtensionPoint> indexExtensionLocation: *_extensionLocation)
 					{
-						if (extensionLocationList->find(indexExtensionLocation) == -1)
+						if (!(extensionLocationList->includes(indexExtensionLocation)))
 						{
 							_extensionLocation->erase(indexExtensionLocation);
 						}
@@ -578,7 +578,7 @@ bool ExtendImpl::eSet(int featureID, const Any& newValue)
 
 					for(const std::shared_ptr<uml::ExtensionPoint> indexExtensionLocation: *extensionLocationList)
 					{
-						if (_extensionLocation->find(indexExtensionLocation) == -1)
+						if (!(_extensionLocation->includes(indexExtensionLocation)))
 						{
 							_extensionLocation->add(indexExtensionLocation);
 						}

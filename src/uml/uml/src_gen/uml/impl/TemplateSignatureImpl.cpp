@@ -337,7 +337,7 @@ void TemplateSignatureImpl::resolveReferences(const int featureID, std::vector<s
 	{
 		case uml::umlPackage::TEMPLATESIGNATURE_ATTRIBUTE_PARAMETER:
 		{
-			std::shared_ptr<Union<uml::TemplateParameter>> _parameter = getParameter();
+			const std::shared_ptr<Union<uml::TemplateParameter>>& _parameter = getParameter();
 			for(std::shared_ptr<ecore::EObject> ref : references)
 			{
 				std::shared_ptr<uml::TemplateParameter>  _r = std::dynamic_pointer_cast<uml::TemplateParameter>(ref);
@@ -448,7 +448,7 @@ bool TemplateSignatureImpl::eSet(int featureID, const Any& newValue)
 					std::shared_ptr<Bag<uml::TemplateParameter>> _ownedParameter=getOwnedParameter();
 					for(const std::shared_ptr<uml::TemplateParameter> indexOwnedParameter: *_ownedParameter)
 					{
-						if (ownedParameterList->find(indexOwnedParameter) == -1)
+						if (!(ownedParameterList->includes(indexOwnedParameter)))
 						{
 							_ownedParameter->erase(indexOwnedParameter);
 						}
@@ -456,7 +456,7 @@ bool TemplateSignatureImpl::eSet(int featureID, const Any& newValue)
 
 					for(const std::shared_ptr<uml::TemplateParameter> indexOwnedParameter: *ownedParameterList)
 					{
-						if (_ownedParameter->find(indexOwnedParameter) == -1)
+						if (!(_ownedParameter->includes(indexOwnedParameter)))
 						{
 							_ownedParameter->add(indexOwnedParameter);
 						}
@@ -485,7 +485,7 @@ bool TemplateSignatureImpl::eSet(int featureID, const Any& newValue)
 					std::shared_ptr<Bag<uml::TemplateParameter>> _parameter=getParameter();
 					for(const std::shared_ptr<uml::TemplateParameter> indexParameter: *_parameter)
 					{
-						if (parameterList->find(indexParameter) == -1)
+						if (!(parameterList->includes(indexParameter)))
 						{
 							_parameter->erase(indexParameter);
 						}
@@ -493,7 +493,7 @@ bool TemplateSignatureImpl::eSet(int featureID, const Any& newValue)
 
 					for(const std::shared_ptr<uml::TemplateParameter> indexParameter: *parameterList)
 					{
-						if (_parameter->find(indexParameter) == -1)
+						if (!(_parameter->includes(indexParameter)))
 						{
 							_parameter->add(indexParameter);
 						}

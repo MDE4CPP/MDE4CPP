@@ -210,7 +210,7 @@ std::shared_ptr<Bag<uml::Port> > EncapsulatedClassifierImpl::getOwnedPorts()
 // Reference Getters & Setters
 //*********************************
 /* Getter & Setter for reference ownedPort */
-const std::shared_ptr<Subset<uml::Port, uml::Property /*Subset does not reference a union*/>>& EncapsulatedClassifierImpl::getOwnedPort() const
+std::shared_ptr<Subset<uml::Port, uml::Property /*Subset does not reference a union*/>> EncapsulatedClassifierImpl::getOwnedPort() const
 {
 	//generated from getterBody annotation
 	std::shared_ptr<SubsetUnion<uml::Property, uml::ConnectableElement, uml::NamedElement, uml::Property>> ownedAttribute = this->getOwnedAttribute();

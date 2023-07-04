@@ -848,7 +848,7 @@ void ExecutionFactoryImpl::resolveReferences(const int featureID, std::vector<st
 	{
 		case fUML::Semantics::Loci::LociPackage::EXECUTIONFACTORY_ATTRIBUTE_BUILTINTYPES:
 		{
-			std::shared_ptr<Bag<uml::PrimitiveType>> _builtInTypes = getBuiltInTypes();
+			const std::shared_ptr<Bag<uml::PrimitiveType>>& _builtInTypes = getBuiltInTypes();
 			for(std::shared_ptr<ecore::EObject> ref : references)
 			{
 				std::shared_ptr<uml::PrimitiveType>  _r = std::dynamic_pointer_cast<uml::PrimitiveType>(ref);
@@ -874,7 +874,7 @@ void ExecutionFactoryImpl::resolveReferences(const int featureID, std::vector<st
 
 		case fUML::Semantics::Loci::LociPackage::EXECUTIONFACTORY_ATTRIBUTE_PRIMITIVEBEHAVIORPROTOTYPES:
 		{
-			std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::OpaqueBehaviorExecution>> _primitiveBehaviorPrototypes = getPrimitiveBehaviorPrototypes();
+			const std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::OpaqueBehaviorExecution>>& _primitiveBehaviorPrototypes = getPrimitiveBehaviorPrototypes();
 			for(std::shared_ptr<ecore::EObject> ref : references)
 			{
 				std::shared_ptr<fUML::Semantics::CommonBehavior::OpaqueBehaviorExecution>  _r = std::dynamic_pointer_cast<fUML::Semantics::CommonBehavior::OpaqueBehaviorExecution>(ref);
@@ -888,7 +888,7 @@ void ExecutionFactoryImpl::resolveReferences(const int featureID, std::vector<st
 
 		case fUML::Semantics::Loci::LociPackage::EXECUTIONFACTORY_ATTRIBUTE_STRATEGIES:
 		{
-			std::shared_ptr<Bag<fUML::Semantics::Loci::SemanticStrategy>> _strategies = getStrategies();
+			const std::shared_ptr<Bag<fUML::Semantics::Loci::SemanticStrategy>>& _strategies = getStrategies();
 			for(std::shared_ptr<ecore::EObject> ref : references)
 			{
 				std::shared_ptr<fUML::Semantics::Loci::SemanticStrategy>  _r = std::dynamic_pointer_cast<fUML::Semantics::Loci::SemanticStrategy>(ref);
@@ -984,7 +984,7 @@ bool ExecutionFactoryImpl::eSet(int featureID, const Any& newValue)
 					std::shared_ptr<Bag<uml::PrimitiveType>> _builtInTypes=getBuiltInTypes();
 					for(const std::shared_ptr<uml::PrimitiveType> indexBuiltInTypes: *_builtInTypes)
 					{
-						if (builtInTypesList->find(indexBuiltInTypes) == -1)
+						if (!(builtInTypesList->includes(indexBuiltInTypes)))
 						{
 							_builtInTypes->erase(indexBuiltInTypes);
 						}
@@ -992,7 +992,7 @@ bool ExecutionFactoryImpl::eSet(int featureID, const Any& newValue)
 
 					for(const std::shared_ptr<uml::PrimitiveType> indexBuiltInTypes: *builtInTypesList)
 					{
-						if (_builtInTypes->find(indexBuiltInTypes) == -1)
+						if (!(_builtInTypes->includes(indexBuiltInTypes)))
 						{
 							_builtInTypes->add(indexBuiltInTypes);
 						}
@@ -1029,7 +1029,7 @@ bool ExecutionFactoryImpl::eSet(int featureID, const Any& newValue)
 					std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::OpaqueBehaviorExecution>> _primitiveBehaviorPrototypes=getPrimitiveBehaviorPrototypes();
 					for(const std::shared_ptr<fUML::Semantics::CommonBehavior::OpaqueBehaviorExecution> indexPrimitiveBehaviorPrototypes: *_primitiveBehaviorPrototypes)
 					{
-						if (primitiveBehaviorPrototypesList->find(indexPrimitiveBehaviorPrototypes) == -1)
+						if (!(primitiveBehaviorPrototypesList->includes(indexPrimitiveBehaviorPrototypes)))
 						{
 							_primitiveBehaviorPrototypes->erase(indexPrimitiveBehaviorPrototypes);
 						}
@@ -1037,7 +1037,7 @@ bool ExecutionFactoryImpl::eSet(int featureID, const Any& newValue)
 
 					for(const std::shared_ptr<fUML::Semantics::CommonBehavior::OpaqueBehaviorExecution> indexPrimitiveBehaviorPrototypes: *primitiveBehaviorPrototypesList)
 					{
-						if (_primitiveBehaviorPrototypes->find(indexPrimitiveBehaviorPrototypes) == -1)
+						if (!(_primitiveBehaviorPrototypes->includes(indexPrimitiveBehaviorPrototypes)))
 						{
 							_primitiveBehaviorPrototypes->add(indexPrimitiveBehaviorPrototypes);
 						}
@@ -1066,7 +1066,7 @@ bool ExecutionFactoryImpl::eSet(int featureID, const Any& newValue)
 					std::shared_ptr<Bag<fUML::Semantics::Loci::SemanticStrategy>> _strategies=getStrategies();
 					for(const std::shared_ptr<fUML::Semantics::Loci::SemanticStrategy> indexStrategies: *_strategies)
 					{
-						if (strategiesList->find(indexStrategies) == -1)
+						if (!(strategiesList->includes(indexStrategies)))
 						{
 							_strategies->erase(indexStrategies);
 						}
@@ -1074,7 +1074,7 @@ bool ExecutionFactoryImpl::eSet(int featureID, const Any& newValue)
 
 					for(const std::shared_ptr<fUML::Semantics::Loci::SemanticStrategy> indexStrategies: *strategiesList)
 					{
-						if (_strategies->find(indexStrategies) == -1)
+						if (!(_strategies->includes(indexStrategies)))
 						{
 							_strategies->add(indexStrategies);
 						}

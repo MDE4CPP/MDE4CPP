@@ -592,7 +592,7 @@ void ActivityPartitionImpl::resolveReferences(const int featureID, std::vector<s
 	{
 		case uml::umlPackage::ACTIVITYPARTITION_ATTRIBUTE_EDGE:
 		{
-			std::shared_ptr<Subset<uml::ActivityEdge, uml::ActivityEdge>> _edge = getEdge();
+			const std::shared_ptr<Subset<uml::ActivityEdge, uml::ActivityEdge>>& _edge = getEdge();
 			for(std::shared_ptr<ecore::EObject> ref : references)
 			{
 				std::shared_ptr<uml::ActivityEdge>  _r = std::dynamic_pointer_cast<uml::ActivityEdge>(ref);
@@ -606,7 +606,7 @@ void ActivityPartitionImpl::resolveReferences(const int featureID, std::vector<s
 
 		case uml::umlPackage::ACTIVITYPARTITION_ATTRIBUTE_NODE:
 		{
-			std::shared_ptr<Subset<uml::ActivityNode, uml::ActivityNode>> _node = getNode();
+			const std::shared_ptr<Subset<uml::ActivityNode, uml::ActivityNode>>& _node = getNode();
 			for(std::shared_ptr<ecore::EObject> ref : references)
 			{
 				std::shared_ptr<uml::ActivityNode>  _r = std::dynamic_pointer_cast<uml::ActivityNode>(ref);
@@ -761,7 +761,7 @@ bool ActivityPartitionImpl::eSet(int featureID, const Any& newValue)
 					std::shared_ptr<Bag<uml::ActivityEdge>> _edge=getEdge();
 					for(const std::shared_ptr<uml::ActivityEdge> indexEdge: *_edge)
 					{
-						if (edgeList->find(indexEdge) == -1)
+						if (!(edgeList->includes(indexEdge)))
 						{
 							_edge->erase(indexEdge);
 						}
@@ -769,7 +769,7 @@ bool ActivityPartitionImpl::eSet(int featureID, const Any& newValue)
 
 					for(const std::shared_ptr<uml::ActivityEdge> indexEdge: *edgeList)
 					{
-						if (_edge->find(indexEdge) == -1)
+						if (!(_edge->includes(indexEdge)))
 						{
 							_edge->add(indexEdge);
 						}
@@ -812,7 +812,7 @@ bool ActivityPartitionImpl::eSet(int featureID, const Any& newValue)
 					std::shared_ptr<Bag<uml::ActivityNode>> _node=getNode();
 					for(const std::shared_ptr<uml::ActivityNode> indexNode: *_node)
 					{
-						if (nodeList->find(indexNode) == -1)
+						if (!(nodeList->includes(indexNode)))
 						{
 							_node->erase(indexNode);
 						}
@@ -820,7 +820,7 @@ bool ActivityPartitionImpl::eSet(int featureID, const Any& newValue)
 
 					for(const std::shared_ptr<uml::ActivityNode> indexNode: *nodeList)
 					{
-						if (_node->find(indexNode) == -1)
+						if (!(_node->includes(indexNode)))
 						{
 							_node->add(indexNode);
 						}
@@ -857,7 +857,7 @@ bool ActivityPartitionImpl::eSet(int featureID, const Any& newValue)
 					std::shared_ptr<Bag<uml::ActivityPartition>> _subpartition=getSubpartition();
 					for(const std::shared_ptr<uml::ActivityPartition> indexSubpartition: *_subpartition)
 					{
-						if (subpartitionList->find(indexSubpartition) == -1)
+						if (!(subpartitionList->includes(indexSubpartition)))
 						{
 							_subpartition->erase(indexSubpartition);
 						}
@@ -865,7 +865,7 @@ bool ActivityPartitionImpl::eSet(int featureID, const Any& newValue)
 
 					for(const std::shared_ptr<uml::ActivityPartition> indexSubpartition: *subpartitionList)
 					{
-						if (_subpartition->find(indexSubpartition) == -1)
+						if (!(_subpartition->includes(indexSubpartition)))
 						{
 							_subpartition->add(indexSubpartition);
 						}

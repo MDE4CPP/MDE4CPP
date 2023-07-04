@@ -595,7 +595,7 @@ bool EOperationImpl::eSet(int featureID, const Any& newValue)
 					std::shared_ptr<Bag<ecore::EClassifier>> _eExceptions=getEExceptions();
 					for(const std::shared_ptr<ecore::EClassifier> indexEExceptions: *_eExceptions)
 					{
-						if (eExceptionsList->find(indexEExceptions) == -1)
+						if (!(eExceptionsList->includes(indexEExceptions)))
 						{
 							_eExceptions->erase(indexEExceptions);
 						}
@@ -603,7 +603,7 @@ bool EOperationImpl::eSet(int featureID, const Any& newValue)
 
 					for(const std::shared_ptr<ecore::EClassifier> indexEExceptions: *eExceptionsList)
 					{
-						if (_eExceptions->find(indexEExceptions) == -1)
+						if (!(_eExceptions->includes(indexEExceptions)))
 						{
 							_eExceptions->add(indexEExceptions);
 						}
@@ -632,7 +632,7 @@ bool EOperationImpl::eSet(int featureID, const Any& newValue)
 					std::shared_ptr<Bag<ecore::EGenericType>> _eGenericExceptions=getEGenericExceptions();
 					for(const std::shared_ptr<ecore::EGenericType> indexEGenericExceptions: *_eGenericExceptions)
 					{
-						if (eGenericExceptionsList->find(indexEGenericExceptions) == -1)
+						if (!(eGenericExceptionsList->includes(indexEGenericExceptions)))
 						{
 							_eGenericExceptions->erase(indexEGenericExceptions);
 						}
@@ -640,7 +640,7 @@ bool EOperationImpl::eSet(int featureID, const Any& newValue)
 
 					for(const std::shared_ptr<ecore::EGenericType> indexEGenericExceptions: *eGenericExceptionsList)
 					{
-						if (_eGenericExceptions->find(indexEGenericExceptions) == -1)
+						if (!(_eGenericExceptions->includes(indexEGenericExceptions)))
 						{
 							_eGenericExceptions->add(indexEGenericExceptions);
 						}
@@ -669,7 +669,7 @@ bool EOperationImpl::eSet(int featureID, const Any& newValue)
 					std::shared_ptr<Bag<ecore::EParameter>> _eParameters=getEParameters();
 					for(const std::shared_ptr<ecore::EParameter> indexEParameters: *_eParameters)
 					{
-						if (eParametersList->find(indexEParameters) == -1)
+						if (!(eParametersList->includes(indexEParameters)))
 						{
 							_eParameters->erase(indexEParameters);
 						}
@@ -677,7 +677,7 @@ bool EOperationImpl::eSet(int featureID, const Any& newValue)
 
 					for(const std::shared_ptr<ecore::EParameter> indexEParameters: *eParametersList)
 					{
-						if (_eParameters->find(indexEParameters) == -1)
+						if (!(_eParameters->includes(indexEParameters)))
 						{
 							_eParameters->add(indexEParameters);
 						}
@@ -706,7 +706,7 @@ bool EOperationImpl::eSet(int featureID, const Any& newValue)
 					std::shared_ptr<Bag<ecore::ETypeParameter>> _eTypeParameters=getETypeParameters();
 					for(const std::shared_ptr<ecore::ETypeParameter> indexETypeParameters: *_eTypeParameters)
 					{
-						if (eTypeParametersList->find(indexETypeParameters) == -1)
+						if (!(eTypeParametersList->includes(indexETypeParameters)))
 						{
 							_eTypeParameters->erase(indexETypeParameters);
 						}
@@ -714,7 +714,7 @@ bool EOperationImpl::eSet(int featureID, const Any& newValue)
 
 					for(const std::shared_ptr<ecore::ETypeParameter> indexETypeParameters: *eTypeParametersList)
 					{
-						if (_eTypeParameters->find(indexETypeParameters) == -1)
+						if (!(_eTypeParameters->includes(indexETypeParameters)))
 						{
 							_eTypeParameters->add(indexETypeParameters);
 						}

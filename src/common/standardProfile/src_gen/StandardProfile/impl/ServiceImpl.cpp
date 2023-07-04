@@ -154,7 +154,7 @@ std::weak_ptr<uml::Component> ServiceImpl::getBase_Component() const
 // Structural Feature Getter/Setter
 //*********************************
 //Get
-Any ServiceImpl::get(std::shared_ptr<uml::Property> _property) const
+Any ServiceImpl::get(const std::shared_ptr<uml::Property>& _property) const
 {
 	std::string qualifiedName = _property->getQualifiedName();
     return this->get(qualifiedName);
@@ -179,19 +179,19 @@ Any ServiceImpl::get(unsigned long _uID) const
 }
 
 //Set
-void ServiceImpl::set(std::shared_ptr<uml::Property> _property, Any value)
+void ServiceImpl::set(const std::shared_ptr<uml::Property>& _property, const Any& value)
 {
 	std::string qualifiedName = _property->getQualifiedName();
     this->set(qualifiedName, value);
 }
 
-void ServiceImpl::set(std::string _qualifiedName, Any value)
+void ServiceImpl::set(std::string _qualifiedName, const Any& value)
 {
 	unsigned long uID = util::Util::polynomialRollingHash(_qualifiedName);
     this->set(uID, value);
 }
 
-void ServiceImpl::set(unsigned long _uID, Any value)
+void ServiceImpl::set(unsigned long _uID, const Any& value)
 {
 	std::map<unsigned long, std::function<void(Any)>>::const_iterator iter = m_setterMap.find(_uID);
     if(iter != m_setterMap.cend())
@@ -202,7 +202,7 @@ void ServiceImpl::set(unsigned long _uID, Any value)
 }
 
 //Unset
-void ServiceImpl::unset(std::shared_ptr<uml::Property> _property)
+void ServiceImpl::unset(const std::shared_ptr<uml::Property>& _property)
 {
 	std::string qualifiedName = _property->getQualifiedName();
     this->unset(qualifiedName);
@@ -217,7 +217,7 @@ void ServiceImpl::unset(std::string _qualifiedName)
 void ServiceImpl::unset(unsigned long _uID)
 {
 	std::map<unsigned long, std::function<void()>>::const_iterator iter = m_unsetterMap.find(_uID);
-    if(iter != m_unsetterMap.cend())
+    if(iter != m_unsetterMap.cend()) //TODO optimize loop
     {
         //invoke the unsetter function
         iter->second();
@@ -229,11 +229,12 @@ void ServiceImpl::unset(unsigned long _uID)
 // Operation Invoction
 //*********************************
 //Invoke
-Any ServiceImpl::invoke(std::shared_ptr<uml::Operation> _operation, std::shared_ptr<Bag<Any>> _arguments)
+Any ServiceImpl::invoke(const std::shared_ptr<uml::Operation>& _operation, const std::shared_ptr<Bag<Any>>& _arguments)
 {
 	std::string qualifiedName = _operation->getQualifiedName();
 
-	for(unsigned int i = 0; i < _operation->getOwnedParameter()->size(); i++)
+	int ownedParameterSize = _operation->getOwnedParameter()->size();
+	for(unsigned int i = 0; i < ownedParameterSize; i++)
 	{
 		qualifiedName += "_" + _operation->getOwnedParameter()->at(i)->getType()->getName();
 	}
@@ -241,16 +242,16 @@ Any ServiceImpl::invoke(std::shared_ptr<uml::Operation> _operation, std::shared_
     return this->invoke(qualifiedName, _arguments);
 }
 
-Any ServiceImpl::invoke(std::string _qualifiedName, std::shared_ptr<Bag<Any>> _arguments)
+Any ServiceImpl::invoke(std::string _qualifiedName, const std::shared_ptr<Bag<Any>>& _arguments)
 {
 	unsigned long uID = util::Util::polynomialRollingHash(_qualifiedName);
     return this->invoke(uID, _arguments);
 }
 
-Any ServiceImpl::invoke(unsigned long _uID, std::shared_ptr<Bag<Any>> _arguments)
+Any ServiceImpl::invoke(unsigned long _uID, const std::shared_ptr<Bag<Any>>& _arguments)
 {
 	std::map<unsigned long, std::function<Any(std::shared_ptr<Bag<Any>>)>>::const_iterator iter = m_invocationMap.find(_uID);
-    if(iter != m_invocationMap.cend())
+    if(iter != m_invocationMap.cend()) //TODO optimize loop
     {
         //invoke the operation
         return iter->second(_arguments);

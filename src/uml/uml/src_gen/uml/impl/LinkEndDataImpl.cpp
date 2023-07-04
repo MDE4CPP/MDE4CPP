@@ -456,7 +456,7 @@ bool LinkEndDataImpl::eSet(int featureID, const Any& newValue)
 					std::shared_ptr<Bag<uml::QualifierValue>> _qualifier=getQualifier();
 					for(const std::shared_ptr<uml::QualifierValue> indexQualifier: *_qualifier)
 					{
-						if (qualifierList->find(indexQualifier) == -1)
+						if (!(qualifierList->includes(indexQualifier)))
 						{
 							_qualifier->erase(indexQualifier);
 						}
@@ -464,7 +464,7 @@ bool LinkEndDataImpl::eSet(int featureID, const Any& newValue)
 
 					for(const std::shared_ptr<uml::QualifierValue> indexQualifier: *qualifierList)
 					{
-						if (_qualifier->find(indexQualifier) == -1)
+						if (!(_qualifier->includes(indexQualifier)))
 						{
 							_qualifier->add(indexQualifier);
 						}

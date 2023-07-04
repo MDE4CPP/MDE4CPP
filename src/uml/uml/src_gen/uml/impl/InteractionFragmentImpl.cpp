@@ -364,7 +364,7 @@ void InteractionFragmentImpl::resolveReferences(const int featureID, std::vector
 	{
 		case uml::umlPackage::INTERACTIONFRAGMENT_ATTRIBUTE_COVERED:
 		{
-			std::shared_ptr<Bag<uml::Lifeline>> _covered = getCovered();
+			const std::shared_ptr<Bag<uml::Lifeline>>& _covered = getCovered();
 			for(std::shared_ptr<ecore::EObject> ref : references)
 			{
 				std::shared_ptr<uml::Lifeline>  _r = std::dynamic_pointer_cast<uml::Lifeline>(ref);
@@ -496,7 +496,7 @@ bool InteractionFragmentImpl::eSet(int featureID, const Any& newValue)
 					std::shared_ptr<Bag<uml::Lifeline>> _covered=getCovered();
 					for(const std::shared_ptr<uml::Lifeline> indexCovered: *_covered)
 					{
-						if (coveredList->find(indexCovered) == -1)
+						if (!(coveredList->includes(indexCovered)))
 						{
 							_covered->erase(indexCovered);
 						}
@@ -504,7 +504,7 @@ bool InteractionFragmentImpl::eSet(int featureID, const Any& newValue)
 
 					for(const std::shared_ptr<uml::Lifeline> indexCovered: *coveredList)
 					{
-						if (_covered->find(indexCovered) == -1)
+						if (!(_covered->includes(indexCovered)))
 						{
 							_covered->add(indexCovered);
 						}
@@ -549,7 +549,7 @@ bool InteractionFragmentImpl::eSet(int featureID, const Any& newValue)
 					std::shared_ptr<Bag<uml::GeneralOrdering>> _generalOrdering=getGeneralOrdering();
 					for(const std::shared_ptr<uml::GeneralOrdering> indexGeneralOrdering: *_generalOrdering)
 					{
-						if (generalOrderingList->find(indexGeneralOrdering) == -1)
+						if (!(generalOrderingList->includes(indexGeneralOrdering)))
 						{
 							_generalOrdering->erase(indexGeneralOrdering);
 						}
@@ -557,7 +557,7 @@ bool InteractionFragmentImpl::eSet(int featureID, const Any& newValue)
 
 					for(const std::shared_ptr<uml::GeneralOrdering> indexGeneralOrdering: *generalOrderingList)
 					{
-						if (_generalOrdering->find(indexGeneralOrdering) == -1)
+						if (!(_generalOrdering->includes(indexGeneralOrdering)))
 						{
 							_generalOrdering->add(indexGeneralOrdering);
 						}

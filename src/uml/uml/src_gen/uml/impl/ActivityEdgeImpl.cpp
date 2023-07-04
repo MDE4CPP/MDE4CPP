@@ -556,7 +556,7 @@ void ActivityEdgeImpl::resolveReferences(const int featureID, std::vector<std::s
 
 		case uml::umlPackage::ACTIVITYEDGE_ATTRIBUTE_INPARTITION:
 		{
-			std::shared_ptr<Subset<uml::ActivityPartition, uml::ActivityGroup>> _inPartition = getInPartition();
+			const std::shared_ptr<Subset<uml::ActivityPartition, uml::ActivityGroup>>& _inPartition = getInPartition();
 			for(std::shared_ptr<ecore::EObject> ref : references)
 			{
 				std::shared_ptr<uml::ActivityPartition>  _r = std::dynamic_pointer_cast<uml::ActivityPartition>(ref);
@@ -594,7 +594,7 @@ void ActivityEdgeImpl::resolveReferences(const int featureID, std::vector<std::s
 
 		case uml::umlPackage::ACTIVITYEDGE_ATTRIBUTE_REDEFINEDEDGE:
 		{
-			std::shared_ptr<Subset<uml::ActivityEdge, uml::RedefinableElement>> _redefinedEdge = getRedefinedEdge();
+			const std::shared_ptr<Subset<uml::ActivityEdge, uml::RedefinableElement>>& _redefinedEdge = getRedefinedEdge();
 			for(std::shared_ptr<ecore::EObject> ref : references)
 			{
 				std::shared_ptr<uml::ActivityEdge>  _r = std::dynamic_pointer_cast<uml::ActivityEdge>(ref);
@@ -780,7 +780,7 @@ bool ActivityEdgeImpl::eSet(int featureID, const Any& newValue)
 					std::shared_ptr<Bag<uml::ActivityPartition>> _inPartition=getInPartition();
 					for(const std::shared_ptr<uml::ActivityPartition> indexInPartition: *_inPartition)
 					{
-						if (inPartitionList->find(indexInPartition) == -1)
+						if (!(inPartitionList->includes(indexInPartition)))
 						{
 							_inPartition->erase(indexInPartition);
 						}
@@ -788,7 +788,7 @@ bool ActivityEdgeImpl::eSet(int featureID, const Any& newValue)
 
 					for(const std::shared_ptr<uml::ActivityPartition> indexInPartition: *inPartitionList)
 					{
-						if (_inPartition->find(indexInPartition) == -1)
+						if (!(_inPartition->includes(indexInPartition)))
 						{
 							_inPartition->add(indexInPartition);
 						}
@@ -833,7 +833,7 @@ bool ActivityEdgeImpl::eSet(int featureID, const Any& newValue)
 					std::shared_ptr<Bag<uml::ActivityEdge>> _redefinedEdge=getRedefinedEdge();
 					for(const std::shared_ptr<uml::ActivityEdge> indexRedefinedEdge: *_redefinedEdge)
 					{
-						if (redefinedEdgeList->find(indexRedefinedEdge) == -1)
+						if (!(redefinedEdgeList->includes(indexRedefinedEdge)))
 						{
 							_redefinedEdge->erase(indexRedefinedEdge);
 						}
@@ -841,7 +841,7 @@ bool ActivityEdgeImpl::eSet(int featureID, const Any& newValue)
 
 					for(const std::shared_ptr<uml::ActivityEdge> indexRedefinedEdge: *redefinedEdgeList)
 					{
-						if (_redefinedEdge->find(indexRedefinedEdge) == -1)
+						if (!(_redefinedEdge->includes(indexRedefinedEdge)))
 						{
 							_redefinedEdge->add(indexRedefinedEdge);
 						}

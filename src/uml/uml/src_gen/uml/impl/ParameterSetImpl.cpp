@@ -329,7 +329,7 @@ void ParameterSetImpl::resolveReferences(const int featureID, std::vector<std::s
 	{
 		case uml::umlPackage::PARAMETERSET_ATTRIBUTE_PARAMETER:
 		{
-			std::shared_ptr<Bag<uml::Parameter>> _parameter = getParameter();
+			const std::shared_ptr<Bag<uml::Parameter>>& _parameter = getParameter();
 			for(std::shared_ptr<ecore::EObject> ref : references)
 			{
 				std::shared_ptr<uml::Parameter>  _r = std::dynamic_pointer_cast<uml::Parameter>(ref);
@@ -423,7 +423,7 @@ bool ParameterSetImpl::eSet(int featureID, const Any& newValue)
 					std::shared_ptr<Bag<uml::Constraint>> _condition=getCondition();
 					for(const std::shared_ptr<uml::Constraint> indexCondition: *_condition)
 					{
-						if (conditionList->find(indexCondition) == -1)
+						if (!(conditionList->includes(indexCondition)))
 						{
 							_condition->erase(indexCondition);
 						}
@@ -431,7 +431,7 @@ bool ParameterSetImpl::eSet(int featureID, const Any& newValue)
 
 					for(const std::shared_ptr<uml::Constraint> indexCondition: *conditionList)
 					{
-						if (_condition->find(indexCondition) == -1)
+						if (!(_condition->includes(indexCondition)))
 						{
 							_condition->add(indexCondition);
 						}
@@ -460,7 +460,7 @@ bool ParameterSetImpl::eSet(int featureID, const Any& newValue)
 					std::shared_ptr<Bag<uml::Parameter>> _parameter=getParameter();
 					for(const std::shared_ptr<uml::Parameter> indexParameter: *_parameter)
 					{
-						if (parameterList->find(indexParameter) == -1)
+						if (!(parameterList->includes(indexParameter)))
 						{
 							_parameter->erase(indexParameter);
 						}
@@ -468,7 +468,7 @@ bool ParameterSetImpl::eSet(int featureID, const Any& newValue)
 
 					for(const std::shared_ptr<uml::Parameter> indexParameter: *parameterList)
 					{
-						if (_parameter->find(indexParameter) == -1)
+						if (!(_parameter->includes(indexParameter)))
 						{
 							_parameter->add(indexParameter);
 						}

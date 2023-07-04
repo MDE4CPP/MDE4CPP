@@ -41,11 +41,11 @@ namespace PSCS::Semantics::Classification
 
 			// Begin Class CS_InstanceValueEvaluation
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getCS_InstanceValueEvaluation_Class() const ;
+			virtual const std::shared_ptr<ecore::EClass>& getCS_InstanceValueEvaluation_Class() const ;
 			
 			
 			
-			virtual std::shared_ptr<ecore::EOperation> getCS_InstanceValueEvaluation_Operation_evaluate() const ;
+			virtual const std::shared_ptr<ecore::EOperation>& getCS_InstanceValueEvaluation_Operation_evaluate() const ;
 			
 			// End Class CS_InstanceValueEvaluation
 

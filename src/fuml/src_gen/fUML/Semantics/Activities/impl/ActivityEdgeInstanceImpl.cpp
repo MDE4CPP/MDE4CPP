@@ -423,7 +423,7 @@ void ActivityEdgeInstanceImpl::resolveReferences(const int featureID, std::vecto
 
 		case fUML::Semantics::Activities::ActivitiesPackage::ACTIVITYEDGEINSTANCE_ATTRIBUTE_OFFERS:
 		{
-			std::shared_ptr<Bag<fUML::Semantics::Activities::Offer>> _offers = getOffers();
+			const std::shared_ptr<Bag<fUML::Semantics::Activities::Offer>>& _offers = getOffers();
 			for(std::shared_ptr<ecore::EObject> ref : references)
 			{
 				std::shared_ptr<fUML::Semantics::Activities::Offer>  _r = std::dynamic_pointer_cast<fUML::Semantics::Activities::Offer>(ref);
@@ -568,7 +568,7 @@ bool ActivityEdgeInstanceImpl::eSet(int featureID, const Any& newValue)
 					std::shared_ptr<Bag<fUML::Semantics::Activities::Offer>> _offers=getOffers();
 					for(const std::shared_ptr<fUML::Semantics::Activities::Offer> indexOffers: *_offers)
 					{
-						if (offersList->find(indexOffers) == -1)
+						if (!(offersList->includes(indexOffers)))
 						{
 							_offers->erase(indexOffers);
 						}
@@ -576,7 +576,7 @@ bool ActivityEdgeInstanceImpl::eSet(int featureID, const Any& newValue)
 
 					for(const std::shared_ptr<fUML::Semantics::Activities::Offer> indexOffers: *offersList)
 					{
-						if (_offers->find(indexOffers) == -1)
+						if (!(_offers->includes(indexOffers)))
 						{
 							_offers->add(indexOffers);
 						}

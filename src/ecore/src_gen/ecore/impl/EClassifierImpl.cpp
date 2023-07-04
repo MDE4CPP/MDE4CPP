@@ -448,7 +448,7 @@ bool EClassifierImpl::eSet(int featureID, const Any& newValue)
 					std::shared_ptr<Bag<ecore::ETypeParameter>> _eTypeParameters=getETypeParameters();
 					for(const std::shared_ptr<ecore::ETypeParameter> indexETypeParameters: *_eTypeParameters)
 					{
-						if (eTypeParametersList->find(indexETypeParameters) == -1)
+						if (!(eTypeParametersList->includes(indexETypeParameters)))
 						{
 							_eTypeParameters->erase(indexETypeParameters);
 						}
@@ -456,7 +456,7 @@ bool EClassifierImpl::eSet(int featureID, const Any& newValue)
 
 					for(const std::shared_ptr<ecore::ETypeParameter> indexETypeParameters: *eTypeParametersList)
 					{
-						if (_eTypeParameters->find(indexETypeParameters) == -1)
+						if (!(_eTypeParameters->includes(indexETypeParameters)))
 						{
 							_eTypeParameters->add(indexETypeParameters);
 						}

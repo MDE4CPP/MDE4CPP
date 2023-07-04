@@ -660,7 +660,7 @@ bool ActionImpl::eSet(int featureID, const Any& newValue)
 					std::shared_ptr<Bag<uml::Constraint>> _localPostcondition=getLocalPostcondition();
 					for(const std::shared_ptr<uml::Constraint> indexLocalPostcondition: *_localPostcondition)
 					{
-						if (localPostconditionList->find(indexLocalPostcondition) == -1)
+						if (!(localPostconditionList->includes(indexLocalPostcondition)))
 						{
 							_localPostcondition->erase(indexLocalPostcondition);
 						}
@@ -668,7 +668,7 @@ bool ActionImpl::eSet(int featureID, const Any& newValue)
 
 					for(const std::shared_ptr<uml::Constraint> indexLocalPostcondition: *localPostconditionList)
 					{
-						if (_localPostcondition->find(indexLocalPostcondition) == -1)
+						if (!(_localPostcondition->includes(indexLocalPostcondition)))
 						{
 							_localPostcondition->add(indexLocalPostcondition);
 						}
@@ -697,7 +697,7 @@ bool ActionImpl::eSet(int featureID, const Any& newValue)
 					std::shared_ptr<Bag<uml::Constraint>> _localPrecondition=getLocalPrecondition();
 					for(const std::shared_ptr<uml::Constraint> indexLocalPrecondition: *_localPrecondition)
 					{
-						if (localPreconditionList->find(indexLocalPrecondition) == -1)
+						if (!(localPreconditionList->includes(indexLocalPrecondition)))
 						{
 							_localPrecondition->erase(indexLocalPrecondition);
 						}
@@ -705,7 +705,7 @@ bool ActionImpl::eSet(int featureID, const Any& newValue)
 
 					for(const std::shared_ptr<uml::Constraint> indexLocalPrecondition: *localPreconditionList)
 					{
-						if (_localPrecondition->find(indexLocalPrecondition) == -1)
+						if (!(_localPrecondition->includes(indexLocalPrecondition)))
 						{
 							_localPrecondition->add(indexLocalPrecondition);
 						}

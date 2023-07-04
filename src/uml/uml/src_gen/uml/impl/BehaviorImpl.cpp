@@ -865,7 +865,7 @@ void BehaviorImpl::resolveReferences(const int featureID, std::vector<std::share
 
 		case uml::umlPackage::BEHAVIOR_ATTRIBUTE_POSTCONDITION:
 		{
-			std::shared_ptr<Subset<uml::Constraint, uml::Constraint /*Subset does not reference a union*/>> _postcondition = getPostcondition();
+			const std::shared_ptr<Subset<uml::Constraint, uml::Constraint /*Subset does not reference a union*/>>& _postcondition = getPostcondition();
 			for(std::shared_ptr<ecore::EObject> ref : references)
 			{
 				std::shared_ptr<uml::Constraint>  _r = std::dynamic_pointer_cast<uml::Constraint>(ref);
@@ -879,7 +879,7 @@ void BehaviorImpl::resolveReferences(const int featureID, std::vector<std::share
 
 		case uml::umlPackage::BEHAVIOR_ATTRIBUTE_PRECONDITION:
 		{
-			std::shared_ptr<Subset<uml::Constraint, uml::Constraint /*Subset does not reference a union*/>> _precondition = getPrecondition();
+			const std::shared_ptr<Subset<uml::Constraint, uml::Constraint /*Subset does not reference a union*/>>& _precondition = getPrecondition();
 			for(std::shared_ptr<ecore::EObject> ref : references)
 			{
 				std::shared_ptr<uml::Constraint>  _r = std::dynamic_pointer_cast<uml::Constraint>(ref);
@@ -893,7 +893,7 @@ void BehaviorImpl::resolveReferences(const int featureID, std::vector<std::share
 
 		case uml::umlPackage::BEHAVIOR_ATTRIBUTE_REDEFINEDBEHAVIOR:
 		{
-			std::shared_ptr<Subset<uml::Behavior, uml::Classifier /*Subset does not reference a union*/>> _redefinedBehavior = getRedefinedBehavior();
+			const std::shared_ptr<Subset<uml::Behavior, uml::Classifier /*Subset does not reference a union*/>>& _redefinedBehavior = getRedefinedBehavior();
 			for(std::shared_ptr<ecore::EObject> ref : references)
 			{
 				std::shared_ptr<uml::Behavior>  _r = std::dynamic_pointer_cast<uml::Behavior>(ref);
@@ -1085,7 +1085,7 @@ bool BehaviorImpl::eSet(int featureID, const Any& newValue)
 					std::shared_ptr<Bag<uml::Parameter>> _ownedParameter=getOwnedParameter();
 					for(const std::shared_ptr<uml::Parameter> indexOwnedParameter: *_ownedParameter)
 					{
-						if (ownedParameterList->find(indexOwnedParameter) == -1)
+						if (!(ownedParameterList->includes(indexOwnedParameter)))
 						{
 							_ownedParameter->erase(indexOwnedParameter);
 						}
@@ -1093,7 +1093,7 @@ bool BehaviorImpl::eSet(int featureID, const Any& newValue)
 
 					for(const std::shared_ptr<uml::Parameter> indexOwnedParameter: *ownedParameterList)
 					{
-						if (_ownedParameter->find(indexOwnedParameter) == -1)
+						if (!(_ownedParameter->includes(indexOwnedParameter)))
 						{
 							_ownedParameter->add(indexOwnedParameter);
 						}
@@ -1122,7 +1122,7 @@ bool BehaviorImpl::eSet(int featureID, const Any& newValue)
 					std::shared_ptr<Bag<uml::ParameterSet>> _ownedParameterSet=getOwnedParameterSet();
 					for(const std::shared_ptr<uml::ParameterSet> indexOwnedParameterSet: *_ownedParameterSet)
 					{
-						if (ownedParameterSetList->find(indexOwnedParameterSet) == -1)
+						if (!(ownedParameterSetList->includes(indexOwnedParameterSet)))
 						{
 							_ownedParameterSet->erase(indexOwnedParameterSet);
 						}
@@ -1130,7 +1130,7 @@ bool BehaviorImpl::eSet(int featureID, const Any& newValue)
 
 					for(const std::shared_ptr<uml::ParameterSet> indexOwnedParameterSet: *ownedParameterSetList)
 					{
-						if (_ownedParameterSet->find(indexOwnedParameterSet) == -1)
+						if (!(_ownedParameterSet->includes(indexOwnedParameterSet)))
 						{
 							_ownedParameterSet->add(indexOwnedParameterSet);
 						}
@@ -1159,7 +1159,7 @@ bool BehaviorImpl::eSet(int featureID, const Any& newValue)
 					std::shared_ptr<Bag<uml::Constraint>> _postcondition=getPostcondition();
 					for(const std::shared_ptr<uml::Constraint> indexPostcondition: *_postcondition)
 					{
-						if (postconditionList->find(indexPostcondition) == -1)
+						if (!(postconditionList->includes(indexPostcondition)))
 						{
 							_postcondition->erase(indexPostcondition);
 						}
@@ -1167,7 +1167,7 @@ bool BehaviorImpl::eSet(int featureID, const Any& newValue)
 
 					for(const std::shared_ptr<uml::Constraint> indexPostcondition: *postconditionList)
 					{
-						if (_postcondition->find(indexPostcondition) == -1)
+						if (!(_postcondition->includes(indexPostcondition)))
 						{
 							_postcondition->add(indexPostcondition);
 						}
@@ -1196,7 +1196,7 @@ bool BehaviorImpl::eSet(int featureID, const Any& newValue)
 					std::shared_ptr<Bag<uml::Constraint>> _precondition=getPrecondition();
 					for(const std::shared_ptr<uml::Constraint> indexPrecondition: *_precondition)
 					{
-						if (preconditionList->find(indexPrecondition) == -1)
+						if (!(preconditionList->includes(indexPrecondition)))
 						{
 							_precondition->erase(indexPrecondition);
 						}
@@ -1204,7 +1204,7 @@ bool BehaviorImpl::eSet(int featureID, const Any& newValue)
 
 					for(const std::shared_ptr<uml::Constraint> indexPrecondition: *preconditionList)
 					{
-						if (_precondition->find(indexPrecondition) == -1)
+						if (!(_precondition->includes(indexPrecondition)))
 						{
 							_precondition->add(indexPrecondition);
 						}
@@ -1233,7 +1233,7 @@ bool BehaviorImpl::eSet(int featureID, const Any& newValue)
 					std::shared_ptr<Bag<uml::Behavior>> _redefinedBehavior=getRedefinedBehavior();
 					for(const std::shared_ptr<uml::Behavior> indexRedefinedBehavior: *_redefinedBehavior)
 					{
-						if (redefinedBehaviorList->find(indexRedefinedBehavior) == -1)
+						if (!(redefinedBehaviorList->includes(indexRedefinedBehavior)))
 						{
 							_redefinedBehavior->erase(indexRedefinedBehavior);
 						}
@@ -1241,7 +1241,7 @@ bool BehaviorImpl::eSet(int featureID, const Any& newValue)
 
 					for(const std::shared_ptr<uml::Behavior> indexRedefinedBehavior: *redefinedBehaviorList)
 					{
-						if (_redefinedBehavior->find(indexRedefinedBehavior) == -1)
+						if (!(_redefinedBehavior->includes(indexRedefinedBehavior)))
 						{
 							_redefinedBehavior->add(indexRedefinedBehavior);
 						}

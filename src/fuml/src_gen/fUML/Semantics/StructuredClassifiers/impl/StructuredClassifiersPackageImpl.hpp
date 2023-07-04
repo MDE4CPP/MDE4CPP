@@ -47,112 +47,112 @@ namespace fUML::Semantics::StructuredClassifiers
 
 			// Begin Class DispatchStrategy
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getDispatchStrategy_Class() const ;
+			virtual const std::shared_ptr<ecore::EClass>& getDispatchStrategy_Class() const ;
 			
 			
 			
-			virtual std::shared_ptr<ecore::EOperation> getDispatchStrategy_Operation_dispatch_Object_Operation() const ;
-			virtual std::shared_ptr<ecore::EOperation> getDispatchStrategy_Operation_getName() const ;
-			virtual std::shared_ptr<ecore::EOperation> getDispatchStrategy_Operation_retrieveMethod_Object_Operation() const ;
+			virtual const std::shared_ptr<ecore::EOperation>& getDispatchStrategy_Operation_dispatch_Object_Operation() const ;
+			virtual const std::shared_ptr<ecore::EOperation>& getDispatchStrategy_Operation_getName() const ;
+			virtual const std::shared_ptr<ecore::EOperation>& getDispatchStrategy_Operation_retrieveMethod_Object_Operation() const ;
 			
 			// End Class DispatchStrategy
 
 			// Begin Class ExtensionalValue
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getExtensionalValue_Class() const ;
+			virtual const std::shared_ptr<ecore::EClass>& getExtensionalValue_Class() const ;
 			
 			
-			virtual std::shared_ptr<ecore::EReference> getExtensionalValue_Attribute_locus() const ;
+			virtual const std::shared_ptr<ecore::EReference>& getExtensionalValue_Attribute_locus() const ;
 			
-			virtual std::shared_ptr<ecore::EOperation> getExtensionalValue_Operation__copy() const ;
-			virtual std::shared_ptr<ecore::EOperation> getExtensionalValue_Operation_destroy() const ;
+			virtual const std::shared_ptr<ecore::EOperation>& getExtensionalValue_Operation__copy() const ;
+			virtual const std::shared_ptr<ecore::EOperation>& getExtensionalValue_Operation_destroy() const ;
 			
 			// End Class ExtensionalValue
 
 			// Begin Class ExtensionalValueList
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getExtensionalValueList_Class() const ;
+			virtual const std::shared_ptr<ecore::EClass>& getExtensionalValueList_Class() const ;
 			
 			
 			
-			virtual std::shared_ptr<ecore::EOperation> getExtensionalValueList_Operation_addValue_ExtensionalValue() const ;
-			virtual std::shared_ptr<ecore::EOperation> getExtensionalValueList_Operation_addValue_ExtensionalValue_EInt() const ;
-			virtual std::shared_ptr<ecore::EOperation> getExtensionalValueList_Operation_getValue() const ;
-			virtual std::shared_ptr<ecore::EOperation> getExtensionalValueList_Operation_removeValue_EInt() const ;
-			virtual std::shared_ptr<ecore::EOperation> getExtensionalValueList_Operation_setValue_ExtensionalValue_EInt() const ;
+			virtual const std::shared_ptr<ecore::EOperation>& getExtensionalValueList_Operation_addValue_ExtensionalValue() const ;
+			virtual const std::shared_ptr<ecore::EOperation>& getExtensionalValueList_Operation_addValue_ExtensionalValue_EInt() const ;
+			virtual const std::shared_ptr<ecore::EOperation>& getExtensionalValueList_Operation_getValue() const ;
+			virtual const std::shared_ptr<ecore::EOperation>& getExtensionalValueList_Operation_removeValue_EInt() const ;
+			virtual const std::shared_ptr<ecore::EOperation>& getExtensionalValueList_Operation_setValue_ExtensionalValue_EInt() const ;
 			
 			// End Class ExtensionalValueList
 
 			// Begin Class Link
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getLink_Class() const ;
+			virtual const std::shared_ptr<ecore::EClass>& getLink_Class() const ;
 			
 			
-			virtual std::shared_ptr<ecore::EReference> getLink_Attribute_type() const ;
+			virtual const std::shared_ptr<ecore::EReference>& getLink_Attribute_type() const ;
 			
-			virtual std::shared_ptr<ecore::EOperation> getLink_Operation__copy() const ;
-			virtual std::shared_ptr<ecore::EOperation> getLink_Operation_addTo_Locus() const ;
-			virtual std::shared_ptr<ecore::EOperation> getLink_Operation_getOtherFeatureValues_ExtensionalValue_Property() const ;
-			virtual std::shared_ptr<ecore::EOperation> getLink_Operation_getTypes() const ;
-			virtual std::shared_ptr<ecore::EOperation> getLink_Operation_isMatchingLink_ExtensionalValue_Property() const ;
-			virtual std::shared_ptr<ecore::EOperation> getLink_Operation_new_() const ;
+			virtual const std::shared_ptr<ecore::EOperation>& getLink_Operation__copy() const ;
+			virtual const std::shared_ptr<ecore::EOperation>& getLink_Operation_addTo_Locus() const ;
+			virtual const std::shared_ptr<ecore::EOperation>& getLink_Operation_getOtherFeatureValues_ExtensionalValue_Property() const ;
+			virtual const std::shared_ptr<ecore::EOperation>& getLink_Operation_getTypes() const ;
+			virtual const std::shared_ptr<ecore::EOperation>& getLink_Operation_isMatchingLink_ExtensionalValue_Property() const ;
+			virtual const std::shared_ptr<ecore::EOperation>& getLink_Operation_new_() const ;
 			
 			// End Class Link
 
 			// Begin Class Object
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getObject_Class() const ;
+			virtual const std::shared_ptr<ecore::EClass>& getObject_Class() const ;
 			
 			
-			virtual std::shared_ptr<ecore::EReference> getObject_Attribute_objectActivation() const ;
-			virtual std::shared_ptr<ecore::EReference> getObject_Attribute_types() const ;
+			virtual const std::shared_ptr<ecore::EReference>& getObject_Attribute_objectActivation() const ;
+			virtual const std::shared_ptr<ecore::EReference>& getObject_Attribute_types() const ;
 			
-			virtual std::shared_ptr<ecore::EOperation> getObject_Operation__copy() const ;
-			virtual std::shared_ptr<ecore::EOperation> getObject_Operation__register_EventAccepter() const ;
-			virtual std::shared_ptr<ecore::EOperation> getObject_Operation_destroy() const ;
-			virtual std::shared_ptr<ecore::EOperation> getObject_Operation_dispatch_Operation() const ;
-			virtual std::shared_ptr<ecore::EOperation> getObject_Operation_new_() const ;
-			virtual std::shared_ptr<ecore::EOperation> getObject_Operation_send_SignalInstance() const ;
-			virtual std::shared_ptr<ecore::EOperation> getObject_Operation_send_EventOccurrence() const ;
-			virtual std::shared_ptr<ecore::EOperation> getObject_Operation_startBehavior_Class_ParameterValue() const ;
-			virtual std::shared_ptr<ecore::EOperation> getObject_Operation_unregister_EventAccepter() const ;
+			virtual const std::shared_ptr<ecore::EOperation>& getObject_Operation__copy() const ;
+			virtual const std::shared_ptr<ecore::EOperation>& getObject_Operation__register_EventAccepter() const ;
+			virtual const std::shared_ptr<ecore::EOperation>& getObject_Operation_destroy() const ;
+			virtual const std::shared_ptr<ecore::EOperation>& getObject_Operation_dispatch_Operation() const ;
+			virtual const std::shared_ptr<ecore::EOperation>& getObject_Operation_new_() const ;
+			virtual const std::shared_ptr<ecore::EOperation>& getObject_Operation_send_SignalInstance() const ;
+			virtual const std::shared_ptr<ecore::EOperation>& getObject_Operation_send_EventOccurrence() const ;
+			virtual const std::shared_ptr<ecore::EOperation>& getObject_Operation_startBehavior_Class_ParameterValue() const ;
+			virtual const std::shared_ptr<ecore::EOperation>& getObject_Operation_unregister_EventAccepter() const ;
 			
 			// End Class Object
 
 			// Begin Class RedefinitionBasedDispatchStrategy
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getRedefinitionBasedDispatchStrategy_Class() const ;
+			virtual const std::shared_ptr<ecore::EClass>& getRedefinitionBasedDispatchStrategy_Class() const ;
 			
 			
 			
-			virtual std::shared_ptr<ecore::EOperation> getRedefinitionBasedDispatchStrategy_Operation_operationsMatch_Operation_Operation() const ;
-			virtual std::shared_ptr<ecore::EOperation> getRedefinitionBasedDispatchStrategy_Operation_retrieveMethod_Object_Operation() const ;
+			virtual const std::shared_ptr<ecore::EOperation>& getRedefinitionBasedDispatchStrategy_Operation_operationsMatch_Operation_Operation() const ;
+			virtual const std::shared_ptr<ecore::EOperation>& getRedefinitionBasedDispatchStrategy_Operation_retrieveMethod_Object_Operation() const ;
 			
 			// End Class RedefinitionBasedDispatchStrategy
 
 			// Begin Class Reference
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getReference_Class() const ;
+			virtual const std::shared_ptr<ecore::EClass>& getReference_Class() const ;
 			
 			
-			virtual std::shared_ptr<ecore::EReference> getReference_Attribute_referent() const ;
+			virtual const std::shared_ptr<ecore::EReference>& getReference_Attribute_referent() const ;
 			
-			virtual std::shared_ptr<ecore::EOperation> getReference_Operation__copy() const ;
-			virtual std::shared_ptr<ecore::EOperation> getReference_Operation_assignFeatureValue_StructuralFeature_EInt() const ;
-			virtual std::shared_ptr<ecore::EOperation> getReference_Operation_destroy() const ;
-			virtual std::shared_ptr<ecore::EOperation> getReference_Operation_dispatch_Operation() const ;
-			virtual std::shared_ptr<ecore::EOperation> getReference_Operation_equals_Value() const ;
-			virtual std::shared_ptr<ecore::EOperation> getReference_Operation_getTypes() const ;
-			virtual std::shared_ptr<ecore::EOperation> getReference_Operation_getValues_StructuralFeature_FeatureValue() const ;
-			virtual std::shared_ptr<ecore::EOperation> getReference_Operation_new_() const ;
-			virtual std::shared_ptr<ecore::EOperation> getReference_Operation_removeValue_StructuralFeature_Value() const ;
-			virtual std::shared_ptr<ecore::EOperation> getReference_Operation_retrieveFeatureValue_StructuralFeature() const ;
-			virtual std::shared_ptr<ecore::EOperation> getReference_Operation_retrieveFeatureValues() const ;
-			virtual std::shared_ptr<ecore::EOperation> getReference_Operation_send_SignalInstance() const ;
-			virtual std::shared_ptr<ecore::EOperation> getReference_Operation_send_EventOccurrence() const ;
-			virtual std::shared_ptr<ecore::EOperation> getReference_Operation_setFeatureValue_StructuralFeature_EInt() const ;
-			virtual std::shared_ptr<ecore::EOperation> getReference_Operation_startBehavior_Class_ParameterValue() const ;
-			virtual std::shared_ptr<ecore::EOperation> getReference_Operation_toString() const ;
+			virtual const std::shared_ptr<ecore::EOperation>& getReference_Operation__copy() const ;
+			virtual const std::shared_ptr<ecore::EOperation>& getReference_Operation_assignFeatureValue_StructuralFeature_EInt() const ;
+			virtual const std::shared_ptr<ecore::EOperation>& getReference_Operation_destroy() const ;
+			virtual const std::shared_ptr<ecore::EOperation>& getReference_Operation_dispatch_Operation() const ;
+			virtual const std::shared_ptr<ecore::EOperation>& getReference_Operation_equals_Value() const ;
+			virtual const std::shared_ptr<ecore::EOperation>& getReference_Operation_getTypes() const ;
+			virtual const std::shared_ptr<ecore::EOperation>& getReference_Operation_getValues_StructuralFeature_FeatureValue() const ;
+			virtual const std::shared_ptr<ecore::EOperation>& getReference_Operation_new_() const ;
+			virtual const std::shared_ptr<ecore::EOperation>& getReference_Operation_removeValue_StructuralFeature_Value() const ;
+			virtual const std::shared_ptr<ecore::EOperation>& getReference_Operation_retrieveFeatureValue_StructuralFeature() const ;
+			virtual const std::shared_ptr<ecore::EOperation>& getReference_Operation_retrieveFeatureValues() const ;
+			virtual const std::shared_ptr<ecore::EOperation>& getReference_Operation_send_SignalInstance() const ;
+			virtual const std::shared_ptr<ecore::EOperation>& getReference_Operation_send_EventOccurrence() const ;
+			virtual const std::shared_ptr<ecore::EOperation>& getReference_Operation_setFeatureValue_StructuralFeature_EInt() const ;
+			virtual const std::shared_ptr<ecore::EOperation>& getReference_Operation_startBehavior_Class_ParameterValue() const ;
+			virtual const std::shared_ptr<ecore::EOperation>& getReference_Operation_toString() const ;
 			
 			// End Class Reference
 

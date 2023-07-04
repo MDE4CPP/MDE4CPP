@@ -166,7 +166,7 @@ void ActivityNodeActivationImpl::addOutgoingEdge(const std::shared_ptr<fUML::Sem
 	//end of body
 }
 
-void ActivityNodeActivationImpl::addToken(const std::shared_ptr<fUML::Semantics::Activities::Token>& token)
+void ActivityNodeActivationImpl::addToken(std::shared_ptr<fUML::Semantics::Activities::Token> token)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -785,7 +785,7 @@ void ActivityNodeActivationImpl::resolveReferences(const int featureID, std::vec
 
 		case fUML::Semantics::Activities::ActivitiesPackage::ACTIVITYNODEACTIVATION_ATTRIBUTE_INCOMINGEDGES:
 		{
-			std::shared_ptr<Bag<fUML::Semantics::Activities::ActivityEdgeInstance>> _incomingEdges = getIncomingEdges();
+			const std::shared_ptr<Bag<fUML::Semantics::Activities::ActivityEdgeInstance>>& _incomingEdges = getIncomingEdges();
 			for(std::shared_ptr<ecore::EObject> ref : references)
 			{
 				std::shared_ptr<fUML::Semantics::Activities::ActivityEdgeInstance>  _r = std::dynamic_pointer_cast<fUML::Semantics::Activities::ActivityEdgeInstance>(ref);
@@ -811,7 +811,7 @@ void ActivityNodeActivationImpl::resolveReferences(const int featureID, std::vec
 
 		case fUML::Semantics::Activities::ActivitiesPackage::ACTIVITYNODEACTIVATION_ATTRIBUTE_OUTGOINGEDGES:
 		{
-			std::shared_ptr<Bag<fUML::Semantics::Activities::ActivityEdgeInstance>> _outgoingEdges = getOutgoingEdges();
+			const std::shared_ptr<Bag<fUML::Semantics::Activities::ActivityEdgeInstance>>& _outgoingEdges = getOutgoingEdges();
 			for(std::shared_ptr<ecore::EObject> ref : references)
 			{
 				std::shared_ptr<fUML::Semantics::Activities::ActivityEdgeInstance>  _r = std::dynamic_pointer_cast<fUML::Semantics::Activities::ActivityEdgeInstance>(ref);
@@ -937,7 +937,7 @@ bool ActivityNodeActivationImpl::eSet(int featureID, const Any& newValue)
 					std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> _heldTokens=getHeldTokens();
 					for(const std::shared_ptr<fUML::Semantics::Activities::Token> indexHeldTokens: *_heldTokens)
 					{
-						if (heldTokensList->find(indexHeldTokens) == -1)
+						if (!(heldTokensList->includes(indexHeldTokens)))
 						{
 							_heldTokens->erase(indexHeldTokens);
 						}
@@ -945,7 +945,7 @@ bool ActivityNodeActivationImpl::eSet(int featureID, const Any& newValue)
 
 					for(const std::shared_ptr<fUML::Semantics::Activities::Token> indexHeldTokens: *heldTokensList)
 					{
-						if (_heldTokens->find(indexHeldTokens) == -1)
+						if (!(_heldTokens->includes(indexHeldTokens)))
 						{
 							_heldTokens->add(indexHeldTokens);
 						}
@@ -974,7 +974,7 @@ bool ActivityNodeActivationImpl::eSet(int featureID, const Any& newValue)
 					std::shared_ptr<Bag<fUML::Semantics::Activities::ActivityEdgeInstance>> _incomingEdges=getIncomingEdges();
 					for(const std::shared_ptr<fUML::Semantics::Activities::ActivityEdgeInstance> indexIncomingEdges: *_incomingEdges)
 					{
-						if (incomingEdgesList->find(indexIncomingEdges) == -1)
+						if (!(incomingEdgesList->includes(indexIncomingEdges)))
 						{
 							_incomingEdges->erase(indexIncomingEdges);
 						}
@@ -982,7 +982,7 @@ bool ActivityNodeActivationImpl::eSet(int featureID, const Any& newValue)
 
 					for(const std::shared_ptr<fUML::Semantics::Activities::ActivityEdgeInstance> indexIncomingEdges: *incomingEdgesList)
 					{
-						if (_incomingEdges->find(indexIncomingEdges) == -1)
+						if (!(_incomingEdges->includes(indexIncomingEdges)))
 						{
 							_incomingEdges->add(indexIncomingEdges);
 						}
@@ -1019,7 +1019,7 @@ bool ActivityNodeActivationImpl::eSet(int featureID, const Any& newValue)
 					std::shared_ptr<Bag<fUML::Semantics::Activities::ActivityEdgeInstance>> _outgoingEdges=getOutgoingEdges();
 					for(const std::shared_ptr<fUML::Semantics::Activities::ActivityEdgeInstance> indexOutgoingEdges: *_outgoingEdges)
 					{
-						if (outgoingEdgesList->find(indexOutgoingEdges) == -1)
+						if (!(outgoingEdgesList->includes(indexOutgoingEdges)))
 						{
 							_outgoingEdges->erase(indexOutgoingEdges);
 						}
@@ -1027,7 +1027,7 @@ bool ActivityNodeActivationImpl::eSet(int featureID, const Any& newValue)
 
 					for(const std::shared_ptr<fUML::Semantics::Activities::ActivityEdgeInstance> indexOutgoingEdges: *outgoingEdgesList)
 					{
-						if (_outgoingEdges->find(indexOutgoingEdges) == -1)
+						if (!(_outgoingEdges->includes(indexOutgoingEdges)))
 						{
 							_outgoingEdges->add(indexOutgoingEdges);
 						}

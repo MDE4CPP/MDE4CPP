@@ -207,7 +207,7 @@ namespace uml
 			*/
 			
 			virtual void setInterface(std::weak_ptr<uml::Interface>) ;
-			virtual const std::shared_ptr<Bag<uml::Parameter>>& getProperty_OwnedParameter() const ;
+			virtual std::shared_ptr<Bag<uml::Parameter>> getProperty_OwnedParameter() const ;
 			/*!
 			An optional set of Constraints specifying the state of the system when the Operation is completed.
 			<p>From package UML::Classification.</p>

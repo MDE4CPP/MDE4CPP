@@ -410,7 +410,7 @@ void InstanceSpecificationImpl::resolveReferences(const int featureID, std::vect
 	{
 		case uml::umlPackage::INSTANCESPECIFICATION_ATTRIBUTE_CLASSIFIER:
 		{
-			std::shared_ptr<Bag<uml::Classifier>> _classifier = getClassifier();
+			const std::shared_ptr<Bag<uml::Classifier>>& _classifier = getClassifier();
 			for(std::shared_ptr<ecore::EObject> ref : references)
 			{
 				std::shared_ptr<uml::Classifier>  _r = std::dynamic_pointer_cast<uml::Classifier>(ref);
@@ -546,7 +546,7 @@ bool InstanceSpecificationImpl::eSet(int featureID, const Any& newValue)
 					std::shared_ptr<Bag<uml::Classifier>> _classifier=getClassifier();
 					for(const std::shared_ptr<uml::Classifier> indexClassifier: *_classifier)
 					{
-						if (classifierList->find(indexClassifier) == -1)
+						if (!(classifierList->includes(indexClassifier)))
 						{
 							_classifier->erase(indexClassifier);
 						}
@@ -554,7 +554,7 @@ bool InstanceSpecificationImpl::eSet(int featureID, const Any& newValue)
 
 					for(const std::shared_ptr<uml::Classifier> indexClassifier: *classifierList)
 					{
-						if (_classifier->find(indexClassifier) == -1)
+						if (!(_classifier->includes(indexClassifier)))
 						{
 							_classifier->add(indexClassifier);
 						}
@@ -583,7 +583,7 @@ bool InstanceSpecificationImpl::eSet(int featureID, const Any& newValue)
 					std::shared_ptr<Bag<uml::Slot>> _slot=getSlot();
 					for(const std::shared_ptr<uml::Slot> indexSlot: *_slot)
 					{
-						if (slotList->find(indexSlot) == -1)
+						if (!(slotList->includes(indexSlot)))
 						{
 							_slot->erase(indexSlot);
 						}
@@ -591,7 +591,7 @@ bool InstanceSpecificationImpl::eSet(int featureID, const Any& newValue)
 
 					for(const std::shared_ptr<uml::Slot> indexSlot: *slotList)
 					{
-						if (_slot->find(indexSlot) == -1)
+						if (!(_slot->includes(indexSlot)))
 						{
 							_slot->add(indexSlot);
 						}

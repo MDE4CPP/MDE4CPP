@@ -49,102 +49,102 @@ namespace fUML::Semantics::Values
 
 			// Begin Class Evaluation
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getEvaluation_Class() const ;
+			virtual const std::shared_ptr<ecore::EClass>& getEvaluation_Class() const ;
 			
 			
-			virtual std::shared_ptr<ecore::EReference> getEvaluation_Attribute_locus() const ;
-			virtual std::shared_ptr<ecore::EReference> getEvaluation_Attribute_specification() const ;
+			virtual const std::shared_ptr<ecore::EReference>& getEvaluation_Attribute_locus() const ;
+			virtual const std::shared_ptr<ecore::EReference>& getEvaluation_Attribute_specification() const ;
 			
-			virtual std::shared_ptr<ecore::EOperation> getEvaluation_Operation_evaluate() const ;
+			virtual const std::shared_ptr<ecore::EOperation>& getEvaluation_Operation_evaluate() const ;
 			
 			// End Class Evaluation
 
 			// Begin Class LiteralBooleanEvaluation
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getLiteralBooleanEvaluation_Class() const ;
+			virtual const std::shared_ptr<ecore::EClass>& getLiteralBooleanEvaluation_Class() const ;
 			
 			
 			
-			virtual std::shared_ptr<ecore::EOperation> getLiteralBooleanEvaluation_Operation_evaluate() const ;
+			virtual const std::shared_ptr<ecore::EOperation>& getLiteralBooleanEvaluation_Operation_evaluate() const ;
 			
 			// End Class LiteralBooleanEvaluation
 
 			// Begin Class LiteralEvaluation
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getLiteralEvaluation_Class() const ;
+			virtual const std::shared_ptr<ecore::EClass>& getLiteralEvaluation_Class() const ;
 			
 			
 			
-			virtual std::shared_ptr<ecore::EOperation> getLiteralEvaluation_Operation_getType_EString() const ;
+			virtual const std::shared_ptr<ecore::EOperation>& getLiteralEvaluation_Operation_getType_EString() const ;
 			
 			// End Class LiteralEvaluation
 
 			// Begin Class LiteralIntegerEvaluation
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getLiteralIntegerEvaluation_Class() const ;
+			virtual const std::shared_ptr<ecore::EClass>& getLiteralIntegerEvaluation_Class() const ;
 			
 			
 			
-			virtual std::shared_ptr<ecore::EOperation> getLiteralIntegerEvaluation_Operation_evaluate() const ;
+			virtual const std::shared_ptr<ecore::EOperation>& getLiteralIntegerEvaluation_Operation_evaluate() const ;
 			
 			// End Class LiteralIntegerEvaluation
 
 			// Begin Class LiteralNullEvaluation
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getLiteralNullEvaluation_Class() const ;
+			virtual const std::shared_ptr<ecore::EClass>& getLiteralNullEvaluation_Class() const ;
 			
 			
 			
-			virtual std::shared_ptr<ecore::EOperation> getLiteralNullEvaluation_Operation_evaluate() const ;
+			virtual const std::shared_ptr<ecore::EOperation>& getLiteralNullEvaluation_Operation_evaluate() const ;
 			
 			// End Class LiteralNullEvaluation
 
 			// Begin Class LiteralRealEvaluation
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getLiteralRealEvaluation_Class() const ;
+			virtual const std::shared_ptr<ecore::EClass>& getLiteralRealEvaluation_Class() const ;
 			
 			
 			
-			virtual std::shared_ptr<ecore::EOperation> getLiteralRealEvaluation_Operation_evaluate() const ;
+			virtual const std::shared_ptr<ecore::EOperation>& getLiteralRealEvaluation_Operation_evaluate() const ;
 			
 			// End Class LiteralRealEvaluation
 
 			// Begin Class LiteralStringEvaluation
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getLiteralStringEvaluation_Class() const ;
+			virtual const std::shared_ptr<ecore::EClass>& getLiteralStringEvaluation_Class() const ;
 			
 			
 			
-			virtual std::shared_ptr<ecore::EOperation> getLiteralStringEvaluation_Operation_evaluate() const ;
+			virtual const std::shared_ptr<ecore::EOperation>& getLiteralStringEvaluation_Operation_evaluate() const ;
 			
 			// End Class LiteralStringEvaluation
 
 			// Begin Class LiteralUnlimitedNaturalEvaluation
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getLiteralUnlimitedNaturalEvaluation_Class() const ;
+			virtual const std::shared_ptr<ecore::EClass>& getLiteralUnlimitedNaturalEvaluation_Class() const ;
 			
 			
 			
-			virtual std::shared_ptr<ecore::EOperation> getLiteralUnlimitedNaturalEvaluation_Operation_evaluate() const ;
+			virtual const std::shared_ptr<ecore::EOperation>& getLiteralUnlimitedNaturalEvaluation_Operation_evaluate() const ;
 			
 			// End Class LiteralUnlimitedNaturalEvaluation
 
 			// Begin Class Value
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getValue_Class() const ;
+			virtual const std::shared_ptr<ecore::EClass>& getValue_Class() const ;
 			
 			
 			
-			virtual std::shared_ptr<ecore::EOperation> getValue_Operation_isInstanceOf_Classifier() const ;
-			virtual std::shared_ptr<ecore::EOperation> getValue_Operation__copy() const ;
-			virtual std::shared_ptr<ecore::EOperation> getValue_Operation_checkAllParents_Classifier_Classifier() const ;
-			virtual std::shared_ptr<ecore::EOperation> getValue_Operation_equals_Value() const ;
-			virtual std::shared_ptr<ecore::EOperation> getValue_Operation_getTypes() const ;
-			virtual std::shared_ptr<ecore::EOperation> getValue_Operation_hasTypes_Classifier() const ;
-			virtual std::shared_ptr<ecore::EOperation> getValue_Operation_new_() const ;
-			virtual std::shared_ptr<ecore::EOperation> getValue_Operation_objectId() const ;
-			virtual std::shared_ptr<ecore::EOperation> getValue_Operation_specify() const ;
-			virtual std::shared_ptr<ecore::EOperation> getValue_Operation_toString() const ;
+			virtual const std::shared_ptr<ecore::EOperation>& getValue_Operation_isInstanceOf_Classifier() const ;
+			virtual const std::shared_ptr<ecore::EOperation>& getValue_Operation__copy() const ;
+			virtual const std::shared_ptr<ecore::EOperation>& getValue_Operation_checkAllParents_Classifier_Classifier() const ;
+			virtual const std::shared_ptr<ecore::EOperation>& getValue_Operation_equals_Value() const ;
+			virtual const std::shared_ptr<ecore::EOperation>& getValue_Operation_getTypes() const ;
+			virtual const std::shared_ptr<ecore::EOperation>& getValue_Operation_hasTypes_Classifier() const ;
+			virtual const std::shared_ptr<ecore::EOperation>& getValue_Operation_new_() const ;
+			virtual const std::shared_ptr<ecore::EOperation>& getValue_Operation_objectId() const ;
+			virtual const std::shared_ptr<ecore::EOperation>& getValue_Operation_specify() const ;
+			virtual const std::shared_ptr<ecore::EOperation>& getValue_Operation_toString() const ;
 			
 			// End Class Value
 

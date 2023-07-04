@@ -118,7 +118,7 @@ std::shared_ptr<ecore::EObject> JoinNodeActivationImpl::copy() const
 //*********************************
 // Operations
 //*********************************
-void JoinNodeActivationImpl::fire(const std::shared_ptr<Bag<fUML::Semantics::Activities::Token>>& incomingTokens)
+void JoinNodeActivationImpl::fire(std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> incomingTokens)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation

@@ -414,7 +414,7 @@ bool ExecutableNodeImpl::eSet(int featureID, const Any& newValue)
 					std::shared_ptr<Bag<uml::ExceptionHandler>> _handler=getHandler();
 					for(const std::shared_ptr<uml::ExceptionHandler> indexHandler: *_handler)
 					{
-						if (handlerList->find(indexHandler) == -1)
+						if (!(handlerList->includes(indexHandler)))
 						{
 							_handler->erase(indexHandler);
 						}
@@ -422,7 +422,7 @@ bool ExecutableNodeImpl::eSet(int featureID, const Any& newValue)
 
 					for(const std::shared_ptr<uml::ExceptionHandler> indexHandler: *handlerList)
 					{
-						if (_handler->find(indexHandler) == -1)
+						if (!(_handler->includes(indexHandler)))
 						{
 							_handler->add(indexHandler);
 						}

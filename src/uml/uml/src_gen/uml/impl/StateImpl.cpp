@@ -1051,7 +1051,7 @@ bool StateImpl::eSet(int featureID, const Any& newValue)
 					std::shared_ptr<Bag<uml::ConnectionPointReference>> _connection=getConnection();
 					for(const std::shared_ptr<uml::ConnectionPointReference> indexConnection: *_connection)
 					{
-						if (connectionList->find(indexConnection) == -1)
+						if (!(connectionList->includes(indexConnection)))
 						{
 							_connection->erase(indexConnection);
 						}
@@ -1059,7 +1059,7 @@ bool StateImpl::eSet(int featureID, const Any& newValue)
 
 					for(const std::shared_ptr<uml::ConnectionPointReference> indexConnection: *connectionList)
 					{
-						if (_connection->find(indexConnection) == -1)
+						if (!(_connection->includes(indexConnection)))
 						{
 							_connection->add(indexConnection);
 						}
@@ -1088,7 +1088,7 @@ bool StateImpl::eSet(int featureID, const Any& newValue)
 					std::shared_ptr<Bag<uml::Pseudostate>> _connectionPoint=getConnectionPoint();
 					for(const std::shared_ptr<uml::Pseudostate> indexConnectionPoint: *_connectionPoint)
 					{
-						if (connectionPointList->find(indexConnectionPoint) == -1)
+						if (!(connectionPointList->includes(indexConnectionPoint)))
 						{
 							_connectionPoint->erase(indexConnectionPoint);
 						}
@@ -1096,7 +1096,7 @@ bool StateImpl::eSet(int featureID, const Any& newValue)
 
 					for(const std::shared_ptr<uml::Pseudostate> indexConnectionPoint: *connectionPointList)
 					{
-						if (_connectionPoint->find(indexConnectionPoint) == -1)
+						if (!(_connectionPoint->includes(indexConnectionPoint)))
 						{
 							_connectionPoint->add(indexConnectionPoint);
 						}
@@ -1125,7 +1125,7 @@ bool StateImpl::eSet(int featureID, const Any& newValue)
 					std::shared_ptr<Bag<uml::Trigger>> _deferrableTrigger=getDeferrableTrigger();
 					for(const std::shared_ptr<uml::Trigger> indexDeferrableTrigger: *_deferrableTrigger)
 					{
-						if (deferrableTriggerList->find(indexDeferrableTrigger) == -1)
+						if (!(deferrableTriggerList->includes(indexDeferrableTrigger)))
 						{
 							_deferrableTrigger->erase(indexDeferrableTrigger);
 						}
@@ -1133,7 +1133,7 @@ bool StateImpl::eSet(int featureID, const Any& newValue)
 
 					for(const std::shared_ptr<uml::Trigger> indexDeferrableTrigger: *deferrableTriggerList)
 					{
-						if (_deferrableTrigger->find(indexDeferrableTrigger) == -1)
+						if (!(_deferrableTrigger->includes(indexDeferrableTrigger)))
 						{
 							_deferrableTrigger->add(indexDeferrableTrigger);
 						}
@@ -1194,7 +1194,7 @@ bool StateImpl::eSet(int featureID, const Any& newValue)
 					std::shared_ptr<Bag<uml::Region>> _region=getRegion();
 					for(const std::shared_ptr<uml::Region> indexRegion: *_region)
 					{
-						if (regionList->find(indexRegion) == -1)
+						if (!(regionList->includes(indexRegion)))
 						{
 							_region->erase(indexRegion);
 						}
@@ -1202,7 +1202,7 @@ bool StateImpl::eSet(int featureID, const Any& newValue)
 
 					for(const std::shared_ptr<uml::Region> indexRegion: *regionList)
 					{
-						if (_region->find(indexRegion) == -1)
+						if (!(_region->includes(indexRegion)))
 						{
 							_region->add(indexRegion);
 						}

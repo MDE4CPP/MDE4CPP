@@ -954,7 +954,7 @@ bool InteractionImpl::eSet(int featureID, const Any& newValue)
 					std::shared_ptr<Bag<uml::Action>> _action=getAction();
 					for(const std::shared_ptr<uml::Action> indexAction: *_action)
 					{
-						if (actionList->find(indexAction) == -1)
+						if (!(actionList->includes(indexAction)))
 						{
 							_action->erase(indexAction);
 						}
@@ -962,7 +962,7 @@ bool InteractionImpl::eSet(int featureID, const Any& newValue)
 
 					for(const std::shared_ptr<uml::Action> indexAction: *actionList)
 					{
-						if (_action->find(indexAction) == -1)
+						if (!(_action->includes(indexAction)))
 						{
 							_action->add(indexAction);
 						}
@@ -991,7 +991,7 @@ bool InteractionImpl::eSet(int featureID, const Any& newValue)
 					std::shared_ptr<Bag<uml::Gate>> _formalGate=getFormalGate();
 					for(const std::shared_ptr<uml::Gate> indexFormalGate: *_formalGate)
 					{
-						if (formalGateList->find(indexFormalGate) == -1)
+						if (!(formalGateList->includes(indexFormalGate)))
 						{
 							_formalGate->erase(indexFormalGate);
 						}
@@ -999,7 +999,7 @@ bool InteractionImpl::eSet(int featureID, const Any& newValue)
 
 					for(const std::shared_ptr<uml::Gate> indexFormalGate: *formalGateList)
 					{
-						if (_formalGate->find(indexFormalGate) == -1)
+						if (!(_formalGate->includes(indexFormalGate)))
 						{
 							_formalGate->add(indexFormalGate);
 						}
@@ -1028,7 +1028,7 @@ bool InteractionImpl::eSet(int featureID, const Any& newValue)
 					std::shared_ptr<Bag<uml::InteractionFragment>> _fragment=getFragment();
 					for(const std::shared_ptr<uml::InteractionFragment> indexFragment: *_fragment)
 					{
-						if (fragmentList->find(indexFragment) == -1)
+						if (!(fragmentList->includes(indexFragment)))
 						{
 							_fragment->erase(indexFragment);
 						}
@@ -1036,7 +1036,7 @@ bool InteractionImpl::eSet(int featureID, const Any& newValue)
 
 					for(const std::shared_ptr<uml::InteractionFragment> indexFragment: *fragmentList)
 					{
-						if (_fragment->find(indexFragment) == -1)
+						if (!(_fragment->includes(indexFragment)))
 						{
 							_fragment->add(indexFragment);
 						}
@@ -1065,7 +1065,7 @@ bool InteractionImpl::eSet(int featureID, const Any& newValue)
 					std::shared_ptr<Bag<uml::Lifeline>> _lifeline=getLifeline();
 					for(const std::shared_ptr<uml::Lifeline> indexLifeline: *_lifeline)
 					{
-						if (lifelineList->find(indexLifeline) == -1)
+						if (!(lifelineList->includes(indexLifeline)))
 						{
 							_lifeline->erase(indexLifeline);
 						}
@@ -1073,7 +1073,7 @@ bool InteractionImpl::eSet(int featureID, const Any& newValue)
 
 					for(const std::shared_ptr<uml::Lifeline> indexLifeline: *lifelineList)
 					{
-						if (_lifeline->find(indexLifeline) == -1)
+						if (!(_lifeline->includes(indexLifeline)))
 						{
 							_lifeline->add(indexLifeline);
 						}
@@ -1102,7 +1102,7 @@ bool InteractionImpl::eSet(int featureID, const Any& newValue)
 					std::shared_ptr<Bag<uml::Message>> _message=getMessage();
 					for(const std::shared_ptr<uml::Message> indexMessage: *_message)
 					{
-						if (messageList->find(indexMessage) == -1)
+						if (!(messageList->includes(indexMessage)))
 						{
 							_message->erase(indexMessage);
 						}
@@ -1110,7 +1110,7 @@ bool InteractionImpl::eSet(int featureID, const Any& newValue)
 
 					for(const std::shared_ptr<uml::Message> indexMessage: *messageList)
 					{
-						if (_message->find(indexMessage) == -1)
+						if (!(_message->includes(indexMessage)))
 						{
 							_message->add(indexMessage);
 						}

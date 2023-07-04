@@ -333,7 +333,7 @@ bool EModelElementImpl::eSet(int featureID, const Any& newValue)
 					std::shared_ptr<Bag<ecore::EAnnotation>> _eAnnotations=getEAnnotations();
 					for(const std::shared_ptr<ecore::EAnnotation> indexEAnnotations: *_eAnnotations)
 					{
-						if (eAnnotationsList->find(indexEAnnotations) == -1)
+						if (!(eAnnotationsList->includes(indexEAnnotations)))
 						{
 							_eAnnotations->erase(indexEAnnotations);
 						}
@@ -341,7 +341,7 @@ bool EModelElementImpl::eSet(int featureID, const Any& newValue)
 
 					for(const std::shared_ptr<ecore::EAnnotation> indexEAnnotations: *eAnnotationsList)
 					{
-						if (_eAnnotations->find(indexEAnnotations) == -1)
+						if (!(_eAnnotations->includes(indexEAnnotations)))
 						{
 							_eAnnotations->add(indexEAnnotations);
 						}

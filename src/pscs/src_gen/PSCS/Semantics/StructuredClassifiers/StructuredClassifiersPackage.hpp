@@ -71,11 +71,11 @@ namespace PSCS::Semantics::StructuredClassifiers
 			static const unsigned int CS_DEFAULTREQUESTPROPAGATIONSTRATEGY_OPERATION_SELECT_REFERENCE_SEMANTICVISITOR = 785142002;
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getCS_DefaultRequestPropagationStrategy_Class() const = 0;
+			virtual const std::shared_ptr<ecore::EClass>& getCS_DefaultRequestPropagationStrategy_Class() const = 0;
 			
 			
 			
-			virtual std::shared_ptr<ecore::EOperation> getCS_DefaultRequestPropagationStrategy_Operation_select_Reference_SemanticVisitor() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getCS_DefaultRequestPropagationStrategy_Operation_select_Reference_SemanticVisitor() const = 0;
 			
 			// End Class CS_DefaultRequestPropagationStrategy
 
@@ -90,11 +90,11 @@ namespace PSCS::Semantics::StructuredClassifiers
 			static const unsigned int CS_DISPATCHOPERATIONOFINTERFACESTRATEGY_OPERATION_OPERATIONSMATCH_OPERATION_OPERATION = 746775994;
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getCS_DispatchOperationOfInterfaceStrategy_Class() const = 0;
+			virtual const std::shared_ptr<ecore::EClass>& getCS_DispatchOperationOfInterfaceStrategy_Class() const = 0;
 			
 			
 			
-			virtual std::shared_ptr<ecore::EOperation> getCS_DispatchOperationOfInterfaceStrategy_Operation_operationsMatch_Operation_Operation() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getCS_DispatchOperationOfInterfaceStrategy_Operation_operationsMatch_Operation_Operation() const = 0;
 			
 			// End Class CS_DispatchOperationOfInterfaceStrategy
 
@@ -114,16 +114,16 @@ namespace PSCS::Semantics::StructuredClassifiers
 			static const unsigned int CS_INTERACTIONPOINT_OPERATION_STARTBEHAVIOR_CLASS_PARAMETERVALUE = 3659703839;
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getCS_InteractionPoint_Class() const = 0;
+			virtual const std::shared_ptr<ecore::EClass>& getCS_InteractionPoint_Class() const = 0;
 			
 			
-			virtual std::shared_ptr<ecore::EReference> getCS_InteractionPoint_Attribute_definingPort() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getCS_InteractionPoint_Attribute_owner() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getCS_InteractionPoint_Attribute_definingPort() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getCS_InteractionPoint_Attribute_owner() const = 0;
 			
-			virtual std::shared_ptr<ecore::EOperation> getCS_InteractionPoint_Operation_checkAllParents_Classifier_Classifier() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getCS_InteractionPoint_Operation_dispatch_Operation() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getCS_InteractionPoint_Operation_send_EventOccurrence() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getCS_InteractionPoint_Operation_startBehavior_Class_ParameterValue() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getCS_InteractionPoint_Operation_checkAllParents_Classifier_Classifier() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getCS_InteractionPoint_Operation_dispatch_Operation() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getCS_InteractionPoint_Operation_send_EventOccurrence() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getCS_InteractionPoint_Operation_startBehavior_Class_ParameterValue() const = 0;
 			
 			// End Class CS_InteractionPoint
 
@@ -139,12 +139,12 @@ namespace PSCS::Semantics::StructuredClassifiers
 			static const unsigned int CS_LINK_OPERATION_HASVALUEFORAFEATURE_VALUE = 1213928788;
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getCS_Link_Class() const = 0;
+			virtual const std::shared_ptr<ecore::EClass>& getCS_Link_Class() const = 0;
 			
 			
 			
-			virtual std::shared_ptr<ecore::EOperation> getCS_Link_Operation_getFeature_Value() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getCS_Link_Operation_hasValueForAFeature_Value() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getCS_Link_Operation_getFeature_Value() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getCS_Link_Operation_hasValueForAFeature_Value() const = 0;
 			
 			// End Class CS_Link
 
@@ -160,12 +160,12 @@ namespace PSCS::Semantics::StructuredClassifiers
 			static const unsigned int CS_NAMEBASED_STRUCTURALFEATUREOFINTERFACEACCESSSTRATEGY_OPERATION_WRITE_CS_OBJECT_EINT = 2035586850;
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getCS_NameBased_StructuralFeatureOfInterfaceAccessStrategy_Class() const = 0;
+			virtual const std::shared_ptr<ecore::EClass>& getCS_NameBased_StructuralFeatureOfInterfaceAccessStrategy_Class() const = 0;
 			
 			
 			
-			virtual std::shared_ptr<ecore::EOperation> getCS_NameBased_StructuralFeatureOfInterfaceAccessStrategy_Operation_read_CS_Object_StructuralFeature() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getCS_NameBased_StructuralFeatureOfInterfaceAccessStrategy_Operation_write_CS_Object_EInt() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getCS_NameBased_StructuralFeatureOfInterfaceAccessStrategy_Operation_read_CS_Object_StructuralFeature() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getCS_NameBased_StructuralFeatureOfInterfaceAccessStrategy_Operation_write_CS_Object_EInt() const = 0;
 			
 			// End Class CS_NameBased_StructuralFeatureOfInterfaceAccessStrategy
 
@@ -202,33 +202,33 @@ namespace PSCS::Semantics::StructuredClassifiers
 			static const unsigned int CS_OBJECT_OPERATION_SETFEATUREVALUE_STRUCTURALFEATURE_EINT = 575812663;
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getCS_Object_Class() const = 0;
+			virtual const std::shared_ptr<ecore::EClass>& getCS_Object_Class() const = 0;
 			
 			
 			
-			virtual std::shared_ptr<ecore::EOperation> getCS_Object_Operation_checkAllParents_Classifier_Classifier() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getCS_Object_Operation_contains_Object() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getCS_Object_Operation_directlyContains_Object() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getCS_Object_Operation_dispatchIn_Operation_CS_InteractionPoint() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getCS_Object_Operation_dispatchIn_Operation_Port() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getCS_Object_Operation_dispatchOut_Operation_CS_InteractionPoint() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getCS_Object_Operation_dispatchOut_Operation_Port() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getCS_Object_Operation_getDirectContainers() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getCS_Object_Operation_getFeatureValue_StructuralFeature() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getCS_Object_Operation_getLinkKind_CS_Link_CS_InteractionPoint() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getCS_Object_Operation_getLinks_CS_InteractionPoint() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getCS_Object_Operation_hasValueForAFeature_Value() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getCS_Object_Operation_isDescendant_Interface_Interface() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getCS_Object_Operation_isOperationProvided_Reference_Operation() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getCS_Object_Operation_isOperationRequired_Reference_Operation() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getCS_Object_Operation_realizesInterface_Class_Interface() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getCS_Object_Operation_selectTargetsForDispatching_CS_Link_EBoolean() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getCS_Object_Operation_selectTargetsForSending_CS_Link_EBoolean() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getCS_Object_Operation_sendIn_EventOccurrence_CS_InteractionPoint() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getCS_Object_Operation_sendIn_EventOccurrence_Port() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getCS_Object_Operation_sendOut_EventOccurrence_CS_InteractionPoint() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getCS_Object_Operation_sendOut_EventOccurrence_Port() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getCS_Object_Operation_setFeatureValue_StructuralFeature_EInt() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getCS_Object_Operation_checkAllParents_Classifier_Classifier() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getCS_Object_Operation_contains_Object() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getCS_Object_Operation_directlyContains_Object() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getCS_Object_Operation_dispatchIn_Operation_CS_InteractionPoint() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getCS_Object_Operation_dispatchIn_Operation_Port() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getCS_Object_Operation_dispatchOut_Operation_CS_InteractionPoint() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getCS_Object_Operation_dispatchOut_Operation_Port() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getCS_Object_Operation_getDirectContainers() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getCS_Object_Operation_getFeatureValue_StructuralFeature() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getCS_Object_Operation_getLinkKind_CS_Link_CS_InteractionPoint() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getCS_Object_Operation_getLinks_CS_InteractionPoint() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getCS_Object_Operation_hasValueForAFeature_Value() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getCS_Object_Operation_isDescendant_Interface_Interface() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getCS_Object_Operation_isOperationProvided_Reference_Operation() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getCS_Object_Operation_isOperationRequired_Reference_Operation() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getCS_Object_Operation_realizesInterface_Class_Interface() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getCS_Object_Operation_selectTargetsForDispatching_CS_Link_EBoolean() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getCS_Object_Operation_selectTargetsForSending_CS_Link_EBoolean() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getCS_Object_Operation_sendIn_EventOccurrence_CS_InteractionPoint() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getCS_Object_Operation_sendIn_EventOccurrence_Port() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getCS_Object_Operation_sendOut_EventOccurrence_CS_InteractionPoint() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getCS_Object_Operation_sendOut_EventOccurrence_Port() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getCS_Object_Operation_setFeatureValue_StructuralFeature_EInt() const = 0;
 			
 			// End Class CS_Object
 
@@ -252,20 +252,20 @@ namespace PSCS::Semantics::StructuredClassifiers
 			static const unsigned int CS_REFERENCE_OPERATION_SENDOUT_EVENTOCCURRENCE_CS_INTERACTIONPOINT = 4252348295;
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getCS_Reference_Class() const = 0;
+			virtual const std::shared_ptr<ecore::EClass>& getCS_Reference_Class() const = 0;
 			
 			
-			virtual std::shared_ptr<ecore::EReference> getCS_Reference_Attribute_compositeReferent() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getCS_Reference_Attribute_compositeReferent() const = 0;
 			
-			virtual std::shared_ptr<ecore::EOperation> getCS_Reference_Operation__copy() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getCS_Reference_Operation_dispatchIn_Operation_CS_InteractionPoint() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getCS_Reference_Operation_dispatchIn_Operation_Port() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getCS_Reference_Operation_dispatchOut_Operation_Port() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getCS_Reference_Operation_dispatchOut_Operation_CS_InteractionPoint() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getCS_Reference_Operation_sendIn_EventOccurrence_CS_InteractionPoint() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getCS_Reference_Operation_sendIn_EventOccurrence_Port() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getCS_Reference_Operation_sendOut_EventOccurrence_Port() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getCS_Reference_Operation_sendOut_EventOccurrence_CS_InteractionPoint() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getCS_Reference_Operation__copy() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getCS_Reference_Operation_dispatchIn_Operation_CS_InteractionPoint() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getCS_Reference_Operation_dispatchIn_Operation_Port() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getCS_Reference_Operation_dispatchOut_Operation_Port() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getCS_Reference_Operation_dispatchOut_Operation_CS_InteractionPoint() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getCS_Reference_Operation_sendIn_EventOccurrence_CS_InteractionPoint() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getCS_Reference_Operation_sendIn_EventOccurrence_Port() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getCS_Reference_Operation_sendOut_EventOccurrence_Port() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getCS_Reference_Operation_sendOut_EventOccurrence_CS_InteractionPoint() const = 0;
 			
 			// End Class CS_Reference
 
@@ -281,12 +281,12 @@ namespace PSCS::Semantics::StructuredClassifiers
 			static const unsigned int CS_REQUESTPROPAGATIONSTRATEGY_OPERATION_SELECT_REFERENCE_SEMANTICVISITOR = 552630845;
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getCS_RequestPropagationStrategy_Class() const = 0;
+			virtual const std::shared_ptr<ecore::EClass>& getCS_RequestPropagationStrategy_Class() const = 0;
 			
 			
 			
-			virtual std::shared_ptr<ecore::EOperation> getCS_RequestPropagationStrategy_Operation_getName() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getCS_RequestPropagationStrategy_Operation_select_Reference_SemanticVisitor() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getCS_RequestPropagationStrategy_Operation_getName() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getCS_RequestPropagationStrategy_Operation_select_Reference_SemanticVisitor() const = 0;
 			
 			// End Class CS_RequestPropagationStrategy
 
@@ -303,19 +303,19 @@ namespace PSCS::Semantics::StructuredClassifiers
 			static const unsigned int CS_STRUCTURALFEATUREOFINTERFACEACCESSSTRATEGY_OPERATION_WRITE_CS_OBJECT_INTEGER = 2987083979;
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getCS_StructuralFeatureOfInterfaceAccessStrategy_Class() const = 0;
+			virtual const std::shared_ptr<ecore::EClass>& getCS_StructuralFeatureOfInterfaceAccessStrategy_Class() const = 0;
 			
 			
 			
-			virtual std::shared_ptr<ecore::EOperation> getCS_StructuralFeatureOfInterfaceAccessStrategy_Operation_getName() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getCS_StructuralFeatureOfInterfaceAccessStrategy_Operation_read_CS_Object_StructuralFeature() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getCS_StructuralFeatureOfInterfaceAccessStrategy_Operation_write_CS_Object_Integer() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getCS_StructuralFeatureOfInterfaceAccessStrategy_Operation_getName() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getCS_StructuralFeatureOfInterfaceAccessStrategy_Operation_read_CS_Object_StructuralFeature() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getCS_StructuralFeatureOfInterfaceAccessStrategy_Operation_write_CS_Object_Integer() const = 0;
 			
 			// End Class CS_StructuralFeatureOfInterfaceAccessStrategy
 
 			static const int CS_LINKKIND_CLASS = 19;
 			
-			virtual std::shared_ptr<ecore::EEnum> getCS_LinkKind_Class() const = 0;
+			virtual const std::shared_ptr<ecore::EEnum>& getCS_LinkKind_Class() const = 0;
 			
 
 			

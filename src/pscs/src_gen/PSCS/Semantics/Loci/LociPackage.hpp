@@ -66,14 +66,14 @@ namespace PSCS::Semantics::Loci
 			static const unsigned int CS_EXECUTIONFACTORY_OPERATION_INSTANTIATEVISITOR_ELEMENT = 3579698249;
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getCS_ExecutionFactory_Class() const = 0;
+			virtual const std::shared_ptr<ecore::EClass>& getCS_ExecutionFactory_Class() const = 0;
 			
 			
-			virtual std::shared_ptr<ecore::EReference> getCS_ExecutionFactory_Attribute_appliedProfiles() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getCS_ExecutionFactory_Attribute_appliedProfiles() const = 0;
 			
-			virtual std::shared_ptr<ecore::EOperation> getCS_ExecutionFactory_Operation_getStereotypeApplication_Class_Element() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getCS_ExecutionFactory_Operation_getStereotypeClass_EString_EString() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getCS_ExecutionFactory_Operation_instantiateVisitor_Element() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getCS_ExecutionFactory_Operation_getStereotypeApplication_Class_Element() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getCS_ExecutionFactory_Operation_getStereotypeClass_EString_EString() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getCS_ExecutionFactory_Operation_instantiateVisitor_Element() const = 0;
 			
 			// End Class CS_ExecutionFactory
 
@@ -88,11 +88,11 @@ namespace PSCS::Semantics::Loci
 			static const unsigned int CS_EXECUTOR_OPERATION_START_CLASS_PARAMETERVALUE = 435271847;
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getCS_Executor_Class() const = 0;
+			virtual const std::shared_ptr<ecore::EClass>& getCS_Executor_Class() const = 0;
 			
 			
 			
-			virtual std::shared_ptr<ecore::EOperation> getCS_Executor_Operation_start_Class_ParameterValue() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getCS_Executor_Operation_start_Class_ParameterValue() const = 0;
 			
 			// End Class CS_Executor
 
@@ -107,11 +107,11 @@ namespace PSCS::Semantics::Loci
 			static const unsigned int CS_LOCUS_OPERATION_INSTANTIATE_CLASS = 3451729688;
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getCS_Locus_Class() const = 0;
+			virtual const std::shared_ptr<ecore::EClass>& getCS_Locus_Class() const = 0;
 			
 			
 			
-			virtual std::shared_ptr<ecore::EOperation> getCS_Locus_Operation_instantiate_Class() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getCS_Locus_Operation_instantiate_Class() const = 0;
 			
 			// End Class CS_Locus
 

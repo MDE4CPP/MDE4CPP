@@ -365,7 +365,7 @@ void ActionActivationImpl::doAction()
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-void ActionActivationImpl::fire(const std::shared_ptr<Bag<fUML::Semantics::Activities::Token>>& incomingTokens)
+void ActionActivationImpl::fire(std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> incomingTokens)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -931,7 +931,7 @@ void ActionActivationImpl::resolveReferences(const int featureID, std::vector<st
 
 		case fUML::Semantics::Actions::ActionsPackage::ACTIONACTIVATION_ATTRIBUTE_INPUTPINACTIVATION:
 		{
-			std::shared_ptr<Subset<fUML::Semantics::Actions::InputPinActivation, fUML::Semantics::Actions::PinActivation>> _inputPinActivation = getInputPinActivation();
+			const std::shared_ptr<Subset<fUML::Semantics::Actions::InputPinActivation, fUML::Semantics::Actions::PinActivation>>& _inputPinActivation = getInputPinActivation();
 			for(std::shared_ptr<ecore::EObject> ref : references)
 			{
 				std::shared_ptr<fUML::Semantics::Actions::InputPinActivation>  _r = std::dynamic_pointer_cast<fUML::Semantics::Actions::InputPinActivation>(ref);
@@ -945,7 +945,7 @@ void ActionActivationImpl::resolveReferences(const int featureID, std::vector<st
 
 		case fUML::Semantics::Actions::ActionsPackage::ACTIONACTIVATION_ATTRIBUTE_OUTPUTPINACTIVATION:
 		{
-			std::shared_ptr<Subset<fUML::Semantics::Actions::OutputPinActivation, fUML::Semantics::Actions::PinActivation>> _outputPinActivation = getOutputPinActivation();
+			const std::shared_ptr<Subset<fUML::Semantics::Actions::OutputPinActivation, fUML::Semantics::Actions::PinActivation>>& _outputPinActivation = getOutputPinActivation();
 			for(std::shared_ptr<ecore::EObject> ref : references)
 			{
 				std::shared_ptr<fUML::Semantics::Actions::OutputPinActivation>  _r = std::dynamic_pointer_cast<fUML::Semantics::Actions::OutputPinActivation>(ref);
@@ -959,7 +959,7 @@ void ActionActivationImpl::resolveReferences(const int featureID, std::vector<st
 
 		case fUML::Semantics::Actions::ActionsPackage::ACTIONACTIVATION_ATTRIBUTE_PINACTIVATION:
 		{
-			std::shared_ptr<Union<fUML::Semantics::Actions::PinActivation>> _pinActivation = getPinActivation();
+			const std::shared_ptr<Union<fUML::Semantics::Actions::PinActivation>>& _pinActivation = getPinActivation();
 			for(std::shared_ptr<ecore::EObject> ref : references)
 			{
 				std::shared_ptr<fUML::Semantics::Actions::PinActivation>  _r = std::dynamic_pointer_cast<fUML::Semantics::Actions::PinActivation>(ref);
@@ -1081,7 +1081,7 @@ bool ActionActivationImpl::eSet(int featureID, const Any& newValue)
 					std::shared_ptr<Bag<fUML::Semantics::Actions::InputPinActivation>> _inputPinActivation=getInputPinActivation();
 					for(const std::shared_ptr<fUML::Semantics::Actions::InputPinActivation> indexInputPinActivation: *_inputPinActivation)
 					{
-						if (inputPinActivationList->find(indexInputPinActivation) == -1)
+						if (!(inputPinActivationList->includes(indexInputPinActivation)))
 						{
 							_inputPinActivation->erase(indexInputPinActivation);
 						}
@@ -1089,7 +1089,7 @@ bool ActionActivationImpl::eSet(int featureID, const Any& newValue)
 
 					for(const std::shared_ptr<fUML::Semantics::Actions::InputPinActivation> indexInputPinActivation: *inputPinActivationList)
 					{
-						if (_inputPinActivation->find(indexInputPinActivation) == -1)
+						if (!(_inputPinActivation->includes(indexInputPinActivation)))
 						{
 							_inputPinActivation->add(indexInputPinActivation);
 						}
@@ -1118,7 +1118,7 @@ bool ActionActivationImpl::eSet(int featureID, const Any& newValue)
 					std::shared_ptr<Bag<fUML::Semantics::Actions::OutputPinActivation>> _outputPinActivation=getOutputPinActivation();
 					for(const std::shared_ptr<fUML::Semantics::Actions::OutputPinActivation> indexOutputPinActivation: *_outputPinActivation)
 					{
-						if (outputPinActivationList->find(indexOutputPinActivation) == -1)
+						if (!(outputPinActivationList->includes(indexOutputPinActivation)))
 						{
 							_outputPinActivation->erase(indexOutputPinActivation);
 						}
@@ -1126,7 +1126,7 @@ bool ActionActivationImpl::eSet(int featureID, const Any& newValue)
 
 					for(const std::shared_ptr<fUML::Semantics::Actions::OutputPinActivation> indexOutputPinActivation: *outputPinActivationList)
 					{
-						if (_outputPinActivation->find(indexOutputPinActivation) == -1)
+						if (!(_outputPinActivation->includes(indexOutputPinActivation)))
 						{
 							_outputPinActivation->add(indexOutputPinActivation);
 						}
@@ -1155,7 +1155,7 @@ bool ActionActivationImpl::eSet(int featureID, const Any& newValue)
 					std::shared_ptr<Bag<fUML::Semantics::Actions::PinActivation>> _pinActivation=getPinActivation();
 					for(const std::shared_ptr<fUML::Semantics::Actions::PinActivation> indexPinActivation: *_pinActivation)
 					{
-						if (pinActivationList->find(indexPinActivation) == -1)
+						if (!(pinActivationList->includes(indexPinActivation)))
 						{
 							_pinActivation->erase(indexPinActivation);
 						}
@@ -1163,7 +1163,7 @@ bool ActionActivationImpl::eSet(int featureID, const Any& newValue)
 
 					for(const std::shared_ptr<fUML::Semantics::Actions::PinActivation> indexPinActivation: *pinActivationList)
 					{
-						if (_pinActivation->find(indexPinActivation) == -1)
+						if (!(_pinActivation->includes(indexPinActivation)))
 						{
 							_pinActivation->add(indexPinActivation);
 						}

@@ -715,7 +715,7 @@ void ExpansionRegionActivationImpl::resolveReferences(const int featureID, std::
 	{
 		case fUML::Semantics::Activities::ActivitiesPackage::EXPANSIONREGIONACTIVATION_ATTRIBUTE_ACTIVATIONGROUPS:
 		{
-			std::shared_ptr<Bag<fUML::Semantics::Activities::ExpansionActivationGroup>> _activationGroups = getActivationGroups();
+			const std::shared_ptr<Bag<fUML::Semantics::Activities::ExpansionActivationGroup>>& _activationGroups = getActivationGroups();
 			for(std::shared_ptr<ecore::EObject> ref : references)
 			{
 				std::shared_ptr<fUML::Semantics::Activities::ExpansionActivationGroup>  _r = std::dynamic_pointer_cast<fUML::Semantics::Activities::ExpansionActivationGroup>(ref);
@@ -729,7 +729,7 @@ void ExpansionRegionActivationImpl::resolveReferences(const int featureID, std::
 
 		case fUML::Semantics::Activities::ActivitiesPackage::EXPANSIONREGIONACTIVATION_ATTRIBUTE_INPUTEXPANSIONTOKENS:
 		{
-			std::shared_ptr<Bag<fUML::Semantics::Activities::TokenSet>> _inputExpansionTokens = getInputExpansionTokens();
+			const std::shared_ptr<Bag<fUML::Semantics::Activities::TokenSet>>& _inputExpansionTokens = getInputExpansionTokens();
 			for(std::shared_ptr<ecore::EObject> ref : references)
 			{
 				std::shared_ptr<fUML::Semantics::Activities::TokenSet>  _r = std::dynamic_pointer_cast<fUML::Semantics::Activities::TokenSet>(ref);
@@ -743,7 +743,7 @@ void ExpansionRegionActivationImpl::resolveReferences(const int featureID, std::
 
 		case fUML::Semantics::Activities::ActivitiesPackage::EXPANSIONREGIONACTIVATION_ATTRIBUTE_INPUTTOKENS:
 		{
-			std::shared_ptr<Bag<fUML::Semantics::Activities::TokenSet>> _inputTokens = getInputTokens();
+			const std::shared_ptr<Bag<fUML::Semantics::Activities::TokenSet>>& _inputTokens = getInputTokens();
 			for(std::shared_ptr<ecore::EObject> ref : references)
 			{
 				std::shared_ptr<fUML::Semantics::Activities::TokenSet>  _r = std::dynamic_pointer_cast<fUML::Semantics::Activities::TokenSet>(ref);
@@ -847,7 +847,7 @@ bool ExpansionRegionActivationImpl::eSet(int featureID, const Any& newValue)
 					std::shared_ptr<Bag<fUML::Semantics::Activities::ExpansionActivationGroup>> _activationGroups=getActivationGroups();
 					for(const std::shared_ptr<fUML::Semantics::Activities::ExpansionActivationGroup> indexActivationGroups: *_activationGroups)
 					{
-						if (activationGroupsList->find(indexActivationGroups) == -1)
+						if (!(activationGroupsList->includes(indexActivationGroups)))
 						{
 							_activationGroups->erase(indexActivationGroups);
 						}
@@ -855,7 +855,7 @@ bool ExpansionRegionActivationImpl::eSet(int featureID, const Any& newValue)
 
 					for(const std::shared_ptr<fUML::Semantics::Activities::ExpansionActivationGroup> indexActivationGroups: *activationGroupsList)
 					{
-						if (_activationGroups->find(indexActivationGroups) == -1)
+						if (!(_activationGroups->includes(indexActivationGroups)))
 						{
 							_activationGroups->add(indexActivationGroups);
 						}
@@ -884,7 +884,7 @@ bool ExpansionRegionActivationImpl::eSet(int featureID, const Any& newValue)
 					std::shared_ptr<Bag<fUML::Semantics::Activities::TokenSet>> _inputExpansionTokens=getInputExpansionTokens();
 					for(const std::shared_ptr<fUML::Semantics::Activities::TokenSet> indexInputExpansionTokens: *_inputExpansionTokens)
 					{
-						if (inputExpansionTokensList->find(indexInputExpansionTokens) == -1)
+						if (!(inputExpansionTokensList->includes(indexInputExpansionTokens)))
 						{
 							_inputExpansionTokens->erase(indexInputExpansionTokens);
 						}
@@ -892,7 +892,7 @@ bool ExpansionRegionActivationImpl::eSet(int featureID, const Any& newValue)
 
 					for(const std::shared_ptr<fUML::Semantics::Activities::TokenSet> indexInputExpansionTokens: *inputExpansionTokensList)
 					{
-						if (_inputExpansionTokens->find(indexInputExpansionTokens) == -1)
+						if (!(_inputExpansionTokens->includes(indexInputExpansionTokens)))
 						{
 							_inputExpansionTokens->add(indexInputExpansionTokens);
 						}
@@ -921,7 +921,7 @@ bool ExpansionRegionActivationImpl::eSet(int featureID, const Any& newValue)
 					std::shared_ptr<Bag<fUML::Semantics::Activities::TokenSet>> _inputTokens=getInputTokens();
 					for(const std::shared_ptr<fUML::Semantics::Activities::TokenSet> indexInputTokens: *_inputTokens)
 					{
-						if (inputTokensList->find(indexInputTokens) == -1)
+						if (!(inputTokensList->includes(indexInputTokens)))
 						{
 							_inputTokens->erase(indexInputTokens);
 						}
@@ -929,7 +929,7 @@ bool ExpansionRegionActivationImpl::eSet(int featureID, const Any& newValue)
 
 					for(const std::shared_ptr<fUML::Semantics::Activities::TokenSet> indexInputTokens: *inputTokensList)
 					{
-						if (_inputTokens->find(indexInputTokens) == -1)
+						if (!(_inputTokens->includes(indexInputTokens)))
 						{
 							_inputTokens->add(indexInputTokens);
 						}

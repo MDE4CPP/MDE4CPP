@@ -560,7 +560,7 @@ void ParameterImpl::resolveReferences(const int featureID, std::vector<std::shar
 
 		case uml::umlPackage::PARAMETER_ATTRIBUTE_PARAMETERSET:
 		{
-			std::shared_ptr<Bag<uml::ParameterSet>> _parameterSet = getParameterSet();
+			const std::shared_ptr<Bag<uml::ParameterSet>>& _parameterSet = getParameterSet();
 			for(std::shared_ptr<ecore::EObject> ref : references)
 			{
 				std::shared_ptr<uml::ParameterSet>  _r = std::dynamic_pointer_cast<uml::ParameterSet>(ref);
@@ -817,7 +817,7 @@ bool ParameterImpl::eSet(int featureID, const Any& newValue)
 					std::shared_ptr<Bag<uml::ParameterSet>> _parameterSet=getParameterSet();
 					for(const std::shared_ptr<uml::ParameterSet> indexParameterSet: *_parameterSet)
 					{
-						if (parameterSetList->find(indexParameterSet) == -1)
+						if (!(parameterSetList->includes(indexParameterSet)))
 						{
 							_parameterSet->erase(indexParameterSet);
 						}
@@ -825,7 +825,7 @@ bool ParameterImpl::eSet(int featureID, const Any& newValue)
 
 					for(const std::shared_ptr<uml::ParameterSet> indexParameterSet: *parameterSetList)
 					{
-						if (_parameterSet->find(indexParameterSet) == -1)
+						if (!(_parameterSet->includes(indexParameterSet)))
 						{
 							_parameterSet->add(indexParameterSet);
 						}

@@ -236,7 +236,7 @@ void CommentImpl::resolveReferences(const int featureID, std::vector<std::shared
 	{
 		case uml::umlPackage::COMMENT_ATTRIBUTE_ANNOTATEDELEMENT:
 		{
-			std::shared_ptr<Bag<uml::Element>> _annotatedElement = getAnnotatedElement();
+			const std::shared_ptr<Bag<uml::Element>>& _annotatedElement = getAnnotatedElement();
 			for(std::shared_ptr<ecore::EObject> ref : references)
 			{
 				std::shared_ptr<uml::Element>  _r = std::dynamic_pointer_cast<uml::Element>(ref);
@@ -328,7 +328,7 @@ bool CommentImpl::eSet(int featureID, const Any& newValue)
 					std::shared_ptr<Bag<uml::Element>> _annotatedElement=getAnnotatedElement();
 					for(const std::shared_ptr<uml::Element> indexAnnotatedElement: *_annotatedElement)
 					{
-						if (annotatedElementList->find(indexAnnotatedElement) == -1)
+						if (!(annotatedElementList->includes(indexAnnotatedElement)))
 						{
 							_annotatedElement->erase(indexAnnotatedElement);
 						}
@@ -336,7 +336,7 @@ bool CommentImpl::eSet(int featureID, const Any& newValue)
 
 					for(const std::shared_ptr<uml::Element> indexAnnotatedElement: *annotatedElementList)
 					{
-						if (_annotatedElement->find(indexAnnotatedElement) == -1)
+						if (!(_annotatedElement->includes(indexAnnotatedElement)))
 						{
 							_annotatedElement->add(indexAnnotatedElement);
 						}

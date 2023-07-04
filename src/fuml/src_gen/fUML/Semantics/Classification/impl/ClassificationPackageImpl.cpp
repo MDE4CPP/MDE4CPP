@@ -53,14 +53,14 @@ void ClassificationPackageImpl::init(std::shared_ptr<ecore::EPackage> package)
 
 
 // Begin Class InstanceValueEvaluation
-std::shared_ptr<ecore::EClass> fUML::Semantics::Classification::ClassificationPackageImpl::getInstanceValueEvaluation_Class() const
+const std::shared_ptr<ecore::EClass>& fUML::Semantics::Classification::ClassificationPackageImpl::getInstanceValueEvaluation_Class() const
 {
 	return m_instanceValueEvaluation_Class;
 }
 
 
 
-std::shared_ptr<ecore::EOperation> fUML::Semantics::Classification::ClassificationPackageImpl::getInstanceValueEvaluation_Operation_evaluate() const
+const std::shared_ptr<ecore::EOperation>& fUML::Semantics::Classification::ClassificationPackageImpl::getInstanceValueEvaluation_Operation_evaluate() const
 {
 	return m_instanceValueEvaluation_Operation_evaluate;
 }

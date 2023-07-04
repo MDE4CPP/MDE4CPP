@@ -521,7 +521,7 @@ void ActivityNodeImpl::resolveReferences(const int featureID, std::vector<std::s
 
 		case uml::umlPackage::ACTIVITYNODE_ATTRIBUTE_ININTERRUPTIBLEREGION:
 		{
-			std::shared_ptr<Subset<uml::InterruptibleActivityRegion, uml::ActivityGroup>> _inInterruptibleRegion = getInInterruptibleRegion();
+			const std::shared_ptr<Subset<uml::InterruptibleActivityRegion, uml::ActivityGroup>>& _inInterruptibleRegion = getInInterruptibleRegion();
 			for(std::shared_ptr<ecore::EObject> ref : references)
 			{
 				std::shared_ptr<uml::InterruptibleActivityRegion>  _r = std::dynamic_pointer_cast<uml::InterruptibleActivityRegion>(ref);
@@ -535,7 +535,7 @@ void ActivityNodeImpl::resolveReferences(const int featureID, std::vector<std::s
 
 		case uml::umlPackage::ACTIVITYNODE_ATTRIBUTE_INPARTITION:
 		{
-			std::shared_ptr<Subset<uml::ActivityPartition, uml::ActivityGroup>> _inPartition = getInPartition();
+			const std::shared_ptr<Subset<uml::ActivityPartition, uml::ActivityGroup>>& _inPartition = getInPartition();
 			for(std::shared_ptr<ecore::EObject> ref : references)
 			{
 				std::shared_ptr<uml::ActivityPartition>  _r = std::dynamic_pointer_cast<uml::ActivityPartition>(ref);
@@ -561,7 +561,7 @@ void ActivityNodeImpl::resolveReferences(const int featureID, std::vector<std::s
 
 		case uml::umlPackage::ACTIVITYNODE_ATTRIBUTE_INCOMING:
 		{
-			std::shared_ptr<Bag<uml::ActivityEdge>> _incoming = getIncoming();
+			const std::shared_ptr<Bag<uml::ActivityEdge>>& _incoming = getIncoming();
 			for(std::shared_ptr<ecore::EObject> ref : references)
 			{
 				std::shared_ptr<uml::ActivityEdge>  _r = std::dynamic_pointer_cast<uml::ActivityEdge>(ref);
@@ -575,7 +575,7 @@ void ActivityNodeImpl::resolveReferences(const int featureID, std::vector<std::s
 
 		case uml::umlPackage::ACTIVITYNODE_ATTRIBUTE_OUTGOING:
 		{
-			std::shared_ptr<Bag<uml::ActivityEdge>> _outgoing = getOutgoing();
+			const std::shared_ptr<Bag<uml::ActivityEdge>>& _outgoing = getOutgoing();
 			for(std::shared_ptr<ecore::EObject> ref : references)
 			{
 				std::shared_ptr<uml::ActivityEdge>  _r = std::dynamic_pointer_cast<uml::ActivityEdge>(ref);
@@ -589,7 +589,7 @@ void ActivityNodeImpl::resolveReferences(const int featureID, std::vector<std::s
 
 		case uml::umlPackage::ACTIVITYNODE_ATTRIBUTE_REDEFINEDNODE:
 		{
-			std::shared_ptr<Subset<uml::ActivityNode, uml::RedefinableElement>> _redefinedNode = getRedefinedNode();
+			const std::shared_ptr<Subset<uml::ActivityNode, uml::RedefinableElement>>& _redefinedNode = getRedefinedNode();
 			for(std::shared_ptr<ecore::EObject> ref : references)
 			{
 				std::shared_ptr<uml::ActivityNode>  _r = std::dynamic_pointer_cast<uml::ActivityNode>(ref);
@@ -722,7 +722,7 @@ bool ActivityNodeImpl::eSet(int featureID, const Any& newValue)
 					std::shared_ptr<Bag<uml::InterruptibleActivityRegion>> _inInterruptibleRegion=getInInterruptibleRegion();
 					for(const std::shared_ptr<uml::InterruptibleActivityRegion> indexInInterruptibleRegion: *_inInterruptibleRegion)
 					{
-						if (inInterruptibleRegionList->find(indexInInterruptibleRegion) == -1)
+						if (!(inInterruptibleRegionList->includes(indexInInterruptibleRegion)))
 						{
 							_inInterruptibleRegion->erase(indexInInterruptibleRegion);
 						}
@@ -730,7 +730,7 @@ bool ActivityNodeImpl::eSet(int featureID, const Any& newValue)
 
 					for(const std::shared_ptr<uml::InterruptibleActivityRegion> indexInInterruptibleRegion: *inInterruptibleRegionList)
 					{
-						if (_inInterruptibleRegion->find(indexInInterruptibleRegion) == -1)
+						if (!(_inInterruptibleRegion->includes(indexInInterruptibleRegion)))
 						{
 							_inInterruptibleRegion->add(indexInInterruptibleRegion);
 						}
@@ -759,7 +759,7 @@ bool ActivityNodeImpl::eSet(int featureID, const Any& newValue)
 					std::shared_ptr<Bag<uml::ActivityPartition>> _inPartition=getInPartition();
 					for(const std::shared_ptr<uml::ActivityPartition> indexInPartition: *_inPartition)
 					{
-						if (inPartitionList->find(indexInPartition) == -1)
+						if (!(inPartitionList->includes(indexInPartition)))
 						{
 							_inPartition->erase(indexInPartition);
 						}
@@ -767,7 +767,7 @@ bool ActivityNodeImpl::eSet(int featureID, const Any& newValue)
 
 					for(const std::shared_ptr<uml::ActivityPartition> indexInPartition: *inPartitionList)
 					{
-						if (_inPartition->find(indexInPartition) == -1)
+						if (!(_inPartition->includes(indexInPartition)))
 						{
 							_inPartition->add(indexInPartition);
 						}
@@ -804,7 +804,7 @@ bool ActivityNodeImpl::eSet(int featureID, const Any& newValue)
 					std::shared_ptr<Bag<uml::ActivityEdge>> _incoming=getIncoming();
 					for(const std::shared_ptr<uml::ActivityEdge> indexIncoming: *_incoming)
 					{
-						if (incomingList->find(indexIncoming) == -1)
+						if (!(incomingList->includes(indexIncoming)))
 						{
 							_incoming->erase(indexIncoming);
 						}
@@ -812,7 +812,7 @@ bool ActivityNodeImpl::eSet(int featureID, const Any& newValue)
 
 					for(const std::shared_ptr<uml::ActivityEdge> indexIncoming: *incomingList)
 					{
-						if (_incoming->find(indexIncoming) == -1)
+						if (!(_incoming->includes(indexIncoming)))
 						{
 							_incoming->add(indexIncoming);
 						}
@@ -841,7 +841,7 @@ bool ActivityNodeImpl::eSet(int featureID, const Any& newValue)
 					std::shared_ptr<Bag<uml::ActivityEdge>> _outgoing=getOutgoing();
 					for(const std::shared_ptr<uml::ActivityEdge> indexOutgoing: *_outgoing)
 					{
-						if (outgoingList->find(indexOutgoing) == -1)
+						if (!(outgoingList->includes(indexOutgoing)))
 						{
 							_outgoing->erase(indexOutgoing);
 						}
@@ -849,7 +849,7 @@ bool ActivityNodeImpl::eSet(int featureID, const Any& newValue)
 
 					for(const std::shared_ptr<uml::ActivityEdge> indexOutgoing: *outgoingList)
 					{
-						if (_outgoing->find(indexOutgoing) == -1)
+						if (!(_outgoing->includes(indexOutgoing)))
 						{
 							_outgoing->add(indexOutgoing);
 						}
@@ -878,7 +878,7 @@ bool ActivityNodeImpl::eSet(int featureID, const Any& newValue)
 					std::shared_ptr<Bag<uml::ActivityNode>> _redefinedNode=getRedefinedNode();
 					for(const std::shared_ptr<uml::ActivityNode> indexRedefinedNode: *_redefinedNode)
 					{
-						if (redefinedNodeList->find(indexRedefinedNode) == -1)
+						if (!(redefinedNodeList->includes(indexRedefinedNode)))
 						{
 							_redefinedNode->erase(indexRedefinedNode);
 						}
@@ -886,7 +886,7 @@ bool ActivityNodeImpl::eSet(int featureID, const Any& newValue)
 
 					for(const std::shared_ptr<uml::ActivityNode> indexRedefinedNode: *redefinedNodeList)
 					{
-						if (_redefinedNode->find(indexRedefinedNode) == -1)
+						if (!(_redefinedNode->includes(indexRedefinedNode)))
 						{
 							_redefinedNode->add(indexRedefinedNode);
 						}

@@ -614,7 +614,7 @@ bool ElementImpl::eSet(int featureID, const Any& newValue)
 					std::shared_ptr<Bag<uml::Comment>> _ownedComment=getOwnedComment();
 					for(const std::shared_ptr<uml::Comment> indexOwnedComment: *_ownedComment)
 					{
-						if (ownedCommentList->find(indexOwnedComment) == -1)
+						if (!(ownedCommentList->includes(indexOwnedComment)))
 						{
 							_ownedComment->erase(indexOwnedComment);
 						}
@@ -622,7 +622,7 @@ bool ElementImpl::eSet(int featureID, const Any& newValue)
 
 					for(const std::shared_ptr<uml::Comment> indexOwnedComment: *ownedCommentList)
 					{
-						if (_ownedComment->find(indexOwnedComment) == -1)
+						if (!(_ownedComment->includes(indexOwnedComment)))
 						{
 							_ownedComment->add(indexOwnedComment);
 						}

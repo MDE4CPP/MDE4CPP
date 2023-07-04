@@ -525,7 +525,7 @@ bool ExecutionImpl::eSet(int featureID, const Any& newValue)
 					std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> _parameterValues=getParameterValues();
 					for(const std::shared_ptr<fUML::Semantics::CommonBehavior::ParameterValue> indexParameterValues: *_parameterValues)
 					{
-						if (parameterValuesList->find(indexParameterValues) == -1)
+						if (!(parameterValuesList->includes(indexParameterValues)))
 						{
 							_parameterValues->erase(indexParameterValues);
 						}
@@ -533,7 +533,7 @@ bool ExecutionImpl::eSet(int featureID, const Any& newValue)
 
 					for(const std::shared_ptr<fUML::Semantics::CommonBehavior::ParameterValue> indexParameterValues: *parameterValuesList)
 					{
-						if (_parameterValues->find(indexParameterValues) == -1)
+						if (!(_parameterValues->includes(indexParameterValues)))
 						{
 							_parameterValues->add(indexParameterValues);
 						}

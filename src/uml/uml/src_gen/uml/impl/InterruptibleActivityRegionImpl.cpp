@@ -340,7 +340,7 @@ void InterruptibleActivityRegionImpl::resolveReferences(const int featureID, std
 	{
 		case uml::umlPackage::INTERRUPTIBLEACTIVITYREGION_ATTRIBUTE_INTERRUPTINGEDGE:
 		{
-			std::shared_ptr<Bag<uml::ActivityEdge>> _interruptingEdge = getInterruptingEdge();
+			const std::shared_ptr<Bag<uml::ActivityEdge>>& _interruptingEdge = getInterruptingEdge();
 			for(std::shared_ptr<ecore::EObject> ref : references)
 			{
 				std::shared_ptr<uml::ActivityEdge>  _r = std::dynamic_pointer_cast<uml::ActivityEdge>(ref);
@@ -354,7 +354,7 @@ void InterruptibleActivityRegionImpl::resolveReferences(const int featureID, std
 
 		case uml::umlPackage::INTERRUPTIBLEACTIVITYREGION_ATTRIBUTE_NODE:
 		{
-			std::shared_ptr<Subset<uml::ActivityNode, uml::ActivityNode>> _node = getNode();
+			const std::shared_ptr<Subset<uml::ActivityNode, uml::ActivityNode>>& _node = getNode();
 			for(std::shared_ptr<ecore::EObject> ref : references)
 			{
 				std::shared_ptr<uml::ActivityNode>  _r = std::dynamic_pointer_cast<uml::ActivityNode>(ref);
@@ -446,7 +446,7 @@ bool InterruptibleActivityRegionImpl::eSet(int featureID, const Any& newValue)
 					std::shared_ptr<Bag<uml::ActivityEdge>> _interruptingEdge=getInterruptingEdge();
 					for(const std::shared_ptr<uml::ActivityEdge> indexInterruptingEdge: *_interruptingEdge)
 					{
-						if (interruptingEdgeList->find(indexInterruptingEdge) == -1)
+						if (!(interruptingEdgeList->includes(indexInterruptingEdge)))
 						{
 							_interruptingEdge->erase(indexInterruptingEdge);
 						}
@@ -454,7 +454,7 @@ bool InterruptibleActivityRegionImpl::eSet(int featureID, const Any& newValue)
 
 					for(const std::shared_ptr<uml::ActivityEdge> indexInterruptingEdge: *interruptingEdgeList)
 					{
-						if (_interruptingEdge->find(indexInterruptingEdge) == -1)
+						if (!(_interruptingEdge->includes(indexInterruptingEdge)))
 						{
 							_interruptingEdge->add(indexInterruptingEdge);
 						}
@@ -483,7 +483,7 @@ bool InterruptibleActivityRegionImpl::eSet(int featureID, const Any& newValue)
 					std::shared_ptr<Bag<uml::ActivityNode>> _node=getNode();
 					for(const std::shared_ptr<uml::ActivityNode> indexNode: *_node)
 					{
-						if (nodeList->find(indexNode) == -1)
+						if (!(nodeList->includes(indexNode)))
 						{
 							_node->erase(indexNode);
 						}
@@ -491,7 +491,7 @@ bool InterruptibleActivityRegionImpl::eSet(int featureID, const Any& newValue)
 
 					for(const std::shared_ptr<uml::ActivityNode> indexNode: *nodeList)
 					{
-						if (_node->find(indexNode) == -1)
+						if (!(_node->includes(indexNode)))
 						{
 							_node->add(indexNode);
 						}

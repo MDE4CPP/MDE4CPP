@@ -180,7 +180,7 @@ namespace uml
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual const std::shared_ptr<Bag<uml::OutputPin>>& getResult() const = 0;
+			virtual std::shared_ptr<Bag<uml::OutputPin>> getResult() const = 0;
 
 			//*********************************
 			// Union Reference Getters

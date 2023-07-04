@@ -229,7 +229,7 @@ void LoopExpEvalImpl::resolveReferences(const int featureID, std::vector<std::sh
 	{
 		case ocl::Evaluations::EvaluationsPackage::LOOPEXPEVAL_ATTRIBUTE_BODYEVALS:
 		{
-			std::shared_ptr<Bag<ocl::Evaluations::OclExpEval>> _bodyEvals = getBodyEvals();
+			const std::shared_ptr<Bag<ocl::Evaluations::OclExpEval>>& _bodyEvals = getBodyEvals();
 			for(std::shared_ptr<ecore::EObject> ref : references)
 			{
 				std::shared_ptr<ocl::Evaluations::OclExpEval>  _r = std::dynamic_pointer_cast<ocl::Evaluations::OclExpEval>(ref);
@@ -243,7 +243,7 @@ void LoopExpEvalImpl::resolveReferences(const int featureID, std::vector<std::sh
 
 		case ocl::Evaluations::EvaluationsPackage::LOOPEXPEVAL_ATTRIBUTE_ITERATORS:
 		{
-			std::shared_ptr<Bag<fUML::Semantics::SimpleClassifiers::StringValue>> _iterators = getIterators();
+			const std::shared_ptr<Bag<fUML::Semantics::SimpleClassifiers::StringValue>>& _iterators = getIterators();
 			for(std::shared_ptr<ecore::EObject> ref : references)
 			{
 				std::shared_ptr<fUML::Semantics::SimpleClassifiers::StringValue>  _r = std::dynamic_pointer_cast<fUML::Semantics::SimpleClassifiers::StringValue>(ref);
@@ -335,7 +335,7 @@ bool LoopExpEvalImpl::eSet(int featureID, const Any& newValue)
 					std::shared_ptr<Bag<ocl::Evaluations::OclExpEval>> _bodyEvals=getBodyEvals();
 					for(const std::shared_ptr<ocl::Evaluations::OclExpEval> indexBodyEvals: *_bodyEvals)
 					{
-						if (bodyEvalsList->find(indexBodyEvals) == -1)
+						if (!(bodyEvalsList->includes(indexBodyEvals)))
 						{
 							_bodyEvals->erase(indexBodyEvals);
 						}
@@ -343,7 +343,7 @@ bool LoopExpEvalImpl::eSet(int featureID, const Any& newValue)
 
 					for(const std::shared_ptr<ocl::Evaluations::OclExpEval> indexBodyEvals: *bodyEvalsList)
 					{
-						if (_bodyEvals->find(indexBodyEvals) == -1)
+						if (!(_bodyEvals->includes(indexBodyEvals)))
 						{
 							_bodyEvals->add(indexBodyEvals);
 						}
@@ -372,7 +372,7 @@ bool LoopExpEvalImpl::eSet(int featureID, const Any& newValue)
 					std::shared_ptr<Bag<fUML::Semantics::SimpleClassifiers::StringValue>> _iterators=getIterators();
 					for(const std::shared_ptr<fUML::Semantics::SimpleClassifiers::StringValue> indexIterators: *_iterators)
 					{
-						if (iteratorsList->find(indexIterators) == -1)
+						if (!(iteratorsList->includes(indexIterators)))
 						{
 							_iterators->erase(indexIterators);
 						}
@@ -380,7 +380,7 @@ bool LoopExpEvalImpl::eSet(int featureID, const Any& newValue)
 
 					for(const std::shared_ptr<fUML::Semantics::SimpleClassifiers::StringValue> indexIterators: *iteratorsList)
 					{
-						if (_iterators->find(indexIterators) == -1)
+						if (!(_iterators->includes(indexIterators)))
 						{
 							_iterators->add(indexIterators);
 						}

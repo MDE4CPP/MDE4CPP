@@ -138,7 +138,7 @@ namespace uml
 			<p>From package UML::StructuredClassifiers.</p>
 			*/
 			
-			virtual const std::shared_ptr<Bag<uml::Property>>& getPart() const = 0;
+			virtual std::shared_ptr<Bag<uml::Property>> getPart() const = 0;
 			
 
 			//*********************************

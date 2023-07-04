@@ -193,7 +193,7 @@ void ValuesImpl::resolveReferences(const int featureID, std::vector<std::shared_
 	{
 		case fUML::Semantics::Actions::ActionsPackage::VALUES_ATTRIBUTE_VALUES:
 		{
-			std::shared_ptr<Bag<fUML::Semantics::Values::Value>> _values = getValues();
+			const std::shared_ptr<Bag<fUML::Semantics::Values::Value>>& _values = getValues();
 			for(std::shared_ptr<ecore::EObject> ref : references)
 			{
 				std::shared_ptr<fUML::Semantics::Values::Value>  _r = std::dynamic_pointer_cast<fUML::Semantics::Values::Value>(ref);
@@ -272,7 +272,7 @@ bool ValuesImpl::eSet(int featureID, const Any& newValue)
 					std::shared_ptr<Bag<fUML::Semantics::Values::Value>> _values=getValues();
 					for(const std::shared_ptr<fUML::Semantics::Values::Value> indexValues: *_values)
 					{
-						if (valuesList->find(indexValues) == -1)
+						if (!(valuesList->includes(indexValues)))
 						{
 							_values->erase(indexValues);
 						}
@@ -280,7 +280,7 @@ bool ValuesImpl::eSet(int featureID, const Any& newValue)
 
 					for(const std::shared_ptr<fUML::Semantics::Values::Value> indexValues: *valuesList)
 					{
-						if (_values->find(indexValues) == -1)
+						if (!(_values->includes(indexValues)))
 						{
 							_values->add(indexValues);
 						}

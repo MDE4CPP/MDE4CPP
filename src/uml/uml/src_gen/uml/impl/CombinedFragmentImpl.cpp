@@ -619,7 +619,7 @@ bool CombinedFragmentImpl::eSet(int featureID, const Any& newValue)
 					std::shared_ptr<Bag<uml::Gate>> _cfragmentGate=getCfragmentGate();
 					for(const std::shared_ptr<uml::Gate> indexCfragmentGate: *_cfragmentGate)
 					{
-						if (cfragmentGateList->find(indexCfragmentGate) == -1)
+						if (!(cfragmentGateList->includes(indexCfragmentGate)))
 						{
 							_cfragmentGate->erase(indexCfragmentGate);
 						}
@@ -627,7 +627,7 @@ bool CombinedFragmentImpl::eSet(int featureID, const Any& newValue)
 
 					for(const std::shared_ptr<uml::Gate> indexCfragmentGate: *cfragmentGateList)
 					{
-						if (_cfragmentGate->find(indexCfragmentGate) == -1)
+						if (!(_cfragmentGate->includes(indexCfragmentGate)))
 						{
 							_cfragmentGate->add(indexCfragmentGate);
 						}
@@ -663,7 +663,7 @@ bool CombinedFragmentImpl::eSet(int featureID, const Any& newValue)
 					std::shared_ptr<Bag<uml::InteractionOperand>> _operand=getOperand();
 					for(const std::shared_ptr<uml::InteractionOperand> indexOperand: *_operand)
 					{
-						if (operandList->find(indexOperand) == -1)
+						if (!(operandList->includes(indexOperand)))
 						{
 							_operand->erase(indexOperand);
 						}
@@ -671,7 +671,7 @@ bool CombinedFragmentImpl::eSet(int featureID, const Any& newValue)
 
 					for(const std::shared_ptr<uml::InteractionOperand> indexOperand: *operandList)
 					{
-						if (_operand->find(indexOperand) == -1)
+						if (!(_operand->includes(indexOperand)))
 						{
 							_operand->add(indexOperand);
 						}

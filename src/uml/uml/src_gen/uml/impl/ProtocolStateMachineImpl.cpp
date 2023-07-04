@@ -612,7 +612,7 @@ bool ProtocolStateMachineImpl::eSet(int featureID, const Any& newValue)
 					std::shared_ptr<Bag<uml::ProtocolConformance>> _conformance=getConformance();
 					for(const std::shared_ptr<uml::ProtocolConformance> indexConformance: *_conformance)
 					{
-						if (conformanceList->find(indexConformance) == -1)
+						if (!(conformanceList->includes(indexConformance)))
 						{
 							_conformance->erase(indexConformance);
 						}
@@ -620,7 +620,7 @@ bool ProtocolStateMachineImpl::eSet(int featureID, const Any& newValue)
 
 					for(const std::shared_ptr<uml::ProtocolConformance> indexConformance: *conformanceList)
 					{
-						if (_conformance->find(indexConformance) == -1)
+						if (!(_conformance->includes(indexConformance)))
 						{
 							_conformance->add(indexConformance);
 						}

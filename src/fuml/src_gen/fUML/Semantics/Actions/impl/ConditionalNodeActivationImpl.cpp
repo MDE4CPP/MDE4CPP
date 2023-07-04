@@ -297,7 +297,7 @@ void ConditionalNodeActivationImpl::resolveReferences(const int featureID, std::
 	{
 		case fUML::Semantics::Actions::ActionsPackage::CONDITIONALNODEACTIVATION_ATTRIBUTE_SELECTEDCLAUSES:
 		{
-			std::shared_ptr<Bag<uml::Clause>> _selectedClauses = getSelectedClauses();
+			const std::shared_ptr<Bag<uml::Clause>>& _selectedClauses = getSelectedClauses();
 			for(std::shared_ptr<ecore::EObject> ref : references)
 			{
 				std::shared_ptr<uml::Clause>  _r = std::dynamic_pointer_cast<uml::Clause>(ref);
@@ -395,7 +395,7 @@ bool ConditionalNodeActivationImpl::eSet(int featureID, const Any& newValue)
 					std::shared_ptr<Bag<fUML::Semantics::Actions::ClauseActivation>> _clauseActivations=getClauseActivations();
 					for(const std::shared_ptr<fUML::Semantics::Actions::ClauseActivation> indexClauseActivations: *_clauseActivations)
 					{
-						if (clauseActivationsList->find(indexClauseActivations) == -1)
+						if (!(clauseActivationsList->includes(indexClauseActivations)))
 						{
 							_clauseActivations->erase(indexClauseActivations);
 						}
@@ -403,7 +403,7 @@ bool ConditionalNodeActivationImpl::eSet(int featureID, const Any& newValue)
 
 					for(const std::shared_ptr<fUML::Semantics::Actions::ClauseActivation> indexClauseActivations: *clauseActivationsList)
 					{
-						if (_clauseActivations->find(indexClauseActivations) == -1)
+						if (!(_clauseActivations->includes(indexClauseActivations)))
 						{
 							_clauseActivations->add(indexClauseActivations);
 						}
@@ -432,7 +432,7 @@ bool ConditionalNodeActivationImpl::eSet(int featureID, const Any& newValue)
 					std::shared_ptr<Bag<uml::Clause>> _selectedClauses=getSelectedClauses();
 					for(const std::shared_ptr<uml::Clause> indexSelectedClauses: *_selectedClauses)
 					{
-						if (selectedClausesList->find(indexSelectedClauses) == -1)
+						if (!(selectedClausesList->includes(indexSelectedClauses)))
 						{
 							_selectedClauses->erase(indexSelectedClauses);
 						}
@@ -440,7 +440,7 @@ bool ConditionalNodeActivationImpl::eSet(int featureID, const Any& newValue)
 
 					for(const std::shared_ptr<uml::Clause> indexSelectedClauses: *selectedClausesList)
 					{
-						if (_selectedClauses->find(indexSelectedClauses) == -1)
+						if (!(_selectedClauses->includes(indexSelectedClauses)))
 						{
 							_selectedClauses->add(indexSelectedClauses);
 						}

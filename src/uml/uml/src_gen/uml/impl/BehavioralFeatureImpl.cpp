@@ -511,7 +511,7 @@ void BehavioralFeatureImpl::resolveReferences(const int featureID, std::vector<s
 	{
 		case uml::umlPackage::BEHAVIORALFEATURE_ATTRIBUTE_METHOD:
 		{
-			std::shared_ptr<Bag<uml::Behavior>> _method = getMethod();
+			const std::shared_ptr<Bag<uml::Behavior>>& _method = getMethod();
 			for(std::shared_ptr<ecore::EObject> ref : references)
 			{
 				std::shared_ptr<uml::Behavior>  _r = std::dynamic_pointer_cast<uml::Behavior>(ref);
@@ -525,7 +525,7 @@ void BehavioralFeatureImpl::resolveReferences(const int featureID, std::vector<s
 
 		case uml::umlPackage::BEHAVIORALFEATURE_ATTRIBUTE_RAISEDEXCEPTION:
 		{
-			std::shared_ptr<Bag<uml::Type>> _raisedException = getRaisedException();
+			const std::shared_ptr<Bag<uml::Type>>& _raisedException = getRaisedException();
 			for(std::shared_ptr<ecore::EObject> ref : references)
 			{
 				std::shared_ptr<uml::Type>  _r = std::dynamic_pointer_cast<uml::Type>(ref);
@@ -700,7 +700,7 @@ bool BehavioralFeatureImpl::eSet(int featureID, const Any& newValue)
 					std::shared_ptr<Bag<uml::Behavior>> _method=getMethod();
 					for(const std::shared_ptr<uml::Behavior> indexMethod: *_method)
 					{
-						if (methodList->find(indexMethod) == -1)
+						if (!(methodList->includes(indexMethod)))
 						{
 							_method->erase(indexMethod);
 						}
@@ -708,7 +708,7 @@ bool BehavioralFeatureImpl::eSet(int featureID, const Any& newValue)
 
 					for(const std::shared_ptr<uml::Behavior> indexMethod: *methodList)
 					{
-						if (_method->find(indexMethod) == -1)
+						if (!(_method->includes(indexMethod)))
 						{
 							_method->add(indexMethod);
 						}
@@ -737,7 +737,7 @@ bool BehavioralFeatureImpl::eSet(int featureID, const Any& newValue)
 					std::shared_ptr<Bag<uml::Parameter>> _ownedParameter=getOwnedParameter();
 					for(const std::shared_ptr<uml::Parameter> indexOwnedParameter: *_ownedParameter)
 					{
-						if (ownedParameterList->find(indexOwnedParameter) == -1)
+						if (!(ownedParameterList->includes(indexOwnedParameter)))
 						{
 							_ownedParameter->erase(indexOwnedParameter);
 						}
@@ -745,7 +745,7 @@ bool BehavioralFeatureImpl::eSet(int featureID, const Any& newValue)
 
 					for(const std::shared_ptr<uml::Parameter> indexOwnedParameter: *ownedParameterList)
 					{
-						if (_ownedParameter->find(indexOwnedParameter) == -1)
+						if (!(_ownedParameter->includes(indexOwnedParameter)))
 						{
 							_ownedParameter->add(indexOwnedParameter);
 						}
@@ -774,7 +774,7 @@ bool BehavioralFeatureImpl::eSet(int featureID, const Any& newValue)
 					std::shared_ptr<Bag<uml::ParameterSet>> _ownedParameterSet=getOwnedParameterSet();
 					for(const std::shared_ptr<uml::ParameterSet> indexOwnedParameterSet: *_ownedParameterSet)
 					{
-						if (ownedParameterSetList->find(indexOwnedParameterSet) == -1)
+						if (!(ownedParameterSetList->includes(indexOwnedParameterSet)))
 						{
 							_ownedParameterSet->erase(indexOwnedParameterSet);
 						}
@@ -782,7 +782,7 @@ bool BehavioralFeatureImpl::eSet(int featureID, const Any& newValue)
 
 					for(const std::shared_ptr<uml::ParameterSet> indexOwnedParameterSet: *ownedParameterSetList)
 					{
-						if (_ownedParameterSet->find(indexOwnedParameterSet) == -1)
+						if (!(_ownedParameterSet->includes(indexOwnedParameterSet)))
 						{
 							_ownedParameterSet->add(indexOwnedParameterSet);
 						}
@@ -811,7 +811,7 @@ bool BehavioralFeatureImpl::eSet(int featureID, const Any& newValue)
 					std::shared_ptr<Bag<uml::Type>> _raisedException=getRaisedException();
 					for(const std::shared_ptr<uml::Type> indexRaisedException: *_raisedException)
 					{
-						if (raisedExceptionList->find(indexRaisedException) == -1)
+						if (!(raisedExceptionList->includes(indexRaisedException)))
 						{
 							_raisedException->erase(indexRaisedException);
 						}
@@ -819,7 +819,7 @@ bool BehavioralFeatureImpl::eSet(int featureID, const Any& newValue)
 
 					for(const std::shared_ptr<uml::Type> indexRaisedException: *raisedExceptionList)
 					{
-						if (_raisedException->find(indexRaisedException) == -1)
+						if (!(_raisedException->includes(indexRaisedException)))
 						{
 							_raisedException->add(indexRaisedException);
 						}

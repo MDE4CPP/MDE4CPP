@@ -295,7 +295,7 @@ const std::shared_ptr<Subset<uml::Connector, uml::Feature, uml::NamedElement>>& 
 }
 
 /* Getter & Setter for reference part */
-const std::shared_ptr<Bag<uml::Property>>& StructuredClassifierImpl::getPart() const
+std::shared_ptr<Bag<uml::Property>> StructuredClassifierImpl::getPart() const
 {
 	//generated from getterBody annotation
 	std::shared_ptr<SubsetUnion<uml::Property, uml::ConnectableElement, uml::NamedElement, uml::Property>> ownedAttribute = this->getOwnedAttribute();
@@ -665,7 +665,7 @@ bool StructuredClassifierImpl::eSet(int featureID, const Any& newValue)
 					std::shared_ptr<Bag<uml::Property>> _ownedAttribute=getOwnedAttribute();
 					for(const std::shared_ptr<uml::Property> indexOwnedAttribute: *_ownedAttribute)
 					{
-						if (ownedAttributeList->find(indexOwnedAttribute) == -1)
+						if (!(ownedAttributeList->includes(indexOwnedAttribute)))
 						{
 							_ownedAttribute->erase(indexOwnedAttribute);
 						}
@@ -673,7 +673,7 @@ bool StructuredClassifierImpl::eSet(int featureID, const Any& newValue)
 
 					for(const std::shared_ptr<uml::Property> indexOwnedAttribute: *ownedAttributeList)
 					{
-						if (_ownedAttribute->find(indexOwnedAttribute) == -1)
+						if (!(_ownedAttribute->includes(indexOwnedAttribute)))
 						{
 							_ownedAttribute->add(indexOwnedAttribute);
 						}
@@ -702,7 +702,7 @@ bool StructuredClassifierImpl::eSet(int featureID, const Any& newValue)
 					std::shared_ptr<Bag<uml::Connector>> _ownedConnector=getOwnedConnector();
 					for(const std::shared_ptr<uml::Connector> indexOwnedConnector: *_ownedConnector)
 					{
-						if (ownedConnectorList->find(indexOwnedConnector) == -1)
+						if (!(ownedConnectorList->includes(indexOwnedConnector)))
 						{
 							_ownedConnector->erase(indexOwnedConnector);
 						}
@@ -710,7 +710,7 @@ bool StructuredClassifierImpl::eSet(int featureID, const Any& newValue)
 
 					for(const std::shared_ptr<uml::Connector> indexOwnedConnector: *ownedConnectorList)
 					{
-						if (_ownedConnector->find(indexOwnedConnector) == -1)
+						if (!(_ownedConnector->includes(indexOwnedConnector)))
 						{
 							_ownedConnector->add(indexOwnedConnector);
 						}

@@ -77,10 +77,10 @@ namespace fUML::Semantics::CommonBehavior
 			
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getCallEventBehavior_Class() const = 0;
+			virtual const std::shared_ptr<ecore::EClass>& getCallEventBehavior_Class() const = 0;
 			
 			
-			virtual std::shared_ptr<ecore::EReference> getCallEventBehavior_Attribute_operation() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getCallEventBehavior_Attribute_operation() const = 0;
 			
 			
 			// End Class CallEventBehavior
@@ -108,23 +108,23 @@ namespace fUML::Semantics::CommonBehavior
 			static const unsigned int CALLEVENTEXECUTION_OPERATION_WAIT_ = 3761191063;
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getCallEventExecution_Class() const = 0;
+			virtual const std::shared_ptr<ecore::EClass>& getCallEventExecution_Class() const = 0;
 			
-			virtual std::shared_ptr<ecore::EAttribute> getCallEventExecution_Attribute_callerSuspended() const = 0;
+			virtual const std::shared_ptr<ecore::EAttribute>& getCallEventExecution_Attribute_callerSuspended() const = 0;
 			
 			
-			virtual std::shared_ptr<ecore::EOperation> getCallEventExecution_Operation__copy() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getCallEventExecution_Operation_createEventOccurrence() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getCallEventExecution_Operation_execute() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getCallEventExecution_Operation_getInputParameterValues() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getCallEventExecution_Operation_getOperation() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getCallEventExecution_Operation_isCallerSuspended() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getCallEventExecution_Operation_makeCall() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getCallEventExecution_Operation_new_() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getCallEventExecution_Operation_releaseCaller() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getCallEventExecution_Operation_setOutputParameterValues_ParameterValue() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getCallEventExecution_Operation_suspendCaller() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getCallEventExecution_Operation_wait_() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getCallEventExecution_Operation__copy() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getCallEventExecution_Operation_createEventOccurrence() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getCallEventExecution_Operation_execute() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getCallEventExecution_Operation_getInputParameterValues() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getCallEventExecution_Operation_getOperation() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getCallEventExecution_Operation_isCallerSuspended() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getCallEventExecution_Operation_makeCall() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getCallEventExecution_Operation_new_() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getCallEventExecution_Operation_releaseCaller() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getCallEventExecution_Operation_setOutputParameterValues_ParameterValue() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getCallEventExecution_Operation_suspendCaller() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getCallEventExecution_Operation_wait_() const = 0;
 			
 			// End Class CallEventExecution
 
@@ -144,16 +144,16 @@ namespace fUML::Semantics::CommonBehavior
 			static const unsigned int CALLEVENTOCCURRENCE_OPERATION_SETOUTPUTPARAMETERVALUES_PARAMETERVALUE = 2726106774;
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getCallEventOccurrence_Class() const = 0;
+			virtual const std::shared_ptr<ecore::EClass>& getCallEventOccurrence_Class() const = 0;
 			
 			
-			virtual std::shared_ptr<ecore::EReference> getCallEventOccurrence_Attribute_execution() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getCallEventOccurrence_Attribute_execution() const = 0;
 			
-			virtual std::shared_ptr<ecore::EOperation> getCallEventOccurrence_Operation_getOperation() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getCallEventOccurrence_Operation_getParameterValues() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getCallEventOccurrence_Operation_match_Trigger() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getCallEventOccurrence_Operation_releaseCaller() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getCallEventOccurrence_Operation_setOutputParameterValues_ParameterValue() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getCallEventOccurrence_Operation_getOperation() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getCallEventOccurrence_Operation_getParameterValues() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getCallEventOccurrence_Operation_match_Trigger() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getCallEventOccurrence_Operation_releaseCaller() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getCallEventOccurrence_Operation_setOutputParameterValues_ParameterValue() const = 0;
 			
 			// End Class CallEventOccurrence
 
@@ -173,16 +173,16 @@ namespace fUML::Semantics::CommonBehavior
 			static const unsigned int CLASSIFIERBEHAVIOREXECUTION_OPERATION_TERMINATE = 4162680347;
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getClassifierBehaviorExecution_Class() const = 0;
+			virtual const std::shared_ptr<ecore::EClass>& getClassifierBehaviorExecution_Class() const = 0;
 			
 			
-			virtual std::shared_ptr<ecore::EReference> getClassifierBehaviorExecution_Attribute_classifier() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getClassifierBehaviorExecution_Attribute_execution() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getClassifierBehaviorExecution_Attribute_objectActivation() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getClassifierBehaviorExecution_Attribute_classifier() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getClassifierBehaviorExecution_Attribute_execution() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getClassifierBehaviorExecution_Attribute_objectActivation() const = 0;
 			
-			virtual std::shared_ptr<ecore::EOperation> getClassifierBehaviorExecution_Operation__startObjectBehavior() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getClassifierBehaviorExecution_Operation_execute_Class_ParameterValue() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getClassifierBehaviorExecution_Operation_terminate() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getClassifierBehaviorExecution_Operation__startObjectBehavior() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getClassifierBehaviorExecution_Operation_execute_Class_ParameterValue() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getClassifierBehaviorExecution_Operation_terminate() const = 0;
 			
 			// End Class ClassifierBehaviorExecution
 
@@ -202,16 +202,16 @@ namespace fUML::Semantics::CommonBehavior
 			static const unsigned int CLASSIFIERBEHAVIORINVOCATIONEVENTACCEPTER_OPERATION_TERMINATE = 1434169574;
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getClassifierBehaviorInvocationEventAccepter_Class() const = 0;
+			virtual const std::shared_ptr<ecore::EClass>& getClassifierBehaviorInvocationEventAccepter_Class() const = 0;
 			
 			
-			virtual std::shared_ptr<ecore::EReference> getClassifierBehaviorInvocationEventAccepter_Attribute_classifier() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getClassifierBehaviorInvocationEventAccepter_Attribute_execution() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getClassifierBehaviorInvocationEventAccepter_Attribute_objectActivation() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getClassifierBehaviorInvocationEventAccepter_Attribute_classifier() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getClassifierBehaviorInvocationEventAccepter_Attribute_execution() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getClassifierBehaviorInvocationEventAccepter_Attribute_objectActivation() const = 0;
 			
-			virtual std::shared_ptr<ecore::EOperation> getClassifierBehaviorInvocationEventAccepter_Operation_accept_EventOccurrence() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getClassifierBehaviorInvocationEventAccepter_Operation_match_EventOccurrence() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getClassifierBehaviorInvocationEventAccepter_Operation_terminate() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getClassifierBehaviorInvocationEventAccepter_Operation_accept_EventOccurrence() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getClassifierBehaviorInvocationEventAccepter_Operation_match_EventOccurrence() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getClassifierBehaviorInvocationEventAccepter_Operation_terminate() const = 0;
 			
 			// End Class ClassifierBehaviorInvocationEventAccepter
 
@@ -227,12 +227,12 @@ namespace fUML::Semantics::CommonBehavior
 			static const unsigned int EVENTACCEPTER_OPERATION_MATCH_EVENTOCCURRENCE = 1694626268;
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getEventAccepter_Class() const = 0;
+			virtual const std::shared_ptr<ecore::EClass>& getEventAccepter_Class() const = 0;
 			
 			
 			
-			virtual std::shared_ptr<ecore::EOperation> getEventAccepter_Operation_accept_EventOccurrence() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getEventAccepter_Operation_match_EventOccurrence() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getEventAccepter_Operation_accept_EventOccurrence() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getEventAccepter_Operation_match_EventOccurrence() const = 0;
 			
 			// End Class EventAccepter
 
@@ -246,7 +246,7 @@ namespace fUML::Semantics::CommonBehavior
 			
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getEventDispatchLoop_Class() const = 0;
+			virtual const std::shared_ptr<ecore::EClass>& getEventDispatchLoop_Class() const = 0;
 			
 			
 			
@@ -270,17 +270,17 @@ namespace fUML::Semantics::CommonBehavior
 			static const unsigned int EVENTOCCURRENCE_OPERATION_SENDTO_REFERENCE = 1965482620;
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getEventOccurrence_Class() const = 0;
+			virtual const std::shared_ptr<ecore::EClass>& getEventOccurrence_Class() const = 0;
 			
 			
-			virtual std::shared_ptr<ecore::EReference> getEventOccurrence_Attribute_target() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getEventOccurrence_Attribute_target() const = 0;
 			
-			virtual std::shared_ptr<ecore::EOperation> getEventOccurrence_Operation_doSend() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getEventOccurrence_Operation_getParameterValues_Event() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getEventOccurrence_Operation_getParameterValues() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getEventOccurrence_Operation_match_Trigger() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getEventOccurrence_Operation_matchAny_Trigger() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getEventOccurrence_Operation_sendTo_Reference() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getEventOccurrence_Operation_doSend() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getEventOccurrence_Operation_getParameterValues_Event() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getEventOccurrence_Operation_getParameterValues() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getEventOccurrence_Operation_match_Trigger() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getEventOccurrence_Operation_matchAny_Trigger() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getEventOccurrence_Operation_sendTo_Reference() const = 0;
 			
 			// End Class EventOccurrence
 
@@ -304,20 +304,20 @@ namespace fUML::Semantics::CommonBehavior
 			static const unsigned int EXECUTION_OPERATION_TERMINATE = 1246638906;
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getExecution_Class() const = 0;
+			virtual const std::shared_ptr<ecore::EClass>& getExecution_Class() const = 0;
 			
 			
-			virtual std::shared_ptr<ecore::EReference> getExecution_Attribute_behavior() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getExecution_Attribute_context() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getExecution_Attribute_parameterValues() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getExecution_Attribute_behavior() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getExecution_Attribute_context() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getExecution_Attribute_parameterValues() const = 0;
 			
-			virtual std::shared_ptr<ecore::EOperation> getExecution_Operation__copy() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getExecution_Operation_execute() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getExecution_Operation_getOutputParameterValues() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getExecution_Operation_getParameterValue_Parameter() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getExecution_Operation_new_() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getExecution_Operation_setParameterValue_ParameterValue() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getExecution_Operation_terminate() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getExecution_Operation__copy() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getExecution_Operation_execute() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getExecution_Operation_getOutputParameterValues() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getExecution_Operation_getParameterValue_Parameter() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getExecution_Operation_new_() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getExecution_Operation_setParameterValue_ParameterValue() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getExecution_Operation_terminate() const = 0;
 			
 			// End Class Execution
 
@@ -332,11 +332,11 @@ namespace fUML::Semantics::CommonBehavior
 			static const unsigned int FIFOGETNEXTEVENTSTRATEGY_OPERATION_RETRIEVENEXTEVENT_OBJECTACTIVATION = 2695220542;
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getFIFOGetNextEventStrategy_Class() const = 0;
+			virtual const std::shared_ptr<ecore::EClass>& getFIFOGetNextEventStrategy_Class() const = 0;
 			
 			
 			
-			virtual std::shared_ptr<ecore::EOperation> getFIFOGetNextEventStrategy_Operation_retrieveNextEvent_ObjectActivation() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getFIFOGetNextEventStrategy_Operation_retrieveNextEvent_ObjectActivation() const = 0;
 			
 			// End Class FIFOGetNextEventStrategy
 
@@ -352,12 +352,12 @@ namespace fUML::Semantics::CommonBehavior
 			static const unsigned int GETNEXTEVENTSTRATEGY_OPERATION_RETRIEVENEXTEVENT_OBJECTACTIVATION = 3970005938;
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getGetNextEventStrategy_Class() const = 0;
+			virtual const std::shared_ptr<ecore::EClass>& getGetNextEventStrategy_Class() const = 0;
 			
 			
 			
-			virtual std::shared_ptr<ecore::EOperation> getGetNextEventStrategy_Operation_getName() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getGetNextEventStrategy_Operation_retrieveNextEvent_ObjectActivation() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getGetNextEventStrategy_Operation_getName() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getGetNextEventStrategy_Operation_retrieveNextEvent_ObjectActivation() const = 0;
 			
 			// End Class GetNextEventStrategy
 
@@ -374,13 +374,13 @@ namespace fUML::Semantics::CommonBehavior
 			static const unsigned int INVOCATIONEVENTOCCURRENCE_OPERATION_MATCH_TRIGGER = 1234869067;
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getInvocationEventOccurrence_Class() const = 0;
+			virtual const std::shared_ptr<ecore::EClass>& getInvocationEventOccurrence_Class() const = 0;
 			
 			
-			virtual std::shared_ptr<ecore::EReference> getInvocationEventOccurrence_Attribute_execution() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getInvocationEventOccurrence_Attribute_execution() const = 0;
 			
-			virtual std::shared_ptr<ecore::EOperation> getInvocationEventOccurrence_Operation_getParameterValues() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getInvocationEventOccurrence_Operation_match_Trigger() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getInvocationEventOccurrence_Operation_getParameterValues() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getInvocationEventOccurrence_Operation_match_Trigger() const = 0;
 			
 			// End Class InvocationEventOccurrence
 
@@ -407,23 +407,23 @@ namespace fUML::Semantics::CommonBehavior
 			static const unsigned int OBJECTACTIVATION_OPERATION_UNREGISTER_EVENTACCEPTER = 1357284263;
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getObjectActivation_Class() const = 0;
+			virtual const std::shared_ptr<ecore::EClass>& getObjectActivation_Class() const = 0;
 			
 			
-			virtual std::shared_ptr<ecore::EReference> getObjectActivation_Attribute_classifierBehaviorExecutions() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getObjectActivation_Attribute_eventPool() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getObjectActivation_Attribute_object() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getObjectActivation_Attribute_waitingEventAccepters() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getObjectActivation_Attribute_classifierBehaviorExecutions() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getObjectActivation_Attribute_eventPool() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getObjectActivation_Attribute_object() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getObjectActivation_Attribute_waitingEventAccepters() const = 0;
 			
-			virtual std::shared_ptr<ecore::EOperation> getObjectActivation_Operation__register_EventAccepter() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getObjectActivation_Operation__send_EventOccurrence() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getObjectActivation_Operation__startObjectBehavior() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getObjectActivation_Operation_dispatchNextEvent() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getObjectActivation_Operation_retrieveNextEvent() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getObjectActivation_Operation_send_EventOccurrence() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getObjectActivation_Operation_startBehavior_Class_ParameterValue() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getObjectActivation_Operation_stop() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getObjectActivation_Operation_unregister_EventAccepter() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getObjectActivation_Operation__register_EventAccepter() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getObjectActivation_Operation__send_EventOccurrence() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getObjectActivation_Operation__startObjectBehavior() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getObjectActivation_Operation_dispatchNextEvent() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getObjectActivation_Operation_retrieveNextEvent() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getObjectActivation_Operation_send_EventOccurrence() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getObjectActivation_Operation_startBehavior_Class_ParameterValue() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getObjectActivation_Operation_stop() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getObjectActivation_Operation_unregister_EventAccepter() const = 0;
 			
 			// End Class ObjectActivation
 
@@ -439,12 +439,12 @@ namespace fUML::Semantics::CommonBehavior
 			static const unsigned int OPAQUEBEHAVIOREXECUTION_OPERATION_EXECUTE = 3076952147;
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getOpaqueBehaviorExecution_Class() const = 0;
+			virtual const std::shared_ptr<ecore::EClass>& getOpaqueBehaviorExecution_Class() const = 0;
 			
 			
 			
-			virtual std::shared_ptr<ecore::EOperation> getOpaqueBehaviorExecution_Operation_doBody_ParameterValue_ParameterValue() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getOpaqueBehaviorExecution_Operation_execute() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getOpaqueBehaviorExecution_Operation_doBody_ParameterValue_ParameterValue() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getOpaqueBehaviorExecution_Operation_execute() const = 0;
 			
 			// End Class OpaqueBehaviorExecution
 
@@ -461,13 +461,13 @@ namespace fUML::Semantics::CommonBehavior
 			static const unsigned int PARAMETERVALUE_OPERATION__COPY = 2742640749;
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getParameterValue_Class() const = 0;
+			virtual const std::shared_ptr<ecore::EClass>& getParameterValue_Class() const = 0;
 			
 			
-			virtual std::shared_ptr<ecore::EReference> getParameterValue_Attribute_parameter() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getParameterValue_Attribute_values() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getParameterValue_Attribute_parameter() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getParameterValue_Attribute_values() const = 0;
 			
-			virtual std::shared_ptr<ecore::EOperation> getParameterValue_Operation__copy() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getParameterValue_Operation__copy() const = 0;
 			
 			// End Class ParameterValue
 
@@ -484,13 +484,13 @@ namespace fUML::Semantics::CommonBehavior
 			static const unsigned int SIGNALEVENTOCCURRENCE_OPERATION_MATCH_TRIGGER = 2137384271;
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getSignalEventOccurrence_Class() const = 0;
+			virtual const std::shared_ptr<ecore::EClass>& getSignalEventOccurrence_Class() const = 0;
 			
 			
-			virtual std::shared_ptr<ecore::EReference> getSignalEventOccurrence_Attribute_signalInstance() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getSignalEventOccurrence_Attribute_signalInstance() const = 0;
 			
-			virtual std::shared_ptr<ecore::EOperation> getSignalEventOccurrence_Operation_getParameterValues_Event() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getSignalEventOccurrence_Operation_match_Trigger() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getSignalEventOccurrence_Operation_getParameterValues_Event() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getSignalEventOccurrence_Operation_match_Trigger() const = 0;
 			
 			// End Class SignalEventOccurrence
 

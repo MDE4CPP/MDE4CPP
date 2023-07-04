@@ -245,7 +245,7 @@ void OclMessageExpEvalImpl::resolveReferences(const int featureID, std::vector<s
 	{
 		case ocl::Evaluations::EvaluationsPackage::OCLMESSAGEEXPEVAL_ATTRIBUTE_ARGUMENTS:
 		{
-			std::shared_ptr<Bag<ocl::Evaluations::OclMessageArgEval>> _arguments = getArguments();
+			const std::shared_ptr<Bag<ocl::Evaluations::OclMessageArgEval>>& _arguments = getArguments();
 			for(std::shared_ptr<ecore::EObject> ref : references)
 			{
 				std::shared_ptr<ocl::Evaluations::OclMessageArgEval>  _r = std::dynamic_pointer_cast<ocl::Evaluations::OclMessageArgEval>(ref);
@@ -356,7 +356,7 @@ bool OclMessageExpEvalImpl::eSet(int featureID, const Any& newValue)
 					std::shared_ptr<Bag<ocl::Evaluations::OclMessageArgEval>> _arguments=getArguments();
 					for(const std::shared_ptr<ocl::Evaluations::OclMessageArgEval> indexArguments: *_arguments)
 					{
-						if (argumentsList->find(indexArguments) == -1)
+						if (!(argumentsList->includes(indexArguments)))
 						{
 							_arguments->erase(indexArguments);
 						}
@@ -364,7 +364,7 @@ bool OclMessageExpEvalImpl::eSet(int featureID, const Any& newValue)
 
 					for(const std::shared_ptr<ocl::Evaluations::OclMessageArgEval> indexArguments: *argumentsList)
 					{
-						if (_arguments->find(indexArguments) == -1)
+						if (!(_arguments->includes(indexArguments)))
 						{
 							_arguments->add(indexArguments);
 						}

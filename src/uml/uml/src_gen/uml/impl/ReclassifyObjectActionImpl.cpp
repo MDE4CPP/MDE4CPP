@@ -420,7 +420,7 @@ void ReclassifyObjectActionImpl::resolveReferences(const int featureID, std::vec
 	{
 		case uml::umlPackage::RECLASSIFYOBJECTACTION_ATTRIBUTE_NEWCLASSIFIER:
 		{
-			std::shared_ptr<Bag<uml::Classifier>> _newClassifier = getNewClassifier();
+			const std::shared_ptr<Bag<uml::Classifier>>& _newClassifier = getNewClassifier();
 			for(std::shared_ptr<ecore::EObject> ref : references)
 			{
 				std::shared_ptr<uml::Classifier>  _r = std::dynamic_pointer_cast<uml::Classifier>(ref);
@@ -434,7 +434,7 @@ void ReclassifyObjectActionImpl::resolveReferences(const int featureID, std::vec
 
 		case uml::umlPackage::RECLASSIFYOBJECTACTION_ATTRIBUTE_OLDCLASSIFIER:
 		{
-			std::shared_ptr<Bag<uml::Classifier>> _oldClassifier = getOldClassifier();
+			const std::shared_ptr<Bag<uml::Classifier>>& _oldClassifier = getOldClassifier();
 			for(std::shared_ptr<ecore::EObject> ref : references)
 			{
 				std::shared_ptr<uml::Classifier>  _r = std::dynamic_pointer_cast<uml::Classifier>(ref);
@@ -558,7 +558,7 @@ bool ReclassifyObjectActionImpl::eSet(int featureID, const Any& newValue)
 					std::shared_ptr<Bag<uml::Classifier>> _newClassifier=getNewClassifier();
 					for(const std::shared_ptr<uml::Classifier> indexNewClassifier: *_newClassifier)
 					{
-						if (newClassifierList->find(indexNewClassifier) == -1)
+						if (!(newClassifierList->includes(indexNewClassifier)))
 						{
 							_newClassifier->erase(indexNewClassifier);
 						}
@@ -566,7 +566,7 @@ bool ReclassifyObjectActionImpl::eSet(int featureID, const Any& newValue)
 
 					for(const std::shared_ptr<uml::Classifier> indexNewClassifier: *newClassifierList)
 					{
-						if (_newClassifier->find(indexNewClassifier) == -1)
+						if (!(_newClassifier->includes(indexNewClassifier)))
 						{
 							_newClassifier->add(indexNewClassifier);
 						}
@@ -603,7 +603,7 @@ bool ReclassifyObjectActionImpl::eSet(int featureID, const Any& newValue)
 					std::shared_ptr<Bag<uml::Classifier>> _oldClassifier=getOldClassifier();
 					for(const std::shared_ptr<uml::Classifier> indexOldClassifier: *_oldClassifier)
 					{
-						if (oldClassifierList->find(indexOldClassifier) == -1)
+						if (!(oldClassifierList->includes(indexOldClassifier)))
 						{
 							_oldClassifier->erase(indexOldClassifier);
 						}
@@ -611,7 +611,7 @@ bool ReclassifyObjectActionImpl::eSet(int featureID, const Any& newValue)
 
 					for(const std::shared_ptr<uml::Classifier> indexOldClassifier: *oldClassifierList)
 					{
-						if (_oldClassifier->find(indexOldClassifier) == -1)
+						if (!(_oldClassifier->includes(indexOldClassifier)))
 						{
 							_oldClassifier->add(indexOldClassifier);
 						}

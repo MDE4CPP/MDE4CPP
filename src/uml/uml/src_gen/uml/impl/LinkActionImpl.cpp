@@ -539,7 +539,7 @@ bool LinkActionImpl::eSet(int featureID, const Any& newValue)
 					std::shared_ptr<Bag<uml::LinkEndData>> _endData=getEndData();
 					for(const std::shared_ptr<uml::LinkEndData> indexEndData: *_endData)
 					{
-						if (endDataList->find(indexEndData) == -1)
+						if (!(endDataList->includes(indexEndData)))
 						{
 							_endData->erase(indexEndData);
 						}
@@ -547,7 +547,7 @@ bool LinkActionImpl::eSet(int featureID, const Any& newValue)
 
 					for(const std::shared_ptr<uml::LinkEndData> indexEndData: *endDataList)
 					{
-						if (_endData->find(indexEndData) == -1)
+						if (!(_endData->includes(indexEndData)))
 						{
 							_endData->add(indexEndData);
 						}
@@ -576,7 +576,7 @@ bool LinkActionImpl::eSet(int featureID, const Any& newValue)
 					std::shared_ptr<Bag<uml::InputPin>> _inputValue=getInputValue();
 					for(const std::shared_ptr<uml::InputPin> indexInputValue: *_inputValue)
 					{
-						if (inputValueList->find(indexInputValue) == -1)
+						if (!(inputValueList->includes(indexInputValue)))
 						{
 							_inputValue->erase(indexInputValue);
 						}
@@ -584,7 +584,7 @@ bool LinkActionImpl::eSet(int featureID, const Any& newValue)
 
 					for(const std::shared_ptr<uml::InputPin> indexInputValue: *inputValueList)
 					{
-						if (_inputValue->find(indexInputValue) == -1)
+						if (!(_inputValue->includes(indexInputValue)))
 						{
 							_inputValue->add(indexInputValue);
 						}

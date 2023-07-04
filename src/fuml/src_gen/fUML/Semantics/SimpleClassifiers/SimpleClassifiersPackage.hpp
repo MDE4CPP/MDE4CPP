@@ -78,16 +78,16 @@ namespace fUML::Semantics::SimpleClassifiers
 			static const unsigned int BOOLEANVALUE_OPERATION_TOSTRING = 3084939113;
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getBooleanValue_Class() const = 0;
+			virtual const std::shared_ptr<ecore::EClass>& getBooleanValue_Class() const = 0;
 			
-			virtual std::shared_ptr<ecore::EAttribute> getBooleanValue_Attribute_value() const = 0;
+			virtual const std::shared_ptr<ecore::EAttribute>& getBooleanValue_Attribute_value() const = 0;
 			
 			
-			virtual std::shared_ptr<ecore::EOperation> getBooleanValue_Operation__copy() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getBooleanValue_Operation_equals_Value() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getBooleanValue_Operation_new_() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getBooleanValue_Operation_specify() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getBooleanValue_Operation_toString() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getBooleanValue_Operation__copy() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getBooleanValue_Operation_equals_Value() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getBooleanValue_Operation_new_() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getBooleanValue_Operation_specify() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getBooleanValue_Operation_toString() const = 0;
 			
 			// End Class BooleanValue
 
@@ -109,18 +109,18 @@ namespace fUML::Semantics::SimpleClassifiers
 			static const unsigned int COMPOUNDVALUE_OPERATION_TOSTRING = 1658148174;
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getCompoundValue_Class() const = 0;
+			virtual const std::shared_ptr<ecore::EClass>& getCompoundValue_Class() const = 0;
 			
 			
-			virtual std::shared_ptr<ecore::EReference> getCompoundValue_Attribute_featureValues() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getCompoundValue_Attribute_featureValues() const = 0;
 			
-			virtual std::shared_ptr<ecore::EOperation> getCompoundValue_Operation__copy() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getCompoundValue_Operation_assignFeatureValue_StructuralFeature_EInt() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getCompoundValue_Operation_equals_Value() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getCompoundValue_Operation_removeFeatureValues_Classifier() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getCompoundValue_Operation_retrieveFeatureValue_StructuralFeature() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getCompoundValue_Operation_retrieveFeatureValues() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getCompoundValue_Operation_toString() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getCompoundValue_Operation__copy() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getCompoundValue_Operation_assignFeatureValue_StructuralFeature_EInt() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getCompoundValue_Operation_equals_Value() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getCompoundValue_Operation_removeFeatureValues_Classifier() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getCompoundValue_Operation_retrieveFeatureValue_StructuralFeature() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getCompoundValue_Operation_retrieveFeatureValues() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getCompoundValue_Operation_toString() const = 0;
 			
 			// End Class CompoundValue
 
@@ -138,14 +138,14 @@ namespace fUML::Semantics::SimpleClassifiers
 			static const unsigned int DATAVALUE_OPERATION_NEW_ = 1021578740;
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getDataValue_Class() const = 0;
+			virtual const std::shared_ptr<ecore::EClass>& getDataValue_Class() const = 0;
 			
 			
-			virtual std::shared_ptr<ecore::EReference> getDataValue_Attribute_type() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getDataValue_Attribute_type() const = 0;
 			
-			virtual std::shared_ptr<ecore::EOperation> getDataValue_Operation__copy() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getDataValue_Operation_getTypes() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getDataValue_Operation_new_() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getDataValue_Operation__copy() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getDataValue_Operation_getTypes() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getDataValue_Operation_new_() const = 0;
 			
 			// End Class DataValue
 
@@ -167,18 +167,18 @@ namespace fUML::Semantics::SimpleClassifiers
 			static const unsigned int ENUMERATIONVALUE_OPERATION_TOSTRING = 3964346320;
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getEnumerationValue_Class() const = 0;
+			virtual const std::shared_ptr<ecore::EClass>& getEnumerationValue_Class() const = 0;
 			
 			
-			virtual std::shared_ptr<ecore::EReference> getEnumerationValue_Attribute_literal() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getEnumerationValue_Attribute_type() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getEnumerationValue_Attribute_literal() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getEnumerationValue_Attribute_type() const = 0;
 			
-			virtual std::shared_ptr<ecore::EOperation> getEnumerationValue_Operation__copy() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getEnumerationValue_Operation_equals_Value() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getEnumerationValue_Operation_getTypes() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getEnumerationValue_Operation_new_() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getEnumerationValue_Operation_specify() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getEnumerationValue_Operation_toString() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getEnumerationValue_Operation__copy() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getEnumerationValue_Operation_equals_Value() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getEnumerationValue_Operation_getTypes() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getEnumerationValue_Operation_new_() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getEnumerationValue_Operation_specify() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getEnumerationValue_Operation_toString() const = 0;
 			
 			// End Class EnumerationValue
 
@@ -197,15 +197,15 @@ namespace fUML::Semantics::SimpleClassifiers
 			static const unsigned int FEATUREVALUE_OPERATION_HASEQUALVALUES_FEATUREVALUE = 2370187995;
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getFeatureValue_Class() const = 0;
+			virtual const std::shared_ptr<ecore::EClass>& getFeatureValue_Class() const = 0;
 			
-			virtual std::shared_ptr<ecore::EAttribute> getFeatureValue_Attribute_position() const = 0;
+			virtual const std::shared_ptr<ecore::EAttribute>& getFeatureValue_Attribute_position() const = 0;
 			
-			virtual std::shared_ptr<ecore::EReference> getFeatureValue_Attribute_feature() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getFeatureValue_Attribute_values() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getFeatureValue_Attribute_feature() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getFeatureValue_Attribute_values() const = 0;
 			
-			virtual std::shared_ptr<ecore::EOperation> getFeatureValue_Operation__copy() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getFeatureValue_Operation_hasEqualValues_FeatureValue() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getFeatureValue_Operation__copy() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getFeatureValue_Operation_hasEqualValues_FeatureValue() const = 0;
 			
 			// End Class FeatureValue
 
@@ -225,16 +225,16 @@ namespace fUML::Semantics::SimpleClassifiers
 			static const unsigned int INTEGERVALUE_OPERATION_TOSTRING = 3025264759;
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getIntegerValue_Class() const = 0;
+			virtual const std::shared_ptr<ecore::EClass>& getIntegerValue_Class() const = 0;
 			
-			virtual std::shared_ptr<ecore::EAttribute> getIntegerValue_Attribute_value() const = 0;
+			virtual const std::shared_ptr<ecore::EAttribute>& getIntegerValue_Attribute_value() const = 0;
 			
 			
-			virtual std::shared_ptr<ecore::EOperation> getIntegerValue_Operation__copy() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getIntegerValue_Operation_equals_Value() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getIntegerValue_Operation_new_() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getIntegerValue_Operation_specify() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getIntegerValue_Operation_toString() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getIntegerValue_Operation__copy() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getIntegerValue_Operation_equals_Value() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getIntegerValue_Operation_new_() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getIntegerValue_Operation_specify() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getIntegerValue_Operation_toString() const = 0;
 			
 			// End Class IntegerValue
 
@@ -251,13 +251,13 @@ namespace fUML::Semantics::SimpleClassifiers
 			static const unsigned int PRIMITIVEVALUE_OPERATION_GETTYPES = 951226260;
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getPrimitiveValue_Class() const = 0;
+			virtual const std::shared_ptr<ecore::EClass>& getPrimitiveValue_Class() const = 0;
 			
 			
-			virtual std::shared_ptr<ecore::EReference> getPrimitiveValue_Attribute_type() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getPrimitiveValue_Attribute_type() const = 0;
 			
-			virtual std::shared_ptr<ecore::EOperation> getPrimitiveValue_Operation__copy() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getPrimitiveValue_Operation_getTypes() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getPrimitiveValue_Operation__copy() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getPrimitiveValue_Operation_getTypes() const = 0;
 			
 			// End Class PrimitiveValue
 
@@ -277,16 +277,16 @@ namespace fUML::Semantics::SimpleClassifiers
 			static const unsigned int REALVALUE_OPERATION_TOSTRING = 1044160033;
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getRealValue_Class() const = 0;
+			virtual const std::shared_ptr<ecore::EClass>& getRealValue_Class() const = 0;
 			
-			virtual std::shared_ptr<ecore::EAttribute> getRealValue_Attribute_value() const = 0;
+			virtual const std::shared_ptr<ecore::EAttribute>& getRealValue_Attribute_value() const = 0;
 			
 			
-			virtual std::shared_ptr<ecore::EOperation> getRealValue_Operation__copy() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getRealValue_Operation_equals_Value() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getRealValue_Operation_new_() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getRealValue_Operation_specify() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getRealValue_Operation_toString() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getRealValue_Operation__copy() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getRealValue_Operation_equals_Value() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getRealValue_Operation_new_() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getRealValue_Operation_specify() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getRealValue_Operation_toString() const = 0;
 			
 			// End Class RealValue
 
@@ -304,14 +304,14 @@ namespace fUML::Semantics::SimpleClassifiers
 			static const unsigned int SIGNALINSTANCE_OPERATION_NEW_ = 1841885000;
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getSignalInstance_Class() const = 0;
+			virtual const std::shared_ptr<ecore::EClass>& getSignalInstance_Class() const = 0;
 			
 			
-			virtual std::shared_ptr<ecore::EReference> getSignalInstance_Attribute_type() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getSignalInstance_Attribute_type() const = 0;
 			
-			virtual std::shared_ptr<ecore::EOperation> getSignalInstance_Operation__copy() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getSignalInstance_Operation_getTypes() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getSignalInstance_Operation_new_() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getSignalInstance_Operation__copy() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getSignalInstance_Operation_getTypes() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getSignalInstance_Operation_new_() const = 0;
 			
 			// End Class SignalInstance
 
@@ -331,16 +331,16 @@ namespace fUML::Semantics::SimpleClassifiers
 			static const unsigned int STRINGVALUE_OPERATION_TOSTRING = 529162816;
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getStringValue_Class() const = 0;
+			virtual const std::shared_ptr<ecore::EClass>& getStringValue_Class() const = 0;
 			
-			virtual std::shared_ptr<ecore::EAttribute> getStringValue_Attribute_value() const = 0;
+			virtual const std::shared_ptr<ecore::EAttribute>& getStringValue_Attribute_value() const = 0;
 			
 			
-			virtual std::shared_ptr<ecore::EOperation> getStringValue_Operation__copy() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getStringValue_Operation_equals_Value() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getStringValue_Operation_new_() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getStringValue_Operation_specify() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getStringValue_Operation_toString() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getStringValue_Operation__copy() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getStringValue_Operation_equals_Value() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getStringValue_Operation_new_() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getStringValue_Operation_specify() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getStringValue_Operation_toString() const = 0;
 			
 			// End Class StringValue
 
@@ -365,21 +365,21 @@ namespace fUML::Semantics::SimpleClassifiers
 			static const unsigned int STRUCTUREDVALUE_OPERATION_SPECIFY = 2039107205;
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getStructuredValue_Class() const = 0;
+			virtual const std::shared_ptr<ecore::EClass>& getStructuredValue_Class() const = 0;
 			
 			
 			
-			virtual std::shared_ptr<ecore::EOperation> getStructuredValue_Operation_assignFeatureValue_StructuralFeature_EInt() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getStructuredValue_Operation_createFeatureValues() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getStructuredValue_Operation_getMemberFeatures_Classifier() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getStructuredValue_Operation_getStructuralFeatureForType_Classifier() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getStructuredValue_Operation_getValues_StructuralFeature_FeatureValue() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getStructuredValue_Operation_removeValue_StructuralFeature_Value() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getStructuredValue_Operation_retrieveFeatureValue_StructuralFeature() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getStructuredValue_Operation_retrieveFeatureValues() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getStructuredValue_Operation_retrieveStructuralFeatures() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getStructuredValue_Operation_setFeatureValue_StructuralFeature_EInt() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getStructuredValue_Operation_specify() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getStructuredValue_Operation_assignFeatureValue_StructuralFeature_EInt() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getStructuredValue_Operation_createFeatureValues() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getStructuredValue_Operation_getMemberFeatures_Classifier() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getStructuredValue_Operation_getStructuralFeatureForType_Classifier() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getStructuredValue_Operation_getValues_StructuralFeature_FeatureValue() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getStructuredValue_Operation_removeValue_StructuralFeature_Value() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getStructuredValue_Operation_retrieveFeatureValue_StructuralFeature() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getStructuredValue_Operation_retrieveFeatureValues() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getStructuredValue_Operation_retrieveStructuralFeatures() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getStructuredValue_Operation_setFeatureValue_StructuralFeature_EInt() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getStructuredValue_Operation_specify() const = 0;
 			
 			// End Class StructuredValue
 
@@ -399,16 +399,16 @@ namespace fUML::Semantics::SimpleClassifiers
 			static const unsigned int UNLIMITEDNATURALVALUE_OPERATION_TOSTRING = 1690699879;
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getUnlimitedNaturalValue_Class() const = 0;
+			virtual const std::shared_ptr<ecore::EClass>& getUnlimitedNaturalValue_Class() const = 0;
 			
-			virtual std::shared_ptr<ecore::EAttribute> getUnlimitedNaturalValue_Attribute_value() const = 0;
+			virtual const std::shared_ptr<ecore::EAttribute>& getUnlimitedNaturalValue_Attribute_value() const = 0;
 			
 			
-			virtual std::shared_ptr<ecore::EOperation> getUnlimitedNaturalValue_Operation__copy() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getUnlimitedNaturalValue_Operation_equals_Value() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getUnlimitedNaturalValue_Operation_new_() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getUnlimitedNaturalValue_Operation_specify() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getUnlimitedNaturalValue_Operation_toString() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getUnlimitedNaturalValue_Operation__copy() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getUnlimitedNaturalValue_Operation_equals_Value() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getUnlimitedNaturalValue_Operation_new_() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getUnlimitedNaturalValue_Operation_specify() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getUnlimitedNaturalValue_Operation_toString() const = 0;
 			
 			// End Class UnlimitedNaturalValue
 

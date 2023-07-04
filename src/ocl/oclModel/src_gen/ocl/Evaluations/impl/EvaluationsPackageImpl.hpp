@@ -76,37 +76,37 @@ namespace ocl::Evaluations
 
 			// Begin Class AssociationClassCallExpEval
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getAssociationClassCallExpEval_Class() const ;
+			virtual const std::shared_ptr<ecore::EClass>& getAssociationClassCallExpEval_Class() const ;
 			
 			
-			virtual std::shared_ptr<ecore::EReference> getAssociationClassCallExpEval_Attribute_referredAssociationClass() const ;
+			virtual const std::shared_ptr<ecore::EReference>& getAssociationClassCallExpEval_Attribute_referredAssociationClass() const ;
 			
 			
 			// End Class AssociationClassCallExpEval
 
 			// Begin Class AssociationEndCallExpEval
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getAssociationEndCallExpEval_Class() const ;
+			virtual const std::shared_ptr<ecore::EClass>& getAssociationEndCallExpEval_Class() const ;
 			
 			
-			virtual std::shared_ptr<ecore::EReference> getAssociationEndCallExpEval_Attribute_referredAssociationEnd() const ;
+			virtual const std::shared_ptr<ecore::EReference>& getAssociationEndCallExpEval_Attribute_referredAssociationEnd() const ;
 			
 			
 			// End Class AssociationEndCallExpEval
 
 			// Begin Class AttributeCallExpEval
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getAttributeCallExpEval_Class() const ;
+			virtual const std::shared_ptr<ecore::EClass>& getAttributeCallExpEval_Class() const ;
 			
 			
-			virtual std::shared_ptr<ecore::EReference> getAttributeCallExpEval_Attribute_referredAttribute() const ;
+			virtual const std::shared_ptr<ecore::EReference>& getAttributeCallExpEval_Attribute_referredAttribute() const ;
 			
 			
 			// End Class AttributeCallExpEval
 
 			// Begin Class BooleanLiteralExpEval
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getBooleanLiteralExpEval_Class() const ;
+			virtual const std::shared_ptr<ecore::EClass>& getBooleanLiteralExpEval_Class() const ;
 			
 			
 			
@@ -115,48 +115,48 @@ namespace ocl::Evaluations
 
 			// Begin Class CollectionItemEval
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getCollectionItemEval_Class() const ;
+			virtual const std::shared_ptr<ecore::EClass>& getCollectionItemEval_Class() const ;
 			
 			
-			virtual std::shared_ptr<ecore::EReference> getCollectionItemEval_Attribute_item() const ;
+			virtual const std::shared_ptr<ecore::EReference>& getCollectionItemEval_Attribute_item() const ;
 			
 			
 			// End Class CollectionItemEval
 
 			// Begin Class CollectionLiteralExpEval
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getCollectionLiteralExpEval_Class() const ;
+			virtual const std::shared_ptr<ecore::EClass>& getCollectionLiteralExpEval_Class() const ;
 			
 			
-			virtual std::shared_ptr<ecore::EReference> getCollectionLiteralExpEval_Attribute_parts() const ;
+			virtual const std::shared_ptr<ecore::EReference>& getCollectionLiteralExpEval_Attribute_parts() const ;
 			
 			
 			// End Class CollectionLiteralExpEval
 
 			// Begin Class CollectionLiteralPartEval
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getCollectionLiteralPartEval_Class() const ;
+			virtual const std::shared_ptr<ecore::EClass>& getCollectionLiteralPartEval_Class() const ;
 			
 			
-			virtual std::shared_ptr<ecore::EReference> getCollectionLiteralPartEval_Attribute_element() const ;
+			virtual const std::shared_ptr<ecore::EReference>& getCollectionLiteralPartEval_Attribute_element() const ;
 			
 			
 			// End Class CollectionLiteralPartEval
 
 			// Begin Class CollectionRangeEval
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getCollectionRangeEval_Class() const ;
+			virtual const std::shared_ptr<ecore::EClass>& getCollectionRangeEval_Class() const ;
 			
 			
-			virtual std::shared_ptr<ecore::EReference> getCollectionRangeEval_Attribute_first() const ;
-			virtual std::shared_ptr<ecore::EReference> getCollectionRangeEval_Attribute_last() const ;
+			virtual const std::shared_ptr<ecore::EReference>& getCollectionRangeEval_Attribute_first() const ;
+			virtual const std::shared_ptr<ecore::EReference>& getCollectionRangeEval_Attribute_last() const ;
 			
 			
 			// End Class CollectionRangeEval
 
 			// Begin Class EnumLiteralExpEval
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getEnumLiteralExpEval_Class() const ;
+			virtual const std::shared_ptr<ecore::EClass>& getEnumLiteralExpEval_Class() const ;
 			
 			
 			
@@ -165,22 +165,22 @@ namespace ocl::Evaluations
 
 			// Begin Class EvalEnvironment
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getEvalEnvironment_Class() const ;
+			virtual const std::shared_ptr<ecore::EClass>& getEvalEnvironment_Class() const ;
 			
 			
-			virtual std::shared_ptr<ecore::EReference> getEvalEnvironment_Attribute_bindings() const ;
+			virtual const std::shared_ptr<ecore::EReference>& getEvalEnvironment_Attribute_bindings() const ;
 			
-			virtual std::shared_ptr<ecore::EOperation> getEvalEnvironment_Operation_add_NameValueBinding() const ;
-			virtual std::shared_ptr<ecore::EOperation> getEvalEnvironment_Operation_addAll_NameValueBinding() const ;
-			virtual std::shared_ptr<ecore::EOperation> getEvalEnvironment_Operation_find_String() const ;
-			virtual std::shared_ptr<ecore::EOperation> getEvalEnvironment_Operation_getValueOf_EString() const ;
-			virtual std::shared_ptr<ecore::EOperation> getEvalEnvironment_Operation_replace_NameValueBinding() const ;
+			virtual const std::shared_ptr<ecore::EOperation>& getEvalEnvironment_Operation_add_NameValueBinding() const ;
+			virtual const std::shared_ptr<ecore::EOperation>& getEvalEnvironment_Operation_addAll_NameValueBinding() const ;
+			virtual const std::shared_ptr<ecore::EOperation>& getEvalEnvironment_Operation_find_String() const ;
+			virtual const std::shared_ptr<ecore::EOperation>& getEvalEnvironment_Operation_getValueOf_EString() const ;
+			virtual const std::shared_ptr<ecore::EOperation>& getEvalEnvironment_Operation_replace_NameValueBinding() const ;
 			
 			// End Class EvalEnvironment
 
 			// Begin Class EvalNameSpace
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getEvalNameSpace_Class() const ;
+			virtual const std::shared_ptr<ecore::EClass>& getEvalNameSpace_Class() const ;
 			
 			
 			
@@ -189,30 +189,30 @@ namespace ocl::Evaluations
 
 			// Begin Class ExpressionInOclEval
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getExpressionInOclEval_Class() const ;
+			virtual const std::shared_ptr<ecore::EClass>& getExpressionInOclEval_Class() const ;
 			
 			
-			virtual std::shared_ptr<ecore::EReference> getExpressionInOclEval_Attribute_context() const ;
-			virtual std::shared_ptr<ecore::EReference> getExpressionInOclEval_Attribute_environment() const ;
+			virtual const std::shared_ptr<ecore::EReference>& getExpressionInOclEval_Attribute_context() const ;
+			virtual const std::shared_ptr<ecore::EReference>& getExpressionInOclEval_Attribute_environment() const ;
 			
 			
 			// End Class ExpressionInOclEval
 
 			// Begin Class IfExpEval
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getIfExpEval_Class() const ;
+			virtual const std::shared_ptr<ecore::EClass>& getIfExpEval_Class() const ;
 			
 			
-			virtual std::shared_ptr<ecore::EReference> getIfExpEval_Attribute_condition() const ;
-			virtual std::shared_ptr<ecore::EReference> getIfExpEval_Attribute_elseExpression() const ;
-			virtual std::shared_ptr<ecore::EReference> getIfExpEval_Attribute_thenExpression() const ;
+			virtual const std::shared_ptr<ecore::EReference>& getIfExpEval_Attribute_condition() const ;
+			virtual const std::shared_ptr<ecore::EReference>& getIfExpEval_Attribute_elseExpression() const ;
+			virtual const std::shared_ptr<ecore::EReference>& getIfExpEval_Attribute_thenExpression() const ;
 			
 			
 			// End Class IfExpEval
 
 			// Begin Class IntegerLiteralExpEval
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getIntegerLiteralExpEval_Class() const ;
+			virtual const std::shared_ptr<ecore::EClass>& getIntegerLiteralExpEval_Class() const ;
 			
 			
 			
@@ -221,17 +221,17 @@ namespace ocl::Evaluations
 
 			// Begin Class IterateExpEval
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getIterateExpEval_Class() const ;
+			virtual const std::shared_ptr<ecore::EClass>& getIterateExpEval_Class() const ;
 			
 			
-			virtual std::shared_ptr<ecore::EReference> getIterateExpEval_Attribute_result() const ;
+			virtual const std::shared_ptr<ecore::EReference>& getIterateExpEval_Attribute_result() const ;
 			
 			
 			// End Class IterateExpEval
 
 			// Begin Class IteratorExpEval
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getIteratorExpEval_Class() const ;
+			virtual const std::shared_ptr<ecore::EClass>& getIteratorExpEval_Class() const ;
 			
 			
 			
@@ -240,19 +240,19 @@ namespace ocl::Evaluations
 
 			// Begin Class LetExpEval
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getLetExpEval_Class() const ;
+			virtual const std::shared_ptr<ecore::EClass>& getLetExpEval_Class() const ;
 			
 			
-			virtual std::shared_ptr<ecore::EReference> getLetExpEval_Attribute_in() const ;
-			virtual std::shared_ptr<ecore::EReference> getLetExpEval_Attribute_initExpression() const ;
-			virtual std::shared_ptr<ecore::EReference> getLetExpEval_Attribute_variable() const ;
+			virtual const std::shared_ptr<ecore::EReference>& getLetExpEval_Attribute_in() const ;
+			virtual const std::shared_ptr<ecore::EReference>& getLetExpEval_Attribute_initExpression() const ;
+			virtual const std::shared_ptr<ecore::EReference>& getLetExpEval_Attribute_variable() const ;
 			
 			
 			// End Class LetExpEval
 
 			// Begin Class LiteralExpEval
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getLiteralExpEval_Class() const ;
+			virtual const std::shared_ptr<ecore::EClass>& getLiteralExpEval_Class() const ;
 			
 			
 			
@@ -261,39 +261,39 @@ namespace ocl::Evaluations
 
 			// Begin Class LoopExpEval
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getLoopExpEval_Class() const ;
+			virtual const std::shared_ptr<ecore::EClass>& getLoopExpEval_Class() const ;
 			
 			
-			virtual std::shared_ptr<ecore::EReference> getLoopExpEval_Attribute_bodyEvals() const ;
-			virtual std::shared_ptr<ecore::EReference> getLoopExpEval_Attribute_iterators() const ;
+			virtual const std::shared_ptr<ecore::EReference>& getLoopExpEval_Attribute_bodyEvals() const ;
+			virtual const std::shared_ptr<ecore::EReference>& getLoopExpEval_Attribute_iterators() const ;
 			
 			
 			// End Class LoopExpEval
 
 			// Begin Class ModelPropertyCallExpEval
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getModelPropertyCallExpEval_Class() const ;
+			virtual const std::shared_ptr<ecore::EClass>& getModelPropertyCallExpEval_Class() const ;
 			
 			
 			
-			virtual std::shared_ptr<ecore::EOperation> getModelPropertyCallExpEval_Operation_atPre() const ;
+			virtual const std::shared_ptr<ecore::EOperation>& getModelPropertyCallExpEval_Operation_atPre() const ;
 			
 			// End Class ModelPropertyCallExpEval
 
 			// Begin Class NavigationCallExpEval
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getNavigationCallExpEval_Class() const ;
+			virtual const std::shared_ptr<ecore::EClass>& getNavigationCallExpEval_Class() const ;
 			
 			
-			virtual std::shared_ptr<ecore::EReference> getNavigationCallExpEval_Attribute_navigationSource() const ;
-			virtual std::shared_ptr<ecore::EReference> getNavigationCallExpEval_Attribute_qualifiers() const ;
+			virtual const std::shared_ptr<ecore::EReference>& getNavigationCallExpEval_Attribute_navigationSource() const ;
+			virtual const std::shared_ptr<ecore::EReference>& getNavigationCallExpEval_Attribute_qualifiers() const ;
 			
 			
 			// End Class NavigationCallExpEval
 
 			// Begin Class NumericLiteralExpEval
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getNumericLiteralExpEval_Class() const ;
+			virtual const std::shared_ptr<ecore::EClass>& getNumericLiteralExpEval_Class() const ;
 			
 			
 			
@@ -302,55 +302,55 @@ namespace ocl::Evaluations
 
 			// Begin Class OclExpEval
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getOclExpEval_Class() const ;
+			virtual const std::shared_ptr<ecore::EClass>& getOclExpEval_Class() const ;
 			
 			
-			virtual std::shared_ptr<ecore::EReference> getOclExpEval_Attribute_beforeEnvironment() const ;
-			virtual std::shared_ptr<ecore::EReference> getOclExpEval_Attribute_environment() const ;
-			virtual std::shared_ptr<ecore::EReference> getOclExpEval_Attribute_model() const ;
-			virtual std::shared_ptr<ecore::EReference> getOclExpEval_Attribute_resultValue() const ;
+			virtual const std::shared_ptr<ecore::EReference>& getOclExpEval_Attribute_beforeEnvironment() const ;
+			virtual const std::shared_ptr<ecore::EReference>& getOclExpEval_Attribute_environment() const ;
+			virtual const std::shared_ptr<ecore::EReference>& getOclExpEval_Attribute_model() const ;
+			virtual const std::shared_ptr<ecore::EReference>& getOclExpEval_Attribute_resultValue() const ;
 			
 			
 			// End Class OclExpEval
 
 			// Begin Class OclMessageArgEval
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getOclMessageArgEval_Class() const ;
+			virtual const std::shared_ptr<ecore::EClass>& getOclMessageArgEval_Class() const ;
 			
 			
-			virtual std::shared_ptr<ecore::EReference> getOclMessageArgEval_Attribute_expression() const ;
-			virtual std::shared_ptr<ecore::EReference> getOclMessageArgEval_Attribute_unspecified() const ;
-			virtual std::shared_ptr<ecore::EReference> getOclMessageArgEval_Attribute_variable() const ;
+			virtual const std::shared_ptr<ecore::EReference>& getOclMessageArgEval_Attribute_expression() const ;
+			virtual const std::shared_ptr<ecore::EReference>& getOclMessageArgEval_Attribute_unspecified() const ;
+			virtual const std::shared_ptr<ecore::EReference>& getOclMessageArgEval_Attribute_variable() const ;
 			
 			
 			// End Class OclMessageArgEval
 
 			// Begin Class OclMessageExpEval
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getOclMessageExpEval_Class() const ;
+			virtual const std::shared_ptr<ecore::EClass>& getOclMessageExpEval_Class() const ;
 			
-			virtual std::shared_ptr<ecore::EAttribute> getOclMessageExpEval_Attribute_name() const ;
+			virtual const std::shared_ptr<ecore::EAttribute>& getOclMessageExpEval_Attribute_name() const ;
 			
-			virtual std::shared_ptr<ecore::EReference> getOclMessageExpEval_Attribute_arguments() const ;
-			virtual std::shared_ptr<ecore::EReference> getOclMessageExpEval_Attribute_target() const ;
+			virtual const std::shared_ptr<ecore::EReference>& getOclMessageExpEval_Attribute_arguments() const ;
+			virtual const std::shared_ptr<ecore::EReference>& getOclMessageExpEval_Attribute_target() const ;
 			
 			
 			// End Class OclMessageExpEval
 
 			// Begin Class OperationCallExpEval
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getOperationCallExpEval_Class() const ;
+			virtual const std::shared_ptr<ecore::EClass>& getOperationCallExpEval_Class() const ;
 			
 			
-			virtual std::shared_ptr<ecore::EReference> getOperationCallExpEval_Attribute_arguments() const ;
-			virtual std::shared_ptr<ecore::EReference> getOperationCallExpEval_Attribute_referredOperation() const ;
+			virtual const std::shared_ptr<ecore::EReference>& getOperationCallExpEval_Attribute_arguments() const ;
+			virtual const std::shared_ptr<ecore::EReference>& getOperationCallExpEval_Attribute_referredOperation() const ;
 			
 			
 			// End Class OperationCallExpEval
 
 			// Begin Class PrimitiveLiteralExpEval
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getPrimitiveLiteralExpEval_Class() const ;
+			virtual const std::shared_ptr<ecore::EClass>& getPrimitiveLiteralExpEval_Class() const ;
 			
 			
 			
@@ -359,17 +359,17 @@ namespace ocl::Evaluations
 
 			// Begin Class PropertyCallExpEval
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getPropertyCallExpEval_Class() const ;
+			virtual const std::shared_ptr<ecore::EClass>& getPropertyCallExpEval_Class() const ;
 			
 			
-			virtual std::shared_ptr<ecore::EReference> getPropertyCallExpEval_Attribute_source() const ;
+			virtual const std::shared_ptr<ecore::EReference>& getPropertyCallExpEval_Attribute_source() const ;
 			
 			
 			// End Class PropertyCallExpEval
 
 			// Begin Class RealLiteralExpEval
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getRealLiteralExpEval_Class() const ;
+			virtual const std::shared_ptr<ecore::EClass>& getRealLiteralExpEval_Class() const ;
 			
 			
 			
@@ -378,7 +378,7 @@ namespace ocl::Evaluations
 
 			// Begin Class StringLiteralExpEval
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getStringLiteralExpEval_Class() const ;
+			virtual const std::shared_ptr<ecore::EClass>& getStringLiteralExpEval_Class() const ;
 			
 			
 			
@@ -387,17 +387,17 @@ namespace ocl::Evaluations
 
 			// Begin Class TupleLiteralExpEval
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getTupleLiteralExpEval_Class() const ;
+			virtual const std::shared_ptr<ecore::EClass>& getTupleLiteralExpEval_Class() const ;
 			
 			
-			virtual std::shared_ptr<ecore::EReference> getTupleLiteralExpEval_Attribute_tuplePart() const ;
+			virtual const std::shared_ptr<ecore::EReference>& getTupleLiteralExpEval_Attribute_tuplePart() const ;
 			
 			
 			// End Class TupleLiteralExpEval
 
 			// Begin Class TupleLiteralExpPartEval
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getTupleLiteralExpPartEval_Class() const ;
+			virtual const std::shared_ptr<ecore::EClass>& getTupleLiteralExpPartEval_Class() const ;
 			
 			
 			
@@ -406,7 +406,7 @@ namespace ocl::Evaluations
 
 			// Begin Class UnlimitedNaturalLiteralExpEval
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getUnlimitedNaturalLiteralExpEval_Class() const ;
+			virtual const std::shared_ptr<ecore::EClass>& getUnlimitedNaturalLiteralExpEval_Class() const ;
 			
 			
 			
@@ -415,7 +415,7 @@ namespace ocl::Evaluations
 
 			// Begin Class UnspecifiedValueExpEval
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getUnspecifiedValueExpEval_Class() const ;
+			virtual const std::shared_ptr<ecore::EClass>& getUnspecifiedValueExpEval_Class() const ;
 			
 			
 			
@@ -424,21 +424,21 @@ namespace ocl::Evaluations
 
 			// Begin Class VariableDeclEval
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getVariableDeclEval_Class() const ;
+			virtual const std::shared_ptr<ecore::EClass>& getVariableDeclEval_Class() const ;
 			
 			
-			virtual std::shared_ptr<ecore::EReference> getVariableDeclEval_Attribute_initExp() const ;
-			virtual std::shared_ptr<ecore::EReference> getVariableDeclEval_Attribute_name() const ;
+			virtual const std::shared_ptr<ecore::EReference>& getVariableDeclEval_Attribute_initExp() const ;
+			virtual const std::shared_ptr<ecore::EReference>& getVariableDeclEval_Attribute_name() const ;
 			
 			
 			// End Class VariableDeclEval
 
 			// Begin Class VariableExpEval
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getVariableExpEval_Class() const ;
+			virtual const std::shared_ptr<ecore::EClass>& getVariableExpEval_Class() const ;
 			
 			
-			virtual std::shared_ptr<ecore::EReference> getVariableExpEval_Attribute_referredVariable() const ;
+			virtual const std::shared_ptr<ecore::EReference>& getVariableExpEval_Attribute_referredVariable() const ;
 			
 			
 			// End Class VariableExpEval

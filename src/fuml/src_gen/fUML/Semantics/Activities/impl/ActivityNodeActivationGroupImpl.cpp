@@ -794,7 +794,7 @@ void ActivityNodeActivationGroupImpl::resolveReferences(const int featureID, std
 
 		case fUML::Semantics::Activities::ActivitiesPackage::ACTIVITYNODEACTIVATIONGROUP_ATTRIBUTE_SUSPENDEDACTIVATIONS:
 		{
-			std::shared_ptr<Bag<fUML::Semantics::Activities::ActivityNodeActivation>> _suspendedActivations = getSuspendedActivations();
+			const std::shared_ptr<Bag<fUML::Semantics::Activities::ActivityNodeActivation>>& _suspendedActivations = getSuspendedActivations();
 			for(std::shared_ptr<ecore::EObject> ref : references)
 			{
 				std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivation>  _r = std::dynamic_pointer_cast<fUML::Semantics::Activities::ActivityNodeActivation>(ref);
@@ -922,7 +922,7 @@ bool ActivityNodeActivationGroupImpl::eSet(int featureID, const Any& newValue)
 					std::shared_ptr<Bag<fUML::Semantics::Activities::ActivityEdgeInstance>> _edgeInstances=getEdgeInstances();
 					for(const std::shared_ptr<fUML::Semantics::Activities::ActivityEdgeInstance> indexEdgeInstances: *_edgeInstances)
 					{
-						if (edgeInstancesList->find(indexEdgeInstances) == -1)
+						if (!(edgeInstancesList->includes(indexEdgeInstances)))
 						{
 							_edgeInstances->erase(indexEdgeInstances);
 						}
@@ -930,7 +930,7 @@ bool ActivityNodeActivationGroupImpl::eSet(int featureID, const Any& newValue)
 
 					for(const std::shared_ptr<fUML::Semantics::Activities::ActivityEdgeInstance> indexEdgeInstances: *edgeInstancesList)
 					{
-						if (_edgeInstances->find(indexEdgeInstances) == -1)
+						if (!(_edgeInstances->includes(indexEdgeInstances)))
 						{
 							_edgeInstances->add(indexEdgeInstances);
 						}
@@ -959,7 +959,7 @@ bool ActivityNodeActivationGroupImpl::eSet(int featureID, const Any& newValue)
 					std::shared_ptr<Bag<fUML::Semantics::Activities::ActivityNodeActivation>> _nodeActivations=getNodeActivations();
 					for(const std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivation> indexNodeActivations: *_nodeActivations)
 					{
-						if (nodeActivationsList->find(indexNodeActivations) == -1)
+						if (!(nodeActivationsList->includes(indexNodeActivations)))
 						{
 							_nodeActivations->erase(indexNodeActivations);
 						}
@@ -967,7 +967,7 @@ bool ActivityNodeActivationGroupImpl::eSet(int featureID, const Any& newValue)
 
 					for(const std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivation> indexNodeActivations: *nodeActivationsList)
 					{
-						if (_nodeActivations->find(indexNodeActivations) == -1)
+						if (!(_nodeActivations->includes(indexNodeActivations)))
 						{
 							_nodeActivations->add(indexNodeActivations);
 						}
@@ -996,7 +996,7 @@ bool ActivityNodeActivationGroupImpl::eSet(int featureID, const Any& newValue)
 					std::shared_ptr<Bag<fUML::Semantics::Activities::ActivityNodeActivation>> _suspendedActivations=getSuspendedActivations();
 					for(const std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivation> indexSuspendedActivations: *_suspendedActivations)
 					{
-						if (suspendedActivationsList->find(indexSuspendedActivations) == -1)
+						if (!(suspendedActivationsList->includes(indexSuspendedActivations)))
 						{
 							_suspendedActivations->erase(indexSuspendedActivations);
 						}
@@ -1004,7 +1004,7 @@ bool ActivityNodeActivationGroupImpl::eSet(int featureID, const Any& newValue)
 
 					for(const std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivation> indexSuspendedActivations: *suspendedActivationsList)
 					{
-						if (_suspendedActivations->find(indexSuspendedActivations) == -1)
+						if (!(_suspendedActivations->includes(indexSuspendedActivations)))
 						{
 							_suspendedActivations->add(indexSuspendedActivations);
 						}

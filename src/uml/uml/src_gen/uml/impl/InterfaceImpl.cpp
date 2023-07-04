@@ -754,7 +754,7 @@ void InterfaceImpl::resolveReferences(const int featureID, std::vector<std::shar
 	{
 		case uml::umlPackage::INTERFACE_ATTRIBUTE_REDEFINEDINTERFACE:
 		{
-			std::shared_ptr<Subset<uml::Interface, uml::Classifier /*Subset does not reference a union*/>> _redefinedInterface = getRedefinedInterface();
+			const std::shared_ptr<Subset<uml::Interface, uml::Classifier /*Subset does not reference a union*/>>& _redefinedInterface = getRedefinedInterface();
 			for(std::shared_ptr<ecore::EObject> ref : references)
 			{
 				std::shared_ptr<uml::Interface>  _r = std::dynamic_pointer_cast<uml::Interface>(ref);
@@ -899,7 +899,7 @@ bool InterfaceImpl::eSet(int featureID, const Any& newValue)
 					std::shared_ptr<Bag<uml::Classifier>> _nestedClassifier=getNestedClassifier();
 					for(const std::shared_ptr<uml::Classifier> indexNestedClassifier: *_nestedClassifier)
 					{
-						if (nestedClassifierList->find(indexNestedClassifier) == -1)
+						if (!(nestedClassifierList->includes(indexNestedClassifier)))
 						{
 							_nestedClassifier->erase(indexNestedClassifier);
 						}
@@ -907,7 +907,7 @@ bool InterfaceImpl::eSet(int featureID, const Any& newValue)
 
 					for(const std::shared_ptr<uml::Classifier> indexNestedClassifier: *nestedClassifierList)
 					{
-						if (_nestedClassifier->find(indexNestedClassifier) == -1)
+						if (!(_nestedClassifier->includes(indexNestedClassifier)))
 						{
 							_nestedClassifier->add(indexNestedClassifier);
 						}
@@ -936,7 +936,7 @@ bool InterfaceImpl::eSet(int featureID, const Any& newValue)
 					std::shared_ptr<Bag<uml::Property>> _ownedAttribute=getOwnedAttribute();
 					for(const std::shared_ptr<uml::Property> indexOwnedAttribute: *_ownedAttribute)
 					{
-						if (ownedAttributeList->find(indexOwnedAttribute) == -1)
+						if (!(ownedAttributeList->includes(indexOwnedAttribute)))
 						{
 							_ownedAttribute->erase(indexOwnedAttribute);
 						}
@@ -944,7 +944,7 @@ bool InterfaceImpl::eSet(int featureID, const Any& newValue)
 
 					for(const std::shared_ptr<uml::Property> indexOwnedAttribute: *ownedAttributeList)
 					{
-						if (_ownedAttribute->find(indexOwnedAttribute) == -1)
+						if (!(_ownedAttribute->includes(indexOwnedAttribute)))
 						{
 							_ownedAttribute->add(indexOwnedAttribute);
 						}
@@ -973,7 +973,7 @@ bool InterfaceImpl::eSet(int featureID, const Any& newValue)
 					std::shared_ptr<Bag<uml::Operation>> _ownedOperation=getOwnedOperation();
 					for(const std::shared_ptr<uml::Operation> indexOwnedOperation: *_ownedOperation)
 					{
-						if (ownedOperationList->find(indexOwnedOperation) == -1)
+						if (!(ownedOperationList->includes(indexOwnedOperation)))
 						{
 							_ownedOperation->erase(indexOwnedOperation);
 						}
@@ -981,7 +981,7 @@ bool InterfaceImpl::eSet(int featureID, const Any& newValue)
 
 					for(const std::shared_ptr<uml::Operation> indexOwnedOperation: *ownedOperationList)
 					{
-						if (_ownedOperation->find(indexOwnedOperation) == -1)
+						if (!(_ownedOperation->includes(indexOwnedOperation)))
 						{
 							_ownedOperation->add(indexOwnedOperation);
 						}
@@ -1010,7 +1010,7 @@ bool InterfaceImpl::eSet(int featureID, const Any& newValue)
 					std::shared_ptr<Bag<uml::Reception>> _ownedReception=getOwnedReception();
 					for(const std::shared_ptr<uml::Reception> indexOwnedReception: *_ownedReception)
 					{
-						if (ownedReceptionList->find(indexOwnedReception) == -1)
+						if (!(ownedReceptionList->includes(indexOwnedReception)))
 						{
 							_ownedReception->erase(indexOwnedReception);
 						}
@@ -1018,7 +1018,7 @@ bool InterfaceImpl::eSet(int featureID, const Any& newValue)
 
 					for(const std::shared_ptr<uml::Reception> indexOwnedReception: *ownedReceptionList)
 					{
-						if (_ownedReception->find(indexOwnedReception) == -1)
+						if (!(_ownedReception->includes(indexOwnedReception)))
 						{
 							_ownedReception->add(indexOwnedReception);
 						}
@@ -1055,7 +1055,7 @@ bool InterfaceImpl::eSet(int featureID, const Any& newValue)
 					std::shared_ptr<Bag<uml::Interface>> _redefinedInterface=getRedefinedInterface();
 					for(const std::shared_ptr<uml::Interface> indexRedefinedInterface: *_redefinedInterface)
 					{
-						if (redefinedInterfaceList->find(indexRedefinedInterface) == -1)
+						if (!(redefinedInterfaceList->includes(indexRedefinedInterface)))
 						{
 							_redefinedInterface->erase(indexRedefinedInterface);
 						}
@@ -1063,7 +1063,7 @@ bool InterfaceImpl::eSet(int featureID, const Any& newValue)
 
 					for(const std::shared_ptr<uml::Interface> indexRedefinedInterface: *redefinedInterfaceList)
 					{
-						if (_redefinedInterface->find(indexRedefinedInterface) == -1)
+						if (!(_redefinedInterface->includes(indexRedefinedInterface)))
 						{
 							_redefinedInterface->add(indexRedefinedInterface);
 						}

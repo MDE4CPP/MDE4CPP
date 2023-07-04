@@ -173,7 +173,7 @@ std::string SetterNameImpl::getSetterName() const
 // Structural Feature Getter/Setter
 //*********************************
 //Get
-Any SetterNameImpl::get(std::shared_ptr<uml::Property> _property) const
+Any SetterNameImpl::get(const std::shared_ptr<uml::Property>& _property) const
 {
 	std::string qualifiedName = _property->getQualifiedName();
     return this->get(qualifiedName);
@@ -198,19 +198,19 @@ Any SetterNameImpl::get(unsigned long _uID) const
 }
 
 //Set
-void SetterNameImpl::set(std::shared_ptr<uml::Property> _property, Any value)
+void SetterNameImpl::set(const std::shared_ptr<uml::Property>& _property, const Any& value)
 {
 	std::string qualifiedName = _property->getQualifiedName();
     this->set(qualifiedName, value);
 }
 
-void SetterNameImpl::set(std::string _qualifiedName, Any value)
+void SetterNameImpl::set(std::string _qualifiedName, const Any& value)
 {
 	unsigned long uID = util::Util::polynomialRollingHash(_qualifiedName);
     this->set(uID, value);
 }
 
-void SetterNameImpl::set(unsigned long _uID, Any value)
+void SetterNameImpl::set(unsigned long _uID, const Any& value)
 {
 	std::map<unsigned long, std::function<void(Any)>>::const_iterator iter = m_setterMap.find(_uID);
     if(iter != m_setterMap.cend())
@@ -221,7 +221,7 @@ void SetterNameImpl::set(unsigned long _uID, Any value)
 }
 
 //Unset
-void SetterNameImpl::unset(std::shared_ptr<uml::Property> _property)
+void SetterNameImpl::unset(const std::shared_ptr<uml::Property>& _property)
 {
 	std::string qualifiedName = _property->getQualifiedName();
     this->unset(qualifiedName);
@@ -236,7 +236,7 @@ void SetterNameImpl::unset(std::string _qualifiedName)
 void SetterNameImpl::unset(unsigned long _uID)
 {
 	std::map<unsigned long, std::function<void()>>::const_iterator iter = m_unsetterMap.find(_uID);
-    if(iter != m_unsetterMap.cend())
+    if(iter != m_unsetterMap.cend()) //TODO optimize loop
     {
         //invoke the unsetter function
         iter->second();
@@ -248,11 +248,12 @@ void SetterNameImpl::unset(unsigned long _uID)
 // Operation Invoction
 //*********************************
 //Invoke
-Any SetterNameImpl::invoke(std::shared_ptr<uml::Operation> _operation, std::shared_ptr<Bag<Any>> _arguments)
+Any SetterNameImpl::invoke(const std::shared_ptr<uml::Operation>& _operation, const std::shared_ptr<Bag<Any>>& _arguments)
 {
 	std::string qualifiedName = _operation->getQualifiedName();
 
-	for(unsigned int i = 0; i < _operation->getOwnedParameter()->size(); i++)
+	int ownedParameterSize = _operation->getOwnedParameter()->size();
+	for(unsigned int i = 0; i < ownedParameterSize; i++)
 	{
 		qualifiedName += "_" + _operation->getOwnedParameter()->at(i)->getType()->getName();
 	}
@@ -260,16 +261,16 @@ Any SetterNameImpl::invoke(std::shared_ptr<uml::Operation> _operation, std::shar
     return this->invoke(qualifiedName, _arguments);
 }
 
-Any SetterNameImpl::invoke(std::string _qualifiedName, std::shared_ptr<Bag<Any>> _arguments)
+Any SetterNameImpl::invoke(std::string _qualifiedName, const std::shared_ptr<Bag<Any>>& _arguments)
 {
 	unsigned long uID = util::Util::polynomialRollingHash(_qualifiedName);
     return this->invoke(uID, _arguments);
 }
 
-Any SetterNameImpl::invoke(unsigned long _uID, std::shared_ptr<Bag<Any>> _arguments)
+Any SetterNameImpl::invoke(unsigned long _uID, const std::shared_ptr<Bag<Any>>& _arguments)
 {
 	std::map<unsigned long, std::function<Any(std::shared_ptr<Bag<Any>>)>>::const_iterator iter = m_invocationMap.find(_uID);
-    if(iter != m_invocationMap.cend())
+    if(iter != m_invocationMap.cend()) //TODO optimize loop
     {
         //invoke the operation
         return iter->second(_arguments);

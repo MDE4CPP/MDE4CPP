@@ -345,7 +345,7 @@ void OclMessageValueImpl::resolveReferences(const int featureID, std::vector<std
 	{
 		case ocl::Values::ValuesPackage::OCLMESSAGEVALUE_ATTRIBUTE_ARGUMENTS:
 		{
-			std::shared_ptr<Bag<ocl::Values::NameValueBinding>> _arguments = getArguments();
+			const std::shared_ptr<Bag<ocl::Values::NameValueBinding>>& _arguments = getArguments();
 			for(std::shared_ptr<ecore::EObject> ref : references)
 			{
 				std::shared_ptr<ocl::Values::NameValueBinding>  _r = std::dynamic_pointer_cast<ocl::Values::NameValueBinding>(ref);
@@ -515,7 +515,7 @@ bool OclMessageValueImpl::eSet(int featureID, const Any& newValue)
 					std::shared_ptr<Bag<ocl::Values::NameValueBinding>> _arguments=getArguments();
 					for(const std::shared_ptr<ocl::Values::NameValueBinding> indexArguments: *_arguments)
 					{
-						if (argumentsList->find(indexArguments) == -1)
+						if (!(argumentsList->includes(indexArguments)))
 						{
 							_arguments->erase(indexArguments);
 						}
@@ -523,7 +523,7 @@ bool OclMessageValueImpl::eSet(int featureID, const Any& newValue)
 
 					for(const std::shared_ptr<ocl::Values::NameValueBinding> indexArguments: *argumentsList)
 					{
-						if (_arguments->find(indexArguments) == -1)
+						if (!(_arguments->includes(indexArguments)))
 						{
 							_arguments->add(indexArguments);
 						}

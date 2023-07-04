@@ -983,7 +983,7 @@ void PropertyImpl::resolveReferences(const int featureID, std::vector<std::share
 
 		case uml::umlPackage::PROPERTY_ATTRIBUTE_REDEFINEDPROPERTY:
 		{
-			std::shared_ptr<SubsetUnion<uml::Property, uml::RedefinableElement>> _redefinedProperty = getRedefinedProperty();
+			const std::shared_ptr<SubsetUnion<uml::Property, uml::RedefinableElement>>& _redefinedProperty = getRedefinedProperty();
 			for(std::shared_ptr<ecore::EObject> ref : references)
 			{
 				std::shared_ptr<uml::Property>  _r = std::dynamic_pointer_cast<uml::Property>(ref);
@@ -997,7 +997,7 @@ void PropertyImpl::resolveReferences(const int featureID, std::vector<std::share
 
 		case uml::umlPackage::PROPERTY_ATTRIBUTE_SUBSETTEDPROPERTY:
 		{
-			std::shared_ptr<Bag<uml::Property>> _subsettedProperty = getSubsettedProperty();
+			const std::shared_ptr<Bag<uml::Property>>& _subsettedProperty = getSubsettedProperty();
 			for(std::shared_ptr<ecore::EObject> ref : references)
 			{
 				std::shared_ptr<uml::Property>  _r = std::dynamic_pointer_cast<uml::Property>(ref);
@@ -1353,7 +1353,7 @@ bool PropertyImpl::eSet(int featureID, const Any& newValue)
 					std::shared_ptr<Bag<uml::Property>> _qualifier=getQualifier();
 					for(const std::shared_ptr<uml::Property> indexQualifier: *_qualifier)
 					{
-						if (qualifierList->find(indexQualifier) == -1)
+						if (!(qualifierList->includes(indexQualifier)))
 						{
 							_qualifier->erase(indexQualifier);
 						}
@@ -1361,7 +1361,7 @@ bool PropertyImpl::eSet(int featureID, const Any& newValue)
 
 					for(const std::shared_ptr<uml::Property> indexQualifier: *qualifierList)
 					{
-						if (_qualifier->find(indexQualifier) == -1)
+						if (!(_qualifier->includes(indexQualifier)))
 						{
 							_qualifier->add(indexQualifier);
 						}
@@ -1390,7 +1390,7 @@ bool PropertyImpl::eSet(int featureID, const Any& newValue)
 					std::shared_ptr<Bag<uml::Property>> _redefinedProperty=getRedefinedProperty();
 					for(const std::shared_ptr<uml::Property> indexRedefinedProperty: *_redefinedProperty)
 					{
-						if (redefinedPropertyList->find(indexRedefinedProperty) == -1)
+						if (!(redefinedPropertyList->includes(indexRedefinedProperty)))
 						{
 							_redefinedProperty->erase(indexRedefinedProperty);
 						}
@@ -1398,7 +1398,7 @@ bool PropertyImpl::eSet(int featureID, const Any& newValue)
 
 					for(const std::shared_ptr<uml::Property> indexRedefinedProperty: *redefinedPropertyList)
 					{
-						if (_redefinedProperty->find(indexRedefinedProperty) == -1)
+						if (!(_redefinedProperty->includes(indexRedefinedProperty)))
 						{
 							_redefinedProperty->add(indexRedefinedProperty);
 						}
@@ -1427,7 +1427,7 @@ bool PropertyImpl::eSet(int featureID, const Any& newValue)
 					std::shared_ptr<Bag<uml::Property>> _subsettedProperty=getSubsettedProperty();
 					for(const std::shared_ptr<uml::Property> indexSubsettedProperty: *_subsettedProperty)
 					{
-						if (subsettedPropertyList->find(indexSubsettedProperty) == -1)
+						if (!(subsettedPropertyList->includes(indexSubsettedProperty)))
 						{
 							_subsettedProperty->erase(indexSubsettedProperty);
 						}
@@ -1435,7 +1435,7 @@ bool PropertyImpl::eSet(int featureID, const Any& newValue)
 
 					for(const std::shared_ptr<uml::Property> indexSubsettedProperty: *subsettedPropertyList)
 					{
-						if (_subsettedProperty->find(indexSubsettedProperty) == -1)
+						if (!(_subsettedProperty->includes(indexSubsettedProperty)))
 						{
 							_subsettedProperty->add(indexSubsettedProperty);
 						}

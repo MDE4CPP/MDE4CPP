@@ -88,15 +88,15 @@ namespace StandardProfile
 			// Structural Feature Getter/Setter
 			//*********************************
 			//Get
-			virtual Any get(std::shared_ptr<uml::Property> _property) const ;
+			virtual Any get(const std::shared_ptr<uml::Property>% _property) const ;
 			virtual Any get(std::string _qualifiedName) const ;
 			virtual Any get(unsigned long _uID) const ;
 			//Set
-			virtual void set(std::shared_ptr<uml::Property> _property, Any value) ;
-			virtual void set(std::string _qualifiedName, Any value) ;
-			virtual void set(unsigned long _uID, Any value) ;
+			virtual void set(const std::shared_ptr<uml::Property>& _property, const Any& value) ;
+			virtual void set(std::string _qualifiedName, const Any& value) ;
+			virtual void set(unsigned long _uID, const Any& value) ;
 			//Unset
-			virtual void unset(std::shared_ptr<uml::Property> _property) ;
+			virtual void unset(const std::shared_ptr<uml::Property>& _property) ;
 			virtual void unset(std::string _qualifiedName) ;
 			virtual void unset(unsigned long _uID) ;
 			
@@ -105,9 +105,9 @@ namespace StandardProfile
 			// Operation Invocation
 			//*********************************
 			//Invoke
-			virtual Any invoke(std::shared_ptr<uml::Operation> _operation, std::shared_ptr<Bag<Any>> _arguments) ;
-			virtual Any invoke(std::string _qualifiedName, std::shared_ptr<Bag<Any>> _arguments) ;
-			virtual Any invoke(unsigned long _uID, std::shared_ptr<Bag<Any>> _arguments) ;
+			virtual Any invoke(const std::shared_ptr<uml::Operation>& _operation, const std::shared_ptr<Bag<Any>>& _arguments) ;
+			virtual Any invoke(std::string _qualifiedName, const std::shared_ptr<Bag<Any>>& _arguments) ;
+			virtual Any invoke(unsigned long _uID, const std::shared_ptr<Bag<Any>>& _arguments) ;
 
 		private:
 			std::weak_ptr<Specification> m_thisSpecificationPtr;

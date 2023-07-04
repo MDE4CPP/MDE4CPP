@@ -242,7 +242,7 @@ void TupleTypeImpl::resolveReferences(const int featureID, std::vector<std::shar
 
 		case ocl::Types::TypesPackage::TUPLETYPE_ATTRIBUTE_PARTS:
 		{
-			std::shared_ptr<Bag<ocl::Types::NameTypeBinding>> _parts = getParts();
+			const std::shared_ptr<Bag<ocl::Types::NameTypeBinding>>& _parts = getParts();
 			for(std::shared_ptr<ecore::EObject> ref : references)
 			{
 				std::shared_ptr<ocl::Types::NameTypeBinding>  _r = std::dynamic_pointer_cast<ocl::Types::NameTypeBinding>(ref);
@@ -342,7 +342,7 @@ bool TupleTypeImpl::eSet(int featureID, const Any& newValue)
 					std::shared_ptr<Bag<ocl::Types::NameTypeBinding>> _parts=getParts();
 					for(const std::shared_ptr<ocl::Types::NameTypeBinding> indexParts: *_parts)
 					{
-						if (partsList->find(indexParts) == -1)
+						if (!(partsList->includes(indexParts)))
 						{
 							_parts->erase(indexParts);
 						}
@@ -350,7 +350,7 @@ bool TupleTypeImpl::eSet(int featureID, const Any& newValue)
 
 					for(const std::shared_ptr<ocl::Types::NameTypeBinding> indexParts: *partsList)
 					{
-						if (_parts->find(indexParts) == -1)
+						if (!(_parts->includes(indexParts)))
 						{
 							_parts->add(indexParts);
 						}

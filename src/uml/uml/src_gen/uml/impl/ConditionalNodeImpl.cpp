@@ -290,7 +290,7 @@ const std::shared_ptr<Subset<uml::Clause, uml::Element>>& ConditionalNodeImpl::g
 }
 
 /* Getter & Setter for reference result */
-const std::shared_ptr<Bag<uml::OutputPin>>& ConditionalNodeImpl::getResult() const
+std::shared_ptr<Bag<uml::OutputPin>> ConditionalNodeImpl::getResult() const
 {
 	//Getter call of redefined container reference StructuredActivityNode::structuredNodeOutput 
 	return uml::StructuredActivityNodeImpl::getStructuredNodeOutput();
@@ -706,7 +706,7 @@ bool ConditionalNodeImpl::eSet(int featureID, const Any& newValue)
 					std::shared_ptr<Bag<uml::Clause>> _clause=getClause();
 					for(const std::shared_ptr<uml::Clause> indexClause: *_clause)
 					{
-						if (clauseList->find(indexClause) == -1)
+						if (!(clauseList->includes(indexClause)))
 						{
 							_clause->erase(indexClause);
 						}
@@ -714,7 +714,7 @@ bool ConditionalNodeImpl::eSet(int featureID, const Any& newValue)
 
 					for(const std::shared_ptr<uml::Clause> indexClause: *clauseList)
 					{
-						if (_clause->find(indexClause) == -1)
+						if (!(_clause->includes(indexClause)))
 						{
 							_clause->add(indexClause);
 						}
@@ -757,7 +757,7 @@ bool ConditionalNodeImpl::eSet(int featureID, const Any& newValue)
 					std::shared_ptr<Bag<uml::OutputPin>> _result=getResult();
 					for(const std::shared_ptr<uml::OutputPin> indexResult: *_result)
 					{
-						if (resultList->find(indexResult) == -1)
+						if (!(resultList->includes(indexResult)))
 						{
 							_result->erase(indexResult);
 						}
@@ -765,7 +765,7 @@ bool ConditionalNodeImpl::eSet(int featureID, const Any& newValue)
 
 					for(const std::shared_ptr<uml::OutputPin> indexResult: *resultList)
 					{
-						if (_result->find(indexResult) == -1)
+						if (!(_result->includes(indexResult)))
 						{
 							_result->add(indexResult);
 						}

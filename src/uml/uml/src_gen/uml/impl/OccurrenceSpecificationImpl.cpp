@@ -299,7 +299,7 @@ void OccurrenceSpecificationImpl::resolveReferences(const int featureID, std::ve
 	{
 		case uml::umlPackage::OCCURRENCESPECIFICATION_ATTRIBUTE_TOAFTER:
 		{
-			std::shared_ptr<Bag<uml::GeneralOrdering>> _toAfter = getToAfter();
+			const std::shared_ptr<Bag<uml::GeneralOrdering>>& _toAfter = getToAfter();
 			for(std::shared_ptr<ecore::EObject> ref : references)
 			{
 				std::shared_ptr<uml::GeneralOrdering>  _r = std::dynamic_pointer_cast<uml::GeneralOrdering>(ref);
@@ -313,7 +313,7 @@ void OccurrenceSpecificationImpl::resolveReferences(const int featureID, std::ve
 
 		case uml::umlPackage::OCCURRENCESPECIFICATION_ATTRIBUTE_TOBEFORE:
 		{
-			std::shared_ptr<Bag<uml::GeneralOrdering>> _toBefore = getToBefore();
+			const std::shared_ptr<Bag<uml::GeneralOrdering>>& _toBefore = getToBefore();
 			for(std::shared_ptr<ecore::EObject> ref : references)
 			{
 				std::shared_ptr<uml::GeneralOrdering>  _r = std::dynamic_pointer_cast<uml::GeneralOrdering>(ref);
@@ -405,7 +405,7 @@ bool OccurrenceSpecificationImpl::eSet(int featureID, const Any& newValue)
 					std::shared_ptr<Bag<uml::GeneralOrdering>> _toAfter=getToAfter();
 					for(const std::shared_ptr<uml::GeneralOrdering> indexToAfter: *_toAfter)
 					{
-						if (toAfterList->find(indexToAfter) == -1)
+						if (!(toAfterList->includes(indexToAfter)))
 						{
 							_toAfter->erase(indexToAfter);
 						}
@@ -413,7 +413,7 @@ bool OccurrenceSpecificationImpl::eSet(int featureID, const Any& newValue)
 
 					for(const std::shared_ptr<uml::GeneralOrdering> indexToAfter: *toAfterList)
 					{
-						if (_toAfter->find(indexToAfter) == -1)
+						if (!(_toAfter->includes(indexToAfter)))
 						{
 							_toAfter->add(indexToAfter);
 						}
@@ -442,7 +442,7 @@ bool OccurrenceSpecificationImpl::eSet(int featureID, const Any& newValue)
 					std::shared_ptr<Bag<uml::GeneralOrdering>> _toBefore=getToBefore();
 					for(const std::shared_ptr<uml::GeneralOrdering> indexToBefore: *_toBefore)
 					{
-						if (toBeforeList->find(indexToBefore) == -1)
+						if (!(toBeforeList->includes(indexToBefore)))
 						{
 							_toBefore->erase(indexToBefore);
 						}
@@ -450,7 +450,7 @@ bool OccurrenceSpecificationImpl::eSet(int featureID, const Any& newValue)
 
 					for(const std::shared_ptr<uml::GeneralOrdering> indexToBefore: *toBeforeList)
 					{
-						if (_toBefore->find(indexToBefore) == -1)
+						if (!(_toBefore->includes(indexToBefore)))
 						{
 							_toBefore->add(indexToBefore);
 						}

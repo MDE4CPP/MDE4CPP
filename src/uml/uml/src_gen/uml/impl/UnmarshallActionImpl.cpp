@@ -594,7 +594,7 @@ bool UnmarshallActionImpl::eSet(int featureID, const Any& newValue)
 					std::shared_ptr<Bag<uml::OutputPin>> _result=getResult();
 					for(const std::shared_ptr<uml::OutputPin> indexResult: *_result)
 					{
-						if (resultList->find(indexResult) == -1)
+						if (!(resultList->includes(indexResult)))
 						{
 							_result->erase(indexResult);
 						}
@@ -602,7 +602,7 @@ bool UnmarshallActionImpl::eSet(int featureID, const Any& newValue)
 
 					for(const std::shared_ptr<uml::OutputPin> indexResult: *resultList)
 					{
-						if (_result->find(indexResult) == -1)
+						if (!(_result->includes(indexResult)))
 						{
 							_result->add(indexResult);
 						}

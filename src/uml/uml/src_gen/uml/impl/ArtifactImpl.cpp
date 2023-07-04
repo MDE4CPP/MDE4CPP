@@ -830,7 +830,7 @@ bool ArtifactImpl::eSet(int featureID, const Any& newValue)
 					std::shared_ptr<Bag<uml::Manifestation>> _manifestation=getManifestation();
 					for(const std::shared_ptr<uml::Manifestation> indexManifestation: *_manifestation)
 					{
-						if (manifestationList->find(indexManifestation) == -1)
+						if (!(manifestationList->includes(indexManifestation)))
 						{
 							_manifestation->erase(indexManifestation);
 						}
@@ -838,7 +838,7 @@ bool ArtifactImpl::eSet(int featureID, const Any& newValue)
 
 					for(const std::shared_ptr<uml::Manifestation> indexManifestation: *manifestationList)
 					{
-						if (_manifestation->find(indexManifestation) == -1)
+						if (!(_manifestation->includes(indexManifestation)))
 						{
 							_manifestation->add(indexManifestation);
 						}
@@ -867,7 +867,7 @@ bool ArtifactImpl::eSet(int featureID, const Any& newValue)
 					std::shared_ptr<Bag<uml::Artifact>> _nestedArtifact=getNestedArtifact();
 					for(const std::shared_ptr<uml::Artifact> indexNestedArtifact: *_nestedArtifact)
 					{
-						if (nestedArtifactList->find(indexNestedArtifact) == -1)
+						if (!(nestedArtifactList->includes(indexNestedArtifact)))
 						{
 							_nestedArtifact->erase(indexNestedArtifact);
 						}
@@ -875,7 +875,7 @@ bool ArtifactImpl::eSet(int featureID, const Any& newValue)
 
 					for(const std::shared_ptr<uml::Artifact> indexNestedArtifact: *nestedArtifactList)
 					{
-						if (_nestedArtifact->find(indexNestedArtifact) == -1)
+						if (!(_nestedArtifact->includes(indexNestedArtifact)))
 						{
 							_nestedArtifact->add(indexNestedArtifact);
 						}
@@ -904,7 +904,7 @@ bool ArtifactImpl::eSet(int featureID, const Any& newValue)
 					std::shared_ptr<Bag<uml::Property>> _ownedAttribute=getOwnedAttribute();
 					for(const std::shared_ptr<uml::Property> indexOwnedAttribute: *_ownedAttribute)
 					{
-						if (ownedAttributeList->find(indexOwnedAttribute) == -1)
+						if (!(ownedAttributeList->includes(indexOwnedAttribute)))
 						{
 							_ownedAttribute->erase(indexOwnedAttribute);
 						}
@@ -912,7 +912,7 @@ bool ArtifactImpl::eSet(int featureID, const Any& newValue)
 
 					for(const std::shared_ptr<uml::Property> indexOwnedAttribute: *ownedAttributeList)
 					{
-						if (_ownedAttribute->find(indexOwnedAttribute) == -1)
+						if (!(_ownedAttribute->includes(indexOwnedAttribute)))
 						{
 							_ownedAttribute->add(indexOwnedAttribute);
 						}
@@ -941,7 +941,7 @@ bool ArtifactImpl::eSet(int featureID, const Any& newValue)
 					std::shared_ptr<Bag<uml::Operation>> _ownedOperation=getOwnedOperation();
 					for(const std::shared_ptr<uml::Operation> indexOwnedOperation: *_ownedOperation)
 					{
-						if (ownedOperationList->find(indexOwnedOperation) == -1)
+						if (!(ownedOperationList->includes(indexOwnedOperation)))
 						{
 							_ownedOperation->erase(indexOwnedOperation);
 						}
@@ -949,7 +949,7 @@ bool ArtifactImpl::eSet(int featureID, const Any& newValue)
 
 					for(const std::shared_ptr<uml::Operation> indexOwnedOperation: *ownedOperationList)
 					{
-						if (_ownedOperation->find(indexOwnedOperation) == -1)
+						if (!(_ownedOperation->includes(indexOwnedOperation)))
 						{
 							_ownedOperation->add(indexOwnedOperation);
 						}

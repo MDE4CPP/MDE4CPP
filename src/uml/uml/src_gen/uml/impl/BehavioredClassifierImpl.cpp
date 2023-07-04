@@ -652,7 +652,7 @@ bool BehavioredClassifierImpl::eSet(int featureID, const Any& newValue)
 					std::shared_ptr<Bag<uml::InterfaceRealization>> _interfaceRealization=getInterfaceRealization();
 					for(const std::shared_ptr<uml::InterfaceRealization> indexInterfaceRealization: *_interfaceRealization)
 					{
-						if (interfaceRealizationList->find(indexInterfaceRealization) == -1)
+						if (!(interfaceRealizationList->includes(indexInterfaceRealization)))
 						{
 							_interfaceRealization->erase(indexInterfaceRealization);
 						}
@@ -660,7 +660,7 @@ bool BehavioredClassifierImpl::eSet(int featureID, const Any& newValue)
 
 					for(const std::shared_ptr<uml::InterfaceRealization> indexInterfaceRealization: *interfaceRealizationList)
 					{
-						if (_interfaceRealization->find(indexInterfaceRealization) == -1)
+						if (!(_interfaceRealization->includes(indexInterfaceRealization)))
 						{
 							_interfaceRealization->add(indexInterfaceRealization);
 						}
@@ -689,7 +689,7 @@ bool BehavioredClassifierImpl::eSet(int featureID, const Any& newValue)
 					std::shared_ptr<Bag<uml::Behavior>> _ownedBehavior=getOwnedBehavior();
 					for(const std::shared_ptr<uml::Behavior> indexOwnedBehavior: *_ownedBehavior)
 					{
-						if (ownedBehaviorList->find(indexOwnedBehavior) == -1)
+						if (!(ownedBehaviorList->includes(indexOwnedBehavior)))
 						{
 							_ownedBehavior->erase(indexOwnedBehavior);
 						}
@@ -697,7 +697,7 @@ bool BehavioredClassifierImpl::eSet(int featureID, const Any& newValue)
 
 					for(const std::shared_ptr<uml::Behavior> indexOwnedBehavior: *ownedBehaviorList)
 					{
-						if (_ownedBehavior->find(indexOwnedBehavior) == -1)
+						if (!(_ownedBehavior->includes(indexOwnedBehavior)))
 						{
 							_ownedBehavior->add(indexOwnedBehavior);
 						}

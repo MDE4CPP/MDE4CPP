@@ -228,7 +228,7 @@ std::shared_ptr<fUML::Semantics::StructuredClassifiers::Object> LocusImpl::insta
 	//end of body
 }
 
-void LocusImpl::remove(const std::shared_ptr<fUML::Semantics::StructuredClassifiers::ExtensionalValue>& value)
+void LocusImpl::remove(std::shared_ptr<fUML::Semantics::StructuredClassifiers::ExtensionalValue> value)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -496,7 +496,7 @@ bool LocusImpl::eSet(int featureID, const Any& newValue)
 					std::shared_ptr<Bag<fUML::Semantics::StructuredClassifiers::ExtensionalValue>> _extensionalValues=getExtensionalValues();
 					for(const std::shared_ptr<fUML::Semantics::StructuredClassifiers::ExtensionalValue> indexExtensionalValues: *_extensionalValues)
 					{
-						if (extensionalValuesList->find(indexExtensionalValues) == -1)
+						if (!(extensionalValuesList->includes(indexExtensionalValues)))
 						{
 							_extensionalValues->erase(indexExtensionalValues);
 						}
@@ -504,7 +504,7 @@ bool LocusImpl::eSet(int featureID, const Any& newValue)
 
 					for(const std::shared_ptr<fUML::Semantics::StructuredClassifiers::ExtensionalValue> indexExtensionalValues: *extensionalValuesList)
 					{
-						if (_extensionalValues->find(indexExtensionalValues) == -1)
+						if (!(_extensionalValues->includes(indexExtensionalValues)))
 						{
 							_extensionalValues->add(indexExtensionalValues);
 						}

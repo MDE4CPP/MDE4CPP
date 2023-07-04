@@ -240,7 +240,7 @@ void NavigationCallExpEvalImpl::resolveReferences(const int featureID, std::vect
 
 		case ocl::Evaluations::EvaluationsPackage::NAVIGATIONCALLEXPEVAL_ATTRIBUTE_QUALIFIERS:
 		{
-			std::shared_ptr<Bag<ocl::Evaluations::OclExpEval>> _qualifiers = getQualifiers();
+			const std::shared_ptr<Bag<ocl::Evaluations::OclExpEval>>& _qualifiers = getQualifiers();
 			for(std::shared_ptr<ecore::EObject> ref : references)
 			{
 				std::shared_ptr<ocl::Evaluations::OclExpEval>  _r = std::dynamic_pointer_cast<ocl::Evaluations::OclExpEval>(ref);
@@ -342,7 +342,7 @@ bool NavigationCallExpEvalImpl::eSet(int featureID, const Any& newValue)
 					std::shared_ptr<Bag<ocl::Evaluations::OclExpEval>> _qualifiers=getQualifiers();
 					for(const std::shared_ptr<ocl::Evaluations::OclExpEval> indexQualifiers: *_qualifiers)
 					{
-						if (qualifiersList->find(indexQualifiers) == -1)
+						if (!(qualifiersList->includes(indexQualifiers)))
 						{
 							_qualifiers->erase(indexQualifiers);
 						}
@@ -350,7 +350,7 @@ bool NavigationCallExpEvalImpl::eSet(int featureID, const Any& newValue)
 
 					for(const std::shared_ptr<ocl::Evaluations::OclExpEval> indexQualifiers: *qualifiersList)
 					{
-						if (_qualifiers->find(indexQualifiers) == -1)
+						if (!(_qualifiers->includes(indexQualifiers)))
 						{
 							_qualifiers->add(indexQualifiers);
 						}

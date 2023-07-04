@@ -259,7 +259,7 @@ void EvalEnvironmentImpl::resolveReferences(const int featureID, std::vector<std
 	{
 		case ocl::Evaluations::EvaluationsPackage::EVALENVIRONMENT_ATTRIBUTE_BINDINGS:
 		{
-			std::shared_ptr<Bag<ocl::Values::NameValueBinding>> _bindings = getBindings();
+			const std::shared_ptr<Bag<ocl::Values::NameValueBinding>>& _bindings = getBindings();
 			for(std::shared_ptr<ecore::EObject> ref : references)
 			{
 				std::shared_ptr<ocl::Values::NameValueBinding>  _r = std::dynamic_pointer_cast<ocl::Values::NameValueBinding>(ref);
@@ -338,7 +338,7 @@ bool EvalEnvironmentImpl::eSet(int featureID, const Any& newValue)
 					std::shared_ptr<Bag<ocl::Values::NameValueBinding>> _bindings=getBindings();
 					for(const std::shared_ptr<ocl::Values::NameValueBinding> indexBindings: *_bindings)
 					{
-						if (bindingsList->find(indexBindings) == -1)
+						if (!(bindingsList->includes(indexBindings)))
 						{
 							_bindings->erase(indexBindings);
 						}
@@ -346,7 +346,7 @@ bool EvalEnvironmentImpl::eSet(int featureID, const Any& newValue)
 
 					for(const std::shared_ptr<ocl::Values::NameValueBinding> indexBindings: *bindingsList)
 					{
-						if (_bindings->find(indexBindings) == -1)
+						if (!(_bindings->includes(indexBindings)))
 						{
 							_bindings->add(indexBindings);
 						}

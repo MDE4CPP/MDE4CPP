@@ -530,7 +530,7 @@ bool EnumerationImpl::eSet(int featureID, const Any& newValue)
 					std::shared_ptr<Bag<uml::EnumerationLiteral>> _ownedLiteral=getOwnedLiteral();
 					for(const std::shared_ptr<uml::EnumerationLiteral> indexOwnedLiteral: *_ownedLiteral)
 					{
-						if (ownedLiteralList->find(indexOwnedLiteral) == -1)
+						if (!(ownedLiteralList->includes(indexOwnedLiteral)))
 						{
 							_ownedLiteral->erase(indexOwnedLiteral);
 						}
@@ -538,7 +538,7 @@ bool EnumerationImpl::eSet(int featureID, const Any& newValue)
 
 					for(const std::shared_ptr<uml::EnumerationLiteral> indexOwnedLiteral: *ownedLiteralList)
 					{
-						if (_ownedLiteral->find(indexOwnedLiteral) == -1)
+						if (!(_ownedLiteral->includes(indexOwnedLiteral)))
 						{
 							_ownedLiteral->add(indexOwnedLiteral);
 						}

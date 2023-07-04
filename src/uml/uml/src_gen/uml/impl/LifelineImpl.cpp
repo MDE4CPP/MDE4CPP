@@ -370,7 +370,7 @@ void LifelineImpl::resolveReferences(const int featureID, std::vector<std::share
 	{
 		case uml::umlPackage::LIFELINE_ATTRIBUTE_COVEREDBY:
 		{
-			std::shared_ptr<Bag<uml::InteractionFragment>> _coveredBy = getCoveredBy();
+			const std::shared_ptr<Bag<uml::InteractionFragment>>& _coveredBy = getCoveredBy();
 			for(std::shared_ptr<ecore::EObject> ref : references)
 			{
 				std::shared_ptr<uml::InteractionFragment>  _r = std::dynamic_pointer_cast<uml::InteractionFragment>(ref);
@@ -518,7 +518,7 @@ bool LifelineImpl::eSet(int featureID, const Any& newValue)
 					std::shared_ptr<Bag<uml::InteractionFragment>> _coveredBy=getCoveredBy();
 					for(const std::shared_ptr<uml::InteractionFragment> indexCoveredBy: *_coveredBy)
 					{
-						if (coveredByList->find(indexCoveredBy) == -1)
+						if (!(coveredByList->includes(indexCoveredBy)))
 						{
 							_coveredBy->erase(indexCoveredBy);
 						}
@@ -526,7 +526,7 @@ bool LifelineImpl::eSet(int featureID, const Any& newValue)
 
 					for(const std::shared_ptr<uml::InteractionFragment> indexCoveredBy: *coveredByList)
 					{
-						if (_coveredBy->find(indexCoveredBy) == -1)
+						if (!(_coveredBy->includes(indexCoveredBy)))
 						{
 							_coveredBy->add(indexCoveredBy);
 						}

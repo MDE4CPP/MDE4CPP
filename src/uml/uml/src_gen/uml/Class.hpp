@@ -168,7 +168,7 @@ namespace uml
 			*/
 			
 			virtual const std::shared_ptr<Subset<uml::Classifier, uml::NamedElement>>& getNestedClassifier() const = 0;
-			virtual const std::shared_ptr<Subset<uml::Property, uml::ConnectableElement, uml::NamedElement, uml::Property>>& getClass_OwnedAttribute() const = 0;
+			virtual std::shared_ptr<Subset<uml::Property, uml::ConnectableElement, uml::NamedElement, uml::Property>> getClass_OwnedAttribute() const = 0;
 			/*!
 			The Operations owned by the Class.
 			<p>From package UML::StructuredClassifiers.</p>
@@ -186,7 +186,7 @@ namespace uml
 			<p>From package UML::StructuredClassifiers.</p>
 			*/
 			
-			virtual const std::shared_ptr<Bag<uml::Class>>& getSuperClass() const = 0;
+			virtual std::shared_ptr<Bag<uml::Class>> getSuperClass() const = 0;
 
 			//*********************************
 			// Union Reference Getters

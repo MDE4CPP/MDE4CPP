@@ -199,7 +199,7 @@ namespace uml
 			<p>From package UML::StateMachines.</p>
 			*/
 			
-			virtual const std::shared_ptr<Bag<uml::StateMachine>>& getExtendedStateMachine() const = 0;
+			virtual std::shared_ptr<Bag<uml::StateMachine>> getExtendedStateMachine() const = 0;
 			/*!
 			The Regions owned directly by the StateMachine.
 			<p>From package UML::StateMachines.</p>

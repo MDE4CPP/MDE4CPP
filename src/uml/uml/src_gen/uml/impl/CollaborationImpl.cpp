@@ -459,7 +459,7 @@ void CollaborationImpl::resolveReferences(const int featureID, std::vector<std::
 	{
 		case uml::umlPackage::COLLABORATION_ATTRIBUTE_COLLABORATIONROLE:
 		{
-			std::shared_ptr<Subset<uml::ConnectableElement, uml::ConnectableElement>> _collaborationRole = getCollaborationRole();
+			const std::shared_ptr<Subset<uml::ConnectableElement, uml::ConnectableElement>>& _collaborationRole = getCollaborationRole();
 			for(std::shared_ptr<ecore::EObject> ref : references)
 			{
 				std::shared_ptr<uml::ConnectableElement>  _r = std::dynamic_pointer_cast<uml::ConnectableElement>(ref);
@@ -572,7 +572,7 @@ bool CollaborationImpl::eSet(int featureID, const Any& newValue)
 					std::shared_ptr<Bag<uml::ConnectableElement>> _collaborationRole=getCollaborationRole();
 					for(const std::shared_ptr<uml::ConnectableElement> indexCollaborationRole: *_collaborationRole)
 					{
-						if (collaborationRoleList->find(indexCollaborationRole) == -1)
+						if (!(collaborationRoleList->includes(indexCollaborationRole)))
 						{
 							_collaborationRole->erase(indexCollaborationRole);
 						}
@@ -580,7 +580,7 @@ bool CollaborationImpl::eSet(int featureID, const Any& newValue)
 
 					for(const std::shared_ptr<uml::ConnectableElement> indexCollaborationRole: *collaborationRoleList)
 					{
-						if (_collaborationRole->find(indexCollaborationRole) == -1)
+						if (!(_collaborationRole->includes(indexCollaborationRole)))
 						{
 							_collaborationRole->add(indexCollaborationRole);
 						}

@@ -257,7 +257,7 @@ void CollectionValueImpl::resolveReferences(const int featureID, std::vector<std
 	{
 		case ocl::Values::ValuesPackage::COLLECTIONVALUE_ATTRIBUTE_ELEMENTS:
 		{
-			std::shared_ptr<Bag<ocl::Values::Element>> _elements = getElements();
+			const std::shared_ptr<Bag<ocl::Values::Element>>& _elements = getElements();
 			for(std::shared_ptr<ecore::EObject> ref : references)
 			{
 				std::shared_ptr<ocl::Values::Element>  _r = std::dynamic_pointer_cast<ocl::Values::Element>(ref);
@@ -342,7 +342,7 @@ bool CollectionValueImpl::eSet(int featureID, const Any& newValue)
 					std::shared_ptr<Bag<ocl::Values::Element>> _elements=getElements();
 					for(const std::shared_ptr<ocl::Values::Element> indexElements: *_elements)
 					{
-						if (elementsList->find(indexElements) == -1)
+						if (!(elementsList->includes(indexElements)))
 						{
 							_elements->erase(indexElements);
 						}
@@ -350,7 +350,7 @@ bool CollectionValueImpl::eSet(int featureID, const Any& newValue)
 
 					for(const std::shared_ptr<ocl::Values::Element> indexElements: *elementsList)
 					{
-						if (_elements->find(indexElements) == -1)
+						if (!(_elements->includes(indexElements)))
 						{
 							_elements->add(indexElements);
 						}

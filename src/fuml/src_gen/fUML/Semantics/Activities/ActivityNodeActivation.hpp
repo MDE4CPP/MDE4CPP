@@ -87,7 +87,7 @@ namespace fUML::Semantics::Activities
 			//*********************************
 			virtual void addIncomingEdge(const std::shared_ptr<fUML::Semantics::Activities::ActivityEdgeInstance>& edge) = 0;
 			virtual void addOutgoingEdge(const std::shared_ptr<fUML::Semantics::Activities::ActivityEdgeInstance>& edge) = 0;
-			virtual void addToken(const std::shared_ptr<fUML::Semantics::Activities::Token>& token) = 0;
+			virtual void addToken(std::shared_ptr<fUML::Semantics::Activities::Token> token) = 0;
 			virtual void addTokens(const std::shared_ptr<Bag<fUML::Semantics::Activities::Token>>& tokens) = 0;
 			virtual void clearTokens() = 0;
 			virtual void createEdgeInstances() = 0;

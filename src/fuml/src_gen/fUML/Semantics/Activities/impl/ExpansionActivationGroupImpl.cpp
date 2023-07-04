@@ -379,7 +379,7 @@ void ExpansionActivationGroupImpl::resolveReferences(const int featureID, std::v
 	{
 		case fUML::Semantics::Activities::ActivitiesPackage::EXPANSIONACTIVATIONGROUP_ATTRIBUTE_GROUPINPUTS:
 		{
-			std::shared_ptr<Bag<fUML::Semantics::Activities::ExpansionNodeActivation>> _groupInputs = getGroupInputs();
+			const std::shared_ptr<Bag<fUML::Semantics::Activities::ExpansionNodeActivation>>& _groupInputs = getGroupInputs();
 			for(std::shared_ptr<ecore::EObject> ref : references)
 			{
 				std::shared_ptr<fUML::Semantics::Activities::ExpansionNodeActivation>  _r = std::dynamic_pointer_cast<fUML::Semantics::Activities::ExpansionNodeActivation>(ref);
@@ -393,7 +393,7 @@ void ExpansionActivationGroupImpl::resolveReferences(const int featureID, std::v
 
 		case fUML::Semantics::Activities::ActivitiesPackage::EXPANSIONACTIVATIONGROUP_ATTRIBUTE_GROUPOUTPUTS:
 		{
-			std::shared_ptr<Bag<fUML::Semantics::Activities::ExpansionNodeActivation>> _groupOutputs = getGroupOutputs();
+			const std::shared_ptr<Bag<fUML::Semantics::Activities::ExpansionNodeActivation>>& _groupOutputs = getGroupOutputs();
 			for(std::shared_ptr<ecore::EObject> ref : references)
 			{
 				std::shared_ptr<fUML::Semantics::Activities::ExpansionNodeActivation>  _r = std::dynamic_pointer_cast<fUML::Semantics::Activities::ExpansionNodeActivation>(ref);
@@ -419,7 +419,7 @@ void ExpansionActivationGroupImpl::resolveReferences(const int featureID, std::v
 
 		case fUML::Semantics::Activities::ActivitiesPackage::EXPANSIONACTIVATIONGROUP_ATTRIBUTE_REGIONINPUTS:
 		{
-			std::shared_ptr<Bag<fUML::Semantics::Actions::OutputPinActivation>> _regionInputs = getRegionInputs();
+			const std::shared_ptr<Bag<fUML::Semantics::Actions::OutputPinActivation>>& _regionInputs = getRegionInputs();
 			for(std::shared_ptr<ecore::EObject> ref : references)
 			{
 				std::shared_ptr<fUML::Semantics::Actions::OutputPinActivation>  _r = std::dynamic_pointer_cast<fUML::Semantics::Actions::OutputPinActivation>(ref);
@@ -524,7 +524,7 @@ bool ExpansionActivationGroupImpl::eSet(int featureID, const Any& newValue)
 					std::shared_ptr<Bag<fUML::Semantics::Activities::ExpansionNodeActivation>> _groupInputs=getGroupInputs();
 					for(const std::shared_ptr<fUML::Semantics::Activities::ExpansionNodeActivation> indexGroupInputs: *_groupInputs)
 					{
-						if (groupInputsList->find(indexGroupInputs) == -1)
+						if (!(groupInputsList->includes(indexGroupInputs)))
 						{
 							_groupInputs->erase(indexGroupInputs);
 						}
@@ -532,7 +532,7 @@ bool ExpansionActivationGroupImpl::eSet(int featureID, const Any& newValue)
 
 					for(const std::shared_ptr<fUML::Semantics::Activities::ExpansionNodeActivation> indexGroupInputs: *groupInputsList)
 					{
-						if (_groupInputs->find(indexGroupInputs) == -1)
+						if (!(_groupInputs->includes(indexGroupInputs)))
 						{
 							_groupInputs->add(indexGroupInputs);
 						}
@@ -561,7 +561,7 @@ bool ExpansionActivationGroupImpl::eSet(int featureID, const Any& newValue)
 					std::shared_ptr<Bag<fUML::Semantics::Activities::ExpansionNodeActivation>> _groupOutputs=getGroupOutputs();
 					for(const std::shared_ptr<fUML::Semantics::Activities::ExpansionNodeActivation> indexGroupOutputs: *_groupOutputs)
 					{
-						if (groupOutputsList->find(indexGroupOutputs) == -1)
+						if (!(groupOutputsList->includes(indexGroupOutputs)))
 						{
 							_groupOutputs->erase(indexGroupOutputs);
 						}
@@ -569,7 +569,7 @@ bool ExpansionActivationGroupImpl::eSet(int featureID, const Any& newValue)
 
 					for(const std::shared_ptr<fUML::Semantics::Activities::ExpansionNodeActivation> indexGroupOutputs: *groupOutputsList)
 					{
-						if (_groupOutputs->find(indexGroupOutputs) == -1)
+						if (!(_groupOutputs->includes(indexGroupOutputs)))
 						{
 							_groupOutputs->add(indexGroupOutputs);
 						}
@@ -613,7 +613,7 @@ bool ExpansionActivationGroupImpl::eSet(int featureID, const Any& newValue)
 					std::shared_ptr<Bag<fUML::Semantics::Actions::OutputPinActivation>> _regionInputs=getRegionInputs();
 					for(const std::shared_ptr<fUML::Semantics::Actions::OutputPinActivation> indexRegionInputs: *_regionInputs)
 					{
-						if (regionInputsList->find(indexRegionInputs) == -1)
+						if (!(regionInputsList->includes(indexRegionInputs)))
 						{
 							_regionInputs->erase(indexRegionInputs);
 						}
@@ -621,7 +621,7 @@ bool ExpansionActivationGroupImpl::eSet(int featureID, const Any& newValue)
 
 					for(const std::shared_ptr<fUML::Semantics::Actions::OutputPinActivation> indexRegionInputs: *regionInputsList)
 					{
-						if (_regionInputs->find(indexRegionInputs) == -1)
+						if (!(_regionInputs->includes(indexRegionInputs)))
 						{
 							_regionInputs->add(indexRegionInputs);
 						}

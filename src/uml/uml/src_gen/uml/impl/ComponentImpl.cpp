@@ -759,7 +759,7 @@ bool ComponentImpl::eSet(int featureID, const Any& newValue)
 					std::shared_ptr<Bag<uml::PackageableElement>> _packagedElement=getPackagedElement();
 					for(const std::shared_ptr<uml::PackageableElement> indexPackagedElement: *_packagedElement)
 					{
-						if (packagedElementList->find(indexPackagedElement) == -1)
+						if (!(packagedElementList->includes(indexPackagedElement)))
 						{
 							_packagedElement->erase(indexPackagedElement);
 						}
@@ -767,7 +767,7 @@ bool ComponentImpl::eSet(int featureID, const Any& newValue)
 
 					for(const std::shared_ptr<uml::PackageableElement> indexPackagedElement: *packagedElementList)
 					{
-						if (_packagedElement->find(indexPackagedElement) == -1)
+						if (!(_packagedElement->includes(indexPackagedElement)))
 						{
 							_packagedElement->add(indexPackagedElement);
 						}
@@ -796,7 +796,7 @@ bool ComponentImpl::eSet(int featureID, const Any& newValue)
 					std::shared_ptr<Bag<uml::ComponentRealization>> _realization=getRealization();
 					for(const std::shared_ptr<uml::ComponentRealization> indexRealization: *_realization)
 					{
-						if (realizationList->find(indexRealization) == -1)
+						if (!(realizationList->includes(indexRealization)))
 						{
 							_realization->erase(indexRealization);
 						}
@@ -804,7 +804,7 @@ bool ComponentImpl::eSet(int featureID, const Any& newValue)
 
 					for(const std::shared_ptr<uml::ComponentRealization> indexRealization: *realizationList)
 					{
-						if (_realization->find(indexRealization) == -1)
+						if (!(_realization->includes(indexRealization)))
 						{
 							_realization->add(indexRealization);
 						}

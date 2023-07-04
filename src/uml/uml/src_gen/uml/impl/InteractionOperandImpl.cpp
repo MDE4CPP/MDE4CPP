@@ -501,7 +501,7 @@ bool InteractionOperandImpl::eSet(int featureID, const Any& newValue)
 					std::shared_ptr<Bag<uml::InteractionFragment>> _fragment=getFragment();
 					for(const std::shared_ptr<uml::InteractionFragment> indexFragment: *_fragment)
 					{
-						if (fragmentList->find(indexFragment) == -1)
+						if (!(fragmentList->includes(indexFragment)))
 						{
 							_fragment->erase(indexFragment);
 						}
@@ -509,7 +509,7 @@ bool InteractionOperandImpl::eSet(int featureID, const Any& newValue)
 
 					for(const std::shared_ptr<uml::InteractionFragment> indexFragment: *fragmentList)
 					{
-						if (_fragment->find(indexFragment) == -1)
+						if (!(_fragment->includes(indexFragment)))
 						{
 							_fragment->add(indexFragment);
 						}

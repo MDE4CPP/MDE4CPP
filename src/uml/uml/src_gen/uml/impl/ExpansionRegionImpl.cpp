@@ -499,7 +499,7 @@ void ExpansionRegionImpl::resolveReferences(const int featureID, std::vector<std
 	{
 		case uml::umlPackage::EXPANSIONREGION_ATTRIBUTE_INPUTELEMENT:
 		{
-			std::shared_ptr<Bag<uml::ExpansionNode>> _inputElement = getInputElement();
+			const std::shared_ptr<Bag<uml::ExpansionNode>>& _inputElement = getInputElement();
 			for(std::shared_ptr<ecore::EObject> ref : references)
 			{
 				std::shared_ptr<uml::ExpansionNode>  _r = std::dynamic_pointer_cast<uml::ExpansionNode>(ref);
@@ -513,7 +513,7 @@ void ExpansionRegionImpl::resolveReferences(const int featureID, std::vector<std
 
 		case uml::umlPackage::EXPANSIONREGION_ATTRIBUTE_OUTPUTELEMENT:
 		{
-			std::shared_ptr<Bag<uml::ExpansionNode>> _outputElement = getOutputElement();
+			const std::shared_ptr<Bag<uml::ExpansionNode>>& _outputElement = getOutputElement();
 			for(std::shared_ptr<ecore::EObject> ref : references)
 			{
 				std::shared_ptr<uml::ExpansionNode>  _r = std::dynamic_pointer_cast<uml::ExpansionNode>(ref);
@@ -638,7 +638,7 @@ bool ExpansionRegionImpl::eSet(int featureID, const Any& newValue)
 					std::shared_ptr<Bag<uml::ExpansionNode>> _inputElement=getInputElement();
 					for(const std::shared_ptr<uml::ExpansionNode> indexInputElement: *_inputElement)
 					{
-						if (inputElementList->find(indexInputElement) == -1)
+						if (!(inputElementList->includes(indexInputElement)))
 						{
 							_inputElement->erase(indexInputElement);
 						}
@@ -646,7 +646,7 @@ bool ExpansionRegionImpl::eSet(int featureID, const Any& newValue)
 
 					for(const std::shared_ptr<uml::ExpansionNode> indexInputElement: *inputElementList)
 					{
-						if (_inputElement->find(indexInputElement) == -1)
+						if (!(_inputElement->includes(indexInputElement)))
 						{
 							_inputElement->add(indexInputElement);
 						}
@@ -682,7 +682,7 @@ bool ExpansionRegionImpl::eSet(int featureID, const Any& newValue)
 					std::shared_ptr<Bag<uml::ExpansionNode>> _outputElement=getOutputElement();
 					for(const std::shared_ptr<uml::ExpansionNode> indexOutputElement: *_outputElement)
 					{
-						if (outputElementList->find(indexOutputElement) == -1)
+						if (!(outputElementList->includes(indexOutputElement)))
 						{
 							_outputElement->erase(indexOutputElement);
 						}
@@ -690,7 +690,7 @@ bool ExpansionRegionImpl::eSet(int featureID, const Any& newValue)
 
 					for(const std::shared_ptr<uml::ExpansionNode> indexOutputElement: *outputElementList)
 					{
-						if (_outputElement->find(indexOutputElement) == -1)
+						if (!(_outputElement->includes(indexOutputElement)))
 						{
 							_outputElement->add(indexOutputElement);
 						}

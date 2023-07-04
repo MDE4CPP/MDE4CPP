@@ -78,13 +78,13 @@ namespace ocl::Values
 			static const unsigned int ANYVALUE_OPERATION_TOSTRING = 1515518266;
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getAnyValue_Class() const = 0;
+			virtual const std::shared_ptr<ecore::EClass>& getAnyValue_Class() const = 0;
 			
-			virtual std::shared_ptr<ecore::EAttribute> getAnyValue_Attribute_value() const = 0;
+			virtual const std::shared_ptr<ecore::EAttribute>& getAnyValue_Attribute_value() const = 0;
 			
 			
-			virtual std::shared_ptr<ecore::EOperation> getAnyValue_Operation_equals_Value() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getAnyValue_Operation_toString() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getAnyValue_Operation_equals_Value() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getAnyValue_Operation_toString() const = 0;
 			
 			// End Class AnyValue
 
@@ -99,11 +99,11 @@ namespace ocl::Values
 			static const unsigned int BAGTYPEVALUE_OPERATION_ADDVALUE_VALUE = 4256862520;
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getBagTypeValue_Class() const = 0;
+			virtual const std::shared_ptr<ecore::EClass>& getBagTypeValue_Class() const = 0;
 			
 			
 			
-			virtual std::shared_ptr<ecore::EOperation> getBagTypeValue_Operation_addValue_Value() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getBagTypeValue_Operation_addValue_Value() const = 0;
 			
 			// End Class BagTypeValue
 
@@ -122,15 +122,15 @@ namespace ocl::Values
 			static const unsigned int COLLECTIONVALUE_OPERATION_TOSTRING = 744572618;
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getCollectionValue_Class() const = 0;
+			virtual const std::shared_ptr<ecore::EClass>& getCollectionValue_Class() const = 0;
 			
 			
-			virtual std::shared_ptr<ecore::EReference> getCollectionValue_Attribute_elements() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getCollectionValue_Attribute_elements() const = 0;
 			
-			virtual std::shared_ptr<ecore::EOperation> getCollectionValue_Operation_addValue_Value() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getCollectionValue_Operation_equals_Value() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getCollectionValue_Operation_find_Value() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getCollectionValue_Operation_toString() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getCollectionValue_Operation_addValue_Value() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getCollectionValue_Operation_equals_Value() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getCollectionValue_Operation_find_Value() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getCollectionValue_Operation_toString() const = 0;
 			
 			// End Class CollectionValue
 
@@ -146,11 +146,11 @@ namespace ocl::Values
 			
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getElement_Class() const = 0;
+			virtual const std::shared_ptr<ecore::EClass>& getElement_Class() const = 0;
 			
-			virtual std::shared_ptr<ecore::EAttribute> getElement_Attribute_indexNr() const = 0;
+			virtual const std::shared_ptr<ecore::EAttribute>& getElement_Attribute_indexNr() const = 0;
 			
-			virtual std::shared_ptr<ecore::EReference> getElement_Attribute_value() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getElement_Attribute_value() const = 0;
 			
 			
 			// End Class Element
@@ -172,16 +172,16 @@ namespace ocl::Values
 			
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getLocalSnapshot_Class() const = 0;
+			virtual const std::shared_ptr<ecore::EClass>& getLocalSnapshot_Class() const = 0;
 			
-			virtual std::shared_ptr<ecore::EAttribute> getLocalSnapshot_Attribute_isPost() const = 0;
-			virtual std::shared_ptr<ecore::EAttribute> getLocalSnapshot_Attribute_isPre() const = 0;
+			virtual const std::shared_ptr<ecore::EAttribute>& getLocalSnapshot_Attribute_isPost() const = 0;
+			virtual const std::shared_ptr<ecore::EAttribute>& getLocalSnapshot_Attribute_isPre() const = 0;
 			
-			virtual std::shared_ptr<ecore::EReference> getLocalSnapshot_Attribute_bindings() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getLocalSnapshot_Attribute_inputQ() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getLocalSnapshot_Attribute_outputQ() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getLocalSnapshot_Attribute_pred() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getLocalSnapshot_Attribute_succ() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getLocalSnapshot_Attribute_bindings() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getLocalSnapshot_Attribute_inputQ() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getLocalSnapshot_Attribute_outputQ() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getLocalSnapshot_Attribute_pred() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getLocalSnapshot_Attribute_succ() const = 0;
 			
 			
 			// End Class LocalSnapshot
@@ -198,11 +198,11 @@ namespace ocl::Values
 			
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getNameValueBinding_Class() const = 0;
+			virtual const std::shared_ptr<ecore::EClass>& getNameValueBinding_Class() const = 0;
 			
-			virtual std::shared_ptr<ecore::EAttribute> getNameValueBinding_Attribute_name() const = 0;
+			virtual const std::shared_ptr<ecore::EAttribute>& getNameValueBinding_Attribute_name() const = 0;
 			
-			virtual std::shared_ptr<ecore::EReference> getNameValueBinding_Attribute_value() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getNameValueBinding_Attribute_value() const = 0;
 			
 			
 			// End Class NameValueBinding
@@ -221,14 +221,14 @@ namespace ocl::Values
 			static const unsigned int OBJECTVALUE_OPERATION_TOSTRING = 3648393225;
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getObjectValue_Class() const = 0;
+			virtual const std::shared_ptr<ecore::EClass>& getObjectValue_Class() const = 0;
 			
 			
-			virtual std::shared_ptr<ecore::EReference> getObjectValue_Attribute_history() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getObjectValue_Attribute_value() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getObjectValue_Attribute_history() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getObjectValue_Attribute_value() const = 0;
 			
-			virtual std::shared_ptr<ecore::EOperation> getObjectValue_Operation_equals_Value() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getObjectValue_Operation_toString() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getObjectValue_Operation_equals_Value() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getObjectValue_Operation_toString() const = 0;
 			
 			// End Class ObjectValue
 
@@ -251,19 +251,19 @@ namespace ocl::Values
 			static const unsigned int OCLMESSAGEVALUE_OPERATION_TOSTRING = 3653382429;
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getOclMessageValue_Class() const = 0;
+			virtual const std::shared_ptr<ecore::EClass>& getOclMessageValue_Class() const = 0;
 			
-			virtual std::shared_ptr<ecore::EAttribute> getOclMessageValue_Attribute_isAsyncOperation() const = 0;
-			virtual std::shared_ptr<ecore::EAttribute> getOclMessageValue_Attribute_isSignal() const = 0;
-			virtual std::shared_ptr<ecore::EAttribute> getOclMessageValue_Attribute_isSyncOperation() const = 0;
-			virtual std::shared_ptr<ecore::EAttribute> getOclMessageValue_Attribute_name() const = 0;
+			virtual const std::shared_ptr<ecore::EAttribute>& getOclMessageValue_Attribute_isAsyncOperation() const = 0;
+			virtual const std::shared_ptr<ecore::EAttribute>& getOclMessageValue_Attribute_isSignal() const = 0;
+			virtual const std::shared_ptr<ecore::EAttribute>& getOclMessageValue_Attribute_isSyncOperation() const = 0;
+			virtual const std::shared_ptr<ecore::EAttribute>& getOclMessageValue_Attribute_name() const = 0;
 			
-			virtual std::shared_ptr<ecore::EReference> getOclMessageValue_Attribute_arguments() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getOclMessageValue_Attribute_returnMessage() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getOclMessageValue_Attribute_source() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getOclMessageValue_Attribute_target() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getOclMessageValue_Attribute_arguments() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getOclMessageValue_Attribute_returnMessage() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getOclMessageValue_Attribute_source() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getOclMessageValue_Attribute_target() const = 0;
 			
-			virtual std::shared_ptr<ecore::EOperation> getOclMessageValue_Operation_toString() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getOclMessageValue_Operation_toString() const = 0;
 			
 			// End Class OclMessageValue
 
@@ -279,12 +279,12 @@ namespace ocl::Values
 			static const unsigned int OCLVOIDVALUE_OPERATION_TOSTRING = 2031383210;
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getOclVoidValue_Class() const = 0;
+			virtual const std::shared_ptr<ecore::EClass>& getOclVoidValue_Class() const = 0;
 			
 			
 			
-			virtual std::shared_ptr<ecore::EOperation> getOclVoidValue_Operation_equals_Value() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getOclVoidValue_Operation_toString() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getOclVoidValue_Operation_equals_Value() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getOclVoidValue_Operation_toString() const = 0;
 			
 			// End Class OclVoidValue
 
@@ -299,11 +299,11 @@ namespace ocl::Values
 			static const unsigned int ORDEREDSETTYPEVALUE_OPERATION_ADDVALUE_VALUE = 2208028395;
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getOrderedSetTypeValue_Class() const = 0;
+			virtual const std::shared_ptr<ecore::EClass>& getOrderedSetTypeValue_Class() const = 0;
 			
 			
 			
-			virtual std::shared_ptr<ecore::EOperation> getOrderedSetTypeValue_Operation_addValue_Value() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getOrderedSetTypeValue_Operation_addValue_Value() const = 0;
 			
 			// End Class OrderedSetTypeValue
 
@@ -318,11 +318,11 @@ namespace ocl::Values
 			static const unsigned int SEQUENCETYPEVALUE_OPERATION_ADDVALUE_VALUE = 2149349627;
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getSequenceTypeValue_Class() const = 0;
+			virtual const std::shared_ptr<ecore::EClass>& getSequenceTypeValue_Class() const = 0;
 			
 			
 			
-			virtual std::shared_ptr<ecore::EOperation> getSequenceTypeValue_Operation_addValue_Value() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getSequenceTypeValue_Operation_addValue_Value() const = 0;
 			
 			// End Class SequenceTypeValue
 
@@ -337,11 +337,11 @@ namespace ocl::Values
 			static const unsigned int SETTYPEVALUE_OPERATION_ADDVALUE_VALUE = 836523242;
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getSetTypeValue_Class() const = 0;
+			virtual const std::shared_ptr<ecore::EClass>& getSetTypeValue_Class() const = 0;
 			
 			
 			
-			virtual std::shared_ptr<ecore::EOperation> getSetTypeValue_Operation_addValue_Value() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getSetTypeValue_Operation_addValue_Value() const = 0;
 			
 			// End Class SetTypeValue
 
@@ -355,7 +355,7 @@ namespace ocl::Values
 			
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getStaticValue_Class() const = 0;
+			virtual const std::shared_ptr<ecore::EClass>& getStaticValue_Class() const = 0;
 			
 			
 			
@@ -376,14 +376,14 @@ namespace ocl::Values
 			static const unsigned int TUPLEVALUE_OPERATION_TOSTRING = 4438792;
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getTupleValue_Class() const = 0;
+			virtual const std::shared_ptr<ecore::EClass>& getTupleValue_Class() const = 0;
 			
 			
-			virtual std::shared_ptr<ecore::EReference> getTupleValue_Attribute_elements() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getTupleValue_Attribute_model() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getTupleValue_Attribute_elements() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getTupleValue_Attribute_model() const = 0;
 			
-			virtual std::shared_ptr<ecore::EOperation> getTupleValue_Operation_equals_Value() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getTupleValue_Operation_toString() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getTupleValue_Operation_equals_Value() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getTupleValue_Operation_toString() const = 0;
 			
 			// End Class TupleValue
 
@@ -399,12 +399,12 @@ namespace ocl::Values
 			static const unsigned int UNDEFINEDVALUE_OPERATION_TOSTRING = 1695102816;
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getUndefinedValue_Class() const = 0;
+			virtual const std::shared_ptr<ecore::EClass>& getUndefinedValue_Class() const = 0;
 			
 			
 			
-			virtual std::shared_ptr<ecore::EOperation> getUndefinedValue_Operation_equals_Value() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getUndefinedValue_Operation_toString() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getUndefinedValue_Operation_equals_Value() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getUndefinedValue_Operation_toString() const = 0;
 			
 			// End Class UndefinedValue
 

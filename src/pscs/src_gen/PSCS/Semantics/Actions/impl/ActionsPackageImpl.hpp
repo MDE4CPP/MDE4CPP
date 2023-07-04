@@ -53,158 +53,158 @@ namespace PSCS::Semantics::Actions
 
 			// Begin Class CS_AcceptCallActionActivation
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getCS_AcceptCallActionActivation_Class() const ;
+			virtual const std::shared_ptr<ecore::EClass>& getCS_AcceptCallActionActivation_Class() const ;
 			
 			
 			
-			virtual std::shared_ptr<ecore::EOperation> getCS_AcceptCallActionActivation_Operation_accept_EventOccurrence() const ;
+			virtual const std::shared_ptr<ecore::EOperation>& getCS_AcceptCallActionActivation_Operation_accept_EventOccurrence() const ;
 			
 			// End Class CS_AcceptCallActionActivation
 
 			// Begin Class CS_AcceptEventActionActivation
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getCS_AcceptEventActionActivation_Class() const ;
+			virtual const std::shared_ptr<ecore::EClass>& getCS_AcceptEventActionActivation_Class() const ;
 			
 			
 			
-			virtual std::shared_ptr<ecore::EOperation> getCS_AcceptEventActionActivation_Operation_accept_EventOccurrence() const ;
+			virtual const std::shared_ptr<ecore::EOperation>& getCS_AcceptEventActionActivation_Operation_accept_EventOccurrence() const ;
 			
 			// End Class CS_AcceptEventActionActivation
 
 			// Begin Class CS_AddStructuralFeatureValueActionActivation
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getCS_AddStructuralFeatureValueActionActivation_Class() const ;
+			virtual const std::shared_ptr<ecore::EClass>& getCS_AddStructuralFeatureValueActionActivation_Class() const ;
 			
 			
 			
-			virtual std::shared_ptr<ecore::EOperation> getCS_AddStructuralFeatureValueActionActivation_Operation_doAction() const ;
-			virtual std::shared_ptr<ecore::EOperation> getCS_AddStructuralFeatureValueActionActivation_Operation_doActionDefault() const ;
+			virtual const std::shared_ptr<ecore::EOperation>& getCS_AddStructuralFeatureValueActionActivation_Operation_doAction() const ;
+			virtual const std::shared_ptr<ecore::EOperation>& getCS_AddStructuralFeatureValueActionActivation_Operation_doActionDefault() const ;
 			
 			// End Class CS_AddStructuralFeatureValueActionActivation
 
 			// Begin Class CS_CallOperationActionActivation
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getCS_CallOperationActionActivation_Class() const ;
+			virtual const std::shared_ptr<ecore::EClass>& getCS_CallOperationActionActivation_Class() const ;
 			
 			
 			
-			virtual std::shared_ptr<ecore::EOperation> getCS_CallOperationActionActivation_Operation__isCreate_Operation() const ;
-			virtual std::shared_ptr<ecore::EOperation> getCS_CallOperationActionActivation_Operation_doAction() const ;
-			virtual std::shared_ptr<ecore::EOperation> getCS_CallOperationActionActivation_Operation_getCallExecution() const ;
-			virtual std::shared_ptr<ecore::EOperation> getCS_CallOperationActionActivation_Operation_isCreate_Operation() const ;
-			virtual std::shared_ptr<ecore::EOperation> getCS_CallOperationActionActivation_Operation_isOperationProvided_Port_Operation() const ;
-			virtual std::shared_ptr<ecore::EOperation> getCS_CallOperationActionActivation_Operation_isOperationRequired_Port_Operation() const ;
+			virtual const std::shared_ptr<ecore::EOperation>& getCS_CallOperationActionActivation_Operation__isCreate_Operation() const ;
+			virtual const std::shared_ptr<ecore::EOperation>& getCS_CallOperationActionActivation_Operation_doAction() const ;
+			virtual const std::shared_ptr<ecore::EOperation>& getCS_CallOperationActionActivation_Operation_getCallExecution() const ;
+			virtual const std::shared_ptr<ecore::EOperation>& getCS_CallOperationActionActivation_Operation_isCreate_Operation() const ;
+			virtual const std::shared_ptr<ecore::EOperation>& getCS_CallOperationActionActivation_Operation_isOperationProvided_Port_Operation() const ;
+			virtual const std::shared_ptr<ecore::EOperation>& getCS_CallOperationActionActivation_Operation_isOperationRequired_Port_Operation() const ;
 			
 			// End Class CS_CallOperationActionActivation
 
 			// Begin Class CS_ClearStructuralFeatureActionActivation
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getCS_ClearStructuralFeatureActionActivation_Class() const ;
+			virtual const std::shared_ptr<ecore::EClass>& getCS_ClearStructuralFeatureActionActivation_Class() const ;
 			
 			
 			
-			virtual std::shared_ptr<ecore::EOperation> getCS_ClearStructuralFeatureActionActivation_Operation_doAction() const ;
-			virtual std::shared_ptr<ecore::EOperation> getCS_ClearStructuralFeatureActionActivation_Operation_getLinksToDestroy_StructuredValue_StructuralFeature() const ;
-			virtual std::shared_ptr<ecore::EOperation> getCS_ClearStructuralFeatureActionActivation_Operation_getPotentialLinkEnds_CS_Reference_StructuralFeature() const ;
+			virtual const std::shared_ptr<ecore::EOperation>& getCS_ClearStructuralFeatureActionActivation_Operation_doAction() const ;
+			virtual const std::shared_ptr<ecore::EOperation>& getCS_ClearStructuralFeatureActionActivation_Operation_getLinksToDestroy_StructuredValue_StructuralFeature() const ;
+			virtual const std::shared_ptr<ecore::EOperation>& getCS_ClearStructuralFeatureActionActivation_Operation_getPotentialLinkEnds_CS_Reference_StructuralFeature() const ;
 			
 			// End Class CS_ClearStructuralFeatureActionActivation
 
 			// Begin Class CS_ConstructStrategy
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getCS_ConstructStrategy_Class() const ;
+			virtual const std::shared_ptr<ecore::EClass>& getCS_ConstructStrategy_Class() const ;
 			
 			
 			
-			virtual std::shared_ptr<ecore::EOperation> getCS_ConstructStrategy_Operation_construct_Operation_CS_Object() const ;
-			virtual std::shared_ptr<ecore::EOperation> getCS_ConstructStrategy_Operation_getName() const ;
+			virtual const std::shared_ptr<ecore::EOperation>& getCS_ConstructStrategy_Operation_construct_Operation_CS_Object() const ;
+			virtual const std::shared_ptr<ecore::EOperation>& getCS_ConstructStrategy_Operation_getName() const ;
 			
 			// End Class CS_ConstructStrategy
 
 			// Begin Class CS_CreateLinkActionActivation
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getCS_CreateLinkActionActivation_Class() const ;
+			virtual const std::shared_ptr<ecore::EClass>& getCS_CreateLinkActionActivation_Class() const ;
 			
 			
 			
-			virtual std::shared_ptr<ecore::EOperation> getCS_CreateLinkActionActivation_Operation_doAction() const ;
+			virtual const std::shared_ptr<ecore::EOperation>& getCS_CreateLinkActionActivation_Operation_doAction() const ;
 			
 			// End Class CS_CreateLinkActionActivation
 
 			// Begin Class CS_CreateObjectActionActivation
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getCS_CreateObjectActionActivation_Class() const ;
+			virtual const std::shared_ptr<ecore::EClass>& getCS_CreateObjectActionActivation_Class() const ;
 			
 			
 			
-			virtual std::shared_ptr<ecore::EOperation> getCS_CreateObjectActionActivation_Operation_doAction() const ;
+			virtual const std::shared_ptr<ecore::EOperation>& getCS_CreateObjectActionActivation_Operation_doAction() const ;
 			
 			// End Class CS_CreateObjectActionActivation
 
 			// Begin Class CS_DefaultConstructStrategy
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getCS_DefaultConstructStrategy_Class() const ;
+			virtual const std::shared_ptr<ecore::EClass>& getCS_DefaultConstructStrategy_Class() const ;
 			
 			
-			virtual std::shared_ptr<ecore::EReference> getCS_DefaultConstructStrategy_Attribute_defaultAssociation() const ;
-			virtual std::shared_ptr<ecore::EReference> getCS_DefaultConstructStrategy_Attribute_generatedRealizingClasses() const ;
-			virtual std::shared_ptr<ecore::EReference> getCS_DefaultConstructStrategy_Attribute_locus() const ;
+			virtual const std::shared_ptr<ecore::EReference>& getCS_DefaultConstructStrategy_Attribute_defaultAssociation() const ;
+			virtual const std::shared_ptr<ecore::EReference>& getCS_DefaultConstructStrategy_Attribute_generatedRealizingClasses() const ;
+			virtual const std::shared_ptr<ecore::EReference>& getCS_DefaultConstructStrategy_Attribute_locus() const ;
 			
-			virtual std::shared_ptr<ecore::EOperation> getCS_DefaultConstructStrategy_Operation_addStructuralFeatureValue_CS_Reference_Value() const ;
-			virtual std::shared_ptr<ecore::EOperation> getCS_DefaultConstructStrategy_Operation_canInstantiate_Property() const ;
-			virtual std::shared_ptr<ecore::EOperation> getCS_DefaultConstructStrategy_Operation_construct_Operation_CS_Object() const ;
-			virtual std::shared_ptr<ecore::EOperation> getCS_DefaultConstructStrategy_Operation_constructObject_CS_Object_Class() const ;
-			virtual std::shared_ptr<ecore::EOperation> getCS_DefaultConstructStrategy_Operation_generateArrayPattern_CS_Reference_Connector() const ;
-			virtual std::shared_ptr<ecore::EOperation> getCS_DefaultConstructStrategy_Operation_generateRealizingClass_Interface_EString() const ;
-			virtual std::shared_ptr<ecore::EOperation> getCS_DefaultConstructStrategy_Operation_generateStarPattern_CS_Reference_Connector() const ;
-			virtual std::shared_ptr<ecore::EOperation> getCS_DefaultConstructStrategy_Operation_getCardinality_ConnectorEnd() const ;
-			virtual std::shared_ptr<ecore::EOperation> getCS_DefaultConstructStrategy_Operation_getDefaultAssociation() const ;
-			virtual std::shared_ptr<ecore::EOperation> getCS_DefaultConstructStrategy_Operation_getRealizingClass_Interface() const ;
-			virtual std::shared_ptr<ecore::EOperation> getCS_DefaultConstructStrategy_Operation_getValuesFromConnectorEnd_CS_Reference_ConnectorEnd() const ;
-			virtual std::shared_ptr<ecore::EOperation> getCS_DefaultConstructStrategy_Operation_instantiateInterface_Interface_Locus() const ;
-			virtual std::shared_ptr<ecore::EOperation> getCS_DefaultConstructStrategy_Operation_isArrayPattern_Connector() const ;
-			virtual std::shared_ptr<ecore::EOperation> getCS_DefaultConstructStrategy_Operation_isStarPattern_Connector() const ;
+			virtual const std::shared_ptr<ecore::EOperation>& getCS_DefaultConstructStrategy_Operation_addStructuralFeatureValue_CS_Reference_Value() const ;
+			virtual const std::shared_ptr<ecore::EOperation>& getCS_DefaultConstructStrategy_Operation_canInstantiate_Property() const ;
+			virtual const std::shared_ptr<ecore::EOperation>& getCS_DefaultConstructStrategy_Operation_construct_Operation_CS_Object() const ;
+			virtual const std::shared_ptr<ecore::EOperation>& getCS_DefaultConstructStrategy_Operation_constructObject_CS_Object_Class() const ;
+			virtual const std::shared_ptr<ecore::EOperation>& getCS_DefaultConstructStrategy_Operation_generateArrayPattern_CS_Reference_Connector() const ;
+			virtual const std::shared_ptr<ecore::EOperation>& getCS_DefaultConstructStrategy_Operation_generateRealizingClass_Interface_EString() const ;
+			virtual const std::shared_ptr<ecore::EOperation>& getCS_DefaultConstructStrategy_Operation_generateStarPattern_CS_Reference_Connector() const ;
+			virtual const std::shared_ptr<ecore::EOperation>& getCS_DefaultConstructStrategy_Operation_getCardinality_ConnectorEnd() const ;
+			virtual const std::shared_ptr<ecore::EOperation>& getCS_DefaultConstructStrategy_Operation_getDefaultAssociation() const ;
+			virtual const std::shared_ptr<ecore::EOperation>& getCS_DefaultConstructStrategy_Operation_getRealizingClass_Interface() const ;
+			virtual const std::shared_ptr<ecore::EOperation>& getCS_DefaultConstructStrategy_Operation_getValuesFromConnectorEnd_CS_Reference_ConnectorEnd() const ;
+			virtual const std::shared_ptr<ecore::EOperation>& getCS_DefaultConstructStrategy_Operation_instantiateInterface_Interface_Locus() const ;
+			virtual const std::shared_ptr<ecore::EOperation>& getCS_DefaultConstructStrategy_Operation_isArrayPattern_Connector() const ;
+			virtual const std::shared_ptr<ecore::EOperation>& getCS_DefaultConstructStrategy_Operation_isStarPattern_Connector() const ;
 			
 			// End Class CS_DefaultConstructStrategy
 
 			// Begin Class CS_ReadExtentActionActivation
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getCS_ReadExtentActionActivation_Class() const ;
+			virtual const std::shared_ptr<ecore::EClass>& getCS_ReadExtentActionActivation_Class() const ;
 			
 			
 			
-			virtual std::shared_ptr<ecore::EOperation> getCS_ReadExtentActionActivation_Operation_doAction() const ;
+			virtual const std::shared_ptr<ecore::EOperation>& getCS_ReadExtentActionActivation_Operation_doAction() const ;
 			
 			// End Class CS_ReadExtentActionActivation
 
 			// Begin Class CS_ReadSelfActionActivation
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getCS_ReadSelfActionActivation_Class() const ;
+			virtual const std::shared_ptr<ecore::EClass>& getCS_ReadSelfActionActivation_Class() const ;
 			
 			
 			
-			virtual std::shared_ptr<ecore::EOperation> getCS_ReadSelfActionActivation_Operation_doAction() const ;
+			virtual const std::shared_ptr<ecore::EOperation>& getCS_ReadSelfActionActivation_Operation_doAction() const ;
 			
 			// End Class CS_ReadSelfActionActivation
 
 			// Begin Class CS_RemoveStructuralFeatureValueActionActivation
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getCS_RemoveStructuralFeatureValueActionActivation_Class() const ;
+			virtual const std::shared_ptr<ecore::EClass>& getCS_RemoveStructuralFeatureValueActionActivation_Class() const ;
 			
 			
 			
-			virtual std::shared_ptr<ecore::EOperation> getCS_RemoveStructuralFeatureValueActionActivation_Operation_doAction() const ;
-			virtual std::shared_ptr<ecore::EOperation> getCS_RemoveStructuralFeatureValueActionActivation_Operation_getLinksToDestroy_StructuredValue_Value() const ;
-			virtual std::shared_ptr<ecore::EOperation> getCS_RemoveStructuralFeatureValueActionActivation_Operation_getPotentialLinkEnds_CS_Reference_StructuralFeature() const ;
+			virtual const std::shared_ptr<ecore::EOperation>& getCS_RemoveStructuralFeatureValueActionActivation_Operation_doAction() const ;
+			virtual const std::shared_ptr<ecore::EOperation>& getCS_RemoveStructuralFeatureValueActionActivation_Operation_getLinksToDestroy_StructuredValue_Value() const ;
+			virtual const std::shared_ptr<ecore::EOperation>& getCS_RemoveStructuralFeatureValueActionActivation_Operation_getPotentialLinkEnds_CS_Reference_StructuralFeature() const ;
 			
 			// End Class CS_RemoveStructuralFeatureValueActionActivation
 
 			// Begin Class CS_SendSignalActionActivation
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getCS_SendSignalActionActivation_Class() const ;
+			virtual const std::shared_ptr<ecore::EClass>& getCS_SendSignalActionActivation_Class() const ;
 			
 			
 			
-			virtual std::shared_ptr<ecore::EOperation> getCS_SendSignalActionActivation_Operation_doAction() const ;
+			virtual const std::shared_ptr<ecore::EOperation>& getCS_SendSignalActionActivation_Operation_doAction() const ;
 			
 			// End Class CS_SendSignalActionActivation
 

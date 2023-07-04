@@ -59,13 +59,13 @@ void ExpressionsPackageImpl::init(std::shared_ptr<ecore::EPackage> package)
 
 
 // Begin Class AssociationClassCallExp
-std::shared_ptr<ecore::EClass> ocl::Expressions::ExpressionsPackageImpl::getAssociationClassCallExp_Class() const
+const std::shared_ptr<ecore::EClass>& ocl::Expressions::ExpressionsPackageImpl::getAssociationClassCallExp_Class() const
 {
 	return m_associationClassCallExp_Class;
 }
 
 
-std::shared_ptr<ecore::EReference> ocl::Expressions::ExpressionsPackageImpl::getAssociationClassCallExp_Attribute_referredAssociationClass() const
+const std::shared_ptr<ecore::EReference>& ocl::Expressions::ExpressionsPackageImpl::getAssociationClassCallExp_Attribute_referredAssociationClass() const
 {
 	return m_associationClassCallExp_Attribute_referredAssociationClass;
 }
@@ -74,12 +74,12 @@ std::shared_ptr<ecore::EReference> ocl::Expressions::ExpressionsPackageImpl::get
 // End Class AssociationClassCallExp
 
 // Begin Class BooleanLiteralExp
-std::shared_ptr<ecore::EClass> ocl::Expressions::ExpressionsPackageImpl::getBooleanLiteralExp_Class() const
+const std::shared_ptr<ecore::EClass>& ocl::Expressions::ExpressionsPackageImpl::getBooleanLiteralExp_Class() const
 {
 	return m_booleanLiteralExp_Class;
 }
 
-std::shared_ptr<ecore::EAttribute> ocl::Expressions::ExpressionsPackageImpl::getBooleanLiteralExp_Attribute_booleanSymbol() const
+const std::shared_ptr<ecore::EAttribute>& ocl::Expressions::ExpressionsPackageImpl::getBooleanLiteralExp_Attribute_booleanSymbol() const
 {
 	return m_booleanLiteralExp_Attribute_booleanSymbol;
 }
@@ -89,13 +89,13 @@ std::shared_ptr<ecore::EAttribute> ocl::Expressions::ExpressionsPackageImpl::get
 // End Class BooleanLiteralExp
 
 // Begin Class CallExp
-std::shared_ptr<ecore::EClass> ocl::Expressions::ExpressionsPackageImpl::getCallExp_Class() const
+const std::shared_ptr<ecore::EClass>& ocl::Expressions::ExpressionsPackageImpl::getCallExp_Class() const
 {
 	return m_callExp_Class;
 }
 
 
-std::shared_ptr<ecore::EReference> ocl::Expressions::ExpressionsPackageImpl::getCallExp_Attribute_source() const
+const std::shared_ptr<ecore::EReference>& ocl::Expressions::ExpressionsPackageImpl::getCallExp_Attribute_source() const
 {
 	return m_callExp_Attribute_source;
 }
@@ -104,13 +104,13 @@ std::shared_ptr<ecore::EReference> ocl::Expressions::ExpressionsPackageImpl::get
 // End Class CallExp
 
 // Begin Class CollectionItem
-std::shared_ptr<ecore::EClass> ocl::Expressions::ExpressionsPackageImpl::getCollectionItem_Class() const
+const std::shared_ptr<ecore::EClass>& ocl::Expressions::ExpressionsPackageImpl::getCollectionItem_Class() const
 {
 	return m_collectionItem_Class;
 }
 
 
-std::shared_ptr<ecore::EReference> ocl::Expressions::ExpressionsPackageImpl::getCollectionItem_Attribute_item() const
+const std::shared_ptr<ecore::EReference>& ocl::Expressions::ExpressionsPackageImpl::getCollectionItem_Attribute_item() const
 {
 	return m_collectionItem_Attribute_item;
 }
@@ -119,17 +119,17 @@ std::shared_ptr<ecore::EReference> ocl::Expressions::ExpressionsPackageImpl::get
 // End Class CollectionItem
 
 // Begin Class CollectionLiteralExp
-std::shared_ptr<ecore::EClass> ocl::Expressions::ExpressionsPackageImpl::getCollectionLiteralExp_Class() const
+const std::shared_ptr<ecore::EClass>& ocl::Expressions::ExpressionsPackageImpl::getCollectionLiteralExp_Class() const
 {
 	return m_collectionLiteralExp_Class;
 }
 
-std::shared_ptr<ecore::EAttribute> ocl::Expressions::ExpressionsPackageImpl::getCollectionLiteralExp_Attribute_kind() const
+const std::shared_ptr<ecore::EAttribute>& ocl::Expressions::ExpressionsPackageImpl::getCollectionLiteralExp_Attribute_kind() const
 {
 	return m_collectionLiteralExp_Attribute_kind;
 }
 
-std::shared_ptr<ecore::EReference> ocl::Expressions::ExpressionsPackageImpl::getCollectionLiteralExp_Attribute_part() const
+const std::shared_ptr<ecore::EReference>& ocl::Expressions::ExpressionsPackageImpl::getCollectionLiteralExp_Attribute_part() const
 {
 	return m_collectionLiteralExp_Attribute_part;
 }
@@ -138,7 +138,7 @@ std::shared_ptr<ecore::EReference> ocl::Expressions::ExpressionsPackageImpl::get
 // End Class CollectionLiteralExp
 
 // Begin Class CollectionLiteralPart
-std::shared_ptr<ecore::EClass> ocl::Expressions::ExpressionsPackageImpl::getCollectionLiteralPart_Class() const
+const std::shared_ptr<ecore::EClass>& ocl::Expressions::ExpressionsPackageImpl::getCollectionLiteralPart_Class() const
 {
 	return m_collectionLiteralPart_Class;
 }
@@ -149,17 +149,17 @@ std::shared_ptr<ecore::EClass> ocl::Expressions::ExpressionsPackageImpl::getColl
 // End Class CollectionLiteralPart
 
 // Begin Class CollectionRange
-std::shared_ptr<ecore::EClass> ocl::Expressions::ExpressionsPackageImpl::getCollectionRange_Class() const
+const std::shared_ptr<ecore::EClass>& ocl::Expressions::ExpressionsPackageImpl::getCollectionRange_Class() const
 {
 	return m_collectionRange_Class;
 }
 
 
-std::shared_ptr<ecore::EReference> ocl::Expressions::ExpressionsPackageImpl::getCollectionRange_Attribute_first() const
+const std::shared_ptr<ecore::EReference>& ocl::Expressions::ExpressionsPackageImpl::getCollectionRange_Attribute_first() const
 {
 	return m_collectionRange_Attribute_first;
 }
-std::shared_ptr<ecore::EReference> ocl::Expressions::ExpressionsPackageImpl::getCollectionRange_Attribute_last() const
+const std::shared_ptr<ecore::EReference>& ocl::Expressions::ExpressionsPackageImpl::getCollectionRange_Attribute_last() const
 {
 	return m_collectionRange_Attribute_last;
 }
@@ -168,13 +168,13 @@ std::shared_ptr<ecore::EReference> ocl::Expressions::ExpressionsPackageImpl::get
 // End Class CollectionRange
 
 // Begin Class EnumLiteralExp
-std::shared_ptr<ecore::EClass> ocl::Expressions::ExpressionsPackageImpl::getEnumLiteralExp_Class() const
+const std::shared_ptr<ecore::EClass>& ocl::Expressions::ExpressionsPackageImpl::getEnumLiteralExp_Class() const
 {
 	return m_enumLiteralExp_Class;
 }
 
 
-std::shared_ptr<ecore::EReference> ocl::Expressions::ExpressionsPackageImpl::getEnumLiteralExp_Attribute_referredEnumLiteral() const
+const std::shared_ptr<ecore::EReference>& ocl::Expressions::ExpressionsPackageImpl::getEnumLiteralExp_Attribute_referredEnumLiteral() const
 {
 	return m_enumLiteralExp_Attribute_referredEnumLiteral;
 }
@@ -183,25 +183,25 @@ std::shared_ptr<ecore::EReference> ocl::Expressions::ExpressionsPackageImpl::get
 // End Class EnumLiteralExp
 
 // Begin Class ExpressionInOcl
-std::shared_ptr<ecore::EClass> ocl::Expressions::ExpressionsPackageImpl::getExpressionInOcl_Class() const
+const std::shared_ptr<ecore::EClass>& ocl::Expressions::ExpressionsPackageImpl::getExpressionInOcl_Class() const
 {
 	return m_expressionInOcl_Class;
 }
 
 
-std::shared_ptr<ecore::EReference> ocl::Expressions::ExpressionsPackageImpl::getExpressionInOcl_Attribute_bodyExpression() const
+const std::shared_ptr<ecore::EReference>& ocl::Expressions::ExpressionsPackageImpl::getExpressionInOcl_Attribute_bodyExpression() const
 {
 	return m_expressionInOcl_Attribute_bodyExpression;
 }
-std::shared_ptr<ecore::EReference> ocl::Expressions::ExpressionsPackageImpl::getExpressionInOcl_Attribute_contextVariable() const
+const std::shared_ptr<ecore::EReference>& ocl::Expressions::ExpressionsPackageImpl::getExpressionInOcl_Attribute_contextVariable() const
 {
 	return m_expressionInOcl_Attribute_contextVariable;
 }
-std::shared_ptr<ecore::EReference> ocl::Expressions::ExpressionsPackageImpl::getExpressionInOcl_Attribute_parameterVariable() const
+const std::shared_ptr<ecore::EReference>& ocl::Expressions::ExpressionsPackageImpl::getExpressionInOcl_Attribute_parameterVariable() const
 {
 	return m_expressionInOcl_Attribute_parameterVariable;
 }
-std::shared_ptr<ecore::EReference> ocl::Expressions::ExpressionsPackageImpl::getExpressionInOcl_Attribute_resultVariable() const
+const std::shared_ptr<ecore::EReference>& ocl::Expressions::ExpressionsPackageImpl::getExpressionInOcl_Attribute_resultVariable() const
 {
 	return m_expressionInOcl_Attribute_resultVariable;
 }
@@ -210,12 +210,12 @@ std::shared_ptr<ecore::EReference> ocl::Expressions::ExpressionsPackageImpl::get
 // End Class ExpressionInOcl
 
 // Begin Class FeatureCallExp
-std::shared_ptr<ecore::EClass> ocl::Expressions::ExpressionsPackageImpl::getFeatureCallExp_Class() const
+const std::shared_ptr<ecore::EClass>& ocl::Expressions::ExpressionsPackageImpl::getFeatureCallExp_Class() const
 {
 	return m_featureCallExp_Class;
 }
 
-std::shared_ptr<ecore::EAttribute> ocl::Expressions::ExpressionsPackageImpl::getFeatureCallExp_Attribute_isPre() const
+const std::shared_ptr<ecore::EAttribute>& ocl::Expressions::ExpressionsPackageImpl::getFeatureCallExp_Attribute_isPre() const
 {
 	return m_featureCallExp_Attribute_isPre;
 }
@@ -225,21 +225,21 @@ std::shared_ptr<ecore::EAttribute> ocl::Expressions::ExpressionsPackageImpl::get
 // End Class FeatureCallExp
 
 // Begin Class IfExp
-std::shared_ptr<ecore::EClass> ocl::Expressions::ExpressionsPackageImpl::getIfExp_Class() const
+const std::shared_ptr<ecore::EClass>& ocl::Expressions::ExpressionsPackageImpl::getIfExp_Class() const
 {
 	return m_ifExp_Class;
 }
 
 
-std::shared_ptr<ecore::EReference> ocl::Expressions::ExpressionsPackageImpl::getIfExp_Attribute_condition() const
+const std::shared_ptr<ecore::EReference>& ocl::Expressions::ExpressionsPackageImpl::getIfExp_Attribute_condition() const
 {
 	return m_ifExp_Attribute_condition;
 }
-std::shared_ptr<ecore::EReference> ocl::Expressions::ExpressionsPackageImpl::getIfExp_Attribute_elseExpression() const
+const std::shared_ptr<ecore::EReference>& ocl::Expressions::ExpressionsPackageImpl::getIfExp_Attribute_elseExpression() const
 {
 	return m_ifExp_Attribute_elseExpression;
 }
-std::shared_ptr<ecore::EReference> ocl::Expressions::ExpressionsPackageImpl::getIfExp_Attribute_thenExpression() const
+const std::shared_ptr<ecore::EReference>& ocl::Expressions::ExpressionsPackageImpl::getIfExp_Attribute_thenExpression() const
 {
 	return m_ifExp_Attribute_thenExpression;
 }
@@ -248,13 +248,13 @@ std::shared_ptr<ecore::EReference> ocl::Expressions::ExpressionsPackageImpl::get
 // End Class IfExp
 
 // Begin Class InfixedExp
-std::shared_ptr<ecore::EClass> ocl::Expressions::ExpressionsPackageImpl::getInfixedExp_Class() const
+const std::shared_ptr<ecore::EClass>& ocl::Expressions::ExpressionsPackageImpl::getInfixedExp_Class() const
 {
 	return m_infixedExp_Class;
 }
 
 
-std::shared_ptr<ecore::EReference> ocl::Expressions::ExpressionsPackageImpl::getInfixedExp_Attribute_source() const
+const std::shared_ptr<ecore::EReference>& ocl::Expressions::ExpressionsPackageImpl::getInfixedExp_Attribute_source() const
 {
 	return m_infixedExp_Attribute_source;
 }
@@ -263,12 +263,12 @@ std::shared_ptr<ecore::EReference> ocl::Expressions::ExpressionsPackageImpl::get
 // End Class InfixedExp
 
 // Begin Class IntegerLiteralExp
-std::shared_ptr<ecore::EClass> ocl::Expressions::ExpressionsPackageImpl::getIntegerLiteralExp_Class() const
+const std::shared_ptr<ecore::EClass>& ocl::Expressions::ExpressionsPackageImpl::getIntegerLiteralExp_Class() const
 {
 	return m_integerLiteralExp_Class;
 }
 
-std::shared_ptr<ecore::EAttribute> ocl::Expressions::ExpressionsPackageImpl::getIntegerLiteralExp_Attribute_integerSymbol() const
+const std::shared_ptr<ecore::EAttribute>& ocl::Expressions::ExpressionsPackageImpl::getIntegerLiteralExp_Attribute_integerSymbol() const
 {
 	return m_integerLiteralExp_Attribute_integerSymbol;
 }
@@ -278,7 +278,7 @@ std::shared_ptr<ecore::EAttribute> ocl::Expressions::ExpressionsPackageImpl::get
 // End Class IntegerLiteralExp
 
 // Begin Class InvalidLiteralExp
-std::shared_ptr<ecore::EClass> ocl::Expressions::ExpressionsPackageImpl::getInvalidLiteralExp_Class() const
+const std::shared_ptr<ecore::EClass>& ocl::Expressions::ExpressionsPackageImpl::getInvalidLiteralExp_Class() const
 {
 	return m_invalidLiteralExp_Class;
 }
@@ -289,13 +289,13 @@ std::shared_ptr<ecore::EClass> ocl::Expressions::ExpressionsPackageImpl::getInva
 // End Class InvalidLiteralExp
 
 // Begin Class IterateExp
-std::shared_ptr<ecore::EClass> ocl::Expressions::ExpressionsPackageImpl::getIterateExp_Class() const
+const std::shared_ptr<ecore::EClass>& ocl::Expressions::ExpressionsPackageImpl::getIterateExp_Class() const
 {
 	return m_iterateExp_Class;
 }
 
 
-std::shared_ptr<ecore::EReference> ocl::Expressions::ExpressionsPackageImpl::getIterateExp_Attribute_result() const
+const std::shared_ptr<ecore::EReference>& ocl::Expressions::ExpressionsPackageImpl::getIterateExp_Attribute_result() const
 {
 	return m_iterateExp_Attribute_result;
 }
@@ -304,7 +304,7 @@ std::shared_ptr<ecore::EReference> ocl::Expressions::ExpressionsPackageImpl::get
 // End Class IterateExp
 
 // Begin Class IteratorExp
-std::shared_ptr<ecore::EClass> ocl::Expressions::ExpressionsPackageImpl::getIteratorExp_Class() const
+const std::shared_ptr<ecore::EClass>& ocl::Expressions::ExpressionsPackageImpl::getIteratorExp_Class() const
 {
 	return m_iteratorExp_Class;
 }
@@ -315,17 +315,17 @@ std::shared_ptr<ecore::EClass> ocl::Expressions::ExpressionsPackageImpl::getIter
 // End Class IteratorExp
 
 // Begin Class LetExp
-std::shared_ptr<ecore::EClass> ocl::Expressions::ExpressionsPackageImpl::getLetExp_Class() const
+const std::shared_ptr<ecore::EClass>& ocl::Expressions::ExpressionsPackageImpl::getLetExp_Class() const
 {
 	return m_letExp_Class;
 }
 
 
-std::shared_ptr<ecore::EReference> ocl::Expressions::ExpressionsPackageImpl::getLetExp_Attribute_in() const
+const std::shared_ptr<ecore::EReference>& ocl::Expressions::ExpressionsPackageImpl::getLetExp_Attribute_in() const
 {
 	return m_letExp_Attribute_in;
 }
-std::shared_ptr<ecore::EReference> ocl::Expressions::ExpressionsPackageImpl::getLetExp_Attribute_variable() const
+const std::shared_ptr<ecore::EReference>& ocl::Expressions::ExpressionsPackageImpl::getLetExp_Attribute_variable() const
 {
 	return m_letExp_Attribute_variable;
 }
@@ -334,7 +334,7 @@ std::shared_ptr<ecore::EReference> ocl::Expressions::ExpressionsPackageImpl::get
 // End Class LetExp
 
 // Begin Class LiteralExp
-std::shared_ptr<ecore::EClass> ocl::Expressions::ExpressionsPackageImpl::getLiteralExp_Class() const
+const std::shared_ptr<ecore::EClass>& ocl::Expressions::ExpressionsPackageImpl::getLiteralExp_Class() const
 {
 	return m_literalExp_Class;
 }
@@ -345,17 +345,17 @@ std::shared_ptr<ecore::EClass> ocl::Expressions::ExpressionsPackageImpl::getLite
 // End Class LiteralExp
 
 // Begin Class LoopExp
-std::shared_ptr<ecore::EClass> ocl::Expressions::ExpressionsPackageImpl::getLoopExp_Class() const
+const std::shared_ptr<ecore::EClass>& ocl::Expressions::ExpressionsPackageImpl::getLoopExp_Class() const
 {
 	return m_loopExp_Class;
 }
 
 
-std::shared_ptr<ecore::EReference> ocl::Expressions::ExpressionsPackageImpl::getLoopExp_Attribute_body() const
+const std::shared_ptr<ecore::EReference>& ocl::Expressions::ExpressionsPackageImpl::getLoopExp_Attribute_body() const
 {
 	return m_loopExp_Attribute_body;
 }
-std::shared_ptr<ecore::EReference> ocl::Expressions::ExpressionsPackageImpl::getLoopExp_Attribute_iterator() const
+const std::shared_ptr<ecore::EReference>& ocl::Expressions::ExpressionsPackageImpl::getLoopExp_Attribute_iterator() const
 {
 	return m_loopExp_Attribute_iterator;
 }
@@ -364,25 +364,25 @@ std::shared_ptr<ecore::EReference> ocl::Expressions::ExpressionsPackageImpl::get
 // End Class LoopExp
 
 // Begin Class MessageExp
-std::shared_ptr<ecore::EClass> ocl::Expressions::ExpressionsPackageImpl::getMessageExp_Class() const
+const std::shared_ptr<ecore::EClass>& ocl::Expressions::ExpressionsPackageImpl::getMessageExp_Class() const
 {
 	return m_messageExp_Class;
 }
 
 
-std::shared_ptr<ecore::EReference> ocl::Expressions::ExpressionsPackageImpl::getMessageExp_Attribute_argument() const
+const std::shared_ptr<ecore::EReference>& ocl::Expressions::ExpressionsPackageImpl::getMessageExp_Attribute_argument() const
 {
 	return m_messageExp_Attribute_argument;
 }
-std::shared_ptr<ecore::EReference> ocl::Expressions::ExpressionsPackageImpl::getMessageExp_Attribute_calledOperation() const
+const std::shared_ptr<ecore::EReference>& ocl::Expressions::ExpressionsPackageImpl::getMessageExp_Attribute_calledOperation() const
 {
 	return m_messageExp_Attribute_calledOperation;
 }
-std::shared_ptr<ecore::EReference> ocl::Expressions::ExpressionsPackageImpl::getMessageExp_Attribute_sentSignal() const
+const std::shared_ptr<ecore::EReference>& ocl::Expressions::ExpressionsPackageImpl::getMessageExp_Attribute_sentSignal() const
 {
 	return m_messageExp_Attribute_sentSignal;
 }
-std::shared_ptr<ecore::EReference> ocl::Expressions::ExpressionsPackageImpl::getMessageExp_Attribute_target() const
+const std::shared_ptr<ecore::EReference>& ocl::Expressions::ExpressionsPackageImpl::getMessageExp_Attribute_target() const
 {
 	return m_messageExp_Attribute_target;
 }
@@ -391,17 +391,17 @@ std::shared_ptr<ecore::EReference> ocl::Expressions::ExpressionsPackageImpl::get
 // End Class MessageExp
 
 // Begin Class NavigationCallExp
-std::shared_ptr<ecore::EClass> ocl::Expressions::ExpressionsPackageImpl::getNavigationCallExp_Class() const
+const std::shared_ptr<ecore::EClass>& ocl::Expressions::ExpressionsPackageImpl::getNavigationCallExp_Class() const
 {
 	return m_navigationCallExp_Class;
 }
 
 
-std::shared_ptr<ecore::EReference> ocl::Expressions::ExpressionsPackageImpl::getNavigationCallExp_Attribute_navigationSource() const
+const std::shared_ptr<ecore::EReference>& ocl::Expressions::ExpressionsPackageImpl::getNavigationCallExp_Attribute_navigationSource() const
 {
 	return m_navigationCallExp_Attribute_navigationSource;
 }
-std::shared_ptr<ecore::EReference> ocl::Expressions::ExpressionsPackageImpl::getNavigationCallExp_Attribute_qualifier() const
+const std::shared_ptr<ecore::EReference>& ocl::Expressions::ExpressionsPackageImpl::getNavigationCallExp_Attribute_qualifier() const
 {
 	return m_navigationCallExp_Attribute_qualifier;
 }
@@ -410,7 +410,7 @@ std::shared_ptr<ecore::EReference> ocl::Expressions::ExpressionsPackageImpl::get
 // End Class NavigationCallExp
 
 // Begin Class NullLiteralExp
-std::shared_ptr<ecore::EClass> ocl::Expressions::ExpressionsPackageImpl::getNullLiteralExp_Class() const
+const std::shared_ptr<ecore::EClass>& ocl::Expressions::ExpressionsPackageImpl::getNullLiteralExp_Class() const
 {
 	return m_nullLiteralExp_Class;
 }
@@ -421,7 +421,7 @@ std::shared_ptr<ecore::EClass> ocl::Expressions::ExpressionsPackageImpl::getNull
 // End Class NullLiteralExp
 
 // Begin Class NumericLiteralExp
-std::shared_ptr<ecore::EClass> ocl::Expressions::ExpressionsPackageImpl::getNumericLiteralExp_Class() const
+const std::shared_ptr<ecore::EClass>& ocl::Expressions::ExpressionsPackageImpl::getNumericLiteralExp_Class() const
 {
 	return m_numericLiteralExp_Class;
 }
@@ -432,57 +432,57 @@ std::shared_ptr<ecore::EClass> ocl::Expressions::ExpressionsPackageImpl::getNume
 // End Class NumericLiteralExp
 
 // Begin Class OclExpression
-std::shared_ptr<ecore::EClass> ocl::Expressions::ExpressionsPackageImpl::getOclExpression_Class() const
+const std::shared_ptr<ecore::EClass>& ocl::Expressions::ExpressionsPackageImpl::getOclExpression_Class() const
 {
 	return m_oclExpression_Class;
 }
 
 
-std::shared_ptr<ecore::EReference> ocl::Expressions::ExpressionsPackageImpl::getOclExpression_Attribute_appliedElement() const
+const std::shared_ptr<ecore::EReference>& ocl::Expressions::ExpressionsPackageImpl::getOclExpression_Attribute_appliedElement() const
 {
 	return m_oclExpression_Attribute_appliedElement;
 }
-std::shared_ptr<ecore::EReference> ocl::Expressions::ExpressionsPackageImpl::getOclExpression_Attribute_elseOwner() const
+const std::shared_ptr<ecore::EReference>& ocl::Expressions::ExpressionsPackageImpl::getOclExpression_Attribute_elseOwner() const
 {
 	return m_oclExpression_Attribute_elseOwner;
 }
-std::shared_ptr<ecore::EReference> ocl::Expressions::ExpressionsPackageImpl::getOclExpression_Attribute_firstOwner() const
+const std::shared_ptr<ecore::EReference>& ocl::Expressions::ExpressionsPackageImpl::getOclExpression_Attribute_firstOwner() const
 {
 	return m_oclExpression_Attribute_firstOwner;
 }
-std::shared_ptr<ecore::EReference> ocl::Expressions::ExpressionsPackageImpl::getOclExpression_Attribute_ifOwner() const
+const std::shared_ptr<ecore::EReference>& ocl::Expressions::ExpressionsPackageImpl::getOclExpression_Attribute_ifOwner() const
 {
 	return m_oclExpression_Attribute_ifOwner;
 }
-std::shared_ptr<ecore::EReference> ocl::Expressions::ExpressionsPackageImpl::getOclExpression_Attribute_initializedElement() const
+const std::shared_ptr<ecore::EReference>& ocl::Expressions::ExpressionsPackageImpl::getOclExpression_Attribute_initializedElement() const
 {
 	return m_oclExpression_Attribute_initializedElement;
 }
-std::shared_ptr<ecore::EReference> ocl::Expressions::ExpressionsPackageImpl::getOclExpression_Attribute_instance() const
+const std::shared_ptr<ecore::EReference>& ocl::Expressions::ExpressionsPackageImpl::getOclExpression_Attribute_instance() const
 {
 	return m_oclExpression_Attribute_instance;
 }
-std::shared_ptr<ecore::EReference> ocl::Expressions::ExpressionsPackageImpl::getOclExpression_Attribute_lastOwner() const
+const std::shared_ptr<ecore::EReference>& ocl::Expressions::ExpressionsPackageImpl::getOclExpression_Attribute_lastOwner() const
 {
 	return m_oclExpression_Attribute_lastOwner;
 }
-std::shared_ptr<ecore::EReference> ocl::Expressions::ExpressionsPackageImpl::getOclExpression_Attribute_loopBodyOwner() const
+const std::shared_ptr<ecore::EReference>& ocl::Expressions::ExpressionsPackageImpl::getOclExpression_Attribute_loopBodyOwner() const
 {
 	return m_oclExpression_Attribute_loopBodyOwner;
 }
-std::shared_ptr<ecore::EReference> ocl::Expressions::ExpressionsPackageImpl::getOclExpression_Attribute_parentCall() const
+const std::shared_ptr<ecore::EReference>& ocl::Expressions::ExpressionsPackageImpl::getOclExpression_Attribute_parentCall() const
 {
 	return m_oclExpression_Attribute_parentCall;
 }
-std::shared_ptr<ecore::EReference> ocl::Expressions::ExpressionsPackageImpl::getOclExpression_Attribute_parentNav() const
+const std::shared_ptr<ecore::EReference>& ocl::Expressions::ExpressionsPackageImpl::getOclExpression_Attribute_parentNav() const
 {
 	return m_oclExpression_Attribute_parentNav;
 }
-std::shared_ptr<ecore::EReference> ocl::Expressions::ExpressionsPackageImpl::getOclExpression_Attribute_thenOwner() const
+const std::shared_ptr<ecore::EReference>& ocl::Expressions::ExpressionsPackageImpl::getOclExpression_Attribute_thenOwner() const
 {
 	return m_oclExpression_Attribute_thenOwner;
 }
-std::shared_ptr<ecore::EReference> ocl::Expressions::ExpressionsPackageImpl::getOclExpression_Attribute_topExpression() const
+const std::shared_ptr<ecore::EReference>& ocl::Expressions::ExpressionsPackageImpl::getOclExpression_Attribute_topExpression() const
 {
 	return m_oclExpression_Attribute_topExpression;
 }
@@ -491,17 +491,17 @@ std::shared_ptr<ecore::EReference> ocl::Expressions::ExpressionsPackageImpl::get
 // End Class OclExpression
 
 // Begin Class OperationCallExp
-std::shared_ptr<ecore::EClass> ocl::Expressions::ExpressionsPackageImpl::getOperationCallExp_Class() const
+const std::shared_ptr<ecore::EClass>& ocl::Expressions::ExpressionsPackageImpl::getOperationCallExp_Class() const
 {
 	return m_operationCallExp_Class;
 }
 
 
-std::shared_ptr<ecore::EReference> ocl::Expressions::ExpressionsPackageImpl::getOperationCallExp_Attribute_argument() const
+const std::shared_ptr<ecore::EReference>& ocl::Expressions::ExpressionsPackageImpl::getOperationCallExp_Attribute_argument() const
 {
 	return m_operationCallExp_Attribute_argument;
 }
-std::shared_ptr<ecore::EReference> ocl::Expressions::ExpressionsPackageImpl::getOperationCallExp_Attribute_referredOperation() const
+const std::shared_ptr<ecore::EReference>& ocl::Expressions::ExpressionsPackageImpl::getOperationCallExp_Attribute_referredOperation() const
 {
 	return m_operationCallExp_Attribute_referredOperation;
 }
@@ -510,12 +510,12 @@ std::shared_ptr<ecore::EReference> ocl::Expressions::ExpressionsPackageImpl::get
 // End Class OperationCallExp
 
 // Begin Class PrimitiveLiteralExp
-std::shared_ptr<ecore::EClass> ocl::Expressions::ExpressionsPackageImpl::getPrimitiveLiteralExp_Class() const
+const std::shared_ptr<ecore::EClass>& ocl::Expressions::ExpressionsPackageImpl::getPrimitiveLiteralExp_Class() const
 {
 	return m_primitiveLiteralExp_Class;
 }
 
-std::shared_ptr<ecore::EAttribute> ocl::Expressions::ExpressionsPackageImpl::getPrimitiveLiteralExp_Attribute_symbol() const
+const std::shared_ptr<ecore::EAttribute>& ocl::Expressions::ExpressionsPackageImpl::getPrimitiveLiteralExp_Attribute_symbol() const
 {
 	return m_primitiveLiteralExp_Attribute_symbol;
 }
@@ -525,13 +525,13 @@ std::shared_ptr<ecore::EAttribute> ocl::Expressions::ExpressionsPackageImpl::get
 // End Class PrimitiveLiteralExp
 
 // Begin Class PropertyCallExp
-std::shared_ptr<ecore::EClass> ocl::Expressions::ExpressionsPackageImpl::getPropertyCallExp_Class() const
+const std::shared_ptr<ecore::EClass>& ocl::Expressions::ExpressionsPackageImpl::getPropertyCallExp_Class() const
 {
 	return m_propertyCallExp_Class;
 }
 
 
-std::shared_ptr<ecore::EReference> ocl::Expressions::ExpressionsPackageImpl::getPropertyCallExp_Attribute_referredProperty() const
+const std::shared_ptr<ecore::EReference>& ocl::Expressions::ExpressionsPackageImpl::getPropertyCallExp_Attribute_referredProperty() const
 {
 	return m_propertyCallExp_Attribute_referredProperty;
 }
@@ -540,12 +540,12 @@ std::shared_ptr<ecore::EReference> ocl::Expressions::ExpressionsPackageImpl::get
 // End Class PropertyCallExp
 
 // Begin Class RealLiteralExp
-std::shared_ptr<ecore::EClass> ocl::Expressions::ExpressionsPackageImpl::getRealLiteralExp_Class() const
+const std::shared_ptr<ecore::EClass>& ocl::Expressions::ExpressionsPackageImpl::getRealLiteralExp_Class() const
 {
 	return m_realLiteralExp_Class;
 }
 
-std::shared_ptr<ecore::EAttribute> ocl::Expressions::ExpressionsPackageImpl::getRealLiteralExp_Attribute_realSymbol() const
+const std::shared_ptr<ecore::EAttribute>& ocl::Expressions::ExpressionsPackageImpl::getRealLiteralExp_Attribute_realSymbol() const
 {
 	return m_realLiteralExp_Attribute_realSymbol;
 }
@@ -555,13 +555,13 @@ std::shared_ptr<ecore::EAttribute> ocl::Expressions::ExpressionsPackageImpl::get
 // End Class RealLiteralExp
 
 // Begin Class StateExp
-std::shared_ptr<ecore::EClass> ocl::Expressions::ExpressionsPackageImpl::getStateExp_Class() const
+const std::shared_ptr<ecore::EClass>& ocl::Expressions::ExpressionsPackageImpl::getStateExp_Class() const
 {
 	return m_stateExp_Class;
 }
 
 
-std::shared_ptr<ecore::EReference> ocl::Expressions::ExpressionsPackageImpl::getStateExp_Attribute_referredState() const
+const std::shared_ptr<ecore::EReference>& ocl::Expressions::ExpressionsPackageImpl::getStateExp_Attribute_referredState() const
 {
 	return m_stateExp_Attribute_referredState;
 }
@@ -570,12 +570,12 @@ std::shared_ptr<ecore::EReference> ocl::Expressions::ExpressionsPackageImpl::get
 // End Class StateExp
 
 // Begin Class StringLiteralExp
-std::shared_ptr<ecore::EClass> ocl::Expressions::ExpressionsPackageImpl::getStringLiteralExp_Class() const
+const std::shared_ptr<ecore::EClass>& ocl::Expressions::ExpressionsPackageImpl::getStringLiteralExp_Class() const
 {
 	return m_stringLiteralExp_Class;
 }
 
-std::shared_ptr<ecore::EAttribute> ocl::Expressions::ExpressionsPackageImpl::getStringLiteralExp_Attribute_stringSymbol() const
+const std::shared_ptr<ecore::EAttribute>& ocl::Expressions::ExpressionsPackageImpl::getStringLiteralExp_Attribute_stringSymbol() const
 {
 	return m_stringLiteralExp_Attribute_stringSymbol;
 }
@@ -585,13 +585,13 @@ std::shared_ptr<ecore::EAttribute> ocl::Expressions::ExpressionsPackageImpl::get
 // End Class StringLiteralExp
 
 // Begin Class TupleLiteralExp
-std::shared_ptr<ecore::EClass> ocl::Expressions::ExpressionsPackageImpl::getTupleLiteralExp_Class() const
+const std::shared_ptr<ecore::EClass>& ocl::Expressions::ExpressionsPackageImpl::getTupleLiteralExp_Class() const
 {
 	return m_tupleLiteralExp_Class;
 }
 
 
-std::shared_ptr<ecore::EReference> ocl::Expressions::ExpressionsPackageImpl::getTupleLiteralExp_Attribute_part() const
+const std::shared_ptr<ecore::EReference>& ocl::Expressions::ExpressionsPackageImpl::getTupleLiteralExp_Attribute_part() const
 {
 	return m_tupleLiteralExp_Attribute_part;
 }
@@ -600,13 +600,13 @@ std::shared_ptr<ecore::EReference> ocl::Expressions::ExpressionsPackageImpl::get
 // End Class TupleLiteralExp
 
 // Begin Class TupleLiteralPart
-std::shared_ptr<ecore::EClass> ocl::Expressions::ExpressionsPackageImpl::getTupleLiteralPart_Class() const
+const std::shared_ptr<ecore::EClass>& ocl::Expressions::ExpressionsPackageImpl::getTupleLiteralPart_Class() const
 {
 	return m_tupleLiteralPart_Class;
 }
 
 
-std::shared_ptr<ecore::EReference> ocl::Expressions::ExpressionsPackageImpl::getTupleLiteralPart_Attribute_attribute() const
+const std::shared_ptr<ecore::EReference>& ocl::Expressions::ExpressionsPackageImpl::getTupleLiteralPart_Attribute_attribute() const
 {
 	return m_tupleLiteralPart_Attribute_attribute;
 }
@@ -615,13 +615,13 @@ std::shared_ptr<ecore::EReference> ocl::Expressions::ExpressionsPackageImpl::get
 // End Class TupleLiteralPart
 
 // Begin Class TypeExp
-std::shared_ptr<ecore::EClass> ocl::Expressions::ExpressionsPackageImpl::getTypeExp_Class() const
+const std::shared_ptr<ecore::EClass>& ocl::Expressions::ExpressionsPackageImpl::getTypeExp_Class() const
 {
 	return m_typeExp_Class;
 }
 
 
-std::shared_ptr<ecore::EReference> ocl::Expressions::ExpressionsPackageImpl::getTypeExp_Attribute_referredType() const
+const std::shared_ptr<ecore::EReference>& ocl::Expressions::ExpressionsPackageImpl::getTypeExp_Attribute_referredType() const
 {
 	return m_typeExp_Attribute_referredType;
 }
@@ -630,12 +630,12 @@ std::shared_ptr<ecore::EReference> ocl::Expressions::ExpressionsPackageImpl::get
 // End Class TypeExp
 
 // Begin Class UnlimitedNaturalExp
-std::shared_ptr<ecore::EClass> ocl::Expressions::ExpressionsPackageImpl::getUnlimitedNaturalExp_Class() const
+const std::shared_ptr<ecore::EClass>& ocl::Expressions::ExpressionsPackageImpl::getUnlimitedNaturalExp_Class() const
 {
 	return m_unlimitedNaturalExp_Class;
 }
 
-std::shared_ptr<ecore::EAttribute> ocl::Expressions::ExpressionsPackageImpl::getUnlimitedNaturalExp_Attribute_unlimitedNaturalSymbol() const
+const std::shared_ptr<ecore::EAttribute>& ocl::Expressions::ExpressionsPackageImpl::getUnlimitedNaturalExp_Attribute_unlimitedNaturalSymbol() const
 {
 	return m_unlimitedNaturalExp_Attribute_unlimitedNaturalSymbol;
 }
@@ -645,7 +645,7 @@ std::shared_ptr<ecore::EAttribute> ocl::Expressions::ExpressionsPackageImpl::get
 // End Class UnlimitedNaturalExp
 
 // Begin Class UnspecifiedValueExp
-std::shared_ptr<ecore::EClass> ocl::Expressions::ExpressionsPackageImpl::getUnspecifiedValueExp_Class() const
+const std::shared_ptr<ecore::EClass>& ocl::Expressions::ExpressionsPackageImpl::getUnspecifiedValueExp_Class() const
 {
 	return m_unspecifiedValueExp_Class;
 }
@@ -656,45 +656,45 @@ std::shared_ptr<ecore::EClass> ocl::Expressions::ExpressionsPackageImpl::getUnsp
 // End Class UnspecifiedValueExp
 
 // Begin Class Variable
-std::shared_ptr<ecore::EClass> ocl::Expressions::ExpressionsPackageImpl::getVariable_Class() const
+const std::shared_ptr<ecore::EClass>& ocl::Expressions::ExpressionsPackageImpl::getVariable_Class() const
 {
 	return m_variable_Class;
 }
 
 
-std::shared_ptr<ecore::EReference> ocl::Expressions::ExpressionsPackageImpl::getVariable_Attribute_baseExp() const
+const std::shared_ptr<ecore::EReference>& ocl::Expressions::ExpressionsPackageImpl::getVariable_Attribute_baseExp() const
 {
 	return m_variable_Attribute_baseExp;
 }
-std::shared_ptr<ecore::EReference> ocl::Expressions::ExpressionsPackageImpl::getVariable_Attribute_initExpression() const
+const std::shared_ptr<ecore::EReference>& ocl::Expressions::ExpressionsPackageImpl::getVariable_Attribute_initExpression() const
 {
 	return m_variable_Attribute_initExpression;
 }
-std::shared_ptr<ecore::EReference> ocl::Expressions::ExpressionsPackageImpl::getVariable_Attribute_loopExp() const
+const std::shared_ptr<ecore::EReference>& ocl::Expressions::ExpressionsPackageImpl::getVariable_Attribute_loopExp() const
 {
 	return m_variable_Attribute_loopExp;
 }
-std::shared_ptr<ecore::EReference> ocl::Expressions::ExpressionsPackageImpl::getVariable_Attribute_referringExp() const
+const std::shared_ptr<ecore::EReference>& ocl::Expressions::ExpressionsPackageImpl::getVariable_Attribute_referringExp() const
 {
 	return m_variable_Attribute_referringExp;
 }
-std::shared_ptr<ecore::EReference> ocl::Expressions::ExpressionsPackageImpl::getVariable_Attribute_representedParameter() const
+const std::shared_ptr<ecore::EReference>& ocl::Expressions::ExpressionsPackageImpl::getVariable_Attribute_representedParameter() const
 {
 	return m_variable_Attribute_representedParameter;
 }
-std::shared_ptr<ecore::EReference> ocl::Expressions::ExpressionsPackageImpl::getVariable_Attribute_resultOwner() const
+const std::shared_ptr<ecore::EReference>& ocl::Expressions::ExpressionsPackageImpl::getVariable_Attribute_resultOwner() const
 {
 	return m_variable_Attribute_resultOwner;
 }
-std::shared_ptr<ecore::EReference> ocl::Expressions::ExpressionsPackageImpl::getVariable_Attribute_selfOwner() const
+const std::shared_ptr<ecore::EReference>& ocl::Expressions::ExpressionsPackageImpl::getVariable_Attribute_selfOwner() const
 {
 	return m_variable_Attribute_selfOwner;
 }
-std::shared_ptr<ecore::EReference> ocl::Expressions::ExpressionsPackageImpl::getVariable_Attribute_value() const
+const std::shared_ptr<ecore::EReference>& ocl::Expressions::ExpressionsPackageImpl::getVariable_Attribute_value() const
 {
 	return m_variable_Attribute_value;
 }
-std::shared_ptr<ecore::EReference> ocl::Expressions::ExpressionsPackageImpl::getVariable_Attribute_varOwner() const
+const std::shared_ptr<ecore::EReference>& ocl::Expressions::ExpressionsPackageImpl::getVariable_Attribute_varOwner() const
 {
 	return m_variable_Attribute_varOwner;
 }
@@ -703,20 +703,20 @@ std::shared_ptr<ecore::EReference> ocl::Expressions::ExpressionsPackageImpl::get
 // End Class Variable
 
 // Begin Class VariableExp
-std::shared_ptr<ecore::EClass> ocl::Expressions::ExpressionsPackageImpl::getVariableExp_Class() const
+const std::shared_ptr<ecore::EClass>& ocl::Expressions::ExpressionsPackageImpl::getVariableExp_Class() const
 {
 	return m_variableExp_Class;
 }
 
 
-std::shared_ptr<ecore::EReference> ocl::Expressions::ExpressionsPackageImpl::getVariableExp_Attribute_referredVariable() const
+const std::shared_ptr<ecore::EReference>& ocl::Expressions::ExpressionsPackageImpl::getVariableExp_Attribute_referredVariable() const
 {
 	return m_variableExp_Attribute_referredVariable;
 }
 
 
 // End Class VariableExp
-std::shared_ptr<ecore::EEnum> ocl::Expressions::ExpressionsPackageImpl::getCollectionKind_Class() const
+const std::shared_ptr<ecore::EEnum>& ocl::Expressions::ExpressionsPackageImpl::getCollectionKind_Class() const
 {
 	return m_collectionKind_Class;
 }

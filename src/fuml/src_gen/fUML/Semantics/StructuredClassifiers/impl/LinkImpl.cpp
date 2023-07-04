@@ -202,17 +202,11 @@ std::shared_ptr<Bag<fUML::Semantics::SimpleClassifiers::FeatureValue> > LinkImpl
 	//end of body
 }
 
-std::shared_ptr<Bag<uml::Classifier> > LinkImpl::getTypes() const
+const std::shared_ptr<Bag<uml::Classifier> >& LinkImpl::getTypes() const
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
-	std::shared_ptr<Bag<uml::Classifier> > types(new Bag<uml::Classifier>());
-
-	if( this->getType() != nullptr)
-	{
-		types->push_back(std::dynamic_pointer_cast<uml::Classifier>(this->getType()));
-	}
-    return types;
+	return this->getType();
 	//end of body
 }
 

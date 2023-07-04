@@ -859,7 +859,7 @@ bool TransitionImpl::eSet(int featureID, const Any& newValue)
 					std::shared_ptr<Bag<uml::Trigger>> _trigger=getTrigger();
 					for(const std::shared_ptr<uml::Trigger> indexTrigger: *_trigger)
 					{
-						if (triggerList->find(indexTrigger) == -1)
+						if (!(triggerList->includes(indexTrigger)))
 						{
 							_trigger->erase(indexTrigger);
 						}
@@ -867,7 +867,7 @@ bool TransitionImpl::eSet(int featureID, const Any& newValue)
 
 					for(const std::shared_ptr<uml::Trigger> indexTrigger: *triggerList)
 					{
-						if (_trigger->find(indexTrigger) == -1)
+						if (!(_trigger->includes(indexTrigger)))
 						{
 							_trigger->add(indexTrigger);
 						}

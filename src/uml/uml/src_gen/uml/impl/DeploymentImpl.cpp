@@ -468,7 +468,7 @@ void DeploymentImpl::resolveReferences(const int featureID, std::vector<std::sha
 	{
 		case uml::umlPackage::DEPLOYMENT_ATTRIBUTE_DEPLOYEDARTIFACT:
 		{
-			std::shared_ptr<Subset<uml::DeployedArtifact, uml::NamedElement /*Subset does not reference a union*/>> _deployedArtifact = getDeployedArtifact();
+			const std::shared_ptr<Subset<uml::DeployedArtifact, uml::NamedElement /*Subset does not reference a union*/>>& _deployedArtifact = getDeployedArtifact();
 			for(std::shared_ptr<ecore::EObject> ref : references)
 			{
 				std::shared_ptr<uml::DeployedArtifact>  _r = std::dynamic_pointer_cast<uml::DeployedArtifact>(ref);
@@ -588,7 +588,7 @@ bool DeploymentImpl::eSet(int featureID, const Any& newValue)
 					std::shared_ptr<Bag<uml::DeploymentSpecification>> _configuration=getConfiguration();
 					for(const std::shared_ptr<uml::DeploymentSpecification> indexConfiguration: *_configuration)
 					{
-						if (configurationList->find(indexConfiguration) == -1)
+						if (!(configurationList->includes(indexConfiguration)))
 						{
 							_configuration->erase(indexConfiguration);
 						}
@@ -596,7 +596,7 @@ bool DeploymentImpl::eSet(int featureID, const Any& newValue)
 
 					for(const std::shared_ptr<uml::DeploymentSpecification> indexConfiguration: *configurationList)
 					{
-						if (_configuration->find(indexConfiguration) == -1)
+						if (!(_configuration->includes(indexConfiguration)))
 						{
 							_configuration->add(indexConfiguration);
 						}
@@ -625,7 +625,7 @@ bool DeploymentImpl::eSet(int featureID, const Any& newValue)
 					std::shared_ptr<Bag<uml::DeployedArtifact>> _deployedArtifact=getDeployedArtifact();
 					for(const std::shared_ptr<uml::DeployedArtifact> indexDeployedArtifact: *_deployedArtifact)
 					{
-						if (deployedArtifactList->find(indexDeployedArtifact) == -1)
+						if (!(deployedArtifactList->includes(indexDeployedArtifact)))
 						{
 							_deployedArtifact->erase(indexDeployedArtifact);
 						}
@@ -633,7 +633,7 @@ bool DeploymentImpl::eSet(int featureID, const Any& newValue)
 
 					for(const std::shared_ptr<uml::DeployedArtifact> indexDeployedArtifact: *deployedArtifactList)
 					{
-						if (_deployedArtifact->find(indexDeployedArtifact) == -1)
+						if (!(_deployedArtifact->includes(indexDeployedArtifact)))
 						{
 							_deployedArtifact->add(indexDeployedArtifact);
 						}

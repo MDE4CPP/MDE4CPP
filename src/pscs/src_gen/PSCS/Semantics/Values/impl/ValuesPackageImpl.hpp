@@ -41,12 +41,12 @@ namespace PSCS::Semantics::Values
 
 			// Begin Class CS_OpaqueExpressionEvaluation
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getCS_OpaqueExpressionEvaluation_Class() const ;
+			virtual const std::shared_ptr<ecore::EClass>& getCS_OpaqueExpressionEvaluation_Class() const ;
 			
 			
 			
-			virtual std::shared_ptr<ecore::EOperation> getCS_OpaqueExpressionEvaluation_Operation_evaluate() const ;
-			virtual std::shared_ptr<ecore::EOperation> getCS_OpaqueExpressionEvaluation_Operation_executeExpressionBehavior() const ;
+			virtual const std::shared_ptr<ecore::EOperation>& getCS_OpaqueExpressionEvaluation_Operation_evaluate() const ;
+			virtual const std::shared_ptr<ecore::EOperation>& getCS_OpaqueExpressionEvaluation_Operation_executeExpressionBehavior() const ;
 			
 			// End Class CS_OpaqueExpressionEvaluation
 

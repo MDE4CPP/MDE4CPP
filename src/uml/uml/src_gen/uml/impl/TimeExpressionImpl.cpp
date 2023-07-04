@@ -347,7 +347,7 @@ void TimeExpressionImpl::resolveReferences(const int featureID, std::vector<std:
 	{
 		case uml::umlPackage::TIMEEXPRESSION_ATTRIBUTE_OBSERVATION:
 		{
-			std::shared_ptr<Bag<uml::Observation>> _observation = getObservation();
+			const std::shared_ptr<Bag<uml::Observation>>& _observation = getObservation();
 			for(std::shared_ptr<ecore::EObject> ref : references)
 			{
 				std::shared_ptr<uml::Observation>  _r = std::dynamic_pointer_cast<uml::Observation>(ref);
@@ -456,7 +456,7 @@ bool TimeExpressionImpl::eSet(int featureID, const Any& newValue)
 					std::shared_ptr<Bag<uml::Observation>> _observation=getObservation();
 					for(const std::shared_ptr<uml::Observation> indexObservation: *_observation)
 					{
-						if (observationList->find(indexObservation) == -1)
+						if (!(observationList->includes(indexObservation)))
 						{
 							_observation->erase(indexObservation);
 						}
@@ -464,7 +464,7 @@ bool TimeExpressionImpl::eSet(int featureID, const Any& newValue)
 
 					for(const std::shared_ptr<uml::Observation> indexObservation: *observationList)
 					{
-						if (_observation->find(indexObservation) == -1)
+						if (!(_observation->includes(indexObservation)))
 						{
 							_observation->add(indexObservation);
 						}

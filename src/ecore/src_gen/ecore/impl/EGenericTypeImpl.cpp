@@ -507,7 +507,7 @@ bool EGenericTypeImpl::eSet(int featureID, const Any& newValue)
 					std::shared_ptr<Bag<ecore::EGenericType>> _eTypeArguments=getETypeArguments();
 					for(const std::shared_ptr<ecore::EGenericType> indexETypeArguments: *_eTypeArguments)
 					{
-						if (eTypeArgumentsList->find(indexETypeArguments) == -1)
+						if (!(eTypeArgumentsList->includes(indexETypeArguments)))
 						{
 							_eTypeArguments->erase(indexETypeArguments);
 						}
@@ -515,7 +515,7 @@ bool EGenericTypeImpl::eSet(int featureID, const Any& newValue)
 
 					for(const std::shared_ptr<ecore::EGenericType> indexETypeArguments: *eTypeArgumentsList)
 					{
-						if (_eTypeArguments->find(indexETypeArguments) == -1)
+						if (!(_eTypeArguments->includes(indexETypeArguments)))
 						{
 							_eTypeArguments->add(indexETypeArguments);
 						}

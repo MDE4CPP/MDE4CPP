@@ -49,7 +49,7 @@ virtual public Token
 			//*********************************
 			virtual std::shared_ptr<fUML::Semantics::Activities::Token> _copy() ;
 			virtual bool equals(const std::shared_ptr<fUML::Semantics::Activities::Token>& other) ;
-			virtual std::shared_ptr<fUML::Semantics::Values::Value> getValue() const ;
+			virtual const std::shared_ptr<fUML::Semantics::Values::Value>& getValue() const ;
 			virtual bool isControl() ;
 			virtual std::shared_ptr<fUML::Semantics::Activities::Token> transfer(const std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivation>& holder) ;
 			virtual void withdraw() ;

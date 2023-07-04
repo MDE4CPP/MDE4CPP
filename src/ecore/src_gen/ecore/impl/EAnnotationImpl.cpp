@@ -476,7 +476,7 @@ bool EAnnotationImpl::eSet(int featureID, const Any& newValue)
 					std::shared_ptr<Bag<ecore::EObject>> _contents=getContents();
 					for(const std::shared_ptr<ecore::EObject> indexContents: *_contents)
 					{
-						if (contentsList->find(indexContents) == -1)
+						if (!(contentsList->includes(indexContents)))
 						{
 							_contents->erase(indexContents);
 						}
@@ -484,7 +484,7 @@ bool EAnnotationImpl::eSet(int featureID, const Any& newValue)
 
 					for(const std::shared_ptr<ecore::EObject> indexContents: *contentsList)
 					{
-						if (_contents->find(indexContents) == -1)
+						if (!(_contents->includes(indexContents)))
 						{
 							_contents->add(indexContents);
 						}
@@ -529,7 +529,7 @@ bool EAnnotationImpl::eSet(int featureID, const Any& newValue)
 					std::shared_ptr<Bag<ecore::EObject>> _references=getReferences();
 					for(const std::shared_ptr<ecore::EObject> indexReferences: *_references)
 					{
-						if (referencesList->find(indexReferences) == -1)
+						if (!(referencesList->includes(indexReferences)))
 						{
 							_references->erase(indexReferences);
 						}
@@ -537,7 +537,7 @@ bool EAnnotationImpl::eSet(int featureID, const Any& newValue)
 
 					for(const std::shared_ptr<ecore::EObject> indexReferences: *referencesList)
 					{
-						if (_references->find(indexReferences) == -1)
+						if (!(_references->includes(indexReferences)))
 						{
 							_references->add(indexReferences);
 						}

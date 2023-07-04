@@ -41,11 +41,11 @@ namespace fUML::Semantics::Classification
 
 			// Begin Class InstanceValueEvaluation
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getInstanceValueEvaluation_Class() const ;
+			virtual const std::shared_ptr<ecore::EClass>& getInstanceValueEvaluation_Class() const ;
 			
 			
 			
-			virtual std::shared_ptr<ecore::EOperation> getInstanceValueEvaluation_Operation_evaluate() const ;
+			virtual const std::shared_ptr<ecore::EOperation>& getInstanceValueEvaluation_Operation_evaluate() const ;
 			
 			// End Class InstanceValueEvaluation
 

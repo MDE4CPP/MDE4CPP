@@ -449,7 +449,7 @@ bool SlotImpl::eSet(int featureID, const Any& newValue)
 					std::shared_ptr<Bag<uml::ValueSpecification>> _value=getValue();
 					for(const std::shared_ptr<uml::ValueSpecification> indexValue: *_value)
 					{
-						if (valueList->find(indexValue) == -1)
+						if (!(valueList->includes(indexValue)))
 						{
 							_value->erase(indexValue);
 						}
@@ -457,7 +457,7 @@ bool SlotImpl::eSet(int featureID, const Any& newValue)
 
 					for(const std::shared_ptr<uml::ValueSpecification> indexValue: *valueList)
 					{
-						if (_value->find(indexValue) == -1)
+						if (!(_value->includes(indexValue)))
 						{
 							_value->add(indexValue);
 						}

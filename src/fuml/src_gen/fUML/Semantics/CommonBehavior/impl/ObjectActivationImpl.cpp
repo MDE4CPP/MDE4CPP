@@ -578,7 +578,7 @@ void ObjectActivationImpl::resolveReferences(const int featureID, std::vector<st
 
 		case fUML::Semantics::CommonBehavior::CommonBehaviorPackage::OBJECTACTIVATION_ATTRIBUTE_WAITINGEVENTACCEPTERS:
 		{
-			std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::EventAccepter>> _waitingEventAccepters = getWaitingEventAccepters();
+			const std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::EventAccepter>>& _waitingEventAccepters = getWaitingEventAccepters();
 			for(std::shared_ptr<ecore::EObject> ref : references)
 			{
 				std::shared_ptr<fUML::Semantics::CommonBehavior::EventAccepter>  _r = std::dynamic_pointer_cast<fUML::Semantics::CommonBehavior::EventAccepter>(ref);
@@ -681,7 +681,7 @@ bool ObjectActivationImpl::eSet(int featureID, const Any& newValue)
 					std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ClassifierBehaviorExecution>> _classifierBehaviorExecutions=getClassifierBehaviorExecutions();
 					for(const std::shared_ptr<fUML::Semantics::CommonBehavior::ClassifierBehaviorExecution> indexClassifierBehaviorExecutions: *_classifierBehaviorExecutions)
 					{
-						if (classifierBehaviorExecutionsList->find(indexClassifierBehaviorExecutions) == -1)
+						if (!(classifierBehaviorExecutionsList->includes(indexClassifierBehaviorExecutions)))
 						{
 							_classifierBehaviorExecutions->erase(indexClassifierBehaviorExecutions);
 						}
@@ -689,7 +689,7 @@ bool ObjectActivationImpl::eSet(int featureID, const Any& newValue)
 
 					for(const std::shared_ptr<fUML::Semantics::CommonBehavior::ClassifierBehaviorExecution> indexClassifierBehaviorExecutions: *classifierBehaviorExecutionsList)
 					{
-						if (_classifierBehaviorExecutions->find(indexClassifierBehaviorExecutions) == -1)
+						if (!(_classifierBehaviorExecutions->includes(indexClassifierBehaviorExecutions)))
 						{
 							_classifierBehaviorExecutions->add(indexClassifierBehaviorExecutions);
 						}
@@ -718,7 +718,7 @@ bool ObjectActivationImpl::eSet(int featureID, const Any& newValue)
 					std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::EventOccurrence>> _eventPool=getEventPool();
 					for(const std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccurrence> indexEventPool: *_eventPool)
 					{
-						if (eventPoolList->find(indexEventPool) == -1)
+						if (!(eventPoolList->includes(indexEventPool)))
 						{
 							_eventPool->erase(indexEventPool);
 						}
@@ -726,7 +726,7 @@ bool ObjectActivationImpl::eSet(int featureID, const Any& newValue)
 
 					for(const std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccurrence> indexEventPool: *eventPoolList)
 					{
-						if (_eventPool->find(indexEventPool) == -1)
+						if (!(_eventPool->includes(indexEventPool)))
 						{
 							_eventPool->add(indexEventPool);
 						}
@@ -763,7 +763,7 @@ bool ObjectActivationImpl::eSet(int featureID, const Any& newValue)
 					std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::EventAccepter>> _waitingEventAccepters=getWaitingEventAccepters();
 					for(const std::shared_ptr<fUML::Semantics::CommonBehavior::EventAccepter> indexWaitingEventAccepters: *_waitingEventAccepters)
 					{
-						if (waitingEventAcceptersList->find(indexWaitingEventAccepters) == -1)
+						if (!(waitingEventAcceptersList->includes(indexWaitingEventAccepters)))
 						{
 							_waitingEventAccepters->erase(indexWaitingEventAccepters);
 						}
@@ -771,7 +771,7 @@ bool ObjectActivationImpl::eSet(int featureID, const Any& newValue)
 
 					for(const std::shared_ptr<fUML::Semantics::CommonBehavior::EventAccepter> indexWaitingEventAccepters: *waitingEventAcceptersList)
 					{
-						if (_waitingEventAccepters->find(indexWaitingEventAccepters) == -1)
+						if (!(_waitingEventAccepters->includes(indexWaitingEventAccepters)))
 						{
 							_waitingEventAccepters->add(indexWaitingEventAccepters);
 						}

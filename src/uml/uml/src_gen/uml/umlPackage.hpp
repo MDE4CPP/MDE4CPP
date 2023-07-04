@@ -308,10 +308,10 @@ namespace uml
 			
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getAbstraction_Class() const = 0;
+			virtual const std::shared_ptr<ecore::EClass>& getAbstraction_Class() const = 0;
 			
 			
-			virtual std::shared_ptr<ecore::EReference> getAbstraction_Attribute_mapping() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getAbstraction_Attribute_mapping() const = 0;
 			
 			
 			// End Class Abstraction
@@ -330,14 +330,14 @@ namespace uml
 			static const unsigned int ACCEPTCALLACTION_OPERATION_UNMARSHALL_EDIAGNOSTICCHAIN_EMAP = 3758873039;
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getAcceptCallAction_Class() const = 0;
+			virtual const std::shared_ptr<ecore::EClass>& getAcceptCallAction_Class() const = 0;
 			
 			
-			virtual std::shared_ptr<ecore::EReference> getAcceptCallAction_Attribute_returnInformation() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getAcceptCallAction_Attribute_returnInformation() const = 0;
 			
-			virtual std::shared_ptr<ecore::EOperation> getAcceptCallAction_Operation_result_pins_EDiagnosticChain_EMap() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getAcceptCallAction_Operation_trigger_call_event_EDiagnosticChain_EMap() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getAcceptCallAction_Operation_unmarshall_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getAcceptCallAction_Operation_result_pins_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getAcceptCallAction_Operation_trigger_call_event_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getAcceptCallAction_Operation_unmarshall_EDiagnosticChain_EMap() const = 0;
 			
 			// End Class AcceptCallAction
 
@@ -359,18 +359,18 @@ namespace uml
 			static const unsigned int ACCEPTEVENTACTION_OPERATION_UNMARSHALL_SIGNAL_EVENTS_EDIAGNOSTICCHAIN_EMAP = 1806469778;
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getAcceptEventAction_Class() const = 0;
+			virtual const std::shared_ptr<ecore::EClass>& getAcceptEventAction_Class() const = 0;
 			
-			virtual std::shared_ptr<ecore::EAttribute> getAcceptEventAction_Attribute_isUnmarshall() const = 0;
+			virtual const std::shared_ptr<ecore::EAttribute>& getAcceptEventAction_Attribute_isUnmarshall() const = 0;
 			
-			virtual std::shared_ptr<ecore::EReference> getAcceptEventAction_Attribute_result() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getAcceptEventAction_Attribute_trigger() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getAcceptEventAction_Attribute_result() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getAcceptEventAction_Attribute_trigger() const = 0;
 			
-			virtual std::shared_ptr<ecore::EOperation> getAcceptEventAction_Operation_conforming_type_EDiagnosticChain_EMap() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getAcceptEventAction_Operation_no_input_pins_EDiagnosticChain_EMap() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getAcceptEventAction_Operation_no_output_pins_EDiagnosticChain_EMap() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getAcceptEventAction_Operation_one_output_pin_EDiagnosticChain_EMap() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getAcceptEventAction_Operation_unmarshall_signal_events_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getAcceptEventAction_Operation_conforming_type_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getAcceptEventAction_Operation_no_input_pins_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getAcceptEventAction_Operation_no_output_pins_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getAcceptEventAction_Operation_one_output_pin_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getAcceptEventAction_Operation_unmarshall_signal_events_EDiagnosticChain_EMap() const = 0;
 			
 			// End Class AcceptEventAction
 
@@ -394,20 +394,20 @@ namespace uml
 			static const unsigned int ACTION_OPERATION_GETCONTEXT = 42483851;
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getAction_Class() const = 0;
+			virtual const std::shared_ptr<ecore::EClass>& getAction_Class() const = 0;
 			
-			virtual std::shared_ptr<ecore::EAttribute> getAction_Attribute_isLocallyReentrant() const = 0;
+			virtual const std::shared_ptr<ecore::EAttribute>& getAction_Attribute_isLocallyReentrant() const = 0;
 			
-			virtual std::shared_ptr<ecore::EReference> getAction_Attribute_context() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getAction_Attribute_input() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getAction_Attribute_localPostcondition() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getAction_Attribute_localPrecondition() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getAction_Attribute_output() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getAction_Attribute_context() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getAction_Attribute_input() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getAction_Attribute_localPostcondition() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getAction_Attribute_localPrecondition() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getAction_Attribute_output() const = 0;
 			
-			virtual std::shared_ptr<ecore::EOperation> getAction_Operation_allActions() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getAction_Operation_allOwnedNodes() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getAction_Operation_containingBehavior() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getAction_Operation_getContext() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getAction_Operation_allActions() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getAction_Operation_allOwnedNodes() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getAction_Operation_containingBehavior() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getAction_Operation_getContext() const = 0;
 			
 			// End Class Action
 
@@ -423,12 +423,12 @@ namespace uml
 			static const unsigned int ACTIONEXECUTIONSPECIFICATION_OPERATION_ACTION_REFERENCED_EDIAGNOSTICCHAIN_EMAP = 3265990093;
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getActionExecutionSpecification_Class() const = 0;
+			virtual const std::shared_ptr<ecore::EClass>& getActionExecutionSpecification_Class() const = 0;
 			
 			
-			virtual std::shared_ptr<ecore::EReference> getActionExecutionSpecification_Attribute_action() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getActionExecutionSpecification_Attribute_action() const = 0;
 			
-			virtual std::shared_ptr<ecore::EOperation> getActionExecutionSpecification_Operation_action_referenced_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getActionExecutionSpecification_Operation_action_referenced_EDiagnosticChain_EMap() const = 0;
 			
 			// End Class ActionExecutionSpecification
 
@@ -446,14 +446,14 @@ namespace uml
 			static const unsigned int ACTIONINPUTPIN_OPERATION_ONE_OUTPUT_PIN_EDIAGNOSTICCHAIN_EMAP = 3182098911;
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getActionInputPin_Class() const = 0;
+			virtual const std::shared_ptr<ecore::EClass>& getActionInputPin_Class() const = 0;
 			
 			
-			virtual std::shared_ptr<ecore::EReference> getActionInputPin_Attribute_fromAction() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getActionInputPin_Attribute_fromAction() const = 0;
 			
-			virtual std::shared_ptr<ecore::EOperation> getActionInputPin_Operation_input_pin_EDiagnosticChain_EMap() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getActionInputPin_Operation_no_control_or_object_flow_EDiagnosticChain_EMap() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getActionInputPin_Operation_one_output_pin_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getActionInputPin_Operation_input_pin_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getActionInputPin_Operation_no_control_or_object_flow_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getActionInputPin_Operation_one_output_pin_EDiagnosticChain_EMap() const = 0;
 			
 			// End Class ActionInputPin
 
@@ -479,22 +479,22 @@ namespace uml
 			static const unsigned int ACTIVITY_OPERATION_MAXIMUM_TWO_PARAMETER_NODES_EDIAGNOSTICCHAIN_EMAP = 2025454442;
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getActivity_Class() const = 0;
+			virtual const std::shared_ptr<ecore::EClass>& getActivity_Class() const = 0;
 			
-			virtual std::shared_ptr<ecore::EAttribute> getActivity_Attribute_isReadOnly() const = 0;
-			virtual std::shared_ptr<ecore::EAttribute> getActivity_Attribute_isSingleExecution() const = 0;
+			virtual const std::shared_ptr<ecore::EAttribute>& getActivity_Attribute_isReadOnly() const = 0;
+			virtual const std::shared_ptr<ecore::EAttribute>& getActivity_Attribute_isSingleExecution() const = 0;
 			
-			virtual std::shared_ptr<ecore::EReference> getActivity_Attribute_edge() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getActivity_Attribute_group() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getActivity_Attribute_node() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getActivity_Attribute_ownedGroup() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getActivity_Attribute_ownedNode() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getActivity_Attribute_partition() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getActivity_Attribute_structuredNode() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getActivity_Attribute_variable() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getActivity_Attribute_edge() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getActivity_Attribute_group() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getActivity_Attribute_node() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getActivity_Attribute_ownedGroup() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getActivity_Attribute_ownedNode() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getActivity_Attribute_partition() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getActivity_Attribute_structuredNode() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getActivity_Attribute_variable() const = 0;
 			
-			virtual std::shared_ptr<ecore::EOperation> getActivity_Operation_maximum_one_parameter_node_EDiagnosticChain_EMap() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getActivity_Operation_maximum_two_parameter_nodes_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getActivity_Operation_maximum_one_parameter_node_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getActivity_Operation_maximum_two_parameter_nodes_EDiagnosticChain_EMap() const = 0;
 			
 			// End Class Activity
 
@@ -519,21 +519,21 @@ namespace uml
 			static const unsigned int ACTIVITYEDGE_OPERATION_SOURCE_AND_TARGET_EDIAGNOSTICCHAIN_EMAP = 2060103261;
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getActivityEdge_Class() const = 0;
+			virtual const std::shared_ptr<ecore::EClass>& getActivityEdge_Class() const = 0;
 			
 			
-			virtual std::shared_ptr<ecore::EReference> getActivityEdge_Attribute_activity() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getActivityEdge_Attribute_guard() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getActivityEdge_Attribute_inGroup() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getActivityEdge_Attribute_inPartition() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getActivityEdge_Attribute_inStructuredNode() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getActivityEdge_Attribute_interrupts() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getActivityEdge_Attribute_redefinedEdge() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getActivityEdge_Attribute_source() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getActivityEdge_Attribute_target() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getActivityEdge_Attribute_weight() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getActivityEdge_Attribute_activity() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getActivityEdge_Attribute_guard() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getActivityEdge_Attribute_inGroup() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getActivityEdge_Attribute_inPartition() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getActivityEdge_Attribute_inStructuredNode() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getActivityEdge_Attribute_interrupts() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getActivityEdge_Attribute_redefinedEdge() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getActivityEdge_Attribute_source() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getActivityEdge_Attribute_target() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getActivityEdge_Attribute_weight() const = 0;
 			
-			virtual std::shared_ptr<ecore::EOperation> getActivityEdge_Operation_source_and_target_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getActivityEdge_Operation_source_and_target_EDiagnosticChain_EMap() const = 0;
 			
 			// End Class ActivityEdge
 
@@ -547,7 +547,7 @@ namespace uml
 			
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getActivityFinalNode_Class() const = 0;
+			virtual const std::shared_ptr<ecore::EClass>& getActivityFinalNode_Class() const = 0;
 			
 			
 			
@@ -572,18 +572,18 @@ namespace uml
 			static const unsigned int ACTIVITYGROUP_OPERATION_NOT_CONTAINED_EDIAGNOSTICCHAIN_EMAP = 2941117457;
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getActivityGroup_Class() const = 0;
+			virtual const std::shared_ptr<ecore::EClass>& getActivityGroup_Class() const = 0;
 			
 			
-			virtual std::shared_ptr<ecore::EReference> getActivityGroup_Attribute_containedEdge() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getActivityGroup_Attribute_containedNode() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getActivityGroup_Attribute_inActivity() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getActivityGroup_Attribute_subgroup() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getActivityGroup_Attribute_superGroup() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getActivityGroup_Attribute_containedEdge() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getActivityGroup_Attribute_containedNode() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getActivityGroup_Attribute_inActivity() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getActivityGroup_Attribute_subgroup() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getActivityGroup_Attribute_superGroup() const = 0;
 			
-			virtual std::shared_ptr<ecore::EOperation> getActivityGroup_Operation_containingActivity() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getActivityGroup_Operation_nodes_and_edges_EDiagnosticChain_EMap() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getActivityGroup_Operation_not_contained_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getActivityGroup_Operation_containingActivity() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getActivityGroup_Operation_nodes_and_edges_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getActivityGroup_Operation_not_contained_EDiagnosticChain_EMap() const = 0;
 			
 			// End Class ActivityGroup
 
@@ -606,19 +606,19 @@ namespace uml
 			static const unsigned int ACTIVITYNODE_OPERATION_CONTAININGACTIVITY = 3068363550;
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getActivityNode_Class() const = 0;
+			virtual const std::shared_ptr<ecore::EClass>& getActivityNode_Class() const = 0;
 			
 			
-			virtual std::shared_ptr<ecore::EReference> getActivityNode_Attribute_activity() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getActivityNode_Attribute_inGroup() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getActivityNode_Attribute_inInterruptibleRegion() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getActivityNode_Attribute_inPartition() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getActivityNode_Attribute_inStructuredNode() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getActivityNode_Attribute_incoming() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getActivityNode_Attribute_outgoing() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getActivityNode_Attribute_redefinedNode() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getActivityNode_Attribute_activity() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getActivityNode_Attribute_inGroup() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getActivityNode_Attribute_inInterruptibleRegion() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getActivityNode_Attribute_inPartition() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getActivityNode_Attribute_inStructuredNode() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getActivityNode_Attribute_incoming() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getActivityNode_Attribute_outgoing() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getActivityNode_Attribute_redefinedNode() const = 0;
 			
-			virtual std::shared_ptr<ecore::EOperation> getActivityNode_Operation_containingActivity() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getActivityNode_Operation_containingActivity() const = 0;
 			
 			// End Class ActivityNode
 
@@ -638,16 +638,16 @@ namespace uml
 			static const unsigned int ACTIVITYPARAMETERNODE_OPERATION_SAME_TYPE_EDIAGNOSTICCHAIN_EMAP = 1979271357;
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getActivityParameterNode_Class() const = 0;
+			virtual const std::shared_ptr<ecore::EClass>& getActivityParameterNode_Class() const = 0;
 			
 			
-			virtual std::shared_ptr<ecore::EReference> getActivityParameterNode_Attribute_parameter() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getActivityParameterNode_Attribute_parameter() const = 0;
 			
-			virtual std::shared_ptr<ecore::EOperation> getActivityParameterNode_Operation_has_parameters_EDiagnosticChain_EMap() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getActivityParameterNode_Operation_no_edges_EDiagnosticChain_EMap() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getActivityParameterNode_Operation_no_incoming_edges_EDiagnosticChain_EMap() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getActivityParameterNode_Operation_no_outgoing_edges_EDiagnosticChain_EMap() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getActivityParameterNode_Operation_same_type_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getActivityParameterNode_Operation_has_parameters_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getActivityParameterNode_Operation_no_edges_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getActivityParameterNode_Operation_no_incoming_edges_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getActivityParameterNode_Operation_no_outgoing_edges_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getActivityParameterNode_Operation_same_type_EDiagnosticChain_EMap() const = 0;
 			
 			// End Class ActivityParameterNode
 
@@ -672,21 +672,21 @@ namespace uml
 			static const unsigned int ACTIVITYPARTITION_OPERATION_REPRESENTS_PROPERTY_AND_IS_CONTAINED_EDIAGNOSTICCHAIN_EMAP = 637234829;
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getActivityPartition_Class() const = 0;
+			virtual const std::shared_ptr<ecore::EClass>& getActivityPartition_Class() const = 0;
 			
-			virtual std::shared_ptr<ecore::EAttribute> getActivityPartition_Attribute_isDimension() const = 0;
-			virtual std::shared_ptr<ecore::EAttribute> getActivityPartition_Attribute_isExternal() const = 0;
+			virtual const std::shared_ptr<ecore::EAttribute>& getActivityPartition_Attribute_isDimension() const = 0;
+			virtual const std::shared_ptr<ecore::EAttribute>& getActivityPartition_Attribute_isExternal() const = 0;
 			
-			virtual std::shared_ptr<ecore::EReference> getActivityPartition_Attribute_edge() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getActivityPartition_Attribute_node() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getActivityPartition_Attribute_represents() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getActivityPartition_Attribute_subpartition() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getActivityPartition_Attribute_superPartition() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getActivityPartition_Attribute_edge() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getActivityPartition_Attribute_node() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getActivityPartition_Attribute_represents() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getActivityPartition_Attribute_subpartition() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getActivityPartition_Attribute_superPartition() const = 0;
 			
-			virtual std::shared_ptr<ecore::EOperation> getActivityPartition_Operation_dimension_not_contained_EDiagnosticChain_EMap() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getActivityPartition_Operation_represents_classifier_EDiagnosticChain_EMap() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getActivityPartition_Operation_represents_property_EDiagnosticChain_EMap() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getActivityPartition_Operation_represents_property_and_is_contained_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getActivityPartition_Operation_dimension_not_contained_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getActivityPartition_Operation_represents_classifier_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getActivityPartition_Operation_represents_property_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getActivityPartition_Operation_represents_property_and_is_contained_EDiagnosticChain_EMap() const = 0;
 			
 			// End Class ActivityPartition
 
@@ -702,12 +702,12 @@ namespace uml
 			static const unsigned int ACTOR_OPERATION_MUST_HAVE_NAME_EDIAGNOSTICCHAIN_EMAP = 1170610443;
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getActor_Class() const = 0;
+			virtual const std::shared_ptr<ecore::EClass>& getActor_Class() const = 0;
 			
 			
 			
-			virtual std::shared_ptr<ecore::EOperation> getActor_Operation_associations_EDiagnosticChain_EMap() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getActor_Operation_must_have_name_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getActor_Operation_associations_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getActor_Operation_must_have_name_EDiagnosticChain_EMap() const = 0;
 			
 			// End Class Actor
 
@@ -725,14 +725,14 @@ namespace uml
 			static const unsigned int ADDSTRUCTURALFEATUREVALUEACTION_OPERATION_REQUIRED_VALUE_EDIAGNOSTICCHAIN_EMAP = 1874164180;
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getAddStructuralFeatureValueAction_Class() const = 0;
+			virtual const std::shared_ptr<ecore::EClass>& getAddStructuralFeatureValueAction_Class() const = 0;
 			
-			virtual std::shared_ptr<ecore::EAttribute> getAddStructuralFeatureValueAction_Attribute_isReplaceAll() const = 0;
+			virtual const std::shared_ptr<ecore::EAttribute>& getAddStructuralFeatureValueAction_Attribute_isReplaceAll() const = 0;
 			
-			virtual std::shared_ptr<ecore::EReference> getAddStructuralFeatureValueAction_Attribute_insertAt() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getAddStructuralFeatureValueAction_Attribute_insertAt() const = 0;
 			
-			virtual std::shared_ptr<ecore::EOperation> getAddStructuralFeatureValueAction_Operation_insertAt_pin_EDiagnosticChain_EMap() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getAddStructuralFeatureValueAction_Operation_required_value_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getAddStructuralFeatureValueAction_Operation_insertAt_pin_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getAddStructuralFeatureValueAction_Operation_required_value_EDiagnosticChain_EMap() const = 0;
 			
 			// End Class AddStructuralFeatureValueAction
 
@@ -750,14 +750,14 @@ namespace uml
 			static const unsigned int ADDVARIABLEVALUEACTION_OPERATION_REQUIRED_VALUE_EDIAGNOSTICCHAIN_EMAP = 3962080929;
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getAddVariableValueAction_Class() const = 0;
+			virtual const std::shared_ptr<ecore::EClass>& getAddVariableValueAction_Class() const = 0;
 			
-			virtual std::shared_ptr<ecore::EAttribute> getAddVariableValueAction_Attribute_isReplaceAll() const = 0;
+			virtual const std::shared_ptr<ecore::EAttribute>& getAddVariableValueAction_Attribute_isReplaceAll() const = 0;
 			
-			virtual std::shared_ptr<ecore::EReference> getAddVariableValueAction_Attribute_insertAt() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getAddVariableValueAction_Attribute_insertAt() const = 0;
 			
-			virtual std::shared_ptr<ecore::EOperation> getAddVariableValueAction_Operation_insertAt_pin_EDiagnosticChain_EMap() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getAddVariableValueAction_Operation_required_value_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getAddVariableValueAction_Operation_insertAt_pin_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getAddVariableValueAction_Operation_required_value_EDiagnosticChain_EMap() const = 0;
 			
 			// End Class AddVariableValueAction
 
@@ -771,7 +771,7 @@ namespace uml
 			
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getAnyReceiveEvent_Class() const = 0;
+			virtual const std::shared_ptr<ecore::EClass>& getAnyReceiveEvent_Class() const = 0;
 			
 			
 			
@@ -790,11 +790,11 @@ namespace uml
 			
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getArgument_Class() const = 0;
+			virtual const std::shared_ptr<ecore::EClass>& getArgument_Class() const = 0;
 			
-			virtual std::shared_ptr<ecore::EAttribute> getArgument_Attribute_name() const = 0;
+			virtual const std::shared_ptr<ecore::EAttribute>& getArgument_Attribute_name() const = 0;
 			
-			virtual std::shared_ptr<ecore::EReference> getArgument_Attribute_value() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getArgument_Attribute_value() const = 0;
 			
 			
 			// End Class Argument
@@ -816,17 +816,17 @@ namespace uml
 			static const unsigned int ARTIFACT_OPERATION_CREATEOWNEDOPERATION_STRING_TYPE = 153390480;
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getArtifact_Class() const = 0;
+			virtual const std::shared_ptr<ecore::EClass>& getArtifact_Class() const = 0;
 			
-			virtual std::shared_ptr<ecore::EAttribute> getArtifact_Attribute_fileName() const = 0;
+			virtual const std::shared_ptr<ecore::EAttribute>& getArtifact_Attribute_fileName() const = 0;
 			
-			virtual std::shared_ptr<ecore::EReference> getArtifact_Attribute_manifestation() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getArtifact_Attribute_nestedArtifact() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getArtifact_Attribute_ownedAttribute() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getArtifact_Attribute_ownedOperation() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getArtifact_Attribute_manifestation() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getArtifact_Attribute_nestedArtifact() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getArtifact_Attribute_ownedAttribute() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getArtifact_Attribute_ownedOperation() const = 0;
 			
-			virtual std::shared_ptr<ecore::EOperation> getArtifact_Operation_createOwnedAttribute_String_UnlimitedNatural() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getArtifact_Operation_createOwnedOperation_String_Type() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getArtifact_Operation_createOwnedAttribute_String_UnlimitedNatural() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getArtifact_Operation_createOwnedOperation_String_Type() const = 0;
 			
 			// End Class Artifact
 
@@ -852,22 +852,22 @@ namespace uml
 			static const unsigned int ASSOCIATION_OPERATION_SPECIALIZED_END_TYPES_EDIAGNOSTICCHAIN_EMAP = 3385560362;
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getAssociation_Class() const = 0;
+			virtual const std::shared_ptr<ecore::EClass>& getAssociation_Class() const = 0;
 			
-			virtual std::shared_ptr<ecore::EAttribute> getAssociation_Attribute_isDerived() const = 0;
+			virtual const std::shared_ptr<ecore::EAttribute>& getAssociation_Attribute_isDerived() const = 0;
 			
-			virtual std::shared_ptr<ecore::EReference> getAssociation_Attribute_endType() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getAssociation_Attribute_memberEnd() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getAssociation_Attribute_navigableOwnedEnd() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getAssociation_Attribute_ownedEnd() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getAssociation_Attribute_endType() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getAssociation_Attribute_memberEnd() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getAssociation_Attribute_navigableOwnedEnd() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getAssociation_Attribute_ownedEnd() const = 0;
 			
-			virtual std::shared_ptr<ecore::EOperation> getAssociation_Operation_association_ends_EDiagnosticChain_EMap() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getAssociation_Operation_binary_associations_EDiagnosticChain_EMap() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getAssociation_Operation_ends_must_be_typed_EDiagnosticChain_EMap() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getAssociation_Operation_getEndTypes() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getAssociation_Operation_isBinary() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getAssociation_Operation_specialized_end_number_EDiagnosticChain_EMap() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getAssociation_Operation_specialized_end_types_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getAssociation_Operation_association_ends_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getAssociation_Operation_binary_associations_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getAssociation_Operation_ends_must_be_typed_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getAssociation_Operation_getEndTypes() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getAssociation_Operation_isBinary() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getAssociation_Operation_specialized_end_number_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getAssociation_Operation_specialized_end_types_EDiagnosticChain_EMap() const = 0;
 			
 			// End Class Association
 
@@ -883,12 +883,12 @@ namespace uml
 			static const unsigned int ASSOCIATIONCLASS_OPERATION_DISJOINT_ATTRIBUTES_ENDS_EDIAGNOSTICCHAIN_EMAP = 3687752876;
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getAssociationClass_Class() const = 0;
+			virtual const std::shared_ptr<ecore::EClass>& getAssociationClass_Class() const = 0;
 			
 			
 			
-			virtual std::shared_ptr<ecore::EOperation> getAssociationClass_Operation_cannot_be_defined_EDiagnosticChain_EMap() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getAssociationClass_Operation_disjoint_attributes_ends_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getAssociationClass_Operation_cannot_be_defined_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getAssociationClass_Operation_disjoint_attributes_ends_EDiagnosticChain_EMap() const = 0;
 			
 			// End Class AssociationClass
 
@@ -918,26 +918,26 @@ namespace uml
 			static const unsigned int BEHAVIOR_OPERATION_PARAMETERS_MATCH_EDIAGNOSTICCHAIN_EMAP = 573973654;
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getBehavior_Class() const = 0;
+			virtual const std::shared_ptr<ecore::EClass>& getBehavior_Class() const = 0;
 			
-			virtual std::shared_ptr<ecore::EAttribute> getBehavior_Attribute_isReentrant() const = 0;
+			virtual const std::shared_ptr<ecore::EAttribute>& getBehavior_Attribute_isReentrant() const = 0;
 			
-			virtual std::shared_ptr<ecore::EReference> getBehavior_Attribute_behavioredClassifier() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getBehavior_Attribute_context() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getBehavior_Attribute_ownedParameter() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getBehavior_Attribute_ownedParameterSet() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getBehavior_Attribute_postcondition() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getBehavior_Attribute_precondition() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getBehavior_Attribute_redefinedBehavior() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getBehavior_Attribute_specification() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getBehavior_Attribute_behavioredClassifier() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getBehavior_Attribute_context() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getBehavior_Attribute_ownedParameter() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getBehavior_Attribute_ownedParameterSet() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getBehavior_Attribute_postcondition() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getBehavior_Attribute_precondition() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getBehavior_Attribute_redefinedBehavior() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getBehavior_Attribute_specification() const = 0;
 			
-			virtual std::shared_ptr<ecore::EOperation> getBehavior_Operation_behavioredClassifier_Element() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getBehavior_Operation_feature_of_context_classifier_EDiagnosticChain_EMap() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getBehavior_Operation_getContext() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getBehavior_Operation_inputParameters() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getBehavior_Operation_most_one_behavior_EDiagnosticChain_EMap() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getBehavior_Operation_outputParameters() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getBehavior_Operation_parameters_match_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getBehavior_Operation_behavioredClassifier_Element() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getBehavior_Operation_feature_of_context_classifier_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getBehavior_Operation_getContext() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getBehavior_Operation_inputParameters() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getBehavior_Operation_most_one_behavior_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getBehavior_Operation_outputParameters() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getBehavior_Operation_parameters_match_EDiagnosticChain_EMap() const = 0;
 			
 			// End Class Behavior
 
@@ -952,10 +952,10 @@ namespace uml
 			
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getBehaviorExecutionSpecification_Class() const = 0;
+			virtual const std::shared_ptr<ecore::EClass>& getBehaviorExecutionSpecification_Class() const = 0;
 			
 			
-			virtual std::shared_ptr<ecore::EReference> getBehaviorExecutionSpecification_Attribute_behavior() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getBehaviorExecutionSpecification_Attribute_behavior() const = 0;
 			
 			
 			// End Class BehaviorExecutionSpecification
@@ -980,20 +980,20 @@ namespace uml
 			static const unsigned int BEHAVIORALFEATURE_OPERATION_OUTPUTPARAMETERS = 3232178764;
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getBehavioralFeature_Class() const = 0;
+			virtual const std::shared_ptr<ecore::EClass>& getBehavioralFeature_Class() const = 0;
 			
-			virtual std::shared_ptr<ecore::EAttribute> getBehavioralFeature_Attribute_concurrency() const = 0;
-			virtual std::shared_ptr<ecore::EAttribute> getBehavioralFeature_Attribute_isAbstract() const = 0;
+			virtual const std::shared_ptr<ecore::EAttribute>& getBehavioralFeature_Attribute_concurrency() const = 0;
+			virtual const std::shared_ptr<ecore::EAttribute>& getBehavioralFeature_Attribute_isAbstract() const = 0;
 			
-			virtual std::shared_ptr<ecore::EReference> getBehavioralFeature_Attribute_method() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getBehavioralFeature_Attribute_ownedParameter() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getBehavioralFeature_Attribute_ownedParameterSet() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getBehavioralFeature_Attribute_raisedException() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getBehavioralFeature_Attribute_method() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getBehavioralFeature_Attribute_ownedParameter() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getBehavioralFeature_Attribute_ownedParameterSet() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getBehavioralFeature_Attribute_raisedException() const = 0;
 			
-			virtual std::shared_ptr<ecore::EOperation> getBehavioralFeature_Operation_abstract_no_method_EDiagnosticChain_EMap() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getBehavioralFeature_Operation_createReturnResult_String_Type() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getBehavioralFeature_Operation_inputParameters() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getBehavioralFeature_Operation_outputParameters() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getBehavioralFeature_Operation_abstract_no_method_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getBehavioralFeature_Operation_createReturnResult_String_Type() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getBehavioralFeature_Operation_inputParameters() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getBehavioralFeature_Operation_outputParameters() const = 0;
 			
 			// End Class BehavioralFeature
 
@@ -1013,16 +1013,16 @@ namespace uml
 			static const unsigned int BEHAVIOREDCLASSIFIER_OPERATION_GETIMPLEMENTEDINTERFACES = 329551508;
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getBehavioredClassifier_Class() const = 0;
+			virtual const std::shared_ptr<ecore::EClass>& getBehavioredClassifier_Class() const = 0;
 			
 			
-			virtual std::shared_ptr<ecore::EReference> getBehavioredClassifier_Attribute_classifierBehavior() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getBehavioredClassifier_Attribute_interfaceRealization() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getBehavioredClassifier_Attribute_ownedBehavior() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getBehavioredClassifier_Attribute_classifierBehavior() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getBehavioredClassifier_Attribute_interfaceRealization() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getBehavioredClassifier_Attribute_ownedBehavior() const = 0;
 			
-			virtual std::shared_ptr<ecore::EOperation> getBehavioredClassifier_Operation_class_behavior_EDiagnosticChain_EMap() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getBehavioredClassifier_Operation_getAllImplementedInterfaces() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getBehavioredClassifier_Operation_getImplementedInterfaces() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getBehavioredClassifier_Operation_class_behavior_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getBehavioredClassifier_Operation_getAllImplementedInterfaces() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getBehavioredClassifier_Operation_getImplementedInterfaces() const = 0;
 			
 			// End Class BehavioredClassifier
 
@@ -1040,14 +1040,14 @@ namespace uml
 			static const unsigned int BROADCASTSIGNALACTION_OPERATION_TYPE_ORDERING_MULTIPLICITY_EDIAGNOSTICCHAIN_EMAP = 12726760;
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getBroadcastSignalAction_Class() const = 0;
+			virtual const std::shared_ptr<ecore::EClass>& getBroadcastSignalAction_Class() const = 0;
 			
 			
-			virtual std::shared_ptr<ecore::EReference> getBroadcastSignalAction_Attribute_signal() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getBroadcastSignalAction_Attribute_signal() const = 0;
 			
-			virtual std::shared_ptr<ecore::EOperation> getBroadcastSignalAction_Operation_no_onport_EDiagnosticChain_EMap() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getBroadcastSignalAction_Operation_number_of_arguments_EDiagnosticChain_EMap() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getBroadcastSignalAction_Operation_type_ordering_multiplicity_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getBroadcastSignalAction_Operation_no_onport_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getBroadcastSignalAction_Operation_number_of_arguments_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getBroadcastSignalAction_Operation_type_ordering_multiplicity_EDiagnosticChain_EMap() const = 0;
 			
 			// End Class BroadcastSignalAction
 
@@ -1068,17 +1068,17 @@ namespace uml
 			static const unsigned int CALLACTION_OPERATION_SYNCHRONOUS_CALL_EDIAGNOSTICCHAIN_EMAP = 1601333858;
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getCallAction_Class() const = 0;
+			virtual const std::shared_ptr<ecore::EClass>& getCallAction_Class() const = 0;
 			
-			virtual std::shared_ptr<ecore::EAttribute> getCallAction_Attribute_isSynchronous() const = 0;
+			virtual const std::shared_ptr<ecore::EAttribute>& getCallAction_Attribute_isSynchronous() const = 0;
 			
-			virtual std::shared_ptr<ecore::EReference> getCallAction_Attribute_result() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getCallAction_Attribute_result() const = 0;
 			
-			virtual std::shared_ptr<ecore::EOperation> getCallAction_Operation_argument_pins_EDiagnosticChain_EMap() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getCallAction_Operation_inputParameters() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getCallAction_Operation_outputParameters() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getCallAction_Operation_result_pins_EDiagnosticChain_EMap() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getCallAction_Operation_synchronous_call_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getCallAction_Operation_argument_pins_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getCallAction_Operation_inputParameters() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getCallAction_Operation_outputParameters() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getCallAction_Operation_result_pins_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getCallAction_Operation_synchronous_call_EDiagnosticChain_EMap() const = 0;
 			
 			// End Class CallAction
 
@@ -1094,12 +1094,12 @@ namespace uml
 			static const unsigned int CALLBEHAVIORACTION_OPERATION_NO_ONPORT_EDIAGNOSTICCHAIN_EMAP = 2451999474;
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getCallBehaviorAction_Class() const = 0;
+			virtual const std::shared_ptr<ecore::EClass>& getCallBehaviorAction_Class() const = 0;
 			
 			
-			virtual std::shared_ptr<ecore::EReference> getCallBehaviorAction_Attribute_behavior() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getCallBehaviorAction_Attribute_behavior() const = 0;
 			
-			virtual std::shared_ptr<ecore::EOperation> getCallBehaviorAction_Operation_no_onport_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getCallBehaviorAction_Operation_no_onport_EDiagnosticChain_EMap() const = 0;
 			
 			// End Class CallBehaviorAction
 
@@ -1114,10 +1114,10 @@ namespace uml
 			
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getCallEvent_Class() const = 0;
+			virtual const std::shared_ptr<ecore::EClass>& getCallEvent_Class() const = 0;
 			
 			
-			virtual std::shared_ptr<ecore::EReference> getCallEvent_Attribute_operation() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getCallEvent_Attribute_operation() const = 0;
 			
 			
 			// End Class CallEvent
@@ -1135,13 +1135,13 @@ namespace uml
 			static const unsigned int CALLOPERATIONACTION_OPERATION_TYPE_TARGET_PIN_EDIAGNOSTICCHAIN_EMAP = 2210549299;
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getCallOperationAction_Class() const = 0;
+			virtual const std::shared_ptr<ecore::EClass>& getCallOperationAction_Class() const = 0;
 			
 			
-			virtual std::shared_ptr<ecore::EReference> getCallOperationAction_Attribute_operation() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getCallOperationAction_Attribute_target() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getCallOperationAction_Attribute_operation() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getCallOperationAction_Attribute_target() const = 0;
 			
-			virtual std::shared_ptr<ecore::EOperation> getCallOperationAction_Operation_type_target_pin_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getCallOperationAction_Operation_type_target_pin_EDiagnosticChain_EMap() const = 0;
 			
 			// End Class CallOperationAction
 
@@ -1155,7 +1155,7 @@ namespace uml
 			
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getCentralBufferNode_Class() const = 0;
+			virtual const std::shared_ptr<ecore::EClass>& getCentralBufferNode_Class() const = 0;
 			
 			
 			
@@ -1173,10 +1173,10 @@ namespace uml
 			
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getChangeEvent_Class() const = 0;
+			virtual const std::shared_ptr<ecore::EClass>& getChangeEvent_Class() const = 0;
 			
 			
-			virtual std::shared_ptr<ecore::EReference> getChangeEvent_Attribute_changeExpression() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getChangeEvent_Attribute_changeExpression() const = 0;
 			
 			
 			// End Class ChangeEvent
@@ -1204,23 +1204,23 @@ namespace uml
 			static const unsigned int CLASS_OPERATION_PASSIVE_CLASS_EDIAGNOSTICCHAIN_EMAP = 3738386724;
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getClass_Class() const = 0;
+			virtual const std::shared_ptr<ecore::EClass>& getClass_Class() const = 0;
 			
-			virtual std::shared_ptr<ecore::EAttribute> getClass_Attribute_isActive() const = 0;
+			virtual const std::shared_ptr<ecore::EAttribute>& getClass_Attribute_isActive() const = 0;
 			
-			virtual std::shared_ptr<ecore::EReference> getClass_Attribute_extension() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getClass_Attribute_nestedClassifier() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getClass_Attribute_ownedAttribute() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getClass_Attribute_ownedOperation() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getClass_Attribute_ownedReception() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getClass_Attribute_superClass() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getClass_Attribute_extension() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getClass_Attribute_nestedClassifier() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getClass_Attribute_ownedAttribute() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getClass_Attribute_ownedOperation() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getClass_Attribute_ownedReception() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getClass_Attribute_superClass() const = 0;
 			
-			virtual std::shared_ptr<ecore::EOperation> getClass_Operation_createOwnedOperation_String_Type() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getClass_Operation_getAllOperations() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getClass_Operation_getExtensions() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getClass_Operation_getSuperClasses() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getClass_Operation_isMetaclass() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getClass_Operation_passive_class_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getClass_Operation_createOwnedOperation_String_Type() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getClass_Operation_getAllOperations() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getClass_Operation_getExtensions() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getClass_Operation_getSuperClasses() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getClass_Operation_isMetaclass() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getClass_Operation_passive_class_EDiagnosticChain_EMap() const = 0;
 			
 			// End Class Class
 
@@ -1276,52 +1276,52 @@ namespace uml
 			static const unsigned int CLASSIFIER_OPERATION_SPECIALIZE_TYPE_EDIAGNOSTICCHAIN_EMAP = 1700667753;
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getClassifier_Class() const = 0;
+			virtual const std::shared_ptr<ecore::EClass>& getClassifier_Class() const = 0;
 			
-			virtual std::shared_ptr<ecore::EAttribute> getClassifier_Attribute_isAbstract() const = 0;
-			virtual std::shared_ptr<ecore::EAttribute> getClassifier_Attribute_isFinalSpecialization() const = 0;
+			virtual const std::shared_ptr<ecore::EAttribute>& getClassifier_Attribute_isAbstract() const = 0;
+			virtual const std::shared_ptr<ecore::EAttribute>& getClassifier_Attribute_isFinalSpecialization() const = 0;
 			
-			virtual std::shared_ptr<ecore::EReference> getClassifier_Attribute_attribute() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getClassifier_Attribute_collaborationUse() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getClassifier_Attribute_feature() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getClassifier_Attribute_general() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getClassifier_Attribute_generalization() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getClassifier_Attribute_inheritedMember() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getClassifier_Attribute_ownedUseCase() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getClassifier_Attribute_powertypeExtent() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getClassifier_Attribute_redefinedClassifier() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getClassifier_Attribute_representation() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getClassifier_Attribute_substitution() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getClassifier_Attribute_useCase() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getClassifier_Attribute_attribute() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getClassifier_Attribute_collaborationUse() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getClassifier_Attribute_feature() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getClassifier_Attribute_general() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getClassifier_Attribute_generalization() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getClassifier_Attribute_inheritedMember() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getClassifier_Attribute_ownedUseCase() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getClassifier_Attribute_powertypeExtent() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getClassifier_Attribute_redefinedClassifier() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getClassifier_Attribute_representation() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getClassifier_Attribute_substitution() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getClassifier_Attribute_useCase() const = 0;
 			
-			virtual std::shared_ptr<ecore::EOperation> getClassifier_Operation_allAttributes() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getClassifier_Operation_allFeatures() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getClassifier_Operation_allParents() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getClassifier_Operation_allRealizedInterfaces() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getClassifier_Operation_allSlottableFeatures() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getClassifier_Operation_allUsedInterfaces() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getClassifier_Operation_directlyRealizedInterfaces() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getClassifier_Operation_directlyUsedInterfaces() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getClassifier_Operation_getAllAttributes() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getClassifier_Operation_getAllOperations() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getClassifier_Operation_getAllUsedInterfaces() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getClassifier_Operation_getGenerals() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getClassifier_Operation_getInheritedMembers() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getClassifier_Operation_getOperation_String_Type() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getClassifier_Operation_getOperation_String_Boolean() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getClassifier_Operation_getOperations() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getClassifier_Operation_getPropertyValue_String() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getClassifier_Operation_getUsedInterfaces() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getClassifier_Operation_hasVisibilityOf_NamedElement() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getClassifier_Operation_inherit_NamedElement() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getClassifier_Operation_inheritableMembers_Classifier() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getClassifier_Operation_isSubstitutableFor_Classifier() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getClassifier_Operation_maps_to_generalization_set_EDiagnosticChain_EMap() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getClassifier_Operation_maySpecializeType_Classifier() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getClassifier_Operation_no_cycles_in_generalization_EDiagnosticChain_EMap() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getClassifier_Operation_non_final_parents_EDiagnosticChain_EMap() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getClassifier_Operation_parents() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getClassifier_Operation_specialize_type_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getClassifier_Operation_allAttributes() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getClassifier_Operation_allFeatures() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getClassifier_Operation_allParents() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getClassifier_Operation_allRealizedInterfaces() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getClassifier_Operation_allSlottableFeatures() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getClassifier_Operation_allUsedInterfaces() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getClassifier_Operation_directlyRealizedInterfaces() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getClassifier_Operation_directlyUsedInterfaces() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getClassifier_Operation_getAllAttributes() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getClassifier_Operation_getAllOperations() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getClassifier_Operation_getAllUsedInterfaces() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getClassifier_Operation_getGenerals() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getClassifier_Operation_getInheritedMembers() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getClassifier_Operation_getOperation_String_Type() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getClassifier_Operation_getOperation_String_Boolean() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getClassifier_Operation_getOperations() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getClassifier_Operation_getPropertyValue_String() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getClassifier_Operation_getUsedInterfaces() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getClassifier_Operation_hasVisibilityOf_NamedElement() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getClassifier_Operation_inherit_NamedElement() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getClassifier_Operation_inheritableMembers_Classifier() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getClassifier_Operation_isSubstitutableFor_Classifier() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getClassifier_Operation_maps_to_generalization_set_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getClassifier_Operation_maySpecializeType_Classifier() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getClassifier_Operation_no_cycles_in_generalization_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getClassifier_Operation_non_final_parents_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getClassifier_Operation_parents() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getClassifier_Operation_specialize_type_EDiagnosticChain_EMap() const = 0;
 			
 			// End Class Classifier
 
@@ -1343,18 +1343,18 @@ namespace uml
 			static const unsigned int CLASSIFIERTEMPLATEPARAMETER_OPERATION_PARAMETERED_ELEMENT_NO_FEATURES_EDIAGNOSTICCHAIN_EMAP = 1560953665;
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getClassifierTemplateParameter_Class() const = 0;
+			virtual const std::shared_ptr<ecore::EClass>& getClassifierTemplateParameter_Class() const = 0;
 			
-			virtual std::shared_ptr<ecore::EAttribute> getClassifierTemplateParameter_Attribute_allowSubstitutable() const = 0;
+			virtual const std::shared_ptr<ecore::EAttribute>& getClassifierTemplateParameter_Attribute_allowSubstitutable() const = 0;
 			
-			virtual std::shared_ptr<ecore::EReference> getClassifierTemplateParameter_Attribute_constrainingClassifier() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getClassifierTemplateParameter_Attribute_constrainingClassifier() const = 0;
 			
-			virtual std::shared_ptr<ecore::EOperation> getClassifierTemplateParameter_Operation_actual_is_classifier_EDiagnosticChain_EMap() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getClassifierTemplateParameter_Operation_constraining_classifiers_constrain_args_EDiagnosticChain_EMap() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getClassifierTemplateParameter_Operation_constraining_classifiers_constrain_parametered_element_EDiagnosticChain_EMap() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getClassifierTemplateParameter_Operation_has_constraining_classifier_EDiagnosticChain_EMap() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getClassifierTemplateParameter_Operation_matching_abstract_EDiagnosticChain_EMap() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getClassifierTemplateParameter_Operation_parametered_element_no_features_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getClassifierTemplateParameter_Operation_actual_is_classifier_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getClassifierTemplateParameter_Operation_constraining_classifiers_constrain_args_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getClassifierTemplateParameter_Operation_constraining_classifiers_constrain_parametered_element_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getClassifierTemplateParameter_Operation_has_constraining_classifier_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getClassifierTemplateParameter_Operation_matching_abstract_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getClassifierTemplateParameter_Operation_parametered_element_no_features_EDiagnosticChain_EMap() const = 0;
 			
 			// End Class ClassifierTemplateParameter
 
@@ -1377,19 +1377,19 @@ namespace uml
 			static const unsigned int CLAUSE_OPERATION_TEST_AND_BODY_EDIAGNOSTICCHAIN_EMAP = 4255472206;
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getClause_Class() const = 0;
+			virtual const std::shared_ptr<ecore::EClass>& getClause_Class() const = 0;
 			
 			
-			virtual std::shared_ptr<ecore::EReference> getClause_Attribute_body() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getClause_Attribute_bodyOutput() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getClause_Attribute_decider() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getClause_Attribute_predecessorClause() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getClause_Attribute_successorClause() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getClause_Attribute_test() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getClause_Attribute_body() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getClause_Attribute_bodyOutput() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getClause_Attribute_decider() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getClause_Attribute_predecessorClause() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getClause_Attribute_successorClause() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getClause_Attribute_test() const = 0;
 			
-			virtual std::shared_ptr<ecore::EOperation> getClause_Operation_body_output_pins_EDiagnosticChain_EMap() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getClause_Operation_decider_output_EDiagnosticChain_EMap() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getClause_Operation_test_and_body_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getClause_Operation_body_output_pins_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getClause_Operation_decider_output_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getClause_Operation_test_and_body_EDiagnosticChain_EMap() const = 0;
 			
 			// End Class Clause
 
@@ -1407,14 +1407,14 @@ namespace uml
 			static const unsigned int CLEARASSOCIATIONACTION_OPERATION_SAME_TYPE_EDIAGNOSTICCHAIN_EMAP = 1927354895;
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getClearAssociationAction_Class() const = 0;
+			virtual const std::shared_ptr<ecore::EClass>& getClearAssociationAction_Class() const = 0;
 			
 			
-			virtual std::shared_ptr<ecore::EReference> getClearAssociationAction_Attribute_association() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getClearAssociationAction_Attribute_object() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getClearAssociationAction_Attribute_association() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getClearAssociationAction_Attribute_object() const = 0;
 			
-			virtual std::shared_ptr<ecore::EOperation> getClearAssociationAction_Operation_multiplicity_EDiagnosticChain_EMap() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getClearAssociationAction_Operation_same_type_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getClearAssociationAction_Operation_multiplicity_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getClearAssociationAction_Operation_same_type_EDiagnosticChain_EMap() const = 0;
 			
 			// End Class ClearAssociationAction
 
@@ -1431,13 +1431,13 @@ namespace uml
 			static const unsigned int CLEARSTRUCTURALFEATUREACTION_OPERATION_TYPE_OF_RESULT_EDIAGNOSTICCHAIN_EMAP = 361464888;
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getClearStructuralFeatureAction_Class() const = 0;
+			virtual const std::shared_ptr<ecore::EClass>& getClearStructuralFeatureAction_Class() const = 0;
 			
 			
-			virtual std::shared_ptr<ecore::EReference> getClearStructuralFeatureAction_Attribute_result() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getClearStructuralFeatureAction_Attribute_result() const = 0;
 			
-			virtual std::shared_ptr<ecore::EOperation> getClearStructuralFeatureAction_Operation_multiplicity_of_result_EDiagnosticChain_EMap() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getClearStructuralFeatureAction_Operation_type_of_result_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getClearStructuralFeatureAction_Operation_multiplicity_of_result_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getClearStructuralFeatureAction_Operation_type_of_result_EDiagnosticChain_EMap() const = 0;
 			
 			// End Class ClearStructuralFeatureAction
 
@@ -1451,7 +1451,7 @@ namespace uml
 			
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getClearVariableAction_Class() const = 0;
+			virtual const std::shared_ptr<ecore::EClass>& getClearVariableAction_Class() const = 0;
 			
 			
 			
@@ -1469,10 +1469,10 @@ namespace uml
 			
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getCollaboration_Class() const = 0;
+			virtual const std::shared_ptr<ecore::EClass>& getCollaboration_Class() const = 0;
 			
 			
-			virtual std::shared_ptr<ecore::EReference> getCollaboration_Attribute_collaborationRole() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getCollaboration_Attribute_collaborationRole() const = 0;
 			
 			
 			// End Class Collaboration
@@ -1492,15 +1492,15 @@ namespace uml
 			static const unsigned int COLLABORATIONUSE_OPERATION_EVERY_ROLE_EDIAGNOSTICCHAIN_EMAP = 2785303016;
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getCollaborationUse_Class() const = 0;
+			virtual const std::shared_ptr<ecore::EClass>& getCollaborationUse_Class() const = 0;
 			
 			
-			virtual std::shared_ptr<ecore::EReference> getCollaborationUse_Attribute_roleBinding() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getCollaborationUse_Attribute_type() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getCollaborationUse_Attribute_roleBinding() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getCollaborationUse_Attribute_type() const = 0;
 			
-			virtual std::shared_ptr<ecore::EOperation> getCollaborationUse_Operation_client_elements_EDiagnosticChain_EMap() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getCollaborationUse_Operation_connectors_EDiagnosticChain_EMap() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getCollaborationUse_Operation_every_role_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getCollaborationUse_Operation_client_elements_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getCollaborationUse_Operation_connectors_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getCollaborationUse_Operation_every_role_EDiagnosticChain_EMap() const = 0;
 			
 			// End Class CollaborationUse
 
@@ -1520,16 +1520,16 @@ namespace uml
 			static const unsigned int COMBINEDFRAGMENT_OPERATION_OPT_LOOP_BREAK_NEG_EDIAGNOSTICCHAIN_EMAP = 1641284448;
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getCombinedFragment_Class() const = 0;
+			virtual const std::shared_ptr<ecore::EClass>& getCombinedFragment_Class() const = 0;
 			
-			virtual std::shared_ptr<ecore::EAttribute> getCombinedFragment_Attribute_interactionOperator() const = 0;
+			virtual const std::shared_ptr<ecore::EAttribute>& getCombinedFragment_Attribute_interactionOperator() const = 0;
 			
-			virtual std::shared_ptr<ecore::EReference> getCombinedFragment_Attribute_cfragmentGate() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getCombinedFragment_Attribute_operand() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getCombinedFragment_Attribute_cfragmentGate() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getCombinedFragment_Attribute_operand() const = 0;
 			
-			virtual std::shared_ptr<ecore::EOperation> getCombinedFragment_Operation_break__EDiagnosticChain_EMap() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getCombinedFragment_Operation_consider_and_ignore_EDiagnosticChain_EMap() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getCombinedFragment_Operation_opt_loop_break_neg_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getCombinedFragment_Operation_break__EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getCombinedFragment_Operation_consider_and_ignore_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getCombinedFragment_Operation_opt_loop_break_neg_EDiagnosticChain_EMap() const = 0;
 			
 			// End Class CombinedFragment
 
@@ -1545,11 +1545,11 @@ namespace uml
 			
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getComment_Class() const = 0;
+			virtual const std::shared_ptr<ecore::EClass>& getComment_Class() const = 0;
 			
-			virtual std::shared_ptr<ecore::EAttribute> getComment_Attribute_body() const = 0;
+			virtual const std::shared_ptr<ecore::EAttribute>& getComment_Attribute_body() const = 0;
 			
-			virtual std::shared_ptr<ecore::EReference> getComment_Attribute_annotatedElement() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getComment_Attribute_annotatedElement() const = 0;
 			
 			
 			// End Class Comment
@@ -1564,7 +1564,7 @@ namespace uml
 			
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getCommunicationPath_Class() const = 0;
+			virtual const std::shared_ptr<ecore::EClass>& getCommunicationPath_Class() const = 0;
 			
 			
 			
@@ -1594,23 +1594,23 @@ namespace uml
 			static const unsigned int COMPONENT_OPERATION_NO_PACKAGED_ELEMENTS_EDIAGNOSTICCHAIN_EMAP = 4216292457;
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getComponent_Class() const = 0;
+			virtual const std::shared_ptr<ecore::EClass>& getComponent_Class() const = 0;
 			
-			virtual std::shared_ptr<ecore::EAttribute> getComponent_Attribute_isIndirectlyInstantiated() const = 0;
+			virtual const std::shared_ptr<ecore::EAttribute>& getComponent_Attribute_isIndirectlyInstantiated() const = 0;
 			
-			virtual std::shared_ptr<ecore::EReference> getComponent_Attribute_packagedElement() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getComponent_Attribute_provided() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getComponent_Attribute_realization() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getComponent_Attribute_required() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getComponent_Attribute_packagedElement() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getComponent_Attribute_provided() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getComponent_Attribute_realization() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getComponent_Attribute_required() const = 0;
 			
-			virtual std::shared_ptr<ecore::EOperation> getComponent_Operation_createOwnedClass_String_Boolean() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getComponent_Operation_createOwnedEnumeration_String() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getComponent_Operation_createOwnedInterface_String() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getComponent_Operation_createOwnedPrimitiveType_String() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getComponent_Operation_getProvideds() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getComponent_Operation_getRequireds() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getComponent_Operation_no_nested_classifiers_EDiagnosticChain_EMap() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getComponent_Operation_no_packaged_elements_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getComponent_Operation_createOwnedClass_String_Boolean() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getComponent_Operation_createOwnedEnumeration_String() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getComponent_Operation_createOwnedInterface_String() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getComponent_Operation_createOwnedPrimitiveType_String() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getComponent_Operation_getProvideds() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getComponent_Operation_getRequireds() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getComponent_Operation_no_nested_classifiers_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getComponent_Operation_no_packaged_elements_EDiagnosticChain_EMap() const = 0;
 			
 			// End Class Component
 
@@ -1626,11 +1626,11 @@ namespace uml
 			
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getComponentRealization_Class() const = 0;
+			virtual const std::shared_ptr<ecore::EClass>& getComponentRealization_Class() const = 0;
 			
 			
-			virtual std::shared_ptr<ecore::EReference> getComponentRealization_Attribute_abstraction() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getComponentRealization_Attribute_realizingClassifier() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getComponentRealization_Attribute_abstraction() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getComponentRealization_Attribute_realizingClassifier() const = 0;
 			
 			
 			// End Class ComponentRealization
@@ -1655,20 +1655,20 @@ namespace uml
 			static const unsigned int CONDITIONALNODE_OPERATION_RESULT_NO_INCOMING_EDIAGNOSTICCHAIN_EMAP = 1196289718;
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getConditionalNode_Class() const = 0;
+			virtual const std::shared_ptr<ecore::EClass>& getConditionalNode_Class() const = 0;
 			
-			virtual std::shared_ptr<ecore::EAttribute> getConditionalNode_Attribute_isAssured() const = 0;
-			virtual std::shared_ptr<ecore::EAttribute> getConditionalNode_Attribute_isDeterminate() const = 0;
+			virtual const std::shared_ptr<ecore::EAttribute>& getConditionalNode_Attribute_isAssured() const = 0;
+			virtual const std::shared_ptr<ecore::EAttribute>& getConditionalNode_Attribute_isDeterminate() const = 0;
 			
-			virtual std::shared_ptr<ecore::EReference> getConditionalNode_Attribute_clause() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getConditionalNode_Attribute_result() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getConditionalNode_Attribute_clause() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getConditionalNode_Attribute_result() const = 0;
 			
-			virtual std::shared_ptr<ecore::EOperation> getConditionalNode_Operation_clause_no_predecessor_EDiagnosticChain_EMap() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getConditionalNode_Operation_executable_nodes_EDiagnosticChain_EMap() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getConditionalNode_Operation_matching_output_pins_EDiagnosticChain_EMap() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getConditionalNode_Operation_no_input_pins_EDiagnosticChain_EMap() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getConditionalNode_Operation_one_clause_with_executable_node_EDiagnosticChain_EMap() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getConditionalNode_Operation_result_no_incoming_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getConditionalNode_Operation_clause_no_predecessor_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getConditionalNode_Operation_executable_nodes_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getConditionalNode_Operation_matching_output_pins_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getConditionalNode_Operation_no_input_pins_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getConditionalNode_Operation_one_clause_with_executable_node_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getConditionalNode_Operation_result_no_incoming_EDiagnosticChain_EMap() const = 0;
 			
 			// End Class ConditionalNode
 
@@ -1684,12 +1684,12 @@ namespace uml
 			static const unsigned int CONNECTABLEELEMENT_OPERATION_GETENDS = 700294205;
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getConnectableElement_Class() const = 0;
+			virtual const std::shared_ptr<ecore::EClass>& getConnectableElement_Class() const = 0;
 			
 			
-			virtual std::shared_ptr<ecore::EReference> getConnectableElement_Attribute_end() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getConnectableElement_Attribute_end() const = 0;
 			
-			virtual std::shared_ptr<ecore::EOperation> getConnectableElement_Operation_getEnds() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getConnectableElement_Operation_getEnds() const = 0;
 			
 			// End Class ConnectableElement
 
@@ -1703,7 +1703,7 @@ namespace uml
 			
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getConnectableElementTemplateParameter_Class() const = 0;
+			virtual const std::shared_ptr<ecore::EClass>& getConnectableElementTemplateParameter_Class() const = 0;
 			
 			
 			
@@ -1725,15 +1725,15 @@ namespace uml
 			static const unsigned int CONNECTIONPOINTREFERENCE_OPERATION_EXIT_PSEUDOSTATES_EDIAGNOSTICCHAIN_EMAP = 3610740388;
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getConnectionPointReference_Class() const = 0;
+			virtual const std::shared_ptr<ecore::EClass>& getConnectionPointReference_Class() const = 0;
 			
 			
-			virtual std::shared_ptr<ecore::EReference> getConnectionPointReference_Attribute_entry() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getConnectionPointReference_Attribute_exit() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getConnectionPointReference_Attribute_state() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getConnectionPointReference_Attribute_entry() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getConnectionPointReference_Attribute_exit() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getConnectionPointReference_Attribute_state() const = 0;
 			
-			virtual std::shared_ptr<ecore::EOperation> getConnectionPointReference_Operation_entry_pseudostates_EDiagnosticChain_EMap() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getConnectionPointReference_Operation_exit_pseudostates_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getConnectionPointReference_Operation_entry_pseudostates_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getConnectionPointReference_Operation_exit_pseudostates_EDiagnosticChain_EMap() const = 0;
 			
 			// End Class ConnectionPointReference
 
@@ -1756,19 +1756,19 @@ namespace uml
 			static const unsigned int CONNECTOR_OPERATION_TYPES_EDIAGNOSTICCHAIN_EMAP = 3612765002;
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getConnector_Class() const = 0;
+			virtual const std::shared_ptr<ecore::EClass>& getConnector_Class() const = 0;
 			
-			virtual std::shared_ptr<ecore::EAttribute> getConnector_Attribute_kind() const = 0;
+			virtual const std::shared_ptr<ecore::EAttribute>& getConnector_Attribute_kind() const = 0;
 			
-			virtual std::shared_ptr<ecore::EReference> getConnector_Attribute_contract() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getConnector_Attribute_end() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getConnector_Attribute_redefinedConnector() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getConnector_Attribute_structuredClassifier() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getConnector_Attribute_type() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getConnector_Attribute_contract() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getConnector_Attribute_end() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getConnector_Attribute_redefinedConnector() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getConnector_Attribute_structuredClassifier() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getConnector_Attribute_type() const = 0;
 			
-			virtual std::shared_ptr<ecore::EOperation> getConnector_Operation_getKind() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getConnector_Operation_roles_EDiagnosticChain_EMap() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getConnector_Operation_types_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getConnector_Operation_getKind() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getConnector_Operation_roles_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getConnector_Operation_types_EDiagnosticChain_EMap() const = 0;
 			
 			// End Class Connector
 
@@ -1791,19 +1791,19 @@ namespace uml
 			static const unsigned int CONNECTOREND_OPERATION_SELF_PART_WITH_PORT_EDIAGNOSTICCHAIN_EMAP = 1871016491;
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getConnectorEnd_Class() const = 0;
+			virtual const std::shared_ptr<ecore::EClass>& getConnectorEnd_Class() const = 0;
 			
 			
-			virtual std::shared_ptr<ecore::EReference> getConnectorEnd_Attribute_connector() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getConnectorEnd_Attribute_definingEnd() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getConnectorEnd_Attribute_partWithPort() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getConnectorEnd_Attribute_role() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getConnectorEnd_Attribute_connector() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getConnectorEnd_Attribute_definingEnd() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getConnectorEnd_Attribute_partWithPort() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getConnectorEnd_Attribute_role() const = 0;
 			
-			virtual std::shared_ptr<ecore::EOperation> getConnectorEnd_Operation_getDefiningEnd() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getConnectorEnd_Operation_multiplicity_EDiagnosticChain_EMap() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getConnectorEnd_Operation_part_with_port_empty_EDiagnosticChain_EMap() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getConnectorEnd_Operation_role_and_part_with_port_EDiagnosticChain_EMap() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getConnectorEnd_Operation_self_part_with_port_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getConnectorEnd_Operation_getDefiningEnd() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getConnectorEnd_Operation_multiplicity_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getConnectorEnd_Operation_part_with_port_empty_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getConnectorEnd_Operation_role_and_part_with_port_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getConnectorEnd_Operation_self_part_with_port_EDiagnosticChain_EMap() const = 0;
 			
 			// End Class ConnectorEnd
 
@@ -1820,13 +1820,13 @@ namespace uml
 			static const unsigned int CONSIDERIGNOREFRAGMENT_OPERATION_TYPE_EDIAGNOSTICCHAIN_EMAP = 4270096363;
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getConsiderIgnoreFragment_Class() const = 0;
+			virtual const std::shared_ptr<ecore::EClass>& getConsiderIgnoreFragment_Class() const = 0;
 			
 			
-			virtual std::shared_ptr<ecore::EReference> getConsiderIgnoreFragment_Attribute_message() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getConsiderIgnoreFragment_Attribute_message() const = 0;
 			
-			virtual std::shared_ptr<ecore::EOperation> getConsiderIgnoreFragment_Operation_consider_or_ignore_EDiagnosticChain_EMap() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getConsiderIgnoreFragment_Operation_type_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getConsiderIgnoreFragment_Operation_consider_or_ignore_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getConsiderIgnoreFragment_Operation_type_EDiagnosticChain_EMap() const = 0;
 			
 			// End Class ConsiderIgnoreFragment
 
@@ -1846,16 +1846,16 @@ namespace uml
 			static const unsigned int CONSTRAINT_OPERATION_NOT_APPLY_TO_SELF_EDIAGNOSTICCHAIN_EMAP = 2965731128;
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getConstraint_Class() const = 0;
+			virtual const std::shared_ptr<ecore::EClass>& getConstraint_Class() const = 0;
 			
 			
-			virtual std::shared_ptr<ecore::EReference> getConstraint_Attribute_constrainedElement() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getConstraint_Attribute_context() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getConstraint_Attribute_specification() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getConstraint_Attribute_constrainedElement() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getConstraint_Attribute_context() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getConstraint_Attribute_specification() const = 0;
 			
-			virtual std::shared_ptr<ecore::EOperation> getConstraint_Operation_boolean_value_EDiagnosticChain_EMap() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getConstraint_Operation_no_side_effects_EDiagnosticChain_EMap() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getConstraint_Operation_not_apply_to_self_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getConstraint_Operation_boolean_value_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getConstraint_Operation_no_side_effects_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getConstraint_Operation_not_apply_to_self_EDiagnosticChain_EMap() const = 0;
 			
 			// End Class Constraint
 
@@ -1873,14 +1873,14 @@ namespace uml
 			static const unsigned int CONTINUATION_OPERATION_SAME_NAME_EDIAGNOSTICCHAIN_EMAP = 4191439791;
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getContinuation_Class() const = 0;
+			virtual const std::shared_ptr<ecore::EClass>& getContinuation_Class() const = 0;
 			
-			virtual std::shared_ptr<ecore::EAttribute> getContinuation_Attribute_setting() const = 0;
+			virtual const std::shared_ptr<ecore::EAttribute>& getContinuation_Attribute_setting() const = 0;
 			
 			
-			virtual std::shared_ptr<ecore::EOperation> getContinuation_Operation_first_or_last_interaction_fragment_EDiagnosticChain_EMap() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getContinuation_Operation_global_EDiagnosticChain_EMap() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getContinuation_Operation_same_name_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getContinuation_Operation_first_or_last_interaction_fragment_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getContinuation_Operation_global_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getContinuation_Operation_same_name_EDiagnosticChain_EMap() const = 0;
 			
 			// End Class Continuation
 
@@ -1895,11 +1895,11 @@ namespace uml
 			static const unsigned int CONTROLFLOW_OPERATION_OBJECT_NODES_EDIAGNOSTICCHAIN_EMAP = 2629306994;
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getControlFlow_Class() const = 0;
+			virtual const std::shared_ptr<ecore::EClass>& getControlFlow_Class() const = 0;
 			
 			
 			
-			virtual std::shared_ptr<ecore::EOperation> getControlFlow_Operation_object_nodes_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getControlFlow_Operation_object_nodes_EDiagnosticChain_EMap() const = 0;
 			
 			// End Class ControlFlow
 
@@ -1913,7 +1913,7 @@ namespace uml
 			
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getControlNode_Class() const = 0;
+			virtual const std::shared_ptr<ecore::EClass>& getControlNode_Class() const = 0;
 			
 			
 			
@@ -1931,11 +1931,11 @@ namespace uml
 			static const unsigned int CREATELINKACTION_OPERATION_ASSOCIATION_NOT_ABSTRACT_EDIAGNOSTICCHAIN_EMAP = 1746163282;
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getCreateLinkAction_Class() const = 0;
+			virtual const std::shared_ptr<ecore::EClass>& getCreateLinkAction_Class() const = 0;
 			
 			
 			
-			virtual std::shared_ptr<ecore::EOperation> getCreateLinkAction_Operation_association_not_abstract_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getCreateLinkAction_Operation_association_not_abstract_EDiagnosticChain_EMap() const = 0;
 			
 			// End Class CreateLinkAction
 
@@ -1953,14 +1953,14 @@ namespace uml
 			static const unsigned int CREATELINKOBJECTACTION_OPERATION_TYPE_OF_RESULT_EDIAGNOSTICCHAIN_EMAP = 3018502509;
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getCreateLinkObjectAction_Class() const = 0;
+			virtual const std::shared_ptr<ecore::EClass>& getCreateLinkObjectAction_Class() const = 0;
 			
 			
-			virtual std::shared_ptr<ecore::EReference> getCreateLinkObjectAction_Attribute_result() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getCreateLinkObjectAction_Attribute_result() const = 0;
 			
-			virtual std::shared_ptr<ecore::EOperation> getCreateLinkObjectAction_Operation_association_class_EDiagnosticChain_EMap() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getCreateLinkObjectAction_Operation_multiplicity_EDiagnosticChain_EMap() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getCreateLinkObjectAction_Operation_type_of_result_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getCreateLinkObjectAction_Operation_association_class_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getCreateLinkObjectAction_Operation_multiplicity_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getCreateLinkObjectAction_Operation_type_of_result_EDiagnosticChain_EMap() const = 0;
 			
 			// End Class CreateLinkObjectAction
 
@@ -1980,16 +1980,16 @@ namespace uml
 			static const unsigned int CREATEOBJECTACTION_OPERATION_SAME_TYPE_EDIAGNOSTICCHAIN_EMAP = 988938262;
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getCreateObjectAction_Class() const = 0;
+			virtual const std::shared_ptr<ecore::EClass>& getCreateObjectAction_Class() const = 0;
 			
 			
-			virtual std::shared_ptr<ecore::EReference> getCreateObjectAction_Attribute_classifier() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getCreateObjectAction_Attribute_result() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getCreateObjectAction_Attribute_classifier() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getCreateObjectAction_Attribute_result() const = 0;
 			
-			virtual std::shared_ptr<ecore::EOperation> getCreateObjectAction_Operation_classifier_not_abstract_EDiagnosticChain_EMap() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getCreateObjectAction_Operation_classifier_not_association_class_EDiagnosticChain_EMap() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getCreateObjectAction_Operation_multiplicity_EDiagnosticChain_EMap() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getCreateObjectAction_Operation_same_type_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getCreateObjectAction_Operation_classifier_not_abstract_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getCreateObjectAction_Operation_classifier_not_association_class_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getCreateObjectAction_Operation_multiplicity_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getCreateObjectAction_Operation_same_type_EDiagnosticChain_EMap() const = 0;
 			
 			// End Class CreateObjectAction
 
@@ -2003,7 +2003,7 @@ namespace uml
 			
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getDataStoreNode_Class() const = 0;
+			virtual const std::shared_ptr<ecore::EClass>& getDataStoreNode_Class() const = 0;
 			
 			
 			
@@ -2024,14 +2024,14 @@ namespace uml
 			static const unsigned int DATATYPE_OPERATION_CREATEOWNEDOPERATION_STRING_TYPE = 4057743014;
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getDataType_Class() const = 0;
+			virtual const std::shared_ptr<ecore::EClass>& getDataType_Class() const = 0;
 			
 			
-			virtual std::shared_ptr<ecore::EReference> getDataType_Attribute_ownedAttribute() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getDataType_Attribute_ownedOperation() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getDataType_Attribute_ownedAttribute() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getDataType_Attribute_ownedOperation() const = 0;
 			
-			virtual std::shared_ptr<ecore::EOperation> getDataType_Operation_createOwnedAttribute_String_UnlimitedNatural() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getDataType_Operation_createOwnedOperation_String_Type() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getDataType_Operation_createOwnedAttribute_String_UnlimitedNatural() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getDataType_Operation_createOwnedOperation_String_Type() const = 0;
 			
 			// End Class DataType
 
@@ -2055,20 +2055,20 @@ namespace uml
 			static const unsigned int DECISIONNODE_OPERATION_ZERO_INPUT_PARAMETERS_EDIAGNOSTICCHAIN_EMAP = 418702236;
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getDecisionNode_Class() const = 0;
+			virtual const std::shared_ptr<ecore::EClass>& getDecisionNode_Class() const = 0;
 			
 			
-			virtual std::shared_ptr<ecore::EReference> getDecisionNode_Attribute_decisionInput() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getDecisionNode_Attribute_decisionInputFlow() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getDecisionNode_Attribute_decisionInput() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getDecisionNode_Attribute_decisionInputFlow() const = 0;
 			
-			virtual std::shared_ptr<ecore::EOperation> getDecisionNode_Operation_decision_input_flow_incoming_EDiagnosticChain_EMap() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getDecisionNode_Operation_edges_EDiagnosticChain_EMap() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getDecisionNode_Operation_incoming_control_one_input_parameter_EDiagnosticChain_EMap() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getDecisionNode_Operation_incoming_object_one_input_parameter_EDiagnosticChain_EMap() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getDecisionNode_Operation_incoming_outgoing_edges_EDiagnosticChain_EMap() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getDecisionNode_Operation_parameters_EDiagnosticChain_EMap() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getDecisionNode_Operation_two_input_parameters_EDiagnosticChain_EMap() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getDecisionNode_Operation_zero_input_parameters_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getDecisionNode_Operation_decision_input_flow_incoming_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getDecisionNode_Operation_edges_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getDecisionNode_Operation_incoming_control_one_input_parameter_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getDecisionNode_Operation_incoming_object_one_input_parameter_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getDecisionNode_Operation_incoming_outgoing_edges_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getDecisionNode_Operation_parameters_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getDecisionNode_Operation_two_input_parameters_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getDecisionNode_Operation_zero_input_parameters_EDiagnosticChain_EMap() const = 0;
 			
 			// End Class DecisionNode
 
@@ -2084,11 +2084,11 @@ namespace uml
 			
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getDependency_Class() const = 0;
+			virtual const std::shared_ptr<ecore::EClass>& getDependency_Class() const = 0;
 			
 			
-			virtual std::shared_ptr<ecore::EReference> getDependency_Attribute_client() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getDependency_Attribute_supplier() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getDependency_Attribute_client() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getDependency_Attribute_supplier() const = 0;
 			
 			
 			// End Class Dependency
@@ -2103,7 +2103,7 @@ namespace uml
 			
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getDeployedArtifact_Class() const = 0;
+			virtual const std::shared_ptr<ecore::EClass>& getDeployedArtifact_Class() const = 0;
 			
 			
 			
@@ -2123,12 +2123,12 @@ namespace uml
 			
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getDeployment_Class() const = 0;
+			virtual const std::shared_ptr<ecore::EClass>& getDeployment_Class() const = 0;
 			
 			
-			virtual std::shared_ptr<ecore::EReference> getDeployment_Attribute_configuration() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getDeployment_Attribute_deployedArtifact() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getDeployment_Attribute_location() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getDeployment_Attribute_configuration() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getDeployment_Attribute_deployedArtifact() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getDeployment_Attribute_location() const = 0;
 			
 			
 			// End Class Deployment
@@ -2148,15 +2148,15 @@ namespace uml
 			static const unsigned int DEPLOYMENTSPECIFICATION_OPERATION_DEPLOYMENT_TARGET_EDIAGNOSTICCHAIN_EMAP = 153248179;
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getDeploymentSpecification_Class() const = 0;
+			virtual const std::shared_ptr<ecore::EClass>& getDeploymentSpecification_Class() const = 0;
 			
-			virtual std::shared_ptr<ecore::EAttribute> getDeploymentSpecification_Attribute_deploymentLocation() const = 0;
-			virtual std::shared_ptr<ecore::EAttribute> getDeploymentSpecification_Attribute_executionLocation() const = 0;
+			virtual const std::shared_ptr<ecore::EAttribute>& getDeploymentSpecification_Attribute_deploymentLocation() const = 0;
+			virtual const std::shared_ptr<ecore::EAttribute>& getDeploymentSpecification_Attribute_executionLocation() const = 0;
 			
-			virtual std::shared_ptr<ecore::EReference> getDeploymentSpecification_Attribute_deployment() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getDeploymentSpecification_Attribute_deployment() const = 0;
 			
-			virtual std::shared_ptr<ecore::EOperation> getDeploymentSpecification_Operation_deployed_elements_EDiagnosticChain_EMap() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getDeploymentSpecification_Operation_deployment_target_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getDeploymentSpecification_Operation_deployed_elements_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getDeploymentSpecification_Operation_deployment_target_EDiagnosticChain_EMap() const = 0;
 			
 			// End Class DeploymentSpecification
 
@@ -2173,13 +2173,13 @@ namespace uml
 			static const unsigned int DEPLOYMENTTARGET_OPERATION_GETDEPLOYEDELEMENTS = 270386154;
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getDeploymentTarget_Class() const = 0;
+			virtual const std::shared_ptr<ecore::EClass>& getDeploymentTarget_Class() const = 0;
 			
 			
-			virtual std::shared_ptr<ecore::EReference> getDeploymentTarget_Attribute_deployedElement() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getDeploymentTarget_Attribute_deployment() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getDeploymentTarget_Attribute_deployedElement() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getDeploymentTarget_Attribute_deployment() const = 0;
 			
-			virtual std::shared_ptr<ecore::EOperation> getDeploymentTarget_Operation_getDeployedElements() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getDeploymentTarget_Operation_getDeployedElements() const = 0;
 			
 			// End Class DeploymentTarget
 
@@ -2193,7 +2193,7 @@ namespace uml
 			
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getDestroyLinkAction_Class() const = 0;
+			virtual const std::shared_ptr<ecore::EClass>& getDestroyLinkAction_Class() const = 0;
 			
 			
 			
@@ -2215,15 +2215,15 @@ namespace uml
 			static const unsigned int DESTROYOBJECTACTION_OPERATION_NO_TYPE_EDIAGNOSTICCHAIN_EMAP = 1214013215;
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getDestroyObjectAction_Class() const = 0;
+			virtual const std::shared_ptr<ecore::EClass>& getDestroyObjectAction_Class() const = 0;
 			
-			virtual std::shared_ptr<ecore::EAttribute> getDestroyObjectAction_Attribute_isDestroyLinks() const = 0;
-			virtual std::shared_ptr<ecore::EAttribute> getDestroyObjectAction_Attribute_isDestroyOwnedObjects() const = 0;
+			virtual const std::shared_ptr<ecore::EAttribute>& getDestroyObjectAction_Attribute_isDestroyLinks() const = 0;
+			virtual const std::shared_ptr<ecore::EAttribute>& getDestroyObjectAction_Attribute_isDestroyOwnedObjects() const = 0;
 			
-			virtual std::shared_ptr<ecore::EReference> getDestroyObjectAction_Attribute_target() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getDestroyObjectAction_Attribute_target() const = 0;
 			
-			virtual std::shared_ptr<ecore::EOperation> getDestroyObjectAction_Operation_multiplicity_EDiagnosticChain_EMap() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getDestroyObjectAction_Operation_no_type_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getDestroyObjectAction_Operation_multiplicity_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getDestroyObjectAction_Operation_no_type_EDiagnosticChain_EMap() const = 0;
 			
 			// End Class DestroyObjectAction
 
@@ -2238,11 +2238,11 @@ namespace uml
 			static const unsigned int DESTRUCTIONOCCURRENCESPECIFICATION_OPERATION_NO_OCCURRENCE_SPECIFICATIONS_BELOW_EDIAGNOSTICCHAIN_EMAP = 2453932104;
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getDestructionOccurrenceSpecification_Class() const = 0;
+			virtual const std::shared_ptr<ecore::EClass>& getDestructionOccurrenceSpecification_Class() const = 0;
 			
 			
 			
-			virtual std::shared_ptr<ecore::EOperation> getDestructionOccurrenceSpecification_Operation_no_occurrence_specifications_below_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getDestructionOccurrenceSpecification_Operation_no_occurrence_specifications_below_EDiagnosticChain_EMap() const = 0;
 			
 			// End Class DestructionOccurrenceSpecification
 
@@ -2256,7 +2256,7 @@ namespace uml
 			
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getDevice_Class() const = 0;
+			virtual const std::shared_ptr<ecore::EClass>& getDevice_Class() const = 0;
 			
 			
 			
@@ -2275,11 +2275,11 @@ namespace uml
 			
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getDirectedRelationship_Class() const = 0;
+			virtual const std::shared_ptr<ecore::EClass>& getDirectedRelationship_Class() const = 0;
 			
 			
-			virtual std::shared_ptr<ecore::EReference> getDirectedRelationship_Attribute_source() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getDirectedRelationship_Attribute_target() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getDirectedRelationship_Attribute_source() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getDirectedRelationship_Attribute_target() const = 0;
 			
 			
 			// End Class DirectedRelationship
@@ -2297,13 +2297,13 @@ namespace uml
 			static const unsigned int DURATION_OPERATION_NO_EXPR_REQUIRES_OBSERVATION_EDIAGNOSTICCHAIN_EMAP = 2764069349;
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getDuration_Class() const = 0;
+			virtual const std::shared_ptr<ecore::EClass>& getDuration_Class() const = 0;
 			
 			
-			virtual std::shared_ptr<ecore::EReference> getDuration_Attribute_expr() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getDuration_Attribute_observation() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getDuration_Attribute_expr() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getDuration_Attribute_observation() const = 0;
 			
-			virtual std::shared_ptr<ecore::EOperation> getDuration_Operation_no_expr_requires_observation_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getDuration_Operation_no_expr_requires_observation_EDiagnosticChain_EMap() const = 0;
 			
 			// End Class Duration
 
@@ -2320,13 +2320,13 @@ namespace uml
 			static const unsigned int DURATIONCONSTRAINT_OPERATION_HAS_ONE_OR_TWO_CONSTRAINEDELEMENTS_EDIAGNOSTICCHAIN_EMAP = 4186177077;
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getDurationConstraint_Class() const = 0;
+			virtual const std::shared_ptr<ecore::EClass>& getDurationConstraint_Class() const = 0;
 			
-			virtual std::shared_ptr<ecore::EAttribute> getDurationConstraint_Attribute_firstEvent() const = 0;
+			virtual const std::shared_ptr<ecore::EAttribute>& getDurationConstraint_Attribute_firstEvent() const = 0;
 			
 			
-			virtual std::shared_ptr<ecore::EOperation> getDurationConstraint_Operation_first_event_multiplicity_EDiagnosticChain_EMap() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getDurationConstraint_Operation_has_one_or_two_constrainedElements_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getDurationConstraint_Operation_first_event_multiplicity_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getDurationConstraint_Operation_has_one_or_two_constrainedElements_EDiagnosticChain_EMap() const = 0;
 			
 			// End Class DurationConstraint
 
@@ -2340,7 +2340,7 @@ namespace uml
 			
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getDurationInterval_Class() const = 0;
+			virtual const std::shared_ptr<ecore::EClass>& getDurationInterval_Class() const = 0;
 			
 			
 			
@@ -2360,13 +2360,13 @@ namespace uml
 			static const unsigned int DURATIONOBSERVATION_OPERATION_FIRST_EVENT_MULTIPLICITY_EDIAGNOSTICCHAIN_EMAP = 2503056873;
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getDurationObservation_Class() const = 0;
+			virtual const std::shared_ptr<ecore::EClass>& getDurationObservation_Class() const = 0;
 			
-			virtual std::shared_ptr<ecore::EAttribute> getDurationObservation_Attribute_firstEvent() const = 0;
+			virtual const std::shared_ptr<ecore::EAttribute>& getDurationObservation_Attribute_firstEvent() const = 0;
 			
-			virtual std::shared_ptr<ecore::EReference> getDurationObservation_Attribute_event() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getDurationObservation_Attribute_event() const = 0;
 			
-			virtual std::shared_ptr<ecore::EOperation> getDurationObservation_Operation_first_event_multiplicity_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getDurationObservation_Operation_first_event_multiplicity_EDiagnosticChain_EMap() const = 0;
 			
 			// End Class DurationObservation
 
@@ -2421,51 +2421,51 @@ namespace uml
 			static const unsigned int ELEMENT_OPERATION_UNAPPLYSTEREOTYPE_STEREOTYPE = 3541463368;
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getElement_Class() const = 0;
+			virtual const std::shared_ptr<ecore::EClass>& getElement_Class() const = 0;
 			
 			
-			virtual std::shared_ptr<ecore::EReference> getElement_Attribute_ownedComment() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getElement_Attribute_ownedElement() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getElement_Attribute_owner() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getElement_Attribute_ownedComment() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getElement_Attribute_ownedElement() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getElement_Attribute_owner() const = 0;
 			
-			virtual std::shared_ptr<ecore::EOperation> getElement_Operation_addKeyword_String() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getElement_Operation_allOwnedElements() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getElement_Operation_applyStereotype_Stereotype() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getElement_Operation_container() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getElement_Operation_createEAnnotation_String() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getElement_Operation_destroy() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getElement_Operation_getApplicableStereotype_String() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getElement_Operation_getApplicableStereotypes() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getElement_Operation_getAppliedStereotype_String() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getElement_Operation_getAppliedStereotypes() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getElement_Operation_getAppliedSubstereotype_Stereotype_String() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getElement_Operation_getAppliedSubstereotypes_Stereotype() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getElement_Operation_getKeywords() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getElement_Operation_getMetaClass() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getElement_Operation_getModel() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getElement_Operation_getNearestPackage() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getElement_Operation_getRelationships() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getElement_Operation_getRelationships_EClass() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getElement_Operation_getRequiredStereotype_String() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getElement_Operation_getRequiredStereotypes() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getElement_Operation_getSourceDirectedRelationships() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getElement_Operation_getSourceDirectedRelationships_EClass() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getElement_Operation_getStereotypeApplication_Stereotype() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getElement_Operation_getStereotypeApplications() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getElement_Operation_getTargetDirectedRelationships() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getElement_Operation_getTargetDirectedRelationships_EClass() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getElement_Operation_getValue_Stereotype_String() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getElement_Operation_hasKeyword_String() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getElement_Operation_hasValue_Stereotype_String() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getElement_Operation_has_owner_EDiagnosticChain_EMap() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getElement_Operation_isStereotypeApplicable_Stereotype() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getElement_Operation_isStereotypeApplied_Stereotype() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getElement_Operation_isStereotypeRequired_Stereotype() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getElement_Operation_mustBeOwned() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getElement_Operation_not_own_self_EDiagnosticChain_EMap() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getElement_Operation_removeKeyword_String() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getElement_Operation_setValue_Stereotype_EJavaObject() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getElement_Operation_unapplyStereotype_Stereotype() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getElement_Operation_addKeyword_String() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getElement_Operation_allOwnedElements() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getElement_Operation_applyStereotype_Stereotype() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getElement_Operation_container() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getElement_Operation_createEAnnotation_String() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getElement_Operation_destroy() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getElement_Operation_getApplicableStereotype_String() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getElement_Operation_getApplicableStereotypes() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getElement_Operation_getAppliedStereotype_String() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getElement_Operation_getAppliedStereotypes() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getElement_Operation_getAppliedSubstereotype_Stereotype_String() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getElement_Operation_getAppliedSubstereotypes_Stereotype() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getElement_Operation_getKeywords() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getElement_Operation_getMetaClass() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getElement_Operation_getModel() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getElement_Operation_getNearestPackage() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getElement_Operation_getRelationships() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getElement_Operation_getRelationships_EClass() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getElement_Operation_getRequiredStereotype_String() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getElement_Operation_getRequiredStereotypes() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getElement_Operation_getSourceDirectedRelationships() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getElement_Operation_getSourceDirectedRelationships_EClass() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getElement_Operation_getStereotypeApplication_Stereotype() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getElement_Operation_getStereotypeApplications() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getElement_Operation_getTargetDirectedRelationships() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getElement_Operation_getTargetDirectedRelationships_EClass() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getElement_Operation_getValue_Stereotype_String() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getElement_Operation_hasKeyword_String() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getElement_Operation_hasValue_Stereotype_String() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getElement_Operation_has_owner_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getElement_Operation_isStereotypeApplicable_Stereotype() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getElement_Operation_isStereotypeApplied_Stereotype() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getElement_Operation_isStereotypeRequired_Stereotype() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getElement_Operation_mustBeOwned() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getElement_Operation_not_own_self_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getElement_Operation_removeKeyword_String() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getElement_Operation_setValue_Stereotype_EJavaObject() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getElement_Operation_unapplyStereotype_Stereotype() const = 0;
 			
 			// End Class Element
 
@@ -2486,17 +2486,17 @@ namespace uml
 			static const unsigned int ELEMENTIMPORT_OPERATION_VISIBILITY_PUBLIC_OR_PRIVATE_EDIAGNOSTICCHAIN_EMAP = 3497731579;
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getElementImport_Class() const = 0;
+			virtual const std::shared_ptr<ecore::EClass>& getElementImport_Class() const = 0;
 			
-			virtual std::shared_ptr<ecore::EAttribute> getElementImport_Attribute_alias() const = 0;
-			virtual std::shared_ptr<ecore::EAttribute> getElementImport_Attribute_visibility() const = 0;
+			virtual const std::shared_ptr<ecore::EAttribute>& getElementImport_Attribute_alias() const = 0;
+			virtual const std::shared_ptr<ecore::EAttribute>& getElementImport_Attribute_visibility() const = 0;
 			
-			virtual std::shared_ptr<ecore::EReference> getElementImport_Attribute_importedElement() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getElementImport_Attribute_importingNamespace() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getElementImport_Attribute_importedElement() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getElementImport_Attribute_importingNamespace() const = 0;
 			
-			virtual std::shared_ptr<ecore::EOperation> getElementImport_Operation_getName() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getElementImport_Operation_imported_element_is_public_EDiagnosticChain_EMap() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getElementImport_Operation_visibility_public_or_private_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getElementImport_Operation_getName() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getElementImport_Operation_imported_element_is_public_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getElementImport_Operation_visibility_public_or_private_EDiagnosticChain_EMap() const = 0;
 			
 			// End Class ElementImport
 
@@ -2512,12 +2512,12 @@ namespace uml
 			static const unsigned int ENCAPSULATEDCLASSIFIER_OPERATION_GETOWNEDPORTS = 1835476817;
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getEncapsulatedClassifier_Class() const = 0;
+			virtual const std::shared_ptr<ecore::EClass>& getEncapsulatedClassifier_Class() const = 0;
 			
 			
-			virtual std::shared_ptr<ecore::EReference> getEncapsulatedClassifier_Attribute_ownedPort() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getEncapsulatedClassifier_Attribute_ownedPort() const = 0;
 			
-			virtual std::shared_ptr<ecore::EOperation> getEncapsulatedClassifier_Operation_getOwnedPorts() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getEncapsulatedClassifier_Operation_getOwnedPorts() const = 0;
 			
 			// End Class EncapsulatedClassifier
 
@@ -2533,12 +2533,12 @@ namespace uml
 			static const unsigned int ENUMERATION_OPERATION_IMMUTABLE_EDIAGNOSTICCHAIN_EMAP = 3717688929;
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getEnumeration_Class() const = 0;
+			virtual const std::shared_ptr<ecore::EClass>& getEnumeration_Class() const = 0;
 			
 			
-			virtual std::shared_ptr<ecore::EReference> getEnumeration_Attribute_ownedLiteral() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getEnumeration_Attribute_ownedLiteral() const = 0;
 			
-			virtual std::shared_ptr<ecore::EOperation> getEnumeration_Operation_immutable_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getEnumeration_Operation_immutable_EDiagnosticChain_EMap() const = 0;
 			
 			// End Class Enumeration
 
@@ -2555,13 +2555,13 @@ namespace uml
 			static const unsigned int ENUMERATIONLITERAL_OPERATION_GETCLASSIFIERS = 4270076526;
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getEnumerationLiteral_Class() const = 0;
+			virtual const std::shared_ptr<ecore::EClass>& getEnumerationLiteral_Class() const = 0;
 			
 			
-			virtual std::shared_ptr<ecore::EReference> getEnumerationLiteral_Attribute_enumeration() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getEnumerationLiteral_Attribute_enumeration() const = 0;
 			
-			virtual std::shared_ptr<ecore::EOperation> getEnumerationLiteral_Operation_getClassifier() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getEnumerationLiteral_Operation_getClassifiers() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getEnumerationLiteral_Operation_getClassifier() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getEnumerationLiteral_Operation_getClassifiers() const = 0;
 			
 			// End Class EnumerationLiteral
 
@@ -2575,7 +2575,7 @@ namespace uml
 			
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getEvent_Class() const = 0;
+			virtual const std::shared_ptr<ecore::EClass>& getEvent_Class() const = 0;
 			
 			
 			
@@ -2602,20 +2602,20 @@ namespace uml
 			static const unsigned int EXCEPTIONHANDLER_OPERATION_OUTPUT_PINS_EDIAGNOSTICCHAIN_EMAP = 4230900057;
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getExceptionHandler_Class() const = 0;
+			virtual const std::shared_ptr<ecore::EClass>& getExceptionHandler_Class() const = 0;
 			
 			
-			virtual std::shared_ptr<ecore::EReference> getExceptionHandler_Attribute_exceptionInput() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getExceptionHandler_Attribute_exceptionType() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getExceptionHandler_Attribute_handlerBody() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getExceptionHandler_Attribute_protectedNode() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getExceptionHandler_Attribute_exceptionInput() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getExceptionHandler_Attribute_exceptionType() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getExceptionHandler_Attribute_handlerBody() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getExceptionHandler_Attribute_protectedNode() const = 0;
 			
-			virtual std::shared_ptr<ecore::EOperation> getExceptionHandler_Operation_edge_source_target_EDiagnosticChain_EMap() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getExceptionHandler_Operation_exception_input_type_EDiagnosticChain_EMap() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getExceptionHandler_Operation_handler_body_edges_EDiagnosticChain_EMap() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getExceptionHandler_Operation_handler_body_owner_EDiagnosticChain_EMap() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getExceptionHandler_Operation_one_input_EDiagnosticChain_EMap() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getExceptionHandler_Operation_output_pins_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getExceptionHandler_Operation_edge_source_target_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getExceptionHandler_Operation_exception_input_type_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getExceptionHandler_Operation_handler_body_edges_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getExceptionHandler_Operation_handler_body_owner_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getExceptionHandler_Operation_one_input_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getExceptionHandler_Operation_output_pins_EDiagnosticChain_EMap() const = 0;
 			
 			// End Class ExceptionHandler
 
@@ -2630,10 +2630,10 @@ namespace uml
 			
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getExecutableNode_Class() const = 0;
+			virtual const std::shared_ptr<ecore::EClass>& getExecutableNode_Class() const = 0;
 			
 			
-			virtual std::shared_ptr<ecore::EReference> getExecutableNode_Attribute_handler() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getExecutableNode_Attribute_handler() const = 0;
 			
 			
 			// End Class ExecutableNode
@@ -2648,7 +2648,7 @@ namespace uml
 			
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getExecutionEnvironment_Class() const = 0;
+			virtual const std::shared_ptr<ecore::EClass>& getExecutionEnvironment_Class() const = 0;
 			
 			
 			
@@ -2666,10 +2666,10 @@ namespace uml
 			
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getExecutionOccurrenceSpecification_Class() const = 0;
+			virtual const std::shared_ptr<ecore::EClass>& getExecutionOccurrenceSpecification_Class() const = 0;
 			
 			
-			virtual std::shared_ptr<ecore::EReference> getExecutionOccurrenceSpecification_Attribute_execution() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getExecutionOccurrenceSpecification_Attribute_execution() const = 0;
 			
 			
 			// End Class ExecutionOccurrenceSpecification
@@ -2687,13 +2687,13 @@ namespace uml
 			static const unsigned int EXECUTIONSPECIFICATION_OPERATION_SAME_LIFELINE_EDIAGNOSTICCHAIN_EMAP = 472396644;
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getExecutionSpecification_Class() const = 0;
+			virtual const std::shared_ptr<ecore::EClass>& getExecutionSpecification_Class() const = 0;
 			
 			
-			virtual std::shared_ptr<ecore::EReference> getExecutionSpecification_Attribute_finish() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getExecutionSpecification_Attribute_start() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getExecutionSpecification_Attribute_finish() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getExecutionSpecification_Attribute_start() const = 0;
 			
-			virtual std::shared_ptr<ecore::EOperation> getExecutionSpecification_Operation_same_lifeline_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getExecutionSpecification_Operation_same_lifeline_EDiagnosticChain_EMap() const = 0;
 			
 			// End Class ExecutionSpecification
 
@@ -2710,13 +2710,13 @@ namespace uml
 			static const unsigned int EXPANSIONNODE_OPERATION_REGION_AS_INPUT_OR_OUTPUT_EDIAGNOSTICCHAIN_EMAP = 832139747;
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getExpansionNode_Class() const = 0;
+			virtual const std::shared_ptr<ecore::EClass>& getExpansionNode_Class() const = 0;
 			
 			
-			virtual std::shared_ptr<ecore::EReference> getExpansionNode_Attribute_regionAsInput() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getExpansionNode_Attribute_regionAsOutput() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getExpansionNode_Attribute_regionAsInput() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getExpansionNode_Attribute_regionAsOutput() const = 0;
 			
-			virtual std::shared_ptr<ecore::EOperation> getExpansionNode_Operation_region_as_input_or_output_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getExpansionNode_Operation_region_as_input_or_output_EDiagnosticChain_EMap() const = 0;
 			
 			// End Class ExpansionNode
 
@@ -2733,12 +2733,12 @@ namespace uml
 			
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getExpansionRegion_Class() const = 0;
+			virtual const std::shared_ptr<ecore::EClass>& getExpansionRegion_Class() const = 0;
 			
-			virtual std::shared_ptr<ecore::EAttribute> getExpansionRegion_Attribute_mode() const = 0;
+			virtual const std::shared_ptr<ecore::EAttribute>& getExpansionRegion_Attribute_mode() const = 0;
 			
-			virtual std::shared_ptr<ecore::EReference> getExpansionRegion_Attribute_inputElement() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getExpansionRegion_Attribute_outputElement() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getExpansionRegion_Attribute_inputElement() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getExpansionRegion_Attribute_outputElement() const = 0;
 			
 			
 			// End Class ExpansionRegion
@@ -2755,11 +2755,11 @@ namespace uml
 			
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getExpression_Class() const = 0;
+			virtual const std::shared_ptr<ecore::EClass>& getExpression_Class() const = 0;
 			
-			virtual std::shared_ptr<ecore::EAttribute> getExpression_Attribute_symbol() const = 0;
+			virtual const std::shared_ptr<ecore::EAttribute>& getExpression_Attribute_symbol() const = 0;
 			
-			virtual std::shared_ptr<ecore::EReference> getExpression_Attribute_operand() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getExpression_Attribute_operand() const = 0;
 			
 			
 			// End Class Expression
@@ -2779,15 +2779,15 @@ namespace uml
 			static const unsigned int EXTEND_OPERATION_EXTENSION_POINTS_EDIAGNOSTICCHAIN_EMAP = 3303344491;
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getExtend_Class() const = 0;
+			virtual const std::shared_ptr<ecore::EClass>& getExtend_Class() const = 0;
 			
 			
-			virtual std::shared_ptr<ecore::EReference> getExtend_Attribute_condition() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getExtend_Attribute_extendedCase() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getExtend_Attribute_extension() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getExtend_Attribute_extensionLocation() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getExtend_Attribute_condition() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getExtend_Attribute_extendedCase() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getExtend_Attribute_extension() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getExtend_Attribute_extensionLocation() const = 0;
 			
-			virtual std::shared_ptr<ecore::EOperation> getExtend_Operation_extension_points_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getExtend_Operation_extension_points_EDiagnosticChain_EMap() const = 0;
 			
 			// End Class Extend
 
@@ -2810,19 +2810,19 @@ namespace uml
 			static const unsigned int EXTENSION_OPERATION_NON_OWNED_END_EDIAGNOSTICCHAIN_EMAP = 8830304;
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getExtension_Class() const = 0;
+			virtual const std::shared_ptr<ecore::EClass>& getExtension_Class() const = 0;
 			
-			virtual std::shared_ptr<ecore::EAttribute> getExtension_Attribute_isRequired() const = 0;
+			virtual const std::shared_ptr<ecore::EAttribute>& getExtension_Attribute_isRequired() const = 0;
 			
-			virtual std::shared_ptr<ecore::EReference> getExtension_Attribute_metaclass() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getExtension_Attribute_metaclass() const = 0;
 			
-			virtual std::shared_ptr<ecore::EOperation> getExtension_Operation_getMetaclass() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getExtension_Operation_getStereotype() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getExtension_Operation_getStereotypeEnd() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getExtension_Operation_isRequired() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getExtension_Operation_is_binary_EDiagnosticChain_EMap() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getExtension_Operation_metaclassEnd() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getExtension_Operation_non_owned_end_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getExtension_Operation_getMetaclass() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getExtension_Operation_getStereotype() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getExtension_Operation_getStereotypeEnd() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getExtension_Operation_isRequired() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getExtension_Operation_is_binary_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getExtension_Operation_metaclassEnd() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getExtension_Operation_non_owned_end_EDiagnosticChain_EMap() const = 0;
 			
 			// End Class Extension
 
@@ -2838,12 +2838,12 @@ namespace uml
 			static const unsigned int EXTENSIONEND_OPERATION_MULTIPLICITY_EDIAGNOSTICCHAIN_EMAP = 1193805419;
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getExtensionEnd_Class() const = 0;
+			virtual const std::shared_ptr<ecore::EClass>& getExtensionEnd_Class() const = 0;
 			
 			
 			
-			virtual std::shared_ptr<ecore::EOperation> getExtensionEnd_Operation_aggregation_EDiagnosticChain_EMap() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getExtensionEnd_Operation_multiplicity_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getExtensionEnd_Operation_aggregation_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getExtensionEnd_Operation_multiplicity_EDiagnosticChain_EMap() const = 0;
 			
 			// End Class ExtensionEnd
 
@@ -2859,12 +2859,12 @@ namespace uml
 			static const unsigned int EXTENSIONPOINT_OPERATION_MUST_HAVE_NAME_EDIAGNOSTICCHAIN_EMAP = 4081749369;
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getExtensionPoint_Class() const = 0;
+			virtual const std::shared_ptr<ecore::EClass>& getExtensionPoint_Class() const = 0;
 			
 			
-			virtual std::shared_ptr<ecore::EReference> getExtensionPoint_Attribute_useCase() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getExtensionPoint_Attribute_useCase() const = 0;
 			
-			virtual std::shared_ptr<ecore::EOperation> getExtensionPoint_Operation_must_have_name_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getExtensionPoint_Operation_must_have_name_EDiagnosticChain_EMap() const = 0;
 			
 			// End Class ExtensionPoint
 
@@ -2879,11 +2879,11 @@ namespace uml
 			static const unsigned int FACTORY_OPERATION_CREATE_CLASS = 503103173;
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getFactory_Class() const = 0;
+			virtual const std::shared_ptr<ecore::EClass>& getFactory_Class() const = 0;
 			
 			
 			
-			virtual std::shared_ptr<ecore::EOperation> getFactory_Operation_create_Class() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getFactory_Operation_create_Class() const = 0;
 			
 			// End Class Factory
 
@@ -2899,11 +2899,11 @@ namespace uml
 			
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getFeature_Class() const = 0;
+			virtual const std::shared_ptr<ecore::EClass>& getFeature_Class() const = 0;
 			
-			virtual std::shared_ptr<ecore::EAttribute> getFeature_Attribute_isStatic() const = 0;
+			virtual const std::shared_ptr<ecore::EAttribute>& getFeature_Attribute_isStatic() const = 0;
 			
-			virtual std::shared_ptr<ecore::EReference> getFeature_Attribute_featuringClassifier() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getFeature_Attribute_featuringClassifier() const = 0;
 			
 			
 			// End Class Feature
@@ -2919,11 +2919,11 @@ namespace uml
 			static const unsigned int FINALNODE_OPERATION_NO_OUTGOING_EDGES_EDIAGNOSTICCHAIN_EMAP = 4257972085;
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getFinalNode_Class() const = 0;
+			virtual const std::shared_ptr<ecore::EClass>& getFinalNode_Class() const = 0;
 			
 			
 			
-			virtual std::shared_ptr<ecore::EOperation> getFinalNode_Operation_no_outgoing_edges_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getFinalNode_Operation_no_outgoing_edges_EDiagnosticChain_EMap() const = 0;
 			
 			// End Class FinalNode
 
@@ -2943,16 +2943,16 @@ namespace uml
 			static const unsigned int FINALSTATE_OPERATION_NO_STATE_BEHAVIOR_EDIAGNOSTICCHAIN_EMAP = 893127205;
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getFinalState_Class() const = 0;
+			virtual const std::shared_ptr<ecore::EClass>& getFinalState_Class() const = 0;
 			
 			
 			
-			virtual std::shared_ptr<ecore::EOperation> getFinalState_Operation_cannot_reference_submachine_EDiagnosticChain_EMap() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getFinalState_Operation_no_entry_behavior_EDiagnosticChain_EMap() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getFinalState_Operation_no_exit_behavior_EDiagnosticChain_EMap() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getFinalState_Operation_no_outgoing_transitions_EDiagnosticChain_EMap() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getFinalState_Operation_no_regions_EDiagnosticChain_EMap() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getFinalState_Operation_no_state_behavior_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getFinalState_Operation_cannot_reference_submachine_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getFinalState_Operation_no_entry_behavior_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getFinalState_Operation_no_exit_behavior_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getFinalState_Operation_no_outgoing_transitions_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getFinalState_Operation_no_regions_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getFinalState_Operation_no_state_behavior_EDiagnosticChain_EMap() const = 0;
 			
 			// End Class FinalState
 
@@ -2966,7 +2966,7 @@ namespace uml
 			
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getFlowFinalNode_Class() const = 0;
+			virtual const std::shared_ptr<ecore::EClass>& getFlowFinalNode_Class() const = 0;
 			
 			
 			
@@ -2985,12 +2985,12 @@ namespace uml
 			static const unsigned int FORKNODE_OPERATION_ONE_INCOMING_EDGE_EDIAGNOSTICCHAIN_EMAP = 1554773991;
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getForkNode_Class() const = 0;
+			virtual const std::shared_ptr<ecore::EClass>& getForkNode_Class() const = 0;
 			
 			
 			
-			virtual std::shared_ptr<ecore::EOperation> getForkNode_Operation_edges_EDiagnosticChain_EMap() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getForkNode_Operation_one_incoming_edge_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getForkNode_Operation_edges_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getForkNode_Operation_one_incoming_edge_EDiagnosticChain_EMap() const = 0;
 			
 			// End Class ForkNode
 
@@ -3007,13 +3007,13 @@ namespace uml
 			static const unsigned int FUNCTIONBEHAVIOR_OPERATION_TYPES_OF_PARAMETERS_EDIAGNOSTICCHAIN_EMAP = 166402892;
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getFunctionBehavior_Class() const = 0;
+			virtual const std::shared_ptr<ecore::EClass>& getFunctionBehavior_Class() const = 0;
 			
 			
 			
-			virtual std::shared_ptr<ecore::EOperation> getFunctionBehavior_Operation_hasAllDataTypeAttributes_DataType() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getFunctionBehavior_Operation_one_output_parameter_EDiagnosticChain_EMap() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getFunctionBehavior_Operation_types_of_parameters_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getFunctionBehavior_Operation_hasAllDataTypeAttributes_DataType() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getFunctionBehavior_Operation_one_output_parameter_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getFunctionBehavior_Operation_types_of_parameters_EDiagnosticChain_EMap() const = 0;
 			
 			// End Class FunctionBehavior
 
@@ -3041,24 +3041,24 @@ namespace uml
 			static const unsigned int GATE_OPERATION_OUTSIDE_CF_MATCHED_EDIAGNOSTICCHAIN_EMAP = 81753625;
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getGate_Class() const = 0;
+			virtual const std::shared_ptr<ecore::EClass>& getGate_Class() const = 0;
 			
 			
 			
-			virtual std::shared_ptr<ecore::EOperation> getGate_Operation_actual_gate_distinguishable_EDiagnosticChain_EMap() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getGate_Operation_actual_gate_matched_EDiagnosticChain_EMap() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getGate_Operation_formal_gate_distinguishable_EDiagnosticChain_EMap() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getGate_Operation_getName() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getGate_Operation_getOperand() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getGate_Operation_inside_cf_gate_distinguishable_EDiagnosticChain_EMap() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getGate_Operation_inside_cf_matched_EDiagnosticChain_EMap() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getGate_Operation_isActual() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getGate_Operation_isFormal() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getGate_Operation_isInsideCF() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getGate_Operation_isOutsideCF() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getGate_Operation_matches_Gate() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getGate_Operation_outside_cf_gate_distinguishable_EDiagnosticChain_EMap() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getGate_Operation_outside_cf_matched_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getGate_Operation_actual_gate_distinguishable_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getGate_Operation_actual_gate_matched_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getGate_Operation_formal_gate_distinguishable_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getGate_Operation_getName() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getGate_Operation_getOperand() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getGate_Operation_inside_cf_gate_distinguishable_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getGate_Operation_inside_cf_matched_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getGate_Operation_isActual() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getGate_Operation_isFormal() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getGate_Operation_isInsideCF() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getGate_Operation_isOutsideCF() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getGate_Operation_matches_Gate() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getGate_Operation_outside_cf_gate_distinguishable_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getGate_Operation_outside_cf_matched_EDiagnosticChain_EMap() const = 0;
 			
 			// End Class Gate
 
@@ -3075,13 +3075,13 @@ namespace uml
 			static const unsigned int GENERALORDERING_OPERATION_IRREFLEXIVE_TRANSITIVE_CLOSURE_EDIAGNOSTICCHAIN_EMAP = 2215591895;
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getGeneralOrdering_Class() const = 0;
+			virtual const std::shared_ptr<ecore::EClass>& getGeneralOrdering_Class() const = 0;
 			
 			
-			virtual std::shared_ptr<ecore::EReference> getGeneralOrdering_Attribute_after() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getGeneralOrdering_Attribute_before() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getGeneralOrdering_Attribute_after() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getGeneralOrdering_Attribute_before() const = 0;
 			
-			virtual std::shared_ptr<ecore::EOperation> getGeneralOrdering_Operation_irreflexive_transitive_closure_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getGeneralOrdering_Operation_irreflexive_transitive_closure_EDiagnosticChain_EMap() const = 0;
 			
 			// End Class GeneralOrdering
 
@@ -3099,13 +3099,13 @@ namespace uml
 			
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getGeneralization_Class() const = 0;
+			virtual const std::shared_ptr<ecore::EClass>& getGeneralization_Class() const = 0;
 			
-			virtual std::shared_ptr<ecore::EAttribute> getGeneralization_Attribute_isSubstitutable() const = 0;
+			virtual const std::shared_ptr<ecore::EAttribute>& getGeneralization_Attribute_isSubstitutable() const = 0;
 			
-			virtual std::shared_ptr<ecore::EReference> getGeneralization_Attribute_general() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getGeneralization_Attribute_generalizationSet() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getGeneralization_Attribute_specific() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getGeneralization_Attribute_general() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getGeneralization_Attribute_generalizationSet() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getGeneralization_Attribute_specific() const = 0;
 			
 			
 			// End Class Generalization
@@ -3126,16 +3126,16 @@ namespace uml
 			static const unsigned int GENERALIZATIONSET_OPERATION_MAPS_TO_GENERALIZATION_SET_EDIAGNOSTICCHAIN_EMAP = 3958412351;
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getGeneralizationSet_Class() const = 0;
+			virtual const std::shared_ptr<ecore::EClass>& getGeneralizationSet_Class() const = 0;
 			
-			virtual std::shared_ptr<ecore::EAttribute> getGeneralizationSet_Attribute_isCovering() const = 0;
-			virtual std::shared_ptr<ecore::EAttribute> getGeneralizationSet_Attribute_isDisjoint() const = 0;
+			virtual const std::shared_ptr<ecore::EAttribute>& getGeneralizationSet_Attribute_isCovering() const = 0;
+			virtual const std::shared_ptr<ecore::EAttribute>& getGeneralizationSet_Attribute_isDisjoint() const = 0;
 			
-			virtual std::shared_ptr<ecore::EReference> getGeneralizationSet_Attribute_generalization() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getGeneralizationSet_Attribute_powertype() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getGeneralizationSet_Attribute_generalization() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getGeneralizationSet_Attribute_powertype() const = 0;
 			
-			virtual std::shared_ptr<ecore::EOperation> getGeneralizationSet_Operation_generalization_same_classifier_EDiagnosticChain_EMap() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getGeneralizationSet_Operation_maps_to_generalization_set_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getGeneralizationSet_Operation_generalization_same_classifier_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getGeneralizationSet_Operation_maps_to_generalization_set_EDiagnosticChain_EMap() const = 0;
 			
 			// End Class GeneralizationSet
 
@@ -3152,11 +3152,11 @@ namespace uml
 			
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getImage_Class() const = 0;
+			virtual const std::shared_ptr<ecore::EClass>& getImage_Class() const = 0;
 			
-			virtual std::shared_ptr<ecore::EAttribute> getImage_Attribute_content() const = 0;
-			virtual std::shared_ptr<ecore::EAttribute> getImage_Attribute_format() const = 0;
-			virtual std::shared_ptr<ecore::EAttribute> getImage_Attribute_location() const = 0;
+			virtual const std::shared_ptr<ecore::EAttribute>& getImage_Attribute_content() const = 0;
+			virtual const std::shared_ptr<ecore::EAttribute>& getImage_Attribute_format() const = 0;
+			virtual const std::shared_ptr<ecore::EAttribute>& getImage_Attribute_location() const = 0;
 			
 			
 			
@@ -3174,11 +3174,11 @@ namespace uml
 			
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getInclude_Class() const = 0;
+			virtual const std::shared_ptr<ecore::EClass>& getInclude_Class() const = 0;
 			
 			
-			virtual std::shared_ptr<ecore::EReference> getInclude_Attribute_addition() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getInclude_Attribute_includingCase() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getInclude_Attribute_addition() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getInclude_Attribute_includingCase() const = 0;
 			
 			
 			// End Class Include
@@ -3203,20 +3203,20 @@ namespace uml
 			static const unsigned int INFORMATIONFLOW_OPERATION_SOURCES_AND_TARGETS_KIND_EDIAGNOSTICCHAIN_EMAP = 238166996;
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getInformationFlow_Class() const = 0;
+			virtual const std::shared_ptr<ecore::EClass>& getInformationFlow_Class() const = 0;
 			
 			
-			virtual std::shared_ptr<ecore::EReference> getInformationFlow_Attribute_conveyed() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getInformationFlow_Attribute_informationSource() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getInformationFlow_Attribute_informationTarget() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getInformationFlow_Attribute_realization() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getInformationFlow_Attribute_realizingActivityEdge() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getInformationFlow_Attribute_realizingConnector() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getInformationFlow_Attribute_realizingMessage() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getInformationFlow_Attribute_conveyed() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getInformationFlow_Attribute_informationSource() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getInformationFlow_Attribute_informationTarget() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getInformationFlow_Attribute_realization() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getInformationFlow_Attribute_realizingActivityEdge() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getInformationFlow_Attribute_realizingConnector() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getInformationFlow_Attribute_realizingMessage() const = 0;
 			
-			virtual std::shared_ptr<ecore::EOperation> getInformationFlow_Operation_convey_classifiers_EDiagnosticChain_EMap() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getInformationFlow_Operation_must_conform_EDiagnosticChain_EMap() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getInformationFlow_Operation_sources_and_targets_kind_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getInformationFlow_Operation_convey_classifiers_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getInformationFlow_Operation_must_conform_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getInformationFlow_Operation_sources_and_targets_kind_EDiagnosticChain_EMap() const = 0;
 			
 			// End Class InformationFlow
 
@@ -3234,14 +3234,14 @@ namespace uml
 			static const unsigned int INFORMATIONITEM_OPERATION_SOURCES_AND_TARGETS_EDIAGNOSTICCHAIN_EMAP = 3123170382;
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getInformationItem_Class() const = 0;
+			virtual const std::shared_ptr<ecore::EClass>& getInformationItem_Class() const = 0;
 			
 			
-			virtual std::shared_ptr<ecore::EReference> getInformationItem_Attribute_represented() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getInformationItem_Attribute_represented() const = 0;
 			
-			virtual std::shared_ptr<ecore::EOperation> getInformationItem_Operation_has_no_EDiagnosticChain_EMap() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getInformationItem_Operation_not_instantiable_EDiagnosticChain_EMap() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getInformationItem_Operation_sources_and_targets_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getInformationItem_Operation_has_no_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getInformationItem_Operation_not_instantiable_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getInformationItem_Operation_sources_and_targets_EDiagnosticChain_EMap() const = 0;
 			
 			// End Class InformationItem
 
@@ -3257,12 +3257,12 @@ namespace uml
 			static const unsigned int INITIALNODE_OPERATION_NO_INCOMING_EDGES_EDIAGNOSTICCHAIN_EMAP = 3592148437;
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getInitialNode_Class() const = 0;
+			virtual const std::shared_ptr<ecore::EClass>& getInitialNode_Class() const = 0;
 			
 			
 			
-			virtual std::shared_ptr<ecore::EOperation> getInitialNode_Operation_control_edges_EDiagnosticChain_EMap() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getInitialNode_Operation_no_incoming_edges_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getInitialNode_Operation_control_edges_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getInitialNode_Operation_no_incoming_edges_EDiagnosticChain_EMap() const = 0;
 			
 			// End Class InitialNode
 
@@ -3285,19 +3285,19 @@ namespace uml
 			static const unsigned int INPUTPIN_OPERATION_OUTGOING_EDGES_STRUCTURED_ONLY_EDIAGNOSTICCHAIN_EMAP = 533417357;
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getInputPin_Class() const = 0;
+			virtual const std::shared_ptr<ecore::EClass>& getInputPin_Class() const = 0;
 			
 			
-			virtual std::shared_ptr<ecore::EReference> getInputPin_Attribute_action() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getInputPin_Attribute_addStructuralFeatureValueAction() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getInputPin_Attribute_callOperationAction() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getInputPin_Attribute_destroyObjectAction() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getInputPin_Attribute_invocationAction() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getInputPin_Attribute_removeStructuralFeatureValueAction() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getInputPin_Attribute_structuralFeatureAction() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getInputPin_Attribute_writeStructuralFeatureAction() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getInputPin_Attribute_action() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getInputPin_Attribute_addStructuralFeatureValueAction() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getInputPin_Attribute_callOperationAction() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getInputPin_Attribute_destroyObjectAction() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getInputPin_Attribute_invocationAction() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getInputPin_Attribute_removeStructuralFeatureValueAction() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getInputPin_Attribute_structuralFeatureAction() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getInputPin_Attribute_writeStructuralFeatureAction() const = 0;
 			
-			virtual std::shared_ptr<ecore::EOperation> getInputPin_Operation_outgoing_edges_structured_only_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getInputPin_Operation_outgoing_edges_structured_only_EDiagnosticChain_EMap() const = 0;
 			
 			// End Class InputPin
 
@@ -3318,17 +3318,17 @@ namespace uml
 			static const unsigned int INSTANCESPECIFICATION_OPERATION_STRUCTURAL_FEATURE_EDIAGNOSTICCHAIN_EMAP = 432277844;
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getInstanceSpecification_Class() const = 0;
+			virtual const std::shared_ptr<ecore::EClass>& getInstanceSpecification_Class() const = 0;
 			
 			
-			virtual std::shared_ptr<ecore::EReference> getInstanceSpecification_Attribute_classifier() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getInstanceSpecification_Attribute_slot() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getInstanceSpecification_Attribute_specification() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getInstanceSpecification_Attribute_classifier() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getInstanceSpecification_Attribute_slot() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getInstanceSpecification_Attribute_specification() const = 0;
 			
-			virtual std::shared_ptr<ecore::EOperation> getInstanceSpecification_Operation_defining_feature_EDiagnosticChain_EMap() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getInstanceSpecification_Operation_deployment_artifact_EDiagnosticChain_EMap() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getInstanceSpecification_Operation_deployment_target_EDiagnosticChain_EMap() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getInstanceSpecification_Operation_structural_feature_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getInstanceSpecification_Operation_defining_feature_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getInstanceSpecification_Operation_deployment_artifact_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getInstanceSpecification_Operation_deployment_target_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getInstanceSpecification_Operation_structural_feature_EDiagnosticChain_EMap() const = 0;
 			
 			// End Class InstanceSpecification
 
@@ -3343,10 +3343,10 @@ namespace uml
 			
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getInstanceValue_Class() const = 0;
+			virtual const std::shared_ptr<ecore::EClass>& getInstanceValue_Class() const = 0;
 			
 			
-			virtual std::shared_ptr<ecore::EReference> getInstanceValue_Attribute_instance() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getInstanceValue_Attribute_instance() const = 0;
 			
 			
 			// End Class InstanceValue
@@ -3367,16 +3367,16 @@ namespace uml
 			static const unsigned int INTERACTION_OPERATION_NOT_CONTAINED_EDIAGNOSTICCHAIN_EMAP = 3628466367;
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getInteraction_Class() const = 0;
+			virtual const std::shared_ptr<ecore::EClass>& getInteraction_Class() const = 0;
 			
 			
-			virtual std::shared_ptr<ecore::EReference> getInteraction_Attribute_action() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getInteraction_Attribute_formalGate() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getInteraction_Attribute_fragment() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getInteraction_Attribute_lifeline() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getInteraction_Attribute_message() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getInteraction_Attribute_action() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getInteraction_Attribute_formalGate() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getInteraction_Attribute_fragment() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getInteraction_Attribute_lifeline() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getInteraction_Attribute_message() const = 0;
 			
-			virtual std::shared_ptr<ecore::EOperation> getInteraction_Operation_not_contained_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getInteraction_Operation_not_contained_EDiagnosticChain_EMap() const = 0;
 			
 			// End Class Interaction
 
@@ -3398,18 +3398,18 @@ namespace uml
 			static const unsigned int INTERACTIONCONSTRAINT_OPERATION_MININT_NON_NEGATIVE_EDIAGNOSTICCHAIN_EMAP = 2482574670;
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getInteractionConstraint_Class() const = 0;
+			virtual const std::shared_ptr<ecore::EClass>& getInteractionConstraint_Class() const = 0;
 			
 			
-			virtual std::shared_ptr<ecore::EReference> getInteractionConstraint_Attribute_maxint() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getInteractionConstraint_Attribute_minint() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getInteractionConstraint_Attribute_maxint() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getInteractionConstraint_Attribute_minint() const = 0;
 			
-			virtual std::shared_ptr<ecore::EOperation> getInteractionConstraint_Operation_dynamic_variables_EDiagnosticChain_EMap() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getInteractionConstraint_Operation_global_data_EDiagnosticChain_EMap() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getInteractionConstraint_Operation_maxint_greater_equal_minint_EDiagnosticChain_EMap() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getInteractionConstraint_Operation_maxint_positive_EDiagnosticChain_EMap() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getInteractionConstraint_Operation_minint_maxint_EDiagnosticChain_EMap() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getInteractionConstraint_Operation_minint_non_negative_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getInteractionConstraint_Operation_dynamic_variables_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getInteractionConstraint_Operation_global_data_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getInteractionConstraint_Operation_maxint_greater_equal_minint_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getInteractionConstraint_Operation_maxint_positive_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getInteractionConstraint_Operation_minint_maxint_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getInteractionConstraint_Operation_minint_non_negative_EDiagnosticChain_EMap() const = 0;
 			
 			// End Class InteractionConstraint
 
@@ -3427,13 +3427,13 @@ namespace uml
 			
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getInteractionFragment_Class() const = 0;
+			virtual const std::shared_ptr<ecore::EClass>& getInteractionFragment_Class() const = 0;
 			
 			
-			virtual std::shared_ptr<ecore::EReference> getInteractionFragment_Attribute_covered() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getInteractionFragment_Attribute_enclosingInteraction() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getInteractionFragment_Attribute_enclosingOperand() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getInteractionFragment_Attribute_generalOrdering() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getInteractionFragment_Attribute_covered() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getInteractionFragment_Attribute_enclosingInteraction() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getInteractionFragment_Attribute_enclosingOperand() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getInteractionFragment_Attribute_generalOrdering() const = 0;
 			
 			
 			// End Class InteractionFragment
@@ -3452,14 +3452,14 @@ namespace uml
 			static const unsigned int INTERACTIONOPERAND_OPERATION_GUARD_DIRECTLY_PRIOR_EDIAGNOSTICCHAIN_EMAP = 3795687392;
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getInteractionOperand_Class() const = 0;
+			virtual const std::shared_ptr<ecore::EClass>& getInteractionOperand_Class() const = 0;
 			
 			
-			virtual std::shared_ptr<ecore::EReference> getInteractionOperand_Attribute_fragment() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getInteractionOperand_Attribute_guard() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getInteractionOperand_Attribute_fragment() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getInteractionOperand_Attribute_guard() const = 0;
 			
-			virtual std::shared_ptr<ecore::EOperation> getInteractionOperand_Operation_guard_contain_references_EDiagnosticChain_EMap() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getInteractionOperand_Operation_guard_directly_prior_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getInteractionOperand_Operation_guard_contain_references_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getInteractionOperand_Operation_guard_directly_prior_EDiagnosticChain_EMap() const = 0;
 			
 			// End Class InteractionOperand
 
@@ -3484,21 +3484,21 @@ namespace uml
 			static const unsigned int INTERACTIONUSE_OPERATION_RETURNVALUE_TYPE_RECIPIENT_CORRESPONDENCE_EDIAGNOSTICCHAIN_EMAP = 31244600;
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getInteractionUse_Class() const = 0;
+			virtual const std::shared_ptr<ecore::EClass>& getInteractionUse_Class() const = 0;
 			
 			
-			virtual std::shared_ptr<ecore::EReference> getInteractionUse_Attribute_actualGate() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getInteractionUse_Attribute_argument() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getInteractionUse_Attribute_refersTo() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getInteractionUse_Attribute_returnValue() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getInteractionUse_Attribute_returnValueRecipient() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getInteractionUse_Attribute_actualGate() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getInteractionUse_Attribute_argument() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getInteractionUse_Attribute_refersTo() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getInteractionUse_Attribute_returnValue() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getInteractionUse_Attribute_returnValueRecipient() const = 0;
 			
-			virtual std::shared_ptr<ecore::EOperation> getInteractionUse_Operation_all_lifelines_EDiagnosticChain_EMap() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getInteractionUse_Operation_arguments_are_constants_EDiagnosticChain_EMap() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getInteractionUse_Operation_arguments_correspond_to_parameters_EDiagnosticChain_EMap() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getInteractionUse_Operation_gates_match_EDiagnosticChain_EMap() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getInteractionUse_Operation_returnValueRecipient_coverage_EDiagnosticChain_EMap() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getInteractionUse_Operation_returnValue_type_recipient_correspondence_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getInteractionUse_Operation_all_lifelines_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getInteractionUse_Operation_arguments_are_constants_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getInteractionUse_Operation_arguments_correspond_to_parameters_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getInteractionUse_Operation_gates_match_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getInteractionUse_Operation_returnValueRecipient_coverage_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getInteractionUse_Operation_returnValue_type_recipient_correspondence_EDiagnosticChain_EMap() const = 0;
 			
 			// End Class InteractionUse
 
@@ -3521,19 +3521,19 @@ namespace uml
 			static const unsigned int INTERFACE_OPERATION_VISIBILITY_EDIAGNOSTICCHAIN_EMAP = 3380332971;
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getInterface_Class() const = 0;
+			virtual const std::shared_ptr<ecore::EClass>& getInterface_Class() const = 0;
 			
 			
-			virtual std::shared_ptr<ecore::EReference> getInterface_Attribute_nestedClassifier() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getInterface_Attribute_ownedAttribute() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getInterface_Attribute_ownedOperation() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getInterface_Attribute_ownedReception() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getInterface_Attribute_protocol() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getInterface_Attribute_redefinedInterface() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getInterface_Attribute_nestedClassifier() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getInterface_Attribute_ownedAttribute() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getInterface_Attribute_ownedOperation() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getInterface_Attribute_ownedReception() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getInterface_Attribute_protocol() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getInterface_Attribute_redefinedInterface() const = 0;
 			
-			virtual std::shared_ptr<ecore::EOperation> getInterface_Operation_createOwnedAttribute_String_UnlimitedNatural() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getInterface_Operation_createOwnedOperation_String_Type() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getInterface_Operation_visibility_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getInterface_Operation_createOwnedAttribute_String_UnlimitedNatural() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getInterface_Operation_createOwnedOperation_String_Type() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getInterface_Operation_visibility_EDiagnosticChain_EMap() const = 0;
 			
 			// End Class Interface
 
@@ -3549,11 +3549,11 @@ namespace uml
 			
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getInterfaceRealization_Class() const = 0;
+			virtual const std::shared_ptr<ecore::EClass>& getInterfaceRealization_Class() const = 0;
 			
 			
-			virtual std::shared_ptr<ecore::EReference> getInterfaceRealization_Attribute_contract() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getInterfaceRealization_Attribute_implementingClassifier() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getInterfaceRealization_Attribute_contract() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getInterfaceRealization_Attribute_implementingClassifier() const = 0;
 			
 			
 			// End Class InterfaceRealization
@@ -3571,13 +3571,13 @@ namespace uml
 			static const unsigned int INTERRUPTIBLEACTIVITYREGION_OPERATION_INTERRUPTING_EDGES_EDIAGNOSTICCHAIN_EMAP = 358373842;
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getInterruptibleActivityRegion_Class() const = 0;
+			virtual const std::shared_ptr<ecore::EClass>& getInterruptibleActivityRegion_Class() const = 0;
 			
 			
-			virtual std::shared_ptr<ecore::EReference> getInterruptibleActivityRegion_Attribute_interruptingEdge() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getInterruptibleActivityRegion_Attribute_node() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getInterruptibleActivityRegion_Attribute_interruptingEdge() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getInterruptibleActivityRegion_Attribute_node() const = 0;
 			
-			virtual std::shared_ptr<ecore::EOperation> getInterruptibleActivityRegion_Operation_interrupting_edges_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getInterruptibleActivityRegion_Operation_interrupting_edges_EDiagnosticChain_EMap() const = 0;
 			
 			// End Class InterruptibleActivityRegion
 
@@ -3593,11 +3593,11 @@ namespace uml
 			
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getInterval_Class() const = 0;
+			virtual const std::shared_ptr<ecore::EClass>& getInterval_Class() const = 0;
 			
 			
-			virtual std::shared_ptr<ecore::EReference> getInterval_Attribute_max() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getInterval_Attribute_min() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getInterval_Attribute_max() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getInterval_Attribute_min() const = 0;
 			
 			
 			// End Class Interval
@@ -3612,7 +3612,7 @@ namespace uml
 			
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getIntervalConstraint_Class() const = 0;
+			virtual const std::shared_ptr<ecore::EClass>& getIntervalConstraint_Class() const = 0;
 			
 			
 			
@@ -3631,11 +3631,11 @@ namespace uml
 			
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getInvocationAction_Class() const = 0;
+			virtual const std::shared_ptr<ecore::EClass>& getInvocationAction_Class() const = 0;
 			
 			
-			virtual std::shared_ptr<ecore::EReference> getInvocationAction_Attribute_argument() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getInvocationAction_Attribute_onPort() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getInvocationAction_Attribute_argument() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getInvocationAction_Attribute_onPort() const = 0;
 			
 			
 			// End Class InvocationAction
@@ -3654,14 +3654,14 @@ namespace uml
 			static const unsigned int JOINNODE_OPERATION_ONE_OUTGOING_EDGE_EDIAGNOSTICCHAIN_EMAP = 2181464453;
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getJoinNode_Class() const = 0;
+			virtual const std::shared_ptr<ecore::EClass>& getJoinNode_Class() const = 0;
 			
-			virtual std::shared_ptr<ecore::EAttribute> getJoinNode_Attribute_isCombineDuplicate() const = 0;
+			virtual const std::shared_ptr<ecore::EAttribute>& getJoinNode_Attribute_isCombineDuplicate() const = 0;
 			
-			virtual std::shared_ptr<ecore::EReference> getJoinNode_Attribute_joinSpec() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getJoinNode_Attribute_joinSpec() const = 0;
 			
-			virtual std::shared_ptr<ecore::EOperation> getJoinNode_Operation_incoming_object_flow_EDiagnosticChain_EMap() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getJoinNode_Operation_one_outgoing_edge_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getJoinNode_Operation_incoming_object_flow_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getJoinNode_Operation_one_outgoing_edge_EDiagnosticChain_EMap() const = 0;
 			
 			// End Class JoinNode
 
@@ -3684,19 +3684,19 @@ namespace uml
 			static const unsigned int LIFELINE_OPERATION_SELECTOR_SPECIFIED_EDIAGNOSTICCHAIN_EMAP = 288066678;
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getLifeline_Class() const = 0;
+			virtual const std::shared_ptr<ecore::EClass>& getLifeline_Class() const = 0;
 			
 			
-			virtual std::shared_ptr<ecore::EReference> getLifeline_Attribute_coveredBy() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getLifeline_Attribute_decomposedAs() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getLifeline_Attribute_interaction() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getLifeline_Attribute_represents() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getLifeline_Attribute_selector() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getLifeline_Attribute_coveredBy() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getLifeline_Attribute_decomposedAs() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getLifeline_Attribute_interaction() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getLifeline_Attribute_represents() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getLifeline_Attribute_selector() const = 0;
 			
-			virtual std::shared_ptr<ecore::EOperation> getLifeline_Operation_interaction_uses_share_lifeline_EDiagnosticChain_EMap() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getLifeline_Operation_same_classifier_EDiagnosticChain_EMap() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getLifeline_Operation_selector_int_or_string_EDiagnosticChain_EMap() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getLifeline_Operation_selector_specified_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getLifeline_Operation_interaction_uses_share_lifeline_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getLifeline_Operation_same_classifier_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getLifeline_Operation_selector_int_or_string_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getLifeline_Operation_selector_specified_EDiagnosticChain_EMap() const = 0;
 			
 			// End Class Lifeline
 
@@ -3716,16 +3716,16 @@ namespace uml
 			static const unsigned int LINKACTION_OPERATION_SAME_PINS_EDIAGNOSTICCHAIN_EMAP = 3042884065;
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getLinkAction_Class() const = 0;
+			virtual const std::shared_ptr<ecore::EClass>& getLinkAction_Class() const = 0;
 			
 			
-			virtual std::shared_ptr<ecore::EReference> getLinkAction_Attribute_endData() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getLinkAction_Attribute_inputValue() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getLinkAction_Attribute_endData() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getLinkAction_Attribute_inputValue() const = 0;
 			
-			virtual std::shared_ptr<ecore::EOperation> getLinkAction_Operation_association() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getLinkAction_Operation_not_static_EDiagnosticChain_EMap() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getLinkAction_Operation_same_association_EDiagnosticChain_EMap() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getLinkAction_Operation_same_pins_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getLinkAction_Operation_association() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getLinkAction_Operation_not_static_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getLinkAction_Operation_same_association_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getLinkAction_Operation_same_pins_EDiagnosticChain_EMap() const = 0;
 			
 			// End Class LinkAction
 
@@ -3742,13 +3742,13 @@ namespace uml
 			static const unsigned int LINKENDCREATIONDATA_OPERATION_INSERTAT_PIN_EDIAGNOSTICCHAIN_EMAP = 1790704694;
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getLinkEndCreationData_Class() const = 0;
+			virtual const std::shared_ptr<ecore::EClass>& getLinkEndCreationData_Class() const = 0;
 			
-			virtual std::shared_ptr<ecore::EAttribute> getLinkEndCreationData_Attribute_isReplaceAll() const = 0;
+			virtual const std::shared_ptr<ecore::EAttribute>& getLinkEndCreationData_Attribute_isReplaceAll() const = 0;
 			
-			virtual std::shared_ptr<ecore::EReference> getLinkEndCreationData_Attribute_insertAt() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getLinkEndCreationData_Attribute_insertAt() const = 0;
 			
-			virtual std::shared_ptr<ecore::EOperation> getLinkEndCreationData_Operation_insertAt_pin_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getLinkEndCreationData_Operation_insertAt_pin_EDiagnosticChain_EMap() const = 0;
 			
 			// End Class LinkEndCreationData
 
@@ -3771,19 +3771,19 @@ namespace uml
 			static const unsigned int LINKENDDATA_OPERATION_SAME_TYPE_EDIAGNOSTICCHAIN_EMAP = 2876739916;
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getLinkEndData_Class() const = 0;
+			virtual const std::shared_ptr<ecore::EClass>& getLinkEndData_Class() const = 0;
 			
 			
-			virtual std::shared_ptr<ecore::EReference> getLinkEndData_Attribute_end() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getLinkEndData_Attribute_qualifier() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getLinkEndData_Attribute_value() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getLinkEndData_Attribute_end() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getLinkEndData_Attribute_qualifier() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getLinkEndData_Attribute_value() const = 0;
 			
-			virtual std::shared_ptr<ecore::EOperation> getLinkEndData_Operation_allPins() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getLinkEndData_Operation_end_object_input_pin_EDiagnosticChain_EMap() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getLinkEndData_Operation_multiplicity_EDiagnosticChain_EMap() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getLinkEndData_Operation_property_is_association_end_EDiagnosticChain_EMap() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getLinkEndData_Operation_qualifiers_EDiagnosticChain_EMap() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getLinkEndData_Operation_same_type_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getLinkEndData_Operation_allPins() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getLinkEndData_Operation_end_object_input_pin_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getLinkEndData_Operation_multiplicity_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getLinkEndData_Operation_property_is_association_end_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getLinkEndData_Operation_qualifiers_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getLinkEndData_Operation_same_type_EDiagnosticChain_EMap() const = 0;
 			
 			// End Class LinkEndData
 
@@ -3800,13 +3800,13 @@ namespace uml
 			static const unsigned int LINKENDDESTRUCTIONDATA_OPERATION_DESTROYAT_PIN_EDIAGNOSTICCHAIN_EMAP = 1453837690;
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getLinkEndDestructionData_Class() const = 0;
+			virtual const std::shared_ptr<ecore::EClass>& getLinkEndDestructionData_Class() const = 0;
 			
-			virtual std::shared_ptr<ecore::EAttribute> getLinkEndDestructionData_Attribute_isDestroyDuplicates() const = 0;
+			virtual const std::shared_ptr<ecore::EAttribute>& getLinkEndDestructionData_Attribute_isDestroyDuplicates() const = 0;
 			
-			virtual std::shared_ptr<ecore::EReference> getLinkEndDestructionData_Attribute_destroyAt() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getLinkEndDestructionData_Attribute_destroyAt() const = 0;
 			
-			virtual std::shared_ptr<ecore::EOperation> getLinkEndDestructionData_Operation_destroyAt_pin_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getLinkEndDestructionData_Operation_destroyAt_pin_EDiagnosticChain_EMap() const = 0;
 			
 			// End Class LinkEndDestructionData
 
@@ -3823,13 +3823,13 @@ namespace uml
 			static const unsigned int LITERALBOOLEAN_OPERATION_ISCOMPUTABLE = 243741030;
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getLiteralBoolean_Class() const = 0;
+			virtual const std::shared_ptr<ecore::EClass>& getLiteralBoolean_Class() const = 0;
 			
-			virtual std::shared_ptr<ecore::EAttribute> getLiteralBoolean_Attribute_value() const = 0;
+			virtual const std::shared_ptr<ecore::EAttribute>& getLiteralBoolean_Attribute_value() const = 0;
 			
 			
-			virtual std::shared_ptr<ecore::EOperation> getLiteralBoolean_Operation_booleanValue() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getLiteralBoolean_Operation_isComputable() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getLiteralBoolean_Operation_booleanValue() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getLiteralBoolean_Operation_isComputable() const = 0;
 			
 			// End Class LiteralBoolean
 
@@ -3846,13 +3846,13 @@ namespace uml
 			static const unsigned int LITERALINTEGER_OPERATION_ISCOMPUTABLE = 780783796;
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getLiteralInteger_Class() const = 0;
+			virtual const std::shared_ptr<ecore::EClass>& getLiteralInteger_Class() const = 0;
 			
-			virtual std::shared_ptr<ecore::EAttribute> getLiteralInteger_Attribute_value() const = 0;
+			virtual const std::shared_ptr<ecore::EAttribute>& getLiteralInteger_Attribute_value() const = 0;
 			
 			
-			virtual std::shared_ptr<ecore::EOperation> getLiteralInteger_Operation_integerValue() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getLiteralInteger_Operation_isComputable() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getLiteralInteger_Operation_integerValue() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getLiteralInteger_Operation_isComputable() const = 0;
 			
 			// End Class LiteralInteger
 
@@ -3868,12 +3868,12 @@ namespace uml
 			static const unsigned int LITERALNULL_OPERATION_ISNULL = 1191978620;
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getLiteralNull_Class() const = 0;
+			virtual const std::shared_ptr<ecore::EClass>& getLiteralNull_Class() const = 0;
 			
 			
 			
-			virtual std::shared_ptr<ecore::EOperation> getLiteralNull_Operation_isComputable() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getLiteralNull_Operation_isNull() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getLiteralNull_Operation_isComputable() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getLiteralNull_Operation_isNull() const = 0;
 			
 			// End Class LiteralNull
 
@@ -3890,13 +3890,13 @@ namespace uml
 			static const unsigned int LITERALREAL_OPERATION_REALVALUE = 1756286746;
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getLiteralReal_Class() const = 0;
+			virtual const std::shared_ptr<ecore::EClass>& getLiteralReal_Class() const = 0;
 			
-			virtual std::shared_ptr<ecore::EAttribute> getLiteralReal_Attribute_value() const = 0;
+			virtual const std::shared_ptr<ecore::EAttribute>& getLiteralReal_Attribute_value() const = 0;
 			
 			
-			virtual std::shared_ptr<ecore::EOperation> getLiteralReal_Operation_isComputable() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getLiteralReal_Operation_realValue() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getLiteralReal_Operation_isComputable() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getLiteralReal_Operation_realValue() const = 0;
 			
 			// End Class LiteralReal
 
@@ -3910,7 +3910,7 @@ namespace uml
 			
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getLiteralSpecification_Class() const = 0;
+			virtual const std::shared_ptr<ecore::EClass>& getLiteralSpecification_Class() const = 0;
 			
 			
 			
@@ -3930,13 +3930,13 @@ namespace uml
 			static const unsigned int LITERALSTRING_OPERATION_STRINGVALUE = 3894136783;
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getLiteralString_Class() const = 0;
+			virtual const std::shared_ptr<ecore::EClass>& getLiteralString_Class() const = 0;
 			
-			virtual std::shared_ptr<ecore::EAttribute> getLiteralString_Attribute_value() const = 0;
+			virtual const std::shared_ptr<ecore::EAttribute>& getLiteralString_Attribute_value() const = 0;
 			
 			
-			virtual std::shared_ptr<ecore::EOperation> getLiteralString_Operation_isComputable() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getLiteralString_Operation_stringValue() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getLiteralString_Operation_isComputable() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getLiteralString_Operation_stringValue() const = 0;
 			
 			// End Class LiteralString
 
@@ -3953,13 +3953,13 @@ namespace uml
 			static const unsigned int LITERALUNLIMITEDNATURAL_OPERATION_UNLIMITEDVALUE = 2738594635;
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getLiteralUnlimitedNatural_Class() const = 0;
+			virtual const std::shared_ptr<ecore::EClass>& getLiteralUnlimitedNatural_Class() const = 0;
 			
-			virtual std::shared_ptr<ecore::EAttribute> getLiteralUnlimitedNatural_Attribute_value() const = 0;
+			virtual const std::shared_ptr<ecore::EAttribute>& getLiteralUnlimitedNatural_Attribute_value() const = 0;
 			
 			
-			virtual std::shared_ptr<ecore::EOperation> getLiteralUnlimitedNatural_Operation_isComputable() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getLiteralUnlimitedNatural_Operation_unlimitedValue() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getLiteralUnlimitedNatural_Operation_isComputable() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getLiteralUnlimitedNatural_Operation_unlimitedValue() const = 0;
 			
 			// End Class LiteralUnlimitedNatural
 
@@ -3991,28 +3991,28 @@ namespace uml
 			static const unsigned int LOOPNODE_OPERATION_SETUP_TEST_AND_BODY_EDIAGNOSTICCHAIN_EMAP = 4028967581;
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getLoopNode_Class() const = 0;
+			virtual const std::shared_ptr<ecore::EClass>& getLoopNode_Class() const = 0;
 			
-			virtual std::shared_ptr<ecore::EAttribute> getLoopNode_Attribute_isTestedFirst() const = 0;
+			virtual const std::shared_ptr<ecore::EAttribute>& getLoopNode_Attribute_isTestedFirst() const = 0;
 			
-			virtual std::shared_ptr<ecore::EReference> getLoopNode_Attribute_bodyOutput() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getLoopNode_Attribute_bodyPart() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getLoopNode_Attribute_decider() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getLoopNode_Attribute_loopVariable() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getLoopNode_Attribute_loopVariableInput() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getLoopNode_Attribute_result() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getLoopNode_Attribute_setupPart() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getLoopNode_Attribute_test() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getLoopNode_Attribute_bodyOutput() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getLoopNode_Attribute_bodyPart() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getLoopNode_Attribute_decider() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getLoopNode_Attribute_loopVariable() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getLoopNode_Attribute_loopVariableInput() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getLoopNode_Attribute_result() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getLoopNode_Attribute_setupPart() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getLoopNode_Attribute_test() const = 0;
 			
-			virtual std::shared_ptr<ecore::EOperation> getLoopNode_Operation_body_output_pins_EDiagnosticChain_EMap() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getLoopNode_Operation_executable_nodes_EDiagnosticChain_EMap() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getLoopNode_Operation_input_edges_EDiagnosticChain_EMap() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getLoopNode_Operation_loop_variable_outgoing_EDiagnosticChain_EMap() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getLoopNode_Operation_matching_loop_variables_EDiagnosticChain_EMap() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getLoopNode_Operation_matching_output_pins_EDiagnosticChain_EMap() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getLoopNode_Operation_matching_result_pins_EDiagnosticChain_EMap() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getLoopNode_Operation_result_no_incoming_EDiagnosticChain_EMap() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getLoopNode_Operation_setup_test_and_body_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getLoopNode_Operation_body_output_pins_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getLoopNode_Operation_executable_nodes_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getLoopNode_Operation_input_edges_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getLoopNode_Operation_loop_variable_outgoing_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getLoopNode_Operation_matching_loop_variables_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getLoopNode_Operation_matching_output_pins_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getLoopNode_Operation_matching_result_pins_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getLoopNode_Operation_result_no_incoming_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getLoopNode_Operation_setup_test_and_body_EDiagnosticChain_EMap() const = 0;
 			
 			// End Class LoopNode
 
@@ -4027,10 +4027,10 @@ namespace uml
 			
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getManifestation_Class() const = 0;
+			virtual const std::shared_ptr<ecore::EClass>& getManifestation_Class() const = 0;
 			
 			
-			virtual std::shared_ptr<ecore::EReference> getManifestation_Attribute_utilizedElement() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getManifestation_Attribute_utilizedElement() const = 0;
 			
 			
 			// End Class Manifestation
@@ -4047,12 +4047,12 @@ namespace uml
 			static const unsigned int MERGENODE_OPERATION_ONE_OUTGOING_EDGE_EDIAGNOSTICCHAIN_EMAP = 4174907869;
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getMergeNode_Class() const = 0;
+			virtual const std::shared_ptr<ecore::EClass>& getMergeNode_Class() const = 0;
 			
 			
 			
-			virtual std::shared_ptr<ecore::EOperation> getMergeNode_Operation_edges_EDiagnosticChain_EMap() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getMergeNode_Operation_one_outgoing_edge_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getMergeNode_Operation_edges_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getMergeNode_Operation_one_outgoing_edge_EDiagnosticChain_EMap() const = 0;
 			
 			// End Class MergeNode
 
@@ -4083,27 +4083,27 @@ namespace uml
 			static const unsigned int MESSAGE_OPERATION_SIGNATURE_REFER_TO_EDIAGNOSTICCHAIN_EMAP = 2916908006;
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getMessage_Class() const = 0;
+			virtual const std::shared_ptr<ecore::EClass>& getMessage_Class() const = 0;
 			
-			virtual std::shared_ptr<ecore::EAttribute> getMessage_Attribute_messageKind() const = 0;
-			virtual std::shared_ptr<ecore::EAttribute> getMessage_Attribute_messageSort() const = 0;
+			virtual const std::shared_ptr<ecore::EAttribute>& getMessage_Attribute_messageKind() const = 0;
+			virtual const std::shared_ptr<ecore::EAttribute>& getMessage_Attribute_messageSort() const = 0;
 			
-			virtual std::shared_ptr<ecore::EReference> getMessage_Attribute_argument() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getMessage_Attribute_connector() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getMessage_Attribute_interaction() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getMessage_Attribute_receiveEvent() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getMessage_Attribute_sendEvent() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getMessage_Attribute_signature() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getMessage_Attribute_argument() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getMessage_Attribute_connector() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getMessage_Attribute_interaction() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getMessage_Attribute_receiveEvent() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getMessage_Attribute_sendEvent() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getMessage_Attribute_signature() const = 0;
 			
-			virtual std::shared_ptr<ecore::EOperation> getMessage_Operation_arguments_EDiagnosticChain_EMap() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getMessage_Operation_cannot_cross_boundaries_EDiagnosticChain_EMap() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getMessage_Operation_getMessageKind() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getMessage_Operation_occurrence_specifications_EDiagnosticChain_EMap() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getMessage_Operation_sending_receiving_message_event_EDiagnosticChain_EMap() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getMessage_Operation_signature_is_operation_reply_EDiagnosticChain_EMap() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getMessage_Operation_signature_is_operation_request_EDiagnosticChain_EMap() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getMessage_Operation_signature_is_signal_EDiagnosticChain_EMap() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getMessage_Operation_signature_refer_to_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getMessage_Operation_arguments_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getMessage_Operation_cannot_cross_boundaries_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getMessage_Operation_getMessageKind() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getMessage_Operation_occurrence_specifications_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getMessage_Operation_sending_receiving_message_event_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getMessage_Operation_signature_is_operation_reply_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getMessage_Operation_signature_is_operation_request_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getMessage_Operation_signature_is_signal_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getMessage_Operation_signature_refer_to_EDiagnosticChain_EMap() const = 0;
 			
 			// End Class Message
 
@@ -4122,15 +4122,15 @@ namespace uml
 			static const unsigned int MESSAGEEND_OPERATION_OPPOSITEEND = 2418148191;
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getMessageEnd_Class() const = 0;
+			virtual const std::shared_ptr<ecore::EClass>& getMessageEnd_Class() const = 0;
 			
 			
-			virtual std::shared_ptr<ecore::EReference> getMessageEnd_Attribute_message() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getMessageEnd_Attribute_message() const = 0;
 			
-			virtual std::shared_ptr<ecore::EOperation> getMessageEnd_Operation_enclosingFragment() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getMessageEnd_Operation_isReceive() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getMessageEnd_Operation_isSend() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getMessageEnd_Operation_oppositeEnd() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getMessageEnd_Operation_enclosingFragment() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getMessageEnd_Operation_isReceive() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getMessageEnd_Operation_isSend() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getMessageEnd_Operation_oppositeEnd() const = 0;
 			
 			// End Class MessageEnd
 
@@ -4144,7 +4144,7 @@ namespace uml
 			
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getMessageEvent_Class() const = 0;
+			virtual const std::shared_ptr<ecore::EClass>& getMessageEvent_Class() const = 0;
 			
 			
 			
@@ -4161,7 +4161,7 @@ namespace uml
 			
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getMessageOccurrenceSpecification_Class() const = 0;
+			virtual const std::shared_ptr<ecore::EClass>& getMessageOccurrenceSpecification_Class() const = 0;
 			
 			
 			
@@ -4180,12 +4180,12 @@ namespace uml
 			static const unsigned int MODEL_OPERATION_ISMETAMODEL = 1662104762;
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getModel_Class() const = 0;
+			virtual const std::shared_ptr<ecore::EClass>& getModel_Class() const = 0;
 			
-			virtual std::shared_ptr<ecore::EAttribute> getModel_Attribute_viewpoint() const = 0;
+			virtual const std::shared_ptr<ecore::EAttribute>& getModel_Attribute_viewpoint() const = 0;
 			
 			
-			virtual std::shared_ptr<ecore::EOperation> getModel_Operation_isMetamodel() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getModel_Operation_isMetamodel() const = 0;
 			
 			// End Class Model
 
@@ -4217,28 +4217,28 @@ namespace uml
 			static const unsigned int MULTIPLICITYELEMENT_OPERATION_VALUE_SPECIFICATION_NO_SIDE_EFFECTS_EDIAGNOSTICCHAIN_EMAP = 3115291509;
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getMultiplicityElement_Class() const = 0;
+			virtual const std::shared_ptr<ecore::EClass>& getMultiplicityElement_Class() const = 0;
 			
-			virtual std::shared_ptr<ecore::EAttribute> getMultiplicityElement_Attribute_isOrdered() const = 0;
-			virtual std::shared_ptr<ecore::EAttribute> getMultiplicityElement_Attribute_isUnique() const = 0;
-			virtual std::shared_ptr<ecore::EAttribute> getMultiplicityElement_Attribute_lower() const = 0;
-			virtual std::shared_ptr<ecore::EAttribute> getMultiplicityElement_Attribute_upper() const = 0;
+			virtual const std::shared_ptr<ecore::EAttribute>& getMultiplicityElement_Attribute_isOrdered() const = 0;
+			virtual const std::shared_ptr<ecore::EAttribute>& getMultiplicityElement_Attribute_isUnique() const = 0;
+			virtual const std::shared_ptr<ecore::EAttribute>& getMultiplicityElement_Attribute_lower() const = 0;
+			virtual const std::shared_ptr<ecore::EAttribute>& getMultiplicityElement_Attribute_upper() const = 0;
 			
-			virtual std::shared_ptr<ecore::EReference> getMultiplicityElement_Attribute_lowerValue() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getMultiplicityElement_Attribute_upperValue() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getMultiplicityElement_Attribute_lowerValue() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getMultiplicityElement_Attribute_upperValue() const = 0;
 			
-			virtual std::shared_ptr<ecore::EOperation> getMultiplicityElement_Operation_compatibleWith_MultiplicityElement() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getMultiplicityElement_Operation_includesMultiplicity_MultiplicityElement() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getMultiplicityElement_Operation_is_Integer_UnlimitedNatural() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getMultiplicityElement_Operation_isMultivalued() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getMultiplicityElement_Operation_lowerBound() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getMultiplicityElement_Operation_lower_ge_0_EDiagnosticChain_EMap() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getMultiplicityElement_Operation_lower_is_integer_EDiagnosticChain_EMap() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getMultiplicityElement_Operation_upperBound() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getMultiplicityElement_Operation_upper_ge_lower_EDiagnosticChain_EMap() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getMultiplicityElement_Operation_upper_is_unlimitedNatural_EDiagnosticChain_EMap() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getMultiplicityElement_Operation_value_specification_constant_EDiagnosticChain_EMap() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getMultiplicityElement_Operation_value_specification_no_side_effects_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getMultiplicityElement_Operation_compatibleWith_MultiplicityElement() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getMultiplicityElement_Operation_includesMultiplicity_MultiplicityElement() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getMultiplicityElement_Operation_is_Integer_UnlimitedNatural() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getMultiplicityElement_Operation_isMultivalued() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getMultiplicityElement_Operation_lowerBound() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getMultiplicityElement_Operation_lower_ge_0_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getMultiplicityElement_Operation_lower_is_integer_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getMultiplicityElement_Operation_upperBound() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getMultiplicityElement_Operation_upper_ge_lower_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getMultiplicityElement_Operation_upper_is_unlimitedNatural_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getMultiplicityElement_Operation_value_specification_constant_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getMultiplicityElement_Operation_value_specification_no_side_effects_EDiagnosticChain_EMap() const = 0;
 			
 			// End Class MultiplicityElement
 
@@ -4272,30 +4272,30 @@ namespace uml
 			static const unsigned int NAMEDELEMENT_OPERATION_VISIBILITY_NEEDS_OWNERSHIP_EDIAGNOSTICCHAIN_EMAP = 3453868149;
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getNamedElement_Class() const = 0;
+			virtual const std::shared_ptr<ecore::EClass>& getNamedElement_Class() const = 0;
 			
-			virtual std::shared_ptr<ecore::EAttribute> getNamedElement_Attribute_name() const = 0;
-			virtual std::shared_ptr<ecore::EAttribute> getNamedElement_Attribute_qualifiedName() const = 0;
-			virtual std::shared_ptr<ecore::EAttribute> getNamedElement_Attribute_visibility() const = 0;
+			virtual const std::shared_ptr<ecore::EAttribute>& getNamedElement_Attribute_name() const = 0;
+			virtual const std::shared_ptr<ecore::EAttribute>& getNamedElement_Attribute_qualifiedName() const = 0;
+			virtual const std::shared_ptr<ecore::EAttribute>& getNamedElement_Attribute_visibility() const = 0;
 			
-			virtual std::shared_ptr<ecore::EReference> getNamedElement_Attribute_clientDependency() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getNamedElement_Attribute_nameExpression() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getNamedElement_Attribute_namespace() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getNamedElement_Attribute_clientDependency() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getNamedElement_Attribute_nameExpression() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getNamedElement_Attribute_namespace() const = 0;
 			
-			virtual std::shared_ptr<ecore::EOperation> getNamedElement_Operation_allNamespaces() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getNamedElement_Operation_allOwningPackages() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getNamedElement_Operation_createDependency_NamedElement() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getNamedElement_Operation_createUsage_NamedElement() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getNamedElement_Operation_getClientDependencies() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getNamedElement_Operation_getLabel() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getNamedElement_Operation_getLabel_Boolean() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getNamedElement_Operation_getNamespace() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getNamedElement_Operation_getQualifiedName() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getNamedElement_Operation_has_no_qualified_name_EDiagnosticChain_EMap() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getNamedElement_Operation_has_qualified_name_EDiagnosticChain_EMap() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getNamedElement_Operation_isDistinguishableFrom_NamedElement_Namespace() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getNamedElement_Operation_separator() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getNamedElement_Operation_visibility_needs_ownership_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getNamedElement_Operation_allNamespaces() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getNamedElement_Operation_allOwningPackages() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getNamedElement_Operation_createDependency_NamedElement() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getNamedElement_Operation_createUsage_NamedElement() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getNamedElement_Operation_getClientDependencies() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getNamedElement_Operation_getLabel() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getNamedElement_Operation_getLabel_Boolean() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getNamedElement_Operation_getNamespace() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getNamedElement_Operation_getQualifiedName() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getNamedElement_Operation_has_no_qualified_name_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getNamedElement_Operation_has_qualified_name_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getNamedElement_Operation_isDistinguishableFrom_NamedElement_Namespace() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getNamedElement_Operation_separator() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getNamedElement_Operation_visibility_needs_ownership_EDiagnosticChain_EMap() const = 0;
 			
 			// End Class NamedElement
 
@@ -4328,29 +4328,29 @@ namespace uml
 			static const unsigned int NAMESPACE_OPERATION_MEMBERS_DISTINGUISHABLE_EDIAGNOSTICCHAIN_EMAP = 1065132056;
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getNamespace_Class() const = 0;
+			virtual const std::shared_ptr<ecore::EClass>& getNamespace_Class() const = 0;
 			
 			
-			virtual std::shared_ptr<ecore::EReference> getNamespace_Attribute_elementImport() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getNamespace_Attribute_importedMember() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getNamespace_Attribute_member() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getNamespace_Attribute_ownedMember() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getNamespace_Attribute_ownedRule() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getNamespace_Attribute_packageImport() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getNamespace_Attribute_elementImport() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getNamespace_Attribute_importedMember() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getNamespace_Attribute_member() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getNamespace_Attribute_ownedMember() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getNamespace_Attribute_ownedRule() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getNamespace_Attribute_packageImport() const = 0;
 			
-			virtual std::shared_ptr<ecore::EOperation> getNamespace_Operation_cannot_import_ownedMembers_EDiagnosticChain_EMap() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getNamespace_Operation_cannot_import_self_EDiagnosticChain_EMap() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getNamespace_Operation_createElementImport_PackageableElement_VisibilityKind() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getNamespace_Operation_createPackageImport_Package_VisibilityKind() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getNamespace_Operation_excludeCollisions_PackageableElement() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getNamespace_Operation_getImportedElements() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getNamespace_Operation_getImportedMembers() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getNamespace_Operation_getImportedPackages() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getNamespace_Operation_getNamesOfMember_NamedElement() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getNamespace_Operation_getOwnedMembers() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getNamespace_Operation_importMembers_PackageableElement() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getNamespace_Operation_membersAreDistinguishable() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getNamespace_Operation_members_distinguishable_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getNamespace_Operation_cannot_import_ownedMembers_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getNamespace_Operation_cannot_import_self_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getNamespace_Operation_createElementImport_PackageableElement_VisibilityKind() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getNamespace_Operation_createPackageImport_Package_VisibilityKind() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getNamespace_Operation_excludeCollisions_PackageableElement() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getNamespace_Operation_getImportedElements() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getNamespace_Operation_getImportedMembers() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getNamespace_Operation_getImportedPackages() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getNamespace_Operation_getNamesOfMember_NamedElement() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getNamespace_Operation_getOwnedMembers() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getNamespace_Operation_importMembers_PackageableElement() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getNamespace_Operation_membersAreDistinguishable() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getNamespace_Operation_members_distinguishable_EDiagnosticChain_EMap() const = 0;
 			
 			// End Class Namespace
 
@@ -4368,14 +4368,14 @@ namespace uml
 			static const unsigned int NODE_OPERATION_INTERNAL_STRUCTURE_EDIAGNOSTICCHAIN_EMAP = 1965611485;
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getNode_Class() const = 0;
+			virtual const std::shared_ptr<ecore::EClass>& getNode_Class() const = 0;
 			
 			
-			virtual std::shared_ptr<ecore::EReference> getNode_Attribute_nestedNode() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getNode_Attribute_nestedNode() const = 0;
 			
-			virtual std::shared_ptr<ecore::EOperation> getNode_Operation_createCommunicationPath_Boolean_UnlimitedNatural() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getNode_Operation_getCommunicationPaths() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getNode_Operation_internal_structure_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getNode_Operation_createCommunicationPath_Boolean_UnlimitedNatural() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getNode_Operation_getCommunicationPaths() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getNode_Operation_internal_structure_EDiagnosticChain_EMap() const = 0;
 			
 			// End Class Node
 
@@ -4393,14 +4393,14 @@ namespace uml
 			static const unsigned int OBJECT_OPERATION_UNSET_PROPERTY = 2421215512;
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getObject_Class() const = 0;
+			virtual const std::shared_ptr<ecore::EClass>& getObject_Class() const = 0;
 			
 			
 			
-			virtual std::shared_ptr<ecore::EOperation> getObject_Operation_get_Property() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getObject_Operation_invoke_Operation_Argument() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getObject_Operation_set_Property_EJavaObject() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getObject_Operation_unset_Property() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getObject_Operation_get_Property() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getObject_Operation_invoke_Operation_Argument() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getObject_Operation_set_Property_EJavaObject() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getObject_Operation_unset_Property() const = 0;
 			
 			// End Class Object
 
@@ -4426,22 +4426,22 @@ namespace uml
 			static const unsigned int OBJECTFLOW_OPERATION_TRANSFORMATION_BEHAVIOR_EDIAGNOSTICCHAIN_EMAP = 3901325479;
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getObjectFlow_Class() const = 0;
+			virtual const std::shared_ptr<ecore::EClass>& getObjectFlow_Class() const = 0;
 			
-			virtual std::shared_ptr<ecore::EAttribute> getObjectFlow_Attribute_isMulticast() const = 0;
-			virtual std::shared_ptr<ecore::EAttribute> getObjectFlow_Attribute_isMultireceive() const = 0;
+			virtual const std::shared_ptr<ecore::EAttribute>& getObjectFlow_Attribute_isMulticast() const = 0;
+			virtual const std::shared_ptr<ecore::EAttribute>& getObjectFlow_Attribute_isMultireceive() const = 0;
 			
-			virtual std::shared_ptr<ecore::EReference> getObjectFlow_Attribute_selection() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getObjectFlow_Attribute_transformation() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getObjectFlow_Attribute_selection() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getObjectFlow_Attribute_transformation() const = 0;
 			
-			virtual std::shared_ptr<ecore::EOperation> getObjectFlow_Operation_compatible_types_EDiagnosticChain_EMap() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getObjectFlow_Operation_input_and_output_parameter_EDiagnosticChain_EMap() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getObjectFlow_Operation_is_multicast_or_is_multireceive_EDiagnosticChain_EMap() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getObjectFlow_Operation_no_executable_nodes_EDiagnosticChain_EMap() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getObjectFlow_Operation_same_upper_bounds_EDiagnosticChain_EMap() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getObjectFlow_Operation_selection_behavior_EDiagnosticChain_EMap() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getObjectFlow_Operation_target_EDiagnosticChain_EMap() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getObjectFlow_Operation_transformation_behavior_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getObjectFlow_Operation_compatible_types_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getObjectFlow_Operation_input_and_output_parameter_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getObjectFlow_Operation_is_multicast_or_is_multireceive_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getObjectFlow_Operation_no_executable_nodes_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getObjectFlow_Operation_same_upper_bounds_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getObjectFlow_Operation_selection_behavior_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getObjectFlow_Operation_target_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getObjectFlow_Operation_transformation_behavior_EDiagnosticChain_EMap() const = 0;
 			
 			// End Class ObjectFlow
 
@@ -4463,18 +4463,18 @@ namespace uml
 			static const unsigned int OBJECTNODE_OPERATION_SELECTION_BEHAVIOR_EDIAGNOSTICCHAIN_EMAP = 3463618476;
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getObjectNode_Class() const = 0;
+			virtual const std::shared_ptr<ecore::EClass>& getObjectNode_Class() const = 0;
 			
-			virtual std::shared_ptr<ecore::EAttribute> getObjectNode_Attribute_isControlType() const = 0;
-			virtual std::shared_ptr<ecore::EAttribute> getObjectNode_Attribute_ordering() const = 0;
+			virtual const std::shared_ptr<ecore::EAttribute>& getObjectNode_Attribute_isControlType() const = 0;
+			virtual const std::shared_ptr<ecore::EAttribute>& getObjectNode_Attribute_ordering() const = 0;
 			
-			virtual std::shared_ptr<ecore::EReference> getObjectNode_Attribute_inState() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getObjectNode_Attribute_selection() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getObjectNode_Attribute_upperBound() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getObjectNode_Attribute_inState() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getObjectNode_Attribute_selection() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getObjectNode_Attribute_upperBound() const = 0;
 			
-			virtual std::shared_ptr<ecore::EOperation> getObjectNode_Operation_input_output_parameter_EDiagnosticChain_EMap() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getObjectNode_Operation_object_flow_edges_EDiagnosticChain_EMap() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getObjectNode_Operation_selection_behavior_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getObjectNode_Operation_input_output_parameter_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getObjectNode_Operation_object_flow_edges_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getObjectNode_Operation_selection_behavior_EDiagnosticChain_EMap() const = 0;
 			
 			// End Class ObjectNode
 
@@ -4488,7 +4488,7 @@ namespace uml
 			
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getObservation_Class() const = 0;
+			virtual const std::shared_ptr<ecore::EClass>& getObservation_Class() const = 0;
 			
 			
 			
@@ -4509,14 +4509,14 @@ namespace uml
 			static const unsigned int OCCURRENCESPECIFICATION_OPERATION_SETCOVERED_LIFELINE = 3135951751;
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getOccurrenceSpecification_Class() const = 0;
+			virtual const std::shared_ptr<ecore::EClass>& getOccurrenceSpecification_Class() const = 0;
 			
 			
-			virtual std::shared_ptr<ecore::EReference> getOccurrenceSpecification_Attribute_toAfter() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getOccurrenceSpecification_Attribute_toBefore() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getOccurrenceSpecification_Attribute_toAfter() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getOccurrenceSpecification_Attribute_toBefore() const = 0;
 			
-			virtual std::shared_ptr<ecore::EOperation> getOccurrenceSpecification_Operation_getCovered() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getOccurrenceSpecification_Operation_setCovered_Lifeline() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getOccurrenceSpecification_Operation_getCovered() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getOccurrenceSpecification_Operation_setCovered_Lifeline() const = 0;
 			
 			// End Class OccurrenceSpecification
 
@@ -4535,15 +4535,15 @@ namespace uml
 			static const unsigned int OPAQUEACTION_OPERATION_LANGUAGE_BODY_SIZE_EDIAGNOSTICCHAIN_EMAP = 2776050946;
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getOpaqueAction_Class() const = 0;
+			virtual const std::shared_ptr<ecore::EClass>& getOpaqueAction_Class() const = 0;
 			
-			virtual std::shared_ptr<ecore::EAttribute> getOpaqueAction_Attribute_body() const = 0;
-			virtual std::shared_ptr<ecore::EAttribute> getOpaqueAction_Attribute_language() const = 0;
+			virtual const std::shared_ptr<ecore::EAttribute>& getOpaqueAction_Attribute_body() const = 0;
+			virtual const std::shared_ptr<ecore::EAttribute>& getOpaqueAction_Attribute_language() const = 0;
 			
-			virtual std::shared_ptr<ecore::EReference> getOpaqueAction_Attribute_inputValue() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getOpaqueAction_Attribute_outputValue() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getOpaqueAction_Attribute_inputValue() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getOpaqueAction_Attribute_outputValue() const = 0;
 			
-			virtual std::shared_ptr<ecore::EOperation> getOpaqueAction_Operation_language_body_size_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getOpaqueAction_Operation_language_body_size_EDiagnosticChain_EMap() const = 0;
 			
 			// End Class OpaqueAction
 
@@ -4559,10 +4559,10 @@ namespace uml
 			
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getOpaqueBehavior_Class() const = 0;
+			virtual const std::shared_ptr<ecore::EClass>& getOpaqueBehavior_Class() const = 0;
 			
-			virtual std::shared_ptr<ecore::EAttribute> getOpaqueBehavior_Attribute_body() const = 0;
-			virtual std::shared_ptr<ecore::EAttribute> getOpaqueBehavior_Attribute_language() const = 0;
+			virtual const std::shared_ptr<ecore::EAttribute>& getOpaqueBehavior_Attribute_body() const = 0;
+			virtual const std::shared_ptr<ecore::EAttribute>& getOpaqueBehavior_Attribute_language() const = 0;
 			
 			
 			
@@ -4590,22 +4590,22 @@ namespace uml
 			static const unsigned int OPAQUEEXPRESSION_OPERATION_VALUE = 2181682856;
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getOpaqueExpression_Class() const = 0;
+			virtual const std::shared_ptr<ecore::EClass>& getOpaqueExpression_Class() const = 0;
 			
-			virtual std::shared_ptr<ecore::EAttribute> getOpaqueExpression_Attribute_body() const = 0;
-			virtual std::shared_ptr<ecore::EAttribute> getOpaqueExpression_Attribute_language() const = 0;
+			virtual const std::shared_ptr<ecore::EAttribute>& getOpaqueExpression_Attribute_body() const = 0;
+			virtual const std::shared_ptr<ecore::EAttribute>& getOpaqueExpression_Attribute_language() const = 0;
 			
-			virtual std::shared_ptr<ecore::EReference> getOpaqueExpression_Attribute_behavior() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getOpaqueExpression_Attribute_result() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getOpaqueExpression_Attribute_behavior() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getOpaqueExpression_Attribute_result() const = 0;
 			
-			virtual std::shared_ptr<ecore::EOperation> getOpaqueExpression_Operation_getResult() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getOpaqueExpression_Operation_isIntegral() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getOpaqueExpression_Operation_isNonNegative() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getOpaqueExpression_Operation_isPositive() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getOpaqueExpression_Operation_language_body_size_EDiagnosticChain_EMap() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getOpaqueExpression_Operation_one_return_result_parameter_EDiagnosticChain_EMap() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getOpaqueExpression_Operation_only_return_result_parameters_EDiagnosticChain_EMap() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getOpaqueExpression_Operation_value() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getOpaqueExpression_Operation_getResult() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getOpaqueExpression_Operation_isIntegral() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getOpaqueExpression_Operation_isNonNegative() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getOpaqueExpression_Operation_isPositive() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getOpaqueExpression_Operation_language_body_size_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getOpaqueExpression_Operation_one_return_result_parameter_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getOpaqueExpression_Operation_only_return_result_parameters_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getOpaqueExpression_Operation_value() const = 0;
 			
 			// End Class OpaqueExpression
 
@@ -4648,39 +4648,39 @@ namespace uml
 			static const unsigned int OPERATION_OPERATION_SETUPPER_UNLIMITEDNATURAL = 1811197491;
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getOperation_Class() const = 0;
+			virtual const std::shared_ptr<ecore::EClass>& getOperation_Class() const = 0;
 			
-			virtual std::shared_ptr<ecore::EAttribute> getOperation_Attribute_isOrdered() const = 0;
-			virtual std::shared_ptr<ecore::EAttribute> getOperation_Attribute_isQuery() const = 0;
-			virtual std::shared_ptr<ecore::EAttribute> getOperation_Attribute_isUnique() const = 0;
-			virtual std::shared_ptr<ecore::EAttribute> getOperation_Attribute_lower() const = 0;
-			virtual std::shared_ptr<ecore::EAttribute> getOperation_Attribute_upper() const = 0;
+			virtual const std::shared_ptr<ecore::EAttribute>& getOperation_Attribute_isOrdered() const = 0;
+			virtual const std::shared_ptr<ecore::EAttribute>& getOperation_Attribute_isQuery() const = 0;
+			virtual const std::shared_ptr<ecore::EAttribute>& getOperation_Attribute_isUnique() const = 0;
+			virtual const std::shared_ptr<ecore::EAttribute>& getOperation_Attribute_lower() const = 0;
+			virtual const std::shared_ptr<ecore::EAttribute>& getOperation_Attribute_upper() const = 0;
 			
-			virtual std::shared_ptr<ecore::EReference> getOperation_Attribute_bodyCondition() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getOperation_Attribute_class() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getOperation_Attribute_datatype() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getOperation_Attribute_interface() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getOperation_Attribute_ownedParameter() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getOperation_Attribute_postcondition() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getOperation_Attribute_precondition() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getOperation_Attribute_redefinedOperation() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getOperation_Attribute_type() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getOperation_Attribute_bodyCondition() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getOperation_Attribute_class() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getOperation_Attribute_datatype() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getOperation_Attribute_interface() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getOperation_Attribute_ownedParameter() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getOperation_Attribute_postcondition() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getOperation_Attribute_precondition() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getOperation_Attribute_redefinedOperation() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getOperation_Attribute_type() const = 0;
 			
-			virtual std::shared_ptr<ecore::EOperation> getOperation_Operation_at_most_one_return_EDiagnosticChain_EMap() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getOperation_Operation_getLower() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getOperation_Operation_getReturnResult() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getOperation_Operation_getType() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getOperation_Operation_getUpper() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getOperation_Operation_isOrdered() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getOperation_Operation_isUnique() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getOperation_Operation_matches_Operation() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getOperation_Operation_only_body_for_query_EDiagnosticChain_EMap() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getOperation_Operation_returnResult() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getOperation_Operation_setIsOrdered_Boolean() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getOperation_Operation_setIsUnique_Boolean() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getOperation_Operation_setLower_Integer() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getOperation_Operation_setType_Type() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getOperation_Operation_setUpper_UnlimitedNatural() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getOperation_Operation_at_most_one_return_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getOperation_Operation_getLower() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getOperation_Operation_getReturnResult() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getOperation_Operation_getType() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getOperation_Operation_getUpper() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getOperation_Operation_isOrdered() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getOperation_Operation_isUnique() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getOperation_Operation_matches_Operation() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getOperation_Operation_only_body_for_query_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getOperation_Operation_returnResult() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getOperation_Operation_setIsOrdered_Boolean() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getOperation_Operation_setIsUnique_Boolean() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getOperation_Operation_setLower_Integer() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getOperation_Operation_setType_Type() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getOperation_Operation_setUpper_UnlimitedNatural() const = 0;
 			
 			// End Class Operation
 
@@ -4695,11 +4695,11 @@ namespace uml
 			static const unsigned int OPERATIONTEMPLATEPARAMETER_OPERATION_MATCH_DEFAULT_SIGNATURE_EDIAGNOSTICCHAIN_EMAP = 932032210;
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getOperationTemplateParameter_Class() const = 0;
+			virtual const std::shared_ptr<ecore::EClass>& getOperationTemplateParameter_Class() const = 0;
 			
 			
 			
-			virtual std::shared_ptr<ecore::EOperation> getOperationTemplateParameter_Operation_match_default_signature_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getOperationTemplateParameter_Operation_match_default_signature_EDiagnosticChain_EMap() const = 0;
 			
 			// End Class OperationTemplateParameter
 
@@ -4722,19 +4722,19 @@ namespace uml
 			static const unsigned int OUTPUTPIN_OPERATION_INCOMING_EDGES_STRUCTURED_ONLY_EDIAGNOSTICCHAIN_EMAP = 3765713794;
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getOutputPin_Class() const = 0;
+			virtual const std::shared_ptr<ecore::EClass>& getOutputPin_Class() const = 0;
 			
 			
-			virtual std::shared_ptr<ecore::EReference> getOutputPin_Attribute_action() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getOutputPin_Attribute_callAction() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getOutputPin_Attribute_clearStructuralFeatureAction() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getOutputPin_Attribute_createObjectAction() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getOutputPin_Attribute_readSelfAction() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getOutputPin_Attribute_readStructuralFeatureAction() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getOutputPin_Attribute_valueSpecificationAction() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getOutputPin_Attribute_writeStructuralFeatureAction() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getOutputPin_Attribute_action() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getOutputPin_Attribute_callAction() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getOutputPin_Attribute_clearStructuralFeatureAction() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getOutputPin_Attribute_createObjectAction() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getOutputPin_Attribute_readSelfAction() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getOutputPin_Attribute_readStructuralFeatureAction() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getOutputPin_Attribute_valueSpecificationAction() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getOutputPin_Attribute_writeStructuralFeatureAction() const = 0;
 			
-			virtual std::shared_ptr<ecore::EOperation> getOutputPin_Operation_incoming_edges_structured_only_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getOutputPin_Operation_incoming_edges_structured_only_EDiagnosticChain_EMap() const = 0;
 			
 			// End Class OutputPin
 
@@ -4780,42 +4780,42 @@ namespace uml
 			static const unsigned int PACKAGE_OPERATION_VISIBLEMEMBERS = 3140448168;
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getPackage_Class() const = 0;
+			virtual const std::shared_ptr<ecore::EClass>& getPackage_Class() const = 0;
 			
-			virtual std::shared_ptr<ecore::EAttribute> getPackage_Attribute_uRI() const = 0;
+			virtual const std::shared_ptr<ecore::EAttribute>& getPackage_Attribute_uRI() const = 0;
 			
-			virtual std::shared_ptr<ecore::EReference> getPackage_Attribute_nestedPackage() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getPackage_Attribute_nestingPackage() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getPackage_Attribute_ownedStereotype() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getPackage_Attribute_ownedType() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getPackage_Attribute_packageMerge() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getPackage_Attribute_packagedElement() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getPackage_Attribute_profileApplication() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getPackage_Attribute_nestedPackage() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getPackage_Attribute_nestingPackage() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getPackage_Attribute_ownedStereotype() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getPackage_Attribute_ownedType() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getPackage_Attribute_packageMerge() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getPackage_Attribute_packagedElement() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getPackage_Attribute_profileApplication() const = 0;
 			
-			virtual std::shared_ptr<ecore::EOperation> getPackage_Operation_allApplicableStereotypes() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getPackage_Operation_applyProfile_Profile() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getPackage_Operation_containingProfile() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getPackage_Operation_createOwnedClass_String_Boolean() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getPackage_Operation_createOwnedEnumeration_String() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getPackage_Operation_createOwnedInterface_String() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getPackage_Operation_createOwnedPrimitiveType_String() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getPackage_Operation_createOwnedStereotype_String_Boolean() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getPackage_Operation_elements_public_or_private_EDiagnosticChain_EMap() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getPackage_Operation_getAllAppliedProfiles() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getPackage_Operation_getAllProfileApplications() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getPackage_Operation_getAppliedProfile_String() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getPackage_Operation_getAppliedProfile_String_Boolean() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getPackage_Operation_getAppliedProfiles() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getPackage_Operation_getNestedPackages() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getPackage_Operation_getOwnedStereotypes() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getPackage_Operation_getOwnedTypes() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getPackage_Operation_getProfileApplication_Profile() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getPackage_Operation_getProfileApplication_Profile_Boolean() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getPackage_Operation_isModelLibrary() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getPackage_Operation_isProfileApplied_Profile() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getPackage_Operation_makesVisible_NamedElement() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getPackage_Operation_unapplyProfile_Profile() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getPackage_Operation_visibleMembers() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getPackage_Operation_allApplicableStereotypes() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getPackage_Operation_applyProfile_Profile() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getPackage_Operation_containingProfile() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getPackage_Operation_createOwnedClass_String_Boolean() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getPackage_Operation_createOwnedEnumeration_String() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getPackage_Operation_createOwnedInterface_String() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getPackage_Operation_createOwnedPrimitiveType_String() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getPackage_Operation_createOwnedStereotype_String_Boolean() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getPackage_Operation_elements_public_or_private_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getPackage_Operation_getAllAppliedProfiles() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getPackage_Operation_getAllProfileApplications() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getPackage_Operation_getAppliedProfile_String() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getPackage_Operation_getAppliedProfile_String_Boolean() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getPackage_Operation_getAppliedProfiles() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getPackage_Operation_getNestedPackages() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getPackage_Operation_getOwnedStereotypes() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getPackage_Operation_getOwnedTypes() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getPackage_Operation_getProfileApplication_Profile() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getPackage_Operation_getProfileApplication_Profile_Boolean() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getPackage_Operation_isModelLibrary() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getPackage_Operation_isProfileApplied_Profile() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getPackage_Operation_makesVisible_NamedElement() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getPackage_Operation_unapplyProfile_Profile() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getPackage_Operation_visibleMembers() const = 0;
 			
 			// End Class Package
 
@@ -4833,14 +4833,14 @@ namespace uml
 			static const unsigned int PACKAGEIMPORT_OPERATION_PUBLIC_OR_PRIVATE_EDIAGNOSTICCHAIN_EMAP = 421704902;
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getPackageImport_Class() const = 0;
+			virtual const std::shared_ptr<ecore::EClass>& getPackageImport_Class() const = 0;
 			
-			virtual std::shared_ptr<ecore::EAttribute> getPackageImport_Attribute_visibility() const = 0;
+			virtual const std::shared_ptr<ecore::EAttribute>& getPackageImport_Attribute_visibility() const = 0;
 			
-			virtual std::shared_ptr<ecore::EReference> getPackageImport_Attribute_importedPackage() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getPackageImport_Attribute_importingNamespace() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getPackageImport_Attribute_importedPackage() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getPackageImport_Attribute_importingNamespace() const = 0;
 			
-			virtual std::shared_ptr<ecore::EOperation> getPackageImport_Operation_public_or_private_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getPackageImport_Operation_public_or_private_EDiagnosticChain_EMap() const = 0;
 			
 			// End Class PackageImport
 
@@ -4856,11 +4856,11 @@ namespace uml
 			
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getPackageMerge_Class() const = 0;
+			virtual const std::shared_ptr<ecore::EClass>& getPackageMerge_Class() const = 0;
 			
 			
-			virtual std::shared_ptr<ecore::EReference> getPackageMerge_Attribute_mergedPackage() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getPackageMerge_Attribute_receivingPackage() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getPackageMerge_Attribute_mergedPackage() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getPackageMerge_Attribute_receivingPackage() const = 0;
 			
 			
 			// End Class PackageMerge
@@ -4877,12 +4877,12 @@ namespace uml
 			static const unsigned int PACKAGEABLEELEMENT_OPERATION_NAMESPACE_NEEDS_VISIBILITY_EDIAGNOSTICCHAIN_EMAP = 369327334;
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getPackageableElement_Class() const = 0;
+			virtual const std::shared_ptr<ecore::EClass>& getPackageableElement_Class() const = 0;
 			
 			
-			virtual std::shared_ptr<ecore::EReference> getPackageableElement_Attribute_owningPackage() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getPackageableElement_Attribute_owningPackage() const = 0;
 			
-			virtual std::shared_ptr<ecore::EOperation> getPackageableElement_Operation_namespace_needs_visibility_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getPackageableElement_Operation_namespace_needs_visibility_EDiagnosticChain_EMap() const = 0;
 			
 			// End Class PackageableElement
 
@@ -4919,33 +4919,33 @@ namespace uml
 			static const unsigned int PARAMETER_OPERATION_UNSETDEFAULT = 190690520;
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getParameter_Class() const = 0;
+			virtual const std::shared_ptr<ecore::EClass>& getParameter_Class() const = 0;
 			
-			virtual std::shared_ptr<ecore::EAttribute> getParameter_Attribute_default() const = 0;
-			virtual std::shared_ptr<ecore::EAttribute> getParameter_Attribute_direction() const = 0;
-			virtual std::shared_ptr<ecore::EAttribute> getParameter_Attribute_effect() const = 0;
-			virtual std::shared_ptr<ecore::EAttribute> getParameter_Attribute_isException() const = 0;
-			virtual std::shared_ptr<ecore::EAttribute> getParameter_Attribute_isStream() const = 0;
+			virtual const std::shared_ptr<ecore::EAttribute>& getParameter_Attribute_default() const = 0;
+			virtual const std::shared_ptr<ecore::EAttribute>& getParameter_Attribute_direction() const = 0;
+			virtual const std::shared_ptr<ecore::EAttribute>& getParameter_Attribute_effect() const = 0;
+			virtual const std::shared_ptr<ecore::EAttribute>& getParameter_Attribute_isException() const = 0;
+			virtual const std::shared_ptr<ecore::EAttribute>& getParameter_Attribute_isStream() const = 0;
 			
-			virtual std::shared_ptr<ecore::EReference> getParameter_Attribute_behavior() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getParameter_Attribute_defaultValue() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getParameter_Attribute_operation() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getParameter_Attribute_parameterSet() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getParameter_Attribute_behavior() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getParameter_Attribute_defaultValue() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getParameter_Attribute_operation() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getParameter_Attribute_parameterSet() const = 0;
 			
-			virtual std::shared_ptr<ecore::EOperation> getParameter_Operation_connector_end_EDiagnosticChain_EMap() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getParameter_Operation_in_and_out_EDiagnosticChain_EMap() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getParameter_Operation_isSetDefault() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getParameter_Operation_not_exception_EDiagnosticChain_EMap() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getParameter_Operation_object_effect_EDiagnosticChain_EMap() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getParameter_Operation_reentrant_behaviors_EDiagnosticChain_EMap() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getParameter_Operation_setBooleanDefaultValue_Boolean() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getParameter_Operation_setIntegerDefaultValue_Integer() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getParameter_Operation_setNullDefaultValue() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getParameter_Operation_setRealDefaultValue_Real() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getParameter_Operation_setStringDefaultValue_String() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getParameter_Operation_setUnlimitedNaturalDefaultValue_UnlimitedNatural() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getParameter_Operation_stream_and_exception_EDiagnosticChain_EMap() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getParameter_Operation_unsetDefault() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getParameter_Operation_connector_end_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getParameter_Operation_in_and_out_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getParameter_Operation_isSetDefault() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getParameter_Operation_not_exception_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getParameter_Operation_object_effect_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getParameter_Operation_reentrant_behaviors_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getParameter_Operation_setBooleanDefaultValue_Boolean() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getParameter_Operation_setIntegerDefaultValue_Integer() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getParameter_Operation_setNullDefaultValue() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getParameter_Operation_setRealDefaultValue_Real() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getParameter_Operation_setStringDefaultValue_String() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getParameter_Operation_setUnlimitedNaturalDefaultValue_UnlimitedNatural() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getParameter_Operation_stream_and_exception_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getParameter_Operation_unsetDefault() const = 0;
 			
 			// End Class Parameter
 
@@ -4964,15 +4964,15 @@ namespace uml
 			static const unsigned int PARAMETERSET_OPERATION_TWO_PARAMETER_SETS_EDIAGNOSTICCHAIN_EMAP = 3479021643;
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getParameterSet_Class() const = 0;
+			virtual const std::shared_ptr<ecore::EClass>& getParameterSet_Class() const = 0;
 			
 			
-			virtual std::shared_ptr<ecore::EReference> getParameterSet_Attribute_condition() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getParameterSet_Attribute_parameter() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getParameterSet_Attribute_condition() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getParameterSet_Attribute_parameter() const = 0;
 			
-			virtual std::shared_ptr<ecore::EOperation> getParameterSet_Operation_input_EDiagnosticChain_EMap() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getParameterSet_Operation_same_parameterized_entity_EDiagnosticChain_EMap() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getParameterSet_Operation_two_parameter_sets_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getParameterSet_Operation_input_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getParameterSet_Operation_same_parameterized_entity_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getParameterSet_Operation_two_parameter_sets_EDiagnosticChain_EMap() const = 0;
 			
 			// End Class ParameterSet
 
@@ -4990,14 +4990,14 @@ namespace uml
 			static const unsigned int PARAMETERABLEELEMENT_OPERATION_ISTEMPLATEPARAMETER = 2453023377;
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getParameterableElement_Class() const = 0;
+			virtual const std::shared_ptr<ecore::EClass>& getParameterableElement_Class() const = 0;
 			
 			
-			virtual std::shared_ptr<ecore::EReference> getParameterableElement_Attribute_owningTemplateParameter() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getParameterableElement_Attribute_templateParameter() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getParameterableElement_Attribute_owningTemplateParameter() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getParameterableElement_Attribute_templateParameter() const = 0;
 			
-			virtual std::shared_ptr<ecore::EOperation> getParameterableElement_Operation_isCompatibleWith_ParameterableElement() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getParameterableElement_Operation_isTemplateParameter() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getParameterableElement_Operation_isCompatibleWith_ParameterableElement() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getParameterableElement_Operation_isTemplateParameter() const = 0;
 			
 			// End Class ParameterableElement
 
@@ -5014,13 +5014,13 @@ namespace uml
 			static const unsigned int PARTDECOMPOSITION_OPERATION_PARTS_OF_INTERNAL_STRUCTURES_EDIAGNOSTICCHAIN_EMAP = 4164163091;
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getPartDecomposition_Class() const = 0;
+			virtual const std::shared_ptr<ecore::EClass>& getPartDecomposition_Class() const = 0;
 			
 			
 			
-			virtual std::shared_ptr<ecore::EOperation> getPartDecomposition_Operation_assume_EDiagnosticChain_EMap() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getPartDecomposition_Operation_commutativity_of_decomposition_EDiagnosticChain_EMap() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getPartDecomposition_Operation_parts_of_internal_structures_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getPartDecomposition_Operation_assume_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getPartDecomposition_Operation_commutativity_of_decomposition_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getPartDecomposition_Operation_parts_of_internal_structures_EDiagnosticChain_EMap() const = 0;
 			
 			// End Class PartDecomposition
 
@@ -5037,13 +5037,13 @@ namespace uml
 			static const unsigned int PIN_OPERATION_NOT_UNIQUE_EDIAGNOSTICCHAIN_EMAP = 3758597056;
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getPin_Class() const = 0;
+			virtual const std::shared_ptr<ecore::EClass>& getPin_Class() const = 0;
 			
-			virtual std::shared_ptr<ecore::EAttribute> getPin_Attribute_isControl() const = 0;
+			virtual const std::shared_ptr<ecore::EAttribute>& getPin_Attribute_isControl() const = 0;
 			
 			
-			virtual std::shared_ptr<ecore::EOperation> getPin_Operation_control_pins_EDiagnosticChain_EMap() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getPin_Operation_not_unique_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getPin_Operation_control_pins_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getPin_Operation_not_unique_EDiagnosticChain_EMap() const = 0;
 			
 			// End Class Pin
 
@@ -5071,24 +5071,24 @@ namespace uml
 			static const unsigned int PORT_OPERATION_PORT_AGGREGATION_EDIAGNOSTICCHAIN_EMAP = 1332067907;
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getPort_Class() const = 0;
+			virtual const std::shared_ptr<ecore::EClass>& getPort_Class() const = 0;
 			
-			virtual std::shared_ptr<ecore::EAttribute> getPort_Attribute_isBehavior() const = 0;
-			virtual std::shared_ptr<ecore::EAttribute> getPort_Attribute_isConjugated() const = 0;
-			virtual std::shared_ptr<ecore::EAttribute> getPort_Attribute_isService() const = 0;
+			virtual const std::shared_ptr<ecore::EAttribute>& getPort_Attribute_isBehavior() const = 0;
+			virtual const std::shared_ptr<ecore::EAttribute>& getPort_Attribute_isConjugated() const = 0;
+			virtual const std::shared_ptr<ecore::EAttribute>& getPort_Attribute_isService() const = 0;
 			
-			virtual std::shared_ptr<ecore::EReference> getPort_Attribute_protocol() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getPort_Attribute_provided() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getPort_Attribute_redefinedPort() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getPort_Attribute_required() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getPort_Attribute_protocol() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getPort_Attribute_provided() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getPort_Attribute_redefinedPort() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getPort_Attribute_required() const = 0;
 			
-			virtual std::shared_ptr<ecore::EOperation> getPort_Operation_basicProvided() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getPort_Operation_basicRequired() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getPort_Operation_default_value_EDiagnosticChain_EMap() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getPort_Operation_encapsulated_owner_EDiagnosticChain_EMap() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getPort_Operation_getProvideds() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getPort_Operation_getRequireds() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getPort_Operation_port_aggregation_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getPort_Operation_basicProvided() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getPort_Operation_basicRequired() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getPort_Operation_default_value_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getPort_Operation_encapsulated_owner_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getPort_Operation_getProvideds() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getPort_Operation_getRequireds() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getPort_Operation_port_aggregation_EDiagnosticChain_EMap() const = 0;
 			
 			// End Class Port
 
@@ -5102,7 +5102,7 @@ namespace uml
 			
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getPrimitiveType_Class() const = 0;
+			virtual const std::shared_ptr<ecore::EClass>& getPrimitiveType_Class() const = 0;
 			
 			
 			
@@ -5132,23 +5132,23 @@ namespace uml
 			static const unsigned int PROFILE_OPERATION_REFERENCES_SAME_METAMODEL_EDIAGNOSTICCHAIN_EMAP = 2161741941;
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getProfile_Class() const = 0;
+			virtual const std::shared_ptr<ecore::EClass>& getProfile_Class() const = 0;
 			
 			
-			virtual std::shared_ptr<ecore::EReference> getProfile_Attribute_metaclassReference() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getProfile_Attribute_metamodelReference() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getProfile_Attribute_metaclassReference() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getProfile_Attribute_metamodelReference() const = 0;
 			
-			virtual std::shared_ptr<ecore::EOperation> getProfile_Operation_create_Classifier() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getProfile_Operation_define() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getProfile_Operation_define_EMap_EMap() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getProfile_Operation_getDefinition() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getProfile_Operation_getDefinition_NamedElement() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getProfile_Operation_getOwnedExtensions_Boolean() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getProfile_Operation_getReferencedMetaclasses() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getProfile_Operation_getReferencedMetamodels() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getProfile_Operation_isDefined() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getProfile_Operation_metaclass_reference_not_specialized_EDiagnosticChain_EMap() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getProfile_Operation_references_same_metamodel_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getProfile_Operation_create_Classifier() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getProfile_Operation_define() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getProfile_Operation_define_EMap_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getProfile_Operation_getDefinition() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getProfile_Operation_getDefinition_NamedElement() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getProfile_Operation_getOwnedExtensions_Boolean() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getProfile_Operation_getReferencedMetaclasses() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getProfile_Operation_getReferencedMetamodels() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getProfile_Operation_isDefined() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getProfile_Operation_metaclass_reference_not_specialized_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getProfile_Operation_references_same_metamodel_EDiagnosticChain_EMap() const = 0;
 			
 			// End Class Profile
 
@@ -5167,15 +5167,15 @@ namespace uml
 			static const unsigned int PROFILEAPPLICATION_OPERATION_GETAPPLIEDDEFINITION_NAMEDELEMENT = 1076549117;
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getProfileApplication_Class() const = 0;
+			virtual const std::shared_ptr<ecore::EClass>& getProfileApplication_Class() const = 0;
 			
-			virtual std::shared_ptr<ecore::EAttribute> getProfileApplication_Attribute_isStrict() const = 0;
+			virtual const std::shared_ptr<ecore::EAttribute>& getProfileApplication_Attribute_isStrict() const = 0;
 			
-			virtual std::shared_ptr<ecore::EReference> getProfileApplication_Attribute_appliedProfile() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getProfileApplication_Attribute_applyingPackage() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getProfileApplication_Attribute_appliedProfile() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getProfileApplication_Attribute_applyingPackage() const = 0;
 			
-			virtual std::shared_ptr<ecore::EOperation> getProfileApplication_Operation_getAppliedDefinition() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getProfileApplication_Operation_getAppliedDefinition_NamedElement() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getProfileApplication_Operation_getAppliedDefinition() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getProfileApplication_Operation_getAppliedDefinition_NamedElement() const = 0;
 			
 			// End Class ProfileApplication
 
@@ -5232,53 +5232,53 @@ namespace uml
 			static const unsigned int PROPERTY_OPERATION_UNSETDEFAULT = 1637600012;
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getProperty_Class() const = 0;
+			virtual const std::shared_ptr<ecore::EClass>& getProperty_Class() const = 0;
 			
-			virtual std::shared_ptr<ecore::EAttribute> getProperty_Attribute_aggregation() const = 0;
-			virtual std::shared_ptr<ecore::EAttribute> getProperty_Attribute_default() const = 0;
-			virtual std::shared_ptr<ecore::EAttribute> getProperty_Attribute_isComposite() const = 0;
-			virtual std::shared_ptr<ecore::EAttribute> getProperty_Attribute_isDerived() const = 0;
-			virtual std::shared_ptr<ecore::EAttribute> getProperty_Attribute_isDerivedUnion() const = 0;
-			virtual std::shared_ptr<ecore::EAttribute> getProperty_Attribute_isID() const = 0;
+			virtual const std::shared_ptr<ecore::EAttribute>& getProperty_Attribute_aggregation() const = 0;
+			virtual const std::shared_ptr<ecore::EAttribute>& getProperty_Attribute_default() const = 0;
+			virtual const std::shared_ptr<ecore::EAttribute>& getProperty_Attribute_isComposite() const = 0;
+			virtual const std::shared_ptr<ecore::EAttribute>& getProperty_Attribute_isDerived() const = 0;
+			virtual const std::shared_ptr<ecore::EAttribute>& getProperty_Attribute_isDerivedUnion() const = 0;
+			virtual const std::shared_ptr<ecore::EAttribute>& getProperty_Attribute_isID() const = 0;
 			
-			virtual std::shared_ptr<ecore::EReference> getProperty_Attribute_association() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getProperty_Attribute_associationEnd() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getProperty_Attribute_class() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getProperty_Attribute_datatype() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getProperty_Attribute_defaultValue() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getProperty_Attribute_interface() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getProperty_Attribute_opposite() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getProperty_Attribute_owningAssociation() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getProperty_Attribute_qualifier() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getProperty_Attribute_redefinedProperty() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getProperty_Attribute_subsettedProperty() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getProperty_Attribute_association() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getProperty_Attribute_associationEnd() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getProperty_Attribute_class() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getProperty_Attribute_datatype() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getProperty_Attribute_defaultValue() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getProperty_Attribute_interface() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getProperty_Attribute_opposite() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getProperty_Attribute_owningAssociation() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getProperty_Attribute_qualifier() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getProperty_Attribute_redefinedProperty() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getProperty_Attribute_subsettedProperty() const = 0;
 			
-			virtual std::shared_ptr<ecore::EOperation> getProperty_Operation_binding_to_attribute_EDiagnosticChain_EMap() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getProperty_Operation_deployment_target_EDiagnosticChain_EMap() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getProperty_Operation_derived_union_is_derived_EDiagnosticChain_EMap() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getProperty_Operation_derived_union_is_read_only_EDiagnosticChain_EMap() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getProperty_Operation_getOpposite() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getProperty_Operation_getOtherEnd() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getProperty_Operation_isAttribute() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getProperty_Operation_isComposite() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getProperty_Operation_isNavigable() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getProperty_Operation_isSetDefault() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getProperty_Operation_multiplicity_of_composite_EDiagnosticChain_EMap() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getProperty_Operation_qualified_is_association_end_EDiagnosticChain_EMap() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getProperty_Operation_redefined_property_inherited_EDiagnosticChain_EMap() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getProperty_Operation_setBooleanDefaultValue_Boolean() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getProperty_Operation_setIntegerDefaultValue_Integer() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getProperty_Operation_setIsNavigable_Boolean() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getProperty_Operation_setNullDefaultValue() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getProperty_Operation_setRealDefaultValue_Real() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getProperty_Operation_setStringDefaultValue_String() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getProperty_Operation_setUnlimitedNaturalDefaultValue_UnlimitedNatural() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getProperty_Operation_subsetted_property_names_EDiagnosticChain_EMap() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getProperty_Operation_subsettingContext() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getProperty_Operation_subsetting_context_conforms_EDiagnosticChain_EMap() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getProperty_Operation_subsetting_rules_EDiagnosticChain_EMap() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getProperty_Operation_type_of_opposite_end_EDiagnosticChain_EMap() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getProperty_Operation_unsetDefault() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getProperty_Operation_binding_to_attribute_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getProperty_Operation_deployment_target_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getProperty_Operation_derived_union_is_derived_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getProperty_Operation_derived_union_is_read_only_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getProperty_Operation_getOpposite() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getProperty_Operation_getOtherEnd() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getProperty_Operation_isAttribute() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getProperty_Operation_isComposite() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getProperty_Operation_isNavigable() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getProperty_Operation_isSetDefault() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getProperty_Operation_multiplicity_of_composite_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getProperty_Operation_qualified_is_association_end_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getProperty_Operation_redefined_property_inherited_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getProperty_Operation_setBooleanDefaultValue_Boolean() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getProperty_Operation_setIntegerDefaultValue_Integer() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getProperty_Operation_setIsNavigable_Boolean() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getProperty_Operation_setNullDefaultValue() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getProperty_Operation_setRealDefaultValue_Real() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getProperty_Operation_setStringDefaultValue_String() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getProperty_Operation_setUnlimitedNaturalDefaultValue_UnlimitedNatural() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getProperty_Operation_subsetted_property_names_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getProperty_Operation_subsettingContext() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getProperty_Operation_subsetting_context_conforms_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getProperty_Operation_subsetting_rules_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getProperty_Operation_type_of_opposite_end_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getProperty_Operation_unsetDefault() const = 0;
 			
 			// End Class Property
 
@@ -5294,11 +5294,11 @@ namespace uml
 			
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getProtocolConformance_Class() const = 0;
+			virtual const std::shared_ptr<ecore::EClass>& getProtocolConformance_Class() const = 0;
 			
 			
-			virtual std::shared_ptr<ecore::EReference> getProtocolConformance_Attribute_generalMachine() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getProtocolConformance_Attribute_specificMachine() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getProtocolConformance_Attribute_generalMachine() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getProtocolConformance_Attribute_specificMachine() const = 0;
 			
 			
 			// End Class ProtocolConformance
@@ -5317,14 +5317,14 @@ namespace uml
 			static const unsigned int PROTOCOLSTATEMACHINE_OPERATION_PROTOCOL_TRANSITIONS_EDIAGNOSTICCHAIN_EMAP = 3134446549;
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getProtocolStateMachine_Class() const = 0;
+			virtual const std::shared_ptr<ecore::EClass>& getProtocolStateMachine_Class() const = 0;
 			
 			
-			virtual std::shared_ptr<ecore::EReference> getProtocolStateMachine_Attribute_conformance() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getProtocolStateMachine_Attribute_conformance() const = 0;
 			
-			virtual std::shared_ptr<ecore::EOperation> getProtocolStateMachine_Operation_deep_or_shallow_history_EDiagnosticChain_EMap() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getProtocolStateMachine_Operation_entry_exit_do_EDiagnosticChain_EMap() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getProtocolStateMachine_Operation_protocol_transitions_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getProtocolStateMachine_Operation_deep_or_shallow_history_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getProtocolStateMachine_Operation_entry_exit_do_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getProtocolStateMachine_Operation_protocol_transitions_EDiagnosticChain_EMap() const = 0;
 			
 			// End Class ProtocolStateMachine
 
@@ -5345,17 +5345,17 @@ namespace uml
 			static const unsigned int PROTOCOLTRANSITION_OPERATION_REFERS_TO_OPERATION_EDIAGNOSTICCHAIN_EMAP = 205735088;
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getProtocolTransition_Class() const = 0;
+			virtual const std::shared_ptr<ecore::EClass>& getProtocolTransition_Class() const = 0;
 			
 			
-			virtual std::shared_ptr<ecore::EReference> getProtocolTransition_Attribute_postCondition() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getProtocolTransition_Attribute_preCondition() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getProtocolTransition_Attribute_referred() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getProtocolTransition_Attribute_postCondition() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getProtocolTransition_Attribute_preCondition() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getProtocolTransition_Attribute_referred() const = 0;
 			
-			virtual std::shared_ptr<ecore::EOperation> getProtocolTransition_Operation_associated_actions_EDiagnosticChain_EMap() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getProtocolTransition_Operation_belongs_to_psm_EDiagnosticChain_EMap() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getProtocolTransition_Operation_getReferreds() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getProtocolTransition_Operation_refers_to_operation_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getProtocolTransition_Operation_associated_actions_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getProtocolTransition_Operation_belongs_to_psm_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getProtocolTransition_Operation_getReferreds() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getProtocolTransition_Operation_refers_to_operation_EDiagnosticChain_EMap() const = 0;
 			
 			// End Class ProtocolTransition
 
@@ -5381,22 +5381,22 @@ namespace uml
 			static const unsigned int PSEUDOSTATE_OPERATION_TRANSITIONS_OUTGOING_EDIAGNOSTICCHAIN_EMAP = 1228342264;
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getPseudostate_Class() const = 0;
+			virtual const std::shared_ptr<ecore::EClass>& getPseudostate_Class() const = 0;
 			
-			virtual std::shared_ptr<ecore::EAttribute> getPseudostate_Attribute_kind() const = 0;
+			virtual const std::shared_ptr<ecore::EAttribute>& getPseudostate_Attribute_kind() const = 0;
 			
-			virtual std::shared_ptr<ecore::EReference> getPseudostate_Attribute_state() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getPseudostate_Attribute_stateMachine() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getPseudostate_Attribute_state() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getPseudostate_Attribute_stateMachine() const = 0;
 			
-			virtual std::shared_ptr<ecore::EOperation> getPseudostate_Operation_choice_vertex_EDiagnosticChain_EMap() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getPseudostate_Operation_fork_vertex_EDiagnosticChain_EMap() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getPseudostate_Operation_history_vertices_EDiagnosticChain_EMap() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getPseudostate_Operation_initial_vertex_EDiagnosticChain_EMap() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getPseudostate_Operation_join_vertex_EDiagnosticChain_EMap() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getPseudostate_Operation_junction_vertex_EDiagnosticChain_EMap() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getPseudostate_Operation_outgoing_from_initial_EDiagnosticChain_EMap() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getPseudostate_Operation_transitions_incoming_EDiagnosticChain_EMap() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getPseudostate_Operation_transitions_outgoing_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getPseudostate_Operation_choice_vertex_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getPseudostate_Operation_fork_vertex_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getPseudostate_Operation_history_vertices_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getPseudostate_Operation_initial_vertex_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getPseudostate_Operation_join_vertex_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getPseudostate_Operation_junction_vertex_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getPseudostate_Operation_outgoing_from_initial_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getPseudostate_Operation_transitions_incoming_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getPseudostate_Operation_transitions_outgoing_EDiagnosticChain_EMap() const = 0;
 			
 			// End Class Pseudostate
 
@@ -5415,15 +5415,15 @@ namespace uml
 			static const unsigned int QUALIFIERVALUE_OPERATION_TYPE_OF_QUALIFIER_EDIAGNOSTICCHAIN_EMAP = 3071264124;
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getQualifierValue_Class() const = 0;
+			virtual const std::shared_ptr<ecore::EClass>& getQualifierValue_Class() const = 0;
 			
 			
-			virtual std::shared_ptr<ecore::EReference> getQualifierValue_Attribute_qualifier() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getQualifierValue_Attribute_value() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getQualifierValue_Attribute_qualifier() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getQualifierValue_Attribute_value() const = 0;
 			
-			virtual std::shared_ptr<ecore::EOperation> getQualifierValue_Operation_multiplicity_of_qualifier_EDiagnosticChain_EMap() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getQualifierValue_Operation_qualifier_attribute_EDiagnosticChain_EMap() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getQualifierValue_Operation_type_of_qualifier_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getQualifierValue_Operation_multiplicity_of_qualifier_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getQualifierValue_Operation_qualifier_attribute_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getQualifierValue_Operation_type_of_qualifier_EDiagnosticChain_EMap() const = 0;
 			
 			// End Class QualifierValue
 
@@ -5438,10 +5438,10 @@ namespace uml
 			
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getRaiseExceptionAction_Class() const = 0;
+			virtual const std::shared_ptr<ecore::EClass>& getRaiseExceptionAction_Class() const = 0;
 			
 			
-			virtual std::shared_ptr<ecore::EReference> getRaiseExceptionAction_Attribute_exception() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getRaiseExceptionAction_Attribute_exception() const = 0;
 			
 			
 			// End Class RaiseExceptionAction
@@ -5460,14 +5460,14 @@ namespace uml
 			static const unsigned int READEXTENTACTION_OPERATION_TYPE_IS_CLASSIFIER_EDIAGNOSTICCHAIN_EMAP = 3792071533;
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getReadExtentAction_Class() const = 0;
+			virtual const std::shared_ptr<ecore::EClass>& getReadExtentAction_Class() const = 0;
 			
 			
-			virtual std::shared_ptr<ecore::EReference> getReadExtentAction_Attribute_classifier() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getReadExtentAction_Attribute_result() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getReadExtentAction_Attribute_classifier() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getReadExtentAction_Attribute_result() const = 0;
 			
-			virtual std::shared_ptr<ecore::EOperation> getReadExtentAction_Operation_multiplicity_of_result_EDiagnosticChain_EMap() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getReadExtentAction_Operation_type_is_classifier_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getReadExtentAction_Operation_multiplicity_of_result_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getReadExtentAction_Operation_type_is_classifier_EDiagnosticChain_EMap() const = 0;
 			
 			// End Class ReadExtentAction
 
@@ -5489,18 +5489,18 @@ namespace uml
 			static const unsigned int READISCLASSIFIEDOBJECTACTION_OPERATION_NO_TYPE_EDIAGNOSTICCHAIN_EMAP = 3290549392;
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getReadIsClassifiedObjectAction_Class() const = 0;
+			virtual const std::shared_ptr<ecore::EClass>& getReadIsClassifiedObjectAction_Class() const = 0;
 			
-			virtual std::shared_ptr<ecore::EAttribute> getReadIsClassifiedObjectAction_Attribute_isDirect() const = 0;
+			virtual const std::shared_ptr<ecore::EAttribute>& getReadIsClassifiedObjectAction_Attribute_isDirect() const = 0;
 			
-			virtual std::shared_ptr<ecore::EReference> getReadIsClassifiedObjectAction_Attribute_classifier() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getReadIsClassifiedObjectAction_Attribute_object() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getReadIsClassifiedObjectAction_Attribute_result() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getReadIsClassifiedObjectAction_Attribute_classifier() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getReadIsClassifiedObjectAction_Attribute_object() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getReadIsClassifiedObjectAction_Attribute_result() const = 0;
 			
-			virtual std::shared_ptr<ecore::EOperation> getReadIsClassifiedObjectAction_Operation_boolean_result_EDiagnosticChain_EMap() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getReadIsClassifiedObjectAction_Operation_multiplicity_of_input_EDiagnosticChain_EMap() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getReadIsClassifiedObjectAction_Operation_multiplicity_of_output_EDiagnosticChain_EMap() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getReadIsClassifiedObjectAction_Operation_no_type_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getReadIsClassifiedObjectAction_Operation_boolean_result_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getReadIsClassifiedObjectAction_Operation_multiplicity_of_input_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getReadIsClassifiedObjectAction_Operation_multiplicity_of_output_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getReadIsClassifiedObjectAction_Operation_no_type_EDiagnosticChain_EMap() const = 0;
 			
 			// End Class ReadIsClassifiedObjectAction
 
@@ -5521,17 +5521,17 @@ namespace uml
 			static const unsigned int READLINKACTION_OPERATION_VISIBILITY_EDIAGNOSTICCHAIN_EMAP = 138000618;
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getReadLinkAction_Class() const = 0;
+			virtual const std::shared_ptr<ecore::EClass>& getReadLinkAction_Class() const = 0;
 			
 			
-			virtual std::shared_ptr<ecore::EReference> getReadLinkAction_Attribute_result() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getReadLinkAction_Attribute_result() const = 0;
 			
-			virtual std::shared_ptr<ecore::EOperation> getReadLinkAction_Operation_compatible_multiplicity_EDiagnosticChain_EMap() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getReadLinkAction_Operation_navigable_open_end_EDiagnosticChain_EMap() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getReadLinkAction_Operation_one_open_end_EDiagnosticChain_EMap() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getReadLinkAction_Operation_openEnd() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getReadLinkAction_Operation_type_and_ordering_EDiagnosticChain_EMap() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getReadLinkAction_Operation_visibility_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getReadLinkAction_Operation_compatible_multiplicity_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getReadLinkAction_Operation_navigable_open_end_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getReadLinkAction_Operation_one_open_end_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getReadLinkAction_Operation_openEnd() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getReadLinkAction_Operation_type_and_ordering_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getReadLinkAction_Operation_visibility_EDiagnosticChain_EMap() const = 0;
 			
 			// End Class ReadLinkAction
 
@@ -5555,20 +5555,20 @@ namespace uml
 			static const unsigned int READLINKOBJECTENDACTION_OPERATION_TYPE_OF_RESULT_EDIAGNOSTICCHAIN_EMAP = 3693693396;
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getReadLinkObjectEndAction_Class() const = 0;
+			virtual const std::shared_ptr<ecore::EClass>& getReadLinkObjectEndAction_Class() const = 0;
 			
 			
-			virtual std::shared_ptr<ecore::EReference> getReadLinkObjectEndAction_Attribute_end() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getReadLinkObjectEndAction_Attribute_object() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getReadLinkObjectEndAction_Attribute_result() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getReadLinkObjectEndAction_Attribute_end() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getReadLinkObjectEndAction_Attribute_object() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getReadLinkObjectEndAction_Attribute_result() const = 0;
 			
-			virtual std::shared_ptr<ecore::EOperation> getReadLinkObjectEndAction_Operation_association_of_association_EDiagnosticChain_EMap() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getReadLinkObjectEndAction_Operation_ends_of_association_EDiagnosticChain_EMap() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getReadLinkObjectEndAction_Operation_multiplicity_of_object_EDiagnosticChain_EMap() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getReadLinkObjectEndAction_Operation_multiplicity_of_result_EDiagnosticChain_EMap() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getReadLinkObjectEndAction_Operation_property_EDiagnosticChain_EMap() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getReadLinkObjectEndAction_Operation_type_of_object_EDiagnosticChain_EMap() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getReadLinkObjectEndAction_Operation_type_of_result_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getReadLinkObjectEndAction_Operation_association_of_association_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getReadLinkObjectEndAction_Operation_ends_of_association_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getReadLinkObjectEndAction_Operation_multiplicity_of_object_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getReadLinkObjectEndAction_Operation_multiplicity_of_result_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getReadLinkObjectEndAction_Operation_property_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getReadLinkObjectEndAction_Operation_type_of_object_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getReadLinkObjectEndAction_Operation_type_of_result_EDiagnosticChain_EMap() const = 0;
 			
 			// End Class ReadLinkObjectEndAction
 
@@ -5593,21 +5593,21 @@ namespace uml
 			static const unsigned int READLINKOBJECTENDQUALIFIERACTION_OPERATION_TYPE_OF_OBJECT_EDIAGNOSTICCHAIN_EMAP = 4054072362;
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getReadLinkObjectEndQualifierAction_Class() const = 0;
+			virtual const std::shared_ptr<ecore::EClass>& getReadLinkObjectEndQualifierAction_Class() const = 0;
 			
 			
-			virtual std::shared_ptr<ecore::EReference> getReadLinkObjectEndQualifierAction_Attribute_object() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getReadLinkObjectEndQualifierAction_Attribute_qualifier() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getReadLinkObjectEndQualifierAction_Attribute_result() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getReadLinkObjectEndQualifierAction_Attribute_object() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getReadLinkObjectEndQualifierAction_Attribute_qualifier() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getReadLinkObjectEndQualifierAction_Attribute_result() const = 0;
 			
-			virtual std::shared_ptr<ecore::EOperation> getReadLinkObjectEndQualifierAction_Operation_association_of_association_EDiagnosticChain_EMap() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getReadLinkObjectEndQualifierAction_Operation_ends_of_association_EDiagnosticChain_EMap() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getReadLinkObjectEndQualifierAction_Operation_multiplicity_of_object_EDiagnosticChain_EMap() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getReadLinkObjectEndQualifierAction_Operation_multiplicity_of_qualifier_EDiagnosticChain_EMap() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getReadLinkObjectEndQualifierAction_Operation_multiplicity_of_result_EDiagnosticChain_EMap() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getReadLinkObjectEndQualifierAction_Operation_qualifier_attribute_EDiagnosticChain_EMap() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getReadLinkObjectEndQualifierAction_Operation_same_type_EDiagnosticChain_EMap() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getReadLinkObjectEndQualifierAction_Operation_type_of_object_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getReadLinkObjectEndQualifierAction_Operation_association_of_association_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getReadLinkObjectEndQualifierAction_Operation_ends_of_association_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getReadLinkObjectEndQualifierAction_Operation_multiplicity_of_object_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getReadLinkObjectEndQualifierAction_Operation_multiplicity_of_qualifier_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getReadLinkObjectEndQualifierAction_Operation_multiplicity_of_result_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getReadLinkObjectEndQualifierAction_Operation_qualifier_attribute_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getReadLinkObjectEndQualifierAction_Operation_same_type_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getReadLinkObjectEndQualifierAction_Operation_type_of_object_EDiagnosticChain_EMap() const = 0;
 			
 			// End Class ReadLinkObjectEndQualifierAction
 
@@ -5626,15 +5626,15 @@ namespace uml
 			static const unsigned int READSELFACTION_OPERATION_TYPE_EDIAGNOSTICCHAIN_EMAP = 503695280;
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getReadSelfAction_Class() const = 0;
+			virtual const std::shared_ptr<ecore::EClass>& getReadSelfAction_Class() const = 0;
 			
 			
-			virtual std::shared_ptr<ecore::EReference> getReadSelfAction_Attribute_result() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getReadSelfAction_Attribute_result() const = 0;
 			
-			virtual std::shared_ptr<ecore::EOperation> getReadSelfAction_Operation_contained_EDiagnosticChain_EMap() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getReadSelfAction_Operation_multiplicity_EDiagnosticChain_EMap() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getReadSelfAction_Operation_not_static_EDiagnosticChain_EMap() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getReadSelfAction_Operation_type_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getReadSelfAction_Operation_contained_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getReadSelfAction_Operation_multiplicity_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getReadSelfAction_Operation_not_static_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getReadSelfAction_Operation_type_EDiagnosticChain_EMap() const = 0;
 			
 			// End Class ReadSelfAction
 
@@ -5650,12 +5650,12 @@ namespace uml
 			static const unsigned int READSTRUCTURALFEATUREACTION_OPERATION_TYPE_AND_ORDERING_EDIAGNOSTICCHAIN_EMAP = 368989742;
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getReadStructuralFeatureAction_Class() const = 0;
+			virtual const std::shared_ptr<ecore::EClass>& getReadStructuralFeatureAction_Class() const = 0;
 			
 			
-			virtual std::shared_ptr<ecore::EReference> getReadStructuralFeatureAction_Attribute_result() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getReadStructuralFeatureAction_Attribute_result() const = 0;
 			
-			virtual std::shared_ptr<ecore::EOperation> getReadStructuralFeatureAction_Operation_type_and_ordering_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getReadStructuralFeatureAction_Operation_type_and_ordering_EDiagnosticChain_EMap() const = 0;
 			
 			// End Class ReadStructuralFeatureAction
 
@@ -5672,13 +5672,13 @@ namespace uml
 			static const unsigned int READVARIABLEACTION_OPERATION_TYPE_AND_ORDERING_EDIAGNOSTICCHAIN_EMAP = 1906125427;
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getReadVariableAction_Class() const = 0;
+			virtual const std::shared_ptr<ecore::EClass>& getReadVariableAction_Class() const = 0;
 			
 			
-			virtual std::shared_ptr<ecore::EReference> getReadVariableAction_Attribute_result() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getReadVariableAction_Attribute_result() const = 0;
 			
-			virtual std::shared_ptr<ecore::EOperation> getReadVariableAction_Operation_compatible_multiplicity_EDiagnosticChain_EMap() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getReadVariableAction_Operation_type_and_ordering_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getReadVariableAction_Operation_compatible_multiplicity_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getReadVariableAction_Operation_type_and_ordering_EDiagnosticChain_EMap() const = 0;
 			
 			// End Class ReadVariableAction
 
@@ -5692,7 +5692,7 @@ namespace uml
 			
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getRealization_Class() const = 0;
+			virtual const std::shared_ptr<ecore::EClass>& getRealization_Class() const = 0;
 			
 			
 			
@@ -5712,13 +5712,13 @@ namespace uml
 			static const unsigned int RECEPTION_OPERATION_SAME_STRUCTURE_AS_SIGNAL_EDIAGNOSTICCHAIN_EMAP = 1100427053;
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getReception_Class() const = 0;
+			virtual const std::shared_ptr<ecore::EClass>& getReception_Class() const = 0;
 			
 			
-			virtual std::shared_ptr<ecore::EReference> getReception_Attribute_signal() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getReception_Attribute_signal() const = 0;
 			
-			virtual std::shared_ptr<ecore::EOperation> getReception_Operation_same_name_as_signal_EDiagnosticChain_EMap() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getReception_Operation_same_structure_as_signal_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getReception_Operation_same_name_as_signal_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getReception_Operation_same_structure_as_signal_EDiagnosticChain_EMap() const = 0;
 			
 			// End Class Reception
 
@@ -5739,17 +5739,17 @@ namespace uml
 			static const unsigned int RECLASSIFYOBJECTACTION_OPERATION_MULTIPLICITY_EDIAGNOSTICCHAIN_EMAP = 1033085717;
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getReclassifyObjectAction_Class() const = 0;
+			virtual const std::shared_ptr<ecore::EClass>& getReclassifyObjectAction_Class() const = 0;
 			
-			virtual std::shared_ptr<ecore::EAttribute> getReclassifyObjectAction_Attribute_isReplaceAll() const = 0;
+			virtual const std::shared_ptr<ecore::EAttribute>& getReclassifyObjectAction_Attribute_isReplaceAll() const = 0;
 			
-			virtual std::shared_ptr<ecore::EReference> getReclassifyObjectAction_Attribute_newClassifier() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getReclassifyObjectAction_Attribute_object() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getReclassifyObjectAction_Attribute_oldClassifier() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getReclassifyObjectAction_Attribute_newClassifier() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getReclassifyObjectAction_Attribute_object() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getReclassifyObjectAction_Attribute_oldClassifier() const = 0;
 			
-			virtual std::shared_ptr<ecore::EOperation> getReclassifyObjectAction_Operation_classifier_not_abstract_EDiagnosticChain_EMap() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getReclassifyObjectAction_Operation_input_pin_EDiagnosticChain_EMap() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getReclassifyObjectAction_Operation_multiplicity_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getReclassifyObjectAction_Operation_classifier_not_abstract_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getReclassifyObjectAction_Operation_input_pin_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getReclassifyObjectAction_Operation_multiplicity_EDiagnosticChain_EMap() const = 0;
 			
 			// End Class ReclassifyObjectAction
 
@@ -5771,18 +5771,18 @@ namespace uml
 			static const unsigned int REDEFINABLEELEMENT_OPERATION_REDEFINITION_CONTEXT_VALID_EDIAGNOSTICCHAIN_EMAP = 1062628144;
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getRedefinableElement_Class() const = 0;
+			virtual const std::shared_ptr<ecore::EClass>& getRedefinableElement_Class() const = 0;
 			
-			virtual std::shared_ptr<ecore::EAttribute> getRedefinableElement_Attribute_isLeaf() const = 0;
+			virtual const std::shared_ptr<ecore::EAttribute>& getRedefinableElement_Attribute_isLeaf() const = 0;
 			
-			virtual std::shared_ptr<ecore::EReference> getRedefinableElement_Attribute_redefinedElement() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getRedefinableElement_Attribute_redefinitionContext() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getRedefinableElement_Attribute_redefinedElement() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getRedefinableElement_Attribute_redefinitionContext() const = 0;
 			
-			virtual std::shared_ptr<ecore::EOperation> getRedefinableElement_Operation_isConsistentWith_RedefinableElement() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getRedefinableElement_Operation_isRedefinitionContextValid_RedefinableElement() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getRedefinableElement_Operation_non_leaf_redefinition_EDiagnosticChain_EMap() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getRedefinableElement_Operation_redefinition_consistent_EDiagnosticChain_EMap() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getRedefinableElement_Operation_redefinition_context_valid_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getRedefinableElement_Operation_isConsistentWith_RedefinableElement() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getRedefinableElement_Operation_isRedefinitionContextValid_RedefinableElement() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getRedefinableElement_Operation_non_leaf_redefinition_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getRedefinableElement_Operation_redefinition_consistent_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getRedefinableElement_Operation_redefinition_context_valid_EDiagnosticChain_EMap() const = 0;
 			
 			// End Class RedefinableElement
 
@@ -5801,15 +5801,15 @@ namespace uml
 			static const unsigned int REDEFINABLETEMPLATESIGNATURE_OPERATION_REDEFINES_PARENTS_EDIAGNOSTICCHAIN_EMAP = 2810722782;
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getRedefinableTemplateSignature_Class() const = 0;
+			virtual const std::shared_ptr<ecore::EClass>& getRedefinableTemplateSignature_Class() const = 0;
 			
 			
-			virtual std::shared_ptr<ecore::EReference> getRedefinableTemplateSignature_Attribute_classifier() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getRedefinableTemplateSignature_Attribute_extendedSignature() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getRedefinableTemplateSignature_Attribute_inheritedParameter() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getRedefinableTemplateSignature_Attribute_classifier() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getRedefinableTemplateSignature_Attribute_extendedSignature() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getRedefinableTemplateSignature_Attribute_inheritedParameter() const = 0;
 			
-			virtual std::shared_ptr<ecore::EOperation> getRedefinableTemplateSignature_Operation_getInheritedParameters() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getRedefinableTemplateSignature_Operation_redefines_parents_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getRedefinableTemplateSignature_Operation_getInheritedParameters() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getRedefinableTemplateSignature_Operation_redefines_parents_EDiagnosticChain_EMap() const = 0;
 			
 			// End Class RedefinableTemplateSignature
 
@@ -5830,17 +5830,17 @@ namespace uml
 			static const unsigned int REDUCEACTION_OPERATION_REDUCER_INPUTS_OUTPUT_EDIAGNOSTICCHAIN_EMAP = 3526484648;
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getReduceAction_Class() const = 0;
+			virtual const std::shared_ptr<ecore::EClass>& getReduceAction_Class() const = 0;
 			
-			virtual std::shared_ptr<ecore::EAttribute> getReduceAction_Attribute_isOrdered() const = 0;
+			virtual const std::shared_ptr<ecore::EAttribute>& getReduceAction_Attribute_isOrdered() const = 0;
 			
-			virtual std::shared_ptr<ecore::EReference> getReduceAction_Attribute_collection() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getReduceAction_Attribute_reducer() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getReduceAction_Attribute_result() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getReduceAction_Attribute_collection() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getReduceAction_Attribute_reducer() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getReduceAction_Attribute_result() const = 0;
 			
-			virtual std::shared_ptr<ecore::EOperation> getReduceAction_Operation_input_type_is_collection_EDiagnosticChain_EMap() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getReduceAction_Operation_output_types_are_compatible_EDiagnosticChain_EMap() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getReduceAction_Operation_reducer_inputs_output_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getReduceAction_Operation_input_type_is_collection_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getReduceAction_Operation_output_types_are_compatible_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getReduceAction_Operation_reducer_inputs_output_EDiagnosticChain_EMap() const = 0;
 			
 			// End Class ReduceAction
 
@@ -5866,22 +5866,22 @@ namespace uml
 			static const unsigned int REGION_OPERATION_SHALLOW_HISTORY_VERTEX_EDIAGNOSTICCHAIN_EMAP = 338218634;
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getRegion_Class() const = 0;
+			virtual const std::shared_ptr<ecore::EClass>& getRegion_Class() const = 0;
 			
 			
-			virtual std::shared_ptr<ecore::EReference> getRegion_Attribute_extendedRegion() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getRegion_Attribute_state() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getRegion_Attribute_stateMachine() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getRegion_Attribute_subvertex() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getRegion_Attribute_transition() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getRegion_Attribute_extendedRegion() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getRegion_Attribute_state() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getRegion_Attribute_stateMachine() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getRegion_Attribute_subvertex() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getRegion_Attribute_transition() const = 0;
 			
-			virtual std::shared_ptr<ecore::EOperation> getRegion_Operation_belongsToPSM() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getRegion_Operation_containingStateMachine() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getRegion_Operation_deep_history_vertex_EDiagnosticChain_EMap() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getRegion_Operation_initial_vertex_EDiagnosticChain_EMap() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getRegion_Operation_owned_EDiagnosticChain_EMap() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getRegion_Operation_redefinitionContext() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getRegion_Operation_shallow_history_vertex_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getRegion_Operation_belongsToPSM() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getRegion_Operation_containingStateMachine() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getRegion_Operation_deep_history_vertex_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getRegion_Operation_initial_vertex_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getRegion_Operation_owned_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getRegion_Operation_redefinitionContext() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getRegion_Operation_shallow_history_vertex_EDiagnosticChain_EMap() const = 0;
 			
 			// End Class Region
 
@@ -5896,10 +5896,10 @@ namespace uml
 			
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getRelationship_Class() const = 0;
+			virtual const std::shared_ptr<ecore::EClass>& getRelationship_Class() const = 0;
 			
 			
-			virtual std::shared_ptr<ecore::EReference> getRelationship_Attribute_relatedElement() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getRelationship_Attribute_relatedElement() const = 0;
 			
 			
 			// End Class Relationship
@@ -5917,13 +5917,13 @@ namespace uml
 			static const unsigned int REMOVESTRUCTURALFEATUREVALUEACTION_OPERATION_REMOVEAT_AND_VALUE_EDIAGNOSTICCHAIN_EMAP = 3006271433;
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getRemoveStructuralFeatureValueAction_Class() const = 0;
+			virtual const std::shared_ptr<ecore::EClass>& getRemoveStructuralFeatureValueAction_Class() const = 0;
 			
-			virtual std::shared_ptr<ecore::EAttribute> getRemoveStructuralFeatureValueAction_Attribute_isRemoveDuplicates() const = 0;
+			virtual const std::shared_ptr<ecore::EAttribute>& getRemoveStructuralFeatureValueAction_Attribute_isRemoveDuplicates() const = 0;
 			
-			virtual std::shared_ptr<ecore::EReference> getRemoveStructuralFeatureValueAction_Attribute_removeAt() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getRemoveStructuralFeatureValueAction_Attribute_removeAt() const = 0;
 			
-			virtual std::shared_ptr<ecore::EOperation> getRemoveStructuralFeatureValueAction_Operation_removeAt_and_value_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getRemoveStructuralFeatureValueAction_Operation_removeAt_and_value_EDiagnosticChain_EMap() const = 0;
 			
 			// End Class RemoveStructuralFeatureValueAction
 
@@ -5940,13 +5940,13 @@ namespace uml
 			static const unsigned int REMOVEVARIABLEVALUEACTION_OPERATION_REMOVEAT_AND_VALUE_EDIAGNOSTICCHAIN_EMAP = 222150914;
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getRemoveVariableValueAction_Class() const = 0;
+			virtual const std::shared_ptr<ecore::EClass>& getRemoveVariableValueAction_Class() const = 0;
 			
-			virtual std::shared_ptr<ecore::EAttribute> getRemoveVariableValueAction_Attribute_isRemoveDuplicates() const = 0;
+			virtual const std::shared_ptr<ecore::EAttribute>& getRemoveVariableValueAction_Attribute_isRemoveDuplicates() const = 0;
 			
-			virtual std::shared_ptr<ecore::EReference> getRemoveVariableValueAction_Attribute_removeAt() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getRemoveVariableValueAction_Attribute_removeAt() const = 0;
 			
-			virtual std::shared_ptr<ecore::EOperation> getRemoveVariableValueAction_Operation_removeAt_and_value_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getRemoveVariableValueAction_Operation_removeAt_and_value_EDiagnosticChain_EMap() const = 0;
 			
 			// End Class RemoveVariableValueAction
 
@@ -5965,15 +5965,15 @@ namespace uml
 			static const unsigned int REPLYACTION_OPERATION_PINS_MATCH_PARAMETER_EDIAGNOSTICCHAIN_EMAP = 1465807302;
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getReplyAction_Class() const = 0;
+			virtual const std::shared_ptr<ecore::EClass>& getReplyAction_Class() const = 0;
 			
 			
-			virtual std::shared_ptr<ecore::EReference> getReplyAction_Attribute_replyToCall() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getReplyAction_Attribute_replyValue() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getReplyAction_Attribute_returnInformation() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getReplyAction_Attribute_replyToCall() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getReplyAction_Attribute_replyValue() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getReplyAction_Attribute_returnInformation() const = 0;
 			
-			virtual std::shared_ptr<ecore::EOperation> getReplyAction_Operation_event_on_reply_to_call_trigger_EDiagnosticChain_EMap() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getReplyAction_Operation_pins_match_parameter_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getReplyAction_Operation_event_on_reply_to_call_trigger_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getReplyAction_Operation_pins_match_parameter_EDiagnosticChain_EMap() const = 0;
 			
 			// End Class ReplyAction
 
@@ -5990,13 +5990,13 @@ namespace uml
 			static const unsigned int SENDOBJECTACTION_OPERATION_TYPE_TARGET_PIN_EDIAGNOSTICCHAIN_EMAP = 383225087;
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getSendObjectAction_Class() const = 0;
+			virtual const std::shared_ptr<ecore::EClass>& getSendObjectAction_Class() const = 0;
 			
 			
-			virtual std::shared_ptr<ecore::EReference> getSendObjectAction_Attribute_request() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getSendObjectAction_Attribute_target() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getSendObjectAction_Attribute_request() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getSendObjectAction_Attribute_target() const = 0;
 			
-			virtual std::shared_ptr<ecore::EOperation> getSendObjectAction_Operation_type_target_pin_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getSendObjectAction_Operation_type_target_pin_EDiagnosticChain_EMap() const = 0;
 			
 			// End Class SendObjectAction
 
@@ -6015,15 +6015,15 @@ namespace uml
 			static const unsigned int SENDSIGNALACTION_OPERATION_TYPE_TARGET_PIN_EDIAGNOSTICCHAIN_EMAP = 2766757954;
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getSendSignalAction_Class() const = 0;
+			virtual const std::shared_ptr<ecore::EClass>& getSendSignalAction_Class() const = 0;
 			
 			
-			virtual std::shared_ptr<ecore::EReference> getSendSignalAction_Attribute_signal() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getSendSignalAction_Attribute_target() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getSendSignalAction_Attribute_signal() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getSendSignalAction_Attribute_target() const = 0;
 			
-			virtual std::shared_ptr<ecore::EOperation> getSendSignalAction_Operation_number_order_EDiagnosticChain_EMap() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getSendSignalAction_Operation_type_ordering_multiplicity_EDiagnosticChain_EMap() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getSendSignalAction_Operation_type_target_pin_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getSendSignalAction_Operation_number_order_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getSendSignalAction_Operation_type_ordering_multiplicity_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getSendSignalAction_Operation_type_target_pin_EDiagnosticChain_EMap() const = 0;
 			
 			// End Class SendSignalAction
 
@@ -6038,10 +6038,10 @@ namespace uml
 			
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getSequenceNode_Class() const = 0;
+			virtual const std::shared_ptr<ecore::EClass>& getSequenceNode_Class() const = 0;
 			
 			
-			virtual std::shared_ptr<ecore::EReference> getSequenceNode_Attribute_executableNode() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getSequenceNode_Attribute_executableNode() const = 0;
 			
 			
 			// End Class SequenceNode
@@ -6058,12 +6058,12 @@ namespace uml
 			static const unsigned int SIGNAL_OPERATION_CREATEOWNEDATTRIBUTE_STRING_UNLIMITEDNATURAL = 2958211947;
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getSignal_Class() const = 0;
+			virtual const std::shared_ptr<ecore::EClass>& getSignal_Class() const = 0;
 			
 			
-			virtual std::shared_ptr<ecore::EReference> getSignal_Attribute_ownedAttribute() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getSignal_Attribute_ownedAttribute() const = 0;
 			
-			virtual std::shared_ptr<ecore::EOperation> getSignal_Operation_createOwnedAttribute_String_UnlimitedNatural() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getSignal_Operation_createOwnedAttribute_String_UnlimitedNatural() const = 0;
 			
 			// End Class Signal
 
@@ -6078,10 +6078,10 @@ namespace uml
 			
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getSignalEvent_Class() const = 0;
+			virtual const std::shared_ptr<ecore::EClass>& getSignalEvent_Class() const = 0;
 			
 			
-			virtual std::shared_ptr<ecore::EReference> getSignalEvent_Attribute_signal() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getSignalEvent_Attribute_signal() const = 0;
 			
 			
 			// End Class SignalEvent
@@ -6099,12 +6099,12 @@ namespace uml
 			
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getSlot_Class() const = 0;
+			virtual const std::shared_ptr<ecore::EClass>& getSlot_Class() const = 0;
 			
 			
-			virtual std::shared_ptr<ecore::EReference> getSlot_Attribute_definingFeature() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getSlot_Attribute_owningInstance() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getSlot_Attribute_value() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getSlot_Attribute_definingFeature() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getSlot_Attribute_owningInstance() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getSlot_Attribute_value() const = 0;
 			
 			
 			// End Class Slot
@@ -6122,13 +6122,13 @@ namespace uml
 			static const unsigned int STARTCLASSIFIERBEHAVIORACTION_OPERATION_TYPE_HAS_CLASSIFIER_EDIAGNOSTICCHAIN_EMAP = 1313200504;
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getStartClassifierBehaviorAction_Class() const = 0;
+			virtual const std::shared_ptr<ecore::EClass>& getStartClassifierBehaviorAction_Class() const = 0;
 			
 			
-			virtual std::shared_ptr<ecore::EReference> getStartClassifierBehaviorAction_Attribute_object() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getStartClassifierBehaviorAction_Attribute_object() const = 0;
 			
-			virtual std::shared_ptr<ecore::EOperation> getStartClassifierBehaviorAction_Operation_multiplicity_EDiagnosticChain_EMap() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getStartClassifierBehaviorAction_Operation_type_has_classifier_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getStartClassifierBehaviorAction_Operation_multiplicity_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getStartClassifierBehaviorAction_Operation_type_has_classifier_EDiagnosticChain_EMap() const = 0;
 			
 			// End Class StartClassifierBehaviorAction
 
@@ -6147,15 +6147,15 @@ namespace uml
 			static const unsigned int STARTOBJECTBEHAVIORACTION_OPERATION_TYPE_OF_OBJECT_EDIAGNOSTICCHAIN_EMAP = 2859096117;
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getStartObjectBehaviorAction_Class() const = 0;
+			virtual const std::shared_ptr<ecore::EClass>& getStartObjectBehaviorAction_Class() const = 0;
 			
 			
-			virtual std::shared_ptr<ecore::EReference> getStartObjectBehaviorAction_Attribute_object() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getStartObjectBehaviorAction_Attribute_object() const = 0;
 			
-			virtual std::shared_ptr<ecore::EOperation> getStartObjectBehaviorAction_Operation_behavior() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getStartObjectBehaviorAction_Operation_multiplicity_of_object_EDiagnosticChain_EMap() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getStartObjectBehaviorAction_Operation_no_onport_EDiagnosticChain_EMap() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getStartObjectBehaviorAction_Operation_type_of_object_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getStartObjectBehaviorAction_Operation_behavior() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getStartObjectBehaviorAction_Operation_multiplicity_of_object_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getStartObjectBehaviorAction_Operation_no_onport_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getStartObjectBehaviorAction_Operation_type_of_object_EDiagnosticChain_EMap() const = 0;
 			
 			// End Class StartObjectBehaviorAction
 
@@ -6193,34 +6193,34 @@ namespace uml
 			static const unsigned int STATE_OPERATION_SUBMACHINE_STATES_EDIAGNOSTICCHAIN_EMAP = 3284388305;
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getState_Class() const = 0;
+			virtual const std::shared_ptr<ecore::EClass>& getState_Class() const = 0;
 			
-			virtual std::shared_ptr<ecore::EAttribute> getState_Attribute_isComposite() const = 0;
-			virtual std::shared_ptr<ecore::EAttribute> getState_Attribute_isOrthogonal() const = 0;
-			virtual std::shared_ptr<ecore::EAttribute> getState_Attribute_isSimple() const = 0;
-			virtual std::shared_ptr<ecore::EAttribute> getState_Attribute_isSubmachineState() const = 0;
+			virtual const std::shared_ptr<ecore::EAttribute>& getState_Attribute_isComposite() const = 0;
+			virtual const std::shared_ptr<ecore::EAttribute>& getState_Attribute_isOrthogonal() const = 0;
+			virtual const std::shared_ptr<ecore::EAttribute>& getState_Attribute_isSimple() const = 0;
+			virtual const std::shared_ptr<ecore::EAttribute>& getState_Attribute_isSubmachineState() const = 0;
 			
-			virtual std::shared_ptr<ecore::EReference> getState_Attribute_connection() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getState_Attribute_connectionPoint() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getState_Attribute_deferrableTrigger() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getState_Attribute_doActivity() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getState_Attribute_entry() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getState_Attribute_exit() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getState_Attribute_redefinedState() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getState_Attribute_region() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getState_Attribute_stateInvariant() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getState_Attribute_submachine() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getState_Attribute_connection() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getState_Attribute_connectionPoint() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getState_Attribute_deferrableTrigger() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getState_Attribute_doActivity() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getState_Attribute_entry() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getState_Attribute_exit() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getState_Attribute_redefinedState() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getState_Attribute_region() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getState_Attribute_stateInvariant() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getState_Attribute_submachine() const = 0;
 			
-			virtual std::shared_ptr<ecore::EOperation> getState_Operation_composite_states_EDiagnosticChain_EMap() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getState_Operation_destinations_or_sources_of_transitions_EDiagnosticChain_EMap() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getState_Operation_entry_or_exit_EDiagnosticChain_EMap() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getState_Operation_isComposite() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getState_Operation_isOrthogonal() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getState_Operation_isSimple() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getState_Operation_isSubmachineState() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getState_Operation_redefinitionContext() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getState_Operation_submachine_or_regions_EDiagnosticChain_EMap() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getState_Operation_submachine_states_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getState_Operation_composite_states_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getState_Operation_destinations_or_sources_of_transitions_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getState_Operation_entry_or_exit_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getState_Operation_isComposite() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getState_Operation_isOrthogonal() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getState_Operation_isSimple() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getState_Operation_isSubmachineState() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getState_Operation_redefinitionContext() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getState_Operation_submachine_or_regions_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getState_Operation_submachine_states_EDiagnosticChain_EMap() const = 0;
 			
 			// End Class State
 
@@ -6235,10 +6235,10 @@ namespace uml
 			
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getStateInvariant_Class() const = 0;
+			virtual const std::shared_ptr<ecore::EClass>& getStateInvariant_Class() const = 0;
 			
 			
-			virtual std::shared_ptr<ecore::EReference> getStateInvariant_Attribute_invariant() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getStateInvariant_Attribute_invariant() const = 0;
 			
 			
 			// End Class StateInvariant
@@ -6264,21 +6264,21 @@ namespace uml
 			static const unsigned int STATEMACHINE_OPERATION_METHOD_EDIAGNOSTICCHAIN_EMAP = 292291073;
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getStateMachine_Class() const = 0;
+			virtual const std::shared_ptr<ecore::EClass>& getStateMachine_Class() const = 0;
 			
 			
-			virtual std::shared_ptr<ecore::EReference> getStateMachine_Attribute_connectionPoint() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getStateMachine_Attribute_extendedStateMachine() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getStateMachine_Attribute_region() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getStateMachine_Attribute_submachineState() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getStateMachine_Attribute_connectionPoint() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getStateMachine_Attribute_extendedStateMachine() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getStateMachine_Attribute_region() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getStateMachine_Attribute_submachineState() const = 0;
 			
-			virtual std::shared_ptr<ecore::EOperation> getStateMachine_Operation_lCA_Vertex_Vertex() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getStateMachine_Operation_lCAState_Vertex_Vertex() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getStateMachine_Operation_ancestor_Vertex_Vertex() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getStateMachine_Operation_classifier_context_EDiagnosticChain_EMap() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getStateMachine_Operation_connection_points_EDiagnosticChain_EMap() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getStateMachine_Operation_context_classifier_EDiagnosticChain_EMap() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getStateMachine_Operation_method_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getStateMachine_Operation_lCA_Vertex_Vertex() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getStateMachine_Operation_lCAState_Vertex_Vertex() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getStateMachine_Operation_ancestor_Vertex_Vertex() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getStateMachine_Operation_classifier_context_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getStateMachine_Operation_connection_points_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getStateMachine_Operation_context_classifier_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getStateMachine_Operation_method_EDiagnosticChain_EMap() const = 0;
 			
 			// End Class StateMachine
 
@@ -6311,29 +6311,29 @@ namespace uml
 			static const unsigned int STEREOTYPE_OPERATION_NAME_NOT_CLASH_EDIAGNOSTICCHAIN_EMAP = 344796417;
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getStereotype_Class() const = 0;
+			virtual const std::shared_ptr<ecore::EClass>& getStereotype_Class() const = 0;
 			
 			
-			virtual std::shared_ptr<ecore::EReference> getStereotype_Attribute_icon() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getStereotype_Attribute_profile() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getStereotype_Attribute_icon() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getStereotype_Attribute_profile() const = 0;
 			
-			virtual std::shared_ptr<ecore::EOperation> getStereotype_Operation_associationEndOwnership_EDiagnosticChain_EMap() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getStereotype_Operation_base_property_multiplicity_multiple_extension_EDiagnosticChain_EMap() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getStereotype_Operation_base_property_multiplicity_single_extension_EDiagnosticChain_EMap() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getStereotype_Operation_base_property_upper_bound_EDiagnosticChain_EMap() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getStereotype_Operation_binaryAssociationsOnly_EDiagnosticChain_EMap() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getStereotype_Operation_containingProfile() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getStereotype_Operation_createExtension_Class_Boolean() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getStereotype_Operation_createIcon_String() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getStereotype_Operation_createIcon_String_String() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getStereotype_Operation_generalize_EDiagnosticChain_EMap() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getStereotype_Operation_getAllExtendedMetaclasses() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getStereotype_Operation_getDefinition() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getStereotype_Operation_getExtendedMetaclasses() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getStereotype_Operation_getKeyword() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getStereotype_Operation_getKeyword_Boolean() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getStereotype_Operation_getProfile() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getStereotype_Operation_name_not_clash_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getStereotype_Operation_associationEndOwnership_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getStereotype_Operation_base_property_multiplicity_multiple_extension_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getStereotype_Operation_base_property_multiplicity_single_extension_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getStereotype_Operation_base_property_upper_bound_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getStereotype_Operation_binaryAssociationsOnly_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getStereotype_Operation_containingProfile() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getStereotype_Operation_createExtension_Class_Boolean() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getStereotype_Operation_createIcon_String() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getStereotype_Operation_createIcon_String_String() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getStereotype_Operation_generalize_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getStereotype_Operation_getAllExtendedMetaclasses() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getStereotype_Operation_getDefinition() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getStereotype_Operation_getExtendedMetaclasses() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getStereotype_Operation_getKeyword() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getStereotype_Operation_getKeyword_Boolean() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getStereotype_Operation_getProfile() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getStereotype_Operation_name_not_clash_EDiagnosticChain_EMap() const = 0;
 			
 			// End Class Stereotype
 
@@ -6351,14 +6351,14 @@ namespace uml
 			static const unsigned int STRINGEXPRESSION_OPERATION_SUBEXPRESSIONS_EDIAGNOSTICCHAIN_EMAP = 1509422814;
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getStringExpression_Class() const = 0;
+			virtual const std::shared_ptr<ecore::EClass>& getStringExpression_Class() const = 0;
 			
 			
-			virtual std::shared_ptr<ecore::EReference> getStringExpression_Attribute_owningExpression() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getStringExpression_Attribute_subExpression() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getStringExpression_Attribute_owningExpression() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getStringExpression_Attribute_subExpression() const = 0;
 			
-			virtual std::shared_ptr<ecore::EOperation> getStringExpression_Operation_operands_EDiagnosticChain_EMap() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getStringExpression_Operation_subexpressions_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getStringExpression_Operation_operands_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getStringExpression_Operation_subexpressions_EDiagnosticChain_EMap() const = 0;
 			
 			// End Class StringExpression
 
@@ -6373,9 +6373,9 @@ namespace uml
 			
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getStructuralFeature_Class() const = 0;
+			virtual const std::shared_ptr<ecore::EClass>& getStructuralFeature_Class() const = 0;
 			
-			virtual std::shared_ptr<ecore::EAttribute> getStructuralFeature_Attribute_isReadOnly() const = 0;
+			virtual const std::shared_ptr<ecore::EAttribute>& getStructuralFeature_Attribute_isReadOnly() const = 0;
 			
 			
 			
@@ -6398,17 +6398,17 @@ namespace uml
 			static const unsigned int STRUCTURALFEATUREACTION_OPERATION_VISIBILITY_EDIAGNOSTICCHAIN_EMAP = 1315419741;
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getStructuralFeatureAction_Class() const = 0;
+			virtual const std::shared_ptr<ecore::EClass>& getStructuralFeatureAction_Class() const = 0;
 			
 			
-			virtual std::shared_ptr<ecore::EReference> getStructuralFeatureAction_Attribute_object() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getStructuralFeatureAction_Attribute_structuralFeature() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getStructuralFeatureAction_Attribute_object() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getStructuralFeatureAction_Attribute_structuralFeature() const = 0;
 			
-			virtual std::shared_ptr<ecore::EOperation> getStructuralFeatureAction_Operation_multiplicity_EDiagnosticChain_EMap() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getStructuralFeatureAction_Operation_not_static_EDiagnosticChain_EMap() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getStructuralFeatureAction_Operation_object_type_EDiagnosticChain_EMap() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getStructuralFeatureAction_Operation_one_featuring_classifier_EDiagnosticChain_EMap() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getStructuralFeatureAction_Operation_visibility_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getStructuralFeatureAction_Operation_multiplicity_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getStructuralFeatureAction_Operation_not_static_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getStructuralFeatureAction_Operation_object_type_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getStructuralFeatureAction_Operation_one_featuring_classifier_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getStructuralFeatureAction_Operation_visibility_EDiagnosticChain_EMap() const = 0;
 			
 			// End Class StructuralFeatureAction
 
@@ -6433,21 +6433,21 @@ namespace uml
 			static const unsigned int STRUCTUREDACTIVITYNODE_OPERATION_TARGETNODES = 2207842792;
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getStructuredActivityNode_Class() const = 0;
+			virtual const std::shared_ptr<ecore::EClass>& getStructuredActivityNode_Class() const = 0;
 			
-			virtual std::shared_ptr<ecore::EAttribute> getStructuredActivityNode_Attribute_mustIsolate() const = 0;
+			virtual const std::shared_ptr<ecore::EAttribute>& getStructuredActivityNode_Attribute_mustIsolate() const = 0;
 			
-			virtual std::shared_ptr<ecore::EReference> getStructuredActivityNode_Attribute_edge() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getStructuredActivityNode_Attribute_node() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getStructuredActivityNode_Attribute_structuredNodeInput() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getStructuredActivityNode_Attribute_structuredNodeOutput() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getStructuredActivityNode_Attribute_variable() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getStructuredActivityNode_Attribute_edge() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getStructuredActivityNode_Attribute_node() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getStructuredActivityNode_Attribute_structuredNodeInput() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getStructuredActivityNode_Attribute_structuredNodeOutput() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getStructuredActivityNode_Attribute_variable() const = 0;
 			
-			virtual std::shared_ptr<ecore::EOperation> getStructuredActivityNode_Operation_edges_EDiagnosticChain_EMap() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getStructuredActivityNode_Operation_input_pin_edges_EDiagnosticChain_EMap() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getStructuredActivityNode_Operation_output_pin_edges_EDiagnosticChain_EMap() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getStructuredActivityNode_Operation_sourceNodes() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getStructuredActivityNode_Operation_targetNodes() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getStructuredActivityNode_Operation_edges_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getStructuredActivityNode_Operation_input_pin_edges_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getStructuredActivityNode_Operation_output_pin_edges_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getStructuredActivityNode_Operation_sourceNodes() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getStructuredActivityNode_Operation_targetNodes() const = 0;
 			
 			// End Class StructuredActivityNode
 
@@ -6468,17 +6468,17 @@ namespace uml
 			static const unsigned int STRUCTUREDCLASSIFIER_OPERATION_GETPARTS = 2304451414;
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getStructuredClassifier_Class() const = 0;
+			virtual const std::shared_ptr<ecore::EClass>& getStructuredClassifier_Class() const = 0;
 			
 			
-			virtual std::shared_ptr<ecore::EReference> getStructuredClassifier_Attribute_ownedAttribute() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getStructuredClassifier_Attribute_ownedConnector() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getStructuredClassifier_Attribute_part() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getStructuredClassifier_Attribute_role() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getStructuredClassifier_Attribute_ownedAttribute() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getStructuredClassifier_Attribute_ownedConnector() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getStructuredClassifier_Attribute_part() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getStructuredClassifier_Attribute_role() const = 0;
 			
-			virtual std::shared_ptr<ecore::EOperation> getStructuredClassifier_Operation_allRoles() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getStructuredClassifier_Operation_createOwnedAttribute_String_UnlimitedNatural() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getStructuredClassifier_Operation_getParts() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getStructuredClassifier_Operation_allRoles() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getStructuredClassifier_Operation_createOwnedAttribute_String_UnlimitedNatural() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getStructuredClassifier_Operation_getParts() const = 0;
 			
 			// End Class StructuredClassifier
 
@@ -6494,11 +6494,11 @@ namespace uml
 			
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getSubstitution_Class() const = 0;
+			virtual const std::shared_ptr<ecore::EClass>& getSubstitution_Class() const = 0;
 			
 			
-			virtual std::shared_ptr<ecore::EReference> getSubstitution_Attribute_contract() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getSubstitution_Attribute_substitutingClassifier() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getSubstitution_Attribute_contract() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getSubstitution_Attribute_substitutingClassifier() const = 0;
 			
 			
 			// End Class Substitution
@@ -6518,15 +6518,15 @@ namespace uml
 			static const unsigned int TEMPLATEBINDING_OPERATION_PARAMETER_SUBSTITUTION_FORMAL_EDIAGNOSTICCHAIN_EMAP = 97895006;
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getTemplateBinding_Class() const = 0;
+			virtual const std::shared_ptr<ecore::EClass>& getTemplateBinding_Class() const = 0;
 			
 			
-			virtual std::shared_ptr<ecore::EReference> getTemplateBinding_Attribute_boundElement() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getTemplateBinding_Attribute_parameterSubstitution() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getTemplateBinding_Attribute_signature() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getTemplateBinding_Attribute_boundElement() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getTemplateBinding_Attribute_parameterSubstitution() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getTemplateBinding_Attribute_signature() const = 0;
 			
-			virtual std::shared_ptr<ecore::EOperation> getTemplateBinding_Operation_one_parameter_substitution_EDiagnosticChain_EMap() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getTemplateBinding_Operation_parameter_substitution_formal_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getTemplateBinding_Operation_one_parameter_substitution_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getTemplateBinding_Operation_parameter_substitution_formal_EDiagnosticChain_EMap() const = 0;
 			
 			// End Class TemplateBinding
 
@@ -6546,16 +6546,16 @@ namespace uml
 			static const unsigned int TEMPLATEPARAMETER_OPERATION_MUST_BE_COMPATIBLE_EDIAGNOSTICCHAIN_EMAP = 2618018285;
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getTemplateParameter_Class() const = 0;
+			virtual const std::shared_ptr<ecore::EClass>& getTemplateParameter_Class() const = 0;
 			
 			
-			virtual std::shared_ptr<ecore::EReference> getTemplateParameter_Attribute_default() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getTemplateParameter_Attribute_ownedDefault() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getTemplateParameter_Attribute_ownedParameteredElement() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getTemplateParameter_Attribute_parameteredElement() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getTemplateParameter_Attribute_signature() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getTemplateParameter_Attribute_default() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getTemplateParameter_Attribute_ownedDefault() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getTemplateParameter_Attribute_ownedParameteredElement() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getTemplateParameter_Attribute_parameteredElement() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getTemplateParameter_Attribute_signature() const = 0;
 			
-			virtual std::shared_ptr<ecore::EOperation> getTemplateParameter_Operation_must_be_compatible_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getTemplateParameter_Operation_must_be_compatible_EDiagnosticChain_EMap() const = 0;
 			
 			// End Class TemplateParameter
 
@@ -6574,15 +6574,15 @@ namespace uml
 			static const unsigned int TEMPLATEPARAMETERSUBSTITUTION_OPERATION_MUST_BE_COMPATIBLE_EDIAGNOSTICCHAIN_EMAP = 1624446334;
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getTemplateParameterSubstitution_Class() const = 0;
+			virtual const std::shared_ptr<ecore::EClass>& getTemplateParameterSubstitution_Class() const = 0;
 			
 			
-			virtual std::shared_ptr<ecore::EReference> getTemplateParameterSubstitution_Attribute_actual() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getTemplateParameterSubstitution_Attribute_formal() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getTemplateParameterSubstitution_Attribute_ownedActual() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getTemplateParameterSubstitution_Attribute_templateBinding() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getTemplateParameterSubstitution_Attribute_actual() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getTemplateParameterSubstitution_Attribute_formal() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getTemplateParameterSubstitution_Attribute_ownedActual() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getTemplateParameterSubstitution_Attribute_templateBinding() const = 0;
 			
-			virtual std::shared_ptr<ecore::EOperation> getTemplateParameterSubstitution_Operation_must_be_compatible_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getTemplateParameterSubstitution_Operation_must_be_compatible_EDiagnosticChain_EMap() const = 0;
 			
 			// End Class TemplateParameterSubstitution
 
@@ -6601,15 +6601,15 @@ namespace uml
 			static const unsigned int TEMPLATESIGNATURE_OPERATION_UNIQUE_PARAMETERS_EDIAGNOSTICCHAIN_EMAP = 1309689182;
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getTemplateSignature_Class() const = 0;
+			virtual const std::shared_ptr<ecore::EClass>& getTemplateSignature_Class() const = 0;
 			
 			
-			virtual std::shared_ptr<ecore::EReference> getTemplateSignature_Attribute_ownedParameter() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getTemplateSignature_Attribute_parameter() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getTemplateSignature_Attribute_template() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getTemplateSignature_Attribute_ownedParameter() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getTemplateSignature_Attribute_parameter() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getTemplateSignature_Attribute_template() const = 0;
 			
-			virtual std::shared_ptr<ecore::EOperation> getTemplateSignature_Operation_own_elements_EDiagnosticChain_EMap() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getTemplateSignature_Operation_unique_parameters_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getTemplateSignature_Operation_own_elements_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getTemplateSignature_Operation_unique_parameters_EDiagnosticChain_EMap() const = 0;
 			
 			// End Class TemplateSignature
 
@@ -6627,14 +6627,14 @@ namespace uml
 			static const unsigned int TEMPLATEABLEELEMENT_OPERATION_PARAMETERABLEELEMENTS = 3445105528;
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getTemplateableElement_Class() const = 0;
+			virtual const std::shared_ptr<ecore::EClass>& getTemplateableElement_Class() const = 0;
 			
 			
-			virtual std::shared_ptr<ecore::EReference> getTemplateableElement_Attribute_ownedTemplateSignature() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getTemplateableElement_Attribute_templateBinding() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getTemplateableElement_Attribute_ownedTemplateSignature() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getTemplateableElement_Attribute_templateBinding() const = 0;
 			
-			virtual std::shared_ptr<ecore::EOperation> getTemplateableElement_Operation_isTemplate() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getTemplateableElement_Operation_parameterableElements() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getTemplateableElement_Operation_isTemplate() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getTemplateableElement_Operation_parameterableElements() const = 0;
 			
 			// End Class TemplateableElement
 
@@ -6654,16 +6654,16 @@ namespace uml
 			static const unsigned int TESTIDENTITYACTION_OPERATION_RESULT_IS_BOOLEAN_EDIAGNOSTICCHAIN_EMAP = 3147734331;
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getTestIdentityAction_Class() const = 0;
+			virtual const std::shared_ptr<ecore::EClass>& getTestIdentityAction_Class() const = 0;
 			
 			
-			virtual std::shared_ptr<ecore::EReference> getTestIdentityAction_Attribute_first() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getTestIdentityAction_Attribute_result() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getTestIdentityAction_Attribute_second() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getTestIdentityAction_Attribute_first() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getTestIdentityAction_Attribute_result() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getTestIdentityAction_Attribute_second() const = 0;
 			
-			virtual std::shared_ptr<ecore::EOperation> getTestIdentityAction_Operation_multiplicity_EDiagnosticChain_EMap() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getTestIdentityAction_Operation_no_type_EDiagnosticChain_EMap() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getTestIdentityAction_Operation_result_is_boolean_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getTestIdentityAction_Operation_multiplicity_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getTestIdentityAction_Operation_no_type_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getTestIdentityAction_Operation_result_is_boolean_EDiagnosticChain_EMap() const = 0;
 			
 			// End Class TestIdentityAction
 
@@ -6679,12 +6679,12 @@ namespace uml
 			static const unsigned int TIMECONSTRAINT_OPERATION_HAS_ONE_CONSTRAINEDELEMENT_EDIAGNOSTICCHAIN_EMAP = 183270666;
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getTimeConstraint_Class() const = 0;
+			virtual const std::shared_ptr<ecore::EClass>& getTimeConstraint_Class() const = 0;
 			
-			virtual std::shared_ptr<ecore::EAttribute> getTimeConstraint_Attribute_firstEvent() const = 0;
+			virtual const std::shared_ptr<ecore::EAttribute>& getTimeConstraint_Attribute_firstEvent() const = 0;
 			
 			
-			virtual std::shared_ptr<ecore::EOperation> getTimeConstraint_Operation_has_one_constrainedElement_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getTimeConstraint_Operation_has_one_constrainedElement_EDiagnosticChain_EMap() const = 0;
 			
 			// End Class TimeConstraint
 
@@ -6701,13 +6701,13 @@ namespace uml
 			static const unsigned int TIMEEVENT_OPERATION_WHEN_NON_NEGATIVE_EDIAGNOSTICCHAIN_EMAP = 2028291049;
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getTimeEvent_Class() const = 0;
+			virtual const std::shared_ptr<ecore::EClass>& getTimeEvent_Class() const = 0;
 			
-			virtual std::shared_ptr<ecore::EAttribute> getTimeEvent_Attribute_isRelative() const = 0;
+			virtual const std::shared_ptr<ecore::EAttribute>& getTimeEvent_Attribute_isRelative() const = 0;
 			
-			virtual std::shared_ptr<ecore::EReference> getTimeEvent_Attribute_when() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getTimeEvent_Attribute_when() const = 0;
 			
-			virtual std::shared_ptr<ecore::EOperation> getTimeEvent_Operation_when_non_negative_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getTimeEvent_Operation_when_non_negative_EDiagnosticChain_EMap() const = 0;
 			
 			// End Class TimeEvent
 
@@ -6724,13 +6724,13 @@ namespace uml
 			static const unsigned int TIMEEXPRESSION_OPERATION_NO_EXPR_REQUIRES_OBSERVATION_EDIAGNOSTICCHAIN_EMAP = 3626418142;
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getTimeExpression_Class() const = 0;
+			virtual const std::shared_ptr<ecore::EClass>& getTimeExpression_Class() const = 0;
 			
 			
-			virtual std::shared_ptr<ecore::EReference> getTimeExpression_Attribute_expr() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getTimeExpression_Attribute_observation() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getTimeExpression_Attribute_expr() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getTimeExpression_Attribute_observation() const = 0;
 			
-			virtual std::shared_ptr<ecore::EOperation> getTimeExpression_Operation_no_expr_requires_observation_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getTimeExpression_Operation_no_expr_requires_observation_EDiagnosticChain_EMap() const = 0;
 			
 			// End Class TimeExpression
 
@@ -6744,7 +6744,7 @@ namespace uml
 			
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getTimeInterval_Class() const = 0;
+			virtual const std::shared_ptr<ecore::EClass>& getTimeInterval_Class() const = 0;
 			
 			
 			
@@ -6763,11 +6763,11 @@ namespace uml
 			
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getTimeObservation_Class() const = 0;
+			virtual const std::shared_ptr<ecore::EClass>& getTimeObservation_Class() const = 0;
 			
-			virtual std::shared_ptr<ecore::EAttribute> getTimeObservation_Attribute_firstEvent() const = 0;
+			virtual const std::shared_ptr<ecore::EAttribute>& getTimeObservation_Attribute_firstEvent() const = 0;
 			
-			virtual std::shared_ptr<ecore::EReference> getTimeObservation_Attribute_event() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getTimeObservation_Attribute_event() const = 0;
 			
 			
 			// End Class TimeObservation
@@ -6801,29 +6801,29 @@ namespace uml
 			static const unsigned int TRANSITION_OPERATION_STATE_IS_LOCAL_EDIAGNOSTICCHAIN_EMAP = 3031218091;
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getTransition_Class() const = 0;
+			virtual const std::shared_ptr<ecore::EClass>& getTransition_Class() const = 0;
 			
-			virtual std::shared_ptr<ecore::EAttribute> getTransition_Attribute_kind() const = 0;
+			virtual const std::shared_ptr<ecore::EAttribute>& getTransition_Attribute_kind() const = 0;
 			
-			virtual std::shared_ptr<ecore::EReference> getTransition_Attribute_container() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getTransition_Attribute_effect() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getTransition_Attribute_guard() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getTransition_Attribute_redefinedTransition() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getTransition_Attribute_source() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getTransition_Attribute_target() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getTransition_Attribute_trigger() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getTransition_Attribute_container() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getTransition_Attribute_effect() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getTransition_Attribute_guard() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getTransition_Attribute_redefinedTransition() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getTransition_Attribute_source() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getTransition_Attribute_target() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getTransition_Attribute_trigger() const = 0;
 			
-			virtual std::shared_ptr<ecore::EOperation> getTransition_Operation_containingStateMachine() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getTransition_Operation_fork_segment_guards_EDiagnosticChain_EMap() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getTransition_Operation_fork_segment_state_EDiagnosticChain_EMap() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getTransition_Operation_initial_transition_EDiagnosticChain_EMap() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getTransition_Operation_join_segment_guards_EDiagnosticChain_EMap() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getTransition_Operation_join_segment_state_EDiagnosticChain_EMap() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getTransition_Operation_outgoing_pseudostates_EDiagnosticChain_EMap() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getTransition_Operation_redefinitionContext() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getTransition_Operation_state_is_external_EDiagnosticChain_EMap() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getTransition_Operation_state_is_internal_EDiagnosticChain_EMap() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getTransition_Operation_state_is_local_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getTransition_Operation_containingStateMachine() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getTransition_Operation_fork_segment_guards_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getTransition_Operation_fork_segment_state_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getTransition_Operation_initial_transition_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getTransition_Operation_join_segment_guards_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getTransition_Operation_join_segment_state_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getTransition_Operation_outgoing_pseudostates_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getTransition_Operation_redefinitionContext() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getTransition_Operation_state_is_external_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getTransition_Operation_state_is_internal_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getTransition_Operation_state_is_local_EDiagnosticChain_EMap() const = 0;
 			
 			// End Class Transition
 
@@ -6840,13 +6840,13 @@ namespace uml
 			static const unsigned int TRIGGER_OPERATION_TRIGGER_WITH_PORTS_EDIAGNOSTICCHAIN_EMAP = 943017704;
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getTrigger_Class() const = 0;
+			virtual const std::shared_ptr<ecore::EClass>& getTrigger_Class() const = 0;
 			
 			
-			virtual std::shared_ptr<ecore::EReference> getTrigger_Attribute_event() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getTrigger_Attribute_port() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getTrigger_Attribute_event() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getTrigger_Attribute_port() const = 0;
 			
-			virtual std::shared_ptr<ecore::EOperation> getTrigger_Operation_trigger_with_ports_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getTrigger_Operation_trigger_with_ports_EDiagnosticChain_EMap() const = 0;
 			
 			// End Class Trigger
 
@@ -6864,14 +6864,14 @@ namespace uml
 			static const unsigned int TYPE_OPERATION_GETASSOCIATIONS = 831147640;
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getType_Class() const = 0;
+			virtual const std::shared_ptr<ecore::EClass>& getType_Class() const = 0;
 			
 			
-			virtual std::shared_ptr<ecore::EReference> getType_Attribute_package() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getType_Attribute_package() const = 0;
 			
-			virtual std::shared_ptr<ecore::EOperation> getType_Operation_conformsTo_Type() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getType_Operation_createAssociation_Boolean_UnlimitedNatural() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getType_Operation_getAssociations() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getType_Operation_conformsTo_Type() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getType_Operation_createAssociation_Boolean_UnlimitedNatural() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getType_Operation_getAssociations() const = 0;
 			
 			// End Class Type
 
@@ -6886,10 +6886,10 @@ namespace uml
 			
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getTypedElement_Class() const = 0;
+			virtual const std::shared_ptr<ecore::EClass>& getTypedElement_Class() const = 0;
 			
 			
-			virtual std::shared_ptr<ecore::EReference> getTypedElement_Attribute_type() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getTypedElement_Attribute_type() const = 0;
 			
 			
 			// End Class TypedElement
@@ -6912,18 +6912,18 @@ namespace uml
 			static const unsigned int UNMARSHALLACTION_OPERATION_TYPE_ORDERING_AND_MULTIPLICITY_EDIAGNOSTICCHAIN_EMAP = 1424955868;
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getUnmarshallAction_Class() const = 0;
+			virtual const std::shared_ptr<ecore::EClass>& getUnmarshallAction_Class() const = 0;
 			
 			
-			virtual std::shared_ptr<ecore::EReference> getUnmarshallAction_Attribute_object() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getUnmarshallAction_Attribute_result() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getUnmarshallAction_Attribute_unmarshallType() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getUnmarshallAction_Attribute_object() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getUnmarshallAction_Attribute_result() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getUnmarshallAction_Attribute_unmarshallType() const = 0;
 			
-			virtual std::shared_ptr<ecore::EOperation> getUnmarshallAction_Operation_multiplicity_of_object_EDiagnosticChain_EMap() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getUnmarshallAction_Operation_number_of_result_EDiagnosticChain_EMap() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getUnmarshallAction_Operation_object_type_EDiagnosticChain_EMap() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getUnmarshallAction_Operation_structural_feature_EDiagnosticChain_EMap() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getUnmarshallAction_Operation_type_ordering_and_multiplicity_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getUnmarshallAction_Operation_multiplicity_of_object_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getUnmarshallAction_Operation_number_of_result_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getUnmarshallAction_Operation_object_type_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getUnmarshallAction_Operation_structural_feature_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getUnmarshallAction_Operation_type_ordering_and_multiplicity_EDiagnosticChain_EMap() const = 0;
 			
 			// End Class UnmarshallAction
 
@@ -6937,7 +6937,7 @@ namespace uml
 			
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getUsage_Class() const = 0;
+			virtual const std::shared_ptr<ecore::EClass>& getUsage_Class() const = 0;
 			
 			
 			
@@ -6963,19 +6963,19 @@ namespace uml
 			static const unsigned int USECASE_OPERATION_NO_ASSOCIATION_TO_USE_CASE_EDIAGNOSTICCHAIN_EMAP = 1524958393;
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getUseCase_Class() const = 0;
+			virtual const std::shared_ptr<ecore::EClass>& getUseCase_Class() const = 0;
 			
 			
-			virtual std::shared_ptr<ecore::EReference> getUseCase_Attribute_extend() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getUseCase_Attribute_extensionPoint() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getUseCase_Attribute_include() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getUseCase_Attribute_subject() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getUseCase_Attribute_extend() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getUseCase_Attribute_extensionPoint() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getUseCase_Attribute_include() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getUseCase_Attribute_subject() const = 0;
 			
-			virtual std::shared_ptr<ecore::EOperation> getUseCase_Operation_allIncludedUseCases() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getUseCase_Operation_binary_associations_EDiagnosticChain_EMap() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getUseCase_Operation_cannot_include_self_EDiagnosticChain_EMap() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getUseCase_Operation_must_have_name_EDiagnosticChain_EMap() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getUseCase_Operation_no_association_to_use_case_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getUseCase_Operation_allIncludedUseCases() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getUseCase_Operation_binary_associations_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getUseCase_Operation_cannot_include_self_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getUseCase_Operation_must_have_name_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getUseCase_Operation_no_association_to_use_case_EDiagnosticChain_EMap() const = 0;
 			
 			// End Class UseCase
 
@@ -6992,13 +6992,13 @@ namespace uml
 			static const unsigned int VALUEPIN_OPERATION_NO_INCOMING_EDGES_EDIAGNOSTICCHAIN_EMAP = 1023340225;
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getValuePin_Class() const = 0;
+			virtual const std::shared_ptr<ecore::EClass>& getValuePin_Class() const = 0;
 			
 			
-			virtual std::shared_ptr<ecore::EReference> getValuePin_Attribute_value() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getValuePin_Attribute_value() const = 0;
 			
-			virtual std::shared_ptr<ecore::EOperation> getValuePin_Operation_compatible_type_EDiagnosticChain_EMap() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getValuePin_Operation_no_incoming_edges_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getValuePin_Operation_compatible_type_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getValuePin_Operation_no_incoming_edges_EDiagnosticChain_EMap() const = 0;
 			
 			// End Class ValuePin
 
@@ -7021,19 +7021,19 @@ namespace uml
 			static const unsigned int VALUESPECIFICATION_OPERATION_UNLIMITEDVALUE = 1134102830;
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getValueSpecification_Class() const = 0;
+			virtual const std::shared_ptr<ecore::EClass>& getValueSpecification_Class() const = 0;
 			
 			
-			virtual std::shared_ptr<ecore::EReference> getValueSpecification_Attribute_owningSlot() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getValueSpecification_Attribute_valueSpecificationAction() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getValueSpecification_Attribute_owningSlot() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getValueSpecification_Attribute_valueSpecificationAction() const = 0;
 			
-			virtual std::shared_ptr<ecore::EOperation> getValueSpecification_Operation_booleanValue() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getValueSpecification_Operation_integerValue() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getValueSpecification_Operation_isComputable() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getValueSpecification_Operation_isNull() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getValueSpecification_Operation_realValue() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getValueSpecification_Operation_stringValue() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getValueSpecification_Operation_unlimitedValue() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getValueSpecification_Operation_booleanValue() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getValueSpecification_Operation_integerValue() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getValueSpecification_Operation_isComputable() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getValueSpecification_Operation_isNull() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getValueSpecification_Operation_realValue() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getValueSpecification_Operation_stringValue() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getValueSpecification_Operation_unlimitedValue() const = 0;
 			
 			// End Class ValueSpecification
 
@@ -7051,14 +7051,14 @@ namespace uml
 			static const unsigned int VALUESPECIFICATIONACTION_OPERATION_MULTIPLICITY_EDIAGNOSTICCHAIN_EMAP = 3796831131;
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getValueSpecificationAction_Class() const = 0;
+			virtual const std::shared_ptr<ecore::EClass>& getValueSpecificationAction_Class() const = 0;
 			
 			
-			virtual std::shared_ptr<ecore::EReference> getValueSpecificationAction_Attribute_result() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getValueSpecificationAction_Attribute_value() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getValueSpecificationAction_Attribute_result() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getValueSpecificationAction_Attribute_value() const = 0;
 			
-			virtual std::shared_ptr<ecore::EOperation> getValueSpecificationAction_Operation_compatible_type_EDiagnosticChain_EMap() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getValueSpecificationAction_Operation_multiplicity_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getValueSpecificationAction_Operation_compatible_type_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getValueSpecificationAction_Operation_multiplicity_EDiagnosticChain_EMap() const = 0;
 			
 			// End Class ValueSpecificationAction
 
@@ -7075,13 +7075,13 @@ namespace uml
 			static const unsigned int VARIABLE_OPERATION_ISACCESSIBLEBY_ACTION = 268671640;
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getVariable_Class() const = 0;
+			virtual const std::shared_ptr<ecore::EClass>& getVariable_Class() const = 0;
 			
 			
-			virtual std::shared_ptr<ecore::EReference> getVariable_Attribute_activityScope() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getVariable_Attribute_scope() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getVariable_Attribute_activityScope() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getVariable_Attribute_scope() const = 0;
 			
-			virtual std::shared_ptr<ecore::EOperation> getVariable_Operation_isAccessibleBy_Action() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getVariable_Operation_isAccessibleBy_Action() const = 0;
 			
 			// End Class Variable
 
@@ -7097,12 +7097,12 @@ namespace uml
 			static const unsigned int VARIABLEACTION_OPERATION_SCOPE_OF_VARIABLE_EDIAGNOSTICCHAIN_EMAP = 408430589;
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getVariableAction_Class() const = 0;
+			virtual const std::shared_ptr<ecore::EClass>& getVariableAction_Class() const = 0;
 			
 			
-			virtual std::shared_ptr<ecore::EReference> getVariableAction_Attribute_variable() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getVariableAction_Attribute_variable() const = 0;
 			
-			virtual std::shared_ptr<ecore::EOperation> getVariableAction_Operation_scope_of_variable_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getVariableAction_Operation_scope_of_variable_EDiagnosticChain_EMap() const = 0;
 			
 			// End Class VariableAction
 
@@ -7124,18 +7124,18 @@ namespace uml
 			static const unsigned int VERTEX_OPERATION_ISCONTAINEDINSTATE_STATE = 3997919607;
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getVertex_Class() const = 0;
+			virtual const std::shared_ptr<ecore::EClass>& getVertex_Class() const = 0;
 			
 			
-			virtual std::shared_ptr<ecore::EReference> getVertex_Attribute_container() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getVertex_Attribute_incoming() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getVertex_Attribute_outgoing() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getVertex_Attribute_container() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getVertex_Attribute_incoming() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getVertex_Attribute_outgoing() const = 0;
 			
-			virtual std::shared_ptr<ecore::EOperation> getVertex_Operation_containingStateMachine() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getVertex_Operation_getIncomings() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getVertex_Operation_getOutgoings() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getVertex_Operation_isContainedInRegion_Region() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getVertex_Operation_isContainedInState_State() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getVertex_Operation_containingStateMachine() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getVertex_Operation_getIncomings() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getVertex_Operation_getOutgoings() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getVertex_Operation_isContainedInRegion_Region() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getVertex_Operation_isContainedInState_State() const = 0;
 			
 			// End Class Vertex
 
@@ -7150,11 +7150,11 @@ namespace uml
 			static const unsigned int WRITELINKACTION_OPERATION_ALLOW_ACCESS_EDIAGNOSTICCHAIN_EMAP = 367255121;
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getWriteLinkAction_Class() const = 0;
+			virtual const std::shared_ptr<ecore::EClass>& getWriteLinkAction_Class() const = 0;
 			
 			
 			
-			virtual std::shared_ptr<ecore::EOperation> getWriteLinkAction_Operation_allow_access_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getWriteLinkAction_Operation_allow_access_EDiagnosticChain_EMap() const = 0;
 			
 			// End Class WriteLinkAction
 
@@ -7174,16 +7174,16 @@ namespace uml
 			static const unsigned int WRITESTRUCTURALFEATUREACTION_OPERATION_TYPE_OF_VALUE_EDIAGNOSTICCHAIN_EMAP = 4292166454;
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getWriteStructuralFeatureAction_Class() const = 0;
+			virtual const std::shared_ptr<ecore::EClass>& getWriteStructuralFeatureAction_Class() const = 0;
 			
 			
-			virtual std::shared_ptr<ecore::EReference> getWriteStructuralFeatureAction_Attribute_result() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getWriteStructuralFeatureAction_Attribute_value() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getWriteStructuralFeatureAction_Attribute_result() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getWriteStructuralFeatureAction_Attribute_value() const = 0;
 			
-			virtual std::shared_ptr<ecore::EOperation> getWriteStructuralFeatureAction_Operation_multiplicity_of_result_EDiagnosticChain_EMap() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getWriteStructuralFeatureAction_Operation_multiplicity_of_value_EDiagnosticChain_EMap() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getWriteStructuralFeatureAction_Operation_type_of_result_EDiagnosticChain_EMap() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getWriteStructuralFeatureAction_Operation_type_of_value_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getWriteStructuralFeatureAction_Operation_multiplicity_of_result_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getWriteStructuralFeatureAction_Operation_multiplicity_of_value_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getWriteStructuralFeatureAction_Operation_type_of_result_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getWriteStructuralFeatureAction_Operation_type_of_value_EDiagnosticChain_EMap() const = 0;
 			
 			// End Class WriteStructuralFeatureAction
 
@@ -7200,13 +7200,13 @@ namespace uml
 			static const unsigned int WRITEVARIABLEACTION_OPERATION_VALUE_TYPE_EDIAGNOSTICCHAIN_EMAP = 2138124691;
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getWriteVariableAction_Class() const = 0;
+			virtual const std::shared_ptr<ecore::EClass>& getWriteVariableAction_Class() const = 0;
 			
 			
-			virtual std::shared_ptr<ecore::EReference> getWriteVariableAction_Attribute_value() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getWriteVariableAction_Attribute_value() const = 0;
 			
-			virtual std::shared_ptr<ecore::EOperation> getWriteVariableAction_Operation_multiplicity_EDiagnosticChain_EMap() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getWriteVariableAction_Operation_value_type_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getWriteVariableAction_Operation_multiplicity_EDiagnosticChain_EMap() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getWriteVariableAction_Operation_value_type_EDiagnosticChain_EMap() const = 0;
 			
 			// End Class WriteVariableAction
 
@@ -7224,19 +7224,19 @@ namespace uml
 			static const int TRANSITIONKIND_CLASS = 242;
 			static const int VISIBILITYKIND_CLASS = 255;
 			
-			virtual std::shared_ptr<ecore::EEnum> getAggregationKind_Class() const = 0;
-			virtual std::shared_ptr<ecore::EEnum> getCallConcurrencyKind_Class() const = 0;
-			virtual std::shared_ptr<ecore::EEnum> getConnectorKind_Class() const = 0;
-			virtual std::shared_ptr<ecore::EEnum> getExpansionKind_Class() const = 0;
-			virtual std::shared_ptr<ecore::EEnum> getInteractionOperatorKind_Class() const = 0;
-			virtual std::shared_ptr<ecore::EEnum> getMessageKind_Class() const = 0;
-			virtual std::shared_ptr<ecore::EEnum> getMessageSort_Class() const = 0;
-			virtual std::shared_ptr<ecore::EEnum> getObjectNodeOrderingKind_Class() const = 0;
-			virtual std::shared_ptr<ecore::EEnum> getParameterDirectionKind_Class() const = 0;
-			virtual std::shared_ptr<ecore::EEnum> getParameterEffectKind_Class() const = 0;
-			virtual std::shared_ptr<ecore::EEnum> getPseudostateKind_Class() const = 0;
-			virtual std::shared_ptr<ecore::EEnum> getTransitionKind_Class() const = 0;
-			virtual std::shared_ptr<ecore::EEnum> getVisibilityKind_Class() const = 0;
+			virtual const std::shared_ptr<ecore::EEnum>& getAggregationKind_Class() const = 0;
+			virtual const std::shared_ptr<ecore::EEnum>& getCallConcurrencyKind_Class() const = 0;
+			virtual const std::shared_ptr<ecore::EEnum>& getConnectorKind_Class() const = 0;
+			virtual const std::shared_ptr<ecore::EEnum>& getExpansionKind_Class() const = 0;
+			virtual const std::shared_ptr<ecore::EEnum>& getInteractionOperatorKind_Class() const = 0;
+			virtual const std::shared_ptr<ecore::EEnum>& getMessageKind_Class() const = 0;
+			virtual const std::shared_ptr<ecore::EEnum>& getMessageSort_Class() const = 0;
+			virtual const std::shared_ptr<ecore::EEnum>& getObjectNodeOrderingKind_Class() const = 0;
+			virtual const std::shared_ptr<ecore::EEnum>& getParameterDirectionKind_Class() const = 0;
+			virtual const std::shared_ptr<ecore::EEnum>& getParameterEffectKind_Class() const = 0;
+			virtual const std::shared_ptr<ecore::EEnum>& getPseudostateKind_Class() const = 0;
+			virtual const std::shared_ptr<ecore::EEnum>& getTransitionKind_Class() const = 0;
+			virtual const std::shared_ptr<ecore::EEnum>& getVisibilityKind_Class() const = 0;
 			
 
 			

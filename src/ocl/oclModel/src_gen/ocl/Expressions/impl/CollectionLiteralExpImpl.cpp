@@ -534,7 +534,7 @@ bool CollectionLiteralExpImpl::eSet(int featureID, const Any& newValue)
 					std::shared_ptr<Bag<ocl::Expressions::CollectionLiteralPart>> _part=getPart();
 					for(const std::shared_ptr<ocl::Expressions::CollectionLiteralPart> indexPart: *_part)
 					{
-						if (partList->find(indexPart) == -1)
+						if (!(partList->includes(indexPart)))
 						{
 							_part->erase(indexPart);
 						}
@@ -542,7 +542,7 @@ bool CollectionLiteralExpImpl::eSet(int featureID, const Any& newValue)
 
 					for(const std::shared_ptr<ocl::Expressions::CollectionLiteralPart> indexPart: *partList)
 					{
-						if (_part->find(indexPart) == -1)
+						if (!(_part->includes(indexPart)))
 						{
 							_part->add(indexPart);
 						}

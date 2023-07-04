@@ -976,7 +976,7 @@ bool StructuredActivityNodeImpl::eSet(int featureID, const Any& newValue)
 					std::shared_ptr<Bag<uml::ActivityEdge>> _edge=getEdge();
 					for(const std::shared_ptr<uml::ActivityEdge> indexEdge: *_edge)
 					{
-						if (edgeList->find(indexEdge) == -1)
+						if (!(edgeList->includes(indexEdge)))
 						{
 							_edge->erase(indexEdge);
 						}
@@ -984,7 +984,7 @@ bool StructuredActivityNodeImpl::eSet(int featureID, const Any& newValue)
 
 					for(const std::shared_ptr<uml::ActivityEdge> indexEdge: *edgeList)
 					{
-						if (_edge->find(indexEdge) == -1)
+						if (!(_edge->includes(indexEdge)))
 						{
 							_edge->add(indexEdge);
 						}
@@ -1020,7 +1020,7 @@ bool StructuredActivityNodeImpl::eSet(int featureID, const Any& newValue)
 					std::shared_ptr<Bag<uml::ActivityNode>> _node=getNode();
 					for(const std::shared_ptr<uml::ActivityNode> indexNode: *_node)
 					{
-						if (nodeList->find(indexNode) == -1)
+						if (!(nodeList->includes(indexNode)))
 						{
 							_node->erase(indexNode);
 						}
@@ -1028,7 +1028,7 @@ bool StructuredActivityNodeImpl::eSet(int featureID, const Any& newValue)
 
 					for(const std::shared_ptr<uml::ActivityNode> indexNode: *nodeList)
 					{
-						if (_node->find(indexNode) == -1)
+						if (!(_node->includes(indexNode)))
 						{
 							_node->add(indexNode);
 						}
@@ -1057,7 +1057,7 @@ bool StructuredActivityNodeImpl::eSet(int featureID, const Any& newValue)
 					std::shared_ptr<Bag<uml::InputPin>> _structuredNodeInput=getStructuredNodeInput();
 					for(const std::shared_ptr<uml::InputPin> indexStructuredNodeInput: *_structuredNodeInput)
 					{
-						if (structuredNodeInputList->find(indexStructuredNodeInput) == -1)
+						if (!(structuredNodeInputList->includes(indexStructuredNodeInput)))
 						{
 							_structuredNodeInput->erase(indexStructuredNodeInput);
 						}
@@ -1065,7 +1065,7 @@ bool StructuredActivityNodeImpl::eSet(int featureID, const Any& newValue)
 
 					for(const std::shared_ptr<uml::InputPin> indexStructuredNodeInput: *structuredNodeInputList)
 					{
-						if (_structuredNodeInput->find(indexStructuredNodeInput) == -1)
+						if (!(_structuredNodeInput->includes(indexStructuredNodeInput)))
 						{
 							_structuredNodeInput->add(indexStructuredNodeInput);
 						}
@@ -1094,7 +1094,7 @@ bool StructuredActivityNodeImpl::eSet(int featureID, const Any& newValue)
 					std::shared_ptr<Bag<uml::OutputPin>> _structuredNodeOutput=getStructuredNodeOutput();
 					for(const std::shared_ptr<uml::OutputPin> indexStructuredNodeOutput: *_structuredNodeOutput)
 					{
-						if (structuredNodeOutputList->find(indexStructuredNodeOutput) == -1)
+						if (!(structuredNodeOutputList->includes(indexStructuredNodeOutput)))
 						{
 							_structuredNodeOutput->erase(indexStructuredNodeOutput);
 						}
@@ -1102,7 +1102,7 @@ bool StructuredActivityNodeImpl::eSet(int featureID, const Any& newValue)
 
 					for(const std::shared_ptr<uml::OutputPin> indexStructuredNodeOutput: *structuredNodeOutputList)
 					{
-						if (_structuredNodeOutput->find(indexStructuredNodeOutput) == -1)
+						if (!(_structuredNodeOutput->includes(indexStructuredNodeOutput)))
 						{
 							_structuredNodeOutput->add(indexStructuredNodeOutput);
 						}
@@ -1131,7 +1131,7 @@ bool StructuredActivityNodeImpl::eSet(int featureID, const Any& newValue)
 					std::shared_ptr<Bag<uml::Variable>> _variable=getVariable();
 					for(const std::shared_ptr<uml::Variable> indexVariable: *_variable)
 					{
-						if (variableList->find(indexVariable) == -1)
+						if (!(variableList->includes(indexVariable)))
 						{
 							_variable->erase(indexVariable);
 						}
@@ -1139,7 +1139,7 @@ bool StructuredActivityNodeImpl::eSet(int featureID, const Any& newValue)
 
 					for(const std::shared_ptr<uml::Variable> indexVariable: *variableList)
 					{
-						if (_variable->find(indexVariable) == -1)
+						if (!(_variable->includes(indexVariable)))
 						{
 							_variable->add(indexVariable);
 						}

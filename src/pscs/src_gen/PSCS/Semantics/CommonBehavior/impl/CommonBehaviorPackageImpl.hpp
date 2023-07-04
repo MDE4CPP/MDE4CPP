@@ -42,32 +42,32 @@ namespace PSCS::Semantics::CommonBehavior
 
 			// Begin Class CS_CallEventExecution
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getCS_CallEventExecution_Class() const ;
+			virtual const std::shared_ptr<ecore::EClass>& getCS_CallEventExecution_Class() const ;
 			
 			
-			virtual std::shared_ptr<ecore::EReference> getCS_CallEventExecution_Attribute_interactionPoint() const ;
+			virtual const std::shared_ptr<ecore::EReference>& getCS_CallEventExecution_Attribute_interactionPoint() const ;
 			
-			virtual std::shared_ptr<ecore::EOperation> getCS_CallEventExecution_Operation__copy() const ;
-			virtual std::shared_ptr<ecore::EOperation> getCS_CallEventExecution_Operation_createEventOccurrence() const ;
-			virtual std::shared_ptr<ecore::EOperation> getCS_CallEventExecution_Operation_new_() const ;
+			virtual const std::shared_ptr<ecore::EOperation>& getCS_CallEventExecution_Operation__copy() const ;
+			virtual const std::shared_ptr<ecore::EOperation>& getCS_CallEventExecution_Operation_createEventOccurrence() const ;
+			virtual const std::shared_ptr<ecore::EOperation>& getCS_CallEventExecution_Operation_new_() const ;
 			
 			// End Class CS_CallEventExecution
 
 			// Begin Class CS_EventOccurrence
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getCS_EventOccurrence_Class() const ;
+			virtual const std::shared_ptr<ecore::EClass>& getCS_EventOccurrence_Class() const ;
 			
-			virtual std::shared_ptr<ecore::EAttribute> getCS_EventOccurrence_Attribute_propagationInward() const ;
+			virtual const std::shared_ptr<ecore::EAttribute>& getCS_EventOccurrence_Attribute_propagationInward() const ;
 			
-			virtual std::shared_ptr<ecore::EReference> getCS_EventOccurrence_Attribute_interactionPoint() const ;
-			virtual std::shared_ptr<ecore::EReference> getCS_EventOccurrence_Attribute_onPort() const ;
-			virtual std::shared_ptr<ecore::EReference> getCS_EventOccurrence_Attribute_wrappedEventOccurrence() const ;
+			virtual const std::shared_ptr<ecore::EReference>& getCS_EventOccurrence_Attribute_interactionPoint() const ;
+			virtual const std::shared_ptr<ecore::EReference>& getCS_EventOccurrence_Attribute_onPort() const ;
+			virtual const std::shared_ptr<ecore::EReference>& getCS_EventOccurrence_Attribute_wrappedEventOccurrence() const ;
 			
-			virtual std::shared_ptr<ecore::EOperation> getCS_EventOccurrence_Operation_doSend() const ;
-			virtual std::shared_ptr<ecore::EOperation> getCS_EventOccurrence_Operation_getParameterValues() const ;
-			virtual std::shared_ptr<ecore::EOperation> getCS_EventOccurrence_Operation_match_Trigger() const ;
-			virtual std::shared_ptr<ecore::EOperation> getCS_EventOccurrence_Operation_sendInTo_CS_Reference_Port() const ;
-			virtual std::shared_ptr<ecore::EOperation> getCS_EventOccurrence_Operation_sendOutTo_CS_Reference_Port() const ;
+			virtual const std::shared_ptr<ecore::EOperation>& getCS_EventOccurrence_Operation_doSend() const ;
+			virtual const std::shared_ptr<ecore::EOperation>& getCS_EventOccurrence_Operation_getParameterValues() const ;
+			virtual const std::shared_ptr<ecore::EOperation>& getCS_EventOccurrence_Operation_match_Trigger() const ;
+			virtual const std::shared_ptr<ecore::EOperation>& getCS_EventOccurrence_Operation_sendInTo_CS_Reference_Port() const ;
+			virtual const std::shared_ptr<ecore::EOperation>& getCS_EventOccurrence_Operation_sendOutTo_CS_Reference_Port() const ;
 			
 			// End Class CS_EventOccurrence
 

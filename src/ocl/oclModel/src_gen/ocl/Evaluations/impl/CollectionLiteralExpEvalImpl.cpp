@@ -206,7 +206,7 @@ void CollectionLiteralExpEvalImpl::resolveReferences(const int featureID, std::v
 	{
 		case ocl::Evaluations::EvaluationsPackage::COLLECTIONLITERALEXPEVAL_ATTRIBUTE_PARTS:
 		{
-			std::shared_ptr<Bag<ocl::Evaluations::CollectionLiteralPartEval>> _parts = getParts();
+			const std::shared_ptr<Bag<ocl::Evaluations::CollectionLiteralPartEval>>& _parts = getParts();
 			for(std::shared_ptr<ecore::EObject> ref : references)
 			{
 				std::shared_ptr<ocl::Evaluations::CollectionLiteralPartEval>  _r = std::dynamic_pointer_cast<ocl::Evaluations::CollectionLiteralPartEval>(ref);
@@ -293,7 +293,7 @@ bool CollectionLiteralExpEvalImpl::eSet(int featureID, const Any& newValue)
 					std::shared_ptr<Bag<ocl::Evaluations::CollectionLiteralPartEval>> _parts=getParts();
 					for(const std::shared_ptr<ocl::Evaluations::CollectionLiteralPartEval> indexParts: *_parts)
 					{
-						if (partsList->find(indexParts) == -1)
+						if (!(partsList->includes(indexParts)))
 						{
 							_parts->erase(indexParts);
 						}
@@ -301,7 +301,7 @@ bool CollectionLiteralExpEvalImpl::eSet(int featureID, const Any& newValue)
 
 					for(const std::shared_ptr<ocl::Evaluations::CollectionLiteralPartEval> indexParts: *partsList)
 					{
-						if (_parts->find(indexParts) == -1)
+						if (!(_parts->includes(indexParts)))
 						{
 							_parts->add(indexParts);
 						}

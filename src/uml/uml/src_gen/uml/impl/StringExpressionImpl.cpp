@@ -511,7 +511,7 @@ bool StringExpressionImpl::eSet(int featureID, const Any& newValue)
 					std::shared_ptr<Bag<uml::StringExpression>> _subExpression=getSubExpression();
 					for(const std::shared_ptr<uml::StringExpression> indexSubExpression: *_subExpression)
 					{
-						if (subExpressionList->find(indexSubExpression) == -1)
+						if (!(subExpressionList->includes(indexSubExpression)))
 						{
 							_subExpression->erase(indexSubExpression);
 						}
@@ -519,7 +519,7 @@ bool StringExpressionImpl::eSet(int featureID, const Any& newValue)
 
 					for(const std::shared_ptr<uml::StringExpression> indexSubExpression: *subExpressionList)
 					{
-						if (_subExpression->find(indexSubExpression) == -1)
+						if (!(_subExpression->includes(indexSubExpression)))
 						{
 							_subExpression->add(indexSubExpression);
 						}

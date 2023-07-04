@@ -53,14 +53,14 @@ void ClassificationPackageImpl::init(std::shared_ptr<ecore::EPackage> package)
 
 
 // Begin Class CS_InstanceValueEvaluation
-std::shared_ptr<ecore::EClass> PSCS::Semantics::Classification::ClassificationPackageImpl::getCS_InstanceValueEvaluation_Class() const
+const std::shared_ptr<ecore::EClass>& PSCS::Semantics::Classification::ClassificationPackageImpl::getCS_InstanceValueEvaluation_Class() const
 {
 	return m_cS_InstanceValueEvaluation_Class;
 }
 
 
 
-std::shared_ptr<ecore::EOperation> PSCS::Semantics::Classification::ClassificationPackageImpl::getCS_InstanceValueEvaluation_Operation_evaluate() const
+const std::shared_ptr<ecore::EOperation>& PSCS::Semantics::Classification::ClassificationPackageImpl::getCS_InstanceValueEvaluation_Operation_evaluate() const
 {
 	return m_cS_InstanceValueEvaluation_Operation_evaluate;
 }

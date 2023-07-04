@@ -58,11 +58,11 @@ namespace fUML::Semantics::Classification
 			static const unsigned int INSTANCEVALUEEVALUATION_OPERATION_EVALUATE = 2581799787;
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getInstanceValueEvaluation_Class() const = 0;
+			virtual const std::shared_ptr<ecore::EClass>& getInstanceValueEvaluation_Class() const = 0;
 			
 			
 			
-			virtual std::shared_ptr<ecore::EOperation> getInstanceValueEvaluation_Operation_evaluate() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getInstanceValueEvaluation_Operation_evaluate() const = 0;
 			
 			// End Class InstanceValueEvaluation
 

@@ -665,7 +665,7 @@ void AssociationImpl::resolveReferences(const int featureID, std::vector<std::sh
 	{
 		case uml::umlPackage::ASSOCIATION_ATTRIBUTE_MEMBEREND:
 		{
-			std::shared_ptr<SubsetUnion<uml::Property, uml::NamedElement>> _memberEnd = getMemberEnd();
+			const std::shared_ptr<SubsetUnion<uml::Property, uml::NamedElement>>& _memberEnd = getMemberEnd();
 			for(std::shared_ptr<ecore::EObject> ref : references)
 			{
 				std::shared_ptr<uml::Property>  _r = std::dynamic_pointer_cast<uml::Property>(ref);
@@ -679,7 +679,7 @@ void AssociationImpl::resolveReferences(const int featureID, std::vector<std::sh
 
 		case uml::umlPackage::ASSOCIATION_ATTRIBUTE_NAVIGABLEOWNEDEND:
 		{
-			std::shared_ptr<Subset<uml::Property, uml::Property /*Subset does not reference a union*/>> _navigableOwnedEnd = getNavigableOwnedEnd();
+			const std::shared_ptr<Subset<uml::Property, uml::Property /*Subset does not reference a union*/>>& _navigableOwnedEnd = getNavigableOwnedEnd();
 			for(std::shared_ptr<ecore::EObject> ref : references)
 			{
 				std::shared_ptr<uml::Property>  _r = std::dynamic_pointer_cast<uml::Property>(ref);
@@ -826,7 +826,7 @@ bool AssociationImpl::eSet(int featureID, const Any& newValue)
 					std::shared_ptr<Bag<uml::Property>> _memberEnd=getMemberEnd();
 					for(const std::shared_ptr<uml::Property> indexMemberEnd: *_memberEnd)
 					{
-						if (memberEndList->find(indexMemberEnd) == -1)
+						if (!(memberEndList->includes(indexMemberEnd)))
 						{
 							_memberEnd->erase(indexMemberEnd);
 						}
@@ -834,7 +834,7 @@ bool AssociationImpl::eSet(int featureID, const Any& newValue)
 
 					for(const std::shared_ptr<uml::Property> indexMemberEnd: *memberEndList)
 					{
-						if (_memberEnd->find(indexMemberEnd) == -1)
+						if (!(_memberEnd->includes(indexMemberEnd)))
 						{
 							_memberEnd->add(indexMemberEnd);
 						}
@@ -863,7 +863,7 @@ bool AssociationImpl::eSet(int featureID, const Any& newValue)
 					std::shared_ptr<Bag<uml::Property>> _navigableOwnedEnd=getNavigableOwnedEnd();
 					for(const std::shared_ptr<uml::Property> indexNavigableOwnedEnd: *_navigableOwnedEnd)
 					{
-						if (navigableOwnedEndList->find(indexNavigableOwnedEnd) == -1)
+						if (!(navigableOwnedEndList->includes(indexNavigableOwnedEnd)))
 						{
 							_navigableOwnedEnd->erase(indexNavigableOwnedEnd);
 						}
@@ -871,7 +871,7 @@ bool AssociationImpl::eSet(int featureID, const Any& newValue)
 
 					for(const std::shared_ptr<uml::Property> indexNavigableOwnedEnd: *navigableOwnedEndList)
 					{
-						if (_navigableOwnedEnd->find(indexNavigableOwnedEnd) == -1)
+						if (!(_navigableOwnedEnd->includes(indexNavigableOwnedEnd)))
 						{
 							_navigableOwnedEnd->add(indexNavigableOwnedEnd);
 						}
@@ -900,7 +900,7 @@ bool AssociationImpl::eSet(int featureID, const Any& newValue)
 					std::shared_ptr<Bag<uml::Property>> _ownedEnd=getOwnedEnd();
 					for(const std::shared_ptr<uml::Property> indexOwnedEnd: *_ownedEnd)
 					{
-						if (ownedEndList->find(indexOwnedEnd) == -1)
+						if (!(ownedEndList->includes(indexOwnedEnd)))
 						{
 							_ownedEnd->erase(indexOwnedEnd);
 						}
@@ -908,7 +908,7 @@ bool AssociationImpl::eSet(int featureID, const Any& newValue)
 
 					for(const std::shared_ptr<uml::Property> indexOwnedEnd: *ownedEndList)
 					{
-						if (_ownedEnd->find(indexOwnedEnd) == -1)
+						if (!(_ownedEnd->includes(indexOwnedEnd)))
 						{
 							_ownedEnd->add(indexOwnedEnd);
 						}

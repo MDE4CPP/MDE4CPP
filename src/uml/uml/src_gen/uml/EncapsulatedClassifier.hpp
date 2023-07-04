@@ -113,7 +113,7 @@ namespace uml
 			<p>From package UML::StructuredClassifiers.</p>
 			*/
 			
-			virtual const std::shared_ptr<Subset<uml::Port, uml::Property /*Subset does not reference a union*/>>& getOwnedPort() const = 0;
+			virtual std::shared_ptr<Subset<uml::Port, uml::Property /*Subset does not reference a union*/>> getOwnedPort() const = 0;
 
 			//*********************************
 			// Union Reference Getters

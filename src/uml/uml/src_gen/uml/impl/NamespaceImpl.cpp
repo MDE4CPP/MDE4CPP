@@ -681,7 +681,7 @@ bool NamespaceImpl::eSet(int featureID, const Any& newValue)
 					std::shared_ptr<Bag<uml::ElementImport>> _elementImport=getElementImport();
 					for(const std::shared_ptr<uml::ElementImport> indexElementImport: *_elementImport)
 					{
-						if (elementImportList->find(indexElementImport) == -1)
+						if (!(elementImportList->includes(indexElementImport)))
 						{
 							_elementImport->erase(indexElementImport);
 						}
@@ -689,7 +689,7 @@ bool NamespaceImpl::eSet(int featureID, const Any& newValue)
 
 					for(const std::shared_ptr<uml::ElementImport> indexElementImport: *elementImportList)
 					{
-						if (_elementImport->find(indexElementImport) == -1)
+						if (!(_elementImport->includes(indexElementImport)))
 						{
 							_elementImport->add(indexElementImport);
 						}
@@ -718,7 +718,7 @@ bool NamespaceImpl::eSet(int featureID, const Any& newValue)
 					std::shared_ptr<Bag<uml::Constraint>> _ownedRule=getOwnedRule();
 					for(const std::shared_ptr<uml::Constraint> indexOwnedRule: *_ownedRule)
 					{
-						if (ownedRuleList->find(indexOwnedRule) == -1)
+						if (!(ownedRuleList->includes(indexOwnedRule)))
 						{
 							_ownedRule->erase(indexOwnedRule);
 						}
@@ -726,7 +726,7 @@ bool NamespaceImpl::eSet(int featureID, const Any& newValue)
 
 					for(const std::shared_ptr<uml::Constraint> indexOwnedRule: *ownedRuleList)
 					{
-						if (_ownedRule->find(indexOwnedRule) == -1)
+						if (!(_ownedRule->includes(indexOwnedRule)))
 						{
 							_ownedRule->add(indexOwnedRule);
 						}
@@ -755,7 +755,7 @@ bool NamespaceImpl::eSet(int featureID, const Any& newValue)
 					std::shared_ptr<Bag<uml::PackageImport>> _packageImport=getPackageImport();
 					for(const std::shared_ptr<uml::PackageImport> indexPackageImport: *_packageImport)
 					{
-						if (packageImportList->find(indexPackageImport) == -1)
+						if (!(packageImportList->includes(indexPackageImport)))
 						{
 							_packageImport->erase(indexPackageImport);
 						}
@@ -763,7 +763,7 @@ bool NamespaceImpl::eSet(int featureID, const Any& newValue)
 
 					for(const std::shared_ptr<uml::PackageImport> indexPackageImport: *packageImportList)
 					{
-						if (_packageImport->find(indexPackageImport) == -1)
+						if (!(_packageImport->includes(indexPackageImport)))
 						{
 							_packageImport->add(indexPackageImport);
 						}

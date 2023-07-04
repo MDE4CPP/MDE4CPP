@@ -1079,7 +1079,7 @@ bool PackageImpl::eSet(int featureID, const Any& newValue)
 					std::shared_ptr<Bag<uml::Package>> _nestedPackage=getNestedPackage();
 					for(const std::shared_ptr<uml::Package> indexNestedPackage: *_nestedPackage)
 					{
-						if (nestedPackageList->find(indexNestedPackage) == -1)
+						if (!(nestedPackageList->includes(indexNestedPackage)))
 						{
 							_nestedPackage->erase(indexNestedPackage);
 						}
@@ -1087,7 +1087,7 @@ bool PackageImpl::eSet(int featureID, const Any& newValue)
 
 					for(const std::shared_ptr<uml::Package> indexNestedPackage: *nestedPackageList)
 					{
-						if (_nestedPackage->find(indexNestedPackage) == -1)
+						if (!(_nestedPackage->includes(indexNestedPackage)))
 						{
 							_nestedPackage->add(indexNestedPackage);
 						}
@@ -1124,7 +1124,7 @@ bool PackageImpl::eSet(int featureID, const Any& newValue)
 					std::shared_ptr<Bag<uml::Type>> _ownedType=getOwnedType();
 					for(const std::shared_ptr<uml::Type> indexOwnedType: *_ownedType)
 					{
-						if (ownedTypeList->find(indexOwnedType) == -1)
+						if (!(ownedTypeList->includes(indexOwnedType)))
 						{
 							_ownedType->erase(indexOwnedType);
 						}
@@ -1132,7 +1132,7 @@ bool PackageImpl::eSet(int featureID, const Any& newValue)
 
 					for(const std::shared_ptr<uml::Type> indexOwnedType: *ownedTypeList)
 					{
-						if (_ownedType->find(indexOwnedType) == -1)
+						if (!(_ownedType->includes(indexOwnedType)))
 						{
 							_ownedType->add(indexOwnedType);
 						}
@@ -1161,7 +1161,7 @@ bool PackageImpl::eSet(int featureID, const Any& newValue)
 					std::shared_ptr<Bag<uml::PackageMerge>> _packageMerge=getPackageMerge();
 					for(const std::shared_ptr<uml::PackageMerge> indexPackageMerge: *_packageMerge)
 					{
-						if (packageMergeList->find(indexPackageMerge) == -1)
+						if (!(packageMergeList->includes(indexPackageMerge)))
 						{
 							_packageMerge->erase(indexPackageMerge);
 						}
@@ -1169,7 +1169,7 @@ bool PackageImpl::eSet(int featureID, const Any& newValue)
 
 					for(const std::shared_ptr<uml::PackageMerge> indexPackageMerge: *packageMergeList)
 					{
-						if (_packageMerge->find(indexPackageMerge) == -1)
+						if (!(_packageMerge->includes(indexPackageMerge)))
 						{
 							_packageMerge->add(indexPackageMerge);
 						}
@@ -1198,7 +1198,7 @@ bool PackageImpl::eSet(int featureID, const Any& newValue)
 					std::shared_ptr<Bag<uml::PackageableElement>> _packagedElement=getPackagedElement();
 					for(const std::shared_ptr<uml::PackageableElement> indexPackagedElement: *_packagedElement)
 					{
-						if (packagedElementList->find(indexPackagedElement) == -1)
+						if (!(packagedElementList->includes(indexPackagedElement)))
 						{
 							_packagedElement->erase(indexPackagedElement);
 						}
@@ -1206,7 +1206,7 @@ bool PackageImpl::eSet(int featureID, const Any& newValue)
 
 					for(const std::shared_ptr<uml::PackageableElement> indexPackagedElement: *packagedElementList)
 					{
-						if (_packagedElement->find(indexPackagedElement) == -1)
+						if (!(_packagedElement->includes(indexPackagedElement)))
 						{
 							_packagedElement->add(indexPackagedElement);
 						}
@@ -1235,7 +1235,7 @@ bool PackageImpl::eSet(int featureID, const Any& newValue)
 					std::shared_ptr<Bag<uml::ProfileApplication>> _profileApplication=getProfileApplication();
 					for(const std::shared_ptr<uml::ProfileApplication> indexProfileApplication: *_profileApplication)
 					{
-						if (profileApplicationList->find(indexProfileApplication) == -1)
+						if (!(profileApplicationList->includes(indexProfileApplication)))
 						{
 							_profileApplication->erase(indexProfileApplication);
 						}
@@ -1243,7 +1243,7 @@ bool PackageImpl::eSet(int featureID, const Any& newValue)
 
 					for(const std::shared_ptr<uml::ProfileApplication> indexProfileApplication: *profileApplicationList)
 					{
-						if (_profileApplication->find(indexProfileApplication) == -1)
+						if (!(_profileApplication->includes(indexProfileApplication)))
 						{
 							_profileApplication->add(indexProfileApplication);
 						}

@@ -369,7 +369,7 @@ bool ParameterValueImpl::eSet(int featureID, const Any& newValue)
 					std::shared_ptr<Bag<fUML::Semantics::Values::Value>> _values=getValues();
 					for(const std::shared_ptr<fUML::Semantics::Values::Value> indexValues: *_values)
 					{
-						if (valuesList->find(indexValues) == -1)
+						if (!(valuesList->includes(indexValues)))
 						{
 							_values->erase(indexValues);
 						}
@@ -377,7 +377,7 @@ bool ParameterValueImpl::eSet(int featureID, const Any& newValue)
 
 					for(const std::shared_ptr<fUML::Semantics::Values::Value> indexValues: *valuesList)
 					{
-						if (_values->find(indexValues) == -1)
+						if (!(_values->includes(indexValues)))
 						{
 							_values->add(indexValues);
 						}

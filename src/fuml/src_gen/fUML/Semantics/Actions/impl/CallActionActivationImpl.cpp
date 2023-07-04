@@ -615,7 +615,7 @@ bool CallActionActivationImpl::eSet(int featureID, const Any& newValue)
 					std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::Execution>> _callExecutions=getCallExecutions();
 					for(const std::shared_ptr<fUML::Semantics::CommonBehavior::Execution> indexCallExecutions: *_callExecutions)
 					{
-						if (callExecutionsList->find(indexCallExecutions) == -1)
+						if (!(callExecutionsList->includes(indexCallExecutions)))
 						{
 							_callExecutions->erase(indexCallExecutions);
 						}
@@ -623,7 +623,7 @@ bool CallActionActivationImpl::eSet(int featureID, const Any& newValue)
 
 					for(const std::shared_ptr<fUML::Semantics::CommonBehavior::Execution> indexCallExecutions: *callExecutionsList)
 					{
-						if (_callExecutions->find(indexCallExecutions) == -1)
+						if (!(_callExecutions->includes(indexCallExecutions)))
 						{
 							_callExecutions->add(indexCallExecutions);
 						}

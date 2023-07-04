@@ -419,7 +419,7 @@ bool CollaborationUseImpl::eSet(int featureID, const Any& newValue)
 					std::shared_ptr<Bag<uml::Dependency>> _roleBinding=getRoleBinding();
 					for(const std::shared_ptr<uml::Dependency> indexRoleBinding: *_roleBinding)
 					{
-						if (roleBindingList->find(indexRoleBinding) == -1)
+						if (!(roleBindingList->includes(indexRoleBinding)))
 						{
 							_roleBinding->erase(indexRoleBinding);
 						}
@@ -427,7 +427,7 @@ bool CollaborationUseImpl::eSet(int featureID, const Any& newValue)
 
 					for(const std::shared_ptr<uml::Dependency> indexRoleBinding: *roleBindingList)
 					{
-						if (_roleBinding->find(indexRoleBinding) == -1)
+						if (!(_roleBinding->includes(indexRoleBinding)))
 						{
 							_roleBinding->add(indexRoleBinding);
 						}

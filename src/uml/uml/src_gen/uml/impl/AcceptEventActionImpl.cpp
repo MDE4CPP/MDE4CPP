@@ -599,7 +599,7 @@ bool AcceptEventActionImpl::eSet(int featureID, const Any& newValue)
 					std::shared_ptr<Bag<uml::OutputPin>> _result=getResult();
 					for(const std::shared_ptr<uml::OutputPin> indexResult: *_result)
 					{
-						if (resultList->find(indexResult) == -1)
+						if (!(resultList->includes(indexResult)))
 						{
 							_result->erase(indexResult);
 						}
@@ -607,7 +607,7 @@ bool AcceptEventActionImpl::eSet(int featureID, const Any& newValue)
 
 					for(const std::shared_ptr<uml::OutputPin> indexResult: *resultList)
 					{
-						if (_result->find(indexResult) == -1)
+						if (!(_result->includes(indexResult)))
 						{
 							_result->add(indexResult);
 						}
@@ -636,7 +636,7 @@ bool AcceptEventActionImpl::eSet(int featureID, const Any& newValue)
 					std::shared_ptr<Bag<uml::Trigger>> _trigger=getTrigger();
 					for(const std::shared_ptr<uml::Trigger> indexTrigger: *_trigger)
 					{
-						if (triggerList->find(indexTrigger) == -1)
+						if (!(triggerList->includes(indexTrigger)))
 						{
 							_trigger->erase(indexTrigger);
 						}
@@ -644,7 +644,7 @@ bool AcceptEventActionImpl::eSet(int featureID, const Any& newValue)
 
 					for(const std::shared_ptr<uml::Trigger> indexTrigger: *triggerList)
 					{
-						if (_trigger->find(indexTrigger) == -1)
+						if (!(_trigger->includes(indexTrigger)))
 						{
 							_trigger->add(indexTrigger);
 						}

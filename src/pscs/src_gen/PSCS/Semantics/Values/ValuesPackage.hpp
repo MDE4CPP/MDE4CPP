@@ -59,12 +59,12 @@ namespace PSCS::Semantics::Values
 			static const unsigned int CS_OPAQUEEXPRESSIONEVALUATION_OPERATION_EXECUTEEXPRESSIONBEHAVIOR = 4286290164;
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getCS_OpaqueExpressionEvaluation_Class() const = 0;
+			virtual const std::shared_ptr<ecore::EClass>& getCS_OpaqueExpressionEvaluation_Class() const = 0;
 			
 			
 			
-			virtual std::shared_ptr<ecore::EOperation> getCS_OpaqueExpressionEvaluation_Operation_evaluate() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getCS_OpaqueExpressionEvaluation_Operation_executeExpressionBehavior() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getCS_OpaqueExpressionEvaluation_Operation_evaluate() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getCS_OpaqueExpressionEvaluation_Operation_executeExpressionBehavior() const = 0;
 			
 			// End Class CS_OpaqueExpressionEvaluation
 

@@ -422,7 +422,7 @@ void DependencyImpl::resolveReferences(const int featureID, std::vector<std::sha
 	{
 		case uml::umlPackage::DEPENDENCY_ATTRIBUTE_CLIENT:
 		{
-			std::shared_ptr<SubsetUnion<uml::NamedElement, uml::Element>> _client = getClient();
+			const std::shared_ptr<SubsetUnion<uml::NamedElement, uml::Element>>& _client = getClient();
 			for(std::shared_ptr<ecore::EObject> ref : references)
 			{
 				std::shared_ptr<uml::NamedElement>  _r = std::dynamic_pointer_cast<uml::NamedElement>(ref);
@@ -436,7 +436,7 @@ void DependencyImpl::resolveReferences(const int featureID, std::vector<std::sha
 
 		case uml::umlPackage::DEPENDENCY_ATTRIBUTE_SUPPLIER:
 		{
-			std::shared_ptr<SubsetUnion<uml::NamedElement, uml::Element>> _supplier = getSupplier();
+			const std::shared_ptr<SubsetUnion<uml::NamedElement, uml::Element>>& _supplier = getSupplier();
 			for(std::shared_ptr<ecore::EObject> ref : references)
 			{
 				std::shared_ptr<uml::NamedElement>  _r = std::dynamic_pointer_cast<uml::NamedElement>(ref);
@@ -546,7 +546,7 @@ bool DependencyImpl::eSet(int featureID, const Any& newValue)
 					std::shared_ptr<Bag<uml::NamedElement>> _client=getClient();
 					for(const std::shared_ptr<uml::NamedElement> indexClient: *_client)
 					{
-						if (clientList->find(indexClient) == -1)
+						if (!(clientList->includes(indexClient)))
 						{
 							_client->erase(indexClient);
 						}
@@ -554,7 +554,7 @@ bool DependencyImpl::eSet(int featureID, const Any& newValue)
 
 					for(const std::shared_ptr<uml::NamedElement> indexClient: *clientList)
 					{
-						if (_client->find(indexClient) == -1)
+						if (!(_client->includes(indexClient)))
 						{
 							_client->add(indexClient);
 						}
@@ -583,7 +583,7 @@ bool DependencyImpl::eSet(int featureID, const Any& newValue)
 					std::shared_ptr<Bag<uml::NamedElement>> _supplier=getSupplier();
 					for(const std::shared_ptr<uml::NamedElement> indexSupplier: *_supplier)
 					{
-						if (supplierList->find(indexSupplier) == -1)
+						if (!(supplierList->includes(indexSupplier)))
 						{
 							_supplier->erase(indexSupplier);
 						}
@@ -591,7 +591,7 @@ bool DependencyImpl::eSet(int featureID, const Any& newValue)
 
 					for(const std::shared_ptr<uml::NamedElement> indexSupplier: *supplierList)
 					{
-						if (_supplier->find(indexSupplier) == -1)
+						if (!(_supplier->includes(indexSupplier)))
 						{
 							_supplier->add(indexSupplier);
 						}

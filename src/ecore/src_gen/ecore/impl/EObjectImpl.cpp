@@ -515,7 +515,7 @@ bool EObjectImpl::eSet(int featureID, const Any& newValue)
 					std::shared_ptr<Bag<ecore::EObject>> _eContentUnion=getEContentUnion();
 					for(const std::shared_ptr<ecore::EObject> indexEContentUnion: *_eContentUnion)
 					{
-						if (eContentUnionList->find(indexEContentUnion) == -1)
+						if (!(eContentUnionList->includes(indexEContentUnion)))
 						{
 							_eContentUnion->erase(indexEContentUnion);
 						}
@@ -523,7 +523,7 @@ bool EObjectImpl::eSet(int featureID, const Any& newValue)
 
 					for(const std::shared_ptr<ecore::EObject> indexEContentUnion: *eContentUnionList)
 					{
-						if (_eContentUnion->find(indexEContentUnion) == -1)
+						if (!(_eContentUnion->includes(indexEContentUnion)))
 						{
 							_eContentUnion->add(indexEContentUnion);
 						}

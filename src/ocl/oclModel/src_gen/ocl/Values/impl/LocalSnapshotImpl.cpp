@@ -312,7 +312,7 @@ void LocalSnapshotImpl::resolveReferences(const int featureID, std::vector<std::
 	{
 		case ocl::Values::ValuesPackage::LOCALSNAPSHOT_ATTRIBUTE_BINDINGS:
 		{
-			std::shared_ptr<Bag<ocl::Values::NameValueBinding>> _bindings = getBindings();
+			const std::shared_ptr<Bag<ocl::Values::NameValueBinding>>& _bindings = getBindings();
 			for(std::shared_ptr<ecore::EObject> ref : references)
 			{
 				std::shared_ptr<ocl::Values::NameValueBinding>  _r = std::dynamic_pointer_cast<ocl::Values::NameValueBinding>(ref);
@@ -326,7 +326,7 @@ void LocalSnapshotImpl::resolveReferences(const int featureID, std::vector<std::
 
 		case ocl::Values::ValuesPackage::LOCALSNAPSHOT_ATTRIBUTE_INPUTQ:
 		{
-			std::shared_ptr<Bag<ocl::Values::OclMessageValue>> _inputQ = getInputQ();
+			const std::shared_ptr<Bag<ocl::Values::OclMessageValue>>& _inputQ = getInputQ();
 			for(std::shared_ptr<ecore::EObject> ref : references)
 			{
 				std::shared_ptr<ocl::Values::OclMessageValue>  _r = std::dynamic_pointer_cast<ocl::Values::OclMessageValue>(ref);
@@ -340,7 +340,7 @@ void LocalSnapshotImpl::resolveReferences(const int featureID, std::vector<std::
 
 		case ocl::Values::ValuesPackage::LOCALSNAPSHOT_ATTRIBUTE_OUTPUTQ:
 		{
-			std::shared_ptr<Bag<ocl::Values::OclMessageValue>> _outputQ = getOutputQ();
+			const std::shared_ptr<Bag<ocl::Values::OclMessageValue>>& _outputQ = getOutputQ();
 			for(std::shared_ptr<ecore::EObject> ref : references)
 			{
 				std::shared_ptr<ocl::Values::OclMessageValue>  _r = std::dynamic_pointer_cast<ocl::Values::OclMessageValue>(ref);
@@ -481,7 +481,7 @@ bool LocalSnapshotImpl::eSet(int featureID, const Any& newValue)
 					std::shared_ptr<Bag<ocl::Values::NameValueBinding>> _bindings=getBindings();
 					for(const std::shared_ptr<ocl::Values::NameValueBinding> indexBindings: *_bindings)
 					{
-						if (bindingsList->find(indexBindings) == -1)
+						if (!(bindingsList->includes(indexBindings)))
 						{
 							_bindings->erase(indexBindings);
 						}
@@ -489,7 +489,7 @@ bool LocalSnapshotImpl::eSet(int featureID, const Any& newValue)
 
 					for(const std::shared_ptr<ocl::Values::NameValueBinding> indexBindings: *bindingsList)
 					{
-						if (_bindings->find(indexBindings) == -1)
+						if (!(_bindings->includes(indexBindings)))
 						{
 							_bindings->add(indexBindings);
 						}
@@ -518,7 +518,7 @@ bool LocalSnapshotImpl::eSet(int featureID, const Any& newValue)
 					std::shared_ptr<Bag<ocl::Values::OclMessageValue>> _inputQ=getInputQ();
 					for(const std::shared_ptr<ocl::Values::OclMessageValue> indexInputQ: *_inputQ)
 					{
-						if (inputQList->find(indexInputQ) == -1)
+						if (!(inputQList->includes(indexInputQ)))
 						{
 							_inputQ->erase(indexInputQ);
 						}
@@ -526,7 +526,7 @@ bool LocalSnapshotImpl::eSet(int featureID, const Any& newValue)
 
 					for(const std::shared_ptr<ocl::Values::OclMessageValue> indexInputQ: *inputQList)
 					{
-						if (_inputQ->find(indexInputQ) == -1)
+						if (!(_inputQ->includes(indexInputQ)))
 						{
 							_inputQ->add(indexInputQ);
 						}
@@ -569,7 +569,7 @@ bool LocalSnapshotImpl::eSet(int featureID, const Any& newValue)
 					std::shared_ptr<Bag<ocl::Values::OclMessageValue>> _outputQ=getOutputQ();
 					for(const std::shared_ptr<ocl::Values::OclMessageValue> indexOutputQ: *_outputQ)
 					{
-						if (outputQList->find(indexOutputQ) == -1)
+						if (!(outputQList->includes(indexOutputQ)))
 						{
 							_outputQ->erase(indexOutputQ);
 						}
@@ -577,7 +577,7 @@ bool LocalSnapshotImpl::eSet(int featureID, const Any& newValue)
 
 					for(const std::shared_ptr<ocl::Values::OclMessageValue> indexOutputQ: *outputQList)
 					{
-						if (_outputQ->find(indexOutputQ) == -1)
+						if (!(_outputQ->includes(indexOutputQ)))
 						{
 							_outputQ->add(indexOutputQ);
 						}

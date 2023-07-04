@@ -1039,7 +1039,7 @@ bool EClassImpl::eSet(int featureID, const Any& newValue)
 					std::shared_ptr<Bag<ecore::EAttribute>> _eAttributes=getEAttributes();
 					for(const std::shared_ptr<ecore::EAttribute> indexEAttributes: *_eAttributes)
 					{
-						if (eAttributesList->find(indexEAttributes) == -1)
+						if (!(eAttributesList->includes(indexEAttributes)))
 						{
 							_eAttributes->erase(indexEAttributes);
 						}
@@ -1047,7 +1047,7 @@ bool EClassImpl::eSet(int featureID, const Any& newValue)
 
 					for(const std::shared_ptr<ecore::EAttribute> indexEAttributes: *eAttributesList)
 					{
-						if (_eAttributes->find(indexEAttributes) == -1)
+						if (!(_eAttributes->includes(indexEAttributes)))
 						{
 							_eAttributes->add(indexEAttributes);
 						}
@@ -1076,7 +1076,7 @@ bool EClassImpl::eSet(int featureID, const Any& newValue)
 					std::shared_ptr<Bag<ecore::EGenericType>> _eGenericSuperTypes=getEGenericSuperTypes();
 					for(const std::shared_ptr<ecore::EGenericType> indexEGenericSuperTypes: *_eGenericSuperTypes)
 					{
-						if (eGenericSuperTypesList->find(indexEGenericSuperTypes) == -1)
+						if (!(eGenericSuperTypesList->includes(indexEGenericSuperTypes)))
 						{
 							_eGenericSuperTypes->erase(indexEGenericSuperTypes);
 						}
@@ -1084,7 +1084,7 @@ bool EClassImpl::eSet(int featureID, const Any& newValue)
 
 					for(const std::shared_ptr<ecore::EGenericType> indexEGenericSuperTypes: *eGenericSuperTypesList)
 					{
-						if (_eGenericSuperTypes->find(indexEGenericSuperTypes) == -1)
+						if (!(_eGenericSuperTypes->includes(indexEGenericSuperTypes)))
 						{
 							_eGenericSuperTypes->add(indexEGenericSuperTypes);
 						}
@@ -1121,7 +1121,7 @@ bool EClassImpl::eSet(int featureID, const Any& newValue)
 					std::shared_ptr<Bag<ecore::EOperation>> _eOperations=getEOperations();
 					for(const std::shared_ptr<ecore::EOperation> indexEOperations: *_eOperations)
 					{
-						if (eOperationsList->find(indexEOperations) == -1)
+						if (!(eOperationsList->includes(indexEOperations)))
 						{
 							_eOperations->erase(indexEOperations);
 						}
@@ -1129,7 +1129,7 @@ bool EClassImpl::eSet(int featureID, const Any& newValue)
 
 					for(const std::shared_ptr<ecore::EOperation> indexEOperations: *eOperationsList)
 					{
-						if (_eOperations->find(indexEOperations) == -1)
+						if (!(_eOperations->includes(indexEOperations)))
 						{
 							_eOperations->add(indexEOperations);
 						}
@@ -1158,7 +1158,7 @@ bool EClassImpl::eSet(int featureID, const Any& newValue)
 					std::shared_ptr<Bag<ecore::EReference>> _eReferences=getEReferences();
 					for(const std::shared_ptr<ecore::EReference> indexEReferences: *_eReferences)
 					{
-						if (eReferencesList->find(indexEReferences) == -1)
+						if (!(eReferencesList->includes(indexEReferences)))
 						{
 							_eReferences->erase(indexEReferences);
 						}
@@ -1166,7 +1166,7 @@ bool EClassImpl::eSet(int featureID, const Any& newValue)
 
 					for(const std::shared_ptr<ecore::EReference> indexEReferences: *eReferencesList)
 					{
-						if (_eReferences->find(indexEReferences) == -1)
+						if (!(_eReferences->includes(indexEReferences)))
 						{
 							_eReferences->add(indexEReferences);
 						}
@@ -1195,7 +1195,7 @@ bool EClassImpl::eSet(int featureID, const Any& newValue)
 					std::shared_ptr<Bag<ecore::EStructuralFeature>> _eStructuralFeatures=getEStructuralFeatures();
 					for(const std::shared_ptr<ecore::EStructuralFeature> indexEStructuralFeatures: *_eStructuralFeatures)
 					{
-						if (eStructuralFeaturesList->find(indexEStructuralFeatures) == -1)
+						if (!(eStructuralFeaturesList->includes(indexEStructuralFeatures)))
 						{
 							_eStructuralFeatures->erase(indexEStructuralFeatures);
 						}
@@ -1203,7 +1203,7 @@ bool EClassImpl::eSet(int featureID, const Any& newValue)
 
 					for(const std::shared_ptr<ecore::EStructuralFeature> indexEStructuralFeatures: *eStructuralFeaturesList)
 					{
-						if (_eStructuralFeatures->find(indexEStructuralFeatures) == -1)
+						if (!(_eStructuralFeatures->includes(indexEStructuralFeatures)))
 						{
 							_eStructuralFeatures->add(indexEStructuralFeatures);
 						}
@@ -1232,7 +1232,7 @@ bool EClassImpl::eSet(int featureID, const Any& newValue)
 					std::shared_ptr<Bag<ecore::EClass>> _eSuperTypes=getESuperTypes();
 					for(const std::shared_ptr<ecore::EClass> indexESuperTypes: *_eSuperTypes)
 					{
-						if (eSuperTypesList->find(indexESuperTypes) == -1)
+						if (!(eSuperTypesList->includes(indexESuperTypes)))
 						{
 							_eSuperTypes->erase(indexESuperTypes);
 						}
@@ -1240,7 +1240,7 @@ bool EClassImpl::eSet(int featureID, const Any& newValue)
 
 					for(const std::shared_ptr<ecore::EClass> indexESuperTypes: *eSuperTypesList)
 					{
-						if (_eSuperTypes->find(indexESuperTypes) == -1)
+						if (!(_eSuperTypes->includes(indexESuperTypes)))
 						{
 							_eSuperTypes->add(indexESuperTypes);
 						}

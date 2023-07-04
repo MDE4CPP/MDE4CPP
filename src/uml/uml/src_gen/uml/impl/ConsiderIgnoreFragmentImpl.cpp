@@ -284,7 +284,7 @@ void ConsiderIgnoreFragmentImpl::resolveReferences(const int featureID, std::vec
 	{
 		case uml::umlPackage::CONSIDERIGNOREFRAGMENT_ATTRIBUTE_MESSAGE:
 		{
-			std::shared_ptr<Bag<uml::NamedElement>> _message = getMessage();
+			const std::shared_ptr<Bag<uml::NamedElement>>& _message = getMessage();
 			for(std::shared_ptr<ecore::EObject> ref : references)
 			{
 				std::shared_ptr<uml::NamedElement>  _r = std::dynamic_pointer_cast<uml::NamedElement>(ref);
@@ -373,7 +373,7 @@ bool ConsiderIgnoreFragmentImpl::eSet(int featureID, const Any& newValue)
 					std::shared_ptr<Bag<uml::NamedElement>> _message=getMessage();
 					for(const std::shared_ptr<uml::NamedElement> indexMessage: *_message)
 					{
-						if (messageList->find(indexMessage) == -1)
+						if (!(messageList->includes(indexMessage)))
 						{
 							_message->erase(indexMessage);
 						}
@@ -381,7 +381,7 @@ bool ConsiderIgnoreFragmentImpl::eSet(int featureID, const Any& newValue)
 
 					for(const std::shared_ptr<uml::NamedElement> indexMessage: *messageList)
 					{
-						if (_message->find(indexMessage) == -1)
+						if (!(_message->includes(indexMessage)))
 						{
 							_message->add(indexMessage);
 						}

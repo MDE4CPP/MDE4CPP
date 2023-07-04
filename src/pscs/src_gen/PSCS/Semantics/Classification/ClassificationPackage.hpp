@@ -58,11 +58,11 @@ namespace PSCS::Semantics::Classification
 			static const unsigned int CS_INSTANCEVALUEEVALUATION_OPERATION_EVALUATE = 410122665;
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getCS_InstanceValueEvaluation_Class() const = 0;
+			virtual const std::shared_ptr<ecore::EClass>& getCS_InstanceValueEvaluation_Class() const = 0;
 			
 			
 			
-			virtual std::shared_ptr<ecore::EOperation> getCS_InstanceValueEvaluation_Operation_evaluate() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getCS_InstanceValueEvaluation_Operation_evaluate() const = 0;
 			
 			// End Class CS_InstanceValueEvaluation
 

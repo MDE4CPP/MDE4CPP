@@ -1169,7 +1169,7 @@ void ClassifierImpl::resolveReferences(const int featureID, std::vector<std::sha
 	{
 		case uml::umlPackage::CLASSIFIER_ATTRIBUTE_GENERAL:
 		{
-			std::shared_ptr<Bag<uml::Classifier>> _general = getGeneral();
+			const std::shared_ptr<Bag<uml::Classifier>>& _general = getGeneral();
 			for(std::shared_ptr<ecore::EObject> ref : references)
 			{
 				std::shared_ptr<uml::Classifier>  _r = std::dynamic_pointer_cast<uml::Classifier>(ref);
@@ -1183,7 +1183,7 @@ void ClassifierImpl::resolveReferences(const int featureID, std::vector<std::sha
 
 		case uml::umlPackage::CLASSIFIER_ATTRIBUTE_POWERTYPEEXTENT:
 		{
-			std::shared_ptr<Bag<uml::GeneralizationSet>> _powertypeExtent = getPowertypeExtent();
+			const std::shared_ptr<Bag<uml::GeneralizationSet>>& _powertypeExtent = getPowertypeExtent();
 			for(std::shared_ptr<ecore::EObject> ref : references)
 			{
 				std::shared_ptr<uml::GeneralizationSet>  _r = std::dynamic_pointer_cast<uml::GeneralizationSet>(ref);
@@ -1197,7 +1197,7 @@ void ClassifierImpl::resolveReferences(const int featureID, std::vector<std::sha
 
 		case uml::umlPackage::CLASSIFIER_ATTRIBUTE_REDEFINEDCLASSIFIER:
 		{
-			std::shared_ptr<SubsetUnion<uml::Classifier, uml::RedefinableElement>> _redefinedClassifier = getRedefinedClassifier();
+			const std::shared_ptr<SubsetUnion<uml::Classifier, uml::RedefinableElement>>& _redefinedClassifier = getRedefinedClassifier();
 			for(std::shared_ptr<ecore::EObject> ref : references)
 			{
 				std::shared_ptr<uml::Classifier>  _r = std::dynamic_pointer_cast<uml::Classifier>(ref);
@@ -1223,7 +1223,7 @@ void ClassifierImpl::resolveReferences(const int featureID, std::vector<std::sha
 
 		case uml::umlPackage::CLASSIFIER_ATTRIBUTE_USECASE:
 		{
-			std::shared_ptr<Bag<uml::UseCase>> _useCase = getUseCase();
+			const std::shared_ptr<Bag<uml::UseCase>>& _useCase = getUseCase();
 			for(std::shared_ptr<ecore::EObject> ref : references)
 			{
 				std::shared_ptr<uml::UseCase>  _r = std::dynamic_pointer_cast<uml::UseCase>(ref);
@@ -1443,7 +1443,7 @@ bool ClassifierImpl::eSet(int featureID, const Any& newValue)
 					std::shared_ptr<Bag<uml::CollaborationUse>> _collaborationUse=getCollaborationUse();
 					for(const std::shared_ptr<uml::CollaborationUse> indexCollaborationUse: *_collaborationUse)
 					{
-						if (collaborationUseList->find(indexCollaborationUse) == -1)
+						if (!(collaborationUseList->includes(indexCollaborationUse)))
 						{
 							_collaborationUse->erase(indexCollaborationUse);
 						}
@@ -1451,7 +1451,7 @@ bool ClassifierImpl::eSet(int featureID, const Any& newValue)
 
 					for(const std::shared_ptr<uml::CollaborationUse> indexCollaborationUse: *collaborationUseList)
 					{
-						if (_collaborationUse->find(indexCollaborationUse) == -1)
+						if (!(_collaborationUse->includes(indexCollaborationUse)))
 						{
 							_collaborationUse->add(indexCollaborationUse);
 						}
@@ -1480,7 +1480,7 @@ bool ClassifierImpl::eSet(int featureID, const Any& newValue)
 					std::shared_ptr<Bag<uml::Classifier>> _general=getGeneral();
 					for(const std::shared_ptr<uml::Classifier> indexGeneral: *_general)
 					{
-						if (generalList->find(indexGeneral) == -1)
+						if (!(generalList->includes(indexGeneral)))
 						{
 							_general->erase(indexGeneral);
 						}
@@ -1488,7 +1488,7 @@ bool ClassifierImpl::eSet(int featureID, const Any& newValue)
 
 					for(const std::shared_ptr<uml::Classifier> indexGeneral: *generalList)
 					{
-						if (_general->find(indexGeneral) == -1)
+						if (!(_general->includes(indexGeneral)))
 						{
 							_general->add(indexGeneral);
 						}
@@ -1517,7 +1517,7 @@ bool ClassifierImpl::eSet(int featureID, const Any& newValue)
 					std::shared_ptr<Bag<uml::Generalization>> _generalization=getGeneralization();
 					for(const std::shared_ptr<uml::Generalization> indexGeneralization: *_generalization)
 					{
-						if (generalizationList->find(indexGeneralization) == -1)
+						if (!(generalizationList->includes(indexGeneralization)))
 						{
 							_generalization->erase(indexGeneralization);
 						}
@@ -1525,7 +1525,7 @@ bool ClassifierImpl::eSet(int featureID, const Any& newValue)
 
 					for(const std::shared_ptr<uml::Generalization> indexGeneralization: *generalizationList)
 					{
-						if (_generalization->find(indexGeneralization) == -1)
+						if (!(_generalization->includes(indexGeneralization)))
 						{
 							_generalization->add(indexGeneralization);
 						}
@@ -1568,7 +1568,7 @@ bool ClassifierImpl::eSet(int featureID, const Any& newValue)
 					std::shared_ptr<Bag<uml::UseCase>> _ownedUseCase=getOwnedUseCase();
 					for(const std::shared_ptr<uml::UseCase> indexOwnedUseCase: *_ownedUseCase)
 					{
-						if (ownedUseCaseList->find(indexOwnedUseCase) == -1)
+						if (!(ownedUseCaseList->includes(indexOwnedUseCase)))
 						{
 							_ownedUseCase->erase(indexOwnedUseCase);
 						}
@@ -1576,7 +1576,7 @@ bool ClassifierImpl::eSet(int featureID, const Any& newValue)
 
 					for(const std::shared_ptr<uml::UseCase> indexOwnedUseCase: *ownedUseCaseList)
 					{
-						if (_ownedUseCase->find(indexOwnedUseCase) == -1)
+						if (!(_ownedUseCase->includes(indexOwnedUseCase)))
 						{
 							_ownedUseCase->add(indexOwnedUseCase);
 						}
@@ -1605,7 +1605,7 @@ bool ClassifierImpl::eSet(int featureID, const Any& newValue)
 					std::shared_ptr<Bag<uml::GeneralizationSet>> _powertypeExtent=getPowertypeExtent();
 					for(const std::shared_ptr<uml::GeneralizationSet> indexPowertypeExtent: *_powertypeExtent)
 					{
-						if (powertypeExtentList->find(indexPowertypeExtent) == -1)
+						if (!(powertypeExtentList->includes(indexPowertypeExtent)))
 						{
 							_powertypeExtent->erase(indexPowertypeExtent);
 						}
@@ -1613,7 +1613,7 @@ bool ClassifierImpl::eSet(int featureID, const Any& newValue)
 
 					for(const std::shared_ptr<uml::GeneralizationSet> indexPowertypeExtent: *powertypeExtentList)
 					{
-						if (_powertypeExtent->find(indexPowertypeExtent) == -1)
+						if (!(_powertypeExtent->includes(indexPowertypeExtent)))
 						{
 							_powertypeExtent->add(indexPowertypeExtent);
 						}
@@ -1642,7 +1642,7 @@ bool ClassifierImpl::eSet(int featureID, const Any& newValue)
 					std::shared_ptr<Bag<uml::Classifier>> _redefinedClassifier=getRedefinedClassifier();
 					for(const std::shared_ptr<uml::Classifier> indexRedefinedClassifier: *_redefinedClassifier)
 					{
-						if (redefinedClassifierList->find(indexRedefinedClassifier) == -1)
+						if (!(redefinedClassifierList->includes(indexRedefinedClassifier)))
 						{
 							_redefinedClassifier->erase(indexRedefinedClassifier);
 						}
@@ -1650,7 +1650,7 @@ bool ClassifierImpl::eSet(int featureID, const Any& newValue)
 
 					for(const std::shared_ptr<uml::Classifier> indexRedefinedClassifier: *redefinedClassifierList)
 					{
-						if (_redefinedClassifier->find(indexRedefinedClassifier) == -1)
+						if (!(_redefinedClassifier->includes(indexRedefinedClassifier)))
 						{
 							_redefinedClassifier->add(indexRedefinedClassifier);
 						}
@@ -1687,7 +1687,7 @@ bool ClassifierImpl::eSet(int featureID, const Any& newValue)
 					std::shared_ptr<Bag<uml::Substitution>> _substitution=getSubstitution();
 					for(const std::shared_ptr<uml::Substitution> indexSubstitution: *_substitution)
 					{
-						if (substitutionList->find(indexSubstitution) == -1)
+						if (!(substitutionList->includes(indexSubstitution)))
 						{
 							_substitution->erase(indexSubstitution);
 						}
@@ -1695,7 +1695,7 @@ bool ClassifierImpl::eSet(int featureID, const Any& newValue)
 
 					for(const std::shared_ptr<uml::Substitution> indexSubstitution: *substitutionList)
 					{
-						if (_substitution->find(indexSubstitution) == -1)
+						if (!(_substitution->includes(indexSubstitution)))
 						{
 							_substitution->add(indexSubstitution);
 						}
@@ -1724,7 +1724,7 @@ bool ClassifierImpl::eSet(int featureID, const Any& newValue)
 					std::shared_ptr<Bag<uml::UseCase>> _useCase=getUseCase();
 					for(const std::shared_ptr<uml::UseCase> indexUseCase: *_useCase)
 					{
-						if (useCaseList->find(indexUseCase) == -1)
+						if (!(useCaseList->includes(indexUseCase)))
 						{
 							_useCase->erase(indexUseCase);
 						}
@@ -1732,7 +1732,7 @@ bool ClassifierImpl::eSet(int featureID, const Any& newValue)
 
 					for(const std::shared_ptr<uml::UseCase> indexUseCase: *useCaseList)
 					{
-						if (_useCase->find(indexUseCase) == -1)
+						if (!(_useCase->includes(indexUseCase)))
 						{
 							_useCase->add(indexUseCase);
 						}

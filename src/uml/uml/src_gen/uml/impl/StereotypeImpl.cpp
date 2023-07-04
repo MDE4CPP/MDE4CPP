@@ -653,7 +653,7 @@ bool StereotypeImpl::eSet(int featureID, const Any& newValue)
 					std::shared_ptr<Bag<uml::Image>> _icon=getIcon();
 					for(const std::shared_ptr<uml::Image> indexIcon: *_icon)
 					{
-						if (iconList->find(indexIcon) == -1)
+						if (!(iconList->includes(indexIcon)))
 						{
 							_icon->erase(indexIcon);
 						}
@@ -661,7 +661,7 @@ bool StereotypeImpl::eSet(int featureID, const Any& newValue)
 
 					for(const std::shared_ptr<uml::Image> indexIcon: *iconList)
 					{
-						if (_icon->find(indexIcon) == -1)
+						if (!(_icon->includes(indexIcon)))
 						{
 							_icon->add(indexIcon);
 						}

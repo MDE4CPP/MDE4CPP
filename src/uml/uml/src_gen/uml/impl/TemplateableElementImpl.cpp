@@ -382,7 +382,7 @@ bool TemplateableElementImpl::eSet(int featureID, const Any& newValue)
 					std::shared_ptr<Bag<uml::TemplateBinding>> _templateBinding=getTemplateBinding();
 					for(const std::shared_ptr<uml::TemplateBinding> indexTemplateBinding: *_templateBinding)
 					{
-						if (templateBindingList->find(indexTemplateBinding) == -1)
+						if (!(templateBindingList->includes(indexTemplateBinding)))
 						{
 							_templateBinding->erase(indexTemplateBinding);
 						}
@@ -390,7 +390,7 @@ bool TemplateableElementImpl::eSet(int featureID, const Any& newValue)
 
 					for(const std::shared_ptr<uml::TemplateBinding> indexTemplateBinding: *templateBindingList)
 					{
-						if (_templateBinding->find(indexTemplateBinding) == -1)
+						if (!(_templateBinding->includes(indexTemplateBinding)))
 						{
 							_templateBinding->add(indexTemplateBinding);
 						}

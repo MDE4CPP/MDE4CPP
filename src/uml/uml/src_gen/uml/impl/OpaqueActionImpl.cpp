@@ -651,7 +651,7 @@ bool OpaqueActionImpl::eSet(int featureID, const Any& newValue)
 					std::shared_ptr<Bag<uml::InputPin>> _inputValue=getInputValue();
 					for(const std::shared_ptr<uml::InputPin> indexInputValue: *_inputValue)
 					{
-						if (inputValueList->find(indexInputValue) == -1)
+						if (!(inputValueList->includes(indexInputValue)))
 						{
 							_inputValue->erase(indexInputValue);
 						}
@@ -659,7 +659,7 @@ bool OpaqueActionImpl::eSet(int featureID, const Any& newValue)
 
 					for(const std::shared_ptr<uml::InputPin> indexInputValue: *inputValueList)
 					{
-						if (_inputValue->find(indexInputValue) == -1)
+						if (!(_inputValue->includes(indexInputValue)))
 						{
 							_inputValue->add(indexInputValue);
 						}
@@ -694,7 +694,7 @@ bool OpaqueActionImpl::eSet(int featureID, const Any& newValue)
 					std::shared_ptr<Bag<uml::OutputPin>> _outputValue=getOutputValue();
 					for(const std::shared_ptr<uml::OutputPin> indexOutputValue: *_outputValue)
 					{
-						if (outputValueList->find(indexOutputValue) == -1)
+						if (!(outputValueList->includes(indexOutputValue)))
 						{
 							_outputValue->erase(indexOutputValue);
 						}
@@ -702,7 +702,7 @@ bool OpaqueActionImpl::eSet(int featureID, const Any& newValue)
 
 					for(const std::shared_ptr<uml::OutputPin> indexOutputValue: *outputValueList)
 					{
-						if (_outputValue->find(indexOutputValue) == -1)
+						if (!(_outputValue->includes(indexOutputValue)))
 						{
 							_outputValue->add(indexOutputValue);
 						}
