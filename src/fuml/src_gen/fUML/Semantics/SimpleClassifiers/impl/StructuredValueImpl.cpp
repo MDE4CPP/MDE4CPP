@@ -159,11 +159,13 @@ std::shared_ptr<Bag<uml::StructuralFeature> > features = retrieveStructuralFeatu
 std::shared_ptr<Bag<uml::StructuralFeature> > memberFeatures = std::make_shared<Bag<uml::StructuralFeature> >();
 if (type != nullptr) {
  std::shared_ptr<Bag<uml::NamedElement> > members = type->getMember();
- for (int i = 0; i < features->size(); i++) {
+ int featuresSize = features->size();
+ for (int i = 0; i < featuresSize; i++) {
 std::shared_ptr<uml::StructuralFeature> feature = features->at(i);
  bool isMember = false;
  int k = 1;
- while (( k <= members->size() ) && !isMember) {
+ int membersSize = members->size();
+ while (( k <= membersSize) && !isMember) {
  std::shared_ptr<uml::NamedElement> member = members->at(k-1);
  isMember = (feature == member);
  k = k + 1;
@@ -186,9 +188,11 @@ std::shared_ptr<Bag<uml::StructuralFeature> > StructuredValueImpl::getStructural
 	// Get all structural features of the given type and all of its
 // supertypes (including private features that are not inherited).
 std::shared_ptr<Bag<uml::StructuralFeature>> features = std::make_shared<Bag<uml::StructuralFeature>>();
+
 // Get feature values for the owned structural features of the given type.
 std::shared_ptr<Bag<uml::NamedElement>> ownedMembers = type->getOwnedMember();
-for (int j = 0; j < ownedMembers->size(); j++) {
+int ownedMembersSize = ownedMembers->size();
+for (int j = 0; j < ownedMembersSize ; j++) {
  std::shared_ptr<uml::NamedElement> ownedMember = ownedMembers->at(j);
 std::shared_ptr<uml::StructuralFeature> structuralMember = std::dynamic_pointer_cast<uml::StructuralFeature>(ownedMember); 
 if (structuralMember) {
@@ -199,10 +203,12 @@ if (structuralMember) {
 // of the given type. (Note that the features for supertypes
 // always come after the owned features.)
 std::shared_ptr<Bag<uml::Classifier>> supertypes = type->getGenerals();
-for (int i = 0; i < supertypes->size(); i++) {
+int supertypesSize = supertypes->size();
+for (int i = 0; i < supertypesSize; i++) {
  std::shared_ptr<uml::Classifier> supertype = supertypes->at(i);
  std::shared_ptr<Bag<uml::StructuralFeature>> supertypeFeatures = getStructuralFeatureForType(supertype);
- for (int j = 0; j < supertypeFeatures->size(); j++) {
+ int supertypeFeaturesSize = supertypeFeatures->size();
+ for (int j = 0; j < supertypeFeaturesSize; j++) {
  std::shared_ptr<uml::StructuralFeature> supertypeFeature = supertypeFeatures->at(j);
  features->add(supertypeFeature);
  }
@@ -240,11 +246,13 @@ std::shared_ptr<Bag<uml::StructuralFeature> > StructuredValueImpl::retrieveStruc
 // that are not inherited).
 std::shared_ptr<Bag<uml::StructuralFeature>> features = std::make_shared<Bag<uml::StructuralFeature>>();
 std::shared_ptr<Bag<uml::Classifier> > types = getTypes();
-for (int i = 0; i < types->size(); i++)
+int typesSize = types->size();
+for (int i = 0; i < typesSize; i++)
  {
  std::shared_ptr<uml::Classifier> type = types->at(i);
  std::shared_ptr<Bag<uml::StructuralFeature>> typeFeatures = getStructuralFeatureForType(type);
- for (int j = 0; j < typeFeatures->size(); j++) 
+ int typeFeaturesSize =  typeFeatures->size();
+ for (int j = 0; j < typeFeaturesSize; j++) 
 {
  std::shared_ptr<uml::StructuralFeature> supertypeFeature = typeFeatures->at(j);
  features->add( supertypeFeature );

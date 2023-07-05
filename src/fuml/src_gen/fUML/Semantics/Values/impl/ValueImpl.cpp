@@ -110,7 +110,8 @@ bool ValueImpl::IsInstanceOf(const std::shared_ptr<uml::Classifier>& classifier)
 	std::shared_ptr<Bag<uml::Classifier> >types = this->getTypes();
 	bool isInstance = this->hasTypes(classifier);
 	int i = 1;
-	while (!isInstance & i <= types->size()) 
+	int typesSize =  types->size();
+	while (!isInstance && i <= typesSize) 
 	{
 		isInstance = this->checkAllParents(types->at(i-1), classifier);
 		i = i + 1;
@@ -141,7 +142,8 @@ bool ValueImpl::checkAllParents(const std::shared_ptr<uml::Classifier>& type, co
 	std::shared_ptr<Bag<uml::Classifier> > directParents = type->getGeneral();
 	bool matched = false;
 	int i = 1;
-	while (!matched & i <= directParents->size() ) 
+	int directParentsSize = directParents->size();
+	while (!matched && i <= directParentsSize) 
 	{
 		std::shared_ptr<uml::Classifier> directParent = directParents->at(i - 1);
 		if (directParent == classifier) 

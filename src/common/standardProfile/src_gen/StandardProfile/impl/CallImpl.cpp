@@ -234,7 +234,7 @@ Any CallImpl::invoke(const std::shared_ptr<uml::Operation>& _operation, const st
 	std::string qualifiedName = _operation->getQualifiedName();
 
 	int ownedParameterSize = _operation->getOwnedParameter()->size();
-	for(unsigned int i = 0; i < ownedParameterSize; i++)
+	for(int i = 0; i < ownedParameterSize; i++)
 	{
 		qualifiedName += "_" + _operation->getOwnedParameter()->at(i)->getType()->getName();
 	}

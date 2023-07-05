@@ -231,7 +231,7 @@ void AnyValueImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoad
 		if ( iter != attr_list.end() )
 		{
 			// TODO this attribute has a non handle type
-			std::cout << "| ERROR    | " << __PRETTY_FUNCTION__ << " handle type of 'value'" << " org.eclipse.emf.ecore.impl.EDataTypeImpl@3a2b2322 (name: EJavaObject) (instanceClassName: java.lang.Object) (serializable: true)" << std::endl; 
+			std::cout << "| ERROR    | " << __PRETTY_FUNCTION__ << " handle type of 'value'" << " org.eclipse.emf.ecore.impl.EDataTypeImpl@5e1218b4 (name: EJavaObject) (instanceClassName: java.lang.Object) (serializable: true)" << std::endl; 
 			Any value; 			this->setValue(value);
 		}
 	}

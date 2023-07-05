@@ -155,7 +155,8 @@ std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue> > SignalEve
 			std::shared_ptr<fUML::Semantics::CommonBehavior::ParameterValue> parameterValue(fUML::Semantics::CommonBehavior::CommonBehaviorFactory::eInstance()->createParameterValue());
 			parameterValue->setParameter(   std::dynamic_pointer_cast<uml::Parameter>( getSignalInstance()->retrieveFeatureValue(feature) )  ); // ->getFeature()
 			// Add Values from the FeatureValue to the ParameterValue to be returned
-			for(int v = 0; v <getSignalInstance()->retrieveFeatureValue(feature)->getValues()->size(); v++)
+			int valueSize = getSignalInstance()->retrieveFeatureValue(feature)->getValues()->size();
+			for(int v = 0; v <valueSize; v++)
 			{
 				parameterValue->getValues()->add(getSignalInstance()->retrieveFeatureValue(feature)->getValues()->at(v));
 			}
