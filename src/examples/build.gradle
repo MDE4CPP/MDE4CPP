@@ -80,7 +80,7 @@ task generateAllExamples() {
 		// ocl examples -----------------------------------
 		examples.add('./oclExamples/oclModelExample/oclEcoreModelExample/model')
 		examples.add('./oclExamples/oclModelExample/oclFumlModelExample/model')
-		examples.add('./oclExamples/oclModelExample/oclUmlModelExample/model')
+		// examples.add('./oclExamples/oclModelExample/oclUmlModelExample/model')
 
 		examples.each { String path -> 
 			exec {
@@ -148,9 +148,9 @@ task compileAllExamples() {
 		//oclExamples/applications/oclExample
 	dependsOn getRootProject().getTasksByName('compileOclExample', true)
 		//oclExamples/applications/oclUmlExample
-	dependsOn getRootProject().getTasksByName('compileOclUmlExample', true)
+	// dependsOn getRootProject().getTasksByName('compileOclUmlExample', true)
 		//oclExamples/oclModelExample/oclFumlModelExample
-	dependsOn getRootProject().getTasksByName('compileApplicationForConnect4', true)
+	// dependsOn getRootProject().getTasksByName('compileApplicationForConnect4', true)
 }
 
 task buildAllExamples(){
