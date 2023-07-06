@@ -92,10 +92,9 @@ EcoreEval::~EcoreEval() {};
 // ### Misc Functions ###
 // ######################
 
-// returns an empty any (nullptr)
+// returns an nullptr
 std::shared_ptr<Any> EcoreEval::defaultResult() {
 
-    //std::shared_ptr<Any> empty;
     return nullptr;
 
 }
@@ -127,7 +126,7 @@ std::shared_ptr<Any> EcoreEval::visitNode(std::shared_ptr<Any> node) {
     //## return statements ##
 
     if (nodeResult == nullptr) {
-        //TODO
+        // TODO maybe handle differ
         // NullExp, OperationCall with non return function can be Nullptr
         return defaultResult();
 
@@ -137,8 +136,8 @@ std::shared_ptr<Any> EcoreEval::visitNode(std::shared_ptr<Any> node) {
 
 }
 
-//count the parents in an Expression Chain
-// recursive
+//count the '()' in an expression chain
+// recursively
 int EcoreEval::parentCounter(std::shared_ptr<ocl::Expressions::OclExpression> checkExp) {
 
     std::shared_ptr<ocl::Expressions::ParentedExp> parentedExp = std::dynamic_pointer_cast<ocl::Expressions::ParentedExp>(checkExp);
@@ -269,8 +268,8 @@ std::shared_ptr<Any> EcoreEval::evalTupleLiteralExp(std::shared_ptr<Any> exp) {
     //basic structure of tuples
     // to be able to refer values inside a tuple with a name,
     // each tuple element have to be a (name,value) pair
-    // std::shared_ptr<Bag<std::tuple<std::string, std::shared_ptr<Any>>>> result in (std::tuple<std::string, std::shared_ptr<Any>>, ...)
-    // without shared_ptr/ std -> Bag<tuple<string, Any>> result in (tuple<string, Any>, ...)
+    // std::shared_ptr<Bag<std::tuple<std::string, std::shared_ptr<Any>>>> results in (std::tuple<std::string, std::shared_ptr<Any>>, ...)
+    // without shared_ptr/ std -> Bag<tuple<string, Any>> results in (tuple<string, Any>, ...)
 
     //std::shared_ptr<Bag<std::tuple<std::string, std::shared_ptr<Any>>>> tupleType;
 
@@ -287,9 +286,9 @@ std::shared_ptr<Any> EcoreEval::evalTupleLiteralExp(std::shared_ptr<Any> exp) {
         return eAny(returnTupleBag, 0, true);
     }
 
-    // go through all element and evaluate them
-    // first name
-    // second value eval
+    // go through all elements and evaluate them
+    // first: name
+    // second: value eval
     // --> custom evaluation of VarDeclExp, otherwise the values would be set in the env
 
     //to avoid doubled names
@@ -448,10 +447,12 @@ std::shared_ptr<Any> EcoreEval::evalCollectionLiteralExp(std::shared_ptr<Any> ex
 
                 //evaluate the rangeExp
                 upperBound = visitNode(eEcoreAny(range->getLast(), range->getLast()->getMetaElementID()));
+                //reset context if necessary for lower bound
                 if (m_env->getContextVariable() != oldContext) {
                     m_env->setContextVariable(oldContext);
                 }
                 lowerBound = visitNode(eEcoreAny(range->getFirst(), range->getFirst()->getMetaElementID()));
+                // here context reset will be automatically after if exp
                 // check if valid Expr
                 if (upperBound->getTypeId() != ecore::ecorePackage::EINT_CLASS || lowerBound->getTypeId() != ecore::ecorePackage::EINT_CLASS) {
                     //TODO add error
@@ -689,7 +690,7 @@ std::shared_ptr<Any> EcoreEval::evalOperationCallExp(std::shared_ptr<Any> exp) {
 
         //eval the arguments
 
-        //evaled Arguments for operation call
+        //eval Arguments for operation call
         const std::shared_ptr<Bag<Any>>& evaledArgBag = std::make_shared<Bag<Any>>(Bag<Any>());
         size_t argSize = operArgs->size();
         //active element
@@ -757,7 +758,7 @@ std::shared_ptr<Any> EcoreEval::evalPropertyCallExp(std::shared_ptr<Any> exp) {
         std::list<std::string>::iterator it;
         for (it = path->begin(); it != path->end(); ++it) {
             
-            // it is possible at this is a tuple
+            // it is possible that this is a tuple
             // look as element in tuple
             if (currentContext->isContainer()){
                 currentContext = findInTuple(currentContext, *it);
@@ -864,8 +865,8 @@ std::shared_ptr<Any> EcoreEval::evalRealLiteralExp(std::shared_ptr<Any> exp) {
 
 }
 
-// ### evalIterateExp ###
-// manage various collection operations
+// ### evalIteratorExp ###
+// manage various collection operations and index calling
 std::shared_ptr<Any> EcoreEval::evalIteratorExp(std::shared_ptr<Any> exp) {
 
     std::shared_ptr<ocl::Expressions::IteratorExp> iteroExp = castEcoreArgument<ocl::Expressions::IteratorExp>(exp);
@@ -934,8 +935,8 @@ std::shared_ptr<Any> EcoreEval::evalIteratorExp(std::shared_ptr<Any> exp) {
         std::shared_ptr<ocl::Expressions::OclExpression> bodyExp = iteroExp->getBody();    
 
         // no explicit loop variable is set
-        // per grammar definition this case is possibel
-        // but in practice this case will be handled by an OpertionCallExp
+        // per grammar definition this case is possible
+        // but in practice this case will be handled by an OperationCallExp
         if (loopVars->size() == 0) {
 
             // call the select operations
@@ -968,6 +969,7 @@ std::shared_ptr<Any> EcoreEval::evalIteratorExp(std::shared_ptr<Any> exp) {
 
     if (iteroExp->getSourrundedBy() == ocl::Expressions::SurroundingType::BRACKETS) {
         
+        //get the collection name
         std::string collectionName = iteroExp->getIterName();
         //update the context
         std::shared_ptr<Any> collectionContext = m_env->lookupPropertyName(collectionName, context);
@@ -1036,7 +1038,7 @@ std::shared_ptr<Any> EcoreEval::evalIteratorExp(std::shared_ptr<Any> exp) {
             //get the qualifiers as int
             // one qualifier means return only the element 
 
-            //get the current result
+            //get the current qualifier
             std::shared_ptr<Any> qualExpResult = visitNode(eEcoreAny(qualifierExpBag->at(0), qualifierExpBag->at(0)->getMetaElementID()));
             if (qualExpResult == nullptr) {
                 //TODO add error
@@ -1071,7 +1073,7 @@ std::shared_ptr<Any> EcoreEval::evalIteratorExp(std::shared_ptr<Any> exp) {
             std::shared_ptr<Any> old_context = m_env->getContextVariable();
             for (size_t i = 0; i < qualifierSize; i++)
             {
-                //get the current result
+                //get the current qualifier
                 std::shared_ptr<Any> elemResult = visitNode(eEcoreAny(qualifierExpBag->at(i), qualifierExpBag->at(i)->getMetaElementID()));
 
                 //reset context if necessary
@@ -1157,7 +1159,7 @@ std::shared_ptr<Any> EcoreEval::evalIterateExp(std::shared_ptr<Any> exp) {
     //check if context is present
     if (context == nullptr) {
 
-        //TODO add erro
+        //TODO add error
         //context is nullptr
         return defaultResult();
     }
@@ -1196,7 +1198,7 @@ std::shared_ptr<Any> EcoreEval::evalIterateExp(std::shared_ptr<Any> exp) {
         return defaultResult();
     }
 
-    //defines what kind the iterateable object is
+    //defines what kind the iterable object is
     // eObjBag or Any Bag
     bool asEObjBag = false;
     
@@ -1225,7 +1227,7 @@ std::shared_ptr<Any> EcoreEval::evalIterateExp(std::shared_ptr<Any> exp) {
 
         if (iterateBag == nullptr) {
             //TODO add error
-            // can't cast context to a iteratable object
+            // can't cast context to a iterable object
             return defaultResult();
         }
 
@@ -1239,11 +1241,12 @@ std::shared_ptr<Any> EcoreEval::evalIterateExp(std::shared_ptr<Any> exp) {
     std::shared_ptr<EcoreEval> bodyEval = std::make_shared<EcoreEval>(EcoreEval(bodyEnv));
 
     if (varDeclElem != nullptr) {
-        //std::shared_ptr<Any> loopElem = bodyEval->visitNode(eEcoreAny(varDeclElem, varDeclElem->getMetaElementID()));
         // the iterator have not to be saved here
         bodyEval->visitNode(eEcoreAny(varDeclElem, varDeclElem->getMetaElementID()));
     }
-    std::shared_ptr<Any> acc = bodyEval->visitNode(eEcoreAny(varDeclAcc, varDeclAcc->getMetaElementID()));
+    //because VarDeclExp does not return the variable per OCL Spec definition
+    bodyEval->visitNode(eEcoreAny(varDeclAcc, varDeclAcc->getMetaElementID()));
+    std::shared_ptr<Any> acc = bodyEnv->lookupNamedElement(varDeclAcc->getVarName());
 
     if (acc == nullptr) {
         //TODO add error
@@ -1287,13 +1290,11 @@ std::shared_ptr<Any> EcoreEval::evalIterateExp(std::shared_ptr<Any> exp) {
                 return defaultResult();
             }
             //call the visitNode Function in the bodyEnv, in this expression will also the acc be set
-            // because it is in the bodyEnv
+            // because it is in the bodyEnv NamedElements
             result = bodyEval->visitNode(eEcoreAny<std::shared_ptr<ocl::Expressions::OclExpression>>(bodyExp, bodyExp->getMetaElementID()));
 
             }
         } else {
-
-            //per grammar definition this is allowed but no real use case was found in the ocl-spec
             
             //only acc is set
             for (size_t i = 0; i < bagSize; i++) {
@@ -1302,7 +1303,7 @@ std::shared_ptr<Any> EcoreEval::evalIterateExp(std::shared_ptr<Any> exp) {
                 //for every loop call the current context changes to the active elem
                 bodyEnv->setContextVariable(eEcoreAny(elem, elem->getMetaElementID()));
                 //call the visitNode Function in the bodyEnv, in this expression will also the acc be set
-                // because it is in the bodyEnv
+                // because it is in the bodyEnv NamedElements
                 result = bodyEval->visitNode(eEcoreAny<std::shared_ptr<ocl::Expressions::OclExpression>>(bodyExp, bodyExp->getMetaElementID()));
             }
         }
@@ -1330,13 +1331,11 @@ std::shared_ptr<Any> EcoreEval::evalIterateExp(std::shared_ptr<Any> exp) {
                     return defaultResult();
                 }
                 //call the visitNode Function in the bodyEnv, in this expression will also the acc be set
-                // because it is in the bodyEnv
+                // because it is in the bodyEnv NamedElements
                 result = bodyEval->visitNode(eEcoreAny<std::shared_ptr<ocl::Expressions::OclExpression>>(bodyExp, bodyExp->getMetaElementID()));
 
             }
         } else {
-
-            //per grammar definition this is allowed but no real use case was found in the ocl-spec
             
             //only acc is set
             for (size_t i = 0; i < bagSize; i++) {
@@ -1346,7 +1345,7 @@ std::shared_ptr<Any> EcoreEval::evalIterateExp(std::shared_ptr<Any> exp) {
                 //for every loop call the current context changes to the active elem
                 bodyEnv->setContextVariable(elem);
                 //call the visitNode Function in the bodyEnv, in this expression will also the acc be set
-                // because it is in the bodyEnv
+                // because it is in the bodyEnv NamedElements
                 result = bodyEval->visitNode(eEcoreAny<std::shared_ptr<ocl::Expressions::OclExpression>>(bodyExp, bodyExp->getMetaElementID()));
             }
         }
@@ -1384,6 +1383,7 @@ std::shared_ptr<Any> EcoreEval::evalPrefixedExp(std::shared_ptr<Any> exp) {
     std::shared_ptr<Any> result = visitNode(bodyNode);
 
     //pass the expression -> during the leading '-' Problem
+    // see in the CustomVisitor -> handleAppliedElement Function
     if(prefExp->getUnarySymbol() == Utilities::CONST_IGNORE) {
         return result;
     }
@@ -1753,7 +1753,7 @@ std::shared_ptr<Any> EcoreEval::evalOperatorExp(std::shared_ptr<Any> exp) {
             return eAny(result, ecore::ecorePackage::EBOOLEAN_CLASS, false);
         } else {
             //TODO add error
-            //cant compare arguments
+            //can't compare arguments
             return defaultResult();
         }
 
@@ -1816,8 +1816,9 @@ std::shared_ptr<Any> EcoreEval::evalParentedExp(std::shared_ptr<Any> exp) {
 
 // ### evalVarDeclExp ###
 // create the Variable and add them to the env
-// if an assignedExp is set, also return it as Any
-// if not add the emtpy variable to the env and return nullptr
+// if an assignedExp is set, add it to the env too
+// if not add the empty variable to the env
+// returns nullptr per OCL Defintion
 std::shared_ptr<Any> EcoreEval::evalVarDeclExp(std::shared_ptr<Any> exp) {
 
     std::shared_ptr<ocl::Expressions::VarDeclarationExp> varDecExp = castEcoreArgument<ocl::Expressions::VarDeclarationExp>(exp);
@@ -1870,7 +1871,8 @@ std::shared_ptr<Any> EcoreEval::evalVarDeclExp(std::shared_ptr<Any> exp) {
             }
             //TODO check Container Type (Bag, Sequence, ...)
             
-            return assignedResult;
+            // per OCL Spec. do not return the added exp
+            return defaultResult();
 
         }
 
@@ -1895,7 +1897,7 @@ std::shared_ptr<Any> EcoreEval::evalVarDeclExp(std::shared_ptr<Any> exp) {
         //singleType
         if (assignedResult->isContainer()) {
             //TODO add error
-            //tryed to assign a container to a single value
+            //tried to assign a container to a single value
             return defaultResult();
         }
         std::string typeName = typeExp->getReferredType();
@@ -1921,8 +1923,8 @@ std::shared_ptr<Any> EcoreEval::evalVarDeclExp(std::shared_ptr<Any> exp) {
             return defaultResult(); 
         }
 
-        //returns the initital Value for the Variable
-        return assignedResult;
+        //per OCL Spec. do not return the added exp
+        return defaultResult();
 
         
     } // END of typeExp != nullptr && assignedExp != nullptr
@@ -1960,8 +1962,8 @@ std::shared_ptr<Any> EcoreEval::evalVarDeclExp(std::shared_ptr<Any> exp) {
             return defaultResult(); 
         }
 
-        // initResult is returned
-        return assignedResult;
+        //per OCL Spec. do not return the added exp
+        return defaultResult();
 
     }
 
@@ -1996,40 +1998,29 @@ std::shared_ptr<Any> EcoreEval::evalVarDeclExp(std::shared_ptr<Any> exp) {
 // ##########################   
 
 // ### handleAppliedElement ###
-// in case in the OclExpression is 'appliedElement' set handle this here
+// in case in the OclExpression have a 'appliedElement' set handle this here
 // updating the contextVariable here
+// this call is after any direct children calls
+// reset the context afterwards if necessary
 std::shared_ptr<Any> EcoreEval::handleAppliedElement(std::shared_ptr<ocl::Expressions::CallExp> appliedElement, std::shared_ptr<Any> parentResult) {
 
-    //'append' first variable to second variable
-    // e.g. self.this (append self to this)
-    // std::shared_ptr<ecore::EcoreAny> ecoreAny = std::dynamic_pointer_cast<ecore::EcoreAny>(parentResult);
-
-    // if (ecoreAny == nullptr) {
-
-    //     //try as ecoreContainer Any
-    //     std::shared_ptr<ecore::EcoreContainerAny> eContainerAny = std::dynamic_pointer_cast<ecore::EcoreContainerAny>(parentResult);
-
-    //     m_env->setContextVariable(eContainerAny);
-    //     std::shared_ptr<Any> anyValue = eEcoreAny<std::shared_ptr<ocl::Expressions::OclExpression>>(appliedElement, appliedElement->getMetaElementID());
+    // save the old context
+    std::shared_ptr<Any> old_context = m_env->getContextVariable();
     
-    //     return visitNode(anyValue);
-
-    // } else {
-
-    //     m_env->setContextVariable(ecoreAny);
-    //     std::shared_ptr<Any> anyValue = eEcoreAny<std::shared_ptr<ocl::Expressions::OclExpression>>(appliedElement, appliedElement->getMetaElementID());
-    
-    //     return visitNode(anyValue);
-
-    // }// end ecoreAny == nullptr
-
     // change the current context
     m_env->setContextVariable(parentResult);
 
     //create any expression and evaluate
     std::shared_ptr<Any> anyValue = eEcoreAny<std::shared_ptr<ocl::Expressions::OclExpression>>(appliedElement, appliedElement->getMetaElementID());
-
-    return visitNode(anyValue);
+    
+    std::shared_ptr<Any> result = visitNode(anyValue);
+    
+    // reset the context afterwards if necessary
+    if (old_context != m_env->getContextVariable()) {
+        m_env->setContextVariable(old_context);
+    }
+    
+    return result;
 
 }
 
@@ -2198,12 +2189,12 @@ std::shared_ptr<Any> EcoreEval::oclSelectReject(bool isSelect, std::shared_ptr<o
 
         if (inputAnyBag == nullptr) {
             //TODO add error
-            //inputCollection could not be casted to iterteable object
+            //inputCollection could not be casted to iterable object
             return defaultResult();
         }
     }
 
-    // neccessary to create an new environment to encapsulate loop variables
+    // necessary to create an new environment to encapsulate loop variables
     std::shared_ptr<EcoreEnvironment> bodyEnv = std::make_shared<EcoreEnvironment>(EcoreEnvironment(m_env, m_env->getSelfVariable()));
     std::shared_ptr<EcoreEval> bodyEval = std::make_shared<EcoreEval>(EcoreEval(bodyEnv));
     
@@ -2231,7 +2222,7 @@ std::shared_ptr<Any> EcoreEval::oclSelectReject(bool isSelect, std::shared_ptr<o
                 
                 // get the current elem
                 elem = eObjBag->at(i);
-                //update the contex var
+                //update the context var
                 bodyEnv->setContextVariable(eEcoreAny(elem, elem->getMetaElementID()));
                 
                 //eval body exp
@@ -2246,7 +2237,7 @@ std::shared_ptr<Any> EcoreEval::oclSelectReject(bool isSelect, std::shared_ptr<o
                     return defaultResult();
                 }
 
-                //add  the elem to the returnBag
+                //add the elem to the returnBag
                 // only if the bodyExp evaluates to true (select) or false (reject)
                 if ((bodyResultBool && isSelect) || (!bodyResultBool && !isSelect)) {
                     returnBag->add(eEcoreAny(elem, elem->getMetaElementID()));
@@ -2263,7 +2254,7 @@ std::shared_ptr<Any> EcoreEval::oclSelectReject(bool isSelect, std::shared_ptr<o
                 
                 // get the current elem
                 elem = inputAnyBag->at(i);
-                //update the contex var
+                //update the context var
                 bodyEnv->setContextVariable(elem);
                 
                 //eval body exp
@@ -2405,41 +2396,39 @@ std::shared_ptr<Any> EcoreEval::callEvalFunction(std::shared_ptr<Any> exp) {
     switch (inputTypeId)
     {
     case ocl::Expressions::ExpressionsPackage::EXPRESSIONINOCL_CLASS:
-        //WIP
+        //ExpressionInOcl
         result = evalExpressionInOcl(exp);
         break;
 
-    case ocl::Expressions::ExpressionsPackage::INVALIDLITERALEXP_CLASS:
-        //TODO
-        //InvalidLiteralExpEval
-        break;
+    // case ocl::Expressions::ExpressionsPackage::INVALIDLITERALEXP_CLASS:
+    //     //will return nullptr
+    //     //InvalidLiteralExpEval
+    //     break;
 
     case ocl::Expressions::ExpressionsPackage::TUPLELITERALEXP_CLASS:
-        //WIP
         //TupleLiteralExpEval
         result = evalTupleLiteralExp(exp);
         break;
 
     case ocl::Expressions::ExpressionsPackage::COLLECTIONLITERALEXP_CLASS:
-        //WIP
         //CollectionLiteralExpEval
         result = evalCollectionLiteralExp(exp);
         break;
 
-    case ocl::Expressions::ExpressionsPackage::COLLECTIONITEM_CLASS:
-        //not needed
-        //CollectionLiteralItemEval
-        break;
+    // case ocl::Expressions::ExpressionsPackage::COLLECTIONITEM_CLASS:
+    //     //not needed
+    //     //CollectionLiteralItemEval
+    //     break;
     
-    case ocl::Expressions::ExpressionsPackage::COLLECTIONRANGE_CLASS:
-        //not needed
-        //CollectionRangeEval
-        break;
+    // case ocl::Expressions::ExpressionsPackage::COLLECTIONRANGE_CLASS:
+    //     //not needed
+    //     //CollectionRangeEval
+    //     break;
     
-    case ocl::Expressions::ExpressionsPackage::NULLLITERALEXP_CLASS:
-        //TODO
-        //NullLiteralExpEval
-        break;
+    // case ocl::Expressions::ExpressionsPackage::NULLLITERALEXP_CLASS:
+    //     //will return nullptr
+    //     //NullLiteralExpEval
+    //     break;
 
     case ocl::Expressions::ExpressionsPackage::ENUMLITERALEXP_CLASS:
         //TODO
@@ -2447,39 +2436,32 @@ std::shared_ptr<Any> EcoreEval::callEvalFunction(std::shared_ptr<Any> exp) {
         break;
     
     case ocl::Expressions::ExpressionsPackage::BOOLEANLITERALEXP_CLASS:
-        //WIP
         //BooleanLitExpEval
         result = evalBooleanLiteralExp(exp);
         break;
 
     case ocl::Expressions::ExpressionsPackage::STRINGLITERALEXP_CLASS:
-        //WIP
         //StringLiteralExpEval
         result = evalStringLiteralExp(exp);
         break;
 
     case ocl::Expressions::ExpressionsPackage::UNLIMITEDNATURALEXP_CLASS:
-        //WIP
         //UnlimitedNaturalLiteralExpEval
         result = evalUnlimitedNaturalLiteralExp(exp);
         break;
     
     case ocl::Expressions::ExpressionsPackage::INTEGERLITERALEXP_CLASS:
-        //WIP
         //IntegerLiteralExpEval
         result = evalIntegerLiteralExp(exp);
         break;
     
     case ocl::Expressions::ExpressionsPackage::REALLITERALEXP_CLASS:
-        //WIP
         //RealLiteralExpEval
         result = evalRealLiteralExp(exp);
         break;
 
     case ocl::Expressions::ExpressionsPackage::OPERATIONCALLEXP_CLASS:
-        //WIP
         //OperationCallExpEval
-        //std::cout << "OperationCallEval" << std::endl;
         result = evalOperationCallExp(exp);
         break;
     
@@ -2489,55 +2471,46 @@ std::shared_ptr<Any> EcoreEval::callEvalFunction(std::shared_ptr<Any> exp) {
         break;
 
     case ocl::Expressions::ExpressionsPackage::PROPERTYCALLEXP_CLASS:
-        //WIP
         //PropertyCallExpEval
-        //std::cout << "PropertyCallEval" << std::endl;
         result = evalPropertyCallExp(exp);
         break;
 
     case ocl::Expressions::ExpressionsPackage::ITERATOREXP_CLASS:
-        //WIP
         //IteratorExpEval
-        //std::cout << "IteratorExpEval" << std::endl;
         result = evalIteratorExp(exp);
         break;
 
     case ocl::Expressions::ExpressionsPackage::ITERATEEXP_CLASS:
-        //WIP
         //IterateExpEval
         result = evalIterateExp(exp);
         break;
 
-    case ocl::Expressions::ExpressionsPackage::TYPEEXP_CLASS:
-        //not needed
-        //TypeExpEval
-        //result = evalTypeExp(exp);
-        break;
+    // case ocl::Expressions::ExpressionsPackage::TYPEEXP_CLASS:
+    //     //not needed
+    //     break;
 
-    case ocl::Expressions::ExpressionsPackage::TUPLETYPEEXP_CLASS:
-        //not needed
-        //TupleTypeExpEval
-        break;
+    // case ocl::Expressions::ExpressionsPackage::TUPLETYPEEXP_CLASS:
+    //     //not needed
+    //     //TupleTypeExpEval
+    //     break;
 
-    case ocl::Expressions::ExpressionsPackage::COLLECTIONTYPEEXP_CLASS:
-        //not needed
-        //CollectionTypeExpEval
-        break;
+    // case ocl::Expressions::ExpressionsPackage::COLLECTIONTYPEEXP_CLASS:
+    //     //not needed
+    //     //CollectionTypeExpEval
+    //     break;
     
     case ocl::Expressions::ExpressionsPackage::LETEXP_CLASS:
-        //WIP
         //LetExpEval
         result = evalLetExp(exp);
         break;
 
     case ocl::Expressions::ExpressionsPackage::IFEXP_CLASS:
-        //WIP
         //IfExpEval
         result = evalIfExp(exp);
         break;
 
     case ocl::Expressions::ExpressionsPackage::VARIABLEEXP_CLASS:
-        //WIP
+        //VariableExp
         result = evalVariableExp(exp);
         break;
     
@@ -2597,43 +2570,39 @@ std::shared_ptr<Any> EcoreEval::callEvalFunction(std::shared_ptr<Any> exp) {
         break;
 
     case ocl::Expressions::ExpressionsPackage::PREFIXEDEXP_CLASS:
-        //WIP
         //PrefixedExpEval
         result = evalPrefixedExp(exp);
         break;
 
     case ocl::Expressions::ExpressionsPackage::OPERATOREXP_CLASS:
-        //WIP
         //OperatorExpEval
         result = evalOperatorExp(exp);
         break;
 
     case ocl::Expressions::ExpressionsPackage::PARENTEDEXP_CLASS:
-        //WIP
         //ParentedExpEval
         return evalParentedExp(exp);
         break;
 
     case ocl::Expressions::ExpressionsPackage::VARDECLARATIONEXP_CLASS:
-        //WIP
         //VarDeclExpEval
         result = evalVarDeclExp(exp);
         break;
 
     case ocl::Expressions::ExpressionsPackage::MESSAGEEXP_CLASS:
-        //UML Stuff
+        //TODO
         //MessageExpEval
         break;
 
     case ocl::Expressions::ExpressionsPackage::MESSAGEARGUMENTS_CLASS:
-        //UML Stuff
+        //TODO
         //MessageArgumentsEval
         break;
 
-    case ocl::Expressions::ExpressionsPackage::UNSPECIFIEDVALUEEXP_CLASS:
-        //UML Stuff
-        //UnspecificValueExpEval
-        break;
+    // case ocl::Expressions::ExpressionsPackage::UNSPECIFIEDVALUEEXP_CLASS:
+    //     //will return nullptr
+    //     //UnspecificValueExpEval
+    //     break;
 
     // case ocl::Expressions::ExpressionsPackage::STATEEXP_CLASS:
     //     //UNUSED
