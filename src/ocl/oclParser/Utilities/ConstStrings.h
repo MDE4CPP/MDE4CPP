@@ -41,8 +41,11 @@ namespace Utilities {
     const std::string CONST_BAG = "Bag";
     const std::string CONST_SEQUENCE = "Sequence";
 
+    const std::string CONST_TUPLE = "Tuple";
+
     const std::string CONST_IMPLICIT_VAR = "implicit_";
     const std::string CONST_NAME = "name";
+    const std::string CONST_TEMP = "temp";
 
     const std::string UNLIMITEDNATURAL_NAME = "UnlimitedNatural";
     const std::string EBOOLEAN_NAME = "EBoolean";

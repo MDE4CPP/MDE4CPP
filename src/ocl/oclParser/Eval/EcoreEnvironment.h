@@ -66,29 +66,12 @@ namespace Eval {
             */
             std::string generateName();
 
-            // /*!
-            // * \brief Retrieve the meta class of the given type.
-            // * If it is already a meta class, cast and return it.
-            // */
-            // std::shared_ptr<ecore::EClass> getMetaClass(std::shared_ptr<ecore::EClassifier> type);
-            /*!
-
-            * \brief createNewObject creates a new object of given EClass and returns it
-            * \param meta_package is the EPackage of the meta model in which e_class is
-            * \param e_class is the EClass of which an object should be created
-            * \param new_object_name is the name of the new object
-            *
-            * If the object couldn't be created, a nullptr is returned
-            */
-            //std::shared_ptr<ecore::EObject> createNewObject(std::shared_ptr<ecore::EPackage> meta_package, std::shared_ptr<ecore::EClass> e_class);
-
             /* SETTERS */
             void setSelfVariable(std::shared_ptr<Any> self) { m_self = self; }
             void setContextVariable(std::shared_ptr<Any> context) { m_context = context; }
 
             /* GETTERS */
             
-
             /*! 
             *  \brief returns the first Environment with no parent (including this)
             *  \return the first Environment with no parent (including this)
@@ -103,8 +86,6 @@ namespace Eval {
 
             // ### non OCL spec functions ###
 
-            // looks for a VariableName directly in self
-            // returns nullptr if variable with given name is not found
             // only 'self' will be requested here, all other properties will be requested in PropertyCallExp
             std::shared_ptr<Any> lookupVariableName(const std::string& name);
 
@@ -119,11 +100,6 @@ namespace Eval {
             // look for a Type in the given Any
             //return nullptr if no type is found
             std::string getTypeName(const std::shared_ptr<Any>& argument);
-
-            // updates the context with the given name
-            // if it is not nullptr
-            // return true if successful
-            bool updateContext(std::shared_ptr<Any> newContext);
 
             //searches in all namedElements for the given variable name
             std::shared_ptr<Any> lookupNamedElement(const std::string& name);
@@ -149,7 +125,7 @@ namespace Eval {
             /*!
             * \brief List of declared variables and implicit variables, including "self".
             * Implicit variables are generated when there is an iterator without any
-            * iteration variable specified.
+            * iteration variable specified. -> this task now manages the m_context var
             * the variables are stored in a tuple
             * first entry is the type as string, second is the value as any
             */
@@ -167,7 +143,7 @@ namespace Eval {
 
     template <class T>
     // T without std::shared_ptr
-    // check if the given type is valid
+    // casts if the given type is valid
     // return nullptr if not, else return the casted object
     std::shared_ptr<T> castEcoreArgument(std::shared_ptr<Any> argument) {
 

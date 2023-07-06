@@ -12,16 +12,6 @@
 
 namespace Eval {
 
-// TODO
-// Ablaufalgo für Anfragebaum
-// wie Ergebnisse weiterreichen
-// Context einbinden
-// EGet, EAllContents, EContents, Get(Meta)Class
-// Name, Invoke
-// Operationen ausführen
-// Attribute, Operationen, select, reject, ...
-// MDE4CPP Any, aus common includen
-
     class EcoreEnvironment;
     
     class EcoreEval{
@@ -85,7 +75,7 @@ namespace Eval {
             // ### Handling Functions ###
             // ##########################        
             
-            // in case in the OclExpression is 'appliedElement' set handle this here
+            // in case in the OclExpression is 'appliedElement' set, handle this here
             // updating the contextVariable here
             std::shared_ptr<Any> handleAppliedElement(std::shared_ptr<ocl::Expressions::CallExp> appliedElement, std::shared_ptr<Any> parentResult);
 

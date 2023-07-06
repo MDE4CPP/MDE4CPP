@@ -73,8 +73,6 @@ void OclEcore::parse(const std::string& oclStr) {
 
 // }
 
-
-//TODO check if Ecore or UML Model
 //currently only Ecore is supported
 std::shared_ptr<Any> OclEcore::query(const std::string& oclStr, std::shared_ptr<Any> context) {
 

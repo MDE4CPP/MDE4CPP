@@ -363,7 +363,7 @@ public:
             std::shared_ptr<ocl::Expressions::CallExp> callExp = std::any_cast<T>(child);
             std::shared_ptr<ocl::Expressions::OclExpression> oclExp = Utilities::oclCV::exp2oclExp(parent);
 
-            //check if the parent is an operatorExp -> the apliedExp can't be a Operand
+            //check if the parent is an operatorExp -> the appliedExp can't be a Operand
             std::shared_ptr<ocl::Expressions::OperatorExp> operaExp = std::dynamic_pointer_cast<ocl::Expressions::OperatorExp>(oclExp);
             bool isNotOperand = true;
             if (operaExp != nullptr) {

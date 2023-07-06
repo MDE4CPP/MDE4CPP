@@ -75,7 +75,7 @@ std::shared_ptr<Any> EcoreEnvironment::lookup(const std::string& name) {
 
 
 /*!
-* \brief Find a Object in the current environment or recursively in its parent environment, based on a single name and the implicitly.
+* \brief Find a Object in the current environment or recursively in its parent environment, based on a single name and implicitly.
 * \param name
 * \return nullptr if the element is not found.
 */
@@ -149,13 +149,14 @@ bool EcoreEnvironment::changeNamedElement(const std::string& name, std::shared_p
             std::get<1>(it->second) = newElem;
             return true;
         }
-        //current exception are Collections, because they are always Bags with no explicit type
+        //current exception are Collections and Tuples, because they are always Bags with no explicit type
         //TODO use of inner type
         if (newElem->isContainer() 
         && (std::get<0>(it->second) == Utilities::CONST_BAG
         || std::get<0>(it->second) == Utilities::CONST_SEQUENCE 
         || std::get<0>(it->second) == Utilities::CONST_SET 
-        || std::get<0>(it->second) == Utilities::CONST_ORDEREDSET))
+        || std::get<0>(it->second) == Utilities::CONST_ORDEREDSET
+        || std::get<0>(it->second) == Utilities::CONST_TUPLE))
         {
             std::get<1>(it->second) = newElem;
             return true;
@@ -173,13 +174,11 @@ bool EcoreEnvironment::changeNamedElement(const std::string& name, std::shared_p
 std::string EcoreEnvironment::generateName()
 {
     m_generatorInt++;
-    return "temp" + std::to_string(m_generatorInt);
+    return Utilities::CONST_TEMP + std::to_string(m_generatorInt);
 }
 
-// returns an empty any (nullptr)
+// returns an nullptr
 std::shared_ptr<Any> EcoreEnvironment::emptyResult() {
-
-    //std::shared_ptr<Any> empty;
     
     return nullptr;
 
@@ -203,8 +202,6 @@ std::shared_ptr<EcoreEnvironment> EcoreEnvironment::getRootEnv()
 
 //### lookupVariableName ###
 
-// looks for a VariableName directly in self
-// returns nullptr if variable with given name is not found
 // only 'self' will be requested here, all other properties will be requested in PropertyCallExp
 std::shared_ptr<Any> EcoreEnvironment::lookupVariableName(const std::string& name) {
 
@@ -252,7 +249,8 @@ std::shared_ptr<Any> EcoreEnvironment::lookupPropertyName(const std::string& nam
     std::shared_ptr<ecore::EStructuralFeature> foundFeat;
 
     for (size_t i = 0; i < size; i++) {
-        const std::shared_ptr<ecore::EStructuralFeature>& elem = eClass->getEAllStructuralFeatures()->at(i);
+        const std::shared_ptr<ecore::EStructuralFeature>& elem = eClass->getEAllStructuralFeatures()->at(i); // -> causes with debugger an error
+        //std::shared_ptr<ecore::EStructuralFeature> elem = eClass->getEAllStructuralFeatures()->at(i); // -> Debug friendly solution
         if (name == elem->getName()) {
             foundFeat = elem;
             break;
@@ -307,7 +305,8 @@ std::shared_ptr<Any> EcoreEnvironment::lookupOperationName(const std::string& na
     std::shared_ptr<ecore::EOperation> foundOp;
 
     for (size_t i = 0; i < size; i++) {
-        const std::shared_ptr<ecore::EOperation>& elem = eClass->getEAllOperations()->at(i);
+        const std::shared_ptr<ecore::EOperation>& elem = eClass->getEAllOperations()->at(i); // -> does not work with debugger
+        //std::shared_ptr<ecore::EOperation> elem = eClass->getEAllOperations()->at(i); // debug friendly solution
         if (name == elem->getName()) {
             foundOp = elem;
             break;
@@ -316,7 +315,7 @@ std::shared_ptr<Any> EcoreEnvironment::lookupOperationName(const std::string& na
 
     //check if found
     if (foundOp == nullptr) {
-        //TODO property name 'name' in eClass.getName() not found
+        //TODO operation name 'name' in eClass.getName() not found
         return emptyResult();
     }
 
@@ -377,18 +376,6 @@ std::string EcoreEnvironment::getTypeName(const std::shared_ptr<Any>& argument) 
 
     // no type could identified
     return "";
-
-}
-
-// updates the context with the given name
-// if it is not nullptr
-bool EcoreEnvironment::updateContext(std::shared_ptr<Any> newContext) {
-
-    if (newContext != nullptr) {
-        m_context = newContext;
-        return true;
-    }
-    return false;
 
 }
 

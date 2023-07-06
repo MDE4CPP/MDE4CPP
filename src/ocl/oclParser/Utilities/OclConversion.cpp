@@ -1,7 +1,7 @@
 #include "OclConversion.h"
 
 #include <ocl/Expressions/ExpressionInOcl.hpp>
-#include <ocl/Expressions/oclExpression.hpp>
+#include <ocl/Expressions/OclExpression.hpp>
 #include <ocl/Expressions/BooleanLiteralExp.hpp>
 #include <ocl/Expressions/IntegerLiteralExp.hpp>
 #include <ocl/Expressions/UnlimitedNaturalExp.hpp>
@@ -38,10 +38,6 @@
 #include <ocl/Expressions/InitOrDerValueListExp.hpp>
 #include <ocl/Expressions/DefExp.hpp>
 
-#include "../Eval/EcoreEval.h"
-// #include <ocl/Expressions/ExpressionsPackage.hpp>
-
-using namespace Eval;
 using namespace Utilities;
 
 std::shared_ptr<ocl::Expressions::OclExpression> oclCV::exp2oclExp(std::any exp) {

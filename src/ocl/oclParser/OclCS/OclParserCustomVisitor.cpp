@@ -237,7 +237,7 @@ namespace OclCS {
                 handleVarDeclarationExp(aggregate, nextResult);
 
             }
-            // MessageExpression -> append oclExp from MessageArgumts
+            // MessageExpression -> append oclExp from MessageArguments
             else if (aggregate.type() == typeid(std::shared_ptr<ocl::Expressions::MessageExp>)) {
 
                 handleMessageExp(aggregate, nextResult);
@@ -323,7 +323,7 @@ namespace OclCS {
                 handleInitOrDerValueExp(aggregate, nextResult);
 
             }
-            // add refferedExp
+            // add referredExp
             else if (aggregate.type() == typeid(std::shared_ptr<ocl::Expressions::InvOrDefExp>)) {
 
                 handleInvOrDefExp(aggregate, nextResult);
@@ -385,7 +385,7 @@ namespace OclCS {
     };
 
     // ###############################################################
-    // ### handling tasks for differnet cases in aggregateResult() ###
+    // ### handling tasks for different cases in aggregateResult() ###
     // ###############################################################
 
     // ### handleExpInOcl ###
@@ -393,7 +393,7 @@ namespace OclCS {
     // set topExp
     void OclParserCustomVisitor::handleExpressionInOcl(std::any aggregate, std::any nextResult) {
 
-        //get aggreggate Expression
+        //get aggregate Expression
         std::shared_ptr<ocl::Expressions::ExpressionInOcl> expInOcl = std::any_cast<std::shared_ptr<ocl::Expressions::ExpressionInOcl>>(aggregate);
 
         //get nextResult Expression
@@ -417,13 +417,13 @@ namespace OclCS {
     //append all CollectionParts from CollectionLiteralParts
     void OclParserCustomVisitor::handleCollectionLiteralExpression(std::any aggregate, std::any nextResult) {
 
-        //get aggreggate Expression
+        //get aggregate Expression
         std::shared_ptr<ocl::Expressions::CollectionLiteralExp> colLitExp = std::any_cast<std::shared_ptr<ocl::Expressions::CollectionLiteralExp>>(aggregate);
 
         //get nextResult
         if (nextResult.type() == typeid(std::shared_ptr<ocl::Expressions::CollectionLiteralParts>)) {
 
-            //get aggreggate Expression
+            //get aggregate Expression
             std::shared_ptr<ocl::Expressions::CollectionLiteralParts> colLitParts = std::any_cast<std::shared_ptr<ocl::Expressions::CollectionLiteralParts>>(nextResult);
 
             // Debug
@@ -446,10 +446,10 @@ namespace OclCS {
     }
 
     // ### handleCollectionLiteralParts ###
-    // collect all collection parts (neccessary because of the grammar structure)
+    // collect all collection parts (necessary because of the grammar structure)
     void OclParserCustomVisitor::handleCollectionLiteralParts(std::any aggregate, std::any nextResult) {
 
-        //get aggreggate Expression
+        //get aggregate Expression
         std::shared_ptr<ocl::Expressions::CollectionLiteralParts> colLitParts = std::any_cast<std::shared_ptr<ocl::Expressions::CollectionLiteralParts>>(aggregate);
 
         //get nextResult value
@@ -470,7 +470,7 @@ namespace OclCS {
 
                 }
                 else {
-                //no cast was succesfull
+                //no cast was successful
                 //either theres a wrong query
                 //or an abstract oclExp was set as nextResult (see Utilities::oclCV::exp2oclExp())
                 //TODO add error
@@ -496,14 +496,14 @@ namespace OclCS {
     // append first and last oclExp
     void OclParserCustomVisitor::handleCollectionRange(std::any aggregate, std::any nextResult) {
 
-        //get aggreggate Expression
+        //get aggregate Expression
         std::shared_ptr<ocl::Expressions::CollectionRange> colRa = std::any_cast<std::shared_ptr<ocl::Expressions::CollectionRange>>(aggregate);
 
         //get nextResult
         std::shared_ptr<ocl::Expressions::OclExpression> oclExp = Utilities::oclCV::exp2oclExp(nextResult);
 
         if (oclExp == nullptr) {
-            //an error occured
+            //an error occurred
             //TODO add error management
             //throw std::invalid_argument("In aggregateResult() -> collectionRange case: std::any value couldn't be converted to oclExpression.");
         }
@@ -529,7 +529,7 @@ namespace OclCS {
     // TupleLiteralExpression -> append TupleLiteralParts
     void OclParserCustomVisitor::handleTupleLiteralExpression(std::any aggregate, std::any nextResult) {
 
-        //get aggreggate Expression
+        //get aggregate Expression
         std::shared_ptr<ocl::Expressions::TupleLiteralExp> tupExp = std::any_cast<std::shared_ptr<ocl::Expressions::TupleLiteralExp>>(aggregate);
 
         //check if nextResult is from VarDeclarationExp type, only then it can be correctly appended
@@ -555,7 +555,7 @@ namespace OclCS {
     // append qualifier and set parentNav for qualifier
     void OclParserCustomVisitor::handleAssociationClassExp(std::any aggregate, std::any nextResult) {
 
-        //get aggreggate Expression
+        //get aggregate Expression
         std::shared_ptr<ocl::Expressions::AssociationClassCallExp> assExp = std::any_cast<std::shared_ptr<ocl::Expressions::AssociationClassCallExp>>(aggregate);
 
         //get nextResult
@@ -582,7 +582,7 @@ namespace OclCS {
     // append arguments and set parentCall in each argument (oclExpression)
     void OclParserCustomVisitor::handleOperationCallExp(std::any aggregate, std::any nextResult) {
 
-        //get aggreggate Expression
+        //get aggregate Expression
         std::shared_ptr<ocl::Expressions::OperationCallExp> opExp = std::any_cast<std::shared_ptr<ocl::Expressions::OperationCallExp>>(aggregate);
 
         //get nextResult
@@ -591,7 +591,7 @@ namespace OclCS {
         if (oclExp == nullptr) {
 
             //TODO error
-            //no cast was successfull
+            //no cast was successful
             //the given argument is not an oclExpression
 
         } else {
@@ -613,7 +613,7 @@ namespace OclCS {
     // or append oclExp (as iterator in impl Collection Operation)
     void OclParserCustomVisitor::handleIteratorExp(std::any aggregate, std::any nextResult) {
 
-        //get aggreggate Expression
+        //get aggregate Expression
         std::shared_ptr<ocl::Expressions::IteratorExp> itoExp = std::any_cast<std::shared_ptr<ocl::Expressions::IteratorExp>>(aggregate);
 
         // Debug 
@@ -696,7 +696,7 @@ namespace OclCS {
     // and the bodyOclExp
     void OclParserCustomVisitor::handleIterateExp(std::any aggregate, std::any nextResult) {
 
-        //get aggreggate Expression
+        //get aggregate Expression
         std::shared_ptr<ocl::Expressions::IterateExp> iterExp = std::any_cast<std::shared_ptr<ocl::Expressions::IterateExp>>(aggregate);
 
         if (nextResult.type() == typeid(std::shared_ptr<ocl::Expressions::VarDeclarationExp>)) {
@@ -735,7 +735,7 @@ namespace OclCS {
     // append all parts of the expressions
     void OclParserCustomVisitor::handleIfExp(std::any aggregate, std::any nextResult) {
 
-        //get aggreggate Expression
+        //get aggregate Expression
         std::shared_ptr<ocl::Expressions::IfExp> ifExp = std::any_cast<std::shared_ptr<ocl::Expressions::IfExp>>(aggregate);
 
         //get nextResult
@@ -748,7 +748,7 @@ namespace OclCS {
 
         } else {
 
-            //set the if condtion else expression and else expression
+            //set the if condition else expression and else expression
             //all parts must be set (see OCL spec)
 
             //because of depth first search
@@ -786,7 +786,7 @@ namespace OclCS {
     //append all variableDeclarations
     void OclParserCustomVisitor::handleLetExp(std::any aggregate, std::any nextResult) {
 
-        //get aggreggate Expression
+        //get aggregate Expression
         std::shared_ptr<ocl::Expressions::LetExp> letExp = std::any_cast<std::shared_ptr<ocl::Expressions::LetExp>>(aggregate);
 
         std::shared_ptr<ocl::Expressions::VarDeclarationExp> varDecExp;
@@ -830,7 +830,7 @@ namespace OclCS {
     // append "parts"
     void OclParserCustomVisitor::handleTupleTypeExp(std::any aggregate, std::any nextResult) {
 
-        //get aggreggate Expression
+        //get aggregate Expression
         std::shared_ptr<ocl::Expressions::TupleTypeExp> tTypeExp = std::any_cast<std::shared_ptr<ocl::Expressions::TupleTypeExp>>(aggregate);
 
         //check if nextResult is from VarDeclarationExp type, only then it can be correctly appended
@@ -857,7 +857,7 @@ namespace OclCS {
     // append innerType
     void OclParserCustomVisitor::handleCollectionTypeExp(std::any aggregate, std::any nextResult) {
 
-        //get aggreggate Expression
+        //get aggregate Expression
         std::shared_ptr<ocl::Expressions::CollectionTypeExp> cTypeExp = std::any_cast<std::shared_ptr<ocl::Expressions::CollectionTypeExp>>(aggregate);
 
         //check if nextResult is an TypeExp
@@ -905,13 +905,13 @@ namespace OclCS {
 
     void OclParserCustomVisitor::handleMessageExp(std::any aggregate, std::any nextResult) {
 
-        //get aggreggate Expression
+        //get aggregate Expression
         std::shared_ptr<ocl::Expressions::MessageExp> mesExp = std::any_cast<std::shared_ptr<ocl::Expressions::MessageExp>>(aggregate);
 
         //check if nextResult is MessageArguments and append the single arguments if so
         if (nextResult.type() == typeid(std::shared_ptr<ocl::Expressions::MessageArguments>)) {
 
-            //get aggreggate Expression
+            //get aggregate Expression
             std::shared_ptr<ocl::Expressions::MessageArguments> mesAr = std::any_cast<std::shared_ptr<ocl::Expressions::MessageArguments>>(nextResult);
 
             //iterate through all messageArguments and add them to MessageExpression
@@ -930,7 +930,7 @@ namespace OclCS {
 
     void OclParserCustomVisitor::handleMessageArguments(std::any aggregate, std::any nextResult) {
 
-        //get aggreggate Expression
+        //get aggregate Expression
         std::shared_ptr<ocl::Expressions::MessageArguments> mesAr = std::any_cast<std::shared_ptr<ocl::Expressions::MessageArguments>>(aggregate);
 
         //get nextResult
@@ -938,7 +938,7 @@ namespace OclCS {
 
             if (oclExp == nullptr) {
 
-                //no cast was succesfull
+                //no cast was successful
                 //either theres a wrong query
                 //or an abstract oclExp was set as nextResult (see Utilities::oclCV::exp2oclExp())
                 //TODO add error
@@ -959,7 +959,7 @@ namespace OclCS {
     // append oclExp to assignedOclExp
     void OclParserCustomVisitor::handleVarDeclarationExp(std::any aggregate, std::any nextResult) {
 
-        //get aggreggate Expression
+        //get aggregate Expression
         std::shared_ptr<ocl::Expressions::VarDeclarationExp> varDecExp = std::any_cast<std::shared_ptr<ocl::Expressions::VarDeclarationExp>>(aggregate);
         
         //check if the (optional) TypeExp isn't already set and if not, try to set
@@ -968,7 +968,7 @@ namespace OclCS {
             //try all type variants
             if (nextResult.type() == typeid(std::shared_ptr<ocl::Expressions::TypeExp>)) {
 
-                //get aggreggate Expression
+                //get aggregate Expression
                 std::shared_ptr<ocl::Expressions::TypeExp> typeExp = std::any_cast<std::shared_ptr<ocl::Expressions::TypeExp>>(nextResult);
                 //set Type
                 varDecExp->setVarType(typeExp);
@@ -978,7 +978,7 @@ namespace OclCS {
 
             } else if (nextResult.type() == typeid(std::shared_ptr<ocl::Expressions::TupleTypeExp>)) {
 
-                //get aggreggate Expression
+                //get aggregate Expression
                 std::shared_ptr<ocl::Expressions::TupleTypeExp> tTypeExp = std::any_cast<std::shared_ptr<ocl::Expressions::TupleTypeExp>>(nextResult);
                 //set Type
                 varDecExp->setVarType(tTypeExp);
@@ -988,7 +988,7 @@ namespace OclCS {
 
             } else if (nextResult.type() == typeid(std::shared_ptr<ocl::Expressions::CollectionTypeExp>)) {
 
-                //get aggreggate Expression
+                //get aggregate Expression
                 std::shared_ptr<ocl::Expressions::CollectionTypeExp> cTypeExp = std::any_cast<std::shared_ptr<ocl::Expressions::CollectionTypeExp>>(nextResult);
                 //set Type
                 varDecExp->setVarType(cTypeExp);
@@ -1002,7 +1002,7 @@ namespace OclCS {
                 std::shared_ptr<ocl::Expressions::OclExpression> oclExp = Utilities::oclCV::exp2oclExp(nextResult);
                 if (oclExp == nullptr) {
 
-                    //no cast was succesfull
+                    //no cast was successful
                     //either theres a wrong query
                     //or an abstract oclExp was set as nextResult (see Utilities::oclCV::exp2oclExp())
                     //TODO add error
@@ -1024,7 +1024,7 @@ namespace OclCS {
 
             if (oclExp == nullptr) {
 
-                //no cast was succesfull
+                //no cast was successful
                 //either theres a wrong query
                 //or an abstract oclExp was set as nextResult (see Utilities::oclCV::exp2oclExp())
                 //TODO add error
@@ -1046,7 +1046,7 @@ namespace OclCS {
     //void OclParserCustomVisitor::handlePrefixedExp(std::any aggregate, std::any nextResult) {
     void OclParserCustomVisitor::handlePrefixedExp(std::any aggregate, std::any nextResult) {    
 
-        //get aggreggate Expression
+        //get aggregate Expression
         std::shared_ptr<ocl::Expressions::PrefixedExp> preExp = std::any_cast<std::shared_ptr<ocl::Expressions::PrefixedExp>>(aggregate);
 
         //get referredOclExp and set as referredExp
@@ -1059,7 +1059,7 @@ namespace OclCS {
 
         } else {
 
-            //if an operatorExp is found, the prefixedExp have to be downset to the left operand
+            //if an operatorExp is found, the prefixedExp have to be set down to the left operand
             // so that e.g.: -2+3 will evaluate as such and not as -(2+3)
             if (nextResult.type() == typeid(std::shared_ptr<ocl::Expressions::OperatorExp>)) {
 
@@ -1135,7 +1135,7 @@ namespace OclCS {
     // append innerExp
     void OclParserCustomVisitor::handleParentedExp(std::any aggregate, std::any nextResult) {
 
-        //get aggreggate Expression
+        //get aggregate Expression
         std::shared_ptr<ocl::Expressions::ParentedExp> parExp = std::any_cast<std::shared_ptr<ocl::Expressions::ParentedExp>>(aggregate);
 
         //get referredOclExp
@@ -1157,7 +1157,7 @@ namespace OclCS {
     // append left and right operand
     void OclParserCustomVisitor::handleOperatorExp(std::any aggregate, std::any nextResult) {
 
-        //get aggreggate Expression
+        //get aggregate Expression
         std::shared_ptr<ocl::Expressions::OperatorExp> operExp = std::any_cast<std::shared_ptr<ocl::Expressions::OperatorExp>>(aggregate);
 
         //get referredOclExp
@@ -1193,7 +1193,7 @@ namespace OclCS {
     // append contextDeclarations
     void OclParserCustomVisitor::handlePackageContextDeclExp(std::any aggregate, std::any nextResult) {
 
-        //get aggreggate Expression
+        //get aggregate Expression
         std::shared_ptr<ocl::Expressions::PackageDeclarationExp> paDeclExp = std::any_cast<std::shared_ptr<ocl::Expressions::PackageDeclarationExp>>(aggregate);
 
         if (nextResult.type() == typeid(std::shared_ptr<ocl::Expressions::ClassifierContextDeclExp>)) {
@@ -1224,12 +1224,12 @@ namespace OclCS {
     // append invOrDecExpr
     void OclParserCustomVisitor::handleClassifierContextDeclExp(std::any aggregate, std::any nextResult) {
 
-        //get aggreggate Expression
+        //get aggregate Expression
         std::shared_ptr<ocl::Expressions::ClassifierContextDeclExp> claDeclExp = std::any_cast<std::shared_ptr<ocl::Expressions::ClassifierContextDeclExp>>(aggregate);
 
         if (nextResult.type() == typeid(std::shared_ptr<ocl::Expressions::InvOrDefExp>)) {
-            std::shared_ptr<ocl::Expressions::InvOrDefExp> invOdefExp = std::any_cast<std::shared_ptr<ocl::Expressions::InvOrDefExp>>(nextResult);
-            claDeclExp->setInvOrDevExp(invOdefExp);
+            std::shared_ptr<ocl::Expressions::InvOrDefExp> invOrDefExp = std::any_cast<std::shared_ptr<ocl::Expressions::InvOrDefExp>>(nextResult);
+            claDeclExp->setInvOrDevExp(invOrDefExp);
         } else {
 
             //TODO add error
@@ -1243,7 +1243,7 @@ namespace OclCS {
     // append typeExpr and initOrDerivedValueList
     void OclParserCustomVisitor::handlePropertyContextDeclExp(std::any aggregate, std::any nextResult) {
 
-        //get aggreggate Expression
+        //get aggregate Expression
         std::shared_ptr<ocl::Expressions::PropertyContextDeclExp> propDeclExp = std::any_cast<std::shared_ptr<ocl::Expressions::PropertyContextDeclExp>>(aggregate);
 
         //set type of the property
@@ -1285,7 +1285,7 @@ namespace OclCS {
     // append operationContextExpr and prePostBodyListExpr
     void OclParserCustomVisitor::handleOperationContextDecl(std::any aggregate, std::any nextResult) {
 
-        //get aggreggate Expression
+        //get aggregate Expression
         std::shared_ptr<ocl::Expressions::OperationContextDeclExp> operaDeclExp = std::any_cast<std::shared_ptr<ocl::Expressions::OperationContextDeclExp>>(aggregate);
 
         // append as operationContext (operation Argument)
@@ -1314,7 +1314,7 @@ namespace OclCS {
     // append all (optional) varDeclExp and the (optional) typeExp
     void OclParserCustomVisitor::handleOperationContextExp(std::any aggregate, std::any nextResult) {
 
-        //get aggreggate Expression
+        //get aggregate Expression
         std::shared_ptr<ocl::Expressions::OperationContextExp> operaExp = std::any_cast<std::shared_ptr<ocl::Expressions::OperationContextExp>>(aggregate);
         
         // append as VarDeclExp (operation Arguments)
@@ -1325,7 +1325,7 @@ namespace OclCS {
             operaExp->getInputParameters()->add(varDecExp);
 
         }
-        // try add as TypeExp (3 possebilities)
+        // try add as TypeExp (3 possibilities)
         else if (nextResult.type() == typeid(std::shared_ptr<ocl::Expressions::TypeExp>)) {
 
             std::shared_ptr<ocl::Expressions::TypeExp> typeExp = std::any_cast<std::shared_ptr<ocl::Expressions::TypeExp>>(nextResult);
@@ -1359,7 +1359,7 @@ namespace OclCS {
     // append Pre, Post, Body Expr
     void OclParserCustomVisitor::handlePrePostBodyListExp(std::any aggregate, std::any nextResult) {
 
-        //get aggreggate Expression
+        //get aggregate Expression
         std::shared_ptr<ocl::Expressions::PrePostBodyListExp> ppbListExp = std::any_cast<std::shared_ptr<ocl::Expressions::PrePostBodyListExp>>(aggregate);
 
         // Debug
@@ -1394,7 +1394,7 @@ namespace OclCS {
     // append bodyExp
     void OclParserCustomVisitor::handlePrePostBodyExp(std::any aggregate, std::any nextResult) {
 
-        //get aggreggate Expression
+        //get aggregate Expression
         std::shared_ptr<ocl::Expressions::PrePostBodyExp> ppbExp = std::any_cast<std::shared_ptr<ocl::Expressions::PrePostBodyExp>>(aggregate);
 
         //get referredOclExp
@@ -1416,7 +1416,7 @@ namespace OclCS {
     // append Init, Derived Expr
     void OclParserCustomVisitor::handleInitOrDerValueListExp(std::any aggregate, std::any nextResult) {
 
-        //get aggreggate Expression
+        //get aggregate Expression
         std::shared_ptr<ocl::Expressions::InitOrDerValueListExp> iOdListExp = std::any_cast<std::shared_ptr<ocl::Expressions::InitOrDerValueListExp>>(aggregate);
 
         if (nextResult.type() == typeid(std::shared_ptr<ocl::Expressions::InitOrDerValueExp>)) {
@@ -1443,7 +1443,7 @@ namespace OclCS {
     // append bodyExp
     void OclParserCustomVisitor::handleInitOrDerValueExp(std::any aggregate, std::any nextResult) {
 
-        //get aggreggate Expression
+        //get aggregate Expression
         std::shared_ptr<ocl::Expressions::InitOrDerValueExp> iOdExp = std::any_cast<std::shared_ptr<ocl::Expressions::InitOrDerValueExp>>(aggregate);
 
         //get referredOclExp
@@ -1465,14 +1465,14 @@ namespace OclCS {
     // append referredExp
     void OclParserCustomVisitor::handleInvOrDefExp(std::any aggregate, std::any nextResult) {
 
-        //get aggreggate Expression
+        //get aggregate Expression
         std::shared_ptr<ocl::Expressions::InvOrDefExp> invOrDefExp = std::any_cast<std::shared_ptr<ocl::Expressions::InvOrDefExp>>(aggregate);
 
-        // DEF Exp allow only defExp as refferedExp
+        // DEF Exp allow only defExp as referredExp
         if (invOrDefExp->getKind() != Utilities::CONST_INV) {
 
             if (nextResult.type() == typeid(std::shared_ptr<ocl::Expressions::DefExp>)) {
-                //get aggreggate Expression
+                //get aggregate Expression
                 std::shared_ptr<ocl::Expressions::DefExp> defExp = std::any_cast<std::shared_ptr<ocl::Expressions::DefExp>>(nextResult);
                 invOrDefExp->setReferredExpression(defExp);
 
@@ -1485,7 +1485,7 @@ namespace OclCS {
             //get referredOclExp
             std::shared_ptr<ocl::Expressions::OclExpression> oclExp = Utilities::oclCV::exp2oclExp(nextResult);
             
-            // set as refferedExp
+            // set as referredExp
             if (oclExp == nullptr) {
                 //TODO add error
                 //there must be an oclExp
@@ -1500,10 +1500,10 @@ namespace OclCS {
     // append frontExpr and bodyExpr
     void OclParserCustomVisitor::handleDefExp(std::any aggregate, std::any nextResult) {
 
-        //get aggreggate Expression
+        //get aggregate Expression
         std::shared_ptr<ocl::Expressions::DefExp> defExp = std::any_cast<std::shared_ptr<ocl::Expressions::DefExp>>(aggregate);
         
-        // check which part of the expre is meant
+        // check which part of the exp is meant
         // depth first search -> check if frontExpr is set
         if (defExp->getFrontExp() != nullptr) {
 
@@ -1527,7 +1527,7 @@ namespace OclCS {
             //get referredOclExp
             std::shared_ptr<ocl::Expressions::OclExpression> oclExp = Utilities::oclCV::exp2oclExp(nextResult);
             
-            // set as refferedExp
+            // set as referredExp
             if (oclExp == nullptr) {
                 //TODO add error
                 //there must be an oclExp
@@ -1716,7 +1716,7 @@ namespace OclCS {
     // #####################    
     
     // ### OclExpression ###
-    // to handle Rules that are not seperated by a custom Rule (e.g. because no mutual left-recursive in antlr4)
+    // to handle Rules that are not separated by a custom Rule (e.g. because no mutual left-recursive in antlr4)
     // Operators e.g.: +,-,*,/,<,>,...
     std::any OclParserCustomVisitor::visitOclExpressionCS(OclParser::OclExpressionCSContext *ctx) {
 
@@ -1957,7 +1957,7 @@ namespace OclCS {
         //from PrimitiveExpression
         unNatExp->setSymbol(u_str);
 
-        //from UnlimitednaturalExpression
+        //from UnlimitedNaturalExpression
         //set the unNatSymbol to either -1 for infinity (*)
         //or to the given integer
         if (u_str.compare(Utilities::CONST_STAR) == 0) {
@@ -2027,7 +2027,7 @@ namespace OclCS {
             //valid collections are: Set, orderedSet, Sequence, Bag
         }  
 
-        //TODO the collection literals will be added via customVisitChildren and aggreagateResult
+        //TODO the collection literals will be added via customVisitChildren and aggregateResult
 
         // make an any for the Exp
         std::any result = std::make_any<std::shared_ptr<ocl::Expressions::CollectionLiteralExp>>(colExp);
@@ -2037,7 +2037,7 @@ namespace OclCS {
     };
 
     // ### CollectionLiteralPartsCS ###
-    //to create an collector for all collectionItems (neccessary because of the grammar structure)
+    //to create an collector for all collectionItems (necessary because of the grammar structure)
     //parts will be added alter in aggregate result
     std::any OclParserCustomVisitor::visitCollectionLiteralPartsCS(OclParser::CollectionLiteralPartsCSContext *ctx) {
 
@@ -2058,9 +2058,9 @@ namespace OclCS {
         //create Exp
         std::shared_ptr<ocl::Expressions::CollectionRange> colRa = ocl::Expressions::ExpressionsFactory::eInstance()->createCollectionRange();
 
-        //because the Lexer trys to find the longest matching Rule to a String
-        // it is neccessary to define a special Rule for this case otherwise
-        // an Real will be missinterpretated (e.g.: 1..2 as 1. Real is wrong) 
+        //because the Lexer tries to find the longest matching Rule to a String
+        // it is necessary to define a special Rule for this case otherwise
+        // an Real will be misinterpreted (e.g.: 1..2 as 1. Real is wrong) 
         if (ctx->SEQRANGE() != nullptr) {
 
             //SEQSTRING = Minus? DecimalNumeral Range
@@ -2186,7 +2186,7 @@ namespace OclCS {
     }
 
     // ### propertyCallExpCS_A ###
-    // set refferedProperty name
+    // set referredProperty name
     std::any OclParserCustomVisitor::visitPropertyCallExpCS_A(OclParser::PropertyCallExpCS_AContext *ctx) {
 
         //create Exp
@@ -2341,7 +2341,7 @@ namespace OclCS {
         // check if it is an Collection Operation
         itoExp->setIsCollectionOperation(ctx->RARROW() != nullptr);
 
-        // set sourrunding Type (Brackets, Paren, None)
+        // set surrounding Type (Brackets, Paren, None)
         // for later use in the Evaluation Parts
         if (ctx->LPAREN() != nullptr) {
             itoExp->setSourrundedBy(ocl::Expressions::SurroundingType::PAREN);
@@ -2375,7 +2375,7 @@ namespace OclCS {
         // the iterateExp is always an Collection Exp
         iterExp->setIsCollectionOperation(true);
 
-        // get iterater Operation Name or name of the Collection
+        // get iterator Operation Name or name of the Collection
         std::string iterName = ctx->ITERATE()->getText();
 
         // set iterName
@@ -2585,7 +2585,7 @@ namespace OclCS {
         //create Exp
         std::shared_ptr<MessageExp> mesExp = ocl::Expressions::ExpressionsFactory::eInstance()->createMessageExp();
 
-        //appendeing of the other parts will be handled in aggregateResult
+        //appending of the other parts will be handled in aggregateResult
         
         // make an any for the Exp
         std::any result = std::make_any<std::shared_ptr<ocl::Expressions::MessageExp>>(mesExp);
@@ -2595,9 +2595,9 @@ namespace OclCS {
 
     }
     
-    // ### MessageArgumets ###
+    // ### MessageArguments ###
     // create the expressions
-    //collects in the aggregateResult function all argumnts
+    //collects in the aggregateResult function all arguments
     std::any OclParserCustomVisitor::visitOclMessageArgumentsCS(OclParser::OclMessageArgumentsCSContext *ctx) {
 
         //create Exp
@@ -2813,7 +2813,7 @@ namespace OclCS {
     }
 
     // ### PrePostBodyExpCS ###
-    // part of OperationContextDeclaratuion
+    // part of OperationContextDeclaration
     std::any OclParserCustomVisitor::visitPrePostBodyExpCS(OclParser::PrePostBodyExpCSContext *ctx) {
 
         //create Exp
@@ -2886,13 +2886,13 @@ namespace OclCS {
     std::any OclParserCustomVisitor::visitInvOrDefCS(OclParser::InvOrDefCSContext *ctx) {
 
         //create Exp
-        std::shared_ptr<InvOrDefExp> invOdefExp = ocl::Expressions::ExpressionsFactory::eInstance()->createInvOrDefExp();
+        std::shared_ptr<InvOrDefExp> invOrDefExp = ocl::Expressions::ExpressionsFactory::eInstance()->createInvOrDefExp();
 
         // set (optional) name
         if (ctx->simpleNameCS() != nullptr) {
             
             std::string name = ctx->simpleNameCS()->getText();
-            invOdefExp->setName(name);
+            invOrDefExp->setName(name);
 
         }
 
@@ -2900,15 +2900,15 @@ namespace OclCS {
 
         // set Kind
         if (ctx->INV() != nullptr) {
-            invOdefExp->setKind(Utilities::CONST_INV);
+            invOrDefExp->setKind(Utilities::CONST_INV);
         } else if (ctx->STATIC() != nullptr) {
-            invOdefExp->setKind(Utilities::CONST_STATICDEF);
+            invOrDefExp->setKind(Utilities::CONST_STATICDEF);
         } else {
-            invOdefExp->setKind(Utilities::CONST_DEF);
+            invOrDefExp->setKind(Utilities::CONST_DEF);
         }
 
         // make an any for the Exp
-        std::any result = std::make_any<std::shared_ptr<ocl::Expressions::InvOrDefExp>>(invOdefExp);
+        std::any result = std::make_any<std::shared_ptr<ocl::Expressions::InvOrDefExp>>(invOrDefExp);
 
         return customVisitChildren(result, ctx);
 
