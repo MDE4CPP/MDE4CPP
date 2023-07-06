@@ -23,9 +23,6 @@
 //#include <abstractDataTypes/Any.hpp>
 #include <ecore/EcoreAny.hpp>
 
-#include <types/typesPackage.hpp>
-#include <primitivetypesReflection/PrimitiveTypesPackage.hpp>
-
 //#include <oclParser/Utilities/test_query.h>
 #include <oclParser/Utilities/OclEcore.h>
 
