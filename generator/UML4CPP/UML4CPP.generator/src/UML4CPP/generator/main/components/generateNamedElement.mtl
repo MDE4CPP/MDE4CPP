@@ -28,9 +28,9 @@
 [template public generatePackageMemberGetter(anElement : Element,impl : Boolean)]
 [if (   not anElement.oclIsUndefined() ) ]
 [if (anElement.oclIsKindOf(NamedElement))]  
-virtual std::shared_ptr<[anElement.getMetaClassName()/]> [anElement.oclAsType(NamedElement).generatePackageGetterCall(anElement.oclAsType(NamedElement))/][abstractSuffix(impl)/];  
+virtual const std::shared_ptr<[anElement.getMetaClassName()/]>& [anElement.oclAsType(NamedElement).generatePackageGetterCall(anElement.oclAsType(NamedElement))/][abstractSuffix(impl)/];  
 [elseif (anElement.oclIsTypeOf(ConnectorEnd))]
-virtual std::shared_ptr<[anElement.getMetaClassName()/]> [anElement.oclAsType(ConnectorEnd).generatePackageGetterCall(anElement.oclAsType(ConnectorEnd))/][abstractSuffix(impl)/];
+virtual const std::shared_ptr<[anElement.getMetaClassName()/]>& [anElement.oclAsType(ConnectorEnd).generatePackageGetterCall(anElement.oclAsType(ConnectorEnd))/][abstractSuffix(impl)/];
 [else]
 [anElement.handleUndefinedElement()/]
 [/if]
@@ -57,12 +57,12 @@ std::shared_ptr<[subPackage.name/]::[subPackage.name/]Package> [aPackage.name/]P
 [template public generatePackageMemberGetterImpl(anElement : Element)]
 [if (   not anElement.oclIsUndefined() ) ]  
 [if (anElement.oclIsKindOf(NamedElement))] 
-std::shared_ptr<[anElement.getMetaClassName()/]> [anElement.getNearestPackage().name/]PackageImpl::[anElement.oclAsType(NamedElement).generatePackageGetterCall(anElement.oclAsType(NamedElement))/]
+const std::shared_ptr<[anElement.getMetaClassName()/]>& [anElement.getNearestPackage().name/]PackageImpl::[anElement.oclAsType(NamedElement).generatePackageGetterCall(anElement.oclAsType(NamedElement))/]
 {
 	return [anElement.oclAsType(NamedElement).memberName()/];
 }
 [elseif (anElement.oclIsTypeOf(ConnectorEnd))]
-std::shared_ptr<[anElement.getMetaClassName()/]> [anElement.getNearestPackage().name/]PackageImpl::[anElement.oclAsType(ConnectorEnd).generatePackageGetterCall(anElement.oclAsType(ConnectorEnd))/]
+const std::shared_ptr<[anElement.getMetaClassName()/]>& [anElement.getNearestPackage().name/]PackageImpl::[anElement.oclAsType(ConnectorEnd).generatePackageGetterCall(anElement.oclAsType(ConnectorEnd))/]
 {
 	return [anElement.oclAsType(ConnectorEnd).memberName()/];
 }
