@@ -176,13 +176,25 @@ class Bag
 
 		iterator erase(iterator el)
 		{
-			return m_bag.erase(el);
+			// Calling erase on an empty std::vector results in segmentation fault
+			if(!m_bag.empty())
+			{
+				return m_bag.erase(el);
+			}
+
+			return m_bag.end();
 		}
 
 		virtual iterator erase(const std::shared_ptr<T>& el)
 		{
 			iterator it = std::find(m_bag.begin(), m_bag.end(), el);
-			return m_bag.erase(it);
+			// Calling erase on an empty std::vector results in segmentation fault
+			if(!m_bag.empty())
+			{
+				return m_bag.erase(it);
+			}
+
+			return it;
 		}
 
 		iterator find(const std::shared_ptr<T>& el)
