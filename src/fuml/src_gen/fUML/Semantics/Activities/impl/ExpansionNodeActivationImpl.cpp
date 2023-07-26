@@ -42,6 +42,7 @@
 #include "fUML/Semantics/Activities/ActivityEdgeInstance.hpp"
 #include "uml/ActivityNode.hpp"
 #include "fUML/Semantics/Activities/ActivityNodeActivationGroup.hpp"
+#include "uml/ExpansionNode.hpp"
 #include "fUML/Semantics/Activities/ExpansionRegionActivation.hpp"
 #include "fUML/Semantics/Activities/ObjectNodeActivation.hpp"
 #include "fUML/Semantics/Activities/Token.hpp"
@@ -104,6 +105,7 @@ ExpansionNodeActivationImpl& ExpansionNodeActivationImpl::operator=(const Expans
 	//Clone Attributes with (deep copy)
 
 	//copy references with no containment (soft copy)
+	m_expansionNode  = obj.getExpansionNode();
 	//Clone references with containment (deep copy)
 	return *this;
 }
@@ -131,21 +133,29 @@ std::shared_ptr<fUML::Semantics::Activities::ExpansionRegionActivation> Expansio
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
-	std::shared_ptr<uml::ExpansionNode> node = std::dynamic_pointer_cast<uml::ExpansionNode>(m_node);
-	std::shared_ptr<uml::ExpansionRegion> region = node->getRegionAsInput();
-	if (region == nullptr)
-	{
-		region = node->getRegionAsOutput();
-	}
-
-	auto group = m_group.lock();
+		auto group = m_group.lock();
 	if (group == nullptr)
 	{
         DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << ": unknown group" << std::endl;)
 		throw "unknown group";
 	}
 
-	return std::dynamic_pointer_cast<fUML::Semantics::Activities::ExpansionRegionActivation>(group->getNodeActivation(region));
+	const std::shared_ptr<uml::ExpansionNode>& node = this->getExpansionNode();
+	const std::shared_ptr<uml::ExpansionRegion>& regionAsInput = node->getRegionAsInput();
+	const std::shared_ptr<uml::ExpansionRegion>& regionAsOutput = node->getRegionAsOutput();
+
+	std::shared_ptr<fUML::Semantics::Activities::ExpansionRegionActivation> expansionRegionActivation = nullptr;
+
+	if (regionAsInput)
+	{
+		expansionRegionActivation = std::dynamic_pointer_cast<fUML::Semantics::Activities::ExpansionRegionActivation>(group->getNodeActivation(regionAsInput));
+	}
+	else if (regionAsOutput)
+	{
+		expansionRegionActivation = std::dynamic_pointer_cast<fUML::Semantics::Activities::ExpansionRegionActivation>(group->getNodeActivation(regionAsOutput));
+	}
+
+	return expansionRegionActivation;
 	//end of body
 }
 
@@ -172,6 +182,33 @@ void ExpansionNodeActivationImpl::receiveOffer()
 //*********************************
 // Reference Getters & Setters
 //*********************************
+/* Getter & Setter for reference expansionNode */
+const std::shared_ptr<uml::ExpansionNode>& ExpansionNodeActivationImpl::getExpansionNode() const
+{
+    return m_expansionNode;
+}
+void ExpansionNodeActivationImpl::setExpansionNode(const std::shared_ptr<uml::ExpansionNode>& _expansionNode)
+{
+    m_expansionNode = _expansionNode;
+	//additional setter call for redefined reference ActivityNodeActivation::node
+	fUML::Semantics::Activities::ActivityNodeActivationImpl::setNode(_expansionNode);
+}
+/*Additional Setter for redefined reference 'ActivityNodeActivation::node'*/
+void ExpansionNodeActivationImpl::setNode(const std::shared_ptr<uml::ActivityNode>& _node)
+{
+	std::shared_ptr<uml::ExpansionNode> _expansionNode = std::dynamic_pointer_cast<uml::ExpansionNode>(_node);
+	if(_expansionNode)
+	{
+		m_expansionNode = _expansionNode;
+
+		//additional setter call for redefined reference ActivityNodeActivation::node
+		fUML::Semantics::Activities::ActivityNodeActivationImpl::setNode(_expansionNode);
+	}
+	else
+	{
+		std::cerr<<"[ExpansionNodeActivation::setNode] : Could not set node because provided node was not of type 'std::shared_ptr<uml::ExpansionNode>'"<<std::endl;
+	}
+}
 
 //*********************************
 // Union Getter
@@ -210,6 +247,25 @@ void ExpansionNodeActivationImpl::load(std::shared_ptr<persistence::interfaces::
 
 void ExpansionNodeActivationImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list)
 {
+	try
+	{
+		std::map<std::string, std::string>::const_iterator iter;
+		std::shared_ptr<ecore::EClass> metaClass = this->eClass(); // get MetaClass
+		iter = attr_list.find("expansionNode");
+		if ( iter != attr_list.end() )
+		{
+			// add unresolvedReference to loadHandler's list
+			loadHandler->addUnresolvedReference(iter->second, loadHandler->getCurrentObject(), metaClass->getEStructuralFeature("expansionNode")); // TODO use getEStructuralFeature() with id, for faster access to EStructuralFeature
+		}
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "| ERROR    | " << e.what() << std::endl;
+	}
+	catch (...) 
+	{
+		std::cout << "| ERROR    | " <<  "Exception occurred" << std::endl;
+	}
 
 	ObjectNodeActivationImpl::loadAttributes(loadHandler, attr_list);
 }
@@ -223,6 +279,20 @@ void ExpansionNodeActivationImpl::loadNode(std::string nodeName, std::shared_ptr
 
 void ExpansionNodeActivationImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
 {
+	switch(featureID)
+	{
+		case fUML::Semantics::Activities::ActivitiesPackage::EXPANSIONNODEACTIVATION_ATTRIBUTE_EXPANSIONNODE:
+		{
+			if (references.size() == 1)
+			{
+				// Cast object to correct type
+				std::shared_ptr<uml::ExpansionNode> _expansionNode = std::dynamic_pointer_cast<uml::ExpansionNode>( references.front() );
+				setExpansionNode(_expansionNode);
+			}
+			
+			return;
+		}
+	}
 	ObjectNodeActivationImpl::resolveReferences(featureID, references);
 }
 
@@ -244,6 +314,8 @@ void ExpansionNodeActivationImpl::saveContent(std::shared_ptr<persistence::inter
 	try
 	{
 		std::shared_ptr<fUML::Semantics::Activities::ActivitiesPackage> package = fUML::Semantics::Activities::ActivitiesPackage::eInstance();
+	// Add references
+		saveHandler->addReference(this->getExpansionNode(), "expansionNode", getExpansionNode()->eClass() != uml::umlPackage::eInstance()->getExpansionNode_Class()); 
 	}
 	catch (std::exception& e)
 	{
@@ -263,6 +335,8 @@ Any ExpansionNodeActivationImpl::eGet(int featureID, bool resolve, bool coreType
 {
 	switch(featureID)
 	{
+		case fUML::Semantics::Activities::ActivitiesPackage::EXPANSIONNODEACTIVATION_ATTRIBUTE_EXPANSIONNODE:
+			return eAny(getExpansionNode(),uml::umlPackage::EXPANSIONNODE_CLASS,false); //507
 	}
 	return ObjectNodeActivationImpl::eGet(featureID, resolve, coreType);
 }
@@ -271,6 +345,8 @@ bool ExpansionNodeActivationImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
+		case fUML::Semantics::Activities::ActivitiesPackage::EXPANSIONNODEACTIVATION_ATTRIBUTE_EXPANSIONNODE:
+			return getExpansionNode() != nullptr; //507
 	}
 	return ObjectNodeActivationImpl::internalEIsSet(featureID);
 }
@@ -279,6 +355,14 @@ bool ExpansionNodeActivationImpl::eSet(int featureID, const Any& newValue)
 {
 	switch(featureID)
 	{
+		case fUML::Semantics::Activities::ActivitiesPackage::EXPANSIONNODEACTIVATION_ATTRIBUTE_EXPANSIONNODE:
+		{
+			// CAST Any to uml::ExpansionNode
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<uml::ExpansionNode> _expansionNode = std::dynamic_pointer_cast<uml::ExpansionNode>(_temp);
+			setExpansionNode(_expansionNode); //507
+			return true;
+		}
 	}
 
 	return ObjectNodeActivationImpl::eSet(featureID, newValue);

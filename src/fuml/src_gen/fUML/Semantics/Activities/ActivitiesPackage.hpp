@@ -525,9 +525,10 @@ namespace fUML::Semantics::Activities
 			// Begin Class ExpansionNodeActivation
 			//Class and Feature IDs 
 			static const unsigned long EXPANSIONNODEACTIVATION_CLASS = 2051282899;
-			static const unsigned int EXPANSIONNODEACTIVATION_CLASS_FEATURE_COUNT = 7;
+			static const unsigned int EXPANSIONNODEACTIVATION_CLASS_FEATURE_COUNT = 8;
 			static const unsigned int EXPANSIONNODEACTIVATION_CLASS_OPERATION_COUNT = 43;
 			
+			static const unsigned long EXPANSIONNODEACTIVATION_ATTRIBUTE_EXPANSIONNODE = 2141280928;
 			
 			static const unsigned int EXPANSIONNODEACTIVATION_OPERATION_FIRE_TOKEN = 2655396851;
 			static const unsigned int EXPANSIONNODEACTIVATION_OPERATION_GETEXPANSIONREGIONACTIVATION = 451366782;
@@ -538,6 +539,7 @@ namespace fUML::Semantics::Activities
 			virtual const std::shared_ptr<ecore::EClass>& getExpansionNodeActivation_Class() const = 0;
 			
 			
+			virtual const std::shared_ptr<ecore::EReference>& getExpansionNodeActivation_Attribute_expansionNode() const = 0;
 			
 			virtual const std::shared_ptr<ecore::EOperation>& getExpansionNodeActivation_Operation_fire_Token() const = 0;
 			virtual const std::shared_ptr<ecore::EOperation>& getExpansionNodeActivation_Operation_getExpansionRegionActivation() const = 0;

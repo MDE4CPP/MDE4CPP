@@ -632,6 +632,10 @@ const std::shared_ptr<ecore::EClass>& fUML::Semantics::Activities::ActivitiesPac
 }
 
 
+const std::shared_ptr<ecore::EReference>& fUML::Semantics::Activities::ActivitiesPackageImpl::getExpansionNodeActivation_Attribute_expansionNode() const
+{
+	return m_expansionNodeActivation_Attribute_expansionNode;
+}
 
 const std::shared_ptr<ecore::EOperation>& fUML::Semantics::Activities::ActivitiesPackageImpl::getExpansionNodeActivation_Operation_fire_Token() const
 {

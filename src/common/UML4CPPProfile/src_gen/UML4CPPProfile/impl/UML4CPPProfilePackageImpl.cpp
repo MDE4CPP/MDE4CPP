@@ -484,163 +484,163 @@ void UML4CPPProfilePackageImpl::initializePackageValueSpecifications()
 	uML4CPPProfile_UML4CPPPackage_packageOnly_defaultValue_LiteralBoolean_UML4CPPProfile_UML4CPPPackage_packageOnly->setValue(false);
 }
 
-std::shared_ptr<uml::ExtensionEnd> UML4CPPProfilePackageImpl::get_ExtensionEnd_extension_DoNotGenerate_UML4CPPProfile_DoNotGenerate()
+const std::shared_ptr<uml::ExtensionEnd>& UML4CPPProfilePackageImpl::get_ExtensionEnd_extension_DoNotGenerate_UML4CPPProfile_DoNotGenerate()
 {
 	return extensionEnd_extension_DoNotGenerate_UML4CPPProfile_DoNotGenerate;
 }
-std::shared_ptr<uml::ExtensionEnd> UML4CPPProfilePackageImpl::get_ExtensionEnd_extension_ExternalLibrary_UML4CPPProfile_ExternalLibrary()
+const std::shared_ptr<uml::ExtensionEnd>& UML4CPPProfilePackageImpl::get_ExtensionEnd_extension_ExternalLibrary_UML4CPPProfile_ExternalLibrary()
 {
 	return extensionEnd_extension_ExternalLibrary_UML4CPPProfile_ExternalLibrary;
 }
-std::shared_ptr<uml::ExtensionEnd> UML4CPPProfilePackageImpl::get_ExtensionEnd_extension_GetterName_UML4CPPProfile_GetterName()
+const std::shared_ptr<uml::ExtensionEnd>& UML4CPPProfilePackageImpl::get_ExtensionEnd_extension_GetterName_UML4CPPProfile_GetterName()
 {
 	return extensionEnd_extension_GetterName_UML4CPPProfile_GetterName;
 }
-std::shared_ptr<uml::ExtensionEnd> UML4CPPProfilePackageImpl::get_ExtensionEnd_extension_MainBehavior_UML4CPPProfile_MainBehavior()
+const std::shared_ptr<uml::ExtensionEnd>& UML4CPPProfilePackageImpl::get_ExtensionEnd_extension_MainBehavior_UML4CPPProfile_MainBehavior()
 {
 	return extensionEnd_extension_MainBehavior_UML4CPPProfile_MainBehavior;
 }
-std::shared_ptr<uml::ExtensionEnd> UML4CPPProfilePackageImpl::get_ExtensionEnd_extension_NonExecutable_UML4CPPProfile_NonExecutable()
+const std::shared_ptr<uml::ExtensionEnd>& UML4CPPProfilePackageImpl::get_ExtensionEnd_extension_NonExecutable_UML4CPPProfile_NonExecutable()
 {
 	return extensionEnd_extension_NonExecutable_UML4CPPProfile_NonExecutable;
 }
-std::shared_ptr<uml::ExtensionEnd> UML4CPPProfilePackageImpl::get_ExtensionEnd_extension_SetterName_UML4CPPProfile_SetterName()
+const std::shared_ptr<uml::ExtensionEnd>& UML4CPPProfilePackageImpl::get_ExtensionEnd_extension_SetterName_UML4CPPProfile_SetterName()
 {
 	return extensionEnd_extension_SetterName_UML4CPPProfile_SetterName;
 }
-std::shared_ptr<uml::ExtensionEnd> UML4CPPProfilePackageImpl::get_ExtensionEnd_extension_Singleton_UML4CPPProfile_Singleton()
+const std::shared_ptr<uml::ExtensionEnd>& UML4CPPProfilePackageImpl::get_ExtensionEnd_extension_Singleton_UML4CPPProfile_Singleton()
 {
 	return extensionEnd_extension_Singleton_UML4CPPProfile_Singleton;
 }
-std::shared_ptr<uml::ExtensionEnd> UML4CPPProfilePackageImpl::get_ExtensionEnd_extension_UML4CPPPackage_UML4CPPProfile_UML4CPPPackage()
+const std::shared_ptr<uml::ExtensionEnd>& UML4CPPProfilePackageImpl::get_ExtensionEnd_extension_UML4CPPPackage_UML4CPPProfile_UML4CPPPackage()
 {
 	return extensionEnd_extension_UML4CPPPackage_UML4CPPProfile_UML4CPPPackage;
 }
-std::shared_ptr<uml::Extension> UML4CPPProfilePackageImpl::get_UML4CPPProfile_Behavior_MainBehavior()
+const std::shared_ptr<uml::Extension>& UML4CPPProfilePackageImpl::get_UML4CPPProfile_Behavior_MainBehavior()
 {
 	return uML4CPPProfile_Behavior_MainBehavior;
 }
-std::shared_ptr<uml::Extension> UML4CPPProfilePackageImpl::get_UML4CPPProfile_Class_Singleton()
+const std::shared_ptr<uml::Extension>& UML4CPPProfilePackageImpl::get_UML4CPPProfile_Class_Singleton()
 {
 	return uML4CPPProfile_Class_Singleton;
 }
-std::shared_ptr<uml::Stereotype> UML4CPPProfilePackageImpl::get_UML4CPPProfile_DoNotGenerate()
+const std::shared_ptr<uml::Stereotype>& UML4CPPProfilePackageImpl::get_UML4CPPProfile_DoNotGenerate()
 {
 	return uML4CPPProfile_DoNotGenerate;
 }
-std::shared_ptr<uml::Property> UML4CPPProfilePackageImpl::get_UML4CPPProfile_DoNotGenerate_base_Element()
+const std::shared_ptr<uml::Property>& UML4CPPProfilePackageImpl::get_UML4CPPProfile_DoNotGenerate_base_Element()
 {
 	return uML4CPPProfile_DoNotGenerate_base_Element;
 }
-std::shared_ptr<uml::Extension> UML4CPPProfilePackageImpl::get_UML4CPPProfile_Element_DoNotGenerate()
+const std::shared_ptr<uml::Extension>& UML4CPPProfilePackageImpl::get_UML4CPPProfile_Element_DoNotGenerate()
 {
 	return uML4CPPProfile_Element_DoNotGenerate;
 }
-std::shared_ptr<uml::Stereotype> UML4CPPProfilePackageImpl::get_UML4CPPProfile_ExternalLibrary()
+const std::shared_ptr<uml::Stereotype>& UML4CPPProfilePackageImpl::get_UML4CPPProfile_ExternalLibrary()
 {
 	return uML4CPPProfile_ExternalLibrary;
 }
-std::shared_ptr<uml::Property> UML4CPPProfilePackageImpl::get_UML4CPPProfile_ExternalLibrary_base_Package()
+const std::shared_ptr<uml::Property>& UML4CPPProfilePackageImpl::get_UML4CPPProfile_ExternalLibrary_base_Package()
 {
 	return uML4CPPProfile_ExternalLibrary_base_Package;
 }
-std::shared_ptr<uml::Property> UML4CPPProfilePackageImpl::get_UML4CPPProfile_ExternalLibrary_includePath()
+const std::shared_ptr<uml::Property>& UML4CPPProfilePackageImpl::get_UML4CPPProfile_ExternalLibrary_includePath()
 {
 	return uML4CPPProfile_ExternalLibrary_includePath;
 }
-std::shared_ptr<uml::Property> UML4CPPProfilePackageImpl::get_UML4CPPProfile_ExternalLibrary_libraryName()
+const std::shared_ptr<uml::Property>& UML4CPPProfilePackageImpl::get_UML4CPPProfile_ExternalLibrary_libraryName()
 {
 	return uML4CPPProfile_ExternalLibrary_libraryName;
 }
-std::shared_ptr<uml::Property> UML4CPPProfilePackageImpl::get_UML4CPPProfile_ExternalLibrary_libraryPath()
+const std::shared_ptr<uml::Property>& UML4CPPProfilePackageImpl::get_UML4CPPProfile_ExternalLibrary_libraryPath()
 {
 	return uML4CPPProfile_ExternalLibrary_libraryPath;
 }
-std::shared_ptr<uml::Stereotype> UML4CPPProfilePackageImpl::get_UML4CPPProfile_GetterName()
+const std::shared_ptr<uml::Stereotype>& UML4CPPProfilePackageImpl::get_UML4CPPProfile_GetterName()
 {
 	return uML4CPPProfile_GetterName;
 }
-std::shared_ptr<uml::Property> UML4CPPProfilePackageImpl::get_UML4CPPProfile_GetterName_base_Property()
+const std::shared_ptr<uml::Property>& UML4CPPProfilePackageImpl::get_UML4CPPProfile_GetterName_base_Property()
 {
 	return uML4CPPProfile_GetterName_base_Property;
 }
-std::shared_ptr<uml::Property> UML4CPPProfilePackageImpl::get_UML4CPPProfile_GetterName_getterName()
+const std::shared_ptr<uml::Property>& UML4CPPProfilePackageImpl::get_UML4CPPProfile_GetterName_getterName()
 {
 	return uML4CPPProfile_GetterName_getterName;
 }
-std::shared_ptr<uml::Stereotype> UML4CPPProfilePackageImpl::get_UML4CPPProfile_MainBehavior()
+const std::shared_ptr<uml::Stereotype>& UML4CPPProfilePackageImpl::get_UML4CPPProfile_MainBehavior()
 {
 	return uML4CPPProfile_MainBehavior;
 }
-std::shared_ptr<uml::Property> UML4CPPProfilePackageImpl::get_UML4CPPProfile_MainBehavior_base_Behavior()
+const std::shared_ptr<uml::Property>& UML4CPPProfilePackageImpl::get_UML4CPPProfile_MainBehavior_base_Behavior()
 {
 	return uML4CPPProfile_MainBehavior_base_Behavior;
 }
-std::shared_ptr<uml::Extension> UML4CPPProfilePackageImpl::get_UML4CPPProfile_NamedElement_NonExecutable()
+const std::shared_ptr<uml::Extension>& UML4CPPProfilePackageImpl::get_UML4CPPProfile_NamedElement_NonExecutable()
 {
 	return uML4CPPProfile_NamedElement_NonExecutable;
 }
-std::shared_ptr<uml::Stereotype> UML4CPPProfilePackageImpl::get_UML4CPPProfile_NonExecutable()
+const std::shared_ptr<uml::Stereotype>& UML4CPPProfilePackageImpl::get_UML4CPPProfile_NonExecutable()
 {
 	return uML4CPPProfile_NonExecutable;
 }
-std::shared_ptr<uml::Property> UML4CPPProfilePackageImpl::get_UML4CPPProfile_NonExecutable_base_NamedElement()
+const std::shared_ptr<uml::Property>& UML4CPPProfilePackageImpl::get_UML4CPPProfile_NonExecutable_base_NamedElement()
 {
 	return uML4CPPProfile_NonExecutable_base_NamedElement;
 }
-std::shared_ptr<uml::Extension> UML4CPPProfilePackageImpl::get_UML4CPPProfile_Package_ExternalLibrary()
+const std::shared_ptr<uml::Extension>& UML4CPPProfilePackageImpl::get_UML4CPPProfile_Package_ExternalLibrary()
 {
 	return uML4CPPProfile_Package_ExternalLibrary;
 }
-std::shared_ptr<uml::Extension> UML4CPPProfilePackageImpl::get_UML4CPPProfile_Package_UML4CPPPackage()
+const std::shared_ptr<uml::Extension>& UML4CPPProfilePackageImpl::get_UML4CPPProfile_Package_UML4CPPPackage()
 {
 	return uML4CPPProfile_Package_UML4CPPPackage;
 }
-std::shared_ptr<uml::Extension> UML4CPPProfilePackageImpl::get_UML4CPPProfile_Property_GetterName()
+const std::shared_ptr<uml::Extension>& UML4CPPProfilePackageImpl::get_UML4CPPProfile_Property_GetterName()
 {
 	return uML4CPPProfile_Property_GetterName;
 }
-std::shared_ptr<uml::Extension> UML4CPPProfilePackageImpl::get_UML4CPPProfile_Property_SetterName()
+const std::shared_ptr<uml::Extension>& UML4CPPProfilePackageImpl::get_UML4CPPProfile_Property_SetterName()
 {
 	return uML4CPPProfile_Property_SetterName;
 }
-std::shared_ptr<uml::Stereotype> UML4CPPProfilePackageImpl::get_UML4CPPProfile_SetterName()
+const std::shared_ptr<uml::Stereotype>& UML4CPPProfilePackageImpl::get_UML4CPPProfile_SetterName()
 {
 	return uML4CPPProfile_SetterName;
 }
-std::shared_ptr<uml::Property> UML4CPPProfilePackageImpl::get_UML4CPPProfile_SetterName_base_Property()
+const std::shared_ptr<uml::Property>& UML4CPPProfilePackageImpl::get_UML4CPPProfile_SetterName_base_Property()
 {
 	return uML4CPPProfile_SetterName_base_Property;
 }
-std::shared_ptr<uml::Property> UML4CPPProfilePackageImpl::get_UML4CPPProfile_SetterName_setterName()
+const std::shared_ptr<uml::Property>& UML4CPPProfilePackageImpl::get_UML4CPPProfile_SetterName_setterName()
 {
 	return uML4CPPProfile_SetterName_setterName;
 }
-std::shared_ptr<uml::Stereotype> UML4CPPProfilePackageImpl::get_UML4CPPProfile_Singleton()
+const std::shared_ptr<uml::Stereotype>& UML4CPPProfilePackageImpl::get_UML4CPPProfile_Singleton()
 {
 	return uML4CPPProfile_Singleton;
 }
-std::shared_ptr<uml::Property> UML4CPPProfilePackageImpl::get_UML4CPPProfile_Singleton_base_Class()
+const std::shared_ptr<uml::Property>& UML4CPPProfilePackageImpl::get_UML4CPPProfile_Singleton_base_Class()
 {
 	return uML4CPPProfile_Singleton_base_Class;
 }
-std::shared_ptr<uml::Stereotype> UML4CPPProfilePackageImpl::get_UML4CPPProfile_UML4CPPPackage()
+const std::shared_ptr<uml::Stereotype>& UML4CPPProfilePackageImpl::get_UML4CPPProfile_UML4CPPPackage()
 {
 	return uML4CPPProfile_UML4CPPPackage;
 }
-std::shared_ptr<uml::Property> UML4CPPProfilePackageImpl::get_UML4CPPProfile_UML4CPPPackage_base_Package()
+const std::shared_ptr<uml::Property>& UML4CPPProfilePackageImpl::get_UML4CPPProfile_UML4CPPPackage_base_Package()
 {
 	return uML4CPPProfile_UML4CPPPackage_base_Package;
 }
-std::shared_ptr<uml::Property> UML4CPPProfilePackageImpl::get_UML4CPPProfile_UML4CPPPackage_eclipseURI()
+const std::shared_ptr<uml::Property>& UML4CPPProfilePackageImpl::get_UML4CPPProfile_UML4CPPPackage_eclipseURI()
 {
 	return uML4CPPProfile_UML4CPPPackage_eclipseURI;
 }
-std::shared_ptr<uml::Property> UML4CPPProfilePackageImpl::get_UML4CPPProfile_UML4CPPPackage_ignoreNamespace()
+const std::shared_ptr<uml::Property>& UML4CPPProfilePackageImpl::get_UML4CPPProfile_UML4CPPPackage_ignoreNamespace()
 {
 	return uML4CPPProfile_UML4CPPPackage_ignoreNamespace;
 }
-std::shared_ptr<uml::Property> UML4CPPProfilePackageImpl::get_UML4CPPProfile_UML4CPPPackage_packageOnly()
+const std::shared_ptr<uml::Property>& UML4CPPProfilePackageImpl::get_UML4CPPProfile_UML4CPPPackage_packageOnly()
 {
 	return uML4CPPProfile_UML4CPPPackage_packageOnly;
 }

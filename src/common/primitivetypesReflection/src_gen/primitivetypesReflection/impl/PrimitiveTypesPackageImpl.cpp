@@ -269,23 +269,23 @@ void PrimitiveTypesPackageImpl::initializePackageValueSpecifications()
 {
 }
 
-std::shared_ptr<uml::PrimitiveType> PrimitiveTypesPackageImpl::get_PrimitiveTypes_Boolean()
+const std::shared_ptr<uml::PrimitiveType>& PrimitiveTypesPackageImpl::get_PrimitiveTypes_Boolean()
 {
 	return primitiveTypes_Boolean;
 }
-std::shared_ptr<uml::PrimitiveType> PrimitiveTypesPackageImpl::get_PrimitiveTypes_Integer()
+const std::shared_ptr<uml::PrimitiveType>& PrimitiveTypesPackageImpl::get_PrimitiveTypes_Integer()
 {
 	return primitiveTypes_Integer;
 }
-std::shared_ptr<uml::PrimitiveType> PrimitiveTypesPackageImpl::get_PrimitiveTypes_Real()
+const std::shared_ptr<uml::PrimitiveType>& PrimitiveTypesPackageImpl::get_PrimitiveTypes_Real()
 {
 	return primitiveTypes_Real;
 }
-std::shared_ptr<uml::PrimitiveType> PrimitiveTypesPackageImpl::get_PrimitiveTypes_String()
+const std::shared_ptr<uml::PrimitiveType>& PrimitiveTypesPackageImpl::get_PrimitiveTypes_String()
 {
 	return primitiveTypes_String;
 }
-std::shared_ptr<uml::PrimitiveType> PrimitiveTypesPackageImpl::get_PrimitiveTypes_UnlimitedNatural()
+const std::shared_ptr<uml::PrimitiveType>& PrimitiveTypesPackageImpl::get_PrimitiveTypes_UnlimitedNatural()
 {
 	return primitiveTypes_UnlimitedNatural;
 }

@@ -135,8 +135,8 @@ void ClearStructuralFeatureActionActivationImpl::doAction()
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
-	std::shared_ptr<uml::ClearStructuralFeatureAction> action = std::dynamic_pointer_cast<uml::ClearStructuralFeatureAction>(m_node);
-	std::shared_ptr<uml::StructuralFeature> feature = action->getStructuralFeature();
+		const std::shared_ptr<uml::ClearStructuralFeatureAction>& action = std::dynamic_pointer_cast<uml::ClearStructuralFeatureAction>(m_node);
+	const std::shared_ptr<uml::StructuralFeature>& feature = action->getStructuralFeature();
 
 	std::shared_ptr<fUML::Semantics::Values::Value> objectValue = nullptr;
 	
@@ -145,7 +145,7 @@ void ClearStructuralFeatureActionActivationImpl::doAction()
 	if((objectPinName.empty()) || (objectPinName.find("self") == 0)){
 		//objectValue is set to the context of the current activity execution
 		std::shared_ptr<fUML::Semantics::StructuredClassifiers::Reference> contextReference = fUML::Semantics::StructuredClassifiers::StructuredClassifiersFactory::eInstance()->createReference();
-		std::shared_ptr<fUML::Semantics::StructuredClassifiers::Object> context = this->getActivityExecution()->getContext();
+		const std::shared_ptr<fUML::Semantics::StructuredClassifiers::Object>& context = this->getActivityExecution()->getContext();
 		contextReference->setReferent(context);
 			
 		objectValue = contextReference;

@@ -997,543 +997,543 @@ void StandardProfilePackageImpl::initializePackageValueSpecifications()
 	extensionEnd_extension_Utility_StandardProfile_Utility_lowerValue_LiteralInteger_ExtensionEnd_extension_Utility_StandardProfile_Utility->setValue(0);
 }
 
-std::shared_ptr<uml::ExtensionEnd> StandardProfilePackageImpl::get_ExtensionEnd_extension_Auxiliary_StandardProfile_Auxiliary()
+const std::shared_ptr<uml::ExtensionEnd>& StandardProfilePackageImpl::get_ExtensionEnd_extension_Auxiliary_StandardProfile_Auxiliary()
 {
 	return extensionEnd_extension_Auxiliary_StandardProfile_Auxiliary;
 }
-std::shared_ptr<uml::ExtensionEnd> StandardProfilePackageImpl::get_ExtensionEnd_extension_BehavioralFeature_Create_StandardProfile_Create()
+const std::shared_ptr<uml::ExtensionEnd>& StandardProfilePackageImpl::get_ExtensionEnd_extension_BehavioralFeature_Create_StandardProfile_Create()
 {
 	return extensionEnd_extension_BehavioralFeature_Create_StandardProfile_Create;
 }
-std::shared_ptr<uml::ExtensionEnd> StandardProfilePackageImpl::get_ExtensionEnd_extension_BuildComponent_StandardProfile_BuildComponent()
+const std::shared_ptr<uml::ExtensionEnd>& StandardProfilePackageImpl::get_ExtensionEnd_extension_BuildComponent_StandardProfile_BuildComponent()
 {
 	return extensionEnd_extension_BuildComponent_StandardProfile_BuildComponent;
 }
-std::shared_ptr<uml::ExtensionEnd> StandardProfilePackageImpl::get_ExtensionEnd_extension_Call_StandardProfile_Call()
+const std::shared_ptr<uml::ExtensionEnd>& StandardProfilePackageImpl::get_ExtensionEnd_extension_Call_StandardProfile_Call()
 {
 	return extensionEnd_extension_Call_StandardProfile_Call;
 }
-std::shared_ptr<uml::ExtensionEnd> StandardProfilePackageImpl::get_ExtensionEnd_extension_Derive_StandardProfile_Derive()
+const std::shared_ptr<uml::ExtensionEnd>& StandardProfilePackageImpl::get_ExtensionEnd_extension_Derive_StandardProfile_Derive()
 {
 	return extensionEnd_extension_Derive_StandardProfile_Derive;
 }
-std::shared_ptr<uml::ExtensionEnd> StandardProfilePackageImpl::get_ExtensionEnd_extension_Destroy_StandardProfile_Destroy()
+const std::shared_ptr<uml::ExtensionEnd>& StandardProfilePackageImpl::get_ExtensionEnd_extension_Destroy_StandardProfile_Destroy()
 {
 	return extensionEnd_extension_Destroy_StandardProfile_Destroy;
 }
-std::shared_ptr<uml::ExtensionEnd> StandardProfilePackageImpl::get_ExtensionEnd_extension_Document_StandardProfile_Document()
+const std::shared_ptr<uml::ExtensionEnd>& StandardProfilePackageImpl::get_ExtensionEnd_extension_Document_StandardProfile_Document()
 {
 	return extensionEnd_extension_Document_StandardProfile_Document;
 }
-std::shared_ptr<uml::ExtensionEnd> StandardProfilePackageImpl::get_ExtensionEnd_extension_Entity_StandardProfile_Entity()
+const std::shared_ptr<uml::ExtensionEnd>& StandardProfilePackageImpl::get_ExtensionEnd_extension_Entity_StandardProfile_Entity()
 {
 	return extensionEnd_extension_Entity_StandardProfile_Entity;
 }
-std::shared_ptr<uml::ExtensionEnd> StandardProfilePackageImpl::get_ExtensionEnd_extension_Executable_StandardProfile_Executable()
+const std::shared_ptr<uml::ExtensionEnd>& StandardProfilePackageImpl::get_ExtensionEnd_extension_Executable_StandardProfile_Executable()
 {
 	return extensionEnd_extension_Executable_StandardProfile_Executable;
 }
-std::shared_ptr<uml::ExtensionEnd> StandardProfilePackageImpl::get_ExtensionEnd_extension_File_StandardProfile_File()
+const std::shared_ptr<uml::ExtensionEnd>& StandardProfilePackageImpl::get_ExtensionEnd_extension_File_StandardProfile_File()
 {
 	return extensionEnd_extension_File_StandardProfile_File;
 }
-std::shared_ptr<uml::ExtensionEnd> StandardProfilePackageImpl::get_ExtensionEnd_extension_Focus_StandardProfile_Focus()
+const std::shared_ptr<uml::ExtensionEnd>& StandardProfilePackageImpl::get_ExtensionEnd_extension_Focus_StandardProfile_Focus()
 {
 	return extensionEnd_extension_Focus_StandardProfile_Focus;
 }
-std::shared_ptr<uml::ExtensionEnd> StandardProfilePackageImpl::get_ExtensionEnd_extension_Framework_StandardProfile_Framework()
+const std::shared_ptr<uml::ExtensionEnd>& StandardProfilePackageImpl::get_ExtensionEnd_extension_Framework_StandardProfile_Framework()
 {
 	return extensionEnd_extension_Framework_StandardProfile_Framework;
 }
-std::shared_ptr<uml::ExtensionEnd> StandardProfilePackageImpl::get_ExtensionEnd_extension_Implement_StandardProfile_Implement()
+const std::shared_ptr<uml::ExtensionEnd>& StandardProfilePackageImpl::get_ExtensionEnd_extension_Implement_StandardProfile_Implement()
 {
 	return extensionEnd_extension_Implement_StandardProfile_Implement;
 }
-std::shared_ptr<uml::ExtensionEnd> StandardProfilePackageImpl::get_ExtensionEnd_extension_ImplementationClass_StandardProfile_ImplementationClass()
+const std::shared_ptr<uml::ExtensionEnd>& StandardProfilePackageImpl::get_ExtensionEnd_extension_ImplementationClass_StandardProfile_ImplementationClass()
 {
 	return extensionEnd_extension_ImplementationClass_StandardProfile_ImplementationClass;
 }
-std::shared_ptr<uml::ExtensionEnd> StandardProfilePackageImpl::get_ExtensionEnd_extension_Instantiate_StandardProfile_Instantiate()
+const std::shared_ptr<uml::ExtensionEnd>& StandardProfilePackageImpl::get_ExtensionEnd_extension_Instantiate_StandardProfile_Instantiate()
 {
 	return extensionEnd_extension_Instantiate_StandardProfile_Instantiate;
 }
-std::shared_ptr<uml::ExtensionEnd> StandardProfilePackageImpl::get_ExtensionEnd_extension_Library_StandardProfile_Library()
+const std::shared_ptr<uml::ExtensionEnd>& StandardProfilePackageImpl::get_ExtensionEnd_extension_Library_StandardProfile_Library()
 {
 	return extensionEnd_extension_Library_StandardProfile_Library;
 }
-std::shared_ptr<uml::ExtensionEnd> StandardProfilePackageImpl::get_ExtensionEnd_extension_Metaclass_StandardProfile_Metaclass()
+const std::shared_ptr<uml::ExtensionEnd>& StandardProfilePackageImpl::get_ExtensionEnd_extension_Metaclass_StandardProfile_Metaclass()
 {
 	return extensionEnd_extension_Metaclass_StandardProfile_Metaclass;
 }
-std::shared_ptr<uml::ExtensionEnd> StandardProfilePackageImpl::get_ExtensionEnd_extension_Metamodel_StandardProfile_Metamodel()
+const std::shared_ptr<uml::ExtensionEnd>& StandardProfilePackageImpl::get_ExtensionEnd_extension_Metamodel_StandardProfile_Metamodel()
 {
 	return extensionEnd_extension_Metamodel_StandardProfile_Metamodel;
 }
-std::shared_ptr<uml::ExtensionEnd> StandardProfilePackageImpl::get_ExtensionEnd_extension_ModelLibrary_StandardProfile_ModelLibrary()
+const std::shared_ptr<uml::ExtensionEnd>& StandardProfilePackageImpl::get_ExtensionEnd_extension_ModelLibrary_StandardProfile_ModelLibrary()
 {
 	return extensionEnd_extension_ModelLibrary_StandardProfile_ModelLibrary;
 }
-std::shared_ptr<uml::ExtensionEnd> StandardProfilePackageImpl::get_ExtensionEnd_extension_Process_StandardProfile_Process()
+const std::shared_ptr<uml::ExtensionEnd>& StandardProfilePackageImpl::get_ExtensionEnd_extension_Process_StandardProfile_Process()
 {
 	return extensionEnd_extension_Process_StandardProfile_Process;
 }
-std::shared_ptr<uml::ExtensionEnd> StandardProfilePackageImpl::get_ExtensionEnd_extension_Realization_StandardProfile_Realization()
+const std::shared_ptr<uml::ExtensionEnd>& StandardProfilePackageImpl::get_ExtensionEnd_extension_Realization_StandardProfile_Realization()
 {
 	return extensionEnd_extension_Realization_StandardProfile_Realization;
 }
-std::shared_ptr<uml::ExtensionEnd> StandardProfilePackageImpl::get_ExtensionEnd_extension_Refine_StandardProfile_Refine()
+const std::shared_ptr<uml::ExtensionEnd>& StandardProfilePackageImpl::get_ExtensionEnd_extension_Refine_StandardProfile_Refine()
 {
 	return extensionEnd_extension_Refine_StandardProfile_Refine;
 }
-std::shared_ptr<uml::ExtensionEnd> StandardProfilePackageImpl::get_ExtensionEnd_extension_Responsibility_StandardProfile_Responsibility()
+const std::shared_ptr<uml::ExtensionEnd>& StandardProfilePackageImpl::get_ExtensionEnd_extension_Responsibility_StandardProfile_Responsibility()
 {
 	return extensionEnd_extension_Responsibility_StandardProfile_Responsibility;
 }
-std::shared_ptr<uml::ExtensionEnd> StandardProfilePackageImpl::get_ExtensionEnd_extension_Script_StandardProfile_Script()
+const std::shared_ptr<uml::ExtensionEnd>& StandardProfilePackageImpl::get_ExtensionEnd_extension_Script_StandardProfile_Script()
 {
 	return extensionEnd_extension_Script_StandardProfile_Script;
 }
-std::shared_ptr<uml::ExtensionEnd> StandardProfilePackageImpl::get_ExtensionEnd_extension_Send_StandardProfile_Send()
+const std::shared_ptr<uml::ExtensionEnd>& StandardProfilePackageImpl::get_ExtensionEnd_extension_Send_StandardProfile_Send()
 {
 	return extensionEnd_extension_Send_StandardProfile_Send;
 }
-std::shared_ptr<uml::ExtensionEnd> StandardProfilePackageImpl::get_ExtensionEnd_extension_Service_StandardProfile_Service()
+const std::shared_ptr<uml::ExtensionEnd>& StandardProfilePackageImpl::get_ExtensionEnd_extension_Service_StandardProfile_Service()
 {
 	return extensionEnd_extension_Service_StandardProfile_Service;
 }
-std::shared_ptr<uml::ExtensionEnd> StandardProfilePackageImpl::get_ExtensionEnd_extension_Source_StandardProfile_Source()
+const std::shared_ptr<uml::ExtensionEnd>& StandardProfilePackageImpl::get_ExtensionEnd_extension_Source_StandardProfile_Source()
 {
 	return extensionEnd_extension_Source_StandardProfile_Source;
 }
-std::shared_ptr<uml::ExtensionEnd> StandardProfilePackageImpl::get_ExtensionEnd_extension_Specification_StandardProfile_Specification()
+const std::shared_ptr<uml::ExtensionEnd>& StandardProfilePackageImpl::get_ExtensionEnd_extension_Specification_StandardProfile_Specification()
 {
 	return extensionEnd_extension_Specification_StandardProfile_Specification;
 }
-std::shared_ptr<uml::ExtensionEnd> StandardProfilePackageImpl::get_ExtensionEnd_extension_Subsystem_StandardProfile_Subsystem()
+const std::shared_ptr<uml::ExtensionEnd>& StandardProfilePackageImpl::get_ExtensionEnd_extension_Subsystem_StandardProfile_Subsystem()
 {
 	return extensionEnd_extension_Subsystem_StandardProfile_Subsystem;
 }
-std::shared_ptr<uml::ExtensionEnd> StandardProfilePackageImpl::get_ExtensionEnd_extension_SystemModel_StandardProfile_SystemModel()
+const std::shared_ptr<uml::ExtensionEnd>& StandardProfilePackageImpl::get_ExtensionEnd_extension_SystemModel_StandardProfile_SystemModel()
 {
 	return extensionEnd_extension_SystemModel_StandardProfile_SystemModel;
 }
-std::shared_ptr<uml::ExtensionEnd> StandardProfilePackageImpl::get_ExtensionEnd_extension_Trace_StandardProfile_Trace()
+const std::shared_ptr<uml::ExtensionEnd>& StandardProfilePackageImpl::get_ExtensionEnd_extension_Trace_StandardProfile_Trace()
 {
 	return extensionEnd_extension_Trace_StandardProfile_Trace;
 }
-std::shared_ptr<uml::ExtensionEnd> StandardProfilePackageImpl::get_ExtensionEnd_extension_Type_StandardProfile_Type()
+const std::shared_ptr<uml::ExtensionEnd>& StandardProfilePackageImpl::get_ExtensionEnd_extension_Type_StandardProfile_Type()
 {
 	return extensionEnd_extension_Type_StandardProfile_Type;
 }
-std::shared_ptr<uml::ExtensionEnd> StandardProfilePackageImpl::get_ExtensionEnd_extension_Usage_Create_StandardProfile_Create()
+const std::shared_ptr<uml::ExtensionEnd>& StandardProfilePackageImpl::get_ExtensionEnd_extension_Usage_Create_StandardProfile_Create()
 {
 	return extensionEnd_extension_Usage_Create_StandardProfile_Create;
 }
-std::shared_ptr<uml::ExtensionEnd> StandardProfilePackageImpl::get_ExtensionEnd_extension_Utility_StandardProfile_Utility()
+const std::shared_ptr<uml::ExtensionEnd>& StandardProfilePackageImpl::get_ExtensionEnd_extension_Utility_StandardProfile_Utility()
 {
 	return extensionEnd_extension_Utility_StandardProfile_Utility;
 }
-std::shared_ptr<uml::Extension> StandardProfilePackageImpl::get_StandardProfile_Abstraction_Derive()
+const std::shared_ptr<uml::Extension>& StandardProfilePackageImpl::get_StandardProfile_Abstraction_Derive()
 {
 	return standardProfile_Abstraction_Derive;
 }
-std::shared_ptr<uml::Extension> StandardProfilePackageImpl::get_StandardProfile_Abstraction_Refine()
+const std::shared_ptr<uml::Extension>& StandardProfilePackageImpl::get_StandardProfile_Abstraction_Refine()
 {
 	return standardProfile_Abstraction_Refine;
 }
-std::shared_ptr<uml::Extension> StandardProfilePackageImpl::get_StandardProfile_Abstraction_Trace()
+const std::shared_ptr<uml::Extension>& StandardProfilePackageImpl::get_StandardProfile_Abstraction_Trace()
 {
 	return standardProfile_Abstraction_Trace;
 }
-std::shared_ptr<uml::Extension> StandardProfilePackageImpl::get_StandardProfile_Artifact_Document()
+const std::shared_ptr<uml::Extension>& StandardProfilePackageImpl::get_StandardProfile_Artifact_Document()
 {
 	return standardProfile_Artifact_Document;
 }
-std::shared_ptr<uml::Extension> StandardProfilePackageImpl::get_StandardProfile_Artifact_Executable()
+const std::shared_ptr<uml::Extension>& StandardProfilePackageImpl::get_StandardProfile_Artifact_Executable()
 {
 	return standardProfile_Artifact_Executable;
 }
-std::shared_ptr<uml::Extension> StandardProfilePackageImpl::get_StandardProfile_Artifact_File()
+const std::shared_ptr<uml::Extension>& StandardProfilePackageImpl::get_StandardProfile_Artifact_File()
 {
 	return standardProfile_Artifact_File;
 }
-std::shared_ptr<uml::Extension> StandardProfilePackageImpl::get_StandardProfile_Artifact_Library()
+const std::shared_ptr<uml::Extension>& StandardProfilePackageImpl::get_StandardProfile_Artifact_Library()
 {
 	return standardProfile_Artifact_Library;
 }
-std::shared_ptr<uml::Extension> StandardProfilePackageImpl::get_StandardProfile_Artifact_Script()
+const std::shared_ptr<uml::Extension>& StandardProfilePackageImpl::get_StandardProfile_Artifact_Script()
 {
 	return standardProfile_Artifact_Script;
 }
-std::shared_ptr<uml::Extension> StandardProfilePackageImpl::get_StandardProfile_Artifact_Source()
+const std::shared_ptr<uml::Extension>& StandardProfilePackageImpl::get_StandardProfile_Artifact_Source()
 {
 	return standardProfile_Artifact_Source;
 }
-std::shared_ptr<uml::Stereotype> StandardProfilePackageImpl::get_StandardProfile_Auxiliary()
+const std::shared_ptr<uml::Stereotype>& StandardProfilePackageImpl::get_StandardProfile_Auxiliary()
 {
 	return standardProfile_Auxiliary;
 }
-std::shared_ptr<uml::Property> StandardProfilePackageImpl::get_StandardProfile_Auxiliary_base_Class()
+const std::shared_ptr<uml::Property>& StandardProfilePackageImpl::get_StandardProfile_Auxiliary_base_Class()
 {
 	return standardProfile_Auxiliary_base_Class;
 }
-std::shared_ptr<uml::Extension> StandardProfilePackageImpl::get_StandardProfile_BehavioralFeature_Create()
+const std::shared_ptr<uml::Extension>& StandardProfilePackageImpl::get_StandardProfile_BehavioralFeature_Create()
 {
 	return standardProfile_BehavioralFeature_Create;
 }
-std::shared_ptr<uml::Extension> StandardProfilePackageImpl::get_StandardProfile_BehavioralFeature_Destroy()
+const std::shared_ptr<uml::Extension>& StandardProfilePackageImpl::get_StandardProfile_BehavioralFeature_Destroy()
 {
 	return standardProfile_BehavioralFeature_Destroy;
 }
-std::shared_ptr<uml::Stereotype> StandardProfilePackageImpl::get_StandardProfile_BuildComponent()
+const std::shared_ptr<uml::Stereotype>& StandardProfilePackageImpl::get_StandardProfile_BuildComponent()
 {
 	return standardProfile_BuildComponent;
 }
-std::shared_ptr<uml::Property> StandardProfilePackageImpl::get_StandardProfile_BuildComponent_base_Component()
+const std::shared_ptr<uml::Property>& StandardProfilePackageImpl::get_StandardProfile_BuildComponent_base_Component()
 {
 	return standardProfile_BuildComponent_base_Component;
 }
-std::shared_ptr<uml::Stereotype> StandardProfilePackageImpl::get_StandardProfile_Call()
+const std::shared_ptr<uml::Stereotype>& StandardProfilePackageImpl::get_StandardProfile_Call()
 {
 	return standardProfile_Call;
 }
-std::shared_ptr<uml::Property> StandardProfilePackageImpl::get_StandardProfile_Call_base_Usage()
+const std::shared_ptr<uml::Property>& StandardProfilePackageImpl::get_StandardProfile_Call_base_Usage()
 {
 	return standardProfile_Call_base_Usage;
 }
-std::shared_ptr<uml::Extension> StandardProfilePackageImpl::get_StandardProfile_Class_Auxiliary()
+const std::shared_ptr<uml::Extension>& StandardProfilePackageImpl::get_StandardProfile_Class_Auxiliary()
 {
 	return standardProfile_Class_Auxiliary;
 }
-std::shared_ptr<uml::Extension> StandardProfilePackageImpl::get_StandardProfile_Class_Focus()
+const std::shared_ptr<uml::Extension>& StandardProfilePackageImpl::get_StandardProfile_Class_Focus()
 {
 	return standardProfile_Class_Focus;
 }
-std::shared_ptr<uml::Extension> StandardProfilePackageImpl::get_StandardProfile_Class_ImplementationClass()
+const std::shared_ptr<uml::Extension>& StandardProfilePackageImpl::get_StandardProfile_Class_ImplementationClass()
 {
 	return standardProfile_Class_ImplementationClass;
 }
-std::shared_ptr<uml::Extension> StandardProfilePackageImpl::get_StandardProfile_Class_Metaclass()
+const std::shared_ptr<uml::Extension>& StandardProfilePackageImpl::get_StandardProfile_Class_Metaclass()
 {
 	return standardProfile_Class_Metaclass;
 }
-std::shared_ptr<uml::Extension> StandardProfilePackageImpl::get_StandardProfile_Class_Type()
+const std::shared_ptr<uml::Extension>& StandardProfilePackageImpl::get_StandardProfile_Class_Type()
 {
 	return standardProfile_Class_Type;
 }
-std::shared_ptr<uml::Extension> StandardProfilePackageImpl::get_StandardProfile_Class_Utility()
+const std::shared_ptr<uml::Extension>& StandardProfilePackageImpl::get_StandardProfile_Class_Utility()
 {
 	return standardProfile_Class_Utility;
 }
-std::shared_ptr<uml::Extension> StandardProfilePackageImpl::get_StandardProfile_Classifier_Realization()
+const std::shared_ptr<uml::Extension>& StandardProfilePackageImpl::get_StandardProfile_Classifier_Realization()
 {
 	return standardProfile_Classifier_Realization;
 }
-std::shared_ptr<uml::Extension> StandardProfilePackageImpl::get_StandardProfile_Classifier_Specification()
+const std::shared_ptr<uml::Extension>& StandardProfilePackageImpl::get_StandardProfile_Classifier_Specification()
 {
 	return standardProfile_Classifier_Specification;
 }
-std::shared_ptr<uml::Extension> StandardProfilePackageImpl::get_StandardProfile_Component_BuildComponent()
+const std::shared_ptr<uml::Extension>& StandardProfilePackageImpl::get_StandardProfile_Component_BuildComponent()
 {
 	return standardProfile_Component_BuildComponent;
 }
-std::shared_ptr<uml::Extension> StandardProfilePackageImpl::get_StandardProfile_Component_Entity()
+const std::shared_ptr<uml::Extension>& StandardProfilePackageImpl::get_StandardProfile_Component_Entity()
 {
 	return standardProfile_Component_Entity;
 }
-std::shared_ptr<uml::Extension> StandardProfilePackageImpl::get_StandardProfile_Component_Implement()
+const std::shared_ptr<uml::Extension>& StandardProfilePackageImpl::get_StandardProfile_Component_Implement()
 {
 	return standardProfile_Component_Implement;
 }
-std::shared_ptr<uml::Extension> StandardProfilePackageImpl::get_StandardProfile_Component_Process()
+const std::shared_ptr<uml::Extension>& StandardProfilePackageImpl::get_StandardProfile_Component_Process()
 {
 	return standardProfile_Component_Process;
 }
-std::shared_ptr<uml::Extension> StandardProfilePackageImpl::get_StandardProfile_Component_Service()
+const std::shared_ptr<uml::Extension>& StandardProfilePackageImpl::get_StandardProfile_Component_Service()
 {
 	return standardProfile_Component_Service;
 }
-std::shared_ptr<uml::Extension> StandardProfilePackageImpl::get_StandardProfile_Component_Subsystem()
+const std::shared_ptr<uml::Extension>& StandardProfilePackageImpl::get_StandardProfile_Component_Subsystem()
 {
 	return standardProfile_Component_Subsystem;
 }
-std::shared_ptr<uml::Stereotype> StandardProfilePackageImpl::get_StandardProfile_Create()
+const std::shared_ptr<uml::Stereotype>& StandardProfilePackageImpl::get_StandardProfile_Create()
 {
 	return standardProfile_Create;
 }
-std::shared_ptr<uml::Property> StandardProfilePackageImpl::get_StandardProfile_Create_base_BehavioralFeature()
+const std::shared_ptr<uml::Property>& StandardProfilePackageImpl::get_StandardProfile_Create_base_BehavioralFeature()
 {
 	return standardProfile_Create_base_BehavioralFeature;
 }
-std::shared_ptr<uml::Property> StandardProfilePackageImpl::get_StandardProfile_Create_base_Usage()
+const std::shared_ptr<uml::Property>& StandardProfilePackageImpl::get_StandardProfile_Create_base_Usage()
 {
 	return standardProfile_Create_base_Usage;
 }
-std::shared_ptr<uml::Stereotype> StandardProfilePackageImpl::get_StandardProfile_Derive()
+const std::shared_ptr<uml::Stereotype>& StandardProfilePackageImpl::get_StandardProfile_Derive()
 {
 	return standardProfile_Derive;
 }
-std::shared_ptr<uml::Property> StandardProfilePackageImpl::get_StandardProfile_Derive_base_Abstraction()
+const std::shared_ptr<uml::Property>& StandardProfilePackageImpl::get_StandardProfile_Derive_base_Abstraction()
 {
 	return standardProfile_Derive_base_Abstraction;
 }
-std::shared_ptr<uml::Stereotype> StandardProfilePackageImpl::get_StandardProfile_Destroy()
+const std::shared_ptr<uml::Stereotype>& StandardProfilePackageImpl::get_StandardProfile_Destroy()
 {
 	return standardProfile_Destroy;
 }
-std::shared_ptr<uml::Property> StandardProfilePackageImpl::get_StandardProfile_Destroy_base_BehavioralFeature()
+const std::shared_ptr<uml::Property>& StandardProfilePackageImpl::get_StandardProfile_Destroy_base_BehavioralFeature()
 {
 	return standardProfile_Destroy_base_BehavioralFeature;
 }
-std::shared_ptr<uml::Stereotype> StandardProfilePackageImpl::get_StandardProfile_Document()
+const std::shared_ptr<uml::Stereotype>& StandardProfilePackageImpl::get_StandardProfile_Document()
 {
 	return standardProfile_Document;
 }
-std::shared_ptr<uml::Property> StandardProfilePackageImpl::get_StandardProfile_Document_base_Artifact()
+const std::shared_ptr<uml::Property>& StandardProfilePackageImpl::get_StandardProfile_Document_base_Artifact()
 {
 	return standardProfile_Document_base_Artifact;
 }
-std::shared_ptr<uml::Stereotype> StandardProfilePackageImpl::get_StandardProfile_Entity()
+const std::shared_ptr<uml::Stereotype>& StandardProfilePackageImpl::get_StandardProfile_Entity()
 {
 	return standardProfile_Entity;
 }
-std::shared_ptr<uml::Property> StandardProfilePackageImpl::get_StandardProfile_Entity_base_Component()
+const std::shared_ptr<uml::Property>& StandardProfilePackageImpl::get_StandardProfile_Entity_base_Component()
 {
 	return standardProfile_Entity_base_Component;
 }
-std::shared_ptr<uml::Stereotype> StandardProfilePackageImpl::get_StandardProfile_Executable()
+const std::shared_ptr<uml::Stereotype>& StandardProfilePackageImpl::get_StandardProfile_Executable()
 {
 	return standardProfile_Executable;
 }
-std::shared_ptr<uml::Property> StandardProfilePackageImpl::get_StandardProfile_Executable_base_Artifact()
+const std::shared_ptr<uml::Property>& StandardProfilePackageImpl::get_StandardProfile_Executable_base_Artifact()
 {
 	return standardProfile_Executable_base_Artifact;
 }
-std::shared_ptr<uml::Stereotype> StandardProfilePackageImpl::get_StandardProfile_File()
+const std::shared_ptr<uml::Stereotype>& StandardProfilePackageImpl::get_StandardProfile_File()
 {
 	return standardProfile_File;
 }
-std::shared_ptr<uml::Property> StandardProfilePackageImpl::get_StandardProfile_File_base_Artifact()
+const std::shared_ptr<uml::Property>& StandardProfilePackageImpl::get_StandardProfile_File_base_Artifact()
 {
 	return standardProfile_File_base_Artifact;
 }
-std::shared_ptr<uml::Stereotype> StandardProfilePackageImpl::get_StandardProfile_Focus()
+const std::shared_ptr<uml::Stereotype>& StandardProfilePackageImpl::get_StandardProfile_Focus()
 {
 	return standardProfile_Focus;
 }
-std::shared_ptr<uml::Property> StandardProfilePackageImpl::get_StandardProfile_Focus_base_Class()
+const std::shared_ptr<uml::Property>& StandardProfilePackageImpl::get_StandardProfile_Focus_base_Class()
 {
 	return standardProfile_Focus_base_Class;
 }
-std::shared_ptr<uml::Stereotype> StandardProfilePackageImpl::get_StandardProfile_Framework()
+const std::shared_ptr<uml::Stereotype>& StandardProfilePackageImpl::get_StandardProfile_Framework()
 {
 	return standardProfile_Framework;
 }
-std::shared_ptr<uml::Property> StandardProfilePackageImpl::get_StandardProfile_Framework_base_Package()
+const std::shared_ptr<uml::Property>& StandardProfilePackageImpl::get_StandardProfile_Framework_base_Package()
 {
 	return standardProfile_Framework_base_Package;
 }
-std::shared_ptr<uml::Stereotype> StandardProfilePackageImpl::get_StandardProfile_Implement()
+const std::shared_ptr<uml::Stereotype>& StandardProfilePackageImpl::get_StandardProfile_Implement()
 {
 	return standardProfile_Implement;
 }
-std::shared_ptr<uml::Property> StandardProfilePackageImpl::get_StandardProfile_Implement_base_Component()
+const std::shared_ptr<uml::Property>& StandardProfilePackageImpl::get_StandardProfile_Implement_base_Component()
 {
 	return standardProfile_Implement_base_Component;
 }
-std::shared_ptr<uml::Stereotype> StandardProfilePackageImpl::get_StandardProfile_ImplementationClass()
+const std::shared_ptr<uml::Stereotype>& StandardProfilePackageImpl::get_StandardProfile_ImplementationClass()
 {
 	return standardProfile_ImplementationClass;
 }
-std::shared_ptr<uml::Property> StandardProfilePackageImpl::get_StandardProfile_ImplementationClass_base_Class()
+const std::shared_ptr<uml::Property>& StandardProfilePackageImpl::get_StandardProfile_ImplementationClass_base_Class()
 {
 	return standardProfile_ImplementationClass_base_Class;
 }
-std::shared_ptr<uml::Stereotype> StandardProfilePackageImpl::get_StandardProfile_Instantiate()
+const std::shared_ptr<uml::Stereotype>& StandardProfilePackageImpl::get_StandardProfile_Instantiate()
 {
 	return standardProfile_Instantiate;
 }
-std::shared_ptr<uml::Property> StandardProfilePackageImpl::get_StandardProfile_Instantiate_base_Usage()
+const std::shared_ptr<uml::Property>& StandardProfilePackageImpl::get_StandardProfile_Instantiate_base_Usage()
 {
 	return standardProfile_Instantiate_base_Usage;
 }
-std::shared_ptr<uml::Stereotype> StandardProfilePackageImpl::get_StandardProfile_Library()
+const std::shared_ptr<uml::Stereotype>& StandardProfilePackageImpl::get_StandardProfile_Library()
 {
 	return standardProfile_Library;
 }
-std::shared_ptr<uml::Property> StandardProfilePackageImpl::get_StandardProfile_Library_base_Artifact()
+const std::shared_ptr<uml::Property>& StandardProfilePackageImpl::get_StandardProfile_Library_base_Artifact()
 {
 	return standardProfile_Library_base_Artifact;
 }
-std::shared_ptr<uml::Stereotype> StandardProfilePackageImpl::get_StandardProfile_Metaclass()
+const std::shared_ptr<uml::Stereotype>& StandardProfilePackageImpl::get_StandardProfile_Metaclass()
 {
 	return standardProfile_Metaclass;
 }
-std::shared_ptr<uml::Property> StandardProfilePackageImpl::get_StandardProfile_Metaclass_base_Class()
+const std::shared_ptr<uml::Property>& StandardProfilePackageImpl::get_StandardProfile_Metaclass_base_Class()
 {
 	return standardProfile_Metaclass_base_Class;
 }
-std::shared_ptr<uml::Stereotype> StandardProfilePackageImpl::get_StandardProfile_Metamodel()
+const std::shared_ptr<uml::Stereotype>& StandardProfilePackageImpl::get_StandardProfile_Metamodel()
 {
 	return standardProfile_Metamodel;
 }
-std::shared_ptr<uml::Property> StandardProfilePackageImpl::get_StandardProfile_Metamodel_base_Model()
+const std::shared_ptr<uml::Property>& StandardProfilePackageImpl::get_StandardProfile_Metamodel_base_Model()
 {
 	return standardProfile_Metamodel_base_Model;
 }
-std::shared_ptr<uml::Stereotype> StandardProfilePackageImpl::get_StandardProfile_ModelLibrary()
+const std::shared_ptr<uml::Stereotype>& StandardProfilePackageImpl::get_StandardProfile_ModelLibrary()
 {
 	return standardProfile_ModelLibrary;
 }
-std::shared_ptr<uml::Property> StandardProfilePackageImpl::get_StandardProfile_ModelLibrary_base_Package()
+const std::shared_ptr<uml::Property>& StandardProfilePackageImpl::get_StandardProfile_ModelLibrary_base_Package()
 {
 	return standardProfile_ModelLibrary_base_Package;
 }
-std::shared_ptr<uml::Extension> StandardProfilePackageImpl::get_StandardProfile_Model_Metamodel()
+const std::shared_ptr<uml::Extension>& StandardProfilePackageImpl::get_StandardProfile_Model_Metamodel()
 {
 	return standardProfile_Model_Metamodel;
 }
-std::shared_ptr<uml::Extension> StandardProfilePackageImpl::get_StandardProfile_Model_SystemModel()
+const std::shared_ptr<uml::Extension>& StandardProfilePackageImpl::get_StandardProfile_Model_SystemModel()
 {
 	return standardProfile_Model_SystemModel;
 }
-std::shared_ptr<uml::Extension> StandardProfilePackageImpl::get_StandardProfile_Package_Framework()
+const std::shared_ptr<uml::Extension>& StandardProfilePackageImpl::get_StandardProfile_Package_Framework()
 {
 	return standardProfile_Package_Framework;
 }
-std::shared_ptr<uml::Extension> StandardProfilePackageImpl::get_StandardProfile_Package_ModelLibrary()
+const std::shared_ptr<uml::Extension>& StandardProfilePackageImpl::get_StandardProfile_Package_ModelLibrary()
 {
 	return standardProfile_Package_ModelLibrary;
 }
-std::shared_ptr<uml::Stereotype> StandardProfilePackageImpl::get_StandardProfile_Process()
+const std::shared_ptr<uml::Stereotype>& StandardProfilePackageImpl::get_StandardProfile_Process()
 {
 	return standardProfile_Process;
 }
-std::shared_ptr<uml::Property> StandardProfilePackageImpl::get_StandardProfile_Process_base_Component()
+const std::shared_ptr<uml::Property>& StandardProfilePackageImpl::get_StandardProfile_Process_base_Component()
 {
 	return standardProfile_Process_base_Component;
 }
-std::shared_ptr<uml::Stereotype> StandardProfilePackageImpl::get_StandardProfile_Realization()
+const std::shared_ptr<uml::Stereotype>& StandardProfilePackageImpl::get_StandardProfile_Realization()
 {
 	return standardProfile_Realization;
 }
-std::shared_ptr<uml::Property> StandardProfilePackageImpl::get_StandardProfile_Realization_base_Classifier()
+const std::shared_ptr<uml::Property>& StandardProfilePackageImpl::get_StandardProfile_Realization_base_Classifier()
 {
 	return standardProfile_Realization_base_Classifier;
 }
-std::shared_ptr<uml::Stereotype> StandardProfilePackageImpl::get_StandardProfile_Refine()
+const std::shared_ptr<uml::Stereotype>& StandardProfilePackageImpl::get_StandardProfile_Refine()
 {
 	return standardProfile_Refine;
 }
-std::shared_ptr<uml::Property> StandardProfilePackageImpl::get_StandardProfile_Refine_base_Abstraction()
+const std::shared_ptr<uml::Property>& StandardProfilePackageImpl::get_StandardProfile_Refine_base_Abstraction()
 {
 	return standardProfile_Refine_base_Abstraction;
 }
-std::shared_ptr<uml::Stereotype> StandardProfilePackageImpl::get_StandardProfile_Responsibility()
+const std::shared_ptr<uml::Stereotype>& StandardProfilePackageImpl::get_StandardProfile_Responsibility()
 {
 	return standardProfile_Responsibility;
 }
-std::shared_ptr<uml::Property> StandardProfilePackageImpl::get_StandardProfile_Responsibility_base_Usage()
+const std::shared_ptr<uml::Property>& StandardProfilePackageImpl::get_StandardProfile_Responsibility_base_Usage()
 {
 	return standardProfile_Responsibility_base_Usage;
 }
-std::shared_ptr<uml::Stereotype> StandardProfilePackageImpl::get_StandardProfile_Script()
+const std::shared_ptr<uml::Stereotype>& StandardProfilePackageImpl::get_StandardProfile_Script()
 {
 	return standardProfile_Script;
 }
-std::shared_ptr<uml::Property> StandardProfilePackageImpl::get_StandardProfile_Script_base_Artifact()
+const std::shared_ptr<uml::Property>& StandardProfilePackageImpl::get_StandardProfile_Script_base_Artifact()
 {
 	return standardProfile_Script_base_Artifact;
 }
-std::shared_ptr<uml::Stereotype> StandardProfilePackageImpl::get_StandardProfile_Send()
+const std::shared_ptr<uml::Stereotype>& StandardProfilePackageImpl::get_StandardProfile_Send()
 {
 	return standardProfile_Send;
 }
-std::shared_ptr<uml::Property> StandardProfilePackageImpl::get_StandardProfile_Send_base_Usage()
+const std::shared_ptr<uml::Property>& StandardProfilePackageImpl::get_StandardProfile_Send_base_Usage()
 {
 	return standardProfile_Send_base_Usage;
 }
-std::shared_ptr<uml::Stereotype> StandardProfilePackageImpl::get_StandardProfile_Service()
+const std::shared_ptr<uml::Stereotype>& StandardProfilePackageImpl::get_StandardProfile_Service()
 {
 	return standardProfile_Service;
 }
-std::shared_ptr<uml::Property> StandardProfilePackageImpl::get_StandardProfile_Service_base_Component()
+const std::shared_ptr<uml::Property>& StandardProfilePackageImpl::get_StandardProfile_Service_base_Component()
 {
 	return standardProfile_Service_base_Component;
 }
-std::shared_ptr<uml::Stereotype> StandardProfilePackageImpl::get_StandardProfile_Source()
+const std::shared_ptr<uml::Stereotype>& StandardProfilePackageImpl::get_StandardProfile_Source()
 {
 	return standardProfile_Source;
 }
-std::shared_ptr<uml::Property> StandardProfilePackageImpl::get_StandardProfile_Source_base_Artifact()
+const std::shared_ptr<uml::Property>& StandardProfilePackageImpl::get_StandardProfile_Source_base_Artifact()
 {
 	return standardProfile_Source_base_Artifact;
 }
-std::shared_ptr<uml::Stereotype> StandardProfilePackageImpl::get_StandardProfile_Specification()
+const std::shared_ptr<uml::Stereotype>& StandardProfilePackageImpl::get_StandardProfile_Specification()
 {
 	return standardProfile_Specification;
 }
-std::shared_ptr<uml::Property> StandardProfilePackageImpl::get_StandardProfile_Specification_base_Classifier()
+const std::shared_ptr<uml::Property>& StandardProfilePackageImpl::get_StandardProfile_Specification_base_Classifier()
 {
 	return standardProfile_Specification_base_Classifier;
 }
-std::shared_ptr<uml::Stereotype> StandardProfilePackageImpl::get_StandardProfile_Subsystem()
+const std::shared_ptr<uml::Stereotype>& StandardProfilePackageImpl::get_StandardProfile_Subsystem()
 {
 	return standardProfile_Subsystem;
 }
-std::shared_ptr<uml::Property> StandardProfilePackageImpl::get_StandardProfile_Subsystem_base_Component()
+const std::shared_ptr<uml::Property>& StandardProfilePackageImpl::get_StandardProfile_Subsystem_base_Component()
 {
 	return standardProfile_Subsystem_base_Component;
 }
-std::shared_ptr<uml::Stereotype> StandardProfilePackageImpl::get_StandardProfile_SystemModel()
+const std::shared_ptr<uml::Stereotype>& StandardProfilePackageImpl::get_StandardProfile_SystemModel()
 {
 	return standardProfile_SystemModel;
 }
-std::shared_ptr<uml::Property> StandardProfilePackageImpl::get_StandardProfile_SystemModel_base_Model()
+const std::shared_ptr<uml::Property>& StandardProfilePackageImpl::get_StandardProfile_SystemModel_base_Model()
 {
 	return standardProfile_SystemModel_base_Model;
 }
-std::shared_ptr<uml::Stereotype> StandardProfilePackageImpl::get_StandardProfile_Trace()
+const std::shared_ptr<uml::Stereotype>& StandardProfilePackageImpl::get_StandardProfile_Trace()
 {
 	return standardProfile_Trace;
 }
-std::shared_ptr<uml::Property> StandardProfilePackageImpl::get_StandardProfile_Trace_base_Abstraction()
+const std::shared_ptr<uml::Property>& StandardProfilePackageImpl::get_StandardProfile_Trace_base_Abstraction()
 {
 	return standardProfile_Trace_base_Abstraction;
 }
-std::shared_ptr<uml::Stereotype> StandardProfilePackageImpl::get_StandardProfile_Type()
+const std::shared_ptr<uml::Stereotype>& StandardProfilePackageImpl::get_StandardProfile_Type()
 {
 	return standardProfile_Type;
 }
-std::shared_ptr<uml::Property> StandardProfilePackageImpl::get_StandardProfile_Type_base_Class()
+const std::shared_ptr<uml::Property>& StandardProfilePackageImpl::get_StandardProfile_Type_base_Class()
 {
 	return standardProfile_Type_base_Class;
 }
-std::shared_ptr<uml::Extension> StandardProfilePackageImpl::get_StandardProfile_Usage_Call()
+const std::shared_ptr<uml::Extension>& StandardProfilePackageImpl::get_StandardProfile_Usage_Call()
 {
 	return standardProfile_Usage_Call;
 }
-std::shared_ptr<uml::Extension> StandardProfilePackageImpl::get_StandardProfile_Usage_Create()
+const std::shared_ptr<uml::Extension>& StandardProfilePackageImpl::get_StandardProfile_Usage_Create()
 {
 	return standardProfile_Usage_Create;
 }
-std::shared_ptr<uml::Extension> StandardProfilePackageImpl::get_StandardProfile_Usage_Instantiate()
+const std::shared_ptr<uml::Extension>& StandardProfilePackageImpl::get_StandardProfile_Usage_Instantiate()
 {
 	return standardProfile_Usage_Instantiate;
 }
-std::shared_ptr<uml::Extension> StandardProfilePackageImpl::get_StandardProfile_Usage_Responsibility()
+const std::shared_ptr<uml::Extension>& StandardProfilePackageImpl::get_StandardProfile_Usage_Responsibility()
 {
 	return standardProfile_Usage_Responsibility;
 }
-std::shared_ptr<uml::Extension> StandardProfilePackageImpl::get_StandardProfile_Usage_Send()
+const std::shared_ptr<uml::Extension>& StandardProfilePackageImpl::get_StandardProfile_Usage_Send()
 {
 	return standardProfile_Usage_Send;
 }
-std::shared_ptr<uml::Stereotype> StandardProfilePackageImpl::get_StandardProfile_Utility()
+const std::shared_ptr<uml::Stereotype>& StandardProfilePackageImpl::get_StandardProfile_Utility()
 {
 	return standardProfile_Utility;
 }
-std::shared_ptr<uml::Property> StandardProfilePackageImpl::get_StandardProfile_Utility_base_Class()
+const std::shared_ptr<uml::Property>& StandardProfilePackageImpl::get_StandardProfile_Utility_base_Class()
 {
 	return standardProfile_Utility_base_Class;
 }

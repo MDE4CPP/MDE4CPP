@@ -161,17 +161,17 @@ void CallActionActivationImpl::doAction()
     {
         this->getCallExecutions()->push_back(callExecution);
 
-        std::shared_ptr<uml::CallAction> callAction = this->getCallAction();
-        std::shared_ptr<Bag<uml::InputPin>> argumentPins = callAction->getArgument();
-        std::shared_ptr<Subset<fUML::Semantics::Actions::InputPinActivation, fUML::Semantics::Actions::PinActivation>> inputActivationList=this->getInputPinActivation();
+        const std::shared_ptr<uml::CallAction>& callAction = this->getCallAction();
+        const std::shared_ptr<Bag<uml::InputPin>>& argumentPins = callAction->getArgument();
+        const std::shared_ptr<Subset<fUML::Semantics::Actions::InputPinActivation, fUML::Semantics::Actions::PinActivation>>& inputActivationList=this->getInputPinActivation();
 
         unsigned int pinNumber = 0;
-        std::shared_ptr<uml::Behavior> beh = callExecution->getBehavior();
-        std::shared_ptr<Bag<uml::Parameter>> parameterList = beh->getOwnedParameter();
+        //std::shared_ptr<uml::Behavior> beh = callExecution->getBehavior();
+        std::shared_ptr<Bag<uml::Parameter>> parameterList = callExecution->getBehavior()->getOwnedParameter();
         unsigned int size = parameterList->size();
         for (unsigned int i=0; i<size; i++)
         {
-        	std::shared_ptr<uml::Parameter> parameter = parameterList->at(i);
+        	const std::shared_ptr<uml::Parameter>& parameter = parameterList->at(i);
         	uml::ParameterDirectionKind direction=parameter->getDirection();
             if (direction == uml::ParameterDirectionKind::IN || direction == uml::ParameterDirectionKind::INOUT)
             {
@@ -180,7 +180,7 @@ void CallActionActivationImpl::doAction()
                 std::shared_ptr<Bag<fUML::Semantics::Values::Value> > values = parameterValue->getValues();
 
                 // get corresponding pin (pin and parameter list should be synchronized)
-                std::shared_ptr<uml::InputPin> correspondingInputpin = argumentPins->at(i);
+                const std::shared_ptr<uml::InputPin>& correspondingInputpin = argumentPins->at(i);
                 std::string pinName = correspondingInputpin->getName();
 
                 // if pin name starts with 'self', get values from context attribute
@@ -242,9 +242,9 @@ void CallActionActivationImpl::doAction()
                 {
 					std::shared_ptr<fUML::Semantics::Actions::InputPinActivation> activation =inputActivationList->at(pinNumber);
 					std::shared_ptr<Bag<fUML::Semantics::Activities::Token> > tokenList = activation->takeUnofferedTokens();
-					for(std::shared_ptr<fUML::Semantics::Activities::Token> token : *tokenList)
+					for(const std::shared_ptr<fUML::Semantics::Activities::Token>& token : *tokenList)
 					{
-						std::shared_ptr<fUML::Semantics::Values::Value> value = token->getValue();
+						const std::shared_ptr<fUML::Semantics::Values::Value>& value = token->getValue();
 						if(value != nullptr)
 						{
 							DEBUG_MESSAGE(std::cout<<"ActionActivation - takeTokens value"<<value->toString()<<std::endl;)
@@ -261,23 +261,23 @@ void CallActionActivationImpl::doAction()
         callExecution->execute();
 
 
-        std::shared_ptr<Bag<uml::OutputPin> > resultPins = callAction->getResult();
+        const std::shared_ptr<Bag<uml::OutputPin>>& resultPins = callAction->getResult();
         std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue> > outputParameterValues = callExecution->getOutputParameterValues();
-        std::shared_ptr<Subset<fUML::Semantics::Actions::OutputPinActivation, fUML::Semantics::Actions::PinActivation>> outputActivationList=this->getOutputPinActivation();
+        const std::shared_ptr<Subset<fUML::Semantics::Actions::OutputPinActivation, fUML::Semantics::Actions::PinActivation>>& outputActivationList=this->getOutputPinActivation();
         pinNumber = 0;
         parameterList = callExecution->getBehavior()->getOwnedParameter();
-        for (std::shared_ptr<uml::Parameter> parameter : *parameterList)
+        for (const std::shared_ptr<uml::Parameter>& parameter : *parameterList)
         {
             if (!(parameter->getDirection() == uml::ParameterDirectionKind::IN))
             {
-                for (std::shared_ptr<fUML::Semantics::CommonBehavior::ParameterValue> outputParameterValue : *outputParameterValues)
+                for (const std::shared_ptr<fUML::Semantics::CommonBehavior::ParameterValue>& outputParameterValue : *outputParameterValues)
                 {
                     if (outputParameterValue->getParameter() == parameter)
                     {
-    					std::shared_ptr<fUML::Semantics::Actions::OutputPinActivation> resultPinActivation = outputActivationList->at(pinNumber);
-        				std::shared_ptr<Bag<fUML::Semantics::Values::Value> > values = outputParameterValue->getValues();
+    					const std::shared_ptr<fUML::Semantics::Actions::OutputPinActivation>& resultPinActivation = outputActivationList->at(pinNumber);
+        				const std::shared_ptr<Bag<fUML::Semantics::Values::Value>>& values = outputParameterValue->getValues();
 
-        				for (std::shared_ptr<fUML::Semantics::Values::Value> value : *values)
+        				for (const std::shared_ptr<fUML::Semantics::Values::Value>& value : *values)
         			    {
         					DEBUG_MESSAGE(std::cout<<("[putToken] node = " + this->getNode()->getName())<<std::endl;)
 

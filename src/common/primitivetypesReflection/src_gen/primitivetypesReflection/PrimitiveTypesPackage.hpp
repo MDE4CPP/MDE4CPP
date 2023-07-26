@@ -34,11 +34,11 @@ namespace PrimitiveTypes
 			static const std::string eNS_PREFIX;
 
 			//getter for the ownedMember
-			virtual std::shared_ptr<uml::PrimitiveType> get_PrimitiveTypes_Boolean() = 0;  
-			virtual std::shared_ptr<uml::PrimitiveType> get_PrimitiveTypes_Integer() = 0;  
-			virtual std::shared_ptr<uml::PrimitiveType> get_PrimitiveTypes_Real() = 0;  
-			virtual std::shared_ptr<uml::PrimitiveType> get_PrimitiveTypes_String() = 0;  
-			virtual std::shared_ptr<uml::PrimitiveType> get_PrimitiveTypes_UnlimitedNatural() = 0;  
+			virtual const std::shared_ptr<uml::PrimitiveType>& get_PrimitiveTypes_Boolean() = 0;  
+			virtual const std::shared_ptr<uml::PrimitiveType>& get_PrimitiveTypes_Integer() = 0;  
+			virtual const std::shared_ptr<uml::PrimitiveType>& get_PrimitiveTypes_Real() = 0;  
+			virtual const std::shared_ptr<uml::PrimitiveType>& get_PrimitiveTypes_String() = 0;  
+			virtual const std::shared_ptr<uml::PrimitiveType>& get_PrimitiveTypes_UnlimitedNatural() = 0;  
 			
 			
 

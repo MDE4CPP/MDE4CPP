@@ -147,8 +147,17 @@ void AddStructuralFeatureValueActionActivationImpl::doAction()
 	// If isReplaceAll is true, first remove all current matching links or feature values.
 	// If isReplaceAll is false and there is an insertAt pin, insert the value at the appropriate position.
 	
-	std::shared_ptr<uml::AddStructuralFeatureValueAction> action = this->getAddStructuralFeatureValueAction();
-	std::shared_ptr<uml::StructuralFeature> feature = action->getStructuralFeature();
+	const std::shared_ptr<uml::AddStructuralFeatureValueAction>& action = this->getAddStructuralFeatureValueAction();
+	const std::shared_ptr<uml::StructuralFeature>& feature = action->getStructuralFeature();
+
+	std::shared_ptr<uml::Property> property = std::dynamic_pointer_cast<uml::Property>(feature);
+
+	if(!property)
+
+	{
+		return;
+	}
+
 	std::shared_ptr<uml::Association> association = this->getAssociation(feature);
 
 	std::shared_ptr<fUML::Semantics::Values::Value> value = nullptr;
@@ -171,7 +180,7 @@ void AddStructuralFeatureValueActionActivationImpl::doAction()
 	std::shared_ptr<Bag<fUML::Semantics::Values::Value>> inputValues = takeTokens(action->getValue());
 	
 	// NOTE: Multiplicity of the value input pin is required to be 1..1.
-	std::shared_ptr<fUML::Semantics::Values::Value> inputValue = inputValues->at(0);
+	const std::shared_ptr<fUML::Semantics::Values::Value>& inputValue = inputValues->at(0);
 
 	int insertAt = -1;
 	if (action->getInsertAt() != nullptr)

@@ -2028,6 +2028,28 @@ void ActivitiesPackageImpl::initializeExpansionNodeActivationContent()
 	m_expansionNodeActivation_Class->setInterface(false);
 	
 	
+	m_expansionNodeActivation_Attribute_expansionNode->setName("expansionNode");
+	m_expansionNodeActivation_Attribute_expansionNode->setEType(uml::umlPackage::eInstance()->getExpansionNode_Class());
+	m_expansionNodeActivation_Attribute_expansionNode->setLowerBound(1);
+	m_expansionNodeActivation_Attribute_expansionNode->setUpperBound(1);
+	m_expansionNodeActivation_Attribute_expansionNode->setTransient(false);
+	m_expansionNodeActivation_Attribute_expansionNode->setVolatile(false);
+	m_expansionNodeActivation_Attribute_expansionNode->setChangeable(true);
+	m_expansionNodeActivation_Attribute_expansionNode->setUnsettable(false);
+	m_expansionNodeActivation_Attribute_expansionNode->setUnique(true);
+	m_expansionNodeActivation_Attribute_expansionNode->setDerived(false);
+	m_expansionNodeActivation_Attribute_expansionNode->setOrdered(true);
+	m_expansionNodeActivation_Attribute_expansionNode->setContainment(false);
+	m_expansionNodeActivation_Attribute_expansionNode->setResolveProxies(true);
+	{
+		std::string defaultValue = "";
+		if (!defaultValue.empty())
+		{
+			m_expansionNodeActivation_Attribute_expansionNode->setDefaultValueLiteral(defaultValue);
+		}				
+			//undefined otherEnd
+			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
+	}
 	
 	m_expansionNodeActivation_Operation_fire_Token->setName("fire");
 	{ 	std::shared_ptr<ecore::ecoreFactory> factory = ecore::ecoreFactory::eInstance();

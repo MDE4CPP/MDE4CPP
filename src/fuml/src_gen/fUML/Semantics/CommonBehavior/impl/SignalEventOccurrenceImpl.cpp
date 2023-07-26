@@ -129,40 +129,37 @@ std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue> > SignalEve
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
 	// Return parameter values for the features of the signal instance, in order, corresponding to the attributes of the declared signal of the given event
-	DEBUG_MESSAGE(std::cout <<  std::string(__PRETTY_FUNCTION__)<< std::endl;)
-	
-	// These are intended to be treated as if they are the values of effective parameters of the direction "in".
-	// (Note that the given event must be a signal event, and the signal instance of this signal event occurence must be a direct or indirect instance of the event signal.)
+// These are intended to be treated as if they are the values of effective parameters of the direction "in".
+// (Note that the given event must be a signal event, and the signal instance of this signal event occurence must be a direct or indirect instance of the event signal.)
 
-	std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue> > parameterValues = std::make_shared<Bag<fUML::Semantics::CommonBehavior::ParameterValue> >();
-	std::shared_ptr<uml::SignalEvent> sEvent = std::dynamic_pointer_cast<uml::SignalEvent>(event);
-	if(sEvent)
+	std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue> > parameterValues(new Bag<fUML::Semantics::CommonBehavior::ParameterValue>());
+	const std::shared_ptr<uml::SignalEvent>& signalEvent = std::dynamic_pointer_cast<uml::SignalEvent>(event);
+	if(signalEvent)
 	{
-		DEBUG_MESSAGE(std::cout <<  "Found Signal Event, passing ParameterValues on."<< std::endl;)
+		DEBUG_MESSAGE(std::cout<<"Found Signal Event, passing ParameterValues on."<<std::endl;)
+		//DEBUG_INFO("Found Signal Event, passing ParameterValues on.")
+		const std::shared_ptr<Bag<uml::StructuralFeature>>& memberFeatures = getSignalInstance()->getMemberFeatures(   std::dynamic_pointer_cast<uml::Classifier>(  (signalEvent)->getSignal()  ) );
+		const std::shared_ptr<fUML::Semantics::SimpleClassifiers::SignalInstance>& signalInstance = this->getSignalInstance();
 
-		std::shared_ptr<Bag<uml::StructuralFeature> > memberFeatures = getSignalInstance()->getMemberFeatures(   std::dynamic_pointer_cast<uml::Classifier>(  (sEvent)->getSignal()  ) );
+		for(const std::shared_ptr<uml::StructuralFeature>& feature : *memberFeatures)
 
-		int beginIter = 0;
-		int endIter = memberFeatures->size();
-		/*
-		Bag<uml::StructuralFeature> >::iterator i;
-		Bag<uml::StructuralFeature> >::iterator endIter = memberFeatures->end();
-		Bag<uml::StructuralFeature> >::iterator beginIter = memberFeatures->begin();
-	*/
-		for(int i = beginIter; i < endIter; i++)
 		{
-			std::shared_ptr<uml::StructuralFeature> feature = memberFeatures->at(i);
+
 			std::shared_ptr<fUML::Semantics::CommonBehavior::ParameterValue> parameterValue(fUML::Semantics::CommonBehavior::CommonBehaviorFactory::eInstance()->createParameterValue());
-			parameterValue->setParameter(   std::dynamic_pointer_cast<uml::Parameter>( getSignalInstance()->retrieveFeatureValue(feature) )  ); // ->getFeature()
+			parameterValue->setParameter(   std::dynamic_pointer_cast<uml::Parameter>( signalInstance ->retrieveFeatureValue(feature) )  ); // ->getFeature()
 			// Add Values from the FeatureValue to the ParameterValue to be returned
-			int valueSize = getSignalInstance()->retrieveFeatureValue(feature)->getValues()->size();
-			for(int v = 0; v <valueSize; v++)
+
+			const std::shared_ptr<Bag<fUML::Semantics::Values::Value>>& values =  signalInstance  ->retrieveFeatureValue(feature)->getValues();
+
+			for(const std::shared_ptr<fUML::Semantics::Values::Value>& value : *values)
 			{
-				parameterValue->getValues()->add(getSignalInstance()->retrieveFeatureValue(feature)->getValues()->at(v));
+				parameterValue->getValues()->add(value);
 			}
 			parameterValues->add(parameterValue);
 		}
+
 	}
+
 	return parameterValues;
 	//end of body
 }
