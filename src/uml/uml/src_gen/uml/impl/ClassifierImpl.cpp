@@ -437,11 +437,10 @@ std::shared_ptr<uml::BehavioredClassifier> bClassifier = std::dynamic_pointer_ca
 
 if(bClassifier != nullptr)
 {
-	std::shared_ptr<Bag<uml::InterfaceRealization>> interfaceRealizations = bClassifier->getInterfaceRealization();
-	for(unsigned int i = 0; i < interfaceRealizations->size(); i++)
+	const std::shared_ptr<Bag<uml::InterfaceRealization>>& interfaceRealizations = bClassifier->getInterfaceRealization();
+	for(const std::shared_ptr<uml::InterfaceRealization>& interfaceRealization : *interfaceRealizations)
 	{
-		std::shared_ptr<uml::InterfaceRealization> interfaceRealization = interfaceRealizations->at(i);
-		std::shared_ptr<uml::Interface> contract = interfaceRealization->getContract();
+		const std::shared_ptr<uml::Interface>& contract = interfaceRealization->getContract();
 
 		if(contract != nullptr)
 		{
@@ -460,19 +459,19 @@ std::shared_ptr<Bag<uml::Interface> > ClassifierImpl::directlyUsedInterfaces()
 	//generated from body annotation
 		std::shared_ptr<Bag<uml::Interface>> directlyUsedInterfaces(new Bag<uml::Interface>());
 
-	std::shared_ptr<Bag<uml::Dependency>> clientDependencies = this->getClientDependency();
+	const std::shared_ptr<Bag<uml::Dependency>>& clientDependencies = this->getClientDependency();
 	
-	for(unsigned int i = 0; i < clientDependencies->size(); i++)
+	for(const std::shared_ptr<uml::Dependency>& clientDependency : *clientDependencies)
 	{
-		std::shared_ptr<uml::Usage> usage = std::dynamic_pointer_cast<uml::Usage>(clientDependencies->at(i));
+		std::shared_ptr<uml::Usage> usage = std::dynamic_pointer_cast<uml::Usage>(clientDependency);
 		if(usage != nullptr)
 		{
-			std::shared_ptr<Bag<uml::NamedElement>> suppliers = usage->getSupplier();
+			const std::shared_ptr<Bag<uml::NamedElement>>& suppliers = usage->getSupplier();
 			std::shared_ptr<Bag<uml::Interface>> interfacesInSuppliers(new Bag<uml::Interface>());
 			
-			for(unsigned int j = 0; j < suppliers->size(); j++)
+			for(const std::shared_ptr<uml::NamedElement>& supplier : *suppliers)
 			{
-				std::shared_ptr<uml::Interface> supplyingInterface = std::dynamic_pointer_cast<uml::Interface>(suppliers->at(j));
+				std::shared_ptr<uml::Interface> supplyingInterface = std::dynamic_pointer_cast<uml::Interface>(supplier);
 				if(supplyingInterface != nullptr)
 				{
 					interfacesInSuppliers->add(supplyingInterface);
@@ -493,7 +492,7 @@ std::shared_ptr<Bag<uml::Property> > ClassifierImpl::getAllAttributes()
 	//generated from body annotation
 	    std::shared_ptr<Bag<uml::Property>> eAllAttributes(new Bag<uml::Property>());
 
-    std::shared_ptr<Bag<uml::Property>> attributeList = this->getAttribute();
+    const std::shared_ptr<Bag<uml::Property>>& attributeList = this->getAttribute();
     eAllAttributes->insert(eAllAttributes->end(), attributeList->begin(), attributeList->end());
 
     std::shared_ptr<Bag<Classifier> > classList = this->getGenerals();
@@ -511,19 +510,19 @@ std::shared_ptr<Bag<uml::Operation> > ClassifierImpl::getAllOperations()
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
 		std::shared_ptr<Bag<uml::Operation>> allOperations(new Bag<uml::Operation>());
-	std::shared_ptr<Bag<uml::Feature>> allDirectFeatures = this->getFeature();
+	const std::shared_ptr<Bag<uml::Feature>>& allDirectFeatures = this->getFeature();
 	
-	for(unsigned int i = 0; i < allDirectFeatures->size(); i++)
+	for(const std::shared_ptr<uml::Feature>& directFeature : *allDirectFeatures)
 	{
-		std::shared_ptr<uml::Operation> operation = std::dynamic_pointer_cast<uml::Operation>(allDirectFeatures->at(i));
+		std::shared_ptr<uml::Operation> operation = std::dynamic_pointer_cast<uml::Operation>(directFeature);
 		if(operation != nullptr){ allOperations->add(operation); }
 	}
 	
-	std::shared_ptr<Bag<uml::Classifier>> superTypes = this->getGenerals();
+	const std::shared_ptr<Bag<uml::Classifier>>& superTypes = this->getGenerals();
 	
-	for(unsigned int i = 0; i < superTypes->size(); i++)
+	for(const std::shared_ptr<uml::Classifier>& superType : *superTypes)
 	{
-		std::shared_ptr<Bag<uml::Operation>> superTypeOperations = superTypes->at(i)->getAllOperations();
+		std::shared_ptr<Bag<uml::Operation>> superTypeOperations = superType ->getAllOperations();
 		allOperations->insert(allOperations->end(), superTypeOperations->begin(), superTypeOperations->end());
 	}
 	
@@ -568,8 +567,8 @@ Any ClassifierImpl::getPropertyValue(std::string propertyName)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
-		std::shared_ptr<Bag<uml::Property> > propertyList = this->getMetaClass()->getAttribute();
-	for(std::shared_ptr<uml::Property> p: *propertyList)
+		const std::shared_ptr<Bag<uml::Property>>& propertyList = this->getMetaClass()->getAttribute();
+	for(const std::shared_ptr<uml::Property>& p: *propertyList)
 	{
 		if(p->getName()==propertyName)
 		{

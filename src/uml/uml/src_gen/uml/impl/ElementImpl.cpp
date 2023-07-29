@@ -155,21 +155,16 @@ std::shared_ptr<Bag<uml::Element> > ElementImpl::allOwnedElements()
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
-		std::shared_ptr<Bag<uml::Element>> list(new Bag<uml::Element>());
-	list->insert(list->begin(), this->getOwnedElement()->begin(), this->getOwnedElement()->end());
+		std::shared_ptr<Bag<uml::Element>> allOwnedElements(new Bag<uml::Element>());
+	allOwnedElements->insert(allOwnedElements->begin(), this->getOwnedElement()->begin(), this->getOwnedElement()->end());
 
-	Bag<uml::Element>::iterator iter = this->getOwnedElement()->begin();
-	Bag<uml::Element>::iterator end = this->getOwnedElement()->end();
-	int i = 0;
-	while(iter != end)
+	for(const std::shared_ptr<uml::Element> ownedElement : *allOwnedElements)
 	{
-		std::shared_ptr<Bag<uml::Element>> elementList = (*iter)->allOwnedElements();
-		list->insert(list->end(), elementList->begin(), elementList->end());
-		iter++;
-		i++;
+		std::shared_ptr<Bag<uml::Element>> recursivelyOwnedElements = ownedElement->allOwnedElements();
+		allOwnedElements->insert(allOwnedElements->end(), recursivelyOwnedElements->begin(), recursivelyOwnedElements->end());
 	}
 
-	return list;
+	return allOwnedElements;
 	//end of body
 }
 
