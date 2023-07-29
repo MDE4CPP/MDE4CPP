@@ -375,7 +375,7 @@ void [aClass.name.concat('Impl')/]::resolveReferences(const int featureID, std::
 			
 		[else]
 			const [aReference.generateReferenceType()/]& _[aReference.name/] = [aReference.GetterName()/]();
-			for(std::shared_ptr<ecore::EObject> ref : references)
+			for(const std::shared_ptr<ecore::EObject>& ref : references)
 			{
 				std::shared_ptr<[aReference.eGenericType.generateCppType(false)/]>  _r = std::dynamic_pointer_cast<[aReference.eGenericType.generateCppType(false)/]>(ref);
 				if (_r != nullptr)
@@ -435,7 +435,7 @@ void [aClass.name.concat('Impl')/]::saveContent(std::shared_ptr<[generatePersist
 			saveHandler->addReference([aReference.name/], "[aReference.name/]", [aReference.name/]->eClass() != package->get[aReference.eType.getMemberNameUpperFirst()/]());
 		}
 		[else]
-		for ([aReference.eType.generateType(true)/] [aReference.name/] : *this->[aReference.GetterName()/]()) 
+		for (const [aReference.eType.generateType(true)/]& [aReference.name/] : *this->[aReference.GetterName()/]()) 
 		{
 			saveHandler->addReference([aReference.name/], "[aReference.name/]", [aReference.name/]->eClass() != package->get[aReference.eType.getMemberNameUpperFirst()/]());
 		}
@@ -463,7 +463,7 @@ if (value == [aAttribute.eType.generateNamespaceDefinition()/]::[aAttribute.eTyp
 		[/for]
 			saveHandler->addAttribute("[aAttribute.name/]", literal);
 	[elseif (aAttribute.upperBound <> 1)]
-			for (std::shared_ptr<[aAttribute.eGenericType.generateCppType(true)/]> value : *m_[aAttribute.name/])
+			for (const std::shared_ptr<[aAttribute.eGenericType.generateCppType(true)/]>& value : *m_[aAttribute.name/])
 			{
 				saveHandler->addAttributeAsNode("[aAttribute.name/]", [if (not (aAttribute.eType.name = 'String' or aAttribute.eType.name = 'EString'))]std::to_string([/if]*value[if (not (aAttribute.eType.name = 'String' or aAttribute.eType.name = 'EString'))])[/if]);
 			}
