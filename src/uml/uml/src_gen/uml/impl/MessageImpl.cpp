@@ -578,7 +578,7 @@ void MessageImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHand
 	{
 		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
 		// Save 'argument'
-		for (std::shared_ptr<uml::ValueSpecification> argument : *this->getArgument()) 
+		for (const std::shared_ptr<uml::ValueSpecification>& argument : *this->getArgument()) 
 		{
 			saveHandler->addReference(argument, "argument", argument->eClass() != package->getValueSpecification_Class());
 		}

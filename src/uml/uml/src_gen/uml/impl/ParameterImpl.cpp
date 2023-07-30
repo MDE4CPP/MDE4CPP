@@ -561,7 +561,7 @@ void ParameterImpl::resolveReferences(const int featureID, std::vector<std::shar
 		case uml::umlPackage::PARAMETER_ATTRIBUTE_PARAMETERSET:
 		{
 			const std::shared_ptr<Bag<uml::ParameterSet>>& _parameterSet = getParameterSet();
-			for(std::shared_ptr<ecore::EObject> ref : references)
+			for(const std::shared_ptr<ecore::EObject>& ref : references)
 			{
 				std::shared_ptr<uml::ParameterSet>  _r = std::dynamic_pointer_cast<uml::ParameterSet>(ref);
 				if (_r != nullptr)

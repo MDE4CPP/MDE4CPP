@@ -378,7 +378,7 @@ void CS_ExecutionFactoryImpl::resolveReferences(const int featureID, std::vector
 		case PSCS::Semantics::Loci::LociPackage::CS_EXECUTIONFACTORY_ATTRIBUTE_APPLIEDPROFILES:
 		{
 			const std::shared_ptr<Bag<uml::Package>>& _appliedProfiles = getAppliedProfiles();
-			for(std::shared_ptr<ecore::EObject> ref : references)
+			for(const std::shared_ptr<ecore::EObject>& ref : references)
 			{
 				std::shared_ptr<uml::Package>  _r = std::dynamic_pointer_cast<uml::Package>(ref);
 				if (_r != nullptr)

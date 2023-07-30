@@ -542,13 +542,13 @@ void InteractionUseImpl::saveContent(std::shared_ptr<persistence::interfaces::XS
 	{
 		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
 		// Save 'actualGate'
-		for (std::shared_ptr<uml::Gate> actualGate : *this->getActualGate()) 
+		for (const std::shared_ptr<uml::Gate>& actualGate : *this->getActualGate()) 
 		{
 			saveHandler->addReference(actualGate, "actualGate", actualGate->eClass() != package->getGate_Class());
 		}
 
 		// Save 'argument'
-		for (std::shared_ptr<uml::ValueSpecification> argument : *this->getArgument()) 
+		for (const std::shared_ptr<uml::ValueSpecification>& argument : *this->getArgument()) 
 		{
 			saveHandler->addReference(argument, "argument", argument->eClass() != package->getValueSpecification_Class());
 		}

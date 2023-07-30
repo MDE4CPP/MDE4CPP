@@ -401,7 +401,7 @@ void ObjectImpl::resolveReferences(const int featureID, std::vector<std::shared_
 		case fUML::Semantics::StructuredClassifiers::StructuredClassifiersPackage::OBJECT_ATTRIBUTE_TYPES:
 		{
 			const std::shared_ptr<Bag<uml::Classifier>>& _types = getTypes();
-			for(std::shared_ptr<ecore::EObject> ref : references)
+			for(const std::shared_ptr<ecore::EObject>& ref : references)
 			{
 				std::shared_ptr<uml::Classifier>  _r = std::dynamic_pointer_cast<uml::Classifier>(ref);
 				if (_r != nullptr)

@@ -193,7 +193,7 @@ std::string NamedElementImpl::getQualifiedName() const
     if(!this->getName().empty() && std::none_of(allNS->cbegin(), allNS->cend(), [](std::shared_ptr<uml::Namespace> ns){ return ns->getName().empty(); }))
     {
         std::string ret;
-        for(std::shared_ptr<uml::Namespace> ns : *allNS )
+        for(const std::shared_ptr<uml::Namespace>& ns : *allNS )
         {
             ret += ns->getName() + separator();
         }

@@ -468,7 +468,7 @@ void CallActionImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveH
 	{
 		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
 		// Save 'result'
-		for (std::shared_ptr<uml::OutputPin> result : *this->getResult()) 
+		for (const std::shared_ptr<uml::OutputPin>& result : *this->getResult()) 
 		{
 			saveHandler->addReference(result, "result", result->eClass() != package->getOutputPin_Class());
 		}

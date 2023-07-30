@@ -597,13 +597,13 @@ void RegionImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandl
 	{
 		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
 		// Save 'subvertex'
-		for (std::shared_ptr<uml::Vertex> subvertex : *this->getSubvertex()) 
+		for (const std::shared_ptr<uml::Vertex>& subvertex : *this->getSubvertex()) 
 		{
 			saveHandler->addReference(subvertex, "subvertex", subvertex->eClass() != package->getVertex_Class());
 		}
 
 		// Save 'transition'
-		for (std::shared_ptr<uml::Transition> transition : *this->getTransition()) 
+		for (const std::shared_ptr<uml::Transition>& transition : *this->getTransition()) 
 		{
 			saveHandler->addReference(transition, "transition", transition->eClass() != package->getTransition_Class());
 		}

@@ -460,7 +460,7 @@ void CollaborationImpl::resolveReferences(const int featureID, std::vector<std::
 		case uml::umlPackage::COLLABORATION_ATTRIBUTE_COLLABORATIONROLE:
 		{
 			const std::shared_ptr<Subset<uml::ConnectableElement, uml::ConnectableElement>>& _collaborationRole = getCollaborationRole();
-			for(std::shared_ptr<ecore::EObject> ref : references)
+			for(const std::shared_ptr<ecore::EObject>& ref : references)
 			{
 				std::shared_ptr<uml::ConnectableElement>  _r = std::dynamic_pointer_cast<uml::ConnectableElement>(ref);
 				if (_r != nullptr)

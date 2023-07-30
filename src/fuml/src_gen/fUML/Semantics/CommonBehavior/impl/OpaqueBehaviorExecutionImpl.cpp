@@ -131,8 +131,8 @@ void OpaqueBehaviorExecutionImpl::execute()
 	std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue> > inputs(new Bag<fUML::Semantics::CommonBehavior::ParameterValue>());
 	std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue> > outputs(new Bag<fUML::Semantics::CommonBehavior::ParameterValue>());
 
-	std::shared_ptr<Bag<uml::Parameter> > parameterList = this->getBehavior()->getOwnedParameter();
-    for(std::shared_ptr<uml::Parameter> parameter : *parameterList) 
+	const std::shared_ptr<Bag<uml::Parameter>>& parameterList = this->getBehavior()->getOwnedParameter();
+    for(const std::shared_ptr<uml::Parameter>& parameter : *parameterList) 
     {
         DEBUG_MESSAGE(std::cout<<parameter->getName()<< " Parameter Direction: " << (int) parameter->getDirection()<<std::endl;)
         if ((parameter->getDirection() == uml::ParameterDirectionKind::IN)
@@ -161,7 +161,7 @@ void OpaqueBehaviorExecutionImpl::execute()
 
     this->doBody(inputs, outputs);
 
-    for(std::shared_ptr<fUML::Semantics::CommonBehavior::ParameterValue> parameterValue : *outputs)
+    for(const std::shared_ptr<fUML::Semantics::CommonBehavior::ParameterValue>& parameterValue : *outputs)
     {
     	//Now override INOUT ParameterValues with their (new) output values
     	std::shared_ptr<uml::Parameter> parameter = parameterValue->getParameter();

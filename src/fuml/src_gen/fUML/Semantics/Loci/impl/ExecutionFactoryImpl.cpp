@@ -849,7 +849,7 @@ void ExecutionFactoryImpl::resolveReferences(const int featureID, std::vector<st
 		case fUML::Semantics::Loci::LociPackage::EXECUTIONFACTORY_ATTRIBUTE_BUILTINTYPES:
 		{
 			const std::shared_ptr<Bag<uml::PrimitiveType>>& _builtInTypes = getBuiltInTypes();
-			for(std::shared_ptr<ecore::EObject> ref : references)
+			for(const std::shared_ptr<ecore::EObject>& ref : references)
 			{
 				std::shared_ptr<uml::PrimitiveType>  _r = std::dynamic_pointer_cast<uml::PrimitiveType>(ref);
 				if (_r != nullptr)
@@ -875,7 +875,7 @@ void ExecutionFactoryImpl::resolveReferences(const int featureID, std::vector<st
 		case fUML::Semantics::Loci::LociPackage::EXECUTIONFACTORY_ATTRIBUTE_PRIMITIVEBEHAVIORPROTOTYPES:
 		{
 			const std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::OpaqueBehaviorExecution>>& _primitiveBehaviorPrototypes = getPrimitiveBehaviorPrototypes();
-			for(std::shared_ptr<ecore::EObject> ref : references)
+			for(const std::shared_ptr<ecore::EObject>& ref : references)
 			{
 				std::shared_ptr<fUML::Semantics::CommonBehavior::OpaqueBehaviorExecution>  _r = std::dynamic_pointer_cast<fUML::Semantics::CommonBehavior::OpaqueBehaviorExecution>(ref);
 				if (_r != nullptr)
@@ -889,7 +889,7 @@ void ExecutionFactoryImpl::resolveReferences(const int featureID, std::vector<st
 		case fUML::Semantics::Loci::LociPackage::EXECUTIONFACTORY_ATTRIBUTE_STRATEGIES:
 		{
 			const std::shared_ptr<Bag<fUML::Semantics::Loci::SemanticStrategy>>& _strategies = getStrategies();
-			for(std::shared_ptr<ecore::EObject> ref : references)
+			for(const std::shared_ptr<ecore::EObject>& ref : references)
 			{
 				std::shared_ptr<fUML::Semantics::Loci::SemanticStrategy>  _r = std::dynamic_pointer_cast<fUML::Semantics::Loci::SemanticStrategy>(ref);
 				if (_r != nullptr)

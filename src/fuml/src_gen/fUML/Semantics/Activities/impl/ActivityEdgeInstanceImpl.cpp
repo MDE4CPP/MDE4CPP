@@ -424,7 +424,7 @@ void ActivityEdgeInstanceImpl::resolveReferences(const int featureID, std::vecto
 		case fUML::Semantics::Activities::ActivitiesPackage::ACTIVITYEDGEINSTANCE_ATTRIBUTE_OFFERS:
 		{
 			const std::shared_ptr<Bag<fUML::Semantics::Activities::Offer>>& _offers = getOffers();
-			for(std::shared_ptr<ecore::EObject> ref : references)
+			for(const std::shared_ptr<ecore::EObject>& ref : references)
 			{
 				std::shared_ptr<fUML::Semantics::Activities::Offer>  _r = std::dynamic_pointer_cast<fUML::Semantics::Activities::Offer>(ref);
 				if (_r != nullptr)

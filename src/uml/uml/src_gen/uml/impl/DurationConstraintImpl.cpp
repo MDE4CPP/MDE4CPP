@@ -335,7 +335,7 @@ void DurationConstraintImpl::saveContent(std::shared_ptr<persistence::interfaces
 		// Add attributes
 		if ( this->eIsSet(package->getDurationConstraint_Attribute_firstEvent()) )
 		{
-			for (std::shared_ptr<bool> value : *m_firstEvent)
+			for (const std::shared_ptr<bool>& value : *m_firstEvent)
 			{
 				saveHandler->addAttributeAsNode("firstEvent", std::to_string(*value));
 			}

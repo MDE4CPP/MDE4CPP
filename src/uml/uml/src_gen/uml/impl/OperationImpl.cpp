@@ -866,7 +866,7 @@ void OperationImpl::resolveReferences(const int featureID, std::vector<std::shar
 		case uml::umlPackage::OPERATION_ATTRIBUTE_POSTCONDITION:
 		{
 			const std::shared_ptr<Subset<uml::Constraint, uml::Constraint /*Subset does not reference a union*/>>& _postcondition = getPostcondition();
-			for(std::shared_ptr<ecore::EObject> ref : references)
+			for(const std::shared_ptr<ecore::EObject>& ref : references)
 			{
 				std::shared_ptr<uml::Constraint>  _r = std::dynamic_pointer_cast<uml::Constraint>(ref);
 				if (_r != nullptr)
@@ -880,7 +880,7 @@ void OperationImpl::resolveReferences(const int featureID, std::vector<std::shar
 		case uml::umlPackage::OPERATION_ATTRIBUTE_PRECONDITION:
 		{
 			const std::shared_ptr<Subset<uml::Constraint, uml::Constraint /*Subset does not reference a union*/>>& _precondition = getPrecondition();
-			for(std::shared_ptr<ecore::EObject> ref : references)
+			for(const std::shared_ptr<ecore::EObject>& ref : references)
 			{
 				std::shared_ptr<uml::Constraint>  _r = std::dynamic_pointer_cast<uml::Constraint>(ref);
 				if (_r != nullptr)
@@ -894,7 +894,7 @@ void OperationImpl::resolveReferences(const int featureID, std::vector<std::shar
 		case uml::umlPackage::OPERATION_ATTRIBUTE_REDEFINEDOPERATION:
 		{
 			const std::shared_ptr<Subset<uml::Operation, uml::RedefinableElement>>& _redefinedOperation = getRedefinedOperation();
-			for(std::shared_ptr<ecore::EObject> ref : references)
+			for(const std::shared_ptr<ecore::EObject>& ref : references)
 			{
 				std::shared_ptr<uml::Operation>  _r = std::dynamic_pointer_cast<uml::Operation>(ref);
 				if (_r != nullptr)

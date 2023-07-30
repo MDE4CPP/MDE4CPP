@@ -500,7 +500,7 @@ void ExpansionRegionImpl::resolveReferences(const int featureID, std::vector<std
 		case uml::umlPackage::EXPANSIONREGION_ATTRIBUTE_INPUTELEMENT:
 		{
 			const std::shared_ptr<Bag<uml::ExpansionNode>>& _inputElement = getInputElement();
-			for(std::shared_ptr<ecore::EObject> ref : references)
+			for(const std::shared_ptr<ecore::EObject>& ref : references)
 			{
 				std::shared_ptr<uml::ExpansionNode>  _r = std::dynamic_pointer_cast<uml::ExpansionNode>(ref);
 				if (_r != nullptr)
@@ -514,7 +514,7 @@ void ExpansionRegionImpl::resolveReferences(const int featureID, std::vector<std
 		case uml::umlPackage::EXPANSIONREGION_ATTRIBUTE_OUTPUTELEMENT:
 		{
 			const std::shared_ptr<Bag<uml::ExpansionNode>>& _outputElement = getOutputElement();
-			for(std::shared_ptr<ecore::EObject> ref : references)
+			for(const std::shared_ptr<ecore::EObject>& ref : references)
 			{
 				std::shared_ptr<uml::ExpansionNode>  _r = std::dynamic_pointer_cast<uml::ExpansionNode>(ref);
 				if (_r != nullptr)

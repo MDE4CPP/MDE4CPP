@@ -422,7 +422,7 @@ void InteractionOperandImpl::saveContent(std::shared_ptr<persistence::interfaces
 	{
 		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
 		// Save 'fragment'
-		for (std::shared_ptr<uml::InteractionFragment> fragment : *this->getFragment()) 
+		for (const std::shared_ptr<uml::InteractionFragment>& fragment : *this->getFragment()) 
 		{
 			saveHandler->addReference(fragment, "fragment", fragment->eClass() != package->getInteractionFragment_Class());
 		}

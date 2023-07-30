@@ -593,7 +593,7 @@ void ActivityPartitionImpl::resolveReferences(const int featureID, std::vector<s
 		case uml::umlPackage::ACTIVITYPARTITION_ATTRIBUTE_EDGE:
 		{
 			const std::shared_ptr<Subset<uml::ActivityEdge, uml::ActivityEdge>>& _edge = getEdge();
-			for(std::shared_ptr<ecore::EObject> ref : references)
+			for(const std::shared_ptr<ecore::EObject>& ref : references)
 			{
 				std::shared_ptr<uml::ActivityEdge>  _r = std::dynamic_pointer_cast<uml::ActivityEdge>(ref);
 				if (_r != nullptr)
@@ -607,7 +607,7 @@ void ActivityPartitionImpl::resolveReferences(const int featureID, std::vector<s
 		case uml::umlPackage::ACTIVITYPARTITION_ATTRIBUTE_NODE:
 		{
 			const std::shared_ptr<Subset<uml::ActivityNode, uml::ActivityNode>>& _node = getNode();
-			for(std::shared_ptr<ecore::EObject> ref : references)
+			for(const std::shared_ptr<ecore::EObject>& ref : references)
 			{
 				std::shared_ptr<uml::ActivityNode>  _r = std::dynamic_pointer_cast<uml::ActivityNode>(ref);
 				if (_r != nullptr)
@@ -666,7 +666,7 @@ void ActivityPartitionImpl::saveContent(std::shared_ptr<persistence::interfaces:
 	{
 		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
 		// Save 'subpartition'
-		for (std::shared_ptr<uml::ActivityPartition> subpartition : *this->getSubpartition()) 
+		for (const std::shared_ptr<uml::ActivityPartition>& subpartition : *this->getSubpartition()) 
 		{
 			saveHandler->addReference(subpartition, "subpartition", subpartition->eClass() != package->getActivityPartition_Class());
 		}

@@ -359,7 +359,7 @@ void ConstraintImpl::resolveReferences(const int featureID, std::vector<std::sha
 		case uml::umlPackage::CONSTRAINT_ATTRIBUTE_CONSTRAINEDELEMENT:
 		{
 			const std::shared_ptr<Bag<uml::Element>>& _constrainedElement = getConstrainedElement();
-			for(std::shared_ptr<ecore::EObject> ref : references)
+			for(const std::shared_ptr<ecore::EObject>& ref : references)
 			{
 				std::shared_ptr<uml::Element>  _r = std::dynamic_pointer_cast<uml::Element>(ref);
 				if (_r != nullptr)

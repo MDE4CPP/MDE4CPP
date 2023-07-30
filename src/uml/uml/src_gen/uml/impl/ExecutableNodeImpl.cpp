@@ -360,7 +360,7 @@ void ExecutableNodeImpl::saveContent(std::shared_ptr<persistence::interfaces::XS
 	{
 		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
 		// Save 'handler'
-		for (std::shared_ptr<uml::ExceptionHandler> handler : *this->getHandler()) 
+		for (const std::shared_ptr<uml::ExceptionHandler>& handler : *this->getHandler()) 
 		{
 			saveHandler->addReference(handler, "handler", handler->eClass() != package->getExceptionHandler_Class());
 		}

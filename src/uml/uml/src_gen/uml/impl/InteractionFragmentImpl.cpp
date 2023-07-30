@@ -365,7 +365,7 @@ void InteractionFragmentImpl::resolveReferences(const int featureID, std::vector
 		case uml::umlPackage::INTERACTIONFRAGMENT_ATTRIBUTE_COVERED:
 		{
 			const std::shared_ptr<Bag<uml::Lifeline>>& _covered = getCovered();
-			for(std::shared_ptr<ecore::EObject> ref : references)
+			for(const std::shared_ptr<ecore::EObject>& ref : references)
 			{
 				std::shared_ptr<uml::Lifeline>  _r = std::dynamic_pointer_cast<uml::Lifeline>(ref);
 				if (_r != nullptr)
@@ -422,7 +422,7 @@ void InteractionFragmentImpl::saveContent(std::shared_ptr<persistence::interface
 	{
 		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
 		// Save 'generalOrdering'
-		for (std::shared_ptr<uml::GeneralOrdering> generalOrdering : *this->getGeneralOrdering()) 
+		for (const std::shared_ptr<uml::GeneralOrdering>& generalOrdering : *this->getGeneralOrdering()) 
 		{
 			saveHandler->addReference(generalOrdering, "generalOrdering", generalOrdering->eClass() != package->getGeneralOrdering_Class());
 		}

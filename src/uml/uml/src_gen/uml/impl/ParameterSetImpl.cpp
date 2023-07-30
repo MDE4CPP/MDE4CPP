@@ -330,7 +330,7 @@ void ParameterSetImpl::resolveReferences(const int featureID, std::vector<std::s
 		case uml::umlPackage::PARAMETERSET_ATTRIBUTE_PARAMETER:
 		{
 			const std::shared_ptr<Bag<uml::Parameter>>& _parameter = getParameter();
-			for(std::shared_ptr<ecore::EObject> ref : references)
+			for(const std::shared_ptr<ecore::EObject>& ref : references)
 			{
 				std::shared_ptr<uml::Parameter>  _r = std::dynamic_pointer_cast<uml::Parameter>(ref);
 				if (_r != nullptr)
@@ -363,7 +363,7 @@ void ParameterSetImpl::saveContent(std::shared_ptr<persistence::interfaces::XSav
 	{
 		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
 		// Save 'condition'
-		for (std::shared_ptr<uml::Constraint> condition : *this->getCondition()) 
+		for (const std::shared_ptr<uml::Constraint>& condition : *this->getCondition()) 
 		{
 			saveHandler->addReference(condition, "condition", condition->eClass() != package->getConstraint_Class());
 		}

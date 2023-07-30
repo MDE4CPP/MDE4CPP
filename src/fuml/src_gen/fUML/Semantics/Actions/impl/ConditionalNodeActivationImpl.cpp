@@ -298,7 +298,7 @@ void ConditionalNodeActivationImpl::resolveReferences(const int featureID, std::
 		case fUML::Semantics::Actions::ActionsPackage::CONDITIONALNODEACTIVATION_ATTRIBUTE_SELECTEDCLAUSES:
 		{
 			const std::shared_ptr<Bag<uml::Clause>>& _selectedClauses = getSelectedClauses();
-			for(std::shared_ptr<ecore::EObject> ref : references)
+			for(const std::shared_ptr<ecore::EObject>& ref : references)
 			{
 				std::shared_ptr<uml::Clause>  _r = std::dynamic_pointer_cast<uml::Clause>(ref);
 				if (_r != nullptr)

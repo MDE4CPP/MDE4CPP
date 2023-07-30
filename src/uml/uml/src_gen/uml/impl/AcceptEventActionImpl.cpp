@@ -519,13 +519,13 @@ void AcceptEventActionImpl::saveContent(std::shared_ptr<persistence::interfaces:
 	{
 		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
 		// Save 'result'
-		for (std::shared_ptr<uml::OutputPin> result : *this->getResult()) 
+		for (const std::shared_ptr<uml::OutputPin>& result : *this->getResult()) 
 		{
 			saveHandler->addReference(result, "result", result->eClass() != package->getOutputPin_Class());
 		}
 
 		// Save 'trigger'
-		for (std::shared_ptr<uml::Trigger> trigger : *this->getTrigger()) 
+		for (const std::shared_ptr<uml::Trigger>& trigger : *this->getTrigger()) 
 		{
 			saveHandler->addReference(trigger, "trigger", trigger->eClass() != package->getTrigger_Class());
 		}

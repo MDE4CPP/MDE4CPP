@@ -292,7 +292,7 @@ void ClassifierTemplateParameterImpl::resolveReferences(const int featureID, std
 		case uml::umlPackage::CLASSIFIERTEMPLATEPARAMETER_ATTRIBUTE_CONSTRAININGCLASSIFIER:
 		{
 			const std::shared_ptr<Bag<uml::Classifier>>& _constrainingClassifier = getConstrainingClassifier();
-			for(std::shared_ptr<ecore::EObject> ref : references)
+			for(const std::shared_ptr<ecore::EObject>& ref : references)
 			{
 				std::shared_ptr<uml::Classifier>  _r = std::dynamic_pointer_cast<uml::Classifier>(ref);
 				if (_r != nullptr)

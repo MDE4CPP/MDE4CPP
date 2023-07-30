@@ -522,7 +522,7 @@ void UnmarshallActionImpl::saveContent(std::shared_ptr<persistence::interfaces::
 		}
 
 		// Save 'result'
-		for (std::shared_ptr<uml::OutputPin> result : *this->getResult()) 
+		for (const std::shared_ptr<uml::OutputPin>& result : *this->getResult()) 
 		{
 			saveHandler->addReference(result, "result", result->eClass() != package->getOutputPin_Class());
 		}

@@ -276,7 +276,7 @@ void TriggerImpl::resolveReferences(const int featureID, std::vector<std::shared
 		case uml::umlPackage::TRIGGER_ATTRIBUTE_PORT:
 		{
 			const std::shared_ptr<Bag<uml::Port>>& _port = getPort();
-			for(std::shared_ptr<ecore::EObject> ref : references)
+			for(const std::shared_ptr<ecore::EObject>& ref : references)
 			{
 				std::shared_ptr<uml::Port>  _r = std::dynamic_pointer_cast<uml::Port>(ref);
 				if (_r != nullptr)

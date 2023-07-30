@@ -437,7 +437,7 @@ void RedefinableTemplateSignatureImpl::resolveReferences(const int featureID, st
 		case uml::umlPackage::REDEFINABLETEMPLATESIGNATURE_ATTRIBUTE_EXTENDEDSIGNATURE:
 		{
 			const std::shared_ptr<Subset<uml::RedefinableTemplateSignature, uml::RedefinableElement>>& _extendedSignature = getExtendedSignature();
-			for(std::shared_ptr<ecore::EObject> ref : references)
+			for(const std::shared_ptr<ecore::EObject>& ref : references)
 			{
 				std::shared_ptr<uml::RedefinableTemplateSignature>  _r = std::dynamic_pointer_cast<uml::RedefinableTemplateSignature>(ref);
 				if (_r != nullptr)

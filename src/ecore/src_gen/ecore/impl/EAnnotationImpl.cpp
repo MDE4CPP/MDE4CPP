@@ -365,7 +365,7 @@ void EAnnotationImpl::resolveReferences(const int featureID, std::vector<std::sh
 		case ecore::ecorePackage::EANNOTATION_ATTRIBUTE_REFERENCES:
 		{
 			const std::shared_ptr<Bag<ecore::EObject>>& _references = getReferences();
-			for(std::shared_ptr<ecore::EObject> ref : references)
+			for(const std::shared_ptr<ecore::EObject>& ref : references)
 			{
 				std::shared_ptr<ecore::EObject>  _r = std::dynamic_pointer_cast<ecore::EObject>(ref);
 				if (_r != nullptr)
@@ -396,7 +396,7 @@ void EAnnotationImpl::saveContent(std::shared_ptr<persistence::interfaces::XSave
 	{
 		std::shared_ptr<ecore::ecorePackage> package = ecore::ecorePackage::eInstance();
 		// Save 'contents'
-		for (std::shared_ptr<ecore::EObject> contents : *this->getContents()) 
+		for (const std::shared_ptr<ecore::EObject>& contents : *this->getContents()) 
 		{
 			saveHandler->addReference(contents, "contents", contents->eClass() != package->getEObject_Class());
 		}

@@ -194,7 +194,7 @@ void ValuesImpl::resolveReferences(const int featureID, std::vector<std::shared_
 		case fUML::Semantics::Actions::ActionsPackage::VALUES_ATTRIBUTE_VALUES:
 		{
 			const std::shared_ptr<Bag<fUML::Semantics::Values::Value>>& _values = getValues();
-			for(std::shared_ptr<ecore::EObject> ref : references)
+			for(const std::shared_ptr<ecore::EObject>& ref : references)
 			{
 				std::shared_ptr<fUML::Semantics::Values::Value>  _r = std::dynamic_pointer_cast<fUML::Semantics::Values::Value>(ref);
 				if (_r != nullptr)

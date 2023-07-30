@@ -258,7 +258,7 @@ void CollectionValueImpl::resolveReferences(const int featureID, std::vector<std
 		case ocl::Values::ValuesPackage::COLLECTIONVALUE_ATTRIBUTE_ELEMENTS:
 		{
 			const std::shared_ptr<Bag<ocl::Values::Element>>& _elements = getElements();
-			for(std::shared_ptr<ecore::EObject> ref : references)
+			for(const std::shared_ptr<ecore::EObject>& ref : references)
 			{
 				std::shared_ptr<ocl::Values::Element>  _r = std::dynamic_pointer_cast<ocl::Values::Element>(ref);
 				if (_r != nullptr)

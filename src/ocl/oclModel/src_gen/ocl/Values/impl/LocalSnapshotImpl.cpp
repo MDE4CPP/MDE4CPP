@@ -313,7 +313,7 @@ void LocalSnapshotImpl::resolveReferences(const int featureID, std::vector<std::
 		case ocl::Values::ValuesPackage::LOCALSNAPSHOT_ATTRIBUTE_BINDINGS:
 		{
 			const std::shared_ptr<Bag<ocl::Values::NameValueBinding>>& _bindings = getBindings();
-			for(std::shared_ptr<ecore::EObject> ref : references)
+			for(const std::shared_ptr<ecore::EObject>& ref : references)
 			{
 				std::shared_ptr<ocl::Values::NameValueBinding>  _r = std::dynamic_pointer_cast<ocl::Values::NameValueBinding>(ref);
 				if (_r != nullptr)
@@ -327,7 +327,7 @@ void LocalSnapshotImpl::resolveReferences(const int featureID, std::vector<std::
 		case ocl::Values::ValuesPackage::LOCALSNAPSHOT_ATTRIBUTE_INPUTQ:
 		{
 			const std::shared_ptr<Bag<ocl::Values::OclMessageValue>>& _inputQ = getInputQ();
-			for(std::shared_ptr<ecore::EObject> ref : references)
+			for(const std::shared_ptr<ecore::EObject>& ref : references)
 			{
 				std::shared_ptr<ocl::Values::OclMessageValue>  _r = std::dynamic_pointer_cast<ocl::Values::OclMessageValue>(ref);
 				if (_r != nullptr)
@@ -341,7 +341,7 @@ void LocalSnapshotImpl::resolveReferences(const int featureID, std::vector<std::
 		case ocl::Values::ValuesPackage::LOCALSNAPSHOT_ATTRIBUTE_OUTPUTQ:
 		{
 			const std::shared_ptr<Bag<ocl::Values::OclMessageValue>>& _outputQ = getOutputQ();
-			for(std::shared_ptr<ecore::EObject> ref : references)
+			for(const std::shared_ptr<ecore::EObject>& ref : references)
 			{
 				std::shared_ptr<ocl::Values::OclMessageValue>  _r = std::dynamic_pointer_cast<ocl::Values::OclMessageValue>(ref);
 				if (_r != nullptr)

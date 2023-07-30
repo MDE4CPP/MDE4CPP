@@ -537,7 +537,7 @@ void ElementImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHand
 	{
 		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
 		// Save 'ownedComment'
-		for (std::shared_ptr<uml::Comment> ownedComment : *this->getOwnedComment()) 
+		for (const std::shared_ptr<uml::Comment>& ownedComment : *this->getOwnedComment()) 
 		{
 			saveHandler->addReference(ownedComment, "ownedComment", ownedComment->eClass() != package->getComment_Class());
 		}

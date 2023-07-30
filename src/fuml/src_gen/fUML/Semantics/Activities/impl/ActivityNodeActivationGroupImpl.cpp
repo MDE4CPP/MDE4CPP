@@ -291,13 +291,11 @@ void ActivityNodeActivationGroupImpl::createNodeActivations(const std::shared_pt
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
-	for (unsigned int i = 0; i < nodes->size(); i++) 
+	for(const std::shared_ptr<uml::ActivityNode>& node: *nodes) 
 	{
-		std::shared_ptr<uml::ActivityNode> node = nodes->at(i);
         if(node != nullptr)
         {
-        	DEBUG_MESSAGE(std::cout<<"[createNodeActivations] Creating a node activation for "
-                   << node->getName() << "..."<<std::endl;)
+        	DEBUG_MESSAGE(std::cout<<"[createNodeActivations] Creating a node activation for "<< node->getName() << "..."<<std::endl;)
         	this->createNodeActivation(node);
         }
         else
@@ -795,7 +793,7 @@ void ActivityNodeActivationGroupImpl::resolveReferences(const int featureID, std
 		case fUML::Semantics::Activities::ActivitiesPackage::ACTIVITYNODEACTIVATIONGROUP_ATTRIBUTE_SUSPENDEDACTIVATIONS:
 		{
 			const std::shared_ptr<Bag<fUML::Semantics::Activities::ActivityNodeActivation>>& _suspendedActivations = getSuspendedActivations();
-			for(std::shared_ptr<ecore::EObject> ref : references)
+			for(const std::shared_ptr<ecore::EObject>& ref : references)
 			{
 				std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivation>  _r = std::dynamic_pointer_cast<fUML::Semantics::Activities::ActivityNodeActivation>(ref);
 				if (_r != nullptr)

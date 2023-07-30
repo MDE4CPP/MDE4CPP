@@ -475,13 +475,13 @@ void LinkActionImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveH
 	{
 		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
 		// Save 'endData'
-		for (std::shared_ptr<uml::LinkEndData> endData : *this->getEndData()) 
+		for (const std::shared_ptr<uml::LinkEndData>& endData : *this->getEndData()) 
 		{
 			saveHandler->addReference(endData, "endData", endData->eClass() != package->getLinkEndData_Class());
 		}
 
 		// Save 'inputValue'
-		for (std::shared_ptr<uml::InputPin> inputValue : *this->getInputValue()) 
+		for (const std::shared_ptr<uml::InputPin>& inputValue : *this->getInputValue()) 
 		{
 			saveHandler->addReference(inputValue, "inputValue", inputValue->eClass() != package->getInputPin_Class());
 		}

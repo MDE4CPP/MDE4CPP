@@ -558,7 +558,7 @@ void ProtocolStateMachineImpl::saveContent(std::shared_ptr<persistence::interfac
 	{
 		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
 		// Save 'conformance'
-		for (std::shared_ptr<uml::ProtocolConformance> conformance : *this->getConformance()) 
+		for (const std::shared_ptr<uml::ProtocolConformance>& conformance : *this->getConformance()) 
 		{
 			saveHandler->addReference(conformance, "conformance", conformance->eClass() != package->getProtocolConformance_Class());
 		}

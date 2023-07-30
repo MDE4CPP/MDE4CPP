@@ -755,7 +755,7 @@ void InterfaceImpl::resolveReferences(const int featureID, std::vector<std::shar
 		case uml::umlPackage::INTERFACE_ATTRIBUTE_REDEFINEDINTERFACE:
 		{
 			const std::shared_ptr<Subset<uml::Interface, uml::Classifier /*Subset does not reference a union*/>>& _redefinedInterface = getRedefinedInterface();
-			for(std::shared_ptr<ecore::EObject> ref : references)
+			for(const std::shared_ptr<ecore::EObject>& ref : references)
 			{
 				std::shared_ptr<uml::Interface>  _r = std::dynamic_pointer_cast<uml::Interface>(ref);
 				if (_r != nullptr)
@@ -798,25 +798,25 @@ void InterfaceImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHa
 	{
 		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
 		// Save 'nestedClassifier'
-		for (std::shared_ptr<uml::Classifier> nestedClassifier : *this->getNestedClassifier()) 
+		for (const std::shared_ptr<uml::Classifier>& nestedClassifier : *this->getNestedClassifier()) 
 		{
 			saveHandler->addReference(nestedClassifier, "nestedClassifier", nestedClassifier->eClass() != package->getClassifier_Class());
 		}
 
 		// Save 'ownedAttribute'
-		for (std::shared_ptr<uml::Property> ownedAttribute : *this->getOwnedAttribute()) 
+		for (const std::shared_ptr<uml::Property>& ownedAttribute : *this->getOwnedAttribute()) 
 		{
 			saveHandler->addReference(ownedAttribute, "ownedAttribute", ownedAttribute->eClass() != package->getProperty_Class());
 		}
 
 		// Save 'ownedOperation'
-		for (std::shared_ptr<uml::Operation> ownedOperation : *this->getOwnedOperation()) 
+		for (const std::shared_ptr<uml::Operation>& ownedOperation : *this->getOwnedOperation()) 
 		{
 			saveHandler->addReference(ownedOperation, "ownedOperation", ownedOperation->eClass() != package->getOperation_Class());
 		}
 
 		// Save 'ownedReception'
-		for (std::shared_ptr<uml::Reception> ownedReception : *this->getOwnedReception()) 
+		for (const std::shared_ptr<uml::Reception>& ownedReception : *this->getOwnedReception()) 
 		{
 			saveHandler->addReference(ownedReception, "ownedReception", ownedReception->eClass() != package->getReception_Class());
 		}

@@ -279,7 +279,7 @@ void EModelElementImpl::saveContent(std::shared_ptr<persistence::interfaces::XSa
 	{
 		std::shared_ptr<ecore::ecorePackage> package = ecore::ecorePackage::eInstance();
 		// Save 'eAnnotations'
-		for (std::shared_ptr<ecore::EAnnotation> eAnnotations : *this->getEAnnotations()) 
+		for (const std::shared_ptr<ecore::EAnnotation>& eAnnotations : *this->getEAnnotations()) 
 		{
 			saveHandler->addReference(eAnnotations, "eAnnotations", eAnnotations->eClass() != package->getEAnnotation_Class());
 		}

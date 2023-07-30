@@ -338,7 +338,7 @@ void ObjectValueImpl::resolveReferences(const int featureID, std::vector<std::sh
 		case ocl::Values::ValuesPackage::OBJECTVALUE_ATTRIBUTE_HISTORY:
 		{
 			const std::shared_ptr<Bag<ocl::Values::LocalSnapshot>>& _history = getHistory();
-			for(std::shared_ptr<ecore::EObject> ref : references)
+			for(const std::shared_ptr<ecore::EObject>& ref : references)
 			{
 				std::shared_ptr<ocl::Values::LocalSnapshot>  _r = std::dynamic_pointer_cast<ocl::Values::LocalSnapshot>(ref);
 				if (_r != nullptr)

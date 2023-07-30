@@ -997,7 +997,7 @@ void ActivityImpl::resolveReferences(const int featureID, std::vector<std::share
 		case uml::umlPackage::ACTIVITY_ATTRIBUTE_PARTITION:
 		{
 			const std::shared_ptr<Subset<uml::ActivityPartition, uml::ActivityGroup /*Subset does not reference a union*/, uml::ActivityGroup>>& _partition = getPartition();
-			for(std::shared_ptr<ecore::EObject> ref : references)
+			for(const std::shared_ptr<ecore::EObject>& ref : references)
 			{
 				std::shared_ptr<uml::ActivityPartition>  _r = std::dynamic_pointer_cast<uml::ActivityPartition>(ref);
 				if (_r != nullptr)
@@ -1049,25 +1049,25 @@ void ActivityImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHan
 	{
 		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
 		// Save 'edge'
-		for (std::shared_ptr<uml::ActivityEdge> edge : *this->getEdge()) 
+		for (const std::shared_ptr<uml::ActivityEdge>& edge : *this->getEdge()) 
 		{
 			saveHandler->addReference(edge, "edge", edge->eClass() != package->getActivityEdge_Class());
 		}
 
 		// Save 'ownedNode'
-		for (std::shared_ptr<uml::ActivityNode> ownedNode : *this->getOwnedNode()) 
+		for (const std::shared_ptr<uml::ActivityNode>& ownedNode : *this->getOwnedNode()) 
 		{
 			saveHandler->addReference(ownedNode, "ownedNode", ownedNode->eClass() != package->getActivityNode_Class());
 		}
 
 		// Save 'structuredNode'
-		for (std::shared_ptr<uml::StructuredActivityNode> structuredNode : *this->getStructuredNode()) 
+		for (const std::shared_ptr<uml::StructuredActivityNode>& structuredNode : *this->getStructuredNode()) 
 		{
 			saveHandler->addReference(structuredNode, "structuredNode", structuredNode->eClass() != package->getStructuredActivityNode_Class());
 		}
 
 		// Save 'variable'
-		for (std::shared_ptr<uml::Variable> variable : *this->getVariable()) 
+		for (const std::shared_ptr<uml::Variable>& variable : *this->getVariable()) 
 		{
 			saveHandler->addReference(variable, "variable", variable->eClass() != package->getVariable_Class());
 		}

@@ -849,31 +849,31 @@ void StructuredActivityNodeImpl::saveContent(std::shared_ptr<persistence::interf
 	{
 		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
 		// Save 'edge'
-		for (std::shared_ptr<uml::ActivityEdge> edge : *this->getEdge()) 
+		for (const std::shared_ptr<uml::ActivityEdge>& edge : *this->getEdge()) 
 		{
 			saveHandler->addReference(edge, "edge", edge->eClass() != package->getActivityEdge_Class());
 		}
 
 		// Save 'node'
-		for (std::shared_ptr<uml::ActivityNode> node : *this->getNode()) 
+		for (const std::shared_ptr<uml::ActivityNode>& node : *this->getNode()) 
 		{
 			saveHandler->addReference(node, "node", node->eClass() != package->getActivityNode_Class());
 		}
 
 		// Save 'structuredNodeInput'
-		for (std::shared_ptr<uml::InputPin> structuredNodeInput : *this->getStructuredNodeInput()) 
+		for (const std::shared_ptr<uml::InputPin>& structuredNodeInput : *this->getStructuredNodeInput()) 
 		{
 			saveHandler->addReference(structuredNodeInput, "structuredNodeInput", structuredNodeInput->eClass() != package->getInputPin_Class());
 		}
 
 		// Save 'structuredNodeOutput'
-		for (std::shared_ptr<uml::OutputPin> structuredNodeOutput : *this->getStructuredNodeOutput()) 
+		for (const std::shared_ptr<uml::OutputPin>& structuredNodeOutput : *this->getStructuredNodeOutput()) 
 		{
 			saveHandler->addReference(structuredNodeOutput, "structuredNodeOutput", structuredNodeOutput->eClass() != package->getOutputPin_Class());
 		}
 
 		// Save 'variable'
-		for (std::shared_ptr<uml::Variable> variable : *this->getVariable()) 
+		for (const std::shared_ptr<uml::Variable>& variable : *this->getVariable()) 
 		{
 			saveHandler->addReference(variable, "variable", variable->eClass() != package->getVariable_Class());
 		}

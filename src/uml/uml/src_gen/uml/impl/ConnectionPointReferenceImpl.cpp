@@ -315,7 +315,7 @@ void ConnectionPointReferenceImpl::resolveReferences(const int featureID, std::v
 		case uml::umlPackage::CONNECTIONPOINTREFERENCE_ATTRIBUTE_ENTRY:
 		{
 			const std::shared_ptr<Bag<uml::Pseudostate>>& _entry = getEntry();
-			for(std::shared_ptr<ecore::EObject> ref : references)
+			for(const std::shared_ptr<ecore::EObject>& ref : references)
 			{
 				std::shared_ptr<uml::Pseudostate>  _r = std::dynamic_pointer_cast<uml::Pseudostate>(ref);
 				if (_r != nullptr)
@@ -329,7 +329,7 @@ void ConnectionPointReferenceImpl::resolveReferences(const int featureID, std::v
 		case uml::umlPackage::CONNECTIONPOINTREFERENCE_ATTRIBUTE_EXIT:
 		{
 			const std::shared_ptr<Bag<uml::Pseudostate>>& _exit = getExit();
-			for(std::shared_ptr<ecore::EObject> ref : references)
+			for(const std::shared_ptr<ecore::EObject>& ref : references)
 			{
 				std::shared_ptr<uml::Pseudostate>  _r = std::dynamic_pointer_cast<uml::Pseudostate>(ref);
 				if (_r != nullptr)

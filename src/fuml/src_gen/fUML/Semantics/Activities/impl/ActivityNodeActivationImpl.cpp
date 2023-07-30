@@ -786,7 +786,7 @@ void ActivityNodeActivationImpl::resolveReferences(const int featureID, std::vec
 		case fUML::Semantics::Activities::ActivitiesPackage::ACTIVITYNODEACTIVATION_ATTRIBUTE_INCOMINGEDGES:
 		{
 			const std::shared_ptr<Bag<fUML::Semantics::Activities::ActivityEdgeInstance>>& _incomingEdges = getIncomingEdges();
-			for(std::shared_ptr<ecore::EObject> ref : references)
+			for(const std::shared_ptr<ecore::EObject>& ref : references)
 			{
 				std::shared_ptr<fUML::Semantics::Activities::ActivityEdgeInstance>  _r = std::dynamic_pointer_cast<fUML::Semantics::Activities::ActivityEdgeInstance>(ref);
 				if (_r != nullptr)
@@ -812,7 +812,7 @@ void ActivityNodeActivationImpl::resolveReferences(const int featureID, std::vec
 		case fUML::Semantics::Activities::ActivitiesPackage::ACTIVITYNODEACTIVATION_ATTRIBUTE_OUTGOINGEDGES:
 		{
 			const std::shared_ptr<Bag<fUML::Semantics::Activities::ActivityEdgeInstance>>& _outgoingEdges = getOutgoingEdges();
-			for(std::shared_ptr<ecore::EObject> ref : references)
+			for(const std::shared_ptr<ecore::EObject>& ref : references)
 			{
 				std::shared_ptr<fUML::Semantics::Activities::ActivityEdgeInstance>  _r = std::dynamic_pointer_cast<fUML::Semantics::Activities::ActivityEdgeInstance>(ref);
 				if (_r != nullptr)

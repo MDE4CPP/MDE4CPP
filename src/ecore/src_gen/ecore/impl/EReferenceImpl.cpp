@@ -321,7 +321,7 @@ void EReferenceImpl::resolveReferences(const int featureID, std::vector<std::sha
 		case ecore::ecorePackage::EREFERENCE_ATTRIBUTE_EKEYS:
 		{
 			const std::shared_ptr<Bag<ecore::EAttribute>>& _eKeys = getEKeys();
-			for(std::shared_ptr<ecore::EObject> ref : references)
+			for(const std::shared_ptr<ecore::EObject>& ref : references)
 			{
 				std::shared_ptr<ecore::EAttribute>  _r = std::dynamic_pointer_cast<ecore::EAttribute>(ref);
 				if (_r != nullptr)

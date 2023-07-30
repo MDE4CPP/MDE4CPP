@@ -595,7 +595,7 @@ void StereotypeImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveH
 	{
 		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
 		// Save 'icon'
-		for (std::shared_ptr<uml::Image> icon : *this->getIcon()) 
+		for (const std::shared_ptr<uml::Image>& icon : *this->getIcon()) 
 		{
 			saveHandler->addReference(icon, "icon", icon->eClass() != package->getImage_Class());
 		}

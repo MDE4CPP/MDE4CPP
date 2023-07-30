@@ -262,7 +262,7 @@ void TupleValueImpl::resolveReferences(const int featureID, std::vector<std::sha
 		case ocl::Values::ValuesPackage::TUPLEVALUE_ATTRIBUTE_ELEMENTS:
 		{
 			const std::shared_ptr<Bag<ocl::Values::NameValueBinding>>& _elements = getElements();
-			for(std::shared_ptr<ecore::EObject> ref : references)
+			for(const std::shared_ptr<ecore::EObject>& ref : references)
 			{
 				std::shared_ptr<ocl::Values::NameValueBinding>  _r = std::dynamic_pointer_cast<ocl::Values::NameValueBinding>(ref);
 				if (_r != nullptr)

@@ -285,7 +285,7 @@ void ConsiderIgnoreFragmentImpl::resolveReferences(const int featureID, std::vec
 		case uml::umlPackage::CONSIDERIGNOREFRAGMENT_ATTRIBUTE_MESSAGE:
 		{
 			const std::shared_ptr<Bag<uml::NamedElement>>& _message = getMessage();
-			for(std::shared_ptr<ecore::EObject> ref : references)
+			for(const std::shared_ptr<ecore::EObject>& ref : references)
 			{
 				std::shared_ptr<uml::NamedElement>  _r = std::dynamic_pointer_cast<uml::NamedElement>(ref);
 				if (_r != nullptr)

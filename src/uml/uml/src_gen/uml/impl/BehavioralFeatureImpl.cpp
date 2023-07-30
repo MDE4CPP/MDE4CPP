@@ -512,7 +512,7 @@ void BehavioralFeatureImpl::resolveReferences(const int featureID, std::vector<s
 		case uml::umlPackage::BEHAVIORALFEATURE_ATTRIBUTE_METHOD:
 		{
 			const std::shared_ptr<Bag<uml::Behavior>>& _method = getMethod();
-			for(std::shared_ptr<ecore::EObject> ref : references)
+			for(const std::shared_ptr<ecore::EObject>& ref : references)
 			{
 				std::shared_ptr<uml::Behavior>  _r = std::dynamic_pointer_cast<uml::Behavior>(ref);
 				if (_r != nullptr)
@@ -526,7 +526,7 @@ void BehavioralFeatureImpl::resolveReferences(const int featureID, std::vector<s
 		case uml::umlPackage::BEHAVIORALFEATURE_ATTRIBUTE_RAISEDEXCEPTION:
 		{
 			const std::shared_ptr<Bag<uml::Type>>& _raisedException = getRaisedException();
-			for(std::shared_ptr<ecore::EObject> ref : references)
+			for(const std::shared_ptr<ecore::EObject>& ref : references)
 			{
 				std::shared_ptr<uml::Type>  _r = std::dynamic_pointer_cast<uml::Type>(ref);
 				if (_r != nullptr)
@@ -565,13 +565,13 @@ void BehavioralFeatureImpl::saveContent(std::shared_ptr<persistence::interfaces:
 	{
 		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
 		// Save 'ownedParameter'
-		for (std::shared_ptr<uml::Parameter> ownedParameter : *this->getOwnedParameter()) 
+		for (const std::shared_ptr<uml::Parameter>& ownedParameter : *this->getOwnedParameter()) 
 		{
 			saveHandler->addReference(ownedParameter, "ownedParameter", ownedParameter->eClass() != package->getParameter_Class());
 		}
 
 		// Save 'ownedParameterSet'
-		for (std::shared_ptr<uml::ParameterSet> ownedParameterSet : *this->getOwnedParameterSet()) 
+		for (const std::shared_ptr<uml::ParameterSet>& ownedParameterSet : *this->getOwnedParameterSet()) 
 		{
 			saveHandler->addReference(ownedParameterSet, "ownedParameterSet", ownedParameterSet->eClass() != package->getParameterSet_Class());
 		}

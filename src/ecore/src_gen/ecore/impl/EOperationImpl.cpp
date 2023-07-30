@@ -465,7 +465,7 @@ void EOperationImpl::resolveReferences(const int featureID, std::vector<std::sha
 		case ecore::ecorePackage::EOPERATION_ATTRIBUTE_EEXCEPTIONS:
 		{
 			const std::shared_ptr<Bag<ecore::EClassifier>>& _eExceptions = getEExceptions();
-			for(std::shared_ptr<ecore::EObject> ref : references)
+			for(const std::shared_ptr<ecore::EObject>& ref : references)
 			{
 				std::shared_ptr<ecore::EClassifier>  _r = std::dynamic_pointer_cast<ecore::EClassifier>(ref);
 				if (_r != nullptr)
@@ -500,7 +500,7 @@ void EOperationImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveH
 	{
 		std::shared_ptr<ecore::ecorePackage> package = ecore::ecorePackage::eInstance();
 		// Save 'eParameters'
-		for (std::shared_ptr<ecore::EParameter> eParameters : *this->getEParameters()) 
+		for (const std::shared_ptr<ecore::EParameter>& eParameters : *this->getEParameters()) 
 		{
 			saveHandler->addReference(eParameters, "eParameters", eParameters->eClass() != package->getEParameter_Class());
 		}

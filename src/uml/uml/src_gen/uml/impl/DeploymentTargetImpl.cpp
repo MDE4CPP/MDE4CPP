@@ -310,7 +310,7 @@ void DeploymentTargetImpl::saveContent(std::shared_ptr<persistence::interfaces::
 	{
 		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
 		// Save 'deployment'
-		for (std::shared_ptr<uml::Deployment> deployment : *this->getDeployment()) 
+		for (const std::shared_ptr<uml::Deployment>& deployment : *this->getDeployment()) 
 		{
 			saveHandler->addReference(deployment, "deployment", deployment->eClass() != package->getDeployment_Class());
 		}

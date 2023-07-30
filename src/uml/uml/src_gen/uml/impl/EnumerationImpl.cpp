@@ -476,7 +476,7 @@ void EnumerationImpl::saveContent(std::shared_ptr<persistence::interfaces::XSave
 	{
 		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
 		// Save 'ownedLiteral'
-		for (std::shared_ptr<uml::EnumerationLiteral> ownedLiteral : *this->getOwnedLiteral()) 
+		for (const std::shared_ptr<uml::EnumerationLiteral>& ownedLiteral : *this->getOwnedLiteral()) 
 		{
 			saveHandler->addReference(ownedLiteral, "ownedLiteral", ownedLiteral->eClass() != package->getEnumerationLiteral_Class());
 		}

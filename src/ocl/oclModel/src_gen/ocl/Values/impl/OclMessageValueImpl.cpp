@@ -346,7 +346,7 @@ void OclMessageValueImpl::resolveReferences(const int featureID, std::vector<std
 		case ocl::Values::ValuesPackage::OCLMESSAGEVALUE_ATTRIBUTE_ARGUMENTS:
 		{
 			const std::shared_ptr<Bag<ocl::Values::NameValueBinding>>& _arguments = getArguments();
-			for(std::shared_ptr<ecore::EObject> ref : references)
+			for(const std::shared_ptr<ecore::EObject>& ref : references)
 			{
 				std::shared_ptr<ocl::Values::NameValueBinding>  _r = std::dynamic_pointer_cast<ocl::Values::NameValueBinding>(ref);
 				if (_r != nullptr)
