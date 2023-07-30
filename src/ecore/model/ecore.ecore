@@ -120,17 +120,17 @@
         eType="#//EAttribute" changeable="false" volatile="true" transient="true"
         derived="true">
       <eAnnotations source="http://tu-ilmenau.de/see/codegen">
-        <details key="getterBody" value="    std::shared_ptr&lt;Bag&lt;ecore::EAttribute> > eAllAttributes(new Bag&lt;ecore::EAttribute>());&#xD;&#xA;&#xD;&#xA;    std::shared_ptr&lt;Bag&lt;ecore::EAttribute> > attributeList = this->getEAttributes();&#xD;&#xA;    eAllAttributes->insert(eAllAttributes->end(), attributeList->begin(), attributeList->end());&#xD;&#xA;    std::shared_ptr&lt;Bag&lt;EClass> > classList = this->getESuperTypes();&#xD;&#xA;    for (std::shared_ptr&lt;EClass> c : *classList)&#xD;&#xA;    {&#xD;&#xA;        std::shared_ptr&lt;Bag&lt;EAttribute> > attributeList = c->getEAllAttributes();&#xD;&#xA;        eAllAttributes->insert(eAllAttributes->end(), attributeList->begin(), attributeList->end());&#xD;&#xA;    }&#xD;&#xA;    return eAllAttributes;"/>
-		<details key="suppressConstRefReturn"/>
-	 </eAnnotations>
+        <details key="getterBody" value="    std::shared_ptr&lt;Bag&lt;ecore::EAttribute> > eAllAttributes(new Bag&lt;ecore::EAttribute>());&#xA;&#xA;    const std::shared_ptr&lt;Bag&lt;ecore::EAttribute>>&amp; attributeList = this->getEAttributes();&#xA;    eAllAttributes->insert(eAllAttributes->end(), attributeList->begin(), attributeList->end());&#xA;    const std::shared_ptr&lt;Bag&lt;EClass>>&amp; classList = this->getESuperTypes();&#xA;    for (const std::shared_ptr&lt;EClass>&amp; c : *classList)&#xA;    {&#xA;        std::shared_ptr&lt;Bag&lt;EAttribute> > attributeList = c->getEAllAttributes();&#xA;        eAllAttributes->insert(eAllAttributes->end(), attributeList->begin(), attributeList->end());&#xA;    }&#xA;    return eAllAttributes;"/>
+        <details key="suppressConstRefReturn"/>
+      </eAnnotations>
     </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EReference" name="eAllReferences" upperBound="-1"
         eType="#//EReference" changeable="false" volatile="true" transient="true"
         derived="true">
       <eAnnotations source="http://tu-ilmenau.de/see/codegen">
-        <details key="getterBody" value="    std::shared_ptr&lt;Bag&lt;ecore::EReference> > eAllReferences(new Bag&lt;ecore::EReference>());&#xD;&#xA;&#xD;&#xA;    std::shared_ptr&lt;Bag&lt;ecore::EReference> > referenceList = this->getEReferences();&#xD;&#xA;    eAllReferences->insert(eAllReferences->end(), referenceList->begin(), referenceList->end());&#xD;&#xA;    std::shared_ptr&lt;Bag&lt;EClass> > classList = this->getESuperTypes();&#xD;&#xA;    for (std::shared_ptr&lt;EClass> c : *classList)&#xD;&#xA;    {&#xD;&#xA;        std::shared_ptr&lt;Bag&lt;EReference> > referenceList = c->getEAllReferences();&#xD;&#xA;        eAllReferences->insert(eAllReferences->end(), referenceList->begin(), referenceList->end());&#xD;&#xA;    }&#xD;&#xA;    return eAllReferences;"/>
-		<details key="suppressConstRefReturn"/>
-	  </eAnnotations>
+        <details key="getterBody" value="    std::shared_ptr&lt;Bag&lt;ecore::EReference> > eAllReferences(new Bag&lt;ecore::EReference>());&#xA;&#xA;    const std::shared_ptr&lt;Bag&lt;ecore::EReference>>&amp; referenceList = this->getEReferences();&#xA;    eAllReferences->insert(eAllReferences->end(), referenceList->begin(), referenceList->end());&#xA;    const std::shared_ptr&lt;Bag&lt;EClass>>&amp; classList = this->getESuperTypes();&#xA;    for (const std::shared_ptr&lt;EClass>&amp; c : *classList)&#xA;    {&#xA;        std::shared_ptr&lt;Bag&lt;EReference> > referenceList = c->getEAllReferences();&#xA;        eAllReferences->insert(eAllReferences->end(), referenceList->begin(), referenceList->end());&#xA;    }&#xA;    return eAllReferences;"/>
+        <details key="suppressConstRefReturn"/>
+      </eAnnotations>
     </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EReference" name="eReferences" upperBound="-1"
         eType="#//EReference" volatile="true" transient="true" derived="true">
@@ -147,24 +147,24 @@
         eType="#//EOperation" changeable="false" volatile="true" transient="true"
         derived="true">
       <eAnnotations source="http://tu-ilmenau.de/see/codegen">
-        <details key="getterBody" value="std::shared_ptr&lt; Bag&lt;ecore::EOperation> > eAllOperations(new Bag&lt;ecore::EOperation> () );&#xD;&#xA;&#xD;&#xA;    std::shared_ptr&lt;Bag&lt;ecore::EOperation> > operationList = this->getEOperations();&#xD;&#xA;    eAllOperations->insert(eAllOperations->end(), operationList->begin(), operationList->end());&#xD;&#xA;    std::shared_ptr&lt;Bag&lt;EClass> > classList = this->getESuperTypes();&#xD;&#xA;    for (std::shared_ptr&lt;EClass > c : *classList)&#xD;&#xA;    {&#xD;&#xA;    &#x9;std::shared_ptr&lt; Bag&lt; EOperation> > operationList = c->getEAllOperations();&#xD;&#xA;        eAllOperations->insert(eAllOperations->end(), operationList->begin(), operationList->end());&#xD;&#xA;    }&#xD;&#xA;    return eAllOperations;"/>
-		<details key="suppressConstRefReturn"/>
-	  </eAnnotations>
+        <details key="getterBody" value="std::shared_ptr&lt; Bag&lt;ecore::EOperation> > eAllOperations(new Bag&lt;ecore::EOperation> () );&#xA;const std::shared_ptr&lt;Bag&lt;ecore::EOperation>>&amp; operationList = this->getEOperations();&#xA;eAllOperations->insert(eAllOperations->end(), operationList->begin(), operationList->end());&#xA;const std::shared_ptr&lt;Bag&lt;EClass>>&amp; classList = this->getESuperTypes();&#xA;for (const std::shared_ptr&lt;EClass >&amp; c : *classList)&#xA;{&#xA;&#x9;std::shared_ptr&lt; Bag&lt; EOperation> > operationList = c->getEAllOperations();&#xA;&#x9;eAllOperations->insert(eAllOperations->end(), operationList->begin(), operationList->end());&#xA;}&#xA;return eAllOperations;"/>
+        <details key="suppressConstRefReturn"/>
+      </eAnnotations>
     </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EReference" name="eAllStructuralFeatures"
         upperBound="-1" eType="#//EStructuralFeature" changeable="false" volatile="true"
         transient="true" derived="true">
       <eAnnotations source="http://tu-ilmenau.de/see/codegen">
-        <details key="getterBody" value="std::shared_ptr&lt; Bag&lt;ecore::EStructuralFeature> > eAllStructuralFeatures( new Bag&lt;ecore::EStructuralFeature> ());&#xD;&#xA;&#xD;&#xA;    std::shared_ptr&lt; Bag&lt; EStructuralFeature> > featureList = this->getEStructuralFeatures();&#xD;&#xA;    eAllStructuralFeatures->insert(eAllStructuralFeatures->end(), featureList->begin(), featureList->end());&#xD;&#xA;    std::shared_ptr&lt;Bag&lt;EClass> > classList = this->getESuperTypes();&#xD;&#xA;    for (std::shared_ptr&lt;EClass > c : *classList)&#xD;&#xA;    {&#xD;&#xA;    &#x9;std::shared_ptr&lt;Bag&lt;EStructuralFeature> > featureList = c->getEAllStructuralFeatures();&#xD;&#xA;        eAllStructuralFeatures->insert(eAllStructuralFeatures->end(), featureList->begin(), featureList->end());&#xD;&#xA;    }&#xD;&#xA;    return eAllStructuralFeatures;"/>
-		<details key="suppressConstRefReturn"/>
-	  </eAnnotations>
+        <details key="getterBody" value="std::shared_ptr&lt; Bag&lt;ecore::EStructuralFeature> > eAllStructuralFeatures( new Bag&lt;ecore::EStructuralFeature> ());&#xA;const std::shared_ptr&lt; Bag&lt;EStructuralFeature>>&amp; featureList = this->getEStructuralFeatures();&#xA;eAllStructuralFeatures->insert(eAllStructuralFeatures->end(), featureList->begin(), featureList->end());&#xA;const std::shared_ptr&lt;Bag&lt;EClass>>&amp; classList = this->getESuperTypes();&#xA;for (const std::shared_ptr&lt;EClass >&amp; c : *classList)&#xA;{&#xA;&#x9;std::shared_ptr&lt;Bag&lt;EStructuralFeature> > featureList = c->getEAllStructuralFeatures();&#xA;&#x9;eAllStructuralFeatures->insert(eAllStructuralFeatures->end(), featureList->begin(), featureList->end());&#xA;}&#xA;return eAllStructuralFeatures;"/>
+        <details key="suppressConstRefReturn"/>
+      </eAnnotations>
     </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EReference" name="eAllSuperTypes" upperBound="-1"
         eType="#//EClass" changeable="false" volatile="true" transient="true" derived="true">
       <eAnnotations source="http://tu-ilmenau.de/see/codegen">
-        <details key="getterBody" value="std::shared_ptr&lt; Bag&lt;ecore::EClass> > eAllSuperTypes(new Bag&lt;ecore::EClass>  ());&#xD;&#xA;&#xD;&#xA;&#x9;std::shared_ptr&lt;Bag&lt;EClass> > classList = this->getESuperTypes();&#xD;&#xA;    eAllSuperTypes->insert(eAllSuperTypes->end(), classList->begin(), classList->end());&#xD;&#xA;    for (std::shared_ptr&lt;EClass > c : *classList)&#xD;&#xA;    {&#xD;&#xA;    &#x9;std::shared_ptr&lt;Bag&lt;EClass> > classList = c->getEAllSuperTypes();&#xD;&#xA;        eAllSuperTypes->insert(eAllSuperTypes->end(), classList->begin(), classList->end());&#xD;&#xA;    }&#xD;&#xA;    return eAllSuperTypes;"/>
-		<details key="suppressConstRefReturn"/>
-	  </eAnnotations>
+        <details key="getterBody" value="std::shared_ptr&lt; Bag&lt;ecore::EClass> > eAllSuperTypes(new Bag&lt;ecore::EClass>  ());&#xA;const std::shared_ptr&lt;Bag&lt;EClass>>&amp; classList = this->getESuperTypes();&#xA;eAllSuperTypes->insert(eAllSuperTypes->end(), classList->begin(), classList->end());&#xA;for (const std::shared_ptr&lt;EClass >&amp; c : *classList)&#xA;{&#xA;&#x9;std::shared_ptr&lt;Bag&lt;EClass> > classList = c->getEAllSuperTypes();&#xA;&#x9;eAllSuperTypes->insert(eAllSuperTypes->end(), classList->begin(), classList->end());&#xA;}&#xA;return eAllSuperTypes;"/>
+        <details key="suppressConstRefReturn"/>
+      </eAnnotations>
     </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EReference" name="eIDAttribute" eType="#//EAttribute"
         volatile="true" transient="true" derived="true" resolveProxies="false"/>
@@ -243,21 +243,21 @@
     </eAnnotations>
     <eOperations name="getEEnumLiteral" eType="#//EEnumLiteral">
       <eAnnotations source="http://tu-ilmenau.de/see/codegen">
-        <details key="body" value="    for (std::shared_ptr&lt;EEnumLiteral> e : *getELiterals())&#xD;&#xA;    {&#xD;&#xA;        if(e->getName()==name)&#xD;&#xA;        {&#xD;&#xA;            return e;&#xD;&#xA;        }&#xD;&#xA;    }&#xD;&#xA;    return std::shared_ptr&lt;ecore::EEnumLiteral>();"/>
+        <details key="body" value="    for (const std::shared_ptr&lt;EEnumLiteral>&amp; e : *getELiterals())&#xA;    {&#xA;        if(e->getName()==name)&#xA;        {&#xA;            return e;&#xA;        }&#xA;    }&#xA;    return std::shared_ptr&lt;ecore::EEnumLiteral>();"/>
         <details key="const"/>
       </eAnnotations>
       <eParameters name="name" eType="#//EString"/>
     </eOperations>
     <eOperations name="getEEnumLiteral" eType="#//EEnumLiteral">
       <eAnnotations source="http://tu-ilmenau.de/see/codegen">
-        <details key="body" value="    for (std::shared_ptr&lt;EEnumLiteral> e : *getELiterals())&#xD;&#xA;    {&#xD;&#xA;        if(e->getValue()==value)&#xD;&#xA;        {&#xD;&#xA;            return e;&#xD;&#xA;        }&#xD;&#xA;    }&#xD;&#xA;    return std::shared_ptr&lt;ecore::EEnumLiteral>();&#xD;&#xA;"/>
+        <details key="body" value="    for (const std::shared_ptr&lt;EEnumLiteral>&amp; e : *getELiterals())&#xA;    {&#xA;        if(e->getValue()==value)&#xA;        {&#xA;            return e;&#xA;        }&#xA;    }&#xA;    return std::shared_ptr&lt;ecore::EEnumLiteral>();&#xA;"/>
         <details key="const"/>
       </eAnnotations>
       <eParameters name="value" eType="#//EInt"/>
     </eOperations>
     <eOperations name="getEEnumLiteralByLiteral" eType="#//EEnumLiteral">
       <eAnnotations source="http://tu-ilmenau.de/see/codegen">
-        <details key="body" value="    for (std::shared_ptr&lt;EEnumLiteral> e : *getELiterals())&#xD;&#xA;    {&#xD;&#xA;        if(e->getLiteral()==literal)&#xD;&#xA;        {&#xD;&#xA;            return e;&#xD;&#xA;        }&#xD;&#xA;    }&#xD;&#xA;    return std::shared_ptr&lt;ecore::EEnumLiteral>  ();"/>
+        <details key="body" value="    for (const std::shared_ptr&lt;EEnumLiteral>&amp; e : *getELiterals())&#xA;    {&#xA;        if(e->getLiteral()==literal)&#xA;        {&#xA;            return e;&#xA;        }&#xA;    }&#xA;    return std::shared_ptr&lt;ecore::EEnumLiteral>  ();"/>
         <details key="const"/>
       </eAnnotations>
       <eParameters name="literal" eType="#//EString"/>
@@ -514,7 +514,7 @@
     </eAnnotations>
     <eOperations name="getEClassifier" eType="#//EClassifier">
       <eAnnotations source="http://tu-ilmenau.de/see/codegen">
-        <details key="body" value="std::shared_ptr&lt;Bag&lt;EClassifier> > classifierList = getEClassifiers();&#xA;    for (std::shared_ptr&lt;EClassifier> c : *classifierList)&#xA;    {&#xA;        if(c->getName()==name)&#xA;        {&#xA;            return c;&#xA;        }&#xA;    }&#xA;    return nullptr;"/>
+        <details key="body" value="const std::shared_ptr&lt;Bag&lt;EClassifier>>&amp; classifierList = getEClassifiers();&#xA;    for (const std::shared_ptr&lt;EClassifier>&amp; c : *classifierList)&#xA;    {&#xA;        if(c->getName()==name)&#xA;        {&#xA;            return c;&#xA;        }&#xA;    }&#xA;    return nullptr;"/>
         <details key="const"/>
       </eAnnotations>
       <eParameters name="name" eType="#//EString"/>

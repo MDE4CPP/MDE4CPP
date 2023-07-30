@@ -375,7 +375,7 @@
         <details key="originalName" value="superClass"/>
       </eAnnotations>
       <eAnnotations source="http://tu-ilmenau.de/see/codegen">
-        <details key="body" value="std::shared_ptr&lt;Bag&lt;uml::Class> > superClass(new Bag&lt;uml::Class> () );&#x9;&#xD;&#xA;&#x9;&#xD;&#xA;    std::shared_ptr&lt;Bag&lt;uml::Classifier> > classifierList = getGenerals();&#x9;&#xD;&#xA;    for (std::shared_ptr&lt;Classifier> c : *classifierList)&#x9;&#xD;&#xA;    {&#x9;&#xD;&#xA;    &#x9;std::shared_ptr&lt;uml::Class> cl = std::dynamic_pointer_cast&lt;uml::Class>(c);&#xD;&#xA;        if(cl)&#xD;&#xA;        {&#xD;&#xA;            superClass->push_back(cl);&#xD;&#xA;        }&#x9;&#xD;&#xA;    }&#x9;&#xD;&#xA;    return superClass;"/>
+        <details key="body" value="std::shared_ptr&lt;Bag&lt;uml::Class> > superClass(new Bag&lt;uml::Class> () );&#x9;&#xA;&#x9;&#xA;    std::shared_ptr&lt;Bag&lt;uml::Classifier> > classifierList = getGenerals();&#x9;&#xA;    for (const std::shared_ptr&lt;Classifier>&amp; c : *classifierList)&#x9;&#xA;    {&#x9;&#xA;    &#x9;std::shared_ptr&lt;uml::Class> cl = std::dynamic_pointer_cast&lt;uml::Class>(c);&#xA;        if(cl)&#xA;        {&#xA;            superClass->push_back(cl);&#xA;        }&#x9;&#xA;    }&#x9;&#xA;    return superClass;"/>
       </eAnnotations>
     </eOperations>
     <eOperations name="getAllOperations" ordered="false" upperBound="-1" eType="#//Operation">
@@ -1242,7 +1242,7 @@
         <details key="originalName" value="qualifiedName"/>
       </eAnnotations>
       <eAnnotations source="http://tu-ilmenau.de/see/codegen">
-        <details key="body" value="std::shared_ptr&lt; Bag&lt;uml::Namespace> >  allNS = allNamespaces();&#xD;&#xA;&#xD;&#xA;    if(!this->getName().empty() &amp;&amp; std::none_of(allNS->cbegin(), allNS->cend(), [](std::shared_ptr&lt;uml::Namespace> ns){ return ns->getName().empty(); }))&#xD;&#xA;    {&#xD;&#xA;        std::string ret;&#xD;&#xA;        for(std::shared_ptr&lt;uml::Namespace> ns : *allNS )&#xD;&#xA;        {&#xD;&#xA;            ret += ns->getName() + separator();&#xD;&#xA;        }&#xD;&#xA;        ret += getName();&#xD;&#xA;        return ret;&#xD;&#xA;    }&#xD;&#xA;    else&#xD;&#xA;    {&#xD;&#xA;        return std::string();&#xD;&#xA;    }"/>
+        <details key="body" value="std::shared_ptr&lt; Bag&lt;uml::Namespace> >  allNS = allNamespaces();&#xA;&#xA;    if(!this->getName().empty() &amp;&amp; std::none_of(allNS->cbegin(), allNS->cend(), [](std::shared_ptr&lt;uml::Namespace> ns){ return ns->getName().empty(); }))&#xA;    {&#xA;        std::string ret;&#xA;        for(const std::shared_ptr&lt;uml::Namespace>&amp; ns : *allNS )&#xA;        {&#xA;            ret += ns->getName() + separator();&#xA;        }&#xA;        ret += getName();&#xA;        return ret;&#xA;    }&#xA;    else&#xA;    {&#xA;        return std::string();&#xA;    }"/>
         <details key="const"/>
       </eAnnotations>
     </eOperations>
