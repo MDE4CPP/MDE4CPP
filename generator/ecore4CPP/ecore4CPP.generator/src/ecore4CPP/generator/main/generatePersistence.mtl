@@ -429,7 +429,7 @@ void [aClass.name.concat('Impl')/]::saveContent(std::shared_ptr<[generatePersist
 [for (aReference : EReference | refList) separator ('\n')]
 		// Save '[aReference.name/]'
 		[if (aReference.upperBound = 1)]
-		[aReference.generateReferenceType()/] [aReference.name/] = this->[aReference.GetterName()/]();
+		const [aReference.generateReferenceType()/]& [aReference.name/] = this->[aReference.GetterName()/]();
 		if ([aReference.name/] != nullptr)
 		{
 			saveHandler->addReference([aReference.name/], "[aReference.name/]", [aReference.name/]->eClass() != package->get[aReference.eType.getMemberNameUpperFirst()/]());

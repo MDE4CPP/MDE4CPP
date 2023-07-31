@@ -306,7 +306,7 @@ void [anEReference.eContainingClass.name.toUpperFirst()/]Impl::[redefinedERefere
 		[anEReference.getClassMemberName()/]->setDefaultValueLiteral(defaultValue);
 	}				
 	[if not anEReference.eOpposite.oclIsUndefined()]						
-	std::shared_ptr<ecore::EReference>  otherEnd = [anEReference.eOpposite.eContainingClass.getPackage_eInstance()/]->[anEReference.eOpposite.packageGetter()/];
+	const std::shared_ptr<ecore::EReference>& otherEnd = [anEReference.eOpposite.eContainingClass.getPackage_eInstance()/]->[anEReference.eOpposite.packageGetter()/];
 	if (otherEnd != nullptr)
     {
    		[anEReference.getClassMemberName()/]->setEOpposite(otherEnd);

@@ -85,8 +85,8 @@
 [template public generateOperationType(eOperation : EOperation) post(trim())]
 [if (eOperation.hasKey(keyCPPType()))][eOperation.valueKey(keyCPPType())/]
 [elseif (not (eOperation.upperBound = 1))]
-	[if (not eOperation.eGenericType.eClassifier.oclIsKindOf(EDataType))] std::shared_ptr<Bag<[eOperation.eGenericType.generateCppType(false)/]> >
-	[else] std::shared_ptr<Bag<[eOperation.eGenericType.generateCppType(false)/]> >
+	[if (not eOperation.eGenericType.eClassifier.oclIsKindOf(EDataType))] std::shared_ptr<Bag<[eOperation.eGenericType.generateCppType(false)/]>>
+	[else] std::shared_ptr<Bag<[eOperation.eGenericType.generateCppType(false)/]>>
 	[/if]
 [elseif ((not eOperation.eType.oclIsUndefined()) 
 	and ((not eOperation.eType.oclIsKindOf(EDataType)) 

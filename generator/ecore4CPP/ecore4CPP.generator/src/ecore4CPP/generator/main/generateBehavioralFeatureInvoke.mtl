@@ -100,7 +100,7 @@ Any [aClass.name.toUpperFirst().concat('Impl')/]::eInvoke(int operationID, const
 			result = eAnyObject(this->[aOperation.name.toString()/]([for (inPar : EParameter | aOperation.eParameters) separator (',')]incoming_param_[inPar.name/][/for]), [aOperation.eType.ePackage.generateNamespaceDefinition()/]::[aOperation.eType.ePackage.name/]Package::[aOperation.eType.oclAsType(EClass).getStaticAttributeIDName()/]);
 					[/if]
 				[else] [comment Returntype Bag<EObject>/]
-			[aOperation.generateOperationType()/] resultList = this->[aOperation.name.toString()/]([for (inPar : EParameter | aOperation.eParameters) separator (',')]incoming_param_[inPar.name/][/for]);
+			const [aOperation.generateOperationType()/]& resultList = this->[aOperation.name.toString()/]([for (inPar : EParameter | aOperation.eParameters) separator (',')]incoming_param_[inPar.name/][/for]);
 			return eAnyBag(resultList,[aOperation.eType.ePackage.generateNamespaceDefinition()/]::[aOperation.eType.ePackage.name/]Package::[aOperation.eType.oclAsType(EClass).getStaticAttributeIDName()/]);
 				[/if]
 			[elseif (aOperation.isAnyNoPtr())]
