@@ -257,7 +257,12 @@ std::shared_ptr<ecore::EObject>  [className/]::copy() const
 
 const std::shared_ptr<uml::Class>& [className/]::getMetaClass() const
 {
+	[if (aClass.oclIsKindOf(Stereotype))]
+	static const std::shared_ptr<uml::Class> metaClass = [aPackage.name.concat('PackageImpl')/]::eInstance()->[aClass.generatePackageGetterCall(aClass)/];
+	return metaClass;
+	[else]
 	return [aPackage.name.concat('PackageImpl')/]::eInstance()->[aClass.generatePackageGetterCall(aClass)/];
+	[/if]
 }
 
 void [className/]::instantiate()
