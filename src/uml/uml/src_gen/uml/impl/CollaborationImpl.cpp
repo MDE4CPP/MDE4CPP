@@ -569,8 +569,8 @@ bool CollaborationImpl::eSet(int featureID, const Any& newValue)
 				try
 				{
 					std::shared_ptr<Bag<uml::ConnectableElement>> collaborationRoleList= newValue->get<std::shared_ptr<Bag<uml::ConnectableElement>>>();
-					std::shared_ptr<Bag<uml::ConnectableElement>> _collaborationRole=getCollaborationRole();
-					for(const std::shared_ptr<uml::ConnectableElement> indexCollaborationRole: *_collaborationRole)
+					const std::shared_ptr<Bag<uml::ConnectableElement>>& _collaborationRole=getCollaborationRole();
+					for(const std::shared_ptr<uml::ConnectableElement>& indexCollaborationRole: *_collaborationRole)
 					{
 						if (!(collaborationRoleList->includes(indexCollaborationRole)))
 						{
@@ -578,7 +578,7 @@ bool CollaborationImpl::eSet(int featureID, const Any& newValue)
 						}
 					}
 
-					for(const std::shared_ptr<uml::ConnectableElement> indexCollaborationRole: *collaborationRoleList)
+					for(const std::shared_ptr<uml::ConnectableElement>& indexCollaborationRole: *collaborationRoleList)
 					{
 						if (!(_collaborationRole->includes(indexCollaborationRole)))
 						{

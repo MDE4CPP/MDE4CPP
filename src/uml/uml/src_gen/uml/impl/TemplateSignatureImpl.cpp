@@ -445,8 +445,8 @@ bool TemplateSignatureImpl::eSet(int featureID, const Any& newValue)
 				try
 				{
 					std::shared_ptr<Bag<uml::TemplateParameter>> ownedParameterList= newValue->get<std::shared_ptr<Bag<uml::TemplateParameter>>>();
-					std::shared_ptr<Bag<uml::TemplateParameter>> _ownedParameter=getOwnedParameter();
-					for(const std::shared_ptr<uml::TemplateParameter> indexOwnedParameter: *_ownedParameter)
+					const std::shared_ptr<Bag<uml::TemplateParameter>>& _ownedParameter=getOwnedParameter();
+					for(const std::shared_ptr<uml::TemplateParameter>& indexOwnedParameter: *_ownedParameter)
 					{
 						if (!(ownedParameterList->includes(indexOwnedParameter)))
 						{
@@ -454,7 +454,7 @@ bool TemplateSignatureImpl::eSet(int featureID, const Any& newValue)
 						}
 					}
 
-					for(const std::shared_ptr<uml::TemplateParameter> indexOwnedParameter: *ownedParameterList)
+					for(const std::shared_ptr<uml::TemplateParameter>& indexOwnedParameter: *ownedParameterList)
 					{
 						if (!(_ownedParameter->includes(indexOwnedParameter)))
 						{
@@ -482,8 +482,8 @@ bool TemplateSignatureImpl::eSet(int featureID, const Any& newValue)
 				try
 				{
 					std::shared_ptr<Bag<uml::TemplateParameter>> parameterList= newValue->get<std::shared_ptr<Bag<uml::TemplateParameter>>>();
-					std::shared_ptr<Bag<uml::TemplateParameter>> _parameter=getParameter();
-					for(const std::shared_ptr<uml::TemplateParameter> indexParameter: *_parameter)
+					const std::shared_ptr<Bag<uml::TemplateParameter>>& _parameter=getParameter();
+					for(const std::shared_ptr<uml::TemplateParameter>& indexParameter: *_parameter)
 					{
 						if (!(parameterList->includes(indexParameter)))
 						{
@@ -491,7 +491,7 @@ bool TemplateSignatureImpl::eSet(int featureID, const Any& newValue)
 						}
 					}
 
-					for(const std::shared_ptr<uml::TemplateParameter> indexParameter: *parameterList)
+					for(const std::shared_ptr<uml::TemplateParameter>& indexParameter: *parameterList)
 					{
 						if (!(_parameter->includes(indexParameter)))
 						{

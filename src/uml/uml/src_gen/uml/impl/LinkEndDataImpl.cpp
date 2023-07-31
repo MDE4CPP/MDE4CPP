@@ -453,8 +453,8 @@ bool LinkEndDataImpl::eSet(int featureID, const Any& newValue)
 				try
 				{
 					std::shared_ptr<Bag<uml::QualifierValue>> qualifierList= newValue->get<std::shared_ptr<Bag<uml::QualifierValue>>>();
-					std::shared_ptr<Bag<uml::QualifierValue>> _qualifier=getQualifier();
-					for(const std::shared_ptr<uml::QualifierValue> indexQualifier: *_qualifier)
+					const std::shared_ptr<Bag<uml::QualifierValue>>& _qualifier=getQualifier();
+					for(const std::shared_ptr<uml::QualifierValue>& indexQualifier: *_qualifier)
 					{
 						if (!(qualifierList->includes(indexQualifier)))
 						{
@@ -462,7 +462,7 @@ bool LinkEndDataImpl::eSet(int featureID, const Any& newValue)
 						}
 					}
 
-					for(const std::shared_ptr<uml::QualifierValue> indexQualifier: *qualifierList)
+					for(const std::shared_ptr<uml::QualifierValue>& indexQualifier: *qualifierList)
 					{
 						if (!(_qualifier->includes(indexQualifier)))
 						{

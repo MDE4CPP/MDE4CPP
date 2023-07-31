@@ -515,8 +515,8 @@ bool LifelineImpl::eSet(int featureID, const Any& newValue)
 				try
 				{
 					std::shared_ptr<Bag<uml::InteractionFragment>> coveredByList= newValue->get<std::shared_ptr<Bag<uml::InteractionFragment>>>();
-					std::shared_ptr<Bag<uml::InteractionFragment>> _coveredBy=getCoveredBy();
-					for(const std::shared_ptr<uml::InteractionFragment> indexCoveredBy: *_coveredBy)
+					const std::shared_ptr<Bag<uml::InteractionFragment>>& _coveredBy=getCoveredBy();
+					for(const std::shared_ptr<uml::InteractionFragment>& indexCoveredBy: *_coveredBy)
 					{
 						if (!(coveredByList->includes(indexCoveredBy)))
 						{
@@ -524,7 +524,7 @@ bool LifelineImpl::eSet(int featureID, const Any& newValue)
 						}
 					}
 
-					for(const std::shared_ptr<uml::InteractionFragment> indexCoveredBy: *coveredByList)
+					for(const std::shared_ptr<uml::InteractionFragment>& indexCoveredBy: *coveredByList)
 					{
 						if (!(_coveredBy->includes(indexCoveredBy)))
 						{

@@ -469,8 +469,8 @@ bool EReferenceImpl::eSet(int featureID, const Any& newValue)
 				try
 				{
 					std::shared_ptr<Bag<ecore::EAttribute>> eKeysList= newValue->get<std::shared_ptr<Bag<ecore::EAttribute>>>();
-					std::shared_ptr<Bag<ecore::EAttribute>> _eKeys=getEKeys();
-					for(const std::shared_ptr<ecore::EAttribute> indexEKeys: *_eKeys)
+					const std::shared_ptr<Bag<ecore::EAttribute>>& _eKeys=getEKeys();
+					for(const std::shared_ptr<ecore::EAttribute>& indexEKeys: *_eKeys)
 					{
 						if (!(eKeysList->includes(indexEKeys)))
 						{
@@ -478,7 +478,7 @@ bool EReferenceImpl::eSet(int featureID, const Any& newValue)
 						}
 					}
 
-					for(const std::shared_ptr<ecore::EAttribute> indexEKeys: *eKeysList)
+					for(const std::shared_ptr<ecore::EAttribute>& indexEKeys: *eKeysList)
 					{
 						if (!(_eKeys->includes(indexEKeys)))
 						{

@@ -827,8 +827,8 @@ bool ArtifactImpl::eSet(int featureID, const Any& newValue)
 				try
 				{
 					std::shared_ptr<Bag<uml::Manifestation>> manifestationList= newValue->get<std::shared_ptr<Bag<uml::Manifestation>>>();
-					std::shared_ptr<Bag<uml::Manifestation>> _manifestation=getManifestation();
-					for(const std::shared_ptr<uml::Manifestation> indexManifestation: *_manifestation)
+					const std::shared_ptr<Bag<uml::Manifestation>>& _manifestation=getManifestation();
+					for(const std::shared_ptr<uml::Manifestation>& indexManifestation: *_manifestation)
 					{
 						if (!(manifestationList->includes(indexManifestation)))
 						{
@@ -836,7 +836,7 @@ bool ArtifactImpl::eSet(int featureID, const Any& newValue)
 						}
 					}
 
-					for(const std::shared_ptr<uml::Manifestation> indexManifestation: *manifestationList)
+					for(const std::shared_ptr<uml::Manifestation>& indexManifestation: *manifestationList)
 					{
 						if (!(_manifestation->includes(indexManifestation)))
 						{
@@ -864,8 +864,8 @@ bool ArtifactImpl::eSet(int featureID, const Any& newValue)
 				try
 				{
 					std::shared_ptr<Bag<uml::Artifact>> nestedArtifactList= newValue->get<std::shared_ptr<Bag<uml::Artifact>>>();
-					std::shared_ptr<Bag<uml::Artifact>> _nestedArtifact=getNestedArtifact();
-					for(const std::shared_ptr<uml::Artifact> indexNestedArtifact: *_nestedArtifact)
+					const std::shared_ptr<Bag<uml::Artifact>>& _nestedArtifact=getNestedArtifact();
+					for(const std::shared_ptr<uml::Artifact>& indexNestedArtifact: *_nestedArtifact)
 					{
 						if (!(nestedArtifactList->includes(indexNestedArtifact)))
 						{
@@ -873,7 +873,7 @@ bool ArtifactImpl::eSet(int featureID, const Any& newValue)
 						}
 					}
 
-					for(const std::shared_ptr<uml::Artifact> indexNestedArtifact: *nestedArtifactList)
+					for(const std::shared_ptr<uml::Artifact>& indexNestedArtifact: *nestedArtifactList)
 					{
 						if (!(_nestedArtifact->includes(indexNestedArtifact)))
 						{
@@ -901,8 +901,8 @@ bool ArtifactImpl::eSet(int featureID, const Any& newValue)
 				try
 				{
 					std::shared_ptr<Bag<uml::Property>> ownedAttributeList= newValue->get<std::shared_ptr<Bag<uml::Property>>>();
-					std::shared_ptr<Bag<uml::Property>> _ownedAttribute=getOwnedAttribute();
-					for(const std::shared_ptr<uml::Property> indexOwnedAttribute: *_ownedAttribute)
+					const std::shared_ptr<Bag<uml::Property>>& _ownedAttribute=getOwnedAttribute();
+					for(const std::shared_ptr<uml::Property>& indexOwnedAttribute: *_ownedAttribute)
 					{
 						if (!(ownedAttributeList->includes(indexOwnedAttribute)))
 						{
@@ -910,7 +910,7 @@ bool ArtifactImpl::eSet(int featureID, const Any& newValue)
 						}
 					}
 
-					for(const std::shared_ptr<uml::Property> indexOwnedAttribute: *ownedAttributeList)
+					for(const std::shared_ptr<uml::Property>& indexOwnedAttribute: *ownedAttributeList)
 					{
 						if (!(_ownedAttribute->includes(indexOwnedAttribute)))
 						{
@@ -938,8 +938,8 @@ bool ArtifactImpl::eSet(int featureID, const Any& newValue)
 				try
 				{
 					std::shared_ptr<Bag<uml::Operation>> ownedOperationList= newValue->get<std::shared_ptr<Bag<uml::Operation>>>();
-					std::shared_ptr<Bag<uml::Operation>> _ownedOperation=getOwnedOperation();
-					for(const std::shared_ptr<uml::Operation> indexOwnedOperation: *_ownedOperation)
+					const std::shared_ptr<Bag<uml::Operation>>& _ownedOperation=getOwnedOperation();
+					for(const std::shared_ptr<uml::Operation>& indexOwnedOperation: *_ownedOperation)
 					{
 						if (!(ownedOperationList->includes(indexOwnedOperation)))
 						{
@@ -947,7 +947,7 @@ bool ArtifactImpl::eSet(int featureID, const Any& newValue)
 						}
 					}
 
-					for(const std::shared_ptr<uml::Operation> indexOwnedOperation: *ownedOperationList)
+					for(const std::shared_ptr<uml::Operation>& indexOwnedOperation: *ownedOperationList)
 					{
 						if (!(_ownedOperation->includes(indexOwnedOperation)))
 						{

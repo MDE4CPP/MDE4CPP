@@ -555,8 +555,8 @@ bool ReclassifyObjectActionImpl::eSet(int featureID, const Any& newValue)
 				try
 				{
 					std::shared_ptr<Bag<uml::Classifier>> newClassifierList= newValue->get<std::shared_ptr<Bag<uml::Classifier>>>();
-					std::shared_ptr<Bag<uml::Classifier>> _newClassifier=getNewClassifier();
-					for(const std::shared_ptr<uml::Classifier> indexNewClassifier: *_newClassifier)
+					const std::shared_ptr<Bag<uml::Classifier>>& _newClassifier=getNewClassifier();
+					for(const std::shared_ptr<uml::Classifier>& indexNewClassifier: *_newClassifier)
 					{
 						if (!(newClassifierList->includes(indexNewClassifier)))
 						{
@@ -564,7 +564,7 @@ bool ReclassifyObjectActionImpl::eSet(int featureID, const Any& newValue)
 						}
 					}
 
-					for(const std::shared_ptr<uml::Classifier> indexNewClassifier: *newClassifierList)
+					for(const std::shared_ptr<uml::Classifier>& indexNewClassifier: *newClassifierList)
 					{
 						if (!(_newClassifier->includes(indexNewClassifier)))
 						{
@@ -600,8 +600,8 @@ bool ReclassifyObjectActionImpl::eSet(int featureID, const Any& newValue)
 				try
 				{
 					std::shared_ptr<Bag<uml::Classifier>> oldClassifierList= newValue->get<std::shared_ptr<Bag<uml::Classifier>>>();
-					std::shared_ptr<Bag<uml::Classifier>> _oldClassifier=getOldClassifier();
-					for(const std::shared_ptr<uml::Classifier> indexOldClassifier: *_oldClassifier)
+					const std::shared_ptr<Bag<uml::Classifier>>& _oldClassifier=getOldClassifier();
+					for(const std::shared_ptr<uml::Classifier>& indexOldClassifier: *_oldClassifier)
 					{
 						if (!(oldClassifierList->includes(indexOldClassifier)))
 						{
@@ -609,7 +609,7 @@ bool ReclassifyObjectActionImpl::eSet(int featureID, const Any& newValue)
 						}
 					}
 
-					for(const std::shared_ptr<uml::Classifier> indexOldClassifier: *oldClassifierList)
+					for(const std::shared_ptr<uml::Classifier>& indexOldClassifier: *oldClassifierList)
 					{
 						if (!(_oldClassifier->includes(indexOldClassifier)))
 						{

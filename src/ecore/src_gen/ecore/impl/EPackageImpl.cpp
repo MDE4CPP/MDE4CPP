@@ -538,8 +538,8 @@ bool EPackageImpl::eSet(int featureID, const Any& newValue)
 				try
 				{
 					std::shared_ptr<Bag<ecore::EClassifier>> eClassifiersList= newValue->get<std::shared_ptr<Bag<ecore::EClassifier>>>();
-					std::shared_ptr<Bag<ecore::EClassifier>> _eClassifiers=getEClassifiers();
-					for(const std::shared_ptr<ecore::EClassifier> indexEClassifiers: *_eClassifiers)
+					const std::shared_ptr<Bag<ecore::EClassifier>>& _eClassifiers=getEClassifiers();
+					for(const std::shared_ptr<ecore::EClassifier>& indexEClassifiers: *_eClassifiers)
 					{
 						if (!(eClassifiersList->includes(indexEClassifiers)))
 						{
@@ -547,7 +547,7 @@ bool EPackageImpl::eSet(int featureID, const Any& newValue)
 						}
 					}
 
-					for(const std::shared_ptr<ecore::EClassifier> indexEClassifiers: *eClassifiersList)
+					for(const std::shared_ptr<ecore::EClassifier>& indexEClassifiers: *eClassifiersList)
 					{
 						if (!(_eClassifiers->includes(indexEClassifiers)))
 						{
@@ -583,8 +583,8 @@ bool EPackageImpl::eSet(int featureID, const Any& newValue)
 				try
 				{
 					std::shared_ptr<Bag<ecore::EPackage>> eSubpackagesList= newValue->get<std::shared_ptr<Bag<ecore::EPackage>>>();
-					std::shared_ptr<Bag<ecore::EPackage>> _eSubpackages=getESubpackages();
-					for(const std::shared_ptr<ecore::EPackage> indexESubpackages: *_eSubpackages)
+					const std::shared_ptr<Bag<ecore::EPackage>>& _eSubpackages=getESubpackages();
+					for(const std::shared_ptr<ecore::EPackage>& indexESubpackages: *_eSubpackages)
 					{
 						if (!(eSubpackagesList->includes(indexESubpackages)))
 						{
@@ -592,7 +592,7 @@ bool EPackageImpl::eSet(int featureID, const Any& newValue)
 						}
 					}
 
-					for(const std::shared_ptr<ecore::EPackage> indexESubpackages: *eSubpackagesList)
+					for(const std::shared_ptr<ecore::EPackage>& indexESubpackages: *eSubpackagesList)
 					{
 						if (!(_eSubpackages->includes(indexESubpackages)))
 						{

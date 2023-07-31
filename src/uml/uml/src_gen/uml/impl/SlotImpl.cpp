@@ -446,8 +446,8 @@ bool SlotImpl::eSet(int featureID, const Any& newValue)
 				try
 				{
 					std::shared_ptr<Bag<uml::ValueSpecification>> valueList= newValue->get<std::shared_ptr<Bag<uml::ValueSpecification>>>();
-					std::shared_ptr<Bag<uml::ValueSpecification>> _value=getValue();
-					for(const std::shared_ptr<uml::ValueSpecification> indexValue: *_value)
+					const std::shared_ptr<Bag<uml::ValueSpecification>>& _value=getValue();
+					for(const std::shared_ptr<uml::ValueSpecification>& indexValue: *_value)
 					{
 						if (!(valueList->includes(indexValue)))
 						{
@@ -455,7 +455,7 @@ bool SlotImpl::eSet(int featureID, const Any& newValue)
 						}
 					}
 
-					for(const std::shared_ptr<uml::ValueSpecification> indexValue: *valueList)
+					for(const std::shared_ptr<uml::ValueSpecification>& indexValue: *valueList)
 					{
 						if (!(_value->includes(indexValue)))
 						{

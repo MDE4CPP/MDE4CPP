@@ -555,8 +555,8 @@ bool RedefinableTemplateSignatureImpl::eSet(int featureID, const Any& newValue)
 				try
 				{
 					std::shared_ptr<Bag<uml::RedefinableTemplateSignature>> extendedSignatureList= newValue->get<std::shared_ptr<Bag<uml::RedefinableTemplateSignature>>>();
-					std::shared_ptr<Bag<uml::RedefinableTemplateSignature>> _extendedSignature=getExtendedSignature();
-					for(const std::shared_ptr<uml::RedefinableTemplateSignature> indexExtendedSignature: *_extendedSignature)
+					const std::shared_ptr<Bag<uml::RedefinableTemplateSignature>>& _extendedSignature=getExtendedSignature();
+					for(const std::shared_ptr<uml::RedefinableTemplateSignature>& indexExtendedSignature: *_extendedSignature)
 					{
 						if (!(extendedSignatureList->includes(indexExtendedSignature)))
 						{
@@ -564,7 +564,7 @@ bool RedefinableTemplateSignatureImpl::eSet(int featureID, const Any& newValue)
 						}
 					}
 
-					for(const std::shared_ptr<uml::RedefinableTemplateSignature> indexExtendedSignature: *extendedSignatureList)
+					for(const std::shared_ptr<uml::RedefinableTemplateSignature>& indexExtendedSignature: *extendedSignatureList)
 					{
 						if (!(_extendedSignature->includes(indexExtendedSignature)))
 						{

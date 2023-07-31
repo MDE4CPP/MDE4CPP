@@ -635,8 +635,8 @@ bool ExpansionRegionImpl::eSet(int featureID, const Any& newValue)
 				try
 				{
 					std::shared_ptr<Bag<uml::ExpansionNode>> inputElementList= newValue->get<std::shared_ptr<Bag<uml::ExpansionNode>>>();
-					std::shared_ptr<Bag<uml::ExpansionNode>> _inputElement=getInputElement();
-					for(const std::shared_ptr<uml::ExpansionNode> indexInputElement: *_inputElement)
+					const std::shared_ptr<Bag<uml::ExpansionNode>>& _inputElement=getInputElement();
+					for(const std::shared_ptr<uml::ExpansionNode>& indexInputElement: *_inputElement)
 					{
 						if (!(inputElementList->includes(indexInputElement)))
 						{
@@ -644,7 +644,7 @@ bool ExpansionRegionImpl::eSet(int featureID, const Any& newValue)
 						}
 					}
 
-					for(const std::shared_ptr<uml::ExpansionNode> indexInputElement: *inputElementList)
+					for(const std::shared_ptr<uml::ExpansionNode>& indexInputElement: *inputElementList)
 					{
 						if (!(_inputElement->includes(indexInputElement)))
 						{
@@ -679,8 +679,8 @@ bool ExpansionRegionImpl::eSet(int featureID, const Any& newValue)
 				try
 				{
 					std::shared_ptr<Bag<uml::ExpansionNode>> outputElementList= newValue->get<std::shared_ptr<Bag<uml::ExpansionNode>>>();
-					std::shared_ptr<Bag<uml::ExpansionNode>> _outputElement=getOutputElement();
-					for(const std::shared_ptr<uml::ExpansionNode> indexOutputElement: *_outputElement)
+					const std::shared_ptr<Bag<uml::ExpansionNode>>& _outputElement=getOutputElement();
+					for(const std::shared_ptr<uml::ExpansionNode>& indexOutputElement: *_outputElement)
 					{
 						if (!(outputElementList->includes(indexOutputElement)))
 						{
@@ -688,7 +688,7 @@ bool ExpansionRegionImpl::eSet(int featureID, const Any& newValue)
 						}
 					}
 
-					for(const std::shared_ptr<uml::ExpansionNode> indexOutputElement: *outputElementList)
+					for(const std::shared_ptr<uml::ExpansionNode>& indexOutputElement: *outputElementList)
 					{
 						if (!(_outputElement->includes(indexOutputElement)))
 						{

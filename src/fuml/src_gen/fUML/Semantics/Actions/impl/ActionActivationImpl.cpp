@@ -668,7 +668,7 @@ std::shared_ptr<Bag<fUML::Semantics::Activities::Token> > tokenList = pinActivat
 
 //DEBUG_INFO("Action '" << this->getNode()->getName() << "' retrieved "<< tokenList->size() << " tokens from pin '" << pin->getName() << "'.")
 
-for(std::shared_ptr<fUML::Semantics::Activities::Token> token : *tokenList)
+for(const std::shared_ptr<fUML::Semantics::Activities::Token>& token : *tokenList)
 {
 #ifndef NDEBUG
 
@@ -710,8 +710,8 @@ bool ActionActivationImpl::valueParticipatesInLink(const std::shared_ptr<fUML::S
 	//generated from body annotation
 	bool participates = false;
 
-	std::shared_ptr<Bag<fUML::Semantics::SimpleClassifiers::FeatureValue> > featureValueList = link->getFeatureValues();
-    for (std::shared_ptr<fUML::Semantics::SimpleClassifiers::FeatureValue> featureValue : *featureValueList)
+	const std::shared_ptr<Bag<fUML::Semantics::SimpleClassifiers::FeatureValue>>& featureValueList = link->getFeatureValues();
+    for (const std::shared_ptr<fUML::Semantics::SimpleClassifiers::FeatureValue>& featureValue : *featureValueList)
     {
         if(featureValue->getValues()->front()->equals(value))
         {
@@ -1089,8 +1089,8 @@ bool ActionActivationImpl::eSet(int featureID, const Any& newValue)
 				try
 				{
 					std::shared_ptr<Bag<fUML::Semantics::Actions::InputPinActivation>> inputPinActivationList= newValue->get<std::shared_ptr<Bag<fUML::Semantics::Actions::InputPinActivation>>>();
-					std::shared_ptr<Bag<fUML::Semantics::Actions::InputPinActivation>> _inputPinActivation=getInputPinActivation();
-					for(const std::shared_ptr<fUML::Semantics::Actions::InputPinActivation> indexInputPinActivation: *_inputPinActivation)
+					const std::shared_ptr<Bag<fUML::Semantics::Actions::InputPinActivation>>& _inputPinActivation=getInputPinActivation();
+					for(const std::shared_ptr<fUML::Semantics::Actions::InputPinActivation>& indexInputPinActivation: *_inputPinActivation)
 					{
 						if (!(inputPinActivationList->includes(indexInputPinActivation)))
 						{
@@ -1098,7 +1098,7 @@ bool ActionActivationImpl::eSet(int featureID, const Any& newValue)
 						}
 					}
 
-					for(const std::shared_ptr<fUML::Semantics::Actions::InputPinActivation> indexInputPinActivation: *inputPinActivationList)
+					for(const std::shared_ptr<fUML::Semantics::Actions::InputPinActivation>& indexInputPinActivation: *inputPinActivationList)
 					{
 						if (!(_inputPinActivation->includes(indexInputPinActivation)))
 						{
@@ -1126,8 +1126,8 @@ bool ActionActivationImpl::eSet(int featureID, const Any& newValue)
 				try
 				{
 					std::shared_ptr<Bag<fUML::Semantics::Actions::OutputPinActivation>> outputPinActivationList= newValue->get<std::shared_ptr<Bag<fUML::Semantics::Actions::OutputPinActivation>>>();
-					std::shared_ptr<Bag<fUML::Semantics::Actions::OutputPinActivation>> _outputPinActivation=getOutputPinActivation();
-					for(const std::shared_ptr<fUML::Semantics::Actions::OutputPinActivation> indexOutputPinActivation: *_outputPinActivation)
+					const std::shared_ptr<Bag<fUML::Semantics::Actions::OutputPinActivation>>& _outputPinActivation=getOutputPinActivation();
+					for(const std::shared_ptr<fUML::Semantics::Actions::OutputPinActivation>& indexOutputPinActivation: *_outputPinActivation)
 					{
 						if (!(outputPinActivationList->includes(indexOutputPinActivation)))
 						{
@@ -1135,7 +1135,7 @@ bool ActionActivationImpl::eSet(int featureID, const Any& newValue)
 						}
 					}
 
-					for(const std::shared_ptr<fUML::Semantics::Actions::OutputPinActivation> indexOutputPinActivation: *outputPinActivationList)
+					for(const std::shared_ptr<fUML::Semantics::Actions::OutputPinActivation>& indexOutputPinActivation: *outputPinActivationList)
 					{
 						if (!(_outputPinActivation->includes(indexOutputPinActivation)))
 						{
@@ -1163,8 +1163,8 @@ bool ActionActivationImpl::eSet(int featureID, const Any& newValue)
 				try
 				{
 					std::shared_ptr<Bag<fUML::Semantics::Actions::PinActivation>> pinActivationList= newValue->get<std::shared_ptr<Bag<fUML::Semantics::Actions::PinActivation>>>();
-					std::shared_ptr<Bag<fUML::Semantics::Actions::PinActivation>> _pinActivation=getPinActivation();
-					for(const std::shared_ptr<fUML::Semantics::Actions::PinActivation> indexPinActivation: *_pinActivation)
+					const std::shared_ptr<Bag<fUML::Semantics::Actions::PinActivation>>& _pinActivation=getPinActivation();
+					for(const std::shared_ptr<fUML::Semantics::Actions::PinActivation>& indexPinActivation: *_pinActivation)
 					{
 						if (!(pinActivationList->includes(indexPinActivation)))
 						{
@@ -1172,7 +1172,7 @@ bool ActionActivationImpl::eSet(int featureID, const Any& newValue)
 						}
 					}
 
-					for(const std::shared_ptr<fUML::Semantics::Actions::PinActivation> indexPinActivation: *pinActivationList)
+					for(const std::shared_ptr<fUML::Semantics::Actions::PinActivation>& indexPinActivation: *pinActivationList)
 					{
 						if (!(_pinActivation->includes(indexPinActivation)))
 						{

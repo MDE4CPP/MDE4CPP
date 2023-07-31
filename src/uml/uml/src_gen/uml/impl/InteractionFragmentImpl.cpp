@@ -493,8 +493,8 @@ bool InteractionFragmentImpl::eSet(int featureID, const Any& newValue)
 				try
 				{
 					std::shared_ptr<Bag<uml::Lifeline>> coveredList= newValue->get<std::shared_ptr<Bag<uml::Lifeline>>>();
-					std::shared_ptr<Bag<uml::Lifeline>> _covered=getCovered();
-					for(const std::shared_ptr<uml::Lifeline> indexCovered: *_covered)
+					const std::shared_ptr<Bag<uml::Lifeline>>& _covered=getCovered();
+					for(const std::shared_ptr<uml::Lifeline>& indexCovered: *_covered)
 					{
 						if (!(coveredList->includes(indexCovered)))
 						{
@@ -502,7 +502,7 @@ bool InteractionFragmentImpl::eSet(int featureID, const Any& newValue)
 						}
 					}
 
-					for(const std::shared_ptr<uml::Lifeline> indexCovered: *coveredList)
+					for(const std::shared_ptr<uml::Lifeline>& indexCovered: *coveredList)
 					{
 						if (!(_covered->includes(indexCovered)))
 						{
@@ -546,8 +546,8 @@ bool InteractionFragmentImpl::eSet(int featureID, const Any& newValue)
 				try
 				{
 					std::shared_ptr<Bag<uml::GeneralOrdering>> generalOrderingList= newValue->get<std::shared_ptr<Bag<uml::GeneralOrdering>>>();
-					std::shared_ptr<Bag<uml::GeneralOrdering>> _generalOrdering=getGeneralOrdering();
-					for(const std::shared_ptr<uml::GeneralOrdering> indexGeneralOrdering: *_generalOrdering)
+					const std::shared_ptr<Bag<uml::GeneralOrdering>>& _generalOrdering=getGeneralOrdering();
+					for(const std::shared_ptr<uml::GeneralOrdering>& indexGeneralOrdering: *_generalOrdering)
 					{
 						if (!(generalOrderingList->includes(indexGeneralOrdering)))
 						{
@@ -555,7 +555,7 @@ bool InteractionFragmentImpl::eSet(int featureID, const Any& newValue)
 						}
 					}
 
-					for(const std::shared_ptr<uml::GeneralOrdering> indexGeneralOrdering: *generalOrderingList)
+					for(const std::shared_ptr<uml::GeneralOrdering>& indexGeneralOrdering: *generalOrderingList)
 					{
 						if (!(_generalOrdering->includes(indexGeneralOrdering)))
 						{

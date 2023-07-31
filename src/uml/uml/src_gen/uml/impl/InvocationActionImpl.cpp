@@ -493,8 +493,8 @@ bool InvocationActionImpl::eSet(int featureID, const Any& newValue)
 				try
 				{
 					std::shared_ptr<Bag<uml::InputPin>> argumentList= newValue->get<std::shared_ptr<Bag<uml::InputPin>>>();
-					std::shared_ptr<Bag<uml::InputPin>> _argument=getArgument();
-					for(const std::shared_ptr<uml::InputPin> indexArgument: *_argument)
+					const std::shared_ptr<Bag<uml::InputPin>>& _argument=getArgument();
+					for(const std::shared_ptr<uml::InputPin>& indexArgument: *_argument)
 					{
 						if (!(argumentList->includes(indexArgument)))
 						{
@@ -502,7 +502,7 @@ bool InvocationActionImpl::eSet(int featureID, const Any& newValue)
 						}
 					}
 
-					for(const std::shared_ptr<uml::InputPin> indexArgument: *argumentList)
+					for(const std::shared_ptr<uml::InputPin>& indexArgument: *argumentList)
 					{
 						if (!(_argument->includes(indexArgument)))
 						{

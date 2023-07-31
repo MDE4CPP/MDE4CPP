@@ -339,8 +339,8 @@ bool NavigationCallExpEvalImpl::eSet(int featureID, const Any& newValue)
 				try
 				{
 					std::shared_ptr<Bag<ocl::Evaluations::OclExpEval>> qualifiersList= newValue->get<std::shared_ptr<Bag<ocl::Evaluations::OclExpEval>>>();
-					std::shared_ptr<Bag<ocl::Evaluations::OclExpEval>> _qualifiers=getQualifiers();
-					for(const std::shared_ptr<ocl::Evaluations::OclExpEval> indexQualifiers: *_qualifiers)
+					const std::shared_ptr<Bag<ocl::Evaluations::OclExpEval>>& _qualifiers=getQualifiers();
+					for(const std::shared_ptr<ocl::Evaluations::OclExpEval>& indexQualifiers: *_qualifiers)
 					{
 						if (!(qualifiersList->includes(indexQualifiers)))
 						{
@@ -348,7 +348,7 @@ bool NavigationCallExpEvalImpl::eSet(int featureID, const Any& newValue)
 						}
 					}
 
-					for(const std::shared_ptr<ocl::Evaluations::OclExpEval> indexQualifiers: *qualifiersList)
+					for(const std::shared_ptr<ocl::Evaluations::OclExpEval>& indexQualifiers: *qualifiersList)
 					{
 						if (!(_qualifiers->includes(indexQualifiers)))
 						{

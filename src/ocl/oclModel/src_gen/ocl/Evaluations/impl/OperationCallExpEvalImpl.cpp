@@ -331,8 +331,8 @@ bool OperationCallExpEvalImpl::eSet(int featureID, const Any& newValue)
 				try
 				{
 					std::shared_ptr<Bag<ocl::Evaluations::OclExpEval>> argumentsList= newValue->get<std::shared_ptr<Bag<ocl::Evaluations::OclExpEval>>>();
-					std::shared_ptr<Bag<ocl::Evaluations::OclExpEval>> _arguments=getArguments();
-					for(const std::shared_ptr<ocl::Evaluations::OclExpEval> indexArguments: *_arguments)
+					const std::shared_ptr<Bag<ocl::Evaluations::OclExpEval>>& _arguments=getArguments();
+					for(const std::shared_ptr<ocl::Evaluations::OclExpEval>& indexArguments: *_arguments)
 					{
 						if (!(argumentsList->includes(indexArguments)))
 						{
@@ -340,7 +340,7 @@ bool OperationCallExpEvalImpl::eSet(int featureID, const Any& newValue)
 						}
 					}
 
-					for(const std::shared_ptr<ocl::Evaluations::OclExpEval> indexArguments: *argumentsList)
+					for(const std::shared_ptr<ocl::Evaluations::OclExpEval>& indexArguments: *argumentsList)
 					{
 						if (!(_arguments->includes(indexArguments)))
 						{

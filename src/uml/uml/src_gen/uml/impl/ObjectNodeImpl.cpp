@@ -596,8 +596,8 @@ bool ObjectNodeImpl::eSet(int featureID, const Any& newValue)
 				try
 				{
 					std::shared_ptr<Bag<uml::State>> inStateList= newValue->get<std::shared_ptr<Bag<uml::State>>>();
-					std::shared_ptr<Bag<uml::State>> _inState=getInState();
-					for(const std::shared_ptr<uml::State> indexInState: *_inState)
+					const std::shared_ptr<Bag<uml::State>>& _inState=getInState();
+					for(const std::shared_ptr<uml::State>& indexInState: *_inState)
 					{
 						if (!(inStateList->includes(indexInState)))
 						{
@@ -605,7 +605,7 @@ bool ObjectNodeImpl::eSet(int featureID, const Any& newValue)
 						}
 					}
 
-					for(const std::shared_ptr<uml::State> indexInState: *inStateList)
+					for(const std::shared_ptr<uml::State>& indexInState: *inStateList)
 					{
 						if (!(_inState->includes(indexInState)))
 						{

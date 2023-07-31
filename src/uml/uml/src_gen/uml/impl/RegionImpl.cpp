@@ -716,8 +716,8 @@ bool RegionImpl::eSet(int featureID, const Any& newValue)
 				try
 				{
 					std::shared_ptr<Bag<uml::Vertex>> subvertexList= newValue->get<std::shared_ptr<Bag<uml::Vertex>>>();
-					std::shared_ptr<Bag<uml::Vertex>> _subvertex=getSubvertex();
-					for(const std::shared_ptr<uml::Vertex> indexSubvertex: *_subvertex)
+					const std::shared_ptr<Bag<uml::Vertex>>& _subvertex=getSubvertex();
+					for(const std::shared_ptr<uml::Vertex>& indexSubvertex: *_subvertex)
 					{
 						if (!(subvertexList->includes(indexSubvertex)))
 						{
@@ -725,7 +725,7 @@ bool RegionImpl::eSet(int featureID, const Any& newValue)
 						}
 					}
 
-					for(const std::shared_ptr<uml::Vertex> indexSubvertex: *subvertexList)
+					for(const std::shared_ptr<uml::Vertex>& indexSubvertex: *subvertexList)
 					{
 						if (!(_subvertex->includes(indexSubvertex)))
 						{
@@ -753,8 +753,8 @@ bool RegionImpl::eSet(int featureID, const Any& newValue)
 				try
 				{
 					std::shared_ptr<Bag<uml::Transition>> transitionList= newValue->get<std::shared_ptr<Bag<uml::Transition>>>();
-					std::shared_ptr<Bag<uml::Transition>> _transition=getTransition();
-					for(const std::shared_ptr<uml::Transition> indexTransition: *_transition)
+					const std::shared_ptr<Bag<uml::Transition>>& _transition=getTransition();
+					for(const std::shared_ptr<uml::Transition>& indexTransition: *_transition)
 					{
 						if (!(transitionList->includes(indexTransition)))
 						{
@@ -762,7 +762,7 @@ bool RegionImpl::eSet(int featureID, const Any& newValue)
 						}
 					}
 
-					for(const std::shared_ptr<uml::Transition> indexTransition: *transitionList)
+					for(const std::shared_ptr<uml::Transition>& indexTransition: *transitionList)
 					{
 						if (!(_transition->includes(indexTransition)))
 						{

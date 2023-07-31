@@ -605,8 +605,8 @@ bool DataTypeImpl::eSet(int featureID, const Any& newValue)
 				try
 				{
 					std::shared_ptr<Bag<uml::Property>> ownedAttributeList= newValue->get<std::shared_ptr<Bag<uml::Property>>>();
-					std::shared_ptr<Bag<uml::Property>> _ownedAttribute=getOwnedAttribute();
-					for(const std::shared_ptr<uml::Property> indexOwnedAttribute: *_ownedAttribute)
+					const std::shared_ptr<Bag<uml::Property>>& _ownedAttribute=getOwnedAttribute();
+					for(const std::shared_ptr<uml::Property>& indexOwnedAttribute: *_ownedAttribute)
 					{
 						if (!(ownedAttributeList->includes(indexOwnedAttribute)))
 						{
@@ -614,7 +614,7 @@ bool DataTypeImpl::eSet(int featureID, const Any& newValue)
 						}
 					}
 
-					for(const std::shared_ptr<uml::Property> indexOwnedAttribute: *ownedAttributeList)
+					for(const std::shared_ptr<uml::Property>& indexOwnedAttribute: *ownedAttributeList)
 					{
 						if (!(_ownedAttribute->includes(indexOwnedAttribute)))
 						{
@@ -642,8 +642,8 @@ bool DataTypeImpl::eSet(int featureID, const Any& newValue)
 				try
 				{
 					std::shared_ptr<Bag<uml::Operation>> ownedOperationList= newValue->get<std::shared_ptr<Bag<uml::Operation>>>();
-					std::shared_ptr<Bag<uml::Operation>> _ownedOperation=getOwnedOperation();
-					for(const std::shared_ptr<uml::Operation> indexOwnedOperation: *_ownedOperation)
+					const std::shared_ptr<Bag<uml::Operation>>& _ownedOperation=getOwnedOperation();
+					for(const std::shared_ptr<uml::Operation>& indexOwnedOperation: *_ownedOperation)
 					{
 						if (!(ownedOperationList->includes(indexOwnedOperation)))
 						{
@@ -651,7 +651,7 @@ bool DataTypeImpl::eSet(int featureID, const Any& newValue)
 						}
 					}
 
-					for(const std::shared_ptr<uml::Operation> indexOwnedOperation: *ownedOperationList)
+					for(const std::shared_ptr<uml::Operation>& indexOwnedOperation: *ownedOperationList)
 					{
 						if (!(_ownedOperation->includes(indexOwnedOperation)))
 						{

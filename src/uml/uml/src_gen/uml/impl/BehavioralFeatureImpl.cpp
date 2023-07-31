@@ -697,8 +697,8 @@ bool BehavioralFeatureImpl::eSet(int featureID, const Any& newValue)
 				try
 				{
 					std::shared_ptr<Bag<uml::Behavior>> methodList= newValue->get<std::shared_ptr<Bag<uml::Behavior>>>();
-					std::shared_ptr<Bag<uml::Behavior>> _method=getMethod();
-					for(const std::shared_ptr<uml::Behavior> indexMethod: *_method)
+					const std::shared_ptr<Bag<uml::Behavior>>& _method=getMethod();
+					for(const std::shared_ptr<uml::Behavior>& indexMethod: *_method)
 					{
 						if (!(methodList->includes(indexMethod)))
 						{
@@ -706,7 +706,7 @@ bool BehavioralFeatureImpl::eSet(int featureID, const Any& newValue)
 						}
 					}
 
-					for(const std::shared_ptr<uml::Behavior> indexMethod: *methodList)
+					for(const std::shared_ptr<uml::Behavior>& indexMethod: *methodList)
 					{
 						if (!(_method->includes(indexMethod)))
 						{
@@ -734,8 +734,8 @@ bool BehavioralFeatureImpl::eSet(int featureID, const Any& newValue)
 				try
 				{
 					std::shared_ptr<Bag<uml::Parameter>> ownedParameterList= newValue->get<std::shared_ptr<Bag<uml::Parameter>>>();
-					std::shared_ptr<Bag<uml::Parameter>> _ownedParameter=getOwnedParameter();
-					for(const std::shared_ptr<uml::Parameter> indexOwnedParameter: *_ownedParameter)
+					const std::shared_ptr<Bag<uml::Parameter>>& _ownedParameter=getOwnedParameter();
+					for(const std::shared_ptr<uml::Parameter>& indexOwnedParameter: *_ownedParameter)
 					{
 						if (!(ownedParameterList->includes(indexOwnedParameter)))
 						{
@@ -743,7 +743,7 @@ bool BehavioralFeatureImpl::eSet(int featureID, const Any& newValue)
 						}
 					}
 
-					for(const std::shared_ptr<uml::Parameter> indexOwnedParameter: *ownedParameterList)
+					for(const std::shared_ptr<uml::Parameter>& indexOwnedParameter: *ownedParameterList)
 					{
 						if (!(_ownedParameter->includes(indexOwnedParameter)))
 						{
@@ -771,8 +771,8 @@ bool BehavioralFeatureImpl::eSet(int featureID, const Any& newValue)
 				try
 				{
 					std::shared_ptr<Bag<uml::ParameterSet>> ownedParameterSetList= newValue->get<std::shared_ptr<Bag<uml::ParameterSet>>>();
-					std::shared_ptr<Bag<uml::ParameterSet>> _ownedParameterSet=getOwnedParameterSet();
-					for(const std::shared_ptr<uml::ParameterSet> indexOwnedParameterSet: *_ownedParameterSet)
+					const std::shared_ptr<Bag<uml::ParameterSet>>& _ownedParameterSet=getOwnedParameterSet();
+					for(const std::shared_ptr<uml::ParameterSet>& indexOwnedParameterSet: *_ownedParameterSet)
 					{
 						if (!(ownedParameterSetList->includes(indexOwnedParameterSet)))
 						{
@@ -780,7 +780,7 @@ bool BehavioralFeatureImpl::eSet(int featureID, const Any& newValue)
 						}
 					}
 
-					for(const std::shared_ptr<uml::ParameterSet> indexOwnedParameterSet: *ownedParameterSetList)
+					for(const std::shared_ptr<uml::ParameterSet>& indexOwnedParameterSet: *ownedParameterSetList)
 					{
 						if (!(_ownedParameterSet->includes(indexOwnedParameterSet)))
 						{
@@ -808,8 +808,8 @@ bool BehavioralFeatureImpl::eSet(int featureID, const Any& newValue)
 				try
 				{
 					std::shared_ptr<Bag<uml::Type>> raisedExceptionList= newValue->get<std::shared_ptr<Bag<uml::Type>>>();
-					std::shared_ptr<Bag<uml::Type>> _raisedException=getRaisedException();
-					for(const std::shared_ptr<uml::Type> indexRaisedException: *_raisedException)
+					const std::shared_ptr<Bag<uml::Type>>& _raisedException=getRaisedException();
+					for(const std::shared_ptr<uml::Type>& indexRaisedException: *_raisedException)
 					{
 						if (!(raisedExceptionList->includes(indexRaisedException)))
 						{
@@ -817,7 +817,7 @@ bool BehavioralFeatureImpl::eSet(int featureID, const Any& newValue)
 						}
 					}
 
-					for(const std::shared_ptr<uml::Type> indexRaisedException: *raisedExceptionList)
+					for(const std::shared_ptr<uml::Type>& indexRaisedException: *raisedExceptionList)
 					{
 						if (!(_raisedException->includes(indexRaisedException)))
 						{

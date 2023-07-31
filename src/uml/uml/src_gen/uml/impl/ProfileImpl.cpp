@@ -595,8 +595,8 @@ bool ProfileImpl::eSet(int featureID, const Any& newValue)
 				try
 				{
 					std::shared_ptr<Bag<uml::ElementImport>> metaclassReferenceList= newValue->get<std::shared_ptr<Bag<uml::ElementImport>>>();
-					std::shared_ptr<Bag<uml::ElementImport>> _metaclassReference=getMetaclassReference();
-					for(const std::shared_ptr<uml::ElementImport> indexMetaclassReference: *_metaclassReference)
+					const std::shared_ptr<Bag<uml::ElementImport>>& _metaclassReference=getMetaclassReference();
+					for(const std::shared_ptr<uml::ElementImport>& indexMetaclassReference: *_metaclassReference)
 					{
 						if (!(metaclassReferenceList->includes(indexMetaclassReference)))
 						{
@@ -604,7 +604,7 @@ bool ProfileImpl::eSet(int featureID, const Any& newValue)
 						}
 					}
 
-					for(const std::shared_ptr<uml::ElementImport> indexMetaclassReference: *metaclassReferenceList)
+					for(const std::shared_ptr<uml::ElementImport>& indexMetaclassReference: *metaclassReferenceList)
 					{
 						if (!(_metaclassReference->includes(indexMetaclassReference)))
 						{
@@ -632,8 +632,8 @@ bool ProfileImpl::eSet(int featureID, const Any& newValue)
 				try
 				{
 					std::shared_ptr<Bag<uml::PackageImport>> metamodelReferenceList= newValue->get<std::shared_ptr<Bag<uml::PackageImport>>>();
-					std::shared_ptr<Bag<uml::PackageImport>> _metamodelReference=getMetamodelReference();
-					for(const std::shared_ptr<uml::PackageImport> indexMetamodelReference: *_metamodelReference)
+					const std::shared_ptr<Bag<uml::PackageImport>>& _metamodelReference=getMetamodelReference();
+					for(const std::shared_ptr<uml::PackageImport>& indexMetamodelReference: *_metamodelReference)
 					{
 						if (!(metamodelReferenceList->includes(indexMetamodelReference)))
 						{
@@ -641,7 +641,7 @@ bool ProfileImpl::eSet(int featureID, const Any& newValue)
 						}
 					}
 
-					for(const std::shared_ptr<uml::PackageImport> indexMetamodelReference: *metamodelReferenceList)
+					for(const std::shared_ptr<uml::PackageImport>& indexMetamodelReference: *metamodelReferenceList)
 					{
 						if (!(_metamodelReference->includes(indexMetamodelReference)))
 						{

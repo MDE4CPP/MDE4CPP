@@ -591,8 +591,8 @@ bool NodeImpl::eSet(int featureID, const Any& newValue)
 				try
 				{
 					std::shared_ptr<Bag<uml::Node>> nestedNodeList= newValue->get<std::shared_ptr<Bag<uml::Node>>>();
-					std::shared_ptr<Bag<uml::Node>> _nestedNode=getNestedNode();
-					for(const std::shared_ptr<uml::Node> indexNestedNode: *_nestedNode)
+					const std::shared_ptr<Bag<uml::Node>>& _nestedNode=getNestedNode();
+					for(const std::shared_ptr<uml::Node>& indexNestedNode: *_nestedNode)
 					{
 						if (!(nestedNodeList->includes(indexNestedNode)))
 						{
@@ -600,7 +600,7 @@ bool NodeImpl::eSet(int featureID, const Any& newValue)
 						}
 					}
 
-					for(const std::shared_ptr<uml::Node> indexNestedNode: *nestedNodeList)
+					for(const std::shared_ptr<uml::Node>& indexNestedNode: *nestedNodeList)
 					{
 						if (!(_nestedNode->includes(indexNestedNode)))
 						{

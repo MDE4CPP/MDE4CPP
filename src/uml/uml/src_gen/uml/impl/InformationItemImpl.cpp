@@ -482,8 +482,8 @@ bool InformationItemImpl::eSet(int featureID, const Any& newValue)
 				try
 				{
 					std::shared_ptr<Bag<uml::Classifier>> representedList= newValue->get<std::shared_ptr<Bag<uml::Classifier>>>();
-					std::shared_ptr<Bag<uml::Classifier>> _represented=getRepresented();
-					for(const std::shared_ptr<uml::Classifier> indexRepresented: *_represented)
+					const std::shared_ptr<Bag<uml::Classifier>>& _represented=getRepresented();
+					for(const std::shared_ptr<uml::Classifier>& indexRepresented: *_represented)
 					{
 						if (!(representedList->includes(indexRepresented)))
 						{
@@ -491,7 +491,7 @@ bool InformationItemImpl::eSet(int featureID, const Any& newValue)
 						}
 					}
 
-					for(const std::shared_ptr<uml::Classifier> indexRepresented: *representedList)
+					for(const std::shared_ptr<uml::Classifier>& indexRepresented: *representedList)
 					{
 						if (!(_represented->includes(indexRepresented)))
 						{

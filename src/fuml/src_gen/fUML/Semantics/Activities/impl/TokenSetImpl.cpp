@@ -268,8 +268,8 @@ bool TokenSetImpl::eSet(int featureID, const Any& newValue)
 				try
 				{
 					std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> tokensList= newValue->get<std::shared_ptr<Bag<fUML::Semantics::Activities::Token>>>();
-					std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> _tokens=getTokens();
-					for(const std::shared_ptr<fUML::Semantics::Activities::Token> indexTokens: *_tokens)
+					const std::shared_ptr<Bag<fUML::Semantics::Activities::Token>>& _tokens=getTokens();
+					for(const std::shared_ptr<fUML::Semantics::Activities::Token>& indexTokens: *_tokens)
 					{
 						if (!(tokensList->includes(indexTokens)))
 						{
@@ -277,7 +277,7 @@ bool TokenSetImpl::eSet(int featureID, const Any& newValue)
 						}
 					}
 
-					for(const std::shared_ptr<fUML::Semantics::Activities::Token> indexTokens: *tokensList)
+					for(const std::shared_ptr<fUML::Semantics::Activities::Token>& indexTokens: *tokensList)
 					{
 						if (!(_tokens->includes(indexTokens)))
 						{

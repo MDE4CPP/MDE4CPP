@@ -805,8 +805,8 @@ bool StateMachineImpl::eSet(int featureID, const Any& newValue)
 				try
 				{
 					std::shared_ptr<Bag<uml::Pseudostate>> connectionPointList= newValue->get<std::shared_ptr<Bag<uml::Pseudostate>>>();
-					std::shared_ptr<Bag<uml::Pseudostate>> _connectionPoint=getConnectionPoint();
-					for(const std::shared_ptr<uml::Pseudostate> indexConnectionPoint: *_connectionPoint)
+					const std::shared_ptr<Bag<uml::Pseudostate>>& _connectionPoint=getConnectionPoint();
+					for(const std::shared_ptr<uml::Pseudostate>& indexConnectionPoint: *_connectionPoint)
 					{
 						if (!(connectionPointList->includes(indexConnectionPoint)))
 						{
@@ -814,7 +814,7 @@ bool StateMachineImpl::eSet(int featureID, const Any& newValue)
 						}
 					}
 
-					for(const std::shared_ptr<uml::Pseudostate> indexConnectionPoint: *connectionPointList)
+					for(const std::shared_ptr<uml::Pseudostate>& indexConnectionPoint: *connectionPointList)
 					{
 						if (!(_connectionPoint->includes(indexConnectionPoint)))
 						{
@@ -842,8 +842,8 @@ bool StateMachineImpl::eSet(int featureID, const Any& newValue)
 				try
 				{
 					std::shared_ptr<Bag<uml::StateMachine>> extendedStateMachineList= newValue->get<std::shared_ptr<Bag<uml::StateMachine>>>();
-					std::shared_ptr<Bag<uml::StateMachine>> _extendedStateMachine=getExtendedStateMachine();
-					for(const std::shared_ptr<uml::StateMachine> indexExtendedStateMachine: *_extendedStateMachine)
+					const std::shared_ptr<Bag<uml::StateMachine>>& _extendedStateMachine=getExtendedStateMachine();
+					for(const std::shared_ptr<uml::StateMachine>& indexExtendedStateMachine: *_extendedStateMachine)
 					{
 						if (!(extendedStateMachineList->includes(indexExtendedStateMachine)))
 						{
@@ -851,7 +851,7 @@ bool StateMachineImpl::eSet(int featureID, const Any& newValue)
 						}
 					}
 
-					for(const std::shared_ptr<uml::StateMachine> indexExtendedStateMachine: *extendedStateMachineList)
+					for(const std::shared_ptr<uml::StateMachine>& indexExtendedStateMachine: *extendedStateMachineList)
 					{
 						if (!(_extendedStateMachine->includes(indexExtendedStateMachine)))
 						{
@@ -879,8 +879,8 @@ bool StateMachineImpl::eSet(int featureID, const Any& newValue)
 				try
 				{
 					std::shared_ptr<Bag<uml::Region>> regionList= newValue->get<std::shared_ptr<Bag<uml::Region>>>();
-					std::shared_ptr<Bag<uml::Region>> _region=getRegion();
-					for(const std::shared_ptr<uml::Region> indexRegion: *_region)
+					const std::shared_ptr<Bag<uml::Region>>& _region=getRegion();
+					for(const std::shared_ptr<uml::Region>& indexRegion: *_region)
 					{
 						if (!(regionList->includes(indexRegion)))
 						{
@@ -888,7 +888,7 @@ bool StateMachineImpl::eSet(int featureID, const Any& newValue)
 						}
 					}
 
-					for(const std::shared_ptr<uml::Region> indexRegion: *regionList)
+					for(const std::shared_ptr<uml::Region>& indexRegion: *regionList)
 					{
 						if (!(_region->includes(indexRegion)))
 						{
@@ -916,8 +916,8 @@ bool StateMachineImpl::eSet(int featureID, const Any& newValue)
 				try
 				{
 					std::shared_ptr<Bag<uml::State>> submachineStateList= newValue->get<std::shared_ptr<Bag<uml::State>>>();
-					std::shared_ptr<Bag<uml::State>> _submachineState=getSubmachineState();
-					for(const std::shared_ptr<uml::State> indexSubmachineState: *_submachineState)
+					const std::shared_ptr<Bag<uml::State>>& _submachineState=getSubmachineState();
+					for(const std::shared_ptr<uml::State>& indexSubmachineState: *_submachineState)
 					{
 						if (!(submachineStateList->includes(indexSubmachineState)))
 						{
@@ -925,7 +925,7 @@ bool StateMachineImpl::eSet(int featureID, const Any& newValue)
 						}
 					}
 
-					for(const std::shared_ptr<uml::State> indexSubmachineState: *submachineStateList)
+					for(const std::shared_ptr<uml::State>& indexSubmachineState: *submachineStateList)
 					{
 						if (!(_submachineState->includes(indexSubmachineState)))
 						{

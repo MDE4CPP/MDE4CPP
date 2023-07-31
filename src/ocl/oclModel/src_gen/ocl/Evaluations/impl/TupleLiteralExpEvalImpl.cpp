@@ -290,8 +290,8 @@ bool TupleLiteralExpEvalImpl::eSet(int featureID, const Any& newValue)
 				try
 				{
 					std::shared_ptr<Bag<ocl::Evaluations::VariableDeclEval>> tuplePartList= newValue->get<std::shared_ptr<Bag<ocl::Evaluations::VariableDeclEval>>>();
-					std::shared_ptr<Bag<ocl::Evaluations::VariableDeclEval>> _tuplePart=getTuplePart();
-					for(const std::shared_ptr<ocl::Evaluations::VariableDeclEval> indexTuplePart: *_tuplePart)
+					const std::shared_ptr<Bag<ocl::Evaluations::VariableDeclEval>>& _tuplePart=getTuplePart();
+					for(const std::shared_ptr<ocl::Evaluations::VariableDeclEval>& indexTuplePart: *_tuplePart)
 					{
 						if (!(tuplePartList->includes(indexTuplePart)))
 						{
@@ -299,7 +299,7 @@ bool TupleLiteralExpEvalImpl::eSet(int featureID, const Any& newValue)
 						}
 					}
 
-					for(const std::shared_ptr<ocl::Evaluations::VariableDeclEval> indexTuplePart: *tuplePartList)
+					for(const std::shared_ptr<ocl::Evaluations::VariableDeclEval>& indexTuplePart: *tuplePartList)
 					{
 						if (!(_tuplePart->includes(indexTuplePart)))
 						{

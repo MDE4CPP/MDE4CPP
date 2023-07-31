@@ -856,8 +856,8 @@ bool TransitionImpl::eSet(int featureID, const Any& newValue)
 				try
 				{
 					std::shared_ptr<Bag<uml::Trigger>> triggerList= newValue->get<std::shared_ptr<Bag<uml::Trigger>>>();
-					std::shared_ptr<Bag<uml::Trigger>> _trigger=getTrigger();
-					for(const std::shared_ptr<uml::Trigger> indexTrigger: *_trigger)
+					const std::shared_ptr<Bag<uml::Trigger>>& _trigger=getTrigger();
+					for(const std::shared_ptr<uml::Trigger>& indexTrigger: *_trigger)
 					{
 						if (!(triggerList->includes(indexTrigger)))
 						{
@@ -865,7 +865,7 @@ bool TransitionImpl::eSet(int featureID, const Any& newValue)
 						}
 					}
 
-					for(const std::shared_ptr<uml::Trigger> indexTrigger: *triggerList)
+					for(const std::shared_ptr<uml::Trigger>& indexTrigger: *triggerList)
 					{
 						if (!(_trigger->includes(indexTrigger)))
 						{

@@ -504,8 +504,8 @@ bool EGenericTypeImpl::eSet(int featureID, const Any& newValue)
 				try
 				{
 					std::shared_ptr<Bag<ecore::EGenericType>> eTypeArgumentsList= newValue->get<std::shared_ptr<Bag<ecore::EGenericType>>>();
-					std::shared_ptr<Bag<ecore::EGenericType>> _eTypeArguments=getETypeArguments();
-					for(const std::shared_ptr<ecore::EGenericType> indexETypeArguments: *_eTypeArguments)
+					const std::shared_ptr<Bag<ecore::EGenericType>>& _eTypeArguments=getETypeArguments();
+					for(const std::shared_ptr<ecore::EGenericType>& indexETypeArguments: *_eTypeArguments)
 					{
 						if (!(eTypeArgumentsList->includes(indexETypeArguments)))
 						{
@@ -513,7 +513,7 @@ bool EGenericTypeImpl::eSet(int featureID, const Any& newValue)
 						}
 					}
 
-					for(const std::shared_ptr<ecore::EGenericType> indexETypeArguments: *eTypeArgumentsList)
+					for(const std::shared_ptr<ecore::EGenericType>& indexETypeArguments: *eTypeArgumentsList)
 					{
 						if (!(_eTypeArguments->includes(indexETypeArguments)))
 						{

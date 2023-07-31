@@ -106,9 +106,10 @@ ExecutableImpl& ExecutableImpl::operator=(const ExecutableImpl & obj)
 }
 
 
-std::shared_ptr<uml::Class> ExecutableImpl::getMetaClass() const
+const std::shared_ptr<uml::Class>& ExecutableImpl::getMetaClass() const
 {
-	return StandardProfilePackageImpl::eInstance()->get_StandardProfile_Executable();
+	static const std::shared_ptr<uml::Class> metaClass = StandardProfilePackageImpl::eInstance()->get_StandardProfile_Executable();
+	return metaClass;
 }
 
 void ExecutableImpl::instantiate()

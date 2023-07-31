@@ -106,9 +106,10 @@ NonExecutableImpl& NonExecutableImpl::operator=(const NonExecutableImpl & obj)
 }
 
 
-std::shared_ptr<uml::Class> NonExecutableImpl::getMetaClass() const
+const std::shared_ptr<uml::Class>& NonExecutableImpl::getMetaClass() const
 {
-	return UML4CPPProfilePackageImpl::eInstance()->get_UML4CPPProfile_NonExecutable();
+	static const std::shared_ptr<uml::Class> metaClass = UML4CPPProfilePackageImpl::eInstance()->get_UML4CPPProfile_NonExecutable();
+	return metaClass;
 }
 
 void NonExecutableImpl::instantiate()

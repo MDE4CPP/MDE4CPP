@@ -585,8 +585,8 @@ bool DeploymentImpl::eSet(int featureID, const Any& newValue)
 				try
 				{
 					std::shared_ptr<Bag<uml::DeploymentSpecification>> configurationList= newValue->get<std::shared_ptr<Bag<uml::DeploymentSpecification>>>();
-					std::shared_ptr<Bag<uml::DeploymentSpecification>> _configuration=getConfiguration();
-					for(const std::shared_ptr<uml::DeploymentSpecification> indexConfiguration: *_configuration)
+					const std::shared_ptr<Bag<uml::DeploymentSpecification>>& _configuration=getConfiguration();
+					for(const std::shared_ptr<uml::DeploymentSpecification>& indexConfiguration: *_configuration)
 					{
 						if (!(configurationList->includes(indexConfiguration)))
 						{
@@ -594,7 +594,7 @@ bool DeploymentImpl::eSet(int featureID, const Any& newValue)
 						}
 					}
 
-					for(const std::shared_ptr<uml::DeploymentSpecification> indexConfiguration: *configurationList)
+					for(const std::shared_ptr<uml::DeploymentSpecification>& indexConfiguration: *configurationList)
 					{
 						if (!(_configuration->includes(indexConfiguration)))
 						{
@@ -622,8 +622,8 @@ bool DeploymentImpl::eSet(int featureID, const Any& newValue)
 				try
 				{
 					std::shared_ptr<Bag<uml::DeployedArtifact>> deployedArtifactList= newValue->get<std::shared_ptr<Bag<uml::DeployedArtifact>>>();
-					std::shared_ptr<Bag<uml::DeployedArtifact>> _deployedArtifact=getDeployedArtifact();
-					for(const std::shared_ptr<uml::DeployedArtifact> indexDeployedArtifact: *_deployedArtifact)
+					const std::shared_ptr<Bag<uml::DeployedArtifact>>& _deployedArtifact=getDeployedArtifact();
+					for(const std::shared_ptr<uml::DeployedArtifact>& indexDeployedArtifact: *_deployedArtifact)
 					{
 						if (!(deployedArtifactList->includes(indexDeployedArtifact)))
 						{
@@ -631,7 +631,7 @@ bool DeploymentImpl::eSet(int featureID, const Any& newValue)
 						}
 					}
 
-					for(const std::shared_ptr<uml::DeployedArtifact> indexDeployedArtifact: *deployedArtifactList)
+					for(const std::shared_ptr<uml::DeployedArtifact>& indexDeployedArtifact: *deployedArtifactList)
 					{
 						if (!(_deployedArtifact->includes(indexDeployedArtifact)))
 						{

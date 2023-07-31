@@ -392,8 +392,8 @@ bool ConditionalNodeActivationImpl::eSet(int featureID, const Any& newValue)
 				try
 				{
 					std::shared_ptr<Bag<fUML::Semantics::Actions::ClauseActivation>> clauseActivationsList= newValue->get<std::shared_ptr<Bag<fUML::Semantics::Actions::ClauseActivation>>>();
-					std::shared_ptr<Bag<fUML::Semantics::Actions::ClauseActivation>> _clauseActivations=getClauseActivations();
-					for(const std::shared_ptr<fUML::Semantics::Actions::ClauseActivation> indexClauseActivations: *_clauseActivations)
+					const std::shared_ptr<Bag<fUML::Semantics::Actions::ClauseActivation>>& _clauseActivations=getClauseActivations();
+					for(const std::shared_ptr<fUML::Semantics::Actions::ClauseActivation>& indexClauseActivations: *_clauseActivations)
 					{
 						if (!(clauseActivationsList->includes(indexClauseActivations)))
 						{
@@ -401,7 +401,7 @@ bool ConditionalNodeActivationImpl::eSet(int featureID, const Any& newValue)
 						}
 					}
 
-					for(const std::shared_ptr<fUML::Semantics::Actions::ClauseActivation> indexClauseActivations: *clauseActivationsList)
+					for(const std::shared_ptr<fUML::Semantics::Actions::ClauseActivation>& indexClauseActivations: *clauseActivationsList)
 					{
 						if (!(_clauseActivations->includes(indexClauseActivations)))
 						{
@@ -429,8 +429,8 @@ bool ConditionalNodeActivationImpl::eSet(int featureID, const Any& newValue)
 				try
 				{
 					std::shared_ptr<Bag<uml::Clause>> selectedClausesList= newValue->get<std::shared_ptr<Bag<uml::Clause>>>();
-					std::shared_ptr<Bag<uml::Clause>> _selectedClauses=getSelectedClauses();
-					for(const std::shared_ptr<uml::Clause> indexSelectedClauses: *_selectedClauses)
+					const std::shared_ptr<Bag<uml::Clause>>& _selectedClauses=getSelectedClauses();
+					for(const std::shared_ptr<uml::Clause>& indexSelectedClauses: *_selectedClauses)
 					{
 						if (!(selectedClausesList->includes(indexSelectedClauses)))
 						{
@@ -438,7 +438,7 @@ bool ConditionalNodeActivationImpl::eSet(int featureID, const Any& newValue)
 						}
 					}
 
-					for(const std::shared_ptr<uml::Clause> indexSelectedClauses: *selectedClausesList)
+					for(const std::shared_ptr<uml::Clause>& indexSelectedClauses: *selectedClausesList)
 					{
 						if (!(_selectedClauses->includes(indexSelectedClauses)))
 						{

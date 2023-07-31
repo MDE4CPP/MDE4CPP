@@ -649,8 +649,8 @@ bool BehavioredClassifierImpl::eSet(int featureID, const Any& newValue)
 				try
 				{
 					std::shared_ptr<Bag<uml::InterfaceRealization>> interfaceRealizationList= newValue->get<std::shared_ptr<Bag<uml::InterfaceRealization>>>();
-					std::shared_ptr<Bag<uml::InterfaceRealization>> _interfaceRealization=getInterfaceRealization();
-					for(const std::shared_ptr<uml::InterfaceRealization> indexInterfaceRealization: *_interfaceRealization)
+					const std::shared_ptr<Bag<uml::InterfaceRealization>>& _interfaceRealization=getInterfaceRealization();
+					for(const std::shared_ptr<uml::InterfaceRealization>& indexInterfaceRealization: *_interfaceRealization)
 					{
 						if (!(interfaceRealizationList->includes(indexInterfaceRealization)))
 						{
@@ -658,7 +658,7 @@ bool BehavioredClassifierImpl::eSet(int featureID, const Any& newValue)
 						}
 					}
 
-					for(const std::shared_ptr<uml::InterfaceRealization> indexInterfaceRealization: *interfaceRealizationList)
+					for(const std::shared_ptr<uml::InterfaceRealization>& indexInterfaceRealization: *interfaceRealizationList)
 					{
 						if (!(_interfaceRealization->includes(indexInterfaceRealization)))
 						{
@@ -686,8 +686,8 @@ bool BehavioredClassifierImpl::eSet(int featureID, const Any& newValue)
 				try
 				{
 					std::shared_ptr<Bag<uml::Behavior>> ownedBehaviorList= newValue->get<std::shared_ptr<Bag<uml::Behavior>>>();
-					std::shared_ptr<Bag<uml::Behavior>> _ownedBehavior=getOwnedBehavior();
-					for(const std::shared_ptr<uml::Behavior> indexOwnedBehavior: *_ownedBehavior)
+					const std::shared_ptr<Bag<uml::Behavior>>& _ownedBehavior=getOwnedBehavior();
+					for(const std::shared_ptr<uml::Behavior>& indexOwnedBehavior: *_ownedBehavior)
 					{
 						if (!(ownedBehaviorList->includes(indexOwnedBehavior)))
 						{
@@ -695,7 +695,7 @@ bool BehavioredClassifierImpl::eSet(int featureID, const Any& newValue)
 						}
 					}
 
-					for(const std::shared_ptr<uml::Behavior> indexOwnedBehavior: *ownedBehaviorList)
+					for(const std::shared_ptr<uml::Behavior>& indexOwnedBehavior: *ownedBehaviorList)
 					{
 						if (!(_ownedBehavior->includes(indexOwnedBehavior)))
 						{

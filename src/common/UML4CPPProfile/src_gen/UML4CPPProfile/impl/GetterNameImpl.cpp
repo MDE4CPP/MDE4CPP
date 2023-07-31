@@ -112,9 +112,10 @@ GetterNameImpl& GetterNameImpl::operator=(const GetterNameImpl & obj)
 }
 
 
-std::shared_ptr<uml::Class> GetterNameImpl::getMetaClass() const
+const std::shared_ptr<uml::Class>& GetterNameImpl::getMetaClass() const
 {
-	return UML4CPPProfilePackageImpl::eInstance()->get_UML4CPPProfile_GetterName();
+	static const std::shared_ptr<uml::Class> metaClass = UML4CPPProfilePackageImpl::eInstance()->get_UML4CPPProfile_GetterName();
+	return metaClass;
 }
 
 void GetterNameImpl::instantiate()

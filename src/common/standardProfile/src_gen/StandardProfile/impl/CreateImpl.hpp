@@ -76,7 +76,7 @@ namespace StandardProfile
 			virtual bool GetIsActive() const;
 
 		protected:
-			virtual std::shared_ptr<uml::Class> getMetaClass() const;
+			virtual const std::shared_ptr<uml::Class>& getMetaClass() const;
 			virtual void instantiate();
 			virtual void destroy();
 

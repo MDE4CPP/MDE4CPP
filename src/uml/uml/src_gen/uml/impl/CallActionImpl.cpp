@@ -535,8 +535,8 @@ bool CallActionImpl::eSet(int featureID, const Any& newValue)
 				try
 				{
 					std::shared_ptr<Bag<uml::OutputPin>> resultList= newValue->get<std::shared_ptr<Bag<uml::OutputPin>>>();
-					std::shared_ptr<Bag<uml::OutputPin>> _result=getResult();
-					for(const std::shared_ptr<uml::OutputPin> indexResult: *_result)
+					const std::shared_ptr<Bag<uml::OutputPin>>& _result=getResult();
+					for(const std::shared_ptr<uml::OutputPin>& indexResult: *_result)
 					{
 						if (!(resultList->includes(indexResult)))
 						{
@@ -544,7 +544,7 @@ bool CallActionImpl::eSet(int featureID, const Any& newValue)
 						}
 					}
 
-					for(const std::shared_ptr<uml::OutputPin> indexResult: *resultList)
+					for(const std::shared_ptr<uml::OutputPin>& indexResult: *resultList)
 					{
 						if (!(_result->includes(indexResult)))
 						{

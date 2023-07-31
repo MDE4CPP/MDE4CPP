@@ -420,8 +420,8 @@ bool ParameterSetImpl::eSet(int featureID, const Any& newValue)
 				try
 				{
 					std::shared_ptr<Bag<uml::Constraint>> conditionList= newValue->get<std::shared_ptr<Bag<uml::Constraint>>>();
-					std::shared_ptr<Bag<uml::Constraint>> _condition=getCondition();
-					for(const std::shared_ptr<uml::Constraint> indexCondition: *_condition)
+					const std::shared_ptr<Bag<uml::Constraint>>& _condition=getCondition();
+					for(const std::shared_ptr<uml::Constraint>& indexCondition: *_condition)
 					{
 						if (!(conditionList->includes(indexCondition)))
 						{
@@ -429,7 +429,7 @@ bool ParameterSetImpl::eSet(int featureID, const Any& newValue)
 						}
 					}
 
-					for(const std::shared_ptr<uml::Constraint> indexCondition: *conditionList)
+					for(const std::shared_ptr<uml::Constraint>& indexCondition: *conditionList)
 					{
 						if (!(_condition->includes(indexCondition)))
 						{
@@ -457,8 +457,8 @@ bool ParameterSetImpl::eSet(int featureID, const Any& newValue)
 				try
 				{
 					std::shared_ptr<Bag<uml::Parameter>> parameterList= newValue->get<std::shared_ptr<Bag<uml::Parameter>>>();
-					std::shared_ptr<Bag<uml::Parameter>> _parameter=getParameter();
-					for(const std::shared_ptr<uml::Parameter> indexParameter: *_parameter)
+					const std::shared_ptr<Bag<uml::Parameter>>& _parameter=getParameter();
+					for(const std::shared_ptr<uml::Parameter>& indexParameter: *_parameter)
 					{
 						if (!(parameterList->includes(indexParameter)))
 						{
@@ -466,7 +466,7 @@ bool ParameterSetImpl::eSet(int featureID, const Any& newValue)
 						}
 					}
 
-					for(const std::shared_ptr<uml::Parameter> indexParameter: *parameterList)
+					for(const std::shared_ptr<uml::Parameter>& indexParameter: *parameterList)
 					{
 						if (!(_parameter->includes(indexParameter)))
 						{

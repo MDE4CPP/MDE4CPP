@@ -106,9 +106,10 @@ FrameworkImpl& FrameworkImpl::operator=(const FrameworkImpl & obj)
 }
 
 
-std::shared_ptr<uml::Class> FrameworkImpl::getMetaClass() const
+const std::shared_ptr<uml::Class>& FrameworkImpl::getMetaClass() const
 {
-	return StandardProfilePackageImpl::eInstance()->get_StandardProfile_Framework();
+	static const std::shared_ptr<uml::Class> metaClass = StandardProfilePackageImpl::eInstance()->get_StandardProfile_Framework();
+	return metaClass;
 }
 
 void FrameworkImpl::instantiate()

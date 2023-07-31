@@ -286,8 +286,8 @@ bool EObjectContainerImpl::eSet(int featureID, const Any& newValue)
 				try
 				{
 					std::shared_ptr<Bag<ecore::EObject>> containerList= newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
-					std::shared_ptr<Bag<ecore::EObject>> _container=getContainer();
-					for(const std::shared_ptr<ecore::EObject> indexContainer: *_container)
+					const std::shared_ptr<Bag<ecore::EObject>>& _container=getContainer();
+					for(const std::shared_ptr<ecore::EObject>& indexContainer: *_container)
 					{
 						if (!(containerList->includes(indexContainer)))
 						{
@@ -295,7 +295,7 @@ bool EObjectContainerImpl::eSet(int featureID, const Any& newValue)
 						}
 					}
 
-					for(const std::shared_ptr<ecore::EObject> indexContainer: *containerList)
+					for(const std::shared_ptr<ecore::EObject>& indexContainer: *containerList)
 					{
 						if (!(_container->includes(indexContainer)))
 						{

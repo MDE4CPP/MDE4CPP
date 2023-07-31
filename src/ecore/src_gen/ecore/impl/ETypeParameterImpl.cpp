@@ -309,8 +309,8 @@ bool ETypeParameterImpl::eSet(int featureID, const Any& newValue)
 				try
 				{
 					std::shared_ptr<Bag<ecore::EGenericType>> eBoundsList= newValue->get<std::shared_ptr<Bag<ecore::EGenericType>>>();
-					std::shared_ptr<Bag<ecore::EGenericType>> _eBounds=getEBounds();
-					for(const std::shared_ptr<ecore::EGenericType> indexEBounds: *_eBounds)
+					const std::shared_ptr<Bag<ecore::EGenericType>>& _eBounds=getEBounds();
+					for(const std::shared_ptr<ecore::EGenericType>& indexEBounds: *_eBounds)
 					{
 						if (!(eBoundsList->includes(indexEBounds)))
 						{
@@ -318,7 +318,7 @@ bool ETypeParameterImpl::eSet(int featureID, const Any& newValue)
 						}
 					}
 
-					for(const std::shared_ptr<ecore::EGenericType> indexEBounds: *eBoundsList)
+					for(const std::shared_ptr<ecore::EGenericType>& indexEBounds: *eBoundsList)
 					{
 						if (!(_eBounds->includes(indexEBounds)))
 						{

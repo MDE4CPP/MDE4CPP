@@ -756,8 +756,8 @@ bool ComponentImpl::eSet(int featureID, const Any& newValue)
 				try
 				{
 					std::shared_ptr<Bag<uml::PackageableElement>> packagedElementList= newValue->get<std::shared_ptr<Bag<uml::PackageableElement>>>();
-					std::shared_ptr<Bag<uml::PackageableElement>> _packagedElement=getPackagedElement();
-					for(const std::shared_ptr<uml::PackageableElement> indexPackagedElement: *_packagedElement)
+					const std::shared_ptr<Bag<uml::PackageableElement>>& _packagedElement=getPackagedElement();
+					for(const std::shared_ptr<uml::PackageableElement>& indexPackagedElement: *_packagedElement)
 					{
 						if (!(packagedElementList->includes(indexPackagedElement)))
 						{
@@ -765,7 +765,7 @@ bool ComponentImpl::eSet(int featureID, const Any& newValue)
 						}
 					}
 
-					for(const std::shared_ptr<uml::PackageableElement> indexPackagedElement: *packagedElementList)
+					for(const std::shared_ptr<uml::PackageableElement>& indexPackagedElement: *packagedElementList)
 					{
 						if (!(_packagedElement->includes(indexPackagedElement)))
 						{
@@ -793,8 +793,8 @@ bool ComponentImpl::eSet(int featureID, const Any& newValue)
 				try
 				{
 					std::shared_ptr<Bag<uml::ComponentRealization>> realizationList= newValue->get<std::shared_ptr<Bag<uml::ComponentRealization>>>();
-					std::shared_ptr<Bag<uml::ComponentRealization>> _realization=getRealization();
-					for(const std::shared_ptr<uml::ComponentRealization> indexRealization: *_realization)
+					const std::shared_ptr<Bag<uml::ComponentRealization>>& _realization=getRealization();
+					for(const std::shared_ptr<uml::ComponentRealization>& indexRealization: *_realization)
 					{
 						if (!(realizationList->includes(indexRealization)))
 						{
@@ -802,7 +802,7 @@ bool ComponentImpl::eSet(int featureID, const Any& newValue)
 						}
 					}
 
-					for(const std::shared_ptr<uml::ComponentRealization> indexRealization: *realizationList)
+					for(const std::shared_ptr<uml::ComponentRealization>& indexRealization: *realizationList)
 					{
 						if (!(_realization->includes(indexRealization)))
 						{

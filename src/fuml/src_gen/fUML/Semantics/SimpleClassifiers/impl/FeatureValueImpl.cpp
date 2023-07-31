@@ -462,8 +462,8 @@ bool FeatureValueImpl::eSet(int featureID, const Any& newValue)
 				try
 				{
 					std::shared_ptr<Bag<fUML::Semantics::Values::Value>> valuesList= newValue->get<std::shared_ptr<Bag<fUML::Semantics::Values::Value>>>();
-					std::shared_ptr<Bag<fUML::Semantics::Values::Value>> _values=getValues();
-					for(const std::shared_ptr<fUML::Semantics::Values::Value> indexValues: *_values)
+					const std::shared_ptr<Bag<fUML::Semantics::Values::Value>>& _values=getValues();
+					for(const std::shared_ptr<fUML::Semantics::Values::Value>& indexValues: *_values)
 					{
 						if (!(valuesList->includes(indexValues)))
 						{
@@ -471,7 +471,7 @@ bool FeatureValueImpl::eSet(int featureID, const Any& newValue)
 						}
 					}
 
-					for(const std::shared_ptr<fUML::Semantics::Values::Value> indexValues: *valuesList)
+					for(const std::shared_ptr<fUML::Semantics::Values::Value>& indexValues: *valuesList)
 					{
 						if (!(_values->includes(indexValues)))
 						{

@@ -512,8 +512,8 @@ bool OclMessageValueImpl::eSet(int featureID, const Any& newValue)
 				try
 				{
 					std::shared_ptr<Bag<ocl::Values::NameValueBinding>> argumentsList= newValue->get<std::shared_ptr<Bag<ocl::Values::NameValueBinding>>>();
-					std::shared_ptr<Bag<ocl::Values::NameValueBinding>> _arguments=getArguments();
-					for(const std::shared_ptr<ocl::Values::NameValueBinding> indexArguments: *_arguments)
+					const std::shared_ptr<Bag<ocl::Values::NameValueBinding>>& _arguments=getArguments();
+					for(const std::shared_ptr<ocl::Values::NameValueBinding>& indexArguments: *_arguments)
 					{
 						if (!(argumentsList->includes(indexArguments)))
 						{
@@ -521,7 +521,7 @@ bool OclMessageValueImpl::eSet(int featureID, const Any& newValue)
 						}
 					}
 
-					for(const std::shared_ptr<ocl::Values::NameValueBinding> indexArguments: *argumentsList)
+					for(const std::shared_ptr<ocl::Values::NameValueBinding>& indexArguments: *argumentsList)
 					{
 						if (!(_arguments->includes(indexArguments)))
 						{

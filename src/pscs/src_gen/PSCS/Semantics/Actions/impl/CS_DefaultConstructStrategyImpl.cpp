@@ -887,8 +887,8 @@ bool CS_DefaultConstructStrategyImpl::eSet(int featureID, const Any& newValue)
 				try
 				{
 					std::shared_ptr<Bag<uml::Class>> generatedRealizingClassesList= newValue->get<std::shared_ptr<Bag<uml::Class>>>();
-					std::shared_ptr<Bag<uml::Class>> _generatedRealizingClasses=getGeneratedRealizingClasses();
-					for(const std::shared_ptr<uml::Class> indexGeneratedRealizingClasses: *_generatedRealizingClasses)
+					const std::shared_ptr<Bag<uml::Class>>& _generatedRealizingClasses=getGeneratedRealizingClasses();
+					for(const std::shared_ptr<uml::Class>& indexGeneratedRealizingClasses: *_generatedRealizingClasses)
 					{
 						if (!(generatedRealizingClassesList->includes(indexGeneratedRealizingClasses)))
 						{
@@ -896,7 +896,7 @@ bool CS_DefaultConstructStrategyImpl::eSet(int featureID, const Any& newValue)
 						}
 					}
 
-					for(const std::shared_ptr<uml::Class> indexGeneratedRealizingClasses: *generatedRealizingClassesList)
+					for(const std::shared_ptr<uml::Class>& indexGeneratedRealizingClasses: *generatedRealizingClassesList)
 					{
 						if (!(_generatedRealizingClasses->includes(indexGeneratedRealizingClasses)))
 						{

@@ -1125,8 +1125,8 @@ bool OperationImpl::eSet(int featureID, const Any& newValue)
 				try
 				{
 					std::shared_ptr<Bag<uml::Parameter>> ownedParameterList= newValue->get<std::shared_ptr<Bag<uml::Parameter>>>();
-					std::shared_ptr<Bag<uml::Parameter>> _ownedParameter=getProperty_OwnedParameter();
-					for(const std::shared_ptr<uml::Parameter> indexOwnedParameter: *_ownedParameter)
+					const std::shared_ptr<Bag<uml::Parameter>>& _ownedParameter=getProperty_OwnedParameter();
+					for(const std::shared_ptr<uml::Parameter>& indexOwnedParameter: *_ownedParameter)
 					{
 						if (!(ownedParameterList->includes(indexOwnedParameter)))
 						{
@@ -1134,7 +1134,7 @@ bool OperationImpl::eSet(int featureID, const Any& newValue)
 						}
 					}
 
-					for(const std::shared_ptr<uml::Parameter> indexOwnedParameter: *ownedParameterList)
+					for(const std::shared_ptr<uml::Parameter>& indexOwnedParameter: *ownedParameterList)
 					{
 						if (!(_ownedParameter->includes(indexOwnedParameter)))
 						{
@@ -1162,8 +1162,8 @@ bool OperationImpl::eSet(int featureID, const Any& newValue)
 				try
 				{
 					std::shared_ptr<Bag<uml::Constraint>> postconditionList= newValue->get<std::shared_ptr<Bag<uml::Constraint>>>();
-					std::shared_ptr<Bag<uml::Constraint>> _postcondition=getPostcondition();
-					for(const std::shared_ptr<uml::Constraint> indexPostcondition: *_postcondition)
+					const std::shared_ptr<Bag<uml::Constraint>>& _postcondition=getPostcondition();
+					for(const std::shared_ptr<uml::Constraint>& indexPostcondition: *_postcondition)
 					{
 						if (!(postconditionList->includes(indexPostcondition)))
 						{
@@ -1171,7 +1171,7 @@ bool OperationImpl::eSet(int featureID, const Any& newValue)
 						}
 					}
 
-					for(const std::shared_ptr<uml::Constraint> indexPostcondition: *postconditionList)
+					for(const std::shared_ptr<uml::Constraint>& indexPostcondition: *postconditionList)
 					{
 						if (!(_postcondition->includes(indexPostcondition)))
 						{
@@ -1199,8 +1199,8 @@ bool OperationImpl::eSet(int featureID, const Any& newValue)
 				try
 				{
 					std::shared_ptr<Bag<uml::Constraint>> preconditionList= newValue->get<std::shared_ptr<Bag<uml::Constraint>>>();
-					std::shared_ptr<Bag<uml::Constraint>> _precondition=getPrecondition();
-					for(const std::shared_ptr<uml::Constraint> indexPrecondition: *_precondition)
+					const std::shared_ptr<Bag<uml::Constraint>>& _precondition=getPrecondition();
+					for(const std::shared_ptr<uml::Constraint>& indexPrecondition: *_precondition)
 					{
 						if (!(preconditionList->includes(indexPrecondition)))
 						{
@@ -1208,7 +1208,7 @@ bool OperationImpl::eSet(int featureID, const Any& newValue)
 						}
 					}
 
-					for(const std::shared_ptr<uml::Constraint> indexPrecondition: *preconditionList)
+					for(const std::shared_ptr<uml::Constraint>& indexPrecondition: *preconditionList)
 					{
 						if (!(_precondition->includes(indexPrecondition)))
 						{
@@ -1236,8 +1236,8 @@ bool OperationImpl::eSet(int featureID, const Any& newValue)
 				try
 				{
 					std::shared_ptr<Bag<uml::Operation>> redefinedOperationList= newValue->get<std::shared_ptr<Bag<uml::Operation>>>();
-					std::shared_ptr<Bag<uml::Operation>> _redefinedOperation=getRedefinedOperation();
-					for(const std::shared_ptr<uml::Operation> indexRedefinedOperation: *_redefinedOperation)
+					const std::shared_ptr<Bag<uml::Operation>>& _redefinedOperation=getRedefinedOperation();
+					for(const std::shared_ptr<uml::Operation>& indexRedefinedOperation: *_redefinedOperation)
 					{
 						if (!(redefinedOperationList->includes(indexRedefinedOperation)))
 						{
@@ -1245,7 +1245,7 @@ bool OperationImpl::eSet(int featureID, const Any& newValue)
 						}
 					}
 
-					for(const std::shared_ptr<uml::Operation> indexRedefinedOperation: *redefinedOperationList)
+					for(const std::shared_ptr<uml::Operation>& indexRedefinedOperation: *redefinedOperationList)
 					{
 						if (!(_redefinedOperation->includes(indexRedefinedOperation)))
 						{

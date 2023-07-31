@@ -106,9 +106,10 @@ SourceImpl& SourceImpl::operator=(const SourceImpl & obj)
 }
 
 
-std::shared_ptr<uml::Class> SourceImpl::getMetaClass() const
+const std::shared_ptr<uml::Class>& SourceImpl::getMetaClass() const
 {
-	return StandardProfilePackageImpl::eInstance()->get_StandardProfile_Source();
+	static const std::shared_ptr<uml::Class> metaClass = StandardProfilePackageImpl::eInstance()->get_StandardProfile_Source();
+	return metaClass;
 }
 
 void SourceImpl::instantiate()

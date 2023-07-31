@@ -473,8 +473,8 @@ bool EAnnotationImpl::eSet(int featureID, const Any& newValue)
 				try
 				{
 					std::shared_ptr<Bag<ecore::EObject>> contentsList= newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
-					std::shared_ptr<Bag<ecore::EObject>> _contents=getContents();
-					for(const std::shared_ptr<ecore::EObject> indexContents: *_contents)
+					const std::shared_ptr<Bag<ecore::EObject>>& _contents=getContents();
+					for(const std::shared_ptr<ecore::EObject>& indexContents: *_contents)
 					{
 						if (!(contentsList->includes(indexContents)))
 						{
@@ -482,7 +482,7 @@ bool EAnnotationImpl::eSet(int featureID, const Any& newValue)
 						}
 					}
 
-					for(const std::shared_ptr<ecore::EObject> indexContents: *contentsList)
+					for(const std::shared_ptr<ecore::EObject>& indexContents: *contentsList)
 					{
 						if (!(_contents->includes(indexContents)))
 						{
@@ -526,8 +526,8 @@ bool EAnnotationImpl::eSet(int featureID, const Any& newValue)
 				try
 				{
 					std::shared_ptr<Bag<ecore::EObject>> referencesList= newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
-					std::shared_ptr<Bag<ecore::EObject>> _references=getReferences();
-					for(const std::shared_ptr<ecore::EObject> indexReferences: *_references)
+					const std::shared_ptr<Bag<ecore::EObject>>& _references=getReferences();
+					for(const std::shared_ptr<ecore::EObject>& indexReferences: *_references)
 					{
 						if (!(referencesList->includes(indexReferences)))
 						{
@@ -535,7 +535,7 @@ bool EAnnotationImpl::eSet(int featureID, const Any& newValue)
 						}
 					}
 
-					for(const std::shared_ptr<ecore::EObject> indexReferences: *referencesList)
+					for(const std::shared_ptr<ecore::EObject>& indexReferences: *referencesList)
 					{
 						if (!(_references->includes(indexReferences)))
 						{

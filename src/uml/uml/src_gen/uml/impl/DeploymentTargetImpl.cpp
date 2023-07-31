@@ -365,8 +365,8 @@ bool DeploymentTargetImpl::eSet(int featureID, const Any& newValue)
 				try
 				{
 					std::shared_ptr<Bag<uml::Deployment>> deploymentList= newValue->get<std::shared_ptr<Bag<uml::Deployment>>>();
-					std::shared_ptr<Bag<uml::Deployment>> _deployment=getDeployment();
-					for(const std::shared_ptr<uml::Deployment> indexDeployment: *_deployment)
+					const std::shared_ptr<Bag<uml::Deployment>>& _deployment=getDeployment();
+					for(const std::shared_ptr<uml::Deployment>& indexDeployment: *_deployment)
 					{
 						if (!(deploymentList->includes(indexDeployment)))
 						{
@@ -374,7 +374,7 @@ bool DeploymentTargetImpl::eSet(int featureID, const Any& newValue)
 						}
 					}
 
-					for(const std::shared_ptr<uml::Deployment> indexDeployment: *deploymentList)
+					for(const std::shared_ptr<uml::Deployment>& indexDeployment: *deploymentList)
 					{
 						if (!(_deployment->includes(indexDeployment)))
 						{

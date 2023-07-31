@@ -205,7 +205,7 @@ void DestroyObjectActionActivationImpl::doAction()
 		if(destroyTarget)
 		{
 			std::shared_ptr<Bag<fUML::Semantics::Values::Value> > tokens=this->takeTokens(destroyTarget);
-			for(std::shared_ptr<fUML::Semantics::Values::Value> value : *tokens)
+			for(const std::shared_ptr<fUML::Semantics::Values::Value>& value : *tokens)
 			{
 				this->destroyObject(value,action->getIsDestroyLinks(), action->getIsDestroyOwnedObjects());
 			}

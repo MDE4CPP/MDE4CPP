@@ -211,7 +211,7 @@ void ActivityNodeActivationImpl::addTokens(const std::shared_ptr<Bag<fUML::Seman
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
-	for(std::shared_ptr<fUML::Semantics::Activities::Token> token: *tokens)
+	for(const std::shared_ptr<fUML::Semantics::Activities::Token>& token: *tokens)
     {
         this->addToken(token);
     }
@@ -473,8 +473,8 @@ void ActivityNodeActivationImpl::sendOffers(const std::shared_ptr<Bag<fUML::Sema
 if (tokens->size() > 0) 
 	{
         // *** Send all outgoing offers concurrently. ***
-		std::shared_ptr<Bag<fUML::Semantics::Activities::ActivityEdgeInstance> > outgoingEdgeList = this->getOutgoingEdges();
-        for(std::shared_ptr<fUML::Semantics::Activities::ActivityEdgeInstance> outgoingEdge : *outgoingEdgeList)
+		const std::shared_ptr<Bag<fUML::Semantics::Activities::ActivityEdgeInstance>>& outgoingEdgeList = this->getOutgoingEdges();
+        for(const std::shared_ptr<fUML::Semantics::Activities::ActivityEdgeInstance>& outgoingEdge : *outgoingEdgeList)
         {
 			DEBUG_MESSAGE(
 				auto target=outgoingEdge->getTarget().lock();
@@ -534,12 +534,12 @@ std::shared_ptr<Bag<fUML::Semantics::Activities::Token> > ActivityNodeActivation
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
 	std::shared_ptr<Bag<fUML::Semantics::Activities::Token> > allTokens(new Bag<fUML::Semantics::Activities::Token>());
-	std::shared_ptr<Bag<fUML::Semantics::Activities::ActivityEdgeInstance> > incomingEdgeList = this->getIncomingEdges();
+	const std::shared_ptr<Bag<fUML::Semantics::Activities::ActivityEdgeInstance>>& incomingEdgeList = this->getIncomingEdges();
 
 	//NEWDEBUG
 	DEBUG_MESSAGE(std::cout<<"-- printing from ActivityNodeActivation::"<<__FUNCTION__<<" '"<<(this->getNode() == nullptr ? "..." : ("node = " + this->getNode()->getName()))<<"' : #incomingEdges = "<<incomingEdgeList->size()<<std::endl;)
 
-	for(std::shared_ptr<fUML::Semantics::Activities::ActivityEdgeInstance> incomingEdge : *incomingEdgeList)
+	for(const std::shared_ptr<fUML::Semantics::Activities::ActivityEdgeInstance>& incomingEdge : *incomingEdgeList)
 	{
 		auto vec = incomingEdge->takeOfferedTokens();
 		allTokens->insert(allTokens->end(), vec->begin(), vec->end());
@@ -934,8 +934,8 @@ bool ActivityNodeActivationImpl::eSet(int featureID, const Any& newValue)
 				try
 				{
 					std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> heldTokensList= newValue->get<std::shared_ptr<Bag<fUML::Semantics::Activities::Token>>>();
-					std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> _heldTokens=getHeldTokens();
-					for(const std::shared_ptr<fUML::Semantics::Activities::Token> indexHeldTokens: *_heldTokens)
+					const std::shared_ptr<Bag<fUML::Semantics::Activities::Token>>& _heldTokens=getHeldTokens();
+					for(const std::shared_ptr<fUML::Semantics::Activities::Token>& indexHeldTokens: *_heldTokens)
 					{
 						if (!(heldTokensList->includes(indexHeldTokens)))
 						{
@@ -943,7 +943,7 @@ bool ActivityNodeActivationImpl::eSet(int featureID, const Any& newValue)
 						}
 					}
 
-					for(const std::shared_ptr<fUML::Semantics::Activities::Token> indexHeldTokens: *heldTokensList)
+					for(const std::shared_ptr<fUML::Semantics::Activities::Token>& indexHeldTokens: *heldTokensList)
 					{
 						if (!(_heldTokens->includes(indexHeldTokens)))
 						{
@@ -971,8 +971,8 @@ bool ActivityNodeActivationImpl::eSet(int featureID, const Any& newValue)
 				try
 				{
 					std::shared_ptr<Bag<fUML::Semantics::Activities::ActivityEdgeInstance>> incomingEdgesList= newValue->get<std::shared_ptr<Bag<fUML::Semantics::Activities::ActivityEdgeInstance>>>();
-					std::shared_ptr<Bag<fUML::Semantics::Activities::ActivityEdgeInstance>> _incomingEdges=getIncomingEdges();
-					for(const std::shared_ptr<fUML::Semantics::Activities::ActivityEdgeInstance> indexIncomingEdges: *_incomingEdges)
+					const std::shared_ptr<Bag<fUML::Semantics::Activities::ActivityEdgeInstance>>& _incomingEdges=getIncomingEdges();
+					for(const std::shared_ptr<fUML::Semantics::Activities::ActivityEdgeInstance>& indexIncomingEdges: *_incomingEdges)
 					{
 						if (!(incomingEdgesList->includes(indexIncomingEdges)))
 						{
@@ -980,7 +980,7 @@ bool ActivityNodeActivationImpl::eSet(int featureID, const Any& newValue)
 						}
 					}
 
-					for(const std::shared_ptr<fUML::Semantics::Activities::ActivityEdgeInstance> indexIncomingEdges: *incomingEdgesList)
+					for(const std::shared_ptr<fUML::Semantics::Activities::ActivityEdgeInstance>& indexIncomingEdges: *incomingEdgesList)
 					{
 						if (!(_incomingEdges->includes(indexIncomingEdges)))
 						{
@@ -1016,8 +1016,8 @@ bool ActivityNodeActivationImpl::eSet(int featureID, const Any& newValue)
 				try
 				{
 					std::shared_ptr<Bag<fUML::Semantics::Activities::ActivityEdgeInstance>> outgoingEdgesList= newValue->get<std::shared_ptr<Bag<fUML::Semantics::Activities::ActivityEdgeInstance>>>();
-					std::shared_ptr<Bag<fUML::Semantics::Activities::ActivityEdgeInstance>> _outgoingEdges=getOutgoingEdges();
-					for(const std::shared_ptr<fUML::Semantics::Activities::ActivityEdgeInstance> indexOutgoingEdges: *_outgoingEdges)
+					const std::shared_ptr<Bag<fUML::Semantics::Activities::ActivityEdgeInstance>>& _outgoingEdges=getOutgoingEdges();
+					for(const std::shared_ptr<fUML::Semantics::Activities::ActivityEdgeInstance>& indexOutgoingEdges: *_outgoingEdges)
 					{
 						if (!(outgoingEdgesList->includes(indexOutgoingEdges)))
 						{
@@ -1025,7 +1025,7 @@ bool ActivityNodeActivationImpl::eSet(int featureID, const Any& newValue)
 						}
 					}
 
-					for(const std::shared_ptr<fUML::Semantics::Activities::ActivityEdgeInstance> indexOutgoingEdges: *outgoingEdgesList)
+					for(const std::shared_ptr<fUML::Semantics::Activities::ActivityEdgeInstance>& indexOutgoingEdges: *outgoingEdgesList)
 					{
 						if (!(_outgoingEdges->includes(indexOutgoingEdges)))
 						{

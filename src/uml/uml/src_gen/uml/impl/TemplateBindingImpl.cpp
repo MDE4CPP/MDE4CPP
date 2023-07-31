@@ -511,8 +511,8 @@ bool TemplateBindingImpl::eSet(int featureID, const Any& newValue)
 				try
 				{
 					std::shared_ptr<Bag<uml::TemplateParameterSubstitution>> parameterSubstitutionList= newValue->get<std::shared_ptr<Bag<uml::TemplateParameterSubstitution>>>();
-					std::shared_ptr<Bag<uml::TemplateParameterSubstitution>> _parameterSubstitution=getParameterSubstitution();
-					for(const std::shared_ptr<uml::TemplateParameterSubstitution> indexParameterSubstitution: *_parameterSubstitution)
+					const std::shared_ptr<Bag<uml::TemplateParameterSubstitution>>& _parameterSubstitution=getParameterSubstitution();
+					for(const std::shared_ptr<uml::TemplateParameterSubstitution>& indexParameterSubstitution: *_parameterSubstitution)
 					{
 						if (!(parameterSubstitutionList->includes(indexParameterSubstitution)))
 						{
@@ -520,7 +520,7 @@ bool TemplateBindingImpl::eSet(int featureID, const Any& newValue)
 						}
 					}
 
-					for(const std::shared_ptr<uml::TemplateParameterSubstitution> indexParameterSubstitution: *parameterSubstitutionList)
+					for(const std::shared_ptr<uml::TemplateParameterSubstitution>& indexParameterSubstitution: *parameterSubstitutionList)
 					{
 						if (!(_parameterSubstitution->includes(indexParameterSubstitution)))
 						{

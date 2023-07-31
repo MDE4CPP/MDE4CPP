@@ -455,8 +455,8 @@ bool CS_ExecutionFactoryImpl::eSet(int featureID, const Any& newValue)
 				try
 				{
 					std::shared_ptr<Bag<uml::Package>> appliedProfilesList= newValue->get<std::shared_ptr<Bag<uml::Package>>>();
-					std::shared_ptr<Bag<uml::Package>> _appliedProfiles=getAppliedProfiles();
-					for(const std::shared_ptr<uml::Package> indexAppliedProfiles: *_appliedProfiles)
+					const std::shared_ptr<Bag<uml::Package>>& _appliedProfiles=getAppliedProfiles();
+					for(const std::shared_ptr<uml::Package>& indexAppliedProfiles: *_appliedProfiles)
 					{
 						if (!(appliedProfilesList->includes(indexAppliedProfiles)))
 						{
@@ -464,7 +464,7 @@ bool CS_ExecutionFactoryImpl::eSet(int featureID, const Any& newValue)
 						}
 					}
 
-					for(const std::shared_ptr<uml::Package> indexAppliedProfiles: *appliedProfilesList)
+					for(const std::shared_ptr<uml::Package>& indexAppliedProfiles: *appliedProfilesList)
 					{
 						if (!(_appliedProfiles->includes(indexAppliedProfiles)))
 						{

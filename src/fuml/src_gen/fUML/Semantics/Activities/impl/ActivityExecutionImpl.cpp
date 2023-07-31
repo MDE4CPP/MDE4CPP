@@ -171,14 +171,14 @@ void ActivityExecutionImpl::execute()
 		std::shared_ptr<fUML::Semantics::Activities::ActivityExecution> thisPtr=getThisActivityExecutionPtr();
 
 		std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup> newActivationGroup=fUML::Semantics::Activities::ActivitiesFactory::eInstance()->createActivityNodeActivationGroup_as_activationGroup_in_ActivityExecution(thisPtr);
-        std::shared_ptr<Bag<uml::ActivityNode> > nodes = activity->getNode();
-		std::shared_ptr<Bag<uml::ActivityEdge> > edges = activity->getEdge();
+        	const std::shared_ptr<Bag<uml::ActivityNode>>& nodes = activity->getNode();
+		const std::shared_ptr<Bag<uml::ActivityEdge>>& edges = activity->getEdge();
 		newActivationGroup->activate(nodes, edges);
 
         DEBUG_MESSAGE(std::cout<<"[execute] Getting output parameter node activations..."<<std::endl;)
 
         std::shared_ptr<Bag<fUML::Semantics::Activities::ActivityParameterNodeActivation> > outputActivationList = this->getActivationGroup()->getOutputParameterNodeActivations();
-        for(std::shared_ptr<fUML::Semantics::Activities::ActivityParameterNodeActivation> outputActivation : *outputActivationList)
+        for(const std::shared_ptr<fUML::Semantics::Activities::ActivityParameterNodeActivation>& outputActivation : *outputActivationList)
         {
             
 	if(outputActivation->getNode()->getMetaElementID() == uml::umlPackage::ACTIVITYPARAMETERNODE_CLASS)
@@ -187,8 +187,8 @@ void ActivityExecutionImpl::execute()
 	      std::shared_ptr<uml::ActivityParameterNode> activityParameterNode = std::dynamic_pointer_cast<uml::ActivityParameterNode> (outputActivation->getNode());
                 parameterValue->setParameter(activityParameterNode->getParameter());
 
-                std::shared_ptr<Bag<fUML::Semantics::Activities::Token> > tokenList = outputActivation->getTokens();
-                for(std::shared_ptr<fUML::Semantics::Activities::Token> token : *tokenList)
+                std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> tokenList = outputActivation->getTokens();
+                for(const std::shared_ptr<fUML::Semantics::Activities::Token>& token : *tokenList)
                 {
                 	std::shared_ptr<fUML::Semantics::Values::Value> value = nullptr;
 		value = token->getValue();

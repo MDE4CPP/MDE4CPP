@@ -434,8 +434,8 @@ bool ObjectValueImpl::eSet(int featureID, const Any& newValue)
 				try
 				{
 					std::shared_ptr<Bag<ocl::Values::LocalSnapshot>> historyList= newValue->get<std::shared_ptr<Bag<ocl::Values::LocalSnapshot>>>();
-					std::shared_ptr<Bag<ocl::Values::LocalSnapshot>> _history=getHistory();
-					for(const std::shared_ptr<ocl::Values::LocalSnapshot> indexHistory: *_history)
+					const std::shared_ptr<Bag<ocl::Values::LocalSnapshot>>& _history=getHistory();
+					for(const std::shared_ptr<ocl::Values::LocalSnapshot>& indexHistory: *_history)
 					{
 						if (!(historyList->includes(indexHistory)))
 						{
@@ -443,7 +443,7 @@ bool ObjectValueImpl::eSet(int featureID, const Any& newValue)
 						}
 					}
 
-					for(const std::shared_ptr<ocl::Values::LocalSnapshot> indexHistory: *historyList)
+					for(const std::shared_ptr<ocl::Values::LocalSnapshot>& indexHistory: *historyList)
 					{
 						if (!(_history->includes(indexHistory)))
 						{

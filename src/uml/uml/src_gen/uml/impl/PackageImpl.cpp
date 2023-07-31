@@ -1076,8 +1076,8 @@ bool PackageImpl::eSet(int featureID, const Any& newValue)
 				try
 				{
 					std::shared_ptr<Bag<uml::Package>> nestedPackageList= newValue->get<std::shared_ptr<Bag<uml::Package>>>();
-					std::shared_ptr<Bag<uml::Package>> _nestedPackage=getNestedPackage();
-					for(const std::shared_ptr<uml::Package> indexNestedPackage: *_nestedPackage)
+					const std::shared_ptr<Bag<uml::Package>>& _nestedPackage=getNestedPackage();
+					for(const std::shared_ptr<uml::Package>& indexNestedPackage: *_nestedPackage)
 					{
 						if (!(nestedPackageList->includes(indexNestedPackage)))
 						{
@@ -1085,7 +1085,7 @@ bool PackageImpl::eSet(int featureID, const Any& newValue)
 						}
 					}
 
-					for(const std::shared_ptr<uml::Package> indexNestedPackage: *nestedPackageList)
+					for(const std::shared_ptr<uml::Package>& indexNestedPackage: *nestedPackageList)
 					{
 						if (!(_nestedPackage->includes(indexNestedPackage)))
 						{
@@ -1121,8 +1121,8 @@ bool PackageImpl::eSet(int featureID, const Any& newValue)
 				try
 				{
 					std::shared_ptr<Bag<uml::Type>> ownedTypeList= newValue->get<std::shared_ptr<Bag<uml::Type>>>();
-					std::shared_ptr<Bag<uml::Type>> _ownedType=getOwnedType();
-					for(const std::shared_ptr<uml::Type> indexOwnedType: *_ownedType)
+					const std::shared_ptr<Bag<uml::Type>>& _ownedType=getOwnedType();
+					for(const std::shared_ptr<uml::Type>& indexOwnedType: *_ownedType)
 					{
 						if (!(ownedTypeList->includes(indexOwnedType)))
 						{
@@ -1130,7 +1130,7 @@ bool PackageImpl::eSet(int featureID, const Any& newValue)
 						}
 					}
 
-					for(const std::shared_ptr<uml::Type> indexOwnedType: *ownedTypeList)
+					for(const std::shared_ptr<uml::Type>& indexOwnedType: *ownedTypeList)
 					{
 						if (!(_ownedType->includes(indexOwnedType)))
 						{
@@ -1158,8 +1158,8 @@ bool PackageImpl::eSet(int featureID, const Any& newValue)
 				try
 				{
 					std::shared_ptr<Bag<uml::PackageMerge>> packageMergeList= newValue->get<std::shared_ptr<Bag<uml::PackageMerge>>>();
-					std::shared_ptr<Bag<uml::PackageMerge>> _packageMerge=getPackageMerge();
-					for(const std::shared_ptr<uml::PackageMerge> indexPackageMerge: *_packageMerge)
+					const std::shared_ptr<Bag<uml::PackageMerge>>& _packageMerge=getPackageMerge();
+					for(const std::shared_ptr<uml::PackageMerge>& indexPackageMerge: *_packageMerge)
 					{
 						if (!(packageMergeList->includes(indexPackageMerge)))
 						{
@@ -1167,7 +1167,7 @@ bool PackageImpl::eSet(int featureID, const Any& newValue)
 						}
 					}
 
-					for(const std::shared_ptr<uml::PackageMerge> indexPackageMerge: *packageMergeList)
+					for(const std::shared_ptr<uml::PackageMerge>& indexPackageMerge: *packageMergeList)
 					{
 						if (!(_packageMerge->includes(indexPackageMerge)))
 						{
@@ -1195,8 +1195,8 @@ bool PackageImpl::eSet(int featureID, const Any& newValue)
 				try
 				{
 					std::shared_ptr<Bag<uml::PackageableElement>> packagedElementList= newValue->get<std::shared_ptr<Bag<uml::PackageableElement>>>();
-					std::shared_ptr<Bag<uml::PackageableElement>> _packagedElement=getPackagedElement();
-					for(const std::shared_ptr<uml::PackageableElement> indexPackagedElement: *_packagedElement)
+					const std::shared_ptr<Bag<uml::PackageableElement>>& _packagedElement=getPackagedElement();
+					for(const std::shared_ptr<uml::PackageableElement>& indexPackagedElement: *_packagedElement)
 					{
 						if (!(packagedElementList->includes(indexPackagedElement)))
 						{
@@ -1204,7 +1204,7 @@ bool PackageImpl::eSet(int featureID, const Any& newValue)
 						}
 					}
 
-					for(const std::shared_ptr<uml::PackageableElement> indexPackagedElement: *packagedElementList)
+					for(const std::shared_ptr<uml::PackageableElement>& indexPackagedElement: *packagedElementList)
 					{
 						if (!(_packagedElement->includes(indexPackagedElement)))
 						{
@@ -1232,8 +1232,8 @@ bool PackageImpl::eSet(int featureID, const Any& newValue)
 				try
 				{
 					std::shared_ptr<Bag<uml::ProfileApplication>> profileApplicationList= newValue->get<std::shared_ptr<Bag<uml::ProfileApplication>>>();
-					std::shared_ptr<Bag<uml::ProfileApplication>> _profileApplication=getProfileApplication();
-					for(const std::shared_ptr<uml::ProfileApplication> indexProfileApplication: *_profileApplication)
+					const std::shared_ptr<Bag<uml::ProfileApplication>>& _profileApplication=getProfileApplication();
+					for(const std::shared_ptr<uml::ProfileApplication>& indexProfileApplication: *_profileApplication)
 					{
 						if (!(profileApplicationList->includes(indexProfileApplication)))
 						{
@@ -1241,7 +1241,7 @@ bool PackageImpl::eSet(int featureID, const Any& newValue)
 						}
 					}
 
-					for(const std::shared_ptr<uml::ProfileApplication> indexProfileApplication: *profileApplicationList)
+					for(const std::shared_ptr<uml::ProfileApplication>& indexProfileApplication: *profileApplicationList)
 					{
 						if (!(_profileApplication->includes(indexProfileApplication)))
 						{

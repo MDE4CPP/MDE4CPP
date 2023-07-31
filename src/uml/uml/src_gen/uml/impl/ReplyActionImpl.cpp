@@ -557,8 +557,8 @@ bool ReplyActionImpl::eSet(int featureID, const Any& newValue)
 				try
 				{
 					std::shared_ptr<Bag<uml::InputPin>> replyValueList= newValue->get<std::shared_ptr<Bag<uml::InputPin>>>();
-					std::shared_ptr<Bag<uml::InputPin>> _replyValue=getReplyValue();
-					for(const std::shared_ptr<uml::InputPin> indexReplyValue: *_replyValue)
+					const std::shared_ptr<Bag<uml::InputPin>>& _replyValue=getReplyValue();
+					for(const std::shared_ptr<uml::InputPin>& indexReplyValue: *_replyValue)
 					{
 						if (!(replyValueList->includes(indexReplyValue)))
 						{
@@ -566,7 +566,7 @@ bool ReplyActionImpl::eSet(int featureID, const Any& newValue)
 						}
 					}
 
-					for(const std::shared_ptr<uml::InputPin> indexReplyValue: *replyValueList)
+					for(const std::shared_ptr<uml::InputPin>& indexReplyValue: *replyValueList)
 					{
 						if (!(_replyValue->includes(indexReplyValue)))
 						{

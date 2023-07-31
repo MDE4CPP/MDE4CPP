@@ -158,7 +158,7 @@ std::shared_ptr<Bag<uml::Element> > ElementImpl::allOwnedElements()
 		std::shared_ptr<Bag<uml::Element>> allOwnedElements(new Bag<uml::Element>());
 	allOwnedElements->insert(allOwnedElements->begin(), this->getOwnedElement()->begin(), this->getOwnedElement()->end());
 
-	for(const std::shared_ptr<uml::Element> ownedElement : *allOwnedElements)
+	for(const std::shared_ptr<uml::Element>& ownedElement : *allOwnedElements)
 	{
 		std::shared_ptr<Bag<uml::Element>> recursivelyOwnedElements = ownedElement->allOwnedElements();
 		allOwnedElements->insert(allOwnedElements->end(), recursivelyOwnedElements->begin(), recursivelyOwnedElements->end());
@@ -233,12 +233,13 @@ std::shared_ptr<Bag<std::string> > ElementImpl::getKeywords()
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-std::shared_ptr<uml::Class> ElementImpl::getMetaClass() const
+const std::shared_ptr<uml::Class>& ElementImpl::getMetaClass() const
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
 		//Todo return generate MetaClass for all UML-Classes in core generator (already done in UML generator) (temporarily used to detect ecore generated uml-Model see OCL())
-	return nullptr; 
+	static const std::shared_ptr<uml::Class> nullPointer = nullptr;
+	return nullPointer;
 	//end of body
 }
 
@@ -606,8 +607,8 @@ bool ElementImpl::eSet(int featureID, const Any& newValue)
 				try
 				{
 					std::shared_ptr<Bag<uml::Comment>> ownedCommentList= newValue->get<std::shared_ptr<Bag<uml::Comment>>>();
-					std::shared_ptr<Bag<uml::Comment>> _ownedComment=getOwnedComment();
-					for(const std::shared_ptr<uml::Comment> indexOwnedComment: *_ownedComment)
+					const std::shared_ptr<Bag<uml::Comment>>& _ownedComment=getOwnedComment();
+					for(const std::shared_ptr<uml::Comment>& indexOwnedComment: *_ownedComment)
 					{
 						if (!(ownedCommentList->includes(indexOwnedComment)))
 						{
@@ -615,7 +616,7 @@ bool ElementImpl::eSet(int featureID, const Any& newValue)
 						}
 					}
 
-					for(const std::shared_ptr<uml::Comment> indexOwnedComment: *ownedCommentList)
+					for(const std::shared_ptr<uml::Comment>& indexOwnedComment: *ownedCommentList)
 					{
 						if (!(_ownedComment->includes(indexOwnedComment)))
 						{

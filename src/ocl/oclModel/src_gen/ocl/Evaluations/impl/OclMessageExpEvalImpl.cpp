@@ -353,8 +353,8 @@ bool OclMessageExpEvalImpl::eSet(int featureID, const Any& newValue)
 				try
 				{
 					std::shared_ptr<Bag<ocl::Evaluations::OclMessageArgEval>> argumentsList= newValue->get<std::shared_ptr<Bag<ocl::Evaluations::OclMessageArgEval>>>();
-					std::shared_ptr<Bag<ocl::Evaluations::OclMessageArgEval>> _arguments=getArguments();
-					for(const std::shared_ptr<ocl::Evaluations::OclMessageArgEval> indexArguments: *_arguments)
+					const std::shared_ptr<Bag<ocl::Evaluations::OclMessageArgEval>>& _arguments=getArguments();
+					for(const std::shared_ptr<ocl::Evaluations::OclMessageArgEval>& indexArguments: *_arguments)
 					{
 						if (!(argumentsList->includes(indexArguments)))
 						{
@@ -362,7 +362,7 @@ bool OclMessageExpEvalImpl::eSet(int featureID, const Any& newValue)
 						}
 					}
 
-					for(const std::shared_ptr<ocl::Evaluations::OclMessageArgEval> indexArguments: *argumentsList)
+					for(const std::shared_ptr<ocl::Evaluations::OclMessageArgEval>& indexArguments: *argumentsList)
 					{
 						if (!(_arguments->includes(indexArguments)))
 						{

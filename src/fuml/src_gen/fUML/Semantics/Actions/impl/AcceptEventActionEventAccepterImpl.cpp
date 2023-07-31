@@ -112,7 +112,7 @@ void AcceptEventActionEventAccepterImpl::accept(const std::shared_ptr<fUML::Sema
 	//generated from body annotation
 	// Accept an event occurrence and forward it to the action activation.
 	DEBUG_MESSAGE(std::cout <<  std::string(__PRETTY_FUNCTION__)<< std::endl;)
-	std::shared_ptr<fUML::Semantics::Actions::AcceptEventActionActivation> actionActivation = getActionActivation();
+	const std::shared_ptr<fUML::Semantics::Actions::AcceptEventActionActivation>& actionActivation = getActionActivation();
 	if(actionActivation != nullptr)
 	{
 		DEBUG_MESSAGE(std::cout << "found ActionActivation" << std::endl; )
@@ -128,7 +128,7 @@ bool AcceptEventActionEventAccepterImpl::match(const std::shared_ptr<fUML::Seman
 	// Return true if the given event occurrence matches a trigger of the accept event action of the action activation.
 	DEBUG_MESSAGE(std::cout <<  std::string(__PRETTY_FUNCTION__)<< std::endl;)
 	bool result = false;
-	std::shared_ptr<fUML::Semantics::Actions::AcceptEventActionActivation> actionActivation = getActionActivation();
+	const std::shared_ptr<fUML::Semantics::Actions::AcceptEventActionActivation>& actionActivation = getActionActivation();
 	if(actionActivation != nullptr)
 	{
 		DEBUG_MESSAGE(std::cout << "found ActionActivation." << std::endl; )

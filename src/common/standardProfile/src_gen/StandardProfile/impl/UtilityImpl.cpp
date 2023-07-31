@@ -106,9 +106,10 @@ UtilityImpl& UtilityImpl::operator=(const UtilityImpl & obj)
 }
 
 
-std::shared_ptr<uml::Class> UtilityImpl::getMetaClass() const
+const std::shared_ptr<uml::Class>& UtilityImpl::getMetaClass() const
 {
-	return StandardProfilePackageImpl::eInstance()->get_StandardProfile_Utility();
+	static const std::shared_ptr<uml::Class> metaClass = StandardProfilePackageImpl::eInstance()->get_StandardProfile_Utility();
+	return metaClass;
 }
 
 void UtilityImpl::instantiate()

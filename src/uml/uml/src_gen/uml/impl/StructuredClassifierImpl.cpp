@@ -657,8 +657,8 @@ bool StructuredClassifierImpl::eSet(int featureID, const Any& newValue)
 				try
 				{
 					std::shared_ptr<Bag<uml::Property>> ownedAttributeList= newValue->get<std::shared_ptr<Bag<uml::Property>>>();
-					std::shared_ptr<Bag<uml::Property>> _ownedAttribute=getOwnedAttribute();
-					for(const std::shared_ptr<uml::Property> indexOwnedAttribute: *_ownedAttribute)
+					const std::shared_ptr<Bag<uml::Property>>& _ownedAttribute=getOwnedAttribute();
+					for(const std::shared_ptr<uml::Property>& indexOwnedAttribute: *_ownedAttribute)
 					{
 						if (!(ownedAttributeList->includes(indexOwnedAttribute)))
 						{
@@ -666,7 +666,7 @@ bool StructuredClassifierImpl::eSet(int featureID, const Any& newValue)
 						}
 					}
 
-					for(const std::shared_ptr<uml::Property> indexOwnedAttribute: *ownedAttributeList)
+					for(const std::shared_ptr<uml::Property>& indexOwnedAttribute: *ownedAttributeList)
 					{
 						if (!(_ownedAttribute->includes(indexOwnedAttribute)))
 						{
@@ -694,8 +694,8 @@ bool StructuredClassifierImpl::eSet(int featureID, const Any& newValue)
 				try
 				{
 					std::shared_ptr<Bag<uml::Connector>> ownedConnectorList= newValue->get<std::shared_ptr<Bag<uml::Connector>>>();
-					std::shared_ptr<Bag<uml::Connector>> _ownedConnector=getOwnedConnector();
-					for(const std::shared_ptr<uml::Connector> indexOwnedConnector: *_ownedConnector)
+					const std::shared_ptr<Bag<uml::Connector>>& _ownedConnector=getOwnedConnector();
+					for(const std::shared_ptr<uml::Connector>& indexOwnedConnector: *_ownedConnector)
 					{
 						if (!(ownedConnectorList->includes(indexOwnedConnector)))
 						{
@@ -703,7 +703,7 @@ bool StructuredClassifierImpl::eSet(int featureID, const Any& newValue)
 						}
 					}
 
-					for(const std::shared_ptr<uml::Connector> indexOwnedConnector: *ownedConnectorList)
+					for(const std::shared_ptr<uml::Connector>& indexOwnedConnector: *ownedConnectorList)
 					{
 						if (!(_ownedConnector->includes(indexOwnedConnector)))
 						{

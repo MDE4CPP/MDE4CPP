@@ -498,8 +498,8 @@ bool InteractionOperandImpl::eSet(int featureID, const Any& newValue)
 				try
 				{
 					std::shared_ptr<Bag<uml::InteractionFragment>> fragmentList= newValue->get<std::shared_ptr<Bag<uml::InteractionFragment>>>();
-					std::shared_ptr<Bag<uml::InteractionFragment>> _fragment=getFragment();
-					for(const std::shared_ptr<uml::InteractionFragment> indexFragment: *_fragment)
+					const std::shared_ptr<Bag<uml::InteractionFragment>>& _fragment=getFragment();
+					for(const std::shared_ptr<uml::InteractionFragment>& indexFragment: *_fragment)
 					{
 						if (!(fragmentList->includes(indexFragment)))
 						{
@@ -507,7 +507,7 @@ bool InteractionOperandImpl::eSet(int featureID, const Any& newValue)
 						}
 					}
 
-					for(const std::shared_ptr<uml::InteractionFragment> indexFragment: *fragmentList)
+					for(const std::shared_ptr<uml::InteractionFragment>& indexFragment: *fragmentList)
 					{
 						if (!(_fragment->includes(indexFragment)))
 						{

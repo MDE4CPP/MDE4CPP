@@ -696,8 +696,8 @@ bool MessageImpl::eSet(int featureID, const Any& newValue)
 				try
 				{
 					std::shared_ptr<Bag<uml::ValueSpecification>> argumentList= newValue->get<std::shared_ptr<Bag<uml::ValueSpecification>>>();
-					std::shared_ptr<Bag<uml::ValueSpecification>> _argument=getArgument();
-					for(const std::shared_ptr<uml::ValueSpecification> indexArgument: *_argument)
+					const std::shared_ptr<Bag<uml::ValueSpecification>>& _argument=getArgument();
+					for(const std::shared_ptr<uml::ValueSpecification>& indexArgument: *_argument)
 					{
 						if (!(argumentList->includes(indexArgument)))
 						{
@@ -705,7 +705,7 @@ bool MessageImpl::eSet(int featureID, const Any& newValue)
 						}
 					}
 
-					for(const std::shared_ptr<uml::ValueSpecification> indexArgument: *argumentList)
+					for(const std::shared_ptr<uml::ValueSpecification>& indexArgument: *argumentList)
 					{
 						if (!(_argument->includes(indexArgument)))
 						{

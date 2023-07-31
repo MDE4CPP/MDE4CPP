@@ -106,9 +106,10 @@ InstantiateImpl& InstantiateImpl::operator=(const InstantiateImpl & obj)
 }
 
 
-std::shared_ptr<uml::Class> InstantiateImpl::getMetaClass() const
+const std::shared_ptr<uml::Class>& InstantiateImpl::getMetaClass() const
 {
-	return StandardProfilePackageImpl::eInstance()->get_StandardProfile_Instantiate();
+	static const std::shared_ptr<uml::Class> metaClass = StandardProfilePackageImpl::eInstance()->get_StandardProfile_Instantiate();
+	return metaClass;
 }
 
 void InstantiateImpl::instantiate()

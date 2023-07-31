@@ -936,8 +936,8 @@ bool ClassImpl::eSet(int featureID, const Any& newValue)
 				try
 				{
 					std::shared_ptr<Bag<uml::Classifier>> nestedClassifierList= newValue->get<std::shared_ptr<Bag<uml::Classifier>>>();
-					std::shared_ptr<Bag<uml::Classifier>> _nestedClassifier=getNestedClassifier();
-					for(const std::shared_ptr<uml::Classifier> indexNestedClassifier: *_nestedClassifier)
+					const std::shared_ptr<Bag<uml::Classifier>>& _nestedClassifier=getNestedClassifier();
+					for(const std::shared_ptr<uml::Classifier>& indexNestedClassifier: *_nestedClassifier)
 					{
 						if (!(nestedClassifierList->includes(indexNestedClassifier)))
 						{
@@ -945,7 +945,7 @@ bool ClassImpl::eSet(int featureID, const Any& newValue)
 						}
 					}
 
-					for(const std::shared_ptr<uml::Classifier> indexNestedClassifier: *nestedClassifierList)
+					for(const std::shared_ptr<uml::Classifier>& indexNestedClassifier: *nestedClassifierList)
 					{
 						if (!(_nestedClassifier->includes(indexNestedClassifier)))
 						{
@@ -973,8 +973,8 @@ bool ClassImpl::eSet(int featureID, const Any& newValue)
 				try
 				{
 					std::shared_ptr<Bag<uml::Property>> ownedAttributeList= newValue->get<std::shared_ptr<Bag<uml::Property>>>();
-					std::shared_ptr<Bag<uml::Property>> _ownedAttribute=getClass_OwnedAttribute();
-					for(const std::shared_ptr<uml::Property> indexOwnedAttribute: *_ownedAttribute)
+					const std::shared_ptr<Bag<uml::Property>>& _ownedAttribute=getClass_OwnedAttribute();
+					for(const std::shared_ptr<uml::Property>& indexOwnedAttribute: *_ownedAttribute)
 					{
 						if (!(ownedAttributeList->includes(indexOwnedAttribute)))
 						{
@@ -982,7 +982,7 @@ bool ClassImpl::eSet(int featureID, const Any& newValue)
 						}
 					}
 
-					for(const std::shared_ptr<uml::Property> indexOwnedAttribute: *ownedAttributeList)
+					for(const std::shared_ptr<uml::Property>& indexOwnedAttribute: *ownedAttributeList)
 					{
 						if (!(_ownedAttribute->includes(indexOwnedAttribute)))
 						{
@@ -1010,8 +1010,8 @@ bool ClassImpl::eSet(int featureID, const Any& newValue)
 				try
 				{
 					std::shared_ptr<Bag<uml::Operation>> ownedOperationList= newValue->get<std::shared_ptr<Bag<uml::Operation>>>();
-					std::shared_ptr<Bag<uml::Operation>> _ownedOperation=getOwnedOperation();
-					for(const std::shared_ptr<uml::Operation> indexOwnedOperation: *_ownedOperation)
+					const std::shared_ptr<Bag<uml::Operation>>& _ownedOperation=getOwnedOperation();
+					for(const std::shared_ptr<uml::Operation>& indexOwnedOperation: *_ownedOperation)
 					{
 						if (!(ownedOperationList->includes(indexOwnedOperation)))
 						{
@@ -1019,7 +1019,7 @@ bool ClassImpl::eSet(int featureID, const Any& newValue)
 						}
 					}
 
-					for(const std::shared_ptr<uml::Operation> indexOwnedOperation: *ownedOperationList)
+					for(const std::shared_ptr<uml::Operation>& indexOwnedOperation: *ownedOperationList)
 					{
 						if (!(_ownedOperation->includes(indexOwnedOperation)))
 						{
@@ -1047,8 +1047,8 @@ bool ClassImpl::eSet(int featureID, const Any& newValue)
 				try
 				{
 					std::shared_ptr<Bag<uml::Reception>> ownedReceptionList= newValue->get<std::shared_ptr<Bag<uml::Reception>>>();
-					std::shared_ptr<Bag<uml::Reception>> _ownedReception=getOwnedReception();
-					for(const std::shared_ptr<uml::Reception> indexOwnedReception: *_ownedReception)
+					const std::shared_ptr<Bag<uml::Reception>>& _ownedReception=getOwnedReception();
+					for(const std::shared_ptr<uml::Reception>& indexOwnedReception: *_ownedReception)
 					{
 						if (!(ownedReceptionList->includes(indexOwnedReception)))
 						{
@@ -1056,7 +1056,7 @@ bool ClassImpl::eSet(int featureID, const Any& newValue)
 						}
 					}
 
-					for(const std::shared_ptr<uml::Reception> indexOwnedReception: *ownedReceptionList)
+					for(const std::shared_ptr<uml::Reception>& indexOwnedReception: *ownedReceptionList)
 					{
 						if (!(_ownedReception->includes(indexOwnedReception)))
 						{
@@ -1084,8 +1084,8 @@ bool ClassImpl::eSet(int featureID, const Any& newValue)
 				try
 				{
 					std::shared_ptr<Bag<uml::Class>> superClassList= newValue->get<std::shared_ptr<Bag<uml::Class>>>();
-					std::shared_ptr<Bag<uml::Class>> _superClass=getSuperClass();
-					for(const std::shared_ptr<uml::Class> indexSuperClass: *_superClass)
+					const std::shared_ptr<Bag<uml::Class>>& _superClass=getSuperClass();
+					for(const std::shared_ptr<uml::Class>& indexSuperClass: *_superClass)
 					{
 						if (!(superClassList->includes(indexSuperClass)))
 						{
@@ -1093,7 +1093,7 @@ bool ClassImpl::eSet(int featureID, const Any& newValue)
 						}
 					}
 
-					for(const std::shared_ptr<uml::Class> indexSuperClass: *superClassList)
+					for(const std::shared_ptr<uml::Class>& indexSuperClass: *superClassList)
 					{
 						if (!(_superClass->includes(indexSuperClass)))
 						{

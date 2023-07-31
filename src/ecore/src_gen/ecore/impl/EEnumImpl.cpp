@@ -393,8 +393,8 @@ bool EEnumImpl::eSet(int featureID, const Any& newValue)
 				try
 				{
 					std::shared_ptr<Bag<ecore::EEnumLiteral>> eLiteralsList= newValue->get<std::shared_ptr<Bag<ecore::EEnumLiteral>>>();
-					std::shared_ptr<Bag<ecore::EEnumLiteral>> _eLiterals=getELiterals();
-					for(const std::shared_ptr<ecore::EEnumLiteral> indexELiterals: *_eLiterals)
+					const std::shared_ptr<Bag<ecore::EEnumLiteral>>& _eLiterals=getELiterals();
+					for(const std::shared_ptr<ecore::EEnumLiteral>& indexELiterals: *_eLiterals)
 					{
 						if (!(eLiteralsList->includes(indexELiterals)))
 						{
@@ -402,7 +402,7 @@ bool EEnumImpl::eSet(int featureID, const Any& newValue)
 						}
 					}
 
-					for(const std::shared_ptr<ecore::EEnumLiteral> indexELiterals: *eLiteralsList)
+					for(const std::shared_ptr<ecore::EEnumLiteral>& indexELiterals: *eLiteralsList)
 					{
 						if (!(_eLiterals->includes(indexELiterals)))
 						{

@@ -478,8 +478,8 @@ bool LocalSnapshotImpl::eSet(int featureID, const Any& newValue)
 				try
 				{
 					std::shared_ptr<Bag<ocl::Values::NameValueBinding>> bindingsList= newValue->get<std::shared_ptr<Bag<ocl::Values::NameValueBinding>>>();
-					std::shared_ptr<Bag<ocl::Values::NameValueBinding>> _bindings=getBindings();
-					for(const std::shared_ptr<ocl::Values::NameValueBinding> indexBindings: *_bindings)
+					const std::shared_ptr<Bag<ocl::Values::NameValueBinding>>& _bindings=getBindings();
+					for(const std::shared_ptr<ocl::Values::NameValueBinding>& indexBindings: *_bindings)
 					{
 						if (!(bindingsList->includes(indexBindings)))
 						{
@@ -487,7 +487,7 @@ bool LocalSnapshotImpl::eSet(int featureID, const Any& newValue)
 						}
 					}
 
-					for(const std::shared_ptr<ocl::Values::NameValueBinding> indexBindings: *bindingsList)
+					for(const std::shared_ptr<ocl::Values::NameValueBinding>& indexBindings: *bindingsList)
 					{
 						if (!(_bindings->includes(indexBindings)))
 						{
@@ -515,8 +515,8 @@ bool LocalSnapshotImpl::eSet(int featureID, const Any& newValue)
 				try
 				{
 					std::shared_ptr<Bag<ocl::Values::OclMessageValue>> inputQList= newValue->get<std::shared_ptr<Bag<ocl::Values::OclMessageValue>>>();
-					std::shared_ptr<Bag<ocl::Values::OclMessageValue>> _inputQ=getInputQ();
-					for(const std::shared_ptr<ocl::Values::OclMessageValue> indexInputQ: *_inputQ)
+					const std::shared_ptr<Bag<ocl::Values::OclMessageValue>>& _inputQ=getInputQ();
+					for(const std::shared_ptr<ocl::Values::OclMessageValue>& indexInputQ: *_inputQ)
 					{
 						if (!(inputQList->includes(indexInputQ)))
 						{
@@ -524,7 +524,7 @@ bool LocalSnapshotImpl::eSet(int featureID, const Any& newValue)
 						}
 					}
 
-					for(const std::shared_ptr<ocl::Values::OclMessageValue> indexInputQ: *inputQList)
+					for(const std::shared_ptr<ocl::Values::OclMessageValue>& indexInputQ: *inputQList)
 					{
 						if (!(_inputQ->includes(indexInputQ)))
 						{
@@ -566,8 +566,8 @@ bool LocalSnapshotImpl::eSet(int featureID, const Any& newValue)
 				try
 				{
 					std::shared_ptr<Bag<ocl::Values::OclMessageValue>> outputQList= newValue->get<std::shared_ptr<Bag<ocl::Values::OclMessageValue>>>();
-					std::shared_ptr<Bag<ocl::Values::OclMessageValue>> _outputQ=getOutputQ();
-					for(const std::shared_ptr<ocl::Values::OclMessageValue> indexOutputQ: *_outputQ)
+					const std::shared_ptr<Bag<ocl::Values::OclMessageValue>>& _outputQ=getOutputQ();
+					for(const std::shared_ptr<ocl::Values::OclMessageValue>& indexOutputQ: *_outputQ)
 					{
 						if (!(outputQList->includes(indexOutputQ)))
 						{
@@ -575,7 +575,7 @@ bool LocalSnapshotImpl::eSet(int featureID, const Any& newValue)
 						}
 					}
 
-					for(const std::shared_ptr<ocl::Values::OclMessageValue> indexOutputQ: *outputQList)
+					for(const std::shared_ptr<ocl::Values::OclMessageValue>& indexOutputQ: *outputQList)
 					{
 						if (!(_outputQ->includes(indexOutputQ)))
 						{

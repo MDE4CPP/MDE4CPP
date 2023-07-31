@@ -136,7 +136,7 @@ std::shared_ptr<ecore::EAnnotation> EModelElementImpl::getEAnnotation(std::strin
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
-	    for(std::shared_ptr<EAnnotation> a : *m_eAnnotations)
+	    for(const std::shared_ptr<EAnnotation>& a : *m_eAnnotations)
     {
 	    if(a->getSource()==source)
 	    {
@@ -330,8 +330,8 @@ bool EModelElementImpl::eSet(int featureID, const Any& newValue)
 				try
 				{
 					std::shared_ptr<Bag<ecore::EAnnotation>> eAnnotationsList= newValue->get<std::shared_ptr<Bag<ecore::EAnnotation>>>();
-					std::shared_ptr<Bag<ecore::EAnnotation>> _eAnnotations=getEAnnotations();
-					for(const std::shared_ptr<ecore::EAnnotation> indexEAnnotations: *_eAnnotations)
+					const std::shared_ptr<Bag<ecore::EAnnotation>>& _eAnnotations=getEAnnotations();
+					for(const std::shared_ptr<ecore::EAnnotation>& indexEAnnotations: *_eAnnotations)
 					{
 						if (!(eAnnotationsList->includes(indexEAnnotations)))
 						{
@@ -339,7 +339,7 @@ bool EModelElementImpl::eSet(int featureID, const Any& newValue)
 						}
 					}
 
-					for(const std::shared_ptr<ecore::EAnnotation> indexEAnnotations: *eAnnotationsList)
+					for(const std::shared_ptr<ecore::EAnnotation>& indexEAnnotations: *eAnnotationsList)
 					{
 						if (!(_eAnnotations->includes(indexEAnnotations)))
 						{

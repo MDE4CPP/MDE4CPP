@@ -421,8 +421,8 @@ bool ExpressionInOclImpl::eSet(int featureID, const Any& newValue)
 				try
 				{
 					std::shared_ptr<Bag<ocl::Expressions::Variable>> parameterVariableList= newValue->get<std::shared_ptr<Bag<ocl::Expressions::Variable>>>();
-					std::shared_ptr<Bag<ocl::Expressions::Variable>> _parameterVariable=getParameterVariable();
-					for(const std::shared_ptr<ocl::Expressions::Variable> indexParameterVariable: *_parameterVariable)
+					const std::shared_ptr<Bag<ocl::Expressions::Variable>>& _parameterVariable=getParameterVariable();
+					for(const std::shared_ptr<ocl::Expressions::Variable>& indexParameterVariable: *_parameterVariable)
 					{
 						if (!(parameterVariableList->includes(indexParameterVariable)))
 						{
@@ -430,7 +430,7 @@ bool ExpressionInOclImpl::eSet(int featureID, const Any& newValue)
 						}
 					}
 
-					for(const std::shared_ptr<ocl::Expressions::Variable> indexParameterVariable: *parameterVariableList)
+					for(const std::shared_ptr<ocl::Expressions::Variable>& indexParameterVariable: *parameterVariableList)
 					{
 						if (!(_parameterVariable->includes(indexParameterVariable)))
 						{

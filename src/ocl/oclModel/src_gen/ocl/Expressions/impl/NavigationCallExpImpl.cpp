@@ -496,8 +496,8 @@ bool NavigationCallExpImpl::eSet(int featureID, const Any& newValue)
 				try
 				{
 					std::shared_ptr<Bag<ocl::Expressions::OclExpression>> qualifierList= newValue->get<std::shared_ptr<Bag<ocl::Expressions::OclExpression>>>();
-					std::shared_ptr<Bag<ocl::Expressions::OclExpression>> _qualifier=getQualifier();
-					for(const std::shared_ptr<ocl::Expressions::OclExpression> indexQualifier: *_qualifier)
+					const std::shared_ptr<Bag<ocl::Expressions::OclExpression>>& _qualifier=getQualifier();
+					for(const std::shared_ptr<ocl::Expressions::OclExpression>& indexQualifier: *_qualifier)
 					{
 						if (!(qualifierList->includes(indexQualifier)))
 						{
@@ -505,7 +505,7 @@ bool NavigationCallExpImpl::eSet(int featureID, const Any& newValue)
 						}
 					}
 
-					for(const std::shared_ptr<ocl::Expressions::OclExpression> indexQualifier: *qualifierList)
+					for(const std::shared_ptr<ocl::Expressions::OclExpression>& indexQualifier: *qualifierList)
 					{
 						if (!(_qualifier->includes(indexQualifier)))
 						{

@@ -389,8 +389,8 @@ bool ClassifierTemplateParameterImpl::eSet(int featureID, const Any& newValue)
 				try
 				{
 					std::shared_ptr<Bag<uml::Classifier>> constrainingClassifierList= newValue->get<std::shared_ptr<Bag<uml::Classifier>>>();
-					std::shared_ptr<Bag<uml::Classifier>> _constrainingClassifier=getConstrainingClassifier();
-					for(const std::shared_ptr<uml::Classifier> indexConstrainingClassifier: *_constrainingClassifier)
+					const std::shared_ptr<Bag<uml::Classifier>>& _constrainingClassifier=getConstrainingClassifier();
+					for(const std::shared_ptr<uml::Classifier>& indexConstrainingClassifier: *_constrainingClassifier)
 					{
 						if (!(constrainingClassifierList->includes(indexConstrainingClassifier)))
 						{
@@ -398,7 +398,7 @@ bool ClassifierTemplateParameterImpl::eSet(int featureID, const Any& newValue)
 						}
 					}
 
-					for(const std::shared_ptr<uml::Classifier> indexConstrainingClassifier: *constrainingClassifierList)
+					for(const std::shared_ptr<uml::Classifier>& indexConstrainingClassifier: *constrainingClassifierList)
 					{
 						if (!(_constrainingClassifier->includes(indexConstrainingClassifier)))
 						{

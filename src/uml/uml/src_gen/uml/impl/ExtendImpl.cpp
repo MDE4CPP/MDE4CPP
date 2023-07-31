@@ -567,8 +567,8 @@ bool ExtendImpl::eSet(int featureID, const Any& newValue)
 				try
 				{
 					std::shared_ptr<Bag<uml::ExtensionPoint>> extensionLocationList= newValue->get<std::shared_ptr<Bag<uml::ExtensionPoint>>>();
-					std::shared_ptr<Bag<uml::ExtensionPoint>> _extensionLocation=getExtensionLocation();
-					for(const std::shared_ptr<uml::ExtensionPoint> indexExtensionLocation: *_extensionLocation)
+					const std::shared_ptr<Bag<uml::ExtensionPoint>>& _extensionLocation=getExtensionLocation();
+					for(const std::shared_ptr<uml::ExtensionPoint>& indexExtensionLocation: *_extensionLocation)
 					{
 						if (!(extensionLocationList->includes(indexExtensionLocation)))
 						{
@@ -576,7 +576,7 @@ bool ExtendImpl::eSet(int featureID, const Any& newValue)
 						}
 					}
 
-					for(const std::shared_ptr<uml::ExtensionPoint> indexExtensionLocation: *extensionLocationList)
+					for(const std::shared_ptr<uml::ExtensionPoint>& indexExtensionLocation: *extensionLocationList)
 					{
 						if (!(_extensionLocation->includes(indexExtensionLocation)))
 						{

@@ -106,9 +106,10 @@ DestroyImpl& DestroyImpl::operator=(const DestroyImpl & obj)
 }
 
 
-std::shared_ptr<uml::Class> DestroyImpl::getMetaClass() const
+const std::shared_ptr<uml::Class>& DestroyImpl::getMetaClass() const
 {
-	return StandardProfilePackageImpl::eInstance()->get_StandardProfile_Destroy();
+	static const std::shared_ptr<uml::Class> metaClass = StandardProfilePackageImpl::eInstance()->get_StandardProfile_Destroy();
+	return metaClass;
 }
 
 void DestroyImpl::instantiate()

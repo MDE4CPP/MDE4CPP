@@ -441,8 +441,8 @@ bool TupleLiteralExpImpl::eSet(int featureID, const Any& newValue)
 				try
 				{
 					std::shared_ptr<Bag<ocl::Expressions::TupleLiteralPart>> partList= newValue->get<std::shared_ptr<Bag<ocl::Expressions::TupleLiteralPart>>>();
-					std::shared_ptr<Bag<ocl::Expressions::TupleLiteralPart>> _part=getPart();
-					for(const std::shared_ptr<ocl::Expressions::TupleLiteralPart> indexPart: *_part)
+					const std::shared_ptr<Bag<ocl::Expressions::TupleLiteralPart>>& _part=getPart();
+					for(const std::shared_ptr<ocl::Expressions::TupleLiteralPart>& indexPart: *_part)
 					{
 						if (!(partList->includes(indexPart)))
 						{
@@ -450,7 +450,7 @@ bool TupleLiteralExpImpl::eSet(int featureID, const Any& newValue)
 						}
 					}
 
-					for(const std::shared_ptr<ocl::Expressions::TupleLiteralPart> indexPart: *partList)
+					for(const std::shared_ptr<ocl::Expressions::TupleLiteralPart>& indexPart: *partList)
 					{
 						if (!(_part->includes(indexPart)))
 						{

@@ -543,8 +543,8 @@ bool InstanceSpecificationImpl::eSet(int featureID, const Any& newValue)
 				try
 				{
 					std::shared_ptr<Bag<uml::Classifier>> classifierList= newValue->get<std::shared_ptr<Bag<uml::Classifier>>>();
-					std::shared_ptr<Bag<uml::Classifier>> _classifier=getClassifier();
-					for(const std::shared_ptr<uml::Classifier> indexClassifier: *_classifier)
+					const std::shared_ptr<Bag<uml::Classifier>>& _classifier=getClassifier();
+					for(const std::shared_ptr<uml::Classifier>& indexClassifier: *_classifier)
 					{
 						if (!(classifierList->includes(indexClassifier)))
 						{
@@ -552,7 +552,7 @@ bool InstanceSpecificationImpl::eSet(int featureID, const Any& newValue)
 						}
 					}
 
-					for(const std::shared_ptr<uml::Classifier> indexClassifier: *classifierList)
+					for(const std::shared_ptr<uml::Classifier>& indexClassifier: *classifierList)
 					{
 						if (!(_classifier->includes(indexClassifier)))
 						{
@@ -580,8 +580,8 @@ bool InstanceSpecificationImpl::eSet(int featureID, const Any& newValue)
 				try
 				{
 					std::shared_ptr<Bag<uml::Slot>> slotList= newValue->get<std::shared_ptr<Bag<uml::Slot>>>();
-					std::shared_ptr<Bag<uml::Slot>> _slot=getSlot();
-					for(const std::shared_ptr<uml::Slot> indexSlot: *_slot)
+					const std::shared_ptr<Bag<uml::Slot>>& _slot=getSlot();
+					for(const std::shared_ptr<uml::Slot>& indexSlot: *_slot)
 					{
 						if (!(slotList->includes(indexSlot)))
 						{
@@ -589,7 +589,7 @@ bool InstanceSpecificationImpl::eSet(int featureID, const Any& newValue)
 						}
 					}
 
-					for(const std::shared_ptr<uml::Slot> indexSlot: *slotList)
+					for(const std::shared_ptr<uml::Slot>& indexSlot: *slotList)
 					{
 						if (!(_slot->includes(indexSlot)))
 						{

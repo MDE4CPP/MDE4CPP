@@ -823,8 +823,8 @@ bool AssociationImpl::eSet(int featureID, const Any& newValue)
 				try
 				{
 					std::shared_ptr<Bag<uml::Property>> memberEndList= newValue->get<std::shared_ptr<Bag<uml::Property>>>();
-					std::shared_ptr<Bag<uml::Property>> _memberEnd=getMemberEnd();
-					for(const std::shared_ptr<uml::Property> indexMemberEnd: *_memberEnd)
+					const std::shared_ptr<Bag<uml::Property>>& _memberEnd=getMemberEnd();
+					for(const std::shared_ptr<uml::Property>& indexMemberEnd: *_memberEnd)
 					{
 						if (!(memberEndList->includes(indexMemberEnd)))
 						{
@@ -832,7 +832,7 @@ bool AssociationImpl::eSet(int featureID, const Any& newValue)
 						}
 					}
 
-					for(const std::shared_ptr<uml::Property> indexMemberEnd: *memberEndList)
+					for(const std::shared_ptr<uml::Property>& indexMemberEnd: *memberEndList)
 					{
 						if (!(_memberEnd->includes(indexMemberEnd)))
 						{
@@ -860,8 +860,8 @@ bool AssociationImpl::eSet(int featureID, const Any& newValue)
 				try
 				{
 					std::shared_ptr<Bag<uml::Property>> navigableOwnedEndList= newValue->get<std::shared_ptr<Bag<uml::Property>>>();
-					std::shared_ptr<Bag<uml::Property>> _navigableOwnedEnd=getNavigableOwnedEnd();
-					for(const std::shared_ptr<uml::Property> indexNavigableOwnedEnd: *_navigableOwnedEnd)
+					const std::shared_ptr<Bag<uml::Property>>& _navigableOwnedEnd=getNavigableOwnedEnd();
+					for(const std::shared_ptr<uml::Property>& indexNavigableOwnedEnd: *_navigableOwnedEnd)
 					{
 						if (!(navigableOwnedEndList->includes(indexNavigableOwnedEnd)))
 						{
@@ -869,7 +869,7 @@ bool AssociationImpl::eSet(int featureID, const Any& newValue)
 						}
 					}
 
-					for(const std::shared_ptr<uml::Property> indexNavigableOwnedEnd: *navigableOwnedEndList)
+					for(const std::shared_ptr<uml::Property>& indexNavigableOwnedEnd: *navigableOwnedEndList)
 					{
 						if (!(_navigableOwnedEnd->includes(indexNavigableOwnedEnd)))
 						{
@@ -897,8 +897,8 @@ bool AssociationImpl::eSet(int featureID, const Any& newValue)
 				try
 				{
 					std::shared_ptr<Bag<uml::Property>> ownedEndList= newValue->get<std::shared_ptr<Bag<uml::Property>>>();
-					std::shared_ptr<Bag<uml::Property>> _ownedEnd=getOwnedEnd();
-					for(const std::shared_ptr<uml::Property> indexOwnedEnd: *_ownedEnd)
+					const std::shared_ptr<Bag<uml::Property>>& _ownedEnd=getOwnedEnd();
+					for(const std::shared_ptr<uml::Property>& indexOwnedEnd: *_ownedEnd)
 					{
 						if (!(ownedEndList->includes(indexOwnedEnd)))
 						{
@@ -906,7 +906,7 @@ bool AssociationImpl::eSet(int featureID, const Any& newValue)
 						}
 					}
 
-					for(const std::shared_ptr<uml::Property> indexOwnedEnd: *ownedEndList)
+					for(const std::shared_ptr<uml::Property>& indexOwnedEnd: *ownedEndList)
 					{
 						if (!(_ownedEnd->includes(indexOwnedEnd)))
 						{

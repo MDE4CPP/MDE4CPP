@@ -106,9 +106,10 @@ FocusImpl& FocusImpl::operator=(const FocusImpl & obj)
 }
 
 
-std::shared_ptr<uml::Class> FocusImpl::getMetaClass() const
+const std::shared_ptr<uml::Class>& FocusImpl::getMetaClass() const
 {
-	return StandardProfilePackageImpl::eInstance()->get_StandardProfile_Focus();
+	static const std::shared_ptr<uml::Class> metaClass = StandardProfilePackageImpl::eInstance()->get_StandardProfile_Focus();
+	return metaClass;
 }
 
 void FocusImpl::instantiate()

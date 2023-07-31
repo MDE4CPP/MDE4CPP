@@ -128,8 +128,8 @@ int ActivityEdgeInstanceImpl::countOfferedValue()
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
 	int count = 0;
-	std::shared_ptr<Bag<fUML::Semantics::Activities::Offer> > offerList = this->getOffers();
-    for(std::shared_ptr<fUML::Semantics::Activities::Offer> offer : *offerList)
+	const std::shared_ptr<Bag<fUML::Semantics::Activities::Offer>>& offerList = this->getOffers();
+    for(const std::shared_ptr<fUML::Semantics::Activities::Offer>& offer : *offerList)
     {
         count+=offer->countOfferedVales();
     }
@@ -208,10 +208,10 @@ std::shared_ptr<Bag<fUML::Semantics::Activities::Token> > ActivityEdgeInstanceIm
 	//generated from body annotation
 	std::shared_ptr<Bag<fUML::Semantics::Activities::Token> > tokens(new Bag<fUML::Semantics::Activities::Token>());
 
-	std::shared_ptr<Bag<fUML::Semantics::Activities::Offer> > offerList = this->getOffers();
+	const std::shared_ptr<Bag<fUML::Semantics::Activities::Offer>>& offerList = this->getOffers();
 	//NEWDEBUG
 	DEBUG_MESSAGE(std::cout<<"-- printing from ActivityEdgeInstance::"<<__FUNCTION__<<" '"<<(this->getEdge() == nullptr ? "..." : ("edge = " + this->getEdge()->getName()))<<"' : #offers = "<<this->getOffers()->size()<<std::endl;)
-	    for(std::shared_ptr<fUML::Semantics::Activities::Offer> offer : *offerList)
+	    for(const std::shared_ptr<fUML::Semantics::Activities::Offer>& offer : *offerList)
     {
     	auto vec = offer->retrieveOfferedTokens();
 	//NEWDEBUG
@@ -565,8 +565,8 @@ bool ActivityEdgeInstanceImpl::eSet(int featureID, const Any& newValue)
 				try
 				{
 					std::shared_ptr<Bag<fUML::Semantics::Activities::Offer>> offersList= newValue->get<std::shared_ptr<Bag<fUML::Semantics::Activities::Offer>>>();
-					std::shared_ptr<Bag<fUML::Semantics::Activities::Offer>> _offers=getOffers();
-					for(const std::shared_ptr<fUML::Semantics::Activities::Offer> indexOffers: *_offers)
+					const std::shared_ptr<Bag<fUML::Semantics::Activities::Offer>>& _offers=getOffers();
+					for(const std::shared_ptr<fUML::Semantics::Activities::Offer>& indexOffers: *_offers)
 					{
 						if (!(offersList->includes(indexOffers)))
 						{
@@ -574,7 +574,7 @@ bool ActivityEdgeInstanceImpl::eSet(int featureID, const Any& newValue)
 						}
 					}
 
-					for(const std::shared_ptr<fUML::Semantics::Activities::Offer> indexOffers: *offersList)
+					for(const std::shared_ptr<fUML::Semantics::Activities::Offer>& indexOffers: *offersList)
 					{
 						if (!(_offers->includes(indexOffers)))
 						{

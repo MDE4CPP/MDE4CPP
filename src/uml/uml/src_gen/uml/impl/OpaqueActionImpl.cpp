@@ -648,8 +648,8 @@ bool OpaqueActionImpl::eSet(int featureID, const Any& newValue)
 				try
 				{
 					std::shared_ptr<Bag<uml::InputPin>> inputValueList= newValue->get<std::shared_ptr<Bag<uml::InputPin>>>();
-					std::shared_ptr<Bag<uml::InputPin>> _inputValue=getInputValue();
-					for(const std::shared_ptr<uml::InputPin> indexInputValue: *_inputValue)
+					const std::shared_ptr<Bag<uml::InputPin>>& _inputValue=getInputValue();
+					for(const std::shared_ptr<uml::InputPin>& indexInputValue: *_inputValue)
 					{
 						if (!(inputValueList->includes(indexInputValue)))
 						{
@@ -657,7 +657,7 @@ bool OpaqueActionImpl::eSet(int featureID, const Any& newValue)
 						}
 					}
 
-					for(const std::shared_ptr<uml::InputPin> indexInputValue: *inputValueList)
+					for(const std::shared_ptr<uml::InputPin>& indexInputValue: *inputValueList)
 					{
 						if (!(_inputValue->includes(indexInputValue)))
 						{
@@ -691,8 +691,8 @@ bool OpaqueActionImpl::eSet(int featureID, const Any& newValue)
 				try
 				{
 					std::shared_ptr<Bag<uml::OutputPin>> outputValueList= newValue->get<std::shared_ptr<Bag<uml::OutputPin>>>();
-					std::shared_ptr<Bag<uml::OutputPin>> _outputValue=getOutputValue();
-					for(const std::shared_ptr<uml::OutputPin> indexOutputValue: *_outputValue)
+					const std::shared_ptr<Bag<uml::OutputPin>>& _outputValue=getOutputValue();
+					for(const std::shared_ptr<uml::OutputPin>& indexOutputValue: *_outputValue)
 					{
 						if (!(outputValueList->includes(indexOutputValue)))
 						{
@@ -700,7 +700,7 @@ bool OpaqueActionImpl::eSet(int featureID, const Any& newValue)
 						}
 					}
 
-					for(const std::shared_ptr<uml::OutputPin> indexOutputValue: *outputValueList)
+					for(const std::shared_ptr<uml::OutputPin>& indexOutputValue: *outputValueList)
 					{
 						if (!(_outputValue->includes(indexOutputValue)))
 						{

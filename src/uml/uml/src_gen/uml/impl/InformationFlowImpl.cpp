@@ -757,8 +757,8 @@ bool InformationFlowImpl::eSet(int featureID, const Any& newValue)
 				try
 				{
 					std::shared_ptr<Bag<uml::Classifier>> conveyedList= newValue->get<std::shared_ptr<Bag<uml::Classifier>>>();
-					std::shared_ptr<Bag<uml::Classifier>> _conveyed=getConveyed();
-					for(const std::shared_ptr<uml::Classifier> indexConveyed: *_conveyed)
+					const std::shared_ptr<Bag<uml::Classifier>>& _conveyed=getConveyed();
+					for(const std::shared_ptr<uml::Classifier>& indexConveyed: *_conveyed)
 					{
 						if (!(conveyedList->includes(indexConveyed)))
 						{
@@ -766,7 +766,7 @@ bool InformationFlowImpl::eSet(int featureID, const Any& newValue)
 						}
 					}
 
-					for(const std::shared_ptr<uml::Classifier> indexConveyed: *conveyedList)
+					for(const std::shared_ptr<uml::Classifier>& indexConveyed: *conveyedList)
 					{
 						if (!(_conveyed->includes(indexConveyed)))
 						{
@@ -794,8 +794,8 @@ bool InformationFlowImpl::eSet(int featureID, const Any& newValue)
 				try
 				{
 					std::shared_ptr<Bag<uml::NamedElement>> informationSourceList= newValue->get<std::shared_ptr<Bag<uml::NamedElement>>>();
-					std::shared_ptr<Bag<uml::NamedElement>> _informationSource=getInformationSource();
-					for(const std::shared_ptr<uml::NamedElement> indexInformationSource: *_informationSource)
+					const std::shared_ptr<Bag<uml::NamedElement>>& _informationSource=getInformationSource();
+					for(const std::shared_ptr<uml::NamedElement>& indexInformationSource: *_informationSource)
 					{
 						if (!(informationSourceList->includes(indexInformationSource)))
 						{
@@ -803,7 +803,7 @@ bool InformationFlowImpl::eSet(int featureID, const Any& newValue)
 						}
 					}
 
-					for(const std::shared_ptr<uml::NamedElement> indexInformationSource: *informationSourceList)
+					for(const std::shared_ptr<uml::NamedElement>& indexInformationSource: *informationSourceList)
 					{
 						if (!(_informationSource->includes(indexInformationSource)))
 						{
@@ -831,8 +831,8 @@ bool InformationFlowImpl::eSet(int featureID, const Any& newValue)
 				try
 				{
 					std::shared_ptr<Bag<uml::NamedElement>> informationTargetList= newValue->get<std::shared_ptr<Bag<uml::NamedElement>>>();
-					std::shared_ptr<Bag<uml::NamedElement>> _informationTarget=getInformationTarget();
-					for(const std::shared_ptr<uml::NamedElement> indexInformationTarget: *_informationTarget)
+					const std::shared_ptr<Bag<uml::NamedElement>>& _informationTarget=getInformationTarget();
+					for(const std::shared_ptr<uml::NamedElement>& indexInformationTarget: *_informationTarget)
 					{
 						if (!(informationTargetList->includes(indexInformationTarget)))
 						{
@@ -840,7 +840,7 @@ bool InformationFlowImpl::eSet(int featureID, const Any& newValue)
 						}
 					}
 
-					for(const std::shared_ptr<uml::NamedElement> indexInformationTarget: *informationTargetList)
+					for(const std::shared_ptr<uml::NamedElement>& indexInformationTarget: *informationTargetList)
 					{
 						if (!(_informationTarget->includes(indexInformationTarget)))
 						{
@@ -868,8 +868,8 @@ bool InformationFlowImpl::eSet(int featureID, const Any& newValue)
 				try
 				{
 					std::shared_ptr<Bag<uml::Relationship>> realizationList= newValue->get<std::shared_ptr<Bag<uml::Relationship>>>();
-					std::shared_ptr<Bag<uml::Relationship>> _realization=getRealization();
-					for(const std::shared_ptr<uml::Relationship> indexRealization: *_realization)
+					const std::shared_ptr<Bag<uml::Relationship>>& _realization=getRealization();
+					for(const std::shared_ptr<uml::Relationship>& indexRealization: *_realization)
 					{
 						if (!(realizationList->includes(indexRealization)))
 						{
@@ -877,7 +877,7 @@ bool InformationFlowImpl::eSet(int featureID, const Any& newValue)
 						}
 					}
 
-					for(const std::shared_ptr<uml::Relationship> indexRealization: *realizationList)
+					for(const std::shared_ptr<uml::Relationship>& indexRealization: *realizationList)
 					{
 						if (!(_realization->includes(indexRealization)))
 						{
@@ -905,8 +905,8 @@ bool InformationFlowImpl::eSet(int featureID, const Any& newValue)
 				try
 				{
 					std::shared_ptr<Bag<uml::ActivityEdge>> realizingActivityEdgeList= newValue->get<std::shared_ptr<Bag<uml::ActivityEdge>>>();
-					std::shared_ptr<Bag<uml::ActivityEdge>> _realizingActivityEdge=getRealizingActivityEdge();
-					for(const std::shared_ptr<uml::ActivityEdge> indexRealizingActivityEdge: *_realizingActivityEdge)
+					const std::shared_ptr<Bag<uml::ActivityEdge>>& _realizingActivityEdge=getRealizingActivityEdge();
+					for(const std::shared_ptr<uml::ActivityEdge>& indexRealizingActivityEdge: *_realizingActivityEdge)
 					{
 						if (!(realizingActivityEdgeList->includes(indexRealizingActivityEdge)))
 						{
@@ -914,7 +914,7 @@ bool InformationFlowImpl::eSet(int featureID, const Any& newValue)
 						}
 					}
 
-					for(const std::shared_ptr<uml::ActivityEdge> indexRealizingActivityEdge: *realizingActivityEdgeList)
+					for(const std::shared_ptr<uml::ActivityEdge>& indexRealizingActivityEdge: *realizingActivityEdgeList)
 					{
 						if (!(_realizingActivityEdge->includes(indexRealizingActivityEdge)))
 						{
@@ -942,8 +942,8 @@ bool InformationFlowImpl::eSet(int featureID, const Any& newValue)
 				try
 				{
 					std::shared_ptr<Bag<uml::Connector>> realizingConnectorList= newValue->get<std::shared_ptr<Bag<uml::Connector>>>();
-					std::shared_ptr<Bag<uml::Connector>> _realizingConnector=getRealizingConnector();
-					for(const std::shared_ptr<uml::Connector> indexRealizingConnector: *_realizingConnector)
+					const std::shared_ptr<Bag<uml::Connector>>& _realizingConnector=getRealizingConnector();
+					for(const std::shared_ptr<uml::Connector>& indexRealizingConnector: *_realizingConnector)
 					{
 						if (!(realizingConnectorList->includes(indexRealizingConnector)))
 						{
@@ -951,7 +951,7 @@ bool InformationFlowImpl::eSet(int featureID, const Any& newValue)
 						}
 					}
 
-					for(const std::shared_ptr<uml::Connector> indexRealizingConnector: *realizingConnectorList)
+					for(const std::shared_ptr<uml::Connector>& indexRealizingConnector: *realizingConnectorList)
 					{
 						if (!(_realizingConnector->includes(indexRealizingConnector)))
 						{
@@ -979,8 +979,8 @@ bool InformationFlowImpl::eSet(int featureID, const Any& newValue)
 				try
 				{
 					std::shared_ptr<Bag<uml::Message>> realizingMessageList= newValue->get<std::shared_ptr<Bag<uml::Message>>>();
-					std::shared_ptr<Bag<uml::Message>> _realizingMessage=getRealizingMessage();
-					for(const std::shared_ptr<uml::Message> indexRealizingMessage: *_realizingMessage)
+					const std::shared_ptr<Bag<uml::Message>>& _realizingMessage=getRealizingMessage();
+					for(const std::shared_ptr<uml::Message>& indexRealizingMessage: *_realizingMessage)
 					{
 						if (!(realizingMessageList->includes(indexRealizingMessage)))
 						{
@@ -988,7 +988,7 @@ bool InformationFlowImpl::eSet(int featureID, const Any& newValue)
 						}
 					}
 
-					for(const std::shared_ptr<uml::Message> indexRealizingMessage: *realizingMessageList)
+					for(const std::shared_ptr<uml::Message>& indexRealizingMessage: *realizingMessageList)
 					{
 						if (!(_realizingMessage->includes(indexRealizingMessage)))
 						{

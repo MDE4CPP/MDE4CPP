@@ -464,8 +464,8 @@ bool GeneralizationSetImpl::eSet(int featureID, const Any& newValue)
 				try
 				{
 					std::shared_ptr<Bag<uml::Generalization>> generalizationList= newValue->get<std::shared_ptr<Bag<uml::Generalization>>>();
-					std::shared_ptr<Bag<uml::Generalization>> _generalization=getGeneralization();
-					for(const std::shared_ptr<uml::Generalization> indexGeneralization: *_generalization)
+					const std::shared_ptr<Bag<uml::Generalization>>& _generalization=getGeneralization();
+					for(const std::shared_ptr<uml::Generalization>& indexGeneralization: *_generalization)
 					{
 						if (!(generalizationList->includes(indexGeneralization)))
 						{
@@ -473,7 +473,7 @@ bool GeneralizationSetImpl::eSet(int featureID, const Any& newValue)
 						}
 					}
 
-					for(const std::shared_ptr<uml::Generalization> indexGeneralization: *generalizationList)
+					for(const std::shared_ptr<uml::Generalization>& indexGeneralization: *generalizationList)
 					{
 						if (!(_generalization->includes(indexGeneralization)))
 						{

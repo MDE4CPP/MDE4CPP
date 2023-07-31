@@ -441,8 +441,8 @@ bool CompoundValueImpl::eSet(int featureID, const Any& newValue)
 				try
 				{
 					std::shared_ptr<Bag<fUML::Semantics::SimpleClassifiers::FeatureValue>> featureValuesList= newValue->get<std::shared_ptr<Bag<fUML::Semantics::SimpleClassifiers::FeatureValue>>>();
-					std::shared_ptr<Bag<fUML::Semantics::SimpleClassifiers::FeatureValue>> _featureValues=getFeatureValues();
-					for(const std::shared_ptr<fUML::Semantics::SimpleClassifiers::FeatureValue> indexFeatureValues: *_featureValues)
+					const std::shared_ptr<Bag<fUML::Semantics::SimpleClassifiers::FeatureValue>>& _featureValues=getFeatureValues();
+					for(const std::shared_ptr<fUML::Semantics::SimpleClassifiers::FeatureValue>& indexFeatureValues: *_featureValues)
 					{
 						if (!(featureValuesList->includes(indexFeatureValues)))
 						{
@@ -450,7 +450,7 @@ bool CompoundValueImpl::eSet(int featureID, const Any& newValue)
 						}
 					}
 
-					for(const std::shared_ptr<fUML::Semantics::SimpleClassifiers::FeatureValue> indexFeatureValues: *featureValuesList)
+					for(const std::shared_ptr<fUML::Semantics::SimpleClassifiers::FeatureValue>& indexFeatureValues: *featureValuesList)
 					{
 						if (!(_featureValues->includes(indexFeatureValues)))
 						{

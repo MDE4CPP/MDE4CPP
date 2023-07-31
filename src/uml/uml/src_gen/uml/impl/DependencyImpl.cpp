@@ -543,8 +543,8 @@ bool DependencyImpl::eSet(int featureID, const Any& newValue)
 				try
 				{
 					std::shared_ptr<Bag<uml::NamedElement>> clientList= newValue->get<std::shared_ptr<Bag<uml::NamedElement>>>();
-					std::shared_ptr<Bag<uml::NamedElement>> _client=getClient();
-					for(const std::shared_ptr<uml::NamedElement> indexClient: *_client)
+					const std::shared_ptr<Bag<uml::NamedElement>>& _client=getClient();
+					for(const std::shared_ptr<uml::NamedElement>& indexClient: *_client)
 					{
 						if (!(clientList->includes(indexClient)))
 						{
@@ -552,7 +552,7 @@ bool DependencyImpl::eSet(int featureID, const Any& newValue)
 						}
 					}
 
-					for(const std::shared_ptr<uml::NamedElement> indexClient: *clientList)
+					for(const std::shared_ptr<uml::NamedElement>& indexClient: *clientList)
 					{
 						if (!(_client->includes(indexClient)))
 						{
@@ -580,8 +580,8 @@ bool DependencyImpl::eSet(int featureID, const Any& newValue)
 				try
 				{
 					std::shared_ptr<Bag<uml::NamedElement>> supplierList= newValue->get<std::shared_ptr<Bag<uml::NamedElement>>>();
-					std::shared_ptr<Bag<uml::NamedElement>> _supplier=getSupplier();
-					for(const std::shared_ptr<uml::NamedElement> indexSupplier: *_supplier)
+					const std::shared_ptr<Bag<uml::NamedElement>>& _supplier=getSupplier();
+					for(const std::shared_ptr<uml::NamedElement>& indexSupplier: *_supplier)
 					{
 						if (!(supplierList->includes(indexSupplier)))
 						{
@@ -589,7 +589,7 @@ bool DependencyImpl::eSet(int featureID, const Any& newValue)
 						}
 					}
 
-					for(const std::shared_ptr<uml::NamedElement> indexSupplier: *supplierList)
+					for(const std::shared_ptr<uml::NamedElement>& indexSupplier: *supplierList)
 					{
 						if (!(_supplier->includes(indexSupplier)))
 						{

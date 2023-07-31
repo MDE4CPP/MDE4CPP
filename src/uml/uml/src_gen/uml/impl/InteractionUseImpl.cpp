@@ -625,8 +625,8 @@ bool InteractionUseImpl::eSet(int featureID, const Any& newValue)
 				try
 				{
 					std::shared_ptr<Bag<uml::Gate>> actualGateList= newValue->get<std::shared_ptr<Bag<uml::Gate>>>();
-					std::shared_ptr<Bag<uml::Gate>> _actualGate=getActualGate();
-					for(const std::shared_ptr<uml::Gate> indexActualGate: *_actualGate)
+					const std::shared_ptr<Bag<uml::Gate>>& _actualGate=getActualGate();
+					for(const std::shared_ptr<uml::Gate>& indexActualGate: *_actualGate)
 					{
 						if (!(actualGateList->includes(indexActualGate)))
 						{
@@ -634,7 +634,7 @@ bool InteractionUseImpl::eSet(int featureID, const Any& newValue)
 						}
 					}
 
-					for(const std::shared_ptr<uml::Gate> indexActualGate: *actualGateList)
+					for(const std::shared_ptr<uml::Gate>& indexActualGate: *actualGateList)
 					{
 						if (!(_actualGate->includes(indexActualGate)))
 						{
@@ -662,8 +662,8 @@ bool InteractionUseImpl::eSet(int featureID, const Any& newValue)
 				try
 				{
 					std::shared_ptr<Bag<uml::ValueSpecification>> argumentList= newValue->get<std::shared_ptr<Bag<uml::ValueSpecification>>>();
-					std::shared_ptr<Bag<uml::ValueSpecification>> _argument=getArgument();
-					for(const std::shared_ptr<uml::ValueSpecification> indexArgument: *_argument)
+					const std::shared_ptr<Bag<uml::ValueSpecification>>& _argument=getArgument();
+					for(const std::shared_ptr<uml::ValueSpecification>& indexArgument: *_argument)
 					{
 						if (!(argumentList->includes(indexArgument)))
 						{
@@ -671,7 +671,7 @@ bool InteractionUseImpl::eSet(int featureID, const Any& newValue)
 						}
 					}
 
-					for(const std::shared_ptr<uml::ValueSpecification> indexArgument: *argumentList)
+					for(const std::shared_ptr<uml::ValueSpecification>& indexArgument: *argumentList)
 					{
 						if (!(_argument->includes(indexArgument)))
 						{

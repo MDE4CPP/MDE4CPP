@@ -106,9 +106,10 @@ ModelLibraryImpl& ModelLibraryImpl::operator=(const ModelLibraryImpl & obj)
 }
 
 
-std::shared_ptr<uml::Class> ModelLibraryImpl::getMetaClass() const
+const std::shared_ptr<uml::Class>& ModelLibraryImpl::getMetaClass() const
 {
-	return StandardProfilePackageImpl::eInstance()->get_StandardProfile_ModelLibrary();
+	static const std::shared_ptr<uml::Class> metaClass = StandardProfilePackageImpl::eInstance()->get_StandardProfile_ModelLibrary();
+	return metaClass;
 }
 
 void ModelLibraryImpl::instantiate()

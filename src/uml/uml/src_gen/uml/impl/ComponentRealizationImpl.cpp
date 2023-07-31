@@ -513,8 +513,8 @@ bool ComponentRealizationImpl::eSet(int featureID, const Any& newValue)
 				try
 				{
 					std::shared_ptr<Bag<uml::Classifier>> realizingClassifierList= newValue->get<std::shared_ptr<Bag<uml::Classifier>>>();
-					std::shared_ptr<Bag<uml::Classifier>> _realizingClassifier=getRealizingClassifier();
-					for(const std::shared_ptr<uml::Classifier> indexRealizingClassifier: *_realizingClassifier)
+					const std::shared_ptr<Bag<uml::Classifier>>& _realizingClassifier=getRealizingClassifier();
+					for(const std::shared_ptr<uml::Classifier>& indexRealizingClassifier: *_realizingClassifier)
 					{
 						if (!(realizingClassifierList->includes(indexRealizingClassifier)))
 						{
@@ -522,7 +522,7 @@ bool ComponentRealizationImpl::eSet(int featureID, const Any& newValue)
 						}
 					}
 
-					for(const std::shared_ptr<uml::Classifier> indexRealizingClassifier: *realizingClassifierList)
+					for(const std::shared_ptr<uml::Classifier>& indexRealizingClassifier: *realizingClassifierList)
 					{
 						if (!(_realizingClassifier->includes(indexRealizingClassifier)))
 						{

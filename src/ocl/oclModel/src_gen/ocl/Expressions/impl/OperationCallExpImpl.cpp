@@ -496,8 +496,8 @@ bool OperationCallExpImpl::eSet(int featureID, const Any& newValue)
 				try
 				{
 					std::shared_ptr<Bag<ocl::Expressions::OclExpression>> argumentList= newValue->get<std::shared_ptr<Bag<ocl::Expressions::OclExpression>>>();
-					std::shared_ptr<Bag<ocl::Expressions::OclExpression>> _argument=getArgument();
-					for(const std::shared_ptr<ocl::Expressions::OclExpression> indexArgument: *_argument)
+					const std::shared_ptr<Bag<ocl::Expressions::OclExpression>>& _argument=getArgument();
+					for(const std::shared_ptr<ocl::Expressions::OclExpression>& indexArgument: *_argument)
 					{
 						if (!(argumentList->includes(indexArgument)))
 						{
@@ -505,7 +505,7 @@ bool OperationCallExpImpl::eSet(int featureID, const Any& newValue)
 						}
 					}
 
-					for(const std::shared_ptr<ocl::Expressions::OclExpression> indexArgument: *argumentList)
+					for(const std::shared_ptr<ocl::Expressions::OclExpression>& indexArgument: *argumentList)
 					{
 						if (!(_argument->includes(indexArgument)))
 						{

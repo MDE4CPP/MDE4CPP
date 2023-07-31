@@ -370,8 +370,8 @@ bool ConsiderIgnoreFragmentImpl::eSet(int featureID, const Any& newValue)
 				try
 				{
 					std::shared_ptr<Bag<uml::NamedElement>> messageList= newValue->get<std::shared_ptr<Bag<uml::NamedElement>>>();
-					std::shared_ptr<Bag<uml::NamedElement>> _message=getMessage();
-					for(const std::shared_ptr<uml::NamedElement> indexMessage: *_message)
+					const std::shared_ptr<Bag<uml::NamedElement>>& _message=getMessage();
+					for(const std::shared_ptr<uml::NamedElement>& indexMessage: *_message)
 					{
 						if (!(messageList->includes(indexMessage)))
 						{
@@ -379,7 +379,7 @@ bool ConsiderIgnoreFragmentImpl::eSet(int featureID, const Any& newValue)
 						}
 					}
 
-					for(const std::shared_ptr<uml::NamedElement> indexMessage: *messageList)
+					for(const std::shared_ptr<uml::NamedElement>& indexMessage: *messageList)
 					{
 						if (!(_message->includes(indexMessage)))
 						{

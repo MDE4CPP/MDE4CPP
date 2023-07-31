@@ -493,8 +493,8 @@ bool LocusImpl::eSet(int featureID, const Any& newValue)
 				try
 				{
 					std::shared_ptr<Bag<fUML::Semantics::StructuredClassifiers::ExtensionalValue>> extensionalValuesList= newValue->get<std::shared_ptr<Bag<fUML::Semantics::StructuredClassifiers::ExtensionalValue>>>();
-					std::shared_ptr<Bag<fUML::Semantics::StructuredClassifiers::ExtensionalValue>> _extensionalValues=getExtensionalValues();
-					for(const std::shared_ptr<fUML::Semantics::StructuredClassifiers::ExtensionalValue> indexExtensionalValues: *_extensionalValues)
+					const std::shared_ptr<Bag<fUML::Semantics::StructuredClassifiers::ExtensionalValue>>& _extensionalValues=getExtensionalValues();
+					for(const std::shared_ptr<fUML::Semantics::StructuredClassifiers::ExtensionalValue>& indexExtensionalValues: *_extensionalValues)
 					{
 						if (!(extensionalValuesList->includes(indexExtensionalValues)))
 						{
@@ -502,7 +502,7 @@ bool LocusImpl::eSet(int featureID, const Any& newValue)
 						}
 					}
 
-					for(const std::shared_ptr<fUML::Semantics::StructuredClassifiers::ExtensionalValue> indexExtensionalValues: *extensionalValuesList)
+					for(const std::shared_ptr<fUML::Semantics::StructuredClassifiers::ExtensionalValue>& indexExtensionalValues: *extensionalValuesList)
 					{
 						if (!(_extensionalValues->includes(indexExtensionalValues)))
 						{

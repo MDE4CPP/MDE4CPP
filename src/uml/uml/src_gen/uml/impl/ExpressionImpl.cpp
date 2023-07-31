@@ -462,8 +462,8 @@ bool ExpressionImpl::eSet(int featureID, const Any& newValue)
 				try
 				{
 					std::shared_ptr<Bag<uml::ValueSpecification>> operandList= newValue->get<std::shared_ptr<Bag<uml::ValueSpecification>>>();
-					std::shared_ptr<Bag<uml::ValueSpecification>> _operand=getOperand();
-					for(const std::shared_ptr<uml::ValueSpecification> indexOperand: *_operand)
+					const std::shared_ptr<Bag<uml::ValueSpecification>>& _operand=getOperand();
+					for(const std::shared_ptr<uml::ValueSpecification>& indexOperand: *_operand)
 					{
 						if (!(operandList->includes(indexOperand)))
 						{
@@ -471,7 +471,7 @@ bool ExpressionImpl::eSet(int featureID, const Any& newValue)
 						}
 					}
 
-					for(const std::shared_ptr<uml::ValueSpecification> indexOperand: *operandList)
+					for(const std::shared_ptr<uml::ValueSpecification>& indexOperand: *operandList)
 					{
 						if (!(_operand->includes(indexOperand)))
 						{

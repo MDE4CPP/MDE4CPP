@@ -342,8 +342,8 @@ bool LoopNodeActivationImpl::eSet(int featureID, const Any& newValue)
 				try
 				{
 					std::shared_ptr<Bag<fUML::Semantics::Actions::Values>> bodyOutputListsList= newValue->get<std::shared_ptr<Bag<fUML::Semantics::Actions::Values>>>();
-					std::shared_ptr<Bag<fUML::Semantics::Actions::Values>> _bodyOutputLists=getBodyOutputLists();
-					for(const std::shared_ptr<fUML::Semantics::Actions::Values> indexBodyOutputLists: *_bodyOutputLists)
+					const std::shared_ptr<Bag<fUML::Semantics::Actions::Values>>& _bodyOutputLists=getBodyOutputLists();
+					for(const std::shared_ptr<fUML::Semantics::Actions::Values>& indexBodyOutputLists: *_bodyOutputLists)
 					{
 						if (!(bodyOutputListsList->includes(indexBodyOutputLists)))
 						{
@@ -351,7 +351,7 @@ bool LoopNodeActivationImpl::eSet(int featureID, const Any& newValue)
 						}
 					}
 
-					for(const std::shared_ptr<fUML::Semantics::Actions::Values> indexBodyOutputLists: *bodyOutputListsList)
+					for(const std::shared_ptr<fUML::Semantics::Actions::Values>& indexBodyOutputLists: *bodyOutputListsList)
 					{
 						if (!(_bodyOutputLists->includes(indexBodyOutputLists)))
 						{

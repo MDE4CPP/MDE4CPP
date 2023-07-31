@@ -328,8 +328,8 @@ void CallActionActivationImpl::terminate()
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
-	std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::Execution> > executionList = this->getCallExecutions();
-	for (std::shared_ptr<fUML::Semantics::CommonBehavior::Execution>  execution: *executionList)
+	const std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::Execution>>& executionList = this->getCallExecutions();
+	for (const std::shared_ptr<fUML::Semantics::CommonBehavior::Execution>&  execution: *executionList)
     {
         execution->terminate();
     }
@@ -612,8 +612,8 @@ bool CallActionActivationImpl::eSet(int featureID, const Any& newValue)
 				try
 				{
 					std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::Execution>> callExecutionsList= newValue->get<std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::Execution>>>();
-					std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::Execution>> _callExecutions=getCallExecutions();
-					for(const std::shared_ptr<fUML::Semantics::CommonBehavior::Execution> indexCallExecutions: *_callExecutions)
+					const std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::Execution>>& _callExecutions=getCallExecutions();
+					for(const std::shared_ptr<fUML::Semantics::CommonBehavior::Execution>& indexCallExecutions: *_callExecutions)
 					{
 						if (!(callExecutionsList->includes(indexCallExecutions)))
 						{
@@ -621,7 +621,7 @@ bool CallActionActivationImpl::eSet(int featureID, const Any& newValue)
 						}
 					}
 
-					for(const std::shared_ptr<fUML::Semantics::CommonBehavior::Execution> indexCallExecutions: *callExecutionsList)
+					for(const std::shared_ptr<fUML::Semantics::CommonBehavior::Execution>& indexCallExecutions: *callExecutionsList)
 					{
 						if (!(_callExecutions->includes(indexCallExecutions)))
 						{

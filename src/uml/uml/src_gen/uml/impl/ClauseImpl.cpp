@@ -505,8 +505,8 @@ bool ClauseImpl::eSet(int featureID, const Any& newValue)
 				try
 				{
 					std::shared_ptr<Bag<uml::ExecutableNode>> bodyList= newValue->get<std::shared_ptr<Bag<uml::ExecutableNode>>>();
-					std::shared_ptr<Bag<uml::ExecutableNode>> _body=getBody();
-					for(const std::shared_ptr<uml::ExecutableNode> indexBody: *_body)
+					const std::shared_ptr<Bag<uml::ExecutableNode>>& _body=getBody();
+					for(const std::shared_ptr<uml::ExecutableNode>& indexBody: *_body)
 					{
 						if (!(bodyList->includes(indexBody)))
 						{
@@ -514,7 +514,7 @@ bool ClauseImpl::eSet(int featureID, const Any& newValue)
 						}
 					}
 
-					for(const std::shared_ptr<uml::ExecutableNode> indexBody: *bodyList)
+					for(const std::shared_ptr<uml::ExecutableNode>& indexBody: *bodyList)
 					{
 						if (!(_body->includes(indexBody)))
 						{
@@ -542,8 +542,8 @@ bool ClauseImpl::eSet(int featureID, const Any& newValue)
 				try
 				{
 					std::shared_ptr<Bag<uml::OutputPin>> bodyOutputList= newValue->get<std::shared_ptr<Bag<uml::OutputPin>>>();
-					std::shared_ptr<Bag<uml::OutputPin>> _bodyOutput=getBodyOutput();
-					for(const std::shared_ptr<uml::OutputPin> indexBodyOutput: *_bodyOutput)
+					const std::shared_ptr<Bag<uml::OutputPin>>& _bodyOutput=getBodyOutput();
+					for(const std::shared_ptr<uml::OutputPin>& indexBodyOutput: *_bodyOutput)
 					{
 						if (!(bodyOutputList->includes(indexBodyOutput)))
 						{
@@ -551,7 +551,7 @@ bool ClauseImpl::eSet(int featureID, const Any& newValue)
 						}
 					}
 
-					for(const std::shared_ptr<uml::OutputPin> indexBodyOutput: *bodyOutputList)
+					for(const std::shared_ptr<uml::OutputPin>& indexBodyOutput: *bodyOutputList)
 					{
 						if (!(_bodyOutput->includes(indexBodyOutput)))
 						{
@@ -587,8 +587,8 @@ bool ClauseImpl::eSet(int featureID, const Any& newValue)
 				try
 				{
 					std::shared_ptr<Bag<uml::Clause>> predecessorClauseList= newValue->get<std::shared_ptr<Bag<uml::Clause>>>();
-					std::shared_ptr<Bag<uml::Clause>> _predecessorClause=getPredecessorClause();
-					for(const std::shared_ptr<uml::Clause> indexPredecessorClause: *_predecessorClause)
+					const std::shared_ptr<Bag<uml::Clause>>& _predecessorClause=getPredecessorClause();
+					for(const std::shared_ptr<uml::Clause>& indexPredecessorClause: *_predecessorClause)
 					{
 						if (!(predecessorClauseList->includes(indexPredecessorClause)))
 						{
@@ -596,7 +596,7 @@ bool ClauseImpl::eSet(int featureID, const Any& newValue)
 						}
 					}
 
-					for(const std::shared_ptr<uml::Clause> indexPredecessorClause: *predecessorClauseList)
+					for(const std::shared_ptr<uml::Clause>& indexPredecessorClause: *predecessorClauseList)
 					{
 						if (!(_predecessorClause->includes(indexPredecessorClause)))
 						{
@@ -624,8 +624,8 @@ bool ClauseImpl::eSet(int featureID, const Any& newValue)
 				try
 				{
 					std::shared_ptr<Bag<uml::Clause>> successorClauseList= newValue->get<std::shared_ptr<Bag<uml::Clause>>>();
-					std::shared_ptr<Bag<uml::Clause>> _successorClause=getSuccessorClause();
-					for(const std::shared_ptr<uml::Clause> indexSuccessorClause: *_successorClause)
+					const std::shared_ptr<Bag<uml::Clause>>& _successorClause=getSuccessorClause();
+					for(const std::shared_ptr<uml::Clause>& indexSuccessorClause: *_successorClause)
 					{
 						if (!(successorClauseList->includes(indexSuccessorClause)))
 						{
@@ -633,7 +633,7 @@ bool ClauseImpl::eSet(int featureID, const Any& newValue)
 						}
 					}
 
-					for(const std::shared_ptr<uml::Clause> indexSuccessorClause: *successorClauseList)
+					for(const std::shared_ptr<uml::Clause>& indexSuccessorClause: *successorClauseList)
 					{
 						if (!(_successorClause->includes(indexSuccessorClause)))
 						{
@@ -661,8 +661,8 @@ bool ClauseImpl::eSet(int featureID, const Any& newValue)
 				try
 				{
 					std::shared_ptr<Bag<uml::ExecutableNode>> testList= newValue->get<std::shared_ptr<Bag<uml::ExecutableNode>>>();
-					std::shared_ptr<Bag<uml::ExecutableNode>> _test=getTest();
-					for(const std::shared_ptr<uml::ExecutableNode> indexTest: *_test)
+					const std::shared_ptr<Bag<uml::ExecutableNode>>& _test=getTest();
+					for(const std::shared_ptr<uml::ExecutableNode>& indexTest: *_test)
 					{
 						if (!(testList->includes(indexTest)))
 						{
@@ -670,7 +670,7 @@ bool ClauseImpl::eSet(int featureID, const Any& newValue)
 						}
 					}
 
-					for(const std::shared_ptr<uml::ExecutableNode> indexTest: *testList)
+					for(const std::shared_ptr<uml::ExecutableNode>& indexTest: *testList)
 					{
 						if (!(_test->includes(indexTest)))
 						{

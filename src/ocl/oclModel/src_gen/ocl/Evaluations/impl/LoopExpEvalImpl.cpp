@@ -332,8 +332,8 @@ bool LoopExpEvalImpl::eSet(int featureID, const Any& newValue)
 				try
 				{
 					std::shared_ptr<Bag<ocl::Evaluations::OclExpEval>> bodyEvalsList= newValue->get<std::shared_ptr<Bag<ocl::Evaluations::OclExpEval>>>();
-					std::shared_ptr<Bag<ocl::Evaluations::OclExpEval>> _bodyEvals=getBodyEvals();
-					for(const std::shared_ptr<ocl::Evaluations::OclExpEval> indexBodyEvals: *_bodyEvals)
+					const std::shared_ptr<Bag<ocl::Evaluations::OclExpEval>>& _bodyEvals=getBodyEvals();
+					for(const std::shared_ptr<ocl::Evaluations::OclExpEval>& indexBodyEvals: *_bodyEvals)
 					{
 						if (!(bodyEvalsList->includes(indexBodyEvals)))
 						{
@@ -341,7 +341,7 @@ bool LoopExpEvalImpl::eSet(int featureID, const Any& newValue)
 						}
 					}
 
-					for(const std::shared_ptr<ocl::Evaluations::OclExpEval> indexBodyEvals: *bodyEvalsList)
+					for(const std::shared_ptr<ocl::Evaluations::OclExpEval>& indexBodyEvals: *bodyEvalsList)
 					{
 						if (!(_bodyEvals->includes(indexBodyEvals)))
 						{
@@ -369,8 +369,8 @@ bool LoopExpEvalImpl::eSet(int featureID, const Any& newValue)
 				try
 				{
 					std::shared_ptr<Bag<fUML::Semantics::SimpleClassifiers::StringValue>> iteratorsList= newValue->get<std::shared_ptr<Bag<fUML::Semantics::SimpleClassifiers::StringValue>>>();
-					std::shared_ptr<Bag<fUML::Semantics::SimpleClassifiers::StringValue>> _iterators=getIterators();
-					for(const std::shared_ptr<fUML::Semantics::SimpleClassifiers::StringValue> indexIterators: *_iterators)
+					const std::shared_ptr<Bag<fUML::Semantics::SimpleClassifiers::StringValue>>& _iterators=getIterators();
+					for(const std::shared_ptr<fUML::Semantics::SimpleClassifiers::StringValue>& indexIterators: *_iterators)
 					{
 						if (!(iteratorsList->includes(indexIterators)))
 						{
@@ -378,7 +378,7 @@ bool LoopExpEvalImpl::eSet(int featureID, const Any& newValue)
 						}
 					}
 
-					for(const std::shared_ptr<fUML::Semantics::SimpleClassifiers::StringValue> indexIterators: *iteratorsList)
+					for(const std::shared_ptr<fUML::Semantics::SimpleClassifiers::StringValue>& indexIterators: *iteratorsList)
 					{
 						if (!(_iterators->includes(indexIterators)))
 						{

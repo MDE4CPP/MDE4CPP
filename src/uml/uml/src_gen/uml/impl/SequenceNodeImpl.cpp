@@ -545,8 +545,8 @@ bool SequenceNodeImpl::eSet(int featureID, const Any& newValue)
 				try
 				{
 					std::shared_ptr<Bag<uml::ExecutableNode>> executableNodeList= newValue->get<std::shared_ptr<Bag<uml::ExecutableNode>>>();
-					std::shared_ptr<Bag<uml::ExecutableNode>> _executableNode=getExecutableNode();
-					for(const std::shared_ptr<uml::ExecutableNode> indexExecutableNode: *_executableNode)
+					const std::shared_ptr<Bag<uml::ExecutableNode>>& _executableNode=getExecutableNode();
+					for(const std::shared_ptr<uml::ExecutableNode>& indexExecutableNode: *_executableNode)
 					{
 						if (!(executableNodeList->includes(indexExecutableNode)))
 						{
@@ -554,7 +554,7 @@ bool SequenceNodeImpl::eSet(int featureID, const Any& newValue)
 						}
 					}
 
-					for(const std::shared_ptr<uml::ExecutableNode> indexExecutableNode: *executableNodeList)
+					for(const std::shared_ptr<uml::ExecutableNode>& indexExecutableNode: *executableNodeList)
 					{
 						if (!(_executableNode->includes(indexExecutableNode)))
 						{

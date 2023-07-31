@@ -402,8 +402,8 @@ bool OccurrenceSpecificationImpl::eSet(int featureID, const Any& newValue)
 				try
 				{
 					std::shared_ptr<Bag<uml::GeneralOrdering>> toAfterList= newValue->get<std::shared_ptr<Bag<uml::GeneralOrdering>>>();
-					std::shared_ptr<Bag<uml::GeneralOrdering>> _toAfter=getToAfter();
-					for(const std::shared_ptr<uml::GeneralOrdering> indexToAfter: *_toAfter)
+					const std::shared_ptr<Bag<uml::GeneralOrdering>>& _toAfter=getToAfter();
+					for(const std::shared_ptr<uml::GeneralOrdering>& indexToAfter: *_toAfter)
 					{
 						if (!(toAfterList->includes(indexToAfter)))
 						{
@@ -411,7 +411,7 @@ bool OccurrenceSpecificationImpl::eSet(int featureID, const Any& newValue)
 						}
 					}
 
-					for(const std::shared_ptr<uml::GeneralOrdering> indexToAfter: *toAfterList)
+					for(const std::shared_ptr<uml::GeneralOrdering>& indexToAfter: *toAfterList)
 					{
 						if (!(_toAfter->includes(indexToAfter)))
 						{
@@ -439,8 +439,8 @@ bool OccurrenceSpecificationImpl::eSet(int featureID, const Any& newValue)
 				try
 				{
 					std::shared_ptr<Bag<uml::GeneralOrdering>> toBeforeList= newValue->get<std::shared_ptr<Bag<uml::GeneralOrdering>>>();
-					std::shared_ptr<Bag<uml::GeneralOrdering>> _toBefore=getToBefore();
-					for(const std::shared_ptr<uml::GeneralOrdering> indexToBefore: *_toBefore)
+					const std::shared_ptr<Bag<uml::GeneralOrdering>>& _toBefore=getToBefore();
+					for(const std::shared_ptr<uml::GeneralOrdering>& indexToBefore: *_toBefore)
 					{
 						if (!(toBeforeList->includes(indexToBefore)))
 						{
@@ -448,7 +448,7 @@ bool OccurrenceSpecificationImpl::eSet(int featureID, const Any& newValue)
 						}
 					}
 
-					for(const std::shared_ptr<uml::GeneralOrdering> indexToBefore: *toBeforeList)
+					for(const std::shared_ptr<uml::GeneralOrdering>& indexToBefore: *toBeforeList)
 					{
 						if (!(_toBefore->includes(indexToBefore)))
 						{

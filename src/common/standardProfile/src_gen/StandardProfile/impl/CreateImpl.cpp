@@ -115,9 +115,10 @@ CreateImpl& CreateImpl::operator=(const CreateImpl & obj)
 }
 
 
-std::shared_ptr<uml::Class> CreateImpl::getMetaClass() const
+const std::shared_ptr<uml::Class>& CreateImpl::getMetaClass() const
 {
-	return StandardProfilePackageImpl::eInstance()->get_StandardProfile_Create();
+	static const std::shared_ptr<uml::Class> metaClass = StandardProfilePackageImpl::eInstance()->get_StandardProfile_Create();
+	return metaClass;
 }
 
 void CreateImpl::instantiate()

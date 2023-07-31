@@ -360,8 +360,8 @@ bool TupleValueImpl::eSet(int featureID, const Any& newValue)
 				try
 				{
 					std::shared_ptr<Bag<ocl::Values::NameValueBinding>> elementsList= newValue->get<std::shared_ptr<Bag<ocl::Values::NameValueBinding>>>();
-					std::shared_ptr<Bag<ocl::Values::NameValueBinding>> _elements=getElements();
-					for(const std::shared_ptr<ocl::Values::NameValueBinding> indexElements: *_elements)
+					const std::shared_ptr<Bag<ocl::Values::NameValueBinding>>& _elements=getElements();
+					for(const std::shared_ptr<ocl::Values::NameValueBinding>& indexElements: *_elements)
 					{
 						if (!(elementsList->includes(indexElements)))
 						{
@@ -369,7 +369,7 @@ bool TupleValueImpl::eSet(int featureID, const Any& newValue)
 						}
 					}
 
-					for(const std::shared_ptr<ocl::Values::NameValueBinding> indexElements: *elementsList)
+					for(const std::shared_ptr<ocl::Values::NameValueBinding>& indexElements: *elementsList)
 					{
 						if (!(_elements->includes(indexElements)))
 						{

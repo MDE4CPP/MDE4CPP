@@ -106,9 +106,10 @@ SpecificationImpl& SpecificationImpl::operator=(const SpecificationImpl & obj)
 }
 
 
-std::shared_ptr<uml::Class> SpecificationImpl::getMetaClass() const
+const std::shared_ptr<uml::Class>& SpecificationImpl::getMetaClass() const
 {
-	return StandardProfilePackageImpl::eInstance()->get_StandardProfile_Specification();
+	static const std::shared_ptr<uml::Class> metaClass = StandardProfilePackageImpl::eInstance()->get_StandardProfile_Specification();
+	return metaClass;
 }
 
 void SpecificationImpl::instantiate()

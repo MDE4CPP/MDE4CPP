@@ -335,8 +335,8 @@ bool EvalEnvironmentImpl::eSet(int featureID, const Any& newValue)
 				try
 				{
 					std::shared_ptr<Bag<ocl::Values::NameValueBinding>> bindingsList= newValue->get<std::shared_ptr<Bag<ocl::Values::NameValueBinding>>>();
-					std::shared_ptr<Bag<ocl::Values::NameValueBinding>> _bindings=getBindings();
-					for(const std::shared_ptr<ocl::Values::NameValueBinding> indexBindings: *_bindings)
+					const std::shared_ptr<Bag<ocl::Values::NameValueBinding>>& _bindings=getBindings();
+					for(const std::shared_ptr<ocl::Values::NameValueBinding>& indexBindings: *_bindings)
 					{
 						if (!(bindingsList->includes(indexBindings)))
 						{
@@ -344,7 +344,7 @@ bool EvalEnvironmentImpl::eSet(int featureID, const Any& newValue)
 						}
 					}
 
-					for(const std::shared_ptr<ocl::Values::NameValueBinding> indexBindings: *bindingsList)
+					for(const std::shared_ptr<ocl::Values::NameValueBinding>& indexBindings: *bindingsList)
 					{
 						if (!(_bindings->includes(indexBindings)))
 						{

@@ -113,9 +113,9 @@ int OfferImpl::countOfferedVales()
 		this->removeWithdrawnTokens();
 
     int count = 0;
-	std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> offeredTokens= this->getOfferedTokens();
+	const std::shared_ptr<Bag<fUML::Semantics::Activities::Token>>& offeredTokens= this->getOfferedTokens();
 
-    for (std::shared_ptr<fUML::Semantics::Activities::Token> offeredToken: *offeredTokens) {
+    for (const std::shared_ptr<fUML::Semantics::Activities::Token>& offeredToken: *offeredTokens) {
         if (offeredToken->getValue() != nullptr) {
             count = count + 1;
         }
@@ -370,8 +370,8 @@ bool OfferImpl::eSet(int featureID, const Any& newValue)
 				try
 				{
 					std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> offeredTokensList= newValue->get<std::shared_ptr<Bag<fUML::Semantics::Activities::Token>>>();
-					std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> _offeredTokens=getOfferedTokens();
-					for(const std::shared_ptr<fUML::Semantics::Activities::Token> indexOfferedTokens: *_offeredTokens)
+					const std::shared_ptr<Bag<fUML::Semantics::Activities::Token>>& _offeredTokens=getOfferedTokens();
+					for(const std::shared_ptr<fUML::Semantics::Activities::Token>& indexOfferedTokens: *_offeredTokens)
 					{
 						if (!(offeredTokensList->includes(indexOfferedTokens)))
 						{
@@ -379,7 +379,7 @@ bool OfferImpl::eSet(int featureID, const Any& newValue)
 						}
 					}
 
-					for(const std::shared_ptr<fUML::Semantics::Activities::Token> indexOfferedTokens: *offeredTokensList)
+					for(const std::shared_ptr<fUML::Semantics::Activities::Token>& indexOfferedTokens: *offeredTokensList)
 					{
 						if (!(_offeredTokens->includes(indexOfferedTokens)))
 						{

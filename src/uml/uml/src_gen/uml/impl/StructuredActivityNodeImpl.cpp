@@ -973,8 +973,8 @@ bool StructuredActivityNodeImpl::eSet(int featureID, const Any& newValue)
 				try
 				{
 					std::shared_ptr<Bag<uml::ActivityEdge>> edgeList= newValue->get<std::shared_ptr<Bag<uml::ActivityEdge>>>();
-					std::shared_ptr<Bag<uml::ActivityEdge>> _edge=getEdge();
-					for(const std::shared_ptr<uml::ActivityEdge> indexEdge: *_edge)
+					const std::shared_ptr<Bag<uml::ActivityEdge>>& _edge=getEdge();
+					for(const std::shared_ptr<uml::ActivityEdge>& indexEdge: *_edge)
 					{
 						if (!(edgeList->includes(indexEdge)))
 						{
@@ -982,7 +982,7 @@ bool StructuredActivityNodeImpl::eSet(int featureID, const Any& newValue)
 						}
 					}
 
-					for(const std::shared_ptr<uml::ActivityEdge> indexEdge: *edgeList)
+					for(const std::shared_ptr<uml::ActivityEdge>& indexEdge: *edgeList)
 					{
 						if (!(_edge->includes(indexEdge)))
 						{
@@ -1017,8 +1017,8 @@ bool StructuredActivityNodeImpl::eSet(int featureID, const Any& newValue)
 				try
 				{
 					std::shared_ptr<Bag<uml::ActivityNode>> nodeList= newValue->get<std::shared_ptr<Bag<uml::ActivityNode>>>();
-					std::shared_ptr<Bag<uml::ActivityNode>> _node=getNode();
-					for(const std::shared_ptr<uml::ActivityNode> indexNode: *_node)
+					const std::shared_ptr<Bag<uml::ActivityNode>>& _node=getNode();
+					for(const std::shared_ptr<uml::ActivityNode>& indexNode: *_node)
 					{
 						if (!(nodeList->includes(indexNode)))
 						{
@@ -1026,7 +1026,7 @@ bool StructuredActivityNodeImpl::eSet(int featureID, const Any& newValue)
 						}
 					}
 
-					for(const std::shared_ptr<uml::ActivityNode> indexNode: *nodeList)
+					for(const std::shared_ptr<uml::ActivityNode>& indexNode: *nodeList)
 					{
 						if (!(_node->includes(indexNode)))
 						{
@@ -1054,8 +1054,8 @@ bool StructuredActivityNodeImpl::eSet(int featureID, const Any& newValue)
 				try
 				{
 					std::shared_ptr<Bag<uml::InputPin>> structuredNodeInputList= newValue->get<std::shared_ptr<Bag<uml::InputPin>>>();
-					std::shared_ptr<Bag<uml::InputPin>> _structuredNodeInput=getStructuredNodeInput();
-					for(const std::shared_ptr<uml::InputPin> indexStructuredNodeInput: *_structuredNodeInput)
+					const std::shared_ptr<Bag<uml::InputPin>>& _structuredNodeInput=getStructuredNodeInput();
+					for(const std::shared_ptr<uml::InputPin>& indexStructuredNodeInput: *_structuredNodeInput)
 					{
 						if (!(structuredNodeInputList->includes(indexStructuredNodeInput)))
 						{
@@ -1063,7 +1063,7 @@ bool StructuredActivityNodeImpl::eSet(int featureID, const Any& newValue)
 						}
 					}
 
-					for(const std::shared_ptr<uml::InputPin> indexStructuredNodeInput: *structuredNodeInputList)
+					for(const std::shared_ptr<uml::InputPin>& indexStructuredNodeInput: *structuredNodeInputList)
 					{
 						if (!(_structuredNodeInput->includes(indexStructuredNodeInput)))
 						{
@@ -1091,8 +1091,8 @@ bool StructuredActivityNodeImpl::eSet(int featureID, const Any& newValue)
 				try
 				{
 					std::shared_ptr<Bag<uml::OutputPin>> structuredNodeOutputList= newValue->get<std::shared_ptr<Bag<uml::OutputPin>>>();
-					std::shared_ptr<Bag<uml::OutputPin>> _structuredNodeOutput=getStructuredNodeOutput();
-					for(const std::shared_ptr<uml::OutputPin> indexStructuredNodeOutput: *_structuredNodeOutput)
+					const std::shared_ptr<Bag<uml::OutputPin>>& _structuredNodeOutput=getStructuredNodeOutput();
+					for(const std::shared_ptr<uml::OutputPin>& indexStructuredNodeOutput: *_structuredNodeOutput)
 					{
 						if (!(structuredNodeOutputList->includes(indexStructuredNodeOutput)))
 						{
@@ -1100,7 +1100,7 @@ bool StructuredActivityNodeImpl::eSet(int featureID, const Any& newValue)
 						}
 					}
 
-					for(const std::shared_ptr<uml::OutputPin> indexStructuredNodeOutput: *structuredNodeOutputList)
+					for(const std::shared_ptr<uml::OutputPin>& indexStructuredNodeOutput: *structuredNodeOutputList)
 					{
 						if (!(_structuredNodeOutput->includes(indexStructuredNodeOutput)))
 						{
@@ -1128,8 +1128,8 @@ bool StructuredActivityNodeImpl::eSet(int featureID, const Any& newValue)
 				try
 				{
 					std::shared_ptr<Bag<uml::Variable>> variableList= newValue->get<std::shared_ptr<Bag<uml::Variable>>>();
-					std::shared_ptr<Bag<uml::Variable>> _variable=getVariable();
-					for(const std::shared_ptr<uml::Variable> indexVariable: *_variable)
+					const std::shared_ptr<Bag<uml::Variable>>& _variable=getVariable();
+					for(const std::shared_ptr<uml::Variable>& indexVariable: *_variable)
 					{
 						if (!(variableList->includes(indexVariable)))
 						{
@@ -1137,7 +1137,7 @@ bool StructuredActivityNodeImpl::eSet(int featureID, const Any& newValue)
 						}
 					}
 
-					for(const std::shared_ptr<uml::Variable> indexVariable: *variableList)
+					for(const std::shared_ptr<uml::Variable>& indexVariable: *variableList)
 					{
 						if (!(_variable->includes(indexVariable)))
 						{

@@ -472,8 +472,8 @@ bool ConstraintImpl::eSet(int featureID, const Any& newValue)
 				try
 				{
 					std::shared_ptr<Bag<uml::Element>> constrainedElementList= newValue->get<std::shared_ptr<Bag<uml::Element>>>();
-					std::shared_ptr<Bag<uml::Element>> _constrainedElement=getConstrainedElement();
-					for(const std::shared_ptr<uml::Element> indexConstrainedElement: *_constrainedElement)
+					const std::shared_ptr<Bag<uml::Element>>& _constrainedElement=getConstrainedElement();
+					for(const std::shared_ptr<uml::Element>& indexConstrainedElement: *_constrainedElement)
 					{
 						if (!(constrainedElementList->includes(indexConstrainedElement)))
 						{
@@ -481,7 +481,7 @@ bool ConstraintImpl::eSet(int featureID, const Any& newValue)
 						}
 					}
 
-					for(const std::shared_ptr<uml::Element> indexConstrainedElement: *constrainedElementList)
+					for(const std::shared_ptr<uml::Element>& indexConstrainedElement: *constrainedElementList)
 					{
 						if (!(_constrainedElement->includes(indexConstrainedElement)))
 						{

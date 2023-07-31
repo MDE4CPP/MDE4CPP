@@ -911,8 +911,8 @@ bool LoopNodeImpl::eSet(int featureID, const Any& newValue)
 				try
 				{
 					std::shared_ptr<Bag<uml::OutputPin>> bodyOutputList= newValue->get<std::shared_ptr<Bag<uml::OutputPin>>>();
-					std::shared_ptr<Bag<uml::OutputPin>> _bodyOutput=getBodyOutput();
-					for(const std::shared_ptr<uml::OutputPin> indexBodyOutput: *_bodyOutput)
+					const std::shared_ptr<Bag<uml::OutputPin>>& _bodyOutput=getBodyOutput();
+					for(const std::shared_ptr<uml::OutputPin>& indexBodyOutput: *_bodyOutput)
 					{
 						if (!(bodyOutputList->includes(indexBodyOutput)))
 						{
@@ -920,7 +920,7 @@ bool LoopNodeImpl::eSet(int featureID, const Any& newValue)
 						}
 					}
 
-					for(const std::shared_ptr<uml::OutputPin> indexBodyOutput: *bodyOutputList)
+					for(const std::shared_ptr<uml::OutputPin>& indexBodyOutput: *bodyOutputList)
 					{
 						if (!(_bodyOutput->includes(indexBodyOutput)))
 						{
@@ -948,8 +948,8 @@ bool LoopNodeImpl::eSet(int featureID, const Any& newValue)
 				try
 				{
 					std::shared_ptr<Bag<uml::ExecutableNode>> bodyPartList= newValue->get<std::shared_ptr<Bag<uml::ExecutableNode>>>();
-					std::shared_ptr<Bag<uml::ExecutableNode>> _bodyPart=getBodyPart();
-					for(const std::shared_ptr<uml::ExecutableNode> indexBodyPart: *_bodyPart)
+					const std::shared_ptr<Bag<uml::ExecutableNode>>& _bodyPart=getBodyPart();
+					for(const std::shared_ptr<uml::ExecutableNode>& indexBodyPart: *_bodyPart)
 					{
 						if (!(bodyPartList->includes(indexBodyPart)))
 						{
@@ -957,7 +957,7 @@ bool LoopNodeImpl::eSet(int featureID, const Any& newValue)
 						}
 					}
 
-					for(const std::shared_ptr<uml::ExecutableNode> indexBodyPart: *bodyPartList)
+					for(const std::shared_ptr<uml::ExecutableNode>& indexBodyPart: *bodyPartList)
 					{
 						if (!(_bodyPart->includes(indexBodyPart)))
 						{
@@ -1000,8 +1000,8 @@ bool LoopNodeImpl::eSet(int featureID, const Any& newValue)
 				try
 				{
 					std::shared_ptr<Bag<uml::OutputPin>> loopVariableList= newValue->get<std::shared_ptr<Bag<uml::OutputPin>>>();
-					std::shared_ptr<Bag<uml::OutputPin>> _loopVariable=getLoopVariable();
-					for(const std::shared_ptr<uml::OutputPin> indexLoopVariable: *_loopVariable)
+					const std::shared_ptr<Bag<uml::OutputPin>>& _loopVariable=getLoopVariable();
+					for(const std::shared_ptr<uml::OutputPin>& indexLoopVariable: *_loopVariable)
 					{
 						if (!(loopVariableList->includes(indexLoopVariable)))
 						{
@@ -1009,7 +1009,7 @@ bool LoopNodeImpl::eSet(int featureID, const Any& newValue)
 						}
 					}
 
-					for(const std::shared_ptr<uml::OutputPin> indexLoopVariable: *loopVariableList)
+					for(const std::shared_ptr<uml::OutputPin>& indexLoopVariable: *loopVariableList)
 					{
 						if (!(_loopVariable->includes(indexLoopVariable)))
 						{
@@ -1037,8 +1037,8 @@ bool LoopNodeImpl::eSet(int featureID, const Any& newValue)
 				try
 				{
 					std::shared_ptr<Bag<uml::InputPin>> loopVariableInputList= newValue->get<std::shared_ptr<Bag<uml::InputPin>>>();
-					std::shared_ptr<Bag<uml::InputPin>> _loopVariableInput=getLoopVariableInput();
-					for(const std::shared_ptr<uml::InputPin> indexLoopVariableInput: *_loopVariableInput)
+					const std::shared_ptr<Bag<uml::InputPin>>& _loopVariableInput=getLoopVariableInput();
+					for(const std::shared_ptr<uml::InputPin>& indexLoopVariableInput: *_loopVariableInput)
 					{
 						if (!(loopVariableInputList->includes(indexLoopVariableInput)))
 						{
@@ -1046,7 +1046,7 @@ bool LoopNodeImpl::eSet(int featureID, const Any& newValue)
 						}
 					}
 
-					for(const std::shared_ptr<uml::InputPin> indexLoopVariableInput: *loopVariableInputList)
+					for(const std::shared_ptr<uml::InputPin>& indexLoopVariableInput: *loopVariableInputList)
 					{
 						if (!(_loopVariableInput->includes(indexLoopVariableInput)))
 						{
@@ -1074,8 +1074,8 @@ bool LoopNodeImpl::eSet(int featureID, const Any& newValue)
 				try
 				{
 					std::shared_ptr<Bag<uml::OutputPin>> resultList= newValue->get<std::shared_ptr<Bag<uml::OutputPin>>>();
-					std::shared_ptr<Bag<uml::OutputPin>> _result=getResult();
-					for(const std::shared_ptr<uml::OutputPin> indexResult: *_result)
+					const std::shared_ptr<Bag<uml::OutputPin>>& _result=getResult();
+					for(const std::shared_ptr<uml::OutputPin>& indexResult: *_result)
 					{
 						if (!(resultList->includes(indexResult)))
 						{
@@ -1083,7 +1083,7 @@ bool LoopNodeImpl::eSet(int featureID, const Any& newValue)
 						}
 					}
 
-					for(const std::shared_ptr<uml::OutputPin> indexResult: *resultList)
+					for(const std::shared_ptr<uml::OutputPin>& indexResult: *resultList)
 					{
 						if (!(_result->includes(indexResult)))
 						{
@@ -1111,8 +1111,8 @@ bool LoopNodeImpl::eSet(int featureID, const Any& newValue)
 				try
 				{
 					std::shared_ptr<Bag<uml::ExecutableNode>> setupPartList= newValue->get<std::shared_ptr<Bag<uml::ExecutableNode>>>();
-					std::shared_ptr<Bag<uml::ExecutableNode>> _setupPart=getSetupPart();
-					for(const std::shared_ptr<uml::ExecutableNode> indexSetupPart: *_setupPart)
+					const std::shared_ptr<Bag<uml::ExecutableNode>>& _setupPart=getSetupPart();
+					for(const std::shared_ptr<uml::ExecutableNode>& indexSetupPart: *_setupPart)
 					{
 						if (!(setupPartList->includes(indexSetupPart)))
 						{
@@ -1120,7 +1120,7 @@ bool LoopNodeImpl::eSet(int featureID, const Any& newValue)
 						}
 					}
 
-					for(const std::shared_ptr<uml::ExecutableNode> indexSetupPart: *setupPartList)
+					for(const std::shared_ptr<uml::ExecutableNode>& indexSetupPart: *setupPartList)
 					{
 						if (!(_setupPart->includes(indexSetupPart)))
 						{
@@ -1148,8 +1148,8 @@ bool LoopNodeImpl::eSet(int featureID, const Any& newValue)
 				try
 				{
 					std::shared_ptr<Bag<uml::ExecutableNode>> testList= newValue->get<std::shared_ptr<Bag<uml::ExecutableNode>>>();
-					std::shared_ptr<Bag<uml::ExecutableNode>> _test=getTest();
-					for(const std::shared_ptr<uml::ExecutableNode> indexTest: *_test)
+					const std::shared_ptr<Bag<uml::ExecutableNode>>& _test=getTest();
+					for(const std::shared_ptr<uml::ExecutableNode>& indexTest: *_test)
 					{
 						if (!(testList->includes(indexTest)))
 						{
@@ -1157,7 +1157,7 @@ bool LoopNodeImpl::eSet(int featureID, const Any& newValue)
 						}
 					}
 
-					for(const std::shared_ptr<uml::ExecutableNode> indexTest: *testList)
+					for(const std::shared_ptr<uml::ExecutableNode>& indexTest: *testList)
 					{
 						if (!(_test->includes(indexTest)))
 						{

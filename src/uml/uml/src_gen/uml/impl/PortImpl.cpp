@@ -767,8 +767,8 @@ bool PortImpl::eSet(int featureID, const Any& newValue)
 				try
 				{
 					std::shared_ptr<Bag<uml::Port>> redefinedPortList= newValue->get<std::shared_ptr<Bag<uml::Port>>>();
-					std::shared_ptr<Bag<uml::Port>> _redefinedPort=getRedefinedPort();
-					for(const std::shared_ptr<uml::Port> indexRedefinedPort: *_redefinedPort)
+					const std::shared_ptr<Bag<uml::Port>>& _redefinedPort=getRedefinedPort();
+					for(const std::shared_ptr<uml::Port>& indexRedefinedPort: *_redefinedPort)
 					{
 						if (!(redefinedPortList->includes(indexRedefinedPort)))
 						{
@@ -776,7 +776,7 @@ bool PortImpl::eSet(int featureID, const Any& newValue)
 						}
 					}
 
-					for(const std::shared_ptr<uml::Port> indexRedefinedPort: *redefinedPortList)
+					for(const std::shared_ptr<uml::Port>& indexRedefinedPort: *redefinedPortList)
 					{
 						if (!(_redefinedPort->includes(indexRedefinedPort)))
 						{

@@ -106,9 +106,10 @@ SendImpl& SendImpl::operator=(const SendImpl & obj)
 }
 
 
-std::shared_ptr<uml::Class> SendImpl::getMetaClass() const
+const std::shared_ptr<uml::Class>& SendImpl::getMetaClass() const
 {
-	return StandardProfilePackageImpl::eInstance()->get_StandardProfile_Send();
+	static const std::shared_ptr<uml::Class> metaClass = StandardProfilePackageImpl::eInstance()->get_StandardProfile_Send();
+	return metaClass;
 }
 
 void SendImpl::instantiate()

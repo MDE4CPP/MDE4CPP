@@ -339,8 +339,8 @@ bool TupleTypeImpl::eSet(int featureID, const Any& newValue)
 				try
 				{
 					std::shared_ptr<Bag<ocl::Types::NameTypeBinding>> partsList= newValue->get<std::shared_ptr<Bag<ocl::Types::NameTypeBinding>>>();
-					std::shared_ptr<Bag<ocl::Types::NameTypeBinding>> _parts=getParts();
-					for(const std::shared_ptr<ocl::Types::NameTypeBinding> indexParts: *_parts)
+					const std::shared_ptr<Bag<ocl::Types::NameTypeBinding>>& _parts=getParts();
+					for(const std::shared_ptr<ocl::Types::NameTypeBinding>& indexParts: *_parts)
 					{
 						if (!(partsList->includes(indexParts)))
 						{
@@ -348,7 +348,7 @@ bool TupleTypeImpl::eSet(int featureID, const Any& newValue)
 						}
 					}
 
-					for(const std::shared_ptr<ocl::Types::NameTypeBinding> indexParts: *partsList)
+					for(const std::shared_ptr<ocl::Types::NameTypeBinding>& indexParts: *partsList)
 					{
 						if (!(_parts->includes(indexParts)))
 						{

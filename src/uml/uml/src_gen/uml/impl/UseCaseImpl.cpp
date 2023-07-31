@@ -736,8 +736,8 @@ bool UseCaseImpl::eSet(int featureID, const Any& newValue)
 				try
 				{
 					std::shared_ptr<Bag<uml::Extend>> extendList= newValue->get<std::shared_ptr<Bag<uml::Extend>>>();
-					std::shared_ptr<Bag<uml::Extend>> _extend=getExtend();
-					for(const std::shared_ptr<uml::Extend> indexExtend: *_extend)
+					const std::shared_ptr<Bag<uml::Extend>>& _extend=getExtend();
+					for(const std::shared_ptr<uml::Extend>& indexExtend: *_extend)
 					{
 						if (!(extendList->includes(indexExtend)))
 						{
@@ -745,7 +745,7 @@ bool UseCaseImpl::eSet(int featureID, const Any& newValue)
 						}
 					}
 
-					for(const std::shared_ptr<uml::Extend> indexExtend: *extendList)
+					for(const std::shared_ptr<uml::Extend>& indexExtend: *extendList)
 					{
 						if (!(_extend->includes(indexExtend)))
 						{
@@ -773,8 +773,8 @@ bool UseCaseImpl::eSet(int featureID, const Any& newValue)
 				try
 				{
 					std::shared_ptr<Bag<uml::ExtensionPoint>> extensionPointList= newValue->get<std::shared_ptr<Bag<uml::ExtensionPoint>>>();
-					std::shared_ptr<Bag<uml::ExtensionPoint>> _extensionPoint=getExtensionPoint();
-					for(const std::shared_ptr<uml::ExtensionPoint> indexExtensionPoint: *_extensionPoint)
+					const std::shared_ptr<Bag<uml::ExtensionPoint>>& _extensionPoint=getExtensionPoint();
+					for(const std::shared_ptr<uml::ExtensionPoint>& indexExtensionPoint: *_extensionPoint)
 					{
 						if (!(extensionPointList->includes(indexExtensionPoint)))
 						{
@@ -782,7 +782,7 @@ bool UseCaseImpl::eSet(int featureID, const Any& newValue)
 						}
 					}
 
-					for(const std::shared_ptr<uml::ExtensionPoint> indexExtensionPoint: *extensionPointList)
+					for(const std::shared_ptr<uml::ExtensionPoint>& indexExtensionPoint: *extensionPointList)
 					{
 						if (!(_extensionPoint->includes(indexExtensionPoint)))
 						{
@@ -810,8 +810,8 @@ bool UseCaseImpl::eSet(int featureID, const Any& newValue)
 				try
 				{
 					std::shared_ptr<Bag<uml::Include>> includeList= newValue->get<std::shared_ptr<Bag<uml::Include>>>();
-					std::shared_ptr<Bag<uml::Include>> _include=getInclude();
-					for(const std::shared_ptr<uml::Include> indexInclude: *_include)
+					const std::shared_ptr<Bag<uml::Include>>& _include=getInclude();
+					for(const std::shared_ptr<uml::Include>& indexInclude: *_include)
 					{
 						if (!(includeList->includes(indexInclude)))
 						{
@@ -819,7 +819,7 @@ bool UseCaseImpl::eSet(int featureID, const Any& newValue)
 						}
 					}
 
-					for(const std::shared_ptr<uml::Include> indexInclude: *includeList)
+					for(const std::shared_ptr<uml::Include>& indexInclude: *includeList)
 					{
 						if (!(_include->includes(indexInclude)))
 						{
@@ -847,8 +847,8 @@ bool UseCaseImpl::eSet(int featureID, const Any& newValue)
 				try
 				{
 					std::shared_ptr<Bag<uml::Classifier>> subjectList= newValue->get<std::shared_ptr<Bag<uml::Classifier>>>();
-					std::shared_ptr<Bag<uml::Classifier>> _subject=getSubject();
-					for(const std::shared_ptr<uml::Classifier> indexSubject: *_subject)
+					const std::shared_ptr<Bag<uml::Classifier>>& _subject=getSubject();
+					for(const std::shared_ptr<uml::Classifier>& indexSubject: *_subject)
 					{
 						if (!(subjectList->includes(indexSubject)))
 						{
@@ -856,7 +856,7 @@ bool UseCaseImpl::eSet(int featureID, const Any& newValue)
 						}
 					}
 
-					for(const std::shared_ptr<uml::Classifier> indexSubject: *subjectList)
+					for(const std::shared_ptr<uml::Classifier>& indexSubject: *subjectList)
 					{
 						if (!(_subject->includes(indexSubject)))
 						{

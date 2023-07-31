@@ -290,8 +290,8 @@ bool CollectionLiteralExpEvalImpl::eSet(int featureID, const Any& newValue)
 				try
 				{
 					std::shared_ptr<Bag<ocl::Evaluations::CollectionLiteralPartEval>> partsList= newValue->get<std::shared_ptr<Bag<ocl::Evaluations::CollectionLiteralPartEval>>>();
-					std::shared_ptr<Bag<ocl::Evaluations::CollectionLiteralPartEval>> _parts=getParts();
-					for(const std::shared_ptr<ocl::Evaluations::CollectionLiteralPartEval> indexParts: *_parts)
+					const std::shared_ptr<Bag<ocl::Evaluations::CollectionLiteralPartEval>>& _parts=getParts();
+					for(const std::shared_ptr<ocl::Evaluations::CollectionLiteralPartEval>& indexParts: *_parts)
 					{
 						if (!(partsList->includes(indexParts)))
 						{
@@ -299,7 +299,7 @@ bool CollectionLiteralExpEvalImpl::eSet(int featureID, const Any& newValue)
 						}
 					}
 
-					for(const std::shared_ptr<ocl::Evaluations::CollectionLiteralPartEval> indexParts: *partsList)
+					for(const std::shared_ptr<ocl::Evaluations::CollectionLiteralPartEval>& indexParts: *partsList)
 					{
 						if (!(_parts->includes(indexParts)))
 						{

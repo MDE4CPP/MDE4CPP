@@ -201,39 +201,44 @@ bool EOperationImpl::isOverrideOf(const std::shared_ptr<ecore::EOperation>& some
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
-		std::shared_ptr<ecore::EClass > containingClass = someOperation->getEContainingClass().lock();
-	if(nullptr == containingClass)
-	{
-		std::cerr << __PRETTY_FUNCTION__ << " containing class not set." << std::endl;
-		return false;
-	}
+	std::shared_ptr<ecore::EClass> containingClass = someOperation->getEContainingClass().lock();
+if(nullptr == containingClass)
+{
+	std::cerr << __PRETTY_FUNCTION__ << " containing class not set." << std::endl;
+	return false;
+}
 
-	std::shared_ptr<ecore::EClass > thisContainingClass = getEContainingClass().lock();
-	if(nullptr == thisContainingClass)
-	{
-		std::cerr << __PRETTY_FUNCTION__ << " thisContainingClass not set." << std::endl;
-		return false;
-	}
+std::shared_ptr<ecore::EClass> thisContainingClass = getEContainingClass().lock();
+if(nullptr == thisContainingClass)
+{
+	std::cerr << __PRETTY_FUNCTION__ << " thisContainingClass not set." << std::endl;
+	return false;
+}
 
-	if (containingClass->isSuperTypeOf(thisContainingClass) && (someOperation->getName()==getName()))
-    {
-        std::shared_ptr< Bag<ecore::EParameter> > parameters = getEParameters();
-        std::shared_ptr< Bag<ecore::EParameter> > otherParameters = someOperation->getEParameters();
-        if (parameters->size() == otherParameters->size())
-        {
-            for (Bag<EParameter> ::iterator i = parameters->begin(), j = otherParameters->begin(); i != parameters->end(); ++i,++j )
-        	{
-            	std::shared_ptr<EParameter> parameter = *i;
-            	std::shared_ptr<EParameter> otherParameter = *j;
-                if (parameter->getEType().get() != otherParameter->getEType().get())
-          		{
-                    return false;
-        		}
-        	}
-            return true;
-		}
+if (containingClass->isSuperTypeOf(thisContainingClass) && (someOperation->getName()==getName()))
+ {
+	 const std::shared_ptr<Bag<ecore::EParameter>>& parameters = getEParameters();
+ 	const std::shared_ptr<Bag<ecore::EParameter>>& otherParameters = someOperation->getEParameters();
+ 	if (parameters->size() == otherParameters->size())
+ 	{
+		Bag<EParameter>::iterator parametersIt = parameters->begin();
+		Bag<EParameter>::iterator parametersEnd = parameters->end();
+		Bag<EParameter>::iterator otherParametersIt = otherParameters->begin();
+		while(parametersIt != parametersEnd)
+ 		{
+			const std::shared_ptr<EParameter>& parameter = *parametersIt;
+ 			const std::shared_ptr<EParameter>& otherParameter = *otherParametersIt;
+	 		if (parameter->getEType().get() != otherParameter->getEType().get())
+ 			{
+ 				return false;
+ 			}
+			parametersIt++;
+			otherParametersIt++;
+ 		}
+ 	return true;
 	}
-    return false;
+}
+ return false;
 	//end of body
 }
 
@@ -592,8 +597,8 @@ bool EOperationImpl::eSet(int featureID, const Any& newValue)
 				try
 				{
 					std::shared_ptr<Bag<ecore::EClassifier>> eExceptionsList= newValue->get<std::shared_ptr<Bag<ecore::EClassifier>>>();
-					std::shared_ptr<Bag<ecore::EClassifier>> _eExceptions=getEExceptions();
-					for(const std::shared_ptr<ecore::EClassifier> indexEExceptions: *_eExceptions)
+					const std::shared_ptr<Bag<ecore::EClassifier>>& _eExceptions=getEExceptions();
+					for(const std::shared_ptr<ecore::EClassifier>& indexEExceptions: *_eExceptions)
 					{
 						if (!(eExceptionsList->includes(indexEExceptions)))
 						{
@@ -601,7 +606,7 @@ bool EOperationImpl::eSet(int featureID, const Any& newValue)
 						}
 					}
 
-					for(const std::shared_ptr<ecore::EClassifier> indexEExceptions: *eExceptionsList)
+					for(const std::shared_ptr<ecore::EClassifier>& indexEExceptions: *eExceptionsList)
 					{
 						if (!(_eExceptions->includes(indexEExceptions)))
 						{
@@ -629,8 +634,8 @@ bool EOperationImpl::eSet(int featureID, const Any& newValue)
 				try
 				{
 					std::shared_ptr<Bag<ecore::EGenericType>> eGenericExceptionsList= newValue->get<std::shared_ptr<Bag<ecore::EGenericType>>>();
-					std::shared_ptr<Bag<ecore::EGenericType>> _eGenericExceptions=getEGenericExceptions();
-					for(const std::shared_ptr<ecore::EGenericType> indexEGenericExceptions: *_eGenericExceptions)
+					const std::shared_ptr<Bag<ecore::EGenericType>>& _eGenericExceptions=getEGenericExceptions();
+					for(const std::shared_ptr<ecore::EGenericType>& indexEGenericExceptions: *_eGenericExceptions)
 					{
 						if (!(eGenericExceptionsList->includes(indexEGenericExceptions)))
 						{
@@ -638,7 +643,7 @@ bool EOperationImpl::eSet(int featureID, const Any& newValue)
 						}
 					}
 
-					for(const std::shared_ptr<ecore::EGenericType> indexEGenericExceptions: *eGenericExceptionsList)
+					for(const std::shared_ptr<ecore::EGenericType>& indexEGenericExceptions: *eGenericExceptionsList)
 					{
 						if (!(_eGenericExceptions->includes(indexEGenericExceptions)))
 						{
@@ -666,8 +671,8 @@ bool EOperationImpl::eSet(int featureID, const Any& newValue)
 				try
 				{
 					std::shared_ptr<Bag<ecore::EParameter>> eParametersList= newValue->get<std::shared_ptr<Bag<ecore::EParameter>>>();
-					std::shared_ptr<Bag<ecore::EParameter>> _eParameters=getEParameters();
-					for(const std::shared_ptr<ecore::EParameter> indexEParameters: *_eParameters)
+					const std::shared_ptr<Bag<ecore::EParameter>>& _eParameters=getEParameters();
+					for(const std::shared_ptr<ecore::EParameter>& indexEParameters: *_eParameters)
 					{
 						if (!(eParametersList->includes(indexEParameters)))
 						{
@@ -675,7 +680,7 @@ bool EOperationImpl::eSet(int featureID, const Any& newValue)
 						}
 					}
 
-					for(const std::shared_ptr<ecore::EParameter> indexEParameters: *eParametersList)
+					for(const std::shared_ptr<ecore::EParameter>& indexEParameters: *eParametersList)
 					{
 						if (!(_eParameters->includes(indexEParameters)))
 						{
@@ -703,8 +708,8 @@ bool EOperationImpl::eSet(int featureID, const Any& newValue)
 				try
 				{
 					std::shared_ptr<Bag<ecore::ETypeParameter>> eTypeParametersList= newValue->get<std::shared_ptr<Bag<ecore::ETypeParameter>>>();
-					std::shared_ptr<Bag<ecore::ETypeParameter>> _eTypeParameters=getETypeParameters();
-					for(const std::shared_ptr<ecore::ETypeParameter> indexETypeParameters: *_eTypeParameters)
+					const std::shared_ptr<Bag<ecore::ETypeParameter>>& _eTypeParameters=getETypeParameters();
+					for(const std::shared_ptr<ecore::ETypeParameter>& indexETypeParameters: *_eTypeParameters)
 					{
 						if (!(eTypeParametersList->includes(indexETypeParameters)))
 						{
@@ -712,7 +717,7 @@ bool EOperationImpl::eSet(int featureID, const Any& newValue)
 						}
 					}
 
-					for(const std::shared_ptr<ecore::ETypeParameter> indexETypeParameters: *eTypeParametersList)
+					for(const std::shared_ptr<ecore::ETypeParameter>& indexETypeParameters: *eTypeParametersList)
 					{
 						if (!(_eTypeParameters->includes(indexETypeParameters)))
 						{

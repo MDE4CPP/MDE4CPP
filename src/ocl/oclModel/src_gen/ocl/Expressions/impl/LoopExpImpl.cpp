@@ -479,8 +479,8 @@ bool LoopExpImpl::eSet(int featureID, const Any& newValue)
 				try
 				{
 					std::shared_ptr<Bag<ocl::Expressions::Variable>> iteratorList= newValue->get<std::shared_ptr<Bag<ocl::Expressions::Variable>>>();
-					std::shared_ptr<Bag<ocl::Expressions::Variable>> _iterator=getIterator();
-					for(const std::shared_ptr<ocl::Expressions::Variable> indexIterator: *_iterator)
+					const std::shared_ptr<Bag<ocl::Expressions::Variable>>& _iterator=getIterator();
+					for(const std::shared_ptr<ocl::Expressions::Variable>& indexIterator: *_iterator)
 					{
 						if (!(iteratorList->includes(indexIterator)))
 						{
@@ -488,7 +488,7 @@ bool LoopExpImpl::eSet(int featureID, const Any& newValue)
 						}
 					}
 
-					for(const std::shared_ptr<ocl::Expressions::Variable> indexIterator: *iteratorList)
+					for(const std::shared_ptr<ocl::Expressions::Variable>& indexIterator: *iteratorList)
 					{
 						if (!(_iterator->includes(indexIterator)))
 						{

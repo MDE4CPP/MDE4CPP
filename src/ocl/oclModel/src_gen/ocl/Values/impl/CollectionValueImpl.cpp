@@ -339,8 +339,8 @@ bool CollectionValueImpl::eSet(int featureID, const Any& newValue)
 				try
 				{
 					std::shared_ptr<Bag<ocl::Values::Element>> elementsList= newValue->get<std::shared_ptr<Bag<ocl::Values::Element>>>();
-					std::shared_ptr<Bag<ocl::Values::Element>> _elements=getElements();
-					for(const std::shared_ptr<ocl::Values::Element> indexElements: *_elements)
+					const std::shared_ptr<Bag<ocl::Values::Element>>& _elements=getElements();
+					for(const std::shared_ptr<ocl::Values::Element>& indexElements: *_elements)
 					{
 						if (!(elementsList->includes(indexElements)))
 						{
@@ -348,7 +348,7 @@ bool CollectionValueImpl::eSet(int featureID, const Any& newValue)
 						}
 					}
 
-					for(const std::shared_ptr<ocl::Values::Element> indexElements: *elementsList)
+					for(const std::shared_ptr<ocl::Values::Element>& indexElements: *elementsList)
 					{
 						if (!(_elements->includes(indexElements)))
 						{

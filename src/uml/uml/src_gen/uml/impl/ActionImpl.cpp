@@ -657,8 +657,8 @@ bool ActionImpl::eSet(int featureID, const Any& newValue)
 				try
 				{
 					std::shared_ptr<Bag<uml::Constraint>> localPostconditionList= newValue->get<std::shared_ptr<Bag<uml::Constraint>>>();
-					std::shared_ptr<Bag<uml::Constraint>> _localPostcondition=getLocalPostcondition();
-					for(const std::shared_ptr<uml::Constraint> indexLocalPostcondition: *_localPostcondition)
+					const std::shared_ptr<Bag<uml::Constraint>>& _localPostcondition=getLocalPostcondition();
+					for(const std::shared_ptr<uml::Constraint>& indexLocalPostcondition: *_localPostcondition)
 					{
 						if (!(localPostconditionList->includes(indexLocalPostcondition)))
 						{
@@ -666,7 +666,7 @@ bool ActionImpl::eSet(int featureID, const Any& newValue)
 						}
 					}
 
-					for(const std::shared_ptr<uml::Constraint> indexLocalPostcondition: *localPostconditionList)
+					for(const std::shared_ptr<uml::Constraint>& indexLocalPostcondition: *localPostconditionList)
 					{
 						if (!(_localPostcondition->includes(indexLocalPostcondition)))
 						{
@@ -694,8 +694,8 @@ bool ActionImpl::eSet(int featureID, const Any& newValue)
 				try
 				{
 					std::shared_ptr<Bag<uml::Constraint>> localPreconditionList= newValue->get<std::shared_ptr<Bag<uml::Constraint>>>();
-					std::shared_ptr<Bag<uml::Constraint>> _localPrecondition=getLocalPrecondition();
-					for(const std::shared_ptr<uml::Constraint> indexLocalPrecondition: *_localPrecondition)
+					const std::shared_ptr<Bag<uml::Constraint>>& _localPrecondition=getLocalPrecondition();
+					for(const std::shared_ptr<uml::Constraint>& indexLocalPrecondition: *_localPrecondition)
 					{
 						if (!(localPreconditionList->includes(indexLocalPrecondition)))
 						{
@@ -703,7 +703,7 @@ bool ActionImpl::eSet(int featureID, const Any& newValue)
 						}
 					}
 
-					for(const std::shared_ptr<uml::Constraint> indexLocalPrecondition: *localPreconditionList)
+					for(const std::shared_ptr<uml::Constraint>& indexLocalPrecondition: *localPreconditionList)
 					{
 						if (!(_localPrecondition->includes(indexLocalPrecondition)))
 						{

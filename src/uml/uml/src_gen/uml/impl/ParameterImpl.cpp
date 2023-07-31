@@ -814,8 +814,8 @@ bool ParameterImpl::eSet(int featureID, const Any& newValue)
 				try
 				{
 					std::shared_ptr<Bag<uml::ParameterSet>> parameterSetList= newValue->get<std::shared_ptr<Bag<uml::ParameterSet>>>();
-					std::shared_ptr<Bag<uml::ParameterSet>> _parameterSet=getParameterSet();
-					for(const std::shared_ptr<uml::ParameterSet> indexParameterSet: *_parameterSet)
+					const std::shared_ptr<Bag<uml::ParameterSet>>& _parameterSet=getParameterSet();
+					for(const std::shared_ptr<uml::ParameterSet>& indexParameterSet: *_parameterSet)
 					{
 						if (!(parameterSetList->includes(indexParameterSet)))
 						{
@@ -823,7 +823,7 @@ bool ParameterImpl::eSet(int featureID, const Any& newValue)
 						}
 					}
 
-					for(const std::shared_ptr<uml::ParameterSet> indexParameterSet: *parameterSetList)
+					for(const std::shared_ptr<uml::ParameterSet>& indexParameterSet: *parameterSetList)
 					{
 						if (!(_parameterSet->includes(indexParameterSet)))
 						{

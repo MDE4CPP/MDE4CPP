@@ -678,8 +678,8 @@ bool NamespaceImpl::eSet(int featureID, const Any& newValue)
 				try
 				{
 					std::shared_ptr<Bag<uml::ElementImport>> elementImportList= newValue->get<std::shared_ptr<Bag<uml::ElementImport>>>();
-					std::shared_ptr<Bag<uml::ElementImport>> _elementImport=getElementImport();
-					for(const std::shared_ptr<uml::ElementImport> indexElementImport: *_elementImport)
+					const std::shared_ptr<Bag<uml::ElementImport>>& _elementImport=getElementImport();
+					for(const std::shared_ptr<uml::ElementImport>& indexElementImport: *_elementImport)
 					{
 						if (!(elementImportList->includes(indexElementImport)))
 						{
@@ -687,7 +687,7 @@ bool NamespaceImpl::eSet(int featureID, const Any& newValue)
 						}
 					}
 
-					for(const std::shared_ptr<uml::ElementImport> indexElementImport: *elementImportList)
+					for(const std::shared_ptr<uml::ElementImport>& indexElementImport: *elementImportList)
 					{
 						if (!(_elementImport->includes(indexElementImport)))
 						{
@@ -715,8 +715,8 @@ bool NamespaceImpl::eSet(int featureID, const Any& newValue)
 				try
 				{
 					std::shared_ptr<Bag<uml::Constraint>> ownedRuleList= newValue->get<std::shared_ptr<Bag<uml::Constraint>>>();
-					std::shared_ptr<Bag<uml::Constraint>> _ownedRule=getOwnedRule();
-					for(const std::shared_ptr<uml::Constraint> indexOwnedRule: *_ownedRule)
+					const std::shared_ptr<Bag<uml::Constraint>>& _ownedRule=getOwnedRule();
+					for(const std::shared_ptr<uml::Constraint>& indexOwnedRule: *_ownedRule)
 					{
 						if (!(ownedRuleList->includes(indexOwnedRule)))
 						{
@@ -724,7 +724,7 @@ bool NamespaceImpl::eSet(int featureID, const Any& newValue)
 						}
 					}
 
-					for(const std::shared_ptr<uml::Constraint> indexOwnedRule: *ownedRuleList)
+					for(const std::shared_ptr<uml::Constraint>& indexOwnedRule: *ownedRuleList)
 					{
 						if (!(_ownedRule->includes(indexOwnedRule)))
 						{
@@ -752,8 +752,8 @@ bool NamespaceImpl::eSet(int featureID, const Any& newValue)
 				try
 				{
 					std::shared_ptr<Bag<uml::PackageImport>> packageImportList= newValue->get<std::shared_ptr<Bag<uml::PackageImport>>>();
-					std::shared_ptr<Bag<uml::PackageImport>> _packageImport=getPackageImport();
-					for(const std::shared_ptr<uml::PackageImport> indexPackageImport: *_packageImport)
+					const std::shared_ptr<Bag<uml::PackageImport>>& _packageImport=getPackageImport();
+					for(const std::shared_ptr<uml::PackageImport>& indexPackageImport: *_packageImport)
 					{
 						if (!(packageImportList->includes(indexPackageImport)))
 						{
@@ -761,7 +761,7 @@ bool NamespaceImpl::eSet(int featureID, const Any& newValue)
 						}
 					}
 
-					for(const std::shared_ptr<uml::PackageImport> indexPackageImport: *packageImportList)
+					for(const std::shared_ptr<uml::PackageImport>& indexPackageImport: *packageImportList)
 					{
 						if (!(_packageImport->includes(indexPackageImport)))
 						{

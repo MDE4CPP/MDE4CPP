@@ -106,9 +106,10 @@ FileImpl& FileImpl::operator=(const FileImpl & obj)
 }
 
 
-std::shared_ptr<uml::Class> FileImpl::getMetaClass() const
+const std::shared_ptr<uml::Class>& FileImpl::getMetaClass() const
 {
-	return StandardProfilePackageImpl::eInstance()->get_StandardProfile_File();
+	static const std::shared_ptr<uml::Class> metaClass = StandardProfilePackageImpl::eInstance()->get_StandardProfile_File();
+	return metaClass;
 }
 
 void FileImpl::instantiate()

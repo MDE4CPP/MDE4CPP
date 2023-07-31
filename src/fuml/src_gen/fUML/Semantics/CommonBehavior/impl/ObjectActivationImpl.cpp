@@ -678,8 +678,8 @@ bool ObjectActivationImpl::eSet(int featureID, const Any& newValue)
 				try
 				{
 					std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ClassifierBehaviorExecution>> classifierBehaviorExecutionsList= newValue->get<std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ClassifierBehaviorExecution>>>();
-					std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ClassifierBehaviorExecution>> _classifierBehaviorExecutions=getClassifierBehaviorExecutions();
-					for(const std::shared_ptr<fUML::Semantics::CommonBehavior::ClassifierBehaviorExecution> indexClassifierBehaviorExecutions: *_classifierBehaviorExecutions)
+					const std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ClassifierBehaviorExecution>>& _classifierBehaviorExecutions=getClassifierBehaviorExecutions();
+					for(const std::shared_ptr<fUML::Semantics::CommonBehavior::ClassifierBehaviorExecution>& indexClassifierBehaviorExecutions: *_classifierBehaviorExecutions)
 					{
 						if (!(classifierBehaviorExecutionsList->includes(indexClassifierBehaviorExecutions)))
 						{
@@ -687,7 +687,7 @@ bool ObjectActivationImpl::eSet(int featureID, const Any& newValue)
 						}
 					}
 
-					for(const std::shared_ptr<fUML::Semantics::CommonBehavior::ClassifierBehaviorExecution> indexClassifierBehaviorExecutions: *classifierBehaviorExecutionsList)
+					for(const std::shared_ptr<fUML::Semantics::CommonBehavior::ClassifierBehaviorExecution>& indexClassifierBehaviorExecutions: *classifierBehaviorExecutionsList)
 					{
 						if (!(_classifierBehaviorExecutions->includes(indexClassifierBehaviorExecutions)))
 						{
@@ -715,8 +715,8 @@ bool ObjectActivationImpl::eSet(int featureID, const Any& newValue)
 				try
 				{
 					std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::EventOccurrence>> eventPoolList= newValue->get<std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::EventOccurrence>>>();
-					std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::EventOccurrence>> _eventPool=getEventPool();
-					for(const std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccurrence> indexEventPool: *_eventPool)
+					const std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::EventOccurrence>>& _eventPool=getEventPool();
+					for(const std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccurrence>& indexEventPool: *_eventPool)
 					{
 						if (!(eventPoolList->includes(indexEventPool)))
 						{
@@ -724,7 +724,7 @@ bool ObjectActivationImpl::eSet(int featureID, const Any& newValue)
 						}
 					}
 
-					for(const std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccurrence> indexEventPool: *eventPoolList)
+					for(const std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccurrence>& indexEventPool: *eventPoolList)
 					{
 						if (!(_eventPool->includes(indexEventPool)))
 						{
@@ -760,8 +760,8 @@ bool ObjectActivationImpl::eSet(int featureID, const Any& newValue)
 				try
 				{
 					std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::EventAccepter>> waitingEventAcceptersList= newValue->get<std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::EventAccepter>>>();
-					std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::EventAccepter>> _waitingEventAccepters=getWaitingEventAccepters();
-					for(const std::shared_ptr<fUML::Semantics::CommonBehavior::EventAccepter> indexWaitingEventAccepters: *_waitingEventAccepters)
+					const std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::EventAccepter>>& _waitingEventAccepters=getWaitingEventAccepters();
+					for(const std::shared_ptr<fUML::Semantics::CommonBehavior::EventAccepter>& indexWaitingEventAccepters: *_waitingEventAccepters)
 					{
 						if (!(waitingEventAcceptersList->includes(indexWaitingEventAccepters)))
 						{
@@ -769,7 +769,7 @@ bool ObjectActivationImpl::eSet(int featureID, const Any& newValue)
 						}
 					}
 
-					for(const std::shared_ptr<fUML::Semantics::CommonBehavior::EventAccepter> indexWaitingEventAccepters: *waitingEventAcceptersList)
+					for(const std::shared_ptr<fUML::Semantics::CommonBehavior::EventAccepter>& indexWaitingEventAccepters: *waitingEventAcceptersList)
 					{
 						if (!(_waitingEventAccepters->includes(indexWaitingEventAccepters)))
 						{

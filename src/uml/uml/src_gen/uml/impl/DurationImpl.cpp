@@ -453,8 +453,8 @@ bool DurationImpl::eSet(int featureID, const Any& newValue)
 				try
 				{
 					std::shared_ptr<Bag<uml::Observation>> observationList= newValue->get<std::shared_ptr<Bag<uml::Observation>>>();
-					std::shared_ptr<Bag<uml::Observation>> _observation=getObservation();
-					for(const std::shared_ptr<uml::Observation> indexObservation: *_observation)
+					const std::shared_ptr<Bag<uml::Observation>>& _observation=getObservation();
+					for(const std::shared_ptr<uml::Observation>& indexObservation: *_observation)
 					{
 						if (!(observationList->includes(indexObservation)))
 						{
@@ -462,7 +462,7 @@ bool DurationImpl::eSet(int featureID, const Any& newValue)
 						}
 					}
 
-					for(const std::shared_ptr<uml::Observation> indexObservation: *observationList)
+					for(const std::shared_ptr<uml::Observation>& indexObservation: *observationList)
 					{
 						if (!(_observation->includes(indexObservation)))
 						{

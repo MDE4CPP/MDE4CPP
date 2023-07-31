@@ -106,9 +106,10 @@ DeriveImpl& DeriveImpl::operator=(const DeriveImpl & obj)
 }
 
 
-std::shared_ptr<uml::Class> DeriveImpl::getMetaClass() const
+const std::shared_ptr<uml::Class>& DeriveImpl::getMetaClass() const
 {
-	return StandardProfilePackageImpl::eInstance()->get_StandardProfile_Derive();
+	static const std::shared_ptr<uml::Class> metaClass = StandardProfilePackageImpl::eInstance()->get_StandardProfile_Derive();
+	return metaClass;
 }
 
 void DeriveImpl::instantiate()

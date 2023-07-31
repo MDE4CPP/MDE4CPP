@@ -436,8 +436,8 @@ bool ConnectionPointReferenceImpl::eSet(int featureID, const Any& newValue)
 				try
 				{
 					std::shared_ptr<Bag<uml::Pseudostate>> entryList= newValue->get<std::shared_ptr<Bag<uml::Pseudostate>>>();
-					std::shared_ptr<Bag<uml::Pseudostate>> _entry=getEntry();
-					for(const std::shared_ptr<uml::Pseudostate> indexEntry: *_entry)
+					const std::shared_ptr<Bag<uml::Pseudostate>>& _entry=getEntry();
+					for(const std::shared_ptr<uml::Pseudostate>& indexEntry: *_entry)
 					{
 						if (!(entryList->includes(indexEntry)))
 						{
@@ -445,7 +445,7 @@ bool ConnectionPointReferenceImpl::eSet(int featureID, const Any& newValue)
 						}
 					}
 
-					for(const std::shared_ptr<uml::Pseudostate> indexEntry: *entryList)
+					for(const std::shared_ptr<uml::Pseudostate>& indexEntry: *entryList)
 					{
 						if (!(_entry->includes(indexEntry)))
 						{
@@ -473,8 +473,8 @@ bool ConnectionPointReferenceImpl::eSet(int featureID, const Any& newValue)
 				try
 				{
 					std::shared_ptr<Bag<uml::Pseudostate>> exitList= newValue->get<std::shared_ptr<Bag<uml::Pseudostate>>>();
-					std::shared_ptr<Bag<uml::Pseudostate>> _exit=getExit();
-					for(const std::shared_ptr<uml::Pseudostate> indexExit: *_exit)
+					const std::shared_ptr<Bag<uml::Pseudostate>>& _exit=getExit();
+					for(const std::shared_ptr<uml::Pseudostate>& indexExit: *_exit)
 					{
 						if (!(exitList->includes(indexExit)))
 						{
@@ -482,7 +482,7 @@ bool ConnectionPointReferenceImpl::eSet(int featureID, const Any& newValue)
 						}
 					}
 
-					for(const std::shared_ptr<uml::Pseudostate> indexExit: *exitList)
+					for(const std::shared_ptr<uml::Pseudostate>& indexExit: *exitList)
 					{
 						if (!(_exit->includes(indexExit)))
 						{

@@ -106,9 +106,10 @@ SystemModelImpl& SystemModelImpl::operator=(const SystemModelImpl & obj)
 }
 
 
-std::shared_ptr<uml::Class> SystemModelImpl::getMetaClass() const
+const std::shared_ptr<uml::Class>& SystemModelImpl::getMetaClass() const
 {
-	return StandardProfilePackageImpl::eInstance()->get_StandardProfile_SystemModel();
+	static const std::shared_ptr<uml::Class> metaClass = StandardProfilePackageImpl::eInstance()->get_StandardProfile_SystemModel();
+	return metaClass;
 }
 
 void SystemModelImpl::instantiate()

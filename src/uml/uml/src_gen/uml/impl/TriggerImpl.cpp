@@ -370,8 +370,8 @@ bool TriggerImpl::eSet(int featureID, const Any& newValue)
 				try
 				{
 					std::shared_ptr<Bag<uml::Port>> portList= newValue->get<std::shared_ptr<Bag<uml::Port>>>();
-					std::shared_ptr<Bag<uml::Port>> _port=getPort();
-					for(const std::shared_ptr<uml::Port> indexPort: *_port)
+					const std::shared_ptr<Bag<uml::Port>>& _port=getPort();
+					for(const std::shared_ptr<uml::Port>& indexPort: *_port)
 					{
 						if (!(portList->includes(indexPort)))
 						{
@@ -379,7 +379,7 @@ bool TriggerImpl::eSet(int featureID, const Any& newValue)
 						}
 					}
 
-					for(const std::shared_ptr<uml::Port> indexPort: *portList)
+					for(const std::shared_ptr<uml::Port>& indexPort: *portList)
 					{
 						if (!(_port->includes(indexPort)))
 						{

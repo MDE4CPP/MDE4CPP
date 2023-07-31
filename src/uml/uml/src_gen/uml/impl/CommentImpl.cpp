@@ -325,8 +325,8 @@ bool CommentImpl::eSet(int featureID, const Any& newValue)
 				try
 				{
 					std::shared_ptr<Bag<uml::Element>> annotatedElementList= newValue->get<std::shared_ptr<Bag<uml::Element>>>();
-					std::shared_ptr<Bag<uml::Element>> _annotatedElement=getAnnotatedElement();
-					for(const std::shared_ptr<uml::Element> indexAnnotatedElement: *_annotatedElement)
+					const std::shared_ptr<Bag<uml::Element>>& _annotatedElement=getAnnotatedElement();
+					for(const std::shared_ptr<uml::Element>& indexAnnotatedElement: *_annotatedElement)
 					{
 						if (!(annotatedElementList->includes(indexAnnotatedElement)))
 						{
@@ -334,7 +334,7 @@ bool CommentImpl::eSet(int featureID, const Any& newValue)
 						}
 					}
 
-					for(const std::shared_ptr<uml::Element> indexAnnotatedElement: *annotatedElementList)
+					for(const std::shared_ptr<uml::Element>& indexAnnotatedElement: *annotatedElementList)
 					{
 						if (!(_annotatedElement->includes(indexAnnotatedElement)))
 						{

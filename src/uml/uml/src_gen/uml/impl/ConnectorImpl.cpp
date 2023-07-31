@@ -643,8 +643,8 @@ bool ConnectorImpl::eSet(int featureID, const Any& newValue)
 				try
 				{
 					std::shared_ptr<Bag<uml::Behavior>> contractList= newValue->get<std::shared_ptr<Bag<uml::Behavior>>>();
-					std::shared_ptr<Bag<uml::Behavior>> _contract=getContract();
-					for(const std::shared_ptr<uml::Behavior> indexContract: *_contract)
+					const std::shared_ptr<Bag<uml::Behavior>>& _contract=getContract();
+					for(const std::shared_ptr<uml::Behavior>& indexContract: *_contract)
 					{
 						if (!(contractList->includes(indexContract)))
 						{
@@ -652,7 +652,7 @@ bool ConnectorImpl::eSet(int featureID, const Any& newValue)
 						}
 					}
 
-					for(const std::shared_ptr<uml::Behavior> indexContract: *contractList)
+					for(const std::shared_ptr<uml::Behavior>& indexContract: *contractList)
 					{
 						if (!(_contract->includes(indexContract)))
 						{
@@ -680,8 +680,8 @@ bool ConnectorImpl::eSet(int featureID, const Any& newValue)
 				try
 				{
 					std::shared_ptr<Bag<uml::ConnectorEnd>> endList= newValue->get<std::shared_ptr<Bag<uml::ConnectorEnd>>>();
-					std::shared_ptr<Bag<uml::ConnectorEnd>> _end=getEnd();
-					for(const std::shared_ptr<uml::ConnectorEnd> indexEnd: *_end)
+					const std::shared_ptr<Bag<uml::ConnectorEnd>>& _end=getEnd();
+					for(const std::shared_ptr<uml::ConnectorEnd>& indexEnd: *_end)
 					{
 						if (!(endList->includes(indexEnd)))
 						{
@@ -689,7 +689,7 @@ bool ConnectorImpl::eSet(int featureID, const Any& newValue)
 						}
 					}
 
-					for(const std::shared_ptr<uml::ConnectorEnd> indexEnd: *endList)
+					for(const std::shared_ptr<uml::ConnectorEnd>& indexEnd: *endList)
 					{
 						if (!(_end->includes(indexEnd)))
 						{
@@ -717,8 +717,8 @@ bool ConnectorImpl::eSet(int featureID, const Any& newValue)
 				try
 				{
 					std::shared_ptr<Bag<uml::Connector>> redefinedConnectorList= newValue->get<std::shared_ptr<Bag<uml::Connector>>>();
-					std::shared_ptr<Bag<uml::Connector>> _redefinedConnector=getRedefinedConnector();
-					for(const std::shared_ptr<uml::Connector> indexRedefinedConnector: *_redefinedConnector)
+					const std::shared_ptr<Bag<uml::Connector>>& _redefinedConnector=getRedefinedConnector();
+					for(const std::shared_ptr<uml::Connector>& indexRedefinedConnector: *_redefinedConnector)
 					{
 						if (!(redefinedConnectorList->includes(indexRedefinedConnector)))
 						{
@@ -726,7 +726,7 @@ bool ConnectorImpl::eSet(int featureID, const Any& newValue)
 						}
 					}
 
-					for(const std::shared_ptr<uml::Connector> indexRedefinedConnector: *redefinedConnectorList)
+					for(const std::shared_ptr<uml::Connector>& indexRedefinedConnector: *redefinedConnectorList)
 					{
 						if (!(_redefinedConnector->includes(indexRedefinedConnector)))
 						{
