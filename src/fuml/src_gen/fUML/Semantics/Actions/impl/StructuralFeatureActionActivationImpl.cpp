@@ -143,7 +143,7 @@ return association;
 	//end of body
 }
 
-std::shared_ptr<Bag<fUML::Semantics::StructuredClassifiers::Link> > StructuralFeatureActionActivationImpl::getMatchingLinks(const std::shared_ptr<uml::Association>& association, const std::shared_ptr<uml::StructuralFeature>& end, const std::shared_ptr<fUML::Semantics::Values::Value>& oppositeValue)
+std::shared_ptr<Bag<fUML::Semantics::StructuredClassifiers::Link>> StructuralFeatureActionActivationImpl::getMatchingLinks(const std::shared_ptr<uml::Association>& association, const std::shared_ptr<uml::StructuralFeature>& end, const std::shared_ptr<fUML::Semantics::Values::Value>& oppositeValue)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -154,7 +154,7 @@ return getMatchingLinksForEndValue(association, end, oppositeValue, nullptr);
 	//end of body
 }
 
-std::shared_ptr<Bag<fUML::Semantics::StructuredClassifiers::Link> > StructuralFeatureActionActivationImpl::getMatchingLinksForEndValue(const std::shared_ptr<uml::Association>& association, const std::shared_ptr<uml::StructuralFeature>& end, const std::shared_ptr<fUML::Semantics::Values::Value>& oppositeValue, const std::shared_ptr<fUML::Semantics::Values::Value>& endValue)
+std::shared_ptr<Bag<fUML::Semantics::StructuredClassifiers::Link>> StructuralFeatureActionActivationImpl::getMatchingLinksForEndValue(const std::shared_ptr<uml::Association>& association, const std::shared_ptr<uml::StructuralFeature>& end, const std::shared_ptr<fUML::Semantics::Values::Value>& oppositeValue, const std::shared_ptr<fUML::Semantics::Values::Value>& endValue)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -389,7 +389,7 @@ Any StructuralFeatureActionActivationImpl::eInvoke(int operationID, const std::s
 			std::shared_ptr<fUML::Semantics::Values::Value> incoming_param_oppositeValue;
 			std::list<Any>::const_iterator incoming_param_oppositeValue_arguments_citer = std::next(arguments->begin(), 2);
 			incoming_param_oppositeValue = (*incoming_param_oppositeValue_arguments_citer)->get<std::shared_ptr<fUML::Semantics::Values::Value> >();
-			std::shared_ptr<Bag<fUML::Semantics::StructuredClassifiers::Link> > resultList = this->getMatchingLinks(incoming_param_association,incoming_param_end,incoming_param_oppositeValue);
+			const std::shared_ptr<Bag<fUML::Semantics::StructuredClassifiers::Link>>& resultList = this->getMatchingLinks(incoming_param_association,incoming_param_end,incoming_param_oppositeValue);
 			return eAnyBag(resultList,fUML::Semantics::StructuredClassifiers::StructuredClassifiersPackage::LINK_CLASS);
 			break;
 		}
@@ -416,7 +416,7 @@ Any StructuralFeatureActionActivationImpl::eInvoke(int operationID, const std::s
 			std::shared_ptr<fUML::Semantics::Values::Value> incoming_param_endValue;
 			std::list<Any>::const_iterator incoming_param_endValue_arguments_citer = std::next(arguments->begin(), 3);
 			incoming_param_endValue = (*incoming_param_endValue_arguments_citer)->get<std::shared_ptr<fUML::Semantics::Values::Value> >();
-			std::shared_ptr<Bag<fUML::Semantics::StructuredClassifiers::Link> > resultList = this->getMatchingLinksForEndValue(incoming_param_association,incoming_param_end,incoming_param_oppositeValue,incoming_param_endValue);
+			const std::shared_ptr<Bag<fUML::Semantics::StructuredClassifiers::Link>>& resultList = this->getMatchingLinksForEndValue(incoming_param_association,incoming_param_end,incoming_param_oppositeValue,incoming_param_endValue);
 			return eAnyBag(resultList,fUML::Semantics::StructuredClassifiers::StructuredClassifiersPackage::LINK_CLASS);
 			break;
 		}

@@ -84,7 +84,7 @@ namespace uml
 			<p>From package UML::Actions.</p>
 			*/
 			 
-			virtual std::shared_ptr<Bag<uml::InputPin> > allPins() = 0;
+			virtual std::shared_ptr<Bag<uml::InputPin>> allPins() = 0;
 			/*!
 			The value InputPin is not also the qualifier value InputPin.
 			value->excludesAll(qualifier.value)

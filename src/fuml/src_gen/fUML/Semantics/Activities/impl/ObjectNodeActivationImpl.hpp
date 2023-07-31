@@ -49,12 +49,12 @@ namespace fUML::Semantics::Activities
 			virtual void clearTokens() ;
 			virtual int countOfferedValues() ;
 			virtual int countUnofferedTokens() ;
-			virtual std::shared_ptr<Bag<fUML::Semantics::Activities::Token> > getUnofferedTokens() ;
+			virtual std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> getUnofferedTokens() ;
 			virtual int removeToken(const std::shared_ptr<fUML::Semantics::Activities::Token>& token) ;
 			virtual void run() ;
 			virtual void sendOffers(const std::shared_ptr<Bag<fUML::Semantics::Activities::Token>>& tokens) ;
 			virtual void sendUnofferedTokens() ;
-			virtual std::shared_ptr<Bag<fUML::Semantics::Activities::Token> > takeUnofferedTokens() ;
+			virtual std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> takeUnofferedTokens() ;
 			virtual void terminate() ;
 			
 			//*********************************

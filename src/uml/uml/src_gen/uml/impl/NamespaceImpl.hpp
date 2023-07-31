@@ -74,24 +74,24 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			 
-			virtual std::shared_ptr<Bag<uml::PackageableElement> > excludeCollisions(const std::shared_ptr<Bag<uml::PackageableElement>>& imps) ;
+			virtual std::shared_ptr<Bag<uml::PackageableElement>> excludeCollisions(const std::shared_ptr<Bag<uml::PackageableElement>>& imps) ;
 			/*!
 			Retrieves the elements imported by this namespace.
 			*/
 			 
-			virtual std::shared_ptr<Bag<uml::PackageableElement> > getImportedElements() ;
+			virtual std::shared_ptr<Bag<uml::PackageableElement>> getImportedElements() ;
 			/*!
 			The importedMember property is derived as the PackageableElements that are members of this Namespace as a result of either PackageImports or ElementImports.
 			result = (self.importMembers(elementImport.importedElement->asSet()->union(packageImport.importedPackage->collect(p | p.visibleMembers()))->asSet()))
 			<p>From package UML::CommonStructure.</p>
 			*/
 			 
-			virtual std::shared_ptr<Bag<uml::PackageableElement> > getImportedMembers() ;
+			virtual std::shared_ptr<Bag<uml::PackageableElement>> getImportedMembers() ;
 			/*!
 			Retrieves the packages imported by this namespace.
 			*/
 			 
-			virtual std::shared_ptr<Bag<uml::Package> > getImportedPackages() ;
+			virtual std::shared_ptr<Bag<uml::Package>> getImportedPackages() ;
 			/*!
 			The query getNamesOfMember() gives a set of all of the names that a member would have in a Namespace, taking importing into account. In general a member can have multiple names in a Namespace if it is imported more than once with different aliases.
 			result = (if self.ownedMember ->includes(element)
@@ -107,15 +107,15 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			 
-			virtual std::shared_ptr<Bag<std::string> > getNamesOfMember(const std::shared_ptr<uml::NamedElement>& element) ;
-			virtual std::shared_ptr<Bag<uml::NamedElement> > getOwnedMembers() ;
+			virtual std::shared_ptr<Bag<std::string>> getNamesOfMember(const std::shared_ptr<uml::NamedElement>& element) ;
+			virtual std::shared_ptr<Bag<uml::NamedElement>> getOwnedMembers() ;
 			/*!
 			The query importMembers() defines which of a set of PackageableElements are actually imported into the Namespace. This excludes hidden ones, i.e., those which have names that conflict with names of ownedMembers, and it also excludes PackageableElements that would have the indistinguishable names when imported.
 			result = (self.excludeCollisions(imps)->select(imp | self.ownedMember->forAll(mem | imp.isDistinguishableFrom(mem, self))))
 			<p>From package UML::CommonStructure.</p>
 			*/
 			 
-			virtual std::shared_ptr<Bag<uml::PackageableElement> > importMembers(const std::shared_ptr<Bag<uml::PackageableElement>>& imps) ;
+			virtual std::shared_ptr<Bag<uml::PackageableElement>> importMembers(const std::shared_ptr<Bag<uml::PackageableElement>>& imps) ;
 			/*!
 			The Boolean query membersAreDistinguishable() determines whether all of the Namespace's members are distinguishable within it.
 			result = (member->forAll( memb |

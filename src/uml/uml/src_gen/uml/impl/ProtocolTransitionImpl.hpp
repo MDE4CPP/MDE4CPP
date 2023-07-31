@@ -66,7 +66,7 @@ namespace uml
 			<p>From package UML::StateMachines.</p>
 			*/
 			 
-			virtual std::shared_ptr<Bag<uml::Operation> > getReferreds() ;
+			virtual std::shared_ptr<Bag<uml::Operation>> getReferreds() ;
 			/*!
 			If a ProtocolTransition refers to an Operation (i.e., has a CallEvent trigger corresponding to an Operation), then that Operation should apply to the context Classifier of the StateMachine of the ProtocolTransition.
 			if (referred()->notEmpty() and containingStateMachine()._'context'->notEmpty()) then 

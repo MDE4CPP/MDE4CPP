@@ -372,7 +372,7 @@ bool PropertyImpl::subsetted_property_names(const Any& diagnostics, std::shared_
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-std::shared_ptr<Bag<uml::Type> > PropertyImpl::subsettingContext()
+std::shared_ptr<Bag<uml::Type>> PropertyImpl::subsettingContext()
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -1044,7 +1044,7 @@ void PropertyImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHan
 	{
 		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
 		// Save 'defaultValue'
-		std::shared_ptr<uml::ValueSpecification> defaultValue = this->getDefaultValue();
+		const std::shared_ptr<uml::ValueSpecification>& defaultValue = this->getDefaultValue();
 		if (defaultValue != nullptr)
 		{
 			saveHandler->addReference(defaultValue, "defaultValue", defaultValue->eClass() != package->getValueSpecification_Class());
@@ -1712,7 +1712,7 @@ Any PropertyImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>
 		// uml::Property::subsettingContext() : uml::Type[*]: 2305810549
 		case umlPackage::PROPERTY_OPERATION_SUBSETTINGCONTEXT:
 		{
-			std::shared_ptr<Bag<uml::Type> > resultList = this->subsettingContext();
+			const std::shared_ptr<Bag<uml::Type>>& resultList = this->subsettingContext();
 			return eAnyBag(resultList,uml::umlPackage::TYPE_CLASS);
 			break;
 		}

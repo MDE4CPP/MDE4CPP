@@ -377,7 +377,7 @@ void JoinNodeImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHan
 	{
 		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
 		// Save 'joinSpec'
-		std::shared_ptr<uml::ValueSpecification> joinSpec = this->getJoinSpec();
+		const std::shared_ptr<uml::ValueSpecification>& joinSpec = this->getJoinSpec();
 		if (joinSpec != nullptr)
 		{
 			saveHandler->addReference(joinSpec, "joinSpec", joinSpec->eClass() != package->getValueSpecification_Class());

@@ -46,7 +46,7 @@ namespace fUML::Semantics::Actions
 			// Operations
 			//*********************************
 			virtual void fire(const std::shared_ptr<Bag<fUML::Semantics::Activities::Token>>& incomingTokens) ;
-			virtual std::shared_ptr<Bag<fUML::Semantics::Activities::Token> > takeOfferedTokens() ;
+			virtual std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> takeOfferedTokens() ;
 			
 			//*********************************
 			// Attribute Getters & Setters

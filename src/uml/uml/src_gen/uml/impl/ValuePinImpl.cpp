@@ -466,7 +466,7 @@ void ValuePinImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHan
 	{
 		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
 		// Save 'value'
-		std::shared_ptr<uml::ValueSpecification> value = this->getValue();
+		const std::shared_ptr<uml::ValueSpecification>& value = this->getValue();
 		if (value != nullptr)
 		{
 			saveHandler->addReference(value, "value", value->eClass() != package->getValueSpecification_Class());

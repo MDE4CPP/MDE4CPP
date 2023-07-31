@@ -401,14 +401,14 @@ void MultiplicityElementImpl::saveContent(std::shared_ptr<persistence::interface
 	{
 		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
 		// Save 'lowerValue'
-		std::shared_ptr<uml::ValueSpecification> lowerValue = this->getLowerValue();
+		const std::shared_ptr<uml::ValueSpecification>& lowerValue = this->getLowerValue();
 		if (lowerValue != nullptr)
 		{
 			saveHandler->addReference(lowerValue, "lowerValue", lowerValue->eClass() != package->getValueSpecification_Class());
 		}
 
 		// Save 'upperValue'
-		std::shared_ptr<uml::ValueSpecification> upperValue = this->getUpperValue();
+		const std::shared_ptr<uml::ValueSpecification>& upperValue = this->getUpperValue();
 		if (upperValue != nullptr)
 		{
 			saveHandler->addReference(upperValue, "upperValue", upperValue->eClass() != package->getValueSpecification_Class());

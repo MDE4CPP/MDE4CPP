@@ -132,12 +132,12 @@ std::shared_ptr<uml::StateMachine> VertexImpl::containingStateMachine()
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-std::shared_ptr<Bag<uml::Transition> > VertexImpl::getIncomings()
+std::shared_ptr<Bag<uml::Transition>> VertexImpl::getIncomings()
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-std::shared_ptr<Bag<uml::Transition> > VertexImpl::getOutgoings()
+std::shared_ptr<Bag<uml::Transition>> VertexImpl::getOutgoings()
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -394,14 +394,14 @@ Any VertexImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& 
 		// uml::Vertex::getIncomings() : uml::Transition[*]: 124960789
 		case umlPackage::VERTEX_OPERATION_GETINCOMINGS:
 		{
-			std::shared_ptr<Bag<uml::Transition> > resultList = this->getIncomings();
+			const std::shared_ptr<Bag<uml::Transition>>& resultList = this->getIncomings();
 			return eAnyBag(resultList,uml::umlPackage::TRANSITION_CLASS);
 			break;
 		}
 		// uml::Vertex::getOutgoings() : uml::Transition[*]: 3840074001
 		case umlPackage::VERTEX_OPERATION_GETOUTGOINGS:
 		{
-			std::shared_ptr<Bag<uml::Transition> > resultList = this->getOutgoings();
+			const std::shared_ptr<Bag<uml::Transition>>& resultList = this->getOutgoings();
 			return eAnyBag(resultList,uml::umlPackage::TRANSITION_CLASS);
 			break;
 		}

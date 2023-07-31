@@ -71,7 +71,7 @@ namespace fUML::Semantics::Activities
 			virtual bool hasTokens() = 0;
 			virtual void removeOfferedValues(int count) = 0;
 			virtual void removeWithdrawnTokens() = 0;
-			virtual std::shared_ptr<Bag<fUML::Semantics::Activities::Token> > retrieveOfferedTokens() = 0;
+			virtual std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> retrieveOfferedTokens() = 0;
 
 			//*********************************
 			// Attribute Getters & Setters

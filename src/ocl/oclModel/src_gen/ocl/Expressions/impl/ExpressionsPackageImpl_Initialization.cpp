@@ -214,7 +214,7 @@ void ExpressionsPackageImpl::initializeCallExpContent()
 		{
 			m_callExp_Attribute_source->setDefaultValueLiteral(defaultValue);
 		}				
-		std::shared_ptr<ecore::EReference>  otherEnd = ocl::Expressions::ExpressionsPackage::eInstance()->getOclExpression_Attribute_appliedElement();
+		const std::shared_ptr<ecore::EReference>& otherEnd = ocl::Expressions::ExpressionsPackage::eInstance()->getOclExpression_Attribute_appliedElement();
 		if (otherEnd != nullptr)
 	    {
 	   		m_callExp_Attribute_source->setEOpposite(otherEnd);
@@ -347,7 +347,7 @@ void ExpressionsPackageImpl::initializeCollectionRangeContent()
 		{
 			m_collectionRange_Attribute_first->setDefaultValueLiteral(defaultValue);
 		}				
-		std::shared_ptr<ecore::EReference>  otherEnd = ocl::Expressions::ExpressionsPackage::eInstance()->getOclExpression_Attribute_firstOwner();
+		const std::shared_ptr<ecore::EReference>& otherEnd = ocl::Expressions::ExpressionsPackage::eInstance()->getOclExpression_Attribute_firstOwner();
 		if (otherEnd != nullptr)
 	    {
 	   		m_collectionRange_Attribute_first->setEOpposite(otherEnd);
@@ -372,7 +372,7 @@ void ExpressionsPackageImpl::initializeCollectionRangeContent()
 		{
 			m_collectionRange_Attribute_last->setDefaultValueLiteral(defaultValue);
 		}				
-		std::shared_ptr<ecore::EReference>  otherEnd = ocl::Expressions::ExpressionsPackage::eInstance()->getOclExpression_Attribute_lastOwner();
+		const std::shared_ptr<ecore::EReference>& otherEnd = ocl::Expressions::ExpressionsPackage::eInstance()->getOclExpression_Attribute_lastOwner();
 		if (otherEnd != nullptr)
 	    {
 	   		m_collectionRange_Attribute_last->setEOpposite(otherEnd);
@@ -441,7 +441,7 @@ void ExpressionsPackageImpl::initializeExpressionInOclContent()
 		{
 			m_expressionInOcl_Attribute_bodyExpression->setDefaultValueLiteral(defaultValue);
 		}				
-		std::shared_ptr<ecore::EReference>  otherEnd = ocl::Expressions::ExpressionsPackage::eInstance()->getOclExpression_Attribute_topExpression();
+		const std::shared_ptr<ecore::EReference>& otherEnd = ocl::Expressions::ExpressionsPackage::eInstance()->getOclExpression_Attribute_topExpression();
 		if (otherEnd != nullptr)
 	    {
 	   		m_expressionInOcl_Attribute_bodyExpression->setEOpposite(otherEnd);
@@ -466,7 +466,7 @@ void ExpressionsPackageImpl::initializeExpressionInOclContent()
 		{
 			m_expressionInOcl_Attribute_contextVariable->setDefaultValueLiteral(defaultValue);
 		}				
-		std::shared_ptr<ecore::EReference>  otherEnd = ocl::Expressions::ExpressionsPackage::eInstance()->getVariable_Attribute_selfOwner();
+		const std::shared_ptr<ecore::EReference>& otherEnd = ocl::Expressions::ExpressionsPackage::eInstance()->getVariable_Attribute_selfOwner();
 		if (otherEnd != nullptr)
 	    {
 	   		m_expressionInOcl_Attribute_contextVariable->setEOpposite(otherEnd);
@@ -491,7 +491,7 @@ void ExpressionsPackageImpl::initializeExpressionInOclContent()
 		{
 			m_expressionInOcl_Attribute_parameterVariable->setDefaultValueLiteral(defaultValue);
 		}				
-		std::shared_ptr<ecore::EReference>  otherEnd = ocl::Expressions::ExpressionsPackage::eInstance()->getVariable_Attribute_varOwner();
+		const std::shared_ptr<ecore::EReference>& otherEnd = ocl::Expressions::ExpressionsPackage::eInstance()->getVariable_Attribute_varOwner();
 		if (otherEnd != nullptr)
 	    {
 	   		m_expressionInOcl_Attribute_parameterVariable->setEOpposite(otherEnd);
@@ -516,7 +516,7 @@ void ExpressionsPackageImpl::initializeExpressionInOclContent()
 		{
 			m_expressionInOcl_Attribute_resultVariable->setDefaultValueLiteral(defaultValue);
 		}				
-		std::shared_ptr<ecore::EReference>  otherEnd = ocl::Expressions::ExpressionsPackage::eInstance()->getVariable_Attribute_resultOwner();
+		const std::shared_ptr<ecore::EReference>& otherEnd = ocl::Expressions::ExpressionsPackage::eInstance()->getVariable_Attribute_resultOwner();
 		if (otherEnd != nullptr)
 	    {
 	   		m_expressionInOcl_Attribute_resultVariable->setEOpposite(otherEnd);
@@ -583,7 +583,7 @@ void ExpressionsPackageImpl::initializeIfExpContent()
 		{
 			m_ifExp_Attribute_condition->setDefaultValueLiteral(defaultValue);
 		}				
-		std::shared_ptr<ecore::EReference>  otherEnd = ocl::Expressions::ExpressionsPackage::eInstance()->getOclExpression_Attribute_ifOwner();
+		const std::shared_ptr<ecore::EReference>& otherEnd = ocl::Expressions::ExpressionsPackage::eInstance()->getOclExpression_Attribute_ifOwner();
 		if (otherEnd != nullptr)
 	    {
 	   		m_ifExp_Attribute_condition->setEOpposite(otherEnd);
@@ -608,7 +608,7 @@ void ExpressionsPackageImpl::initializeIfExpContent()
 		{
 			m_ifExp_Attribute_elseExpression->setDefaultValueLiteral(defaultValue);
 		}				
-		std::shared_ptr<ecore::EReference>  otherEnd = ocl::Expressions::ExpressionsPackage::eInstance()->getOclExpression_Attribute_elseOwner();
+		const std::shared_ptr<ecore::EReference>& otherEnd = ocl::Expressions::ExpressionsPackage::eInstance()->getOclExpression_Attribute_elseOwner();
 		if (otherEnd != nullptr)
 	    {
 	   		m_ifExp_Attribute_elseExpression->setEOpposite(otherEnd);
@@ -633,7 +633,7 @@ void ExpressionsPackageImpl::initializeIfExpContent()
 		{
 			m_ifExp_Attribute_thenExpression->setDefaultValueLiteral(defaultValue);
 		}				
-		std::shared_ptr<ecore::EReference>  otherEnd = ocl::Expressions::ExpressionsPackage::eInstance()->getOclExpression_Attribute_thenOwner();
+		const std::shared_ptr<ecore::EReference>& otherEnd = ocl::Expressions::ExpressionsPackage::eInstance()->getOclExpression_Attribute_thenOwner();
 		if (otherEnd != nullptr)
 	    {
 	   		m_ifExp_Attribute_thenExpression->setEOpposite(otherEnd);
@@ -744,7 +744,7 @@ void ExpressionsPackageImpl::initializeIterateExpContent()
 		{
 			m_iterateExp_Attribute_result->setDefaultValueLiteral(defaultValue);
 		}				
-		std::shared_ptr<ecore::EReference>  otherEnd = ocl::Expressions::ExpressionsPackage::eInstance()->getVariable_Attribute_baseExp();
+		const std::shared_ptr<ecore::EReference>& otherEnd = ocl::Expressions::ExpressionsPackage::eInstance()->getVariable_Attribute_baseExp();
 		if (otherEnd != nullptr)
 	    {
 	   		m_iterateExp_Attribute_result->setEOpposite(otherEnd);
@@ -857,7 +857,7 @@ void ExpressionsPackageImpl::initializeLoopExpContent()
 		{
 			m_loopExp_Attribute_body->setDefaultValueLiteral(defaultValue);
 		}				
-		std::shared_ptr<ecore::EReference>  otherEnd = ocl::Expressions::ExpressionsPackage::eInstance()->getOclExpression_Attribute_loopBodyOwner();
+		const std::shared_ptr<ecore::EReference>& otherEnd = ocl::Expressions::ExpressionsPackage::eInstance()->getOclExpression_Attribute_loopBodyOwner();
 		if (otherEnd != nullptr)
 	    {
 	   		m_loopExp_Attribute_body->setEOpposite(otherEnd);
@@ -882,7 +882,7 @@ void ExpressionsPackageImpl::initializeLoopExpContent()
 		{
 			m_loopExp_Attribute_iterator->setDefaultValueLiteral(defaultValue);
 		}				
-		std::shared_ptr<ecore::EReference>  otherEnd = ocl::Expressions::ExpressionsPackage::eInstance()->getVariable_Attribute_loopExp();
+		const std::shared_ptr<ecore::EReference>& otherEnd = ocl::Expressions::ExpressionsPackage::eInstance()->getVariable_Attribute_loopExp();
 		if (otherEnd != nullptr)
 	    {
 	   		m_loopExp_Attribute_iterator->setEOpposite(otherEnd);
@@ -1039,7 +1039,7 @@ void ExpressionsPackageImpl::initializeNavigationCallExpContent()
 		{
 			m_navigationCallExp_Attribute_qualifier->setDefaultValueLiteral(defaultValue);
 		}				
-		std::shared_ptr<ecore::EReference>  otherEnd = ocl::Expressions::ExpressionsPackage::eInstance()->getOclExpression_Attribute_parentNav();
+		const std::shared_ptr<ecore::EReference>& otherEnd = ocl::Expressions::ExpressionsPackage::eInstance()->getOclExpression_Attribute_parentNav();
 		if (otherEnd != nullptr)
 	    {
 	   		m_navigationCallExp_Attribute_qualifier->setEOpposite(otherEnd);
@@ -1097,7 +1097,7 @@ void ExpressionsPackageImpl::initializeOclExpressionContent()
 		{
 			m_oclExpression_Attribute_appliedElement->setDefaultValueLiteral(defaultValue);
 		}				
-		std::shared_ptr<ecore::EReference>  otherEnd = ocl::Expressions::ExpressionsPackage::eInstance()->getCallExp_Attribute_source();
+		const std::shared_ptr<ecore::EReference>& otherEnd = ocl::Expressions::ExpressionsPackage::eInstance()->getCallExp_Attribute_source();
 		if (otherEnd != nullptr)
 	    {
 	   		m_oclExpression_Attribute_appliedElement->setEOpposite(otherEnd);
@@ -1122,7 +1122,7 @@ void ExpressionsPackageImpl::initializeOclExpressionContent()
 		{
 			m_oclExpression_Attribute_elseOwner->setDefaultValueLiteral(defaultValue);
 		}				
-		std::shared_ptr<ecore::EReference>  otherEnd = ocl::Expressions::ExpressionsPackage::eInstance()->getIfExp_Attribute_elseExpression();
+		const std::shared_ptr<ecore::EReference>& otherEnd = ocl::Expressions::ExpressionsPackage::eInstance()->getIfExp_Attribute_elseExpression();
 		if (otherEnd != nullptr)
 	    {
 	   		m_oclExpression_Attribute_elseOwner->setEOpposite(otherEnd);
@@ -1147,7 +1147,7 @@ void ExpressionsPackageImpl::initializeOclExpressionContent()
 		{
 			m_oclExpression_Attribute_firstOwner->setDefaultValueLiteral(defaultValue);
 		}				
-		std::shared_ptr<ecore::EReference>  otherEnd = ocl::Expressions::ExpressionsPackage::eInstance()->getCollectionRange_Attribute_first();
+		const std::shared_ptr<ecore::EReference>& otherEnd = ocl::Expressions::ExpressionsPackage::eInstance()->getCollectionRange_Attribute_first();
 		if (otherEnd != nullptr)
 	    {
 	   		m_oclExpression_Attribute_firstOwner->setEOpposite(otherEnd);
@@ -1172,7 +1172,7 @@ void ExpressionsPackageImpl::initializeOclExpressionContent()
 		{
 			m_oclExpression_Attribute_ifOwner->setDefaultValueLiteral(defaultValue);
 		}				
-		std::shared_ptr<ecore::EReference>  otherEnd = ocl::Expressions::ExpressionsPackage::eInstance()->getIfExp_Attribute_condition();
+		const std::shared_ptr<ecore::EReference>& otherEnd = ocl::Expressions::ExpressionsPackage::eInstance()->getIfExp_Attribute_condition();
 		if (otherEnd != nullptr)
 	    {
 	   		m_oclExpression_Attribute_ifOwner->setEOpposite(otherEnd);
@@ -1197,7 +1197,7 @@ void ExpressionsPackageImpl::initializeOclExpressionContent()
 		{
 			m_oclExpression_Attribute_initializedElement->setDefaultValueLiteral(defaultValue);
 		}				
-		std::shared_ptr<ecore::EReference>  otherEnd = ocl::Expressions::ExpressionsPackage::eInstance()->getVariable_Attribute_initExpression();
+		const std::shared_ptr<ecore::EReference>& otherEnd = ocl::Expressions::ExpressionsPackage::eInstance()->getVariable_Attribute_initExpression();
 		if (otherEnd != nullptr)
 	    {
 	   		m_oclExpression_Attribute_initializedElement->setEOpposite(otherEnd);
@@ -1222,7 +1222,7 @@ void ExpressionsPackageImpl::initializeOclExpressionContent()
 		{
 			m_oclExpression_Attribute_instance->setDefaultValueLiteral(defaultValue);
 		}				
-		std::shared_ptr<ecore::EReference>  otherEnd = ocl::Evaluations::EvaluationsPackage::eInstance()->getOclExpEval_Attribute_model();
+		const std::shared_ptr<ecore::EReference>& otherEnd = ocl::Evaluations::EvaluationsPackage::eInstance()->getOclExpEval_Attribute_model();
 		if (otherEnd != nullptr)
 	    {
 	   		m_oclExpression_Attribute_instance->setEOpposite(otherEnd);
@@ -1247,7 +1247,7 @@ void ExpressionsPackageImpl::initializeOclExpressionContent()
 		{
 			m_oclExpression_Attribute_lastOwner->setDefaultValueLiteral(defaultValue);
 		}				
-		std::shared_ptr<ecore::EReference>  otherEnd = ocl::Expressions::ExpressionsPackage::eInstance()->getCollectionRange_Attribute_last();
+		const std::shared_ptr<ecore::EReference>& otherEnd = ocl::Expressions::ExpressionsPackage::eInstance()->getCollectionRange_Attribute_last();
 		if (otherEnd != nullptr)
 	    {
 	   		m_oclExpression_Attribute_lastOwner->setEOpposite(otherEnd);
@@ -1272,7 +1272,7 @@ void ExpressionsPackageImpl::initializeOclExpressionContent()
 		{
 			m_oclExpression_Attribute_loopBodyOwner->setDefaultValueLiteral(defaultValue);
 		}				
-		std::shared_ptr<ecore::EReference>  otherEnd = ocl::Expressions::ExpressionsPackage::eInstance()->getLoopExp_Attribute_body();
+		const std::shared_ptr<ecore::EReference>& otherEnd = ocl::Expressions::ExpressionsPackage::eInstance()->getLoopExp_Attribute_body();
 		if (otherEnd != nullptr)
 	    {
 	   		m_oclExpression_Attribute_loopBodyOwner->setEOpposite(otherEnd);
@@ -1297,7 +1297,7 @@ void ExpressionsPackageImpl::initializeOclExpressionContent()
 		{
 			m_oclExpression_Attribute_parentCall->setDefaultValueLiteral(defaultValue);
 		}				
-		std::shared_ptr<ecore::EReference>  otherEnd = ocl::Expressions::ExpressionsPackage::eInstance()->getOperationCallExp_Attribute_argument();
+		const std::shared_ptr<ecore::EReference>& otherEnd = ocl::Expressions::ExpressionsPackage::eInstance()->getOperationCallExp_Attribute_argument();
 		if (otherEnd != nullptr)
 	    {
 	   		m_oclExpression_Attribute_parentCall->setEOpposite(otherEnd);
@@ -1322,7 +1322,7 @@ void ExpressionsPackageImpl::initializeOclExpressionContent()
 		{
 			m_oclExpression_Attribute_parentNav->setDefaultValueLiteral(defaultValue);
 		}				
-		std::shared_ptr<ecore::EReference>  otherEnd = ocl::Expressions::ExpressionsPackage::eInstance()->getNavigationCallExp_Attribute_qualifier();
+		const std::shared_ptr<ecore::EReference>& otherEnd = ocl::Expressions::ExpressionsPackage::eInstance()->getNavigationCallExp_Attribute_qualifier();
 		if (otherEnd != nullptr)
 	    {
 	   		m_oclExpression_Attribute_parentNav->setEOpposite(otherEnd);
@@ -1347,7 +1347,7 @@ void ExpressionsPackageImpl::initializeOclExpressionContent()
 		{
 			m_oclExpression_Attribute_thenOwner->setDefaultValueLiteral(defaultValue);
 		}				
-		std::shared_ptr<ecore::EReference>  otherEnd = ocl::Expressions::ExpressionsPackage::eInstance()->getIfExp_Attribute_thenExpression();
+		const std::shared_ptr<ecore::EReference>& otherEnd = ocl::Expressions::ExpressionsPackage::eInstance()->getIfExp_Attribute_thenExpression();
 		if (otherEnd != nullptr)
 	    {
 	   		m_oclExpression_Attribute_thenOwner->setEOpposite(otherEnd);
@@ -1372,7 +1372,7 @@ void ExpressionsPackageImpl::initializeOclExpressionContent()
 		{
 			m_oclExpression_Attribute_topExpression->setDefaultValueLiteral(defaultValue);
 		}				
-		std::shared_ptr<ecore::EReference>  otherEnd = ocl::Expressions::ExpressionsPackage::eInstance()->getExpressionInOcl_Attribute_bodyExpression();
+		const std::shared_ptr<ecore::EReference>& otherEnd = ocl::Expressions::ExpressionsPackage::eInstance()->getExpressionInOcl_Attribute_bodyExpression();
 		if (otherEnd != nullptr)
 	    {
 	   		m_oclExpression_Attribute_topExpression->setEOpposite(otherEnd);
@@ -1408,7 +1408,7 @@ void ExpressionsPackageImpl::initializeOperationCallExpContent()
 		{
 			m_operationCallExp_Attribute_argument->setDefaultValueLiteral(defaultValue);
 		}				
-		std::shared_ptr<ecore::EReference>  otherEnd = ocl::Expressions::ExpressionsPackage::eInstance()->getOclExpression_Attribute_parentCall();
+		const std::shared_ptr<ecore::EReference>& otherEnd = ocl::Expressions::ExpressionsPackage::eInstance()->getOclExpression_Attribute_parentCall();
 		if (otherEnd != nullptr)
 	    {
 	   		m_operationCallExp_Attribute_argument->setEOpposite(otherEnd);
@@ -1766,7 +1766,7 @@ void ExpressionsPackageImpl::initializeVariableContent()
 		{
 			m_variable_Attribute_baseExp->setDefaultValueLiteral(defaultValue);
 		}				
-		std::shared_ptr<ecore::EReference>  otherEnd = ocl::Expressions::ExpressionsPackage::eInstance()->getIterateExp_Attribute_result();
+		const std::shared_ptr<ecore::EReference>& otherEnd = ocl::Expressions::ExpressionsPackage::eInstance()->getIterateExp_Attribute_result();
 		if (otherEnd != nullptr)
 	    {
 	   		m_variable_Attribute_baseExp->setEOpposite(otherEnd);
@@ -1791,7 +1791,7 @@ void ExpressionsPackageImpl::initializeVariableContent()
 		{
 			m_variable_Attribute_initExpression->setDefaultValueLiteral(defaultValue);
 		}				
-		std::shared_ptr<ecore::EReference>  otherEnd = ocl::Expressions::ExpressionsPackage::eInstance()->getOclExpression_Attribute_initializedElement();
+		const std::shared_ptr<ecore::EReference>& otherEnd = ocl::Expressions::ExpressionsPackage::eInstance()->getOclExpression_Attribute_initializedElement();
 		if (otherEnd != nullptr)
 	    {
 	   		m_variable_Attribute_initExpression->setEOpposite(otherEnd);
@@ -1816,7 +1816,7 @@ void ExpressionsPackageImpl::initializeVariableContent()
 		{
 			m_variable_Attribute_loopExp->setDefaultValueLiteral(defaultValue);
 		}				
-		std::shared_ptr<ecore::EReference>  otherEnd = ocl::Expressions::ExpressionsPackage::eInstance()->getLoopExp_Attribute_iterator();
+		const std::shared_ptr<ecore::EReference>& otherEnd = ocl::Expressions::ExpressionsPackage::eInstance()->getLoopExp_Attribute_iterator();
 		if (otherEnd != nullptr)
 	    {
 	   		m_variable_Attribute_loopExp->setEOpposite(otherEnd);
@@ -1841,7 +1841,7 @@ void ExpressionsPackageImpl::initializeVariableContent()
 		{
 			m_variable_Attribute_referringExp->setDefaultValueLiteral(defaultValue);
 		}				
-		std::shared_ptr<ecore::EReference>  otherEnd = ocl::Expressions::ExpressionsPackage::eInstance()->getVariableExp_Attribute_referredVariable();
+		const std::shared_ptr<ecore::EReference>& otherEnd = ocl::Expressions::ExpressionsPackage::eInstance()->getVariableExp_Attribute_referredVariable();
 		if (otherEnd != nullptr)
 	    {
 	   		m_variable_Attribute_referringExp->setEOpposite(otherEnd);
@@ -1888,7 +1888,7 @@ void ExpressionsPackageImpl::initializeVariableContent()
 		{
 			m_variable_Attribute_resultOwner->setDefaultValueLiteral(defaultValue);
 		}				
-		std::shared_ptr<ecore::EReference>  otherEnd = ocl::Expressions::ExpressionsPackage::eInstance()->getExpressionInOcl_Attribute_resultVariable();
+		const std::shared_ptr<ecore::EReference>& otherEnd = ocl::Expressions::ExpressionsPackage::eInstance()->getExpressionInOcl_Attribute_resultVariable();
 		if (otherEnd != nullptr)
 	    {
 	   		m_variable_Attribute_resultOwner->setEOpposite(otherEnd);
@@ -1913,7 +1913,7 @@ void ExpressionsPackageImpl::initializeVariableContent()
 		{
 			m_variable_Attribute_selfOwner->setDefaultValueLiteral(defaultValue);
 		}				
-		std::shared_ptr<ecore::EReference>  otherEnd = ocl::Expressions::ExpressionsPackage::eInstance()->getExpressionInOcl_Attribute_contextVariable();
+		const std::shared_ptr<ecore::EReference>& otherEnd = ocl::Expressions::ExpressionsPackage::eInstance()->getExpressionInOcl_Attribute_contextVariable();
 		if (otherEnd != nullptr)
 	    {
 	   		m_variable_Attribute_selfOwner->setEOpposite(otherEnd);
@@ -1960,7 +1960,7 @@ void ExpressionsPackageImpl::initializeVariableContent()
 		{
 			m_variable_Attribute_varOwner->setDefaultValueLiteral(defaultValue);
 		}				
-		std::shared_ptr<ecore::EReference>  otherEnd = ocl::Expressions::ExpressionsPackage::eInstance()->getExpressionInOcl_Attribute_parameterVariable();
+		const std::shared_ptr<ecore::EReference>& otherEnd = ocl::Expressions::ExpressionsPackage::eInstance()->getExpressionInOcl_Attribute_parameterVariable();
 		if (otherEnd != nullptr)
 	    {
 	   		m_variable_Attribute_varOwner->setEOpposite(otherEnd);
@@ -1996,7 +1996,7 @@ void ExpressionsPackageImpl::initializeVariableExpContent()
 		{
 			m_variableExp_Attribute_referredVariable->setDefaultValueLiteral(defaultValue);
 		}				
-		std::shared_ptr<ecore::EReference>  otherEnd = ocl::Expressions::ExpressionsPackage::eInstance()->getVariable_Attribute_referringExp();
+		const std::shared_ptr<ecore::EReference>& otherEnd = ocl::Expressions::ExpressionsPackage::eInstance()->getVariable_Attribute_referringExp();
 		if (otherEnd != nullptr)
 	    {
 	   		m_variableExp_Attribute_referredVariable->setEOpposite(otherEnd);

@@ -63,7 +63,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			 
-			virtual std::shared_ptr<Bag<uml::Namespace> > allNamespaces() const ;
+			virtual std::shared_ptr<Bag<uml::Namespace>> allNamespaces() const ;
 			/*!
 			The query allOwningPackages() returns the set of all the enclosing Namespaces of this NamedElement, working outwards, that are Packages, up to but not including the first such Namespace that is not a Package.
 			result = (if namespace.oclIsKindOf(Package)
@@ -76,7 +76,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			 
-			virtual std::shared_ptr<Bag<uml::Package> > allOwningPackages() ;
+			virtual std::shared_ptr<Bag<uml::Package>> allOwningPackages() ;
 			/*!
 			Creates a dependency between this named element and the specified supplier, owned by this named element's nearest package.
 			*/
@@ -92,7 +92,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			 
-			virtual std::shared_ptr<Bag<uml::Dependency> > getClientDependencies() ;
+			virtual std::shared_ptr<Bag<uml::Dependency>> getClientDependencies() ;
 			/*!
 			Retrieves a localized label for this named element.
 			*/

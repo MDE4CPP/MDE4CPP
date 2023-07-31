@@ -432,7 +432,7 @@ void ValuesPackageImpl::initializeLocalSnapshotContent()
 		{
 			m_localSnapshot_Attribute_pred->setDefaultValueLiteral(defaultValue);
 		}				
-		std::shared_ptr<ecore::EReference>  otherEnd = ocl::Values::ValuesPackage::eInstance()->getLocalSnapshot_Attribute_succ();
+		const std::shared_ptr<ecore::EReference>& otherEnd = ocl::Values::ValuesPackage::eInstance()->getLocalSnapshot_Attribute_succ();
 		if (otherEnd != nullptr)
 	    {
 	   		m_localSnapshot_Attribute_pred->setEOpposite(otherEnd);
@@ -457,7 +457,7 @@ void ValuesPackageImpl::initializeLocalSnapshotContent()
 		{
 			m_localSnapshot_Attribute_succ->setDefaultValueLiteral(defaultValue);
 		}				
-		std::shared_ptr<ecore::EReference>  otherEnd = ocl::Values::ValuesPackage::eInstance()->getLocalSnapshot_Attribute_pred();
+		const std::shared_ptr<ecore::EReference>& otherEnd = ocl::Values::ValuesPackage::eInstance()->getLocalSnapshot_Attribute_pred();
 		if (otherEnd != nullptr)
 	    {
 	   		m_localSnapshot_Attribute_succ->setEOpposite(otherEnd);
@@ -958,7 +958,7 @@ void ValuesPackageImpl::initializeTupleValueContent()
 		{
 			m_tupleValue_Attribute_model->setDefaultValueLiteral(defaultValue);
 		}				
-		std::shared_ptr<ecore::EReference>  otherEnd = ocl::Types::TypesPackage::eInstance()->getTupleType_Attribute_instance();
+		const std::shared_ptr<ecore::EReference>& otherEnd = ocl::Types::TypesPackage::eInstance()->getTupleType_Attribute_instance();
 		if (otherEnd != nullptr)
 	    {
 	   		m_tupleValue_Attribute_model->setEOpposite(otherEnd);

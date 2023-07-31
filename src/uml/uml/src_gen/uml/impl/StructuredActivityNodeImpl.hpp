@@ -81,7 +81,7 @@ namespace uml
 			<p>From package UML::Actions.</p>
 			*/
 			 
-			virtual std::shared_ptr<Bag<uml::ActivityNode> > sourceNodes() ;
+			virtual std::shared_ptr<Bag<uml::ActivityNode>> sourceNodes() ;
 			/*!
 			Return those ActivityNodes contained immediately within the StructuredActivityNode that may act as targets of edges owned by the StructuredActivityNode.
 			result = (node->union(output.oclAsType(ActivityNode)->asSet())->
@@ -89,7 +89,7 @@ namespace uml
 			<p>From package UML::Actions.</p>
 			*/
 			 
-			virtual std::shared_ptr<Bag<uml::ActivityNode> > targetNodes() ;
+			virtual std::shared_ptr<Bag<uml::ActivityNode>> targetNodes() ;
 			
 			//*********************************
 			// Attribute Getters & Setters

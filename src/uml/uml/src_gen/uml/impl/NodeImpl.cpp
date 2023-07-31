@@ -217,7 +217,7 @@ std::shared_ptr<uml::CommunicationPath> NodeImpl::createCommunicationPath(bool e
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-std::shared_ptr<Bag<uml::CommunicationPath> > NodeImpl::getCommunicationPaths()
+std::shared_ptr<Bag<uml::CommunicationPath>> NodeImpl::getCommunicationPaths()
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -705,7 +705,7 @@ Any NodeImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& ar
 		// uml::Node::getCommunicationPaths() : uml::CommunicationPath[*]: 810632424
 		case umlPackage::NODE_OPERATION_GETCOMMUNICATIONPATHS:
 		{
-			std::shared_ptr<Bag<uml::CommunicationPath> > resultList = this->getCommunicationPaths();
+			const std::shared_ptr<Bag<uml::CommunicationPath>>& resultList = this->getCommunicationPaths();
 			return eAnyBag(resultList,uml::umlPackage::COMMUNICATIONPATH_CLASS);
 			break;
 		}

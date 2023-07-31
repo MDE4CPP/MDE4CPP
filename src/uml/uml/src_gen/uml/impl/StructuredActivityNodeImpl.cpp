@@ -357,12 +357,12 @@ bool StructuredActivityNodeImpl::output_pin_edges(const Any& diagnostics, std::s
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-std::shared_ptr<Bag<uml::ActivityNode> > StructuredActivityNodeImpl::sourceNodes()
+std::shared_ptr<Bag<uml::ActivityNode>> StructuredActivityNodeImpl::sourceNodes()
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-std::shared_ptr<Bag<uml::ActivityNode> > StructuredActivityNodeImpl::targetNodes()
+std::shared_ptr<Bag<uml::ActivityNode>> StructuredActivityNodeImpl::targetNodes()
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -1234,14 +1234,14 @@ Any StructuredActivityNodeImpl::eInvoke(int operationID, const std::shared_ptr<s
 		// uml::StructuredActivityNode::sourceNodes() : uml::ActivityNode[*]: 3462902530
 		case umlPackage::STRUCTUREDACTIVITYNODE_OPERATION_SOURCENODES:
 		{
-			std::shared_ptr<Bag<uml::ActivityNode> > resultList = this->sourceNodes();
+			const std::shared_ptr<Bag<uml::ActivityNode>>& resultList = this->sourceNodes();
 			return eAnyBag(resultList,uml::umlPackage::ACTIVITYNODE_CLASS);
 			break;
 		}
 		// uml::StructuredActivityNode::targetNodes() : uml::ActivityNode[*]: 2207842792
 		case umlPackage::STRUCTUREDACTIVITYNODE_OPERATION_TARGETNODES:
 		{
-			std::shared_ptr<Bag<uml::ActivityNode> > resultList = this->targetNodes();
+			const std::shared_ptr<Bag<uml::ActivityNode>>& resultList = this->targetNodes();
 			return eAnyBag(resultList,uml::umlPackage::ACTIVITYNODE_CLASS);
 			break;
 		}

@@ -196,7 +196,7 @@ bool ValueImpl::equals(const std::shared_ptr<fUML::Semantics::Values::Value>& ot
 	//end of body
 }
 
-std::shared_ptr<Bag<uml::Classifier> > ValueImpl::getTypes() const
+std::shared_ptr<Bag<uml::Classifier>> ValueImpl::getTypes() const
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -410,7 +410,7 @@ Any ValueImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& a
 		// fUML::Semantics::Values::Value::getTypes() : uml::Classifier[*] {const}: 3772499480
 		case ValuesPackage::VALUE_OPERATION_GETTYPES:
 		{
-			std::shared_ptr<Bag<uml::Classifier> > resultList = this->getTypes();
+			const std::shared_ptr<Bag<uml::Classifier>>& resultList = this->getTypes();
 			return eAnyBag(resultList,uml::umlPackage::CLASSIFIER_CLASS);
 			break;
 		}

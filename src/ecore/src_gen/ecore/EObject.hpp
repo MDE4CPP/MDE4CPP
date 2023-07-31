@@ -79,7 +79,7 @@ namespace ecore
 			virtual std::shared_ptr<ecore::EObject> eContainer() = 0;
 			virtual std::shared_ptr<ecore::EStructuralFeature> eContainingFeature() const = 0;
 			virtual std::shared_ptr<ecore::EReference> eContainmentFeature() const = 0;
-			virtual std::shared_ptr<Bag<ecore::EObject> > eContents() const = 0;
+			virtual std::shared_ptr<Bag<ecore::EObject>> eContents() const = 0;
 			virtual std::shared_ptr<std::list < ecore::EObject>> eCrossReferences() const = 0;
 			virtual Any eGet(const std::shared_ptr<ecore::EStructuralFeature>& feature) const = 0;
 			virtual Any eGet(const std::shared_ptr<ecore::EStructuralFeature>& feature, bool resolve) const = 0;

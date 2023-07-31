@@ -674,7 +674,7 @@ void TransitionImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveH
 	{
 		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
 		// Save 'effect'
-		std::shared_ptr<uml::Behavior> effect = this->getEffect();
+		const std::shared_ptr<uml::Behavior>& effect = this->getEffect();
 		if (effect != nullptr)
 		{
 			saveHandler->addReference(effect, "effect", effect->eClass() != package->getBehavior_Class());

@@ -237,12 +237,12 @@ bool BehavioredClassifierImpl::class_behavior(const Any& diagnostics, std::share
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-std::shared_ptr<Bag<uml::Interface> > BehavioredClassifierImpl::getAllImplementedInterfaces()
+std::shared_ptr<Bag<uml::Interface>> BehavioredClassifierImpl::getAllImplementedInterfaces()
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-std::shared_ptr<Bag<uml::Interface> > BehavioredClassifierImpl::getImplementedInterfaces()
+std::shared_ptr<Bag<uml::Interface>> BehavioredClassifierImpl::getImplementedInterfaces()
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -748,14 +748,14 @@ Any BehavioredClassifierImpl::eInvoke(int operationID, const std::shared_ptr<std
 		// uml::BehavioredClassifier::getAllImplementedInterfaces() : uml::Interface[*]: 3121381189
 		case umlPackage::BEHAVIOREDCLASSIFIER_OPERATION_GETALLIMPLEMENTEDINTERFACES:
 		{
-			std::shared_ptr<Bag<uml::Interface> > resultList = this->getAllImplementedInterfaces();
+			const std::shared_ptr<Bag<uml::Interface>>& resultList = this->getAllImplementedInterfaces();
 			return eAnyBag(resultList,uml::umlPackage::INTERFACE_CLASS);
 			break;
 		}
 		// uml::BehavioredClassifier::getImplementedInterfaces() : uml::Interface[*]: 329551508
 		case umlPackage::BEHAVIOREDCLASSIFIER_OPERATION_GETIMPLEMENTEDINTERFACES:
 		{
-			std::shared_ptr<Bag<uml::Interface> > resultList = this->getImplementedInterfaces();
+			const std::shared_ptr<Bag<uml::Interface>>& resultList = this->getImplementedInterfaces();
 			return eAnyBag(resultList,uml::umlPackage::INTERFACE_CLASS);
 			break;
 		}

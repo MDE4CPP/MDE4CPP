@@ -214,7 +214,7 @@ std::shared_ptr<ecore::EObject> PortImpl::copy() const
 //*********************************
 // Operations
 //*********************************
-std::shared_ptr<Bag<uml::Interface> > PortImpl::basicProvided()
+std::shared_ptr<Bag<uml::Interface>> PortImpl::basicProvided()
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -234,7 +234,7 @@ std::shared_ptr<Bag<uml::Interface> > PortImpl::basicProvided()
 	//end of body
 }
 
-std::shared_ptr<Bag<uml::Interface> > PortImpl::basicRequired()
+std::shared_ptr<Bag<uml::Interface>> PortImpl::basicRequired()
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -258,7 +258,7 @@ bool PortImpl::encapsulated_owner(const Any& diagnostics, std::shared_ptr<std::m
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-std::shared_ptr<Bag<uml::Interface> > PortImpl::getProvideds()
+std::shared_ptr<Bag<uml::Interface>> PortImpl::getProvideds()
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -267,7 +267,7 @@ std::shared_ptr<Bag<uml::Interface> > PortImpl::getProvideds()
 	//end of body
 }
 
-std::shared_ptr<Bag<uml::Interface> > PortImpl::getRequireds()
+std::shared_ptr<Bag<uml::Interface>> PortImpl::getRequireds()
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -813,14 +813,14 @@ Any PortImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& ar
 		// uml::Port::basicProvided() : uml::Interface[*]: 2234995286
 		case umlPackage::PORT_OPERATION_BASICPROVIDED:
 		{
-			std::shared_ptr<Bag<uml::Interface> > resultList = this->basicProvided();
+			const std::shared_ptr<Bag<uml::Interface>>& resultList = this->basicProvided();
 			return eAnyBag(resultList,uml::umlPackage::INTERFACE_CLASS);
 			break;
 		}
 		// uml::Port::basicRequired() : uml::Interface[*]: 149776146
 		case umlPackage::PORT_OPERATION_BASICREQUIRED:
 		{
-			std::shared_ptr<Bag<uml::Interface> > resultList = this->basicRequired();
+			const std::shared_ptr<Bag<uml::Interface>>& resultList = this->basicRequired();
 			return eAnyBag(resultList,uml::umlPackage::INTERFACE_CLASS);
 			break;
 		}
@@ -859,14 +859,14 @@ Any PortImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& ar
 		// uml::Port::getProvideds() : uml::Interface[*]: 4122866187
 		case umlPackage::PORT_OPERATION_GETPROVIDEDS:
 		{
-			std::shared_ptr<Bag<uml::Interface> > resultList = this->getProvideds();
+			const std::shared_ptr<Bag<uml::Interface>>& resultList = this->getProvideds();
 			return eAnyBag(resultList,uml::umlPackage::INTERFACE_CLASS);
 			break;
 		}
 		// uml::Port::getRequireds() : uml::Interface[*]: 2874458023
 		case umlPackage::PORT_OPERATION_GETREQUIREDS:
 		{
-			std::shared_ptr<Bag<uml::Interface> > resultList = this->getRequireds();
+			const std::shared_ptr<Bag<uml::Interface>>& resultList = this->getRequireds();
 			return eAnyBag(resultList,uml::umlPackage::INTERFACE_CLASS);
 			break;
 		}

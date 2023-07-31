@@ -57,7 +57,7 @@ namespace uml
 			*/
 			 
 			virtual std::shared_ptr<uml::Operation> createOwnedOperation(std::string name, const std::shared_ptr<Bag<std::string>>& parameterNames, const std::shared_ptr<Bag<uml::Type>>& parameterTypes, const std::shared_ptr<uml::Type>& returnType) ;
-			virtual std::shared_ptr<Bag<uml::Operation> > getAllOperations() ;
+			virtual std::shared_ptr<Bag<uml::Operation>> getAllOperations() ;
 			/*!
 			Derivation for Class::/extension : Extension
 			result = (Extension.allInstances()->select(ext | 
@@ -66,14 +66,14 @@ namespace uml
 			<p>From package UML::StructuredClassifiers.</p>
 			*/
 			 
-			virtual std::shared_ptr<Bag<uml::Extension> > getExtensions() ;
+			virtual std::shared_ptr<Bag<uml::Extension>> getExtensions() ;
 			/*!
 			Derivation for Class::/superClass : Class
 			result = (self.general()->select(oclIsKindOf(Class))->collect(oclAsType(Class))->asSet())
 			<p>From package UML::StructuredClassifiers.</p>
 			*/
 			 
-			virtual std::shared_ptr<Bag<uml::Class> > getSuperClasses() ;
+			virtual std::shared_ptr<Bag<uml::Class>> getSuperClasses() ;
 			/*!
 			Determines whether this class is a metaclass.
 			*/

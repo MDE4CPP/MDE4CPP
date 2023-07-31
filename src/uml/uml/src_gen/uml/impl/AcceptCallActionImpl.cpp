@@ -377,7 +377,7 @@ void AcceptCallActionImpl::saveContent(std::shared_ptr<persistence::interfaces::
 	{
 		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
 		// Save 'returnInformation'
-		std::shared_ptr<uml::OutputPin> returnInformation = this->getReturnInformation();
+		const std::shared_ptr<uml::OutputPin>& returnInformation = this->getReturnInformation();
 		if (returnInformation != nullptr)
 		{
 			saveHandler->addReference(returnInformation, "returnInformation", returnInformation->eClass() != package->getOutputPin_Class());

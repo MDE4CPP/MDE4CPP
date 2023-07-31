@@ -57,7 +57,7 @@ namespace uml
 			<p>From package UML::StructuredClassifiers.</p>
 			*/
 			 
-			virtual std::shared_ptr<Bag<uml::Port> > getOwnedPorts() ;
+			virtual std::shared_ptr<Bag<uml::Port>> getOwnedPorts() ;
 			
 			//*********************************
 			// Attribute Getters & Setters

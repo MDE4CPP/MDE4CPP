@@ -124,7 +124,7 @@ std::shared_ptr<uml::Operation> CallEventOccurrenceImpl::getOperation()
 	//end of body
 }
 
-std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue> > CallEventOccurrenceImpl::getParameterValues()
+std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> CallEventOccurrenceImpl::getParameterValues()
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -348,7 +348,7 @@ Any CallEventOccurrenceImpl::eInvoke(int operationID, const std::shared_ptr<std:
 		// fUML::Semantics::CommonBehavior::CallEventOccurrence::getParameterValues() : fUML::Semantics::CommonBehavior::ParameterValue[*]: 2035047579
 		case CommonBehaviorPackage::CALLEVENTOCCURRENCE_OPERATION_GETPARAMETERVALUES:
 		{
-			std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue> > resultList = this->getParameterValues();
+			const std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>>& resultList = this->getParameterValues();
 			return eAnyBag(resultList,fUML::Semantics::CommonBehavior::CommonBehaviorPackage::PARAMETERVALUE_CLASS);
 			break;
 		}

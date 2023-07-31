@@ -143,7 +143,7 @@ std::shared_ptr<fUML::Semantics::Values::Value> ExecutorImpl::evaluate(const std
 	//end of body
 }
 
-std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue> > ExecutorImpl::execute(const std::shared_ptr<uml::Behavior>& behavior, const std::shared_ptr<fUML::Semantics::StructuredClassifiers::Object>& context, const std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>>& inputs)
+std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> ExecutorImpl::execute(const std::shared_ptr<uml::Behavior>& behavior, const std::shared_ptr<fUML::Semantics::StructuredClassifiers::Object>& context, const std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>>& inputs)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -385,7 +385,7 @@ Any ExecutorImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>
 			std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> incoming_param_inputs;
 			std::list<Any>::const_iterator incoming_param_inputs_arguments_citer = std::next(arguments->begin(), 2);
 			incoming_param_inputs = (*incoming_param_inputs_arguments_citer)->get<std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> >();
-			std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue> > resultList = this->execute(incoming_param_behavior,incoming_param_context,incoming_param_inputs);
+			const std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>>& resultList = this->execute(incoming_param_behavior,incoming_param_context,incoming_param_inputs);
 			return eAnyBag(resultList,fUML::Semantics::CommonBehavior::CommonBehaviorPackage::PARAMETERVALUE_CLASS);
 			break;
 		}

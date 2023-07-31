@@ -169,7 +169,7 @@ namespace uml
 			Retrieves all the metaclasses extended by this stereotype, including the metaclasses extended by its superstereotypes.
 			*/
 			 
-			virtual std::shared_ptr<Bag<uml::Class> > getAllExtendedMetaclasses() = 0;
+			virtual std::shared_ptr<Bag<uml::Class>> getAllExtendedMetaclasses() = 0;
 			/*!
 			Retrieves the current definition (Ecore representation) of this stereotype.
 			*/
@@ -179,7 +179,7 @@ namespace uml
 			Retrieves the metaclasses extended by this stereotype.
 			*/
 			 
-			virtual std::shared_ptr<Bag<uml::Class> > getExtendedMetaclasses() = 0;
+			virtual std::shared_ptr<Bag<uml::Class>> getExtendedMetaclasses() = 0;
 			/*!
 			Retrieves the localized keyword for this stereotype.
 			*/

@@ -361,7 +361,7 @@ void AbstractionImpl::saveContent(std::shared_ptr<persistence::interfaces::XSave
 	{
 		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
 		// Save 'mapping'
-		std::shared_ptr<uml::OpaqueExpression> mapping = this->getMapping();
+		const std::shared_ptr<uml::OpaqueExpression>& mapping = this->getMapping();
 		if (mapping != nullptr)
 		{
 			saveHandler->addReference(mapping, "mapping", mapping->eClass() != package->getOpaqueExpression_Class());

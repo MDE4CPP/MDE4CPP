@@ -303,7 +303,7 @@ void CS_RemoveStructuralFeatureValueActionActivationImpl::doAction()
 	//end of body
 }
 
-std::shared_ptr<Bag<PSCS::Semantics::StructuredClassifiers::CS_Link> > CS_RemoveStructuralFeatureValueActionActivationImpl::getLinksToDestroy(const std::shared_ptr<fUML::Semantics::SimpleClassifiers::StructuredValue>& value, const std::shared_ptr<uml::StructuralFeature>& feature, const std::shared_ptr<fUML::Semantics::Values::Value>& removedValue)
+std::shared_ptr<Bag<PSCS::Semantics::StructuredClassifiers::CS_Link>> CS_RemoveStructuralFeatureValueActionActivationImpl::getLinksToDestroy(const std::shared_ptr<fUML::Semantics::SimpleClassifiers::StructuredValue>& value, const std::shared_ptr<uml::StructuralFeature>& feature, const std::shared_ptr<fUML::Semantics::Values::Value>& removedValue)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -377,7 +377,7 @@ std::shared_ptr<Bag<PSCS::Semantics::StructuredClassifiers::CS_Link> > CS_Remove
 	//end of body
 }
 
-std::shared_ptr<Bag<fUML::Semantics::Values::Value> > CS_RemoveStructuralFeatureValueActionActivationImpl::getPotentialLinkEnds(const std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Reference>& context, const std::shared_ptr<uml::StructuralFeature>& feature)
+std::shared_ptr<Bag<fUML::Semantics::Values::Value>> CS_RemoveStructuralFeatureValueActionActivationImpl::getPotentialLinkEnds(const std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Reference>& context, const std::shared_ptr<uml::StructuralFeature>& feature)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -577,7 +577,7 @@ Any CS_RemoveStructuralFeatureValueActionActivationImpl::eInvoke(int operationID
 			std::shared_ptr<fUML::Semantics::Values::Value> incoming_param_removedValue;
 			std::list<Any>::const_iterator incoming_param_removedValue_arguments_citer = std::next(arguments->begin(), 2);
 			incoming_param_removedValue = (*incoming_param_removedValue_arguments_citer)->get<std::shared_ptr<fUML::Semantics::Values::Value> >();
-			std::shared_ptr<Bag<PSCS::Semantics::StructuredClassifiers::CS_Link> > resultList = this->getLinksToDestroy(incoming_param_value,incoming_param_feature,incoming_param_removedValue);
+			const std::shared_ptr<Bag<PSCS::Semantics::StructuredClassifiers::CS_Link>>& resultList = this->getLinksToDestroy(incoming_param_value,incoming_param_feature,incoming_param_removedValue);
 			return eAnyBag(resultList,PSCS::Semantics::StructuredClassifiers::StructuredClassifiersPackage::CS_LINK_CLASS);
 			break;
 		}
@@ -594,7 +594,7 @@ Any CS_RemoveStructuralFeatureValueActionActivationImpl::eInvoke(int operationID
 			std::shared_ptr<uml::StructuralFeature> incoming_param_feature;
 			std::list<Any>::const_iterator incoming_param_feature_arguments_citer = std::next(arguments->begin(), 1);
 			incoming_param_feature = (*incoming_param_feature_arguments_citer)->get<std::shared_ptr<uml::StructuralFeature> >();
-			std::shared_ptr<Bag<fUML::Semantics::Values::Value> > resultList = this->getPotentialLinkEnds(incoming_param_context,incoming_param_feature);
+			const std::shared_ptr<Bag<fUML::Semantics::Values::Value>>& resultList = this->getPotentialLinkEnds(incoming_param_context,incoming_param_feature);
 			return eAnyBag(resultList,fUML::Semantics::Values::ValuesPackage::VALUE_CLASS);
 			break;
 		}

@@ -50,7 +50,7 @@ virtual public EObject
 			virtual std::shared_ptr<ecore::EObject> eContainer() ;
 			virtual std::shared_ptr<ecore::EStructuralFeature> eContainingFeature() const ;
 			virtual std::shared_ptr<ecore::EReference> eContainmentFeature() const ;
-			virtual std::shared_ptr<Bag<ecore::EObject> > eContents() const ;
+			virtual std::shared_ptr<Bag<ecore::EObject>> eContents() const ;
 			virtual std::shared_ptr<std::list < ecore::EObject>> eCrossReferences() const ;
 			virtual Any eGet(const std::shared_ptr<ecore::EStructuralFeature>& feature) const ;
 			virtual Any eGet(const std::shared_ptr<ecore::EStructuralFeature>& feature, bool resolve) const ;

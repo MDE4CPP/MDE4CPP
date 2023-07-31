@@ -305,7 +305,7 @@ void ChangeEventImpl::saveContent(std::shared_ptr<persistence::interfaces::XSave
 	{
 		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
 		// Save 'changeExpression'
-		std::shared_ptr<uml::ValueSpecification> changeExpression = this->getChangeExpression();
+		const std::shared_ptr<uml::ValueSpecification>& changeExpression = this->getChangeExpression();
 		if (changeExpression != nullptr)
 		{
 			saveHandler->addReference(changeExpression, "changeExpression", changeExpression->eClass() != package->getValueSpecification_Class());

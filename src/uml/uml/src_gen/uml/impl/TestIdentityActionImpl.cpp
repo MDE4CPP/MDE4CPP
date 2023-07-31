@@ -454,21 +454,21 @@ void TestIdentityActionImpl::saveContent(std::shared_ptr<persistence::interfaces
 	{
 		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
 		// Save 'first'
-		std::shared_ptr<uml::InputPin> first = this->getFirst();
+		const std::shared_ptr<uml::InputPin>& first = this->getFirst();
 		if (first != nullptr)
 		{
 			saveHandler->addReference(first, "first", first->eClass() != package->getInputPin_Class());
 		}
 
 		// Save 'result'
-		std::shared_ptr<uml::OutputPin> result = this->getResult();
+		const std::shared_ptr<uml::OutputPin>& result = this->getResult();
 		if (result != nullptr)
 		{
 			saveHandler->addReference(result, "result", result->eClass() != package->getOutputPin_Class());
 		}
 
 		// Save 'second'
-		std::shared_ptr<uml::InputPin> second = this->getSecond();
+		const std::shared_ptr<uml::InputPin>& second = this->getSecond();
 		if (second != nullptr)
 		{
 			saveHandler->addReference(second, "second", second->eClass() != package->getInputPin_Class());

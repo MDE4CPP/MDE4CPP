@@ -155,7 +155,7 @@ std::shared_ptr<ecore::EObject> EnumerationLiteralImpl::copy() const
 //*********************************
 
 
-std::shared_ptr<Bag<uml::Classifier> > EnumerationLiteralImpl::getClassifiers()
+std::shared_ptr<Bag<uml::Classifier>> EnumerationLiteralImpl::getClassifiers()
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -383,7 +383,7 @@ Any EnumerationLiteralImpl::eInvoke(int operationID, const std::shared_ptr<std::
 		// uml::EnumerationLiteral::getClassifiers() : uml::Classifier[*]: 4270076526
 		case umlPackage::ENUMERATIONLITERAL_OPERATION_GETCLASSIFIERS:
 		{
-			std::shared_ptr<Bag<uml::Classifier> > resultList = this->getClassifiers();
+			const std::shared_ptr<Bag<uml::Classifier>>& resultList = this->getClassifiers();
 			return eAnyBag(resultList,uml::umlPackage::CLASSIFIER_CLASS);
 			break;
 		}

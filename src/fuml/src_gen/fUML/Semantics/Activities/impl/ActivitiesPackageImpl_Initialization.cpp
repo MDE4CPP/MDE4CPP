@@ -149,7 +149,7 @@ void ActivitiesPackageImpl::initializeActivityEdgeInstanceContent()
 		{
 			m_activityEdgeInstance_Attribute_group->setDefaultValueLiteral(defaultValue);
 		}				
-		std::shared_ptr<ecore::EReference>  otherEnd = fUML::Semantics::Activities::ActivitiesPackage::eInstance()->getActivityNodeActivationGroup_Attribute_edgeInstances();
+		const std::shared_ptr<ecore::EReference>& otherEnd = fUML::Semantics::Activities::ActivitiesPackage::eInstance()->getActivityNodeActivationGroup_Attribute_edgeInstances();
 		if (otherEnd != nullptr)
 	    {
 	   		m_activityEdgeInstance_Attribute_group->setEOpposite(otherEnd);
@@ -196,7 +196,7 @@ void ActivitiesPackageImpl::initializeActivityEdgeInstanceContent()
 		{
 			m_activityEdgeInstance_Attribute_source->setDefaultValueLiteral(defaultValue);
 		}				
-		std::shared_ptr<ecore::EReference>  otherEnd = fUML::Semantics::Activities::ActivitiesPackage::eInstance()->getActivityNodeActivation_Attribute_outgoingEdges();
+		const std::shared_ptr<ecore::EReference>& otherEnd = fUML::Semantics::Activities::ActivitiesPackage::eInstance()->getActivityNodeActivation_Attribute_outgoingEdges();
 		if (otherEnd != nullptr)
 	    {
 	   		m_activityEdgeInstance_Attribute_source->setEOpposite(otherEnd);
@@ -221,7 +221,7 @@ void ActivitiesPackageImpl::initializeActivityEdgeInstanceContent()
 		{
 			m_activityEdgeInstance_Attribute_target->setDefaultValueLiteral(defaultValue);
 		}				
-		std::shared_ptr<ecore::EReference>  otherEnd = fUML::Semantics::Activities::ActivitiesPackage::eInstance()->getActivityNodeActivation_Attribute_incomingEdges();
+		const std::shared_ptr<ecore::EReference>& otherEnd = fUML::Semantics::Activities::ActivitiesPackage::eInstance()->getActivityNodeActivation_Attribute_incomingEdges();
 		if (otherEnd != nullptr)
 	    {
 	   		m_activityEdgeInstance_Attribute_target->setEOpposite(otherEnd);
@@ -323,7 +323,7 @@ void ActivitiesPackageImpl::initializeActivityExecutionContent()
 		{
 			m_activityExecution_Attribute_activationGroup->setDefaultValueLiteral(defaultValue);
 		}				
-		std::shared_ptr<ecore::EReference>  otherEnd = fUML::Semantics::Activities::ActivitiesPackage::eInstance()->getActivityNodeActivationGroup_Attribute_activityExecution();
+		const std::shared_ptr<ecore::EReference>& otherEnd = fUML::Semantics::Activities::ActivitiesPackage::eInstance()->getActivityNodeActivationGroup_Attribute_activityExecution();
 		if (otherEnd != nullptr)
 	    {
 	   		m_activityExecution_Attribute_activationGroup->setEOpposite(otherEnd);
@@ -474,7 +474,7 @@ void ActivitiesPackageImpl::initializeActivityNodeActivationContent()
 		{
 			m_activityNodeActivation_Attribute_group->setDefaultValueLiteral(defaultValue);
 		}				
-		std::shared_ptr<ecore::EReference>  otherEnd = fUML::Semantics::Activities::ActivitiesPackage::eInstance()->getActivityNodeActivationGroup_Attribute_nodeActivations();
+		const std::shared_ptr<ecore::EReference>& otherEnd = fUML::Semantics::Activities::ActivitiesPackage::eInstance()->getActivityNodeActivationGroup_Attribute_nodeActivations();
 		if (otherEnd != nullptr)
 	    {
 	   		m_activityNodeActivation_Attribute_group->setEOpposite(otherEnd);
@@ -499,7 +499,7 @@ void ActivitiesPackageImpl::initializeActivityNodeActivationContent()
 		{
 			m_activityNodeActivation_Attribute_heldTokens->setDefaultValueLiteral(defaultValue);
 		}				
-		std::shared_ptr<ecore::EReference>  otherEnd = fUML::Semantics::Activities::ActivitiesPackage::eInstance()->getToken_Attribute_holder();
+		const std::shared_ptr<ecore::EReference>& otherEnd = fUML::Semantics::Activities::ActivitiesPackage::eInstance()->getToken_Attribute_holder();
 		if (otherEnd != nullptr)
 	    {
 	   		m_activityNodeActivation_Attribute_heldTokens->setEOpposite(otherEnd);
@@ -524,7 +524,7 @@ void ActivitiesPackageImpl::initializeActivityNodeActivationContent()
 		{
 			m_activityNodeActivation_Attribute_incomingEdges->setDefaultValueLiteral(defaultValue);
 		}				
-		std::shared_ptr<ecore::EReference>  otherEnd = fUML::Semantics::Activities::ActivitiesPackage::eInstance()->getActivityEdgeInstance_Attribute_target();
+		const std::shared_ptr<ecore::EReference>& otherEnd = fUML::Semantics::Activities::ActivitiesPackage::eInstance()->getActivityEdgeInstance_Attribute_target();
 		if (otherEnd != nullptr)
 	    {
 	   		m_activityNodeActivation_Attribute_incomingEdges->setEOpposite(otherEnd);
@@ -571,7 +571,7 @@ void ActivitiesPackageImpl::initializeActivityNodeActivationContent()
 		{
 			m_activityNodeActivation_Attribute_outgoingEdges->setDefaultValueLiteral(defaultValue);
 		}				
-		std::shared_ptr<ecore::EReference>  otherEnd = fUML::Semantics::Activities::ActivitiesPackage::eInstance()->getActivityEdgeInstance_Attribute_source();
+		const std::shared_ptr<ecore::EReference>& otherEnd = fUML::Semantics::Activities::ActivitiesPackage::eInstance()->getActivityEdgeInstance_Attribute_source();
 		if (otherEnd != nullptr)
 	    {
 	   		m_activityNodeActivation_Attribute_outgoingEdges->setEOpposite(otherEnd);
@@ -979,7 +979,7 @@ void ActivitiesPackageImpl::initializeActivityNodeActivationGroupContent()
 		{
 			m_activityNodeActivationGroup_Attribute_activityExecution->setDefaultValueLiteral(defaultValue);
 		}				
-		std::shared_ptr<ecore::EReference>  otherEnd = fUML::Semantics::Activities::ActivitiesPackage::eInstance()->getActivityExecution_Attribute_activationGroup();
+		const std::shared_ptr<ecore::EReference>& otherEnd = fUML::Semantics::Activities::ActivitiesPackage::eInstance()->getActivityExecution_Attribute_activationGroup();
 		if (otherEnd != nullptr)
 	    {
 	   		m_activityNodeActivationGroup_Attribute_activityExecution->setEOpposite(otherEnd);
@@ -1004,7 +1004,7 @@ void ActivitiesPackageImpl::initializeActivityNodeActivationGroupContent()
 		{
 			m_activityNodeActivationGroup_Attribute_containingNodeActivation->setDefaultValueLiteral(defaultValue);
 		}				
-		std::shared_ptr<ecore::EReference>  otherEnd = fUML::Semantics::Actions::ActionsPackage::eInstance()->getStructuredActivityNodeActivation_Attribute_activationGroup();
+		const std::shared_ptr<ecore::EReference>& otherEnd = fUML::Semantics::Actions::ActionsPackage::eInstance()->getStructuredActivityNodeActivation_Attribute_activationGroup();
 		if (otherEnd != nullptr)
 	    {
 	   		m_activityNodeActivationGroup_Attribute_containingNodeActivation->setEOpposite(otherEnd);
@@ -1029,7 +1029,7 @@ void ActivitiesPackageImpl::initializeActivityNodeActivationGroupContent()
 		{
 			m_activityNodeActivationGroup_Attribute_edgeInstances->setDefaultValueLiteral(defaultValue);
 		}				
-		std::shared_ptr<ecore::EReference>  otherEnd = fUML::Semantics::Activities::ActivitiesPackage::eInstance()->getActivityEdgeInstance_Attribute_group();
+		const std::shared_ptr<ecore::EReference>& otherEnd = fUML::Semantics::Activities::ActivitiesPackage::eInstance()->getActivityEdgeInstance_Attribute_group();
 		if (otherEnd != nullptr)
 	    {
 	   		m_activityNodeActivationGroup_Attribute_edgeInstances->setEOpposite(otherEnd);
@@ -1054,7 +1054,7 @@ void ActivitiesPackageImpl::initializeActivityNodeActivationGroupContent()
 		{
 			m_activityNodeActivationGroup_Attribute_nodeActivations->setDefaultValueLiteral(defaultValue);
 		}				
-		std::shared_ptr<ecore::EReference>  otherEnd = fUML::Semantics::Activities::ActivitiesPackage::eInstance()->getActivityNodeActivation_Attribute_group();
+		const std::shared_ptr<ecore::EReference>& otherEnd = fUML::Semantics::Activities::ActivitiesPackage::eInstance()->getActivityNodeActivation_Attribute_group();
 		if (otherEnd != nullptr)
 	    {
 	   		m_activityNodeActivationGroup_Attribute_nodeActivations->setEOpposite(otherEnd);
@@ -3027,7 +3027,7 @@ void ActivitiesPackageImpl::initializeTokenContent()
 		{
 			m_token_Attribute_holder->setDefaultValueLiteral(defaultValue);
 		}				
-		std::shared_ptr<ecore::EReference>  otherEnd = fUML::Semantics::Activities::ActivitiesPackage::eInstance()->getActivityNodeActivation_Attribute_heldTokens();
+		const std::shared_ptr<ecore::EReference>& otherEnd = fUML::Semantics::Activities::ActivitiesPackage::eInstance()->getActivityNodeActivation_Attribute_heldTokens();
 		if (otherEnd != nullptr)
 	    {
 	   		m_token_Attribute_holder->setEOpposite(otherEnd);

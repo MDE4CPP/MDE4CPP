@@ -1028,7 +1028,7 @@ void EvaluationsPackageImpl::initializeOclExpEvalContent()
 		{
 			m_oclExpEval_Attribute_model->setDefaultValueLiteral(defaultValue);
 		}				
-		std::shared_ptr<ecore::EReference>  otherEnd = ocl::Expressions::ExpressionsPackage::eInstance()->getOclExpression_Attribute_instance();
+		const std::shared_ptr<ecore::EReference>& otherEnd = ocl::Expressions::ExpressionsPackage::eInstance()->getOclExpression_Attribute_instance();
 		if (otherEnd != nullptr)
 	    {
 	   		m_oclExpEval_Attribute_model->setEOpposite(otherEnd);

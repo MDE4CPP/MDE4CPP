@@ -123,7 +123,7 @@ return newValue;
 	//end of body
 }
 
-std::shared_ptr<Bag<uml::Classifier> > SignalInstanceImpl::getTypes() const
+std::shared_ptr<Bag<uml::Classifier>> SignalInstanceImpl::getTypes() const
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -334,7 +334,7 @@ Any SignalInstanceImpl::eInvoke(int operationID, const std::shared_ptr<std::list
 		// fUML::Semantics::SimpleClassifiers::SignalInstance::getTypes() : uml::Classifier[*] {const}: 1341600700
 		case SimpleClassifiersPackage::SIGNALINSTANCE_OPERATION_GETTYPES:
 		{
-			std::shared_ptr<Bag<uml::Classifier> > resultList = this->getTypes();
+			const std::shared_ptr<Bag<uml::Classifier>>& resultList = this->getTypes();
 			return eAnyBag(resultList,uml::umlPackage::CLASSIFIER_CLASS);
 			break;
 		}

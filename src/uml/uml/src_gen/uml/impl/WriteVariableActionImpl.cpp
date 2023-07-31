@@ -364,7 +364,7 @@ void WriteVariableActionImpl::saveContent(std::shared_ptr<persistence::interface
 	{
 		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
 		// Save 'value'
-		std::shared_ptr<uml::InputPin> value = this->getValue();
+		const std::shared_ptr<uml::InputPin>& value = this->getValue();
 		if (value != nullptr)
 		{
 			saveHandler->addReference(value, "value", value->eClass() != package->getInputPin_Class());

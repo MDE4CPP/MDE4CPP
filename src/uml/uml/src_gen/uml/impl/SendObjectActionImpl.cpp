@@ -397,14 +397,14 @@ void SendObjectActionImpl::saveContent(std::shared_ptr<persistence::interfaces::
 	{
 		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
 		// Save 'request'
-		std::shared_ptr<uml::InputPin> request = this->getRequest();
+		const std::shared_ptr<uml::InputPin>& request = this->getRequest();
 		if (request != nullptr)
 		{
 			saveHandler->addReference(request, "request", request->eClass() != package->getInputPin_Class());
 		}
 
 		// Save 'target'
-		std::shared_ptr<uml::InputPin> target = this->getTarget();
+		const std::shared_ptr<uml::InputPin>& target = this->getTarget();
 		if (target != nullptr)
 		{
 			saveHandler->addReference(target, "target", target->eClass() != package->getInputPin_Class());

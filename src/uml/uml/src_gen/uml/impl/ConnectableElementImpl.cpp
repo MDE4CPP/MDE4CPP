@@ -126,7 +126,7 @@ ConnectableElementImpl& ConnectableElementImpl::operator=(const ConnectableEleme
 //*********************************
 // Operations
 //*********************************
-std::shared_ptr<Bag<uml::ConnectorEnd> > ConnectableElementImpl::getEnds()
+std::shared_ptr<Bag<uml::ConnectorEnd>> ConnectableElementImpl::getEnds()
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -335,7 +335,7 @@ Any ConnectableElementImpl::eInvoke(int operationID, const std::shared_ptr<std::
 		// uml::ConnectableElement::getEnds() : uml::ConnectorEnd[*]: 700294205
 		case umlPackage::CONNECTABLEELEMENT_OPERATION_GETENDS:
 		{
-			std::shared_ptr<Bag<uml::ConnectorEnd> > resultList = this->getEnds();
+			const std::shared_ptr<Bag<uml::ConnectorEnd>>& resultList = this->getEnds();
 			return eAnyBag(resultList,uml::umlPackage::CONNECTOREND_CLASS);
 			break;
 		}

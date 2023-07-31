@@ -368,22 +368,22 @@ ClassifierImpl& ClassifierImpl::operator=(const ClassifierImpl & obj)
 //*********************************
 // Operations
 //*********************************
-std::shared_ptr<Bag<uml::Property> > ClassifierImpl::allAttributes()
+std::shared_ptr<Bag<uml::Property>> ClassifierImpl::allAttributes()
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-std::shared_ptr<Bag<uml::Feature> > ClassifierImpl::allFeatures()
+std::shared_ptr<Bag<uml::Feature>> ClassifierImpl::allFeatures()
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-std::shared_ptr<Bag<uml::Classifier> > ClassifierImpl::allParents()
+std::shared_ptr<Bag<uml::Classifier>> ClassifierImpl::allParents()
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-std::shared_ptr<Bag<uml::Interface> > ClassifierImpl::allRealizedInterfaces()
+std::shared_ptr<Bag<uml::Interface>> ClassifierImpl::allRealizedInterfaces()
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -393,9 +393,9 @@ std::shared_ptr<Bag<uml::Interface>> directlyRealizedInterfaces = this->directly
 allRealizedInterface->insert(allRealizedInterface->end(), directlyRealizedInterfaces->begin(), directlyRealizedInterfaces->end());
 	
 std::shared_ptr<Bag<uml::Classifier>> superClasses = this->getGenerals();
-for(unsigned int i = 0; i < superClasses->size(); i++)
+for(const std::shared_ptr<uml::Classifier>& superClass : *superClasses)
 {
-	std::shared_ptr<Bag<uml::Interface>> superRealizedInterfaces = superClasses->at(i)->allRealizedInterfaces();
+	std::shared_ptr<Bag<uml::Interface>> superRealizedInterfaces = superClass->allRealizedInterfaces();
 	allRealizedInterface->insert(allRealizedInterface->end(), superRealizedInterfaces->begin(), superRealizedInterfaces->end());
 }
 
@@ -403,12 +403,12 @@ return allRealizedInterface;
 	//end of body
 }
 
-std::shared_ptr<Bag<uml::StructuralFeature> > ClassifierImpl::allSlottableFeatures()
+std::shared_ptr<Bag<uml::StructuralFeature>> ClassifierImpl::allSlottableFeatures()
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-std::shared_ptr<Bag<uml::Interface> > ClassifierImpl::allUsedInterfaces()
+std::shared_ptr<Bag<uml::Interface>> ClassifierImpl::allUsedInterfaces()
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -417,10 +417,10 @@ std::shared_ptr<Bag<uml::Interface> > ClassifierImpl::allUsedInterfaces()
 	
 	allUsedInterfaces->insert(allUsedInterfaces->end(), directlyUsedInterfaces->begin(), directlyUsedInterfaces->end());
 	
-	std::shared_ptr<Bag<uml::Classifier>> superClasses = this->getGenerals();
-	for(unsigned int i = 0; i < superClasses->size(); i++)
+	 std::shared_ptr<Bag<uml::Classifier>> superClasses = this->getGenerals();
+	for(const std::shared_ptr<uml::Classifier>& superClass : *superClasses)
 	{
-		std::shared_ptr<Bag<uml::Interface>> superUsedInterfaces = superClasses->at(i)->allUsedInterfaces();
+		std::shared_ptr<Bag<uml::Interface>> superUsedInterfaces = superClass->allUsedInterfaces();
 		allUsedInterfaces->insert(allUsedInterfaces->end(), superUsedInterfaces->begin(), superUsedInterfaces->end());
 	}
 
@@ -428,7 +428,7 @@ std::shared_ptr<Bag<uml::Interface> > ClassifierImpl::allUsedInterfaces()
 	//end of body
 }
 
-std::shared_ptr<Bag<uml::Interface> > ClassifierImpl::directlyRealizedInterfaces()
+std::shared_ptr<Bag<uml::Interface>> ClassifierImpl::directlyRealizedInterfaces()
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -453,7 +453,7 @@ return directlyRealizedInterfaces;
 	//end of body
 }
 
-std::shared_ptr<Bag<uml::Interface> > ClassifierImpl::directlyUsedInterfaces()
+std::shared_ptr<Bag<uml::Interface>> ClassifierImpl::directlyUsedInterfaces()
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -486,7 +486,7 @@ std::shared_ptr<Bag<uml::Interface> > ClassifierImpl::directlyUsedInterfaces()
 	//end of body
 }
 
-std::shared_ptr<Bag<uml::Property> > ClassifierImpl::getAllAttributes()
+std::shared_ptr<Bag<uml::Property>> ClassifierImpl::getAllAttributes()
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -495,7 +495,7 @@ std::shared_ptr<Bag<uml::Property> > ClassifierImpl::getAllAttributes()
     const std::shared_ptr<Bag<uml::Property>>& attributeList = this->getAttribute();
     eAllAttributes->insert(eAllAttributes->end(), attributeList->begin(), attributeList->end());
 
-    std::shared_ptr<Bag<Classifier> > classList = this->getGenerals();
+    std::shared_ptr<Bag<Classifier>> classList = this->getGenerals();
     for (const std::shared_ptr<Classifier>& c : *classList)
     {
         std::shared_ptr<Bag<Property> > attributeList = c->getAllAttributes();
@@ -505,7 +505,7 @@ std::shared_ptr<Bag<uml::Property> > ClassifierImpl::getAllAttributes()
 	//end of body
 }
 
-std::shared_ptr<Bag<uml::Operation> > ClassifierImpl::getAllOperations()
+std::shared_ptr<Bag<uml::Operation>> ClassifierImpl::getAllOperations()
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -518,7 +518,7 @@ std::shared_ptr<Bag<uml::Operation> > ClassifierImpl::getAllOperations()
 		if(operation != nullptr){ allOperations->add(operation); }
 	}
 	
-	const std::shared_ptr<Bag<uml::Classifier>>& superTypes = this->getGenerals();
+	std::shared_ptr<Bag<uml::Classifier>> superTypes = this->getGenerals();
 	
 	for(const std::shared_ptr<uml::Classifier>& superType : *superTypes)
 	{
@@ -530,12 +530,12 @@ std::shared_ptr<Bag<uml::Operation> > ClassifierImpl::getAllOperations()
 	//end of body
 }
 
-std::shared_ptr<Bag<uml::Interface> > ClassifierImpl::getAllUsedInterfaces()
+std::shared_ptr<Bag<uml::Interface>> ClassifierImpl::getAllUsedInterfaces()
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-std::shared_ptr<Bag<uml::Classifier> > ClassifierImpl::getGenerals()
+std::shared_ptr<Bag<uml::Classifier>> ClassifierImpl::getGenerals()
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -543,7 +543,7 @@ std::shared_ptr<Bag<uml::Classifier> > ClassifierImpl::getGenerals()
 	//end of body
 }
 
-std::shared_ptr<Bag<uml::NamedElement> > ClassifierImpl::getInheritedMembers()
+std::shared_ptr<Bag<uml::NamedElement>> ClassifierImpl::getInheritedMembers()
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -558,7 +558,7 @@ std::shared_ptr<uml::Operation> ClassifierImpl::getOperation(std::string name, c
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-std::shared_ptr<Bag<uml::Operation> > ClassifierImpl::getOperations()
+std::shared_ptr<Bag<uml::Operation>> ClassifierImpl::getOperations()
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -579,7 +579,7 @@ Any ClassifierImpl::getPropertyValue(std::string propertyName)
 	//end of body
 }
 
-std::shared_ptr<Bag<uml::Interface> > ClassifierImpl::getUsedInterfaces()
+std::shared_ptr<Bag<uml::Interface>> ClassifierImpl::getUsedInterfaces()
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -589,12 +589,12 @@ bool ClassifierImpl::hasVisibilityOf(const std::shared_ptr<uml::NamedElement>& n
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-std::shared_ptr<Bag<uml::NamedElement> > ClassifierImpl::inherit(const std::shared_ptr<Bag<uml::NamedElement>>& inhs)
+std::shared_ptr<Bag<uml::NamedElement>> ClassifierImpl::inherit(const std::shared_ptr<Bag<uml::NamedElement>>& inhs)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-std::shared_ptr<Bag<uml::NamedElement> > ClassifierImpl::inheritableMembers(const std::shared_ptr<uml::Classifier>& c)
+std::shared_ptr<Bag<uml::NamedElement>> ClassifierImpl::inheritableMembers(const std::shared_ptr<uml::Classifier>& c)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -624,7 +624,7 @@ bool ClassifierImpl::non_final_parents(const Any& diagnostics, std::shared_ptr<s
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-std::shared_ptr<Bag<uml::Classifier> > ClassifierImpl::parents()
+std::shared_ptr<Bag<uml::Classifier>> ClassifierImpl::parents()
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -1783,91 +1783,91 @@ Any ClassifierImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any
 		// uml::Classifier::allAttributes() : uml::Property[*]: 3067782479
 		case umlPackage::CLASSIFIER_OPERATION_ALLATTRIBUTES:
 		{
-			std::shared_ptr<Bag<uml::Property> > resultList = this->allAttributes();
+			const std::shared_ptr<Bag<uml::Property>>& resultList = this->allAttributes();
 			return eAnyBag(resultList,uml::umlPackage::PROPERTY_CLASS);
 			break;
 		}
 		// uml::Classifier::allFeatures() : uml::Feature[*]: 2625373874
 		case umlPackage::CLASSIFIER_OPERATION_ALLFEATURES:
 		{
-			std::shared_ptr<Bag<uml::Feature> > resultList = this->allFeatures();
+			const std::shared_ptr<Bag<uml::Feature>>& resultList = this->allFeatures();
 			return eAnyBag(resultList,uml::umlPackage::FEATURE_CLASS);
 			break;
 		}
 		// uml::Classifier::allParents() : uml::Classifier[*]: 299467449
 		case umlPackage::CLASSIFIER_OPERATION_ALLPARENTS:
 		{
-			std::shared_ptr<Bag<uml::Classifier> > resultList = this->allParents();
+			const std::shared_ptr<Bag<uml::Classifier>>& resultList = this->allParents();
 			return eAnyBag(resultList,uml::umlPackage::CLASSIFIER_CLASS);
 			break;
 		}
 		// uml::Classifier::allRealizedInterfaces() : uml::Interface[*]: 1667853328
 		case umlPackage::CLASSIFIER_OPERATION_ALLREALIZEDINTERFACES:
 		{
-			std::shared_ptr<Bag<uml::Interface> > resultList = this->allRealizedInterfaces();
+			const std::shared_ptr<Bag<uml::Interface>>& resultList = this->allRealizedInterfaces();
 			return eAnyBag(resultList,uml::umlPackage::INTERFACE_CLASS);
 			break;
 		}
 		// uml::Classifier::allSlottableFeatures() : uml::StructuralFeature[*]: 1526814209
 		case umlPackage::CLASSIFIER_OPERATION_ALLSLOTTABLEFEATURES:
 		{
-			std::shared_ptr<Bag<uml::StructuralFeature> > resultList = this->allSlottableFeatures();
+			const std::shared_ptr<Bag<uml::StructuralFeature>>& resultList = this->allSlottableFeatures();
 			return eAnyBag(resultList,uml::umlPackage::STRUCTURALFEATURE_CLASS);
 			break;
 		}
 		// uml::Classifier::allUsedInterfaces() : uml::Interface[*]: 703777961
 		case umlPackage::CLASSIFIER_OPERATION_ALLUSEDINTERFACES:
 		{
-			std::shared_ptr<Bag<uml::Interface> > resultList = this->allUsedInterfaces();
+			const std::shared_ptr<Bag<uml::Interface>>& resultList = this->allUsedInterfaces();
 			return eAnyBag(resultList,uml::umlPackage::INTERFACE_CLASS);
 			break;
 		}
 		// uml::Classifier::directlyRealizedInterfaces() : uml::Interface[*]: 2958885839
 		case umlPackage::CLASSIFIER_OPERATION_DIRECTLYREALIZEDINTERFACES:
 		{
-			std::shared_ptr<Bag<uml::Interface> > resultList = this->directlyRealizedInterfaces();
+			const std::shared_ptr<Bag<uml::Interface>>& resultList = this->directlyRealizedInterfaces();
 			return eAnyBag(resultList,uml::umlPackage::INTERFACE_CLASS);
 			break;
 		}
 		// uml::Classifier::directlyUsedInterfaces() : uml::Interface[*]: 2666848748
 		case umlPackage::CLASSIFIER_OPERATION_DIRECTLYUSEDINTERFACES:
 		{
-			std::shared_ptr<Bag<uml::Interface> > resultList = this->directlyUsedInterfaces();
+			const std::shared_ptr<Bag<uml::Interface>>& resultList = this->directlyUsedInterfaces();
 			return eAnyBag(resultList,uml::umlPackage::INTERFACE_CLASS);
 			break;
 		}
 		// uml::Classifier::getAllAttributes() : uml::Property[*]: 385172867
 		case umlPackage::CLASSIFIER_OPERATION_GETALLATTRIBUTES:
 		{
-			std::shared_ptr<Bag<uml::Property> > resultList = this->getAllAttributes();
+			const std::shared_ptr<Bag<uml::Property>>& resultList = this->getAllAttributes();
 			return eAnyBag(resultList,uml::umlPackage::PROPERTY_CLASS);
 			break;
 		}
 		// uml::Classifier::getAllOperations() : uml::Operation[*]: 3362998652
 		case umlPackage::CLASSIFIER_OPERATION_GETALLOPERATIONS:
 		{
-			std::shared_ptr<Bag<uml::Operation> > resultList = this->getAllOperations();
+			const std::shared_ptr<Bag<uml::Operation>>& resultList = this->getAllOperations();
 			return eAnyBag(resultList,uml::umlPackage::OPERATION_CLASS);
 			break;
 		}
 		// uml::Classifier::getAllUsedInterfaces() : uml::Interface[*]: 1284650005
 		case umlPackage::CLASSIFIER_OPERATION_GETALLUSEDINTERFACES:
 		{
-			std::shared_ptr<Bag<uml::Interface> > resultList = this->getAllUsedInterfaces();
+			const std::shared_ptr<Bag<uml::Interface>>& resultList = this->getAllUsedInterfaces();
 			return eAnyBag(resultList,uml::umlPackage::INTERFACE_CLASS);
 			break;
 		}
 		// uml::Classifier::getGenerals() : uml::Classifier[*]: 3949457156
 		case umlPackage::CLASSIFIER_OPERATION_GETGENERALS:
 		{
-			std::shared_ptr<Bag<uml::Classifier> > resultList = this->getGenerals();
+			const std::shared_ptr<Bag<uml::Classifier>>& resultList = this->getGenerals();
 			return eAnyBag(resultList,uml::umlPackage::CLASSIFIER_CLASS);
 			break;
 		}
 		// uml::Classifier::getInheritedMembers() : uml::NamedElement[*]: 4185121864
 		case umlPackage::CLASSIFIER_OPERATION_GETINHERITEDMEMBERS:
 		{
-			std::shared_ptr<Bag<uml::NamedElement> > resultList = this->getInheritedMembers();
+			const std::shared_ptr<Bag<uml::NamedElement>>& resultList = this->getInheritedMembers();
 			return eAnyBag(resultList,uml::umlPackage::NAMEDELEMENT_CLASS);
 			break;
 		}
@@ -1921,7 +1921,7 @@ Any ClassifierImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any
 		// uml::Classifier::getOperations() : uml::Operation[*]: 1789810819
 		case umlPackage::CLASSIFIER_OPERATION_GETOPERATIONS:
 		{
-			std::shared_ptr<Bag<uml::Operation> > resultList = this->getOperations();
+			const std::shared_ptr<Bag<uml::Operation>>& resultList = this->getOperations();
 			return eAnyBag(resultList,uml::umlPackage::OPERATION_CLASS);
 			break;
 		}
@@ -1939,7 +1939,7 @@ Any ClassifierImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any
 		// uml::Classifier::getUsedInterfaces() : uml::Interface[*]: 2875330752
 		case umlPackage::CLASSIFIER_OPERATION_GETUSEDINTERFACES:
 		{
-			std::shared_ptr<Bag<uml::Interface> > resultList = this->getUsedInterfaces();
+			const std::shared_ptr<Bag<uml::Interface>>& resultList = this->getUsedInterfaces();
 			return eAnyBag(resultList,uml::umlPackage::INTERFACE_CLASS);
 			break;
 		}
@@ -1962,7 +1962,7 @@ Any ClassifierImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any
 			std::shared_ptr<Bag<uml::NamedElement>> incoming_param_inhs;
 			std::list<Any>::const_iterator incoming_param_inhs_arguments_citer = std::next(arguments->begin(), 0);
 			incoming_param_inhs = (*incoming_param_inhs_arguments_citer)->get<std::shared_ptr<Bag<uml::NamedElement>> >();
-			std::shared_ptr<Bag<uml::NamedElement> > resultList = this->inherit(incoming_param_inhs);
+			const std::shared_ptr<Bag<uml::NamedElement>>& resultList = this->inherit(incoming_param_inhs);
 			return eAnyBag(resultList,uml::umlPackage::NAMEDELEMENT_CLASS);
 			break;
 		}
@@ -1974,7 +1974,7 @@ Any ClassifierImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any
 			std::shared_ptr<uml::Classifier> incoming_param_c;
 			std::list<Any>::const_iterator incoming_param_c_arguments_citer = std::next(arguments->begin(), 0);
 			incoming_param_c = (*incoming_param_c_arguments_citer)->get<std::shared_ptr<uml::Classifier> >();
-			std::shared_ptr<Bag<uml::NamedElement> > resultList = this->inheritableMembers(incoming_param_c);
+			const std::shared_ptr<Bag<uml::NamedElement>>& resultList = this->inheritableMembers(incoming_param_c);
 			return eAnyBag(resultList,uml::umlPackage::NAMEDELEMENT_CLASS);
 			break;
 		}
@@ -2051,7 +2051,7 @@ Any ClassifierImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any
 		// uml::Classifier::parents() : uml::Classifier[*]: 3079307280
 		case umlPackage::CLASSIFIER_OPERATION_PARENTS:
 		{
-			std::shared_ptr<Bag<uml::Classifier> > resultList = this->parents();
+			const std::shared_ptr<Bag<uml::Classifier>>& resultList = this->parents();
 			return eAnyBag(resultList,uml::umlPackage::CLASSIFIER_CLASS);
 			break;
 		}

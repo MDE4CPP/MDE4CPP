@@ -251,7 +251,7 @@ namespace uml
 			<p>From package UML::Classification.</p>
 			*/
 			 
-			virtual std::shared_ptr<Bag<uml::Type> > subsettingContext() = 0;
+			virtual std::shared_ptr<Bag<uml::Type>> subsettingContext() = 0;
 			/*!
 			Subsetting may only occur when the context of the subsetting property conforms to the context of the subsetted property.
 			subsettedProperty->notEmpty() implies

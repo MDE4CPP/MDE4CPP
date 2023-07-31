@@ -238,7 +238,7 @@ void LocusImpl::remove(std::shared_ptr<fUML::Semantics::StructuredClassifiers::E
 	//end of body
 }
 
-std::shared_ptr<Bag<fUML::Semantics::StructuredClassifiers::ExtensionalValue> > LocusImpl::retrieveExtent(const std::shared_ptr<uml::Classifier>& classifier)
+std::shared_ptr<Bag<fUML::Semantics::StructuredClassifiers::ExtensionalValue>> LocusImpl::retrieveExtent(const std::shared_ptr<uml::Classifier>& classifier)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -623,7 +623,7 @@ Any LocusImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& a
 			std::shared_ptr<uml::Classifier> incoming_param_classifier;
 			std::list<Any>::const_iterator incoming_param_classifier_arguments_citer = std::next(arguments->begin(), 0);
 			incoming_param_classifier = (*incoming_param_classifier_arguments_citer)->get<std::shared_ptr<uml::Classifier> >();
-			std::shared_ptr<Bag<fUML::Semantics::StructuredClassifiers::ExtensionalValue> > resultList = this->retrieveExtent(incoming_param_classifier);
+			const std::shared_ptr<Bag<fUML::Semantics::StructuredClassifiers::ExtensionalValue>>& resultList = this->retrieveExtent(incoming_param_classifier);
 			return eAnyBag(resultList,fUML::Semantics::StructuredClassifiers::StructuredClassifiersPackage::EXTENSIONALVALUE_CLASS);
 			break;
 		}

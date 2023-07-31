@@ -263,37 +263,37 @@ std::shared_ptr<uml::PackageImport> NamespaceImpl::createPackageImport(const std
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-std::shared_ptr<Bag<uml::PackageableElement> > NamespaceImpl::excludeCollisions(const std::shared_ptr<Bag<uml::PackageableElement>>& imps)
+std::shared_ptr<Bag<uml::PackageableElement>> NamespaceImpl::excludeCollisions(const std::shared_ptr<Bag<uml::PackageableElement>>& imps)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-std::shared_ptr<Bag<uml::PackageableElement> > NamespaceImpl::getImportedElements()
+std::shared_ptr<Bag<uml::PackageableElement>> NamespaceImpl::getImportedElements()
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-std::shared_ptr<Bag<uml::PackageableElement> > NamespaceImpl::getImportedMembers()
+std::shared_ptr<Bag<uml::PackageableElement>> NamespaceImpl::getImportedMembers()
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-std::shared_ptr<Bag<uml::Package> > NamespaceImpl::getImportedPackages()
+std::shared_ptr<Bag<uml::Package>> NamespaceImpl::getImportedPackages()
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-std::shared_ptr<Bag<std::string> > NamespaceImpl::getNamesOfMember(const std::shared_ptr<uml::NamedElement>& element)
+std::shared_ptr<Bag<std::string>> NamespaceImpl::getNamesOfMember(const std::shared_ptr<uml::NamedElement>& element)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-std::shared_ptr<Bag<uml::NamedElement> > NamespaceImpl::getOwnedMembers()
+std::shared_ptr<Bag<uml::NamedElement>> NamespaceImpl::getOwnedMembers()
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-std::shared_ptr<Bag<uml::PackageableElement> > NamespaceImpl::importMembers(const std::shared_ptr<Bag<uml::PackageableElement>>& imps)
+std::shared_ptr<Bag<uml::PackageableElement>> NamespaceImpl::importMembers(const std::shared_ptr<Bag<uml::PackageableElement>>& imps)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -867,28 +867,28 @@ Any NamespaceImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>
 			std::shared_ptr<Bag<uml::PackageableElement>> incoming_param_imps;
 			std::list<Any>::const_iterator incoming_param_imps_arguments_citer = std::next(arguments->begin(), 0);
 			incoming_param_imps = (*incoming_param_imps_arguments_citer)->get<std::shared_ptr<Bag<uml::PackageableElement>> >();
-			std::shared_ptr<Bag<uml::PackageableElement> > resultList = this->excludeCollisions(incoming_param_imps);
+			const std::shared_ptr<Bag<uml::PackageableElement>>& resultList = this->excludeCollisions(incoming_param_imps);
 			return eAnyBag(resultList,uml::umlPackage::PACKAGEABLEELEMENT_CLASS);
 			break;
 		}
 		// uml::Namespace::getImportedElements() : uml::PackageableElement[*]: 2588792065
 		case umlPackage::NAMESPACE_OPERATION_GETIMPORTEDELEMENTS:
 		{
-			std::shared_ptr<Bag<uml::PackageableElement> > resultList = this->getImportedElements();
+			const std::shared_ptr<Bag<uml::PackageableElement>>& resultList = this->getImportedElements();
 			return eAnyBag(resultList,uml::umlPackage::PACKAGEABLEELEMENT_CLASS);
 			break;
 		}
 		// uml::Namespace::getImportedMembers() : uml::PackageableElement[*]: 2627629447
 		case umlPackage::NAMESPACE_OPERATION_GETIMPORTEDMEMBERS:
 		{
-			std::shared_ptr<Bag<uml::PackageableElement> > resultList = this->getImportedMembers();
+			const std::shared_ptr<Bag<uml::PackageableElement>>& resultList = this->getImportedMembers();
 			return eAnyBag(resultList,uml::umlPackage::PACKAGEABLEELEMENT_CLASS);
 			break;
 		}
 		// uml::Namespace::getImportedPackages() : uml::Package[*]: 1496815389
 		case umlPackage::NAMESPACE_OPERATION_GETIMPORTEDPACKAGES:
 		{
-			std::shared_ptr<Bag<uml::Package> > resultList = this->getImportedPackages();
+			const std::shared_ptr<Bag<uml::Package>>& resultList = this->getImportedPackages();
 			return eAnyBag(resultList,uml::umlPackage::PACKAGE_CLASS);
 			break;
 		}
@@ -906,7 +906,7 @@ Any NamespaceImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>
 		// uml::Namespace::getOwnedMembers() : uml::NamedElement[*]: 353105181
 		case umlPackage::NAMESPACE_OPERATION_GETOWNEDMEMBERS:
 		{
-			std::shared_ptr<Bag<uml::NamedElement> > resultList = this->getOwnedMembers();
+			const std::shared_ptr<Bag<uml::NamedElement>>& resultList = this->getOwnedMembers();
 			return eAnyBag(resultList,uml::umlPackage::NAMEDELEMENT_CLASS);
 			break;
 		}
@@ -918,7 +918,7 @@ Any NamespaceImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>
 			std::shared_ptr<Bag<uml::PackageableElement>> incoming_param_imps;
 			std::list<Any>::const_iterator incoming_param_imps_arguments_citer = std::next(arguments->begin(), 0);
 			incoming_param_imps = (*incoming_param_imps_arguments_citer)->get<std::shared_ptr<Bag<uml::PackageableElement>> >();
-			std::shared_ptr<Bag<uml::PackageableElement> > resultList = this->importMembers(incoming_param_imps);
+			const std::shared_ptr<Bag<uml::PackageableElement>>& resultList = this->importMembers(incoming_param_imps);
 			return eAnyBag(resultList,uml::umlPackage::PACKAGEABLEELEMENT_CLASS);
 			break;
 		}

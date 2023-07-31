@@ -271,7 +271,7 @@ std::shared_ptr<ecore::EObject> UseCaseImpl::copy() const
 //*********************************
 // Operations
 //*********************************
-std::shared_ptr<Bag<uml::UseCase> > UseCaseImpl::allIncludedUseCases()
+std::shared_ptr<Bag<uml::UseCase>> UseCaseImpl::allIncludedUseCases()
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -893,7 +893,7 @@ Any UseCaseImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>&
 		// uml::UseCase::allIncludedUseCases() : uml::UseCase[*]: 3794514740
 		case umlPackage::USECASE_OPERATION_ALLINCLUDEDUSECASES:
 		{
-			std::shared_ptr<Bag<uml::UseCase> > resultList = this->allIncludedUseCases();
+			const std::shared_ptr<Bag<uml::UseCase>>& resultList = this->allIncludedUseCases();
 			return eAnyBag(resultList,uml::umlPackage::USECASE_CLASS);
 			break;
 		}

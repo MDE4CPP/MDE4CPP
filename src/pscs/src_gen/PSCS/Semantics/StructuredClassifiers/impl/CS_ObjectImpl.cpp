@@ -377,7 +377,7 @@ std::shared_ptr<fUML::Semantics::CommonBehavior::Execution> CS_ObjectImpl::dispa
 	//end of body
 }
 
-std::shared_ptr<Bag<PSCS::Semantics::StructuredClassifiers::CS_Object> > CS_ObjectImpl::getDirectContainers()
+std::shared_ptr<Bag<PSCS::Semantics::StructuredClassifiers::CS_Object>> CS_ObjectImpl::getDirectContainers()
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -466,7 +466,7 @@ PSCS::Semantics::StructuredClassifiers::CS_LinkKind CS_ObjectImpl::getLinkKind(c
 	//end of body
 }
 
-std::shared_ptr<Bag<PSCS::Semantics::StructuredClassifiers::CS_Link> > CS_ObjectImpl::getLinks(const std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_InteractionPoint>& interactionPoint)
+std::shared_ptr<Bag<PSCS::Semantics::StructuredClassifiers::CS_Link>> CS_ObjectImpl::getLinks(const std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_InteractionPoint>& interactionPoint)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -663,7 +663,7 @@ bool CS_ObjectImpl::realizesInterface(const std::shared_ptr<uml::Class>& type, c
 	//end of body
 }
 
-std::shared_ptr<Bag<fUML::Semantics::StructuredClassifiers::Reference> > CS_ObjectImpl::selectTargetsForDispatching(const std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Link>& link, const std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_InteractionPoint>& interactionPoint, uml::ConnectorKind connectorKind, const std::shared_ptr<uml::Operation>& operation, bool toInternal)
+std::shared_ptr<Bag<fUML::Semantics::StructuredClassifiers::Reference>> CS_ObjectImpl::selectTargetsForDispatching(const std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Link>& link, const std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_InteractionPoint>& interactionPoint, uml::ConnectorKind connectorKind, const std::shared_ptr<uml::Operation>& operation, bool toInternal)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -760,7 +760,7 @@ std::shared_ptr<Bag<fUML::Semantics::StructuredClassifiers::Reference> > CS_Obje
 	//end of body
 }
 
-std::shared_ptr<Bag<fUML::Semantics::StructuredClassifiers::Reference> > CS_ObjectImpl::selectTargetsForSending(const std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Link>& link, const std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_InteractionPoint>& interactionPoint, uml::ConnectorKind connectorKind, bool toInternal)
+std::shared_ptr<Bag<fUML::Semantics::StructuredClassifiers::Reference>> CS_ObjectImpl::selectTargetsForSending(const std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Link>& link, const std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_InteractionPoint>& interactionPoint, uml::ConnectorKind connectorKind, bool toInternal)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -1247,7 +1247,7 @@ Any CS_ObjectImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>
 		// PSCS::Semantics::StructuredClassifiers::CS_Object::getDirectContainers() : PSCS::Semantics::StructuredClassifiers::CS_Object[*]: 3389575504
 		case StructuredClassifiersPackage::CS_OBJECT_OPERATION_GETDIRECTCONTAINERS:
 		{
-			std::shared_ptr<Bag<PSCS::Semantics::StructuredClassifiers::CS_Object> > resultList = this->getDirectContainers();
+			const std::shared_ptr<Bag<PSCS::Semantics::StructuredClassifiers::CS_Object>>& resultList = this->getDirectContainers();
 			return eAnyBag(resultList,PSCS::Semantics::StructuredClassifiers::StructuredClassifiersPackage::CS_OBJECT_CLASS);
 			break;
 		}
@@ -1286,7 +1286,7 @@ Any CS_ObjectImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>
 			std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_InteractionPoint> incoming_param_interactionPoint;
 			std::list<Any>::const_iterator incoming_param_interactionPoint_arguments_citer = std::next(arguments->begin(), 0);
 			incoming_param_interactionPoint = (*incoming_param_interactionPoint_arguments_citer)->get<std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_InteractionPoint> >();
-			std::shared_ptr<Bag<PSCS::Semantics::StructuredClassifiers::CS_Link> > resultList = this->getLinks(incoming_param_interactionPoint);
+			const std::shared_ptr<Bag<PSCS::Semantics::StructuredClassifiers::CS_Link>>& resultList = this->getLinks(incoming_param_interactionPoint);
 			return eAnyBag(resultList,PSCS::Semantics::StructuredClassifiers::StructuredClassifiersPackage::CS_LINK_CLASS);
 			break;
 		}
@@ -1393,7 +1393,7 @@ Any CS_ObjectImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>
 			bool incoming_param_toInternal;
 			std::list<Any>::const_iterator incoming_param_toInternal_arguments_citer = std::next(arguments->begin(), 4);
 			incoming_param_toInternal = (*incoming_param_toInternal_arguments_citer)->get<bool >();
-			std::shared_ptr<Bag<fUML::Semantics::StructuredClassifiers::Reference> > resultList = this->selectTargetsForDispatching(incoming_param_link,incoming_param_interactionPoint,incoming_param_connectorKind,incoming_param_operation,incoming_param_toInternal);
+			const std::shared_ptr<Bag<fUML::Semantics::StructuredClassifiers::Reference>>& resultList = this->selectTargetsForDispatching(incoming_param_link,incoming_param_interactionPoint,incoming_param_connectorKind,incoming_param_operation,incoming_param_toInternal);
 			return eAnyBag(resultList,fUML::Semantics::StructuredClassifiers::StructuredClassifiersPackage::REFERENCE_CLASS);
 			break;
 		}
@@ -1420,7 +1420,7 @@ Any CS_ObjectImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>
 			bool incoming_param_toInternal;
 			std::list<Any>::const_iterator incoming_param_toInternal_arguments_citer = std::next(arguments->begin(), 3);
 			incoming_param_toInternal = (*incoming_param_toInternal_arguments_citer)->get<bool >();
-			std::shared_ptr<Bag<fUML::Semantics::StructuredClassifiers::Reference> > resultList = this->selectTargetsForSending(incoming_param_link,incoming_param_interactionPoint,incoming_param_connectorKind,incoming_param_toInternal);
+			const std::shared_ptr<Bag<fUML::Semantics::StructuredClassifiers::Reference>>& resultList = this->selectTargetsForSending(incoming_param_link,incoming_param_interactionPoint,incoming_param_connectorKind,incoming_param_toInternal);
 			return eAnyBag(resultList,fUML::Semantics::StructuredClassifiers::StructuredClassifiersPackage::REFERENCE_CLASS);
 			break;
 		}

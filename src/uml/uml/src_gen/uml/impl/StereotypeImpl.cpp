@@ -262,7 +262,7 @@ bool StereotypeImpl::generalize(const Any& diagnostics, std::shared_ptr<std::map
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-std::shared_ptr<Bag<uml::Class> > StereotypeImpl::getAllExtendedMetaclasses()
+std::shared_ptr<Bag<uml::Class>> StereotypeImpl::getAllExtendedMetaclasses()
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -272,7 +272,7 @@ std::shared_ptr<ecore::EClass> StereotypeImpl::getDefinition()
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-std::shared_ptr<Bag<uml::Class> > StereotypeImpl::getExtendedMetaclasses()
+std::shared_ptr<Bag<uml::Class>> StereotypeImpl::getExtendedMetaclasses()
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -841,7 +841,7 @@ Any StereotypeImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any
 		// uml::Stereotype::getAllExtendedMetaclasses() : uml::Class[*]: 912925586
 		case umlPackage::STEREOTYPE_OPERATION_GETALLEXTENDEDMETACLASSES:
 		{
-			std::shared_ptr<Bag<uml::Class> > resultList = this->getAllExtendedMetaclasses();
+			const std::shared_ptr<Bag<uml::Class>>& resultList = this->getAllExtendedMetaclasses();
 			return eAnyBag(resultList,uml::umlPackage::CLASS_CLASS);
 			break;
 		}
@@ -854,7 +854,7 @@ Any StereotypeImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any
 		// uml::Stereotype::getExtendedMetaclasses() : uml::Class[*]: 1491956517
 		case umlPackage::STEREOTYPE_OPERATION_GETEXTENDEDMETACLASSES:
 		{
-			std::shared_ptr<Bag<uml::Class> > resultList = this->getExtendedMetaclasses();
+			const std::shared_ptr<Bag<uml::Class>>& resultList = this->getExtendedMetaclasses();
 			return eAnyBag(resultList,uml::umlPackage::CLASS_CLASS);
 			break;
 		}

@@ -57,7 +57,7 @@ namespace uml
 			<p>From package UML::UseCases.</p>
 			*/
 			 
-			virtual std::shared_ptr<Bag<uml::UseCase> > allIncludedUseCases() ;
+			virtual std::shared_ptr<Bag<uml::UseCase>> allIncludedUseCases() ;
 			/*!
 			UseCases can only be involved in binary Associations.
 			Association.allInstances()->forAll(a | a.memberEnd.type->includes(self) implies a.memberEnd->size() = 2)

@@ -342,7 +342,7 @@ std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivation> ActivityNod
 	//end of body
 }
 
-std::shared_ptr<Bag<fUML::Semantics::Activities::ActivityParameterNodeActivation> > ActivityNodeActivationGroupImpl::getOutputParameterNodeActivations()
+std::shared_ptr<Bag<fUML::Semantics::Activities::ActivityParameterNodeActivation>> ActivityNodeActivationGroupImpl::getOutputParameterNodeActivations()
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -1135,7 +1135,7 @@ Any ActivityNodeActivationGroupImpl::eInvoke(int operationID, const std::shared_
 		// fUML::Semantics::Activities::ActivityNodeActivationGroup::getOutputParameterNodeActivations() : fUML::Semantics::Activities::ActivityParameterNodeActivation[*]: 2536177538
 		case ActivitiesPackage::ACTIVITYNODEACTIVATIONGROUP_OPERATION_GETOUTPUTPARAMETERNODEACTIVATIONS:
 		{
-			std::shared_ptr<Bag<fUML::Semantics::Activities::ActivityParameterNodeActivation> > resultList = this->getOutputParameterNodeActivations();
+			const std::shared_ptr<Bag<fUML::Semantics::Activities::ActivityParameterNodeActivation>>& resultList = this->getOutputParameterNodeActivations();
 			return eAnyBag(resultList,fUML::Semantics::Activities::ActivitiesPackage::ACTIVITYPARAMETERNODEACTIVATION_CLASS);
 			break;
 		}

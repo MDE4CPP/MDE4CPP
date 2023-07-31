@@ -151,7 +151,7 @@ void AcceptEventActionActivationImpl::accept(const std::shared_ptr<fUML::Semanti
 	// execution with the context object.
 	DEBUG_MESSAGE(std::cout <<  std::string(__PRETTY_FUNCTION__)<< std::endl;)
 	std::shared_ptr<uml::AcceptEventAction> action = std::dynamic_pointer_cast<uml::AcceptEventAction>( getNode() );
-	std::shared_ptr<Bag<uml::OutputPin>> resultPins = action->getResult();
+	const std::shared_ptr<Bag<uml::OutputPin>>& resultPins = action->getResult();
 	if ( isRunning() )
 	{
 		DEBUG_MESSAGE(std::cout <<"Action is running." << std::endl; )
@@ -162,7 +162,7 @@ void AcceptEventActionActivationImpl::accept(const std::shared_ptr<fUML::Semanti
 			if (signalEventOccurrence != nullptr)
 			{
 				DEBUG_MESSAGE(std::cout <<"found signalEventOccurence." << std::endl; )
-				std::shared_ptr<fUML::Semantics::SimpleClassifiers::SignalInstance> signalInstance = signalEventOccurrence->getSignalInstance();
+				const std::shared_ptr<fUML::Semantics::SimpleClassifiers::SignalInstance>& signalInstance = signalEventOccurrence->getSignalInstance();
 				if(signalInstance != nullptr)
 				{
 					DEBUG_MESSAGE(std::cout << "found SignalInstance." << std::endl; )

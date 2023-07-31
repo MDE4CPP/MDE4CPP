@@ -457,7 +457,7 @@ void InstanceSpecificationImpl::saveContent(std::shared_ptr<persistence::interfa
 		}
 
 		// Save 'specification'
-		std::shared_ptr<uml::ValueSpecification> specification = this->getSpecification();
+		const std::shared_ptr<uml::ValueSpecification>& specification = this->getSpecification();
 		if (specification != nullptr)
 		{
 			saveHandler->addReference(specification, "specification", specification->eClass() != package->getValueSpecification_Class());

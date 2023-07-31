@@ -137,7 +137,7 @@ int ActivityEdgeInstanceImpl::countOfferedValue()
 	//end of body
 }
 
-std::shared_ptr<Bag<fUML::Semantics::Activities::Token> > ActivityEdgeInstanceImpl::getOfferedTokens()
+std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> ActivityEdgeInstanceImpl::getOfferedTokens()
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -202,7 +202,7 @@ void ActivityEdgeInstanceImpl::sendOffer(const std::shared_ptr<Bag<fUML::Semanti
 	//end of body
 }
 
-std::shared_ptr<Bag<fUML::Semantics::Activities::Token> > ActivityEdgeInstanceImpl::takeOfferedTokens()
+std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> ActivityEdgeInstanceImpl::takeOfferedTokens()
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -224,7 +224,7 @@ std::shared_ptr<Bag<fUML::Semantics::Activities::Token> > ActivityEdgeInstanceIm
 	//end of body
 }
 
-std::shared_ptr<Bag<fUML::Semantics::Activities::Token> > ActivityEdgeInstanceImpl::takeOfferedTokens(int maxCount)
+std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> ActivityEdgeInstanceImpl::takeOfferedTokens(int maxCount)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -633,7 +633,7 @@ Any ActivityEdgeInstanceImpl::eInvoke(int operationID, const std::shared_ptr<std
 		// fUML::Semantics::Activities::ActivityEdgeInstance::getOfferedTokens() : fUML::Semantics::Activities::Token[*]: 247253392
 		case ActivitiesPackage::ACTIVITYEDGEINSTANCE_OPERATION_GETOFFEREDTOKENS:
 		{
-			std::shared_ptr<Bag<fUML::Semantics::Activities::Token> > resultList = this->getOfferedTokens();
+			const std::shared_ptr<Bag<fUML::Semantics::Activities::Token>>& resultList = this->getOfferedTokens();
 			return eAnyBag(resultList,fUML::Semantics::Activities::ActivitiesPackage::TOKEN_CLASS);
 			break;
 		}
@@ -657,7 +657,7 @@ Any ActivityEdgeInstanceImpl::eInvoke(int operationID, const std::shared_ptr<std
 		// fUML::Semantics::Activities::ActivityEdgeInstance::takeOfferedTokens() : fUML::Semantics::Activities::Token[*]: 3785400521
 		case ActivitiesPackage::ACTIVITYEDGEINSTANCE_OPERATION_TAKEOFFEREDTOKENS:
 		{
-			std::shared_ptr<Bag<fUML::Semantics::Activities::Token> > resultList = this->takeOfferedTokens();
+			const std::shared_ptr<Bag<fUML::Semantics::Activities::Token>>& resultList = this->takeOfferedTokens();
 			return eAnyBag(resultList,fUML::Semantics::Activities::ActivitiesPackage::TOKEN_CLASS);
 			break;
 		}
@@ -669,7 +669,7 @@ Any ActivityEdgeInstanceImpl::eInvoke(int operationID, const std::shared_ptr<std
 			int incoming_param_maxCount;
 			std::list<Any>::const_iterator incoming_param_maxCount_arguments_citer = std::next(arguments->begin(), 0);
 			incoming_param_maxCount = (*incoming_param_maxCount_arguments_citer)->get<int >();
-			std::shared_ptr<Bag<fUML::Semantics::Activities::Token> > resultList = this->takeOfferedTokens(incoming_param_maxCount);
+			const std::shared_ptr<Bag<fUML::Semantics::Activities::Token>>& resultList = this->takeOfferedTokens(incoming_param_maxCount);
 			return eAnyBag(resultList,fUML::Semantics::Activities::ActivitiesPackage::TOKEN_CLASS);
 			break;
 		}

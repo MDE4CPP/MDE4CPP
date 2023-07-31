@@ -126,7 +126,7 @@ void PinActivationImpl::fire(const std::shared_ptr<Bag<fUML::Semantics::Activiti
 	//end of body
 }
 
-std::shared_ptr<Bag<fUML::Semantics::Activities::Token> > PinActivationImpl::takeOfferedTokens()
+std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> PinActivationImpl::takeOfferedTokens()
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -432,7 +432,7 @@ Any PinActivationImpl::eInvoke(int operationID, const std::shared_ptr<std::list<
 		// fUML::Semantics::Actions::PinActivation::takeOfferedTokens() : fUML::Semantics::Activities::Token[*]: 1396222683
 		case ActionsPackage::PINACTIVATION_OPERATION_TAKEOFFEREDTOKENS:
 		{
-			std::shared_ptr<Bag<fUML::Semantics::Activities::Token> > resultList = this->takeOfferedTokens();
+			const std::shared_ptr<Bag<fUML::Semantics::Activities::Token>>& resultList = this->takeOfferedTokens();
 			return eAnyBag(resultList,fUML::Semantics::Activities::ActivitiesPackage::TOKEN_CLASS);
 			break;
 		}

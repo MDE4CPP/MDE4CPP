@@ -401,7 +401,7 @@ void RemoveVariableValueActionImpl::saveContent(std::shared_ptr<persistence::int
 	{
 		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
 		// Save 'removeAt'
-		std::shared_ptr<uml::InputPin> removeAt = this->getRemoveAt();
+		const std::shared_ptr<uml::InputPin>& removeAt = this->getRemoveAt();
 		if (removeAt != nullptr)
 		{
 			saveHandler->addReference(removeAt, "removeAt", removeAt->eClass() != package->getInputPin_Class());

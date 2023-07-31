@@ -80,17 +80,17 @@ namespace uml
 			Retrieves the extensions owned by this profile, excluding non-required extensions if indicated.
 			*/
 			 
-			virtual std::shared_ptr<Bag<uml::Extension> > getOwnedExtensions(bool requiredOnly) ;
+			virtual std::shared_ptr<Bag<uml::Extension>> getOwnedExtensions(bool requiredOnly) ;
 			/*!
 			Retrieves the metaclasses referenced by this profile.
 			*/
 			 
-			virtual std::shared_ptr<Bag<uml::Class> > getReferencedMetaclasses() ;
+			virtual std::shared_ptr<Bag<uml::Class>> getReferencedMetaclasses() ;
 			/*!
 			Retrieves the metamodels referenced by this profile.
 			*/
 			 
-			virtual std::shared_ptr<Bag<uml::Model> > getReferencedMetamodels() ;
+			virtual std::shared_ptr<Bag<uml::Model>> getReferencedMetamodels() ;
 			/*!
 			Determines whether this profile is defined.
 			*/

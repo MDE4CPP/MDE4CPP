@@ -118,7 +118,7 @@ namespace uml
 			<p>From package UML::StructuredClassifiers.</p>
 			*/
 			 
-			virtual std::shared_ptr<Bag<uml::Type> > getEndTypes() = 0;
+			virtual std::shared_ptr<Bag<uml::Type>> getEndTypes() = 0;
 			/*!
 			Determines whether this association is a binary association, i.e. whether it has exactly two member ends.
 			*/

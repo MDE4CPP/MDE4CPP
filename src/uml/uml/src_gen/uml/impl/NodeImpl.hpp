@@ -61,7 +61,7 @@ namespace uml
 			Retrieves the communication paths in which this node is involved.
 			*/
 			 
-			virtual std::shared_ptr<Bag<uml::CommunicationPath> > getCommunicationPaths() ;
+			virtual std::shared_ptr<Bag<uml::CommunicationPath>> getCommunicationPaths() ;
 			/*!
 			The internal structure of a Node (if defined) consists solely of parts of type Node.
 			part->forAll(oclIsKindOf(Node))

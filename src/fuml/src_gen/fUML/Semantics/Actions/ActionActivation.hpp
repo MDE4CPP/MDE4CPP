@@ -99,11 +99,11 @@ namespace fUML::Semantics::Actions
 			//*********************************
 			virtual void addOutgoingEdge(const std::shared_ptr<fUML::Semantics::Activities::ActivityEdgeInstance>& edge) = 0;
 			virtual void addPinActivation(const std::shared_ptr<fUML::Semantics::Actions::PinActivation>& pinActivation) = 0;
-			virtual std::shared_ptr<Bag<fUML::Semantics::Activities::Token> > completeAction() = 0;
+			virtual std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> completeAction() = 0;
 			virtual void createNodeActivations() = 0;
 			virtual void doAction() = 0;
 			virtual void fire(std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> incomingTokens) = 0;
-			virtual std::shared_ptr<Bag<fUML::Semantics::Values::Value> > getTokens(const std::shared_ptr<uml::InputPin>& pin) = 0;
+			virtual std::shared_ptr<Bag<fUML::Semantics::Values::Value>> getTokens(const std::shared_ptr<uml::InputPin>& pin) = 0;
 			virtual void initialize(const std::shared_ptr<uml::ActivityNode>& node, const std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup>& group) = 0;
 			virtual bool isFirng() = 0;
 			virtual bool isReady() = 0;
@@ -114,8 +114,8 @@ namespace fUML::Semantics::Actions
 			virtual std::shared_ptr<fUML::Semantics::Actions::PinActivation> retrievePinActivation(const std::shared_ptr<uml::Pin>& pin) = 0;
 			virtual void run() = 0;
 			virtual void sendOffers() = 0;
-			virtual std::shared_ptr<Bag<fUML::Semantics::Activities::Token> > takeOfferedTokens() = 0;
-			virtual std::shared_ptr<Bag<fUML::Semantics::Values::Value> > takeTokens(const std::shared_ptr<uml::InputPin>& pin) = 0;
+			virtual std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> takeOfferedTokens() = 0;
+			virtual std::shared_ptr<Bag<fUML::Semantics::Values::Value>> takeTokens(const std::shared_ptr<uml::InputPin>& pin) = 0;
 			virtual void terminate() = 0;
 			virtual bool valueParticipatesInLink(const std::shared_ptr<fUML::Semantics::Values::Value>& value, const std::shared_ptr<fUML::Semantics::StructuredClassifiers::Link>& link) = 0;
 

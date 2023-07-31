@@ -276,7 +276,7 @@ void ActionActivationImpl::addPinActivation(const std::shared_ptr<fUML::Semantic
 	//end of body
 }
 
-std::shared_ptr<Bag<fUML::Semantics::Activities::Token> > ActionActivationImpl::completeAction()
+std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> ActionActivationImpl::completeAction()
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -385,7 +385,7 @@ void ActionActivationImpl::fire(std::shared_ptr<Bag<fUML::Semantics::Activities:
 	//end of body
 }
 
-std::shared_ptr<Bag<fUML::Semantics::Values::Value> > ActionActivationImpl::getTokens(const std::shared_ptr<uml::InputPin>& pin)
+std::shared_ptr<Bag<fUML::Semantics::Values::Value>> ActionActivationImpl::getTokens(const std::shared_ptr<uml::InputPin>& pin)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -605,7 +605,7 @@ void ActionActivationImpl::sendOffers()
 	//end of body
 }
 
-std::shared_ptr<Bag<fUML::Semantics::Activities::Token> > ActionActivationImpl::takeOfferedTokens()
+std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> ActionActivationImpl::takeOfferedTokens()
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -657,7 +657,7 @@ DEBUG_MESSAGE(std::cout<<"-- printing from ActionActivation::"<<__FUNCTION__<<" 
 	//end of body
 }
 
-std::shared_ptr<Bag<fUML::Semantics::Values::Value> > ActionActivationImpl::takeTokens(const std::shared_ptr<uml::InputPin>& pin)
+std::shared_ptr<Bag<fUML::Semantics::Values::Value>> ActionActivationImpl::takeTokens(const std::shared_ptr<uml::InputPin>& pin)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -1231,7 +1231,7 @@ Any ActionActivationImpl::eInvoke(int operationID, const std::shared_ptr<std::li
 		// fUML::Semantics::Actions::ActionActivation::completeAction() : fUML::Semantics::Activities::Token[*]: 3464717817
 		case ActionsPackage::ACTIONACTIVATION_OPERATION_COMPLETEACTION:
 		{
-			std::shared_ptr<Bag<fUML::Semantics::Activities::Token> > resultList = this->completeAction();
+			const std::shared_ptr<Bag<fUML::Semantics::Activities::Token>>& resultList = this->completeAction();
 			return eAnyBag(resultList,fUML::Semantics::Activities::ActivitiesPackage::TOKEN_CLASS);
 			break;
 		}
@@ -1266,7 +1266,7 @@ Any ActionActivationImpl::eInvoke(int operationID, const std::shared_ptr<std::li
 			std::shared_ptr<uml::InputPin> incoming_param_pin;
 			std::list<Any>::const_iterator incoming_param_pin_arguments_citer = std::next(arguments->begin(), 0);
 			incoming_param_pin = (*incoming_param_pin_arguments_citer)->get<std::shared_ptr<uml::InputPin> >();
-			std::shared_ptr<Bag<fUML::Semantics::Values::Value> > resultList = this->getTokens(incoming_param_pin);
+			const std::shared_ptr<Bag<fUML::Semantics::Values::Value>>& resultList = this->getTokens(incoming_param_pin);
 			return eAnyBag(resultList,fUML::Semantics::Values::ValuesPackage::VALUE_CLASS);
 			break;
 		}
@@ -1378,7 +1378,7 @@ Any ActionActivationImpl::eInvoke(int operationID, const std::shared_ptr<std::li
 		// fUML::Semantics::Actions::ActionActivation::takeOfferedTokens() : fUML::Semantics::Activities::Token[*]: 4135421142
 		case ActionsPackage::ACTIONACTIVATION_OPERATION_TAKEOFFEREDTOKENS:
 		{
-			std::shared_ptr<Bag<fUML::Semantics::Activities::Token> > resultList = this->takeOfferedTokens();
+			const std::shared_ptr<Bag<fUML::Semantics::Activities::Token>>& resultList = this->takeOfferedTokens();
 			return eAnyBag(resultList,fUML::Semantics::Activities::ActivitiesPackage::TOKEN_CLASS);
 			break;
 		}
@@ -1390,7 +1390,7 @@ Any ActionActivationImpl::eInvoke(int operationID, const std::shared_ptr<std::li
 			std::shared_ptr<uml::InputPin> incoming_param_pin;
 			std::list<Any>::const_iterator incoming_param_pin_arguments_citer = std::next(arguments->begin(), 0);
 			incoming_param_pin = (*incoming_param_pin_arguments_citer)->get<std::shared_ptr<uml::InputPin> >();
-			std::shared_ptr<Bag<fUML::Semantics::Values::Value> > resultList = this->takeTokens(incoming_param_pin);
+			const std::shared_ptr<Bag<fUML::Semantics::Values::Value>>& resultList = this->takeTokens(incoming_param_pin);
 			return eAnyBag(resultList,fUML::Semantics::Values::ValuesPackage::VALUE_CLASS);
 			break;
 		}

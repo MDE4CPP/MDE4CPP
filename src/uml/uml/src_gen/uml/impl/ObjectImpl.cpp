@@ -108,7 +108,7 @@ Any ObjectImpl::get(const std::shared_ptr<uml::Property>& property) const
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-std::shared_ptr<Bag<uml::Object> > ObjectImpl::invoke(const std::shared_ptr<uml::Operation>& op, const std::shared_ptr<Bag<uml::Argument>>& arguments)
+std::shared_ptr<Bag<uml::Object>> ObjectImpl::invoke(const std::shared_ptr<uml::Operation>& op, const std::shared_ptr<Bag<uml::Argument>>& arguments)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -264,7 +264,7 @@ Any ObjectImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& 
 			std::shared_ptr<Bag<uml::Argument>> incoming_param_arguments;
 			std::list<Any>::const_iterator incoming_param_arguments_arguments_citer = std::next(arguments->begin(), 1);
 			incoming_param_arguments = (*incoming_param_arguments_arguments_citer)->get<std::shared_ptr<Bag<uml::Argument>> >();
-			std::shared_ptr<Bag<uml::Object> > resultList = this->invoke(incoming_param_op,incoming_param_arguments);
+			const std::shared_ptr<Bag<uml::Object>>& resultList = this->invoke(incoming_param_op,incoming_param_arguments);
 			return eAnyBag(resultList,uml::umlPackage::OBJECT_CLASS);
 			break;
 		}

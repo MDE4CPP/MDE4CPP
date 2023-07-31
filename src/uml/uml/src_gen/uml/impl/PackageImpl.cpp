@@ -370,12 +370,12 @@ std::shared_ptr<ecore::EObject> PackageImpl::copy() const
 //*********************************
 // Operations
 //*********************************
-std::shared_ptr<Bag<uml::Stereotype> > PackageImpl::allApplicableStereotypes()
+std::shared_ptr<Bag<uml::Stereotype>> PackageImpl::allApplicableStereotypes()
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-std::shared_ptr<Bag<ecore::EObject> > PackageImpl::applyProfile(const std::shared_ptr<uml::Profile>& profile)
+std::shared_ptr<Bag<ecore::EObject>> PackageImpl::applyProfile(const std::shared_ptr<uml::Profile>& profile)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -415,12 +415,12 @@ bool PackageImpl::elements_public_or_private(const Any& diagnostics, std::shared
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-std::shared_ptr<Bag<uml::Profile> > PackageImpl::getAllAppliedProfiles()
+std::shared_ptr<Bag<uml::Profile>> PackageImpl::getAllAppliedProfiles()
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-std::shared_ptr<Bag<uml::ProfileApplication> > PackageImpl::getAllProfileApplications()
+std::shared_ptr<Bag<uml::ProfileApplication>> PackageImpl::getAllProfileApplications()
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -435,22 +435,22 @@ std::shared_ptr<uml::Profile> PackageImpl::getAppliedProfile(std::string qualifi
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-std::shared_ptr<Bag<uml::Profile> > PackageImpl::getAppliedProfiles()
+std::shared_ptr<Bag<uml::Profile>> PackageImpl::getAppliedProfiles()
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-std::shared_ptr<Bag<uml::Package> > PackageImpl::getNestedPackages()
+std::shared_ptr<Bag<uml::Package>> PackageImpl::getNestedPackages()
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-std::shared_ptr<Bag<uml::Stereotype> > PackageImpl::getOwnedStereotypes()
+std::shared_ptr<Bag<uml::Stereotype>> PackageImpl::getOwnedStereotypes()
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-std::shared_ptr<Bag<uml::Type> > PackageImpl::getOwnedTypes()
+std::shared_ptr<Bag<uml::Type>> PackageImpl::getOwnedTypes()
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -480,12 +480,12 @@ bool PackageImpl::makesVisible(const std::shared_ptr<uml::NamedElement>& el)
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-std::shared_ptr<Bag<ecore::EObject> > PackageImpl::unapplyProfile(const std::shared_ptr<uml::Profile>& profile)
+std::shared_ptr<Bag<ecore::EObject>> PackageImpl::unapplyProfile(const std::shared_ptr<uml::Profile>& profile)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-std::shared_ptr<Bag<uml::PackageableElement> > PackageImpl::visibleMembers()
+std::shared_ptr<Bag<uml::PackageableElement>> PackageImpl::visibleMembers()
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -1290,7 +1290,7 @@ Any PackageImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>&
 		// uml::Package::allApplicableStereotypes() : uml::Stereotype[*]: 3081223090
 		case umlPackage::PACKAGE_OPERATION_ALLAPPLICABLESTEREOTYPES:
 		{
-			std::shared_ptr<Bag<uml::Stereotype> > resultList = this->allApplicableStereotypes();
+			const std::shared_ptr<Bag<uml::Stereotype>>& resultList = this->allApplicableStereotypes();
 			return eAnyBag(resultList,uml::umlPackage::STEREOTYPE_CLASS);
 			break;
 		}
@@ -1302,7 +1302,7 @@ Any PackageImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>&
 			std::shared_ptr<uml::Profile> incoming_param_profile;
 			std::list<Any>::const_iterator incoming_param_profile_arguments_citer = std::next(arguments->begin(), 0);
 			incoming_param_profile = (*incoming_param_profile_arguments_citer)->get<std::shared_ptr<uml::Profile> >();
-			std::shared_ptr<Bag<ecore::EObject> > resultList = this->applyProfile(incoming_param_profile);
+			const std::shared_ptr<Bag<ecore::EObject>>& resultList = this->applyProfile(incoming_param_profile);
 			return eAnyBag(resultList,ecore::ecorePackage::EOBJECT_CLASS);
 			break;
 		}
@@ -1396,14 +1396,14 @@ Any PackageImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>&
 		// uml::Package::getAllAppliedProfiles() : uml::Profile[*]: 1897955286
 		case umlPackage::PACKAGE_OPERATION_GETALLAPPLIEDPROFILES:
 		{
-			std::shared_ptr<Bag<uml::Profile> > resultList = this->getAllAppliedProfiles();
+			const std::shared_ptr<Bag<uml::Profile>>& resultList = this->getAllAppliedProfiles();
 			return eAnyBag(resultList,uml::umlPackage::PROFILE_CLASS);
 			break;
 		}
 		// uml::Package::getAllProfileApplications() : uml::ProfileApplication[*]: 3294067191
 		case umlPackage::PACKAGE_OPERATION_GETALLPROFILEAPPLICATIONS:
 		{
-			std::shared_ptr<Bag<uml::ProfileApplication> > resultList = this->getAllProfileApplications();
+			const std::shared_ptr<Bag<uml::ProfileApplication>>& resultList = this->getAllProfileApplications();
 			return eAnyBag(resultList,uml::umlPackage::PROFILEAPPLICATION_CLASS);
 			break;
 		}
@@ -1437,28 +1437,28 @@ Any PackageImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>&
 		// uml::Package::getAppliedProfiles() : uml::Profile[*]: 2071132101
 		case umlPackage::PACKAGE_OPERATION_GETAPPLIEDPROFILES:
 		{
-			std::shared_ptr<Bag<uml::Profile> > resultList = this->getAppliedProfiles();
+			const std::shared_ptr<Bag<uml::Profile>>& resultList = this->getAppliedProfiles();
 			return eAnyBag(resultList,uml::umlPackage::PROFILE_CLASS);
 			break;
 		}
 		// uml::Package::getNestedPackages() : uml::Package[*]: 2155135055
 		case umlPackage::PACKAGE_OPERATION_GETNESTEDPACKAGES:
 		{
-			std::shared_ptr<Bag<uml::Package> > resultList = this->getNestedPackages();
+			const std::shared_ptr<Bag<uml::Package>>& resultList = this->getNestedPackages();
 			return eAnyBag(resultList,uml::umlPackage::PACKAGE_CLASS);
 			break;
 		}
 		// uml::Package::getOwnedStereotypes() : uml::Stereotype[*]: 2086351653
 		case umlPackage::PACKAGE_OPERATION_GETOWNEDSTEREOTYPES:
 		{
-			std::shared_ptr<Bag<uml::Stereotype> > resultList = this->getOwnedStereotypes();
+			const std::shared_ptr<Bag<uml::Stereotype>>& resultList = this->getOwnedStereotypes();
 			return eAnyBag(resultList,uml::umlPackage::STEREOTYPE_CLASS);
 			break;
 		}
 		// uml::Package::getOwnedTypes() : uml::Type[*]: 2779567969
 		case umlPackage::PACKAGE_OPERATION_GETOWNEDTYPES:
 		{
-			std::shared_ptr<Bag<uml::Type> > resultList = this->getOwnedTypes();
+			const std::shared_ptr<Bag<uml::Type>>& resultList = this->getOwnedTypes();
 			return eAnyBag(resultList,uml::umlPackage::TYPE_CLASS);
 			break;
 		}
@@ -1525,14 +1525,14 @@ Any PackageImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>&
 			std::shared_ptr<uml::Profile> incoming_param_profile;
 			std::list<Any>::const_iterator incoming_param_profile_arguments_citer = std::next(arguments->begin(), 0);
 			incoming_param_profile = (*incoming_param_profile_arguments_citer)->get<std::shared_ptr<uml::Profile> >();
-			std::shared_ptr<Bag<ecore::EObject> > resultList = this->unapplyProfile(incoming_param_profile);
+			const std::shared_ptr<Bag<ecore::EObject>>& resultList = this->unapplyProfile(incoming_param_profile);
 			return eAnyBag(resultList,ecore::ecorePackage::EOBJECT_CLASS);
 			break;
 		}
 		// uml::Package::visibleMembers() : uml::PackageableElement[*]: 3140448168
 		case umlPackage::PACKAGE_OPERATION_VISIBLEMEMBERS:
 		{
-			std::shared_ptr<Bag<uml::PackageableElement> > resultList = this->visibleMembers();
+			const std::shared_ptr<Bag<uml::PackageableElement>>& resultList = this->visibleMembers();
 			return eAnyBag(resultList,uml::umlPackage::PACKAGEABLEELEMENT_CLASS);
 			break;
 		}

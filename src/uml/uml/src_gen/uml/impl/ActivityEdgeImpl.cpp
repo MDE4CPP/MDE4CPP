@@ -654,14 +654,14 @@ void ActivityEdgeImpl::saveContent(std::shared_ptr<persistence::interfaces::XSav
 	{
 		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
 		// Save 'guard'
-		std::shared_ptr<uml::ValueSpecification> guard = this->getGuard();
+		const std::shared_ptr<uml::ValueSpecification>& guard = this->getGuard();
 		if (guard != nullptr)
 		{
 			saveHandler->addReference(guard, "guard", guard->eClass() != package->getValueSpecification_Class());
 		}
 
 		// Save 'weight'
-		std::shared_ptr<uml::ValueSpecification> weight = this->getWeight();
+		const std::shared_ptr<uml::ValueSpecification>& weight = this->getWeight();
 		if (weight != nullptr)
 		{
 			saveHandler->addReference(weight, "weight", weight->eClass() != package->getValueSpecification_Class());

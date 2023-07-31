@@ -72,7 +72,7 @@ namespace fUML::Semantics::SimpleClassifiers
 			//*********************************
 			virtual std::shared_ptr<fUML::Semantics::Values::Value> _copy() = 0;
 			virtual bool equals(const std::shared_ptr<fUML::Semantics::Values::Value>& otherValue) = 0;
-			virtual std::shared_ptr<Bag<uml::Classifier> > getTypes() = 0;
+			virtual std::shared_ptr<Bag<uml::Classifier>> getTypes() = 0;
 			virtual std::shared_ptr<fUML::Semantics::Values::Value> new_() = 0;
 			virtual std::shared_ptr<uml::ValueSpecification> specify() = 0;
 			virtual std::string toString() = 0;

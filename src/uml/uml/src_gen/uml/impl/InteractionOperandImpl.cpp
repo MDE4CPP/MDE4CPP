@@ -428,7 +428,7 @@ void InteractionOperandImpl::saveContent(std::shared_ptr<persistence::interfaces
 		}
 
 		// Save 'guard'
-		std::shared_ptr<uml::InteractionConstraint> guard = this->getGuard();
+		const std::shared_ptr<uml::InteractionConstraint>& guard = this->getGuard();
 		if (guard != nullptr)
 		{
 			saveHandler->addReference(guard, "guard", guard->eClass() != package->getInteractionConstraint_Class());

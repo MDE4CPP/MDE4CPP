@@ -459,7 +459,7 @@ void ExtendImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandl
 	{
 		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
 		// Save 'condition'
-		std::shared_ptr<uml::Constraint> condition = this->getCondition();
+		const std::shared_ptr<uml::Constraint>& condition = this->getCondition();
 		if (condition != nullptr)
 		{
 			saveHandler->addReference(condition, "condition", condition->eClass() != package->getConstraint_Class());

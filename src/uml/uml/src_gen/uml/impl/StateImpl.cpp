@@ -896,21 +896,21 @@ void StateImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandle
 		}
 
 		// Save 'doActivity'
-		std::shared_ptr<uml::Behavior> doActivity = this->getDoActivity();
+		const std::shared_ptr<uml::Behavior>& doActivity = this->getDoActivity();
 		if (doActivity != nullptr)
 		{
 			saveHandler->addReference(doActivity, "doActivity", doActivity->eClass() != package->getBehavior_Class());
 		}
 
 		// Save 'entry'
-		std::shared_ptr<uml::Behavior> entry = this->getEntry();
+		const std::shared_ptr<uml::Behavior>& entry = this->getEntry();
 		if (entry != nullptr)
 		{
 			saveHandler->addReference(entry, "entry", entry->eClass() != package->getBehavior_Class());
 		}
 
 		// Save 'exit'
-		std::shared_ptr<uml::Behavior> exit = this->getExit();
+		const std::shared_ptr<uml::Behavior>& exit = this->getExit();
 		if (exit != nullptr)
 		{
 			saveHandler->addReference(exit, "exit", exit->eClass() != package->getBehavior_Class());

@@ -147,7 +147,7 @@ bool TemplateableElementImpl::isTemplate()
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-std::shared_ptr<Bag<uml::ParameterableElement> > TemplateableElementImpl::parameterableElements()
+std::shared_ptr<Bag<uml::ParameterableElement>> TemplateableElementImpl::parameterableElements()
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -309,7 +309,7 @@ void TemplateableElementImpl::saveContent(std::shared_ptr<persistence::interface
 	{
 		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
 		// Save 'ownedTemplateSignature'
-		std::shared_ptr<uml::TemplateSignature> ownedTemplateSignature = this->getOwnedTemplateSignature();
+		const std::shared_ptr<uml::TemplateSignature>& ownedTemplateSignature = this->getOwnedTemplateSignature();
 		if (ownedTemplateSignature != nullptr)
 		{
 			saveHandler->addReference(ownedTemplateSignature, "ownedTemplateSignature", ownedTemplateSignature->eClass() != package->getTemplateSignature_Class());
@@ -431,7 +431,7 @@ Any TemplateableElementImpl::eInvoke(int operationID, const std::shared_ptr<std:
 		// uml::TemplateableElement::parameterableElements() : uml::ParameterableElement[*]: 3445105528
 		case umlPackage::TEMPLATEABLEELEMENT_OPERATION_PARAMETERABLEELEMENTS:
 		{
-			std::shared_ptr<Bag<uml::ParameterableElement> > resultList = this->parameterableElements();
+			const std::shared_ptr<Bag<uml::ParameterableElement>>& resultList = this->parameterableElements();
 			return eAnyBag(resultList,uml::umlPackage::PARAMETERABLEELEMENT_CLASS);
 			break;
 		}

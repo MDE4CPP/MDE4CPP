@@ -299,7 +299,7 @@ std::shared_ptr<fUML::Semantics::Values::Value> DecisionNodeActivationImpl::getD
 	//end of body
 }
 
-std::shared_ptr<Bag<fUML::Semantics::Values::Value> > DecisionNodeActivationImpl::getDecisionValues(const std::shared_ptr<Bag<fUML::Semantics::Activities::Token>>& incomingTokens)
+std::shared_ptr<Bag<fUML::Semantics::Values::Value>> DecisionNodeActivationImpl::getDecisionValues(const std::shared_ptr<Bag<fUML::Semantics::Activities::Token>>& incomingTokens)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -368,7 +368,7 @@ bool DecisionNodeActivationImpl::isReady()
 	//end of body
 }
 
-std::shared_ptr<Bag<fUML::Semantics::Activities::Token> > DecisionNodeActivationImpl::removeJoinedControlTokens(const std::shared_ptr<Bag<fUML::Semantics::Activities::Token>>& incomingTokens)
+std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> DecisionNodeActivationImpl::removeJoinedControlTokens(const std::shared_ptr<Bag<fUML::Semantics::Activities::Token>>& incomingTokens)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -394,7 +394,7 @@ std::shared_ptr<Bag<fUML::Semantics::Activities::Token> > DecisionNodeActivation
 	//end of body
 }
 
-std::shared_ptr<Bag<fUML::Semantics::Activities::Token> > DecisionNodeActivationImpl::takeOfferedTokens()
+std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> DecisionNodeActivationImpl::takeOfferedTokens()
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -747,7 +747,7 @@ Any DecisionNodeActivationImpl::eInvoke(int operationID, const std::shared_ptr<s
 			std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> incoming_param_incomingTokens;
 			std::list<Any>::const_iterator incoming_param_incomingTokens_arguments_citer = std::next(arguments->begin(), 0);
 			incoming_param_incomingTokens = (*incoming_param_incomingTokens_arguments_citer)->get<std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> >();
-			std::shared_ptr<Bag<fUML::Semantics::Values::Value> > resultList = this->getDecisionValues(incoming_param_incomingTokens);
+			const std::shared_ptr<Bag<fUML::Semantics::Values::Value>>& resultList = this->getDecisionValues(incoming_param_incomingTokens);
 			return eAnyBag(resultList,fUML::Semantics::Values::ValuesPackage::VALUE_CLASS);
 			break;
 		}
@@ -771,14 +771,14 @@ Any DecisionNodeActivationImpl::eInvoke(int operationID, const std::shared_ptr<s
 			std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> incoming_param_incomingTokens;
 			std::list<Any>::const_iterator incoming_param_incomingTokens_arguments_citer = std::next(arguments->begin(), 0);
 			incoming_param_incomingTokens = (*incoming_param_incomingTokens_arguments_citer)->get<std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> >();
-			std::shared_ptr<Bag<fUML::Semantics::Activities::Token> > resultList = this->removeJoinedControlTokens(incoming_param_incomingTokens);
+			const std::shared_ptr<Bag<fUML::Semantics::Activities::Token>>& resultList = this->removeJoinedControlTokens(incoming_param_incomingTokens);
 			return eAnyBag(resultList,fUML::Semantics::Activities::ActivitiesPackage::TOKEN_CLASS);
 			break;
 		}
 		// fUML::Semantics::Activities::DecisionNodeActivation::takeOfferedTokens() : fUML::Semantics::Activities::Token[*]: 121080352
 		case ActivitiesPackage::DECISIONNODEACTIVATION_OPERATION_TAKEOFFEREDTOKENS:
 		{
-			std::shared_ptr<Bag<fUML::Semantics::Activities::Token> > resultList = this->takeOfferedTokens();
+			const std::shared_ptr<Bag<fUML::Semantics::Activities::Token>>& resultList = this->takeOfferedTokens();
 			return eAnyBag(resultList,fUML::Semantics::Activities::ActivitiesPackage::TOKEN_CLASS);
 			break;
 		}

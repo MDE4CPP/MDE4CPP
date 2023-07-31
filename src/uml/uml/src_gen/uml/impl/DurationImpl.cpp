@@ -387,7 +387,7 @@ void DurationImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHan
 	{
 		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
 		// Save 'expr'
-		std::shared_ptr<uml::ValueSpecification> expr = this->getExpr();
+		const std::shared_ptr<uml::ValueSpecification>& expr = this->getExpr();
 		if (expr != nullptr)
 		{
 			saveHandler->addReference(expr, "expr", expr->eClass() != package->getValueSpecification_Class());

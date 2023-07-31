@@ -194,7 +194,7 @@ EncapsulatedClassifierImpl& EncapsulatedClassifierImpl::operator=(const Encapsul
 //*********************************
 // Operations
 //*********************************
-std::shared_ptr<Bag<uml::Port> > EncapsulatedClassifierImpl::getOwnedPorts()
+std::shared_ptr<Bag<uml::Port>> EncapsulatedClassifierImpl::getOwnedPorts()
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -552,7 +552,7 @@ Any EncapsulatedClassifierImpl::eInvoke(int operationID, const std::shared_ptr<s
 		// uml::EncapsulatedClassifier::getOwnedPorts() : uml::Port[*]: 1835476817
 		case umlPackage::ENCAPSULATEDCLASSIFIER_OPERATION_GETOWNEDPORTS:
 		{
-			std::shared_ptr<Bag<uml::Port> > resultList = this->getOwnedPorts();
+			const std::shared_ptr<Bag<uml::Port>>& resultList = this->getOwnedPorts();
 			return eAnyBag(resultList,uml::umlPackage::PORT_CLASS);
 			break;
 		}

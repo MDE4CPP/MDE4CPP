@@ -138,7 +138,7 @@ namespace uml
 			<p>From package UML::StructuredClassifiers.</p>
 			*/
 			 
-			virtual std::shared_ptr<Bag<uml::Interface> > getProvideds() = 0;
+			virtual std::shared_ptr<Bag<uml::Interface>> getProvideds() = 0;
 			/*!
 			Derivation for Component::/required
 			result = (let 	uis : Set(Interface) = allUsedInterfaces(),
@@ -152,7 +152,7 @@ namespace uml
 			<p>From package UML::StructuredClassifiers.</p>
 			*/
 			 
-			virtual std::shared_ptr<Bag<uml::Interface> > getRequireds() = 0;
+			virtual std::shared_ptr<Bag<uml::Interface>> getRequireds() = 0;
 			/*!
 			A Component cannot nest Classifiers.
 			nestedClassifier->isEmpty()

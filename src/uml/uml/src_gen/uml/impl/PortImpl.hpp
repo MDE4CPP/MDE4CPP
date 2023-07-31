@@ -67,14 +67,14 @@ namespace uml
 			<p>From package UML::StructuredClassifiers.</p>
 			*/
 			 
-			virtual std::shared_ptr<Bag<uml::Interface> > basicProvided() ;
+			virtual std::shared_ptr<Bag<uml::Interface>> basicProvided() ;
 			/*!
 			The union of the sets of Interfaces used by the type of the Port and its supertypes.
 			result = ( type.oclAsType(Classifier).allUsedInterfaces() )
 			<p>From package UML::StructuredClassifiers.</p>
 			*/
 			 
-			virtual std::shared_ptr<Bag<uml::Interface> > basicRequired() ;
+			virtual std::shared_ptr<Bag<uml::Interface>> basicRequired() ;
 			/*!
 			A defaultValue for port cannot be specified when the type of the Port is an Interface.
 			type.oclIsKindOf(Interface) implies defaultValue->isEmpty()
@@ -93,14 +93,14 @@ namespace uml
 			<p>From package UML::StructuredClassifiers.</p>
 			*/
 			 
-			virtual std::shared_ptr<Bag<uml::Interface> > getProvideds() ;
+			virtual std::shared_ptr<Bag<uml::Interface>> getProvideds() ;
 			/*!
 			Derivation for Port::/required
 			result = (if isConjugated then basicProvided() else basicRequired() endif)
 			<p>From package UML::StructuredClassifiers.</p>
 			*/
 			 
-			virtual std::shared_ptr<Bag<uml::Interface> > getRequireds() ;
+			virtual std::shared_ptr<Bag<uml::Interface>> getRequireds() ;
 			/*!
 			Port.aggregation must be composite.
 			aggregation = AggregationKind::composite

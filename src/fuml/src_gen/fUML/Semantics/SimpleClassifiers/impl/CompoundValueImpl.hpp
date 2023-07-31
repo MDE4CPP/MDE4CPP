@@ -48,7 +48,7 @@ namespace fUML::Semantics::SimpleClassifiers
 			virtual bool equals(const std::shared_ptr<fUML::Semantics::Values::Value>& otherValue) ;
 			virtual void removeFeatureValues(const std::shared_ptr<uml::Classifier>& classifier) ;
 			virtual std::shared_ptr<fUML::Semantics::SimpleClassifiers::FeatureValue> retrieveFeatureValue(const std::shared_ptr<uml::StructuralFeature>& feature) ;
-			virtual std::shared_ptr<Bag<fUML::Semantics::SimpleClassifiers::FeatureValue> > retrieveFeatureValues() ;
+			virtual std::shared_ptr<Bag<fUML::Semantics::SimpleClassifiers::FeatureValue>> retrieveFeatureValues() ;
 			virtual std::string toString() ;
 			
 			//*********************************

@@ -92,7 +92,7 @@ namespace fUML::Semantics::Activities
 			virtual std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivation> createNodeActivation(const std::shared_ptr<uml::ActivityNode>& node) = 0;
 			virtual void createNodeActivations(const std::shared_ptr<Bag<uml::ActivityNode>>& nodes) = 0;
 			virtual std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivation> getNodeActivation(const std::shared_ptr<uml::ActivityNode>& node) = 0;
-			virtual std::shared_ptr<Bag<fUML::Semantics::Activities::ActivityParameterNodeActivation> > getOutputParameterNodeActivations() = 0;
+			virtual std::shared_ptr<Bag<fUML::Semantics::Activities::ActivityParameterNodeActivation>> getOutputParameterNodeActivations() = 0;
 			virtual bool hasSourceFor(const std::shared_ptr<fUML::Semantics::Activities::ActivityEdgeInstance>& edgeInstance) = 0;
 			virtual bool isSuspended() = 0;
 			virtual void resume(const std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivation>& activation) = 0;

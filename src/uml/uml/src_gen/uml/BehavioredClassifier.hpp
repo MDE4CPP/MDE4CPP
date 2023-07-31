@@ -107,12 +107,12 @@ namespace uml
 			Retrieves all the interfaces on which this behaviored classifier or any of its parents has an interface realization dependency.
 			*/
 			 
-			virtual std::shared_ptr<Bag<uml::Interface> > getAllImplementedInterfaces() = 0;
+			virtual std::shared_ptr<Bag<uml::Interface>> getAllImplementedInterfaces() = 0;
 			/*!
 			Retrieves the interfaces on which this behaviored classifier has an interface realization dependency.
 			*/
 			 
-			virtual std::shared_ptr<Bag<uml::Interface> > getImplementedInterfaces() = 0;
+			virtual std::shared_ptr<Bag<uml::Interface>> getImplementedInterfaces() = 0;
 
 			//*********************************
 			// Attribute Getters & Setters

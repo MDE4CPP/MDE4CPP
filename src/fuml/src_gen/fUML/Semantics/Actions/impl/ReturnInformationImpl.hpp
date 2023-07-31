@@ -46,7 +46,7 @@ namespace fUML::Semantics::Actions
 			virtual std::shared_ptr<fUML::Semantics::Values::Value> _copy() ;
 			virtual bool equals(const std::shared_ptr<fUML::Semantics::Values::Value>& otherValue) ;
 			virtual std::shared_ptr<uml::Operation> getOperation() ;
-			virtual std::shared_ptr<Bag<uml::Classifier> > getTypes() ;
+			virtual std::shared_ptr<Bag<uml::Classifier>> getTypes() ;
 			virtual std::shared_ptr<fUML::Semantics::Values::Value> new_() ;
 			virtual void reply(const std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>>& outputParameterValues) ;
 			virtual std::shared_ptr<uml::ValueSpecification> specify() ;

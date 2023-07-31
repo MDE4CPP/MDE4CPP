@@ -67,7 +67,7 @@ namespace uml
 			Retrieves the associations in which this type is involved.
 			*/
 			 
-			virtual std::shared_ptr<Bag<uml::Association> > getAssociations() ;
+			virtual std::shared_ptr<Bag<uml::Association>> getAssociations() ;
 			
 			//*********************************
 			// Attribute Getters & Setters

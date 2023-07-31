@@ -298,7 +298,7 @@ bool AssociationImpl::ends_must_be_typed(const Any& diagnostics, std::shared_ptr
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-std::shared_ptr<Bag<uml::Type> > AssociationImpl::getEndTypes()
+std::shared_ptr<Bag<uml::Type>> AssociationImpl::getEndTypes()
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -998,7 +998,7 @@ Any AssociationImpl::eInvoke(int operationID, const std::shared_ptr<std::list<An
 		// uml::Association::getEndTypes() : uml::Type[*]: 2690402644
 		case umlPackage::ASSOCIATION_OPERATION_GETENDTYPES:
 		{
-			std::shared_ptr<Bag<uml::Type> > resultList = this->getEndTypes();
+			const std::shared_ptr<Bag<uml::Type>>& resultList = this->getEndTypes();
 			return eAnyBag(resultList,uml::umlPackage::TYPE_CLASS);
 			break;
 		}

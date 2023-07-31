@@ -601,7 +601,7 @@ void ParameterImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHa
 	{
 		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
 		// Save 'defaultValue'
-		std::shared_ptr<uml::ValueSpecification> defaultValue = this->getDefaultValue();
+		const std::shared_ptr<uml::ValueSpecification>& defaultValue = this->getDefaultValue();
 		if (defaultValue != nullptr)
 		{
 			saveHandler->addReference(defaultValue, "defaultValue", defaultValue->eClass() != package->getValueSpecification_Class());

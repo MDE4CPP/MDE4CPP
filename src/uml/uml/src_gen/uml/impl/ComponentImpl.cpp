@@ -267,12 +267,12 @@ std::shared_ptr<uml::PrimitiveType> ComponentImpl::createOwnedPrimitiveType(std:
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-std::shared_ptr<Bag<uml::Interface> > ComponentImpl::getProvideds()
+std::shared_ptr<Bag<uml::Interface>> ComponentImpl::getProvideds()
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-std::shared_ptr<Bag<uml::Interface> > ComponentImpl::getRequireds()
+std::shared_ptr<Bag<uml::Interface>> ComponentImpl::getRequireds()
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -888,14 +888,14 @@ Any ComponentImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>
 		// uml::Component::getProvideds() : uml::Interface[*]: 1978665601
 		case umlPackage::COMPONENT_OPERATION_GETPROVIDEDS:
 		{
-			std::shared_ptr<Bag<uml::Interface> > resultList = this->getProvideds();
+			const std::shared_ptr<Bag<uml::Interface>>& resultList = this->getProvideds();
 			return eAnyBag(resultList,uml::umlPackage::INTERFACE_CLASS);
 			break;
 		}
 		// uml::Component::getRequireds() : uml::Interface[*]: 1044914701
 		case umlPackage::COMPONENT_OPERATION_GETREQUIREDS:
 		{
-			std::shared_ptr<Bag<uml::Interface> > resultList = this->getRequireds();
+			const std::shared_ptr<Bag<uml::Interface>>& resultList = this->getRequireds();
 			return eAnyBag(resultList,uml::umlPackage::INTERFACE_CLASS);
 			break;
 		}

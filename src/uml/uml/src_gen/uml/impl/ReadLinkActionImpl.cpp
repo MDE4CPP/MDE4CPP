@@ -172,7 +172,7 @@ bool ReadLinkActionImpl::one_open_end(const Any& diagnostics, std::shared_ptr<st
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-std::shared_ptr<Bag<uml::Property> > ReadLinkActionImpl::openEnd()
+std::shared_ptr<Bag<uml::Property>> ReadLinkActionImpl::openEnd()
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -413,7 +413,7 @@ void ReadLinkActionImpl::saveContent(std::shared_ptr<persistence::interfaces::XS
 	{
 		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
 		// Save 'result'
-		std::shared_ptr<uml::OutputPin> result = this->getResult();
+		const std::shared_ptr<uml::OutputPin>& result = this->getResult();
 		if (result != nullptr)
 		{
 			saveHandler->addReference(result, "result", result->eClass() != package->getOutputPin_Class());
@@ -530,7 +530,7 @@ Any ReadLinkActionImpl::eInvoke(int operationID, const std::shared_ptr<std::list
 		// uml::ReadLinkAction::openEnd() : uml::Property[*]: 4152235483
 		case umlPackage::READLINKACTION_OPERATION_OPENEND:
 		{
-			std::shared_ptr<Bag<uml::Property> > resultList = this->openEnd();
+			const std::shared_ptr<Bag<uml::Property>>& resultList = this->openEnd();
 			return eAnyBag(resultList,uml::umlPackage::PROPERTY_CLASS);
 			break;
 		}

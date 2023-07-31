@@ -151,7 +151,7 @@ bool ElementImpl::addKeyword(std::string keyword)
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-std::shared_ptr<Bag<uml::Element> > ElementImpl::allOwnedElements()
+std::shared_ptr<Bag<uml::Element>> ElementImpl::allOwnedElements()
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -197,7 +197,7 @@ std::shared_ptr<uml::Stereotype> ElementImpl::getApplicableStereotype(std::strin
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-std::shared_ptr<Bag<uml::Stereotype> > ElementImpl::getApplicableStereotypes()
+std::shared_ptr<Bag<uml::Stereotype>> ElementImpl::getApplicableStereotypes()
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -210,7 +210,7 @@ std::shared_ptr<uml::Stereotype> ElementImpl::getAppliedStereotype(std::string q
 	//end of body
 }
 
-std::shared_ptr<Bag<uml::Stereotype> > ElementImpl::getAppliedStereotypes() const
+std::shared_ptr<Bag<uml::Stereotype>> ElementImpl::getAppliedStereotypes() const
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -223,12 +223,12 @@ std::shared_ptr<uml::Stereotype> ElementImpl::getAppliedSubstereotype(const std:
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-std::shared_ptr<Bag<uml::Stereotype> > ElementImpl::getAppliedSubstereotypes(const std::shared_ptr<uml::Stereotype>& stereotype)
+std::shared_ptr<Bag<uml::Stereotype>> ElementImpl::getAppliedSubstereotypes(const std::shared_ptr<uml::Stereotype>& stereotype)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-std::shared_ptr<Bag<std::string> > ElementImpl::getKeywords()
+std::shared_ptr<Bag<std::string>> ElementImpl::getKeywords()
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -253,12 +253,12 @@ std::shared_ptr<uml::Package> ElementImpl::getNearestPackage()
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-std::shared_ptr<Bag<uml::Relationship> > ElementImpl::getRelationships()
+std::shared_ptr<Bag<uml::Relationship>> ElementImpl::getRelationships()
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-std::shared_ptr<Bag<uml::Relationship> > ElementImpl::getRelationships(const std::shared_ptr<ecore::EClass>& eClass)
+std::shared_ptr<Bag<uml::Relationship>> ElementImpl::getRelationships(const std::shared_ptr<ecore::EClass>& eClass)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -268,17 +268,17 @@ std::shared_ptr<uml::Stereotype> ElementImpl::getRequiredStereotype(std::string 
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-std::shared_ptr<Bag<uml::Stereotype> > ElementImpl::getRequiredStereotypes()
+std::shared_ptr<Bag<uml::Stereotype>> ElementImpl::getRequiredStereotypes()
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-std::shared_ptr<Bag<uml::DirectedRelationship> > ElementImpl::getSourceDirectedRelationships()
+std::shared_ptr<Bag<uml::DirectedRelationship>> ElementImpl::getSourceDirectedRelationships()
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-std::shared_ptr<Bag<uml::DirectedRelationship> > ElementImpl::getSourceDirectedRelationships(const std::shared_ptr<ecore::EClass>& eClass)
+std::shared_ptr<Bag<uml::DirectedRelationship>> ElementImpl::getSourceDirectedRelationships(const std::shared_ptr<ecore::EClass>& eClass)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -288,17 +288,17 @@ std::shared_ptr<ecore::EObject> ElementImpl::getStereotypeApplication(const std:
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-std::shared_ptr<Bag<ecore::EObject> > ElementImpl::getStereotypeApplications()
+std::shared_ptr<Bag<ecore::EObject>> ElementImpl::getStereotypeApplications()
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-std::shared_ptr<Bag<uml::DirectedRelationship> > ElementImpl::getTargetDirectedRelationships()
+std::shared_ptr<Bag<uml::DirectedRelationship>> ElementImpl::getTargetDirectedRelationships()
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-std::shared_ptr<Bag<uml::DirectedRelationship> > ElementImpl::getTargetDirectedRelationships(const std::shared_ptr<ecore::EClass>& eClass)
+std::shared_ptr<Bag<uml::DirectedRelationship>> ElementImpl::getTargetDirectedRelationships(const std::shared_ptr<ecore::EClass>& eClass)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -664,7 +664,7 @@ Any ElementImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>&
 		// uml::Element::allOwnedElements() : uml::Element[*]: 247654748
 		case umlPackage::ELEMENT_OPERATION_ALLOWNEDELEMENTS:
 		{
-			std::shared_ptr<Bag<uml::Element> > resultList = this->allOwnedElements();
+			const std::shared_ptr<Bag<uml::Element>>& resultList = this->allOwnedElements();
 			return eAnyBag(resultList,uml::umlPackage::ELEMENT_CLASS);
 			break;
 		}
@@ -716,7 +716,7 @@ Any ElementImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>&
 		// uml::Element::getApplicableStereotypes() : uml::Stereotype[*]: 4106909555
 		case umlPackage::ELEMENT_OPERATION_GETAPPLICABLESTEREOTYPES:
 		{
-			std::shared_ptr<Bag<uml::Stereotype> > resultList = this->getApplicableStereotypes();
+			const std::shared_ptr<Bag<uml::Stereotype>>& resultList = this->getApplicableStereotypes();
 			return eAnyBag(resultList,uml::umlPackage::STEREOTYPE_CLASS);
 			break;
 		}
@@ -734,7 +734,7 @@ Any ElementImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>&
 		// uml::Element::getAppliedStereotypes() : uml::Stereotype[*] {const}: 536733808
 		case umlPackage::ELEMENT_OPERATION_GETAPPLIEDSTEREOTYPES:
 		{
-			std::shared_ptr<Bag<uml::Stereotype> > resultList = this->getAppliedStereotypes();
+			const std::shared_ptr<Bag<uml::Stereotype>>& resultList = this->getAppliedStereotypes();
 			return eAnyBag(resultList,uml::umlPackage::STEREOTYPE_CLASS);
 			break;
 		}
@@ -762,7 +762,7 @@ Any ElementImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>&
 			std::shared_ptr<uml::Stereotype> incoming_param_stereotype;
 			std::list<Any>::const_iterator incoming_param_stereotype_arguments_citer = std::next(arguments->begin(), 0);
 			incoming_param_stereotype = (*incoming_param_stereotype_arguments_citer)->get<std::shared_ptr<uml::Stereotype> >();
-			std::shared_ptr<Bag<uml::Stereotype> > resultList = this->getAppliedSubstereotypes(incoming_param_stereotype);
+			const std::shared_ptr<Bag<uml::Stereotype>>& resultList = this->getAppliedSubstereotypes(incoming_param_stereotype);
 			return eAnyBag(resultList,uml::umlPackage::STEREOTYPE_CLASS);
 			break;
 		}
@@ -793,7 +793,7 @@ Any ElementImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>&
 		// uml::Element::getRelationships() : uml::Relationship[*]: 2213814646
 		case umlPackage::ELEMENT_OPERATION_GETRELATIONSHIPS:
 		{
-			std::shared_ptr<Bag<uml::Relationship> > resultList = this->getRelationships();
+			const std::shared_ptr<Bag<uml::Relationship>>& resultList = this->getRelationships();
 			return eAnyBag(resultList,uml::umlPackage::RELATIONSHIP_CLASS);
 			break;
 		}
@@ -805,7 +805,7 @@ Any ElementImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>&
 			std::shared_ptr<ecore::EClass> incoming_param_eClass;
 			std::list<Any>::const_iterator incoming_param_eClass_arguments_citer = std::next(arguments->begin(), 0);
 			incoming_param_eClass = (*incoming_param_eClass_arguments_citer)->get<std::shared_ptr<ecore::EClass> >();
-			std::shared_ptr<Bag<uml::Relationship> > resultList = this->getRelationships(incoming_param_eClass);
+			const std::shared_ptr<Bag<uml::Relationship>>& resultList = this->getRelationships(incoming_param_eClass);
 			return eAnyBag(resultList,uml::umlPackage::RELATIONSHIP_CLASS);
 			break;
 		}
@@ -823,14 +823,14 @@ Any ElementImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>&
 		// uml::Element::getRequiredStereotypes() : uml::Stereotype[*]: 1705085663
 		case umlPackage::ELEMENT_OPERATION_GETREQUIREDSTEREOTYPES:
 		{
-			std::shared_ptr<Bag<uml::Stereotype> > resultList = this->getRequiredStereotypes();
+			const std::shared_ptr<Bag<uml::Stereotype>>& resultList = this->getRequiredStereotypes();
 			return eAnyBag(resultList,uml::umlPackage::STEREOTYPE_CLASS);
 			break;
 		}
 		// uml::Element::getSourceDirectedRelationships() : uml::DirectedRelationship[*]: 2795621331
 		case umlPackage::ELEMENT_OPERATION_GETSOURCEDIRECTEDRELATIONSHIPS:
 		{
-			std::shared_ptr<Bag<uml::DirectedRelationship> > resultList = this->getSourceDirectedRelationships();
+			const std::shared_ptr<Bag<uml::DirectedRelationship>>& resultList = this->getSourceDirectedRelationships();
 			return eAnyBag(resultList,uml::umlPackage::DIRECTEDRELATIONSHIP_CLASS);
 			break;
 		}
@@ -842,7 +842,7 @@ Any ElementImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>&
 			std::shared_ptr<ecore::EClass> incoming_param_eClass;
 			std::list<Any>::const_iterator incoming_param_eClass_arguments_citer = std::next(arguments->begin(), 0);
 			incoming_param_eClass = (*incoming_param_eClass_arguments_citer)->get<std::shared_ptr<ecore::EClass> >();
-			std::shared_ptr<Bag<uml::DirectedRelationship> > resultList = this->getSourceDirectedRelationships(incoming_param_eClass);
+			const std::shared_ptr<Bag<uml::DirectedRelationship>>& resultList = this->getSourceDirectedRelationships(incoming_param_eClass);
 			return eAnyBag(resultList,uml::umlPackage::DIRECTEDRELATIONSHIP_CLASS);
 			break;
 		}
@@ -860,14 +860,14 @@ Any ElementImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>&
 		// uml::Element::getStereotypeApplications() : ecore::EObject[*]: 3677056906
 		case umlPackage::ELEMENT_OPERATION_GETSTEREOTYPEAPPLICATIONS:
 		{
-			std::shared_ptr<Bag<ecore::EObject> > resultList = this->getStereotypeApplications();
+			const std::shared_ptr<Bag<ecore::EObject>>& resultList = this->getStereotypeApplications();
 			return eAnyBag(resultList,ecore::ecorePackage::EOBJECT_CLASS);
 			break;
 		}
 		// uml::Element::getTargetDirectedRelationships() : uml::DirectedRelationship[*]: 1070993753
 		case umlPackage::ELEMENT_OPERATION_GETTARGETDIRECTEDRELATIONSHIPS:
 		{
-			std::shared_ptr<Bag<uml::DirectedRelationship> > resultList = this->getTargetDirectedRelationships();
+			const std::shared_ptr<Bag<uml::DirectedRelationship>>& resultList = this->getTargetDirectedRelationships();
 			return eAnyBag(resultList,uml::umlPackage::DIRECTEDRELATIONSHIP_CLASS);
 			break;
 		}
@@ -879,7 +879,7 @@ Any ElementImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>&
 			std::shared_ptr<ecore::EClass> incoming_param_eClass;
 			std::list<Any>::const_iterator incoming_param_eClass_arguments_citer = std::next(arguments->begin(), 0);
 			incoming_param_eClass = (*incoming_param_eClass_arguments_citer)->get<std::shared_ptr<ecore::EClass> >();
-			std::shared_ptr<Bag<uml::DirectedRelationship> > resultList = this->getTargetDirectedRelationships(incoming_param_eClass);
+			const std::shared_ptr<Bag<uml::DirectedRelationship>>& resultList = this->getTargetDirectedRelationships(incoming_param_eClass);
 			return eAnyBag(resultList,uml::umlPackage::DIRECTEDRELATIONSHIP_CLASS);
 			break;
 		}

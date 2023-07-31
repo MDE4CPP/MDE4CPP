@@ -178,7 +178,7 @@ bool ReferenceImpl::equals(const std::shared_ptr<fUML::Semantics::Values::Value>
 	//end of body
 }
 
-std::shared_ptr<Bag<uml::Classifier> > ReferenceImpl::getTypes()
+std::shared_ptr<Bag<uml::Classifier>> ReferenceImpl::getTypes()
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -186,7 +186,7 @@ std::shared_ptr<Bag<uml::Classifier> > ReferenceImpl::getTypes()
 	//end of body
 }
 
-std::shared_ptr<Bag<fUML::Semantics::Values::Value> > ReferenceImpl::getValues(const std::shared_ptr<uml::StructuralFeature>& feature, const std::shared_ptr<Bag<fUML::Semantics::SimpleClassifiers::FeatureValue>>& featureValues)
+std::shared_ptr<Bag<fUML::Semantics::Values::Value>> ReferenceImpl::getValues(const std::shared_ptr<uml::StructuralFeature>& feature, const std::shared_ptr<Bag<fUML::Semantics::SimpleClassifiers::FeatureValue>>& featureValues)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -219,7 +219,7 @@ std::shared_ptr<fUML::Semantics::SimpleClassifiers::FeatureValue> ReferenceImpl:
 	//end of body
 }
 
-std::shared_ptr<Bag<fUML::Semantics::SimpleClassifiers::FeatureValue> > ReferenceImpl::retrieveFeatureValues()
+std::shared_ptr<Bag<fUML::Semantics::SimpleClassifiers::FeatureValue>> ReferenceImpl::retrieveFeatureValues()
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -511,7 +511,7 @@ Any ReferenceImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>
 		// fUML::Semantics::StructuredClassifiers::Reference::getTypes() : uml::Classifier[*]: 1569155812
 		case StructuredClassifiersPackage::REFERENCE_OPERATION_GETTYPES:
 		{
-			std::shared_ptr<Bag<uml::Classifier> > resultList = this->getTypes();
+			const std::shared_ptr<Bag<uml::Classifier>>& resultList = this->getTypes();
 			return eAnyBag(resultList,uml::umlPackage::CLASSIFIER_CLASS);
 			break;
 		}
@@ -528,7 +528,7 @@ Any ReferenceImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>
 			std::shared_ptr<Bag<fUML::Semantics::SimpleClassifiers::FeatureValue>> incoming_param_featureValues;
 			std::list<Any>::const_iterator incoming_param_featureValues_arguments_citer = std::next(arguments->begin(), 1);
 			incoming_param_featureValues = (*incoming_param_featureValues_arguments_citer)->get<std::shared_ptr<Bag<fUML::Semantics::SimpleClassifiers::FeatureValue>> >();
-			std::shared_ptr<Bag<fUML::Semantics::Values::Value> > resultList = this->getValues(incoming_param_feature,incoming_param_featureValues);
+			const std::shared_ptr<Bag<fUML::Semantics::Values::Value>>& resultList = this->getValues(incoming_param_feature,incoming_param_featureValues);
 			return eAnyBag(resultList,fUML::Semantics::Values::ValuesPackage::VALUE_CLASS);
 			break;
 		}
@@ -568,7 +568,7 @@ Any ReferenceImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>
 		// fUML::Semantics::StructuredClassifiers::Reference::retrieveFeatureValues() : fUML::Semantics::SimpleClassifiers::FeatureValue[*]: 92970232
 		case StructuredClassifiersPackage::REFERENCE_OPERATION_RETRIEVEFEATUREVALUES:
 		{
-			std::shared_ptr<Bag<fUML::Semantics::SimpleClassifiers::FeatureValue> > resultList = this->retrieveFeatureValues();
+			const std::shared_ptr<Bag<fUML::Semantics::SimpleClassifiers::FeatureValue>>& resultList = this->retrieveFeatureValues();
 			return eAnyBag(resultList,fUML::Semantics::SimpleClassifiers::SimpleClassifiersPackage::FEATUREVALUE_CLASS);
 			break;
 		}

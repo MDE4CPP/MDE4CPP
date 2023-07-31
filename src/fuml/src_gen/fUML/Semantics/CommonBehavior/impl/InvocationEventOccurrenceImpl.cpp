@@ -111,7 +111,7 @@ std::shared_ptr<ecore::EObject> InvocationEventOccurrenceImpl::copy() const
 //*********************************
 // Operations
 //*********************************
-std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue> > InvocationEventOccurrenceImpl::getParameterValues()
+std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> InvocationEventOccurrenceImpl::getParameterValues()
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -313,7 +313,7 @@ Any InvocationEventOccurrenceImpl::eInvoke(int operationID, const std::shared_pt
 		// fUML::Semantics::CommonBehavior::InvocationEventOccurrence::getParameterValues() : fUML::Semantics::CommonBehavior::ParameterValue[*]: 264852969
 		case CommonBehaviorPackage::INVOCATIONEVENTOCCURRENCE_OPERATION_GETPARAMETERVALUES:
 		{
-			std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue> > resultList = this->getParameterValues();
+			const std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>>& resultList = this->getParameterValues();
 			return eAnyBag(resultList,fUML::Semantics::CommonBehavior::CommonBehaviorPackage::PARAMETERVALUE_CLASS);
 			break;
 		}

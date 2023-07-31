@@ -164,7 +164,7 @@ std::shared_ptr<ecore::EReference> EObjectImpl::eContainmentFeature() const
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-std::shared_ptr<Bag<ecore::EObject> > EObjectImpl::eContents() const
+std::shared_ptr<Bag<ecore::EObject>> EObjectImpl::eContents() const
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -596,7 +596,7 @@ Any EObjectImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>&
 		// ecore::EObject::eContents() : ecore::EObject[*] {const}: 1440229147
 		case ecorePackage::EOBJECT_OPERATION_ECONTENTS:
 		{
-			std::shared_ptr<Bag<ecore::EObject> > resultList = this->eContents();
+			const std::shared_ptr<Bag<ecore::EObject>>& resultList = this->eContents();
 			return eAnyBag(resultList,ecore::ecorePackage::EOBJECT_CLASS);
 			break;
 		}

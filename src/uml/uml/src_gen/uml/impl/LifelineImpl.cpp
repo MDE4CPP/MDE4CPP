@@ -440,7 +440,7 @@ void LifelineImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHan
 	{
 		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
 		// Save 'selector'
-		std::shared_ptr<uml::ValueSpecification> selector = this->getSelector();
+		const std::shared_ptr<uml::ValueSpecification>& selector = this->getSelector();
 		if (selector != nullptr)
 		{
 			saveHandler->addReference(selector, "selector", selector->eClass() != package->getValueSpecification_Class());

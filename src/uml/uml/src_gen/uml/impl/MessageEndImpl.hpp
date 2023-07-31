@@ -80,7 +80,7 @@ namespace uml
 			<p>From package UML::Interactions.</p>
 			*/
 			 
-			virtual std::shared_ptr<Bag<uml::InteractionFragment> > enclosingFragment() ;
+			virtual std::shared_ptr<Bag<uml::InteractionFragment>> enclosingFragment() ;
 			/*!
 			This query returns value true if this MessageEnd is a receiveEvent.
 			message->notEmpty()
@@ -104,7 +104,7 @@ namespace uml
 			<p>From package UML::Interactions.</p>
 			*/
 			 
-			virtual std::shared_ptr<Bag<uml::MessageEnd> > oppositeEnd() ;
+			virtual std::shared_ptr<Bag<uml::MessageEnd>> oppositeEnd() ;
 			
 			//*********************************
 			// Attribute Getters & Setters

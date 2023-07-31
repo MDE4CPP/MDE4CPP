@@ -290,7 +290,7 @@ std::shared_ptr<uml::Operation> ClassImpl::createOwnedOperation(std::string name
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-std::shared_ptr<Bag<uml::Operation> > ClassImpl::getAllOperations()
+std::shared_ptr<Bag<uml::Operation>> ClassImpl::getAllOperations()
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -311,12 +311,12 @@ return allOperations;
 	//end of body
 }
 
-std::shared_ptr<Bag<uml::Extension> > ClassImpl::getExtensions()
+std::shared_ptr<Bag<uml::Extension>> ClassImpl::getExtensions()
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-std::shared_ptr<Bag<uml::Class> > ClassImpl::getSuperClasses()
+std::shared_ptr<Bag<uml::Class>> ClassImpl::getSuperClasses()
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -1163,21 +1163,21 @@ Any ClassImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& a
 		// uml::Class::getAllOperations() : uml::Operation[*]: 3178057285
 		case umlPackage::CLASS_OPERATION_GETALLOPERATIONS:
 		{
-			std::shared_ptr<Bag<uml::Operation> > resultList = this->getAllOperations();
+			const std::shared_ptr<Bag<uml::Operation>>& resultList = this->getAllOperations();
 			return eAnyBag(resultList,uml::umlPackage::OPERATION_CLASS);
 			break;
 		}
 		// uml::Class::getExtensions() : uml::Extension[*]: 4033444456
 		case umlPackage::CLASS_OPERATION_GETEXTENSIONS:
 		{
-			std::shared_ptr<Bag<uml::Extension> > resultList = this->getExtensions();
+			const std::shared_ptr<Bag<uml::Extension>>& resultList = this->getExtensions();
 			return eAnyBag(resultList,uml::umlPackage::EXTENSION_CLASS);
 			break;
 		}
 		// uml::Class::getSuperClasses() : uml::Class[*]: 1013854710
 		case umlPackage::CLASS_OPERATION_GETSUPERCLASSES:
 		{
-			std::shared_ptr<Bag<uml::Class> > resultList = this->getSuperClasses();
+			const std::shared_ptr<Bag<uml::Class>>& resultList = this->getSuperClasses();
 			return eAnyBag(resultList,uml::umlPackage::CLASS_CLASS);
 			break;
 		}

@@ -73,7 +73,7 @@ namespace PSCS::Semantics::StructuredClassifiers
 			// Operations
 			//*********************************
 			virtual std::string getName() = 0;
-			virtual std::shared_ptr<Bag<fUML::Semantics::StructuredClassifiers::Reference> > select(const std::shared_ptr<Bag<fUML::Semantics::StructuredClassifiers::Reference>>& potentialTargets, const std::shared_ptr<fUML::Semantics::Loci::SemanticVisitor>& context) = 0;
+			virtual std::shared_ptr<Bag<fUML::Semantics::StructuredClassifiers::Reference>> select(const std::shared_ptr<Bag<fUML::Semantics::StructuredClassifiers::Reference>>& potentialTargets, const std::shared_ptr<fUML::Semantics::Loci::SemanticVisitor>& context) = 0;
 
 			//*********************************
 			// Attribute Getters & Setters

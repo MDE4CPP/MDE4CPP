@@ -61,12 +61,12 @@ namespace uml
 			<p>From package UML::Packages.</p>
 			*/
 			 
-			virtual std::shared_ptr<Bag<uml::Stereotype> > allApplicableStereotypes() ;
+			virtual std::shared_ptr<Bag<uml::Stereotype>> allApplicableStereotypes() ;
 			/*!
 			Applies the current definition of the specified profile to this package and automatically applies required stereotypes in the profile to elements within this package's namespace hieararchy. If a different definition is already applied, automatically migrates any associated stereotype values on a "best effort" basis (matching classifiers and structural features by name).
 			*/
 			 
-			virtual std::shared_ptr<Bag<ecore::EObject> > applyProfile(const std::shared_ptr<uml::Profile>& profile) ;
+			virtual std::shared_ptr<Bag<ecore::EObject>> applyProfile(const std::shared_ptr<uml::Profile>& profile) ;
 			/*!
 			The query containingProfile() returns the closest profile directly or indirectly containing this package (or this package itself, if it is a profile).
 			result = (if self.oclIsKindOf(Profile) then 
@@ -113,12 +113,12 @@ namespace uml
 			Retrieves all the profiles that are applied to this package, including profiles applied to its nesting package(s).
 			*/
 			 
-			virtual std::shared_ptr<Bag<uml::Profile> > getAllAppliedProfiles() ;
+			virtual std::shared_ptr<Bag<uml::Profile>> getAllAppliedProfiles() ;
 			/*!
 			Retrieves all the profile applications for this package, including profile applications for its nesting package(s).
 			*/
 			 
-			virtual std::shared_ptr<Bag<uml::ProfileApplication> > getAllProfileApplications() ;
+			virtual std::shared_ptr<Bag<uml::ProfileApplication>> getAllProfileApplications() ;
 			/*!
 			Retrieves the profile with the specified qualified name that is applied to this package, or null if no such profile is applied.
 			*/
@@ -133,28 +133,28 @@ namespace uml
 			Retrieves the profiles that are applied to this package.
 			*/
 			 
-			virtual std::shared_ptr<Bag<uml::Profile> > getAppliedProfiles() ;
+			virtual std::shared_ptr<Bag<uml::Profile>> getAppliedProfiles() ;
 			/*!
 			Derivation for Package::/nestedPackage
 			result = (packagedElement->select(oclIsKindOf(Package))->collect(oclAsType(Package))->asSet())
 			<p>From package UML::Packages.</p>
 			*/
 			 
-			virtual std::shared_ptr<Bag<uml::Package> > getNestedPackages() ;
+			virtual std::shared_ptr<Bag<uml::Package>> getNestedPackages() ;
 			/*!
 			Derivation for Package::/ownedStereotype
 			result = (packagedElement->select(oclIsKindOf(Stereotype))->collect(oclAsType(Stereotype))->asSet())
 			<p>From package UML::Packages.</p>
 			*/
 			 
-			virtual std::shared_ptr<Bag<uml::Stereotype> > getOwnedStereotypes() ;
+			virtual std::shared_ptr<Bag<uml::Stereotype>> getOwnedStereotypes() ;
 			/*!
 			Derivation for Package::/ownedType
 			result = (packagedElement->select(oclIsKindOf(Type))->collect(oclAsType(Type))->asSet())
 			<p>From package UML::Packages.</p>
 			*/
 			 
-			virtual std::shared_ptr<Bag<uml::Type> > getOwnedTypes() ;
+			virtual std::shared_ptr<Bag<uml::Type>> getOwnedTypes() ;
 			/*!
 			Retrieves the application of the specified profile to this package, or null if no such profile is applied.
 			*/
@@ -189,14 +189,14 @@ namespace uml
 			Unapplies the specified profile from this package and automatically unapplies stereotypes in the profile from elements within this package's namespace hieararchy.
 			*/
 			 
-			virtual std::shared_ptr<Bag<ecore::EObject> > unapplyProfile(const std::shared_ptr<uml::Profile>& profile) ;
+			virtual std::shared_ptr<Bag<ecore::EObject>> unapplyProfile(const std::shared_ptr<uml::Profile>& profile) ;
 			/*!
 			The query visibleMembers() defines which members of a Package can be accessed outside it.
 			result = (member->select( m | m.oclIsKindOf(PackageableElement) and self.makesVisible(m))->collect(oclAsType(PackageableElement))->asSet())
 			<p>From package UML::Packages.</p>
 			*/
 			 
-			virtual std::shared_ptr<Bag<uml::PackageableElement> > visibleMembers() ;
+			virtual std::shared_ptr<Bag<uml::PackageableElement>> visibleMembers() ;
 			
 			//*********************************
 			// Attribute Getters & Setters

@@ -301,7 +301,7 @@ void StateInvariantImpl::saveContent(std::shared_ptr<persistence::interfaces::XS
 	{
 		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
 		// Save 'invariant'
-		std::shared_ptr<uml::Constraint> invariant = this->getInvariant();
+		const std::shared_ptr<uml::Constraint>& invariant = this->getInvariant();
 		if (invariant != nullptr)
 		{
 			saveHandler->addReference(invariant, "invariant", invariant->eClass() != package->getConstraint_Class());

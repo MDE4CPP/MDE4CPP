@@ -170,7 +170,7 @@ this->suspendCaller();
 	//end of body
 }
 
-std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue> > CallEventExecutionImpl::getInputParameterValues()
+std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> CallEventExecutionImpl::getInputParameterValues()
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -490,7 +490,7 @@ Any CallEventExecutionImpl::eInvoke(int operationID, const std::shared_ptr<std::
 		// fUML::Semantics::CommonBehavior::CallEventExecution::getInputParameterValues() : fUML::Semantics::CommonBehavior::ParameterValue[*]: 4255424542
 		case CommonBehaviorPackage::CALLEVENTEXECUTION_OPERATION_GETINPUTPARAMETERVALUES:
 		{
-			std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue> > resultList = this->getInputParameterValues();
+			const std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>>& resultList = this->getInputParameterValues();
 			return eAnyBag(resultList,fUML::Semantics::CommonBehavior::CommonBehaviorPackage::PARAMETERVALUE_CLASS);
 			break;
 		}

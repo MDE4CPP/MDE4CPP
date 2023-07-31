@@ -117,7 +117,7 @@ namespace uml
 			<p>From package UML::Actions.</p>
 			*/
 			 
-			virtual std::shared_ptr<Bag<uml::Property> > openEnd() = 0;
+			virtual std::shared_ptr<Bag<uml::Property>> openEnd() = 0;
 			/*!
 			The type and ordering of the result OutputPin are same as the type and ordering of the open Association end.
 			self.openEnd()->forAll(type=result.type and isOrdered=result.isOrdered)

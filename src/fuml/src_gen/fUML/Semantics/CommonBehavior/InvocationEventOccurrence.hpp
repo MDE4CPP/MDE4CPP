@@ -76,7 +76,7 @@ namespace fUML::Semantics::CommonBehavior
 			//*********************************
 			// Operations
 			//*********************************
-			virtual std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue> > getParameterValues() = 0;
+			virtual std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> getParameterValues() = 0;
 			virtual bool match(const std::shared_ptr<uml::Trigger>& trigger) = 0;
 
 			//*********************************

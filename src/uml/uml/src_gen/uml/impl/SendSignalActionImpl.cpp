@@ -423,7 +423,7 @@ void SendSignalActionImpl::saveContent(std::shared_ptr<persistence::interfaces::
 	{
 		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
 		// Save 'target'
-		std::shared_ptr<uml::InputPin> target = this->getTarget();
+		const std::shared_ptr<uml::InputPin>& target = this->getTarget();
 		if (target != nullptr)
 		{
 			saveHandler->addReference(target, "target", target->eClass() != package->getInputPin_Class());

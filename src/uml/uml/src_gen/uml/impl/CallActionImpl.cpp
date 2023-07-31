@@ -181,12 +181,12 @@ bool CallActionImpl::argument_pins(const Any& diagnostics, std::shared_ptr<std::
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-std::shared_ptr<Bag<uml::Parameter> > CallActionImpl::inputParameters()
+std::shared_ptr<Bag<uml::Parameter>> CallActionImpl::inputParameters()
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-std::shared_ptr<Bag<uml::Parameter> > CallActionImpl::outputParameters()
+std::shared_ptr<Bag<uml::Parameter>> CallActionImpl::outputParameters()
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -597,14 +597,14 @@ Any CallActionImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any
 		// uml::CallAction::inputParameters() : uml::Parameter[*]: 105388692
 		case umlPackage::CALLACTION_OPERATION_INPUTPARAMETERS:
 		{
-			std::shared_ptr<Bag<uml::Parameter> > resultList = this->inputParameters();
+			const std::shared_ptr<Bag<uml::Parameter>>& resultList = this->inputParameters();
 			return eAnyBag(resultList,uml::umlPackage::PARAMETER_CLASS);
 			break;
 		}
 		// uml::CallAction::outputParameters() : uml::Parameter[*]: 4183905689
 		case umlPackage::CALLACTION_OPERATION_OUTPUTPARAMETERS:
 		{
-			std::shared_ptr<Bag<uml::Parameter> > resultList = this->outputParameters();
+			const std::shared_ptr<Bag<uml::Parameter>>& resultList = this->outputParameters();
 			return eAnyBag(resultList,uml::umlPackage::PARAMETER_CLASS);
 			break;
 		}

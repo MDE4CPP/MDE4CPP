@@ -53,7 +53,7 @@ namespace PSCS::Semantics::Actions
 			virtual int getCardinality(const std::shared_ptr<uml::ConnectorEnd>& end) ;
 			virtual std::shared_ptr<uml::Association> getDefaultAssociation() ;
 			virtual std::shared_ptr<uml::Class> getRealizingClass(const std::shared_ptr<uml::Interface>& interface_) ;
-			virtual std::shared_ptr<Bag<fUML::Semantics::Values::Value> > getValuesFromConnectorEnd(const std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Reference>& context, const std::shared_ptr<uml::ConnectorEnd>& end) ;
+			virtual std::shared_ptr<Bag<fUML::Semantics::Values::Value>> getValuesFromConnectorEnd(const std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Reference>& context, const std::shared_ptr<uml::ConnectorEnd>& end) ;
 			virtual std::shared_ptr<fUML::Semantics::StructuredClassifiers::Object> instantiateInterface(const std::shared_ptr<uml::Interface>& interface, const std::shared_ptr<fUML::Semantics::Loci::Locus>& locus) ;
 			virtual bool isArrayPattern(const std::shared_ptr<uml::Connector>& c) ;
 			virtual bool isStarPattern(const std::shared_ptr<uml::Connector>& c) ;

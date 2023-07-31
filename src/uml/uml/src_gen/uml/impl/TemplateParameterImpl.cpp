@@ -399,14 +399,14 @@ void TemplateParameterImpl::saveContent(std::shared_ptr<persistence::interfaces:
 	{
 		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
 		// Save 'ownedDefault'
-		std::shared_ptr<uml::ParameterableElement> ownedDefault = this->getOwnedDefault();
+		const std::shared_ptr<uml::ParameterableElement>& ownedDefault = this->getOwnedDefault();
 		if (ownedDefault != nullptr)
 		{
 			saveHandler->addReference(ownedDefault, "ownedDefault", ownedDefault->eClass() != package->getParameterableElement_Class());
 		}
 
 		// Save 'ownedParameteredElement'
-		std::shared_ptr<uml::ParameterableElement> ownedParameteredElement = this->getOwnedParameteredElement();
+		const std::shared_ptr<uml::ParameterableElement>& ownedParameteredElement = this->getOwnedParameteredElement();
 		if (ownedParameteredElement != nullptr)
 		{
 			saveHandler->addReference(ownedParameteredElement, "ownedParameteredElement", ownedParameteredElement->eClass() != package->getParameterableElement_Class());

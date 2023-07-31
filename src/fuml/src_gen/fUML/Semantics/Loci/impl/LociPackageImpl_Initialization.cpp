@@ -141,7 +141,7 @@ void LociPackageImpl::initializeExecutionFactoryContent()
 		{
 			m_executionFactory_Attribute_locus->setDefaultValueLiteral(defaultValue);
 		}				
-		std::shared_ptr<ecore::EReference>  otherEnd = fUML::Semantics::Loci::LociPackage::eInstance()->getLocus_Attribute_factory();
+		const std::shared_ptr<ecore::EReference>& otherEnd = fUML::Semantics::Loci::LociPackage::eInstance()->getLocus_Attribute_factory();
 		if (otherEnd != nullptr)
 	    {
 	   		m_executionFactory_Attribute_locus->setEOpposite(otherEnd);
@@ -409,7 +409,7 @@ void LociPackageImpl::initializeExecutorContent()
 		{
 			m_executor_Attribute_locus->setDefaultValueLiteral(defaultValue);
 		}				
-		std::shared_ptr<ecore::EReference>  otherEnd = fUML::Semantics::Loci::LociPackage::eInstance()->getLocus_Attribute_executor();
+		const std::shared_ptr<ecore::EReference>& otherEnd = fUML::Semantics::Loci::LociPackage::eInstance()->getLocus_Attribute_executor();
 		if (otherEnd != nullptr)
 	    {
 	   		m_executor_Attribute_locus->setEOpposite(otherEnd);
@@ -550,7 +550,7 @@ void LociPackageImpl::initializeLocusContent()
 		{
 			m_locus_Attribute_executor->setDefaultValueLiteral(defaultValue);
 		}				
-		std::shared_ptr<ecore::EReference>  otherEnd = fUML::Semantics::Loci::LociPackage::eInstance()->getExecutor_Attribute_locus();
+		const std::shared_ptr<ecore::EReference>& otherEnd = fUML::Semantics::Loci::LociPackage::eInstance()->getExecutor_Attribute_locus();
 		if (otherEnd != nullptr)
 	    {
 	   		m_locus_Attribute_executor->setEOpposite(otherEnd);
@@ -597,7 +597,7 @@ void LociPackageImpl::initializeLocusContent()
 		{
 			m_locus_Attribute_factory->setDefaultValueLiteral(defaultValue);
 		}				
-		std::shared_ptr<ecore::EReference>  otherEnd = fUML::Semantics::Loci::LociPackage::eInstance()->getExecutionFactory_Attribute_locus();
+		const std::shared_ptr<ecore::EReference>& otherEnd = fUML::Semantics::Loci::LociPackage::eInstance()->getExecutionFactory_Attribute_locus();
 		if (otherEnd != nullptr)
 	    {
 	   		m_locus_Attribute_factory->setEOpposite(otherEnd);

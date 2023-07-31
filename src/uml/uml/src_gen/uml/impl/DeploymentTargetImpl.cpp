@@ -147,7 +147,7 @@ DeploymentTargetImpl& DeploymentTargetImpl::operator=(const DeploymentTargetImpl
 //*********************************
 // Operations
 //*********************************
-std::shared_ptr<Bag<uml::PackageableElement> > DeploymentTargetImpl::getDeployedElements()
+std::shared_ptr<Bag<uml::PackageableElement>> DeploymentTargetImpl::getDeployedElements()
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -411,7 +411,7 @@ Any DeploymentTargetImpl::eInvoke(int operationID, const std::shared_ptr<std::li
 		// uml::DeploymentTarget::getDeployedElements() : uml::PackageableElement[*]: 270386154
 		case umlPackage::DEPLOYMENTTARGET_OPERATION_GETDEPLOYEDELEMENTS:
 		{
-			std::shared_ptr<Bag<uml::PackageableElement> > resultList = this->getDeployedElements();
+			const std::shared_ptr<Bag<uml::PackageableElement>>& resultList = this->getDeployedElements();
 			return eAnyBag(resultList,uml::umlPackage::PACKAGEABLEELEMENT_CLASS);
 			break;
 		}

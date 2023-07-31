@@ -117,7 +117,7 @@ return newValue;
 	//end of body
 }
 
-std::shared_ptr<Bag<uml::Classifier> > PrimitiveValueImpl::getTypes()
+std::shared_ptr<Bag<uml::Classifier>> PrimitiveValueImpl::getTypes()
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -319,7 +319,7 @@ Any PrimitiveValueImpl::eInvoke(int operationID, const std::shared_ptr<std::list
 		// fUML::Semantics::SimpleClassifiers::PrimitiveValue::getTypes() : uml::Classifier[*]: 951226260
 		case SimpleClassifiersPackage::PRIMITIVEVALUE_OPERATION_GETTYPES:
 		{
-			std::shared_ptr<Bag<uml::Classifier> > resultList = this->getTypes();
+			const std::shared_ptr<Bag<uml::Classifier>>& resultList = this->getTypes();
 			return eAnyBag(resultList,uml::umlPackage::CLASSIFIER_CLASS);
 			break;
 		}

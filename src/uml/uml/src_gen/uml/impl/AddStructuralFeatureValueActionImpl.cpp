@@ -426,7 +426,7 @@ void AddStructuralFeatureValueActionImpl::saveContent(std::shared_ptr<persistenc
 	{
 		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
 		// Save 'insertAt'
-		std::shared_ptr<uml::InputPin> insertAt = this->getInsertAt();
+		const std::shared_ptr<uml::InputPin>& insertAt = this->getInsertAt();
 		if (insertAt != nullptr)
 		{
 			saveHandler->addReference(insertAt, "insertAt", insertAt->eClass() != package->getInputPin_Class());

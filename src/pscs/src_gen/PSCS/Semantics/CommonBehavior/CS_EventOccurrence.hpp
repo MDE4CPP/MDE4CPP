@@ -82,7 +82,7 @@ namespace PSCS::Semantics::CommonBehavior
 			// Operations
 			//*********************************
 			virtual void doSend() = 0;
-			virtual std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue> > getParameterValues() = 0;
+			virtual std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> getParameterValues() = 0;
 			virtual bool match(const std::shared_ptr<uml::Trigger>& trigger) = 0;
 			virtual void sendInTo(const std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Reference>& target, const std::shared_ptr<uml::Port>& port) = 0;
 			virtual void sendOutTo(const std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Reference>& target, const std::shared_ptr<uml::Port>& port) = 0;

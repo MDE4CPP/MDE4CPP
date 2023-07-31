@@ -48,12 +48,12 @@ namespace fUML::Semantics::StructuredClassifiers
 			virtual void destroy() ;
 			virtual std::shared_ptr<fUML::Semantics::CommonBehavior::Execution> dispatch(const std::shared_ptr<uml::Operation>& operation) ;
 			virtual bool equals(const std::shared_ptr<fUML::Semantics::Values::Value>& otherValue) ;
-			virtual std::shared_ptr<Bag<uml::Classifier> > getTypes() ;
-			virtual std::shared_ptr<Bag<fUML::Semantics::Values::Value> > getValues(const std::shared_ptr<uml::StructuralFeature>& feature, const std::shared_ptr<Bag<fUML::Semantics::SimpleClassifiers::FeatureValue>>& featureValues) ;
+			virtual std::shared_ptr<Bag<uml::Classifier>> getTypes() ;
+			virtual std::shared_ptr<Bag<fUML::Semantics::Values::Value>> getValues(const std::shared_ptr<uml::StructuralFeature>& feature, const std::shared_ptr<Bag<fUML::Semantics::SimpleClassifiers::FeatureValue>>& featureValues) ;
 			virtual std::shared_ptr<fUML::Semantics::Values::Value> new_() ;
 			virtual void removeValue(const std::shared_ptr<uml::StructuralFeature>& feature, const std::shared_ptr<fUML::Semantics::Values::Value>& value) ;
 			virtual std::shared_ptr<fUML::Semantics::SimpleClassifiers::FeatureValue> retrieveFeatureValue(const std::shared_ptr<uml::StructuralFeature>& feature) ;
-			virtual std::shared_ptr<Bag<fUML::Semantics::SimpleClassifiers::FeatureValue> > retrieveFeatureValues() ;
+			virtual std::shared_ptr<Bag<fUML::Semantics::SimpleClassifiers::FeatureValue>> retrieveFeatureValues() ;
 			virtual void send(const std::shared_ptr<fUML::Semantics::SimpleClassifiers::SignalInstance>& signalInstance) ;
 			virtual void send(const std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccurrence>& eventOccurrence) ;
 			virtual void setFeatureValue(const std::shared_ptr<uml::StructuralFeature>& feature, const std::shared_ptr<Bag<fUML::Semantics::Values::Value>>& values, int position) ;

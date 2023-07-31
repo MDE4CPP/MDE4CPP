@@ -136,7 +136,7 @@ std::shared_ptr<fUML::Semantics::Values::Value> CS_OpaqueExpressionEvaluationImp
 	//end of body
 }
 
-std::shared_ptr<Bag<fUML::Semantics::Values::Value> > CS_OpaqueExpressionEvaluationImpl::executeExpressionBehavior()
+std::shared_ptr<Bag<fUML::Semantics::Values::Value>> CS_OpaqueExpressionEvaluationImpl::executeExpressionBehavior()
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -303,7 +303,7 @@ Any CS_OpaqueExpressionEvaluationImpl::eInvoke(int operationID, const std::share
 		// PSCS::Semantics::Values::CS_OpaqueExpressionEvaluation::executeExpressionBehavior() : fUML::Semantics::Values::Value[*]: 4286290164
 		case ValuesPackage::CS_OPAQUEEXPRESSIONEVALUATION_OPERATION_EXECUTEEXPRESSIONBEHAVIOR:
 		{
-			std::shared_ptr<Bag<fUML::Semantics::Values::Value> > resultList = this->executeExpressionBehavior();
+			const std::shared_ptr<Bag<fUML::Semantics::Values::Value>>& resultList = this->executeExpressionBehavior();
 			return eAnyBag(resultList,fUML::Semantics::Values::ValuesPackage::VALUE_CLASS);
 			break;
 		}

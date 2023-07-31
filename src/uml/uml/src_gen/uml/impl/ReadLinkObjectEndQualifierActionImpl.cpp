@@ -495,14 +495,14 @@ void ReadLinkObjectEndQualifierActionImpl::saveContent(std::shared_ptr<persisten
 	{
 		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
 		// Save 'object'
-		std::shared_ptr<uml::InputPin> object = this->getObject();
+		const std::shared_ptr<uml::InputPin>& object = this->getObject();
 		if (object != nullptr)
 		{
 			saveHandler->addReference(object, "object", object->eClass() != package->getInputPin_Class());
 		}
 
 		// Save 'result'
-		std::shared_ptr<uml::OutputPin> result = this->getResult();
+		const std::shared_ptr<uml::OutputPin>& result = this->getResult();
 		if (result != nullptr)
 		{
 			saveHandler->addReference(result, "result", result->eClass() != package->getOutputPin_Class());

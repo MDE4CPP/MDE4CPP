@@ -367,7 +367,7 @@ void TemplateParameterSubstitutionImpl::saveContent(std::shared_ptr<persistence:
 	{
 		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
 		// Save 'ownedActual'
-		std::shared_ptr<uml::ParameterableElement> ownedActual = this->getOwnedActual();
+		const std::shared_ptr<uml::ParameterableElement>& ownedActual = this->getOwnedActual();
 		if (ownedActual != nullptr)
 		{
 			saveHandler->addReference(ownedActual, "ownedActual", ownedActual->eClass() != package->getParameterableElement_Class());

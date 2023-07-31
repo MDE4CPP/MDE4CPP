@@ -383,14 +383,14 @@ void InteractionConstraintImpl::saveContent(std::shared_ptr<persistence::interfa
 	{
 		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
 		// Save 'maxint'
-		std::shared_ptr<uml::ValueSpecification> maxint = this->getMaxint();
+		const std::shared_ptr<uml::ValueSpecification>& maxint = this->getMaxint();
 		if (maxint != nullptr)
 		{
 			saveHandler->addReference(maxint, "maxint", maxint->eClass() != package->getValueSpecification_Class());
 		}
 
 		// Save 'minint'
-		std::shared_ptr<uml::ValueSpecification> minint = this->getMinint();
+		const std::shared_ptr<uml::ValueSpecification>& minint = this->getMinint();
 		if (minint != nullptr)
 		{
 			saveHandler->addReference(minint, "minint", minint->eClass() != package->getValueSpecification_Class());

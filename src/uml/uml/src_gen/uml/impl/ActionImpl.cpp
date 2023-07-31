@@ -210,12 +210,12 @@ ActionImpl& ActionImpl::operator=(const ActionImpl & obj)
 //*********************************
 // Operations
 //*********************************
-std::shared_ptr<Bag<uml::Action> > ActionImpl::allActions()
+std::shared_ptr<Bag<uml::Action>> ActionImpl::allActions()
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-std::shared_ptr<Bag<uml::ActivityNode> > ActionImpl::allOwnedNodes()
+std::shared_ptr<Bag<uml::ActivityNode>> ActionImpl::allOwnedNodes()
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -740,14 +740,14 @@ Any ActionImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& 
 		// uml::Action::allActions() : uml::Action[*]: 666610799
 		case umlPackage::ACTION_OPERATION_ALLACTIONS:
 		{
-			std::shared_ptr<Bag<uml::Action> > resultList = this->allActions();
+			const std::shared_ptr<Bag<uml::Action>>& resultList = this->allActions();
 			return eAnyBag(resultList,uml::umlPackage::ACTION_CLASS);
 			break;
 		}
 		// uml::Action::allOwnedNodes() : uml::ActivityNode[*]: 1529799585
 		case umlPackage::ACTION_OPERATION_ALLOWNEDNODES:
 		{
-			std::shared_ptr<Bag<uml::ActivityNode> > resultList = this->allOwnedNodes();
+			const std::shared_ptr<Bag<uml::ActivityNode>>& resultList = this->allOwnedNodes();
 			return eAnyBag(resultList,uml::umlPackage::ACTIVITYNODE_CLASS);
 			break;
 		}

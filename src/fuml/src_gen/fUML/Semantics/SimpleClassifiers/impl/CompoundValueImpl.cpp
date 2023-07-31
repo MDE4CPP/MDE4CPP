@@ -234,7 +234,7 @@ std::shared_ptr<fUML::Semantics::SimpleClassifiers::FeatureValue> CompoundValueI
 	//end of body
 }
 
-std::shared_ptr<Bag<fUML::Semantics::SimpleClassifiers::FeatureValue> > CompoundValueImpl::retrieveFeatureValues()
+std::shared_ptr<Bag<fUML::Semantics::SimpleClassifiers::FeatureValue>> CompoundValueImpl::retrieveFeatureValues()
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -547,7 +547,7 @@ Any CompoundValueImpl::eInvoke(int operationID, const std::shared_ptr<std::list<
 		// fUML::Semantics::SimpleClassifiers::CompoundValue::retrieveFeatureValues() : fUML::Semantics::SimpleClassifiers::FeatureValue[*]: 379911432
 		case SimpleClassifiersPackage::COMPOUNDVALUE_OPERATION_RETRIEVEFEATUREVALUES:
 		{
-			std::shared_ptr<Bag<fUML::Semantics::SimpleClassifiers::FeatureValue> > resultList = this->retrieveFeatureValues();
+			const std::shared_ptr<Bag<fUML::Semantics::SimpleClassifiers::FeatureValue>>& resultList = this->retrieveFeatureValues();
 			return eAnyBag(resultList,fUML::Semantics::SimpleClassifiers::SimpleClassifiersPackage::FEATUREVALUE_CLASS);
 			break;
 		}

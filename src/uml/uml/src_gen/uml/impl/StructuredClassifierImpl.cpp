@@ -227,7 +227,7 @@ StructuredClassifierImpl& StructuredClassifierImpl::operator=(const StructuredCl
 //*********************************
 // Operations
 //*********************************
-std::shared_ptr<Bag<uml::ConnectableElement> > StructuredClassifierImpl::allRoles()
+std::shared_ptr<Bag<uml::ConnectableElement>> StructuredClassifierImpl::allRoles()
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -237,7 +237,7 @@ std::shared_ptr<uml::Property> StructuredClassifierImpl::createOwnedAttribute(st
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-std::shared_ptr<Bag<uml::Property> > StructuredClassifierImpl::getParts()
+std::shared_ptr<Bag<uml::Property>> StructuredClassifierImpl::getParts()
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -740,7 +740,7 @@ Any StructuredClassifierImpl::eInvoke(int operationID, const std::shared_ptr<std
 		// uml::StructuredClassifier::allRoles() : uml::ConnectableElement[*]: 3047328929
 		case umlPackage::STRUCTUREDCLASSIFIER_OPERATION_ALLROLES:
 		{
-			std::shared_ptr<Bag<uml::ConnectableElement> > resultList = this->allRoles();
+			const std::shared_ptr<Bag<uml::ConnectableElement>>& resultList = this->allRoles();
 			return eAnyBag(resultList,uml::umlPackage::CONNECTABLEELEMENT_CLASS);
 			break;
 		}
@@ -773,7 +773,7 @@ Any StructuredClassifierImpl::eInvoke(int operationID, const std::shared_ptr<std
 		// uml::StructuredClassifier::getParts() : uml::Property[*]: 2304451414
 		case umlPackage::STRUCTUREDCLASSIFIER_OPERATION_GETPARTS:
 		{
-			std::shared_ptr<Bag<uml::Property> > resultList = this->getParts();
+			const std::shared_ptr<Bag<uml::Property>>& resultList = this->getParts();
 			return eAnyBag(resultList,uml::umlPackage::PROPERTY_CLASS);
 			break;
 		}

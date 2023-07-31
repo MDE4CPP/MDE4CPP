@@ -188,7 +188,7 @@ std::shared_ptr<ecore::EObject> RedefinableTemplateSignatureImpl::copy() const
 //*********************************
 // Operations
 //*********************************
-std::shared_ptr<Bag<uml::TemplateParameter> > RedefinableTemplateSignatureImpl::getInheritedParameters()
+std::shared_ptr<Bag<uml::TemplateParameter>> RedefinableTemplateSignatureImpl::getInheritedParameters()
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -608,7 +608,7 @@ Any RedefinableTemplateSignatureImpl::eInvoke(int operationID, const std::shared
 		// uml::RedefinableTemplateSignature::getInheritedParameters() : uml::TemplateParameter[*]: 1729090337
 		case umlPackage::REDEFINABLETEMPLATESIGNATURE_OPERATION_GETINHERITEDPARAMETERS:
 		{
-			std::shared_ptr<Bag<uml::TemplateParameter> > resultList = this->getInheritedParameters();
+			const std::shared_ptr<Bag<uml::TemplateParameter>>& resultList = this->getInheritedParameters();
 			return eAnyBag(resultList,uml::umlPackage::TEMPLATEPARAMETER_CLASS);
 			break;
 		}

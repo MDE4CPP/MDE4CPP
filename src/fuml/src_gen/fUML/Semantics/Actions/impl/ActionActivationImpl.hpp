@@ -47,11 +47,11 @@ namespace fUML::Semantics::Actions
 			//*********************************
 			virtual void addOutgoingEdge(const std::shared_ptr<fUML::Semantics::Activities::ActivityEdgeInstance>& edge) ;
 			virtual void addPinActivation(const std::shared_ptr<fUML::Semantics::Actions::PinActivation>& pinActivation) ;
-			virtual std::shared_ptr<Bag<fUML::Semantics::Activities::Token> > completeAction() ;
+			virtual std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> completeAction() ;
 			virtual void createNodeActivations() ;
 			virtual void doAction() ;
 			virtual void fire(std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> incomingTokens) ;
-			virtual std::shared_ptr<Bag<fUML::Semantics::Values::Value> > getTokens(const std::shared_ptr<uml::InputPin>& pin) ;
+			virtual std::shared_ptr<Bag<fUML::Semantics::Values::Value>> getTokens(const std::shared_ptr<uml::InputPin>& pin) ;
 			virtual void initialize(const std::shared_ptr<uml::ActivityNode>& node, const std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup>& group) ;
 			virtual bool isFirng() ;
 			virtual bool isReady() ;
@@ -62,8 +62,8 @@ namespace fUML::Semantics::Actions
 			virtual std::shared_ptr<fUML::Semantics::Actions::PinActivation> retrievePinActivation(const std::shared_ptr<uml::Pin>& pin) ;
 			virtual void run() ;
 			virtual void sendOffers() ;
-			virtual std::shared_ptr<Bag<fUML::Semantics::Activities::Token> > takeOfferedTokens() ;
-			virtual std::shared_ptr<Bag<fUML::Semantics::Values::Value> > takeTokens(const std::shared_ptr<uml::InputPin>& pin) ;
+			virtual std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> takeOfferedTokens() ;
+			virtual std::shared_ptr<Bag<fUML::Semantics::Values::Value>> takeTokens(const std::shared_ptr<uml::InputPin>& pin) ;
 			virtual void terminate() ;
 			virtual bool valueParticipatesInLink(const std::shared_ptr<fUML::Semantics::Values::Value>& value, const std::shared_ptr<fUML::Semantics::StructuredClassifiers::Link>& link) ;
 			

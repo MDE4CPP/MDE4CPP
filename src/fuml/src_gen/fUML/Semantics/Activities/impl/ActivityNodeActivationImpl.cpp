@@ -308,7 +308,7 @@ bool ActivityNodeActivationImpl::getRunning()
 	//end of body
 }
 
-std::shared_ptr<Bag<fUML::Semantics::Activities::Token> > ActivityNodeActivationImpl::getTokens()
+std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> ActivityNodeActivationImpl::getTokens()
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -529,7 +529,7 @@ void ActivityNodeActivationImpl::suspend()
 	//end of body
 }
 
-std::shared_ptr<Bag<fUML::Semantics::Activities::Token> > ActivityNodeActivationImpl::takeOfferedTokens()
+std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> ActivityNodeActivationImpl::takeOfferedTokens()
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -552,7 +552,7 @@ std::shared_ptr<Bag<fUML::Semantics::Activities::Token> > ActivityNodeActivation
 	//end of body
 }
 
-std::shared_ptr<Bag<fUML::Semantics::Activities::Token> > ActivityNodeActivationImpl::takeTokens()
+std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> ActivityNodeActivationImpl::takeTokens()
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -1177,7 +1177,7 @@ Any ActivityNodeActivationImpl::eInvoke(int operationID, const std::shared_ptr<s
 		// fUML::Semantics::Activities::ActivityNodeActivation::getTokens() : fUML::Semantics::Activities::Token[*]: 3137100059
 		case ActivitiesPackage::ACTIVITYNODEACTIVATION_OPERATION_GETTOKENS:
 		{
-			std::shared_ptr<Bag<fUML::Semantics::Activities::Token> > resultList = this->getTokens();
+			const std::shared_ptr<Bag<fUML::Semantics::Activities::Token>>& resultList = this->getTokens();
 			return eAnyBag(resultList,fUML::Semantics::Activities::ActivitiesPackage::TOKEN_CLASS);
 			break;
 		}
@@ -1263,14 +1263,14 @@ Any ActivityNodeActivationImpl::eInvoke(int operationID, const std::shared_ptr<s
 		// fUML::Semantics::Activities::ActivityNodeActivation::takeOfferedTokens() : fUML::Semantics::Activities::Token[*]: 4181507751
 		case ActivitiesPackage::ACTIVITYNODEACTIVATION_OPERATION_TAKEOFFEREDTOKENS:
 		{
-			std::shared_ptr<Bag<fUML::Semantics::Activities::Token> > resultList = this->takeOfferedTokens();
+			const std::shared_ptr<Bag<fUML::Semantics::Activities::Token>>& resultList = this->takeOfferedTokens();
 			return eAnyBag(resultList,fUML::Semantics::Activities::ActivitiesPackage::TOKEN_CLASS);
 			break;
 		}
 		// fUML::Semantics::Activities::ActivityNodeActivation::takeTokens() : fUML::Semantics::Activities::Token[*]: 1423548432
 		case ActivitiesPackage::ACTIVITYNODEACTIVATION_OPERATION_TAKETOKENS:
 		{
-			std::shared_ptr<Bag<fUML::Semantics::Activities::Token> > resultList = this->takeTokens();
+			const std::shared_ptr<Bag<fUML::Semantics::Activities::Token>>& resultList = this->takeTokens();
 			return eAnyBag(resultList,fUML::Semantics::Activities::ActivitiesPackage::TOKEN_CLASS);
 			break;
 		}

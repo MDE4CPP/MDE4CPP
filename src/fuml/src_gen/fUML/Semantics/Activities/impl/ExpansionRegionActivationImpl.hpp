@@ -56,7 +56,7 @@ namespace fUML::Semantics::Activities
 			virtual void runIterative() ;
 			virtual void runParallel() ;
 			virtual void sendOffers() ;
-			virtual std::shared_ptr<Bag<fUML::Semantics::Activities::Token> > takeOfferedTokens() ;
+			virtual std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> takeOfferedTokens() ;
 			virtual void terminate() ;
 			virtual void terminateGroup(const std::shared_ptr<fUML::Semantics::Activities::ExpansionActivationGroup>& activationGroup) ;
 			

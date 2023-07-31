@@ -161,7 +161,7 @@ int ObjectNodeActivationImpl::countUnofferedTokens()
 	//end of body
 }
 
-std::shared_ptr<Bag<fUML::Semantics::Activities::Token> > ObjectNodeActivationImpl::getUnofferedTokens()
+std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> ObjectNodeActivationImpl::getUnofferedTokens()
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -231,7 +231,7 @@ void ObjectNodeActivationImpl::sendUnofferedTokens()
 	//end of body
 }
 
-std::shared_ptr<Bag<fUML::Semantics::Activities::Token> > ObjectNodeActivationImpl::takeUnofferedTokens()
+std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> ObjectNodeActivationImpl::takeUnofferedTokens()
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -467,7 +467,7 @@ Any ObjectNodeActivationImpl::eInvoke(int operationID, const std::shared_ptr<std
 		// fUML::Semantics::Activities::ObjectNodeActivation::getUnofferedTokens() : fUML::Semantics::Activities::Token[*]: 2051750135
 		case ActivitiesPackage::OBJECTNODEACTIVATION_OPERATION_GETUNOFFEREDTOKENS:
 		{
-			std::shared_ptr<Bag<fUML::Semantics::Activities::Token> > resultList = this->getUnofferedTokens();
+			const std::shared_ptr<Bag<fUML::Semantics::Activities::Token>>& resultList = this->getUnofferedTokens();
 			return eAnyBag(resultList,fUML::Semantics::Activities::ActivitiesPackage::TOKEN_CLASS);
 			break;
 		}
@@ -508,7 +508,7 @@ Any ObjectNodeActivationImpl::eInvoke(int operationID, const std::shared_ptr<std
 		// fUML::Semantics::Activities::ObjectNodeActivation::takeUnofferedTokens() : fUML::Semantics::Activities::Token[*]: 4049856236
 		case ActivitiesPackage::OBJECTNODEACTIVATION_OPERATION_TAKEUNOFFEREDTOKENS:
 		{
-			std::shared_ptr<Bag<fUML::Semantics::Activities::Token> > resultList = this->takeUnofferedTokens();
+			const std::shared_ptr<Bag<fUML::Semantics::Activities::Token>>& resultList = this->takeUnofferedTokens();
 			return eAnyBag(resultList,fUML::Semantics::Activities::ActivitiesPackage::TOKEN_CLASS);
 			break;
 		}

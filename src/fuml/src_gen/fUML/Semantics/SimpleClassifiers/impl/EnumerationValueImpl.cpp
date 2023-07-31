@@ -145,7 +145,7 @@ bool EnumerationValueImpl::equals(const std::shared_ptr<fUML::Semantics::Values:
 	//end of body
 }
 
-std::shared_ptr<Bag<uml::Classifier> > EnumerationValueImpl::getTypes()
+std::shared_ptr<Bag<uml::Classifier>> EnumerationValueImpl::getTypes()
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -429,7 +429,7 @@ Any EnumerationValueImpl::eInvoke(int operationID, const std::shared_ptr<std::li
 		// fUML::Semantics::SimpleClassifiers::EnumerationValue::getTypes() : uml::Classifier[*]: 1927916094
 		case SimpleClassifiersPackage::ENUMERATIONVALUE_OPERATION_GETTYPES:
 		{
-			std::shared_ptr<Bag<uml::Classifier> > resultList = this->getTypes();
+			const std::shared_ptr<Bag<uml::Classifier>>& resultList = this->getTypes();
 			return eAnyBag(resultList,uml::umlPackage::CLASSIFIER_CLASS);
 			break;
 		}

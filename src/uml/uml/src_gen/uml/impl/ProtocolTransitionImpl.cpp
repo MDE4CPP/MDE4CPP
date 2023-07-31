@@ -162,7 +162,7 @@ bool ProtocolTransitionImpl::belongs_to_psm(const Any& diagnostics, std::shared_
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-std::shared_ptr<Bag<uml::Operation> > ProtocolTransitionImpl::getReferreds()
+std::shared_ptr<Bag<uml::Operation>> ProtocolTransitionImpl::getReferreds()
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -540,7 +540,7 @@ Any ProtocolTransitionImpl::eInvoke(int operationID, const std::shared_ptr<std::
 		// uml::ProtocolTransition::getReferreds() : uml::Operation[*]: 37225025
 		case umlPackage::PROTOCOLTRANSITION_OPERATION_GETREFERREDS:
 		{
-			std::shared_ptr<Bag<uml::Operation> > resultList = this->getReferreds();
+			const std::shared_ptr<Bag<uml::Operation>>& resultList = this->getReferreds();
 			return eAnyBag(resultList,uml::umlPackage::OPERATION_CLASS);
 			break;
 		}

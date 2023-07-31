@@ -130,7 +130,7 @@ return newValue;
 	//end of body
 }
 
-std::shared_ptr<Bag<uml::Classifier> > DataValueImpl::getTypes()
+std::shared_ptr<Bag<uml::Classifier>> DataValueImpl::getTypes()
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -341,7 +341,7 @@ Any DataValueImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>
 		// fUML::Semantics::SimpleClassifiers::DataValue::getTypes() : uml::Classifier[*]: 120141329
 		case SimpleClassifiersPackage::DATAVALUE_OPERATION_GETTYPES:
 		{
-			std::shared_ptr<Bag<uml::Classifier> > resultList = this->getTypes();
+			const std::shared_ptr<Bag<uml::Classifier>>& resultList = this->getTypes();
 			return eAnyBag(resultList,uml::umlPackage::CLASSIFIER_CLASS);
 			break;
 		}

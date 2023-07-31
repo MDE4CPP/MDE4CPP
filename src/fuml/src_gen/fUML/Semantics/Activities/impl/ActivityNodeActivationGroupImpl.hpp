@@ -57,7 +57,7 @@ virtual public ActivityNodeActivationGroup
 			virtual std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivation> createNodeActivation(const std::shared_ptr<uml::ActivityNode>& node) ;
 			virtual void createNodeActivations(const std::shared_ptr<Bag<uml::ActivityNode>>& nodes) ;
 			virtual std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivation> getNodeActivation(const std::shared_ptr<uml::ActivityNode>& node) ;
-			virtual std::shared_ptr<Bag<fUML::Semantics::Activities::ActivityParameterNodeActivation> > getOutputParameterNodeActivations() ;
+			virtual std::shared_ptr<Bag<fUML::Semantics::Activities::ActivityParameterNodeActivation>> getOutputParameterNodeActivations() ;
 			virtual bool hasSourceFor(const std::shared_ptr<fUML::Semantics::Activities::ActivityEdgeInstance>& edgeInstance) ;
 			virtual bool isSuspended() ;
 			virtual void resume(const std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivation>& activation) ;

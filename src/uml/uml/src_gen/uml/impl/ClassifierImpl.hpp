@@ -60,28 +60,28 @@ namespace uml
 			<p>From package UML::Classification.</p>
 			*/
 			 
-			virtual std::shared_ptr<Bag<uml::Property> > allAttributes() ;
+			virtual std::shared_ptr<Bag<uml::Property>> allAttributes() ;
 			/*!
 			The query allFeatures() gives all of the Features in the namespace of the Classifier. In general, through mechanisms such as inheritance, this will be a larger set than feature.
 			result = (member->select(oclIsKindOf(Feature))->collect(oclAsType(Feature))->asSet())
 			<p>From package UML::Classification.</p>
 			*/
 			 
-			virtual std::shared_ptr<Bag<uml::Feature> > allFeatures() ;
+			virtual std::shared_ptr<Bag<uml::Feature>> allFeatures() ;
 			/*!
 			The query allParents() gives all of the direct and indirect ancestors of a generalized Classifier.
 			result = (parents()->union(parents()->collect(allParents())->asSet()))
 			<p>From package UML::Classification.</p>
 			*/
 			 
-			virtual std::shared_ptr<Bag<uml::Classifier> > allParents() ;
+			virtual std::shared_ptr<Bag<uml::Classifier>> allParents() ;
 			/*!
 			The Interfaces realized by this Classifier and all of its generalizations
 			result = (directlyRealizedInterfaces()->union(self.allParents()->collect(directlyRealizedInterfaces()))->asSet())
 			<p>From package UML::Classification.</p>
 			*/
 			 
-			virtual std::shared_ptr<Bag<uml::Interface> > allRealizedInterfaces() ;
+			virtual std::shared_ptr<Bag<uml::Interface>> allRealizedInterfaces() ;
 			/*!
 			All StructuralFeatures related to the Classifier that may have Slots, including direct attributes, inherited attributes, private attributes in generalizations, and memberEnds of Associations, but excluding redefined StructuralFeatures.
 			result = (member->select(oclIsKindOf(StructuralFeature))->
@@ -91,14 +91,14 @@ namespace uml
 			<p>From package UML::Classification.</p>
 			*/
 			 
-			virtual std::shared_ptr<Bag<uml::StructuralFeature> > allSlottableFeatures() ;
+			virtual std::shared_ptr<Bag<uml::StructuralFeature>> allSlottableFeatures() ;
 			/*!
 			The Interfaces used by this Classifier and all of its generalizations
 			result = (directlyUsedInterfaces()->union(self.allParents()->collect(directlyUsedInterfaces()))->asSet())
 			<p>From package UML::Classification.</p>
 			*/
 			 
-			virtual std::shared_ptr<Bag<uml::Interface> > allUsedInterfaces() ;
+			virtual std::shared_ptr<Bag<uml::Interface>> allUsedInterfaces() ;
 			/*!
 			The Interfaces directly realized by this Classifier
 			result = ((clientDependency->
@@ -107,7 +107,7 @@ namespace uml
 			<p>From package UML::Classification.</p>
 			*/
 			 
-			virtual std::shared_ptr<Bag<uml::Interface> > directlyRealizedInterfaces() ;
+			virtual std::shared_ptr<Bag<uml::Interface>> directlyRealizedInterfaces() ;
 			/*!
 			The Interfaces directly used by this Classifier
 			result = ((supplierDependency->
@@ -116,36 +116,36 @@ namespace uml
 			<p>From package UML::Classification.</p>
 			*/
 			 
-			virtual std::shared_ptr<Bag<uml::Interface> > directlyUsedInterfaces() ;
+			virtual std::shared_ptr<Bag<uml::Interface>> directlyUsedInterfaces() ;
 			/*!
 			Retrieves all the attributes of this classifier, including those inherited from its parents.
 			*/
 			 
-			virtual std::shared_ptr<Bag<uml::Property> > getAllAttributes() ;
+			virtual std::shared_ptr<Bag<uml::Property>> getAllAttributes() ;
 			/*!
 			Retrieves all the operations of this classifier, including those inherited from its parents.
 			*/
 			 
-			virtual std::shared_ptr<Bag<uml::Operation> > getAllOperations() ;
+			virtual std::shared_ptr<Bag<uml::Operation>> getAllOperations() ;
 			/*!
 			Retrieves all the interfaces on which this classifier or any of its parents has a usage dependency.
 			*/
 			 
-			virtual std::shared_ptr<Bag<uml::Interface> > getAllUsedInterfaces() ;
+			virtual std::shared_ptr<Bag<uml::Interface>> getAllUsedInterfaces() ;
 			/*!
 			The general Classifiers are the ones referenced by the Generalization relationships.
 			result = (parents())
 			<p>From package UML::Classification.</p>
 			*/
 			 
-			virtual std::shared_ptr<Bag<uml::Classifier> > getGenerals() ;
+			virtual std::shared_ptr<Bag<uml::Classifier>> getGenerals() ;
 			/*!
 			The inheritedMember association is derived by inheriting the inheritable members of the parents.
 			result = (inherit(parents()->collect(inheritableMembers(self))->asSet()))
 			<p>From package UML::Classification.</p>
 			*/
 			 
-			virtual std::shared_ptr<Bag<uml::NamedElement> > getInheritedMembers() ;
+			virtual std::shared_ptr<Bag<uml::NamedElement>> getInheritedMembers() ;
 			/*!
 			Retrieves the first operation with the specified name, parameter names, and parameter types from this classifier.
 			*/
@@ -160,7 +160,7 @@ namespace uml
 			Retrieves the operations of this classifier.
 			*/
 			 
-			virtual std::shared_ptr<Bag<uml::Operation> > getOperations() ;
+			virtual std::shared_ptr<Bag<uml::Operation>> getOperations() ;
 			/*!
 			Retrieves the value of the property with the specified name.
 			*/
@@ -170,7 +170,7 @@ namespace uml
 			Retrieves the interfaces on which this classifier has a usage dependency.
 			*/
 			 
-			virtual std::shared_ptr<Bag<uml::Interface> > getUsedInterfaces() ;
+			virtual std::shared_ptr<Bag<uml::Interface>> getUsedInterfaces() ;
 			/*!
 			The query hasVisibilityOf() determines whether a NamedElement is visible in the classifier. Non-private members are visible. It is only called when the argument is something owned by a parent.
 			allParents()->including(self)->collect(member)->includes(n)
@@ -189,7 +189,7 @@ namespace uml
 			<p>From package UML::Classification.</p>
 			*/
 			 
-			virtual std::shared_ptr<Bag<uml::NamedElement> > inherit(const std::shared_ptr<Bag<uml::NamedElement>>& inhs) ;
+			virtual std::shared_ptr<Bag<uml::NamedElement>> inherit(const std::shared_ptr<Bag<uml::NamedElement>>& inhs) ;
 			/*!
 			The query inheritableMembers() gives all of the members of a Classifier that may be inherited in one of its descendants, subject to whatever visibility restrictions apply.
 			c.allParents()->includes(self)
@@ -197,7 +197,7 @@ namespace uml
 			<p>From package UML::Classification.</p>
 			*/
 			 
-			virtual std::shared_ptr<Bag<uml::NamedElement> > inheritableMembers(const std::shared_ptr<uml::Classifier>& c) ;
+			virtual std::shared_ptr<Bag<uml::NamedElement>> inheritableMembers(const std::shared_ptr<uml::Classifier>& c) ;
 			/*!
 			result = (substitution.contract->includes(contract))
 			<p>From package UML::Classification.</p>
@@ -238,7 +238,7 @@ namespace uml
 			<p>From package UML::Classification.</p>
 			*/
 			 
-			virtual std::shared_ptr<Bag<uml::Classifier> > parents() ;
+			virtual std::shared_ptr<Bag<uml::Classifier>> parents() ;
 			/*!
 			A Classifier may only specialize Classifiers of a valid type.
 			parents()->forAll(c | self.maySpecializeType(c))

@@ -66,13 +66,13 @@ namespace uml
 			<p>From package UML::Actions.</p>
 			*/
 			 
-			virtual std::shared_ptr<Bag<uml::Parameter> > inputParameters() ;
+			virtual std::shared_ptr<Bag<uml::Parameter>> inputParameters() ;
 			/*!
 			Return the inout, out and return ownedParameters of the Behavior or Operation being called. (This operation is abstract and should be overridden by subclasses of CallAction.)
 			<p>From package UML::Actions.</p>
 			*/
 			 
-			virtual std::shared_ptr<Bag<uml::Parameter> > outputParameters() ;
+			virtual std::shared_ptr<Bag<uml::Parameter>> outputParameters() ;
 			/*!
 			The number of result OutputPins must be the same as the number of output (inout, out and return) ownedParameters of the called Behavior or Operation. The type, ordering and multiplicity of each result OutputPin must be consistent with the corresponding input Parameter.
 			let parameter: OrderedSet(Parameter) = self.outputParameters() in

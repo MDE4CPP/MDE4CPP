@@ -424,14 +424,14 @@ void WriteStructuralFeatureActionImpl::saveContent(std::shared_ptr<persistence::
 	{
 		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
 		// Save 'result'
-		std::shared_ptr<uml::OutputPin> result = this->getResult();
+		const std::shared_ptr<uml::OutputPin>& result = this->getResult();
 		if (result != nullptr)
 		{
 			saveHandler->addReference(result, "result", result->eClass() != package->getOutputPin_Class());
 		}
 
 		// Save 'value'
-		std::shared_ptr<uml::InputPin> value = this->getValue();
+		const std::shared_ptr<uml::InputPin>& value = this->getValue();
 		if (value != nullptr)
 		{
 			saveHandler->addReference(value, "value", value->eClass() != package->getInputPin_Class());

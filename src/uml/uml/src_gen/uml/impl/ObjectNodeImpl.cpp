@@ -483,7 +483,7 @@ void ObjectNodeImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveH
 	{
 		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
 		// Save 'upperBound'
-		std::shared_ptr<uml::ValueSpecification> upperBound = this->getUpperBound();
+		const std::shared_ptr<uml::ValueSpecification>& upperBound = this->getUpperBound();
 		if (upperBound != nullptr)
 		{
 			saveHandler->addReference(upperBound, "upperBound", upperBound->eClass() != package->getValueSpecification_Class());

@@ -156,7 +156,7 @@ return this->getCallEventOccurrence()->getOperation();
 	//end of body
 }
 
-std::shared_ptr<Bag<uml::Classifier> > ReturnInformationImpl::getTypes()
+std::shared_ptr<Bag<uml::Classifier>> ReturnInformationImpl::getTypes()
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -418,7 +418,7 @@ Any ReturnInformationImpl::eInvoke(int operationID, const std::shared_ptr<std::l
 		// fUML::Semantics::Actions::ReturnInformation::getTypes() : uml::Classifier[*]: 2416387611
 		case ActionsPackage::RETURNINFORMATION_OPERATION_GETTYPES:
 		{
-			std::shared_ptr<Bag<uml::Classifier> > resultList = this->getTypes();
+			const std::shared_ptr<Bag<uml::Classifier>>& resultList = this->getTypes();
 			return eAnyBag(resultList,uml::umlPackage::CLASSIFIER_CLASS);
 			break;
 		}

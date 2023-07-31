@@ -87,7 +87,7 @@ namespace fUML::Semantics::CommonBehavior
 			virtual std::shared_ptr<fUML::Semantics::Values::Value> _copy() = 0;
 			virtual std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccurrence> createEventOccurrence() = 0;
 			virtual void execute() = 0;
-			virtual std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue> > getInputParameterValues() = 0;
+			virtual std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> getInputParameterValues() = 0;
 			virtual std::shared_ptr<uml::Operation> getOperation() = 0;
 			virtual bool isCallerSuspended() = 0;
 			virtual void makeCall() = 0;

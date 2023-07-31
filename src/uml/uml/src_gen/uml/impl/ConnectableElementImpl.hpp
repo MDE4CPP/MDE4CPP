@@ -55,7 +55,7 @@ namespace uml
 			<p>From package UML::StructuredClassifiers.</p>
 			*/
 			 
-			virtual std::shared_ptr<Bag<uml::ConnectorEnd> > getEnds() ;
+			virtual std::shared_ptr<Bag<uml::ConnectorEnd>> getEnds() ;
 			
 			//*********************************
 			// Attribute Getters & Setters

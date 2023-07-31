@@ -375,7 +375,7 @@ void TypesPackageImpl::initializeTupleTypeContent()
 		{
 			m_tupleType_Attribute_instance->setDefaultValueLiteral(defaultValue);
 		}				
-		std::shared_ptr<ecore::EReference>  otherEnd = ocl::Values::ValuesPackage::eInstance()->getTupleValue_Attribute_model();
+		const std::shared_ptr<ecore::EReference>& otherEnd = ocl::Values::ValuesPackage::eInstance()->getTupleValue_Attribute_model();
 		if (otherEnd != nullptr)
 	    {
 	   		m_tupleType_Attribute_instance->setEOpposite(otherEnd);

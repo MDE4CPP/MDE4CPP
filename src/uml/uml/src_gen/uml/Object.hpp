@@ -90,7 +90,7 @@ namespace uml
 			If an Argument is not supplied for a Parameter, its default value, if any, will be used.
 			*/
 			 
-			virtual std::shared_ptr<Bag<uml::Object> > invoke(const std::shared_ptr<uml::Operation>& op, const std::shared_ptr<Bag<uml::Argument>>& arguments) = 0;
+			virtual std::shared_ptr<Bag<uml::Object>> invoke(const std::shared_ptr<uml::Operation>& op, const std::shared_ptr<Bag<uml::Argument>>& arguments) = 0;
 			/*!
 			If the Property has multiplicity upper bound = 1, set() atomically updates the value of the Property to the object
 			parameter. If Property has multiplicity upper bound >1, the Object must be a kind of ReflectiveCollection.

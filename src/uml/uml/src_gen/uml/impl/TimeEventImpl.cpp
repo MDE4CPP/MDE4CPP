@@ -340,7 +340,7 @@ void TimeEventImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHa
 	{
 		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
 		// Save 'when'
-		std::shared_ptr<uml::TimeExpression> when = this->getWhen();
+		const std::shared_ptr<uml::TimeExpression>& when = this->getWhen();
 		if (when != nullptr)
 		{
 			saveHandler->addReference(when, "when", when->eClass() != package->getTimeExpression_Class());

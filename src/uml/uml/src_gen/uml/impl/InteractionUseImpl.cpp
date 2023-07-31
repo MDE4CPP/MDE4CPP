@@ -554,7 +554,7 @@ void InteractionUseImpl::saveContent(std::shared_ptr<persistence::interfaces::XS
 		}
 
 		// Save 'returnValue'
-		std::shared_ptr<uml::ValueSpecification> returnValue = this->getReturnValue();
+		const std::shared_ptr<uml::ValueSpecification>& returnValue = this->getReturnValue();
 		if (returnValue != nullptr)
 		{
 			saveHandler->addReference(returnValue, "returnValue", returnValue->eClass() != package->getValueSpecification_Class());

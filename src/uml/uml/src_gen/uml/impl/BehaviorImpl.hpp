@@ -80,7 +80,7 @@ namespace uml
 			<p>From package UML::CommonBehavior.</p>
 			*/
 			 
-			virtual std::shared_ptr<Bag<uml::Parameter> > inputParameters() ;
+			virtual std::shared_ptr<Bag<uml::Parameter>> inputParameters() ;
 			/*!
 			There may be at most one Behavior for a given pairing of BehavioredClassifier (as owner of the Behavior) and BehavioralFeature (as specification of the Behavior).
 			specification <> null implies _'context'.ownedBehavior->select(specification=self.specification)->size() = 1
@@ -93,7 +93,7 @@ namespace uml
 			<p>From package UML::CommonBehavior.</p>
 			*/
 			 
-			virtual std::shared_ptr<Bag<uml::Parameter> > outputParameters() ;
+			virtual std::shared_ptr<Bag<uml::Parameter>> outputParameters() ;
 			/*!
 			If a Behavior has a specification BehavioralFeature, then it must have the same number of ownedParameters as its specification. The Behavior Parameters must also "match" the BehavioralParameter Parameters, but the exact requirements for this matching are not formalized.
 			specification <> null implies ownedParameter->size() = specification.ownedParameter->size()

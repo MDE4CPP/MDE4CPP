@@ -84,7 +84,7 @@ namespace fUML::Semantics::Loci
 			virtual bool conforms(const std::shared_ptr<uml::Classifier>& type, const std::shared_ptr<uml::Classifier>& classifier) = 0;
 			virtual std::shared_ptr<fUML::Semantics::StructuredClassifiers::Object> instantiate(const std::shared_ptr<uml::Class>& type) = 0;
 			virtual void remove(std::shared_ptr<fUML::Semantics::StructuredClassifiers::ExtensionalValue> value) = 0;
-			virtual std::shared_ptr<Bag<fUML::Semantics::StructuredClassifiers::ExtensionalValue> > retrieveExtent(const std::shared_ptr<uml::Classifier>& classifier) = 0;
+			virtual std::shared_ptr<Bag<fUML::Semantics::StructuredClassifiers::ExtensionalValue>> retrieveExtent(const std::shared_ptr<uml::Classifier>& classifier) = 0;
 
 			//*********************************
 			// Attribute Getters & Setters

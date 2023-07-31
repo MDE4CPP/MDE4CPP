@@ -108,7 +108,7 @@ std::shared_ptr<ecore::EObject> CS_DefaultRequestPropagationStrategyImpl::copy()
 //*********************************
 // Operations
 //*********************************
-std::shared_ptr<Bag<fUML::Semantics::StructuredClassifiers::Reference> > CS_DefaultRequestPropagationStrategyImpl::select(const std::shared_ptr<Bag<fUML::Semantics::StructuredClassifiers::Reference>>& potentialTargets, const std::shared_ptr<fUML::Semantics::Loci::SemanticVisitor>& context)
+std::shared_ptr<Bag<fUML::Semantics::StructuredClassifiers::Reference>> CS_DefaultRequestPropagationStrategyImpl::select(const std::shared_ptr<Bag<fUML::Semantics::StructuredClassifiers::Reference>>& potentialTargets, const std::shared_ptr<fUML::Semantics::Loci::SemanticVisitor>& context)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -264,7 +264,7 @@ Any CS_DefaultRequestPropagationStrategyImpl::eInvoke(int operationID, const std
 			std::shared_ptr<fUML::Semantics::Loci::SemanticVisitor> incoming_param_context;
 			std::list<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
 			incoming_param_context = (*incoming_param_context_arguments_citer)->get<std::shared_ptr<fUML::Semantics::Loci::SemanticVisitor> >();
-			std::shared_ptr<Bag<fUML::Semantics::StructuredClassifiers::Reference> > resultList = this->select(incoming_param_potentialTargets,incoming_param_context);
+			const std::shared_ptr<Bag<fUML::Semantics::StructuredClassifiers::Reference>>& resultList = this->select(incoming_param_potentialTargets,incoming_param_context);
 			return eAnyBag(resultList,fUML::Semantics::StructuredClassifiers::StructuredClassifiersPackage::REFERENCE_CLASS);
 			break;
 		}

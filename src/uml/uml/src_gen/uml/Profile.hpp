@@ -129,17 +129,17 @@ namespace uml
 			Retrieves the extensions owned by this profile, excluding non-required extensions if indicated.
 			*/
 			 
-			virtual std::shared_ptr<Bag<uml::Extension> > getOwnedExtensions(bool requiredOnly) = 0;
+			virtual std::shared_ptr<Bag<uml::Extension>> getOwnedExtensions(bool requiredOnly) = 0;
 			/*!
 			Retrieves the metaclasses referenced by this profile.
 			*/
 			 
-			virtual std::shared_ptr<Bag<uml::Class> > getReferencedMetaclasses() = 0;
+			virtual std::shared_ptr<Bag<uml::Class>> getReferencedMetaclasses() = 0;
 			/*!
 			Retrieves the metamodels referenced by this profile.
 			*/
 			 
-			virtual std::shared_ptr<Bag<uml::Model> > getReferencedMetamodels() = 0;
+			virtual std::shared_ptr<Bag<uml::Model>> getReferencedMetamodels() = 0;
 			/*!
 			Determines whether this profile is defined.
 			*/

@@ -176,7 +176,7 @@ void ExecutionImpl::execute()
 
 
 
-std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue> > ExecutionImpl::getOutputParameterValues()
+std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> ExecutionImpl::getOutputParameterValues()
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -580,7 +580,7 @@ Any ExecutionImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>
 		// fUML::Semantics::CommonBehavior::Execution::getOutputParameterValues() : fUML::Semantics::CommonBehavior::ParameterValue[*]: 3117320457
 		case CommonBehaviorPackage::EXECUTION_OPERATION_GETOUTPUTPARAMETERVALUES:
 		{
-			std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue> > resultList = this->getOutputParameterValues();
+			const std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>>& resultList = this->getOutputParameterValues();
 			return eAnyBag(resultList,fUML::Semantics::CommonBehavior::CommonBehaviorPackage::PARAMETERVALUE_CLASS);
 			break;
 		}

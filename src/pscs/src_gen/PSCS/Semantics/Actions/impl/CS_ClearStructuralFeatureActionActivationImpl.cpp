@@ -207,7 +207,7 @@ void CS_ClearStructuralFeatureActionActivationImpl::doAction()
 	//end of body
 }
 
-std::shared_ptr<Bag<PSCS::Semantics::StructuredClassifiers::CS_Link> > CS_ClearStructuralFeatureActionActivationImpl::getLinksToDestroy(const std::shared_ptr<fUML::Semantics::SimpleClassifiers::StructuredValue>& value, const std::shared_ptr<uml::StructuralFeature>& feature)
+std::shared_ptr<Bag<PSCS::Semantics::StructuredClassifiers::CS_Link>> CS_ClearStructuralFeatureActionActivationImpl::getLinksToDestroy(const std::shared_ptr<fUML::Semantics::SimpleClassifiers::StructuredValue>& value, const std::shared_ptr<uml::StructuralFeature>& feature)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -296,7 +296,7 @@ std::shared_ptr<Bag<PSCS::Semantics::StructuredClassifiers::CS_Link> > CS_ClearS
 	//end of body
 }
 
-std::shared_ptr<Bag<fUML::Semantics::Values::Value> > CS_ClearStructuralFeatureActionActivationImpl::getPotentialLinkEnds(const std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Reference>& context, const std::shared_ptr<uml::StructuralFeature>& feature)
+std::shared_ptr<Bag<fUML::Semantics::Values::Value>> CS_ClearStructuralFeatureActionActivationImpl::getPotentialLinkEnds(const std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Reference>& context, const std::shared_ptr<uml::StructuralFeature>& feature)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -489,7 +489,7 @@ Any CS_ClearStructuralFeatureActionActivationImpl::eInvoke(int operationID, cons
 			std::shared_ptr<uml::StructuralFeature> incoming_param_feature;
 			std::list<Any>::const_iterator incoming_param_feature_arguments_citer = std::next(arguments->begin(), 1);
 			incoming_param_feature = (*incoming_param_feature_arguments_citer)->get<std::shared_ptr<uml::StructuralFeature> >();
-			std::shared_ptr<Bag<PSCS::Semantics::StructuredClassifiers::CS_Link> > resultList = this->getLinksToDestroy(incoming_param_value,incoming_param_feature);
+			const std::shared_ptr<Bag<PSCS::Semantics::StructuredClassifiers::CS_Link>>& resultList = this->getLinksToDestroy(incoming_param_value,incoming_param_feature);
 			return eAnyBag(resultList,PSCS::Semantics::StructuredClassifiers::StructuredClassifiersPackage::CS_LINK_CLASS);
 			break;
 		}
@@ -506,7 +506,7 @@ Any CS_ClearStructuralFeatureActionActivationImpl::eInvoke(int operationID, cons
 			std::shared_ptr<uml::StructuralFeature> incoming_param_feature;
 			std::list<Any>::const_iterator incoming_param_feature_arguments_citer = std::next(arguments->begin(), 1);
 			incoming_param_feature = (*incoming_param_feature_arguments_citer)->get<std::shared_ptr<uml::StructuralFeature> >();
-			std::shared_ptr<Bag<fUML::Semantics::Values::Value> > resultList = this->getPotentialLinkEnds(incoming_param_context,incoming_param_feature);
+			const std::shared_ptr<Bag<fUML::Semantics::Values::Value>>& resultList = this->getPotentialLinkEnds(incoming_param_context,incoming_param_feature);
 			return eAnyBag(resultList,fUML::Semantics::Values::ValuesPackage::VALUE_CLASS);
 			break;
 		}

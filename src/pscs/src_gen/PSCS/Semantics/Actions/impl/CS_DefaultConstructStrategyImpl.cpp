@@ -506,7 +506,7 @@ std::shared_ptr<uml::Class> CS_DefaultConstructStrategyImpl::getRealizingClass(c
 	//end of body
 }
 
-std::shared_ptr<Bag<fUML::Semantics::Values::Value> > CS_DefaultConstructStrategyImpl::getValuesFromConnectorEnd(const std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Reference>& context, const std::shared_ptr<uml::ConnectorEnd>& end)
+std::shared_ptr<Bag<fUML::Semantics::Values::Value>> CS_DefaultConstructStrategyImpl::getValuesFromConnectorEnd(const std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Reference>& context, const std::shared_ptr<uml::ConnectorEnd>& end)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -1091,7 +1091,7 @@ Any CS_DefaultConstructStrategyImpl::eInvoke(int operationID, const std::shared_
 			std::shared_ptr<uml::ConnectorEnd> incoming_param_end;
 			std::list<Any>::const_iterator incoming_param_end_arguments_citer = std::next(arguments->begin(), 1);
 			incoming_param_end = (*incoming_param_end_arguments_citer)->get<std::shared_ptr<uml::ConnectorEnd> >();
-			std::shared_ptr<Bag<fUML::Semantics::Values::Value> > resultList = this->getValuesFromConnectorEnd(incoming_param_context,incoming_param_end);
+			const std::shared_ptr<Bag<fUML::Semantics::Values::Value>>& resultList = this->getValuesFromConnectorEnd(incoming_param_context,incoming_param_end);
 			return eAnyBag(resultList,fUML::Semantics::Values::ValuesPackage::VALUE_CLASS);
 			break;
 		}

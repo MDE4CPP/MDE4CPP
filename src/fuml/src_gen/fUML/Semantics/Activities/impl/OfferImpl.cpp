@@ -190,7 +190,7 @@ void OfferImpl::removeWithdrawnTokens()
 	//end of body
 }
 
-std::shared_ptr<Bag<fUML::Semantics::Activities::Token> > OfferImpl::retrieveOfferedTokens()
+std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> OfferImpl::retrieveOfferedTokens()
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -445,7 +445,7 @@ Any OfferImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& a
 		// fUML::Semantics::Activities::Offer::retrieveOfferedTokens() : fUML::Semantics::Activities::Token[*]: 1383812745
 		case ActivitiesPackage::OFFER_OPERATION_RETRIEVEOFFEREDTOKENS:
 		{
-			std::shared_ptr<Bag<fUML::Semantics::Activities::Token> > resultList = this->retrieveOfferedTokens();
+			const std::shared_ptr<Bag<fUML::Semantics::Activities::Token>>& resultList = this->retrieveOfferedTokens();
 			return eAnyBag(resultList,fUML::Semantics::Activities::ActivitiesPackage::TOKEN_CLASS);
 			break;
 		}

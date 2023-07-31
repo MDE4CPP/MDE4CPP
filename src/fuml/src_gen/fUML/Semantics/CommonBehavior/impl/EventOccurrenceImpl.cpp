@@ -129,12 +129,12 @@ void EventOccurrenceImpl::doSend()
 	//end of body
 }
 
-std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue> > EventOccurrenceImpl::getParameterValues(const std::shared_ptr<uml::Event>& event)
+std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> EventOccurrenceImpl::getParameterValues(const std::shared_ptr<uml::Event>& event)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue> > EventOccurrenceImpl::getParameterValues()
+std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> EventOccurrenceImpl::getParameterValues()
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -396,14 +396,14 @@ Any EventOccurrenceImpl::eInvoke(int operationID, const std::shared_ptr<std::lis
 			std::shared_ptr<uml::Event> incoming_param_event;
 			std::list<Any>::const_iterator incoming_param_event_arguments_citer = std::next(arguments->begin(), 0);
 			incoming_param_event = (*incoming_param_event_arguments_citer)->get<std::shared_ptr<uml::Event> >();
-			std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue> > resultList = this->getParameterValues(incoming_param_event);
+			const std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>>& resultList = this->getParameterValues(incoming_param_event);
 			return eAnyBag(resultList,fUML::Semantics::CommonBehavior::CommonBehaviorPackage::PARAMETERVALUE_CLASS);
 			break;
 		}
 		// fUML::Semantics::CommonBehavior::EventOccurrence::getParameterValues() : fUML::Semantics::CommonBehavior::ParameterValue[*]: 2905522987
 		case CommonBehaviorPackage::EVENTOCCURRENCE_OPERATION_GETPARAMETERVALUES:
 		{
-			std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue> > resultList = this->getParameterValues();
+			const std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>>& resultList = this->getParameterValues();
 			return eAnyBag(resultList,fUML::Semantics::CommonBehavior::CommonBehaviorPackage::PARAMETERVALUE_CLASS);
 			break;
 		}

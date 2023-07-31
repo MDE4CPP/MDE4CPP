@@ -554,7 +554,7 @@ void ActionsPackageImpl::initializeActionActivationContent()
 		{
 			m_actionActivation_Attribute_pinActivation->setDefaultValueLiteral(defaultValue);
 		}				
-		std::shared_ptr<ecore::EReference>  otherEnd = fUML::Semantics::Actions::ActionsPackage::eInstance()->getPinActivation_Attribute_actionActivation();
+		const std::shared_ptr<ecore::EReference>& otherEnd = fUML::Semantics::Actions::ActionsPackage::eInstance()->getPinActivation_Attribute_actionActivation();
 		if (otherEnd != nullptr)
 	    {
 	   		m_actionActivation_Attribute_pinActivation->setEOpposite(otherEnd);
@@ -1837,7 +1837,7 @@ void ActionsPackageImpl::initializePinActivationContent()
 		{
 			m_pinActivation_Attribute_actionActivation->setDefaultValueLiteral(defaultValue);
 		}				
-		std::shared_ptr<ecore::EReference>  otherEnd = fUML::Semantics::Actions::ActionsPackage::eInstance()->getActionActivation_Attribute_pinActivation();
+		const std::shared_ptr<ecore::EReference>& otherEnd = fUML::Semantics::Actions::ActionsPackage::eInstance()->getActionActivation_Attribute_pinActivation();
 		if (otherEnd != nullptr)
 	    {
 	   		m_pinActivation_Attribute_actionActivation->setEOpposite(otherEnd);
@@ -2509,7 +2509,7 @@ void ActionsPackageImpl::initializeStructuredActivityNodeActivationContent()
 		{
 			m_structuredActivityNodeActivation_Attribute_activationGroup->setDefaultValueLiteral(defaultValue);
 		}				
-		std::shared_ptr<ecore::EReference>  otherEnd = fUML::Semantics::Activities::ActivitiesPackage::eInstance()->getActivityNodeActivationGroup_Attribute_containingNodeActivation();
+		const std::shared_ptr<ecore::EReference>& otherEnd = fUML::Semantics::Activities::ActivitiesPackage::eInstance()->getActivityNodeActivationGroup_Attribute_containingNodeActivation();
 		if (otherEnd != nullptr)
 	    {
 	   		m_structuredActivityNodeActivation_Attribute_activationGroup->setEOpposite(otherEnd);

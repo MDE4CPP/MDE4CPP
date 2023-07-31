@@ -471,7 +471,7 @@ void ActionInputPinImpl::saveContent(std::shared_ptr<persistence::interfaces::XS
 	{
 		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
 		// Save 'fromAction'
-		std::shared_ptr<uml::Action> fromAction = this->getFromAction();
+		const std::shared_ptr<uml::Action>& fromAction = this->getFromAction();
 		if (fromAction != nullptr)
 		{
 			saveHandler->addReference(fromAction, "fromAction", fromAction->eClass() != package->getAction_Class());

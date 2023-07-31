@@ -435,7 +435,7 @@ void ExpansionRegionActivationImpl::sendOffers()
 	//end of body
 }
 
-std::shared_ptr<Bag<fUML::Semantics::Activities::Token> > ExpansionRegionActivationImpl::takeOfferedTokens()
+std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> ExpansionRegionActivationImpl::takeOfferedTokens()
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -1052,7 +1052,7 @@ Any ExpansionRegionActivationImpl::eInvoke(int operationID, const std::shared_pt
 		// fUML::Semantics::Activities::ExpansionRegionActivation::takeOfferedTokens() : fUML::Semantics::Activities::Token[*]: 1713936329
 		case ActivitiesPackage::EXPANSIONREGIONACTIVATION_OPERATION_TAKEOFFEREDTOKENS:
 		{
-			std::shared_ptr<Bag<fUML::Semantics::Activities::Token> > resultList = this->takeOfferedTokens();
+			const std::shared_ptr<Bag<fUML::Semantics::Activities::Token>>& resultList = this->takeOfferedTokens();
 			return eAnyBag(resultList,fUML::Semantics::Activities::ActivitiesPackage::TOKEN_CLASS);
 			break;
 		}

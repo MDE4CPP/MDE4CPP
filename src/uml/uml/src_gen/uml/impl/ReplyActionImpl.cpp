@@ -487,7 +487,7 @@ void ReplyActionImpl::saveContent(std::shared_ptr<persistence::interfaces::XSave
 		}
 
 		// Save 'returnInformation'
-		std::shared_ptr<uml::InputPin> returnInformation = this->getReturnInformation();
+		const std::shared_ptr<uml::InputPin>& returnInformation = this->getReturnInformation();
 		if (returnInformation != nullptr)
 		{
 			saveHandler->addReference(returnInformation, "returnInformation", returnInformation->eClass() != package->getInputPin_Class());

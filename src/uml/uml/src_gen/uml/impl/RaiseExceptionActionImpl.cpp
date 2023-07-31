@@ -360,7 +360,7 @@ void RaiseExceptionActionImpl::saveContent(std::shared_ptr<persistence::interfac
 	{
 		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
 		// Save 'exception'
-		std::shared_ptr<uml::InputPin> exception = this->getException();
+		const std::shared_ptr<uml::InputPin>& exception = this->getException();
 		if (exception != nullptr)
 		{
 			saveHandler->addReference(exception, "exception", exception->eClass() != package->getInputPin_Class());

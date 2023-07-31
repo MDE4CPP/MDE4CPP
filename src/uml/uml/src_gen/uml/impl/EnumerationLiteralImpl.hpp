@@ -53,7 +53,7 @@ namespace uml
 			// Operations
 			//*********************************
 			
-			virtual std::shared_ptr<Bag<uml::Classifier> > getClassifiers() ;
+			virtual std::shared_ptr<Bag<uml::Classifier>> getClassifiers() ;
 			
 			//*********************************
 			// Attribute Getters & Setters

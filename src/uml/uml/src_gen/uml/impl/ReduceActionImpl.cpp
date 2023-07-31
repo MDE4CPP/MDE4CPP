@@ -490,14 +490,14 @@ void ReduceActionImpl::saveContent(std::shared_ptr<persistence::interfaces::XSav
 	{
 		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
 		// Save 'collection'
-		std::shared_ptr<uml::InputPin> collection = this->getCollection();
+		const std::shared_ptr<uml::InputPin>& collection = this->getCollection();
 		if (collection != nullptr)
 		{
 			saveHandler->addReference(collection, "collection", collection->eClass() != package->getInputPin_Class());
 		}
 
 		// Save 'result'
-		std::shared_ptr<uml::OutputPin> result = this->getResult();
+		const std::shared_ptr<uml::OutputPin>& result = this->getResult();
 		if (result != nullptr)
 		{
 			saveHandler->addReference(result, "result", result->eClass() != package->getOutputPin_Class());

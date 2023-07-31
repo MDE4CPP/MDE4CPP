@@ -88,11 +88,11 @@ namespace fUML::Semantics::Activities
 			virtual void fire(const std::shared_ptr<Bag<fUML::Semantics::Activities::Token>>& incomingTokens) = 0;
 			virtual std::shared_ptr<fUML::Semantics::Activities::ActivityEdgeInstance> getDecisionInputFlowInstance() = 0;
 			virtual std::shared_ptr<fUML::Semantics::Values::Value> getDecisionInputFlowValue() = 0;
-			virtual std::shared_ptr<Bag<fUML::Semantics::Values::Value> > getDecisionValues(const std::shared_ptr<Bag<fUML::Semantics::Activities::Token>>& incomingTokens) = 0;
+			virtual std::shared_ptr<Bag<fUML::Semantics::Values::Value>> getDecisionValues(const std::shared_ptr<Bag<fUML::Semantics::Activities::Token>>& incomingTokens) = 0;
 			virtual bool hasObjectFlowInput() = 0;
 			virtual bool isReady() = 0;
-			virtual std::shared_ptr<Bag<fUML::Semantics::Activities::Token> > removeJoinedControlTokens(const std::shared_ptr<Bag<fUML::Semantics::Activities::Token>>& incomingTokens) = 0;
-			virtual std::shared_ptr<Bag<fUML::Semantics::Activities::Token> > takeOfferedTokens() = 0;
+			virtual std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> removeJoinedControlTokens(const std::shared_ptr<Bag<fUML::Semantics::Activities::Token>>& incomingTokens) = 0;
+			virtual std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> takeOfferedTokens() = 0;
 			virtual void terminate() = 0;
 			virtual bool test(const std::shared_ptr<uml::ValueSpecification>& gaurd, const std::shared_ptr<fUML::Semantics::Values::Value>& value) = 0;
 

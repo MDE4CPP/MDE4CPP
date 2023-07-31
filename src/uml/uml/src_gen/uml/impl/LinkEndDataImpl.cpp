@@ -145,7 +145,7 @@ std::shared_ptr<ecore::EObject> LinkEndDataImpl::copy() const
 //*********************************
 // Operations
 //*********************************
-std::shared_ptr<Bag<uml::InputPin> > LinkEndDataImpl::allPins()
+std::shared_ptr<Bag<uml::InputPin>> LinkEndDataImpl::allPins()
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -507,7 +507,7 @@ Any LinkEndDataImpl::eInvoke(int operationID, const std::shared_ptr<std::list<An
 		// uml::LinkEndData::allPins() : uml::InputPin[*]: 3830825810
 		case umlPackage::LINKENDDATA_OPERATION_ALLPINS:
 		{
-			std::shared_ptr<Bag<uml::InputPin> > resultList = this->allPins();
+			const std::shared_ptr<Bag<uml::InputPin>>& resultList = this->allPins();
 			return eAnyBag(resultList,uml::umlPackage::INPUTPIN_CLASS);
 			break;
 		}

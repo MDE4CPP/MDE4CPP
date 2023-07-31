@@ -156,7 +156,7 @@ std::shared_ptr<uml::Association> TypeImpl::createAssociation(bool end1IsNavigab
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-std::shared_ptr<Bag<uml::Association> > TypeImpl::getAssociations()
+std::shared_ptr<Bag<uml::Association>> TypeImpl::getAssociations()
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -452,7 +452,7 @@ Any TypeImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& ar
 		// uml::Type::getAssociations() : uml::Association[*]: 831147640
 		case umlPackage::TYPE_OPERATION_GETASSOCIATIONS:
 		{
-			std::shared_ptr<Bag<uml::Association> > resultList = this->getAssociations();
+			const std::shared_ptr<Bag<uml::Association>>& resultList = this->getAssociations();
 			return eAnyBag(resultList,uml::umlPackage::ASSOCIATION_CLASS);
 			break;
 		}

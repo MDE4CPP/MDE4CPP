@@ -57,7 +57,7 @@ namespace uml
 			<p>From package UML::StructuredClassifiers.</p>
 			*/
 			 
-			virtual std::shared_ptr<Bag<uml::ConnectableElement> > allRoles() ;
+			virtual std::shared_ptr<Bag<uml::ConnectableElement>> allRoles() ;
 			/*!
 			Creates a property with the specified name, type, lower bound, and upper bound as an owned attribute of this structured classifier.
 			*/
@@ -69,7 +69,7 @@ namespace uml
 			<p>From package UML::StructuredClassifiers.</p>
 			*/
 			 
-			virtual std::shared_ptr<Bag<uml::Property> > getParts() ;
+			virtual std::shared_ptr<Bag<uml::Property>> getParts() ;
 			
 			//*********************************
 			// Attribute Getters & Setters

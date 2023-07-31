@@ -124,7 +124,7 @@ std::shared_ptr<ecore::EObject> SignalEventOccurrenceImpl::copy() const
 //*********************************
 // Operations
 //*********************************
-std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue> > SignalEventOccurrenceImpl::getParameterValues(const std::shared_ptr<uml::Event>& event)
+std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> SignalEventOccurrenceImpl::getParameterValues(const std::shared_ptr<uml::Event>& event)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -370,7 +370,7 @@ Any SignalEventOccurrenceImpl::eInvoke(int operationID, const std::shared_ptr<st
 			std::shared_ptr<uml::Event> incoming_param_event;
 			std::list<Any>::const_iterator incoming_param_event_arguments_citer = std::next(arguments->begin(), 0);
 			incoming_param_event = (*incoming_param_event_arguments_citer)->get<std::shared_ptr<uml::Event> >();
-			std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue> > resultList = this->getParameterValues(incoming_param_event);
+			const std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>>& resultList = this->getParameterValues(incoming_param_event);
 			return eAnyBag(resultList,fUML::Semantics::CommonBehavior::CommonBehaviorPackage::PARAMETERVALUE_CLASS);
 			break;
 		}

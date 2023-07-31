@@ -127,7 +127,7 @@ NamedElementImpl& NamedElementImpl::operator=(const NamedElementImpl & obj)
 //*********************************
 // Operations
 //*********************************
-std::shared_ptr<Bag<uml::Namespace> > NamedElementImpl::allNamespaces() const
+std::shared_ptr<Bag<uml::Namespace>> NamedElementImpl::allNamespaces() const
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -152,7 +152,7 @@ std::shared_ptr<Bag<uml::Namespace> > NamedElementImpl::allNamespaces() const
 	//end of body
 }
 
-std::shared_ptr<Bag<uml::Package> > NamedElementImpl::allOwningPackages()
+std::shared_ptr<Bag<uml::Package>> NamedElementImpl::allOwningPackages()
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -167,7 +167,7 @@ std::shared_ptr<uml::Usage> NamedElementImpl::createUsage(const std::shared_ptr<
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-std::shared_ptr<Bag<uml::Dependency> > NamedElementImpl::getClientDependencies()
+std::shared_ptr<Bag<uml::Dependency>> NamedElementImpl::getClientDependencies()
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -456,7 +456,7 @@ void NamedElementImpl::saveContent(std::shared_ptr<persistence::interfaces::XSav
 	{
 		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
 		// Save 'nameExpression'
-		std::shared_ptr<uml::StringExpression> nameExpression = this->getNameExpression();
+		const std::shared_ptr<uml::StringExpression>& nameExpression = this->getNameExpression();
 		if (nameExpression != nullptr)
 		{
 			saveHandler->addReference(nameExpression, "nameExpression", nameExpression->eClass() != package->getStringExpression_Class());
@@ -590,14 +590,14 @@ Any NamedElementImpl::eInvoke(int operationID, const std::shared_ptr<std::list<A
 		// uml::NamedElement::allNamespaces() : uml::Namespace[*] {const}: 2409538685
 		case umlPackage::NAMEDELEMENT_OPERATION_ALLNAMESPACES:
 		{
-			std::shared_ptr<Bag<uml::Namespace> > resultList = this->allNamespaces();
+			const std::shared_ptr<Bag<uml::Namespace>>& resultList = this->allNamespaces();
 			return eAnyBag(resultList,uml::umlPackage::NAMESPACE_CLASS);
 			break;
 		}
 		// uml::NamedElement::allOwningPackages() : uml::Package[*]: 2217156650
 		case umlPackage::NAMEDELEMENT_OPERATION_ALLOWNINGPACKAGES:
 		{
-			std::shared_ptr<Bag<uml::Package> > resultList = this->allOwningPackages();
+			const std::shared_ptr<Bag<uml::Package>>& resultList = this->allOwningPackages();
 			return eAnyBag(resultList,uml::umlPackage::PACKAGE_CLASS);
 			break;
 		}
@@ -626,7 +626,7 @@ Any NamedElementImpl::eInvoke(int operationID, const std::shared_ptr<std::list<A
 		// uml::NamedElement::getClientDependencies() : uml::Dependency[*]: 3811456257
 		case umlPackage::NAMEDELEMENT_OPERATION_GETCLIENTDEPENDENCIES:
 		{
-			std::shared_ptr<Bag<uml::Dependency> > resultList = this->getClientDependencies();
+			const std::shared_ptr<Bag<uml::Dependency>>& resultList = this->getClientDependencies();
 			return eAnyBag(resultList,uml::umlPackage::DEPENDENCY_CLASS);
 			break;
 		}

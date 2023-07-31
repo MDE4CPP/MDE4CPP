@@ -141,7 +141,7 @@ std::shared_ptr<ecore::EObject> StructuredActivityNodeActivationImpl::copy() con
 //*********************************
 // Operations
 //*********************************
-std::shared_ptr<Bag<fUML::Semantics::Activities::Token> > StructuredActivityNodeActivationImpl::completeAction()
+std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> StructuredActivityNodeActivationImpl::completeAction()
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -239,7 +239,7 @@ std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivation> StructuredA
 	//end of body
 }
 
-std::shared_ptr<Bag<fUML::Semantics::Values::Value> > StructuredActivityNodeActivationImpl::getPinValues(const std::shared_ptr<uml::OutputPin>& pin)
+std::shared_ptr<Bag<fUML::Semantics::Values::Value>> StructuredActivityNodeActivationImpl::getPinValues(const std::shared_ptr<uml::OutputPin>& pin)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -281,7 +281,7 @@ bool StructuredActivityNodeActivationImpl::isSuspended()
 	//end of body
 }
 
-std::shared_ptr<Bag<uml::ActivityNode> > StructuredActivityNodeActivationImpl::makeActivityNodeList(const std::shared_ptr<Bag<uml::ExecutableNode>>& nodes)
+std::shared_ptr<Bag<uml::ActivityNode>> StructuredActivityNodeActivationImpl::makeActivityNodeList(const std::shared_ptr<Bag<uml::ExecutableNode>>& nodes)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -559,7 +559,7 @@ Any StructuredActivityNodeActivationImpl::eInvoke(int operationID, const std::sh
 		// fUML::Semantics::Actions::StructuredActivityNodeActivation::completeAction() : fUML::Semantics::Activities::Token[*]: 3878860807
 		case ActionsPackage::STRUCTUREDACTIVITYNODEACTIVATION_OPERATION_COMPLETEACTION:
 		{
-			std::shared_ptr<Bag<fUML::Semantics::Activities::Token> > resultList = this->completeAction();
+			const std::shared_ptr<Bag<fUML::Semantics::Activities::Token>>& resultList = this->completeAction();
 			return eAnyBag(resultList,fUML::Semantics::Activities::ActivitiesPackage::TOKEN_CLASS);
 			break;
 		}
@@ -606,7 +606,7 @@ Any StructuredActivityNodeActivationImpl::eInvoke(int operationID, const std::sh
 			std::shared_ptr<uml::OutputPin> incoming_param_pin;
 			std::list<Any>::const_iterator incoming_param_pin_arguments_citer = std::next(arguments->begin(), 0);
 			incoming_param_pin = (*incoming_param_pin_arguments_citer)->get<std::shared_ptr<uml::OutputPin> >();
-			std::shared_ptr<Bag<fUML::Semantics::Values::Value> > resultList = this->getPinValues(incoming_param_pin);
+			const std::shared_ptr<Bag<fUML::Semantics::Values::Value>>& resultList = this->getPinValues(incoming_param_pin);
 			return eAnyBag(resultList,fUML::Semantics::Values::ValuesPackage::VALUE_CLASS);
 			break;
 		}
@@ -635,7 +635,7 @@ Any StructuredActivityNodeActivationImpl::eInvoke(int operationID, const std::sh
 			std::shared_ptr<Bag<uml::ExecutableNode>> incoming_param_nodes;
 			std::list<Any>::const_iterator incoming_param_nodes_arguments_citer = std::next(arguments->begin(), 0);
 			incoming_param_nodes = (*incoming_param_nodes_arguments_citer)->get<std::shared_ptr<Bag<uml::ExecutableNode>> >();
-			std::shared_ptr<Bag<uml::ActivityNode> > resultList = this->makeActivityNodeList(incoming_param_nodes);
+			const std::shared_ptr<Bag<uml::ActivityNode>>& resultList = this->makeActivityNodeList(incoming_param_nodes);
 			return eAnyBag(resultList,uml::umlPackage::ACTIVITYNODE_CLASS);
 			break;
 		}

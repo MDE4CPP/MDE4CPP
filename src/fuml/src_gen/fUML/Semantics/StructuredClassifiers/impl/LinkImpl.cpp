@@ -179,7 +179,7 @@ void LinkImpl::addTo(const std::shared_ptr<fUML::Semantics::Loci::Locus>& locus)
 	//end of body
 }
 
-std::shared_ptr<Bag<fUML::Semantics::SimpleClassifiers::FeatureValue> > LinkImpl::getOtherFeatureValues(const std::shared_ptr<Bag<fUML::Semantics::StructuredClassifiers::ExtensionalValue>>& extent, const std::shared_ptr<uml::Property>& end)
+std::shared_ptr<Bag<fUML::Semantics::SimpleClassifiers::FeatureValue>> LinkImpl::getOtherFeatureValues(const std::shared_ptr<Bag<fUML::Semantics::StructuredClassifiers::ExtensionalValue>>& extent, const std::shared_ptr<uml::Property>& end)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -202,7 +202,7 @@ std::shared_ptr<Bag<fUML::Semantics::SimpleClassifiers::FeatureValue> > LinkImpl
 	//end of body
 }
 
-std::shared_ptr<Bag<uml::Classifier> > LinkImpl::getTypes() const
+std::shared_ptr<Bag<uml::Classifier>> LinkImpl::getTypes() const
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -463,14 +463,14 @@ Any LinkImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>& ar
 			std::shared_ptr<uml::Property> incoming_param_end;
 			std::list<Any>::const_iterator incoming_param_end_arguments_citer = std::next(arguments->begin(), 1);
 			incoming_param_end = (*incoming_param_end_arguments_citer)->get<std::shared_ptr<uml::Property> >();
-			std::shared_ptr<Bag<fUML::Semantics::SimpleClassifiers::FeatureValue> > resultList = this->getOtherFeatureValues(incoming_param_extent,incoming_param_end);
+			const std::shared_ptr<Bag<fUML::Semantics::SimpleClassifiers::FeatureValue>>& resultList = this->getOtherFeatureValues(incoming_param_extent,incoming_param_end);
 			return eAnyBag(resultList,fUML::Semantics::SimpleClassifiers::SimpleClassifiersPackage::FEATUREVALUE_CLASS);
 			break;
 		}
 		// fUML::Semantics::StructuredClassifiers::Link::getTypes() : uml::Classifier[*] {const}: 2319995210
 		case StructuredClassifiersPackage::LINK_OPERATION_GETTYPES:
 		{
-			std::shared_ptr<Bag<uml::Classifier> > resultList = this->getTypes();
+			const std::shared_ptr<Bag<uml::Classifier>>& resultList = this->getTypes();
 			return eAnyBag(resultList,uml::umlPackage::CLASSIFIER_CLASS);
 			break;
 		}

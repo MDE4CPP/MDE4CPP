@@ -822,7 +822,7 @@ void InterfaceImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHa
 		}
 
 		// Save 'protocol'
-		std::shared_ptr<uml::ProtocolStateMachine> protocol = this->getProtocol();
+		const std::shared_ptr<uml::ProtocolStateMachine>& protocol = this->getProtocol();
 		if (protocol != nullptr)
 		{
 			saveHandler->addReference(protocol, "protocol", protocol->eClass() != package->getProtocolStateMachine_Class());

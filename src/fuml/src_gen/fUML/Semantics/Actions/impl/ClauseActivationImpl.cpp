@@ -115,12 +115,12 @@ std::shared_ptr<fUML::Semantics::SimpleClassifiers::BooleanValue> ClauseActivati
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-std::shared_ptr<Bag<fUML::Semantics::Actions::ClauseActivation> > ClauseActivationImpl::getPredecessors()
+std::shared_ptr<Bag<fUML::Semantics::Actions::ClauseActivation>> ClauseActivationImpl::getPredecessors()
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-std::shared_ptr<Bag<fUML::Semantics::Actions::ClauseActivation> > ClauseActivationImpl::getSuccessors()
+std::shared_ptr<Bag<fUML::Semantics::Actions::ClauseActivation>> ClauseActivationImpl::getSuccessors()
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -371,14 +371,14 @@ Any ClauseActivationImpl::eInvoke(int operationID, const std::shared_ptr<std::li
 		// fUML::Semantics::Actions::ClauseActivation::getPredecessors() : fUML::Semantics::Actions::ClauseActivation[*]: 1373824501
 		case ActionsPackage::CLAUSEACTIVATION_OPERATION_GETPREDECESSORS:
 		{
-			std::shared_ptr<Bag<fUML::Semantics::Actions::ClauseActivation> > resultList = this->getPredecessors();
+			const std::shared_ptr<Bag<fUML::Semantics::Actions::ClauseActivation>>& resultList = this->getPredecessors();
 			return eAnyBag(resultList,fUML::Semantics::Actions::ActionsPackage::CLAUSEACTIVATION_CLASS);
 			break;
 		}
 		// fUML::Semantics::Actions::ClauseActivation::getSuccessors() : fUML::Semantics::Actions::ClauseActivation[*]: 3983311568
 		case ActionsPackage::CLAUSEACTIVATION_OPERATION_GETSUCCESSORS:
 		{
-			std::shared_ptr<Bag<fUML::Semantics::Actions::ClauseActivation> > resultList = this->getSuccessors();
+			const std::shared_ptr<Bag<fUML::Semantics::Actions::ClauseActivation>>& resultList = this->getSuccessors();
 			return eAnyBag(resultList,fUML::Semantics::Actions::ActionsPackage::CLAUSEACTIVATION_CLASS);
 			break;
 		}

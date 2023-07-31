@@ -247,17 +247,17 @@ std::shared_ptr<ecore::ENamedElement> ProfileImpl::getDefinition(const std::shar
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-std::shared_ptr<Bag<uml::Extension> > ProfileImpl::getOwnedExtensions(bool requiredOnly)
+std::shared_ptr<Bag<uml::Extension>> ProfileImpl::getOwnedExtensions(bool requiredOnly)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-std::shared_ptr<Bag<uml::Class> > ProfileImpl::getReferencedMetaclasses()
+std::shared_ptr<Bag<uml::Class>> ProfileImpl::getReferencedMetaclasses()
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-std::shared_ptr<Bag<uml::Model> > ProfileImpl::getReferencedMetamodels()
+std::shared_ptr<Bag<uml::Model>> ProfileImpl::getReferencedMetamodels()
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -738,21 +738,21 @@ Any ProfileImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any>>&
 			bool incoming_param_requiredOnly;
 			std::list<Any>::const_iterator incoming_param_requiredOnly_arguments_citer = std::next(arguments->begin(), 0);
 			incoming_param_requiredOnly = (*incoming_param_requiredOnly_arguments_citer)->get<bool >();
-			std::shared_ptr<Bag<uml::Extension> > resultList = this->getOwnedExtensions(incoming_param_requiredOnly);
+			const std::shared_ptr<Bag<uml::Extension>>& resultList = this->getOwnedExtensions(incoming_param_requiredOnly);
 			return eAnyBag(resultList,uml::umlPackage::EXTENSION_CLASS);
 			break;
 		}
 		// uml::Profile::getReferencedMetaclasses() : uml::Class[*]: 2481786676
 		case umlPackage::PROFILE_OPERATION_GETREFERENCEDMETACLASSES:
 		{
-			std::shared_ptr<Bag<uml::Class> > resultList = this->getReferencedMetaclasses();
+			const std::shared_ptr<Bag<uml::Class>>& resultList = this->getReferencedMetaclasses();
 			return eAnyBag(resultList,uml::umlPackage::CLASS_CLASS);
 			break;
 		}
 		// uml::Profile::getReferencedMetamodels() : uml::Model[*]: 2762577013
 		case umlPackage::PROFILE_OPERATION_GETREFERENCEDMETAMODELS:
 		{
-			std::shared_ptr<Bag<uml::Model> > resultList = this->getReferencedMetamodels();
+			const std::shared_ptr<Bag<uml::Model>>& resultList = this->getReferencedMetamodels();
 			return eAnyBag(resultList,uml::umlPackage::MODEL_CLASS);
 			break;
 		}

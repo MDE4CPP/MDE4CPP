@@ -55,7 +55,7 @@ namespace uml
 			<p>From package UML::Classification.</p>
 			*/
 			 
-			virtual std::shared_ptr<Bag<uml::TemplateParameter> > getInheritedParameters() ;
+			virtual std::shared_ptr<Bag<uml::TemplateParameter>> getInheritedParameters() ;
 			/*!
 			If any of the parent Classifiers are a template, then the extendedSignature must include the signature of that Classifier.
 			classifier.allParents()->forAll(c | c.ownedTemplateSignature->notEmpty() implies self->closure(extendedSignature)->includes(c.ownedTemplateSignature))

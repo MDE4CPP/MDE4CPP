@@ -108,14 +108,14 @@ namespace uml
 			<p>From package UML::Classification.</p>
 			*/
 			 
-			virtual std::shared_ptr<Bag<uml::Parameter> > inputParameters() = 0;
+			virtual std::shared_ptr<Bag<uml::Parameter>> inputParameters() = 0;
 			/*!
 			The ownedParameters with direction out, inout, or return.
 			result = (ownedParameter->select(direction=ParameterDirectionKind::out or direction=ParameterDirectionKind::inout or direction=ParameterDirectionKind::return))
 			<p>From package UML::Classification.</p>
 			*/
 			 
-			virtual std::shared_ptr<Bag<uml::Parameter> > outputParameters() = 0;
+			virtual std::shared_ptr<Bag<uml::Parameter>> outputParameters() = 0;
 
 			//*********************************
 			// Attribute Getters & Setters

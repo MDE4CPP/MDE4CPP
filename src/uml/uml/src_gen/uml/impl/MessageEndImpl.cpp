@@ -116,7 +116,7 @@ MessageEndImpl& MessageEndImpl::operator=(const MessageEndImpl & obj)
 //*********************************
 // Operations
 //*********************************
-std::shared_ptr<Bag<uml::InteractionFragment> > MessageEndImpl::enclosingFragment()
+std::shared_ptr<Bag<uml::InteractionFragment>> MessageEndImpl::enclosingFragment()
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -131,7 +131,7 @@ bool MessageEndImpl::isSend()
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-std::shared_ptr<Bag<uml::MessageEnd> > MessageEndImpl::oppositeEnd()
+std::shared_ptr<Bag<uml::MessageEnd>> MessageEndImpl::oppositeEnd()
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -348,7 +348,7 @@ Any MessageEndImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any
 		// uml::MessageEnd::enclosingFragment() : uml::InteractionFragment[*]: 3122365935
 		case umlPackage::MESSAGEEND_OPERATION_ENCLOSINGFRAGMENT:
 		{
-			std::shared_ptr<Bag<uml::InteractionFragment> > resultList = this->enclosingFragment();
+			const std::shared_ptr<Bag<uml::InteractionFragment>>& resultList = this->enclosingFragment();
 			return eAnyBag(resultList,uml::umlPackage::INTERACTIONFRAGMENT_CLASS);
 			break;
 		}
@@ -367,7 +367,7 @@ Any MessageEndImpl::eInvoke(int operationID, const std::shared_ptr<std::list<Any
 		// uml::MessageEnd::oppositeEnd() : uml::MessageEnd[*]: 2418148191
 		case umlPackage::MESSAGEEND_OPERATION_OPPOSITEEND:
 		{
-			std::shared_ptr<Bag<uml::MessageEnd> > resultList = this->oppositeEnd();
+			const std::shared_ptr<Bag<uml::MessageEnd>>& resultList = this->oppositeEnd();
 			return eAnyBag(resultList,uml::umlPackage::MESSAGEEND_CLASS);
 			break;
 		}

@@ -49,7 +49,7 @@ virtual public Offer
 			virtual bool hasTokens() ;
 			virtual void removeOfferedValues(int count) ;
 			virtual void removeWithdrawnTokens() ;
-			virtual std::shared_ptr<Bag<fUML::Semantics::Activities::Token> > retrieveOfferedTokens() ;
+			virtual std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> retrieveOfferedTokens() ;
 			
 			//*********************************
 			// Attribute Getters & Setters

@@ -203,12 +203,12 @@ std::shared_ptr<uml::Parameter> BehavioralFeatureImpl::createReturnResult(std::s
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-std::shared_ptr<Bag<uml::Parameter> > BehavioralFeatureImpl::inputParameters()
+std::shared_ptr<Bag<uml::Parameter>> BehavioralFeatureImpl::inputParameters()
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-std::shared_ptr<Bag<uml::Parameter> > BehavioralFeatureImpl::outputParameters()
+std::shared_ptr<Bag<uml::Parameter>> BehavioralFeatureImpl::outputParameters()
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -893,14 +893,14 @@ Any BehavioralFeatureImpl::eInvoke(int operationID, const std::shared_ptr<std::l
 		// uml::BehavioralFeature::inputParameters() : uml::Parameter[*]: 2494913883
 		case umlPackage::BEHAVIORALFEATURE_OPERATION_INPUTPARAMETERS:
 		{
-			std::shared_ptr<Bag<uml::Parameter> > resultList = this->inputParameters();
+			const std::shared_ptr<Bag<uml::Parameter>>& resultList = this->inputParameters();
 			return eAnyBag(resultList,uml::umlPackage::PARAMETER_CLASS);
 			break;
 		}
 		// uml::BehavioralFeature::outputParameters() : uml::Parameter[*]: 3232178764
 		case umlPackage::BEHAVIORALFEATURE_OPERATION_OUTPUTPARAMETERS:
 		{
-			std::shared_ptr<Bag<uml::Parameter> > resultList = this->outputParameters();
+			const std::shared_ptr<Bag<uml::Parameter>>& resultList = this->outputParameters();
 			return eAnyBag(resultList,uml::umlPackage::PARAMETER_CLASS);
 			break;
 		}

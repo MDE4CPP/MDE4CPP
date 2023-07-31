@@ -48,11 +48,11 @@ virtual public ActivityEdgeInstance
 			// Operations
 			//*********************************
 			virtual int countOfferedValue() ;
-			virtual std::shared_ptr<Bag<fUML::Semantics::Activities::Token> > getOfferedTokens() ;
+			virtual std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> getOfferedTokens() ;
 			virtual bool hasOffer() ;
 			virtual void sendOffer(const std::shared_ptr<Bag<fUML::Semantics::Activities::Token>>& tokens) ;
-			virtual std::shared_ptr<Bag<fUML::Semantics::Activities::Token> > takeOfferedTokens() ;
-			virtual std::shared_ptr<Bag<fUML::Semantics::Activities::Token> > takeOfferedTokens(int maxCount) ;
+			virtual std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> takeOfferedTokens() ;
+			virtual std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> takeOfferedTokens(int maxCount) ;
 			
 			//*********************************
 			// Attribute Getters & Setters

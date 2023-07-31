@@ -515,7 +515,7 @@ void UnmarshallActionImpl::saveContent(std::shared_ptr<persistence::interfaces::
 	{
 		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
 		// Save 'object'
-		std::shared_ptr<uml::InputPin> object = this->getObject();
+		const std::shared_ptr<uml::InputPin>& object = this->getObject();
 		if (object != nullptr)
 		{
 			saveHandler->addReference(object, "object", object->eClass() != package->getInputPin_Class());
