@@ -191,15 +191,15 @@ OperationCallExpImpl& OperationCallExpImpl::operator=(const OperationCallExpImpl
 	m_referredOperation  = obj.getReferredOperation();
 	//Clone references with containment (deep copy)
 	//clone reference 'argument'
-	std::shared_ptr<Bag<ocl::Expressions::OclExpression>> argumentList = obj.getArgument();
+	const std::shared_ptr<Bag<ocl::Expressions::OclExpression>>& argumentList = obj.getArgument();
 	if(argumentList)
 	{
 		m_argument.reset(new Bag<ocl::Expressions::OclExpression>());
 		
 		
-		for(const std::shared_ptr<ocl::Expressions::OclExpression> argumentindexElem: *argumentList) 
+		for(const std::shared_ptr<ocl::Expressions::OclExpression>& argumentindexElem: *argumentList) 
 		{
-			std::shared_ptr<ocl::Expressions::OclExpression> temp = std::dynamic_pointer_cast<ocl::Expressions::OclExpression>((argumentindexElem)->copy());
+			const std::shared_ptr<ocl::Expressions::OclExpression>& temp = std::dynamic_pointer_cast<ocl::Expressions::OclExpression>((argumentindexElem)->copy());
 			m_argument->push_back(temp);
 		}
 	}

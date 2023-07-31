@@ -183,7 +183,7 @@ BehaviorImpl& BehaviorImpl::operator=(const BehaviorImpl & obj)
 	}
 
 	//clone reference 'ownedParameter'
-	std::shared_ptr<Subset<uml::Parameter, uml::NamedElement>> ownedParameterList = obj.getOwnedParameter();
+	const std::shared_ptr<Subset<uml::Parameter, uml::NamedElement>>& ownedParameterList = obj.getOwnedParameter();
 	if(ownedParameterList)
 	{
 		/*Subset*/
@@ -198,9 +198,9 @@ BehaviorImpl& BehaviorImpl::operator=(const BehaviorImpl & obj)
 			std::cout << "Initialising value Subset: " << "m_ownedParameter - Subset<uml::Parameter, uml::NamedElement >(getOwnedMember())" << std::endl;
 		#endif
 		
-		for(const std::shared_ptr<uml::Parameter> ownedParameterindexElem: *ownedParameterList) 
+		for(const std::shared_ptr<uml::Parameter>& ownedParameterindexElem: *ownedParameterList) 
 		{
-			std::shared_ptr<uml::Parameter> temp = std::dynamic_pointer_cast<uml::Parameter>((ownedParameterindexElem)->copy());
+			const std::shared_ptr<uml::Parameter>& temp = std::dynamic_pointer_cast<uml::Parameter>((ownedParameterindexElem)->copy());
 			m_ownedParameter->push_back(temp);
 		}
 	}
@@ -210,7 +210,7 @@ BehaviorImpl& BehaviorImpl::operator=(const BehaviorImpl & obj)
 	}
 
 	//clone reference 'ownedParameterSet'
-	std::shared_ptr<Subset<uml::ParameterSet, uml::NamedElement>> ownedParameterSetList = obj.getOwnedParameterSet();
+	const std::shared_ptr<Subset<uml::ParameterSet, uml::NamedElement>>& ownedParameterSetList = obj.getOwnedParameterSet();
 	if(ownedParameterSetList)
 	{
 		/*Subset*/
@@ -225,9 +225,9 @@ BehaviorImpl& BehaviorImpl::operator=(const BehaviorImpl & obj)
 			std::cout << "Initialising value Subset: " << "m_ownedParameterSet - Subset<uml::ParameterSet, uml::NamedElement >(getOwnedMember())" << std::endl;
 		#endif
 		
-		for(const std::shared_ptr<uml::ParameterSet> ownedParameterSetindexElem: *ownedParameterSetList) 
+		for(const std::shared_ptr<uml::ParameterSet>& ownedParameterSetindexElem: *ownedParameterSetList) 
 		{
-			std::shared_ptr<uml::ParameterSet> temp = std::dynamic_pointer_cast<uml::ParameterSet>((ownedParameterSetindexElem)->copy());
+			const std::shared_ptr<uml::ParameterSet>& temp = std::dynamic_pointer_cast<uml::ParameterSet>((ownedParameterSetindexElem)->copy());
 			m_ownedParameterSet->push_back(temp);
 		}
 	}
@@ -237,7 +237,7 @@ BehaviorImpl& BehaviorImpl::operator=(const BehaviorImpl & obj)
 	}
 
 	//clone reference 'postcondition'
-	std::shared_ptr<Subset<uml::Constraint, uml::Constraint /*Subset does not reference a union*/>> postconditionList = obj.getPostcondition();
+	const std::shared_ptr<Subset<uml::Constraint, uml::Constraint /*Subset does not reference a union*/>>& postconditionList = obj.getPostcondition();
 	if(postconditionList)
 	{
 		/*Subset*/
@@ -252,9 +252,9 @@ BehaviorImpl& BehaviorImpl::operator=(const BehaviorImpl & obj)
 			std::cout << "Initialising value Subset: " << "m_postcondition - Subset<uml::Constraint, uml::Constraint /*Subset does not reference a union*/ >(getOwnedRule())" << std::endl;
 		#endif
 		
-		for(const std::shared_ptr<uml::Constraint> postconditionindexElem: *postconditionList) 
+		for(const std::shared_ptr<uml::Constraint>& postconditionindexElem: *postconditionList) 
 		{
-			std::shared_ptr<uml::Constraint> temp = std::dynamic_pointer_cast<uml::Constraint>((postconditionindexElem)->copy());
+			const std::shared_ptr<uml::Constraint>& temp = std::dynamic_pointer_cast<uml::Constraint>((postconditionindexElem)->copy());
 			m_postcondition->push_back(temp);
 		}
 	}
@@ -264,7 +264,7 @@ BehaviorImpl& BehaviorImpl::operator=(const BehaviorImpl & obj)
 	}
 
 	//clone reference 'precondition'
-	std::shared_ptr<Subset<uml::Constraint, uml::Constraint /*Subset does not reference a union*/>> preconditionList = obj.getPrecondition();
+	const std::shared_ptr<Subset<uml::Constraint, uml::Constraint /*Subset does not reference a union*/>>& preconditionList = obj.getPrecondition();
 	if(preconditionList)
 	{
 		/*Subset*/
@@ -279,9 +279,9 @@ BehaviorImpl& BehaviorImpl::operator=(const BehaviorImpl & obj)
 			std::cout << "Initialising value Subset: " << "m_precondition - Subset<uml::Constraint, uml::Constraint /*Subset does not reference a union*/ >(getOwnedRule())" << std::endl;
 		#endif
 		
-		for(const std::shared_ptr<uml::Constraint> preconditionindexElem: *preconditionList) 
+		for(const std::shared_ptr<uml::Constraint>& preconditionindexElem: *preconditionList) 
 		{
-			std::shared_ptr<uml::Constraint> temp = std::dynamic_pointer_cast<uml::Constraint>((preconditionindexElem)->copy());
+			const std::shared_ptr<uml::Constraint>& temp = std::dynamic_pointer_cast<uml::Constraint>((preconditionindexElem)->copy());
 			m_precondition->push_back(temp);
 		}
 	}
@@ -291,7 +291,7 @@ BehaviorImpl& BehaviorImpl::operator=(const BehaviorImpl & obj)
 	}
 
 	//clone reference 'redefinedBehavior'
-	std::shared_ptr<Subset<uml::Behavior, uml::Classifier /*Subset does not reference a union*/>> redefinedBehaviorList = obj.getRedefinedBehavior();
+	const std::shared_ptr<Subset<uml::Behavior, uml::Classifier /*Subset does not reference a union*/>>& redefinedBehaviorList = obj.getRedefinedBehavior();
 	if(redefinedBehaviorList)
 	{
 		/*Subset*/
@@ -306,9 +306,9 @@ BehaviorImpl& BehaviorImpl::operator=(const BehaviorImpl & obj)
 			std::cout << "Initialising value Subset: " << "m_redefinedBehavior - Subset<uml::Behavior, uml::Classifier /*Subset does not reference a union*/ >(getRedefinedClassifier())" << std::endl;
 		#endif
 		
-		for(const std::shared_ptr<uml::Behavior> redefinedBehaviorindexElem: *redefinedBehaviorList) 
+		for(const std::shared_ptr<uml::Behavior>& redefinedBehaviorindexElem: *redefinedBehaviorList) 
 		{
-			std::shared_ptr<uml::Behavior> temp = std::dynamic_pointer_cast<uml::Behavior>((redefinedBehaviorindexElem)->copy());
+			const std::shared_ptr<uml::Behavior>& temp = std::dynamic_pointer_cast<uml::Behavior>((redefinedBehaviorindexElem)->copy());
 			m_redefinedBehavior->push_back(temp);
 		}
 	}

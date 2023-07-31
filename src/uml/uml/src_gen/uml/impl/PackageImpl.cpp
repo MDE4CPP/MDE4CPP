@@ -160,7 +160,7 @@ PackageImpl& PackageImpl::operator=(const PackageImpl & obj)
 	m_nestingPackage  = obj.getNestingPackage();
 	//Clone references with containment (deep copy)
 	//clone reference 'nestedPackage'
-	std::shared_ptr<Subset<uml::Package, uml::PackageableElement /*Subset does not reference a union*/>> nestedPackageList = obj.getNestedPackage();
+	const std::shared_ptr<Subset<uml::Package, uml::PackageableElement /*Subset does not reference a union*/>>& nestedPackageList = obj.getNestedPackage();
 	if(nestedPackageList)
 	{
 		/*Subset*/
@@ -175,9 +175,9 @@ PackageImpl& PackageImpl::operator=(const PackageImpl & obj)
 			std::cout << "Initialising value Subset: " << "m_nestedPackage - Subset<uml::Package, uml::PackageableElement /*Subset does not reference a union*/ >(getPackagedElement())" << std::endl;
 		#endif
 		
-		for(const std::shared_ptr<uml::Package> nestedPackageindexElem: *nestedPackageList) 
+		for(const std::shared_ptr<uml::Package>& nestedPackageindexElem: *nestedPackageList) 
 		{
-			std::shared_ptr<uml::Package> temp = std::dynamic_pointer_cast<uml::Package>((nestedPackageindexElem)->copy());
+			const std::shared_ptr<uml::Package>& temp = std::dynamic_pointer_cast<uml::Package>((nestedPackageindexElem)->copy());
 			m_nestedPackage->push_back(temp);
 		}
 	}
@@ -187,7 +187,7 @@ PackageImpl& PackageImpl::operator=(const PackageImpl & obj)
 	}
 
 	//clone reference 'ownedStereotype'
-	std::shared_ptr<Subset<uml::Stereotype, uml::PackageableElement /*Subset does not reference a union*/>> ownedStereotypeList = obj.getOwnedStereotype();
+	const std::shared_ptr<Subset<uml::Stereotype, uml::PackageableElement /*Subset does not reference a union*/>>& ownedStereotypeList = obj.getOwnedStereotype();
 	if(ownedStereotypeList)
 	{
 		/*Subset*/
@@ -202,9 +202,9 @@ PackageImpl& PackageImpl::operator=(const PackageImpl & obj)
 			std::cout << "Initialising value Subset: " << "m_ownedStereotype - Subset<uml::Stereotype, uml::PackageableElement /*Subset does not reference a union*/ >(getPackagedElement())" << std::endl;
 		#endif
 		
-		for(const std::shared_ptr<uml::Stereotype> ownedStereotypeindexElem: *ownedStereotypeList) 
+		for(const std::shared_ptr<uml::Stereotype>& ownedStereotypeindexElem: *ownedStereotypeList) 
 		{
-			std::shared_ptr<uml::Stereotype> temp = std::dynamic_pointer_cast<uml::Stereotype>((ownedStereotypeindexElem)->copy());
+			const std::shared_ptr<uml::Stereotype>& temp = std::dynamic_pointer_cast<uml::Stereotype>((ownedStereotypeindexElem)->copy());
 			m_ownedStereotype->push_back(temp);
 		}
 	}
@@ -214,7 +214,7 @@ PackageImpl& PackageImpl::operator=(const PackageImpl & obj)
 	}
 
 	//clone reference 'ownedType'
-	std::shared_ptr<Subset<uml::Type, uml::PackageableElement /*Subset does not reference a union*/>> ownedTypeList = obj.getOwnedType();
+	const std::shared_ptr<Subset<uml::Type, uml::PackageableElement /*Subset does not reference a union*/>>& ownedTypeList = obj.getOwnedType();
 	if(ownedTypeList)
 	{
 		/*Subset*/
@@ -229,9 +229,9 @@ PackageImpl& PackageImpl::operator=(const PackageImpl & obj)
 			std::cout << "Initialising value Subset: " << "m_ownedType - Subset<uml::Type, uml::PackageableElement /*Subset does not reference a union*/ >(getPackagedElement())" << std::endl;
 		#endif
 		
-		for(const std::shared_ptr<uml::Type> ownedTypeindexElem: *ownedTypeList) 
+		for(const std::shared_ptr<uml::Type>& ownedTypeindexElem: *ownedTypeList) 
 		{
-			std::shared_ptr<uml::Type> temp = std::dynamic_pointer_cast<uml::Type>((ownedTypeindexElem)->copy());
+			const std::shared_ptr<uml::Type>& temp = std::dynamic_pointer_cast<uml::Type>((ownedTypeindexElem)->copy());
 			m_ownedType->push_back(temp);
 		}
 	}
@@ -241,7 +241,7 @@ PackageImpl& PackageImpl::operator=(const PackageImpl & obj)
 	}
 
 	//clone reference 'packageMerge'
-	std::shared_ptr<Subset<uml::PackageMerge, uml::Element>> packageMergeList = obj.getPackageMerge();
+	const std::shared_ptr<Subset<uml::PackageMerge, uml::Element>>& packageMergeList = obj.getPackageMerge();
 	if(packageMergeList)
 	{
 		/*Subset*/
@@ -256,9 +256,9 @@ PackageImpl& PackageImpl::operator=(const PackageImpl & obj)
 			std::cout << "Initialising value Subset: " << "m_packageMerge - Subset<uml::PackageMerge, uml::Element >(getOwnedElement())" << std::endl;
 		#endif
 		
-		for(const std::shared_ptr<uml::PackageMerge> packageMergeindexElem: *packageMergeList) 
+		for(const std::shared_ptr<uml::PackageMerge>& packageMergeindexElem: *packageMergeList) 
 		{
-			std::shared_ptr<uml::PackageMerge> temp = std::dynamic_pointer_cast<uml::PackageMerge>((packageMergeindexElem)->copy());
+			const std::shared_ptr<uml::PackageMerge>& temp = std::dynamic_pointer_cast<uml::PackageMerge>((packageMergeindexElem)->copy());
 			m_packageMerge->push_back(temp);
 		}
 	}
@@ -268,7 +268,7 @@ PackageImpl& PackageImpl::operator=(const PackageImpl & obj)
 	}
 
 	//clone reference 'packagedElement'
-	std::shared_ptr<SubsetUnion<uml::PackageableElement, uml::NamedElement>> packagedElementList = obj.getPackagedElement();
+	const std::shared_ptr<SubsetUnion<uml::PackageableElement, uml::NamedElement>>& packagedElementList = obj.getPackagedElement();
 	if(packagedElementList)
 	{
 		/*SubsetUnion*/
@@ -283,9 +283,9 @@ PackageImpl& PackageImpl::operator=(const PackageImpl & obj)
 			std::cout << "Initialising value SubsetUnion: " << "m_packagedElement - SubsetUnion<uml::PackageableElement, uml::NamedElement >(getOwnedMember())" << std::endl;
 		#endif
 		
-		for(const std::shared_ptr<uml::PackageableElement> packagedElementindexElem: *packagedElementList) 
+		for(const std::shared_ptr<uml::PackageableElement>& packagedElementindexElem: *packagedElementList) 
 		{
-			std::shared_ptr<uml::PackageableElement> temp = std::dynamic_pointer_cast<uml::PackageableElement>((packagedElementindexElem)->copy());
+			const std::shared_ptr<uml::PackageableElement>& temp = std::dynamic_pointer_cast<uml::PackageableElement>((packagedElementindexElem)->copy());
 			m_packagedElement->push_back(temp);
 		}
 	}
@@ -295,7 +295,7 @@ PackageImpl& PackageImpl::operator=(const PackageImpl & obj)
 	}
 
 	//clone reference 'profileApplication'
-	std::shared_ptr<Subset<uml::ProfileApplication, uml::Element>> profileApplicationList = obj.getProfileApplication();
+	const std::shared_ptr<Subset<uml::ProfileApplication, uml::Element>>& profileApplicationList = obj.getProfileApplication();
 	if(profileApplicationList)
 	{
 		/*Subset*/
@@ -310,9 +310,9 @@ PackageImpl& PackageImpl::operator=(const PackageImpl & obj)
 			std::cout << "Initialising value Subset: " << "m_profileApplication - Subset<uml::ProfileApplication, uml::Element >(getOwnedElement())" << std::endl;
 		#endif
 		
-		for(const std::shared_ptr<uml::ProfileApplication> profileApplicationindexElem: *profileApplicationList) 
+		for(const std::shared_ptr<uml::ProfileApplication>& profileApplicationindexElem: *profileApplicationList) 
 		{
-			std::shared_ptr<uml::ProfileApplication> temp = std::dynamic_pointer_cast<uml::ProfileApplication>((profileApplicationindexElem)->copy());
+			const std::shared_ptr<uml::ProfileApplication>& temp = std::dynamic_pointer_cast<uml::ProfileApplication>((profileApplicationindexElem)->copy());
 			m_profileApplication->push_back(temp);
 		}
 	}

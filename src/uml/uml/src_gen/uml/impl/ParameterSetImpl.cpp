@@ -110,7 +110,7 @@ ParameterSetImpl& ParameterSetImpl::operator=(const ParameterSetImpl & obj)
 	m_parameter  = obj.getParameter();
 	//Clone references with containment (deep copy)
 	//clone reference 'condition'
-	std::shared_ptr<Subset<uml::Constraint, uml::Element>> conditionList = obj.getCondition();
+	const std::shared_ptr<Subset<uml::Constraint, uml::Element>>& conditionList = obj.getCondition();
 	if(conditionList)
 	{
 		/*Subset*/
@@ -125,9 +125,9 @@ ParameterSetImpl& ParameterSetImpl::operator=(const ParameterSetImpl & obj)
 			std::cout << "Initialising value Subset: " << "m_condition - Subset<uml::Constraint, uml::Element >(getOwnedElement())" << std::endl;
 		#endif
 		
-		for(const std::shared_ptr<uml::Constraint> conditionindexElem: *conditionList) 
+		for(const std::shared_ptr<uml::Constraint>& conditionindexElem: *conditionList) 
 		{
-			std::shared_ptr<uml::Constraint> temp = std::dynamic_pointer_cast<uml::Constraint>((conditionindexElem)->copy());
+			const std::shared_ptr<uml::Constraint>& temp = std::dynamic_pointer_cast<uml::Constraint>((conditionindexElem)->copy());
 			m_condition->push_back(temp);
 		}
 	}

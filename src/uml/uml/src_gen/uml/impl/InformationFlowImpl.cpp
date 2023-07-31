@@ -138,7 +138,7 @@ InformationFlowImpl& InformationFlowImpl::operator=(const InformationFlowImpl & 
 	m_realizingMessage  = obj.getRealizingMessage();
 	//Clone references with containment (deep copy)
 	//clone reference 'informationSource'
-	std::shared_ptr<Subset<uml::NamedElement, uml::Element>> informationSourceList = obj.getInformationSource();
+	const std::shared_ptr<Subset<uml::NamedElement, uml::Element>>& informationSourceList = obj.getInformationSource();
 	if(informationSourceList)
 	{
 		/*Subset*/
@@ -153,9 +153,9 @@ InformationFlowImpl& InformationFlowImpl::operator=(const InformationFlowImpl & 
 			std::cout << "Initialising value Subset: " << "m_informationSource - Subset<uml::NamedElement, uml::Element >(getSource())" << std::endl;
 		#endif
 		
-		for(const std::shared_ptr<uml::NamedElement> informationSourceindexElem: *informationSourceList) 
+		for(const std::shared_ptr<uml::NamedElement>& informationSourceindexElem: *informationSourceList) 
 		{
-			std::shared_ptr<uml::NamedElement> temp = std::dynamic_pointer_cast<uml::NamedElement>((informationSourceindexElem)->copy());
+			const std::shared_ptr<uml::NamedElement>& temp = std::dynamic_pointer_cast<uml::NamedElement>((informationSourceindexElem)->copy());
 			m_informationSource->push_back(temp);
 		}
 	}
@@ -165,7 +165,7 @@ InformationFlowImpl& InformationFlowImpl::operator=(const InformationFlowImpl & 
 	}
 
 	//clone reference 'informationTarget'
-	std::shared_ptr<Subset<uml::NamedElement, uml::Element>> informationTargetList = obj.getInformationTarget();
+	const std::shared_ptr<Subset<uml::NamedElement, uml::Element>>& informationTargetList = obj.getInformationTarget();
 	if(informationTargetList)
 	{
 		/*Subset*/
@@ -180,9 +180,9 @@ InformationFlowImpl& InformationFlowImpl::operator=(const InformationFlowImpl & 
 			std::cout << "Initialising value Subset: " << "m_informationTarget - Subset<uml::NamedElement, uml::Element >(getTarget())" << std::endl;
 		#endif
 		
-		for(const std::shared_ptr<uml::NamedElement> informationTargetindexElem: *informationTargetList) 
+		for(const std::shared_ptr<uml::NamedElement>& informationTargetindexElem: *informationTargetList) 
 		{
-			std::shared_ptr<uml::NamedElement> temp = std::dynamic_pointer_cast<uml::NamedElement>((informationTargetindexElem)->copy());
+			const std::shared_ptr<uml::NamedElement>& temp = std::dynamic_pointer_cast<uml::NamedElement>((informationTargetindexElem)->copy());
 			m_informationTarget->push_back(temp);
 		}
 	}

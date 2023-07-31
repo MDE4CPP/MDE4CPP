@@ -157,7 +157,7 @@ AssociationImpl& AssociationImpl::operator=(const AssociationImpl & obj)
 	//copy references with no containment (soft copy)
 	//Clone references with containment (deep copy)
 	//clone reference 'endType'
-	std::shared_ptr<Subset<uml::Type, uml::Element>> endTypeList = obj.getEndType();
+	const std::shared_ptr<Subset<uml::Type, uml::Element>>& endTypeList = obj.getEndType();
 	if(endTypeList)
 	{
 		/*Subset*/
@@ -172,9 +172,9 @@ AssociationImpl& AssociationImpl::operator=(const AssociationImpl & obj)
 			std::cout << "Initialising value Subset: " << "m_endType - Subset<uml::Type, uml::Element >(getRelatedElement())" << std::endl;
 		#endif
 		
-		for(const std::shared_ptr<uml::Type> endTypeindexElem: *endTypeList) 
+		for(const std::shared_ptr<uml::Type>& endTypeindexElem: *endTypeList) 
 		{
-			std::shared_ptr<uml::Type> temp = std::dynamic_pointer_cast<uml::Type>((endTypeindexElem)->copy());
+			const std::shared_ptr<uml::Type>& temp = std::dynamic_pointer_cast<uml::Type>((endTypeindexElem)->copy());
 			m_endType->push_back(temp);
 		}
 	}
@@ -184,7 +184,7 @@ AssociationImpl& AssociationImpl::operator=(const AssociationImpl & obj)
 	}
 
 	//clone reference 'memberEnd'
-	std::shared_ptr<SubsetUnion<uml::Property, uml::NamedElement>> memberEndList = obj.getMemberEnd();
+	const std::shared_ptr<SubsetUnion<uml::Property, uml::NamedElement>>& memberEndList = obj.getMemberEnd();
 	if(memberEndList)
 	{
 		/*SubsetUnion*/
@@ -199,9 +199,9 @@ AssociationImpl& AssociationImpl::operator=(const AssociationImpl & obj)
 			std::cout << "Initialising value SubsetUnion: " << "m_memberEnd - SubsetUnion<uml::Property, uml::NamedElement >(getMember())" << std::endl;
 		#endif
 		
-		for(const std::shared_ptr<uml::Property> memberEndindexElem: *memberEndList) 
+		for(const std::shared_ptr<uml::Property>& memberEndindexElem: *memberEndList) 
 		{
-			std::shared_ptr<uml::Property> temp = std::dynamic_pointer_cast<uml::Property>((memberEndindexElem)->copy());
+			const std::shared_ptr<uml::Property>& temp = std::dynamic_pointer_cast<uml::Property>((memberEndindexElem)->copy());
 			m_memberEnd->push_back(temp);
 		}
 	}
@@ -211,7 +211,7 @@ AssociationImpl& AssociationImpl::operator=(const AssociationImpl & obj)
 	}
 
 	//clone reference 'navigableOwnedEnd'
-	std::shared_ptr<Subset<uml::Property, uml::Property /*Subset does not reference a union*/>> navigableOwnedEndList = obj.getNavigableOwnedEnd();
+	const std::shared_ptr<Subset<uml::Property, uml::Property /*Subset does not reference a union*/>>& navigableOwnedEndList = obj.getNavigableOwnedEnd();
 	if(navigableOwnedEndList)
 	{
 		/*Subset*/
@@ -226,9 +226,9 @@ AssociationImpl& AssociationImpl::operator=(const AssociationImpl & obj)
 			std::cout << "Initialising value Subset: " << "m_navigableOwnedEnd - Subset<uml::Property, uml::Property /*Subset does not reference a union*/ >(getOwnedEnd())" << std::endl;
 		#endif
 		
-		for(const std::shared_ptr<uml::Property> navigableOwnedEndindexElem: *navigableOwnedEndList) 
+		for(const std::shared_ptr<uml::Property>& navigableOwnedEndindexElem: *navigableOwnedEndList) 
 		{
-			std::shared_ptr<uml::Property> temp = std::dynamic_pointer_cast<uml::Property>((navigableOwnedEndindexElem)->copy());
+			const std::shared_ptr<uml::Property>& temp = std::dynamic_pointer_cast<uml::Property>((navigableOwnedEndindexElem)->copy());
 			m_navigableOwnedEnd->push_back(temp);
 		}
 	}
@@ -238,7 +238,7 @@ AssociationImpl& AssociationImpl::operator=(const AssociationImpl & obj)
 	}
 
 	//clone reference 'ownedEnd'
-	std::shared_ptr<SubsetUnion<uml::Property, uml::Feature, uml::NamedElement, uml::Property /*Subset does not reference a union*/>> ownedEndList = obj.getOwnedEnd();
+	const std::shared_ptr<SubsetUnion<uml::Property, uml::Feature, uml::NamedElement, uml::Property /*Subset does not reference a union*/>>& ownedEndList = obj.getOwnedEnd();
 	if(ownedEndList)
 	{
 		/*SubsetUnion*/
@@ -253,9 +253,9 @@ AssociationImpl& AssociationImpl::operator=(const AssociationImpl & obj)
 			std::cout << "Initialising value SubsetUnion: " << "m_ownedEnd - SubsetUnion<uml::Property, uml::Feature, uml::NamedElement, uml::Property /*Subset does not reference a union*/ >(getFeature(), getOwnedMember(), getMemberEnd())" << std::endl;
 		#endif
 		
-		for(const std::shared_ptr<uml::Property> ownedEndindexElem: *ownedEndList) 
+		for(const std::shared_ptr<uml::Property>& ownedEndindexElem: *ownedEndList) 
 		{
-			std::shared_ptr<uml::Property> temp = std::dynamic_pointer_cast<uml::Property>((ownedEndindexElem)->copy());
+			const std::shared_ptr<uml::Property>& temp = std::dynamic_pointer_cast<uml::Property>((ownedEndindexElem)->copy());
 			m_ownedEnd->push_back(temp);
 		}
 	}

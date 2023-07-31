@@ -140,7 +140,7 @@ ActionImpl& ActionImpl::operator=(const ActionImpl & obj)
 	m_context  = obj.getContext();
 	//Clone references with containment (deep copy)
 	//clone reference 'localPostcondition'
-	std::shared_ptr<Subset<uml::Constraint, uml::Element>> localPostconditionList = obj.getLocalPostcondition();
+	const std::shared_ptr<Subset<uml::Constraint, uml::Element>>& localPostconditionList = obj.getLocalPostcondition();
 	if(localPostconditionList)
 	{
 		/*Subset*/
@@ -155,9 +155,9 @@ ActionImpl& ActionImpl::operator=(const ActionImpl & obj)
 			std::cout << "Initialising value Subset: " << "m_localPostcondition - Subset<uml::Constraint, uml::Element >(getOwnedElement())" << std::endl;
 		#endif
 		
-		for(const std::shared_ptr<uml::Constraint> localPostconditionindexElem: *localPostconditionList) 
+		for(const std::shared_ptr<uml::Constraint>& localPostconditionindexElem: *localPostconditionList) 
 		{
-			std::shared_ptr<uml::Constraint> temp = std::dynamic_pointer_cast<uml::Constraint>((localPostconditionindexElem)->copy());
+			const std::shared_ptr<uml::Constraint>& temp = std::dynamic_pointer_cast<uml::Constraint>((localPostconditionindexElem)->copy());
 			m_localPostcondition->push_back(temp);
 		}
 	}
@@ -167,7 +167,7 @@ ActionImpl& ActionImpl::operator=(const ActionImpl & obj)
 	}
 
 	//clone reference 'localPrecondition'
-	std::shared_ptr<Subset<uml::Constraint, uml::Element>> localPreconditionList = obj.getLocalPrecondition();
+	const std::shared_ptr<Subset<uml::Constraint, uml::Element>>& localPreconditionList = obj.getLocalPrecondition();
 	if(localPreconditionList)
 	{
 		/*Subset*/
@@ -182,9 +182,9 @@ ActionImpl& ActionImpl::operator=(const ActionImpl & obj)
 			std::cout << "Initialising value Subset: " << "m_localPrecondition - Subset<uml::Constraint, uml::Element >(getOwnedElement())" << std::endl;
 		#endif
 		
-		for(const std::shared_ptr<uml::Constraint> localPreconditionindexElem: *localPreconditionList) 
+		for(const std::shared_ptr<uml::Constraint>& localPreconditionindexElem: *localPreconditionList) 
 		{
-			std::shared_ptr<uml::Constraint> temp = std::dynamic_pointer_cast<uml::Constraint>((localPreconditionindexElem)->copy());
+			const std::shared_ptr<uml::Constraint>& temp = std::dynamic_pointer_cast<uml::Constraint>((localPreconditionindexElem)->copy());
 			m_localPrecondition->push_back(temp);
 		}
 	}

@@ -160,7 +160,7 @@ UseCaseImpl& UseCaseImpl::operator=(const UseCaseImpl & obj)
 	m_subject  = obj.getSubject();
 	//Clone references with containment (deep copy)
 	//clone reference 'extend'
-	std::shared_ptr<Subset<uml::Extend, uml::NamedElement>> extendList = obj.getExtend();
+	const std::shared_ptr<Subset<uml::Extend, uml::NamedElement>>& extendList = obj.getExtend();
 	if(extendList)
 	{
 		/*Subset*/
@@ -175,9 +175,9 @@ UseCaseImpl& UseCaseImpl::operator=(const UseCaseImpl & obj)
 			std::cout << "Initialising value Subset: " << "m_extend - Subset<uml::Extend, uml::NamedElement >(getOwnedMember())" << std::endl;
 		#endif
 		
-		for(const std::shared_ptr<uml::Extend> extendindexElem: *extendList) 
+		for(const std::shared_ptr<uml::Extend>& extendindexElem: *extendList) 
 		{
-			std::shared_ptr<uml::Extend> temp = std::dynamic_pointer_cast<uml::Extend>((extendindexElem)->copy());
+			const std::shared_ptr<uml::Extend>& temp = std::dynamic_pointer_cast<uml::Extend>((extendindexElem)->copy());
 			m_extend->push_back(temp);
 		}
 	}
@@ -187,7 +187,7 @@ UseCaseImpl& UseCaseImpl::operator=(const UseCaseImpl & obj)
 	}
 
 	//clone reference 'extensionPoint'
-	std::shared_ptr<Subset<uml::ExtensionPoint, uml::NamedElement>> extensionPointList = obj.getExtensionPoint();
+	const std::shared_ptr<Subset<uml::ExtensionPoint, uml::NamedElement>>& extensionPointList = obj.getExtensionPoint();
 	if(extensionPointList)
 	{
 		/*Subset*/
@@ -202,9 +202,9 @@ UseCaseImpl& UseCaseImpl::operator=(const UseCaseImpl & obj)
 			std::cout << "Initialising value Subset: " << "m_extensionPoint - Subset<uml::ExtensionPoint, uml::NamedElement >(getOwnedMember())" << std::endl;
 		#endif
 		
-		for(const std::shared_ptr<uml::ExtensionPoint> extensionPointindexElem: *extensionPointList) 
+		for(const std::shared_ptr<uml::ExtensionPoint>& extensionPointindexElem: *extensionPointList) 
 		{
-			std::shared_ptr<uml::ExtensionPoint> temp = std::dynamic_pointer_cast<uml::ExtensionPoint>((extensionPointindexElem)->copy());
+			const std::shared_ptr<uml::ExtensionPoint>& temp = std::dynamic_pointer_cast<uml::ExtensionPoint>((extensionPointindexElem)->copy());
 			m_extensionPoint->push_back(temp);
 		}
 	}
@@ -214,7 +214,7 @@ UseCaseImpl& UseCaseImpl::operator=(const UseCaseImpl & obj)
 	}
 
 	//clone reference 'include'
-	std::shared_ptr<Subset<uml::Include, uml::NamedElement>> includeList = obj.getInclude();
+	const std::shared_ptr<Subset<uml::Include, uml::NamedElement>>& includeList = obj.getInclude();
 	if(includeList)
 	{
 		/*Subset*/
@@ -229,9 +229,9 @@ UseCaseImpl& UseCaseImpl::operator=(const UseCaseImpl & obj)
 			std::cout << "Initialising value Subset: " << "m_include - Subset<uml::Include, uml::NamedElement >(getOwnedMember())" << std::endl;
 		#endif
 		
-		for(const std::shared_ptr<uml::Include> includeindexElem: *includeList) 
+		for(const std::shared_ptr<uml::Include>& includeindexElem: *includeList) 
 		{
-			std::shared_ptr<uml::Include> temp = std::dynamic_pointer_cast<uml::Include>((includeindexElem)->copy());
+			const std::shared_ptr<uml::Include>& temp = std::dynamic_pointer_cast<uml::Include>((includeindexElem)->copy());
 			m_include->push_back(temp);
 		}
 	}

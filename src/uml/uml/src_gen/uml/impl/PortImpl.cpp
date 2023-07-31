@@ -175,7 +175,7 @@ PortImpl& PortImpl::operator=(const PortImpl & obj)
 	m_required  = obj.getRequired();
 	//Clone references with containment (deep copy)
 	//clone reference 'redefinedPort'
-	std::shared_ptr<Subset<uml::Port, uml::Property /*Subset does not reference a union*/>> redefinedPortList = obj.getRedefinedPort();
+	const std::shared_ptr<Subset<uml::Port, uml::Property /*Subset does not reference a union*/>>& redefinedPortList = obj.getRedefinedPort();
 	if(redefinedPortList)
 	{
 		/*Subset*/
@@ -190,9 +190,9 @@ PortImpl& PortImpl::operator=(const PortImpl & obj)
 			std::cout << "Initialising value Subset: " << "m_redefinedPort - Subset<uml::Port, uml::Property /*Subset does not reference a union*/ >(getRedefinedProperty())" << std::endl;
 		#endif
 		
-		for(const std::shared_ptr<uml::Port> redefinedPortindexElem: *redefinedPortList) 
+		for(const std::shared_ptr<uml::Port>& redefinedPortindexElem: *redefinedPortList) 
 		{
-			std::shared_ptr<uml::Port> temp = std::dynamic_pointer_cast<uml::Port>((redefinedPortindexElem)->copy());
+			const std::shared_ptr<uml::Port>& temp = std::dynamic_pointer_cast<uml::Port>((redefinedPortindexElem)->copy());
 			m_redefinedPort->push_back(temp);
 		}
 	}

@@ -103,15 +103,15 @@ CompoundValueImpl& CompoundValueImpl::operator=(const CompoundValueImpl & obj)
 	//copy references with no containment (soft copy)
 	//Clone references with containment (deep copy)
 	//clone reference 'featureValues'
-	std::shared_ptr<Bag<fUML::Semantics::SimpleClassifiers::FeatureValue>> featureValuesList = obj.getFeatureValues();
+	const std::shared_ptr<Bag<fUML::Semantics::SimpleClassifiers::FeatureValue>>& featureValuesList = obj.getFeatureValues();
 	if(featureValuesList)
 	{
 		m_featureValues.reset(new Bag<fUML::Semantics::SimpleClassifiers::FeatureValue>());
 		
 		
-		for(const std::shared_ptr<fUML::Semantics::SimpleClassifiers::FeatureValue> featureValuesindexElem: *featureValuesList) 
+		for(const std::shared_ptr<fUML::Semantics::SimpleClassifiers::FeatureValue>& featureValuesindexElem: *featureValuesList) 
 		{
-			std::shared_ptr<fUML::Semantics::SimpleClassifiers::FeatureValue> temp = std::dynamic_pointer_cast<fUML::Semantics::SimpleClassifiers::FeatureValue>((featureValuesindexElem)->copy());
+			const std::shared_ptr<fUML::Semantics::SimpleClassifiers::FeatureValue>& temp = std::dynamic_pointer_cast<fUML::Semantics::SimpleClassifiers::FeatureValue>((featureValuesindexElem)->copy());
 			m_featureValues->push_back(temp);
 		}
 	}

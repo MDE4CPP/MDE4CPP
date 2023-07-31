@@ -110,7 +110,7 @@ EPackageImpl& EPackageImpl::operator=(const EPackageImpl & obj)
 	m_eSuperPackage  = obj.getESuperPackage();
 	//Clone references with containment (deep copy)
 	//clone reference 'eClassifiers'
-	std::shared_ptr<Subset<ecore::EClassifier, ecore::EObject>> eClassifiersList = obj.getEClassifiers();
+	const std::shared_ptr<Subset<ecore::EClassifier, ecore::EObject>>& eClassifiersList = obj.getEClassifiers();
 	if(eClassifiersList)
 	{
 		/*Subset*/
@@ -125,9 +125,9 @@ EPackageImpl& EPackageImpl::operator=(const EPackageImpl & obj)
 			std::cout << "Initialising value Subset: " << "m_eClassifiers - Subset<ecore::EClassifier, ecore::EObject >(getEContentUnion())" << std::endl;
 		#endif
 		
-		for(const std::shared_ptr<ecore::EClassifier> eClassifiersindexElem: *eClassifiersList) 
+		for(const std::shared_ptr<ecore::EClassifier>& eClassifiersindexElem: *eClassifiersList) 
 		{
-			std::shared_ptr<ecore::EClassifier> temp = std::dynamic_pointer_cast<ecore::EClassifier>((eClassifiersindexElem)->copy());
+			const std::shared_ptr<ecore::EClassifier>& temp = std::dynamic_pointer_cast<ecore::EClassifier>((eClassifiersindexElem)->copy());
 			m_eClassifiers->push_back(temp);
 		}
 	}
@@ -137,15 +137,15 @@ EPackageImpl& EPackageImpl::operator=(const EPackageImpl & obj)
 	}
 
 	//clone reference 'eSubpackages'
-	std::shared_ptr<Bag<ecore::EPackage>> eSubpackagesList = obj.getESubpackages();
+	const std::shared_ptr<Bag<ecore::EPackage>>& eSubpackagesList = obj.getESubpackages();
 	if(eSubpackagesList)
 	{
 		m_eSubpackages.reset(new Bag<ecore::EPackage>());
 		
 		
-		for(const std::shared_ptr<ecore::EPackage> eSubpackagesindexElem: *eSubpackagesList) 
+		for(const std::shared_ptr<ecore::EPackage>& eSubpackagesindexElem: *eSubpackagesList) 
 		{
-			std::shared_ptr<ecore::EPackage> temp = std::dynamic_pointer_cast<ecore::EPackage>((eSubpackagesindexElem)->copy());
+			const std::shared_ptr<ecore::EPackage>& temp = std::dynamic_pointer_cast<ecore::EPackage>((eSubpackagesindexElem)->copy());
 			m_eSubpackages->push_back(temp);
 		}
 	}

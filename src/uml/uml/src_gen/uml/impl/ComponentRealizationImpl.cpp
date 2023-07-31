@@ -138,7 +138,7 @@ ComponentRealizationImpl& ComponentRealizationImpl::operator=(const ComponentRea
 	m_abstraction  = obj.getAbstraction();
 	//Clone references with containment (deep copy)
 	//clone reference 'realizingClassifier'
-	std::shared_ptr<Subset<uml::Classifier, uml::NamedElement /*Subset does not reference a union*/>> realizingClassifierList = obj.getRealizingClassifier();
+	const std::shared_ptr<Subset<uml::Classifier, uml::NamedElement /*Subset does not reference a union*/>>& realizingClassifierList = obj.getRealizingClassifier();
 	if(realizingClassifierList)
 	{
 		/*Subset*/
@@ -153,9 +153,9 @@ ComponentRealizationImpl& ComponentRealizationImpl::operator=(const ComponentRea
 			std::cout << "Initialising value Subset: " << "m_realizingClassifier - Subset<uml::Classifier, uml::NamedElement /*Subset does not reference a union*/ >(getClient())" << std::endl;
 		#endif
 		
-		for(const std::shared_ptr<uml::Classifier> realizingClassifierindexElem: *realizingClassifierList) 
+		for(const std::shared_ptr<uml::Classifier>& realizingClassifierindexElem: *realizingClassifierList) 
 		{
-			std::shared_ptr<uml::Classifier> temp = std::dynamic_pointer_cast<uml::Classifier>((realizingClassifierindexElem)->copy());
+			const std::shared_ptr<uml::Classifier>& temp = std::dynamic_pointer_cast<uml::Classifier>((realizingClassifierindexElem)->copy());
 			m_realizingClassifier->push_back(temp);
 		}
 	}

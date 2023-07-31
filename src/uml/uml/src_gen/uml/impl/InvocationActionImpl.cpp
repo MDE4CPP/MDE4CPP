@@ -138,7 +138,7 @@ InvocationActionImpl& InvocationActionImpl::operator=(const InvocationActionImpl
 	m_onPort  = obj.getOnPort();
 	//Clone references with containment (deep copy)
 	//clone reference 'argument'
-	std::shared_ptr<SubsetUnion<uml::InputPin, uml::InputPin>> argumentList = obj.getArgument();
+	const std::shared_ptr<SubsetUnion<uml::InputPin, uml::InputPin>>& argumentList = obj.getArgument();
 	if(argumentList)
 	{
 		/*SubsetUnion*/
@@ -153,9 +153,9 @@ InvocationActionImpl& InvocationActionImpl::operator=(const InvocationActionImpl
 			std::cout << "Initialising value SubsetUnion: " << "m_argument - SubsetUnion<uml::InputPin, uml::InputPin >(getInput())" << std::endl;
 		#endif
 		
-		for(const std::shared_ptr<uml::InputPin> argumentindexElem: *argumentList) 
+		for(const std::shared_ptr<uml::InputPin>& argumentindexElem: *argumentList) 
 		{
-			std::shared_ptr<uml::InputPin> temp = std::dynamic_pointer_cast<uml::InputPin>((argumentindexElem)->copy());
+			const std::shared_ptr<uml::InputPin>& temp = std::dynamic_pointer_cast<uml::InputPin>((argumentindexElem)->copy());
 			m_argument->push_back(temp);
 		}
 	}

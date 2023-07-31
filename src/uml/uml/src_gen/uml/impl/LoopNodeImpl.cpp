@@ -168,7 +168,7 @@ LoopNodeImpl& LoopNodeImpl::operator=(const LoopNodeImpl & obj)
 	m_test  = obj.getTest();
 	//Clone references with containment (deep copy)
 	//clone reference 'loopVariable'
-	std::shared_ptr<Subset<uml::OutputPin, uml::Element>> loopVariableList = obj.getLoopVariable();
+	const std::shared_ptr<Subset<uml::OutputPin, uml::Element>>& loopVariableList = obj.getLoopVariable();
 	if(loopVariableList)
 	{
 		/*Subset*/
@@ -183,9 +183,9 @@ LoopNodeImpl& LoopNodeImpl::operator=(const LoopNodeImpl & obj)
 			std::cout << "Initialising value Subset: " << "m_loopVariable - Subset<uml::OutputPin, uml::Element >(getOwnedElement())" << std::endl;
 		#endif
 		
-		for(const std::shared_ptr<uml::OutputPin> loopVariableindexElem: *loopVariableList) 
+		for(const std::shared_ptr<uml::OutputPin>& loopVariableindexElem: *loopVariableList) 
 		{
-			std::shared_ptr<uml::OutputPin> temp = std::dynamic_pointer_cast<uml::OutputPin>((loopVariableindexElem)->copy());
+			const std::shared_ptr<uml::OutputPin>& temp = std::dynamic_pointer_cast<uml::OutputPin>((loopVariableindexElem)->copy());
 			m_loopVariable->push_back(temp);
 		}
 	}

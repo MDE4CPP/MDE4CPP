@@ -138,7 +138,7 @@ LinkActionImpl& LinkActionImpl::operator=(const LinkActionImpl & obj)
 	//copy references with no containment (soft copy)
 	//Clone references with containment (deep copy)
 	//clone reference 'endData'
-	std::shared_ptr<Subset<uml::LinkEndData, uml::Element>> endDataList = obj.getEndData();
+	const std::shared_ptr<Subset<uml::LinkEndData, uml::Element>>& endDataList = obj.getEndData();
 	if(endDataList)
 	{
 		/*Subset*/
@@ -153,9 +153,9 @@ LinkActionImpl& LinkActionImpl::operator=(const LinkActionImpl & obj)
 			std::cout << "Initialising value Subset: " << "m_endData - Subset<uml::LinkEndData, uml::Element >(getOwnedElement())" << std::endl;
 		#endif
 		
-		for(const std::shared_ptr<uml::LinkEndData> endDataindexElem: *endDataList) 
+		for(const std::shared_ptr<uml::LinkEndData>& endDataindexElem: *endDataList) 
 		{
-			std::shared_ptr<uml::LinkEndData> temp = std::dynamic_pointer_cast<uml::LinkEndData>((endDataindexElem)->copy());
+			const std::shared_ptr<uml::LinkEndData>& temp = std::dynamic_pointer_cast<uml::LinkEndData>((endDataindexElem)->copy());
 			m_endData->push_back(temp);
 		}
 	}
@@ -165,7 +165,7 @@ LinkActionImpl& LinkActionImpl::operator=(const LinkActionImpl & obj)
 	}
 
 	//clone reference 'inputValue'
-	std::shared_ptr<Subset<uml::InputPin, uml::InputPin>> inputValueList = obj.getInputValue();
+	const std::shared_ptr<Subset<uml::InputPin, uml::InputPin>>& inputValueList = obj.getInputValue();
 	if(inputValueList)
 	{
 		/*Subset*/
@@ -180,9 +180,9 @@ LinkActionImpl& LinkActionImpl::operator=(const LinkActionImpl & obj)
 			std::cout << "Initialising value Subset: " << "m_inputValue - Subset<uml::InputPin, uml::InputPin >(getInput())" << std::endl;
 		#endif
 		
-		for(const std::shared_ptr<uml::InputPin> inputValueindexElem: *inputValueList) 
+		for(const std::shared_ptr<uml::InputPin>& inputValueindexElem: *inputValueList) 
 		{
-			std::shared_ptr<uml::InputPin> temp = std::dynamic_pointer_cast<uml::InputPin>((inputValueindexElem)->copy());
+			const std::shared_ptr<uml::InputPin>& temp = std::dynamic_pointer_cast<uml::InputPin>((inputValueindexElem)->copy());
 			m_inputValue->push_back(temp);
 		}
 	}

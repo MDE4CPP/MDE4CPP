@@ -138,7 +138,7 @@ ReplyActionImpl& ReplyActionImpl::operator=(const ReplyActionImpl & obj)
 	m_replyToCall  = obj.getReplyToCall();
 	//Clone references with containment (deep copy)
 	//clone reference 'replyValue'
-	std::shared_ptr<Subset<uml::InputPin, uml::InputPin>> replyValueList = obj.getReplyValue();
+	const std::shared_ptr<Subset<uml::InputPin, uml::InputPin>>& replyValueList = obj.getReplyValue();
 	if(replyValueList)
 	{
 		/*Subset*/
@@ -153,9 +153,9 @@ ReplyActionImpl& ReplyActionImpl::operator=(const ReplyActionImpl & obj)
 			std::cout << "Initialising value Subset: " << "m_replyValue - Subset<uml::InputPin, uml::InputPin >(getInput())" << std::endl;
 		#endif
 		
-		for(const std::shared_ptr<uml::InputPin> replyValueindexElem: *replyValueList) 
+		for(const std::shared_ptr<uml::InputPin>& replyValueindexElem: *replyValueList) 
 		{
-			std::shared_ptr<uml::InputPin> temp = std::dynamic_pointer_cast<uml::InputPin>((replyValueindexElem)->copy());
+			const std::shared_ptr<uml::InputPin>& temp = std::dynamic_pointer_cast<uml::InputPin>((replyValueindexElem)->copy());
 			m_replyValue->push_back(temp);
 		}
 	}

@@ -112,15 +112,15 @@ EOperationImpl& EOperationImpl::operator=(const EOperationImpl & obj)
 	m_eExceptions  = obj.getEExceptions();
 	//Clone references with containment (deep copy)
 	//clone reference 'eGenericExceptions'
-	std::shared_ptr<Bag<ecore::EGenericType>> eGenericExceptionsList = obj.getEGenericExceptions();
+	const std::shared_ptr<Bag<ecore::EGenericType>>& eGenericExceptionsList = obj.getEGenericExceptions();
 	if(eGenericExceptionsList)
 	{
 		m_eGenericExceptions.reset(new Bag<ecore::EGenericType>());
 		
 		
-		for(const std::shared_ptr<ecore::EGenericType> eGenericExceptionsindexElem: *eGenericExceptionsList) 
+		for(const std::shared_ptr<ecore::EGenericType>& eGenericExceptionsindexElem: *eGenericExceptionsList) 
 		{
-			std::shared_ptr<ecore::EGenericType> temp = std::dynamic_pointer_cast<ecore::EGenericType>((eGenericExceptionsindexElem)->copy());
+			const std::shared_ptr<ecore::EGenericType>& temp = std::dynamic_pointer_cast<ecore::EGenericType>((eGenericExceptionsindexElem)->copy());
 			m_eGenericExceptions->push_back(temp);
 		}
 	}
@@ -130,7 +130,7 @@ EOperationImpl& EOperationImpl::operator=(const EOperationImpl & obj)
 	}
 
 	//clone reference 'eParameters'
-	std::shared_ptr<Subset<ecore::EParameter, ecore::EObject>> eParametersList = obj.getEParameters();
+	const std::shared_ptr<Subset<ecore::EParameter, ecore::EObject>>& eParametersList = obj.getEParameters();
 	if(eParametersList)
 	{
 		/*Subset*/
@@ -145,9 +145,9 @@ EOperationImpl& EOperationImpl::operator=(const EOperationImpl & obj)
 			std::cout << "Initialising value Subset: " << "m_eParameters - Subset<ecore::EParameter, ecore::EObject >(getEContentUnion())" << std::endl;
 		#endif
 		
-		for(const std::shared_ptr<ecore::EParameter> eParametersindexElem: *eParametersList) 
+		for(const std::shared_ptr<ecore::EParameter>& eParametersindexElem: *eParametersList) 
 		{
-			std::shared_ptr<ecore::EParameter> temp = std::dynamic_pointer_cast<ecore::EParameter>((eParametersindexElem)->copy());
+			const std::shared_ptr<ecore::EParameter>& temp = std::dynamic_pointer_cast<ecore::EParameter>((eParametersindexElem)->copy());
 			m_eParameters->push_back(temp);
 		}
 	}
@@ -157,15 +157,15 @@ EOperationImpl& EOperationImpl::operator=(const EOperationImpl & obj)
 	}
 
 	//clone reference 'eTypeParameters'
-	std::shared_ptr<Bag<ecore::ETypeParameter>> eTypeParametersList = obj.getETypeParameters();
+	const std::shared_ptr<Bag<ecore::ETypeParameter>>& eTypeParametersList = obj.getETypeParameters();
 	if(eTypeParametersList)
 	{
 		m_eTypeParameters.reset(new Bag<ecore::ETypeParameter>());
 		
 		
-		for(const std::shared_ptr<ecore::ETypeParameter> eTypeParametersindexElem: *eTypeParametersList) 
+		for(const std::shared_ptr<ecore::ETypeParameter>& eTypeParametersindexElem: *eTypeParametersList) 
 		{
-			std::shared_ptr<ecore::ETypeParameter> temp = std::dynamic_pointer_cast<ecore::ETypeParameter>((eTypeParametersindexElem)->copy());
+			const std::shared_ptr<ecore::ETypeParameter>& temp = std::dynamic_pointer_cast<ecore::ETypeParameter>((eTypeParametersindexElem)->copy());
 			m_eTypeParameters->push_back(temp);
 		}
 	}

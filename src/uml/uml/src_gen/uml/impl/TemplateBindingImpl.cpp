@@ -108,7 +108,7 @@ TemplateBindingImpl& TemplateBindingImpl::operator=(const TemplateBindingImpl & 
 	m_boundElement  = obj.getBoundElement();
 	//Clone references with containment (deep copy)
 	//clone reference 'parameterSubstitution'
-	std::shared_ptr<Subset<uml::TemplateParameterSubstitution, uml::Element>> parameterSubstitutionList = obj.getParameterSubstitution();
+	const std::shared_ptr<Subset<uml::TemplateParameterSubstitution, uml::Element>>& parameterSubstitutionList = obj.getParameterSubstitution();
 	if(parameterSubstitutionList)
 	{
 		/*Subset*/
@@ -123,9 +123,9 @@ TemplateBindingImpl& TemplateBindingImpl::operator=(const TemplateBindingImpl & 
 			std::cout << "Initialising value Subset: " << "m_parameterSubstitution - Subset<uml::TemplateParameterSubstitution, uml::Element >(getOwnedElement())" << std::endl;
 		#endif
 		
-		for(const std::shared_ptr<uml::TemplateParameterSubstitution> parameterSubstitutionindexElem: *parameterSubstitutionList) 
+		for(const std::shared_ptr<uml::TemplateParameterSubstitution>& parameterSubstitutionindexElem: *parameterSubstitutionList) 
 		{
-			std::shared_ptr<uml::TemplateParameterSubstitution> temp = std::dynamic_pointer_cast<uml::TemplateParameterSubstitution>((parameterSubstitutionindexElem)->copy());
+			const std::shared_ptr<uml::TemplateParameterSubstitution>& temp = std::dynamic_pointer_cast<uml::TemplateParameterSubstitution>((parameterSubstitutionindexElem)->copy());
 			m_parameterSubstitution->push_back(temp);
 		}
 	}

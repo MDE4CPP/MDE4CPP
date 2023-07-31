@@ -134,7 +134,7 @@ InteractionOperandImpl& InteractionOperandImpl::operator=(const InteractionOpera
 	//copy references with no containment (soft copy)
 	//Clone references with containment (deep copy)
 	//clone reference 'fragment'
-	std::shared_ptr<Subset<uml::InteractionFragment, uml::NamedElement>> fragmentList = obj.getFragment();
+	const std::shared_ptr<Subset<uml::InteractionFragment, uml::NamedElement>>& fragmentList = obj.getFragment();
 	if(fragmentList)
 	{
 		/*Subset*/
@@ -149,9 +149,9 @@ InteractionOperandImpl& InteractionOperandImpl::operator=(const InteractionOpera
 			std::cout << "Initialising value Subset: " << "m_fragment - Subset<uml::InteractionFragment, uml::NamedElement >(getOwnedMember())" << std::endl;
 		#endif
 		
-		for(const std::shared_ptr<uml::InteractionFragment> fragmentindexElem: *fragmentList) 
+		for(const std::shared_ptr<uml::InteractionFragment>& fragmentindexElem: *fragmentList) 
 		{
-			std::shared_ptr<uml::InteractionFragment> temp = std::dynamic_pointer_cast<uml::InteractionFragment>((fragmentindexElem)->copy());
+			const std::shared_ptr<uml::InteractionFragment>& temp = std::dynamic_pointer_cast<uml::InteractionFragment>((fragmentindexElem)->copy());
 			m_fragment->push_back(temp);
 		}
 	}

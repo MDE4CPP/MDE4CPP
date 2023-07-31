@@ -117,15 +117,15 @@ LocusImpl& LocusImpl::operator=(const LocusImpl & obj)
 	}
 
 	//clone reference 'extensionalValues'
-	std::shared_ptr<Bag<fUML::Semantics::StructuredClassifiers::ExtensionalValue>> extensionalValuesList = obj.getExtensionalValues();
+	const std::shared_ptr<Bag<fUML::Semantics::StructuredClassifiers::ExtensionalValue>>& extensionalValuesList = obj.getExtensionalValues();
 	if(extensionalValuesList)
 	{
 		m_extensionalValues.reset(new Bag<fUML::Semantics::StructuredClassifiers::ExtensionalValue>());
 		
 		
-		for(const std::shared_ptr<fUML::Semantics::StructuredClassifiers::ExtensionalValue> extensionalValuesindexElem: *extensionalValuesList) 
+		for(const std::shared_ptr<fUML::Semantics::StructuredClassifiers::ExtensionalValue>& extensionalValuesindexElem: *extensionalValuesList) 
 		{
-			std::shared_ptr<fUML::Semantics::StructuredClassifiers::ExtensionalValue> temp = std::dynamic_pointer_cast<fUML::Semantics::StructuredClassifiers::ExtensionalValue>((extensionalValuesindexElem)->copy());
+			const std::shared_ptr<fUML::Semantics::StructuredClassifiers::ExtensionalValue>& temp = std::dynamic_pointer_cast<fUML::Semantics::StructuredClassifiers::ExtensionalValue>((extensionalValuesindexElem)->copy());
 			m_extensionalValues->push_back(temp);
 		}
 	}

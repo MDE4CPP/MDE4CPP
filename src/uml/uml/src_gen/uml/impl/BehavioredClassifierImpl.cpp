@@ -162,7 +162,7 @@ BehavioredClassifierImpl& BehavioredClassifierImpl::operator=(const BehavioredCl
 	}
 
 	//clone reference 'interfaceRealization'
-	std::shared_ptr<Subset<uml::InterfaceRealization, uml::Element>> interfaceRealizationList = obj.getInterfaceRealization();
+	const std::shared_ptr<Subset<uml::InterfaceRealization, uml::Element>>& interfaceRealizationList = obj.getInterfaceRealization();
 	if(interfaceRealizationList)
 	{
 		/*Subset*/
@@ -177,9 +177,9 @@ BehavioredClassifierImpl& BehavioredClassifierImpl::operator=(const BehavioredCl
 			std::cout << "Initialising value Subset: " << "m_interfaceRealization - Subset<uml::InterfaceRealization, uml::Element >(getOwnedElement())" << std::endl;
 		#endif
 		
-		for(const std::shared_ptr<uml::InterfaceRealization> interfaceRealizationindexElem: *interfaceRealizationList) 
+		for(const std::shared_ptr<uml::InterfaceRealization>& interfaceRealizationindexElem: *interfaceRealizationList) 
 		{
-			std::shared_ptr<uml::InterfaceRealization> temp = std::dynamic_pointer_cast<uml::InterfaceRealization>((interfaceRealizationindexElem)->copy());
+			const std::shared_ptr<uml::InterfaceRealization>& temp = std::dynamic_pointer_cast<uml::InterfaceRealization>((interfaceRealizationindexElem)->copy());
 			m_interfaceRealization->push_back(temp);
 		}
 	}
@@ -189,7 +189,7 @@ BehavioredClassifierImpl& BehavioredClassifierImpl::operator=(const BehavioredCl
 	}
 
 	//clone reference 'ownedBehavior'
-	std::shared_ptr<SubsetUnion<uml::Behavior, uml::NamedElement>> ownedBehaviorList = obj.getOwnedBehavior();
+	const std::shared_ptr<SubsetUnion<uml::Behavior, uml::NamedElement>>& ownedBehaviorList = obj.getOwnedBehavior();
 	if(ownedBehaviorList)
 	{
 		/*SubsetUnion*/
@@ -204,9 +204,9 @@ BehavioredClassifierImpl& BehavioredClassifierImpl::operator=(const BehavioredCl
 			std::cout << "Initialising value SubsetUnion: " << "m_ownedBehavior - SubsetUnion<uml::Behavior, uml::NamedElement >(getOwnedMember())" << std::endl;
 		#endif
 		
-		for(const std::shared_ptr<uml::Behavior> ownedBehaviorindexElem: *ownedBehaviorList) 
+		for(const std::shared_ptr<uml::Behavior>& ownedBehaviorindexElem: *ownedBehaviorList) 
 		{
-			std::shared_ptr<uml::Behavior> temp = std::dynamic_pointer_cast<uml::Behavior>((ownedBehaviorindexElem)->copy());
+			const std::shared_ptr<uml::Behavior>& temp = std::dynamic_pointer_cast<uml::Behavior>((ownedBehaviorindexElem)->copy());
 			m_ownedBehavior->push_back(temp);
 		}
 	}

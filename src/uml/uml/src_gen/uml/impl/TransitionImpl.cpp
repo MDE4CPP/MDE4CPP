@@ -150,7 +150,7 @@ TransitionImpl& TransitionImpl::operator=(const TransitionImpl & obj)
 	}
 
 	//clone reference 'trigger'
-	std::shared_ptr<Subset<uml::Trigger, uml::Element>> triggerList = obj.getTrigger();
+	const std::shared_ptr<Subset<uml::Trigger, uml::Element>>& triggerList = obj.getTrigger();
 	if(triggerList)
 	{
 		/*Subset*/
@@ -165,9 +165,9 @@ TransitionImpl& TransitionImpl::operator=(const TransitionImpl & obj)
 			std::cout << "Initialising value Subset: " << "m_trigger - Subset<uml::Trigger, uml::Element >(getOwnedElement())" << std::endl;
 		#endif
 		
-		for(const std::shared_ptr<uml::Trigger> triggerindexElem: *triggerList) 
+		for(const std::shared_ptr<uml::Trigger>& triggerindexElem: *triggerList) 
 		{
-			std::shared_ptr<uml::Trigger> temp = std::dynamic_pointer_cast<uml::Trigger>((triggerindexElem)->copy());
+			const std::shared_ptr<uml::Trigger>& temp = std::dynamic_pointer_cast<uml::Trigger>((triggerindexElem)->copy());
 			m_trigger->push_back(temp);
 		}
 	}

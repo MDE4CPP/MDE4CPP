@@ -108,15 +108,15 @@ ExpressionInOclImpl& ExpressionInOclImpl::operator=(const ExpressionInOclImpl & 
 	}
 
 	//clone reference 'parameterVariable'
-	std::shared_ptr<Bag<ocl::Expressions::Variable>> parameterVariableList = obj.getParameterVariable();
+	const std::shared_ptr<Bag<ocl::Expressions::Variable>>& parameterVariableList = obj.getParameterVariable();
 	if(parameterVariableList)
 	{
 		m_parameterVariable.reset(new Bag<ocl::Expressions::Variable>());
 		
 		
-		for(const std::shared_ptr<ocl::Expressions::Variable> parameterVariableindexElem: *parameterVariableList) 
+		for(const std::shared_ptr<ocl::Expressions::Variable>& parameterVariableindexElem: *parameterVariableList) 
 		{
-			std::shared_ptr<ocl::Expressions::Variable> temp = std::dynamic_pointer_cast<ocl::Expressions::Variable>((parameterVariableindexElem)->copy());
+			const std::shared_ptr<ocl::Expressions::Variable>& temp = std::dynamic_pointer_cast<ocl::Expressions::Variable>((parameterVariableindexElem)->copy());
 			m_parameterVariable->push_back(temp);
 		}
 	}

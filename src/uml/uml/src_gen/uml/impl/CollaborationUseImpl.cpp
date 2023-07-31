@@ -109,7 +109,7 @@ CollaborationUseImpl& CollaborationUseImpl::operator=(const CollaborationUseImpl
 	m_type  = obj.getType();
 	//Clone references with containment (deep copy)
 	//clone reference 'roleBinding'
-	std::shared_ptr<Subset<uml::Dependency, uml::Element>> roleBindingList = obj.getRoleBinding();
+	const std::shared_ptr<Subset<uml::Dependency, uml::Element>>& roleBindingList = obj.getRoleBinding();
 	if(roleBindingList)
 	{
 		/*Subset*/
@@ -124,9 +124,9 @@ CollaborationUseImpl& CollaborationUseImpl::operator=(const CollaborationUseImpl
 			std::cout << "Initialising value Subset: " << "m_roleBinding - Subset<uml::Dependency, uml::Element >(getOwnedElement())" << std::endl;
 		#endif
 		
-		for(const std::shared_ptr<uml::Dependency> roleBindingindexElem: *roleBindingList) 
+		for(const std::shared_ptr<uml::Dependency>& roleBindingindexElem: *roleBindingList) 
 		{
-			std::shared_ptr<uml::Dependency> temp = std::dynamic_pointer_cast<uml::Dependency>((roleBindingindexElem)->copy());
+			const std::shared_ptr<uml::Dependency>& temp = std::dynamic_pointer_cast<uml::Dependency>((roleBindingindexElem)->copy());
 			m_roleBinding->push_back(temp);
 		}
 	}

@@ -100,15 +100,15 @@ FeatureValueImpl& FeatureValueImpl::operator=(const FeatureValueImpl & obj)
 	m_feature  = obj.getFeature();
 	//Clone references with containment (deep copy)
 	//clone reference 'values'
-	std::shared_ptr<Bag<fUML::Semantics::Values::Value>> valuesList = obj.getValues();
+	const std::shared_ptr<Bag<fUML::Semantics::Values::Value>>& valuesList = obj.getValues();
 	if(valuesList)
 	{
 		m_values.reset(new Bag<fUML::Semantics::Values::Value>());
 		
 		
-		for(const std::shared_ptr<fUML::Semantics::Values::Value> valuesindexElem: *valuesList) 
+		for(const std::shared_ptr<fUML::Semantics::Values::Value>& valuesindexElem: *valuesList) 
 		{
-			std::shared_ptr<fUML::Semantics::Values::Value> temp = std::dynamic_pointer_cast<fUML::Semantics::Values::Value>((valuesindexElem)->copy());
+			const std::shared_ptr<fUML::Semantics::Values::Value>& temp = std::dynamic_pointer_cast<fUML::Semantics::Values::Value>((valuesindexElem)->copy());
 			m_values->push_back(temp);
 		}
 	}

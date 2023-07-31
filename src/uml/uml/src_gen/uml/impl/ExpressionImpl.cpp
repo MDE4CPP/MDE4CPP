@@ -145,7 +145,7 @@ ExpressionImpl& ExpressionImpl::operator=(const ExpressionImpl & obj)
 	//copy references with no containment (soft copy)
 	//Clone references with containment (deep copy)
 	//clone reference 'operand'
-	std::shared_ptr<Subset<uml::ValueSpecification, uml::Element>> operandList = obj.getOperand();
+	const std::shared_ptr<Subset<uml::ValueSpecification, uml::Element>>& operandList = obj.getOperand();
 	if(operandList)
 	{
 		/*Subset*/
@@ -160,9 +160,9 @@ ExpressionImpl& ExpressionImpl::operator=(const ExpressionImpl & obj)
 			std::cout << "Initialising value Subset: " << "m_operand - Subset<uml::ValueSpecification, uml::Element >(getOwnedElement())" << std::endl;
 		#endif
 		
-		for(const std::shared_ptr<uml::ValueSpecification> operandindexElem: *operandList) 
+		for(const std::shared_ptr<uml::ValueSpecification>& operandindexElem: *operandList) 
 		{
-			std::shared_ptr<uml::ValueSpecification> temp = std::dynamic_pointer_cast<uml::ValueSpecification>((operandindexElem)->copy());
+			const std::shared_ptr<uml::ValueSpecification>& temp = std::dynamic_pointer_cast<uml::ValueSpecification>((operandindexElem)->copy());
 			m_operand->push_back(temp);
 		}
 	}

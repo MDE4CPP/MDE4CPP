@@ -172,7 +172,7 @@ ClassifierImpl& ClassifierImpl::operator=(const ClassifierImpl & obj)
 	m_useCase  = obj.getUseCase();
 	//Clone references with containment (deep copy)
 	//clone reference 'collaborationUse'
-	std::shared_ptr<SubsetUnion<uml::CollaborationUse, uml::Element>> collaborationUseList = obj.getCollaborationUse();
+	const std::shared_ptr<SubsetUnion<uml::CollaborationUse, uml::Element>>& collaborationUseList = obj.getCollaborationUse();
 	if(collaborationUseList)
 	{
 		/*SubsetUnion*/
@@ -187,9 +187,9 @@ ClassifierImpl& ClassifierImpl::operator=(const ClassifierImpl & obj)
 			std::cout << "Initialising value SubsetUnion: " << "m_collaborationUse - SubsetUnion<uml::CollaborationUse, uml::Element >(getOwnedElement())" << std::endl;
 		#endif
 		
-		for(const std::shared_ptr<uml::CollaborationUse> collaborationUseindexElem: *collaborationUseList) 
+		for(const std::shared_ptr<uml::CollaborationUse>& collaborationUseindexElem: *collaborationUseList) 
 		{
-			std::shared_ptr<uml::CollaborationUse> temp = std::dynamic_pointer_cast<uml::CollaborationUse>((collaborationUseindexElem)->copy());
+			const std::shared_ptr<uml::CollaborationUse>& temp = std::dynamic_pointer_cast<uml::CollaborationUse>((collaborationUseindexElem)->copy());
 			m_collaborationUse->push_back(temp);
 		}
 	}
@@ -199,7 +199,7 @@ ClassifierImpl& ClassifierImpl::operator=(const ClassifierImpl & obj)
 	}
 
 	//clone reference 'generalization'
-	std::shared_ptr<Subset<uml::Generalization, uml::Element>> generalizationList = obj.getGeneralization();
+	const std::shared_ptr<Subset<uml::Generalization, uml::Element>>& generalizationList = obj.getGeneralization();
 	if(generalizationList)
 	{
 		/*Subset*/
@@ -214,9 +214,9 @@ ClassifierImpl& ClassifierImpl::operator=(const ClassifierImpl & obj)
 			std::cout << "Initialising value Subset: " << "m_generalization - Subset<uml::Generalization, uml::Element >(getOwnedElement())" << std::endl;
 		#endif
 		
-		for(const std::shared_ptr<uml::Generalization> generalizationindexElem: *generalizationList) 
+		for(const std::shared_ptr<uml::Generalization>& generalizationindexElem: *generalizationList) 
 		{
-			std::shared_ptr<uml::Generalization> temp = std::dynamic_pointer_cast<uml::Generalization>((generalizationindexElem)->copy());
+			const std::shared_ptr<uml::Generalization>& temp = std::dynamic_pointer_cast<uml::Generalization>((generalizationindexElem)->copy());
 			m_generalization->push_back(temp);
 		}
 	}
@@ -226,7 +226,7 @@ ClassifierImpl& ClassifierImpl::operator=(const ClassifierImpl & obj)
 	}
 
 	//clone reference 'inheritedMember'
-	std::shared_ptr<Subset<uml::NamedElement, uml::NamedElement>> inheritedMemberList = obj.getInheritedMember();
+	const std::shared_ptr<Subset<uml::NamedElement, uml::NamedElement>>& inheritedMemberList = obj.getInheritedMember();
 	if(inheritedMemberList)
 	{
 		/*Subset*/
@@ -241,9 +241,9 @@ ClassifierImpl& ClassifierImpl::operator=(const ClassifierImpl & obj)
 			std::cout << "Initialising value Subset: " << "m_inheritedMember - Subset<uml::NamedElement, uml::NamedElement >(getMember())" << std::endl;
 		#endif
 		
-		for(const std::shared_ptr<uml::NamedElement> inheritedMemberindexElem: *inheritedMemberList) 
+		for(const std::shared_ptr<uml::NamedElement>& inheritedMemberindexElem: *inheritedMemberList) 
 		{
-			std::shared_ptr<uml::NamedElement> temp = std::dynamic_pointer_cast<uml::NamedElement>((inheritedMemberindexElem)->copy());
+			const std::shared_ptr<uml::NamedElement>& temp = std::dynamic_pointer_cast<uml::NamedElement>((inheritedMemberindexElem)->copy());
 			m_inheritedMember->push_back(temp);
 		}
 	}
@@ -253,7 +253,7 @@ ClassifierImpl& ClassifierImpl::operator=(const ClassifierImpl & obj)
 	}
 
 	//clone reference 'ownedUseCase'
-	std::shared_ptr<Subset<uml::UseCase, uml::NamedElement>> ownedUseCaseList = obj.getOwnedUseCase();
+	const std::shared_ptr<Subset<uml::UseCase, uml::NamedElement>>& ownedUseCaseList = obj.getOwnedUseCase();
 	if(ownedUseCaseList)
 	{
 		/*Subset*/
@@ -268,9 +268,9 @@ ClassifierImpl& ClassifierImpl::operator=(const ClassifierImpl & obj)
 			std::cout << "Initialising value Subset: " << "m_ownedUseCase - Subset<uml::UseCase, uml::NamedElement >(getOwnedMember())" << std::endl;
 		#endif
 		
-		for(const std::shared_ptr<uml::UseCase> ownedUseCaseindexElem: *ownedUseCaseList) 
+		for(const std::shared_ptr<uml::UseCase>& ownedUseCaseindexElem: *ownedUseCaseList) 
 		{
-			std::shared_ptr<uml::UseCase> temp = std::dynamic_pointer_cast<uml::UseCase>((ownedUseCaseindexElem)->copy());
+			const std::shared_ptr<uml::UseCase>& temp = std::dynamic_pointer_cast<uml::UseCase>((ownedUseCaseindexElem)->copy());
 			m_ownedUseCase->push_back(temp);
 		}
 	}
@@ -280,7 +280,7 @@ ClassifierImpl& ClassifierImpl::operator=(const ClassifierImpl & obj)
 	}
 
 	//clone reference 'redefinedClassifier'
-	std::shared_ptr<SubsetUnion<uml::Classifier, uml::RedefinableElement>> redefinedClassifierList = obj.getRedefinedClassifier();
+	const std::shared_ptr<SubsetUnion<uml::Classifier, uml::RedefinableElement>>& redefinedClassifierList = obj.getRedefinedClassifier();
 	if(redefinedClassifierList)
 	{
 		/*SubsetUnion*/
@@ -295,9 +295,9 @@ ClassifierImpl& ClassifierImpl::operator=(const ClassifierImpl & obj)
 			std::cout << "Initialising value SubsetUnion: " << "m_redefinedClassifier - SubsetUnion<uml::Classifier, uml::RedefinableElement >(getRedefinedElement())" << std::endl;
 		#endif
 		
-		for(const std::shared_ptr<uml::Classifier> redefinedClassifierindexElem: *redefinedClassifierList) 
+		for(const std::shared_ptr<uml::Classifier>& redefinedClassifierindexElem: *redefinedClassifierList) 
 		{
-			std::shared_ptr<uml::Classifier> temp = std::dynamic_pointer_cast<uml::Classifier>((redefinedClassifierindexElem)->copy());
+			const std::shared_ptr<uml::Classifier>& temp = std::dynamic_pointer_cast<uml::Classifier>((redefinedClassifierindexElem)->copy());
 			m_redefinedClassifier->push_back(temp);
 		}
 	}
@@ -313,7 +313,7 @@ ClassifierImpl& ClassifierImpl::operator=(const ClassifierImpl & obj)
 	}
 
 	//clone reference 'substitution'
-	std::shared_ptr<Subset<uml::Substitution, uml::Element>> substitutionList = obj.getSubstitution();
+	const std::shared_ptr<Subset<uml::Substitution, uml::Element>>& substitutionList = obj.getSubstitution();
 	if(substitutionList)
 	{
 		/*Subset*/
@@ -328,9 +328,9 @@ ClassifierImpl& ClassifierImpl::operator=(const ClassifierImpl & obj)
 			std::cout << "Initialising value Subset: " << "m_substitution - Subset<uml::Substitution, uml::Element >(getOwnedElement())" << std::endl;
 		#endif
 		
-		for(const std::shared_ptr<uml::Substitution> substitutionindexElem: *substitutionList) 
+		for(const std::shared_ptr<uml::Substitution>& substitutionindexElem: *substitutionList) 
 		{
-			std::shared_ptr<uml::Substitution> temp = std::dynamic_pointer_cast<uml::Substitution>((substitutionindexElem)->copy());
+			const std::shared_ptr<uml::Substitution>& temp = std::dynamic_pointer_cast<uml::Substitution>((substitutionindexElem)->copy());
 			m_substitution->push_back(temp);
 		}
 	}

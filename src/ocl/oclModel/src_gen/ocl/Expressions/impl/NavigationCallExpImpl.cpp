@@ -191,15 +191,15 @@ NavigationCallExpImpl& NavigationCallExpImpl::operator=(const NavigationCallExpI
 	m_navigationSource  = obj.getNavigationSource();
 	//Clone references with containment (deep copy)
 	//clone reference 'qualifier'
-	std::shared_ptr<Bag<ocl::Expressions::OclExpression>> qualifierList = obj.getQualifier();
+	const std::shared_ptr<Bag<ocl::Expressions::OclExpression>>& qualifierList = obj.getQualifier();
 	if(qualifierList)
 	{
 		m_qualifier.reset(new Bag<ocl::Expressions::OclExpression>());
 		
 		
-		for(const std::shared_ptr<ocl::Expressions::OclExpression> qualifierindexElem: *qualifierList) 
+		for(const std::shared_ptr<ocl::Expressions::OclExpression>& qualifierindexElem: *qualifierList) 
 		{
-			std::shared_ptr<ocl::Expressions::OclExpression> temp = std::dynamic_pointer_cast<ocl::Expressions::OclExpression>((qualifierindexElem)->copy());
+			const std::shared_ptr<ocl::Expressions::OclExpression>& temp = std::dynamic_pointer_cast<ocl::Expressions::OclExpression>((qualifierindexElem)->copy());
 			m_qualifier->push_back(temp);
 		}
 	}

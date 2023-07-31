@@ -135,11 +135,11 @@ DurationConstraintImpl& DurationConstraintImpl::operator=(const DurationConstrai
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy DurationConstraint "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
 	#endif
 	//Clone Attributes with (deep copy)
-	std::shared_ptr<Bag<bool>> firstEventList = obj.isFirstEvent();
+	const std::shared_ptr<Bag<bool>>& firstEventList = obj.isFirstEvent();
 	if(firstEventList)
 	{	
 		m_firstEvent.reset(new Bag<bool>());
-		for(const std::shared_ptr<bool> it: *firstEventList) 
+		for(const std::shared_ptr<bool>& it: *firstEventList) 
 		{
 			m_firstEvent->push_back(it);
 		}

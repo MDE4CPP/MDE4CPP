@@ -122,7 +122,7 @@ RedefinableTemplateSignatureImpl& RedefinableTemplateSignatureImpl::operator=(co
 	m_classifier  = obj.getClassifier();
 	//Clone references with containment (deep copy)
 	//clone reference 'extendedSignature'
-	std::shared_ptr<Subset<uml::RedefinableTemplateSignature, uml::RedefinableElement>> extendedSignatureList = obj.getExtendedSignature();
+	const std::shared_ptr<Subset<uml::RedefinableTemplateSignature, uml::RedefinableElement>>& extendedSignatureList = obj.getExtendedSignature();
 	if(extendedSignatureList)
 	{
 		/*Subset*/
@@ -137,9 +137,9 @@ RedefinableTemplateSignatureImpl& RedefinableTemplateSignatureImpl::operator=(co
 			std::cout << "Initialising value Subset: " << "m_extendedSignature - Subset<uml::RedefinableTemplateSignature, uml::RedefinableElement >(getRedefinedElement())" << std::endl;
 		#endif
 		
-		for(const std::shared_ptr<uml::RedefinableTemplateSignature> extendedSignatureindexElem: *extendedSignatureList) 
+		for(const std::shared_ptr<uml::RedefinableTemplateSignature>& extendedSignatureindexElem: *extendedSignatureList) 
 		{
-			std::shared_ptr<uml::RedefinableTemplateSignature> temp = std::dynamic_pointer_cast<uml::RedefinableTemplateSignature>((extendedSignatureindexElem)->copy());
+			const std::shared_ptr<uml::RedefinableTemplateSignature>& temp = std::dynamic_pointer_cast<uml::RedefinableTemplateSignature>((extendedSignatureindexElem)->copy());
 			m_extendedSignature->push_back(temp);
 		}
 	}
@@ -149,7 +149,7 @@ RedefinableTemplateSignatureImpl& RedefinableTemplateSignatureImpl::operator=(co
 	}
 
 	//clone reference 'inheritedParameter'
-	std::shared_ptr<Subset<uml::TemplateParameter, uml::TemplateParameter>> inheritedParameterList = obj.getInheritedParameter();
+	const std::shared_ptr<Subset<uml::TemplateParameter, uml::TemplateParameter>>& inheritedParameterList = obj.getInheritedParameter();
 	if(inheritedParameterList)
 	{
 		/*Subset*/
@@ -164,9 +164,9 @@ RedefinableTemplateSignatureImpl& RedefinableTemplateSignatureImpl::operator=(co
 			std::cout << "Initialising value Subset: " << "m_inheritedParameter - Subset<uml::TemplateParameter, uml::TemplateParameter >(getParameter())" << std::endl;
 		#endif
 		
-		for(const std::shared_ptr<uml::TemplateParameter> inheritedParameterindexElem: *inheritedParameterList) 
+		for(const std::shared_ptr<uml::TemplateParameter>& inheritedParameterindexElem: *inheritedParameterList) 
 		{
-			std::shared_ptr<uml::TemplateParameter> temp = std::dynamic_pointer_cast<uml::TemplateParameter>((inheritedParameterindexElem)->copy());
+			const std::shared_ptr<uml::TemplateParameter>& temp = std::dynamic_pointer_cast<uml::TemplateParameter>((inheritedParameterindexElem)->copy());
 			m_inheritedParameter->push_back(temp);
 		}
 	}

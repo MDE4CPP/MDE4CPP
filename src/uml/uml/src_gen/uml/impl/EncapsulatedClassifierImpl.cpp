@@ -157,7 +157,7 @@ EncapsulatedClassifierImpl& EncapsulatedClassifierImpl::operator=(const Encapsul
 	//copy references with no containment (soft copy)
 	//Clone references with containment (deep copy)
 	//clone reference 'ownedPort'
-	std::shared_ptr<Subset<uml::Port, uml::Property /*Subset does not reference a union*/>> ownedPortList = obj.getOwnedPort();
+	const std::shared_ptr<Subset<uml::Port, uml::Property /*Subset does not reference a union*/>>& ownedPortList = obj.getOwnedPort();
 	if(ownedPortList)
 	{
 		/*Subset*/
@@ -172,9 +172,9 @@ EncapsulatedClassifierImpl& EncapsulatedClassifierImpl::operator=(const Encapsul
 			std::cout << "Initialising value Subset: " << "m_ownedPort - Subset<uml::Port, uml::Property /*Subset does not reference a union*/ >(getOwnedAttribute())" << std::endl;
 		#endif
 		
-		for(const std::shared_ptr<uml::Port> ownedPortindexElem: *ownedPortList) 
+		for(const std::shared_ptr<uml::Port>& ownedPortindexElem: *ownedPortList) 
 		{
-			std::shared_ptr<uml::Port> temp = std::dynamic_pointer_cast<uml::Port>((ownedPortindexElem)->copy());
+			const std::shared_ptr<uml::Port>& temp = std::dynamic_pointer_cast<uml::Port>((ownedPortindexElem)->copy());
 			m_ownedPort->push_back(temp);
 		}
 	}

@@ -154,7 +154,7 @@ SignalImpl& SignalImpl::operator=(const SignalImpl & obj)
 	//copy references with no containment (soft copy)
 	//Clone references with containment (deep copy)
 	//clone reference 'ownedAttribute'
-	std::shared_ptr<Subset<uml::Property, uml::NamedElement, uml::Property>> ownedAttributeList = obj.getOwnedAttribute();
+	const std::shared_ptr<Subset<uml::Property, uml::NamedElement, uml::Property>>& ownedAttributeList = obj.getOwnedAttribute();
 	if(ownedAttributeList)
 	{
 		/*Subset*/
@@ -169,9 +169,9 @@ SignalImpl& SignalImpl::operator=(const SignalImpl & obj)
 			std::cout << "Initialising value Subset: " << "m_ownedAttribute - Subset<uml::Property, uml::NamedElement, uml::Property >(getOwnedMember(), getAttribute())" << std::endl;
 		#endif
 		
-		for(const std::shared_ptr<uml::Property> ownedAttributeindexElem: *ownedAttributeList) 
+		for(const std::shared_ptr<uml::Property>& ownedAttributeindexElem: *ownedAttributeList) 
 		{
-			std::shared_ptr<uml::Property> temp = std::dynamic_pointer_cast<uml::Property>((ownedAttributeindexElem)->copy());
+			const std::shared_ptr<uml::Property>& temp = std::dynamic_pointer_cast<uml::Property>((ownedAttributeindexElem)->copy());
 			m_ownedAttribute->push_back(temp);
 		}
 	}

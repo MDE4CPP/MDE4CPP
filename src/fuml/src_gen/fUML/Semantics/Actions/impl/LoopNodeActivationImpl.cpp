@@ -109,15 +109,15 @@ LoopNodeActivationImpl& LoopNodeActivationImpl::operator=(const LoopNodeActivati
 	//copy references with no containment (soft copy)
 	//Clone references with containment (deep copy)
 	//clone reference 'bodyOutputLists'
-	std::shared_ptr<Bag<fUML::Semantics::Actions::Values>> bodyOutputListsList = obj.getBodyOutputLists();
+	const std::shared_ptr<Bag<fUML::Semantics::Actions::Values>>& bodyOutputListsList = obj.getBodyOutputLists();
 	if(bodyOutputListsList)
 	{
 		m_bodyOutputLists.reset(new Bag<fUML::Semantics::Actions::Values>());
 		
 		
-		for(const std::shared_ptr<fUML::Semantics::Actions::Values> bodyOutputListsindexElem: *bodyOutputListsList) 
+		for(const std::shared_ptr<fUML::Semantics::Actions::Values>& bodyOutputListsindexElem: *bodyOutputListsList) 
 		{
-			std::shared_ptr<fUML::Semantics::Actions::Values> temp = std::dynamic_pointer_cast<fUML::Semantics::Actions::Values>((bodyOutputListsindexElem)->copy());
+			const std::shared_ptr<fUML::Semantics::Actions::Values>& temp = std::dynamic_pointer_cast<fUML::Semantics::Actions::Values>((bodyOutputListsindexElem)->copy());
 			m_bodyOutputLists->push_back(temp);
 		}
 	}

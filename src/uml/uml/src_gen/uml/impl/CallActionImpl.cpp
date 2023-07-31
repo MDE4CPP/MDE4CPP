@@ -139,7 +139,7 @@ CallActionImpl& CallActionImpl::operator=(const CallActionImpl & obj)
 	//copy references with no containment (soft copy)
 	//Clone references with containment (deep copy)
 	//clone reference 'result'
-	std::shared_ptr<Subset<uml::OutputPin, uml::OutputPin>> resultList = obj.getResult();
+	const std::shared_ptr<Subset<uml::OutputPin, uml::OutputPin>>& resultList = obj.getResult();
 	if(resultList)
 	{
 		/*Subset*/
@@ -154,9 +154,9 @@ CallActionImpl& CallActionImpl::operator=(const CallActionImpl & obj)
 			std::cout << "Initialising value Subset: " << "m_result - Subset<uml::OutputPin, uml::OutputPin >(getOutput())" << std::endl;
 		#endif
 		
-		for(const std::shared_ptr<uml::OutputPin> resultindexElem: *resultList) 
+		for(const std::shared_ptr<uml::OutputPin>& resultindexElem: *resultList) 
 		{
-			std::shared_ptr<uml::OutputPin> temp = std::dynamic_pointer_cast<uml::OutputPin>((resultindexElem)->copy());
+			const std::shared_ptr<uml::OutputPin>& temp = std::dynamic_pointer_cast<uml::OutputPin>((resultindexElem)->copy());
 			m_result->push_back(temp);
 		}
 	}

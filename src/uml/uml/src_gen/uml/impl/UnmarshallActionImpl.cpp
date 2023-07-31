@@ -143,7 +143,7 @@ UnmarshallActionImpl& UnmarshallActionImpl::operator=(const UnmarshallActionImpl
 	}
 
 	//clone reference 'result'
-	std::shared_ptr<Subset<uml::OutputPin, uml::OutputPin>> resultList = obj.getResult();
+	const std::shared_ptr<Subset<uml::OutputPin, uml::OutputPin>>& resultList = obj.getResult();
 	if(resultList)
 	{
 		/*Subset*/
@@ -158,9 +158,9 @@ UnmarshallActionImpl& UnmarshallActionImpl::operator=(const UnmarshallActionImpl
 			std::cout << "Initialising value Subset: " << "m_result - Subset<uml::OutputPin, uml::OutputPin >(getOutput())" << std::endl;
 		#endif
 		
-		for(const std::shared_ptr<uml::OutputPin> resultindexElem: *resultList) 
+		for(const std::shared_ptr<uml::OutputPin>& resultindexElem: *resultList) 
 		{
-			std::shared_ptr<uml::OutputPin> temp = std::dynamic_pointer_cast<uml::OutputPin>((resultindexElem)->copy());
+			const std::shared_ptr<uml::OutputPin>& temp = std::dynamic_pointer_cast<uml::OutputPin>((resultindexElem)->copy());
 			m_result->push_back(temp);
 		}
 	}

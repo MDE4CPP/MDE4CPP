@@ -160,7 +160,7 @@ CollaborationImpl& CollaborationImpl::operator=(const CollaborationImpl & obj)
 	//copy references with no containment (soft copy)
 	//Clone references with containment (deep copy)
 	//clone reference 'collaborationRole'
-	std::shared_ptr<Subset<uml::ConnectableElement, uml::ConnectableElement>> collaborationRoleList = obj.getCollaborationRole();
+	const std::shared_ptr<Subset<uml::ConnectableElement, uml::ConnectableElement>>& collaborationRoleList = obj.getCollaborationRole();
 	if(collaborationRoleList)
 	{
 		/*Subset*/
@@ -175,9 +175,9 @@ CollaborationImpl& CollaborationImpl::operator=(const CollaborationImpl & obj)
 			std::cout << "Initialising value Subset: " << "m_collaborationRole - Subset<uml::ConnectableElement, uml::ConnectableElement >(getRole())" << std::endl;
 		#endif
 		
-		for(const std::shared_ptr<uml::ConnectableElement> collaborationRoleindexElem: *collaborationRoleList) 
+		for(const std::shared_ptr<uml::ConnectableElement>& collaborationRoleindexElem: *collaborationRoleList) 
 		{
-			std::shared_ptr<uml::ConnectableElement> temp = std::dynamic_pointer_cast<uml::ConnectableElement>((collaborationRoleindexElem)->copy());
+			const std::shared_ptr<uml::ConnectableElement>& temp = std::dynamic_pointer_cast<uml::ConnectableElement>((collaborationRoleindexElem)->copy());
 			m_collaborationRole->push_back(temp);
 		}
 	}

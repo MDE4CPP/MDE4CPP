@@ -99,15 +99,15 @@ EGenericTypeImpl& EGenericTypeImpl::operator=(const EGenericTypeImpl & obj)
 	}
 
 	//clone reference 'eTypeArguments'
-	std::shared_ptr<Bag<ecore::EGenericType>> eTypeArgumentsList = obj.getETypeArguments();
+	const std::shared_ptr<Bag<ecore::EGenericType>>& eTypeArgumentsList = obj.getETypeArguments();
 	if(eTypeArgumentsList)
 	{
 		m_eTypeArguments.reset(new Bag<ecore::EGenericType>());
 		
 		
-		for(const std::shared_ptr<ecore::EGenericType> eTypeArgumentsindexElem: *eTypeArgumentsList) 
+		for(const std::shared_ptr<ecore::EGenericType>& eTypeArgumentsindexElem: *eTypeArgumentsList) 
 		{
-			std::shared_ptr<ecore::EGenericType> temp = std::dynamic_pointer_cast<ecore::EGenericType>((eTypeArgumentsindexElem)->copy());
+			const std::shared_ptr<ecore::EGenericType>& temp = std::dynamic_pointer_cast<ecore::EGenericType>((eTypeArgumentsindexElem)->copy());
 			m_eTypeArguments->push_back(temp);
 		}
 	}

@@ -194,15 +194,15 @@ LoopExpImpl& LoopExpImpl::operator=(const LoopExpImpl & obj)
 	}
 
 	//clone reference 'iterator'
-	std::shared_ptr<Bag<ocl::Expressions::Variable>> iteratorList = obj.getIterator();
+	const std::shared_ptr<Bag<ocl::Expressions::Variable>>& iteratorList = obj.getIterator();
 	if(iteratorList)
 	{
 		m_iterator.reset(new Bag<ocl::Expressions::Variable>());
 		
 		
-		for(const std::shared_ptr<ocl::Expressions::Variable> iteratorindexElem: *iteratorList) 
+		for(const std::shared_ptr<ocl::Expressions::Variable>& iteratorindexElem: *iteratorList) 
 		{
-			std::shared_ptr<ocl::Expressions::Variable> temp = std::dynamic_pointer_cast<ocl::Expressions::Variable>((iteratorindexElem)->copy());
+			const std::shared_ptr<ocl::Expressions::Variable>& temp = std::dynamic_pointer_cast<ocl::Expressions::Variable>((iteratorindexElem)->copy());
 			m_iterator->push_back(temp);
 		}
 	}

@@ -123,7 +123,7 @@ BehavioralFeatureImpl& BehavioralFeatureImpl::operator=(const BehavioralFeatureI
 	m_raisedException  = obj.getRaisedException();
 	//Clone references with containment (deep copy)
 	//clone reference 'ownedParameter'
-	std::shared_ptr<Subset<uml::Parameter, uml::NamedElement>> ownedParameterList = obj.getOwnedParameter();
+	const std::shared_ptr<Subset<uml::Parameter, uml::NamedElement>>& ownedParameterList = obj.getOwnedParameter();
 	if(ownedParameterList)
 	{
 		/*Subset*/
@@ -138,9 +138,9 @@ BehavioralFeatureImpl& BehavioralFeatureImpl::operator=(const BehavioralFeatureI
 			std::cout << "Initialising value Subset: " << "m_ownedParameter - Subset<uml::Parameter, uml::NamedElement >(getOwnedMember())" << std::endl;
 		#endif
 		
-		for(const std::shared_ptr<uml::Parameter> ownedParameterindexElem: *ownedParameterList) 
+		for(const std::shared_ptr<uml::Parameter>& ownedParameterindexElem: *ownedParameterList) 
 		{
-			std::shared_ptr<uml::Parameter> temp = std::dynamic_pointer_cast<uml::Parameter>((ownedParameterindexElem)->copy());
+			const std::shared_ptr<uml::Parameter>& temp = std::dynamic_pointer_cast<uml::Parameter>((ownedParameterindexElem)->copy());
 			m_ownedParameter->push_back(temp);
 		}
 	}
@@ -150,7 +150,7 @@ BehavioralFeatureImpl& BehavioralFeatureImpl::operator=(const BehavioralFeatureI
 	}
 
 	//clone reference 'ownedParameterSet'
-	std::shared_ptr<Subset<uml::ParameterSet, uml::NamedElement>> ownedParameterSetList = obj.getOwnedParameterSet();
+	const std::shared_ptr<Subset<uml::ParameterSet, uml::NamedElement>>& ownedParameterSetList = obj.getOwnedParameterSet();
 	if(ownedParameterSetList)
 	{
 		/*Subset*/
@@ -165,9 +165,9 @@ BehavioralFeatureImpl& BehavioralFeatureImpl::operator=(const BehavioralFeatureI
 			std::cout << "Initialising value Subset: " << "m_ownedParameterSet - Subset<uml::ParameterSet, uml::NamedElement >(getOwnedMember())" << std::endl;
 		#endif
 		
-		for(const std::shared_ptr<uml::ParameterSet> ownedParameterSetindexElem: *ownedParameterSetList) 
+		for(const std::shared_ptr<uml::ParameterSet>& ownedParameterSetindexElem: *ownedParameterSetList) 
 		{
-			std::shared_ptr<uml::ParameterSet> temp = std::dynamic_pointer_cast<uml::ParameterSet>((ownedParameterSetindexElem)->copy());
+			const std::shared_ptr<uml::ParameterSet>& temp = std::dynamic_pointer_cast<uml::ParameterSet>((ownedParameterSetindexElem)->copy());
 			m_ownedParameterSet->push_back(temp);
 		}
 	}

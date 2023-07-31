@@ -170,11 +170,11 @@ OpaqueBehaviorImpl& OpaqueBehaviorImpl::operator=(const OpaqueBehaviorImpl & obj
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy OpaqueBehavior "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
 	#endif
 	//Clone Attributes with (deep copy)
-	std::shared_ptr<Bag<std::string>> bodyList = obj.getBody();
+	const std::shared_ptr<Bag<std::string>>& bodyList = obj.getBody();
 	if(bodyList)
 	{	
 		m_body.reset(new Bag<std::string>());
-		for(const std::shared_ptr<std::string> it: *bodyList) 
+		for(const std::shared_ptr<std::string>& it: *bodyList) 
 		{
 			m_body->push_back(it);
 		}
@@ -183,11 +183,11 @@ OpaqueBehaviorImpl& OpaqueBehaviorImpl::operator=(const OpaqueBehaviorImpl & obj
 	{
 		DEBUG_MESSAGE(std::cout << "Warning: container is nullptr body."<< std::endl;)
 	}
-	std::shared_ptr<Bag<std::string>> languageList = obj.getLanguage();
+	const std::shared_ptr<Bag<std::string>>& languageList = obj.getLanguage();
 	if(languageList)
 	{	
 		m_language.reset(new Bag<std::string>());
-		for(const std::shared_ptr<std::string> it: *languageList) 
+		for(const std::shared_ptr<std::string>& it: *languageList) 
 		{
 			m_language->push_back(it);
 		}

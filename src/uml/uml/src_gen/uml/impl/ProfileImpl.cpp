@@ -156,7 +156,7 @@ ProfileImpl& ProfileImpl::operator=(const ProfileImpl & obj)
 	//copy references with no containment (soft copy)
 	//Clone references with containment (deep copy)
 	//clone reference 'metaclassReference'
-	std::shared_ptr<Subset<uml::ElementImport, uml::ElementImport /*Subset does not reference a union*/>> metaclassReferenceList = obj.getMetaclassReference();
+	const std::shared_ptr<Subset<uml::ElementImport, uml::ElementImport /*Subset does not reference a union*/>>& metaclassReferenceList = obj.getMetaclassReference();
 	if(metaclassReferenceList)
 	{
 		/*Subset*/
@@ -171,9 +171,9 @@ ProfileImpl& ProfileImpl::operator=(const ProfileImpl & obj)
 			std::cout << "Initialising value Subset: " << "m_metaclassReference - Subset<uml::ElementImport, uml::ElementImport /*Subset does not reference a union*/ >(getElementImport())" << std::endl;
 		#endif
 		
-		for(const std::shared_ptr<uml::ElementImport> metaclassReferenceindexElem: *metaclassReferenceList) 
+		for(const std::shared_ptr<uml::ElementImport>& metaclassReferenceindexElem: *metaclassReferenceList) 
 		{
-			std::shared_ptr<uml::ElementImport> temp = std::dynamic_pointer_cast<uml::ElementImport>((metaclassReferenceindexElem)->copy());
+			const std::shared_ptr<uml::ElementImport>& temp = std::dynamic_pointer_cast<uml::ElementImport>((metaclassReferenceindexElem)->copy());
 			m_metaclassReference->push_back(temp);
 		}
 	}
@@ -183,7 +183,7 @@ ProfileImpl& ProfileImpl::operator=(const ProfileImpl & obj)
 	}
 
 	//clone reference 'metamodelReference'
-	std::shared_ptr<Subset<uml::PackageImport, uml::PackageImport /*Subset does not reference a union*/>> metamodelReferenceList = obj.getMetamodelReference();
+	const std::shared_ptr<Subset<uml::PackageImport, uml::PackageImport /*Subset does not reference a union*/>>& metamodelReferenceList = obj.getMetamodelReference();
 	if(metamodelReferenceList)
 	{
 		/*Subset*/
@@ -198,9 +198,9 @@ ProfileImpl& ProfileImpl::operator=(const ProfileImpl & obj)
 			std::cout << "Initialising value Subset: " << "m_metamodelReference - Subset<uml::PackageImport, uml::PackageImport /*Subset does not reference a union*/ >(getPackageImport())" << std::endl;
 		#endif
 		
-		for(const std::shared_ptr<uml::PackageImport> metamodelReferenceindexElem: *metamodelReferenceList) 
+		for(const std::shared_ptr<uml::PackageImport>& metamodelReferenceindexElem: *metamodelReferenceList) 
 		{
-			std::shared_ptr<uml::PackageImport> temp = std::dynamic_pointer_cast<uml::PackageImport>((metamodelReferenceindexElem)->copy());
+			const std::shared_ptr<uml::PackageImport>& temp = std::dynamic_pointer_cast<uml::PackageImport>((metamodelReferenceindexElem)->copy());
 			m_metamodelReference->push_back(temp);
 		}
 	}

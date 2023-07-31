@@ -111,15 +111,15 @@ ConditionalNodeActivationImpl& ConditionalNodeActivationImpl::operator=(const Co
 	m_selectedClauses  = obj.getSelectedClauses();
 	//Clone references with containment (deep copy)
 	//clone reference 'clauseActivations'
-	std::shared_ptr<Bag<fUML::Semantics::Actions::ClauseActivation>> clauseActivationsList = obj.getClauseActivations();
+	const std::shared_ptr<Bag<fUML::Semantics::Actions::ClauseActivation>>& clauseActivationsList = obj.getClauseActivations();
 	if(clauseActivationsList)
 	{
 		m_clauseActivations.reset(new Bag<fUML::Semantics::Actions::ClauseActivation>());
 		
 		
-		for(const std::shared_ptr<fUML::Semantics::Actions::ClauseActivation> clauseActivationsindexElem: *clauseActivationsList) 
+		for(const std::shared_ptr<fUML::Semantics::Actions::ClauseActivation>& clauseActivationsindexElem: *clauseActivationsList) 
 		{
-			std::shared_ptr<fUML::Semantics::Actions::ClauseActivation> temp = std::dynamic_pointer_cast<fUML::Semantics::Actions::ClauseActivation>((clauseActivationsindexElem)->copy());
+			const std::shared_ptr<fUML::Semantics::Actions::ClauseActivation>& temp = std::dynamic_pointer_cast<fUML::Semantics::Actions::ClauseActivation>((clauseActivationsindexElem)->copy());
 			m_clauseActivations->push_back(temp);
 		}
 	}

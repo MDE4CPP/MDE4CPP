@@ -169,7 +169,7 @@ ComponentImpl& ComponentImpl::operator=(const ComponentImpl & obj)
 	m_required  = obj.getRequired();
 	//Clone references with containment (deep copy)
 	//clone reference 'packagedElement'
-	std::shared_ptr<Subset<uml::PackageableElement, uml::NamedElement>> packagedElementList = obj.getPackagedElement();
+	const std::shared_ptr<Subset<uml::PackageableElement, uml::NamedElement>>& packagedElementList = obj.getPackagedElement();
 	if(packagedElementList)
 	{
 		/*Subset*/
@@ -184,9 +184,9 @@ ComponentImpl& ComponentImpl::operator=(const ComponentImpl & obj)
 			std::cout << "Initialising value Subset: " << "m_packagedElement - Subset<uml::PackageableElement, uml::NamedElement >(getOwnedMember())" << std::endl;
 		#endif
 		
-		for(const std::shared_ptr<uml::PackageableElement> packagedElementindexElem: *packagedElementList) 
+		for(const std::shared_ptr<uml::PackageableElement>& packagedElementindexElem: *packagedElementList) 
 		{
-			std::shared_ptr<uml::PackageableElement> temp = std::dynamic_pointer_cast<uml::PackageableElement>((packagedElementindexElem)->copy());
+			const std::shared_ptr<uml::PackageableElement>& temp = std::dynamic_pointer_cast<uml::PackageableElement>((packagedElementindexElem)->copy());
 			m_packagedElement->push_back(temp);
 		}
 	}
@@ -196,7 +196,7 @@ ComponentImpl& ComponentImpl::operator=(const ComponentImpl & obj)
 	}
 
 	//clone reference 'realization'
-	std::shared_ptr<Subset<uml::ComponentRealization, uml::Element>> realizationList = obj.getRealization();
+	const std::shared_ptr<Subset<uml::ComponentRealization, uml::Element>>& realizationList = obj.getRealization();
 	if(realizationList)
 	{
 		/*Subset*/
@@ -211,9 +211,9 @@ ComponentImpl& ComponentImpl::operator=(const ComponentImpl & obj)
 			std::cout << "Initialising value Subset: " << "m_realization - Subset<uml::ComponentRealization, uml::Element >(getOwnedElement())" << std::endl;
 		#endif
 		
-		for(const std::shared_ptr<uml::ComponentRealization> realizationindexElem: *realizationList) 
+		for(const std::shared_ptr<uml::ComponentRealization>& realizationindexElem: *realizationList) 
 		{
-			std::shared_ptr<uml::ComponentRealization> temp = std::dynamic_pointer_cast<uml::ComponentRealization>((realizationindexElem)->copy());
+			const std::shared_ptr<uml::ComponentRealization>& temp = std::dynamic_pointer_cast<uml::ComponentRealization>((realizationindexElem)->copy());
 			m_realization->push_back(temp);
 		}
 	}

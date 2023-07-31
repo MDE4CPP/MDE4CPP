@@ -138,7 +138,7 @@ AcceptEventActionImpl& AcceptEventActionImpl::operator=(const AcceptEventActionI
 	//copy references with no containment (soft copy)
 	//Clone references with containment (deep copy)
 	//clone reference 'result'
-	std::shared_ptr<Subset<uml::OutputPin, uml::OutputPin>> resultList = obj.getResult();
+	const std::shared_ptr<Subset<uml::OutputPin, uml::OutputPin>>& resultList = obj.getResult();
 	if(resultList)
 	{
 		/*Subset*/
@@ -153,9 +153,9 @@ AcceptEventActionImpl& AcceptEventActionImpl::operator=(const AcceptEventActionI
 			std::cout << "Initialising value Subset: " << "m_result - Subset<uml::OutputPin, uml::OutputPin >(getOutput())" << std::endl;
 		#endif
 		
-		for(const std::shared_ptr<uml::OutputPin> resultindexElem: *resultList) 
+		for(const std::shared_ptr<uml::OutputPin>& resultindexElem: *resultList) 
 		{
-			std::shared_ptr<uml::OutputPin> temp = std::dynamic_pointer_cast<uml::OutputPin>((resultindexElem)->copy());
+			const std::shared_ptr<uml::OutputPin>& temp = std::dynamic_pointer_cast<uml::OutputPin>((resultindexElem)->copy());
 			m_result->push_back(temp);
 		}
 	}
@@ -165,7 +165,7 @@ AcceptEventActionImpl& AcceptEventActionImpl::operator=(const AcceptEventActionI
 	}
 
 	//clone reference 'trigger'
-	std::shared_ptr<Subset<uml::Trigger, uml::Element>> triggerList = obj.getTrigger();
+	const std::shared_ptr<Subset<uml::Trigger, uml::Element>>& triggerList = obj.getTrigger();
 	if(triggerList)
 	{
 		/*Subset*/
@@ -180,9 +180,9 @@ AcceptEventActionImpl& AcceptEventActionImpl::operator=(const AcceptEventActionI
 			std::cout << "Initialising value Subset: " << "m_trigger - Subset<uml::Trigger, uml::Element >(getOwnedElement())" << std::endl;
 		#endif
 		
-		for(const std::shared_ptr<uml::Trigger> triggerindexElem: *triggerList) 
+		for(const std::shared_ptr<uml::Trigger>& triggerindexElem: *triggerList) 
 		{
-			std::shared_ptr<uml::Trigger> temp = std::dynamic_pointer_cast<uml::Trigger>((triggerindexElem)->copy());
+			const std::shared_ptr<uml::Trigger>& temp = std::dynamic_pointer_cast<uml::Trigger>((triggerindexElem)->copy());
 			m_trigger->push_back(temp);
 		}
 	}

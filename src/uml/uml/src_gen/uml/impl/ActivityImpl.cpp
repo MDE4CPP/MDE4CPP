@@ -182,7 +182,7 @@ ActivityImpl& ActivityImpl::operator=(const ActivityImpl & obj)
 	//copy references with no containment (soft copy)
 	//Clone references with containment (deep copy)
 	//clone reference 'edge'
-	std::shared_ptr<Subset<uml::ActivityEdge, uml::Element>> edgeList = obj.getEdge();
+	const std::shared_ptr<Subset<uml::ActivityEdge, uml::Element>>& edgeList = obj.getEdge();
 	if(edgeList)
 	{
 		/*Subset*/
@@ -197,9 +197,9 @@ ActivityImpl& ActivityImpl::operator=(const ActivityImpl & obj)
 			std::cout << "Initialising value Subset: " << "m_edge - Subset<uml::ActivityEdge, uml::Element >(getOwnedElement())" << std::endl;
 		#endif
 		
-		for(const std::shared_ptr<uml::ActivityEdge> edgeindexElem: *edgeList) 
+		for(const std::shared_ptr<uml::ActivityEdge>& edgeindexElem: *edgeList) 
 		{
-			std::shared_ptr<uml::ActivityEdge> temp = std::dynamic_pointer_cast<uml::ActivityEdge>((edgeindexElem)->copy());
+			const std::shared_ptr<uml::ActivityEdge>& temp = std::dynamic_pointer_cast<uml::ActivityEdge>((edgeindexElem)->copy());
 			m_edge->push_back(temp);
 		}
 	}
@@ -209,7 +209,7 @@ ActivityImpl& ActivityImpl::operator=(const ActivityImpl & obj)
 	}
 
 	//clone reference 'node'
-	std::shared_ptr<SubsetUnion<uml::ActivityNode, uml::Element>> nodeList = obj.getNode();
+	const std::shared_ptr<SubsetUnion<uml::ActivityNode, uml::Element>>& nodeList = obj.getNode();
 	if(nodeList)
 	{
 		/*SubsetUnion*/
@@ -224,9 +224,9 @@ ActivityImpl& ActivityImpl::operator=(const ActivityImpl & obj)
 			std::cout << "Initialising value SubsetUnion: " << "m_node - SubsetUnion<uml::ActivityNode, uml::Element >(getOwnedElement())" << std::endl;
 		#endif
 		
-		for(const std::shared_ptr<uml::ActivityNode> nodeindexElem: *nodeList) 
+		for(const std::shared_ptr<uml::ActivityNode>& nodeindexElem: *nodeList) 
 		{
-			std::shared_ptr<uml::ActivityNode> temp = std::dynamic_pointer_cast<uml::ActivityNode>((nodeindexElem)->copy());
+			const std::shared_ptr<uml::ActivityNode>& temp = std::dynamic_pointer_cast<uml::ActivityNode>((nodeindexElem)->copy());
 			m_node->push_back(temp);
 		}
 	}
@@ -236,7 +236,7 @@ ActivityImpl& ActivityImpl::operator=(const ActivityImpl & obj)
 	}
 
 	//clone reference 'ownedGroup'
-	std::shared_ptr<SubsetUnion<uml::ActivityGroup, uml::ActivityGroup>> ownedGroupList = obj.getOwnedGroup();
+	const std::shared_ptr<SubsetUnion<uml::ActivityGroup, uml::ActivityGroup>>& ownedGroupList = obj.getOwnedGroup();
 	if(ownedGroupList)
 	{
 		/*SubsetUnion*/
@@ -251,9 +251,9 @@ ActivityImpl& ActivityImpl::operator=(const ActivityImpl & obj)
 			std::cout << "Initialising value SubsetUnion: " << "m_ownedGroup - SubsetUnion<uml::ActivityGroup, uml::ActivityGroup >(getGroup())" << std::endl;
 		#endif
 		
-		for(const std::shared_ptr<uml::ActivityGroup> ownedGroupindexElem: *ownedGroupList) 
+		for(const std::shared_ptr<uml::ActivityGroup>& ownedGroupindexElem: *ownedGroupList) 
 		{
-			std::shared_ptr<uml::ActivityGroup> temp = std::dynamic_pointer_cast<uml::ActivityGroup>((ownedGroupindexElem)->copy());
+			const std::shared_ptr<uml::ActivityGroup>& temp = std::dynamic_pointer_cast<uml::ActivityGroup>((ownedGroupindexElem)->copy());
 			m_ownedGroup->push_back(temp);
 		}
 	}
@@ -263,7 +263,7 @@ ActivityImpl& ActivityImpl::operator=(const ActivityImpl & obj)
 	}
 
 	//clone reference 'ownedNode'
-	std::shared_ptr<Subset<uml::ActivityNode, uml::ActivityNode /*Subset does not reference a union*/>> ownedNodeList = obj.getOwnedNode();
+	const std::shared_ptr<Subset<uml::ActivityNode, uml::ActivityNode /*Subset does not reference a union*/>>& ownedNodeList = obj.getOwnedNode();
 	if(ownedNodeList)
 	{
 		/*Subset*/
@@ -278,9 +278,9 @@ ActivityImpl& ActivityImpl::operator=(const ActivityImpl & obj)
 			std::cout << "Initialising value Subset: " << "m_ownedNode - Subset<uml::ActivityNode, uml::ActivityNode /*Subset does not reference a union*/ >(getNode())" << std::endl;
 		#endif
 		
-		for(const std::shared_ptr<uml::ActivityNode> ownedNodeindexElem: *ownedNodeList) 
+		for(const std::shared_ptr<uml::ActivityNode>& ownedNodeindexElem: *ownedNodeList) 
 		{
-			std::shared_ptr<uml::ActivityNode> temp = std::dynamic_pointer_cast<uml::ActivityNode>((ownedNodeindexElem)->copy());
+			const std::shared_ptr<uml::ActivityNode>& temp = std::dynamic_pointer_cast<uml::ActivityNode>((ownedNodeindexElem)->copy());
 			m_ownedNode->push_back(temp);
 		}
 	}
@@ -290,7 +290,7 @@ ActivityImpl& ActivityImpl::operator=(const ActivityImpl & obj)
 	}
 
 	//clone reference 'partition'
-	std::shared_ptr<Subset<uml::ActivityPartition, uml::ActivityGroup /*Subset does not reference a union*/, uml::ActivityGroup>> partitionList = obj.getPartition();
+	const std::shared_ptr<Subset<uml::ActivityPartition, uml::ActivityGroup /*Subset does not reference a union*/, uml::ActivityGroup>>& partitionList = obj.getPartition();
 	if(partitionList)
 	{
 		/*Subset*/
@@ -305,9 +305,9 @@ ActivityImpl& ActivityImpl::operator=(const ActivityImpl & obj)
 			std::cout << "Initialising value Subset: " << "m_partition - Subset<uml::ActivityPartition, uml::ActivityGroup /*Subset does not reference a union*/, uml::ActivityGroup >(getOwnedGroup(), getGroup())" << std::endl;
 		#endif
 		
-		for(const std::shared_ptr<uml::ActivityPartition> partitionindexElem: *partitionList) 
+		for(const std::shared_ptr<uml::ActivityPartition>& partitionindexElem: *partitionList) 
 		{
-			std::shared_ptr<uml::ActivityPartition> temp = std::dynamic_pointer_cast<uml::ActivityPartition>((partitionindexElem)->copy());
+			const std::shared_ptr<uml::ActivityPartition>& temp = std::dynamic_pointer_cast<uml::ActivityPartition>((partitionindexElem)->copy());
 			m_partition->push_back(temp);
 		}
 	}
@@ -317,7 +317,7 @@ ActivityImpl& ActivityImpl::operator=(const ActivityImpl & obj)
 	}
 
 	//clone reference 'structuredNode'
-	std::shared_ptr<Subset<uml::StructuredActivityNode, uml::ActivityGroup, uml::ActivityNode /*Subset does not reference a union*/>> structuredNodeList = obj.getStructuredNode();
+	const std::shared_ptr<Subset<uml::StructuredActivityNode, uml::ActivityGroup, uml::ActivityNode /*Subset does not reference a union*/>>& structuredNodeList = obj.getStructuredNode();
 	if(structuredNodeList)
 	{
 		/*Subset*/
@@ -332,9 +332,9 @@ ActivityImpl& ActivityImpl::operator=(const ActivityImpl & obj)
 			std::cout << "Initialising value Subset: " << "m_structuredNode - Subset<uml::StructuredActivityNode, uml::ActivityGroup, uml::ActivityNode /*Subset does not reference a union*/ >(getGroup(), getNode())" << std::endl;
 		#endif
 		
-		for(const std::shared_ptr<uml::StructuredActivityNode> structuredNodeindexElem: *structuredNodeList) 
+		for(const std::shared_ptr<uml::StructuredActivityNode>& structuredNodeindexElem: *structuredNodeList) 
 		{
-			std::shared_ptr<uml::StructuredActivityNode> temp = std::dynamic_pointer_cast<uml::StructuredActivityNode>((structuredNodeindexElem)->copy());
+			const std::shared_ptr<uml::StructuredActivityNode>& temp = std::dynamic_pointer_cast<uml::StructuredActivityNode>((structuredNodeindexElem)->copy());
 			m_structuredNode->push_back(temp);
 		}
 	}
@@ -344,7 +344,7 @@ ActivityImpl& ActivityImpl::operator=(const ActivityImpl & obj)
 	}
 
 	//clone reference 'variable'
-	std::shared_ptr<Subset<uml::Variable, uml::NamedElement>> variableList = obj.getVariable();
+	const std::shared_ptr<Subset<uml::Variable, uml::NamedElement>>& variableList = obj.getVariable();
 	if(variableList)
 	{
 		/*Subset*/
@@ -359,9 +359,9 @@ ActivityImpl& ActivityImpl::operator=(const ActivityImpl & obj)
 			std::cout << "Initialising value Subset: " << "m_variable - Subset<uml::Variable, uml::NamedElement >(getOwnedMember())" << std::endl;
 		#endif
 		
-		for(const std::shared_ptr<uml::Variable> variableindexElem: *variableList) 
+		for(const std::shared_ptr<uml::Variable>& variableindexElem: *variableList) 
 		{
-			std::shared_ptr<uml::Variable> temp = std::dynamic_pointer_cast<uml::Variable>((variableindexElem)->copy());
+			const std::shared_ptr<uml::Variable>& temp = std::dynamic_pointer_cast<uml::Variable>((variableindexElem)->copy());
 			m_variable->push_back(temp);
 		}
 	}

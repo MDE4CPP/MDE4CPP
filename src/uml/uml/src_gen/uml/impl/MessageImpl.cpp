@@ -126,7 +126,7 @@ MessageImpl& MessageImpl::operator=(const MessageImpl & obj)
 	m_signature  = obj.getSignature();
 	//Clone references with containment (deep copy)
 	//clone reference 'argument'
-	std::shared_ptr<Subset<uml::ValueSpecification, uml::Element>> argumentList = obj.getArgument();
+	const std::shared_ptr<Subset<uml::ValueSpecification, uml::Element>>& argumentList = obj.getArgument();
 	if(argumentList)
 	{
 		/*Subset*/
@@ -141,9 +141,9 @@ MessageImpl& MessageImpl::operator=(const MessageImpl & obj)
 			std::cout << "Initialising value Subset: " << "m_argument - Subset<uml::ValueSpecification, uml::Element >(getOwnedElement())" << std::endl;
 		#endif
 		
-		for(const std::shared_ptr<uml::ValueSpecification> argumentindexElem: *argumentList) 
+		for(const std::shared_ptr<uml::ValueSpecification>& argumentindexElem: *argumentList) 
 		{
-			std::shared_ptr<uml::ValueSpecification> temp = std::dynamic_pointer_cast<uml::ValueSpecification>((argumentindexElem)->copy());
+			const std::shared_ptr<uml::ValueSpecification>& temp = std::dynamic_pointer_cast<uml::ValueSpecification>((argumentindexElem)->copy());
 			m_argument->push_back(temp);
 		}
 	}

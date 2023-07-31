@@ -128,7 +128,7 @@ DependencyImpl& DependencyImpl::operator=(const DependencyImpl & obj)
 	//copy references with no containment (soft copy)
 	//Clone references with containment (deep copy)
 	//clone reference 'client'
-	std::shared_ptr<SubsetUnion<uml::NamedElement, uml::Element>> clientList = obj.getClient();
+	const std::shared_ptr<SubsetUnion<uml::NamedElement, uml::Element>>& clientList = obj.getClient();
 	if(clientList)
 	{
 		/*SubsetUnion*/
@@ -143,9 +143,9 @@ DependencyImpl& DependencyImpl::operator=(const DependencyImpl & obj)
 			std::cout << "Initialising value SubsetUnion: " << "m_client - SubsetUnion<uml::NamedElement, uml::Element >(getSource())" << std::endl;
 		#endif
 		
-		for(const std::shared_ptr<uml::NamedElement> clientindexElem: *clientList) 
+		for(const std::shared_ptr<uml::NamedElement>& clientindexElem: *clientList) 
 		{
-			std::shared_ptr<uml::NamedElement> temp = std::dynamic_pointer_cast<uml::NamedElement>((clientindexElem)->copy());
+			const std::shared_ptr<uml::NamedElement>& temp = std::dynamic_pointer_cast<uml::NamedElement>((clientindexElem)->copy());
 			m_client->push_back(temp);
 		}
 	}
@@ -155,7 +155,7 @@ DependencyImpl& DependencyImpl::operator=(const DependencyImpl & obj)
 	}
 
 	//clone reference 'supplier'
-	std::shared_ptr<SubsetUnion<uml::NamedElement, uml::Element>> supplierList = obj.getSupplier();
+	const std::shared_ptr<SubsetUnion<uml::NamedElement, uml::Element>>& supplierList = obj.getSupplier();
 	if(supplierList)
 	{
 		/*SubsetUnion*/
@@ -170,9 +170,9 @@ DependencyImpl& DependencyImpl::operator=(const DependencyImpl & obj)
 			std::cout << "Initialising value SubsetUnion: " << "m_supplier - SubsetUnion<uml::NamedElement, uml::Element >(getTarget())" << std::endl;
 		#endif
 		
-		for(const std::shared_ptr<uml::NamedElement> supplierindexElem: *supplierList) 
+		for(const std::shared_ptr<uml::NamedElement>& supplierindexElem: *supplierList) 
 		{
-			std::shared_ptr<uml::NamedElement> temp = std::dynamic_pointer_cast<uml::NamedElement>((supplierindexElem)->copy());
+			const std::shared_ptr<uml::NamedElement>& temp = std::dynamic_pointer_cast<uml::NamedElement>((supplierindexElem)->copy());
 			m_supplier->push_back(temp);
 		}
 	}

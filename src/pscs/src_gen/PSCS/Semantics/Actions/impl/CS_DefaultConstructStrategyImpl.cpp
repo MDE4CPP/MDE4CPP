@@ -133,15 +133,15 @@ CS_DefaultConstructStrategyImpl& CS_DefaultConstructStrategyImpl::operator=(cons
 	}
 
 	//clone reference 'generatedRealizingClasses'
-	std::shared_ptr<Bag<uml::Class>> generatedRealizingClassesList = obj.getGeneratedRealizingClasses();
+	const std::shared_ptr<Bag<uml::Class>>& generatedRealizingClassesList = obj.getGeneratedRealizingClasses();
 	if(generatedRealizingClassesList)
 	{
 		m_generatedRealizingClasses.reset(new Bag<uml::Class>());
 		
 		
-		for(const std::shared_ptr<uml::Class> generatedRealizingClassesindexElem: *generatedRealizingClassesList) 
+		for(const std::shared_ptr<uml::Class>& generatedRealizingClassesindexElem: *generatedRealizingClassesList) 
 		{
-			std::shared_ptr<uml::Class> temp = std::dynamic_pointer_cast<uml::Class>((generatedRealizingClassesindexElem)->copy());
+			const std::shared_ptr<uml::Class>& temp = std::dynamic_pointer_cast<uml::Class>((generatedRealizingClassesindexElem)->copy());
 			m_generatedRealizingClasses->push_back(temp);
 		}
 	}

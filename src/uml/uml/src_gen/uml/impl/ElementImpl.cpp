@@ -109,7 +109,7 @@ ElementImpl& ElementImpl::operator=(const ElementImpl & obj)
 	m_owner  = obj.getOwner();
 	//Clone references with containment (deep copy)
 	//clone reference 'ownedComment'
-	std::shared_ptr<Subset<uml::Comment, uml::Element>> ownedCommentList = obj.getOwnedComment();
+	const std::shared_ptr<Subset<uml::Comment, uml::Element>>& ownedCommentList = obj.getOwnedComment();
 	if(ownedCommentList)
 	{
 		/*Subset*/
@@ -124,9 +124,9 @@ ElementImpl& ElementImpl::operator=(const ElementImpl & obj)
 			std::cout << "Initialising value Subset: " << "m_ownedComment - Subset<uml::Comment, uml::Element >(getOwnedElement())" << std::endl;
 		#endif
 		
-		for(const std::shared_ptr<uml::Comment> ownedCommentindexElem: *ownedCommentList) 
+		for(const std::shared_ptr<uml::Comment>& ownedCommentindexElem: *ownedCommentList) 
 		{
-			std::shared_ptr<uml::Comment> temp = std::dynamic_pointer_cast<uml::Comment>((ownedCommentindexElem)->copy());
+			const std::shared_ptr<uml::Comment>& temp = std::dynamic_pointer_cast<uml::Comment>((ownedCommentindexElem)->copy());
 			m_ownedComment->push_back(temp);
 		}
 	}

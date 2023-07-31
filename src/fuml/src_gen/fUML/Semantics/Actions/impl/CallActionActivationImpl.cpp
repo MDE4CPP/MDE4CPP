@@ -128,15 +128,15 @@ CallActionActivationImpl& CallActionActivationImpl::operator=(const CallActionAc
 	m_callAction  = obj.getCallAction();
 	//Clone references with containment (deep copy)
 	//clone reference 'callExecutions'
-	std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::Execution>> callExecutionsList = obj.getCallExecutions();
+	const std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::Execution>>& callExecutionsList = obj.getCallExecutions();
 	if(callExecutionsList)
 	{
 		m_callExecutions.reset(new Bag<fUML::Semantics::CommonBehavior::Execution>());
 		
 		
-		for(const std::shared_ptr<fUML::Semantics::CommonBehavior::Execution> callExecutionsindexElem: *callExecutionsList) 
+		for(const std::shared_ptr<fUML::Semantics::CommonBehavior::Execution>& callExecutionsindexElem: *callExecutionsList) 
 		{
-			std::shared_ptr<fUML::Semantics::CommonBehavior::Execution> temp = std::dynamic_pointer_cast<fUML::Semantics::CommonBehavior::Execution>((callExecutionsindexElem)->copy());
+			const std::shared_ptr<fUML::Semantics::CommonBehavior::Execution>& temp = std::dynamic_pointer_cast<fUML::Semantics::CommonBehavior::Execution>((callExecutionsindexElem)->copy());
 			m_callExecutions->push_back(temp);
 		}
 	}

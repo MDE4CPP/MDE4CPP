@@ -129,7 +129,7 @@ CombinedFragmentImpl& CombinedFragmentImpl::operator=(const CombinedFragmentImpl
 	//copy references with no containment (soft copy)
 	//Clone references with containment (deep copy)
 	//clone reference 'cfragmentGate'
-	std::shared_ptr<Subset<uml::Gate, uml::Element>> cfragmentGateList = obj.getCfragmentGate();
+	const std::shared_ptr<Subset<uml::Gate, uml::Element>>& cfragmentGateList = obj.getCfragmentGate();
 	if(cfragmentGateList)
 	{
 		/*Subset*/
@@ -144,9 +144,9 @@ CombinedFragmentImpl& CombinedFragmentImpl::operator=(const CombinedFragmentImpl
 			std::cout << "Initialising value Subset: " << "m_cfragmentGate - Subset<uml::Gate, uml::Element >(getOwnedElement())" << std::endl;
 		#endif
 		
-		for(const std::shared_ptr<uml::Gate> cfragmentGateindexElem: *cfragmentGateList) 
+		for(const std::shared_ptr<uml::Gate>& cfragmentGateindexElem: *cfragmentGateList) 
 		{
-			std::shared_ptr<uml::Gate> temp = std::dynamic_pointer_cast<uml::Gate>((cfragmentGateindexElem)->copy());
+			const std::shared_ptr<uml::Gate>& temp = std::dynamic_pointer_cast<uml::Gate>((cfragmentGateindexElem)->copy());
 			m_cfragmentGate->push_back(temp);
 		}
 	}
@@ -156,7 +156,7 @@ CombinedFragmentImpl& CombinedFragmentImpl::operator=(const CombinedFragmentImpl
 	}
 
 	//clone reference 'operand'
-	std::shared_ptr<Subset<uml::InteractionOperand, uml::Element>> operandList = obj.getOperand();
+	const std::shared_ptr<Subset<uml::InteractionOperand, uml::Element>>& operandList = obj.getOperand();
 	if(operandList)
 	{
 		/*Subset*/
@@ -171,9 +171,9 @@ CombinedFragmentImpl& CombinedFragmentImpl::operator=(const CombinedFragmentImpl
 			std::cout << "Initialising value Subset: " << "m_operand - Subset<uml::InteractionOperand, uml::Element >(getOwnedElement())" << std::endl;
 		#endif
 		
-		for(const std::shared_ptr<uml::InteractionOperand> operandindexElem: *operandList) 
+		for(const std::shared_ptr<uml::InteractionOperand>& operandindexElem: *operandList) 
 		{
-			std::shared_ptr<uml::InteractionOperand> temp = std::dynamic_pointer_cast<uml::InteractionOperand>((operandindexElem)->copy());
+			const std::shared_ptr<uml::InteractionOperand>& temp = std::dynamic_pointer_cast<uml::InteractionOperand>((operandindexElem)->copy());
 			m_operand->push_back(temp);
 		}
 	}

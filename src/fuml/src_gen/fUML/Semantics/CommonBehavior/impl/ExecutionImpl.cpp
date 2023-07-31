@@ -120,15 +120,15 @@ ExecutionImpl& ExecutionImpl::operator=(const ExecutionImpl & obj)
 	m_context  = obj.getContext();
 	//Clone references with containment (deep copy)
 	//clone reference 'parameterValues'
-	std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> parameterValuesList = obj.getParameterValues();
+	const std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>>& parameterValuesList = obj.getParameterValues();
 	if(parameterValuesList)
 	{
 		m_parameterValues.reset(new Bag<fUML::Semantics::CommonBehavior::ParameterValue>());
 		
 		
-		for(const std::shared_ptr<fUML::Semantics::CommonBehavior::ParameterValue> parameterValuesindexElem: *parameterValuesList) 
+		for(const std::shared_ptr<fUML::Semantics::CommonBehavior::ParameterValue>& parameterValuesindexElem: *parameterValuesList) 
 		{
-			std::shared_ptr<fUML::Semantics::CommonBehavior::ParameterValue> temp = std::dynamic_pointer_cast<fUML::Semantics::CommonBehavior::ParameterValue>((parameterValuesindexElem)->copy());
+			const std::shared_ptr<fUML::Semantics::CommonBehavior::ParameterValue>& temp = std::dynamic_pointer_cast<fUML::Semantics::CommonBehavior::ParameterValue>((parameterValuesindexElem)->copy());
 			m_parameterValues->push_back(temp);
 		}
 	}
