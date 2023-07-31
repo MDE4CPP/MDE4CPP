@@ -142,7 +142,7 @@ void StartObjectBehaviorActionActivationImpl::doAction()
 	std::shared_ptr<uml::StartObjectBehaviorAction> action = std::dynamic_pointer_cast<uml::StartObjectBehaviorAction>(this->getNode());
 	if(action)
 	{
-		std::shared_ptr<uml::InputPin > object= action->getObject();
+		const std::shared_ptr<uml::InputPin >& object= action->getObject();
 		if(object)
 		{
 			//Todo Check: really only first Element?
@@ -150,7 +150,7 @@ void StartObjectBehaviorActionActivationImpl::doAction()
 			std::shared_ptr<fUML::Semantics::StructuredClassifiers::Reference> reference = std::dynamic_pointer_cast<fUML::Semantics::StructuredClassifiers::Reference>(valueObject);
 			if (reference)
 			{
-				std::shared_ptr<Subset<uml::InputPin, uml::InputPin>> argumentPins = action->getArgument();
+				const std::shared_ptr<Subset<uml::InputPin, uml::InputPin>>& argumentPins = action->getArgument();
 				std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue> > inputs(new Bag<fUML::Semantics::CommonBehavior::ParameterValue>());
 				//Todo Check TypedElement? - fUML Spec: Class_ type = (Class_)(action.object.typedElement.type);
 				std::shared_ptr<uml::Class> type=std::dynamic_pointer_cast<uml::Class> (object->getType());
@@ -164,10 +164,10 @@ void StartObjectBehaviorActionActivationImpl::doAction()
 					}
 					if (behavior)
 					{
-						std::shared_ptr<Subset<uml::Parameter, uml::NamedElement>> parameters = behavior->getOwnedParameter();
+						const std::shared_ptr<Subset<uml::Parameter, uml::NamedElement>>& parameters = behavior->getOwnedParameter();
 						int pinNumber = 0;
 
-						for(std::shared_ptr<uml::Parameter> parameter: *parameters)
+						for(const std::shared_ptr<uml::Parameter>& parameter: *parameters)
 						{
 							uml::ParameterDirectionKind direction=parameter->getDirection();
 
