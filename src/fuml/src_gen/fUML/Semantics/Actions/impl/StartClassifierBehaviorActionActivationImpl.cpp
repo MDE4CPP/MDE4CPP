@@ -138,7 +138,7 @@ void StartClassifierBehaviorActionActivationImpl::doAction()
 	std::shared_ptr<uml::StartClassifierBehaviorAction> action = std::dynamic_pointer_cast<uml::StartClassifierBehaviorAction>(this->getNode());
 	if(action)
 	{
-		std::shared_ptr<uml::InputPin > object= action->getObject();
+		const std::shared_ptr<uml::InputPin >& object= action->getObject();
 		if(object)
 		{
 			//Todo Check: really only first Element?

@@ -137,8 +137,8 @@ void RemoveStructuralFeatureValueActivationImpl::doAction()
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
-	std::shared_ptr<uml::RemoveStructuralFeatureValueAction> action = this->getRemoveStructuralFeatureValueAction();
-	std::shared_ptr<uml::StructuralFeature> feature = action->getStructuralFeature();
+	const std::shared_ptr<uml::RemoveStructuralFeatureValueAction>& action = this->getRemoveStructuralFeatureValueAction();
+	const std::shared_ptr<uml::StructuralFeature>& feature = action->getStructuralFeature();
 
 	std::shared_ptr<fUML::Semantics::Values::Value> objectValue = nullptr;
 	
@@ -147,7 +147,7 @@ void RemoveStructuralFeatureValueActivationImpl::doAction()
 	if((objectPinName.empty()) || (objectPinName.find("self") == 0)){
 		//objectValue is set to the context of the current activity execution
 		std::shared_ptr<fUML::Semantics::StructuredClassifiers::Reference> contextReference = fUML::Semantics::StructuredClassifiers::StructuredClassifiersFactory::eInstance()->createReference();
-		std::shared_ptr<fUML::Semantics::StructuredClassifiers::Object> context = this->getActivityExecution()->getContext();
+		const std::shared_ptr<fUML::Semantics::StructuredClassifiers::Object>& context = this->getActivityExecution()->getContext();
 		contextReference->setReferent(context);
 			
 		objectValue = contextReference;

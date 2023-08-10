@@ -122,7 +122,7 @@ std::shared_ptr<Bag<uml::Classifier>> PrimitiveValueImpl::getTypes()
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
 	std::shared_ptr<Bag<uml::Classifier>> types(new Bag<uml::Classifier>());
-	std::shared_ptr<uml::PrimitiveType> type = this->getType();
+	const std::shared_ptr<uml::PrimitiveType>& type = this->getType();
 	if (type != nullptr)
 	{
 		types->push_back(std::dynamic_pointer_cast<uml::Classifier>(type));

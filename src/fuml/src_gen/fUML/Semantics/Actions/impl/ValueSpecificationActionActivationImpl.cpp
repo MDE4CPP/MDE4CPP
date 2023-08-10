@@ -133,7 +133,7 @@ void ValueSpecificationActionActivationImpl::doAction()
 	std::shared_ptr<uml::ValueSpecificationAction> action = std::dynamic_pointer_cast<uml::ValueSpecificationAction>(m_node);
 	if (action != nullptr)
 	{
-		std::shared_ptr<uml::ValueSpecification> valueSpecificaton = action->getValue();
+		const std::shared_ptr<uml::ValueSpecification>& valueSpecificaton = action->getValue();
 		if (valueSpecificaton == nullptr)
 		{
 			throw "value of ValueSpecificationAction is null";

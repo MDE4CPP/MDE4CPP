@@ -173,7 +173,7 @@ void SendSignalActionActivationImpl::doAction()
 	{
 		DEBUG_MESSAGE(std::cout <<  "Found a reference Target."<< std::endl;)
 
- 		std::shared_ptr<uml::Signal> signal = action->getSignal();
+ 		const std::shared_ptr<uml::Signal>& signal = action->getSignal();
 
 		std::shared_ptr<fUML::Semantics::SimpleClassifiers::SignalInstance> signalInstance (fUML::Semantics::SimpleClassifiers::SimpleClassifiersFactory::eInstance()->createSignalInstance());		
 
@@ -181,9 +181,9 @@ void SendSignalActionActivationImpl::doAction()
 		DEBUG_MESSAGE(std::cout <<  "begin accessing signalInstance."<< std::endl;)
 		signalInstance->setType( signal );
 		DEBUG_MESSAGE(std::cout <<  "begin accessing signal."<< std::endl;)
- 		std::shared_ptr<Bag<uml::Property>> attributes = signal->getOwnedAttribute();
+ 		const std::shared_ptr<Bag<uml::Property>>& attributes = signal->getOwnedAttribute();
 		DEBUG_MESSAGE(std::cout <<  "begin accessing action for Inputs."<< std::endl;)
- 		std::shared_ptr<Bag<uml::InputPin>> argumentPins = action->getArgument();
+ 		const std::shared_ptr<Bag<uml::InputPin>>& argumentPins = action->getArgument();
 		int i = 0;
 		int beginIter = 0;
 		DEBUG_MESSAGE(std::cout <<  "begin accessing attributes of signal."<< std::endl;)

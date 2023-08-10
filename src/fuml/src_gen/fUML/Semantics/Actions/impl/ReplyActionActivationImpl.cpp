@@ -137,9 +137,9 @@ void ReplyActionActivationImpl::doAction()
 // on the reply value pins.
 
 std::shared_ptr<uml::ReplyAction> action = std::dynamic_pointer_cast<uml::ReplyAction>(this->getNode());
-std::shared_ptr<uml::Trigger> replyToCall = action->getReplyToCall();
-std::shared_ptr<Bag<uml::InputPin>> replyValuePins = action->getReplyValue();
-std::shared_ptr<uml::InputPin> returnInformationPin = action->getReturnInformation();
+const std::shared_ptr<uml::Trigger>& replyToCall = action->getReplyToCall();
+const std::shared_ptr<Bag<uml::InputPin>>& replyValuePins = action->getReplyValue();
+const std::shared_ptr<uml::InputPin>& returnInformationPin = action->getReturnInformation();
 
 std::shared_ptr<Bag<fUML::Semantics::Values::Value>> values = this->takeTokens(returnInformationPin);
 std::shared_ptr<fUML::Semantics::Actions::ReturnInformation> returnInformation = std::dynamic_pointer_cast<fUML::Semantics::Actions::ReturnInformation>(values->at(0));

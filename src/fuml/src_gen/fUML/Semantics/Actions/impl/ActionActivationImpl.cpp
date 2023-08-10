@@ -395,7 +395,7 @@ std::shared_ptr<Bag<fUML::Semantics::Values::Value>> ActionActivationImpl::getTo
 	std::shared_ptr<fUML::Semantics::Actions::PinActivation> pinActivation(this->retrievePinActivation(pin));
 	std::shared_ptr<Bag<fUML::Semantics::Values::Value>> values(new Bag<fUML::Semantics::Values::Value>());
 
-	std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> tokenList = pinActivation->getUnofferedTokens();
+	const std::shared_ptr<Bag<fUML::Semantics::Activities::Token>>& tokenList = pinActivation->getUnofferedTokens();
     for(const std::shared_ptr<fUML::Semantics::Activities::Token>& token : *tokenList)
     {
     	std::shared_ptr<fUML::Semantics::Activities::ObjectToken> objToken = std::dynamic_pointer_cast<fUML::Semantics::Activities::ObjectToken>(token);

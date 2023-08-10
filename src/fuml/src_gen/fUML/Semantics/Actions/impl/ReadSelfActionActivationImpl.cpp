@@ -133,16 +133,16 @@ void ReadSelfActionActivationImpl::doAction()
 	//generated from body annotation
 	// Get the context object of the activity execution containing this action activation and place a reference to it on the result output pin.
 
-	std::shared_ptr<uml::ReadSelfAction> action = this->getReadSelfAction();
+	const std::shared_ptr<uml::ReadSelfAction>& action = this->getReadSelfAction();
 	if(action)
 	{
 
 		std::shared_ptr<fUML::Semantics::StructuredClassifiers::Reference> reference= fUML::Semantics::StructuredClassifiers::StructuredClassifiersFactory::eInstance()->createReference();
-		std::shared_ptr<fUML::Semantics::StructuredClassifiers::Object> context=this->getExecutionContext();	
+		const std::shared_ptr<fUML::Semantics::StructuredClassifiers::Object>& context=this->getExecutionContext();	
 		if(context)
 		{
 			reference->setReferent(context);
-			std::shared_ptr<uml::OutputPin > outputPin=action->getResult();
+			const std::shared_ptr<uml::OutputPin >& outputPin=action->getResult();
 			if(outputPin)
 			{
 				this->putToken(action->getResult(), reference);

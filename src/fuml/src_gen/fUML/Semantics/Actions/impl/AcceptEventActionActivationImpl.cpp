@@ -185,7 +185,7 @@ void AcceptEventActionActivationImpl::accept(const std::shared_ptr<fUML::Semanti
 			{
 				std::shared_ptr<fUML::Semantics::CommonBehavior::ParameterValue> parameterValue = parameterValues->at(i);
 			// Line unneeded double declaration?
-			//	std::shared_ptr<Bag<uml::OutputPin>> resultPins = action->getResult();
+			//	const std::shared_ptr<Bag<uml::OutputPin>>& resultPins = action->getResult();
 				if(resultPins)
 				{
 					std::shared_ptr<uml::OutputPin> resultPin = resultPins->at(i);

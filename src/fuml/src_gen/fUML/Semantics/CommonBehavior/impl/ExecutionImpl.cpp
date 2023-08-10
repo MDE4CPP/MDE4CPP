@@ -153,7 +153,7 @@ std::shared_ptr<fUML::Semantics::CommonBehavior::Execution> newValue = std::dyna
 
 newValue->setContext(this->getContext());
 
-std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> parameterValues = this->getParameterValues();
+const std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>>& parameterValues = this->getParameterValues();
 unsigned int parameterValuesSize = parameterValues->size();
 
 for(unsigned int i = 0; i < parameterValuesSize; i++)
@@ -204,7 +204,7 @@ std::shared_ptr<fUML::Semantics::CommonBehavior::ParameterValue> ExecutionImpl::
 	//generated from body annotation
 	std::shared_ptr<fUML::Semantics::CommonBehavior::ParameterValue> parameterValue = nullptr;
 
-	std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> list = this->getParameterValues();
+	const std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>>& list = this->getParameterValues();
 	std::vector<std::shared_ptr<fUML::Semantics::CommonBehavior::ParameterValue>>::iterator it = std::find_if(list->begin(), list->end(), [parameter] (std::shared_ptr<fUML::Semantics::CommonBehavior::ParameterValue> p) { return p->getParameter() == parameter; } );
     if(it!= this->getParameterValues()->end() )
     {

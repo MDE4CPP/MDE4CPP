@@ -189,7 +189,7 @@ void ActivityNodeActivationGroupImpl::activate(const std::shared_ptr<Bag<uml::Ac
 	//generated from body annotation
 	this->createNodeActivations(nodes);
     this->createEdgeInstance(edges);    
-    std::shared_ptr<Bag<fUML::Semantics::Activities::ActivityNodeActivation>> nodeActiviations = this->getNodeActivations();
+    const std::shared_ptr<Bag<fUML::Semantics::Activities::ActivityNodeActivation>>& nodeActiviations = this->getNodeActivations();
     this->run(nodeActiviations);
 	//end of body
 }
@@ -259,7 +259,7 @@ void ActivityNodeActivationGroupImpl::createEdgeInstance(const std::shared_ptr<B
         this->getNodeActivation(edge->getTarget())->addIncomingEdge(edgeInstance);
     }
 
-	std::shared_ptr<Bag<fUML::Semantics::Activities::ActivityNodeActivation>> nodeActivations = this->getNodeActivations();
+	const std::shared_ptr<Bag<fUML::Semantics::Activities::ActivityNodeActivation>>& nodeActivations = this->getNodeActivations();
     for (unsigned int i = 0; i < nodeActivations->size(); i++) {
     	std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivation> nodeActivation = nodeActivations->at(i);
         nodeActivation->createEdgeInstances();
@@ -329,7 +329,7 @@ std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivation> ActivityNod
     if (activation == nullptr) 
     {
         unsigned int i = 0;
-        std::shared_ptr<Bag<fUML::Semantics::Activities::ActivityNodeActivation>> nodeActivations=this->getNodeActivations();
+        const std::shared_ptr<Bag<fUML::Semantics::Activities::ActivityNodeActivation>>& nodeActivations=this->getNodeActivations();
         unsigned int nodeActivationsSize= nodeActivations->size();
         while ((!activation) && (i < nodeActivationsSize))
         {
@@ -367,7 +367,7 @@ bool ActivityNodeActivationGroupImpl::hasSourceFor(const std::shared_ptr<fUML::S
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
 		bool hasSource = false;
-	std::shared_ptr<Bag<fUML::Semantics::Activities::ActivityNodeActivation>> activations = this->getNodeActivations();
+	const std::shared_ptr<Bag<fUML::Semantics::Activities::ActivityNodeActivation>>& activations = this->getNodeActivations();
     unsigned int i = 0;
     while (!hasSource && i < activations->size()) 
     {
@@ -476,7 +476,7 @@ void ActivityNodeActivationGroupImpl::run(const std::shared_ptr<Bag<fUML::Semant
 			const int class_id = activation->eClass()->getClassifierID();
 			if(!(class_id == fUML::Semantics::Actions::ActionsPackage::INPUTPINACTIVATION_CLASS ||  class_id == fUML::Semantics::Actions::ActionsPackage::OUTPUTPINACTIVATION_CLASS || class_id ==fUML::Semantics::Activities::ActivitiesPackage::EXPANSIONNODEACTIVATION_CLASS))
 			{
-				std::shared_ptr<Bag<fUML::Semantics::Activities::ActivityEdgeInstance>> edges = activation->getIncomingEdges();
+				const std::shared_ptr<Bag<fUML::Semantics::Activities::ActivityEdgeInstance>>& edges = activation->getIncomingEdges();
 				bool isEnabled = this->checkIncomingEdges(edges, activations);
 
 				// For an action activation, also consider incoming edges to
@@ -486,13 +486,13 @@ void ActivityNodeActivationGroupImpl::run(const std::shared_ptr<Bag<fUML::Semant
 					std::shared_ptr<uml::Action> action = std::dynamic_pointer_cast<uml::Action>(activation->getNode());
 					if(action != nullptr) // if there is no action (e.g anonymous Fork), then there is also no pins
 					{
-						std::shared_ptr<Bag<uml::InputPin>> inputPins = action->getInput();
+						const std::shared_ptr<Bag<uml::InputPin>>& inputPins = action->getInput();
 				        auto pinEndIter=inputPins->end();
 						for (auto pinIt = inputPins->begin(); pinIt != pinEndIter; ++pinIt)
 						{
 							std::shared_ptr<uml::InputPin> inputPin = (*pinIt);
 							std::shared_ptr<fUML::Semantics::Actions::ActionActivation> actionActivation = std::dynamic_pointer_cast<fUML::Semantics::Actions::ActionActivation>(activation);
-							std::shared_ptr<Bag<fUML::Semantics::Activities::ActivityEdgeInstance>> inputEdges = actionActivation->retrievePinActivation(inputPin)->getIncomingEdges();
+							const std::shared_ptr<Bag<fUML::Semantics::Activities::ActivityEdgeInstance>>& inputEdges = actionActivation->retrievePinActivation(inputPin)->getIncomingEdges();
 							isEnabled = isEnabled && this->checkIncomingEdges(inputEdges, activations);
 						}
 					}
@@ -580,7 +580,7 @@ void ActivityNodeActivationGroupImpl::terminateAll()
 	//generated from body annotation
 	//DEBUG_MESSAGE(//TODO fix std::cout<<"[terminateAll] Terminating activation group for "<< (this->getActivityExecution() != nullptr ? "activity " + this->getActivityExecution()->getTypes()->at(0)->getName() : this->getContainingNodeActivation() != nullptr ? "node " << this->getContainingNodeActivation()->getNode()->getName() : "expansion region") << ".");)
 
-	std::shared_ptr<Bag<fUML::Semantics::Activities::ActivityNodeActivation>> nodeActivations = this->getNodeActivations();
+	const std::shared_ptr<Bag<fUML::Semantics::Activities::ActivityNodeActivation>>& nodeActivations = this->getNodeActivations();
     for (unsigned int i = 0; i < nodeActivations->size(); i++) 
     {
     	std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivation> nodeActivation = nodeActivations->at(i);

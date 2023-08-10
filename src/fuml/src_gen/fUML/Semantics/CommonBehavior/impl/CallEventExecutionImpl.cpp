@@ -249,7 +249,7 @@ void CallEventExecutionImpl::setOutputParameterValues(const std::shared_ptr<Bag<
 	//generated from body annotation
 	// Set the output parameter values for this execution.
 
-std::shared_ptr<Bag<uml::Parameter>> parameters = this->getBehavior()->getOwnedParameter();
+const std::shared_ptr<Bag<uml::Parameter>>& parameters = this->getBehavior()->getOwnedParameter();
 unsigned int i = 1;
 unsigned int j = 1;
 

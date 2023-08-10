@@ -152,7 +152,7 @@ std::shared_ptr<fUML::Semantics::Values::Value> DecisionNodeActivationImpl::exec
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
-		std::shared_ptr<uml::DecisionNode> decisionNode = this->getDecisionNode();
+		const std::shared_ptr<uml::DecisionNode>& decisionNode = this->getDecisionNode();
 	std::shared_ptr<uml::Behavior> decisionInputBehavior = nullptr;
 
     if(decisionNode != nullptr)
@@ -205,7 +205,7 @@ std::shared_ptr<fUML::Semantics::Values::Value> DecisionNodeActivationImpl::exec
         }
         this->getDecisionInputExecution()->execute();
 
-        std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> outputParameterValues = this->getDecisionInputExecution()->getOutputParameterValues();
+        const std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>>& outputParameterValues = this->getDecisionInputExecution()->getOutputParameterValues();
         this->getDecisionInputExecution()->destroy();
 
         decisionInputResult = outputParameterValues->at(0)->getValues()->at(0);
@@ -223,12 +223,12 @@ void DecisionNodeActivationImpl::fire(const std::shared_ptr<Bag<fUML::Semantics:
 
 	std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> removedControlTokens = this->removeJoinedControlTokens(incomingTokens);
 	std::shared_ptr<Bag<fUML::Semantics::Values::Value>> decisionValues = this->getDecisionValues(incomingTokens);
-	std::shared_ptr<Bag<fUML::Semantics::Activities::ActivityEdgeInstance>> outgoingEdges = this->getOutgoingEdges();
+	const std::shared_ptr<Bag<fUML::Semantics::Activities::ActivityEdgeInstance>>& outgoingEdges = this->getOutgoingEdges();
 
     for (unsigned int i = 0; i < outgoingEdges->size(); i++) 
     {
     	std::shared_ptr<fUML::Semantics::Activities::ActivityEdgeInstance> edgeInstance = outgoingEdges->at(i);
-    	std::shared_ptr<uml::ValueSpecification> guard = edgeInstance->getEdge()->getGuard();
+    	const std::shared_ptr<uml::ValueSpecification>& guard = edgeInstance->getEdge()->getGuard();
 
     	std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> offeredTokens(new Bag<fUML::Semantics::Activities::Token>());
         for (unsigned int j = 0; j < incomingTokens->size(); j++) 
@@ -258,7 +258,7 @@ std::shared_ptr<fUML::Semantics::Activities::ActivityEdgeInstance> DecisionNodeA
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
-		std::shared_ptr<uml::ActivityEdge>  decisionInputFlow = this->getDecisionNode()->getDecisionInputFlow();
+		const std::shared_ptr<uml::ActivityEdge>&  decisionInputFlow = this->getDecisionNode()->getDecisionInputFlow();
 
 	std::shared_ptr<fUML::Semantics::Activities::ActivityEdgeInstance> edgeInstance = nullptr;
     if (decisionInputFlow != nullptr) 
@@ -283,7 +283,7 @@ std::shared_ptr<fUML::Semantics::Values::Value> DecisionNodeActivationImpl::getD
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
-	std::shared_ptr<fUML::Semantics::Activities::ActivityEdgeInstance> decisionInputFlowInstance = this->getDecisionInputFlowInstance();
+	const std::shared_ptr<fUML::Semantics::Activities::ActivityEdgeInstance>& decisionInputFlowInstance = this->getDecisionInputFlowInstance();
 
 	std::shared_ptr<fUML::Semantics::Values::Value> value = nullptr;
     if (decisionInputFlowInstance != nullptr) 
@@ -303,7 +303,7 @@ std::shared_ptr<Bag<fUML::Semantics::Values::Value>> DecisionNodeActivationImpl:
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
-	std::shared_ptr<fUML::Semantics::Values::Value> decisionInputValue = this->getDecisionInputFlowValue();
+	const std::shared_ptr<fUML::Semantics::Values::Value>& decisionInputValue = this->getDecisionInputFlowValue();
 
 	std::shared_ptr<Bag<fUML::Semantics::Values::Value>> decisionValues(new Bag<fUML::Semantics::Values::Value>());
 
@@ -338,13 +338,13 @@ bool DecisionNodeActivationImpl::hasObjectFlowInput()
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
-		std::shared_ptr<uml::ActivityEdge> decisionInputFlow = this->getDecisionNode()->getDecisionInputFlow();
+		const std::shared_ptr<uml::ActivityEdge>& decisionInputFlow = this->getDecisionNode()->getDecisionInputFlow();
 
     bool isObjectFlow = false;
     unsigned int i = 0;
     while (!isObjectFlow && i < this->getIncomingEdges()->size()) 
     {
-    	std::shared_ptr<uml::ActivityEdge> edge = this->getIncomingEdges()->at(i)->getEdge();
+    	const std::shared_ptr<uml::ActivityEdge>& edge = this->getIncomingEdges()->at(i)->getEdge();
         isObjectFlow = (edge != decisionInputFlow) && (std::dynamic_pointer_cast<uml::ObjectFlow>(edge) != nullptr);
         i = i + 1;
     }
@@ -398,10 +398,10 @@ std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> DecisionNodeActivationI
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
-	std::shared_ptr<uml::ObjectFlow> decisionInputFlow = this->getDecisionNode()->getDecisionInputFlow();
+	const std::shared_ptr<uml::ObjectFlow>& decisionInputFlow = this->getDecisionNode()->getDecisionInputFlow();
 
 	std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> allTokens(new Bag<fUML::Semantics::Activities::Token>());
-	std::shared_ptr<Bag<fUML::Semantics::Activities::ActivityEdgeInstance>> incomingEdges = this->getIncomingEdges();
+	const std::shared_ptr<Bag<fUML::Semantics::Activities::ActivityEdgeInstance>>& incomingEdges = this->getIncomingEdges();
     for (unsigned int i = 0; i < incomingEdges->size(); i++) 
     {
     	std::shared_ptr<fUML::Semantics::Activities::ActivityEdgeInstance> edgeInstance = incomingEdges->at(i);

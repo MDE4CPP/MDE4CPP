@@ -147,7 +147,7 @@ std::shared_ptr<fUML::Semantics::Values::Value> ObjectImpl::_copy()
 
 std::shared_ptr<fUML::Semantics::StructuredClassifiers::Object> newObject = std::dynamic_pointer_cast<fUML::Semantics::StructuredClassifiers::Object>(fUML::Semantics::StructuredClassifiers::ExtensionalValueImpl::_copy());
 
-std::shared_ptr<Bag<uml::Classifier>> types = this->getTypes();
+const std::shared_ptr<Bag<uml::Classifier>>& types = this->getTypes();
 unsigned int typesSize = types->size();
 
 for(unsigned int i = 0; i < typesSize; i++)
@@ -230,7 +230,7 @@ void ObjectImpl::send(const std::shared_ptr<fUML::Semantics::CommonBehavior::Eve
 
 	//generated from body annotation
 	// If the object is active, add the given event occurrence to the event pool and signal that a new event occurrence has arrived.
-	// std::shared_ptr<fUML::Semantics::CommonBehavior::ObjectActivation> objectActivation = getObjectActivation();
+	// const std::shared_ptr<fUML::Semantics::CommonBehavior::ObjectActivation>& objectActivation = getObjectActivation();
 	if( this->getObjectActivation() != nullptr) {
 		DEBUG_MESSAGE( std::cout << "object Activation found..." << std::endl;)
  		this->getObjectActivation()->send(eventOccurrence);

@@ -139,7 +139,7 @@ std::shared_ptr<fUML::Semantics::CommonBehavior::ParameterValue> ParameterValueI
 std::shared_ptr<fUML::Semantics::CommonBehavior::ParameterValue> newValue = fUML::Semantics::CommonBehavior::CommonBehaviorFactory::eInstance()->createParameterValue();
 newValue->setParameter(this->getParameter());
 
-std::shared_ptr<Bag<fUML::Semantics::Values::Value>> values = this->getValues();
+const std::shared_ptr<Bag<fUML::Semantics::Values::Value>>& values = this->getValues();
 unsigned int valuesSize = values->size();
 
 for(unsigned int i = 0; i < valuesSize; i++)

@@ -243,14 +243,14 @@ std::shared_ptr<Bag<fUML::Semantics::StructuredClassifiers::ExtensionalValue>> L
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
 		std::shared_ptr<Bag<fUML::Semantics::StructuredClassifiers::ExtensionalValue>> extent(new Bag<fUML::Semantics::StructuredClassifiers::ExtensionalValue>());
-	std::shared_ptr<Bag<fUML::Semantics::StructuredClassifiers::ExtensionalValue>> extensionalValues = this->getExtensionalValues();
+	const std::shared_ptr<Bag<fUML::Semantics::StructuredClassifiers::ExtensionalValue>>& extensionalValues = this->getExtensionalValues();
 
 	unsigned int extensionalValuesSize = extensionalValues->size();
 
 	for (unsigned int i=0; i < extensionalValuesSize; i++)
 	{
 		std::shared_ptr<fUML::Semantics::StructuredClassifiers::ExtensionalValue> value = extensionalValues->at(i);
-		std::shared_ptr<Bag<uml::Classifier>> types = value->getTypes();
+		const std::shared_ptr<Bag<uml::Classifier>>& types = value->getTypes();
 		bool conforms = false;
 		unsigned int j = 0;
 		while(!conforms && j < types->size())

@@ -155,7 +155,7 @@ void CallActionActivationImpl::doAction()
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
-		std::shared_ptr<fUML::Semantics::CommonBehavior::Execution> callExecution = this->getCallExecution();
+		const std::shared_ptr<fUML::Semantics::CommonBehavior::Execution>& callExecution = this->getCallExecution();
 
     if (callExecution != nullptr)
     {
@@ -166,18 +166,18 @@ void CallActionActivationImpl::doAction()
         const std::shared_ptr<Subset<fUML::Semantics::Actions::InputPinActivation, fUML::Semantics::Actions::PinActivation>>& inputActivationList=this->getInputPinActivation();
 
         unsigned int pinNumber = 0;
-        //std::shared_ptr<uml::Behavior> beh = callExecution->getBehavior();
+        //const std::shared_ptr<uml::Behavior>& beh = callExecution->getBehavior();
         std::shared_ptr<Bag<uml::Parameter>> parameterList = callExecution->getBehavior()->getOwnedParameter();
         unsigned int size = parameterList->size();
         for (unsigned int i=0; i<size; i++)
         {
-        	const std::shared_ptr<uml::Parameter>& parameter = parameterList->at(i);
+		const std::shared_ptr<uml::Parameter>& parameter = parameterList->at(i);
         	uml::ParameterDirectionKind direction=parameter->getDirection();
             if (direction == uml::ParameterDirectionKind::IN || direction == uml::ParameterDirectionKind::INOUT)
             {
             	std::shared_ptr<fUML::Semantics::CommonBehavior::ParameterValue> parameterValue(fUML::Semantics::CommonBehavior::CommonBehaviorFactory::eInstance()->createParameterValue());
                 parameterValue->setParameter(parameter);
-                std::shared_ptr<Bag<fUML::Semantics::Values::Value>> values = parameterValue->getValues();
+                const std::shared_ptr<Bag<fUML::Semantics::Values::Value>>& values = parameterValue->getValues();
 
                 // get corresponding pin (pin and parameter list should be synchronized)
                 const std::shared_ptr<uml::InputPin>& correspondingInputpin = argumentPins->at(i);
@@ -189,10 +189,10 @@ void CallActionActivationImpl::doAction()
                 	std::string attributeName = pinName.substr (5, std::string::npos);
 					DEBUG_MESSAGE(std::cout << "change context to " << attributeName << std::endl;)
 
-                	std::shared_ptr<fUML::Semantics::StructuredClassifiers::Object> context = getExecutionContext();
+                	const std::shared_ptr<fUML::Semantics::StructuredClassifiers::Object>& context = getExecutionContext();
 
 					std::shared_ptr<uml::Property> attribute = nullptr;
-					std::shared_ptr<Bag<uml::Classifier>> contextTypes = context->getTypes();
+					const std::shared_ptr<Bag<uml::Classifier>>& contextTypes = context->getTypes();
 					Bag<uml::Classifier>::iterator contextTypesIter = contextTypes->begin();
 					Bag<uml::Classifier>::iterator contextTypesEnd = contextTypes->end();
 
@@ -201,7 +201,7 @@ void CallActionActivationImpl::doAction()
 						std::shared_ptr<uml::Classifier> classifier = *contextTypesIter;
 						contextTypesIter++;
 
-						std::shared_ptr<Bag<uml::Property>> attributes = classifier->getAllAttributes();
+						const std::shared_ptr<Bag<uml::Property>>& attributes = classifier->getAllAttributes();
 						Bag<uml::Property>::iterator attributeIter = attributes->begin();
 						Bag<uml::Property>::iterator attributeEnd = attributes->end();
 						while (attribute == nullptr || attributeIter < attributeEnd)
@@ -232,7 +232,7 @@ void CallActionActivationImpl::doAction()
                 // if pin name starts with 'self', use context as value
                 else if (pinName.find("self") == 0)
 				{
-					std::shared_ptr<fUML::Semantics::StructuredClassifiers::Object> context = getExecutionContext();
+					const std::shared_ptr<fUML::Semantics::StructuredClassifiers::Object>& context = getExecutionContext();
 
 					std::shared_ptr<fUML::Semantics::StructuredClassifiers::Reference> contextReference = fUML::Semantics::StructuredClassifiers::StructuredClassifiersFactory::eInstance()->createReference();
 					contextReference->setReferent(context);
@@ -262,7 +262,7 @@ void CallActionActivationImpl::doAction()
 
 
         const std::shared_ptr<Bag<uml::OutputPin>>& resultPins = callAction->getResult();
-        std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> outputParameterValues = callExecution->getOutputParameterValues();
+        const std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>>& outputParameterValues = callExecution->getOutputParameterValues();
         const std::shared_ptr<Subset<fUML::Semantics::Actions::OutputPinActivation, fUML::Semantics::Actions::PinActivation>>& outputActivationList=this->getOutputPinActivation();
         pinNumber = 0;
         parameterList = callExecution->getBehavior()->getOwnedParameter();

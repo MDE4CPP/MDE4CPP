@@ -158,7 +158,7 @@ void StructuredActivityNodeActivationImpl::createEdgeInstances()
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
-	std::shared_ptr<Bag<uml::ActivityEdge>> edges = (std::dynamic_pointer_cast<uml::StructuredActivityNode> (this->getNode()))->getEdge();
+	const std::shared_ptr<Bag<uml::ActivityEdge>>& edges = (std::dynamic_pointer_cast<uml::StructuredActivityNode> (this->getNode()))->getEdge();
 	this->getActivationGroup()->createEdgeInstance(edges);
 	//end of body
 }
@@ -173,7 +173,7 @@ void StructuredActivityNodeActivationImpl::createNodeActivations()
 	this->getActivationGroup()->setContainingNodeActivation(getThisStructuredActivityNodeActivationPtr());
 
 	std::shared_ptr<uml::StructuredActivityNode> structuredActivityNode = std::dynamic_pointer_cast<uml::StructuredActivityNode> (this->getNode());
-	std::shared_ptr<Bag<uml::ActivityNode>> nodes = structuredActivityNode->getNode();
+	const std::shared_ptr<Bag<uml::ActivityNode>>& nodes = structuredActivityNode->getNode();
 	this->getActivationGroup()->createNodeActivations(nodes);
 	//end of body
 }
@@ -214,7 +214,7 @@ void StructuredActivityNodeActivationImpl::doStructuredActivity()
         pinActivation->sendUnofferedTokens();
     }
 
-    std::shared_ptr<Bag<fUML::Semantics::Activities::ActivityNodeActivation>> nodes = this->getActivationGroup()->getNodeActivations();
+    const std::shared_ptr<Bag<fUML::Semantics::Activities::ActivityNodeActivation>>& nodes = this->getActivationGroup()->getNodeActivations();
     this->getActivationGroup()->run(nodes);
 	//end of body
 }
@@ -244,13 +244,13 @@ std::shared_ptr<Bag<fUML::Semantics::Values::Value>> StructuredActivityNodeActiv
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
 	std::shared_ptr<fUML::Semantics::Actions::PinActivation> pinActivation = std::dynamic_pointer_cast<fUML::Semantics::Actions::PinActivation>(this->getActivationGroup()->getNodeActivation(pin));
-	std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> tokens = pinActivation->getTokens();
+	const std::shared_ptr<Bag<fUML::Semantics::Activities::Token>>& tokens = pinActivation->getTokens();
 
 	std::shared_ptr<Bag<fUML::Semantics::Values::Value>> values(new Bag<fUML::Semantics::Values::Value>());
     for (unsigned int i = 0; i < tokens->size(); i++) 
     {
     	std::shared_ptr<fUML::Semantics::Activities::Token> token = tokens->at(i);
-    	std::shared_ptr<fUML::Semantics::Values::Value> value = token->getValue();
+    	const std::shared_ptr<fUML::Semantics::Values::Value>& value = token->getValue();
         if (value != nullptr) 
         {
             values->push_back(value);
@@ -294,14 +294,14 @@ std::shared_ptr<Bag<uml::ActivityNode>> StructuredActivityNodeActivationImpl::ma
         std::shared_ptr<uml::Action> action = std::dynamic_pointer_cast<uml::Action>(node);
         if (action != nullptr) 
         {
-        	std::shared_ptr<Bag<uml::InputPin>> inputPins = action->getInput();//was: nullptr;
+        	const std::shared_ptr<Bag<uml::InputPin>>& inputPins = action->getInput();//was: nullptr;
             for (unsigned int j = 0; j < inputPins->size(); j++) 
             {
             	std::shared_ptr<uml::InputPin> inputPin = inputPins->at(j);
                 activityNodes->push_back(inputPin);
             }
 
-            std::shared_ptr<Bag<uml::OutputPin>> outputPins = action->getOutput();//was: nullptr;
+            const std::shared_ptr<Bag<uml::OutputPin>>& outputPins = action->getOutput();//was: nullptr;
             for (unsigned int j = 0; j < outputPins->size(); j++) 
             {
             	std::shared_ptr<uml::OutputPin> outputPin = outputPins->at(j);

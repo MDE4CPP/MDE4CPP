@@ -136,10 +136,10 @@ std::shared_ptr<fUML::Semantics::CommonBehavior::Execution> CallBehaviorActionAc
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
-	std::shared_ptr<uml::CallBehaviorAction> callBehaviorAction = this->getCallBehaviorAction();
+	const std::shared_ptr<uml::CallBehaviorAction>& callBehaviorAction = this->getCallBehaviorAction();
     if(callBehaviorAction != nullptr)
     {
-    	std::shared_ptr<uml::Behavior> behavior = callBehaviorAction->getBehavior();
+    	const std::shared_ptr<uml::Behavior>& behavior = callBehaviorAction->getBehavior();
     	std::shared_ptr<fUML::Semantics::StructuredClassifiers::Object> context = nullptr;
 
         if(behavior!=nullptr)

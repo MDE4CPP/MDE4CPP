@@ -198,10 +198,10 @@ void DestroyObjectActionActivationImpl::doAction()
 	// If isDestroyOwnedObjects is true, destroy all objects owned by the referent via composition links.
 	// Destroy the referent object.
 
-	std::shared_ptr<uml::DestroyObjectAction> action = this->getDestroyObjectAction();
+	const std::shared_ptr<uml::DestroyObjectAction>& action = this->getDestroyObjectAction();
 	if(action)
 	{
-		std::shared_ptr<uml::InputPin > destroyTarget=action->getTarget();
+		const std::shared_ptr<uml::InputPin >& destroyTarget=action->getTarget();
 		if(destroyTarget)
 		{
 			std::shared_ptr<Bag<fUML::Semantics::Values::Value>> tokens=this->takeTokens(destroyTarget);

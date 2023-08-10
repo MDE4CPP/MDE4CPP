@@ -142,7 +142,7 @@ void LinkImpl::addTo(const std::shared_ptr<fUML::Semantics::Loci::Locus>& locus)
 	// Shift the positions of ends of other links, as appropriate, for ends
 	// that are ordered.
 
-	std::shared_ptr<Bag<uml::Property>> ends = this->getType()->getMemberEnd();
+	const std::shared_ptr<Bag<uml::Property>>& ends = this->getType()->getMemberEnd();
 	std::shared_ptr<Bag<fUML::Semantics::StructuredClassifiers::ExtensionalValue>> extent = locus->retrieveExtent(this->getType());
 
 	unsigned int endsSize = ends->size();
@@ -219,7 +219,7 @@ bool LinkImpl::isMatchingLink(const std::shared_ptr<fUML::Semantics::StructuredC
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
-		std::shared_ptr<Bag<uml::Property>> ends = this->getType()->getMemberEnd();
+		const std::shared_ptr<Bag<uml::Property>>& ends = this->getType()->getMemberEnd();
 
 	bool matches = true;
 	unsigned int i = 0;

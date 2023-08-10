@@ -161,14 +161,14 @@ void ActivityExecutionImpl::execute()
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
-		std::shared_ptr<uml::Activity> activity = this->getActivity();
+		const std::shared_ptr<uml::Activity>& activity = this->getActivity();
 
     if(activity != nullptr)
     {
         DEBUG_MESSAGE(std::cout<<"[execute] Activity " << activity->getName()<< "..."<<std::endl;)
         DEBUG_MESSAGE(std::cout<<"[event] Execute activity=" + activity->getName()<<std::endl;)
 
-		std::shared_ptr<fUML::Semantics::Activities::ActivityExecution> thisPtr=getThisActivityExecutionPtr();
+		const std::shared_ptr<fUML::Semantics::Activities::ActivityExecution>& thisPtr=getThisActivityExecutionPtr();
 
 		std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup> newActivationGroup=fUML::Semantics::Activities::ActivitiesFactory::eInstance()->createActivityNodeActivationGroup_as_activationGroup_in_ActivityExecution(thisPtr);
         	const std::shared_ptr<Bag<uml::ActivityNode>>& nodes = activity->getNode();
@@ -177,7 +177,7 @@ void ActivityExecutionImpl::execute()
 
         DEBUG_MESSAGE(std::cout<<"[execute] Getting output parameter node activations..."<<std::endl;)
 
-        std::shared_ptr<Bag<fUML::Semantics::Activities::ActivityParameterNodeActivation>> outputActivationList = this->getActivationGroup()->getOutputParameterNodeActivations();
+        const std::shared_ptr<Bag<fUML::Semantics::Activities::ActivityParameterNodeActivation>>& outputActivationList = this->getActivationGroup()->getOutputParameterNodeActivations();
         for(const std::shared_ptr<fUML::Semantics::Activities::ActivityParameterNodeActivation>& outputActivation : *outputActivationList)
         {
             
@@ -187,7 +187,7 @@ void ActivityExecutionImpl::execute()
 	      std::shared_ptr<uml::ActivityParameterNode> activityParameterNode = std::dynamic_pointer_cast<uml::ActivityParameterNode> (outputActivation->getNode());
                 parameterValue->setParameter(activityParameterNode->getParameter());
 
-                std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> tokenList = outputActivation->getTokens();
+                const std::shared_ptr<Bag<fUML::Semantics::Activities::Token>>& tokenList = outputActivation->getTokens();
                 for(const std::shared_ptr<fUML::Semantics::Activities::Token>& token : *tokenList)
                 {
                 	std::shared_ptr<fUML::Semantics::Values::Value> value = nullptr;

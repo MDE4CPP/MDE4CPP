@@ -140,7 +140,7 @@ void ActivityParameterNodeActivationImpl::fire(const std::shared_ptr<Bag<fUML::S
 	if (this->getNode()->getIncoming()->size() == 0) 
 	{
 		DEBUG_MESSAGE(std::cout<< "[fire] Input activity parameter node " << this->getNode()->getName() << "..."<<std::endl;)
-		std::shared_ptr<uml::Parameter> parameter = (std::dynamic_pointer_cast<uml::ActivityParameterNode>(this->getNode()))->getParameter();
+		const std::shared_ptr<uml::Parameter>& parameter = (std::dynamic_pointer_cast<uml::ActivityParameterNode>(this->getNode()))->getParameter();
 		std::shared_ptr<fUML::Semantics::CommonBehavior::ParameterValue> parameterValue = this->getActivityExecution()->getParameterValue(parameter);
 
 		if (parameterValue != nullptr) 

@@ -141,7 +141,7 @@ std::shared_ptr<fUML::Semantics::SimpleClassifiers::FeatureValue> newValue = fUM
 newValue->setFeature(this->getFeature());
 newValue->setPosition(this->getPosition());
 
-std::shared_ptr<Bag<fUML::Semantics::Values::Value>> values = this->getValues();
+const std::shared_ptr<Bag<fUML::Semantics::Values::Value>>& values = this->getValues();
 unsigned int valuesSize = values->size();
 
 for(unsigned int i = 0; i < valuesSize; i++)
@@ -167,7 +167,7 @@ bool FeatureValueImpl::hasEqualValues(const std::shared_ptr<fUML::Semantics::Sim
     }
     else
     {
-    	std::shared_ptr<uml::StructuralFeature> feature = this->getFeature();
+    	const std::shared_ptr<uml::StructuralFeature>& feature = this->getFeature();
         if(feature->getIsOrdered())
         {
             unsigned int i = 0;
@@ -181,7 +181,7 @@ bool FeatureValueImpl::hasEqualValues(const std::shared_ptr<fUML::Semantics::Sim
         else
         {
         	std::shared_ptr<fUML::Semantics::SimpleClassifiers::FeatureValue> otherFeatureValues(fUML::Semantics::SimpleClassifiers::SimpleClassifiersFactory::eInstance()->createFeatureValue());
-        	std::shared_ptr<Bag<fUML::Semantics::Values::Value>> values = other->getValues();
+        	const std::shared_ptr<Bag<fUML::Semantics::Values::Value>>& values = other->getValues();
             for(unsigned int i = 0; i < values->size(); i++)
             {
             	std::shared_ptr<fUML::Semantics::Values::Value> value = values->at(i);

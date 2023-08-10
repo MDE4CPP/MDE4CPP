@@ -233,7 +233,7 @@ void ObjectActivationImpl::dispatchNextEvent()
 		// Bag<int> matchingEventAccepterIndexes; // einfach ganz normalen typ anlegen
 		std::vector<int> matchingEventAccepterIndexes;
 
- 		std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::EventAccepter>> waitingEventAccepters = getWaitingEventAccepters();
+ 		const std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::EventAccepter>>& waitingEventAccepters = getWaitingEventAccepters();
 		int i = 0; 
 		int beginIter = 0;
 		int endIter = waitingEventAccepters->size();
@@ -317,7 +317,7 @@ void ObjectActivationImpl::startBehavior(const std::shared_ptr<uml::Class>& clas
 	{
     	DEBUG_MESSAGE(std::cout<<"[startBehavior] Starting behavior for all classifiers..."<<std::endl;)
 		// *** Start all classifier behaviors concurrently. ***
-		std::shared_ptr<Bag<uml::Classifier>> types = this->getObject()->getTypes();
+		const std::shared_ptr<Bag<uml::Classifier>>& types = this->getObject()->getTypes();
         std::vector<std::shared_ptr<uml::Classifier>>::iterator i;
         for (i = types->begin(); i!=types->end(); ++i) 
         {
@@ -375,7 +375,7 @@ void ObjectActivationImpl::stop()
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
-	std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ClassifierBehaviorExecution>> classifierBehaviorExecutions = this->getClassifierBehaviorExecutions();
+	const std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ClassifierBehaviorExecution>>& classifierBehaviorExecutions = this->getClassifierBehaviorExecutions();
     for (unsigned int i = 0; i < classifierBehaviorExecutions->size(); i++) 
     {
     	std::shared_ptr<fUML::Semantics::CommonBehavior::ClassifierBehaviorExecution> classifierBehaviorExecution = classifierBehaviorExecutions->at(i);

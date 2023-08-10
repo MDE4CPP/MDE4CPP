@@ -140,11 +140,11 @@ std::shared_ptr<fUML::Semantics::CommonBehavior::Execution> CallOperationActionA
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
 	std::shared_ptr<fUML::Semantics::CommonBehavior::Execution> execution = nullptr;
-	std::shared_ptr<uml::CallOperationAction> action = this->getCallOperationAction();
+	const std::shared_ptr<uml::CallOperationAction>& action = this->getCallOperationAction();
 	if(action != nullptr)
 	{
 		//Pin name
-		std::shared_ptr<uml::InputPin> targetPin = action->getTarget();
+		const std::shared_ptr<uml::InputPin>& targetPin = action->getTarget();
 		std::string name = targetPin->getName();
 
 		std::shared_ptr<fUML::Semantics::Values::Value> target = nullptr;
@@ -159,7 +159,7 @@ std::shared_ptr<fUML::Semantics::CommonBehavior::Execution> CallOperationActionA
 				DEBUG_MESSAGE(std::cout << "change context to " << attributeName << std::endl;)
 
 				std::shared_ptr<uml::Property> attribute = nullptr;
-				std::shared_ptr<Bag<uml::Classifier>> contextTypes = context->getTypes();
+				const std::shared_ptr<Bag<uml::Classifier>>& contextTypes = context->getTypes();
 				Bag<uml::Classifier>::iterator contextTypesIter = contextTypes->begin();
 				Bag<uml::Classifier>::iterator contextTypesEnd = contextTypes->end();
 
@@ -168,7 +168,7 @@ std::shared_ptr<fUML::Semantics::CommonBehavior::Execution> CallOperationActionA
 					std::shared_ptr<uml::Classifier> classifier = *contextTypesIter;
 					contextTypesIter++;
 
-					std::shared_ptr<Bag<uml::Property>> attributes = classifier->getAllAttributes();
+					const std::shared_ptr<Bag<uml::Property>>& attributes = classifier->getAllAttributes();
 					Bag<uml::Property>::iterator attributeIter = attributes->begin();
 					Bag<uml::Property>::iterator attributeEnd = attributes->end();
 					while (attribute == nullptr || attributeIter < attributeEnd)
@@ -214,7 +214,7 @@ std::shared_ptr<fUML::Semantics::CommonBehavior::Execution> CallOperationActionA
 		}
 		else
 		{
-			std::shared_ptr<uml::InputPin> t = action->getTarget();
+			const std::shared_ptr<uml::InputPin>& t = action->getTarget();
 			if(nullptr==t)
 			{
 				std::cerr << "[getCallExecution] Target is null" << std::endl;
@@ -228,7 +228,7 @@ std::shared_ptr<fUML::Semantics::CommonBehavior::Execution> CallOperationActionA
 				}
 				else
 				{
-					std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> unofferedTokens = pa->getUnofferedTokens();
+					const std::shared_ptr<Bag<fUML::Semantics::Activities::Token>>& unofferedTokens = pa->getUnofferedTokens();
 					if(nullptr == unofferedTokens)
 					{
 						std::cerr << "[getCallExecution] UnofferedTokens are null" << std::endl;

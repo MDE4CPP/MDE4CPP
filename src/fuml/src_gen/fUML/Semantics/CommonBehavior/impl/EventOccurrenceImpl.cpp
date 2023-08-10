@@ -116,7 +116,7 @@ void EventOccurrenceImpl::doSend()
 	// Send this event occurrence to the target reference.
 	DEBUG_MESSAGE(std::cout <<  std::string(__PRETTY_FUNCTION__)<< std::endl;)
 
-	std::shared_ptr<fUML::Semantics::StructuredClassifiers::Reference> target = getTarget();
+	const std::shared_ptr<fUML::Semantics::StructuredClassifiers::Reference>& target = getTarget();
 	if(target != nullptr)
 	{
 		DEBUG_MESSAGE(std::cout << "found target != nullptr, sending..." << std::endl;)

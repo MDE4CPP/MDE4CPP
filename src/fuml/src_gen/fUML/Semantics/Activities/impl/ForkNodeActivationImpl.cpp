@@ -136,7 +136,7 @@ void ForkNodeActivationImpl::fire(const std::shared_ptr<Bag<fUML::Semantics::Act
 		std::cout<<"-- printing from "<<this->getNode()->getName()<<" : #incomingTokens = "<<incomingTokens->size()<<std::endl;)
     }
 
-	std::shared_ptr<Bag<fUML::Semantics::Activities::ActivityEdgeInstance>> outgoingEdges = this->getOutgoingEdges();
+	const std::shared_ptr<Bag<fUML::Semantics::Activities::ActivityEdgeInstance>>& outgoingEdges = this->getOutgoingEdges();
     int outgoingEdgeCount = outgoingEdges->size();
 
     std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> forkedTokens(new Bag<fUML::Semantics::Activities::Token>());

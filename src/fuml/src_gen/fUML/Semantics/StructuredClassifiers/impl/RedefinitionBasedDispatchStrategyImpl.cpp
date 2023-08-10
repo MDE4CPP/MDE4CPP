@@ -151,7 +151,7 @@ std::shared_ptr<uml::Behavior> RedefinitionBasedDispatchStrategyImpl::retrieveMe
 		unsigned long metaElementID = type->eClass()->getMetaElementID();
 		if(metaElementID == uml::umlPackage::CLASS_CLASS || metaElementID == uml::umlPackage::INTERFACE_CLASS)
 		{
-		std::shared_ptr<Bag<uml::Operation>> memberOperations = type->getAllOperations();
+		const std::shared_ptr<Bag<uml::Operation>>& memberOperations = type->getAllOperations();
 		unsigned int j = 0;
 		while(method == nullptr && (j < memberOperations->size()))
 		{

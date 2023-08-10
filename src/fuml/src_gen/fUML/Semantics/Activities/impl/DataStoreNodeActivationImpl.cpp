@@ -125,7 +125,7 @@ void DataStoreNodeActivationImpl::addToken(const std::shared_ptr<fUML::Semantics
 		
 		bool isUnique = true;
 		if (value != nullptr) {
-			std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> heldTokens = this->getTokens();
+			const std::shared_ptr<Bag<fUML::Semantics::Activities::Token>>& heldTokens = this->getTokens();
 			unsigned int i = 0;
 			while (isUnique && i < heldTokens->size()) {
 				isUnique = !(heldTokens->at(i)->getValue()->equals(value));
