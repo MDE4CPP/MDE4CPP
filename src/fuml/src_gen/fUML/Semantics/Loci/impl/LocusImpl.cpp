@@ -56,8 +56,8 @@
 #include "fUML/Semantics/StructuredClassifiers/ExtensionalValue.hpp"
 #include "fUML/Semantics/StructuredClassifiers/Object.hpp"
 //Factories and Package includes
-#include "fUML/Semantics/SemanticsPackage.hpp"
 #include "fUML/fUMLPackage.hpp"
+#include "fUML/Semantics/SemanticsPackage.hpp"
 #include "fUML/Semantics/Loci/LociPackage.hpp"
 #include "fUML/Semantics/StructuredClassifiers/StructuredClassifiersPackage.hpp"
 #include "uml/umlPackage.hpp"
@@ -228,13 +228,13 @@ std::shared_ptr<fUML::Semantics::StructuredClassifiers::Object> LocusImpl::insta
 	//end of body
 }
 
-void LocusImpl::remove(std::shared_ptr<fUML::Semantics::StructuredClassifiers::ExtensionalValue> value)
+void LocusImpl::remove(const std::shared_ptr<fUML::Semantics::StructuredClassifiers::ExtensionalValue>& value)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
-	value->setLocus(nullptr);
+	//value->setLocus(nullptr);
 	this->getExtensionalValues()->erase(value);
-	value.reset();
+	//value.reset();
 	//end of body
 }
 

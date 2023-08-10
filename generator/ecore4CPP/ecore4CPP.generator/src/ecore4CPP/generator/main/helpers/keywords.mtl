@@ -67,7 +67,6 @@
 [query public keyDocumentation(any : OclAny) : String = 'documentation' /]	[** indicates a documentation of an element /]
 [query public sourceNameRedefines(any : OclAny) : String = 'redefines'/]  [** indicates that an attribute redefines another attribute /]
 
-[query public suppressConstRefArgs(any : OclAny) : String = 'suppressConstRefArgs'/] [** indicates that the arguments of an operation shall not be generated as a cons-reference./]
 [query public suppressConstRefReturn(any : OclAny) : String = 'suppressConstRefReturn'/] [** indicates that the return shall not be generated as a cons-reference./]
 [query public forceConstRefReturn(any : OclAny) : String = 'forceConstRefReturn'/] [** indicates that the return shall be generated as a cons-reference even if it wound not otherwise./]
 

@@ -74,7 +74,7 @@ std::shared_ptr<ecore::EObject> [behaviorName/]::copy() const
 	return *this;
 }
 
-void [behaviorName/]::doBody(const std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>>% inputParameters, const std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>>& outputParameters)
+void [behaviorName/]::doBody(const std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>>& inputParameters, const std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>>& outputParameters)
 {
     DEBUG_MESSAGE(std::cout << "Printing from "<< this->getBehavior()->getName() << std::endl;)
     DEBUG_MESSAGE(std::cout << "__________________________" << std::endl;)

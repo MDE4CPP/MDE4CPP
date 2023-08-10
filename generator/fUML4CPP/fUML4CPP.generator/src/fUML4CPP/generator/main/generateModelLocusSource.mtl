@@ -73,7 +73,7 @@ using namespace [aPackage.generateNamespace(false)/];
 	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete [packageName/]Locus "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
 #endif
 }
-std::shared_ptr<fUML::Semantics::StructuredClassifiers::Object> [packageName/]LocusImpl::instantiate(std::shared_ptr<uml::Class>  type)
+std::shared_ptr<fUML::Semantics::StructuredClassifiers::Object> [packageName/]LocusImpl::instantiate(const std::shared_ptr<uml::Class>&  type)
 {
 [let packageList : Set(Package) = aPackage.getClassPackagesOfCreateObjectAction()]
 [if (packageList->size() > 0)]

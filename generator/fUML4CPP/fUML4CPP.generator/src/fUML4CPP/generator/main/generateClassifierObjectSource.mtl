@@ -253,38 +253,27 @@ std::shared_ptr<Bag<PSCS::Semantics::StructuredClassifiers::CS_Object>> [classNa
 	return directContainers;
 }
 
+[if (aClassifier.oclIsKindOf(Class) and aClassifier.oclAsType(Class).isActive)]
 // Object Activation getter/setter forwarder implementations
-
 const std::shared_ptr<fUML::Semantics::CommonBehavior::ObjectActivation>& [className/]::getObjectActivation() const
 {
-	if( this->getMyClassValue() )
+	if([aClassifier.UMLValueName()/])
 	{
-		if( this->getMyClassValue()->GetIsActive() )
-		{
-			return this->getMyClassValue()->getObjectActivation();	// should only get if MyClassValue is active aswell
-		}
-		else
-		{
-			return PSCS::Semantics::StructuredClassifiers::CS_ObjectImpl::getObjectActivation();
-		}
+		return [aClassifier.UMLValueName()/]->getObjectActivation();	// should only get if MyClassValue is active aswell
 	}
-	else
-	{
-		return PSCS::Semantics::StructuredClassifiers::CS_ObjectImpl::getObjectActivation();
-	}
+
+	return PSCS::Semantics::StructuredClassifiers::CS_ObjectImpl::getObjectActivation();
 }	
-void [className/]::setObjectActivation(std::shared_ptr<fUML::Semantics::CommonBehavior::ObjectActivation> _objectActivation)
+void [className/]::setObjectActivation(const std::shared_ptr<fUML::Semantics::CommonBehavior::ObjectActivation>& _objectActivation)
 {
-	if( getMyClassValue() )
+	if([aClassifier.UMLValueName()/])
 	{
-		if( getMyClassValue()->GetIsActive() )
-		{
-			getMyClassValue()->setObjectActivation(_objectActivation);	// should only set if MyClassValue is active aswell
-		}
+		[aClassifier.UMLValueName()/]->setObjectActivation(_objectActivation);	// should only set if MyClassValue is active aswell
 	}
+
 	PSCS::Semantics::StructuredClassifiers::CS_ObjectImpl::setObjectActivation(_objectActivation);
 }
-
+[/if]
 
 
 [let attributes : OrderedSet(Property) = aClassifier.getMyAttributes() ]

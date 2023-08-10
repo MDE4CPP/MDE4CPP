@@ -86,13 +86,12 @@ namespace [aClassifier.getNearestPackage().generateNamespace(false)/]
 			virtual std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_InteractionPoint> convertToInteractionPoint(std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Reference>, std::shared_ptr<uml::Port>);
 			[/comment]
 [/if]
-
+[/let]
+			[if (aClassifier.oclIsKindOf(Class) and aClassifier.oclAsType(Class).isActive)]
 			//forward the object activation to the contained object if possible
 			virtual const std::shared_ptr<fUML::Semantics::CommonBehavior::ObjectActivation>& getObjectActivation() const;
-			virtual void setObjectActivation(std::shared_ptr<fUML::Semantics::CommonBehavior::ObjectActivation>);
-
-
-[/let]
+			virtual void setObjectActivation(const std::shared_ptr<fUML::Semantics::CommonBehavior::ObjectActivation>&);
+			[/if]
 
 		protected:
 			std::shared_ptr<[pointerName/]> [aClassifier.UMLValueName()/] = nullptr;

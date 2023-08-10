@@ -40,7 +40,7 @@ namespace [aPackage.generateNamespace(false)/]
 			//*********************************
 			// Operations
 			//*********************************
-			virtual std::shared_ptr<fUML::Semantics::StructuredClassifiers::Object> instantiate(std::shared_ptr<uml::Class>  type) = 0;
+			virtual std::shared_ptr<fUML::Semantics::StructuredClassifiers::Object> instantiate(const std::shared_ptr<uml::Class>&  type) = 0;
 	};
 }
 [endGuard(aPackage,'LocusExecution')/]
@@ -70,7 +70,7 @@ namespace [aPackage.generateNamespace(false)/]
 			
 			/*!
 			 */ 
-			virtual std::shared_ptr<fUML::Semantics::StructuredClassifiers::Object> instantiate(std::shared_ptr<uml::Class>  type) ;
+			virtual std::shared_ptr<fUML::Semantics::StructuredClassifiers::Object> instantiate(const std::shared_ptr<uml::Class>&  type) ;
 			virtual void setThisLocusPtr(std::weak_ptr<PSCS::Semantics::Loci::CS_Locus> thisLocusPtr){PSCS::Semantics::Loci::CS_LocusImpl::setThisLocusPtr(thisLocusPtr);};
 	};
 }

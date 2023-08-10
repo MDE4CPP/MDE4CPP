@@ -63,6 +63,12 @@
 [/if]
 [/for]
 [/if]
+[if (aClass.isActive)]
+namespace fUML::Semantics::CommonBehavior
+{
+	class ObjectActivation;
+}
+[/if]
 
 // base class includes 
 [if (aClass.superClass->isEmpty())]
@@ -95,11 +101,6 @@
 #include "[elements.getNearestPackage().generateNamespacePath(false)/]/[elements.name.toUpperFirst().concat('.hpp')/]"[/for]
 [/if]
 
-
-
-// include object activation
-#include "fUML/Semantics/CommonBehavior/ObjectActivation.hpp"
-
 [if (not aClass.getNearestPackage().isIgnoreNamespace())]
 namespace [aPackage.generateNamespace(false)/]
 {
@@ -126,16 +127,14 @@ virtual public [sClass.getClassifierName(aClass, false, sClass.getNearestPackage
 			// Operations
 			//*********************************
 			[aClass.ownedOperation->sortedBy(name).generateOperationDecl(false)/]
+			[if (aClass.isActive)]
 
 			//*********************************
 			// ObjectActivation Forwarder SetGet
 			//*********************************
-			[if (aClass.isActive)]
-				virtual std::shared_ptr<fUML::Semantics::CommonBehavior::ObjectActivation> getObjectActivation() const = 0;
-				virtual void setObjectActivation(std::shared_ptr<fUML::Semantics::CommonBehavior::ObjectActivation>) = 0;
+			virtual const std::shared_ptr<fUML::Semantics::CommonBehavior::ObjectActivation>& getObjectActivation() const = 0;
+			virtual void setObjectActivation(const std::shared_ptr<fUML::Semantics::CommonBehavior::ObjectActivation>&) = 0;
 			[/if]
-			// Getter for Active Class
-			virtual bool GetIsActive() const = 0;
 			
 		protected:
 			//*********************************
@@ -143,8 +142,6 @@ virtual public [sClass.getClassifierName(aClass, false, sClass.getNearestPackage
 			//*********************************
 			[aClass.ownedAttribute->sortedBy(name).generateAttributeProtectedMember()/]
 			[aClass.getImplicitCompositeOwners()->sortedBy(name).generateCompositeOwnerAttributeProtectedMember() /]
-
-			
 
 		public:
 			//*********************************

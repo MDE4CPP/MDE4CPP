@@ -52,8 +52,8 @@
 #include "fUML/Semantics/Loci/SemanticVisitor.hpp"
 #include "fUML/Semantics/Activities/Token.hpp"
 //Factories and Package includes
-#include "fUML/Semantics/SemanticsPackage.hpp"
 #include "fUML/fUMLPackage.hpp"
+#include "fUML/Semantics/SemanticsPackage.hpp"
 #include "fUML/Semantics/Activities/ActivitiesPackage.hpp"
 #include "fUML/Semantics/Loci/LociPackage.hpp"
 #include "fUML/Semantics/StructuredClassifiers/StructuredClassifiersPackage.hpp"
@@ -166,7 +166,7 @@ void ActivityNodeActivationImpl::addOutgoingEdge(const std::shared_ptr<fUML::Sem
 	//end of body
 }
 
-void ActivityNodeActivationImpl::addToken(std::shared_ptr<fUML::Semantics::Activities::Token> token)
+void ActivityNodeActivationImpl::addToken(const std::shared_ptr<fUML::Semantics::Activities::Token>& token)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -187,23 +187,25 @@ else
 		}
 	)
 
-if (!token->isWithdrawn())
+std::shared_ptr<fUML::Semantics::Activities::Token> tokenToAdd = token;
+
+if (!tokenToAdd->isWithdrawn())
 {
-	token->withdraw();
+	tokenToAdd->withdraw();
 	//token = token->_copy();
 	if(token->getMetaElementID() == fUML::Semantics::Activities::ActivitiesPackage::FORKEDTOKEN_CLASS)
 	{
-		token = token->_copy();
+		tokenToAdd = token->_copy();
 	}
 		
 }
 
-token->setHolder(getThisActivityNodeActivationPtr());
-token->setWithdrawn(false);
+tokenToAdd->setHolder(getThisActivityNodeActivationPtr());
+tokenToAdd->setWithdrawn(false);
 
 DEBUG_MESSAGE(std::cout<<"[addToken] Adding token with value = "<<token->getValue()<<std::endl;)
 
-this->getHeldTokens()->push_back(token);
+this->getHeldTokens()->push_back(tokenToAdd);
 	//end of body
 }
 

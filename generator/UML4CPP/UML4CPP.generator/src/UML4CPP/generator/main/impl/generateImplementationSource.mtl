@@ -135,6 +135,11 @@
 #include "[anEnd.role.type._package.generateNamespacePath(true)/]/[anEnd.role.type.name.toUpperFirst()/].hpp"
 [/for][/for]
 
+[if (aClass.isActive)]
+//Include fUML ObjectActivation
+#include "fUML/Semantics/CommonBehavior/ObjectActivation.hpp"
+[/if]
+
 [if (not aPackage.isIgnoreNamespace())]using namespace [aPackage.generateNamespace(false)/];[/if]
 
 //*********************************
@@ -369,31 +374,18 @@ void [className/]::destroy()
 
 [aClass.generateGetThisPtrCPP()/]
 
-
+[if (aClass.isActive)]
 //*********************************
 // ObjectActivation Forwarder Impl
 //*********************************
-[if (aClass.isActive) ]
-	std::shared_ptr<fUML::Semantics::CommonBehavior::ObjectActivation> [className/]::getObjectActivation() const
-	{
-	    return m_objectActivation;
-	}
-	void [className/]::setObjectActivation(std::shared_ptr<fUML::Semantics::CommonBehavior::ObjectActivation> _objectActivation)
-	{
-	    m_objectActivation = _objectActivation;
-	}
-[/if]
-// Getter for Active Class
-bool [className/]::GetIsActive() const
+const std::shared_ptr<fUML::Semantics::CommonBehavior::ObjectActivation>& [className/]::getObjectActivation() const
 {
-	[if (aClass.isActive) ]
-		return true;
-	[else]
-		return false;
-	[/if]
-
+	return m_objectActivation;
 }
-
-
+void [className/]::setObjectActivation(const std::shared_ptr<fUML::Semantics::CommonBehavior::ObjectActivation>& _objectActivation)
+{
+	m_objectActivation = _objectActivation;
+}
+[/if]
 [/file]
 [/template]

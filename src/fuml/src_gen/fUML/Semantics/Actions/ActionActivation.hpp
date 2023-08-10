@@ -102,7 +102,7 @@ namespace fUML::Semantics::Actions
 			virtual std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> completeAction() = 0;
 			virtual void createNodeActivations() = 0;
 			virtual void doAction() = 0;
-			virtual void fire(std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> incomingTokens) = 0;
+			virtual void fire(const std::shared_ptr<Bag<fUML::Semantics::Activities::Token>>& incomingTokens) = 0;
 			virtual std::shared_ptr<Bag<fUML::Semantics::Values::Value>> getTokens(const std::shared_ptr<uml::InputPin>& pin) = 0;
 			virtual void initialize(const std::shared_ptr<uml::ActivityNode>& node, const std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup>& group) = 0;
 			virtual bool isFirng() = 0;
