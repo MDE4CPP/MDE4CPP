@@ -255,13 +255,13 @@ std::shared_ptr<Bag<PSCS::Semantics::StructuredClassifiers::CS_Object>> [classNa
 
 // Object Activation getter/setter forwarder implementations
 
-std::shared_ptr<fUML::Semantics::CommonBehavior::ObjectActivation> [className/]::getObjectActivation() const
+const std::shared_ptr<fUML::Semantics::CommonBehavior::ObjectActivation>& [className/]::getObjectActivation() const
 {
-	if( getMyClassValue() )
+	if( this->getMyClassValue() )
 	{
-		if( getMyClassValue()->GetIsActive() )
+		if( this->getMyClassValue()->GetIsActive() )
 		{
-			return getMyClassValue()->getObjectActivation();	// should only get if MyClassValue is active aswell
+			return this->getMyClassValue()->getObjectActivation();	// should only get if MyClassValue is active aswell
 		}
 		else
 		{

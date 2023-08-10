@@ -88,7 +88,7 @@ namespace [aClassifier.getNearestPackage().generateNamespace(false)/]
 [/if]
 
 			//forward the object activation to the contained object if possible
-			virtual std::shared_ptr<fUML::Semantics::CommonBehavior::ObjectActivation> getObjectActivation() const;
+			virtual const std::shared_ptr<fUML::Semantics::CommonBehavior::ObjectActivation>& getObjectActivation() const;
 			virtual void setObjectActivation(std::shared_ptr<fUML::Semantics::CommonBehavior::ObjectActivation>);
 
 
