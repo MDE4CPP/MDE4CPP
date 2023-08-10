@@ -249,7 +249,7 @@ void ExecutionFactoryImpl::addBuiltInType(const std::shared_ptr<uml::PrimitiveTy
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
-	std::shared_ptr<Bag<uml::PrimitiveType> > builtInTypes = this->getBuiltInTypes();
+	std::shared_ptr<Bag<uml::PrimitiveType>> builtInTypes = this->getBuiltInTypes();
     builtInTypes->push_back(type);
 	//end of body
 }
@@ -258,7 +258,7 @@ void ExecutionFactoryImpl::addPrimitiveBehaviorPrototype(const std::shared_ptr<f
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
-	std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::OpaqueBehaviorExecution> > primBehaviorExecution = this->getPrimitiveBehaviorPrototypes();
+	std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::OpaqueBehaviorExecution>> primBehaviorExecution = this->getPrimitiveBehaviorPrototypes();
     primBehaviorExecution->push_back(execution);
 	//end of body
 }

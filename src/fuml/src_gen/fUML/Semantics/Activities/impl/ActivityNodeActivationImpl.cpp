@@ -312,8 +312,8 @@ std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> ActivityNodeActivationI
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
-	std::shared_ptr<Bag<fUML::Semantics::Activities::Token> > tokens(new Bag<fUML::Semantics::Activities::Token>());
-	std::shared_ptr<Bag<fUML::Semantics::Activities::Token> > heldTokens = this->getHeldTokens();
+	std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> tokens(new Bag<fUML::Semantics::Activities::Token>());
+	std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> heldTokens = this->getHeldTokens();
     for (unsigned int i = 0; i < heldTokens->size(); i++) 
     {
     	std::shared_ptr<fUML::Semantics::Activities::Token> heldToken = heldTokens->at(i);
@@ -363,7 +363,7 @@ void ActivityNodeActivationImpl::receiveOffer()
 
     bool ready = this->isReady();
 
-    std::shared_ptr<Bag<Token> > tokens;
+    std::shared_ptr<Bag<Token>> tokens;
     if (ready) 
     {
         DEBUG_MESSAGE(std::cout<<"[receiveOffer] Firing."<<std::endl;)
@@ -392,7 +392,7 @@ int ActivityNodeActivationImpl::removeToken(const std::shared_ptr<fUML::Semantic
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
-		std::shared_ptr<Bag<fUML::Semantics::Activities::Token> > heldTokenList = this->getHeldTokens();
+		std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> heldTokenList = this->getHeldTokens();
 	std::vector<std::shared_ptr<fUML::Semantics::Activities::Token>>::iterator iter = heldTokenList->begin();
 	std::vector<std::shared_ptr<fUML::Semantics::Activities::Token>>::iterator end = heldTokenList->end();
 
@@ -533,7 +533,7 @@ std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> ActivityNodeActivationI
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
-	std::shared_ptr<Bag<fUML::Semantics::Activities::Token> > allTokens(new Bag<fUML::Semantics::Activities::Token>());
+	std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> allTokens(new Bag<fUML::Semantics::Activities::Token>());
 	const std::shared_ptr<Bag<fUML::Semantics::Activities::ActivityEdgeInstance>>& incomingEdgeList = this->getIncomingEdges();
 
 	//NEWDEBUG
@@ -556,7 +556,7 @@ std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> ActivityNodeActivationI
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
-	std::shared_ptr<Bag<fUML::Semantics::Activities::Token> > tokens = this->getTokens();
+	std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> tokens = this->getTokens();
     this->clearTokens();
 
     return tokens;

@@ -199,7 +199,7 @@ std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> OfferImpl::retrieveOffe
 	this->removeWithdrawnTokens();
 
 	
-std::shared_ptr<Bag<fUML::Semantics::Activities::Token> > tokens(this->getOfferedTokens());
+std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> tokens(this->getOfferedTokens());
 
     	
 return tokens;

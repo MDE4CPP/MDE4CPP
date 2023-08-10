@@ -107,7 +107,7 @@ bool ValueImpl::IsInstanceOf(const std::shared_ptr<uml::Classifier>& classifier)
 	//generated from body annotation
 	// Check if this value has the given classifier as its type
 	// or as an ancestor of one of its types.
-	std::shared_ptr<Bag<uml::Classifier> >types = this->getTypes();
+	std::shared_ptr<Bag<uml::Classifier>>types = this->getTypes();
 	bool isInstance = this->hasTypes(classifier);
 	int i = 1;
 	int typesSize =  types->size();
@@ -139,7 +139,7 @@ bool ValueImpl::checkAllParents(const std::shared_ptr<uml::Classifier>& type, co
 	// Check if the given classifier matches any of the direct or indirect
 	// ancestors of a given type.
 	// Potentially getGeneral, getGenerals or allParents. In Terms of Likeliness
-	std::shared_ptr<Bag<uml::Classifier> > directParents = type->getGeneral();
+	std::shared_ptr<Bag<uml::Classifier>> directParents = type->getGeneral();
 	bool matched = false;
 	int i = 1;
 	int directParentsSize = directParents->size();
@@ -164,8 +164,8 @@ bool ValueImpl::equals(const std::shared_ptr<fUML::Semantics::Values::Value>& ot
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
-		std::shared_ptr<Bag<uml::Classifier> > myTypes = this->getTypes();
-	std::shared_ptr<Bag<uml::Classifier> > otherTypes = otherValue->getTypes();
+		std::shared_ptr<Bag<uml::Classifier>> myTypes = this->getTypes();
+	std::shared_ptr<Bag<uml::Classifier>> otherTypes = otherValue->getTypes();
 
     DEBUG_MESSAGE(std::cout<<"in Value"<<std::endl;)
     bool isEqual = true;
@@ -205,7 +205,7 @@ bool ValueImpl::hasTypes(const std::shared_ptr<uml::Classifier>& type)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
-		std::shared_ptr<Bag<uml::Classifier> > types = this->getTypes();
+		std::shared_ptr<Bag<uml::Classifier>> types = this->getTypes();
 
     bool found = false;
     unsigned int i = 0;

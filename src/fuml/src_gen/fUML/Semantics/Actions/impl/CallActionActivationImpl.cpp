@@ -177,7 +177,7 @@ void CallActionActivationImpl::doAction()
             {
             	std::shared_ptr<fUML::Semantics::CommonBehavior::ParameterValue> parameterValue(fUML::Semantics::CommonBehavior::CommonBehaviorFactory::eInstance()->createParameterValue());
                 parameterValue->setParameter(parameter);
-                std::shared_ptr<Bag<fUML::Semantics::Values::Value> > values = parameterValue->getValues();
+                std::shared_ptr<Bag<fUML::Semantics::Values::Value>> values = parameterValue->getValues();
 
                 // get corresponding pin (pin and parameter list should be synchronized)
                 const std::shared_ptr<uml::InputPin>& correspondingInputpin = argumentPins->at(i);
@@ -241,7 +241,7 @@ void CallActionActivationImpl::doAction()
                 else
                 {
 					std::shared_ptr<fUML::Semantics::Actions::InputPinActivation> activation =inputActivationList->at(pinNumber);
-					std::shared_ptr<Bag<fUML::Semantics::Activities::Token> > tokenList = activation->takeUnofferedTokens();
+					std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> tokenList = activation->takeUnofferedTokens();
 					for(const std::shared_ptr<fUML::Semantics::Activities::Token>& token : *tokenList)
 					{
 						const std::shared_ptr<fUML::Semantics::Values::Value>& value = token->getValue();
@@ -262,7 +262,7 @@ void CallActionActivationImpl::doAction()
 
 
         const std::shared_ptr<Bag<uml::OutputPin>>& resultPins = callAction->getResult();
-        std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue> > outputParameterValues = callExecution->getOutputParameterValues();
+        std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> outputParameterValues = callExecution->getOutputParameterValues();
         const std::shared_ptr<Subset<fUML::Semantics::Actions::OutputPinActivation, fUML::Semantics::Actions::PinActivation>>& outputActivationList=this->getOutputPinActivation();
         pinNumber = 0;
         parameterList = callExecution->getBehavior()->getOwnedParameter();

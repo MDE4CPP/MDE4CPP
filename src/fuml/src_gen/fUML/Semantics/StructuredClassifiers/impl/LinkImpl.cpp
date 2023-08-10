@@ -206,7 +206,7 @@ std::shared_ptr<Bag<uml::Classifier>> LinkImpl::getTypes() const
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
-	std::shared_ptr<Bag<uml::Classifier> > types(new Bag<uml::Classifier>());
+	std::shared_ptr<Bag<uml::Classifier>> types(new Bag<uml::Classifier>());
 if( this->getType() != nullptr)
 	{
 		types->push_back(std::dynamic_pointer_cast<uml::Classifier>(this->getType()));
@@ -219,7 +219,7 @@ bool LinkImpl::isMatchingLink(const std::shared_ptr<fUML::Semantics::StructuredC
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
-		std::shared_ptr<Bag<uml::Property> > ends = this->getType()->getMemberEnd();
+		std::shared_ptr<Bag<uml::Property>> ends = this->getType()->getMemberEnd();
 
 	bool matches = true;
 	unsigned int i = 0;

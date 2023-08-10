@@ -164,7 +164,7 @@ void DestroyObjectActionActivationImpl::destroyObject(const std::shared_ptr<fUML
 		}
 		if (isDestroyOwnedObjects)
 		{
-			std::shared_ptr<Bag<fUML::Semantics::SimpleClassifiers::FeatureValue> > objectFeatureValues = reference->retrieveFeatureValues();
+			std::shared_ptr<Bag<fUML::Semantics::SimpleClassifiers::FeatureValue>> objectFeatureValues = reference->retrieveFeatureValues();
 			for(const std::shared_ptr<fUML::Semantics::SimpleClassifiers::FeatureValue>& featureValue : *objectFeatureValues)
 			{
 				std::shared_ptr<uml::Property> property = std::dynamic_pointer_cast<uml::Property> (featureValue->getFeature());
@@ -204,7 +204,7 @@ void DestroyObjectActionActivationImpl::doAction()
 		std::shared_ptr<uml::InputPin > destroyTarget=action->getTarget();
 		if(destroyTarget)
 		{
-			std::shared_ptr<Bag<fUML::Semantics::Values::Value> > tokens=this->takeTokens(destroyTarget);
+			std::shared_ptr<Bag<fUML::Semantics::Values::Value>> tokens=this->takeTokens(destroyTarget);
 			for(const std::shared_ptr<fUML::Semantics::Values::Value>& value : *tokens)
 			{
 				this->destroyObject(value,action->getIsDestroyLinks(), action->getIsDestroyOwnedObjects());

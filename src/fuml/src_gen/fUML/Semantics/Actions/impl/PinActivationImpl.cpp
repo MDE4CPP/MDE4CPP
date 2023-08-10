@@ -136,14 +136,14 @@ std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> PinActivationImpl::take
 	//Note: A pin activation used in an expansion activation group will have this.node == null
 	upper = getPin()->getUpper();
 
-	std::shared_ptr<Bag<fUML::Semantics::Activities::Token> > tokens(new Bag<fUML::Semantics::Activities::Token>());
+	std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> tokens(new Bag<fUML::Semantics::Activities::Token>());
 
 	//NEWDEBUG
 	DEBUG_MESSAGE(std::cout<<"-- printing from PinActivation::"<<__FUNCTION__<<" '"<<(this->getNode() == nullptr ? "..." : ("node = " + this->getNode()->getName()))<<"' : count = "<<count<<std::endl;)
 
 	if (upper < 0 || count < upper) 
 	{
-		std::shared_ptr<Bag<fUML::Semantics::Activities::ActivityEdgeInstance> > incomingEdges = this->getIncomingEdges();
+		std::shared_ptr<Bag<fUML::Semantics::Activities::ActivityEdgeInstance>> incomingEdges = this->getIncomingEdges();
 
 		//NEWDEBUG
 		DEBUG_MESSAGE(std::cout<<"-- printing from PinActivation::"<<__FUNCTION__<<" '"<<(this->getNode() == nullptr ? "..." : ("node = " + this->getNode()->getName()))<<"' : #incomingEdges = "<<incomingEdges->size()<<std::endl;)
@@ -152,7 +152,7 @@ std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> PinActivationImpl::take
 		{
 			std::shared_ptr<fUML::Semantics::Activities::ActivityEdgeInstance> edge = incomingEdges->at(i);
 			int incomingCount = edge->countOfferedValue();
-			std::shared_ptr<Bag<fUML::Semantics::Activities::Token> > incomingTokens(new Bag<fUML::Semantics::Activities::Token>());
+			std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> incomingTokens(new Bag<fUML::Semantics::Activities::Token>());
 			if (upper < 0 || incomingCount < upper - count) 
 			{
 				incomingTokens = edge->takeOfferedTokens();

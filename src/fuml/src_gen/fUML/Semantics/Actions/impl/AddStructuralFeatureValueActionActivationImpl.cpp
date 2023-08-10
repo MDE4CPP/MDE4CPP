@@ -167,7 +167,7 @@ void AddStructuralFeatureValueActionActivationImpl::doAction()
 	if((objectPinName.empty()) || (objectPinName.find("self") == 0)){
 		//value is set to the context of the current activity execution
 		std::shared_ptr<fUML::Semantics::StructuredClassifiers::Reference> contextReference = fUML::Semantics::StructuredClassifiers::StructuredClassifiersFactory::eInstance()->createReference();
-		std::shared_ptr<fUML::Semantics::StructuredClassifiers::Object> context = this->getActivityExecution()->getContext();
+		const std::shared_ptr<fUML::Semantics::StructuredClassifiers::Object>& context = this->getActivityExecution()->getContext();
 		contextReference->setReferent(context);
 			
 		value = contextReference;

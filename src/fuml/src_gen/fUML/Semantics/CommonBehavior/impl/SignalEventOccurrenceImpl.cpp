@@ -132,7 +132,7 @@ std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> SignalEven
 // These are intended to be treated as if they are the values of effective parameters of the direction "in".
 // (Note that the given event must be a signal event, and the signal instance of this signal event occurence must be a direct or indirect instance of the event signal.)
 
-	std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue> > parameterValues(new Bag<fUML::Semantics::CommonBehavior::ParameterValue>());
+	std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> parameterValues(new Bag<fUML::Semantics::CommonBehavior::ParameterValue>());
 	const std::shared_ptr<uml::SignalEvent>& signalEvent = std::dynamic_pointer_cast<uml::SignalEvent>(event);
 	if(signalEvent)
 	{

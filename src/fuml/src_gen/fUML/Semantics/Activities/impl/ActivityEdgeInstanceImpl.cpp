@@ -141,7 +141,7 @@ std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> ActivityEdgeInstanceImp
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
-		std::shared_ptr<Bag<fUML::Semantics::Activities::Token> > tokens(new Bag<fUML::Semantics::Activities::Token>());
+		std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> tokens(new Bag<fUML::Semantics::Activities::Token>());
 
 	Bag<fUML::Semantics::Activities::Offer>* offerList = this->getOffers().get();
     const int size = offerList->size();
@@ -206,7 +206,7 @@ std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> ActivityEdgeInstanceImp
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
-	std::shared_ptr<Bag<fUML::Semantics::Activities::Token> > tokens(new Bag<fUML::Semantics::Activities::Token>());
+	std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> tokens(new Bag<fUML::Semantics::Activities::Token>());
 
 	const std::shared_ptr<Bag<fUML::Semantics::Activities::Offer>>& offerList = this->getOffers();
 	//NEWDEBUG
@@ -228,12 +228,12 @@ std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> ActivityEdgeInstanceImp
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
-	std::shared_ptr<Bag<fUML::Semantics::Activities::Token> > tokens(new Bag<fUML::Semantics::Activities::Token>());
+	std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> tokens(new Bag<fUML::Semantics::Activities::Token>());
     int remainingCount = maxCount;
 
     while (this->getOffers()->size() > 0 && remainingCount > 0) {
     	std::shared_ptr<fUML::Semantics::Activities::Offer> offer = this->getOffers()->at(0);
-    	std::shared_ptr<Bag<fUML::Semantics::Activities::Token> > offeredTokens = offer->retrieveOfferedTokens();
+    	std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> offeredTokens = offer->retrieveOfferedTokens();
         int count = offer->countOfferedVales();
         if (count <= remainingCount) {
             for (unsigned int i = 0; i < offeredTokens->size(); i++) {

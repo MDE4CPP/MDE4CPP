@@ -317,14 +317,14 @@ void ObjectActivationImpl::startBehavior(const std::shared_ptr<uml::Class>& clas
 	{
     	DEBUG_MESSAGE(std::cout<<"[startBehavior] Starting behavior for all classifiers..."<<std::endl;)
 		// *** Start all classifier behaviors concurrently. ***
-		std::shared_ptr<Bag<uml::Classifier> > types = this->getObject()->getTypes();
+		std::shared_ptr<Bag<uml::Classifier>> types = this->getObject()->getTypes();
         std::vector<std::shared_ptr<uml::Classifier>>::iterator i;
         for (i = types->begin(); i!=types->end(); ++i) 
         {
         	std::shared_ptr<uml::Class> type = std::dynamic_pointer_cast<uml::Class> (*i);
         	if ((std::dynamic_pointer_cast<uml::Behavior>(type) != nullptr) || (type->getClassifierBehavior() != nullptr))
             {
-            	std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue> > parameterValue(new Bag<fUML::Semantics::CommonBehavior::ParameterValue>());
+            	std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> parameterValue(new Bag<fUML::Semantics::CommonBehavior::ParameterValue>());
             	this->startBehavior(type, parameterValue);
             }
         }
@@ -358,7 +358,7 @@ void ObjectActivationImpl::startBehavior(const std::shared_ptr<uml::Class>& clas
         	newExecution->setObjectActivation(getThisObjectActivationPtr());
         	this->getClassifierBehaviorExecutions()->push_back(newExecution);
 		// build bag out of the classifier element to match signature of execute
-		std::shared_ptr<Bag<uml::Class> > classifierBag;
+		std::shared_ptr<Bag<uml::Class>> classifierBag;
 		classifierBag->add(classifier);
         	newExecution->execute(classifierBag, inputs);
 
@@ -375,7 +375,7 @@ void ObjectActivationImpl::stop()
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
-	std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ClassifierBehaviorExecution> > classifierBehaviorExecutions = this->getClassifierBehaviorExecutions();
+	std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ClassifierBehaviorExecution>> classifierBehaviorExecutions = this->getClassifierBehaviorExecutions();
     for (unsigned int i = 0; i < classifierBehaviorExecutions->size(); i++) 
     {
     	std::shared_ptr<fUML::Semantics::CommonBehavior::ClassifierBehaviorExecution> classifierBehaviorExecution = classifierBehaviorExecutions->at(i);

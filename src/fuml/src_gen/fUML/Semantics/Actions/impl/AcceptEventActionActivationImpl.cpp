@@ -166,8 +166,8 @@ void AcceptEventActionActivationImpl::accept(const std::shared_ptr<fUML::Semanti
 				if(signalInstance != nullptr)
 				{
 					DEBUG_MESSAGE(std::cout << "found SignalInstance." << std::endl; )
-					// std::shared_ptr<Bag<fUML::Semantics::SimpleClassifiers::SignalInstance> > result = std::make_shared<Bag<fUML::Semantics::SimpleClassifiers::SignalInstance> >();
-					std::shared_ptr<Bag<fUML::Semantics::Values::Value> > result = std::make_shared<Bag<fUML::Semantics::Values::Value> >();
+					// std::shared_ptr<Bag<fUML::Semantics::SimpleClassifiers::SignalInstance>> result = std::make_shared<Bag<fUML::Semantics::SimpleClassifiers::SignalInstance> >();
+					std::shared_ptr<Bag<fUML::Semantics::Values::Value>> result = std::make_shared<Bag<fUML::Semantics::Values::Value> >();
 					result->add( signalInstance );
 					if (resultPins->size() > 0) 
 					{
@@ -180,12 +180,12 @@ void AcceptEventActionActivationImpl::accept(const std::shared_ptr<fUML::Semanti
 		{
 			DEBUG_MESSAGE(std::cout << "Is unmarshalling." << std::endl; )
 
-			std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue> > parameterValues = eventOccurrence->getParameterValues(   action->getTrigger()->at(0)->getEvent()  );//action.trigger.get(0).event);
+			std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> parameterValues = eventOccurrence->getParameterValues(   action->getTrigger()->at(0)->getEvent()  );//action.trigger.get(0).event);
 			for(unsigned int i = 0; i < parameterValues->size(); i++)
 			{
 				std::shared_ptr<fUML::Semantics::CommonBehavior::ParameterValue> parameterValue = parameterValues->at(i);
 			// Line unneeded double declaration?
-			//	std::shared_ptr<Bag<uml::OutputPin> > resultPins = action->getResult();
+			//	std::shared_ptr<Bag<uml::OutputPin>> resultPins = action->getResult();
 				if(resultPins)
 				{
 					std::shared_ptr<uml::OutputPin> resultPin = resultPins->at(i);

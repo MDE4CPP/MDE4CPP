@@ -134,7 +134,7 @@ std::shared_ptr<Bag<uml::Classifier>> DataValueImpl::getTypes()
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
-	std::shared_ptr<Bag<uml::Classifier> > types(new Bag<uml::Classifier>());
+	std::shared_ptr<Bag<uml::Classifier>> types(new Bag<uml::Classifier>());
     types->push_back(std::dynamic_pointer_cast<uml::Classifier>(this->getType()));
     return types;
 	//end of body

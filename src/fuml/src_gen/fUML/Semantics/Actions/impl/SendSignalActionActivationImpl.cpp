@@ -139,7 +139,7 @@ void SendSignalActionActivationImpl::doAction()
 
 	// Otherwise, construct a signal using the values from the argument pins and send it to the referent object.
 	std::shared_ptr<uml::SendSignalAction> action = std::dynamic_pointer_cast<uml::SendSignalAction>( getNode() );
-	//std::shared_ptr<Bag<fUML::Semantics::Values::Value> > target = takeTokens( action->getTarget() )->at(0);
+	//std::shared_ptr<Bag<fUML::Semantics::Values::Value>> target = takeTokens( action->getTarget() )->at(0);
 
 	// in case no refTargets are set, the Bag is empty, use this to prevent trying to access it's 0th Element
 	std::shared_ptr<fUML::Semantics::Values::Value> target;
@@ -147,7 +147,7 @@ void SendSignalActionActivationImpl::doAction()
 	{
 		if(action->getTarget() )
 		{
-			std::shared_ptr<Bag<fUML::Semantics::Values::Value> > targetBag = takeTokens( action->getTarget() );
+			std::shared_ptr<Bag<fUML::Semantics::Values::Value>> targetBag = takeTokens( action->getTarget() );
 			
 			if(targetBag->size() > 0 )
 			{
@@ -181,7 +181,7 @@ void SendSignalActionActivationImpl::doAction()
 		DEBUG_MESSAGE(std::cout <<  "begin accessing signalInstance."<< std::endl;)
 		signalInstance->setType( signal );
 		DEBUG_MESSAGE(std::cout <<  "begin accessing signal."<< std::endl;)
- 		std::shared_ptr<Bag<uml::Property> > attributes = signal->getOwnedAttribute();
+ 		std::shared_ptr<Bag<uml::Property>> attributes = signal->getOwnedAttribute();
 		DEBUG_MESSAGE(std::cout <<  "begin accessing action for Inputs."<< std::endl;)
  		std::shared_ptr<Bag<uml::InputPin>> argumentPins = action->getArgument();
 		int i = 0;
@@ -200,7 +200,7 @@ void SendSignalActionActivationImpl::doAction()
  			std::shared_ptr< uml::Property> attribute = attributes->at(i);
 			DEBUG_MESSAGE(std::cout <<  "accessing argumentPins in loop."<< std::endl;)
  			std::shared_ptr< uml::InputPin> argumentPin = argumentPins->at(i);
-			std::shared_ptr<Bag<fUML::Semantics::Values::Value> > values = takeTokens(argumentPin);
+			std::shared_ptr<Bag<fUML::Semantics::Values::Value>> values = takeTokens(argumentPin);
  			signalInstance->assignFeatureValue(attribute, values, 0);
  		}
 

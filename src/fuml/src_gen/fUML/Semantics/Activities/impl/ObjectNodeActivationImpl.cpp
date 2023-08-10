@@ -165,7 +165,7 @@ std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> ObjectNodeActivationImp
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
-	std::shared_ptr<Bag<fUML::Semantics::Activities::Token> > tokens(new Bag<fUML::Semantics::Activities::Token>());
+	std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> tokens(new Bag<fUML::Semantics::Activities::Token>());
 
   const int numberUnofferedTokens=this->countUnofferedTokens(); 
   int offeredTokenCount=this->getOfferedTokenCount(); 
@@ -225,7 +225,7 @@ void ObjectNodeActivationImpl::sendUnofferedTokens()
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
-	std::shared_ptr<Bag<fUML::Semantics::Activities::Token> > tokens = this->getUnofferedTokens();
+	std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> tokens = this->getUnofferedTokens();
     this->setOfferedTokenCount(this->getOfferedTokenCount() + tokens->size());
     this->sendOffers(tokens);
 	//end of body
@@ -235,7 +235,7 @@ std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> ObjectNodeActivationImp
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
-	std::shared_ptr<Bag<fUML::Semantics::Activities::Token> > tokens = this->getUnofferedTokens();
+	std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> tokens = this->getUnofferedTokens();
 
 //NEWDEBUG
 DEBUG_MESSAGE(std::cout<<"-- printing from ObjectNodeActivation::"<<__FUNCTION__<<" '"<<(this->getNode() == nullptr ? "..." : ("node = " + this->getNode()->getName()))<<"' : #unofferedTokens before withdraw = "<<tokens->size()<<std::endl;)

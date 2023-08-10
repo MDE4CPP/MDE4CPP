@@ -128,8 +128,8 @@ void OpaqueBehaviorExecutionImpl::execute()
 	//generated from body annotation
 	DEBUG_MESSAGE(std::cout<<"[execute] Opaque behavior " << this->getBehavior()->getName() << "..."<<std::endl;)
 
-	std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue> > inputs(new Bag<fUML::Semantics::CommonBehavior::ParameterValue>());
-	std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue> > outputs(new Bag<fUML::Semantics::CommonBehavior::ParameterValue>());
+	std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> inputs(new Bag<fUML::Semantics::CommonBehavior::ParameterValue>());
+	std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> outputs(new Bag<fUML::Semantics::CommonBehavior::ParameterValue>());
 
 	const std::shared_ptr<Bag<uml::Parameter>>& parameterList = this->getBehavior()->getOwnedParameter();
     for(const std::shared_ptr<uml::Parameter>& parameter : *parameterList) 

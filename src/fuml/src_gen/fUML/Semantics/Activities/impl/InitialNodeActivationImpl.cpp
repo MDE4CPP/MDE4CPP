@@ -122,7 +122,7 @@ void InitialNodeActivationImpl::fire(const std::shared_ptr<Bag<fUML::Semantics::
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
-		std::shared_ptr<Bag<fUML::Semantics::Activities::Token> > tokens(new Bag<fUML::Semantics::Activities::Token>());
+		std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> tokens(new Bag<fUML::Semantics::Activities::Token>());
 	//struct null_deleter{void operator()(void const *) const { } };
 	std::shared_ptr<fUML::Semantics::Activities::ControlToken> controlToken(fUML::Semantics::Activities::ActivitiesFactory::eInstance()->createControlToken());
     tokens->push_back(controlToken);

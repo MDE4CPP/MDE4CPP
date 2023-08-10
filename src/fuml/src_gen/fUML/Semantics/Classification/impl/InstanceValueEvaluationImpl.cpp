@@ -138,7 +138,7 @@ std::shared_ptr<fUML::Semantics::Values::Value> InstanceValueEvaluationImpl::eva
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
 	std::shared_ptr<uml::InstanceSpecification> instance = (std::dynamic_pointer_cast<uml::InstanceValue>(this->getSpecification()))->getInstance();
-	std::shared_ptr<Bag<uml::Classifier> > types = instance->getClassifier();
+	std::shared_ptr<Bag<uml::Classifier>> types = instance->getClassifier();
 	std::shared_ptr<uml::Classifier> myType = types->at(0);
 
     DEBUG_MESSAGE(std::cout<<("[evaluate] type = " + myType->getName())<<std::endl;)
@@ -192,13 +192,13 @@ std::shared_ptr<fUML::Semantics::Values::Value> InstanceValueEvaluationImpl::eva
 
         structuredValue->createFeatureValues();
 
-        std::shared_ptr<Bag<uml::Slot> > instanceSlots = instance->getSlot();
+        std::shared_ptr<Bag<uml::Slot>> instanceSlots = instance->getSlot();
         for(unsigned int i = 0; i < instanceSlots->size(); i++)
         {
         	std::shared_ptr<uml::Slot> slot = instanceSlots->at(i);
-        	std::shared_ptr<Bag<fUML::Semantics::Values::Value> > values(new Bag<fUML::Semantics::Values::Value>());
+        	std::shared_ptr<Bag<fUML::Semantics::Values::Value>> values(new Bag<fUML::Semantics::Values::Value>());
 
-        	std::shared_ptr<Bag<uml::ValueSpecification> > slotValues = slot->getValue();
+        	std::shared_ptr<Bag<uml::ValueSpecification>> slotValues = slot->getValue();
             for(unsigned int j = 0; j < slotValues->size(); j++)
             {
             	std::shared_ptr<uml::ValueSpecification> slotValue = slotValues->at(j);

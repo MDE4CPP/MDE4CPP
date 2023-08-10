@@ -248,7 +248,7 @@ std::string CompoundValueImpl::toString()
 	//generated from body annotation
 		std::string buffer = "(" + this->objectId() + ":";
 
-	std::shared_ptr<Bag<uml::Classifier> > types = this->getTypes();
+	std::shared_ptr<Bag<uml::Classifier>> types = this->getTypes();
 
     unsigned int i = 0;
     while(i < types->size())

@@ -151,7 +151,7 @@ void StartObjectBehaviorActionActivationImpl::doAction()
 			if (reference)
 			{
 				const std::shared_ptr<Subset<uml::InputPin, uml::InputPin>>& argumentPins = action->getArgument();
-				std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue> > inputs(new Bag<fUML::Semantics::CommonBehavior::ParameterValue>());
+				std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> inputs(new Bag<fUML::Semantics::CommonBehavior::ParameterValue>());
 				//Todo Check TypedElement? - fUML Spec: Class_ type = (Class_)(action.object.typedElement.type);
 				std::shared_ptr<uml::Class> type=std::dynamic_pointer_cast<uml::Class> (object->getType());
 				if (type)
@@ -177,7 +177,7 @@ void StartObjectBehaviorActionActivationImpl::doAction()
 
 								parameterValue->setParameter(parameter);
 								auto argumentPin=argumentPins->at(pinNumber);
-								std::shared_ptr<Bag<fUML::Semantics::Values::Value> > valueTokens=this->takeTokens(argumentPin);
+								std::shared_ptr<Bag<fUML::Semantics::Values::Value>> valueTokens=this->takeTokens(argumentPin);
 								parameterValue->getValues()->insert(*valueTokens);
 								inputs->add(parameterValue);
 							}

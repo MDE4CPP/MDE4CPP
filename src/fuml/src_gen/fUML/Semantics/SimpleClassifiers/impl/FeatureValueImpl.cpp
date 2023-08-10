@@ -181,7 +181,7 @@ bool FeatureValueImpl::hasEqualValues(const std::shared_ptr<fUML::Semantics::Sim
         else
         {
         	std::shared_ptr<fUML::Semantics::SimpleClassifiers::FeatureValue> otherFeatureValues(fUML::Semantics::SimpleClassifiers::SimpleClassifiersFactory::eInstance()->createFeatureValue());
-        	std::shared_ptr<Bag<fUML::Semantics::Values::Value> > values = other->getValues();
+        	std::shared_ptr<Bag<fUML::Semantics::Values::Value>> values = other->getValues();
             for(unsigned int i = 0; i < values->size(); i++)
             {
             	std::shared_ptr<fUML::Semantics::Values::Value> value = values->at(i);

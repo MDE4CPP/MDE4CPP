@@ -180,7 +180,7 @@ std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> ExecutionI
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
-	std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue> > outputs(new Bag<fUML::Semantics::CommonBehavior::ParameterValue>());
+	std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> outputs(new Bag<fUML::Semantics::CommonBehavior::ParameterValue>());
 
 	const std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>>& outputParameterValueList = this->getParameterValues();
     for (const std::shared_ptr<fUML::Semantics::CommonBehavior::ParameterValue>& parameterValue : *outputParameterValueList)
@@ -204,7 +204,7 @@ std::shared_ptr<fUML::Semantics::CommonBehavior::ParameterValue> ExecutionImpl::
 	//generated from body annotation
 	std::shared_ptr<fUML::Semantics::CommonBehavior::ParameterValue> parameterValue = nullptr;
 
-	std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue> > list = this->getParameterValues();
+	std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> list = this->getParameterValues();
 	std::vector<std::shared_ptr<fUML::Semantics::CommonBehavior::ParameterValue>>::iterator it = std::find_if(list->begin(), list->end(), [parameter] (std::shared_ptr<fUML::Semantics::CommonBehavior::ParameterValue> p) { return p->getParameter() == parameter; } );
     if(it!= this->getParameterValues()->end() )
     {

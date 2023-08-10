@@ -228,7 +228,7 @@ std::shared_ptr<fUML::Semantics::CommonBehavior::Execution> CallOperationActionA
 				}
 				else
 				{
-					std::shared_ptr<Bag<fUML::Semantics::Activities::Token> > unofferedTokens = pa->getUnofferedTokens();
+					std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> unofferedTokens = pa->getUnofferedTokens();
 					if(nullptr == unofferedTokens)
 					{
 						std::cerr << "[getCallExecution] UnofferedTokens are null" << std::endl;

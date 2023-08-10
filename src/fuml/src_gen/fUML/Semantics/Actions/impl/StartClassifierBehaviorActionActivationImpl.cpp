@@ -149,7 +149,7 @@ void StartClassifierBehaviorActionActivationImpl::doAction()
 				std::shared_ptr<uml::Class> type=std::dynamic_pointer_cast<uml::Class> (object->getType());
 				if (type)
 				{
-					std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue> > parameterValueList(new Bag<fUML::Semantics::CommonBehavior::ParameterValue>());
+					std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> parameterValueList(new Bag<fUML::Semantics::CommonBehavior::ParameterValue>());
 
 					reference->startBehavior(type, parameterValueList);
 				}

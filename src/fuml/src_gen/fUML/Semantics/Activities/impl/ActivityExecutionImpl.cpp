@@ -177,7 +177,7 @@ void ActivityExecutionImpl::execute()
 
         DEBUG_MESSAGE(std::cout<<"[execute] Getting output parameter node activations..."<<std::endl;)
 
-        std::shared_ptr<Bag<fUML::Semantics::Activities::ActivityParameterNodeActivation> > outputActivationList = this->getActivationGroup()->getOutputParameterNodeActivations();
+        std::shared_ptr<Bag<fUML::Semantics::Activities::ActivityParameterNodeActivation>> outputActivationList = this->getActivationGroup()->getOutputParameterNodeActivations();
         for(const std::shared_ptr<fUML::Semantics::Activities::ActivityParameterNodeActivation>& outputActivation : *outputActivationList)
         {
             
