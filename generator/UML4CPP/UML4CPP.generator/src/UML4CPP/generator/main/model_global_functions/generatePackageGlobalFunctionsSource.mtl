@@ -17,9 +17,9 @@
 [aPackage.generatePackageGlobalFunctionsIncludeStatements()/]
 
 [let opaqueBehaviorsForGlobalFunctions : Set(OpaqueBehavior) = aPackage.collectOpaqueBehaviorsForGlobalFunctionsOfPackage()]
-[for (aNamespace : Namespace | opaqueBehaviorsForGlobalFunctions.namespace->asSet()->sortedBy(name)) separator('\n') after('\n')]
-	[for (anOpaqueBehavior : OpaqueBehavior | opaqueBehaviorsForGlobalFunctions->select(oB : OpaqueBehavior | oB.namespace = aNamespace))]
-[anOpaqueBehavior.generateCppType()/] [if (aNamespace.oclIsKindOf(Classifier))][aNamespace.oclAsType(Classifier).generateNamespaceName(true)/]::[elseif(aNamespace.oclIsKindOf(Package))][aNamespace.oclAsType(Package).generateNamespace(true)/]::[else]/*ERROR: Invalid namespace for OpaqueBehavior: [aNamespace.myNamespaceName()/]*/ [/if][anOpaqueBehavior.name/]([for (passedParameter : Parameter | anOpaqueBehavior.ownedParameter->select(p :Parameter | not (p.direction = ParameterDirectionKind::return))) separator (',')][passedParameter.generateCppType(true)/] [passedParameter.name/][/for])
+[for (aNamespace : Namespace | opaqueBehaviorsForGlobalFunctions.getNextParentElementWithDefinedNamespaceProperty()->asSet()->sortedBy(name)) separator('\n') after('\n')]
+	[for (anOpaqueBehavior : OpaqueBehavior | opaqueBehaviorsForGlobalFunctions->select(oB : OpaqueBehavior | oB.getNextParentElementWithDefinedNamespaceProperty() = aNamespace))]
+[anOpaqueBehavior.generateCppType()/] [if (aNamespace.oclIsKindOf(Classifier))][aNamespace.oclAsType(Classifier).generateNamespaceName(true)/]::[elseif(aNamespace.oclIsKindOf(Package))][aNamespace.oclAsType(Package).generateNamespace(true)/]::[elseif(aNamespace.isOwnedByStateMachine())][aNamespace.qualifiedName/]::[if(aNamespace.oclIsKindOf(State))][anOpaqueBehavior.getStateBehaviorType()/]_[/if][else]/*ERROR: Invalid namespace for OpaqueBehavior: [aNamespace.myNamespaceName()/]*/ [/if][anOpaqueBehavior.name/]([for (passedParameter : Parameter | anOpaqueBehavior.ownedParameter->select(p :Parameter | not (p.direction = ParameterDirectionKind::return))) separator (',')][passedParameter.generateCppType(true)/] [passedParameter.name/][/for])
 {
 		[if (anOpaqueBehavior.ownedParameter->select(p : Parameter | p.direction = ParameterDirectionKind::return)->notEmpty())]
 		[let returnParameter : Parameter = anOpaqueBehavior.ownedParameter->select(p : Parameter | p.direction = ParameterDirectionKind::return)->first()]
@@ -37,6 +37,7 @@
 }
 	[/for]
 [/for]
+[/let]
 
 std::shared_ptr<Any> [aPackage.generateNamespace(true)/]::invoke(const std::shared_ptr<uml::OpaqueBehavior>& _opaqueBehavior, const std::shared_ptr<Bag<Any>>& inputArguments, const std::shared_ptr<Bag<Any>>& outputArguments)
 {
@@ -142,7 +143,7 @@ std::shared_ptr<Any> [aPackage.generateNamespace(true)/]::invoke(const std::shar
 			[comment anOpaqueBehavior has a return parameter /]
 			[if(not returnParameterList->isEmpty() and not returnParameterList->first().oclIsInvalid())]
 			[let returnParameter : Parameter = returnParameterList->first()]
-			[returnParameter.generateCppType(false)/] [returnParameter.name/] = [if (anOpaqueBehavior.namespace.oclIsKindOf(Classifier))][anOpaqueBehavior.namespace.oclAsType(Classifier).generateNamespaceName(true)/]::[elseif(anOpaqueBehavior.namespace.oclIsKindOf(Package))][anOpaqueBehavior.namespace.oclAsType(Package).generateNamespace(true)/]::[else]/*ERROR: Invalid namespace for OpaqueBehavior: [anOpaqueBehavior.namespace.myNamespaceName()/]*/ [/if][anOpaqueBehavior.name/]([for (inputParameter : Parameter | anOpaqueBehavior.ownedParameter->select(direction = ParameterDirectionKind::_in or direction = ParameterDirectionKind::inout)) separator (', ')][inputParameter.name/][/for]);
+			[returnParameter.generateCppType(false)/] [returnParameter.name/] = [if (anOpaqueBehavior.getNextParentElementWithDefinedNamespaceProperty().oclIsKindOf(Classifier))][anOpaqueBehavior.getNextParentElementWithDefinedNamespaceProperty().oclAsType(Classifier).generateNamespaceName(true)/]::[elseif(anOpaqueBehavior.getNextParentElementWithDefinedNamespaceProperty().oclIsKindOf(Package))][anOpaqueBehavior.getNextParentElementWithDefinedNamespaceProperty().oclAsType(Package).generateNamespace(true)/]::[elseif(anOpaqueBehavior.isOwnedByStateMachine())][anOpaqueBehavior.getNextParentElementWithDefinedNamespaceProperty().qualifiedName/]::[if(anOpaqueBehavior.getNextParentElementWithDefinedNamespaceProperty().oclIsKindOf(State))][anOpaqueBehavior.getStateBehaviorType()/]_[/if][else]/*ERROR: Invalid namespace for OpaqueBehavior: [anOpaqueBehavior.namespace.myNamespaceName()/]*/ [/if][anOpaqueBehavior.name/]([for (inputParameter : Parameter | anOpaqueBehavior.ownedParameter->select(direction = ParameterDirectionKind::_in or direction = ParameterDirectionKind::inout)) separator (', ')][inputParameter.name/][/for]);
 				[comment returnParameter has no type, i.e. is of any type, ergo can be passed right away /]
 				[if (returnParameter.type.oclIsUndefined())]
 			std::shared_ptr<Any> returnArgument = [returnParameter.name/];
@@ -156,7 +157,7 @@ std::shared_ptr<Any> [aPackage.generateNamespace(true)/]::invoke(const std::shar
 			[/let]
 			[comment anOpaqueBehavior has no return parameter /]
 			[else]
-		[if (anOpaqueBehavior.namespace.oclIsKindOf(Classifier))][anOpaqueBehavior.namespace.oclAsType(Classifier).generateNamespaceName(true)/]::[elseif(anOpaqueBehavior.namespace.oclIsKindOf(Package))][anOpaqueBehavior.namespace.oclAsType(Package).generateNamespace(true)/]::[else]/*ERROR: Invalid namespace for OpaqueBehavior: [anOpaqueBehavior.namespace.myNamespaceName()/]*/ [/if][anOpaqueBehavior.name/]([for (inputParameter : Parameter | anOpaqueBehavior.ownedParameter->select(not (direction = ParameterDirectionKind::return))) separator (', ')][inputParameter.name/][/for]);
+			[if (anOpaqueBehavior.getNextParentElementWithDefinedNamespaceProperty().oclIsKindOf(Classifier))][anOpaqueBehavior.getNextParentElementWithDefinedNamespaceProperty().oclAsType(Classifier).generateNamespaceName(true)/]::[elseif(anOpaqueBehavior.getNextParentElementWithDefinedNamespaceProperty().oclIsKindOf(Package))][anOpaqueBehavior.getNextParentElementWithDefinedNamespaceProperty().oclAsType(Package).generateNamespace(true)/]::[elseif(anOpaqueBehavior.isOwnedByStateMachine())][anOpaqueBehavior.getNextParentElementWithDefinedNamespaceProperty().qualifiedName/]::[if(anOpaqueBehavior.getNextParentElementWithDefinedNamespaceProperty().oclIsKindOf(State))][anOpaqueBehavior.getStateBehaviorType()/]_[/if][else]/*ERROR: Invalid namespace for OpaqueBehavior: [anOpaqueBehavior.namespace.myNamespaceName()/]*/ [/if][anOpaqueBehavior.name/]([for (inputParameter : Parameter | anOpaqueBehavior.ownedParameter->select(not (direction = ParameterDirectionKind::return))) separator (', ')][inputParameter.name/][/for]);
 			std::shared_ptr<Any> returnArgument = eAny(nullptr, -1, false);
 			[/if]
 		[/let]
@@ -194,7 +195,6 @@ std::shared_ptr<Any> [aPackage.generateNamespace(true)/]::invoke(const std::shar
 [/if]
 	return nullptr;
 }
-[/let]
 [/file]
 [/template]
 

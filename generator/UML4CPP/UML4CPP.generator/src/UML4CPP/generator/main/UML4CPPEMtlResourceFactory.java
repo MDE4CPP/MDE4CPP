@@ -85,6 +85,7 @@ public class UML4CPPEMtlResourceFactory extends EMtlResourceFactoryImpl {
 		initializeModelPluginEmtls(resourcePathPrefix);
 		initializeProfilesEmtls(resourcePathPrefix);
 		initializePscsEmtls(resourcePathPrefix);
+		initializePssmEmtls(resourcePathPrefix);
 		initializeSignalsEmtls(resourcePathPrefix);
 		initializeValidationEmtls(resourcePathPrefix);
 	}
@@ -260,6 +261,13 @@ public class UML4CPPEMtlResourceFactory extends EMtlResourceFactoryImpl {
         						"generateDestruction"
         						};
         generateFilePathMapData(moduleNames, "pscs", resourcePathPrefix);
+    }
+    
+    private void initializePssmEmtls(String resourcePathPrefix)
+    {
+    	String[] moduleNames = {"generateStateMachine"
+    							};
+    	generateFilePathMapData(moduleNames, "pssm", resourcePathPrefix);
     }
 
 	private void initializeSignalsEmtls(String resourcePathPrefix)

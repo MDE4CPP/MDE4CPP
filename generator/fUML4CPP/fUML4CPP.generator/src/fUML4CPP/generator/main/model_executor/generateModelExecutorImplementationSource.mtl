@@ -77,7 +77,7 @@ originalName : String = aPackage.generateNamespacePath(false);
 [for (anIncludeString : String | 	
 	aPackage.getBehaviorsOwnedByPackage()
 	->filter(OpaqueBehavior)
-	->reject(oB : OpaqueBehavior | (not oB._context.oclIsUndefined()) and oB._context.oclIsTypeOf(Class))
+	->reject(oB : OpaqueBehavior | (not oB._context.oclIsUndefined()) and oB._context.oclIsTypeOf(Class) and not oB.isOwnedByStateMachine())
 	->reject(oB : OpaqueBehavior | oB.hasStereotypeApplied(QN_STEREOTYPE_MAINBEHAVIOR()))
 	->reject(oB : OpaqueBehavior | oB.isDoNotGenerateElement())
 	->select(oB : OpaqueBehavior | oB.specification.oclIsUndefined())
@@ -348,9 +348,10 @@ std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> [packageNa
 			[comment 
 				Else if the OpaqueBehavior has no specification (i.e. it does not implement any Operation)
 				but it has a defined context and this context is a class,
+				PSSM: and it is not owned by a StateMachine,
 				then execute this Behavior on the corresponding context object
 			/]
-			[elseif ((not anOpaqueBehavior._context.oclIsUndefined()) and anOpaqueBehavior._context.oclIsTypeOf(Class))]
+			[elseif ((not anOpaqueBehavior._context.oclIsUndefined()) and anOpaqueBehavior._context.oclIsTypeOf(Class) and (not anOpaqueBehavior.isOwnedByStateMachine()))]
 				// OpaqueBehavior [anOpaqueBehavior.generateNamespaceName(true)/] has Class [anOpaqueBehavior._context.generateNamespaceName(true)/] as its context
 				if(!context)
 				{

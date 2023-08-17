@@ -56,9 +56,10 @@
 
 [** 
  * Get all OpaqueBehaviors where aClass is the context but they do not have a specification (i.e. do not implement any Operation)
+ * PSSM: and are not owned by a State
  * These are treated as normal C++ methods
 */]
-[query public collectOpaqueBehaviorsContexedByClass(aClass : Class) : Set(OpaqueBehavior) = aClass.allOwnedElements()->filter(OpaqueBehavior)->reject(isDoNotGenerateElement())->select(_context = aClass)->select(specification.oclIsUndefined()) /]
+[query public collectOpaqueBehaviorsContexedByClass(aClass : Class) : Set(OpaqueBehavior) = aClass.allOwnedElements()->filter(OpaqueBehavior)->reject(isDoNotGenerateElement())->select(_context = aClass)->select(specification.oclIsUndefined())->reject(isOwnedByStateMachine()) /]
 
 [** 
  * Get all Interfaces (direct or indirect) that are realized by aClass
@@ -187,9 +188,22 @@ static const unsigned long [aClass.name.toUpperCase()/]_ATTRIBUTE_[compositeOwne
 //[anOperation.generateQualifiedNameWithSignature()/]
 static const unsigned long [anOperation.getMemberName().toUpperCase()/] = [anOperation.generateQualifiedNameWithSignature().generatePolynomialRollingHash()/];
 [/for]
-[comment  Behaviors of aClass/]
+[comment  Behaviors of aClass / an owned StateMachine/]
 [for (aBehavior : Behavior | aClass.ownedBehavior) before('//Behaviors\n')]
+	[if(aBehavior.oclIsKindOf(StateMachine))]
+	[aBehavior.oclAsType(StateMachine).generateStaticPackageIDsForStateMachine()/]
+	[else]
 	[aBehavior.generateStaticPackageIDsForClass()/]
+	[/if]
+[/for]
+[/template]
+
+[**
+ * As State Behaviors are not owned by a Class, they have to be fetched seperately
+*/]
+[template private generateStaticPackageIDsForStateMachine(aStateMachine : StateMachine)]
+[for (aStateMachineBehavior : Behavior | aStateMachine.allOwnedElements()->filter(Behavior)->asSet())]
+	[aStateMachineBehavior.generateStaticPackageIDsForClass()/]
 [/for]
 [/template]
 

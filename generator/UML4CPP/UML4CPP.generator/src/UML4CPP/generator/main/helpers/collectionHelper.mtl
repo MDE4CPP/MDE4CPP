@@ -223,4 +223,14 @@
 	->reject(oB : OpaqueBehavior | oB.hasStereotypeApplied(QN_STEREOTYPE_MAINBEHAVIOR()))
 	->reject(oB : OpaqueBehavior | oB.isDoNotGenerateElement())
 	->select(oB : OpaqueBehavior | oB.specification.oclIsUndefined())
+	->union(aPackage.allOwnedElements()->filter(StateMachine).collectOpaqueBehaviorsOwnedByStateMachine()->asSet())
+/]
+
+[**
+ * PSSM: query to collect all OpaqueBehaviors belonging to aStateMachine.
+ * These will be treated as global functions of the generated StateMachine
+*/]
+[query public collectOpaqueBehaviorsOwnedByStateMachine(aStateMachine : StateMachine) : Set(OpaqueBehavior) =
+	aStateMachine.allOwnedElements()
+	->filter(OpaqueBehavior)
 /]

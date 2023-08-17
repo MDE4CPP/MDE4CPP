@@ -76,6 +76,8 @@ namespace PrimitiveTypes
 			void createPackageSignals(std::shared_ptr<uml::Package> primitiveTypes, std::shared_ptr<uml::umlFactory> factory);
 			void createPackageStereotypes(std::shared_ptr<uml::Package> primitiveTypes, std::shared_ptr<uml::umlFactory> factory);
 			void createPackageValueSpecifications(std::shared_ptr<uml::Package> primitiveTypes, std::shared_ptr<uml::umlFactory> factory);
+			//PSSM
+			void createPackageStateMachines(std::shared_ptr<uml::Package> primitiveTypes, std::shared_ptr<uml::umlFactory> factory);
 
 			void initializePackageActivities();
 			void initializePackageClasses();
@@ -90,6 +92,8 @@ namespace PrimitiveTypes
 			void initializePackageSignals();
 			void initializePackageStereotypes();
 			void initializePackageValueSpecifications();
+			//PSSM
+			void initializePackageStateMachines();
 	};
 }
 #endif /* end of include guard: PRIMITIVETYPES_METAMODELPACKAGEIMPL_HPP */

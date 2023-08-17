@@ -50,10 +50,10 @@ namespace [aPackage.generateNamespace(true)/]
 	std::shared_ptr<Any> invoke(const std::shared_ptr<uml::OpaqueBehavior>&, const std::shared_ptr<Bag<Any>>&, const std::shared_ptr<Bag<Any>>&);
 }
 
-[for (aNamespace : Namespace | opaqueBehaviorsForGlobalFunctionsOfPackage.namespace->asSet()->sortedBy(name)) separator('\n') after('\n')]
-namespace [if (aNamespace.oclIsKindOf(Classifier))][aNamespace.oclAsType(Classifier).generateNamespaceName(true)/][elseif(aNamespace.oclIsKindOf(Package))][aNamespace.oclAsType(Package).generateNamespace(true)/][else]/*ERROR: Invalid namespace for OpaqueBehavior: [aNamespace.myNamespaceName()/]*/[/if]
+[for (aNamespace : Namespace | opaqueBehaviorsForGlobalFunctionsOfPackage.getNextParentElementWithDefinedNamespaceProperty()->asSet()->sortedBy(name)) separator('\n') after('\n')]
+namespace [if (aNamespace.oclIsKindOf(Classifier))][aNamespace.oclAsType(Classifier).generateNamespaceName(true)/][elseif(aNamespace.oclIsKindOf(Package))][aNamespace.oclAsType(Package).generateNamespace(true)/][elseif(aNamespace.isOwnedByStateMachine())][aNamespace.qualifiedName/][else]/*ERROR: Invalid namespace for OpaqueBehavior: [aNamespace.myNamespaceName()/]*/[/if]
 {
-	[for (anOpaqueBehavior : OpaqueBehavior | opaqueBehaviorsForGlobalFunctionsOfPackage->select(oB : OpaqueBehavior | oB.namespace = aNamespace))]
+	[for (anOpaqueBehavior : OpaqueBehavior | opaqueBehaviorsForGlobalFunctionsOfPackage->select(oB : OpaqueBehavior | oB.getNextParentElementWithDefinedNamespaceProperty() = aNamespace))]
 	[anOpaqueBehavior.generateMethodDeclaration()/]
 	[/for]
 }
@@ -68,7 +68,7 @@ namespace [if (aNamespace.oclIsKindOf(Classifier))][aNamespace.oclAsType(Classif
 		isFunctionBehavior : Boolean = anOpaqueBehavior.oclIsKindOf(FunctionBehavior);
 	}
 ]
-[anOpaqueBehavior.generateCppType()/] [anOpaqueBehavior.name/]([for (passedParameter : Parameter | anOpaqueBehavior.ownedParameter->select(aParameter : Parameter | not (aParameter.direction = ParameterDirectionKind::return))) separator (', ')][if(isFunctionBehavior)]const [/if][passedParameter.generateCppType(true)/] [passedParameter.name/][if (passedParameter.default->notEmpty())] = [passedParameter.genDefault()/][/if][/for]);
+[anOpaqueBehavior.generateCppType()/] [if(anOpaqueBehavior.owner.oclIsKindOf(State))][anOpaqueBehavior.getStateBehaviorType()/]_[/if][anOpaqueBehavior.name/]([for (passedParameter : Parameter | anOpaqueBehavior.ownedParameter->select(aParameter : Parameter | not (aParameter.direction = ParameterDirectionKind::return))) separator (', ')][if(isFunctionBehavior)]const [/if][passedParameter.generateCppType(true)/] [passedParameter.name/][if (passedParameter.default->notEmpty())] = [passedParameter.genDefault()/][/if][/for]);
 [/template]
 
 [query private includes(opaqueBehaviorsList : Set(OpaqueBehavior)) : Set(Type) =

@@ -368,7 +368,8 @@ void [className/]::destroy()
 [aOperation.generateOperationImplementation()/]
 [/for]
 [comment OpaqueBehaviors directly or indirectly owned by aClass that have no defined specification
-(i.e. they do not define the method for any Operation) are treated as normal C++ methods/]
+(i.e. they do not define the method for any Operation) are treated as normal C++ methods.
+PSSM: OpaqueBehaviors owned by a State are not included in aClass./]
 [for (anOpaqueBehavior : OpaqueBehavior | aClass.collectOpaqueBehaviorsContexedByClass()->sortedBy(name)) separator('\n') after('\n')]
 [anOpaqueBehavior.generateOpaqueBehaviorImplementation()/]
 [/for]

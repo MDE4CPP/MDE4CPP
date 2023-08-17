@@ -18,6 +18,8 @@
 
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "uml/VisibilityKind.hpp"
+//PSSM
+#include "uml/PseudostateKind.hpp"
 //meta meta model factory
 #include "uml/umlFactory.hpp"
 #include "ecore/ecorePackage.hpp"
@@ -113,6 +115,8 @@ void EcorePackageImpl::createPackageContents(std::shared_ptr<uml::Package> ecore
 	createPackagePrimitiveTypes(ecore, factory);
 	createPackageSignals(ecore, factory);
 	createPackageStereotypes(ecore, factory);
+	//PSSM
+	createPackageStateMachines(ecore, factory);
 }
 
 void EcorePackageImpl::createPackageActivities(std::shared_ptr<uml::Package> ecore, std::shared_ptr<uml::umlFactory> factory)
@@ -1155,6 +1159,13 @@ void EcorePackageImpl::createPackageValueSpecifications(std::shared_ptr<uml::Pac
 	
 }
 
+//PSSM
+void EcorePackageImpl::createPackageStateMachines(std::shared_ptr<uml::Package> ecore, std::shared_ptr<uml::umlFactory> factory)
+{
+}
+
+
+
 void EcorePackageImpl::initializePackageContents(std::shared_ptr<uml::Package> ecore)
 {
 	if (isInitialized)
@@ -1181,6 +1192,8 @@ void EcorePackageImpl::initializePackageContents(std::shared_ptr<uml::Package> e
 	initializePackageStereotypes();
 	initializePackageValueSpecifications();
 	
+	//PSSM
+	initializePackageStateMachines();
 }
 
 //ActivityNodes and Edges
@@ -4875,5 +4888,11 @@ const std::shared_ptr<uml::Property>& EcorePackageImpl::get_Ecore_ETypedElement_
 }
 
 
+
+
+// PSSM
+void EcorePackageImpl::initializePackageStateMachines()
+{
+}
 
 

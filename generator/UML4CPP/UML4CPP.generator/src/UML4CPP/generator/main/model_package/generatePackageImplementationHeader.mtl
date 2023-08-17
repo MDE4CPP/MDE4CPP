@@ -105,6 +105,11 @@ namespace [subPackage.generateNamespace(false)/]
 			void createPackageSignals(std::shared_ptr<uml::Package> [aPackage.memberName()/], std::shared_ptr<uml::umlFactory> factory);
 			void createPackageStereotypes(std::shared_ptr<uml::Package> [aPackage.memberName()/], std::shared_ptr<uml::umlFactory> factory);
 			void createPackageValueSpecifications(std::shared_ptr<uml::Package> [aPackage.memberName()/], std::shared_ptr<uml::umlFactory> factory);
+			//PSSM
+			void createPackageStateMachines(std::shared_ptr<uml::Package> [aPackage.memberName()/], std::shared_ptr<uml::umlFactory> factory);
+[for (aStateMachine : StateMachine | (aPackage.getElementsBelongingToPackage()->filter(StateMachine)->sortedBy(myQualifiedName())))]
+			void createStateMachine_[aStateMachine.memberName()/](std::shared_ptr<uml::Package> [aPackage.memberName()/], std::shared_ptr<uml::umlFactory> factory);
+[/for]
 
 			void initializePackageActivities();
 [for (anActivity : Activity | (aPackage.allOwnedElements()->filter(Activity)->sortedBy(myQualifiedName())))]
@@ -122,6 +127,11 @@ namespace [subPackage.generateNamespace(false)/]
 			void initializePackageSignals();
 			void initializePackageStereotypes();
 			void initializePackageValueSpecifications();
+			//PSSM
+			void initializePackageStateMachines();
+[for (aStateMachine : StateMachine | (aPackage.getElementsBelongingToPackage()->filter(StateMachine)->sortedBy(myQualifiedName())))]
+			void initializeStateMachine_[aStateMachine.memberName()/]();
+[/for]
 	};
 [if (not aPackage.isIgnoreNamespace())]}[/if]
 [endGuard(aPackage,'MetaModelPackageImpl')/]

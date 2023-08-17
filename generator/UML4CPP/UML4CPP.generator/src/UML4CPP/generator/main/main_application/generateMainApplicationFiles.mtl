@@ -39,7 +39,7 @@
 	[elseif (mainBehavior.oclIsKindOf(Activity))]
 		[aPackage.generateMainApplicationSourceFromActivity()/]
 	[elseif (mainBehavior.oclIsKindOf(StateMachine))]
-		[comment To be implemented in the future /]
+		[aPackage.generateMainApplicationSourceFromStateMachine()/]
 	[elseif (mainBehavior.oclIsKindOf(Interaction))]
 		[comment To be implemented in the future /]
 	[/if]

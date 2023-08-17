@@ -419,6 +419,12 @@ public class ValidationService
 					//TODO implement
 					break;
 				}
+				//PSSM
+				case UMLPackage.STATE_MACHINE:
+				{
+					//TODO implement
+					break;
+				}
 				
 				default:
 					throw new IllegalArgumentException("Unexpected value: " + behavior.eClass().getClassifierID());

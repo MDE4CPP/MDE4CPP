@@ -39,6 +39,8 @@
 [import UML4CPP::generator::main::components::generateStereotype /]
 [import UML4CPP::generator::main::components::generateType /]
 [import UML4CPP::generator::main::components::generateValueSpecification /]
+[comment PSSM/]
+[import UML4CPP::generator::main::pssm::generateStateMachine /]
 [import UML4CPP::generator::main::helpers::collectionHelper /]
 [import UML4CPP::generator::main::helpers::generalHelper /]
 [import UML4CPP::generator::main::helpers::keywords /]
@@ -46,6 +48,8 @@
 [import UML4CPP::generator::main::profiles::uml4CPPProfileHelper /]
 [import UML4CPP::generator::main::helpers::isGeneratableHelper /]
 [import UML4CPP::generator::main::helpers::singletonHelper /]
+
+[import UML4CPP::generator::main::components::generateParameter /]
 
 
 [query public getAllAppliedStereotypes(aPackage : Package) : Set(Stereotype) = OrderedSet{
@@ -100,6 +104,8 @@
 
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "uml/VisibilityKind.hpp"
+//PSSM
+#include "uml/PseudostateKind.hpp"
 //meta meta model factory
 #include "[aPackage.eClass().ePackage.name/]/[aPackage.eClass().ePackage.name.concat('Factory')/].hpp"
 [if ((aPackage.name = 'Ecore') or (aPackage.name = 'UML') )]
@@ -211,6 +217,8 @@ void [packageName/]::createPackageContents(std::shared_ptr<uml::Package> [aPacka
 	createPackagePrimitiveTypes([aPackage.memberName()/], factory);
 	createPackageSignals([aPackage.memberName()/], factory);
 	createPackageStereotypes([aPackage.memberName()/], factory);
+	//PSSM
+	createPackageStateMachines([aPackage.memberName()/], factory);
 }
 
 void [packageName/]::createPackageActivities(std::shared_ptr<uml::Package> [aPackage.memberName()/], std::shared_ptr<uml::umlFactory> factory)
@@ -392,6 +400,68 @@ void [packageName/]::createPackageValueSpecifications(std::shared_ptr<uml::Packa
 [/for]
 }
 
+//PSSM
+[comment Create all State Machines in Package/]
+void [packageName/]::createPackageStateMachines(std::shared_ptr<uml::Package> [aPackage.memberName()/], std::shared_ptr<uml::umlFactory> factory)
+{
+[for (aStateMachine : StateMachine | (aPackage.getElementsBelongingToPackage()->filter(StateMachine)->sortedBy(myQualifiedName())))]
+	createStateMachine_[aStateMachine.memberName()/]([aPackage.memberName()/], factory);
+[/for]
+}
+
+[comment Create a single StateMachine/]
+[for (aStateMachine : StateMachine | (aPackage.getElementsBelongingToPackage()->filter(StateMachine)->sortedBy(myQualifiedName())))]
+void [packageName/]::createStateMachine_[aStateMachine.memberName()/](std::shared_ptr<uml::Package> [aPackage.memberName()/], std::shared_ptr<uml::umlFactory> factory)
+{
+	[aStateMachine.generateStateMachineCreation()/]
+
+	// create Regions
+	[for (aRegion : Region | (aStateMachine.region->sortedBy(myQualifiedName())))]
+	// create Region [aRegion.name/]
+	[aRegion.memberName()/] = factory->create[aRegion.eClass().name/]_as_region_in_StateMachine([aStateMachine.memberName()/]);
+		// create States
+			[for (aState : State | (aRegion.allOwnedElements()->filter(State)->sortedBy(myQualifiedName())))]
+			// create [aState.name/] in Region [aRegion.name/]
+			[aState.memberName()/] = factory->create[aState.eClass().name/]_as_subvertex_in_Region([aRegion.memberName()/]);
+			[if (not aState.oclIsKindOf(FinalState))]
+				[if (not aState.entry.oclIsUndefined())]
+				// create Entry Behavior of State [aState.name/]
+				[aState.entry.memberName()/] = factory->create[aState.entry.eClass().name/]_as_entry_in_State([aState.memberName()/]);
+				[/if]
+				[if (not aState.doActivity.oclIsUndefined())]
+				// create doActivity Behavior of State [aState.name/]
+				[aState.doActivity.memberName()/] = factory->create[aState.doActivity.eClass().name/]_as_doActivity_in_State([aState.memberName()/]);
+				[/if]
+				[if (not aState.exit.oclIsUndefined())]
+				// create Exit Behavior of State [aState.name/]
+				[aState.exit.memberName()/] = factory->create[aState.exit.eClass().name/]_as_exit_in_State([aState.memberName()/]);
+				[/if]
+			[/if]
+	
+			[/for]
+		
+		// create Pseudostates
+			[for (aPseudostate : Pseudostate | (aRegion.allOwnedElements()->filter(Pseudostate)->sortedBy(myQualifiedName())))]
+			// create Pseudostate [aPseudostate.name/] of Kind [aPseudostate.kind/]
+			[comment if (aPseudostate.kind = PseudostateKind::initial)/]
+			[aPseudostate.memberName()/] = factory->createPseudostate_as_subvertex_in_Region([aRegion.memberName()/]);
+	
+			[/for]
+
+		// create Transitions
+			[for (aTransition : Transition | (aRegion.allOwnedElements()->filter(Transition)->sortedBy(myQualifiedName())))]
+			// create Transition [aTransition.name/]
+			[aTransition.memberName()/] = factory->createTransition_as_transition_in_Region([aRegion.memberName()/]);
+	
+			[/for]
+		
+
+	[/for]
+}
+
+[/for]
+
+
 void [packageName/]::initializePackageContents(std::shared_ptr<uml::Package> [aPackage.memberName()/])
 {
 	if (isInitialized)
@@ -421,6 +491,8 @@ void [packageName/]::initializePackageContents(std::shared_ptr<uml::Package> [aP
 	initializePackageStereotypes();
 	initializePackageValueSpecifications();
 	[if (not aPackage.oclIsKindOf(Profile))][aPackage.generateStereotypeApplication()/][/if]
+	//PSSM
+	initializePackageStateMachines();
 }
 
 //ActivityNodes and Edges
@@ -627,6 +699,71 @@ void [packageName/]::initializePackageValueSpecifications()
 
 [for (subPackage : Package | aPackage.nestedPackage->sortedBy(name))]
 [subPackage.generateSubPackageGetterImpl(aPackage)/]
+[/for]
+
+[comment Initialize all State Machines in aPackage/]
+// PSSM
+void [packageName/]::initializePackageStateMachines()
+{
+[for (aStateMachine : StateMachine | (aPackage.getElementsBelongingToPackage()->filter(StateMachine)->sortedBy(myQualifiedName())))]
+	initializeStateMachine_[aStateMachine.memberName()/]();
+[/for]
+}
+
+[for (aStateMachine : StateMachine | (aPackage.getElementsBelongingToPackage()->filter(StateMachine)->sortedBy(myQualifiedName())))]
+[comment Initialize a single StateMachine/]
+void [packageName/]::initializeStateMachine_[aStateMachine.memberName()/]()
+{
+	[aStateMachine.generateStateMachineInitialization()/]
+
+	// initialize Regions
+	[for (aRegion : Region | (aStateMachine.region->sortedBy(myQualifiedName())))]
+	// initialize Region [aRegion.name/]
+	[aRegion.memberName()/]->setName("[aRegion.name/]");
+		// initialize States
+			[for (aState : State | (aRegion.allOwnedElements()->filter(State)->sortedBy(myQualifiedName())))]
+			// initialize [aState.name/] in Region [aRegion.name/]
+			[aState.memberName()/]->setName("[aState.name/]");
+			[if (not aState.oclIsKindOf(FinalState))]
+				// initialize Entry Behavior of State [aState.name/]
+				[if (not aState.entry.oclIsUndefined())]
+				[aState.entry.memberName()/]->setName("[aState.entry.name/]");
+				[aState.entry.memberName()/]->_setID([aState.entry.getMemberName().toUpperCase()/]);
+				[/if]
+				// initialize doActivity Behavior of State [aState.name/]
+				[if (not aState.doActivity.oclIsUndefined())]
+				[aState.doActivity.memberName()/]->setName("[aState.doActivity.name/]");
+				[/if]
+				// initialize Exit Behavior of State [aState.name/]
+				[if (not aState.exit.oclIsUndefined())]
+				[aState.exit.memberName()/]->setName("[aState.exit.name/]");
+				[/if]
+			[/if]
+	
+			[/for]
+		
+		// initialize Pseudostates
+			[for (aPseudostate : Pseudostate | (aRegion.allOwnedElements()->filter(Pseudostate)->sortedBy(myQualifiedName())))]
+			// initialize Pseudostate [aPseudostate.name/] of Kind [aPseudostate.kind/]
+			[comment if (aPseudostate.kind = PseudostateKind::initial)/]
+			[aPseudostate.memberName()/]->setName("[aPseudostate.memberName()/]");
+			[aPseudostate.memberName()/]->setKind(uml::PseudostateKind::[aPseudostate.kind.toString().toUpper()/]);
+	
+			[/for]
+
+		// initialize Transitions
+			[for (aTransition : Transition | (aRegion.allOwnedElements()->filter(Transition)->sortedBy(myQualifiedName())))]
+			// initialize Transition [aTransition.name/]
+			[aTransition.memberName()/]->setName("[aTransition.memberName()/]");
+			[aTransition.memberName()/]->setSource([aTransition.source.memberName()/]);
+			[aTransition.memberName()/]->setTarget([aTransition.target.memberName()/]);
+	
+			[/for]
+		
+
+	[/for]
+}
+
 [/for]
 
 [/file]

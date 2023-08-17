@@ -234,3 +234,17 @@ types::typesPackage::[aClassifier.name.toUpperCase()/]_CLASS
  * check if type is primitive type
 */]
 [query public isPrimitive(type : Type) : Boolean = (not type.oclIsUndefined()) and ((type.name = 'Integer') or (type.name = 'Boolean') or (type.name = 'String') or (type.name = 'Real') or (type.name = 'EInt') or (type.name = 'EBoolean') or (type.name = 'EString') or (type.name = 'EDouble')  or (type.name = 'EFloat') or (type.name = 'UnlimitedNatural'))/]
+
+
+
+[**
+ * PSSM: check if an element is directly or indirectly owned by a StateMachine
+*/]
+[query public isOwnedByStateMachine(anElement : Element) : Boolean = 
+if anElement.owner.oclIsUndefined() then false
+else
+	if anElement.owner.oclIsKindOf(StateMachine) then true
+	else anElement.owner.isOwnedByStateMachine()
+	endif
+endif
+/]
