@@ -149,13 +149,13 @@ if((std::dynamic_pointer_cast<uml::CallEvent>(replyToCall->getEvent()) != nullpt
 	std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> parameterValues(new Bag<fUML::Semantics::CommonBehavior::ParameterValue>());
 	unsigned int i = 1;
 
-	while(i <= replyValuePins->size()){
+	for(const std::shared_ptr<uml::InputPin>& replyValuePin : *replyValuePins){
 		std::shared_ptr<fUML::Semantics::CommonBehavior::ParameterValue> parameterValue = fUML::Semantics::CommonBehavior::CommonBehaviorFactory::eInstance()->createParameterValue();
-		std::shared_ptr<Bag<fUML::Semantics::Values::Value>> currentValues = this->takeTokens(replyValuePins->at(i-1)); 
+		std::shared_ptr<Bag<fUML::Semantics::Values::Value>> currentValues = this->takeTokens(replyValuePin); 
 		
-		for(unsigned int j = 0; j < currentValues->size(); j++)
+		for(const std::shared_ptr<fUML::Semantics::Values::Value>& currentValue : *currentValues)
 		{
-			parameterValue->getValues()->add(currentValues->at(j));
+			parameterValue->getValues()->add(currentValue);
 		}
 		parameterValues->add(parameterValue);
 		i += 1;

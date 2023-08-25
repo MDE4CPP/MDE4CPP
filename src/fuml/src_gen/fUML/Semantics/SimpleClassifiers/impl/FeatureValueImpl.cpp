@@ -142,11 +142,9 @@ newValue->setFeature(this->getFeature());
 newValue->setPosition(this->getPosition());
 
 const std::shared_ptr<Bag<fUML::Semantics::Values::Value>>& values = this->getValues();
-unsigned int valuesSize = values->size();
 
-for(unsigned int i = 0; i < valuesSize; i++)
+for(const std::shared_ptr<fUML::Semantics::Values::Value>& value : *values)
 {
-	std::shared_ptr<fUML::Semantics::Values::Value> value = values->at(i);
 	newValue->getValues()->add(value->_copy());
 }
 
@@ -182,9 +180,8 @@ bool FeatureValueImpl::hasEqualValues(const std::shared_ptr<fUML::Semantics::Sim
         {
         	std::shared_ptr<fUML::Semantics::SimpleClassifiers::FeatureValue> otherFeatureValues(fUML::Semantics::SimpleClassifiers::SimpleClassifiersFactory::eInstance()->createFeatureValue());
         	const std::shared_ptr<Bag<fUML::Semantics::Values::Value>>& values = other->getValues();
-            for(unsigned int i = 0; i < values->size(); i++)
+            for(const std::shared_ptr<fUML::Semantics::Values::Value>& value : *values)
             {
-            	std::shared_ptr<fUML::Semantics::Values::Value> value = values->at(i);
                 otherFeatureValues->getValues()->push_back(value);
             }
 

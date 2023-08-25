@@ -186,10 +186,8 @@ std::shared_ptr<Bag<fUML::Semantics::SimpleClassifiers::FeatureValue>> LinkImpl:
 		// Return all feature values for the given end of links in the given
 	// extent whose other ends match this link.
 	std::shared_ptr<Bag<fUML::Semantics::SimpleClassifiers::FeatureValue>> featureValues(new Bag<fUML::Semantics::SimpleClassifiers::FeatureValue>());
-	unsigned int extentSize = extent->size();
-	for(unsigned int i = 0; i < extentSize; i++)
+	for(const std::shared_ptr<fUML::Semantics::StructuredClassifiers::ExtensionalValue>& link : *extent)
 	{
-		std::shared_ptr<fUML::Semantics::StructuredClassifiers::ExtensionalValue> link = extent->at(i);
 		if(link != getThisLinkPtr())
 		{
 			if(isMatchingLink(link, end))

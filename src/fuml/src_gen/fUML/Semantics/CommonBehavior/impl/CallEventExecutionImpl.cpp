@@ -177,9 +177,9 @@ std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> CallEventE
 	// Return input parameter values for this execution.
 
 std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> parameterValues(new Bag<fUML::Semantics::CommonBehavior::ParameterValue>());
-for(unsigned int i = 0; i < this->getParameterValues()->size(); i++)
+const std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> ownParameterValues = this->getParameterValues();
+for(const std::shared_ptr<fUML::Semantics::CommonBehavior::ParameterValue>& parameterValue : *ownParameterValues)
 {
-	std::shared_ptr<fUML::Semantics::CommonBehavior::ParameterValue> parameterValue = this->getParameterValues()->at(i);
 	if((parameterValue->getParameter()->getDirection() == uml::ParameterDirectionKind::IN) || (parameterValue->getParameter()->getDirection() == uml::ParameterDirectionKind::INOUT))
 	{
 		parameterValues->add(parameterValue);

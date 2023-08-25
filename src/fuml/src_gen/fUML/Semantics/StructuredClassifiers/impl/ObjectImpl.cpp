@@ -150,9 +150,9 @@ std::shared_ptr<fUML::Semantics::StructuredClassifiers::Object> newObject = std:
 const std::shared_ptr<Bag<uml::Classifier>>& types = this->getTypes();
 unsigned int typesSize = types->size();
 
-for(unsigned int i = 0; i < typesSize; i++)
+for(const std::shared_ptr<uml::Classifier>& type : *types)
 {
-	std::shared_ptr<uml::Classifier> type = types->at(i);
+	
 	newObject->getTypes()->add(type);
 }
 

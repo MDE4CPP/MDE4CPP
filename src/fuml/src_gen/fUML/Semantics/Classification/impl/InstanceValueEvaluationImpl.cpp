@@ -176,9 +176,8 @@ std::shared_ptr<fUML::Semantics::Values::Value> InstanceValueEvaluationImpl::eva
             {
                 // Debug.println("[evaluate] Type is a class.");
                 object = fUML::Semantics::StructuredClassifiers::StructuredClassifiersFactory::eInstance()->createObject();
-                for(unsigned int i = 0; i < types->size(); i++)
+                for(const std::shared_ptr<uml::Classifier>& type : *types)
                 {
-                	std::shared_ptr<uml::Classifier> type = types->at(i);
                     object->getTypes()->push_back(std::dynamic_pointer_cast<uml::Class>(type));
                 }
             }
@@ -193,15 +192,12 @@ std::shared_ptr<fUML::Semantics::Values::Value> InstanceValueEvaluationImpl::eva
         structuredValue->createFeatureValues();
 
         const std::shared_ptr<Bag<uml::Slot>>& instanceSlots = instance->getSlot();
-        for(unsigned int i = 0; i < instanceSlots->size(); i++)
+        for(const std::shared_ptr<uml::Slot>& slot : *instanceSlots)
         {
-        	std::shared_ptr<uml::Slot> slot = instanceSlots->at(i);
         	std::shared_ptr<Bag<fUML::Semantics::Values::Value>> values(new Bag<fUML::Semantics::Values::Value>());
-
         	const std::shared_ptr<Bag<uml::ValueSpecification>>& slotValues = slot->getValue();
-            for(unsigned int j = 0; j < slotValues->size(); j++)
+            for(const std::shared_ptr<uml::ValueSpecification>& slotValue : *slotValues)
             {
-            	std::shared_ptr<uml::ValueSpecification> slotValue = slotValues->at(j);
                 values->push_back(this->getLocus()->getExecutor()->evaluate(slotValue));
             }
             structuredValue->assignFeatureValue(slot->getDefiningFeature(), values, 0);

@@ -167,8 +167,7 @@ std::shared_ptr<uml::Property> oppositeEnd = getOppositeEnd(association, end);
 std::shared_ptr<Bag<fUML::Semantics::StructuredClassifiers::ExtensionalValue>> extent = this->getExecutionLocus()->retrieveExtent(association);
 
 std::shared_ptr<Bag<fUML::Semantics::StructuredClassifiers::Link>> links(new Bag<fUML::Semantics::StructuredClassifiers::Link>);
-for(unsigned int i = 0; i < extent->size(); i++){
-	std::shared_ptr<fUML::Semantics::StructuredClassifiers::ExtensionalValue> link = extent->at(i);
+for(const std::shared_ptr<fUML::Semantics::StructuredClassifiers::ExtensionalValue>& link : *extent){
 	if(link->retrieveFeatureValue(oppositeEnd)->getValues()->at(0) == oppositeValue) {
 		bool matches = true;
 		if(endValue != nullptr) {

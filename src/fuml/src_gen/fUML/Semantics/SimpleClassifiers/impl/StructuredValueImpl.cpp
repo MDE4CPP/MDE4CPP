@@ -128,14 +128,11 @@ void StructuredValueImpl::createFeatureValues()
 
     if(types!= nullptr)
     {
-    	for(unsigned int i = 0; i < types->size(); i++)
+    	for(const std::shared_ptr<uml::Classifier>& type : *types)
     	{
-    		std::shared_ptr<uml::Classifier> type = types->at(i);
     		const std::shared_ptr<Bag<uml::NamedElement>>& members = type->getMember();
-
-    		for(unsigned int j = 0; j < members->size(); j++)
+    		for(const std::shared_ptr<uml::NamedElement>& member : *members)
     		{
-    			std::shared_ptr<uml::NamedElement> member = members->at(j);
     			std::shared_ptr<uml::StructuralFeature> structuralFeature = std::dynamic_pointer_cast<uml::StructuralFeature>(member);
     			if(structuralFeature != nullptr)
     			{
@@ -285,20 +282,17 @@ std::shared_ptr<uml::ValueSpecification> StructuredValueImpl::specify()
     std::shared_ptr<Bag<fUML::Semantics::SimpleClassifiers::FeatureValue>> featureValues = this->retrieveFeatureValues();
     // Debug.println("[specify] " + featureValues.size() + " feature(s).");
 
-    for(unsigned int i = 0; i < featureValues->size(); i++)
+    for(const std::shared_ptr<fUML::Semantics::SimpleClassifiers::FeatureValue>& featureValue : *featureValues)
     {
-    	std::shared_ptr<fUML::Semantics::SimpleClassifiers::FeatureValue> featureValue = featureValues->at(i);
-
-    	std::shared_ptr<uml::Slot> slot = uml::umlFactory::eInstance()->createSlot_as_slot_in_InstanceSpecification(std::shared_ptr<uml::InstanceSpecification>());
+      	std::shared_ptr<uml::Slot> slot = uml::umlFactory::eInstance()->createSlot_as_slot_in_InstanceSpecification(std::shared_ptr<uml::InstanceSpecification>());
         slot->setDefiningFeature(featureValue->getFeature());
 
         // Debug.println("[specify] feature = " + featureValue.feature.name
         // + ", " + featureValue.values.size() + " value(s).");
 
         const std::shared_ptr<Bag<fUML::Semantics::Values::Value>>& values = featureValue->getValues();
-        for(unsigned int j = 0; j < values->size(); j++)
+        for(const std::shared_ptr<fUML::Semantics::Values::Value>& value : *values)
         {
-        	std::shared_ptr<fUML::Semantics::Values::Value> value = values->at(j);
             // Debug.println("[specify] value = " + value);
             slot->getValue()->push_back(value->specify());
         }

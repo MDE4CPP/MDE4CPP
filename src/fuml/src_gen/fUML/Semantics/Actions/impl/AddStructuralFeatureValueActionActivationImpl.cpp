@@ -195,7 +195,7 @@ void AddStructuralFeatureValueActionActivationImpl::doAction()
 	
 	if(association != nullptr) 
 	{
-		std::shared_ptr<Bag<fUML::Semantics::StructuredClassifiers::Link>> links = this->getMatchingLinks(association, feature, value);
+		const std::shared_ptr<Bag<fUML::Semantics::StructuredClassifiers::Link>>& links = this->getMatchingLinks(association, feature, value);
 		
 		std::shared_ptr<uml::Property> oppositeEnd = this->getOppositeEnd(association, feature);
 		int position = 0;
@@ -204,8 +204,7 @@ void AddStructuralFeatureValueActionActivationImpl::doAction()
 		}
 		
 		if (action->getIsReplaceAll()){
-			for(int unsigned i = 0; i < links->size(); i++) {
-				std::shared_ptr<fUML::Semantics::StructuredClassifiers::Link> link = links->at(i);
+			for (std::shared_ptr<fUML::Semantics::StructuredClassifiers::Link> link : *links) {
 				link->destroy();
 			}			
 		}

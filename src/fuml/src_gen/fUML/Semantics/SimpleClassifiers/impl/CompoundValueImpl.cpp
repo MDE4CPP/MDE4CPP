@@ -133,14 +133,12 @@ std::shared_ptr<fUML::Semantics::Values::Value> CompoundValueImpl::_copy()
 	// Create a new data value with the same featureValues as this data value.
 
 std::shared_ptr<fUML::Semantics::SimpleClassifiers::CompoundValue> newValue = 
-	std::dynamic_pointer_cast<fUML::Semantics::SimpleClassifiers::CompoundValue>(fUML::Semantics::Values::ValueImpl::_copy());
+std::dynamic_pointer_cast<fUML::Semantics::SimpleClassifiers::CompoundValue>(fUML::Semantics::Values::ValueImpl::_copy());
 
-std::shared_ptr<Bag<fUML::Semantics::SimpleClassifiers::FeatureValue>> featureValues = this->retrieveFeatureValues();
-unsigned int featureValuesSize = featureValues->size();
+const std::shared_ptr<Bag<fUML::Semantics::SimpleClassifiers::FeatureValue>>& featureValues = this->getFeatureValues();
 
-for(unsigned int i = 0; i < featureValuesSize; i++)
+for(const std::shared_ptr<fUML::Semantics::SimpleClassifiers::FeatureValue>& featureValue : *featureValues)
 {
-	std::shared_ptr<fUML::Semantics::SimpleClassifiers::FeatureValue> featureValue = featureValues->at(i);
 	newValue->getFeatureValues()->add(featureValue->_copy());
 }
 
@@ -160,10 +158,9 @@ void CompoundValueImpl::assignFeatureValue(const std::shared_ptr<uml::Structural
         this->getFeatureValues()->push_back(featureValue);
     }
     featureValue->setFeature(feature);
-    std::vector<std::shared_ptr<fUML::Semantics::Values::Value>>::iterator i;
-    for(i=values->begin();i!=values->end();++i)
+    for(const std::shared_ptr<fUML::Semantics::Values::Value>& value : *values)
     {
-    	featureValue->getValues()->push_back(*i);
+    	featureValue->getValues()->push_back(value);
     }
     featureValue->setPosition(position);
 	//end of body

@@ -154,11 +154,9 @@ std::shared_ptr<fUML::Semantics::CommonBehavior::Execution> newValue = std::dyna
 newValue->setContext(this->getContext());
 
 const std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>>& parameterValues = this->getParameterValues();
-unsigned int parameterValuesSize = parameterValues->size();
 
-for(unsigned int i = 0; i < parameterValuesSize; i++)
+for(const std::shared_ptr<fUML::Semantics::CommonBehavior::ParameterValue>& parameterValue : *parameterValues)
 {
-	std::shared_ptr<fUML::Semantics::CommonBehavior::ParameterValue> parameterValue = parameterValues->at(i);
 	newValue->getParameterValues()->add(parameterValue->_copy());
 }
 
