@@ -226,6 +226,8 @@ void UML4CPPProfilePackageImpl::createPackageValueSpecifications(std::shared_ptr
 	
 }
 
+
+
 void UML4CPPProfilePackageImpl::initializePackageContents(std::shared_ptr<uml::Package> uML4CPPProfile)
 {
 	if (isInitialized)

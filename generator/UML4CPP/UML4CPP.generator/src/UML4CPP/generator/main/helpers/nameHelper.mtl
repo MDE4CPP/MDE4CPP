@@ -106,14 +106,17 @@
 [query public generateNamespacePathWithoutRoot(aPackage : Package, noReflection : Boolean) : String = aPackage.getNamespacePath(noReflection, true).substring(2)/] [comment first char is '/', which should be removed, index starts at 1 /] 
 
 [**
- * PSSM: retrieve next parent element with a defined namespace property as Namespace or this element as a Namespace if aforementioned condition applies.
+ * PSSM: retrieve next parent element with a defined namespace property as Namespace. If no such element can be found, null is returned.
 */]
 [query public getNextParentElementWithDefinedNamespaceProperty(anElement : Element) : Namespace = 
-if (not anElement.oclAsType(Namespace).namespace.oclIsUndefined()) then anElement.oclAsType(Namespace)
+if (not anElement.oclAsType(Namespace).namespace.oclIsUndefined()) then anElement.oclAsType(Namespace).namespace
 else
 	if anElement.owner.oclIsUndefined() then null
 	else
-		anElement.owner.getNextParentElementWithDefinedNamespaceProperty()
+		if (not anElement.owner.oclAsType(Namespace).namespace.oclIsUndefined()) then anElement.owner.oclAsType(Namespace)
+		else
+			anElement.owner.getNextParentElementWithDefinedNamespaceProperty()
+		endif
 	endif
 endif
 /]

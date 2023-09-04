@@ -54,7 +54,7 @@
 	= invoke('UML4CPP.generator.main.model_execution.ExecutableModelService', 'isPSCSExecutable()', Sequence{})
 /]
 
-[comment determines whether the model is configured as PSCS-executable /]
+[comment determines whether the model is configured as PSSM-executable /]
 [query public isPSSMExecutable(anOclAny: OclAny) : Boolean
 	= invoke('UML4CPP.generator.main.model_execution.ExecutableModelService', 'isPSSMExecutable()', Sequence{})
 /]

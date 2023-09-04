@@ -121,10 +121,11 @@ void RealFunctionsPackageImpl::createPackageClasses(std::shared_ptr<uml::Package
 //-------------------------------------------
 //Opaque Behaviors
 
-	//Abs
-	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_Abs = factory->createFunctionBehavior_as_ownedType_in_Package(foundationalModelLibrary_PrimitiveBehaviors_RealFunctions);
-	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_Abs_x = factory->createParameter_as_ownedParameter_in_Behavior(foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_Abs);
-	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_Abs_result = factory->createParameter_as_ownedParameter_in_Behavior(foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_Abs);
+	//lessThan
+	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_lessThan = factory->createFunctionBehavior_as_ownedType_in_Package(foundationalModelLibrary_PrimitiveBehaviors_RealFunctions);
+	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_lessThan_x = factory->createParameter_as_ownedParameter_in_Behavior(foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_lessThan);
+	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_lessThan_y = factory->createParameter_as_ownedParameter_in_Behavior(foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_lessThan);
+	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_lessThan_result = factory->createParameter_as_ownedParameter_in_Behavior(foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_lessThan);
 	
 	//lessOrEqual
 	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_lessOrEqual = factory->createFunctionBehavior_as_ownedType_in_Package(foundationalModelLibrary_PrimitiveBehaviors_RealFunctions);
@@ -132,49 +133,33 @@ void RealFunctionsPackageImpl::createPackageClasses(std::shared_ptr<uml::Package
 	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_lessOrEqual_y = factory->createParameter_as_ownedParameter_in_Behavior(foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_lessOrEqual);
 	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_lessOrEqual_result = factory->createParameter_as_ownedParameter_in_Behavior(foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_lessOrEqual);
 	
-	//Floor
-	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_Floor = factory->createFunctionBehavior_as_ownedType_in_Package(foundationalModelLibrary_PrimitiveBehaviors_RealFunctions);
-	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_Floor_x = factory->createParameter_as_ownedParameter_in_Behavior(foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_Floor);
-	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_Floor_result = factory->createParameter_as_ownedParameter_in_Behavior(foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_Floor);
-	
-	//Max
-	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_Max = factory->createFunctionBehavior_as_ownedType_in_Package(foundationalModelLibrary_PrimitiveBehaviors_RealFunctions);
-	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_Max_x = factory->createParameter_as_ownedParameter_in_Behavior(foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_Max);
-	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_Max_y = factory->createParameter_as_ownedParameter_in_Behavior(foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_Max);
-	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_Max_result = factory->createParameter_as_ownedParameter_in_Behavior(foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_Max);
-	
-	//lessThan
-	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_lessThan = factory->createFunctionBehavior_as_ownedType_in_Package(foundationalModelLibrary_PrimitiveBehaviors_RealFunctions);
-	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_lessThan_x = factory->createParameter_as_ownedParameter_in_Behavior(foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_lessThan);
-	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_lessThan_y = factory->createParameter_as_ownedParameter_in_Behavior(foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_lessThan);
-	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_lessThan_result = factory->createParameter_as_ownedParameter_in_Behavior(foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_lessThan);
-	
-	//times
-	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_times = factory->createFunctionBehavior_as_ownedType_in_Package(foundationalModelLibrary_PrimitiveBehaviors_RealFunctions);
-	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_times_x = factory->createParameter_as_ownedParameter_in_Behavior(foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_times);
-	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_times_y = factory->createParameter_as_ownedParameter_in_Behavior(foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_times);
-	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_times_result = factory->createParameter_as_ownedParameter_in_Behavior(foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_times);
-	
-	//Neg
-	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_Neg = factory->createFunctionBehavior_as_ownedType_in_Package(foundationalModelLibrary_PrimitiveBehaviors_RealFunctions);
-	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_Neg_x = factory->createParameter_as_ownedParameter_in_Behavior(foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_Neg);
-	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_Neg_result = factory->createParameter_as_ownedParameter_in_Behavior(foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_Neg);
-	
-	//ToReal
-	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_ToReal = factory->createFunctionBehavior_as_ownedType_in_Package(foundationalModelLibrary_PrimitiveBehaviors_RealFunctions);
-	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_ToReal_x = factory->createParameter_as_ownedParameter_in_Behavior(foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_ToReal);
-	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_ToReal_result = factory->createParameter_as_ownedParameter_in_Behavior(foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_ToReal);
-	
 	//divide
 	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_divide = factory->createFunctionBehavior_as_ownedType_in_Package(foundationalModelLibrary_PrimitiveBehaviors_RealFunctions);
 	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_divide_x = factory->createParameter_as_ownedParameter_in_Behavior(foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_divide);
 	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_divide_y = factory->createParameter_as_ownedParameter_in_Behavior(foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_divide);
 	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_divide_result = factory->createParameter_as_ownedParameter_in_Behavior(foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_divide);
 	
+	//greaterThan
+	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_greaterThan = factory->createFunctionBehavior_as_ownedType_in_Package(foundationalModelLibrary_PrimitiveBehaviors_RealFunctions);
+	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_greaterThan_x = factory->createParameter_as_ownedParameter_in_Behavior(foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_greaterThan);
+	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_greaterThan_y = factory->createParameter_as_ownedParameter_in_Behavior(foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_greaterThan);
+	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_greaterThan_result = factory->createParameter_as_ownedParameter_in_Behavior(foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_greaterThan);
+	
+	//Floor
+	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_Floor = factory->createFunctionBehavior_as_ownedType_in_Package(foundationalModelLibrary_PrimitiveBehaviors_RealFunctions);
+	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_Floor_x = factory->createParameter_as_ownedParameter_in_Behavior(foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_Floor);
+	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_Floor_result = factory->createParameter_as_ownedParameter_in_Behavior(foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_Floor);
+	
 	//ToString
 	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_ToString = factory->createFunctionBehavior_as_ownedType_in_Package(foundationalModelLibrary_PrimitiveBehaviors_RealFunctions);
 	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_ToString_x = factory->createParameter_as_ownedParameter_in_Behavior(foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_ToString);
 	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_ToString_result = factory->createParameter_as_ownedParameter_in_Behavior(foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_ToString);
+	
+	//times
+	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_times = factory->createFunctionBehavior_as_ownedType_in_Package(foundationalModelLibrary_PrimitiveBehaviors_RealFunctions);
+	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_times_x = factory->createParameter_as_ownedParameter_in_Behavior(foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_times);
+	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_times_y = factory->createParameter_as_ownedParameter_in_Behavior(foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_times);
+	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_times_result = factory->createParameter_as_ownedParameter_in_Behavior(foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_times);
 	
 	//minus
 	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_minus = factory->createFunctionBehavior_as_ownedType_in_Package(foundationalModelLibrary_PrimitiveBehaviors_RealFunctions);
@@ -188,16 +173,31 @@ void RealFunctionsPackageImpl::createPackageClasses(std::shared_ptr<uml::Package
 	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_Min_y = factory->createParameter_as_ownedParameter_in_Behavior(foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_Min);
 	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_Min_result = factory->createParameter_as_ownedParameter_in_Behavior(foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_Min);
 	
+	//ToReal
+	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_ToReal = factory->createFunctionBehavior_as_ownedType_in_Package(foundationalModelLibrary_PrimitiveBehaviors_RealFunctions);
+	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_ToReal_x = factory->createParameter_as_ownedParameter_in_Behavior(foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_ToReal);
+	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_ToReal_result = factory->createParameter_as_ownedParameter_in_Behavior(foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_ToReal);
+	
+	//Inv
+	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_Inv = factory->createFunctionBehavior_as_ownedType_in_Package(foundationalModelLibrary_PrimitiveBehaviors_RealFunctions);
+	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_Inv_x = factory->createParameter_as_ownedParameter_in_Behavior(foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_Inv);
+	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_Inv_result = factory->createParameter_as_ownedParameter_in_Behavior(foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_Inv);
+	
 	//ToInteger
 	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_ToInteger = factory->createFunctionBehavior_as_ownedType_in_Package(foundationalModelLibrary_PrimitiveBehaviors_RealFunctions);
 	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_ToInteger_x = factory->createParameter_as_ownedParameter_in_Behavior(foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_ToInteger);
 	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_ToInteger_result = factory->createParameter_as_ownedParameter_in_Behavior(foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_ToInteger);
 	
-	//plus
-	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_plus = factory->createFunctionBehavior_as_ownedType_in_Package(foundationalModelLibrary_PrimitiveBehaviors_RealFunctions);
-	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_plus_x = factory->createParameter_as_ownedParameter_in_Behavior(foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_plus);
-	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_plus_y = factory->createParameter_as_ownedParameter_in_Behavior(foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_plus);
-	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_plus_result = factory->createParameter_as_ownedParameter_in_Behavior(foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_plus);
+	//Abs
+	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_Abs = factory->createFunctionBehavior_as_ownedType_in_Package(foundationalModelLibrary_PrimitiveBehaviors_RealFunctions);
+	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_Abs_x = factory->createParameter_as_ownedParameter_in_Behavior(foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_Abs);
+	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_Abs_result = factory->createParameter_as_ownedParameter_in_Behavior(foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_Abs);
+	
+	//Max
+	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_Max = factory->createFunctionBehavior_as_ownedType_in_Package(foundationalModelLibrary_PrimitiveBehaviors_RealFunctions);
+	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_Max_x = factory->createParameter_as_ownedParameter_in_Behavior(foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_Max);
+	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_Max_y = factory->createParameter_as_ownedParameter_in_Behavior(foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_Max);
+	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_Max_result = factory->createParameter_as_ownedParameter_in_Behavior(foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_Max);
 	
 	//greaterOrEqual
 	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_greaterOrEqual = factory->createFunctionBehavior_as_ownedType_in_Package(foundationalModelLibrary_PrimitiveBehaviors_RealFunctions);
@@ -205,21 +205,21 @@ void RealFunctionsPackageImpl::createPackageClasses(std::shared_ptr<uml::Package
 	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_greaterOrEqual_y = factory->createParameter_as_ownedParameter_in_Behavior(foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_greaterOrEqual);
 	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_greaterOrEqual_result = factory->createParameter_as_ownedParameter_in_Behavior(foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_greaterOrEqual);
 	
-	//Inv
-	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_Inv = factory->createFunctionBehavior_as_ownedType_in_Package(foundationalModelLibrary_PrimitiveBehaviors_RealFunctions);
-	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_Inv_x = factory->createParameter_as_ownedParameter_in_Behavior(foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_Inv);
-	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_Inv_result = factory->createParameter_as_ownedParameter_in_Behavior(foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_Inv);
-	
-	//greaterThan
-	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_greaterThan = factory->createFunctionBehavior_as_ownedType_in_Package(foundationalModelLibrary_PrimitiveBehaviors_RealFunctions);
-	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_greaterThan_x = factory->createParameter_as_ownedParameter_in_Behavior(foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_greaterThan);
-	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_greaterThan_y = factory->createParameter_as_ownedParameter_in_Behavior(foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_greaterThan);
-	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_greaterThan_result = factory->createParameter_as_ownedParameter_in_Behavior(foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_greaterThan);
+	//Neg
+	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_Neg = factory->createFunctionBehavior_as_ownedType_in_Package(foundationalModelLibrary_PrimitiveBehaviors_RealFunctions);
+	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_Neg_x = factory->createParameter_as_ownedParameter_in_Behavior(foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_Neg);
+	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_Neg_result = factory->createParameter_as_ownedParameter_in_Behavior(foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_Neg);
 	
 	//Round
 	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_Round = factory->createFunctionBehavior_as_ownedType_in_Package(foundationalModelLibrary_PrimitiveBehaviors_RealFunctions);
 	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_Round_x = factory->createParameter_as_ownedParameter_in_Behavior(foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_Round);
 	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_Round_result = factory->createParameter_as_ownedParameter_in_Behavior(foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_Round);
+	
+	//plus
+	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_plus = factory->createFunctionBehavior_as_ownedType_in_Package(foundationalModelLibrary_PrimitiveBehaviors_RealFunctions);
+	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_plus_x = factory->createParameter_as_ownedParameter_in_Behavior(foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_plus);
+	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_plus_y = factory->createParameter_as_ownedParameter_in_Behavior(foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_plus);
+	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_plus_result = factory->createParameter_as_ownedParameter_in_Behavior(foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_plus);
 	
 }
 
@@ -274,6 +274,8 @@ void RealFunctionsPackageImpl::createPackageValueSpecifications(std::shared_ptr<
 	
 }
 
+
+
 void RealFunctionsPackageImpl::initializePackageContents(std::shared_ptr<uml::Package> foundationalModelLibrary_PrimitiveBehaviors_RealFunctions)
 {
 	if (isInitialized)
@@ -321,23 +323,30 @@ void RealFunctionsPackageImpl::initializePackageClasses()
 //-------------------------------------------
 //Opaque Behaviors
 
-	//Abs
-	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_Abs->setName("Abs");
+	//lessThan
+	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_lessThan->setName("lessThan");
 	// parameter x
-	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_Abs_x->setName("x");
-	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_Abs_x->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Real());
-	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_Abs_x->setLower(1);
-	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_Abs_x->setUpper(1);
-	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_Abs_x->setDirection(uml::ParameterDirectionKind::IN);
+	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_lessThan_x->setName("x");
+	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_lessThan_x->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Real());
+	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_lessThan_x->setLower(1);
+	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_lessThan_x->setUpper(1);
+	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_lessThan_x->setDirection(uml::ParameterDirectionKind::IN);
+	
+	// parameter y
+	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_lessThan_y->setName("y");
+	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_lessThan_y->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Real());
+	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_lessThan_y->setLower(1);
+	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_lessThan_y->setUpper(1);
+	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_lessThan_y->setDirection(uml::ParameterDirectionKind::IN);
 	
 	// parameter result
-	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_Abs_result->setName("result");
-	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_Abs_result->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Real());
-	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_Abs_result->setLower(1);
-	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_Abs_result->setUpper(1);
-	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_Abs_result->setDirection(uml::ParameterDirectionKind::RETURN);
+	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_lessThan_result->setName("result");
+	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_lessThan_result->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Boolean());
+	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_lessThan_result->setLower(1);
+	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_lessThan_result->setUpper(1);
+	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_lessThan_result->setDirection(uml::ParameterDirectionKind::RETURN);
 	
-	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_Abs->_setID(REALFUNCTIONS_FUNCTIONBEHAVIOR_ABS);
+	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_lessThan->_setID(REALFUNCTIONS_FUNCTIONBEHAVIOR_LESSTHAN);
 	
 	
 	//lessOrEqual
@@ -366,141 +375,6 @@ void RealFunctionsPackageImpl::initializePackageClasses()
 	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_lessOrEqual->_setID(REALFUNCTIONS_FUNCTIONBEHAVIOR_LESSOREQUAL);
 	
 	
-	//Floor
-	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_Floor->setName("Floor");
-	// parameter x
-	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_Floor_x->setName("x");
-	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_Floor_x->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Real());
-	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_Floor_x->setLower(1);
-	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_Floor_x->setUpper(1);
-	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_Floor_x->setDirection(uml::ParameterDirectionKind::IN);
-	
-	// parameter result
-	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_Floor_result->setName("result");
-	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_Floor_result->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Integer());
-	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_Floor_result->setLower(1);
-	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_Floor_result->setUpper(1);
-	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_Floor_result->setDirection(uml::ParameterDirectionKind::RETURN);
-	
-	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_Floor->_setID(REALFUNCTIONS_FUNCTIONBEHAVIOR_FLOOR);
-	
-	
-	//Max
-	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_Max->setName("Max");
-	// parameter x
-	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_Max_x->setName("x");
-	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_Max_x->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Real());
-	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_Max_x->setLower(1);
-	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_Max_x->setUpper(1);
-	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_Max_x->setDirection(uml::ParameterDirectionKind::IN);
-	
-	// parameter y
-	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_Max_y->setName("y");
-	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_Max_y->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Real());
-	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_Max_y->setLower(1);
-	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_Max_y->setUpper(1);
-	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_Max_y->setDirection(uml::ParameterDirectionKind::IN);
-	
-	// parameter result
-	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_Max_result->setName("result");
-	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_Max_result->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Real());
-	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_Max_result->setLower(1);
-	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_Max_result->setUpper(1);
-	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_Max_result->setDirection(uml::ParameterDirectionKind::RETURN);
-	
-	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_Max->_setID(REALFUNCTIONS_FUNCTIONBEHAVIOR_MAX);
-	
-	
-	//lessThan
-	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_lessThan->setName("lessThan");
-	// parameter x
-	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_lessThan_x->setName("x");
-	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_lessThan_x->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Real());
-	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_lessThan_x->setLower(1);
-	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_lessThan_x->setUpper(1);
-	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_lessThan_x->setDirection(uml::ParameterDirectionKind::IN);
-	
-	// parameter y
-	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_lessThan_y->setName("y");
-	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_lessThan_y->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Real());
-	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_lessThan_y->setLower(1);
-	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_lessThan_y->setUpper(1);
-	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_lessThan_y->setDirection(uml::ParameterDirectionKind::IN);
-	
-	// parameter result
-	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_lessThan_result->setName("result");
-	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_lessThan_result->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Boolean());
-	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_lessThan_result->setLower(1);
-	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_lessThan_result->setUpper(1);
-	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_lessThan_result->setDirection(uml::ParameterDirectionKind::RETURN);
-	
-	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_lessThan->_setID(REALFUNCTIONS_FUNCTIONBEHAVIOR_LESSTHAN);
-	
-	
-	//times
-	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_times->setName("times");
-	// parameter x
-	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_times_x->setName("x");
-	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_times_x->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Real());
-	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_times_x->setLower(1);
-	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_times_x->setUpper(1);
-	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_times_x->setDirection(uml::ParameterDirectionKind::IN);
-	
-	// parameter y
-	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_times_y->setName("y");
-	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_times_y->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Real());
-	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_times_y->setLower(1);
-	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_times_y->setUpper(1);
-	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_times_y->setDirection(uml::ParameterDirectionKind::IN);
-	
-	// parameter result
-	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_times_result->setName("result");
-	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_times_result->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Real());
-	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_times_result->setLower(1);
-	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_times_result->setUpper(1);
-	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_times_result->setDirection(uml::ParameterDirectionKind::RETURN);
-	
-	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_times->_setID(REALFUNCTIONS_FUNCTIONBEHAVIOR_TIMES);
-	
-	
-	//Neg
-	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_Neg->setName("Neg");
-	// parameter x
-	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_Neg_x->setName("x");
-	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_Neg_x->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Real());
-	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_Neg_x->setLower(1);
-	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_Neg_x->setUpper(1);
-	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_Neg_x->setDirection(uml::ParameterDirectionKind::IN);
-	
-	// parameter result
-	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_Neg_result->setName("result");
-	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_Neg_result->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Real());
-	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_Neg_result->setLower(1);
-	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_Neg_result->setUpper(1);
-	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_Neg_result->setDirection(uml::ParameterDirectionKind::RETURN);
-	
-	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_Neg->_setID(REALFUNCTIONS_FUNCTIONBEHAVIOR_NEG);
-	
-	
-	//ToReal
-	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_ToReal->setName("ToReal");
-	// parameter x
-	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_ToReal_x->setName("x");
-	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_ToReal_x->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_String());
-	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_ToReal_x->setLower(1);
-	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_ToReal_x->setUpper(1);
-	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_ToReal_x->setDirection(uml::ParameterDirectionKind::IN);
-	
-	// parameter result
-	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_ToReal_result->setName("result");
-	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_ToReal_result->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Real());
-	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_ToReal_result->setLower(0);
-	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_ToReal_result->setUpper(1);
-	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_ToReal_result->setDirection(uml::ParameterDirectionKind::RETURN);
-	
-	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_ToReal->_setID(REALFUNCTIONS_FUNCTIONBEHAVIOR_TOREAL);
-	
-	
 	//divide
 	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_divide->setName("divide");
 	// parameter x
@@ -527,6 +401,51 @@ void RealFunctionsPackageImpl::initializePackageClasses()
 	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_divide->_setID(REALFUNCTIONS_FUNCTIONBEHAVIOR_DIVIDE);
 	
 	
+	//greaterThan
+	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_greaterThan->setName("greaterThan");
+	// parameter x
+	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_greaterThan_x->setName("x");
+	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_greaterThan_x->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Real());
+	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_greaterThan_x->setLower(1);
+	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_greaterThan_x->setUpper(1);
+	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_greaterThan_x->setDirection(uml::ParameterDirectionKind::IN);
+	
+	// parameter y
+	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_greaterThan_y->setName("y");
+	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_greaterThan_y->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Real());
+	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_greaterThan_y->setLower(1);
+	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_greaterThan_y->setUpper(1);
+	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_greaterThan_y->setDirection(uml::ParameterDirectionKind::IN);
+	
+	// parameter result
+	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_greaterThan_result->setName("result");
+	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_greaterThan_result->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Boolean());
+	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_greaterThan_result->setLower(1);
+	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_greaterThan_result->setUpper(1);
+	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_greaterThan_result->setDirection(uml::ParameterDirectionKind::RETURN);
+	
+	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_greaterThan->_setID(REALFUNCTIONS_FUNCTIONBEHAVIOR_GREATERTHAN);
+	
+	
+	//Floor
+	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_Floor->setName("Floor");
+	// parameter x
+	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_Floor_x->setName("x");
+	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_Floor_x->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Real());
+	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_Floor_x->setLower(1);
+	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_Floor_x->setUpper(1);
+	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_Floor_x->setDirection(uml::ParameterDirectionKind::IN);
+	
+	// parameter result
+	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_Floor_result->setName("result");
+	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_Floor_result->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Integer());
+	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_Floor_result->setLower(1);
+	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_Floor_result->setUpper(1);
+	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_Floor_result->setDirection(uml::ParameterDirectionKind::RETURN);
+	
+	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_Floor->_setID(REALFUNCTIONS_FUNCTIONBEHAVIOR_FLOOR);
+	
+	
 	//ToString
 	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_ToString->setName("ToString");
 	// parameter x
@@ -544,6 +463,32 @@ void RealFunctionsPackageImpl::initializePackageClasses()
 	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_ToString_result->setDirection(uml::ParameterDirectionKind::RETURN);
 	
 	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_ToString->_setID(REALFUNCTIONS_FUNCTIONBEHAVIOR_TOSTRING);
+	
+	
+	//times
+	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_times->setName("times");
+	// parameter x
+	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_times_x->setName("x");
+	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_times_x->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Real());
+	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_times_x->setLower(1);
+	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_times_x->setUpper(1);
+	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_times_x->setDirection(uml::ParameterDirectionKind::IN);
+	
+	// parameter y
+	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_times_y->setName("y");
+	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_times_y->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Real());
+	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_times_y->setLower(1);
+	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_times_y->setUpper(1);
+	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_times_y->setDirection(uml::ParameterDirectionKind::IN);
+	
+	// parameter result
+	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_times_result->setName("result");
+	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_times_result->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Real());
+	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_times_result->setLower(1);
+	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_times_result->setUpper(1);
+	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_times_result->setDirection(uml::ParameterDirectionKind::RETURN);
+	
+	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_times->_setID(REALFUNCTIONS_FUNCTIONBEHAVIOR_TIMES);
 	
 	
 	//minus
@@ -598,6 +543,44 @@ void RealFunctionsPackageImpl::initializePackageClasses()
 	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_Min->_setID(REALFUNCTIONS_FUNCTIONBEHAVIOR_MIN);
 	
 	
+	//ToReal
+	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_ToReal->setName("ToReal");
+	// parameter x
+	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_ToReal_x->setName("x");
+	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_ToReal_x->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_String());
+	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_ToReal_x->setLower(1);
+	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_ToReal_x->setUpper(1);
+	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_ToReal_x->setDirection(uml::ParameterDirectionKind::IN);
+	
+	// parameter result
+	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_ToReal_result->setName("result");
+	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_ToReal_result->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Real());
+	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_ToReal_result->setLower(0);
+	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_ToReal_result->setUpper(1);
+	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_ToReal_result->setDirection(uml::ParameterDirectionKind::RETURN);
+	
+	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_ToReal->_setID(REALFUNCTIONS_FUNCTIONBEHAVIOR_TOREAL);
+	
+	
+	//Inv
+	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_Inv->setName("Inv");
+	// parameter x
+	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_Inv_x->setName("x");
+	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_Inv_x->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Real());
+	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_Inv_x->setLower(1);
+	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_Inv_x->setUpper(1);
+	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_Inv_x->setDirection(uml::ParameterDirectionKind::IN);
+	
+	// parameter result
+	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_Inv_result->setName("result");
+	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_Inv_result->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Real());
+	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_Inv_result->setLower(1);
+	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_Inv_result->setUpper(1);
+	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_Inv_result->setDirection(uml::ParameterDirectionKind::RETURN);
+	
+	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_Inv->_setID(REALFUNCTIONS_FUNCTIONBEHAVIOR_INV);
+	
+	
 	//ToInteger
 	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_ToInteger->setName("ToInteger");
 	// parameter x
@@ -617,30 +600,49 @@ void RealFunctionsPackageImpl::initializePackageClasses()
 	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_ToInteger->_setID(REALFUNCTIONS_FUNCTIONBEHAVIOR_TOINTEGER);
 	
 	
-	//plus
-	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_plus->setName("plus");
+	//Abs
+	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_Abs->setName("Abs");
 	// parameter x
-	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_plus_x->setName("x");
-	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_plus_x->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Real());
-	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_plus_x->setLower(1);
-	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_plus_x->setUpper(1);
-	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_plus_x->setDirection(uml::ParameterDirectionKind::IN);
-	
-	// parameter y
-	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_plus_y->setName("y");
-	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_plus_y->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Real());
-	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_plus_y->setLower(1);
-	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_plus_y->setUpper(1);
-	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_plus_y->setDirection(uml::ParameterDirectionKind::IN);
+	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_Abs_x->setName("x");
+	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_Abs_x->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Real());
+	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_Abs_x->setLower(1);
+	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_Abs_x->setUpper(1);
+	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_Abs_x->setDirection(uml::ParameterDirectionKind::IN);
 	
 	// parameter result
-	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_plus_result->setName("result");
-	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_plus_result->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Real());
-	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_plus_result->setLower(1);
-	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_plus_result->setUpper(1);
-	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_plus_result->setDirection(uml::ParameterDirectionKind::RETURN);
+	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_Abs_result->setName("result");
+	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_Abs_result->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Real());
+	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_Abs_result->setLower(1);
+	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_Abs_result->setUpper(1);
+	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_Abs_result->setDirection(uml::ParameterDirectionKind::RETURN);
 	
-	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_plus->_setID(REALFUNCTIONS_FUNCTIONBEHAVIOR_PLUS);
+	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_Abs->_setID(REALFUNCTIONS_FUNCTIONBEHAVIOR_ABS);
+	
+	
+	//Max
+	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_Max->setName("Max");
+	// parameter x
+	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_Max_x->setName("x");
+	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_Max_x->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Real());
+	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_Max_x->setLower(1);
+	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_Max_x->setUpper(1);
+	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_Max_x->setDirection(uml::ParameterDirectionKind::IN);
+	
+	// parameter y
+	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_Max_y->setName("y");
+	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_Max_y->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Real());
+	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_Max_y->setLower(1);
+	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_Max_y->setUpper(1);
+	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_Max_y->setDirection(uml::ParameterDirectionKind::IN);
+	
+	// parameter result
+	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_Max_result->setName("result");
+	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_Max_result->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Real());
+	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_Max_result->setLower(1);
+	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_Max_result->setUpper(1);
+	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_Max_result->setDirection(uml::ParameterDirectionKind::RETURN);
+	
+	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_Max->_setID(REALFUNCTIONS_FUNCTIONBEHAVIOR_MAX);
 	
 	
 	//greaterOrEqual
@@ -669,49 +671,23 @@ void RealFunctionsPackageImpl::initializePackageClasses()
 	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_greaterOrEqual->_setID(REALFUNCTIONS_FUNCTIONBEHAVIOR_GREATEROREQUAL);
 	
 	
-	//Inv
-	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_Inv->setName("Inv");
+	//Neg
+	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_Neg->setName("Neg");
 	// parameter x
-	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_Inv_x->setName("x");
-	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_Inv_x->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Real());
-	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_Inv_x->setLower(1);
-	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_Inv_x->setUpper(1);
-	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_Inv_x->setDirection(uml::ParameterDirectionKind::IN);
+	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_Neg_x->setName("x");
+	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_Neg_x->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Real());
+	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_Neg_x->setLower(1);
+	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_Neg_x->setUpper(1);
+	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_Neg_x->setDirection(uml::ParameterDirectionKind::IN);
 	
 	// parameter result
-	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_Inv_result->setName("result");
-	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_Inv_result->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Real());
-	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_Inv_result->setLower(1);
-	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_Inv_result->setUpper(1);
-	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_Inv_result->setDirection(uml::ParameterDirectionKind::RETURN);
+	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_Neg_result->setName("result");
+	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_Neg_result->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Real());
+	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_Neg_result->setLower(1);
+	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_Neg_result->setUpper(1);
+	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_Neg_result->setDirection(uml::ParameterDirectionKind::RETURN);
 	
-	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_Inv->_setID(REALFUNCTIONS_FUNCTIONBEHAVIOR_INV);
-	
-	
-	//greaterThan
-	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_greaterThan->setName("greaterThan");
-	// parameter x
-	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_greaterThan_x->setName("x");
-	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_greaterThan_x->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Real());
-	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_greaterThan_x->setLower(1);
-	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_greaterThan_x->setUpper(1);
-	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_greaterThan_x->setDirection(uml::ParameterDirectionKind::IN);
-	
-	// parameter y
-	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_greaterThan_y->setName("y");
-	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_greaterThan_y->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Real());
-	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_greaterThan_y->setLower(1);
-	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_greaterThan_y->setUpper(1);
-	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_greaterThan_y->setDirection(uml::ParameterDirectionKind::IN);
-	
-	// parameter result
-	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_greaterThan_result->setName("result");
-	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_greaterThan_result->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Boolean());
-	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_greaterThan_result->setLower(1);
-	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_greaterThan_result->setUpper(1);
-	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_greaterThan_result->setDirection(uml::ParameterDirectionKind::RETURN);
-	
-	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_greaterThan->_setID(REALFUNCTIONS_FUNCTIONBEHAVIOR_GREATERTHAN);
+	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_Neg->_setID(REALFUNCTIONS_FUNCTIONBEHAVIOR_NEG);
 	
 	
 	//Round
@@ -731,6 +707,32 @@ void RealFunctionsPackageImpl::initializePackageClasses()
 	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_Round_result->setDirection(uml::ParameterDirectionKind::RETURN);
 	
 	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_Round->_setID(REALFUNCTIONS_FUNCTIONBEHAVIOR_ROUND);
+	
+	
+	//plus
+	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_plus->setName("plus");
+	// parameter x
+	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_plus_x->setName("x");
+	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_plus_x->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Real());
+	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_plus_x->setLower(1);
+	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_plus_x->setUpper(1);
+	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_plus_x->setDirection(uml::ParameterDirectionKind::IN);
+	
+	// parameter y
+	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_plus_y->setName("y");
+	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_plus_y->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Real());
+	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_plus_y->setLower(1);
+	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_plus_y->setUpper(1);
+	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_plus_y->setDirection(uml::ParameterDirectionKind::IN);
+	
+	// parameter result
+	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_plus_result->setName("result");
+	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_plus_result->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Real());
+	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_plus_result->setLower(1);
+	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_plus_result->setUpper(1);
+	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_plus_result->setDirection(uml::ParameterDirectionKind::RETURN);
+	
+	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_plus->_setID(REALFUNCTIONS_FUNCTIONBEHAVIOR_PLUS);
 	
 	
 }
@@ -743,23 +745,30 @@ void RealFunctionsPackageImpl::initializePackageSignals()
 //-------------------------------------------
 //Opaque Behaviors
 
-	//Abs
-	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_Abs->setName("Abs");
+	//lessThan
+	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_lessThan->setName("lessThan");
 	// parameter x
-	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_Abs_x->setName("x");
-	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_Abs_x->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Real());
-	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_Abs_x->setLower(1);
-	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_Abs_x->setUpper(1);
-	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_Abs_x->setDirection(uml::ParameterDirectionKind::IN);
+	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_lessThan_x->setName("x");
+	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_lessThan_x->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Real());
+	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_lessThan_x->setLower(1);
+	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_lessThan_x->setUpper(1);
+	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_lessThan_x->setDirection(uml::ParameterDirectionKind::IN);
+	
+	// parameter y
+	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_lessThan_y->setName("y");
+	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_lessThan_y->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Real());
+	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_lessThan_y->setLower(1);
+	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_lessThan_y->setUpper(1);
+	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_lessThan_y->setDirection(uml::ParameterDirectionKind::IN);
 	
 	// parameter result
-	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_Abs_result->setName("result");
-	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_Abs_result->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Real());
-	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_Abs_result->setLower(1);
-	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_Abs_result->setUpper(1);
-	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_Abs_result->setDirection(uml::ParameterDirectionKind::RETURN);
+	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_lessThan_result->setName("result");
+	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_lessThan_result->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Boolean());
+	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_lessThan_result->setLower(1);
+	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_lessThan_result->setUpper(1);
+	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_lessThan_result->setDirection(uml::ParameterDirectionKind::RETURN);
 	
-	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_Abs->_setID(REALFUNCTIONS_FUNCTIONBEHAVIOR_ABS);
+	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_lessThan->_setID(REALFUNCTIONS_FUNCTIONBEHAVIOR_LESSTHAN);
 	
 	
 	//lessOrEqual
@@ -788,141 +797,6 @@ void RealFunctionsPackageImpl::initializePackageSignals()
 	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_lessOrEqual->_setID(REALFUNCTIONS_FUNCTIONBEHAVIOR_LESSOREQUAL);
 	
 	
-	//Floor
-	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_Floor->setName("Floor");
-	// parameter x
-	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_Floor_x->setName("x");
-	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_Floor_x->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Real());
-	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_Floor_x->setLower(1);
-	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_Floor_x->setUpper(1);
-	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_Floor_x->setDirection(uml::ParameterDirectionKind::IN);
-	
-	// parameter result
-	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_Floor_result->setName("result");
-	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_Floor_result->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Integer());
-	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_Floor_result->setLower(1);
-	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_Floor_result->setUpper(1);
-	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_Floor_result->setDirection(uml::ParameterDirectionKind::RETURN);
-	
-	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_Floor->_setID(REALFUNCTIONS_FUNCTIONBEHAVIOR_FLOOR);
-	
-	
-	//Max
-	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_Max->setName("Max");
-	// parameter x
-	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_Max_x->setName("x");
-	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_Max_x->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Real());
-	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_Max_x->setLower(1);
-	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_Max_x->setUpper(1);
-	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_Max_x->setDirection(uml::ParameterDirectionKind::IN);
-	
-	// parameter y
-	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_Max_y->setName("y");
-	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_Max_y->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Real());
-	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_Max_y->setLower(1);
-	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_Max_y->setUpper(1);
-	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_Max_y->setDirection(uml::ParameterDirectionKind::IN);
-	
-	// parameter result
-	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_Max_result->setName("result");
-	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_Max_result->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Real());
-	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_Max_result->setLower(1);
-	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_Max_result->setUpper(1);
-	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_Max_result->setDirection(uml::ParameterDirectionKind::RETURN);
-	
-	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_Max->_setID(REALFUNCTIONS_FUNCTIONBEHAVIOR_MAX);
-	
-	
-	//lessThan
-	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_lessThan->setName("lessThan");
-	// parameter x
-	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_lessThan_x->setName("x");
-	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_lessThan_x->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Real());
-	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_lessThan_x->setLower(1);
-	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_lessThan_x->setUpper(1);
-	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_lessThan_x->setDirection(uml::ParameterDirectionKind::IN);
-	
-	// parameter y
-	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_lessThan_y->setName("y");
-	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_lessThan_y->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Real());
-	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_lessThan_y->setLower(1);
-	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_lessThan_y->setUpper(1);
-	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_lessThan_y->setDirection(uml::ParameterDirectionKind::IN);
-	
-	// parameter result
-	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_lessThan_result->setName("result");
-	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_lessThan_result->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Boolean());
-	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_lessThan_result->setLower(1);
-	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_lessThan_result->setUpper(1);
-	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_lessThan_result->setDirection(uml::ParameterDirectionKind::RETURN);
-	
-	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_lessThan->_setID(REALFUNCTIONS_FUNCTIONBEHAVIOR_LESSTHAN);
-	
-	
-	//times
-	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_times->setName("times");
-	// parameter x
-	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_times_x->setName("x");
-	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_times_x->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Real());
-	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_times_x->setLower(1);
-	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_times_x->setUpper(1);
-	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_times_x->setDirection(uml::ParameterDirectionKind::IN);
-	
-	// parameter y
-	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_times_y->setName("y");
-	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_times_y->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Real());
-	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_times_y->setLower(1);
-	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_times_y->setUpper(1);
-	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_times_y->setDirection(uml::ParameterDirectionKind::IN);
-	
-	// parameter result
-	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_times_result->setName("result");
-	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_times_result->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Real());
-	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_times_result->setLower(1);
-	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_times_result->setUpper(1);
-	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_times_result->setDirection(uml::ParameterDirectionKind::RETURN);
-	
-	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_times->_setID(REALFUNCTIONS_FUNCTIONBEHAVIOR_TIMES);
-	
-	
-	//Neg
-	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_Neg->setName("Neg");
-	// parameter x
-	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_Neg_x->setName("x");
-	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_Neg_x->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Real());
-	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_Neg_x->setLower(1);
-	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_Neg_x->setUpper(1);
-	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_Neg_x->setDirection(uml::ParameterDirectionKind::IN);
-	
-	// parameter result
-	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_Neg_result->setName("result");
-	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_Neg_result->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Real());
-	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_Neg_result->setLower(1);
-	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_Neg_result->setUpper(1);
-	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_Neg_result->setDirection(uml::ParameterDirectionKind::RETURN);
-	
-	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_Neg->_setID(REALFUNCTIONS_FUNCTIONBEHAVIOR_NEG);
-	
-	
-	//ToReal
-	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_ToReal->setName("ToReal");
-	// parameter x
-	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_ToReal_x->setName("x");
-	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_ToReal_x->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_String());
-	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_ToReal_x->setLower(1);
-	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_ToReal_x->setUpper(1);
-	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_ToReal_x->setDirection(uml::ParameterDirectionKind::IN);
-	
-	// parameter result
-	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_ToReal_result->setName("result");
-	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_ToReal_result->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Real());
-	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_ToReal_result->setLower(0);
-	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_ToReal_result->setUpper(1);
-	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_ToReal_result->setDirection(uml::ParameterDirectionKind::RETURN);
-	
-	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_ToReal->_setID(REALFUNCTIONS_FUNCTIONBEHAVIOR_TOREAL);
-	
-	
 	//divide
 	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_divide->setName("divide");
 	// parameter x
@@ -949,6 +823,51 @@ void RealFunctionsPackageImpl::initializePackageSignals()
 	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_divide->_setID(REALFUNCTIONS_FUNCTIONBEHAVIOR_DIVIDE);
 	
 	
+	//greaterThan
+	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_greaterThan->setName("greaterThan");
+	// parameter x
+	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_greaterThan_x->setName("x");
+	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_greaterThan_x->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Real());
+	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_greaterThan_x->setLower(1);
+	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_greaterThan_x->setUpper(1);
+	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_greaterThan_x->setDirection(uml::ParameterDirectionKind::IN);
+	
+	// parameter y
+	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_greaterThan_y->setName("y");
+	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_greaterThan_y->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Real());
+	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_greaterThan_y->setLower(1);
+	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_greaterThan_y->setUpper(1);
+	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_greaterThan_y->setDirection(uml::ParameterDirectionKind::IN);
+	
+	// parameter result
+	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_greaterThan_result->setName("result");
+	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_greaterThan_result->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Boolean());
+	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_greaterThan_result->setLower(1);
+	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_greaterThan_result->setUpper(1);
+	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_greaterThan_result->setDirection(uml::ParameterDirectionKind::RETURN);
+	
+	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_greaterThan->_setID(REALFUNCTIONS_FUNCTIONBEHAVIOR_GREATERTHAN);
+	
+	
+	//Floor
+	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_Floor->setName("Floor");
+	// parameter x
+	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_Floor_x->setName("x");
+	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_Floor_x->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Real());
+	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_Floor_x->setLower(1);
+	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_Floor_x->setUpper(1);
+	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_Floor_x->setDirection(uml::ParameterDirectionKind::IN);
+	
+	// parameter result
+	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_Floor_result->setName("result");
+	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_Floor_result->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Integer());
+	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_Floor_result->setLower(1);
+	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_Floor_result->setUpper(1);
+	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_Floor_result->setDirection(uml::ParameterDirectionKind::RETURN);
+	
+	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_Floor->_setID(REALFUNCTIONS_FUNCTIONBEHAVIOR_FLOOR);
+	
+	
 	//ToString
 	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_ToString->setName("ToString");
 	// parameter x
@@ -966,6 +885,32 @@ void RealFunctionsPackageImpl::initializePackageSignals()
 	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_ToString_result->setDirection(uml::ParameterDirectionKind::RETURN);
 	
 	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_ToString->_setID(REALFUNCTIONS_FUNCTIONBEHAVIOR_TOSTRING);
+	
+	
+	//times
+	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_times->setName("times");
+	// parameter x
+	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_times_x->setName("x");
+	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_times_x->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Real());
+	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_times_x->setLower(1);
+	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_times_x->setUpper(1);
+	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_times_x->setDirection(uml::ParameterDirectionKind::IN);
+	
+	// parameter y
+	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_times_y->setName("y");
+	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_times_y->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Real());
+	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_times_y->setLower(1);
+	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_times_y->setUpper(1);
+	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_times_y->setDirection(uml::ParameterDirectionKind::IN);
+	
+	// parameter result
+	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_times_result->setName("result");
+	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_times_result->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Real());
+	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_times_result->setLower(1);
+	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_times_result->setUpper(1);
+	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_times_result->setDirection(uml::ParameterDirectionKind::RETURN);
+	
+	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_times->_setID(REALFUNCTIONS_FUNCTIONBEHAVIOR_TIMES);
 	
 	
 	//minus
@@ -1020,6 +965,44 @@ void RealFunctionsPackageImpl::initializePackageSignals()
 	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_Min->_setID(REALFUNCTIONS_FUNCTIONBEHAVIOR_MIN);
 	
 	
+	//ToReal
+	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_ToReal->setName("ToReal");
+	// parameter x
+	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_ToReal_x->setName("x");
+	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_ToReal_x->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_String());
+	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_ToReal_x->setLower(1);
+	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_ToReal_x->setUpper(1);
+	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_ToReal_x->setDirection(uml::ParameterDirectionKind::IN);
+	
+	// parameter result
+	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_ToReal_result->setName("result");
+	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_ToReal_result->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Real());
+	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_ToReal_result->setLower(0);
+	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_ToReal_result->setUpper(1);
+	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_ToReal_result->setDirection(uml::ParameterDirectionKind::RETURN);
+	
+	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_ToReal->_setID(REALFUNCTIONS_FUNCTIONBEHAVIOR_TOREAL);
+	
+	
+	//Inv
+	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_Inv->setName("Inv");
+	// parameter x
+	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_Inv_x->setName("x");
+	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_Inv_x->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Real());
+	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_Inv_x->setLower(1);
+	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_Inv_x->setUpper(1);
+	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_Inv_x->setDirection(uml::ParameterDirectionKind::IN);
+	
+	// parameter result
+	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_Inv_result->setName("result");
+	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_Inv_result->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Real());
+	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_Inv_result->setLower(1);
+	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_Inv_result->setUpper(1);
+	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_Inv_result->setDirection(uml::ParameterDirectionKind::RETURN);
+	
+	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_Inv->_setID(REALFUNCTIONS_FUNCTIONBEHAVIOR_INV);
+	
+	
 	//ToInteger
 	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_ToInteger->setName("ToInteger");
 	// parameter x
@@ -1039,30 +1022,49 @@ void RealFunctionsPackageImpl::initializePackageSignals()
 	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_ToInteger->_setID(REALFUNCTIONS_FUNCTIONBEHAVIOR_TOINTEGER);
 	
 	
-	//plus
-	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_plus->setName("plus");
+	//Abs
+	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_Abs->setName("Abs");
 	// parameter x
-	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_plus_x->setName("x");
-	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_plus_x->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Real());
-	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_plus_x->setLower(1);
-	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_plus_x->setUpper(1);
-	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_plus_x->setDirection(uml::ParameterDirectionKind::IN);
-	
-	// parameter y
-	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_plus_y->setName("y");
-	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_plus_y->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Real());
-	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_plus_y->setLower(1);
-	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_plus_y->setUpper(1);
-	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_plus_y->setDirection(uml::ParameterDirectionKind::IN);
+	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_Abs_x->setName("x");
+	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_Abs_x->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Real());
+	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_Abs_x->setLower(1);
+	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_Abs_x->setUpper(1);
+	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_Abs_x->setDirection(uml::ParameterDirectionKind::IN);
 	
 	// parameter result
-	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_plus_result->setName("result");
-	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_plus_result->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Real());
-	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_plus_result->setLower(1);
-	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_plus_result->setUpper(1);
-	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_plus_result->setDirection(uml::ParameterDirectionKind::RETURN);
+	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_Abs_result->setName("result");
+	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_Abs_result->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Real());
+	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_Abs_result->setLower(1);
+	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_Abs_result->setUpper(1);
+	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_Abs_result->setDirection(uml::ParameterDirectionKind::RETURN);
 	
-	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_plus->_setID(REALFUNCTIONS_FUNCTIONBEHAVIOR_PLUS);
+	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_Abs->_setID(REALFUNCTIONS_FUNCTIONBEHAVIOR_ABS);
+	
+	
+	//Max
+	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_Max->setName("Max");
+	// parameter x
+	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_Max_x->setName("x");
+	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_Max_x->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Real());
+	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_Max_x->setLower(1);
+	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_Max_x->setUpper(1);
+	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_Max_x->setDirection(uml::ParameterDirectionKind::IN);
+	
+	// parameter y
+	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_Max_y->setName("y");
+	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_Max_y->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Real());
+	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_Max_y->setLower(1);
+	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_Max_y->setUpper(1);
+	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_Max_y->setDirection(uml::ParameterDirectionKind::IN);
+	
+	// parameter result
+	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_Max_result->setName("result");
+	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_Max_result->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Real());
+	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_Max_result->setLower(1);
+	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_Max_result->setUpper(1);
+	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_Max_result->setDirection(uml::ParameterDirectionKind::RETURN);
+	
+	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_Max->_setID(REALFUNCTIONS_FUNCTIONBEHAVIOR_MAX);
 	
 	
 	//greaterOrEqual
@@ -1091,49 +1093,23 @@ void RealFunctionsPackageImpl::initializePackageSignals()
 	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_greaterOrEqual->_setID(REALFUNCTIONS_FUNCTIONBEHAVIOR_GREATEROREQUAL);
 	
 	
-	//Inv
-	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_Inv->setName("Inv");
+	//Neg
+	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_Neg->setName("Neg");
 	// parameter x
-	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_Inv_x->setName("x");
-	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_Inv_x->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Real());
-	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_Inv_x->setLower(1);
-	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_Inv_x->setUpper(1);
-	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_Inv_x->setDirection(uml::ParameterDirectionKind::IN);
+	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_Neg_x->setName("x");
+	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_Neg_x->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Real());
+	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_Neg_x->setLower(1);
+	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_Neg_x->setUpper(1);
+	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_Neg_x->setDirection(uml::ParameterDirectionKind::IN);
 	
 	// parameter result
-	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_Inv_result->setName("result");
-	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_Inv_result->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Real());
-	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_Inv_result->setLower(1);
-	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_Inv_result->setUpper(1);
-	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_Inv_result->setDirection(uml::ParameterDirectionKind::RETURN);
+	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_Neg_result->setName("result");
+	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_Neg_result->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Real());
+	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_Neg_result->setLower(1);
+	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_Neg_result->setUpper(1);
+	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_Neg_result->setDirection(uml::ParameterDirectionKind::RETURN);
 	
-	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_Inv->_setID(REALFUNCTIONS_FUNCTIONBEHAVIOR_INV);
-	
-	
-	//greaterThan
-	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_greaterThan->setName("greaterThan");
-	// parameter x
-	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_greaterThan_x->setName("x");
-	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_greaterThan_x->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Real());
-	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_greaterThan_x->setLower(1);
-	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_greaterThan_x->setUpper(1);
-	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_greaterThan_x->setDirection(uml::ParameterDirectionKind::IN);
-	
-	// parameter y
-	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_greaterThan_y->setName("y");
-	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_greaterThan_y->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Real());
-	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_greaterThan_y->setLower(1);
-	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_greaterThan_y->setUpper(1);
-	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_greaterThan_y->setDirection(uml::ParameterDirectionKind::IN);
-	
-	// parameter result
-	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_greaterThan_result->setName("result");
-	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_greaterThan_result->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Boolean());
-	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_greaterThan_result->setLower(1);
-	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_greaterThan_result->setUpper(1);
-	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_greaterThan_result->setDirection(uml::ParameterDirectionKind::RETURN);
-	
-	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_greaterThan->_setID(REALFUNCTIONS_FUNCTIONBEHAVIOR_GREATERTHAN);
+	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_Neg->_setID(REALFUNCTIONS_FUNCTIONBEHAVIOR_NEG);
 	
 	
 	//Round
@@ -1153,6 +1129,32 @@ void RealFunctionsPackageImpl::initializePackageSignals()
 	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_Round_result->setDirection(uml::ParameterDirectionKind::RETURN);
 	
 	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_Round->_setID(REALFUNCTIONS_FUNCTIONBEHAVIOR_ROUND);
+	
+	
+	//plus
+	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_plus->setName("plus");
+	// parameter x
+	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_plus_x->setName("x");
+	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_plus_x->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Real());
+	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_plus_x->setLower(1);
+	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_plus_x->setUpper(1);
+	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_plus_x->setDirection(uml::ParameterDirectionKind::IN);
+	
+	// parameter y
+	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_plus_y->setName("y");
+	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_plus_y->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Real());
+	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_plus_y->setLower(1);
+	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_plus_y->setUpper(1);
+	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_plus_y->setDirection(uml::ParameterDirectionKind::IN);
+	
+	// parameter result
+	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_plus_result->setName("result");
+	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_plus_result->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Real());
+	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_plus_result->setLower(1);
+	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_plus_result->setUpper(1);
+	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_plus_result->setDirection(uml::ParameterDirectionKind::RETURN);
+	
+	foundationalModelLibrary_PrimitiveBehaviors_RealFunctions_plus->_setID(REALFUNCTIONS_FUNCTIONBEHAVIOR_PLUS);
 	
 	
 }

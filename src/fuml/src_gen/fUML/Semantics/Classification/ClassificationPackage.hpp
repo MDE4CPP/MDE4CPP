@@ -16,9 +16,9 @@ namespace ecore
 {
 	class EStringToStringMapEntry;
 	class EAnnotation;
-	class EGenericType;
-	class EOperation;
 	class EClass;
+	class EOperation;
+	class EGenericType;
 }
 
 namespace fUML::Semantics::Classification 

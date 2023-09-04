@@ -9,10 +9,10 @@
 //metametamodel classes
 #include "ecore/EStringToStringMapEntry.hpp"
 #include "ecore/EAnnotation.hpp"
+#include "ecore/EClass.hpp"
+#include "ecore/EOperation.hpp"
 #include "ecore/EReference.hpp"
 #include "ecore/EGenericType.hpp"
-#include "ecore/EOperation.hpp"
-#include "ecore/EClass.hpp"
 #include "ecore/EParameter.hpp"
 
 //depending model packages

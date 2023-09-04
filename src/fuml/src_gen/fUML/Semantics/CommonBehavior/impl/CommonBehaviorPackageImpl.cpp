@@ -6,13 +6,13 @@
 //metametamodel classes
 #include "ecore/EStringToStringMapEntry.hpp"
 #include "ecore/EAnnotation.hpp"
-#include "ecore/EAttribute.hpp"
-#include "ecore/EReference.hpp"
-#include "ecore/EGenericType.hpp"
-#include "ecore/EOperation.hpp"
 #include "ecore/EClass.hpp"
-#include "ecore/EParameter.hpp"
+#include "ecore/EOperation.hpp"
+#include "ecore/EReference.hpp"
+#include "ecore/EAttribute.hpp"
+#include "ecore/EGenericType.hpp"
 #include "ecore/EDataType.hpp"
+#include "ecore/EParameter.hpp"
 
 //metamodel factory
 #include "fUML/Semantics/CommonBehavior/CommonBehaviorFactory.hpp"

@@ -8793,8 +8793,6 @@ namespace UML
 			void createPackageSignals(std::shared_ptr<uml::Package> uML, std::shared_ptr<uml::umlFactory> factory);
 			void createPackageStereotypes(std::shared_ptr<uml::Package> uML, std::shared_ptr<uml::umlFactory> factory);
 			void createPackageValueSpecifications(std::shared_ptr<uml::Package> uML, std::shared_ptr<uml::umlFactory> factory);
-			//PSSM
-			void createPackageStateMachines(std::shared_ptr<uml::Package> uML, std::shared_ptr<uml::umlFactory> factory);
 
 			void initializePackageActivities();
 			void initializePackageClasses();
@@ -8809,8 +8807,6 @@ namespace UML
 			void initializePackageSignals();
 			void initializePackageStereotypes();
 			void initializePackageValueSpecifications();
-			//PSSM
-			void initializePackageStateMachines();
 	};
 }
 #endif /* end of include guard: UML_METAMODELPACKAGEIMPL_HPP */

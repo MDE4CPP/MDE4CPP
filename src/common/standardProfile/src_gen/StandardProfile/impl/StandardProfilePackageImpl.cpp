@@ -438,6 +438,8 @@ void StandardProfilePackageImpl::createPackageValueSpecifications(std::shared_pt
 	
 }
 
+
+
 void StandardProfilePackageImpl::initializePackageContents(std::shared_ptr<uml::Package> standardProfile)
 {
 	if (isInitialized)

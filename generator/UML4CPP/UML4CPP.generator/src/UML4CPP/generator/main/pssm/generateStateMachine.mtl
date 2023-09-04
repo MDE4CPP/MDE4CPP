@@ -45,10 +45,13 @@
 */]
 [template public generateStateMachineInitialization(aStateMachine : StateMachine)]
 // StateMachine [aStateMachine.name/]
+[if (not isReflectionModel(aStateMachine.getRootPackage()))]
+[aStateMachine.memberName()/]->_setID([aStateMachine.getMemberName().toUpperCase()/]);
+[/if]
 [aStateMachine.memberName()/]->setName("[aStateMachine.name/]");
-[aStateMachine.ownedParameter.generateParameterInitialization()/]
-[if (aStateMachine.owner.oclIsKindOf(BehavioredClassifier))]
+[if (aStateMachine.owner.oclIsKindOf(BehavioredClassifier))] 
 [aStateMachine.memberName()/]->setContext([aStateMachine.owner.oclAsType(BehavioredClassifier).memberName()/]);
 [/if]
+[aStateMachine.ownedParameter.generateParameterInitialization()/]
 
 [/template]

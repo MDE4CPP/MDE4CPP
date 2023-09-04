@@ -7,8 +7,6 @@
 
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "uml/VisibilityKind.hpp"
-//PSSM
-#include "uml/PseudostateKind.hpp"
 //meta meta model factory
 #include "uml/umlFactory.hpp"
 
@@ -100,8 +98,6 @@ void PrimitiveTypesPackageImpl::createPackageContents(std::shared_ptr<uml::Packa
 	createPackagePrimitiveTypes(primitiveTypes, factory);
 	createPackageSignals(primitiveTypes, factory);
 	createPackageStereotypes(primitiveTypes, factory);
-	//PSSM
-	createPackageStateMachines(primitiveTypes, factory);
 }
 
 void PrimitiveTypesPackageImpl::createPackageActivities(std::shared_ptr<uml::Package> primitiveTypes, std::shared_ptr<uml::umlFactory> factory)
@@ -185,11 +181,6 @@ void PrimitiveTypesPackageImpl::createPackageValueSpecifications(std::shared_ptr
 {
 }
 
-//PSSM
-void PrimitiveTypesPackageImpl::createPackageStateMachines(std::shared_ptr<uml::Package> primitiveTypes, std::shared_ptr<uml::umlFactory> factory)
-{
-}
-
 
 
 void PrimitiveTypesPackageImpl::initializePackageContents(std::shared_ptr<uml::Package> primitiveTypes)
@@ -218,8 +209,6 @@ void PrimitiveTypesPackageImpl::initializePackageContents(std::shared_ptr<uml::P
 	initializePackageStereotypes();
 	initializePackageValueSpecifications();
 	
-	//PSSM
-	initializePackageStateMachines();
 }
 
 //ActivityNodes and Edges
@@ -313,11 +302,5 @@ const std::shared_ptr<uml::PrimitiveType>& PrimitiveTypesPackageImpl::get_Primit
 }
 
 
-
-
-// PSSM
-void PrimitiveTypesPackageImpl::initializePackageStateMachines()
-{
-}
 
 

@@ -75,5 +75,9 @@
 [query private collectActivitiesUsedByDecisionNodes(aPackage : Package) : Set(Activity) = 
 	aPackage.getRootPackage().allOwnedElements()->filter(DecisionNode).decisionInput->filter(Activity)->asSet()/]
 
+[comment PSSM collection helpers /]
+[query public collectStateMachinesOwnedByPackage(aPackage : Package) : Set(StateMachine) = 
+	aPackage.getRootPackage().allOwnedElements()->filter(StateMachine)->asSet()/]
+
 [comment Helper query, returns a Set containing the main activity of the model if there is one, or else an empty Set /]
 [query private getMainActivityAsSet(aPackage : Package) : Set(Activity) = if(aPackage.hasMainActivity()) then Set{aPackage.getMainActivity()} else Set{} endif /]

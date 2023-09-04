@@ -238,6 +238,11 @@ types::typesPackage::[aClassifier.name.toUpperCase()/]_CLASS
 
 
 [**
+ * PSSM: check if a package contains a StateMachine. Currently used to determin if model must be built in PSSM-conformance mode.
+*/]
+[query public hasStateMachine(aPackage : Package) : Boolean = (aPackage.allOwnedElements()->filter(StateMachine)->size() > 0) /]
+
+[**
  * PSSM: check if an element is directly or indirectly owned by a StateMachine
 */]
 [query public isOwnedByStateMachine(anElement : Element) : Boolean = 

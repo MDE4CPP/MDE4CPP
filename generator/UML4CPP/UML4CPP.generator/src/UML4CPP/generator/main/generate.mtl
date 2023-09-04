@@ -137,7 +137,7 @@
 		[/if]
 	[/for]
 	[comment Generate global functions /]
-	[if ((aPackage.collectOpaqueBehaviorsForGlobalFunctionsOfPackage()->size() > 0) or (aPackage.allOwnedElements()->filter(StateMachine)->size() > 0))]
+	[if ((aPackage.collectOpaqueBehaviorsForGlobalFunctionsOfPackage()->size() > 0) or aPackage.hasStateMachine())]
 		[printInfo('Generating global functions library for ' + aPackage.eClass().name + ' ' + aPackage.generateNamespace(false), 1)/]
 		[aPackage.generatePackageGlobalFunctionsFiles()/]
 	[/if]

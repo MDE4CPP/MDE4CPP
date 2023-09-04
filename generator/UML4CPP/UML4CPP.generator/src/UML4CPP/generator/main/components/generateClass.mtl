@@ -202,6 +202,7 @@ static const unsigned long [anOperation.getMemberName().toUpperCase()/] = [anOpe
  * As State Behaviors are not owned by a Class, they have to be fetched seperately
 */]
 [template private generateStaticPackageIDsForStateMachine(aStateMachine : StateMachine)]
+[aStateMachine.generateStaticClassID()/]
 [for (aStateMachineBehavior : Behavior | aStateMachine.allOwnedElements()->filter(Behavior)->asSet())]
 	[aStateMachineBehavior.generateStaticPackageIDsForClass()/]
 [/for]

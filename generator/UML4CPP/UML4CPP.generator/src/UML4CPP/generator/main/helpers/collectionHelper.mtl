@@ -214,6 +214,7 @@
 
 [**
  * query to collect all OpaqueBehaviors belonging to aPackage of which the context is not a class and that are not the specification of any Operation.
+ * PSSM: Also, all Behaviors owned by a StateMachine regardless of their context property value
  * These will be treated as global functions of the generated library
 */]
 [query public collectOpaqueBehaviorsForGlobalFunctionsOfPackage(aPackage : Package) : Set(OpaqueBehavior) = 

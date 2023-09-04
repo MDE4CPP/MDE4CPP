@@ -16,10 +16,10 @@ namespace ecore
 {
 	class EStringToStringMapEntry;
 	class EAnnotation;
+	class EClass;
+	class EOperation;
 	class EReference;
 	class EGenericType;
-	class EOperation;
-	class EClass;
 	class EParameter;
 }
 

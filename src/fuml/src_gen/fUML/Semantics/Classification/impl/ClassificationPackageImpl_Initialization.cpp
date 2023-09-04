@@ -6,9 +6,9 @@
 //metametamodel classes
 #include "ecore/EStringToStringMapEntry.hpp"
 #include "ecore/EAnnotation.hpp"
-#include "ecore/EGenericType.hpp"
-#include "ecore/EOperation.hpp"
 #include "ecore/EClass.hpp"
+#include "ecore/EOperation.hpp"
+#include "ecore/EGenericType.hpp"
 
 // metametamodel factory
 #include "ecore/ecoreFactory.hpp"

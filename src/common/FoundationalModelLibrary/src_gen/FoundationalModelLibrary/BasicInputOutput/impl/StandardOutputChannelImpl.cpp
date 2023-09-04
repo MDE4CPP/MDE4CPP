@@ -115,12 +115,12 @@ const std::shared_ptr<Bag<uml::Classifier>>& StandardOutputChannelImpl::getTypes
 		types.reset();
 		// Add type of self 'StandardOutputChannel' : Class
 		types->add(FoundationalModelLibrary::BasicInputOutput::BasicInputOutputPackage::eInstance()->get_FoundationalModelLibrary_BasicInputOutput_StandardOutputChannel());
-		// Add base type 'TextOutputChannel' : Class
-		types->add(FoundationalModelLibrary::BasicInputOutput::BasicInputOutputPackage::eInstance()->get_FoundationalModelLibrary_BasicInputOutput_TextOutputChannel());
 		// Add base type 'OutputChannel' : Class
 		types->add(FoundationalModelLibrary::BasicInputOutput::BasicInputOutputPackage::eInstance()->get_FoundationalModelLibrary_BasicInputOutput_OutputChannel());
 		// Add base type 'Channel' : Class
 		types->add(FoundationalModelLibrary::BasicInputOutput::BasicInputOutputPackage::eInstance()->get_FoundationalModelLibrary_BasicInputOutput_Channel());
+		// Add base type 'TextOutputChannel' : Class
+		types->add(FoundationalModelLibrary::BasicInputOutput::BasicInputOutputPackage::eInstance()->get_FoundationalModelLibrary_BasicInputOutput_TextOutputChannel());
 	}
 
 	return types;

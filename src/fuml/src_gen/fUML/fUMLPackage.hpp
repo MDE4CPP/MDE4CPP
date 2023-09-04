@@ -14,16 +14,16 @@
 
 namespace ecore 
 {
+	class EPackage;
 	class EStringToStringMapEntry;
 	class EAnnotation;
-	class EAttribute;
-	class EReference;
-	class EGenericType;
-	class EPackage;
-	class EOperation;
 	class EClass;
-	class EParameter;
+	class EOperation;
+	class EReference;
+	class EAttribute;
+	class EGenericType;
 	class EDataType;
+	class EParameter;
 }
 
 namespace fUML 

@@ -48,7 +48,6 @@
 [import UML4CPP::generator::main::profiles::uml4CPPProfileHelper /]
 [import UML4CPP::generator::main::helpers::isGeneratableHelper /]
 [import UML4CPP::generator::main::helpers::singletonHelper /]
-
 [import UML4CPP::generator::main::components::generateParameter /]
 
 
@@ -104,8 +103,10 @@
 
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "uml/VisibilityKind.hpp"
+[if (aPackage.hasStateMachine())]
 //PSSM
 #include "uml/PseudostateKind.hpp"
+[/if]
 //meta meta model factory
 #include "[aPackage.eClass().ePackage.name/]/[aPackage.eClass().ePackage.name.concat('Factory')/].hpp"
 [if ((aPackage.name = 'Ecore') or (aPackage.name = 'UML') )]
@@ -217,8 +218,10 @@ void [packageName/]::createPackageContents(std::shared_ptr<uml::Package> [aPacka
 	createPackagePrimitiveTypes([aPackage.memberName()/], factory);
 	createPackageSignals([aPackage.memberName()/], factory);
 	createPackageStereotypes([aPackage.memberName()/], factory);
+[if (aPackage.hasStateMachine())]
 	//PSSM
 	createPackageStateMachines([aPackage.memberName()/], factory);
+[/if]
 }
 
 void [packageName/]::createPackageActivities(std::shared_ptr<uml::Package> [aPackage.memberName()/], std::shared_ptr<uml::umlFactory> factory)
@@ -400,8 +403,9 @@ void [packageName/]::createPackageValueSpecifications(std::shared_ptr<uml::Packa
 [/for]
 }
 
-//PSSM
 [comment Create all State Machines in Package/]
+[if (aPackage.hasStateMachine())]
+//PSSM
 void [packageName/]::createPackageStateMachines(std::shared_ptr<uml::Package> [aPackage.memberName()/], std::shared_ptr<uml::umlFactory> factory)
 {
 [for (aStateMachine : StateMachine | (aPackage.getElementsBelongingToPackage()->filter(StateMachine)->sortedBy(myQualifiedName())))]
@@ -460,6 +464,7 @@ void [packageName/]::createStateMachine_[aStateMachine.memberName()/](std::share
 }
 
 [/for]
+[/if]
 
 
 void [packageName/]::initializePackageContents(std::shared_ptr<uml::Package> [aPackage.memberName()/])
@@ -491,8 +496,10 @@ void [packageName/]::initializePackageContents(std::shared_ptr<uml::Package> [aP
 	initializePackageStereotypes();
 	initializePackageValueSpecifications();
 	[if (not aPackage.oclIsKindOf(Profile))][aPackage.generateStereotypeApplication()/][/if]
+[if (aPackage.hasStateMachine())]
 	//PSSM
 	initializePackageStateMachines();
+[/if]
 }
 
 //ActivityNodes and Edges
@@ -702,6 +709,7 @@ void [packageName/]::initializePackageValueSpecifications()
 [/for]
 
 [comment Initialize all State Machines in aPackage/]
+[if (aPackage.hasStateMachine())]
 // PSSM
 void [packageName/]::initializePackageStateMachines()
 {
@@ -765,6 +773,6 @@ void [packageName/]::initializeStateMachine_[aStateMachine.memberName()/]()
 }
 
 [/for]
-
+[/if]
 [/file]
 [/template]

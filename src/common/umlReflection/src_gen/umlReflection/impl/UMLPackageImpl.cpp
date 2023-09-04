@@ -24,8 +24,6 @@
 
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "uml/VisibilityKind.hpp"
-//PSSM
-#include "uml/PseudostateKind.hpp"
 //meta meta model factory
 #include "uml/umlFactory.hpp"
 #include "uml/umlPackage.hpp"
@@ -124,8 +122,6 @@ void UMLPackageImpl::createPackageContents(std::shared_ptr<uml::Package> uML)
 	createPackagePrimitiveTypes(uML, factory);
 	createPackageSignals(uML, factory);
 	createPackageStereotypes(uML, factory);
-	//PSSM
-	createPackageStateMachines(uML, factory);
 }
 
 void UMLPackageImpl::createPackageActivities(std::shared_ptr<uml::Package> uML, std::shared_ptr<uml::umlFactory> factory)
@@ -16648,11 +16644,6 @@ void UMLPackageImpl::createPackageValueSpecifications(std::shared_ptr<uml::Packa
 	
 }
 
-//PSSM
-void UMLPackageImpl::createPackageStateMachines(std::shared_ptr<uml::Package> uML, std::shared_ptr<uml::umlFactory> factory)
-{
-}
-
 
 
 void UMLPackageImpl::initializePackageContents(std::shared_ptr<uml::Package> uML)
@@ -16681,8 +16672,6 @@ void UMLPackageImpl::initializePackageContents(std::shared_ptr<uml::Package> uML
 	initializePackageStereotypes();
 	initializePackageValueSpecifications();
 	
-	//PSSM
-	initializePackageStateMachines();
 }
 
 //ActivityNodes and Edges
@@ -54151,11 +54140,5 @@ const std::shared_ptr<uml::Constraint>& UMLPackageImpl::get_UML_WriteVariableAct
 }
 
 
-
-
-// PSSM
-void UMLPackageImpl::initializePackageStateMachines()
-{
-}
 
 
