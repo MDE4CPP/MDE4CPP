@@ -37,6 +37,7 @@
 
 //Includes from roles of ConnectorEnds (if required)
 
+
 using namespace StandardProfile;
 
 //*********************************
@@ -270,16 +271,4 @@ void SendImpl::setThisSendPtr(std::weak_ptr<Send> thisSendPtr)
 	m_thisSendPtr = thisSendPtr;
 	setThisStereotypePtr(thisSendPtr);
 }
-
-
-//*********************************
-// ObjectActivation Forwarder Impl
-//*********************************
-// Getter for Active Class
-bool SendImpl::GetIsActive() const
-{
-		return false;
-
-}
-
 

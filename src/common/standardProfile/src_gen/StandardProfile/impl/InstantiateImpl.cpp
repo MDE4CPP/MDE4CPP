@@ -37,6 +37,7 @@
 
 //Includes from roles of ConnectorEnds (if required)
 
+
 using namespace StandardProfile;
 
 //*********************************
@@ -270,16 +271,4 @@ void InstantiateImpl::setThisInstantiatePtr(std::weak_ptr<Instantiate> thisInsta
 	m_thisInstantiatePtr = thisInstantiatePtr;
 	setThisStereotypePtr(thisInstantiatePtr);
 }
-
-
-//*********************************
-// ObjectActivation Forwarder Impl
-//*********************************
-// Getter for Active Class
-bool InstantiateImpl::GetIsActive() const
-{
-		return false;
-
-}
-
 

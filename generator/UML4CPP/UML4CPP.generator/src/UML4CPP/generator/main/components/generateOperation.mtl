@@ -57,7 +57,7 @@ virtual [aOperation.generateCppType()/] [aOperation.name/]([for (sParameter : Pa
 [/let]
 [/if]
 
-[comment TODO: the following if is somethimes undefined when the method is an activity instead of a function behaviour/] 
+[comment TODO: the following if is sometimes undefined when the method is an activity instead of a function behaviour/] 
 [if (aOperation.method->notEmpty())]
 	[if(aOperation.method->filter(Activity)->notEmpty())]
 	std::shared_ptr<PluginFramework> pluginFramework = PluginFramework::eInstance();

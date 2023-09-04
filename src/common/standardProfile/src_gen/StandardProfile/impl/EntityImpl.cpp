@@ -37,6 +37,7 @@
 
 //Includes from roles of ConnectorEnds (if required)
 
+
 using namespace StandardProfile;
 
 //*********************************
@@ -270,16 +271,4 @@ void EntityImpl::setThisEntityPtr(std::weak_ptr<Entity> thisEntityPtr)
 	m_thisEntityPtr = thisEntityPtr;
 	setThisStereotypePtr(thisEntityPtr);
 }
-
-
-//*********************************
-// ObjectActivation Forwarder Impl
-//*********************************
-// Getter for Active Class
-bool EntityImpl::GetIsActive() const
-{
-		return false;
-
-}
-
 

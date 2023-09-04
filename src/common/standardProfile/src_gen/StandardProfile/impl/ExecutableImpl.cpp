@@ -37,6 +37,7 @@
 
 //Includes from roles of ConnectorEnds (if required)
 
+
 using namespace StandardProfile;
 
 //*********************************
@@ -285,16 +286,4 @@ void ExecutableImpl::setThisExecutablePtr(std::weak_ptr<Executable> thisExecutab
 	m_thisExecutablePtr = thisExecutablePtr;
 	setThisFilePtr(thisExecutablePtr);
 }
-
-
-//*********************************
-// ObjectActivation Forwarder Impl
-//*********************************
-// Getter for Active Class
-bool ExecutableImpl::GetIsActive() const
-{
-		return false;
-
-}
-
 

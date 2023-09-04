@@ -38,6 +38,7 @@
 
 //Includes from roles of ConnectorEnds (if required)
 
+
 using namespace UML4CPPProfile;
 
 //*********************************
@@ -289,16 +290,4 @@ void SetterNameImpl::setThisSetterNamePtr(std::weak_ptr<SetterName> thisSetterNa
 	m_thisSetterNamePtr = thisSetterNamePtr;
 	setThisStereotypePtr(thisSetterNamePtr);
 }
-
-
-//*********************************
-// ObjectActivation Forwarder Impl
-//*********************************
-// Getter for Active Class
-bool SetterNameImpl::GetIsActive() const
-{
-		return false;
-
-}
-
 

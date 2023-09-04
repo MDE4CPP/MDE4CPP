@@ -37,6 +37,7 @@
 
 //Includes from roles of ConnectorEnds (if required)
 
+
 using namespace StandardProfile;
 
 //*********************************
@@ -270,16 +271,4 @@ void FileImpl::setThisFilePtr(std::weak_ptr<File> thisFilePtr)
 	m_thisFilePtr = thisFilePtr;
 	setThisStereotypePtr(thisFilePtr);
 }
-
-
-//*********************************
-// ObjectActivation Forwarder Impl
-//*********************************
-// Getter for Active Class
-bool FileImpl::GetIsActive() const
-{
-		return false;
-
-}
-
 

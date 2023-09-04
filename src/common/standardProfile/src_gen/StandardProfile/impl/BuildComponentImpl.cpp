@@ -37,6 +37,7 @@
 
 //Includes from roles of ConnectorEnds (if required)
 
+
 using namespace StandardProfile;
 
 //*********************************
@@ -270,16 +271,4 @@ void BuildComponentImpl::setThisBuildComponentPtr(std::weak_ptr<BuildComponent> 
 	m_thisBuildComponentPtr = thisBuildComponentPtr;
 	setThisStereotypePtr(thisBuildComponentPtr);
 }
-
-
-//*********************************
-// ObjectActivation Forwarder Impl
-//*********************************
-// Getter for Active Class
-bool BuildComponentImpl::GetIsActive() const
-{
-		return false;
-
-}
-
 

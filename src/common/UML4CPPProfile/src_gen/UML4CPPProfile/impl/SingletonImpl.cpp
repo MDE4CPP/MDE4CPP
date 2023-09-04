@@ -37,6 +37,7 @@
 
 //Includes from roles of ConnectorEnds (if required)
 
+
 using namespace UML4CPPProfile;
 
 //*********************************
@@ -270,16 +271,4 @@ void SingletonImpl::setThisSingletonPtr(std::weak_ptr<Singleton> thisSingletonPt
 	m_thisSingletonPtr = thisSingletonPtr;
 	setThisStereotypePtr(thisSingletonPtr);
 }
-
-
-//*********************************
-// ObjectActivation Forwarder Impl
-//*********************************
-// Getter for Active Class
-bool SingletonImpl::GetIsActive() const
-{
-		return false;
-
-}
-
 

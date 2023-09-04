@@ -37,6 +37,7 @@
 
 //Includes from roles of ConnectorEnds (if required)
 
+
 using namespace StandardProfile;
 
 //*********************************
@@ -270,16 +271,4 @@ void ModelLibraryImpl::setThisModelLibraryPtr(std::weak_ptr<ModelLibrary> thisMo
 	m_thisModelLibraryPtr = thisModelLibraryPtr;
 	setThisStereotypePtr(thisModelLibraryPtr);
 }
-
-
-//*********************************
-// ObjectActivation Forwarder Impl
-//*********************************
-// Getter for Active Class
-bool ModelLibraryImpl::GetIsActive() const
-{
-		return false;
-
-}
-
 

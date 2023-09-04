@@ -37,6 +37,7 @@
 
 //Includes from roles of ConnectorEnds (if required)
 
+
 using namespace StandardProfile;
 
 //*********************************
@@ -270,16 +271,4 @@ void FrameworkImpl::setThisFrameworkPtr(std::weak_ptr<Framework> thisFrameworkPt
 	m_thisFrameworkPtr = thisFrameworkPtr;
 	setThisStereotypePtr(thisFrameworkPtr);
 }
-
-
-//*********************************
-// ObjectActivation Forwarder Impl
-//*********************************
-// Getter for Active Class
-bool FrameworkImpl::GetIsActive() const
-{
-		return false;
-
-}
-
 

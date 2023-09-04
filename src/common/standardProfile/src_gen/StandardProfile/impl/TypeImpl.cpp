@@ -37,6 +37,7 @@
 
 //Includes from roles of ConnectorEnds (if required)
 
+
 using namespace StandardProfile;
 
 //*********************************
@@ -270,16 +271,4 @@ void TypeImpl::setThisTypePtr(std::weak_ptr<Type> thisTypePtr)
 	m_thisTypePtr = thisTypePtr;
 	setThisStereotypePtr(thisTypePtr);
 }
-
-
-//*********************************
-// ObjectActivation Forwarder Impl
-//*********************************
-// Getter for Active Class
-bool TypeImpl::GetIsActive() const
-{
-		return false;
-
-}
-
 

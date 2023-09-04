@@ -37,6 +37,7 @@
 
 //Includes from roles of ConnectorEnds (if required)
 
+
 using namespace StandardProfile;
 
 //*********************************
@@ -270,16 +271,4 @@ void MetamodelImpl::setThisMetamodelPtr(std::weak_ptr<Metamodel> thisMetamodelPt
 	m_thisMetamodelPtr = thisMetamodelPtr;
 	setThisStereotypePtr(thisMetamodelPtr);
 }
-
-
-//*********************************
-// ObjectActivation Forwarder Impl
-//*********************************
-// Getter for Active Class
-bool MetamodelImpl::GetIsActive() const
-{
-		return false;
-
-}
-
 

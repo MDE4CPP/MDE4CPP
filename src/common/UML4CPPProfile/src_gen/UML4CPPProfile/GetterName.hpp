@@ -22,11 +22,6 @@ namespace uml
 
 
 
-
-
-// include object activation
-#include "fUML/Semantics/CommonBehavior/ObjectActivation.hpp"
-
 namespace UML4CPPProfile
 {
 	class GetterName : virtual public uml::Stereotype 
@@ -52,12 +47,6 @@ namespace UML4CPPProfile
 			// Operations
 			//*********************************
 			
-
-			//*********************************
-			// ObjectActivation Forwarder SetGet
-			//*********************************
-			// Getter for Active Class
-			virtual bool GetIsActive() const = 0;
 			
 		protected:
 			//*********************************
@@ -66,8 +55,6 @@ namespace UML4CPPProfile
 			std::weak_ptr<uml::Property> m_base_Property;
 			std::string m_getterName;
 			
-			
-
 			
 
 		public:

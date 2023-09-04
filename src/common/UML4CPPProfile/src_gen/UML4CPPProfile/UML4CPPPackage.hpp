@@ -22,11 +22,6 @@ namespace uml
 
 
 
-
-
-// include object activation
-#include "fUML/Semantics/CommonBehavior/ObjectActivation.hpp"
-
 namespace UML4CPPProfile
 {
 	class UML4CPPPackage : virtual public uml::Stereotype 
@@ -56,12 +51,6 @@ namespace UML4CPPProfile
 			// Operations
 			//*********************************
 			
-
-			//*********************************
-			// ObjectActivation Forwarder SetGet
-			//*********************************
-			// Getter for Active Class
-			virtual bool GetIsActive() const = 0;
 			
 		protected:
 			//*********************************
@@ -72,8 +61,6 @@ namespace UML4CPPProfile
 			bool m_ignoreNamespace= false /*defined default value*/;
 			bool m_packageOnly= false /*defined default value*/;
 			
-			
-
 			
 
 		public:

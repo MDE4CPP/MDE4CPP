@@ -37,6 +37,7 @@
 
 //Includes from roles of ConnectorEnds (if required)
 
+
 using namespace StandardProfile;
 
 //*********************************
@@ -270,16 +271,4 @@ void UtilityImpl::setThisUtilityPtr(std::weak_ptr<Utility> thisUtilityPtr)
 	m_thisUtilityPtr = thisUtilityPtr;
 	setThisStereotypePtr(thisUtilityPtr);
 }
-
-
-//*********************************
-// ObjectActivation Forwarder Impl
-//*********************************
-// Getter for Active Class
-bool UtilityImpl::GetIsActive() const
-{
-		return false;
-
-}
-
 

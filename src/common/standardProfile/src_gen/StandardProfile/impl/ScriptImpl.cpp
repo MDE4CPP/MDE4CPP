@@ -37,6 +37,7 @@
 
 //Includes from roles of ConnectorEnds (if required)
 
+
 using namespace StandardProfile;
 
 //*********************************
@@ -285,16 +286,4 @@ void ScriptImpl::setThisScriptPtr(std::weak_ptr<Script> thisScriptPtr)
 	m_thisScriptPtr = thisScriptPtr;
 	setThisFilePtr(thisScriptPtr);
 }
-
-
-//*********************************
-// ObjectActivation Forwarder Impl
-//*********************************
-// Getter for Active Class
-bool ScriptImpl::GetIsActive() const
-{
-		return false;
-
-}
-
 

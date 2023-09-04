@@ -37,6 +37,7 @@
 
 //Includes from roles of ConnectorEnds (if required)
 
+
 using namespace UML4CPPProfile;
 
 //*********************************
@@ -270,16 +271,4 @@ void NonExecutableImpl::setThisNonExecutablePtr(std::weak_ptr<NonExecutable> thi
 	m_thisNonExecutablePtr = thisNonExecutablePtr;
 	setThisStereotypePtr(thisNonExecutablePtr);
 }
-
-
-//*********************************
-// ObjectActivation Forwarder Impl
-//*********************************
-// Getter for Active Class
-bool NonExecutableImpl::GetIsActive() const
-{
-		return false;
-
-}
-
 

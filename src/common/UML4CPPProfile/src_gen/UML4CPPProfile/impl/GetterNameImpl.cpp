@@ -38,6 +38,7 @@
 
 //Includes from roles of ConnectorEnds (if required)
 
+
 using namespace UML4CPPProfile;
 
 //*********************************
@@ -289,16 +290,4 @@ void GetterNameImpl::setThisGetterNamePtr(std::weak_ptr<GetterName> thisGetterNa
 	m_thisGetterNamePtr = thisGetterNamePtr;
 	setThisStereotypePtr(thisGetterNamePtr);
 }
-
-
-//*********************************
-// ObjectActivation Forwarder Impl
-//*********************************
-// Getter for Active Class
-bool GetterNameImpl::GetIsActive() const
-{
-		return false;
-
-}
-
 

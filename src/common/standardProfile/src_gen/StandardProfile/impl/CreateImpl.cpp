@@ -39,6 +39,7 @@
 
 //Includes from roles of ConnectorEnds (if required)
 
+
 using namespace StandardProfile;
 
 //*********************************
@@ -294,16 +295,4 @@ void CreateImpl::setThisCreatePtr(std::weak_ptr<Create> thisCreatePtr)
 	m_thisCreatePtr = thisCreatePtr;
 	setThisStereotypePtr(thisCreatePtr);
 }
-
-
-//*********************************
-// ObjectActivation Forwarder Impl
-//*********************************
-// Getter for Active Class
-bool CreateImpl::GetIsActive() const
-{
-		return false;
-
-}
-
 

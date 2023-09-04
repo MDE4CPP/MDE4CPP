@@ -37,6 +37,7 @@
 
 //Includes from roles of ConnectorEnds (if required)
 
+
 using namespace UML4CPPProfile;
 
 //*********************************
@@ -270,16 +271,4 @@ void MainBehaviorImpl::setThisMainBehaviorPtr(std::weak_ptr<MainBehavior> thisMa
 	m_thisMainBehaviorPtr = thisMainBehaviorPtr;
 	setThisStereotypePtr(thisMainBehaviorPtr);
 }
-
-
-//*********************************
-// ObjectActivation Forwarder Impl
-//*********************************
-// Getter for Active Class
-bool MainBehaviorImpl::GetIsActive() const
-{
-		return false;
-
-}
-
 

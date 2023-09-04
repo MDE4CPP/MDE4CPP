@@ -38,6 +38,7 @@
 
 //Includes from roles of ConnectorEnds (if required)
 
+
 using namespace UML4CPPProfile;
 
 //*********************************
@@ -323,16 +324,4 @@ void UML4CPPPackageImpl::setThisUML4CPPPackagePtr(std::weak_ptr<UML4CPPPackage> 
 	m_thisUML4CPPPackagePtr = thisUML4CPPPackagePtr;
 	setThisStereotypePtr(thisUML4CPPPackagePtr);
 }
-
-
-//*********************************
-// ObjectActivation Forwarder Impl
-//*********************************
-// Getter for Active Class
-bool UML4CPPPackageImpl::GetIsActive() const
-{
-		return false;
-
-}
-
 

@@ -37,6 +37,7 @@
 
 //Includes from roles of ConnectorEnds (if required)
 
+
 using namespace StandardProfile;
 
 //*********************************
@@ -285,16 +286,4 @@ void SourceImpl::setThisSourcePtr(std::weak_ptr<Source> thisSourcePtr)
 	m_thisSourcePtr = thisSourcePtr;
 	setThisFilePtr(thisSourcePtr);
 }
-
-
-//*********************************
-// ObjectActivation Forwarder Impl
-//*********************************
-// Getter for Active Class
-bool SourceImpl::GetIsActive() const
-{
-		return false;
-
-}
-
 

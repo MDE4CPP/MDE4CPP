@@ -37,6 +37,7 @@
 
 //Includes from roles of ConnectorEnds (if required)
 
+
 using namespace StandardProfile;
 
 //*********************************
@@ -285,16 +286,4 @@ void DocumentImpl::setThisDocumentPtr(std::weak_ptr<Document> thisDocumentPtr)
 	m_thisDocumentPtr = thisDocumentPtr;
 	setThisFilePtr(thisDocumentPtr);
 }
-
-
-//*********************************
-// ObjectActivation Forwarder Impl
-//*********************************
-// Getter for Active Class
-bool DocumentImpl::GetIsActive() const
-{
-		return false;
-
-}
-
 

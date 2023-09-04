@@ -22,11 +22,6 @@ namespace uml
 
 
 
-
-
-// include object activation
-#include "fUML/Semantics/CommonBehavior/ObjectActivation.hpp"
-
 namespace StandardProfile
 {
 	class Document:virtual public File	{
@@ -49,12 +44,6 @@ namespace StandardProfile
 			// Operations
 			//*********************************
 			
-
-			//*********************************
-			// ObjectActivation Forwarder SetGet
-			//*********************************
-			// Getter for Active Class
-			virtual bool GetIsActive() const = 0;
 			
 		protected:
 			//*********************************
@@ -62,8 +51,6 @@ namespace StandardProfile
 			//*********************************
 			std::weak_ptr<uml::Artifact> m_base_Artifact;
 			
-			
-
 			
 
 		public:

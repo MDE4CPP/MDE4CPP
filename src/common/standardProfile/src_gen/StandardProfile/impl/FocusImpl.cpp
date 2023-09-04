@@ -37,6 +37,7 @@
 
 //Includes from roles of ConnectorEnds (if required)
 
+
 using namespace StandardProfile;
 
 //*********************************
@@ -270,16 +271,4 @@ void FocusImpl::setThisFocusPtr(std::weak_ptr<Focus> thisFocusPtr)
 	m_thisFocusPtr = thisFocusPtr;
 	setThisStereotypePtr(thisFocusPtr);
 }
-
-
-//*********************************
-// ObjectActivation Forwarder Impl
-//*********************************
-// Getter for Active Class
-bool FocusImpl::GetIsActive() const
-{
-		return false;
-
-}
-
 

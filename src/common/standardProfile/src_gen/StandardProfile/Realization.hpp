@@ -22,11 +22,6 @@ namespace uml
 
 
 
-
-
-// include object activation
-#include "fUML/Semantics/CommonBehavior/ObjectActivation.hpp"
-
 namespace StandardProfile
 {
 	class Realization : virtual public uml::Stereotype 
@@ -50,12 +45,6 @@ namespace StandardProfile
 			// Operations
 			//*********************************
 			
-
-			//*********************************
-			// ObjectActivation Forwarder SetGet
-			//*********************************
-			// Getter for Active Class
-			virtual bool GetIsActive() const = 0;
 			
 		protected:
 			//*********************************
@@ -63,8 +52,6 @@ namespace StandardProfile
 			//*********************************
 			std::weak_ptr<uml::Classifier> m_base_Classifier;
 			
-			
-
 			
 
 		public:
