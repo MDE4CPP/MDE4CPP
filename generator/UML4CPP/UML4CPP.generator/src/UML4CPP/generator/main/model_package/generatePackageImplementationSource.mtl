@@ -49,6 +49,7 @@
 [import UML4CPP::generator::main::helpers::isGeneratableHelper /]
 [import UML4CPP::generator::main::helpers::singletonHelper /]
 [import UML4CPP::generator::main::components::generateParameter /]
+[import UML4CPP::generator::main::model_execution::model_execution /]
 
 
 [query public getAllAppliedStereotypes(aPackage : Package) : Set(Stereotype) = OrderedSet{
@@ -103,7 +104,7 @@
 
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "uml/VisibilityKind.hpp"
-[if (aPackage.hasStateMachine())]
+[if (aPackage.isPSSMExecutable())]
 //PSSM
 #include "uml/PseudostateKind.hpp"
 [/if]
@@ -218,7 +219,7 @@ void [packageName/]::createPackageContents(std::shared_ptr<uml::Package> [aPacka
 	createPackagePrimitiveTypes([aPackage.memberName()/], factory);
 	createPackageSignals([aPackage.memberName()/], factory);
 	createPackageStereotypes([aPackage.memberName()/], factory);
-[if (aPackage.hasStateMachine())]
+[if (aPackage.isPSSMExecutable())]
 	//PSSM
 	createPackageStateMachines([aPackage.memberName()/], factory);
 [/if]
@@ -404,7 +405,7 @@ void [packageName/]::createPackageValueSpecifications(std::shared_ptr<uml::Packa
 }
 
 [comment Create all State Machines in Package/]
-[if (aPackage.hasStateMachine())]
+[if (aPackage.isPSSMExecutable())]
 //PSSM
 void [packageName/]::createPackageStateMachines(std::shared_ptr<uml::Package> [aPackage.memberName()/], std::shared_ptr<uml::umlFactory> factory)
 {
@@ -496,7 +497,7 @@ void [packageName/]::initializePackageContents(std::shared_ptr<uml::Package> [aP
 	initializePackageStereotypes();
 	initializePackageValueSpecifications();
 	[if (not aPackage.oclIsKindOf(Profile))][aPackage.generateStereotypeApplication()/][/if]
-[if (aPackage.hasStateMachine())]
+[if (aPackage.isPSSMExecutable())]
 	//PSSM
 	initializePackageStateMachines();
 [/if]
@@ -709,7 +710,7 @@ void [packageName/]::initializePackageValueSpecifications()
 [/for]
 
 [comment Initialize all State Machines in aPackage/]
-[if (aPackage.hasStateMachine())]
+[if (aPackage.isPSSMExecutable())]
 // PSSM
 void [packageName/]::initializePackageStateMachines()
 {

@@ -25,6 +25,7 @@
 [import UML4CPP::generator::main::helpers::collectionHelper /]
 [import UML4CPP::generator::main::profiles::uml4CPPProfileHelper /]
 [import UML4CPP::generator::main::profiles::strategyHelper /]
+[import UML4CPP::generator::main::model_execution::model_execution /]
 
 [template public generatePackageImplHeader(aPackage : Package) {packageName : String = aPackage.name.concat('PackageImpl');}]
 [file (aPackage.generateNamespacePath(false).concat('/impl/').concat(aPackage.name).concat('PackageImpl.hpp'), false, 'UTF-8')]
@@ -105,7 +106,7 @@ namespace [subPackage.generateNamespace(false)/]
 			void createPackageSignals(std::shared_ptr<uml::Package> [aPackage.memberName()/], std::shared_ptr<uml::umlFactory> factory);
 			void createPackageStereotypes(std::shared_ptr<uml::Package> [aPackage.memberName()/], std::shared_ptr<uml::umlFactory> factory);
 			void createPackageValueSpecifications(std::shared_ptr<uml::Package> [aPackage.memberName()/], std::shared_ptr<uml::umlFactory> factory);
-[if (aPackage.hasStateMachine())]
+[if (aPackage.isPSSMExecutable())]
 			//PSSM
 			void createPackageStateMachines(std::shared_ptr<uml::Package> [aPackage.memberName()/], std::shared_ptr<uml::umlFactory> factory);
 	[for (aStateMachine : StateMachine | (aPackage.getElementsBelongingToPackage()->filter(StateMachine)->sortedBy(myQualifiedName())))]
@@ -129,7 +130,7 @@ namespace [subPackage.generateNamespace(false)/]
 			void initializePackageSignals();
 			void initializePackageStereotypes();
 			void initializePackageValueSpecifications();
-[if (aPackage.hasStateMachine())]
+[if (aPackage.isPSSMExecutable())]
 			//PSSM
 			void initializePackageStateMachines();
 	[for (aStateMachine : StateMachine | (aPackage.getElementsBelongingToPackage()->filter(StateMachine)->sortedBy(myQualifiedName())))]

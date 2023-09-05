@@ -62,6 +62,7 @@
 [template public generateFUML(aPackage : uml::Package)]
 [comment @main/]
 [setIsFUMLExecutable()/]
+[if (aPackage.hasStateMachine())] [setIsPSSMExecutable()/] [/if]
 [if (not aPackage.isDoNotGenerate())]
 	[aPackage.generateUML()/]
 	[if (aPackage.isPackageOnly())]

@@ -85,16 +85,6 @@
 [/for]
 [/template]
 
-[template public generateParameterInstances(aStateMachine : StateMachine, aPackage : Package)]
-[for (par : Parameter | aStateMachine.ownedParameter->select((direction = ParameterDirectionKind::inout) or (direction = ParameterDirectionKind::_in)))]
-[if(par.type.supportedTypes())]
-[par.generateCppType(true)/] [par.name/] = [par.default/];
-[else]
-[par.generateCppType(true)/] [par.name/]([par.type.getNearestPackage().generateNamespace(false)/]::[par.type.getNearestPackage().getPackageName()/]Factory::eInstance()->create[par.type.name.toUpperFirst()/]());
-[/if]
-[/for]
-[/template]
-
 [template public generateAnyCreationFromParameter(aParameter : Parameter) post(trim())
 {
 	parameterTypeIsPrimitiveOrEnumeration : Boolean = aParameter.type.oclIsKindOf(PrimitiveType) or aParameter.type.oclIsKindOf(Enumeration);
