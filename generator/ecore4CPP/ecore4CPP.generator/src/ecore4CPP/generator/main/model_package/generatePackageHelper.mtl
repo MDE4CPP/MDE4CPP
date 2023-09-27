@@ -19,12 +19,13 @@
 [query public getMetaMetaModelClasses(anEPackage : EPackage) : Set(EClassifier) = OrderedSet{
 								anEPackage.eAllContents().eClass(), 
 								anEPackage.eAllContents()->selectByKind(EClass).eOperations.eClass(), 
+								anEPackage.eAllContents()->selectByKind(EClass).eOperations.eType->reject(oclIsUndefined()).eClass(),
 								anEPackage.eAllContents()->selectByKind(EClass).eOperations.eParameters.eType.eClass(), 
 								anEPackage.eAllContents()->selectByKind(EClass).eOperations.eParameters.eClass(), 
 								anEPackage.eAllContents()->selectByKind(EClass).eAttributes.eClass(), 
 								anEPackage.eAllContents()->selectByKind(EClass).eAttributes.eType.eClass(), 
 								anEPackage.eAllContents()->selectByKind(EClass).eReferences.eClass()
-						}->flatten()->selectByKind(EClass)->sortedBy(name)/]
+						}->flatten()->sortedBy(name)/]
 
 [template public generateModelElementGetter(anENamedElement : ENamedElement, anEPackage : EPackage, impl : Boolean) ? ( not hasImplOnly())]
 virtual const std::shared_ptr<[metaModelTypeString(anENamedElement, anEPackage)/]>& get[anENamedElement.getMemberNameUpperFirst()/]() const [abstractSufix(impl)/];
