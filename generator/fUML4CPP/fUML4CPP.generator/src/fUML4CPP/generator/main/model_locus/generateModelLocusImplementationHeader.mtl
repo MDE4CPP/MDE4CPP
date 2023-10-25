@@ -27,12 +27,20 @@ originalName : String = aPackage.generateNamespacePath(false);
 [startGuard(aPackage,'LocusImpl')/]
 
 #include "../[upperName/]Locus.hpp"
+[if (aPackage.includesPSSM())]
+#include "PSSM/Semantics/Loci/impl/SM_LocusImpl.hpp"
+[else]
 #include "fUML/Semantics/Loci/impl/LocusImpl.hpp"
 //#include "PSCS/Semantics/Loci/impl/CS_LocusImpl.hpp"
+[/if]
 
 namespace [aPackage.generateNamespace(false)/] 
 {
+	[if (aPackage.includesPSSM())]
+	class [upperName/]LocusImpl :virtual public PSSM::Semantics::Loci::SM_LocusImpl, virtual public [upperName/]Locus
+	[else]
 	class [upperName/]LocusImpl :virtual public /*PSCS::Semantics::Loci::CS_LocusImpl*/ fUML::Semantics::Loci::LocusImpl, virtual public [upperName/]Locus
+	[/if]
 	{
 		private:    
 			[upperName/]LocusImpl& operator=([upperName/]LocusImpl const&) = delete;
@@ -45,10 +53,10 @@ namespace [aPackage.generateNamespace(false)/]
 			virtual ~[upperName/]LocusImpl();
 			
 			/*!
-			 */ 
+			 */
 			virtual std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_Object> instantiate(const std::shared_ptr<uml::Class>&);
-			virtual std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_SignalInstance> instantiate(const std::shared_ptr<uml::Signal>&);
 			virtual void setThisLocusPtr(std::weak_ptr</*PSCS::Semantics::Loci::CS_Locus*/fUML::Semantics::Loci::Locus>);
+			virtual std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_SignalInstance> instantiate(const std::shared_ptr<uml::Signal>&);
 	};
 }
 [endGuard(aPackage,'LocusImpl')/]

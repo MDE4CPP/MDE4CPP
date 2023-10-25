@@ -15,11 +15,11 @@
 [module generateModelExecutionFactoryImplementationSource('http://www.eclipse.org/uml2/5.0.0/UML')]
 
 [import fUML4CPP::generator::main::helpers::fUMLCollectionHelper /]
+[import fUML4CPP::generator::main::pssm::generatePssmExecutionPrototypes /]
 
 [import UML4CPP::generator::main::helpers::generalHelper /]
 [import UML4CPP::generator::main::helpers::nameHelper /]
 [import UML4CPP::generator::main::profiles::uml4CPPProfileHelper /]
-
 
 [template public generateModelExecutionFactoryImplementationSource(aPackage : Package)
 {
@@ -33,15 +33,17 @@ originalName : String = aPackage.generateNamespacePath(false);
 [defineDebugMacro()/]
 
 //Model includes
-[for (activityPackage : Package | aPackage.collectActivitiesOwnedByPackage()->reject(isDoNotGenerateElement()).getNearestPackage()->asSet()->sortedBy(myQualifiedName()))]
-#include "[activityPackage.generateNamespacePath(false)/]/[activityPackage.getPackageName()/]Package.hpp"
+[for (activitySmPackage : Package | aPackage.collectActivitiesOwnedByPackage()->union(aPackage.collectStateMachinesOwnedByPackage())->reject(isDoNotGenerateElement()).getNearestPackage()->asSet()->sortedBy(myQualifiedName()))]
+#include "[activitySmPackage.generateNamespacePath(false)/]/[activitySmPackage.getPackageName()/]Package.hpp"
 [/for]
 
 //fUML includes
+[if (aPackage.hasActivity())]
 #include "fUML/Semantics/Actions/ActionsFactory.hpp"
 #include "fUML/Semantics/Activities/ActivitiesFactory.hpp"
 #include "fUML/Semantics/Activities/ActivityExecution.hpp"
 #include "fUML/Semantics/Activities/ActivityNodeActivationGroup.hpp"
+[/if]
 #include "fUML/Semantics/Loci/Locus.hpp"
 [for (anIncludeString : String | 
 	aPackage.collectActivitiesOwnedByPackage()->reject(isDoNotGenerateElement()).node
@@ -53,13 +55,37 @@ originalName : String = aPackage.generateNamespacePath(false);
 	.generateCorrespondingActivityNodeActivationInclude()->asSet()) before('//ActivityNodeActivation includes\n')]
 [anIncludeString/]
 [/for]
+[if (aPackage.includesPSSM())]
+
+//PSSM includes
+#include "PSSM/Semantics/StateMachines/StateMachinesFactory.hpp"
+#include "PSSM/Semantics/StateMachines/StateMachineExecution.hpp"
+#include "PSSM/Semantics/StateMachines/RegionActivation.hpp"
+#include "PSSM/Semantics/StateMachines/StateActivation.hpp"
+#include "PSSM/Semantics/StateMachines/FinalStateActivation.hpp"
+#include "PSSM/Semantics/StateMachines/ExternalTransitionActivation.hpp"
+[for (pseudostateKind : String | PseudostateKind.allInstances().toString())]
+#include "PSSM/Semantics/StateMachines/[pseudostateKind.toUpperFirst()/]PseudostateActivation.hpp"
+[/for]
+[/if]
+
 [if (aPackage.getRootPackage().allOwnedElements()->filter(ActivityEdge)->reject(isDoNotGenerateElement())->size() > 0)]
 //ActivityEdgeInstance include
 #include "fUML/Semantics/Activities/ActivityEdgeInstance.hpp"
 [/if]
 
 //UML includes
+[if (aPackage.hasActivity())]
 #include "uml/Activity.hpp"
+[/if]
+[if (aPackage.includesPSSM())]
+#include "uml/StateMachine.hpp"
+#include "uml/Region.hpp"
+#include "uml/State.hpp"
+#include "uml/FinalState.hpp"
+#include "uml/Pseudostate.hpp"
+#include "uml/Transition.hpp"
+[/if]
 [for (anIncludeString : String | 
 	aPackage.collectActivitiesOwnedByPackage()->reject(isDoNotGenerateElement()).node
 	->addAll(aPackage.collectActivitiesOwnedByPackage()->reject(isDoNotGenerateElement()).node->filter(Action).input)
@@ -107,6 +133,24 @@ std::shared_ptr<fUML::Semantics::CommonBehavior::Execution> [packageName/]Execut
 [/if]
 [/let]
 
+[comment PSSM: create an Execution for a StateMachine as a ExecutionPrototype, if not already existing/]
+[if (aPackage.includesPSSM())]
+[let stateMachinesOwnedByPackage : Set(StateMachine) = aPackage.collectStateMachinesOwnedByPackage()->reject(isDoNotGenerateElement())->sortedBy(myQualifiedName())->asSet()]
+[if (stateMachinesOwnedByPackage->size() > 0)]
+	[for (aStateMachine : StateMachine | stateMachinesOwnedByPackage) before('\tswitch(behavior->_getID())\n\t{\n') after('\t}\n')]
+		case [aStateMachine.getNearestPackage().generateNamespace(true)/]::[aStateMachine.getNearestPackage().getPackageName()/]Package::[aStateMachine.getMemberName().toUpperCase()/]:
+		{
+			if(!m_[aStateMachine.memberName()/]ExecutionPrototype)
+			{
+				this->create[aStateMachine.memberName().toUpperFirst()/]ExecutionPrototype();
+			}
+			return m_[aStateMachine.memberName()/]ExecutionPrototype;
+		}
+	[/for]
+[/if]
+[/let]
+[/if]
+
 	return nullptr;
 }
 
@@ -128,10 +172,25 @@ void [packageName/]ExecutionFactoryImpl::create[anActivity.memberName().toUpperF
 }
 [/for]
 
+[comment PSSM: add functions to create ExecutionPrototypes for each StateMachine/]
+[for (aStateMachine : StateMachine | aPackage.collectStateMachinesOwnedByPackage()->reject(isDoNotGenerateElement()))]
+void [packageName/]ExecutionFactoryImpl::create[aStateMachine.memberName().toUpperFirst()/]ExecutionPrototype()
+{
+	[aStateMachine.generateStateMachineExecutionPrototypeCreatorBody()/]
+}
+[/for]
+
+[if (aPackage.includesPSSM())]
+void [packageName/]ExecutionFactoryImpl::setThisExecutionFactoryPtr(std::weak_ptr<PSSM::Semantics::Loci::SM_ExecutionFactory> thisExecutionFactoryPtr)
+{
+	PSSM::Semantics::Loci::SM_ExecutionFactoryImpl::setThisExecutionFactoryPtr(thisExecutionFactoryPtr);
+}
+[else]
 void [packageName/]ExecutionFactoryImpl::setThisExecutionFactoryPtr(std::weak_ptr</*PSCS::Semantics::Loci::CS_ExecutionFactory*/fUML::Semantics::Loci::ExecutionFactory> thisExecutionFactoryPtr)
 {
 	/*PSCS::Semantics::Loci::CS_ExecutionFactoryImpl::setThisExecutionFactoryPtr(thisExecutionFactoryPtr)*/ fUML::Semantics::Loci::ExecutionFactoryImpl::setThisExecutionFactoryPtr(thisExecutionFactoryPtr);
 }
+[/if]
 [/file]
 [/template]
 

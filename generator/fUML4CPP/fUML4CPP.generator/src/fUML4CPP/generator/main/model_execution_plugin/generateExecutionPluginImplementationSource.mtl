@@ -142,6 +142,26 @@ std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> [packageNa
 	return this->m_executor->execute(behavior, context, inputs);
 }
 
+std::shared_ptr<Any> [packageName/]::executeStateMachine(std::shared_ptr<uml::StateMachine> stateMachine, std::shared_ptr<Bag<Any>> parameterList, std::shared_ptr<uml::Element> element)
+{
+	if(!m_IsInitialized)
+	{
+		initialize();
+	}
+[let stateMachinesOwnedByPackage : Set(StateMachine) = aPackage.collectStateMachinesOwnedByPackage()->reject(isDoNotGenerateElement())->sortedBy(myQualifiedName())->asSet()]
+[if (stateMachinesOwnedByPackage->size() > 0)]
+	[for (aStateMachine : StateMachine | stateMachinesOwnedByPackage) before('\n\tswitch(stateMachine->_getID())\n\t{\n') after('\t}\n')]
+		[comment ACHTUNG: NAMESPACE NOCH NICHT KONTROLLIERT!/]
+		case [aStateMachine.getNearestPackage().generateNamespace(true)/]::[aStateMachine.getNearestPackage().getPackageName()/]Package::[aStateMachine.getMemberName().toUpperCase()/]:
+		{
+			[aStateMachine.generateStateMachineExecution()/]
+		}
+	[/for]
+[/if]
+[/let]
+	return nullptr;
+}
+
 std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_Object> [packageName/]::instantiateClass(std::shared_ptr<uml::Class> type)
 {
 	if(!m_IsInitialized)
@@ -221,10 +241,14 @@ std::shared_ptr<Any> [packageName/]::evaluateSpecification(std::shared_ptr<uml::
 #include "uml/Parameter.hpp"
 #include "uml/UMLAny.hpp"
 #include "uml/UMLContainerAny.hpp"
+#include "uml/StateMachine.hpp"
 
 //Model includes
-[for (activityPackage : Package | aPackage.collectActivitiesOwnedByPackage()->reject(isDoNotGenerateElement()).getNearestPackage()->asSet()->sortedBy(myQualifiedName()))]
-#include "[activityPackage.generateNamespacePath(false)/]/[activityPackage.getPackageName()/]Package.hpp"
+[for (act_SM_Package : Package | 
+	aPackage.collectActivitiesOwnedByPackage()->reject(isDoNotGenerateElement()).getNearestPackage()->asSet()->sortedBy(myQualifiedName())
+	->union(aPackage.collectStateMachinesOwnedByPackage()->reject(isDoNotGenerateElement()).getNearestPackage()->asSet()->sortedBy(myQualifiedName()))
+)]
+#include "[act_SM_Package.generateNamespacePath(false)/]/[act_SM_Package.getPackageName()/]Package.hpp"
 [/for]
 [/template]
 
@@ -358,6 +382,69 @@ return returnValue;
 DEBUG_INFO("Activity [anActivity.myQualifiedName()/] does not have any return parameter.")
 return nullptr;
 [/if]
+[/template]
+
+[template private generateStateMachineExecution(aStateMachine : StateMachine) post(trim())]
+[comment]
+std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> pList(new Bag<fUML::Semantics::CommonBehavior::ParameterValue>());
+[for (aParameter : Parameter | aStateMachine.ownedParameter->select((direction = ParameterDirectionKind::inout) or (direction = ParameterDirectionKind::_in))) before('\n')]
+//Creating ParameterValue for input parameter [aStateMachine.name/]::[aParameter.name/]
+{
+	const std::shared_ptr<Any>& [aParameter.name/] = parameterList->at([aParameter.listNumber(aStateMachine)/]);
+	std::shared_ptr<fUML::Semantics::CommonBehavior::ParameterValue> [aParameter.name/]_parameterValue = fUML::Semantics::CommonBehavior::CommonBehaviorFactory::eInstance()->createParameterValue();
+	[aParameter.name/]_parameterValue->setParameter([aParameter.generatePackageGetterCall()/]);
+comment Anys that contain a list of elements has to be expanded
+[if (aParameter.upper <> 1)]
+	[if (aParameter.type.oclIsKindOf(PrimitiveType) or aParameter.type.oclIsKindOf(Enumeration))]
+	[aParameter.generateCppType(false)/] elementList = [aParameter.name/]->get<[aParameter.generateCppType(false)/]>();
+	for(const [aParameter.type.generateCppRawType(false)/]& anElement : *elementList)
+	{
+		[aParameter.name/]_parameterValue->getValues()->add(eAny(anElement, [aParameter.name/]->getTypeId(), false));
+	}
+	[else]
+	const std::shared_ptr<uml::UMLContainerAny>& umlContainerAny = std::dynamic_pointer_cast<uml::UMLContainerAny>([aParameter.name/]);
+	const std::shared_ptr<Bag<uml::Element>>& elementList = umlContainerAny->getAsElementContainer();
+	for(const std::shared_ptr<uml::Element>& anElement : *elementList)
+	{
+		[aParameter.name/]_parameterValue->getValues()->add(eUMLAny(anElement, [aParameter.name/]->getTypeId()));
+	}
+	[/if]
+[else]
+	[aParameter.name/]_parameterValue->getValues()->add([aParameter.name/]);
+[/if]
+	pList->add([aParameter.name/]_parameterValue);
+}
+[/for]
+[/comment]
+
+//Executing StateMachine [aStateMachine.name/]
+const std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>>& outputParameterValues = m_locus->getExecutor()->execute([aStateMachine.generatePackageGetterCall()/], [if (aStateMachine.owner.oclIsKindOf(Class))]element[else]nullptr[/if], nullptr);
+
+[comment]]
+[if (aStateMachine.ownedParameter->select(p :Parameter | p.direction = ParameterDirectionKind::return)->notEmpty())]
+//The State Machine has a return parameter
+[let par : Parameter = aStateMachine.ownedParameter->select(p :Parameter | p.direction = ParameterDirectionKind::return)->first()]
+std::shared_ptr<Any> returnValue;
+const std::shared_ptr<uml::Parameter>& returnParameter = [par.generatePackageGetterCall()/];
+
+for(const std::shared_ptr<fUML::Semantics::CommonBehavior::ParameterValue>& parameterValue : *outputParameterValues)
+{
+	if(returnParameter == parameterValue->getParameter())
+	{
+		returnValue = parameterValue->getValues()->at(0);
+		break;
+	}
+}
+
+return returnValue;
+[/let]
+[else]
+DEBUG_INFO("StateMachine [aStateMachine.myQualifiedName()/] does not have any return parameter.")
+[/comment]
+return nullptr;
+[comment]
+[/if]
+[/comment]
 [/template]
 
 [template private generateExecutionPluginDeinitialization(aPackage : Package)]

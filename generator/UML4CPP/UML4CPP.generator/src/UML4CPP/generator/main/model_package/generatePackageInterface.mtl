@@ -38,7 +38,9 @@ namespace uml
 [for (nE : EClass | OrderedSet{(aPackage.getElementsBelongingToPackage()->filter(NamedElement)-aPackage.getElementsBelongingToPackage()->filter(ValueSpecification)).eClass()}->flatten()->sortedBy(name))]
 	class [nE.name/];
 [/for]
+[if (aPackage.hasActivity())]
 	class ConnectorEnd;
+[/if]
 }
 
 [for (subPackage : Package| aPackage.ownedElement->filter(Package)->sortedBy(name)) separator ('\n')]

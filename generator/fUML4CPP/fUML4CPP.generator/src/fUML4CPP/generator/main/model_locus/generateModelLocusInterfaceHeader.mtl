@@ -26,12 +26,20 @@ originalName : String = aPackage.generateNamespacePath(false);
 [file (originalName.concat('Exec/') + upperName.concat('Locus.hpp'), false, 'UTF-8')]
 [startGuard(aPackage,'Locus')/]
 
+[if (aPackage.includesPSSM())]
+#include "PSSM/Semantics/Loci/SM_Locus.hpp"
+[else]
 //#include "PSCS/Semantics/Loci/CS_Locus.hpp"
 #include "fUML/Semantics/Loci/Locus.hpp"
+[/if]
 
 namespace [aPackage.generateNamespace(false)/] 
 {
+	[if (aPackage.includesPSSM())]
+	class [upperName/]Locus: virtual public PSSM::Semantics::Loci::SM_Locus
+	[else]
 	class [upperName/]Locus: virtual public /*PSCS::Semantics::Loci::CS_Locus*/ fUML::Semantics::Loci::Locus
+	[/if]
 	{
 		public: 
 			[upperName/]Locus (){};

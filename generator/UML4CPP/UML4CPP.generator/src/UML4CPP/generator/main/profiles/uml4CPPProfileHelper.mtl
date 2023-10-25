@@ -34,6 +34,8 @@
 [query public getMainOpaqueBehavior(aPackage : Package) : OpaqueBehavior = if(hasMainOpaqueBehavior()) then getMainBehavior().oclAsType(OpaqueBehavior) else null endif /]
 [query public hasMainActivity(aPackage : Package) : Boolean = if(hasMainBehavior() and getMainBehavior().oclIsKindOf(Activity)) then true else false endif /]
 [query public getMainActivity(aPackage : Package) : Activity = if(hasMainActivity()) then getMainBehavior().oclAsType(Activity) else null endif /]
+[query public hasMainStateMachine(aPackage : Package) : Boolean = if(hasMainBehavior() and getMainBehavior().oclIsKindOf(StateMachine)) then true else false endif /]
+[query public getMainStateMachine(aPackage : Package) : StateMachine = if(hasMainStateMachine()) then getMainBehavior().oclAsType(StateMachine) else null endif /]
 [query public hasMainSourceCode(ePackage : Package) : Boolean = true /]
 [query public getMainSourceCode(ePackage : Package) : String = '' /]
 [query public hasMainIncludes(ePackage : Package) : Boolean = true /]

@@ -54,8 +54,14 @@ originalName : String = aPackage.generateNamespacePath(false);
 #include "fUML/Semantics/Activities/ActivityNodeActivationGroup.hpp"
 #include "fUML/Semantics/Activities/ActivitiesFactory.hpp"
 #include "fUML/Semantics/CommonBehavior/CommonBehaviorFactory.hpp"
+[if (aPackage.includesPSSM())]
+#include "PSSM/Semantics/Loci/SM_Locus.hpp"
+#include "PSSM/Semantics/Loci/SM_ExecutionFactory.hpp"
+#include "PSSM/Semantics/StateMachines/StateMachineExecution.hpp"
+[else]
 #include "fUML/Semantics/Loci/Locus.hpp"
 #include "fUML/Semantics/Loci/ExecutionFactory.hpp"
+[/if]
 [for (requiredPackage : Package | 
 	aPackage.getEnumerationsOwnedByPackage()._package
 	->addAll(aPackage.getBehaviorsOwnedByPackage()->filter(OpaqueBehavior).getNearestPackage())
@@ -263,6 +269,14 @@ std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> [packageNa
 			[/let]
 		}
 	}
+	[if (aPackage.includesPSSM())]
+	else if (behaviorMetaElementID == uml::umlPackage::STATEMACHINE_CLASS)
+	{
+		const auto& stateMachineExecution = std::dynamic_pointer_cast<PSSM::Semantics::StateMachines::StateMachineExecution>(this->getLocus().lock()->getFactory()->createExecution(behavior, context));
+		stateMachineExecution->execute();
+		return nullptr;
+	}
+	[/if]
 	else
 	{
 		std::cerr<<__PRETTY_FUNCTION__<<" : Unsupported type of Behavior! Currently only Activities, OpaqueBehaviors and FunctionBehaviors are supported!"<<std::endl;

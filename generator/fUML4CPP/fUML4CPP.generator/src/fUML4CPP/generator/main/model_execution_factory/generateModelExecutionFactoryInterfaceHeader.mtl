@@ -26,12 +26,20 @@ originalName : String = aPackage.generateNamespacePath(false);
 [file (originalName.concat('Exec/') + upperName.concat('ExecutionFactory.hpp'), false, 'UTF-8')]
 [startGuard(aPackage,'ExecutionFactory')/]
 
-//#include "PSCS/Semantics/Loci/CS_ExecutionFactory.hpp"
-#include "fUML/Semantics/Loci/ExecutionFactory.hpp"
+[if (aPackage.includesPSSM())]
+#include "PSSM/Semantics/Loci/impl/SM_ExecutionFactoryImpl.hpp"
+[else]
+#include "fUML/Semantics/Loci/impl/ExecutionFactoryImpl.hpp"
+//#include "PSCS/Semantics/Loci/impl/CS_ExecutionFactoryImpl.hpp"
+[/if]
 
 namespace [aPackage.generateNamespace(false)/] 
 {
-	class [upperName/]ExecutionFactory: virtual public /*PSCS::Semantics::Loci::CS_ExecutionFactory*/ fUML::Semantics::Loci::ExecutionFactory
+	[if (aPackage.includesPSSM())]
+	class [upperName/]ExecutionFactory : virtual public PSSM::Semantics::Loci::SM_ExecutionFactory
+	[else]
+	class [upperName/]ExecutionFactory : virtual public/*PSCS::Semantics::Loci::CS_ExecutionFactory*/ fUML::Semantics::Loci::ExecutionFactory
+	[/if]
 	{
 		public: 
 			[upperName/]ExecutionFactory (){};

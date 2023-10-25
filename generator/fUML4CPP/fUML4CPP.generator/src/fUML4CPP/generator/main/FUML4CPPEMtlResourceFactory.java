@@ -28,6 +28,7 @@ public class FUML4CPPEMtlResourceFactory extends UML4CPPEMtlResourceFactory {
 		initializeModelExecutorEmtls(resourcePathPrefix);
 		initializeModelLocusEmtls(resourcePathPrefix);
 		initializeStrategyEmtls(resourcePathPrefix);
+		initializePssmEmtls(resourcePathPrefix);
 	}
 	
 	private void initializeGeneralEmtls(String resourcePathPrefix)
@@ -101,6 +102,13 @@ public class FUML4CPPEMtlResourceFactory extends UML4CPPEMtlResourceFactory {
 								"generateStrategySource"
 								};
 		generateFilePathMapData(ModuleNames, "strategies", resourcePathPrefix);
+	}
+	
+	private void initializePssmEmtls(String resourcePathPrefix)
+	{
+		String[] ModuleNames = {"generatePssmExecutionPrototypes"
+								};
+		generateFilePathMapData(ModuleNames, "pssm", resourcePathPrefix);
 	}
 }
 

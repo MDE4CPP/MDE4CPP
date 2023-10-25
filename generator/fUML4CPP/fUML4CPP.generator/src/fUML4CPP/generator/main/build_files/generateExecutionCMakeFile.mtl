@@ -23,7 +23,10 @@
 [import UML4CPP::generator::main::profiles::strategyHelper /]
 
 
-[template public generateExecutionCMakeFile(aPackage : Package, packageOnly : Boolean) { packageName : String = getPackageName(); execPackageName : String = getPackageName().concat('Exec'); }]
+[template public generateExecutionCMakeFile(aPackage : Package, packageOnly : Boolean) { 
+	packageName : String = getPackageName(); 
+	execPackageName : String = getPackageName().concat('Exec');
+}]
 [comment ------------------------------------------------------------------- /]
 [comment Generate CMakeLists.txt for model execution adapter                 /]
 [comment ------------------------------------------------------------------- /]
@@ -136,7 +139,7 @@ ENDIF()
 [template private generateCMakeFindLibraryCommand(aPackage : Package, ending : String, folderName : String, debugMode : Boolean)]
 [for (packName : String | aPackage.metaModelLibrariesNames()->reject(name : String | aPackage.getAllSubPackageNames()->includes(name)))]
 FIND_LIBRARY([packName.toUpperCase()/]_[libraryVariableNameSuffix(debugMode)/] [packName/][libraryNameSuffix(debugMode)/][ending/] ${MDE4CPP_HOME}/application/[folderName/])
-[if (OrderedSet{'ecore', 'uml', 'fUML', 'PSCS', 'ecoreReflection', 'umlReflection','primitivetypesReflection', 'oclParser', aPackage.getPackageName()}->excludes(packName))]
+[if (OrderedSet{'ecore', 'uml', 'fUML', 'PSCS', 'PSSM', 'ecoreReflection', 'umlReflection','primitivetypesReflection', 'oclParser', aPackage.getPackageName()}->excludes(packName))]
 FIND_LIBRARY([packName.toUpperCase()/]EXEC_[libraryVariableNameSuffix(debugMode)/] [packName/]Exec[libraryNameSuffix(debugMode)/][ending/] ${MDE4CPP_HOME}/application/[folderName/])
 [/if]
 [/for]
@@ -147,7 +150,7 @@ FIND_LIBRARY(PLUGINFRAMEWORK_[libraryVariableNameSuffix(debugMode)/] pluginFrame
 TARGET_LINK_LIBRARIES(${PROJECT_NAME}
 [for (packName : String | aPackage.metaModelLibrariesNames()->reject(name : String | aPackage.getAllSubPackageNames()->includes(name)))]
 	[buildModeCMakeProperty(debugMode)/] ${[packName.toUpperCase()/]_[libraryVariableNameSuffix(debugMode)/]}
-	[if (OrderedSet{'ecore', 'uml', 'fUML', 'PSCS', 'ecoreReflection', 'umlReflection','primitivetypesReflection', 'oclParser', aPackage.getPackageName()}->excludes(packName))]
+	[if (OrderedSet{'ecore', 'uml', 'fUML', 'PSCS', 'PSSM', 'ecoreReflection', 'umlReflection','primitivetypesReflection', 'oclParser', aPackage.getPackageName()}->excludes(packName))]
 	[buildModeCMakeProperty(debugMode)/] ${[packName.toUpperCase()/]EXEC_[libraryVariableNameSuffix(debugMode)/]}
 	[/if]
 [/for]

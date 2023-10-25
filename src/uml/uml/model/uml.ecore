@@ -6563,21 +6563,25 @@
     </eAnnotations>
     <eOperations name="isComposite" ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/uml2/5.0.0/Types#//Boolean">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="doNotGenerate"/>
         <details key="documentation" value="A composite State is a State with at least one Region.&#xA;result = (region->notEmpty())&#xA;&lt;p>From package UML::StateMachines.&lt;/p>"/>
       </eAnnotations>
     </eOperations>
     <eOperations name="isOrthogonal" ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/uml2/5.0.0/Types#//Boolean">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="doNotGenerate"/>
         <details key="documentation" value="An orthogonal State is a composite state with at least 2 regions.&#xA;result = (region->size () > 1)&#xA;&lt;p>From package UML::StateMachines.&lt;/p>"/>
       </eAnnotations>
     </eOperations>
     <eOperations name="isSimple" ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/uml2/5.0.0/Types#//Boolean">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="doNotGenerate"/>
         <details key="documentation" value="A simple State is a State without any regions.&#xA;result = ((region->isEmpty()) and not isSubmachineState())&#xA;&lt;p>From package UML::StateMachines.&lt;/p>"/>
       </eAnnotations>
     </eOperations>
     <eOperations name="isSubmachineState" ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/uml2/5.0.0/Types#//Boolean">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="doNotGenerate"/>
         <details key="documentation" value="Only submachine State references another StateMachine.&#xA;result = (submachine &lt;> null)&#xA;&lt;p>From package UML::StateMachines.&lt;/p>"/>
       </eAnnotations>
     </eOperations>

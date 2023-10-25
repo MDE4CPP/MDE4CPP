@@ -9,6 +9,7 @@
 #include "ecore/EClass.hpp"
 #include "ecore/EOperation.hpp"
 #include "ecore/EGenericType.hpp"
+#include "ecore/EDataType.hpp"
 
 //metamodel factory
 #include "fUML/Semantics/Classification/ClassificationFactory.hpp"

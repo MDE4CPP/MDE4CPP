@@ -19,6 +19,7 @@
 [import UML4CPP::generator::main::helpers::generalHelper /]
 [import UML4CPP::generator::main::helpers::nameHelper /]
 [import UML4CPP::generator::main::profiles::uml4CPPProfileHelper /]
+[import UML4CPP::generator::main::model_execution::model_execution /]
 
 
 [template public generateModelExecutionFactoryImplementationHeader(aPackage : Package) 
@@ -30,23 +31,41 @@ originalName : String = aPackage.generateNamespacePath(false);
 [startGuard(aPackage,'ExecutionFactoryImpl')/]
 
 #include "../[upperName/]ExecutionFactory.hpp"
+[if (aPackage.includesPSSM())]
+#include "PSSM/Semantics/Loci/impl/SM_ExecutionFactoryImpl.hpp"
+[else]
 #include "fUML/Semantics/Loci/impl/ExecutionFactoryImpl.hpp"
 //#include "PSCS/Semantics/Loci/impl/CS_ExecutionFactoryImpl.hpp"
+[/if]
 
 namespace fUML::Semantics::Activities 
 {
 	class ActivityExecution;
 }
+[if (aPackage.includesPSSM())]
+
+namespace PSSM::Semantics::StateMachines
+{
+	class StateMachineExecution;
+}
+[/if]
 
 namespace [aPackage.generateNamespace(false)/] 
 {
+	[if (aPackage.includesPSSM())]
+	class [upperName/]ExecutionFactoryImpl : virtual public PSSM::Semantics::Loci::SM_ExecutionFactoryImpl, virtual public [upperName/]ExecutionFactory
+	[else]
 	class [upperName/]ExecutionFactoryImpl : virtual public/*PSCS::Semantics::Loci::CS_ExecutionFactoryImpl*/ fUML::Semantics::Loci::ExecutionFactoryImpl, virtual public [upperName/]ExecutionFactory
+	[/if]
 	{
 		private:    
 			[upperName/]ExecutionFactoryImpl& operator=([upperName/]ExecutionFactoryImpl const&) = delete;
 			[for (anActivity : Activity | aPackage.collectActivitiesOwnedByPackage()->reject(isDoNotGenerateElement())) before('\t\t\t//Methods to create ActivityExecution Prototypes\n')]
 			void create[anActivity.memberName().toUpperFirst()/]ExecutionPrototype();
 			[comment]std::shared_ptr<fUML::Semantics::Activities::ActivityExecution> get[anActivity.memberName().toUpperFirst()/]ExecutionPrototype();[/comment]
+			[/for]
+			[for (aStateMachine : StateMachine | aPackage.collectStateMachinesOwnedByPackage()->reject(isDoNotGenerateElement())) before('\t\t\t//Functions to create StateMachinesExecution Prototypes\n')]
+			void create[aStateMachine.memberName().toUpperFirst()/]ExecutionPrototype();
 			[/for]
 
 		public:
@@ -56,11 +75,18 @@ namespace [aPackage.generateNamespace(false)/]
 			/*!
 			 */
 			virtual std::shared_ptr<fUML::Semantics::CommonBehavior::Execution> createExecution(const std::shared_ptr<uml::Behavior>&, const std::shared_ptr<uml::Element>&);
+			[if (aPackage.includesPSSM())]
+			virtual void setThisExecutionFactoryPtr(std::weak_ptr<PSSM::Semantics::Loci::SM_ExecutionFactory>);
+			[else]
 			virtual void setThisExecutionFactoryPtr(std::weak_ptr</*PSCS::Semantics::Loci::CS_ExecutionFactory*/fUML::Semantics::Loci::ExecutionFactory>);
+			[/if]
 	
 		private:
 			[for (anActivity : Activity | aPackage.collectActivitiesOwnedByPackage()->reject(isDoNotGenerateElement())) before('\t\t\t//ActivityExecution Prototypes\n')]
 			std::shared_ptr<fUML::Semantics::Activities::ActivityExecution> m_[anActivity.memberName()/]ExecutionPrototype;
+			[/for]
+			[for (aStateMachine : StateMachine | aPackage.collectStateMachinesOwnedByPackage()->reject(isDoNotGenerateElement())) before('\t\t\t//StateMachineExecution Prototypes\n')]
+			std::shared_ptr<PSSM::Semantics::StateMachines::StateMachineExecution> m_[aStateMachine.memberName()/]ExecutionPrototype;
 			[/for]
 	};
 }

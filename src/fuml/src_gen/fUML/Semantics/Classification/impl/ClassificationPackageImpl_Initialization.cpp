@@ -9,6 +9,7 @@
 #include "ecore/EClass.hpp"
 #include "ecore/EOperation.hpp"
 #include "ecore/EGenericType.hpp"
+#include "ecore/EDataType.hpp"
 
 // metametamodel factory
 #include "ecore/ecoreFactory.hpp"

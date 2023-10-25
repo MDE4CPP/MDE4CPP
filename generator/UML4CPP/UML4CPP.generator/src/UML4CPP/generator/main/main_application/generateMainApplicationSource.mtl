@@ -176,8 +176,8 @@ int main()
 
 [template public generateMainApplicationSourceFromStateMachine(aPackage : Package) { packageName : String = getPackageName(); }]
 [file ('../application/src/main.cpp', false, 'UTF-8')]
-[comment]
 [let mainStateMachine : StateMachine = aPackage.getMainBehavior().oclAsType(StateMachine)]
+
 #include <iostream>
 #include <memory>
 #include <vector>
@@ -203,8 +203,7 @@ using namespace [aPackage.generateNamespace(false)/];
 
 int main()
 {	
-    //executing main activity
-	[mainStateMachine.generateParameterInstances(aPackage)/]
+    //executing main State Machine
 	std::shared_ptr<[if (mainStateMachine.owner.oclIsKindOf(Classifier))][mainStateMachine.owner.oclAsType(Classifier).generateNamespaceName(false)/][else]uml::Element[/if]> element = [if (mainStateMachine.owner.oclIsKindOf(Classifier))][mainStateMachine.owner.oclAsType(Classifier).generateNamespace(false)/]::[mainStateMachine.owner.oclAsType(Classifier).getNearestPackage().getPackageName()/]Factory::eInstance()->create[mainStateMachine.owner.oclAsType(Classifier).name.toUpperFirst()/]()[else]nullptr[/if];
 
 	std::shared_ptr<PluginFramework> pluginFramework = PluginFramework::eInstance();
@@ -223,13 +222,13 @@ int main()
 			[for (aParameter : Parameter | mainStateMachine.ownedParameter->select((direction = ParameterDirectionKind::inout) or (direction = ParameterDirectionKind::_in)))]
 			parameterList->add([aParameter.generateAnyCreationFromParameter()/]);
 			[/for]
-			std::shared_ptr<Any> activityResult = executionPlugin->executeStateMachine([mainStateMachine.generatePackageGetterCall()/], parameterList, element);
+			std::shared_ptr<Any> StateMachineResult = executionPlugin->executeStateMachine([mainStateMachine.generatePackageGetterCall()/], parameterList, element);
 
 
 			[if (mainStateMachine.ownedParameter->select(p :Parameter | p.direction = ParameterDirectionKind::return)->notEmpty())]
 			[let returnParameter : Parameter = mainStateMachine.ownedParameter->select(p :Parameter | p.direction = ParameterDirectionKind::return)->first()]
-			[returnParameter.type.generateCppRawType(false)/] returnValue = activityResult->get<[returnParameter.type.generateCppRawType(false)/]>();
-			DEBUG_INFO("Activity '[mainStateMachine.name/]' has a return parameter named '[returnParameter.name/]'.")
+			[returnParameter.type.generateCppRawType(false)/] returnValue = StateMachineResult->get<[returnParameter.type.generateCppRawType(false)/]>();
+			DEBUG_INFO("State Machine '[mainStateMachine.name/]' has a return parameter named '[returnParameter.name/]'.")
 			
 			if(returnValue == nullptr)
 			{
@@ -241,7 +240,7 @@ int main()
 			}
 			[/let]
 			[else]
-			DEBUG_INFO("Activity '[mainStateMachine.name/] does not have any return parameter.")
+			DEBUG_INFO("State Machine '[mainStateMachine.name/] does not have any return parameter.")
 			[/if]
 		}
 		else
@@ -256,6 +255,5 @@ int main()
     return EXIT_SUCCESS;
 }
 [/let]
-[/comment]
 [/file]
 [/template]

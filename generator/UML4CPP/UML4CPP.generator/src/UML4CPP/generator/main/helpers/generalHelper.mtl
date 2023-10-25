@@ -23,6 +23,7 @@
 [import UML4CPP::generator::main::helpers::nameHelper /]
 [import UML4CPP::generator::main::validation::validation/]
 [import UML4CPP::generator::main::profiles::strategyHelper /]
+[import UML4CPP::generator::main::model_execution::model_execution /]
 
 
 [**
@@ -235,12 +236,21 @@ types::typesPackage::[aClassifier.name.toUpperCase()/]_CLASS
 */]
 [query public isPrimitive(type : Type) : Boolean = (not type.oclIsUndefined()) and ((type.name = 'Integer') or (type.name = 'Boolean') or (type.name = 'String') or (type.name = 'Real') or (type.name = 'EInt') or (type.name = 'EBoolean') or (type.name = 'EString') or (type.name = 'EDouble')  or (type.name = 'EFloat') or (type.name = 'UnlimitedNatural'))/]
 
+[**
+ * Check if a package contains a Activity.
+*/]
+[query public hasActivity(aPackage : Package) : Boolean = (aPackage.allOwnedElements()->filter(Activity)->size() > 0) /]
 
 
 [**
- * PSSM: check if a package contains a StateMachine. Currently used to determin if model must be built in PSSM-conformance mode.
+ * PSSM: check if a package contains a StateMachine.
 */]
 [query public hasStateMachine(aPackage : Package) : Boolean = (aPackage.allOwnedElements()->filter(StateMachine)->size() > 0) /]
+
+[**
+ * PSSM: Determine if the PSSM are allowed (Executable Model Level) and needed (package has StateMachine) to be used for package creation
+*/]
+[query public includesPSSM(aPackage : Package) : Boolean = (aPackage.isPSSMExecutable() and aPackage.hasStateMachine()) /]
 
 [**
  * PSSM: check if an element is directly or indirectly owned by a StateMachine
@@ -250,6 +260,18 @@ if anElement.owner.oclIsUndefined() then false
 else
 	if anElement.owner.oclIsKindOf(StateMachine) then true
 	else anElement.owner.isOwnedByStateMachine()
+	endif
+endif
+/]
+
+[**
+ * PSSM: get next StateMachine owning the given Element, if one exists, else null.
+*/]
+[query public getOwningStateMachine(anElement : Element) : StateMachine = 
+if anElement.owner.oclIsUndefined() then null
+else
+	if anElement.owner.oclIsKindOf(StateMachine) then anElement.owner.oclAsType(StateMachine)
+	else anElement.owner.getOwningStateMachine()
 	endif
 endif
 /]

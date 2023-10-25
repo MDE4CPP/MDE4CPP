@@ -19,6 +19,7 @@ namespace ecore
 	class EClass;
 	class EOperation;
 	class EGenericType;
+	class EDataType;
 }
 
 namespace fUML::Semantics::Classification 

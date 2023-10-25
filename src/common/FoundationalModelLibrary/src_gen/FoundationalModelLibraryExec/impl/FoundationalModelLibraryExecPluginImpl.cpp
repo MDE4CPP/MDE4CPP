@@ -40,6 +40,7 @@
 #include "uml/Parameter.hpp"
 #include "uml/UMLAny.hpp"
 #include "uml/UMLContainerAny.hpp"
+#include "uml/StateMachine.hpp"
 
 //Model includes
 #include "FoundationalModelLibrary/BasicInputOutput/BasicInputOutputPackage.hpp"
@@ -189,6 +190,15 @@ std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> Foundation
 	}
 
 	return this->m_executor->execute(behavior, context, inputs);
+}
+
+std::shared_ptr<Any> FoundationalModelLibraryExecPluginImpl::executeStateMachine(std::shared_ptr<uml::StateMachine> stateMachine, std::shared_ptr<Bag<Any>> parameterList, std::shared_ptr<uml::Element> element)
+{
+	if(!m_IsInitialized)
+	{
+		initialize();
+	}
+	return nullptr;
 }
 
 std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_Object> FoundationalModelLibraryExecPluginImpl::instantiateClass(std::shared_ptr<uml::Class> type)

@@ -24,6 +24,7 @@
 [import UML4CPP::generator::main::helpers::nameHelper /]
 [import UML4CPP::generator::main::helpers::keywords /]
 [import UML4CPP::generator::main::profiles::uml4CPPProfileHelper /]
+[import UML4CPP::generator::main::model_execution::model_execution /]
 
 
 [template public generateMainApplicationCMakeFile(aPackage : Package) { packageName : String = getPackageName(); }]
@@ -123,7 +124,7 @@ ENDIF()
 FIND_LIBRARY([packName.toUpperCase()/]_[libraryVariableNameSuffix(debugMode)/] [packName/][libraryNameSuffix(debugMode)/][ending/] ${MDE4CPP_HOME}/application/[folderName/])
 [/for]
 FIND_LIBRARY([aPackage.getPackageName().toUpperCase()/]_[libraryVariableNameSuffix(debugMode)/] [aPackage.getPackageName()/][libraryNameSuffix(debugMode)/][ending/] ${MDE4CPP_HOME}/application/[folderName/])
-[if (aPackage.hasMainActivity())]
+[if (aPackage.hasMainActivity() or (aPackage.isPSSMExecutable() and aPackage.hasMainStateMachine()))]
 FIND_LIBRARY(PLUGINFRAMEWORK_[libraryVariableNameSuffix(debugMode)/] pluginFramework[libraryNameSuffix(debugMode)/][ending/] ${MDE4CPP_HOME}/application/[folderName/])
 [elseif (aPackage.hasMainOpaqueBehavior() and aPackage.getMainOpaqueBehavior().hasLanguage(keyLibrary()))]
 	[for (libName : String | aPackage.getMainOpaqueBehavior().getEntriesForLanguageTokenized(keyLibrary()))]
@@ -143,7 +144,7 @@ TARGET_LINK_LIBRARIES(${PROJECT_NAME}
 	[buildModeCMakeProperty(debugMode)/] ${[packName.toUpperCase()/]_[libraryVariableNameSuffix(debugMode)/]}
 [/for]
 	[buildModeCMakeProperty(debugMode)/] ${[aPackage.getPackageName().toUpperCase()/]_[libraryVariableNameSuffix(debugMode)/]}
-[if (aPackage.hasMainActivity())]
+[if (aPackage.hasMainActivity() or (aPackage.isPSSMExecutable() and aPackage.hasMainStateMachine()))]
 	[buildModeCMakeProperty(debugMode)/] ${PLUGINFRAMEWORK_[libraryVariableNameSuffix(debugMode)/]}
 [elseif (aPackage.hasMainOpaqueBehavior() and aPackage.getMainOpaqueBehavior().hasLanguage(keyLibrary()))]
 	[for (libName : String | aPackage.getMainOpaqueBehavior().getEntriesForLanguageTokenized(keyLibrary()))]
