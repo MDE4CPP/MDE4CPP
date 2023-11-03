@@ -37,12 +37,15 @@ Create all PSSM-specific Execution Prototypes  for the Model ExecutionFactory
 DEBUG_INFO("Creating StateMachineActivation for [aStateMachine.eClass().name/] '[aStateMachine.metamodelElementName()/]'");
 auto stateMachine = [aStateMachine.generatePackageGetterCall()/];
 [aStateMachine.getVisitorVariableName()/] = PSSM::Semantics::StateMachines::StateMachinesFactory::eInstance()->createStateMachineExecution();
+[aStateMachine.getVisitorVariableName()/]->setContext(PSSM_HelloWorld::PSSM_HelloWorldPackage::eInstance()->[aStateMachine.getContext().generatePackageGetterCall()/]);
 [aStateMachine.getVisitorVariableName()/]->getTypes()->push_back(stateMachine);
 // Place this Execution in the Locus
 this->getLocus().lock()->add([aStateMachine.getVisitorVariableName()/]);
+[aStateMachine.getVisitorVariableName()/]->setLocus(this->getLocus().lock());
 // Create a StateMachineConfiguration for this Execution
 PSSM::Semantics::StateMachines::StateMachinesFactory::eInstance()->createStateMachineConfiguration_as_configuration_in_StateMachineExecution([aStateMachine.getVisitorVariableName()/]);
-[aStateMachine.getVisitorVariableName()/]->setLocus(this->getLocus().lock());
+// Create an ObjectActivation for this StateMachineExecution and {TBD} start its Event Dispatch Loop
+[aStateMachine.getVisitorVariableName()/]->startBehavior(PSSM_HelloWorld::PSSM_HelloWorldPackage::eInstance()->[aStateMachine._context.generatePackageGetterCall()/], nullptr);
 [for (aSmRegion : Region | aStateMachine.region) before ('\t\n// Create Regions of StateMachine\n')]
 [aSmRegion.generateSmRegionActivationCreation()/]
 [/for]

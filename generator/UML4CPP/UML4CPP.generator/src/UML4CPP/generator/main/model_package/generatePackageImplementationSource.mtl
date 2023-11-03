@@ -734,18 +734,20 @@ void [packageName/]::initializeStateMachine_[aStateMachine.memberName()/]()
 			// initialize [aState.name/] in Region [aRegion.name/]
 			[aState.memberName()/]->setName("[aState.name/]");
 			[if (not aState.oclIsKindOf(FinalState))]
-				// initialize Entry Behavior of State [aState.name/]
 				[if (not aState.entry.oclIsUndefined())]
+				// initialize Entry Behavior of State [aState.name/]
 				[aState.entry.memberName()/]->setName("[aState.entry.name/]");
 				[aState.entry.memberName()/]->_setID([aState.entry.getMemberName().toUpperCase()/]);
 				[/if]
-				// initialize doActivity Behavior of State [aState.name/]
 				[if (not aState.doActivity.oclIsUndefined())]
+				// initialize doActivity Behavior of State [aState.name/]
 				[aState.doActivity.memberName()/]->setName("[aState.doActivity.name/]");
+				[aState.doActivity.memberName()/]->_setID([aState.doActivity.getMemberName().toUpperCase()/]);
 				[/if]
-				// initialize Exit Behavior of State [aState.name/]
 				[if (not aState.exit.oclIsUndefined())]
+				// initialize Exit Behavior of State [aState.name/]
 				[aState.exit.memberName()/]->setName("[aState.exit.name/]");
+				[aState.exit.memberName()/]->_setID([aState.exit.getMemberName().toUpperCase()/]);
 				[/if]
 			[/if]
 	
