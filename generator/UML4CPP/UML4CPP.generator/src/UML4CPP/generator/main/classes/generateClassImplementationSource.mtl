@@ -96,6 +96,11 @@
 	before('\n//external Interfaces realized by this class\n')]
 #include "[externalPackage.generateNamespacePath(true)/]/[externalPackage.myNamespaceName()/]Package.hpp"
 [/for]
+[comment Packages of external Activities executed by this class /]
+[for (externalPackage : Package | aClass.ownedOperation.method.getNearestPackage()->reject(p : Package | p = aPackage))
+	before('\n//external Activities executed by this class\n')]
+#include "[externalPackage.generateNamespacePath(true)/]/[externalPackage.myNamespaceName()/]Package.hpp"
+[/for]
 [comment Used Types /]
 [for (cl : Type | aClass.includes()->select(t : Type | t.oclIsKindOf(Class) or t.oclIsKindOf(Interface) or t.oclIsKindOf(Enumeration)  or t.oclIsTypeOf(DataType))->sortedBy(myQualifiedName())) before('\n//Used Types\n')]
 [if (cl.getNearestPackage().hasIncludePath())]

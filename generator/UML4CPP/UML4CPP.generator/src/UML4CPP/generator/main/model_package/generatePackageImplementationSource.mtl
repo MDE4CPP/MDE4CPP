@@ -90,7 +90,8 @@
 								aPackage.getElementsBelongingToPackage()->filter(CallOperationAction)->reject(operation.oclIsUndefined()).operation.eClass(),
 								aPackage.getElementsBelongingToPackage()->filter(CallBehaviorAction)->reject(behavior.oclIsUndefined()).behavior.eClass(),
 								aPackage.getElementsBelongingToPackage()->filter(DecisionNode)->reject(decisionInput.oclIsUndefined()).decisionInput.eClass(),
-								aPackage.getElementsBelongingToPackage()->filter(AcceptEventAction).trigger->reject(event.oclIsUndefined()).event.eClass()
+								aPackage.getElementsBelongingToPackage()->filter(AcceptEventAction).trigger->reject(event.oclIsUndefined()).event.eClass(),
+								aPackage.getElementsBelongingToPackage()->filter(Activity).ownedParameter->reject(p : Parameter | p.type.oclIsUndefined()).type.eClass()
 							}->flatten()->sortedBy(name)/]
 
 [template public generatePackageImplSource(aPackage : Package) {packageName : String = aPackage.name.concat('PackageImpl');}]
