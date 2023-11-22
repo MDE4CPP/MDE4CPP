@@ -212,8 +212,43 @@ std::string
 [if (aType.name.oclIsUndefined())]undefinedType[else][if (not aType.isIgnoreNamespace())][aType.namespace.oclAsType(Package).generateNamespace(true)/]::[/if][aType.name.toUpperFirst()/][/if]
 [/template]
 
+[template public generateDefaultValue(aType : Type) ? (aType.oclIsKindOf(Enumeration)) post(trim())]
+[let anEnumeration : Enumeration = aType.oclAsType(Enumeration)]
+[if (not anEnumeration.ownedLiteral->isEmpty())][anEnumeration.generateCppRawType(true)/]::[anEnumeration.ownedLiteral->first().name.toUpperCase()/][else]/* ERROR: No literal in enum [anEnumeration.generateCppRawType(true)/] */[/if]
+[/let]
+[/template]
+
+[template public generateDefaultValue(aType : Type) ? (aType.oclIsKindOf(PrimitiveType)) post(trim())]
+[let aPrimitiveType : PrimitiveType = aType.oclAsType(PrimitiveType)]
+[if (aPrimitiveType.isNumericType())]0[elseif(aPrimitiveType.isStringType())]""[elseif(aPrimitiveType.isBooleanType())]false[else]/* ERROR: Unhandled PrimitiveType, could not generate default value */[/if]
+[/let]
+[/template]
+
+[template public generateDefaultValue(aType : Type) post(trim())] [comment Fall-through/]
+nullptr
+[/template]
+
 [query public collectTypeIncludeStrings(aType : Type) : Set(String) = Set(String)
 {
 	'#include "' + aType.getNearestPackage().generateNamespacePath(true) + '/' + aType.name.toUpperFirst() + '.hpp"'
 }->flatten()
+/]
+
+[query private isNumericType(aPrimitiveType : PrimitiveType) : Boolean =  
+	aPrimitiveType.name = 'Integer' or
+	aPrimitiveType.name = 'EInt' or
+	aPrimitiveType.name = 'UnlimitedNatural' or
+	aPrimitiveType.name = 'Real' or
+	aPrimitiveType.name = 'EDouble' or
+	aPrimitiveType.name = 'EFloat'
+/]
+
+[query private isStringType(aPrimitiveType : PrimitiveType) : Boolean =  
+	aPrimitiveType.name = 'String' or
+	aPrimitiveType.name = 'EString'
+/]
+
+[query private isBooleanType(aPrimitiveType : PrimitiveType) : Boolean =  
+	aPrimitiveType.name = 'Boolean' or
+	aPrimitiveType.name = 'EBoolean'
 /]
