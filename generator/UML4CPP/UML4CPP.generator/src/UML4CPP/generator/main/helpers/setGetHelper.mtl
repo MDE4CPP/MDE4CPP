@@ -50,9 +50,9 @@ virtual void unset(const std::shared_ptr<uml::Property>& _property) [abstractSuf
 virtual void unset(std::string _qualifiedName) [abstractSuffix(impl)/];
 virtual void unset(unsigned long _uID) [abstractSuffix(impl)/];
 //Remove
-virtual void remove(const std::shared_ptr<uml::Property>& _property, const std::shared_ptr<Any>& value) [abstractSuffix(impl)/];
-virtual void remove(std::string _qualifiedName, const std::shared_ptr<Any>& value) [abstractSuffix(impl)/];
-virtual void remove(unsigned long _uID, const std::shared_ptr<Any>& value) [abstractSuffix(impl)/];
+virtual void remove(const std::shared_ptr<uml::Property>& _property, const std::shared_ptr<Any>& value, int removeAt = -1, bool isRemoveDuplicates = false) [abstractSuffix(impl)/];
+virtual void remove(std::string _qualifiedName, const std::shared_ptr<Any>& value, int removeAt = -1, bool isRemoveDuplicates = false) [abstractSuffix(impl)/];
+virtual void remove(unsigned long _uID, const std::shared_ptr<Any>& value, int removeAt = -1, bool isRemoveDuplicates = false) [abstractSuffix(impl)/];
 [/template]
 
 [**
@@ -375,13 +375,13 @@ void [aClass.name.toUpperFirst().concat('Impl')/]::set(unsigned long _uID, const
 [template private generateAddImplementation(aClass : Class)]
 void [aClass.name.toUpperFirst().concat('Impl')/]::add(const std::shared_ptr<uml::Property>& _property, const std::shared_ptr<Any>& value, int insertAt /*= -1*/)
 {
-	this->add(_property->_getID(), value);
+	this->add(_property->_getID(), value, insertAt);
 }
 
 void [aClass.name.toUpperFirst().concat('Impl')/]::add(std::string _qualifiedName, const std::shared_ptr<Any>& value, int insertAt /*= -1*/)
 {
 	unsigned long uID = util::Util::polynomialRollingHash(_qualifiedName);
-	this->add(uID, value);
+	this->add(uID, value, insertAt);
 }
 
 void [aClass.name.toUpperFirst().concat('Impl')/]::add(unsigned long _uID, const std::shared_ptr<Any>& value, int insertAt /*= -1*/)
@@ -480,16 +480,16 @@ void [aClass.name.toUpperFirst().concat('Impl')/]::unset(std::string _qualifiedN
 
 void [aClass.name.toUpperFirst().concat('Impl')/]::unset(unsigned long _uID)
 {
-[if ((not aClass.getPropertiesForGetAndSet()->select(p : Property | p.type.oclIsUndefined() or ((not p.type.oclIsKindOf(PrimitiveType)) and (not p.type.oclIsKindOf(Enumeration))))->isEmpty()))]
+[if ((not aClass.getPropertiesForGetAndSet()->select(p : Property | (not p.isReadOnly))->isEmpty()))]
 	switch(_uID)
 	{
-		[for (aProperty : Property | aClass.getPropertiesForGetAndSet()->select(p : Property | p.type.oclIsUndefined() or ((not p.type.oclIsKindOf(PrimitiveType)) and (not p.type.oclIsKindOf(Enumeration)))))]
+		[for (aProperty : Property | aClass.getPropertiesForGetAndSet()->select(p : Property | (not p.isReadOnly)))]
 		case [aProperty.getNearestPackage().generateNamespace(true)/]::[aProperty.getNearestPackage().getPackageName()/]Package::[aProperty.getMemberName().toUpperCase()/]:
 		{
 			[if (aProperty.upper = 1)]
-			m_[aProperty.name/].reset();
+			m_[aProperty.name/] = [aProperty.type.generateDefaultValue()/];
 			[else]
-			m_[aProperty.name/]->clear();
+			this->[aProperty.getterName()/]()->clear();
 			[/if]
 			return;
 		}
@@ -513,29 +513,29 @@ void [aClass.name.toUpperFirst().concat('Impl')/]::unset(unsigned long _uID)
 [/template]
 
 [template public generateRemoveImplementation(aClass : Class)]
-void [aClass.name.toUpperFirst().concat('Impl')/]::remove(const std::shared_ptr<uml::Property>& _property, const std::shared_ptr<Any>& value)
+void [aClass.name.toUpperFirst().concat('Impl')/]::remove(const std::shared_ptr<uml::Property>& _property, const std::shared_ptr<Any>& value, int removeAt /*= -1*/, bool isRemoveDuplicates /*= false*/)
 {
-	this->remove(_property->_getID(), value);
+	this->remove(_property->_getID(), value, removeAt);
 }
 
-void [aClass.name.toUpperFirst().concat('Impl')/]::remove(std::string _qualifiedName, const std::shared_ptr<Any>& value)
+void [aClass.name.toUpperFirst().concat('Impl')/]::remove(std::string _qualifiedName, const std::shared_ptr<Any>& value, int removeAt /*= -1*/, bool isRemoveDuplicates /*= false*/)
 {
 	unsigned long uID = util::Util::polynomialRollingHash(_qualifiedName);
-	this->remove(uID, value);
+	this->remove(uID, value, removeAt);
 }
 
-void [aClass.name.toUpperFirst().concat('Impl')/]::remove(unsigned long _uID, const std::shared_ptr<Any>& value)
+void [aClass.name.toUpperFirst().concat('Impl')/]::remove(unsigned long _uID, const std::shared_ptr<Any>& value, int removeAt /*= -1*/, bool isRemoveDuplicates /*= false*/)
 {
-[if (not aClass.getPropertiesForGetAndSet()->select(p : Property | (not p.isReadOnly) and p.upper <> 1)->isEmpty())]
+[if (not aClass.getPropertiesForGetAndSet()->select(p : Property | (not p.isReadOnly))->isEmpty())]
 	switch(_uID)
 	{
-		[for (aProperty : Property | aClass.getPropertiesForGetAndSet()->select(p : Property | (not p.isReadOnly) and p.upper <> 1))]
+		[for (aProperty : Property | aClass.getPropertiesForGetAndSet()->select(p : Property | (not p.isReadOnly)))]
 		case [aProperty.getNearestPackage().generateNamespace(true)/]::[aProperty.getNearestPackage().getPackageName()/]Package::[aProperty.getMemberName().toUpperCase()/]:
 		{
 			[if (aProperty.type.oclIsUndefined())]
 			std::shared_ptr<Any> valueToRemove;
 			[else]
-			[aProperty.type.generateCppRawType(false)/] valueToRemove;
+			[aProperty.type.generateCppRawType(false)/] valueToRemove = [aProperty.type.generateDefaultValue()/];
 			[/if]
 			if(value->isContainer())
 			{
@@ -583,8 +583,46 @@ void [aClass.name.toUpperFirst().concat('Impl')/]::remove(unsigned long _uID, co
 				[/if]
 			}
 
-
-			this->[aProperty.getterName()/]()->erase(valueToRemove);
+			
+			if(removeAt >= 1 && !isRemoveDuplicates) // As per fUML-specification, if isRemoveDuplicates is true, removeAt is ignored
+			{
+				// If removeAt != -1, the value to remove is not taken into account anymore.
+				// Instead, the value at index = removeAt is removed
+				// NOTE: removeAt is 1-based rather than 0-based
+				[if (aProperty.upper = 1)]
+				[comment if aProperty is a simple property, removeAt may only be exactly 1 /]
+				if(removeAt == 1)
+				{
+					m_[aProperty.name/] = [aProperty.type.generateDefaultValue()/];
+				}
+				[else]
+				if(this->[aProperty.getterName()/]()->size() >= removeAt)
+				{
+					this->[aProperty.getterName()/]()->erase(this->[aProperty.getterName()/]()->begin() + (removeAt - 1));
+				}
+				[/if]
+			}
+			else
+			{
+				[if (aProperty.upper = 1)]
+				[comment if aProperty is a simple property, valueToRemove must equal the current value of aProperty /]
+				if(m_[aProperty.name/] == valueToRemove)
+				{
+					m_[aProperty.name/] = [aProperty.type.generateDefaultValue()/];
+				}
+				[else]
+				if(isRemoveDuplicates)
+				{
+					int index = this->[aProperty.getterName()/]()->index_of(valueToRemove);
+					while(index != -1)
+					{
+						this->[aProperty.getterName()/]()->erase(this->[aProperty.getterName()/]()->begin() + index);
+						index = this->[aProperty.getterName()/]()->index_of(valueToRemove);
+					}
+				}
+				this->[aProperty.getterName()/]()->erase(valueToRemove);
+				[/if]
+			}
 
 			return;
 		}
