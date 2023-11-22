@@ -4,17 +4,17 @@
 
 #include "abstractDataTypes/SubsetUnion.hpp"
 //metametamodel classes
-#include "ecore/EEnum.hpp"
 #include "ecore/EStringToStringMapEntry.hpp"
 #include "ecore/EAnnotation.hpp"
-#include "ecore/EClass.hpp"
-#include "ecore/EOperation.hpp"
-#include "ecore/EReference.hpp"
-#include "ecore/EEnumLiteral.hpp"
 #include "ecore/EAttribute.hpp"
+#include "ecore/EReference.hpp"
 #include "ecore/EGenericType.hpp"
-#include "ecore/EDataType.hpp"
+#include "ecore/EEnum.hpp"
+#include "ecore/EOperation.hpp"
+#include "ecore/EClass.hpp"
 #include "ecore/EParameter.hpp"
+#include "ecore/EDataType.hpp"
+#include "ecore/EEnumLiteral.hpp"
 
 // metametamodel factory
 #include "ecore/ecoreFactory.hpp"
@@ -12514,23 +12514,23 @@ void umlPackageImpl::initializeObjectContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_object_Operation_remove_Property_EJavaObject->setName("remove");
+	m_object_Operation_remove_Property_EBoolean->setName("remove");
 	{ 	std::shared_ptr<ecore::ecoreFactory> factory = ecore::ecoreFactory::eInstance();
 		std::shared_ptr<ecore::EClass> unknownClass = factory ->createEClass(-1);
 	   	unknownClass->setName("invalid");
 		unknownClass->setAbstract(true);
 		unknownClass->setInterface(true);
-		m_object_Operation_remove_Property_EJavaObject->setEType(unknownClass);
+		m_object_Operation_remove_Property_EBoolean->setEType(unknownClass);
 	}
-	m_object_Operation_remove_Property_EJavaObject->setLowerBound(0);
-	m_object_Operation_remove_Property_EJavaObject->setUpperBound(1);
-	m_object_Operation_remove_Property_EJavaObject->setUnique(true);
-	m_object_Operation_remove_Property_EJavaObject->setOrdered(true);
+	m_object_Operation_remove_Property_EBoolean->setLowerBound(0);
+	m_object_Operation_remove_Property_EBoolean->setUpperBound(1);
+	m_object_Operation_remove_Property_EBoolean->setUnique(true);
+	m_object_Operation_remove_Property_EBoolean->setOrdered(true);
 	
-	m_object_Operation_remove_Property_EJavaObject->_setID(OBJECT_OPERATION_REMOVE_PROPERTY_EJAVAOBJECT);
+	m_object_Operation_remove_Property_EBoolean->_setID(OBJECT_OPERATION_REMOVE_PROPERTY_EBOOLEAN);
 	
 	{
-		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_object_Operation_remove_Property_EJavaObject);
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_object_Operation_remove_Property_EBoolean);
 		parameter->setName("_property");
 		parameter->setEType(nullptr);
 		parameter->setLowerBound(0);
@@ -12540,8 +12540,28 @@ void umlPackageImpl::initializeObjectContent()
 	}
 	
 	{
-		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_object_Operation_remove_Property_EJavaObject);
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_object_Operation_remove_Property_EBoolean);
 		parameter->setName("value");
+		parameter->setEType(nullptr);
+		parameter->setLowerBound(0);
+		parameter->setUpperBound(1);
+		parameter->setUnique(true);
+		parameter->setOrdered(true);
+	}
+	
+	{
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_object_Operation_remove_Property_EBoolean);
+		parameter->setName("removeAt");
+		parameter->setEType(nullptr);
+		parameter->setLowerBound(0);
+		parameter->setUpperBound(1);
+		parameter->setUnique(true);
+		parameter->setOrdered(true);
+	}
+	
+	{
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_object_Operation_remove_Property_EBoolean);
+		parameter->setName("isRemoveDuplicates");
 		parameter->setEType(nullptr);
 		parameter->setLowerBound(0);
 		parameter->setUpperBound(1);

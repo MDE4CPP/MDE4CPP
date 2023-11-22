@@ -4,17 +4,17 @@
 
 #include "abstractDataTypes/SubsetUnion.hpp"
 //metametamodel classes
-#include "ecore/EEnum.hpp"
 #include "ecore/EStringToStringMapEntry.hpp"
 #include "ecore/EAnnotation.hpp"
-#include "ecore/EClass.hpp"
-#include "ecore/EOperation.hpp"
-#include "ecore/EReference.hpp"
-#include "ecore/EEnumLiteral.hpp"
 #include "ecore/EAttribute.hpp"
+#include "ecore/EReference.hpp"
 #include "ecore/EGenericType.hpp"
-#include "ecore/EDataType.hpp"
+#include "ecore/EEnum.hpp"
+#include "ecore/EOperation.hpp"
+#include "ecore/EClass.hpp"
 #include "ecore/EParameter.hpp"
+#include "ecore/EDataType.hpp"
+#include "ecore/EEnumLiteral.hpp"
 
 //metamodel factory
 #include "uml/umlFactory.hpp"
@@ -3842,9 +3842,9 @@ const std::shared_ptr<ecore::EOperation>& uml::umlPackageImpl::getObject_Operati
 {
 	return m_object_Operation_invoke_OpaqueBehavior_EJavaObject;
 }
-const std::shared_ptr<ecore::EOperation>& uml::umlPackageImpl::getObject_Operation_remove_Property_EJavaObject() const
+const std::shared_ptr<ecore::EOperation>& uml::umlPackageImpl::getObject_Operation_remove_Property_EBoolean() const
 {
-	return m_object_Operation_remove_Property_EJavaObject;
+	return m_object_Operation_remove_Property_EBoolean;
 }
 const std::shared_ptr<ecore::EOperation>& uml::umlPackageImpl::getObject_Operation_set_Property_EJavaObject() const
 {

@@ -49,9 +49,9 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "uml/umlFactory.hpp"
-#include "fUML/Semantics/Activities/ActivitiesFactory.hpp"
 #include "fUML/Semantics/Actions/ActionsFactory.hpp"
+#include "fUML/Semantics/Activities/ActivitiesFactory.hpp"
+#include "uml/umlFactory.hpp"
 #include "uml/Action.hpp"
 #include "fUML/Semantics/Activities/ActivityEdgeInstance.hpp"
 #include "uml/ActivityNode.hpp"
@@ -151,6 +151,8 @@ void RemoveStructuralFeatureValueActionActivationImpl::doAction()
 		return;
 	}
 
+	bool isRemoveDuplicates = action->getIsRemoveDuplicates();
+
 	std::shared_ptr<Any> objectValue = nullptr;
 	
 	/* MDE4CPP specific implementation for handling "self"-Pin */
@@ -168,6 +170,21 @@ void RemoveStructuralFeatureValueActionActivationImpl::doAction()
 
 	std::shared_ptr<Any> inputValue = takeTokens(action->getValue())->at(0);
 
+	int removeAt = -1;
+	std::shared_ptr<uml::InputPin> removeAtPin = action->getRemoveAt();
+	if(removeAtPin)
+	{
+		std::shared_ptr<Any> removeAtValue = this->takeTokens(removeAtPin)->at(0);
+		try
+		{
+			removeAt = removeAtValue->get<int>();
+		}
+		catch(...)
+		{
+			DEBUG_ERROR("Provided value for removeAt pin is not an integer!")
+		}
+	}
+
 	try
 	{
 		std::shared_ptr<uml::UMLAny> umlAny = std::dynamic_pointer_cast<uml::UMLAny>(objectValue);
@@ -176,7 +193,7 @@ void RemoveStructuralFeatureValueActionActivationImpl::doAction()
 
 		if(structuredValue)
 		{
-			structuredValue->remove(property, inputValue);
+			structuredValue->remove(property, inputValue, removeAt, isRemoveDuplicates);
 		}
 		else
 		{

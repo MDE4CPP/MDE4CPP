@@ -139,7 +139,7 @@ std::shared_ptr<Any> ObjectImpl::invoke(const std::shared_ptr<uml::OpaqueBehavio
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-void ObjectImpl::remove(const std::shared_ptr<uml::Property>& _property, const std::shared_ptr<Any>& value)
+void ObjectImpl::remove(const std::shared_ptr<uml::Property>& _property, const std::shared_ptr<Any>& value, int removeAt, bool isRemoveDuplicates)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -535,8 +535,8 @@ std::shared_ptr<Any> ObjectImpl::eInvoke(int operationID, const std::shared_ptr<
 			result = eAny(this->invoke(incoming_param__opaqueBehavior,incoming_param_inputArguments,incoming_param_outputArguments), 0, false);
 			break;
 		}
-		// uml::Object::remove(uml::Property, Any): 1546275363
-		case umlPackage::OBJECT_OPERATION_REMOVE_PROPERTY_EJAVAOBJECT:
+		// uml::Object::remove(uml::Property, Any, int, bool): 2049499274
+		case umlPackage::OBJECT_OPERATION_REMOVE_PROPERTY_EBOOLEAN:
 		{
 			//Retrieve input parameter '_property'
 			//parameter 0
@@ -578,7 +578,35 @@ std::shared_ptr<Any> ObjectImpl::eInvoke(int operationID, const std::shared_ptr<
 				return nullptr;
 			}
 		
-			this->remove(incoming_param__property,incoming_param_value);
+			//Retrieve input parameter 'removeAt'
+			//parameter 2
+			int incoming_param_removeAt;
+			Bag<Any>::const_iterator incoming_param_removeAt_arguments_citer = std::next(arguments->begin(), 2);
+			try
+			{
+				incoming_param_removeAt = (*incoming_param_removeAt_arguments_citer)->get<int>();
+			}
+			catch(...)
+			{
+				DEBUG_ERROR("Invalid type stored in 'Any' for parameter 'removeAt'. Failed to invoke operation 'remove'!")
+				return nullptr;
+			}
+		
+			//Retrieve input parameter 'isRemoveDuplicates'
+			//parameter 3
+			bool incoming_param_isRemoveDuplicates;
+			Bag<Any>::const_iterator incoming_param_isRemoveDuplicates_arguments_citer = std::next(arguments->begin(), 3);
+			try
+			{
+				incoming_param_isRemoveDuplicates = (*incoming_param_isRemoveDuplicates_arguments_citer)->get<bool>();
+			}
+			catch(...)
+			{
+				DEBUG_ERROR("Invalid type stored in 'Any' for parameter 'isRemoveDuplicates'. Failed to invoke operation 'remove'!")
+				return nullptr;
+			}
+		
+			this->remove(incoming_param__property,incoming_param_value,incoming_param_removeAt,incoming_param_isRemoveDuplicates);
 			break;
 		}
 		// uml::Object::set(uml::Property, Any): 183386425

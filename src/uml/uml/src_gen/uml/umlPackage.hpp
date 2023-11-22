@@ -14,17 +14,17 @@
 
 namespace ecore 
 {
-	class EEnum;
 	class EStringToStringMapEntry;
 	class EAnnotation;
-	class EClass;
-	class EOperation;
-	class EReference;
-	class EEnumLiteral;
 	class EAttribute;
+	class EReference;
 	class EGenericType;
-	class EDataType;
+	class EEnum;
+	class EOperation;
+	class EClass;
 	class EParameter;
+	class EDataType;
+	class EEnumLiteral;
 }
 
 namespace uml 
@@ -3903,7 +3903,7 @@ namespace uml
 			static const unsigned long OBJECT_OPERATION_GET_PROPERTY = 511579154;
 			static const unsigned long OBJECT_OPERATION_INVOKE_OPERATION_EJAVAOBJECT = 2370151843;
 			static const unsigned long OBJECT_OPERATION_INVOKE_OPAQUEBEHAVIOR_EJAVAOBJECT = 1414710241;
-			static const unsigned long OBJECT_OPERATION_REMOVE_PROPERTY_EJAVAOBJECT = 1546275363;
+			static const unsigned long OBJECT_OPERATION_REMOVE_PROPERTY_EBOOLEAN = 2049499274;
 			static const unsigned long OBJECT_OPERATION_SET_PROPERTY_EJAVAOBJECT = 183386425;
 			static const unsigned long OBJECT_OPERATION_UNSET_PROPERTY = 2421215512;
 			
@@ -3918,7 +3918,7 @@ namespace uml
 			virtual const std::shared_ptr<ecore::EOperation>& getObject_Operation_get_Property() const = 0;
 			virtual const std::shared_ptr<ecore::EOperation>& getObject_Operation_invoke_Operation_EJavaObject() const = 0;
 			virtual const std::shared_ptr<ecore::EOperation>& getObject_Operation_invoke_OpaqueBehavior_EJavaObject() const = 0;
-			virtual const std::shared_ptr<ecore::EOperation>& getObject_Operation_remove_Property_EJavaObject() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getObject_Operation_remove_Property_EBoolean() const = 0;
 			virtual const std::shared_ptr<ecore::EOperation>& getObject_Operation_set_Property_EJavaObject() const = 0;
 			virtual const std::shared_ptr<ecore::EOperation>& getObject_Operation_unset_Property() const = 0;
 			

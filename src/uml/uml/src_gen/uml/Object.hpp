@@ -117,7 +117,7 @@ namespace uml
 			If Property has multiplicity upper bound >1, remove() will automatically remove the value from the collection.
 			*/
 			 
-			virtual void remove(const std::shared_ptr<uml::Property>& _property, const std::shared_ptr<Any>& value) = 0;
+			virtual void remove(const std::shared_ptr<uml::Property>& _property, const std::shared_ptr<Any>& value, int removeAt, bool isRemoveDuplicates) = 0;
 			/*!
 			If the Property has multiplicity upper bound = 1, set() atomically updates the value of the Property to the object
 			parameter.
