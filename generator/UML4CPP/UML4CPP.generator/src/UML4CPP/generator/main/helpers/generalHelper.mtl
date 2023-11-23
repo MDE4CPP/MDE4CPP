@@ -224,17 +224,32 @@ types::typesPackage::[aClassifier.name.toUpperCase()/]_CLASS
 [**
  * query for determining if a Parameter is a shared_ptr
 * /]
-[query public isSharedPtr(aProperty : Property) : Boolean = (not aProperty.isBackReference()) and (aProperty.type.oclIsUndefined() or ((not aProperty.type.isPrimitive()) and (not aProperty.type.oclIsKindOf(Enumeration))) or  (aProperty.upper <> 1)) /]
+[query public isSharedPtr(aProperty : Property) : Boolean = (not aProperty.isBackReference()) and (aProperty.type.oclIsUndefined() or aProperty.type.isComplex() or  (aProperty.upper <> 1)) /]
 
 [**
  * check if a property is back reference of composition 
 */]
-[query public isBackReference(aProperty : Property) : Boolean = (not aProperty.association.oclIsUndefined()) and (not aProperty.owner.oclIsKindOf(Association)) and aProperty.association.memberEnd->excluding(aProperty)->asOrderedSet()->first().isComposite /]
+[query public isBackReference(aProperty : Property) : Boolean = 
+	(not aProperty.association.oclIsUndefined()) 
+	and (not aProperty.owner.oclIsKindOf(Association)) 
+	and aProperty.association.memberEnd->excluding(aProperty)->asOrderedSet()->first().isComposite 
+	and aProperty.type.isComplex() 
+/]
 
 [**
  * check if type is primitive type
 */]
 [query public isPrimitive(type : Type) : Boolean = (not type.oclIsUndefined()) and ((type.name = 'Integer') or (type.name = 'Boolean') or (type.name = 'String') or (type.name = 'Real') or (type.name = 'EInt') or (type.name = 'EBoolean') or (type.name = 'EString') or (type.name = 'EDouble')  or (type.name = 'EFloat') or (type.name = 'UnlimitedNatural'))/]
+
+[**
+ * check if type is enumeration
+*/]
+[query public isEnumeration(type : Type) : Boolean = type.oclIsKindOf(Enumeration) /]
+
+[**
+ * check if type is a complex type (i.e. no primitive type and no enumeration)
+*/]
+[query public isComplex(type : Type) : Boolean = (not type.isPrimitive()) and (not type.isEnumeration()) /]
 
 [**
  * Check if a package contains a Activity.
