@@ -48,13 +48,13 @@ virtual public Object
 			If Property has multiplicity upper bound >1, add() will automatically add the value to the collection.
 			*/
 			 
-			virtual void add(const std::shared_ptr<uml::Property>& _property, const std::shared_ptr<Any>& value) ;
+			virtual bool add(const std::shared_ptr<uml::Property>& _property, const std::shared_ptr<Any>& value) ;
 			/*!
 			If Property has multiplicity upper bound >1, add() will automatically add the value to the collection.
 			Value will be added at the position given by insertAt.
 			*/
 			 
-			virtual void add(const std::shared_ptr<uml::Property>& _property, const std::shared_ptr<Any>& value, int insertAt) ;
+			virtual bool add(const std::shared_ptr<uml::Property>& _property, const std::shared_ptr<Any>& value, int insertAt) ;
 			/*!
 			Abstract operation to destroy an instance.
 			*/
@@ -85,14 +85,14 @@ virtual public Object
 			If Property has multiplicity upper bound >1, remove() will automatically remove the value from the collection.
 			*/
 			 
-			virtual void remove(const std::shared_ptr<uml::Property>& _property, const std::shared_ptr<Any>& value, int removeAt, bool isRemoveDuplicates) ;
+			virtual bool remove(const std::shared_ptr<uml::Property>& _property, const std::shared_ptr<Any>& value, int removeAt, bool isRemoveDuplicates) ;
 			/*!
-			If the Property has multiplicity upper bound = 1, set() atomically updates the value of the Property to the object
+			If the Property has multiplicity upper bound = 1, set() automically updates the value of the Property to the object
 			parameter.
 			*/
 			 
-			virtual void set(const std::shared_ptr<uml::Property>& _property, const std::shared_ptr<Any>& value) ;
-			virtual void unset(const std::shared_ptr<uml::Property>& _property) ;
+			virtual bool set(const std::shared_ptr<uml::Property>& _property, const std::shared_ptr<Any>& value) ;
+			virtual bool unset(const std::shared_ptr<uml::Property>& _property) ;
 			
 			//*********************************
 			// Attribute Getters & Setters

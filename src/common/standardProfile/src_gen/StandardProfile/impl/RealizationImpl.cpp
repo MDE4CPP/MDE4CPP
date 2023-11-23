@@ -157,18 +157,18 @@ std::shared_ptr<Any> RealizationImpl::get(unsigned long _uID) const
 }
 
 //Set
-void RealizationImpl::set(const std::shared_ptr<uml::Property>& _property, const std::shared_ptr<Any>& value)
+bool RealizationImpl::set(const std::shared_ptr<uml::Property>& _property, const std::shared_ptr<Any>& value)
 {
-	this->set(_property->_getID(), value);
+	return this->set(_property->_getID(), value);
 }
 
-void RealizationImpl::set( std::string _qualifiedName, const std::shared_ptr<Any>& value)
+bool RealizationImpl::set( std::string _qualifiedName, const std::shared_ptr<Any>& value)
 {
 	unsigned long uID = util::Util::polynomialRollingHash(_qualifiedName);
-	this->set(uID, value);
+	return this->set(uID, value);
 }
 
-void RealizationImpl::set(unsigned long _uID, const std::shared_ptr<Any>& value)
+bool RealizationImpl::set(unsigned long _uID, const std::shared_ptr<Any>& value)
 {
 	switch(_uID)
 	{
@@ -184,6 +184,7 @@ void RealizationImpl::set(unsigned long _uID, const std::shared_ptr<Any>& value)
 					if(_base_Classifier)
 					{
 						setBase_Classifier(_base_Classifier);
+						return true;
 					}			
 					else
 					{
@@ -193,74 +194,131 @@ void RealizationImpl::set(unsigned long _uID, const std::shared_ptr<Any>& value)
 				catch(...)
 				{
 					DEBUG_ERROR("Invalid type stored in 'uml::UMLAny' for property 'base_Classifier'. Failed to set property!")
-					return;
+					return true;
 				}
 			}
 			else
 			{
 				DEBUG_ERROR("Invalid instance of 'uml::UMLAny' for property 'base_Classifier'. Failed to set property!")
-				return;
+				return true;
 			}
 		break;
 		}
 	}
+	return false;
 }
 
 //Add
-void RealizationImpl::add(const std::shared_ptr<uml::Property>& _property, const std::shared_ptr<Any>& value, int insertAt /*= -1*/)
+bool RealizationImpl::add(const std::shared_ptr<uml::Property>& _property, const std::shared_ptr<Any>& value, int insertAt /*= -1*/)
 {
-	this->add(_property->_getID(), value);
+	return this->add(_property->_getID(), value, insertAt);
 }
 
-void RealizationImpl::add(std::string _qualifiedName, const std::shared_ptr<Any>& value, int insertAt /*= -1*/)
+bool RealizationImpl::add(std::string _qualifiedName, const std::shared_ptr<Any>& value, int insertAt /*= -1*/)
 {
 	unsigned long uID = util::Util::polynomialRollingHash(_qualifiedName);
-	this->add(uID, value);
+	return this->add(uID, value, insertAt);
 }
 
-void RealizationImpl::add(unsigned long _uID, const std::shared_ptr<Any>& value, int insertAt /*= -1*/)
+bool RealizationImpl::add(unsigned long _uID, const std::shared_ptr<Any>& value, int insertAt /*= -1*/)
 {
+	return false;
 }
 
 //Unset
-void RealizationImpl::unset(const std::shared_ptr<uml::Property>& _property)
+bool RealizationImpl::unset(const std::shared_ptr<uml::Property>& _property)
 {
-	this->unset(_property->_getID());
+	return this->unset(_property->_getID());
 }
 
-void RealizationImpl::unset(std::string _qualifiedName)
+bool RealizationImpl::unset(std::string _qualifiedName)
 {
 	unsigned long uID = util::Util::polynomialRollingHash(_qualifiedName);
-	this->unset(uID);
+	return this->unset(uID);
 }
 
-void RealizationImpl::unset(unsigned long _uID)
+bool RealizationImpl::unset(unsigned long _uID)
 {
 	switch(_uID)
 	{
 		case StandardProfile::StandardProfilePackage::REALIZATION_PROPERTY_BASE_CLASSIFIER:
 		{
 			m_base_Classifier.reset();
-			return;
+			return true;
 		}
 	}
 
+	return false;
 }
 
 //Remove
-void RealizationImpl::remove(const std::shared_ptr<uml::Property>& _property, const std::shared_ptr<Any>& value)
+bool RealizationImpl::remove(const std::shared_ptr<uml::Property>& _property, const std::shared_ptr<Any>& value, int removeAt /*= -1*/, bool isRemoveDuplicates /*= false*/)
 {
-	this->remove(_property->_getID(), value);
+	return this->remove(_property->_getID(), value, removeAt);
 }
 
-void RealizationImpl::remove(std::string _qualifiedName, const std::shared_ptr<Any>& value)
+bool RealizationImpl::remove(std::string _qualifiedName, const std::shared_ptr<Any>& value, int removeAt /*= -1*/, bool isRemoveDuplicates /*= false*/)
 {
 	unsigned long uID = util::Util::polynomialRollingHash(_qualifiedName);
-	this->remove(uID, value);
+	return this->remove(uID, value, removeAt);
 }
 
-void RealizationImpl::remove(unsigned long _uID, const std::shared_ptr<Any>& value)
+bool RealizationImpl::remove(unsigned long _uID, const std::shared_ptr<Any>& value, int removeAt /*= -1*/, bool isRemoveDuplicates /*= false*/)
 {
+	switch(_uID)
+	{
+		case StandardProfile::StandardProfilePackage::REALIZATION_PROPERTY_BASE_CLASSIFIER:
+		{
+			std::shared_ptr<uml::Classifier> valueToRemove = nullptr;
+			if(value->isContainer())
+			{
+				std::shared_ptr<uml::UMLContainerAny> umlContainerAny = std::dynamic_pointer_cast<uml::UMLContainerAny>(value);
+				if(umlContainerAny)
+				{
+					std::shared_ptr<Bag<uml::Element>> container = umlContainerAny->getAsElementContainer();
+					if(container && !(container->empty()))
+					{
+						// If a non-empty container is passed, the first value of the container will be removed from the property
+						std::shared_ptr<uml::Element> firstElement = container->at(0);
+						valueToRemove = std::dynamic_pointer_cast<uml::Classifier>(firstElement);
+					}
+				}
+			}
+			else
+			{
+				std::shared_ptr<uml::UMLAny> umlAny = std::dynamic_pointer_cast<uml::UMLAny>(value);
+				if(umlAny)
+				{
+					std::shared_ptr<uml::Element> element = umlAny->getAsElement();
+					valueToRemove = std::dynamic_pointer_cast<uml::Classifier>(element);
+				}
+			}
+
+			
+			if(removeAt >= 1 && !isRemoveDuplicates) // As per fUML-specification, if isRemoveDuplicates is true, removeAt is ignored
+			{
+				// If removeAt != -1, the value to remove is not taken into account anymore.
+				// Instead, the value at index = removeAt is removed
+				// NOTE: removeAt is 1-based rather than 0-based
+				
+				if(removeAt == 1)
+				{
+					m_base_Classifier.reset();
+					return true;
+				}
+			}
+			else
+			{
+				if(m_base_Classifier.lock() == valueToRemove)
+				{
+					m_base_Classifier.reset();
+					return true;
+				}
+			}
+		}
+	}
+
+	return false;
 }
 
 //**************************************

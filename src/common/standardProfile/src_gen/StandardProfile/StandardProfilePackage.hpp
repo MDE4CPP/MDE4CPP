@@ -14,7 +14,6 @@ namespace uml
 	class ExtensionEnd;
 	class Property;
 	class Stereotype;
-	class ConnectorEnd;
 }
 
 

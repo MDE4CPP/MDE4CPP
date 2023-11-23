@@ -140,67 +140,71 @@ std::shared_ptr<Any> ListenerImpl::get(unsigned long _uID) const
 }
 
 //Set
-void ListenerImpl::set(const std::shared_ptr<uml::Property>& _property, const std::shared_ptr<Any>& value)
+bool ListenerImpl::set(const std::shared_ptr<uml::Property>& _property, const std::shared_ptr<Any>& value)
 {
-	this->set(_property->_getID(), value);
+	return this->set(_property->_getID(), value);
 }
 
-void ListenerImpl::set( std::string _qualifiedName, const std::shared_ptr<Any>& value)
+bool ListenerImpl::set( std::string _qualifiedName, const std::shared_ptr<Any>& value)
 {
 	unsigned long uID = util::Util::polynomialRollingHash(_qualifiedName);
-	this->set(uID, value);
+	return this->set(uID, value);
 }
 
-void ListenerImpl::set(unsigned long _uID, const std::shared_ptr<Any>& value)
+bool ListenerImpl::set(unsigned long _uID, const std::shared_ptr<Any>& value)
 {
+	return false;
 }
 
 //Add
-void ListenerImpl::add(const std::shared_ptr<uml::Property>& _property, const std::shared_ptr<Any>& value, int insertAt /*= -1*/)
+bool ListenerImpl::add(const std::shared_ptr<uml::Property>& _property, const std::shared_ptr<Any>& value, int insertAt /*= -1*/)
 {
-	this->add(_property->_getID(), value);
+	return this->add(_property->_getID(), value, insertAt);
 }
 
-void ListenerImpl::add(std::string _qualifiedName, const std::shared_ptr<Any>& value, int insertAt /*= -1*/)
+bool ListenerImpl::add(std::string _qualifiedName, const std::shared_ptr<Any>& value, int insertAt /*= -1*/)
 {
 	unsigned long uID = util::Util::polynomialRollingHash(_qualifiedName);
-	this->add(uID, value);
+	return this->add(uID, value, insertAt);
 }
 
-void ListenerImpl::add(unsigned long _uID, const std::shared_ptr<Any>& value, int insertAt /*= -1*/)
+bool ListenerImpl::add(unsigned long _uID, const std::shared_ptr<Any>& value, int insertAt /*= -1*/)
 {
+	return false;
 }
 
 //Unset
-void ListenerImpl::unset(const std::shared_ptr<uml::Property>& _property)
+bool ListenerImpl::unset(const std::shared_ptr<uml::Property>& _property)
 {
-	this->unset(_property->_getID());
+	return this->unset(_property->_getID());
 }
 
-void ListenerImpl::unset(std::string _qualifiedName)
+bool ListenerImpl::unset(std::string _qualifiedName)
 {
 	unsigned long uID = util::Util::polynomialRollingHash(_qualifiedName);
-	this->unset(uID);
+	return this->unset(uID);
 }
 
-void ListenerImpl::unset(unsigned long _uID)
+bool ListenerImpl::unset(unsigned long _uID)
 {
+	return false;
 }
 
 //Remove
-void ListenerImpl::remove(const std::shared_ptr<uml::Property>& _property, const std::shared_ptr<Any>& value)
+bool ListenerImpl::remove(const std::shared_ptr<uml::Property>& _property, const std::shared_ptr<Any>& value, int removeAt /*= -1*/, bool isRemoveDuplicates /*= false*/)
 {
-	this->remove(_property->_getID(), value);
+	return this->remove(_property->_getID(), value, removeAt);
 }
 
-void ListenerImpl::remove(std::string _qualifiedName, const std::shared_ptr<Any>& value)
+bool ListenerImpl::remove(std::string _qualifiedName, const std::shared_ptr<Any>& value, int removeAt /*= -1*/, bool isRemoveDuplicates /*= false*/)
 {
 	unsigned long uID = util::Util::polynomialRollingHash(_qualifiedName);
-	this->remove(uID, value);
+	return this->remove(uID, value, removeAt);
 }
 
-void ListenerImpl::remove(unsigned long _uID, const std::shared_ptr<Any>& value)
+bool ListenerImpl::remove(unsigned long _uID, const std::shared_ptr<Any>& value, int removeAt /*= -1*/, bool isRemoveDuplicates /*= false*/)
 {
+	return false;
 }
 
 //**************************************

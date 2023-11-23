@@ -10,7 +10,6 @@
 
 namespace uml 
 {
-	class ConnectorEnd;
 }
 
 namespace FoundationalModelLibrary::PrimitiveBehaviors::BooleanFunctions 

@@ -74,21 +74,21 @@ namespace FoundationalModelLibrary::Common
 			virtual std::shared_ptr<Any> get(std::string _qualifiedName) const ;
 			virtual std::shared_ptr<Any> get(unsigned long _uID) const ;
 			//Set
-			virtual void set(const std::shared_ptr<uml::Property>& _property, const std::shared_ptr<Any>& value) ;
-			virtual void set(std::string _qualifiedName, const std::shared_ptr<Any>& value) ;
-			virtual void set(unsigned long _uID, const std::shared_ptr<Any>& value) ;
+			virtual bool set(const std::shared_ptr<uml::Property>& _property, const std::shared_ptr<Any>& value) ;
+			virtual bool set(std::string _qualifiedName, const std::shared_ptr<Any>& value) ;
+			virtual bool set(unsigned long _uID, const std::shared_ptr<Any>& value) ;
 			//Add
-			virtual void add(const std::shared_ptr<uml::Property>& _property, const std::shared_ptr<Any>& value, int insertAt = -1) ;
-			virtual void add(std::string _qualifiedName, const std::shared_ptr<Any>& value, int insertAt = -1) ;
-			virtual void add(unsigned long _uID, const std::shared_ptr<Any>& value, int insertAt = -1) ;
+			virtual bool add(const std::shared_ptr<uml::Property>& _property, const std::shared_ptr<Any>& value, int insertAt = -1) ;
+			virtual bool add(std::string _qualifiedName, const std::shared_ptr<Any>& value, int insertAt = -1) ;
+			virtual bool add(unsigned long _uID, const std::shared_ptr<Any>& value, int insertAt = -1) ;
 			//Unset
-			virtual void unset(const std::shared_ptr<uml::Property>& _property) ;
-			virtual void unset(std::string _qualifiedName) ;
-			virtual void unset(unsigned long _uID) ;
+			virtual bool unset(const std::shared_ptr<uml::Property>& _property) ;
+			virtual bool unset(std::string _qualifiedName) ;
+			virtual bool unset(unsigned long _uID) ;
 			//Remove
-			virtual void remove(const std::shared_ptr<uml::Property>& _property, const std::shared_ptr<Any>& value) ;
-			virtual void remove(std::string _qualifiedName, const std::shared_ptr<Any>& value) ;
-			virtual void remove(unsigned long _uID, const std::shared_ptr<Any>& value) ;
+			virtual bool remove(const std::shared_ptr<uml::Property>& _property, const std::shared_ptr<Any>& value, int removeAt = -1, bool isRemoveDuplicates = false) ;
+			virtual bool remove(std::string _qualifiedName, const std::shared_ptr<Any>& value, int removeAt = -1, bool isRemoveDuplicates = false) ;
+			virtual bool remove(unsigned long _uID, const std::shared_ptr<Any>& value, int removeAt = -1, bool isRemoveDuplicates = false) ;
 		
 			//**************************************
 			// Operation & OpaqueBehavior Invocation

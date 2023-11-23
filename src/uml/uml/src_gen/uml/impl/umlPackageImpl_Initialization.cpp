@@ -12322,13 +12322,7 @@ void umlPackageImpl::initializeObjectContent()
 	 * EOperations
 	 */
 	m_object_Operation_add_Property_EJavaObject->setName("add");
-	{ 	std::shared_ptr<ecore::ecoreFactory> factory = ecore::ecoreFactory::eInstance();
-		std::shared_ptr<ecore::EClass> unknownClass = factory ->createEClass(-1);
-	   	unknownClass->setName("invalid");
-		unknownClass->setAbstract(true);
-		unknownClass->setInterface(true);
-		m_object_Operation_add_Property_EJavaObject->setEType(unknownClass);
-	}
+	m_object_Operation_add_Property_EJavaObject->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_object_Operation_add_Property_EJavaObject->setLowerBound(0);
 	m_object_Operation_add_Property_EJavaObject->setUpperBound(1);
 	m_object_Operation_add_Property_EJavaObject->setUnique(true);
@@ -12339,7 +12333,7 @@ void umlPackageImpl::initializeObjectContent()
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_object_Operation_add_Property_EJavaObject);
 		parameter->setName("_property");
-		parameter->setEType(nullptr);
+		parameter->setEType(getProperty_Class());
 		parameter->setLowerBound(0);
 		parameter->setUpperBound(1);
 		parameter->setUnique(true);
@@ -12349,7 +12343,7 @@ void umlPackageImpl::initializeObjectContent()
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_object_Operation_add_Property_EJavaObject);
 		parameter->setName("value");
-		parameter->setEType(nullptr);
+		parameter->setEType(ecore::ecorePackage::eInstance()->getEJavaObject_Class());
 		parameter->setLowerBound(0);
 		parameter->setUpperBound(1);
 		parameter->setUnique(true);
@@ -12357,13 +12351,7 @@ void umlPackageImpl::initializeObjectContent()
 	}
 	
 	m_object_Operation_add_Property_EInt->setName("add");
-	{ 	std::shared_ptr<ecore::ecoreFactory> factory = ecore::ecoreFactory::eInstance();
-		std::shared_ptr<ecore::EClass> unknownClass = factory ->createEClass(-1);
-	   	unknownClass->setName("invalid");
-		unknownClass->setAbstract(true);
-		unknownClass->setInterface(true);
-		m_object_Operation_add_Property_EInt->setEType(unknownClass);
-	}
+	m_object_Operation_add_Property_EInt->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_object_Operation_add_Property_EInt->setLowerBound(0);
 	m_object_Operation_add_Property_EInt->setUpperBound(1);
 	m_object_Operation_add_Property_EInt->setUnique(true);
@@ -12374,7 +12362,7 @@ void umlPackageImpl::initializeObjectContent()
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_object_Operation_add_Property_EInt);
 		parameter->setName("_property");
-		parameter->setEType(nullptr);
+		parameter->setEType(getProperty_Class());
 		parameter->setLowerBound(0);
 		parameter->setUpperBound(1);
 		parameter->setUnique(true);
@@ -12384,7 +12372,7 @@ void umlPackageImpl::initializeObjectContent()
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_object_Operation_add_Property_EInt);
 		parameter->setName("value");
-		parameter->setEType(nullptr);
+		parameter->setEType(ecore::ecorePackage::eInstance()->getEJavaObject_Class());
 		parameter->setLowerBound(0);
 		parameter->setUpperBound(1);
 		parameter->setUnique(true);
@@ -12394,7 +12382,7 @@ void umlPackageImpl::initializeObjectContent()
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_object_Operation_add_Property_EInt);
 		parameter->setName("insertAt");
-		parameter->setEType(nullptr);
+		parameter->setEType(ecore::ecorePackage::eInstance()->getEInt_Class());
 		parameter->setLowerBound(0);
 		parameter->setUpperBound(1);
 		parameter->setUnique(true);
@@ -12515,13 +12503,7 @@ void umlPackageImpl::initializeObjectContent()
 	}
 	
 	m_object_Operation_remove_Property_EBoolean->setName("remove");
-	{ 	std::shared_ptr<ecore::ecoreFactory> factory = ecore::ecoreFactory::eInstance();
-		std::shared_ptr<ecore::EClass> unknownClass = factory ->createEClass(-1);
-	   	unknownClass->setName("invalid");
-		unknownClass->setAbstract(true);
-		unknownClass->setInterface(true);
-		m_object_Operation_remove_Property_EBoolean->setEType(unknownClass);
-	}
+	m_object_Operation_remove_Property_EBoolean->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_object_Operation_remove_Property_EBoolean->setLowerBound(0);
 	m_object_Operation_remove_Property_EBoolean->setUpperBound(1);
 	m_object_Operation_remove_Property_EBoolean->setUnique(true);
@@ -12532,7 +12514,7 @@ void umlPackageImpl::initializeObjectContent()
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_object_Operation_remove_Property_EBoolean);
 		parameter->setName("_property");
-		parameter->setEType(nullptr);
+		parameter->setEType(getProperty_Class());
 		parameter->setLowerBound(0);
 		parameter->setUpperBound(1);
 		parameter->setUnique(true);
@@ -12542,7 +12524,7 @@ void umlPackageImpl::initializeObjectContent()
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_object_Operation_remove_Property_EBoolean);
 		parameter->setName("value");
-		parameter->setEType(nullptr);
+		parameter->setEType(ecore::ecorePackage::eInstance()->getEJavaObject_Class());
 		parameter->setLowerBound(0);
 		parameter->setUpperBound(1);
 		parameter->setUnique(true);
@@ -12552,7 +12534,7 @@ void umlPackageImpl::initializeObjectContent()
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_object_Operation_remove_Property_EBoolean);
 		parameter->setName("removeAt");
-		parameter->setEType(nullptr);
+		parameter->setEType(ecore::ecorePackage::eInstance()->getEInt_Class());
 		parameter->setLowerBound(0);
 		parameter->setUpperBound(1);
 		parameter->setUnique(true);
@@ -12562,7 +12544,7 @@ void umlPackageImpl::initializeObjectContent()
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_object_Operation_remove_Property_EBoolean);
 		parameter->setName("isRemoveDuplicates");
-		parameter->setEType(nullptr);
+		parameter->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 		parameter->setLowerBound(0);
 		parameter->setUpperBound(1);
 		parameter->setUnique(true);
@@ -12570,13 +12552,7 @@ void umlPackageImpl::initializeObjectContent()
 	}
 	
 	m_object_Operation_set_Property_EJavaObject->setName("set");
-	{ 	std::shared_ptr<ecore::ecoreFactory> factory = ecore::ecoreFactory::eInstance();
-		std::shared_ptr<ecore::EClass> unknownClass = factory ->createEClass(-1);
-	   	unknownClass->setName("invalid");
-		unknownClass->setAbstract(true);
-		unknownClass->setInterface(true);
-		m_object_Operation_set_Property_EJavaObject->setEType(unknownClass);
-	}
+	m_object_Operation_set_Property_EJavaObject->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_object_Operation_set_Property_EJavaObject->setLowerBound(0);
 	m_object_Operation_set_Property_EJavaObject->setUpperBound(1);
 	m_object_Operation_set_Property_EJavaObject->setUnique(true);
@@ -12587,7 +12563,7 @@ void umlPackageImpl::initializeObjectContent()
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_object_Operation_set_Property_EJavaObject);
 		parameter->setName("_property");
-		parameter->setEType(nullptr);
+		parameter->setEType(getProperty_Class());
 		parameter->setLowerBound(0);
 		parameter->setUpperBound(1);
 		parameter->setUnique(true);
@@ -12597,7 +12573,7 @@ void umlPackageImpl::initializeObjectContent()
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_object_Operation_set_Property_EJavaObject);
 		parameter->setName("value");
-		parameter->setEType(nullptr);
+		parameter->setEType(ecore::ecorePackage::eInstance()->getEJavaObject_Class());
 		parameter->setLowerBound(0);
 		parameter->setUpperBound(1);
 		parameter->setUnique(true);
@@ -12605,13 +12581,7 @@ void umlPackageImpl::initializeObjectContent()
 	}
 	
 	m_object_Operation_unset_Property->setName("unset");
-	{ 	std::shared_ptr<ecore::ecoreFactory> factory = ecore::ecoreFactory::eInstance();
-		std::shared_ptr<ecore::EClass> unknownClass = factory ->createEClass(-1);
-	   	unknownClass->setName("invalid");
-		unknownClass->setAbstract(true);
-		unknownClass->setInterface(true);
-		m_object_Operation_unset_Property->setEType(unknownClass);
-	}
+	m_object_Operation_unset_Property->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_object_Operation_unset_Property->setLowerBound(0);
 	m_object_Operation_unset_Property->setUpperBound(1);
 	m_object_Operation_unset_Property->setUnique(true);
@@ -12622,7 +12592,7 @@ void umlPackageImpl::initializeObjectContent()
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_object_Operation_unset_Property);
 		parameter->setName("_property");
-		parameter->setEType(nullptr);
+		parameter->setEType(getProperty_Class());
 		parameter->setLowerBound(0);
 		parameter->setUpperBound(1);
 		parameter->setUnique(true);

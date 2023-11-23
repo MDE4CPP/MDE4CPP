@@ -3897,15 +3897,15 @@ namespace uml
 			static const unsigned int OBJECT_CLASS_OPERATION_COUNT = 9;
 			
 			
-			static const unsigned long OBJECT_OPERATION_ADD_PROPERTY_EJAVAOBJECT = 637724934;
-			static const unsigned long OBJECT_OPERATION_ADD_PROPERTY_EINT = 319727429;
+			static const unsigned long OBJECT_OPERATION_ADD_PROPERTY_EJAVAOBJECT = 1398402360;
+			static const unsigned long OBJECT_OPERATION_ADD_PROPERTY_EINT = 3415478911;
 			static const unsigned long OBJECT_OPERATION_DESTROY = 2359110280;
 			static const unsigned long OBJECT_OPERATION_GET_PROPERTY = 511579154;
 			static const unsigned long OBJECT_OPERATION_INVOKE_OPERATION_EJAVAOBJECT = 2370151843;
 			static const unsigned long OBJECT_OPERATION_INVOKE_OPAQUEBEHAVIOR_EJAVAOBJECT = 1414710241;
-			static const unsigned long OBJECT_OPERATION_REMOVE_PROPERTY_EBOOLEAN = 2049499274;
-			static const unsigned long OBJECT_OPERATION_SET_PROPERTY_EJAVAOBJECT = 183386425;
-			static const unsigned long OBJECT_OPERATION_UNSET_PROPERTY = 2421215512;
+			static const unsigned long OBJECT_OPERATION_REMOVE_PROPERTY_EBOOLEAN = 1193303628;
+			static const unsigned long OBJECT_OPERATION_SET_PROPERTY_EJAVAOBJECT = 944063851;
+			static const unsigned long OBJECT_OPERATION_UNSET_PROPERTY = 2448223378;
 			
 			//Class and Feature Getter
 			virtual const std::shared_ptr<ecore::EClass>& getObject_Class() const = 0;

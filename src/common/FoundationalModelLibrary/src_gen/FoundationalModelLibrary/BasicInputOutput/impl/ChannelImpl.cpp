@@ -140,67 +140,71 @@ std::shared_ptr<Any> ChannelImpl::get(unsigned long _uID) const
 }
 
 //Set
-void ChannelImpl::set(const std::shared_ptr<uml::Property>& _property, const std::shared_ptr<Any>& value)
+bool ChannelImpl::set(const std::shared_ptr<uml::Property>& _property, const std::shared_ptr<Any>& value)
 {
-	this->set(_property->_getID(), value);
+	return this->set(_property->_getID(), value);
 }
 
-void ChannelImpl::set( std::string _qualifiedName, const std::shared_ptr<Any>& value)
+bool ChannelImpl::set( std::string _qualifiedName, const std::shared_ptr<Any>& value)
 {
 	unsigned long uID = util::Util::polynomialRollingHash(_qualifiedName);
-	this->set(uID, value);
+	return this->set(uID, value);
 }
 
-void ChannelImpl::set(unsigned long _uID, const std::shared_ptr<Any>& value)
+bool ChannelImpl::set(unsigned long _uID, const std::shared_ptr<Any>& value)
 {
+	return false;
 }
 
 //Add
-void ChannelImpl::add(const std::shared_ptr<uml::Property>& _property, const std::shared_ptr<Any>& value, int insertAt /*= -1*/)
+bool ChannelImpl::add(const std::shared_ptr<uml::Property>& _property, const std::shared_ptr<Any>& value, int insertAt /*= -1*/)
 {
-	this->add(_property->_getID(), value);
+	return this->add(_property->_getID(), value, insertAt);
 }
 
-void ChannelImpl::add(std::string _qualifiedName, const std::shared_ptr<Any>& value, int insertAt /*= -1*/)
+bool ChannelImpl::add(std::string _qualifiedName, const std::shared_ptr<Any>& value, int insertAt /*= -1*/)
 {
 	unsigned long uID = util::Util::polynomialRollingHash(_qualifiedName);
-	this->add(uID, value);
+	return this->add(uID, value, insertAt);
 }
 
-void ChannelImpl::add(unsigned long _uID, const std::shared_ptr<Any>& value, int insertAt /*= -1*/)
+bool ChannelImpl::add(unsigned long _uID, const std::shared_ptr<Any>& value, int insertAt /*= -1*/)
 {
+	return false;
 }
 
 //Unset
-void ChannelImpl::unset(const std::shared_ptr<uml::Property>& _property)
+bool ChannelImpl::unset(const std::shared_ptr<uml::Property>& _property)
 {
-	this->unset(_property->_getID());
+	return this->unset(_property->_getID());
 }
 
-void ChannelImpl::unset(std::string _qualifiedName)
+bool ChannelImpl::unset(std::string _qualifiedName)
 {
 	unsigned long uID = util::Util::polynomialRollingHash(_qualifiedName);
-	this->unset(uID);
+	return this->unset(uID);
 }
 
-void ChannelImpl::unset(unsigned long _uID)
+bool ChannelImpl::unset(unsigned long _uID)
 {
+	return false;
 }
 
 //Remove
-void ChannelImpl::remove(const std::shared_ptr<uml::Property>& _property, const std::shared_ptr<Any>& value)
+bool ChannelImpl::remove(const std::shared_ptr<uml::Property>& _property, const std::shared_ptr<Any>& value, int removeAt /*= -1*/, bool isRemoveDuplicates /*= false*/)
 {
-	this->remove(_property->_getID(), value);
+	return this->remove(_property->_getID(), value, removeAt);
 }
 
-void ChannelImpl::remove(std::string _qualifiedName, const std::shared_ptr<Any>& value)
+bool ChannelImpl::remove(std::string _qualifiedName, const std::shared_ptr<Any>& value, int removeAt /*= -1*/, bool isRemoveDuplicates /*= false*/)
 {
 	unsigned long uID = util::Util::polynomialRollingHash(_qualifiedName);
-	this->remove(uID, value);
+	return this->remove(uID, value, removeAt);
 }
 
-void ChannelImpl::remove(unsigned long _uID, const std::shared_ptr<Any>& value)
+bool ChannelImpl::remove(unsigned long _uID, const std::shared_ptr<Any>& value, int removeAt /*= -1*/, bool isRemoveDuplicates /*= false*/)
 {
+	return false;
 }
 
 //**************************************

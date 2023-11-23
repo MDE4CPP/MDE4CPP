@@ -106,7 +106,7 @@ std::shared_ptr<ecore::EObject> ObjectImpl::copy() const
 //*********************************
 // Operations
 //*********************************
-void ObjectImpl::add(const std::shared_ptr<uml::Property>& _property, const std::shared_ptr<Any>& value)
+bool ObjectImpl::add(const std::shared_ptr<uml::Property>& _property, const std::shared_ptr<Any>& value)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -114,7 +114,7 @@ void ObjectImpl::add(const std::shared_ptr<uml::Property>& _property, const std:
 	//end of body
 }
 
-void ObjectImpl::add(const std::shared_ptr<uml::Property>& _property, const std::shared_ptr<Any>& value, int insertAt)
+bool ObjectImpl::add(const std::shared_ptr<uml::Property>& _property, const std::shared_ptr<Any>& value, int insertAt)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -139,17 +139,17 @@ std::shared_ptr<Any> ObjectImpl::invoke(const std::shared_ptr<uml::OpaqueBehavio
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-void ObjectImpl::remove(const std::shared_ptr<uml::Property>& _property, const std::shared_ptr<Any>& value, int removeAt, bool isRemoveDuplicates)
+bool ObjectImpl::remove(const std::shared_ptr<uml::Property>& _property, const std::shared_ptr<Any>& value, int removeAt, bool isRemoveDuplicates)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-void ObjectImpl::set(const std::shared_ptr<uml::Property>& _property, const std::shared_ptr<Any>& value)
+bool ObjectImpl::set(const std::shared_ptr<uml::Property>& _property, const std::shared_ptr<Any>& value)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
-void ObjectImpl::unset(const std::shared_ptr<uml::Property>& _property)
+bool ObjectImpl::unset(const std::shared_ptr<uml::Property>& _property)
 {
 	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
@@ -271,7 +271,7 @@ std::shared_ptr<Any> ObjectImpl::eInvoke(int operationID, const std::shared_ptr<
  
   	switch(operationID)
 	{
-		// uml::Object::add(uml::Property, Any): 637724934
+		// uml::Object::add(uml::Property, Any) : bool: 1398402360
 		case umlPackage::OBJECT_OPERATION_ADD_PROPERTY_EJAVAOBJECT:
 		{
 			//Retrieve input parameter '_property'
@@ -314,10 +314,10 @@ std::shared_ptr<Any> ObjectImpl::eInvoke(int operationID, const std::shared_ptr<
 				return nullptr;
 			}
 		
-			this->add(incoming_param__property,incoming_param_value);
+			result = eAny(this->add(incoming_param__property,incoming_param_value), 0, false);
 			break;
 		}
-		// uml::Object::add(uml::Property, Any, int): 319727429
+		// uml::Object::add(uml::Property, Any, int) : bool: 3415478911
 		case umlPackage::OBJECT_OPERATION_ADD_PROPERTY_EINT:
 		{
 			//Retrieve input parameter '_property'
@@ -374,7 +374,7 @@ std::shared_ptr<Any> ObjectImpl::eInvoke(int operationID, const std::shared_ptr<
 				return nullptr;
 			}
 		
-			this->add(incoming_param__property,incoming_param_value,incoming_param_insertAt);
+			result = eAny(this->add(incoming_param__property,incoming_param_value,incoming_param_insertAt), 0, false);
 			break;
 		}
 		// uml::Object::destroy(): 2359110280
@@ -535,7 +535,7 @@ std::shared_ptr<Any> ObjectImpl::eInvoke(int operationID, const std::shared_ptr<
 			result = eAny(this->invoke(incoming_param__opaqueBehavior,incoming_param_inputArguments,incoming_param_outputArguments), 0, false);
 			break;
 		}
-		// uml::Object::remove(uml::Property, Any, int, bool): 2049499274
+		// uml::Object::remove(uml::Property, Any, int, bool) : bool: 1193303628
 		case umlPackage::OBJECT_OPERATION_REMOVE_PROPERTY_EBOOLEAN:
 		{
 			//Retrieve input parameter '_property'
@@ -606,10 +606,10 @@ std::shared_ptr<Any> ObjectImpl::eInvoke(int operationID, const std::shared_ptr<
 				return nullptr;
 			}
 		
-			this->remove(incoming_param__property,incoming_param_value,incoming_param_removeAt,incoming_param_isRemoveDuplicates);
+			result = eAny(this->remove(incoming_param__property,incoming_param_value,incoming_param_removeAt,incoming_param_isRemoveDuplicates), 0, false);
 			break;
 		}
-		// uml::Object::set(uml::Property, Any): 183386425
+		// uml::Object::set(uml::Property, Any) : bool: 944063851
 		case umlPackage::OBJECT_OPERATION_SET_PROPERTY_EJAVAOBJECT:
 		{
 			//Retrieve input parameter '_property'
@@ -652,10 +652,10 @@ std::shared_ptr<Any> ObjectImpl::eInvoke(int operationID, const std::shared_ptr<
 				return nullptr;
 			}
 		
-			this->set(incoming_param__property,incoming_param_value);
+			result = eAny(this->set(incoming_param__property,incoming_param_value), 0, false);
 			break;
 		}
-		// uml::Object::unset(uml::Property): 2421215512
+		// uml::Object::unset(uml::Property) : bool: 2448223378
 		case umlPackage::OBJECT_OPERATION_UNSET_PROPERTY:
 		{
 			//Retrieve input parameter '_property'
@@ -684,7 +684,7 @@ std::shared_ptr<Any> ObjectImpl::eInvoke(int operationID, const std::shared_ptr<
 				}
 			}
 		
-			this->unset(incoming_param__property);
+			result = eAny(this->unset(incoming_param__property), 0, false);
 			break;
 		}
 

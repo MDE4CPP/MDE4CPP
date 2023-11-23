@@ -208,18 +208,18 @@ std::shared_ptr<Any> ExternalLibraryImpl::get(unsigned long _uID) const
 }
 
 //Set
-void ExternalLibraryImpl::set(const std::shared_ptr<uml::Property>& _property, const std::shared_ptr<Any>& value)
+bool ExternalLibraryImpl::set(const std::shared_ptr<uml::Property>& _property, const std::shared_ptr<Any>& value)
 {
-	this->set(_property->_getID(), value);
+	return this->set(_property->_getID(), value);
 }
 
-void ExternalLibraryImpl::set( std::string _qualifiedName, const std::shared_ptr<Any>& value)
+bool ExternalLibraryImpl::set( std::string _qualifiedName, const std::shared_ptr<Any>& value)
 {
 	unsigned long uID = util::Util::polynomialRollingHash(_qualifiedName);
-	this->set(uID, value);
+	return this->set(uID, value);
 }
 
-void ExternalLibraryImpl::set(unsigned long _uID, const std::shared_ptr<Any>& value)
+bool ExternalLibraryImpl::set(unsigned long _uID, const std::shared_ptr<Any>& value)
 {
 	switch(_uID)
 	{
@@ -235,6 +235,7 @@ void ExternalLibraryImpl::set(unsigned long _uID, const std::shared_ptr<Any>& va
 					if(_base_Package)
 					{
 						setBase_Package(_base_Package);
+						return true;
 					}			
 					else
 					{
@@ -244,13 +245,13 @@ void ExternalLibraryImpl::set(unsigned long _uID, const std::shared_ptr<Any>& va
 				catch(...)
 				{
 					DEBUG_ERROR("Invalid type stored in 'uml::UMLAny' for property 'base_Package'. Failed to set property!")
-					return;
+					return true;
 				}
 			}
 			else
 			{
 				DEBUG_ERROR("Invalid instance of 'uml::UMLAny' for property 'base_Package'. Failed to set property!")
-				return;
+				return true;
 			}
 		break;
 		}
@@ -260,11 +261,12 @@ void ExternalLibraryImpl::set(unsigned long _uID, const std::shared_ptr<Any>& va
 			{
 				std::string _includePath = value->get<std::string>();
 				setIncludePath(_includePath);
+				return true;
 			}
 			catch(...)
 			{
 				DEBUG_ERROR("Invalid type stored in 'Any' for property 'includePath'. Failed to set property!")
-				return;
+				return true;
 			}
 		break;
 		}
@@ -274,11 +276,12 @@ void ExternalLibraryImpl::set(unsigned long _uID, const std::shared_ptr<Any>& va
 			{
 				std::string _libraryName = value->get<std::string>();
 				setLibraryName(_libraryName);
+				return true;
 			}
 			catch(...)
 			{
 				DEBUG_ERROR("Invalid type stored in 'Any' for property 'libraryName'. Failed to set property!")
-				return;
+				return true;
 			}
 		break;
 		}
@@ -288,72 +291,262 @@ void ExternalLibraryImpl::set(unsigned long _uID, const std::shared_ptr<Any>& va
 			{
 				std::string _libraryPath = value->get<std::string>();
 				setLibraryPath(_libraryPath);
+				return true;
 			}
 			catch(...)
 			{
 				DEBUG_ERROR("Invalid type stored in 'Any' for property 'libraryPath'. Failed to set property!")
-				return;
+				return true;
 			}
 		break;
 		}
 	}
+	return false;
 }
 
 //Add
-void ExternalLibraryImpl::add(const std::shared_ptr<uml::Property>& _property, const std::shared_ptr<Any>& value, int insertAt /*= -1*/)
+bool ExternalLibraryImpl::add(const std::shared_ptr<uml::Property>& _property, const std::shared_ptr<Any>& value, int insertAt /*= -1*/)
 {
-	this->add(_property->_getID(), value);
+	return this->add(_property->_getID(), value, insertAt);
 }
 
-void ExternalLibraryImpl::add(std::string _qualifiedName, const std::shared_ptr<Any>& value, int insertAt /*= -1*/)
+bool ExternalLibraryImpl::add(std::string _qualifiedName, const std::shared_ptr<Any>& value, int insertAt /*= -1*/)
 {
 	unsigned long uID = util::Util::polynomialRollingHash(_qualifiedName);
-	this->add(uID, value);
+	return this->add(uID, value, insertAt);
 }
 
-void ExternalLibraryImpl::add(unsigned long _uID, const std::shared_ptr<Any>& value, int insertAt /*= -1*/)
+bool ExternalLibraryImpl::add(unsigned long _uID, const std::shared_ptr<Any>& value, int insertAt /*= -1*/)
 {
+	return false;
 }
 
 //Unset
-void ExternalLibraryImpl::unset(const std::shared_ptr<uml::Property>& _property)
+bool ExternalLibraryImpl::unset(const std::shared_ptr<uml::Property>& _property)
 {
-	this->unset(_property->_getID());
+	return this->unset(_property->_getID());
 }
 
-void ExternalLibraryImpl::unset(std::string _qualifiedName)
+bool ExternalLibraryImpl::unset(std::string _qualifiedName)
 {
 	unsigned long uID = util::Util::polynomialRollingHash(_qualifiedName);
-	this->unset(uID);
+	return this->unset(uID);
 }
 
-void ExternalLibraryImpl::unset(unsigned long _uID)
+bool ExternalLibraryImpl::unset(unsigned long _uID)
 {
 	switch(_uID)
 	{
 		case UML4CPPProfile::UML4CPPProfilePackage::EXTERNALLIBRARY_PROPERTY_BASE_PACKAGE:
 		{
 			m_base_Package.reset();
-			return;
+			return true;
+		}
+		case UML4CPPProfile::UML4CPPProfilePackage::EXTERNALLIBRARY_PROPERTY_INCLUDEPATH:
+		{
+			m_includePath = "";
+			return true;
+		}
+		case UML4CPPProfile::UML4CPPProfilePackage::EXTERNALLIBRARY_PROPERTY_LIBRARYNAME:
+		{
+			m_libraryName = "";
+			return true;
+		}
+		case UML4CPPProfile::UML4CPPProfilePackage::EXTERNALLIBRARY_PROPERTY_LIBRARYPATH:
+		{
+			m_libraryPath = "";
+			return true;
 		}
 	}
 
+	return false;
 }
 
 //Remove
-void ExternalLibraryImpl::remove(const std::shared_ptr<uml::Property>& _property, const std::shared_ptr<Any>& value)
+bool ExternalLibraryImpl::remove(const std::shared_ptr<uml::Property>& _property, const std::shared_ptr<Any>& value, int removeAt /*= -1*/, bool isRemoveDuplicates /*= false*/)
 {
-	this->remove(_property->_getID(), value);
+	return this->remove(_property->_getID(), value, removeAt);
 }
 
-void ExternalLibraryImpl::remove(std::string _qualifiedName, const std::shared_ptr<Any>& value)
+bool ExternalLibraryImpl::remove(std::string _qualifiedName, const std::shared_ptr<Any>& value, int removeAt /*= -1*/, bool isRemoveDuplicates /*= false*/)
 {
 	unsigned long uID = util::Util::polynomialRollingHash(_qualifiedName);
-	this->remove(uID, value);
+	return this->remove(uID, value, removeAt);
 }
 
-void ExternalLibraryImpl::remove(unsigned long _uID, const std::shared_ptr<Any>& value)
+bool ExternalLibraryImpl::remove(unsigned long _uID, const std::shared_ptr<Any>& value, int removeAt /*= -1*/, bool isRemoveDuplicates /*= false*/)
 {
+	switch(_uID)
+	{
+		case UML4CPPProfile::UML4CPPProfilePackage::EXTERNALLIBRARY_PROPERTY_BASE_PACKAGE:
+		{
+			std::shared_ptr<uml::Package> valueToRemove = nullptr;
+			if(value->isContainer())
+			{
+				std::shared_ptr<uml::UMLContainerAny> umlContainerAny = std::dynamic_pointer_cast<uml::UMLContainerAny>(value);
+				if(umlContainerAny)
+				{
+					std::shared_ptr<Bag<uml::Element>> container = umlContainerAny->getAsElementContainer();
+					if(container && !(container->empty()))
+					{
+						// If a non-empty container is passed, the first value of the container will be removed from the property
+						std::shared_ptr<uml::Element> firstElement = container->at(0);
+						valueToRemove = std::dynamic_pointer_cast<uml::Package>(firstElement);
+					}
+				}
+			}
+			else
+			{
+				std::shared_ptr<uml::UMLAny> umlAny = std::dynamic_pointer_cast<uml::UMLAny>(value);
+				if(umlAny)
+				{
+					std::shared_ptr<uml::Element> element = umlAny->getAsElement();
+					valueToRemove = std::dynamic_pointer_cast<uml::Package>(element);
+				}
+			}
+
+			
+			if(removeAt >= 1 && !isRemoveDuplicates) // As per fUML-specification, if isRemoveDuplicates is true, removeAt is ignored
+			{
+				// If removeAt != -1, the value to remove is not taken into account anymore.
+				// Instead, the value at index = removeAt is removed
+				// NOTE: removeAt is 1-based rather than 0-based
+				
+				if(removeAt == 1)
+				{
+					m_base_Package.reset();
+					return true;
+				}
+			}
+			else
+			{
+				if(m_base_Package.lock() == valueToRemove)
+				{
+					m_base_Package.reset();
+					return true;
+				}
+			}
+		}
+		case UML4CPPProfile::UML4CPPProfilePackage::EXTERNALLIBRARY_PROPERTY_INCLUDEPATH:
+		{
+			std::string valueToRemove = "";
+			if(value->isContainer())
+			{
+				std::shared_ptr<Bag<std::string>> container = value->get<std::shared_ptr<Bag<std::string>>>();
+				if(container && !(container->empty()))
+				{
+						// If a non-empty container is passed, the first value of the container will be removed from the property
+						valueToRemove = *(container->at(0));
+				}
+			}
+			else
+			{
+				valueToRemove = value->get<std::string>();
+			}
+
+			
+			if(removeAt >= 1 && !isRemoveDuplicates) // As per fUML-specification, if isRemoveDuplicates is true, removeAt is ignored
+			{
+				// If removeAt != -1, the value to remove is not taken into account anymore.
+				// Instead, the value at index = removeAt is removed
+				// NOTE: removeAt is 1-based rather than 0-based
+				
+				if(removeAt == 1)
+				{
+					m_includePath = "";
+					return true;
+				}
+			}
+			else
+			{
+				if(m_includePath == valueToRemove)
+				{
+					m_includePath = "";
+					return true;
+				}
+			}
+		}
+		case UML4CPPProfile::UML4CPPProfilePackage::EXTERNALLIBRARY_PROPERTY_LIBRARYNAME:
+		{
+			std::string valueToRemove = "";
+			if(value->isContainer())
+			{
+				std::shared_ptr<Bag<std::string>> container = value->get<std::shared_ptr<Bag<std::string>>>();
+				if(container && !(container->empty()))
+				{
+						// If a non-empty container is passed, the first value of the container will be removed from the property
+						valueToRemove = *(container->at(0));
+				}
+			}
+			else
+			{
+				valueToRemove = value->get<std::string>();
+			}
+
+			
+			if(removeAt >= 1 && !isRemoveDuplicates) // As per fUML-specification, if isRemoveDuplicates is true, removeAt is ignored
+			{
+				// If removeAt != -1, the value to remove is not taken into account anymore.
+				// Instead, the value at index = removeAt is removed
+				// NOTE: removeAt is 1-based rather than 0-based
+				
+				if(removeAt == 1)
+				{
+					m_libraryName = "";
+					return true;
+				}
+			}
+			else
+			{
+				if(m_libraryName == valueToRemove)
+				{
+					m_libraryName = "";
+					return true;
+				}
+			}
+		}
+		case UML4CPPProfile::UML4CPPProfilePackage::EXTERNALLIBRARY_PROPERTY_LIBRARYPATH:
+		{
+			std::string valueToRemove = "";
+			if(value->isContainer())
+			{
+				std::shared_ptr<Bag<std::string>> container = value->get<std::shared_ptr<Bag<std::string>>>();
+				if(container && !(container->empty()))
+				{
+						// If a non-empty container is passed, the first value of the container will be removed from the property
+						valueToRemove = *(container->at(0));
+				}
+			}
+			else
+			{
+				valueToRemove = value->get<std::string>();
+			}
+
+			
+			if(removeAt >= 1 && !isRemoveDuplicates) // As per fUML-specification, if isRemoveDuplicates is true, removeAt is ignored
+			{
+				// If removeAt != -1, the value to remove is not taken into account anymore.
+				// Instead, the value at index = removeAt is removed
+				// NOTE: removeAt is 1-based rather than 0-based
+				
+				if(removeAt == 1)
+				{
+					m_libraryPath = "";
+					return true;
+				}
+			}
+			else
+			{
+				if(m_libraryPath == valueToRemove)
+				{
+					m_libraryPath = "";
+					return true;
+				}
+			}
+		}
+	}
+
+	return false;
 }
 
 //**************************************

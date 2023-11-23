@@ -115,12 +115,12 @@ const std::shared_ptr<Bag<uml::Classifier>>& StandardOutputChannelImpl::getTypes
 		types.reset();
 		// Add type of self 'StandardOutputChannel' : Class
 		types->add(FoundationalModelLibrary::BasicInputOutput::BasicInputOutputPackage::eInstance()->get_FoundationalModelLibrary_BasicInputOutput_StandardOutputChannel());
-		// Add base type 'OutputChannel' : Class
-		types->add(FoundationalModelLibrary::BasicInputOutput::BasicInputOutputPackage::eInstance()->get_FoundationalModelLibrary_BasicInputOutput_OutputChannel());
 		// Add base type 'Channel' : Class
 		types->add(FoundationalModelLibrary::BasicInputOutput::BasicInputOutputPackage::eInstance()->get_FoundationalModelLibrary_BasicInputOutput_Channel());
 		// Add base type 'TextOutputChannel' : Class
 		types->add(FoundationalModelLibrary::BasicInputOutput::BasicInputOutputPackage::eInstance()->get_FoundationalModelLibrary_BasicInputOutput_TextOutputChannel());
+		// Add base type 'OutputChannel' : Class
+		types->add(FoundationalModelLibrary::BasicInputOutput::BasicInputOutputPackage::eInstance()->get_FoundationalModelLibrary_BasicInputOutput_OutputChannel());
 	}
 
 	return types;
@@ -154,75 +154,79 @@ std::shared_ptr<Any> StandardOutputChannelImpl::get(unsigned long _uID) const
 }
 
 //Set
-void StandardOutputChannelImpl::set(const std::shared_ptr<uml::Property>& _property, const std::shared_ptr<Any>& value)
+bool StandardOutputChannelImpl::set(const std::shared_ptr<uml::Property>& _property, const std::shared_ptr<Any>& value)
 {
-	this->set(_property->_getID(), value);
+	return this->set(_property->_getID(), value);
 }
 
-void StandardOutputChannelImpl::set( std::string _qualifiedName, const std::shared_ptr<Any>& value)
+bool StandardOutputChannelImpl::set( std::string _qualifiedName, const std::shared_ptr<Any>& value)
 {
 	unsigned long uID = util::Util::polynomialRollingHash(_qualifiedName);
-	this->set(uID, value);
+	return this->set(uID, value);
 }
 
-void StandardOutputChannelImpl::set(unsigned long _uID, const std::shared_ptr<Any>& value)
+bool StandardOutputChannelImpl::set(unsigned long _uID, const std::shared_ptr<Any>& value)
 {
 	//Call set() for base class TextOutputChannel
-	FoundationalModelLibrary::BasicInputOutput::TextOutputChannelImpl::set(_uID, value);
+	if(FoundationalModelLibrary::BasicInputOutput::TextOutputChannelImpl::set(_uID, value)) return true;
+	return false;
 }
 
 //Add
-void StandardOutputChannelImpl::add(const std::shared_ptr<uml::Property>& _property, const std::shared_ptr<Any>& value, int insertAt /*= -1*/)
+bool StandardOutputChannelImpl::add(const std::shared_ptr<uml::Property>& _property, const std::shared_ptr<Any>& value, int insertAt /*= -1*/)
 {
-	this->add(_property->_getID(), value);
+	return this->add(_property->_getID(), value, insertAt);
 }
 
-void StandardOutputChannelImpl::add(std::string _qualifiedName, const std::shared_ptr<Any>& value, int insertAt /*= -1*/)
+bool StandardOutputChannelImpl::add(std::string _qualifiedName, const std::shared_ptr<Any>& value, int insertAt /*= -1*/)
 {
 	unsigned long uID = util::Util::polynomialRollingHash(_qualifiedName);
-	this->add(uID, value);
+	return this->add(uID, value, insertAt);
 }
 
-void StandardOutputChannelImpl::add(unsigned long _uID, const std::shared_ptr<Any>& value, int insertAt /*= -1*/)
+bool StandardOutputChannelImpl::add(unsigned long _uID, const std::shared_ptr<Any>& value, int insertAt /*= -1*/)
 {
-	//Call set() for base class TextOutputChannel
-	FoundationalModelLibrary::BasicInputOutput::TextOutputChannelImpl::add(_uID, value, insertAt);
+	//Call add() for base class TextOutputChannel
+	if(FoundationalModelLibrary::BasicInputOutput::TextOutputChannelImpl::add(_uID, value, insertAt)) return true;
+	return false;
 }
 
 //Unset
-void StandardOutputChannelImpl::unset(const std::shared_ptr<uml::Property>& _property)
+bool StandardOutputChannelImpl::unset(const std::shared_ptr<uml::Property>& _property)
 {
-	this->unset(_property->_getID());
+	return this->unset(_property->_getID());
 }
 
-void StandardOutputChannelImpl::unset(std::string _qualifiedName)
+bool StandardOutputChannelImpl::unset(std::string _qualifiedName)
 {
 	unsigned long uID = util::Util::polynomialRollingHash(_qualifiedName);
-	this->unset(uID);
+	return this->unset(uID);
 }
 
-void StandardOutputChannelImpl::unset(unsigned long _uID)
+bool StandardOutputChannelImpl::unset(unsigned long _uID)
 {
 	//Call unset() for base class TextOutputChannel
-	FoundationalModelLibrary::BasicInputOutput::TextOutputChannelImpl::unset(_uID);
+	if(FoundationalModelLibrary::BasicInputOutput::TextOutputChannelImpl::unset(_uID)) return true;
+	return false;
 }
 
 //Remove
-void StandardOutputChannelImpl::remove(const std::shared_ptr<uml::Property>& _property, const std::shared_ptr<Any>& value)
+bool StandardOutputChannelImpl::remove(const std::shared_ptr<uml::Property>& _property, const std::shared_ptr<Any>& value, int removeAt /*= -1*/, bool isRemoveDuplicates /*= false*/)
 {
-	this->remove(_property->_getID(), value);
+	return this->remove(_property->_getID(), value, removeAt);
 }
 
-void StandardOutputChannelImpl::remove(std::string _qualifiedName, const std::shared_ptr<Any>& value)
+bool StandardOutputChannelImpl::remove(std::string _qualifiedName, const std::shared_ptr<Any>& value, int removeAt /*= -1*/, bool isRemoveDuplicates /*= false*/)
 {
 	unsigned long uID = util::Util::polynomialRollingHash(_qualifiedName);
-	this->remove(uID, value);
+	return this->remove(uID, value, removeAt);
 }
 
-void StandardOutputChannelImpl::remove(unsigned long _uID, const std::shared_ptr<Any>& value)
+bool StandardOutputChannelImpl::remove(unsigned long _uID, const std::shared_ptr<Any>& value, int removeAt /*= -1*/, bool isRemoveDuplicates /*= false*/)
 {
 	//Call set() for base class TextOutputChannel
-	FoundationalModelLibrary::BasicInputOutput::TextOutputChannelImpl::remove(_uID, value);
+	if(FoundationalModelLibrary::BasicInputOutput::TextOutputChannelImpl::remove(_uID, value)) return true;
+	return false;
 }
 
 //**************************************

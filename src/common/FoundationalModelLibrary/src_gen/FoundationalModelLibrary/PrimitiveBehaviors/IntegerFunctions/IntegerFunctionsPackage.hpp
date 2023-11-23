@@ -12,7 +12,6 @@ namespace uml
 {
 	class FunctionBehavior;
 	class Parameter;
-	class ConnectorEnd;
 }
 
 

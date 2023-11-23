@@ -157,18 +157,18 @@ std::shared_ptr<Any> ServiceImpl::get(unsigned long _uID) const
 }
 
 //Set
-void ServiceImpl::set(const std::shared_ptr<uml::Property>& _property, const std::shared_ptr<Any>& value)
+bool ServiceImpl::set(const std::shared_ptr<uml::Property>& _property, const std::shared_ptr<Any>& value)
 {
-	this->set(_property->_getID(), value);
+	return this->set(_property->_getID(), value);
 }
 
-void ServiceImpl::set( std::string _qualifiedName, const std::shared_ptr<Any>& value)
+bool ServiceImpl::set( std::string _qualifiedName, const std::shared_ptr<Any>& value)
 {
 	unsigned long uID = util::Util::polynomialRollingHash(_qualifiedName);
-	this->set(uID, value);
+	return this->set(uID, value);
 }
 
-void ServiceImpl::set(unsigned long _uID, const std::shared_ptr<Any>& value)
+bool ServiceImpl::set(unsigned long _uID, const std::shared_ptr<Any>& value)
 {
 	switch(_uID)
 	{
@@ -184,6 +184,7 @@ void ServiceImpl::set(unsigned long _uID, const std::shared_ptr<Any>& value)
 					if(_base_Component)
 					{
 						setBase_Component(_base_Component);
+						return true;
 					}			
 					else
 					{
@@ -193,74 +194,131 @@ void ServiceImpl::set(unsigned long _uID, const std::shared_ptr<Any>& value)
 				catch(...)
 				{
 					DEBUG_ERROR("Invalid type stored in 'uml::UMLAny' for property 'base_Component'. Failed to set property!")
-					return;
+					return true;
 				}
 			}
 			else
 			{
 				DEBUG_ERROR("Invalid instance of 'uml::UMLAny' for property 'base_Component'. Failed to set property!")
-				return;
+				return true;
 			}
 		break;
 		}
 	}
+	return false;
 }
 
 //Add
-void ServiceImpl::add(const std::shared_ptr<uml::Property>& _property, const std::shared_ptr<Any>& value, int insertAt /*= -1*/)
+bool ServiceImpl::add(const std::shared_ptr<uml::Property>& _property, const std::shared_ptr<Any>& value, int insertAt /*= -1*/)
 {
-	this->add(_property->_getID(), value);
+	return this->add(_property->_getID(), value, insertAt);
 }
 
-void ServiceImpl::add(std::string _qualifiedName, const std::shared_ptr<Any>& value, int insertAt /*= -1*/)
+bool ServiceImpl::add(std::string _qualifiedName, const std::shared_ptr<Any>& value, int insertAt /*= -1*/)
 {
 	unsigned long uID = util::Util::polynomialRollingHash(_qualifiedName);
-	this->add(uID, value);
+	return this->add(uID, value, insertAt);
 }
 
-void ServiceImpl::add(unsigned long _uID, const std::shared_ptr<Any>& value, int insertAt /*= -1*/)
+bool ServiceImpl::add(unsigned long _uID, const std::shared_ptr<Any>& value, int insertAt /*= -1*/)
 {
+	return false;
 }
 
 //Unset
-void ServiceImpl::unset(const std::shared_ptr<uml::Property>& _property)
+bool ServiceImpl::unset(const std::shared_ptr<uml::Property>& _property)
 {
-	this->unset(_property->_getID());
+	return this->unset(_property->_getID());
 }
 
-void ServiceImpl::unset(std::string _qualifiedName)
+bool ServiceImpl::unset(std::string _qualifiedName)
 {
 	unsigned long uID = util::Util::polynomialRollingHash(_qualifiedName);
-	this->unset(uID);
+	return this->unset(uID);
 }
 
-void ServiceImpl::unset(unsigned long _uID)
+bool ServiceImpl::unset(unsigned long _uID)
 {
 	switch(_uID)
 	{
 		case StandardProfile::StandardProfilePackage::SERVICE_PROPERTY_BASE_COMPONENT:
 		{
 			m_base_Component.reset();
-			return;
+			return true;
 		}
 	}
 
+	return false;
 }
 
 //Remove
-void ServiceImpl::remove(const std::shared_ptr<uml::Property>& _property, const std::shared_ptr<Any>& value)
+bool ServiceImpl::remove(const std::shared_ptr<uml::Property>& _property, const std::shared_ptr<Any>& value, int removeAt /*= -1*/, bool isRemoveDuplicates /*= false*/)
 {
-	this->remove(_property->_getID(), value);
+	return this->remove(_property->_getID(), value, removeAt);
 }
 
-void ServiceImpl::remove(std::string _qualifiedName, const std::shared_ptr<Any>& value)
+bool ServiceImpl::remove(std::string _qualifiedName, const std::shared_ptr<Any>& value, int removeAt /*= -1*/, bool isRemoveDuplicates /*= false*/)
 {
 	unsigned long uID = util::Util::polynomialRollingHash(_qualifiedName);
-	this->remove(uID, value);
+	return this->remove(uID, value, removeAt);
 }
 
-void ServiceImpl::remove(unsigned long _uID, const std::shared_ptr<Any>& value)
+bool ServiceImpl::remove(unsigned long _uID, const std::shared_ptr<Any>& value, int removeAt /*= -1*/, bool isRemoveDuplicates /*= false*/)
 {
+	switch(_uID)
+	{
+		case StandardProfile::StandardProfilePackage::SERVICE_PROPERTY_BASE_COMPONENT:
+		{
+			std::shared_ptr<uml::Component> valueToRemove = nullptr;
+			if(value->isContainer())
+			{
+				std::shared_ptr<uml::UMLContainerAny> umlContainerAny = std::dynamic_pointer_cast<uml::UMLContainerAny>(value);
+				if(umlContainerAny)
+				{
+					std::shared_ptr<Bag<uml::Element>> container = umlContainerAny->getAsElementContainer();
+					if(container && !(container->empty()))
+					{
+						// If a non-empty container is passed, the first value of the container will be removed from the property
+						std::shared_ptr<uml::Element> firstElement = container->at(0);
+						valueToRemove = std::dynamic_pointer_cast<uml::Component>(firstElement);
+					}
+				}
+			}
+			else
+			{
+				std::shared_ptr<uml::UMLAny> umlAny = std::dynamic_pointer_cast<uml::UMLAny>(value);
+				if(umlAny)
+				{
+					std::shared_ptr<uml::Element> element = umlAny->getAsElement();
+					valueToRemove = std::dynamic_pointer_cast<uml::Component>(element);
+				}
+			}
+
+			
+			if(removeAt >= 1 && !isRemoveDuplicates) // As per fUML-specification, if isRemoveDuplicates is true, removeAt is ignored
+			{
+				// If removeAt != -1, the value to remove is not taken into account anymore.
+				// Instead, the value at index = removeAt is removed
+				// NOTE: removeAt is 1-based rather than 0-based
+				
+				if(removeAt == 1)
+				{
+					m_base_Component.reset();
+					return true;
+				}
+			}
+			else
+			{
+				if(m_base_Component.lock() == valueToRemove)
+				{
+					m_base_Component.reset();
+					return true;
+				}
+			}
+		}
+	}
+
+	return false;
 }
 
 //**************************************

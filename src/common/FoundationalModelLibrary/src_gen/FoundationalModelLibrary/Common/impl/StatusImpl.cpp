@@ -157,18 +157,18 @@ std::shared_ptr<Any> StatusImpl::get(unsigned long _uID) const
 }
 
 //Set
-void StatusImpl::set(const std::shared_ptr<uml::Property>& _property, const std::shared_ptr<Any>& value)
+bool StatusImpl::set(const std::shared_ptr<uml::Property>& _property, const std::shared_ptr<Any>& value)
 {
-	this->set(_property->_getID(), value);
+	return this->set(_property->_getID(), value);
 }
 
-void StatusImpl::set(std::string _qualifiedName,const std::shared_ptr<Any>& value)
+bool StatusImpl::set(std::string _qualifiedName,const std::shared_ptr<Any>& value)
 {
 	unsigned long uID = util::Util::polynomialRollingHash(_qualifiedName);
-	this->set(uID, value);
+	return this->set(uID, value);
 }
 
-void StatusImpl::set(unsigned long _uID, const std::shared_ptr<Any>& value)
+bool StatusImpl::set(unsigned long _uID, const std::shared_ptr<Any>& value)
 {
 	switch(_uID)
 	{
@@ -178,11 +178,12 @@ void StatusImpl::set(unsigned long _uID, const std::shared_ptr<Any>& value)
 			{
 				int _code = value->get<int>();
 				setCode(_code);
+				return true;
 			}
 			catch(...)
 			{
 				DEBUG_ERROR("Invalid type stored in 'Any' for property 'code'. Failed to set property!")
-				return;
+				return true;
 			}
 		break;
 		}
@@ -192,11 +193,12 @@ void StatusImpl::set(unsigned long _uID, const std::shared_ptr<Any>& value)
 			{
 				std::string _context = value->get<std::string>();
 				setContext(_context);
+				return true;
 			}
 			catch(...)
 			{
 				DEBUG_ERROR("Invalid type stored in 'Any' for property 'context'. Failed to set property!")
-				return;
+				return true;
 			}
 		break;
 		}
@@ -206,63 +208,205 @@ void StatusImpl::set(unsigned long _uID, const std::shared_ptr<Any>& value)
 			{
 				std::string _description = value->get<std::string>();
 				setDescription(_description);
+				return true;
 			}
 			catch(...)
 			{
 				DEBUG_ERROR("Invalid type stored in 'Any' for property 'description'. Failed to set property!")
-				return;
+				return true;
 			}
 		break;
 		}
 	}
+	return false;
 }
 
 //Add
-void StatusImpl::add(const std::shared_ptr<uml::Property>& _property, const std::shared_ptr<Any>& value, int insertAt /*= -1*/)
+bool StatusImpl::add(const std::shared_ptr<uml::Property>& _property, const std::shared_ptr<Any>& value, int insertAt /*= -1*/)
 {
-	this->add(_property->_getID(), value);
+	return this->add(_property->_getID(), value);
 }
 
-void StatusImpl::add(std::string _qualifiedName, const std::shared_ptr<Any>& value, int insertAt /*= -1*/)
+bool StatusImpl::add(std::string _qualifiedName, const std::shared_ptr<Any>& value, int insertAt /*= -1*/)
 {
 	unsigned long uID = util::Util::polynomialRollingHash(_qualifiedName);
-	this->add(uID, value);
+	return this->add(uID, value);
 }
 
-void StatusImpl::add(unsigned long _uID, const std::shared_ptr<Any>& value, int insertAt /*= -1*/)
+bool StatusImpl::add(unsigned long _uID, const std::shared_ptr<Any>& value, int insertAt /*= -1*/)
 {
+	return false;
 }
 
 //Unset
-void StatusImpl::unset(const std::shared_ptr<uml::Property>& _property)
+bool StatusImpl::unset(const std::shared_ptr<uml::Property>& _property)
 {
-	this->unset(_property->_getID());
+	return this->unset(_property->_getID());
 }
 
-void StatusImpl::unset(std::string _qualifiedName)
+bool StatusImpl::unset(std::string _qualifiedName)
 {
 	unsigned long uID = util::Util::polynomialRollingHash(_qualifiedName);
-	this->unset(uID);
+	return this->unset(uID);
 }
 
-void StatusImpl::unset(unsigned long _uID)
+bool StatusImpl::unset(unsigned long _uID)
 {
+	switch(_uID)
+	{
+		case FoundationalModelLibrary::Common::CommonPackage::STATUS_PROPERTY_CODE:
+		{
+			m_code = 0;
+			return true;
+		}
+		case FoundationalModelLibrary::Common::CommonPackage::STATUS_PROPERTY_CONTEXT:
+		{
+			m_context = "";
+			return true;
+		}
+		case FoundationalModelLibrary::Common::CommonPackage::STATUS_PROPERTY_DESCRIPTION:
+		{
+			m_description = "";
+			return true;
+		}
+	}
+
+	return false;
 }
 
 //Remove
-void StatusImpl::remove(const std::shared_ptr<uml::Property>& _property, const std::shared_ptr<Any>& value)
+bool StatusImpl::remove(const std::shared_ptr<uml::Property>& _property, const std::shared_ptr<Any>& value, int removeAt /*= -1*/, bool isRemoveDuplicates /*= false*/)
 {
-	this->remove(_property->_getID(), value);
+	return this->remove(_property->_getID(), value);
 }
 
-void StatusImpl::remove(std::string _qualifiedName, const std::shared_ptr<Any>& value)
+bool StatusImpl::remove(std::string _qualifiedName, const std::shared_ptr<Any>& value, int removeAt /*= -1*/, bool isRemoveDuplicates /*= false*/)
 {
 	unsigned long uID = util::Util::polynomialRollingHash(_qualifiedName);
-	this->remove(uID, value);
+	return this->remove(uID, value);
 }
 
-void StatusImpl::remove(unsigned long _uID, const std::shared_ptr<Any>& value)
+bool StatusImpl::remove(unsigned long _uID, const std::shared_ptr<Any>& value, int removeAt /*= -1*/, bool isRemoveDuplicates /*= false*/)
 {
+	switch(_uID)
+	{
+		case FoundationalModelLibrary::Common::CommonPackage::STATUS_PROPERTY_CODE:
+		{
+			int valueToRemove = 0;
+			if(value->isContainer())
+			{
+				std::shared_ptr<Bag<int>> container = value->get<std::shared_ptr<Bag<int>>>();
+				if(container && !(container->empty()))
+				{
+						// If a non-empty container is passed, the first value of the container will be removed from the property
+						valueToRemove = *(container->at(0));
+				}
+			}
+			else
+			{
+				valueToRemove = value->get<int>();
+			}
+
+
+			if(removeAt >= 1 && !isRemoveDuplicates) // As per fUML-specification, if isRemoveDuplicates is true, removeAt is ignored
+			{
+				// If removeAt != -1, the value to remove is not taken into account anymore.
+				// Instead, the value at index = removeAt is removed
+				// NOTE: removeAt is 1-based rather than 0-based
+				if(removeAt == 1)
+				{
+					m_code = 0;
+					return true;
+				}
+			}
+			else
+			{
+				if(m_code == valueToRemove)
+				{
+					m_code = 0;
+					return true;
+				}
+			}
+		}
+		case FoundationalModelLibrary::Common::CommonPackage::STATUS_PROPERTY_CONTEXT:
+		{
+			std::string valueToRemove = "";
+			if(value->isContainer())
+			{
+				std::shared_ptr<Bag<std::string>> container = value->get<std::shared_ptr<Bag<std::string>>>();
+				if(container && !(container->empty()))
+				{
+						// If a non-empty container is passed, the first value of the container will be removed from the property
+						valueToRemove = *(container->at(0));
+				}
+			}
+			else
+			{
+				valueToRemove = value->get<std::string>();
+			}
+
+
+			if(removeAt >= 1 && !isRemoveDuplicates) // As per fUML-specification, if isRemoveDuplicates is true, removeAt is ignored
+			{
+				// If removeAt != -1, the value to remove is not taken into account anymore.
+				// Instead, the value at index = removeAt is removed
+				// NOTE: removeAt is 1-based rather than 0-based
+				if(removeAt == 1)
+				{
+					m_context = "";
+					return true;
+				}
+			}
+			else
+			{
+				if(m_context == valueToRemove)
+				{
+					m_context = "";
+					return true;
+				}
+			}
+		}
+		case FoundationalModelLibrary::Common::CommonPackage::STATUS_PROPERTY_DESCRIPTION:
+		{
+			std::string valueToRemove = "";
+			if(value->isContainer())
+			{
+				std::shared_ptr<Bag<std::string>> container = value->get<std::shared_ptr<Bag<std::string>>>();
+				if(container && !(container->empty()))
+				{
+						// If a non-empty container is passed, the first value of the container will be removed from the property
+						valueToRemove = *(container->at(0));
+				}
+			}
+			else
+			{
+				valueToRemove = value->get<std::string>();
+			}
+
+
+			if(removeAt >= 1 && !isRemoveDuplicates) // As per fUML-specification, if isRemoveDuplicates is true, removeAt is ignored
+			{
+				// If removeAt != -1, the value to remove is not taken into account anymore.
+				// Instead, the value at index = removeAt is removed
+				// NOTE: removeAt is 1-based rather than 0-based
+				if(removeAt == 1)
+				{
+					m_description = "";
+					return true;
+				}
+			}
+			else
+			{
+				if(m_description == valueToRemove)
+				{
+					m_description = "";
+					return true;
+				}
+			}
+		}
+	}
+
+	return false;
 }
 
 //**************************************

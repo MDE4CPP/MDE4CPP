@@ -157,18 +157,18 @@ std::shared_ptr<Any> DoNotGenerateImpl::get(unsigned long _uID) const
 }
 
 //Set
-void DoNotGenerateImpl::set(const std::shared_ptr<uml::Property>& _property, const std::shared_ptr<Any>& value)
+bool DoNotGenerateImpl::set(const std::shared_ptr<uml::Property>& _property, const std::shared_ptr<Any>& value)
 {
-	this->set(_property->_getID(), value);
+	return this->set(_property->_getID(), value);
 }
 
-void DoNotGenerateImpl::set( std::string _qualifiedName, const std::shared_ptr<Any>& value)
+bool DoNotGenerateImpl::set( std::string _qualifiedName, const std::shared_ptr<Any>& value)
 {
 	unsigned long uID = util::Util::polynomialRollingHash(_qualifiedName);
-	this->set(uID, value);
+	return this->set(uID, value);
 }
 
-void DoNotGenerateImpl::set(unsigned long _uID, const std::shared_ptr<Any>& value)
+bool DoNotGenerateImpl::set(unsigned long _uID, const std::shared_ptr<Any>& value)
 {
 	switch(_uID)
 	{
@@ -184,6 +184,7 @@ void DoNotGenerateImpl::set(unsigned long _uID, const std::shared_ptr<Any>& valu
 					if(_base_Element)
 					{
 						setBase_Element(_base_Element);
+						return true;
 					}			
 					else
 					{
@@ -193,74 +194,131 @@ void DoNotGenerateImpl::set(unsigned long _uID, const std::shared_ptr<Any>& valu
 				catch(...)
 				{
 					DEBUG_ERROR("Invalid type stored in 'uml::UMLAny' for property 'base_Element'. Failed to set property!")
-					return;
+					return true;
 				}
 			}
 			else
 			{
 				DEBUG_ERROR("Invalid instance of 'uml::UMLAny' for property 'base_Element'. Failed to set property!")
-				return;
+				return true;
 			}
 		break;
 		}
 	}
+	return false;
 }
 
 //Add
-void DoNotGenerateImpl::add(const std::shared_ptr<uml::Property>& _property, const std::shared_ptr<Any>& value, int insertAt /*= -1*/)
+bool DoNotGenerateImpl::add(const std::shared_ptr<uml::Property>& _property, const std::shared_ptr<Any>& value, int insertAt /*= -1*/)
 {
-	this->add(_property->_getID(), value);
+	return this->add(_property->_getID(), value, insertAt);
 }
 
-void DoNotGenerateImpl::add(std::string _qualifiedName, const std::shared_ptr<Any>& value, int insertAt /*= -1*/)
+bool DoNotGenerateImpl::add(std::string _qualifiedName, const std::shared_ptr<Any>& value, int insertAt /*= -1*/)
 {
 	unsigned long uID = util::Util::polynomialRollingHash(_qualifiedName);
-	this->add(uID, value);
+	return this->add(uID, value, insertAt);
 }
 
-void DoNotGenerateImpl::add(unsigned long _uID, const std::shared_ptr<Any>& value, int insertAt /*= -1*/)
+bool DoNotGenerateImpl::add(unsigned long _uID, const std::shared_ptr<Any>& value, int insertAt /*= -1*/)
 {
+	return false;
 }
 
 //Unset
-void DoNotGenerateImpl::unset(const std::shared_ptr<uml::Property>& _property)
+bool DoNotGenerateImpl::unset(const std::shared_ptr<uml::Property>& _property)
 {
-	this->unset(_property->_getID());
+	return this->unset(_property->_getID());
 }
 
-void DoNotGenerateImpl::unset(std::string _qualifiedName)
+bool DoNotGenerateImpl::unset(std::string _qualifiedName)
 {
 	unsigned long uID = util::Util::polynomialRollingHash(_qualifiedName);
-	this->unset(uID);
+	return this->unset(uID);
 }
 
-void DoNotGenerateImpl::unset(unsigned long _uID)
+bool DoNotGenerateImpl::unset(unsigned long _uID)
 {
 	switch(_uID)
 	{
 		case UML4CPPProfile::UML4CPPProfilePackage::DONOTGENERATE_PROPERTY_BASE_ELEMENT:
 		{
-			m_base_Element.reset();
-			return;
+			m_base_Element = nullptr;
+			return true;
 		}
 	}
 
+	return false;
 }
 
 //Remove
-void DoNotGenerateImpl::remove(const std::shared_ptr<uml::Property>& _property, const std::shared_ptr<Any>& value)
+bool DoNotGenerateImpl::remove(const std::shared_ptr<uml::Property>& _property, const std::shared_ptr<Any>& value, int removeAt /*= -1*/, bool isRemoveDuplicates /*= false*/)
 {
-	this->remove(_property->_getID(), value);
+	return this->remove(_property->_getID(), value, removeAt);
 }
 
-void DoNotGenerateImpl::remove(std::string _qualifiedName, const std::shared_ptr<Any>& value)
+bool DoNotGenerateImpl::remove(std::string _qualifiedName, const std::shared_ptr<Any>& value, int removeAt /*= -1*/, bool isRemoveDuplicates /*= false*/)
 {
 	unsigned long uID = util::Util::polynomialRollingHash(_qualifiedName);
-	this->remove(uID, value);
+	return this->remove(uID, value, removeAt);
 }
 
-void DoNotGenerateImpl::remove(unsigned long _uID, const std::shared_ptr<Any>& value)
+bool DoNotGenerateImpl::remove(unsigned long _uID, const std::shared_ptr<Any>& value, int removeAt /*= -1*/, bool isRemoveDuplicates /*= false*/)
 {
+	switch(_uID)
+	{
+		case UML4CPPProfile::UML4CPPProfilePackage::DONOTGENERATE_PROPERTY_BASE_ELEMENT:
+		{
+			std::shared_ptr<uml::Element> valueToRemove = nullptr;
+			if(value->isContainer())
+			{
+				std::shared_ptr<uml::UMLContainerAny> umlContainerAny = std::dynamic_pointer_cast<uml::UMLContainerAny>(value);
+				if(umlContainerAny)
+				{
+					std::shared_ptr<Bag<uml::Element>> container = umlContainerAny->getAsElementContainer();
+					if(container && !(container->empty()))
+					{
+						// If a non-empty container is passed, the first value of the container will be removed from the property
+						std::shared_ptr<uml::Element> firstElement = container->at(0);
+						valueToRemove = std::dynamic_pointer_cast<uml::Element>(firstElement);
+					}
+				}
+			}
+			else
+			{
+				std::shared_ptr<uml::UMLAny> umlAny = std::dynamic_pointer_cast<uml::UMLAny>(value);
+				if(umlAny)
+				{
+					std::shared_ptr<uml::Element> element = umlAny->getAsElement();
+					valueToRemove = std::dynamic_pointer_cast<uml::Element>(element);
+				}
+			}
+
+			
+			if(removeAt >= 1 && !isRemoveDuplicates) // As per fUML-specification, if isRemoveDuplicates is true, removeAt is ignored
+			{
+				// If removeAt != -1, the value to remove is not taken into account anymore.
+				// Instead, the value at index = removeAt is removed
+				// NOTE: removeAt is 1-based rather than 0-based
+				
+				if(removeAt == 1)
+				{
+					m_base_Element = nullptr;
+					return true;
+				}
+			}
+			else
+			{
+				if(m_base_Element == valueToRemove)
+				{
+					m_base_Element = nullptr;
+					return true;
+				}
+			}
+		}
+	}
+
+	return false;
 }
 
 //**************************************

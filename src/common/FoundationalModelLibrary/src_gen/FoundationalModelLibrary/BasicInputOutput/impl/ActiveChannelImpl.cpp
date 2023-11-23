@@ -150,75 +150,79 @@ std::shared_ptr<Any> ActiveChannelImpl::get(unsigned long _uID) const
 }
 
 //Set
-void ActiveChannelImpl::set(const std::shared_ptr<uml::Property>& _property, const std::shared_ptr<Any>& value)
+bool ActiveChannelImpl::set(const std::shared_ptr<uml::Property>& _property, const std::shared_ptr<Any>& value)
 {
-	this->set(_property->_getID(), value);
+	return this->set(_property->_getID(), value);
 }
 
-void ActiveChannelImpl::set( std::string _qualifiedName, const std::shared_ptr<Any>& value)
+bool ActiveChannelImpl::set( std::string _qualifiedName, const std::shared_ptr<Any>& value)
 {
 	unsigned long uID = util::Util::polynomialRollingHash(_qualifiedName);
-	this->set(uID, value);
+	return this->set(uID, value);
 }
 
-void ActiveChannelImpl::set(unsigned long _uID, const std::shared_ptr<Any>& value)
+bool ActiveChannelImpl::set(unsigned long _uID, const std::shared_ptr<Any>& value)
 {
 	//Call set() for base class Channel
-	FoundationalModelLibrary::BasicInputOutput::ChannelImpl::set(_uID, value);
+	if(FoundationalModelLibrary::BasicInputOutput::ChannelImpl::set(_uID, value)) return true;
+	return false;
 }
 
 //Add
-void ActiveChannelImpl::add(const std::shared_ptr<uml::Property>& _property, const std::shared_ptr<Any>& value, int insertAt /*= -1*/)
+bool ActiveChannelImpl::add(const std::shared_ptr<uml::Property>& _property, const std::shared_ptr<Any>& value, int insertAt /*= -1*/)
 {
-	this->add(_property->_getID(), value);
+	return this->add(_property->_getID(), value, insertAt);
 }
 
-void ActiveChannelImpl::add(std::string _qualifiedName, const std::shared_ptr<Any>& value, int insertAt /*= -1*/)
+bool ActiveChannelImpl::add(std::string _qualifiedName, const std::shared_ptr<Any>& value, int insertAt /*= -1*/)
 {
 	unsigned long uID = util::Util::polynomialRollingHash(_qualifiedName);
-	this->add(uID, value);
+	return this->add(uID, value, insertAt);
 }
 
-void ActiveChannelImpl::add(unsigned long _uID, const std::shared_ptr<Any>& value, int insertAt /*= -1*/)
+bool ActiveChannelImpl::add(unsigned long _uID, const std::shared_ptr<Any>& value, int insertAt /*= -1*/)
 {
-	//Call set() for base class Channel
-	FoundationalModelLibrary::BasicInputOutput::ChannelImpl::add(_uID, value, insertAt);
+	//Call add() for base class Channel
+	if(FoundationalModelLibrary::BasicInputOutput::ChannelImpl::add(_uID, value, insertAt)) return true;
+	return false;
 }
 
 //Unset
-void ActiveChannelImpl::unset(const std::shared_ptr<uml::Property>& _property)
+bool ActiveChannelImpl::unset(const std::shared_ptr<uml::Property>& _property)
 {
-	this->unset(_property->_getID());
+	return this->unset(_property->_getID());
 }
 
-void ActiveChannelImpl::unset(std::string _qualifiedName)
+bool ActiveChannelImpl::unset(std::string _qualifiedName)
 {
 	unsigned long uID = util::Util::polynomialRollingHash(_qualifiedName);
-	this->unset(uID);
+	return this->unset(uID);
 }
 
-void ActiveChannelImpl::unset(unsigned long _uID)
+bool ActiveChannelImpl::unset(unsigned long _uID)
 {
 	//Call unset() for base class Channel
-	FoundationalModelLibrary::BasicInputOutput::ChannelImpl::unset(_uID);
+	if(FoundationalModelLibrary::BasicInputOutput::ChannelImpl::unset(_uID)) return true;
+	return false;
 }
 
 //Remove
-void ActiveChannelImpl::remove(const std::shared_ptr<uml::Property>& _property, const std::shared_ptr<Any>& value)
+bool ActiveChannelImpl::remove(const std::shared_ptr<uml::Property>& _property, const std::shared_ptr<Any>& value, int removeAt /*= -1*/, bool isRemoveDuplicates /*= false*/)
 {
-	this->remove(_property->_getID(), value);
+	return this->remove(_property->_getID(), value, removeAt);
 }
 
-void ActiveChannelImpl::remove(std::string _qualifiedName, const std::shared_ptr<Any>& value)
+bool ActiveChannelImpl::remove(std::string _qualifiedName, const std::shared_ptr<Any>& value, int removeAt /*= -1*/, bool isRemoveDuplicates /*= false*/)
 {
 	unsigned long uID = util::Util::polynomialRollingHash(_qualifiedName);
-	this->remove(uID, value);
+	return this->remove(uID, value, removeAt);
 }
 
-void ActiveChannelImpl::remove(unsigned long _uID, const std::shared_ptr<Any>& value)
+bool ActiveChannelImpl::remove(unsigned long _uID, const std::shared_ptr<Any>& value, int removeAt /*= -1*/, bool isRemoveDuplicates /*= false*/)
 {
 	//Call set() for base class Channel
-	FoundationalModelLibrary::BasicInputOutput::ChannelImpl::remove(_uID, value);
+	if(FoundationalModelLibrary::BasicInputOutput::ChannelImpl::remove(_uID, value)) return true;
+	return false;
 }
 
 //**************************************

@@ -13,7 +13,6 @@ namespace uml
 	class Class;
 	class DataType;
 	class Property;
-	class ConnectorEnd;
 }
 
 
