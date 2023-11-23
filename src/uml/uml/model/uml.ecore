@@ -2871,14 +2871,14 @@
       </eAnnotations>
       <eParameters name="_property" eType="#//Property"/>
     </eOperations>
-    <eOperations name="set">
+    <eOperations name="set" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-        <details key="documentation" value="If the Property has multiplicity upper bound = 1, set() atomically updates the value of the Property to the object&#xA;parameter."/>
+        <details key="documentation" value="If the Property has multiplicity upper bound = 1, set() automically updates the value of the Property to the object&#xA;parameter."/>
       </eAnnotations>
       <eParameters name="_property" eType="#//Property"/>
       <eParameters name="value" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
     </eOperations>
-    <eOperations name="add">
+    <eOperations name="add" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="If Property has multiplicity upper bound >1, add() will automatically add the value to the collection."/>
       </eAnnotations>
@@ -2888,7 +2888,7 @@
       <eParameters name="_property" eType="#//Property"/>
       <eParameters name="value" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
     </eOperations>
-    <eOperations name="add">
+    <eOperations name="add" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="If Property has multiplicity upper bound >1, add() will automatically add the value to the collection.&#xA;Value will be added at the position given by insertAt."/>
       </eAnnotations>
@@ -2896,10 +2896,10 @@
       <eParameters name="value" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
       <eParameters name="insertAt" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
     </eOperations>
-    <eOperations name="unset">
+    <eOperations name="unset" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
       <eParameters name="_property" eType="#//Property"/>
     </eOperations>
-    <eOperations name="remove">
+    <eOperations name="remove" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="If Property has multiplicity upper bound >1, remove() will automatically remove the value from the collection."/>
       </eAnnotations>
