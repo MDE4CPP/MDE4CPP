@@ -153,7 +153,7 @@ std::shared_ptr<Any> StatusImpl::get(unsigned long _uID) const
 			return eAny(this->getDescription(), types::typesPackage::STRING_CLASS, false);
 	}
 
-	return eAny(nullptr, -1, false);
+	return nullptr;
 }
 
 //Set
@@ -277,13 +277,13 @@ bool StatusImpl::unset(unsigned long _uID)
 //Remove
 bool StatusImpl::remove(const std::shared_ptr<uml::Property>& _property, const std::shared_ptr<Any>& value, int removeAt /*= -1*/, bool isRemoveDuplicates /*= false*/)
 {
-	return this->remove(_property->_getID(), value);
+	return this->remove(_property->_getID(), value, removeAt, isRemoveDuplicates);
 }
 
 bool StatusImpl::remove(std::string _qualifiedName, const std::shared_ptr<Any>& value, int removeAt /*= -1*/, bool isRemoveDuplicates /*= false*/)
 {
 	unsigned long uID = util::Util::polynomialRollingHash(_qualifiedName);
-	return this->remove(uID, value);
+	return this->remove(uID, value, removeAt, isRemoveDuplicates);
 }
 
 bool StatusImpl::remove(unsigned long _uID, const std::shared_ptr<Any>& value, int removeAt /*= -1*/, bool isRemoveDuplicates /*= false*/)

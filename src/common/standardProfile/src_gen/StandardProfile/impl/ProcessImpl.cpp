@@ -153,7 +153,7 @@ std::shared_ptr<Any> ProcessImpl::get(unsigned long _uID) const
 			return eUMLAny(this->getBase_Component().lock(), uml::umlPackage::COMPONENT_CLASS);
 	}
 
-	return eAny(nullptr, -1, false);
+	return nullptr;
 }
 
 //Set
@@ -254,13 +254,13 @@ bool ProcessImpl::unset(unsigned long _uID)
 //Remove
 bool ProcessImpl::remove(const std::shared_ptr<uml::Property>& _property, const std::shared_ptr<Any>& value, int removeAt /*= -1*/, bool isRemoveDuplicates /*= false*/)
 {
-	return this->remove(_property->_getID(), value, removeAt);
+	return this->remove(_property->_getID(), value, removeAt, isRemoveDuplicates);
 }
 
 bool ProcessImpl::remove(std::string _qualifiedName, const std::shared_ptr<Any>& value, int removeAt /*= -1*/, bool isRemoveDuplicates /*= false*/)
 {
 	unsigned long uID = util::Util::polynomialRollingHash(_qualifiedName);
-	return this->remove(uID, value, removeAt);
+	return this->remove(uID, value, removeAt, isRemoveDuplicates);
 }
 
 bool ProcessImpl::remove(unsigned long _uID, const std::shared_ptr<Any>& value, int removeAt /*= -1*/, bool isRemoveDuplicates /*= false*/)

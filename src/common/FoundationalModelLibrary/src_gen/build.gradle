@@ -79,6 +79,11 @@ task compileFoundationalModelLibrary(type: tui.sse.mde4cpp.MDE4CPPCompile) {
 	dependsOn primitivetypesReflection
 	inputs.files(primitivetypesReflection.outputs)
 
+	// dependency to model 'PSSM'
+	def PSSM = getRootProject().getTasksByName('compilePSSM', true)
+	dependsOn PSSM
+	inputs.files(PSSM.outputs)
+
 	// dependency to model 'ecore'
 	def ecore = getRootProject().getTasksByName('compileEcore', true)
 	dependsOn ecore

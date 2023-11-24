@@ -33,21 +33,21 @@ SET(SOURCE_FILES
 	# Model ExecutionFactory
 	impl/FoundationalModelLibraryExecutionFactoryImpl.cpp
 	#Strategy classes for Package FoundationalModelLibrary
-	#Strategy classes for Package FoundationalModelLibrary::BasicInputOutput
-	
-	#Strategy classes for Package FoundationalModelLibrary::Common
-	
 	#Strategy classes for Package FoundationalModelLibrary::PrimitiveBehaviors
-	#Strategy classes for Package FoundationalModelLibrary::PrimitiveBehaviors::StringFunctions
+	#Strategy classes for Package FoundationalModelLibrary::PrimitiveBehaviors::IntegerFunctions
 	
 	#Strategy classes for Package FoundationalModelLibrary::PrimitiveBehaviors::RealFunctions
 	
-	#Strategy classes for Package FoundationalModelLibrary::PrimitiveBehaviors::UnlimitedNaturalFunctions
-	
 	#Strategy classes for Package FoundationalModelLibrary::PrimitiveBehaviors::BooleanFunctions
 	
-	#Strategy classes for Package FoundationalModelLibrary::PrimitiveBehaviors::IntegerFunctions
+	#Strategy classes for Package FoundationalModelLibrary::PrimitiveBehaviors::StringFunctions
 	
+	#Strategy classes for Package FoundationalModelLibrary::PrimitiveBehaviors::UnlimitedNaturalFunctions
+	
+	
+	#Strategy classes for Package FoundationalModelLibrary::BasicInputOutput
+	
+	#Strategy classes for Package FoundationalModelLibrary::Common
 	
 	
 )
@@ -72,6 +72,7 @@ IF(UNIX AND NOT APPLE)
 		FIND_LIBRARY(UML_DEBUG umld.so ${MDE4CPP_HOME}/application/bin)
 		FIND_LIBRARY(PSCS_DEBUG PSCSd.so ${MDE4CPP_HOME}/application/bin)
 		FIND_LIBRARY(PRIMITIVETYPESREFLECTION_DEBUG primitivetypesReflectiond.so ${MDE4CPP_HOME}/application/bin)
+		FIND_LIBRARY(PSSM_DEBUG PSSMd.so ${MDE4CPP_HOME}/application/bin)
 		FIND_LIBRARY(ECORE_DEBUG ecored.so ${MDE4CPP_HOME}/application/bin)
 		FIND_LIBRARY(UMLREFLECTION_DEBUG umlReflectiond.so ${MDE4CPP_HOME}/application/bin)
 		FIND_LIBRARY(PLUGINFRAMEWORK_DEBUG pluginFrameworkd.so ${MDE4CPP_HOME}/application/bin)
@@ -82,6 +83,7 @@ IF(UNIX AND NOT APPLE)
 		FIND_LIBRARY(UML_RELEASE uml.so ${MDE4CPP_HOME}/application/bin)
 		FIND_LIBRARY(PSCS_RELEASE PSCS.so ${MDE4CPP_HOME}/application/bin)
 		FIND_LIBRARY(PRIMITIVETYPESREFLECTION_RELEASE primitivetypesReflection.so ${MDE4CPP_HOME}/application/bin)
+		FIND_LIBRARY(PSSM_RELEASE PSSM.so ${MDE4CPP_HOME}/application/bin)
 		FIND_LIBRARY(ECORE_RELEASE ecore.so ${MDE4CPP_HOME}/application/bin)
 		FIND_LIBRARY(UMLREFLECTION_RELEASE umlReflection.so ${MDE4CPP_HOME}/application/bin)
 		FIND_LIBRARY(PLUGINFRAMEWORK_RELEASE pluginFramework.so ${MDE4CPP_HOME}/application/bin)
@@ -94,6 +96,7 @@ ELSEIF(APPLE)
 		FIND_LIBRARY(UML_DEBUG umld.dylib ${MDE4CPP_HOME}/application/bin)
 		FIND_LIBRARY(PSCS_DEBUG PSCSd.dylib ${MDE4CPP_HOME}/application/bin)
 		FIND_LIBRARY(PRIMITIVETYPESREFLECTION_DEBUG primitivetypesReflectiond.dylib ${MDE4CPP_HOME}/application/bin)
+		FIND_LIBRARY(PSSM_DEBUG PSSMd.dylib ${MDE4CPP_HOME}/application/bin)
 		FIND_LIBRARY(ECORE_DEBUG ecored.dylib ${MDE4CPP_HOME}/application/bin)
 		FIND_LIBRARY(UMLREFLECTION_DEBUG umlReflectiond.dylib ${MDE4CPP_HOME}/application/bin)
 		FIND_LIBRARY(PLUGINFRAMEWORK_DEBUG pluginFrameworkd.dylib ${MDE4CPP_HOME}/application/bin)
@@ -104,6 +107,7 @@ ELSEIF(APPLE)
 		FIND_LIBRARY(UML_RELEASE uml.dylib ${MDE4CPP_HOME}/application/bin)
 		FIND_LIBRARY(PSCS_RELEASE PSCS.dylib ${MDE4CPP_HOME}/application/bin)
 		FIND_LIBRARY(PRIMITIVETYPESREFLECTION_RELEASE primitivetypesReflection.dylib ${MDE4CPP_HOME}/application/bin)
+		FIND_LIBRARY(PSSM_RELEASE PSSM.dylib ${MDE4CPP_HOME}/application/bin)
 		FIND_LIBRARY(ECORE_RELEASE ecore.dylib ${MDE4CPP_HOME}/application/bin)
 		FIND_LIBRARY(UMLREFLECTION_RELEASE umlReflection.dylib ${MDE4CPP_HOME}/application/bin)
 		FIND_LIBRARY(PLUGINFRAMEWORK_RELEASE pluginFramework.dylib ${MDE4CPP_HOME}/application/bin)
@@ -116,6 +120,7 @@ ELSE()
 		FIND_LIBRARY(UML_DEBUG umld ${MDE4CPP_HOME}/application/lib)
 		FIND_LIBRARY(PSCS_DEBUG PSCSd ${MDE4CPP_HOME}/application/lib)
 		FIND_LIBRARY(PRIMITIVETYPESREFLECTION_DEBUG primitivetypesReflectiond ${MDE4CPP_HOME}/application/lib)
+		FIND_LIBRARY(PSSM_DEBUG PSSMd ${MDE4CPP_HOME}/application/lib)
 		FIND_LIBRARY(ECORE_DEBUG ecored ${MDE4CPP_HOME}/application/lib)
 		FIND_LIBRARY(UMLREFLECTION_DEBUG umlReflectiond ${MDE4CPP_HOME}/application/lib)
 		FIND_LIBRARY(PLUGINFRAMEWORK_DEBUG pluginFrameworkd ${MDE4CPP_HOME}/application/lib)
@@ -126,6 +131,7 @@ ELSE()
 		FIND_LIBRARY(UML_RELEASE uml ${MDE4CPP_HOME}/application/lib)
 		FIND_LIBRARY(PSCS_RELEASE PSCS ${MDE4CPP_HOME}/application/lib)
 		FIND_LIBRARY(PRIMITIVETYPESREFLECTION_RELEASE primitivetypesReflection ${MDE4CPP_HOME}/application/lib)
+		FIND_LIBRARY(PSSM_RELEASE PSSM ${MDE4CPP_HOME}/application/lib)
 		FIND_LIBRARY(ECORE_RELEASE ecore ${MDE4CPP_HOME}/application/lib)
 		FIND_LIBRARY(UMLREFLECTION_RELEASE umlReflection ${MDE4CPP_HOME}/application/lib)
 		FIND_LIBRARY(PLUGINFRAMEWORK_RELEASE pluginFramework ${MDE4CPP_HOME}/application/lib)
@@ -144,6 +150,7 @@ IF (CMAKE_BUILD_TYPE STREQUAL "Debug")
 		debug ${UML_DEBUG}
 		debug ${PSCS_DEBUG}
 		debug ${PRIMITIVETYPESREFLECTION_DEBUG}
+		debug ${PSSM_DEBUG}
 		debug ${ECORE_DEBUG}
 		debug ${UMLREFLECTION_DEBUG}
 		debug ${PLUGINFRAMEWORK_DEBUG}
@@ -157,6 +164,7 @@ ELSE()
 		optimized ${UML_RELEASE}
 		optimized ${PSCS_RELEASE}
 		optimized ${PRIMITIVETYPESREFLECTION_RELEASE}
+		optimized ${PSSM_RELEASE}
 		optimized ${ECORE_RELEASE}
 		optimized ${UMLREFLECTION_RELEASE}
 		optimized ${PLUGINFRAMEWORK_RELEASE}

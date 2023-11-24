@@ -197,10 +197,10 @@ const std::shared_ptr<Bag<uml::Classifier>>& TextOutputChannelImpl::getTypes() c
 		types.reset();
 		// Add type of self 'TextOutputChannel' : Class
 		types->add(FoundationalModelLibrary::BasicInputOutput::BasicInputOutputPackage::eInstance()->get_FoundationalModelLibrary_BasicInputOutput_TextOutputChannel());
-		// Add base type 'Channel' : Class
-		types->add(FoundationalModelLibrary::BasicInputOutput::BasicInputOutputPackage::eInstance()->get_FoundationalModelLibrary_BasicInputOutput_Channel());
 		// Add base type 'OutputChannel' : Class
 		types->add(FoundationalModelLibrary::BasicInputOutput::BasicInputOutputPackage::eInstance()->get_FoundationalModelLibrary_BasicInputOutput_OutputChannel());
+		// Add base type 'Channel' : Class
+		types->add(FoundationalModelLibrary::BasicInputOutput::BasicInputOutputPackage::eInstance()->get_FoundationalModelLibrary_BasicInputOutput_Channel());
 	}
 
 	return types;
@@ -293,19 +293,19 @@ bool TextOutputChannelImpl::unset(unsigned long _uID)
 //Remove
 bool TextOutputChannelImpl::remove(const std::shared_ptr<uml::Property>& _property, const std::shared_ptr<Any>& value, int removeAt /*= -1*/, bool isRemoveDuplicates /*= false*/)
 {
-	return this->remove(_property->_getID(), value, removeAt);
+	return this->remove(_property->_getID(), value, removeAt, isRemoveDuplicates);
 }
 
 bool TextOutputChannelImpl::remove(std::string _qualifiedName, const std::shared_ptr<Any>& value, int removeAt /*= -1*/, bool isRemoveDuplicates /*= false*/)
 {
 	unsigned long uID = util::Util::polynomialRollingHash(_qualifiedName);
-	return this->remove(uID, value, removeAt);
+	return this->remove(uID, value, removeAt, isRemoveDuplicates);
 }
 
 bool TextOutputChannelImpl::remove(unsigned long _uID, const std::shared_ptr<Any>& value, int removeAt /*= -1*/, bool isRemoveDuplicates /*= false*/)
 {
 	//Call set() for base class OutputChannel
-	if(FoundationalModelLibrary::BasicInputOutput::OutputChannelImpl::remove(_uID, value)) return true;
+	if(FoundationalModelLibrary::BasicInputOutput::OutputChannelImpl::remove(_uID, value, removeAt, isRemoveDuplicates)) return true;
 	return false;
 }
 

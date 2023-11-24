@@ -163,7 +163,7 @@ std::shared_ptr<Any> FoundationalModelLibraryExecPluginImpl::executeActivity(std
 			}
 			
 			//Executing Activity WriteLine
-			const std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>>& outputParameterValues = m_locus->getExecutor()->execute(FoundationalModelLibrary::BasicInputOutput::BasicInputOutputPackage::eInstance()->get_FoundationalModelLibrary_BasicInputOutput_WriteLine(), nullptr, pList);
+			const std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>>& outputParameterValues = m_locus->getExecutor()->execute(FoundationalModelLibrary::BasicInputOutput::BasicInputOutputPackage::eInstance()->get_FoundationalModelLibrary_BasicInputOutput_WriteLine(), element, pList);
 			
 			DEBUG_INFO("Activity FoundationalModelLibrary_BasicInputOutput_WriteLine does not have any return parameter.")
 			return nullptr;
@@ -173,7 +173,7 @@ std::shared_ptr<Any> FoundationalModelLibraryExecPluginImpl::executeActivity(std
 			std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> pList(new Bag<fUML::Semantics::CommonBehavior::ParameterValue>());
 			
 			//Executing Activity ReadLine
-			const std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>>& outputParameterValues = m_locus->getExecutor()->execute(FoundationalModelLibrary::BasicInputOutput::BasicInputOutputPackage::eInstance()->get_FoundationalModelLibrary_BasicInputOutput_ReadLine(), nullptr, pList);
+			const std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>>& outputParameterValues = m_locus->getExecutor()->execute(FoundationalModelLibrary::BasicInputOutput::BasicInputOutputPackage::eInstance()->get_FoundationalModelLibrary_BasicInputOutput_ReadLine(), element, pList);
 			
 			DEBUG_INFO("Activity FoundationalModelLibrary_BasicInputOutput_ReadLine does not have any return parameter.")
 			return nullptr;

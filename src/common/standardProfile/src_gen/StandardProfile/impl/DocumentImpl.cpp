@@ -268,13 +268,13 @@ bool DocumentImpl::unset(unsigned long _uID)
 //Remove
 bool DocumentImpl::remove(const std::shared_ptr<uml::Property>& _property, const std::shared_ptr<Any>& value, int removeAt /*= -1*/, bool isRemoveDuplicates /*= false*/)
 {
-	return this->remove(_property->_getID(), value, removeAt);
+	return this->remove(_property->_getID(), value, removeAt, isRemoveDuplicates);
 }
 
 bool DocumentImpl::remove(std::string _qualifiedName, const std::shared_ptr<Any>& value, int removeAt /*= -1*/, bool isRemoveDuplicates /*= false*/)
 {
 	unsigned long uID = util::Util::polynomialRollingHash(_qualifiedName);
-	return this->remove(uID, value, removeAt);
+	return this->remove(uID, value, removeAt, isRemoveDuplicates);
 }
 
 bool DocumentImpl::remove(unsigned long _uID, const std::shared_ptr<Any>& value, int removeAt /*= -1*/, bool isRemoveDuplicates /*= false*/)
@@ -333,7 +333,7 @@ bool DocumentImpl::remove(unsigned long _uID, const std::shared_ptr<Any>& value,
 	}
 
 	//Call set() for base class File
-	if(StandardProfile::FileImpl::remove(_uID, value)) return true;
+	if(StandardProfile::FileImpl::remove(_uID, value, removeAt, isRemoveDuplicates)) return true;
 	return false;
 }
 

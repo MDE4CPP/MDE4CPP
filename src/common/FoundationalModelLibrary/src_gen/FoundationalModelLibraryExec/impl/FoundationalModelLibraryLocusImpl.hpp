@@ -26,10 +26,10 @@ namespace FoundationalModelLibrary
 			virtual ~FoundationalModelLibraryLocusImpl();
 			
 			/*!
-			 */ 
+			 */
 			virtual std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_Object> instantiate(const std::shared_ptr<uml::Class>&);
-			virtual std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_SignalInstance> instantiate(const std::shared_ptr<uml::Signal>&);
 			virtual void setThisLocusPtr(std::weak_ptr</*PSCS::Semantics::Loci::CS_Locus*/fUML::Semantics::Loci::Locus>);
+			virtual std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_SignalInstance> instantiate(const std::shared_ptr<uml::Signal>&);
 	};
 }
 #endif /* end of include guard: FOUNDATIONALMODELLIBRARY_LOCUSIMPL_HPP */
