@@ -169,7 +169,7 @@ std::shared_ptr<Any> [aDataType.name.toUpperFirst().concat('Impl')/]::get(unsign
 	[/for]
 	return result;
 [else]
-	return eAny(nullptr, -1, false);
+	return nullptr;
 [/if]
 [/let]
 }
@@ -518,13 +518,13 @@ bool [aDataType.name.toUpperFirst().concat('Impl')/]::unset(unsigned long _uID)
 [template public generateRemoveImplementation(aDataType : DataType)]
 bool [aDataType.name.toUpperFirst().concat('Impl')/]::remove(const std::shared_ptr<uml::Property>& _property, const std::shared_ptr<Any>& value, int removeAt /*= -1*/, bool isRemoveDuplicates /*= false*/)
 {
-	return this->remove(_property->_getID(), value);
+	return this->remove(_property->_getID(), value, removeAt, isRemoveDuplicates);
 }
 
 bool [aDataType.name.toUpperFirst().concat('Impl')/]::remove(std::string _qualifiedName, const std::shared_ptr<Any>& value, int removeAt /*= -1*/, bool isRemoveDuplicates /*= false*/)
 {
 	unsigned long uID = util::Util::polynomialRollingHash(_qualifiedName);
-	return this->remove(uID, value);
+	return this->remove(uID, value, removeAt, isRemoveDuplicates);
 }
 
 bool [aDataType.name.toUpperFirst().concat('Impl')/]::remove(unsigned long _uID, const std::shared_ptr<Any>& value, int removeAt /*= -1*/, bool isRemoveDuplicates /*= false*/)
@@ -649,7 +649,7 @@ bool [aDataType.name.toUpperFirst().concat('Impl')/]::remove(unsigned long _uID,
 [/if]
 [for (general : Classifier | aDataType.general->reject(oclIsUndefined() and name.oclIsUndefined()))]
 	//Call remove() for base class [general.name/]
-	if([general.generateNamespaceName(true)/]Impl::remove(_uID, value)) return true;
+	if([general.generateNamespaceName(true)/]Impl::remove(_uID, value, removeAt, isRemoveDuplicates)) return true;
 [/for]
 	return false;
 }
