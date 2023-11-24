@@ -364,12 +364,14 @@ void [aClass.name.concat('Impl')/]::resolveReferences(const int featureID, std::
 			if (references.size() == 1)
 			{
 				// Cast object to correct type
+				[if not (aReference.hasKey(keyCPPType()))]
 				[if (aReference.isOfAnyType())]
 				std::shared_ptr<EObjectAny> _[aReference.name/] = std::dynamic_pointer_cast<EObjectAny>( references.front() );
 				[aReference.SetterName()/](_[aReference.name/]->getAny());
 				[else]
 				[aReference.eGenericType.generateCppType(true)/] _[aReference.name/] = std::dynamic_pointer_cast<[aReference.eGenericType.generateCppType(false)/]>( references.front() );
 				[aReference.SetterName()/](_[aReference.name/]);
+				[/if]
 				[/if]
 			}
 			
@@ -479,6 +481,7 @@ if (value == [aAttribute.eType.generateNamespaceDefinition()/]::[aAttribute.eTyp
 [if (refList->size() > 0)]
 	// Add references
 [for (aReference : EReference | refList)]
+	[if (not (aReference.hasKey(keyCPPType())))]
 	[if (aReference.upperBound = 1)] 
 		[if (not (aReference.eType.oclIsUndefined()))] 
 			[if ((aReference.eType.name ='EEList') or (aReference.eType.name ='ETreeIterator') )]		saveHandler->addReferences<[aReference.eGenericType.eTypeArguments->first().generateCppType(true)/]>("[aReference.name/]", this->[aReference.GetterName()/]());
@@ -501,7 +504,7 @@ if (value == [aAttribute.eType.generateNamespaceDefinition()/]::[aAttribute.eTyp
 		[else]		// Unknown EClass to save "[aReference.name/]"
 		[/if]
 	[else]		saveHandler->addReferences<[aReference.eGenericType.generateCppType(false)/]>("[aReference.name/]", this->[aReference.GetterName()/]());
-	[/if] 
+	[/if][/if]
 [/for][/if][/let]
 [let refList : OrderedSet(EReference) = aClass.eReferences->select(eRef: EReference|(eRef.containment = true and not (eRef.hasSubset() and not eRef.isSubsetUnion())))->reject(doNotGenerateEStructuralFeature())->asOrderedSet()->sortedBy(name)]
 [if (refList->size() > 0)]

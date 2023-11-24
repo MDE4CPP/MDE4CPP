@@ -288,17 +288,22 @@ endif
 	endif
 /]
 [query public getGeneralSuperClassName(aClass : Class) : String = 
-	if(isFUMLExecutable())
-	then
-		'fUML::MDE4CPP_Extensions::FUML_Object'
+	if(isPSSMExecutable())
+	then 
+		'PSSM::MDE4CPP_Extensions::PSSM_Object'
 	else
-		if(aClass.oclIsKindOf(Stereotype)) 
-		then 
-			'uml::Stereotype'
+		if(isFUMLExecutable())
+		then
+			'fUML::MDE4CPP_Extensions::FUML_Object'
 		else
-			'uml::Element' 
-		endif
-	endif 
+			if(aClass.oclIsKindOf(Stereotype)) 
+			then 
+				'uml::Stereotype'
+			else
+				'uml::Element' 
+			endif
+		endif 
+	endif
 /]
 
 [query public getGeneralSuperClassInterfaceInclude(aDataType : DataType) : String = 'uml/Element.hpp'/]
@@ -312,17 +317,22 @@ endif
 	endif
 /]
 [query public getGeneralSuperClassInterfaceInclude(aClass : Class) : String = 
-	if(isFUMLExecutable())
-	then
-		'fUML/MDE4CPP_Extensions/FUML_Object.hpp'
+	if(isPSSMExecutable())
+	then 
+		'PSSM/MDE4CPP_Extensions/PSSM_Object.hpp'
 	else
-		if(aClass.oclIsKindOf(Stereotype)) 
-		then 
-			'uml/Stereotype.hpp'
+		if(isFUMLExecutable())
+		then
+			'fUML/MDE4CPP_Extensions/FUML_Object.hpp'
 		else
-			'uml/Element.hpp' 
-		endif
-	endif 
+			if(aClass.oclIsKindOf(Stereotype)) 
+			then 
+				'uml/Stereotype.hpp'
+			else
+				'uml/Element.hpp' 
+			endif
+		endif 
+	endif
 /]
 
 [query public getGeneralSuperClassImplInclude(aDataType : DataType) : String = 'uml/impl/ElementImpl.hpp'/]
@@ -336,17 +346,22 @@ endif
 	endif
 /]
 [query public getGeneralSuperClassImplInclude(aClass : Class) : String = 
-	if(isFUMLExecutable())
-	then
-		'fUML/MDE4CPP_Extensions/impl/FUML_ObjectImpl.hpp'
+	if(isPSSMExecutable())
+	then 
+		'PSSM/MDE4CPP_Extensions/impl/PSSM_ObjectImpl.hpp'
 	else
-		if(aClass.oclIsKindOf(Stereotype)) 
-		then 
-			'uml/impl/StereotypeImpl.hpp'
+		if(isFUMLExecutable())
+		then
+			'fUML/MDE4CPP_Extensions/impl/FUML_ObjectImpl.hpp'
 		else
-			'uml/impl/ElementImpl.hpp' 
-		endif
-	endif 
+			if(aClass.oclIsKindOf(Stereotype)) 
+			then 
+				'uml/impl/StereotypeImpl.hpp'
+			else
+				'uml/impl/ElementImpl.hpp' 
+			endif
+		endif 
+	endif
 /]
 
 [**

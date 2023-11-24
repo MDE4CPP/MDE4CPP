@@ -24,6 +24,7 @@
 [import ecore4CPP::generator::main::generateUnion /]
 [import ecore4CPP::generator::main::generateType /]
 [import ecore4CPP::generator::main::helper /]
+[import ecore4CPP::generator::main::helpers::keywords /]
 [import ecore4CPP::generator::main::validation::validation /]
 
 [template public generateClassImplementationHeader(anEClass : EClass){ 
@@ -53,6 +54,11 @@
 #include "ecore/impl/EModelElementImpl.hpp"
 [/if]
 
+[if (anEClass.hasKey(keyIncludes()))]
+//Includes from codegen annotation
+[anEClass.valueKey(keyIncludes())/]
+
+[/if]
 //*********************************
 [comment namespace /]
 namespace [anEClass.generateNamespaceDefinition()/] 

@@ -37,15 +37,19 @@ Create all PSSM-specific Execution Prototypes  for the Model ExecutionFactory
 DEBUG_INFO("Creating StateMachineActivation for [aStateMachine.eClass().name/] '[aStateMachine.metamodelElementName()/]'");
 auto stateMachine = [aStateMachine.generatePackageGetterCall()/];
 [aStateMachine.getVisitorVariableName()/] = PSSM::Semantics::StateMachines::StateMachinesFactory::eInstance()->createStateMachineExecution();
-[aStateMachine.getVisitorVariableName()/]->setContext(PSSM_HelloWorld::PSSM_HelloWorldPackage::eInstance()->[aStateMachine.getContext().generatePackageGetterCall()/]);
+[aStateMachine.getVisitorVariableName()/]->setContext(context);
 [aStateMachine.getVisitorVariableName()/]->getTypes()->push_back(stateMachine);
 // Place this Execution in the Locus
 this->getLocus().lock()->add([aStateMachine.getVisitorVariableName()/]);
 [aStateMachine.getVisitorVariableName()/]->setLocus(this->getLocus().lock());
 // Create a StateMachineConfiguration for this Execution
 PSSM::Semantics::StateMachines::StateMachinesFactory::eInstance()->createStateMachineConfiguration_as_configuration_in_StateMachineExecution([aStateMachine.getVisitorVariableName()/]);
-// Create an ObjectActivation for this StateMachineExecution and {TBD} start its Event Dispatch Loop
-[aStateMachine.getVisitorVariableName()/]->startBehavior(PSSM_HelloWorld::PSSM_HelloWorldPackage::eInstance()->[aStateMachine._context.generatePackageGetterCall()/], nullptr);
+// Create an ObjectActivation for the Context Object of this StateMachineExecution and {TBD} start its Event Dispatch Loop.
+[if (aStateMachine._context = aStateMachine.oclAsType(BehavioredClassifier))]
+[aStateMachine.getVisitorVariableName()/]->startBehavior([aStateMachine._context.generatePackageGetterCall()/], nullptr);
+[else]
+context->startBehavior([aStateMachine._context.generatePackageGetterCall()/], nullptr);
+[/if]
 [for (aSmRegion : Region | aStateMachine.region) before ('\t\n// Create Regions of StateMachine\n')]
 [aSmRegion.generateSmRegionActivationCreation()/]
 [/for]
@@ -63,7 +67,7 @@ PSSM::Semantics::StateMachines::StateMachinesFactory::eInstance()->createStateMa
 	DEBUG_INFO("Creating RegionActivation for [aSmRegion.eClass().name/] '[aSmRegion.metamodelElementName()/]'");
 	auto [aSmRegion.getVisitorVariableName()/] = PSSM::Semantics::StateMachines::StateMachinesFactory::eInstance()->createRegionActivation_as_regionActivations_in_StateMachineExecution([owningStateMachine.getVisitorVariableName()/]);
 	[aSmRegion.getVisitorVariableName()/]->setParent([owningStateMachine.getVisitorVariableName()/]);
-	[aSmRegion.getVisitorVariableName()/]->setNode(PSSM_HelloWorld::PSSM_HelloWorldPackage::eInstance()->[aSmRegion.generatePackageGetterCall()/]);
+	[aSmRegion.getVisitorVariableName()/]->setNode([aSmRegion.generatePackageGetterCall()/]);
 	[for (aVertex : Vertex | aSmRegion.subvertex) before ('\t\n// Create Vertices of Region\n')]
 	[aVertex.generateVertexActivationCreation()/]
 	[/for]
@@ -78,7 +82,7 @@ PSSM::Semantics::StateMachines::StateMachinesFactory::eInstance()->createStateMa
 	DEBUG_INFO("Creating RegionActivation for [aStateRegion.eClass().name/] '[aStateRegion.metamodelElementName()/]'");
 	auto [aStateRegion.getVisitorVariableName()/] = PSSM::Semantics::StateMachines::StateMachinesFactory::eInstance()->createRegionActivation_as_regionActivations_in_StateActivation([aState.getVisitorVariableName()/]);
 	[aStateRegion.getVisitorVariableName()/]->setParent([aState.getVisitorVariableName()/]);
-	[aStateRegion.getVisitorVariableName()/]->setNode(PSSM_HelloWorld::PSSM_HelloWorldPackage::eInstance()->[aStateRegion.generatePackageGetterCall()/]);
+	[aStateRegion.getVisitorVariableName()/]->setNode([aStateRegion.generatePackageGetterCall()/]);
 	[for (aVertex : Vertex | aStateRegion.subvertex) before ('\t\n// Create Vertices of Region\n')]
 	[aVertex.generateVertexActivationCreation()/]
 	[/for]
@@ -104,7 +108,7 @@ PSSM::Semantics::StateMachines::StateMachinesFactory::eInstance()->createStateMa
 	[/if]
 	[aVertex.container.getVisitorVariableName()/]->getVertexActivations()->add([aVertex.getVisitorVariableName()/]);
 	[aVertex.getVisitorVariableName()/]->setParent([aVertex.container.getVisitorVariableName()/]);
-	[aVertex.getVisitorVariableName()/]->setNode(PSSM_HelloWorld::PSSM_HelloWorldPackage::eInstance()->[aVertex.generatePackageGetterCall()/]);
+	[aVertex.getVisitorVariableName()/]->setNode([aVertex.generatePackageGetterCall()/]);
 	[comment]
 	[if (aVertex.oclIsKindOf(State))]
 	[let aState : State = aVertex.oclAsType(State)]
@@ -146,7 +150,7 @@ PSSM::Semantics::StateMachines::StateMachinesFactory::eInstance()->createStateMa
 	DEBUG_INFO("// Create [aTransition.eClass().name/]Activation for [aTransition.eClass().name/] '[aTransition.metamodelElementName()/]'");
 	auto [aTransition.getVisitorVariableName()/] = PSSM::Semantics::StateMachines::StateMachinesFactory::eInstance()->createExternalTransitionActivation();
 	[aTransition.getVisitorVariableName()/]->setParent([aTransition.container.getVisitorVariableName()/]);
-	[aTransition.getVisitorVariableName()/]->setNode(PSSM_HelloWorld::PSSM_HelloWorldPackage::eInstance()->[aTransition.generatePackageGetterCall()/]);
+	[aTransition.getVisitorVariableName()/]->setNode([aTransition.generatePackageGetterCall()/]);
 	auto sourceVertexActivation_[aTransition.myQualifiedName()/] = [owningStateMachine.getVisitorVariableName()/]->getVertexActivation([aTransition.source.generatePackageGetterCall()/]);
 	auto targetVertexActivation_[aTransition.myQualifiedName()/] = [owningStateMachine.getVisitorVariableName()/]->getVertexActivation([aTransition.target.generatePackageGetterCall()/]);
 	[aTransition.getVisitorVariableName()/]->setSourceActivation(sourceVertexActivation_[aTransition.myQualifiedName()/]);

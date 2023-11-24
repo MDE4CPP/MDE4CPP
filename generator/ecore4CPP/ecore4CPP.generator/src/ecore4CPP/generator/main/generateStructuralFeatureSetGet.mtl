@@ -15,6 +15,7 @@
 [module generateStructuralFeatureSetGet('http://www.eclipse.org/emf/2002/Ecore')]
 
 [import ecore4CPP::generator::main::helper /]
+[import ecore4CPP::generator::main::helpers::keywords /]
 [import ecore4CPP::generator::main::generateAttribute /]
 [import ecore4CPP::generator::main::generateType /]
 [import ecore4CPP::generator::main::generateReference /]
@@ -173,6 +174,7 @@ bool [aClass.name.toUpperFirst().concat('Impl')/]::eSet(int featureID,  const st
 		[comment anEStructuralFeature is typed by an EClass /]
 		[else]
 			[comment anEStructuralFeature is a single-instanced value /]
+			[if (not (anEStructuralFeature.hasKey(keyCPPType())))]
 			[if (anEStructuralFeature.upperBound = 1)]
 			std::shared_ptr<ecore::EcoreAny> ecoreAny = std::dynamic_pointer_cast<ecore::EcoreAny>(newValue);
 			if(ecoreAny)
@@ -244,6 +246,7 @@ bool [aClass.name.toUpperFirst().concat('Impl')/]::eSet(int featureID,  const st
 				DEBUG_ERROR("Invalid instance of 'ecore::ecoreContainerAny' for feature '[anEStructuralFeature.name/]'. Failed to set feature!")
 				return false;
 			}
+			[/if]
 			[/if]
 		[/if]
 		return true;

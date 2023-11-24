@@ -96,10 +96,12 @@
 /]
 
 [query private collectIncludingMetaModelNamesForExecutableModels(anOclAny: OclAny) : Set(String) =
-	if(isFUMLExecutable())
+	if(isPSSMExecutable())
 	then
 		OrderedSet{
-			'fUML'
+			'fUML',
+			'PSCS',
+			'PSSM'
 		}
 	else
 		if(isPSCSExecutable())
@@ -109,13 +111,11 @@
 				'PSCS'
 			}
 		else
-			if(isPSSMExecutable())
+			if(isFUMLExecutable())
 			then
 				OrderedSet{
-					'fUML',
-					'PSCS',
-					'PSSM'
-				}
+					'fUML'
+				}			
 			else
 				OrderedSet{}
 			endif

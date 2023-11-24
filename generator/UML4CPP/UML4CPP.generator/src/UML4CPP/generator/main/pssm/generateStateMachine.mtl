@@ -50,7 +50,10 @@
 [/if]
 [aStateMachine.memberName()/]->setName("[aStateMachine.name/]");
 [if (aStateMachine.owner.oclIsKindOf(BehavioredClassifier))] 
-[aStateMachine.memberName()/]->setContext([aStateMachine.owner.oclAsType(BehavioredClassifier).memberName()/]);
+[comment]
+aStateMachine.memberName()/]->setContext([aStateMachine.owner.oclAsType(BehavioredClassifier).memberName()/]);
+[/comment]
+[aStateMachine.memberName()/]->setContext([aStateMachine._context.memberName()/]);
 [/if]
 [aStateMachine.ownedParameter.generateParameterInitialization()/]
 
