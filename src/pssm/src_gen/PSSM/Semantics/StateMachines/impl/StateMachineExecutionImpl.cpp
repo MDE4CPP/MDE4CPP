@@ -46,11 +46,10 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "uml/umlFactory.hpp"
-#include "ecore/ecoreFactory.hpp"
-#include "fUML/MDE4CPP_Extensions/MDE4CPP_ExtensionsFactory.hpp"
-#include "PSSM/Semantics/StateMachines/StateMachinesFactory.hpp"
 #include "fUML/Semantics/CommonBehavior/CommonBehaviorFactory.hpp"
+#include "PSSM/Semantics/StateMachines/StateMachinesFactory.hpp"
+#include "ecore/ecoreFactory.hpp"
+#include "uml/umlFactory.hpp"
 #include "fUML/Semantics/Loci/LociFactory.hpp"
 #include "uml/Behavior.hpp"
 #include "uml/Class.hpp"
@@ -59,7 +58,6 @@
 #include "ecore/EAnnotation.hpp"
 #include "uml/Element.hpp"
 #include "fUML/Semantics/CommonBehavior/Execution.hpp"
-#include "fUML/MDE4CPP_Extensions/FUML_Object.hpp"
 #include "fUML/Semantics/Loci/Locus.hpp"
 #include "fUML/Semantics/CommonBehavior/ObjectActivation.hpp"
 #include "fUML/Semantics/CommonBehavior/ParameterValue.hpp"
@@ -72,7 +70,6 @@
 #include "PSSM/Semantics/SemanticsPackage.hpp"
 #include "fUML/Semantics/CommonBehavior/CommonBehaviorPackage.hpp"
 #include "fUML/Semantics/Loci/LociPackage.hpp"
-#include "fUML/MDE4CPP_Extensions/MDE4CPP_ExtensionsPackage.hpp"
 #include "PSSM/Semantics/StateMachines/StateMachinesPackage.hpp"
 #include "ecore/ecorePackage.hpp"
 #include "uml/umlPackage.hpp"

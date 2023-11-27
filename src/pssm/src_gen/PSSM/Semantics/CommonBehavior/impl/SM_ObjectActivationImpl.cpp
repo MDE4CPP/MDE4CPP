@@ -41,9 +41,8 @@
 
 #include <exception> // used in Persistence
 #include "fUML/MDE4CPP_Extensions/MDE4CPP_ExtensionsFactory.hpp"
-#include "fUML/Semantics/CommonBehavior/CommonBehaviorFactory.hpp"
 #include "PSSM/Semantics/StateMachines/StateMachinesFactory.hpp"
-#include "fUML/Semantics/StructuredClassifiers/StructuredClassifiersFactory.hpp"
+#include "fUML/Semantics/CommonBehavior/CommonBehaviorFactory.hpp"
 #include "fUML/Semantics/CommonBehavior/ClassifierBehaviorExecution.hpp"
 #include "PSSM/Semantics/StateMachines/CompletionEventOccurrence.hpp"
 #include "PSSM/Semantics/StateMachines/DeferredEventOccurrence.hpp"
@@ -359,7 +358,7 @@ std::shared_ptr<Any> SM_ObjectActivationImpl::eGet(int featureID, bool resolve, 
 	switch(featureID)
 	{
 		case PSSM::Semantics::CommonBehavior::CommonBehaviorPackage::SM_OBJECTACTIVATION_ATTRIBUTE_DEFERREDEVENTPOOL:
-			return eEcoreContainerAny(getDeferredEventPool(),PSSM::Semantics::StateMachines::StateMachinesPackage::DEFERREDEVENTOCCURRENCE_CLASS); //307
+			return eEcoreContainerAny(getDeferredEventPool(),PSSM::Semantics::StateMachines::StateMachinesPackage::DEFERREDEVENTOCCURRENCE_CLASS); //304
 	}
 	return fUML::Semantics::CommonBehavior::ObjectActivationImpl::eGet(featureID, resolve, coreType);
 }
@@ -369,7 +368,7 @@ bool SM_ObjectActivationImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case PSSM::Semantics::CommonBehavior::CommonBehaviorPackage::SM_OBJECTACTIVATION_ATTRIBUTE_DEFERREDEVENTPOOL:
-			return getDeferredEventPool() != nullptr; //307
+			return getDeferredEventPool() != nullptr; //304
 	}
 	return fUML::Semantics::CommonBehavior::ObjectActivationImpl::internalEIsSet(featureID);
 }
