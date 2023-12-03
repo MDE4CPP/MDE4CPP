@@ -127,9 +127,12 @@ public class Generate extends AbstractAcceleoGenerator {
             } else {
                 URI modelURI = URI.createFileURI(args[0]);
                 File folder = new File(args[1]);
-                
+                boolean apiFlag = Boolean.parseBoolean(args[2]);
+                Generate.apiFlag = apiFlag;
+
                 System.out.println("Generate c++ code for: " + modelURI.devicePath());
                 System.out.println("          into folder: " + folder.getAbsolutePath().replace("\\", "/"));
+                System.out.println("Generate code with api: " + apiFlag);
                 
                 List<String> arguments = new ArrayList<String>();
                 
@@ -158,7 +161,7 @@ public class Generate extends AbstractAcceleoGenerator {
                  * (Help -> Help Contents).
                  */
                  
-                for (int i = 2; i < args.length; i++) {
+                for (int i = 3; i < args.length; i++) {
                     generator.addPropertiesFile(args[i]);
                 }
                 
@@ -423,5 +426,14 @@ public class Generate extends AbstractAcceleoGenerator {
          */ 
         resourceSet.getResourceFactoryRegistry().getExtensionToFactoryMap().put(UMLResource.FILE_EXTENSION, UMLResource.Factory.INSTANCE);
 		resourceSet.getResourceFactoryRegistry().getExtensionToFactoryMap( ).put("emtl", new Ecore4CPPEMtlResourceFactory());
+    }
+
+    /**
+     * Returns if a rest api should be generated.
+     * @return true if flag was set, otherwise false
+     */
+    public boolean getGenerateApi()
+    {
+        return Generate.apiFlag;
     }
 }

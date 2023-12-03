@@ -14,6 +14,8 @@ import org.gradle.api.tasks.OutputFile;
 import org.gradle.api.tasks.TaskAction;
 import org.gradle.api.tasks.options.Option;
 
+import org.apache.tools.ant.taskdefs.condition.Os;
+
 /**
  * Gradle task class for generating C++ projects of Ecore and UML models using MDE4CPP Code Generator<br>
  * Configuration options:<br>
@@ -43,7 +45,8 @@ public class MDE4CPPGenerate extends DefaultTask
 {
 	private File modelFile = null;
 	private boolean m_structureOnly = false;
-
+	private boolean m_apiFlag = false;
+	
 	private String m_targetFolder = null;
 	private String m_srcGenFolder = ".." + File.separator + "src_gen";
 
@@ -62,6 +65,11 @@ public class MDE4CPPGenerate extends DefaultTask
 		{
 			boolean structureOnly = PropertyAnalyser.isStructuredOnlyRequested(getProject());
 			setStructureOnly(structureOnly);
+		}
+		if(PropertyAnalyser.hasApiGenerationFlag(getProject()))
+		{
+			boolean generateApi = PropertyAnalyser.isApiGenerationRequested(getProject());
+			setApiFlag(generateApi);
 		}
 		
 		return new File(m_generator.getPath());
@@ -126,6 +134,13 @@ public class MDE4CPPGenerate extends DefaultTask
 		return new File(m_targetFolder);
 	}
 
+	/**
+	 * @param generateAPI : Bool - specifing if the API should be build
+	 */
+	public void setGenerateAPI(boolean generateAPI)
+	{
+		setApiFlag(generateAPI);
+	}	
 	
 	/**
 	 * @param relatedModels - name list of related model
@@ -154,7 +169,32 @@ public class MDE4CPPGenerate extends DefaultTask
 			m_generator.setPath(generatorPath);
 		}
 	}
+	
+	/**
+	 * @param generateApi - api creation flag
+	 */
+	@Option(option = "generateApi", description = "Specifies if the generator should create the rest api.")
+	public void setGenerateApiFlag(boolean generateApi)
+	{
+		if (Os.isFamily(Os.FAMILY_WINDOWS)) {
+			if(generateApi){
+				setApiFlag(true);
+			}
+		}else {
+			throw new GradleException("RestAPI is only supported on Windows currently. Please generate the modell without the -PGenerateAPI property");
+		}
+		
+	}
 
+	/**
+	 * indicates, that rest api files should be generated or not
+	 *
+	 * @param generateApi : Boolean - true to generate rest api files, false to not generate rest api files
+	 */
+	public void setApiFlag(boolean generateApi) {
+		this.m_apiFlag = generateApi;
+	}
+	
 	/**
 	 * @param modelFilePath - model path
 	 */
@@ -308,7 +348,9 @@ public class MDE4CPPGenerate extends DefaultTask
 		command.add(m_generator.getPath());
 		command.add(m_modelFileName);
 		command.add(m_targetFolder);
-		String startingMessage = "Generating model " + m_modelFileName + " using generator " + m_generator.getName();
+		command.add(String.valueOf(m_apiFlag));
+		
+		String startingMessage = "Generating model " + m_modelFileName + " using generator " + m_generator.getName() + " generating api files " + m_apiFlag;
 		
 		executeGenerateProcess(command, m_workingDirectory, startingMessage);		
 	}

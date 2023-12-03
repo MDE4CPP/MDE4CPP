@@ -64,6 +64,10 @@ string(REPLACE "\\" "/" MDE4CPP_HOME $ENV{MDE4CPP_HOME})
 SET(SOURCE_FILES
 # Factories and packages
 	[aPackage.generatePackageAndFactory()/]
+[if hasCreateApiFlag()]
+# REST-Api
+	[aPackage.generateAPI()/]
+[/if]
 # Package plugin
 	impl/[packageName/]PluginImpl.cpp
 # Package content
@@ -144,6 +148,9 @@ task build[packageName.toUpperFirst()/]() {
 [if(aPackage.prepareApplication())]
 	dependsOn 'application:compileApplicationFor[packageName.toUpperFirst()/]'
 [/if]
+[if hasCreateApiFlag()]
+	dependsOn getRootProject().getTasksByName('deliverBoostLibray', true)
+[/if]
 [for (pack : EPackage | aPackage.metaModelLibraries()->reject(doNotGenerateEPackage())) before ('\n') ? (not(pack.name = aPackage.name))]
 	dependsOn getRootProject().getTasksByName('build[pack.name.toUpperFirst()/]', true)
 [/for]
@@ -170,6 +177,12 @@ description 'Generate task for project: [packageName/]'
 task generate[packageName.toUpperFirst()/](type: tui.sse.mde4cpp.MDE4CPPGenerate) {
 	group '[packageName/]'
 	description 'generate C++ code of [packageName/].ecore model'
+
+	[if hasCreateApiFlag()]
+	generateAPI = true;
+	[else]
+	generateAPI = false;
+	[/if]
 	
 	modelFilePath = file('.' + File.separator + '[packageName/].ecore')
 
@@ -294,6 +307,11 @@ task clean {
 [aPackage.eSubpackages->reject(doNotGenerateEPackage()).generatePackageAndFactory()/]
 [/template]
 
+
+[template private generateAPI(aPackage : EPackage) { packageName : String = aPackage.name; }]	
+[aPackage.getNamespacePathWithoutRoot()/]impl/[packageName/]Api.cpp
+[/template]
+
 [template private generateCMakeFindLibraryCommands(aPackage : EPackage, ending : String, folderName : String)]
 IF (CMAKE_BUILD_TYPE STREQUAL "Debug")
 	[generateCMakeFindLibraryCommand(aPackage, ending, folderName, true)/]
@@ -327,6 +345,10 @@ TARGET_LINK_LIBRARIES(${PROJECT_NAME}
 	[buildModeCMakeProperty(debugMode)/] ${[libName.toUpperCase()/]_[libraryVariableNameSuffix(debugMode)/]}
 [/if]
 [/for]
+	[if hasCreateApiFlag()]
+    [buildModeCMakeProperty(debugMode)/] ws2_32
+    [buildModeCMakeProperty(debugMode)/] wsock32
+	[/if]
 )
 [/template]
 

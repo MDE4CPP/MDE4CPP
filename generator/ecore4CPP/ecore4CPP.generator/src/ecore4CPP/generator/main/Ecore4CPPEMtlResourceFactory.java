@@ -74,6 +74,7 @@ public class Ecore4CPPEMtlResourceFactory extends EMtlResourceFactoryImpl {
 		initializeConfigurationEmtls(resourcePathPrefix);
 		initializeFactoryEmtls(resourcePathPrefix);
 		initializeHelpersEmtls(resourcePathPrefix);
+		initializeApiEmtls(resourcePathPrefix);
 		initializeClassesEmtls(resourcePathPrefix);
 		initializePackageEmtls(resourcePathPrefix);
 		initializePluginEmtls(resourcePathPrefix);
@@ -124,6 +125,15 @@ public class Ecore4CPPEMtlResourceFactory extends EMtlResourceFactoryImpl {
 								"generateFactoryInterface"
 								};
 		generateFilePathMapData(moduleNames, "model_factory", resourcePathPrefix);
+	}
+
+	private void initializeApiEmtls(String resourcePathPrefix)
+	{
+		String[] moduleNames = {"generateModelApiHeader",
+								"generateModelApiSource",
+								"generateModelApi"
+								};
+		generateFilePathMapData(moduleNames, "api", resourcePathPrefix);
 	}
 	
 	private void initializeHelpersEmtls(String resourcePathPrefix)
