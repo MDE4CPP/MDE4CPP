@@ -47,6 +47,14 @@ public class Generate extends AbstractAcceleoGenerator {
     public static final String[] TEMPLATE_NAMES = { "generateModel" };
     
     /**
+     * Indicates if a rest api should be generated.
+     *
+     * @generated
+     */
+    public static boolean apiFlag = false;
+
+
+    /**
      * The list of properties files from the launch parameters (Launch configuration).
      *
      * @generated
