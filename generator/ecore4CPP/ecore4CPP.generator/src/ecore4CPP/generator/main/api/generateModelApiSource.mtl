@@ -49,12 +49,11 @@ std::shared_ptr<[packageName/]> [packageName/]::eInstance(const std::shared_ptr<
         if(m_objects.find(className + "_" + objectName) != m_objects.end()){
             return crow::response(400, "Object already exists!");
         }
-		long metaEleID = 0;
 		std::shared_ptr<ecore::EObject> obj =  m_factory->create("[anEPackage.name/]::"+className);
 		if(obj == nullptr){
-			return crow::response(400, "Object class does not exists!");
+			return crow::response(404, "Class of Object does not exists!");
 		}
-		metaEleID = obj->eClass()->getMetaElementID();
+		long metaEleID = obj->eClass()->getMetaElementID();
         auto object = readValue(crow::json::load(request.body), metaEleID);
         m_objects['['/]className + "_" + objectName[']'/] = object;
         return crow::response(201);
