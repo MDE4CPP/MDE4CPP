@@ -43,8 +43,8 @@
 #include "PSSM/Semantics/StateMachines/StateMachineExecution.hpp"
 #include "PSSM/Semantics/StateMachines/VertexActivation.hpp"
 //Factories and Package includes
-#include "PSSM/PSSMPackage.hpp"
 #include "PSSM/Semantics/SemanticsPackage.hpp"
+#include "PSSM/PSSMPackage.hpp"
 #include "PSSM/Semantics/StateMachines/StateMachinesPackage.hpp"
 
 using namespace PSSM::Semantics::StateMachines;

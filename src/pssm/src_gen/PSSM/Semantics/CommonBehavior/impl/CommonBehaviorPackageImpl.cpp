@@ -4,15 +4,15 @@
 
 #include "abstractDataTypes/SubsetUnion.hpp"
 //metametamodel classes
-#include "ecore/EStringToStringMapEntry.hpp"
 #include "ecore/EAnnotation.hpp"
-#include "ecore/EClass.hpp"
-#include "ecore/EOperation.hpp"
-#include "ecore/EReference.hpp"
-#include "ecore/EAttribute.hpp"
+#include "ecore/EStringToStringMapEntry.hpp"
 #include "ecore/EGenericType.hpp"
-#include "ecore/EDataType.hpp"
+#include "ecore/EOperation.hpp"
+#include "ecore/EAttribute.hpp"
 #include "ecore/EParameter.hpp"
+#include "ecore/EClass.hpp"
+#include "ecore/EDataType.hpp"
+#include "ecore/EReference.hpp"
 
 //metamodel factory
 #include "PSSM/Semantics/CommonBehavior/CommonBehaviorFactory.hpp"
@@ -117,10 +117,6 @@ const std::shared_ptr<ecore::EOperation>& PSSM::Semantics::CommonBehavior::Commo
 {
 	return m_callEventExecution_Operation_getInputParameterValues;
 }
-const std::shared_ptr<ecore::EOperation>& PSSM::Semantics::CommonBehavior::CommonBehaviorPackageImpl::getCallEventExecution_Operation_new_() const
-{
-	return m_callEventExecution_Operation_new_;
-}
 const std::shared_ptr<ecore::EOperation>& PSSM::Semantics::CommonBehavior::CommonBehaviorPackageImpl::getCallEventExecution_Operation_releaseCaller() const
 {
 	return m_callEventExecution_Operation_releaseCaller;
@@ -159,9 +155,17 @@ const std::shared_ptr<ecore::EReference>& PSSM::Semantics::CommonBehavior::Commo
 	return m_eventTriggeredExecution_Attribute_wrappedExecution;
 }
 
-const std::shared_ptr<ecore::EOperation>& PSSM::Semantics::CommonBehavior::CommonBehaviorPackageImpl::getEventTriggeredExecution_Operation_copy() const
+const std::shared_ptr<ecore::EOperation>& PSSM::Semantics::CommonBehavior::CommonBehaviorPackageImpl::getEventTriggeredExecution_Operation_execute() const
 {
-	return m_eventTriggeredExecution_Operation_copy;
+	return m_eventTriggeredExecution_Operation_execute;
+}
+const std::shared_ptr<ecore::EOperation>& PSSM::Semantics::CommonBehavior::CommonBehaviorPackageImpl::getEventTriggeredExecution_Operation_finalize() const
+{
+	return m_eventTriggeredExecution_Operation_finalize;
+}
+const std::shared_ptr<ecore::EOperation>& PSSM::Semantics::CommonBehavior::CommonBehaviorPackageImpl::getEventTriggeredExecution_Operation_initialize_Behavior() const
+{
+	return m_eventTriggeredExecution_Operation_initialize_Behavior;
 }
 
 // End Class EventTriggeredExecution

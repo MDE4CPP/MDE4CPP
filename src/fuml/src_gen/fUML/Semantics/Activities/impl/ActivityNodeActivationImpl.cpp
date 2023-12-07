@@ -51,15 +51,16 @@
 #include "uml/ActivityNode.hpp"
 #include "fUML/Semantics/Activities/ActivityNodeActivation.hpp"
 #include "fUML/Semantics/Activities/ActivityNodeActivationGroup.hpp"
-#include "uml/Element.hpp"
+#include "fUML/MDE4CPP_Extensions/FUML_Object.hpp"
 #include "fUML/Semantics/Loci/Locus.hpp"
 #include "fUML/Semantics/Loci/SemanticVisitor.hpp"
 #include "fUML/Semantics/Activities/Token.hpp"
 //Factories and Package includes
-#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/SemanticsPackage.hpp"
+#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/Activities/ActivitiesPackage.hpp"
 #include "fUML/Semantics/Loci/LociPackage.hpp"
+#include "fUML/MDE4CPP_Extensions/MDE4CPP_ExtensionsPackage.hpp"
 #include "uml/umlPackage.hpp"
 
 using namespace fUML::Semantics::Activities;
@@ -256,7 +257,7 @@ std::shared_ptr<fUML::Semantics::Activities::ActivityExecution> ActivityNodeActi
 	//end of body
 }
 
-std::shared_ptr<uml::Element> ActivityNodeActivationImpl::getExecutionContext()
+std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_Object> ActivityNodeActivationImpl::getExecutionContext()
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -1266,10 +1267,10 @@ std::shared_ptr<Any> ActivityNodeActivationImpl::eInvoke(int operationID, const 
 			result = eEcoreAny(this->getActivityExecution(), fUML::Semantics::Activities::ActivitiesPackage::ACTIVITYEXECUTION_CLASS);
 			break;
 		}
-		// fUML::Semantics::Activities::ActivityNodeActivation::getExecutionContext() : uml::Element: 3574975649
+		// fUML::Semantics::Activities::ActivityNodeActivation::getExecutionContext() : fUML::MDE4CPP_Extensions::FUML_Object: 1798696675
 		case ActivitiesPackage::ACTIVITYNODEACTIVATION_OPERATION_GETEXECUTIONCONTEXT:
 		{
-			result = eEcoreAny(this->getExecutionContext(), uml::umlPackage::ELEMENT_CLASS);
+			result = eEcoreAny(this->getExecutionContext(), fUML::MDE4CPP_Extensions::MDE4CPP_ExtensionsPackage::FUML_OBJECT_CLASS);
 			break;
 		}
 		// fUML::Semantics::Activities::ActivityNodeActivation::getExecutionLocus() : fUML::Semantics::Loci::Locus: 4097970094

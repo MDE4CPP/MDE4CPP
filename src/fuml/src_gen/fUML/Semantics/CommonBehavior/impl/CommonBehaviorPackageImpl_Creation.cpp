@@ -7,15 +7,15 @@
 
 #include "abstractDataTypes/SubsetUnion.hpp"
 //metametamodel classes
-#include "ecore/EStringToStringMapEntry.hpp"
 #include "ecore/EAnnotation.hpp"
-#include "ecore/EClass.hpp"
-#include "ecore/EOperation.hpp"
-#include "ecore/EReference.hpp"
-#include "ecore/EAttribute.hpp"
+#include "ecore/EStringToStringMapEntry.hpp"
 #include "ecore/EGenericType.hpp"
-#include "ecore/EDataType.hpp"
+#include "ecore/EOperation.hpp"
+#include "ecore/EAttribute.hpp"
 #include "ecore/EParameter.hpp"
+#include "ecore/EClass.hpp"
+#include "ecore/EDataType.hpp"
+#include "ecore/EReference.hpp"
 
 //depending model packages
 #include "ecore/ecorePackage.hpp"
@@ -38,6 +38,7 @@ void CommonBehaviorPackageImpl::createPackageContents(std::shared_ptr<ecore::EPa
 
 	createClassifierBehaviorExecutionContent(package, factory);
 	createEventAccepterContent(package, factory);
+	createEventDispatchLoopContent(package, factory);
 	createEventOccurrenceContent(package, factory);
 	createExecutionContent(package, factory);
 	createFIFOGetNextEventStrategyContent(package, factory);
@@ -71,6 +72,16 @@ void CommonBehaviorPackageImpl::createEventAccepterContent(std::shared_ptr<ecore
 	
 	m_eventAccepter_Operation_accept_EventOccurrence = factory->createEOperation_as_eOperations_in_EClass(m_eventAccepter_Class, EVENTACCEPTER_OPERATION_ACCEPT_EVENTOCCURRENCE);
 	m_eventAccepter_Operation_match_EventOccurrence = factory->createEOperation_as_eOperations_in_EClass(m_eventAccepter_Class, EVENTACCEPTER_OPERATION_MATCH_EVENTOCCURRENCE);
+	
+}
+
+void CommonBehaviorPackageImpl::createEventDispatchLoopContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory)
+{
+	m_eventDispatchLoop_Class = factory->createEClass_as_eClassifiers_in_EPackage(package, EVENTDISPATCHLOOP_CLASS);
+	
+	m_eventDispatchLoop_Attribute_memberThread = factory->createEReference_as_eReferences_in_EClass(m_eventDispatchLoop_Class, EVENTDISPATCHLOOP_ATTRIBUTE_MEMBERTHREAD);
+	
+	m_eventDispatchLoop_Operation_startDispatchLoop_ObjectActivation = factory->createEOperation_as_eOperations_in_EClass(m_eventDispatchLoop_Class, EVENTDISPATCHLOOP_OPERATION_STARTDISPATCHLOOP_OBJECTACTIVATION);
 	
 }
 
@@ -133,7 +144,10 @@ void CommonBehaviorPackageImpl::createObjectActivationContent(std::shared_ptr<ec
 	m_objectActivation_Class = factory->createEClass_as_eClassifiers_in_EPackage(package, OBJECTACTIVATION_CLASS);
 	
 	m_objectActivation_Attribute_classifierBehaviorExecutions = factory->createEReference_as_eReferences_in_EClass(m_objectActivation_Class, OBJECTACTIVATION_ATTRIBUTE_CLASSIFIERBEHAVIOREXECUTIONS);
+	m_objectActivation_Attribute_conditionVariable = factory->createEReference_as_eReferences_in_EClass(m_objectActivation_Class, OBJECTACTIVATION_ATTRIBUTE_CONDITIONVARIABLE);
 	m_objectActivation_Attribute_eventPool = factory->createEReference_as_eReferences_in_EClass(m_objectActivation_Class, OBJECTACTIVATION_ATTRIBUTE_EVENTPOOL);
+	m_objectActivation_Attribute_memberThread = factory->createEReference_as_eReferences_in_EClass(m_objectActivation_Class, OBJECTACTIVATION_ATTRIBUTE_MEMBERTHREAD);
+	m_objectActivation_Attribute_mutex = factory->createEReference_as_eReferences_in_EClass(m_objectActivation_Class, OBJECTACTIVATION_ATTRIBUTE_MUTEX);
 	m_objectActivation_Attribute_object = factory->createEReference_as_eReferences_in_EClass(m_objectActivation_Class, OBJECTACTIVATION_ATTRIBUTE_OBJECT);
 	m_objectActivation_Attribute_waitingEventAccepters = factory->createEReference_as_eReferences_in_EClass(m_objectActivation_Class, OBJECTACTIVATION_ATTRIBUTE_WAITINGEVENTACCEPTERS);
 	

@@ -307,7 +307,7 @@
         </eOperations>
         <eOperations name="doCall" upperBound="-1" eType="#//Semantics/CommonBehavior/ParameterValue">
           <eAnnotations source="http://tu-ilmenau.de/see/codegen">
-            <details key="body" value="std::shared_ptr&lt;uml::Behavior> behavior = this->retrieveBehavior();&#xA;&#xA;&#x9;if(behavior != nullptr)&#xA;&#x9;{&#xA;&#x9;&#x9;std::shared_ptr&lt;uml::Element> context = nullptr;&#xA;&#x9;&#x9;if(behavior->getContext() != nullptr)&#xA;&#x9;&#x9;{&#xA;&#x9;&#x9;&#x9;DEBUG_INFO(&quot;Behavior context is '&quot; &lt;&lt; behavior->getContext()->getName() &lt;&lt; &quot;'.&quot;)&#xA;&#x9;&#x9;&#x9;context = this->getExecutionContext();&#xA;&#x9;&#x9;}&#xA;&#x9;&#x9;&#xA;&#x9;&#x9;return this->getExecutionLocus()->getExecutor()->execute(behavior, context, inputParameterValues);&#xA;&#x9;}&#xA;&#x9;return nullptr;&#xA;"/>
+            <details key="body" value="std::shared_ptr&lt;uml::Behavior> behavior = this->retrieveBehavior();&#xD;&#xA;&#xD;&#xA;&#x9;if(behavior != nullptr)&#xD;&#xA;&#x9;{&#xD;&#xA;&#x9;&#x9;std::shared_ptr&lt;fUML::MDE4CPP_Extensions::FUML_Object> context = nullptr;&#xD;&#xA;&#x9;&#x9;if(behavior->getContext() != nullptr)&#xD;&#xA;&#x9;&#x9;{&#xD;&#xA;&#x9;&#x9;&#x9;DEBUG_INFO(&quot;Behavior context is '&quot; &lt;&lt; behavior->getContext()->getName() &lt;&lt; &quot;'.&quot;)&#xD;&#xA;&#x9;&#x9;&#x9;context = this->getExecutionContext();&#xD;&#xA;&#x9;&#x9;}&#xD;&#xA;&#x9;&#x9;&#xD;&#xA;&#x9;&#x9;return this->getExecutionLocus()->getExecutor()->execute(behavior, context, inputParameterValues);&#xD;&#xA;&#x9;}&#xD;&#xA;&#x9;return nullptr;&#xD;&#xA;"/>
           </eAnnotations>
           <eParameters name="inputParameterValues" upperBound="-1" eType="#//Semantics/CommonBehavior/ParameterValue"/>
         </eOperations>
@@ -733,11 +733,11 @@
       </eClassifiers>
       <eClassifiers xsi:type="ecore:EClass" name="ReadSelfActionActivation" eSuperTypes="#//Semantics/Actions/ActionActivation">
         <eAnnotations source="http://tu-ilmenau.de/see/codegen">
-          <details key="implIncludes" value="#include &quot;uml/UMLAny.hpp&quot;&#xA;#include &quot;uml/ReadSelfAction.hpp&quot;"/>
+          <details key="implIncludes" value="#include &quot;uml/UMLAny.hpp&quot;&#xD;&#xA;#include &quot;uml/ReadSelfAction.hpp&quot;&#xD;&#xA;#include &quot;fUML/MDE4CPP_Extensions/FUML_Object.hpp&quot;"/>
         </eAnnotations>
         <eOperations name="doAction">
           <eAnnotations source="http://tu-ilmenau.de/see/codegen">
-            <details key="body" value="// Get the context object of the activity execution containing this action activation and place a reference to it on the result output pin.&#xA;&#x9;const std::shared_ptr&lt;uml::ReadSelfAction>&amp; action = this->getReadSelfAction();&#xA;&#xA;&#x9;std::shared_ptr&lt;uml::Element> context=this->getExecutionContext();&#x9;&#xA;&#x9;if(context)&#xA;&#x9;{&#xA;&#x9;&#x9;std::shared_ptr&lt;Any> value = eUMLAny(context, context->getMetaElementID());&#xA;&#x9;&#x9;const std::shared_ptr&lt;uml::OutputPin>&amp; resultPin = action->getResult();&#xA;&#x9;&#x9;if(resultPin)&#xA;&#x9;&#x9;{&#xA;&#x9;&#x9;&#x9;this->putToken(resultPin, value);&#xA;&#x9;&#x9;}&#xA;&#x9;&#x9;else&#xA;&#x9;&#x9;{&#xA;&#x9;&#x9;&#x9;DEBUG_ERROR(&quot;Result pin is nullptr! Failed to read self!&quot;)&#xA;&#x9;&#x9;}&#xA;&#x9;}&#xA;&#x9;else&#xA;&#x9;{&#xA;&#x9;&#x9;DEBUG_ERROR(&quot;Context nullptr! Failed to read self!&quot;)&#xA;&#x9;}"/>
+            <details key="body" value="// Get the context object of the activity execution containing this action activation and place a reference to it on the result output pin.&#xD;&#xA;&#x9;const std::shared_ptr&lt;uml::ReadSelfAction>&amp; action = this->getReadSelfAction();&#xD;&#xA;&#xD;&#xA;&#x9;std::shared_ptr&lt;fUML::MDE4CPP_Extensions::FUML_Object> context=this->getExecutionContext();&#x9;&#xD;&#xA;&#x9;if(context)&#xD;&#xA;&#x9;{&#xD;&#xA;&#x9;&#x9;std::shared_ptr&lt;Any> value = eUMLAny(context, context->getMetaElementID());&#xD;&#xA;&#x9;&#x9;const std::shared_ptr&lt;uml::OutputPin>&amp; resultPin = action->getResult();&#xD;&#xA;&#x9;&#x9;if(resultPin)&#xD;&#xA;&#x9;&#x9;{&#xD;&#xA;&#x9;&#x9;&#x9;this->putToken(resultPin, value);&#xD;&#xA;&#x9;&#x9;}&#xD;&#xA;&#x9;&#x9;else&#xD;&#xA;&#x9;&#x9;{&#xD;&#xA;&#x9;&#x9;&#x9;DEBUG_ERROR(&quot;Result pin is nullptr! Failed to read self!&quot;)&#xD;&#xA;&#x9;&#x9;}&#xD;&#xA;&#x9;}&#xD;&#xA;&#x9;else&#xD;&#xA;&#x9;{&#xD;&#xA;&#x9;&#x9;DEBUG_ERROR(&quot;Context nullptr! Failed to read self!&quot;)&#xD;&#xA;&#x9;}"/>
           </eAnnotations>
         </eOperations>
         <eStructuralFeatures xsi:type="ecore:EReference" name="readSelfAction" lowerBound="1"
@@ -1244,7 +1244,7 @@
             <details key="body" value="&#xA;&#x9;auto group=this->getGroup().lock();&#xA;&#x9;if(group)&#xA;&#x9;{&#xA;&#x9;&#x9;return group->retrieveActivityExecution();&#xA;&#x9;}&#xA;&#x9;else&#xA;&#x9;{&#xA;&#x9;&#x9;std::cout &lt;&lt; __PRETTY_FUNCTION__  &lt;&lt; std::endl;&#xA;&#x9;&#x9;throw &quot;empty group!&quot;;&#xA;&#x9;}&#xA;&#xA;&#x9;return std::shared_ptr&lt;fUML::Semantics::Activities::ActivityExecution>();"/>
           </eAnnotations>
         </eOperations>
-        <eOperations name="getExecutionContext" ordered="false" lowerBound="1" eType="ecore:EClass http://www.eclipse.org/uml2/5.0.0/UML#//Element">
+        <eOperations name="getExecutionContext" ordered="false" lowerBound="1" eType="#//MDE4CPP_Extensions/FUML_Object">
           <eAnnotations source="http://tu-ilmenau.de/see/codegen">
             <details key="body" value="return this->getActivityExecution()->getContext();"/>
           </eAnnotations>
@@ -2145,7 +2145,7 @@
           </eAnnotations>
         </eOperations>
         <eStructuralFeatures xsi:type="ecore:EReference" name="context" ordered="false"
-            lowerBound="1" eType="ecore:EClass http://www.eclipse.org/uml2/5.0.0/UML#//Element"/>
+            lowerBound="1" eType="#//MDE4CPP_Extensions/FUML_Object"/>
         <eStructuralFeatures xsi:type="ecore:EReference" name="parameterValues" ordered="false"
             upperBound="-1" eType="#//Semantics/CommonBehavior/ParameterValue" containment="true"/>
         <eStructuralFeatures xsi:type="ecore:EReference" name="behavior" lowerBound="1"
@@ -2219,11 +2219,13 @@
       </eClassifiers>
       <eClassifiers xsi:type="ecore:EClass" name="ObjectActivation">
         <eAnnotations source="http://tu-ilmenau.de/see/codegen">
-          <details key="implIncludes" value="#include &quot;fUML/Semantics/CommonBehavior/ClassifierBehaviorExecution.hpp&quot;&#xA;#include &quot;fUML/Semantics/SimpleClassifiers/SimpleClassifiersPackage.hpp&quot;&#xA;#include &quot;fUML/Semantics/Loci/ChoiceStrategy.hpp&quot;&#xA;#include &quot;fUML/Semantics/Loci/Locus.hpp&quot;&#xA;#include &quot;fUML/Semantics/Loci/ExecutionFactory.hpp&quot;&#xA;#include &quot;fUML/Semantics/CommonBehavior/GetNextEventStrategy.hpp&quot;&#xA;&#xA;#include &quot;uml/Behavior.hpp&quot;&#xA;#include &quot;uml/Class.hpp&quot;"/>
+          <details key="implIncludes" value="#include &quot;fUML/Semantics/CommonBehavior/ClassifierBehaviorExecution.hpp&quot;&#xD;&#xA;#include &quot;fUML/Semantics/SimpleClassifiers/SimpleClassifiersPackage.hpp&quot;&#xD;&#xA;#include &quot;fUML/Semantics/Loci/ChoiceStrategy.hpp&quot;&#xD;&#xA;#include &quot;fUML/Semantics/Loci/Locus.hpp&quot;&#xD;&#xA;#include &quot;fUML/Semantics/Loci/ExecutionFactory.hpp&quot;&#xD;&#xA;#include &quot;fUML/Semantics/CommonBehavior/GetNextEventStrategy.hpp&quot;&#xD;&#xA;&#xD;&#xA;#include &quot;uml/Behavior.hpp&quot;&#xD;&#xA;#include &quot;uml/Class.hpp&quot;&#xD;&#xA;&#xD;&#xA;#include &lt;thread>&#xD;&#xA;#include &lt;mutex>&#xD;&#xA;#include &lt;condition_variable>"/>
+          <details key="interfaceIncludes" value="#include &lt;thread>&#xA;#include &lt;mutex>&#xA;#include &lt;condition_variable>"/>
+          <details key="constructorBody" value="m_eventPool = std::make_shared&lt;Bag&lt;fUML::Semantics::CommonBehavior::EventOccurrence>>();&#xA;&#x9;m_waitingEventAccepters = std::make_shared&lt;Bag&lt;fUML::Semantics::CommonBehavior::EventAccepter>>();&#xA;&#x9;this->m_mutex = std::make_shared&lt;std::mutex>();&#xA;&#x9;this->m_conditionVariable = std::make_shared&lt;std::condition_variable>();"/>
         </eAnnotations>
         <eOperations name="startBehavior" ordered="false" lowerBound="1">
           <eAnnotations source="http://tu-ilmenau.de/see/codegen">
-            <details key="body" value="&#x9;if (classifier == nullptr)&#xA;&#x9;{&#xA;    &#x9;&#x9;DEBUG_INFO(&quot; Starting behavior for all classifiers...&quot;)&#xA;&#x9;&#x9;// *** Start all classifier behaviors concurrently. ***&#xA;&#x9;&#x9;const std::shared_ptr&lt;Bag&lt;uml::Classifier>>&amp; types = this->getObject()->getTypes();&#xA;&#xA;        &#x9;for (const std::shared_ptr&lt;uml::Classifier>&amp; classifier : *types)&#xA;       &#x9;&#x9;{&#xA;        &#x9;&#x9;std::shared_ptr&lt;uml::Class> type = std::dynamic_pointer_cast&lt;uml::Class>(classifier);&#xA;        &#x9;&#x9;if ((std::dynamic_pointer_cast&lt;uml::Behavior>(type) != nullptr) || (type->getClassifierBehavior() != nullptr))&#xA;            &#x9;&#x9;{&#xA;            &#x9;&#x9;&#x9;std::shared_ptr&lt;Bag&lt;fUML::Semantics::CommonBehavior::ParameterValue>> parameterValue(new Bag&lt;fUML::Semantics::CommonBehavior::ParameterValue>());&#xA;            &#x9;&#x9;&#x9;this->startBehavior(type, parameterValue);&#xA;            &#x9;&#x9;}&#xA;        &#x9;}&#xA;&#x9;}&#xA;&#x9;else&#xA;&#x9;{&#xA;    &#x9;DEBUG_INFO(&quot;Starting behavior for &quot;&lt;&lt; classifier->getName())&#xA;&#xA;&#x9;&#x9;bool notYetStarted = true;&#xA;        &#x9;unsigned int i = 0;&#xA;&#x9;&#x9;unsigned int classifierBehaviorExecutionsSize = this->getClassifierBehaviorExecutions()->size();&#xA;        &#x9;while (notYetStarted &amp;&amp; i &lt; classifierBehaviorExecutionsSize)&#xA;       &#x9;&#x9;{&#xA;        &#x9;&#x9;notYetStarted = (this->getClassifierBehaviorExecutions()->at(i)->getClassifier() != classifier);&#xA;           &#x9; &#x9;i = i + 1;&#xA;        &#x9;}&#xA;&#xA;        &#x9;if (notYetStarted)&#xA;        &#x9;{&#x9;&#xA;        &#x9;&#x9;std::shared_ptr&lt;fUML::Semantics::CommonBehavior::ClassifierBehaviorExecution> newExecution(fUML::Semantics::CommonBehavior::CommonBehaviorFactory::eInstance()->createClassifierBehaviorExecution());&#xA;        &#x9;&#x9;newExecution->setObjectActivation(getThisObjectActivationPtr());&#xA;        &#x9;&#x9;this->getClassifierBehaviorExecutions()->push_back(newExecution);&#xA;&#x9;&#x9;&#xA;&#x9;&#x9;&#x9;std::shared_ptr&lt;Bag&lt;uml::Class>> classifierBag;&#xA;&#x9;&#x9;&#x9;classifierBag->add(classifier);&#xA;        &#x9;&#x9;newExecution->execute(classifierBag, inputs);&#xA;&#xA;&#x9;&#x9;&#x9;dispatchNextEvent();&#xA;        &#x9;}&#xA;&#x9;}"/>
+            <details key="body" value="// Start EventDispatchLoop (if not already started)&#xA;&#x9;_startObjectBehavior();&#xA;&#xA;&#x9;if (classifier == nullptr)&#xA;&#x9;{&#xA;    &#x9;&#x9;DEBUG_INFO(&quot; Starting behavior for all classifiers...&quot;)&#xA;&#x9;&#x9;// *** Start all classifier behaviors concurrently. ***&#xA;&#x9;&#x9;const auto&amp; types = this->getObject()->getTypes();&#xA;&#xA;        &#x9;for (const auto&amp; classifier : *types)&#xA;       &#x9;&#x9;{&#xA;        &#x9;&#x9;auto type = std::dynamic_pointer_cast&lt;uml::Class>(classifier);&#xA;        &#x9;&#x9;if ((std::dynamic_pointer_cast&lt;uml::Behavior>(type) != nullptr) || (type->getClassifierBehavior() != nullptr))&#xA;&#x9;&#x9;&#x9;&#x9;{&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;std::shared_ptr&lt;Bag&lt;fUML::Semantics::CommonBehavior::ParameterValue>> parameterValue(new Bag&lt;fUML::Semantics::CommonBehavior::ParameterValue>());&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;this->startBehavior(type, parameterValue);&#xA;&#x9;&#x9;&#x9;&#x9;}&#xA;        &#x9;}&#xA;&#x9;}&#xA;&#x9;else&#xA;&#x9;{&#xA;    &#x9;DEBUG_INFO(&quot;Starting behavior for &quot;&lt;&lt; classifier->getName())&#xA;&#xA;&#x9;&#x9;bool notYetStarted = true;&#xA;        unsigned int i = 0;&#xA;&#x9;&#x9;unsigned int classifierBehaviorExecutionsSize = this->getClassifierBehaviorExecutions()->size();&#xA;        &#x9;while (notYetStarted &amp;&amp; i &lt; classifierBehaviorExecutionsSize)&#xA;       &#x9;&#x9;{&#xA;        &#x9;&#x9;notYetStarted = (this->getClassifierBehaviorExecutions()->at(i)->getClassifier() != classifier);&#xA;           &#x9; &#x9;++i;&#xA;        &#x9;}&#xA;        &#x9;if (notYetStarted)&#xA;        &#x9;{&#x9;&#xA;        &#x9;&#x9;/* fUML::Semantics::CommonBehavior::ClassifierBehaviorExecutionImpl::execute() MUST BE IMPLEMENTED&#xA;        &#x9;&#x9;auto newExecution(fUML::Semantics::CommonBehavior::CommonBehaviorFactory::eInstance()->createClassifierBehaviorExecution());&#xA;        &#x9;&#x9;newExecution->setObjectActivation(getThisObjectActivationPtr());&#xA;        &#x9;&#x9;this->getClassifierBehaviorExecutions()->push_back(newExecution);&#xA;&#x9;&#x9;&#x9;&#x9;auto classifierBag = std::make_shared&lt;Bag&lt;uml::Class>>();&#xA;&#x9;&#x9;&#x9;&#x9;classifierBag->add(classifier);&#xA;        &#x9;&#x9;newExecution->execute(classifierBag, inputs);&#xA;&#x9;&#x9;&#x9;&#x9;this->m_conditionVariable->notify_one();*/&#xA;        &#x9;}&#xA;&#x9;}"/>
           </eAnnotations>
           <eParameters name="classifier" ordered="false" eType="ecore:EClass http://www.eclipse.org/uml2/5.0.0/UML#//Class"/>
           <eParameters name="inputs" ordered="false" upperBound="-1" eType="#//Semantics/CommonBehavior/ParameterValue"/>
@@ -2235,25 +2237,25 @@
         </eOperations>
         <eOperations name="_register" ordered="false" lowerBound="1">
           <eAnnotations source="http://tu-ilmenau.de/see/codegen">
-            <details key="body" value="    DEBUG_INFO(&quot;object = &quot; &lt;&lt; this->getObject())&#xA;    DEBUG_INFO(&quot;accepter = &quot; &lt;&lt; accepter)&#xA;&#xA;    this->getWaitingEventAccepters()->push_back(accepter);&#xA;&#xA;&#x9;// For now, try running dispatch directly&#xA;&#x9;DEBUG_INFO(&quot; Directly dispatching next event.&quot;);&#xA;&#x9;this->dispatchNextEvent();"/>
+            <details key="body" value="DEBUG_INFO(&quot;object = &quot; &lt;&lt; this->getObject())&#xD;&#xA;    DEBUG_INFO(&quot;accepter = &quot; &lt;&lt; accepter)&#xD;&#xA;&#x9;std::unique_lock lock(*this->m_mutex);&#xD;&#xA;&#xD;&#xA;    this->m_waitingEventAccepters->push_back(accepter);&#xD;&#xA;&#xD;&#xA;&#x9;lock.unlock();&#xD;&#xA;&#x9;this->m_conditionVariable->notify_one();"/>
           </eAnnotations>
           <eParameters name="accepter" ordered="false" lowerBound="1" eType="#//Semantics/CommonBehavior/EventAccepter"/>
         </eOperations>
         <eOperations name="unregister" ordered="false" lowerBound="1">
           <eAnnotations source="http://tu-ilmenau.de/see/codegen">
-            <details key="body" value="DEBUG_INFO(&quot;object = &quot; &lt;&lt; this->getObject())&#xA;&#x9;DEBUG_INFO(&quot;accepter = &quot; &lt;&lt; accepter)&#xA;&#x9;this->getWaitingEventAccepters()->erase(accepter);&#xA;"/>
+            <details key="body" value="DEBUG_INFO(&quot;object = &quot; &lt;&lt; this->getObject())&#xA;&#x9;DEBUG_INFO(&quot;accepter = &quot; &lt;&lt; accepter)&#xA;&#x9;std::unique_lock lock(*m_mutex);&#xA;&#xA;&#x9;this->m_waitingEventAccepters->erase(accepter);&#xA;&#xA;&#x9;lock.unlock();&#xA;&#x9;this->m_conditionVariable->notify_one();"/>
           </eAnnotations>
           <eParameters name="accepter" ordered="false" lowerBound="1" eType="#//Semantics/CommonBehavior/EventAccepter"/>
         </eOperations>
         <eOperations name="send" lowerBound="1">
           <eAnnotations source="http://tu-ilmenau.de/see/codegen">
-            <details key="body" value="this->getEventPool()->push_back(std::dynamic_pointer_cast&lt;fUML::Semantics::CommonBehavior::EventOccurrence>(eventOccurrence->copy()));"/>
+            <details key="body" value="std::unique_lock lock(*m_mutex);&#xA;&#x9;this->m_eventPool->push_back(std::dynamic_pointer_cast&lt;fUML::Semantics::CommonBehavior::EventOccurrence>(eventOccurrence->copy()));&#xA;&#x9;&#xA;&#x9;lock.unlock();&#xA;&#x9;this->m_conditionVariable->notify_one();"/>
           </eAnnotations>
           <eParameters name="eventOccurrence" ordered="false" lowerBound="1" eType="#//Semantics/CommonBehavior/EventOccurrence"/>
         </eOperations>
         <eOperations name="dispatchNextEvent" ordered="false" lowerBound="1">
           <eAnnotations source="http://tu-ilmenau.de/see/codegen">
-            <details key="body" value="// Get the next event occurrence out of the event pool.&#xA;&#x9;// If there are one or more waiting event accepters with triggers that&#xA;&#x9;// match the event occurrence, then dispatch it to exactly one of those&#xA;&#x9;// waiting accepters.&#xA;&#x9;if (getEventPool()->size() > 0)&#xA;&#x9;{&#x9;&#xA;&#x9;&#x9;DEBUG_INFO(&quot;Event Pool not empty.&quot;)&#xA;&#xA; &#x9;&#x9;std::shared_ptr&lt;fUML::Semantics::CommonBehavior::EventOccurrence> eventOccurrence = retrieveNextEvent();&#xA;&#x9;&#x9;std::vector&lt;int> matchingEventAccepterIndexes;&#xA;&#xA; &#x9;&#x9;const std::shared_ptr&lt;Bag&lt;fUML::Semantics::CommonBehavior::EventAccepter>>&amp; waitingEventAccepters = this->getWaitingEventAccepters();&#xA;&#x9;&#x9;unsigned int waitingEventAcceptersSize = waitingEventAccepters->size();&#xA;&#xA;&#x9;&#x9;for (unsigned int i = 0; i &lt; waitingEventAcceptersSize; i++)&#xA;&#x9;&#x9;{&#xA;&#x9;&#x9;&#x9;DEBUG_INFO(&quot;checking next eventAccepter.&quot;)&#xA;&#xA; &#x9;&#x9;&#x9;const std::shared_ptr&lt;fUML::Semantics::CommonBehavior::EventAccepter>&amp; eventAccepter = waitingEventAccepters->at(i);&#xA; &#x9;&#x9;&#x9;if (eventAccepter->match(eventOccurrence))&#xA;&#x9;&#x9;&#x9;{&#xA;&#x9;&#x9;&#x9;&#x9;DEBUG_INFO(&quot;EventAccepter matches!&quot;)&#xA;&#x9;&#x9;&#x9;&#x9;matchingEventAccepterIndexes.push_back(i);&#xA;&#x9;&#x9;&#x9;}&#xA;&#x9;&#x9;}&#xA;&#x9;&#x9;if (matchingEventAccepterIndexes.size() > 0)&#xA;&#x9;&#x9;{&#xA;&#x9;&#x9;&#x9;DEBUG_INFO(&quot;At least one EventAccepter matches! Accepting...&quot;)&#xA;&#xA; &#x9;&#x9;// *** Choose one matching event accepter non-deterministically. ***&#xA;&#x9;&#x9;std::shared_ptr&lt;fUML::Semantics::Loci::ChoiceStrategy> Strategy = std::dynamic_pointer_cast&lt;fUML::Semantics::Loci::ChoiceStrategy>(getObject()->getLocus()->getFactory()->getStrategy(&quot;choice&quot;) );&#xA;&#x9;&#x9;int j = Strategy->choose(matchingEventAccepterIndexes.size());&#xA;&#x9;&#x9;int k = matchingEventAccepterIndexes.at(j - 1);&#xA;&#x9;&#x9;std::shared_ptr&lt;fUML::Semantics::CommonBehavior::EventAccepter> selectedEventAccepter = waitingEventAccepters->at(k);&#xA;&#x9;&#x9;waitingEventAccepters->erase(waitingEventAccepters->begin() + k);&#xA;&#x9;&#x9;selectedEventAccepter->accept(eventOccurrence);&#xA;&#x9;&#x9;}&#xA;&#x9;}"/>
+            <details key="body" value="// Get the next event occurrence out of the event pool.&#xA;&#x9;// If there are one or more waiting event accepters with triggers that&#xA;&#x9;// match the event occurrence, then dispatch it to exactly one of those&#xA;&#x9;// waiting accepters.&#xA;&#x9;if (this->getEventPool()->size() > 0)&#xA;&#x9;{&#x9;&#xA;&#x9;&#x9;DEBUG_INFO(&quot;Event Pool not empty. Trying to dispatch an EventOccurrence from the Pool.&quot;)&#xA; &#x9;&#x9;std::shared_ptr&lt;fUML::Semantics::CommonBehavior::EventOccurrence> eventOccurrence = this->retrieveNextEvent();&#xA;&#x9;&#x9;auto matchingEventAccepters = std::make_shared&lt;Bag&lt;fUML::Semantics::CommonBehavior::EventAccepter>>();&#xA;&#xA; &#x9;&#x9;const auto&amp; waitingEventAccepters = this->getWaitingEventAccepters();&#xA;&#x9;&#x9;for (const auto&amp; waitingEventAccepter : *waitingEventAccepters)&#xA;&#x9;&#x9;{&#xA;&#x9;&#x9;&#x9;DEBUG_INFO(&quot;Checking next EventAccepter for possible dispatching.&quot;)&#xA; &#x9;&#x9;&#x9;if (waitingEventAccepter->match(eventOccurrence))&#xA;&#x9;&#x9;&#x9;{&#xA;&#x9;&#x9;&#x9;&#x9;DEBUG_INFO(&quot;An EventAccepter matches!&quot;)&#xA;&#x9;&#x9;&#x9;&#x9;matchingEventAccepters->push_back(waitingEventAccepter);&#xA;&#x9;&#x9;&#x9;}&#xA;&#x9;&#x9;}&#xA;&#x9;&#x9;if (matchingEventAccepters->size() > 0)&#xA;&#x9;&#x9;{&#xA;&#x9;&#x9;&#x9;// Choose one matching event accepter non-deterministically.&#xA;&#x9;&#x9;&#x9;const auto&amp; strategy = std::dynamic_pointer_cast&lt;fUML::Semantics::Loci::ChoiceStrategy>(getObject()->getLocus()->getFactory()->getStrategy(&quot;choice&quot;));&#xA;&#x9;&#x9;&#x9;int chosenIndex = strategy->choose(matchingEventAccepters->size());&#xA;&#x9;&#x9;&#x9;const auto&amp; selectedEventAccepter = matchingEventAccepters->at(chosenIndex-1);&#xA;&#x9;&#x9;&#x9;waitingEventAccepters->erase(selectedEventAccepter);&#xA;&#x9;&#x9;&#x9;selectedEventAccepter->accept(eventOccurrence);&#xA;&#x9;&#x9;}&#xA;&#x9;}&#xA;&#x9;/*if (this->getEventPool()->size() > 0)&#xA;&#x9;{&#x9;&#xA;&#x9;&#x9;DEBUG_INFO(&quot;Event Pool not empty.&quot;)&#xA;&#xA; &#x9;&#x9;std::shared_ptr&lt;fUML::Semantics::CommonBehavior::EventOccurrence> eventOccurrence = this->retrieveNextEvent();&#xA;&#x9;&#x9;std::vector&lt;int> matchingEventAccepterIndexes;&#xA;&#xA; &#x9;&#x9;const std::shared_ptr&lt;Bag&lt;fUML::Semantics::CommonBehavior::EventAccepter>>&amp; waitingEventAccepters = this->getWaitingEventAccepters();&#xA;&#x9;&#x9;unsigned int waitingEventAcceptersSize = waitingEventAccepters->size();&#xA;&#xA;&#x9;&#x9;for (unsigned int i = 0; i &lt; waitingEventAcceptersSize; i++)&#xA;&#x9;&#x9;{&#xA;&#x9;&#x9;&#x9;DEBUG_INFO(&quot;checking next eventAccepter.&quot;)&#xA;&#xA; &#x9;&#x9;&#x9;const std::shared_ptr&lt;fUML::Semantics::CommonBehavior::EventAccepter>&amp; eventAccepter = waitingEventAccepters->at(i);&#xA; &#x9;&#x9;&#x9;if (eventAccepter->match(eventOccurrence))&#xA;&#x9;&#x9;&#x9;{&#xA;&#x9;&#x9;&#x9;&#x9;DEBUG_INFO(&quot;EventAccepter matches!&quot;)&#xA;&#x9;&#x9;&#x9;&#x9;matchingEventAccepterIndexes.push_back(i);&#xA;&#x9;&#x9;&#x9;}&#xA;&#x9;&#x9;}&#xA;&#x9;&#x9;if (matchingEventAccepterIndexes.size() > 0)&#xA;&#x9;&#x9;{&#xA;&#x9;&#x9;&#x9;DEBUG_INFO(&quot;At least one EventAccepter matches! Accepting...&quot;)&#xA;&#xA; &#x9;&#x9;// *** Choose one matching event accepter non-deterministically. ***&#xA;&#x9;&#x9;std::shared_ptr&lt;fUML::Semantics::Loci::ChoiceStrategy> Strategy = std::dynamic_pointer_cast&lt;fUML::Semantics::Loci::ChoiceStrategy>(this->getObject()->getLocus()->getFactory()->getStrategy(&quot;choice&quot;) );&#xA;&#x9;&#x9;int j = Strategy->choose(matchingEventAccepterIndexes.size());&#xA;&#x9;&#x9;int k = matchingEventAccepterIndexes.at(j - 1);&#xA;&#x9;&#x9;std::shared_ptr&lt;fUML::Semantics::CommonBehavior::EventAccepter> selectedEventAccepter = waitingEventAccepters->at(k);&#xA;&#x9;&#x9;waitingEventAccepters->erase(waitingEventAccepters->begin() + k);&#xA;&#x9;&#x9;selectedEventAccepter->accept(eventOccurrence);&#xA;&#x9;&#x9;}&#xA;&#x9;}*/"/>
           </eAnnotations>
         </eOperations>
         <eOperations name="retrieveNextEvent" ordered="false" lowerBound="1" eType="#//Semantics/CommonBehavior/EventOccurrence">
@@ -2263,7 +2265,7 @@
         </eOperations>
         <eOperations name="_startObjectBehavior" ordered="false" lowerBound="1">
           <eAnnotations source="http://tu-ilmenau.de/see/codegen">
-            <details key="body" value="//What to do here??&#xA;return;"/>
+            <details key="body" value="//auto eventDispatchLoop = std::make_shared&lt;fUML::Semantics::CommonBehavior::EventDispatchLoop>();&#xA;&#x9;//eventDispatchLoop->startDispatchLoop(this->getThisObjectActivationPtr());&#xA;&#x9;if (!m_memberThread)&#xA;&#x9;{&#xA;&#x9;&#x9;m_memberThread = std::make_shared&lt;std::thread>(std::thread([this](){&#xA;&#x9;&#x9;&#x9;DEBUG_INFO(&quot;Starting an EventDispatchLoop as an own thread&quot;);&#xA;&#x9;&#x9;&#x9;while (true)&#xA;&#x9;&#x9;&#x9;{&#xA;&#x9;&#x9;&#x9;&#x9;// Wait as long as there is no event in the DispatchLoop&#xA;&#x9;&#x9;&#x9;&#x9;DEBUG_INFO(&quot;EventDispatchLoop is locking&quot;);&#xA;&#x9;&#x9;&#x9;&#x9;std::unique_lock lock(*m_mutex);&#xA;&#x9;&#x9;&#x9;&#x9;auto&amp; eventPool = this->m_eventPool;&#xA;&#x9;&#x9;&#x9;&#x9;this->m_conditionVariable->wait(lock, [&amp;eventPool]{return !eventPool->empty();});&#xA;&#x9;&#x9;&#x9;&#x9;DEBUG_INFO(&quot;EventDispatchLoop is dispatching&quot;);&#xA;&#x9;&#x9;&#x9;&#x9;lock.unlock();&#xA;&#x9;&#x9;&#x9;&#x9;this->dispatchNextEvent();&#xA;&#x9;&#x9;&#x9;&#x9;this->m_conditionVariable->notify_one();&#xA;&#x9;&#x9;&#x9;}&#xA;&#x9;&#x9;}));&#xA;&#x9;&#x9;m_memberThread->detach();&#xA;&#x9;}"/>
           </eAnnotations>
         </eOperations>
         <eStructuralFeatures xsi:type="ecore:EReference" name="waitingEventAccepters"
@@ -2275,11 +2277,43 @@
         <eStructuralFeatures xsi:type="ecore:EReference" name="classifierBehaviorExecutions"
             ordered="false" upperBound="-1" eType="#//Semantics/CommonBehavior/ClassifierBehaviorExecution"
             containment="true"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="conditionVariable"
+            lowerBound="1" eType="#//Semantics/StructuredClassifiers/Object">
+          <eAnnotations source="http://tu-ilmenau.de/see/codegen">
+            <details key="cppType" value="std::shared_ptr&lt;std::condition_variable>"/>
+          </eAnnotations>
+        </eStructuralFeatures>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="memberThread" lowerBound="1"
+            eType="#//Semantics/StructuredClassifiers/Object">
+          <eAnnotations source="http://tu-ilmenau.de/see/codegen">
+            <details key="cppType" value="std::shared_ptr&lt;std::thread>"/>
+          </eAnnotations>
+        </eStructuralFeatures>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="mutex" lowerBound="1"
+            eType="#//Semantics/StructuredClassifiers/Object">
+          <eAnnotations source="http://tu-ilmenau.de/see/codegen">
+            <details key="cppType" value="std::shared_ptr&lt;std::mutex>"/>
+          </eAnnotations>
+        </eStructuralFeatures>
       </eClassifiers>
       <eClassifiers xsi:type="ecore:EClass" name="EventDispatchLoop">
         <eAnnotations source="http://tu-ilmenau.de/see/codegen">
-          <details key="doNotGenerate" value="Class 'EventDispatchLoop' is excluded from generation because event handling is currently not supported."/>
+          <details key="COMMENTdoNotGenerate"/>
+          <details key="includes" value="#include &lt;thread>&#xD;&#xA;#include &lt;mutex>&#xD;&#xA;#include &lt;condition_variable>"/>
+          <details key="interfaceIncludes" value="#include &lt;thread>&#xD;&#xA;#include &lt;mutex>&#xD;&#xA;#include &lt;condition_variable>"/>
+          <details key="implIncludes" value="#include &lt;thread>&#xD;&#xA;#include &lt;mutex>&#xD;&#xA;#include &lt;condition_variable>"/>
         </eAnnotations>
+        <eOperations name="startDispatchLoop" ordered="false" lowerBound="1">
+          <eAnnotations source="http://tu-ilmenau.de/see/codegen">
+            <details key="body" value="if (!m_memberThread)&#xD;&#xA;&#x9;{&#xD;&#xA;&#x9;&#x9;m_memberThread = std::make_shared&lt;std::thread>(std::thread([&amp;objectActivation](){&#xD;&#xA;&#x9;&#x9;&#x9;DEBUG_INFO(&quot;Starting an EventDispatchLoop as an own thread&quot;);&#xD;&#xA;&#x9;&#x9;&#x9;while (true)&#xD;&#xA;&#x9;&#x9;&#x9;{&#xD;&#xA;&#x9;&#x9;&#x9;&#x9;// Wait as long as there is no event in the DispatchLoop&#xD;&#xA;&#x9;&#x9;&#x9;&#x9;std::unique_lock lock(*objectActivation->getMutex());&#xD;&#xA;&#x9;&#x9;&#x9;&#x9;auto&amp; eventPool = objectActivation->getEventPool();&#xD;&#xA;&#x9;&#x9;&#x9;&#x9;objectActivation->getConditionVariable()->wait(lock, [&amp;eventPool]{return !eventPool->empty();});&#xD;&#xA;&#xD;&#xA;&#x9;&#x9;&#x9;&#x9;objectActivation->dispatchNextEvent();&#xD;&#xA;&#xD;&#xA;&#x9;&#x9;&#x9;&#x9;lock.unlock();&#xD;&#xA;&#x9;&#x9;&#x9;&#x9;objectActivation->getConditionVariable()->notify_one();&#xD;&#xA;&#x9;&#x9;&#x9;}&#xD;&#xA;&#x9;&#x9;}));&#xD;&#xA;&#x9;&#x9;m_memberThread->detach();&#xD;&#xA;&#x9;}"/>
+          </eAnnotations>
+          <eParameters name="objectActivation" lowerBound="1" eType="#//Semantics/CommonBehavior/ObjectActivation"/>
+        </eOperations>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="memberThread" eType="#//Semantics/StructuredClassifiers/Object">
+          <eAnnotations source="http://tu-ilmenau.de/see/codegen">
+            <details key="cppType" value="std::shared_ptr&lt;std::thread>"/>
+          </eAnnotations>
+        </eStructuralFeatures>
       </eClassifiers>
       <eClassifiers xsi:type="ecore:EClass" name="OpaqueBehaviorExecution" abstract="true"
           eSuperTypes="#//Semantics/CommonBehavior/Execution">
@@ -2337,11 +2371,14 @@
       <eClassifiers xsi:type="ecore:EClass" name="ChoiceStrategy" abstract="true"
           eSuperTypes="#//Semantics/Loci/SemanticStrategy">
         <eOperations name="choose" ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt">
+          <eAnnotations source="http://tu-ilmenau.de/see/codegen">
+            <details key="body" value="// This Operation is intended to be overridden by concrete ChoiceStrategy Subclasses.&#xA;&#x9;return -1;"/>
+          </eAnnotations>
           <eParameters name="size" ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
         </eOperations>
         <eOperations name="getName" ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
           <eAnnotations source="http://tu-ilmenau.de/see/codegen">
-            <details key="body" value="return &quot;choice&quot;;"/>
+            <details key="body" value="// The name of all ChoiceStrategys is &quot;choice&quot;&#xA;&#x9;return &quot;choice&quot;;"/>
           </eAnnotations>
         </eOperations>
       </eClassifiers>
@@ -2354,7 +2391,7 @@
             <details key="body" value="&#x9;std::shared_ptr &lt;fUML::Semantics::CommonBehavior::Execution> execution;&#xA;&#x9;int behaviorMetaElementID = behavior->getMetaElementID();&#xA;    if((behaviorMetaElementID == uml::umlPackage::OPAQUEBEHAVIOR_CLASS) || (behaviorMetaElementID == uml::umlPackage::FUNCTIONBEHAVIOR_CLASS))&#xA;    {&#xA;&#x9;//Currently not supported&#xA;        //execution = this->instantiateOpaqueBehaviorExecution(behavior);&#xA;    }&#xA;    else&#xA;    {&#xA;&#x9;&#x9;if(behaviorMetaElementID == uml::umlPackage::ACTIVITY_CLASS)&#xA;&#x9;&#x9;{&#xA;&#x9;&#x9;&#x9;execution = fUML::Semantics::Activities::ActivitiesFactory::eInstance()->createActivityExecution();&#xA;&#x9;&#x9;&#x9;execution->getTypes()->push_back(behavior);&#xA;            &#x9;&#x9;//execution->createFeatureValues();&#x9;&#xA;&#x9;&#x9;}&#xA;&#x9;&#x9;else{&#xA;&#x9;&#x9;&#x9;/*&#xA;&#x9;&#x9;&#x9;Should never be reached&#xA;&#x9;&#x9;&#x9;*/&#xA;&#x9;&#x9;&#x9;execution = std::dynamic_pointer_cast&lt;fUML::Semantics::CommonBehavior::Execution>(this->instantiateVisitor(behavior));&#xA;&#x9;&#x9;&#x9;if(execution != nullptr)&#xA;&#x9;&#x9;&#x9;{&#xA;&#x9;&#x9;&#x9;&#x9;execution->getTypes()->push_back(behavior);&#xA;            &#x9;&#x9;&#x9;//execution->createFeatureValues();&#xA;&#x9;&#x9;&#x9;}&#xA;&#x9;&#x9;}&#xA;    }&#xA;&#xA;    if(nullptr == execution)&#xA;    {&#xA;        std::cerr &lt;&lt; &quot;[createExecution] Execution is null&quot; &lt;&lt; std::endl;&#xA;        return nullptr;&#xA;    }&#xA;    this->getLocus().lock()->add(execution);&#xA;&#x9;execution->setLocus(this->getLocus().lock());&#xA;&#xA;&#xA;    if(context == nullptr)&#xA;    {&#xA;        if(execution != nullptr)&#xA;        {&#xA;&#x9;  /*&#xA;&#x9;  Setting the execution as the context of itself creates a circular dependecy between shared_ptrs,&#xA;&#x9;  which results in a memory leak.&#xA;&#x9;  Since the execution context should not be needed if the executed behavior does not have a context,&#xA;&#x9;  this line is commented out&#xA;&#x9;  */&#xA;            //execution->setContext(execution);&#xA;        }&#xA;    }&#xA;    else&#xA;    {&#xA;        if(execution != nullptr)&#xA;        {&#xA;            execution->setContext(context);&#xA;        }&#xA;    }&#xA;&#xA;    return execution;"/>
           </eAnnotations>
           <eParameters name="behavior" ordered="false" lowerBound="1" eType="ecore:EClass http://www.eclipse.org/uml2/5.0.0/UML#//Behavior"/>
-          <eParameters name="context" ordered="false" eType="ecore:EClass http://www.eclipse.org/uml2/5.0.0/UML#//Element"/>
+          <eParameters name="context" ordered="false" eType="#//MDE4CPP_Extensions/FUML_Object"/>
         </eOperations>
         <eOperations name="createEvaluation" ordered="false" lowerBound="1" eType="#//Semantics/Values/Evaluation">
           <eAnnotations source="http://tu-ilmenau.de/see/codegen">
@@ -2464,7 +2501,7 @@
             <details key="body" value="std::shared_ptr&lt;fUML::Semantics::CommonBehavior::Execution> execution = nullptr;&#xA;&#x9;if (auto locus = this->getLocus().lock())&#xA;&#x9;{&#xA;&#x9;&#x9;execution = locus->getFactory()->createExecution(behavior, context);&#xA;&#x9;}&#xA;&#xA;    if(nullptr == execution)&#xA;    {&#xA;        std::cerr &lt;&lt; &quot;[execute] Execution is null&quot; &lt;&lt; std::endl;&#xA;        return nullptr;&#xA;    }&#xA;&#xA;    for(const std::shared_ptr&lt;fUML::Semantics::CommonBehavior::ParameterValue>&amp; parameterValue : *inputs )&#xA;    {&#xA;        execution->setParameterValue(parameterValue);&#xA;    }&#xA;&#xA;    execution->execute();&#xA;    const std::shared_ptr&lt;Bag&lt;fUML::Semantics::CommonBehavior::ParameterValue>>&amp; outputValues = execution->getOutputParameterValues();&#xA;    execution->destroy();&#xA;&#xA;    return outputValues;"/>
           </eAnnotations>
           <eParameters name="behavior" ordered="false" lowerBound="1" eType="ecore:EClass http://www.eclipse.org/uml2/5.0.0/UML#//Behavior"/>
-          <eParameters name="context" ordered="false" eType="ecore:EClass http://www.eclipse.org/uml2/5.0.0/UML#//Element"/>
+          <eParameters name="context" ordered="false" eType="#//MDE4CPP_Extensions/FUML_Object"/>
           <eParameters name="inputs" ordered="false" upperBound="-1" eType="#//Semantics/CommonBehavior/ParameterValue"/>
         </eOperations>
         <eStructuralFeatures xsi:type="ecore:EReference" name="locus" ordered="false"
@@ -2543,7 +2580,11 @@
             containment="true"/>
       </eClassifiers>
       <eClassifiers xsi:type="ecore:EClass" name="SemanticStrategy" abstract="true">
-        <eOperations name="getName" ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+        <eOperations name="getName" ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
+          <eAnnotations source="http://tu-ilmenau.de/see/codegen">
+            <details key="body" value="// This Operation is intended to be overridden by concrete SemanticStrategy Subclasses.&#xA;&#x9;return &quot;&quot;;"/>
+          </eAnnotations>
+        </eOperations>
       </eClassifiers>
       <eClassifiers xsi:type="ecore:EClass" name="SemanticVisitor" abstract="true">
         <eOperations name="_endIsolation" ordered="false" lowerBound="1">
@@ -3048,7 +3089,7 @@
       <eClassifiers xsi:type="ecore:EClass" name="Object" eSuperTypes="#//Semantics/StructuredClassifiers/ExtensionalValue">
         <eAnnotations source="http://tu-ilmenau.de/see/codegen">
           <details key="implIncludes" value="#include &quot;fUML/Semantics/StructuredClassifiers/DispatchStrategy.hpp&quot;&#xA;#include &quot;fUML/Semantics/Loci/ExecutionFactory.hpp&quot;&#xA;#include &quot;fUML/Semantics/CommonBehavior/CommonBehaviorFactory.hpp&quot;&#xA;#include &quot;fUML/Semantics/CommonBehavior/CommonBehaviorPackage.hpp&quot;&#xA;#include &quot;uml/umlFactory.hpp&quot;&#xA;#include &quot;uml/Class.hpp&quot;&#xA;#include &quot;uml/Classifier.hpp&quot;"/>
-          <details key="doNotGenerate" value="Class 'Object' is excluded from generation because it is obsolete.&#xA;Objects are represented by class uml::Element in this fUML implementation.&#xA;This is possible because in MDE4CPP, all C++ classes generated from UML classes inherit from uml::Element.&#xA;"/>
+          <details key="doNotGenerate" value="Class 'Object' is excluded from generation because it is obsolete.&#xA;Objects are represented by class fUML::MDE4CPP_Extensions::FUML_Object in this fUML implementation.&#xA;This is possible because in MDE4CPP, all C++ classes generated from UML classes can be used directly as their own objects.&#xA;All Functionalities provided by this fUML::StructuredClassifiers::Object is included in the FUML_Object which is the base class for all generated C++ classes"/>
         </eAnnotations>
         <eOperations name="startBehavior" ordered="false" lowerBound="1">
           <eAnnotations source="http://tu-ilmenau.de/see/codegen">

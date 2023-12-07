@@ -7,17 +7,17 @@
 
 #include "abstractDataTypes/SubsetUnion.hpp"
 //metametamodel classes
-#include "ecore/EEnum.hpp"
-#include "ecore/EStringToStringMapEntry.hpp"
-#include "ecore/EAnnotation.hpp"
-#include "ecore/EClass.hpp"
-#include "ecore/EOperation.hpp"
-#include "ecore/EReference.hpp"
 #include "ecore/EEnumLiteral.hpp"
-#include "ecore/EAttribute.hpp"
+#include "ecore/EAnnotation.hpp"
+#include "ecore/EStringToStringMapEntry.hpp"
 #include "ecore/EGenericType.hpp"
-#include "ecore/EDataType.hpp"
+#include "ecore/EOperation.hpp"
+#include "ecore/EAttribute.hpp"
 #include "ecore/EParameter.hpp"
+#include "ecore/EEnum.hpp"
+#include "ecore/EClass.hpp"
+#include "ecore/EDataType.hpp"
+#include "ecore/EReference.hpp"
 
 //depending model packages
 #include "PSSM/PSSMPackage.hpp"
@@ -348,7 +348,9 @@ void StateMachinesPackageImpl::createStateMachineExecutionContent(std::shared_pt
 {
 	m_stateMachineExecution_Class = factory->createEClass_as_eClassifiers_in_EPackage(package, STATEMACHINEEXECUTION_CLASS);
 	
+	m_stateMachineExecution_Attribute_conditionVariable = factory->createEReference_as_eReferences_in_EClass(m_stateMachineExecution_Class, STATEMACHINEEXECUTION_ATTRIBUTE_CONDITIONVARIABLE);
 	m_stateMachineExecution_Attribute_configuration = factory->createEReference_as_eReferences_in_EClass(m_stateMachineExecution_Class, STATEMACHINEEXECUTION_ATTRIBUTE_CONFIGURATION);
+	m_stateMachineExecution_Attribute_mutex = factory->createEReference_as_eReferences_in_EClass(m_stateMachineExecution_Class, STATEMACHINEEXECUTION_ATTRIBUTE_MUTEX);
 	m_stateMachineExecution_Attribute_regionActivations = factory->createEReference_as_eReferences_in_EClass(m_stateMachineExecution_Class, STATEMACHINEEXECUTION_ATTRIBUTE_REGIONACTIVATIONS);
 	
 	m_stateMachineExecution_Operation_execute = factory->createEOperation_as_eOperations_in_EClass(m_stateMachineExecution_Class, STATEMACHINEEXECUTION_OPERATION_EXECUTE);

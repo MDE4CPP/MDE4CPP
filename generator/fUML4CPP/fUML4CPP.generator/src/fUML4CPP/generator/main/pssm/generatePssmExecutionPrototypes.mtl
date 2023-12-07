@@ -37,18 +37,26 @@ Create all PSSM-specific Execution Prototypes  for the Model ExecutionFactory
 DEBUG_INFO("Creating StateMachineActivation for [aStateMachine.eClass().name/] '[aStateMachine.metamodelElementName()/]'");
 auto stateMachine = [aStateMachine.generatePackageGetterCall()/];
 [aStateMachine.getVisitorVariableName()/] = PSSM::Semantics::StateMachines::StateMachinesFactory::eInstance()->createStateMachineExecution();
-[aStateMachine.getVisitorVariableName()/]->setContext(context);
+
+[if (aStateMachine._context = aStateMachine.oclAsType(BehavioredClassifier))]
+[aStateMachine.getVisitorVariableName()/]->setContext([aStateMachine.getVisitorVariableName()/]);
+[else]
+if (context == nullptr) [aStateMachine.getVisitorVariableName()/]->setContext([aStateMachine.getVisitorVariableName()/]);
+else [aStateMachine.getVisitorVariableName()/]->setContext(context);
+[/if]
+
 [aStateMachine.getVisitorVariableName()/]->getTypes()->push_back(stateMachine);
 // Place this Execution in the Locus
 this->getLocus().lock()->add([aStateMachine.getVisitorVariableName()/]);
 [aStateMachine.getVisitorVariableName()/]->setLocus(this->getLocus().lock());
 // Create a StateMachineConfiguration for this Execution
 PSSM::Semantics::StateMachines::StateMachinesFactory::eInstance()->createStateMachineConfiguration_as_configuration_in_StateMachineExecution([aStateMachine.getVisitorVariableName()/]);
-// Create an ObjectActivation for the Context Object of this StateMachineExecution and {TBD} start its Event Dispatch Loop.
-[if (aStateMachine._context = aStateMachine.oclAsType(BehavioredClassifier))]
-[aStateMachine.getVisitorVariableName()/]->startBehavior([aStateMachine._context.generatePackageGetterCall()/], nullptr);
+// Create an ObjectActivation for the Context Object of this StateMachineExecution and start its Event Dispatch Loop.
+[if (aStateMachine._context.oclIsKindOf(Class))]
+[aStateMachine.getVisitorVariableName()/]->getContext()->setLocus(this->getLocus().lock());
+[aStateMachine.getVisitorVariableName()/]->getContext()->startBehavior([aStateMachine._context.generatePackageGetterCall()/], nullptr);
 [else]
-context->startBehavior([aStateMachine._context.generatePackageGetterCall()/], nullptr);
+[aStateMachine.getVisitorVariableName()/]->getContext()->startBehavior(nullptr, nullptr);
 [/if]
 [for (aSmRegion : Region | aStateMachine.region) before ('\t\n// Create Regions of StateMachine\n')]
 [aSmRegion.generateSmRegionActivationCreation()/]
@@ -123,20 +131,16 @@ context->startBehavior([aStateMachine._context.generatePackageGetterCall()/], nu
 [template private generateStateBehaviorsReferences(aState : State) post(trim())]
 	[comment As Executions of all Behaviors are created by the framework already and the referencing happens in the UML part, this is obsolete /]
 	[if (not aState.entry.oclIsUndefined())]
-	
 	// Create [aState.entry.eClass().name/] for [aState.entry.eClass().name/] '[aState.entry.name/]' as State Entry
 	DEBUG_INFO("// Create [aState.entry.eClass().name/] for [aState.entry.eClass().name/] '[aState.entry.name/]' as State Entry");
-
 	[/if]
 	[if (not aState.doActivity.oclIsUndefined())]
 	// Create [aState.doActivity.eClass().name/] for [aState.doActivity.eClass().name/] '[aState.doActivity.name/];  as State doActivity
 	DEBUG_INFO("// Create [aState.doActivity.eClass().name/] for [aState.doActivity.eClass().name/] '[aState.doActivity.name/]' as State doActivity");
-
 	[/if]
 	[if (not aState.exit.oclIsUndefined())]
 	// Create [aState.exit.eClass().name/] for [aState.exit.eClass().name/] '[aState.exit.name/]' as State Exit
 	DEBUG_INFO("// Create [aState.exit.eClass().name/] for [aState.exit.eClass().name/] '[aState.exit.name/]' as State Exit");
-
 	[/if]
 [/template]
 

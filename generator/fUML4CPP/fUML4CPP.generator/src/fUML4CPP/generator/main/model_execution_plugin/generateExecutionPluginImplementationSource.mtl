@@ -113,7 +113,7 @@ void [packageName/]::initialize()
 	m_IsInitialized = true;
 }
 
-std::shared_ptr<Any> [packageName/]::executeActivity(std::shared_ptr<uml::Activity> activity, std::shared_ptr<Bag<Any>> parameterList, std::shared_ptr<uml::Element> element)
+std::shared_ptr<Any> [packageName/]::executeActivity(std::shared_ptr<uml::Activity> activity, std::shared_ptr<Bag<Any>> parameterList, std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_Object> element)
 {
 	if(!m_IsInitialized)
 	{
@@ -132,7 +132,7 @@ std::shared_ptr<Any> [packageName/]::executeActivity(std::shared_ptr<uml::Activi
 	return nullptr;
 }
 
-std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> [packageName/]::executeBehavior(std::shared_ptr<uml::Behavior> behavior, std::shared_ptr<uml::Element> context, std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> inputs)
+std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> [packageName/]::executeBehavior(std::shared_ptr<uml::Behavior> behavior, std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_Object> context, std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> inputs)
 {
 	if(!m_IsInitialized)
 	{
@@ -142,7 +142,7 @@ std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> [packageNa
 	return this->m_executor->execute(behavior, context, inputs);
 }
 
-std::shared_ptr<Any> [packageName/]::executeStateMachine(std::shared_ptr<uml::StateMachine> stateMachine, std::shared_ptr<Bag<Any>> parameterList, std::shared_ptr<uml::Element> element)
+std::shared_ptr<Any> [packageName/]::executeStateMachine(std::shared_ptr<uml::StateMachine> stateMachine, std::shared_ptr<Bag<Any>> parameterList, std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_Object> element)
 {
 	if(!m_IsInitialized)
 	{

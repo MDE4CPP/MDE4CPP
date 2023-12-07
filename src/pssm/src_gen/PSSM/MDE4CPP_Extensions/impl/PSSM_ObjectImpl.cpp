@@ -42,10 +42,10 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "ecore/ecoreFactory.hpp"
-#include "fUML/Semantics/CommonBehavior/CommonBehaviorFactory.hpp"
 #include "uml/umlFactory.hpp"
 #include "fUML/Semantics/Loci/LociFactory.hpp"
+#include "ecore/ecoreFactory.hpp"
+#include "fUML/Semantics/CommonBehavior/CommonBehaviorFactory.hpp"
 #include "uml/Class.hpp"
 #include "uml/Comment.hpp"
 #include "ecore/EAnnotation.hpp"
@@ -58,8 +58,8 @@
 #include "PSSM/PSSMPackage.hpp"
 #include "fUML/Semantics/CommonBehavior/CommonBehaviorPackage.hpp"
 #include "fUML/Semantics/Loci/LociPackage.hpp"
-#include "fUML/MDE4CPP_Extensions/MDE4CPP_ExtensionsPackage.hpp"
 #include "PSSM/MDE4CPP_Extensions/MDE4CPP_ExtensionsPackage.hpp"
+#include "fUML/MDE4CPP_Extensions/MDE4CPP_ExtensionsPackage.hpp"
 #include "ecore/ecorePackage.hpp"
 #include "uml/umlPackage.hpp"
 

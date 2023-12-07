@@ -154,11 +154,12 @@
 
 #include <exception> // used in Persistence
 #include "fUML/Semantics/Loci/LociFactory.hpp"
-#include "uml/umlFactory.hpp"
 #include "fUML/Semantics/CommonBehavior/CommonBehaviorFactory.hpp"
+#include "uml/umlFactory.hpp"
 #include "uml/Behavior.hpp"
 #include "uml/Element.hpp"
 #include "fUML/Semantics/CommonBehavior/Execution.hpp"
+#include "fUML/MDE4CPP_Extensions/FUML_Object.hpp"
 #include "fUML/Semantics/Loci/Locus.hpp"
 #include "uml/OpaqueBehavior.hpp"
 #include "uml/PrimitiveType.hpp"
@@ -166,10 +167,11 @@
 #include "fUML/Semantics/Loci/SemanticVisitor.hpp"
 #include "uml/ValueSpecification.hpp"
 //Factories and Package includes
-#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/SemanticsPackage.hpp"
+#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/CommonBehavior/CommonBehaviorPackage.hpp"
 #include "fUML/Semantics/Loci/LociPackage.hpp"
+#include "fUML/MDE4CPP_Extensions/MDE4CPP_ExtensionsPackage.hpp"
 #include "uml/umlPackage.hpp"
 
 using namespace fUML::Semantics::Loci;
@@ -271,7 +273,7 @@ void ExecutionFactoryImpl::assignStrategy(const std::shared_ptr<fUML::Semantics:
 
 
 
-std::shared_ptr<fUML::Semantics::CommonBehavior::Execution> ExecutionFactoryImpl::createExecution(const std::shared_ptr<uml::Behavior>& behavior, const std::shared_ptr<uml::Element>& context)
+std::shared_ptr<fUML::Semantics::CommonBehavior::Execution> ExecutionFactoryImpl::createExecution(const std::shared_ptr<uml::Behavior>& behavior, const std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_Object>& context)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -1057,8 +1059,8 @@ std::shared_ptr<Any> ExecutionFactoryImpl::eInvoke(int operationID, const std::s
 			this->assignStrategy(incoming_param_strategy);
 			break;
 		}
-		// fUML::Semantics::Loci::ExecutionFactory::createExecution(uml::Behavior, uml::Element) : fUML::Semantics::CommonBehavior::Execution: 2395760303
-		case LociPackage::EXECUTIONFACTORY_OPERATION_CREATEEXECUTION_BEHAVIOR_ELEMENT:
+		// fUML::Semantics::Loci::ExecutionFactory::createExecution(uml::Behavior, fUML::MDE4CPP_Extensions::FUML_Object) : fUML::Semantics::CommonBehavior::Execution: 1811139829
+		case LociPackage::EXECUTIONFACTORY_OPERATION_CREATEEXECUTION_BEHAVIOR_FUML_OBJECT:
 		{
 			//Retrieve input parameter 'behavior'
 			//parameter 0
@@ -1088,7 +1090,7 @@ std::shared_ptr<Any> ExecutionFactoryImpl::eInvoke(int operationID, const std::s
 		
 			//Retrieve input parameter 'context'
 			//parameter 1
-			std::shared_ptr<uml::Element> incoming_param_context;
+			std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_Object> incoming_param_context;
 			Bag<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
 			{
 				std::shared_ptr<ecore::EcoreAny> ecoreAny = std::dynamic_pointer_cast<ecore::EcoreAny>((*incoming_param_context_arguments_citer));
@@ -1097,7 +1099,7 @@ std::shared_ptr<Any> ExecutionFactoryImpl::eInvoke(int operationID, const std::s
 					try
 					{
 						std::shared_ptr<ecore::EObject> _temp = ecoreAny->getAsEObject();
-						incoming_param_context = std::dynamic_pointer_cast<uml::Element>(_temp);
+						incoming_param_context = std::dynamic_pointer_cast<fUML::MDE4CPP_Extensions::FUML_Object>(_temp);
 					}
 					catch(...)
 					{

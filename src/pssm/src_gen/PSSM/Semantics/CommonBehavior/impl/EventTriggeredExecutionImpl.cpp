@@ -35,15 +35,20 @@
 #include "ecore/ecorePackage.hpp"
 //Includes from codegen annotation
 #include "fUML/FUMLFactory.hpp"
+#include "fUML/MDE4CPP_Extensions/FUML_SignalInstance.hpp"
+#include "fUML/Semantics/CommonBehavior/SignalEventOccurrence.hpp"
+#include "PSSM/Semantics/CommonBehavior/CallEventOccurrence.hpp"
+#include "PSSM/Semantics/CommonBehavior/CallEventExecution.hpp"
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "fUML/Semantics/CommonBehavior/CommonBehaviorFactory.hpp"
-#include "ecore/ecoreFactory.hpp"
 #include "uml/umlFactory.hpp"
 #include "fUML/Semantics/Loci/LociFactory.hpp"
+#include "ecore/ecoreFactory.hpp"
+#include "fUML/Semantics/CommonBehavior/CommonBehaviorFactory.hpp"
+#include "fUML/MDE4CPP_Extensions/MDE4CPP_ExtensionsFactory.hpp"
 #include "uml/Behavior.hpp"
 #include "uml/Classifier.hpp"
 #include "uml/Comment.hpp"
@@ -51,15 +56,17 @@
 #include "uml/Element.hpp"
 #include "fUML/Semantics/CommonBehavior/EventOccurrence.hpp"
 #include "fUML/Semantics/CommonBehavior/Execution.hpp"
+#include "fUML/MDE4CPP_Extensions/FUML_Object.hpp"
 #include "fUML/Semantics/Loci/Locus.hpp"
 #include "fUML/Semantics/CommonBehavior/ObjectActivation.hpp"
 #include "fUML/Semantics/CommonBehavior/ParameterValue.hpp"
 //Factories and Package includes
-#include "PSSM/PSSMPackage.hpp"
 #include "PSSM/Semantics/SemanticsPackage.hpp"
+#include "PSSM/PSSMPackage.hpp"
 #include "fUML/Semantics/CommonBehavior/CommonBehaviorPackage.hpp"
 #include "PSSM/Semantics/CommonBehavior/CommonBehaviorPackage.hpp"
 #include "fUML/Semantics/Loci/LociPackage.hpp"
+#include "fUML/MDE4CPP_Extensions/MDE4CPP_ExtensionsPackage.hpp"
 #include "ecore/ecorePackage.hpp"
 #include "uml/umlPackage.hpp"
 
@@ -127,23 +134,122 @@ std::shared_ptr<ecore::EObject> EventTriggeredExecutionImpl::copy() const
 //*********************************
 // Operations
 //*********************************
-std::shared_ptr<Any> EventTriggeredExecutionImpl::copy()
+
+
+void EventTriggeredExecutionImpl::execute()
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
-	auto copy = std::shared_ptr<EventTriggeredExecutionImpl>(new EventTriggeredExecutionImpl);
-	copy->setTriggeringEventOccurrence(this->getTriggeringEventOccurrence());
-	copy->setWrappedExecution(this->getWrappedExecution());
-	return std::make_shared<Any>(copy);
-
+	// The Behavior handled by the wrappedExecution is parameterized
+	// with the input ParameterValues provided by the triggeringEventOccurrence.
+	// The Behavior is then executed and finally, the outputParameterValues are passed to the triggeringEventOccurrence 
+	// (only occurs in the case of a CallEventOccurrence).
+	if(this->getWrappedExecution() != nullptr && this->getTriggeringEventOccurrence() != nullptr)
+	{
+		const auto& inputParameterValues = this->initialize(this->getWrappedExecution()->getBehavior());
+		for (const auto& inputParameterValue : *inputParameterValues)
+		{
+			this->getWrappedExecution()->setParameterValue(inputParameterValue);
+		}
+		this->getWrappedExecution()->execute();
+		this->finalize();
+	}
 	//end of body
 }
 
+void EventTriggeredExecutionImpl::finalize()
+{
+	//ADD_COUNT(__PRETTY_FUNCTION__)
+	//generated from body annotation
+	// Transfer output ParameterValues (produced by the wrapped execution) back to
+	// the Execution associated to the CallEventOccurrence.
+	// If an effect, entry or exit Behavior is not just input-conforming, then the
+	// values of its output Parameters are passed out of its Behavior Execution on
+	// its completion as potential values for the output Parameters of the called 
+	// Operation.
+	// Notes: 
+	//    If the CallEvent is for a synchronous call, then the call ends at the end
+	//    of the triggered run-to-completion (RTC) step. If the called Operation has
+	//    output Parameters, then the values returned for those parameters are those
+	//    produced by the last effect, entry or exit Behavior to complete its execution
+	//    during the RTC step. Since some or all of those Behaviors may execute concurrently,
+	//    which one completes last may be only partially determined by the specified semantics.
+	//    The values returned may legally be those produced any Behavior that produces potential
+	//    output values and is the last to complete in any execution trace for the RTC
+	//    step consistent with the specified StateMachine semantics.
+	this->_beginIsolation();
+	if (const auto& callEventOccurrence = std::dynamic_pointer_cast<PSSM::Semantics::CommonBehavior::CallEventOccurrence>(this->getTriggeringEventOccurrence()))
+	{
+		const auto& outputParameterValues = this->getWrappedExecution()->getOutputParameterValues();
+		if(this->getWrappedExecution()->getBehavior()->outputParameters()->size() == outputParameterValues->size())
+		{
+			const auto& behaviorOutputParameters = callEventOccurrence->getExecution()->getBehavior()->outputParameters();
+			for (unsigned int i = 0; i < behaviorOutputParameters->size(); ++i)
+			{
+				auto parameterValue = fUML::Semantics::CommonBehavior::CommonBehaviorFactory::eInstance()->createParameterValue();
+				parameterValue->setParameter(behaviorOutputParameters->at(i));
+				parameterValue->getValues()->insert(*(outputParameterValues->at(i)->getValues()));
+				callEventOccurrence->getExecution()->setParameterValue(parameterValue);
+			}
+		}
 
+	}
+	this->_endIsolation();
+	//end of body
+}
 
-
-
-
+std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> EventTriggeredExecutionImpl::initialize(const std::shared_ptr<uml::Behavior>& behavior)
+{
+	//ADD_COUNT(__PRETTY_FUNCTION__)
+	//generated from body annotation
+	// Transfer input parameter values of the call event execution
+	// to the wrapped execution if possible. 
+	// Two situations are considered:
+	// 1. If the triggering EventOccurrence is for a SignalEvent, then all
+	//    executed Behaviors will have either one parameter or no parameters.
+	//    If the Behavior has one Parameter, the SignalInstance corresponding to
+	//    the SignalEventOccurrence is passed into the Behavior Execution as
+	//    the value of its parameter.
+	// 2. If the triggering EventOccurrence is for a CallEvent, then all executed
+	//    Behaviors will have either no Parameters or signatures that conform or
+	//    input conform to the Operation being called.
+	//    If a Behavior has parameters, then the values of the input parameters
+	//    for the call are passed into the Behavior Execution as the values
+	//    of the corresponding input parameters of the Behavior.
+	this->_beginIsolation();
+	auto parameterValues = std::make_shared<Bag<fUML::Semantics::CommonBehavior::ParameterValue>>();
+	if (behavior->getOwnedParameter()->size() > 0)
+	{
+		if (const auto& signalEventOccurrence = std::dynamic_pointer_cast<fUML::Semantics::CommonBehavior::SignalEventOccurrence>(this->getTriggeringEventOccurrence()))
+		{
+			if (behavior->inputParameters()->size() == 1)
+			{
+				auto parameterValue = fUML::Semantics::CommonBehavior::CommonBehaviorFactory::eInstance()->createParameterValue();
+				parameterValue->setParameter(behavior->inputParameters()->at(0));
+				parameterValue->getValues()->push_back(std::dynamic_pointer_cast<Any>(signalEventOccurrence->getSignalInstance()));
+				parameterValues->push_back(parameterValue);
+			}
+		}
+		else if (const auto& callEventOccurrence = std::dynamic_pointer_cast<PSSM::Semantics::CommonBehavior::CallEventOccurrence>(this->getTriggeringEventOccurrence()))
+		{
+			const auto& behaviorInputParameters = behavior->inputParameters();
+			const auto& inputParameterValues = callEventOccurrence->getExecution()->getInputParameterValues();
+			if (behaviorInputParameters->size() == inputParameterValues->size())
+			{
+				for (unsigned int i = 0; i < behaviorInputParameters->size(); ++i)
+				{
+					auto parameterValue = fUML::Semantics::CommonBehavior::CommonBehaviorFactory::eInstance()->createParameterValue();
+					parameterValue->setParameter(behaviorInputParameters->at(i));
+					parameterValue->getValues()->insert(*(inputParameterValues->at(i)->getValues()));
+					parameterValues->push_back(parameterValue);
+				}
+			}
+		}
+	}
+	this->_endIsolation();
+	return parameterValues;
+	//end of body
+}
 
 
 
@@ -420,10 +526,49 @@ std::shared_ptr<Any> EventTriggeredExecutionImpl::eInvoke(int operationID, const
  
   	switch(operationID)
 	{
-		// PSSM::Semantics::CommonBehavior::EventTriggeredExecution::copy() : Any: 285431960
-		case CommonBehaviorPackage::EVENTTRIGGEREDEXECUTION_OPERATION_COPY:
+		// PSSM::Semantics::CommonBehavior::EventTriggeredExecution::execute(): 3241661790
+		case CommonBehaviorPackage::EVENTTRIGGEREDEXECUTION_OPERATION_EXECUTE:
 		{
-			result = eAny(this->copy(), 0, false);
+			this->execute();
+			break;
+		}
+		// PSSM::Semantics::CommonBehavior::EventTriggeredExecution::finalize(): 4224883493
+		case CommonBehaviorPackage::EVENTTRIGGEREDEXECUTION_OPERATION_FINALIZE:
+		{
+			this->finalize();
+			break;
+		}
+		// PSSM::Semantics::CommonBehavior::EventTriggeredExecution::initialize(uml::Behavior) : fUML::Semantics::CommonBehavior::ParameterValue[*]: 846647309
+		case CommonBehaviorPackage::EVENTTRIGGEREDEXECUTION_OPERATION_INITIALIZE_BEHAVIOR:
+		{
+			//Retrieve input parameter 'behavior'
+			//parameter 0
+			std::shared_ptr<uml::Behavior> incoming_param_behavior;
+			Bag<Any>::const_iterator incoming_param_behavior_arguments_citer = std::next(arguments->begin(), 0);
+			{
+				std::shared_ptr<ecore::EcoreAny> ecoreAny = std::dynamic_pointer_cast<ecore::EcoreAny>((*incoming_param_behavior_arguments_citer));
+				if(ecoreAny)
+				{
+					try
+					{
+						std::shared_ptr<ecore::EObject> _temp = ecoreAny->getAsEObject();
+						incoming_param_behavior = std::dynamic_pointer_cast<uml::Behavior>(_temp);
+					}
+					catch(...)
+					{
+						DEBUG_ERROR("Invalid type stored in 'ecore::EcoreAny' for parameter 'behavior'. Failed to invoke operation 'initialize'!")
+						return nullptr;
+					}
+				}
+				else
+				{
+					DEBUG_ERROR("Invalid instance of 'ecore::EcoreAny' for parameter 'behavior'. Failed to invoke operation 'initialize'!")
+					return nullptr;
+				}
+			}
+		
+			std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> resultList = this->initialize(incoming_param_behavior);
+			return eEcoreContainerAny(resultList,fUML::Semantics::CommonBehavior::CommonBehaviorPackage::PARAMETERVALUE_CLASS);
 			break;
 		}
 

@@ -35,14 +35,16 @@
 #include "ecore/ecorePackage.hpp"
 //Includes from codegen annotation
 #include "uml/State.hpp"
+#include "PSSM/Semantics/StateMachines/StateMachineExecution.hpp"
+#include <condition_variable>
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "fUML/Semantics/Loci/LociFactory.hpp"
 #include "uml/umlFactory.hpp"
 #include "PSSM/Semantics/StateMachines/StateMachinesFactory.hpp"
+#include "fUML/Semantics/Loci/LociFactory.hpp"
 #include "fUML/Semantics/CommonBehavior/EventOccurrence.hpp"
 #include "PSSM/Semantics/StateMachines/InitialPseudostateActivation.hpp"
 #include "uml/NamedElement.hpp"
@@ -54,8 +56,8 @@
 #include "uml/Vertex.hpp"
 #include "PSSM/Semantics/StateMachines/VertexActivation.hpp"
 //Factories and Package includes
-#include "PSSM/PSSMPackage.hpp"
 #include "PSSM/Semantics/SemanticsPackage.hpp"
+#include "PSSM/PSSMPackage.hpp"
 #include "fUML/Semantics/CommonBehavior/CommonBehaviorPackage.hpp"
 #include "fUML/Semantics/Loci/LociPackage.hpp"
 #include "PSSM/Semantics/StateMachines/StateMachinesPackage.hpp"
@@ -170,8 +172,8 @@ bool RegionActivationImpl::canPropagateExecution(const std::shared_ptr<PSSM::Sem
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
+	// Check if given Transition enters a Vertex of this Region
 	bool propagate = true;
-	// Check if given Transition enters a Vertex of this Regionsharedptr<DerivedAbstract> name = std::dynamic_pointer_cast<Vertex>(einSharedPointer)
 	if (this->getVertexActivation(std::dynamic_pointer_cast<uml::Vertex>(enteringTransition->getTargetActivation()->getNode())) == nullptr)
 	{
 		auto initialPSActivation = this->getOrigin();
@@ -197,7 +199,7 @@ void RegionActivationImpl::enter(const std::shared_ptr<PSSM::Semantics::StateMac
 	}
 	else
 	{
-		if (auto parentStateActivation = std::dynamic_pointer_cast<StateActivation>(this->getParent()))
+		if (const auto& parentStateActivation = std::dynamic_pointer_cast<StateActivation>(this->getParent()))
 		{
 			parentStateActivation->getRegionActivations()->erase(this->getThisRegionActivationPtr());
 			if(parentStateActivation->hasCompleted())
@@ -215,10 +217,9 @@ void RegionActivationImpl::exit(const std::shared_ptr<PSSM::Semantics::StateMach
 	//generated from body annotation
 	// Exiting a Region implies exiting all of is active Vertices.
 	// Note: There is always a single active Vertex for a given Region.
-	for (int i = 0; i < int(m_vertexActivations->size()); ++i)
-	//for (auto& vertexActivation : this->getVertexActivations())
+	//for (int i = 0; i < int(m_vertexActivations->size()); ++i)
+	for (const auto& vertexActivation : *this->getVertexActivations())
 	{
-		auto vertexActivation = m_vertexActivations->at(i);
 		if (vertexActivation->isActive())
 		{
 			vertexActivation->exit(exitingTransition, eventOccurrence, nullptr);
@@ -234,9 +235,9 @@ std::shared_ptr<PSSM::Semantics::StateMachines::InitialPseudostateActivation> Re
 	//generated from body annotation
 	// Return, if any, the initial pseudo-state activation directly
 	// owned by this region.
-	for (auto& vertexActivation : *(this->m_vertexActivations))
+	for (const auto& vertexActivation : *(this->m_vertexActivations))
 	{
-		if (auto initialPSActivation = std::dynamic_pointer_cast<InitialPseudostateActivation>(vertexActivation))
+		if (const auto& initialPSActivation = std::dynamic_pointer_cast<InitialPseudostateActivation>(vertexActivation))
 		{
 			return initialPSActivation;
 		}
@@ -259,18 +260,22 @@ std::shared_ptr<PSSM::Semantics::StateMachines::VertexActivation> RegionActivati
 	// Matching rules (or):
 	//  1 - The node for which this Activation is an interpreter is the Vertex.
 	//  2 - The node for which this Activation is an interpreter redefines the Vertex 
-	for (auto& vertexActivation : *(this->m_vertexActivations))
+	for (const auto& vertexActivation : *this->m_vertexActivations)
 	{
 		if(vertexActivation->isVisitorFor(vertex))
 		{
 			return vertexActivation;
 		}
 	}
-	for (auto& vertexActivation : *(this->m_vertexActivations))
+	for (const auto& vertexActivation : *this->m_vertexActivations)
 	{
 		if(vertexActivation->isVisitorFor(vertex))
 		{
-			vertexActivation->getVertexActivation(vertex);
+			return vertexActivation;
+		}
+		else
+		{
+			return vertexActivation->getVertexActivation(vertex);
 		}
 	}
 	return nullptr;
@@ -307,15 +312,15 @@ bool RegionActivationImpl::isRedefined(const std::shared_ptr<Bag<uml::Transition
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
 	// Depth-first Check if given Transition is redefined by another Transition of given list.
-	for (auto& currentTransition : *transitions)
+	for (const auto& currentTransition : *transitions)
 	{
 		auto redefinedTransition = currentTransition->getRedefinedTransition();
 		while (redefinedTransition != nullptr) 
 		{
 			if (redefinedTransition == transition) 
-			{
 				return true;
-			}
+			else 
+				redefinedTransition = currentTransition->getRedefinedTransition();
 		}
 	}
 	return false;
@@ -328,7 +333,7 @@ void RegionActivationImpl::terminate()
 	//generated from body annotation
 	// Capture the semantics related to the termination of a Region. Regions typically
 	// get terminated when the owning StateMachine terminates.
-	for (auto& vertexActivation : *m_vertexActivations) 
+	for (const auto& vertexActivation : *m_vertexActivations) 
 	{
 		vertexActivation->terminate();
 	}
@@ -347,8 +352,10 @@ bool RegionActivationImpl::getIsCompleted() const
 }
 void RegionActivationImpl::setIsCompleted(bool _isCompleted)
 {
+	//generated from setterBody annotation
 	m_isCompleted = _isCompleted;
-	
+	std::dynamic_pointer_cast<PSSM::Semantics::StateMachines::StateMachineExecution>(this->getStateMachineExecution())->getConditionVariable()->notify_one(); 
+	//end of body
 }
 
 //*********************************

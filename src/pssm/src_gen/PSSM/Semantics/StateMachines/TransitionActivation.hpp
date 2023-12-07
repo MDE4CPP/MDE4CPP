@@ -93,9 +93,9 @@ namespace PSSM::Semantics::StateMachines
 			virtual bool isReached() = 0;
 			virtual bool isTraversed(bool staticCheck) = 0;
 			virtual bool isTriggered(bool staticCheck) = 0;
-			virtual void setSourceActivation(const std::shared_ptr<PSSM::Semantics::StateMachines::VertexActivation>& _) = 0;
+			virtual void setSourceActivation(const std::shared_ptr<PSSM::Semantics::StateMachines::VertexActivation>& sourceActivation) = 0;
 			
-			virtual void setTargetActivation(const std::shared_ptr<PSSM::Semantics::StateMachines::VertexActivation>& _) = 0;
+			virtual void setTargetActivation(const std::shared_ptr<PSSM::Semantics::StateMachines::VertexActivation>& targetActivation) = 0;
 			virtual void tryExecuteEffect(const std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccurrence>& eventOccurrence) = 0;
 
 			//*********************************

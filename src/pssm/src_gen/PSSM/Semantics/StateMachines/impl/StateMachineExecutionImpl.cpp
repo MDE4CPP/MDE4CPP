@@ -41,16 +41,21 @@
 #include "uml/StateMachine.hpp"
 #include "uml/Region.hpp"
 #include "fUML/Semantics/CommonBehavior/EventAccepter.hpp"
+
+#include <mutex>
+#include <condition_variable>
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "fUML/Semantics/CommonBehavior/CommonBehaviorFactory.hpp"
-#include "PSSM/Semantics/StateMachines/StateMachinesFactory.hpp"
-#include "ecore/ecoreFactory.hpp"
 #include "uml/umlFactory.hpp"
 #include "fUML/Semantics/Loci/LociFactory.hpp"
+#include "PSSM/Semantics/StateMachines/StateMachinesFactory.hpp"
+#include "ecore/ecoreFactory.hpp"
+#include "fUML/Semantics/StructuredClassifiers/StructuredClassifiersFactory.hpp"
+#include "fUML/Semantics/CommonBehavior/CommonBehaviorFactory.hpp"
+#include "fUML/MDE4CPP_Extensions/MDE4CPP_ExtensionsFactory.hpp"
 #include "uml/Behavior.hpp"
 #include "uml/Class.hpp"
 #include "uml/Classifier.hpp"
@@ -58,6 +63,7 @@
 #include "ecore/EAnnotation.hpp"
 #include "uml/Element.hpp"
 #include "fUML/Semantics/CommonBehavior/Execution.hpp"
+#include "fUML/MDE4CPP_Extensions/FUML_Object.hpp"
 #include "fUML/Semantics/Loci/Locus.hpp"
 #include "fUML/Semantics/CommonBehavior/ObjectActivation.hpp"
 #include "fUML/Semantics/CommonBehavior/ParameterValue.hpp"
@@ -66,10 +72,11 @@
 #include "uml/Vertex.hpp"
 #include "PSSM/Semantics/StateMachines/VertexActivation.hpp"
 //Factories and Package includes
-#include "PSSM/PSSMPackage.hpp"
 #include "PSSM/Semantics/SemanticsPackage.hpp"
+#include "PSSM/PSSMPackage.hpp"
 #include "fUML/Semantics/CommonBehavior/CommonBehaviorPackage.hpp"
 #include "fUML/Semantics/Loci/LociPackage.hpp"
+#include "fUML/MDE4CPP_Extensions/MDE4CPP_ExtensionsPackage.hpp"
 #include "PSSM/Semantics/StateMachines/StateMachinesPackage.hpp"
 #include "ecore/ecorePackage.hpp"
 #include "uml/umlPackage.hpp"
@@ -84,6 +91,9 @@ StateMachineExecutionImpl::StateMachineExecutionImpl()
 	/*
 	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
 	*/
+	//generated from codegen annotation
+	this->m_mutex = std::make_shared<std::mutex>();
+	this->m_conditionVariable = std::make_shared<std::condition_variable>();
 }
 
 StateMachineExecutionImpl::~StateMachineExecutionImpl()
@@ -121,6 +131,8 @@ StateMachineExecutionImpl& StateMachineExecutionImpl::operator=(const StateMachi
 	//Clone Attributes with (deep copy)
 
 	//copy references with no containment (soft copy)
+	m_conditionVariable  = obj.getConditionVariable();
+	m_mutex  = obj.getMutex();
 	//Clone references with containment (deep copy)
 	//clone reference 'configuration'
 	if(obj.getConfiguration()!=nullptr)
@@ -185,11 +197,11 @@ void StateMachineExecutionImpl::execute()
 		regionActivation.enter(null, null);
 	}*/
 
-	if (this->m_context != nullptr && this->m_objectActivation != nullptr)
+	if (this->m_context != nullptr && this->m_context->getObjectActivation() != nullptr)
 	{
-		auto smEventAccepter = PSSM::Semantics::StateMachines::StateMachinesFactory::eInstance()->createStateMachineEventAccepter();
+		const auto& smEventAccepter = PSSM::Semantics::StateMachines::StateMachinesFactory::eInstance()->createStateMachineEventAccepter();
 		smEventAccepter->setRegistrationContext(this->getThisStateMachineExecutionPtr());
-		this->_register(smEventAccepter);
+		this->m_context->_register(smEventAccepter);
 	}
 	/* Region have been initialized in the model's ExecutionFactory already
 	this->initRegions();
@@ -201,10 +213,29 @@ void StateMachineExecutionImpl::execute()
 	{
 		regionActivation->activateTransitions();
 	}*/
-	for (auto regionActivation : *(this->m_regionActivations))
+	for (const auto& regionActivation : *(this->m_regionActivations))
 	{
 		regionActivation->enter(nullptr, nullptr);
 	}
+	
+	// Block this thread until the StateMachine Execution is complete to prevent this StateMachineExecution
+	// from being destroyed after this initial RTC Step returns.
+	std::unique_lock lock(*m_mutex);
+	auto& regionActivations = this->m_regionActivations;
+	this->m_conditionVariable->wait(lock, [&regionActivations]
+	{
+		bool allCompleted = true;
+		for (const auto& regionActivation : *regionActivations)
+		{
+			if (!regionActivation->getIsCompleted()) 
+			{
+				allCompleted = false;
+				break;
+			}
+		}
+		return allCompleted;
+	});
+	lock.unlock();
 	//end of body
 }
 
@@ -272,8 +303,7 @@ void StateMachineExecutionImpl::startBehavior(const std::shared_ptr<uml::Class>&
 		this->setObjectActivation(objectActivation);
 		this->m_objectActivation->setObject(this->getThisFUML_ObjectPtr());
 	}
-	// Event Dispatch Loop currently not supported
-	// this->m_objectActivation->startBehavior(classifier, inputs);
+	this->m_objectActivation->startBehavior(classifier, inputs);
 	//end of body
 }
 
@@ -284,7 +314,7 @@ void StateMachineExecutionImpl::terminate()
 	// The termination of a State Machine consists in aborting all "ongoing" DoActivity Behaviors
 	// started by States owned by this State Machine. States that are currently active (i.e. registered
 	// in the State Machine configuration) are not exited (i.e. their Exit Behaviors  are not executed).
-	for (auto regionActivation : *(this->m_regionActivations))
+	for (const auto& regionActivation : *(this->m_regionActivations))
 	{
 		regionActivation->terminate();
 	}
@@ -299,6 +329,17 @@ void StateMachineExecutionImpl::terminate()
 //*********************************
 // Reference Getters & Setters
 //*********************************
+/* Getter & Setter for reference conditionVariable */
+const std::shared_ptr<std::condition_variable>& StateMachineExecutionImpl::getConditionVariable() const
+{
+    return m_conditionVariable;
+}
+void StateMachineExecutionImpl::setConditionVariable(const std::shared_ptr<std::condition_variable>& _conditionVariable)
+{
+    m_conditionVariable = _conditionVariable;
+	
+}
+
 /* Getter & Setter for reference configuration */
 const std::shared_ptr<PSSM::Semantics::StateMachines::StateMachineConfiguration>& StateMachineExecutionImpl::getConfiguration() const
 {
@@ -307,6 +348,17 @@ const std::shared_ptr<PSSM::Semantics::StateMachines::StateMachineConfiguration>
 void StateMachineExecutionImpl::setConfiguration(const std::shared_ptr<PSSM::Semantics::StateMachines::StateMachineConfiguration>& _configuration)
 {
     m_configuration = _configuration;
+	
+}
+
+/* Getter & Setter for reference mutex */
+const std::shared_ptr<std::mutex>& StateMachineExecutionImpl::getMutex() const
+{
+    return m_mutex;
+}
+void StateMachineExecutionImpl::setMutex(const std::shared_ptr<std::mutex>& _mutex)
+{
+    m_mutex = _mutex;
 	
 }
 
@@ -355,6 +407,32 @@ void StateMachineExecutionImpl::load(std::shared_ptr<persistence::interfaces::XL
 
 void StateMachineExecutionImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list)
 {
+	try
+	{
+		std::map<std::string, std::string>::const_iterator iter;
+		std::shared_ptr<ecore::EClass> metaClass = this->eClass(); // get MetaClass
+		iter = attr_list.find("conditionVariable");
+		if ( iter != attr_list.end() )
+		{
+			// add unresolvedReference to loadHandler's list
+			loadHandler->addUnresolvedReference(iter->second, loadHandler->getCurrentObject(), metaClass->getEStructuralFeature("conditionVariable")); // TODO use getEStructuralFeature() with id, for faster access to EStructuralFeature
+		}
+
+		iter = attr_list.find("mutex");
+		if ( iter != attr_list.end() )
+		{
+			// add unresolvedReference to loadHandler's list
+			loadHandler->addUnresolvedReference(iter->second, loadHandler->getCurrentObject(), metaClass->getEStructuralFeature("mutex")); // TODO use getEStructuralFeature() with id, for faster access to EStructuralFeature
+		}
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "| ERROR    | " << e.what() << std::endl;
+	}
+	catch (...) 
+	{
+		std::cout << "| ERROR    | " <<  "Exception occurred" << std::endl;
+	}
 
 	fUML::Semantics::CommonBehavior::ExecutionImpl::loadAttributes(loadHandler, attr_list);
 }
@@ -402,6 +480,28 @@ void StateMachineExecutionImpl::loadNode(std::string nodeName, std::shared_ptr<p
 
 void StateMachineExecutionImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject>> references)
 {
+	switch(featureID)
+	{
+		case PSSM::Semantics::StateMachines::StateMachinesPackage::STATEMACHINEEXECUTION_ATTRIBUTE_CONDITIONVARIABLE:
+		{
+			if (references.size() == 1)
+			{
+				// Cast object to correct type
+			}
+			
+			return;
+		}
+
+		case PSSM::Semantics::StateMachines::StateMachinesPackage::STATEMACHINEEXECUTION_ATTRIBUTE_MUTEX:
+		{
+			if (references.size() == 1)
+			{
+				// Cast object to correct type
+			}
+			
+			return;
+		}
+	}
 	fUML::Semantics::CommonBehavior::ExecutionImpl::resolveReferences(featureID, references);
 }
 
@@ -426,6 +526,7 @@ void StateMachineExecutionImpl::saveContent(std::shared_ptr<persistence::interfa
 	try
 	{
 		std::shared_ptr<PSSM::Semantics::StateMachines::StateMachinesPackage> package = PSSM::Semantics::StateMachines::StateMachinesPackage::eInstance();
+	// Add references
 		//
 		// Add new tags (from references)
 		//
@@ -456,8 +557,12 @@ std::shared_ptr<Any> StateMachineExecutionImpl::eGet(int featureID, bool resolve
 {
 	switch(featureID)
 	{
+		case PSSM::Semantics::StateMachines::StateMachinesPackage::STATEMACHINEEXECUTION_ATTRIBUTE_CONDITIONVARIABLE:
+			return eAny(getConditionVariable(),-1,false); //3914
 		case PSSM::Semantics::StateMachines::StateMachinesPackage::STATEMACHINEEXECUTION_ATTRIBUTE_CONFIGURATION:
 			return eAny(getConfiguration(),PSSM::Semantics::StateMachines::StateMachinesPackage::STATEMACHINECONFIGURATION_CLASS,false); //3913
+		case PSSM::Semantics::StateMachines::StateMachinesPackage::STATEMACHINEEXECUTION_ATTRIBUTE_MUTEX:
+			return eAny(getMutex(),-1,false); //3915
 		case PSSM::Semantics::StateMachines::StateMachinesPackage::STATEMACHINEEXECUTION_ATTRIBUTE_REGIONACTIVATIONS:
 			return eEcoreContainerAny(getRegionActivations(),PSSM::Semantics::StateMachines::StateMachinesPackage::REGIONACTIVATION_CLASS); //3912
 	}
@@ -468,8 +573,12 @@ bool StateMachineExecutionImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
+		case PSSM::Semantics::StateMachines::StateMachinesPackage::STATEMACHINEEXECUTION_ATTRIBUTE_CONDITIONVARIABLE:
+			return getConditionVariable() != nullptr; //3914
 		case PSSM::Semantics::StateMachines::StateMachinesPackage::STATEMACHINEEXECUTION_ATTRIBUTE_CONFIGURATION:
 			return getConfiguration() != nullptr; //3913
+		case PSSM::Semantics::StateMachines::StateMachinesPackage::STATEMACHINEEXECUTION_ATTRIBUTE_MUTEX:
+			return getMutex() != nullptr; //3915
 		case PSSM::Semantics::StateMachines::StateMachinesPackage::STATEMACHINEEXECUTION_ATTRIBUTE_REGIONACTIVATIONS:
 			return getRegionActivations() != nullptr; //3912
 	}
@@ -480,6 +589,10 @@ bool StateMachineExecutionImpl::eSet(int featureID,  const std::shared_ptr<Any>&
 {
 	switch(featureID)
 	{
+		case PSSM::Semantics::StateMachines::StateMachinesPackage::STATEMACHINEEXECUTION_ATTRIBUTE_CONDITIONVARIABLE:
+		{
+		return true;
+		}
 		case PSSM::Semantics::StateMachines::StateMachinesPackage::STATEMACHINEEXECUTION_ATTRIBUTE_CONFIGURATION:
 		{
 			std::shared_ptr<ecore::EcoreAny> ecoreAny = std::dynamic_pointer_cast<ecore::EcoreAny>(newValue);
@@ -509,6 +622,10 @@ bool StateMachineExecutionImpl::eSet(int featureID,  const std::shared_ptr<Any>&
 				DEBUG_ERROR("Invalid instance of 'ecore::ecoreAny' for feature 'configuration'. Failed to set feature!")
 				return false;
 			}
+		return true;
+		}
+		case PSSM::Semantics::StateMachines::StateMachinesPackage::STATEMACHINEEXECUTION_ATTRIBUTE_MUTEX:
+		{
 		return true;
 		}
 		case PSSM::Semantics::StateMachines::StateMachinesPackage::STATEMACHINEEXECUTION_ATTRIBUTE_REGIONACTIVATIONS:

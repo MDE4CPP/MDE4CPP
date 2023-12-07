@@ -4,17 +4,17 @@
 
 #include "abstractDataTypes/SubsetUnion.hpp"
 //metametamodel classes
-#include "ecore/EEnum.hpp"
-#include "ecore/EStringToStringMapEntry.hpp"
-#include "ecore/EAnnotation.hpp"
-#include "ecore/EClass.hpp"
-#include "ecore/EOperation.hpp"
-#include "ecore/EReference.hpp"
 #include "ecore/EEnumLiteral.hpp"
-#include "ecore/EAttribute.hpp"
+#include "ecore/EAnnotation.hpp"
+#include "ecore/EStringToStringMapEntry.hpp"
 #include "ecore/EGenericType.hpp"
-#include "ecore/EDataType.hpp"
+#include "ecore/EOperation.hpp"
+#include "ecore/EAttribute.hpp"
 #include "ecore/EParameter.hpp"
+#include "ecore/EEnum.hpp"
+#include "ecore/EClass.hpp"
+#include "ecore/EDataType.hpp"
+#include "ecore/EReference.hpp"
 
 // metametamodel factory
 #include "ecore/ecoreFactory.hpp"
@@ -25,6 +25,7 @@
 #include "fUML/Semantics/Loci/LociPackage.hpp"
 #include "fUML/MDE4CPP_Extensions/MDE4CPP_ExtensionsPackage.hpp"
 #include "PSSM/PSSMPackage.hpp"
+#include "fUML/Semantics/StructuredClassifiers/StructuredClassifiersPackage.hpp"
 #include "ecore/ecorePackage.hpp"
 #include "fUML/fUMLPackage.hpp"
 #include "types/typesPackage.hpp"
@@ -2293,6 +2294,29 @@ void StateMachinesPackageImpl::initializeStateMachineExecutionContent()
 	/*
 	 * EReferences
 	 */
+	m_stateMachineExecution_Attribute_conditionVariable->setName("conditionVariable");
+	{
+		std::shared_ptr<ecore::ecoreFactory> factory = ecore::ecoreFactory::eInstance();
+		std::shared_ptr<ecore::EClass> unknownClass = factory ->createEClass(-1);
+	   	unknownClass->setName("invalid");
+		unknownClass->setAbstract(true);
+		unknownClass->setInterface(true);
+		m_stateMachineExecution_Attribute_conditionVariable->setEType(unknownClass);
+	}
+	m_stateMachineExecution_Attribute_conditionVariable->setLowerBound(1);
+	m_stateMachineExecution_Attribute_conditionVariable->setUpperBound(1);
+	m_stateMachineExecution_Attribute_conditionVariable->setTransient(false);
+	m_stateMachineExecution_Attribute_conditionVariable->setVolatile(false);
+	m_stateMachineExecution_Attribute_conditionVariable->setChangeable(true);
+	m_stateMachineExecution_Attribute_conditionVariable->setUnsettable(false);
+	m_stateMachineExecution_Attribute_conditionVariable->setUnique(true);
+	m_stateMachineExecution_Attribute_conditionVariable->setDerived(false);
+	m_stateMachineExecution_Attribute_conditionVariable->setOrdered(true);
+	m_stateMachineExecution_Attribute_conditionVariable->setContainment(false);
+	m_stateMachineExecution_Attribute_conditionVariable->setResolveProxies(true);
+	m_stateMachineExecution_Attribute_conditionVariable->setDefaultValueLiteral("");	
+	
+	m_stateMachineExecution_Attribute_conditionVariable->_setID(STATEMACHINEEXECUTION_ATTRIBUTE_CONDITIONVARIABLE);
 	m_stateMachineExecution_Attribute_configuration->setName("configuration");
 	m_stateMachineExecution_Attribute_configuration->setEType(getStateMachineConfiguration_Class());
 	m_stateMachineExecution_Attribute_configuration->setLowerBound(1);
@@ -2310,6 +2334,29 @@ void StateMachinesPackageImpl::initializeStateMachineExecutionContent()
 	m_stateMachineExecution_Attribute_configuration->setEOpposite(PSSM::Semantics::StateMachines::StateMachinesPackage::eInstance()->getStateMachineConfiguration_Attribute_execution());
 	
 	m_stateMachineExecution_Attribute_configuration->_setID(STATEMACHINEEXECUTION_ATTRIBUTE_CONFIGURATION);
+	m_stateMachineExecution_Attribute_mutex->setName("mutex");
+	{
+		std::shared_ptr<ecore::ecoreFactory> factory = ecore::ecoreFactory::eInstance();
+		std::shared_ptr<ecore::EClass> unknownClass = factory ->createEClass(-1);
+	   	unknownClass->setName("invalid");
+		unknownClass->setAbstract(true);
+		unknownClass->setInterface(true);
+		m_stateMachineExecution_Attribute_mutex->setEType(unknownClass);
+	}
+	m_stateMachineExecution_Attribute_mutex->setLowerBound(1);
+	m_stateMachineExecution_Attribute_mutex->setUpperBound(1);
+	m_stateMachineExecution_Attribute_mutex->setTransient(false);
+	m_stateMachineExecution_Attribute_mutex->setVolatile(false);
+	m_stateMachineExecution_Attribute_mutex->setChangeable(true);
+	m_stateMachineExecution_Attribute_mutex->setUnsettable(false);
+	m_stateMachineExecution_Attribute_mutex->setUnique(true);
+	m_stateMachineExecution_Attribute_mutex->setDerived(false);
+	m_stateMachineExecution_Attribute_mutex->setOrdered(true);
+	m_stateMachineExecution_Attribute_mutex->setContainment(false);
+	m_stateMachineExecution_Attribute_mutex->setResolveProxies(true);
+	m_stateMachineExecution_Attribute_mutex->setDefaultValueLiteral("");	
+	
+	m_stateMachineExecution_Attribute_mutex->_setID(STATEMACHINEEXECUTION_ATTRIBUTE_MUTEX);
 	m_stateMachineExecution_Attribute_regionActivations->setName("regionActivations");
 	m_stateMachineExecution_Attribute_regionActivations->setEType(getRegionActivation_Class());
 	m_stateMachineExecution_Attribute_regionActivations->setLowerBound(1);
@@ -3011,7 +3058,7 @@ void StateMachinesPackageImpl::initializeTransitionActivationContent()
 	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_transitionActivation_Operation_setSourceActivation_VertexActivation);
-		parameter->setName("_");
+		parameter->setName("sourceActivation");
 		parameter->setEType(nullptr);
 		parameter->setLowerBound(0);
 		parameter->setUpperBound(1);
@@ -3036,7 +3083,7 @@ void StateMachinesPackageImpl::initializeTransitionActivationContent()
 	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_transitionActivation_Operation_setTargetActivation_VertexActivation);
-		parameter->setName("_");
+		parameter->setName("targetActivation");
 		parameter->setEType(nullptr);
 		parameter->setLowerBound(0);
 		parameter->setUpperBound(1);

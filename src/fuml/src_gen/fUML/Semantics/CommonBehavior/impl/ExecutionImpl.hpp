@@ -63,8 +63,8 @@ namespace fUML::Semantics::CommonBehavior
 			//*********************************
 			virtual const std::shared_ptr<uml::Behavior>& getBehavior() const ;
 			virtual void setBehavior(const std::shared_ptr<uml::Behavior>&) ;
-			virtual const std::shared_ptr<uml::Element>& getContext() const ;
-			virtual void setContext(const std::shared_ptr<uml::Element>&) ;
+			virtual const std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_Object>& getContext() const ;
+			virtual void setContext(const std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_Object>&) ;
 			virtual const std::shared_ptr<fUML::Semantics::Loci::Locus>& getLocus() const ;
 			virtual void setLocus(const std::shared_ptr<fUML::Semantics::Loci::Locus>&) ;
 			

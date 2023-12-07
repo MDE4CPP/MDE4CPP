@@ -104,8 +104,8 @@ namespace fUML::Semantics::CommonBehavior
 			//*********************************
 			virtual const std::shared_ptr<uml::Behavior>& getBehavior() const = 0;
 			virtual void setBehavior(const std::shared_ptr<uml::Behavior>&) = 0;
-			virtual const std::shared_ptr<uml::Element>& getContext() const = 0;
-			virtual void setContext(const std::shared_ptr<uml::Element>&) = 0;
+			virtual const std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_Object>& getContext() const = 0;
+			virtual void setContext(const std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_Object>&) = 0;
 			virtual const std::shared_ptr<fUML::Semantics::Loci::Locus>& getLocus() const = 0;
 			virtual void setLocus(const std::shared_ptr<fUML::Semantics::Loci::Locus>&) = 0;
 			
@@ -137,7 +137,7 @@ namespace fUML::Semantics::CommonBehavior
 			// Reference Members
 			//*********************************
 			mutable std::shared_ptr<uml::Behavior> m_behavior;
-			std::shared_ptr<uml::Element> m_context;
+			std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_Object> m_context;
 			std::shared_ptr<fUML::Semantics::Loci::Locus> m_locus;
 			
 			mutable std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> m_parameterValues;

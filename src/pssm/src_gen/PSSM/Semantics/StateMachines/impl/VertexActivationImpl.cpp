@@ -43,8 +43,8 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "fUML/Semantics/Loci/LociFactory.hpp"
 #include "uml/umlFactory.hpp"
+#include "fUML/Semantics/Loci/LociFactory.hpp"
 #include "PSSM/Semantics/StateMachines/StateMachinesFactory.hpp"
 #include "fUML/Semantics/CommonBehavior/EventOccurrence.hpp"
 #include "uml/NamedElement.hpp"
@@ -55,8 +55,8 @@
 #include "uml/Vertex.hpp"
 #include "PSSM/Semantics/StateMachines/VertexActivation.hpp"
 //Factories and Package includes
-#include "PSSM/PSSMPackage.hpp"
 #include "PSSM/Semantics/SemanticsPackage.hpp"
+#include "PSSM/PSSMPackage.hpp"
 #include "fUML/Semantics/CommonBehavior/CommonBehaviorPackage.hpp"
 #include "fUML/Semantics/Loci/LociPackage.hpp"
 #include "PSSM/Semantics/StateMachines/StateMachinesPackage.hpp"
@@ -123,7 +123,7 @@ void VertexActivationImpl::addIncomingTransition(const std::shared_ptr<PSSM::Sem
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
-		this->getIncomingTransitionActivations()->add(transitionActivation);
+	this->getIncomingTransitionActivations()->add(transitionActivation);
 	//end of body
 }
 
@@ -131,7 +131,7 @@ void VertexActivationImpl::addOutgoingTransition(const std::shared_ptr<PSSM::Sem
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
-		this->getOutgoingTransitionActivations()->add(transitionActivation);
+	this->getOutgoingTransitionActivations()->add(transitionActivation);
 	//end of body
 }
 
@@ -139,26 +139,14 @@ bool VertexActivationImpl::canPropagateExecution(const std::shared_ptr<PSSM::Sem
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
-		// The common behavior of all kind of vertices is that when the propagation analysis is done
-// if a the target is a vertex that is nested within a hierarchy then the analysis
-// must be recursively propagated to the parent vertices.
-//boolean propagate = true;
-//if(leastCommonAncestor != null){
-//	RegionActivation parentRegionActivation = this.getOwningRegionActivation();
-//	if(leastCommonAncestor!=parentRegionActivation){
-//		VertexActivation vertexActivation = (VertexActivation) parentRegionActivation.getParent();
-//		if(vertexActivation != null){
-//			propagate = vertexActivation.canPropagateExecution(enteringTransition, eventOccurrence, leastCommonAncestor);
-//		}
-//	}
-//}
-//return propagate;
+	// The common behavior of all kind of vertices is that when the propagation analysis is done.
+	// If a the target is a Vertex that is nested within a hierarchy, then the analysis
+	// must be recursively propagated to the parent vertices.
 	bool propagate = true;
 	if(leastCommonAncestor != nullptr) {
-		std::shared_ptr<PSSM::Semantics::StateMachines::RegionActivation> parentRegionActivation = this->getOwningRegionActivation();
+		const auto& parentRegionActivation = this->getOwningRegionActivation();
 		if(leastCommonAncestor != parentRegionActivation) {
-			std::shared_ptr<PSSM::Semantics::StateMachines::VertexActivation> vertexActivation = std::dynamic_pointer_cast<PSSM::Semantics::StateMachines::VertexActivation>(parentRegionActivation->getParent());
-			if(vertexActivation != nullptr) {
+			if(const auto& vertexActivation = std::dynamic_pointer_cast<PSSM::Semantics::StateMachines::VertexActivation>(parentRegionActivation->getParent())) {
 				propagate = vertexActivation->canPropagateExecution(enteringTransition, eventOccurrence, leastCommonAncestor);
 			}
 		}
@@ -175,26 +163,19 @@ void VertexActivationImpl::enter(const std::shared_ptr<PSSM::Semantics::StateMac
 	// occurs when the parent is not active while there is an attempt to enter the current
 	// vertex activation. What is important here is that entry rule is applied recursively
 	// until the least common ancestor is reached.
-	//RegionActivation owningRegionActivation = this.getOwningRegionActivation();
-	//if(leastCommonAncestor != null && owningRegionActivation != null && leastCommonAncestor != owningRegionActivation){
-	//	VertexActivation vertexActivation = (VertexActivation) owningRegionActivation.getParent();
-	//	if(vertexActivation != null){
-	//		vertexActivation.enter(enteringTransition, eventOccurrence, leastCommonAncestor);
-	//	}
-	//}
-	//logger.info(this.getNode().getName()+" => ACTIVE");
-	//this.setStatus(StateMetadata.ACTIVE);
-	//this.tagOutgoingTransitions(TransitionMetadata.REACHED, false);
-	//FUMLExecutionEngine.eInstance.getControlDelegate().control(this);
-	std::shared_ptr<PSSM::Semantics::StateMachines::RegionActivation> owningRegionActivation = this->getOwningRegionActivation();
-	if(leastCommonAncestor != nullptr && owningRegionActivation != nullptr && leastCommonAncestor != owningRegionActivation) {
-		std::shared_ptr<PSSM::Semantics::StateMachines::VertexActivation> vertexActivation = std::dynamic_pointer_cast<PSSM::Semantics::StateMachines::VertexActivation>(owningRegionActivation->getParent());
-		if(vertexActivation != nullptr) {
+	const auto& owningRegionActivation = this->getOwningRegionActivation();
+	if(leastCommonAncestor != nullptr && owningRegionActivation != nullptr && leastCommonAncestor != owningRegionActivation)
+	{
+		const auto& vertexActivation = std::dynamic_pointer_cast<PSSM::Semantics::StateMachines::VertexActivation>(owningRegionActivation->getParent());
+		if(vertexActivation != nullptr)
+		{
 			vertexActivation->enter(enteringTransition, eventOccurrence, leastCommonAncestor);
 		}
 	}
 	this->setStatus(PSSM::Semantics::StateMachines::StateMetadata::ACTIVE);
+	DEBUG_INFO(this->getNode()->getName() << " is now ACTIVE");
 	this->tagOutgoingTransition(PSSM::Semantics::StateMachines::TransitionMetadata::REACHED, false);
+	//FUMLExecutionEngine.eInstance.getControlDelegate().control(this);
 	//end of body
 }
 
@@ -202,26 +183,19 @@ void VertexActivationImpl::exit(const std::shared_ptr<PSSM::Semantics::StateMach
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
-		// When a vertex is exited its parent may need to be exited too. Such situation typically
-// occurs when the current vertex is exited through a transition that cross boundaries of
-// the parent state (and maybe also border its own parent). This implies that from the current
-// vertex and until the least common ancestor is reached all states are exited recursively.
-//this.tagIncomingTransitions(TransitionMetadata.NONE, false);
-//this.setStatus(StateMetadata.IDLE);
-//logger.info(this.getNode().getName()+" => IDLE");
-//RegionActivation owningRegionActivation = this.getOwningRegionActivation();
-//if(leastCommonAncestor != null && owningRegionActivation != null && leastCommonAncestor != owningRegionActivation){
-//	VertexActivation vertexActivation = (VertexActivation) owningRegionActivation.getParent();
-//	if(vertexActivation != null){
-//		vertexActivation.exit(exitingTransition, eventOccurrence, leastCommonAncestor);
-//	}
-//}
+	// When a vertex is exited its parent may need to be exited too. Such situation typically
+	// occurs when the current vertex is exited through a transition that cross boundaries of
+	// the parent state (and maybe also border its own parent). This implies that from the current
+	// vertex and until the least common ancestor is reached all states are exited recursively.
 	this->tagIncomingTransition(PSSM::Semantics::StateMachines::TransitionMetadata::NONE, false);
 	this->setStatus(PSSM::Semantics::StateMachines::StateMetadata::IDLE);
-	std::shared_ptr<PSSM::Semantics::StateMachines::RegionActivation> owningRegionActivation = this->getOwningRegionActivation();
-	if(leastCommonAncestor != nullptr && owningRegionActivation != nullptr && leastCommonAncestor != owningRegionActivation) {
-		std::shared_ptr<PSSM::Semantics::StateMachines::VertexActivation> vertexActivation = std::dynamic_pointer_cast<PSSM::Semantics::StateMachines::VertexActivation>(owningRegionActivation->getParent());
-		if(vertexActivation != nullptr) {
+	DEBUG_INFO(this->getNode()->getName() << " is now IDLE");
+	const auto& owningRegionActivation = this->getOwningRegionActivation();
+	if(leastCommonAncestor != nullptr && owningRegionActivation != nullptr && leastCommonAncestor != owningRegionActivation)
+	{
+		const auto& vertexActivation = std::dynamic_pointer_cast<PSSM::Semantics::StateMachines::VertexActivation>(owningRegionActivation->getParent());
+		if(vertexActivation != nullptr)
+		{
 			vertexActivation->exit(exitingTransition, eventOccurrence, leastCommonAncestor);
 		}
 	}
@@ -234,16 +208,8 @@ std::shared_ptr<Bag<PSSM::Semantics::StateMachines::VertexActivation>> VertexAct
 	//generated from body annotation
 	// Provides the hierarchy of State Activations starting from the current
 	// element. This list is ordered from the innermost element to the outermost element
-	//List<VertexActivation> hierarchy = new ArrayList<VertexActivation>();
-	//List<SemanticVisitor> contextChain = this.getContextChain();
-	//for(SemanticVisitor element : contextChain){
-	//	if(element instanceof StateActivation){
-	//		hierarchy.add((StateActivation)element);
-	//	}
-	//}
-	//return hierarchy;
-	std::shared_ptr<Bag<PSSM::Semantics::StateMachines::VertexActivation> > hierarchy(new Bag<PSSM::Semantics::StateMachines::VertexActivation>());
-	for (auto element : *(this->getContextChain()))
+	std::shared_ptr<Bag<PSSM::Semantics::StateMachines::VertexActivation>> hierarchy(new Bag<PSSM::Semantics::StateMachines::VertexActivation>());
+	for (const auto& element : *(this->getContextChain()))
 	{
 		if (std::dynamic_pointer_cast<PSSM::Semantics::StateMachines::StateActivation>(element) != nullptr) 
 		{
@@ -258,7 +224,7 @@ std::shared_ptr<Bag<PSSM::Semantics::StateMachines::TransitionActivation>> Verte
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
-		return this->m_incomingTransitionActivations;
+	return this->m_incomingTransitionActivations;
 	//end of body
 }
 
@@ -297,12 +263,16 @@ std::shared_ptr<PSSM::Semantics::StateMachines::RegionActivation> VertexActivati
 	//		targetHierarchyIndex = targetHierarchyIndex - 1;
 	//	}
 	//}
-	while(leastCommonAncestor == nullptr && sourceHierarchyIndex > 0 && targetHierarchyIndex > 0) {
+	while (leastCommonAncestor == nullptr && sourceHierarchyIndex > 0 && targetHierarchyIndex > 0) 
+	{
 		sourceHierarchyNode = sourceHierarchy->at(sourceHierarchyIndex - 1);
 		targetHierarchyNode = targetHierarchy->at(targetHierarchyIndex - 1);
-		if(sourceHierarchyNode != targetHierarchyNode) {
+		if (sourceHierarchyNode != targetHierarchyNode) 
+		{
 			leastCommonAncestor = this->getRegionActivation(sourceHierarchyNode);
-		} else {
+		}
+		else 
+		{
 			sourceHierarchyIndex = sourceHierarchyIndex -1;
 			targetHierarchyIndex = targetHierarchyIndex - 1;
 		}
@@ -327,11 +297,16 @@ std::shared_ptr<PSSM::Semantics::StateMachines::RegionActivation> VertexActivati
 	//		}
 	//	}
 	//}
-	if(leastCommonAncestor == nullptr) {
-		if(sourceHierarchyIndex == 0 && targetHierarchyIndex == 0) {
+	if (leastCommonAncestor == nullptr) 
+	{
+		if (sourceHierarchyIndex == 0 && targetHierarchyIndex == 0) 
+		{
 			leastCommonAncestor = this->getRegionActivation(sourceHierarchy->at(sourceHierarchyIndex +1));
-		} else {
-			if(this->getVertexActivation(std::dynamic_pointer_cast<uml::Vertex>(vertexActivation->getNode())) != nullptr) {
+		}
+		else
+		{
+			if (this->getVertexActivation(std::dynamic_pointer_cast<uml::Vertex>(vertexActivation->getNode())) != nullptr) 
+			{
 				//transitionKind ??
 				leastCommonAncestor = this->getRegionActivation(sourceHierarchy->at(sourceHierarchyIndex - 1));
 			}
@@ -345,7 +320,7 @@ std::shared_ptr<Bag<PSSM::Semantics::StateMachines::TransitionActivation>> Verte
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
-		return this->m_outgoingTransitionActivations;
+	return this->m_outgoingTransitionActivations;
 	//end of body
 }
 
@@ -414,6 +389,7 @@ std::shared_ptr<PSSM::Semantics::StateMachines::VertexActivation> VertexActivati
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
+	// Returns nothing by default. Must be overridden by StateActivation;
 	return nullptr;
 	//end of body
 }
@@ -435,12 +411,10 @@ bool VertexActivationImpl::isEnterable(const std::shared_ptr<PSSM::Semantics::St
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
-	// By default a vertex has no prerequisites that need to be full-filled
-// to be entered. Nevertheless some vertex (e.g., join or exit) have such
-// prerequisites. Therefore this method is intended to be overridden in vertex
-// activation sub-classes. 
-return true;
-
+	// By default, a Vertex has no prerequisites that need to be fullfilled
+	// to be entered. Nevertheless, some Vertices (e.g., join or exit) have such
+	// prerequisites. Therefore this method is intended to be overridden in the VertexActivation sub-classes. 
+	return true;
 	//end of body
 }
 
@@ -448,11 +422,10 @@ bool VertexActivationImpl::isExitable(const std::shared_ptr<PSSM::Semantics::Sta
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
-	// By default a vertex has no prerequisites that need to be full-filled to be entered
-// Nevertheless some vertex (e.g., Fork) have such prerequisite. Therefore this method
-// is intended to be overridden in vertex activation sub-classes.
-return true;
-
+	// By default, a Vertex has no prerequisites that need to be fullfilled
+	// to be exited. Nevertheless, some Vertices (e.g., fork) have such
+	// prerequisites. Therefore this method is intended to be overridden in the VertexActivation sub-classes. 
+	return true;
 	//end of body
 }
 
@@ -462,12 +435,22 @@ void VertexActivationImpl::tagIncomingTransition(PSSM::Semantics::StateMachines:
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
-	// Tags all incomingTransitionActivations as the given value. StaticCheck is currently not supported.
-	if (this->m_incomingTransitionActivations != nullptr) 
+	// Tags all incomingTransitionActivations as the given value.
+	if (m_incomingTransitionActivations != nullptr) 
 	{
-		for (auto incomingTransitionActivation : *(this->m_incomingTransitionActivations))
+		if (staticCheck)
 		{
-			incomingTransitionActivation->setStatus(status);
+			for (const auto& incomingTransitionActivation : *m_incomingTransitionActivations)
+			{
+				incomingTransitionActivation->setAnalyticalStatus(status);
+			}
+		}
+		else
+		{
+			for (const auto& incomingTransitionActivation : *m_incomingTransitionActivations)
+			{
+				incomingTransitionActivation->setStatus(status);
+			}
 		}
 	}
 	//end of body
@@ -477,12 +460,22 @@ void VertexActivationImpl::tagOutgoingTransition(PSSM::Semantics::StateMachines:
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
-	// Tags all outgoingTransitionActivations as the given value. StaticCheck is currently not supported.
+	// Tags all outgoingTransitionActivations as the given value.
 	if (this->m_outgoingTransitionActivations != nullptr) 
 	{
-		for (auto outgoingTransitionActivation : *(this->m_outgoingTransitionActivations))
+		if (staticCheck)
 		{
-			outgoingTransitionActivation->setStatus(status);
+			for (const auto& outgoingTransitionActivation : *m_outgoingTransitionActivations)
+			{
+				outgoingTransitionActivation->setAnalyticalStatus(status);
+			}
+		}
+		else
+		{
+			for (const auto& outgoingTransitionActivation : *m_incomingTransitionActivations)
+			{
+				outgoingTransitionActivation->setStatus(status);
+			}
 		}
 	}
 	//end of body
@@ -492,10 +485,8 @@ void VertexActivationImpl::terminate()
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
-	// Terminate applied by a vertex activation does nothing by default. However it is intended
-// to be overridden by sub-classe(s)  
-return;
-
+	// Intended to be overridden by sub-classe(s)  
+	return;
 	//end of body
 }
 

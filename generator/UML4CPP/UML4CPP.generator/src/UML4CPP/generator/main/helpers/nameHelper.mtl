@@ -27,7 +27,7 @@
  *  queries to generate qualified name, required for elements without defined name
 */]
 [query public myQualifiedName (anElement : NamedElement) : String = if oclIsUndefined() then ('Undefined Element found: ' + anElement.toString()) else myStateBehaviorName().sanitize() endif /] 
-[query private myStateBehaviorName (anElement: NamedElement) : String = if (oclIsKindOf(Behavior) and owner.oclIsKindOf(State)) then owner.oclAsType(NamedElement).myQualifiedName().concat('_').concat(oclAsType(Behavior).getStateBehaviorType()).concat('_').concat(name) else myPinName() endif /]
+[query private myStateBehaviorName (anElement: NamedElement) : String = if (oclIsKindOf(Behavior) and owner.oclIsKindOf(State)) then owner.oclAsType(NamedElement).myQualifiedName().concat('_').concat(oclAsType(Behavior).getStateMachineBehaviorType()).concat('_').concat(name) else myPinName() endif /]
 [query private myPinName (anElement : NamedElement) : String = if(oclIsKindOf(Pin)) then eClass().name.concat('_').concat(owner.oclAsType(Action)._context.name).concat('_').concat(owner.owner.oclAsType(NamedElement).name).concat('_').concat(owner.oclAsType(NamedElement).name).concat('_').concat(name) else myElementQualifiedName() endif /]
 [query private myElementQualifiedName (anElement : NamedElement) : String = if (namespace.oclIsUndefined() or ''=namespace) and (not owner.oclIsUndefined()) and (not owner.oclAsType(NamedElement).qualifiedName.oclIsUndefined()) and (not (qualifiedName.oclIsUndefined())) then (owner.oclAsType(NamedElement).myQualifiedName()).concat('_').concat(eClass().name).concat('_').concat(qualifiedName).substituteAll('.', '_') else myLiteralSpecificationName() endif /]
 [query private myLiteralSpecificationName(anElement :NamedElement) : String = if (oclIsKindOf(LiteralSpecification)) then if (owner.oclIsTypeOf(ConnectorEnd)) then myValueSpecName().concat('_').concat(owner.oclAsType(ConnectorEnd).myQualifiedName()) else myValueSpecName().concat('_').concat(owner.mySlotName()).concat(myLiteralName()) endif else myValueSpecName()endif /]
@@ -80,15 +80,15 @@
 	if (aBehavior._context.oclIsUndefined())
 	then aBehavior.getNearestPackage().getNamespace(noReflection ,false)
 	else 
-		if aBehavior.owner.oclIsKindOf(State)
+		if aBehavior.owner.oclIsKindOf(State) or aBehavior.owner.oclIsKindOf(Transition)
 		then aBehavior.getNextParentElementWithDefinedNamespaceProperty().qualifiedName
 		else aBehavior._context.getNearestPackage().getNamespace(noReflection, false) + '::' + aBehavior._context.name
 		endif
 	endif
 /]
 
-[query public generateNamespaceName(aBehavior : Behavior, noReflection : Boolean) : String =  if (aBehavior.owner.oclIsKindOf(State)) then aBehavior.generateStateBehaviorNamespaceName(noReflection) else aBehavior.generateNamespace(noReflection) + '::' + aBehavior.name endif /]
-[query private generateStateBehaviorNamespaceName(aStateBehavior : Behavior, noReflection : Boolean) : String = aStateBehavior.generateNamespace(noReflection) + '::' + aStateBehavior.getStateBehaviorType() + '_' + aStateBehavior.name /]
+[query public generateNamespaceName(aBehavior : Behavior, noReflection : Boolean) : String =  if (aBehavior.owner.oclIsKindOf(State) or aBehavior.owner.oclIsKindOf(Transition)) then aBehavior.generateStateMachineBehaviorNamespaceName(noReflection) else aBehavior.generateNamespace(noReflection) + '::' + aBehavior.name endif /]
+[query private generateStateMachineBehaviorNamespaceName(aStateMachineBehavior : Behavior, noReflection : Boolean) : String = aStateMachineBehavior.generateNamespace(noReflection) + '::' + aStateMachineBehavior.getStateMachineBehaviorType() + '_' + aStateMachineBehavior.name /]
 [query public generateNamespace(anOperation : Operation, noReflection : Boolean) : String = anOperation.owner.oclAsType(Classifier).generateNamespaceName(noReflection)/]
 [query public generateNamespaceName(anOperation : Operation, noReflection : Boolean) : String = anOperation.owner.oclAsType(Classifier).generateNamespaceName(noReflection).concat('::').concat(anOperation.name)/]
 [query public generateNamespace(aProperty : Property, noReflection : Boolean) : String = aProperty.owner.oclAsType(Classifier).generateNamespaceName(noReflection)/]
@@ -123,10 +123,10 @@ endif
 
 [**
  * PSSM: get the type of State Behavior (entry, doActivity, exit) a given State Behavior represents as a String. If the given Behavior is not a child of a State or is not assigned as a State Behavior, null is returned.
+ * Same applies to the Transition Effect Behavior.
 */]
-[query public getStateBehaviorType(aBehavior : Behavior) : String =
-if (not aBehavior.owner.oclIsKindOf(State)) then null
-else
+[query public getStateMachineBehaviorType(aBehavior : Behavior) : String =
+if (aBehavior.owner.oclIsKindOf(State)) then 
 	if (aBehavior.owner.oclAsType(State).entry = aBehavior) then 'entry'
 	else 
 		if (aBehavior.owner.oclAsType(State).doActivity = aBehavior)  then 'doActivity'
@@ -136,6 +136,13 @@ else
 			endif
 		endif
 	endif
+else
+if (aBehavior.owner.oclIsKindOf(Transition)) then
+	if (aBehavior.owner.oclAsType(Transition).effect = aBehavior) then 'effect'
+	else null
+	endif
+else null
+endif
 endif
 /]
 
@@ -243,7 +250,7 @@ endif
 		 endif
 	endif /]
 [query public getMemberName(aBehavior : Behavior) : String = if(aBehavior.oclIsUndefined()) then '' else if(aBehavior.owner.oclIsKindOf(State)) then aBehavior.getStateBehaviorMemberName() else aBehavior.owner.oclAsType(NamedElement).myName().toLowerFirst() + '_' + aBehavior.eClass().name + '_' + aBehavior.name.toLowerFirst() endif endif/]
-[query private getStateBehaviorMemberName(aStateBehavior : Behavior) : String = aStateBehavior.owner.oclAsType(NamedElement).memberName().toLowerFirst() + '_'  + aStateBehavior.eClass().name + '_' + aStateBehavior.getStateBehaviorType() + '_' + aStateBehavior.name.toLowerFirst() /]
+[query private getStateBehaviorMemberName(aStateBehavior : Behavior) : String = aStateBehavior.owner.oclAsType(NamedElement).memberName().toLowerFirst() + '_'  + aStateBehavior.eClass().name + '_' + aStateBehavior.getStateMachineBehaviorType() + '_' + aStateBehavior.name.toLowerFirst() /]
 [query public getMemberName(aProperty : Property) : String = if (aProperty.oclIsUndefined()) then '' else aProperty.owner.oclAsType(NamedElement).myName().toLowerFirst() + '_'+ aProperty.eClass().name + '_' + aProperty.name.toLowerFirst() endif /]
 [query public getMemberName(anOperation : Operation) : String = if (anOperation.oclIsUndefined()) then '' else anOperation.owner.oclAsType(NamedElement).myName().toLowerFirst() + '_Operation_' + anOperation.name.toLowerFirst() + anOperation.parameterListName() endif /]
 

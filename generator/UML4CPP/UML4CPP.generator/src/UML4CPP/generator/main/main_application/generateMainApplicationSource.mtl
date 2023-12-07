@@ -120,7 +120,7 @@ int main()
 {	
     //executing main activity
 	[mainActivity.generateParameterInstances(aPackage)/]
-	std::shared_ptr<[if (mainActivity.owner.oclIsKindOf(Classifier))][mainActivity.owner.oclAsType(Classifier).generateNamespaceName(false)/][else]uml::Element[/if]> element = [if (mainActivity.owner.oclIsKindOf(Classifier))][mainActivity.owner.oclAsType(Classifier).generateNamespace(false)/]::[mainActivity.owner.oclAsType(Classifier).getNearestPackage().getPackageName()/]Factory::eInstance()->create[mainActivity.owner.oclAsType(Classifier).name.toUpperFirst()/]()[else]nullptr[/if];
+	std::shared_ptr<[if (mainActivity.owner.oclIsKindOf(Classifier))][mainActivity.owner.oclAsType(Classifier).generateNamespaceName(false)/][else]fUML::MDE4CPP_Extensions::FUML_Object[/if]> element = [if (mainActivity.owner.oclIsKindOf(Classifier))][mainActivity.owner.oclAsType(Classifier).generateNamespace(false)/]::[mainActivity.owner.oclAsType(Classifier).getNearestPackage().getPackageName()/]Factory::eInstance()->create[mainActivity.owner.oclAsType(Classifier).name.toUpperFirst()/]()[else]nullptr[/if];
 
 	std::shared_ptr<PluginFramework> pluginFramework = PluginFramework::eInstance();
 	std::string pluginName = "[mainActivity.getRootPackage().getPackageName()/]Exec";
@@ -204,7 +204,7 @@ using namespace [aPackage.generateNamespace(false)/];
 int main()
 {	
     //executing main State Machine
-	std::shared_ptr<[if (mainStateMachine.owner.oclIsKindOf(Classifier))][mainStateMachine.owner.oclAsType(Classifier).generateNamespaceName(false)/][else]uml::Element[/if]> element = [if (mainStateMachine.owner.oclIsKindOf(Classifier))][mainStateMachine.owner.oclAsType(Classifier).generateNamespace(false)/]::[mainStateMachine.owner.oclAsType(Classifier).getNearestPackage().getPackageName()/]Factory::eInstance()->create[mainStateMachine.owner.oclAsType(Classifier).name.toUpperFirst()/]()[else]nullptr[/if];
+	std::shared_ptr<[if (mainStateMachine.owner.oclIsKindOf(Classifier))][mainStateMachine.owner.oclAsType(Classifier).generateNamespaceName(false)/][else]fUML::MDE4CPP_Extensions::FUML_Object[/if]> element = [if (mainStateMachine.owner.oclIsKindOf(Classifier))][mainStateMachine.owner.oclAsType(Classifier).generateNamespace(false)/]::[mainStateMachine.owner.oclAsType(Classifier).getNearestPackage().getPackageName()/]Factory::eInstance()->create[mainStateMachine.owner.oclAsType(Classifier).name.toUpperFirst()/]()[else]nullptr[/if];
 
 	std::shared_ptr<PluginFramework> pluginFramework = PluginFramework::eInstance();
 	std::string pluginName = "[mainStateMachine.getRootPackage().getPackageName()/]Exec";

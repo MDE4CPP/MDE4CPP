@@ -4,8 +4,8 @@
 //*
 //********************************************************************
 
-#ifndef PSSM_SEMANTICS_COMMONBEHAVIOR_CALLEVENTEXECUTION_HPP
-#define PSSM_SEMANTICS_COMMONBEHAVIOR_CALLEVENTEXECUTION_HPP
+#ifndef FUML_SEMANTICS_COMMONBEHAVIOR_EVENTDISPATCHLOOP_HPP
+#define FUML_SEMANTICS_COMMONBEHAVIOR_EVENTDISPATCHLOOP_HPP
 
 
 #include <memory>
@@ -26,90 +26,61 @@ namespace persistence
 	}
 }
 
-namespace PSSM
+namespace fUML
 {
-	class PSSMFactory;
+	class fUMLFactory;
 }
 
 //Forward Declaration for used types 
 namespace fUML::Semantics::CommonBehavior 
 {
 	class ObjectActivation;
-	class ParameterValue;
-}
-namespace PSSM::Semantics::CommonBehavior 
-{
-	class CallEventOccurrence;
-}
-namespace fUML::Semantics::Loci 
-{
-	class Locus;
-}
-namespace ecore 
-{
-	class EAnnotation;
-}
-namespace uml 
-{
-	class Behavior;
-	class Classifier;
-	class Comment;
-	class Operation;
 }
 
 // namespace macro header include
-#include "PSSM/PSSM.hpp"
-
-// base class includes
-#include "fUML/Semantics/CommonBehavior/Execution.hpp"
+#include "fUML/fUML.hpp"
 
 
 
+#include "ecore/EModelElement.hpp"
+
+//Includes from codegen annotation
+#include <thread>
+#include <mutex>
+#include <condition_variable>
 
 //*********************************
-namespace PSSM::Semantics::CommonBehavior 
+namespace fUML::Semantics::CommonBehavior 
 {
 	
-	class PSSM_API CallEventExecution : virtual public fUML::Semantics::CommonBehavior::Execution
+	class FUML_API EventDispatchLoop : virtual public ecore::EModelElement
 	{
 		public:
- 			CallEventExecution(const CallEventExecution &) {}
+ 			EventDispatchLoop(const EventDispatchLoop &) {}
 
 		protected:
-			CallEventExecution(){}
+			EventDispatchLoop(){}
 
 		public:
 			virtual std::shared_ptr<ecore::EObject> copy() const = 0;
 
 			//destructor
-			virtual ~CallEventExecution() {}
+			virtual ~EventDispatchLoop() {}
 
 			//*********************************
 			// Operations
 			//*********************************
-			virtual void _send(const std::shared_ptr<PSSM::Semantics::CommonBehavior::CallEventOccurrence>& eventOccurrence) = 0;
-			virtual void _suspend() = 0;
-			virtual void execute() = 0;
-			
-			virtual std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> getInputParameterValues() = 0;
-			
-			virtual void releaseCaller() = 0;
+			virtual void startDispatchLoop(const std::shared_ptr<fUML::Semantics::CommonBehavior::ObjectActivation>& objectActivation) = 0;
 
 			//*********************************
 			// Attribute Getters & Setters
 			//*********************************
-			virtual bool getCallerSuspended() const = 0;
-			virtual void setCallerSuspended (bool _callerSuspended)= 0;
 
 			//*********************************
 			// Reference Getters & Setters
 			//*********************************
-			virtual const std::shared_ptr<uml::Behavior>& getBehavior() const = 0;
-			virtual void setBehavior(const std::shared_ptr<uml::Behavior>&) = 0;
-			virtual const std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_Object>& getCallerContext() const = 0;
-			virtual void setCallerContext(const std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_Object>&) = 0;
-			virtual const std::shared_ptr<uml::Operation>& getOperation() const = 0;
-			virtual void setOperation(const std::shared_ptr<uml::Operation>&) = 0;
+			virtual const std::shared_ptr<std::thread>& getMemberThread() const = 0;
+			virtual void setMemberThread(const std::shared_ptr<std::thread>&) = 0;
 
 			//*********************************
 			// Union Reference Getters
@@ -131,14 +102,11 @@ namespace PSSM::Semantics::CommonBehavior
 			//*********************************
 			// Attribute Members
 			//*********************************
-			bool m_callerSuspended= false;
 			
 			//*********************************
 			// Reference Members
 			//*********************************
-			std::shared_ptr<uml::Behavior> m_behavior;
-			std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_Object> m_callerContext;
-			std::shared_ptr<uml::Operation> m_operation;
+			std::shared_ptr<std::thread> m_memberThread;
 	};
 }
-#endif /* end of include guard: PSSM_SEMANTICS_COMMONBEHAVIOR_CALLEVENTEXECUTION_HPP */
+#endif /* end of include guard: FUML_SEMANTICS_COMMONBEHAVIOR_EVENTDISPATCHLOOP_HPP */

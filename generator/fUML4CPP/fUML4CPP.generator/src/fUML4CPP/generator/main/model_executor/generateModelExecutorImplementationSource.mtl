@@ -200,7 +200,7 @@ std::shared_ptr<Any> [packageName/]ExecutorImpl::evaluate(const std::shared_ptr<
 	//return PSCS::Semantics::Loci::CS_ExecutorImpl::evaluate(specification);
 }
 
-std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> [packageName/]ExecutorImpl::execute(const std::shared_ptr<uml::Behavior>& behavior, const std::shared_ptr<uml::Element>& context, const std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>>& inputs)
+std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> [packageName/]ExecutorImpl::execute(const std::shared_ptr<uml::Behavior>& behavior, const std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_Object>& context, const std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>>& inputs)
 {
 [if (aPackage.getBehaviorsOwnedByPackage()->addAll(aPackage.getCalledBehaviors())->size() > 0)]
 	int behaviorMetaElementID = behavior->getMetaElementID();
@@ -286,7 +286,7 @@ std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> [packageNa
 	return fUML::Semantics::Loci::ExecutorImpl::execute(behavior, context, inputs);
 }
 
-std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> [packageName/]ExecutorImpl::invokeOpaqueBehavior(const std::shared_ptr<uml::OpaqueBehavior>& opaqueBehavior, const std::shared_ptr<uml::Element>& context, const std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>>& inputs)
+std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> [packageName/]ExecutorImpl::invokeOpaqueBehavior(const std::shared_ptr<uml::OpaqueBehavior>& opaqueBehavior, const std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_Object>& context, const std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>>& inputs)
 {
 	std::string pluginName;
 

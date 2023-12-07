@@ -4,15 +4,15 @@
 
 #include "abstractDataTypes/SubsetUnion.hpp"
 //metametamodel classes
-#include "ecore/EStringToStringMapEntry.hpp"
 #include "ecore/EAnnotation.hpp"
-#include "ecore/EClass.hpp"
-#include "ecore/EOperation.hpp"
-#include "ecore/EReference.hpp"
-#include "ecore/EAttribute.hpp"
+#include "ecore/EStringToStringMapEntry.hpp"
 #include "ecore/EGenericType.hpp"
-#include "ecore/EDataType.hpp"
+#include "ecore/EOperation.hpp"
+#include "ecore/EAttribute.hpp"
 #include "ecore/EParameter.hpp"
+#include "ecore/EClass.hpp"
+#include "ecore/EDataType.hpp"
+#include "ecore/EReference.hpp"
 
 //metamodel factory
 #include "fUML/Semantics/CommonBehavior/CommonBehaviorFactory.hpp"
@@ -129,6 +129,25 @@ const std::shared_ptr<ecore::EOperation>& fUML::Semantics::CommonBehavior::Commo
 }
 
 // End Class EventAccepter
+
+// Begin Class EventDispatchLoop
+const std::shared_ptr<ecore::EClass>& fUML::Semantics::CommonBehavior::CommonBehaviorPackageImpl::getEventDispatchLoop_Class() const
+{
+	return m_eventDispatchLoop_Class;
+}
+
+
+const std::shared_ptr<ecore::EReference>& fUML::Semantics::CommonBehavior::CommonBehaviorPackageImpl::getEventDispatchLoop_Attribute_memberThread() const
+{
+	return m_eventDispatchLoop_Attribute_memberThread;
+}
+
+const std::shared_ptr<ecore::EOperation>& fUML::Semantics::CommonBehavior::CommonBehaviorPackageImpl::getEventDispatchLoop_Operation_startDispatchLoop_ObjectActivation() const
+{
+	return m_eventDispatchLoop_Operation_startDispatchLoop_ObjectActivation;
+}
+
+// End Class EventDispatchLoop
 
 // Begin Class EventOccurrence
 const std::shared_ptr<ecore::EClass>& fUML::Semantics::CommonBehavior::CommonBehaviorPackageImpl::getEventOccurrence_Class() const
@@ -273,9 +292,21 @@ const std::shared_ptr<ecore::EReference>& fUML::Semantics::CommonBehavior::Commo
 {
 	return m_objectActivation_Attribute_classifierBehaviorExecutions;
 }
+const std::shared_ptr<ecore::EReference>& fUML::Semantics::CommonBehavior::CommonBehaviorPackageImpl::getObjectActivation_Attribute_conditionVariable() const
+{
+	return m_objectActivation_Attribute_conditionVariable;
+}
 const std::shared_ptr<ecore::EReference>& fUML::Semantics::CommonBehavior::CommonBehaviorPackageImpl::getObjectActivation_Attribute_eventPool() const
 {
 	return m_objectActivation_Attribute_eventPool;
+}
+const std::shared_ptr<ecore::EReference>& fUML::Semantics::CommonBehavior::CommonBehaviorPackageImpl::getObjectActivation_Attribute_memberThread() const
+{
+	return m_objectActivation_Attribute_memberThread;
+}
+const std::shared_ptr<ecore::EReference>& fUML::Semantics::CommonBehavior::CommonBehaviorPackageImpl::getObjectActivation_Attribute_mutex() const
+{
+	return m_objectActivation_Attribute_mutex;
 }
 const std::shared_ptr<ecore::EReference>& fUML::Semantics::CommonBehavior::CommonBehaviorPackageImpl::getObjectActivation_Attribute_object() const
 {

@@ -4,15 +4,15 @@
 
 #include "abstractDataTypes/SubsetUnion.hpp"
 //metametamodel classes
-#include "ecore/EStringToStringMapEntry.hpp"
 #include "ecore/EAnnotation.hpp"
-#include "ecore/EClass.hpp"
-#include "ecore/EOperation.hpp"
-#include "ecore/EReference.hpp"
-#include "ecore/EAttribute.hpp"
+#include "ecore/EStringToStringMapEntry.hpp"
 #include "ecore/EGenericType.hpp"
-#include "ecore/EDataType.hpp"
+#include "ecore/EOperation.hpp"
+#include "ecore/EAttribute.hpp"
 #include "ecore/EParameter.hpp"
+#include "ecore/EClass.hpp"
+#include "ecore/EDataType.hpp"
+#include "ecore/EReference.hpp"
 
 // metametamodel factory
 #include "ecore/ecoreFactory.hpp"
@@ -21,6 +21,7 @@
 
 #include "fUML/Semantics/Loci/LociPackage.hpp"
 #include "fUML/MDE4CPP_Extensions/MDE4CPP_ExtensionsPackage.hpp"
+#include "fUML/Semantics/StructuredClassifiers/StructuredClassifiersPackage.hpp"
 #include "ecore/ecorePackage.hpp"
 #include "fUML/fUMLPackage.hpp"
 #include "types/typesPackage.hpp"
@@ -53,6 +54,7 @@ void CommonBehaviorPackageImpl::initializePackageContents()
  	// Initialize classes and features; add operations and parameters
 	initializeClassifierBehaviorExecutionContent();
 	initializeEventAccepterContent();
+	initializeEventDispatchLoopContent();
 	initializeEventOccurrenceContent();
 	initializeExecutionContent();
 	initializeFIFOGetNextEventStrategyContent();
@@ -268,6 +270,76 @@ void CommonBehaviorPackageImpl::initializeEventAccepterContent()
 	
 }
 
+void CommonBehaviorPackageImpl::initializeEventDispatchLoopContent()
+{
+	m_eventDispatchLoop_Class->setName("EventDispatchLoop");
+	m_eventDispatchLoop_Class->setAbstract(false);
+	m_eventDispatchLoop_Class->setInterface(false);
+	
+	m_eventDispatchLoop_Class->_setID(EVENTDISPATCHLOOP_CLASS);
+	
+	/*
+	 * EAttributes
+	 */
+	
+	/*
+	 * EReferences
+	 */
+	m_eventDispatchLoop_Attribute_memberThread->setName("memberThread");
+	{
+		std::shared_ptr<ecore::ecoreFactory> factory = ecore::ecoreFactory::eInstance();
+		std::shared_ptr<ecore::EClass> unknownClass = factory ->createEClass(-1);
+	   	unknownClass->setName("invalid");
+		unknownClass->setAbstract(true);
+		unknownClass->setInterface(true);
+		m_eventDispatchLoop_Attribute_memberThread->setEType(unknownClass);
+	}
+	m_eventDispatchLoop_Attribute_memberThread->setLowerBound(0);
+	m_eventDispatchLoop_Attribute_memberThread->setUpperBound(1);
+	m_eventDispatchLoop_Attribute_memberThread->setTransient(false);
+	m_eventDispatchLoop_Attribute_memberThread->setVolatile(false);
+	m_eventDispatchLoop_Attribute_memberThread->setChangeable(true);
+	m_eventDispatchLoop_Attribute_memberThread->setUnsettable(false);
+	m_eventDispatchLoop_Attribute_memberThread->setUnique(true);
+	m_eventDispatchLoop_Attribute_memberThread->setDerived(false);
+	m_eventDispatchLoop_Attribute_memberThread->setOrdered(true);
+	m_eventDispatchLoop_Attribute_memberThread->setContainment(false);
+	m_eventDispatchLoop_Attribute_memberThread->setResolveProxies(true);
+	m_eventDispatchLoop_Attribute_memberThread->setDefaultValueLiteral("");	
+	
+	m_eventDispatchLoop_Attribute_memberThread->_setID(EVENTDISPATCHLOOP_ATTRIBUTE_MEMBERTHREAD);
+	
+	/*
+	 * EOperations
+	 */
+	m_eventDispatchLoop_Operation_startDispatchLoop_ObjectActivation->setName("startDispatchLoop");
+	{ 	std::shared_ptr<ecore::ecoreFactory> factory = ecore::ecoreFactory::eInstance();
+		std::shared_ptr<ecore::EClass> unknownClass = factory ->createEClass(-1);
+	   	unknownClass->setName("invalid");
+		unknownClass->setAbstract(true);
+		unknownClass->setInterface(true);
+		m_eventDispatchLoop_Operation_startDispatchLoop_ObjectActivation->setEType(unknownClass);
+	}
+	m_eventDispatchLoop_Operation_startDispatchLoop_ObjectActivation->setLowerBound(1);
+	m_eventDispatchLoop_Operation_startDispatchLoop_ObjectActivation->setUpperBound(1);
+	m_eventDispatchLoop_Operation_startDispatchLoop_ObjectActivation->setUnique(true);
+	m_eventDispatchLoop_Operation_startDispatchLoop_ObjectActivation->setOrdered(false);
+	
+	m_eventDispatchLoop_Operation_startDispatchLoop_ObjectActivation->_setID(EVENTDISPATCHLOOP_OPERATION_STARTDISPATCHLOOP_OBJECTACTIVATION);
+	
+	{
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_eventDispatchLoop_Operation_startDispatchLoop_ObjectActivation);
+		parameter->setName("objectActivation");
+		parameter->setEType(nullptr);
+		parameter->setLowerBound(0);
+		parameter->setUpperBound(1);
+		parameter->setUnique(true);
+		parameter->setOrdered(true);
+	}
+	
+	
+}
+
 void CommonBehaviorPackageImpl::initializeEventOccurrenceContent()
 {
 	m_eventOccurrence_Class->setName("EventOccurrence");
@@ -436,7 +508,7 @@ void CommonBehaviorPackageImpl::initializeExecutionContent()
 	
 	m_execution_Attribute_behavior->_setID(EXECUTION_ATTRIBUTE_BEHAVIOR);
 	m_execution_Attribute_context->setName("context");
-	m_execution_Attribute_context->setEType(uml::umlPackage::eInstance()->getElement_Class());
+	m_execution_Attribute_context->setEType(fUML::MDE4CPP_Extensions::MDE4CPP_ExtensionsPackage::eInstance()->getFUML_Object_Class());
 	m_execution_Attribute_context->setLowerBound(1);
 	m_execution_Attribute_context->setUpperBound(1);
 	m_execution_Attribute_context->setTransient(false);
@@ -751,6 +823,29 @@ void CommonBehaviorPackageImpl::initializeObjectActivationContent()
 	m_objectActivation_Attribute_classifierBehaviorExecutions->setDefaultValueLiteral("");	
 	
 	m_objectActivation_Attribute_classifierBehaviorExecutions->_setID(OBJECTACTIVATION_ATTRIBUTE_CLASSIFIERBEHAVIOREXECUTIONS);
+	m_objectActivation_Attribute_conditionVariable->setName("conditionVariable");
+	{
+		std::shared_ptr<ecore::ecoreFactory> factory = ecore::ecoreFactory::eInstance();
+		std::shared_ptr<ecore::EClass> unknownClass = factory ->createEClass(-1);
+	   	unknownClass->setName("invalid");
+		unknownClass->setAbstract(true);
+		unknownClass->setInterface(true);
+		m_objectActivation_Attribute_conditionVariable->setEType(unknownClass);
+	}
+	m_objectActivation_Attribute_conditionVariable->setLowerBound(1);
+	m_objectActivation_Attribute_conditionVariable->setUpperBound(1);
+	m_objectActivation_Attribute_conditionVariable->setTransient(false);
+	m_objectActivation_Attribute_conditionVariable->setVolatile(false);
+	m_objectActivation_Attribute_conditionVariable->setChangeable(true);
+	m_objectActivation_Attribute_conditionVariable->setUnsettable(false);
+	m_objectActivation_Attribute_conditionVariable->setUnique(true);
+	m_objectActivation_Attribute_conditionVariable->setDerived(false);
+	m_objectActivation_Attribute_conditionVariable->setOrdered(true);
+	m_objectActivation_Attribute_conditionVariable->setContainment(false);
+	m_objectActivation_Attribute_conditionVariable->setResolveProxies(true);
+	m_objectActivation_Attribute_conditionVariable->setDefaultValueLiteral("");	
+	
+	m_objectActivation_Attribute_conditionVariable->_setID(OBJECTACTIVATION_ATTRIBUTE_CONDITIONVARIABLE);
 	m_objectActivation_Attribute_eventPool->setName("eventPool");
 	m_objectActivation_Attribute_eventPool->setEType(getEventOccurrence_Class());
 	m_objectActivation_Attribute_eventPool->setLowerBound(0);
@@ -767,6 +862,52 @@ void CommonBehaviorPackageImpl::initializeObjectActivationContent()
 	m_objectActivation_Attribute_eventPool->setDefaultValueLiteral("");	
 	
 	m_objectActivation_Attribute_eventPool->_setID(OBJECTACTIVATION_ATTRIBUTE_EVENTPOOL);
+	m_objectActivation_Attribute_memberThread->setName("memberThread");
+	{
+		std::shared_ptr<ecore::ecoreFactory> factory = ecore::ecoreFactory::eInstance();
+		std::shared_ptr<ecore::EClass> unknownClass = factory ->createEClass(-1);
+	   	unknownClass->setName("invalid");
+		unknownClass->setAbstract(true);
+		unknownClass->setInterface(true);
+		m_objectActivation_Attribute_memberThread->setEType(unknownClass);
+	}
+	m_objectActivation_Attribute_memberThread->setLowerBound(1);
+	m_objectActivation_Attribute_memberThread->setUpperBound(1);
+	m_objectActivation_Attribute_memberThread->setTransient(false);
+	m_objectActivation_Attribute_memberThread->setVolatile(false);
+	m_objectActivation_Attribute_memberThread->setChangeable(true);
+	m_objectActivation_Attribute_memberThread->setUnsettable(false);
+	m_objectActivation_Attribute_memberThread->setUnique(true);
+	m_objectActivation_Attribute_memberThread->setDerived(false);
+	m_objectActivation_Attribute_memberThread->setOrdered(true);
+	m_objectActivation_Attribute_memberThread->setContainment(false);
+	m_objectActivation_Attribute_memberThread->setResolveProxies(true);
+	m_objectActivation_Attribute_memberThread->setDefaultValueLiteral("");	
+	
+	m_objectActivation_Attribute_memberThread->_setID(OBJECTACTIVATION_ATTRIBUTE_MEMBERTHREAD);
+	m_objectActivation_Attribute_mutex->setName("mutex");
+	{
+		std::shared_ptr<ecore::ecoreFactory> factory = ecore::ecoreFactory::eInstance();
+		std::shared_ptr<ecore::EClass> unknownClass = factory ->createEClass(-1);
+	   	unknownClass->setName("invalid");
+		unknownClass->setAbstract(true);
+		unknownClass->setInterface(true);
+		m_objectActivation_Attribute_mutex->setEType(unknownClass);
+	}
+	m_objectActivation_Attribute_mutex->setLowerBound(1);
+	m_objectActivation_Attribute_mutex->setUpperBound(1);
+	m_objectActivation_Attribute_mutex->setTransient(false);
+	m_objectActivation_Attribute_mutex->setVolatile(false);
+	m_objectActivation_Attribute_mutex->setChangeable(true);
+	m_objectActivation_Attribute_mutex->setUnsettable(false);
+	m_objectActivation_Attribute_mutex->setUnique(true);
+	m_objectActivation_Attribute_mutex->setDerived(false);
+	m_objectActivation_Attribute_mutex->setOrdered(true);
+	m_objectActivation_Attribute_mutex->setContainment(false);
+	m_objectActivation_Attribute_mutex->setResolveProxies(true);
+	m_objectActivation_Attribute_mutex->setDefaultValueLiteral("");	
+	
+	m_objectActivation_Attribute_mutex->_setID(OBJECTACTIVATION_ATTRIBUTE_MUTEX);
 	m_objectActivation_Attribute_object->setName("object");
 	m_objectActivation_Attribute_object->setEType(fUML::MDE4CPP_Extensions::MDE4CPP_ExtensionsPackage::eInstance()->getFUML_Object_Class());
 	m_objectActivation_Attribute_object->setLowerBound(1);

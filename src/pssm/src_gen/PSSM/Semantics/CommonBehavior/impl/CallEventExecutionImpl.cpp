@@ -45,10 +45,10 @@
 
 #include <exception> // used in Persistence
 #include "uml/umlFactory.hpp"
-#include "fUML/MDE4CPP_Extensions/MDE4CPP_ExtensionsFactory.hpp"
+#include "fUML/Semantics/Loci/LociFactory.hpp"
 #include "ecore/ecoreFactory.hpp"
 #include "fUML/Semantics/CommonBehavior/CommonBehaviorFactory.hpp"
-#include "fUML/Semantics/Loci/LociFactory.hpp"
+#include "fUML/MDE4CPP_Extensions/MDE4CPP_ExtensionsFactory.hpp"
 #include "uml/Behavior.hpp"
 #include "PSSM/Semantics/CommonBehavior/CallEventOccurrence.hpp"
 #include "uml/Classifier.hpp"
@@ -62,8 +62,8 @@
 #include "uml/Operation.hpp"
 #include "fUML/Semantics/CommonBehavior/ParameterValue.hpp"
 //Factories and Package includes
-#include "PSSM/PSSMPackage.hpp"
 #include "PSSM/Semantics/SemanticsPackage.hpp"
+#include "PSSM/PSSMPackage.hpp"
 #include "fUML/Semantics/CommonBehavior/CommonBehaviorPackage.hpp"
 #include "PSSM/Semantics/CommonBehavior/CommonBehaviorPackage.hpp"
 #include "fUML/Semantics/Loci/LociPackage.hpp"
@@ -214,13 +214,7 @@ std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> CallEventE
 	//end of body
 }
 
-std::shared_ptr<Any> CallEventExecutionImpl::new_()
-{
-	//ADD_COUNT(__PRETTY_FUNCTION__)
-	//generated from body annotation
-	return eEcoreAny(PSSM::Semantics::CommonBehavior::CommonBehaviorFactory::eInstance()->createCallEventExecution(), PSSM::Semantics::CommonBehavior::CommonBehaviorPackage::CALLEVENTEXECUTION_CLASS);
-	//end of body
-}
+
 
 void CallEventExecutionImpl::releaseCaller()
 {
@@ -660,12 +654,6 @@ std::shared_ptr<Any> CallEventExecutionImpl::eInvoke(int operationID, const std:
 		{
 			std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> resultList = this->getInputParameterValues();
 			return eEcoreContainerAny(resultList,fUML::Semantics::CommonBehavior::CommonBehaviorPackage::PARAMETERVALUE_CLASS);
-			break;
-		}
-		// PSSM::Semantics::CommonBehavior::CallEventExecution::new_() : Any: 3061400933
-		case CommonBehaviorPackage::CALLEVENTEXECUTION_OPERATION_NEW_:
-		{
-			result = eAny(this->new_(), 0, false);
 			break;
 		}
 		// PSSM::Semantics::CommonBehavior::CallEventExecution::releaseCaller(): 1070378962

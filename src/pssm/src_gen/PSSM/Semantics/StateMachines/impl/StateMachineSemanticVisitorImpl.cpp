@@ -50,8 +50,8 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "fUML/Semantics/Loci/LociFactory.hpp"
 #include "uml/umlFactory.hpp"
+#include "fUML/Semantics/Loci/LociFactory.hpp"
 #include "uml/Behavior.hpp"
 #include "fUML/Semantics/CommonBehavior/EventOccurrence.hpp"
 #include "fUML/Semantics/CommonBehavior/Execution.hpp"
@@ -61,8 +61,8 @@
 #include "fUML/Semantics/Loci/SemanticVisitor.hpp"
 #include "uml/Trigger.hpp"
 //Factories and Package includes
-#include "PSSM/PSSMPackage.hpp"
 #include "PSSM/Semantics/SemanticsPackage.hpp"
+#include "PSSM/PSSMPackage.hpp"
 #include "fUML/Semantics/CommonBehavior/CommonBehaviorPackage.hpp"
 #include "fUML/Semantics/Loci/LociPackage.hpp"
 #include "fUML/MDE4CPP_Extensions/MDE4CPP_ExtensionsPackage.hpp"
@@ -130,10 +130,9 @@ void StateMachineSemanticVisitorImpl::activate()
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
 	// This operation is intended to be overridden by sub-classes. For required sub-classes
-// (e.g., RegionActivation, StateActivation) it will initiate the instantiation phase of
-// child semantic visitors. By default activate does nothing.
-return;
-
+	// (e.g., RegionActivation, StateActivation) it will initiate the instantiation phase of
+	// child semantic visitors. By default, activate() does nothing.
+	return;
 	//end of body
 }
 
@@ -142,10 +141,9 @@ void StateMachineSemanticVisitorImpl::activateTransitions()
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
 	// ActivateTransition is intended to be overridden by sub-classes. It will capture the instantiation
-// of transitions visitors as well as the linking between these visitors and the required vertices
-// activation. By default activate does nothing.
-return;
-
+	// of transitions visitors as well as the linking between these visitors and the required vertices
+	// activation. By default activate, does() nothing.
+	return;
 	//end of body
 }
 
@@ -197,8 +195,7 @@ std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_Object> StateMachineSemanticVisit
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
-	//return this->getStateMachineExecution()->getContext();
-	return this->getStateMachineExecution(); // Execution::getContext returns uml::Element instead of FUML_Object???
+	return this->getStateMachineExecution()->getContext();
 	//end of body
 }
 
@@ -206,17 +203,21 @@ std::shared_ptr<fUML::Semantics::CommonBehavior::Execution> StateMachineSemantic
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
+	// Create an Execution for the specified Behavior. If the Behavior Execution is triggered by 
+	// the dispatching of an EventOccurrence (i.e. a CallEvent or a SignalEvent), then an EventTriggeredExecution is provided. 
+	// The EventTriggeredExecution wraps the original Execution and ensures passing of Event data to the wrapped Execution.
+	// while the context both of the new Behavior Execution and its containing EventTriggeredExecution is the same as of this SMSV.
 	std::shared_ptr<fUML::Semantics::CommonBehavior::Execution> execution = nullptr;
 	if(behavior != nullptr) 
 	{
-		std::shared_ptr<fUML::Semantics::CommonBehavior::Execution> originalExecution = this->getExecutionLocus()->getFactory()->createExecution(behavior, this->getExecutionContext());
+		auto originalExecution = this->getExecutionLocus()->getFactory()->createExecution(behavior, this->getExecutionContext());
 		if(eventOccurrence != nullptr) 
 		{
-			std::shared_ptr<PSSM::Semantics::CommonBehavior::EventTriggeredExecution> containerExecution = PSSM::Semantics::CommonBehavior::CommonBehaviorFactory::eInstance()->createEventTriggeredExecution();
+			auto containerExecution = PSSM::Semantics::CommonBehavior::CommonBehaviorFactory::eInstance()->createEventTriggeredExecution();
 			containerExecution->setTriggeringEventOccurrence(eventOccurrence);
 			containerExecution->setWrappedExecution(originalExecution);
 			containerExecution->setContext(originalExecution->getContext());
-
+			execution = containerExecution;
 		} 
 		else 
 		{
@@ -258,18 +259,13 @@ std::shared_ptr<fUML::Semantics::CommonBehavior::Execution> StateMachineSemantic
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
 	// Return the state-machine execution from which the caller of this operation belongs
-	//if(this.parent!=null && this.parent instanceof StateMachineExecution){
-	//	return (Execution)this.parent;
-	//}else{
-	//	return ((StateMachineSemanticVisitor)this.parent).getStateMachineExecution();
-	//}
+	auto execution = std::dynamic_pointer_cast<PSSM::Semantics::StateMachines::StateMachineExecution>(this->m_parent);
 
-	std::shared_ptr<PSSM::Semantics::StateMachines::StateMachineExecution> exec = std::dynamic_pointer_cast<PSSM::Semantics::StateMachines::StateMachineExecution>(this->m_parent);
-
-	if(this->m_parent != nullptr && exec != nullptr)
+	if(this->m_parent != nullptr && execution != nullptr)
 	{
 		return std::dynamic_pointer_cast<fUML::Semantics::CommonBehavior::Execution>(this->m_parent);
-	} else
+	} 
+	else
 	{
 		return (std::dynamic_pointer_cast<PSSM::Semantics::StateMachines::StateMachineSemanticVisitor>(this->m_parent))->getStateMachineExecution();
 	}
@@ -280,7 +276,6 @@ bool StateMachineSemanticVisitorImpl::isVisitorFor(const std::shared_ptr<uml::Na
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
-	//return this.node == node;
 	return this->m_node == node;
 	//end of body
 }

@@ -62,7 +62,13 @@ virtual public ObjectActivation
 			// Reference Getters & Setters
 			//*********************************
 			virtual const std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ClassifierBehaviorExecution>>& getClassifierBehaviorExecutions() const ;
+			virtual const std::shared_ptr<std::condition_variable>& getConditionVariable() const ;
+			virtual void setConditionVariable(const std::shared_ptr<std::condition_variable>&) ;
 			virtual const std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::EventOccurrence>>& getEventPool() const ;
+			virtual const std::shared_ptr<std::thread>& getMemberThread() const ;
+			virtual void setMemberThread(const std::shared_ptr<std::thread>&) ;
+			virtual const std::shared_ptr<std::mutex>& getMutex() const ;
+			virtual void setMutex(const std::shared_ptr<std::mutex>&) ;
 			virtual const std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_Object>& getObject() const ;
 			virtual void setObject(const std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_Object>&) ;
 			virtual const std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::EventAccepter>>& getWaitingEventAccepters() const ;

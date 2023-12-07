@@ -43,10 +43,10 @@ namespace PSSM::Semantics::CommonBehavior
 			//*********************************
 			// Operations
 			//*********************************
-			virtual std::shared_ptr<Any> copy() ;
 			
-			
-			
+			virtual void execute() ;
+			virtual void finalize() ;
+			virtual std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> initialize(const std::shared_ptr<uml::Behavior>& behavior) ;
 			
 			
 			//*********************************

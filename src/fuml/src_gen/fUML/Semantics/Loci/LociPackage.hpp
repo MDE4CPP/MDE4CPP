@@ -14,14 +14,14 @@
 
 namespace ecore 
 {
-	class EStringToStringMapEntry;
 	class EAnnotation;
-	class EClass;
-	class EOperation;
-	class EReference;
+	class EStringToStringMapEntry;
 	class EGenericType;
-	class EDataType;
+	class EOperation;
 	class EParameter;
+	class EClass;
+	class EDataType;
+	class EReference;
 }
 
 namespace fUML::Semantics::Loci 
@@ -90,7 +90,7 @@ namespace fUML::Semantics::Loci
 			
 			static const unsigned long EXECUTIONFACTORY_OPERATION_ADDBUILTINTYPE_PRIMITIVETYPE = 1000019030;
 			static const unsigned long EXECUTIONFACTORY_OPERATION_ASSIGNSTRATEGY_SEMANTICSTRATEGY = 4022033692;
-			static const unsigned long EXECUTIONFACTORY_OPERATION_CREATEEXECUTION_BEHAVIOR_ELEMENT = 2395760303;
+			static const unsigned long EXECUTIONFACTORY_OPERATION_CREATEEXECUTION_BEHAVIOR_FUML_OBJECT = 1811139829;
 			static const unsigned long EXECUTIONFACTORY_OPERATION_GETBUILTINTYPE_ESTRING = 3934172273;
 			static const unsigned long EXECUTIONFACTORY_OPERATION_GETSTRATEGY_ESTRING = 4148006243;
 			static const unsigned long EXECUTIONFACTORY_OPERATION_GETSTRATEGYINDEX_ESTRING = 353629829;
@@ -106,7 +106,7 @@ namespace fUML::Semantics::Loci
 			
 			virtual const std::shared_ptr<ecore::EOperation>& getExecutionFactory_Operation_addBuiltInType_PrimitiveType() const = 0;
 			virtual const std::shared_ptr<ecore::EOperation>& getExecutionFactory_Operation_assignStrategy_SemanticStrategy() const = 0;
-			virtual const std::shared_ptr<ecore::EOperation>& getExecutionFactory_Operation_createExecution_Behavior_Element() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getExecutionFactory_Operation_createExecution_Behavior_FUML_Object() const = 0;
 			virtual const std::shared_ptr<ecore::EOperation>& getExecutionFactory_Operation_getBuiltInType_EString() const = 0;
 			virtual const std::shared_ptr<ecore::EOperation>& getExecutionFactory_Operation_getStrategy_EString() const = 0;
 			virtual const std::shared_ptr<ecore::EOperation>& getExecutionFactory_Operation_getStrategyIndex_EString() const = 0;
@@ -124,7 +124,7 @@ namespace fUML::Semantics::Loci
 			static const unsigned long EXECUTOR_ATTRIBUTE_LOCUS = 32912316;
 			
 			static const unsigned long EXECUTOR_OPERATION_EVALUATE_VALUESPECIFICATION = 321446891;
-			static const unsigned long EXECUTOR_OPERATION_EXECUTE_BEHAVIOR_PARAMETERVALUE = 3205044137;
+			static const unsigned long EXECUTOR_OPERATION_EXECUTE_BEHAVIOR_PARAMETERVALUE = 1550418063;
 			static const unsigned long EXECUTOR_OPERATION_START_CLASS_PARAMETERVALUE = 2158458358;
 			
 			//Class and Feature Getter

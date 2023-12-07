@@ -54,7 +54,7 @@ namespace fUML::Semantics::Activities
 			virtual void createNodeActivations() ;
 			virtual void fire(const std::shared_ptr<Bag<fUML::Semantics::Activities::Token>>& incomingTokens) ;
 			virtual std::shared_ptr<fUML::Semantics::Activities::ActivityExecution> getActivityExecution() ;
-			virtual std::shared_ptr<uml::Element> getExecutionContext() ;
+			virtual std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_Object> getExecutionContext() ;
 			virtual std::shared_ptr<fUML::Semantics::Loci::Locus> getExecutionLocus() ;
 			virtual std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivation> getNodeActivation(const std::shared_ptr<uml::ActivityNode>& node) ;
 			virtual bool getRunning() ;

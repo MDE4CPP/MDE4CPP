@@ -33,14 +33,16 @@
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 #include "ecore/ecorePackage.hpp"
+//Includes from codegen annotation
+#include "PSSM/Semantics/StateMachines/VertexActivation.hpp"
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
+#include "uml/umlFactory.hpp"
 #include "fUML/Semantics/Loci/LociFactory.hpp"
 #include "PSSM/Semantics/StateMachines/StateMachinesFactory.hpp"
-#include "uml/umlFactory.hpp"
 #include "fUML/Semantics/CommonBehavior/EventOccurrence.hpp"
 #include "uml/NamedElement.hpp"
 #include "PSSM/Semantics/StateMachines/PseudostateActivation.hpp"
@@ -48,8 +50,8 @@
 #include "fUML/Semantics/Loci/SemanticVisitor.hpp"
 #include "PSSM/Semantics/StateMachines/TransitionActivation.hpp"
 //Factories and Package includes
-#include "PSSM/PSSMPackage.hpp"
 #include "PSSM/Semantics/SemanticsPackage.hpp"
+#include "PSSM/PSSMPackage.hpp"
 #include "fUML/Semantics/CommonBehavior/CommonBehaviorPackage.hpp"
 #include "fUML/Semantics/Loci/LociPackage.hpp"
 #include "PSSM/Semantics/StateMachines/StateMachinesPackage.hpp"
@@ -124,7 +126,7 @@ void InitialPseudostateActivationImpl::enter(const std::shared_ptr<PSSM::Semanti
 	// Entering an InitialPseudostateActivation results in firing its outgoing TransitionActivation immediately without the use of Events (therefore "nullptr").
 	// This is because all InitialPSActivations are traversed during the first RTC Step of entering their Region instead of being triggered by any accepted EventOccurrence.
 	// Also, a InitialPS must have exactly one outgoing TransitionActivation which must not have Triggers and guards, therefore checking for fireable TransitionActivations can be omitted.
-	this->getThisVertexActivationPtr()->enter(enteringTransition, eventOccurrence, leastCommonAncestor);
+	// STACKOVERFLOW this->getThisVertexActivationPtr()->enter(enteringTransition, eventOccurrence, leastCommonAncestor);
 	if (this->m_outgoingTransitionActivations->size() == 1)
 	{
 		this->m_outgoingTransitionActivations->at(0)->fire(eventOccurrence);

@@ -4,68 +4,63 @@
 //*
 //********************************************************************
 
-#ifndef PSSM_SEMANTICS_COMMONBEHAVIOR_CALLEVENTEXECUTIONCALLEVENTEXECUTIONIMPL_HPP
-#define PSSM_SEMANTICS_COMMONBEHAVIOR_CALLEVENTEXECUTIONCALLEVENTEXECUTIONIMPL_HPP
+#ifndef FUML_SEMANTICS_COMMONBEHAVIOR_EVENTDISPATCHLOOPEVENTDISPATCHLOOPIMPL_HPP
+#define FUML_SEMANTICS_COMMONBEHAVIOR_EVENTDISPATCHLOOPEVENTDISPATCHLOOPIMPL_HPP
 
 //*********************************
 // generated Includes
 
 // namespace macro header include
-#include "PSSM/PSSM.hpp" 
+#include "fUML/fUML.hpp" 
 
 // model includes
-#include "../CallEventExecution.hpp"
+#include "../EventDispatchLoop.hpp"
 
-#include "PSSM/Semantics/CommonBehavior/impl/CommonBehaviorFactoryImpl.hpp"
-#include "fUML/Semantics/CommonBehavior/impl/ExecutionImpl.hpp"
+#include "fUML/Semantics/CommonBehavior/impl/CommonBehaviorFactoryImpl.hpp"
+
+#include "ecore/impl/EModelElementImpl.hpp"
+
+//Includes from codegen annotation
+#include <thread>
+#include <mutex>
+#include <condition_variable>
 
 //*********************************
-namespace PSSM::Semantics::CommonBehavior 
+namespace fUML::Semantics::CommonBehavior 
 {
-	class PSSM_API CallEventExecutionImpl : virtual public fUML::Semantics::CommonBehavior::ExecutionImpl, virtual public CallEventExecution 
+	class FUML_API EventDispatchLoopImpl : virtual public ecore::EModelElementImpl,
+virtual public EventDispatchLoop 
 	{
 		public: 
-			CallEventExecutionImpl(const CallEventExecutionImpl & obj);
+			EventDispatchLoopImpl(const EventDispatchLoopImpl & obj);
 			virtual std::shared_ptr<ecore::EObject> copy() const;
-			CallEventExecutionImpl& operator=(CallEventExecutionImpl const&); 
+			EventDispatchLoopImpl& operator=(EventDispatchLoopImpl const&); 
 
 		protected:
-			friend class PSSM::Semantics::CommonBehavior::CommonBehaviorFactoryImpl;
-			CallEventExecutionImpl();
-			virtual std::shared_ptr<PSSM::Semantics::CommonBehavior::CallEventExecution> getThisCallEventExecutionPtr() const;
-			virtual void setThisCallEventExecutionPtr(std::weak_ptr<PSSM::Semantics::CommonBehavior::CallEventExecution> thisCallEventExecutionPtr);
+			friend class fUML::Semantics::CommonBehavior::CommonBehaviorFactoryImpl;
+			EventDispatchLoopImpl();
+			virtual std::shared_ptr<fUML::Semantics::CommonBehavior::EventDispatchLoop> getThisEventDispatchLoopPtr() const;
+			virtual void setThisEventDispatchLoopPtr(std::weak_ptr<fUML::Semantics::CommonBehavior::EventDispatchLoop> thisEventDispatchLoopPtr);
 
 
 		public:
 			//destructor
-			virtual ~CallEventExecutionImpl();
+			virtual ~EventDispatchLoopImpl();
 			
 			//*********************************
 			// Operations
 			//*********************************
-			virtual void _send(const std::shared_ptr<PSSM::Semantics::CommonBehavior::CallEventOccurrence>& eventOccurrence) ;
-			virtual void _suspend() ;
-			virtual void execute() ;
-			
-			virtual std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> getInputParameterValues() ;
-			
-			virtual void releaseCaller() ;
+			virtual void startDispatchLoop(const std::shared_ptr<fUML::Semantics::CommonBehavior::ObjectActivation>& objectActivation) ;
 			
 			//*********************************
 			// Attribute Getters & Setters
 			//*********************************
-			virtual bool getCallerSuspended() const ;
-			virtual void setCallerSuspended (bool _callerSuspended);
 			
 			//*********************************
 			// Reference Getters & Setters
 			//*********************************
-			virtual const std::shared_ptr<uml::Behavior>& getBehavior() const ;
-			virtual void setBehavior(const std::shared_ptr<uml::Behavior>&) ;
-			virtual const std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_Object>& getCallerContext() const ;
-			virtual void setCallerContext(const std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_Object>&) ;
-			virtual const std::shared_ptr<uml::Operation>& getOperation() const ;
-			virtual void setOperation(const std::shared_ptr<uml::Operation>&) ;
+			virtual const std::shared_ptr<std::thread>& getMemberThread() const ;
+			virtual void setMemberThread(const std::shared_ptr<std::thread>&) ;
 			
 			//*********************************
 			// Union Reference Getters
@@ -102,7 +97,7 @@ namespace PSSM::Semantics::CommonBehavior
 			virtual std::shared_ptr<Any> eInvoke(int operationID,const std::shared_ptr<Bag<Any>>& arguments) ;
 
 		private:
-			std::weak_ptr<PSSM::Semantics::CommonBehavior::CallEventExecution> m_thisCallEventExecutionPtr;
+			std::weak_ptr<fUML::Semantics::CommonBehavior::EventDispatchLoop> m_thisEventDispatchLoopPtr;
 	};
 }
-#endif /* end of include guard: PSSM_SEMANTICS_COMMONBEHAVIOR_CALLEVENTEXECUTIONCALLEVENTEXECUTIONIMPL_HPP */
+#endif /* end of include guard: FUML_SEMANTICS_COMMONBEHAVIOR_EVENTDISPATCHLOOPEVENTDISPATCHLOOPIMPL_HPP */

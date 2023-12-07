@@ -7,14 +7,14 @@
 
 #include "abstractDataTypes/SubsetUnion.hpp"
 //metametamodel classes
-#include "ecore/EStringToStringMapEntry.hpp"
 #include "ecore/EAnnotation.hpp"
-#include "ecore/EClass.hpp"
-#include "ecore/EOperation.hpp"
-#include "ecore/EReference.hpp"
+#include "ecore/EStringToStringMapEntry.hpp"
 #include "ecore/EGenericType.hpp"
-#include "ecore/EDataType.hpp"
+#include "ecore/EOperation.hpp"
 #include "ecore/EParameter.hpp"
+#include "ecore/EClass.hpp"
+#include "ecore/EDataType.hpp"
+#include "ecore/EReference.hpp"
 
 //depending model packages
 #include "ecore/ecorePackage.hpp"
@@ -66,7 +66,7 @@ void LociPackageImpl::createExecutionFactoryContent(std::shared_ptr<ecore::EPack
 	
 	m_executionFactory_Operation_addBuiltInType_PrimitiveType = factory->createEOperation_as_eOperations_in_EClass(m_executionFactory_Class, EXECUTIONFACTORY_OPERATION_ADDBUILTINTYPE_PRIMITIVETYPE);
 	m_executionFactory_Operation_assignStrategy_SemanticStrategy = factory->createEOperation_as_eOperations_in_EClass(m_executionFactory_Class, EXECUTIONFACTORY_OPERATION_ASSIGNSTRATEGY_SEMANTICSTRATEGY);
-	m_executionFactory_Operation_createExecution_Behavior_Element = factory->createEOperation_as_eOperations_in_EClass(m_executionFactory_Class, EXECUTIONFACTORY_OPERATION_CREATEEXECUTION_BEHAVIOR_ELEMENT);
+	m_executionFactory_Operation_createExecution_Behavior_FUML_Object = factory->createEOperation_as_eOperations_in_EClass(m_executionFactory_Class, EXECUTIONFACTORY_OPERATION_CREATEEXECUTION_BEHAVIOR_FUML_OBJECT);
 	m_executionFactory_Operation_getBuiltInType_EString = factory->createEOperation_as_eOperations_in_EClass(m_executionFactory_Class, EXECUTIONFACTORY_OPERATION_GETBUILTINTYPE_ESTRING);
 	m_executionFactory_Operation_getStrategy_EString = factory->createEOperation_as_eOperations_in_EClass(m_executionFactory_Class, EXECUTIONFACTORY_OPERATION_GETSTRATEGY_ESTRING);
 	m_executionFactory_Operation_getStrategyIndex_EString = factory->createEOperation_as_eOperations_in_EClass(m_executionFactory_Class, EXECUTIONFACTORY_OPERATION_GETSTRATEGYINDEX_ESTRING);

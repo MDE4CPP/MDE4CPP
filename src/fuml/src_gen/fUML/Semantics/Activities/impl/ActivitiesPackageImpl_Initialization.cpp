@@ -4,15 +4,15 @@
 
 #include "abstractDataTypes/SubsetUnion.hpp"
 //metametamodel classes
-#include "ecore/EStringToStringMapEntry.hpp"
 #include "ecore/EAnnotation.hpp"
-#include "ecore/EClass.hpp"
-#include "ecore/EOperation.hpp"
-#include "ecore/EReference.hpp"
-#include "ecore/EAttribute.hpp"
+#include "ecore/EStringToStringMapEntry.hpp"
 #include "ecore/EGenericType.hpp"
-#include "ecore/EDataType.hpp"
+#include "ecore/EOperation.hpp"
+#include "ecore/EAttribute.hpp"
 #include "ecore/EParameter.hpp"
+#include "ecore/EClass.hpp"
+#include "ecore/EDataType.hpp"
+#include "ecore/EReference.hpp"
 
 // metametamodel factory
 #include "ecore/ecoreFactory.hpp"
@@ -22,6 +22,7 @@
 #include "fUML/Semantics/Actions/ActionsPackage.hpp"
 #include "fUML/Semantics/CommonBehavior/CommonBehaviorPackage.hpp"
 #include "fUML/Semantics/Loci/LociPackage.hpp"
+#include "fUML/MDE4CPP_Extensions/MDE4CPP_ExtensionsPackage.hpp"
 #include "ecore/ecorePackage.hpp"
 #include "fUML/fUMLPackage.hpp"
 #include "uml/umlPackage.hpp"
@@ -736,7 +737,7 @@ void ActivitiesPackageImpl::initializeActivityNodeActivationContent()
 	
 	
 	m_activityNodeActivation_Operation_getExecutionContext->setName("getExecutionContext");
-	m_activityNodeActivation_Operation_getExecutionContext->setEType(uml::umlPackage::eInstance()->getElement_Class());
+	m_activityNodeActivation_Operation_getExecutionContext->setEType(fUML::MDE4CPP_Extensions::MDE4CPP_ExtensionsPackage::eInstance()->getFUML_Object_Class());
 	m_activityNodeActivation_Operation_getExecutionContext->setLowerBound(1);
 	m_activityNodeActivation_Operation_getExecutionContext->setUpperBound(1);
 	m_activityNodeActivation_Operation_getExecutionContext->setUnique(true);

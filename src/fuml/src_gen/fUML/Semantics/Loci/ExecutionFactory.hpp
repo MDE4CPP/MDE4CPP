@@ -43,6 +43,10 @@ namespace fUML::Semantics::Loci
 	class SemanticStrategy;
 	class SemanticVisitor;
 }
+namespace fUML::MDE4CPP_Extensions 
+{
+	class FUML_Object;
+}
 namespace uml 
 {
 	class Behavior;
@@ -87,7 +91,7 @@ namespace fUML::Semantics::Loci
 			
 			virtual void assignStrategy(const std::shared_ptr<fUML::Semantics::Loci::SemanticStrategy>& strategy) = 0;
 			
-			virtual std::shared_ptr<fUML::Semantics::CommonBehavior::Execution> createExecution(const std::shared_ptr<uml::Behavior>& behavior, const std::shared_ptr<uml::Element>& context) = 0;
+			virtual std::shared_ptr<fUML::Semantics::CommonBehavior::Execution> createExecution(const std::shared_ptr<uml::Behavior>& behavior, const std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_Object>& context) = 0;
 			virtual std::shared_ptr<uml::PrimitiveType> getBuiltInType(std::string name) = 0;
 			virtual std::shared_ptr<fUML::Semantics::Loci::SemanticStrategy> getStrategy(std::string name) = 0;
 			virtual int getStrategyIndex(std::string name) = 0;

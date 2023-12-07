@@ -56,7 +56,6 @@ namespace PSSM::Semantics::CommonBehavior
 			virtual const std::shared_ptr<ecore::EOperation>& getCallEventExecution_Operation__suspend() const ;
 			virtual const std::shared_ptr<ecore::EOperation>& getCallEventExecution_Operation_execute() const ;
 			virtual const std::shared_ptr<ecore::EOperation>& getCallEventExecution_Operation_getInputParameterValues() const ;
-			virtual const std::shared_ptr<ecore::EOperation>& getCallEventExecution_Operation_new_() const ;
 			virtual const std::shared_ptr<ecore::EOperation>& getCallEventExecution_Operation_releaseCaller() const ;
 			
 			// End Class CallEventExecution
@@ -79,7 +78,9 @@ namespace PSSM::Semantics::CommonBehavior
 			virtual const std::shared_ptr<ecore::EReference>& getEventTriggeredExecution_Attribute_triggeringEventOccurrence() const ;
 			virtual const std::shared_ptr<ecore::EReference>& getEventTriggeredExecution_Attribute_wrappedExecution() const ;
 			
-			virtual const std::shared_ptr<ecore::EOperation>& getEventTriggeredExecution_Operation_copy() const ;
+			virtual const std::shared_ptr<ecore::EOperation>& getEventTriggeredExecution_Operation_execute() const ;
+			virtual const std::shared_ptr<ecore::EOperation>& getEventTriggeredExecution_Operation_finalize() const ;
+			virtual const std::shared_ptr<ecore::EOperation>& getEventTriggeredExecution_Operation_initialize_Behavior() const ;
 			
 			// End Class EventTriggeredExecution
 
@@ -108,7 +109,7 @@ namespace PSSM::Semantics::CommonBehavior
 			
 			std::shared_ptr<ecore::EAttribute> m_callEventExecution_Attribute_callerSuspended = nullptr;
 			std::shared_ptr<ecore::EReference> m_callEventExecution_Attribute_behavior = nullptr;std::shared_ptr<ecore::EReference> m_callEventExecution_Attribute_callerContext = nullptr;std::shared_ptr<ecore::EReference> m_sM_ObjectActivation_Attribute_deferredEventPool = nullptr;std::shared_ptr<ecore::EReference> m_callEventOccurrence_Attribute_execution = nullptr;std::shared_ptr<ecore::EReference> m_callEventExecution_Attribute_operation = nullptr;std::shared_ptr<ecore::EReference> m_eventTriggeredExecution_Attribute_triggeringEventOccurrence = nullptr;std::shared_ptr<ecore::EReference> m_eventTriggeredExecution_Attribute_wrappedExecution = nullptr;
-			std::shared_ptr<ecore::EOperation> m_callEventExecution_Operation__send_CallEventOccurrence = nullptr;std::shared_ptr<ecore::EOperation> m_callEventExecution_Operation__suspend = nullptr;std::shared_ptr<ecore::EOperation> m_eventTriggeredExecution_Operation_copy = nullptr;std::shared_ptr<ecore::EOperation> m_callEventExecution_Operation_execute = nullptr;std::shared_ptr<ecore::EOperation> m_sM_ObjectActivation_Operation_getDeferredEventInsertionIndex = nullptr;std::shared_ptr<ecore::EOperation> m_callEventExecution_Operation_getInputParameterValues = nullptr;std::shared_ptr<ecore::EOperation> m_sM_ObjectActivation_Operation_getNextCompletionEvent = nullptr;std::shared_ptr<ecore::EOperation> m_callEventExecution_Operation_new_ = nullptr;std::shared_ptr<ecore::EOperation> m_sM_ObjectActivation_Operation_registerCompletionEvent_StateActivation = nullptr;std::shared_ptr<ecore::EOperation> m_sM_ObjectActivation_Operation_registerDeferredEvent_EventOccurrence_StateActivation = nullptr;std::shared_ptr<ecore::EOperation> m_callEventExecution_Operation_releaseCaller = nullptr;std::shared_ptr<ecore::EOperation> m_sM_ObjectActivation_Operation_releaseDeferredEvents_StateActivation = nullptr;std::shared_ptr<ecore::EOperation> m_sM_ObjectActivation_Operation_retrieveNextEvent = nullptr;
+			std::shared_ptr<ecore::EOperation> m_callEventExecution_Operation__send_CallEventOccurrence = nullptr;std::shared_ptr<ecore::EOperation> m_callEventExecution_Operation__suspend = nullptr;std::shared_ptr<ecore::EOperation> m_eventTriggeredExecution_Operation_execute = nullptr;std::shared_ptr<ecore::EOperation> m_callEventExecution_Operation_execute = nullptr;std::shared_ptr<ecore::EOperation> m_eventTriggeredExecution_Operation_finalize = nullptr;std::shared_ptr<ecore::EOperation> m_sM_ObjectActivation_Operation_getDeferredEventInsertionIndex = nullptr;std::shared_ptr<ecore::EOperation> m_callEventExecution_Operation_getInputParameterValues = nullptr;std::shared_ptr<ecore::EOperation> m_sM_ObjectActivation_Operation_getNextCompletionEvent = nullptr;std::shared_ptr<ecore::EOperation> m_eventTriggeredExecution_Operation_initialize_Behavior = nullptr;std::shared_ptr<ecore::EOperation> m_sM_ObjectActivation_Operation_registerCompletionEvent_StateActivation = nullptr;std::shared_ptr<ecore::EOperation> m_sM_ObjectActivation_Operation_registerDeferredEvent_EventOccurrence_StateActivation = nullptr;std::shared_ptr<ecore::EOperation> m_callEventExecution_Operation_releaseCaller = nullptr;std::shared_ptr<ecore::EOperation> m_sM_ObjectActivation_Operation_releaseDeferredEvents_StateActivation = nullptr;std::shared_ptr<ecore::EOperation> m_sM_ObjectActivation_Operation_retrieveNextEvent = nullptr;
 
 			friend class CommonBehaviorPackage;
 

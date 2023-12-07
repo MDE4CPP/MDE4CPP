@@ -69,6 +69,10 @@ namespace uml
 
 
 
+//Includes from codegen annotation
+#include <thread>
+#include <mutex>
+#include <condition_variable>
 
 //*********************************
 namespace PSSM::Semantics::StateMachines 
@@ -106,8 +110,12 @@ namespace PSSM::Semantics::StateMachines
 			//*********************************
 			// Reference Getters & Setters
 			//*********************************
+			virtual const std::shared_ptr<std::condition_variable>& getConditionVariable() const = 0;
+			virtual void setConditionVariable(const std::shared_ptr<std::condition_variable>&) = 0;
 			virtual const std::shared_ptr<PSSM::Semantics::StateMachines::StateMachineConfiguration>& getConfiguration() const = 0;
 			virtual void setConfiguration(const std::shared_ptr<PSSM::Semantics::StateMachines::StateMachineConfiguration>&) = 0;
+			virtual const std::shared_ptr<std::mutex>& getMutex() const = 0;
+			virtual void setMutex(const std::shared_ptr<std::mutex>&) = 0;
 			virtual const std::shared_ptr<Bag<PSSM::Semantics::StateMachines::RegionActivation>>& getRegionActivations() const = 0;
 
 			//*********************************
@@ -134,7 +142,9 @@ namespace PSSM::Semantics::StateMachines
 			//*********************************
 			// Reference Members
 			//*********************************
+			std::shared_ptr<std::condition_variable> m_conditionVariable;
 			std::shared_ptr<PSSM::Semantics::StateMachines::StateMachineConfiguration> m_configuration;
+			std::shared_ptr<std::mutex> m_mutex;
 			mutable std::shared_ptr<Bag<PSSM::Semantics::StateMachines::RegionActivation>> m_regionActivations;
 	};
 }

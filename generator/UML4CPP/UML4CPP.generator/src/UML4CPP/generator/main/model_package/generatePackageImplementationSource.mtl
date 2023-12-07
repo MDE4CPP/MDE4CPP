@@ -427,7 +427,7 @@ void [packageName/]::createStateMachine_[aStateMachine.memberName()/](std::share
 	[aRegion.memberName()/] = factory->create[aRegion.eClass().name/]_as_region_in_StateMachine([aStateMachine.memberName()/]);
 		// create States
 			[for (aState : State | (aRegion.allOwnedElements()->filter(State)->sortedBy(myQualifiedName())))]
-			// create [aState.name/] in Region [aRegion.name/]
+			// create State [aState.name/] in Region [aRegion.name/]
 			[aState.memberName()/] = factory->create[aState.eClass().name/]_as_subvertex_in_Region([aRegion.memberName()/]);
 			[if (not aState.oclIsKindOf(FinalState))]
 				[if (not aState.entry.oclIsUndefined())]
@@ -451,13 +451,17 @@ void [packageName/]::createStateMachine_[aStateMachine.memberName()/](std::share
 			// create Pseudostate [aPseudostate.name/] of Kind [aPseudostate.kind/]
 			[comment if (aPseudostate.kind = PseudostateKind::initial)/]
 			[aPseudostate.memberName()/] = factory->createPseudostate_as_subvertex_in_Region([aRegion.memberName()/]);
-	
+				
 			[/for]
 
 		// create Transitions
 			[for (aTransition : Transition | (aRegion.allOwnedElements()->filter(Transition)->sortedBy(myQualifiedName())))]
 			// create Transition [aTransition.name/]
 			[aTransition.memberName()/] = factory->createTransition_as_transition_in_Region([aRegion.memberName()/]);
+				[if (not aTransition.effect.oclIsUndefined())]
+				// create Effect Behavior of Transition [aTransition.memberName()/]
+				[aTransition.effect.memberName()/] = factory->create[aTransition.effect.eClass().name/]_as_effect_in_Transition([aTransition.memberName()/]);
+				[/if]
 	
 			[/for]
 		
@@ -721,6 +725,7 @@ void [packageName/]::initializePackageStateMachines()
 }
 
 [for (aStateMachine : StateMachine | (aPackage.getElementsBelongingToPackage()->filter(StateMachine)->sortedBy(myQualifiedName())))]
+[let stateMachineContext : String = if (aStateMachine._context.oclIsUndefined()) or (not aStateMachine.owner.oclIsKindOf(BehavioredClassifier)) then aStateMachine.memberName() else aStateMachine._context.memberName() endif]
 [comment Initialize a single StateMachine/]
 void [packageName/]::initializeStateMachine_[aStateMachine.memberName()/]()
 {
@@ -739,19 +744,19 @@ void [packageName/]::initializeStateMachine_[aStateMachine.memberName()/]()
 				// initialize Entry Behavior of State [aState.name/]
 				[aState.entry.memberName()/]->setName("[aState.entry.name/]");
 				[aState.entry.memberName()/]->_setID([aState.entry.getMemberName().toUpperCase()/]);
-				[aState.entry.memberName()/]->setContext([aStateMachine.owner.oclAsType(BehavioredClassifier).memberName()/]);
+				[aState.entry.memberName()/]->setContext([stateMachineContext/]);
 				[/if]
 				[if (not aState.doActivity.oclIsUndefined())]
 				// initialize doActivity Behavior of State [aState.name/]
 				[aState.doActivity.memberName()/]->setName("[aState.doActivity.name/]");
 				[aState.doActivity.memberName()/]->_setID([aState.doActivity.getMemberName().toUpperCase()/]);
-				[aState.entry.memberName()/]->setContext([aStateMachine.owner.oclAsType(BehavioredClassifier).memberName()/]);
+				[aState.doActivity.memberName()/]->setContext([stateMachineContext/]);
 				[/if]
 				[if (not aState.exit.oclIsUndefined())]
 				// initialize Exit Behavior of State [aState.name/]
 				[aState.exit.memberName()/]->setName("[aState.exit.name/]");
 				[aState.exit.memberName()/]->_setID([aState.exit.getMemberName().toUpperCase()/]);
-				[aState.entry.memberName()/]->setContext([aStateMachine.owner.oclAsType(BehavioredClassifier).memberName()/]);
+				[aState.exit.memberName()/]->setContext([stateMachineContext/]);
 				[/if]
 			[/if]
 	
@@ -772,6 +777,12 @@ void [packageName/]::initializeStateMachine_[aStateMachine.memberName()/]()
 			[aTransition.memberName()/]->setName("[aTransition.memberName()/]");
 			[aTransition.memberName()/]->setSource([aTransition.source.memberName()/]);
 			[aTransition.memberName()/]->setTarget([aTransition.target.memberName()/]);
+				[if (not aTransition.effect.oclIsUndefined())]
+				// initialize Effect Behavior of Transition [aTransition.name/]
+				[aTransition.effect.memberName()/]->setName("[aTransition.effect.name/]");
+				[aTransition.effect.memberName()/]->_setID([aTransition.effect.getMemberName().toUpperCase()/]);
+				[aTransition.effect.memberName()/]->setContext([stateMachineContext/]);
+				[/if]
 	
 			[/for]
 		
@@ -779,6 +790,7 @@ void [packageName/]::initializeStateMachine_[aStateMachine.memberName()/]()
 	[/for]
 }
 
+[/let]
 [/for]
 [/if]
 [/file]

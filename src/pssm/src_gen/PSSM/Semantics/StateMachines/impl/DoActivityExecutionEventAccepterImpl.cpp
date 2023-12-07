@@ -43,8 +43,8 @@
 #include "fUML/Semantics/CommonBehavior/EventAccepter.hpp"
 #include "fUML/Semantics/CommonBehavior/EventOccurrence.hpp"
 //Factories and Package includes
-#include "PSSM/PSSMPackage.hpp"
 #include "PSSM/Semantics/SemanticsPackage.hpp"
+#include "PSSM/PSSMPackage.hpp"
 #include "fUML/Semantics/CommonBehavior/CommonBehaviorPackage.hpp"
 #include "PSSM/Semantics/StateMachines/StateMachinesPackage.hpp"
 

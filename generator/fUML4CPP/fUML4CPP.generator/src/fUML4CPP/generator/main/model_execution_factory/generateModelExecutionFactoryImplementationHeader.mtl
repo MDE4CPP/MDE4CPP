@@ -65,7 +65,7 @@ namespace [aPackage.generateNamespace(false)/]
 			[comment]std::shared_ptr<fUML::Semantics::Activities::ActivityExecution> get[anActivity.memberName().toUpperFirst()/]ExecutionPrototype();[/comment]
 			[/for]
 			[for (aStateMachine : StateMachine | aPackage.collectStateMachinesOwnedByPackage()->reject(isDoNotGenerateElement())) before('\t\t\t//Functions to create StateMachinesExecution Prototypes\n')]
-			void create[aStateMachine.memberName().toUpperFirst()/]ExecutionPrototype();
+			void create[aStateMachine.memberName().toUpperFirst()/]ExecutionPrototype(const std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_Object>&);
 			[/for]
 
 		public:
@@ -74,7 +74,7 @@ namespace [aPackage.generateNamespace(false)/]
 			
 			/*!
 			 */
-			virtual std::shared_ptr<fUML::Semantics::CommonBehavior::Execution> createExecution(const std::shared_ptr<uml::Behavior>&, const std::shared_ptr<uml::Element>&);
+			virtual std::shared_ptr<fUML::Semantics::CommonBehavior::Execution> createExecution(const std::shared_ptr<uml::Behavior>&, const std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_Object>&);
 			[if (aPackage.includesPSSM())]
 			virtual void setThisExecutionFactoryPtr(std::weak_ptr<PSSM::Semantics::Loci::SM_ExecutionFactory>);
 			[else]

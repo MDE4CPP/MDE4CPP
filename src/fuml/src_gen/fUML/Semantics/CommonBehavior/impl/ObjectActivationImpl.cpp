@@ -43,12 +43,17 @@
 
 #include "uml/Behavior.hpp"
 #include "uml/Class.hpp"
+
+#include <thread>
+#include <mutex>
+#include <condition_variable>
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
 #include "fUML/Semantics/CommonBehavior/CommonBehaviorFactory.hpp"
+#include "fUML/Semantics/StructuredClassifiers/StructuredClassifiersFactory.hpp"
 #include "fUML/MDE4CPP_Extensions/MDE4CPP_ExtensionsFactory.hpp"
 #include "uml/Class.hpp"
 #include "fUML/Semantics/CommonBehavior/ClassifierBehaviorExecution.hpp"
@@ -57,8 +62,8 @@
 #include "fUML/MDE4CPP_Extensions/FUML_Object.hpp"
 #include "fUML/Semantics/CommonBehavior/ParameterValue.hpp"
 //Factories and Package includes
-#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/SemanticsPackage.hpp"
+#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/CommonBehavior/CommonBehaviorPackage.hpp"
 #include "fUML/MDE4CPP_Extensions/MDE4CPP_ExtensionsPackage.hpp"
 #include "uml/umlPackage.hpp"
@@ -73,6 +78,11 @@ ObjectActivationImpl::ObjectActivationImpl()
 	/*
 	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
 	*/
+	//generated from codegen annotation
+	m_eventPool = std::make_shared<Bag<fUML::Semantics::CommonBehavior::EventOccurrence>>();
+	m_waitingEventAccepters = std::make_shared<Bag<fUML::Semantics::CommonBehavior::EventAccepter>>();
+	this->m_mutex = std::make_shared<std::mutex>();
+	this->m_conditionVariable = std::make_shared<std::condition_variable>();
 }
 
 ObjectActivationImpl::~ObjectActivationImpl()
@@ -110,6 +120,9 @@ ObjectActivationImpl& ObjectActivationImpl::operator=(const ObjectActivationImpl
 	//Clone Attributes with (deep copy)
 
 	//copy references with no containment (soft copy)
+	m_conditionVariable  = obj.getConditionVariable();
+	m_memberThread  = obj.getMemberThread();
+	m_mutex  = obj.getMutex();
 	m_object  = obj.getObject();
 	m_waitingEventAccepters  = obj.getWaitingEventAccepters();
 	//Clone references with containment (deep copy)
@@ -168,14 +181,14 @@ void ObjectActivationImpl::_register(const std::shared_ptr<fUML::Semantics::Comm
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
-	    DEBUG_INFO("object = " << this->getObject())
+	DEBUG_INFO("object = " << this->getObject())
     DEBUG_INFO("accepter = " << accepter)
+	std::unique_lock lock(*this->m_mutex);
 
-    this->getWaitingEventAccepters()->push_back(accepter);
+    this->m_waitingEventAccepters->push_back(accepter);
 
-	// For now, try running dispatch directly
-	DEBUG_INFO(" Directly dispatching next event.");
-	this->dispatchNextEvent();
+	lock.unlock();
+	this->m_conditionVariable->notify_one();
 	//end of body
 }
 
@@ -183,8 +196,27 @@ void ObjectActivationImpl::_startObjectBehavior()
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
-	//What to do here??
-return;
+	//auto eventDispatchLoop = std::make_shared<fUML::Semantics::CommonBehavior::EventDispatchLoop>();
+	//eventDispatchLoop->startDispatchLoop(this->getThisObjectActivationPtr());
+	if (!m_memberThread)
+	{
+		m_memberThread = std::make_shared<std::thread>(std::thread([this](){
+			DEBUG_INFO("Starting an EventDispatchLoop as an own thread");
+			while (true)
+			{
+				// Wait as long as there is no event in the DispatchLoop
+				DEBUG_INFO("EventDispatchLoop is locking");
+				std::unique_lock lock(*m_mutex);
+				auto& eventPool = this->m_eventPool;
+				this->m_conditionVariable->wait(lock, [&eventPool]{return !eventPool->empty();});
+				DEBUG_INFO("EventDispatchLoop is dispatching");
+				lock.unlock();
+				this->dispatchNextEvent();
+				this->m_conditionVariable->notify_one();
+			}
+		}));
+		m_memberThread->detach();
+	}
 	//end of body
 }
 
@@ -196,11 +228,37 @@ void ObjectActivationImpl::dispatchNextEvent()
 	// If there are one or more waiting event accepters with triggers that
 	// match the event occurrence, then dispatch it to exactly one of those
 	// waiting accepters.
-	if (getEventPool()->size() > 0)
+	if (this->getEventPool()->size() > 0)
+	{	
+		DEBUG_INFO("Event Pool not empty. Trying to dispatch an EventOccurrence from the Pool.")
+ 		std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccurrence> eventOccurrence = this->retrieveNextEvent();
+		auto matchingEventAccepters = std::make_shared<Bag<fUML::Semantics::CommonBehavior::EventAccepter>>();
+
+ 		const auto& waitingEventAccepters = this->getWaitingEventAccepters();
+		for (const auto& waitingEventAccepter : *waitingEventAccepters)
+		{
+			DEBUG_INFO("Checking next EventAccepter for possible dispatching.")
+ 			if (waitingEventAccepter->match(eventOccurrence))
+			{
+				DEBUG_INFO("An EventAccepter matches!")
+				matchingEventAccepters->push_back(waitingEventAccepter);
+			}
+		}
+		if (matchingEventAccepters->size() > 0)
+		{
+			// Choose one matching event accepter non-deterministically.
+			const auto& strategy = std::dynamic_pointer_cast<fUML::Semantics::Loci::ChoiceStrategy>(getObject()->getLocus()->getFactory()->getStrategy("choice"));
+			int chosenIndex = strategy->choose(matchingEventAccepters->size());
+			const auto& selectedEventAccepter = matchingEventAccepters->at(chosenIndex-1);
+			waitingEventAccepters->erase(selectedEventAccepter);
+			selectedEventAccepter->accept(eventOccurrence);
+		}
+	}
+	/*if (this->getEventPool()->size() > 0)
 	{	
 		DEBUG_INFO("Event Pool not empty.")
 
- 		std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccurrence> eventOccurrence = retrieveNextEvent();
+ 		std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccurrence> eventOccurrence = this->retrieveNextEvent();
 		std::vector<int> matchingEventAccepterIndexes;
 
  		const std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::EventAccepter>>& waitingEventAccepters = this->getWaitingEventAccepters();
@@ -222,14 +280,14 @@ void ObjectActivationImpl::dispatchNextEvent()
 			DEBUG_INFO("At least one EventAccepter matches! Accepting...")
 
  		// *** Choose one matching event accepter non-deterministically. ***
-		std::shared_ptr<fUML::Semantics::Loci::ChoiceStrategy> Strategy = std::dynamic_pointer_cast<fUML::Semantics::Loci::ChoiceStrategy>(getObject()->getLocus()->getFactory()->getStrategy("choice") );
+		std::shared_ptr<fUML::Semantics::Loci::ChoiceStrategy> Strategy = std::dynamic_pointer_cast<fUML::Semantics::Loci::ChoiceStrategy>(this->getObject()->getLocus()->getFactory()->getStrategy("choice") );
 		int j = Strategy->choose(matchingEventAccepterIndexes.size());
 		int k = matchingEventAccepterIndexes.at(j - 1);
 		std::shared_ptr<fUML::Semantics::CommonBehavior::EventAccepter> selectedEventAccepter = waitingEventAccepters->at(k);
 		waitingEventAccepters->erase(waitingEventAccepters->begin() + k);
 		selectedEventAccepter->accept(eventOccurrence);
 		}
-	}
+	}*/
 	//end of body
 }
 
@@ -249,7 +307,11 @@ void ObjectActivationImpl::send(const std::shared_ptr<fUML::Semantics::CommonBeh
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
-	this->getEventPool()->push_back(std::dynamic_pointer_cast<fUML::Semantics::CommonBehavior::EventOccurrence>(eventOccurrence->copy()));
+	std::unique_lock lock(*m_mutex);
+	this->m_eventPool->push_back(std::dynamic_pointer_cast<fUML::Semantics::CommonBehavior::EventOccurrence>(eventOccurrence->copy()));
+	
+	lock.unlock();
+	this->m_conditionVariable->notify_one();
 	//end of body
 }
 
@@ -257,20 +319,23 @@ void ObjectActivationImpl::startBehavior(const std::shared_ptr<uml::Class>& clas
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
-		if (classifier == nullptr)
+	// Start EventDispatchLoop (if not already started)
+	_startObjectBehavior();
+
+	if (classifier == nullptr)
 	{
     		DEBUG_INFO(" Starting behavior for all classifiers...")
 		// *** Start all classifier behaviors concurrently. ***
-		const std::shared_ptr<Bag<uml::Classifier>>& types = this->getObject()->getTypes();
+		const auto& types = this->getObject()->getTypes();
 
-        	for (const std::shared_ptr<uml::Classifier>& classifier : *types)
+        	for (const auto& classifier : *types)
        		{
-        		std::shared_ptr<uml::Class> type = std::dynamic_pointer_cast<uml::Class>(classifier);
+        		auto type = std::dynamic_pointer_cast<uml::Class>(classifier);
         		if ((std::dynamic_pointer_cast<uml::Behavior>(type) != nullptr) || (type->getClassifierBehavior() != nullptr))
-            		{
-            			std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> parameterValue(new Bag<fUML::Semantics::CommonBehavior::ParameterValue>());
-            			this->startBehavior(type, parameterValue);
-            		}
+				{
+					std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> parameterValue(new Bag<fUML::Semantics::CommonBehavior::ParameterValue>());
+					this->startBehavior(type, parameterValue);
+				}
         	}
 	}
 	else
@@ -278,25 +343,23 @@ void ObjectActivationImpl::startBehavior(const std::shared_ptr<uml::Class>& clas
     	DEBUG_INFO("Starting behavior for "<< classifier->getName())
 
 		bool notYetStarted = true;
-        	unsigned int i = 0;
+        unsigned int i = 0;
 		unsigned int classifierBehaviorExecutionsSize = this->getClassifierBehaviorExecutions()->size();
         	while (notYetStarted && i < classifierBehaviorExecutionsSize)
        		{
         		notYetStarted = (this->getClassifierBehaviorExecutions()->at(i)->getClassifier() != classifier);
-           	 	i = i + 1;
+           	 	++i;
         	}
-
         	if (notYetStarted)
         	{	
-        		std::shared_ptr<fUML::Semantics::CommonBehavior::ClassifierBehaviorExecution> newExecution(fUML::Semantics::CommonBehavior::CommonBehaviorFactory::eInstance()->createClassifierBehaviorExecution());
+        		/* fUML::Semantics::CommonBehavior::ClassifierBehaviorExecutionImpl::execute() MUST BE IMPLEMENTED
+        		auto newExecution(fUML::Semantics::CommonBehavior::CommonBehaviorFactory::eInstance()->createClassifierBehaviorExecution());
         		newExecution->setObjectActivation(getThisObjectActivationPtr());
         		this->getClassifierBehaviorExecutions()->push_back(newExecution);
-		
-			std::shared_ptr<Bag<uml::Class>> classifierBag;
-			classifierBag->add(classifier);
+				auto classifierBag = std::make_shared<Bag<uml::Class>>();
+				classifierBag->add(classifier);
         		newExecution->execute(classifierBag, inputs);
-
-			dispatchNextEvent();
+				this->m_conditionVariable->notify_one();*/
         	}
 	}
 	//end of body
@@ -320,8 +383,12 @@ void ObjectActivationImpl::unregister(const std::shared_ptr<fUML::Semantics::Com
 	//generated from body annotation
 	DEBUG_INFO("object = " << this->getObject())
 	DEBUG_INFO("accepter = " << accepter)
-	this->getWaitingEventAccepters()->erase(accepter);
+	std::unique_lock lock(*m_mutex);
 
+	this->m_waitingEventAccepters->erase(accepter);
+
+	lock.unlock();
+	this->m_conditionVariable->notify_one();
 	//end of body
 }
 
@@ -344,6 +411,17 @@ const std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ClassifierBehaviorExe
     return m_classifierBehaviorExecutions;
 }
 
+/* Getter & Setter for reference conditionVariable */
+const std::shared_ptr<std::condition_variable>& ObjectActivationImpl::getConditionVariable() const
+{
+    return m_conditionVariable;
+}
+void ObjectActivationImpl::setConditionVariable(const std::shared_ptr<std::condition_variable>& _conditionVariable)
+{
+    m_conditionVariable = _conditionVariable;
+	
+}
+
 /* Getter & Setter for reference eventPool */
 const std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::EventOccurrence>>& ObjectActivationImpl::getEventPool() const
 {
@@ -354,6 +432,28 @@ const std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::EventOccurrence>>& Ob
 		
 	}
     return m_eventPool;
+}
+
+/* Getter & Setter for reference memberThread */
+const std::shared_ptr<std::thread>& ObjectActivationImpl::getMemberThread() const
+{
+    return m_memberThread;
+}
+void ObjectActivationImpl::setMemberThread(const std::shared_ptr<std::thread>& _memberThread)
+{
+    m_memberThread = _memberThread;
+	
+}
+
+/* Getter & Setter for reference mutex */
+const std::shared_ptr<std::mutex>& ObjectActivationImpl::getMutex() const
+{
+    return m_mutex;
+}
+void ObjectActivationImpl::setMutex(const std::shared_ptr<std::mutex>& _mutex)
+{
+    m_mutex = _mutex;
+	
 }
 
 /* Getter & Setter for reference object */
@@ -416,6 +516,27 @@ void ObjectActivationImpl::loadAttributes(std::shared_ptr<persistence::interface
 	{
 		std::map<std::string, std::string>::const_iterator iter;
 		std::shared_ptr<ecore::EClass> metaClass = this->eClass(); // get MetaClass
+		iter = attr_list.find("conditionVariable");
+		if ( iter != attr_list.end() )
+		{
+			// add unresolvedReference to loadHandler's list
+			loadHandler->addUnresolvedReference(iter->second, loadHandler->getCurrentObject(), metaClass->getEStructuralFeature("conditionVariable")); // TODO use getEStructuralFeature() with id, for faster access to EStructuralFeature
+		}
+
+		iter = attr_list.find("memberThread");
+		if ( iter != attr_list.end() )
+		{
+			// add unresolvedReference to loadHandler's list
+			loadHandler->addUnresolvedReference(iter->second, loadHandler->getCurrentObject(), metaClass->getEStructuralFeature("memberThread")); // TODO use getEStructuralFeature() with id, for faster access to EStructuralFeature
+		}
+
+		iter = attr_list.find("mutex");
+		if ( iter != attr_list.end() )
+		{
+			// add unresolvedReference to loadHandler's list
+			loadHandler->addUnresolvedReference(iter->second, loadHandler->getCurrentObject(), metaClass->getEStructuralFeature("mutex")); // TODO use getEStructuralFeature() with id, for faster access to EStructuralFeature
+		}
+
 		iter = attr_list.find("object");
 		if ( iter != attr_list.end() )
 		{
@@ -486,6 +607,36 @@ void ObjectActivationImpl::resolveReferences(const int featureID, std::vector<st
 {
 	switch(featureID)
 	{
+		case fUML::Semantics::CommonBehavior::CommonBehaviorPackage::OBJECTACTIVATION_ATTRIBUTE_CONDITIONVARIABLE:
+		{
+			if (references.size() == 1)
+			{
+				// Cast object to correct type
+			}
+			
+			return;
+		}
+
+		case fUML::Semantics::CommonBehavior::CommonBehaviorPackage::OBJECTACTIVATION_ATTRIBUTE_MEMBERTHREAD:
+		{
+			if (references.size() == 1)
+			{
+				// Cast object to correct type
+			}
+			
+			return;
+		}
+
+		case fUML::Semantics::CommonBehavior::CommonBehaviorPackage::OBJECTACTIVATION_ATTRIBUTE_MUTEX:
+		{
+			if (references.size() == 1)
+			{
+				// Cast object to correct type
+			}
+			
+			return;
+		}
+
 		case fUML::Semantics::CommonBehavior::CommonBehaviorPackage::OBJECTACTIVATION_ATTRIBUTE_OBJECT:
 		{
 			if (references.size() == 1)
@@ -562,8 +713,14 @@ std::shared_ptr<Any> ObjectActivationImpl::eGet(int featureID, bool resolve, boo
 	{
 		case fUML::Semantics::CommonBehavior::CommonBehaviorPackage::OBJECTACTIVATION_ATTRIBUTE_CLASSIFIERBEHAVIOREXECUTIONS:
 			return eEcoreContainerAny(getClassifierBehaviorExecutions(),fUML::Semantics::CommonBehavior::CommonBehaviorPackage::CLASSIFIERBEHAVIOREXECUTION_CLASS); //823
+		case fUML::Semantics::CommonBehavior::CommonBehaviorPackage::OBJECTACTIVATION_ATTRIBUTE_CONDITIONVARIABLE:
+			return eAny(getConditionVariable(),-1,false); //824
 		case fUML::Semantics::CommonBehavior::CommonBehaviorPackage::OBJECTACTIVATION_ATTRIBUTE_EVENTPOOL:
 			return eEcoreContainerAny(getEventPool(),fUML::Semantics::CommonBehavior::CommonBehaviorPackage::EVENTOCCURRENCE_CLASS); //821
+		case fUML::Semantics::CommonBehavior::CommonBehaviorPackage::OBJECTACTIVATION_ATTRIBUTE_MEMBERTHREAD:
+			return eAny(getMemberThread(),-1,false); //825
+		case fUML::Semantics::CommonBehavior::CommonBehaviorPackage::OBJECTACTIVATION_ATTRIBUTE_MUTEX:
+			return eAny(getMutex(),-1,false); //826
 		case fUML::Semantics::CommonBehavior::CommonBehaviorPackage::OBJECTACTIVATION_ATTRIBUTE_OBJECT:
 			return eAny(getObject(),fUML::MDE4CPP_Extensions::MDE4CPP_ExtensionsPackage::FUML_OBJECT_CLASS,false); //822
 		case fUML::Semantics::CommonBehavior::CommonBehaviorPackage::OBJECTACTIVATION_ATTRIBUTE_WAITINGEVENTACCEPTERS:
@@ -578,8 +735,14 @@ bool ObjectActivationImpl::internalEIsSet(int featureID) const
 	{
 		case fUML::Semantics::CommonBehavior::CommonBehaviorPackage::OBJECTACTIVATION_ATTRIBUTE_CLASSIFIERBEHAVIOREXECUTIONS:
 			return getClassifierBehaviorExecutions() != nullptr; //823
+		case fUML::Semantics::CommonBehavior::CommonBehaviorPackage::OBJECTACTIVATION_ATTRIBUTE_CONDITIONVARIABLE:
+			return getConditionVariable() != nullptr; //824
 		case fUML::Semantics::CommonBehavior::CommonBehaviorPackage::OBJECTACTIVATION_ATTRIBUTE_EVENTPOOL:
 			return getEventPool() != nullptr; //821
+		case fUML::Semantics::CommonBehavior::CommonBehaviorPackage::OBJECTACTIVATION_ATTRIBUTE_MEMBERTHREAD:
+			return getMemberThread() != nullptr; //825
+		case fUML::Semantics::CommonBehavior::CommonBehaviorPackage::OBJECTACTIVATION_ATTRIBUTE_MUTEX:
+			return getMutex() != nullptr; //826
 		case fUML::Semantics::CommonBehavior::CommonBehaviorPackage::OBJECTACTIVATION_ATTRIBUTE_OBJECT:
 			return getObject() != nullptr; //822
 		case fUML::Semantics::CommonBehavior::CommonBehaviorPackage::OBJECTACTIVATION_ATTRIBUTE_WAITINGEVENTACCEPTERS:
@@ -637,6 +800,10 @@ bool ObjectActivationImpl::eSet(int featureID,  const std::shared_ptr<Any>& newV
 			}
 		return true;
 		}
+		case fUML::Semantics::CommonBehavior::CommonBehaviorPackage::OBJECTACTIVATION_ATTRIBUTE_CONDITIONVARIABLE:
+		{
+		return true;
+		}
 		case fUML::Semantics::CommonBehavior::CommonBehaviorPackage::OBJECTACTIVATION_ATTRIBUTE_EVENTPOOL:
 		{
 			std::shared_ptr<ecore::EcoreContainerAny> ecoreContainerAny = std::dynamic_pointer_cast<ecore::EcoreContainerAny>(newValue);
@@ -680,6 +847,14 @@ bool ObjectActivationImpl::eSet(int featureID,  const std::shared_ptr<Any>& newV
 				DEBUG_ERROR("Invalid instance of 'ecore::ecoreContainerAny' for feature 'eventPool'. Failed to set feature!")
 				return false;
 			}
+		return true;
+		}
+		case fUML::Semantics::CommonBehavior::CommonBehaviorPackage::OBJECTACTIVATION_ATTRIBUTE_MEMBERTHREAD:
+		{
+		return true;
+		}
+		case fUML::Semantics::CommonBehavior::CommonBehaviorPackage::OBJECTACTIVATION_ATTRIBUTE_MUTEX:
+		{
 		return true;
 		}
 		case fUML::Semantics::CommonBehavior::CommonBehaviorPackage::OBJECTACTIVATION_ATTRIBUTE_OBJECT:

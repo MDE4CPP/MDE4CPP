@@ -4,14 +4,14 @@
 
 #include "abstractDataTypes/SubsetUnion.hpp"
 //metametamodel classes
-#include "ecore/EStringToStringMapEntry.hpp"
 #include "ecore/EAnnotation.hpp"
-#include "ecore/EClass.hpp"
-#include "ecore/EOperation.hpp"
-#include "ecore/EReference.hpp"
+#include "ecore/EStringToStringMapEntry.hpp"
 #include "ecore/EGenericType.hpp"
-#include "ecore/EDataType.hpp"
+#include "ecore/EOperation.hpp"
 #include "ecore/EParameter.hpp"
+#include "ecore/EClass.hpp"
+#include "ecore/EDataType.hpp"
+#include "ecore/EReference.hpp"
 
 //metamodel factory
 #include "fUML/Semantics/Loci/LociFactory.hpp"
@@ -121,9 +121,9 @@ const std::shared_ptr<ecore::EOperation>& fUML::Semantics::Loci::LociPackageImpl
 {
 	return m_executionFactory_Operation_assignStrategy_SemanticStrategy;
 }
-const std::shared_ptr<ecore::EOperation>& fUML::Semantics::Loci::LociPackageImpl::getExecutionFactory_Operation_createExecution_Behavior_Element() const
+const std::shared_ptr<ecore::EOperation>& fUML::Semantics::Loci::LociPackageImpl::getExecutionFactory_Operation_createExecution_Behavior_FUML_Object() const
 {
-	return m_executionFactory_Operation_createExecution_Behavior_Element;
+	return m_executionFactory_Operation_createExecution_Behavior_FUML_Object;
 }
 const std::shared_ptr<ecore::EOperation>& fUML::Semantics::Loci::LociPackageImpl::getExecutionFactory_Operation_getBuiltInType_EString() const
 {

@@ -4,15 +4,15 @@
 
 #include "abstractDataTypes/SubsetUnion.hpp"
 //metametamodel classes
-#include "ecore/EStringToStringMapEntry.hpp"
 #include "ecore/EAnnotation.hpp"
-#include "ecore/EClass.hpp"
-#include "ecore/EOperation.hpp"
-#include "ecore/EReference.hpp"
-#include "ecore/EAttribute.hpp"
+#include "ecore/EStringToStringMapEntry.hpp"
 #include "ecore/EGenericType.hpp"
-#include "ecore/EDataType.hpp"
+#include "ecore/EOperation.hpp"
+#include "ecore/EAttribute.hpp"
 #include "ecore/EParameter.hpp"
+#include "ecore/EClass.hpp"
+#include "ecore/EDataType.hpp"
+#include "ecore/EReference.hpp"
 
 // metametamodel factory
 #include "ecore/ecoreFactory.hpp"
@@ -211,16 +211,6 @@ void CommonBehaviorPackageImpl::initializeCallEventExecutionContent()
 	m_callEventExecution_Operation_getInputParameterValues->_setID(CALLEVENTEXECUTION_OPERATION_GETINPUTPARAMETERVALUES);
 	
 	
-	m_callEventExecution_Operation_new_->setName("new_");
-	m_callEventExecution_Operation_new_->setEType(ecore::ecorePackage::eInstance()->getEJavaObject_Class());
-	m_callEventExecution_Operation_new_->setLowerBound(1);
-	m_callEventExecution_Operation_new_->setUpperBound(1);
-	m_callEventExecution_Operation_new_->setUnique(true);
-	m_callEventExecution_Operation_new_->setOrdered(false);
-	
-	m_callEventExecution_Operation_new_->_setID(CALLEVENTEXECUTION_OPERATION_NEW_);
-	
-	
 	m_callEventExecution_Operation_releaseCaller->setName("releaseCaller");
 	{ 	std::shared_ptr<ecore::ecoreFactory> factory = ecore::ecoreFactory::eInstance();
 		std::shared_ptr<ecore::EClass> unknownClass = factory ->createEClass(-1);
@@ -329,15 +319,56 @@ void CommonBehaviorPackageImpl::initializeEventTriggeredExecutionContent()
 	/*
 	 * EOperations
 	 */
-	m_eventTriggeredExecution_Operation_copy->setName("copy");
-	m_eventTriggeredExecution_Operation_copy->setEType(ecore::ecorePackage::eInstance()->getEJavaObject_Class());
-	m_eventTriggeredExecution_Operation_copy->setLowerBound(1);
-	m_eventTriggeredExecution_Operation_copy->setUpperBound(1);
-	m_eventTriggeredExecution_Operation_copy->setUnique(true);
-	m_eventTriggeredExecution_Operation_copy->setOrdered(false);
+	m_eventTriggeredExecution_Operation_execute->setName("execute");
+	{ 	std::shared_ptr<ecore::ecoreFactory> factory = ecore::ecoreFactory::eInstance();
+		std::shared_ptr<ecore::EClass> unknownClass = factory ->createEClass(-1);
+	   	unknownClass->setName("invalid");
+		unknownClass->setAbstract(true);
+		unknownClass->setInterface(true);
+		m_eventTriggeredExecution_Operation_execute->setEType(unknownClass);
+	}
+	m_eventTriggeredExecution_Operation_execute->setLowerBound(1);
+	m_eventTriggeredExecution_Operation_execute->setUpperBound(1);
+	m_eventTriggeredExecution_Operation_execute->setUnique(true);
+	m_eventTriggeredExecution_Operation_execute->setOrdered(false);
 	
-	m_eventTriggeredExecution_Operation_copy->_setID(EVENTTRIGGEREDEXECUTION_OPERATION_COPY);
+	m_eventTriggeredExecution_Operation_execute->_setID(EVENTTRIGGEREDEXECUTION_OPERATION_EXECUTE);
 	
+	
+	m_eventTriggeredExecution_Operation_finalize->setName("finalize");
+	{ 	std::shared_ptr<ecore::ecoreFactory> factory = ecore::ecoreFactory::eInstance();
+		std::shared_ptr<ecore::EClass> unknownClass = factory ->createEClass(-1);
+	   	unknownClass->setName("invalid");
+		unknownClass->setAbstract(true);
+		unknownClass->setInterface(true);
+		m_eventTriggeredExecution_Operation_finalize->setEType(unknownClass);
+	}
+	m_eventTriggeredExecution_Operation_finalize->setLowerBound(0);
+	m_eventTriggeredExecution_Operation_finalize->setUpperBound(-1);
+	m_eventTriggeredExecution_Operation_finalize->setUnique(true);
+	m_eventTriggeredExecution_Operation_finalize->setOrdered(false);
+	
+	m_eventTriggeredExecution_Operation_finalize->_setID(EVENTTRIGGEREDEXECUTION_OPERATION_FINALIZE);
+	
+	
+	m_eventTriggeredExecution_Operation_initialize_Behavior->setName("initialize");
+	m_eventTriggeredExecution_Operation_initialize_Behavior->setEType(fUML::Semantics::CommonBehavior::CommonBehaviorPackage::eInstance()->getParameterValue_Class());
+	m_eventTriggeredExecution_Operation_initialize_Behavior->setLowerBound(0);
+	m_eventTriggeredExecution_Operation_initialize_Behavior->setUpperBound(-1);
+	m_eventTriggeredExecution_Operation_initialize_Behavior->setUnique(true);
+	m_eventTriggeredExecution_Operation_initialize_Behavior->setOrdered(false);
+	
+	m_eventTriggeredExecution_Operation_initialize_Behavior->_setID(EVENTTRIGGEREDEXECUTION_OPERATION_INITIALIZE_BEHAVIOR);
+	
+	{
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_eventTriggeredExecution_Operation_initialize_Behavior);
+		parameter->setName("behavior");
+		parameter->setEType(uml::umlPackage::eInstance()->getBehavior_Class());
+		parameter->setLowerBound(0);
+		parameter->setUpperBound(1);
+		parameter->setUnique(true);
+		parameter->setOrdered(true);
+	}
 	
 	
 }

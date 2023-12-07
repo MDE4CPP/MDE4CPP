@@ -47,18 +47,21 @@
 #include "PSSM/Semantics/Values/SM_OpaqueExpressionEvaluation.hpp"
 #include "fUML/FUMLFactory.hpp"
 #include "PSSM/Semantics/StateMachines/TransitionMetadata.hpp"
-#include "uml/Behavior.hpp"
+#include "uml/OpaqueBehavior.hpp"
 #include "fUML/Semantics/CommonBehavior/Execution.hpp"
 #include "fUML/Semantics/Loci/Locus.hpp"
+#include "PSSM/Semantics/CommonBehavior/CommonBehaviorFactory.hpp"
+#include "PSSM/Semantics/CommonBehavior/EventTriggeredExecution.hpp"
+#include "PSSM/Semantics/CommonBehavior/CallEventExecution.hpp"
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "fUML/Semantics/Loci/LociFactory.hpp"
-#include "uml/umlFactory.hpp"
-#include "fUML/Semantics/CommonBehavior/CommonBehaviorFactory.hpp"
 #include "PSSM/Semantics/StateMachines/StateMachinesFactory.hpp"
+#include "uml/umlFactory.hpp"
+#include "fUML/Semantics/Loci/LociFactory.hpp"
+#include "fUML/Semantics/CommonBehavior/CommonBehaviorFactory.hpp"
 #include "fUML/Semantics/CommonBehavior/EventOccurrence.hpp"
 #include "uml/NamedElement.hpp"
 #include "PSSM/Semantics/StateMachines/RegionActivation.hpp"
@@ -66,8 +69,8 @@
 #include "PSSM/Semantics/StateMachines/StateMachineSemanticVisitor.hpp"
 #include "PSSM/Semantics/StateMachines/VertexActivation.hpp"
 //Factories and Package includes
-#include "PSSM/PSSMPackage.hpp"
 #include "PSSM/Semantics/SemanticsPackage.hpp"
+#include "PSSM/PSSMPackage.hpp"
 #include "fUML/Semantics/CommonBehavior/CommonBehaviorPackage.hpp"
 #include "fUML/Semantics/Loci/LociPackage.hpp"
 #include "PSSM/Semantics/StateMachines/StateMachinesPackage.hpp"
@@ -298,20 +301,15 @@ void TransitionActivationImpl::fire(const std::shared_ptr<fUML::Semantics::Commo
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
-		// The fire sequence is broken into the following set of actions
-// 1 - Exit the source (depends on the kind of transition that is currently used)
-// 2 - Execute the effect (if one exists for that transition)
-// 3 - Enter the target (depends on the kind of transition that is currently used)
-//this.exitSource(eventOccurrence);
-//FUMLExecutionEngine.eInstance.getControlDelegate().control(this);
-//this.tryExecuteEffect(eventOccurrence);
-//this.setStatus(TransitionMetadata.TRAVERSED);
-//logger.info(this.getNode().getName()+" => TRAVERSED");
-//this.enterTarget(eventOccurrence);
+	// The fire sequence is broken into the following set of actions
+	// 1 - Exit the source (depends on the kind of transition that is currently used)
+	// 2 - Execute the effect (if one exists for that transition)
+	// 3 - Enter the target (depends on the kind of transition that is currently used)
 	this->exitSource(eventOccurrence);
-	//ExecutionEngine ?
+	//FUMLExecutionEngine.eInstance.getControlDelegate().control(this);
 	this->tryExecuteEffect(eventOccurrence);
 	this->setStatus(PSSM::Semantics::StateMachines::TransitionMetadata::TRAVERSED);
+	DEBUG_INFO("Transition " << this->getNode()->getName() << " has fired.");
 	this->enterTarget(eventOccurrence);
 	//end of body
 }
@@ -402,15 +400,14 @@ bool TransitionActivationImpl::isReached()
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
-		/// Convenience operation which returns true if the status of this transition
-// is REACHED; false otherwise.
-//boolean reached = true;
-//if(staticCheck){
-//	reached = this.analyticalStatus.equals(TransitionMetadata.REACHED);
-//}else{
-//	reached = this.status.equals(TransitionMetadata.REACHED);
-//}
-//return reached;
+	// Convenience operation which returns true if the status of this transition is REACHED; false otherwise.
+	//boolean reached = true;
+	//if(staticCheck){
+	//	reached = this.analyticalStatus.equals(TransitionMetadata.REACHED);
+	//}else{
+	//	reached = this.status.equals(TransitionMetadata.REACHED);
+	//}
+	//return reached;
 	return this->getStatus() == PSSM::Semantics::StateMachines::TransitionMetadata::REACHED;
 	//end of body
 }
@@ -419,22 +416,15 @@ bool TransitionActivationImpl::isTraversed(bool staticCheck)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
-		// Convenience operation which returns true if the status of this transition
-// is TRAVERSED; false otherwise.
-//boolean traversed = true;
-//if(staticCheck){
-//	traversed = this.analyticalStatus.equals(TransitionMetadata.TRAVERSED);
-//}else{
-//	traversed = this.status.equals(TransitionMetadata.TRAVERSED);
-//}
-//return traversed;
-	bool traversed = true;
-	if(staticCheck) {
-		traversed = this->getAnalyticalStatus() == PSSM::Semantics::StateMachines::TransitionMetadata::TRAVERSED;
-	} else {
-		traversed = this->getStatus() == PSSM::Semantics::StateMachines::TransitionMetadata::TRAVERSED;
+	// Convenience operation which returns true if the status of this transition is TRAVERSED; false otherwise.
+	if(staticCheck) 
+	{
+		return this->getAnalyticalStatus() == PSSM::Semantics::StateMachines::TransitionMetadata::TRAVERSED;
+	} 
+	else 
+	{
+		return this->getStatus() == PSSM::Semantics::StateMachines::TransitionMetadata::TRAVERSED;
 	}
-	return traversed;
 	//end of body
 }
 
@@ -474,23 +464,21 @@ bool TransitionActivationImpl::isTriggered(bool staticCheck)
 	//end of body
 }
 
-void TransitionActivationImpl::setSourceActivation(const std::shared_ptr<PSSM::Semantics::StateMachines::VertexActivation>& _)
+void TransitionActivationImpl::setSourceActivation(const std::shared_ptr<PSSM::Semantics::StateMachines::VertexActivation>& sourceActivation)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
-	//	this.vertexSourceActivation = vertexSourceActivation;
-	this->m_sourceVertexActivation = _;
+	this->m_sourceVertexActivation = sourceActivation;
 	//end of body
 }
 
 
 
-void TransitionActivationImpl::setTargetActivation(const std::shared_ptr<PSSM::Semantics::StateMachines::VertexActivation>& _)
+void TransitionActivationImpl::setTargetActivation(const std::shared_ptr<PSSM::Semantics::StateMachines::VertexActivation>& targetActivation)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
-	//	this.vertexTargetActivation = vertexTargetActivation;
-	this->m_targetVertexActivation = _;
+	this->m_targetVertexActivation = targetActivation;
 	//end of body
 }
 
@@ -498,34 +486,49 @@ void TransitionActivationImpl::tryExecuteEffect(const std::shared_ptr<fUML::Sema
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
-	// Execute the effect owned by the transition (if any). If there// Execute the effect owned by the transition (if any). If there
-	// is no effect but the transition redefines another transition, then
-	// the effect of this transition is executed instead. This rule
-	// applies recursively.
-	//Transition transition = (Transition) this.getNode();
-	//Behavior effect = transition.getEffect();
-	//while(effect == null && transition.getRedefinedTransition() != null){
-	//	transition = transition.getRedefinedTransition();
-	//	effect = transition.getEffect();
-	//}
-	//if(effect != null){
-	//	Execution execution = this.getExecutionFor(transition.getEffect(), eventOccurrence);
-	//	if(execution!=null){
-	//		execution.execute();
-	//	}
-	//}
-	std::shared_ptr<uml::Transition> transition = std::dynamic_pointer_cast<uml::Transition>(this->getNode());
-	std::shared_ptr<uml::Behavior> effect = transition->getEffect();
+	// Execute the effect owned by the Transition (if any). 
+	// If there is no effect but the transition redefines another transition, then
+	// the effect of this transition is executed instead. This rule applies recursively.
+	auto transition = std::dynamic_pointer_cast<uml::Transition>(this->getNode());
+	auto effectBehavior = transition->getEffect();
 
-	while(effect == nullptr && transition->getRedefinedTransition() != nullptr) {
+	while (effectBehavior == nullptr && transition->getRedefinedTransition() != nullptr) 
+	{
 		transition = transition->getRedefinedTransition();
-		effect = transition->getEffect();
+		effectBehavior = transition->getEffect();
 	}
 
-	if(effect != nullptr) {
-		std::shared_ptr<fUML::Semantics::CommonBehavior::Execution> execution = this->getExecutionFor(transition->getEffect(), eventOccurrence);
-		if(execution != nullptr) {
-			execution->execute();
+	if (effectBehavior != nullptr) 
+	{
+		if (std::dynamic_pointer_cast<uml::OpaqueBehavior>(effectBehavior))
+		{
+			// Extract any Parameters from the given EventOccurrence (replaces EventTriggeredExecution::initialize()),
+			// invoke the OpaqueBehavior directly via ModelExecutor::execute()
+			// and pass any output ParameterValues to the eventOccurrence in case it's a CallEventOccurrence.
+			auto eventTriggeredExecution = PSSM::Semantics::CommonBehavior::CommonBehaviorFactory::eInstance()->createEventTriggeredExecution();
+			eventTriggeredExecution->setTriggeringEventOccurrence(eventOccurrence);
+			eventTriggeredExecution->setContext(this->getExecutionContext());
+			auto inputParameterValues = eventTriggeredExecution->initialize(effectBehavior);
+			
+			auto outputParameterValues = this->getExecutionLocus()->getExecutor()->execute(effectBehavior, this->getExecutionContext(), inputParameterValues);
+			
+			if (const auto& callEventOccurrence = std::dynamic_pointer_cast<PSSM::Semantics::CommonBehavior::CallEventOccurrence>(eventOccurrence))
+			{
+				for (const auto& outputParameterValue : *outputParameterValues)
+				{
+					callEventOccurrence->getExecution()->setParameterValue(outputParameterValue);
+				}
+			}
+		}
+		else
+		{
+			// create an Execution for the Behavior and wrap it in an EventTriggeredExecution which, when executed, 
+			// extracts any parameters from the given EventOccurrence, executes its wrapped Behavior Execution
+			// and passes any output ParameterValues to its triggering EventOccurrence in case its a CallEventOccurrence.
+			if (const auto& effectBehaviorExecution = this->getExecutionFor(effectBehavior, eventOccurrence)) // != nullptr
+			{
+				effectBehaviorExecution->execute();
+			}
 		}
 	}
 	//end of body
@@ -1416,65 +1419,65 @@ std::shared_ptr<Any> TransitionActivationImpl::eInvoke(int operationID, const st
 		// PSSM::Semantics::StateMachines::TransitionActivation::setSourceActivation(PSSM::Semantics::StateMachines::VertexActivation): 2747339387
 		case StateMachinesPackage::TRANSITIONACTIVATION_OPERATION_SETSOURCEACTIVATION_VERTEXACTIVATION:
 		{
-			//Retrieve input parameter '_'
+			//Retrieve input parameter 'sourceActivation'
 			//parameter 0
-			std::shared_ptr<PSSM::Semantics::StateMachines::VertexActivation> incoming_param__;
-			Bag<Any>::const_iterator incoming_param___arguments_citer = std::next(arguments->begin(), 0);
+			std::shared_ptr<PSSM::Semantics::StateMachines::VertexActivation> incoming_param_sourceActivation;
+			Bag<Any>::const_iterator incoming_param_sourceActivation_arguments_citer = std::next(arguments->begin(), 0);
 			{
-				std::shared_ptr<ecore::EcoreAny> ecoreAny = std::dynamic_pointer_cast<ecore::EcoreAny>((*incoming_param___arguments_citer));
+				std::shared_ptr<ecore::EcoreAny> ecoreAny = std::dynamic_pointer_cast<ecore::EcoreAny>((*incoming_param_sourceActivation_arguments_citer));
 				if(ecoreAny)
 				{
 					try
 					{
 						std::shared_ptr<ecore::EObject> _temp = ecoreAny->getAsEObject();
-						incoming_param__ = std::dynamic_pointer_cast<PSSM::Semantics::StateMachines::VertexActivation>(_temp);
+						incoming_param_sourceActivation = std::dynamic_pointer_cast<PSSM::Semantics::StateMachines::VertexActivation>(_temp);
 					}
 					catch(...)
 					{
-						DEBUG_ERROR("Invalid type stored in 'ecore::EcoreAny' for parameter '_'. Failed to invoke operation 'setSourceActivation'!")
+						DEBUG_ERROR("Invalid type stored in 'ecore::EcoreAny' for parameter 'sourceActivation'. Failed to invoke operation 'setSourceActivation'!")
 						return nullptr;
 					}
 				}
 				else
 				{
-					DEBUG_ERROR("Invalid instance of 'ecore::EcoreAny' for parameter '_'. Failed to invoke operation 'setSourceActivation'!")
+					DEBUG_ERROR("Invalid instance of 'ecore::EcoreAny' for parameter 'sourceActivation'. Failed to invoke operation 'setSourceActivation'!")
 					return nullptr;
 				}
 			}
 		
-			this->setSourceActivation(incoming_param__);
+			this->setSourceActivation(incoming_param_sourceActivation);
 			break;
 		}
 		// PSSM::Semantics::StateMachines::TransitionActivation::setTargetActivation(PSSM::Semantics::StateMachines::VertexActivation): 1905334593
 		case StateMachinesPackage::TRANSITIONACTIVATION_OPERATION_SETTARGETACTIVATION_VERTEXACTIVATION:
 		{
-			//Retrieve input parameter '_'
+			//Retrieve input parameter 'targetActivation'
 			//parameter 0
-			std::shared_ptr<PSSM::Semantics::StateMachines::VertexActivation> incoming_param__;
-			Bag<Any>::const_iterator incoming_param___arguments_citer = std::next(arguments->begin(), 0);
+			std::shared_ptr<PSSM::Semantics::StateMachines::VertexActivation> incoming_param_targetActivation;
+			Bag<Any>::const_iterator incoming_param_targetActivation_arguments_citer = std::next(arguments->begin(), 0);
 			{
-				std::shared_ptr<ecore::EcoreAny> ecoreAny = std::dynamic_pointer_cast<ecore::EcoreAny>((*incoming_param___arguments_citer));
+				std::shared_ptr<ecore::EcoreAny> ecoreAny = std::dynamic_pointer_cast<ecore::EcoreAny>((*incoming_param_targetActivation_arguments_citer));
 				if(ecoreAny)
 				{
 					try
 					{
 						std::shared_ptr<ecore::EObject> _temp = ecoreAny->getAsEObject();
-						incoming_param__ = std::dynamic_pointer_cast<PSSM::Semantics::StateMachines::VertexActivation>(_temp);
+						incoming_param_targetActivation = std::dynamic_pointer_cast<PSSM::Semantics::StateMachines::VertexActivation>(_temp);
 					}
 					catch(...)
 					{
-						DEBUG_ERROR("Invalid type stored in 'ecore::EcoreAny' for parameter '_'. Failed to invoke operation 'setTargetActivation'!")
+						DEBUG_ERROR("Invalid type stored in 'ecore::EcoreAny' for parameter 'targetActivation'. Failed to invoke operation 'setTargetActivation'!")
 						return nullptr;
 					}
 				}
 				else
 				{
-					DEBUG_ERROR("Invalid instance of 'ecore::EcoreAny' for parameter '_'. Failed to invoke operation 'setTargetActivation'!")
+					DEBUG_ERROR("Invalid instance of 'ecore::EcoreAny' for parameter 'targetActivation'. Failed to invoke operation 'setTargetActivation'!")
 					return nullptr;
 				}
 			}
 		
-			this->setTargetActivation(incoming_param__);
+			this->setTargetActivation(incoming_param_targetActivation);
 			break;
 		}
 		// PSSM::Semantics::StateMachines::TransitionActivation::tryExecuteEffect(fUML::Semantics::CommonBehavior::EventOccurrence): 3598997427

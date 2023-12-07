@@ -14,17 +14,17 @@
 
 namespace ecore 
 {
-	class EEnum;
-	class EStringToStringMapEntry;
-	class EAnnotation;
-	class EClass;
-	class EOperation;
-	class EReference;
 	class EEnumLiteral;
-	class EAttribute;
+	class EAnnotation;
+	class EStringToStringMapEntry;
 	class EGenericType;
-	class EDataType;
+	class EOperation;
+	class EAttribute;
 	class EParameter;
+	class EEnum;
+	class EClass;
+	class EDataType;
+	class EReference;
 }
 
 namespace PSSM::Semantics::StateMachines 
@@ -652,10 +652,12 @@ namespace PSSM::Semantics::StateMachines
 			// Begin Class StateMachineExecution
 			//Class and Feature IDs 
 			static const unsigned long STATEMACHINEEXECUTION_CLASS = 1411054300;
-			static const unsigned int STATEMACHINEEXECUTION_CLASS_FEATURE_COUNT = 13;
+			static const unsigned int STATEMACHINEEXECUTION_CLASS_FEATURE_COUNT = 15;
 			static const unsigned int STATEMACHINEEXECUTION_CLASS_OPERATION_COUNT = 58;
 			
+			static const unsigned long STATEMACHINEEXECUTION_ATTRIBUTE_CONDITIONVARIABLE = 1048116379;
 			static const unsigned long STATEMACHINEEXECUTION_ATTRIBUTE_CONFIGURATION = 1936731267;
+			static const unsigned long STATEMACHINEEXECUTION_ATTRIBUTE_MUTEX = 922940629;
 			static const unsigned long STATEMACHINEEXECUTION_ATTRIBUTE_REGIONACTIVATIONS = 1525081353;
 			
 			static const unsigned long STATEMACHINEEXECUTION_OPERATION_EXECUTE = 868578077;
@@ -668,7 +670,9 @@ namespace PSSM::Semantics::StateMachines
 			virtual const std::shared_ptr<ecore::EClass>& getStateMachineExecution_Class() const = 0;
 			
 			
+			virtual const std::shared_ptr<ecore::EReference>& getStateMachineExecution_Attribute_conditionVariable() const = 0;
 			virtual const std::shared_ptr<ecore::EReference>& getStateMachineExecution_Attribute_configuration() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getStateMachineExecution_Attribute_mutex() const = 0;
 			virtual const std::shared_ptr<ecore::EReference>& getStateMachineExecution_Attribute_regionActivations() const = 0;
 			
 			virtual const std::shared_ptr<ecore::EOperation>& getStateMachineExecution_Operation_execute() const = 0;

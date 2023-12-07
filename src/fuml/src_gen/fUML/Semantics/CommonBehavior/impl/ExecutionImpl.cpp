@@ -50,9 +50,10 @@
 
 #include <exception> // used in Persistence
 #include "uml/umlFactory.hpp"
+#include "fUML/Semantics/CommonBehavior/CommonBehaviorFactory.hpp"
 #include "fUML/Semantics/Loci/LociFactory.hpp"
 #include "ecore/ecoreFactory.hpp"
-#include "fUML/Semantics/CommonBehavior/CommonBehaviorFactory.hpp"
+#include "fUML/MDE4CPP_Extensions/MDE4CPP_ExtensionsFactory.hpp"
 #include "uml/Behavior.hpp"
 #include "uml/Classifier.hpp"
 #include "uml/Comment.hpp"
@@ -65,8 +66,8 @@
 #include "fUML/Semantics/CommonBehavior/ParameterValue.hpp"
 #include "fUML/Semantics/Loci/SemanticVisitor.hpp"
 //Factories and Package includes
-#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/SemanticsPackage.hpp"
+#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/CommonBehavior/CommonBehaviorPackage.hpp"
 #include "fUML/Semantics/Loci/LociPackage.hpp"
 #include "fUML/MDE4CPP_Extensions/MDE4CPP_ExtensionsPackage.hpp"
@@ -306,11 +307,11 @@ void ExecutionImpl::setBehavior(const std::shared_ptr<uml::Behavior>& _behavior)
 }
 
 /* Getter & Setter for reference context */
-const std::shared_ptr<uml::Element>& ExecutionImpl::getContext() const
+const std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_Object>& ExecutionImpl::getContext() const
 {
     return m_context;
 }
-void ExecutionImpl::setContext(const std::shared_ptr<uml::Element>& _context)
+void ExecutionImpl::setContext(const std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_Object>& _context)
 {
     m_context = _context;
 	
@@ -482,7 +483,7 @@ void ExecutionImpl::resolveReferences(const int featureID, std::vector<std::shar
 			if (references.size() == 1)
 			{
 				// Cast object to correct type
-				std::shared_ptr<uml::Element> _context = std::dynamic_pointer_cast<uml::Element>( references.front() );
+				std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_Object> _context = std::dynamic_pointer_cast<fUML::MDE4CPP_Extensions::FUML_Object>( references.front() );
 				setContext(_context);
 			}
 			
@@ -540,7 +541,7 @@ void ExecutionImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHa
 		std::shared_ptr<fUML::Semantics::CommonBehavior::CommonBehaviorPackage> package = fUML::Semantics::CommonBehavior::CommonBehaviorPackage::eInstance();
 	// Add references
 		saveHandler->addReference(this->getBehavior(), "behavior", getBehavior()->eClass() != uml::umlPackage::eInstance()->getBehavior_Class()); 
-		saveHandler->addReference(this->getContext(), "context", getContext()->eClass() != uml::umlPackage::eInstance()->getElement_Class()); 
+		saveHandler->addReference(this->getContext(), "context", getContext()->eClass() != fUML::MDE4CPP_Extensions::MDE4CPP_ExtensionsPackage::eInstance()->getFUML_Object_Class()); 
 		saveHandler->addReference(this->getLocus(), "locus", getLocus()->eClass() != fUML::Semantics::Loci::LociPackage::eInstance()->getLocus_Class()); 
 		saveHandler->addReferences<uml::Classifier>("types", this->getTypes());
 		//
@@ -572,7 +573,7 @@ std::shared_ptr<Any> ExecutionImpl::eGet(int featureID, bool resolve, bool coreT
 		case fUML::Semantics::CommonBehavior::CommonBehaviorPackage::EXECUTION_ATTRIBUTE_BEHAVIOR:
 			return eAny(getBehavior(),uml::umlPackage::BEHAVIOR_CLASS,false); //468
 		case fUML::Semantics::CommonBehavior::CommonBehaviorPackage::EXECUTION_ATTRIBUTE_CONTEXT:
-			return eAny(getContext(),uml::umlPackage::ELEMENT_CLASS,false); //466
+			return eAny(getContext(),fUML::MDE4CPP_Extensions::MDE4CPP_ExtensionsPackage::FUML_OBJECT_CLASS,false); //466
 		case fUML::Semantics::CommonBehavior::CommonBehaviorPackage::EXECUTION_ATTRIBUTE_LOCUS:
 			return eAny(getLocus(),fUML::Semantics::Loci::LociPackage::LOCUS_CLASS,false); //469
 		case fUML::Semantics::CommonBehavior::CommonBehaviorPackage::EXECUTION_ATTRIBUTE_PARAMETERVALUES:
@@ -658,7 +659,7 @@ bool ExecutionImpl::eSet(int featureID,  const std::shared_ptr<Any>& newValue)
 				try
 				{
 					std::shared_ptr<ecore::EObject> eObject = ecoreAny->getAsEObject();
-					std::shared_ptr<uml::Element> _context = std::dynamic_pointer_cast<uml::Element>(eObject);
+					std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_Object> _context = std::dynamic_pointer_cast<fUML::MDE4CPP_Extensions::FUML_Object>(eObject);
 					if(_context)
 					{
 						setContext(_context); //466

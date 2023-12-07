@@ -21,7 +21,7 @@
 #include <cassert>
 #include <iostream>
 #include <sstream>
-#include <stdexcept>
+
 
 
 #include "ecore/EcoreAny.hpp"
@@ -39,8 +39,8 @@
 #include <exception> // used in Persistence
 #include "fUML/Semantics/Loci/SemanticStrategy.hpp"
 //Factories and Package includes
-#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/SemanticsPackage.hpp"
+#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/Loci/LociPackage.hpp"
 
 using namespace fUML::Semantics::Loci;
@@ -99,13 +99,18 @@ ChoiceStrategyImpl& ChoiceStrategyImpl::operator=(const ChoiceStrategyImpl & obj
 //*********************************
 int ChoiceStrategyImpl::choose(int size)
 {
-	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
+	//ADD_COUNT(__PRETTY_FUNCTION__)
+	//generated from body annotation
+	// This Operation is intended to be overridden by concrete ChoiceStrategy Subclasses.
+	return -1;
+	//end of body
 }
 
 std::string ChoiceStrategyImpl::getName()
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
+	// The name of all ChoiceStrategys is "choice"
 	return "choice";
 	//end of body
 }

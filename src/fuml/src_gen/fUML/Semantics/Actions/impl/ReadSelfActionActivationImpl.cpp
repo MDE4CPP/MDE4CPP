@@ -36,14 +36,15 @@
 //Includes from codegen annotation
 #include "uml/UMLAny.hpp"
 #include "uml/ReadSelfAction.hpp"
+#include "fUML/MDE4CPP_Extensions/FUML_Object.hpp"
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "uml/umlFactory.hpp"
 #include "fUML/Semantics/Activities/ActivitiesFactory.hpp"
 #include "fUML/Semantics/Actions/ActionsFactory.hpp"
+#include "uml/umlFactory.hpp"
 #include "uml/Action.hpp"
 #include "fUML/Semantics/Actions/ActionActivation.hpp"
 #include "fUML/Semantics/Activities/ActivityEdgeInstance.hpp"
@@ -55,8 +56,8 @@
 #include "uml/ReadSelfAction.hpp"
 #include "fUML/Semantics/Activities/Token.hpp"
 //Factories and Package includes
-#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/SemanticsPackage.hpp"
+#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/Actions/ActionsPackage.hpp"
 #include "fUML/Semantics/Activities/ActivitiesPackage.hpp"
 #include "uml/umlPackage.hpp"
@@ -137,7 +138,7 @@ void ReadSelfActionActivationImpl::doAction()
 	// Get the context object of the activity execution containing this action activation and place a reference to it on the result output pin.
 	const std::shared_ptr<uml::ReadSelfAction>& action = this->getReadSelfAction();
 
-	std::shared_ptr<uml::Element> context=this->getExecutionContext();	
+	std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_Object> context=this->getExecutionContext();	
 	if(context)
 	{
 		std::shared_ptr<Any> value = eUMLAny(context, context->getMetaElementID());

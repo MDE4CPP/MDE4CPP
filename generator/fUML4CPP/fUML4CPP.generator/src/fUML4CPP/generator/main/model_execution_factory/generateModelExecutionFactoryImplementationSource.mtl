@@ -38,7 +38,7 @@ originalName : String = aPackage.generateNamespacePath(false);
 [/for]
 
 //fUML includes
-[if (aPackage.hasActivity())]
+[if (aPackage.includesFUML())]
 #include "fUML/Semantics/Actions/ActionsFactory.hpp"
 #include "fUML/Semantics/Activities/ActivitiesFactory.hpp"
 #include "fUML/Semantics/Activities/ActivityExecution.hpp"
@@ -58,6 +58,7 @@ originalName : String = aPackage.generateNamespacePath(false);
 [if (aPackage.includesPSSM())]
 
 //PSSM includes
+#include "PSSM/MDE4CPP_Extensions/PSSM_Object.hpp"
 #include "PSSM/Semantics/StateMachines/StateMachinesFactory.hpp"
 #include "PSSM/Semantics/StateMachines/StateMachineExecution.hpp"
 #include "PSSM/Semantics/StateMachines/RegionActivation.hpp"
@@ -75,7 +76,7 @@ originalName : String = aPackage.generateNamespacePath(false);
 [/if]
 
 //UML includes
-[if (aPackage.hasActivity())]
+[if (aPackage.includesFUML())]
 #include "uml/Activity.hpp"
 [/if]
 [if (aPackage.includesPSSM())]
@@ -116,7 +117,7 @@ using namespace [aPackage.generateNamespace(false)/];
 {
 }
 
-std::shared_ptr<fUML::Semantics::CommonBehavior::Execution> [packageName/]ExecutionFactoryImpl::createExecution(const std::shared_ptr<uml::Behavior>& behavior, const std::shared_ptr<uml::Element>& context)
+std::shared_ptr<fUML::Semantics::CommonBehavior::Execution> [packageName/]ExecutionFactoryImpl::createExecution(const std::shared_ptr<uml::Behavior>& behavior, const std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_Object>& context)
 {
 [let activitiesOwnedByPackage : Set(Activity) = aPackage.collectActivitiesOwnedByPackage()->reject(isDoNotGenerateElement())->sortedBy(myQualifiedName())->asSet()]
 [if (activitiesOwnedByPackage->size() > 0)]
@@ -142,7 +143,7 @@ std::shared_ptr<fUML::Semantics::CommonBehavior::Execution> [packageName/]Execut
 		{
 			if(!m_[aStateMachine.memberName()/]ExecutionPrototype)
 			{
-				this->create[aStateMachine.memberName().toUpperFirst()/]ExecutionPrototype();
+				this->create[aStateMachine.memberName().toUpperFirst()/]ExecutionPrototype(context);
 			}
 			return m_[aStateMachine.memberName()/]ExecutionPrototype;
 		}
@@ -174,7 +175,7 @@ void [packageName/]ExecutionFactoryImpl::create[anActivity.memberName().toUpperF
 
 [comment PSSM: add functions to create ExecutionPrototypes for each StateMachine/]
 [for (aStateMachine : StateMachine | aPackage.collectStateMachinesOwnedByPackage()->reject(isDoNotGenerateElement()))]
-void [packageName/]ExecutionFactoryImpl::create[aStateMachine.memberName().toUpperFirst()/]ExecutionPrototype()
+void [packageName/]ExecutionFactoryImpl::create[aStateMachine.memberName().toUpperFirst()/]ExecutionPrototype(const std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_Object>& context)
 {
 	[aStateMachine.generateStateMachineExecutionPrototypeCreatorBody()/]
 }

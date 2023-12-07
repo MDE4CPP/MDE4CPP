@@ -40,9 +40,10 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "fUML/MDE4CPP_Extensions/MDE4CPP_ExtensionsFactory.hpp"
+#include "fUML/Semantics/StructuredClassifiers/StructuredClassifiersFactory.hpp"
 #include "PSSM/Semantics/StateMachines/StateMachinesFactory.hpp"
 #include "fUML/Semantics/CommonBehavior/CommonBehaviorFactory.hpp"
+#include "fUML/MDE4CPP_Extensions/MDE4CPP_ExtensionsFactory.hpp"
 #include "fUML/Semantics/CommonBehavior/ClassifierBehaviorExecution.hpp"
 #include "PSSM/Semantics/StateMachines/CompletionEventOccurrence.hpp"
 #include "PSSM/Semantics/StateMachines/DeferredEventOccurrence.hpp"
@@ -52,8 +53,8 @@
 #include "fUML/Semantics/CommonBehavior/ObjectActivation.hpp"
 #include "PSSM/Semantics/StateMachines/StateActivation.hpp"
 //Factories and Package includes
-#include "PSSM/PSSMPackage.hpp"
 #include "PSSM/Semantics/SemanticsPackage.hpp"
+#include "PSSM/PSSMPackage.hpp"
 #include "fUML/Semantics/CommonBehavior/CommonBehaviorPackage.hpp"
 #include "PSSM/Semantics/CommonBehavior/CommonBehaviorPackage.hpp"
 #include "fUML/MDE4CPP_Extensions/MDE4CPP_ExtensionsPackage.hpp"
@@ -128,9 +129,9 @@ int SM_ObjectActivationImpl::getDeferredEventInsertionIndex()
 	//generated from body annotation
 	// Deferred events are always registered after completion events if any.
 	// Return the insertion point for deferred events.
-	for (auto event : *(m_eventPool))
+	for (const auto& event : *(m_eventPool))
 	{
-		if (auto deferredEvent = std::dynamic_pointer_cast<PSSM::Semantics::StateMachines::DeferredEventOccurrence>(event)) 
+		if (const auto& deferredEvent = std::dynamic_pointer_cast<PSSM::Semantics::StateMachines::DeferredEventOccurrence>(event)) 
 		{
 			return m_eventPool->index_of(event);
 		}
@@ -143,11 +144,13 @@ std::shared_ptr<PSSM::Semantics::StateMachines::CompletionEventOccurrence> SM_Ob
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
-	for (auto event : *(m_eventPool))
+	for (const auto& eventOccurrence : *(this->m_eventPool))
 	{
-		if (auto completionEvent = std::dynamic_pointer_cast<PSSM::Semantics::StateMachines::CompletionEventOccurrence>(event))
+		if (const auto& completionEventOccurence = std::dynamic_pointer_cast<PSSM::Semantics::StateMachines::CompletionEventOccurrence>(eventOccurrence))
 		{
-			return completionEvent;
+			// Delete EventOccurrence from the Event Pool here as fUML::ObjectActivation::retrieveNextEvent is not called for CompletionEventOccurrences.
+			this->m_eventPool->erase(completionEventOccurence);
+			return completionEventOccurence;
 		}
 	}
 	return nullptr;
@@ -158,14 +161,21 @@ void SM_ObjectActivationImpl::registerCompletionEvent(const std::shared_ptr<PSSM
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
-	// Create a CompletionEvent for the given StateActivation and place it in the event pool.
-	auto completionEventOccurrence(PSSM::Semantics::StateMachines::StateMachinesFactory::eInstance()->createCompletionEventOccurrence_as_eventPool_in_ObjectActivation(this->getThisObjectActivationPtr()));
+	// Create a CompletionEvent for the given StateActivation
+	const auto& completionEventOccurrence(PSSM::Semantics::StateMachines::StateMachinesFactory::eInstance()->createCompletionEventOccurrence());
 	completionEventOccurrence->setStateActivation(stateActivation);
+	
+	// Place it in the Event Pool
+	std::unique_lock lock(*m_mutex);
+	this->m_eventPool->push_back(completionEventOccurrence);
+	lock.unlock();	
+
 	DEBUG_INFO("StateActivation " << stateActivation << " registered an CompletionEventOccurrence!")
+	this->m_conditionVariable->notify_one();
 
 	// As there is currently no dispatch loop running asynchronously, try dispatching this Event immediateley
-	DEBUG_INFO("Dispatching Event immediateley:");
-	this->dispatchNextEvent();
+	//DEBUG_INFO("Dispatching Event immediateley:");
+	//this->dispatchNextEvent();
 	//end of body
 }
 
@@ -197,6 +207,7 @@ std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccurrence> SM_ObjectActiv
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
+	// REPLACES GETNEXTEVENT()
 	// Redefinition of fUML::ObjectActivation to accommodate to priorities of PSSM-specific EventOccurrences:
 	// All CompletionEventOccurrences are dispatched first. They are dispatched according to their order of arrival in the pool. 
 	// Only if no CompletionEventOccurrences are in the pool, then regular EventOccurrences are dispatched according to the set dispatching policy. 
@@ -358,7 +369,7 @@ std::shared_ptr<Any> SM_ObjectActivationImpl::eGet(int featureID, bool resolve, 
 	switch(featureID)
 	{
 		case PSSM::Semantics::CommonBehavior::CommonBehaviorPackage::SM_OBJECTACTIVATION_ATTRIBUTE_DEFERREDEVENTPOOL:
-			return eEcoreContainerAny(getDeferredEventPool(),PSSM::Semantics::StateMachines::StateMachinesPackage::DEFERREDEVENTOCCURRENCE_CLASS); //304
+			return eEcoreContainerAny(getDeferredEventPool(),PSSM::Semantics::StateMachines::StateMachinesPackage::DEFERREDEVENTOCCURRENCE_CLASS); //307
 	}
 	return fUML::Semantics::CommonBehavior::ObjectActivationImpl::eGet(featureID, resolve, coreType);
 }
@@ -368,7 +379,7 @@ bool SM_ObjectActivationImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case PSSM::Semantics::CommonBehavior::CommonBehaviorPackage::SM_OBJECTACTIVATION_ATTRIBUTE_DEFERREDEVENTPOOL:
-			return getDeferredEventPool() != nullptr; //304
+			return getDeferredEventPool() != nullptr; //307
 	}
 	return fUML::Semantics::CommonBehavior::ObjectActivationImpl::internalEIsSet(featureID);
 }

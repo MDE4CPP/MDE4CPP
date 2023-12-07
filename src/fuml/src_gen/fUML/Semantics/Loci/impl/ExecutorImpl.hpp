@@ -48,7 +48,7 @@ virtual public Executor
 			// Operations
 			//*********************************
 			virtual std::shared_ptr<Any> evaluate(const std::shared_ptr<uml::ValueSpecification>& specification) ;
-			virtual std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> execute(const std::shared_ptr<uml::Behavior>& behavior, const std::shared_ptr<uml::Element>& context, const std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>>& inputs) ;
+			virtual std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> execute(const std::shared_ptr<uml::Behavior>& behavior, const std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_Object>& context, const std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>>& inputs) ;
 			virtual std::shared_ptr<uml::Element> start(const std::shared_ptr<uml::Class>& type, const std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>>& inputs) ;
 			
 			//*********************************

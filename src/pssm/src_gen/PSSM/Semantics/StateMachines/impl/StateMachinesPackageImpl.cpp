@@ -4,17 +4,17 @@
 
 #include "abstractDataTypes/SubsetUnion.hpp"
 //metametamodel classes
-#include "ecore/EEnum.hpp"
-#include "ecore/EStringToStringMapEntry.hpp"
-#include "ecore/EAnnotation.hpp"
-#include "ecore/EClass.hpp"
-#include "ecore/EOperation.hpp"
-#include "ecore/EReference.hpp"
 #include "ecore/EEnumLiteral.hpp"
-#include "ecore/EAttribute.hpp"
+#include "ecore/EAnnotation.hpp"
+#include "ecore/EStringToStringMapEntry.hpp"
 #include "ecore/EGenericType.hpp"
-#include "ecore/EDataType.hpp"
+#include "ecore/EOperation.hpp"
+#include "ecore/EAttribute.hpp"
 #include "ecore/EParameter.hpp"
+#include "ecore/EEnum.hpp"
+#include "ecore/EClass.hpp"
+#include "ecore/EDataType.hpp"
+#include "ecore/EReference.hpp"
 
 //metamodel factory
 #include "PSSM/Semantics/StateMachines/StateMachinesFactory.hpp"
@@ -670,9 +670,17 @@ const std::shared_ptr<ecore::EClass>& PSSM::Semantics::StateMachines::StateMachi
 }
 
 
+const std::shared_ptr<ecore::EReference>& PSSM::Semantics::StateMachines::StateMachinesPackageImpl::getStateMachineExecution_Attribute_conditionVariable() const
+{
+	return m_stateMachineExecution_Attribute_conditionVariable;
+}
 const std::shared_ptr<ecore::EReference>& PSSM::Semantics::StateMachines::StateMachinesPackageImpl::getStateMachineExecution_Attribute_configuration() const
 {
 	return m_stateMachineExecution_Attribute_configuration;
+}
+const std::shared_ptr<ecore::EReference>& PSSM::Semantics::StateMachines::StateMachinesPackageImpl::getStateMachineExecution_Attribute_mutex() const
+{
+	return m_stateMachineExecution_Attribute_mutex;
 }
 const std::shared_ptr<ecore::EReference>& PSSM::Semantics::StateMachines::StateMachinesPackageImpl::getStateMachineExecution_Attribute_regionActivations() const
 {

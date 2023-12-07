@@ -14,15 +14,15 @@
 
 namespace ecore 
 {
-	class EStringToStringMapEntry;
 	class EAnnotation;
-	class EClass;
-	class EOperation;
-	class EReference;
-	class EAttribute;
+	class EStringToStringMapEntry;
 	class EGenericType;
-	class EDataType;
+	class EOperation;
+	class EAttribute;
 	class EParameter;
+	class EClass;
+	class EDataType;
+	class EReference;
 }
 
 namespace PSSM::Semantics::CommonBehavior 
@@ -59,7 +59,7 @@ namespace PSSM::Semantics::CommonBehavior
 			//Class and Feature IDs 
 			static const unsigned long CALLEVENTEXECUTION_CLASS = 1816164655;
 			static const unsigned int CALLEVENTEXECUTION_CLASS_FEATURE_COUNT = 15;
-			static const unsigned int CALLEVENTEXECUTION_CLASS_OPERATION_COUNT = 59;
+			static const unsigned int CALLEVENTEXECUTION_CLASS_OPERATION_COUNT = 58;
 			static const unsigned long CALLEVENTEXECUTION_ATTRIBUTE_CALLERSUSPENDED = 680148591;
 			
 			static const unsigned long CALLEVENTEXECUTION_ATTRIBUTE_BEHAVIOR = 68529846;
@@ -70,7 +70,6 @@ namespace PSSM::Semantics::CommonBehavior
 			static const unsigned long CALLEVENTEXECUTION_OPERATION__SUSPEND = 515841911;
 			static const unsigned long CALLEVENTEXECUTION_OPERATION_EXECUTE = 1935366821;
 			static const unsigned long CALLEVENTEXECUTION_OPERATION_GETINPUTPARAMETERVALUES = 4255590145;
-			static const unsigned long CALLEVENTEXECUTION_OPERATION_NEW_ = 3061400933;
 			static const unsigned long CALLEVENTEXECUTION_OPERATION_RELEASECALLER = 1070378962;
 			
 			//Class and Feature Getter
@@ -86,7 +85,6 @@ namespace PSSM::Semantics::CommonBehavior
 			virtual const std::shared_ptr<ecore::EOperation>& getCallEventExecution_Operation__suspend() const = 0;
 			virtual const std::shared_ptr<ecore::EOperation>& getCallEventExecution_Operation_execute() const = 0;
 			virtual const std::shared_ptr<ecore::EOperation>& getCallEventExecution_Operation_getInputParameterValues() const = 0;
-			virtual const std::shared_ptr<ecore::EOperation>& getCallEventExecution_Operation_new_() const = 0;
 			virtual const std::shared_ptr<ecore::EOperation>& getCallEventExecution_Operation_releaseCaller() const = 0;
 			
 			// End Class CallEventExecution
@@ -115,12 +113,14 @@ namespace PSSM::Semantics::CommonBehavior
 			//Class and Feature IDs 
 			static const unsigned long EVENTTRIGGEREDEXECUTION_CLASS = 1450499413;
 			static const unsigned int EVENTTRIGGEREDEXECUTION_CLASS_FEATURE_COUNT = 13;
-			static const unsigned int EVENTTRIGGEREDEXECUTION_CLASS_OPERATION_COUNT = 54;
+			static const unsigned int EVENTTRIGGEREDEXECUTION_CLASS_OPERATION_COUNT = 56;
 			
 			static const unsigned long EVENTTRIGGEREDEXECUTION_ATTRIBUTE_TRIGGERINGEVENTOCCURRENCE = 1973312478;
 			static const unsigned long EVENTTRIGGEREDEXECUTION_ATTRIBUTE_WRAPPEDEXECUTION = 1069891488;
 			
-			static const unsigned long EVENTTRIGGEREDEXECUTION_OPERATION_COPY = 285431960;
+			static const unsigned long EVENTTRIGGEREDEXECUTION_OPERATION_EXECUTE = 3241661790;
+			static const unsigned long EVENTTRIGGEREDEXECUTION_OPERATION_FINALIZE = 4224883493;
+			static const unsigned long EVENTTRIGGEREDEXECUTION_OPERATION_INITIALIZE_BEHAVIOR = 846647309;
 			
 			//Class and Feature Getter
 			virtual const std::shared_ptr<ecore::EClass>& getEventTriggeredExecution_Class() const = 0;
@@ -129,7 +129,9 @@ namespace PSSM::Semantics::CommonBehavior
 			virtual const std::shared_ptr<ecore::EReference>& getEventTriggeredExecution_Attribute_triggeringEventOccurrence() const = 0;
 			virtual const std::shared_ptr<ecore::EReference>& getEventTriggeredExecution_Attribute_wrappedExecution() const = 0;
 			
-			virtual const std::shared_ptr<ecore::EOperation>& getEventTriggeredExecution_Operation_copy() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getEventTriggeredExecution_Operation_execute() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getEventTriggeredExecution_Operation_finalize() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getEventTriggeredExecution_Operation_initialize_Behavior() const = 0;
 			
 			// End Class EventTriggeredExecution
 

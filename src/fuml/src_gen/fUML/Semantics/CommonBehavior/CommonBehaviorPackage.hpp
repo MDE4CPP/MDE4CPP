@@ -14,21 +14,22 @@
 
 namespace ecore 
 {
-	class EStringToStringMapEntry;
 	class EAnnotation;
-	class EClass;
-	class EOperation;
-	class EReference;
-	class EAttribute;
+	class EStringToStringMapEntry;
 	class EGenericType;
-	class EDataType;
+	class EOperation;
+	class EAttribute;
 	class EParameter;
+	class EClass;
+	class EDataType;
+	class EReference;
 }
 
 namespace fUML::Semantics::CommonBehavior 
 {
 	class ClassifierBehaviorExecution;
 	class EventAccepter;
+	class EventDispatchLoop;
 	class EventOccurrence;
 	class Execution;
 	class FIFOGetNextEventStrategy;
@@ -108,6 +109,27 @@ namespace fUML::Semantics::CommonBehavior
 			virtual const std::shared_ptr<ecore::EOperation>& getEventAccepter_Operation_match_EventOccurrence() const = 0;
 			
 			// End Class EventAccepter
+
+
+			// Begin Class EventDispatchLoop
+			//Class and Feature IDs 
+			static const unsigned long EVENTDISPATCHLOOP_CLASS = 1354650361;
+			static const unsigned int EVENTDISPATCHLOOP_CLASS_FEATURE_COUNT = 1;
+			static const unsigned int EVENTDISPATCHLOOP_CLASS_OPERATION_COUNT = 1;
+			
+			static const unsigned long EVENTDISPATCHLOOP_ATTRIBUTE_MEMBERTHREAD = 1756598410;
+			
+			static const unsigned long EVENTDISPATCHLOOP_OPERATION_STARTDISPATCHLOOP_OBJECTACTIVATION = 135163438;
+			
+			//Class and Feature Getter
+			virtual const std::shared_ptr<ecore::EClass>& getEventDispatchLoop_Class() const = 0;
+			
+			
+			virtual const std::shared_ptr<ecore::EReference>& getEventDispatchLoop_Attribute_memberThread() const = 0;
+			
+			virtual const std::shared_ptr<ecore::EOperation>& getEventDispatchLoop_Operation_startDispatchLoop_ObjectActivation() const = 0;
+			
+			// End Class EventDispatchLoop
 
 
 			// Begin Class EventOccurrence
@@ -225,11 +247,14 @@ namespace fUML::Semantics::CommonBehavior
 			// Begin Class ObjectActivation
 			//Class and Feature IDs 
 			static const unsigned long OBJECTACTIVATION_CLASS = 1754020883;
-			static const unsigned int OBJECTACTIVATION_CLASS_FEATURE_COUNT = 4;
+			static const unsigned int OBJECTACTIVATION_CLASS_FEATURE_COUNT = 7;
 			static const unsigned int OBJECTACTIVATION_CLASS_OPERATION_COUNT = 8;
 			
 			static const unsigned long OBJECTACTIVATION_ATTRIBUTE_CLASSIFIERBEHAVIOREXECUTIONS = 470972086;
+			static const unsigned long OBJECTACTIVATION_ATTRIBUTE_CONDITIONVARIABLE = 691283720;
 			static const unsigned long OBJECTACTIVATION_ATTRIBUTE_EVENTPOOL = 1340800468;
+			static const unsigned long OBJECTACTIVATION_ATTRIBUTE_MEMBERTHREAD = 424492349;
+			static const unsigned long OBJECTACTIVATION_ATTRIBUTE_MUTEX = 1319528081;
 			static const unsigned long OBJECTACTIVATION_ATTRIBUTE_OBJECT = 1526874106;
 			static const unsigned long OBJECTACTIVATION_ATTRIBUTE_WAITINGEVENTACCEPTERS = 343315370;
 			
@@ -247,7 +272,10 @@ namespace fUML::Semantics::CommonBehavior
 			
 			
 			virtual const std::shared_ptr<ecore::EReference>& getObjectActivation_Attribute_classifierBehaviorExecutions() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getObjectActivation_Attribute_conditionVariable() const = 0;
 			virtual const std::shared_ptr<ecore::EReference>& getObjectActivation_Attribute_eventPool() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getObjectActivation_Attribute_memberThread() const = 0;
+			virtual const std::shared_ptr<ecore::EReference>& getObjectActivation_Attribute_mutex() const = 0;
 			virtual const std::shared_ptr<ecore::EReference>& getObjectActivation_Attribute_object() const = 0;
 			virtual const std::shared_ptr<ecore::EReference>& getObjectActivation_Attribute_waitingEventAccepters() const = 0;
 			

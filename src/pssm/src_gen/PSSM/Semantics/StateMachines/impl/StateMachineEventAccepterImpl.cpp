@@ -55,8 +55,8 @@
 #include "PSSM/Semantics/StateMachines/StateMachineExecution.hpp"
 #include "PSSM/Semantics/StateMachines/TransitionActivation.hpp"
 //Factories and Package includes
-#include "PSSM/PSSMPackage.hpp"
 #include "PSSM/Semantics/SemanticsPackage.hpp"
+#include "PSSM/PSSMPackage.hpp"
 #include "fUML/Semantics/CommonBehavior/CommonBehaviorPackage.hpp"
 #include "PSSM/Semantics/StateMachines/StateMachinesPackage.hpp"
 
@@ -143,13 +143,13 @@ bool StateMachineEventAccepterImpl::_defer(const std::shared_ptr<fUML::Semantics
 	return deferred;*/
 
 	bool deferred = false;
-	for (auto child : *(stateConfiguration->getChildren()))
+	for (const auto& child : *(stateConfiguration->getChildren()))
 	{
 		deferred = this->_defer(eventOccurrence, child);
 	}
 	if (!deferred && stateConfiguration->getVertexActivation() != nullptr)
 	{
-		if (auto stateActivation = std::dynamic_pointer_cast<StateActivation>(stateConfiguration->getVertexActivation()))
+		if (const auto& stateActivation = std::dynamic_pointer_cast<StateActivation>(stateConfiguration->getVertexActivation()))
 		{
 			if (stateActivation->canDefer(eventOccurrence))
 			{
@@ -232,14 +232,14 @@ std::shared_ptr<Bag<PSSM::Semantics::StateMachines::TransitionActivation>> State
 	return selectedTransitions;*/
 
 	std::shared_ptr<Bag<PSSM::Semantics::StateMachines::TransitionActivation>> selectedTransitionActivations(new Bag<PSSM::Semantics::StateMachines::TransitionActivation>());
-	for (auto child : *(stateConfiguration->getChildren()))
+	for (const auto& child : *(stateConfiguration->getChildren()))
 	{
 		selectedTransitionActivations->insert(*(this->_select(eventOccurrence, child)));
 	}
 
 	if (selectedTransitionActivations->empty() && stateConfiguration->getVertexActivation() != nullptr)
 	{
-		for (auto outgoingTransitionActivation : *(stateConfiguration->getVertexActivation()->getOutgoingTransitions()))
+		for (const auto& outgoingTransitionActivation : *(stateConfiguration->getVertexActivation()->getOutgoingTransitions()))
 		{
 			if (outgoingTransitionActivation->canFireOn(eventOccurrence))
 			{
@@ -249,8 +249,8 @@ std::shared_ptr<Bag<PSSM::Semantics::StateMachines::TransitionActivation>> State
 
 		if (selectedTransitionActivations->size() > 1)
 		{
-			auto choiceStrategy = std::dynamic_pointer_cast<fUML::Semantics::Loci::ChoiceStrategy>(this->m_registrationContext->getLocus()->getFactory()->getStrategy("choice"));
-			auto chosenTransitionActivation = selectedTransitionActivations->at(choiceStrategy->choose(selectedTransitionActivations->size()-1));
+			const auto& choiceStrategy = std::dynamic_pointer_cast<fUML::Semantics::Loci::ChoiceStrategy>(this->m_registrationContext->getLocus()->getFactory()->getStrategy("choice"));
+			const auto& chosenTransitionActivation = selectedTransitionActivations->at(choiceStrategy->choose(selectedTransitionActivations->size()-1));
 			selectedTransitionActivations->clear();
 			selectedTransitionActivations->add(chosenTransitionActivation);
 		}
@@ -304,7 +304,7 @@ void StateMachineEventAccepterImpl::accept(const std::shared_ptr<fUML::Semantics
 		auto fireableTransitionActivations = this->select(eventOccurrence);
 		if (!fireableTransitionActivations->empty())
 		{
-			for (auto fireableTransitionActivation : *fireableTransitionActivations) {
+			for (const auto& fireableTransitionActivation : *fireableTransitionActivations) {
 				fireableTransitionActivation->fire(eventOccurrence);
 			}
 		}
@@ -312,7 +312,7 @@ void StateMachineEventAccepterImpl::accept(const std::shared_ptr<fUML::Semantics
 
 
 	// If dispatched Event was an CallEventOccurrence, then check if caller needs to be released.
-	if (auto callEventOccurrence = std::dynamic_pointer_cast<PSSM::Semantics::CommonBehavior::CallEventOccurrence>(eventOccurrence))
+	if (const auto& callEventOccurrence = std::dynamic_pointer_cast<PSSM::Semantics::CommonBehavior::CallEventOccurrence>(eventOccurrence))
 	{
 		callEventOccurrence->getExecution()->releaseCaller();
 	}
@@ -363,10 +363,10 @@ bool StateMachineEventAccepterImpl::isDeferred(const std::shared_ptr<fUML::Seman
 	bool deferred = this->_isDeferred(eventOccurrence, this->m_registrationContext->getConfiguration()->getRootConfiguration());
 	if (deferred) 
 	{
-		auto context = this->m_registrationContext;
+		const auto& context = this->m_registrationContext;
 		if (context != nullptr && context->getObjectActivation() != nullptr)
 		{
-			for (auto waitingEventAccepter : *(context->getObjectActivation()->getWaitingEventAccepters()))
+			for (const auto& waitingEventAccepter : *(context->getObjectActivation()->getWaitingEventAccepters()))
 			{
 				if (waitingEventAccepter != std::dynamic_pointer_cast<fUML::Semantics::CommonBehavior::EventAccepter>(this->getThisStateMachineEventAccepterPtr()) && waitingEventAccepter->match(eventOccurrence)) 
 				{

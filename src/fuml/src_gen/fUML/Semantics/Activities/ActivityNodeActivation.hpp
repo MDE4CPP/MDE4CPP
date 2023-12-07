@@ -44,10 +44,13 @@ namespace fUML::Semantics::Loci
 {
 	class Locus;
 }
+namespace fUML::MDE4CPP_Extensions 
+{
+	class FUML_Object;
+}
 namespace uml 
 {
 	class ActivityNode;
-	class Element;
 }
 
 // namespace macro header include
@@ -91,7 +94,7 @@ namespace fUML::Semantics::Activities
 			virtual void createNodeActivations() = 0;
 			virtual void fire(const std::shared_ptr<Bag<fUML::Semantics::Activities::Token>>& incomingTokens) = 0;
 			virtual std::shared_ptr<fUML::Semantics::Activities::ActivityExecution> getActivityExecution() = 0;
-			virtual std::shared_ptr<uml::Element> getExecutionContext() = 0;
+			virtual std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_Object> getExecutionContext() = 0;
 			virtual std::shared_ptr<fUML::Semantics::Loci::Locus> getExecutionLocus() = 0;
 			virtual std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivation> getNodeActivation(const std::shared_ptr<uml::ActivityNode>& node) = 0;
 			virtual bool getRunning() = 0;

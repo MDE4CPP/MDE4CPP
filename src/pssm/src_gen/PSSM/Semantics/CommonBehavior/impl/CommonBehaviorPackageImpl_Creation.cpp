@@ -7,15 +7,15 @@
 
 #include "abstractDataTypes/SubsetUnion.hpp"
 //metametamodel classes
-#include "ecore/EStringToStringMapEntry.hpp"
 #include "ecore/EAnnotation.hpp"
-#include "ecore/EClass.hpp"
-#include "ecore/EOperation.hpp"
-#include "ecore/EReference.hpp"
-#include "ecore/EAttribute.hpp"
+#include "ecore/EStringToStringMapEntry.hpp"
 #include "ecore/EGenericType.hpp"
-#include "ecore/EDataType.hpp"
+#include "ecore/EOperation.hpp"
+#include "ecore/EAttribute.hpp"
 #include "ecore/EParameter.hpp"
+#include "ecore/EClass.hpp"
+#include "ecore/EDataType.hpp"
+#include "ecore/EReference.hpp"
 
 //depending model packages
 #include "PSSM/PSSMPackage.hpp"
@@ -59,7 +59,6 @@ void CommonBehaviorPackageImpl::createCallEventExecutionContent(std::shared_ptr<
 	m_callEventExecution_Operation__suspend = factory->createEOperation_as_eOperations_in_EClass(m_callEventExecution_Class, CALLEVENTEXECUTION_OPERATION__SUSPEND);
 	m_callEventExecution_Operation_execute = factory->createEOperation_as_eOperations_in_EClass(m_callEventExecution_Class, CALLEVENTEXECUTION_OPERATION_EXECUTE);
 	m_callEventExecution_Operation_getInputParameterValues = factory->createEOperation_as_eOperations_in_EClass(m_callEventExecution_Class, CALLEVENTEXECUTION_OPERATION_GETINPUTPARAMETERVALUES);
-	m_callEventExecution_Operation_new_ = factory->createEOperation_as_eOperations_in_EClass(m_callEventExecution_Class, CALLEVENTEXECUTION_OPERATION_NEW_);
 	m_callEventExecution_Operation_releaseCaller = factory->createEOperation_as_eOperations_in_EClass(m_callEventExecution_Class, CALLEVENTEXECUTION_OPERATION_RELEASECALLER);
 	
 }
@@ -80,7 +79,9 @@ void CommonBehaviorPackageImpl::createEventTriggeredExecutionContent(std::shared
 	m_eventTriggeredExecution_Attribute_triggeringEventOccurrence = factory->createEReference_as_eReferences_in_EClass(m_eventTriggeredExecution_Class, EVENTTRIGGEREDEXECUTION_ATTRIBUTE_TRIGGERINGEVENTOCCURRENCE);
 	m_eventTriggeredExecution_Attribute_wrappedExecution = factory->createEReference_as_eReferences_in_EClass(m_eventTriggeredExecution_Class, EVENTTRIGGEREDEXECUTION_ATTRIBUTE_WRAPPEDEXECUTION);
 	
-	m_eventTriggeredExecution_Operation_copy = factory->createEOperation_as_eOperations_in_EClass(m_eventTriggeredExecution_Class, EVENTTRIGGEREDEXECUTION_OPERATION_COPY);
+	m_eventTriggeredExecution_Operation_execute = factory->createEOperation_as_eOperations_in_EClass(m_eventTriggeredExecution_Class, EVENTTRIGGEREDEXECUTION_OPERATION_EXECUTE);
+	m_eventTriggeredExecution_Operation_finalize = factory->createEOperation_as_eOperations_in_EClass(m_eventTriggeredExecution_Class, EVENTTRIGGEREDEXECUTION_OPERATION_FINALIZE);
+	m_eventTriggeredExecution_Operation_initialize_Behavior = factory->createEOperation_as_eOperations_in_EClass(m_eventTriggeredExecution_Class, EVENTTRIGGEREDEXECUTION_OPERATION_INITIALIZE_BEHAVIOR);
 	
 }
 

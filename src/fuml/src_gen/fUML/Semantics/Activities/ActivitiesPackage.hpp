@@ -14,15 +14,15 @@
 
 namespace ecore 
 {
-	class EStringToStringMapEntry;
 	class EAnnotation;
-	class EClass;
-	class EOperation;
-	class EReference;
-	class EAttribute;
+	class EStringToStringMapEntry;
 	class EGenericType;
-	class EDataType;
+	class EOperation;
+	class EAttribute;
 	class EParameter;
+	class EClass;
+	class EDataType;
+	class EReference;
 }
 
 namespace fUML::Semantics::Activities 
@@ -182,7 +182,7 @@ namespace fUML::Semantics::Activities
 			static const unsigned long ACTIVITYNODEACTIVATION_OPERATION_CREATENODEACTIVATIONS = 1346898969;
 			static const unsigned long ACTIVITYNODEACTIVATION_OPERATION_FIRE_TOKEN = 3892530199;
 			static const unsigned long ACTIVITYNODEACTIVATION_OPERATION_GETACTIVITYEXECUTION = 415943298;
-			static const unsigned long ACTIVITYNODEACTIVATION_OPERATION_GETEXECUTIONCONTEXT = 3574975649;
+			static const unsigned long ACTIVITYNODEACTIVATION_OPERATION_GETEXECUTIONCONTEXT = 1798696675;
 			static const unsigned long ACTIVITYNODEACTIVATION_OPERATION_GETEXECUTIONLOCUS = 4097970094;
 			static const unsigned long ACTIVITYNODEACTIVATION_OPERATION_GETNODEACTIVATION_ACTIVITYNODE = 4201354494;
 			static const unsigned long ACTIVITYNODEACTIVATION_OPERATION_GETRUNNING = 254630437;

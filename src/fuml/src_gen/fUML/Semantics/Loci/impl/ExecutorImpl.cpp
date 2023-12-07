@@ -50,14 +50,16 @@
 #include "uml/Behavior.hpp"
 #include "uml/Class.hpp"
 #include "uml/Element.hpp"
+#include "fUML/MDE4CPP_Extensions/FUML_Object.hpp"
 #include "fUML/Semantics/Loci/Locus.hpp"
 #include "fUML/Semantics/CommonBehavior/ParameterValue.hpp"
 #include "uml/ValueSpecification.hpp"
 //Factories and Package includes
-#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/SemanticsPackage.hpp"
+#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/CommonBehavior/CommonBehaviorPackage.hpp"
 #include "fUML/Semantics/Loci/LociPackage.hpp"
+#include "fUML/MDE4CPP_Extensions/MDE4CPP_ExtensionsPackage.hpp"
 #include "uml/umlPackage.hpp"
 
 using namespace fUML::Semantics::Loci;
@@ -183,7 +185,7 @@ std::shared_ptr<Any> ExecutorImpl::evaluate(const std::shared_ptr<uml::ValueSpec
 	//end of body
 }
 
-std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> ExecutorImpl::execute(const std::shared_ptr<uml::Behavior>& behavior, const std::shared_ptr<uml::Element>& context, const std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>>& inputs)
+std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> ExecutorImpl::execute(const std::shared_ptr<uml::Behavior>& behavior, const std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_Object>& context, const std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>>& inputs)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -452,7 +454,7 @@ std::shared_ptr<Any> ExecutorImpl::eInvoke(int operationID, const std::shared_pt
 			result = eAny(this->evaluate(incoming_param_specification), 0, false);
 			break;
 		}
-		// fUML::Semantics::Loci::Executor::execute(uml::Behavior, uml::Element, fUML::Semantics::CommonBehavior::ParameterValue[*]) : fUML::Semantics::CommonBehavior::ParameterValue[*]: 3205044137
+		// fUML::Semantics::Loci::Executor::execute(uml::Behavior, fUML::MDE4CPP_Extensions::FUML_Object, fUML::Semantics::CommonBehavior::ParameterValue[*]) : fUML::Semantics::CommonBehavior::ParameterValue[*]: 1550418063
 		case LociPackage::EXECUTOR_OPERATION_EXECUTE_BEHAVIOR_PARAMETERVALUE:
 		{
 			//Retrieve input parameter 'behavior'
@@ -483,7 +485,7 @@ std::shared_ptr<Any> ExecutorImpl::eInvoke(int operationID, const std::shared_pt
 		
 			//Retrieve input parameter 'context'
 			//parameter 1
-			std::shared_ptr<uml::Element> incoming_param_context;
+			std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_Object> incoming_param_context;
 			Bag<Any>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
 			{
 				std::shared_ptr<ecore::EcoreAny> ecoreAny = std::dynamic_pointer_cast<ecore::EcoreAny>((*incoming_param_context_arguments_citer));
@@ -492,7 +494,7 @@ std::shared_ptr<Any> ExecutorImpl::eInvoke(int operationID, const std::shared_pt
 					try
 					{
 						std::shared_ptr<ecore::EObject> _temp = ecoreAny->getAsEObject();
-						incoming_param_context = std::dynamic_pointer_cast<uml::Element>(_temp);
+						incoming_param_context = std::dynamic_pointer_cast<fUML::MDE4CPP_Extensions::FUML_Object>(_temp);
 					}
 					catch(...)
 					{

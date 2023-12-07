@@ -46,14 +46,19 @@
 #include "PSSM/Semantics/StateMachines/EntryPointPseudostateActivation.hpp"
 #include "uml/Pseudostate.hpp"
 #include "uml/Transition.hpp"
+#include "uml/OpaqueBehavior.hpp"
+#include "PSSM/Semantics/CommonBehavior/CommonBehaviorFactory.hpp"
+#include "PSSM/Semantics/CommonBehavior/EventTriggeredExecution.hpp"
+#include "PSSM/Semantics/CommonBehavior/CallEventOccurrence.hpp"
+#include "PSSM/Semantics/CommonBehavior/CallEventExecution.hpp"
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "fUML/Semantics/Loci/LociFactory.hpp"
 #include "PSSM/Semantics/StateMachines/StateMachinesFactory.hpp"
 #include "uml/umlFactory.hpp"
+#include "fUML/Semantics/Loci/LociFactory.hpp"
 #include "uml/Behavior.hpp"
 #include "PSSM/Semantics/StateMachines/ConnectionPointActivation.hpp"
 #include "PSSM/Semantics/StateMachines/DoActivityContextObject.hpp"
@@ -65,8 +70,8 @@
 #include "uml/Vertex.hpp"
 #include "PSSM/Semantics/StateMachines/VertexActivation.hpp"
 //Factories and Package includes
-#include "PSSM/PSSMPackage.hpp"
 #include "PSSM/Semantics/SemanticsPackage.hpp"
+#include "PSSM/PSSMPackage.hpp"
 #include "fUML/Semantics/CommonBehavior/CommonBehaviorPackage.hpp"
 #include "fUML/Semantics/Loci/LociPackage.hpp"
 #include "PSSM/Semantics/StateMachines/StateMachinesPackage.hpp"
@@ -222,7 +227,7 @@ bool StateActivationImpl::canDefer(const std::shared_ptr<fUML::Semantics::Common
 	if(deferred)
 	{
 		deferred = false;
-		for (auto outgoingTransitionActivation : *m_outgoingTransitionActivations)
+		for (const auto& outgoingTransitionActivation : *m_outgoingTransitionActivations)
 		{
 			if (outgoingTransitionActivation->canFireOn(eventOccurrence))
 			{
@@ -270,7 +275,7 @@ void StateActivationImpl::enter(const std::shared_ptr<PSSM::Semantics::StateMach
 	// All parent Vertices must be entered beforehand until the least common ancestor of this StateActivation and the source StateActivation of the entering Transition is reached.
 	// NOTE: Due to the unability of MDE4CPP to invoke behaviors asynchronously, the sequence order has been altered compared to the specification.
 	if (this->getStatus() == StateMetadata::IDLE) {
-		this->getThisVertexActivationPtr()->enter(enteringTransition, eventOccurrence, leastCommonAncestor);
+		// STACKOVERFLOW this->getThisVertexActivationPtr()->enter(enteringTransition, eventOccurrence, leastCommonAncestor);
 		if (std::dynamic_pointer_cast<PSSM::Semantics::StateMachines::RegionActivation>(this->m_parent) != leastCommonAncestor) {
 			if (auto parentVertexActivation = std::dynamic_pointer_cast<PSSM::Semantics::StateMachines::VertexActivation>(this->m_parent)) {
 				parentVertexActivation->enter(enteringTransition, eventOccurrence, leastCommonAncestor);
@@ -348,14 +353,14 @@ void StateActivationImpl::enterRegions(const std::shared_ptr<PSSM::Semantics::St
 
 	if (std::dynamic_pointer_cast<PSSM::Semantics::StateMachines::EntryPointPseudostateActivation>(targetActivation) != nullptr) 
 	{
-		auto entryPoint = std::dynamic_pointer_cast<uml::Pseudostate>(targetActivation->getNode());
-		for (auto outgoingTransition : *(entryPoint->getOutgoings())) 
+		const auto& entryPoint = std::dynamic_pointer_cast<uml::Pseudostate>(targetActivation->getNode());
+		for (const auto& outgoingTransition : *(entryPoint->getOutgoings())) 
 		{
 			targetedVertices->add(outgoingTransition->getTarget());
 		}
 	} // else history
 
-	for (auto regionActivation : *m_regionActivations)
+	for (const auto& regionActivation : *m_regionActivations)
 	{
 		int j=0;
 		bool found = false;
@@ -381,7 +386,7 @@ void StateActivationImpl::exit(const std::shared_ptr<PSSM::Semantics::StateMachi
 	// As the State is now idle, it unregisters itself in the StateMachineConfiguration of the owning StateMachine.
 	if (std::dynamic_pointer_cast<uml::State>(this->getNode())->getIsComposite())
 	{
-		for (auto ownedRegionActivation : *(this->m_regionActivations))
+		for (const auto& ownedRegionActivation : *(this->m_regionActivations))
 		{
 			ownedRegionActivation->exit(nullptr, eventOccurrence);
 		}
@@ -505,7 +510,7 @@ bool StateActivationImpl::hasCompleted()
 	bool stateHasCompleted = this->m_isEntryCompleted && this->m_isDoActivityCompleted;
 	if (std::dynamic_pointer_cast<uml::State>(this->getNode())->getIsComposite())
 	{
-		for (auto ownedRegionActivation : *(this->getRegionActivations()))
+		for (const auto& ownedRegionActivation : *(this->getRegionActivations()))
 		{
 			stateHasCompleted = stateHasCompleted && ownedRegionActivation->getIsCompleted();
 		}
@@ -548,14 +553,38 @@ void StateActivationImpl::tryExecuteEntry(const std::shared_ptr<fUML::Semantics:
 	// This rule applies recursively.
 	if (!this->m_isEntryCompleted)
 	{
-		if (auto entryBehavior = this->getEntry()) // != nullptr
+		if (const auto& entryBehavior = this->getEntry()) // != nullptr
 		{
-			/*if (auto entryBehaviorExecution = this->getExecutionFor(entryBehavior, eventOccurrence)) // != nullptr
+			if (std::dynamic_pointer_cast<uml::OpaqueBehavior>(entryBehavior))
 			{
-				entryBehaviorExecution->execute();
-				this->setIsEntryCompleted(true);
-			}*/
-			this->getExecutionLocus()->getExecutor()->execute(entryBehavior, this->getExecutionContext(), std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>>(new Bag<fUML::Semantics::CommonBehavior::ParameterValue>()));
+				// Extract any Parameters from the given EventOccurrence (replaces EventTriggeredExecution::initialize()),
+				// invoke the OpaqueBehavior directly via ModelExecutor::execute()
+				// and pass any output ParameterValues to the eventOccurrence in case its a CallEventOccurrence.
+				auto eventTriggeredExecution = PSSM::Semantics::CommonBehavior::CommonBehaviorFactory::eInstance()->createEventTriggeredExecution();
+				eventTriggeredExecution->setTriggeringEventOccurrence(eventOccurrence);
+				eventTriggeredExecution->setContext(this->getExecutionContext());
+				auto inputParameterValues = eventTriggeredExecution->initialize(entryBehavior);
+				
+				auto outputParameterValues = this->getExecutionLocus()->getExecutor()->execute(entryBehavior, this->getExecutionContext(), inputParameterValues);
+				
+				if (const auto& callEventOccurrence = std::dynamic_pointer_cast<PSSM::Semantics::CommonBehavior::CallEventOccurrence>(eventOccurrence))
+				{
+					for (const auto& outputParameterValue : *outputParameterValues)
+					{
+						callEventOccurrence->getExecution()->setParameterValue(outputParameterValue);
+					}
+				}
+			}
+			else
+			{
+				/// create an Execution for the Behavior and wrap it in an EventTriggeredExecution which, when executed, 
+				// extracts any parameters from the given EventOccurrence, executes its wrapped Behavior Execution
+				// and passes any output ParameterValues to its triggering EventOccurrence in case it's a CallEventOccurrence.
+				if (const auto& entryBehaviorExecution = this->getExecutionFor(entryBehavior, eventOccurrence)) // != nullptr
+				{
+					entryBehaviorExecution->execute();
+				}
+			}
 		}
 		this->setIsEntryCompleted(true);
 		if (this->hasCompleted())
@@ -573,15 +602,44 @@ void StateActivationImpl::tryExecuteExit(const std::shared_ptr<fUML::Semantics::
 	// Execute the State's exit Behavior if specified.
 	// If not, but the State redefines another State which itself has an exit Behavior specified, then this Behavior is executed.
 	// This rule applies recursively.
-	if (auto exitBehavior = this->getExit()) // != nullptr
+	if (!this->m_isExitCompleted)
 	{
-		/*if (auto exitBehaviorExecution = this->getExecutionFor(exitBehavior, eventOccurrence)) // != nullptr
+		if (const auto& exitBehavior = this->getExit()) // != nullptr
 		{
-			exitBehaviorExecution->execute();
-		}*/
-		this->getExecutionLocus()->getExecutor()->execute(exitBehavior, this->getExecutionContext(), std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>>(new Bag<fUML::Semantics::CommonBehavior::ParameterValue>()));
+			if (std::dynamic_pointer_cast<uml::OpaqueBehavior>(exitBehavior))
+			{
+				// Extract any Parameters from the given EventOccurrence (replaces EventTriggeredExecution::initialize()),
+				// invoke the OpaqueBehavior directly via ModelExecutor::execute()
+				// and pass any output ParameterValues to the eventOccurrence in case its a CallEventOccurrence.
+				auto eventTriggeredExecution = PSSM::Semantics::CommonBehavior::CommonBehaviorFactory::eInstance()->createEventTriggeredExecution();
+				eventTriggeredExecution->setTriggeringEventOccurrence(eventOccurrence);
+				eventTriggeredExecution->setContext(this->getExecutionContext());
+				auto inputParameterValues = eventTriggeredExecution->initialize(exitBehavior);
+				
+				auto outputParameterValues = this->getExecutionLocus()->getExecutor()->execute(exitBehavior, this->getExecutionContext(), inputParameterValues);
+				
+				if (const auto& callEventOccurrence = std::dynamic_pointer_cast<PSSM::Semantics::CommonBehavior::CallEventOccurrence>(eventOccurrence))
+				{
+					for (const auto& outputParameterValue : *outputParameterValues)
+					{
+						callEventOccurrence->getExecution()->setParameterValue(outputParameterValue);
+					}
+				}
+			}
+			else
+			{
+				// create an Execution for the Behavior and wrap it in an EventTriggeredExecution which, when executed, 
+				// extracts any parameters from the given EventOccurrence, executes its wrapped Behavior Execution
+				// and passes any output ParameterValues to its triggering EventOccurrence in case it's a CallEventOccurrence.
+				if (const auto& exitBehaviorExecution = this->getExecutionFor(exitBehavior, eventOccurrence)) // != nullptr
+				{
+					exitBehaviorExecution->execute();
+				}
+			}
+		}
+		this->setIsExitCompleted(true);
 	}
-	//super.exit(null, eventOccurrence, null);
+	// SEGMENTATION FAULT, CALL STACK this->getThisVertexActivationPtr()->exit(nullptr, eventOccurrence, nullptr);
 	//end of body
 }
 

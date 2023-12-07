@@ -4,14 +4,14 @@
 
 #include "abstractDataTypes/SubsetUnion.hpp"
 //metametamodel classes
-#include "ecore/EStringToStringMapEntry.hpp"
 #include "ecore/EAnnotation.hpp"
-#include "ecore/EClass.hpp"
-#include "ecore/EOperation.hpp"
-#include "ecore/EReference.hpp"
+#include "ecore/EStringToStringMapEntry.hpp"
 #include "ecore/EGenericType.hpp"
-#include "ecore/EDataType.hpp"
+#include "ecore/EOperation.hpp"
 #include "ecore/EParameter.hpp"
+#include "ecore/EClass.hpp"
+#include "ecore/EDataType.hpp"
+#include "ecore/EReference.hpp"
 
 // metametamodel factory
 #include "ecore/ecoreFactory.hpp"
@@ -228,17 +228,17 @@ void LociPackageImpl::initializeExecutionFactoryContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_executionFactory_Operation_createExecution_Behavior_Element->setName("createExecution");
-	m_executionFactory_Operation_createExecution_Behavior_Element->setEType(fUML::Semantics::CommonBehavior::CommonBehaviorPackage::eInstance()->getExecution_Class());
-	m_executionFactory_Operation_createExecution_Behavior_Element->setLowerBound(1);
-	m_executionFactory_Operation_createExecution_Behavior_Element->setUpperBound(1);
-	m_executionFactory_Operation_createExecution_Behavior_Element->setUnique(true);
-	m_executionFactory_Operation_createExecution_Behavior_Element->setOrdered(false);
+	m_executionFactory_Operation_createExecution_Behavior_FUML_Object->setName("createExecution");
+	m_executionFactory_Operation_createExecution_Behavior_FUML_Object->setEType(fUML::Semantics::CommonBehavior::CommonBehaviorPackage::eInstance()->getExecution_Class());
+	m_executionFactory_Operation_createExecution_Behavior_FUML_Object->setLowerBound(1);
+	m_executionFactory_Operation_createExecution_Behavior_FUML_Object->setUpperBound(1);
+	m_executionFactory_Operation_createExecution_Behavior_FUML_Object->setUnique(true);
+	m_executionFactory_Operation_createExecution_Behavior_FUML_Object->setOrdered(false);
 	
-	m_executionFactory_Operation_createExecution_Behavior_Element->_setID(EXECUTIONFACTORY_OPERATION_CREATEEXECUTION_BEHAVIOR_ELEMENT);
+	m_executionFactory_Operation_createExecution_Behavior_FUML_Object->_setID(EXECUTIONFACTORY_OPERATION_CREATEEXECUTION_BEHAVIOR_FUML_OBJECT);
 	
 	{
-		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_executionFactory_Operation_createExecution_Behavior_Element);
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_executionFactory_Operation_createExecution_Behavior_FUML_Object);
 		parameter->setName("behavior");
 		parameter->setEType(uml::umlPackage::eInstance()->getBehavior_Class());
 		parameter->setLowerBound(0);
@@ -248,9 +248,9 @@ void LociPackageImpl::initializeExecutionFactoryContent()
 	}
 	
 	{
-		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_executionFactory_Operation_createExecution_Behavior_Element);
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_executionFactory_Operation_createExecution_Behavior_FUML_Object);
 		parameter->setName("context");
-		parameter->setEType(uml::umlPackage::eInstance()->getElement_Class());
+		parameter->setEType(fUML::MDE4CPP_Extensions::MDE4CPP_ExtensionsPackage::eInstance()->getFUML_Object_Class());
 		parameter->setLowerBound(0);
 		parameter->setUpperBound(1);
 		parameter->setUnique(true);
@@ -413,7 +413,7 @@ void LociPackageImpl::initializeExecutorContent()
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_executor_Operation_execute_Behavior_ParameterValue);
 		parameter->setName("context");
-		parameter->setEType(uml::umlPackage::eInstance()->getElement_Class());
+		parameter->setEType(fUML::MDE4CPP_Extensions::MDE4CPP_ExtensionsPackage::eInstance()->getFUML_Object_Class());
 		parameter->setLowerBound(0);
 		parameter->setUpperBound(1);
 		parameter->setUnique(true);

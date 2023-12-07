@@ -56,6 +56,10 @@ namespace uml
 
 #include "ecore/EModelElement.hpp"
 
+//Includes from codegen annotation
+#include <thread>
+#include <mutex>
+#include <condition_variable>
 
 //*********************************
 namespace fUML::Semantics::CommonBehavior 
@@ -95,7 +99,13 @@ namespace fUML::Semantics::CommonBehavior
 			// Reference Getters & Setters
 			//*********************************
 			virtual const std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ClassifierBehaviorExecution>>& getClassifierBehaviorExecutions() const = 0;
+			virtual const std::shared_ptr<std::condition_variable>& getConditionVariable() const = 0;
+			virtual void setConditionVariable(const std::shared_ptr<std::condition_variable>&) = 0;
 			virtual const std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::EventOccurrence>>& getEventPool() const = 0;
+			virtual const std::shared_ptr<std::thread>& getMemberThread() const = 0;
+			virtual void setMemberThread(const std::shared_ptr<std::thread>&) = 0;
+			virtual const std::shared_ptr<std::mutex>& getMutex() const = 0;
+			virtual void setMutex(const std::shared_ptr<std::mutex>&) = 0;
 			virtual const std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_Object>& getObject() const = 0;
 			virtual void setObject(const std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_Object>&) = 0;
 			virtual const std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::EventAccepter>>& getWaitingEventAccepters() const = 0;
@@ -125,7 +135,10 @@ namespace fUML::Semantics::CommonBehavior
 			// Reference Members
 			//*********************************
 			mutable std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ClassifierBehaviorExecution>> m_classifierBehaviorExecutions;
+			std::shared_ptr<std::condition_variable> m_conditionVariable;
 			mutable std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::EventOccurrence>> m_eventPool;
+			std::shared_ptr<std::thread> m_memberThread;
+			std::shared_ptr<std::mutex> m_mutex;
 			std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_Object> m_object;
 			mutable std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::EventAccepter>> m_waitingEventAccepters;
 	};

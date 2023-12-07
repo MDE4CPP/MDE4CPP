@@ -6,6 +6,7 @@
 #include "ecore/EClass.hpp"
 #include "fUML/Semantics/CommonBehavior/impl/ClassifierBehaviorExecutionImpl.hpp"
 #include "fUML/Semantics/CommonBehavior/impl/EventAccepterImpl.hpp"
+#include "fUML/Semantics/CommonBehavior/impl/EventDispatchLoopImpl.hpp"
 #include "fUML/Semantics/CommonBehavior/impl/EventOccurrenceImpl.hpp"
 #include "fUML/Semantics/CommonBehavior/impl/ExecutionImpl.hpp"
 #include "fUML/Semantics/CommonBehavior/impl/FIFOGetNextEventStrategyImpl.hpp"
@@ -40,6 +41,7 @@ std::shared_ptr<CommonBehaviorFactory> CommonBehaviorFactory::eInstance()
 CommonBehaviorFactoryImpl::CommonBehaviorFactoryImpl()
 {
 	m_idMap.insert(std::make_pair("fUML::Semantics::CommonBehavior::ClassifierBehaviorExecution", CommonBehaviorPackage::CLASSIFIERBEHAVIOREXECUTION_CLASS));
+	m_idMap.insert(std::make_pair("fUML::Semantics::CommonBehavior::EventDispatchLoop", CommonBehaviorPackage::EVENTDISPATCHLOOP_CLASS));
 	m_idMap.insert(std::make_pair("fUML::Semantics::CommonBehavior::EventOccurrence", CommonBehaviorPackage::EVENTOCCURRENCE_CLASS));
 	m_idMap.insert(std::make_pair("fUML::Semantics::CommonBehavior::FIFOGetNextEventStrategy", CommonBehaviorPackage::FIFOGETNEXTEVENTSTRATEGY_CLASS));
 	m_idMap.insert(std::make_pair("fUML::Semantics::CommonBehavior::ObjectActivation", CommonBehaviorPackage::OBJECTACTIVATION_CLASS));
@@ -76,6 +78,12 @@ std::shared_ptr<ecore::EObject> CommonBehaviorFactoryImpl::create(const int meta
 				assert(castedContainer);
 				return std::shared_ptr<fUML::Semantics::CommonBehavior::ClassifierBehaviorExecution>(this->createClassifierBehaviorExecution_as_classifierBehaviorExecutions_in_ObjectActivation(castedContainer,metaElementID));
 			}
+			break;
+		}
+		case CommonBehaviorPackage::EVENTDISPATCHLOOP_CLASS:
+		{
+				return this->createEventDispatchLoop(metaElementID);
+			
 			break;
 		}
 		case CommonBehaviorPackage::EVENTOCCURRENCE_CLASS:
@@ -187,6 +195,13 @@ std::shared_ptr<fUML::Semantics::CommonBehavior::ClassifierBehaviorExecution> Co
 	element->setThisClassifierBehaviorExecutionPtr(element);
 	return element;
 	
+}
+std::shared_ptr<fUML::Semantics::CommonBehavior::EventDispatchLoop> CommonBehaviorFactoryImpl::createEventDispatchLoop(const int metaElementID/*=-1*/) const
+{
+	std::shared_ptr<fUML::Semantics::CommonBehavior::EventDispatchLoopImpl> element(new fUML::Semantics::CommonBehavior::EventDispatchLoopImpl());
+	element->setMetaElementID(metaElementID);
+	element->setThisEventDispatchLoopPtr(element);
+	return element;
 }
 std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccurrence> CommonBehaviorFactoryImpl::createEventOccurrence(const int metaElementID/*=-1*/) const
 {

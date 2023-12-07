@@ -58,8 +58,12 @@ namespace PSSM::Semantics::StateMachines
 			//*********************************
 			// Reference Getters & Setters
 			//*********************************
+			virtual const std::shared_ptr<std::condition_variable>& getConditionVariable() const ;
+			virtual void setConditionVariable(const std::shared_ptr<std::condition_variable>&) ;
 			virtual const std::shared_ptr<PSSM::Semantics::StateMachines::StateMachineConfiguration>& getConfiguration() const ;
 			virtual void setConfiguration(const std::shared_ptr<PSSM::Semantics::StateMachines::StateMachineConfiguration>&) ;
+			virtual const std::shared_ptr<std::mutex>& getMutex() const ;
+			virtual void setMutex(const std::shared_ptr<std::mutex>&) ;
 			virtual const std::shared_ptr<Bag<PSSM::Semantics::StateMachines::RegionActivation>>& getRegionActivations() const ;
 			
 			//*********************************
