@@ -23,8 +23,8 @@ namespace FoundationalModelLibrary
 		private:    
 			FoundationalModelLibraryExecutionFactoryImpl& operator=(FoundationalModelLibraryExecutionFactoryImpl const&) = delete;
 			//Methods to create ActivityExecution Prototypes
-			void createFoundationalModelLibrary_BasicInputOutput_WriteLineExecutionPrototype();
 			void createFoundationalModelLibrary_BasicInputOutput_ReadLineExecutionPrototype();
+			void createFoundationalModelLibrary_BasicInputOutput_WriteLineExecutionPrototype();
 
 		public:
 			FoundationalModelLibraryExecutionFactoryImpl();
@@ -32,13 +32,13 @@ namespace FoundationalModelLibrary
 			
 			/*!
 			 */
-			virtual std::shared_ptr<fUML::Semantics::CommonBehavior::Execution> createExecution(const std::shared_ptr<uml::Behavior>&, const std::shared_ptr<uml::Element>&);
+			virtual std::shared_ptr<fUML::Semantics::CommonBehavior::Execution> createExecution(const std::shared_ptr<uml::Behavior>&, const std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_Object>&);
 			virtual void setThisExecutionFactoryPtr(std::weak_ptr</*PSCS::Semantics::Loci::CS_ExecutionFactory*/fUML::Semantics::Loci::ExecutionFactory>);
 	
 		private:
 			//ActivityExecution Prototypes
-			std::shared_ptr<fUML::Semantics::Activities::ActivityExecution> m_foundationalModelLibrary_BasicInputOutput_WriteLineExecutionPrototype;
 			std::shared_ptr<fUML::Semantics::Activities::ActivityExecution> m_foundationalModelLibrary_BasicInputOutput_ReadLineExecutionPrototype;
+			std::shared_ptr<fUML::Semantics::Activities::ActivityExecution> m_foundationalModelLibrary_BasicInputOutput_WriteLineExecutionPrototype;
 	};
 }
 #endif /* end of include guard: FOUNDATIONALMODELLIBRARY_EXECUTIONFACTORYIMPL_HPP */

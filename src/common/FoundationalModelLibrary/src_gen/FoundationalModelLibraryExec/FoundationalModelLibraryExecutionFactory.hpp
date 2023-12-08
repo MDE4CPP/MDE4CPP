@@ -23,7 +23,7 @@ namespace FoundationalModelLibrary
 			//*********************************
 			// Operations
 			//*********************************
-			virtual std::shared_ptr<fUML::Semantics::CommonBehavior::Execution> createExecution(const std::shared_ptr<uml::Behavior>&, const std::shared_ptr<uml::Element>&) = 0;
+			virtual std::shared_ptr<fUML::Semantics::CommonBehavior::Execution> createExecution(const std::shared_ptr<uml::Behavior>&, const std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_Object>&) = 0;
 	};
 }
 #endif /* end of include guard: FOUNDATIONALMODELLIBRARY_EXECUTIONFACTORY_HPP */

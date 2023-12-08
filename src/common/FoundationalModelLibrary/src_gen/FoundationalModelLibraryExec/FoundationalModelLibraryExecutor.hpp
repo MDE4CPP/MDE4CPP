@@ -24,7 +24,7 @@ namespace FoundationalModelLibrary
 			// Operations
 			//*********************************
 			virtual std::shared_ptr<Any> evaluate(const std::shared_ptr<uml::ValueSpecification>&) = 0;
-			virtual std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> execute(const std::shared_ptr<uml::Behavior>&, const std::shared_ptr<uml::Element>&, const std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>>&) = 0;
+			virtual std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> execute(const std::shared_ptr<uml::Behavior>&, const std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_Object>&, const std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>>&) = 0;
 	};
 }
 #endif /* end of include guard: FOUNDATIONALMODELLIBRARY_EXECUTOR_HPP */
