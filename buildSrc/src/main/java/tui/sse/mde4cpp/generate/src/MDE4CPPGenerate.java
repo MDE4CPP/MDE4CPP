@@ -348,7 +348,9 @@ public class MDE4CPPGenerate extends DefaultTask
 		command.add(m_generator.getPath());
 		command.add(m_modelFileName);
 		command.add(m_targetFolder);
-		command.add(String.valueOf(m_apiFlag));
+		if(m_generator == GENERATOR.ECORE4CPP) {
+			command.add(String.valueOf(m_apiFlag));
+			}
 		
 		String startingMessage = "Generating model " + m_modelFileName + " using generator " + m_generator.getName() + " generating api files " + m_apiFlag;
 		

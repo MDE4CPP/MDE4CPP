@@ -49,11 +49,10 @@ public class Generate extends AbstractAcceleoGenerator {
     /**
      * Indicates if a rest api should be generated.
      *
-     * @generated
+     *@generated NOT
      */
     public static boolean apiFlag = false;
-
-
+    
     /**
      * The list of properties files from the launch parameters (Launch configuration).
      *
