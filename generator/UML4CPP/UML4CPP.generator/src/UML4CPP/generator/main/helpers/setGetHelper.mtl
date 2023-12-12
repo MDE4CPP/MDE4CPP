@@ -692,7 +692,7 @@ std::shared_ptr<Any> [aClass.name.toUpperFirst().concat('Impl')/]::invoke(std::s
 
 std::shared_ptr<Any> [aClass.name.toUpperFirst().concat('Impl')/]::invoke(unsigned long _uID, const std::shared_ptr<Bag<Any>>& inputArguments, const std::shared_ptr<Bag<Any>>& outputArguments)
 {
-	std::shared_ptr<Any> result = eAny(nullptr, -1, false);
+	std::shared_ptr<Any> result = nullptr;
 [if (not aClass.getOperationsForInvoke()->isEmpty())]
 
 	switch(_uID)
@@ -842,18 +842,14 @@ std::shared_ptr<Any> [aClass.name.toUpperFirst().concat('Impl')/]::invoke(unsign
 	}
 
 [/if]	
-[let classList : OrderedSet(Class) = aClass.superClass->reject(oclIsUndefined() and name.oclIsUndefined())->sortedBy(name)]
-	[if (classList->size() > 0)]
-		[for (sClass : Class | aClass.superClass->reject(oclIsUndefined() and name.oclIsUndefined()))]
+[for (sClass : Class | aClass.superClass->reject(oclIsUndefined() and name.oclIsUndefined())->sortedBy(name))]
 	//Call invoke() for base class [sClass.name/]
 	result = [sClass.generateNamespaceName(true)/]Impl::invoke(_uID, inputArguments, outputArguments);
 	if (result != nullptr)
 	{
 		return result;
 	}
-		[/for]
-	[/if]
-[/let]
+[/for]
 	return result;
 }
 [/template]
@@ -1013,7 +1009,7 @@ std::shared_ptr<Any> [aClass.name.toUpperFirst().concat('Impl')/]::invoke(const 
 [/if]	
 	[let classList : OrderedSet(Class) = aClass.superClass->reject(oclIsUndefined() and name.oclIsUndefined())->sortedBy(name)]
 	[if (classList->size() > 0)]
-	std::shared_ptr<Any> result;
+	std::shared_ptr<Any> result = nullptr;
 	[for (sClass : Class | aClass.superClass->reject(oclIsUndefined() and name.oclIsUndefined()))]
 	//Call invoke() for base class [sClass.name/]
 	result = [sClass.generateNamespaceName(true)/]Impl::invoke(_opaqueBehavior, inputArguments, outputArguments);
@@ -1024,7 +1020,7 @@ std::shared_ptr<Any> [aClass.name.toUpperFirst().concat('Impl')/]::invoke(const 
 	[/for]
 	return result;
 	[else]
-	return eAny(nullptr, -1, false);
+	return nullptr;
 	[/if]
 	[/let]
 }
