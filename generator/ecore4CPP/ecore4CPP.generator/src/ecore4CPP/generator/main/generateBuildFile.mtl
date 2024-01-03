@@ -161,7 +161,7 @@ task build[packageName.toUpperFirst()/]() {
 [/for]
 }
 [if hasCreateApiFlag()]
-tasks.getByPath('src_gen:compile[packageName.toUpperFirst()/]').mustRunAfter tasks.getTaskByName('deliverBoostLibray',true)
+tasks.getByPath('src_gen:compile[packageName.toUpperFirst()/]').mustRunAfter getRootProject().getTasksByName('deliverBoostLibray',true)
 [/if]
 tasks.getByPath('src_gen:compile[packageName.toUpperFirst()/]').mustRunAfter tasks.getByPath('model:generate[packageName.toUpperFirst()/]')
 [/file]
