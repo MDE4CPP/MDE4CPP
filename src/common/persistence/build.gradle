@@ -31,7 +31,7 @@ plugins {
 
 description '3rdparty: xerces-c'
 
-def xercesVersion = "3.2.4"
+def xercesVersion = "3.2.5"
 
 task deliverPersistenceInterface(type: Copy) {
 	group 'Persistence'
@@ -57,11 +57,12 @@ task deliverPersistenceInterface(type: Copy) {
 
 task downloadFile(type: Download) {
 	description 'download xerces'
-    src "https://www-eu.apache.org/dist//xerces/c/3/sources/xerces-c-${xercesVersion}.zip"
+    src "https://dlcdn.apache.org//xerces/c/3/sources/xerces-c-${xercesVersion}.zip"
     dest new File(file("./xerces/xerces-c-${xercesVersion}.zip").absolutePath)
     onlyIfModified true
     quiet true
 }
+
 
 task downloadAndUnzipFile(dependsOn: downloadFile, type: Copy) {
 	description 'download and unzip xerces'
