@@ -20,13 +20,14 @@ namespace uml
 namespace FoundationalModelLibrary::PrimitiveBehaviors::StringFunctions
 {
 	std::shared_ptr<Any> invoke(const std::shared_ptr<uml::OpaqueBehavior>&, const std::shared_ptr<Bag<Any>>&, const std::shared_ptr<Bag<Any>>&);
+	std::shared_ptr<Any> invoke(unsigned long, const std::shared_ptr<Bag<Any>>&, const std::shared_ptr<Bag<Any>>&);
 }
 
 namespace FoundationalModelLibrary::PrimitiveBehaviors::StringFunctions
 {
-	std::string Substring(const std::string x, const int lower, const int upper);
 	int Size(const std::string x);
 	std::string Concat(const std::string x, const std::string y);
+	std::string Substring(const std::string x, const int lower, const int upper);
 }
 
 #endif /* end of include guard: FOUNDATIONALMODELLIBRARY_PRIMITIVEBEHAVIORS_STRINGFUNCTIONS__GLOBALFUNCTIONS_HPP */

@@ -7,13 +7,14 @@
 
 #include "abstractDataTypes/SubsetUnion.hpp"
 //metametamodel classes
-#include "ecore/EAnnotation.hpp"
-#include "ecore/EStringToStringMapEntry.hpp"
 #include "ecore/EGenericType.hpp"
-#include "ecore/EOperation.hpp"
-#include "ecore/EParameter.hpp"
-#include "ecore/EClass.hpp"
 #include "ecore/EReference.hpp"
+#include "ecore/EDataType.hpp"
+#include "ecore/EParameter.hpp"
+#include "ecore/EAnnotation.hpp"
+#include "ecore/EClass.hpp"
+#include "ecore/EOperation.hpp"
+#include "ecore/EStringToStringMapEntry.hpp"
 
 //depending model packages
 #include "ecore/ecorePackage.hpp"
@@ -50,6 +51,10 @@ void MDE4CPP_ExtensionsPackageImpl::createFUML_ObjectContent(std::shared_ptr<eco
 	m_fUML_Object_Operation__register_EventAccepter = factory->createEOperation_as_eOperations_in_EClass(m_fUML_Object_Class, FUML_OBJECT_OPERATION__REGISTER_EVENTACCEPTER);
 	m_fUML_Object_Operation_destroy = factory->createEOperation_as_eOperations_in_EClass(m_fUML_Object_Class, FUML_OBJECT_OPERATION_DESTROY);
 	m_fUML_Object_Operation_getTypes = factory->createEOperation_as_eOperations_in_EClass(m_fUML_Object_Class, FUML_OBJECT_OPERATION_GETTYPES);
+	m_fUML_Object_Operation_invokeOpaqueBehavior_EString_EJavaObject = factory->createEOperation_as_eOperations_in_EClass(m_fUML_Object_Class, FUML_OBJECT_OPERATION_INVOKEOPAQUEBEHAVIOR_ESTRING_EJAVAOBJECT);
+	m_fUML_Object_Operation_invokeOpaqueBehavior_EInt_EJavaObject = factory->createEOperation_as_eOperations_in_EClass(m_fUML_Object_Class, FUML_OBJECT_OPERATION_INVOKEOPAQUEBEHAVIOR_EINT_EJAVAOBJECT);
+	m_fUML_Object_Operation_invokeOperation_EString_EJavaObject = factory->createEOperation_as_eOperations_in_EClass(m_fUML_Object_Class, FUML_OBJECT_OPERATION_INVOKEOPERATION_ESTRING_EJAVAOBJECT);
+	m_fUML_Object_Operation_invokeOperation_EInt_EJavaObject = factory->createEOperation_as_eOperations_in_EClass(m_fUML_Object_Class, FUML_OBJECT_OPERATION_INVOKEOPERATION_EINT_EJAVAOBJECT);
 	m_fUML_Object_Operation_send_EventOccurrence = factory->createEOperation_as_eOperations_in_EClass(m_fUML_Object_Class, FUML_OBJECT_OPERATION_SEND_EVENTOCCURRENCE);
 	m_fUML_Object_Operation_startBehavior_Class_ParameterValue = factory->createEOperation_as_eOperations_in_EClass(m_fUML_Object_Class, FUML_OBJECT_OPERATION_STARTBEHAVIOR_CLASS_PARAMETERVALUE);
 	m_fUML_Object_Operation_unregister_EventAccepter = factory->createEOperation_as_eOperations_in_EClass(m_fUML_Object_Class, FUML_OBJECT_OPERATION_UNREGISTER_EVENTACCEPTER);

@@ -334,18 +334,18 @@ bool TextInputChannelImpl::remove(unsigned long _uID, const std::shared_ptr<Any>
 //Operation Invocation
 std::shared_ptr<Any> TextInputChannelImpl::invoke(const std::shared_ptr<uml::Operation>& _operation, const std::shared_ptr<Bag<Any>>& inputArguments, const std::shared_ptr<Bag<Any>>& outputArguments)
 {
-	return this->invoke(_operation->_getID(), inputArguments, outputArguments);
+	return this->invokeOperation(_operation->_getID(), inputArguments, outputArguments);
 }
 
-std::shared_ptr<Any> TextInputChannelImpl::invoke(std::string _qualifiedName, const std::shared_ptr<Bag<Any>>& inputArguments, const std::shared_ptr<Bag<Any>>& outputArguments)
+std::shared_ptr<Any> TextInputChannelImpl::invokeOperation(std::string _qualifiedName, const std::shared_ptr<Bag<Any>>& inputArguments, const std::shared_ptr<Bag<Any>>& outputArguments)
 {
 	unsigned long uID = util::Util::polynomialRollingHash(_qualifiedName);
-	return this->invoke(uID, inputArguments, outputArguments);
+	return this->invokeOperation(uID, inputArguments, outputArguments);
 }
 
-std::shared_ptr<Any> TextInputChannelImpl::invoke(unsigned long _uID, const std::shared_ptr<Bag<Any>>& inputArguments, const std::shared_ptr<Bag<Any>>& outputArguments)
+std::shared_ptr<Any> TextInputChannelImpl::invokeOperation(unsigned long _uID, const std::shared_ptr<Bag<Any>>& inputArguments, const std::shared_ptr<Bag<Any>>& outputArguments)
 {
-	std::shared_ptr<Any> result = eAny(nullptr, -1, false);
+	std::shared_ptr<Any> result = nullptr;
 
 	switch(_uID)
 	{
@@ -471,7 +471,7 @@ std::shared_ptr<Any> TextInputChannelImpl::invoke(unsigned long _uID, const std:
 	}
 
 	//Call invoke() for base class InputChannel
-	result = FoundationalModelLibrary::BasicInputOutput::InputChannelImpl::invoke(_uID, inputArguments, outputArguments);
+	result = FoundationalModelLibrary::BasicInputOutput::InputChannelImpl::invokeOperation(_uID, inputArguments, outputArguments);
 	if (result != nullptr)
 	{
 		return result;
@@ -482,9 +482,20 @@ std::shared_ptr<Any> TextInputChannelImpl::invoke(unsigned long _uID, const std:
 //OpaqueBehavior Invocation
 std::shared_ptr<Any> TextInputChannelImpl::invoke(const std::shared_ptr<uml::OpaqueBehavior>& _opaqueBehavior, const std::shared_ptr<Bag<Any>>& inputArguments, const std::shared_ptr<Bag<Any>>& outputArguments)
 {
-	std::shared_ptr<Any> result;
+	return this->invokeOpaqueBehavior(_opaqueBehavior->_getID(), inputArguments, outputArguments);
+}
+
+std::shared_ptr<Any> TextInputChannelImpl::invokeOpaqueBehavior(std::string _qualifiedName, const std::shared_ptr<Bag<Any>>& inputArguments, const std::shared_ptr<Bag<Any>>& outputArguments)
+{
+	unsigned long uID = util::Util::polynomialRollingHash(_qualifiedName);
+	return this->invokeOpaqueBehavior(uID, inputArguments, outputArguments);
+}
+
+std::shared_ptr<Any> TextInputChannelImpl::invokeOpaqueBehavior(unsigned long _uID, const std::shared_ptr<Bag<Any>>& inputArguments, const std::shared_ptr<Bag<Any>>& outputArguments)
+{
+	std::shared_ptr<Any> result = nullptr;
 	//Call invoke() for base class InputChannel
-	result = FoundationalModelLibrary::BasicInputOutput::InputChannelImpl::invoke(_opaqueBehavior, inputArguments, outputArguments);
+	result = FoundationalModelLibrary::BasicInputOutput::InputChannelImpl::invokeOpaqueBehavior(_uID, inputArguments, outputArguments);
 	if (result != nullptr)
 	{
 		return result;

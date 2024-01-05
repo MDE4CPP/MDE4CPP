@@ -14,13 +14,14 @@
 
 namespace ecore 
 {
-	class EAnnotation;
-	class EStringToStringMapEntry;
 	class EGenericType;
-	class EOperation;
-	class EParameter;
-	class EClass;
 	class EReference;
+	class EDataType;
+	class EParameter;
+	class EAnnotation;
+	class EClass;
+	class EOperation;
+	class EStringToStringMapEntry;
 }
 
 namespace fUML::MDE4CPP_Extensions 
@@ -55,7 +56,7 @@ namespace fUML::MDE4CPP_Extensions
 			//Class and Feature IDs 
 			static const unsigned long FUML_OBJECT_CLASS = 1012292556;
 			static const unsigned int FUML_OBJECT_CLASS_FEATURE_COUNT = 6;
-			static const unsigned int FUML_OBJECT_CLASS_OPERATION_COUNT = 43;
+			static const unsigned int FUML_OBJECT_CLASS_OPERATION_COUNT = 47;
 			
 			static const unsigned long FUML_OBJECT_ATTRIBUTE_LOCUS = 121078438;
 			static const unsigned long FUML_OBJECT_ATTRIBUTE_OBJECTACTIVATION = 1242096493;
@@ -63,6 +64,10 @@ namespace fUML::MDE4CPP_Extensions
 			static const unsigned long FUML_OBJECT_OPERATION__REGISTER_EVENTACCEPTER = 2307607380;
 			static const unsigned long FUML_OBJECT_OPERATION_DESTROY = 4089641697;
 			static const unsigned long FUML_OBJECT_OPERATION_GETTYPES = 1742598842;
+			static const unsigned long FUML_OBJECT_OPERATION_INVOKEOPAQUEBEHAVIOR_ESTRING_EJAVAOBJECT = 738288422;
+			static const unsigned long FUML_OBJECT_OPERATION_INVOKEOPAQUEBEHAVIOR_EINT_EJAVAOBJECT = 960883863;
+			static const unsigned long FUML_OBJECT_OPERATION_INVOKEOPERATION_ESTRING_EJAVAOBJECT = 3231998528;
+			static const unsigned long FUML_OBJECT_OPERATION_INVOKEOPERATION_EINT_EJAVAOBJECT = 3453044381;
 			static const unsigned long FUML_OBJECT_OPERATION_SEND_EVENTOCCURRENCE = 1595242616;
 			static const unsigned long FUML_OBJECT_OPERATION_STARTBEHAVIOR_CLASS_PARAMETERVALUE = 692191281;
 			static const unsigned long FUML_OBJECT_OPERATION_UNREGISTER_EVENTACCEPTER = 1214480524;
@@ -77,6 +82,10 @@ namespace fUML::MDE4CPP_Extensions
 			virtual const std::shared_ptr<ecore::EOperation>& getFUML_Object_Operation__register_EventAccepter() const = 0;
 			virtual const std::shared_ptr<ecore::EOperation>& getFUML_Object_Operation_destroy() const = 0;
 			virtual const std::shared_ptr<ecore::EOperation>& getFUML_Object_Operation_getTypes() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getFUML_Object_Operation_invokeOpaqueBehavior_EString_EJavaObject() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getFUML_Object_Operation_invokeOpaqueBehavior_EInt_EJavaObject() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getFUML_Object_Operation_invokeOperation_EString_EJavaObject() const = 0;
+			virtual const std::shared_ptr<ecore::EOperation>& getFUML_Object_Operation_invokeOperation_EInt_EJavaObject() const = 0;
 			virtual const std::shared_ptr<ecore::EOperation>& getFUML_Object_Operation_send_EventOccurrence() const = 0;
 			virtual const std::shared_ptr<ecore::EOperation>& getFUML_Object_Operation_startBehavior_Class_ParameterValue() const = 0;
 			virtual const std::shared_ptr<ecore::EOperation>& getFUML_Object_Operation_unregister_EventAccepter() const = 0;

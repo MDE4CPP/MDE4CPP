@@ -300,7 +300,6 @@ bool ModelLibraryImpl::remove(unsigned long _uID, const std::shared_ptr<Any>& va
 				// If removeAt != -1, the value to remove is not taken into account anymore.
 				// Instead, the value at index = removeAt is removed
 				// NOTE: removeAt is 1-based rather than 0-based
-				
 				if(removeAt == 1)
 				{
 					m_base_Package.reset();
@@ -327,25 +326,36 @@ bool ModelLibraryImpl::remove(unsigned long _uID, const std::shared_ptr<Any>& va
 //Operation Invocation
 std::shared_ptr<Any> ModelLibraryImpl::invoke(const std::shared_ptr<uml::Operation>& _operation, const std::shared_ptr<Bag<Any>>& inputArguments, const std::shared_ptr<Bag<Any>>& outputArguments)
 {
-	return this->invoke(_operation->_getID(), inputArguments, outputArguments);
+	return this->invokeOperation(_operation->_getID(), inputArguments, outputArguments);
 }
 
-std::shared_ptr<Any> ModelLibraryImpl::invoke(std::string _qualifiedName, const std::shared_ptr<Bag<Any>>& inputArguments, const std::shared_ptr<Bag<Any>>& outputArguments)
+std::shared_ptr<Any> ModelLibraryImpl::invokeOperation(std::string _qualifiedName, const std::shared_ptr<Bag<Any>>& inputArguments, const std::shared_ptr<Bag<Any>>& outputArguments)
 {
 	unsigned long uID = util::Util::polynomialRollingHash(_qualifiedName);
-	return this->invoke(uID, inputArguments, outputArguments);
+	return this->invokeOperation(uID, inputArguments, outputArguments);
 }
 
-std::shared_ptr<Any> ModelLibraryImpl::invoke(unsigned long _uID, const std::shared_ptr<Bag<Any>>& inputArguments, const std::shared_ptr<Bag<Any>>& outputArguments)
+std::shared_ptr<Any> ModelLibraryImpl::invokeOperation(unsigned long _uID, const std::shared_ptr<Bag<Any>>& inputArguments, const std::shared_ptr<Bag<Any>>& outputArguments)
 {
-	std::shared_ptr<Any> result = eAny(nullptr, -1, false);
+	std::shared_ptr<Any> result = nullptr;
 	return result;
 }
 
 //OpaqueBehavior Invocation
 std::shared_ptr<Any> ModelLibraryImpl::invoke(const std::shared_ptr<uml::OpaqueBehavior>& _opaqueBehavior, const std::shared_ptr<Bag<Any>>& inputArguments, const std::shared_ptr<Bag<Any>>& outputArguments)
 {
-	return eAny(nullptr, -1, false);
+	return this->invokeOpaqueBehavior(_opaqueBehavior->_getID(), inputArguments, outputArguments);
+}
+
+std::shared_ptr<Any> ModelLibraryImpl::invokeOpaqueBehavior(std::string _qualifiedName, const std::shared_ptr<Bag<Any>>& inputArguments, const std::shared_ptr<Bag<Any>>& outputArguments)
+{
+	unsigned long uID = util::Util::polynomialRollingHash(_qualifiedName);
+	return this->invokeOpaqueBehavior(uID, inputArguments, outputArguments);
+}
+
+std::shared_ptr<Any> ModelLibraryImpl::invokeOpaqueBehavior(unsigned long _uID, const std::shared_ptr<Bag<Any>>& inputArguments, const std::shared_ptr<Bag<Any>>& outputArguments)
+{
+	return nullptr;
 }
 
 std::shared_ptr<ModelLibrary> ModelLibraryImpl::getThisModelLibraryPtr()

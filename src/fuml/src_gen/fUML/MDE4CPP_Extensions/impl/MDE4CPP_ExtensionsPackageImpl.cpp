@@ -4,13 +4,14 @@
 
 #include "abstractDataTypes/SubsetUnion.hpp"
 //metametamodel classes
-#include "ecore/EAnnotation.hpp"
-#include "ecore/EStringToStringMapEntry.hpp"
 #include "ecore/EGenericType.hpp"
-#include "ecore/EOperation.hpp"
-#include "ecore/EParameter.hpp"
-#include "ecore/EClass.hpp"
 #include "ecore/EReference.hpp"
+#include "ecore/EDataType.hpp"
+#include "ecore/EParameter.hpp"
+#include "ecore/EAnnotation.hpp"
+#include "ecore/EClass.hpp"
+#include "ecore/EOperation.hpp"
+#include "ecore/EStringToStringMapEntry.hpp"
 
 //metamodel factory
 #include "fUML/MDE4CPP_Extensions/MDE4CPP_ExtensionsFactory.hpp"
@@ -100,6 +101,22 @@ const std::shared_ptr<ecore::EOperation>& fUML::MDE4CPP_Extensions::MDE4CPP_Exte
 const std::shared_ptr<ecore::EOperation>& fUML::MDE4CPP_Extensions::MDE4CPP_ExtensionsPackageImpl::getFUML_Object_Operation_getTypes() const
 {
 	return m_fUML_Object_Operation_getTypes;
+}
+const std::shared_ptr<ecore::EOperation>& fUML::MDE4CPP_Extensions::MDE4CPP_ExtensionsPackageImpl::getFUML_Object_Operation_invokeOpaqueBehavior_EString_EJavaObject() const
+{
+	return m_fUML_Object_Operation_invokeOpaqueBehavior_EString_EJavaObject;
+}
+const std::shared_ptr<ecore::EOperation>& fUML::MDE4CPP_Extensions::MDE4CPP_ExtensionsPackageImpl::getFUML_Object_Operation_invokeOpaqueBehavior_EInt_EJavaObject() const
+{
+	return m_fUML_Object_Operation_invokeOpaqueBehavior_EInt_EJavaObject;
+}
+const std::shared_ptr<ecore::EOperation>& fUML::MDE4CPP_Extensions::MDE4CPP_ExtensionsPackageImpl::getFUML_Object_Operation_invokeOperation_EString_EJavaObject() const
+{
+	return m_fUML_Object_Operation_invokeOperation_EString_EJavaObject;
+}
+const std::shared_ptr<ecore::EOperation>& fUML::MDE4CPP_Extensions::MDE4CPP_ExtensionsPackageImpl::getFUML_Object_Operation_invokeOperation_EInt_EJavaObject() const
+{
+	return m_fUML_Object_Operation_invokeOperation_EInt_EJavaObject;
 }
 const std::shared_ptr<ecore::EOperation>& fUML::MDE4CPP_Extensions::MDE4CPP_ExtensionsPackageImpl::getFUML_Object_Operation_send_EventOccurrence() const
 {

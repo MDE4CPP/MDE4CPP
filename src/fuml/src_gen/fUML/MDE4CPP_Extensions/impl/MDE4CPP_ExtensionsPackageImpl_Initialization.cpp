@@ -4,13 +4,14 @@
 
 #include "abstractDataTypes/SubsetUnion.hpp"
 //metametamodel classes
-#include "ecore/EAnnotation.hpp"
-#include "ecore/EStringToStringMapEntry.hpp"
 #include "ecore/EGenericType.hpp"
-#include "ecore/EOperation.hpp"
-#include "ecore/EParameter.hpp"
-#include "ecore/EClass.hpp"
 #include "ecore/EReference.hpp"
+#include "ecore/EDataType.hpp"
+#include "ecore/EParameter.hpp"
+#include "ecore/EAnnotation.hpp"
+#include "ecore/EClass.hpp"
+#include "ecore/EOperation.hpp"
+#include "ecore/EStringToStringMapEntry.hpp"
 
 // metametamodel factory
 #include "ecore/ecoreFactory.hpp"
@@ -153,6 +154,162 @@ void MDE4CPP_ExtensionsPackageImpl::initializeFUML_ObjectContent()
 	
 	m_fUML_Object_Operation_getTypes->_setID(FUML_OBJECT_OPERATION_GETTYPES);
 	
+	
+	m_fUML_Object_Operation_invokeOpaqueBehavior_EString_EJavaObject->setName("invokeOpaqueBehavior");
+	m_fUML_Object_Operation_invokeOpaqueBehavior_EString_EJavaObject->setEType(ecore::ecorePackage::eInstance()->getEJavaObject_Class());
+	m_fUML_Object_Operation_invokeOpaqueBehavior_EString_EJavaObject->setLowerBound(0);
+	m_fUML_Object_Operation_invokeOpaqueBehavior_EString_EJavaObject->setUpperBound(1);
+	m_fUML_Object_Operation_invokeOpaqueBehavior_EString_EJavaObject->setUnique(true);
+	m_fUML_Object_Operation_invokeOpaqueBehavior_EString_EJavaObject->setOrdered(true);
+	
+	m_fUML_Object_Operation_invokeOpaqueBehavior_EString_EJavaObject->_setID(FUML_OBJECT_OPERATION_INVOKEOPAQUEBEHAVIOR_ESTRING_EJAVAOBJECT);
+	
+	{
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_fUML_Object_Operation_invokeOpaqueBehavior_EString_EJavaObject);
+		parameter->setName("_qualifiedName");
+		parameter->setEType(ecore::ecorePackage::eInstance()->getEString_Class());
+		parameter->setLowerBound(0);
+		parameter->setUpperBound(1);
+		parameter->setUnique(true);
+		parameter->setOrdered(true);
+	}
+	
+	{
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_fUML_Object_Operation_invokeOpaqueBehavior_EString_EJavaObject);
+		parameter->setName("inputArguments");
+		parameter->setEType(ecore::ecorePackage::eInstance()->getEJavaObject_Class());
+		parameter->setLowerBound(0);
+		parameter->setUpperBound(1);
+		parameter->setUnique(true);
+		parameter->setOrdered(true);
+	}
+	
+	{
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_fUML_Object_Operation_invokeOpaqueBehavior_EString_EJavaObject);
+		parameter->setName("outputArguments");
+		parameter->setEType(ecore::ecorePackage::eInstance()->getEJavaObject_Class());
+		parameter->setLowerBound(0);
+		parameter->setUpperBound(1);
+		parameter->setUnique(true);
+		parameter->setOrdered(true);
+	}
+	
+	m_fUML_Object_Operation_invokeOpaqueBehavior_EInt_EJavaObject->setName("invokeOpaqueBehavior");
+	m_fUML_Object_Operation_invokeOpaqueBehavior_EInt_EJavaObject->setEType(ecore::ecorePackage::eInstance()->getEJavaObject_Class());
+	m_fUML_Object_Operation_invokeOpaqueBehavior_EInt_EJavaObject->setLowerBound(0);
+	m_fUML_Object_Operation_invokeOpaqueBehavior_EInt_EJavaObject->setUpperBound(1);
+	m_fUML_Object_Operation_invokeOpaqueBehavior_EInt_EJavaObject->setUnique(true);
+	m_fUML_Object_Operation_invokeOpaqueBehavior_EInt_EJavaObject->setOrdered(true);
+	
+	m_fUML_Object_Operation_invokeOpaqueBehavior_EInt_EJavaObject->_setID(FUML_OBJECT_OPERATION_INVOKEOPAQUEBEHAVIOR_EINT_EJAVAOBJECT);
+	
+	{
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_fUML_Object_Operation_invokeOpaqueBehavior_EInt_EJavaObject);
+		parameter->setName("_uID");
+		parameter->setEType(ecore::ecorePackage::eInstance()->getEInt_Class());
+		parameter->setLowerBound(0);
+		parameter->setUpperBound(1);
+		parameter->setUnique(true);
+		parameter->setOrdered(true);
+	}
+	
+	{
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_fUML_Object_Operation_invokeOpaqueBehavior_EInt_EJavaObject);
+		parameter->setName("inputArguments");
+		parameter->setEType(ecore::ecorePackage::eInstance()->getEJavaObject_Class());
+		parameter->setLowerBound(0);
+		parameter->setUpperBound(1);
+		parameter->setUnique(true);
+		parameter->setOrdered(true);
+	}
+	
+	{
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_fUML_Object_Operation_invokeOpaqueBehavior_EInt_EJavaObject);
+		parameter->setName("outputArguments");
+		parameter->setEType(ecore::ecorePackage::eInstance()->getEJavaObject_Class());
+		parameter->setLowerBound(0);
+		parameter->setUpperBound(1);
+		parameter->setUnique(true);
+		parameter->setOrdered(true);
+	}
+	
+	m_fUML_Object_Operation_invokeOperation_EString_EJavaObject->setName("invokeOperation");
+	m_fUML_Object_Operation_invokeOperation_EString_EJavaObject->setEType(ecore::ecorePackage::eInstance()->getEJavaObject_Class());
+	m_fUML_Object_Operation_invokeOperation_EString_EJavaObject->setLowerBound(0);
+	m_fUML_Object_Operation_invokeOperation_EString_EJavaObject->setUpperBound(1);
+	m_fUML_Object_Operation_invokeOperation_EString_EJavaObject->setUnique(true);
+	m_fUML_Object_Operation_invokeOperation_EString_EJavaObject->setOrdered(true);
+	
+	m_fUML_Object_Operation_invokeOperation_EString_EJavaObject->_setID(FUML_OBJECT_OPERATION_INVOKEOPERATION_ESTRING_EJAVAOBJECT);
+	
+	{
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_fUML_Object_Operation_invokeOperation_EString_EJavaObject);
+		parameter->setName("_qualifiedName");
+		parameter->setEType(ecore::ecorePackage::eInstance()->getEString_Class());
+		parameter->setLowerBound(0);
+		parameter->setUpperBound(1);
+		parameter->setUnique(true);
+		parameter->setOrdered(true);
+	}
+	
+	{
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_fUML_Object_Operation_invokeOperation_EString_EJavaObject);
+		parameter->setName("inputArguments");
+		parameter->setEType(ecore::ecorePackage::eInstance()->getEJavaObject_Class());
+		parameter->setLowerBound(0);
+		parameter->setUpperBound(1);
+		parameter->setUnique(true);
+		parameter->setOrdered(true);
+	}
+	
+	{
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_fUML_Object_Operation_invokeOperation_EString_EJavaObject);
+		parameter->setName("outputArguments");
+		parameter->setEType(ecore::ecorePackage::eInstance()->getEJavaObject_Class());
+		parameter->setLowerBound(0);
+		parameter->setUpperBound(1);
+		parameter->setUnique(true);
+		parameter->setOrdered(true);
+	}
+	
+	m_fUML_Object_Operation_invokeOperation_EInt_EJavaObject->setName("invokeOperation");
+	m_fUML_Object_Operation_invokeOperation_EInt_EJavaObject->setEType(ecore::ecorePackage::eInstance()->getEJavaObject_Class());
+	m_fUML_Object_Operation_invokeOperation_EInt_EJavaObject->setLowerBound(0);
+	m_fUML_Object_Operation_invokeOperation_EInt_EJavaObject->setUpperBound(1);
+	m_fUML_Object_Operation_invokeOperation_EInt_EJavaObject->setUnique(true);
+	m_fUML_Object_Operation_invokeOperation_EInt_EJavaObject->setOrdered(true);
+	
+	m_fUML_Object_Operation_invokeOperation_EInt_EJavaObject->_setID(FUML_OBJECT_OPERATION_INVOKEOPERATION_EINT_EJAVAOBJECT);
+	
+	{
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_fUML_Object_Operation_invokeOperation_EInt_EJavaObject);
+		parameter->setName("_uID");
+		parameter->setEType(ecore::ecorePackage::eInstance()->getEInt_Class());
+		parameter->setLowerBound(0);
+		parameter->setUpperBound(1);
+		parameter->setUnique(true);
+		parameter->setOrdered(true);
+	}
+	
+	{
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_fUML_Object_Operation_invokeOperation_EInt_EJavaObject);
+		parameter->setName("inputArguments");
+		parameter->setEType(ecore::ecorePackage::eInstance()->getEJavaObject_Class());
+		parameter->setLowerBound(0);
+		parameter->setUpperBound(1);
+		parameter->setUnique(true);
+		parameter->setOrdered(true);
+	}
+	
+	{
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_fUML_Object_Operation_invokeOperation_EInt_EJavaObject);
+		parameter->setName("outputArguments");
+		parameter->setEType(ecore::ecorePackage::eInstance()->getEJavaObject_Class());
+		parameter->setLowerBound(0);
+		parameter->setUpperBound(1);
+		parameter->setUnique(true);
+		parameter->setOrdered(true);
+	}
 	
 	m_fUML_Object_Operation_send_EventOccurrence->setName("send");
 	{ 	std::shared_ptr<ecore::ecoreFactory> factory = ecore::ecoreFactory::eInstance();

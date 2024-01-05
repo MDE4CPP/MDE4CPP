@@ -21,7 +21,7 @@
 #include <cassert>
 #include <iostream>
 #include <sstream>
-
+#include <stdexcept>
 #include "abstractDataTypes/Subset.hpp"
 
 
@@ -39,9 +39,9 @@
 
 #include <exception> // used in Persistence
 #include "uml/umlFactory.hpp"
-#include "fUML/Semantics/Loci/LociFactory.hpp"
 #include "ecore/ecoreFactory.hpp"
 #include "fUML/Semantics/CommonBehavior/CommonBehaviorFactory.hpp"
+#include "fUML/Semantics/Loci/LociFactory.hpp"
 #include "uml/Class.hpp"
 #include "uml/Classifier.hpp"
 #include "uml/Comment.hpp"
@@ -154,6 +154,26 @@ const std::shared_ptr<Bag<uml::Classifier>>& FUML_ObjectImpl::getTypes() const
 
 return nullPointer;
 	//end of body
+}
+
+std::shared_ptr<Any> FUML_ObjectImpl::invokeOpaqueBehavior(std::string _qualifiedName, const std::shared_ptr<Bag<Any>>& inputArguments, const std::shared_ptr<Bag<Any>>& outputArguments)
+{
+	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
+}
+
+std::shared_ptr<Any> FUML_ObjectImpl::invokeOpaqueBehavior(unsigned long _uID, const std::shared_ptr<Bag<Any>>& inputArguments, const std::shared_ptr<Bag<Any>>& outputArguments)
+{
+	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
+}
+
+std::shared_ptr<Any> FUML_ObjectImpl::invokeOperation(std::string _qualifiedName, const std::shared_ptr<Bag<Any>>& inputArguments, const std::shared_ptr<Bag<Any>>& outputArguments)
+{
+	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
+}
+
+std::shared_ptr<Any> FUML_ObjectImpl::invokeOperation(unsigned long _uID, const std::shared_ptr<Bag<Any>>& inputArguments, const std::shared_ptr<Bag<Any>>& outputArguments)
+{
+	throw std::runtime_error("UnsupportedOperationException: " + std::string(__PRETTY_FUNCTION__));
 }
 
 void FUML_ObjectImpl::send(const std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccurrence>& eventOccurrence)
@@ -531,6 +551,198 @@ std::shared_ptr<Any> FUML_ObjectImpl::eInvoke(int operationID, const std::shared
 		{
 			std::shared_ptr<Bag<uml::Classifier>> resultList = this->getTypes();
 			return eEcoreContainerAny(resultList,uml::umlPackage::CLASSIFIER_CLASS);
+			break;
+		}
+		// fUML::MDE4CPP_Extensions::FUML_Object::invokeOpaqueBehavior(std::string, Any[*], Any[*]) : Any: 738288422
+		case MDE4CPP_ExtensionsPackage::FUML_OBJECT_OPERATION_INVOKEOPAQUEBEHAVIOR_ESTRING_EJAVAOBJECT:
+		{
+			//Retrieve input parameter '_qualifiedName'
+			//parameter 0
+			std::string incoming_param__qualifiedName;
+			Bag<Any>::const_iterator incoming_param__qualifiedName_arguments_citer = std::next(arguments->begin(), 0);
+			try
+			{
+				incoming_param__qualifiedName = (*incoming_param__qualifiedName_arguments_citer)->get<std::string>();
+			}
+			catch(...)
+			{
+				DEBUG_ERROR("Invalid type stored in 'Any' for parameter '_qualifiedName'. Failed to invoke operation 'invokeOpaqueBehavior'!")
+				return nullptr;
+			}
+		
+			//Retrieve input parameter 'inputArguments'
+			//parameter 1
+			std::shared_ptr<Bag<Any>> incoming_param_inputArguments;
+			Bag<Any>::const_iterator incoming_param_inputArguments_arguments_citer = std::next(arguments->begin(), 1);
+			try
+			{
+				incoming_param_inputArguments = (*incoming_param_inputArguments_arguments_citer)->get<std::shared_ptr<Bag<Any>>>();
+			}
+			catch(...)
+			{
+				DEBUG_ERROR("Invalid type stored in 'Any' for parameter 'inputArguments'. Failed to invoke operation 'invokeOpaqueBehavior'!")
+				return nullptr;
+			}
+		
+			//Retrieve input parameter 'outputArguments'
+			//parameter 2
+			std::shared_ptr<Bag<Any>> incoming_param_outputArguments;
+			Bag<Any>::const_iterator incoming_param_outputArguments_arguments_citer = std::next(arguments->begin(), 2);
+			try
+			{
+				incoming_param_outputArguments = (*incoming_param_outputArguments_arguments_citer)->get<std::shared_ptr<Bag<Any>>>();
+			}
+			catch(...)
+			{
+				DEBUG_ERROR("Invalid type stored in 'Any' for parameter 'outputArguments'. Failed to invoke operation 'invokeOpaqueBehavior'!")
+				return nullptr;
+			}
+		
+			result = eAny(this->invokeOpaqueBehavior(incoming_param__qualifiedName,incoming_param_inputArguments,incoming_param_outputArguments), 0, false);
+			break;
+		}
+		// fUML::MDE4CPP_Extensions::FUML_Object::invokeOpaqueBehavior(int, Any[*], Any[*]) : Any: 960883863
+		case MDE4CPP_ExtensionsPackage::FUML_OBJECT_OPERATION_INVOKEOPAQUEBEHAVIOR_EINT_EJAVAOBJECT:
+		{
+			//Retrieve input parameter '_uID'
+			//parameter 0
+			unsigned long incoming_param__uID;
+			Bag<Any>::const_iterator incoming_param__uID_arguments_citer = std::next(arguments->begin(), 0);
+			try
+			{
+				incoming_param__uID = (*incoming_param__uID_arguments_citer)->get<unsigned long>();
+			}
+			catch(...)
+			{
+				DEBUG_ERROR("Invalid type stored in 'Any' for parameter '_uID'. Failed to invoke operation 'invokeOpaqueBehavior'!")
+				return nullptr;
+			}
+		
+			//Retrieve input parameter 'inputArguments'
+			//parameter 1
+			std::shared_ptr<Bag<Any>> incoming_param_inputArguments;
+			Bag<Any>::const_iterator incoming_param_inputArguments_arguments_citer = std::next(arguments->begin(), 1);
+			try
+			{
+				incoming_param_inputArguments = (*incoming_param_inputArguments_arguments_citer)->get<std::shared_ptr<Bag<Any>>>();
+			}
+			catch(...)
+			{
+				DEBUG_ERROR("Invalid type stored in 'Any' for parameter 'inputArguments'. Failed to invoke operation 'invokeOpaqueBehavior'!")
+				return nullptr;
+			}
+		
+			//Retrieve input parameter 'outputArguments'
+			//parameter 2
+			std::shared_ptr<Bag<Any>> incoming_param_outputArguments;
+			Bag<Any>::const_iterator incoming_param_outputArguments_arguments_citer = std::next(arguments->begin(), 2);
+			try
+			{
+				incoming_param_outputArguments = (*incoming_param_outputArguments_arguments_citer)->get<std::shared_ptr<Bag<Any>>>();
+			}
+			catch(...)
+			{
+				DEBUG_ERROR("Invalid type stored in 'Any' for parameter 'outputArguments'. Failed to invoke operation 'invokeOpaqueBehavior'!")
+				return nullptr;
+			}
+		
+			result = eAny(this->invokeOpaqueBehavior(incoming_param__uID,incoming_param_inputArguments,incoming_param_outputArguments), 0, false);
+			break;
+		}
+		// fUML::MDE4CPP_Extensions::FUML_Object::invokeOperation(std::string, Any[*], Any[*]) : Any: 3231998528
+		case MDE4CPP_ExtensionsPackage::FUML_OBJECT_OPERATION_INVOKEOPERATION_ESTRING_EJAVAOBJECT:
+		{
+			//Retrieve input parameter '_qualifiedName'
+			//parameter 0
+			std::string incoming_param__qualifiedName;
+			Bag<Any>::const_iterator incoming_param__qualifiedName_arguments_citer = std::next(arguments->begin(), 0);
+			try
+			{
+				incoming_param__qualifiedName = (*incoming_param__qualifiedName_arguments_citer)->get<std::string>();
+			}
+			catch(...)
+			{
+				DEBUG_ERROR("Invalid type stored in 'Any' for parameter '_qualifiedName'. Failed to invoke operation 'invokeOperation'!")
+				return nullptr;
+			}
+		
+			//Retrieve input parameter 'inputArguments'
+			//parameter 1
+			std::shared_ptr<Bag<Any>> incoming_param_inputArguments;
+			Bag<Any>::const_iterator incoming_param_inputArguments_arguments_citer = std::next(arguments->begin(), 1);
+			try
+			{
+				incoming_param_inputArguments = (*incoming_param_inputArguments_arguments_citer)->get<std::shared_ptr<Bag<Any>>>();
+			}
+			catch(...)
+			{
+				DEBUG_ERROR("Invalid type stored in 'Any' for parameter 'inputArguments'. Failed to invoke operation 'invokeOperation'!")
+				return nullptr;
+			}
+		
+			//Retrieve input parameter 'outputArguments'
+			//parameter 2
+			std::shared_ptr<Bag<Any>> incoming_param_outputArguments;
+			Bag<Any>::const_iterator incoming_param_outputArguments_arguments_citer = std::next(arguments->begin(), 2);
+			try
+			{
+				incoming_param_outputArguments = (*incoming_param_outputArguments_arguments_citer)->get<std::shared_ptr<Bag<Any>>>();
+			}
+			catch(...)
+			{
+				DEBUG_ERROR("Invalid type stored in 'Any' for parameter 'outputArguments'. Failed to invoke operation 'invokeOperation'!")
+				return nullptr;
+			}
+		
+			result = eAny(this->invokeOperation(incoming_param__qualifiedName,incoming_param_inputArguments,incoming_param_outputArguments), 0, false);
+			break;
+		}
+		// fUML::MDE4CPP_Extensions::FUML_Object::invokeOperation(int, Any[*], Any[*]) : Any: 3453044381
+		case MDE4CPP_ExtensionsPackage::FUML_OBJECT_OPERATION_INVOKEOPERATION_EINT_EJAVAOBJECT:
+		{
+			//Retrieve input parameter '_uID'
+			//parameter 0
+			unsigned long incoming_param__uID;
+			Bag<Any>::const_iterator incoming_param__uID_arguments_citer = std::next(arguments->begin(), 0);
+			try
+			{
+				incoming_param__uID = (*incoming_param__uID_arguments_citer)->get<unsigned long>();
+			}
+			catch(...)
+			{
+				DEBUG_ERROR("Invalid type stored in 'Any' for parameter '_uID'. Failed to invoke operation 'invokeOperation'!")
+				return nullptr;
+			}
+		
+			//Retrieve input parameter 'inputArguments'
+			//parameter 1
+			std::shared_ptr<Bag<Any>> incoming_param_inputArguments;
+			Bag<Any>::const_iterator incoming_param_inputArguments_arguments_citer = std::next(arguments->begin(), 1);
+			try
+			{
+				incoming_param_inputArguments = (*incoming_param_inputArguments_arguments_citer)->get<std::shared_ptr<Bag<Any>>>();
+			}
+			catch(...)
+			{
+				DEBUG_ERROR("Invalid type stored in 'Any' for parameter 'inputArguments'. Failed to invoke operation 'invokeOperation'!")
+				return nullptr;
+			}
+		
+			//Retrieve input parameter 'outputArguments'
+			//parameter 2
+			std::shared_ptr<Bag<Any>> incoming_param_outputArguments;
+			Bag<Any>::const_iterator incoming_param_outputArguments_arguments_citer = std::next(arguments->begin(), 2);
+			try
+			{
+				incoming_param_outputArguments = (*incoming_param_outputArguments_arguments_citer)->get<std::shared_ptr<Bag<Any>>>();
+			}
+			catch(...)
+			{
+				DEBUG_ERROR("Invalid type stored in 'Any' for parameter 'outputArguments'. Failed to invoke operation 'invokeOperation'!")
+				return nullptr;
+			}
+		
+			result = eAny(this->invokeOperation(incoming_param__uID,incoming_param_inputArguments,incoming_param_outputArguments), 0, false);
 			break;
 		}
 		// fUML::MDE4CPP_Extensions::FUML_Object::send(fUML::Semantics::CommonBehavior::EventOccurrence): 1595242616

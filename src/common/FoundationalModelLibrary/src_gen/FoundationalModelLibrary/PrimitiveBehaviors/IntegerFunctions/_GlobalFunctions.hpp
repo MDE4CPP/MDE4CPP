@@ -20,27 +20,28 @@ namespace uml
 namespace FoundationalModelLibrary::PrimitiveBehaviors::IntegerFunctions
 {
 	std::shared_ptr<Any> invoke(const std::shared_ptr<uml::OpaqueBehavior>&, const std::shared_ptr<Bag<Any>>&, const std::shared_ptr<Bag<Any>>&);
+	std::shared_ptr<Any> invoke(unsigned long, const std::shared_ptr<Bag<Any>>&, const std::shared_ptr<Bag<Any>>&);
 }
 
 namespace FoundationalModelLibrary::PrimitiveBehaviors::IntegerFunctions
 {
-	int Div(const int x, const int y);
-	bool greaterThan(const int x, const int y);
-	int Max(const int x, const int y);
-	bool equals(const int x, const int y);
-	bool lessOrEqual(const int x, const int y);
-	int ToInteger(const std::string x);
-	int times(const int x, const int y);
-	int minus(const int x, const int y);
-	bool lessThan(const int x, const int y);
-	int Neg(const int x);
 	int Min(const int x, const int y);
+	bool greaterThan(const int x, const int y);
+	int Neg(const int x);
 	std::string ToString(const int x);
-	int ToUnlimitedNatural(const int x);
+	int minus(const int x, const int y);
 	int plus(const int x, const int y);
 	double divide(const int x, const int y);
+	int Div(const int x, const int y);
+	int times(const int x, const int y);
+	bool lessOrEqual(const int x, const int y);
 	bool greaterOrEqual(const int x, const int y);
+	bool lessThan(const int x, const int y);
 	int Mod(const int x, const int y);
+	int Max(const int x, const int y);
+	int ToInteger(const std::string x);
+	bool equals(const int x, const int y);
+	int ToUnlimitedNatural(const int x);
 	int Abs(const int x);
 }
 

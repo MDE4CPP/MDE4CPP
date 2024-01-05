@@ -314,7 +314,6 @@ bool ExecutableImpl::remove(unsigned long _uID, const std::shared_ptr<Any>& valu
 				// If removeAt != -1, the value to remove is not taken into account anymore.
 				// Instead, the value at index = removeAt is removed
 				// NOTE: removeAt is 1-based rather than 0-based
-				
 				if(removeAt == 1)
 				{
 					m_base_Artifact.reset();
@@ -343,20 +342,20 @@ bool ExecutableImpl::remove(unsigned long _uID, const std::shared_ptr<Any>& valu
 //Operation Invocation
 std::shared_ptr<Any> ExecutableImpl::invoke(const std::shared_ptr<uml::Operation>& _operation, const std::shared_ptr<Bag<Any>>& inputArguments, const std::shared_ptr<Bag<Any>>& outputArguments)
 {
-	return this->invoke(_operation->_getID(), inputArguments, outputArguments);
+	return this->invokeOperation(_operation->_getID(), inputArguments, outputArguments);
 }
 
-std::shared_ptr<Any> ExecutableImpl::invoke(std::string _qualifiedName, const std::shared_ptr<Bag<Any>>& inputArguments, const std::shared_ptr<Bag<Any>>& outputArguments)
+std::shared_ptr<Any> ExecutableImpl::invokeOperation(std::string _qualifiedName, const std::shared_ptr<Bag<Any>>& inputArguments, const std::shared_ptr<Bag<Any>>& outputArguments)
 {
 	unsigned long uID = util::Util::polynomialRollingHash(_qualifiedName);
-	return this->invoke(uID, inputArguments, outputArguments);
+	return this->invokeOperation(uID, inputArguments, outputArguments);
 }
 
-std::shared_ptr<Any> ExecutableImpl::invoke(unsigned long _uID, const std::shared_ptr<Bag<Any>>& inputArguments, const std::shared_ptr<Bag<Any>>& outputArguments)
+std::shared_ptr<Any> ExecutableImpl::invokeOperation(unsigned long _uID, const std::shared_ptr<Bag<Any>>& inputArguments, const std::shared_ptr<Bag<Any>>& outputArguments)
 {
-	std::shared_ptr<Any> result = eAny(nullptr, -1, false);
+	std::shared_ptr<Any> result = nullptr;
 	//Call invoke() for base class File
-	result = StandardProfile::FileImpl::invoke(_uID, inputArguments, outputArguments);
+	result = StandardProfile::FileImpl::invokeOperation(_uID, inputArguments, outputArguments);
 	if (result != nullptr)
 	{
 		return result;
@@ -367,9 +366,20 @@ std::shared_ptr<Any> ExecutableImpl::invoke(unsigned long _uID, const std::share
 //OpaqueBehavior Invocation
 std::shared_ptr<Any> ExecutableImpl::invoke(const std::shared_ptr<uml::OpaqueBehavior>& _opaqueBehavior, const std::shared_ptr<Bag<Any>>& inputArguments, const std::shared_ptr<Bag<Any>>& outputArguments)
 {
-	std::shared_ptr<Any> result;
+	return this->invokeOpaqueBehavior(_opaqueBehavior->_getID(), inputArguments, outputArguments);
+}
+
+std::shared_ptr<Any> ExecutableImpl::invokeOpaqueBehavior(std::string _qualifiedName, const std::shared_ptr<Bag<Any>>& inputArguments, const std::shared_ptr<Bag<Any>>& outputArguments)
+{
+	unsigned long uID = util::Util::polynomialRollingHash(_qualifiedName);
+	return this->invokeOpaqueBehavior(uID, inputArguments, outputArguments);
+}
+
+std::shared_ptr<Any> ExecutableImpl::invokeOpaqueBehavior(unsigned long _uID, const std::shared_ptr<Bag<Any>>& inputArguments, const std::shared_ptr<Bag<Any>>& outputArguments)
+{
+	std::shared_ptr<Any> result = nullptr;
 	//Call invoke() for base class File
-	result = StandardProfile::FileImpl::invoke(_opaqueBehavior, inputArguments, outputArguments);
+	result = StandardProfile::FileImpl::invokeOpaqueBehavior(_uID, inputArguments, outputArguments);
 	if (result != nullptr)
 	{
 		return result;

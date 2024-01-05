@@ -15,12 +15,7 @@
 namespace uml
 {
 	class Activity;
-	class OpaqueBehavior;
-}
-
-namespace fUML::Semantics::Activities 
-{
-	class ActivityExecution;
+	class Behavior;
 }
 
 namespace FoundationalModelLibrary 
@@ -29,7 +24,7 @@ namespace FoundationalModelLibrary
 	{
 		private:    
 			FoundationalModelLibraryExecutorImpl& operator=(FoundationalModelLibraryExecutorImpl const&) = delete;
-			std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> invokeOpaqueBehavior(const std::shared_ptr<uml::OpaqueBehavior>&, const std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_Object>&, const std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>>&);
+			std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> invokeOpaqueBehavior(const std::shared_ptr<uml::Behavior>&, const std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_Object>&, const std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>>&);
 
 		public:
 			FoundationalModelLibraryExecutorImpl();
