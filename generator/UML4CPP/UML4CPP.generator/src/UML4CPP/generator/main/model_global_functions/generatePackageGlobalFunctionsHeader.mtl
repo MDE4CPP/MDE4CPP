@@ -48,6 +48,7 @@ class [aClassifier.name.toUpperFirst()/];
 namespace [aPackage.generateNamespace(true)/]
 {
 	std::shared_ptr<Any> invoke(const std::shared_ptr<uml::OpaqueBehavior>&, const std::shared_ptr<Bag<Any>>&, const std::shared_ptr<Bag<Any>>&);
+	std::shared_ptr<Any> invoke(unsigned long, const std::shared_ptr<Bag<Any>>&, const std::shared_ptr<Bag<Any>>&);
 }
 
 [for (aNamespace : Namespace | opaqueBehaviorsForGlobalFunctionsOfPackage.getNextParentElementWithDefinedNamespaceProperty()->asSet()->sortedBy(name)) separator('\n') after('\n')]

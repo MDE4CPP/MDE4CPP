@@ -61,11 +61,13 @@ virtual bool remove(unsigned long _uID, const std::shared_ptr<Any>& value, int r
 [template public generateInvoke(aClass : Class,impl : Boolean)]
 //Operation invocation
 virtual std::shared_ptr<Any> invoke(const std::shared_ptr<uml::Operation>& _operation, const std::shared_ptr<Bag<Any>>& inputArguments, const std::shared_ptr<Bag<Any>>& outputArguments) [abstractSuffix(impl)/];
-virtual std::shared_ptr<Any> invoke(std::string _qualifiedName, const std::shared_ptr<Bag<Any>>& inputArguments, const std::shared_ptr<Bag<Any>>& outputArguments) [abstractSuffix(impl)/];
-virtual std::shared_ptr<Any> invoke(unsigned long _uID, const std::shared_ptr<Bag<Any>>& inputArguments, const std::shared_ptr<Bag<Any>>& outputArguments) [abstractSuffix(impl)/];
+virtual std::shared_ptr<Any> invokeOperation(std::string _qualifiedName, const std::shared_ptr<Bag<Any>>& inputArguments, const std::shared_ptr<Bag<Any>>& outputArguments) [abstractSuffix(impl)/];
+virtual std::shared_ptr<Any> invokeOperation(unsigned long _uID, const std::shared_ptr<Bag<Any>>& inputArguments, const std::shared_ptr<Bag<Any>>& outputArguments) [abstractSuffix(impl)/];
 
 //OpaqueBehavior invocation
 virtual std::shared_ptr<Any> invoke(const std::shared_ptr<uml::OpaqueBehavior>& _opaqueBehavior, const std::shared_ptr<Bag<Any>>& inputArguments, const std::shared_ptr<Bag<Any>>& outputArguments) [abstractSuffix(impl)/];
+virtual std::shared_ptr<Any> invokeOpaqueBehavior(std::string _qualifiedName, const std::shared_ptr<Bag<Any>>& inputArguments, const std::shared_ptr<Bag<Any>>& outputArguments) [abstractSuffix(impl)/];
+virtual std::shared_ptr<Any> invokeOpaqueBehavior(unsigned long _uID, const std::shared_ptr<Bag<Any>>& inputArguments, const std::shared_ptr<Bag<Any>>& outputArguments) [abstractSuffix(impl)/];
 [/template]
 
 [query private getPropertiesForGetAndSet(aClass : Class) : OrderedSet(Property) = aClass.attribute->addAll(aClass.interfaceRealization.contract.attribute)->reject(isDoNotGenerateElement())->sortedBy(myQualifiedName())/]
@@ -681,16 +683,16 @@ bool [aClass.name.toUpperFirst().concat('Impl')/]::remove(unsigned long _uID, co
 [template private generateOperationInvokeImplementation(aClass : Class)]
 std::shared_ptr<Any> [aClass.name.toUpperFirst().concat('Impl')/]::invoke(const std::shared_ptr<uml::Operation>& _operation, const std::shared_ptr<Bag<Any>>& inputArguments, const std::shared_ptr<Bag<Any>>& outputArguments)
 {
-	return this->invoke(_operation->_getID(), inputArguments, outputArguments);
+	return this->invokeOperation(_operation->_getID(), inputArguments, outputArguments);
 }
 
-std::shared_ptr<Any> [aClass.name.toUpperFirst().concat('Impl')/]::invoke(std::string _qualifiedName, const std::shared_ptr<Bag<Any>>& inputArguments, const std::shared_ptr<Bag<Any>>& outputArguments)
+std::shared_ptr<Any> [aClass.name.toUpperFirst().concat('Impl')/]::invokeOperation(std::string _qualifiedName, const std::shared_ptr<Bag<Any>>& inputArguments, const std::shared_ptr<Bag<Any>>& outputArguments)
 {
 	unsigned long uID = util::Util::polynomialRollingHash(_qualifiedName);
-	return this->invoke(uID, inputArguments, outputArguments);
+	return this->invokeOperation(uID, inputArguments, outputArguments);
 }
 
-std::shared_ptr<Any> [aClass.name.toUpperFirst().concat('Impl')/]::invoke(unsigned long _uID, const std::shared_ptr<Bag<Any>>& inputArguments, const std::shared_ptr<Bag<Any>>& outputArguments)
+std::shared_ptr<Any> [aClass.name.toUpperFirst().concat('Impl')/]::invokeOperation(unsigned long _uID, const std::shared_ptr<Bag<Any>>& inputArguments, const std::shared_ptr<Bag<Any>>& outputArguments)
 {
 	std::shared_ptr<Any> result = nullptr;
 [if (not aClass.getOperationsForInvoke()->isEmpty())]
@@ -844,7 +846,7 @@ std::shared_ptr<Any> [aClass.name.toUpperFirst().concat('Impl')/]::invoke(unsign
 [/if]	
 [for (sClass : Class | aClass.superClass->reject(oclIsUndefined() and name.oclIsUndefined())->sortedBy(name))]
 	//Call invoke() for base class [sClass.name/]
-	result = [sClass.generateNamespaceName(true)/]Impl::invoke(_uID, inputArguments, outputArguments);
+	result = [sClass.generateNamespaceName(true)/]Impl::invokeOperation(_uID, inputArguments, outputArguments);
 	if (result != nullptr)
 	{
 		return result;
@@ -857,10 +859,19 @@ std::shared_ptr<Any> [aClass.name.toUpperFirst().concat('Impl')/]::invoke(unsign
 [template private generateOpaqueBehaviorInvokeImplementation(aClass : Class)]
 std::shared_ptr<Any> [aClass.name.toUpperFirst().concat('Impl')/]::invoke(const std::shared_ptr<uml::OpaqueBehavior>& _opaqueBehavior, const std::shared_ptr<Bag<Any>>& inputArguments, const std::shared_ptr<Bag<Any>>& outputArguments)
 {
-[if (not aClass.collectOpaqueBehaviorsContexedByClass()->isEmpty())]
-	unsigned long uID = _opaqueBehavior->_getID();
+	return this->invokeOpaqueBehavior(_opaqueBehavior->_getID(), inputArguments, outputArguments);
+}
 
-	switch(uID)
+std::shared_ptr<Any> [aClass.name.toUpperFirst().concat('Impl')/]::invokeOpaqueBehavior(std::string _qualifiedName, const std::shared_ptr<Bag<Any>>& inputArguments, const std::shared_ptr<Bag<Any>>& outputArguments)
+{
+	unsigned long uID = util::Util::polynomialRollingHash(_qualifiedName);
+	return this->invokeOpaqueBehavior(uID, inputArguments, outputArguments);
+}
+
+std::shared_ptr<Any> [aClass.name.toUpperFirst().concat('Impl')/]::invokeOpaqueBehavior(unsigned long _uID, const std::shared_ptr<Bag<Any>>& inputArguments, const std::shared_ptr<Bag<Any>>& outputArguments)
+{
+[if (not aClass.collectOpaqueBehaviorsContexedByClass()->isEmpty())]
+	switch(_uID)
 	{
 	[for (anOpaqueBehavior : OpaqueBehavior | aClass.collectOpaqueBehaviorsContexedByClass())]
 		case [anOpaqueBehavior.getNearestPackage().generateNamespace(true)/]::[anOpaqueBehavior.getNearestPackage().getPackageName()/]Package::[anOpaqueBehavior.getMemberName().toUpperCase()/]:
@@ -1012,7 +1023,7 @@ std::shared_ptr<Any> [aClass.name.toUpperFirst().concat('Impl')/]::invoke(const 
 	std::shared_ptr<Any> result = nullptr;
 	[for (sClass : Class | aClass.superClass->reject(oclIsUndefined() and name.oclIsUndefined()))]
 	//Call invoke() for base class [sClass.name/]
-	result = [sClass.generateNamespaceName(true)/]Impl::invoke(_opaqueBehavior, inputArguments, outputArguments);
+	result = [sClass.generateNamespaceName(true)/]Impl::invokeOpaqueBehavior(_uID, inputArguments, outputArguments);
 	if (result != nullptr)
 	{
 		return result;

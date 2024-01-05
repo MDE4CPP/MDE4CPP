@@ -42,18 +42,19 @@ originalName : String = aPackage.generateNamespacePath(false);
 #include "ecore/EClass.hpp"
 #include "uml/umlPackage.hpp"
 #include "uml/Activity.hpp"
+#include "uml/Behavior.hpp"
 #include "uml/Enumeration.hpp"
 #include "uml/EnumerationLiteral.hpp"
 #include "uml/FunctionBehavior.hpp"
 #include "uml/InstanceValue.hpp"
-#include "uml/OpaqueBehavior.hpp"
 #include "uml/Parameter.hpp"
 #include "uml/ParameterDirectionKind.hpp"
-#include "fUML/Semantics/CommonBehavior/ParameterValue.hpp"
 #include "fUML/Semantics/Activities/ActivityExecution.hpp"
 #include "fUML/Semantics/Activities/ActivityNodeActivationGroup.hpp"
 #include "fUML/Semantics/Activities/ActivitiesFactory.hpp"
 #include "fUML/Semantics/CommonBehavior/CommonBehaviorFactory.hpp"
+#include "fUML/Semantics/CommonBehavior/Execution.hpp"
+#include "fUML/Semantics/CommonBehavior/ParameterValue.hpp"
 [if (aPackage.includesPSSM())]
 #include "PSSM/Semantics/Loci/SM_Locus.hpp"
 #include "PSSM/Semantics/Loci/SM_ExecutionFactory.hpp"
@@ -206,13 +207,11 @@ std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> [packageNa
 	int behaviorMetaElementID = behavior->getMetaElementID();
     if((behaviorMetaElementID == uml::umlPackage::OPAQUEBEHAVIOR_CLASS) || (behaviorMetaElementID == uml::umlPackage::FUNCTIONBEHAVIOR_CLASS))
     {
-		const std::shared_ptr<uml::OpaqueBehavior>& opaqueBehavior = std::dynamic_pointer_cast<uml::OpaqueBehavior>(behavior);
-		return this->invokeOpaqueBehavior(opaqueBehavior, context, inputs);
+		return this->invokeOpaqueBehavior(behavior, context, inputs);
     }
 	else if(behaviorMetaElementID == uml::umlPackage::ACTIVITY_CLASS)
 	{
-		const std::shared_ptr<fUML::Semantics::Activities::ActivityExecution>& activityExecution = 
-			std::dynamic_pointer_cast<fUML::Semantics::Activities::ActivityExecution>(this->getLocus().lock()->getFactory()->createExecution(behavior, context));
+		const std::shared_ptr<fUML::Semantics::CommonBehavior::Execution>& activityExecution = this->getLocus().lock()->getFactory()->createExecution(behavior, context);
 
 		//Model-internal activities
 		if(activityExecution)
@@ -229,7 +228,7 @@ std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> [packageNa
 
 			std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> outputParameterValues = activityExecution->getOutputParameterValues();
 			activityExecution->getParameterValues()->clear();
-			activityExecution->getActivationGroup()->terminateAll();
+			activityExecution->terminate();
 			
 			return outputParameterValues;
 		}
@@ -286,7 +285,7 @@ std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> [packageNa
 	return fUML::Semantics::Loci::ExecutorImpl::execute(behavior, context, inputs);
 }
 
-std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> [packageName/]ExecutorImpl::invokeOpaqueBehavior(const std::shared_ptr<uml::OpaqueBehavior>& opaqueBehavior, const std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_Object>& context, const std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>>& inputs)
+std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> [packageName/]ExecutorImpl::invokeOpaqueBehavior(const std::shared_ptr<uml::Behavior>& opaqueBehavior, const std::shared_ptr<fUML::MDE4CPP_Extensions::FUML_Object>& context, const std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>>& inputs)
 {
 	std::string pluginName;
 
@@ -326,7 +325,7 @@ std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> [packageNa
 	->filter(OpaqueBehavior)
 	->reject(oB : OpaqueBehavior | oB.hasStereotypeApplied(QN_STEREOTYPE_MAINBEHAVIOR()))
 	->reject(oB : OpaqueBehavior | oB.isDoNotGenerateElement()))
-	before('\t\tswitch(opaqueBehavior->_getID())\n\t\t{\n') after('\n\t\t}')]
+	before('\t\tunsigned long uID = opaqueBehavior->_getID();\n\t\tswitch(uID)\n\t\t{\n') after('\n\t\t}')]
 			case [anOpaqueBehavior.getNearestPackage().generateNamespace(true)/]::[anOpaqueBehavior.getNearestPackage().getPackageName()/]Package::[anOpaqueBehavior.getMemberName().toUpperCase()/]:
 			{	
 			[comment 
@@ -342,7 +341,7 @@ std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> [packageNa
 					DEBUG_ERROR("Context for execution OpaqueBehavior [anOpaqueBehavior.generateNamespaceName(true)/] is null!");
 					return outputParameterValues;
 				}
-				result = context->invoke([specifiedOperation.generatePackageGetterCall()/], inputArguments, outputArguments);
+				result = context->invokeOperation([specifiedOperation.getNearestPackage().generateNamespace(true)/]::[specifiedOperation.getNearestPackage().getPackageName()/]Package::[specifiedOperation.getMemberName().toUpperCase()/], inputArguments, outputArguments);
 					[let outputParameters : OrderedSet(Parameter) = anOpaqueBehavior.ownedParameter->select(p : Parameter | (p.direction = ParameterDirectionKind::inout) or (p.direction = ParameterDirectionKind::out))]
 					[for (outputParameter : Parameter | outputParameters) before('\n')]
 				//Create output ParameterValue for [outputParameter.direction/] parameter [outputParameter.name/]
@@ -372,7 +371,7 @@ std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> [packageNa
 					DEBUG_ERROR("Context for execution OpaqueBehavior [anOpaqueBehavior.generateNamespaceName(true)/] is null!");
 					return outputParameterValues;
 				}
-				result = context->invoke(opaqueBehavior, inputArguments, outputArguments);
+				result = context->invokeOpaqueBehavior(uID, inputArguments, outputArguments);
 				[let outputParameters : OrderedSet(Parameter) = anOpaqueBehavior.ownedParameter->select(p : Parameter | (p.direction = ParameterDirectionKind::inout) or (p.direction = ParameterDirectionKind::out))]
 				[for (outputParameter : Parameter | outputParameters) before('\n')]
 				std::shared_ptr<fUML::Semantics::CommonBehavior::ParameterValue> [outputParameter.name/]ParameterValue = fUML::Semantics::CommonBehavior::CommonBehaviorFactory::eInstance()->createParameterValue();
@@ -392,7 +391,7 @@ std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> [packageNa
 			[else]
 				// OpaqueBehavior [anOpaqueBehavior.generateNamespaceName(true)/] has [if (anOpaqueBehavior._context.oclIsUndefined())]no context[else][anOpaqueBehavior._context.eClass().name/] [anOpaqueBehavior._context.generateNamespaceName(true)/] as its context[/if]
 				// and is therefore realized as a global function
-				result = [anOpaqueBehavior.getNearestPackage().generateNamespace(true)/]::invoke(opaqueBehavior, inputArguments, outputArguments);
+				result = [anOpaqueBehavior.getNearestPackage().generateNamespace(true)/]::invoke(uID, inputArguments, outputArguments);
 				[let outputParameters : OrderedSet(Parameter) = anOpaqueBehavior.ownedParameter->select(p : Parameter | (p.direction = ParameterDirectionKind::inout) or (p.direction = ParameterDirectionKind::out))]
 				[for (outputParameter : Parameter | outputParameters) before('\n')]
 				std::shared_ptr<fUML::Semantics::CommonBehavior::ParameterValue> [outputParameter.name/]ParameterValue = fUML::Semantics::CommonBehavior::CommonBehaviorFactory::eInstance()->createParameterValue();
