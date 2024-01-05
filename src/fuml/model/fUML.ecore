@@ -3471,6 +3471,34 @@
           <details key="body" value="    if(this->getObjectActivation() != nullptr)&#xA;    {&#xA;        this->getObjectActivation()->stop();&#xA;        this->setObjectActivation(nullptr);&#xA;    }&#xA;&#xA;    this->getLocus()->remove(getThisFUML_ObjectPtr());"/>
         </eAnnotations>
       </eOperations>
+      <eOperations name="invokeOperation" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject">
+        <eParameters name="_qualifiedName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+        <eParameters name="inputArguments" upperBound="-1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
+        <eParameters name="outputArguments" upperBound="-1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
+      </eOperations>
+      <eOperations name="invokeOperation" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject">
+        <eParameters name="_uID" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt">
+          <eAnnotations source="http://tu-ilmenau.de/see/codegen">
+            <details key="cppType" value="unsigned long"/>
+          </eAnnotations>
+        </eParameters>
+        <eParameters name="inputArguments" upperBound="-1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
+        <eParameters name="outputArguments" upperBound="-1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
+      </eOperations>
+      <eOperations name="invokeOpaqueBehavior" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject">
+        <eParameters name="_qualifiedName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+        <eParameters name="inputArguments" upperBound="-1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
+        <eParameters name="outputArguments" upperBound="-1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
+      </eOperations>
+      <eOperations name="invokeOpaqueBehavior" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject">
+        <eParameters name="_uID" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt">
+          <eAnnotations source="http://tu-ilmenau.de/see/codegen">
+            <details key="cppType" value="unsigned long"/>
+          </eAnnotations>
+        </eParameters>
+        <eParameters name="inputArguments" upperBound="-1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
+        <eParameters name="outputArguments" upperBound="-1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
+      </eOperations>
       <eStructuralFeatures xsi:type="ecore:EReference" name="locus" ordered="false"
           eType="#//Semantics/Loci/Locus">
         <eAnnotations source="MDE4CPP_Substitutes" references="#//Semantics/StructuredClassifiers/ExtensionalValue/locus">
